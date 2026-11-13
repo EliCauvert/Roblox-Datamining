@@ -4,6 +4,7 @@ local FoundationModule = require(Parent.Foundation)
 local GetFriendsCallingStoreFunction = require(Parent.FriendsCalling.Stores).GetFriendsCallingStore
 local ReactModule = require(Parent.React)
 local NewResult = require(Parent.Loggers).Logger:new(script.Name)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local Icon = FoundationModule.Icon
 local IconSize = FoundationModule.Enums.IconSize
 local Text = FoundationModule.Text
@@ -13,7 +14,7 @@ local MapCallCardModule = require(SocialCards.Components.CallCard.mapCallCard)
 local ParseCallCardModule = require(SocialCards.Components.CallCard.parseCallCard)
 local RingingIndicatorModule = require(SocialCards.Components.CallCard.RingingIndicator)
 local UseCallCardModule = require(SocialCards.Components.CallCard.useCallCard)
-local FFlagFriendsCallingServiceLuaMigration = require(Parent.SharedFlags).FFlagFriendsCallingServiceLuaMigration
+local FFlagFriendsCallingServiceLuaMigration = SharedFlagsModule.FFlagFriendsCallingServiceLuaMigration
 local FriendsCallingService = game:GetService("FriendsCallingService")
 local _UDim = UDim.new(0, 20)
 

@@ -2,6 +2,9 @@
 local Parent = SocialExperienceJoin.Parent
 local ReactModule = require(Parent.React)
 local RoactUtilsModule = require(Parent.RoactUtils)
+local NavigationModule = require(Parent.Navigation)
+local RobloxAppNavigationModule = require(Parent.RobloxAppNavigation)
+local RobloxAppHooksModule = require(Parent.RobloxAppHooks)
 local PromiseModule = require(Parent.Promise)
 local PurchaseExperienceModalModule = require(script.Parent.PurchaseExperienceModal)
 local PurchaseProductByIdModule = require(SocialExperienceJoin.Networking.PurchaseProductById)
@@ -9,11 +12,11 @@ local ConstantsModule = require(SocialExperienceJoin.Common.Constants)
 local InitializeSocialExperienceJoinAnalyticsModule = require(SocialExperienceJoin.Analytics.initializeSocialExperienceJoinAnalytics)
 local EventNamesModule = require(SocialExperienceJoin.Analytics.EventNames)
 local RODUXKEY = ConstantsModule.RODUX_KEY
-local UseNavigationFunction = require(Parent.Navigation).useNavigation
-local UseNavigationPropsFunction = require(Parent.RobloxAppNavigation).useNavigationProps
+local UseNavigationFunction = NavigationModule.useNavigation
+local UseNavigationPropsFunction = RobloxAppNavigationModule.useNavigationProps
 local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
 local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
-local UseScreenSizeFunction = require(Parent.RobloxAppHooks).useScreenSize
+local UseScreenSizeFunction = RobloxAppHooksModule.useScreenSize
 local PurchaseExperienceStatusModule = require(SocialExperienceJoin.Analytics.PurchaseExperienceStatus)
 
 return function()

@@ -1,7 +1,8 @@
 ﻿local Parent = script.Parent.Parent.Parent.Parent
 local Object = require(Parent.LuauPolyfill).Object
+local ReactModule = require(Parent.React)
 local ScrollViewContextModule = {}
-local Context = require(Parent.React).createContext(nil)
+local Context = ReactModule.createContext(nil)
 
 if _G.__DEV__ then
 	Context.displayName = "ScrollViewContext"

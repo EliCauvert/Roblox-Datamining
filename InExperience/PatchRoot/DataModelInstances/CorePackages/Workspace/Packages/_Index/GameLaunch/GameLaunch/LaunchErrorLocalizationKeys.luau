@@ -1,8 +1,10 @@
 ﻿local Parent = script:FindFirstAncestor("GameLaunch").Parent
+local RetrievalStatus = require(Parent.Http).Enum.RetrievalStatus
 local PlayabilityStatusEnum = require(Parent.DiscoveryTypes).PlayabilityStatusEnum
+local FFlagLuaAppBlockedUnplayableError = require(Parent.SharedFlags).FFlagLuaAppBlockedUnplayableError
 local LaunchErrorLocalizationKeysModule = {}
 local config = {
-	[require(Parent.Http).Enum.RetrievalStatus.Failed] = "Feature.GamePage.QuickLaunch.LaunchError.RequestFailed",
+	[RetrievalStatus.Failed] = "Feature.GamePage.QuickLaunch.LaunchError.RequestFailed",
 	[PlayabilityStatusEnum.GuestProhibited] = "Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited",
 	[PlayabilityStatusEnum.GameUnapproved] = "Feature.ExperienceDetails.UnplayableError.GameUnapproved",
 	[PlayabilityStatusEnum.UniverseRootPlaceIsPrivate] = "Feature.ExperienceDetails.UnplayableError.UniverseRootPlaceIsPrivate",
@@ -24,7 +26,7 @@ local config = {
 	[PlayabilityStatusEnum.ContextualPlayabilityUnrated] = "Feature.ExperienceDetails.UnplayableError.ContextualPlayabilityUnrated",
 	[PlayabilityStatusEnum.ContextualPlayabilityAgeGatedByDescriptor] = "Feature.ExperienceDetails.UnplayableError.ContextualPlayabilityAgeGatedByDescriptor",
 	[PlayabilityStatusEnum.FiatPurchaseDeviceRestricted] = "Feature.ExperienceDetails.UnplayableError.FiatPurchaseDeviceRestricted",
-	[PlayabilityStatusEnum.ContextualPlayabilityExperienceBlockedParentalControls] = if require(Parent.SharedFlags).FFlagLuaAppBlockedUnplayableError then "Feature.ExperienceDetails.UnplayableError.ContextualPlayabilityExperienceBlockedParentalControls" else nil,
+	[PlayabilityStatusEnum.ContextualPlayabilityExperienceBlockedParentalControls] = if FFlagLuaAppBlockedUnplayableError then "Feature.ExperienceDetails.UnplayableError.ContextualPlayabilityExperienceBlockedParentalControls" else nil,
 	Default = "Feature.ExperienceDetails.UnplayableError.UnplayableOther"
 }
 setmetatable(LaunchErrorLocalizationKeysModule, {

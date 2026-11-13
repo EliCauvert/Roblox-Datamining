@@ -1,9 +1,11 @@
 ﻿local Parent = script.Parent.Parent.Parent
 local Parent1 = Parent.Parent
 local CapturesCommonModule = require(Parent1.CapturesCommon)
+local FoundationModule = require(Parent1.Foundation)
 local ReactModule = require(Parent1.React)
+local RoactUtilsModule = require(Parent1.RoactUtils)
 local UseAnalyticsModule = require(Parent.Analytics.useAnalytics)
-local UseDispatchFunction = require(Parent1.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
 local CaptureTypeModule = require(Parent.Enums.CaptureType)
 local CarouselOpenedModule = require(Parent.Actions.CarouselOpened)
 local EventNamesModule = require(Parent.Analytics.EventNames)
@@ -11,7 +13,7 @@ local GetContentFromObjectFunction = CapturesCommonModule.Utils.getContentFromOb
 local GetCropSizeFunction = CapturesCommonModule.Utils.getCropSize
 local GetFormatTimeModule = require(Parent.Utils.getFormatTime)
 local _ = require(Parent.Types)
-local Text = require(Parent1.Foundation).Text
+local Text = FoundationModule.Text
 local FFlagUseRbxstorageInGalleryModule = require(Parent.Flags.FFlagUseRbxstorageInGallery)
 local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 

@@ -3,13 +3,14 @@ local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
 local CryoModule = require(Songbird.Parent.Cryo)
 local LoggingProtocolModule = require(Songbird.Parent.LoggingProtocol)
 local _ = require(Songbird.types)
+local GetFIntSongbirdTelemetryThrottleModule = require(Songbird.Flags.getFIntSongbirdTelemetryThrottle)
 local Default = LoggingProtocolModule.default
 local config = {
 	eventName = "NowPlayingPeekAnalytics",
 	description = " Peek UI related analytics ",
 	links = "https://roblox.atlassian.net/l/cp/VLpzDBz5",
 	backends = { LoggingProtocolModule.TelemetryBackends.EventIngest },
-	throttlingPercentage = require(Songbird.Flags.getFIntSongbirdTelemetryThrottle)(),
+	throttlingPercentage = GetFIntSongbirdTelemetryThrottleModule(),
 	lastUpdated = { 24, 30, 9 }
 }
 

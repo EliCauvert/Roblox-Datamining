@@ -32,9 +32,10 @@ function AppShortcutBar(Frame: Frame)
 			end
 		end, { UseLastInputResult })
 	end
+	local NoDisableAppShortcutBarAndroidTV = #Frame.items > 0 and (not UseFocusedTextBoxResult and (not DisableAppShortcutBarAndroidTV or UseStateResult))
 	local Inverted = not ResponsiveModule.useBreakpointYOrSmaller(ResponsiveModule.Keys.XSmall)
 	local Inverted1: boolean = not ResponsiveModule.useBreakpointXOrSmaller(ResponsiveModule.Keys.Small) and Inverted
-	local Inverted1_1: boolean = #Frame.items > 0 and (not UseFocusedTextBoxResult and (not DisableAppShortcutBarAndroidTV or UseStateResult)) and Inverted1
+	local Inverted1_1: boolean = NoDisableAppShortcutBarAndroidTV and Inverted1
 	
 	if FFlagEnableStickyShortcutBarOnAllPlatformsIxpEnabled and not FFlagUnifyShortcutBarUnifiedIXPExposure then
 		UseStickyShortcutBarExposureLoggingModule(Inverted1_1)

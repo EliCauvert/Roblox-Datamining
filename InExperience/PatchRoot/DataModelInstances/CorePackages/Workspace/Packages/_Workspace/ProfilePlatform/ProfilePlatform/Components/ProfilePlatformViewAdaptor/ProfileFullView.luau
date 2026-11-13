@@ -2,6 +2,7 @@
 local Parent = ProfilePlatform.Parent
 local UserInputService = game:GetService("UserInputService")
 local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
 local FoundationModule = require(Parent.Foundation)
 local FullscreenPageWithSafeArea = require(Parent.AppBlox).FullscreenPageWithSafeArea
 local EnumsModule = require(ProfilePlatform.Common.Enums)
@@ -16,7 +17,7 @@ local FFlagProfilePlatformMeTabScrollAwayModule = require(ProfilePlatform.Flags.
 local View = FoundationModule.View
 local IconButton = FoundationModule.IconButton
 local IconSize = FoundationModule.Enums.IconSize
-local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 
 return function(p1)
 	-- upvalues: UseStyleFunction (copy), UseProfileFormFactorModule (copy), EnumsModule (copy), FFlagAXEnableProfileTab (copy), UseProfileWrapperContextModule (copy), UseIsMeTabModule (copy), UseProfileJsonComponentModule (copy), ConstantsModule (copy), ReactModule (copy), FFlagProfilePlatformMeTabScrollAwayModule (copy), VisibilityControl (copy), UserInputService (copy), View (copy), IconButton (copy), IconSize (copy), FullscreenPageWithSafeArea (copy)

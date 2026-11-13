@@ -1,7 +1,9 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local UniverseConfigurationModule = require(Parent.DataHydration.UniverseConfiguration)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local ArchiveGameDialogModule = require(BuildExperience.Components.GameConfigurations.ArchiveGameDialog)
@@ -16,13 +18,13 @@ local FFlagBuildExperiencePrivateInvitesModule = require(BuildExperience.Flags.F
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local FFlagBuildExperienceHomeTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceHomeTelemetry)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
-local FocusNavigableSurfaceIdentifierEnum = require(Parent.FocusNavigationUtils).FocusNavigableSurfaceIdentifierEnum
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local Menu = FoundationModule.Menu
 local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
 local InputSize = FoundationModule.Enums.InputSize
 local PopoverAlign = FoundationModule.Enums.PopoverAlign
 local PopoverSide = FoundationModule.Enums.PopoverSide
-local PrivacyType = require(Parent.DataHydration.UniverseConfiguration).PrivacyType
+local PrivacyType = UniverseConfigurationModule.PrivacyType
 
 local function _(TelemetryGranularity)
 	return {

@@ -5,9 +5,10 @@ local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 local RoactModule = require(CorePackages.Packages.Roact)
 local PromiseModule = require(CorePackages.Packages.Promise)
 local CoreScriptsRootProvider = require(CorePackages.Workspace.Packages.CoreScriptsRoactCommon).CoreScriptsRootProvider
+local PlayerListModule = require(CorePackages.Workspace.Packages.PlayerList)
 local BlockingAnalyticsModule = require(script.Parent.Analytics.BlockingAnalytics)
 local BlockingModalScreenModule = require(script.Parent.Components.Blocking.BlockingModalScreen)
-local FFlagAddNewPlayerListMobileFocusNav = require(CorePackages.Workspace.Packages.PlayerList).Flags.FFlagAddNewPlayerListMobileFocusNav
+local FFlagAddNewPlayerListMobileFocusNav = PlayerListModule.Flags.FFlagAddNewPlayerListMobileFocusNav
 local BlockingContainer = nil
 
 local function _()

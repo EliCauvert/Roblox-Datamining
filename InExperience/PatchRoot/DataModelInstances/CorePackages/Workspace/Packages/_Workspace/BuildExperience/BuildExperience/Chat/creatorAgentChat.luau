@@ -369,6 +369,13 @@ return {
 		else
 			table.insert(List, UnifiedMonetizationToolModule.localToolDefinition)
 		end
+		local PromptMeta = {
+			_roblox = {
+				application = "build-on-mobile",
+				localTools = List,
+				providerConfig = { universeId = UniverseId }
+			}
+		}
 		local PromptLifecycleTelemetryModule = if FFlagBuildExperiencePromptFailureTelemetry then CreatePromptLifecycleTelemetryModule(function()
 			-- upvalues: UniverseId (copy), p7 (copy), ChatOpenIdForUniverse (copy)
 			return {
@@ -410,13 +417,7 @@ return {
 		
 		local config = {
 			prompt = Prompt,
-			promptMeta = {
-				_roblox = {
-					application = "build-on-mobile",
-					localTools = List,
-					providerConfig = { universeId = UniverseId }
-				}
-			},
+			promptMeta = PromptMeta,
 			onDroppedChatMessage = function(MessageId, p10)
 				-- upvalues: UniverseId (copy), p7 (copy), ChatOpenIdForUniverse (copy), SendBuildExperienceEventModule (upval), FFlagBuildExperienceHistoryPollTelemetry (upval)
 				local v1 = "DROPPED_CHAT_MESSAGE"

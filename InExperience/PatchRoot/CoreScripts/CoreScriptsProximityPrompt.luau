@@ -289,19 +289,19 @@ local function createPrompt(Prompt, ProximityPromptInputType, Parent)
 		table.insert(CreateResults2, TweenService:Create(ButtonImage, _TweenInfo, { ImageTransparency = 1 }))
 		table.insert(CreateResults3, TweenService:Create(ButtonImage, _TweenInfo, { ImageTransparency = 0 }))
 		local StringForKeyCode = UserInputService:GetStringForKeyCode(Prompt.KeyboardKeyCode)
-		local Entry = config[Prompt.KeyboardKeyCode]
+		local Entry1 = config[Prompt.KeyboardKeyCode]
 		
-		if Entry == nil then
-			Entry = config1[StringForKeyCode]
+		if Entry1 == nil then
+			Entry1 = config1[StringForKeyCode]
 		end
-		if Entry == nil then
-			local Entry1 = config2[Prompt.KeyboardKeyCode]
+		if Entry1 == nil then
+			local Entry = config2[Prompt.KeyboardKeyCode]
 			
-			if Entry1 then
-				StringForKeyCode = Entry1
+			if Entry then
+				StringForKeyCode = Entry
 			end
 		end
-		if Entry then
+		if Entry1 then
 			local ButtonImage1 = Instance.new("ImageLabel")
 			ButtonImage1.Name = "ButtonImage"
 			ButtonImage1.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -309,7 +309,7 @@ local function createPrompt(Prompt, ProximityPromptInputType, Parent)
 			ButtonImage1.Position = UDim2.fromScale(0.5, 0.5)
 			ButtonImage1.BackgroundTransparency = 1
 			ButtonImage1.ImageTransparency = 1
-			ButtonImage1.Image = Entry
+			ButtonImage1.Image = Entry1
 			ButtonImage1.Parent = Frame1
 			table.insert(CreateResults2, TweenService:Create(ButtonImage1, _TweenInfo, { ImageTransparency = 1 }))
 			table.insert(CreateResults3, TweenService:Create(ButtonImage1, _TweenInfo, { ImageTransparency = 0 }))
@@ -322,12 +322,12 @@ local function createPrompt(Prompt, ProximityPromptInputType, Parent)
 			ButtonText.Position = UDim2.fromOffset(0, -1)
 			ButtonText.Size = UDim2.fromScale(1, 1)
 			ButtonText.Font = AppFonts.default:getMedium()
-			local Entry2 = config3[Prompt.KeyboardKeyCode]
+			local Entry = config3[Prompt.KeyboardKeyCode]
 			
-			if Entry2 == nil then
-				Entry2 = 14
+			if Entry == nil then
+				Entry = 14
 			end
-			ButtonText.TextSize = Entry2
+			ButtonText.TextSize = Entry
 			ButtonText.BackgroundTransparency = 1
 			ButtonText.TextTransparency = 1
 			ButtonText.TextColor3 = _Color3_1

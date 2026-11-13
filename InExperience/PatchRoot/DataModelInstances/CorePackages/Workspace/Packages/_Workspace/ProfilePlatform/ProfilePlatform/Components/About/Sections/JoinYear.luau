@@ -2,14 +2,16 @@
 local Parent = ProfilePlatform.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
+local BuilderIconsModule = require(Parent.BuilderIcons)
 local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 local Icon = FoundationModule.Icon
 local InputSize = FoundationModule.Enums.InputSize
 local IconVariant = FoundationModule.Enums.IconVariant
-local CircleI = require(Parent.BuilderIcons).Icon.CircleI
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local CircleI = BuilderIconsModule.Icon.CircleI
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 
 return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), View (copy), Text (copy), Icon (copy), CircleI (copy), InputSize (copy), IconVariant (copy)

@@ -1,0 +1,3 @@
+﻿local FFlagAppIaHomeShowCampaignTabModule = require(script.Parent.FFlagAppIaHomeShowCampaignTab)
+
+return game:DefineFastFlag("AppIaHomeCampaignDeepLink", false) and FFlagAppIaHomeShowCampaignTabModule

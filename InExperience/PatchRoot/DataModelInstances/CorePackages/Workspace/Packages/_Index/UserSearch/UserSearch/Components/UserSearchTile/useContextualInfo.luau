@@ -11,12 +11,13 @@ local ContextualInfoTypes = SocialCommonModule.Enums.ContextualInfoTypes
 local PresenceType = require(UserSearch.Rodux.RoduxPresence).Enums.PresenceType
 local FFlagUserSearchPresenceStoreMigrationModule = require(UserSearch.Flags.FFlagUserSearchPresenceStoreMigration)
 local PresenceType1 = if FFlagUserSearchPresenceStoreMigrationModule then require(Parent.DataHydration).Presence.PresenceEnums.PresenceType else nil
+local FFlagUserSearchUsePreviousUsernameMatch = require(Parent.SharedFlags).FFlagUserSearchUsePreviousUsernameMatch
 local FFlagUserSearchUseThisIsYou = require(Parent.SharedFlags).FFlagUserSearchUseThisIsYou
 local FFlagUserSearchClassmatesInsight = require(Parent.SharedFlags).FFlagUserSearchClassmatesInsight
 local IconsStatusPlayerFriend = Images["icons/status/player/friend"]
 local IconsStatusPlayerFollowing = Images["icons/status/player/following"]
 
-local function v15(PreviousUsernames, Text: string)
+local function v16(PreviousUsernames, Text: string)
 	if not PreviousUsernames or #PreviousUsernames == 0 then
 		return false
 	end
@@ -29,7 +30,7 @@ local function v15(PreviousUsernames, Text: string)
 end
 
 return function(p1)
-	-- upvalues: UseRelationshipSelectorModule (copy), UseLocalizationFunction (copy), FFlagUserSearchUseThisIsYou (copy), FFlagUserSearchClassmatesInsight (copy), UseMutualFriendsTextFunction (copy), ContextualInfoTypes (copy), v15 (copy), FFlagUserSearchPresenceStoreMigrationModule (copy), PresenceType1 (copy), PresenceType (copy), IconsStatusPlayerFriend (copy), IconsStatusPlayerFollowing (copy)
+	-- upvalues: UseRelationshipSelectorModule (copy), UseLocalizationFunction (copy), FFlagUserSearchUseThisIsYou (copy), FFlagUserSearchClassmatesInsight (copy), UseMutualFriendsTextFunction (copy), ContextualInfoTypes (copy), FFlagUserSearchUsePreviousUsernameMatch (copy), v16 (copy), FFlagUserSearchPresenceStoreMigrationModule (copy), PresenceType1 (copy), PresenceType (copy), IconsStatusPlayerFriend (copy), IconsStatusPlayerFollowing (copy)
 	local UseRelationshipSelectorModuleResult = UseRelationshipSelectorModule(p1.userId)
 	local ShouldUseCompactTiles = p1.shouldUseCompactTiles
 	local ShouldUseCompactTiles1 = p1.shouldUseCompactTiles
@@ -52,7 +53,7 @@ return function(p1)
 		return {
 			text = if FFlagUserSearchUseThisIsYou then UseLocalizationResult.thisIsYou elseif ShouldUseCompactTiles then UseLocalizationResult.you else UseLocalizationResult.thisIsYou
 		}, ContextualInfoTypes.IsMyself
-	elseif v15(p1.previousUsernames, p1.searchKeyword) then
+	elseif if FFlagUserSearchUsePreviousUsernameMatch then p1.isPreviousUsernameMatch else v16(p1.previousUsernames, p1.searchKeyword) then
 		return { text = UseLocalizationResult.newUsername }, ContextualInfoTypes.PreviousUsername
 	elseif UseRelationshipSelectorModuleResult.status == Enum.FriendStatus.Friend then
 		if p1.shouldUseCompactTiles and ((if FFlagUserSearchPresenceStoreMigrationModule then p1.userPresence and p1.userPresence.userPresenceType == PresenceType1.InGame else p1.userPresence and p1.userPresence.userPresenceType == PresenceType.InGame) and p1.userPresence and p1.userPresence.lastLocation and p1.userPresence.universeId) then

@@ -1,9 +1,11 @@
 ﻿local AvatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
 local Parent = AvatarExperienceCommon.Parent
+local AvatarExperienceModelModule = require(Parent.AvatarExperienceModel)
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local _ = require(AvatarExperienceCommon.Types.TryOnItemComparisonData)
 local ConstantsModule = require(AvatarExperienceCommon.Constants)
-local ItemTypeEnum = require(Parent.AvatarExperienceModel).Enums.ItemTypeEnum
-local FFlagAXCatalogMakeupSupport = require(Parent.AvatarExperienceFlags).FFlagAXCatalogMakeupSupport
+local ItemTypeEnum = AvatarExperienceModelModule.Enums.ItemTypeEnum
+local FFlagAXCatalogMakeupSupport = AvatarExperienceFlagsModule.FFlagAXCatalogMakeupSupport
 
 function shouldReplaceTryOn(p1, p2): boolean
 	-- upvalues: ItemTypeEnum (copy), FFlagAXCatalogMakeupSupport (copy), ConstantsModule (copy)

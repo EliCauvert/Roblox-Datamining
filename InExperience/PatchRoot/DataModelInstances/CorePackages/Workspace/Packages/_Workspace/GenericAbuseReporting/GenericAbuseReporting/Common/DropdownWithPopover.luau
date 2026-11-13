@@ -6,6 +6,7 @@ local FoundationModule = require(Parent.Foundation)
 local InputHandlersModule = require(Parent.InputHandlers)
 local ReactModule = require(Parent.React)
 local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local UIBloxModule = require(Parent.UIBlox)
 local AppFocusRoot = FocusNavigationUtilsModule.AppFocusRoot
 local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
@@ -16,7 +17,7 @@ local PopoverSide = FoundationModule.Enums.PopoverSide
 local ScrollBarVisibility = FoundationModule.Enums.ScrollBarVisibility
 local ScrollView = FoundationModule.ScrollView
 local Text = FoundationModule.Text
-local UseLayerCollectorFunction = require(Parent.UIBlox).Core.Layout.LayerCollector.useLayerCollector
+local UseLayerCollectorFunction = UIBloxModule.Core.Layout.LayerCollector.useLayerCollector
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local View = FoundationModule.View
 local SideModalDropdownButtonModule = require(GenericAbuseReporting.Common.SideModalDropdownButton)
@@ -33,6 +34,7 @@ return ReactModule.memo(function(p1)
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(Vector2.new(0, 0))
 	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(Vector2.new(0, 0))
 	local UseStateResult6, UseStateResult2_5 = ReactModule.useState(Vector2.new(0, 0))
+	local UseScrollbarOffsetModuleResult = UseScrollbarOffsetModule(UseStateResult5, UseStateResult6)
 	local UseFocusGuiObjectResult = ReactFocusNavigationModule.useFocusGuiObject()
 	local UseRefResult = ReactModule.useRef(nil)
 	local VRCentralOverlay = CoreGui:FindFirstChild("VRCentralOverlay")
@@ -89,7 +91,7 @@ return ReactModule.memo(function(p1)
 						}, {
 							ReactModule.createElement(ScrollView, {
 								gradientHeight = 15,
-								Size = UDim2.new(0, math.min(AbsoluteSize.X, UseStateResult4.X + UseScrollbarOffsetModule(UseStateResult5, UseStateResult6)), 0, (math.min(AbsoluteSize.Y, UseStateResult4.Y))),
+								Size = UDim2.new(0, math.min(AbsoluteSize.X, UseStateResult4.X + UseScrollbarOffsetModuleResult), 0, (math.min(AbsoluteSize.Y, UseStateResult4.Y))),
 								scroll = {
 									AutomaticCanvasSize = Enum.AutomaticSize.Y,
 									CanvasSize = UDim2.new(1, 0, 0, 0),

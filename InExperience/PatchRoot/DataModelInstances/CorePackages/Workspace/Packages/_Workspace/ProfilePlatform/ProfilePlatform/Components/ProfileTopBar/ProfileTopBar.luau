@@ -3,6 +3,7 @@ local Parent = ProfilePlatform.Parent
 local ReactModule = require(Parent.React)
 local UIBloxModule = require(Parent.UIBlox)
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local Images = UIBloxModule.App.ImageSet.Images
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local UseLastInputModeFunction = require(Parent.FocusNavigationUtils).useLastInputMode
 local ConstantsModule = require(ProfilePlatform.Common.Constants)
@@ -11,7 +12,7 @@ local FFlagProfilePlatformNewProfileHeader = require(Parent.SharedFlags).FFlagPr
 local FoundationModule = require(Parent.Foundation)
 local View = FoundationModule.View
 local Divider = FoundationModule.Divider
-local IconsNavigationClose = UIBloxModule.App.ImageSet.Images["icons/navigation/close"]
+local IconsNavigationClose = Images["icons/navigation/close"]
 local NewUSERPROFILEHEADERHEIGHT = ConstantsModule.USER_PROFILE_HEADER_HEIGHT + ConstantsModule.CTA_BUTTON_HEIGHT + ConstantsModule.PAGE_PADDING
 
 return function(p1)

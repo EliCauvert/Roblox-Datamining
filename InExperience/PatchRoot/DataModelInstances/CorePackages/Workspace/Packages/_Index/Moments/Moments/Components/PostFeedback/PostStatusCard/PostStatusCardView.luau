@@ -2,6 +2,7 @@
 local Parent = Moments.Parent
 local BuilderIconsModule = require(Parent.BuilderIcons)
 local FoundationModule = require(Parent.Foundation)
+local MomentsCommonModule = require(Parent.MomentsCommon)
 local ReactModule = require(Parent.React)
 local Button = FoundationModule.Button
 local FoundationProvider = FoundationModule.FoundationProvider
@@ -12,7 +13,7 @@ local ColorMode = FoundationModule.Enums.ColorMode
 local FillBehavior = FoundationModule.Enums.FillBehavior
 local IconSize = FoundationModule.Enums.IconSize
 local InputSize = FoundationModule.Enums.InputSize
-local MomentMediaTile = require(Parent.MomentsCommon).Media.MomentMediaTile
+local MomentMediaTile = MomentsCommonModule.Media.MomentMediaTile
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local ConstantsModule = require(Moments.Constants)
 

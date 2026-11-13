@@ -2,6 +2,7 @@
 local Parent = Moments.Parent
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
+local MomentsCommonModule = require(Parent.MomentsCommon)
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local _ = require(script.Parent.FeedTypes)
 local ImmersiveChromeMachineModule = require(script.Parent.immersiveChromeMachine)
@@ -10,7 +11,7 @@ local GetFIntMomentsImmersiveHideAfterAdvancesModule = require(Moments.Flags.Get
 local GetFIntMomentsImmersiveShownDwellMsModule = require(Moments.Flags.GetFIntMomentsImmersiveShownDwellMs)
 local GetFIntMomentsImmersiveHiddenCooldownMsModule = require(Moments.Flags.GetFIntMomentsImmersiveHiddenCooldownMs)
 local GetFFlagMomentsPersistHeaderOnProfilePeekModule = require(Moments.Flags.GetFFlagMomentsPersistHeaderOnProfilePeek)
-local Analytics = require(Parent.MomentsCommon).Analytics
+local Analytics = MomentsCommonModule.Analytics
 local EventNames = Analytics.EventNames
 local FireAnalyticsEventFunction = Analytics.fireAnalyticsEvent
 

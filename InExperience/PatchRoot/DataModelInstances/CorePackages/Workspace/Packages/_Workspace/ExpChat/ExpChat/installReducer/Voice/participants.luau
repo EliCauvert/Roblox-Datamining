@@ -2,10 +2,11 @@
 local Parent = ExpChat.Parent
 local Dictionary = require(Parent.llama).Dictionary
 local None = require(Parent.llama).None
+local RoduxModule = require(Parent.Rodux)
 local VOICESTATE = require(Parent.VoiceChat).Constants.VOICE_STATE
 local Actions = ExpChat.Actions
 
-return require(Parent.Rodux).createReducer({}, {
+return RoduxModule.createReducer({}, {
 	[require(Actions.VoiceParticipantAdded).name] = function(p1, p2)
 		-- upvalues: Dictionary (copy)
 		local UserId = p2.userId

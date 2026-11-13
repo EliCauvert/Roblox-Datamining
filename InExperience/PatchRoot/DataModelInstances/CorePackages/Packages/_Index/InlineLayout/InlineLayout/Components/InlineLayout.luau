@@ -11,8 +11,9 @@ local _ = require(Parent.Components.InlineLayout.InlineLayoutElements.Renderable
 local HardBreakElementModule = require(Parent.Components.InlineLayout.InlineLayoutElements.HardBreakElement)
 local HoverContextModule = require(Parent.Components.InlineLayout.InlineLayoutElements.HoverContext)
 local RenderInMeasuredFrameModule = require(Parent.Utils.renderInMeasuredFrame)
+local MarkdownCoreModule = require(Parent1.MarkdownCore)
 local View = FoundationModule.View
-local Flags = require(Parent1.MarkdownCore).Flags
+local Flags = MarkdownCoreModule.Flags
 local FFlagDebugInlineLayout = game:DefineFastFlag("FFlagDebugInlineLayout", false)
 
 local function layoutElements(Elements, X)
@@ -36,17 +37,17 @@ local function layoutElements(Elements, X)
 		Total = X
 	end
 	while (Count1 <= #Elements or v1) and Count2 < Count do
-		local V16 = v1 or Elements[Count1]
+		local V17 = v1 or Elements[Count1]
 		
-		if V16 == HardBreakElementModule then
+		if V17 == HardBreakElementModule then
 			Count1 += 1
 			table.insert(List, List1)
 			List1 = {}
 			Total = X
 			Flag = false
 		else
-			if #List1 == 0 and Flag and V16.trimStart then
-				local TrimStartResult = V16:trimStart()
+			if #List1 == 0 and Flag and V17.trimStart then
+				local TrimStartResult = V17:trimStart()
 				
 				if TrimStartResult == nil then
 					v1 = nil
@@ -54,31 +55,31 @@ local function layoutElements(Elements, X)
 					Count2 += 1
 					continue
 				else
-					V16 = TrimStartResult
+					V17 = TrimStartResult
 				end
 			end
-			local Width = V16:getWidth()
+			local Width = V17:getWidth()
 			local CountList1 = #List1
 			
 			if Width <= Total then
-				table.insert(List1, RenderInMeasuredFrameModule(V16:render(Count1, CountList1), Width, CountList1))
+				table.insert(List1, RenderInMeasuredFrameModule(V17:render(Count1, CountList1), Width, CountList1))
 				Total -= Width
 				v1 = nil
 				Count1 += 1
 			else
-				local Parts, Parts2 = V16:split(Total)
+				local Parts, Parts2 = V17:split(Total)
 				
 				if Parts:getWidth() <= Total then
 					table.insert(List1, RenderInMeasuredFrameModule(Parts:render(Count1, CountList1), Parts:getWidth(), CountList1))
 					v1 = Parts2
 				elseif #List1 == 0 then
-					if V16.canForceSplit then
-						Parts, Parts2 = V16:split(Total, true)
+					if V17.canForceSplit then
+						Parts, Parts2 = V17:split(Total, true)
 					end
 					table.insert(List1, RenderInMeasuredFrameModule(Parts:render(Count1, CountList1), Parts:getWidth(), CountList1))
 					v1 = Parts2
 				else
-					v1 = V16
+					v1 = V17
 				end
 				if Flags.FFlagMarkdownAssistantParity and v1 == nil then
 					Count1 += 1

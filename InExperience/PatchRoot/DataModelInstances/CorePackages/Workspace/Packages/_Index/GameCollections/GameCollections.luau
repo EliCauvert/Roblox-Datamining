@@ -12,6 +12,7 @@
 	useIsHoldToPlayEnabledForGames = require(script.useIsHoldToPlayEnabledForGames),
 	useNavigateToSortLinkWebView = require(script.useNavigateToSortLinkWebView),
 	useRenderGameCollectionItem = require(script.useRenderGameCollectionItem),
+	useTriggerGameTileFeedbackCallbacks = require(script.useTriggerGameTileFeedbackCallbacks),
 	["jest.config"] = script["jest.config"],
 	["jest.main.config"] = script["jest.main.config"],
 	["jest.mockDataModel.config"] = script["jest.mockDataModel.config"],

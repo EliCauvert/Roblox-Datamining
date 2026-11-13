@@ -8,12 +8,13 @@ local QueueExperimentation = require(Parent1.SocialExperiments).QueueExperimenta
 local CachedPolicyServiceModule = require(Parent1.CachedPolicyService)
 local MarketplaceGetMarketplaceAssetStoreModule = require(Parent1.DataHydration.MarketplaceGetMarketplaceAssetStore)
 local LoadingScreenTelemetryModule = require(Parent.LoadingScreenTelemetry)
+local SharedFlagsModule = require(Parent1.SharedFlags)
 local ConstantsModule = require(TiltLoadingScreen.Constants)
 local MarketplaceService = game:GetService("MarketplaceService")
 local ExperienceService = game:GetService("ExperienceService")
 local GuiService = game:GetService("GuiService")
 local UserInputService = game:GetService("UserInputService")
-local FFlagEnableLuaAppsFollowUserId = require(Parent1.SharedFlags).FFlagEnableLuaAppsFollowUserId
+local FFlagEnableLuaAppsFollowUserId = SharedFlagsModule.FFlagEnableLuaAppsFollowUserId
 local CreateDataCacheFunction = DataHydrationModule.createDataCache
 local CreateDataResolverFunction = DataHydrationModule.createDataResolver
 local QueuePositionEnabledEngineFeature = game:GetEngineFeature("QueuePositionEnabled")
@@ -747,10 +748,10 @@ return function(p1: number, p2, p3)
 						end)
 						
 						if Signal1(false) > 0 then return end
-						local Thread7 = DeferredThread1
+						local Thread6 = DeferredThread1
 						
-						if Thread7 and coroutine.status(Thread7) ~= "dead" then
-							task.cancel(Thread7)
+						if Thread6 and coroutine.status(Thread6) ~= "dead" then
+							task.cancel(Thread6)
 						end
 						DeferredThread1 = task.defer(function()
 							-- upvalues: FetchUniverseId (upval), PlaceId (copy), Flag2 (upval), Signal (upval), Signal1 (upval), Signal2_1 (upval), Connection1 (upval)
@@ -774,10 +775,10 @@ return function(p1: number, p2, p3)
 					local SignalResult1: number = Signal(false)
 					
 					if SignalResult1 <= 0 then return end
-					local Thread = DeferredThread
+					local Thread7 = DeferredThread
 					
-					if Thread and coroutine.status(Thread) ~= "dead" then
-						task.cancel(Thread)
+					if Thread7 and coroutine.status(Thread7) ~= "dead" then
+						task.cancel(Thread7)
 					end
 					DeferredThread = task.defer(function()
 						-- upvalues: FetchProductInfo (upval), SignalResult1 (copy), Flag2 (upval), Signal (upval), MarketplaceGetMarketplaceAssetStoreModuleResult (upval)
@@ -801,10 +802,10 @@ return function(p1: number, p2, p3)
 					end)
 					
 					if Signal1(false) > 0 then return end
-					local Thread6 = DeferredThread1
+					local Thread = DeferredThread1
 					
-					if Thread6 and coroutine.status(Thread6) ~= "dead" then
-						task.cancel(Thread6)
+					if Thread and coroutine.status(Thread) ~= "dead" then
+						task.cancel(Thread)
 					end
 					DeferredThread1 = task.defer(function()
 						-- upvalues: FetchUniverseId (upval), SignalResult1 (copy), Flag2 (upval), Signal (upval), Signal1 (upval), Signal2_1 (upval), Connection1 (upval)

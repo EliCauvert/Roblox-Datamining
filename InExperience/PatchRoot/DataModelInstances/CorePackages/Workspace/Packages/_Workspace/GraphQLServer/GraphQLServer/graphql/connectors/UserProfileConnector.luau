@@ -10,13 +10,15 @@ local FillRequestedNamesModule = require(GraphQLServer.fillRequestedNames)
 local _ = require(Parent.LuauPolyfill)
 local PromiseModule = require(Parent.Promise)
 local FetchModule = require(Parent.Fetch)
+local Url = require(Parent.Http).Url
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
 local GraphQLError = require(Parent.GraphQL).GraphQLError
 local Fetch = FetchModule.fetch
 local Response = FetchModule.Response
 local _ = require(script.Parent.Parent.generatedTypes)
-local v1 = require(Parent.UrlBuilder).UrlBuilder.new({
+local v1 = UrlBuilder.new({
 	path = "user-profile-api/v1/user/profiles/get-profiles",
-	base = require(Parent.Http).Url.APIS_URL
+	base = Url.APIS_URL
 })()
 
 local function fetchProfilesByIds(Entry, Fields, p1)

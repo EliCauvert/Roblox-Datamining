@@ -134,13 +134,13 @@ local function hadNoMutationsEffects(p1, p2): boolean
 	return true
 end
 
-local Callback1: ((any, any, any, any) -> ())? = nil
+local Callback: ((any, any, any, any) -> ())? = nil
 local UpdateHostContainer = nil
-local Callback: ((any, any, any, any, any) -> ())? = nil
+local Callback1: ((any, any, any, any, any) -> ())? = nil
 local Callback2: ((any, any, any, any) -> ())? = nil
 
 if SupportsMutation then
-	Callback1 = function(StateNode, Return, _, _)
+	Callback = function(StateNode, Return, _, _)
 		-- upvalues: HostComponent (copy), HostText (copy), AppendInitialChildFunction (copy), EnableFundamentalAPI (copy), FundamentalComponent (copy), HostPortal (copy)
 		local Child = Return.child
 		while Child ~= nil do
@@ -165,7 +165,7 @@ if SupportsMutation then
 	
 	UpdateHostContainer = function(_, _) end
 	
-	Callback = function(p3, Return, Type, PendingProps, p4)
+	Callback1 = function(p3, Return, Type, PendingProps, p4)
 		-- upvalues: GetHostContextFunction (copy), PrepareUpdateFunction (copy), ReactFeatureFlags (copy), HostUpdate (copy), Update (copy)
 		local MemoizedProps = p3.memoizedProps
 		
@@ -196,7 +196,7 @@ if SupportsMutation then
 		end
 	end
 elseif SupportsPersistence then
-	Callback1 = function(_, _, _, _)
+	Callback = function(_, _, _, _)
 		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 		print("UNIMPLEMENTED ERROR: " .. tostring("appendAllChildren"))
@@ -290,7 +290,7 @@ end
 
 return {
 	completeWork = function(p3, Return, Lanes)
-		-- upvalues: IndeterminateComponent (copy), LazyComponent (copy), SimpleMemoComponent (copy), FunctionComponent (copy), ForwardRef (copy), Fragment (copy), Mode (copy), ContextConsumer (copy), MemoComponent (copy), bubbleProperties (copy), ClassComponent (copy), IsContextProviderFunction (copy), PopContextFunction (copy), HostRoot (copy), PopHostContainerFunction (copy), PopTopLevelContextObjectFunction (copy), ResetWorkInProgressVersionsFunction (copy), PopHydrationStateFunction (copy), Update (copy), Snapshot (copy), UpdateHostContainer (ref), HostComponent (copy), PopHostContextFunction (copy), GetRootHostContainerFunction (copy), Callback (ref), Ref (copy), InvariantFunction (copy), GetHostContextFunction (copy), PrepareToHydrateHostInstanceFunction (copy), CreateInstanceFunction (copy), Callback1 (ref), FinalizeInitialChildrenFunction (copy), HostText (copy), Callback2 (ref), PrepareToHydrateHostTextInstanceFunction (copy), CreateTextInstanceFunction (copy), Profiler (copy), Callback3 (copy), Passive (copy), PerformedWork (copy), NoFlags (copy), ReactFeatureFlags (copy), LayoutMask (copy), Deletion (copy), HostUpdate (copy), PassiveMask (copy), SuspenseComponent (copy), PopSuspenseContextFunction (copy), EnableSuspenseServerRenderer (copy), PrepareToHydrateHostSuspenseInstanceFunction (copy), EnableSchedulerTracing (copy), MarkSpawnedWorkFunction (copy), OffscreenLane (copy), EnableProfilerTimer (copy), ProfileMode (copy), NoMode (copy), ResetHydrationStateFunction (copy), DidCapture (copy), TransferActualDurationFunction (copy), BlockingMode (copy), HasSuspenseContextFunction (copy), SuspenseStackCursor (copy), InvisibleParentSuspenseContext (copy), RenderDidSuspendFunction (copy), RenderDidSuspendDelayIfPossibleFunction (copy), SupportsPersistence (copy), SupportsMutation (copy), EnableSuspenseCallback (copy), HostPortal (copy), PreparePortalMountFunction (copy), ContextProvider (copy), PopProviderFunction (copy), IncompleteClassComponent (copy), SuspenseListComponent (copy), FundamentalComponent (copy), ScopeComponent (copy), Block (copy), OffscreenComponent (copy), LegacyHiddenComponent (copy), PopRenderLanesFunction (copy), IncludesSomeLaneFunction (copy), ReactFiberWorkLoopNewModule (copy), ConcurrentMode (copy)
+		-- upvalues: IndeterminateComponent (copy), LazyComponent (copy), SimpleMemoComponent (copy), FunctionComponent (copy), ForwardRef (copy), Fragment (copy), Mode (copy), ContextConsumer (copy), MemoComponent (copy), bubbleProperties (copy), ClassComponent (copy), IsContextProviderFunction (copy), PopContextFunction (copy), HostRoot (copy), PopHostContainerFunction (copy), PopTopLevelContextObjectFunction (copy), ResetWorkInProgressVersionsFunction (copy), PopHydrationStateFunction (copy), Update (copy), Snapshot (copy), UpdateHostContainer (ref), HostComponent (copy), PopHostContextFunction (copy), GetRootHostContainerFunction (copy), Callback1 (ref), Ref (copy), InvariantFunction (copy), GetHostContextFunction (copy), PrepareToHydrateHostInstanceFunction (copy), CreateInstanceFunction (copy), Callback (ref), FinalizeInitialChildrenFunction (copy), HostText (copy), Callback2 (ref), PrepareToHydrateHostTextInstanceFunction (copy), CreateTextInstanceFunction (copy), Profiler (copy), Callback3 (copy), Passive (copy), PerformedWork (copy), NoFlags (copy), ReactFeatureFlags (copy), LayoutMask (copy), Deletion (copy), HostUpdate (copy), PassiveMask (copy), SuspenseComponent (copy), PopSuspenseContextFunction (copy), EnableSuspenseServerRenderer (copy), PrepareToHydrateHostSuspenseInstanceFunction (copy), EnableSchedulerTracing (copy), MarkSpawnedWorkFunction (copy), OffscreenLane (copy), EnableProfilerTimer (copy), ProfileMode (copy), NoMode (copy), ResetHydrationStateFunction (copy), DidCapture (copy), TransferActualDurationFunction (copy), BlockingMode (copy), HasSuspenseContextFunction (copy), SuspenseStackCursor (copy), InvisibleParentSuspenseContext (copy), RenderDidSuspendFunction (copy), RenderDidSuspendDelayIfPossibleFunction (copy), SupportsPersistence (copy), SupportsMutation (copy), EnableSuspenseCallback (copy), HostPortal (copy), PreparePortalMountFunction (copy), ContextProvider (copy), PopProviderFunction (copy), IncompleteClassComponent (copy), SuspenseListComponent (copy), FundamentalComponent (copy), ScopeComponent (copy), Block (copy), OffscreenComponent (copy), LegacyHiddenComponent (copy), PopRenderLanesFunction (copy), IncludesSomeLaneFunction (copy), ReactFiberWorkLoopNewModule (copy), ConcurrentMode (copy)
 		local PendingProps = Return.pendingProps
 		
 		if Return.tag == IndeterminateComponent or Return.tag == LazyComponent or Return.tag == SimpleMemoComponent or Return.tag == FunctionComponent or Return.tag == ForwardRef or Return.tag == Fragment or Return.tag == Mode or Return.tag == ContextConsumer or Return.tag == MemoComponent then
@@ -346,7 +346,7 @@ return {
 					end
 				else
 					local CreateInstanceResult = CreateInstanceFunction(Type, PendingProps, RootHostContainer, HostContext, Return)
-					Callback1(CreateInstanceResult, Return, false, false)
+					Callback(CreateInstanceResult, Return, false, false)
 					Return.stateNode = CreateInstanceResult
 					
 					if FinalizeInitialChildrenFunction(CreateInstanceResult, Type, PendingProps, RootHostContainer, HostContext) then
@@ -357,7 +357,7 @@ return {
 					Return.flags = bit32.bor(Return.flags, Ref)
 				end
 			else
-				Callback(p3, Return, Type, PendingProps, RootHostContainer)
+				Callback1(p3, Return, Type, PendingProps, RootHostContainer)
 				
 				if p3.ref ~= Return.ref then
 					Return.flags = bit32.bor(Return.flags, Ref)

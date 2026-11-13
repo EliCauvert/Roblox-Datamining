@@ -7,7 +7,7 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local _ = require(Parent.DiscoveryTypes)
 local FFlagLuaAppHeaderButtonText = require(Parent.SharedFlags).FFlagLuaAppHeaderButtonText
 
-return function(Callback1, p1, p2, p3, p4, p5, p6, p7, p8, p9, Callback)
+return function(Callback1, p1, p2, p3, p4, p5, p6, p7, p8, p9, Callback2)
 	-- upvalues: UseNavigateToSeeAllModule (copy), ReactModule (copy), UseNavigateToSortLinkWebViewModule (copy), UseLocalizationFunction (copy), FFlagLuaAppHeaderButtonText (copy)
 	local UseNavigateToSeeAllModuleResult = UseNavigateToSeeAllModule(p1, p2, p3, p4, p5, p6)
 	local UseResult = ReactModule.useCallback(function()
@@ -30,13 +30,13 @@ return function(Callback1, p1, p2, p3, p4, p5, p6, p7, p8, p9, Callback)
 		p1,
 		p2
 	})
-	local Callback2 = if p7 then UseResult1 else UseResult
+	local Callback = if p7 then UseResult1 else UseResult
 	local UseLocalizationResult = UseLocalizationFunction({ learnMore = "Feature.GameDetails.Label.LearnMore" })
 	
-	return Callback2, if FFlagLuaAppHeaderButtonText and p9 then p9 elseif p7 then UseLocalizationResult.learnMore else nil, (ReactModule.useCallback(function()
-		-- upvalues: Callback (copy), p1 (copy), p8 (copy), p2 (copy), UseNavigateToSortLinkWebViewModuleResult (copy), p6 (copy), Callback2 (copy)
-		if Callback then
-			Callback()
+	return Callback, if FFlagLuaAppHeaderButtonText and p9 then p9 elseif p7 then UseLocalizationResult.learnMore else nil, (ReactModule.useCallback(function()
+		-- upvalues: Callback2 (copy), p1 (copy), p8 (copy), p2 (copy), UseNavigateToSortLinkWebViewModuleResult (copy), p6 (copy), Callback (copy)
+		if Callback2 then
+			Callback2()
 			
 			return
 		end
@@ -45,9 +45,9 @@ return function(Callback1, p1, p2, p3, p4, p5, p6, p7, p8, p9, Callback)
 			
 			return
 		else
-			Callback2()
+			Callback()
 		end
 	end, {
-		UseNavigateToSortLinkWebViewModuleResult, p8, p6, p1, p2, Callback2, Callback
+		UseNavigateToSortLinkWebViewModuleResult, p8, p6, p1, p2, Callback, Callback2
 	}))
 end

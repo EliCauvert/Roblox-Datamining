@@ -1,9 +1,10 @@
 ﻿local Parent = script:FindFirstAncestor("AvatarExperienceModel").Parent
+local EnumerateModule = require(Parent.enumerate)
 local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local FFlagAXCatalogM41Props = AvatarExperienceFlagsModule.FFlagAXCatalogM41Props
 local FFlagAXAddHDCatalogTab = AvatarExperienceFlagsModule.FFlagAXAddHDCatalogTab
 
-return require(Parent.enumerate)(script.Name, {
+return EnumerateModule(script.Name, {
 	Featured = "Featured",
 	Recommended = "Recommended",
 	Characters = "Characters",

@@ -32,6 +32,7 @@ return function(p1, _, p2, _)
 		
 		return
 	else
+		local PlaceId = ActionParams.placeId
 		local Ctx = ActionParams.ctx or ""
 		local FavoritesStore = Game1.getFavoritesStore(false)
 		local DataResult = FavoritesStore.getAndFetchFavorite(UniverseId).data(false)
@@ -39,7 +40,7 @@ return function(p1, _, p2, _)
 		GameFavoriteFunction({
 			uid = tostring(Players.LocalPlayer and Players.LocalPlayer.UserId),
 			ctx = Ctx,
-			placeId = tostring(ActionParams.placeId),
+			placeId = tostring(PlaceId),
 			state = if Inverted then "on" else "off",
 			targetId = if FFlagLuaAppAddUniverseIdToEngagementEvents then UniverseId else nil
 		}, Ctx)

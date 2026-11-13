@@ -2,8 +2,9 @@
 local Parent = SocialExperienceJoin.Parent
 local ReactModule = require(Parent.React)
 local UIBloxModule = require(Parent.UIBlox)
+local LocalizationModule = require(Parent.Localization)
 local TextKeysModule = require(SocialExperienceJoin.Common.TextKeys)
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 

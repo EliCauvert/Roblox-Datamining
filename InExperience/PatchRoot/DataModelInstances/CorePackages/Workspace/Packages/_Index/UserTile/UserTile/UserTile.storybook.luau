@@ -1,6 +1,7 @@
 ﻿local UserTile = script:FindFirstAncestor("UserTile")
 local Parent = UserTile.Parent
 local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
 local FoundationModule = require(Parent.Foundation)
 local StyleModule = require(Parent.Style)
 local StyleProviderWithDefaultTheme = StyleModule.StyleProviderWithDefaultTheme
@@ -61,7 +62,7 @@ return {
 	name = "UserTile",
 	storyRoot = UserTile.Stories,
 	roact = ReactModule,
-	reactRoblox = require(Parent.ReactRoblox),
+	reactRoblox = ReactRobloxModule,
 	mapStory = function(Callback)
 		-- upvalues: config (copy), ReactModule (copy), LocalizationProvider (copy), Localization (copy), StyleProviderWithDefaultTheme (copy), RoactRoduxModule (copy), createStore (copy), mockNavigation (copy), FoundationProvider (copy), DesignTokenProvider (copy)
 		return function(p1)

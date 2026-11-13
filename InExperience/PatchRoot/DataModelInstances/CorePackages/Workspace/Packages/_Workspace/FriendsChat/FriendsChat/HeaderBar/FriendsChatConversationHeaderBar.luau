@@ -1,6 +1,7 @@
 ﻿local Parent = script:FindFirstAncestor("FriendsChat").Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
+local ExpChatSharedModule = require(Parent.ExpChatShared)
 local UseInterpolatedClientSettingsModule = require(Parent.ExpChatIntegration.useInterpolatedClientSettings)
 local UseChatWindowSettingsModule = require(Parent.ExpChatIntegration.useChatWindowSettings)
 local FFlagFriendsChatAddTopBarDividerModule = require(script.Parent.Parent.Flags.FFlagFriendsChatAddTopBarDivider)
@@ -13,7 +14,7 @@ local IconName = FoundationModule.Enums.IconName
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local ButtonSize = FoundationModule.Enums.ButtonSize
 local UseTokensFunction = FoundationModule.Hooks.useTokens
-local NewResult = require(Parent.ExpChatShared).Logger:new(script.Name)
+local NewResult = ExpChatSharedModule.Logger:new(script.Name)
 
 return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseChatWindowSettingsModule (copy), ReactModule (copy), UseInterpolatedClientSettingsModule (copy), NewResult (copy), ResolveFadeModule (copy), View (copy), IconButton (copy), IconName (copy), ButtonVariant (copy), ButtonSize (copy), FriendsChatFacePileModule (copy), FFlagFriendsChatAddTopBarDividerModule (copy), Divider (copy)

@@ -12,6 +12,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
 local GetLocalizedPriceModule = require(AvatarExperienceUIKit.ItemCard.Utils.getLocalizedPrice)
 local FFlagAXDurablesFooter = AvatarExperienceFlagsModule.FFlagAXDurablesFooter
+local FFlagAXItemCardComponentsMemo = AvatarExperienceFlagsModule.FFlagAXItemCardComponentsMemo
 
 local function renderIconTextPair(p1)
 	-- upvalues: ReactModule (copy), Icon (copy), IconSize (copy), Text (copy)
@@ -182,4 +183,4 @@ local function ItemCardPriceLine(Frame: Frame)
 	}, config)
 end
 
-return if AvatarExperienceFlagsModule.FFlagAXItemCardComponentsMemo then ReactModule.memo(ItemCardPriceLine) else ItemCardPriceLine
+return if FFlagAXItemCardComponentsMemo then ReactModule.memo(ItemCardPriceLine) else ItemCardPriceLine

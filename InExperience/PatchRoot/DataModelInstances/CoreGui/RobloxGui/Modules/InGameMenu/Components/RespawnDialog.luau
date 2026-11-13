@@ -1,5 +1,6 @@
 ﻿local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
 local Roact = InGameMenuDependenciesModule.Roact
+local RoactRodux = InGameMenuDependenciesModule.RoactRodux
 local IGMRespawnControllerBarModule = require(script.Parent.IGMRespawnControllerBar)
 local Parent = script.Parent.Parent
 local WithLocalizationModule = require(Parent.Localization.withLocalization)
@@ -9,7 +10,7 @@ local ConfirmationDialogModule = require(script.Parent.ConfirmationDialog)
 local SendAnalyticsModule = require(Parent.Utility.SendAnalytics)
 local ConstantsModule = require(Parent.Resources.Constants)
 
-return InGameMenuDependenciesModule.RoactRodux.UNSTABLE_connect2(function(p1, _)
+return RoactRodux.UNSTABLE_connect2(function(p1, _)
 	return {
 		isRespawning = p1.respawn.dialogOpen,
 		inputType = p1.displayOptions.inputType

@@ -1,6 +1,7 @@
 ﻿local AuthCommon = script:FindFirstAncestor("AuthCommon")
 local LoginErrorCodesModule = require(AuthCommon.Enums.LoginErrorCodes)
 local LoginErrorCodeSSOModule = require(AuthCommon.Enums.LoginErrorCodeSSO)
+local FFlagEnableIllegalChildAccountLinkingErrorMessageOnSSOModule = require(AuthCommon.Flags.FFlagEnableIllegalChildAccountLinkingErrorMessageOnSSO)
 local PlatformAccountName = require(AuthCommon.Parent.UniversalAppPolicy).getAppFeaturePolicies().getPlatformAccountName()
 local config = {
 	[LoginErrorCodeSSOModule.AuthError] = "Authentication.Login.Response.SomethingWentWrong",
@@ -27,7 +28,7 @@ local config = {
 	}
 }
 
-if require(AuthCommon.Flags.FFlagEnableIllegalChildAccountLinkingErrorMessageOnSSO) then
+if FFlagEnableIllegalChildAccountLinkingErrorMessageOnSSOModule then
 	config[LoginErrorCodesModule.IllegalChildAccountLinking] = "Authentication.Login.LinkIllegalChildAccountLinking"
 end
 return function(p1)

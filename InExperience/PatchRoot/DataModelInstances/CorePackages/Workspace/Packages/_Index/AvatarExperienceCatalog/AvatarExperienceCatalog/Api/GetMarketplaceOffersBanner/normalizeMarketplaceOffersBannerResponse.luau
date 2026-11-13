@@ -1,10 +1,12 @@
 ﻿local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local Normalize = require(Parent.AvatarExperienceCommon).Utils.normalize
 local NormalizeNotEmptyStringFunction = Normalize.normalizeNotEmptyString
+local MakeNormalizeTableFnFunction = Normalize.makeNormalizeTableFn
 local MakeRequiredFunction = Normalize.makeRequired
 local _ = require(script.Parent.MarketplaceOffersBannerTypes)
 local DecodeLuauUnicodeEscapesModule = require(script.Parent.decodeLuauUnicodeEscapes)
-local FFlagAXUpdateOffersEndsUIWithBadge = require(Parent.AvatarExperienceFlags).FFlagAXUpdateOffersEndsUIWithBadge
+local FFlagAXUpdateOffersEndsUIWithBadge = AvatarExperienceFlagsModule.FFlagAXUpdateOffersEndsUIWithBadge
 
 local function normalizeDisplayString(p1)
 	-- upvalues: NormalizeNotEmptyStringFunction (copy), DecodeLuauUnicodeEscapesModule (copy)
@@ -17,7 +19,7 @@ local function normalizeDisplayString(p1)
 	end
 end
 
-local NormalizeTableFn = Normalize.makeNormalizeTableFn({
+local NormalizeTableFn = MakeNormalizeTableFnFunction({
 	modalTitle = MakeRequiredFunction(normalizeDisplayString),
 	offerBodyLinkText = MakeRequiredFunction(normalizeDisplayString),
 	modalHeroIcon = NormalizeNotEmptyStringFunction,

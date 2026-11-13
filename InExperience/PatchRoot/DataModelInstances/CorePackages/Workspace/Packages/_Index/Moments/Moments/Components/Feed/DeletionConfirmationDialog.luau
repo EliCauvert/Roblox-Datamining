@@ -1,8 +1,9 @@
 ﻿local Parent = script:FindFirstAncestor("Moments").Parent
 local FoundationModule = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
 local ReactModule = require(Parent.React)
 local Dialog = FoundationModule.Dialog
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local config = {
 	title = "Feature.Moments.Label.DeleteMomentTitle",
 	body = "Feature.Moments.Label.DeleteMomentBody",

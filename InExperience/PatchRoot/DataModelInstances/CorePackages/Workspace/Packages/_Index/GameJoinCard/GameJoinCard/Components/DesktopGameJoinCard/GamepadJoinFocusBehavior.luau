@@ -2,11 +2,12 @@
 local ReactModule = require(Parent.React)
 local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
 local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local HoldToPlayModule = require(Parent.HoldToPlay)
 local AppShortcutBarContext = require(Parent.AppShortcutBar).AppShortcutBarContext
 local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
 local ButtonHoldStateEnum = FocusNavigationUtilsModule.ButtonHoldStateEnum
 local UseButtonHoldFunction = FocusNavigationUtilsModule.useButtonHold
-local Constants = require(Parent.HoldToPlay).Constants
+local Constants = HoldToPlayModule.Constants
 
 return function(p1)
 	-- upvalues: ReactFocusNavigationModule (copy), ReactModule (copy), UseButtonHoldFunction (copy), Constants (copy), AppShortcutBarContext (copy), ButtonHoldStateEnum (copy), FocusNavigationEventNameEnum (copy)

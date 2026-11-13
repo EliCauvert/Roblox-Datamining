@@ -1,8 +1,9 @@
 ﻿local ExpChat = script:FindFirstAncestor("ExpChat")
 local Parent = ExpChat.Parent
+local ExpChatSharedModule = require(Parent.ExpChatShared)
 local FriendsChatFocusModule = require(Parent.FriendsChat.FriendsChatFocus)
 local GetFocusNavigationStoreModule = require(ExpChat.Stores.GetFocusNavigationStore)
-local TabTypes = require(Parent.ExpChatShared).TabTypes
+local TabTypes = ExpChatSharedModule.TabTypes
 local config = {
 	canOpenChat = function(): boolean
 		return false

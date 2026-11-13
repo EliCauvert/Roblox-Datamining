@@ -1,8 +1,9 @@
 ﻿local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
+local Rodux = InGameMenuDependenciesModule.Rodux
 local Cryo = InGameMenuDependenciesModule.Cryo
 local Parent = script.Parent.Parent
 
-return InGameMenuDependenciesModule.Rodux.createReducer({ closingApp = false, menuIconTooltipOpen = false }, {
+return Rodux.createReducer({ closingApp = false, menuIconTooltipOpen = false }, {
 	[require(Parent.Actions.OpenNativeClosePrompt).name] = function(p1, _)
 		-- upvalues: Cryo (copy)
 		return Cryo.Dictionary.join(p1, { closingApp = true })

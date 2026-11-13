@@ -8,11 +8,12 @@ local UseChatPagePaddingModule = require(AppChat.Contexts.ChatPagePadding.useCha
 local FoundationModule = require(Parent.Foundation)
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local GetBoldTextThemeModule = require(script.Parent.Utils.getBoldTextTheme)
+local Images = UIBloxModule.App.ImageSet.Images
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local IconSize = UIBloxModule.App.Constant.IconSize
 local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebugAppChatEnableDomLocators)
 local FFlagAppChatRemoveConversationListDividerModule = require(AppChat.Flags.FFlagAppChatRemoveConversationListDivider)
-local IconsNavigationPushRight = UIBloxModule.App.ImageSet.Images["icons/navigation/pushRight"]
+local IconsNavigationPushRight = Images["icons/navigation/pushRight"]
 
 function CustomConversationListEntry(p1)
 	-- upvalues: UseStyleFunction (copy), GetBoldTextThemeModule (copy), UseTextSizeOffsetFunction (copy), UseChatPagePaddingModule (copy), IconSize (copy), FoundationModule (copy), ReactModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), ImageSetLabel (copy), NormalizeFontFaceFunction (copy), IconsNavigationPushRight (copy), FFlagAppChatRemoveConversationListDividerModule (copy)

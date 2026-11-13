@@ -1,5 +1,6 @@
 ﻿local LocalizationService = game:GetService("LocalizationService")
 local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local FFlagBuildExperienceMonetizationNativeUIModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
 local FFlagBuildExperienceToolLocalizationModule = require(BuildExperience.Flags.FFlagBuildExperienceToolLocalization)
 local SharedFlagsModule = require(BuildExperience.Parent.SharedFlags)
 local FFlagEnableShareSheet = SharedFlagsModule.FFlagEnableShareSheet
@@ -136,7 +137,7 @@ local config = {
 	}
 }
 
-if require(BuildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI) then
+if FFlagBuildExperienceMonetizationNativeUIModule then
 	config.manage_developer_product = {
 		completed = "Feature.Build.Title.DeveloperProduct",
 		failed = "Feature.Build.Title.DeveloperProduct",

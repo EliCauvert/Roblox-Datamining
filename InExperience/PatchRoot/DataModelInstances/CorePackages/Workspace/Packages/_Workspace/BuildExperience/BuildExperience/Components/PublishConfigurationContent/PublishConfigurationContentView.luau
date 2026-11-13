@@ -27,24 +27,28 @@ return function(p1)
 		versionTitleDescription = LocalizationStringsModule.PUBLISH_VERSION_TITLE_DESCRIPTION
 	})
 	local ContentBody = UseLocalizationResult.contentBody
+	local ContentMaturity = UseLocalizationResult.contentMaturity
 	local ContentTitle = UseLocalizationResult.contentTitle
 	local GameDetails = UseLocalizationResult.gameDetails
 	local GameDetailsBody = UseLocalizationResult.gameDetailsBody
+	local IconAndThumbnails = UseLocalizationResult.iconAndThumbnails
+	local TitleAndDescription = UseLocalizationResult.titleAndDescription
 	local VersionInformationBody = UseLocalizationResult.versionInformationBody
 	local VersionInformationTitle = UseLocalizationResult.versionInformationTitle
 	local VersionHistory = UseLocalizationResult.versionHistory
+	local VersionTitleDescription = UseLocalizationResult.versionTitleDescription
 	local IsEditDisabled = FFlagBuildCheckGamePermissionsModule and p1.isEditDisabled
 	local IsIconAndThumbnailsDisabled = FFlagBuildCheckGamePermissionsModule and p1.isIconAndThumbnailsDisabled
 	local Rows = {
 		{
 			id = "icon-thumbnails",
-			title = UseLocalizationResult.iconAndThumbnails,
+			title = IconAndThumbnails,
 			onActivated = p1.onOpenIconAndThumbnails,
 			isDisabled = IsEditDisabled or IsIconAndThumbnailsDisabled
 		},
 		{
 			id = "title-description",
-			title = UseLocalizationResult.titleAndDescription,
+			title = TitleAndDescription,
 			onActivated = p1.onOpenTitleDescriptionPage,
 			isDisabled = IsEditDisabled
 		}
@@ -52,7 +56,7 @@ return function(p1)
 	local Rows1 = {
 		{
 			id = "content-rating",
-			title = UseLocalizationResult.contentMaturity,
+			title = ContentMaturity,
 			description = p1.contentMaturityText,
 			trailingIcon = IconName.ArrowUpRightFromSquare,
 			onActivated = p1.onOpenContentMaturity,
@@ -62,7 +66,7 @@ return function(p1)
 	local List = {}
 	table.insert(List, {
 		id = "version-title-description",
-		title = UseLocalizationResult.versionTitleDescription,
+		title = VersionTitleDescription,
 		onActivated = p1.onOpenVersionTitleDescriptionPage
 	})
 	table.insert(List, {

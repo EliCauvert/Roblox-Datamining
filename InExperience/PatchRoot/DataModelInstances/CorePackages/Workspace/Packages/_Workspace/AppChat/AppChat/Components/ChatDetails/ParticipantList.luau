@@ -10,6 +10,7 @@ local UserModel = require(Parent.UserLib).Models.UserModel
 local MemoFunction = ReactModule.memo
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local LoggerModule = require(script.Parent.Logger)
+local PresenceSortComparator = SocialLibrariesModule.Utils.presenceSortComparator
 local SortedList = SocialLibrariesModule.Components.SortedList
 local ParticipantEntryRightFrameModule = require(script.Parent.ParticipantEntryRightFrame)
 local ParticipantEntryModule = require(script.Parent.ParticipantEntry)
@@ -34,7 +35,7 @@ local config = {
 		-- upvalues: LoggerModule (copy)
 		LoggerModule:warning("onEntryActivated was not passed to ParticipantList")
 	end,
-	sortComparator = SocialLibrariesModule.Utils.presenceSortComparator
+	sortComparator = PresenceSortComparator
 }
 
 function ParticipantList(p1)

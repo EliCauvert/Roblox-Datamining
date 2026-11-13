@@ -17,6 +17,7 @@ local UseProfileCardWidthFunction = require(Parent.ProfilePlatformCommon).Hooks.
 local UserTileModule = require(Parent.UserTile)
 local EditProfileHeaderBarModule = require(EditProfile.BaseComponents.EditProfileHeaderBar)
 local TextKeysModule = require(EditProfile.Common.TextKeys)
+local FFlagEditProfileAlignBioTranslationKeysModule = require(EditProfile.Flags.FFlagEditProfileAlignBioTranslationKeys)
 local FFlagAXEnableProfileTab = require(Parent.SharedFlags).FFlagAXEnableProfileTab
 local FFlagSplitPaneFullBleedEditProfile = require(Parent.SharedFlags).FFlagSplitPaneFullBleedEditProfile
 local FFlagFixNonTruncatedTextModule = require(EditProfile.Flags.FFlagFixNonTruncatedText)
@@ -43,7 +44,7 @@ local function renderRowTrailing(AreNamesLoading, Text1, YOffset, p1)
 end
 
 return function(p1)
-	-- upvalues: UseProfileCardWidthFunction (copy), UseTokensFunction (copy), FFlagAXEnableProfileTab (copy), FFlagSplitPaneFullBleedEditProfile (copy), TextKeysModule (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), EditProfileHeaderBarModule (copy), UserTileModule (copy), IconButton (copy), IconName (copy), IconSize (copy), ButtonVariant (copy), List (copy), config (copy), renderRowTrailing (copy), FFlagFixNonTruncatedTextModule (copy), EditProfileProfileFramesSectionModule (copy)
+	-- upvalues: UseProfileCardWidthFunction (copy), UseTokensFunction (copy), FFlagAXEnableProfileTab (copy), FFlagSplitPaneFullBleedEditProfile (copy), TextKeysModule (copy), UseLocalizationFunction (copy), FFlagEditProfileAlignBioTranslationKeysModule (copy), ReactModule (copy), View (copy), EditProfileHeaderBarModule (copy), UserTileModule (copy), IconButton (copy), IconName (copy), IconSize (copy), ButtonVariant (copy), List (copy), config (copy), renderRowTrailing (copy), FFlagFixNonTruncatedTextModule (copy), EditProfileProfileFramesSectionModule (copy)
 	local UseProfileCardWidthResult = UseProfileCardWidthFunction()
 	local UseTokensResult = UseTokensFunction()
 	local IsFullBleed: boolean = if FFlagAXEnableProfileTab then p1.fullBleed == true else FFlagSplitPaneFullBleedEditProfile and p1.fullBleed == true
@@ -51,7 +52,7 @@ return function(p1)
 		TopBarTitle = TextKeysModule.Title,
 		UsernameLabel = TextKeysModule.Username,
 		DisplayNameLabel = if p1.isPolicyEnabled then TextKeysModule.AgedUpDisplayName else TextKeysModule.DisplayName,
-		BioLabel = TextKeysModule.About,
+		BioLabel = if FFlagEditProfileAlignBioTranslationKeysModule then TextKeysModule.Bio else TextKeysModule.About,
 		BioPlaceholder = TextKeysModule.AboutPlaceholder
 	})
 	local Size400 = UseTokensResult.Size.Size_400

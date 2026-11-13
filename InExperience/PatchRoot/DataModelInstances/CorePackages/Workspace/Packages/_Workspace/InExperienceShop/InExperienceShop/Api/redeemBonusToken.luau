@@ -3,10 +3,11 @@ local HttpService = game:GetService("HttpService")
 local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
 local Parent = InExperienceShop.Parent
 local PromiseModule = require(Parent.Promise)
+local Url = require(Parent.Http).Url
 local ErrorsModule = require(script.Parent.Errors)
 local ShopDebugLoggerModule = require(InExperienceShop.Internal.ShopDebugLogger)
 local FIntRedeemBonusTokenTimeoutMsModule = require(InExperienceShop.Flags.FIntRedeemBonusTokenTimeoutMs)
-local Text = require(Parent.Http).Url.APIS_URL .. "payments-bonus-service/v1/redeem-bonus-token"
+local Text = Url.APIS_URL .. "payments-bonus-service/v1/redeem-bonus-token"
 
 local function _(p1): number
 	return (tonumber(string.match(tostring(p1), "HTTP (%d%d%d)")))

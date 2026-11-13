@@ -4,11 +4,11 @@ local UseEffectFunction = ReactModule.useEffect
 local LuauPolyfillModule = require(Parent.LuauPolyfill)
 local SetTimeoutFunction = LuauPolyfillModule.setTimeout
 local ClearTimeoutFunction = LuauPolyfillModule.clearTimeout
-local Snackbar = require(Parent.Foundation).Snackbar
+local SnackbarDEPRECATED = require(Parent.Foundation).Snackbar_DEPRECATED
 local GenericInterventionSnackbarAutoDismissDelaySeconds = game:DefineFastInt("GenericInterventionSnackbarAutoDismissDelaySeconds", 4)
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseEffectFunction (copy), GenericInterventionSnackbarAutoDismissDelaySeconds (copy), SetTimeoutFunction (copy), ClearTimeoutFunction (copy), ReactModule (copy), Snackbar (copy)
+	-- upvalues: UseEffectFunction (copy), GenericInterventionSnackbarAutoDismissDelaySeconds (copy), SetTimeoutFunction (copy), ClearTimeoutFunction (copy), ReactModule (copy), SnackbarDEPRECATED (copy)
 	UseEffectFunction(function()
 		-- upvalues: p1 (copy), GenericInterventionSnackbarAutoDismissDelaySeconds (upval), SetTimeoutFunction (upval), ClearTimeoutFunction (upval)
 		local SetTimeoutResult = nil
@@ -25,7 +25,7 @@ return ReactModule.memo(function(p1)
 		end
 	end, { p1.onDismiss, p1.autoDismissDelaySeconds })
 	
-	return (ReactModule.createElement(Snackbar, {
+	return (ReactModule.createElement(SnackbarDEPRECATED, {
 		title = p1.titleText,
 		icon = p1.iconName,
 		Position = UDim2.new(0.5, 0, 0, 0),

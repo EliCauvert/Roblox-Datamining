@@ -4,6 +4,7 @@ local ApolloFriendsModule = require(Parent.ApolloFriends)
 local ApolloPresenceModule = require(Parent.ApolloPresence)
 local _ = require(Parent.GraphQLServer)
 local SocialLuaAnalyticsModule = require(Parent.SocialLuaAnalytics)
+local LoggingProtocolModule = require(Parent.LoggingProtocol)
 
 local function rtnPresenceToGraphQLPresence(p1)
 	-- upvalues: ApolloPresenceModule (copy)
@@ -39,7 +40,7 @@ local function _(List)
 end
 
 local Emitter = SocialLuaAnalyticsModule.Telemetry.createEmitter({
-	telemetryImpl = require(Parent.LoggingProtocol).default,
+	telemetryImpl = LoggingProtocolModule.default,
 	defaultTelemetryConfig = {
 		links = "https://docs.google.com/document/d/1uRCdl8pEuiW9wDiOTL39JPMGLhgxtpvVgiXovE8Xof4",
 		throttlingThousandths = game:DefineFastInt("FriendsCommonAnalyticsThrottlingThousandths", 10000)

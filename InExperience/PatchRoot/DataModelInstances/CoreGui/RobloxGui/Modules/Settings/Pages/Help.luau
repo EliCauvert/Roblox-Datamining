@@ -484,6 +484,7 @@ v1 = (function()
 		-- upvalues: HelpConstantsModule (upval), CreateFunction (upval), NewPage (copy), NewResult (upval), ThemeModule (upval)
 		local GamepadQuest = HelpConstantsModule.Images.GamepadQuest
 		local QuestGamepadLabels = HelpConstantsModule.Labels.QuestGamepadLabels
+		local Image = GamepadQuest.Image
 		local HeightRatio = GamepadQuest.HeightRatio
 		local LocalizationKeyPrefix = QuestGamepadLabels.LocalizationKeyPrefix
 		local LabelRelativeTextHeight = QuestGamepadLabels.LabelRelativeTextHeight
@@ -496,7 +497,7 @@ v1 = (function()
 			Position = UDim2.new(0.5, 0, 0, 0),
 			AnchorPoint = Vector2.new(0.5, 0),
 			SizeConstraint = Enum.SizeConstraint.RelativeXX,
-			Image = GamepadQuest.Image,
+			Image = Image,
 			Parent = Parent
 		})
 		local UIPadding = NewPage.Page:FindFirstChildOfClass("UIPadding")

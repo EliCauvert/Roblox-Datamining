@@ -23,6 +23,7 @@ return function(p1)
 	if FFlagUserTileIncludeProfileFramePropModule and p1.includeProfileFrame ~= nil then
 		IncludeProfileFrame = IncludeProfileFrame and p1.includeProfileFrame
 	end
+	local AvatarThumbnailUrl = if FFlagUserTileShowShimmerWhenLoadingModule and p1.avatarThumbnailUrl then p1.avatarThumbnailUrl else GetStandardSizeAvatarHeadShotRbxthumbFunction(p1.userId, IncludeProfileFrame)
 	local UseTokensResult = UseTokensFunction()
 	
 	return ReactModule.createElement(View, {
@@ -44,7 +45,7 @@ return function(p1)
 				tag = "size-full aspect-1-1 radius-circle align-x-center align-y-center row position-center-center anchor-center-center",
 				ZIndex = 3,
 				backgroundStyle = if p1.hover then UseTokensResult.Color.Shift.Shift_400 else UseTokensResult.Color.Shift.Shift_300,
-				Image = if FFlagUserTileShowShimmerWhenLoadingModule and p1.avatarThumbnailUrl then p1.avatarThumbnailUrl else GetStandardSizeAvatarHeadShotRbxthumbFunction(p1.userId, IncludeProfileFrame)
+				Image = AvatarThumbnailUrl
 			}),
 			GradientOverlay = if FFlagUserTileAvatarOverlayIcon and p1.overlayIcon then ReactModule.createElement(View, {
 				tag = "position-center-center anchor-center-center size-full aspect-1-1 radius-circle",

@@ -1,8 +1,9 @@
 ﻿local Parent = script:FindFirstAncestor("ExpChat").Parent
+local RoduxModule = require(Parent.Rodux)
 local Dictionary = require(Parent.llama).Dictionary
 local Actions = require(Parent.ExpChatShared).Actions
 
-return require(Parent.Rodux).createReducer({}, {
+return RoduxModule.createReducer({}, {
 	[Actions.PlayerAdded.name] = function(p1, p2)
 		-- upvalues: Dictionary (copy)
 		return if p2.hasVerifiedBadge then Dictionary.join(p1, { [p2.userId] = p2.hasVerifiedBadge }) else p1

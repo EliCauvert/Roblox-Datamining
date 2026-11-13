@@ -2,14 +2,16 @@
 local Parent = PeopleReactView.Parent
 local ReactModule = require(Parent.React)
 local PeopleServiceModule = require(Parent.PeopleService)
+local SignalsReactModule = require(Parent.SignalsReact)
 local View = require(Parent.Foundation).View
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseSignalStateFunction = SignalsReactModule.useSignalState
 local PersonRowModule = require(PeopleReactView.Components.List.PersonRow)
 local LazyPersonRowModule = require(PeopleReactView.Components.List.LazyPersonRow)
 local _ = require(PeopleReactView.Stores.GetScrollingFrameStore)
 local FlagsService = PeopleServiceModule.getService("Flags")
 local GetFFlagAddPeoplePageCardLayoutFunction = FlagsService.GetFFlagAddPeoplePageCardLayout
 local FFlagEnablePeopleListLazyRender = FlagsService.FFlagEnablePeopleListLazyRender
+local FFlagPeoplePageRemoveUseMemoElements = FlagsService.FFlagPeoplePageRemoveUseMemoElements
 
 local function MemoizedPersonRow(p1)
 	-- upvalues: ReactModule (copy), FFlagEnablePeopleListLazyRender (copy), LazyPersonRowModule (copy), PersonRowModule (copy)
@@ -97,4 +99,4 @@ local function PeopleList(Frame)
 	})
 end
 
-return if FlagsService.FFlagPeoplePageRemoveUseMemoElements then ReactModule.memo(PeopleList) else PeopleList
+return if FFlagPeoplePageRemoveUseMemoElements then ReactModule.memo(PeopleList) else PeopleList

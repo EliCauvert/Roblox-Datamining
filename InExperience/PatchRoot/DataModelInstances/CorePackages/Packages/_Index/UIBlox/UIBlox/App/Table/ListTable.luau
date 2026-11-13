@@ -1,8 +1,9 @@
 ﻿local Parent = script.Parent.Parent.Parent
+local Core = Parent.Core
 local Parent1 = Parent.Parent
 local TModule = require(Parent1.t)
 local RoactModule = require(Parent1.Roact)
-local WithStyleModule = require(Parent.Core.Style.withStyle)
+local WithStyleModule = require(Core.Style.withStyle)
 local ListTable = RoactModule.PureComponent:extend("ListTable")
 ListTable.validateProps = TModule.strictInterface({
 	layoutOrder = TModule.optional(TModule.integer),

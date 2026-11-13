@@ -2,6 +2,7 @@
 local DependenciesModule = require(Squads.dependencies)
 local Parent = Squads.Parent
 local CrossExperienceVoiceModule = require(Parent.CrossExperienceVoice)
+local UIBloxModule = require(Parent.UIBlox)
 local UserProfilesModule = require(Parent.UserProfiles)
 local GetStandardSizeAvatarHeadShotRbxthumbFunction = require(Parent.UserLib).Utils.getStandardSizeAvatarHeadShotRbxthumb
 local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
@@ -34,7 +35,7 @@ local UseIsCurrentSquadPartyVoiceEligibleFunction = HooksModule.useIsCurrentSqua
 local GetFFlagEnableCrossExpVoiceFunction = SharedFlags.GetFFlagEnableCrossExpVoice
 local IconSize = Foundation.Enums.IconSize
 local StateLayerAffordance = Foundation.Enums.StateLayerAffordance
-local ImageSetLabel = require(Parent.UIBlox).Core.ImageSet.ImageSetLabel
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local _ = require(Squads.Common.ModelTypes)
 local SquadUserPartyStatusModule = require(Squads.Enums.SquadUserPartyStatus)
 local SquadLobbyUserOverflowMenuContainerModule = require(Squads.Components.SquadLobby.SquadLobbyUserOverflowMenu.SquadLobbyUserOverflowMenuContainer)
@@ -372,7 +373,7 @@ return function(p1)
 				})
 			}, {})
 		}),
-		InactiveOverlay = if IsConnecting or v2 or v5 or (p1.user.partyStatus == SquadUserPartyStatusModule.Invited or p1.user.partyStatus == SquadUserPartyStatusModule.NoResponse) then React.createElement(Foundation.View, {
+		InactiveOverlay = if IsConnecting or v2 or v5 or p1.user.partyStatus == SquadUserPartyStatusModule.Invited or p1.user.partyStatus == SquadUserPartyStatusModule.NoResponse then React.createElement(Foundation.View, {
 			tag = "size-full radius-medium",
 			backgroundStyle = {
 				Transparency = 0.25,

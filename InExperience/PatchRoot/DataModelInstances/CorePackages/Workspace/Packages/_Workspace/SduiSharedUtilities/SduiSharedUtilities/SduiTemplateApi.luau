@@ -13,7 +13,6 @@ local SduiErrors = SduiCoreSystemModule.SduiErrors
 local SduiLogger = SduiCoreSystemModule.SduiLogger
 local DisplayLocation = ServiceContractsProtoModule.apppageplatform.shared.display_location.DisplayLocation
 local TemplateApiMessages = ServiceContractsProtoModule.apppageplatform.templates.template_api_messages
-local FFlagSduiAdvertiseRuntimeSupportSets = require(Parent.SharedFlags).FFlagSduiAdvertiseRuntimeSupportSets
 
 local function _(): string
 	-- upvalues: UrlBuilderModule (copy)
@@ -114,23 +113,6 @@ local function buildCachedComponentMappings(DisplayLocationNumbers, SurfaceKeysB
 	return List
 end
 
-local function buildPostConfig(p2, Locale, Capabilities)
-	-- upvalues: ServiceContractsProtoModule (copy), TemplateApiMessages (copy), SduiCapabilities (copy), buildCachedComponentMappings (copy), SduiApiStorePostConfigModule (copy)
-	return {
-		contentType = SduiApiStorePostConfigModule.SduiApiStorePostConfigContentType.Proto,
-		protoMessage = TemplateApiMessages.GetTemplatesRequest,
-		body = TemplateApiMessages.GetTemplatesRequest.new({
-			display_locations = p2.displayLocationNumbers,
-			client_capabilities = ServiceContractsProtoModule.apppageplatform.shared.client_capabilities.ClientCapabilities.new({
-				enabled_capabilities = SduiCapabilities.getEnabledCapabilityNumbers(Capabilities),
-				platform = ServiceContractsProtoModule.apppageplatform.shared.client_capabilities.Platform.toNumber("PLATFORM_APP")
-			}),
-			cached_component_mappings = buildCachedComponentMappings(p2.displayLocationNumbers, p2.surfaceKeysByDisplayLocation),
-			locale = Locale
-		})
-	}
-end
-
 local function buildPostConfigWithRuntimeSupport(p2, Locale, Client_capabilities)
 	-- upvalues: TemplateApiMessages (copy), buildCachedComponentMappings (copy), SduiApiStorePostConfigModule (copy)
 	return {
@@ -171,57 +153,33 @@ end
 
 return {
 	createRequest = function(p3)
-		-- upvalues: resolveSurfaceKeys (copy), LocalizationService (copy), SduiCapabilities (copy), FFlagSduiAdvertiseRuntimeSupportSets (copy), UrlBuilderModule (copy), buildPostConfigWithRuntimeSupport (copy), TemplateApiMessages (copy), buildPostConfig (copy)
+		-- upvalues: resolveSurfaceKeys (copy), LocalizationService (copy), SduiCapabilities (copy), UrlBuilderModule (copy), buildPostConfigWithRuntimeSupport (copy), TemplateApiMessages (copy)
 		local ResolveSurfaceKeysResult = resolveSurfaceKeys(p3.surfaceKeys)
 		
 		if ResolveSurfaceKeysResult == nil then
 			return nil
 		end
 		local Locale = p3.locale or LocalizationService.RobloxLocaleId
-		local Capabilities = p3.capabilities or SduiCapabilities.getEnabledCapabilities()
+		local Copy = table.clone(SduiCapabilities.getEnabledCapabilities())
+		table.sort(Copy)
+		local ClientCapabilities = SduiCapabilities.buildClientCapabilities()
+		local config = {
+			url = `{UrlBuilderModule.UrlBase.APIS}/landing-page-api/v1/templates`
+		}
+		local v1 = "sdui-template-api:%*:%*:%*"
+		local ConcatFunction = table.concat
+		local DisplayLocationNumbers = ResolveSurfaceKeysResult.displayLocationNumbers
+		local Buffer = table.create(#DisplayLocationNumbers)
 		
-		if FFlagSduiAdvertiseRuntimeSupportSets then
-			local Copy = table.clone(SduiCapabilities.getEnabledCapabilities())
-			table.sort(Copy)
-			local ClientCapabilities = SduiCapabilities.buildClientCapabilities()
-			local config = {
-				url = `{UrlBuilderModule.UrlBase.APIS}/landing-page-api/v1/templates`
-			}
-			local v1 = "sdui-template-api:%*:%*:%*"
-			local ConcatFunction1 = table.concat
-			local DisplayLocationNumbers = ResolveSurfaceKeysResult.displayLocationNumbers
-			local Buffer = table.create(#DisplayLocationNumbers)
-			
-			for _, displayLocationNumber in DisplayLocationNumbers do
-				table.insert(Buffer, (tostring(displayLocationNumber)))
-			end
-			config.cacheKey = v1:format(ConcatFunction1(Buffer, ","), Locale, (table.concat(Copy, ",")))
-			config.postConfig = buildPostConfigWithRuntimeSupport(ResolveSurfaceKeysResult, Locale, ClientCapabilities)
-			config.responseProto = TemplateApiMessages.GetTemplatesResponse
-			config.surfaceKeysByDisplayLocation = ResolveSurfaceKeysResult.surfaceKeysByDisplayLocation
-			
-			return config
-		else
-			local Copy1 = table.clone(Capabilities)
-			table.sort(Copy1)
-			local config1 = {
-				url = `{UrlBuilderModule.UrlBase.APIS}/landing-page-api/v1/templates`
-			}
-			local v2 = "sdui-template-api:%*:%*:%*"
-			local ConcatFunction = table.concat
-			local DisplayLocationNumbers = ResolveSurfaceKeysResult.displayLocationNumbers
-			local Buffer1 = table.create(#DisplayLocationNumbers)
-			
-			for _, displayLocationNumber1 in DisplayLocationNumbers do
-				table.insert(Buffer1, (tostring(displayLocationNumber1)))
-			end
-			config1.cacheKey = v2:format(ConcatFunction(Buffer1, ","), Locale, (table.concat(Copy1, ",")))
-			config1.postConfig = buildPostConfig(ResolveSurfaceKeysResult, Locale, Capabilities)
-			config1.responseProto = TemplateApiMessages.GetTemplatesResponse
-			config1.surfaceKeysByDisplayLocation = ResolveSurfaceKeysResult.surfaceKeysByDisplayLocation
-			
-			return config1
+		for _, displayLocationNumber in DisplayLocationNumbers do
+			table.insert(Buffer, (tostring(displayLocationNumber)))
 		end
+		config.cacheKey = v1:format(ConcatFunction(Buffer, ","), Locale, (table.concat(Copy, ",")))
+		config.postConfig = buildPostConfigWithRuntimeSupport(ResolveSurfaceKeysResult, Locale, ClientCapabilities)
+		config.responseProto = TemplateApiMessages.GetTemplatesResponse
+		config.surfaceKeysByDisplayLocation = ResolveSurfaceKeysResult.surfaceKeysByDisplayLocation
+		
+		return config
 	end,
 	parseResponseForSurface = function(p4, p5)
 		-- upvalues: SduiSurfaceToDisplayLocationModule (copy), extractTemplates (copy), DisplayLocation (copy), GetSduiTemplateStoreModule (copy)

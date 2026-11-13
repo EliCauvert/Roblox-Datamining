@@ -3,10 +3,11 @@ local Parent = AppComposition.Parent
 local DisplayModule = require(Parent.Display)
 local SignalsModule = require(Parent.Signals)
 local _ = require(Parent.Foundation)
+local FFlagAppCompositionContainerWidth = require(Parent.SharedFlags).FFlagAppCompositionContainerWidth
 local CreateBreakpointComputedModule = require(AppComposition.createBreakpointComputed)
 local ResolveBreakpointModule = require(AppComposition.resolveBreakpoint)
 
-return if require(Parent.SharedFlags).FFlagAppCompositionContainerWidth then CreateBreakpointComputedModule(function(p1)
+return if FFlagAppCompositionContainerWidth then CreateBreakpointComputedModule(function(p1)
 	-- upvalues: DisplayModule (copy)
 	return DisplayModule.GetDisplayStore(p1).getDesignSpaceViewportWidth(p1)
 end) else SignalsModule.createComputed(function(p1)

@@ -2,17 +2,13 @@
 local Parent = ProfilePlatform.Parent
 local ReactModule = require(Parent.React)
 local _ = require(ProfilePlatform.Common.Types)
-local ApolloProfileInsightsModule = require(Parent.ApolloProfileInsights)
 local EnumsModule = require(ProfilePlatform.Common.Enums)
 local UseProfileAnalyticsContextModule = require(ProfilePlatform.Contexts.useProfileAnalyticsContext)
 local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
 local UseAreWebViewsSupportedModule = require(ProfilePlatform.Hooks.useAreWebViewsSupported)
 local ChipGroup = require(ProfilePlatform.Components.ChipGroup).ChipGroup
 local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
-local UseProfileInsightsByUserIdsFunction = ApolloProfileInsightsModule.Hooks.useProfileInsightsByUserIds
-local GetProfileInsightsByUserIdFromDataFunction = ApolloProfileInsightsModule.Selectors.getProfileInsightsByUserIdFromData
 local UseSignalProfileInsightsByUserIdFunction = require(Parent.ProfileInsights).useSignalProfileInsightsByUserId
-local GetFFlagEnableProfileInsightsApolloMigrationFunction = require(Parent.SharedFlags).GetFFlagEnableProfileInsightsApolloMigration
 local Parent1 = script.Parent
 local UseSocialCountsDataModule = require(Parent1.hooks.useSocialCountsData)
 local UseSocialCountsActionsModule = require(Parent1.hooks.useSocialCountsActions)
@@ -27,7 +23,7 @@ local FFlagProfilePlatformGracefulVisibilityModule = require(ProfilePlatform.Fla
 local FFlagSocialTabsPageIxpEnabledModule = require(ProfilePlatform.Flags.FFlagSocialTabsPageIxpEnabled)
 
 return function(p1)
-	-- upvalues: UseProfileWrapperContextModule (copy), UseProfileAnalyticsContextModule (copy), UseAreWebViewsSupportedModule (copy), UseLocalUserIdFunction (copy), UseDynamicSizeMarginModule (copy), FFlagAddIEMProfilePage (copy), GetFFlagEnableProfileInsightsApolloMigrationFunction (copy), UseSignalProfileInsightsByUserIdFunction (copy), UseProfileInsightsByUserIdsFunction (copy), GetProfileInsightsByUserIdFromDataFunction (copy), UseSocialCountsDataModule (copy), UseSocialCountsActionsModule (copy), FFlagEnableSocialTabsPage (copy), FFlagSocialTabsPageIxpEnabledModule (copy), FFlagProfilePlatformEnableSchoolChip (copy), UseSchoolChipModule (copy), ReactModule (copy), EnumsModule (copy), FFlagProfilePlatformGracefulVisibilityModule (copy), ChipSize (copy), ChipGroup (copy)
+	-- upvalues: UseProfileWrapperContextModule (copy), UseProfileAnalyticsContextModule (copy), UseAreWebViewsSupportedModule (copy), UseLocalUserIdFunction (copy), UseDynamicSizeMarginModule (copy), FFlagAddIEMProfilePage (copy), UseSignalProfileInsightsByUserIdFunction (copy), UseSocialCountsDataModule (copy), UseSocialCountsActionsModule (copy), FFlagEnableSocialTabsPage (copy), FFlagSocialTabsPageIxpEnabledModule (copy), FFlagProfilePlatformEnableSchoolChip (copy), UseSchoolChipModule (copy), ReactModule (copy), EnumsModule (copy), FFlagProfilePlatformGracefulVisibilityModule (copy), ChipSize (copy), ChipGroup (copy)
 	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
 	local UseProfileAnalyticsContextModuleResult = UseProfileAnalyticsContextModule()
 	local UseAreWebViewsSupportedModuleResult = UseAreWebViewsSupportedModule()
@@ -36,21 +32,12 @@ return function(p1)
 	local ProfileId = UseProfileWrapperContextModuleResult.profileId
 	local Source = if FFlagAddIEMProfilePage then UseProfileWrapperContextModuleResult.sourceInfo.source else nil
 	local IsProfileIdMatch = ProfileId == tostring(UseLocalUserIdResult)
-	local v1 = nil
-	
-	if GetFFlagEnableProfileInsightsApolloMigrationFunction() then
-		v1 = UseSignalProfileInsightsByUserIdFunction({ rankingStrategy = "tc_info_boost", userId = ProfileId })
-	else
-		local UseProfileInsightsByUserIdsResult = UseProfileInsightsByUserIdsFunction({ userIds = { ProfileId } })
-		
-		if UseProfileInsightsByUserIdsResult and UseProfileInsightsByUserIdsResult.data and not UseProfileInsightsByUserIdsResult.loading then
-			v1 = GetProfileInsightsByUserIdFromDataFunction(UseProfileInsightsByUserIdsResult.data, ProfileId)
-		end
-	end
+	local UseSignalProfileInsightsByUserIdResult = UseSignalProfileInsightsByUserIdFunction({ rankingStrategy = "tc_info_boost", userId = ProfileId })
+	local MutualFriends = if UseSignalProfileInsightsByUserIdResult and UseSignalProfileInsightsByUserIdResult.mutualFriends then UseSignalProfileInsightsByUserIdResult.mutualFriends else {}
 	local Ids = {}
 	
-	for _, value in ipairs(if v1 and v1.mutualFriends then v1.mutualFriends else {}) do
-		table.insert(Ids, value.id)
+	for _, mutualFriend in ipairs(MutualFriends) do
+		table.insert(Ids, mutualFriend.id)
 	end
 	local UseSocialCountsDataModuleResult = UseSocialCountsDataModule(ProfileId, IsProfileIdMatch, UseAreWebViewsSupportedModuleResult, Ids)
 	local UseSocialCountsActionsModuleResult = UseSocialCountsActionsModule(ProfileId, IsProfileIdMatch, UseProfileAnalyticsContextModuleResult, Ids, if FFlagEnableSocialTabsPage then p1.title else nil, if FFlagSocialTabsPageIxpEnabledModule then UseAreWebViewsSupportedModuleResult else nil)

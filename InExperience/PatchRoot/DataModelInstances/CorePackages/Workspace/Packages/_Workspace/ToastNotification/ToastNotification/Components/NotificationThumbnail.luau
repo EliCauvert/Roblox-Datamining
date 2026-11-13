@@ -1,4 +1,5 @@
 ﻿local Parent = script.Parent.Parent
+local Context = Parent.context
 local DependenciesModule = require(Parent.dependencies)
 local ImagePile = DependenciesModule.AppBlox.ImagePile
 local React = DependenciesModule.React
@@ -11,16 +12,17 @@ local UserLibConstants = DependenciesModule.UserLibConstants
 local Parent1 = Parent.Parent
 local NotificationsCommonModule = require(Parent1.NotificationsCommon)
 local Constants = NotificationsCommonModule.constants
+local SharedFlagsModule = require(Parent1.SharedFlags)
 local ToastNotificationHelperModule = require(Parent.utils.toastNotificationHelper)
 local Images = UIBlox.App.ImageSet.Images
 local ImageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
 local IconsGraphicLogomarkGradientXlarge = Images["icons/graphic/logomark-gradient_xlarge"]
 local IconsCommonSafety = Images["icons/common/safety"]
-local GetFFlagEnableToastIconSupportFunction = require(Parent1.SharedFlags).GetFFlagEnableToastIconSupport
+local GetFFlagEnableToastIconSupportFunction = SharedFlagsModule.GetFFlagEnableToastIconSupport
 local FFlagNotificationThumbnailUseProfileFrameThumbnail = NotificationsCommonModule.FFlagNotificationThumbnailUseProfileFrameThumbnail
-local UseNotificationCardStateModule = require(Parent.context.useNotificationCardState)
+local UseNotificationCardStateModule = require(Context.useNotificationCardState)
 
-local function v18(IdType)
+local function v20(IdType)
 	-- upvalues: TypeModule (copy), UserLibConstants (copy)
 	return if IdType == TypeModule.SENDERThumbnailTypeEnum.Game then UserLibConstants.RbxthumbTypes.GameIcon elseif IdType == TypeModule.SENDERThumbnailTypeEnum.User then UserLibConstants.RbxthumbTypes.AvatarHeadShot elseif IdType == TypeModule.SENDERThumbnailTypeEnum.Group then UserLibConstants.RbxthumbTypes.GroupIcon elseif IdType == TypeModule.SENDERThumbnailTypeEnum.Asset then UserLibConstants.RbxthumbTypes.Asset elseif IdType == TypeModule.SENDERThumbnailTypeEnum.Bundle then UserLibConstants.RbxthumbTypes.BundleThumbnail else UserLibConstants.RbxthumbTypes.GameIcon
 end
@@ -31,7 +33,7 @@ local IsUserThumbnail = if ToastNotificationHelperModule.isUserThumbnail then To
 end
 
 return function()
-	-- upvalues: UseNotificationCardStateModule (copy), UseStyleFunction (copy), IsUserThumbnail (copy), FFlagNotificationThumbnailUseProfileFrameThumbnail (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), v18 (copy), GetFFlagEnableToastIconSupportFunction (copy), TypeModule (copy), Constants (copy), React (copy), ImageSetLabel (copy), IconsCommonSafety (copy), IconsGraphicLogomarkGradientXlarge (copy), ImagePile (copy), LoadableImage (copy)
+	-- upvalues: UseNotificationCardStateModule (copy), UseStyleFunction (copy), IsUserThumbnail (copy), FFlagNotificationThumbnailUseProfileFrameThumbnail (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), v20 (copy), GetFFlagEnableToastIconSupportFunction (copy), TypeModule (copy), Constants (copy), React (copy), ImageSetLabel (copy), IconsCommonSafety (copy), IconsGraphicLogomarkGradientXlarge (copy), ImagePile (copy), LoadableImage (copy)
 	local Thumbnail = UseNotificationCardStateModule("thumbnail")
 	
 	if Thumbnail == nil or #Thumbnail == 0 then
@@ -45,7 +47,7 @@ return function()
 		if not IsUserThumbnail(value) then
 			Flag = true
 		end
-		Images[tostring(value.id)] = if FFlagNotificationThumbnailUseProfileFrameThumbnail then GetRbxthumbWithTypeSizeAndOptionsFunction(value.id, v18(value.idType), 150, nil, nil, IsUserThumbnail(value)) else GetRbxthumbWithTypeSizeAndOptionsFunction(value.id, v18(value.idType), 150)
+		Images[tostring(value.id)] = if FFlagNotificationThumbnailUseProfileFrameThumbnail then GetRbxthumbWithTypeSizeAndOptionsFunction(value.id, v20(value.idType), 150, nil, nil, IsUserThumbnail(value)) else GetRbxthumbWithTypeSizeAndOptionsFunction(value.id, v20(value.idType), 150)
 	end
 	local Images1 = {}
 	
@@ -106,7 +108,7 @@ return function()
 					showFailedStateWhenLoadingFailed = true,
 					useShimmerAnimationWhileLoading = true,
 					ZIndex = 1,
-					Image = if FFlagNotificationThumbnailUseProfileFrameThumbnail then GetRbxthumbWithTypeSizeAndOptionsFunction(ThumbnailEntry.id, v18(ThumbnailEntry.idType), 150, nil, nil, IsUserThumbnail(ThumbnailEntry)) else GetRbxthumbWithTypeSizeAndOptionsFunction(ThumbnailEntry.id, v18(ThumbnailEntry.idType), 150),
+					Image = if FFlagNotificationThumbnailUseProfileFrameThumbnail then GetRbxthumbWithTypeSizeAndOptionsFunction(ThumbnailEntry.id, v20(ThumbnailEntry.idType), 150, nil, nil, IsUserThumbnail(ThumbnailEntry)) else GetRbxthumbWithTypeSizeAndOptionsFunction(ThumbnailEntry.id, v20(ThumbnailEntry.idType), 150),
 					Size = UDim2.fromScale(1, 1),
 					cornerRadius = if IsUserThumbnail(ThumbnailEntry) then _UDim else UDim.new(0, 8)
 				})

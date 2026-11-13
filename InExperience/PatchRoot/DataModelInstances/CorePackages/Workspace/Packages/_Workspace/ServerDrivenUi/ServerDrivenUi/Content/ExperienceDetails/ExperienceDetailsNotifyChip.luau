@@ -5,15 +5,17 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local SignalsReactModule = require(Parent.SignalsReact)
 local Game1 = require(Parent.DataHydration).Game
+local LocalizationModule = require(Parent.Localization)
 local SduiChip = require(Parent.SduiSharedContent).SduiChip
 local ToastRoduxModule = require(Parent.ToastRodux)
 local ToastType = ToastRoduxModule.Enums.ToastType
 local SetCurrentToastMessageFunction = ToastRoduxModule.Actions.SetCurrentToastMessage
+local UniversalAppPolicyModule = require(Parent.UniversalAppPolicy)
 local GameFollowFunction = require(Parent.DiscoveryAnalytics).Events.gameFollow
 local FFlagLuaAppAddUniverseIdToEngagementEvents = require(Parent.SharedFlags).FFlagLuaAppAddUniverseIdToEngagementEvents
 local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
-local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
+local UseAppPolicyFunction = UniversalAppPolicyModule.useAppPolicy
 local UseOptimisticUpdateStatusModule = require(ServerDrivenUi.Content.ExperienceDetails.Hooks.useOptimisticUpdateStatus)
 
 return ReactModule.memo(function(p1)

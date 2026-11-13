@@ -1,11 +1,12 @@
 ﻿local Parent = script:FindFirstAncestor("AvatarExperienceAnalytics").Parent
+local SharedFlagsModule = require(Parent.SharedFlags)
 local _ = require(Parent.AvatarExperienceNavigation)
 local _ = require(Parent.AvatarExperienceModel)
 local SendUnifiedEventForDeferredActionModule = require(script.Parent.sendUnifiedEventForDeferredAction)
 local GetMarketplaceUnifiedItemTypeModule = require(script.Parent.Utils.getMarketplaceUnifiedItemType)
 local GetUnifiedLoggingSurfaceModule = require(script.Parent.Utils.getUnifiedLoggingSurface)
 local UnifiedEventLogEnumsModule = require(script.Parent.UnifiedEventLogEnums)
-local FFlagAXFixClickItemDetailsSurfaceLogging = require(Parent.SharedFlags).FFlagAXFixClickItemDetailsSurfaceLogging
+local FFlagAXFixClickItemDetailsSurfaceLogging = SharedFlagsModule.FFlagAXFixClickItemDetailsSurfaceLogging
 
 return function(p1)
 	-- upvalues: SendUnifiedEventForDeferredActionModule (copy), UnifiedEventLogEnumsModule (copy), GetMarketplaceUnifiedItemTypeModule (copy), FFlagAXFixClickItemDetailsSurfaceLogging (copy), GetUnifiedLoggingSurfaceModule (copy)

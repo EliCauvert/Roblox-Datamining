@@ -6,9 +6,10 @@ local FetchModule = require(Parent.Fetch)
 local Fetch = FetchModule.fetch
 local Response = FetchModule.Response
 local GraphQLError = require(Parent.GraphQL).GraphQLError
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
 local BuildOmniRecommendationsRequestModule = require(script.Parent.buildOmniRecommendationsRequest)
 local _ = require(script.Parent.Parent.Parent.generatedTypes)
-local OmniRecommendationMetadata = require(Parent.UrlBuilder).UrlBuilder.fromString("apis:discovery-api/omni-recommendation-metadata")
+local OmniRecommendationMetadata = UrlBuilder.fromString("apis:discovery-api/omni-recommendation-metadata")
 
 return {
 	findOmniFeedBySessionId = function(p1, p2)

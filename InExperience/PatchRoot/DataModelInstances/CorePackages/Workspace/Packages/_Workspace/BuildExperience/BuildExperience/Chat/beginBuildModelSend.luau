@@ -125,8 +125,8 @@ return function(p3, p4, p5, p6)
 					else
 						IsDefault = false
 						
-						for _, value1 in Models.available do
-							if value1.id == Tier then
+						for _, value in Models.available do
+							if value.id == Tier then
 								IsDefault = true
 								break
 							end
@@ -166,8 +166,8 @@ return function(p3, p4, p5, p6)
 					else
 						IsDefault1 = false
 						
-						for _, value in Models1.available do
-							if value.id == Tier1 then
+						for _, value1 in Models1.available do
+							if value1.id == Tier1 then
 								IsDefault1 = true
 								break
 							end

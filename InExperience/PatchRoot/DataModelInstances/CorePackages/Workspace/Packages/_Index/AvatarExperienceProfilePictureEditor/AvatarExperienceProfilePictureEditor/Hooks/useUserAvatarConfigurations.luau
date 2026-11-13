@@ -2,13 +2,16 @@
 local Parent = AvatarExperienceProfilePictureEditor.Parent
 local ReactModule = require(Parent.React)
 local HttpRequestModule = require(Parent.HttpRequest)
+local ProfilePlatformCommonModule = require(Parent.ProfilePlatformCommon)
+local SignalsReactModule = require(Parent.SignalsReact)
+local FFlagRobloxSubscriptionOnboardingSheet = require(Parent.SharedFlags).FFlagRobloxSubscriptionOnboardingSheet
 local ConstantsModule = require(AvatarExperienceProfilePictureEditor.Constants)
 local _ = require(AvatarExperienceProfilePictureEditor.Shared.parseCloseupCameraConfig)
 local _ = require(AvatarExperienceProfilePictureEditor.Common.Enums)
 local UserAvatarConfigurationsApiModule = require(AvatarExperienceProfilePictureEditor.Api.userAvatarConfigurationsApi)
 local UserAvatarConfigurationsCacheModule = require(AvatarExperienceProfilePictureEditor.Api.userAvatarConfigurationsCache)
-local ProfileRefreshSignal = require(Parent.ProfilePlatformCommon).Signals.ProfileRefreshSignal
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local ProfileRefreshSignal = ProfilePlatformCommonModule.Signals.ProfileRefreshSignal
+local UseSignalStateFunction = SignalsReactModule.useSignalState
 local config = {
 	emoteAssetId = nil,
 	distanceScale = ConstantsModule.DefaultDistanceScale,
@@ -23,7 +26,7 @@ local ConfigResult = HttpRequestModule.config({
 })
 
 return function(Current, p1)
-	-- upvalues: UserAvatarConfigurationsApiModule (copy), UseSignalStateFunction (copy), ProfileRefreshSignal (copy), ReactModule (copy), config (copy), UserAvatarConfigurationsCacheModule (copy), ConfigResult (copy)
+	-- upvalues: UserAvatarConfigurationsApiModule (copy), UseSignalStateFunction (copy), ProfileRefreshSignal (copy), ReactModule (copy), config (copy), FFlagRobloxSubscriptionOnboardingSheet (copy), UserAvatarConfigurationsCacheModule (copy), ConfigResult (copy)
 	local NoP4: boolean = not p1 or p1.listenToProfileRefreshSignal ~= false
 	local SelectionTypes = if p1 then p1.selectionTypes else UserAvatarConfigurationsApiModule.DEFAULT_SELECTION_TYPES
 	local UseSignalStateResult = UseSignalStateFunction(ProfileRefreshSignal.getProfileRefreshSignal)
@@ -42,11 +45,21 @@ return function(Current, p1)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(config)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(nil)
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(true)
+	local UseStateResult2_4 = nil
+	local UseStateResult5 = nil
+	
+	if FFlagRobloxSubscriptionOnboardingSheet then
+		UseStateResult5, UseStateResult2_4 = ReactModule.useState(false)
+	else
+		UseStateResult5 = false
+		
+		UseStateResult2_4 = function(_) end
+	end
 	local UseRefResult1 = ReactModule.useRef(false)
 	local UseRefResult2 = ReactModule.useRef(nil)
 	local UseRefResult3 = ReactModule.useRef(UseStateResult)
 	ReactModule.useEffect(function()
-		-- upvalues: Current (copy), UseRefResult1 (copy), UseRefResult2 (copy), UseRefResult3 (copy), UseStateResult (copy), UseStateResult2_1 (copy), config (upval), UseStateResult2_2 (copy), UseStateResult2_3 (copy), UserAvatarConfigurationsCacheModule (upval), ConfigResult (upval), SelectionTypes (copy)
+		-- upvalues: Current (copy), UseRefResult1 (copy), UseRefResult2 (copy), UseRefResult3 (copy), UseStateResult (copy), UseStateResult2_1 (copy), config (upval), UseStateResult2_2 (copy), UseStateResult2_4 (ref), UseStateResult2_3 (copy), UserAvatarConfigurationsCacheModule (upval), ConfigResult (upval), SelectionTypes (copy)
 		local Flag = false
 		
 		if Current == nil then
@@ -55,6 +68,7 @@ return function(Current, p1)
 			UseRefResult3.current = UseStateResult
 			UseStateResult2_1(config)
 			UseStateResult2_2(nil)
+			UseStateResult2_4(false)
 			UseStateResult2_3(false)
 			
 			return
@@ -64,6 +78,7 @@ return function(Current, p1)
 			UseRefResult2.current = Current
 			UseStateResult2_1(config)
 			UseStateResult2_2(nil)
+			UseStateResult2_4(false)
 		end
 		if UseRefResult3.current ~= UseStateResult then
 			UserAvatarConfigurationsCacheModule.invalidate(Current)
@@ -73,18 +88,20 @@ return function(Current, p1)
 			UseStateResult2_3(true)
 		end
 		UserAvatarConfigurationsCacheModule.fetchCached(ConfigResult, Current, SelectionTypes):andThen(function(Result)
-			-- upvalues: Flag (ref), UseStateResult2_1 (upval), UseStateResult2_2 (upval), UseRefResult1 (upval), UseStateResult2_3 (upval)
+			-- upvalues: Flag (ref), UseStateResult2_1 (upval), UseStateResult2_2 (upval), UseStateResult2_4 (upval), UseRefResult1 (upval), UseStateResult2_3 (upval)
 			if not Flag then
 				UseStateResult2_1(Result.parsed.closeupCameraConfig)
 				UseStateResult2_2(Result.parsed.profileFrameAssetId)
+				UseStateResult2_4(false)
 				UseRefResult1.current = true
 				UseStateResult2_3(false)
 				
 				return
 			end
 		end):catch(function(_)
-			-- upvalues: Flag (ref), UseRefResult1 (upval), UseStateResult2_3 (upval)
+			-- upvalues: Flag (ref), UseStateResult2_4 (upval), UseRefResult1 (upval), UseStateResult2_3 (upval)
 			if not Flag then
+				UseStateResult2_4(true)
 				UseRefResult1.current = true
 				UseStateResult2_3(false)
 				
@@ -98,5 +115,5 @@ return function(Current, p1)
 		end
 	end, { Current, UseStateResult, SelectionTypes })
 	
-	return UseStateResult1, UseStateResult3, UseStateResult4
+	return UseStateResult1, UseStateResult3, UseStateResult4, UseStateResult5
 end

@@ -6,6 +6,7 @@ local DashModule = require(Parent.Dash)
 local BuyActionBar = require(Parent.AvatarExperienceInspectAndBuy).Components.BuyActionBar
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local _ = require(ProfilePlatform.Common.Types)
+local InspectAvatarUtilsModule = require(ProfilePlatform.Components.InspectAvatar.InspectAvatarUtils)
 local ItemDisplayHelpersModule = require(ProfilePlatform.Components.InspectAvatar.ItemDisplayHelpers)
 local CatalogItemRowCardContainerModule = require(ProfilePlatform.Components.InspectAvatar.CatalogItemRowCardContainer)
 local RecentActivityPurchaseConfirmationDialogModule = require(script.Parent.RecentActivityPurchaseConfirmationDialog)
@@ -16,7 +17,7 @@ local Text = FoundationModule.Text
 local Skeleton = FoundationModule.Skeleton
 local DialogSize = FoundationModule.Enums.DialogSize
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
-local IsItemPurchasableFunction = require(ProfilePlatform.Components.InspectAvatar.InspectAvatarUtils).isItemPurchasable
+local IsItemPurchasableFunction = InspectAvatarUtilsModule.isItemPurchasable
 
 return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ItemDisplayHelpersModule (copy), ReactModule (copy), DashModule (copy), CatalogItemRowCardContainerModule (copy), IsItemPurchasableFunction (copy), Skeleton (copy), Sheet (copy), DialogSize (copy), Text (copy), View (copy), BuyActionBar (copy), ButtonVariant (copy), RecentActivityPurchaseConfirmationDialogModule (copy), RecentActivityInsufficientRobuxDialogModule (copy)

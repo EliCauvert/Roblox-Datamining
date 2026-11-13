@@ -1,5 +1,6 @@
 ﻿local CollectionViews = script:FindFirstAncestor("CollectionViews")
 local _ = require(CollectionViews.CollectionViewTypes)
+local FFlagLuaAppCompositionLegacyLayout = require(CollectionViews.Parent.SharedFlags).FFlagLuaAppCompositionLegacyLayout
 local list = {
 	{
 		maxWidth = 499,
@@ -284,7 +285,7 @@ local list1 = {
 		}
 	}
 }
-local List = if require(CollectionViews.Parent.SharedFlags).FFlagLuaAppCompositionLegacyLayout then list1 else list
+local List = if FFlagLuaAppCompositionLegacyLayout then list1 else list
 
 return {
 	resolveBreakpoint = function(p1)

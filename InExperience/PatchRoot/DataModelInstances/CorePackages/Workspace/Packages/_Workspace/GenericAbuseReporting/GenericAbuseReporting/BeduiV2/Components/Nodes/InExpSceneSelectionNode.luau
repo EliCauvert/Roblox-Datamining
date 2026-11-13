@@ -1,14 +1,16 @@
 ﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
 local ReactModule = require(GenericAbuseReporting.Parent.React)
+local AbuseReportAnalyticsContextModule = require(GenericAbuseReporting.BeduiV2.Analytics.AbuseReportAnalyticsContext)
 local AnalyticsServiceModule = require(GenericAbuseReporting.BeduiV2.Analytics.analyticsService)
 local InExpSceneSelectionAdapterModule = require(script.Parent.inExpSceneSelectionAdapter)
 local GetIsInExpSceneSelectionAvailableModule = require(script.Parent.getIsInExpSceneSelectionAvailable)
+local LayoutSlotsModule = require(GenericAbuseReporting.BeduiV2.Components.LayoutSlots)
 local TextWithTranslationModule = require(GenericAbuseReporting.BeduiV2.Utils.Translate.TextWithTranslation)
 local _ = require(GenericAbuseReporting.BeduiV2.Utils.Translate.translate)
 local SubmitSource = AnalyticsServiceModule.SubmitSource
 local TelemetryEventType = AnalyticsServiceModule.TelemetryEventType
-local UseAbuseReportAnalyticsFunction = require(GenericAbuseReporting.BeduiV2.Analytics.AbuseReportAnalyticsContext).useAbuseReportAnalytics
-local UseLayoutSlotsFunction = require(GenericAbuseReporting.BeduiV2.Components.LayoutSlots).useLayoutSlots
+local UseAbuseReportAnalyticsFunction = AbuseReportAnalyticsContextModule.useAbuseReportAnalytics
+local UseLayoutSlotsFunction = LayoutSlotsModule.useLayoutSlots
 
 return ReactModule.memo(function(Current)
 	-- upvalues: ReactModule (copy), UseAbuseReportAnalyticsFunction (copy), UseLayoutSlotsFunction (copy), GetIsInExpSceneSelectionAvailableModule (copy), TelemetryEventType (copy), InExpSceneSelectionAdapterModule (copy), SubmitSource (copy), TextWithTranslationModule (copy)

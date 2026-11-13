@@ -3,6 +3,8 @@ local Parent = PeopleReactView.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local PeopleServiceModule = require(Parent.PeopleService)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local View = FoundationModule.View
 local Text = FoundationModule.Text
@@ -12,7 +14,7 @@ local PopoverAlign = FoundationModule.Enums.PopoverAlign
 local Radius = FoundationModule.Enums.Radius
 local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
 local UseTokensFunction = FoundationModule.Hooks.useTokens
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseSignalStateFunction = SignalsReactModule.useSignalState
 local FFlagVoiceChatVolumePerUserDisableInteractionWhenMutedModule = require(PeopleReactView.Flags.FFlagVoiceChatVolumePerUserDisableInteractionWhenMuted)
 local FFlagVoiceChatVolumePerUserMuteVolumeSyncModule = require(PeopleReactView.Flags.FFlagVoiceChatVolumePerUserMuteVolumeSync)
 local FFlagPeoplePageDismissVolumePopoverOnScrollOutOfView = PeopleServiceModule.getService("Flags").FFlagPeoplePageDismissVolumePopoverOnScrollOutOfView
@@ -24,7 +26,7 @@ local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
 local RbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId")
 local VOICEVOLUME = PeopleServiceModule.getService("Constants").VOICE_CHAT.VOICE_VOLUME
 local ENTRYPOINT = PeopleServiceModule.getService("Constants").ANALYTICS.ENTRY_POINT
-local Signal = require(Parent.Signals).createSignal(false)
+local Signal = SignalsModule.createSignal(false)
 
 return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), PeopleServiceModule (copy), FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry (copy), ENTRYPOINT (copy), FFlagVoiceChatVolumePerUserDisableInteractionWhenMutedModule (copy), UseSignalStateFunction (copy), Signal (copy), UseScaledValueFunction (copy), FFlagPeoplePageFlipVolumePopoverToFitViewport (copy), VOICEVOLUME (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), RbxAnalyticsService (copy), FFlagVoiceChatVolumePerUserMuteVolumeSyncModule (copy), FFlagPeoplePageDismissVolumePopoverOnScrollOutOfView (copy), UseDismissWhenOutOfViewModule (copy), UsePopoverSideToFitScrollingViewportModule (copy), PopoverSide (copy), Popover (copy), View (copy), PopoverAlign (copy), Radius (copy), Text (copy), FoundationModule (copy)

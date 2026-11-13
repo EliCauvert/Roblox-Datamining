@@ -1,8 +1,9 @@
 ﻿local AvatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
 local Parent = AvatarExperienceProfilePictureEditor.Parent
 local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
 local ConstantsModule = require(AvatarExperienceProfilePictureEditor.Constants)
-local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
 local function _(p1)
 	-- upvalues: ReactModule (copy)
@@ -108,8 +109,10 @@ return function(p1)
 	local Largest1 = math.max(1, (math.floor(UseTokensResult.Stroke.Standard + 0.5)))
 	local Floored = math.floor(p1.cutoutSize * ConstantsModule.CircleCutoutHoleDiameterFraction + 0.5)
 	local Largest2 = math.max(0, (math.floor((p1.cutoutSize - Floored) / 2 + 0.5)))
+	local XOffset = Largest + Largest2
+	local NewCutoutTopOffset = p1.cutoutTopOffset + Largest2
 	local NewLargest = Largest + p1.cutoutSize * 0.5
-	local NewCutoutTopOffset = p1.cutoutTopOffset + p1.cutoutSize * 0.5
+	local NewCutoutTopOffset1 = p1.cutoutTopOffset + p1.cutoutSize * 0.5
 	local Largest3 = math.max(1, Floored - Largest1)
 	
 	return ReactModule.createElement(ReactModule.Fragment, nil, {
@@ -153,7 +156,7 @@ return function(p1)
 			Active = false,
 			ZIndex = 2,
 			Size = UDim2.fromOffset(Floored, Floored),
-			Position = UDim2.fromOffset(Largest + Largest2, p1.cutoutTopOffset + Largest2)
+			Position = UDim2.fromOffset(XOffset, NewCutoutTopOffset)
 		}, (buildCompositionGridChildren(Largest1, EmphasisColor3, Transparency1))),
 		Cutout = ReactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
@@ -172,7 +175,7 @@ return function(p1)
 			Active = false,
 			ZIndex = 4,
 			Size = UDim2.fromOffset(Largest3, Largest3),
-			Position = UDim2.fromOffset(NewLargest, NewCutoutTopOffset),
+			Position = UDim2.fromOffset(NewLargest, NewCutoutTopOffset1),
 			AnchorPoint = Vector2.new(0.5, 0.5)
 		}, {
 			UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0.5, 0) }),
@@ -190,7 +193,7 @@ return function(p1)
 			ZIndex = 5,
 			Image = p1.frameImage,
 			Size = UDim2.fromOffset(Floored, Floored),
-			Position = UDim2.fromOffset(NewLargest, NewCutoutTopOffset),
+			Position = UDim2.fromOffset(NewLargest, NewCutoutTopOffset1),
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			ScaleType = Enum.ScaleType.Fit
 		}) else nil

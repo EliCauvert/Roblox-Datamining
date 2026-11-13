@@ -1,6 +1,29 @@
 ﻿local Foundation = script:FindFirstAncestor("Foundation")
 local LocalizationService = require(Foundation.Utility.Wrappers).Services.LocalizationService
 local TranslatorModule = require(Foundation.Utility.Localization.Translator)
+local MonthMap = {
+	[1] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.January"),
+	[2] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.February"),
+	[3] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.March"),
+	[4] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.April"),
+	[5] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.May"),
+	[6] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.June"),
+	[7] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.July"),
+	[8] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.August"),
+	[9] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.September"),
+	[10] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.October"),
+	[11] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.November"),
+	[12] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.December")
+}
+local Weekdays = {
+	[1] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.SundayAbbreviated"),
+	[2] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.MondayAbbreviated"),
+	[3] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.TuesdayAbbreviated"),
+	[4] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.WednesdayAbbreviated"),
+	[5] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.ThursdayAbbreviated"),
+	[6] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.FridayAbbreviated"),
+	[7] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.SaturdayAbbreviated")
+}
 
 local function getDaysInMonth(p1, p2: number)
 	local list = {
@@ -133,20 +156,7 @@ return {
 		
 		return UnixTimestamp <= UnixTimestamp2 and UnixTimestamp2 <= UnixTimestamp1
 	end,
-	monthMap = {
-		[1] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.January"),
-		[2] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.February"),
-		[3] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.March"),
-		[4] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.April"),
-		[5] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.May"),
-		[6] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.June"),
-		[7] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.July"),
-		[8] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.August"),
-		[9] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.September"),
-		[10] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.October"),
-		[11] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.November"),
-		[12] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.December")
-	},
+	monthMap = MonthMap,
 	roundDownToNearestMinute = function(p1)
 		local LocalTime = p1:ToLocalTime()
 		
@@ -160,13 +170,5 @@ return {
 	toLocalTime = function(p1)
 		return (p1:ToLocalTime())
 	end,
-	weekdays = {
-		[1] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.SundayAbbreviated"),
-		[2] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.MondayAbbreviated"),
-		[3] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.TuesdayAbbreviated"),
-		[4] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.WednesdayAbbreviated"),
-		[5] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.ThursdayAbbreviated"),
-		[6] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.FridayAbbreviated"),
-		[7] = TranslatorModule:FormatByKey("CommonUI.Controls.Label.SaturdayAbbreviated")
-	}
+	weekdays = Weekdays
 }

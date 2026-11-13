@@ -1,7 +1,9 @@
 ﻿local Foundation = script:FindFirstAncestor("Foundation")
+local FlagsModule = require(Foundation.Utility.Flags)
 local _ = require(Foundation.Enums.PopoverAlign)
 local _ = require(Foundation.Enums.PopoverSide)
 local ReactModule = require(Foundation.Parent.React)
+local GetHardwareSafeAreaInsetsModule = require(Foundation.Components.Sheet.getHardwareSafeAreaInsets)
 local PositioningModule = require(script.Parent.positioning)
 local _ = require(Foundation.Components.Types)
 
@@ -27,8 +29,33 @@ local function useConnectSignals(Frame, PropertyNames, UseRefResult)
 	end, { Frame, UseRefResult })
 end
 
+local function getAnchorVisibilityBounds(ScreenGui, p1)
+	-- upvalues: GetHardwareSafeAreaInsetsModule (copy)
+	local ScreenGui1 = if ScreenGui:IsA("ScreenGui") then ScreenGui else ScreenGui:FindFirstAncestorWhichIsA("ScreenGui")
+	
+	if ScreenGui1 and ScreenGui1.ScreenInsets == Enum.ScreenInsets.DeviceSafeInsets then
+		local AbsolutePosition = ScreenGui1.AbsolutePosition
+		local NewAbsolutePosition = AbsolutePosition + ScreenGui1.AbsoluteSize
+		
+		local function _(p2, p3, p4)
+			return if math.abs(p2 - p3) < 1 then p4 else 0
+		end
+		
+		local HardwareSafeAreaInsetsModule = GetHardwareSafeAreaInsetsModule()
+		local Left = HardwareSafeAreaInsetsModule.left
+		local Top = HardwareSafeAreaInsetsModule.top
+		local MinDelta = p1.Min - Vector2.new(if math.abs(p1.Min.X - AbsolutePosition.X) < 1 then Left else 0, if math.abs(p1.Min.Y - AbsolutePosition.Y) < 1 then Top else 0)
+		local Right = HardwareSafeAreaInsetsModule.right
+		local Bottom = HardwareSafeAreaInsetsModule.bottom
+		
+		return Rect.new(MinDelta, p1.Max + Vector2.new(if math.abs(p1.Max.X - NewAbsolutePosition.X) < 1 then Right else 0, if math.abs(p1.Max.Y - NewAbsolutePosition.Y) < 1 then Bottom else 0))
+	else
+		return p1
+	end
+end
+
 return function(p1, Frame: Frame, Frame1: Frame, Frame2: Frame, p2, Position, p3)
-	-- upvalues: ReactModule (copy), PositioningModule (copy), useConnectSignals (copy)
+	-- upvalues: ReactModule (copy), FlagsModule (copy), PositioningModule (copy), getAnchorVisibilityBounds (copy), useConnectSignals (copy)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Vector2.new())
 	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(true)
 	local UseBindingResult3, UseBindingResult2_2 = ReactModule.useBinding(UDim2.new())
@@ -39,7 +66,7 @@ return function(p1, Frame: Frame, Frame1: Frame, Frame2: Frame, p2, Position, p3
 	local UseRefResult1 = ReactModule.useRef({})
 	local UseRefResult2 = ReactModule.useRef(false)
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: p1 (copy), Frame (copy), Frame1 (copy), Frame2 (copy), UseBindingResult2_1 (copy), PositioningModule (upval), UseRefResult1 (copy), p2 (copy), Position (copy), p3 (copy), UseBindingResult2_2 (copy), UseBindingResult2_3 (copy), UseBindingResult2_4 (copy), UseBindingResult2 (copy), UseBindingResult2_5 (copy)
+		-- upvalues: p1 (copy), Frame (copy), Frame1 (copy), Frame2 (copy), UseBindingResult2_1 (copy), FlagsModule (upval), PositioningModule (upval), getAnchorVisibilityBounds (upval), UseRefResult1 (copy), p2 (copy), Position (copy), p3 (copy), UseBindingResult2_2 (copy), UseBindingResult2_3 (copy), UseBindingResult2_4 (copy), UseBindingResult2 (copy), UseBindingResult2_5 (copy)
 		if not p1 or not Frame or not Frame1 or not Frame2 then
 			UseBindingResult2_1(false)
 			
@@ -52,7 +79,13 @@ return function(p1, Frame: Frame, Frame1: Frame, Frame2: Frame, p2, Position, p3
 		local _Rect = Rect.new(AbsolutePosition, AbsolutePosition + Frame.AbsoluteSize)
 		local _Rect1 = Rect.new(AbsolutePosition1, AbsolutePosition1 + AbsoluteSize1)
 		
-		if not PositioningModule.isOnScreen(_Rect, _Rect1) then
+		if FlagsModule.FoundationPopoverClampOffscreenAnchor then
+			if not PositioningModule.isOnScreen(_Rect, getAnchorVisibilityBounds(Frame2, _Rect1)) then
+				UseBindingResult2_1(false)
+				
+				return
+			end
+		elseif not PositioningModule.isOnScreen(_Rect, _Rect1) then
 			UseBindingResult2_1(false)
 			
 			return
@@ -73,6 +106,9 @@ return function(p1, Frame: Frame, Frame1: Frame, Frame2: Frame, p2, Position, p3
 			
 			return
 		end
+		if FlagsModule.FoundationPopoverClampOffscreenAnchor and not PositioningModule.isOnScreen(_Rect, _Rect1) then
+			_Rect = PositioningModule.clampRectToScreen(_Rect, _Rect1)
+		end
 		local Position1 = if type(p2) == "table" then p2.position else p2
 		local Offset = if type(p2) == "table" then p2.offset else 0
 		local Position2 = Position
@@ -82,8 +118,8 @@ return function(p1, Frame: Frame, Frame1: Frame, Frame2: Frame, p2, Position, p3
 			Position2 = Position.position
 			Offset1 = Position.offset
 		end
-		local P9 = p3 or 0
-		local Positions, Positions2, Positions3 = PositioningModule.calculatePositions(PositioningModule.calculateSide(Position1, _Rect, _Rect1, (PositioningModule.calculatePopoverBounds(Position1, Offset, Offset1, P9, AbsoluteSize))), Offset, Position2, Offset1, _Rect, _Rect1, P9, AbsoluteSize)
+		local P14 = p3 or 0
+		local Positions, Positions2, Positions3 = PositioningModule.calculatePositions(PositioningModule.calculateSide(Position1, _Rect, _Rect1, (PositioningModule.calculatePopoverBounds(Position1, Offset, Offset1, P14, AbsoluteSize))), Offset, Position2, Offset1, _Rect, _Rect1, P14, AbsoluteSize)
 		UseBindingResult2_2(UDim2.fromOffset(AbsoluteSize.X, AbsoluteSize.Y))
 		UseBindingResult2_3(AbsoluteSize1)
 		UseBindingResult2_4(Positions2 + Positions)

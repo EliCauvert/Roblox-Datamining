@@ -491,7 +491,7 @@ function MenuIcon.render(p1)
 			[RoactModule.Change.AbsolutePosition] = v85
 		}, {
 			BadgeOver12 = Element2,
-			Background = if EnabledFunction() and (FFlagEnableConsoleExpControls and p1.props.unibarMenuRef and p1.props.unibarMenuRef.current) then nil else Element,
+			Background = if EnabledFunction() and FFlagEnableConsoleExpControls and p1.props.unibarMenuRef and p1.props.unibarMenuRef.current then nil else Element,
 			IconHitArea = if EnabledFunction() and FFlagEnableConsoleExpControls then Element3 else nil,
 			ShowTopBarListener = Element1
 		})

@@ -1,6 +1,7 @@
 ﻿local InExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
 local Parent = InExperienceSideSheet.Parent
 local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local FoundationModule = require(Parent.Foundation)
@@ -12,7 +13,7 @@ local Text = FoundationModule.Text
 local View = FoundationModule.View
 local FFlagSideSheetEmphasizeLeave = require(InExperienceSideSheet.Flags).FFlagSideSheetEmphasizeLeave
 local ButtonWidth = require(InExperienceSideSheet.Common.Enums).ButtonWidth
-local Signal = require(Parent.Signals).createSignal(nil)
+local Signal = SignalsModule.createSignal(nil)
 
 local function _(p1: number): number
 	return p1 + (1 - p1) * 0.5

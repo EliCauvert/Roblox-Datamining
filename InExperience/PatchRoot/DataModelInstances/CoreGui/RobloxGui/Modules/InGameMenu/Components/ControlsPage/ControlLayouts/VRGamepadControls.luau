@@ -1,6 +1,7 @@
 ﻿local CorePackages = game:GetService("CorePackages")
 local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDependencies)
 local Roact = InGameMenuDependenciesModule.Roact
+local UIBlox = InGameMenuDependenciesModule.UIBlox
 local InGameMenu = script:FindFirstAncestor("InGameMenu")
 local Array = require(CorePackages.Packages.LuauPolyfill).Array
 local ControlLayoutContainerModule = require(script.Parent.Parent.ControlLayoutContainer)
@@ -9,7 +10,7 @@ local AssetsModule = require(InGameMenu.Resources.Assets)
 local ControlsModule = require(InGameMenu.Resources.Controls)
 local ReactModule = require(CorePackages.Packages.React)
 local WithLocalizationModule = require(InGameMenu.Localization.withLocalization)
-local ImageSetLabel = InGameMenuDependenciesModule.UIBlox.Core.ImageSet.ImageSetLabel
+local ImageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
 local Image = require(CorePackages.Packages.Foundation).Image
 local FFlagCoreUiMigrateUIBloxToFoundation = require(CorePackages.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
 local config = {

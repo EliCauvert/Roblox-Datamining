@@ -163,27 +163,27 @@ return {
 					break
 				end
 				local v3 = nil
-				local StartIndex2, SS3, _, SS5, SS6, SS7
-				StartIndex2, v2, SS3, _, SS5, SS6, SS7 = Text:find("%s+([^%s=/>]+)([%s]-)(=?)([%s]-)(['\"]?)", v2)
-				Callback2("[TagLoop]:#LINE# start=%s || apos=%s || k=%s || zsp='%s' || eq='%s', quote=[%s]", Callback1(StartIndex2), Callback1(v2), Callback1(SS3), Callback1(SS6), Callback1(SS5), (Callback1(SS7)))
+				local StartIndex1, SS3, _, SS5, SS6, SS7
+				StartIndex1, v2, SS3, _, SS5, SS6, SS7 = Text:find("%s+([^%s=/>]+)([%s]-)(=?)([%s]-)(['\"]?)", v2)
+				Callback2("[TagLoop]:#LINE# start=%s || apos=%s || k=%s || zsp='%s' || eq='%s', quote=[%s]", Callback1(StartIndex1), Callback1(v2), Callback1(SS3), Callback1(SS6), Callback1(SS5), (Callback1(SS7)))
 				
 				if not SS3 or SS3 == "/>" or SS3 == ">" then break end
 				if SS5 == "=" then
 					local S: string = if SS7 == "" then "=([^%s>]*)" else SS7 .. "([^" .. SS7 .. "]*)" .. SS7
-					local StartIndex3
-					StartIndex3, v2, v34 = Text:find(S, v2)
-					Callback2("[TagLoop]:#LINE# start=%s || apos=%s || v=%s || pattern=%s", Callback1(StartIndex3), Callback1(v2), Callback1(v3), (Callback1(S)))
+					local StartIndex2
+					StartIndex2, v2, v30 = Text:find(S, v2)
+					Callback2("[TagLoop]:#LINE# start=%s || apos=%s || v=%s || pattern=%s", Callback1(StartIndex2), Callback1(v2), Callback1(v3), (Callback1(S)))
 				end
-				local V34 = v3 or ""
+				local V30 = v3 or ""
 				
 				if Flag then
-					for i1, value1 in pairs(t1) do
-						V34 = V34:gsub(value1, i1)
-						Callback2("[TagLoop]:#LINE# rv=%s || rk=%s", Callback1(value1), (Callback1(i1)))
+					for i, value in pairs(t1) do
+						V30 = V30:gsub(value, i)
+						Callback2("[TagLoop]:#LINE# rv=%s || rk=%s", Callback1(value), (Callback1(i)))
 					end
 				end
-				Callback2("[TagLoop]:#LINE# k=%s || v=%s", Callback1(SS3), (Callback1(V34)))
-				NewResult1:addattribute(SS3, V34)
+				Callback2("[TagLoop]:#LINE# k=%s || v=%s", Callback1(SS3), (Callback1(V30)))
+				NewResult1:addattribute(SS3, V30)
 				Count1 = (Count1 or 0) + 1
 			end
 			if VoidelementsModule[NewResult1.name:lower()] then
@@ -194,34 +194,34 @@ return {
 				table.insert(t3[NewResult1.name], NewResult1)
 			end
 			local EndIndex: number = v1
-			local Count11: number? = nil
+			local Count2: number? = nil
 			while true do
 				if math.random() <= 0.004 then
 					wait()
 				end
-				if Count11 == P8 then
+				if Count2 == P8 then
 					Callback3("Tag closing loop reached loop limit (%d). Consider either increasing it or checking HTML-code for syntax errors", P8)
 					break
 				end
-				local StartIndex1, W3_1, W4
-				StartIndex1, EndIndex, W3_1, W4 = NewResult._text:find("[^<]*<(/?)([%w-]+)", EndIndex)
-				Callback2("[TagCloseLoop]:#LINE# closestart=%s || closeend=%s || closing=%s || closename=%s", Callback1(StartIndex1), Callback1(EndIndex), Callback1(W3_1), (Callback1(W4)))
+				local StartIndex3, W3_1, W4
+				StartIndex3, EndIndex, W3_1, W4 = NewResult._text:find("[^<]*<(/?)([%w-]+)", EndIndex)
+				Callback2("[TagCloseLoop]:#LINE# closestart=%s || closeend=%s || closing=%s || closename=%s", Callback1(StartIndex3), Callback1(EndIndex), Callback1(W3_1), (Callback1(W4)))
 				
 				if not W3_1 or W3_1 == "" then break end
 				NewResult1 = table.remove(t3[W4] or {}) or NewResult1
-				local v4 = NewResult._text:find("<", StartIndex1)
+				local v4 = NewResult._text:find("<", StartIndex3)
 				Callback2("[TagCloseLoop]:#LINE# closestart=%s", (Callback1(v4)))
 				NewResult1:close(v4, EndIndex + 1)
 				Parent = NewResult1.parent
 				Flag1 = true
-				Count11 = (Count11 or 0) + 1
+				Count2 = (Count2 or 0) + 1
 			end
 		end
 		if Flag then
 			Callback2("tpl")
 			
-			for i, value in pairs(t1) do
-				NewResult._text = NewResult._text:gsub(value, i)
+			for i1, value1 in pairs(t1) do
+				NewResult._text = NewResult._text:gsub(value1, i1)
 			end
 		end
 		return NewResult

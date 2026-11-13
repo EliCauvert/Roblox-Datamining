@@ -18,8 +18,8 @@ return function(p1)
 	local ContentFooter = p1.contentFooter
 	local SetDefaultModuleResult: number = SetDefaultModule(p1.textLineCount, 2)
 	local SetDefaultModuleResult1 = SetDefaultModule(p1.hasSidePadding, true)
-	local Offset1 = nil
 	local Offset = nil
+	local Offset1 = nil
 	local Offset2 = nil
 	local Offset3 = nil
 	
@@ -40,8 +40,9 @@ return function(p1)
 	local FooterHeight = p1.footerHeight
 	local UseStyleModuleResultFont = UseStyleModuleResult.Font
 	local SetDefaultModuleResult4 = SetDefaultModule(p1.titleFont, UseStyleModuleResultFont.Header2)
+	local Theme = UseStyleModuleResult.Theme
 	local ScaledBaseSize = (UseStyleModuleResultFont.BaseSize + UseTextSizeOffsetModuleResult) * SetDefaultModuleResult4.RelativeSize * SetDefaultModuleResult
-	local TextEmphasis = UseStyleModuleResult.Theme.TextEmphasis
+	local TextEmphasis = Theme.TextEmphasis
 	
 	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,

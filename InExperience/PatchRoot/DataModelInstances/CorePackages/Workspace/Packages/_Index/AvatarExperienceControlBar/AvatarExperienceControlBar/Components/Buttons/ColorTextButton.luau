@@ -2,8 +2,9 @@
 local Parent = AvatarExperienceControlBar.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
 local UseSemanticTokensModule = require(AvatarExperienceControlBar.Hooks.useSemanticTokens)
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local UseHoverBindingModule = require(AvatarExperienceControlBar.Hooks.useHoverBinding)
 local ColorItemModule = require(AvatarExperienceControlBar.Components.Items.ColorItem)
 

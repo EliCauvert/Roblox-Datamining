@@ -1,8 +1,9 @@
 ﻿local Parent = script.Parent.Parent.Parent
 local Parent1 = Parent.Parent
+local Core = Parent1.Core
 local ReactModule = require(Parent1.Parent.React)
 local _ = require(Parent.Style.StyleTypes)
-local UseStyleModule = require(Parent1.Core.Style.useStyle)
+local UseStyleModule = require(Core.Style.useStyle)
 
 return function(p1)
 	-- upvalues: UseStyleModule (copy), ReactModule (copy)

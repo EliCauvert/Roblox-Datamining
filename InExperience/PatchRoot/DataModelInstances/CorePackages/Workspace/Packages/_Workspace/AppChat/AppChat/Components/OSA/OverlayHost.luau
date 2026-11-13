@@ -4,11 +4,10 @@ local CryoModule = require(Parent.Cryo)
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
 local ProviderContainer = require(Parent.RoactUtils).Components.ProviderContainer
+local GroupOSADialogModule = require(AppChat.Components.OSA.GroupOSADialog)
 local GetOverlayStoreModule = require(AppChat.Stores.GetOverlayStore)
 local FFlagAppChatShowOSAOnPageEntry = require(Parent.SharedFlags).FFlagAppChatShowOSAOnPageEntry
-local config = {
-	GroupOSADialog = require(AppChat.Components.OSA.GroupOSADialog)
-}
+local config = { GroupOSADialog = GroupOSADialogModule }
 
 return function(p1)
 	-- upvalues: GetOverlayStoreModule (copy), SignalsReactModule (copy), ReactModule (copy), config (copy), CryoModule (copy), FFlagAppChatShowOSAOnPageEntry (copy), ProviderContainer (copy)

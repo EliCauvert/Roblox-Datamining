@@ -16,8 +16,9 @@ local _ = require(SocialUpsell.Analytics.Enum.UpsellEntrySurfaceType)
 local UpsellComponentModule = require(SocialUpsell.Analytics.Enum.UpsellComponent)
 local _ = require(SocialUpsell.Enum.SocialUpsellType)
 local ConstantsModule = require(SocialUpsell.Constants)
+local SocialLuaAnalyticsModule = require(Parent.SocialLuaAnalytics)
 local BannerBadge = require(Parent.AppBlox).BannerBadge
-local EventTypes = require(Parent.SocialLuaAnalytics).Analytics.Enums.EventTypes
+local EventTypes = SocialLuaAnalyticsModule.Analytics.Enums.EventTypes
 local FIntMaxDaysToShowCountDownLabelModule = require(SocialUpsell.Flag.FIntMaxDaysToShowCountDownLabel)
 local FIntMinDaysToShowCountdownLabelModule = require(SocialUpsell.Flag.FIntMinDaysToShowCountdownLabel)
 local UseSocialUpsellOverlayControllerModule = require(SocialUpsell.Hooks.useSocialUpsellOverlayController)
@@ -33,7 +34,7 @@ local Image = FoundationModule.Image
 local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
 local config = { isInExperience = true }
 
-local function v31(DeadlineUtcTimestamp, p1)
+local function v32(DeadlineUtcTimestamp, p1)
 	-- upvalues: FIntMinDaysToShowCountdownLabelModule (copy), FIntMaxDaysToShowCountDownLabelModule (copy)
 	if DeadlineUtcTimestamp and DeadlineUtcTimestamp ~= 0 then
 		local Floored = math.floor((DeadlineUtcTimestamp - os.time()) / 86400)
@@ -47,7 +48,7 @@ end
 local GetViewportSize = if FFlagEnableAEGIS2CommsFAEUpsell then DisplayModule.GetDisplayStore(false).getViewportSize else nil
 
 return function(p1)
-	-- upvalues: config (copy), UseSocialUpsellOverlayControllerModule (copy), ReactModule (copy), UseScaledValueFunction (copy), ReactFocusNavigationModule (copy), ReactUtilsModule (copy), HttpService (copy), SocialUpsellAnalyticsModule (copy), UpsellComponentModule (copy), UseLocalizationFunction (copy), v31 (copy), FFlagEnableAEGIS2CommsFAEUpsell (copy), SignalsReactModule (copy), GetViewportSize (ref), UseSelectorFunction (copy), MinHeightFor (copy), EventTypes (copy), ConstantsModule (copy), ButtonVariant (copy), Dialog (copy), DialogSize (copy), View (copy), Image (copy), BannerBadge (copy), FoundationModule (copy), IconName (copy), BadgeVariant (copy), Text (copy)
+	-- upvalues: config (copy), UseSocialUpsellOverlayControllerModule (copy), ReactModule (copy), UseScaledValueFunction (copy), ReactFocusNavigationModule (copy), ReactUtilsModule (copy), HttpService (copy), SocialUpsellAnalyticsModule (copy), UpsellComponentModule (copy), UseLocalizationFunction (copy), v32 (copy), FFlagEnableAEGIS2CommsFAEUpsell (copy), SignalsReactModule (copy), GetViewportSize (ref), UseSelectorFunction (copy), MinHeightFor (copy), EventTypes (copy), ConstantsModule (copy), ButtonVariant (copy), Dialog (copy), DialogSize (copy), View (copy), Image (copy), BannerBadge (copy), FoundationModule (copy), IconName (copy), BadgeVariant (copy), Text (copy)
 	local P2 = p1 or config
 	local UseSocialUpsellOverlayControllerModuleResult = UseSocialUpsellOverlayControllerModule(P2.isInExperience)
 	local UseRefResult = ReactModule.useRef(nil)
@@ -83,8 +84,8 @@ return function(p1)
 		dayLeft = "Feature.FAE.Label.DayLeft"
 	})
 	local UseMemoResult2 = ReactModule.useMemo(function()
-		-- upvalues: P2 (copy), v31 (upval), UseLocalizationResult (copy)
-		return if P2.countDownBadge then v31(P2.countDownBadge.deadlineUtcTimestamp, UseLocalizationResult) else nil
+		-- upvalues: P2 (copy), v32 (upval), UseLocalizationResult (copy)
+		return if P2.countDownBadge then v32(P2.countDownBadge.deadlineUtcTimestamp, UseLocalizationResult) else nil
 	end, { P2.countDownBadge, UseLocalizationResult })
 	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: P2 (copy), UseMemoResult2 (copy)

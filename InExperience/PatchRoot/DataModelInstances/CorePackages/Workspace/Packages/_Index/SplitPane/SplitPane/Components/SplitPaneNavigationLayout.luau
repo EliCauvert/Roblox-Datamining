@@ -88,17 +88,18 @@ return function(p1)
 				Size = UDim2.fromScale(1, 1)
 			}, { SupportContent = Frame })
 		end
+		local SupportPane = {
+			width = UseSplitPaneRenderModuleResult.supportWidth,
+			minWidth = UseSplitPaneRenderModuleResult.supportMinWidth,
+			maxWidth = UseSplitPaneRenderModuleResult.supportMaxWidth,
+			resizable = if SupportPaneMode == Enums.SupportPaneMode.Normal and UseSplitPaneRenderModuleResult.supportPaneResizable then Enums.PaneResizable.Horizontal else Enums.PaneResizable.None,
+			element = Frame
+		}
 		local HasNextEntry = next(UseSplitPaneRenderModuleResult.overlaySlotChildren) ~= nil
 		
 		return ReactModule.createElement(ReactModule.Fragment, nil, {
 			SplitView = ReactModule.createElement(SplitView, {
-				supportPane = {
-					width = UseSplitPaneRenderModuleResult.supportWidth,
-					minWidth = UseSplitPaneRenderModuleResult.supportMinWidth,
-					maxWidth = UseSplitPaneRenderModuleResult.supportMaxWidth,
-					resizable = if SupportPaneMode == Enums.SupportPaneMode.Normal and UseSplitPaneRenderModuleResult.supportPaneResizable then Enums.PaneResizable.Horizontal else Enums.PaneResizable.None,
-					element = Frame
-				},
+				supportPane = SupportPane,
 				supportPaneMode = SupportPaneMode,
 				supportResizerAbovePane = UseSplitPaneRenderModuleResult.supportResizerAbovePane,
 				onSupportPaneWidthChanged = UseSplitPaneRenderModuleResult.onSupportPaneWidthChanged,

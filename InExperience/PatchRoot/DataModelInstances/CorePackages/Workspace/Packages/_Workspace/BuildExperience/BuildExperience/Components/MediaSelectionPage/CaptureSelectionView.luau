@@ -2,6 +2,7 @@
 local Parent = BuildExperience.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
+local MomentsCommonModule = require(Parent.MomentsCommon)
 local Button = FoundationModule.Button
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local InputSize = FoundationModule.Enums.InputSize
@@ -10,7 +11,7 @@ local FFlagBuildExperienceLocalizeCaptureShowMoreModule = require(BuildExperienc
 local MediaPreviewModule = require(script.Parent.MediaPreview)
 local CaptureGridItemModule = require(script.Parent.CaptureGridItem)
 local UseCaptureSelectionViewModelModule = require(script.Parent.useCaptureSelectionViewModel)
-local ScrollingGridView = require(Parent.MomentsCommon).ScrollingGridView
+local ScrollingGridView = MomentsCommonModule.ScrollingGridView
 
 local function renderEmptyState()
 	-- upvalues: ReactModule (copy), View (copy)

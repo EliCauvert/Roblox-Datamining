@@ -5,8 +5,9 @@ local UserInputService = game:GetService("UserInputService")
 local _ = require(Parent1.AppCommonLib)
 local ReactModule = require(Parent1.React)
 local RoactUtilsModule = require(Parent1.RoactUtils)
+local RobloxAppHooksModule = require(Parent1.RobloxAppHooks)
 local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
-local UseScreenSizeFunction = require(Parent1.RobloxAppHooks).useScreenSize
+local UseScreenSizeFunction = RobloxAppHooksModule.useScreenSize
 local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
 local UseSignalFunction = RoactUtilsModule.Hooks.useSignal
 local CaptureTypeModule = require(Parent.Enums.CaptureType)
@@ -39,10 +40,11 @@ end
 local _ = function(): boolean
 	-- upvalues: UserInputService (copy), UserGameSettings (copy)
 	local Platform = UserInputService:GetPlatform()
+	local IsPlatformMatch: boolean = Platform == Enum.Platform.IOS or Platform == Enum.Platform.Android
 	local TouchEnabled = UserInputService.TouchEnabled
 	local ReducedMotion = UserGameSettings.ReducedMotion
 	
-	return (Platform == Enum.Platform.IOS or Platform == Enum.Platform.Android) and (TouchEnabled and not ReducedMotion)
+	return IsPlatformMatch and (TouchEnabled and not ReducedMotion)
 end
 
 return function(Frame)
@@ -67,8 +69,8 @@ return function(Frame)
 	local _Vector2 = Vector2.new(math.floor(UseScreenSizeResult.X - ClampedValue * 2), (math.floor(Frame.maxHeight)))
 	local ScaledX = _Vector2.X * #UseSelectorResult
 	local X: number = (UseScreenSizeResult - _Vector2).X
-	local XOffset = nil
 	local XRatio1 = nil
+	local XOffset = nil
 	
 	if X % 2 == 0 then
 		local XRatio = X / 2
@@ -210,9 +212,10 @@ return function(Frame)
 		
 		if NoUseStateResult then
 			local Platform = UserInputService:GetPlatform()
+			local IsPlatformMatch: boolean = Platform == Enum.Platform.IOS or Platform == Enum.Platform.Android
 			local TouchEnabled = UserInputService.TouchEnabled
 			local ReducedMotion = UserGameSettings.ReducedMotion
-			NoUseStateResult = (Platform == Enum.Platform.IOS or Platform == Enum.Platform.Android) and (TouchEnabled and not ReducedMotion)
+			NoUseStateResult = IsPlatformMatch and (TouchEnabled and not ReducedMotion)
 		end
 	end
 	config1.ScrollingEnabled = NoUseStateResult

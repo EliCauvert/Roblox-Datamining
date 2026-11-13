@@ -4,9 +4,10 @@ local Players = game:GetService("Players")
 local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
 local Parent = InExperienceShop.Parent
 local PromiseModule = require(Parent.Promise)
+local Url = require(Parent.Http).Url
 local ErrorsModule = require(script.Parent.Errors)
 local ShopDebugLoggerModule = require(InExperienceShop.Internal.ShopDebugLogger)
-local Text = require(Parent.Http).Url.APIS_URL .. "game-passes/v1/game-passes:batchGetOwnership"
+local Text = Url.APIS_URL .. "game-passes/v1/game-passes:batchGetOwnership"
 
 return function(GamePassId)
 	-- upvalues: PromiseModule (copy), Players (copy), ErrorsModule (copy), ShopDebugLoggerModule (copy), HttpRbxApiService (copy), Text (copy), HttpService (copy)

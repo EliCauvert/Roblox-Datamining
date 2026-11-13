@@ -74,11 +74,11 @@ return function(p1)
 	GetActiveSessionFunction = Store.getActiveSession
 	SetActiveSessionFunction = Store.setActiveSession
 	local Signal, Signal2 = CreateSignalFunction(nil)
-	local Callback1 = nil
 	local Callback = nil
+	local Callback1 = nil
 	
 	if FFlagMomentsRenderCreatePostStatus then
-		Callback1, Callback = CreateSignalFunction(false)
+		Callback, Callback1 = CreateSignalFunction(false)
 	end
 	local Computed = CreateComputedFunction(function(p2)
 		-- upvalues: Store (copy), Registry (copy)
@@ -300,15 +300,15 @@ return function(p1)
 	end
 	
 	local function settlePublishResult(Promise)
-		-- upvalues: Parent (upval), FFlagMomentsRenderCreatePostStatus (upval), Callback (ref), Host (copy), dismiss (copy)
+		-- upvalues: Parent (upval), FFlagMomentsRenderCreatePostStatus (upval), Callback1 (ref), Host (copy), dismiss (copy)
 		local PromiseModule = require(Parent.Promise)
 		
 		if FFlagMomentsRenderCreatePostStatus and PromiseModule.is(Promise) then
-			Callback(true)
+			Callback1(true)
 			
 			local function _(p5)
-				-- upvalues: Callback (upval), Host (upval), dismiss (upval)
-				Callback(false)
+				-- upvalues: Callback1 (upval), Host (upval), dismiss (upval)
+				Callback1(false)
 				
 				if Host.onPublishFinished ~= nil then
 					Host.onPublishFinished(p5)
@@ -319,9 +319,9 @@ return function(p1)
 			end
 			
 			Promise:andThen(function(Enabled)
-				-- upvalues: Callback (upval), Host (upval), dismiss (upval)
+				-- upvalues: Callback1 (upval), Host (upval), dismiss (upval)
 				local IsEnabled = Enabled == true
-				Callback(false)
+				Callback1(false)
 				
 				if Host.onPublishFinished ~= nil then
 					Host.onPublishFinished(IsEnabled)
@@ -330,8 +330,8 @@ return function(p1)
 					dismiss()
 				end
 			end, function()
-				-- upvalues: Callback (upval), Host (upval)
-				Callback(false)
+				-- upvalues: Callback1 (upval), Host (upval)
+				Callback1(false)
 				
 				if Host.onPublishFinished ~= nil then
 					Host.onPublishFinished(false)
@@ -540,10 +540,10 @@ return function(p1)
 		end,
 		getSelectedVoiceId = Signal3,
 		setSelectedVoiceId = Signal2_2,
-		getIsPublishing = Callback1,
+		getIsPublishing = Callback,
 		publish = function()
-			-- upvalues: FFlagMomentsRenderCreatePostStatus (upval), Callback1 (ref), Store (copy), Host (copy), Signal2 (copy), DialogTypeModule (upval), dismissModal (copy), p1 (copy), v2 (ref), FFlagMomentsTTSDraftRestoreModule (upval), FFlagMomentTextGenerationFilteredSignal (upval), emitGeneratedTextFeedback (copy), SessionManager (upval), FunnelEventNames (upval), Preview (copy), FFlagMomentsCommentsCreatorControlModule (upval), Computed (copy), CryoModule (upval), MakeCreationEventFieldsModule (upval), EventNames (upval), GetFFlagEnableMomentTextGenerationFunction (upval), GetFFlagMomentsTTSAudioOverlayModule (upval), FFlagMomentsTTSPublishMetadataEditsModule (upval), FFlagMomentsTTSVoiceSelectorModule (upval), GetFFlagMomentsTTSStartTimePositioningModule (upval), TtsAudio (ref), FFlagMomentsTextOverlayV2Redesign (upval), FireAnalyticsEventModule (upval), MomentsCommonModule (upval), settlePublishResult (copy), dismiss (copy)
-			if FFlagMomentsRenderCreatePostStatus and Callback1(false) then return end
+			-- upvalues: FFlagMomentsRenderCreatePostStatus (upval), Callback (ref), Store (copy), Host (copy), Signal2 (copy), DialogTypeModule (upval), dismissModal (copy), p1 (copy), v2 (ref), FFlagMomentsTTSDraftRestoreModule (upval), FFlagMomentTextGenerationFilteredSignal (upval), emitGeneratedTextFeedback (copy), SessionManager (upval), FunnelEventNames (upval), Preview (copy), FFlagMomentsCommentsCreatorControlModule (upval), Computed (copy), CryoModule (upval), MakeCreationEventFieldsModule (upval), EventNames (upval), GetFFlagEnableMomentTextGenerationFunction (upval), GetFFlagMomentsTTSAudioOverlayModule (upval), FFlagMomentsTTSPublishMetadataEditsModule (upval), FFlagMomentsTTSVoiceSelectorModule (upval), GetFFlagMomentsTTSStartTimePositioningModule (upval), TtsAudio (ref), FFlagMomentsTextOverlayV2Redesign (upval), FireAnalyticsEventModule (upval), MomentsCommonModule (upval), settlePublishResult (copy), dismiss (copy)
+			if FFlagMomentsRenderCreatePostStatus and Callback(false) then return end
 			local Description = Store.getDescription(false)
 			
 			if Host.isTextFiltered ~= nil and Host.isTextFiltered(Description) then

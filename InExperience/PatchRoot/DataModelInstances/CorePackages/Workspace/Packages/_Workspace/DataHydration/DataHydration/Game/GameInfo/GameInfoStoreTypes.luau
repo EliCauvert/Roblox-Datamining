@@ -1,7 +1,6 @@
 ﻿local DataHydration = script:FindFirstAncestor("DataHydration")
-local Parent = DataHydration.Parent
 local _ = require(DataHydration.DataHydrationTypes)
-local TModule = require(Parent.t)
+local TModule = require(DataHydration.Parent.t)
 
 return {
 	gameInfoResponseValidator = TModule.interface({
@@ -16,7 +15,7 @@ return {
 				hasVerifiedBadge = TModule.optional(TModule.boolean)
 			})),
 			visits = TModule.optional(TModule.number),
-			playerCount = if require(Parent.SharedFlags).FFlagLuaAppDataHydrationPlayerCountGameInfoStore then TModule.optional(TModule.number) else nil,
+			playerCount = TModule.optional(TModule.number),
 			totalUpVotes = TModule.optional(TModule.string),
 			totalDownVotes = TModule.optional(TModule.string)
 		}))

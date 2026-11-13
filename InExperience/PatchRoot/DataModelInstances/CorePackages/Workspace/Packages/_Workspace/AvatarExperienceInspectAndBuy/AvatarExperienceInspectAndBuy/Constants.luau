@@ -1,5 +1,6 @@
 ﻿local AvatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
 local AvatarExperienceFlagsModule = require(AvatarExperienceInspectAndBuy.Parent.AvatarExperienceFlags)
+local FFlagAXInspectAndBuyMakeupSupport = AvatarExperienceFlagsModule.FFlagAXInspectAndBuyMakeupSupport
 local FFlagAXCatalogBackgroundsSupport = AvatarExperienceFlagsModule.FFlagAXCatalogBackgroundsSupport
 local PriceStatusModule = require(AvatarExperienceInspectAndBuy.Enums.PriceStatus)
 local config = {
@@ -28,7 +29,7 @@ local config = {
 	}
 }
 
-if AvatarExperienceFlagsModule.FFlagAXInspectAndBuyMakeupSupport then
+if FFlagAXInspectAndBuyMakeupSupport then
 	config.AssetLocalizationKeys[tostring(Enum.AssetType.EyeMakeup.Value)] = "Feature.Catalog.Label.EyeMakeup"
 	config.AssetLocalizationKeys[tostring(Enum.AssetType.FaceMakeup.Value)] = "Feature.Catalog.Label.FaceMakeup"
 	config.AssetLocalizationKeys[tostring(Enum.AssetType.LipMakeup.Value)] = "Feature.Catalog.Label.LipMakeup"

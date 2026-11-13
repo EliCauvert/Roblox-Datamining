@@ -5,13 +5,15 @@ local UIBloxModule = require(Parent.UIBlox)
 local Button = UIBloxModule.App.Button.Button
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 local ControlState = UIBloxModule.Core.Control.Enum.ControlState
+local IconSize = UIBloxModule.App.ImageSet.Enum.IconSize
 local Images = UIBloxModule.App.ImageSet.Images
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local Interactable = UIBloxModule.Core.Control.Interactable
 local LoadableImage = UIBloxModule.App.Loading.LoadableImage
+local GetIconSizeFunction = UIBloxModule.App.ImageSet.getIconSize
 local WithStyleFunction = UIBloxModule.Core.Style.withStyle
 local HoverButtonBackgroundModule = require(script.Parent.HoverButtonBackground)
-local IconSize = UIBloxModule.App.ImageSet.getIconSize(UIBloxModule.App.ImageSet.Enum.IconSize.Large)
+local IconSize1 = GetIconSizeFunction(IconSize.Large)
 local _UDim2 = UDim2.fromScale(0.4, 0.512)
 local _UDim2_1 = UDim2.fromOffset(64, 48)
 local _UDim2_2 = UDim2.fromScale(0.25, 0.33)
@@ -115,9 +117,9 @@ function ThumbnailButton.renderButton(p1)
 end
 
 function ThumbnailButton.renderEmptyState(p1)
-	-- upvalues: WithStyleFunction (copy), RoactModule (copy), ImageSetLabel (copy), IconSize (copy), Images (copy)
+	-- upvalues: WithStyleFunction (copy), RoactModule (copy), ImageSetLabel (copy), IconSize1 (copy), Images (copy)
 	return WithStyleFunction(function(p2)
-		-- upvalues: p1 (copy), RoactModule (upval), ImageSetLabel (upval), IconSize (upval), Images (upval)
+		-- upvalues: p1 (copy), RoactModule (upval), ImageSetLabel (upval), IconSize1 (upval), Images (upval)
 		return RoactModule.createElement("Frame", {
 			LayoutOrder = p1.props.layoutOrder,
 			Size = p1.props.size,
@@ -129,7 +131,7 @@ function ThumbnailButton.renderEmptyState(p1)
 			Corner = RoactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
 			Icon = RoactModule.createElement(ImageSetLabel, {
 				BackgroundTransparency = 1,
-				Size = UDim2.fromOffset(IconSize, IconSize),
+				Size = UDim2.fromOffset(IconSize1, IconSize1),
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.fromScale(0.5, 0.5),
 				Image = Images["icons/imageUnavailable"],

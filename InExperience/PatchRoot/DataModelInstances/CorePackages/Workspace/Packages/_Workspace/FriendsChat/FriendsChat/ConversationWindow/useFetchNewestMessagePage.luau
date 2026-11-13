@@ -1,11 +1,12 @@
 ﻿local FriendsChat = script:FindFirstAncestor("FriendsChat")
 local Parent = FriendsChat.Parent
 local ReactModule = require(Parent.React)
+local ExpChatSharedModule = require(Parent.ExpChatShared)
 local FetchMessagePageModule = require(Parent.AppChat.fetchMessagePage)
 local FetchOlderMessagesModule = require(Parent.AppChat.fetchOlderMessages)
 local GetConversationMessageListStoreModule = require(Parent.AppChat.GetConversationMessageListStore)
 local FFlagFriendsChatPaginateOlderMessagesModule = require(FriendsChat.Flags.FFlagFriendsChatPaginateOlderMessages)
-local NewResult = require(Parent.ExpChatShared).Logger:new(script.Name)
+local NewResult = ExpChatSharedModule.Logger:new(script.Name)
 
 local function _(p1)
 	-- upvalues: GetConversationMessageListStoreModule (copy)

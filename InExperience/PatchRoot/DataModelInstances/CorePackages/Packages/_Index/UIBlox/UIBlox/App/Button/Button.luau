@@ -10,9 +10,13 @@ local TModule = require(Parent3.t)
 local FoundationModule = require(Parent3.Foundation)
 local FoundationButtonUtilsModule = require(Parent.FoundationButtonUtils)
 local ValidateImageModule = require(Core.ImageSet.Validator.validateImage)
+local ValidateFontInfoModule = require(Core.Style.Validator.validateFontInfo)
+local ValidateTypographyInfoModule = require(Parent2.Core.Style.Validator.validateTypographyInfo)
 local ButtonTypeModule = require(Parent.Enum.ButtonType)
+local StandardButtonSizeModule = require(Core.Button.Enum.StandardButtonSize)
 local GenericButtonModule = require(Core.Button.GenericButton)
 local ControlStateModule = require(Core.Control.Enum.ControlState)
+local IsReactTagPropModule = require(Parent2.Utility.isReactTagProp)
 local ImagesModule = require(Parent1.ImageSet.Images)
 local CursorKindModule = require(Parent1.SelectionImage.CursorKind)
 local WithSelectionCursorProviderModule = require(Parent1.SelectionImage.withSelectionCursorProvider)
@@ -63,11 +67,11 @@ local config4 = {
 }
 local _UDim = UDim.new(0, 8)
 Button.validateProps = TModule.strictInterface({
-	[ReactModule.Tag] = require(Parent2.Utility.isReactTagProp),
+	[ReactModule.Tag] = IsReactTagPropModule,
 	buttonType = TModule.optional(ButtonTypeModule.isEnumValue),
 	automaticSize = TModule.optional(TModule.EnumItem),
 	size = TModule.optional(TModule.UDim2),
-	standardSize = TModule.optional(require(Core.Button.Enum.StandardButtonSize).isEnumValue),
+	standardSize = TModule.optional(StandardButtonSizeModule.isEnumValue),
 	maxWidth = TModule.optional(TModule.numberPositive),
 	fitContent = TModule.optional(TModule.boolean),
 	anchorPoint = TModule.optional(TModule.Vector2),
@@ -76,7 +80,7 @@ Button.validateProps = TModule.strictInterface({
 	icon = TModule.optional(ValidateImageModule),
 	text = TModule.optional(TModule.string),
 	inputIcon = TModule.optional(ValidateImageModule),
-	fontStyle = TModule.optional(TModule.union(TModule.string, require(Core.Style.Validator.validateFontInfo), (require(Parent2.Core.Style.Validator.validateTypographyInfo)))),
+	fontStyle = TModule.optional(TModule.union(TModule.string, ValidateFontInfoModule, ValidateTypographyInfoModule)),
 	buttonTextOverride = TModule.optional(TModule.table),
 	isDisabled = TModule.optional(TModule.boolean),
 	isLoading = TModule.optional(TModule.boolean),
@@ -152,13 +156,13 @@ function Button.render(p1)
 	end)
 end
 
-local function v27(p1)
+local function v31(p1)
 	-- upvalues: UseCursorModule (copy), _UDim (copy), CryoModule (copy), ReactModule (copy), Button (copy)
 	return ReactModule.createElement(Button, (CryoModule.Dictionary.join({ cursor = UseCursorModule(_UDim) }, p1)))
 end
 
 local ForwardRefResult = ReactModule.forwardRef(function(p1, p2)
-	-- upvalues: UIBloxConfigModule (copy), FoundationModule (copy), CryoModule (copy), Button (copy), FoundationButtonUtilsModule (copy), ReactModule (copy), RoactGamepadModule (copy), v27 (copy)
+	-- upvalues: UIBloxConfigModule (copy), FoundationModule (copy), CryoModule (copy), Button (copy), FoundationButtonUtilsModule (copy), ReactModule (copy), RoactGamepadModule (copy), v31 (copy)
 	if UIBloxConfigModule.useFoundationButton and not p1.DO_NOT_USE_useUIBloxButton then
 		local UseTokensResult = FoundationModule.Hooks.useTokens()
 		local JoinResult = CryoModule.Dictionary.join(Button.defaultProps, p1)
@@ -208,7 +212,7 @@ local ForwardRefResult = ReactModule.forwardRef(function(p1, p2)
 			NextSelectionRight = JoinResult.NextSelectionRight
 		})
 	else
-		return ReactModule.createElement(v27, CryoModule.Dictionary.join(p1, { buttonRef = p1.buttonRef or p2 }))
+		return ReactModule.createElement(v31, CryoModule.Dictionary.join(p1, { buttonRef = p1.buttonRef or p2 }))
 	end
 end)
 ForwardRefResult.validateProps = Button.validateProps

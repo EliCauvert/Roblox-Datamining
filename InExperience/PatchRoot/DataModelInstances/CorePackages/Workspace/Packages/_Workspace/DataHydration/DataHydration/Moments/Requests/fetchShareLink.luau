@@ -1,10 +1,12 @@
 ﻿local DataHydration = script:FindFirstAncestor("DataHydration")
 local Parent = DataHydration.Parent
 local HttpService = game:GetService("HttpService")
+local HttpModule = require(Parent.Http)
 local HttpClientModule = require(Parent.HttpClient)
+local MomentsTypesModule = require(Parent.MomentsTypes)
 local _ = require(DataHydration.Moments.MomentsStoreTypes)
-local Text = require(Parent.Http).Url.APIS_URL .. "deeplinks/v2/get-or-create-static"
-local ShareLinkTargetIdType = require(Parent.MomentsTypes).Enums.ShareLinkTargetIdType
+local Text = HttpModule.Url.APIS_URL .. "deeplinks/v2/get-or-create-static"
+local ShareLinkTargetIdType = MomentsTypesModule.Enums.ShareLinkTargetIdType
 
 local function decodeShareLink(p1)
 	return if p1.link and type(p1.link) == "string" then p1.link else nil

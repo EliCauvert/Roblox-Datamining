@@ -11,6 +11,7 @@ local FFlagUseSignalsForAuthenticationStatus = require(Parent.SharedFlags).FFlag
 local GetAuthenticationStatusStore = if FFlagUseSignalsForAuthenticationStatus then require(Parent.AuthenticationStatus).GetAuthenticationStatusStore else nil
 local GetXboxLoginConsecutiveDaysModule = require(Achievements.Requests.GetXboxLoginConsecutiveDays)
 local VoteCountRefresherModule = require(Achievements.AchievementDataRefresher.VoteCountRefresher)
+local FFlagLuaAppDefaultHttpRetry = require(Parent.SharedFlags).FFlagLuaAppDefaultHttpRetry
 local FFlagGateLoginStreaksByAchievementAvailabilityModule = require(Achievements.Flags.FFlagGateLoginStreaksByAchievementAvailability)
 local FFlagFixAvatarSaveAchievementListenerRaceModule = require(Achievements.Flags.FFlagFixAvatarSaveAchievementListenerRace)
 local AchievementServiceIsAchievementAvailableEngineFeature = game:GetEngineFeature("AchievementServiceIsAchievementAvailable")
@@ -19,7 +20,7 @@ local ConfigResult = HttpRequestModule.config({
 		-- upvalues: HttpRequestModule (copy)
 		return HttpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
 	end,
-	maxRetryCount = if require(Parent.SharedFlags).FFlagLuaAppDefaultHttpRetry then game:DefineFastInt("InAppAchievementManagerHttpRetryCount", 4) else nil
+	maxRetryCount = if FFlagLuaAppDefaultHttpRetry then game:DefineFastInt("InAppAchievementManagerHttpRetryCount", 4) else nil
 })
 local PlatformCloudStorageService = nil
 pcall(function()

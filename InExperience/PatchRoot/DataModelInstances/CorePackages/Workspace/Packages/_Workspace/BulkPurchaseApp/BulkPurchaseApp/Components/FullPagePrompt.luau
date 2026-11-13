@@ -62,6 +62,7 @@ return (ReactModule.forwardRef(function(p1, Ref)
 	local UseDesignTokensResult = UseDesignTokensFunction(v14)
 	local UseUiModeInfoResult = UseUiModeInfoFunction()
 	local ScaledMAXWIDTH = if UseUiModeInfoResult.uiMode == UiMode.TenFoot then ConstantsModule.MAX_WIDTH * ConstantsModule.TEN_FOOT_MULTIPLIER else ConstantsModule.MAX_WIDTH
+	local ScaledMAXHEIGHT = if UseUiModeInfoResult.uiMode == UiMode.TenFoot then ConstantsModule.MAX_HEIGHT * ConstantsModule.TEN_FOOT_MULTIPLIER else ConstantsModule.MAX_HEIGHT
 	local IsXBelow: boolean = UseScreenSizeResult.X < ConstantsModule.MOBILE_BREAKPOINT and UseScreenSizeResult.X < UseScreenSizeResult.Y
 	
 	return ReactModule.createElement(ScrimModule, { ref = Ref }, ReactModule.createElement(BoxModule, {
@@ -73,7 +74,7 @@ return (ReactModule.forwardRef(function(p1, Ref)
 			UseDesignTokensResult.padding
 		},
 		cornerRadius = UDim.new(0, UseDesignTokensResult.cornerRadius),
-		Size = UDim2.new(if IsXBelow then 1 else 0, if IsXBelow then 0 else math.min(ScaledMAXWIDTH, UseScreenSizeResult.X), 0, (math.min(if UseUiModeInfoResult.uiMode == UiMode.TenFoot then ConstantsModule.MAX_HEIGHT * ConstantsModule.TEN_FOOT_MULTIPLIER else ConstantsModule.MAX_HEIGHT, UseScreenSizeResult.Y))),
+		Size = UDim2.new(if IsXBelow then 1 else 0, if IsXBelow then 0 else math.min(ScaledMAXWIDTH, UseScreenSizeResult.X), 0, (math.min(ScaledMAXHEIGHT, UseScreenSizeResult.Y))),
 		BackgroundColor3 = UseDesignTokensResult.background,
 		Position = UDim2.fromScale(0.5, if IsXBelow then 1 else 0.5),
 		AnchorPoint = Vector2.new(0.5, if IsXBelow then 1 else 0.5)

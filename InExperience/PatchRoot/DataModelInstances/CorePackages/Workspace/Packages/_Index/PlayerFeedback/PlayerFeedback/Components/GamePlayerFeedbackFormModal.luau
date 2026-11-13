@@ -11,6 +11,7 @@ local PartialPageModal = UIBloxModule.App.Dialog.Modal.PartialPageModal
 local VerticalScrollView = UIBloxModule.App.Container.VerticalScrollView
 local ButtonStack = UIBloxModule.App.Button.ButtonStack
 local CryoModule = require(Parent.Cryo)
+local ArgCheckModule = require(Parent.ArgCheck)
 local TModule = require(Parent.t)
 local CloseCentralOverlayFunction = require(Parent.CentralOverlay).Thunks.CloseCentralOverlay
 local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
@@ -80,7 +81,7 @@ local function _(Text: string): number
 	return if utf8.len(Text) then utf8.len(utf8.nfcnormalize(Text)) else string.len(Text)
 end
 
-local WrapResult = require(Parent.ArgCheck).wrap(TModule.interface({
+local WrapResult = ArgCheckModule.wrap(TModule.interface({
 	closeCentralOverlayThunk = TModule.callback,
 	universeId = TModule.string,
 	playerFeedbackMetadata = TModule.strictInterface({

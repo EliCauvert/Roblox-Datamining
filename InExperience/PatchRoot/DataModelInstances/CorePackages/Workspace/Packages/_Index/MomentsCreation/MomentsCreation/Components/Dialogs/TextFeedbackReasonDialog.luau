@@ -1,10 +1,11 @@
 ﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
 local Parent = MomentsCreation.Parent
 local FoundationModule = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
 local ReactModule = require(Parent.React)
 local Dialog = FoundationModule.Dialog
 local Text = FoundationModule.Text
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local UseCreationFlowStringsModule = require(MomentsCreation.Hooks.useCreationFlowStrings)
 local config = {
 	title = "Feature.Moments.Title.GenerateTextFeedbackReason",

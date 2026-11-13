@@ -1,6 +1,7 @@
 ﻿local Parent = script:FindFirstAncestor("Moments").Parent
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
+local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
@@ -8,7 +9,7 @@ local ConstantsModule = require(script.Parent.Constants)
 local _ = require(script.Parent.Types)
 local SnapMathModule = require(script.Parent.snapMath)
 local PagerNavigationModule = require(script.Parent.pagerNavigation)
-local UsePreferencesFunction = require(Parent.Foundation).Hooks.usePreferences
+local UsePreferencesFunction = FoundationModule.Hooks.usePreferences
 
 return function(p1)
 	-- upvalues: ReactModule (copy), UsePreferencesFunction (copy), SignalsModule (copy), RunService (copy), ConstantsModule (copy), SnapMathModule (copy), PagerNavigationModule (copy), UserInputService (copy), SignalsReactModule (copy)

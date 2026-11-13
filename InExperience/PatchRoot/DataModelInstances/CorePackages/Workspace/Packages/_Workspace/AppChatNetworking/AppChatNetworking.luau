@@ -15,6 +15,8 @@ local _ = require(Responses["clear-global-unread-count"])
 local _ = require(Responses["get-chat-moderation-statuses"])
 local _ = require(Responses["translate-user-message"])
 local _ = require(script.rodux.GetModalSequence)
+local _ = require(script.http.GetConversations)
+local _ = require(script.http.RecordModalSequenceResponse)
 
 return {
 	Constants = require(script.Constants),

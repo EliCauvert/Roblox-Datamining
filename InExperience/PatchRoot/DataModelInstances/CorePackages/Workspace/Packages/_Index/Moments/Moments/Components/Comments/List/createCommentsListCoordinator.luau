@@ -222,9 +222,9 @@ return function(p1)
 	local T = {}
 	local t1 = {}
 	local FeedItemIds = {}
-	local Callback: (() -> ())? = nil
-	local Signal, Signal2 = SignalsModule.createSignal(0)
 	local Callback1: (() -> ())? = nil
+	local Signal, Signal2 = SignalsModule.createSignal(0)
+	local Callback: (() -> ())? = nil
 	local OwnerGeneration = CommentsStore.getOwnerGeneration(false)
 	local Flag = false
 	local CommentPostedCallback = nil
@@ -324,7 +324,7 @@ return function(p1)
 	end
 	
 	local function clearReactionState()
-		-- upvalues: t (copy), cancelReactionRequest (copy), t1 (copy), Callback (ref), FeedItemIds (copy), ReactionStore (copy)
+		-- upvalues: t (copy), cancelReactionRequest (copy), t1 (copy), Callback1 (ref), FeedItemIds (copy), ReactionStore (copy)
 		local List = {}
 		
 		for i in t do
@@ -346,9 +346,9 @@ return function(p1)
 				Entry()
 			end
 		end
-		if Callback ~= nil then
-			Callback()
-			Callback = nil
+		if Callback1 ~= nil then
+			Callback1()
+			Callback1 = nil
 		end
 		table.clear(FeedItemIds)
 		ReactionStore.clear()
@@ -378,7 +378,7 @@ return function(p1)
 	end
 	
 	local function setReactionCooldown(p2)
-		-- upvalues: NowMs (copy), ReactionStore (copy), parseHttpDateMs (upval), Callback (ref), Schedule (copy)
+		-- upvalues: NowMs (copy), ReactionStore (copy), parseHttpDateMs (upval), Callback1 (ref), Schedule (copy)
 		local NowMsResult: number = NowMs()
 		local CooldownUntilMs: number = ReactionStore.getCooldownUntilMs(false)
 		local v3 = nil
@@ -398,12 +398,12 @@ return function(p1)
 		local Largest = math.max(CooldownUntilMs, NowMsResult + v3)
 		ReactionStore.setCooldownUntilMs(Largest)
 		
-		if Callback ~= nil then
-			Callback()
+		if Callback1 ~= nil then
+			Callback1()
 		end
-		Callback = Schedule(math.max(0, Largest - NowMsResult), function()
-			-- upvalues: Callback (upval), ReactionStore (upval), Largest (copy)
-			Callback = nil
+		Callback1 = Schedule(math.max(0, Largest - NowMsResult), function()
+			-- upvalues: Callback1 (upval), ReactionStore (upval), Largest (copy)
+			Callback1 = nil
 			
 			if ReactionStore.getCooldownUntilMs(false) == Largest then
 				ReactionStore.setCooldownUntilMs(0)
@@ -412,16 +412,16 @@ return function(p1)
 	end
 	
 	local _ = function()
-		-- upvalues: Callback1 (ref), Signal2 (copy)
-		if Callback1 ~= nil then
-			Callback1()
-			Callback1 = nil
+		-- upvalues: Callback (ref), Signal2 (copy)
+		if Callback ~= nil then
+			Callback()
+			Callback = nil
 		end
 		Signal2(0)
 	end
 	
 	local function setPostCooldown(p2)
-		-- upvalues: NowMs (copy), Signal (copy), parseHttpDateMs (upval), Signal2 (copy), Callback1 (ref), Schedule (copy)
+		-- upvalues: NowMs (copy), Signal (copy), parseHttpDateMs (upval), Signal2 (copy), Callback (ref), Schedule (copy)
 		local NowMsResult: number = NowMs()
 		local SignalResult: number = Signal(false)
 		local v3 = nil
@@ -441,12 +441,12 @@ return function(p1)
 		local Largest = math.max(SignalResult, NowMsResult + v3)
 		Signal2(Largest)
 		
-		if Callback1 ~= nil then
-			Callback1()
+		if Callback ~= nil then
+			Callback()
 		end
-		Callback1 = Schedule(math.max(0, Largest - NowMsResult), function()
-			-- upvalues: Callback1 (upval), Signal (upval), Largest (copy), Signal2 (upval)
-			Callback1 = nil
+		Callback = Schedule(math.max(0, Largest - NowMsResult), function()
+			-- upvalues: Callback (upval), Signal (upval), Largest (copy), Signal2 (upval)
+			Callback = nil
 			
 			if Signal(false) == Largest then
 				Signal2(0)
@@ -455,7 +455,7 @@ return function(p1)
 	end
 	
 	local _ = function(): boolean
-		-- upvalues: Signal (copy), NowMs (copy), Callback1 (ref), Signal2 (copy)
+		-- upvalues: Signal (copy), NowMs (copy), Callback (ref), Signal2 (copy)
 		local SignalResult = Signal(false)
 		
 		if SignalResult == 0 then
@@ -464,9 +464,9 @@ return function(p1)
 		if NowMs() < SignalResult then
 			return true
 		end
-		if Callback1 ~= nil then
-			Callback1()
-			Callback1 = nil
+		if Callback ~= nil then
+			Callback()
+			Callback = nil
 		end
 		Signal2(0)
 		
@@ -1583,7 +1583,7 @@ return function(p1)
 	end
 	
 	local Effect = SignalsModule.createEffect(function(p3)
-		-- upvalues: CommentsStore (copy), OwnerGeneration (ref), FFlagMomentsComments (upval), CommentPostedCallback (ref), v1 (ref), v2 (ref), EventNames (upval), AnalyticsSession (ref), T (ref), clearReactionState (copy), Callback1 (ref), Signal2 (copy), CollectionStore (copy)
+		-- upvalues: CommentsStore (copy), OwnerGeneration (ref), FFlagMomentsComments (upval), CommentPostedCallback (ref), v1 (ref), v2 (ref), EventNames (upval), AnalyticsSession (ref), T (ref), clearReactionState (copy), Callback (ref), Signal2 (copy), CollectionStore (copy)
 		local OwnerGeneration1 = CommentsStore.getOwnerGeneration(p3)
 		
 		if OwnerGeneration1 == OwnerGeneration then return end
@@ -1602,22 +1602,22 @@ return function(p1)
 			if ActivePageRequest ~= nil then
 				ActivePageRequest.cancel()
 			end
-			local ActivePinnedRequest = v6.activePinnedRequest
+			local ActivePinnedRequest1 = v6.activePinnedRequest
 			v6.activePinnedRequest = nil
 			
-			if ActivePinnedRequest ~= nil then
+			if ActivePinnedRequest1 ~= nil then
 				v6.hasRequestedPinnedComment = false
-				ActivePinnedRequest.cancel()
+				ActivePinnedRequest1.cancel()
 			end
 		end
-		local ActivePageRequest1 = v2
+		local ActivePinnedRequest = v2
 		v2 = nil
 		
-		if ActivePageRequest1 ~= nil then
-			if FFlagMomentsComments and ActivePageRequest1.analyticsSession ~= nil and ActivePageRequest1.ownerGeneration == CommentsStore.getOwnerGeneration(false) then
-				ActivePageRequest1.analyticsSession.logEvent(EventNames.MomentCommentPostResult, { outcome = "cancelled", failureReason = "cancelled" })
+		if ActivePinnedRequest ~= nil then
+			if FFlagMomentsComments and ActivePinnedRequest.analyticsSession ~= nil and ActivePinnedRequest.ownerGeneration == CommentsStore.getOwnerGeneration(false) then
+				ActivePinnedRequest.analyticsSession.logEvent(EventNames.MomentCommentPostResult, { outcome = "cancelled", failureReason = "cancelled" })
 			end
-			ActivePageRequest1.cancel()
+			ActivePinnedRequest.cancel()
 		end
 		if FFlagMomentsComments then
 			AnalyticsSession = nil
@@ -1632,9 +1632,9 @@ return function(p1)
 			clearReactionState()
 		end
 		if FFlagMomentsComments then
-			if Callback1 ~= nil then
-				Callback1()
-				Callback1 = nil
+			if Callback ~= nil then
+				Callback()
+				Callback = nil
 			end
 			Signal2(0)
 		end
@@ -1745,7 +1745,7 @@ return function(p1)
 			end
 		end,
 		submitComment = function(FeedItemId, SessionId, p4)
-			-- upvalues: v1 (ref), Flag (ref), CommentsStore (copy), v2 (ref), CollectionStore (copy), FFlagMomentsComments (upval), Signal (copy), NowMs (copy), Callback1 (ref), Signal2 (copy), p1 (copy), AnalyticsSession (ref), CommentPostedCallback (ref), startPendingPost (copy)
+			-- upvalues: v1 (ref), Flag (ref), CommentsStore (copy), v2 (ref), CollectionStore (copy), FFlagMomentsComments (upval), Signal (copy), NowMs (copy), Callback (ref), Signal2 (copy), p1 (copy), AnalyticsSession (ref), CommentPostedCallback (ref), startPendingPost (copy)
 			local v7 = v1
 			local v8 = if Flag or v7 == nil or v7.feedItemId ~= FeedItemId or v7.sessionId ~= SessionId or v7.ownerGeneration ~= CommentsStore.getOwnerGeneration(false) or v7.refCount == 0 then nil else v7
 			
@@ -1761,9 +1761,9 @@ return function(p1)
 				elseif NowMs() < SignalResult then
 					Flag1 = true
 				else
-					if Callback1 ~= nil then
-						Callback1()
-						Callback1 = nil
+					if Callback ~= nil then
+						Callback()
+						Callback = nil
 					end
 					Signal2(0)
 					Flag1 = false
@@ -1787,7 +1787,7 @@ return function(p1)
 			return (startPendingPost(v8, FeedItemId, SessionId, PendingSubmission))
 		end,
 		retryPendingSubmission = function(FeedItemId, SessionId)
-			-- upvalues: v1 (ref), Flag (ref), CommentsStore (copy), v2 (ref), CollectionStore (copy), FFlagMomentsComments (upval), Signal (copy), NowMs (copy), Callback1 (ref), Signal2 (copy), startPendingPost (copy)
+			-- upvalues: v1 (ref), Flag (ref), CommentsStore (copy), v2 (ref), CollectionStore (copy), FFlagMomentsComments (upval), Signal (copy), NowMs (copy), Callback (ref), Signal2 (copy), startPendingPost (copy)
 			local v7 = v1
 			local v8 = if Flag or v7 == nil or v7.feedItemId ~= FeedItemId or v7.sessionId ~= SessionId or v7.ownerGeneration ~= CommentsStore.getOwnerGeneration(false) or v7.refCount == 0 then nil else v7
 			
@@ -1808,9 +1808,9 @@ return function(p1)
 				elseif NowMs() < SignalResult then
 					Flag1 = true
 				else
-					if Callback1 ~= nil then
-						Callback1()
-						Callback1 = nil
+					if Callback ~= nil then
+						Callback()
+						Callback = nil
 					end
 					Signal2(0)
 					Flag1 = false
@@ -1845,19 +1845,19 @@ return function(p1)
 		ensureReactionPresent = if FFlagMomentsComments then ensureReactionPresent else rejectReactionMutation,
 		ensureReactionAbsent = if FFlagMomentsComments then ensureReactionAbsent else rejectReactionMutation,
 		clearReactionState = if FFlagMomentsComments then clearReactionState else noOp,
-		deleteComment = function(FeedItemId, Key, Callback1, Callback): boolean
+		deleteComment = function(FeedItemId, Key, Callback2, Callback): boolean
 			-- upvalues: Flag (ref), T (ref), CommentsStore (copy), FFlagMomentsComments (upval), p1 (copy), v1 (ref), FFlagMomentsCommentActionsRealtimeModule (upval), DeleteComment (copy), observeRequest (upval), MomentsCommentsModule (upval), ReadStatusCode (copy), GetCommentsFailureReasonModule (upval), removeDeletedComment (copy)
 			if Flag or T[Key] ~= nil then
 				return false
 			end
 			local OwnerGeneration = CommentsStore.getOwnerGeneration(false)
-			local Callback2 = nil
+			local Callback1 = nil
 			
 			if FFlagMomentsComments and p1.getCommentDeletedCallback ~= nil then
 				local v7 = v1
 				
 				if v7 ~= nil and v7.feedItemId == FeedItemId then
-					Callback2 = p1.getCommentDeletedCallback(FeedItemId, v7.sessionId)
+					Callback1 = p1.getCommentDeletedCallback(FeedItemId, v7.sessionId)
 				end
 			end
 			local AnalyticsSession = nil
@@ -1874,7 +1874,7 @@ return function(p1)
 			local config = { cancel = function() end }
 			T[Key] = config
 			config.cancel = observeRequest(DeleteCommentResult, function(p4)
-				-- upvalues: T (upval), Key (copy), config (copy), Flag (upval), CommentsStore (upval), OwnerGeneration (copy), MomentsCommentsModule (upval), ReadStatusCode (upval), FFlagMomentsCommentActionsRealtimeModule (upval), AnalyticsSession (ref), GetCommentsFailureReasonModule (upval), removeDeletedComment (upval), FeedItemId (copy), FFlagMomentsComments (upval), Callback (copy), Callback1 (copy), Callback2 (ref)
+				-- upvalues: T (upval), Key (copy), config (copy), Flag (upval), CommentsStore (upval), OwnerGeneration (copy), MomentsCommentsModule (upval), ReadStatusCode (upval), FFlagMomentsCommentActionsRealtimeModule (upval), AnalyticsSession (ref), GetCommentsFailureReasonModule (upval), removeDeletedComment (upval), FeedItemId (copy), FFlagMomentsComments (upval), Callback (copy), Callback2 (copy), Callback1 (ref)
 				if T[Key] ~= config then return end
 				T[Key] = nil
 				
@@ -1901,11 +1901,11 @@ return function(p1)
 					if FFlagMomentsComments and p4.status == "succeeded" and Callback ~= nil then
 						Callback()
 					end
-				elseif Callback1 ~= nil then
-					Callback1()
-				end
-				if FFlagMomentsComments and p4.status == "succeeded" and Callback2 ~= nil then
+				elseif Callback2 ~= nil then
 					Callback2()
+				end
+				if FFlagMomentsComments and p4.status == "succeeded" and Callback1 ~= nil then
+					Callback1()
 				end
 			end)
 			
@@ -1969,7 +1969,7 @@ return function(p1)
 			end
 		end,
 		dispose = function()
-			-- upvalues: Flag (ref), Effect (copy), FFlagMomentsComments (upval), CommentPostedCallback (ref), v1 (ref), v2 (ref), CommentsStore (copy), EventNames (upval), AnalyticsSession (ref), T (ref), clearReactionState (copy), Callback1 (ref), Signal2 (copy), CollectionStore (copy)
+			-- upvalues: Flag (ref), Effect (copy), FFlagMomentsComments (upval), CommentPostedCallback (ref), v1 (ref), v2 (ref), CommentsStore (copy), EventNames (upval), AnalyticsSession (ref), T (ref), clearReactionState (copy), Callback (ref), Signal2 (copy), CollectionStore (copy)
 			if Flag then return end
 			Flag = true
 			Effect()
@@ -1987,22 +1987,22 @@ return function(p1)
 				if ActivePageRequest ~= nil then
 					ActivePageRequest.cancel()
 				end
-				local ActivePinnedRequest = v9.activePinnedRequest
+				local ActivePinnedRequest1 = v9.activePinnedRequest
 				v9.activePinnedRequest = nil
 				
-				if ActivePinnedRequest ~= nil then
+				if ActivePinnedRequest1 ~= nil then
 					v9.hasRequestedPinnedComment = false
-					ActivePinnedRequest.cancel()
+					ActivePinnedRequest1.cancel()
 				end
 			end
-			local ActivePageRequest1 = v2
+			local ActivePinnedRequest = v2
 			v2 = nil
 			
-			if ActivePageRequest1 ~= nil then
-				if FFlagMomentsComments and ActivePageRequest1.analyticsSession ~= nil and ActivePageRequest1.ownerGeneration == CommentsStore.getOwnerGeneration(false) then
-					ActivePageRequest1.analyticsSession.logEvent(EventNames.MomentCommentPostResult, { outcome = "cancelled", failureReason = "cancelled" })
+			if ActivePinnedRequest ~= nil then
+				if FFlagMomentsComments and ActivePinnedRequest.analyticsSession ~= nil and ActivePinnedRequest.ownerGeneration == CommentsStore.getOwnerGeneration(false) then
+					ActivePinnedRequest.analyticsSession.logEvent(EventNames.MomentCommentPostResult, { outcome = "cancelled", failureReason = "cancelled" })
 				end
-				ActivePageRequest1.cancel()
+				ActivePinnedRequest.cancel()
 			end
 			if FFlagMomentsComments then
 				AnalyticsSession = nil
@@ -2017,9 +2017,9 @@ return function(p1)
 				clearReactionState()
 			end
 			if FFlagMomentsComments then
-				if Callback1 ~= nil then
-					Callback1()
-					Callback1 = nil
+				if Callback ~= nil then
+					Callback()
+					Callback = nil
 				end
 				Signal2(0)
 			end

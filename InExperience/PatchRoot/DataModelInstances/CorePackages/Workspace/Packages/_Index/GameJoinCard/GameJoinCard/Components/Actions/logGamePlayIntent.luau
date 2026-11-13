@@ -11,8 +11,9 @@ return function(p1)
 	if UserId == "" then return end
 	local Presence = p1.presence
 	local PlaceId = Presence.placeId
+	local RootPlaceId = Presence.rootPlaceId
 	local Text: string = if PlaceId == nil or tostring(PlaceId) == "" then "" else tostring(PlaceId)
-	local Number: number? = tonumber(Presence.rootPlaceId)
+	local Number: number? = tonumber(RootPlaceId)
 	
 	if Text ~= "" and Number ~= nil then
 		GamePlayIntentFunction(p1.eventIngest, PeopleListInHomePage, {

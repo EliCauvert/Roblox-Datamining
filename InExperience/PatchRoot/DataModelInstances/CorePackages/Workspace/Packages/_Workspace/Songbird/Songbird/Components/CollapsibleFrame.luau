@@ -1,11 +1,12 @@
 ﻿local Songbird = script:FindFirstAncestor("Songbird")
 local FoundationModule = require(Songbird.Parent.Foundation)
 local ReactModule = require(Songbird.Parent.React)
+local ReactUtilsModule = require(Songbird.Parent.ReactUtils)
 local ReactOtterModule = require(Songbird.Parent.ReactOtter)
 local UseBindingFunction = ReactModule.useBinding
 local UseCallbackFunction = ReactModule.useCallback
 local UseEffectFunction = ReactModule.useEffect
-local UsePreviousFunction = require(Songbird.Parent.ReactUtils).usePrevious
+local UsePreviousFunction = ReactUtilsModule.usePrevious
 local UseAnimatedBindingFunction = ReactOtterModule.useAnimatedBinding
 local config = { stiffness = 300, damping = 30, mass = 1 }
 

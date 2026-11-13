@@ -18,9 +18,10 @@ local HeaderBar = UIBloxModule.App.Bar.HeaderBar
 local HeaderBar1 = FoundationModule.HeaderBar
 local AppHeaderBarModule = require(Parent.AppHeaderBar)
 local GetTopBarStoreModule = require(AppChat.Stores.GetTopBarStore)
+local SignalsReactModule = require(Parent.SignalsReact)
 local ThemeBackgroundModule = require(Parent.ThemeBackground)
 local FFlagAppThemeHalloween2026ChatBackgroundModule = require(AppChat.Flags.FFlagAppThemeHalloween2026ChatBackground)
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseSignalStateFunction = SignalsReactModule.useSignalState
 
 local function noOp()
 	return nil

@@ -1161,6 +1161,28 @@ local function ConnectedLibrary(p2)
 		UseResult10(LimitSelectAllResult, true)
 	end
 	
+	local Element = ReactModule.createElement(LibraryNavigatorModule, {
+		externalDispatchConnector = UseResult1,
+		onNavigationStateChange = UseResult2,
+		screenProps = {
+			library = Library,
+			isReady = UseStateResult3,
+			isOpen = UseIsOpenResult,
+			activeRouteKey = UseStateResult.key,
+			query = UseStateResult1,
+			onBack = UseResult6,
+			onOpenItem = UseResult8,
+			onOpenCategory = UseResult7,
+			chatActions = Copy,
+			resourceActions = UseMemoResult,
+			unavailableText = UseLibraryStringsModuleResult.modelUnavailable,
+			worldCutout = if IsAvailable or FFlagBuildExperienceLibrary and not UseStateResult3 then {
+				title = UseLibraryStringsModuleResult.world,
+				onActivated = OnActivated,
+				onRectChanged = UseLibraryWorldCutoutViewModelModuleResult.onCellRectChanged
+			} else nil
+		}
+	})
 	local Title = if ItemId == nil then UseLibraryStringsModuleResult.title elseif Model == "Model" then UseLibraryStringsModuleResult.object elseif Model == "Image" then UseLibraryStringsModuleResult.image else UseLibraryStringsModuleResult.sound
 	
 	return ReactModule.createElement(FocusNavigationUtilsModule.FocusRoot, {
@@ -1191,28 +1213,7 @@ local function ConnectedLibrary(p2)
 				-- upvalues: returnToAppChat (copy)
 				returnToAppChat(nil, "close_button")
 			end
-		}, (ReactModule.createElement(LibraryNavigatorModule, {
-			externalDispatchConnector = UseResult1,
-			onNavigationStateChange = UseResult2,
-			screenProps = {
-				library = Library,
-				isReady = UseStateResult3,
-				isOpen = UseIsOpenResult,
-				activeRouteKey = UseStateResult.key,
-				query = UseStateResult1,
-				onBack = UseResult6,
-				onOpenItem = UseResult8,
-				onOpenCategory = UseResult7,
-				chatActions = Copy,
-				resourceActions = UseMemoResult,
-				unavailableText = UseLibraryStringsModuleResult.modelUnavailable,
-				worldCutout = if IsAvailable or FFlagBuildExperienceLibrary and not UseStateResult3 then {
-					title = UseLibraryStringsModuleResult.world,
-					onActivated = OnActivated,
-					onRectChanged = UseLibraryWorldCutoutViewModelModuleResult.onCellRectChanged
-				} else nil
-			}
-		}))),
+		}, Element),
 		Leaving = if UseStateResult4 then ReactModule.createElement(LibraryLeavingOverlayModule, { ZIndex = 2 }) else nil,
 		FirstFrameCover = if UseStateResult5 then nil else ReactModule.createElement(FoundationModule.View, {
 			ZIndex = 3,

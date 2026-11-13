@@ -14,12 +14,13 @@ local ShareInviteLinkMapStateToPropsModule = require(ShareGame.Components.ShareI
 local ShareLinksRodux = ReducerDependencies.ShareLinksRodux
 local NetworkStatus = ReducerDependencies.RoduxNetworking.Enum.NetworkStatus
 local ThemeModule = require(RobloxGui.Modules.Settings.Theme)
+local GetFFlagEnableNewInviteMenuModule = require(RobloxGui.Modules.Flags.GetFFlagEnableNewInviteMenu)
 local ShareInviteLink = RoactModule.PureComponent:extend("ShareInviteLink")
 local Offset = 12
 local Offset1 = 8
 local XOffset = 69
 
-if require(RobloxGui.Modules.Flags.GetFFlagEnableNewInviteMenu)() then
+if GetFFlagEnableNewInviteMenuModule() then
 	Offset = 16
 	Offset1 = 12
 	XOffset = 66

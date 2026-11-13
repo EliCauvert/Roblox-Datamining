@@ -2,6 +2,7 @@
 local _ = require(MomentsCreation.Types.CreationFlowTypes)
 local StickerToolModule = require(MomentsCreation.Tools.stickerTool)
 local VoiceToolModule = require(MomentsCreation.Tools.voiceTool)
+local GetFFlagMomentsStickerButtonFunction = require(MomentsCreation.Parent.MomentsCommon).Flags.GetFFlagMomentsStickerButton
 local GetFFlagMomentsTTSAudioOverlayModule = require(MomentsCreation.Flags.GetFFlagMomentsTTSAudioOverlay)
 local List = {
 	require(MomentsCreation.Tools.trimTool),
@@ -10,7 +11,7 @@ local List = {
 	(require(MomentsCreation.Tools.generateTextTool))
 }
 
-if require(MomentsCreation.Parent.MomentsCommon).Flags.GetFFlagMomentsStickerButton() then
+if GetFFlagMomentsStickerButtonFunction() then
 	table.insert(List, StickerToolModule)
 end
 if GetFFlagMomentsTTSAudioOverlayModule and game:GetEngineFeature("TextToSpeechPlatformPreview") then

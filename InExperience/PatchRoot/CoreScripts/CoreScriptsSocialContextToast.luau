@@ -3,9 +3,9 @@ local Players = game:GetService("Players")
 local EventIngestService = game:GetService("EventIngestService")
 local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
 local SocialContextToastContainerFunction: (any, any, any) -> () = require(CorePackages.Workspace.Packages.SocialContextToasts).SocialContextToastContainer
-local GetFFlagSocialContextToastEventStreamFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagSocialContextToastEventStream
 local FFlagEnablePartyNudgeAfterJoin = require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnablePartyNudgeAfterJoin
 local FFlagShowFriendJoinedYouToastForNonReferredJoins = require(CorePackages.Workspace.Packages.SharedFlags).FFlagShowFriendJoinedYouToastForNonReferredJoins
+local GetFFlagEnableReferredPlayerJoinRemoteEventFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagEnableReferredPlayerJoinRemoteEvent
 local GetFIntReferredPlayerJoinRemoteEventTimeoutFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFIntReferredPlayerJoinRemoteEventTimeout
 local HttpRequestModule = require(CorePackages.Packages.HttpRequest)
 local ConfigResult = HttpRequestModule.config({
@@ -19,7 +19,7 @@ local ApolloClientModule = require(game:GetService("CoreGui").RobloxGui.Modules.
 local Analytics = require(CorePackages.Workspace.Packages.Analytics).Analytics
 local EventIngest = require(CorePackages.Workspace.Packages.Analytics).AnalyticsReporters.EventIngest
 local IXPServiceWrapper = require(CorePackages.Workspace.Packages.IxpServiceWrapper).IXPServiceWrapper
-local ReferredPlayerJoin = if require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagEnableReferredPlayerJoinRemoteEvent() then RobloxReplicatedStorage:WaitForChild("ReferredPlayerJoin", GetFIntReferredPlayerJoinRemoteEventTimeoutFunction()) else nil
+local ReferredPlayerJoin = if GetFFlagEnableReferredPlayerJoinRemoteEventFunction() then RobloxReplicatedStorage:WaitForChild("ReferredPlayerJoin", GetFIntReferredPlayerJoinRemoteEventTimeoutFunction()) else nil
 local ShowFriendJoinedPlayerToast = nil
 local ShowPlayerJoinedFriendsToast = nil
 local FriendPlayerJoinedRemoteEventTimeout = game:DefineFastInt("FriendPlayerJoinedRemoteEventTimeout", 5)
@@ -40,4 +40,4 @@ SocialContextToastContainerFunction({
 	referredPlayerJoinRemoteEvent = ReferredPlayerJoin,
 	showFriendJoinedPlayerToastRemoteEvent = ShowFriendJoinedPlayerToast,
 	showPlayerJoinedFriendsToastRemoteEvent = ShowPlayerJoinedFriendsToast
-}, if GetFFlagSocialContextToastEventStreamFunction() then tostring(game.GameId) else game.GameId, if GetFFlagSocialContextToastEventStreamFunction() then tostring(game.PlaceId) else game.PlaceId)
+}, tostring(game.GameId), (tostring(game.PlaceId)))

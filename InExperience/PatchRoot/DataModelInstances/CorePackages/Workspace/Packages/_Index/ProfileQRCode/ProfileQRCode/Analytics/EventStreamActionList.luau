@@ -1,8 +1,9 @@
 ﻿local Parent = script:FindFirstAncestor("ProfileQRCode").Parent
 local DashModule = require(Parent.Dash)
+local SocialLuaAnalyticsModule = require(Parent.SocialLuaAnalytics)
 local BtnValuesModule = require(script.Parent.Parent.Analytics.BtnValues)
 local EventNamesModule = require(script.Parent.EventNames)
-local Enums = require(Parent.SocialLuaAnalytics).Analytics.Enums
+local Enums = SocialLuaAnalyticsModule.Analytics.Enums
 local Contexts = Enums.Contexts
 local EventTypes = Enums.EventTypes
 

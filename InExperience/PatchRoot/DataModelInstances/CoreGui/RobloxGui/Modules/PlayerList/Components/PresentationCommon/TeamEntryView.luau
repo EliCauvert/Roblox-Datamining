@@ -206,7 +206,7 @@ return ReactModule.memo(function(p1)
 					})
 				end
 			end
-		elseif p1.gameStatsCount and (p1.teamStatsCount and (p1.gameStatsCount > 0 and p1.teamStatsCount >= 0)) then
+		elseif p1.gameStatsCount and p1.teamStatsCount and p1.gameStatsCount > 0 and p1.teamStatsCount >= 0 then
 			p1.gameStats.iterateData(function(StatName, p2)
 				-- upvalues: MaxLeaderstats (copy), p1 (copy), Elements1 (copy), ReactModule (upval), StatEntryContainerModule (upval), UseMemoResult (copy), OverlayStyle (copy), TextEmphasis (ref)
 				if MaxLeaderstats >= p2.order(false) then

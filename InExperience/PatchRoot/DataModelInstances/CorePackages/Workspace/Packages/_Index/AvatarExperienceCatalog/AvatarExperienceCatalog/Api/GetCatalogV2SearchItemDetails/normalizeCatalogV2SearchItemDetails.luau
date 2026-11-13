@@ -5,6 +5,7 @@ local Normalize = AvatarExperienceCommonModule.Utils.normalize
 local NormalizeBooleanFunction = Normalize.normalizeBoolean
 local NormalizeStringFunction = Normalize.normalizeString
 local NormalizeNumberFunction = Normalize.normalizeNumber
+local MakeNormalizeTableFnFunction = Normalize.makeNormalizeTableFn
 local GetRawItemLicensingInfoFunction = AvatarExperienceCommonModule.Utils.getRawItemLicensingInfo
 local ConvertToPascalCaseModule = require(AvatarExperienceCatalog.Utils.convertToPascalCase)
 local FFlagAXMarketplaceLicensing = require(Parent.AvatarExperienceFlags).FFlagAXMarketplaceLicensing
@@ -104,7 +105,7 @@ local function normalizeItem(p2)
 	end
 end
 
-return (Normalize.makeNormalizeTableFn({
+return (MakeNormalizeTableFnFunction({
 	data = function(List)
 		-- upvalues: normalizeItem (copy)
 		if typeof(List) ~= "table" then

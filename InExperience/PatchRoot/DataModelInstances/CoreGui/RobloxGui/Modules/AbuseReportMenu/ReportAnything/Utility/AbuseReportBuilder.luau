@@ -113,7 +113,7 @@ local function InterpretAnnotations(p1)
 		local v1 = 1e999
 		local v2 = nil
 		local AvatarsForRegion = if GetFFlagRAEnableCircleRegionFunction() then GetAvatarsForRegionFunction(p1.identificationResults.identifiedAvatars, annotationPoint, p1.annotationCircleRadius, p1.annotationAreaWidth, p1.annotationAreaHeight) else GetAvatarsForPointFunction(p1.identificationResults.identifiedAvatars, annotationPoint)
-		for i, _ in pairs(AvatarsForRegion) do
+		for i, value in pairs(AvatarsForRegion) do
 			local Distance = p1.identificationResults.identifiedAvatars[i].distance
 			
 			if Distance < v1 then
@@ -126,12 +126,12 @@ local function InterpretAnnotations(p1)
 		if GetFFlagReportAnythingEnableAdReportFunction() then
 			local v4 = 1e999
 			
-			for i1, _ in pairs((GetAdsForPointFunction(p1.identificationResults.identifiedAds, annotationPoint))) do
-				local Distance = p1.identificationResults.identifiedAds[i1].distance
+			for value, _ in pairs((GetAdsForPointFunction(p1.identificationResults.identifiedAds, annotationPoint))) do
+				local Distance = p1.identificationResults.identifiedAds[value].distance
 				
 				if Distance < v4 then
 					v4 = Distance
-					v3 = i1
+					v3 = value
 				end
 			end
 		end

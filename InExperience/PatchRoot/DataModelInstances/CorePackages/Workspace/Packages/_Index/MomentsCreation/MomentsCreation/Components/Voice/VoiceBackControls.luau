@@ -2,13 +2,14 @@
 local Parent = MomentsCreation.Parent
 local BuilderIconsModule = require(Parent.BuilderIcons)
 local FoundationModule = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
 local MomentsCommonModule = require(Parent.MomentsCommon)
 local ReactModule = require(Parent.React)
 local Icon = FoundationModule.Icon
 local Menu = FoundationModule.Menu
 local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local UseDeviceInsetsFunction = MomentsCommonModule.Hooks.useDeviceInsets
 local UseToggleStateFunction = MomentsCommonModule.Hooks.useToggleState
 local UseCreationControllerFunction = require(MomentsCreation.CreationController).useCreationController
@@ -26,6 +27,10 @@ return function()
 		discard = "Feature.Moments.Action.DiscardChange",
 		keep = "Feature.Moments.Action.KeepEditing"
 	})
+	local Items = {
+		{ id = "discard", text = UseLocalizationResult.discard },
+		{ id = "keep", text = UseLocalizationResult.keep }
+	}
 	
 	local function _()
 		-- upvalues: FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval)
@@ -66,10 +71,7 @@ return function()
 					FireAnalyticsEventModule(EventNames.EditingFlowVoiceContinueEditingPressed, MakeCreationEventFieldsModule.makeVoiceEventFields())
 				end
 			end,
-			items = {
-				{ id = "discard", text = UseLocalizationResult.discard },
-				{ id = "keep", text = UseLocalizationResult.keep }
-			}
+			items = Items
 		}, {
 			BackButton = ReactModule.createElement(View, {
 				tag = "auto-xy padding-small radius-circle",

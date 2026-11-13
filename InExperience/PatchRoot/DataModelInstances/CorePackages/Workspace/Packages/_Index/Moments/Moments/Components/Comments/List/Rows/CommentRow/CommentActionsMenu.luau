@@ -1,4 +1,5 @@
 ﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
 local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
 local FoundationModule = require(Parent.Foundation)
 local InputHandlersModule = require(Parent.InputHandlers)
@@ -10,7 +11,7 @@ local UseFocusRootFunction = FocusNavigationUtilsModule.useFocusRoot
 local InputSize = FoundationModule.Enums.InputSize
 local PopoverAlign = FoundationModule.Enums.PopoverAlign
 local PopoverSide = FoundationModule.Enums.PopoverSide
-local ThreeDotsHorizontal = require(Parent.BuilderIcons).Icon.ThreeDotsHorizontal
+local ThreeDotsHorizontal = BuilderIconsModule.Icon.ThreeDotsHorizontal
 local EventMap = {
 	[Enum.KeyCode.ButtonB] = FocusNavigationEventNameEnum.NavigateBack,
 	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack

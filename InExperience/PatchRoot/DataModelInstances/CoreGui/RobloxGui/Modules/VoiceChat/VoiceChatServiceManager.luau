@@ -746,6 +746,14 @@ function VoiceChatServiceManager:GetMicManager()
 	return self.coreVoiceManager and self.coreVoiceManager.micManager or nil
 end
 
+function VoiceChatServiceManager:HasLocalVoiceDevice()
+	return self.coreVoiceManager:HasLocalVoiceDevice()
+end
+
+function VoiceChatServiceManager:SubscribeToLocalAudioDeviceChanges(p3)
+	self.coreVoiceManager:subscribe("OnLocalAudioDeviceChanged", p3)
+end
+
 function VoiceChatServiceManager:GetMutedAnyone()
 	return self.coreVoiceManager:GetMutedAnyone()
 end

@@ -3,8 +3,10 @@ local Components = FriendsMenu.Components
 local Parent = FriendsMenu.Parent
 local Context = FriendsMenu.Context
 local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
 local CryoModule = require(Parent.Cryo)
 local SharedFlagsModule = require(Parent.SharedFlags)
+local GetFFlagEnableCommonFriendsMenuFunction = SharedFlagsModule.GetFFlagEnableCommonFriendsMenu
 local GetFFlagFriendsMenuDummyLoadingFriendsFixFunction = SharedFlagsModule.GetFFlagFriendsMenuDummyLoadingFriendsFix
 local FoundationModule = require(Parent.Foundation)
 local UseCursorFunction = FoundationModule.Hooks.useCursor
@@ -12,15 +14,15 @@ local FriendThumbnailModule = require(Components.FriendThumbnail)
 local FriendsMenuButtonModule = require(Components.FriendsMenuButton)
 local FriendInfoModule = require(Components.FriendInfo)
 local FriendsMenuCheckboxModule = require(Components.FriendsMenuCheckbox)
-local InviteCallbackContextModule = if SharedFlagsModule.GetFFlagEnableCommonFriendsMenu() then require(Context.InviteCallbackContext) else require(Context.InviteFriendContext)
+local InviteCallbackContextModule = if GetFFlagEnableCommonFriendsMenuFunction() then require(Context.InviteCallbackContext) else require(Context.InviteFriendContext)
 local SelectedUsersContextModule = require(Context.SelectedUsersContext)
 local FriendMenuTypeModule = require(FriendsMenu.Enums.FriendMenuType)
-local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local _ = require(FriendsMenu.friendsMenuModalType)
 local _UDim2 = UDim2.new(1, 0, 0.5, 0)
 local _Vector2 = Vector2.new(1, 0.5)
 
-local function v18() end
+local function v19() end
 
 local config = {
 	sidePadding = 24,
@@ -29,7 +31,7 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), UseStyleFunction (copy), InviteCallbackContextModule (copy), SelectedUsersContextModule (copy), UseCursorFunction (copy), FoundationModule (copy), GetFFlagFriendsMenuDummyLoadingFriendsFixFunction (copy), FriendMenuTypeModule (copy), v18 (copy), FriendThumbnailModule (copy), FriendInfoModule (copy), FriendsMenuCheckboxModule (copy), _UDim2 (copy), _Vector2 (copy), FriendsMenuButtonModule (copy)
+	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), UseStyleFunction (copy), InviteCallbackContextModule (copy), SelectedUsersContextModule (copy), UseCursorFunction (copy), FoundationModule (copy), GetFFlagFriendsMenuDummyLoadingFriendsFixFunction (copy), FriendMenuTypeModule (copy), v19 (copy), FriendThumbnailModule (copy), FriendInfoModule (copy), FriendsMenuCheckboxModule (copy), _UDim2 (copy), _Vector2 (copy), FriendsMenuButtonModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local Theme = UseStyleFunction().Theme
@@ -103,7 +105,7 @@ return function(p1)
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(false)
 		end,
-		[ReactModule.Event.Activated] = if GetFFlagFriendsMenuDummyLoadingFriendsFixFunction() and Friend.isLoadingPlaceholder then v18 elseif NoIsFetchingFriends then UseResult2 else v18,
+		[ReactModule.Event.Activated] = if GetFFlagFriendsMenuDummyLoadingFriendsFixFunction() and Friend.isLoadingPlaceholder then v19 elseif NoIsFetchingFriends then UseResult2 else v19,
 		AutoButtonColor = NoIsFetchingFriends
 	}, {
 		UIListLayout = ReactModule.createElement("UIListLayout", {

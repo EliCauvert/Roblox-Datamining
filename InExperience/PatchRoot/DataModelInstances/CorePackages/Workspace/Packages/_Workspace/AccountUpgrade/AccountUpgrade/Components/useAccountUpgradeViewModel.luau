@@ -474,6 +474,7 @@ return function(p1)
 			return not p2
 		end)
 	end, { UseStateResult8, OnFieldInteraction })
+	local UseStateResult12 = if UseStateResult1 == InputValidity.Invalid and #UseStateResult9 > 0 then UseStateResult9 else {}
 	local UseMarketingConsentModuleResult = if FFlagAccountUpgradeMarketingConsentModule then UseMarketingConsentModule({
 		spec = FlowSpec,
 		flow = Flow,
@@ -560,7 +561,7 @@ return function(p1)
 		usernamePlaceholder = UseLocalizationResult.usernamePlaceholder,
 		username = Value,
 		prefilledUsername = UseRefResult1.current,
-		usernameSuggestions = if UseStateResult1 == InputValidity.Invalid and #UseStateResult9 > 0 then UseStateResult9 else {},
+		usernameSuggestions = UseStateResult12,
 		usernameSuggestionPrompt = `{UseLocalizationResult.usernameSuggestionPrompt}:`,
 		usernameSuggestionEventContext = if FFlagAccountUpgradeOAuthTelemetryModule and Flow == AccountUpgradeFlowModule.OAuth then EventStreamConstants.Context.AccountUpgrade else nil,
 		onUsernameSuggestionSelected = ReactModule.useCallback(function(p2)

@@ -111,7 +111,7 @@ function IssueTracker.init(p1)
 		local List1 = {}
 		local t = {}
 		local Children = p1.containerRef.current and p1.containerRef.current:GetChildren() or {}
-		for _, Gui in pairs(Children) do
+		for i, Gui in pairs(Children) do
 			if Gui:IsA("GuiObject") then
 				t[Gui.Name] = Gui.AbsoluteSize.Y
 			end

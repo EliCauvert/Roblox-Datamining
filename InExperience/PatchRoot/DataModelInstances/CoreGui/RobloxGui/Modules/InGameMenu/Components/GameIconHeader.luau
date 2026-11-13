@@ -1,10 +1,11 @@
 ﻿local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
 local Roact = InGameMenuDependenciesModule.Roact
+local RoactRodux = InGameMenuDependenciesModule.RoactRodux
 local Parent = script.Parent.Parent
 local ThemedTextLabelModule = require(Parent.Components.ThemedTextLabel)
 local GameIconModule = require(Parent.Components.GameIcon)
 
-return InGameMenuDependenciesModule.RoactRodux.UNSTABLE_connect2(function(p1)
+return RoactRodux.UNSTABLE_connect2(function(p1)
 	return { gameName = p1.gameInfo.name }
 end)(function(p1)
 	-- upvalues: Roact (copy), GameIconModule (copy), ThemedTextLabelModule (copy)

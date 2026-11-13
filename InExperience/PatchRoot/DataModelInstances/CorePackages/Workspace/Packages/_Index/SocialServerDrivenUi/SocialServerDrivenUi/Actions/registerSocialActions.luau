@@ -4,14 +4,13 @@ local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local SduiActionType = SduiCoreSystemModule.SduiActionType
 local GetSduiActionHandlerRegistryFunction = SduiCoreSystemModule.getSduiActionHandlerRegistry
 local FFlagLuaAppSduiVerificationUpsellActions = require(Parent.SharedFlags).FFlagLuaAppSduiVerificationUpsellActions
-local FFlagSduiRequestFriendshipActionHandler = require(Parent.SharedFlags).FFlagSduiRequestFriendshipActionHandler
 local FFlagEditProfileFramesEnabled = require(Parent.SharedFlags).FFlagEditProfileFramesEnabled
 local FFlagAddSDUIEditProfileFramesAction = require(Parent.SharedFlags).FFlagAddSDUIEditProfileFramesAction
 local FFlagAppChatConversationTrustedFriendUpsellBanner = require(Parent.SharedFlags).FFlagAppChatConversationTrustedFriendUpsellBanner
 local FFlagLuaAppExperienceLeaderboardSeeAllEnabled = require(Parent.SharedFlags).FFlagLuaAppExperienceLeaderboardSeeAllEnabled
 
 return function()
-	-- upvalues: SduiActionType (copy), FFlagLuaAppSduiVerificationUpsellActions (copy), SocialServerDrivenUi (copy), FFlagSduiRequestFriendshipActionHandler (copy), FFlagEditProfileFramesEnabled (copy), FFlagAddSDUIEditProfileFramesAction (copy), FFlagAppChatConversationTrustedFriendUpsellBanner (copy), FFlagLuaAppExperienceLeaderboardSeeAllEnabled (copy), GetSduiActionHandlerRegistryFunction (copy)
+	-- upvalues: SduiActionType (copy), FFlagLuaAppSduiVerificationUpsellActions (copy), SocialServerDrivenUi (copy), FFlagEditProfileFramesEnabled (copy), FFlagAddSDUIEditProfileFramesAction (copy), FFlagAppChatConversationTrustedFriendUpsellBanner (copy), FFlagLuaAppExperienceLeaderboardSeeAllEnabled (copy), GetSduiActionHandlerRegistryFunction (copy)
 	GetSduiActionHandlerRegistryFunction().registerActionHandlerConfigs({
 		[SduiActionType.OpenFacialAgeEstimation] = if FFlagLuaAppSduiVerificationUpsellActions then nil else {
 			lazyHandler = function()
@@ -37,13 +36,13 @@ return function()
 				return require(SocialServerDrivenUi.Actions.SduiHideProfileCompletionAction)
 			end
 		},
-		[SduiActionType.RequestFriendship] = if FFlagSduiRequestFriendshipActionHandler then {
+		[SduiActionType.RequestFriendship] = {
 			skipUnifiedLogging = true,
 			lazyHandler = function()
 				-- upvalues: SocialServerDrivenUi (upval)
 				return require(SocialServerDrivenUi.Actions.SduiRequestFriendshipAction)
 			end
-		} else nil,
+		},
 		[SduiActionType.OpenProfileFramesEditor] = if FFlagEditProfileFramesEnabled and FFlagAddSDUIEditProfileFramesAction then {
 			lazyHandler = function()
 				-- upvalues: SocialServerDrivenUi (upval)

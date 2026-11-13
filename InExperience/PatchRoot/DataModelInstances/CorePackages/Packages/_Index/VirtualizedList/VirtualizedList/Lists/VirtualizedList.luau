@@ -39,6 +39,7 @@ local ReactModule = require(Parent1.React)
 local _ = require(Parent.Components.ScrollView.ScrollView)
 local VirtualizedListContextModule = require(script.Parent.VirtualizedListContext)
 local VirtualizedListCellContextProvider = VirtualizedListContextModule.VirtualizedListCellContextProvider
+local VirtualizedListContext = VirtualizedListContextModule.VirtualizedListContext
 local VirtualizedListContextProvider = VirtualizedListContextModule.VirtualizedListContextProvider
 local Callback = nil
 local CreateResult = nil
@@ -83,7 +84,7 @@ local _ = function(p1)
 end
 
 local VirtualizedList = ReactModule.PureComponent:extend("VirtualizedList")
-VirtualizedList.contextType = VirtualizedListContextModule.VirtualizedListContext
+VirtualizedList.contextType = VirtualizedListContext
 
 function VirtualizedList.init(p1, Props)
 	-- upvalues: Map (copy), InvariantModule (copy), FillRateHelperModule (copy), Boolean (copy), ComputeWindowedRenderLimitsFunction (copy), BatchinatorModule (copy), Array (copy), ViewabilityHelperModule (copy), Object (copy), Set (copy), Console (copy), Callback (ref), ReactModule (copy), ViewModule (copy), ScrollViewModule (copy), RefreshControl (ref), v1 (copy), InfoLogModule (copy)
@@ -1131,17 +1132,17 @@ function VirtualizedList.render(p7)
 			p7._canvasSize = if p7.props.horizontal then UDim2.new(0, p7._invertedCanvasLength, 1, 0) else UDim2.new(1, 0, 0, p7._invertedCanvasLength)
 		else
 			local Current = p7:getScrollRef()._nativeRef.current
-			local CanvasPosition1 = Current.CanvasPosition
+			local CanvasPosition = Current.CanvasPosition
 			local FrameMetricsApprox = p7._getFrameMetricsApprox((math.min(p7._highestMeasuredFrameIndex, ItemCount)))
 			local NewOffset = FrameMetricsApprox.offset + FrameMetricsApprox.length
 			local IsInvertedCanvasLengthBelow: boolean = if p7.props.optimizeInvertedCanvasResize then p7._invertedCanvasLength - p7._footerLength < NewOffset else NewOffset ~= p7._invertedCanvasLength - p7._footerLength
 			
 			if ItemCount <= p7._highestMeasuredFrameIndex and NewOffset ~= p7._invertedCanvasLength - p7._footerLength then
-				local FooterLengthDelta = NewOffset + p7._footerLength - p7._invertedCanvasLength
+				local NewOffsetDelta = NewOffset + p7._footerLength - p7._invertedCanvasLength
 				p7._invertedCanvasLength = NewOffset + p7._footerLength
 				local _UDim2: UDim2 = if p7.props.horizontal then UDim2.new(0, p7._invertedCanvasLength, 1, 0) else UDim2.new(1, 0, 0, p7._invertedCanvasLength)
 				Current.CanvasSize = _UDim2
-				p7._canvasPosition = if p7.props.horizontal then Vector2.new(CanvasPosition1.X + FooterLengthDelta, CanvasPosition1.Y) else Vector2.new(CanvasPosition1.X, CanvasPosition1.Y + FooterLengthDelta)
+				p7._canvasPosition = if p7.props.horizontal then Vector2.new(CanvasPosition.X + NewOffsetDelta, CanvasPosition.Y) else Vector2.new(CanvasPosition.X, CanvasPosition.Y + NewOffsetDelta)
 				p7._canvasSize = _UDim2
 			elseif IsInvertedCanvasLengthBelow and p7.state.scrollPositionDelta == 0 then
 				local WindowSize = p7.props.windowSize
@@ -1150,7 +1151,7 @@ function VirtualizedList.render(p7)
 				p7._invertedCanvasLength = NewOffset1
 				local _UDim2: UDim2 = if p7.props.horizontal then UDim2.new(0, p7._invertedCanvasLength, 1, 0) else UDim2.new(1, 0, 0, p7._invertedCanvasLength)
 				Current.CanvasSize = _UDim2
-				Current.CanvasPosition = if p7.props.horizontal then Vector2.new(CanvasPosition1.X + NewOffsetDelta, CanvasPosition1.Y) else Vector2.new(CanvasPosition1.X, CanvasPosition1.Y + NewOffsetDelta)
+				Current.CanvasPosition = if p7.props.horizontal then Vector2.new(CanvasPosition.X + NewOffsetDelta, CanvasPosition.Y) else Vector2.new(CanvasPosition.X, CanvasPosition.Y + NewOffsetDelta)
 				p7._canvasPosition = Current.CanvasPosition
 				p7._canvasSize = _UDim2
 			end
@@ -1307,8 +1308,9 @@ function VirtualizedList._onCellLayout(p8, Frame: Frame, KeyExtractorResult, Ind
 			if Frame1 and not p8.props.getItemLayout and math.abs(config1.length - Frame1.length) >= 1 then
 				if p8.props.UNSTABLE_forceSiblingLayoutUpdate then
 					local Frame2 = Frame:FindFirstAncestorOfClass("Frame")
+					local Children = if Frame2 then Frame2:GetChildren() else {}
 					local ItemCount = p8.props.getItemCount(p8.props.data)
-					Array.forEach(if Frame2 then Frame2:GetChildren() else {}, function(Frame: Frame)
+					Array.forEach(Children, function(Frame: Frame)
 						-- upvalues: Index (copy), ItemCount (copy), p8 (copy)
 						if not Frame:IsA("GuiObject") then return end
 						local Magnitude = math.abs(Frame.LayoutOrder)
@@ -1341,7 +1343,7 @@ function VirtualizedList._onCellLayout(p8, Frame: Frame, KeyExtractorResult, Ind
 			p8._highestMeasuredFrameIndex = math.max(p8._highestMeasuredFrameIndex, Index)
 			p8:_scheduleCellsToRenderUpdate()
 			
-			if p8.props.inverted and not p8.props.getItemLayout and (p8.state.last == p8.props.getItemCount(p8.props.data) and p8._highestMeasuredFrameIndex == p8.state.last) then
+			if p8.props.inverted and not p8.props.getItemLayout and p8.state.last == p8.props.getItemCount(p8.props.data) and p8._highestMeasuredFrameIndex == p8.state.last then
 				p8:forceUpdate()
 			end
 		end

@@ -1,6 +1,7 @@
 ﻿local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local IconName = require(Parent.Foundation).Enums.IconName
-local FFlagAXRemoveOfferBannerIcon = require(Parent.AvatarExperienceFlags).FFlagAXRemoveOfferBannerIcon
+local FFlagAXRemoveOfferBannerIcon = AvatarExperienceFlagsModule.FFlagAXRemoveOfferBannerIcon
 
 return function(p1)
 	-- upvalues: IconName (copy), FFlagAXRemoveOfferBannerIcon (copy)

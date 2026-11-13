@@ -3,13 +3,14 @@ local Parent = PeopleReactView.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local PeopleServiceModule = require(Parent.PeopleService)
+local SignalsReactModule = require(Parent.SignalsReact)
 local ConstantsModule = require(PeopleReactView.Constants)
 local Button = FoundationModule.Button
 local ButtonSize = FoundationModule.Enums.ButtonSize
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseSignalStateFunction = SignalsReactModule.useSignalState
 
 return function(Player: Player)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), PeopleServiceModule (copy), UseSignalStateFunction (copy), View (copy), ConstantsModule (copy), Button (copy), ButtonVariant (copy), ButtonSize (copy)

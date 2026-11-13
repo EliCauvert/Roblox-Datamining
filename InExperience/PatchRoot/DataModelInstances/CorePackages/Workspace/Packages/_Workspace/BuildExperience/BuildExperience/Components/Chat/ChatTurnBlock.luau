@@ -2,6 +2,7 @@
 local Parent = BuildExperience.Parent
 local FoundationModule = require(Parent.Foundation)
 local LocalizationModule = require(Parent.Localization)
+local MarkdownModule = require(Parent.Markdown)
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
 local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
@@ -44,7 +45,7 @@ local IconName = FoundationModule.Enums.IconName
 local IconSize = FoundationModule.Enums.IconSize
 local IconVariant = FoundationModule.Enums.IconVariant
 local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
-local MarkdownViewer = require(Parent.Markdown).Components.MarkdownViewer
+local MarkdownViewer = MarkdownModule.Components.MarkdownViewer
 local t = {}
 local config = {
 	onAnswerSelectedByToolCallId = {},

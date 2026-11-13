@@ -1,5 +1,6 @@
 ﻿local Foundation = script:FindFirstAncestor("Foundation")
 local Parent = Foundation.Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
 local ReactModule = require(Parent.React)
 local ButtonVariantModule = require(Foundation.Enums.ButtonVariant)
 local InputSizeModule = require(Foundation.Enums.InputSize)
@@ -10,7 +11,7 @@ local ViewModule = require(Foundation.Components.View)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local ThumbnailModule = require(script.Parent.Thumbnail)
 local UseUpsellContentVariantsModule = require(script.Parent.useUpsellContentVariants)
-local Icon = require(Parent.BuilderIcons).Icon
+local Icon = BuilderIconsModule.Icon
 
 return function(p1)
 	-- upvalues: UseTokensModule (copy), UseUpsellContentVariantsModule (copy), ReactModule (copy), ViewModule (copy), ThumbnailModule (copy), TextModule (copy), IconModule (copy), Icon (copy), IconButtonModule (copy), ButtonVariantModule (copy), InputSizeModule (copy)

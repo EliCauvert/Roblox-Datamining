@@ -1,9 +1,11 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
 local Players = game:GetService("Players")
+local LocalizationModule = require(Parent.Localization)
 local MomentsCommonModule = require(Parent.MomentsCommon)
 local _ = require(Parent.MomentsTypes)
 local ReactModule = require(Parent.React)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local VerticalPagerModule = require(Moments.Components.VerticalPager)
@@ -14,12 +16,12 @@ local GetPostInsightsCoachmarkSessionStoreModule = require(script.Parent.getPost
 local GetPostInsightsPageStoreModule = require(script.Parent.getPostInsightsPageStore)
 local PostInsightsCoachmarkImpressionCacheModule = require(script.Parent.postInsightsCoachmarkImpressionCache)
 local PostInsightsStringsModule = require(script.Parent.postInsightsStrings)
-local GetCommentsSheetStoreModule = if require(Parent.SharedFlags).FFlagMomentsComments then require(Moments.Components.Comments.Sheet.getCommentsSheetStore) else nil
+local GetCommentsSheetStoreModule = if SharedFlagsModule.FFlagMomentsComments then require(Moments.Components.Comments.Sheet.getCommentsSheetStore) else nil
 local EventNames = MomentsCommonModule.Analytics.EventNames
 local RecommendationSource = MomentsCommonModule.Analytics.RecommendationSource
 local GetFIntMomentsCoachmarkMaxImpressionsFunction = MomentsCommonModule.Flags.GetFIntMomentsCoachmarkMaxImpressions
 local GetFIntMomentsCoachmarkAutoDismissSecondsFunction = MomentsCommonModule.Flags.GetFIntMomentsCoachmarkAutoDismissSeconds
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 
 local function onImpression()
 	-- upvalues: FirePostInsightsCoachmarkEventModule (copy), EventNames (copy)

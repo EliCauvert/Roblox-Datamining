@@ -1,12 +1,14 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local CreatorAnalyticsModule = require(Parent.DataHydration.CreatorAnalytics)
 local AnalyticsKeysModule = require(BuildExperience.Analytics.AnalyticsKeys)
 local AnalyticsUnitModule = require(BuildExperience.Analytics.AnalyticsUnit)
 local AnalyticsMetricModule = require(BuildExperience.Analytics.AnalyticsMetric)
 local GoalLockedActionIdModule = require(BuildExperience.Analytics.Goals.GoalLockedActionId)
 local GoalMetricSummarySourcesModule = require(BuildExperience.Analytics.Goals.GoalMetricSummarySources)
 local _ = require(BuildExperience.Analytics.Goals.GoalTypes)
-local MetricId = require(Parent.DataHydration.CreatorAnalytics).MetricId
+local MetricId = CreatorAnalyticsModule.MetricId
 local config = {
 	Charts = AnalyticsKeysModule.ANALYTICS_ACQUISITION_SOURCE_CHARTS,
 	ContinueToPlay = AnalyticsKeysModule.ANALYTICS_ACQUISITION_SOURCE_CONTINUE_TO_PLAY,
@@ -179,7 +181,7 @@ return {
 					kind = "number",
 					id = "DailyRevenue",
 					titleKey = AnalyticsKeysModule.ANALYTICS_OVERVIEW_METRIC_TITLE_ROBUX_SPENT,
-					icon = require(Parent.Foundation).Enums.IconName.Robux,
+					icon = FoundationModule.Enums.IconName.Robux,
 					source = GoalMetricSummarySourcesModule.summary({ metric = MetricId.DailyRevenue }),
 					format = { unit = AnalyticsUnitModule.Scalar }
 				},

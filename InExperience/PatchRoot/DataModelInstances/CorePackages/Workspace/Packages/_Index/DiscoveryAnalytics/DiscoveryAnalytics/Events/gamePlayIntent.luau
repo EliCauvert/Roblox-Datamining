@@ -31,6 +31,17 @@ local Config1 = if FFlagLuaAppGameEventsTelemetryServiceShadowTraffic then {
 	lastUpdated = { 26, 3, 4 }
 } else nil
 local StrictInterfaceResult = TModule.strictInterface({
+	placeId = TModule.union(TModule.string, TModule.number),
+	rootPlaceId = TModule.union(TModule.number, TModule.string),
+	referralSource = TModule.optional(TModule.string),
+	universeId = TModule.string,
+	launchData = TModule.optional(TModule.string),
+	tileType = TModule.optional(TModule.string),
+	nativeAdData = TModule.optional(TModule.string),
+	pageName = TModule.optional(TModule.string),
+	actionType = if FFlagLuaAppDemoModePlayButtonTelemetry then TModule.optional(TModule.string) else nil
+})
+local StrictInterfaceResult1 = TModule.strictInterface({
 	placeId = TModule.string,
 	rootPlaceId = TModule.number,
 	universeId = TModule.string,
@@ -54,43 +65,49 @@ local StrictInterfaceResult = TModule.strictInterface({
 	analyticsData = TModule.optional(TModule.table),
 	actionType = if FFlagLuaAppDemoModePlayButtonTelemetry then TModule.optional(TModule.string) else nil
 })
-local StrictInterfaceResult1 = if FFlagTraversalHistoryDiscoveryTelemetry then TModule.strictInterface({
+local config = {
+	placeId = TModule.string,
+	rootPlaceId = TModule.number,
+	universeId = TModule.string,
+	sortEntryIndex = TModule.string,
+	gameSetTypeId = TModule.string,
+	sortIndex = TModule.string,
+	rowOnPage = TModule.optional(TModule.number),
+	topicDataPosition = TModule.optional(TModule.number),
+	nativeAdData = TModule.optional(TModule.string),
+	pageName = TModule.optional(TModule.string),
+	launchData = TModule.optional(TModule.string),
+	tileType = TModule.string,
+	positionInRow = TModule.optional(TModule.number),
+	rowNumber = TModule.optional(TModule.number),
+	feedRowNumber = TModule.optional(TModule.number),
+	actionType = if FFlagLuaAppDemoModePlayButtonTelemetry then TModule.optional(TModule.string) else nil
+}
+local config1 = {
+	placeId = TModule.string,
+	rootPlaceId = TModule.number,
+	universeId = TModule.string,
+	referralSource = TModule.string,
+	sortIndex = TModule.string,
+	sortEntryIndex = TModule.string,
+	gameSetTypeId = TModule.string,
+	gameSetTargetId = TModule.optional(TModule.number),
+	topicDataPosition = TModule.optional(TModule.number),
+	nativeAdData = TModule.optional(TModule.string),
+	pageName = TModule.optional(TModule.string),
+	tileType = TModule.string,
+	actionType = if FFlagLuaAppDemoModePlayButtonTelemetry then TModule.optional(TModule.string) else nil
+}
+local StrictInterfaceResult2 = if FFlagTraversalHistoryDiscoveryTelemetry then TModule.strictInterface({
 	placeId = TModule.string,
 	universeId = TModule.string,
 	sortEntryIndex = TModule.string,
 	pageName = TModule.optional(TModule.string)
 }) else nil
-local config = {
-	PlayButton = TModule.strictInterface({
-		placeId = TModule.union(TModule.string, TModule.number),
-		rootPlaceId = TModule.union(TModule.number, TModule.string),
-		referralSource = TModule.optional(TModule.string),
-		universeId = TModule.string,
-		launchData = TModule.optional(TModule.string),
-		tileType = TModule.optional(TModule.string),
-		nativeAdData = TModule.optional(TModule.string),
-		pageName = TModule.optional(TModule.string),
-		actionType = if FFlagLuaAppDemoModePlayButtonTelemetry then TModule.optional(TModule.string) else nil
-	}),
-	[ConstantsModule.Context.ExperienceTile] = StrictInterfaceResult,
-	[ConstantsModule.Context.SearchExperienceTile] = TModule.strictInterface({
-		placeId = TModule.string,
-		rootPlaceId = TModule.number,
-		universeId = TModule.string,
-		sortEntryIndex = TModule.string,
-		gameSetTypeId = TModule.string,
-		sortIndex = TModule.string,
-		rowOnPage = TModule.optional(TModule.number),
-		topicDataPosition = TModule.optional(TModule.number),
-		nativeAdData = TModule.optional(TModule.string),
-		pageName = TModule.optional(TModule.string),
-		launchData = TModule.optional(TModule.string),
-		tileType = TModule.string,
-		positionInRow = TModule.optional(TModule.number),
-		rowNumber = TModule.optional(TModule.number),
-		feedRowNumber = TModule.optional(TModule.number),
-		actionType = if FFlagLuaAppDemoModePlayButtonTelemetry then TModule.optional(TModule.string) else nil
-	}),
+local config2 = {
+	PlayButton = StrictInterfaceResult,
+	[ConstantsModule.Context.ExperienceTile] = StrictInterfaceResult1,
+	[ConstantsModule.Context.SearchExperienceTile] = TModule.strictInterface(config),
 	[ConstantsModule.Context.PeopleListInHomePage] = TModule.strictInterface({
 		placeId = TModule.string,
 		rootPlaceId = TModule.number,
@@ -145,23 +162,9 @@ local config = {
 		rootPlaceId = TModule.optional(TModule.string),
 		joinAttemptId = TModule.string
 	}),
-	[ConstantsModule.Context.HoldToPlayLauncher] = TModule.strictInterface({
-		placeId = TModule.string,
-		rootPlaceId = TModule.number,
-		universeId = TModule.string,
-		referralSource = TModule.string,
-		sortIndex = TModule.string,
-		sortEntryIndex = TModule.string,
-		gameSetTypeId = TModule.string,
-		gameSetTargetId = TModule.optional(TModule.number),
-		topicDataPosition = TModule.optional(TModule.number),
-		nativeAdData = TModule.optional(TModule.string),
-		pageName = TModule.optional(TModule.string),
-		tileType = TModule.string,
-		actionType = if FFlagLuaAppDemoModePlayButtonTelemetry then TModule.optional(TModule.string) else nil
-	}),
-	[ConstantsModule.Context.InExpHistoryTile] = if FFlagTraversalHistoryDiscoveryTelemetry then StrictInterfaceResult1 else nil,
-	[ConstantsModule.Context.InstantPlay] = if FFlagLuaAppContinueSortInstantPlay then StrictInterfaceResult else nil
+	[ConstantsModule.Context.HoldToPlayLauncher] = TModule.strictInterface(config1),
+	[ConstantsModule.Context.InExpHistoryTile] = if FFlagTraversalHistoryDiscoveryTelemetry then StrictInterfaceResult2 else nil,
+	[ConstantsModule.Context.InstantPlay] = if FFlagLuaAppContinueSortInstantPlay then StrictInterfaceResult1 else nil
 }
 
 local function _(p1)
@@ -174,11 +177,11 @@ local function _(p1)
 end
 
 return function(p1, EventContext, JoinResult)
-	-- upvalues: config (copy), DiscoveryEventErrorLogger (copy), HttpService (copy), FFlagLuaAppGamePlayIntentEventMobileAdsId (copy), AppStorageService (copy), FFlagLuaAppMigrateGameEventsTelemetryService (copy), CryoModule (copy), TelemetryService (copy), Config (ref), GetPlatformTargetFunction (copy), FFlagLuaAppGameEventsTelemetryServiceShadowTraffic (copy), Config1 (ref)
-	if config[EventContext] == nil then
+	-- upvalues: config2 (copy), DiscoveryEventErrorLogger (copy), HttpService (copy), FFlagLuaAppGamePlayIntentEventMobileAdsId (copy), AppStorageService (copy), FFlagLuaAppMigrateGameEventsTelemetryService (copy), CryoModule (copy), TelemetryService (copy), Config (ref), GetPlatformTargetFunction (copy), FFlagLuaAppGameEventsTelemetryServiceShadowTraffic (copy), Config1 (ref)
+	if config2[EventContext] == nil then
 		DiscoveryEventErrorLogger.reportError("GamePlayIntentMissingInterface", `Missing interface for eventContext {EventContext} to type check gamePlayIntent event parameters`, { eventContext = EventContext })
 	else
-		local v1, v2 = config[EventContext](JoinResult)
+		local v1, v2 = config2[EventContext](JoinResult)
 		
 		if not v1 then
 			DiscoveryEventErrorLogger.reportError("GamePlayIntentInvalidInterface", v2)

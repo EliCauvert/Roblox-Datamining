@@ -6,11 +6,12 @@ local GetRbxthumbWithTypeSizeAndOptionsFunction = UserLibModule.Utils.getRbxthum
 local ConstantsModule = require(Parent.AppChat.Constants)
 local ImageSetLabel = require(Parent.UIBlox).Core.ImageSet.ImageSetLabel
 local GetImageDataFunction = require(Parent.RobloxAppAssets).GetImageData
+local Colors = require(Parent.Style).Colors
 local FriendIcon = RoactModule.PureComponent:extend("FriendIcon")
 FriendIcon.defaultProps = {
 	layoutOrder = 0,
 	showBackground = true,
-	maskColor = require(Parent.Style).Colors.White
+	maskColor = Colors.White
 }
 
 function FriendIcon.render(p1)

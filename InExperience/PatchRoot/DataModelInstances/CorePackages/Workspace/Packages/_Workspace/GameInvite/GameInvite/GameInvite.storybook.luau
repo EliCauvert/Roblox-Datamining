@@ -1,6 +1,7 @@
 ﻿local GameInvite = script:FindFirstAncestor("GameInvite")
 local Parent = GameInvite.Parent
 local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
 local RoactRoduxModule = require(Parent.RoactRodux)
 local RoduxModule = require(Parent.Rodux)
 local StyleModule = require(Parent.Style)
@@ -11,7 +12,7 @@ return {
 	name = "GameInvite",
 	storyRoot = GameInvite,
 	roact = ReactModule,
-	reactRoblox = require(Parent.ReactRoblox),
+	reactRoblox = ReactRobloxModule,
 	mapStory = function(Callback)
 		-- upvalues: ReactModule (copy), StyleModule (copy), RoactRoduxModule (copy), RoduxModule (copy), GameInviteReducerModule (copy), FoundationModule (copy)
 		return function(p1)

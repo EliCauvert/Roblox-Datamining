@@ -1,4 +1,5 @@
 ﻿local Parent = script:FindFirstAncestor("SduiCoreSystem").Parent
+local FoundationModule = require(Parent.Foundation)
 local SharedFlagsModule = require(Parent.SharedFlags)
 
 local function _()
@@ -7,6 +8,7 @@ end
 
 return {
 	CAPABILITY_SUPPORTS_HYDRATION_CLIENT_HINTS = true,
+	CAPABILITY_SUPPORTS_GAME_TILE_ACTIVE_FRIENDS_TREATMENT = SharedFlagsModule.FFlagSduiActiveFriendsFooterTreatment,
 	CAPABILITY_SUPPORTS_MULTI_SIZE_POOL = SharedFlagsModule.FFlagSduiPerSectionPoolSizing,
 	CAPABILITY_SUPPORTS_EDP_PERSISTENT_ACTION_BAR_PLAY_BUTTON = SharedFlagsModule.FFlagSduiEdpPersistentActionBarPlayButton,
 	CAPABILITY_SUPPORTS_EDP_COMMUNITY_SECTION = SharedFlagsModule.FFlagSduiCommunitySectionSupport,
@@ -39,7 +41,7 @@ return {
 	end)(),
 	CAPABILITY_SUPPORTS_EVENT_RSVP_FACE_PILE = SharedFlagsModule.FFlagSduiEventRsvpFacePile,
 	CAPABILITY_SUPPORTS_SCALED_PLAY_BUTTON_AND_IMAGE_SIZES = SharedFlagsModule.FFlagSduiScalePlayButtonAndImageSizes,
-	CAPABILITY_SUPPORTS_EXTENDED_CLIENT_CAPABILITIES = SharedFlagsModule.FFlagSduiAdvertiseRuntimeSupportSets,
+	CAPABILITY_SUPPORTS_EXTENDED_CLIENT_CAPABILITIES = true,
 	CAPABILITY_SUPPORTS_PREFERRED_TEXT_SIZE_LINE_BUDGETS = SharedFlagsModule.FFlagSduiPreferredTextSizeLineBudgets,
 	CAPABILITY_SUPPORTS_CONTAINER_QUERIES = SharedFlagsModule.FFlagSduiContainerQueries,
 	CAPABILITY_SUPPORTS_EDP_EARLY_ACCESS_UPSELL = SharedFlagsModule.FFlagEnableGameJoinEarlyAccess,
@@ -49,7 +51,7 @@ return {
 	CAPABILITY_SUPPORTS_GROUP_ANNOUNCEMENTS = SharedFlagsModule.FFlagGroupAnnouncementsSdui,
 	CAPABILITY_SUPPORTS_GROUP_CONTENT_REACTIONS = SharedFlagsModule.FFlagSduiReactionsComponent,
 	CAPABILITY_SUPPORTS_GROUP_FORUM_POST_TEMPLATE = SharedFlagsModule.FFlagGroupForumPostTemplate and SharedFlagsModule.FFlagSduiMarkdownTextComponentEnabled,
-	CAPABILITY_SUPPORTS_FOUNDATION_BADGE_OVERMEDIA_LIGHT = require(Parent.Foundation).Utility.Flags.FoundationBadgeOverMediaAdaptive,
+	CAPABILITY_SUPPORTS_FOUNDATION_BADGE_OVERMEDIA_LIGHT = FoundationModule.Utility.Flags.FoundationBadgeOverMediaAdaptive,
 	CAPABILITY_SUPPORTS_FOUNDATION_BADGE_SHAPE = SharedFlagsModule.FFlagSduiBadgeShape,
 	CAPABILITY_SUPPORTS_EDP_MEDIA_GALLERY_MOMENT_VIDEO = SharedFlagsModule.FFlagLuaAppEdpMomentVideo and SharedFlagsModule.FFlagLuaAppVideoPlayerTrimAndMusic,
 	CAPABILITY_SUPPORTS_SAFETY_RESOURCE_BANNER = SharedFlagsModule.FFlagSafetyResourceBannerTelemetry and SharedFlagsModule.FFlagLuaAppSduiOpenExternalLinkAction,

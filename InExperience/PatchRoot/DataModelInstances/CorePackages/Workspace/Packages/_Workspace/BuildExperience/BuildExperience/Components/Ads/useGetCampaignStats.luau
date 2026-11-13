@@ -1,8 +1,9 @@
 ﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
 local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
 local CampaignStatsModule = require(Parent.DataHydration.CampaignStats)
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
-local CreateComputedFunction = require(Parent.Signals).createComputed
+local CreateComputedFunction = SignalsModule.createComputed
 local config = {
 	plays = false,
 	adClicks = false,

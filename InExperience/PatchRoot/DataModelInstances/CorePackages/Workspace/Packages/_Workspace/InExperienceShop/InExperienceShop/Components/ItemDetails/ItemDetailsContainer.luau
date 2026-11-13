@@ -2,9 +2,10 @@
 local Parent = InExperienceShop.Parent
 local ReactModule = require(Parent.React)
 local View = require(Parent.Foundation).View
+local SharedFlagsModule = require(Parent.SharedFlags)
 local ItemDetailsViewModule = require(script.Parent.ItemDetailsView)
 local UseItemDetailsViewModelModule = require(script.Parent.useItemDetailsViewModel)
-local ShopAbuseReportOverlayModule = if require(Parent.SharedFlags).FFlagEnableReportingFlowForExperienceShop then require(InExperienceShop.Components.ShopAbuseReportOverlay) else nil
+local ShopAbuseReportOverlayModule = if SharedFlagsModule.FFlagEnableReportingFlowForExperienceShop then require(InExperienceShop.Components.ShopAbuseReportOverlay) else nil
 
 return function(p1)
 	-- upvalues: UseItemDetailsViewModelModule (copy), ReactModule (copy), View (copy), ItemDetailsViewModule (copy), ShopAbuseReportOverlayModule (copy)

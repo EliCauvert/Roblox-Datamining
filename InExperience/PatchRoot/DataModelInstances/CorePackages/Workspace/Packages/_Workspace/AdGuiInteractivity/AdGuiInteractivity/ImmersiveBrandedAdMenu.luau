@@ -3,13 +3,14 @@ local AdGuiInteractivity = script:FindFirstAncestor("AdGuiInteractivity")
 local Parent = AdGuiInteractivity.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
 local ImmersiveBrandedAdWhyThisAdDialogModule = require(AdGuiInteractivity.ImmersiveBrandedAdWhyThisAdDialog)
 local ImmersiveBrandedAdReportAdDialogModule = require(AdGuiInteractivity.ImmersiveBrandedAdReportAdDialog)
 local AdsInteractivityTelemetryModule = require(AdGuiInteractivity.AdsInteractivityTelemetry)
 local Menu = FoundationModule.Menu
 local InputSize = FoundationModule.Enums.InputSize
 local PopoverSide = FoundationModule.Enums.PopoverSide
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local UseMeasurableRefFunction = FoundationModule.Hooks.useMeasurableRef
 
 return function(p1)

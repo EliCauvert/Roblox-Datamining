@@ -13,6 +13,7 @@ return ReactModule.memo(function(Frame)
 		defaultRewrittenLabelText = "CoreScripts.TextChat.ChatWindow.RewrittenLabel",
 		rewrittenLabelText = FStringInExpChatRewriteLabelKeyModule
 	})
+	local RewrittenLabelText = if UseLocalizationResult.rewrittenLabelText and UseLocalizationResult.rewrittenLabelText ~= "" then UseLocalizationResult.rewrittenLabelText else UseLocalizationResult.defaultRewrittenLabelText
 	local MapResult = Frame.textTransparency:map(function(p1: number): boolean
 		return p1 < 1
 	end)
@@ -26,7 +27,7 @@ return ReactModule.memo(function(Frame)
 			tag = "size-0-0 auto-xy text-caption-small text-align-x-left",
 			LayoutOrder = 1,
 			RichText = true,
-			Text = "(" .. (if UseLocalizationResult.rewrittenLabelText and UseLocalizationResult.rewrittenLabelText ~= "" then UseLocalizationResult.rewrittenLabelText else UseLocalizationResult.defaultRewrittenLabelText) .. ")",
+			Text = "(" .. RewrittenLabelText .. ")",
 			textStyle = {
 				Color3 = UseTokensResult.Color.Content.Muted.Color3,
 				Transparency = MergeBindableScalarModule(UseTokensResult.Color.Content.Muted.Transparency, Frame.textTransparency)

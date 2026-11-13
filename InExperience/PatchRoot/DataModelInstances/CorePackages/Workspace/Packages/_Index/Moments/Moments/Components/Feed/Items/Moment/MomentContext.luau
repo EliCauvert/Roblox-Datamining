@@ -1,10 +1,11 @@
 ﻿local Parent = script:FindFirstAncestor("Moments").Parent
 local ReactModule = require(Parent.React)
+local MomentsCommonModule = require(Parent.MomentsCommon)
 local ReactOtterModule = require(Parent.ReactOtter)
 local SignalsModule = require(Parent.Signals)
 local GetFFlagMomentsRenderPostAssetsModule = require(Parent.MomentsCommon.GetFFlagMomentsRenderPostAssets)
 local CreateMomentStoreModule = require(script.Parent.createMomentStore)
-local MediaPreloadProvider = require(Parent.MomentsCommon).Media.MediaPreloadProvider
+local MediaPreloadProvider = MomentsCommonModule.Media.MediaPreloadProvider
 local config = { duration = 0.08, easingStyle = Enum.EasingStyle.Quad }
 local Context = ReactModule.createContext(nil)
 

@@ -1,5 +1,6 @@
 ﻿local AppChat = script:FindFirstAncestor("AppChat")
 local Parent = AppChat.Parent
+local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
 local SocialCarouselModule = require(Parent.SocialCarousel)
@@ -10,8 +11,9 @@ local ConversationListItemKindModule = require(script.Parent.ConversationListIte
 local ConversationRowModule = require(script.Parent.ConversationRow.ConversationRow)
 local ConversationRowBindingHostModule = require(script.Parent.ConversationRow.ConversationRowBindingHost)
 local PartyQuickStartContainerModule = require(script.Parent.PartyQuickStartContainer)
+local FFlagAppChatUseBindingViewRecyclerConversationRowModule = require(AppChat.Flags.FFlagAppChatUseBindingViewRecyclerConversationRow)
 local Constants = SocialCarouselModule.Constants
-local View = require(Parent.Foundation).View
+local View = FoundationModule.View
 local config = {
 	readiness = ViewRecyclerModule.RecyclableViewReadiness.ReadyOnCommit
 }
@@ -74,7 +76,7 @@ local Frozen = table.freeze({
 			ChatLandingModal = ReactModule.createElement(ChatLandingModalContainerModule)
 		})
 	end),
-	[ConversationListItemKindModule.Conversation] = if require(AppChat.Flags.FFlagAppChatUseBindingViewRecyclerConversationRow) then RecyclableView1 else RecyclableView,
+	[ConversationListItemKindModule.Conversation] = if FFlagAppChatUseBindingViewRecyclerConversationRowModule then RecyclableView1 else RecyclableView,
 	[ConversationListItemKindModule.GroupLink] = ViewRecyclerModule.createRecyclableView(function(p1)
 		-- upvalues: SignalsReactModule (copy), ReactModule (copy), ConversationGroupsEntryContainerModule (copy)
 		return ReactModule.createElement(ConversationGroupsEntryContainerModule, {

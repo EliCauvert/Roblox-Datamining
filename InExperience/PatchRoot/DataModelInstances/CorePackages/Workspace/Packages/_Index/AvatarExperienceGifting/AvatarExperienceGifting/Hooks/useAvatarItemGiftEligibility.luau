@@ -1,8 +1,9 @@
 ﻿local AvatarExperienceGifting = script:FindFirstAncestor("AvatarExperienceGifting")
 local Parent = AvatarExperienceGifting.Parent
 local ReactModule = require(Parent.React)
+local GiftingModule = require(Parent.Gifting)
 local BuildGiftItemModule = require(AvatarExperienceGifting.Utils.buildGiftItem)
-local UseGiftEligibilityFunction = require(Parent.Gifting).Hooks.useGiftEligibility
+local UseGiftEligibilityFunction = GiftingModule.Hooks.useGiftEligibility
 
 return function(p1, p2)
 	-- upvalues: ReactModule (copy), BuildGiftItemModule (copy), UseGiftEligibilityFunction (copy)

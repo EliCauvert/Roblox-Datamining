@@ -3,9 +3,11 @@ local Parent = SquadsCore.Parent
 local SquadRootViewTypeModule = require(SquadsCore.Enums.SquadRootViewType)
 local _ = require(Parent.LuauPolyfill)
 local PromiseModule = require(Parent.Promise)
+local ReactModule = require(Parent.React)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local _ = require(SquadsCore.Enums.SquadExperienceInviteSource)
 
-return (require(Parent.React).createContext({
+return (ReactModule.createContext({
 	showGroupOSADialog = nil,
 	closeSquadPrompt = function() end,
 	createConversation = function(_, _, _, _)
@@ -16,7 +18,7 @@ return (require(Parent.React).createContext({
 		end
 	end,
 	createFriendConversation = function(_, _) end,
-	createExperienceInvite = if require(Parent.SharedFlags).FFlagEnableSquadRegroupExperimentation then function(_, _)
+	createExperienceInvite = if SharedFlagsModule.FFlagEnableSquadRegroupExperimentation then function(_, _)
 		-- upvalues: PromiseModule (copy)
 		return function(_)
 			-- upvalues: PromiseModule (upval)

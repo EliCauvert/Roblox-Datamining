@@ -1,12 +1,13 @@
 ﻿local AppChat = script:FindFirstAncestor("AppChat")
 local Parent = AppChat.Parent
 local DataHydrationModule = require(Parent.DataHydration)
+local MomentsTypesModule = require(Parent.MomentsTypes)
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
 local GetMomentDetailsStoreModule = require(AppChat.Stores.GetMomentDetailsStore)
 local MomentDetailsStatusModule = require(script.Parent.MomentDetailsStatus)
 local FFlagAppChatMomentShareCardEdgeCasesModule = require(AppChat.Flags.FFlagAppChatMomentShareCardEdgeCases)
-local MomentStatus = require(Parent.MomentsTypes).Enums.MomentStatus
+local MomentStatus = MomentsTypesModule.Enums.MomentStatus
 local config = { metadata = {} }
 
 return function(p1, p2)

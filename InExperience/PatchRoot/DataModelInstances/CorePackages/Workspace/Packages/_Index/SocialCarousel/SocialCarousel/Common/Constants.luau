@@ -1,6 +1,7 @@
 ﻿local SocialCarousel = script:FindFirstAncestor("SocialCarousel")
+local FFlagSocialCarouselUpdateVerticalSpacingModule = require(SocialCarousel.Flags.FFlagSocialCarouselUpdateVerticalSpacing)
 local FFlagSocialCarouselShareQREnabled = require(SocialCarousel.Parent.SharedFlags).FFlagSocialCarouselShareQREnabled
-local v1: number = if require(SocialCarousel.Flags.FFlagSocialCarouselUpdateVerticalSpacing) then 38 else 45
+local v1: number = if FFlagSocialCarouselUpdateVerticalSpacingModule then 38 else 45
 
 return {
 	TILE_ICON_SCALE = 0.5,

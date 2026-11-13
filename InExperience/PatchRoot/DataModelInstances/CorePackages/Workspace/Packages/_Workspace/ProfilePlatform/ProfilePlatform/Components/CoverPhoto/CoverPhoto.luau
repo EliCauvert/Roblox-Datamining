@@ -30,6 +30,7 @@ return function(p1)
 		UseMemoResult
 	})
 	local Offset = UseMemoResult1 - 100
+	local YOffset = UseMemoResult1 - p1.parallaxOffset
 	local OffsetDelta = Offset - p1.parallaxOffset
 	
 	return ReactModule.createElement(View, {
@@ -43,7 +44,7 @@ return function(p1)
 		}, {
 			CoverPhotoWrapper = ReactModule.createElement(View, {
 				ClipsDescendants = true,
-				Size = UDim2.new(1, 0, 0, UseMemoResult1 - p1.parallaxOffset)
+				Size = UDim2.new(1, 0, 0, YOffset)
 			}, {
 				CoverPhoto = ReactModule.createElement(LoadableImage, {
 					BackgroundTransparency = 1,

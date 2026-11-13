@@ -1,8 +1,9 @@
 ﻿local Parent = script.Parent.Parent
 local ItemTypeModule = require(Parent.Enums.ItemType)
 local PurchaseErrorModule = require(Parent.Enums.PurchaseError)
+local SymbolModule = require(Parent.Symbols.Symbol)
 local KeyMappingsModule = require(script.Parent.KeyMappings)
-local FormattedParam = require(Parent.Symbols.Symbol).named("FormattedParam")
+local FormattedParam = SymbolModule.named("FormattedParam")
 
 local function _(p1): boolean
 	-- upvalues: FormattedParam (copy)

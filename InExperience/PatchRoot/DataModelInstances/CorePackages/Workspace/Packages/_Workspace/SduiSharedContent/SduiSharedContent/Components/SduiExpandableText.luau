@@ -1,8 +1,10 @@
 ﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
 local ReactModule = require(Parent.React)
+local AppBloxModule = require(Parent.AppBlox)
+local FoundationModule = require(Parent.Foundation)
 local ReportUnifiedLoggingActionFunction = require(Parent.SduiCoreSystem).reportUnifiedLoggingAction
-local ExpandableText = require(Parent.AppBlox).ExpandableText
-local View = require(Parent.Foundation).View
+local ExpandableText = AppBloxModule.ExpandableText
+local View = FoundationModule.View
 
 return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), ReportUnifiedLoggingActionFunction (copy), View (copy), ExpandableText (copy)

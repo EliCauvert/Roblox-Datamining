@@ -3,13 +3,14 @@ local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
 local CryoModule = require(Songbird.Parent.Cryo)
 local LoggingProtocolModule = require(Songbird.Parent.LoggingProtocol)
 local _ = require(Songbird.types)
+local GetFIntSongbirdTelemetryThrottleModule = require(Songbird.Flags.getFIntSongbirdTelemetryThrottle)
 local Default = LoggingProtocolModule.default
 local config = {
 	eventName = "NowPlayingChromeWindowAnalytics",
 	description = " Now Playing Chrome Window UI related analytics ",
 	links = "https://roblox.atlassian.net/wiki/x/I4Fcqw",
 	backends = { LoggingProtocolModule.TelemetryBackends.EventIngest },
-	throttlingPercentage = require(Songbird.Flags.getFIntSongbirdTelemetryThrottle)(),
+	throttlingPercentage = GetFIntSongbirdTelemetryThrottleModule(),
 	lastUpdated = { 24, 12, 10 }
 }
 

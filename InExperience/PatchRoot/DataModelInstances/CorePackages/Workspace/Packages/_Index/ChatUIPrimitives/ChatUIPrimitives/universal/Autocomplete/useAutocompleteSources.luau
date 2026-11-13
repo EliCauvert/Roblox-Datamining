@@ -1,8 +1,11 @@
-﻿local ReactModule = require(script:FindFirstAncestor("ChatUIPrimitives").Parent.React)
+﻿local ChatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
+local ReactModule = require(ChatUIPrimitives.Parent.React)
 local _ = require(script.Parent.AutocompleteTypes)
 local AssertUniqueSourceIdsModule = require(script.Parent.assertUniqueSourceIds)
 local TextBoxRangeModule = require(script.Parent.textBoxRange)
 local UseAutocompleteKeyboardNavigationModule = require(script.Parent.useAutocompleteKeyboardNavigation)
+local FFlagExpChatAutocompleteRematchOnCursorMoveModule = require(ChatUIPrimitives.Flags.FFlagExpChatAutocompleteRematchOnCursorMove)
+local FFlagExpChatComposerReportFocusAfterPickModule = require(ChatUIPrimitives.Flags.FFlagExpChatComposerReportFocusAfterPick)
 local config = {
 	activated = false,
 	selectedIndex = 0,
@@ -50,8 +53,8 @@ local _ = function(p2, p3)
 	return t
 end
 
-return function(p4, Current, p5)
-	-- upvalues: ReactModule (copy), config (copy), TextBoxRangeModule (copy), UseAutocompleteKeyboardNavigationModule (copy), AssertUniqueSourceIdsModule (copy)
+return function(p4, Current, p5, Current1)
+	-- upvalues: ReactModule (copy), config (copy), TextBoxRangeModule (copy), FFlagExpChatAutocompleteRematchOnCursorMoveModule (copy), FFlagExpChatComposerReportFocusAfterPickModule (copy), UseAutocompleteKeyboardNavigationModule (copy), AssertUniqueSourceIdsModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(config)
 	local UseRefResult = ReactModule.useRef(UseStateResult)
 	UseRefResult.current = UseStateResult
@@ -61,8 +64,21 @@ return function(p4, Current, p5)
 	local UseRefResult4 = ReactModule.useRef(0)
 	local UseRefResult5 = ReactModule.useRef("")
 	local UseRefResult6 = ReactModule.useRef(false)
+	local UseRefResult7 = ReactModule.useRef(0)
+	local UseRefResult8 = ReactModule.useRef(0)
+	local UseRefResult9 = ReactModule.useRef(Current1)
+	UseRefResult9.current = Current1
 	
-	local function _()
+	local function _(TextBox)
+		-- upvalues: UseRefResult9 (copy)
+		local CurrentFunction: () -> () = UseRefResult9.current
+		
+		if CurrentFunction ~= nil and TextBox:IsFocused() then
+			CurrentFunction()
+		end
+	end
+	
+	local _ = function()
 		-- upvalues: p4 (copy), TextBoxRangeModule (upval), UseRefResult4 (copy)
 		local Current = p4.current
 		
@@ -77,10 +93,14 @@ return function(p4, Current, p5)
 	end
 	
 	local _ = function(p6)
-		-- upvalues: UseRefResult6 (copy), p4 (copy), TextBoxRangeModule (upval)
+		-- upvalues: UseRefResult6 (copy), FFlagExpChatAutocompleteRematchOnCursorMoveModule (upval), UseRefResult7 (copy), p4 (copy), TextBoxRangeModule (upval), FFlagExpChatComposerReportFocusAfterPickModule (upval), UseRefResult9 (copy)
 		task.defer(function()
-			-- upvalues: UseRefResult6 (upval), p4 (upval), p6 (copy), TextBoxRangeModule (upval)
+			-- upvalues: UseRefResult6 (upval), FFlagExpChatAutocompleteRematchOnCursorMoveModule (upval), UseRefResult7 (upval), p4 (upval), p6 (copy), TextBoxRangeModule (upval), FFlagExpChatComposerReportFocusAfterPickModule (upval), UseRefResult9 (upval)
 			UseRefResult6.current = false
+			
+			if FFlagExpChatAutocompleteRematchOnCursorMoveModule then
+				UseRefResult7.current = 0
+			end
 			local Current = p4.current
 			
 			if Current == nil then return end
@@ -89,11 +109,18 @@ return function(p4, Current, p5)
 			if p6 ~= nil then
 				TextBoxRangeModule.placeCursor(Current, p6)
 			end
+			if FFlagExpChatComposerReportFocusAfterPickModule then
+				local CurrentFunction: () -> () = UseRefResult9.current
+				
+				if CurrentFunction ~= nil and Current:IsFocused() then
+					CurrentFunction()
+				end
+			end
 		end)
 	end
 	
 	local function commitRow(SelectedIndex): boolean
-		-- upvalues: UseRefResult (copy), p4 (copy), UseRefResult6 (copy), TextBoxRangeModule (upval), UseRefResult2 (copy), UseRefResult4 (copy), UseStateResult2 (copy), config (upval), UseRefResult1 (copy)
+		-- upvalues: UseRefResult (copy), p4 (copy), UseRefResult6 (copy), FFlagExpChatAutocompleteRematchOnCursorMoveModule (upval), UseRefResult7 (copy), TextBoxRangeModule (upval), FFlagExpChatComposerReportFocusAfterPickModule (upval), UseRefResult9 (copy), UseRefResult2 (copy), UseRefResult4 (copy), UseStateResult2 (copy), config (upval), UseRefResult1 (copy)
 		local Current = UseRefResult.current
 		local Row = Current.rows[SelectedIndex]
 		local Current1 = p4.current
@@ -102,8 +129,12 @@ return function(p4, Current, p5)
 			UseRefResult6.current = true
 			local v1 = nil
 			task.defer(function()
-				-- upvalues: UseRefResult6 (upval), p4 (upval), v1 (copy), TextBoxRangeModule (upval)
+				-- upvalues: UseRefResult6 (upval), FFlagExpChatAutocompleteRematchOnCursorMoveModule (upval), UseRefResult7 (upval), p4 (upval), v1 (copy), TextBoxRangeModule (upval), FFlagExpChatComposerReportFocusAfterPickModule (upval), UseRefResult9 (upval)
 				UseRefResult6.current = false
+				
+				if FFlagExpChatAutocompleteRematchOnCursorMoveModule then
+					UseRefResult7.current = 0
+				end
 				local Current = p4.current
 				
 				if Current == nil then return end
@@ -111,6 +142,13 @@ return function(p4, Current, p5)
 				
 				if v1 ~= nil then
 					TextBoxRangeModule.placeCursor(Current, v1)
+				end
+				if FFlagExpChatComposerReportFocusAfterPickModule then
+					local CurrentFunction: () -> () = UseRefResult9.current
+					
+					if CurrentFunction ~= nil and Current:IsFocused() then
+						CurrentFunction()
+					end
 				end
 			end)
 			
@@ -123,8 +161,12 @@ return function(p4, Current, p5)
 			UseRefResult6.current = true
 			local v2 = nil
 			task.defer(function()
-				-- upvalues: UseRefResult6 (upval), p4 (upval), v2 (copy), TextBoxRangeModule (upval)
+				-- upvalues: UseRefResult6 (upval), FFlagExpChatAutocompleteRematchOnCursorMoveModule (upval), UseRefResult7 (upval), p4 (upval), v2 (copy), TextBoxRangeModule (upval), FFlagExpChatComposerReportFocusAfterPickModule (upval), UseRefResult9 (upval)
 				UseRefResult6.current = false
+				
+				if FFlagExpChatAutocompleteRematchOnCursorMoveModule then
+					UseRefResult7.current = 0
+				end
 				local Current = p4.current
 				
 				if Current == nil then return end
@@ -132,6 +174,13 @@ return function(p4, Current, p5)
 				
 				if v2 ~= nil then
 					TextBoxRangeModule.placeCursor(Current, v2)
+				end
+				if FFlagExpChatComposerReportFocusAfterPickModule then
+					local CurrentFunction: () -> () = UseRefResult9.current
+					
+					if CurrentFunction ~= nil and Current:IsFocused() then
+						CurrentFunction()
+					end
 				end
 			end)
 			
@@ -154,8 +203,12 @@ return function(p4, Current, p5)
 				Current21 = UseRefResult4.current
 			until true
 			task.defer(function()
-				-- upvalues: UseRefResult6 (upval), p4 (upval), Current21 (copy), TextBoxRangeModule (upval)
+				-- upvalues: UseRefResult6 (upval), FFlagExpChatAutocompleteRematchOnCursorMoveModule (upval), UseRefResult7 (upval), p4 (upval), Current21 (copy), TextBoxRangeModule (upval), FFlagExpChatComposerReportFocusAfterPickModule (upval), UseRefResult9 (upval)
 				UseRefResult6.current = false
+				
+				if FFlagExpChatAutocompleteRematchOnCursorMoveModule then
+					UseRefResult7.current = 0
+				end
 				local Current = p4.current
 				
 				if Current == nil then return end
@@ -163,6 +216,13 @@ return function(p4, Current, p5)
 				
 				if Current21 ~= nil then
 					TextBoxRangeModule.placeCursor(Current, Current21)
+				end
+				if FFlagExpChatComposerReportFocusAfterPickModule then
+					local CurrentFunction: () -> () = UseRefResult9.current
+					
+					if CurrentFunction ~= nil and Current:IsFocused() then
+						CurrentFunction()
+					end
 				end
 			end)
 			
@@ -175,8 +235,12 @@ return function(p4, Current, p5)
 				UseStateResult2(config)
 			end
 			task.defer(function()
-				-- upvalues: UseRefResult6 (upval), p4 (upval), SpliceResult2 (copy), TextBoxRangeModule (upval)
+				-- upvalues: UseRefResult6 (upval), FFlagExpChatAutocompleteRematchOnCursorMoveModule (upval), UseRefResult7 (upval), p4 (upval), SpliceResult2 (copy), TextBoxRangeModule (upval), FFlagExpChatComposerReportFocusAfterPickModule (upval), UseRefResult9 (upval)
 				UseRefResult6.current = false
+				
+				if FFlagExpChatAutocompleteRematchOnCursorMoveModule then
+					UseRefResult7.current = 0
+				end
 				local Current = p4.current
 				
 				if Current == nil then return end
@@ -184,6 +248,13 @@ return function(p4, Current, p5)
 				
 				if SpliceResult2 ~= nil then
 					TextBoxRangeModule.placeCursor(Current, SpliceResult2)
+				end
+				if FFlagExpChatComposerReportFocusAfterPickModule then
+					local CurrentFunction: () -> () = UseRefResult9.current
+					
+					if CurrentFunction ~= nil and Current:IsFocused() then
+						CurrentFunction()
+					end
 				end
 			end)
 			
@@ -198,8 +269,12 @@ return function(p4, Current, p5)
 				UseStateResult2(config)
 				local v4 = 1
 				task.defer(function()
-					-- upvalues: UseRefResult6 (upval), p4 (upval), v4 (copy), TextBoxRangeModule (upval)
+					-- upvalues: UseRefResult6 (upval), FFlagExpChatAutocompleteRematchOnCursorMoveModule (upval), UseRefResult7 (upval), p4 (upval), v4 (copy), TextBoxRangeModule (upval), FFlagExpChatComposerReportFocusAfterPickModule (upval), UseRefResult9 (upval)
 					UseRefResult6.current = false
+					
+					if FFlagExpChatAutocompleteRematchOnCursorMoveModule then
+						UseRefResult7.current = 0
+					end
 					local Current = p4.current
 					
 					if Current == nil then return end
@@ -207,6 +282,13 @@ return function(p4, Current, p5)
 					
 					if v4 ~= nil then
 						TextBoxRangeModule.placeCursor(Current, v4)
+					end
+					if FFlagExpChatComposerReportFocusAfterPickModule then
+						local CurrentFunction: () -> () = UseRefResult9.current
+						
+						if CurrentFunction ~= nil and Current:IsFocused() then
+							CurrentFunction()
+						end
 					end
 				end)
 				
@@ -226,8 +308,12 @@ return function(p4, Current, p5)
 				Current6 = UseRefResult4.current
 			until true
 			task.defer(function()
-				-- upvalues: UseRefResult6 (upval), p4 (upval), Current6 (copy), TextBoxRangeModule (upval)
+				-- upvalues: UseRefResult6 (upval), FFlagExpChatAutocompleteRematchOnCursorMoveModule (upval), UseRefResult7 (upval), p4 (upval), Current6 (copy), TextBoxRangeModule (upval), FFlagExpChatComposerReportFocusAfterPickModule (upval), UseRefResult9 (upval)
 				UseRefResult6.current = false
+				
+				if FFlagExpChatAutocompleteRematchOnCursorMoveModule then
+					UseRefResult7.current = 0
+				end
 				local Current = p4.current
 				
 				if Current == nil then return end
@@ -235,6 +321,13 @@ return function(p4, Current, p5)
 				
 				if Current6 ~= nil then
 					TextBoxRangeModule.placeCursor(Current, Current6)
+				end
+				if FFlagExpChatComposerReportFocusAfterPickModule then
+					local CurrentFunction: () -> () = UseRefResult9.current
+					
+					if CurrentFunction ~= nil and Current:IsFocused() then
+						CurrentFunction()
+					end
 				end
 			end)
 			
@@ -254,8 +347,12 @@ return function(p4, Current, p5)
 				Current7 = UseRefResult4.current
 			until true
 			task.defer(function()
-				-- upvalues: UseRefResult6 (upval), p4 (upval), Current7 (copy), TextBoxRangeModule (upval)
+				-- upvalues: UseRefResult6 (upval), FFlagExpChatAutocompleteRematchOnCursorMoveModule (upval), UseRefResult7 (upval), p4 (upval), Current7 (copy), TextBoxRangeModule (upval), FFlagExpChatComposerReportFocusAfterPickModule (upval), UseRefResult9 (upval)
 				UseRefResult6.current = false
+				
+				if FFlagExpChatAutocompleteRematchOnCursorMoveModule then
+					UseRefResult7.current = 0
+				end
 				local Current = p4.current
 				
 				if Current == nil then return end
@@ -264,6 +361,13 @@ return function(p4, Current, p5)
 				if Current7 ~= nil then
 					TextBoxRangeModule.placeCursor(Current, Current7)
 				end
+				if FFlagExpChatComposerReportFocusAfterPickModule then
+					local CurrentFunction: () -> () = UseRefResult9.current
+					
+					if CurrentFunction ~= nil and Current:IsFocused() then
+						CurrentFunction()
+					end
+				end
 			end)
 			
 			return true
@@ -271,7 +375,7 @@ return function(p4, Current, p5)
 	end
 	
 	local UseResult = ReactModule.useCallback(function(Text)
-		-- upvalues: UseRefResult6 (copy), UseRefResult1 (copy), UseRefResult (copy), UseStateResult2 (copy), config (upval), p4 (copy), TextBoxRangeModule (upval), UseRefResult4 (copy)
+		-- upvalues: UseRefResult6 (copy), UseRefResult1 (copy), UseRefResult (copy), UseStateResult2 (copy), config (upval), p4 (copy), TextBoxRangeModule (upval), UseRefResult4 (copy), FFlagExpChatAutocompleteRematchOnCursorMoveModule (upval), UseRefResult7 (copy), FFlagExpChatComposerReportFocusAfterPickModule (upval), UseRefResult9 (copy)
 		if UseRefResult6.current then return end
 		local Current = UseRefResult1.current
 		
@@ -315,8 +419,12 @@ return function(p4, Current, p5)
 							UseStateResult2(config)
 						end
 						task.defer(function()
-							-- upvalues: UseRefResult6 (upval), p4 (upval), SpliceResult2 (copy), TextBoxRangeModule (upval)
+							-- upvalues: UseRefResult6 (upval), FFlagExpChatAutocompleteRematchOnCursorMoveModule (upval), UseRefResult7 (upval), p4 (upval), SpliceResult2 (copy), TextBoxRangeModule (upval), FFlagExpChatComposerReportFocusAfterPickModule (upval), UseRefResult9 (upval)
 							UseRefResult6.current = false
+							
+							if FFlagExpChatAutocompleteRematchOnCursorMoveModule then
+								UseRefResult7.current = 0
+							end
 							local Current = p4.current
 							
 							if Current == nil then return end
@@ -324,6 +432,13 @@ return function(p4, Current, p5)
 							
 							if SpliceResult2 ~= nil then
 								TextBoxRangeModule.placeCursor(Current, SpliceResult2)
+							end
+							if FFlagExpChatComposerReportFocusAfterPickModule then
+								local CurrentFunction: () -> () = UseRefResult9.current
+								
+								if CurrentFunction ~= nil and Current:IsFocused() then
+									CurrentFunction()
+								end
 							end
 						end)
 						
@@ -392,16 +507,24 @@ return function(p4, Current, p5)
 		end
 	end, {})
 	ReactModule.useEffect(function()
-		-- upvalues: p4 (copy), Current (copy), TextBoxRangeModule (upval), UseRefResult4 (copy)
+		-- upvalues: p4 (copy), Current (copy), TextBoxRangeModule (upval), UseRefResult4 (copy), FFlagExpChatAutocompleteRematchOnCursorMoveModule (upval), UseRefResult7 (copy), UseRefResult5 (copy), UseRefResult8 (copy), UseResult (copy)
 		local Current1 = p4.current
 		
 		if Current1 == nil or Current == nil then return end
 		local Connection = Current1:GetPropertyChangedSignal("CursorPosition"):Connect(function()
-			-- upvalues: TextBoxRangeModule (upval), Current1 (copy), UseRefResult4 (upval)
+			-- upvalues: TextBoxRangeModule (upval), Current1 (copy), UseRefResult4 (upval), FFlagExpChatAutocompleteRematchOnCursorMoveModule (upval), UseRefResult7 (upval), UseRefResult5 (upval), UseRefResult8 (upval), UseResult (upval)
 			local Cursor = TextBoxRangeModule.readCursor(Current1)
 			
 			if Cursor ~= nil then
 				UseRefResult4.current = Cursor
+				
+				if FFlagExpChatAutocompleteRematchOnCursorMoveModule and os.clock() <= UseRefResult7.current then
+					UseRefResult7.current = 0
+					
+					if Current1:IsFocused() and Current1.Text == UseRefResult5.current and Cursor ~= UseRefResult8.current then
+						UseResult(Current1.Text)
+					end
+				end
 			end
 		end)
 		
@@ -411,61 +534,74 @@ return function(p4, Current, p5)
 		end
 	end, { p4.current, Current })
 	local UseResult1 = ReactModule.useCallback(function(KeyCode)
-		-- upvalues: UseRefResult (copy), UseStateResult2 (copy), config (upval), p4 (copy), UseRefResult4 (copy), TextBoxRangeModule (upval)
+		-- upvalues: UseRefResult (copy), UseStateResult2 (copy), config (upval), FFlagExpChatAutocompleteRematchOnCursorMoveModule (upval), UseRefResult7 (copy), p4 (copy), UseRefResult4 (copy), TextBoxRangeModule (upval), FFlagExpChatComposerReportFocusAfterPickModule (upval), UseRefResult9 (copy)
 		local Current = UseRefResult.current
 		
 		if not Current.activated or #Current.rows == 0 then return end
 		if KeyCode == Enum.KeyCode.Escape then
 			UseStateResult2(config)
+			
+			if FFlagExpChatAutocompleteRematchOnCursorMoveModule then
+				UseRefResult7.current = 0
+			end
 			local Current1 = p4.current
-			local Current2 = UseRefResult4.current
+			local Current11 = UseRefResult4.current
 			task.defer(function()
-				-- upvalues: Current1 (copy), TextBoxRangeModule (upval), Current2 (copy)
+				-- upvalues: Current1 (copy), TextBoxRangeModule (upval), Current11 (copy), FFlagExpChatComposerReportFocusAfterPickModule (upval), UseRefResult9 (upval)
 				if Current1 then
 					Current1:CaptureFocus()
-					TextBoxRangeModule.placeCursor(Current1, Current2)
+					TextBoxRangeModule.placeCursor(Current1, Current11)
+					
+					if FFlagExpChatComposerReportFocusAfterPickModule then
+						local CurrentFunction: () -> () = UseRefResult9.current
+						
+						if CurrentFunction ~= nil and Current1:IsFocused() then
+							CurrentFunction()
+						end
+					end
 				end
 			end)
 			
 			return
-		end
-		local SelectedIndex: number = Current.selectedIndex
-		local CountRows = #Current.rows
-		local CountRows1 = nil
-		
-		if KeyCode == Enum.KeyCode.Up then
-			CountRows1 = if SelectedIndex <= 0 then 1 elseif SelectedIndex == 1 then CountRows else SelectedIndex - 1
-		elseif KeyCode == Enum.KeyCode.Down then
-			local NewSelectedIndex = SelectedIndex + 1
-			CountRows1 = if CountRows < NewSelectedIndex then 1 else NewSelectedIndex
 		else
-			CountRows1 = nil
-		end
-		if CountRows1 ~= nil then
-			UseStateResult2(function(p6)
-				-- upvalues: KeyCode (copy)
-				local SelectedIndex: number = p6.selectedIndex
-				local CountRows = #p6.rows
-				local CountRows1 = nil
-				
-				if KeyCode == Enum.KeyCode.Up then
-					CountRows1 = if SelectedIndex <= 0 then 1 elseif SelectedIndex == 1 then CountRows else SelectedIndex - 1
-				elseif KeyCode == Enum.KeyCode.Down then
-					local NewSelectedIndex = SelectedIndex + 1
-					CountRows1 = if CountRows < NewSelectedIndex then 1 else NewSelectedIndex
-				else
-					CountRows1 = nil
-				end
-				return if CountRows1 == nil then p6 else {
-					activated = p6.activated,
-					sections = p6.sections,
-					rows = p6.rows,
-					selectedIndex = CountRows1,
-					keyboardIndex = CountRows1
-				}
-			end)
+			local SelectedIndex: number = Current.selectedIndex
+			local CountRows = #Current.rows
+			local CountRows1 = nil
 			
-			return
+			if KeyCode == Enum.KeyCode.Up then
+				CountRows1 = if SelectedIndex <= 0 then 1 elseif SelectedIndex == 1 then CountRows else SelectedIndex - 1
+			elseif KeyCode == Enum.KeyCode.Down then
+				local NewSelectedIndex = SelectedIndex + 1
+				CountRows1 = if CountRows < NewSelectedIndex then 1 else NewSelectedIndex
+			else
+				CountRows1 = nil
+			end
+			if CountRows1 ~= nil then
+				UseStateResult2(function(p6)
+					-- upvalues: KeyCode (copy)
+					local SelectedIndex: number = p6.selectedIndex
+					local CountRows = #p6.rows
+					local CountRows1 = nil
+					
+					if KeyCode == Enum.KeyCode.Up then
+						CountRows1 = if SelectedIndex <= 0 then 1 elseif SelectedIndex == 1 then CountRows else SelectedIndex - 1
+					elseif KeyCode == Enum.KeyCode.Down then
+						local NewSelectedIndex = SelectedIndex + 1
+						CountRows1 = if CountRows < NewSelectedIndex then 1 else NewSelectedIndex
+					else
+						CountRows1 = nil
+					end
+					return if CountRows1 == nil then p6 else {
+						activated = p6.activated,
+						sections = p6.sections,
+						rows = p6.rows,
+						selectedIndex = CountRows1,
+						keyboardIndex = CountRows1
+					}
+				end)
+				
+				return
+			end
 		end
 	end, {})
 	UseAutocompleteKeyboardNavigationModule(UseStateResult.activated and #UseStateResult.rows > 0, if Current == nil then nil else UseResult1, p5)
@@ -505,8 +641,26 @@ return function(p4, Current, p5)
 		end
 	end, { Current, UseResult })
 	local UseResult2 = ReactModule.useCallback(function(Current)
-		-- upvalues: UseRefResult5 (copy), UseResult (copy)
+		-- upvalues: UseRefResult5 (copy), FFlagExpChatAutocompleteRematchOnCursorMoveModule (upval), UseRefResult6 (copy), UseRefResult7 (copy), UseRefResult8 (copy), p4 (copy), TextBoxRangeModule (upval), UseRefResult4 (copy), UseResult (copy)
 		UseRefResult5.current = Current
+		repeat
+			if not FFlagExpChatAutocompleteRematchOnCursorMoveModule or UseRefResult6.current then break end
+			UseRefResult7.current = os.clock() + 0.5
+			local Current1 = p4.current
+			local Current2 = nil
+			repeat
+				if Current1 ~= nil then
+					local Cursor = TextBoxRangeModule.readCursor(Current1)
+					
+					if Cursor ~= nil then
+						Current2 = Cursor
+						break
+					end
+				end
+				Current2 = UseRefResult4.current
+			until true
+			UseRefResult8.current = Current2
+		until true
 		UseResult(Current)
 	end, { UseResult })
 	local UseResult3 = ReactModule.useCallback(function(p6)
@@ -546,13 +700,13 @@ return function(p4, Current, p5)
 		
 		return if CurrentEntry == nil then nil else CurrentEntry.renderEntry(p6.item, p7)
 	end, {})
-	local Current1 = {}
+	local Current2 = {}
 	
 	if Current ~= nil then
 		AssertUniqueSourceIdsModule(Current.sources)
 		
 		for _, source in Current.sources do
-			Current1[source.id] = source
+			Current2[source.id] = source
 		end
 	end
 	if UseRefResult3.current ~= Current then
@@ -563,7 +717,7 @@ return function(p4, Current, p5)
 		end
 	end
 	UseRefResult1.current = Current
-	UseRefResult2.current = Current1
+	UseRefResult2.current = Current2
 	
 	return {
 		isOpen = UseStateResult.activated and #UseStateResult.rows > 0,

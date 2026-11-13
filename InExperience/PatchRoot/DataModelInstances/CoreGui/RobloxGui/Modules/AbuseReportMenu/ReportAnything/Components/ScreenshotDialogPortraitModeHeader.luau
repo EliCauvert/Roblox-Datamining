@@ -39,6 +39,7 @@ local _ = function(Text)
 		return WithStyleFunction(function(p1)
 			-- upvalues: ReactModule (upval), Text (upval), NormalizeFontFaceFunction (upval)
 			local CurrentCamera = game.Workspace.CurrentCamera
+			local XDelta: number = if CurrentCamera == nil then 300 else CurrentCamera.ViewportSize.X - 150
 			local Theme = p1.Theme
 			
 			return ReactModule.createElement("TextLabel", {
@@ -51,7 +52,7 @@ local _ = function(Text)
 				TextTransparency = Theme.TextEmphasis.Transparency,
 				TextXAlignment = Enum.TextXAlignment.Center,
 				TextYAlignment = Enum.TextYAlignment.Center,
-				Size = UDim2.new(0, if CurrentCamera == nil then 300 else CurrentCamera.ViewportSize.X - 150, 1, 0)
+				Size = UDim2.new(0, XDelta, 1, 0)
 			})
 		end)
 	end
@@ -178,6 +179,7 @@ return function(p1)
 		return WithStyleFunction(function(p2)
 			-- upvalues: ReactModule (upval), TitleText (upval), NormalizeFontFaceFunction (upval)
 			local CurrentCamera = game.Workspace.CurrentCamera
+			local XDelta: number = if CurrentCamera == nil then 300 else CurrentCamera.ViewportSize.X - 150
 			local Theme = p2.Theme
 			
 			return ReactModule.createElement("TextLabel", {
@@ -190,7 +192,7 @@ return function(p1)
 				TextTransparency = Theme.TextEmphasis.Transparency,
 				TextXAlignment = Enum.TextXAlignment.Center,
 				TextYAlignment = Enum.TextYAlignment.Center,
-				Size = UDim2.new(0, if CurrentCamera == nil then 300 else CurrentCamera.ViewportSize.X - 150, 1, 0)
+				Size = UDim2.new(0, XDelta, 1, 0)
 			})
 		end)
 	end

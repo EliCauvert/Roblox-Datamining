@@ -6,10 +6,11 @@ local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
 local AppFonts = require(CorePackages.Workspace.Packages.Style).AppFonts
 local ColorsModule = require(Parent.Colors)
 local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local VerifiedBadgesModule = require(CorePackages.Workspace.Packages.VerifiedBadges)
 local UserLibModule = require(CorePackages.Workspace.Packages.UserLib)
 local InspectAndBuyContextModule = require(Parent.Components.InspectAndBuyContext)
 local PlayerNameLabel = RoactModule.PureComponent:extend("PlayerNameLabel")
-local Verified = require(CorePackages.Workspace.Packages.VerifiedBadges).emoji.verified
+local Verified = VerifiedBadgesModule.emoji.verified
 
 function PlayerNameLabel.render(p1)
 	-- upvalues: Players (copy), UserLibModule (copy), RobloxTranslatorModule (copy), Verified (copy), RoactModule (copy), InspectAndBuyContextModule (copy), ColorsModule (copy), AppFonts (copy)

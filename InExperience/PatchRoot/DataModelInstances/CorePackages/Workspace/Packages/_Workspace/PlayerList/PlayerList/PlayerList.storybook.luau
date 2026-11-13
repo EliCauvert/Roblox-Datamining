@@ -1,6 +1,7 @@
 ﻿local Parent = script.Parent
 local Parent1 = Parent.Parent
 local ReactModule = require(Parent1.React)
+local ReactRobloxModule = require(Parent1.ReactRoblox)
 local FoundationModule = require(Parent1.Foundation)
 local FoundationProvider = FoundationModule.FoundationProvider
 local ColorMode = FoundationModule.Enums.ColorMode
@@ -15,7 +16,7 @@ return {
 	name = "PlayerList",
 	storyRoots = { Parent },
 	roact = ReactModule,
-	reactRoblox = require(Parent1.ReactRoblox),
+	reactRoblox = ReactRobloxModule,
 	mapStory = function(p1)
 		-- upvalues: FFlagPlayerListContrastingTeamTextModule (copy), ReactModule (copy), FoundationProvider (copy), config (copy), ColorMode (copy)
 		return function(p2)

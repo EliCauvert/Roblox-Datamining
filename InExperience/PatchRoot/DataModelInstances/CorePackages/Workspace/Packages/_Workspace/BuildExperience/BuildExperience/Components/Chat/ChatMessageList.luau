@@ -1,10 +1,11 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local ChatConstantsModule = require(BuildExperience.Chat.chatConstants)
 local _ = require(BuildExperience.Chat.chatTypes)
 local FFlagBuildAgentAdCampaignCardModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignCard)
-local View = require(Parent.Foundation).View
+local View = FoundationModule.View
 local ChatHistoryLoadingStateModule = require(script.Parent.ChatHistoryLoadingState)
 local ChatMessageItemModule = require(script.Parent.ChatMessageItem)
 

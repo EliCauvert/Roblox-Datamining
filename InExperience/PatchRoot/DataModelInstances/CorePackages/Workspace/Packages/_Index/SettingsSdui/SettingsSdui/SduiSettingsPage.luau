@@ -1,5 +1,7 @@
 ﻿local SettingsSdui = script:FindFirstAncestor("SettingsSdui")
 local Parent = SettingsSdui.Parent
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local CompositionTags = require(Parent.AppComposition).CompositionTags
 local ReactModule = require(Parent.React)
 local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
 local FFlagSduiSettingsFocusRef = require(Parent.SharedFlags).FFlagSduiSettingsFocusRef
@@ -8,12 +10,10 @@ local SduiSurfaceLoadTimeTracker = SduiSharedUtilitiesModule.SduiSurfaceLoadTime
 local UsePageScopeRefFunction = SduiSharedUtilitiesModule.usePageScopeRef
 local SettingsSduiConstantsModule = require(SettingsSdui.SettingsSduiConstants)
 local FetchSettingsPageModule = require(SettingsSdui.fetchSettingsPage)
-local Settings = require(Parent.RobloxAppEnums).AppPage.Settings
+local Settings = AppPage.Settings
 local ConfigKey = SettingsSduiConstantsModule.ConfigKey
 local SurfaceLoadTimeEventName = SettingsSduiConstantsModule.SurfaceLoadTimeEventName
-local Composition = {
-	layout = require(Parent.AppComposition).CompositionTags.Layout.Detail
-}
+local Composition = { layout = CompositionTags.Layout.Detail }
 
 return ReactModule.memo(function(p1)
 	-- upvalues: UsePageScopeRefFunction (copy), ConfigKey (copy), ReactModule (copy), SduiSurfaceLoadTimeTracker (copy), SurfaceLoadTimeEventName (copy), FetchSettingsPageModule (copy), SduiPageWrapperEntryPoint (copy), Settings (copy), Composition (copy), FFlagSduiSettingsFocusRef (copy)

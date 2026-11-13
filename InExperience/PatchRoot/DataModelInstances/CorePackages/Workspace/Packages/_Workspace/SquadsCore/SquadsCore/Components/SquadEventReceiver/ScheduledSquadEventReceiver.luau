@@ -11,10 +11,11 @@ local SquadToastTypeModule = require(SquadsCore.Enums.SquadToastType)
 local ReactModule = require(Parent.React)
 local RealtimeDeliveryModule = require(Parent.RealtimeDelivery)
 local ToastNotificationModule = require(Parent.ToastNotification)
+local ToastNotificationsProtocolModule = require(Parent.ToastNotificationsProtocol)
 local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local LifecycleEvents = ToastNotificationModule.LifecycleEvents
 local NotificationTypeEnum = ToastNotificationModule.ToastNotificationTypeModule.NotificationTypeEnum
-local Default = require(Parent.ToastNotificationsProtocol).ToastNotificationProtocol.default
+local Default = ToastNotificationsProtocolModule.ToastNotificationProtocol.default
 
 return function()
 	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), SquadExternalContractContextModule (copy), Default (copy), NotificationTypeEnum (copy), LifecycleEvents (copy), ConstantsModule (copy), HttpService (copy), EventNamesModule (copy), SquadToastActionsAndStatesModule (copy), SquadToastTypeModule (copy), CreateOrJoinSquadModule (copy), RealtimeDeliveryModule (copy), GetScheduledSquadsStoreModule (copy)

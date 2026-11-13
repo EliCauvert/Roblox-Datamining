@@ -4,6 +4,8 @@ local HttpService = game:GetService("HttpService")
 local ReactModule = require(Parent.React)
 local FFlagEditProfileFramesEnabled = require(Parent.SharedFlags).FFlagEditProfileFramesEnabled
 local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local LocalizationModule = require(Parent.Localization)
+local RoactUtilsModule = require(Parent.RoactUtils)
 local UseProfileFramesModule = require(AvatarExperienceProfilePictureEditor.Hooks.useProfileFrames)
 local UseUserAvatarConfigurationsModule = require(AvatarExperienceProfilePictureEditor.Hooks.useUserAvatarConfigurations)
 local UseProfileFramesGatingModule = require(AvatarExperienceProfilePictureEditor.Hooks.useProfileFramesGating)
@@ -20,8 +22,8 @@ local EditProfileImageAnalyticsModule = require(AvatarExperienceProfilePictureEd
 local _ = require(AvatarExperienceProfilePictureEditor.Common.Enums)
 local ConstantsModule = require(AvatarExperienceProfilePictureEditor.Constants)
 local TextKeysModule = require(AvatarExperienceProfilePictureEditor.Common.TextKeys)
-local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 
 return function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseLocalUserIdFunction (copy), UseUserAvatarConfigurationsModule (copy), UseProfileFramesModule (copy), UseProfileFramesGatingModule (copy), ReactModule (copy), UseEditProfileImageDraftModule (copy), UseEditProfileImageNavigationModule (copy), UseEditProfileImageEmotesModule (copy), HttpService (copy), ConstantsModule (copy), EditProfileImageAnalyticsModule (copy), OpenProfileFramesSubscriptionUpsellModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), BuildEditProfileImageAssetItemsModule (copy), UseEditProfileImageSaveModule (copy), FFlagEditProfileFramesEnabled (copy), EditProfileImageHelpersModule (copy), UseFocusOnMountEffectFunction (copy)

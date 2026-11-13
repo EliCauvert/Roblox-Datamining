@@ -1,6 +1,7 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
 local FoundationModule = require(Parent.Foundation)
+local MarkdownModule = require(Parent.Markdown)
 local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
@@ -17,7 +18,7 @@ local View = FoundationModule.View
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local FillBehavior = FoundationModule.Enums.FillBehavior
 local InputSize = FoundationModule.Enums.InputSize
-local MarkdownViewer = require(Parent.Markdown).Components.MarkdownViewer
+local MarkdownViewer = MarkdownModule.Components.MarkdownViewer
 
 local function AgentPlanSheet(p1)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FoundationModule (copy), ReactModule (copy), GetMarkdownRendererPropsModule (copy), Sheet (copy), Text (copy), View (copy), MarkdownViewer (copy)

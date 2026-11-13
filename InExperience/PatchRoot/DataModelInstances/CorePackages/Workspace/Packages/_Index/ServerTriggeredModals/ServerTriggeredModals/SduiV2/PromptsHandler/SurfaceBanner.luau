@@ -1,6 +1,7 @@
 ﻿local ServerTriggeredModals = script:FindFirstAncestor("ServerTriggeredModals")
 local Parent = ServerTriggeredModals.Parent
 local ReactModule = require(Parent.React)
+local AppNavBarModule = require(Parent.AppNavBar)
 local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
 local SignalsReactModule = require(Parent.SignalsReact)
 local RobloxAppHooksModule = require(Parent.RobloxAppHooks)
@@ -9,7 +10,7 @@ local SduiFeatureEntryPoint = SduiSharedUtilitiesModule.SduiFeatureEntryPoint
 local UseComponentConfigFunction = SduiSharedUtilitiesModule.useComponentConfig
 local UseStatusBarHeightFunction = RobloxAppHooksModule.useStatusBarHeight
 local UseTopBarHeightFunction = RobloxAppHooksModule.useTopBarHeight
-local VisibilityControl = require(Parent.AppNavBar).VisibilityControl
+local VisibilityControl = AppNavBarModule.VisibilityControl
 local FFlagPromptsActionEventLoggingModule = require(ServerTriggeredModals.Flags.FFlagPromptsActionEventLogging)
 
 local function noopGetter()

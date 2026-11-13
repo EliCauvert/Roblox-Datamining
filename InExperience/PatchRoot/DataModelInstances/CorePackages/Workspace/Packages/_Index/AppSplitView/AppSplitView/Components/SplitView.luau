@@ -25,9 +25,10 @@ end
 local Computed = SignalsModule.createComputed(function(p1)
 	-- upvalues: GetRegionOverridesFunction (copy), RegionName (copy), DisplayModule (copy)
 	local RegionOverrides = if GetRegionOverridesFunction and RegionName then GetRegionOverridesFunction(RegionName.NavigationRegion) else nil
+	local WidthScale = if RegionOverrides and RegionOverrides.widthScale then RegionOverrides.widthScale else 0
 	local DisplayStore = DisplayModule.GetDisplayStore(p1)
 	
-	return (if RegionOverrides and RegionOverrides.widthScale then RegionOverrides.widthScale else 0) * (if DisplayStore.getPlatformScale then DisplayStore.getPlatformScale(p1) else 1)
+	return WidthScale * (if DisplayStore.getPlatformScale then DisplayStore.getPlatformScale(p1) else 1)
 end)
 local Computed1 = SignalsModule.createComputed(function(p1)
 	-- upvalues: GetRegionOverridesFunction (copy), RegionName (copy), DisplayModule (copy)
@@ -87,7 +88,7 @@ return ReactModule.memo(function(p1)
 		end
 	end
 	local IsSupportResizerAbovePane = p1.supportResizerAbovePane == true
-	local ZIndex: number = if IsSupportPaneModeMatch then 4 elseif NoIsSupportPaneModeMatch2 and not HasOnSupportPaneWidthChanged and not IsSupportResizerAbovePane then 3 else 1
+	local ZIndex: number = if IsSupportPaneModeMatch then 4 elseif NoIsSupportPaneModeMatch2 and (not HasOnSupportPaneWidthChanged and not IsSupportResizerAbovePane) then 3 else 1
 	
 	return ReactModule.createElement(ReactModule.Fragment, nil, {
 		CompositionStyleSheet = ReactModule.createElement(CompositionStyleSheet),

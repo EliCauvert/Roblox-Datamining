@@ -1,13 +1,15 @@
 ﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
 local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local DataHydrationModule = require(Parent.DataHydration)
 local FoundationModule = require(Parent.Foundation)
+local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
 local VirtualEventsModule = require(Parent.VirtualEvents)
 local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
 local SetCentralOverlayFunction = require(Parent.CentralOverlay).Actions.SetCentralOverlay
 local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 local GetActionTelemetryFieldValueFunction = SduiCoreSystemModule.getActionTelemetryFieldValue
-local GetExperienceEventInfoStoreFunction = require(Parent.DataHydration).ExperienceEvents.getExperienceEventInfoStore
-local GetSduiPageEntrySnackbarStoreFunction = require(Parent.SduiSharedUtilities).getSduiPageEntrySnackbarStore
+local GetExperienceEventInfoStoreFunction = DataHydrationModule.ExperienceEvents.getExperienceEventInfoStore
+local GetSduiPageEntrySnackbarStoreFunction = SduiSharedUtilitiesModule.getSduiPageEntrySnackbarStore
 
 local function showRsvpSuccessToast(p1, EntryPointKey, EventName, EventTime)
 	-- upvalues: GetSduiPageEntrySnackbarStoreFunction (copy), FoundationModule (copy)

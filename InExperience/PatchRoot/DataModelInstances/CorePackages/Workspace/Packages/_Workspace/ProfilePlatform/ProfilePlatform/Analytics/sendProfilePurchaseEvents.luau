@@ -1,6 +1,7 @@
 ﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
 local Parent = ProfilePlatform.Parent
 local AvatarExperienceAnalyticsModule = require(Parent.AvatarExperienceAnalytics)
+local AvatarExperienceNavigationModule = require(Parent.AvatarExperienceNavigation)
 local _ = require(Parent.AvatarExperienceModel)
 local EnumsModule = require(ProfilePlatform.Common.Enums)
 local SendUnifiedEventLogFunction = AvatarExperienceAnalyticsModule.sendUnifiedEventLog
@@ -8,7 +9,7 @@ local SendPassthroughUnifiedEventLogFunction = AvatarExperienceAnalyticsModule.s
 local FFlagAXUnifiedEventStrictPayloads = AvatarExperienceAnalyticsModule.Flags.FFlagAXUnifiedEventStrictPayloads
 local UnifiedEventLogEnums = AvatarExperienceAnalyticsModule.UnifiedEventLogEnums
 local _ = UnifiedEventLogEnums.MarketplaceUnifiedAction
-local UnifiedLoggingSurface = require(Parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
+local UnifiedLoggingSurface = AvatarExperienceNavigationModule.Enums.UnifiedLoggingSurface
 
 return function(Action, List, Community)
 	-- upvalues: EnumsModule (copy), UnifiedLoggingSurface (copy), FFlagAXUnifiedEventStrictPayloads (copy), SendPassthroughUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), SendUnifiedEventLogFunction (copy)

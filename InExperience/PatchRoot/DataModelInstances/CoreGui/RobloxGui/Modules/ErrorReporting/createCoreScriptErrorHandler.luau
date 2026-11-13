@@ -19,9 +19,11 @@ return function(p1)
 		-- upvalues: IsReportableScript (copy), ReactModule (upval), PiiFilter (copy), RateLimiter (copy), p1 (copy)
 		if p4 == nil or not IsReportableScript(p4) then return end
 		local Unstable_parseReactErrorResult, Unstable_parseReactErrorResult2 = ReactModule.unstable_parseReactError(p2)
+		local Message = Unstable_parseReactErrorResult.message
+		local Stack = Unstable_parseReactErrorResult.stack or p3
 		local P5 = p5 or Unstable_parseReactErrorResult2
-		local CleanPiiResult = PiiFilter:cleanPii(Unstable_parseReactErrorResult.message)
-		local CleanPiiResult1 = PiiFilter:cleanPii(Unstable_parseReactErrorResult.stack or p3)
+		local CleanPiiResult = PiiFilter:cleanPii(Message)
+		local CleanPiiResult1 = PiiFilter:cleanPii(Stack)
 		local CleanPiiResult2 = if P5 == nil then nil else PiiFilter:cleanPii(P5)
 		
 		if RateLimiter ~= nil then

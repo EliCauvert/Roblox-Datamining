@@ -86,9 +86,10 @@ function LineGraph.render(p1)
 			local GetYResult = GetYFunction(Key)
 			local GetXResult2 = GetXFunction(Key)
 			local GetXResultDelta = GetXResult - GetXResult1
+			local GetXResultRatio = GetXResultDelta > 0 and (GetXResult2 - GetXResult1) / GetXResultDelta or 0
 			local MaxYDelta = MaxY - MinY
 			table.insert(List, {
-				X = GetXResultDelta > 0 and (GetXResult2 - GetXResult1) / GetXResultDelta or 0,
+				X = GetXResultRatio,
 				Y = MaxYDelta > 0 and (GetYResult - MinY) / MaxYDelta or 1,
 				data = Key
 			})

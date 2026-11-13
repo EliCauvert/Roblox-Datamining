@@ -1,5 +1,8 @@
 ﻿local Layouts = script.Parent.Layouts
-local Constants = {
+local SmallModule = require(Layouts.Small)
+local LargeModule = require(Layouts.Large)
+local TenFootModule = require(Layouts.TenFoot)
+local ConstantsModule = {
 	EmotesPerPage = 8,
 	ErrorDisplayTimeSeconds = 5,
 	FallbackLocale = "en-us",
@@ -84,10 +87,10 @@ local Constants = {
 	Colors = { White = Color3.new(1, 1, 1), Black = Color3.new(0, 0, 0) },
 	OffScreen = require(game:GetService("CorePackages").Packages.enumerate)("OffScreen", { "Top", "Bottom" })
 }
-Constants.Layouts = {
-	[Constants.Layout.Small] = require(Layouts.Small),
-	[Constants.Layout.Large] = require(Layouts.Large),
-	[Constants.Layout.TenFoot] = require(Layouts.TenFoot)
+ConstantsModule.Layouts = {
+	[ConstantsModule.Layout.Small] = SmallModule,
+	[ConstantsModule.Layout.Large] = LargeModule,
+	[ConstantsModule.Layout.TenFoot] = TenFootModule
 }
 
 local function makeTableConstant(p1, p2)
@@ -101,17 +104,17 @@ local function makeTableConstant(p1, p2)
 end
 
 for i, value in pairs({
-	Constants = Constants,
-	["Constants.Colors"] = Constants.Colors,
-	["Constants.Layout"] = Constants.Layout,
-	["Constants.LeaveMenuNoSinkInputs"] = Constants.LeaveMenuNoSinkInputs,
-	["Constants.LocalizationKeys"] = Constants.LocalizationKeys,
-	["Constants.LocalizationKeys.ErrorMessages"] = Constants.LocalizationKeys.ErrorMessages,
-	["Constants.Layouts"] = Constants.Layouts,
-	["Constants.Layouts.Small"] = Constants.Layouts[Constants.Layout.Small],
-	["Constants.Layouts.Large"] = Constants.Layouts[Constants.Layout.Large],
-	["Constants.Layouts.TenFoot"] = Constants.Layouts[Constants.Layout.TenFoot]
+	Constants = ConstantsModule,
+	["Constants.Colors"] = ConstantsModule.Colors,
+	["Constants.Layout"] = ConstantsModule.Layout,
+	["Constants.LeaveMenuNoSinkInputs"] = ConstantsModule.LeaveMenuNoSinkInputs,
+	["Constants.LocalizationKeys"] = ConstantsModule.LocalizationKeys,
+	["Constants.LocalizationKeys.ErrorMessages"] = ConstantsModule.LocalizationKeys.ErrorMessages,
+	["Constants.Layouts"] = ConstantsModule.Layouts,
+	["Constants.Layouts.Small"] = ConstantsModule.Layouts[ConstantsModule.Layout.Small],
+	["Constants.Layouts.Large"] = ConstantsModule.Layouts[ConstantsModule.Layout.Large],
+	["Constants.Layouts.TenFoot"] = ConstantsModule.Layouts[ConstantsModule.Layout.TenFoot]
 }) do
 	makeTableConstant(i, value)
 end
-return Constants
+return ConstantsModule

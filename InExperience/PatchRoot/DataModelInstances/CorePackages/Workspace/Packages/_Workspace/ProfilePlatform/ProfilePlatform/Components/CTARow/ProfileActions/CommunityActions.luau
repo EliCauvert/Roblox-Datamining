@@ -5,6 +5,7 @@ local AppPage = require(Parent.RobloxAppEnums).AppPage
 local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
 local UrlBase = require(Parent.UrlBuilder).UrlBase
 local Default = require(Parent.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
+local Url = require(Parent.Http).Url
 local SetCurrentToastMessageFunction = require(Parent.ToastRodux).Actions.SetCurrentToastMessage
 local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
 local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
@@ -20,7 +21,7 @@ local _ = require(ProfilePlatform.Components.CTARow.Types)
 local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
 local MakeViewGroupPageModule = require(ProfilePlatform.Utils.makeViewGroupPage)
 local ProfileTypes = EnumsModule.ProfileTypes
-local ShareName: string = `{require(Parent.Http).Url.BASE_URL}share/g/%s`
+local ShareName: string = `{Url.BASE_URL}share/g/%s`
 
 return {
 	[EnumsModule.ProfileActions.CopyLink] = function(p1)

@@ -210,6 +210,7 @@ return ReactModule.memo(function(p1)
 	local UseCanAccessPartyModuleResult = UseCanAccessPartyModule()
 	local NewSize = if NoUseIsUserPendingModuleResult then UseTokensResult.Size.Size_200 + UseTokensResult.Gap.XSmall else 0
 	local Right = UseChatPagePaddingModuleResult.right
+	local NewRight = if UseCanAccessPartyModuleResult and HasGroupUp then Right + Size1900 elseif FFlagAppChatTimestampInSubtitleModule then if NoUseIsUserPendingModuleResult then UseTokensResult.Gap.Medium + UseTokensResult.Size.Size_200 else 0 else UseMemoResult + NewSize + Right
 	local Element = if UseCanAccessPartyModuleResult and HasGroupUp and Conversation.id then ReactModule.createElement(SquadComponentAccessWrapperModule, { parentChannelId = Conversation.id }, {
 		ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
@@ -245,7 +246,7 @@ return ReactModule.memo(function(p1)
 			hideLeftAvatarPadding = true,
 			Size = UDim2.new(1, 0, 0, JoinResult.entryHeight),
 			conversation = JoinResult.conversation,
-			childWidth = if UseCanAccessPartyModuleResult and HasGroupUp then Right + Size1900 elseif FFlagAppChatTimestampInSubtitleModule then if NoUseIsUserPendingModuleResult then UseTokensResult.Gap.Medium + UseTokensResult.Size.Size_200 else 0 else UseMemoResult + NewSize + Right,
+			childWidth = NewRight,
 			subTitleText = if GetFFlagDebugAppChatModule() then JoinResult.conversation.id else JoinResult.conversation.lastMessageContent,
 			subTitleTimestamp = UseRelativeTimestampBindingModuleResult1,
 			onActivated = UseResult3,

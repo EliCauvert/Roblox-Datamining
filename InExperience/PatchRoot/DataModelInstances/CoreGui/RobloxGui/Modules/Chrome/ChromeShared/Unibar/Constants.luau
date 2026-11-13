@@ -6,6 +6,7 @@ local FFlagChromeShortcutRemoveRespawnOnLeavePage = SharedFlagsModule.FFlagChrom
 local FFlagResponsiveUnitsDeprecateTenFoot = SharedFlagsModule.FFlagResponsiveUnitsDeprecateTenFoot
 local _ = require(CorePackages.Packages.ReactOtter)
 local TenFootInterfaceModule = require(script.Parent.Parent.Parent.Parent.TenFootInterface)
+local IconSize = require(CorePackages.Packages.UIBlox).App.ImageSet.Enum.IconSize
 local v1 = require(script.Parent.Parent.Utility.GetStyleTokens)()
 
 local function _(p1)
@@ -61,7 +62,7 @@ return {
 	WINDOW_HOST_GUI_NAME = "WindowHost",
 	CLOSE_BUTTON_FRAME = UDim2.fromOffset(v1.Size.Size_1100, v1.Size.Size_1100),
 	CLOSE_BUTTON_SIZE = UDim2.fromOffset(if FFlagResponsiveUnitsDeprecateTenFoot then 22 else (if TenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 22, if FFlagResponsiveUnitsDeprecateTenFoot then 22 else (if TenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 22),
-	CLOSE_ICON_SIZE = require(CorePackages.Packages.UIBlox).App.ImageSet.Enum.IconSize.Small,
+	CLOSE_ICON_SIZE = IconSize.Small,
 	CORNER_RADIUS = UDim.new(0, v1.Radius.Medium),
 	WINDOW_DEFAULT_PADDING = v1.Padding.Small,
 	WINDOW_ICON_SIZE = if FFlagResponsiveUnitsDeprecateTenFoot then 42 else (if TenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 42,

@@ -35,11 +35,10 @@ return function(p1)
 	local SelectedAmount = UseTransferStoreModuleResult.getSelectedAmount(false)
 	local TransferRetryOrigin = UseTransferStoreModuleResult.getTransferRetryOrigin(false)
 	local FreeTransfersExhausted = UseTransferStoreModuleResult.getFreeTransfersExhausted(false)
+	local FreeTransfersExhaustedTitle = if FFlagCurrencyTransferNoFreeTransfersRemainingUpsellModule and FreeTransfersExhausted then UseLocalizationResult.FreeTransfersExhaustedTitle else UseLocalizationResult.UpsellSubscriptionTitle or ""
 	local TransferClientSessionId = UseTransferStoreModuleResult.getTransferClientSessionId(false)
 	local config = {
-		purchaseUIOptions = {
-			title = if FFlagCurrencyTransferNoFreeTransfersRemainingUpsellModule and FreeTransfersExhausted then UseLocalizationResult.FreeTransfersExhaustedTitle else UseLocalizationResult.UpsellSubscriptionTitle or ""
-		},
+		purchaseUIOptions = { title = FreeTransfersExhaustedTitle },
 		surfaceName = SurfaceName.RobuxTransferUpsell,
 		surfaceContext = if UseTransferStoreModuleResult.getTransferOrigination(false) == TransferOriginationModule.InExperience then SurfaceContext.InGame else SurfaceContext.InApp,
 		analyticsContext = if SharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest and TransferClientSessionId ~= "" then {

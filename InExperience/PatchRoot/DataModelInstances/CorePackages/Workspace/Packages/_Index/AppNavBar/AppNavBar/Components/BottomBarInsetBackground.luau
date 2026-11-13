@@ -1,9 +1,10 @@
 ﻿local Parent = script.Parent.Parent
 local Parent1 = Parent.Parent
 local ReactModule = require(Parent1.React)
+local FoundationModule = require(Parent1.Foundation)
 local VisibilityControlModule = require(Parent.VisibilityControl)
 local GetScrollAwayEnabledModule = require(Parent.getScrollAwayEnabled)
-local UseTokensFunction = require(Parent1.Foundation).Hooks.useTokens
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
 return ReactModule.memo(function(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), GetScrollAwayEnabledModule (copy), VisibilityControlModule (copy)

@@ -1,6 +1,7 @@
 ﻿local UserList = script:FindFirstAncestor("UserList")
 local Parent = UserList.Parent
 local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
 local View = require(Parent.Foundation).View
 local FlatList = require(Parent.VirtualizedList).FlatList
 local _ = require(UserList.Common.Types)
@@ -20,7 +21,7 @@ local config = {
 	ScrollBarThickness = 0,
 	BorderSizePixel = 0
 }
-local JoinResult = require(Parent.Cryo).Dictionary.join(config, { Selectable = false })
+local JoinResult = CryoModule.Dictionary.join(config, { Selectable = false })
 local ContentContainerStyle = { BackgroundTransparency = 1 }
 
 local function keyExtractor(p1, _)

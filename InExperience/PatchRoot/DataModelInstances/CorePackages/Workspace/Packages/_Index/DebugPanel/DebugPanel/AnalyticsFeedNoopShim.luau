@@ -9,6 +9,18 @@ local function noopRuleFactory(...)
 	return noopRule
 end
 
+local Resolvers = {
+	fromEventName = noopRuleFactory,
+	fromCtx = noopRuleFactory,
+	fromField = noopRuleFactory,
+	fromEnum = noopRuleFactory,
+	eventNameAsLabel = noopRuleFactory,
+	fixed = noopRuleFactory,
+	walk = function(_, _)
+		return nil
+	end
+}
+
 local function noopFormatter(_, _, _)
 	return nil
 end
@@ -28,17 +40,7 @@ return {
 		return v0
 	end,
 	notify = function(_) end,
-	Resolvers = {
-		fromEventName = noopRuleFactory,
-		fromCtx = noopRuleFactory,
-		fromField = noopRuleFactory,
-		fromEnum = noopRuleFactory,
-		eventNameAsLabel = noopRuleFactory,
-		fixed = noopRuleFactory,
-		walk = function(_, _)
-			return nil
-		end
-	},
+	Resolvers = Resolvers,
 	Formatters = {
 		enumLabel = function(_)
 			-- upvalues: noopFormatter (copy)

@@ -1,7 +1,8 @@
 ﻿local Parent = script:FindFirstAncestor("InlineRichText").Parent
 local CryoModule = require(Parent.Cryo)
+local FoundationModule = require(Parent.Foundation)
 local RenderableInlineElement = require(Parent.InlineLayout).Components.InlineLayoutElements.RenderableInlineElement
-local Icon = require(Parent.Foundation).Icon
+local Icon = FoundationModule.Icon
 
 local function mapProps(p1)
 	-- upvalues: CryoModule (copy)

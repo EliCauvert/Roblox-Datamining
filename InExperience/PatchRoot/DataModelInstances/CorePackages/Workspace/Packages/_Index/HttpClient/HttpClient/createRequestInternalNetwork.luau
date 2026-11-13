@@ -1,7 +1,6 @@
 ﻿local HttpService = game:GetService("HttpService")
 local _ = require(script.Parent.types)
 local FFlagHttpClientMrRouterHeadersModule = require(script.Parent.Flags.FFlagHttpClientMrRouterHeaders)
-local FFlagHttpClientRetryExtensionsModule = require(script.Parent.Flags.FFlagHttpClientRetryExtensions)
 local MrRouterHeadersModule = if FFlagHttpClientMrRouterHeadersModule then require(script:FindFirstAncestor("HttpClient").Parent.MrRouterHeaders) else nil
 
 local function toLowerKeyedHeaders(Headers)
@@ -17,27 +16,27 @@ local function toLowerKeyedHeaders(Headers)
 end
 
 return function(p1)
-	-- upvalues: FFlagHttpClientRetryExtensionsModule (copy), FFlagHttpClientMrRouterHeadersModule (copy), MrRouterHeadersModule (ref), HttpService (copy), toLowerKeyedHeaders (copy)
-	local TransportFailuresAsResponses = if FFlagHttpClientRetryExtensionsModule then p1 ~= nil and p1.transportFailuresAsResponses else nil
+	-- upvalues: FFlagHttpClientMrRouterHeadersModule (copy), MrRouterHeadersModule (ref), HttpService (copy), toLowerKeyedHeaders (copy)
+	local TransportFailuresAsResponses = p1 ~= nil and p1.transportFailuresAsResponses
 	
 	return {
 		request = function(p2, Callback)
-			-- upvalues: FFlagHttpClientMrRouterHeadersModule (upval), MrRouterHeadersModule (upval), HttpService (upval), FFlagHttpClientRetryExtensionsModule (upval), TransportFailuresAsResponses (copy), toLowerKeyedHeaders (upval)
+			-- upvalues: FFlagHttpClientMrRouterHeadersModule (upval), MrRouterHeadersModule (upval), HttpService (upval), TransportFailuresAsResponses (copy), toLowerKeyedHeaders (upval)
 			local RequestInternalResult = HttpService:RequestInternal({
 				Url = p2.url,
 				Method = p2.method,
 				Headers = if FFlagHttpClientMrRouterHeadersModule then MrRouterHeadersModule.injectMrRouterHeaders(p2.headers) else p2.headers,
 				Body = p2.body,
 				OnMessage = p2.onMessage,
-				Priority = if FFlagHttpClientRetryExtensionsModule then p2.priority else nil
+				Priority = p2.priority
 			})
 			local Flag = false
 			RequestInternalResult:Start(function(p3, p4)
-				-- upvalues: Flag (ref), FFlagHttpClientRetryExtensionsModule (upval), TransportFailuresAsResponses (upval), Callback (copy), toLowerKeyedHeaders (upval)
+				-- upvalues: Flag (ref), TransportFailuresAsResponses (upval), Callback (copy), toLowerKeyedHeaders (upval)
 				if Flag then return end
 				Flag = true
 				
-				if typeof(p4) == "table" and (p3 or FFlagHttpClientRetryExtensionsModule and TransportFailuresAsResponses) then
+				if typeof(p4) == "table" and (p3 or TransportFailuresAsResponses) then
 					local Stats = nil
 					
 					if typeof(p4.Stats) == "table" then
@@ -57,11 +56,11 @@ return function(p1)
 						headers = toLowerKeyedHeaders(p4.Headers),
 						httpError = p4.HttpError,
 						stats = Stats,
-						wasTransportFailure = if FFlagHttpClientRetryExtensionsModule and TransportFailuresAsResponses then not p3 else nil
+						wasTransportFailure = if TransportFailuresAsResponses then not p3 else nil
 					})
 					
 					return
-				elseif FFlagHttpClientRetryExtensionsModule and TransportFailuresAsResponses then
+				elseif TransportFailuresAsResponses then
 					Callback(false, (tostring(p4 or "RequestInternal failed")))
 					
 					return

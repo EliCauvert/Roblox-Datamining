@@ -2,6 +2,7 @@
 local Parent = MomentsCreation.Parent
 local BuilderIconsModule = require(Parent.BuilderIcons)
 local FoundationModule = require(Parent.Foundation)
+local MomentsCommonModule = require(Parent.MomentsCommon)
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
@@ -18,7 +19,7 @@ local UseEffectFunction = ReactModule.useEffect
 local UseMemoFunction = ReactModule.useMemo
 local UseRefFunction = ReactModule.useRef
 local UseStateFunction = ReactModule.useState
-local UseDeviceInsetsFunction = require(Parent.MomentsCommon).Hooks.useDeviceInsets
+local UseDeviceInsetsFunction = MomentsCommonModule.Hooks.useDeviceInsets
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UseSignalStateFunction = SignalsReactModule.useSignalState
 local UseSignalBindingFunction = SignalsReactModule.useSignalBinding

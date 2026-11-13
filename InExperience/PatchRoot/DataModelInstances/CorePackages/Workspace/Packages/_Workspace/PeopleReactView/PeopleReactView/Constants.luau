@@ -1,4 +1,6 @@
 ﻿local Parent = script:FindFirstAncestor("PeopleReactView").Parent
+local IconName = require(Parent.Foundation).Enums.IconName
+local GetFFlagFixPeoplePageCardTooltipFunction = require(Parent.PeopleService).getService("Flags").GetFFlagFixPeoplePageCardTooltip
 local UniversesExposedToPeopleCardsTooltipKey = game:DefineFastString("UniversesExposedToPeopleCardsTooltipKey", "UniversesExposedToCardTooltipKey2")
 
 return {
@@ -62,7 +64,7 @@ return {
 				REPORT_PLAYER_NEW = "speech-bubble-exclamation",
 				INSPECT_LEGACY = "icons/actions/zoomIn",
 				INSPECT_NEW = "magnifying-glass-plus",
-				REPORT_PLAYER_FLAG = require(Parent.Foundation).Enums.IconName.Flag
+				REPORT_PLAYER_FLAG = IconName.Flag
 			}
 		},
 		CARD_MENU = {
@@ -77,7 +79,7 @@ return {
 				SELECT_USERNAME_TO_VIEW_PROFILE = "Feature.SettingsHub.Description.SelectUsernameToViewProfile",
 				OK = "Feature.SettingsHub.Action.Ok"
 			},
-			UNIVERSES_EXPOSED_TO_CARD_TOOLTIP = if require(Parent.PeopleService).getService("Flags").GetFFlagFixPeoplePageCardTooltip() then UniversesExposedToPeopleCardsTooltipKey else "UniversesExposedToCardTooltipKey2"
+			UNIVERSES_EXPOSED_TO_CARD_TOOLTIP = if GetFFlagFixPeoplePageCardTooltipFunction() then UniversesExposedToPeopleCardsTooltipKey else "UniversesExposedToCardTooltipKey2"
 		},
 		BUTTON_ACTIVATED_TABLE_KEYS = { SWITCH_SERVER = "switchServer" }
 	}

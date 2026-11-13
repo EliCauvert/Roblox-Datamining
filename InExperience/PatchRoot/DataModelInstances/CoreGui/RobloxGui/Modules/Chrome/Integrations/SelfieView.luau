@@ -12,12 +12,14 @@ local ConstantsModule = require(RobloxGui.Modules.TopBar.Constants)
 local ApplyDisplayScaleResult = ConstantsModule.ApplyDisplayScale(ConstantsModule.TopBarHeight)
 local SelfieView = Chrome.Parent.SelfieView
 local GetFFlagChromeSelfViewIgnoreCoreGuiModule = require(Chrome.Flags.GetFFlagChromeSelfViewIgnoreCoreGui)
+local SideSheetPlacement = require(CorePackages.Workspace.Packages.Chrome).Enums.SideSheetPlacement
 local FFlagTokenizeUnibarConstantsWithStyleProvider = require(Chrome.ChromeShared.Flags).FFlagTokenizeUnibarConstantsWithStyleProvider
 local FFlagEnableConsoleExpControls = require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnableConsoleExpControls
 local Module = require(SelfieView)
 local FaceChatUtilsModule = require(SelfieView.Utils.FaceChatUtils)
 local SizingUtilsModule = require(SelfieView.Utils.SizingUtils)
 local SelfieViewPolicyModule = require(SelfieView.Utils.SelfieViewPolicy)
+local AvailabilitySignalState = require(Chrome.ChromeShared.Service.ChromeUtils).AvailabilitySignalState
 local UnibarStyle = require(CorePackages.Workspace.Packages.Chrome).UnibarStyle
 local ViewportUtilModule = require(Chrome.ChromeShared.Service.ViewportUtil)
 local Size = SizingUtilsModule.getSize(ViewportUtilModule.screenSize:get(), false)
@@ -38,9 +40,9 @@ local RegisterResult = ServiceModule:register({
 	draggable = true,
 	cachePosition = true,
 	id = SELFIEVIEWID,
-	sideSheetPlacement = require(CorePackages.Workspace.Packages.Chrome).Enums.SideSheetPlacement.BelowFold,
+	sideSheetPlacement = SideSheetPlacement.BelowFold,
 	windowSize = NewResult,
-	initialAvailability = require(Chrome.ChromeShared.Service.ChromeUtils).AvailabilitySignalState.Unavailable,
+	initialAvailability = AvailabilitySignalState.Unavailable,
 	activated = function()
 		-- upvalues: ServiceModule (copy), SELFIEVIEWID (copy)
 		ServiceModule:toggleWindow(SELFIEVIEWID)

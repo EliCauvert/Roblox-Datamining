@@ -1,5 +1,6 @@
 ﻿local ShareSheet = script:FindFirstAncestor("ShareSheet")
 local Parent = ShareSheet.Parent
+local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
 local ViewRecyclerModule = require(Parent.ViewRecycler)
@@ -8,7 +9,7 @@ local ShareSheetConstantsModule = require(ShareSheet.ShareSheetConstants)
 local UsePeoplePickerListItemViewModelModule = require(script.Parent.usePeoplePickerListItemViewModel)
 local _ = require(script.Parent.usePeoplePickerListViewModel)
 local _ = require(ShareSheet.Components.PeoplePicker.usePeoplePickerPagination)
-local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
 local function PeoplePickerListItem(p1)
 	-- upvalues: UsePeoplePickerListItemViewModelModule (copy), ReactModule (copy), PeoplePickerListViewModule (copy)

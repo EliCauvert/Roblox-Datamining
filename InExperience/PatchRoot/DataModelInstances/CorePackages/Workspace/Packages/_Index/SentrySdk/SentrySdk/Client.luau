@@ -104,7 +104,8 @@ end
 function ClientModule:capture_message(Message, p1, p2, p3)
 	-- upvalues: VersionModule (copy)
 	local NoNextEntry = next(self.extra) == nil
-	local config = {
+	local HttpService = self.httpService
+	self.transport:send({
 		platform = "roblox",
 		server_name = "roblox-server",
 		message = { message = Message },
@@ -124,9 +125,7 @@ function ClientModule:capture_message(Message, p1, p2, p3)
 				job_id = game.JobId or "unknown"
 			}
 		}
-	}
-	local HttpService = self.httpService
-	self.transport:send(config, if p2 then function(p4, p5)
+	}, if p2 then function(p4, p5)
 		-- upvalues: HttpService (copy), p2 (copy)
 		local Id = nil
 		local v1 = nil

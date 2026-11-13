@@ -1,13 +1,14 @@
 ﻿local Parent = script.Parent.Parent.Parent
 local Parent1 = Parent.Parent
 local CoreGui = game:GetService("CoreGui")
+local LocalizationModule = require(Parent1.Localization)
 local ReactModule = require(Parent1.React)
 local RoactUtilsModule = require(Parent1.RoactUtils)
 local UIBloxModule = require(Parent1.UIBlox)
 local NormalizeFontFaceFunction = require(Parent1.Foundation).Utility.normalizeFontFace
 local UseAnalyticsModule = require(Parent.Analytics.useAnalytics)
 local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
-local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
 local IconButton = UIBloxModule.App.Button.IconButton
 local IconSize = UIBloxModule.App.ImageSet.Enum.IconSize
@@ -140,7 +141,7 @@ end)(function(Frame)
 					active = UseStateResult
 				}, function(Callback)
 					-- upvalues: UseStateResult2 (copy), ReactModule (upval), Interactable (upval), UseResult1 (copy), ImageSetLabel (upval), Images (upval)
-					local function v34(p1)
+					local function v35(p1)
 						-- upvalues: UseStateResult2 (upval), Callback (copy)
 						UseStateResult2(false)
 						Callback(p1)
@@ -152,8 +153,8 @@ end)(function(Frame)
 						LayoutOrder = 2,
 						Position = UDim2.fromScale(1, 0.5),
 						Size = UDim2.fromOffset(16, 16),
-						[ReactModule.Change.AbsolutePosition] = v34,
-						[ReactModule.Change.AbsoluteSize] = v34,
+						[ReactModule.Change.AbsolutePosition] = v35,
+						[ReactModule.Change.AbsoluteSize] = v35,
 						[ReactModule.Event.Activated] = UseResult1
 					}, {
 						InfoIcon = ReactModule.createElement(ImageSetLabel, {

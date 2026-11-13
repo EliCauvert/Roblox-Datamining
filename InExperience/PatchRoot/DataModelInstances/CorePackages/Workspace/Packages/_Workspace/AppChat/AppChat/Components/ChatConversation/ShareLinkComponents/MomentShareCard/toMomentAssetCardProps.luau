@@ -1,11 +1,13 @@
 ﻿local AppChat = script:FindFirstAncestor("AppChat")
 local Parent = AppChat.Parent
+local FoundationModule = require(Parent.Foundation)
 local _ = require(Parent.React)
+local AssetCardTypesModule = require(AppChat.Components.ChatConversation.AssetCardView.AssetCardTypes)
 local _ = require(AppChat.Components.ChatConversation.Grouping.MessageGroupShape)
 local MomentDetailsStatusModule = require(script.Parent.MomentDetailsStatus)
 local _ = require(script.Parent.MomentShareCardView)
-local IconName = require(Parent.Foundation).Enums.IconName
-local Status = require(AppChat.Components.ChatConversation.AssetCardView.AssetCardTypes).Status
+local IconName = FoundationModule.Enums.IconName
+local Status = AssetCardTypesModule.Status
 local config = {
 	[MomentDetailsStatusModule.Loading] = Status.Loading,
 	[MomentDetailsStatusModule.Ready] = Status.Ready,

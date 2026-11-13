@@ -1,12 +1,15 @@
 ﻿local SocialExperienceJoin = script:FindFirstAncestor("SocialExperienceJoin")
 local Parent = SocialExperienceJoin.Parent
 local ReactModule = require(Parent.React)
+local NavigationModule = require(Parent.Navigation)
+local RobloxAppHooksModule = require(Parent.RobloxAppHooks)
 local UserProfilesModule = require(Parent.UserProfiles)
+local RobloxAppNavigationModule = require(Parent.RobloxAppNavigation)
 local InitializeSocialExperienceJoinAnalyticsModule = require(SocialExperienceJoin.Analytics.initializeSocialExperienceJoinAnalytics)
 local EventNamesModule = require(SocialExperienceJoin.Analytics.EventNames)
-local UseNavigationFunction = require(Parent.Navigation).useNavigation
-local UseNavigationPropsFunction = require(Parent.RobloxAppNavigation).useNavigationProps
-local UseScreenSizeFunction = require(Parent.RobloxAppHooks).useScreenSize
+local UseNavigationFunction = NavigationModule.useNavigation
+local UseNavigationPropsFunction = RobloxAppNavigationModule.useNavigationProps
+local UseScreenSizeFunction = RobloxAppHooksModule.useScreenSize
 local UnableToJoinExperienceModalModule = require(script.Parent.UnableToJoinExperienceModal)
 
 return function(p1)
@@ -28,6 +31,7 @@ return function(p1)
 		userIds = { UseNavigationPropsResult.userId },
 		query = UserProfilesModule.Queries.userProfilesCombinedNameByUserIds
 	})
+	local CombinedNameFromId = if UseUserProfilesFetchResult.data then UserProfilesModule.Selectors.getCombinedNameFromId(UseUserProfilesFetchResult.data, UseNavigationPropsResult.userId) else ""
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseNavigationResult (copy)
 		UseNavigationResult.pop()
@@ -61,6 +65,6 @@ return function(p1)
 			p1.openGameDetailsPeekView, UseResult
 		}),
 		screenSize = UseScreenSizeFunction(),
-		userPrimaryName = if UseUserProfilesFetchResult.data then UserProfilesModule.Selectors.getCombinedNameFromId(UseUserProfilesFetchResult.data, UseNavigationPropsResult.userId) else ""
+		userPrimaryName = CombinedNameFromId
 	})
 end

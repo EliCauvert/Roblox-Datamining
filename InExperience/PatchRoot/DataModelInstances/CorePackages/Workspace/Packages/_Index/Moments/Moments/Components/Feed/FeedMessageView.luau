@@ -3,6 +3,7 @@ local FoundationModule = require(Parent.Foundation)
 local FoundationCloudAssetsModule = require(Parent.FoundationCloudAssets)
 local MomentsCommonModule = require(Parent.MomentsCommon)
 local ReactModule = require(Parent.React)
+local FFlagMomentsParentTimeLimit = MomentsCommonModule.Flags.FFlagMomentsParentTimeLimit
 local Button = FoundationModule.Button
 local Icon = FoundationModule.Icon
 local Image = FoundationModule.Image
@@ -16,7 +17,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local FormFactor = MomentsCommonModule.Enums.FormFactor
 
 local function renderGraphic(Frame, ImageStyle)
-	-- upvalues: FoundationCloudAssetsModule (copy), ReactModule (copy), Image (copy), Icon (copy), IconSize (copy), View (copy)
+	-- upvalues: FoundationCloudAssetsModule (copy), ReactModule (copy), Image (copy), Icon (copy), IconSize (copy), FFlagMomentsParentTimeLimit (copy), View (copy)
 	if Frame.pictogram ~= nil then
 		local Asset = FoundationCloudAssetsModule.Assets[Frame.pictogram]
 		
@@ -44,6 +45,7 @@ local function renderGraphic(Frame, ImageStyle)
 			size = Frame.iconSize or IconSize.Large,
 			style = ImageStyle
 		})
+		local FrameRadiusTag = FFlagMomentsParentTimeLimit and Frame.frameRadiusTag or "radius-large"
 		
 		return ReactModule.createElement(View, {
 			LayoutOrder = 1,
@@ -55,10 +57,10 @@ local function renderGraphic(Frame, ImageStyle)
 				Size = UDim2.fromOffset(94, 94)
 			}, {
 				TiltFrame = ReactModule.createElement(View, {
-					tag = "position-center-center anchor-center-center stroke-standard stroke-default radius-large",
 					Rotation = -15,
 					testId = "--moments-feed-message--tilt-frame",
 					ZIndex = 1,
+					tag = `position-center-center anchor-center-center stroke-standard stroke-default {FrameRadiusTag}`,
 					Size = UDim2.fromOffset(115, 115)
 				}),
 				Glyph = Element

@@ -20,6 +20,7 @@ local ReportGameImpressionCountsModule = require(script.Parent.reportGameImpress
 local FeedItemRowDataHitCounterModule = require(script.Parent.FeedItemRowDataHitCounter)
 local FeedItemRowDataMissingCounterModule = require(script.Parent.FeedItemRowDataMissingCounter)
 local FFlagLuaAppGameImpressionsMobileAdsId = require(Parent.SharedFlags).FFlagLuaAppGameImpressionsMobileAdsId
+local FFlagTraversalHistoryDiscoveryTelemetry = require(Parent.SharedFlags).FFlagTraversalHistoryDiscoveryTelemetry
 local FFlagLuaAppGameImpressionsAddUnifiedFields = require(Parent.SharedFlags).FFlagLuaAppGameImpressionsAddUnifiedFields
 local FFlagSduiFixSearchTelemetry = require(Parent.SharedFlags).FFlagSduiFixSearchTelemetry
 local FFlagLuaAppSponsoredGamePreviewVideo = require(Parent.SharedFlags).FFlagLuaAppSponsoredGamePreviewVideo
@@ -122,8 +123,8 @@ local function addGameFields(EntryIndexes, p2, p3: number, p4, p5, GameSortId, p
 			elseif TileBadgeByPositionConfigFromEntry then
 				local List17 = {}
 				
-				for i, value in GetValidTileBadgesFunction(TileBadgeByPositionConfigFromEntry) do
-					local MapResult = CryoModule.List.map(value, function(p8)
+				for i, value1 in GetValidTileBadgesFunction(TileBadgeByPositionConfigFromEntry) do
+					local MapResult = CryoModule.List.map(value1, function(p8)
 						return p8.analyticsId
 					end)
 					
@@ -244,7 +245,7 @@ local function addGameFields(EntryIndexes, p2, p3: number, p4, p5, GameSortId, p
 	if p4 and #List6 > 0 then
 		config.videoThumbnailAssetIds = table.concat(List6, ",")
 	end
-	if FFlagLuaAppDiscoveryMomentVideoTelemetry and (#T > 0 and not t.videoIsMoment) then
+	if FFlagLuaAppDiscoveryMomentVideoTelemetry and #T > 0 and not t.videoIsMoment then
 		config.videoIsMoment_arr = table.concat(T, ",")
 	end
 	if #List12 > 0 then
@@ -265,8 +266,8 @@ local function addGameFields(EntryIndexes, p2, p3: number, p4, p5, GameSortId, p
 		for i2 in t do
 			local List18 = {}
 			
-			for _, value1 in List16 do
-				table.insert(List18, value1[i2] or "0")
+			for _, value in List16 do
+				table.insert(List18, value[i2] or "0")
 			end
 			t1[`{i2}_arr`] = table.concat(List18, ",")
 		end
@@ -408,7 +409,7 @@ return {
 		GameImpressionsEventModule(p8, PageContext, JoinResult)
 		ReportGameImpressionCountsModule(p9, PageContext, AddGameFieldsResult2, 1)
 	end,
-	sendFromTraversalHistoryPage = if require(Parent.SharedFlags).FFlagTraversalHistoryDiscoveryTelemetry then function(p8, p9, p10, p11, p12, p13)
+	sendFromTraversalHistoryPage = if FFlagTraversalHistoryDiscoveryTelemetry then function(p8, p9, p10, p11, p12, p13)
 		-- upvalues: addGameFields (copy), CryoModule (copy), LocalizationService (copy), GameImpressionsEventModule (copy), ReportGameImpressionCountsModule (copy)
 		if p8 and p9 then
 			local AddGameFieldsResult, AddGameFieldsResult2 = addGameFields(p10, p11, p12, false, p13)

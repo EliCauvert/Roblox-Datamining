@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("RobloxPlusAmpSubscriptionCheck", false)
+﻿return game:DefineFastFlag("RobloxPlusAmpSubscriptionCheck2", false)

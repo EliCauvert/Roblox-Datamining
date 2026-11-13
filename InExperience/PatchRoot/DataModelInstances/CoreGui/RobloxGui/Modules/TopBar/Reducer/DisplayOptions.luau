@@ -8,11 +8,15 @@ if require(Parent.Flags.FFlagTopBarDeprecateDisplayOptionsRodux) then
 else
 	local Actions = Parent.Actions
 	local SetMenuOpenModule = require(Actions.SetMenuOpen)
+	local SetTopBarEnabledModule = require(Actions.SetTopBarEnabled)
+	local SetSmallTouchDeviceModule = require(Actions.SetSmallTouchDevice)
 	local SetScreenSizeModule = require(Actions.SetScreenSize)
 	local SetKeepOutAreaModule = require(Actions.SetKeepOutArea)
 	local RemoveKeepOutAreaModule = require(Actions.RemoveKeepOutArea)
 	local _ = require(Actions.SetInputType)
 	local SetInspectMenuOpenModule = require(Actions.SetInspectMenuOpen)
+	local SetGamepadMenuOpenModule = require(Actions.SetGamepadMenuOpen)
+	local SetGamepadNavigationDialogOpenModule = require(Actions.SetGamepadNavigationDialogOpen)
 	local FFlagGamepadNavigationDialogABTestModule = require(script.Parent.Parent.Flags.FFlagGamepadNavigationDialogABTest)
 	local CoreGuiCommonModule = require(CorePackages.Workspace.Packages.CoreGuiCommon)
 	local FFlagTopBarSignalizeMenuOpen = CoreGuiCommonModule.Flags.FFlagTopBarSignalizeMenuOpen
@@ -38,11 +42,11 @@ else
 				isGamepadMenuOpen = (p1.menuOpen or not p2.menuOpen) and p1.isGamepadMenuOpen
 			})
 		end,
-		[require(Actions.SetTopBarEnabled).name] = function(p1, p2)
+		[SetTopBarEnabledModule.name] = function(p1, p2)
 			-- upvalues: CryoModule (copy)
 			return CryoModule.Dictionary.join(p1, { topbarEnabled = p2.enabled })
 		end,
-		[require(Actions.SetSmallTouchDevice).name] = function(p1, p2)
+		[SetSmallTouchDeviceModule.name] = function(p1, p2)
 			-- upvalues: CryoModule (copy)
 			return CryoModule.Dictionary.join(p1, { isSmallTouchDevice = p2.isSmallTouchDevice })
 		end,
@@ -54,14 +58,14 @@ else
 			-- upvalues: CryoModule (copy)
 			return CryoModule.Dictionary.join(p1, { inspectMenuOpen = p2.inspectMenuOpen })
 		end,
-		[require(Actions.SetGamepadMenuOpen).name] = function(p1, p2)
+		[SetGamepadMenuOpenModule.name] = function(p1, p2)
 			-- upvalues: CryoModule (copy), FFlagGamepadNavigationDialogABTestModule (copy)
 			return CryoModule.Dictionary.join(p1, {
 				isGamepadMenuOpen = p2.open,
 				isGamepadNavigationDialogOpen = not FFlagGamepadNavigationDialogABTestModule and nil
 			})
 		end,
-		[require(Actions.SetGamepadNavigationDialogOpen).name] = if FFlagGamepadNavigationDialogABTestModule then function(p1, p2)
+		[SetGamepadNavigationDialogOpenModule.name] = if FFlagGamepadNavigationDialogABTestModule then function(p1, p2)
 			-- upvalues: CryoModule (copy)
 			return CryoModule.Dictionary.join(p1, { isGamepadNavigationDialogOpen = p2.open })
 		end else nil,

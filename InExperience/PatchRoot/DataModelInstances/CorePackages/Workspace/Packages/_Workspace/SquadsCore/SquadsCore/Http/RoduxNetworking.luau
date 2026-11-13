@@ -1,9 +1,10 @@
 ﻿local Parent = script:FindFirstAncestor("SquadsCore").Parent
 local HttpRequestModule = require(Parent.HttpRequest)
+local RoduxNetworkingModule = require(Parent.RoduxNetworking)
 local Logger = require(Parent.Loggers).Logger
 local SquadsCore = Logger.new(Logger, "SquadsCore")
 
-return require(Parent.RoduxNetworking).config({
+return RoduxNetworkingModule.config({
 	keyPath = "Squad.NetworkStatus",
 	networkImpl = HttpRequestModule.config({
 		requestFunction = function(p1, p2, p3)

@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("MomentsCreatorAnalytics", false)
+﻿return game:DefineFastFlag("MomentsCreatorAnalyticsPhase1", false)

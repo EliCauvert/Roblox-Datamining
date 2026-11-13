@@ -2,11 +2,13 @@
 local Parent1 = Parent.Parent
 local RoactModule = require(Parent1.Roact)
 local TModule = require(Parent1.t)
+local ValidateFontInfoModule = require(Parent.Core.Style.Validator.validateFontInfo)
+local ValidateColorInfoModule = require(Parent.Core.Style.Validator.validateColorInfo)
 local GenericTextLabelModule = require(Parent.Core.Text.GenericTextLabel.GenericTextLabel)
 local ToastText = RoactModule.PureComponent:extend("ToastText")
 ToastText.validateProps = TModule.interface({
-	colorStyle = require(Parent.Core.Style.Validator.validateColorInfo),
-	fontStyle = require(Parent.Core.Style.Validator.validateFontInfo),
+	colorStyle = ValidateColorInfoModule,
+	fontStyle = ValidateFontInfoModule,
 	Size = TModule.UDim2,
 	Text = TModule.string,
 	AnchorPoint = TModule.optional(TModule.Vector2),

@@ -53,12 +53,12 @@ return ReactModule.memo(function(p1)
 		local _UDim2 = UDim2.new(1, -UseTokensResult.Padding.Medium, 0, UseTokensResult.Padding.Medium)
 		local OverflowMenuSignalStore = GetOverflowMenuSignalStoreFunction()
 		local CollectionId = p1.collectionId or ""
-		local List1 = {}
+		local List = {}
 		
 		for i, _ in p1.availableMenuItems do
-			table.insert(List1, i)
+			table.insert(List, i)
 		end
-		local Joined = table.concat(List1, ",")
+		local Joined = table.concat(List, ",")
 		local UseResult = ReactModule.useCallback(function(p2)
 			-- upvalues: p1 (copy), Joined (copy)
 			if p1.onMenuOpenChanged then
@@ -160,60 +160,60 @@ return ReactModule.memo(function(p1)
 		local CollectionId1 = p1.collectionId or ""
 		local MenuKey1 = p1.menuKey
 		local _Vector2_1 = Vector2.new(1, 0)
-		local _UDim2_1 = UDim2.new(1, -UseTokensResult1.Padding.Medium, 0, UseTokensResult1.Padding.Medium)
+		local UseSignalStateResult = UseTokensResult1.Padding
+		UseSignalStateResult = UseSignalStateResult.Medium
+		local _UDim2_1 = UDim2.new(1, -UseTokensResult1.Padding.Medium, 0, UseSignalStateResult)
 		local OverflowMenuSignalStore1 = GetOverflowMenuSignalStoreFunction()
 		local SetFocusRef = nil
 		
 		if not FFlagLuaAppFixExplicitFeedbackConsoleTelemetry then
-			local UseSignalStateResult = p1.isSelected
-			SetFocusRef = UseGameTileOverflowMenuFocusNavigationModule(MenuKey1, UseSignalStateResult, p1.parentRef)
+			UseSignalStateResult = MenuKey1
+			SetFocusRef = UseGameTileOverflowMenuFocusNavigationModule(UseSignalStateResult, p1.isSelected, p1.parentRef)
 		end
-		local List2 = {}
-		local UseSignalStateResult = nil
+		local List = {}
+		UseSignalStateResult = p1.availableMenuItems
 		
-		for i1, _ in p1.availableMenuItems, UseSignalStateResult do
-			table.insert(List2, i1)
+		for i1, _ in UseSignalStateResult do
+			table.insert(List, i1)
 		end
-		UseSignalStateResult = List2
-		local Joined1 = table.concat(UseSignalStateResult, ",")
-		UseSignalStateResult = ReactModule
-		UseSignalStateResult = UseSignalStateResult.useCallback
-		UseSignalStateResult = UseSignalStateResult(function(p2)
-			-- upvalues: p1 (copy), Joined1 (copy)
+		UseSignalStateResult = table.concat
+		UseSignalStateResult = UseSignalStateResult(List, ",")
+		local UseResult = ReactModule.useCallback(function(p2)
+			-- upvalues: p1 (copy), UseSignalStateResult (copy)
 			if p1.onMenuOpenChanged then
-				p1.onMenuOpenChanged(p2, Joined1)
+				p1.onMenuOpenChanged(p2, UseSignalStateResult)
 			end
-		end, { p1.onMenuOpenChanged, Joined1 })
-		local UseResult = ReactModule.useCallback(function(MenuItem)
-			-- upvalues: p1 (copy), CollectionId1 (copy), Joined1 (copy), FFlagLuaAppEnableNxMRoduxApportioning (upval), GameTileOverflowMenuActionFunction (upval)
+		end, { p1.onMenuOpenChanged, UseSignalStateResult })
+		local UseResult1 = ReactModule.useCallback(function(MenuItem)
+			-- upvalues: p1 (copy), CollectionId1 (copy), UseSignalStateResult (copy), FFlagLuaAppEnableNxMRoduxApportioning (upval), GameTileOverflowMenuActionFunction (upval)
 			GameTileOverflowMenuActionFunction({
 				actionType = "GameTileOverflowMenuItemActivated",
 				universeId = p1.universeId,
 				sortId = CollectionId1,
 				menuItem = MenuItem,
-				availableMenuItems = Joined1,
+				availableMenuItems = UseSignalStateResult,
 				contentType = if FFlagLuaAppEnableNxMRoduxApportioning then p1.contentType else nil
 			}, p1.appPage)
 		end, {
 			p1.appPage,
 			p1.universeId,
 			CollectionId1,
-			Joined1,
+			UseSignalStateResult,
 			if FFlagLuaAppEnableNxMRoduxApportioning then p1.contentType else nil
 		})
 		
 		if FFlagLuaAppFixExplicitFeedbackConsoleTelemetry then
-			SetFocusRef = UseGameTileOverflowMenuFocusNavigationModule(MenuKey1, p1.isSelected, p1.parentRef, UseSignalStateResult)
+			SetFocusRef = UseGameTileOverflowMenuFocusNavigationModule(MenuKey1, p1.isSelected, p1.parentRef, UseResult)
 		end
-		local UseResult1 = if FFlagLuaAppContinueSortInstantPlay then ReactModule.useCallback(function()
-			-- upvalues: p1 (copy), UseResult (copy), TileOverflowMenuItems (upval)
+		local UseResult2 = if FFlagLuaAppContinueSortInstantPlay then ReactModule.useCallback(function()
+			-- upvalues: p1 (copy), UseResult1 (copy), TileOverflowMenuItems (upval)
 			if p1.onGameDetailsActivated then
 				p1.onGameDetailsActivated()
 			end
-			UseResult(TileOverflowMenuItems.GameDetails)
-		end, { p1.onGameDetailsActivated, UseResult }) else nil
-		local UseResult2 = ReactModule.useCallback(function()
-			-- upvalues: ActivateGameNotInterestedModule (upval), p1 (copy), CollectionId1 (copy), UseDispatchResult (copy), UseLocalizationResult (copy), UseRoactServiceResult (copy), UseResult (copy), TileOverflowMenuItems (upval)
+			UseResult1(TileOverflowMenuItems.GameDetails)
+		end, { p1.onGameDetailsActivated, UseResult1 }) else nil
+		local UseResult3 = ReactModule.useCallback(function()
+			-- upvalues: ActivateGameNotInterestedModule (upval), p1 (copy), CollectionId1 (copy), UseDispatchResult (copy), UseLocalizationResult (copy), UseRoactServiceResult (copy), UseResult1 (copy), TileOverflowMenuItems (upval)
 			if ActivateGameNotInterestedModule({
 				appPage = p1.appPage,
 				collectionId = CollectionId1,
@@ -225,29 +225,29 @@ return ReactModule.memo(function(p1)
 				setGameHidden = p1.setGameHidden,
 				universeId = p1.universeId
 			}) then
-				UseResult(TileOverflowMenuItems.NotInterested)
+				UseResult1(TileOverflowMenuItems.NotInterested)
 			end
 		end, {
 			CollectionId1, UseDispatchResult, UseLocalizationResult, UseRoactServiceResult,
-			UseResult, p1.appPage, p1.isSponsored, p1.placeId, p1.setGameHidden,
+			UseResult1, p1.appPage, p1.isSponsored, p1.placeId, p1.setGameHidden,
 			p1.universeId
 		})
-		local UseResult3 = ReactModule.useCallback(function()
-			-- upvalues: UseDispatchResult (copy), SetCentralOverlayFunction (upval), CentralOverlayType (upval), p1 (copy), FFlagLuaAppEnableNxMRoduxApportioning (upval), UseResult (copy), TileOverflowMenuItems (upval)
+		local UseResult4 = ReactModule.useCallback(function()
+			-- upvalues: UseDispatchResult (copy), SetCentralOverlayFunction (upval), CentralOverlayType (upval), p1 (copy), FFlagLuaAppEnableNxMRoduxApportioning (upval), UseResult1 (copy), TileOverflowMenuItems (upval)
 			UseDispatchResult(SetCentralOverlayFunction(CentralOverlayType.WhyThisAdModal, {
 				universeId = p1.universeId,
 				payerName = p1.payerName,
 				sponsoredUserCohort = p1.sponsoredUserCohort,
 				contentType = if FFlagLuaAppEnableNxMRoduxApportioning then p1.contentType else nil
 			}))
-			UseResult(TileOverflowMenuItems.WhyThisAd)
+			UseResult1(TileOverflowMenuItems.WhyThisAd)
 		end, {
 			UseDispatchResult, p1.universeId, p1.payerName, p1.sponsoredUserCohort,
 			if FFlagLuaAppEnableNxMRoduxApportioning then p1.contentType else nil,
-			UseResult
+			UseResult1
 		})
-		local UseResult4 = ReactModule.useCallback(function()
-			-- upvalues: p1 (copy), FlaggedMutedErrorFunction (upval), UseDispatchResult (copy), OpenDynamicAbuseReportModule (upval), AbuseVectorModule (upval), CloseCentralOverlayFunction (upval), UseResult (copy), TileOverflowMenuItems (upval)
+		local UseResult5 = ReactModule.useCallback(function()
+			-- upvalues: p1 (copy), FlaggedMutedErrorFunction (upval), UseDispatchResult (copy), OpenDynamicAbuseReportModule (upval), AbuseVectorModule (upval), CloseCentralOverlayFunction (upval), UseResult1 (copy), TileOverflowMenuItems (upval)
 			if p1.adId then
 				UseDispatchResult(OpenDynamicAbuseReportModule({
 					abuseVector = AbuseVectorModule.AdV2,
@@ -257,15 +257,15 @@ return ReactModule.memo(function(p1)
 						UseDispatchResult(CloseCentralOverlayFunction())
 					end
 				}))
-				UseResult(TileOverflowMenuItems.ReportAd)
+				UseResult1(TileOverflowMenuItems.ReportAd)
 				
 				return
 			else
 				FlaggedMutedErrorFunction("ReportSponsoredAdError", "Report ad clicked without valid target ad id")
 			end
-		end, { UseDispatchResult, p1.adId, UseResult })
-		local UseResult5 = if FFlagLuaAppEnableReportExperience then ReactModule.useCallback(function()
-			-- upvalues: p1 (copy), FlaggedMutedErrorFunction (upval), UseDispatchResult (copy), OpenDynamicAbuseReportModule (upval), FFlagEnableNewReportFlowGameTile (upval), AbuseVectorModule (upval), FFlagAddThumbnailSelectorReport (upval), CloseCentralOverlayFunction (upval), UseResult (copy), TileOverflowMenuItems (upval)
+		end, { UseDispatchResult, p1.adId, UseResult1 })
+		local UseResult6 = if FFlagLuaAppEnableReportExperience then ReactModule.useCallback(function()
+			-- upvalues: p1 (copy), FlaggedMutedErrorFunction (upval), UseDispatchResult (copy), OpenDynamicAbuseReportModule (upval), FFlagEnableNewReportFlowGameTile (upval), AbuseVectorModule (upval), FFlagAddThumbnailSelectorReport (upval), CloseCentralOverlayFunction (upval), UseResult1 (copy), TileOverflowMenuItems (upval)
 			if p1.placeId then
 				UseDispatchResult(OpenDynamicAbuseReportModule({
 					abuseVector = if FFlagEnableNewReportFlowGameTile then AbuseVectorModule.GameTile else AbuseVectorModule.Place,
@@ -276,15 +276,15 @@ return ReactModule.memo(function(p1)
 						UseDispatchResult(CloseCentralOverlayFunction())
 					end
 				}))
-				UseResult(TileOverflowMenuItems.ReportExperience)
+				UseResult1(TileOverflowMenuItems.ReportExperience)
 				
 				return
 			else
 				FlaggedMutedErrorFunction("ReportExperienceError", "Report experience clicked without valid target place id")
 			end
-		end, { UseDispatchResult, p1.placeId, p1.universeId, UseResult }) else nil
+		end, { UseDispatchResult, p1.placeId, p1.universeId, UseResult1 }) else nil
 		local UseMemoResult = ReactModule.useMemo(function()
-			-- upvalues: FFlagLuaAppContinueSortInstantPlay (upval), p1 (copy), TileOverflowMenuItems (upval), UseLocalizationResult (copy), UseResult1 (copy), UseResult2 (copy), UseResult3 (copy), IconName (upval), UseResult4 (copy), FFlagLuaAppEnableReportExperience (upval), UseResult5 (copy)
+			-- upvalues: FFlagLuaAppContinueSortInstantPlay (upval), p1 (copy), TileOverflowMenuItems (upval), UseLocalizationResult (copy), UseResult2 (copy), UseResult3 (copy), UseResult4 (copy), IconName (upval), UseResult5 (copy), FFlagLuaAppEnableReportExperience (upval), UseResult6 (copy)
 			local List = {}
 			
 			if FFlagLuaAppContinueSortInstantPlay and p1.availableMenuItems[TileOverflowMenuItems.GameDetails] then
@@ -292,7 +292,7 @@ return ReactModule.memo(function(p1)
 					icon = "icons/actions/info",
 					id = TileOverflowMenuItems.GameDetails,
 					text = UseLocalizationResult.gameDetails,
-					onActivated = UseResult1
+					onActivated = UseResult2
 				})
 			end
 			if p1.availableMenuItems[TileOverflowMenuItems.NotInterested] then
@@ -300,7 +300,7 @@ return ReactModule.memo(function(p1)
 					icon = "icons/actions/block",
 					id = TileOverflowMenuItems.NotInterested,
 					text = UseLocalizationResult.notInterested,
-					onActivated = UseResult2
+					onActivated = UseResult3
 				})
 			end
 			if p1.availableMenuItems[TileOverflowMenuItems.WhyThisAd] then
@@ -308,7 +308,7 @@ return ReactModule.memo(function(p1)
 					icon = "icons/actions/info",
 					id = TileOverflowMenuItems.WhyThisAd,
 					text = UseLocalizationResult.whyThisAd,
-					onActivated = UseResult3
+					onActivated = UseResult4
 				})
 			end
 			if p1.availableMenuItems[TileOverflowMenuItems.ReportAd] then
@@ -316,7 +316,7 @@ return ReactModule.memo(function(p1)
 					icon = IconName.Flag,
 					id = TileOverflowMenuItems.ReportAd,
 					text = UseLocalizationResult.reportAd,
-					onActivated = UseResult4
+					onActivated = UseResult5
 				})
 			end
 			if FFlagLuaAppEnableReportExperience and p1.availableMenuItems[TileOverflowMenuItems.ReportExperience] then
@@ -324,15 +324,15 @@ return ReactModule.memo(function(p1)
 					icon = IconName.Flag,
 					id = TileOverflowMenuItems.ReportExperience,
 					text = UseLocalizationResult.reportExperience,
-					onActivated = UseResult5
+					onActivated = UseResult6
 				})
 			end
 			return List
 		end, {
-			if FFlagLuaAppContinueSortInstantPlay then UseResult1 else nil, UseResult2,
-			UseLocalizationResult, UseResult3,
-			FFlagLuaAppEnableReportExperience and UseResult4 or nil,
-			FFlagLuaAppEnableReportExperience and UseResult5 or nil, p1.isSponsored,
+			if FFlagLuaAppContinueSortInstantPlay then UseResult2 else nil, UseResult3,
+			UseLocalizationResult, UseResult4,
+			FFlagLuaAppEnableReportExperience and UseResult5 or nil,
+			FFlagLuaAppEnableReportExperience and UseResult6 or nil, p1.isSponsored,
 			p1.availableMenuItems
 		})
 		local UseSignalStateResult1 = nil
@@ -373,7 +373,7 @@ return ReactModule.memo(function(p1)
 			buttonIconBackgroundStyle = UseTokensResult1.Color.OverMedia.OverMedia_0,
 			menuKey = MenuKey1,
 			setFocusRef = SetFocusRef,
-			onMenuOpenChanged = UseSignalStateResult,
+			onMenuOpenChanged = UseResult,
 			buttonIconSize = IconSize.Small
 		})
 	end

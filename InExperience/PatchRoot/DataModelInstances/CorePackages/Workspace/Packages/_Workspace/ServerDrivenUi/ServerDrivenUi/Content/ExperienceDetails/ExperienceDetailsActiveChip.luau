@@ -5,10 +5,13 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local SignalsReactModule = require(Parent.SignalsReact)
 local DataHydrationModule = require(Parent.DataHydration)
+local GameTileModule = require(Parent.GameTile)
+local LocalizationModule = require(Parent.Localization)
+local DiscoveryAnalyticsModule = require(Parent.DiscoveryAnalytics)
 local SduiChip = require(Parent.SduiSharedContent).SduiChip
-local UsePlayerCountTextFunction = require(Parent.GameTile).usePlayerCountText
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
-local GameDetailsSubpageFunction = require(Parent.DiscoveryAnalytics).Events.gameDetailsSubpage
+local UsePlayerCountTextFunction = GameTileModule.usePlayerCountText
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
+local GameDetailsSubpageFunction = DiscoveryAnalyticsModule.Events.gameDetailsSubpage
 local UseNavigateToServersModule = require(ServerDrivenUi.Content.ExperienceDetails.Hooks.useNavigateToServers)
 
 return ReactModule.memo(function(p1)

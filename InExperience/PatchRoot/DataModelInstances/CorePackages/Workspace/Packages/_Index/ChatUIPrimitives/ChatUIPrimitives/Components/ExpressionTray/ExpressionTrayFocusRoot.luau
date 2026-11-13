@@ -11,9 +11,10 @@ return function(p1)
 	-- upvalues: Parent (copy), ReactModule (copy), FFlagExpChatExpressionTrayRestoreGatedByInputModeModule (copy), RestoreSelectionIfStrandedModule (copy), GuiService (copy), UseDefaultFocusBehaviorFunction (copy), FFlagExpChatMemoizeExpressionTrayFocusRootRenderModule (copy)
 	local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
 	local UseFocusRootFunction = FocusNavigationUtilsModule.useFocusRoot
+	local UseLastInputModeFunction = FocusNavigationUtilsModule.useLastInputMode
 	local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseLastInputModeResult = FocusNavigationUtilsModule.useLastInputMode()
+	local UseLastInputModeResult = UseLastInputModeFunction()
 	local UseRefResult1 = ReactModule.useRef(false)
 	ReactModule.useEffect(function()
 		-- upvalues: UseRefResult1 (copy), p1 (copy), FFlagExpChatExpressionTrayRestoreGatedByInputModeModule (upval), UseLastInputModeResult (copy), RestoreSelectionIfStrandedModule (upval), GuiService (upval), UseRefResult (copy)

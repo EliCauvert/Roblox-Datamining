@@ -1,4 +1,7 @@
 ﻿local GenericChallenges = script:FindFirstAncestor("GenericChallenges")
+local Parent = GenericChallenges.Parent
+local AddRawValueMethodToEnumModule: (any, any) -> () = require(GenericChallenges.Utils.addRawValueMethodToEnum)
+local EnumerateModule = require(Parent.enumerate)
 local config = {
 	Unknown = "Unknown",
 	Login = "Login",
@@ -6,7 +9,7 @@ local config = {
 	ItemTrade = "ItemTrade",
 	PasswordReset = "PasswordReset"
 }
-local v1 = require(GenericChallenges.Parent.enumerate)(script.Name, config)
-require(GenericChallenges.Utils.addRawValueMethodToEnum)(v1, config)
+local EnumerateModuleResult = EnumerateModule(script.Name, config)
+AddRawValueMethodToEnumModule(EnumerateModuleResult, config)
 
-return v1
+return EnumerateModuleResult

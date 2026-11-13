@@ -1,12 +1,13 @@
 ﻿local GameTile = script:FindFirstAncestor("GameTile")
 local Parent = GameTile.Parent
 local CryoModule = require(Parent.Cryo)
+local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local ResponsiveModule = require(Parent.Responsive)
 local GameTileDirectActionModule = require(GameTile.GameTileDirectAction)
 local GameTileOverflowMenuModule = require(GameTile.GameTileOverflowMenu)
 local TileOverflowMenuItems = require(GameTile.GameTileConstants).TileOverflowMenuItems
-local IconName = require(Parent.Foundation).Enums.IconName
+local IconName = FoundationModule.Enums.IconName
 local UseLastInputFunction = ResponsiveModule.useLastInput
 
 local function _(p1): number

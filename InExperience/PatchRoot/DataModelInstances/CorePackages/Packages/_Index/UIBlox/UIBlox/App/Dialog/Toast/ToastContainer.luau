@@ -7,10 +7,13 @@ local GetTextSizeModule = require(Parent1.Core.Text.GetTextSize)
 local ImagesModule = require(Parent1.App.ImageSet.Images)
 local MemoizeModule = require(Parent1.Utility.memoize)
 local WithStyleModule = require(Parent1.Core.Style.withStyle)
+local ValidateColorInfoModule = require(Parent1.Core.Style.Validator.validateColorInfo)
+local ButtonTypeModule = require(Parent.Button.Enum.ButtonType)
 local FoundationButtonUtilsModule = require(Parent.Button.FoundationButtonUtils)
+local StandardButtonSizeModule = require(Parent1.Core.Button.Enum.StandardButtonSize)
 local UIBloxConfigModule = require(Parent1.UIBloxConfig)
 local _Vector2 = Vector2.new(36, 36)
-local Small = require(Parent1.Core.Button.Enum.StandardButtonSize).Small
+local Small = StandardButtonSizeModule.Small
 
 local function _(p1, p2, p3, X)
 	-- upvalues: GetTextSizeModule (copy)
@@ -22,7 +25,7 @@ ToastContainer.validateProps = TModule.strictInterface({
 	anchorPoint = TModule.optional(TModule.Vector2),
 	buttonText = TModule.optional(TModule.string),
 	fitHeight = TModule.optional(TModule.boolean),
-	iconColorStyle = TModule.optional((require(Parent1.Core.Style.Validator.validateColorInfo))),
+	iconColorStyle = TModule.optional(ValidateColorInfoModule),
 	iconImage = TModule.optional(TModule.union(TModule.table, TModule.string, TModule.callback)),
 	iconSize = TModule.optional(TModule.Vector2),
 	iconChildren = TModule.optional(TModule.table),
@@ -37,7 +40,7 @@ ToastContainer.validateProps = TModule.strictInterface({
 	sizeConstraint = TModule.optional(TModule.table),
 	toastSubtitle = TModule.optional(TModule.string),
 	toastTitle = TModule.string,
-	buttonType = TModule.optional(require(Parent.Button.Enum.ButtonType).isEnumValue)
+	buttonType = TModule.optional(ButtonTypeModule.isEnumValue)
 })
 ToastContainer.defaultProps = {
 	fitHeight = true,

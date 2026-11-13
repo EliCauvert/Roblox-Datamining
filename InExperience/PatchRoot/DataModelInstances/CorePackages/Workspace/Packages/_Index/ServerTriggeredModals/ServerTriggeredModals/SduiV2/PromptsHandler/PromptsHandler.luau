@@ -16,6 +16,7 @@ local SduiLoadTimer = SduiSharedUtilitiesModule.SduiLoadTimer
 local View = require(Parent.Foundation).View
 local LoggerModule = require(ServerTriggeredModals.Logger)
 local ReportPromptImpressionModule = require(ServerTriggeredModals.reportPromptImpression)
+local LogPromptModalSkippedModule = require(ServerTriggeredModals.logPromptModalSkipped)
 local SendModalImpressionEventFunction = require(Parent.ServerTriggeredModalImpressions).sendModalImpressionEvent
 local FetchPromptsModule = require(ServerTriggeredModals.SduiV2.fetchPrompts)
 local PromptsEntryPointModule = require(ServerTriggeredModals.SduiV2.PromptsEntryPoint)
@@ -23,6 +24,7 @@ local PromptStyleModule = require(ServerTriggeredModals.SduiV2.PromptStyle)
 local UsePromptEntriesModule = require(ServerTriggeredModals.SduiV2.usePromptEntries)
 local UseModalSignalStoreModule = require(ServerTriggeredModals.SignalStores.useModalSignalStore)
 local FFlagPromptsActionEventLoggingModule = require(ServerTriggeredModals.Flags.FFlagPromptsActionEventLogging)
+local FFlagPromptsModalSkipTelemetryModule = require(ServerTriggeredModals.Flags.FFlagPromptsModalSkipTelemetry)
 local FFlagPlusUpsellSheetHomePromptModule = require(ServerTriggeredModals.Flags.FFlagPlusUpsellSheetHomePrompt)
 local PlusUpsellSheetPromptModule = if FFlagPlusUpsellSheetHomePromptModule then require(script.Parent.Parent.PlusUpsellSheetPrompt) else nil
 local GetEntryPointSurfaceConfigModule = require(script.Parent.getEntryPointSurfaceConfig)
@@ -85,7 +87,7 @@ local _ = function(HomepageLaunch)
 end
 
 local MemoResult = ReactModule.memo(function(p1)
-	-- upvalues: FFlagNotificationStreamPromptsHandlerEnabled (copy), PromptsEntryPointModule (copy), SharedFlagsModule (copy), UseDispatchFunction (copy), FFlagSduiDismissPromptAction (copy), UseStoreFunction (copy), UseModalSignalStoreModule (copy), FFlagEdpGameLeavePromptsHandlerEnabled (copy), FFlagEdpOpenPromptsHandlerEnabled (copy), FFlagPromptsEdpOpenReplaceOnFetch (copy), FFlagPushNotificationsUpsellPassClientAttributesToPrompts (copy), GetHomepagePromptsClientAttributesModule (copy), ReactModule (copy), GetEntryPointSurfaceConfigModule (copy), SignalsReactModule (copy), FFlagHomepagePromptsHandlerPassClientAttributes (copy), FFlagChatPushUpsellPromptsEnabled (copy), FFlagSduiAllowNoConfigsBuilt (copy), SduiLoadTimer (copy), parsePromptStyles (copy), FIntPromptsHandlerSessionTimeoutMs (copy), FFlagPromptsHandlerFetchOncePerSession (copy), Tbl (copy), FetchPromptsModule (copy), LocalUserIdStore (copy), CurrentUserIds (copy), UsePromptEntriesModule (copy), PromptStyleModule (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), FFlagPromptsImpressionUsesTitle (copy), FFlagPlusUpsellSheetHomePromptModule (copy), PlusUpsellSheetPromptModule (copy), ReportPromptImpressionModule (copy), LoggerModule (copy), SendModalImpressionEventFunction (copy), FFlagPromptsHandlerCoachmarkEnabled (copy), FFlagSduiSurfaceBannerScrollAwaySticky (copy), FFlagAppIaScrollAway (copy), AppNavBarModule (copy), FFlagSduiSurfaceBannerAlwaysMounted (copy), FFlagSduiSystemBannerComponent (copy), SurfaceBannerModule (copy), SduiFeatureEntryPoint (copy), FFlagPromptsActionEventLoggingModule (copy), FFlagHomepagePromptsPaddingFix (copy), View (copy), CoachmarkRendererModule (copy)
+	-- upvalues: FFlagNotificationStreamPromptsHandlerEnabled (copy), PromptsEntryPointModule (copy), SharedFlagsModule (copy), UseDispatchFunction (copy), FFlagSduiDismissPromptAction (copy), UseStoreFunction (copy), UseModalSignalStoreModule (copy), FFlagEdpGameLeavePromptsHandlerEnabled (copy), FFlagEdpOpenPromptsHandlerEnabled (copy), FFlagPromptsEdpOpenReplaceOnFetch (copy), FFlagPushNotificationsUpsellPassClientAttributesToPrompts (copy), GetHomepagePromptsClientAttributesModule (copy), ReactModule (copy), GetEntryPointSurfaceConfigModule (copy), SignalsReactModule (copy), FFlagHomepagePromptsHandlerPassClientAttributes (copy), FFlagChatPushUpsellPromptsEnabled (copy), FFlagSduiAllowNoConfigsBuilt (copy), SduiLoadTimer (copy), parsePromptStyles (copy), FIntPromptsHandlerSessionTimeoutMs (copy), FFlagPromptsHandlerFetchOncePerSession (copy), Tbl (copy), FetchPromptsModule (copy), LocalUserIdStore (copy), CurrentUserIds (copy), UsePromptEntriesModule (copy), PromptStyleModule (copy), FFlagPromptsModalSkipTelemetryModule (copy), LogPromptModalSkippedModule (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), FFlagPromptsImpressionUsesTitle (copy), FFlagPlusUpsellSheetHomePromptModule (copy), PlusUpsellSheetPromptModule (copy), ReportPromptImpressionModule (copy), LoggerModule (copy), SendModalImpressionEventFunction (copy), FFlagPromptsHandlerCoachmarkEnabled (copy), FFlagSduiSurfaceBannerScrollAwaySticky (copy), FFlagAppIaScrollAway (copy), AppNavBarModule (copy), FFlagSduiSurfaceBannerAlwaysMounted (copy), FFlagSduiSystemBannerComponent (copy), SurfaceBannerModule (copy), SduiFeatureEntryPoint (copy), FFlagPromptsActionEventLoggingModule (copy), FFlagHomepagePromptsPaddingFix (copy), View (copy), CoachmarkRendererModule (copy)
 	local EntryPoint = p1.entryPoint
 	local IsEntryPointMatch: boolean = FFlagNotificationStreamPromptsHandlerEnabled and EntryPoint == PromptsEntryPointModule.NotificationStreamOpen
 	local PromptStyle = p1.promptStyle
@@ -279,26 +281,43 @@ local MemoResult = ReactModule.memo(function(p1)
 	local UseRefResult1 = if FFlagSduiDismissPromptAction then ReactModule.useRef(nil) else nil
 	local UseRefResult2 = if FFlagSduiDismissPromptAction then ReactModule.useRef(nil) else nil
 	ReactModule.useEffect(function()
-		-- upvalues: UseSignalStateResult (copy), UseSignalStateResult1 (copy), UsePromptEntriesModuleResultEntry (copy), UseModalSignalStoreModuleResult (copy), EntryPoint (copy), UseDispatchResult (copy), SetCentralOverlayFunction (upval), CentralOverlayType (upval), UseMemoResult (copy), FFlagPromptsImpressionUsesTitle (upval), FFlagSduiDismissPromptAction (upval), UseRefResult1 (copy), UseRefResult2 (copy)
-		if UseSignalStateResult then return end
-		if UseSignalStateResult1 then return end
-		if UsePromptEntriesModuleResultEntry == nil or UsePromptEntriesModuleResultEntry.config == nil or UsePromptEntriesModuleResultEntry.identifier == nil or UsePromptEntriesModuleResultEntry.robloxComponentType == nil or UsePromptEntriesModuleResultEntry.title == nil then return end
-		UseModalSignalStoreModuleResult.setHasShown(EntryPoint, true)
-		UseDispatchResult(SetCentralOverlayFunction(CentralOverlayType.SduiPromptModal, {
-			configKey = UseMemoResult.configKey,
-			appPage = UseMemoResult.appPage,
-			modalId = UsePromptEntriesModuleResultEntry.identifier,
-			modalType = if FFlagPromptsImpressionUsesTitle then UsePromptEntriesModuleResultEntry.title else UsePromptEntriesModuleResultEntry.robloxComponentType
-		}))
-		
-		if FFlagSduiDismissPromptAction then
-			UseRefResult1.current = UsePromptEntriesModuleResultEntry.title
-			UseRefResult2.current = UsePromptEntriesModuleResultEntry.identifier
+		-- upvalues: UseSignalStateResult (copy), FFlagPromptsModalSkipTelemetryModule (upval), LogPromptModalSkippedModule (upval), EntryPoint (copy), UsePromptEntriesModuleResult (copy), UseSignalStateResult1 (copy), UsePromptEntriesModuleResultEntry (copy), UseModalSignalStoreModuleResult (copy), UseDispatchResult (copy), SetCentralOverlayFunction (upval), CentralOverlayType (upval), UseMemoResult (copy), FFlagPromptsImpressionUsesTitle (upval), FFlagSduiDismissPromptAction (upval), UseRefResult1 (copy), UseRefResult2 (copy)
+		if not UseSignalStateResult then
+			if not UseSignalStateResult1 then
+				if UsePromptEntriesModuleResultEntry ~= nil and UsePromptEntriesModuleResultEntry.config ~= nil and UsePromptEntriesModuleResultEntry.identifier ~= nil and UsePromptEntriesModuleResultEntry.robloxComponentType ~= nil and UsePromptEntriesModuleResultEntry.title ~= nil then
+					UseModalSignalStoreModuleResult.setHasShown(EntryPoint, true)
+					
+					if FFlagPromptsModalSkipTelemetryModule then
+						LogPromptModalSkippedModule.markShown(EntryPoint, UsePromptEntriesModuleResultEntry)
+					end
+					UseDispatchResult(SetCentralOverlayFunction(CentralOverlayType.SduiPromptModal, {
+						configKey = UseMemoResult.configKey,
+						appPage = UseMemoResult.appPage,
+						modalId = UsePromptEntriesModuleResultEntry.identifier,
+						modalType = if FFlagPromptsImpressionUsesTitle then UsePromptEntriesModuleResultEntry.title else UsePromptEntriesModuleResultEntry.robloxComponentType
+					}))
+					
+					if FFlagSduiDismissPromptAction then
+						UseRefResult1.current = UsePromptEntriesModuleResultEntry.title
+						UseRefResult2.current = UsePromptEntriesModuleResultEntry.identifier
+					end
+					return
+				elseif FFlagPromptsModalSkipTelemetryModule and UsePromptEntriesModuleResultEntry ~= nil then
+					LogPromptModalSkippedModule.log(LogPromptModalSkippedModule.Reason.IncompleteEntry, EntryPoint, UsePromptEntriesModuleResultEntry)
+				end
+				return
+			elseif FFlagPromptsModalSkipTelemetryModule then
+				LogPromptModalSkippedModule.logAll(LogPromptModalSkippedModule.Reason.LegacyMetadata, EntryPoint, UsePromptEntriesModuleResult)
+			end
+			return
+		elseif FFlagPromptsModalSkipTelemetryModule then
+			LogPromptModalSkippedModule.logAll(LogPromptModalSkippedModule.Reason.AlreadyShown, EntryPoint, UsePromptEntriesModuleResult)
 		end
 	end, {
 		UseSignalStateResult, UseSignalStateResult1, UseDispatchResult,
 		UseModalSignalStoreModuleResult, UsePromptEntriesModuleResultEntry,
-		UseMemoResult, EntryPoint
+		UseMemoResult, EntryPoint,
+		if FFlagPromptsModalSkipTelemetryModule then UsePromptEntriesModuleResult else nil
 	})
 	
 	if FFlagSduiDismissPromptAction then
@@ -376,7 +395,7 @@ local MemoResult = ReactModule.memo(function(p1)
 	local Element = nil
 	
 	if IsPromptStyleMatch then
-		Element = if FFlagSduiSystemBannerComponent and HasUsePromptEntriesModuleResultEntry and ScrollAwayEnabled then ReactModule.createElement(SurfaceBannerModule, {
+		Element = if FFlagSduiSystemBannerComponent and (HasUsePromptEntriesModuleResultEntry and ScrollAwayEnabled) then ReactModule.createElement(SurfaceBannerModule, {
 			identifier = if UsePromptEntriesModuleResultEntry1 then UsePromptEntriesModuleResultEntry1.identifier else nil,
 			configKey = UseMemoResult.configKey,
 			appPage = UseMemoResult.appPage,
@@ -419,10 +438,10 @@ local MemoResult = ReactModule.memo(function(p1)
 		}) else p1.inlineBannerFallback
 	end
 	if (FFlagHomepagePromptsPaddingFix or IsEntryPointMatch) and IsPromptStyleMatch1 then
-		local HasUsePromptEntriesModuleResultEntry1 = UsePromptEntriesModuleResult1[1] ~= nil
+		local v1 = UsePromptEntriesModuleResult1[1] ~= nil
 		
 		if Element ~= nil then
-			local HasTopPadding: boolean = HasUsePromptEntriesModuleResultEntry1 and p1.topPadding ~= nil
+			local HasTopPadding: boolean = v1 and p1.topPadding ~= nil
 			local HasBottomPadding = p1.bottomPadding ~= nil
 			Element = ReactModule.createElement(View, {
 				Size = UDim2.new(1, 0, 0, 0),
@@ -432,7 +451,7 @@ local MemoResult = ReactModule.memo(function(p1)
 					bottom = if HasBottomPadding then UDim.new(0, p1.bottomPadding) else nil
 				}
 			}, { InlineBanner = Element })
-		elseif HasUsePromptEntriesModuleResultEntry1 and p1.topPadding then
+		elseif v1 and p1.topPadding then
 			Element = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 0, p1.topPadding)

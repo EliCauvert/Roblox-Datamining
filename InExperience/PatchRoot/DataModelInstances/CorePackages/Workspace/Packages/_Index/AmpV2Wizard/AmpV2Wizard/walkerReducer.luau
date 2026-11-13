@@ -103,13 +103,14 @@ local function reduceReport(p2, p3)
 	end
 	local Node = p2.nodes[CurrentNodeId]
 	local Transition = if Node then Node.transitions[p3.outcome] else nil
-	local Copy = table.clone(p2.history)
-	table.insert(Copy, {
+	local config = {
 		flow = p2.chosenFlow,
 		node = CurrentNodeId,
 		outcome = p3.outcome,
 		data = p3.data
-	})
+	}
+	local Copy = table.clone(p2.history)
+	table.insert(Copy, config)
 	
 	if Transition == nil then
 		return (errorExit(p2, Copy, p3.outcome))

@@ -1,4 +1,5 @@
 ﻿local AmpV2Wizard = script:FindFirstAncestor("AmpV2Wizard")
+local LoggingProtocolModule = require(AmpV2Wizard.Parent.LoggingProtocol)
 local _ = require(AmpV2Wizard.Types)
 local WizardEventNamesModule = require(AmpV2Wizard.WizardEventNames)
 local AmpV2WizardEventThrottleHundredthsPercent = game:DefineFastInt("AmpV2WizardEventThrottleHundredthsPercent", 10000)
@@ -30,7 +31,7 @@ local function makeConfig(EventName)
 	}
 end
 
-local Default = require(AmpV2Wizard.Parent.LoggingProtocol).default
+local Default = LoggingProtocolModule.default
 
 return {
 	flattenParams = flattenParams,

@@ -1,9 +1,10 @@
 ﻿local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local GetIconRichTextFunction = FoundationModule.Utility.getIconRichText
-local FFlagAXMISWithBlackbird = require(Parent.SharedFlags).FFlagAXMISWithBlackbird
+local FFlagAXMISWithBlackbird = SharedFlagsModule.FFlagAXMISWithBlackbird
 
 return function(Frame)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), FoundationModule (copy), FFlagAXMISWithBlackbird (copy), GetIconRichTextFunction (copy)

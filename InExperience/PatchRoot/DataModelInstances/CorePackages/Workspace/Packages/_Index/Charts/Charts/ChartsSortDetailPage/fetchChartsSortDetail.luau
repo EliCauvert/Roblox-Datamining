@@ -14,9 +14,7 @@ local ChartsSortDetailScopeFieldsModule = require(Charts.ChartsSortDetailPage.Ch
 local GetChartsSortDetailPostUrlModule = require(Charts.ChartsSortDetailPage.getChartsSortDetailPostUrl)
 local GetChartsSortDetailPageKeyModule = require(Charts.ChartsSortDetailPage.getChartsSortDetailPageKey)
 local BuildChartsSortDetailRequestModule = require(Charts.ChartsSortDetailPage.buildChartsSortDetailRequest)
-local SharedFlagsModule = require(Parent.SharedFlags)
-local FFlagSduiChartsSortDetailGenreFilter = SharedFlagsModule.FFlagSduiChartsSortDetailGenreFilter
-local FFlagSduiAdvertiseRuntimeSupportSets = SharedFlagsModule.FFlagSduiAdvertiseRuntimeSupportSets
+local FFlagSduiChartsSortDetailGenreFilter = require(Parent.SharedFlags).FFlagSduiChartsSortDetailGenreFilter
 
 local function _()
 	-- upvalues: GetSduiClientPageScopeFunction (copy), ChartsConstantsModule (copy), ChartsPageScopeFieldsModule (copy)
@@ -67,7 +65,7 @@ local _ = function(p1)
 end
 
 return function(SortId, LoadTimer)
-	-- upvalues: GetSduiClientPageScopeFunction (copy), ChartsConstantsModule (copy), ChartsPageScopeFieldsModule (copy), GetChartsSortDetailPageKeyModule (copy), FFlagSduiChartsSortDetailGenreFilter (copy), GetSduiApiStoreFunction (copy), ChartsSortDetailScopeFieldsModule (copy), GetChartsSortDetailPostUrlModule (copy), Parent (copy), FFlagSduiAdvertiseRuntimeSupportSets (copy), SduiCapabilities (copy), BuildChartsSortDetailRequestModule (copy), ChartsPageSessionModule (copy), getFilterSelectionsWithGenre (copy), GetSduiTemplateStoreFunction (copy), SduiResponseType (copy), SduiApiStorePostConfigContentType (copy)
+	-- upvalues: GetSduiClientPageScopeFunction (copy), ChartsConstantsModule (copy), ChartsPageScopeFieldsModule (copy), GetChartsSortDetailPageKeyModule (copy), FFlagSduiChartsSortDetailGenreFilter (copy), GetSduiApiStoreFunction (copy), ChartsSortDetailScopeFieldsModule (copy), GetChartsSortDetailPostUrlModule (copy), Parent (copy), SduiCapabilities (copy), BuildChartsSortDetailRequestModule (copy), ChartsPageSessionModule (copy), getFilterSelectionsWithGenre (copy), GetSduiTemplateStoreFunction (copy), SduiResponseType (copy), SduiApiStorePostConfigContentType (copy)
 	local ChartsSortDetailPageKeyModule = GetChartsSortDetailPageKeyModule(SortId, nil, (GetSduiClientPageScopeFunction(ChartsConstantsModule.ConfigKey).get(ChartsPageScopeFieldsModule.FilterSelections)))
 	
 	if FFlagSduiChartsSortDetailGenreFilter then
@@ -80,23 +78,18 @@ return function(SortId, LoadTimer)
 		end
 	end
 	local ChartsSortDetailPostUrlModule = GetChartsSortDetailPostUrlModule()
-	local ServiceContractsProtoModule = require(Parent.ServiceContractsProto)
-	local ChartsPage = ServiceContractsProtoModule.apppageplatform.charts.charts_page
-	local ClientCapabilities = ServiceContractsProtoModule.apppageplatform.shared.client_capabilities.ClientCapabilities
-	local ClientCapabilities1 = nil
-	ClientCapabilities1 = if FFlagSduiAdvertiseRuntimeSupportSets then SduiCapabilities.buildClientCapabilities() else ClientCapabilities.new({
-		enabled_capabilities = SduiCapabilities.getEnabledCapabilityNumbers({ "CAPABILITY_SUPPORTS_HYDRATION_CLIENT_HINTS" })
-	})
+	local ChartsPage = require(Parent.ServiceContractsProto).apppageplatform.charts.charts_page
+	local ClientCapabilities = SduiCapabilities.buildClientCapabilities()
 	
 	local function buildBody(ContentPageToken)
-		-- upvalues: BuildChartsSortDetailRequestModule (upval), ChartsPage (copy), SortId (copy), ChartsPageSessionModule (upval), FFlagSduiChartsSortDetailGenreFilter (upval), getFilterSelectionsWithGenre (upval), ChartsSortDetailPageKeyModule (copy), GetSduiClientPageScopeFunction (upval), ChartsConstantsModule (upval), ChartsPageScopeFieldsModule (upval), GetSduiTemplateStoreFunction (upval), ClientCapabilities1 (ref)
+		-- upvalues: BuildChartsSortDetailRequestModule (upval), ChartsPage (copy), SortId (copy), ChartsPageSessionModule (upval), FFlagSduiChartsSortDetailGenreFilter (upval), getFilterSelectionsWithGenre (upval), ChartsSortDetailPageKeyModule (copy), GetSduiClientPageScopeFunction (upval), ChartsConstantsModule (upval), ChartsPageScopeFieldsModule (upval), GetSduiTemplateStoreFunction (upval), ClientCapabilities (copy)
 		return BuildChartsSortDetailRequestModule(ChartsPage, {
 			sortId = SortId,
 			contentPageToken = ContentPageToken,
 			sessionId = ChartsPageSessionModule:Get(),
 			filterSelections = if FFlagSduiChartsSortDetailGenreFilter then getFilterSelectionsWithGenre(ChartsSortDetailPageKeyModule) else GetSduiClientPageScopeFunction(ChartsConstantsModule.ConfigKey).get(ChartsPageScopeFieldsModule.FilterSelections),
 			cachedRobloxComponentToTemplateId = GetSduiTemplateStoreFunction().getCachedRobloxComponentToTemplateId("ChartsSortDetail"),
-			clientCapabilities = ClientCapabilities1
+			clientCapabilities = ClientCapabilities
 		})
 	end
 	

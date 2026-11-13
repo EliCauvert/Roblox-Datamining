@@ -4,6 +4,7 @@ local DashModule = require(Parent.Dash)
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local RoactNetworking = require(Parent.RoactServiceTags).RoactNetworking
+local SharedFlagsModule = require(Parent.SharedFlags)
 local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
 local Button = FoundationModule.Button
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
@@ -28,7 +29,7 @@ local UseAbuseReportAnalyticsFunction = require(GenericAbuseReporting.BeduiV2.An
 local UseLayoutSlotsFunction = require(GenericAbuseReporting.BeduiV2.Components.LayoutSlots).useLayoutSlots
 local FFlagAbuseReportImproveErrorEventsModule = require(GenericAbuseReporting.Flags.FFlagAbuseReportImproveErrorEvents)
 local FFlagAbuseReportOptimisticBlockToggleModule = require(GenericAbuseReporting.Flags.FFlagAbuseReportOptimisticBlockToggle)
-local FFlagSupportSubmissionOnAllReportNodes = require(Parent.SharedFlags).FFlagSupportSubmissionOnAllReportNodes
+local FFlagSupportSubmissionOnAllReportNodes = SharedFlagsModule.FFlagSupportSubmissionOnAllReportNodes
 
 local function useBlockToggle(BlockToggle)
 	-- upvalues: ReactModule (copy), FFlagAbuseReportOptimisticBlockToggleModule (copy), UseAbuseReportAnalyticsFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), IsBlockedUserFunction (copy), TelemetryEventType (copy), FFlagAbuseReportImproveErrorEventsModule (copy), FormatErrorDetailForAnalyticsFunction (copy), DashModule (copy), UnblockUserFunction (copy), BlockUserFunction (copy)

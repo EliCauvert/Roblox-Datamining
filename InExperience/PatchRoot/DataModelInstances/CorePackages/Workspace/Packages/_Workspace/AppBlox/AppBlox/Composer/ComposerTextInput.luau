@@ -819,7 +819,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1)
 						ref = UseRefResult,
 						tag = `{UseStyleTagsModuleResult or ""} data-testid={WithDefaultsModuleResult.testId}--textbox`,
 						Size = if IsLargestAbove then _UDim2 else nil,
-						automaticSize = if WithDefaultsModuleResult.maxLines then nil elseif HasMaxLines then if IsLargestAbove and not UseStateResult3 and UseStateResult6 ~= "" then Enum.AutomaticSize.Y else nil else MapBindableModule(WithDefaultsModuleResult.text, function(p2)
+						automaticSize = if WithDefaultsModuleResult.maxLines then nil elseif HasMaxLines then if IsLargestAbove and (not UseStateResult3 and UseStateResult6 ~= "") then Enum.AutomaticSize.Y else nil else MapBindableModule(WithDefaultsModuleResult.text, function(p2)
 							-- upvalues: IsLargestAbove (copy), UseStateResult3 (copy)
 							return if IsLargestAbove and not UseStateResult3 and p2 ~= "" then Enum.AutomaticSize.Y else nil
 						end),
@@ -832,7 +832,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1)
 						onInputChanged = UseResult12,
 						onInputEnded = UseResult17,
 						manualFocusRelease = if IsUsePreferredInputModuleResultMatch then WithDefaultsModuleResult.manualFocusRelease else nil,
-						shouldEmitReturnEvents = IsUsePreferredInputModuleResultMatch and WithDefaultsModuleResult.manualFocusRelease == true and WithDefaultsModuleResult.alwaysMultiLine == true or nil
+						shouldEmitReturnEvents = IsUsePreferredInputModuleResultMatch and (WithDefaultsModuleResult.manualFocusRelease == true and WithDefaultsModuleResult.alwaysMultiLine == true) or nil
 					}, {
 						DragDetector = UseMemoResult8,
 						BoundsChecker = if IsLargestAbove then ReactModule.createElement(MemoResult, {
@@ -843,7 +843,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1)
 							ref = UseRefResult2
 						}) else nil
 					}),
-					MobileFocusTarget = if IsLargestAbove and (IsUsePreferredInputModuleResultMatch and not UseStateResult3 and not IsDisabled) then ReactModule.createElement(ViewModule, {
+					MobileFocusTarget = if IsLargestAbove and IsUsePreferredInputModuleResultMatch and not UseStateResult3 and not IsDisabled then ReactModule.createElement(ViewModule, {
 						tag = "size-full",
 						ZIndex = 2,
 						onActivated = UseResult5,
@@ -870,7 +870,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1)
 						onCursorPositionChanged = if IsLargestAbove then UseResult23 else nil,
 						onInputEnded = UseResult17,
 						manualFocusRelease = if IsUsePreferredInputModuleResultMatch then WithDefaultsModuleResult.manualFocusRelease else nil,
-						shouldEmitReturnEvents = IsUsePreferredInputModuleResultMatch and WithDefaultsModuleResult.manualFocusRelease == true and WithDefaultsModuleResult.alwaysMultiLine == true or nil
+						shouldEmitReturnEvents = IsUsePreferredInputModuleResultMatch and (WithDefaultsModuleResult.manualFocusRelease == true and WithDefaultsModuleResult.alwaysMultiLine == true) or nil
 					}) else nil
 				})
 			}),

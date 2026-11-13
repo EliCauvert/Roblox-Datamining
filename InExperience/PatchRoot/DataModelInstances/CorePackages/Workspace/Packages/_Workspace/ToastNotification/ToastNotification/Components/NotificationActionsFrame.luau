@@ -1,5 +1,7 @@
 ﻿local Parent = script.Parent.Parent
 local Context = Parent.context
+local Hooks = Parent.Hooks
+local Utils = Parent.utils
 local DependenciesModule = require(Parent.dependencies)
 local UIBlox = DependenciesModule.UIBlox
 local UseTokensFunction = require(Parent.Parent.Foundation).Hooks.useTokens
@@ -16,17 +18,17 @@ local UseFocusGuiObjectFunction = require(Parent1.ReactFocusNavigation).useFocus
 local FocusNavigationUtilsModule = require(Parent1.FocusNavigationUtils)
 local FocusRoot = FocusNavigationUtilsModule.FocusRoot
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local GetTimerFromCardDataFunction = require(Parent.utils.toastNotificationHelper).getTimerFromCardData
+local GetTimerFromCardDataFunction = require(Utils.toastNotificationHelper).getTimerFromCardData
 local UseNotificationCardStateModule = require(Context.useNotificationCardState)
 local UseNotificationCardDataModule = require(Context.useNotificationCardData)
-local UseTimeRemainingMapModule = require(Parent.Hooks.useTimeRemainingMap)
+local UseTimeRemainingMapModule = require(Hooks.useTimeRemainingMap)
 
 local function _(Alert)
 	-- upvalues: TypeModule (copy), ButtonType (copy)
 	return if Alert == TypeModule.SENDERButtonStyleEnum.Growth then ButtonType.PrimaryContextual elseif Alert == TypeModule.SENDERButtonStyleEnum.Primary then ButtonType.PrimarySystem elseif Alert == TypeModule.SENDERButtonStyleEnum.Secondary then ButtonType.Secondary elseif Alert == TypeModule.SENDERButtonStyleEnum.Alert then ButtonType.Alert else ButtonType.Secondary
 end
 
-local function v19(List, p1, Callback, UseRefResult)
+local function v21(List, p1, Callback, UseRefResult)
 	-- upvalues: UseTokensFunction (copy), UseNotificationCardDataModule (copy), GetTimerFromCardDataFunction (copy), UseTimeRemainingMapModule (copy), TypeModule (copy), ButtonType (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseNotificationCardDataModuleResult = UseNotificationCardDataModule()
@@ -64,7 +66,7 @@ local function v19(List, p1, Callback, UseRefResult)
 end
 
 return function(p2)
-	-- upvalues: UseNotificationCardStateModule (copy), UseNotificationCardDataModule (copy), UseLocalizationFunction (copy), ReactModule (copy), UseFocusGuiObjectFunction (copy), v19 (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), ButtonStack (copy), DefaultButtonHeight (copy), DefaultContentPadding (copy)
+	-- upvalues: UseNotificationCardStateModule (copy), UseNotificationCardDataModule (copy), UseLocalizationFunction (copy), ReactModule (copy), UseFocusGuiObjectFunction (copy), v21 (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), ButtonStack (copy), DefaultButtonHeight (copy), DefaultContentPadding (copy)
 	local Button = UseNotificationCardStateModule("button")
 	local HandleActions = UseNotificationCardDataModule().handleActions
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -86,7 +88,7 @@ return function(p2)
 			UseFocusGuiObjectResult(nil)
 		end
 	end, { ShouldAutoFocus, UseFocusGuiObjectResult })
-	local Buttons = v19(Button, UseLocalizationResult, HandleActions, UseRefResult)
+	local Buttons = v21(Button, UseLocalizationResult, HandleActions, UseRefResult)
 	
 	return if #Buttons > 0 then ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,

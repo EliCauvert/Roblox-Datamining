@@ -12,6 +12,8 @@ local IsTypeDefinitionNodeFunction = PredicatesModule.isTypeDefinitionNode
 local IsTypeSystemDefinitionNodeFunction = PredicatesModule.isTypeSystemDefinitionNode
 local IsTypeSystemExtensionNodeFunction = PredicatesModule.isTypeSystemExtensionNode
 local Type = Parent.type
+local SpecifiedScalarTypes = require(Type.scalars).specifiedScalarTypes
+local IntrospectionTypes = require(Type.introspection).introspectionTypes
 local MapResult = nil
 local Callback1 = nil
 local Callback = nil
@@ -45,7 +47,7 @@ local KnownTypeNamesRuleModule = {
 		}
 	end
 }
-MapResult = Array.map(Array.concat(require(Type.scalars).specifiedScalarTypes, require(Type.introspection).introspectionTypes), function(p2)
+MapResult = Array.map(Array.concat(SpecifiedScalarTypes, IntrospectionTypes), function(p2)
 	return p2.name
 end)
 

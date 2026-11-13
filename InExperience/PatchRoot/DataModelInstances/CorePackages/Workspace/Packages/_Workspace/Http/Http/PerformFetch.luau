@@ -60,20 +60,20 @@ function PerformFetchModule.Single(p1, Callback)
 	end
 end
 
-function PerformFetchModule.Batch(p1, Callback, Callback1)
+function PerformFetchModule.Batch(p1, Callback1, Callback)
 	-- upvalues: NewResults (ref), PromiseModule (copy), RetrievalStatus (copy), BatchUpdateFetchingStatusFunction (copy), PromiseUtilities (copy), ResultModule (copy)
 	assert(typeof(p1) == "table")
-	assert(typeof(Callback) == "function")
 	assert(typeof(Callback1) == "function")
+	assert(typeof(Callback) == "function")
 	
 	return function(p2)
-		-- upvalues: p1 (copy), Callback (copy), NewResults (upval), PromiseModule (upval), RetrievalStatus (upval), BatchUpdateFetchingStatusFunction (upval), Callback1 (copy), PromiseUtilities (upval), ResultModule (upval)
+		-- upvalues: p1 (copy), Callback1 (copy), NewResults (upval), PromiseModule (upval), RetrievalStatus (upval), BatchUpdateFetchingStatusFunction (upval), Callback (copy), PromiseUtilities (upval), ResultModule (upval)
 		local List = {}
 		local Keys = {}
 		local t = {}
 		
 		for _, value in ipairs(p1) do
-			local CallbackResult = Callback(value)
+			local CallbackResult = Callback1(value)
 			local NewResult = NewResults[CallbackResult]
 			
 			if NewResult then
@@ -100,7 +100,7 @@ function PerformFetchModule.Batch(p1, Callback, Callback1)
 			if #List1 > 0 then
 				p2:dispatch(BatchUpdateFetchingStatusFunction(List1))
 			end
-			ResolveResult = Callback1(p2, List)
+			ResolveResult = Callback(p2, List)
 			assert(PromiseModule.is(ResolveResult))
 		else
 			ResolveResult = PromiseModule.resolve({})

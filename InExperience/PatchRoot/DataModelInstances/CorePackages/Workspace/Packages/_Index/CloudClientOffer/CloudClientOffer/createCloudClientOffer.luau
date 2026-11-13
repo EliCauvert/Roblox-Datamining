@@ -3,13 +3,15 @@ local SignalsModule = require(CloudClientOffer.Parent.Signals)
 local _ = require(CloudClientOffer.CloudClientServiceAdapter)
 local _ = require(CloudClientOffer.CloudClientExperiment)
 local _ = require(CloudClientOffer.Stores.GetCloudClientSessionStore.createCloudClientSessionStore)
+local FFlagLuaAppCloudClientOfferDryRunModule = require(CloudClientOffer.Flags.FFlagLuaAppCloudClientOfferDryRun)
+local FFlagLuaAppCloudClientOfferDecisionTelemetryModule = require(CloudClientOffer.Flags.FFlagLuaAppCloudClientOfferDecisionTelemetry)
 
 local function _(p1, p2): string
 	return `{p1}/{p2}`
 end
 
 return function(p1)
-	-- upvalues: SignalsModule (copy)
+	-- upvalues: SignalsModule (copy), FFlagLuaAppCloudClientOfferDryRunModule (copy), FFlagLuaAppCloudClientOfferDecisionTelemetryModule (copy)
 	local Service = p1.service
 	local Experiment = p1.experiment
 	local Session = p1.session
@@ -46,7 +48,7 @@ return function(p1)
 	end
 	
 	local function tryCandidate(p2, p3: number, Count1)
-		-- upvalues: Flag (ref), Count (ref), Candidates (copy), v2 (ref), v3 (ref), v1 (ref), Signal2 (copy), tryCandidate (copy), Session (copy), Service (copy), Experiment (copy)
+		-- upvalues: Flag (ref), Count (ref), Candidates (copy), v2 (ref), v3 (ref), v1 (ref), Signal2 (copy), tryCandidate (copy), Session (copy), Service (copy), FFlagLuaAppCloudClientOfferDryRunModule (upval), Experiment (copy)
 		local function _()
 			-- upvalues: Flag (upval), Count1 (copy), Count (upval)
 			return Flag or Count1 ~= Count
@@ -98,13 +100,29 @@ return function(p1)
 				end
 				
 				local function onReservationFailed(p4)
-					-- upvalues: Flag (upval), Count1 (copy), Count (upval), Session (upval), Text (copy), tryCandidate (upval), p2 (copy), p3 (copy)
+					-- upvalues: Flag (upval), Count1 (copy), Count (upval), FFlagLuaAppCloudClientOfferDryRunModule (upval), v2 (upval), v3 (upval), v1 (upval), Signal2 (upval), Session (upval), Text (copy), tryCandidate (upval), p2 (copy), p3 (copy)
 					if Flag or Count1 ~= Count then return end
-					if p4.kind == "Ineligible" then
-						Session.markPlaceRefused(Text)
-					end
-					if not Flag and Count1 == Count then
-						tryCandidate(p2, p3 + 1, Count1)
+					if FFlagLuaAppCloudClientOfferDryRunModule and p4.kind == "Unavailable" and p4.reason == "DryRun" then
+						local config = { kind = "Local" }
+						local Callback: (any) -> () = v2
+						v2 = nil
+						v3 = nil
+						
+						if v1 ~= nil then
+							v1 = nil
+							Signal2(nil)
+						end
+						if Callback ~= nil then
+							Callback(config)
+						end
+						return
+					else
+						if p4.kind == "Ineligible" then
+							Session.markPlaceRefused(Text)
+						end
+						if not Flag and Count1 == Count then
+							tryCandidate(p2, p3 + 1, Count1)
+						end
 					end
 				end
 				
@@ -189,10 +207,13 @@ return function(p1)
 			end
 		end,
 		accept = function()
-			-- upvalues: v1 (ref), Flag (ref), v2 (ref), v3 (ref), Signal2 (copy)
+			-- upvalues: v1 (ref), Flag (ref), FFlagLuaAppCloudClientOfferDecisionTelemetryModule (upval), Service (copy), v2 (ref), v3 (ref), Signal2 (copy)
 			local Offer = v1
 			
 			if Flag or Offer == nil then return end
+			if FFlagLuaAppCloudClientOfferDecisionTelemetryModule then
+				Service.reportDecision(Offer.reservationToken, "accepted")
+			end
 			local config = { kind = "Stream", offer = Offer }
 			local Callback: (any) -> () = v2
 			v2 = nil
@@ -207,8 +228,11 @@ return function(p1)
 			end
 		end,
 		decline = function()
-			-- upvalues: Flag (ref), v1 (ref), Service (copy), v2 (ref), v3 (ref), Signal2 (copy)
+			-- upvalues: Flag (ref), v1 (ref), FFlagLuaAppCloudClientOfferDecisionTelemetryModule (upval), Service (copy), v2 (ref), v3 (ref), Signal2 (copy)
 			if Flag or v1 == nil then return end
+			if FFlagLuaAppCloudClientOfferDecisionTelemetryModule then
+				Service.reportDecision(v1.reservationToken, "rejected")
+			end
 			local v4 = v1
 			
 			if v4 ~= nil then
@@ -228,8 +252,11 @@ return function(p1)
 			end
 		end,
 		dismiss = function()
-			-- upvalues: Flag (ref), v1 (ref), Service (copy), v2 (ref), v3 (ref), Signal2 (copy)
+			-- upvalues: Flag (ref), v1 (ref), FFlagLuaAppCloudClientOfferDecisionTelemetryModule (upval), Service (copy), v2 (ref), v3 (ref), Signal2 (copy)
 			if Flag or v1 == nil then return end
+			if FFlagLuaAppCloudClientOfferDecisionTelemetryModule then
+				Service.reportDecision(v1.reservationToken, "dismissed")
+			end
 			local v4 = v1
 			
 			if v4 ~= nil then

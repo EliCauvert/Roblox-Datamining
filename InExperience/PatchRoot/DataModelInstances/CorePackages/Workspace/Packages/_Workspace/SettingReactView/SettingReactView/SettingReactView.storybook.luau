@@ -1,6 +1,7 @@
 ﻿local SettingReactView = script:FindFirstAncestor("SettingReactView")
 local Parent = SettingReactView.Parent
 local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
 local FoundationModule = require(Parent.Foundation)
 local FoundationProvider = FoundationModule.FoundationProvider
 local config = {
@@ -18,7 +19,7 @@ return {
 	name = SettingReactView.Name,
 	storyRoot = SettingReactView,
 	roact = ReactModule,
-	reactRoblox = require(Parent.ReactRoblox),
+	reactRoblox = ReactRobloxModule,
 	mapStory = function(p1)
 		-- upvalues: ReactModule (copy), FoundationProvider (copy), config (copy), config1 (copy)
 		return function(p2)

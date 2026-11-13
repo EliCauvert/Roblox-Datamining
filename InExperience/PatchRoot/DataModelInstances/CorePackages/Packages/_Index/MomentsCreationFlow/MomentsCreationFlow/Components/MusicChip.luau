@@ -1,11 +1,12 @@
 ﻿local MomentsCreationFlow = script:FindFirstAncestor("MomentsCreationFlow")
 local Parent = MomentsCreationFlow.Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local Icon = FoundationModule.Icon
 local Text = FoundationModule.Text
 local View = FoundationModule.View
-local MusicNote = require(Parent.BuilderIcons).Icon.MusicNote
+local MusicNote = BuilderIconsModule.Icon.MusicNote
 local UseMusicInfoModule = require(MomentsCreationFlow.Hooks.useMusicInfo)
 
 return function(p1)

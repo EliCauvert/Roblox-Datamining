@@ -2173,6 +2173,7 @@ Feature.Build.Action.Resume,CV
 Feature.Build.Action.Retry,
 Feature.Build.Action.Revert,
 Feature.Build.Action.Save,
+Feature.Build.Action.SaveFilters,
 Feature.Build.Action.SetDailyLimit,Atur batas harian
 Feature.Build.Action.SetLimit,Atur batas
 Feature.Build.Action.Settings,
@@ -3894,7 +3895,7 @@ Feature.Moments.Action.AddMusic,Tambahkan Musik
 Feature.Moments.Action.AddSticker,Tambahkan Stiker
 Feature.Moments.Action.AddText,Tambahkan Teks
 Feature.Moments.Action.AddVoice,Tambahkan Suara
-Feature.Moments.Action.Analytics,Analitik
+Feature.Moments.Action.Analytics,Lihat statistik
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
@@ -3945,12 +3946,15 @@ Feature.Moments.Description.GenerateTextFeedbackDisclosure,Buatan AI. Review seb
 Feature.Moments.Description.HowToCaptureStep1,"Aktifkan Media, gabung ke Pengalaman Virtual, dan pilih menu hamburger"
 Feature.Moments.Description.HowToCaptureStep2,Aktifkan kendali Media
 Feature.Moments.Description.HowToCaptureStep3,Ambil foto dan video gameplay
+Feature.Moments.Description.LeaveAvatarMomentsCreation,"Semua perubahanmu akan hilang, tetapi pakaianmu akan tetap sama."
 Feature.Moments.Description.LeaveMomentsCreation,"Semua perubahanmu akan hilang, tetapi kamu masih dapat menemukan tangkapan layar ini di galeri <b>Mediamu</b>."
+Feature.Moments.Description.MomentsOffBody,Minta orang tua untuk mengaktifkan Moment di kendali orang tua.
 Feature.Moments.Description.NoMusicResults,Musik tidak ditemukan
 Feature.Moments.Description.NonInfiniteScrollEndBody,Kami sudah menjeda feed-mu. Kamu bisa memutuskan apakah ingin terus menonton.
 Feature.Moments.Description.NothingHereYet,Belum ada apa pun di sini...
 Feature.Moments.Description.PublishMoment,Deskripsikan Moment-mu
 Feature.Moments.Description.StayFriendly,Mari kita tetap bersikap ramah
+Feature.Moments.Description.TimeLimitReachedBody,Batas didasarkan pada usia. Tonton Moment besok.
 Feature.Moments.Description.TooManyUploads,Kamu telah meng-upload terlalu banyak video hari ini. Coba lagi besok.
 Feature.Moments.Disclaimer.EveryoneMoments,Semua orang di Moment dapat melihat apa yang dipublikasikan
 Feature.Moments.Label.All,
@@ -4021,6 +4025,7 @@ Feature.Moments.Label.MomentRemovedTitle,Kami menghapus Moment ini
 Feature.Moments.Label.MomentUnavailable,Moment tidak tersedia
 Feature.Moments.Label.MomentUnavailableDefault,Moment ini tidak tersedia.
 Feature.Moments.Label.MomentsExperienceName,
+Feature.Moments.Label.MomentsOffTitle,Moment dinonaktifkan
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,Belum ada komentar
 Feature.Moments.Label.NonInfiniteScrollEndTitle,Ada lebih banyak Moment untuk ditonton
@@ -4050,6 +4055,7 @@ Feature.Moments.Label.TextGenerationFailedBody,Tidak dapat membuat teks. Coba la
 Feature.Moments.Label.TextGenerationFailedTitle,Pembuatan Gagal
 Feature.Moments.Label.TextGenerationFilteredBody,"Tidak dapat melakukan pembuatan untuk video yang direkam ini, konten difilter."
 Feature.Moments.Label.TextGenerationFilteredTitle,Pembuatan Difilter
+Feature.Moments.Label.TimeLimitReachedTitle,Kamu sudah mencapai batas waktu untuk Moment
 Feature.Moments.Label.Tone,Gaya
 Feature.Moments.Label.Tone.Cinematic,Sinematik
 Feature.Moments.Label.Tone.Funny,Lucu
@@ -4906,6 +4912,8 @@ Feature.UniversalShareSheet.Response.SharedMessage,Pesan terkirim
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Beberapa pesan terkirim
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} lainnya
 Feature.UserLibrary.Label.MyLibrary,Perpustakaan Saya
+Feature.VIPServer.Message.TooManyFreeServersOnGame,Jumlah server privat gratis di pengalaman virtual ini sudah mencapai maksimum.
+Feature.VIPServer.Message.TooManyTotalActiveFreeServers,Jumlah server privat gratis sudah mencapai maksimum. Nonaktifkan beberapa server lainnya terlebih dahulu.
 Feature.VerificationUpsell.Action.AddPhone,Tambahkan Nomor Ponsel
 Feature.VerificationUpsell.Action.AddPhoneNumber,
 Feature.VerificationUpsell.Action.AddPhoneVoice,Tambahkan Ponsel untuk Chat Suara

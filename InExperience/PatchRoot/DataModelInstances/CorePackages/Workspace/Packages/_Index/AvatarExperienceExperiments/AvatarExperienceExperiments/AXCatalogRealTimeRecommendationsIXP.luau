@@ -1,11 +1,13 @@
 ﻿local Parent = script:FindFirstAncestor("AvatarExperienceExperiments").Parent
+local AppUserLayers = require(Parent.ExperimentLayers).AppUserLayers
+local IXPUtilsModule = require(Parent.IXPUtils)
 local AXCatalogRealTimeRecommendationsIXPV2 = game:DefineFastFlag("AXCatalogRealTimeRecommendationsIXPV2", false)
 local AXCatalogRealTimeRecommendationsIXPEnabledForAllV2 = game:DefineFastFlag("AXCatalogRealTimeRecommendationsIXPEnabledForAllV2", false)
 
-return require(Parent.IXPUtils).defineIXPTest({
+return IXPUtilsModule.defineIXPTest({
 	name = "AvatarMarketplace.UA.PerfCatalogRealTimeRecommendations",
 	recordExposure = false,
-	layer = require(Parent.ExperimentLayers).AppUserLayers.AvatarExperienceUAMarketplaceView,
+	layer = AppUserLayers.AvatarExperienceUAMarketplaceView,
 	getIsUserInExperiment = function(p1): boolean
 		return p1.catalogRealTimeRecommendations ~= nil
 	end,

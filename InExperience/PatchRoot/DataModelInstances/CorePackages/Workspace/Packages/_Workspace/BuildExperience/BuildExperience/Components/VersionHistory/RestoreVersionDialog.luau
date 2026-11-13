@@ -2,12 +2,13 @@
 local Parent = BuildExperience.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local Dialog = FoundationModule.Dialog
 local DialogSize = FoundationModule.Enums.DialogSize
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
-local FFlagEnableTeamTestLua = require(Parent.SharedFlags).FFlagEnableTeamTestLua
+local FFlagEnableTeamTestLua = SharedFlagsModule.FFlagEnableTeamTestLua
 
 return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), FFlagEnableTeamTestLua (copy), ButtonVariant (copy), Dialog (copy), DialogSize (copy)

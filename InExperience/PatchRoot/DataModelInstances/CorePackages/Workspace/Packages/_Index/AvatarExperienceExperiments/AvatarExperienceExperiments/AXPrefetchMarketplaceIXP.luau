@@ -1,11 +1,13 @@
 ﻿local Parent = script:FindFirstAncestor("AvatarExperienceExperiments").Parent
+local AppUserLayers = require(Parent.ExperimentLayers).AppUserLayers
+local IXPUtilsModule = require(Parent.IXPUtils)
 local AXPrefetchMarketplaceIXP5 = game:DefineFastFlag("AXPrefetchMarketplaceIXP5", false)
 local AXPrefetchMarketplaceIXPEnabledForAll5 = game:DefineFastFlag("AXPrefetchMarketplaceIXPEnabledForAll5", false)
 
-return require(Parent.IXPUtils).defineIXPTest({
+return IXPUtilsModule.defineIXPTest({
 	name = "AvatarMarketplace.UA.PrefetchMarketplace",
 	recordExposure = false,
-	layer = require(Parent.ExperimentLayers).AppUserLayers.AvatarExperienceUAMarketplaceView,
+	layer = AppUserLayers.AvatarExperienceUAMarketplaceView,
 	getIsUserInExperiment = function(p1): boolean
 		return p1.enableMarketplacePrefetch ~= nil
 	end,

@@ -33,8 +33,8 @@ return function(p1)
 	local UseSelectorResult = if not FFlagLuaAppEnableSduiHomePage then UseSelectorFunction(function(p2): string
 		return (tostring(p2.LocalUserId))
 	end) else nil
-	local HasIncomingFriendRequest = nil
 	local Recommendation = nil
+	local HasIncomingFriendRequest = nil
 	
 	if FFlagLuaAppEnableSduiHomePage then
 		HasIncomingFriendRequest = if p1.recommendation then p1.recommendation.hasIncomingFriendRequest else nil

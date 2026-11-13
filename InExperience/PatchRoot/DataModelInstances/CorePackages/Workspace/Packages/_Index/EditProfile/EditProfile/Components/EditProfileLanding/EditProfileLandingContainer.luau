@@ -214,8 +214,14 @@ return function(p2)
 		AnalyticsServiceV2Module.sendEditProfileOpened()
 	end, {})
 	local UseSignalStateResult1 = UseSignalStateFunction(UseMemoResult)
+	local NoUseSignalStateResult1: boolean = not UseSignalStateResult1 or UseSignalStateResult1.status ~= "success"
 	local Entry = UseSignalStateResult1 and (UseSignalStateResult1.data and UseSignalStateResult1.data[1])
+	local GetDisplayName = if Entry then Entry.names.getDisplayName else Signal
+	local UseSignalStateResult2 = UseSignalStateFunction(if Entry then Entry.names.getUsername else Signal) or ""
+	local UseSignalStateResult3 = UseSignalStateFunction(GetDisplayName) or ""
 	local Description = EditProfileStoreModule.getDescription(UseLocalUserIdResult)
+	local IsUseSignalStateResultMatch = UseSignalStateFunction(Description.status) == DataHydrationTypes.DataStatus.NotReady
+	local UseSignalStateResult4 = UseSignalStateFunction(Description.data) or ""
 	
 	local function OnProfileFramesActivated()
 		-- upvalues: openEditProfileImageFromProfilePlatform (upval), p2 (copy), EnumsModule (upval)
@@ -226,11 +232,11 @@ return function(p2)
 		userId = UseLocalUserIdResult,
 		fullBleed = NoIsFullScreen,
 		onClose = OnClose,
-		username = UseSignalStateFunction(if Entry then Entry.names.getUsername else Signal) or "",
-		displayName = UseSignalStateFunction(if Entry then Entry.names.getDisplayName else Signal) or "",
-		areNamesLoading = not UseSignalStateResult1 or UseSignalStateResult1.status ~= "success",
-		bioText = UseSignalStateFunction(Description.data) or "",
-		isBioLoading = UseSignalStateFunction(Description.status) == DataHydrationTypes.DataStatus.NotReady,
+		username = UseSignalStateResult2,
+		displayName = UseSignalStateResult3,
+		areNamesLoading = NoUseSignalStateResult1,
+		bioText = UseSignalStateResult4,
+		isBioLoading = IsUseSignalStateResultMatch,
 		isPolicyEnabled = UseRealNamesInDisplayNamesEnabledModuleResult,
 		settingButtonOnActivated = {
 			displayName = DisplayName,

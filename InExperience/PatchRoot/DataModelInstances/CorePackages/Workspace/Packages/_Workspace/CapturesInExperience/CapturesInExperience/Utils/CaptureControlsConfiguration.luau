@@ -4,18 +4,19 @@ local AppStorageService = game:GetService("AppStorageService")
 local HttpService = game:GetService("HttpService")
 local CryoModule = require(Parent1.Cryo)
 local GetDeepValueFunction = require(Parent1.LuaSocialLibrariesDeps).SocialLibraries.config({}).Dictionary.getDeepValue
+local GetLocalUserIdModule = require(Parent.Utils.getLocalUserId)
 local ConstantsModule = require(Parent.Constants)
 local CaptureControlsAppStorageEnabledEngineFeature = game:GetEngineFeature("CaptureControlsAppStorageEnabled")
 local _Vector2 = Vector2.new(1, 0.5)
 local t = {}
 local Text = tostring(game.GameId)
-local v1 = require(Parent.Utils.getLocalUserId)((game:GetService("Players")))
+local LocalUserIdModule = GetLocalUserIdModule((game:GetService("Players")))
 local CaptureControlsStoredAnchorPoints = game:DefineFastInt("CaptureControlsStoredAnchorPoints", 100)
 
 return {
 	getStoredSnapAnchorPoint = function()
-		-- upvalues: CaptureControlsAppStorageEnabledEngineFeature (copy), v1 (copy), _Vector2 (copy), AppStorageService (copy), ConstantsModule (copy), HttpService (copy), t (ref), GetDeepValueFunction (copy), Text (copy)
-		if not CaptureControlsAppStorageEnabledEngineFeature or not v1 then
+		-- upvalues: CaptureControlsAppStorageEnabledEngineFeature (copy), LocalUserIdModule (copy), _Vector2 (copy), AppStorageService (copy), ConstantsModule (copy), HttpService (copy), t (ref), GetDeepValueFunction (copy), Text (copy)
+		if not CaptureControlsAppStorageEnabledEngineFeature or not LocalUserIdModule then
 			return _Vector2
 		end
 		local Success, Result = pcall(function()
@@ -33,7 +34,7 @@ return {
 		
 		if Success1 then
 			t = Result1
-			local DeepValue = GetDeepValueFunction(Result1, string.format("%s.%s", v1, Text))
+			local DeepValue = GetDeepValueFunction(Result1, string.format("%s.%s", LocalUserIdModule, Text))
 			
 			return if DeepValue then Vector2.new(DeepValue.X, DeepValue.Y) else _Vector2
 		else
@@ -41,9 +42,9 @@ return {
 		end
 	end,
 	setStoredSnapAnchorPoint = function(Vector)
-		-- upvalues: CaptureControlsAppStorageEnabledEngineFeature (copy), v1 (copy), t (ref), Text (copy), CryoModule (copy), CaptureControlsStoredAnchorPoints (copy), AppStorageService (copy), ConstantsModule (copy), HttpService (copy)
-		if not CaptureControlsAppStorageEnabledEngineFeature or not v1 then return end
-		local Entry = t[v1] or {}
+		-- upvalues: CaptureControlsAppStorageEnabledEngineFeature (copy), LocalUserIdModule (copy), t (ref), Text (copy), CryoModule (copy), CaptureControlsStoredAnchorPoints (copy), AppStorageService (copy), ConstantsModule (copy), HttpService (copy)
+		if not CaptureControlsAppStorageEnabledEngineFeature or not LocalUserIdModule then return end
+		local Entry = t[LocalUserIdModule] or {}
 		Entry[Text] = { X = Vector.X, Y = Vector.Y, timestamp = os.time() }
 		local KeysResult = CryoModule.Dictionary.keys(Entry)
 		
@@ -58,7 +59,7 @@ return {
 				return Set[p1]
 			end)
 		end
-		local UnionResult = CryoModule.Dictionary.union(t, { [v1] = Entry })
+		local UnionResult = CryoModule.Dictionary.union(t, { [LocalUserIdModule] = Entry })
 		AppStorageService:SetItem(ConstantsModule.CaptureControlsPositionStorageKey, HttpService:JSONEncode(UnionResult))
 		t = UnionResult
 	end

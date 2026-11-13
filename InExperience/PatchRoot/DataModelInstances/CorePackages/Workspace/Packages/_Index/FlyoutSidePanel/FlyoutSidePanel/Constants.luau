@@ -1,5 +1,7 @@
 ﻿local Parent = script:FindFirstAncestor("FlyoutSidePanel").Parent
 local FlyoutSidePanelIXP = require(Parent.SharedExperimentDefinition).FlyoutSidePanelIXP
+local FFlagEnableChartsInFlyout = require(Parent.SharedFlags).FFlagEnableChartsInFlyout
+local FFlagUserLibrary = require(Parent.SharedFlags).FFlagUserLibrary
 local FFlagFlyoutAddAdjustScreenModule = require(script.Parent.Flags.FFlagFlyoutAddAdjustScreen)
 
 return {
@@ -13,9 +15,9 @@ return {
 	MAX_SHOWN_STATUS_INDICATOR_COUNT = 99,
 	FLYOUT_DEFAULT_POLICY = {
 		MyLibrary = {
-			if require(Parent.SharedFlags).FFlagUserLibrary then "UserLibrary" else nil,
-			"Favorites", "ContinuePlaying",
-			if require(Parent.SharedFlags).FFlagEnableChartsInFlyout and FlyoutSidePanelIXP.isChartsInFlyoutEnabled() then "Charts" else nil,
+			if FFlagUserLibrary then "UserLibrary" else nil, "Favorites",
+			"ContinuePlaying",
+			if FFlagEnableChartsInFlyout and FlyoutSidePanelIXP.isChartsInFlyoutEnabled() then "Charts" else nil,
 			"Connections", "Communities", "Inventory", "Trades", "Messages", "Blackbird",
 			"Premium", "GiftCards", "Redeem", "Settings",
 			if FFlagFlyoutAddAdjustScreenModule then "AdjustScreen" else nil,

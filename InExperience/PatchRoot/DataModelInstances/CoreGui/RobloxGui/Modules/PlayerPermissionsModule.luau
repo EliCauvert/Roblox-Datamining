@@ -1,4 +1,4 @@
-﻿local t = {}
+﻿local PlayerPermissionsModule = {}
 local Players = game:GetService("Players")
 local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 local _ = RobloxGui:WaitForChild("Modules")
@@ -399,7 +399,7 @@ end
 
 local v5 = "Admin"
 
-function t.IsPlayerAdminAsync(Player): boolean
+function PlayerPermissionsModule.IsPlayerAdminAsync(Player): boolean
 	-- upvalues: NewResults (copy), Module (copy), v5 (copy)
 	local NewResult = NewResults[Player]
 	
@@ -419,7 +419,7 @@ end
 
 local v6 = "Intern"
 
-function t.IsPlayerInternAsync(Player): boolean
+function PlayerPermissionsModule.IsPlayerInternAsync(Player): boolean
 	-- upvalues: NewResults (copy), Module (copy), v6 (copy)
 	local NewResult = NewResults[Player]
 	
@@ -439,7 +439,7 @@ end
 
 local v7 = "Star"
 
-function t.IsPlayerStarAsync(Player): boolean
+function PlayerPermissionsModule.IsPlayerStarAsync(Player): boolean
 	-- upvalues: NewResults (copy), Module (copy), v7 (copy)
 	local NewResult = NewResults[Player]
 	
@@ -457,7 +457,7 @@ function t.IsPlayerStarAsync(Player): boolean
 	return false
 end
 
-function t.IsPlayerLocalizationExpertAsync(p3): boolean
+function PlayerPermissionsModule.IsPlayerLocalizationExpertAsync(p3): boolean
 	-- upvalues: list (copy)
 	for i = 1, #list do
 		if list[i](p3) then
@@ -492,13 +492,13 @@ else
 		return Player.UserId == game.CreatorId
 	end
 end
-t.IsPlayerPlaceOwnerAsync = IsPlayerPlaceOwnerAsync
-t.CanPlayerManagePlaceAsync = CanPlayerManagePlace
+PlayerPermissionsModule.IsPlayerPlaceOwnerAsync = IsPlayerPlaceOwnerAsync
+PlayerPermissionsModule.CanPlayerManagePlaceAsync = CanPlayerManagePlace
 
 if FFlagInExperienceUserProfileSettingsEnabledModule then
-	t.IsPlayerInExperienceNameEnabledAsync = IsPlayerInExperienceNameEnabled
+	PlayerPermissionsModule.IsPlayerInExperienceNameEnabledAsync = IsPlayerInExperienceNameEnabled
 end
 if FFlagBadgeVisibilitySettingEnabled then
-	t.SetPlayerInExperienceNameEnabled = SetPlayerInExperienceNameEnabled
+	PlayerPermissionsModule.SetPlayerInExperienceNameEnabled = SetPlayerInExperienceNameEnabled
 end
-return t
+return PlayerPermissionsModule

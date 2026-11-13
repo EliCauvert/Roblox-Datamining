@@ -10,11 +10,13 @@
 	getFrameRect = function(p1, Value: number)
 		local ClampedValue = math.clamp(Value, 1, p1.frameCount)
 		local ClampedValueDelta = ClampedValue - 1
+		local ClampedValueDeltaRemainder = ClampedValueDelta % p1.columns
+		local Floored = math.floor(ClampedValueDelta / p1.columns)
 		local Stride = p1.stride or (p1.cellSize or p1.frameSize + (p1.padding or 0))
 		
 		return {
 			frameIndex = ClampedValue,
-			offset = Vector2.new(ClampedValueDelta % p1.columns * Stride, math.floor(ClampedValueDelta / p1.columns) * Stride),
+			offset = Vector2.new(ClampedValueDeltaRemainder * Stride, Floored * Stride),
 			size = Vector2.new(p1.frameSize, p1.frameSize)
 		}
 	end,

@@ -8,12 +8,13 @@ local _ = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetF
 local _ = require(GenericAbuseReporting.Enums.AbuseVector)
 local ArTranslationProvider = require(GenericAbuseReporting.BeduiV2.Utils.Translate.arTranslation).ArTranslationProvider
 local LayoutSlotsModule = require(GenericAbuseReporting.BeduiV2.Components.LayoutSlots)
+local LoaderContextModule = require(GenericAbuseReporting.BeduiV2.Loaders.LoaderContext)
 local UseAbuseSheetFlowModule = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.useAbuseSheetFlow)
 local VoiceSpeakingSignalsModule = require(GenericAbuseReporting.BeduiV2.Utils.Signals.voiceSpeakingSignals)
 local InlineSlots = LayoutSlotsModule.inlineSlots
 local LayoutSlotsProvider = LayoutSlotsModule.LayoutSlotsProvider
 local OverlaidControlsProvider = LayoutSlotsModule.OverlaidControlsProvider
-local LoaderProvider = require(GenericAbuseReporting.BeduiV2.Loaders.LoaderContext).LoaderProvider
+local LoaderProvider = LoaderContextModule.LoaderProvider
 local FFlagAbuseReportInExpPlayerListV3 = SharedFlagsModule.FFlagAbuseReportInExpPlayerListV3
 local FFlagAbuseReportVoiceMute = SharedFlagsModule.FFlagAbuseReportVoiceMute
 

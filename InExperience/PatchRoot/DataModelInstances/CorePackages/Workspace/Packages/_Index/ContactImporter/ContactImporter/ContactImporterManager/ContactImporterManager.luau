@@ -3,6 +3,7 @@ local AppStorageService = game:GetService("AppStorageService")
 local MessageBusService = game:GetService("MessageBusService")
 local Parent1 = Parent.Parent
 local ReactModule = require(Parent1.React)
+local DashModule = require(Parent1.Dash)
 local CryoModule = require(Parent1.Cryo)
 local UseQueryFunction = require(Parent1.ApolloClient).useQuery
 local ApolloFriendsModule = require(Parent1.ApolloFriends)
@@ -10,17 +11,21 @@ local Queries = require(Parent1.ApolloLocalState).queries
 local SocialLuaAnalyticsModule = require(Parent1.SocialLuaAnalytics)
 local AnalyticsFactory = SocialLuaAnalyticsModule.Analytics.AnalyticsFactory
 local DefaultAnalyticsService = SocialLuaAnalyticsModule.Analytics.DefaultAnalyticsService
+local EventTypes = SocialLuaAnalyticsModule.Analytics.Enums.EventTypes
+local Contexts = SocialLuaAnalyticsModule.Analytics.Enums.Contexts
 local UseFetchContactImporterInfoOnceFunction = require(Parent.Utils).useFetchContactImporterInfoOnce
 local UseAutoSyncContactsFunction = require(Parent.Utils).useAutoSyncContacts
 local UserIdExistsFunction = require(Parent1.SocialCommon).Utils.userIdExists
 local PermissionsProtocol = require(Parent1.PermissionsProtocol).PermissionsProtocol
 local UserProfilesModule = require(Parent1.UserProfiles)
 local UseLocalUserIdFunction = require(Parent1.RobloxAppHooks).useLocalUserId
+local UniversalAppPolicy = require(Parent.dependencies).UniversalAppPolicy
 local GetAppFeaturePoliciesFunction = require(Parent1.UniversalAppPolicy).getAppFeaturePolicies
 local PaginatedFriendsCarouselIXPModule = require(Parent.Experiments.PaginatedFriendsCarouselIXP)
 local EarlierFetchTimeForFriendsCarouselV1 = game:DefineFastFlag("EarlierFetchTimeForFriendsCarousel_v1", false)
 local PrefetchProfileNamesOnStartupV2 = game:DefineFastFlag("PrefetchProfileNamesOnStartup_v2", false)
 local FIntFriendsCarouselInitialFetchSize = require(Parent1.SharedFlags).FIntFriendsCarouselInitialFetchSize
+local FFlagRegisterQRCodeKeyInEngine = require(Parent1.SharedFlags).FFlagRegisterQRCodeKeyInEngine
 local FFlagAddFriendsPageHighlightUnseenTrustedRequests = require(Parent1.SharedFlags).FFlagAddFriendsPageHighlightUnseenTrustedRequests
 local FFlagSocialCarouselMigrateRecommendations = require(Parent1.SharedFlags).FFlagSocialCarouselMigrateRecommendations
 local FFlagFriendSortedByPresenceSignalsImplementation = require(Parent1.SharedFlags).FFlagFriendSortedByPresenceSignalsImplementation
@@ -32,20 +37,18 @@ local UnseenRequestsStore = FriendsRequestsModule.UnseenRequestsStore
 local FriendsRecommendationsModule = require(Parent1.DataHydration.FriendsRecommendations)
 local FriendsRecommendationsStore = FriendsRecommendationsModule.FriendsRecommendationsStore
 local DataSource = FriendsRecommendationsModule.Enums.DataSource
-local ProfileQrCodeCameraSettingsModalSeen: string = if require(Parent1.SharedFlags).FFlagRegisterQRCodeKeyInEngine then "ProfileQrCodeCameraSettingsModalSeen" else "ScreenshotEventTracking"
+local ProfileQrCodeCameraSettingsModalSeen: string = if FFlagRegisterQRCodeKeyInEngine then "ProfileQrCodeCameraSettingsModalSeen" else "ScreenshotEventTracking"
 local RealtimeMessageId = MessageBusService:GetMessageId("Realtime", "appResume")
 local GetResult1 = if PrefetchProfileNamesOnStartupV2 then UserProfilesModule.Stores.UserProfileStore.get() else nil
 local EventStream = {
 	ProfileQRCodeCameraSettingsModalSeen = {
-		context = SocialLuaAnalyticsModule.Analytics.Enums.Contexts.ProfileQRCode,
-		eventType = SocialLuaAnalyticsModule.Analytics.Enums.EventTypes.SettingsModalSeenSinceLastAppStart,
-		formatRulesForAdditionalInfo = {
-			cameraPermissionResponseStatus = require(Parent1.Dash).identity
-		}
+		context = Contexts.ProfileQRCode,
+		eventType = EventTypes.SettingsModalSeenSinceLastAppStart,
+		formatRulesForAdditionalInfo = { cameraPermissionResponseStatus = DashModule.identity }
 	}
 }
 
-return require(Parent.dependencies).UniversalAppPolicy.connect(function(p1)
+return UniversalAppPolicy.connect(function(p1)
 	return {
 		isContactImporterPolicyEnabled = p1.getContactImporterEnabled()
 	}

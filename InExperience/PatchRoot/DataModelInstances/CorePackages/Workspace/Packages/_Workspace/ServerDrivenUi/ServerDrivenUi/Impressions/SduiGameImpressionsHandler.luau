@@ -11,9 +11,10 @@ local FFlagSduiSearchResultsPageEnabled = require(Parent.SharedFlags).FFlagSduiS
 local FFlagSduiFixSearchTelemetry = require(Parent.SharedFlags).FFlagSduiFixSearchTelemetry
 local FFlagLuaAppSponsoredGamePreviewVideo = require(Parent.SharedFlags).FFlagLuaAppSponsoredGamePreviewVideo
 local FFlagLuaAppSduiPassSortSubId = require(Parent.SharedFlags).FFlagLuaAppSduiPassSortSubId
+local FFlagSduiForwardAnalyticsDataToGameClick = require(Parent.SharedFlags).FFlagSduiForwardAnalyticsDataToGameClick
 local t = {}
 local FilterAndStringifyAnalyticsDataModule = nil
-FilterAndStringifyAnalyticsDataModule = if require(Parent.SharedFlags).FFlagSduiForwardAnalyticsDataToGameClick then require(ServerDrivenUi.Analytics.filterAndStringifyAnalyticsData) else function(List)
+FilterAndStringifyAnalyticsDataModule = if FFlagSduiForwardAnalyticsDataToGameClick then require(ServerDrivenUi.Analytics.filterAndStringifyAnalyticsData) else function(List)
 	if not List or type(List) ~= "table" then
 		return nil
 	end

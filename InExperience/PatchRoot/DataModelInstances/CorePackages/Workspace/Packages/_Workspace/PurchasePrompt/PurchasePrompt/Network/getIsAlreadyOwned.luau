@@ -2,8 +2,9 @@
 local Players = game:GetService("Players")
 local PurchaseErrorModule = require(Parent.Enums.PurchaseError)
 local PromiseModule = require(Parent.Promise)
+local ProductTypeEnum = require(Parent.types).ProductTypeEnum
 local FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow = require(Parent.Parent.SharedFlags).FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow
-local config = { [require(Parent.types).ProductTypeEnum.VIPServer] = true }
+local config = { [ProductTypeEnum.VIPServer] = true }
 
 return function(p1, p2, p3, p4)
 	-- upvalues: FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (copy), PromiseModule (copy), config (copy), Players (copy), PurchaseErrorModule (copy)

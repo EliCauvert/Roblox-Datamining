@@ -1,8 +1,14 @@
 ﻿local GetConnectionsPlayedStoreModule = require(script.ConnectionsPlayed.getConnectionsPlayedStore)
 local CreateConnectionsPlayedStoreModule = require(script.ConnectionsPlayed.createConnectionsPlayedStore)
 local GamePassModule = require(script.GamePass)
+local CreateGamePassStore = GamePassModule.createGamePassStore
+local GetGamePassStore = GamePassModule.getGamePassStore
 local GameDeveloperProductModule = require(script.GameDeveloperProduct)
+local CreateGameDeveloperProductStore = GameDeveloperProductModule.createGameDeveloperProductStore
+local GetGameDeveloperProductStore = GameDeveloperProductModule.getGameDeveloperProductStore
 local GameSubscriptionModule = require(script.GameSubscription)
+local CreateGameSubscriptionStore = GameSubscriptionModule.createGameSubscriptionStore
+local GetGameSubscriptionStore = GameSubscriptionModule.getGameSubscriptionStore
 local _ = require(script.Followings.FollowingsStoreTypes)
 local _ = require(script.Votes.VotesStoreTypes)
 local _ = require(script.Favorites.FavoritesStoreTypes)
@@ -18,12 +24,12 @@ local _ = require(script.GameSubscription.GameSubscriptionStoreTypes)
 local FFlagLuaAppDataHydrationConnectionsPlayedStore = require(script:FindFirstAncestor("DataHydration").Parent.SharedFlags).FFlagLuaAppDataHydrationConnectionsPlayedStore
 
 return {
-	createGamePassStore = GamePassModule.createGamePassStore,
-	getGamePassStore = GamePassModule.getGamePassStore,
-	createGameDeveloperProductStore = GameDeveloperProductModule.createGameDeveloperProductStore,
-	getGameDeveloperProductStore = GameDeveloperProductModule.getGameDeveloperProductStore,
-	createGameSubscriptionStore = GameSubscriptionModule.createGameSubscriptionStore,
-	getGameSubscriptionStore = GameSubscriptionModule.getGameSubscriptionStore,
+	createGamePassStore = CreateGamePassStore,
+	getGamePassStore = GetGamePassStore,
+	createGameDeveloperProductStore = CreateGameDeveloperProductStore,
+	getGameDeveloperProductStore = GetGameDeveloperProductStore,
+	createGameSubscriptionStore = CreateGameSubscriptionStore,
+	getGameSubscriptionStore = GetGameSubscriptionStore,
 	createFavoritesStore = require(script.Favorites.createFavoritesStore),
 	createAgeRecommendationStore = require(script.AgeRecommendations.createAgeRecommendationStore),
 	createFollowingsStore = require(script.Followings.createFollowingsStore),

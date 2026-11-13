@@ -7,10 +7,11 @@ return function(p1, p2)
 	if not DeepValueModule or not DeepValueModule.usersTyping or not p1.Users then
 		return {}
 	end
+	local UsersTyping = DeepValueModule.usersTyping
 	local Users = p1.Users
 	local List = {}
 	
-	for i, value in pairs(DeepValueModule.usersTyping) do
+	for i, value in pairs(UsersTyping) do
 		if i ~= p1.LocalUserId and value then
 			table.insert(List, Users[i])
 		end

@@ -1,6 +1,7 @@
 ﻿local Songbird = script:FindFirstAncestor("Songbird")
 local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
+local AssetFavoritesModule = require(Songbird.Parent.AssetFavorites)
 local FoundationModule = require(Songbird.Parent.Foundation)
 local ReactModule = require(Songbird.Parent.React)
 local FocusNavigationUtilsModule = require(Songbird.Parent.FocusNavigationUtils)
@@ -12,7 +13,7 @@ local DefaultTwoStepReportFlowModule = require(Songbird.Parent.GenericAbuseRepor
 local AbuseCategoryModule = require(Songbird.Parent.GenericAbuseReporting.AbuseCategory)
 local AbuseEntrypointModule = require(Songbird.Parent.GenericAbuseReporting.AbuseEntrypoint)
 local UseCallbackFunction = ReactModule.useCallback
-local UseLocalUserIdFunction = require(Songbird.Parent.AssetFavorites).useLocalUserId
+local UseLocalUserIdFunction = AssetFavoritesModule.useLocalUserId
 local ReportCategories = {
 	{
 		localizationKey = "Feature.SongDetails.Label.InappropriateAudio",

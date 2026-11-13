@@ -27,6 +27,7 @@ local FFlagPassShopPurchaseSurfaceToBuyModal = SharedFlagsModule.FFlagPassShopPu
 local FFlagSkipBuyDelayForExperienceShopModule = require(v1.Flags.FFlagSkipBuyDelayForExperienceShop)
 local _ = require(v1.types)
 local FFlagPurchasePromptSubtitleForTimedOptions = require(v1.Parent.SharedFlags).FFlagPurchasePromptSubtitleForTimedOptions
+local FFlagAXMISWithBlackbird = SharedFlagsModule.FFlagAXMISWithBlackbird
 local FFlagEnableRobuxInExperienceShop = SharedFlagsModule.FFlagEnableRobuxInExperienceShop
 local PurchasePromptElevateDisplayOrder = game:DefineFastFlag("PurchasePromptElevateDisplayOrder", false)
 local WindowStateModule = require(v1.Enums.WindowState)
@@ -115,7 +116,7 @@ return {
 	end,
 	windowStateChangedEvent = BindableEvent.Event,
 	promptStateSetToNoneEvent = BindableEvent1.Event,
-	Utils = if SharedFlagsModule.FFlagAXMISWithBlackbird then {
+	Utils = if FFlagAXMISWithBlackbird then {
 		getBlackbirdUpsellBannerProductInfo = require(v1.Utils.getBlackbirdUpsellBannerProductInfo)
 	} else {},
 	PublishAssetAnalytics = require(v1.Utils.PublishAssetAnalytics),

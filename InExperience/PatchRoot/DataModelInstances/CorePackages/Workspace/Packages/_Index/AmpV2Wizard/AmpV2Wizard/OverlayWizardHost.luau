@@ -141,6 +141,18 @@ return function(p1)
 		analyticsStrings = UseWizardWalkerModuleResult.analyticsStrings,
 		analyticsSessionId = UseWizardWalkerModuleResult.analyticsSessionId
 	}
+	local Element = if NoGetResult then ReactModule.createElement(UnknownNodeDebugViewModule, {
+		nodeType = CurrentNode.type,
+		details = CurrentNode.details,
+		transitions = CurrentNode.transitions,
+		report = UseWizardWalkerModuleResult.report
+	}) else ReactModule.createElement(Component, {
+		props = Node.details,
+		ctx = Ctx,
+		report = if HasUsePresentedOverPageModuleResult then noopReport else UseWizardWalkerModuleResult.report,
+		transitions = Node.transitions,
+		dismiss = if IsSessionPolling then UseWizardWalkerModuleResult.dismissPresentation else nil
+	})
 	local FillsViewportResult1 = if HasUsePresentedOverPageModuleResult then ComponentRegistryModule.fillsViewport(Registry, Node.type) else FillsViewportResult
 	local Frame = if HasUsePresentedOverPageModuleResult then ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -177,20 +189,7 @@ return function(p1)
 				["padding-large"] = not FillsViewportResult1
 			},
 			GroupTransparency = if FFlagAmpV2WizardNoCanvasGroupDimModule then nil else UseBindingResult
-		}, {
-			Node = if NoGetResult then ReactModule.createElement(UnknownNodeDebugViewModule, {
-				nodeType = CurrentNode.type,
-				details = CurrentNode.details,
-				transitions = CurrentNode.transitions,
-				report = UseWizardWalkerModuleResult.report
-			}) else ReactModule.createElement(Component, {
-				props = Node.details,
-				ctx = Ctx,
-				report = if HasUsePresentedOverPageModuleResult then noopReport else UseWizardWalkerModuleResult.report,
-				transitions = Node.transitions,
-				dismiss = if IsSessionPolling then UseWizardWalkerModuleResult.dismissPresentation else nil
-			})
-		}),
+		}, { Node = Element }),
 		LoadingOverlay = if IsLoading and (not IsSessionPolling or HasUsePresentedOverPageModuleResult) then ReactModule.createElement(View, {
 			tag = "size-full",
 			ZIndex = 2,
@@ -210,12 +209,12 @@ return function(p1)
 	if Frame ~= nil then
 		config.PresentingNode = Frame
 	end
-	local Element = ReactModule.createElement(View, {
+	local Element1 = ReactModule.createElement(View, {
 		tag = "size-full",
 		ref = UseWizardViewportLayoutModuleResult2,
 		onAbsolutePositionChanged = UseWizardViewportLayoutModuleResult2,
 		onAbsoluteSizeChanged = UseWizardViewportLayoutModuleResult2
 	}, config)
 	
-	return if FFlagAmpV2WizardServerParentFacingModule then if Node.behavior == nil or Node.behavior.parentFacing ~= true then Element else ReactModule.createElement(ParentModeTheme, nil, Element) elseif IsParentModeThemedNodeModule(Node.type, UseWizardWalkerModuleResult.currentNodeId) then ReactModule.createElement(ParentModeTheme, nil, Element) else Element
+	return if FFlagAmpV2WizardServerParentFacingModule then if Node.behavior == nil or Node.behavior.parentFacing ~= true then Element1 else ReactModule.createElement(ParentModeTheme, nil, Element1) elseif IsParentModeThemedNodeModule(Node.type, UseWizardWalkerModuleResult.currentNodeId) then ReactModule.createElement(ParentModeTheme, nil, Element1) else Element1
 end

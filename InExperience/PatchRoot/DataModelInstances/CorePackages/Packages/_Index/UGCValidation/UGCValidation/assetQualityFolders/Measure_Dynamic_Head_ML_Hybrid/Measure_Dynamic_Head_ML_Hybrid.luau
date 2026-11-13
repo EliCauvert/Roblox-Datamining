@@ -1,7 +1,10 @@
 ﻿local Parent = script.Parent.Parent.Parent
 local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 local ReadAQSummaryNumberModule = require(Parent.util.readAQSummaryNumber)
+local GetFFlagUGCValidateAQDynamicHeadMLHybridModule = require(Parent.flags.getFFlagUGCValidateAQDynamicHeadMLHybrid)
+local GetFFlagUGCValidateAQDynamicHeadMLHybridShadowModule = require(Parent.flags.getFFlagUGCValidateAQDynamicHeadMLHybridShadow)
 local GetFFlagUGCValidateAQDynamicHeadMLHybridNewFacsMessagesModule = require(Parent.flags.getFFlagUGCValidateAQDynamicHeadMLHybridNewFacsMessages)
 local GetFFlagUGCValidateAQDynamicHeadMLHybridWarningsModule = require(Parent.flags.getFFlagUGCValidateAQDynamicHeadMLHybridWarnings)
 local GetFIntUGCValidationDynamicHeadMLEyesMinScorePerMillionModule = require(Parent.flags.getFIntUGCValidationDynamicHeadMLEyesMinScorePerMillion)
@@ -137,11 +140,9 @@ local list = {
 }
 
 return {
-	categories = {
-		require(Parent.validationSystem.ValidationEnums).UploadCategory.DYNAMIC_HEAD
-	},
-	fflag = require(Parent.flags.getFFlagUGCValidateAQDynamicHeadMLHybrid),
-	shadowFlag = require(Parent.flags.getFFlagUGCValidateAQDynamicHeadMLHybridShadow),
+	categories = { ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD },
+	fflag = GetFFlagUGCValidateAQDynamicHeadMLHybridModule,
+	shadowFlag = GetFFlagUGCValidateAQDynamicHeadMLHybridShadowModule,
 	knownAqsUserErrors = {
 		MISSING_CAGE_INFO = ErrorSourceStringsModule.Keys.DynamicHeadMISSINGCAGE,
 		NO_FACS = ErrorSourceStringsModule.Keys.DynamicHeadNOFACS

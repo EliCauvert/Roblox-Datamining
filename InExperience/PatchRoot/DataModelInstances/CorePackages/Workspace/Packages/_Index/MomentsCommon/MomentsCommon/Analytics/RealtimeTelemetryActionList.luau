@@ -1,6 +1,8 @@
-﻿local SocialLuaAnalyticsModule = require(script:FindFirstAncestor("MomentsCommon").Parent.SocialLuaAnalytics)
+﻿local MomentsCommon = script:FindFirstAncestor("MomentsCommon")
+local SocialLuaAnalyticsModule = require(MomentsCommon.Parent.SocialLuaAnalytics)
 local SupportedTelemetryBackends = SocialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends
 local RealtimeEventNamesModule = require(script.Parent.RealtimeEventNames)
+local FFlagMomentsParentTimeLimitModule = require(MomentsCommon.Flags.FFlagMomentsParentTimeLimit)
 local Telemetry = SocialLuaAnalyticsModule.Telemetry
 local config = {
 	watch_tab = "watch_tab",
@@ -15,7 +17,8 @@ local function _(p1)
 end
 
 local function normalizeRequestFailureReason(p1)
-	return if p1 == nil or p1 == "" then "unknown" elseif p1 == "requestFailed" or p1 == "malformedResponse" then p1 else "unknown"
+	-- upvalues: FFlagMomentsParentTimeLimitModule (copy)
+	return if p1 == nil or p1 == "" then "unknown" elseif p1 == "requestFailed" or p1 == "malformedResponse" then p1 elseif FFlagMomentsParentTimeLimitModule and p1 == "parentalTimeLimitReached" then p1 else "unknown"
 end
 
 local function normalizeMediaFailureReason(Text: string): string
@@ -245,11 +248,12 @@ return {
 				incrementValue = 1,
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				format = function(p1)
+					-- upvalues: FFlagMomentsParentTimeLimitModule (copy)
 					local config = { status = p1.status, feedType = p1.feedType }
 					
 					if p1.status == "failed" then
 						local FailureReason = p1.failureReason
-						config.failureReason = if FailureReason == nil or FailureReason == "" then "unknown" elseif FailureReason == "requestFailed" or FailureReason == "malformedResponse" then FailureReason else "unknown"
+						config.failureReason = if FailureReason == nil or FailureReason == "" then "unknown" elseif FailureReason == "requestFailed" or FailureReason == "malformedResponse" then FailureReason elseif FFlagMomentsParentTimeLimitModule and FailureReason == "parentalTimeLimitReached" then FailureReason else "unknown"
 					end
 					return config
 				end
@@ -266,12 +270,12 @@ return {
 				incrementValue = 1,
 				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				format = function(p1)
-					-- upvalues: normalizeRequestFailureReason (copy)
+					-- upvalues: normalizeRequestFailureReason (copy), FFlagMomentsParentTimeLimitModule (copy)
 					local config = { status = p1.status, feedType = p1.feedType }
 					
 					if p1.status == "failed" then
 						local FailureReason = p1.failureReason
-						config.failureReason = if FailureReason == nil or FailureReason == "" then "unknown" elseif FailureReason == "requestFailed" or FailureReason == "malformedResponse" then FailureReason else "unknown"
+						config.failureReason = if FailureReason == nil or FailureReason == "" then "unknown" elseif FailureReason == "requestFailed" or FailureReason == "malformedResponse" then FailureReason elseif FFlagMomentsParentTimeLimitModule and FailureReason == "parentalTimeLimitReached" then FailureReason else "unknown"
 					end
 					return config
 				end

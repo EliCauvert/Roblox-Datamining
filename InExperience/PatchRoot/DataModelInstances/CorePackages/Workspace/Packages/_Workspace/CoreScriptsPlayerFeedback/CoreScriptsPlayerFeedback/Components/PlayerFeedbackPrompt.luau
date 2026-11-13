@@ -6,6 +6,7 @@ local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFo
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local Images = UIBloxModule.App.ImageSet.Images
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local MouseIconOverrideService = require(Parent.CoreScriptsCommon).MouseIconOverrideService
 local ConstantsModule = require(CoreScriptsPlayerFeedback.constants)
@@ -16,7 +17,7 @@ local GuiService = game:GetService("GuiService")
 local ContextActionService = game:GetService("ContextActionService")
 local TelemetryService = game:GetService("TelemetryService")
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
-local ComponentAssetsCircle21 = UIBloxModule.App.ImageSet.Images["component_assets/circle_21"]
+local ComponentAssetsCircle21 = Images["component_assets/circle_21"]
 
 return (ReactModule.memo(function(p1)
 	-- upvalues: UseScreenSizeFunction (copy), UseStyleFunction (copy), UseLastInputMethodFunction (copy), ReactModule (copy), UseLocalizationFunction (copy), GuiService (copy), ConstantsModule (copy), MouseIconOverrideService (copy), TelemetryService (copy), UseEscapeDismissModule (copy), ContextActionService (copy), NormalizeFontFaceFunction (copy), ImageSetLabel (copy), ComponentAssetsCircle21 (copy), ButtonType (copy), InteractiveAlert (copy)

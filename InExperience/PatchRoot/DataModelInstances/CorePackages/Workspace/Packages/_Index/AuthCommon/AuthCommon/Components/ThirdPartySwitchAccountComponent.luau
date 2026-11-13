@@ -3,15 +3,19 @@ local Parent = AuthCommon.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local DividerWithTextModule = require(AuthCommon.Components.DividerWithText)
+local FFlagLandingPageConsoleButtonVariants = require(Parent.SharedFlags).FFlagLandingPageConsoleButtonVariants
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local ThirdPartyUserService = game:GetService("ThirdPartyUserService")
 local View = FoundationModule.View
+local Button = FoundationModule.Button
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local InputSize = FoundationModule.Enums.InputSize
 local Text = FoundationModule.Text
 local Image = FoundationModule.Image
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), ThirdPartyUserService (copy), UseLocalizationFunction (copy), View (copy), Text (copy), Image (copy), DividerWithTextModule (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), ThirdPartyUserService (copy), UseLocalizationFunction (copy), View (copy), Text (copy), Image (copy), FFlagLandingPageConsoleButtonVariants (copy), Button (copy), ButtonVariant (copy), InputSize (copy), DividerWithTextModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), ThirdPartyUserService (upval)
@@ -76,8 +80,26 @@ return function(p1)
 			})
 		})
 	end
+	local Element = if FFlagLandingPageConsoleButtonVariants and p1.useFoundationButton then ReactModule.createElement(View, {
+		LayoutOrder = 2,
+		tag = "size-full-0 auto-y radius-medium bg-surface-0"
+	}, {
+		Button = ReactModule.createElement(Button, {
+			testId = "--auth-platform-account-switch-button",
+			icon = "xbox",
+			variant = ButtonVariant.Standard,
+			size = InputSize.Large,
+			width = UDim.new(1, 0),
+			text = p1.thirdPartyUserName,
+			isDisabled = p1.isDisabled,
+			NextSelectionUp = p1.nextSelectionUp,
+			onActivated = UseResult,
+			ref = p1.buttonRef
+		})
+	}) else nil
 	local v1 = nil
 	local v2 = nil
+	
 	if p1.isDisabled then
 		v1 = "stroke-muted"
 		v2 = "content-inverse-default"
@@ -102,7 +124,7 @@ return function(p1)
 			text = if UseLocalizationResult then UseLocalizationResult.dividerText else "",
 			padding = UseTokensResult.Size.Size_800
 		}),
-		SwitchAccountButton = ReactModule.createElement(View, {
+		SwitchAccountButton = Element or ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			testId = "--auth-platform-account-switch-button",
 			Size = UDim2.new(1, 0, 0, UseTokensResult.Size.Size_1200),

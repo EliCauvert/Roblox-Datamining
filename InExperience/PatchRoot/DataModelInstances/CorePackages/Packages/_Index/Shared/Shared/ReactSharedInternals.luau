@@ -1,4 +1,5 @@
 ﻿local Parent = script.Parent.Parent
+local ReactGlobalsModule = require(Parent.ReactGlobals)
 local Console = require(Parent.LuauPolyfill).console
 
 local function _(p1)
@@ -17,5 +18,5 @@ return {
 	ReactCurrentBatchConfig = require(script.ReactCurrentBatchConfig),
 	ReactCurrentOwner = require(script.ReactCurrentOwner),
 	IsSomeRendererActing = require(script.IsSomeRendererActing),
-	ReactDebugCurrentFrame = if require(Parent.ReactGlobals).__DEV__ then ReactDebugCurrentFrameModule else { setExtraStackFrame = function(_) end }
+	ReactDebugCurrentFrame = if ReactGlobalsModule.__DEV__ then ReactDebugCurrentFrameModule else { setExtraStackFrame = function(_) end }
 }

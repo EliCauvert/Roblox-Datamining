@@ -1,15 +1,17 @@
 ﻿local AvatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
 local Parent = AvatarExperienceProfilePictureEditor.Parent
 local ReactModule = require(Parent.React)
+local RoactNavigationModule = require(Parent.RoactNavigation)
+local RoactUtilsModule = require(Parent.RoactUtils)
 local EditProfileImageModule = require(script.Parent.EditProfileImage)
 local EnumsModule = require(AvatarExperienceProfilePictureEditor.Common.Enums)
 local FFlagNavigationCallbackParam = require(Parent.SharedFlags).FFlagNavigationCallbackParam
 local CloseProfilePictureEditorModule = require(AvatarExperienceProfilePictureEditor.Utils.closeProfilePictureEditor)
 local LeaveEditProfileImageModule = require(AvatarExperienceProfilePictureEditor.Utils.leaveEditProfileImage)
 local ShowEditProfileImageToastModule = require(AvatarExperienceProfilePictureEditor.Utils.showEditProfileImageToast)
-local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
 
-return require(Parent.RoactNavigation).withNavigationFocus(function(p1)
+return RoactNavigationModule.withNavigationFocus(function(p1)
 	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), FFlagNavigationCallbackParam (copy), LeaveEditProfileImageModule (copy), CloseProfilePictureEditorModule (copy), ShowEditProfileImageToastModule (copy), EnumsModule (copy), EditProfileImageModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	

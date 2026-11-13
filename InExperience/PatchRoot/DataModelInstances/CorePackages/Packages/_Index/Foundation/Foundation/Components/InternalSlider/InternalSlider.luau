@@ -1,6 +1,7 @@
 ﻿local Foundation = script:FindFirstAncestor("Foundation")
 local ReactModule = require(Foundation.Parent.React)
 local ConstantsModule = require(Foundation.Constants)
+local FlagsModule = require(Foundation.Utility.Flags)
 local InputModeModule = require(Foundation.Utility.Input.InputMode)
 local _ = require(Foundation.Components.Types)
 local ViewModule = require(Foundation.Components.View)
@@ -8,12 +9,15 @@ local UseLastInputModeModule = require(Foundation.Utility.Input.useLastInputMode
 local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
 local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 local CursorTypeModule = require(Foundation.Enums.CursorType)
+local InputSizeModule = require(Foundation.Enums.InputSize)
 local OrientationModule = require(Foundation.Enums.Orientation)
 local StateLayerAffordanceModule = require(Foundation.Enums.StateLayerAffordance)
+local VisibilityModule = require(Foundation.Enums.Visibility)
 local CursorComponentModule = require(Foundation.Providers.Cursor.CursorComponent)
 local PresentationContextModule = require(Foundation.Providers.Style.PresentationContext)
 local GetKnobSizeModule = require(Foundation.Components.Knob.getKnobSize)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local SizeAnchorModule = require(Foundation.Components.Slider.SizeAnchor)
 local SliderThumbModule = require(Foundation.Components.Slider.SliderThumb)
 local GetKnobVisibilityModule = require(script.Parent.getKnobVisibility)
 local UseSliderCaptureModule = require(script.Parent.useSliderCapture)
@@ -24,10 +28,10 @@ local config = {
 	isContained = false,
 	testId = "--foundation-internal-slider",
 	range = NumberRange.new(0, 1),
-	size = require(Foundation.Enums.InputSize).Medium,
+	size = InputSizeModule.Medium,
 	width = UDim.new(1, 0),
 	orientation = OrientationModule.Horizontal,
-	knobVisibility = require(Foundation.Enums.Visibility).Auto
+	knobVisibility = VisibilityModule.Auto
 }
 local SelectionGroup = {
 	SelectionBehaviorLeft = Enum.SelectionBehavior.Stop,
@@ -50,7 +54,7 @@ local function getFullBounds()
 end
 
 return ReactModule.forwardRef(function(p1, p2)
-	-- upvalues: WithDefaultsModule (copy), config (copy), OrientationModule (copy), UseTokensModule (copy), PresentationContextModule (copy), UseLastInputModeModule (copy), ReactModule (copy), GetKnobSizeModule (copy), UseSliderThumbsModule (copy), UseSliderCaptureModule (copy), UseSliderPointerDragModule (copy), InputModeModule (copy), GetKnobVisibilityModule (copy), ViewModule (copy), StateLayerAffordanceModule (copy), CursorTypeModule (copy), _Vector2 (copy), SelectionGroup (copy), noop (copy), CursorComponentModule (copy), SliderThumbModule (copy), getFullBounds (copy), WithCommonPropsModule (copy), ConstantsModule (copy), config1 (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), OrientationModule (copy), UseTokensModule (copy), PresentationContextModule (copy), UseLastInputModeModule (copy), ReactModule (copy), GetKnobSizeModule (copy), UseSliderThumbsModule (copy), UseSliderCaptureModule (copy), UseSliderPointerDragModule (copy), InputModeModule (copy), GetKnobVisibilityModule (copy), ViewModule (copy), StateLayerAffordanceModule (copy), CursorTypeModule (copy), FlagsModule (copy), SizeAnchorModule (copy), _Vector2 (copy), SelectionGroup (copy), noop (copy), CursorComponentModule (copy), SliderThumbModule (copy), getFullBounds (copy), WithCommonPropsModule (copy), ConstantsModule (copy), config1 (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local IsOrientationMatch = WithDefaultsModuleResult.orientation == OrientationModule.Vertical
 	local UseTokensModuleResult = UseTokensModule()
@@ -152,7 +156,8 @@ return ReactModule.forwardRef(function(p1, p2)
 				[ReactModule.Event.DragEnd] = UseSliderPointerDragModuleResult.onTrackDragEnded,
 				SelectionModeDragSpeed = UDim2.new(),
 				Enabled = not WithDefaultsModuleResult.isDisabled
-			})
+			}),
+			SizeAnchor = if FlagsModule.FoundationSliderAutoSizeFix then ReactModule.createElement(SizeAnchorModule) else nil
 		}),
 		Track = ReactModule.createElement(ReactModule.Fragment, nil, if WithDefaultsModuleResult.renderTrack then WithDefaultsModuleResult.renderTrack(UseSliderThumbsModuleResult.span) else WithDefaultsModuleResult.children),
 		SelectionCursor = if UseSliderCaptureModuleResult.isCaptured then ReactModule.createElement(ViewModule, {

@@ -10,6 +10,7 @@ pcall(function()
 end)
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
 local EnableAudioPlaybackInAppFunction = require(Parent.MediaPlayback).enableAudioPlaybackInApp
 local MomentsCommonModule = require(Parent.MomentsCommon)
 local Media = MomentsCommonModule.Media
@@ -19,7 +20,7 @@ local ToMediaItemModule = require(Parent.Moments.ToMediaItem)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagMomentsAutoplayAmpPolicy = SharedFlagsModule.FFlagMomentsAutoplayAmpPolicy
 local FFlagProfileMomentSceneOutfitPoster = SharedFlagsModule.FFlagProfileMomentSceneOutfitPoster
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseSignalStateFunction = SignalsReactModule.useSignalState
 
 local function _(): boolean
 	-- upvalues: UserInputService (copy)

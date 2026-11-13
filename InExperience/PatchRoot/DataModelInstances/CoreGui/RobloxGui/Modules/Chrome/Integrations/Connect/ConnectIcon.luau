@@ -93,16 +93,16 @@ return function(p1)
 	local MapResult = nil
 	
 	if FFlagEnableChatIconUnibarDropdownFixEnabled then
-		local Transparency2 = UseTokensResult.Color.Content.Default.Transparency
+		local Transparency = UseTokensResult.Color.Content.Default.Transparency
 		MapResult = if UseContextResult then UseContextResult:map(function(p2: number)
-			-- upvalues: UseTokensResult (copy), Transparency2 (copy)
+			-- upvalues: UseTokensResult (copy), Transparency (copy)
 			return {
 				Color3 = UseTokensResult.Color.Content.Default.Color3,
-				Transparency = Transparency2 + (1 - Transparency2) * (1 - p2)
+				Transparency = Transparency + (1 - Transparency) * (1 - p2)
 			}
 		end) else UseTokensResult.Color.Content.Default
 	end
-	local CreateElementFunction1 = ReactModule.createElement
+	local CreateElementFunction = ReactModule.createElement
 	local View = FoundationModule.View
 	local config1 = { Size = UDim2.new(0, ICONSIZE, 0, ICONSIZE) }
 	local config2 = {
@@ -114,10 +114,10 @@ return function(p1)
 			style = if FFlagEnableChatIconUnibarDropdownFixEnabled then MapResult else nil
 		})
 	}
-	local Element = nil
+	local Badge = nil
 	
 	if Contrast1 then
-		local CreateElementFunction = ReactModule.createElement
+		local CreateElementFunction1 = ReactModule.createElement
 		local View1 = FoundationModule.View
 		local config3 = {
 			ZIndex = 2,
@@ -126,22 +126,22 @@ return function(p1)
 		local BackgroundStyle = nil
 		
 		if UnionResult.isSquadIndicatorEnabled then
-			local Transparency = Contrast.Transparency
+			local Transparency1 = Contrast.Transparency
 			BackgroundStyle = {
 				Color3 = Contrast.Color3,
-				Transparency = if UseContextResult then UseContextResult:map(function(p2: number): number
-					-- upvalues: Transparency (copy)
-					return Transparency + (1 - Transparency) * (1 - p2)
-				end) else Transparency
-			}
-		else
-			local Transparency1 = UseTokensResult.Color.System.Contrast.Transparency
-			BackgroundStyle = {
-				Color3 = UseTokensResult.Color.System.Contrast.Color3,
 				Transparency = if UseContextResult then UseContextResult:map(function(p2: number): number
 					-- upvalues: Transparency1 (copy)
 					return Transparency1 + (1 - Transparency1) * (1 - p2)
 				end) else Transparency1
+			}
+		else
+			local Transparency2 = UseTokensResult.Color.System.Contrast.Transparency
+			BackgroundStyle = {
+				Color3 = UseTokensResult.Color.System.Contrast.Color3,
+				Transparency = if UseContextResult then UseContextResult:map(function(p2: number): number
+					-- upvalues: Transparency2 (copy)
+					return Transparency2 + (1 - Transparency2) * (1 - p2)
+				end) else Transparency2
 			}
 		end
 		config3.backgroundStyle = BackgroundStyle
@@ -158,11 +158,11 @@ return function(p1)
 			["anchor-top-right radius-circle size-200"] = true,
 			["stroke-thicker"] = not FFlagEnableChatIconUnibarDropdownFixEnabled
 		}
-		Element = CreateElementFunction(View1, config3)
+		Badge = CreateElementFunction1(View1, config3)
 	else
-		Element = nil
+		Badge = nil
 	end
-	config2.Badge = Element
+	config2.Badge = Badge
 	
-	return CreateElementFunction1(View, config1, config2)
+	return CreateElementFunction(View, config1, config2)
 end

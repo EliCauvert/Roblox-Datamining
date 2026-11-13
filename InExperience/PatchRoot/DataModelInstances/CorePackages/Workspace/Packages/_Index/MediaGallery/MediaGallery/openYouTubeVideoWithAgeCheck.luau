@@ -1,9 +1,11 @@
 ﻿local GuiService = game:GetService("GuiService")
 local HttpService = game:GetService("HttpService")
 local Parent = script:FindFirstAncestor("MediaGallery").Parent
+local RobloxAppEnumsModule = require(Parent.RobloxAppEnums)
+local UniversalAppPolicyModule = require(Parent.UniversalAppPolicy)
 local SetCentralOverlayFunction = require(Parent.CentralOverlay).Actions.SetCentralOverlay
-local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
-local GetAppFeaturePoliciesFunction = require(Parent.UniversalAppPolicy).getAppFeaturePolicies
+local CentralOverlayType = RobloxAppEnumsModule.CentralOverlayType
+local GetAppFeaturePoliciesFunction = UniversalAppPolicyModule.getAppFeaturePolicies
 
 return function(p1, p2, Callback: (any) -> (), Callback1)
 	-- upvalues: HttpService (copy), GuiService (copy), GetAppFeaturePoliciesFunction (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy)

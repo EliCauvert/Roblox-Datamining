@@ -2,6 +2,7 @@
 local Parent = ExpChat.Parent
 local RoactModule = require(Parent.Roact)
 local OtterModule = require(Parent.Otter)
+local TimerModule = require(ExpChat.Timer)
 local UIBloxModule = require(Parent.UIBlox)
 local Images = UIBloxModule.App.ImageSet.Images
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
@@ -9,7 +10,7 @@ local LocalizationModule = require(ExpChat.Localization)
 local FFlagExpChatUnmountTranslationFTUXModule = require(ExpChat.Flags.FFlagExpChatUnmountTranslationFTUX)
 local GameSettings = UserSettings().GameSettings
 local ChatTranslationFTUX = RoactModule.Component:extend("ChatTranslationFTUX")
-ChatTranslationFTUX.defaultProps = { timer = require(ExpChat.Timer).new(10) }
+ChatTranslationFTUX.defaultProps = { timer = TimerModule.new(10) }
 local _Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
 local _Font1 = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal)
 local config = { dampingRatio = 1, frequency = 2 }

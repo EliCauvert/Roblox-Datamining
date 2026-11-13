@@ -202,7 +202,7 @@ function createTraversalTaskList(p2, List)
 			local Children = v3.children
 			local Count2 = 0
 			
-			for i1, child in pairs(Children) do
+			for i1, _ in pairs(Children) do
 				if p2[i1] then
 					Count2 += 1
 				end
@@ -210,19 +210,19 @@ function createTraversalTaskList(p2, List)
 			if Count2 == 0 then break end
 			local Largest = 0
 			
-			for child, _ in pairs(Children) do
-				if p2[child] then
-					Largest = math.max(Largest, p2[child].raycastHits)
+			for i2, _ in pairs(Children) do
+				if p2[i2] then
+					Largest = math.max(Largest, p2[i2].raycastHits)
 				end
 			end
 			if Largest / RaycastHits < FIntIGARSubtreeDivergenceThresholdPerMilleModuleRatio then break end
 			local v4 = nil
 			local RaycastHits1 = 0
 			
-			for i2, _ in pairs(Children) do
-				if p2[i2] and RaycastHits1 < p2[i2].raycastHits then
-					v4 = i2
-					RaycastHits1 = p2[i2].raycastHits
+			for i3, _ in pairs(Children) do
+				if p2[i3] and RaycastHits1 < p2[i3].raycastHits then
+					v4 = i3
+					RaycastHits1 = p2[i3].raycastHits
 				end
 			end
 			v2 = v4

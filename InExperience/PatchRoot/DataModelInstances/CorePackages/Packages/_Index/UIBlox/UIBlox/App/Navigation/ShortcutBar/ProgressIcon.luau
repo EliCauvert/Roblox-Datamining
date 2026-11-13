@@ -49,7 +49,9 @@ return function(p1)
 	-- upvalues: ImagesModule (copy), UseStyleModule (copy), ReactModule (copy), renderHalfCircle (copy), ImageSetComponentModule (copy)
 	local Progress = p1.progress
 	local IsHolding = p1.isHolding
+	local IconHolding = if IsHolding then p1.iconHolding else p1.icon
 	local IconsControlsKeysHoldButtonAssetsHoldPressedRadialFill = if IsHolding then ImagesModule["icons/controls/keys/hold_button_assets/hold_Pressed_RadialFill"] else ImagesModule["icons/controls/keys/hold_button_assets/hold_Unpressed_RadialFill"]
+	local IconsControlsKeysHoldButtonAssetsHoldPressedArrow = if IsHolding then ImagesModule["icons/controls/keys/hold_button_assets/hold_Pressed_Arrow"] else ImagesModule["icons/controls/keys/hold_button_assets/hold_Unpressed_Arrow"]
 	local UseStyleModuleResult = UseStyleModule()
 	
 	return ReactModule.createElement("Frame", {
@@ -96,7 +98,7 @@ return function(p1)
 			Size = UDim2.fromScale(1, 1),
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
-			Image = if IsHolding then p1.iconHolding else p1.icon,
+			Image = IconHolding,
 			ImageColor3 = UseStyleModuleResult.Theme.IconEmphasis.Color,
 			ImageTransparency = ReactModule.useMemo(function()
 				-- upvalues: Progress (copy)
@@ -112,7 +114,7 @@ return function(p1)
 			Size = UDim2.fromScale(1, 1),
 			AnchorPoint = Vector2.new(0.5, 0),
 			Position = UDim2.fromScale(0.5, 0),
-			Image = if IsHolding then ImagesModule["icons/controls/keys/hold_button_assets/hold_Pressed_Arrow"] else ImagesModule["icons/controls/keys/hold_button_assets/hold_Unpressed_Arrow"],
+			Image = IconsControlsKeysHoldButtonAssetsHoldPressedArrow,
 			ImageColor3 = UseStyleModuleResult.Theme.IconEmphasis.Color
 		})
 	})

@@ -1,15 +1,18 @@
 ﻿local PlayWithRewardComponent = script:FindFirstAncestor("PlayWithRewardComponent")
 local Parent = PlayWithRewardComponent.Parent
 local FoundationModule = require(Parent.Foundation)
+local NavigationModule = require(Parent.Navigation)
 local ReactModule = require(Parent.React)
+local RoactUtilsModule = require(Parent.RoactUtils)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local PlayWithRewardCoachmarkStorageModule = require(PlayWithRewardComponent.PlayWithRewardCoachmarkStorage)
 local PlayWithRewardTelemetryModule = require(PlayWithRewardComponent.PlayWithRewardTelemetry)
-local UseEarlyIsFocusedFunction = require(Parent.Navigation).useEarlyIsFocused
-local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseEarlyIsFocusedFunction = NavigationModule.useEarlyIsFocused
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
 local Coachmark = FoundationModule.Coachmark
 local PopoverAlign = FoundationModule.Enums.PopoverAlign
 local PopoverSide = FoundationModule.Enums.PopoverSide
-local FFlagPlayWithRewardCoachmarkOverlayFix = require(Parent.SharedFlags).FFlagPlayWithRewardCoachmarkOverlayFix
+local FFlagPlayWithRewardCoachmarkOverlayFix = SharedFlagsModule.FFlagPlayWithRewardCoachmarkOverlayFix
 
 return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), FFlagPlayWithRewardCoachmarkOverlayFix (copy), UseEarlyIsFocusedFunction (copy), UseSelectorFunction (copy), PlayWithRewardCoachmarkStorageModule (copy), PlayWithRewardTelemetryModule (copy), Coachmark (copy), PopoverSide (copy), PopoverAlign (copy)

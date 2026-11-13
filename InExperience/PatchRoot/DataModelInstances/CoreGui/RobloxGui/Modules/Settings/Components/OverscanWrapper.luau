@@ -2,8 +2,9 @@
 local CoreScriptsRootProvider = require(CorePackages.Workspace.Packages.CoreScriptsRoactCommon).CoreScriptsRootProvider
 local FocusRoot = require(CorePackages.Workspace.Packages.FocusNavigationUtils).FocusRoot
 local ReactModule = require(CorePackages.Packages.React)
+local RobloxAppEnumsModule = require(CorePackages.Workspace.Packages.RobloxAppEnums)
 local FocusNavigableSurfaceIdentifierEnum = require(CorePackages.Workspace.Packages.FocusNavigationUtils).FocusNavigableSurfaceIdentifierEnum
-local DeviceType = require(CorePackages.Workspace.Packages.RobloxAppEnums).DeviceType
+local DeviceType = RobloxAppEnumsModule.DeviceType
 
 function OverscanWrapper(p1)
 	-- upvalues: DeviceType (copy), ReactModule (copy), CoreScriptsRootProvider (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)

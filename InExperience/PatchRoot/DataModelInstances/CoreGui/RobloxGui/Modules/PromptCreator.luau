@@ -1,4 +1,4 @@
-﻿local t = {}
+﻿local PromptCreatorModule = {}
 local UserInputService = game:GetService("UserInputService")
 local ContextActionService = game:GetService("ContextActionService")
 local TextService = game:GetService("TextService")
@@ -786,7 +786,7 @@ if not PromptCreatorTransientDialog then
 		end
 	end)
 end
-function t:CreatePrompt(p3): boolean
+function PromptCreatorModule:CreatePrompt(p3): boolean
 	-- upvalues: Flag1 (ref), PromptCreatorTransientDialog (copy), createPromptDialog (copy)
 	if Flag1 then
 		return false
@@ -803,9 +803,9 @@ function t:CreatePrompt(p3): boolean
 	return true
 end
 
-function t:IsCurrentlyPrompting()
+function PromptCreatorModule:IsCurrentlyPrompting()
 	-- upvalues: Flag1 (ref)
 	return Flag1
 end
 
-return t
+return PromptCreatorModule

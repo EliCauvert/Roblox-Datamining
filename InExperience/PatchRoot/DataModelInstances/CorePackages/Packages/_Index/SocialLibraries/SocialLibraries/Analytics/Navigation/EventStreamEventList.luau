@@ -2,6 +2,8 @@
 local EnumsModule = require(script.Parent.Parent.Enums)
 local Contexts = EnumsModule.Contexts
 local EventTypes = EnumsModule.EventTypes
+local SubPages = EnumsModule.SubPages
+local Pages = EnumsModule.Pages
 local BtnValuesModule = require(script.Parent.BtnValues)
 
 local function Uid(p1): string
@@ -14,8 +16,8 @@ return {
 		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
 			btn = BtnValuesModule.PlayerProfile,
-			subpage = EnumsModule.SubPages.PeekView,
-			page = EnumsModule.Pages.PlayerProfile
+			subpage = SubPages.PeekView,
+			page = Pages.PlayerProfile
 		},
 		formatRulesForAdditionalInfo = { uid = Uid }
 	},

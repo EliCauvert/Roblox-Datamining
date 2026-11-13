@@ -1,5 +1,6 @@
 ﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
 local Parent = MomentsCreation.Parent
+local SignalsModule = require(Parent.Signals)
 local _ = require(MomentsCreation.Types.CreationFlowTypes)
 local ClassifyTTSErrorModule = require(MomentsCreation.Audio.classifyTTSError)
 local NormalizeWaveformModule = require(MomentsCreation.Audio.normalizeWaveform)
@@ -9,7 +10,7 @@ local GetFIntMomentsTTSWaveformMaxSamplesModule = require(MomentsCreation.Flags.
 local AudioDuckingFastInts = require(Parent.MomentsCommon).Media.audioDuckingFastInts
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
-local CreateSignalFunction = require(Parent.Signals).createSignal
+local CreateSignalFunction = SignalsModule.createSignal
 
 local function defaultCreateTtsInstance(PlayerGui)
 	-- upvalues: Players (copy), AudioDuckingFastInts (copy)

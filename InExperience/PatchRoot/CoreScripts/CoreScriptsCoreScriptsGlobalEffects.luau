@@ -6,6 +6,7 @@ local CoreScriptsRootProvider = require(CorePackages.Workspace.Packages.CoreScri
 local UsePlayerCurrentScreenOrientationModule = require(RobloxGui.Modules.Common.Hooks.usePlayerCurrentScreenOrientation)
 local CoreScriptsGamepadDisconnectListenerModule = require(RobloxGui.Modules.GamepadDisconnect.CoreScriptsGamepadDisconnectListener)
 local ReactModule = require(CorePackages.Packages.React)
+local RoactModule = require(CorePackages.Packages.Roact)
 local DeviceType = require(CorePackages.Workspace.Packages.RobloxAppEnums).DeviceType
 local UseLogInputTypeChangedFunction = require(CorePackages.Workspace.Packages.UiShellEvents).useLogInputTypeChanged
 local UseLogOrientationChangedFunction = require(CorePackages.Workspace.Packages.UiShellEvents).useLogOrientationChanged
@@ -33,7 +34,7 @@ local function sendInputTypeLogging(InputType1)
 	end
 end
 
-require(CorePackages.Packages.Roact).mount(ReactModule.createElement(function(_)
+RoactModule.mount(ReactModule.createElement(function(_)
 	-- upvalues: RemoveLoggingHookForCorescriptGlobalEffects2 (copy), ReactModule (copy), sendInputTypeLogging (copy), GetInputGroupFunction (copy), UseExternalEventFunction (copy), UserInputService (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), UseLogInputTypeChangedFunction (copy), NewResult (copy), RbxAnalyticsService (copy), UsePlayerCurrentScreenOrientationModule (copy), UseLogOrientationChangedFunction (copy), DeviceType (copy), CoreScriptsRootProvider (copy), CoreScriptsGamepadDisconnectListenerModule (copy)
 	if RemoveLoggingHookForCorescriptGlobalEffects2 then
 		UseExternalEventFunction(UserInputService.LastInputTypeChanged, (ReactModule.useCallback(function(p1)

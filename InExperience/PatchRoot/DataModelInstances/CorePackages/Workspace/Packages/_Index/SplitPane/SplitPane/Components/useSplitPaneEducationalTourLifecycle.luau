@@ -1,10 +1,11 @@
 ﻿local Parent = script:FindFirstAncestor("SplitPane").Parent
 local ReactModule = require(Parent.React)
+local AppSplitViewModule = require(Parent.AppSplitView)
 local _ = require(script.Parent.Parent.Stores.getSplitPaneEducationalTourStore)
 local _ = require(script.Parent.Parent.Stores.SplitPaneStore)
 local FFlagSplitPaneEducationalTourTelemetryModule = require(script.Parent.Parent.Flags.FFlagSplitPaneEducationalTourTelemetry)
 local SplitPaneEducationalTourTelemetryModule = if FFlagSplitPaneEducationalTourTelemetryModule then require(script.Parent.Parent.Telemetry.SplitPaneEducationalTourTelemetry) else nil
-local SupportPaneMode = require(Parent.AppSplitView).Enums.SupportPaneMode
+local SupportPaneMode = AppSplitViewModule.Enums.SupportPaneMode
 
 return function(p1)
 	-- upvalues: ReactModule (copy), SupportPaneMode (copy), FFlagSplitPaneEducationalTourTelemetryModule (copy), SplitPaneEducationalTourTelemetryModule (copy)

@@ -1,9 +1,10 @@
 ﻿local Chrome = script:FindFirstAncestor("Chrome")
 local CorePackages = game:GetService("CorePackages")
 local SignalsModule = require(CorePackages.Packages.Signals)
+local InExperienceSideSheetModule = require(CorePackages.Workspace.Packages.InExperienceSideSheet)
 local ServiceModule = require(Chrome.Service)
 local ConstantsModule = require(Chrome.ChromeShared.Unibar.Constants)
-local GetSideSheetVisibilityFunction = require(CorePackages.Workspace.Packages.InExperienceSideSheet).getSideSheetVisibility
+local GetSideSheetVisibilityFunction = InExperienceSideSheetModule.getSideSheetVisibility
 local list = {
 	ConstantsModule.IN_EXPERIENCE_SHOP_ID,
 	ConstantsModule.AVATAR_SWITCHER_ID
@@ -46,15 +47,15 @@ return function()
 	end)
 	local _ = nil
 	
-	local function v11()
-		-- upvalues: v1 (upval), v11 (ref), Effect (copy)
-		if v1 == v11 then
+	local function v12()
+		-- upvalues: v1 (upval), v12 (ref), Effect (copy)
+		if v1 == v12 then
 			v1 = nil
 		end
 		Effect()
 	end
 	
-	v1 = v11
+	v1 = v12
 	
-	return v11
+	return v12
 end

@@ -11,6 +11,7 @@ local UseAnalyticsModule = require(Parent.Analytics.useAnalytics)
 local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
 local UseRefFunction = ReactModule.useRef
 local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
+local CapturesPolicyModule = require(Parent.App.CapturesPolicy)
 local CaptureTypeModule = require(Parent.Enums.CaptureType)
 local ConstantsModule = require(Parent.Constants)
 local DeleteWarningModalOpenedModule = require(Parent.Actions.DeleteWarningModalOpened)
@@ -25,7 +26,7 @@ local _UDim = UDim.new(0.12, 0)
 local _UDim2 = UDim2.fromOffset(36, 36)
 local _UDim1 = UDim.new(0, 8)
 
-return (require(Parent.App.CapturesPolicy).connect(function(p1)
+return (CapturesPolicyModule.connect(function(p1)
 	return { enableShareCaptureCTA = p1.enableShareCaptureCTA() }
 end)(function(Frame)
 	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseStyleFunction (copy), UseRefFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), ReactModule (copy), GetSaveToStoragePermissionModule (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy), EventNamesModule (copy), SocialStopwatchModule (copy), ShareCaptureModule (copy), ExternalShareSourceTypeModule (copy), GetIsDeleteWarningModalOptedOutModule (copy), DeleteWarningModalOpenedModule (copy), _UDim1 (copy), _UDim (copy), IconButton (copy), Images (copy), _UDim2 (copy)

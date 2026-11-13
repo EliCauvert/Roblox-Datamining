@@ -8,6 +8,7 @@ local _ = require(Parent.Signals)
 local ConfigModule = require(ExpChat.Config)
 local AdvanceHistoryScrollModule = require(script.Parent.advanceHistoryScroll)
 local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
+local DebounceModule = require(ExpChat.ChatWindow.Helpers.debounce)
 local GetFFlagExpChatSendWindowScrollEventModule = require(ExpChat.Flags.getFFlagExpChatSendWindowScrollEvent)
 local FFlagExpChatLimitScrollingV2WindowModule = require(ExpChat.Flags.FFlagExpChatLimitScrollingV2Window)
 local FFlagExpChatScrollbarInsetModule = require(ExpChat.Flags.FFlagExpChatScrollbarInset)
@@ -31,7 +32,7 @@ local _ = function(PreferredInput): boolean
 	return PreferredInput == Enum.PreferredInput.KeyboardAndMouse or PreferredInput == Enum.PreferredInput.Touch
 end
 
-local Callback = require(ExpChat.ChatWindow.Helpers.debounce)(function()
+local Callback = DebounceModule(function()
 	-- upvalues: TextChatService (copy)
 	TextChatService:SendExpChatWindowScroll()
 end, (game:DefineFastInt("ExpChatWindowScrollV3Debounce", 0)))

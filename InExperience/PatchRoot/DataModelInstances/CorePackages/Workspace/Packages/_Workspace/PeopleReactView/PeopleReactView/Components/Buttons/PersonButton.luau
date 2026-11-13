@@ -1,7 +1,9 @@
 ﻿local Parent = script:FindFirstAncestor("PeopleReactView").Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
 local SignalsModule = require(Parent.Signals)
+local PeopleServiceModule = require(Parent.PeopleService)
 local View = FoundationModule.View
 local Icon = FoundationModule.Icon
 local IconButton = FoundationModule.IconButton
@@ -11,8 +13,8 @@ local FillBehavior = FoundationModule.Enums.FillBehavior
 local IconSize = FoundationModule.Enums.IconSize
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UseCursorFunction = FoundationModule.Hooks.useCursor
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
-local FlagsService = require(Parent.PeopleService).getService("Flags")
+local UseSignalStateFunction = SignalsReactModule.useSignalState
+local FlagsService = PeopleServiceModule.getService("Flags")
 local GetFFlagAddPeoplePageCardLayoutFunction = FlagsService.GetFFlagAddPeoplePageCardLayout
 local GetFFlagNewPeoplePageIconsFunction = FlagsService.GetFFlagNewPeoplePageIcons
 

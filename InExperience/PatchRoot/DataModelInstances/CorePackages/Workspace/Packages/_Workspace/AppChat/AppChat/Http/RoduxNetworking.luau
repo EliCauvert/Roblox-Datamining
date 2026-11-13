@@ -1,9 +1,11 @@
 ﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local FFlagLuaAppDefaultHttpRetry = require(Parent.SharedFlags).FFlagLuaAppDefaultHttpRetry
 local HttpRequestModule = require(Parent.HttpRequest)
+local RoduxNetworkingModule = require(Parent.RoduxNetworking)
 local Logger = require(Parent.Loggers).Logger
 local AppChat = Logger.new(Logger, "AppChat")
 
-return require(Parent.RoduxNetworking).config({
+return RoduxNetworkingModule.config({
 	keyPath = "ChatAppReducer.networkStatus",
 	killRequestWithFilteredIds = true,
 	networkImpl = HttpRequestModule.config({
@@ -17,6 +19,6 @@ return require(Parent.RoduxNetworking).config({
 			-- upvalues: AppChat (copy)
 			AppChat:debug("Returned: {}", string.format("[ requestMethod = %q, url = %q, statusCode = %s ]", p2.requestMethod, p2.url, p1.StatusCode))
 		end,
-		maxRetryCount = if require(Parent.SharedFlags).FFlagLuaAppDefaultHttpRetry then game:DefineFastInt("AppChatRoduxNetworkingHttpRetryCount", 4) else nil
+		maxRetryCount = if FFlagLuaAppDefaultHttpRetry then game:DefineFastInt("AppChatRoduxNetworkingHttpRetryCount", 4) else nil
 	})
 })

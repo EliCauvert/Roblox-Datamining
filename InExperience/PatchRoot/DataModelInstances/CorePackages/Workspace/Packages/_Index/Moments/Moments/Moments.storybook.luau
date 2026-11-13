@@ -4,6 +4,7 @@ local Parent = Moments.Parent
 local FoundationModule = require(Parent.Foundation)
 local LocalizationProvider = require(Parent.Localization).LocalizationProvider
 local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
 local Localization = require(Parent.Dev.RobloxAppLocales).Localization
 local ColorMode = FoundationModule.Enums.ColorMode
 local Device = FoundationModule.Enums.Device
@@ -13,7 +14,7 @@ local config = { Dark = ColorMode.Dark, Light = ColorMode.Light }
 return {
 	name = "Moments",
 	roact = ReactModule,
-	reactRoblox = require(Parent.ReactRoblox),
+	reactRoblox = ReactRobloxModule,
 	mapStory = function(p1)
 		-- upvalues: ReactModule (copy), Localization (copy), LocalizationService (copy), LocalizationProvider (copy), FoundationProvider (copy), config (copy), ColorMode (copy), Device (copy)
 		return function(p2)

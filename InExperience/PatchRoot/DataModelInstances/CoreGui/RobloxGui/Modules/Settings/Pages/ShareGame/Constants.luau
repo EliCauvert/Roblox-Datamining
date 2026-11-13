@@ -1,5 +1,6 @@
 ﻿local CorePackages = game:GetService("CorePackages")
 local UserModel = require(CorePackages.Workspace.Packages.UserLib).Models.UserModel
+local ThumbnailRequest = require(CorePackages.Workspace.Packages.UserLib).Utils.ThumbnailRequest
 local Constants = require(CorePackages.Workspace.Packages.UserLib).Utils.Constants
 local DeviceLayout = {
 	PHONE_PORTRAIT = "PHONE_PORTRAIT",
@@ -118,7 +119,7 @@ local ConstantsModule = {
 }
 ConstantsModule.ThumbnailRequest = {
 	InviteToGame = {
-		require(CorePackages.Workspace.Packages.UserLib).Utils.ThumbnailRequest.fromData(ConstantsModule.InviteAvatarThumbnailType, ConstantsModule.InviteAvatarThumbnailSize)
+		ThumbnailRequest.fromData(ConstantsModule.InviteAvatarThumbnailType, ConstantsModule.InviteAvatarThumbnailSize)
 	}
 }
 

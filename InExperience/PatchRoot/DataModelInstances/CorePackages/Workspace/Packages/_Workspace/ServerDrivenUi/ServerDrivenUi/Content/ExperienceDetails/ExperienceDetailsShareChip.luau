@@ -4,8 +4,9 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local SignalsReactModule = require(Parent.SignalsReact)
 local Game = require(Parent.DataHydration).Game
+local LocalizationModule = require(Parent.Localization)
 local SduiChip = require(Parent.SduiSharedContent).SduiChip
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local UseExperienceDetailsShareModule = require(ServerDrivenUi.Content.ExperienceDetails.Hooks.useExperienceDetailsShare)
 
 return ReactModule.memo(function(p1)

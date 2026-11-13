@@ -6,6 +6,15 @@ local CurveAnimationHierarchyUtilsModule = require(Parent.util.CurveAnimationHie
 local CurveAnimBoneHierarchyUtilsModule = require(Parent.util.CurveAnimBoneHierarchyUtils)
 local GetFFlagUGCValidateRestrictNumFaceControlsModule = require(Parent.flags.getFFlagUGCValidateRestrictNumFaceControls)
 local GetFIntUGCValidateMaxTotalFaceControlsModule = require(Parent.flags.getFIntUGCValidateMaxTotalFaceControls)
+local Categories = {
+	ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION,
+	ValidationEnumsModule.UploadCategory.ANIMATION
+}
+local RequiredData = { ValidationEnumsModule.SharedDataMember.curveAnimations }
+local ConditionalData = { ValidationEnumsModule.SharedDataMember.curveAnimBoneData }
+local PrereqTests = {
+	ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
+}
 
 local function buildAcceptableForFolder(Object, p1)
 	-- upvalues: CurveAnimBoneHierarchyUtilsModule (copy), CurveAnimationHierarchyUtilsModule (copy)
@@ -135,16 +144,11 @@ local function validateHierarchyTree(Folder, Name, Name1, p4)
 end
 
 return {
-	categories = {
-		ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION,
-		ValidationEnumsModule.UploadCategory.ANIMATION
-	},
-	requiredData = { ValidationEnumsModule.SharedDataMember.curveAnimations },
-	conditionalData = { ValidationEnumsModule.SharedDataMember.curveAnimBoneData },
+	categories = Categories,
+	requiredData = RequiredData,
+	conditionalData = ConditionalData,
 	expectedFailures = {},
-	prereqTests = {
-		ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
-	},
+	prereqTests = PrereqTests,
 	run = function(p5, p6)
 		-- upvalues: CurveAnimationHierarchyUtilsModule (copy), validateHierarchyTree (copy)
 		for _, curveAnimation in p6.curveAnimations do

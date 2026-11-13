@@ -1,9 +1,10 @@
 ﻿local Chrome = script:FindFirstAncestor("Chrome")
+local MappedSignal = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal
 local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 local FFlagRespawnChromeShortcutTelemetryModule = require(Chrome.Flags.FFlagRespawnChromeShortcutTelemetry)
 local IsNameMatch = false
 local NewResult = require(game:GetService("CorePackages").Workspace.Packages.AppCommonLib).Signal.new()
-local NewResult1 = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(NewResult, function()
+local NewMappedSignal = MappedSignal.new(NewResult, function()
 	-- upvalues: IsNameMatch (ref)
 	return IsNameMatch
 end)
@@ -18,7 +19,7 @@ task.defer(function()
 end)
 
 return {
-	respawnPageOpenSignal = NewResult1,
+	respawnPageOpenSignal = NewMappedSignal,
 	respawnPage = function(p1)
 		-- upvalues: RobloxGui (copy), IsNameMatch (ref), FFlagRespawnChromeShortcutTelemetryModule (copy)
 		local SettingsHubModule = require(RobloxGui.Modules.Settings.SettingsHub)

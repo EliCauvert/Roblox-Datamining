@@ -2,9 +2,10 @@
 local GameSettings = UserSettings().GameSettings
 local ExpChat = script:FindFirstAncestor("ExpChat")
 local Parent = ExpChat.Parent
+local ExpChatSharedModule = require(Parent.ExpChatShared)
 local EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint = require(Parent.SharedFlags).EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint
 local _ = require(ExpChat.Stores.GetPresetChatStore.createPresetChatStore)
-local InitializePresetChat = require(Parent.ExpChatShared).Logger:new("ExpChat/PresetChat/initializePresetChat")
+local InitializePresetChat = ExpChatSharedModule.Logger:new("ExpChat/PresetChat/initializePresetChat")
 
 local function getPresetsFromEngine()
 	-- upvalues: TextChatService (copy)

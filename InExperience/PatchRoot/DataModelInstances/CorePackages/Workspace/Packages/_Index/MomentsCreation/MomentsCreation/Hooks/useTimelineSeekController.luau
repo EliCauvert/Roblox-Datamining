@@ -1,5 +1,6 @@
 ﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
 local Parent = MomentsCreation.Parent
+local MomentsCommonModule = require(Parent.MomentsCommon)
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 local GuiService = game:GetService("GuiService")
@@ -7,7 +8,7 @@ local UseCallbackFunction = ReactModule.useCallback
 local UseEffectFunction = ReactModule.useEffect
 local UseMemoFunction = ReactModule.useMemo
 local UseRefFunction = ReactModule.useRef
-local UseDeviceInsetsFunction = require(Parent.MomentsCommon).Hooks.useDeviceInsets
+local UseDeviceInsetsFunction = MomentsCommonModule.Hooks.useDeviceInsets
 local ComputeSeekFractionModule = require(MomentsCreation.Utils.computeSeekFraction)
 local FFlagMomentsTTSScrubberDragInOverlayModule = require(MomentsCreation.Flags.FFlagMomentsTTSScrubberDragInOverlay)
 local FFlagMomentsScrubberSeekOnReleaseModule = require(MomentsCreation.Flags.FFlagMomentsScrubberSeekOnRelease)

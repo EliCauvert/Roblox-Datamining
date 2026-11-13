@@ -11,6 +11,7 @@ local DesignTokenProvider = require(Parent.Style).DesignTokenProvider
 local RoactRoduxModule = require(Parent.RoactRodux)
 local AppStyleProvider = require(Parent.Style).AppStyleProvider
 local AppStyleProvider1 = UIBloxModule.App.Style.AppStyleProvider
+local ReactRobloxModule = require(Parent.ReactRoblox)
 
 local function createStore()
 	-- upvalues: RoduxModule (copy)
@@ -28,7 +29,7 @@ local config2 = {
 return {
 	name = "AvatarExperienceCommon",
 	roact = ReactModule,
-	reactRoblox = require(Parent.ReactRoblox),
+	reactRoblox = ReactRobloxModule,
 	mapStory = function(p1)
 		-- upvalues: config (copy), ReactModule (copy), AppStyleProvider1 (copy), config2 (copy), AppStyleProvider (copy), RoactRoduxModule (copy), createStore (copy), DesignTokenProvider (copy), FoundationProvider (copy), config1 (copy)
 		return function(p2)

@@ -8,10 +8,11 @@ local SetAssetsModule = require(Parent.Actions.SetAssets)
 local SetBundlesModule = require(Parent.Actions.SetBundles)
 local GetExperiencePlayabilityModule = require(Parent.Thunks.GetExperiencePlayability)
 local GetExperienceInfoModule = require(Parent.Thunks.GetExperienceInfo)
+local CreateInspectAndBuyKeyMapperModule = require(Parent.createInspectAndBuyKeyMapper)
 local SendCounterModule = require(Parent.Thunks.SendCounter)
 local ConstantsModule = require(Parent.Constants)
 local list = { NetworkModule }
-local GetItemDetails = require(Parent.createInspectAndBuyKeyMapper)("getItemDetails")
+local GetItemDetails = CreateInspectAndBuyKeyMapperModule("getItemDetails")
 
 return function(p1, AvatarItemType)
 	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), GetItemDetails (copy), PerformFetch (copy), AssetInfoModule (copy), SetAssetsModule (copy), BundleInfoModule (copy), SetBundlesModule (copy), SendCounterModule (copy), ConstantsModule (copy), GetExperiencePlayabilityModule (copy), GetExperienceInfoModule (copy)

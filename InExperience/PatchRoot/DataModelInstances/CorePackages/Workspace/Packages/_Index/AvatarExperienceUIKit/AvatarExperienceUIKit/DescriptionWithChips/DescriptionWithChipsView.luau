@@ -9,10 +9,9 @@ local Icon = FoundationModule.Icon
 local IconName = FoundationModule.Enums.IconName
 local IconSize = FoundationModule.Enums.IconSize
 local Skeleton = FoundationModule.Skeleton
+local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
 local NumberSequence1 = NumberSequence.new(1, 0)
-local StateLayer = {
-	affordance = FoundationModule.Enums.StateLayerAffordance.None
-}
+local StateLayer = { affordance = StateLayerAffordance.None }
 local _Vector2 = Vector2.new(0.5, 0.5)
 local _UDim2 = UDim2.fromScale(0.5, 0.5)
 

@@ -149,18 +149,18 @@ function PromiseModule:all()
 			error(("Non-promise value passed into Promise.all at index #%d"):format(i), 2)
 		end
 	end
-	return PromiseModule.new(function(Callback, Callback1)
+	return PromiseModule.new(function(Callback1, Callback)
 		-- upvalues: self (copy)
 		local t = {}
 		local Count = 0
 		
 		local function resolveOne(Key, ...)
-			-- upvalues: t (copy), Count (ref), self (upval), Callback (copy)
+			-- upvalues: t (copy), Count (ref), self (upval), Callback1 (copy)
 			t[Key] = (...)
 			Count += 1
 			
 			if Count == #self then
-				Callback(t)
+				Callback1(t)
 			end
 		end
 		
@@ -169,8 +169,8 @@ function PromiseModule:all()
 				-- upvalues: resolveOne (copy), i (copy)
 				resolveOne(i, ...)
 			end, function(...)
-				-- upvalues: Callback1 (copy)
-				Callback1(...)
+				-- upvalues: Callback (copy)
+				Callback(...)
 			end)
 		end
 	end)

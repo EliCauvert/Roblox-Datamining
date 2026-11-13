@@ -247,8 +247,8 @@ local function createBuildAppStorage(AppStorageService, HttpService)
 	local _ = function(Callback: (any) -> ())
 		-- upvalues: tryReadData (copy), HttpService (copy), AppStorageService (copy)
 		local TryReadDataResult, TryReadDataResult2 = tryReadData()
-		local TryReadDataResult1 = nil
 		local v6 = nil
+		local TryReadDataResult1 = nil
 		
 		if TryReadDataResult then
 			v6 = true

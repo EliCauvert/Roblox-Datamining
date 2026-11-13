@@ -3,6 +3,7 @@ local AccountUpgradeModule = require(CorePackages.Workspace.Packages.AccountUpgr
 local ChromeModule = require(CorePackages.Workspace.Packages.Chrome)
 local ServiceModule = require(script:FindFirstAncestor("Chrome").Service)
 local InExperienceSideSheetModule = require(CorePackages.Workspace.Packages.InExperienceSideSheet)
+local IsPioneerLaunchFunction = require(CorePackages.Workspace.Packages.PioneerUtils).isPioneerLaunch
 local ReactModule = require(CorePackages.Packages.React)
 local Pioneer = AccountUpgradeModule.AccountUpgradeFlow.Pioneer
 local v1 = nil
@@ -31,7 +32,7 @@ local function AccountUpsellIntegration(p1)
 	})
 end
 
-local Config = if require(CorePackages.Workspace.Packages.PioneerUtils).isPioneerLaunch() then {
+local Config = if IsPioneerLaunchFunction() then {
 	id = "AccountUpsell",
 	label = "CoreScripts.InGameMenu.UnlockMore.Title",
 	activated = function() end,

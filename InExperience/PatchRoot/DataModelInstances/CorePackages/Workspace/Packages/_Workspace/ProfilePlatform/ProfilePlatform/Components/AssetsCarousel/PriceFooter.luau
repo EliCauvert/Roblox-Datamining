@@ -5,10 +5,12 @@ local UIBloxModule = require(Parent.UIBlox)
 local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local Images = UIBloxModule.App.ImageSet.Images
+local LocalizationModule = require(Parent.Localization)
 local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local FFlagProfilePlatformFixResaleLimitedPriceModule = require(ProfilePlatform.Flags.FFlagProfilePlatformFixResaleLimitedPrice)
-local IconsCommonRobux = UIBloxModule.App.ImageSet.Images["icons/common/robux"]
+local IconsCommonRobux = Images["icons/common/robux"]
 
 return function(p1)
 	-- upvalues: UseStyleFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), FFlagProfilePlatformFixResaleLimitedPriceModule (copy), ReactModule (copy), ImageSetLabel (copy), IconsCommonRobux (copy), NormalizeFontFaceFunction (copy)

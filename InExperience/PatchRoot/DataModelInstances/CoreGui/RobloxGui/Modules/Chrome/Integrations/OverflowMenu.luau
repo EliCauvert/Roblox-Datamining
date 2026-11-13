@@ -390,7 +390,7 @@ function HamburgerButton(p1)
 				return (1 - p2) * UseStyleResult.Theme.IconEmphasis.Transparency
 			end)
 		}),
-		if SelfieViewModule.useCameraOn() and (not ServiceModule:isWindowOpen(SELFIEVIEWID) and not UseMappedSignalResult) then ReactModule.createElement(SelfieViewModule.CameraStatusDot, {
+		if SelfieViewModule.useCameraOn() and not ServiceModule:isWindowOpen(SELFIEVIEWID) and not UseMappedSignalResult then ReactModule.createElement(SelfieViewModule.CameraStatusDot, {
 			Name = "CameraStatusDot",
 			ZIndex = 2,
 			Position = UDim2.new(1, -4, 1, -7)

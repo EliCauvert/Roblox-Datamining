@@ -3,13 +3,14 @@ local Parent = ProfilePlatform.Parent
 local ReactModule = require(Parent.React)
 local RoactNavigationModule = require(Parent.RoactNavigation)
 local SocialServerDrivenUiModule = require(Parent.SocialServerDrivenUi)
+local RobloxAppHooksModule = require(Parent.RobloxAppHooks)
 local SocialSduiComponentWrapper = SocialServerDrivenUiModule.SocialSduiComponentWrapper
 local UseProfileAnalyticsContextModule = require(ProfilePlatform.Contexts.useProfileAnalyticsContext)
 local UseDynamicSizeMarginModule = require(ProfilePlatform.Hooks.useDynamicSizeMargin)
 local UseProfileCompletionSduiContextModule = require(ProfilePlatform.Hooks.useProfileCompletionSduiContext)
 local UseProfileCompletionDataModule = require(ProfilePlatform.Hooks.useProfileCompletionData)
 local EnumsModule = require(ProfilePlatform.Common.Enums)
-local UseScreenSizeFunction = require(Parent.RobloxAppHooks).useScreenSize
+local UseScreenSizeFunction = RobloxAppHooksModule.useScreenSize
 
 return ReactModule.memo(function(p1)
 	-- upvalues: UseProfileAnalyticsContextModule (copy), UseScreenSizeFunction (copy), UseDynamicSizeMarginModule (copy), ReactModule (copy), UseProfileCompletionSduiContextModule (copy), SocialServerDrivenUiModule (copy), UseProfileCompletionDataModule (copy), RoactNavigationModule (copy), SocialSduiComponentWrapper (copy), EnumsModule (copy)

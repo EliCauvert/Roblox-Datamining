@@ -49,13 +49,14 @@ function Sparkline.render(p1)
 			local ScaledI1 = (i - 2) / (CountList - 1) * AbsSize.X
 			local ScaledY = (MaxYDelta > 0 and (List[i] - MinY) / MaxYDelta or 0.5) * AbsSize.Y
 			local ScaledY1 = (MaxYDelta > 0 and (List[i - 1] - MinY) / MaxYDelta or 0.5) * AbsSize.Y
+			local ScaledIRatio = (ScaledI + ScaledI1) / 2
 			local X = ScaledI - ScaledI1
 			local Y = ScaledY - ScaledY1
 			local SquareRoot = math.sqrt(X * X + Y * Y)
 			Frames["seg" .. i] = RoactModule.createElement("Frame", {
 				BorderSizePixel = 0,
 				Size = UDim2.new(0, SquareRoot, 0, LineWidth),
-				Position = UDim2.new(0, (ScaledI + ScaledI1) / 2 - SquareRoot / 2, 1, -((ScaledY + ScaledY1) / 2)),
+				Position = UDim2.new(0, ScaledIRatio - SquareRoot / 2, 1, -((ScaledY + ScaledY1) / 2)),
 				BackgroundColor3 = Color,
 				Rotation = -math.deg((math.atan2(Y, X)))
 			})

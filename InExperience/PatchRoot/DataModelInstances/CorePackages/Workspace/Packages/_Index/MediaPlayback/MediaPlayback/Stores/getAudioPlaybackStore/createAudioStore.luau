@@ -1,12 +1,13 @@
 ﻿local MediaPlayback = script:FindFirstAncestor("MediaPlayback")
 local SignalsModule = require(MediaPlayback.Parent.Signals)
+local SignalsExperimentalModule = require(MediaPlayback.Parent.SignalsExperimental)
 local EnableAudioPlaybackInAppModule = require(MediaPlayback.Common.enableAudioPlaybackInApp)
 local CreateAudioSystemModule = require(MediaPlayback.Stores.getAudioPlaybackStore.createAudioSystem)
 local CreateVolumeStoreModule = require(MediaPlayback.Stores.getAudioPlaybackStore.createVolumeStore)
 local _ = require(MediaPlayback.Stores.getAudioPlaybackStore.types)
 local CreateSignalFunction = SignalsModule.createSignal
 local CreateEffectFunction = SignalsModule.createEffect
-local OnDisposedFunction = require(MediaPlayback.Parent.SignalsExperimental).onDisposed
+local OnDisposedFunction = SignalsExperimentalModule.onDisposed
 local config = {
 	spawn = function(Callback)
 		return task.spawn(Callback)

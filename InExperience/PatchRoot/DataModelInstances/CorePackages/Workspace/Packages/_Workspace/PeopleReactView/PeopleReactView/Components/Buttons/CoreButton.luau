@@ -1,13 +1,14 @@
 ﻿local Parent = script:FindFirstAncestor("PeopleReactView").Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
 local SignalsModule = require(Parent.Signals)
 local View = FoundationModule.View
 local Text = FoundationModule.Text
 local Icon = FoundationModule.Icon
 local IconSize = FoundationModule.Enums.IconSize
 local UseTokensFunction = FoundationModule.Hooks.useTokens
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseSignalStateFunction = SignalsReactModule.useSignalState
 
 return function(Frame)
 	-- upvalues: UseTokensFunction (copy), UseSignalStateFunction (copy), SignalsModule (copy), ReactModule (copy), View (copy), Icon (copy), IconSize (copy), Text (copy)

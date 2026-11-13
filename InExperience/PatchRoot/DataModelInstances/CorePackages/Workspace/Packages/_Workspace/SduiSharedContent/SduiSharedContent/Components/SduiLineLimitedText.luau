@@ -1,11 +1,12 @@
 ﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
 local ReactModule = require(Parent.React)
 local CryoModule = require(Parent.Cryo)
+local FoundationModule = require(Parent.Foundation)
 local SignalsReactModule = require(Parent.SignalsReact)
 local TextSizeModule = require(Parent.TextSize)
 local GetPreferredTextSizeLineBudgetFunction = require(Parent.SduiSharedUtilities).getPreferredTextSizeLineBudget
 local SduiTextModule = require(script.Parent.SduiText)
-local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
 return function(p1)
 	-- upvalues: UseTokensFunction (copy), SignalsReactModule (copy), TextSizeModule (copy), GetPreferredTextSizeLineBudgetFunction (copy), ReactModule (copy), SduiTextModule (copy), CryoModule (copy)

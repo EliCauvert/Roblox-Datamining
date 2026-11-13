@@ -6,7 +6,9 @@ local PlayerListManagerModule = require(CoreGui:WaitForChild("RobloxGui").Module
 local MouseIconOverrideService = require(CorePackages.Workspace.Packages.CoreScriptsCommon).MouseIconOverrideService
 local FFlagGameInviteModalUnlockMouse = require(CorePackages.Workspace.Packages.SharedFlags).FFlagGameInviteModalUnlockMouse
 local GameInviteModule = require(CorePackages.Workspace.Packages.GameInvite)
+local RenderCoreScriptGameInviteModalContainerFunction: (any) -> () = GameInviteModule.renderCoreScriptGameInviteModalContainer
 local GameInviteModalManager = GameInviteModule.GameInviteModalManager
+local ApolloClientModule = require(CoreGui.RobloxGui.Modules.ApolloClient)
 
 local function Callback(p1)
 	-- upvalues: PlayerListManagerModule (copy), FFlagGameInviteModalUnlockMouse (copy), UserInputService (copy), VRService (copy), MouseIconOverrideService (copy)
@@ -27,5 +29,5 @@ local function Callback(p1)
 	end
 end
 
-GameInviteModule.renderCoreScriptGameInviteModalContainer((require(CoreGui.RobloxGui.Modules.ApolloClient)))
+RenderCoreScriptGameInviteModalContainerFunction(ApolloClientModule)
 GameInviteModalManager.ToggleGameInviteModalEvent.Event:Connect(Callback)

@@ -3,9 +3,6 @@ local Parent = TrustedContacts.Parent
 local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local _ = require(Parent.GraphQLServer)
-local ApolloProfileInsightsModule = require(Parent.ApolloProfileInsights)
-local UseProfileInsightsByUserIdsFunction = ApolloProfileInsightsModule.Hooks.useProfileInsightsByUserIds
-local GetProfileInsightsByUserIdFromDataFunction = ApolloProfileInsightsModule.Selectors.getProfileInsightsByUserIdFromData
 local IsCustomNilModule = require(TrustedContacts.Utils.isCustomNil)
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
@@ -21,12 +18,11 @@ local AmpApiProvider = AmpUpsellModule.AmpApiProvider
 local AccessResponseEnum = AmpUpsellModule.AmpEnums.AccessResponseEnum
 local FFlagProfilePlatformAddTC = require(Parent.SharedFlags).FFlagProfilePlatformAddTC
 local FStringParentLinkAmpNameSpace = require(Parent.SharedFlags).FStringParentLinkAmpNameSpace
-local GetFFlagEnableProfileInsightsApolloMigrationFunction = require(Parent.SharedFlags).GetFFlagEnableProfileInsightsApolloMigration
 local FFlagTFClassmatesProfileInsight = require(Parent.SharedFlags).FFlagTFClassmatesProfileInsight
 local GetResult = require(Parent.UserProfiles).Stores.UserProfileStore.get()
 
 return function(p1)
-	-- upvalues: ReactModule (copy), SignalsModule (copy), GetResult (copy), SignalsReactModule (copy), GetFFlagEnableProfileInsightsApolloMigrationFunction (copy), UseSignalProfileInsightsByUserIdFunction (copy), UseProfileInsightsByUserIdsFunction (copy), GetProfileInsightsByUserIdFromDataFunction (copy), IsCustomNilModule (copy), UseLocalizationFunction (copy), AmpApiProvider (copy), FStringParentLinkAmpNameSpace (copy), AccessResponseEnum (copy), FoundationModule (copy), View (copy), UserTile (copy), LayoutMode (copy), FFlagTFClassmatesProfileInsight (copy), Skeleton (copy), FFlagProfilePlatformAddTC (copy), SocialMetadataIconsAndTextsSectionModule (copy)
+	-- upvalues: ReactModule (copy), SignalsModule (copy), GetResult (copy), SignalsReactModule (copy), UseSignalProfileInsightsByUserIdFunction (copy), IsCustomNilModule (copy), UseLocalizationFunction (copy), AmpApiProvider (copy), FStringParentLinkAmpNameSpace (copy), AccessResponseEnum (copy), FoundationModule (copy), View (copy), UserTile (copy), LayoutMode (copy), FFlagTFClassmatesProfileInsight (copy), Skeleton (copy), FFlagProfilePlatformAddTC (copy), SocialMetadataIconsAndTextsSectionModule (copy)
 	local CombinedName = ""
 	local Username = ""
 	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
@@ -45,30 +41,14 @@ return function(p1)
 	end, { p1.userId })))
 	Username = UseSignalStateResult.username
 	CombinedName = UseSignalStateResult.combinedName
-	local t = {}
-	local UseSignalProfileInsightsByUserIdResult2 = nil
-	
-	if GetFFlagEnableProfileInsightsApolloMigrationFunction() then
-		t, UseSignalProfileInsightsByUserIdResult2 = UseSignalProfileInsightsByUserIdFunction({
-			rankingStrategy = "tc_info_boost",
-			forceFetch = true,
-			userId = p1.userId
-		})
-	else
-		local UseProfileInsightsByUserIdsResult = UseProfileInsightsByUserIdsFunction({
-			rankingStrategy = "tc_info_boost",
-			fetchPolicy = "network-only",
-			userIds = { p1.userId }
-		})
-		
-		if UseProfileInsightsByUserIdsResult and UseProfileInsightsByUserIdsResult.data and not UseProfileInsightsByUserIdsResult.loading then
-			t = GetProfileInsightsByUserIdFromDataFunction(UseProfileInsightsByUserIdsResult.data, p1.userId)
-		end
-		UseSignalProfileInsightsByUserIdResult2 = UseProfileInsightsByUserIdsResult.loading
-	end
+	local UseSignalProfileInsightsByUserIdResult, UseSignalProfileInsightsByUserIdResult2 = UseSignalProfileInsightsByUserIdFunction({
+		rankingStrategy = "tc_info_boost",
+		forceFetch = true,
+		userId = p1.userId
+	})
 	local UseLocalizationResult = UseLocalizationFunction({
 		yourLinkedParent = "Feature.Friends.Label.YourLinkedParent",
-		userAgeVerifiedBracket = if IsCustomNilModule(t.userAgeVerifiedBracket) then nil else t.userAgeVerifiedBracket
+		userAgeVerifiedBracket = if IsCustomNilModule(UseSignalProfileInsightsByUserIdResult.userAgeVerifiedBracket) then nil else UseSignalProfileInsightsByUserIdResult.userAgeVerifiedBracket
 	})
 	local UseStateResult = nil
 	local UseStateResult2 = nil
@@ -84,16 +64,16 @@ return function(p1)
 		return if UseLocalizationResult.userAgeVerifiedBracket then ` • {UseLocalizationResult.userAgeVerifiedBracket}` else nil
 	end, { UseLocalizationResult.userAgeVerifiedBracket })
 	local UseMemoResult1 = ReactModule.useMemo(function()
-		-- upvalues: IsCustomNilModule (upval), t (ref), FFlagTFClassmatesProfileInsight (upval)
+		-- upvalues: IsCustomNilModule (upval), UseSignalProfileInsightsByUserIdResult (copy), FFlagTFClassmatesProfileInsight (upval)
 		return {
-			mutualFriends = if IsCustomNilModule(t.mutualFriends) then nil else t.mutualFriends,
-			friendshipAgeUnixSeconds = if IsCustomNilModule(t.friendshipAgeUnixSeconds) then nil else t.friendshipAgeUnixSeconds,
-			friendRequestOriginSource = if IsCustomNilModule(t.friendRequestOriginSource) then nil else t.friendRequestOriginSource,
-			accountCreationDateUnixSeconds = if IsCustomNilModule(t.accountCreationDateUnixSeconds) then nil else t.accountCreationDateUnixSeconds,
-			localizedCountryName = if IsCustomNilModule(t.localizedCountryName) then nil else t.localizedCountryName,
-			isClassmate = FFlagTFClassmatesProfileInsight and t.isClassmate == true or nil
+			mutualFriends = if IsCustomNilModule(UseSignalProfileInsightsByUserIdResult.mutualFriends) then nil else UseSignalProfileInsightsByUserIdResult.mutualFriends,
+			friendshipAgeUnixSeconds = if IsCustomNilModule(UseSignalProfileInsightsByUserIdResult.friendshipAgeUnixSeconds) then nil else UseSignalProfileInsightsByUserIdResult.friendshipAgeUnixSeconds,
+			friendRequestOriginSource = if IsCustomNilModule(UseSignalProfileInsightsByUserIdResult.friendRequestOriginSource) then nil else UseSignalProfileInsightsByUserIdResult.friendRequestOriginSource,
+			accountCreationDateUnixSeconds = if IsCustomNilModule(UseSignalProfileInsightsByUserIdResult.accountCreationDateUnixSeconds) then nil else UseSignalProfileInsightsByUserIdResult.accountCreationDateUnixSeconds,
+			localizedCountryName = if IsCustomNilModule(UseSignalProfileInsightsByUserIdResult.localizedCountryName) then nil else UseSignalProfileInsightsByUserIdResult.localizedCountryName,
+			isClassmate = FFlagTFClassmatesProfileInsight and UseSignalProfileInsightsByUserIdResult.isClassmate == true or nil
 		}
-	end, { t })
+	end, { UseSignalProfileInsightsByUserIdResult })
 	
 	return ReactModule.createElement(View, {
 		LayoutOrder = 2,

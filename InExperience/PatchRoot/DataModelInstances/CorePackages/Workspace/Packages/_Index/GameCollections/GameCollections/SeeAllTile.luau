@@ -3,13 +3,14 @@ local ReactModule = require(Parent.React)
 local UIBloxModule = require(Parent.UIBlox)
 local FoundationModule = require(Parent.Foundation)
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local Images = UIBloxModule.App.ImageSet.Images
 local UseCursorFunction = UIBloxModule.App.SelectionCursor.useCursor
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local FFlagSduiComponentsUseFoundationTokens = require(Parent.SharedFlags).FFlagSduiComponentsUseFoundationTokens
-local IconsNavigationPushRight = UIBloxModule.App.ImageSet.Images["icons/navigation/pushRight"]
+local IconsNavigationPushRight = Images["icons/navigation/pushRight"]
 
 function SeeAllTile(p1)
 	-- upvalues: FFlagSduiComponentsUseFoundationTokens (copy), UseTokensFunction (copy), UseDesignTokensFunction (copy), UseLocalizationFunction (copy), UseCursorFunction (copy), IconsNavigationPushRight (copy), ReactModule (copy), ImageSetLabel (copy), NormalizeFontFaceFunction (copy)

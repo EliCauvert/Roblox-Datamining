@@ -45,12 +45,12 @@ local function fetchAllCampaigns(p1)
 	-- upvalues: UrlBase (copy), PromiseModule (copy), HttpService (copy), FetchFunction (copy), AsPromiseFunction (copy), mapCampaign (copy)
 	local BaseUrl = p1.baseUrl or UrlBase.APIS
 	
-	return PromiseModule.new(function(Callback1, Callback)
+	return PromiseModule.new(function(Callback, Callback1)
 		-- upvalues: BaseUrl (copy), HttpService (upval), FetchFunction (upval), p1 (copy), AsPromiseFunction (upval), mapCampaign (upval)
 		local List = {}
 		
 		local function fetchPage(NextPageToken, p2)
-			-- upvalues: BaseUrl (upval), HttpService (upval), FetchFunction (upval), p1 (upval), AsPromiseFunction (upval), List (copy), mapCampaign (upval), Callback1 (copy), Callback (copy), fetchPage (copy)
+			-- upvalues: BaseUrl (upval), HttpService (upval), FetchFunction (upval), p1 (upval), AsPromiseFunction (upval), List (copy), mapCampaign (upval), Callback (copy), Callback1 (copy), fetchPage (copy)
 			local MaxPageSizeName: string = ("%s%s?maxPageSize=%d"):format(BaseUrl, "/ads-management/v1/campaigns", 100)
 			
 			if NextPageToken ~= nil and NextPageToken ~= "" then
@@ -65,7 +65,7 @@ local function fetchAllCampaigns(p1)
 					return p3
 				end
 			}))):andThen(function(Result)
-				-- upvalues: List (upval), mapCampaign (upval), Callback1 (upval), p2 (copy), Callback (upval), fetchPage (upval)
+				-- upvalues: List (upval), mapCampaign (upval), Callback (upval), p2 (copy), Callback1 (upval), fetchPage (upval)
 				local Campaigns = if Result == nil then nil else Result.campaigns
 				
 				if Campaigns ~= nil then
@@ -76,12 +76,12 @@ local function fetchAllCampaigns(p1)
 				local NextPageToken = if Result == nil then nil else Result.nextPageToken
 				
 				if NextPageToken == nil or NextPageToken == "" then
-					Callback1(List)
+					Callback(List)
 					
 					return
 				end
 				if p2 >= 10 then
-					Callback({
+					Callback1({
 						errorMessage = "Ad campaigns pagination exceeded the page limit"
 					})
 					
@@ -90,8 +90,8 @@ local function fetchAllCampaigns(p1)
 					fetchPage(NextPageToken, p2 + 1)
 				end
 			end):catch(function(Err)
-				-- upvalues: Callback (upval)
-				Callback(Err)
+				-- upvalues: Callback1 (upval)
+				Callback1(Err)
 			end)
 		end
 		

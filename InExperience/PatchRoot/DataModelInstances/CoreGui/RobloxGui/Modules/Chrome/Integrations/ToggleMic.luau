@@ -13,12 +13,15 @@ local ShowVoiceRestrictionEndedSnackbarModule = require(RobloxGui.Modules.VoiceC
 local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
 local FFlagProactiveVoiceRestrictionsUFR = SharedFlagsModule.FFlagProactiveVoiceRestrictionsUFR
 local FFlagReactiveVoiceRestrictionsUFR = SharedFlagsModule.FFlagReactiveVoiceRestrictionsUFR
+local FFlagMicIndicatorRequiresVoiceDevice = SharedFlagsModule.FFlagMicIndicatorRequiresVoiceDevice
 local VoiceAnalyticsModule = require(RobloxGui.Modules.Settings.Analytics.VoiceAnalytics)
 local EnableChromeAudioFocusManagement = game:DefineFastFlag("EnableChromeAudioFocusManagement", false)
 local EnableChromeAudioFocusManagement1 = game:GetEngineFeature("AudioFocusManagement") and EnableChromeAudioFocusManagement
 local MicConsumerRegistry = game:DefineFastFlag("MicConsumerRegistry", false)
+local SideSheetPlacement = require(CorePackages.Workspace.Packages.Chrome).Enums.SideSheetPlacement
 local FFlagTokenizeUnibarConstantsWithStyleProvider = require(Chrome.ChromeShared.Flags).FFlagTokenizeUnibarConstantsWithStyleProvider
 local ChromeUtilsModule = require(Chrome.ChromeShared.Service.ChromeUtils)
+local IsVoiceChatSupportedModule = require(Chrome.Integrations.isVoiceChatSupported)
 local RedVoiceDotModule = require(Chrome.Integrations.RedVoiceDot)
 local UnibarStyle = require(CorePackages.Workspace.Packages.Chrome).UnibarStyle
 local UseIsPlaytestModeModule = require(Chrome.ChromeShared.Hooks.useIsPlaytestMode)
@@ -108,7 +111,7 @@ end
 RegisterResult = require(Chrome.Service):register({
 	id = "toggle_mic_mute",
 	label = if require(Chrome.Flags.FFlagChangeToggleMicText) then "CoreScripts.TopBar.Mic" else "CoreScripts.TopBar.ToggleMic",
-	sideSheetPlacement = require(CorePackages.Workspace.Packages.Chrome).Enums.SideSheetPlacement.Unibar,
+	sideSheetPlacement = SideSheetPlacement.Unibar,
 	activated = Activated,
 	isActivated = NewResult,
 	components = {
@@ -246,8 +249,29 @@ local function observeMicPresentation()
 	end
 end
 
+local _ = function(): boolean
+	-- upvalues: Default (copy), MicConsumerRegistry (copy)
+	local MicManager = Default:GetMicManager()
+	
+	return if MicConsumerRegistry and MicManager then (if MicManager:HasConsumer("voice_chat") then 1 else 0) < MicManager:GetConsumerCount() else false
+end
+
+local _ = function()
+	-- upvalues: Default (copy), MicConsumerRegistry (copy), RegisterResult (ref)
+	if not Default:HasLocalVoiceDevice() then
+		local MicManager = Default:GetMicManager()
+		
+		if not (if MicConsumerRegistry and MicManager then (if MicManager:HasConsumer("voice_chat") then 1 else 0) < MicManager:GetConsumerCount() else false) then
+			RegisterResult.availability:unavailable()
+			
+			return
+		end
+	end
+	RegisterResult.availability:pinned()
+end
+
 local function applyVoiceUIVisibility()
-	-- upvalues: FFlagProactiveVoiceRestrictionsUFR (copy), Default (copy), RegisterResult (ref), handleRestrictedActivation (copy), FFlagReactiveVoiceRestrictionsUFR (copy)
+	-- upvalues: FFlagProactiveVoiceRestrictionsUFR (copy), Default (copy), RegisterResult (ref), handleRestrictedActivation (copy), FFlagReactiveVoiceRestrictionsUFR (copy), FFlagMicIndicatorRequiresVoiceDevice (copy), MicConsumerRegistry (copy)
 	if FFlagProactiveVoiceRestrictionsUFR then
 		local Flag = nil
 		if Default:GetVoiceRestrictionState(false) == "normal" then
@@ -264,12 +288,36 @@ local function applyVoiceUIVisibility()
 		end
 		if Flag then return end
 	end
-	if Default.voiceUIVisible then
+	if FFlagMicIndicatorRequiresVoiceDevice and Default.voiceUIVisible then
+		if not Default:HasLocalVoiceDevice() then
+			local MicManager = Default:GetMicManager()
+			
+			if not (if MicConsumerRegistry and MicManager then (if MicManager:HasConsumer("voice_chat") then 1 else 0) < MicManager:GetConsumerCount() else false) then
+				RegisterResult.availability:unavailable()
+				
+				return
+			end
+		end
 		RegisterResult.availability:pinned()
 		
 		return
 	else
-		RegisterResult.availability:unavailable()
+		if FFlagMicIndicatorRequiresVoiceDevice then
+			local MicManager = Default:GetMicManager()
+			
+			if if MicConsumerRegistry and MicManager then (if MicManager:HasConsumer("voice_chat") then 1 else 0) < MicManager:GetConsumerCount() else false then
+				RegisterResult.availability:pinned()
+				
+				return
+			end
+		end
+		if Default.voiceUIVisible then
+			RegisterResult.availability:pinned()
+			
+			return
+		else
+			RegisterResult.availability:unavailable()
+		end
 	end
 end
 
@@ -304,7 +352,7 @@ local function updateMicAvailabilityFromConsumers()
 end
 
 local function updateVoiceState(_, NewState)
-	-- upvalues: FFlagProactiveVoiceRestrictionsUFR (copy), Default (copy), RegisterResult (ref), handleRestrictedActivation (copy), FFlagReactiveVoiceRestrictionsUFR (copy), EnableChromeAudioFocusManagement1 (copy), MicConsumerRegistry (copy), updateMicAvailabilityFromConsumers (copy), Activated1 (copy), Activated2 (copy), Activated (copy)
+	-- upvalues: FFlagProactiveVoiceRestrictionsUFR (copy), Default (copy), RegisterResult (ref), handleRestrictedActivation (copy), FFlagReactiveVoiceRestrictionsUFR (copy), EnableChromeAudioFocusManagement1 (copy), applyVoiceUIVisibility (copy), FFlagMicIndicatorRequiresVoiceDevice (copy), MicConsumerRegistry (copy), updateMicAvailabilityFromConsumers (copy), Activated1 (copy), Activated2 (copy), Activated (copy)
 	if FFlagProactiveVoiceRestrictionsUFR then
 		local Flag = nil
 		if Default:GetVoiceRestrictionState(false) == "normal" then
@@ -324,29 +372,19 @@ local function updateVoiceState(_, NewState)
 	repeat
 		if NewState ~= Enum.VoiceChatState.Ended then
 			if EnableChromeAudioFocusManagement1 then
-				if FFlagProactiveVoiceRestrictionsUFR then
-					local Flag = nil
-					if Default:GetVoiceRestrictionState(false) == "normal" then
-						Flag = false
-					else
-						RegisterResult.activated = handleRestrictedActivation
-						
-						if FFlagReactiveVoiceRestrictionsUFR then
-							RegisterResult.availability:pinned()
-						else
-							RegisterResult.availability:unavailable()
-						end
-						Flag = true
+				applyVoiceUIVisibility()
+				break
+			elseif FFlagMicIndicatorRequiresVoiceDevice then
+				if not Default:HasLocalVoiceDevice() then
+					local MicManager = Default:GetMicManager()
+					
+					if not (if MicConsumerRegistry and MicManager then (if MicManager:HasConsumer("voice_chat") then 1 else 0) < MicManager:GetConsumerCount() else false) then
+						RegisterResult.availability:unavailable()
+						break
 					end
-					if Flag then break end
 				end
-				if Default.voiceUIVisible then
-					RegisterResult.availability:pinned()
-					break
-				else
-					RegisterResult.availability:unavailable()
-					break
-				end
+				RegisterResult.availability:pinned()
+				break
 			else
 				RegisterResult.availability:pinned()
 				break
@@ -374,63 +412,60 @@ local function updateVoiceState(_, NewState)
 	end
 end
 
-if require(Chrome.Integrations.isVoiceChatSupported)() then
+if IsVoiceChatSupportedModule() then
 	if FFlagProactiveVoiceRestrictionsUFR then
 		script.Destroying:Once((observeMicPresentation()))
 	end
 	Default:asyncInit():andThen(function()
-		-- upvalues: Default (copy), updateVoiceState (copy), EnableChromeAudioFocusManagement1 (copy), applyVoiceUIVisibility (copy), FFlagProactiveVoiceRestrictionsUFR (copy), RegisterResult (ref), handleRestrictedActivation (copy), FFlagReactiveVoiceRestrictionsUFR (copy)
+		-- upvalues: Default (copy), updateVoiceState (copy), FFlagMicIndicatorRequiresVoiceDevice (copy), EnableChromeAudioFocusManagement1 (copy), applyVoiceUIVisibility (copy), FFlagProactiveVoiceRestrictionsUFR (copy), RegisterResult (ref), handleRestrictedActivation (copy), FFlagReactiveVoiceRestrictionsUFR (copy), MicConsumerRegistry (copy)
 		local Service = Default:getService()
 		
 		if Service then
 			Service.StateChanged:Connect(updateVoiceState)
 			Default:SetupParticipantListeners()
 			
+			if FFlagMicIndicatorRequiresVoiceDevice then
+				Default:SubscribeToLocalAudioDeviceChanges(function()
+					-- upvalues: updateVoiceState (upval), Service (copy)
+					updateVoiceState(nil, Service.VoiceChatState)
+				end)
+			end
 			if EnableChromeAudioFocusManagement1 then
 				Default.showVoiceUI.Event:Connect(applyVoiceUIVisibility)
 				Default.hideVoiceUI.Event:Connect(applyVoiceUIVisibility)
+				applyVoiceUIVisibility()
 				
-				if FFlagProactiveVoiceRestrictionsUFR then
-					local Flag = nil
-					if Default:GetVoiceRestrictionState(false) == "normal" then
-						Flag = false
-					else
-						RegisterResult.activated = handleRestrictedActivation
-						
-						if FFlagReactiveVoiceRestrictionsUFR then
-							RegisterResult.availability:pinned()
-						else
-							RegisterResult.availability:unavailable()
-						end
-						Flag = true
-					end
-					if Flag then return end
-				end
-				if Default.voiceUIVisible then
-					RegisterResult.availability:pinned()
-					
-					return
+				return
+			end
+			if FFlagProactiveVoiceRestrictionsUFR then
+				local Flag = nil
+				if Default:GetVoiceRestrictionState(false) == "normal" then
+					Flag = false
 				else
-					RegisterResult.availability:unavailable()
+					RegisterResult.activated = handleRestrictedActivation
 					
-					return
-				end
-			else
-				if FFlagProactiveVoiceRestrictionsUFR then
-					local Flag = nil
-					if Default:GetVoiceRestrictionState(false) == "normal" then
-						Flag = false
+					if FFlagReactiveVoiceRestrictionsUFR then
+						RegisterResult.availability:pinned()
 					else
-						RegisterResult.activated = handleRestrictedActivation
-						
-						if FFlagReactiveVoiceRestrictionsUFR then
-							RegisterResult.availability:pinned()
-						else
-							RegisterResult.availability:unavailable()
-						end
-						Flag = true
+						RegisterResult.availability:unavailable()
 					end
-					if not Flag then
+					Flag = true
+				end
+				if not Flag then
+					if FFlagMicIndicatorRequiresVoiceDevice then
+						if not Default:HasLocalVoiceDevice() then
+							local MicManager = Default:GetMicManager()
+							
+							if not (if MicConsumerRegistry and MicManager then (if MicManager:HasConsumer("voice_chat") then 1 else 0) < MicManager:GetConsumerCount() else false) then
+								RegisterResult.availability:unavailable()
+								
+								return
+							end
+						end
+						RegisterResult.availability:pinned()
+						
+						return
+					else
 						RegisterResult.availability:pinned()
 					end
 				end

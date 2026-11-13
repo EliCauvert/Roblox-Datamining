@@ -5,11 +5,12 @@ local ReactModule = require(Parent.React)
 local OtterModule = require(Parent.Otter)
 local FoundationModule = require(Parent.Foundation)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local SharedFlagsModule = require(Parent.SharedFlags)
 local UseRequireManualSelectionModule = require(AccountUpgrade.Hooks.useRequireManualSelection)
 local _ = require(script.Parent.BirthdaySheetView)
 local DateHelper = require(Parent.Time).DateHelper
 local UseValidatedBirthdayFunction = require(Parent.AuthSignup).Hooks.useValidatedBirthday
-local FIntSinglePageSignupMinimumAge = require(Parent.SharedFlags).FIntSinglePageSignupMinimumAge
+local FIntSinglePageSignupMinimumAge = SharedFlagsModule.FIntSinglePageSignupMinimumAge
 local config = { frequency = 3 }
 
 local function useSlide(Current)
@@ -104,18 +105,19 @@ return function(p1)
 		yearAffix = DateHelper.YearAffixLocalizationKey
 	})
 	local Date = if UseValidatedBirthdayResult1 and UseLocalizationResult.monthText then DateHelper:GetFormattedFullString(UseLocalizationResult.monthText, UseValidatedBirthdayResult1.Day, UseLocalizationResult.dayAffix, UseValidatedBirthdayResult1.Year, UseLocalizationResult.yearAffix, " ", LocalizationService.RobloxLocaleId) else nil
+	local config = {
+		ageSummaryText = if Date then {
+			"Authentication.SignUp.Label.BirthdayPickerWithDateAndAge",
+			date = Date,
+			yearsOld = tostring(AgeInYears)
+		} else nil
+	}
 	local Birthday = p1.birthday
 	
 	return {
 		titleText = UseLocalizationResult.titleText,
 		confirmText = UseLocalizationResult.confirmText,
-		ageSummaryText = UseLocalizationFunction({
-			ageSummaryText = if Date then {
-				"Authentication.SignUp.Label.BirthdayPickerWithDateAndAge",
-				date = Date,
-				yearsOld = tostring(AgeInYears)
-			} else nil
-		}).ageSummaryText,
+		ageSummaryText = UseLocalizationFunction(config).ageSummaryText,
 		isCentered = p1.isCentered == true,
 		slideProgress = UseSlideResult,
 		minAgeAllowed = FIntSinglePageSignupMinimumAge,

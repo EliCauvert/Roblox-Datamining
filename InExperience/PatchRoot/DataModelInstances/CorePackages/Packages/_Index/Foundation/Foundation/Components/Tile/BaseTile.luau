@@ -2,6 +2,8 @@
 local ReactModule = require(Foundation.Parent.React)
 local BaseTileContentModule = require(script.Parent.BaseTileContent)
 local BaseTileMediaModule = require(script.Parent.BaseTileMedia)
+local BaseTileMediaClippingModule = require(Foundation.Enums.BaseTileMediaClipping)
+local TileAspectRatioModule = require(Foundation.Enums.TileAspectRatio)
 local _ = require(Foundation.Components.Types)
 local GetTestIdTagModule = require(Foundation.Utility.getTestIdTag)
 local JoinBindablesModule = require(Foundation.Utility.joinBindables)
@@ -18,8 +20,8 @@ end
 local config = {
 	isContained = false,
 	testId = "--foundation-base-tile",
-	mediaAspectRatio = require(Foundation.Enums.TileAspectRatio).Ratio16x9,
-	mediaClippingStyle = require(Foundation.Enums.BaseTileMediaClipping).Default
+	mediaAspectRatio = TileAspectRatioModule.Ratio16x9,
+	mediaClippingStyle = BaseTileMediaClippingModule.Default
 }
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)

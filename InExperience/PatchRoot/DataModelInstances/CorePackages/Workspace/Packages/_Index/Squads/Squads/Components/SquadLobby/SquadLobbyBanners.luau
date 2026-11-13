@@ -279,6 +279,7 @@ local function v27(Frame)
 	local UseAppPolicyResult = UseAppPolicyFunction(function(p1)
 		return p1.getWebViewSupport()
 	end)
+	local UseIsAnyOtherUserPartyVoiceEligibleModuleResult1 = UseIsCurrentSquadPartyVoiceEligibleResult and (not UseIsLocalPlayerPartyVoiceEligibleResult and UseIsAnyOtherUserPartyVoiceEligibleModuleResult)
 	local UseResult = React.useCallback(function()
 		-- upvalues: PartyVoiceBannerErrorUserNotEligibleURL (upval), UseLocalizationResult (copy)
 		if PartyVoiceBannerErrorUserNotEligibleURL ~= "" then
@@ -286,7 +287,7 @@ local function v27(Frame)
 		end
 	end, { UseLocalizationResult.errorButton })
 	
-	return if UseIsCurrentSquadPartyVoiceEligibleResult and (not UseIsLocalPlayerPartyVoiceEligibleResult and UseIsAnyOtherUserPartyVoiceEligibleModuleResult) then React.createElement(v24, {
+	return if UseIsAnyOtherUserPartyVoiceEligibleModuleResult1 then React.createElement(v24, {
 		isButtonInline = false,
 		LayoutOrder = Frame.LayoutOrder,
 		label = UseLocalizationResult.errorText,

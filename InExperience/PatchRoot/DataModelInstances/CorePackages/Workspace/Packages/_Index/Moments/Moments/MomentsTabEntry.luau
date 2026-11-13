@@ -2,6 +2,8 @@
 local Parent = Moments.Parent
 local HttpService = game:GetService("HttpService")
 local MomentsCommonModule = require(Parent.MomentsCommon)
+local MomentsTypesModule = require(Parent.MomentsTypes)
+local NavigationModule = require(Parent.Navigation)
 local ReactModule = require(Parent.React)
 local RoactNavigationModule = require(Parent.RoactNavigation)
 local SharedFlagsModule = require(Parent.SharedFlags)
@@ -36,8 +38,8 @@ local MomentsSessionHeartbeats = {}
 local FFlagMomentsCreateAvatarPosts = SharedFlagsModule.FFlagMomentsCreateAvatarPosts
 local FFlagMomentsAvatarLookTryOn = SharedFlagsModule.FFlagMomentsAvatarLookTryOn
 local FFlagMomentsCommentDeepLinks = SharedFlagsModule.FFlagMomentsCommentDeepLinks
-local ShareLinkTargetIdType = require(Parent.MomentsTypes).Enums.ShareLinkTargetIdType
-local GetActiveRoutesFunction = require(Parent.Navigation).getActiveRoutes
+local ShareLinkTargetIdType = MomentsTypesModule.Enums.ShareLinkTargetIdType
+local GetActiveRoutesFunction = NavigationModule.getActiveRoutes
 
 local function _(p1)
 	return if type(p1) == "string" and p1 ~= "" then p1 elseif type(p1) == "number" then tostring(p1) else nil

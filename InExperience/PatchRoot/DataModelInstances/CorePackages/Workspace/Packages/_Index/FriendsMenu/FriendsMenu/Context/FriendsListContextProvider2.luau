@@ -8,6 +8,7 @@ local UserLibModule = require(Parent2.UserLib)
 local UserProfilesModule = require(Parent2.UserProfiles)
 local CryoModule = require(Parent2.Cryo)
 local Constants = UserLibModule.Utils.Constants
+local ThumbnailRequest = UserLibModule.Utils.ThumbnailRequest
 local PreloadUsersThumbnailFunction = UserLibModule.Thunks.PreloadUsersThumbnail
 local UseDispatchFunction = require(Parent2.RoactUtils).Hooks.RoactRodux.useDispatch
 local SortFriendsByCorrectedPresenceAndRank = FriendsMenuDependenciesModule.sortFriendsByCorrectedPresenceAndRank
@@ -29,7 +30,7 @@ local config = {
 }
 config.ThumbnailRequest = {
 	InviteToGame = {
-		UserLibModule.Utils.ThumbnailRequest.fromData(config.InviteAvatarThumbnailType, config.InviteAvatarThumbnailSize)
+		ThumbnailRequest.fromData(config.InviteAvatarThumbnailType, config.InviteAvatarThumbnailSize)
 	}
 }
 
@@ -54,7 +55,7 @@ return function(p1)
 		query = UserProfilesModule.Queries.userProfilesCombinedNameAndUsernameByUserIds
 	})
 	
-	local function v36(Ids, p2)
+	local function v37(Ids, p2)
 		-- upvalues: UseDispatchResult (copy), PreloadUsersThumbnailFunction (upval), config (upval), UseUserProfilesFetchResult (copy), p1 (copy), UserModel (upval), UseFriendsListOrderedByPresenceResult (copy), PresenceType (upval), FFlagFilterOutDeletedAccountsGameInvitesModule (upval), ConstantsModule (upval), UseSortInvitesByScoreExperimentResult (copy), SortInvitesByScoreIXPModule (upval), SortFriendsByCorrectedPresenceAndRank (upval), UseStateResult2_2 (copy), UseStateResult2_1 (copy), UseMemoResult (ref), CryoModule (upval)
 		UseDispatchResult(PreloadUsersThumbnailFunction(Ids, config.ThumbnailRequest.InviteToGame, nil))
 		UseUserProfilesFetchResult:fetchMore({ variables = { userIds = Ids } }):andThen(function(Result)
@@ -114,7 +115,7 @@ return function(p1)
 	end
 	
 	UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: UseStateResult (copy), GetFriendsSearchModule (upval), NetworkImplOverride (ref), Text (copy), UseSortInvitesByScoreExperimentResult (copy), SortInvitesByScoreIXPModule (upval), CryoModule (upval), v36 (copy), UseFriendsListOrderedByPresenceResult (copy), UseMemoResult (ref), FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt (upval), UseStateResult2_2 (copy), UseStateResult2_1 (copy)
+		-- upvalues: UseStateResult (copy), GetFriendsSearchModule (upval), NetworkImplOverride (ref), Text (copy), UseSortInvitesByScoreExperimentResult (copy), SortInvitesByScoreIXPModule (upval), CryoModule (upval), v37 (copy), UseFriendsListOrderedByPresenceResult (copy), UseMemoResult (ref), FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt (upval), UseStateResult2_2 (copy), UseStateResult2_1 (copy)
 		if UseStateResult == "" then
 			if UseFriendsListOrderedByPresenceResult.onlineFriends and UseFriendsListOrderedByPresenceResult.offlineFriends then
 				local Ids = {}
@@ -129,7 +130,7 @@ return function(p1)
 					end
 				end
 				if not FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt or #Ids ~= 0 then
-					return (v36(Ids, T))
+					return (v37(Ids, T))
 				elseif UseFriendsListOrderedByPresenceResult.isLoading then
 					return {}
 				else
@@ -141,10 +142,10 @@ return function(p1)
 			end
 		else
 			GetFriendsSearchModule(NetworkImplOverride, Text, UseStateResult, 20):andThen(function(Result)
-				-- upvalues: UseSortInvitesByScoreExperimentResult (upval), SortInvitesByScoreIXPModule (upval), CryoModule (upval), v36 (upval)
+				-- upvalues: UseSortInvitesByScoreExperimentResult (upval), SortInvitesByScoreIXPModule (upval), CryoModule (upval), v37 (upval)
 				local T = if UseSortInvitesByScoreExperimentResult or SortInvitesByScoreIXPModule.FFlagSortInvitesByScoreEnabledForAll then {} else nil
 				
-				return (v36(CryoModule.List.map(Result.responseBody.PageItems, function(p3, p4): string
+				return (v37(CryoModule.List.map(Result.responseBody.PageItems, function(p3, p4): string
 					-- upvalues: UseSortInvitesByScoreExperimentResult (upval), SortInvitesByScoreIXPModule (upval), T (copy)
 					if UseSortInvitesByScoreExperimentResult or SortInvitesByScoreIXPModule.FFlagSortInvitesByScoreEnabledForAll then
 						T[p3.id] = p4

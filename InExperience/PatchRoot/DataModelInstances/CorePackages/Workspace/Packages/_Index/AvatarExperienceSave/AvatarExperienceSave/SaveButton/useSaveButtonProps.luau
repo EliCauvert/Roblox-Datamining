@@ -2,10 +2,11 @@
 local Parent = AvatarExperienceSave.Parent
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
+local AvatarExperienceNavigationModule = require(Parent.AvatarExperienceNavigation)
 local SlotBasedEditorAnalytics = require(Parent.AvatarExperienceAnalytics).Surfaces.SlotBasedEditorAnalytics
 local SaveStatusEnumModule = require(AvatarExperienceSave.Enums.SaveStatusEnum)
 local UseAvatarSaveContextModule = require(AvatarExperienceSave.Context.useAvatarSaveContext)
-local UseAvatarRouteFunction = require(Parent.AvatarExperienceNavigation).AvatarRoute.Hooks.useAvatarRoute
+local UseAvatarRouteFunction = AvatarExperienceNavigationModule.AvatarRoute.Hooks.useAvatarRoute
 
 return function()
 	-- upvalues: UseAvatarRouteFunction (copy), UseAvatarSaveContextModule (copy), SignalsReactModule (copy), ReactModule (copy), SaveStatusEnumModule (copy), SlotBasedEditorAnalytics (copy)

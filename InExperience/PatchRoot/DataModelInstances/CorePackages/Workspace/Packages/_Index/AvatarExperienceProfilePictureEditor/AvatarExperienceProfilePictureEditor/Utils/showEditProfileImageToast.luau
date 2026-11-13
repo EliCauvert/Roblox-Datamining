@@ -1,5 +1,6 @@
 ﻿local AvatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
 local ToastRoduxModule = require(AvatarExperienceProfilePictureEditor.Parent.ToastRodux)
+local TextKeysModule = require(AvatarExperienceProfilePictureEditor.Common.TextKeys)
 local ToastType = ToastRoduxModule.Enums.ToastType
 local SetCurrentToastMessageFunction = ToastRoduxModule.Actions.SetCurrentToastMessage
 local config = {
@@ -9,7 +10,7 @@ local config = {
 }
 local config1 = {
 	isLocalized = false,
-	toastMessage = require(AvatarExperienceProfilePictureEditor.Common.TextKeys).SaveFailed,
+	toastMessage = TextKeysModule.SaveFailed,
 	toastType = ToastType.NetworkingError
 }
 

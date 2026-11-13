@@ -91,11 +91,11 @@ return {
 			
 			return false, p1
 		end
-		local ValidateInterfaceModuleResult1, ValidateInterfaceModuleResult2_1 = ValidateInterfaceModule(DeepCopyResult, UiComponentInterface, false)
+		local ValidateInterfaceModuleResult, ValidateInterfaceModuleResult2 = ValidateInterfaceModule(DeepCopyResult, UiComponentInterface, false)
 		
-		if not ValidateInterfaceModuleResult1 then
+		if not ValidateInterfaceModuleResult then
 			p2.dependencies.logger.reportError(SduiErrorType.InvalidComponentConfig, {
-				message = `(Eager) Invalid config for component. err: {ValidateInterfaceModuleResult2_1}`,
+				message = `(Eager) Invalid config for component. err: {ValidateInterfaceModuleResult2}`,
 				componentType = ComponentType,
 				name = Name,
 				value = DeepCopyResult
@@ -150,13 +150,13 @@ return {
 		local PropInterface = p2.componentDefinitions:getPropInterface(ComponentType)
 		
 		if PropInterface then
-			local ValidateInterfaceModuleResult, ValidateInterfaceModuleResult2 = ValidateInterfaceModule(DeepCopyResult.props, PropInterface)
+			local ValidateInterfaceModuleResult1, ValidateInterfaceModuleResult2_1 = ValidateInterfaceModule(DeepCopyResult.props, PropInterface)
 			
-			if not ValidateInterfaceModuleResult then
+			if not ValidateInterfaceModuleResult1 then
 				p2.dependencies.logger.reportError(SduiErrorType.InvalidProps, {
 					componentType = ComponentType,
 					name = Name,
-					message = ValidateInterfaceModuleResult2
+					message = ValidateInterfaceModuleResult2_1
 				}, p2.appPage)
 				Instrumentation:stopTimerFlow("EagerProcess", p2, true)
 				

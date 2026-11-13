@@ -1,15 +1,18 @@
 ﻿local ExpChat = script:FindFirstAncestor("ExpChat")
 local Parent = ExpChat.Parent
+local RoduxModule = require(Parent.Rodux)
 local Dictionary = require(Parent.llama).Dictionary
 local Actions = ExpChat.Actions
+local ChatLayoutHorizontalAlignmentChangedModule = require(Actions.ChatLayoutHorizontalAlignmentChanged)
+local ChatLayoutVerticalAlignmentChangedModule = require(Actions.ChatLayoutVerticalAlignmentChanged)
 local Y = game:GetService("GuiService"):GetGuiInset().Y
 
-return require(Parent.Rodux).createReducer({
+return RoduxModule.createReducer({
 	Position = UDim2.new(0, 8, 0, 4),
 	AnchorPoint = Vector2.new(0, 0),
 	UIListLayoutVerticalAlignment = Enum.VerticalAlignment.Top
 }, {
-	[require(Actions.ChatLayoutHorizontalAlignmentChanged).name] = function(Frame, p1)
+	[ChatLayoutHorizontalAlignmentChangedModule.name] = function(Frame, p1)
 		-- upvalues: Dictionary (copy)
 		local Position = Frame.Position
 		local AnchorPoint = Frame.AnchorPoint
@@ -26,7 +29,7 @@ return require(Parent.Rodux).createReducer({
 		end
 		return Dictionary.join(Frame, { Position = Position, AnchorPoint = AnchorPoint })
 	end,
-	[require(Actions.ChatLayoutVerticalAlignmentChanged).name] = function(Frame, p1)
+	[ChatLayoutVerticalAlignmentChangedModule.name] = function(Frame, p1)
 		-- upvalues: Y (copy), Dictionary (copy)
 		local Position = Frame.Position
 		local AnchorPoint = Frame.AnchorPoint

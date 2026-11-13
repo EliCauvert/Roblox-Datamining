@@ -3,6 +3,8 @@ local GameSettings = UserSettings().GameSettings
 local GuiService = game:GetService("GuiService")
 local SettingsServiceModule = require(game:GetService("CorePackages").Workspace.Packages.SettingsService)
 local ValueChangedSignal = SettingsServiceModule.ValueChangedSignal
+local AvailabilitySignal = SettingsServiceModule.AvailabilitySignal
+local SettingEnum = SettingsServiceModule.SettingEnum
 local UtilsModule = require(Settings.Integrations.Utils)
 
 local function _(): boolean
@@ -14,7 +16,7 @@ return {
 	id = "fullscreen",
 	label = "CoreScripts.InGameMenu.GameSettings.FullScreen",
 	alreadyLocalized = false,
-	field_type = SettingsServiceModule.SettingEnum.Toggle,
+	field_type = SettingEnum.Toggle,
 	layoutOrder = require(Settings.Integrations.Constants).GAMESETTINGS.LAYOUT_ORDER.FullScreenFrame,
 	onChanged = (function()
 		-- upvalues: ValueChangedSignal (copy), GameSettings (copy), GuiService (copy)
@@ -34,5 +36,5 @@ return {
 		
 		return NewValueChangedSignal
 	end)(),
-	availability = SettingsServiceModule.AvailabilitySignal.new(UtilsModule.getDeviceType() == UtilsModule.DeviceTypes.Desktop or UtilsModule.getDeviceType() == UtilsModule.DeviceTypes.Unknown)
+	availability = AvailabilitySignal.new(UtilsModule.getDeviceType() == UtilsModule.DeviceTypes.Desktop or UtilsModule.getDeviceType() == UtilsModule.DeviceTypes.Unknown)
 }

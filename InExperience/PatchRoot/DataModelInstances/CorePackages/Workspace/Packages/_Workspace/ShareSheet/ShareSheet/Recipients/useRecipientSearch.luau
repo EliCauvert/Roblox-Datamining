@@ -1,9 +1,10 @@
 ﻿local ShareSheet = script:FindFirstAncestor("ShareSheet")
 local Parent = ShareSheet.Parent
 local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local _ = require(ShareSheet.Types)
-local Signal = require(Parent.Signals).createSignal(nil)
+local Signal = SignalsModule.createSignal(nil)
 
 return function(p1, p2)
 	-- upvalues: ReactModule (copy), SignalsReactModule (copy), Signal (copy)

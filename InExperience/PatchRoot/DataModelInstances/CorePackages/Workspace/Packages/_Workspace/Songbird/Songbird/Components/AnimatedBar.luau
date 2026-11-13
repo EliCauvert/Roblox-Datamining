@@ -2,9 +2,10 @@
 local CryoModule = require(Songbird.Parent.Cryo)
 local ReactModule = require(Songbird.Parent.React)
 local ReactOtterModule = require(Songbird.Parent.ReactOtter)
+local FoundationModule = require(Songbird.Parent.Foundation)
 local UseCallbackFunction = ReactModule.useCallback
 local UseEffectFunction = ReactModule.useEffect
-local UseTokensFunction = require(Songbird.Parent.Foundation).Hooks.useTokens
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 local config = {
 	isMoving = true,
 	staticHeight = 0.5,

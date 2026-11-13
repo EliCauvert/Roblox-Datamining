@@ -1,6 +1,7 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
 local FoundationModule = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
 local MomentsCommonModule = require(Parent.MomentsCommon)
 local ReactModule = require(Parent.React)
 local Button = FoundationModule.Button
@@ -10,7 +11,7 @@ local Text = FoundationModule.Text
 local View = FoundationModule.View
 local UseDeviceInsetsFunction = MomentsCommonModule.Hooks.useDeviceInsets
 local UseFormFactorFunction = MomentsCommonModule.Hooks.useFormFactor
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local FormFactor = MomentsCommonModule.Enums.FormFactor
 local ConstantsModule = require(Moments.Constants)

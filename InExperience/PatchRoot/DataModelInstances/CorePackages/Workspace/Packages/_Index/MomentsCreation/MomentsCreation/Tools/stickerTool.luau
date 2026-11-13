@@ -1,21 +1,24 @@
 ﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
 local Parent = MomentsCreation.Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local MomentsCommonModule = require(Parent.MomentsCommon)
 local ReactModule = require(Parent.React)
+local CreationFlowStateModule = require(MomentsCreation.Enums.CreationFlowState)
 local _ = require(MomentsCreation.Types.CreationFlowTypes)
 local CreateEditSessionModule = require(MomentsCreation.Stores.createEditSession)
 local StickerOverlayControlsModule = require(MomentsCreation.Components.StickerOverlay.StickerOverlayControls)
 local StickerOverlayLayerModule = require(MomentsCreation.Components.StickerOverlay.StickerOverlayLayer)
-local EventNames = require(Parent.MomentsCommon).Analytics.EventNames
+local EventNames = MomentsCommonModule.Analytics.EventNames
 
 return {
 	kind = "sticker",
 	presentation = "Step",
 	zIndex = 3,
-	step = require(MomentsCreation.Enums.CreationFlowState).StickerOverlay,
+	step = CreationFlowStateModule.StickerOverlay,
 	cta = {
 		localizationKey = "Feature.Moments.Action.AddSticker",
 		order = 4,
-		icon = require(Parent.BuilderIcons).Icon.SquareFaceEmoji,
+		icon = BuilderIconsModule.Icon.SquareFaceEmoji,
 		analyticsEvent = EventNames.EditingFlowStickerOverlayButtonPressed,
 		commitAnalyticsEvent = EventNames.EditingFlowStickerOverlayDoneButtonPressed,
 		cancelAnalyticsEvent = EventNames.EditingFlowStickerOverlayBackButtonPressed

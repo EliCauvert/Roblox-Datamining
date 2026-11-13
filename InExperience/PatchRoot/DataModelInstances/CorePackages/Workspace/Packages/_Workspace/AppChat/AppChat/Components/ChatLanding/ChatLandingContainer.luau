@@ -396,13 +396,13 @@ function ChatLandingContainer(p2)
 	local ScrollAwayEnabled = FFlagAppIaScrollAway and (not UseIsInExperienceModuleResult and AppNavBarModule.getScrollAwayEnabled())
 	local UseCanAccessPartyModuleResult = UseCanAccessPartyModule()
 	local UseCanAccessPartyModuleResult1 = SquadQuickStartExperimentation.getPartyQuickStartChangesEnabled() and UseCanAccessPartyModuleResult
-	local v2 = IsNotDone
+	local IsNotDone1 = IsNotDone
 	
-	if FFlagAppChatConversationLoadRetryModule and UseIsChatEnabledModuleResult and not v1 and IsEmpty then
-		v2 = v2 or IsFetchingMatch
+	if FFlagAppChatConversationLoadRetryModule and UseIsChatEnabledModuleResult and (not v1 and IsEmpty) then
+		IsNotDone1 = IsNotDone1 or IsFetchingMatch
 	end
 	local Element = nil
-	if v2 then
+	if IsNotDone1 then
 		Element = ReactModule.createElement(ChatLoadingContainerModule, {
 			cellWidth = 375,
 			topBarHeight = JoinResult.topBarHeight,
@@ -412,7 +412,7 @@ function ChatLandingContainer(p2)
 			pageBackgroundTransparency = if HasUseThemeBackgroundResult then 1 else nil
 		})
 		Flag = true
-	elseif FFlagAppChatConversationLoadRetryModule and UseIsChatEnabledModuleResult and (not v1 and IsEmpty and UseIsAppLoadedModuleResult and (not IsIsFetchingConversations and IsFailedMatch)) then
+	elseif FFlagAppChatConversationLoadRetryModule and UseIsChatEnabledModuleResult and not v1 and IsEmpty and (UseIsAppLoadedModuleResult and not IsIsFetchingConversations and IsFailedMatch) then
 		Element = ReactModule.createElement(FoundationModule.Empty, {
 			text = UseLocalizationResult.conversationLoadError,
 			button = {
@@ -421,7 +421,7 @@ function ChatLandingContainer(p2)
 			}
 		})
 		Flag = true
-	elseif UseIsChatEnabledModuleResult and (v1 or not IsEmpty or not UseIsAppLoadedModuleResult or IsIsFetchingConversations) then
+	elseif UseIsChatEnabledModuleResult and (v1 or (not IsEmpty or not UseIsAppLoadedModuleResult or IsIsFetchingConversations)) then
 		Flag = true
 		Flag1 = true
 		Flag2 = true
@@ -556,24 +556,24 @@ function ChatLandingContainer(p2)
 	
 	if FFlagAppChatPerfTrackingModule then
 		ReactModule.useEffect(function()
-			-- upvalues: UseChatIsVisibleModuleResult (copy), v2 (ref), UseIsChatEnabledModuleResult (copy), NewResult (upval), UseMemoResult (copy), AppChatPerfTrackerModule (upval)
+			-- upvalues: UseChatIsVisibleModuleResult (copy), IsNotDone1 (ref), UseIsChatEnabledModuleResult (copy), NewResult (upval), UseMemoResult (copy), AppChatPerfTrackerModule (upval)
 			if not UseChatIsVisibleModuleResult then return end
-			local UseIsChatEnabledModuleResult1 = not v2 and UseIsChatEnabledModuleResult
-			NewResult:debug("TTI Ready Check (ChatLanding): isLoading={}, isChatEnabled={}, itemCount={}, ready={}", v2, UseIsChatEnabledModuleResult, #UseMemoResult, UseIsChatEnabledModuleResult1)
+			local UseIsChatEnabledModuleResult1 = not IsNotDone1 and UseIsChatEnabledModuleResult
+			NewResult:debug("TTI Ready Check (ChatLanding): isLoading={}, isChatEnabled={}, itemCount={}, ready={}", IsNotDone1, UseIsChatEnabledModuleResult, #UseMemoResult, UseIsChatEnabledModuleResult1)
 			
 			if UseIsChatEnabledModuleResult1 and AppChatPerfTrackerModule.isActive(AppChatPerfTrackerModule.Events.ChatLandingTTI) then
 				AppChatPerfTrackerModule.finish(AppChatPerfTrackerModule.Events.ChatLandingTTI, { numElementsRendered = #UseMemoResult })
 			end
 		end, {
 			UseChatIsVisibleModuleResult,
-			v2,
+			IsNotDone1,
 			UseIsChatEnabledModuleResult,
 			#UseMemoResult
 		})
 		
 		if FFlagSignalsNavDeferProjection then
 			local Current = {
-				isInteractive = not v2 and UseIsChatEnabledModuleResult,
+				isInteractive = not IsNotDone1 and UseIsChatEnabledModuleResult,
 				numElementsRendered = #UseMemoResult
 			}
 			local UseRefResult2 = ReactModule.useRef(Current)

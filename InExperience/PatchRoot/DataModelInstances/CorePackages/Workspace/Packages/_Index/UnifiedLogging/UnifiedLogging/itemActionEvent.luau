@@ -2,6 +2,7 @@
 local TelemetryService = game:GetService("TelemetryService")
 local UnifiedLogging = script:FindFirstAncestor("UnifiedLogging")
 local Parent = UnifiedLogging.Parent
+local CryoModule = require(Parent.Cryo)
 local GetPlatformTargetFunction = require(Parent.Analytics).getPlatformTarget
 local TModule = require(Parent.t)
 local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
@@ -48,21 +49,20 @@ local config = {
 	interactionUuid = TModule.optional(TModule.string)
 }
 IntersectionResult = TModule.intersection(UnionResult, TModule.interface(config))
+local IntersectionResult1 = TModule.intersection(UnionResult, TModule.interface(CryoModule.Dictionary.join(config, {
+	itemId = TModule.string,
+	itemPosition = TModule.number,
+	sourceCarousel = TModule.string,
+	friendStatus = TModule.string,
+	presence = TModule.string,
+	presenceUniverseId = TModule.string
+})))
 local InterfaceResult = if FFlagLuaAppUnifiedLoggingDialogContentTypeModule then TModule.interface({
 	contentType = TModule.string,
 	actionType = TModule.string,
 	interactionUuid = TModule.optional(TModule.string)
 }) else nil
-local config1 = {
-	[ContentTypeModule.User] = TModule.intersection(UnionResult, TModule.interface(require(Parent.Cryo).Dictionary.join(config, {
-		itemId = TModule.string,
-		itemPosition = TModule.number,
-		sourceCarousel = TModule.string,
-		friendStatus = TModule.string,
-		presence = TModule.string,
-		presenceUniverseId = TModule.string
-	})))
-}
+local config1 = { [ContentTypeModule.User] = IntersectionResult1 }
 
 if FFlagLuaAppUnifiedLoggingDialogContentTypeModule then
 	config1[ContentTypeModule.Dialog] = InterfaceResult

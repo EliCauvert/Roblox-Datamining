@@ -1,7 +1,8 @@
 ﻿local VirtualEvents = script:FindFirstAncestor("VirtualEvents")
+local RoactUtilsModule = require(VirtualEvents.Parent.RoactUtils)
 local UseLocalizationFunction = require(VirtualEvents.Parent.Localization).Hooks.useLocalization
 local GetDeepValueFunction = require(VirtualEvents.Parent.LuaSocialLibrariesDeps).SocialLibraries.config({}).Dictionary.getDeepValue
-local UseSelectorFunction = require(VirtualEvents.Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
 
 return function(p1)
 	-- upvalues: UseSelectorFunction (copy), GetDeepValueFunction (copy), UseLocalizationFunction (copy)

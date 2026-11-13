@@ -1,7 +1,9 @@
 ﻿local SocialCarousel = script:FindFirstAncestor("SocialCarousel")
+local SocialCommonModule = require(SocialCarousel.Parent.SocialCommon)
+local EnumsModule = require(SocialCarousel.Common.Enums)
 local TileVisibilityModule = require(script.Parent.tileVisibility)
-local PresenceTypes = require(SocialCarousel.Parent.SocialCommon).Enums.PresenceTypes
-local Tile = require(SocialCarousel.Common.Enums).Tile
+local PresenceTypes = SocialCommonModule.Enums.PresenceTypes
+local Tile = EnumsModule.Tile
 
 local function _(Text, Text1, p1)
 	if p1 == nil then

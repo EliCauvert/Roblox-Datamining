@@ -72,18 +72,19 @@ return function(p1, _, p2, _)
 		return
 	else
 		PlayerFeedbackEvents.ClickPlayerFeedbackPromptCta(p2.dependencies.eventIngest, RootPlaceId)
+		local PlayerFeedbackMetadata = {
+			rootPlaceId = DataResult.rootPlaceId,
+			canSubmitReview = DataResult.canSubmitReview,
+			canSubmitComment = DataResult.canSubmitComment,
+			categoryType = Entry,
+			category = Category,
+			comment = DataResult.comment,
+			metadata = DataResult.metadata
+		}
 		local ConfigKey = p2.configKey
 		p2.dependencies.dispatch(SetCentralOverlayFunction(CentralOverlayType.GamePlayerFeedbackForm, {
 			universeId = UniverseId,
-			playerFeedbackMetadata = {
-				rootPlaceId = DataResult.rootPlaceId,
-				canSubmitReview = DataResult.canSubmitReview,
-				canSubmitComment = DataResult.canSubmitComment,
-				categoryType = Entry,
-				category = Category,
-				comment = DataResult.comment,
-				metadata = DataResult.metadata
-			},
+			playerFeedbackMetadata = PlayerFeedbackMetadata,
 			onSubmitted = function()
 				-- upvalues: Game (upval), RootPlaceId (copy), ConfigKey (copy), GetSduiClientPageScopeFunction (upval)
 				Game.getUserVoteFeedbackMetadataStore(false).clearItem(RootPlaceId)

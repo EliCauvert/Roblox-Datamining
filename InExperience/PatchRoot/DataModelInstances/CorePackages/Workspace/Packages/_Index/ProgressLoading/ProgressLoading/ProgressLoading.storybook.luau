@@ -2,6 +2,7 @@
 local Parent = ProgressLoading.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
 local FoundationProvider = FoundationModule.FoundationProvider
 local config = {
 	Default = FoundationModule.Enums.ColorMode.Dark,
@@ -18,7 +19,7 @@ return {
 	name = "ProgressLoading",
 	storyRoot = ProgressLoading,
 	roact = ReactModule,
-	reactRoblox = require(Parent.ReactRoblox),
+	reactRoblox = ReactRobloxModule,
 	mapStory = function(p1)
 		-- upvalues: ReactModule (copy), FoundationProvider (copy), config (copy), config1 (copy)
 		return function(p2)

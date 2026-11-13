@@ -20,17 +20,17 @@ return function(p1)
 	-- upvalues: UseRoactServiceFunction (copy), AppLogging (copy), HttpService (copy), GetFFlagLuaAppChallengeMoreTelemetryEnabledModule (copy), UseStateFunction (copy), UseEffectFunction (copy), DeviceAccessChallengeEventModule (copy), ChallengeEventConstantsModule (copy), UseSelectorFunction (copy), RoactModule (copy), Loading (copy), IconSize (copy), RoactNavigationModule (copy)
 	local UseRoactServiceResult = UseRoactServiceFunction(AppLogging)
 	local v1 = nil
-	local Callback = nil
-	local v2 = nil
 	local Callback1 = nil
+	local v2 = nil
+	local Callback = nil
 	local Data = HttpService:JSONDecode(p1.challengeMetadata)
 	
 	if GetFFlagLuaAppChallengeMoreTelemetryEnabledModule() then
-		v1, Callback = UseStateFunction(false)
-		v2, Callback1 = UseStateFunction(false)
+		v1, Callback1 = UseStateFunction(false)
+		v2, Callback = UseStateFunction(false)
 	end
 	UseEffectFunction(function()
-		-- upvalues: UseRoactServiceResult (copy), DeviceAccessChallengeEventModule (upval), ChallengeEventConstantsModule (upval), p1 (copy), Data (copy), HttpService (upval), GetFFlagLuaAppChallengeMoreTelemetryEnabledModule (upval), Callback (ref), Callback1 (ref)
+		-- upvalues: UseRoactServiceResult (copy), DeviceAccessChallengeEventModule (upval), ChallengeEventConstantsModule (upval), p1 (copy), Data (copy), HttpService (upval), GetFFlagLuaAppChallengeMoreTelemetryEnabledModule (upval), Callback1 (ref), Callback (ref)
 		UseRoactServiceResult:logRobloxTelemetryEvent(DeviceAccessChallengeEventModule, {}, {
 			context = ChallengeEventConstantsModule.ChallengeLifecycleEventConstants.ChallengeInitialized,
 			challengeId = p1.challengeId,
@@ -47,7 +47,7 @@ return function(p1)
 				Data1.accessToken.tokenType = Data.tokenType
 				
 				if GetFFlagLuaAppChallengeMoreTelemetryEnabledModule() then
-					Callback(true)
+					Callback1(true)
 				end
 				p1.onChallengeCompleted(HttpService:JSONEncode(Data1.accessToken))
 				UseRoactServiceResult:logRobloxTelemetryEvent(DeviceAccessChallengeEventModule, {}, {
@@ -60,7 +60,7 @@ return function(p1)
 			end
 		end
 		if GetFFlagLuaAppChallengeMoreTelemetryEnabledModule() then
-			Callback1(true)
+			Callback(true)
 		end
 		p1.onChallengeFailed(ErrorCode)
 		UseRoactServiceResult:logRobloxTelemetryEvent(DeviceAccessChallengeEventModule, {}, {

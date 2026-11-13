@@ -1,0 +1,15 @@
+﻿local _ = require("./types")
+local _ = require("./navigation_types")
+local _ = require("./control_types")
+local NavPageLayersModule = require("./nav_page_layers")
+local NavTabViewModule = require("./nav_tab_view")
+local NavStackModule = require("./nav_stack")
+local NavPageViewModule = require("./nav_page_view")
+
+return function(p1, p2, p3)
+	-- upvalues: NavPageLayersModule (copy), NavTabViewModule (copy), NavStackModule (copy), NavPageViewModule (copy)
+	local NavPageLayersModuleResult = NavPageLayersModule(p1)
+	NavTabViewModule(p1, p2, p3, NavPageLayersModuleResult)
+	NavStackModule(p1, p2, p3, NavPageLayersModuleResult)
+	NavPageViewModule(p1, p2, p3, NavPageLayersModuleResult)
+end

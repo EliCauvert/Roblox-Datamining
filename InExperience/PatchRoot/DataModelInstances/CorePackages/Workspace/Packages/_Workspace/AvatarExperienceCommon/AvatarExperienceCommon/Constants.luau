@@ -1,10 +1,11 @@
 ﻿local Parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
 local LabelAbuseTypeMappingModule = require(script.Parent.LabelAbuseTypeMapping)
 local _ = require(script.Parent.Types.CategoryTypes.CategoryTypes)
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local AvatarExperienceModelModule = require(Parent.AvatarExperienceModel)
 local OutfitTypesModule = require(script.Parent.Enums.OutfitTypes)
 local InventoryOutfitType = AvatarExperienceModelModule.Enums.InventoryOutfitType
-local FFlagAXCatalogMakeupSupport = require(Parent.AvatarExperienceFlags).FFlagAXCatalogMakeupSupport
+local FFlagAXCatalogMakeupSupport = AvatarExperienceFlagsModule.FFlagAXCatalogMakeupSupport
 local Frozen = table.freeze({
 	height = 1,
 	width = 1,

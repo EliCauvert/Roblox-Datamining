@@ -24,10 +24,11 @@ local function computeAimPoint(Frame: Frame, Vector, X, X1)
 	local AbsolutePosition = Frame.AbsolutePosition
 	local AbsolutePositionDelta = AbsolutePosition - Vector2.new(X, X)
 	local NewAbsoluteSize = AbsoluteSize + Vector2.new(X1, X1)
+	local _Vector2 = Vector2.new(math.clamp(Vector.X, AbsolutePositionDelta.X, AbsolutePositionDelta.X + NewAbsoluteSize.X), (math.clamp(Vector.Y, AbsolutePositionDelta.Y, AbsolutePositionDelta.Y + NewAbsoluteSize.Y)))
 	local NewAbsolutePosition = AbsolutePosition + AbsoluteSize / 2
 	local ClampedValue = math.clamp(1 - math.max(AbsoluteSize.X, AbsoluteSize.Y) / X1 / 0.5, 0, 1)
 	
-	return Vector2.new(math.clamp(Vector.X, AbsolutePositionDelta.X, AbsolutePositionDelta.X + NewAbsoluteSize.X), (math.clamp(Vector.Y, AbsolutePositionDelta.Y, AbsolutePositionDelta.Y + NewAbsoluteSize.Y))):Lerp(NewAbsolutePosition, ClampedValue), (Vector2.new(math.clamp(Vector.X, AbsolutePosition.X, AbsolutePosition.X + AbsoluteSize.X), (math.clamp(Vector.Y, AbsolutePosition.Y, AbsolutePosition.Y + AbsoluteSize.Y))):Lerp(NewAbsolutePosition, ClampedValue))
+	return _Vector2:Lerp(NewAbsolutePosition, ClampedValue), (Vector2.new(math.clamp(Vector.X, AbsolutePosition.X, AbsolutePosition.X + AbsoluteSize.X), (math.clamp(Vector.Y, AbsolutePosition.Y, AbsolutePosition.Y + AbsoluteSize.Y))):Lerp(NewAbsolutePosition, ClampedValue))
 end
 
 local function scoreCandidate(Frame: Frame, CursorPosition, Vector, CursorRadius, p1)
@@ -230,17 +231,17 @@ function MoveAssistController:applyMoveAssist(Offset, _debugSnapshot)
 	end
 	self._assistTarget = Committed
 	local Interpolated = OffsetRatio:Lerp(ZeroVector, AssistStrength.assistStrength)
-	local Magnitude2: number = Interpolated.Magnitude
-	local InterpolatedRatio = if Magnitude2 > 0.00001 then Interpolated / Magnitude2 else Vector2.zero
+	local Magnitude1: number = Interpolated.Magnitude
+	local InterpolatedRatio = if Magnitude1 > 0.00001 then Interpolated / Magnitude1 else Vector2.zero
 	
 	if InterpolatedRatio == Vector2.zero then
 		return Offset
 	end
-	local ScaledMagnitude = InterpolatedRatio * Magnitude
+	local ScaledInterpolatedRatio = InterpolatedRatio * Magnitude
 	
 	if FFlagEnableVirtualCursorDebugging then
-		if (ScaledMagnitude - Offset).Magnitude > 0 then
-			print("Move input adjusted from", Offset, "to", ScaledMagnitude)
+		if (ScaledInterpolatedRatio - Offset).Magnitude > 0 then
+			print("Move input adjusted from", Offset, "to", ScaledInterpolatedRatio)
 		end
 		local DebugSnapshot = self._debugSnapshot
 		
@@ -260,7 +261,7 @@ function MoveAssistController:applyMoveAssist(Offset, _debugSnapshot)
 			v2.state = "committed"
 		end
 	end
-	return ScaledMagnitude
+	return ScaledInterpolatedRatio
 end
 
 function MoveAssistController:clearDebugSnapshot()

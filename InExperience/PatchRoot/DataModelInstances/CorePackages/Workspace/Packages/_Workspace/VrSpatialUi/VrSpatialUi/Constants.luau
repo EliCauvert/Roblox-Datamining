@@ -5,7 +5,9 @@ local LuauPolyfillModule = if IsInExperienceUIVREnabled then require(Parent.Luau
 local _Vector2 = Vector2.new(0, 0)
 local _CFrame = CFrame.new(0, 0, 0)
 local SpatialUIPanelZOffset: number = game:DefineFastInt("SpatialUIPanelZOffset", 100)
-local FFlagEnableInExperienceUIPCVRFix = require(Parent.SharedFlags).FFlagEnableInExperienceUIPCVRFix
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagEnableInExperienceUIPCVRFix = SharedFlagsModule.FFlagEnableInExperienceUIPCVRFix
+local FFlagSpatialUIRobloxGuiPanelTransparent = SharedFlagsModule.FFlagSpatialUIRobloxGuiPanelTransparent
 local SpatialUIChromeSubMenuHeight = game:DefineFastInt("SpatialUIChromeSubMenuHeight", 448)
 local SpatialUIType = {
 	ScreenUI = "ScreenUI",
@@ -140,8 +142,8 @@ local AssignResult = {
 			name = "RobloxGuiPanel-PartOnly",
 			faceCamera = true,
 			lerp = true,
-			transparency = 0.5,
-			partSize = _Vector2_1
+			partSize = _Vector2_1,
+			transparency = if FFlagSpatialUIRobloxGuiPanelTransparent then 1 else 0.5
 		}
 	}
 }

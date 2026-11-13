@@ -10,12 +10,14 @@ local ImageSetComponentModule = require(Parent.Core.ImageSet.ImageSetComponent)
 local ValidateImageSetDataModule = require(Parent.Core.ImageSet.Validator.validateImageSetData)
 local BadgeVariantModule = require(Parent.App.Indicator.Enum.BadgeVariant)
 local BadgeStatesModule = require(Parent.App.Indicator.Enum.BadgeStates)
+local IconSizeModule = require(Parent.App.ImageSet.Enum.IconSize)
+local GetIconSizeModule = require(Parent.App.ImageSet.getIconSize)
 local InteractableListModule = require(Parent.Core.Control.InteractableList)
 local WithAnimationModule = require(Parent.Core.Animation.withAnimation)
 local MigrateBadgeVariantModule = require(Parent.Utility.migrateBadgeVariant)
 local PlacementModule = require(script.Parent.Enum.Placement)
 local config = { frequency = 3 }
-local XOffset: number = require(Parent.App.ImageSet.getIconSize)(require(Parent.App.ImageSet.Enum.IconSize).Medium)
+local XOffset: number = GetIconSizeModule(IconSizeModule.Medium)
 local NewXOffset = XOffset + 8
 local NewXOffsetRatio = (NewXOffset - XOffset) / 2
 local NewXOffsetRatio1 = (NewXOffset - XOffset) / 2

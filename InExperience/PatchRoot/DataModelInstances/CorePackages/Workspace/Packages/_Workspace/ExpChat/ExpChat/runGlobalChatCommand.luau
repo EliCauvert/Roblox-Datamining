@@ -1,9 +1,10 @@
 ﻿local ExpChat = script:FindFirstAncestor("ExpChat")
 local Parent = ExpChat.Parent
 local ExpChatSharedModule = require(Parent.ExpChatShared)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local GetMessagesStoreModule = require(ExpChat.Stores.GetMessagesStore)
 local GetChannelTabsStoreModule = require(ExpChat.Stores.GetChannelTabsStore)
-local FFlagExpChatUseChannelTabsStore = require(Parent.SharedFlags).FFlagExpChatUseChannelTabsStore
+local FFlagExpChatUseChannelTabsStore = SharedFlagsModule.FFlagExpChatUseChannelTabsStore
 local Context = ExpChatSharedModule.context
 local GlobalCommands = ExpChatSharedModule.GlobalCommands
 local NewResult = ExpChatSharedModule.Logger:new("ExpChat/" .. script.Name)

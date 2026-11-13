@@ -27,6 +27,16 @@ return StrictModule({
 		Asset = "Asset",
 		Bundle = "Bundle"
 	}, "Constants.ProductType"),
+	SaleLocationType = StrictModule({
+		Invalid = "Invalid",
+		ShopOnly = "ShopOnly",
+		MyExperiencesOnly = "MyExperiencesOnly",
+		ShopAndMyExperiences = "ShopAndMyExperiences",
+		ExperiencesById = "ExperiencesById",
+		ShopAndAllExperiences = "ShopAndAllExperiences",
+		ExperiencesDevApiOnly = "ExperiencesDevApiOnly",
+		ShopAndExperiencesById = "ShopAndExperiencesById"
+	}, "Constants.SaleLocationType"),
 	Currency = StrictModule({ Robux = 1 }, "Constants.Currency"),
 	TermsOfUse = StrictModule({
 		DMCCAUrl = "https://en.help.roblox.com/hc/en-us/articles/115004647846-Roblox-Terms-of-Use#robux-and-premium-membership"

@@ -56,10 +56,11 @@ local function copyMeshPart(Object, RenderMeshes, MeshTexture)
 		for ChildName, value in R15plusUtilsModule.getNameWhitelistOfClassInSchema(R15plusUtilsModule.getAvatarBoneSchema(Object.Name), "Attachment") do
 			if value and MeshPartAsync:FindFirstChild(ChildName) == nil then
 				local ChildName1 = Object:FindFirstChild(ChildName, true)
+				local MeshPartAsyncCFrame = if ChildName1 == nil then MeshPartAsync.CFrame else ChildName1.WorldCFrame
 				local Attachment = Instance.new("Attachment")
 				Attachment.Name = ChildName
 				Attachment.Parent = MeshPartAsync
-				Attachment.WorldCFrame = if ChildName1 == nil then MeshPartAsync.CFrame else ChildName1.WorldCFrame
+				Attachment.WorldCFrame = MeshPartAsyncCFrame
 			end
 		end
 	end

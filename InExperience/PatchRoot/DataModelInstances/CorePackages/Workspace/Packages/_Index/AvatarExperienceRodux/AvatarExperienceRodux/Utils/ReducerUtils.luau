@@ -1,9 +1,10 @@
 ﻿local Parent = script:FindFirstAncestor("AvatarExperienceRodux").Parent
+local Constants = require(Parent.AvatarExperienceCommon).Constants
 local FFlagAXCatalogMakeupSupport = require(Parent.AvatarExperienceFlags).FFlagAXCatalogMakeupSupport
 local AssetTypeToAssetCategory = require(script.Parent.Parent.Constants).AssetTypeToAssetCategory
 local _ = require(script.Parent.Parent.Types.BodyColors)
 local _ = require(script.Parent.Parent.Types.OutfitTryOn)
-local LOOKTYPE = require(Parent.AvatarExperienceCommon).Constants.LOOK_TYPE
+local LOOKTYPE = Constants.LOOK_TYPE
 
 return {
 	filterTryOns = function(List, p1)

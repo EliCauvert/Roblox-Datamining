@@ -4,11 +4,12 @@ local ReactModule = require(Parent.React)
 local UIBloxModule = require(Parent.UIBlox)
 local AppPage = require(Parent.RobloxAppEnums).AppPage
 local UseScreenSizeFunction = require(Parent.RobloxAppHooks).useScreenSize
+local LocalizationModule = require(Parent.Localization)
 local TextKeysModule = require(EditProfile.Common.TextKeys)
 local FFlagEditProfileFixFocusNavigationModule = require(EditProfile.Flags.FFlagEditProfileFixFocusNavigation)
 local FocusNavigatorWrapperModule = require(EditProfile.Utils.FocusNavigatorWrapper)
 local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 local Character = utf8.char(57346)
 

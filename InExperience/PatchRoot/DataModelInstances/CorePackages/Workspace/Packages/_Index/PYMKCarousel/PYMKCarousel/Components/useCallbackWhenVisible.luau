@@ -36,12 +36,13 @@ local function _(p1, p2): boolean
 	local Current = p2 and p2.current
 	
 	if Current then
+		local Y = Current.AbsolutePosition.Y
 		local NewY = Current.AbsolutePosition.Y + Current.AbsoluteSize.Y
-		local Y = p1.min.Y
-		local Y1 = p1.max.Y
-		local ScaledY = (Y1 - Y) / 100 * HomePagePYMKPercentageOfViewPortToStartFetch
+		local Y1 = p1.min.Y
+		local Y2 = p1.max.Y
+		local ScaledY = (Y2 - Y1) / 100 * HomePagePYMKPercentageOfViewPortToStartFetch
 		
-		return Y - ScaledY < Current.AbsolutePosition.Y and NewY < Y1 + ScaledY
+		return Y1 - ScaledY < Y and NewY < Y2 + ScaledY
 	else
 		return false
 	end
@@ -60,11 +61,12 @@ return function(p1)
 		local v2 = nil
 		
 		if Current then
+			local Y = Current.AbsolutePosition.Y
 			local NewY = Current.AbsolutePosition.Y + Current.AbsoluteSize.Y
-			local Y = v1.min.Y
-			local Y1 = v1.max.Y
-			local ScaledY = (Y1 - Y) / 100 * HomePagePYMKPercentageOfViewPortToStartFetch
-			v2 = Y - ScaledY < Current.AbsolutePosition.Y and NewY < Y1 + ScaledY
+			local Y1 = v1.min.Y
+			local Y2 = v1.max.Y
+			local ScaledY = (Y2 - Y1) / 100 * HomePagePYMKPercentageOfViewPortToStartFetch
+			v2 = Y1 - ScaledY < Y and NewY < Y2 + ScaledY
 		else
 			v2 = false
 		end
@@ -78,11 +80,12 @@ return function(p1)
 				local v3 = nil
 				
 				if Current then
+					local Y = Current.AbsolutePosition.Y
 					local NewY = Current.AbsolutePosition.Y + Current.AbsoluteSize.Y
-					local Y = v1.min.Y
-					local Y1 = v1.max.Y
-					local ScaledY = (Y1 - Y) / 100 * HomePagePYMKPercentageOfViewPortToStartFetch
-					v3 = Y - ScaledY < Current.AbsolutePosition.Y and NewY < Y1 + ScaledY
+					local Y1 = v1.min.Y
+					local Y2 = v1.max.Y
+					local ScaledY = (Y2 - Y1) / 100 * HomePagePYMKPercentageOfViewPortToStartFetch
+					v3 = Y1 - ScaledY < Y and NewY < Y2 + ScaledY
 				else
 					v3 = false
 				end

@@ -2,6 +2,9 @@
 local FoundationModule = require(Parent.Foundation)
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local ReactModule = require(Parent.React)
+local RobloxAppEnumsModule = require(Parent.RobloxAppEnums)
+local UniversalAppPolicyModule = require(Parent.UniversalAppPolicy)
+local UrlBuilderModule = require(Parent.UrlBuilder)
 local CloseCentralOverlayFunction = require(Parent.CentralOverlay).Thunks.CloseCentralOverlay
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local Dialog = FoundationModule.Dialog
@@ -12,9 +15,9 @@ local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3D
 local LuaAppTextFeedbackFormModalStandardInput = game:DefineFastFlag("LuaAppTextFeedbackFormModalStandardInput", false)
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local AppPage = require(Parent.RobloxAppEnums).AppPage
-local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
-local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local AppPage = RobloxAppEnumsModule.AppPage
+local UseAppPolicyFunction = UniversalAppPolicyModule.useAppPolicy
+local UrlBuilder = UrlBuilderModule.UrlBuilder
 
 return ReactModule.memo(function(p1)
 	-- upvalues: UseDispatchFunction (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), CloseCentralOverlayFunction (copy), UseAppPolicyFunction (copy), AppPage (copy), UrlBuilder (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), Dialog (copy), LuaAppTextFeedbackFormModalStandardInput (copy), NormalizeFontFaceFunction (copy), ButtonVariant (copy)

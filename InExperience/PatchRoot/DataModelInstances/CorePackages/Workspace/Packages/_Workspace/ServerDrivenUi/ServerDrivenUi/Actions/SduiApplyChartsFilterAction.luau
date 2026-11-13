@@ -25,8 +25,9 @@ return function(p1, _, p2)
 		
 		return
 	end
+	local FilterSelections = ActionParams.filterSelections
 	local ChartsModule = require(Parent.Charts)
-	GetSduiClientPageScopeFunction(p2.configKey).set(ChartsModule.ChartsPageScopeFields.FilterSelections, ActionParams.filterSelections)
+	GetSduiClientPageScopeFunction(p2.configKey).set(ChartsModule.ChartsPageScopeFields.FilterSelections, FilterSelections)
 	local ChartsPage = SduiLoadTimer.createLoadTimer("ChartsPage")
 	ChartsPage.start("filter_refetch")
 	local ChartsPage1 = ChartsModule.fetchChartsPage(ChartsPage, true)

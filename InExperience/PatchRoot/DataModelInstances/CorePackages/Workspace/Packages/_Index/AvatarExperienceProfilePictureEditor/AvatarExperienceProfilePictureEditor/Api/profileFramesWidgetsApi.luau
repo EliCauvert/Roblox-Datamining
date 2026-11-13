@@ -3,8 +3,9 @@ local Parent = AvatarExperienceProfilePictureEditor.Parent
 local HttpModule = require(Parent.Http)
 local HttpService = game:GetService("HttpService")
 local PromiseModule = require(Parent.Promise)
+local AvatarExperienceCatalogModule = require(Parent.AvatarExperienceCatalog)
 local EnumsModule = require(AvatarExperienceProfilePictureEditor.Common.Enums)
-local GetWidgetListInfoFunction = require(Parent.AvatarExperienceCatalog).Api.getWidgetListInfo
+local GetWidgetListInfoFunction = AvatarExperienceCatalogModule.Api.getWidgetListInfo
 
 local function extractWidgetContent(WidgetListInfo)
 	local List = {}

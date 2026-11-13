@@ -11,7 +11,6 @@ local FetchGameDetailsModule = require(script.Parent.fetchGameDetails)
 local GameInfoStoreTypesModule = require(script.Parent.GameInfoStoreTypes)
 local TrimFunction = require(Parent.LuauPolyfill).String.trim
 local FFlagLuaAppInExperienceDetailsPrompt = require(Parent.SharedFlags).FFlagLuaAppInExperienceDetailsPrompt
-local FFlagLuaAppDataHydrationPlayerCountGameInfoStore = require(Parent.SharedFlags).FFlagLuaAppDataHydrationPlayerCountGameInfoStore
 local GetFIntLuaAppThrottleRefreshPlayabilityIntervalSecondsFunction = require(Parent.SharedFlags).GetFIntLuaAppThrottleRefreshPlayabilityIntervalSeconds
 local FFlagLuaAppDataHydrationUpdateItem = require(Parent.SharedFlags).FFlagLuaAppDataHydrationUpdateItem
 local FIntLuaAppThrottleRefreshPlayabilityIntervalSeconds = if FFlagLuaAppInExperienceDetailsPrompt then GetFIntLuaAppThrottleRefreshPlayabilityIntervalSecondsFunction() else nil
@@ -25,7 +24,7 @@ local function sanitizeGameInfo(p1)
 end
 
 return function()
-	-- upvalues: FFlagLuaAppInExperienceDetailsPrompt (copy), CreateDataCacheModule (copy), FIntLuaAppThrottleRefreshPlayabilityIntervalSeconds (copy), sanitizeGameInfo (copy), CreateDataResolverModule (copy), LogResponseErrorFunction (copy), DiscoveryEventErrorLogger (copy), DashModule (copy), FetchGameDetailsModule (copy), GameInfoStoreTypesModule (copy), FFlagLuaAppDataHydrationPlayerCountGameInfoStore (copy), FFlagLuaAppDataHydrationUpdateItem (copy)
+	-- upvalues: FFlagLuaAppInExperienceDetailsPrompt (copy), CreateDataCacheModule (copy), FIntLuaAppThrottleRefreshPlayabilityIntervalSeconds (copy), sanitizeGameInfo (copy), CreateDataResolverModule (copy), LogResponseErrorFunction (copy), DiscoveryEventErrorLogger (copy), DashModule (copy), FetchGameDetailsModule (copy), GameInfoStoreTypesModule (copy), FFlagLuaAppDataHydrationUpdateItem (copy)
 	local t = {}
 	
 	local function _(p1, p2)
@@ -54,11 +53,11 @@ return function()
 			end
 		end else nil,
 		fetchFn = function(p1)
-			-- upvalues: DashModule (upval), FetchGameDetailsModule (upval), FFlagLuaAppInExperienceDetailsPrompt (upval), GameInfoStoreTypesModule (upval), FFlagLuaAppDataHydrationPlayerCountGameInfoStore (upval), t (copy)
+			-- upvalues: DashModule (upval), FetchGameDetailsModule (upval), FFlagLuaAppInExperienceDetailsPrompt (upval), GameInfoStoreTypesModule (upval), t (copy)
 			local KeysResult = DashModule.keys(p1)
 			
 			return FetchGameDetailsModule(KeysResult):andThen(function(Result)
-				-- upvalues: FFlagLuaAppInExperienceDetailsPrompt (upval), KeysResult (copy), GameInfoStoreTypesModule (upval), FFlagLuaAppDataHydrationPlayerCountGameInfoStore (upval), DashModule (upval), t (upval)
+				-- upvalues: FFlagLuaAppInExperienceDetailsPrompt (upval), KeysResult (copy), GameInfoStoreTypesModule (upval), DashModule (upval), t (upval)
 				if FFlagLuaAppInExperienceDetailsPrompt then
 					if not Result or not Result.responseBody then
 						error({
@@ -104,7 +103,7 @@ return function()
 									name = entry.creator.name,
 									hasVerifiedBadge = entry.creator.hasVerifiedBadge
 								} else nil,
-								playerCount = if FFlagLuaAppDataHydrationPlayerCountGameInfoStore then entry.playing else nil,
+								playerCount = entry.playing,
 								totalVisits = entry.visits
 							}
 						end
@@ -116,12 +115,12 @@ return function()
 					end
 				else
 					DashModule.forEach(Data, function(p2)
-						-- upvalues: t1 (copy), FFlagLuaAppDataHydrationPlayerCountGameInfoStore (upval)
+						-- upvalues: t1 (copy)
 						t1[tostring(p2.id)] = {
 							name = p2.name,
 							rootPlaceId = tostring(p2.rootPlaceId),
 							universeId = tostring(p2.id),
-							playerCount = if FFlagLuaAppDataHydrationPlayerCountGameInfoStore then p2.playing else nil,
+							playerCount = p2.playing,
 							totalVisits = p2.visits
 						}
 					end)

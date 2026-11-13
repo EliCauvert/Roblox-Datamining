@@ -1,6 +1,7 @@
 ﻿local SocialCarousel = script:FindFirstAncestor("SocialCarousel")
 local Parent = SocialCarousel.Parent
 local CanViewBuildModule = require(Parent.BuildExperiencePlaytestLaunch.canViewBuild)
+local DataHydrationModule = require(Parent.DataHydration)
 local FoundationModule = require(Parent.Foundation)
 local GameJoinCardModule = require(Parent.GameJoinCard)
 local ReactModule = require(Parent.React)
@@ -11,7 +12,7 @@ local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
 local AppPage = require(Parent.RobloxAppEnums).AppPage
 local FFlagMobileGameJoinCardGamepadSupport = require(Parent.SharedFlags).FFlagMobileGameJoinCardGamepadSupport
 local UseSocialCarouselContextModule = require(SocialCarousel.Contexts.useSocialCarouselContext)
-local IsPresenceInBuildFunction = require(Parent.DataHydration).Presence.isPresenceInBuild
+local IsPresenceInBuildFunction = DataHydrationModule.Presence.isPresenceInBuild
 
 return function(p1)
 	-- upvalues: UseNavigationFunction (copy), UseSocialCarouselContextModule (copy), UseAppPolicyFunction (copy), CanViewBuildModule (copy), IsPresenceInBuildFunction (copy), UseLocalizationFunction (copy), ResponsiveModule (copy), FFlagMobileGameJoinCardGamepadSupport (copy), ReactModule (copy), AppPage (copy), FoundationModule (copy), GameJoinCardModule (copy)

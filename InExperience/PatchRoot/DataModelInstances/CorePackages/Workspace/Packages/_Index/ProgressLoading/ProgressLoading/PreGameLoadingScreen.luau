@@ -5,6 +5,7 @@ local MarketplaceService = game:GetService("MarketplaceService")
 local RunService = game:GetService("RunService")
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
+local RoduxModule = require(Parent.Rodux)
 local RoactRoduxModule = require(Parent.RoactRodux)
 local Constants = require(Parent.UIBlox).App.Style.Constants
 local UiModeStyleProvider = require(Parent.Style).UiModeStyleProvider
@@ -17,9 +18,10 @@ local PregameOverrideModule = require(script.Parent.Stores.PregameOverride)
 local GetJoiningPlaceModule = require(script.Parent.getJoiningPlace)
 local CreateNetworkingModule = require(script.Parent.createNetworking)
 local Url = require(Parent.Http).Url
+local EngineFeatureEnableDeferredAssetManagerServiceModule = require(ProgressLoading.Flags.EngineFeatureEnableDeferredAssetManagerService)
 local FFlagBuildExperienceLibrary = require(Parent.SharedFlags).FFlagBuildExperienceLibrary
-local DeferredAssetManagerService = if require(ProgressLoading.Flags.EngineFeatureEnableDeferredAssetManagerService) then game:GetService("DeferredAssetManagerService") else nil
-local NewResult = require(Parent.Rodux).Store.new(function(p1)
+local DeferredAssetManagerService = if EngineFeatureEnableDeferredAssetManagerServiceModule then game:GetService("DeferredAssetManagerService") else nil
+local NewResult = RoduxModule.Store.new(function(p1)
 	return p1 or {}
 end, {})
 

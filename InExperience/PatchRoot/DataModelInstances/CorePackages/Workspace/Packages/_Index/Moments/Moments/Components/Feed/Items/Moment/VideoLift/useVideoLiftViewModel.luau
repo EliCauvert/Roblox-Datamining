@@ -109,6 +109,7 @@ return function(FeedItemId)
 	local UseTokensResult = UseTokensFunction()
 	local Small = UseTokensResult.Padding.Small
 	local Medium = UseTokensResult.Radius.Medium
+	local Time200 = if UsePreferencesFunction().reducedMotion then 0 else UseTokensResult.Time.Time_200
 	local Controller = MomentContextModule.useMoment().controller
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval)
@@ -153,7 +154,7 @@ return function(FeedItemId)
 		UseMemoResult,
 		Small,
 		Medium
-	}), if UsePreferencesFunction().reducedMotion then 0 else UseTokensResult.Time.Time_200)
+	}), Time200)
 	
 	return ReactModule.useMemo(function()
 		-- upvalues: UseSettlingLayoutResult (copy), _UDim2 (upval), _UDim2_1 (upval), UseMemoResult (copy)

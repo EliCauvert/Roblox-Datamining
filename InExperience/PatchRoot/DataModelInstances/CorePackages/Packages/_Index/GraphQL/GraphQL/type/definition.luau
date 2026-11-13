@@ -3,9 +3,10 @@ local LuauPolyfillModule = require(Parent.Parent.LuauPolyfill)
 local Array = LuauPolyfillModule.Array
 local Error1 = LuauPolyfillModule.Error
 local Map = LuauPolyfillModule.Map
+local Object = LuauPolyfillModule.Object
 local CoerceToMapFunction = LuauPolyfillModule.coerceToMap
 local NullModule = require(Parent.luaUtils.null)
-local FreezeResult = LuauPolyfillModule.Object.freeze({})
+local FreezeResult = Object.freeze({})
 local IsNillishFunction = require(Parent.luaUtils.isNillish).isNillish
 local Jsutils = Parent.jsutils
 local _ = require(Jsutils.ObjMap)
@@ -45,15 +46,15 @@ local isAbstractType = nil
 local Callback8 = nil
 local Callback9 = nil
 local isNamedType = nil
-local Callback15 = nil
 local Callback14 = nil
-local Callback16 = nil
-local Callback13 = nil
 local Callback18 = nil
+local Callback15 = nil
+local Callback13 = nil
 local Callback17 = nil
+local Callback16 = nil
 local Callback12 = nil
-local Callback10 = nil
 local Callback11 = nil
+local Callback10 = nil
 local Module = nil
 local Module1 = nil
 local Module2 = {}
@@ -427,7 +428,7 @@ end
 Module3.__index = Module3
 
 function Module3.new(p1)
-	-- upvalues: ToObjMapFunction (copy), Callback11 (ref), Callback10 (ref), DevAssertFunction (copy), InspectFunction (copy), Module3 (copy)
+	-- upvalues: ToObjMapFunction (copy), Callback10 (ref), Callback11 (ref), DevAssertFunction (copy), InspectFunction (copy), Module3 (copy)
 	local ExtensionASTNodes = p1.extensionASTNodes
 	local config = {
 		name = p1.name,
@@ -437,12 +438,12 @@ function Module3.new(p1)
 		astNode = p1.astNode,
 		extensionASTNodes = if ExtensionASTNodes and #ExtensionASTNodes > 0 then ExtensionASTNodes else nil,
 		_fields = function()
-			-- upvalues: Callback11 (upval), p1 (copy)
-			return Callback11(p1)
-		end,
-		_interfaces = function()
 			-- upvalues: Callback10 (upval), p1 (copy)
 			return Callback10(p1)
+		end,
+		_interfaces = function()
+			-- upvalues: Callback11 (upval), p1 (copy)
+			return Callback11(p1)
 		end
 	}
 	DevAssertFunction(typeof(p1.name) == "string", "Must provide name.")
@@ -491,7 +492,7 @@ function Module3:toJSON()
 	return self:toString()
 end
 
-Callback10 = function(p1)
+Callback11 = function(p1)
 	-- upvalues: DevAssertFunction (copy), Array (copy)
 	local InterfacesFunction = p1.interfaces
 	local InterfacesResult = if typeof(InterfacesFunction) == "function" then InterfacesFunction() else InterfacesFunction
@@ -501,7 +502,7 @@ Callback10 = function(p1)
 	return InterfacesResult1
 end
 
-Callback11 = function(p1)
+Callback10 = function(p1)
 	-- upvalues: DevAssertFunction (copy), Callback13 (ref), InstanceOfModule (copy), Map (copy), CoerceToMapFunction (copy), MapValueOrderedFunction (copy), InspectFunction (copy), Array (copy), ToObjMapFunction (copy)
 	local FieldsFunction = p1.fields
 	local FieldsResult = if typeof(FieldsFunction) == "function" then FieldsFunction() else FieldsFunction
@@ -547,13 +548,13 @@ Callback13 = function(Args): boolean
 end
 
 Callback12 = function(Fields)
-	-- upvalues: MapValueOrderedFunction (copy), Callback15 (ref)
+	-- upvalues: MapValueOrderedFunction (copy), Callback14 (ref)
 	return MapValueOrderedFunction(Fields, function(p1)
-		-- upvalues: Callback15 (upval)
+		-- upvalues: Callback14 (upval)
 		return {
 			description = p1.description,
 			type = p1.type,
-			args = Callback15(p1.args),
+			args = Callback14(p1.args),
 			resolve = p1.resolve,
 			subscribe = p1.subscribe,
 			deprecationReason = p1.deprecationReason,
@@ -563,7 +564,7 @@ Callback12 = function(Fields)
 	end)
 end
 
-Callback15 = function(Args)
+Callback14 = function(Args)
 	-- upvalues: KeyValMapFunction (copy)
 	return KeyValMapFunction(Args, function(p1)
 		return p1.name
@@ -587,7 +588,7 @@ end
 Module4.__index = Module4
 
 function Module4.new(p1)
-	-- upvalues: ToObjMapFunction (copy), Callback11 (ref), Callback10 (ref), DevAssertFunction (copy), InspectFunction (copy), Module4 (copy)
+	-- upvalues: ToObjMapFunction (copy), Callback10 (ref), Callback11 (ref), DevAssertFunction (copy), InspectFunction (copy), Module4 (copy)
 	local ExtensionASTNodes = p1.extensionASTNodes
 	local config = {
 		name = p1.name,
@@ -597,12 +598,12 @@ function Module4.new(p1)
 		astNode = p1.astNode,
 		extensionASTNodes = if ExtensionASTNodes and #ExtensionASTNodes > 0 then ExtensionASTNodes else nil,
 		_fields = function()
-			-- upvalues: Callback11 (upval), p1 (copy)
-			return Callback11(p1)
-		end,
-		_interfaces = function()
 			-- upvalues: Callback10 (upval), p1 (copy)
 			return Callback10(p1)
+		end,
+		_interfaces = function()
+			-- upvalues: Callback11 (upval), p1 (copy)
+			return Callback11(p1)
 		end
 	}
 	DevAssertFunction(typeof(p1.name) == "string", "Must provide name.")
@@ -654,7 +655,7 @@ end
 Module5.__index = Module5
 
 function Module5.new(p1)
-	-- upvalues: ToObjMapFunction (copy), Callback16 (ref), DevAssertFunction (copy), InspectFunction (copy), Module5 (copy)
+	-- upvalues: ToObjMapFunction (copy), Callback15 (ref), DevAssertFunction (copy), InspectFunction (copy), Module5 (copy)
 	local ExtensionASTNodes = p1.extensionASTNodes
 	local config = {
 		name = p1.name,
@@ -664,8 +665,8 @@ function Module5.new(p1)
 		astNode = p1.astNode,
 		extensionASTNodes = if ExtensionASTNodes and #ExtensionASTNodes > 0 then ExtensionASTNodes else nil,
 		_types = function()
-			-- upvalues: Callback16 (upval), p1 (copy)
-			return Callback16(p1)
+			-- upvalues: Callback15 (upval), p1 (copy)
+			return Callback15(p1)
 		end
 	}
 	DevAssertFunction(typeof(p1.name) == "string", "Must provide name.")
@@ -705,7 +706,7 @@ function Module5:toJSON()
 	return self:toString()
 end
 
-Callback16 = function(p1)
+Callback15 = function(p1)
 	-- upvalues: DevAssertFunction (copy), Array (copy)
 	local TypesFunction = p1.types
 	local TypesResult = if typeof(TypesFunction) == "function" then TypesFunction() else TypesFunction
@@ -717,7 +718,7 @@ end
 Module6.__index = Module6
 
 function Module6.new(p1)
-	-- upvalues: ToObjMapFunction (copy), Callback17 (ref), Array (copy), FreezeResult (copy), KeyMapFunction (copy), DevAssertFunction (copy), Module6 (copy)
+	-- upvalues: ToObjMapFunction (copy), Callback16 (ref), Array (copy), FreezeResult (copy), KeyMapFunction (copy), DevAssertFunction (copy), Module6 (copy)
 	local ExtensionASTNodes = p1.extensionASTNodes
 	local config = {
 		name = p1.name,
@@ -726,7 +727,7 @@ function Module6.new(p1)
 		astNode = p1.astNode,
 		extensionASTNodes = if ExtensionASTNodes and #ExtensionASTNodes > 0 then ExtensionASTNodes else nil
 	}
-	config._values = Callback17(config.name, p1.values)
+	config._values = Callback16(config.name, p1.values)
 	config._valueLookup = {}
 	Array.forEach(config._values, function(p2)
 		-- upvalues: config (copy), FreezeResult (upval)
@@ -765,30 +766,30 @@ function Module6:serialize(p1)
 end
 
 function Module6:parseValue(p1: string)
-	-- upvalues: InspectFunction (copy), GraphQLError (copy), Callback18 (ref)
+	-- upvalues: InspectFunction (copy), GraphQLError (copy), Callback17 (ref)
 	if typeof(p1) ~= "string" then
 		local InspectResult = InspectFunction(p1)
-		error(GraphQLError.new(("Enum \"%s\" cannot represent non-string value: %s." .. Callback18(self, InspectResult)):format(self.name, InspectResult)))
+		error(GraphQLError.new(("Enum \"%s\" cannot represent non-string value: %s." .. Callback17(self, InspectResult)):format(self.name, InspectResult)))
 	end
 	local Value = self:getValue(p1)
 	
 	if Value == nil then
-		error(GraphQLError.new(("Value \"%s\" does not exist in \"%s\" enum."):format(p1, self.name) .. Callback18(self, p1)))
+		error(GraphQLError.new(("Value \"%s\" does not exist in \"%s\" enum."):format(p1, self.name) .. Callback17(self, p1)))
 	end
 	return Value.value
 end
 
 function Module6:parseLiteral(p1, _)
-	-- upvalues: Kind (copy), PrintFunction (copy), GraphQLError (copy), Callback18 (ref)
+	-- upvalues: Kind (copy), PrintFunction (copy), GraphQLError (copy), Callback17 (ref)
 	if p1.kind ~= Kind.ENUM then
 		local PrintResult = PrintFunction(p1)
-		error(GraphQLError.new(("Enum \"%s\" cannot represent non-enum value: %s."):format(self.name, PrintResult) .. Callback18(self, PrintResult), p1))
+		error(GraphQLError.new(("Enum \"%s\" cannot represent non-enum value: %s."):format(self.name, PrintResult) .. Callback17(self, PrintResult), p1))
 	end
 	local Value = self:getValue(p1.value)
 	
 	if Value == nil then
 		local PrintResult = PrintFunction(p1)
-		error(GraphQLError.new(("Value \"%s\" does not exist in \"%s\" enum."):format(PrintResult, self.name) .. Callback18(self, PrintResult), p1))
+		error(GraphQLError.new(("Value \"%s\" does not exist in \"%s\" enum."):format(PrintResult, self.name) .. Callback17(self, PrintResult), p1))
 	end
 	return Value.value
 end
@@ -827,14 +828,14 @@ function Module6:toJSON()
 	return self:toString()
 end
 
-Callback18 = function(p1, p2)
+Callback17 = function(p1, p2)
 	-- upvalues: Array (copy), SuggestionListFunction (copy), DidYouMeanFunction (copy)
 	return DidYouMeanFunction("the enum value", (SuggestionListFunction(p2, (Array.map(p1:getValues(), function(p3)
 		return p3.name
 	end)))))
 end
 
-Callback17 = function(Name, Values)
+Callback16 = function(Name, Values)
 	-- upvalues: DevAssertFunction (copy), Callback13 (ref), InstanceOfModule (copy), Map (copy), CoerceToMapFunction (copy), Array (copy), InspectFunction (copy), ToObjMapFunction (copy)
 	DevAssertFunction(Callback13(Values) or InstanceOfModule(Values, Map), ("%s values must be an object with value names as keys."):format((tostring(Name))))
 	
@@ -858,7 +859,7 @@ end
 Module7.__index = Module7
 
 function Module7.new(p1)
-	-- upvalues: ToObjMapFunction (copy), Callback14 (ref), DevAssertFunction (copy), Module7 (copy)
+	-- upvalues: ToObjMapFunction (copy), Callback18 (ref), DevAssertFunction (copy), Module7 (copy)
 	local ExtensionASTNodes = p1.extensionASTNodes
 	local config = {
 		name = p1.name,
@@ -867,8 +868,8 @@ function Module7.new(p1)
 		astNode = p1.astNode,
 		extensionASTNodes = if ExtensionASTNodes and #ExtensionASTNodes > 0 then ExtensionASTNodes else nil,
 		_fields = function()
-			-- upvalues: Callback14 (upval), p1 (copy)
-			return Callback14(p1)
+			-- upvalues: Callback18 (upval), p1 (copy)
+			return Callback18(p1)
 		end
 	}
 	DevAssertFunction(typeof(p1.name) == "string", "Must provide name.")
@@ -915,7 +916,7 @@ function Module7:toJSON()
 	return self:toString()
 end
 
-Callback14 = function(p1)
+Callback18 = function(p1)
 	-- upvalues: DevAssertFunction (copy), Callback13 (ref), InstanceOfModule (copy), Map (copy), CoerceToMapFunction (copy), MapValueOrderedFunction (copy), ToObjMapFunction (copy)
 	local FieldsFunction = p1.fields
 	local FieldsResult = if typeof(FieldsFunction) == "function" then FieldsFunction() else FieldsFunction
@@ -986,7 +987,7 @@ return {
 	isNamedType = isNamedType,
 	assertNamedType = assertNamedType,
 	getNamedType = getNamedType,
-	argsToArgsConfig = Callback15,
+	argsToArgsConfig = Callback14,
 	isRequiredArgument = isRequiredArgument,
 	isRequiredInputField = function(p1): boolean
 		-- upvalues: Callback6 (ref)

@@ -1,9 +1,10 @@
 ﻿local GameInvite = script:FindFirstAncestor("GameInvite")
 local Parent = GameInvite.Parent
+local DataHydrationModule = require(Parent.DataHydration)
 local _ = require(Parent.UserList)
 local UserModel = require(Parent.UserLib).Models.UserModel
 local EscapeRichTextModule = require(GameInvite.utils.escapeRichText)
-local PresenceType = require(Parent.DataHydration).Presence.PresenceEnums.PresenceType
+local PresenceType = DataHydrationModule.Presence.PresenceEnums.PresenceType
 
 return {
 	getContextText = function(p1, p2)

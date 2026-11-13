@@ -2,6 +2,7 @@
 local CorePackages = game:GetService("CorePackages")
 local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDependencies)
 local Roact = InGameMenuDependenciesModule.Roact
+local RoactRodux = InGameMenuDependenciesModule.RoactRodux
 local T = InGameMenuDependenciesModule.t
 local Parent = script.Parent.Parent
 local WithLocalizationModule = require(Parent.Localization.withLocalization)
@@ -17,7 +18,7 @@ local StrictInterfaceResult = T.strictInterface({
 	sendAnalytics = T.callback
 })
 
-return InGameMenuDependenciesModule.RoactRodux.UNSTABLE_connect2(function(p1, _)
+return RoactRodux.UNSTABLE_connect2(function(p1, _)
 	return { isLeavingGame = p1.leavingGame }
 end, function(Callback)
 	-- upvalues: CancelLeavingGameModule (copy), SendAnalyticsModule (copy), ConstantsModule (copy)

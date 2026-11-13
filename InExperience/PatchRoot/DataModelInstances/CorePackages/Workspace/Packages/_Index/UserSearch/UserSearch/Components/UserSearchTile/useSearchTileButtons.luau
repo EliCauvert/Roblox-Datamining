@@ -19,16 +19,17 @@ local FocusNavigationEventNameEnum = require(Parent.FocusNavigationUtils).FocusN
 local FFlagUserSearchAddFocusActionsSupport = require(Parent.SharedFlags).FFlagUserSearchAddFocusActionsSupport
 local FFlagSduiUserSearchTile = require(Parent.SharedFlags).FFlagSduiUserSearchTile
 local FFlagUserSearchHideFriendActionsForBlockedUsersModule = require(UserSearch.Flags.FFlagUserSearchHideFriendActionsForBlockedUsers)
+local FFlagMigrateFriendshipStatusesUserSearchModule = require(UserSearch.Flags.FFlagMigrateFriendshipStatusesUserSearch)
 local FFlagUserSearchJoinPassStorePresenceModule = require(UserSearch.Flags.FFlagUserSearchJoinPassStorePresence)
 local UseIsUserBlockedModule = if FFlagUserSearchHideFriendActionsForBlockedUsersModule then require(script.Parent.useIsUserBlocked) else nil
 local FriendsStoreChallengeNetworkModule = require(UserSearch.Networking.friendsStoreChallengeNetwork)
 local FFlagEnableFriendsStoreChallengeInterceptor = require(Parent.SharedFlags).FFlagEnableFriendsStoreChallengeInterceptor
 local GetResult = require(Parent.DataHydration).Friends.FriendsStore.get()
 local Enums1 = require(Parent.DataHydration).Friends.Enums
-local FFlagMigrateFriendshipStatusesUserSearchModule = require(UserSearch.Flags.FFlagMigrateFriendshipStatusesUserSearch) or FFlagSduiUserSearchTile
+local FFlagMigrateFriendshipStatusesUserSearchModule1 = FFlagMigrateFriendshipStatusesUserSearchModule or FFlagSduiUserSearchTile
 
 return function(p1, Callback)
-	-- upvalues: UseLocalUserIdFunction (copy), UseDispatchFunction (copy), UseRelationshipSelectorModule (copy), UseStyleFunction (copy), FFlagUserSearchHideFriendActionsForBlockedUsersModule (copy), UseIsUserBlockedModule (copy), UseJoinUserInExperienceFunction (copy), Contexts (copy), FFlagUserSearchJoinPassStorePresenceModule (copy), Images (copy), PresenceHelpersModule (copy), FFlagUserSearchAddFocusActionsSupport (copy), FocusNavigationEventNameEnum (copy), FFlagMigrateFriendshipStatusesUserSearchModule (copy), GetResult (copy), FriendsNetworkingModule (copy), SetCurrentToastMessageFunction (copy), EventNamesModule (copy), DashModule (copy), Enums1 (copy), FFlagEnableFriendsStoreChallengeInterceptor (copy), FriendsStoreChallengeNetworkModule (copy), Enums (copy)
+	-- upvalues: UseLocalUserIdFunction (copy), UseDispatchFunction (copy), UseRelationshipSelectorModule (copy), UseStyleFunction (copy), FFlagUserSearchHideFriendActionsForBlockedUsersModule (copy), UseIsUserBlockedModule (copy), UseJoinUserInExperienceFunction (copy), Contexts (copy), FFlagUserSearchJoinPassStorePresenceModule (copy), Images (copy), PresenceHelpersModule (copy), FFlagUserSearchAddFocusActionsSupport (copy), FocusNavigationEventNameEnum (copy), FFlagMigrateFriendshipStatusesUserSearchModule1 (copy), GetResult (copy), FriendsNetworkingModule (copy), SetCurrentToastMessageFunction (copy), EventNamesModule (copy), DashModule (copy), Enums1 (copy), FFlagEnableFriendsStoreChallengeInterceptor (copy), FriendsStoreChallengeNetworkModule (copy), Enums (copy)
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseRelationshipSelectorModuleResult = UseRelationshipSelectorModule(p1.userId)
@@ -62,8 +63,8 @@ return function(p1, Callback)
 			icon = IconsCommonPlusSmall,
 			focusEventName = if FFlagUserSearchAddFocusActionsSupport and p1.shouldAddFocusEventName then FocusNavigationEventNameEnum.HoldToAcceptFriendRequest else nil,
 			onActivated = function()
-				-- upvalues: FFlagMigrateFriendshipStatusesUserSearchModule (upval), GetResult (upval), p1 (copy), UseDispatchResult (copy), FriendsNetworkingModule (upval), UseLocalUserIdResult (copy), SetCurrentToastMessageFunction (upval), Callback (copy), EventNamesModule (upval)
-				(if FFlagMigrateFriendshipStatusesUserSearchModule then GetResult.AcceptFriendRequest(p1.userId) else UseDispatchResult(FriendsNetworkingModule.AcceptFriendRequestFromUserId.API({
+				-- upvalues: FFlagMigrateFriendshipStatusesUserSearchModule1 (upval), GetResult (upval), p1 (copy), UseDispatchResult (copy), FriendsNetworkingModule (upval), UseLocalUserIdResult (copy), SetCurrentToastMessageFunction (upval), Callback (copy), EventNamesModule (upval)
+				(if FFlagMigrateFriendshipStatusesUserSearchModule1 then GetResult.AcceptFriendRequest(p1.userId) else UseDispatchResult(FriendsNetworkingModule.AcceptFriendRequestFromUserId.API({
 					targetUserId = p1.userId,
 					currentUserId = UseLocalUserIdResult
 				}))):andThen(function()
@@ -95,8 +96,8 @@ return function(p1, Callback)
 			icon = IconsCommonPlusSmall,
 			focusEventName = if FFlagUserSearchAddFocusActionsSupport and p1.shouldAddFocusEventName then FocusNavigationEventNameEnum.HoldToAddFriend else nil,
 			onActivated = function()
-				-- upvalues: FFlagMigrateFriendshipStatusesUserSearchModule (upval), GetResult (upval), p1 (copy), Enums1 (upval), FFlagEnableFriendsStoreChallengeInterceptor (upval), FriendsStoreChallengeNetworkModule (upval), UseDispatchResult (copy), FriendsNetworkingModule (upval), UseLocalUserIdResult (copy), Enums (upval), SetCurrentToastMessageFunction (upval), Callback (copy), EventNamesModule (upval)
-				(if FFlagMigrateFriendshipStatusesUserSearchModule then GetResult.RequestFriendship(p1.userId, Enums1.FriendshipOriginSourceType.PlayerSearch, nil, if FFlagEnableFriendsStoreChallengeInterceptor then FriendsStoreChallengeNetworkModule else nil) else UseDispatchResult(FriendsNetworkingModule.RequestFriendshipFromUserId.API({
+				-- upvalues: FFlagMigrateFriendshipStatusesUserSearchModule1 (upval), GetResult (upval), p1 (copy), Enums1 (upval), FFlagEnableFriendsStoreChallengeInterceptor (upval), FriendsStoreChallengeNetworkModule (upval), UseDispatchResult (copy), FriendsNetworkingModule (upval), UseLocalUserIdResult (copy), Enums (upval), SetCurrentToastMessageFunction (upval), Callback (copy), EventNamesModule (upval)
+				(if FFlagMigrateFriendshipStatusesUserSearchModule1 then GetResult.RequestFriendship(p1.userId, Enums1.FriendshipOriginSourceType.PlayerSearch, nil, if FFlagEnableFriendsStoreChallengeInterceptor then FriendsStoreChallengeNetworkModule else nil) else UseDispatchResult(FriendsNetworkingModule.RequestFriendshipFromUserId.API({
 					targetUserId = p1.userId,
 					currentUserId = UseLocalUserIdResult,
 					friendshipOriginSourceType = Enums.FriendshipOriginSourceType.PlayerSearch.rawValue()

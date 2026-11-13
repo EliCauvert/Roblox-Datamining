@@ -1,9 +1,10 @@
 ﻿local EditProfile = script:FindFirstAncestor("EditProfile")
+local Parent = EditProfile.Parent
 local TextKeysModule = require(EditProfile.Common.TextKeys)
 local RealNamesInDisplayNamesIXPModule = require(EditProfile.Flags.RealNamesInDisplayNamesIXP)
 local FFlagEditProfileDisplayNameUseUnder17DescriptionModule = require(EditProfile.Flags.FFlagEditProfileDisplayNameUseUnder17Description)
 local UseRealNamesInDisplayNamesEnabledModule = require(script.Parent.useRealNamesInDisplayNamesEnabled)
-local UseLocalizationFunction = require(EditProfile.Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local config = {
 	displayNameCaption = TextKeysModule.DisplayNameCaption,
 	displayNameChangeError = TextKeysModule.DisplayNameError,

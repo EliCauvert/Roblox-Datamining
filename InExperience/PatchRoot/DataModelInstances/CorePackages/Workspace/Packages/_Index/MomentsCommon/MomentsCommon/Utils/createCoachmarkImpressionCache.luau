@@ -1,7 +1,8 @@
 ﻿local MomentsCommon = script:FindFirstAncestor("MomentsCommon")
 local MomentsLocalStorageModule = require(MomentsCommon.Storage.MomentsLocalStorage)
+local MomentsLocalStorageKeysModule = require(MomentsCommon.Storage.MomentsLocalStorageKeys)
 local Players = game:GetService("Players")
-local CoachmarkImpressions = require(MomentsCommon.Storage.MomentsLocalStorageKeys).CoachmarkImpressions
+local CoachmarkImpressions = MomentsLocalStorageKeysModule.CoachmarkImpressions
 
 return function(p1)
 	-- upvalues: Players (copy), MomentsLocalStorageModule (copy), CoachmarkImpressions (copy)

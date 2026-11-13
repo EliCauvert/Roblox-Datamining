@@ -2,13 +2,14 @@
 local TelemetryService = game:GetService("TelemetryService")
 local QueueExperimentation = require(Parent.SocialExperiments).QueueExperimentation
 local IsJoinNewServerButtonEnabled = QueueExperimentation.getIsJoinNewServerButtonEnabled() or QueueExperimentation.getIsAutoJoinNewServerEnabled()
+local FIntLoadingScreenQueuedStateButtonClickThrottleHundredthsPercent = require(Parent.SharedFlags).FIntLoadingScreenQueuedStateButtonClickThrottleHundredthsPercent
 local StandardizedFields = { "addPlaceId", "addUniverseId", "addOSInfo" }
 local config = {
 	eventName = "loadingScreenQueuedStateButtonClick",
 	description = "Event fired when the user clicks a queued-state action button on the loading screen.",
 	links = "https://docs.google.com/document/d/1vbUe9xu9Hi6P7wpRpBC3jKHLXel03wCB-ezb9eJFCBc/edit?usp=sharing",
 	backends = { "EventIngest" },
-	throttlingPercentage = require(Parent.SharedFlags).FIntLoadingScreenQueuedStateButtonClickThrottleHundredthsPercent,
+	throttlingPercentage = FIntLoadingScreenQueuedStateButtonClickThrottleHundredthsPercent,
 	lastUpdated = { 2026, 4, 8 }
 }
 

@@ -1,9 +1,10 @@
 ﻿local Parent = script.Parent.Parent
 local Parent1 = Parent.Parent
+local RoduxModule = require(Parent1.Rodux)
 local CryoModule = require(Parent1.Cryo)
 local _ = require(Parent.Types)
 
-return require(Parent1.Rodux).createReducer({ IsOpen = false, SelectedCaptures = {} }, {
+return RoduxModule.createReducer({ IsOpen = false, SelectedCaptures = {} }, {
 	[require(Parent.Actions.CaptureManagerClosed).name] = function(p1, _)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p1, { IsOpen = false, SelectedCaptures = {} })

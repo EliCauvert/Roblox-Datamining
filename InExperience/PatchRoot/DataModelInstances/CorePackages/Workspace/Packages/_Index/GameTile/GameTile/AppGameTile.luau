@@ -868,7 +868,7 @@ function AppGameTile.renderContent(p2, ReducedMotion, p3, FoundationTokens)
 			isTouchPreferredInput = if FFlagLuaAppContinueSortInstantPlay then p2.props.isTouchPreferredInput else nil
 		}),
 		VideoPlaybackDetector = p2.props.videoPlaybackDetector,
-		InstantPlayLauncher = if FFlagLuaAppContinueSortInstantPlay and (CallbackResult.isActive and p2.state.instantPlayRequested) then ReactModule.createElement(InstantPlayLauncherModule, {
+		InstantPlayLauncher = if FFlagLuaAppContinueSortInstantPlay and CallbackResult.isActive and p2.state.instantPlayRequested then ReactModule.createElement(InstantPlayLauncherModule, {
 			launchSource = "ExperienceTile",
 			universeId = p2.props.navigationUniverseId,
 			referralSource = p2.props.referralSource,

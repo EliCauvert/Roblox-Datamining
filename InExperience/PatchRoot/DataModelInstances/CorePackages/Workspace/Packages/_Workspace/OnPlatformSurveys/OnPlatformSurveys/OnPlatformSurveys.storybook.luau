@@ -1,6 +1,7 @@
 ﻿local OnPlatformSurveys = script:FindFirstAncestor("OnPlatformSurveys")
 local Parent = OnPlatformSurveys.Parent
 local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.Dev.ReactRoblox)
 local FoundationModule = require(Parent.Foundation)
 local FoundationProvider = FoundationModule.FoundationProvider
 local ColorMode = FoundationModule.Enums.ColorMode
@@ -21,7 +22,7 @@ end
 
 return {
 	roact = ReactModule,
-	reactRoblox = require(Parent.Dev.ReactRoblox),
+	reactRoblox = ReactRobloxModule,
 	mapStory = function(p1)
 		-- upvalues: ReactModule (copy), MockProvidersModule (copy), FoundationProvider (copy), config (copy), ColorMode (copy), Device (copy)
 		return function(Tbl)

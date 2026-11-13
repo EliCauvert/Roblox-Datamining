@@ -1,6 +1,7 @@
 ﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local MomentsTypesModule = require(Parent.MomentsTypes)
 local Analytics = require(Parent.MomentsCommon).Analytics
-local MomentStatus = require(Parent.MomentsTypes).Enums.MomentStatus
+local MomentStatus = MomentsTypesModule.Enums.MomentStatus
 
 return function(p1, p2)
 	-- upvalues: MomentStatus (copy), Analytics (copy)

@@ -16,6 +16,7 @@ local VideoUtilsModule = require(Parent.VideoUtils)
 local RefreshHomePageModule = require(Home.refreshHomePage)
 local FetchHomePageModule = require(Home.fetchHomePage)
 local UseHomeCollectionLayoutSyncModule = require(Home.useHomeCollectionLayoutSync)
+local UseHomeStartupSnapshotModule = require(Home.useHomeStartupSnapshot)
 local HomeConstantsModule = require(Home.HomeConstants)
 local HomePageSessionModule = require(Home.HomePageSession)
 local FFlagLuaAppAddHomeExtraTopPadding = require(Parent.SharedFlags).FFlagLuaAppAddHomeExtraTopPadding
@@ -28,6 +29,7 @@ local FFlagAppPageShellScrollTelemetry = require(Parent.SharedFlags).FFlagAppPag
 local FFlagHomePageRefetchOnDataHydrationAccountReset = require(Parent.SharedFlags).FFlagHomePageRefetchOnDataHydrationAccountReset
 local FFlagLuaAppSduiHomeSponsoredAdViewabilityModule = require(Home.Flags.FFlagLuaAppSduiHomeSponsoredAdViewability)
 local FFlagAppThemeHalloween2026HomeBackground = require(Parent.SharedFlags).FFlagAppThemeHalloween2026HomeBackground
+local FFlagSduiHomeStartupSnapshot = require(Parent.SharedFlags).FFlagSduiHomeStartupSnapshot
 
 local function _(p1, p2)
 	return p1[p2] or p1.navigation and p1.navigation.getParam(p2)
@@ -41,7 +43,7 @@ local function getCommittedHomeSessionId(p1)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: HomeConstantsModule (copy), FFlagLuaAppAddHomeExtraTopPadding (copy), UseEntrySurfacingFunction (copy), FFlagSduiDismissPromptPageScope (copy), UsePageScopeRefFunction (copy), ReactModule (copy), SduiSharedUtilitiesModule (copy), AppPage (copy), FFlagHomePageRefetchOnDataHydrationAccountReset (copy), FetchHomePageModule (copy), Home (copy), UseHomeCollectionLayoutSyncModule (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), ResponsiveModule (copy), VideoUtilsModule (copy), FFlagLuaAppSduiVideoThumbnail (copy), FFlagLuaAppSduiHomeSponsoredAdViewabilityModule (copy), SignalsReactModule (copy), getCommittedHomeSessionId (copy), UseSponsoredAdViewabilityDetectorFunction (copy), AppLifecycleObserverService (copy), FFlagLuaAppSduiSuppressVideoDetectorDuringScroll (copy), ExperienceService (copy), SduiPageWrapperEntryPoint (copy), RefreshHomePageModule (copy), FFlagAppPageShellScrollTelemetry (copy), FFlagAppPageShellScrollToTopFocus (copy), FFlagAppThemeHalloween2026HomeBackground (copy)
+	-- upvalues: HomeConstantsModule (copy), FFlagLuaAppAddHomeExtraTopPadding (copy), UseEntrySurfacingFunction (copy), FFlagSduiDismissPromptPageScope (copy), UsePageScopeRefFunction (copy), ReactModule (copy), SduiSharedUtilitiesModule (copy), AppPage (copy), FFlagHomePageRefetchOnDataHydrationAccountReset (copy), FetchHomePageModule (copy), Home (copy), UseHomeCollectionLayoutSyncModule (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), ResponsiveModule (copy), VideoUtilsModule (copy), FFlagLuaAppSduiVideoThumbnail (copy), FFlagLuaAppSduiHomeSponsoredAdViewabilityModule (copy), SignalsReactModule (copy), getCommittedHomeSessionId (copy), UseSponsoredAdViewabilityDetectorFunction (copy), AppLifecycleObserverService (copy), FFlagSduiHomeStartupSnapshot (copy), UseHomeStartupSnapshotModule (copy), FFlagLuaAppSduiSuppressVideoDetectorDuringScroll (copy), ExperienceService (copy), SduiPageWrapperEntryPoint (copy), RefreshHomePageModule (copy), FFlagAppPageShellScrollTelemetry (copy), FFlagAppPageShellScrollToTopFocus (copy), FFlagAppThemeHalloween2026HomeBackground (copy)
 	local ConfigKey = HomeConstantsModule.ConfigKey
 	local v1 = nil
 	
@@ -83,12 +85,26 @@ return ReactModule.memo(function(p1)
 			return VideoUtilsModule.FeedVideoPlaybackContext.new(IsUsePreferredInputResultMatch)
 		end, { IsUsePreferredInputResultMatch })
 	end
-	local v2 = nil
+	local Callback = nil
 	
 	if FFlagLuaAppSduiHomeSponsoredAdViewabilityModule then
 		local UseStateResult
-		UseStateResult, v38 = ReactModule.useState(nil)
+		UseStateResult, Callback = ReactModule.useState(nil)
 		UseSponsoredAdViewabilityDetectorFunction(UseStateResult, SignalsReactModule.useSignalState(getCommittedHomeSessionId), AppLifecycleObserverService)
+	end
+	local UseResult = nil
+	
+	if FFlagSduiHomeStartupSnapshot then
+		local UseStateResult1, UseStateResult2 = ReactModule.useState(nil)
+		UseHomeStartupSnapshotModule(UseStateResult1, p1.navigation)
+		UseResult = ReactModule.useCallback(function(p2)
+			-- upvalues: UseStateResult2 (copy), Callback (ref)
+			UseStateResult2(p2)
+			
+			if Callback then
+				Callback(p2)
+			end
+		end, { Callback })
 	end
 	if FFlagLuaAppSduiSuppressVideoDetectorDuringScroll then
 		local IsUsePreferredInputResultMatch1 = ResponsiveModule.usePreferredInput() == ResponsiveModule.Input.Touch
@@ -124,7 +140,7 @@ return ReactModule.memo(function(p1)
 		})
 	end
 	return ReactModule.createElement(SduiPageWrapperEntryPoint, {
-		ref = if FFlagLuaAppSduiHomeSponsoredAdViewabilityModule then v2 else nil,
+		ref = if FFlagSduiHomeStartupSnapshot then UseResult elseif FFlagLuaAppSduiHomeSponsoredAdViewabilityModule then Callback else nil,
 		appPage = AppPage.Home,
 		configKey = ConfigKey,
 		contentIdentifier = HomeConstantsModule.ContentIdentifier,

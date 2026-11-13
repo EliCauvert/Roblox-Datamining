@@ -195,6 +195,8 @@ local function EditProfileImageBody(p1)
 			Frames.onOpenSubscriptionUpsell("banner")
 		end
 	}) else nil
+	local CutoutTopOffset = UseEditProfileImageLayoutResult.cutoutTopOffset
+	local CutoutSize = UseEditProfileImageLayoutResult.cutoutSize
 	local PreviewHeight = UseEditProfileImageLayoutResult.previewHeight
 	local VisiblePreviewHeight = UseEditProfileImageLayoutResult.visiblePreviewHeight
 	local PreviewWidth = UseEditProfileImageLayoutResult.previewWidth
@@ -202,46 +204,103 @@ local function EditProfileImageBody(p1)
 	local Floored = if IsSplit then math.floor(UseEditProfileImageLayoutResult.safeWidth * ConstantsModule.SplitControlsPaneWidthScale + 0.5) else UseEditProfileImageLayoutResult.safeWidth
 	local CloseButtonTopOffset = UseEditProfileImageLayoutResult.closeButtonTopOffset
 	local UseResult1 = if IsModeMatch then if IsSplit then UseResult else nil else Navigation.onTitleBack
+	local Element1 = if ActiveView == "frames" then if Frames.show then ReactModule.createElement(AssetGridScrollSectionModule, {
+		layoutOrder = 3,
+		title = Frames.localizedTitle,
+		titleLeadingIconName = IconName.RobloxPlus,
+		onTitleBack = UseResult1,
+		useInternalScroll = IsSplit,
+		gridProps = {
+			tileSize = 96,
+			items = Frames.items,
+			isLoading = Frames.isLoading,
+			hasError = Frames.hasError,
+			onRetry = Frames.onRetry,
+			bannerComponent = Element,
+			selectedId = Frames.selectedFrameId,
+			onSelect = Frames.onSelect,
+			containerWidth = Floored
+		}
+	}) else ReactModule.createElement(View, { tag = "size-full-0", LayoutOrder = 3 }) elseif ActiveView == "emotes" then ReactModule.createElement(ExpandedEmotesGridContentModule, {
+		layoutOrder = 3,
+		tileSize = 96,
+		containerWidth = Floored,
+		onTitleBack = UseResult1,
+		useInternalScroll = IsSplit,
+		ownedEmoteItems = Emotes.ownedItems,
+		recommendedEmoteItems = Emotes.recommendedItems,
+		emotesLoading = Emotes.isLoading,
+		emotesError = Emotes.hasError,
+		hasMoreEmotes = Emotes.hasMore,
+		isLoadingMoreEmotes = Emotes.isLoadingMore,
+		hasLoadMoreEmotesError = Emotes.hasLoadMoreError,
+		onMoreEmotes = Emotes.onMore,
+		onRetryEmotes = Emotes.onRetry,
+		selectedEmoteId = Emotes.selectedEmoteId,
+		onSelectEmote = OnSelect
+	}) else ReactModule.createElement(CombinedCarouselsContentModule, {
+		layoutOrder = 3,
+		tileSize = 96,
+		showFrames = Frames.show,
+		useInternalScroll = IsSplit,
+		emoteItems = Emotes.items,
+		emotesLoading = Emotes.isLoading,
+		emotesError = Emotes.hasError,
+		onRetryEmotes = Emotes.onRetry,
+		selectedEmoteId = Emotes.selectedEmoteId,
+		onSelectEmote = OnSelect,
+		onExpandEmotes = Navigation.onExpandEmotes,
+		frameItems = Frames.items,
+		framesLoading = Frames.isLoading,
+		framesError = Frames.hasError,
+		onRetryFrames = Frames.onRetry,
+		selectedFrameId = Frames.selectedFrameId,
+		onSelectFrame = Frames.onSelect,
+		onExpandFrames = Navigation.onExpandFrames,
+		framesBannerComponent = Element
+	})
+	local Element2 = ReactModule.createElement(RotatableAvatarPreviewModule, {
+		fillContainer = false,
+		userId = Preview.localUserId or "",
+		width = PreviewWidth,
+		height = PreviewHeight,
+		cutoutSize = CutoutSize,
+		cutoutTopOffset = CutoutTopOffset,
+		isCameraControlBarDisabled = not IsSplit,
+		fieldOfViewDeg = ConstantsModule.CameraFieldOfViewDeg,
+		fieldOfViewForDistanceScaleDeg = CutoutFieldOfViewDeg,
+		distanceScale = Preview.distanceScale,
+		committedYRotDeg = Preview.yRotDeg,
+		emoteAssetId = Emotes.selectedEmoteId,
+		rigTypeOverride = if FFlagEditProfileImageR15UpgradePrompt then p1.accountRigType else nil,
+		frameImage = Frames.selectedImage,
+		onYRotDegChanged = Preview.onYRotDegChanged,
+		onDistanceScaleChanged = Preview.onDistanceScaleChanged
+	})
 	local NoOnTitleBack: boolean = not IsModeMatch and not Navigation.onTitleBack
 	local NoOnTitleBack1: boolean = IsShowCloseButton and (not IsSplit and (NoOnTitleBack or IsModeMatch))
-	local Element1 = ReactModule.createElement(IconButton, {
+	local Element21 = ReactModule.createElement(IconButton, {
 		isCircular = true,
 		icon = if IsModeMatch then IconName.ChevronLargeLeft else IconName.X,
 		size = IconSize.Medium,
 		variant = ButtonVariant.Utility,
 		onActivated = UseResult
 	})
+	local Element3 = if NoOnTitleBack1 then ReactModule.createElement(View, {
+		tag = "position-top-left auto-xy",
+		ZIndex = 10,
+		Position = if IsSplit then UDim2.fromScale(ConstantsModule.SplitControlsPaneWidthScale, 0) else nil,
+		ref = Navigation.closeButtonRef,
+		padding = {
+			top = UDim.new(0, CloseButtonTopOffset),
+			left = UDim.new(0, UseTokensResult.Padding.XLarge)
+		}
+	}, { Button = Element21 }) else nil
 	local HeaderBar = FoundationModule.HeaderBar
 	local config1 = {
 		activeView = ActiveView,
-		avatarPreview = ReactModule.createElement(RotatableAvatarPreviewModule, {
-			fillContainer = false,
-			userId = Preview.localUserId or "",
-			width = PreviewWidth,
-			height = PreviewHeight,
-			cutoutSize = UseEditProfileImageLayoutResult.cutoutSize,
-			cutoutTopOffset = UseEditProfileImageLayoutResult.cutoutTopOffset,
-			isCameraControlBarDisabled = not IsSplit,
-			fieldOfViewDeg = ConstantsModule.CameraFieldOfViewDeg,
-			fieldOfViewForDistanceScaleDeg = CutoutFieldOfViewDeg,
-			distanceScale = Preview.distanceScale,
-			committedYRotDeg = Preview.yRotDeg,
-			emoteAssetId = Emotes.selectedEmoteId,
-			rigTypeOverride = if FFlagEditProfileImageR15UpgradePrompt then p1.accountRigType else nil,
-			frameImage = Frames.selectedImage,
-			onYRotDegChanged = Preview.onYRotDegChanged,
-			onDistanceScaleChanged = Preview.onDistanceScaleChanged
-		}),
-		closeButton = if NoOnTitleBack1 then ReactModule.createElement(View, {
-			tag = "position-top-left auto-xy",
-			ZIndex = 10,
-			Position = if IsSplit then UDim2.fromScale(ConstantsModule.SplitControlsPaneWidthScale, 0) else nil,
-			ref = Navigation.closeButtonRef,
-			padding = {
-				top = UDim.new(0, CloseButtonTopOffset),
-				left = UDim.new(0, UseTokensResult.Padding.XLarge)
-			}
-		}, { Button = Element1 }) else nil,
+		avatarPreview = Element2,
+		closeButton = Element3,
 		header = if IsSplit and NoOnTitleBack and IsShowCloseButton then ReactModule.createElement(View, {
 			tag = "size-full-0 auto-y",
 			LayoutOrder = 1,
@@ -272,61 +331,7 @@ local function EditProfileImageBody(p1)
 			onOpenProfileFramesSubscriptionUpsell = Frames.onOpenSubscriptionUpsell,
 			renderRecommendedEmotePurchaseFooter = p1.renderRecommendedEmotePurchaseFooter
 		}),
-		options = if ActiveView == "frames" then if Frames.show then ReactModule.createElement(AssetGridScrollSectionModule, {
-			layoutOrder = 3,
-			title = Frames.localizedTitle,
-			titleLeadingIconName = IconName.RobloxPlus,
-			onTitleBack = UseResult1,
-			useInternalScroll = IsSplit,
-			gridProps = {
-				tileSize = 96,
-				items = Frames.items,
-				isLoading = Frames.isLoading,
-				hasError = Frames.hasError,
-				onRetry = Frames.onRetry,
-				bannerComponent = Element,
-				selectedId = Frames.selectedFrameId,
-				onSelect = Frames.onSelect,
-				containerWidth = Floored
-			}
-		}) else ReactModule.createElement(View, { tag = "size-full-0", LayoutOrder = 3 }) elseif ActiveView == "emotes" then ReactModule.createElement(ExpandedEmotesGridContentModule, {
-			layoutOrder = 3,
-			tileSize = 96,
-			containerWidth = Floored,
-			onTitleBack = UseResult1,
-			useInternalScroll = IsSplit,
-			ownedEmoteItems = Emotes.ownedItems,
-			recommendedEmoteItems = Emotes.recommendedItems,
-			emotesLoading = Emotes.isLoading,
-			emotesError = Emotes.hasError,
-			hasMoreEmotes = Emotes.hasMore,
-			isLoadingMoreEmotes = Emotes.isLoadingMore,
-			hasLoadMoreEmotesError = Emotes.hasLoadMoreError,
-			onMoreEmotes = Emotes.onMore,
-			onRetryEmotes = Emotes.onRetry,
-			selectedEmoteId = Emotes.selectedEmoteId,
-			onSelectEmote = OnSelect
-		}) else ReactModule.createElement(CombinedCarouselsContentModule, {
-			layoutOrder = 3,
-			tileSize = 96,
-			showFrames = Frames.show,
-			useInternalScroll = IsSplit,
-			emoteItems = Emotes.items,
-			emotesLoading = Emotes.isLoading,
-			emotesError = Emotes.hasError,
-			onRetryEmotes = Emotes.onRetry,
-			selectedEmoteId = Emotes.selectedEmoteId,
-			onSelectEmote = OnSelect,
-			onExpandEmotes = Navigation.onExpandEmotes,
-			frameItems = Frames.items,
-			framesLoading = Frames.isLoading,
-			framesError = Frames.hasError,
-			onRetryFrames = Frames.onRetry,
-			selectedFrameId = Frames.selectedFrameId,
-			onSelectFrame = Frames.onSelect,
-			onExpandFrames = Navigation.onExpandFrames,
-			framesBannerComponent = Element
-		})
+		options = Element1
 	}
 	
 	return ReactModule.createElement(FocusNavigatorWrapperModule, { onClose = Navigation.onBack }, {

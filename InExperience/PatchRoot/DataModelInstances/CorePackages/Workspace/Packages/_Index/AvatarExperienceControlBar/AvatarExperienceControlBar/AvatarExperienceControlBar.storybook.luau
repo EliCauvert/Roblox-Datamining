@@ -6,6 +6,7 @@ local LocalizationProvider = require(Parent.Localization).LocalizationProvider
 local Localization = require(Parent.Dev.AppLocales).Localization
 local ColorMode = FoundationModule.Enums.ColorMode
 local Device = FoundationModule.Enums.Device
+local ReactRobloxModule = require(Parent.Dev.ReactRoblox)
 local config = { Light = ColorMode.Light, Dark = ColorMode.Dark }
 local config1 = { Console = Device.Console, Desktop = Device.Desktop }
 local StyleTable = {
@@ -17,7 +18,7 @@ local StyleTable = {
 return {
 	name = "AvatarExperienceControlBar",
 	roact = ReactModule,
-	reactRoblox = require(Parent.Dev.ReactRoblox),
+	reactRoblox = ReactRobloxModule,
 	mapStory = function(p1)
 		-- upvalues: config (copy), ReactModule (copy), LocalizationProvider (copy), Localization (copy), FoundationProvider (copy), StyleTable (copy), config1 (copy)
 		return function(p2)

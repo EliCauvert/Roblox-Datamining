@@ -1,6 +1,11 @@
 ﻿local SduiSharedContent = script:FindFirstAncestor("SduiSharedContent")
 local Parent = SduiSharedContent.Parent
 local ReactModule = require(Parent.React)
+local NavigationModule = require(Parent.Navigation)
+local DrawerModule = require(Parent.Drawer)
+local RoactUtilsModule = require(Parent.RoactUtils)
+local SignalsReactModule = require(Parent.SignalsReact)
+local StreamNotificationsModule = require(Parent.StreamNotifications)
 local SendCoachmarkImpressionModule = require(SduiSharedContent.Analytics.sendCoachmarkImpression)
 local FFlagPromptsCoachmarkImpressionOnShow = require(Parent.SharedFlags).FFlagPromptsCoachmarkImpressionOnShow
 local LuaAppUseNavFocusInSduiCoachmark = game:DefineFastFlag("LuaAppUseNavFocusInSduiCoachmark", false)
@@ -11,11 +16,11 @@ local LuaAppHideSduiCoachmarkWhenNotificationStreamOpen = game:DefineFastFlag("L
 local FFlagEnableOnScreenAPIIntegration = require(Parent.SharedFlags).FFlagEnableOnScreenAPIIntegration
 local UseIsRouteOnScreenFunction = require(Parent.RobloxAppNavigation).useIsRouteOnScreen
 local Coachmark = require(Parent.Foundation).Coachmark
-local UseNavigationFocusFunction = require(Parent.Navigation).useNavigationFocus
-local UseDrawerVisibleFunction = require(Parent.Drawer).Hooks.useDrawerVisible
-local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
-local StreamNotificationStore = require(Parent.StreamNotifications).StreamNotificationStore
+local UseNavigationFocusFunction = NavigationModule.useNavigationFocus
+local UseDrawerVisibleFunction = DrawerModule.Hooks.useDrawerVisible
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
+local UseSignalStateFunction = SignalsReactModule.useSignalState
+local StreamNotificationStore = StreamNotificationsModule.StreamNotificationStore
 local CollectionService = game:GetService("CollectionService")
 
 return ReactModule.memo(function(p1)

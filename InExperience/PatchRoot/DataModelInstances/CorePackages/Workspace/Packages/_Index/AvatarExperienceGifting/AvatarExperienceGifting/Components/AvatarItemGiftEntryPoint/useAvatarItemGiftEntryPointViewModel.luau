@@ -2,10 +2,11 @@
 local Parent = AvatarExperienceGifting.Parent
 local ReactModule = require(Parent.React)
 local _ = require(Parent.Gifting)
+local AvatarExperienceNavigationModule = require(Parent.AvatarExperienceNavigation)
 local UseNavigationFunction = require(Parent.Navigation).useNavigation
 local _ = require(script.Parent.AvatarItemGiftEntryPointView)
 local UseAvatarItemGiftEligibilityModule = require(AvatarExperienceGifting.Hooks.useAvatarItemGiftEligibility)
-local AvatarScreen = require(Parent.AvatarExperienceNavigation).Enums.AvatarScreen
+local AvatarScreen = AvatarExperienceNavigationModule.Enums.AvatarScreen
 
 return function(Frame)
 	-- upvalues: UseNavigationFunction (copy), UseAvatarItemGiftEligibilityModule (copy), ReactModule (copy), AvatarScreen (copy)
@@ -14,6 +15,7 @@ return function(Frame)
 	local LayoutOrder = Frame.LayoutOrder
 	local UseNavigationResult = UseNavigationFunction()
 	local UseAvatarItemGiftEligibilityModuleResult = UseAvatarItemGiftEligibilityModule(CollectibleItemId, Frame.eligibilityDeps)
+	local AreItemsGiftable = UseAvatarItemGiftEligibilityModuleResult.areItemsGiftable
 	local CanGift = UseAvatarItemGiftEligibilityModuleResult.canGift
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: CanGift (copy), CollectibleItemId (copy), UseNavigationResult (copy), AvatarScreen (upval)
@@ -25,7 +27,7 @@ return function(Frame)
 	end, { CanGift, CollectibleItemId, UseNavigationResult })
 	
 	return {
-		isVisible = UseAvatarItemGiftEligibilityModuleResult.areItemsGiftable,
+		isVisible = AreItemsGiftable,
 		buttonProps = ReactModule.useMemo(function()
 			-- upvalues: UseResult (copy), IsCircular (copy), LayoutOrder (copy)
 			return {

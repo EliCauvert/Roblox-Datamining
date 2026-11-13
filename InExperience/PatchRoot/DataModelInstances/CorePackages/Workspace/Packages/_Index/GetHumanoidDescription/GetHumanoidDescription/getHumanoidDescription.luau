@@ -103,44 +103,44 @@ return function(UserId)
 	if not Humanoid then
 		return config, "ERR_RA_HUMOBJ"
 	end
-	local Result1 = nil
-	local Success1
-	Success1, Result1 = pcall(function()
+	local Result = nil
+	local Success
+	Success, Result = pcall(function()
 		-- upvalues: Humanoid (copy)
 		return (Humanoid:GetAppliedDescription())
 	end)
 	
-	if not Success1 then
+	if not Success then
 		return config, "ERR_RA_HUMOBJ"
 	end
-	if not Result1 then
+	if not Result then
 		return config, "ERR_RA_HUMDESC"
 	end
 	local Count = 0
 	
-	local function v20(Key)
-		-- upvalues: Result1 (ref), config (copy)
-		if typeof(Result1[Key]) == "Color3" then
-			config[Key] = { Result1[Key].R, Result1[Key].G, Result1[Key].B }
+	local function v18(Key)
+		-- upvalues: Result (ref), config (copy)
+		if typeof(Result[Key]) == "Color3" then
+			config[Key] = { Result[Key].R, Result[Key].G, Result[Key].B }
 			
 			return
 		else
-			config[Key] = Result1[Key]
+			config[Key] = Result[Key]
 		end
 	end
 	
 	for i, _ in pairs(config) do
-		if not pcall(v20, i) then
+		if not pcall(v18, i) then
 			Count += 1
 		end
 	end
-	local Success2, Result2 = pcall(Result1.GetAccessories, Result1, false)
+	local Success1, Result1 = pcall(Result.GetAccessories, Result, false)
 	
-	if Success2 then
-		local Success3, Result3 = pcall(v2, Result2)
+	if Success1 then
+		local Success2, Result2 = pcall(v2, Result1)
 		
-		if Success3 then
-			config.AccessoryBlob = Result3
+		if Success2 then
+			config.AccessoryBlob = Result2
 		else
 			Count += 1
 		end
@@ -148,28 +148,28 @@ return function(UserId)
 		Count += 1
 	end
 	if GetHumanoidDescriptionUpdatesV2B then
-		local Success5, Result5 = pcall(Result1.GetEmotes, Result1)
+		local Success3, Result3 = pcall(Result.GetEmotes, Result)
 		
-		if Success5 then
-			config.Emotes = Result5
+		if Success3 then
+			config.Emotes = Result3
 		else
 			Count += 1
 		end
 	end
-	local Success6, Result6 = pcall(Result1.GetEquippedEmotes, Result1)
-	local Success7, Result7 = pcall(Result1.GetEmotes, Result1)
+	local Success4, Result4 = pcall(Result.GetEquippedEmotes, Result)
+	local Success5, Result5 = pcall(Result.GetEmotes, Result)
 	
-	if Success6 and Success7 then
-		local Success, Result = pcall(v3, Result7, Result6)
+	if Success4 and Success5 then
+		local Success6, Result6 = pcall(v3, Result5, Result4)
 		
-		if Success then
-			config.Emotes = Result
+		if Success6 then
+			config.Emotes = Result6
 			
 			if GetFFlagGetHumanoidDescriptionUpdatesV2EFunction() then
-				local Success4, Result4 = pcall(v4, Humanoid)
+				local Success7, Result7 = pcall(v4, Humanoid)
 				
-				if Success4 then
-					config.CurrentlyPlayingAnimationIds = Result4
+				if Success7 then
+					config.CurrentlyPlayingAnimationIds = Result7
 				else
 					Count += 1
 				end

@@ -1,9 +1,11 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
+local FoundationCloudAssetsModule = require(Parent.FoundationCloudAssets)
+local LocalizationModule = require(Parent.Localization)
 local ReactModule = require(Parent.React)
 local FeedMessageViewModule = require(Moments.Components.Feed.FeedMessageView)
 local UseIsPersonalizedFeedModule = require(Moments.Hooks.useIsPersonalizedFeed)
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local config = {
 	emptyTitle = "Feature.Moments.Label.FollowingEmptyTitle",
 	emptyBodyRecommended = "Feature.Moments.Description.FollowingEmptyBodyRecommended",
@@ -24,7 +26,7 @@ local config1 = {
 	caughtUpBody = "You've watched all the new Moments in this feed. Switch feeds to view more.",
 	caughtUpAction = "View other feed"
 }
-require(Parent.FoundationCloudAssets).preloadAsset("pictograms/magnifyglassperson")
+FoundationCloudAssetsModule.preloadAsset("pictograms/magnifyglassperson")
 
 return function(Frame)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), UseIsPersonalizedFeedModule (copy), config1 (copy), ReactModule (copy), FeedMessageViewModule (copy)

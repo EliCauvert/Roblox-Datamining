@@ -57,6 +57,7 @@ local function AboutDetailsSheetLegacy(_)
 		return p1.TopBar.statusBarHeight
 	end)
 	local SafeAreaSize = GetSafeAreaSizeFunction(UseScreenSizeResult, UseSelectorResult)
+	local XScale = (if FFlagProfilePlatformNewProfileHeader then if FFlagSwitchProfileWidthHookToSocialCommon then UseProfileCardWidthFunction() else UseProfileCardWidthModule(IsFormFactorMatch) else math.min(SafeAreaSize.X.Offset, ConstantsModule.MAXIMUM_CONTAINER_WIDTH)) / SafeAreaSize.X.Offset
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateBackFunction (upval)
 		if FFlagSignalsNavP3Dispatch then
@@ -69,7 +70,7 @@ local function AboutDetailsSheetLegacy(_)
 	end, { UseDispatchResult })
 	local config1 = {
 		position = UDim2.fromScale(1, 0),
-		size = UDim2.fromScale((if FFlagProfilePlatformNewProfileHeader then if FFlagSwitchProfileWidthHookToSocialCommon then UseProfileCardWidthFunction() else UseProfileCardWidthModule(IsFormFactorMatch) else math.min(SafeAreaSize.X.Offset, ConstantsModule.MAXIMUM_CONTAINER_WIDTH)) / SafeAreaSize.X.Offset, 1),
+		size = UDim2.fromScale(XScale, 1),
 		anchorPoint = Vector2.new(1, 0)
 	}
 	local UseMemoResult = ReactModule.useMemo(function()

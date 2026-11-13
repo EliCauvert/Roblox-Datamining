@@ -1,6 +1,7 @@
 ﻿local Songbird = script:FindFirstAncestor("Songbird")
 local CoreGui = game:GetService("CoreGui")
 local ReactModule = require(Songbird.Parent.React)
+local ReactUtilsModule = require(Songbird.Parent.ReactUtils)
 local ReactRobloxModule = require(Songbird.Parent.ReactRoblox)
 local FoundationModule = require(Songbird.Parent.Foundation)
 local CustomFoundationChipModule = require(Songbird.Components.CustomFoundationChip)
@@ -12,7 +13,7 @@ local GetFFlagSongDetailsPageDesignPassFunction = require(Songbird.Parent.Shared
 local UseLocalizationFunction = require(Songbird.Parent.Localization).Hooks.useLocalization
 local UseCallbackFunction = ReactModule.useCallback
 local UseStateFunction = ReactModule.useState
-local CreateNextOrderFunction = require(Songbird.Parent.ReactUtils).createNextOrder
+local CreateNextOrderFunction = ReactUtilsModule.createNextOrder
 
 return function(Frame)
 	-- upvalues: UseLocalizationFunction (copy), UseStateFunction (copy), CreateNextOrderFunction (copy), UseCallbackFunction (copy), SendAudioPlayerAnalyticsModule (copy), AnalyticActionsModule (copy), ReactModule (copy), FoundationModule (copy), GetFFlagSongDetailsPageDesignPassFunction (copy), CustomFoundationChipModule (copy), ReactRobloxModule (copy), ReportSongDialogModule (copy), CoreGui (copy)

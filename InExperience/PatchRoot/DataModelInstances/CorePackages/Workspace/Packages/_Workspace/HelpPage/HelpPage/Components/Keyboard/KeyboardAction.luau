@@ -5,13 +5,14 @@ local ReactModule = require(Parent1.React)
 local FoundationModule = require(Parent1.Foundation)
 local _ = require(Parent.Configs.ConfigTypes)
 local ExtraKeysEnumModule = require(Parent.Enums.ExtraKeysEnum)
+local LocalizationModule = require(Parent1.Localization)
 local ConstantsModule = require(Parent.Constants)
 local FFlagHelpPageCCLModule = require(Parent.Flags.FFlagHelpPageCCL)
 local UseLocalizedLabelsModule = require(Parent.Hooks.useLocalizedLabels)
 local View = FoundationModule.View
 local Text = FoundationModule.Text
 local UseTokensFunction = FoundationModule.Hooks.useTokens
-local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local KEYCODEORDER = ConstantsModule.HELP_PAGE.KEYCODE_ORDER
 
 local function getKeyCodeName(KeyCode)

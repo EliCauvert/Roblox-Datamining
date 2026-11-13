@@ -1,16 +1,20 @@
 ﻿local Parent = script:FindFirstAncestor("BuildExperiencePlaytestLaunch").Parent
 local CentralOverlayModule = require(Parent.CentralOverlay)
+local FoundationModule = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
+local NavigationModule = require(Parent.Navigation)
 local ReactModule = require(Parent.React)
 local RobloxAppEnumsModule = require(Parent.RobloxAppEnums)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local UseNavigationFunction = require(Parent.Navigation).useNavigation
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseNavigationFunction = NavigationModule.useNavigation
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local AppPage = RobloxAppEnumsModule.AppPage
 local CentralOverlayType = RobloxAppEnumsModule.CentralOverlayType
 local SetCentralOverlayFunction = CentralOverlayModule.Actions.SetCentralOverlay
 local CloseCentralOverlayFunction = CentralOverlayModule.Thunks.CloseCentralOverlay
-local DialogSize = require(Parent.Foundation).Enums.DialogSize
-local FFlagLuaAppPlaytestTrustedFriendsRefetchPlayability = require(Parent.SharedFlags).FFlagLuaAppPlaytestTrustedFriendsRefetchPlayability
+local DialogSize = FoundationModule.Enums.DialogSize
+local FFlagLuaAppPlaytestTrustedFriendsRefetchPlayability = SharedFlagsModule.FFlagLuaAppPlaytestTrustedFriendsRefetchPlayability
 
 return function(UserId, p1)
 	-- upvalues: UseDispatchFunction (copy), UseNavigationFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), DialogSize (copy), CloseCentralOverlayFunction (copy), AppPage (copy), FFlagLuaAppPlaytestTrustedFriendsRefetchPlayability (copy)

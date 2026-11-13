@@ -1,6 +1,7 @@
 ﻿local Parent = script:FindFirstAncestor("ApolloLocalState").Parent
 local CryoModule = require(Parent.Cryo)
 local FFlagUserProfilePlatformProfile = require(Parent.SharedFlags).FFlagUserProfilePlatformProfile
+local FFlagUserProfileMergeCachedNames = require(Parent.SharedFlags).FFlagUserProfileMergeCachedNames
 local MakeDefaultReadPolicyModule = require(script.Parent.utils.makeDefaultReadPolicy)
 
 local function mergeNames(_, p1, p2)
@@ -19,7 +20,7 @@ return {
 			read = if FFlagUserProfilePlatformProfile then nil else MakeDefaultReadPolicyModule("")
 		},
 		names = {
-			merge = if require(Parent.SharedFlags).FFlagUserProfileMergeCachedNames then mergeAllNames elseif FFlagUserProfilePlatformProfile then mergeNames else nil
+			merge = if FFlagUserProfileMergeCachedNames then mergeAllNames elseif FFlagUserProfilePlatformProfile then mergeNames else nil
 		}
 	}
 }

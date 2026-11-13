@@ -9,6 +9,7 @@ local RoactRoduxModule = require(Parent.RoactRodux)
 local LocalizationProvider = require(Parent.Localization).LocalizationProvider
 local AppStyleProvider = require(Parent.UIBlox).App.Style.AppStyleProvider
 local DesignTokenProvider = require(Parent.Dev.Style).DesignTokenProvider
+local ReactRobloxModule = require(Parent.Dev.ReactRoblox)
 local Localization = require(Parent.Dev.AppLocales).Localization
 local AppStyleProvider1 = require(Parent.Dev.Style).AppStyleProvider
 
@@ -28,7 +29,7 @@ local config2 = {
 return {
 	name = "AvatarExperienceCatalog",
 	roact = ReactModule,
-	reactRoblox = require(Parent.Dev.ReactRoblox),
+	reactRoblox = ReactRobloxModule,
 	mapStory = function(p1)
 		-- upvalues: config (copy), ReactModule (copy), LocalizationProvider (copy), Localization (copy), AppStyleProvider (copy), config2 (copy), AppStyleProvider1 (copy), RoactRoduxModule (copy), createStore (copy), DesignTokenProvider (copy), FoundationProvider (copy), config1 (copy)
 		return function(p2)

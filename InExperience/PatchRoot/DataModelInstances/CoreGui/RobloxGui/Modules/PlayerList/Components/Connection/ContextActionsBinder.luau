@@ -1,6 +1,7 @@
 ﻿local CorePackages = game:GetService("CorePackages")
 local ContextActionService = game:GetService("ContextActionService")
 local GuiService = game:GetService("GuiService")
+local RoactModule = require(CorePackages.Packages.Roact)
 local ReactModule = require(CorePackages.Packages.React)
 local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
 local PlayerListModule = require(CorePackages.Workspace.Packages.PlayerList)
@@ -10,7 +11,7 @@ local ClosePlayerDropDownModule = require(Parent.Actions.ClosePlayerDropDown)
 local FFlagPlayerListReduceRerendersModule = require(Parent.Flags.FFlagPlayerListReduceRerenders)
 local FFlagAddNewPlayerListMobileFocusNav = PlayerListModule.Flags.FFlagAddNewPlayerListMobileFocusNav
 local FFlagPlayerListUseMobileOnSmallDisplay = PlayerListModule.Flags.FFlagPlayerListUseMobileOnSmallDisplay
-local ContextActionsBinder = require(CorePackages.Packages.Roact).PureComponent:extend("ContextActionsBinder")
+local ContextActionsBinder = RoactModule.PureComponent:extend("ContextActionsBinder")
 local list = {
 	Enum.UserInputType.Gamepad1, Enum.UserInputType.Gamepad2,
 	Enum.UserInputType.Gamepad3, Enum.UserInputType.Gamepad4,

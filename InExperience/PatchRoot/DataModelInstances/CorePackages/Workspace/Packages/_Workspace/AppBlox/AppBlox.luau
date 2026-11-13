@@ -1,5 +1,6 @@
 ﻿local AnimateScrollViewToSelectionHelperModule = require(script.AnimateScrollViewToSelectionHelper)
 local SharedFlagsModule = require(script.Parent.SharedFlags)
+local FFlagUseAnimateScrollViewToSelectionHelper = SharedFlagsModule.FFlagUseAnimateScrollViewToSelectionHelper
 local FFlagLuaAppTextFeedbackFormModal = SharedFlagsModule.FFlagLuaAppTextFeedbackFormModal
 local _ = require(script.MediaGallery.MediaGalleryTypes)
 
@@ -19,7 +20,7 @@ return {
 	InsetBackground = require(script.InsetBackground),
 	Banner = require(script.Banner),
 	BannerBadge = require(script.Banner.BannerBadge),
-	AnimateScrollViewToSelectionHelper = if SharedFlagsModule.FFlagUseAnimateScrollViewToSelectionHelper then AnimateScrollViewToSelectionHelperModule else nil,
+	AnimateScrollViewToSelectionHelper = if FFlagUseAnimateScrollViewToSelectionHelper then AnimateScrollViewToSelectionHelperModule else nil,
 	ContentPosition = require(script.DetailsPage.ContentPosition),
 	DetailsPageLayout = require(script.DetailsPageLayout),
 	DetailsPageSelector = require(script.DetailsPage.DetailsPageSelector),

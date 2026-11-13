@@ -1,9 +1,10 @@
 ﻿local AppChat = script:FindFirstAncestor("AppChat")
 local Parent = AppChat.Parent
+local DataHydrationModule = require(Parent.DataHydration)
 local PresenceType = require(AppChat.Http.RoduxPresence).Enums.PresenceType
 local ComponentAssetsCircle25 = require(Parent.UIBlox).App.ImageSet.Images["component_assets/circle_25"]
 local FFlagAppChatPresenceStoreMigrationModule = require(AppChat.Flags.FFlagAppChatPresenceStoreMigration)
-local PresenceType1 = require(Parent.DataHydration).Presence.PresenceEnums.PresenceType
+local PresenceType1 = DataHydrationModule.Presence.PresenceEnums.PresenceType
 local UserPresenceText = {
 	[PresenceType.Offline] = "Common.Presence.Label.Offline",
 	[PresenceType.Online] = "Common.Presence.Label.Online",
@@ -29,7 +30,7 @@ local config1 = {
 	InStudio = ComponentAssetsCircle25
 }
 
-local function v10(p1)
+local function v11(p1)
 	-- upvalues: PresenceType (copy), UserPresenceText (copy)
 	local UserPresenceType = p1.userPresenceType
 	local LastLocation = p1.lastLocation
@@ -45,7 +46,7 @@ local function getUserPresenceTextFromStore(p1)
 	return if UserPresenceType == PresenceType1.Offline then config[PresenceType1.Offline] elseif UserPresenceType == PresenceType1.Online then config[PresenceType1.Online] elseif UserPresenceType == PresenceType1.InGame or UserPresenceType == PresenceType1.InStudio then if LastLocation and LastLocation ~= "" then tostring(LastLocation) else config[PresenceType1.Online] else ""
 end
 
-local function v12(p1, p2)
+local function v13(p1, p2)
 	-- upvalues: UserPresenceText (copy), PresenceType (copy), UserPresenceImage (copy)
 	local config = nil
 	if not p1 then
@@ -91,8 +92,8 @@ local function getUserDisplayPresenceFromStoreData(p1, p2)
 end
 
 return {
-	getUserDisplayPresence = if FFlagAppChatPresenceStoreMigrationModule then getUserDisplayPresenceFromStoreData else v12,
-	getUserPresenceText = if FFlagAppChatPresenceStoreMigrationModule then getUserPresenceTextFromStore else v10,
+	getUserDisplayPresence = if FFlagAppChatPresenceStoreMigrationModule then getUserDisplayPresenceFromStoreData else v13,
+	getUserPresenceText = if FFlagAppChatPresenceStoreMigrationModule then getUserPresenceTextFromStore else v11,
 	userPresenceImage = UserPresenceImage,
 	userPresenceText = UserPresenceText,
 	storePresenceImage = if FFlagAppChatPresenceStoreMigrationModule then config1 else nil,

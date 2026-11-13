@@ -1,11 +1,13 @@
 ﻿local GameTile = script:FindFirstAncestor("GameTile")
 local Parent = GameTile.Parent
+local LoggersModule = require(Parent.Loggers)
+local RobloxAppToastsRoduxModule = require(Parent.RobloxAppToastsRodux)
 local UserSignalsModule = require(Parent.UserSignals)
 local Default = require(Parent.LoggingProtocol).default
 local PostSendUserSignalFunction = UserSignalsModule.PostSendUserSignal
-local SetNetworkingErrorToastFunction = require(Parent.RobloxAppToastsRodux).Thunks.SetNetworkingErrorToast
+local SetNetworkingErrorToastFunction = RobloxAppToastsRoduxModule.Thunks.SetNetworkingErrorToast
 local UserSignalTypes = UserSignalsModule.UserSignalTypes
-local MutedErrorFunction = require(Parent.Loggers).mutedError
+local MutedErrorFunction = LoggersModule.mutedError
 local NotInterestedUserSignalTelemetryEventConfigsModule = require(GameTile.NotInterestedUserSignalTelemetryEventConfigs)
 
 return function(p1): boolean

@@ -1219,9 +1219,10 @@ return function(p1)
 			t2[Context] = true
 			local ChatWindowConfiguration = TextChatService1:FindFirstChildOfClass("ChatWindowConfiguration")
 			local ChatInputBarConfiguration = TextChatService1:FindFirstChildOfClass("ChatInputBarConfiguration")
+			local NoChatWindowConfiguration: boolean = not ChatWindowConfiguration or ChatWindowConfiguration.Enabled ~= false
 			local NoChatInputBarConfiguration: boolean = not ChatInputBarConfiguration or ChatInputBarConfiguration.Enabled ~= false
 			
-			if ChatWindowConfiguration and ChatWindowConfiguration.Enabled == false or not NoChatInputBarConfiguration then return end
+			if not NoChatWindowConfiguration or not NoChatInputBarConfiguration then return end
 			local Name = ""
 			
 			if Context == "global" then

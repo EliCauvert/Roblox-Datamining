@@ -18,13 +18,14 @@ local RequestsModule = require(VirtualEvents.requests)
 local _ = require(VirtualEvents.Parent.VirtualEventsState)
 local ConstantsModule = require(VirtualEvents.constants)
 local UseMutationFunction = require(VirtualEvents.Parent.ApolloClient).useMutation
+local Images = UIBloxModule.App.ImageSet.Images
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local UtilityActionIcon = UIBloxModule.App.Button.UtilityActionIcon
 local LoadableImage = UIBloxModule.App.Loading.LoadableImage
 local WithStyleFunction = UIBloxModule.Core.Style.withStyle
 local FocusNavigableSurfaceWrapper = FocusNavigationUtilsModule.FocusNavigableSurfaceWrapper
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local IconsNavigationCloseSmall = UIBloxModule.App.ImageSet.Images["icons/navigation/close_small"]
+local IconsNavigationCloseSmall = Images["icons/navigation/close_small"]
 
 local function OnClose() end
 

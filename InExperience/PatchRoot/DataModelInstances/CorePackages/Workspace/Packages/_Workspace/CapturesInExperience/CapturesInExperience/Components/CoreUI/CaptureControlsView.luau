@@ -18,6 +18,7 @@ local GalleryButtonContentModule = require(Parent.Components.CoreUI.GalleryButto
 local VideoCaptureControlModule = require(Parent.Components.CoreUI.VideoCaptureControl)
 local VoiceChatIndicatorModule = require(Parent.Components.CoreUI.VoiceChatIndicator)
 local CapturesContextModule = require(Parent.Context.CapturesContext)
+local CapturesPolicyModule = require(Parent.App.CapturesPolicy)
 local CarouselOpenedModule = require(Parent.Actions.CarouselOpened)
 local ConstantsModule = require(Parent.Constants)
 local EventNamesModule = require(Parent.Analytics.EventNames)
@@ -50,7 +51,7 @@ local config = {
 	[SnapDirectionModule.Top] = PopoverSide.Bottom
 }
 
-return (require(Parent.App.CapturesPolicy).connect(function(p1)
+return (CapturesPolicyModule.connect(function(p1)
 	-- upvalues: CaptureService (copy), DebugOverrideCaptureControlsVideoGuacPolicy (copy)
 	return {
 		hasVideoCaptureCapability = p1.hasVideoCaptureCapability() and CaptureService:CanCaptureVideo() or DebugOverrideCaptureControlsVideoGuacPolicy

@@ -1,15 +1,18 @@
 ﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
 local Parent = ProfilePlatform.Parent
 local ReactModule = require(Parent.React)
+local LocalizationModule = require(Parent.Localization)
+local NavigationModule = require(Parent.Navigation)
 local AppPage = require(Parent.RobloxAppEnums).AppPage
+local SocialLuaAnalyticsModule = require(Parent.SocialLuaAnalytics)
 local EnumsModule = require(ProfilePlatform.Common.Enums)
 local _ = require(ProfilePlatform.Common.Types)
 local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
 local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
 local UseProfileJsonComponentModule = require(ProfilePlatform.Hooks.useProfileJsonComponent)
-local UseNavigationFunction = require(Parent.Navigation).useNavigation
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
-local Contexts = require(Parent.SocialLuaAnalytics).Analytics.Enums.Contexts
+local UseNavigationFunction = NavigationModule.useNavigation
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
+local Contexts = SocialLuaAnalyticsModule.Analytics.Enums.Contexts
 
 return function(p1)
 	-- upvalues: UseNavigationFunction (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), EventNamesModule (copy), AppPage (copy), Contexts (copy)

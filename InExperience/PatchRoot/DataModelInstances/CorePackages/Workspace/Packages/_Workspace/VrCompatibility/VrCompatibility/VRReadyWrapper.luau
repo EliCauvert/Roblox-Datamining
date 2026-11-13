@@ -1,12 +1,13 @@
 ﻿local Parent = script.Parent.Parent
 local ReactModule = require(Parent.React)
 local RoactModule = require(Parent.Roact)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local Panel3D = require(Parent.UIBlox).Core.VR.Panel3D
 local UseIsFPSAtTargetFunction = require(Parent.SplashScreenManager).useIsFPSAtTarget
 local RoundedCornersFrameModule = require(script.Parent.RoundedCornersFrame)
 local Object = require(Parent.LuauPolyfill).Object
 local UseIsSpatialFunction = require(Parent.Responsive).useIsSpatial
-local GetFFlagEnableVRWrapperTransparencyFunction = require(Parent.SharedFlags).GetFFlagEnableVRWrapperTransparency
+local GetFFlagEnableVRWrapperTransparencyFunction = SharedFlagsModule.GetFFlagEnableVRWrapperTransparency
 local ROUNDEDCORNERRADIUS = require(script.Parent.Constants).ROUNDED_CORNER_RADIUS
 
 return function(p1)

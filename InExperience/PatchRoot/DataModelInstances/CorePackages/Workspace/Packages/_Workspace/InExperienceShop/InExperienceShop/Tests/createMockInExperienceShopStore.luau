@@ -21,11 +21,12 @@ return function()
 	local Signal9, Signal2_8 = SignalsModule.createSignal(0)
 	local Signal10, Signal2_9 = SignalsModule.createSignal(false)
 	local Signal11, Signal2_10 = SignalsModule.createSignal(nil)
-	local Signal12, Signal2_11 = SignalsModule.createSignal({})
-	local Signal13, Signal2_12 = SignalsModule.createSignal(ConstantsModule.MIN_COLUMNS)
-	local Signal14, Signal2_13 = SignalsModule.createSignal(false)
+	local Signal12, Signal2_11 = SignalsModule.createSignal(nil)
+	local Signal13, Signal2_12 = SignalsModule.createSignal({})
+	local Signal14, Signal2_13 = SignalsModule.createSignal(ConstantsModule.MIN_COLUMNS)
 	local Signal15, Signal2_14 = SignalsModule.createSignal(false)
-	local Signal16, Signal2_15 = SignalsModule.createSignal(nil)
+	local Signal16, Signal2_15 = SignalsModule.createSignal(false)
+	local Signal17, Signal2_16 = SignalsModule.createSignal(nil)
 	
 	return {
 		store = {
@@ -40,19 +41,20 @@ return function()
 			getTrialRedeemThumbnail = Signal8,
 			getTrialRedeemSuccessCount = Signal9,
 			getNotificationFreeTrialTopBarChip = Signal10,
-			getTrialRedemptionError = Signal11,
+			getPurchasedOwnedGamePass = Signal11,
+			getTrialRedemptionError = Signal12,
 			dismissTrialRedemptionError = function()
-				-- upvalues: Signal2_10 (copy)
-				Signal2_10(nil)
+				-- upvalues: Signal2_11 (copy)
+				Signal2_11(nil)
 			end,
-			getBonusPromotionEligibility = Signal12,
-			getItemsPerRow = Signal13,
-			getShouldOpenToRobuxTab = Signal14,
-			getOpenedFromBuyRobux = Signal15,
-			getPurchasedRobuxAmount = Signal16,
+			getBonusPromotionEligibility = Signal13,
+			getItemsPerRow = Signal14,
+			getShouldOpenToRobuxTab = Signal15,
+			getOpenedFromBuyRobux = Signal16,
+			getPurchasedRobuxAmount = Signal17,
 			dismissRobuxPurchaseSuccess = function()
-				-- upvalues: Signal2_15 (copy)
-				Signal2_15(nil)
+				-- upvalues: Signal2_16 (copy)
+				Signal2_16(nil)
 			end,
 			onShopOpened = Jest.fn(),
 			fetchAllShopData = Jest.fn(),
@@ -67,9 +69,9 @@ return function()
 			redeemGamePassTrial = Jest.fn(),
 			pollGamePassOwnership = Jest.fn(),
 			bonusGamePassIdForNativePurchase = Jest.fn(),
-			setItemsPerRow = Signal2_12,
-			setShouldOpenToRobuxTab = Signal2_13,
-			setOpenedFromBuyRobux = Signal2_14
+			setItemsPerRow = Signal2_13,
+			setShouldOpenToRobuxTab = Signal2_14,
+			setOpenedFromBuyRobux = Signal2_15
 		},
 		setCategories = Signal2,
 		setSections = Signal2_1,
@@ -82,9 +84,10 @@ return function()
 		setTrialRedeemThumbnail = Signal2_7,
 		setTrialRedeemSuccessCount = Signal2_8,
 		setNotificationFreeTrialTopBarChip = Signal2_9,
-		setTrialRedemptionError = Signal2_10,
-		setBonusPromotionEligibility = Signal2_11,
-		setItemsPerRow = Signal2_12,
-		setPurchasedRobuxAmount = Signal2_15
+		setPurchasedOwnedGamePass = Signal2_10,
+		setTrialRedemptionError = Signal2_11,
+		setBonusPromotionEligibility = Signal2_12,
+		setItemsPerRow = Signal2_13,
+		setPurchasedRobuxAmount = Signal2_16
 	}
 end

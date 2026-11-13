@@ -1,11 +1,13 @@
 ﻿local ShareSheet = script:FindFirstAncestor("ShareSheet")
 local Parent = ShareSheet.Parent
 local FoundationModule = require(Parent.Foundation)
+local FriendsCommonModule = require(Parent.FriendsCommon)
 local ReactModule = require(Parent.React)
+local SocialCommonModule = require(Parent.SocialCommon)
 local FFlagShareSheetDesktopReadinessModule = require(ShareSheet.Flags.FFlagShareSheetDesktopReadiness)
 local ShareSheetItemViewModule = require(script.Parent.ShareSheetItemView)
-local UseGetPresenceByUserIdFunction = require(Parent.FriendsCommon).Hooks.useGetPresenceByUserId
-local ConvertToFoundationPresenceEnumFunction = require(Parent.SocialCommon).Utils.convertToFoundationPresenceEnum
+local UseGetPresenceByUserIdFunction = FriendsCommonModule.Hooks.useGetPresenceByUserId
+local ConvertToFoundationPresenceEnumFunction = SocialCommonModule.Utils.convertToFoundationPresenceEnum
 
 return function(Frame)
 	-- upvalues: UseGetPresenceByUserIdFunction (copy), ConvertToFoundationPresenceEnumFunction (copy), FoundationModule (copy), ReactModule (copy), ShareSheetItemViewModule (copy), FFlagShareSheetDesktopReadinessModule (copy)

@@ -1,6 +1,7 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
 local FoundationModule = require(Parent.Foundation)
+local MomentsCommonModule = require(Parent.MomentsCommon)
 local ReactModule = require(Parent.React)
 local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
@@ -8,6 +9,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local _ = require(script.Parent.FeedTypes)
 local FeedMessageViewModule = require(script.Parent.FeedMessageView)
 local FFlagMomentsFeedErrorStateRedesignModule = require(Moments.Flags.FFlagMomentsFeedErrorStateRedesign)
+local FFlagMomentsParentTimeLimit = MomentsCommonModule.Flags.FFlagMomentsParentTimeLimit
 local FocusRoot = FocusNavigationUtilsModule.FocusRoot
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local Button = FoundationModule.Button
@@ -62,7 +64,7 @@ local function FeedErrorMessage(p1)
 end
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), config (copy), FFlagMomentsFeedErrorStateRedesignModule (copy), ReactModule (copy), CenteredOverlay (copy), FeedErrorMessage (copy), Text (copy), View (copy), Button (copy), FoundationModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), config (copy), FFlagMomentsFeedErrorStateRedesignModule (copy), ReactModule (copy), CenteredOverlay (copy), FeedErrorMessage (copy), Text (copy), FFlagMomentsParentTimeLimit (copy), View (copy), Button (copy), FoundationModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local Status = p1.status
 	
@@ -86,6 +88,11 @@ return function(p1)
 			Text = "No moments yet"
 		}),
 		Cta = p1.emptyContent
+	}) elseif FFlagMomentsParentTimeLimit and Status == "LimitReached" then ReactModule.createElement(View, {
+		tag = "col align-x-center align-y-center gap-medium size-full padding-xlarge bg-surface-0",
+		ZIndex = p1.zIndex
+	}, {
+		TimeLimit = ReactModule.createElement(require(script.Parent.Items.TimeLimit.MomentsTimeLimitContainer))
 	}) elseif p1.loadMoreFailed then ReactModule.createElement(View, {
 		tag = "col align-x-center align-y-bottom size-full padding-large",
 		ZIndex = p1.zIndex

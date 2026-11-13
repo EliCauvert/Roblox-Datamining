@@ -11,12 +11,13 @@ local ConstantsModule = require(Parent.Resources.Constants)
 local WithLocalizationModule = require(Parent.Localization.withLocalization)
 local InfoDialogModule = require(Parent.Components.InfoDialog)
 local FocusHandlerModule = require(script.Parent.Parent.Connection.FocusHandler)
-local ReportSentDialog = Roact.PureComponent:extend("ReportSentDialog")
-ReportSentDialog.validateProps = T.strictInterface({
+local StrictInterfaceResult = T.strictInterface({
 	isReportSentOpen = T.boolean,
 	onDismiss = T.callback,
 	inputType = T.optional(T.string)
 })
+local ReportSentDialog = Roact.PureComponent:extend("ReportSentDialog")
+ReportSentDialog.validateProps = StrictInterfaceResult
 
 function ReportSentDialog.init(p1)
 	-- upvalues: Roact (copy)

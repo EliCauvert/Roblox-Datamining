@@ -18,6 +18,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
 local UseTextSizeOffsetFunction = FoundationModule.Hooks.useTextSizeOffset
 local ConstantsModule = require(AppChat.Constants)
+local FFlagAppChatGenericShareLinkPreviewModule = require(AppChat.Flags.FFlagAppChatGenericShareLinkPreview)
 local GetGroupCornerRadiiModule = require(AppChat.Components.ChatConversation.Grouping.getGroupCornerRadii)
 local LoadFoundationCloudAssetModule = require(AppChat.Utils.loadFoundationCloudAsset)
 local Status = require(script.Parent.AssetCardTypes).Status
@@ -47,9 +48,9 @@ local function ErrorContent(p1)
 end
 
 local function Media(Frame)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Image (copy), Frozen (copy), Icon (copy), IconSize (copy)
+	-- upvalues: UseTokensFunction (copy), FFlagAppChatGenericShareLinkPreviewModule (copy), ReactModule (copy), View (copy), Image (copy), Frozen (copy), Icon (copy), IconSize (copy)
 	local UseTokensResult = UseTokensFunction()
-	local PictogramScale = if Frame.isPictogram then Frame.pictogramScale or 0.66 else 1
+	local PictogramScale = if Frame.isPictogram then Frame.pictogramScale or 0.66 else FFlagAppChatGenericShareLinkPreviewModule and Frame.imageScale or 1
 	
 	return ReactModule.createElement(View, {
 		tag = "bg-shift-200",
@@ -230,7 +231,7 @@ local function ActionButton(Frame: Frame)
 end
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: UseTokensFunction (copy), UseScaledValueFunction (copy), ConstantsModule (copy), Status (copy), GetGroupCornerRadiiModule (copy), ReactModule (copy), View (copy), ErrorContent (copy), Media (copy), Title (copy), Subtitle (copy), GameStats (copy), ActionButton (copy)
+	-- upvalues: UseTokensFunction (copy), UseScaledValueFunction (copy), ConstantsModule (copy), Status (copy), GetGroupCornerRadiiModule (copy), ReactModule (copy), View (copy), ErrorContent (copy), Media (copy), FFlagAppChatGenericShareLinkPreviewModule (copy), Title (copy), Subtitle (copy), GameStats (copy), ActionButton (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseScaledValueResult = UseScaledValueFunction(ConstantsModule.AssetCard.WIDTH)
 	local Size500 = UseTokensResult.Size.Size_500
@@ -264,6 +265,7 @@ return ReactModule.memo(function(Frame)
 			aspectRatio = Media1.aspectRatio,
 			isPictogram = Media1.isPictogram == true,
 			pictogramScale = Media1.pictogramScale,
+			imageScale = if FFlagAppChatGenericShareLinkPreviewModule then Media1.imageScale else nil,
 			overlayIcon = Media1.overlayIcon,
 			onActivated = Media1.onActivated,
 			isDisabled = not IsStatusMatch,

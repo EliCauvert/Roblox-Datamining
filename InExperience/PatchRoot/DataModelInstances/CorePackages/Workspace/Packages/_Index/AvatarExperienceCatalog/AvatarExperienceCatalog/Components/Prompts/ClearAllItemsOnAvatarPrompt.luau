@@ -3,6 +3,7 @@ local Parent = AvatarExperienceCatalog.Parent
 local ReactModule = require(Parent.React)
 local RoactNavigationModule = require(Parent.RoactNavigation)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local WithMappedNavigationParamsFunction = require(Parent.AvatarExperienceNavigation).withMappedNavigationParams
 local AXPartialPageModal = require(Parent.AvatarExperienceCommon).Components.AXPartialPageModal
 local FoundationModule = require(Parent.Foundation)
 local View = FoundationModule.View
@@ -12,7 +13,7 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local InputSize = FoundationModule.Enums.InputSize
 local UseMultiItemShoppingFtuxModule = require(AvatarExperienceCatalog.Hooks.useMultiItemShoppingFtux)
 
-return (require(Parent.AvatarExperienceNavigation).withMappedNavigationParams(function(p1)
+return (WithMappedNavigationParamsFunction(function(p1)
 	-- upvalues: UseLocalizationFunction (copy), UseMultiItemShoppingFtuxModule (copy), ReactModule (copy), RoactNavigationModule (copy), View (copy), Text (copy), Checkbox (copy), InputSize (copy), AXPartialPageModal (copy), ButtonVariant (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		confirmButtonText = "Feature.Avatar.Action.Clear",

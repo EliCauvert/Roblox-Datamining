@@ -6,13 +6,14 @@ local LocalizationModule = require(Parent.Localization)
 local PlaceVersionHistoryModule = require(Parent.DataHydration.PlaceVersionHistory)
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
+local TimeModule = require(Parent.Time)
 local FFlagBuildEventsUpdate1Module = require(BuildExperience.Flags.FFlagBuildEventsUpdate1)
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local LaunchExperienceModule = require(Parent.BuildExperiencePlaytestLaunch.launchExperience)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 local VersionHistoryUtilsModule = require(script.Parent.Parent.VersionHistoryUtils)
 local _ = require(script.Parent.LiveVersionCardView)
-local DateHelper = require(Parent.Time).DateHelper
+local DateHelper = TimeModule.DateHelper
 local UseAbbreviatedNumberLocalizationFunction = LocalizationModule.Hooks.useAbbreviatedNumberLocalization
 local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 
@@ -59,7 +60,7 @@ return function(p1)
 	local v3 = ""
 	
 	if PlaceVersion then
-		v1, v2, v26 = VersionHistoryUtilsModule.getCreatedDateParts(PlaceVersion.createdTime)
+		v1, v2, v27 = VersionHistoryUtilsModule.getCreatedDateParts(PlaceVersion.createdTime)
 	end
 	local UseLocalizationResult = UseLocalizationFunction({
 		createdDate = {

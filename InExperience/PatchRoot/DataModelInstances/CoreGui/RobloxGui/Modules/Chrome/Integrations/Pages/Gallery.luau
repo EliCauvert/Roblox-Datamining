@@ -5,20 +5,20 @@ local CommonIconModule = require(Chrome.Integrations.CommonIcon)
 local CapturesPolicy = require(CorePackages.Workspace.Packages.CapturesInExperience).CapturesPolicy
 local SideSheetPlacement = require(CorePackages.Workspace.Packages.Chrome).Enums.SideSheetPlacement
 local IsSpatialFunction = require(CorePackages.Workspace.Packages.AppCommonLib).isSpatial
+local IsInExperienceUIVREnabled = require(CorePackages.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
 local FFlagFixSpatialUICaptures = require(CorePackages.Workspace.Packages.SharedFlags).FFlagFixSpatialUICaptures
 local UpdateGalleryIcon = game:DefineFastFlag("UpdateGalleryIcon", false)
 local InGameMenuIntegrationUtilsModule = require(script.Parent.InGameMenuIntegrationUtils)
 local ReadResult = CapturesPolicy.PolicyImplementation.read()
-local FFlagFixSpatialUICaptures1 = require(CorePackages.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled and FFlagFixSpatialUICaptures
-local NoFFlagFixSpatialUICaptures1: boolean = (if ReadResult then CapturesPolicy.Mapper(ReadResult).eligibleForCapturesFeature() else false) and (not FFlagFixSpatialUICaptures1 or not IsSpatialFunction())
+local Inverted: boolean = (if ReadResult then CapturesPolicy.Mapper(ReadResult).eligibleForCapturesFeature() else false) and (not (IsInExperienceUIVREnabled and FFlagFixSpatialUICaptures) or not IsSpatialFunction())
 
-if NoFFlagFixSpatialUICaptures1 then
+if Inverted then
 	local CapturesPage = InGameMenuIntegrationUtilsModule.createPageOpenSignal("CapturesPage")
 	
 	return ServiceModule:register({
 		id = "gallery",
 		label = "Feature.Captures.Title.Gallery",
-		initialAvailability = if NoFFlagFixSpatialUICaptures1 then ServiceModule.AvailabilitySignal.Available else ServiceModule.AvailabilitySignal.Unavailable,
+		initialAvailability = if Inverted then ServiceModule.AvailabilitySignal.Available else ServiceModule.AvailabilitySignal.Unavailable,
 		sideSheetPlacement = SideSheetPlacement.BelowFold,
 		activated = function(_)
 			-- upvalues: InGameMenuIntegrationUtilsModule (copy), CapturesPage (copy)

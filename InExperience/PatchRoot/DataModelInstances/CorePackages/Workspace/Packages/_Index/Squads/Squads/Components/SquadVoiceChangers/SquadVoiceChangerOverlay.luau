@@ -1,10 +1,11 @@
 ﻿local Squads = script:FindFirstAncestor("Squads")
 local Parent = Squads.Parent
 local FFlagSquadsEnableFoundationTestIdsModule = require(Squads.Flags.FFlagSquadsEnableFoundationTestIds)
+local DependenciesModule = require(Squads.dependencies)
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local CryoModule = require(Parent.Cryo)
-local UseNavigationFunction = require(Squads.dependencies).useNavigation
+local UseNavigationFunction = DependenciesModule.useNavigation
 local SquadVoiceChangersModule = require(script.Parent.SquadVoiceChangers)
 local config = {
 	fillListWithExtraVoicePacks = false,

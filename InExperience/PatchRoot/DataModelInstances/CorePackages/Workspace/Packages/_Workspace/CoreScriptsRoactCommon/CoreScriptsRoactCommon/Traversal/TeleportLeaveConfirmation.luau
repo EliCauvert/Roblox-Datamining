@@ -1,5 +1,6 @@
 ﻿local Parent = script:FindFirstAncestor("CoreScriptsRoactCommon").Parent
 local FoundationModule = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
 local ReactModule = require(Parent.React)
 local TeleportBackModule = require(script.Parent.TeleportBack)
 local TraversalTelemetryModule = require(script.Parent.TraversalTelemetry)
@@ -7,7 +8,7 @@ local Dialog = FoundationModule.Dialog
 local DialogSize = FoundationModule.Enums.DialogSize
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local Orientation = FoundationModule.Enums.Orientation
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), TraversalTelemetryModule (copy), TeleportBackModule (copy), Dialog (copy), DialogSize (copy), Orientation (copy), ButtonVariant (copy)

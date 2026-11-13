@@ -1,11 +1,12 @@
 ﻿local Parent = script:FindFirstAncestor("ExpChat").Parent
+local SignalsModule = require(Parent.Signals)
 local ExpChatSharedModule = require(Parent.ExpChatShared)
 local CreateChatTooltipStoreModule = require(script.createChatTooltipStore)
 local PromptsApiModule = require(script.promptsApi)
 local FFlagExpChatPresetChatEnabled = ExpChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
 local FFlagExpChatUseUnifiedTooltipStore = ExpChatSharedModule.Flags.FFlagExpChatUseUnifiedTooltipStore
 
-return require(Parent.Signals).createComputed(function()
+return SignalsModule.createComputed(function()
 	-- upvalues: CreateChatTooltipStoreModule (copy), FFlagExpChatUseUnifiedTooltipStore (copy), PromptsApiModule (copy), FFlagExpChatPresetChatEnabled (copy)
 	local ChatTooltipStoreModule = CreateChatTooltipStoreModule()
 	

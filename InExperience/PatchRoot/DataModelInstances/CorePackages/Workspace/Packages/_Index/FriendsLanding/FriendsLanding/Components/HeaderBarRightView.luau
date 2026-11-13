@@ -1,6 +1,7 @@
 ﻿local FriendsLanding = script:FindFirstAncestor("FriendsLanding")
 local Parent = FriendsLanding.Parent
 local DependenciesModule = require(FriendsLanding.dependencies)
+local SocialLibraries = DependenciesModule.SocialLibraries
 local Roact = DependenciesModule.Roact
 local UIBlox = DependenciesModule.UIBlox
 local FriendsLandingContextModule = require(FriendsLanding.FriendsLandingContext)
@@ -11,12 +12,12 @@ local MemoizeFunction = DependenciesModule.memoize
 local IconButton = UIBlox.App.Button.IconButton
 local Images = UIBlox.App.ImageSet.Images
 local ButtonClickEventsModule = require(FriendsLanding.FriendsLandingAnalytics.ButtonClickEvents)
-local ComposeFunction = DependenciesModule.SocialLibraries.RoduxTools.compose
+local ComposeFunction = SocialLibraries.RoduxTools.compose
 local Sources = require(Parent.SocialLuaAnalytics).Analytics.Enums.Sources
 local AppPage = require(Parent.RobloxAppEnums).AppPage
 local FFlagConnectionManagementChips = require(Parent.SharedFlags).FFlagConnectionManagementChips
 
-local function v15(p1)
+local function v16(p1)
 	-- upvalues: Roact (copy), IconButton (copy), Images (copy)
 	return Roact.createElement(IconButton, {
 		size = UDim2.fromOffset(0, 0),
@@ -65,7 +66,7 @@ function HeaderBarRightView.init(p1)
 end
 
 function HeaderBarRightView.render(p1)
-	-- upvalues: config (copy), EnumScreensModule (copy), Roact (copy), v15 (copy), AddFriendsIconModule (copy), FFlagConnectionManagementChips (copy)
+	-- upvalues: config (copy), EnumScreensModule (copy), Roact (copy), v16 (copy), AddFriendsIconModule (copy), FFlagConnectionManagementChips (copy)
 	local Navigation = p1.props.navigation
 	local SHOWSEARCHFRIENDSICONEntry = nil
 	local SHOWADDFRIENDSICONEntry = nil
@@ -88,7 +89,7 @@ function HeaderBarRightView.render(p1)
 			HorizontalAlignment = Enum.HorizontalAlignment.Right,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}),
-		SearchFriendsIcon = SHOWSEARCHFRIENDSICONEntry and v15({
+		SearchFriendsIcon = SHOWSEARCHFRIENDSICONEntry and v16({
 			layoutOrder = 1,
 			goToSearchFriendsPage = p1.goToSearchFriendsPage()
 		}),

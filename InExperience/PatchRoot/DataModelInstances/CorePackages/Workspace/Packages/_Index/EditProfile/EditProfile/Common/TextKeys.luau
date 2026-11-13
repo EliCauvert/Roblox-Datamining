@@ -1,5 +1,7 @@
 ﻿return {
 	About = "CommonUI.Features.Label.About",
+	Bio = "Feature.Profile.Label.About",
+	EditBio = "Feature.EditUserBio.Label.Title",
 	AboutModalCaption = "Feature.Profile.Description.AboutModalCaption",
 	AboutPlaceholder = "Feature.Profile.Label.AboutPlaceholder",
 	Buy = "Feature.Catalog.Action.Buy",

@@ -1,4 +1,4 @@
-﻿local _ = game:GetService("Players")
+﻿local Players = game:GetService("Players")
 local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
 local VoiceChatService = game:GetService("VoiceChatService")
 local SoundService = game:GetService("SoundService")
@@ -10,6 +10,7 @@ local DebugLogVoiceDefault = game:DefineFastFlag("DebugLogVoiceDefault", false)
 local FFlagUseAudioDeviceInputAddedSignal = require(CorePackages.Workspace.Packages.SharedFlags).FFlagUseAudioDeviceInputAddedSignal
 local AudioInstanceAddedApiEnabledEngineFeature = game:GetEngineFeature("AudioInstanceAddedApiEnabled")
 local FFlagExpChatDictation = require(CorePackages.Workspace.Packages.SharedFlags).FFlagExpChatDictation
+local AvatarChatServicePlayerClientFeaturesResolvedEngineFeature = require(CorePackages.Workspace.Packages.SharedFlags).FFlagFaeEnablesVoiceDevice and game:GetEngineFeature("AvatarChatServicePlayerClientFeaturesResolved")
 
 local function log(...)
 	-- upvalues: DebugLogVoiceDefault (copy)
@@ -104,64 +105,64 @@ local _ = function(Object)
 	return Object:IsDescendantOf(CoreGui)
 end
 
-local function trackDevice(Key)
+local function trackDevice(AudioDeviceInput)
 	-- upvalues: FFlagExpChatDictation (copy), CoreGui (copy), t (copy), t1 (copy), log (copy), trackDevice (copy)
-	if FFlagExpChatDictation and Key:IsDescendantOf(CoreGui) then return end
-	local Player = Key.Player
+	if FFlagExpChatDictation and AudioDeviceInput:IsDescendantOf(CoreGui) then return end
+	local Player = AudioDeviceInput.Player
 	
 	if Player then
 		local Entry = t[Player]
 		local config = nil
 		
 		if Entry == nil then
-			config = { [Key] = true }
+			config = { [AudioDeviceInput] = true }
 		else
-			Entry[Key] = true
+			Entry[AudioDeviceInput] = true
 			config = Entry
 		end
 		t[Player] = config
 	end
 	local Player1 = Player
-	t1[Key] = {
-		onPlayerChanged = Key:GetPropertyChangedSignal("Player"):Connect(function()
-			-- upvalues: Key (copy), Player1 (ref), t (upval), t1 (upval), log (upval), trackDevice (upval)
+	t1[AudioDeviceInput] = {
+		onPlayerChanged = AudioDeviceInput:GetPropertyChangedSignal("Player"):Connect(function()
+			-- upvalues: AudioDeviceInput (copy), Player1 (ref), t (upval), t1 (upval), log (upval), trackDevice (upval)
 			local Player = Player1
 			
 			if Player then
 				local Entry = t[Player]
 				
 				if Entry then
-					Entry[Key] = nil
+					Entry[AudioDeviceInput] = nil
 				end
 			end
-			local Entry1 = t1[Key]
+			local Entry1 = t1[AudioDeviceInput]
 			
 			if Entry1 then
 				Entry1.onPlayerChanged:Disconnect()
-				t1[Key] = nil
+				t1[AudioDeviceInput] = nil
 			else
 				log("Attempting to remove connections from untracked AudioDeviceInput")
 			end
-			Player1 = Key.Player
-			trackDevice(Key)
+			Player1 = AudioDeviceInput.Player
+			trackDevice(AudioDeviceInput)
 		end)
 	}
-	Key.Destroying:Connect(function()
-		-- upvalues: Key (copy), t (upval), t1 (upval), log (upval)
-		local Player = Key.Player
+	AudioDeviceInput.Destroying:Connect(function()
+		-- upvalues: AudioDeviceInput (copy), t (upval), t1 (upval), log (upval)
+		local Player = AudioDeviceInput.Player
 		
 		if Player then
 			local Entry = t[Player]
 			
 			if Entry then
-				Entry[Key] = nil
+				Entry[AudioDeviceInput] = nil
 			end
 		end
-		local Entry1 = t1[Key]
+		local Entry1 = t1[AudioDeviceInput]
 		
 		if Entry1 then
 			Entry1.onPlayerChanged:Disconnect()
-			t1[Key] = nil
+			t1[AudioDeviceInput] = nil
 			
 			return
 		else
@@ -208,13 +209,73 @@ local function createAudioDevice(Player: Player)
 	log("Creating device for ", Player.Name)
 end
 
+local function createDefaultVoiceDevice(Player: Player)
+	-- upvalues: CharacterAddedConnections (copy), trackDevice (copy), addEmitterToHead (copy), log (copy)
+	local CharacterAddedConnection = CharacterAddedConnections[Player]
+	
+	if CharacterAddedConnection then
+		CharacterAddedConnection:Disconnect()
+	end
+	local AudioDeviceInput = Instance.new("AudioDeviceInput")
+	AudioDeviceInput.Player = Player
+	AudioDeviceInput.Parent = Player
+	AudioDeviceInput.Active = false
+	trackDevice(AudioDeviceInput)
+	
+	if Player.Character then
+		local Character = Player.Character
+		local AddEmitterToHeadResult = addEmitterToHead(Character)
+		log("Hooking input device to emitter", Character, AudioDeviceInput, AddEmitterToHeadResult)
+		local Wire = Instance.new("Wire")
+		Wire.Parent = AddEmitterToHeadResult
+		Wire.SourceInstance = AudioDeviceInput
+		Wire.TargetInstance = AddEmitterToHeadResult
+	end
+	CharacterAddedConnections[Player] = Player.CharacterAdded:Connect(function(Character)
+		-- upvalues: AudioDeviceInput (copy), addEmitterToHead (upval), log (upval)
+		local AddEmitterToHeadResult = addEmitterToHead(Character)
+		log("Hooking input device to emitter", Character, AudioDeviceInput, AddEmitterToHeadResult)
+		local Wire = Instance.new("Wire")
+		Wire.Parent = AddEmitterToHeadResult
+		Wire.SourceInstance = AudioDeviceInput
+		Wire.TargetInstance = AddEmitterToHeadResult
+	end)
+	log("Creating device for ", Player.Name)
+end
+
+local function playerHasDevice(p1): boolean
+	-- upvalues: t (copy)
+	local Entry = t[p1]
+	
+	return Entry ~= nil and next(Entry) ~= nil
+end
+
 if VoiceChatService.UseNewAudioApi then
 	log("Using new Audio API, EnableDefaultVoice: ", VoiceChatService.EnableDefaultVoice)
 	
 	if VoiceChatService.EnableDefaultVoice then
-		local Players = game:GetService("Players")
-		Players.PlayerAdded:Connect(createAudioDevice)
-		Players.PlayerRemoving:Connect(function(Player)
+		local Players1 = game:GetService("Players")
+		local Callback: (any) -> () = nil
+		
+		if AvatarChatServicePlayerClientFeaturesResolvedEngineFeature then
+			Callback = require(CoreGui:WaitForChild("RobloxGui").Modules.Server.createDefaultVoiceDeviceRequester)({
+				isVoiceEnabledAsync = function(Player)
+					-- upvalues: VoiceChatService (copy)
+					return VoiceChatService:IsVoiceEnabledForUserIdAsync(Player.UserId)
+				end,
+				playerHasDevice = playerHasDevice,
+				isPlayerInGame = function(p1): boolean
+					-- upvalues: Players (copy)
+					return p1.Parent == Players
+				end,
+				createDevice = createDefaultVoiceDevice,
+				log = log
+			})
+			Players1.PlayerAdded:Connect(Callback)
+		else
+			Players1.PlayerAdded:Connect(createAudioDevice)
+		end
+		Players1.PlayerRemoving:Connect(function(Player)
 			-- upvalues: t (copy), CharacterAddedConnections (copy), log (copy)
 			local Entry = t[Player]
 			local CharacterAddedConnection = CharacterAddedConnections[Player]
@@ -228,8 +289,23 @@ if VoiceChatService.UseNewAudioApi then
 			end
 		end)
 		
-		for _, player in Players:GetPlayers() do
-			createAudioDevice(player)
+		if AvatarChatServicePlayerClientFeaturesResolvedEngineFeature then
+			AvatarChatService.PlayerClientFeaturesResolved:Connect(function(p1, Mask)
+				-- upvalues: AvatarChatService (copy), log (copy), Callback (ref)
+				local IsEnabled = AvatarChatService:IsEnabled(Mask, Enum.AvatarChatServiceFeature.UserAudio)
+				log("Client features resolved for", p1.Name, "UserAudio enabled:", IsEnabled)
+				
+				if IsEnabled then
+					Callback(p1)
+				end
+			end)
+		end
+		for _, player in Players1:GetPlayers() do
+			if AvatarChatServicePlayerClientFeaturesResolvedEngineFeature then
+				Callback(player)
+			else
+				createAudioDevice(player)
+			end
 		end
 	end
 	local SetUserActive = Instance.new("RemoteEvent")

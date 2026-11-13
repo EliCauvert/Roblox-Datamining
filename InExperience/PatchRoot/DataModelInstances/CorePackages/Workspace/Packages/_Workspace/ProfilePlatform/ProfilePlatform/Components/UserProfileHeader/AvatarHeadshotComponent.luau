@@ -35,6 +35,7 @@ return function(p1)
 	local UseDynamicSizeMarginModuleResult, UseDynamicSizeMarginModuleResult2 = UseDynamicSizeMarginModule()
 	local UserId = p1.userId
 	local IsUserIdMatch = UserId == tostring((UseLocalUserIdFunction()))
+	local ConvertToFoundationPresenceEnumResult = if IsUserIdMatch or not p1.userPresenceType then nil else ConvertToFoundationPresenceEnumFunction(p1.userPresenceType)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
 		usernameCopied = TextKeysModule.UsernameCopied,
@@ -86,7 +87,7 @@ return function(p1)
 			contextualInfo = if FFlagAddPlatformNameToProfileHeader then p1.platformName else nil,
 			contextualInfoIcon = if FFlagAddPlatformNameToProfileHeader then UseMemoResult else nil,
 			layoutMode = LayoutMode.wide,
-			userPresenceType = if IsUserIdMatch or not p1.userPresenceType then nil else ConvertToFoundationPresenceEnumFunction(p1.userPresenceType),
+			userPresenceType = ConvertToFoundationPresenceEnumResult,
 			titleStyle = UseTokensResult.Typography.HeadingSmall,
 			subtitleStyle = UseTokensResult.Typography.BodyMedium,
 			onSubtitleClicked = if IsUsePreferredInputResultMatch then nil else UseResult1,

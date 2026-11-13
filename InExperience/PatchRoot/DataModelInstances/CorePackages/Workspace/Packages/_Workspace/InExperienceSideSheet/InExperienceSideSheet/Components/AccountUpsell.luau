@@ -2,6 +2,7 @@
 local Parent = InExperienceSideSheet.Parent
 local _ = require(Parent.Chrome)
 local FoundationModule = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
 local ReactModule = require(Parent.React)
 local Icon = FoundationModule.Icon
 local Text = FoundationModule.Text
@@ -9,7 +10,7 @@ local View = FoundationModule.View
 local IconName = FoundationModule.Enums.IconName
 local IconVariant = FoundationModule.Enums.IconVariant
 local UseTokensFunction = FoundationModule.Hooks.useTokens
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local AnalyticsConstantsModule = require(InExperienceSideSheet.Analytics.AnalyticsConstants)
 local SidesheetAnalyticsModule = require(InExperienceSideSheet.Analytics.SidesheetAnalytics)
 local ClosePeoplePageOpenedWithSideSheetModule = require(InExperienceSideSheet.Utils.closePeoplePageOpenedWithSideSheet)

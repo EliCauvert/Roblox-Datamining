@@ -1,10 +1,12 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local SignalsReactModule = require(Parent.SignalsReact)
 local UseNavigationFocusFunction = require(Parent.Navigation).useNavigationFocus
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseSignalStateFunction = SignalsReactModule.useSignalState
 local UseMomentsTabIsVisibleModule = require(Moments.Hooks.useMomentsTabIsVisible)
 local GetMomentsPreferencesStoreModule = require(Moments.Stores.GetMomentsPreferencesStore)
-local FeedPlaybackSuspension = require(Parent.MomentsCommon).Media.feedPlaybackSuspension
+local FeedPlaybackSuspension = MomentsCommonModule.Media.feedPlaybackSuspension
 
 return function(): boolean
 	-- upvalues: UseNavigationFocusFunction (copy), UseMomentsTabIsVisibleModule (copy), UseSignalStateFunction (copy), FeedPlaybackSuspension (copy), GetMomentsPreferencesStoreModule (copy)

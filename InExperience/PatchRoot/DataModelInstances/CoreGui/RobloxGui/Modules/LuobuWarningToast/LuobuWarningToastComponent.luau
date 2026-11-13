@@ -3,10 +3,11 @@ local RoactModule = require(CorePackages.Packages.Roact)
 local UIBloxModule = require(CorePackages.Packages.UIBlox)
 local Images = UIBloxModule.App.ImageSet.Images
 local Toast = UIBloxModule.App.Dialog.Toast
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
 local ContentProvider = game:GetService("ContentProvider")
 local RenderWithCoreScriptsStyleProviderModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Common.renderWithCoreScriptsStyleProvider)
 local LuobuWarningToastComponent = RoactModule.PureComponent:extend("LuobuWarningToastComponent")
-local InGameCommonUIMessageLuobuGameJoinWarning = require(CorePackages.Workspace.Packages.RobloxTranslator):FormatByKey("InGame.CommonUI.Message.LuobuGameJoinWarning")
+local InGameCommonUIMessageLuobuGameJoinWarning = RobloxTranslatorModule:FormatByKey("InGame.CommonUI.Message.LuobuGameJoinWarning")
 
 function LuobuWarningToastComponent.init(p1)
 	-- upvalues: Images (copy), ContentProvider (copy), InGameCommonUIMessageLuobuGameJoinWarning (copy)

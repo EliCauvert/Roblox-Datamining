@@ -1,12 +1,13 @@
 ﻿local Parent = script.Parent.Parent.Parent
 local Parent1 = Parent.Parent
 local ReactModule = require(Parent1.React)
+local RoactUtilsModule = require(Parent1.RoactUtils)
 local ConstantsModule = require(Parent.Constants)
 local PromptConnectionsModule = require(Parent.Components.CaptureService.PromptConnections)
 local PromptTypeModule = require(Parent.Enums.PromptType)
 local CapturePermissionsPromptV2Module = require(Parent.Components.CaptureService.CapturePermissionsPromptV2)
 local _ = require(Parent.Types)
-local UseSelectorFunction = require(Parent1.RoactUtils).Hooks.RoactRodux.useSelector
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
 local config = {
 	[PromptTypeModule.SaveCaptures] = require(Parent.Components.CaptureService.SaveCapturesPrompt),
 	[PromptTypeModule.ShareCapture] = require(Parent.Components.CaptureService.ShareCapturePrompt)

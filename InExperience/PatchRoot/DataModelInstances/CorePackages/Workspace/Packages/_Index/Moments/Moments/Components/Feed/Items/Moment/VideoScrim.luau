@@ -1,10 +1,12 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
+local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
 local GetColorStyleWithTransparencyModule = require(Moments.Utils.getColorStyleWithTransparency)
 local MomentContextModule = require(script.Parent.MomentContext)
-local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseSignalStateFunction = SignalsReactModule.useSignalState
 
 return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), MomentContextModule (copy), UseSignalStateFunction (copy), GetColorStyleWithTransparencyModule (copy), ReactModule (copy)

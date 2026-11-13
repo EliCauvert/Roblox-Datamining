@@ -1,8 +1,9 @@
 ﻿local UserInputService = game:GetService("UserInputService")
 local Parent = script:FindFirstAncestor("ToastNotification").Parent
 local ReactModule = require(Parent.React)
+local AppShortcutBarModule = require(Parent.AppShortcutBar)
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
-local IconWithHoldAnimation = require(Parent.AppShortcutBar).IconWithHoldAnimation
+local IconWithHoldAnimation = AppShortcutBarModule.IconWithHoldAnimation
 
 return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), IconWithHoldAnimation (copy), UserInputService (copy)

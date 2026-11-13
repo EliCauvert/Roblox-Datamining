@@ -95,19 +95,24 @@ return function(p1)
 	local Ceiled: number = if Entry then math.ceil(OverlayEdit.textOverlayStyle.fontSize * Entry) else 0
 	local NoSize = if p1.fitToContent == nil then p1.size == nil else p1.fitToContent
 	local Ceiled1 = 0
-	local Offset = 0
+	local Offset1 = 0
 	
 	if FFlagMomentsTextOverlayV2RedesignModule and NoSize then
 		Ceiled1 = math.ceil(OverlayEdit.textOverlayStyle.fontSize * (config1[OverlayEdit.textOverlayStyle.font] or 0.03))
 		
 		if FFlagMomentsTextOverlayEdgeClipFixModule then
-			Offset = math.ceil(TextService:GetTextSize(" ", OverlayEdit.textOverlayStyle.fontSize, OverlayEdit.textOverlayStyle.font, Vector2.new(1000000, 1000000)).X)
+			Offset1 = math.ceil(TextService:GetTextSize(" ", OverlayEdit.textOverlayStyle.fontSize, OverlayEdit.textOverlayStyle.font, Vector2.new(1000000, 1000000)).X)
 		end
-		local TextSize = TextService:GetTextSize(OverlayEdit.text, OverlayEdit.textOverlayStyle.fontSize, OverlayEdit.textOverlayStyle.font, Vector2.new(276 - Ceiled1 - Offset * 2, 1000000))
-		Size = UDim2.fromOffset(math.ceil(TextSize.X) + Ceiled1 + Offset * 2, math.ceil(TextSize.Y) + Ceiled)
+		local TextSize = TextService:GetTextSize(OverlayEdit.text, OverlayEdit.textOverlayStyle.fontSize, OverlayEdit.textOverlayStyle.font, Vector2.new(276 - Ceiled1 - Offset1 * 2, 1000000))
+		Size = UDim2.fromOffset(math.ceil(TextSize.X) + Ceiled1 + Offset1 * 2, math.ceil(TextSize.Y) + Ceiled)
 		UISizeConstraint = nil
 	end
-	local NewCeiled = Ceiled1 + Offset
+	local Offset = Ceiled1 + Offset1
+	local UIPadding = if Entry or Offset > 0 then ReactModule.createElement("UIPadding", {
+		PaddingLeft = if Offset1 > 0 then UDim.new(0, Offset1) else nil,
+		PaddingTop = if Entry then UDim.new(0, Ceiled) else nil,
+		PaddingRight = if Offset > 0 then UDim.new(0, Offset) else nil
+	}) else nil
 	local IsUsePreferredInputResultMatch: boolean = FFlagMomentsTextOverlayV2RedesignModule and (FFlagMomentsTextOverlayChipGrowAboveKeyboardModule and (p1.editable == true and UsePreferredInputResult == ResponsiveModule.Input.Touch))
 	local UseCallbackResult3 = UseCallbackFunction(function(TextBox)
 		-- upvalues: InsertNewlineAtCursorModule (upval)
@@ -146,11 +151,7 @@ return function(p1)
 		[ReactModule.Change.Text] = p1.onTextChanged
 	}, {
 		WrapWidth = UISizeConstraint,
-		FontQuirkPadding = if Entry or NewCeiled > 0 then ReactModule.createElement("UIPadding", {
-			PaddingLeft = if Offset > 0 then UDim.new(0, Offset) else nil,
-			PaddingTop = if Entry then UDim.new(0, Ceiled) else nil,
-			PaddingRight = if NewCeiled > 0 then UDim.new(0, NewCeiled) else nil
-		}) else nil
+		FontQuirkPadding = UIPadding
 	})
 	local Scale = OverlayEdit.scale
 	local AdditionalScale = p1.additionalScale

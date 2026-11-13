@@ -155,9 +155,10 @@ function Scrollbar(p1)
 						if p1.OnViewChanged then
 							local GraphToPlotResult = UseContextResult.graphToPlot((UseContextResult.plotToView(p2)))
 							local Min = UseContextResult.getGraphRect().Min
+							local X = if p1.Axis == TypesModule.AXIS_X then Min.X else Min.Y
 							local Max = UseContextResult.getViewportRect().Max
-							local X = if p1.Axis == TypesModule.AXIS_X then Max.X else Max.Y
-							p1.OnViewChanged(math.max(math.min(if p1.Axis == TypesModule.AXIS_X then GraphToPlotResult.X else GraphToPlotResult.Y, X - p1.MinZoom), if p1.Axis == TypesModule.AXIS_X then Min.X else Min.Y), X)
+							local X1 = if p1.Axis == TypesModule.AXIS_X then Max.X else Max.Y
+							p1.OnViewChanged(math.max(math.min(if p1.Axis == TypesModule.AXIS_X then GraphToPlotResult.X else GraphToPlotResult.Y, X1 - p1.MinZoom), X), X1)
 						end
 					end, { p1.OnViewChanged, p1.Axis, p1.MinZoom })
 				}),
@@ -172,9 +173,10 @@ function Scrollbar(p1)
 						if p1.OnViewChanged then
 							local GraphToPlotResult = UseContextResult.graphToPlot((UseContextResult.plotToView(p2)))
 							local Max = UseContextResult.getGraphRect().Max
+							local X = if p1.Axis == TypesModule.AXIS_X then Max.X else Max.Y
 							local Min = UseContextResult.getViewportRect().Min
-							local X = if p1.Axis == TypesModule.AXIS_X then Min.X else Min.Y
-							p1.OnViewChanged(X, (math.min(math.max(if p1.Axis == TypesModule.AXIS_X then GraphToPlotResult.X else GraphToPlotResult.Y, X + p1.MinZoom), if p1.Axis == TypesModule.AXIS_X then Max.X else Max.Y)))
+							local X1 = if p1.Axis == TypesModule.AXIS_X then Min.X else Min.Y
+							p1.OnViewChanged(X1, (math.min(math.max(if p1.Axis == TypesModule.AXIS_X then GraphToPlotResult.X else GraphToPlotResult.Y, X1 + p1.MinZoom), X)))
 						end
 					end, { p1.OnViewChanged, p1.Axis, p1.MinZoom })
 				})

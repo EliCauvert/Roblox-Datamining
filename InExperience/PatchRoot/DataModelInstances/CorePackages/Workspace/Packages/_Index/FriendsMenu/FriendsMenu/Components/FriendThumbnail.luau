@@ -2,6 +2,7 @@
 local Parent = FriendsMenu.Parent
 local ReactModule = require(Parent.React)
 local GetRbxthumbWithTypeSizeAndOptionsFunction = require(Parent.UserLib).Utils.getRbxthumbWithTypeSizeAndOptions
+local UserLibModule = require(Parent.UserLib)
 local FFlagFriendsMenuUseProfileFrameThumbnailModule = require(FriendsMenu.Flags.FFlagFriendsMenuUseProfileFrameThumbnail)
 local UIBloxModule = require(Parent.UIBlox)
 local FoundationModule = require(Parent.Foundation)
@@ -13,7 +14,7 @@ local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local IconSize = UIBloxModule.App.Constant.IconSize
 local Images = UIBloxModule.App.ImageSet.Images
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
-local Constants = require(Parent.UserLib).Utils.Constants
+local Constants = UserLibModule.Utils.Constants
 local Size150x150 = Constants.RbxThumbnailSizes.Size150x150
 local AvatarHeadShot = Constants.RbxthumbTypes.AvatarHeadShot
 local config = {

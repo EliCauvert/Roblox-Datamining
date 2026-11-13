@@ -1,6 +1,7 @@
 ﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
 local Parent = ProfilePlatform.Parent
 local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagFriendsCallingClientGateDEV = SharedFlagsModule.FFlagFriendsCallingClientGate_DEV
 local FFlagFriendsCallingServiceLuaMigration = SharedFlagsModule.FFlagFriendsCallingServiceLuaMigration
 local NewResult = require(Parent.Loggers).Logger:new(script.Name)
 local ButtonVariant = require(Parent.Foundation).Enums.ButtonVariant
@@ -10,7 +11,7 @@ local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
 local ProfileTypes = EnumsModule.ProfileTypes
 
 return {
-	[EnumsModule.ProfileActions.Call] = if SharedFlagsModule.FFlagFriendsCallingClientGate_DEV then function(p1)
+	[EnumsModule.ProfileActions.Call] = if FFlagFriendsCallingClientGateDEV then function(p1)
 		-- upvalues: ButtonVariant (copy), ProfileTypes (copy), EnumsModule (copy), EventNamesModule (copy), FFlagFriendsCallingServiceLuaMigration (copy), NewResult (copy)
 		return {
 			text = "Call",

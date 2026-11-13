@@ -1,6 +1,7 @@
 ﻿local Parent = script.Parent.Parent.Parent
 local Parent1 = Parent.Parent
 local ReactModule = require(Parent1.React)
+local SharedFlagsModule = require(Parent1.SharedFlags)
 local FoundationModule = require(Parent1.Foundation)
 local View = FoundationModule.View
 local Text = FoundationModule.Text
@@ -30,7 +31,7 @@ local UnifiedPurchaseModalTypeEnumModule = require(Parent.Enums.UnifiedPurchaseM
 local _ = require(Parent.ProductPurchase.v4.cartPricingResponseLineItem)
 local FormatNumberModule = require(Parent.Utility.formatNumber)
 local GetUpsellBadgeInfoModule = require(Parent.Utility.getUpsellBadgeInfo)
-local FFlagAXMISWithBlackbird = require(Parent1.SharedFlags).FFlagAXMISWithBlackbird
+local FFlagAXMISWithBlackbird = SharedFlagsModule.FFlagAXMISWithBlackbird
 local FFlagEnableRobuxUpsellPlusButtonExperimentModule = require(Parent.Flags.FFlagEnableRobuxUpsellPlusButtonExperiment)
 local FFlagUnifiedPurchaseFlowMarketplaceUIImprovements = require(Parent.Parent.SharedFlags).FFlagUnifiedPurchaseFlowMarketplaceUIImprovements
 local CompactUpsellModalBreakpoint = game:DefineFastInt("CompactUpsellModalBreakpoint", 400)
@@ -265,9 +266,10 @@ local function UnifiedRobuxUpsellModalV2(p1)
 	end
 	local IsPurchaseModalTypeMatch: boolean = FFlagEnableUnifiedPurchaseFlowForDevSubs and p1.purchaseModalType == UnifiedPurchaseModalTypeEnumModule.DeveloperSubscription
 	local PerMonth = if IsPurchaseModalTypeMatch then UseLocalizationResult.PerMonth else nil
+	local Subscribe = if IsPurchaseModalTypeMatch then UseLocalizationResult.Subscribe else UseLocalizationResult.Buy
 	local IsBuyItemDisabled: boolean = p1.buttons.buyItemDisabled == true or p1.isCartPricingLoading == true
 	local config = {
-		text = if IsPurchaseModalTypeMatch then UseLocalizationResult.Subscribe else UseLocalizationResult.Buy,
+		text = Subscribe,
 		variant = ButtonVariant.Emphasis,
 		onActivated = UseResult,
 		isDisabled = IsBuyItemDisabled,
@@ -375,13 +377,13 @@ local function UnifiedRobuxUpsellModalV2(p1)
 		LayoutOrder = 3,
 		tag = "col align-x-center align-y-center gap-medium size-full-0 auto-y padding-x-xsmall padding-bottom-xxlarge padding-top-small"
 	}
-	local Elements = nil
+	local config11 = nil
 	
 	if GetFFlagIAPExperienceEnableMultiDisplayUpsellModule() then
-		Elements = {}
+		config11 = {}
 		
 		for LayoutOrder, upsellSuggestion in ipairs(p1.upsellSuggestions) do
-			Elements["UpsellPackage" .. tostring(LayoutOrder)] = ReactModule.createElement(UpsellProductDetails, {
+			config11["UpsellPackage" .. tostring(LayoutOrder)] = ReactModule.createElement(UpsellProductDetails, {
 				layoutOrder = LayoutOrder,
 				product = upsellSuggestion,
 				selected = p1.selectedUpsellIndex == LayoutOrder,
@@ -394,7 +396,7 @@ local function UnifiedRobuxUpsellModalV2(p1)
 			})
 		end
 	else
-		Elements = {
+		config11 = {
 			UpsellPackage1 = ReactModule.createElement(UpsellProductDetails, {
 				layoutOrder = 1,
 				product = p1.upsellSuggestions[1],
@@ -418,7 +420,7 @@ local function UnifiedRobuxUpsellModalV2(p1)
 			}) else nil
 		}
 	end
-	config4.UpsellSuggestions = CreateElementFunction1(View, config5, Elements)
+	config4.UpsellSuggestions = CreateElementFunction1(View, config5, config11)
 	t.ContentView = CreateElementFunction3(View, config3, config4)
 	config2.DialogContent = CreateElementFunction(Content, v1, t)
 	config2.DialogActions = if OnRobloxPlusButtonActivated then ReactModule.createElement(ButtonGroup, {

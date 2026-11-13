@@ -1,14 +1,18 @@
 ﻿local Parent = script:FindFirstAncestor("OnPlatformSurveys").Parent
+local LocalizationModule = require(Parent.Localization)
 local ReactModule = require(Parent.React)
 local RoactRoduxModule = require(Parent.RoactRodux)
+local RoactUtilsModule = require(Parent.RoactUtils)
 local RoduxModule = require(Parent.Rodux)
+local StyleModule = require(Parent.Style)
+local UIBloxModule = require(Parent.UIBlox)
 local UniversalAppPolicyModule = require(Parent.UniversalAppPolicy)
 local AppFeaturePolicies = UniversalAppPolicyModule.AppFeaturePolicies
-local LayerCollectorProvider = require(Parent.UIBlox).Core.Layout.LayerCollector.LayerCollectorProvider
-local LocalizationProvider = require(Parent.Localization).LocalizationProvider
-local ProviderContainer = require(Parent.RoactUtils).Components.ProviderContainer
+local LayerCollectorProvider = UIBloxModule.Core.Layout.LayerCollector.LayerCollectorProvider
+local LocalizationProvider = LocalizationModule.LocalizationProvider
+local ProviderContainer = RoactUtilsModule.Components.ProviderContainer
 local RoactAppPolicy = UniversalAppPolicyModule.RoactAppPolicy
-local StyleProviderWithDefaultTheme = require(Parent.Style).StyleProviderWithDefaultTheme
+local StyleProviderWithDefaultTheme = StyleModule.StyleProviderWithDefaultTheme
 
 local function reducer(p1)
 	return p1 or {}

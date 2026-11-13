@@ -89,10 +89,11 @@ return ReactModule.memo(function(Frame)
 			task.defer(function()
 				-- upvalues: Parent (upval), Pkg (upval), ProductId (upval), ToUnifiedCategoryIdModule (upval), Frame (upval), FFlagEnableCategoryLoggingInShopModule (upval), UseRefResult (upval), SessionService (upval)
 				local AvatarExperienceAnalyticsModule = require(Parent.AvatarExperienceAnalytics)
+				local AddUnifiedEventLoggingFunction: (any, any, any) -> () = AvatarExperienceAnalyticsModule.addUnifiedEventLogging
 				local MarketplaceUnifiedItemType = AvatarExperienceAnalyticsModule.UnifiedEventLogEnums.MarketplaceUnifiedItemType
 				local FFlagAXUnifiedEventStrictPayloads = AvatarExperienceAnalyticsModule.Flags.FFlagAXUnifiedEventStrictPayloads
 				local HasBonusItem = Pkg.bonusItem ~= nil
-				AvatarExperienceAnalyticsModule.addUnifiedEventLogging(UseRefResult, {
+				AddUnifiedEventLoggingFunction(UseRefResult, {
 					universeId = game.GameId,
 					itemId = if FFlagAXUnifiedEventStrictPayloads then tostring(if ProductId == nil then Pkg.id else ProductId) elseif ProductId == nil then Pkg.id else ProductId,
 					itemType = if HasBonusItem then MarketplaceUnifiedItemType.ROBUX_WITH_BONUS else MarketplaceUnifiedItemType.ROBUX,

@@ -5,6 +5,7 @@ local _ = require(Parent.DataHydration.UniverseActivation)
 local UniverseConfigurationModule = require(Parent.DataHydration.UniverseConfiguration)
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local PrivacyType = UniverseConfigurationModule.PrivacyType
+local GAMECONFIGURATIONAUDIENCEUNKNOWN = LocalizationStringsModule.GAME_CONFIGURATION_AUDIENCE_UNKNOWN
 local AudienceTextByPrivacyType = {
 	[PrivacyType.Public] = LocalizationStringsModule.GAME_CONFIGURATION_AUDIENCE_PUBLIC,
 	[PrivacyType.FriendsOnly] = LocalizationStringsModule.GAME_CONFIGURATION_AUDIENCE_FRIENDS_ONLY,
@@ -53,7 +54,7 @@ end
 
 return {
 	AudienceTextByPrivacyType = AudienceTextByPrivacyType,
-	UNKNOWN_AUDIENCE_TEXT = LocalizationStringsModule.GAME_CONFIGURATION_AUDIENCE_UNKNOWN,
+	UNKNOWN_AUDIENCE_TEXT = GAMECONFIGURATIONAUDIENCEUNKNOWN,
 	getAudience = function(p1)
 		-- upvalues: config (copy), UniverseConfigurationModule (copy)
 		if p1 == nil then

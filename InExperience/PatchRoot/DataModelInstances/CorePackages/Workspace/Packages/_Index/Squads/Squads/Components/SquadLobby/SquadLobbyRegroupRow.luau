@@ -42,6 +42,7 @@ return function(p1)
 	local UseResult = React.useCallback(function(p2)
 		return p2.Squad and (p2.Squad.Squad and p2.Squad.Squad.currentExperienceInvite)
 	end, {})
+	local UseSignalStateResult = if FFlagUseSignalsForSquadExperienceInvite then UseSignalStateFunction(GetSquadExperienceInviteStoreFunction(false).getHasCurrentExperienceInvite) else UseSelectorFunction(UseResult) ~= nil
 	local UseCurrentSquadIdResult = UseCurrentSquadIdFunction()
 	local UseIsExperienceInviteRetryBlockedResult = UseIsExperienceInviteRetryBlockedFunction(UseCurrentSquadIdResult)
 	local UseResult1 = React.useCallback(function(p2)
@@ -91,7 +92,7 @@ return function(p1)
 			text = UseLocalizationResult.Join,
 			size = ButtonSize.Medium,
 			variant = ButtonVariant.Standard,
-			isDisabled = (if FFlagUseSignalsForSquadExperienceInvite then UseSignalStateFunction(GetSquadExperienceInviteStoreFunction(false).getHasCurrentExperienceInvite) else UseSelectorFunction(UseResult) ~= nil) or UseIsExperienceInviteRetryBlockedResult,
+			isDisabled = UseSignalStateResult or UseIsExperienceInviteRetryBlockedResult,
 			testId = if FFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-regroup-row--join-button" else nil,
 			onActivated = React.useCallback(function()
 				-- upvalues: RootPlaceId (copy), LoggerModule (upval), UseDispatchResult (copy), CreateExperienceInviteModule (upval), UseContextResult (copy), SquadExperienceInviteSource (upval), EventNamesModule (upval), UseCurrentSquadIdResult (copy), p1 (copy), FFlagSquadsPresenceStoreMigration (upval), UseGetPresenceByUserIdResult (copy), RbxAnalyticsService (upval), SquadToastActionsAndStates (upval), SquadRegroupEntryPoint (upval)

@@ -570,7 +570,7 @@ return function(Current, p1)
 	if FFlagBuildAgentAdCampaignRefreshEligibilityModule and Current2 == UseRefResult5.current then
 		Current2 = nil
 	end
-	if FFlagBuildAgentAdCampaignRefreshEligibilityModule and SelectedOption ~= nil and Offers ~= nil and Offers[SelectedOption.campaignOption] == nil then
+	if FFlagBuildAgentAdCampaignRefreshEligibilityModule and (SelectedOption ~= nil and Offers ~= nil and Offers[SelectedOption.campaignOption] == nil) then
 		SelectedOption = nil
 	end
 	return {

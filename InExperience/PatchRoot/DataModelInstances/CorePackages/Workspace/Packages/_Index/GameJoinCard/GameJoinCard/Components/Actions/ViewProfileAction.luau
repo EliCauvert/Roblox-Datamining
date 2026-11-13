@@ -2,6 +2,7 @@
 local Parent = GameJoinCard.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local RobloxAppEnumsModule = require(Parent.RobloxAppEnums)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local UserCtaAction = require(Parent.UserCtaCommon).Enums.UserCtaAction
 local Text = FoundationModule.Text
@@ -10,7 +11,7 @@ local ControlState = FoundationModule.Enums.ControlState
 local InputSize = FoundationModule.Enums.InputSize
 local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
 local UseTokensFunction = FoundationModule.Hooks.useTokens
-local AppPage = require(Parent.RobloxAppEnums).AppPage
+local AppPage = RobloxAppEnumsModule.AppPage
 local FFlagEnableSplitPane = SharedFlagsModule.FFlagEnableSplitPane
 local FFlagSocialCarouselBuildPresence = SharedFlagsModule.FFlagSocialCarouselBuildPresence
 local AnalyticsConstantsModule = require(GameJoinCard.Analytics.AnalyticsConstants)

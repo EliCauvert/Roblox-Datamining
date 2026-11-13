@@ -3,6 +3,7 @@ local Parent = SocialCarousel.Parent
 local SupportedTelemetryBackends = require(Parent.SocialLuaAnalytics).Analytics.Enums.SupportedTelemetryBackends
 local EventNamesModule = require(script.Parent.EventNames)
 local FFlagSocialCarouselShareQREnabled = require(Parent.SharedFlags).FFlagSocialCarouselShareQREnabled
+local FFlagSocialCarouselLogNewFriendRequestsBadgeModule = require(SocialCarousel.Flags.FFlagSocialCarouselLogNewFriendRequestsBadge)
 
 return {
 	defaults = {
@@ -30,7 +31,7 @@ return {
 			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[EventNamesModule.AddFriendsTileSeen] = if require(SocialCarousel.Flags.FFlagSocialCarouselLogNewFriendRequestsBadge) then {
+	[EventNamesModule.AddFriendsTileSeen] = if FFlagSocialCarouselLogNewFriendRequestsBadgeModule then {
 		description = "New-friend-request badge count resolved or changed on the Home Add Friends tile",
 		lastUpdated = { 26, 10, 29 },
 		backendsList = {

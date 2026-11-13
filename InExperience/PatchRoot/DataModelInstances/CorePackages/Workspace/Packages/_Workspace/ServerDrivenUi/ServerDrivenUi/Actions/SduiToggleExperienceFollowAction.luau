@@ -34,13 +34,14 @@ return function(p1, _, p2, _)
 		
 		return
 	else
+		local PlaceId = ActionParams.placeId
 		local Ctx = ActionParams.ctx or ""
 		local FollowingsStore = Game1.getFollowingsStore(false)
 		local DataResult = FollowingsStore.getAndFetchFollowing(UniverseId).data(false)
 		local Inverted = not (DataResult and DataResult.isFollowing or false)
 		GameFollowFunction({
 			uid = tostring(Players.LocalPlayer and Players.LocalPlayer.UserId),
-			placeId = tostring(ActionParams.placeId),
+			placeId = tostring(PlaceId),
 			state = if Inverted then "on" else "off",
 			ctx = Ctx,
 			universeId = if FFlagLuaAppAddUniverseIdToEngagementEvents then UniverseId else nil

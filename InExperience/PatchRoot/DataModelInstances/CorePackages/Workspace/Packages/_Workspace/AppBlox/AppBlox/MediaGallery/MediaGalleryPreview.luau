@@ -5,14 +5,16 @@ local OtterModule = require(Parent.Otter)
 local RoactModule = require(Parent.Roact)
 local UIBloxModule = require(Parent.UIBlox)
 local IconButton = UIBloxModule.App.Button.IconButton
+local IconSize = UIBloxModule.App.ImageSet.Enum.IconSize
 local Images = UIBloxModule.App.ImageSet.Images
+local GetIconSizeFunction = UIBloxModule.App.ImageSet.getIconSize
 local WithStyleFunction = UIBloxModule.Core.Style.withStyle
 local TModule = require(Parent.t)
 local ThumbnailButtonModule = require(script.Parent.ThumbnailButton)
 local CalcMediaGallerySizesFromHeightModule = require(script.Parent.calcMediaGallerySizesFromHeight)
 local CalcMediaGallerySizesFromWidthModule = require(script.Parent.calcMediaGallerySizesFromWidth)
 local GetShowItemsModule = require(script.Parent.getShowItems)
-local IconSize = UIBloxModule.App.ImageSet.getIconSize(UIBloxModule.App.ImageSet.Enum.IconSize.Medium)
+local IconSize1 = GetIconSizeFunction(IconSize.Medium)
 local config = { frequency = 4, dampingRatio = 1 }
 local MediaGalleryPreview = RoactModule.Component:extend("MediaGalleryPreview")
 MediaGalleryPreview.validateProps = TModule.strictInterface({
@@ -247,7 +249,7 @@ function MediaGalleryPreview.init(p1)
 end
 
 function MediaGalleryPreview.render(p1)
-	-- upvalues: WithStyleFunction (copy), RoactModule (copy), IconButton (copy), IconSize (copy), Images (copy), EventConnection (copy), RunService (copy)
+	-- upvalues: WithStyleFunction (copy), RoactModule (copy), IconButton (copy), IconSize1 (copy), Images (copy), EventConnection (copy), RunService (copy)
 	local LayoutOrder = p1.props.layoutOrder
 	local AnchorPoint = p1.props.anchorPoint
 	local Position = p1.props.position
@@ -268,7 +270,7 @@ function MediaGalleryPreview.render(p1)
 	local IsFocusIndexAbove = #ItemsToShow < FocusIndex + NumberOfThumbnails
 	
 	return WithStyleFunction(function(p2)
-		-- upvalues: RoactModule (upval), LayoutOrder (copy), Size (copy), AnchorPoint (copy), Position (copy), p1 (copy), NoAnimationOn (copy), AnimationOn (copy), NewSelectedIndex (copy), ItemsToShow (copy), SelectedIndex (copy), IsNumberOfThumbnailsBelow (copy), ShowArrows (copy), IconButton (upval), IconSize (upval), Images (upval), IsFocusIndexBelow (copy), IsFocusIndexAbove (copy), EventConnection (upval), RunService (upval)
+		-- upvalues: RoactModule (upval), LayoutOrder (copy), Size (copy), AnchorPoint (copy), Position (copy), p1 (copy), NoAnimationOn (copy), AnimationOn (copy), NewSelectedIndex (copy), ItemsToShow (copy), SelectedIndex (copy), IsNumberOfThumbnailsBelow (copy), ShowArrows (copy), IconButton (upval), IconSize1 (upval), Images (upval), IsFocusIndexBelow (copy), IsFocusIndexAbove (copy), EventConnection (upval), RunService (upval)
 		return RoactModule.createElement("Frame", {
 			LayoutOrder = LayoutOrder,
 			Size = Size,
@@ -324,7 +326,7 @@ function MediaGalleryPreview.render(p1)
 					[RoactModule.Event.InputEnded] = IsNumberOfThumbnailsBelow and p1.onMouseLeavePagination or nil
 				}, {
 					LeftArrow = ShowArrows and RoactModule.createElement(IconButton, {
-						size = UDim2.new(0, IconSize, 1, 0),
+						size = UDim2.new(0, IconSize1, 1, 0),
 						anchorPoint = Vector2.new(0, 0.5),
 						position = UDim2.fromScale(0, 0.5),
 						icon = Images["icons/actions/cycleLeft"],
@@ -333,7 +335,7 @@ function MediaGalleryPreview.render(p1)
 					}) or nil,
 					Scroller = p1:renderScroller(p2),
 					RightArrow = ShowArrows and RoactModule.createElement(IconButton, {
-						size = UDim2.new(0, IconSize, 1, 0),
+						size = UDim2.new(0, IconSize1, 1, 0),
 						anchorPoint = Vector2.new(1, 0.5),
 						position = UDim2.fromScale(1, 0.5),
 						icon = Images["icons/actions/cycleRight"],
@@ -351,13 +353,13 @@ function MediaGalleryPreview.render(p1)
 end
 
 function MediaGalleryPreview.renderScroller(p1, p2)
-	-- upvalues: RoactModule (copy), IconSize (copy)
+	-- upvalues: RoactModule (copy), IconSize1 (copy)
 	return RoactModule.createElement("ScrollingFrame", {
 		BackgroundTransparency = 1,
 		ScrollBarThickness = 0,
 		ClipsDescendants = true,
 		Selectable = false,
-		Size = UDim2.new(1, -IconSize * 2, 1, 0),
+		Size = UDim2.new(1, -IconSize1 * 2, 1, 0),
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		Position = UDim2.fromScale(0.5, 0.5),
 		ScrollingDirection = Enum.ScrollingDirection.X,

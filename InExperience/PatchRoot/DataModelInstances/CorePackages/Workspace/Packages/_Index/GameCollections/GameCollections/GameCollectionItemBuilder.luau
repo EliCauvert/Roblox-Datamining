@@ -2,7 +2,9 @@
 local Parent = GameCollections.Parent
 local GameCollectionItemTypes = require(Parent.DiscoveryTypes).GameCollectionItemTypes
 local CalculateGridLayoutModule = require(GameCollections.calculateGridLayout)
+local RenderEmphasisTileModule = require(GameCollections.renderEmphasisTile)
 local SponsoredTilesModule = require(Parent.SponsoredTiles)
+local RenderTwoByOneTile = SponsoredTilesModule.renderTwoByOneTile
 local RenderOneByTwoTile = SponsoredTilesModule.renderOneByTwoTile
 local RenderBlankTileModule = require(GameCollections.renderBlankTile)
 local CryoModule = require(Parent.Cryo)
@@ -14,8 +16,8 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagLuaAppEnableNxMRoduxApportioning = SharedFlagsModule.FFlagLuaAppEnableNxMRoduxApportioning
 local FFlagLuaAppEnableNxMApportioningExtraLogging = SharedFlagsModule.FFlagLuaAppEnableNxMApportioningExtraLogging
 local config = {
-	[GameCollectionItemTypes.GameCollectionItemType.EmphasisTile] = require(GameCollections.renderEmphasisTile),
-	[GameCollectionItemTypes.GameCollectionItemType.TwoByOneTile] = SponsoredTilesModule.renderTwoByOneTile,
+	[GameCollectionItemTypes.GameCollectionItemType.EmphasisTile] = RenderEmphasisTileModule,
+	[GameCollectionItemTypes.GameCollectionItemType.TwoByOneTile] = RenderTwoByOneTile,
 	[GameCollectionItemTypes.GameCollectionItemType.Blank] = RenderBlankTileModule
 }
 

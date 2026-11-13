@@ -24,10 +24,10 @@ local MediaPreviewModule = require(script.Parent.MediaPreview)
 local _ = require(script.Parent.types)
 local FFlagMediaSelectorErrorLoggingModule = require(BuildExperience.Flags.FFlagMediaSelectorErrorLogging)
 local FormatErrorModule = require(BuildExperience.utils.formatError)
-local Snackbar = FoundationModule.Snackbar
+local SnackbarDEPRECATED = FoundationModule.Snackbar_DEPRECATED
 
 return function(p1)
-	-- upvalues: UseCompositionLayoutFunction (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagMediaSelectorErrorLoggingModule (copy), GetGameMediaForUniverseModule (copy), ReactModule (copy), UniverseConfigurationModule (copy), SignalsReactModule (copy), UseTokensFunction (copy), CreateGalleryCaptureSourceModule (copy), UseMediaUpdaterModule (copy), GetGameMediaStoreFunction (copy), FormatErrorModule (copy), UploadCaptureAsyncModule (copy), GetThumbnailUrlAsyncModule (copy), PromiseModule (copy), CreateImageAssetAsyncModule (copy), CaptureSelectionViewModule (copy), FilmstripSlotModule (copy), View (copy), Snackbar (copy), MediaPreviewModule (copy), ScrollView (copy), FoundationModule (copy)
+	-- upvalues: UseCompositionLayoutFunction (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagMediaSelectorErrorLoggingModule (copy), GetGameMediaForUniverseModule (copy), ReactModule (copy), UniverseConfigurationModule (copy), SignalsReactModule (copy), UseTokensFunction (copy), CreateGalleryCaptureSourceModule (copy), UseMediaUpdaterModule (copy), GetGameMediaStoreFunction (copy), FormatErrorModule (copy), UploadCaptureAsyncModule (copy), GetThumbnailUrlAsyncModule (copy), PromiseModule (copy), CreateImageAssetAsyncModule (copy), CaptureSelectionViewModule (copy), FilmstripSlotModule (copy), View (copy), SnackbarDEPRECATED (copy), MediaPreviewModule (copy), ScrollView (copy), FoundationModule (copy)
 	local UseCompositionLayoutResult = UseCompositionLayoutFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
 		captureLibrary = LocalizationStringsModule.MEDIA_SELECTION_CAPTURE_LIBRARY,
@@ -449,19 +449,19 @@ return function(p1)
 	local MediaType = nil
 	local AssetSource = nil
 	local IsIcon = false
-	local UseStateResultEntry = false
+	local Icon = false
 	
 	if UseStateResult3.kind == "icon" then
 		IsIcon = true
 		AssetSource = UseStateResult
 		MediaType = "image"
-		UseStateResultEntry = UseStateResult7.icon or false
+		Icon = UseStateResult7.icon or false
 	elseif UseStateResult3.kind == "thumbnail" then
 		for _, value in UseMemoResult do
 			if value.id == UseStateResult3.id then
 				MediaType = value.mediaType
 				AssetSource = value.assetSource
-				UseStateResultEntry = UseStateResult7[value.id] or false
+				Icon = UseStateResult7[value.id] or false
 				break
 			end
 		end
@@ -532,7 +532,7 @@ return function(p1)
 			tag = "row align-x-center size-full-0 auto-y padding-x-large",
 			LayoutOrder = 0
 		}, {
-			Snackbar = ReactModule.createElement(Snackbar, {
+			Snackbar = ReactModule.createElement(SnackbarDEPRECATED, {
 				testId = "MediaSelector.error-snackbar",
 				title = UseStateResult8,
 				onClose = UseResult3
@@ -550,7 +550,7 @@ return function(p1)
 				mediaType = MediaType,
 				assetSource = AssetSource,
 				isIcon = IsIcon,
-				isLoading = UseStateResultEntry
+				isLoading = Icon
 			})
 		}),
 		Filmstrip = ReactModule.createElement(ScrollView, {

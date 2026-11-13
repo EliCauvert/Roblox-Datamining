@@ -2,13 +2,29 @@
 local Parent = PurchasePrompt.Parent
 local HttpService = game:GetService("HttpService")
 local SharedFlagsModule = require(Parent.SharedFlags)
+local RequestAssetPurchaseModule = require(PurchasePrompt.Actions.RequestAssetPurchase)
+local RequestBundlePurchaseModule = require(PurchasePrompt.Actions.RequestBundlePurchase)
+local RequestGamepassPurchaseModule = require(PurchasePrompt.Actions.RequestGamepassPurchase)
+local RequestProductPurchaseModule = require(PurchasePrompt.Actions.RequestProductPurchase)
+local RequestSubscriptionPurchaseModule = require(PurchasePrompt.Actions.RequestSubscriptionPurchase)
+local RequestAvatarCreationFeePurchaseModule = require(PurchasePrompt.Actions.RequestAvatarCreationFeePurchase)
+local RequestExperiencePurchaseModule = require(PurchasePrompt.Actions.RequestExperiencePurchase)
+local RequestLookPurchaseModule = require(PurchasePrompt.Actions.RequestLookPurchase)
+local RequestRobuxUpsellPurchaseModule = require(PurchasePrompt.Actions.RequestRobuxUpsellPurchase)
+local RequestDeveloperSubscriptionPurchaseModule = require(PurchasePrompt.Actions.RequestDeveloperSubscriptionPurchase)
+local RequestVIPServerPurchaseModule = require(PurchasePrompt.Actions.RequestVIPServerPurchase)
+local CompleteRequestModule = require(PurchasePrompt.Actions.CompleteRequest)
+local RefreshExpectedPriceModule = require(PurchasePrompt.Actions.RefreshExpectedPrice)
+local VIPServerCreatedModule = require(PurchasePrompt.Actions.VIPServerCreated)
+local VIPServerRenamedModule = require(PurchasePrompt.Actions.VIPServerRenamed)
 local RequestTypeModule = require(PurchasePrompt.Enums.RequestType)
+local FFlagAXMISWithBlackbird = SharedFlagsModule.FFlagAXMISWithBlackbird
 local FFlagLuaAppsEnablePromptVIPServerPurchase = SharedFlagsModule.FFlagLuaAppsEnablePromptVIPServerPurchase
 local FFlagStableIdempotencyKeyForProductAndGamePassModule = require(PurchasePrompt.Flags.FFlagStableIdempotencyKeyForProductAndGamePass)
 local config = { requestType = RequestTypeModule.None }
 
 return (require(Parent.PurchasePromptDeps).Rodux.createReducer(config, {
-	[require(PurchasePrompt.Actions.RequestAssetPurchase).name] = function(_, p1)
+	[RequestAssetPurchaseModule.name] = function(_, p1)
 		-- upvalues: HttpService (copy), RequestTypeModule (copy)
 		local IdempotencyKey = p1.idempotencyKey
 		
@@ -29,7 +45,7 @@ return (require(Parent.PurchasePromptDeps).Rodux.createReducer(config, {
 			expectedPrice = p1.expectedPrice or 0
 		}
 	end,
-	[require(PurchasePrompt.Actions.RequestGamepassPurchase).name] = function(_, p1)
+	[RequestGamepassPurchaseModule.name] = function(_, p1)
 		-- upvalues: RequestTypeModule (copy), FFlagStableIdempotencyKeyForProductAndGamePassModule (copy), HttpService (copy)
 		local config = {
 			isRobloxPurchase = false,
@@ -48,7 +64,7 @@ return (require(Parent.PurchasePromptDeps).Rodux.createReducer(config, {
 		end
 		return config
 	end,
-	[require(PurchasePrompt.Actions.RequestProductPurchase).name] = function(_, p1)
+	[RequestProductPurchaseModule.name] = function(_, p1)
 		-- upvalues: RequestTypeModule (copy), FFlagStableIdempotencyKeyForProductAndGamePassModule (copy), HttpService (copy)
 		local config = {
 			isRobloxPurchase = false,
@@ -67,7 +83,7 @@ return (require(Parent.PurchasePromptDeps).Rodux.createReducer(config, {
 		end
 		return config
 	end,
-	[require(PurchasePrompt.Actions.RequestBundlePurchase).name] = function(_, p1)
+	[RequestBundlePurchaseModule.name] = function(_, p1)
 		-- upvalues: HttpService (copy), RequestTypeModule (copy)
 		local IdempotencyKey = p1.idempotencyKey
 		
@@ -87,11 +103,11 @@ return (require(Parent.PurchasePromptDeps).Rodux.createReducer(config, {
 			expectedPrice = p1.expectedPrice or 0
 		}
 	end,
-	[require(PurchasePrompt.Actions.RequestSubscriptionPurchase).name] = function(_, p1)
+	[RequestSubscriptionPurchaseModule.name] = function(_, p1)
 		-- upvalues: RequestTypeModule (copy)
 		return { id = p1.id, requestType = RequestTypeModule.Subscription }
 	end,
-	[require(PurchasePrompt.Actions.RequestAvatarCreationFeePurchase).name] = function(_, p1)
+	[RequestAvatarCreationFeePurchaseModule.name] = function(_, p1)
 		-- upvalues: RequestTypeModule (copy)
 		return {
 			requestType = RequestTypeModule.AvatarCreationFee,
@@ -99,25 +115,25 @@ return (require(Parent.PurchasePromptDeps).Rodux.createReducer(config, {
 			id = p1.guid
 		}
 	end,
-	[require(PurchasePrompt.Actions.RequestExperiencePurchase).name] = function(_, p1)
+	[RequestExperiencePurchaseModule.name] = function(_, p1)
 		-- upvalues: RequestTypeModule (copy)
 		return {
 			requestType = RequestTypeModule.Experience,
 			universeId = p1.universeId
 		}
 	end,
-	[require(PurchasePrompt.Actions.RequestLookPurchase).name] = function(_, p1)
+	[RequestLookPurchaseModule.name] = function(_, p1)
 		-- upvalues: RequestTypeModule (copy)
 		return {
 			requestType = RequestTypeModule.Look,
 			lookId = p1.lookId
 		}
 	end,
-	[require(PurchasePrompt.Actions.RequestRobuxUpsellPurchase).name] = if SharedFlagsModule.FFlagAXMISWithBlackbird then function(_, _)
+	[RequestRobuxUpsellPurchaseModule.name] = if FFlagAXMISWithBlackbird then function(_, _)
 		-- upvalues: RequestTypeModule (copy)
 		return { requestType = RequestTypeModule.RobuxUpsell }
 	end else nil,
-	[require(PurchasePrompt.Actions.RequestDeveloperSubscriptionPurchase).name] = function(_, p1)
+	[RequestDeveloperSubscriptionPurchaseModule.name] = function(_, p1)
 		-- upvalues: RequestTypeModule (copy)
 		return {
 			requestType = RequestTypeModule.DeveloperSubscription,
@@ -125,7 +141,7 @@ return (require(Parent.PurchasePromptDeps).Rodux.createReducer(config, {
 			expectedPrice = p1.expectedPrice
 		}
 	end,
-	[require(PurchasePrompt.Actions.RequestVIPServerPurchase).name] = function(_, _)
+	[RequestVIPServerPurchaseModule.name] = function(_, _)
 		-- upvalues: RequestTypeModule (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), HttpService (copy)
 		local config = { requestType = RequestTypeModule.VIPServer }
 		
@@ -134,13 +150,13 @@ return (require(Parent.PurchasePromptDeps).Rodux.createReducer(config, {
 		end
 		return config
 	end,
-	[require(PurchasePrompt.Actions.RefreshExpectedPrice).name] = function(Tbl, p1)
+	[RefreshExpectedPriceModule.name] = function(Tbl, p1)
 		local Copy = table.clone(Tbl)
 		Copy.expectedPrice = p1.expectedPrice
 		
 		return Copy
 	end,
-	[require(PurchasePrompt.Actions.VIPServerCreated).name] = if FFlagLuaAppsEnablePromptVIPServerPurchase then function(Tbl, p1)
+	[VIPServerCreatedModule.name] = if FFlagLuaAppsEnablePromptVIPServerPurchase then function(Tbl, p1)
 		local Copy = table.clone(Tbl)
 		Copy.vipServerId = p1.vipServerId
 		Copy.vipServerName = p1.vipServerName
@@ -148,13 +164,13 @@ return (require(Parent.PurchasePromptDeps).Rodux.createReducer(config, {
 		
 		return Copy
 	end else nil,
-	[require(PurchasePrompt.Actions.VIPServerRenamed).name] = if FFlagLuaAppsEnablePromptVIPServerPurchase then function(Tbl, p1)
+	[VIPServerRenamedModule.name] = if FFlagLuaAppsEnablePromptVIPServerPurchase then function(Tbl, p1)
 		local Copy = table.clone(Tbl)
 		Copy.vipServerName = p1.vipServerName
 		
 		return Copy
 	end else nil,
-	[require(PurchasePrompt.Actions.CompleteRequest).name] = function(_, _)
+	[CompleteRequestModule.name] = function(_, _)
 		-- upvalues: config (copy)
 		return config
 	end

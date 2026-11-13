@@ -2,11 +2,12 @@
 local Parent = AvatarWorkshop.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
 local ItemCardModule = require(AvatarWorkshop.Components.ItemCard.ItemCard)
 local VirtualizedGridModule = require(AvatarWorkshop.Components.VirtualizedGrid.VirtualizedGrid)
 local _ = require(script.Parent.InventoryGridTypes)
 local InputSize = FoundationModule.Enums.InputSize
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 
 local function renderItem(p1)
 	-- upvalues: ReactModule (copy), ItemCardModule (copy)

@@ -2,6 +2,7 @@
 local SignalsModule = require(Parent.Signals)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local CreateUserChatSettingStoreModule = require(script.createUserChatSettingStore)
+local FFlagAIRephraseSettingEnabled = SharedFlagsModule.FFlagAIRephraseSettingEnabled
 local FFlagChatSummariesSettingEnabled = SharedFlagsModule.FFlagChatSummariesSettingEnabled
 
 local function _(p1, p2, Callback: (any) -> (), Callback1: (any) -> ())
@@ -60,7 +61,7 @@ local function buildChatSummariesConfig()
 	}
 end
 
-local Computed = if SharedFlagsModule.FFlagAIRephraseSettingEnabled then SignalsModule.createComputed(function()
+local Computed = if FFlagAIRephraseSettingEnabled then SignalsModule.createComputed(function()
 	-- upvalues: CreateUserChatSettingStoreModule (copy), buildAIRephraseConfig (copy)
 	return CreateUserChatSettingStoreModule((buildAIRephraseConfig()))
 end) else nil

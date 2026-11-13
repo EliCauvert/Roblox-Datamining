@@ -3,11 +3,12 @@ local Parent = UserTile.Parent
 local ReactModule = require(Parent.React)
 local _ = require(Parent.Foundation)
 local CryoModule = require(Parent.Cryo)
+local DataHydrationModule = require(Parent.DataHydration)
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local SignalsModule = require(Parent.Signals)
 local UserTileModule = require(UserTile.Components.UserTile)
 local _ = require(script.Parent.Parent.Enums.LayoutMode)
-local GetResult = require(Parent.DataHydration).TrustedConnections.TrustedConnectionsStore.get()
+local GetResult = DataHydrationModule.TrustedConnections.TrustedConnectionsStore.get()
 
 return function(p1)
 	-- upvalues: ReactModule (copy), SignalsModule (copy), GetResult (copy), UseSignalStateFunction (copy), CryoModule (copy), UserTileModule (copy)

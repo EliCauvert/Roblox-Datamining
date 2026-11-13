@@ -123,6 +123,15 @@ return function(p1)
 		return { status = "hidden" }
 	else
 		local HasModal = UseStateResult.modal ~= nil
+		local Element = if UseStateResult1 then ReactModule.createElement(CatalogOffersBannerOfferModalsModule, {
+			modal = UseStateResult1,
+			offersModalOpen = UseStateResult3,
+			termsModalOpen = UseStateResult4,
+			okButtonText = UseLocalizationResult.okModalButton,
+			onCloseOffersModal = UseResult,
+			onOpenTermsModal = UseResult2,
+			onCloseTermsModal = UseResult3
+		}) else nil
 		local Config = if FFlagAXUpdateOffersEndsUIWithBadge then {
 			Transparency = 0,
 			Color3 = blendShiftFillForOpaqueGuiObject(UseTokensResult.Color.Shift.Shift_200, UseTokensResult.Color.Surface.Surface_0.Color3)
@@ -153,15 +162,7 @@ return function(p1)
 				offerModalTapAreaEnabled = HasModal,
 				onOfferBannerActivated = if HasModal then UseResult1 else nil
 			},
-			modals = if UseStateResult1 then ReactModule.createElement(CatalogOffersBannerOfferModalsModule, {
-				modal = UseStateResult1,
-				offersModalOpen = UseStateResult3,
-				termsModalOpen = UseStateResult4,
-				okButtonText = UseLocalizationResult.okModalButton,
-				onCloseOffersModal = UseResult,
-				onOpenTermsModal = UseResult2,
-				onCloseTermsModal = UseResult3
-			}) else nil
+			modals = Element
 		}
 	end
 end

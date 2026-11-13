@@ -51,13 +51,14 @@ return {
 			local ScaledResponseDataUpdateEnd = if ResponseDataUpdateBegin and ResponseDataUpdateEnd then (ResponseDataUpdateEnd - ResponseDataUpdateBegin) * 1000 else nil
 			local SduiTreeBuildBegin = ClockTimes.SduiTreeBuildBegin
 			local SduiTreeBuildEnd = ClockTimes.SduiTreeBuildEnd
+			local ScaledSduiTreeBuildEnd = if SduiTreeBuildBegin and SduiTreeBuildEnd then (SduiTreeBuildEnd - SduiTreeBuildBegin) * 1000 else nil
 			local SduiClientHintsBegin = ClockTimes.SduiClientHintsBegin
 			local SduiClientHintsEnd = ClockTimes.SduiClientHintsEnd
 			local config = {
 				totalDurationMs = ScaledClockTime,
 				uiRequestDurationMs = Smallest,
 				responseDecodeDurationMs = ScaledResponseDecodeEnd,
-				sduiTreeBuildDurationMs = if SduiTreeBuildBegin and SduiTreeBuildEnd then (SduiTreeBuildEnd - SduiTreeBuildBegin) * 1000 else nil,
+				sduiTreeBuildDurationMs = ScaledSduiTreeBuildEnd,
 				dataUpdateDurationMs = ScaledResponseDataUpdateEnd,
 				netRoundTripTimeMs = v1 and (v1.RoundTripTime and v1.RoundTripTime * 1000),
 				netDurationReceiveResponseMs = v1 and (v1.DurationReceiveResponse and v1.DurationReceiveResponse * 1000),

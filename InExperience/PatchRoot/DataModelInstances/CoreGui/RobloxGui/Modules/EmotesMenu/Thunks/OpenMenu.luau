@@ -2,12 +2,15 @@
 local GuiService = game:GetService("GuiService")
 local VRService = game:GetService("VRService")
 local Parent = script.Parent.Parent
+local Actions = Parent.Actions
 local Parent1 = Parent.Parent
+local EventStream = require(CorePackages.Workspace.Packages.Analytics).AnalyticsReporters.EventStream
+local AnalyticsModule = require(Parent.Analytics)
 local FFlagEnableNewBackpack = require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnableNewBackpack
 local Features = if FFlagEnableNewBackpack then require(CorePackages.Workspace.Packages.System).Features else nil
 local BackpackScriptModule = if FFlagEnableNewBackpack then nil else require(Parent1.BackpackScript)
-local ShowMenuModule = require(Parent.Actions.ShowMenu)
-local WithEventStreamResult = require(Parent.Analytics).new():withEventStream(require(CorePackages.Workspace.Packages.Analytics).AnalyticsReporters.EventStream.new((game:GetService("RbxAnalyticsService"))))
+local ShowMenuModule = require(Actions.ShowMenu)
+local WithEventStreamResult = AnalyticsModule.new():withEventStream(EventStream.new((game:GetService("RbxAnalyticsService"))))
 
 return function(_)
 	-- upvalues: GuiService (copy), VRService (copy), FFlagEnableNewBackpack (copy), Features (copy), BackpackScriptModule (copy), WithEventStreamResult (copy), ShowMenuModule (copy)

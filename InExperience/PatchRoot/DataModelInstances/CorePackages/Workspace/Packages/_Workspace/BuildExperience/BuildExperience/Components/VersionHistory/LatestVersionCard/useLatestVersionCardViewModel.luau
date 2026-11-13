@@ -1,5 +1,8 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
+local DataHydrationModule = require(Parent.DataHydration)
+local LocalizationModule = require(Parent.Localization)
+local NavigationModule = require(Parent.Navigation)
 local PlaceVersionHistoryModule = require(Parent.DataHydration.PlaceVersionHistory)
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
@@ -11,9 +14,9 @@ local VersionHistoryUtilsModule = require(script.Parent.Parent.VersionHistoryUti
 local _ = require(script.Parent.LatestVersionCardView)
 local _ = require(BuildExperience.useGamePermissions)
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
-local DataStatus = require(Parent.DataHydration).DataStatus
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
-local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local DataStatus = DataHydrationModule.DataStatus
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
+local UseNavigationFunction = NavigationModule.useNavigation
 
 return function(p1)
 	-- upvalues: PlaceVersionHistoryModule (copy), ReactModule (copy), SignalsReactModule (copy), GetPlaytestLoadingStoreModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseNavigationFunction (copy), SendBuildExperienceEventModule (copy), LaunchPlaytestWithLoadingStateModule (copy), VersionHistoryUtilsModule (copy), DataStatus (copy), FFlagBuildCheckGamePermissionsModule (copy)
@@ -66,6 +69,7 @@ return function(p1)
 	else
 		local PlaceVersion = if UseSignalStateResult then UseSignalStateResult.placeVersion else nil
 		local VersionNumber = if PlaceVersion then VersionHistoryUtilsModule.getVersionNumber(PlaceVersion) else nil
+		local IsUseSignalStateResultMatch = UseSignalStateResult1 == DataStatus.NotReady
 		local NoFFlagBuildCheckGamePermissionsModule = not FFlagBuildCheckGamePermissionsModule or p1.permissions.canEdit
 		local NoFFlagBuildCheckGamePermissionsModule1 = not FFlagBuildCheckGamePermissionsModule or p1.permissions.canPublish
 		
@@ -76,7 +80,7 @@ return function(p1)
 			playtestText = UseLocalizationResult.playtest,
 			publishText = UseLocalizationResult.publish,
 			isPlaytestDisabled = UseSignalStateResult2 or not NoFFlagBuildCheckGamePermissionsModule,
-			isPublishDisabled = UseSignalStateResult1 == DataStatus.NotReady or (VersionNumber == Entry.versionNumber or not NoFFlagBuildCheckGamePermissionsModule1),
+			isPublishDisabled = IsUseSignalStateResultMatch or (VersionNumber == Entry.versionNumber or not NoFFlagBuildCheckGamePermissionsModule1),
 			onPlaytestActivated = UseResult,
 			onPublishActivated = UseResult1,
 			layoutOrder = p1.layoutOrder,

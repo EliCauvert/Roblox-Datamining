@@ -16,14 +16,13 @@ local StatusIndicatorVariant = FoundationModule.Enums.StatusIndicatorVariant
 local Radius = FoundationModule.Enums.Radius
 local FFlagSocialCarouselShowLoadingSkeletonModule = require(SocialCarousel.Flags.FFlagSocialCarouselShowLoadingSkeleton)
 local FFlagSocialCarouselUnselectableSkeletonModule = require(SocialCarousel.Flags.FFlagSocialCarouselUnselectableSkeleton)
-local FFlagSocialCarouselRemoveStrokeForAddFriendsModule = require(SocialCarousel.Flags.FFlagSocialCarouselRemoveStrokeForAddFriends)
 local FFlagSocialCarouselXSmallTileTextModule = require(SocialCarousel.Flags.FFlagSocialCarouselXSmallTileText)
 local FFlagSocialCarouselXXSmallTilesModule = require(SocialCarousel.Flags.FFlagSocialCarouselXXSmallTiles)
 local UseXSmallTileTypographyModule = require(SocialCarousel.Hooks.useXSmallTileTypography)
 local FIntSocalCarouselMaxNewRequestsCountModule = require(SocialCarousel.Flags.FIntSocalCarouselMaxNewRequestsCount)
 
 return function(p1)
-	-- upvalues: ReactModule (copy), UseTokensFunction (copy), FFlagSocialCarouselXXSmallTilesModule (copy), FFlagSocialCarouselXSmallTileTextModule (copy), UseXSmallTileTypographyModule (copy), FFlagSocialCarouselShowLoadingSkeletonModule (copy), GetTextSizeFunction (copy), View (copy), Image (copy), Enums (copy), Text (copy), StatusIndicator (copy), StatusIndicatorVariant (copy), FIntSocalCarouselMaxNewRequestsCountModule (copy), FFlagSocialCarouselUnselectableSkeletonModule (copy), Skeleton (copy), Radius (copy), FFlagSocialCarouselRemoveStrokeForAddFriendsModule (copy), Icon (copy), IconSize (copy)
+	-- upvalues: ReactModule (copy), UseTokensFunction (copy), FFlagSocialCarouselXXSmallTilesModule (copy), FFlagSocialCarouselXSmallTileTextModule (copy), UseXSmallTileTypographyModule (copy), FFlagSocialCarouselShowLoadingSkeletonModule (copy), GetTextSizeFunction (copy), View (copy), Image (copy), Enums (copy), Text (copy), StatusIndicator (copy), StatusIndicatorVariant (copy), FIntSocalCarouselMaxNewRequestsCountModule (copy), FFlagSocialCarouselUnselectableSkeletonModule (copy), Skeleton (copy), Radius (copy), Icon (copy), IconSize (copy)
 	local TileRef = p1.tileRef or ReactModule.useRef(nil)
 	local UseTokensResult = UseTokensFunction()
 	local v1 = nil
@@ -142,12 +141,6 @@ return function(p1)
 					["align-x-center"] = true,
 					["align-y-center"] = true,
 					row = true
-				},
-				stroke = if FFlagSocialCarouselRemoveStrokeForAddFriendsModule then nil else {
-					Color = UseTokensResult.Color.Stroke.Emphasis.Color3,
-					Transparency = UseTokensResult.Color.Stroke.Emphasis.Transparency,
-					Thickness = UseTokensResult.Stroke.Thick,
-					BorderStrokePosition = Enum.BorderStrokePosition.Inner
 				},
 				onAbsoluteSizeChanged = if FFlagSocialCarouselXXSmallTilesModule and p1.iconScale then UseResult else nil
 			}, {

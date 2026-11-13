@@ -3,6 +3,7 @@ local HttpService = game:GetService("HttpService")
 local Parent = EditProfile.Parent
 local FFlagUserProfilePlatformProfile = require(Parent.SharedFlags).FFlagUserProfilePlatformProfile
 local ReactModule = require(Parent.React)
+local RoactNavigationModule = require(Parent.RoactNavigation)
 local JavascriptHybrid = require(EditProfile.Common.Constants).JavascriptHybrid
 local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
 local UserProfilesModule = require(Parent.UserProfiles)
@@ -13,7 +14,7 @@ local AnalyticsModule = require(EditProfile.Analytics)
 local EventNames = AnalyticsModule.EventNames
 local UseAnalyticsFunction = AnalyticsModule.useAnalytics
 
-return require(Parent.RoactNavigation).withNavigation(function(p1)
+return RoactNavigationModule.withNavigation(function(p1)
 	-- upvalues: UseLocalUserIdFunction (copy), UserProfilesModule (copy), FFlagUserProfilePlatformProfile (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UseAnalyticsFunction (copy), JavascriptHybrid (copy), EventNames (copy), ReactModule (copy), UrlBuilder (copy), HttpService (copy)
 	local UseUserProfilesFetchResult = UserProfilesModule.Hooks.useUserProfilesFetch({
 		userIds = { (UseLocalUserIdFunction()) },

@@ -2,8 +2,10 @@
 local Parent1 = Parent.Parent
 local DashModule = require(Parent1.Dash)
 local FoundationModule = require(Parent1.Foundation)
+local LocalizationModule = require(Parent1.Localization)
 local ReactModule = require(Parent1.React)
 local RoactUtilsModule = require(Parent1.RoactUtils)
+local RobloxAppHooksModule = require(Parent1.RobloxAppHooks)
 local UIBloxModule = require(Parent1.UIBlox)
 local Images = UIBloxModule.App.ImageSet.Images
 local ImageSetButton = UIBloxModule.Core.ImageSet.ImageSetButton
@@ -16,8 +18,8 @@ local View = FoundationModule.View
 local UseAnalyticsModule = require(Parent.Analytics.useAnalytics)
 local UseCallbackFunction = ReactModule.useCallback
 local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
-local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
-local UseScreenSizeFunction = require(Parent1.RobloxAppHooks).useScreenSize
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
+local UseScreenSizeFunction = RobloxAppHooksModule.useScreenSize
 local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
 local UseStateFunction = ReactModule.useState
 local UseTopbarInsetHeightModule = require(Parent.Hooks.useTopbarInsetHeight)
@@ -128,11 +130,14 @@ return function(_)
 	end, { UseSelectorResult, UseStateResult4 })
 	
 	if UseSelectorResult2 then
+		local IsYAbove: boolean = UseStateResult.X > 0 and UseStateResult.Y > 0
+		local ClampedValue = math.clamp(UseScreenSizeResult.Y / UseScreenSizeResult.X, 0.42857142857142855, 1)
+		local Y = UseStateResult.Y
 		local XDelta = UseStateResult.X - 41
-		local ClampedValue = math.clamp(math.floor(XDelta / 90), 1, 3)
-		local Value = (XDelta - (ClampedValue - 1) * 4) / ClampedValue
-		local _Vector2 = Vector2.new(math.floor(Value), (math.floor(Value * math.clamp(UseScreenSizeResult.Y / UseScreenSizeResult.X, 0.42857142857142855, 1))))
-		local IsYBelow = UseStateResult.Y < XDelta
+		local ClampedValue1 = math.clamp(math.floor(XDelta / 90), 1, 3)
+		local Value = (XDelta - (ClampedValue1 - 1) * 4) / ClampedValue1
+		local _Vector2 = Vector2.new(math.floor(Value), (math.floor(Value * ClampedValue)))
+		local IsYBelow = Y < XDelta
 		local Height: number = if IsYBelow then 44 else 82
 		local ScaledY = (_Vector2.Y + 4) * math.ceil(#UseSelectorResult / math.clamp(math.floor(XDelta / 90), 1, 3))
 		
@@ -184,7 +189,7 @@ return function(_)
 					},
 					Size = UDim2.new(1, 0, 1, -(Height + 40))
 				}, {
-					GridView = UseStateResult.X > 0 and UseStateResult.Y > 0 and ReactModule.createElement(GridView, {
+					GridView = IsYAbove and ReactModule.createElement(GridView, {
 						LayoutOrder = 1,
 						itemPadding = Vector2.new(4, 4),
 						items = UseMemoResult,

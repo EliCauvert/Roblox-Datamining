@@ -1,5 +1,6 @@
 ﻿local Parent = script.Parent.Parent.Parent
 local Parent1 = Parent.Parent
+local CapturesCommonModule = require(Parent1.CapturesCommon)
 local FoundationModule = require(Parent1.Foundation)
 local ReactModule = require(Parent1.React)
 local _ = require(Parent.Types)
@@ -8,7 +9,7 @@ local IconName = FoundationModule.Enums.IconName
 local IconSize = FoundationModule.Enums.IconSize
 local Image = FoundationModule.Image
 local View = FoundationModule.View
-local GetContentFromObjectFunction = require(Parent1.CapturesCommon).Utils.getContentFromObject
+local GetContentFromObjectFunction = CapturesCommonModule.Utils.getContentFromObject
 
 local function renderThumbnailSlot(SlotCapture, Thumbnail, IsActiveSlotMatch)
 	-- upvalues: ReactModule (copy), View (copy), Image (copy), GetContentFromObjectFunction (copy)

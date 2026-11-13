@@ -57,6 +57,41 @@ local StandardizedFields = {
 	"addPlaySessionId",
 	"addSessionInfo"
 }
+local config1 = {
+	eventName = "shareSheetOpened",
+	description = "Count of share sheet requests opened",
+	backends = { LoggingProtocolModule.TelemetryBackends.Counter },
+	throttlingPercentage = ShareSheetTelemetryThrottleHundredthsPercent,
+	lastUpdated = { 2026, 8, 3 }
+}
+local config2 = {
+	eventName = "shareSheetClosed",
+	description = "Count of share sheet requests closed",
+	backends = { LoggingProtocolModule.TelemetryBackends.Counter },
+	throttlingPercentage = ShareSheetTelemetryThrottleHundredthsPercent,
+	lastUpdated = { 2026, 8, 3 }
+}
+local config3 = {
+	eventName = "shareSheetInteraction",
+	description = "Count of share sheet interactions",
+	backends = { LoggingProtocolModule.TelemetryBackends.Counter },
+	throttlingPercentage = ShareSheetTelemetryThrottleHundredthsPercent,
+	lastUpdated = { 2026, 8, 3 }
+}
+local config4 = {
+	eventName = "shareSheetMessageSendResult",
+	description = "Count of per-recipient share sheet message send results",
+	backends = { LoggingProtocolModule.TelemetryBackends.Counter },
+	throttlingPercentage = ShareSheetTelemetryThrottleHundredthsPercent,
+	lastUpdated = { 2026, 9, 8 }
+}
+local config5 = {
+	eventName = "shareSheetMessageSendResultDurationMs",
+	description = "Duration in milliseconds from recipient send invocation to result",
+	backends = { LoggingProtocolModule.TelemetryBackends.Stats },
+	throttlingPercentage = ShareSheetTelemetryThrottleHundredthsPercent,
+	lastUpdated = { 2026, 9, 8 }
+}
 local ShareSheetTelemetryModule = {
 	LifecycleType = { Open = "open", Close = "close" },
 	CloseReason = {
@@ -99,41 +134,6 @@ local ShareSheetTelemetryModule = {
 			customFields = CustomFields
 		})
 	end
-}
-local config1 = {
-	eventName = "shareSheetOpened",
-	description = "Count of share sheet requests opened",
-	backends = { LoggingProtocolModule.TelemetryBackends.Counter },
-	throttlingPercentage = ShareSheetTelemetryThrottleHundredthsPercent,
-	lastUpdated = { 2026, 8, 3 }
-}
-local config2 = {
-	eventName = "shareSheetClosed",
-	description = "Count of share sheet requests closed",
-	backends = { LoggingProtocolModule.TelemetryBackends.Counter },
-	throttlingPercentage = ShareSheetTelemetryThrottleHundredthsPercent,
-	lastUpdated = { 2026, 8, 3 }
-}
-local config3 = {
-	eventName = "shareSheetInteraction",
-	description = "Count of share sheet interactions",
-	backends = { LoggingProtocolModule.TelemetryBackends.Counter },
-	throttlingPercentage = ShareSheetTelemetryThrottleHundredthsPercent,
-	lastUpdated = { 2026, 8, 3 }
-}
-local config4 = {
-	eventName = "shareSheetMessageSendResult",
-	description = "Count of per-recipient share sheet message send results",
-	backends = { LoggingProtocolModule.TelemetryBackends.Counter },
-	throttlingPercentage = ShareSheetTelemetryThrottleHundredthsPercent,
-	lastUpdated = { 2026, 9, 8 }
-}
-local config5 = {
-	eventName = "shareSheetMessageSendResultDurationMs",
-	description = "Duration in milliseconds from recipient send invocation to result",
-	backends = { LoggingProtocolModule.TelemetryBackends.Stats },
-	throttlingPercentage = ShareSheetTelemetryThrottleHundredthsPercent,
-	lastUpdated = { 2026, 9, 8 }
 }
 
 function ShareSheetTelemetryModule.logLifecycle(CustomFields)

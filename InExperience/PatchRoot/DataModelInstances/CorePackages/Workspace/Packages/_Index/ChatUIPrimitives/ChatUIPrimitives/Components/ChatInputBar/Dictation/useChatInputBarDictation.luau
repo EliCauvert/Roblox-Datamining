@@ -2,8 +2,9 @@
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
 local UseDictationInputBarModule = require(Parent.DictationCore.useDictationInputBar)
+local ConstantsModule = require(Parent.DictationCore.Constants)
 local GetDictationInputModeModule = require(script.Parent.getDictationInputMode)
-local DictationState = require(Parent.DictationCore.Constants).DictationState
+local DictationState = ConstantsModule.DictationState
 
 return function(p1, p2, OnSubmit, p3, p4)
 	-- upvalues: ReactModule (copy), UseDictationInputBarModule (copy), GetDictationInputModeModule (copy), DictationState (copy), SignalsReactModule (copy)

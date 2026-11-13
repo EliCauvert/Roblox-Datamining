@@ -1,10 +1,11 @@
 ﻿local ExpChatShared = script:FindFirstAncestor("ExpChatShared")
 local Parent = ExpChatShared.Parent
+local RoduxModule = require(Parent.Rodux)
 local Dictionary = require(Parent.llama).Dictionary
 local List = require(Parent.llama).List
 local Actions = ExpChatShared.Actions
 
-return require(Parent.Rodux).createReducer({}, {
+return RoduxModule.createReducer({}, {
 	[require(Actions.PlayerAdded).name] = function(p1, p2)
 		-- upvalues: Dictionary (copy), List (copy)
 		local Lowered = string.lower(p2.displayName)

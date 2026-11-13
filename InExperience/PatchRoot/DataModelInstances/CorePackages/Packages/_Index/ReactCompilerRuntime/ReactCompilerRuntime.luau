@@ -16,6 +16,10 @@ local function useMemoFallback(p1)
 end
 
 local COMPILERRUNTIME = ReactModule.__COMPILER_RUNTIME
+local C = if COMPILERRUNTIME == nil then nil else COMPILERRUNTIME.c
+local Cg = if COMPILERRUNTIME == nil then nil else COMPILERRUNTIME.cg
+local Cc = if COMPILERRUNTIME == nil then nil else COMPILERRUNTIME.cc
+local Jsx = if COMPILERRUNTIME == nil then nil else COMPILERRUNTIME.jsx
 
 local function _(p2)
 	return coroutine.wrap(function()
@@ -36,9 +40,9 @@ local function unsupportedClassMemoCache(_)
 end
 
 return {
-	c = (if COMPILERRUNTIME == nil then nil else COMPILERRUNTIME.c) or useMemoFallback,
-	cg = (if COMPILERRUNTIME == nil then nil else COMPILERRUNTIME.cg) or uncachedMemoCache,
-	cc = (if COMPILERRUNTIME == nil then nil else COMPILERRUNTIME.cc) or unsupportedClassMemoCache,
+	c = C or useMemoFallback,
+	cg = Cg or uncachedMemoCache,
+	cc = Cc or unsupportedClassMemoCache,
 	iterate = function(Callback, p3, p4)
 		if type(Callback) == "function" then
 			return Callback, p3, p4
@@ -53,7 +57,7 @@ return {
 			end), nil, nil
 		end
 	end,
-	jsx = (if COMPILERRUNTIME == nil then nil else COMPILERRUNTIME.jsx) or ReactModule.createElement,
+	jsx = Jsx or ReactModule.createElement,
 	MEMO_CACHE_SENTINEL = REACTMEMOCACHESENTINEL,
 	createMemoCacheSlot = function(p5)
 		-- upvalues: REACTMEMOCACHESENTINEL (copy)

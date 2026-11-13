@@ -5,6 +5,7 @@ local Llama = DependenciesModule.llama
 local Roact = DependenciesModule.Roact
 local MemoizeFunction = DependenciesModule.memoize
 local Dictionary = Llama.Dictionary
+local FriendsLandingPageModule = require(FriendsLanding.Components.FriendsLandingPage)
 local LimitFriendsModule = require(script.helpers.limitFriends)
 local UpdateFriendsWithWidthModule = require(script.helpers.updateFriendsWithWidth)
 local LoadFriendGroupModule = require(script.helpers.loadFriendGroup)
@@ -13,6 +14,7 @@ local FriendsPerLoadGroupModule = require(script.helpers.friendsPerLoadGroup)
 local ShowMoreButtonModule = require(FriendsLanding.Components.ShowMoreButton)
 local ButtonClickEventsModule = require(FriendsLanding.FriendsLandingAnalytics.ButtonClickEvents)
 local FilterStatesModule = require(FriendsLanding.Friends.filterStates)
+local ShowMoreSectionTypeEnumModule = require(FriendsLanding.Enums.ShowMoreSectionTypeEnum)
 local React = DependenciesModule.React
 local GridMetrics = DependenciesModule.UIBlox.App.Grid.GridMetrics
 local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
@@ -26,10 +28,10 @@ ShowMoreWrapper.defaultProps = {
 	overrideRenderShowMore = nil,
 	handleShowMore = nil,
 	spacingIfEmpty = 48,
-	listComponent = require(FriendsLanding.Components.FriendsLandingPage),
+	listComponent = FriendsLandingPageModule,
 	friends = {},
 	filter = FilterStatesModule.All,
-	sectionType = require(FriendsLanding.Enums.ShowMoreSectionTypeEnum).Friends
+	sectionType = ShowMoreSectionTypeEnumModule.Friends
 }
 
 function ShowMoreWrapper.init(p1)

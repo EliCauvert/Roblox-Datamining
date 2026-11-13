@@ -32,8 +32,14 @@ return ReactModule.memo(ReactModule.forwardRef(function(Frame, Ref)
 		testId = Frame.testId
 	}, {
 		Content = ReactModule.createElement(ViewModule, {
-			tag = "col align-x-center gap-xxsmall size-full-0 auto-y",
-			padding = {
+			tag = {
+				["col align-x-center"] = true,
+				["gap-xxsmall size-full-0 auto-y"] = not Frame.isCapsule,
+				["align-y-center"] = Frame.isCapsule,
+				["gap-xsmall size-full-1400"] = Frame.isCapsule and Frame.hasLabel,
+				["size-full-1200"] = Frame.isCapsule and not Frame.hasLabel
+			},
+			padding = if Frame.isCapsule then nil else {
 				top = UDim.new(0, UseTokensModuleResult.Padding.XXSmall + UseTokensModuleResult.Padding.Small),
 				bottom = UDim.new(0, UseTokensModuleResult.Padding.XXSmall + UseTokensModuleResult.Padding.Small)
 			},
@@ -64,9 +70,9 @@ return ReactModule.memo(ReactModule.forwardRef(function(Frame, Ref)
 					ZIndex = 2,
 					variant = StatusIndicatorVariantModule.Emphasis,
 					size = StatusIndicatorSizeModule.Small,
-					mask = UseTokensModuleResult.Color.Common.NavigationBar,
+					mask = if Frame.isCapsule then nil else UseTokensModuleResult.Color.Common.NavigationBar,
 					AnchorPoint = Vector2.new(0.5, 0.5),
-					Position = UDim2.new(1, -UseTokensModuleResult.Size.Size_50, 0, UseTokensModuleResult.Size.Size_50),
+					Position = if Frame.isCapsule then UDim2.fromScale(1, 0) else UDim2.new(1, -UseTokensModuleResult.Size.Size_50, 0, UseTokensModuleResult.Size.Size_50),
 					testId = `{Frame.testId}--status`
 				} else {
 					ZIndex = 2,
@@ -74,18 +80,18 @@ return ReactModule.memo(ReactModule.forwardRef(function(Frame, Ref)
 					max = Item.indicator.max or 99,
 					variant = StatusIndicatorVariantModule.Emphasis,
 					size = StatusIndicatorSizeModule.Small,
-					mask = UseTokensModuleResult.Color.Common.NavigationBar,
+					mask = if Frame.isCapsule then nil else UseTokensModuleResult.Color.Common.NavigationBar,
 					AnchorPoint = Vector2.new(0, 0.5),
-					Position = UDim2.new(1, -UseTokensModuleResult.Size.Size_150, 0, UseTokensModuleResult.Size.Size_50),
+					Position = if Frame.isCapsule then UDim2.new(1, -UseTokensModuleResult.Size.Size_100, 0, 0) else UDim2.new(1, -UseTokensModuleResult.Size.Size_150, 0, UseTokensModuleResult.Size.Size_50),
 					testId = `{Frame.testId}--status`
 				}) else nil
 			}),
-			Label = ReactModule.createElement(TextModule, {
+			Label = if Frame.hasLabel then ReactModule.createElement(TextModule, {
 				LayoutOrder = 2,
 				tag = "size-full-0 auto-y text-caption-small text-align-x-center text-truncate-end content-emphasis",
 				Text = Item.text,
 				testId = `{Frame.testId}--label`
-			})
+			}) else nil
 		})
 	})
 end))

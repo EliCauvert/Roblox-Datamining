@@ -61,9 +61,10 @@ return ReactModule.memo(function(List)
 		UseStateResult2(false)
 	end, {})
 	local IsMountRealDuringPlaceholder = List.mountRealDuringPlaceholder == true
+	local NoUseStateResult: boolean = not UseStateResult or (not IsIsPlaceholder or IsMountRealDuringPlaceholder)
 	local CloneElementResult = nil
 	
-	if (not UseStateResult or (not IsIsPlaceholder or IsMountRealDuringPlaceholder)) and List.real then
+	if NoUseStateResult and List.real then
 		local v1 = nil
 		
 		for i, value in List do

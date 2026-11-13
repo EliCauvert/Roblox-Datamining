@@ -2,13 +2,15 @@
 local Parent = BuildExperience.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local ReactUtilsModule = require(Parent.ReactUtils)
 local FFlagBuildExperienceFoundationTabsModule = require(BuildExperience.Flags.FFlagBuildExperienceFoundationTabs)
 local FFlagSubTabSizeSmall = require(Parent.SharedFlags).FFlagSubTabSizeSmall
 local BuildTabStripModule = require(BuildExperience.Components.BuildTabStrip.BuildTabStrip)
+local CreateBuildHomeTabStoreModule = require(BuildExperience.Stores.GetBuildHomeTabStore.createBuildHomeTabStore)
 local _ = require(script.Parent.useBuildHomeTabsViewModel)
 local View = FoundationModule.View
-local CreateNextOrderFunction = require(Parent.ReactUtils).createNextOrder
-local BUILDHOMETAB = require(BuildExperience.Stores.GetBuildHomeTabStore.createBuildHomeTabStore).BUILD_HOME_TAB
+local CreateNextOrderFunction = ReactUtilsModule.createNextOrder
+local BUILDHOMETAB = CreateBuildHomeTabStoreModule.BUILD_HOME_TAB
 
 local function _(p1, p2, p3)
 	return p3 or math.abs(p1 - p2) < 1

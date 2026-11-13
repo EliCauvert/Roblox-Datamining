@@ -29,6 +29,14 @@ local function defaultGetIsInExperience(p1)
 	return require(Moments.Stores.GetMomentsPreferencesStore)(false).getIsTeleporting(p1)
 end
 
+local function _()
+	local Success, Result = pcall(function()
+		return game:GetService("AppLifecycleObserverService")
+	end)
+	
+	return if Success then Result else nil
+end
+
 return function(p1)
 	-- upvalues: defaultPostHeartbeat (copy), defaultGetUsage (copy), defaultGetHasDailyLimit (copy), defaultGetIsInExperience (copy), SignalsModule (copy), CreateMomentsUsageHeartbeatModule (copy), FIntMomentsUsageHeartbeatIntervalSecModule (copy), Analytics (copy), FIntMomentsUsageResumePollSecModule (copy)
 	local P2 = p1 or {}
@@ -126,6 +134,65 @@ return function(p1)
 		reconcile()
 	end)
 	
+	local function setTabFocused(p2)
+		-- upvalues: v3 (ref), reconcile (copy)
+		v3.setTabFocused(p2)
+		reconcile()
+	end
+	
+	local function setForegrounded(Value)
+		-- upvalues: Foregrounded (ref), v3 (ref), v2 (ref), reconcile (copy)
+		Foregrounded = Value
+		v3.setForegrounded(Foregrounded and not v2)
+		reconcile()
+	end
+	
+	local Count = 0
+	
+	local function retainWatching()
+		-- upvalues: Count (ref), v3 (ref), reconcile (copy)
+		Count += 1
+		v3.setTabFocused(true)
+		reconcile()
+		local Flag = false
+		
+		return function()
+			-- upvalues: Flag (ref), Count (upval), v3 (upval), reconcile (upval)
+			if not Flag then
+				Flag = true
+				Count -= 1
+				v3.setTabFocused(Count > 0)
+				reconcile()
+				
+				return
+			end
+		end
+	end
+	
+	local LifecycleObserver = P2.lifecycleObserver
+	
+	if not LifecycleObserver then
+		local Success, Result = pcall(function()
+			return game:GetService("AppLifecycleObserverService")
+		end)
+		LifecycleObserver = if Success then Result else nil
+	end
+	local List = {}
+	
+	if LifecycleObserver ~= nil then
+		table.insert(List, LifecycleObserver.OnHide:Connect(function()
+			-- upvalues: Foregrounded (ref), v3 (ref), v2 (ref), reconcile (copy)
+			Foregrounded = false
+			v3.setForegrounded(Foregrounded and not v2)
+			reconcile()
+		end))
+		table.insert(List, LifecycleObserver.OnUnhide:Connect(function()
+			-- upvalues: Foregrounded (ref), v3 (ref), v2 (ref), reconcile (copy)
+			Foregrounded = true
+			v3.setForegrounded(Foregrounded and not v2)
+			reconcile()
+		end))
+	end
 	return {
 		getIsLimitReached = Signal,
 		getLimitSeconds = Signal1,
@@ -136,24 +203,20 @@ return function(p1)
 				GetUsage():andThen(applyUsage):catch(ignoreFailure)
 			end
 		end,
-		setTabFocused = function(p2)
-			-- upvalues: v3 (ref), reconcile (copy)
-			v3.setTabFocused(p2)
-			reconcile()
-		end,
-		setForegrounded = function(Value)
-			-- upvalues: Foregrounded (ref), v3 (ref), v2 (ref), reconcile (copy)
-			Foregrounded = Value
-			v3.setForegrounded(Foregrounded and not v2)
-			reconcile()
-		end,
+		setTabFocused = setTabFocused,
+		setForegrounded = setForegrounded,
+		retainWatching = retainWatching,
 		dispose = function()
-			-- upvalues: Flag (ref), Effect (copy), Effect1 (copy), v3 (ref), MomentsSessionHeartbeat (ref)
+			-- upvalues: Flag (ref), Effect (copy), Effect1 (copy), v3 (ref), MomentsSessionHeartbeat (ref), List (copy)
 			Flag = true
 			Effect()
 			Effect1()
 			v3.stop()
 			MomentsSessionHeartbeat.stop()
+			
+			for _, Connection in List do
+				Connection:Disconnect()
+			end
 		end
 	}
 end

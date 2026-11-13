@@ -1,8 +1,10 @@
 ﻿local Parent = script:FindFirstAncestor("AvatarExperienceGifting").Parent
 local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local GiftingModule = require(Parent.Gifting)
 local AvatarGiftInfoPanelViewModule = require(script.Parent.Parent.AvatarGiftInfoPanel.AvatarGiftInfoPanelView)
-local GiftAcceptView = require(Parent.Gifting).Components.GiftAcceptView
-local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local GiftAcceptView = GiftingModule.Components.GiftAcceptView
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
 return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), AvatarGiftInfoPanelViewModule (copy), GiftAcceptView (copy)

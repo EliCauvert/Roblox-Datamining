@@ -10,6 +10,7 @@ local LocalizationModule = require(Parent.Localization)
 local PromiseModule = require(Parent.Promise)
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
 local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local LocalizationRoactContext = LocalizationModule.LocalizationRoactContext
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
@@ -24,7 +25,7 @@ local GetBuildExperienceRefreshStoreModule = require(BuildExperience.Stores.GetB
 local _ = require(BuildExperience.Stores.GetMyCreationsFilterStore)
 local GetSearchQueryStoreModule = require(BuildExperience.Stores.GetSearchQueryStore)
 local _ = require(BuildExperience.Stores.GetSearchQueryStore.createSearchQueryStore)
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseSignalStateFunction = SignalsReactModule.useSignalState
 local PageSize: number = if FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule then 15 else 50
 local t = {}
 local config = { games = "All" }

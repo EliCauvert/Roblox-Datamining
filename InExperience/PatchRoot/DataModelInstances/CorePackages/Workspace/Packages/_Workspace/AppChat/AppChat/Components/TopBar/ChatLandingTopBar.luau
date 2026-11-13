@@ -102,7 +102,8 @@ return function(p1)
 			exitVariant = if WideModeScreenProps then "Cancel" else "Chevron"
 		})
 	end, { WideModeScreenProps })
-	local UseResult1 = ReactModule.useCallback(function()
+	local UseResult1 = if ShouldRenderCenter then if FFlagAppChatFoundationSearchInputModule then UseResult else v31 else nil
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: SetScreenTopBarFunction (copy), EnumScreensModule (upval), UseTelemetryModuleResult (copy), ChatLandingTelemetryEventsModule (upval)
 		SetScreenTopBarFunction(EnumScreensModule.ChatLanding, {
 			shouldRenderCenter = true,
@@ -111,7 +112,7 @@ return function(p1)
 		})
 		UseTelemetryModuleResult.emit(ChatLandingTelemetryEventsModule.ChatLandingSearchBtnClicked, {})
 	end, { UseTelemetryModuleResult, SetScreenTopBarFunction })
-	local UseResult2 = ReactModule.useCallback(function()
+	local UseResult21 = ReactModule.useCallback(function()
 		-- upvalues: Navigation (copy), EnumScreensModule (upval), UseTelemetryModuleResult (copy), ChatLandingTelemetryEventsModule (upval)
 		Navigation.navigate(EnumScreensModule.CreateNewChat)
 		UseTelemetryModuleResult.emit(ChatLandingTelemetryEventsModule.ChatLandingComposeBtnClicked, {})
@@ -134,7 +135,7 @@ return function(p1)
 	local TopBarShowSnoozeNotifications = UseChatLandingVisibilityModuleResult.topBarShowSnoozeNotifications
 	local NotificationCount = UseChatLandingVisibilityModuleResult.notificationCount
 	local UseResult5 = ReactModule.useCallback(function()
-		-- upvalues: RightHidden (copy), FFlagEnableHeaderBarButtonsUpdate (upval), ReactModule (upval), FoundationModule (upval), TopBarShowSearch (ref), FFlagDebugAppChatEnableDomLocatorsModule (upval), DomLocatorsModule (upval), UseResult1 (copy), TopBarShowCreateChatGroup (copy), UseResult2 (copy), TopBarShowNotifications (copy), StreamNotificationsBellIcon (upval), NotificationCount (copy), FFlagStreamNotificationBellEntryPoint (upval), AppPage (upval), FFlagAppChatLandingNotifBtnTelemetryModule (upval), UseResult3 (copy), TopBarShowSnoozeNotifications (copy), SnoozeToastNotificationsButtonModule (upval), IconButtonWidth (copy), IconButton (upval), Images (upval), GetFFlagIsSquadEnabledFunction (upval), WideModeScreenProps (copy)
+		-- upvalues: RightHidden (copy), FFlagEnableHeaderBarButtonsUpdate (upval), ReactModule (upval), FoundationModule (upval), TopBarShowSearch (ref), FFlagDebugAppChatEnableDomLocatorsModule (upval), DomLocatorsModule (upval), UseResult2 (copy), TopBarShowCreateChatGroup (copy), UseResult21 (copy), TopBarShowNotifications (copy), StreamNotificationsBellIcon (upval), NotificationCount (copy), FFlagStreamNotificationBellEntryPoint (upval), AppPage (upval), FFlagAppChatLandingNotifBtnTelemetryModule (upval), UseResult3 (copy), TopBarShowSnoozeNotifications (copy), SnoozeToastNotificationsButtonModule (upval), IconButtonWidth (copy), IconButton (upval), Images (upval), GetFFlagIsSquadEnabledFunction (upval), WideModeScreenProps (copy)
 		return if RightHidden then nil elseif FFlagEnableHeaderBarButtonsUpdate then ReactModule.createElement(FoundationModule.View, {
 			tag = "row align-x-right align-y-center gap-xsmall auto-xy"
 		}, {
@@ -144,7 +145,7 @@ return function(p1)
 				size = FoundationModule.Enums.InputSize.Medium,
 				icon = FoundationModule.Enums.IconName.MagnifyingGlass,
 				testId = if FFlagDebugAppChatEnableDomLocatorsModule then DomLocatorsModule.chatLandingTopBarIconButton("search") else nil,
-				onActivated = UseResult1
+				onActivated = UseResult2
 			}) else nil,
 			createNewChat = if TopBarShowCreateChatGroup then ReactModule.createElement(FoundationModule.IconButton, {
 				isCircular = true,
@@ -152,7 +153,7 @@ return function(p1)
 				size = FoundationModule.Enums.InputSize.Medium,
 				icon = FoundationModule.Enums.IconName.PencilSquare,
 				testId = if FFlagDebugAppChatEnableDomLocatorsModule then DomLocatorsModule.chatLandingTopBarIconButton("createChat") else nil,
-				onActivated = UseResult2
+				onActivated = UseResult21
 			}) else nil,
 			notifications = if TopBarShowNotifications then ReactModule.createElement(StreamNotificationsBellIcon, {
 				layoutOrder = 3,
@@ -172,12 +173,12 @@ return function(p1)
 				size = FoundationModule.Enums.InputSize.Medium,
 				icon = FoundationModule.Enums.IconName.MagnifyingGlass,
 				testId = DomLocatorsModule.chatLandingTopBarIconButton("search"),
-				onActivated = UseResult1
+				onActivated = UseResult2
 			}) else ReactModule.createElement(IconButton, {
 				layoutOrder = 1,
 				size = UDim2.new(0, IconButtonWidth, 1, 0),
 				icon = Images["icons/common/search"],
-				onActivated = UseResult1
+				onActivated = UseResult2
 			})),
 			createNewChat = TopBarShowCreateChatGroup and (if FFlagDebugAppChatEnableDomLocatorsModule then ReactModule.createElement(FoundationModule.IconButton, {
 				isCircular = true,
@@ -185,12 +186,12 @@ return function(p1)
 				size = FoundationModule.Enums.InputSize.Medium,
 				icon = FoundationModule.Enums.IconName.PlusLarge,
 				testId = DomLocatorsModule.chatLandingTopBarIconButton("createChat"),
-				onActivated = UseResult2
+				onActivated = UseResult21
 			}) else ReactModule.createElement(IconButton, {
 				layoutOrder = 2,
 				size = UDim2.new(0, IconButtonWidth, 1, 0),
 				icon = if GetFFlagIsSquadEnabledFunction() then Images["icons/common/plus"] else Images["icons/actions/compose"],
-				onActivated = UseResult2
+				onActivated = UseResult21
 			})),
 			notifications = TopBarShowNotifications and (if FFlagDebugAppChatEnableDomLocatorsModule then ReactModule.createElement(FoundationModule.View, {
 				tag = "row align-x-center align-y-center radius-circle",
@@ -216,7 +217,7 @@ return function(p1)
 			}) else nil
 		})
 	end, {
-		IconButtonWidth, NotificationCount, UseResult2, UseResult1,
+		IconButtonWidth, NotificationCount, UseResult21, UseResult2,
 		if FFlagAppChatLandingNotifBtnTelemetryModule then UseResult3 else false,
 		RightHidden, TopBarShowCreateChatGroup, TopBarShowNotifications,
 		TopBarShowSearch, TopBarShowSnoozeNotifications, WideModeScreenProps
@@ -227,7 +228,7 @@ return function(p1)
 		screenName = ScreenName,
 		navigation = Navigation,
 		renderRight = if ShouldRenderCenter then nil else UseResult5,
-		renderCenter = if ShouldRenderCenter then if FFlagAppChatFoundationSearchInputModule then UseResult else v31 else nil,
+		renderCenter = UseResult1,
 		renderLeft = if NoIsInExperienceScreenProps then UseResult4 else nil,
 		hideTitle = NoIsInExperienceScreenProps
 	})

@@ -7,6 +7,7 @@ local SendAXCounterV2Module = require(script.Parent.Parent.sendAXCounterV2)
 local UnifiedLoggingSurface = require(Parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
 local IsRunningInStudioFunction = require(Parent.AppCommonLib).isRunningInStudio
 local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local FIntAXUnifiedEventCounterFlushSeconds = AvatarExperienceFlagsModule.FIntAXUnifiedEventCounterFlushSeconds
 local FIntAXUnifiedEventCounterImpressionFlushSeconds = AvatarExperienceFlagsModule.FIntAXUnifiedEventCounterImpressionFlushSeconds
 local FIntAXUnifiedEventCounterMaxKeys = AvatarExperienceFlagsModule.FIntAXUnifiedEventCounterMaxKeys
 local FIntAXUnifiedEventCounterIdleSeconds = AvatarExperienceFlagsModule.FIntAXUnifiedEventCounterIdleSeconds
@@ -37,7 +38,7 @@ local function newWindow(Label, MaxSeconds, TracksPhase)
 	}
 end
 
-local Short = newWindow("short", AvatarExperienceFlagsModule.FIntAXUnifiedEventCounterFlushSeconds, false)
+local Short = newWindow("short", FIntAXUnifiedEventCounterFlushSeconds, false)
 local Long = newWindow("long", FIntAXUnifiedEventCounterImpressionFlushSeconds, true)
 local NavigationOpaquePage = nil
 local t = {}

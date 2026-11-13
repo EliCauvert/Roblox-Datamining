@@ -104,9 +104,10 @@ local function generateSearchFilters(p6, Pattern)
 			Buffer1[NodeId] = false
 			continue
 		end
+		local Children = Node.Children
 		local v1 = false
 		
-		for i1, child in pairs(Node.Children) do
+		for i1, child in pairs(Children) do
 			local AnnotateSearchFilterNodesResult = annotateSearchFilterNodes(Data, Buffer, Buffer1, i1, child, false)
 			v1 = v1 or AnnotateSearchFilterNodesResult
 		end

@@ -1,7 +1,11 @@
 ﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
 local Parent = ProfilePlatform.Parent
 local EnumsModule = require(ProfilePlatform.Common.Enums)
+local EditProfileLandingModule = require(Parent.EditProfile.EditProfileLanding)
+local EditDisplayNameErrorModalModule = require(Parent.EditProfile.EditDisplayNameErrorModal)
+local UsernameInsufficientFundsModalModule = require(Parent.EditProfile.UsernameInsufficientFundsModal)
 local EnumsModule1 = require(Parent.EditProfile.Enums)
+local SetAliasModal = require(Parent.SetAlias).SetAliasModal
 local EditProfileScreenViewAdapterModule = require(Parent.EditProfile.EditProfileScreenViewAdapter)
 local EditProfileToastScreenModule = require(Parent.EditProfile.EditProfileToastScreen)
 local EditProfileBackgroundContainerModule = require(ProfilePlatform.Components.EditProfileBackgroundContainer)
@@ -53,7 +57,7 @@ local List = {
 	},
 	{
 		[EnumsModule.Screens.EditProfilePage] = {
-			screen = require(Parent.EditProfile.EditProfileLanding),
+			screen = EditProfileLandingModule,
 			navigationOptions = if FFlagAXEnableProfileTab then function(p1)
 				-- upvalues: config (copy), NavigationOptions (copy)
 				return if p1.navigation.getParam("fullBleed") then config else NavigationOptions
@@ -62,19 +66,19 @@ local List = {
 	},
 	{
 		[EnumsModule.Screens.EditDisplayNameErrorModal] = {
-			screen = require(Parent.EditProfile.EditDisplayNameErrorModal),
+			screen = EditDisplayNameErrorModalModule,
 			navigationOptions = NavigationOptions
 		}
 	},
 	{
 		[EnumsModule.Screens.UsernameInsufficientFundsModal] = {
-			screen = require(Parent.EditProfile.UsernameInsufficientFundsModal),
+			screen = UsernameInsufficientFundsModalModule,
 			navigationOptions = NavigationOptions
 		}
 	},
 	{
 		[EnumsModule.Screens.SetAliasModal] = {
-			screen = require(Parent.SetAlias).SetAliasModal,
+			screen = SetAliasModal,
 			navigationOptions = NavigationOptions
 		}
 	},

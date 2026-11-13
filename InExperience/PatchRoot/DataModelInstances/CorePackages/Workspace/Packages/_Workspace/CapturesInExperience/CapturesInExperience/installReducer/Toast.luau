@@ -1,10 +1,11 @@
 ﻿local Parent = script.Parent.Parent
 local Parent1 = Parent.Parent
 local DashModule = require(Parent1.Dash)
+local RoduxModule = require(Parent1.Rodux)
 local CapturesToastTypeModule = require(Parent.Enums.CapturesToastType)
 local _ = require(Parent.Types)
 
-return require(Parent1.Rodux).createReducer({
+return RoduxModule.createReducer({
 	IsDismissed = false,
 	ToastConfig = nil,
 	ToastType = CapturesToastTypeModule.None

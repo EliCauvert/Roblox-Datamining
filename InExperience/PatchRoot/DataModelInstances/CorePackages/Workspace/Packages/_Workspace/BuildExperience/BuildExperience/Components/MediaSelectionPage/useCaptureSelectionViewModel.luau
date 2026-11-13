@@ -1,10 +1,11 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
+local LocalizationModule = require(Parent.Localization)
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local FFlagBuildExperienceLocalizeCaptureShowMoreModule = require(BuildExperience.Flags.FFlagBuildExperienceLocalizeCaptureShowMore)
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 
 return function(p1)
 	-- upvalues: SignalsReactModule (copy), ReactModule (copy), FFlagBuildExperienceLocalizeCaptureShowMoreModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy)

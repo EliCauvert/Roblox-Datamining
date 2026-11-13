@@ -2,17 +2,19 @@
 local Parent1 = Parent.Parent.Parent
 local Parent2 = Parent1.Parent
 local ReactModule = require(Parent2.React)
+local ContextualSliderModule = require(Parent.ContextualSlider)
+local SystemSliderModule = require(Parent.SystemSlider)
 local DescribeFunction: (any, any) -> () = require(Parent2.Dev.JestGlobals).describe
 local BenchmarksModule = require(Parent1.Utility.benchmarks)
 local MountComponentTimesFunction = BenchmarksModule.mountComponentTimes
 local ScrollComponentTimesFunction = BenchmarksModule.scrollComponentTimes
-local Element = ReactModule.createElement(require(Parent.ContextualSlider), {
+local Element = ReactModule.createElement(ContextualSliderModule, {
 	min = 0,
 	max = 100,
 	value = 0,
 	onValueChanged = function() end
 })
-local Element1 = ReactModule.createElement(require(Parent.SystemSlider), {
+local Element1 = ReactModule.createElement(SystemSliderModule, {
 	min = 0,
 	max = 100,
 	value = 0,

@@ -8,10 +8,11 @@ local AnalyticsModule = require(Parent.Services.Analytics)
 local SetFavoriteBundleModule = require(Parent.Actions.SetFavoriteBundle)
 local SetBundlesModule = require(Parent.Actions.SetBundles)
 local BundleInfoModule = require(Parent.Models.BundleInfo)
+local CreateInspectAndBuyKeyMapperModule = require(Parent.createInspectAndBuyKeyMapper)
 local SendCounterModule = require(Parent.Thunks.SendCounter)
 local ConstantsModule = require(Parent.Constants)
 local list = { NetworkModule, AnalyticsModule }
-local CreateFavoriteForBundle = require(Parent.createInspectAndBuyKeyMapper)("createFavoriteForBundle")
+local CreateFavoriteForBundle = CreateInspectAndBuyKeyMapperModule("createFavoriteForBundle")
 
 return function(p1)
 	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), AnalyticsModule (copy), CreateFavoriteForBundle (copy), PerformFetch (copy), SetFavoriteBundleModule (copy), BundleInfoModule (copy), SetBundlesModule (copy), SendCounterModule (copy), ConstantsModule (copy), PromiseModule (copy)

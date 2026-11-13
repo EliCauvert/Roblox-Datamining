@@ -3,11 +3,12 @@ local Parent = SocialUpsell.Parent
 local CryoModule = require(Parent.Cryo)
 local ReactModule = require(Parent.React)
 local SocialUpsellTypeModule = require(SocialUpsell.Enum.SocialUpsellType)
+local UpsellEntrySurfaceTypeModule = require(SocialUpsell.Analytics.Enum.UpsellEntrySurfaceType)
 local FAEUpsellOverlayModule = require(SocialUpsell.Components.FAEUpsellOverlay)
 local FFlagEnableAEGIS2CommsFAEUpsell = require(Parent.SharedFlags).FFlagEnableAEGIS2CommsFAEUpsell
 local config = {
 	isInExperience = false,
-	upsellEntrySurface = require(SocialUpsell.Analytics.Enum.UpsellEntrySurfaceType).Unknown,
+	upsellEntrySurface = UpsellEntrySurfaceTypeModule.Unknown,
 	upsellType = SocialUpsellTypeModule.Unknown
 }
 

@@ -11,10 +11,9 @@ local SettingsSduiConstantsModule = require(SettingsSdui.SettingsSduiConstants)
 local SettingsPageSessionModule = require(SettingsSdui.SettingsPageSession)
 local GetSettingsPageUrlModule = require(SettingsSdui.getSettingsPageUrl)
 local BuildSettingsPageRequestModule = require(SettingsSdui.buildSettingsPageRequest)
-local FFlagSduiAdvertiseRuntimeSupportSets = require(Parent.SharedFlags).FFlagSduiAdvertiseRuntimeSupportSets
 
 local function fetchSettingsPage(LoadTimer, p1)
-	-- upvalues: SettingsSduiConstantsModule (copy), GetSduiApiStoreFunction (copy), SettingsPageSessionModule (copy), Parent (copy), FFlagSduiAdvertiseRuntimeSupportSets (copy), SduiCapabilities (copy), GetSduiTemplateStoreFunction (copy), AppPage (copy), GetSettingsPageUrlModule (copy), BuildSettingsPageRequestModule (copy), SduiResponseType (copy), SduiApiStorePostConfigContentType (copy), fetchSettingsPage (copy)
+	-- upvalues: SettingsSduiConstantsModule (copy), GetSduiApiStoreFunction (copy), SettingsPageSessionModule (copy), Parent (copy), SduiCapabilities (copy), GetSduiTemplateStoreFunction (copy), AppPage (copy), GetSettingsPageUrlModule (copy), BuildSettingsPageRequestModule (copy), SduiResponseType (copy), SduiApiStorePostConfigContentType (copy), fetchSettingsPage (copy)
 	local ConfigKey = SettingsSduiConstantsModule.ConfigKey
 	local SduiApiStore = GetSduiApiStoreFunction()
 	local _, Data2 = SduiApiStore.getData(ConfigKey)
@@ -39,7 +38,7 @@ local function fetchSettingsPage(LoadTimer, p1)
 				sessionId = SettingsPageSessionModule:Get(),
 				cachedRobloxComponentToTemplateId = GetSduiTemplateStoreFunction().getCachedRobloxComponentToTemplateId(AppPage.Settings),
 				clientCapabilities = ServiceContractsProtoModule.apppageplatform.shared.client_capabilities.ClientCapabilities.new({
-					enabled_capabilities = if FFlagSduiAdvertiseRuntimeSupportSets then SduiCapabilities.getEnabledCapabilityNumbersWithoutExtendedMarker() else SduiCapabilities.getEnabledCapabilityNumbers(SduiCapabilities.getEnabledCapabilities())
+					enabled_capabilities = SduiCapabilities.getEnabledCapabilityNumbersWithoutExtendedMarker()
 				})
 			})
 		},

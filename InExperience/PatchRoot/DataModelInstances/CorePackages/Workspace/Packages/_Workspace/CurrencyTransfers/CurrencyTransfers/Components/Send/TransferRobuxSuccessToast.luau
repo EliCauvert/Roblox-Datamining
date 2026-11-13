@@ -6,7 +6,7 @@ local TransferLocaleFormatModule = require(CurrencyTransfers.Localization.transf
 local SignalsReactModule = require(Parent.SignalsReact)
 local LocalizationService = game:GetService("LocalizationService")
 local FoundationModule = require(Parent.Foundation)
-local Snackbar = FoundationModule.Snackbar
+local SnackbarDEPRECATED = FoundationModule.Snackbar_DEPRECATED
 local Enums = FoundationModule.Enums
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local HandleTransferCompleteModule = require(CurrencyTransfers.Actions.Send.handleTransferComplete)
@@ -14,7 +14,7 @@ local UseTransferStoreModule = require(CurrencyTransfers.Hooks.useTransferStore)
 local FormatNumberModule = require(CurrencyTransfers.Utils.formatNumber)
 
 return function(_)
-	-- upvalues: UseLocalizationFunction (copy), TransferLocalizationKeysModule (copy), UseTransferStoreModule (copy), SignalsReactModule (copy), FormatNumberModule (copy), LocalizationService (copy), ReactModule (copy), TransferLocaleFormatModule (copy), HandleTransferCompleteModule (copy), Snackbar (copy), Enums (copy)
+	-- upvalues: UseLocalizationFunction (copy), TransferLocalizationKeysModule (copy), UseTransferStoreModule (copy), SignalsReactModule (copy), FormatNumberModule (copy), LocalizationService (copy), ReactModule (copy), TransferLocaleFormatModule (copy), HandleTransferCompleteModule (copy), SnackbarDEPRECATED (copy), Enums (copy)
 	local UseLocalizationResult = UseLocalizationFunction(TransferLocalizationKeysModule.Presets.TransferRobuxSuccessToast)
 	local UseTransferStoreModuleResult = UseTransferStoreModule()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(UseTransferStoreModuleResult.getSelectedAmount)
@@ -46,7 +46,7 @@ return function(_)
 		end
 	end, {})
 	
-	return ReactModule.createElement(Snackbar, {
+	return ReactModule.createElement(SnackbarDEPRECATED, {
 		ZIndex = 100,
 		title = UseMemoResult,
 		icon = {

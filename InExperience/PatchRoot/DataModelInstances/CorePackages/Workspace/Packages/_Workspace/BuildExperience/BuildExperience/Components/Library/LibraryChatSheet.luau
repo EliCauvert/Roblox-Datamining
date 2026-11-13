@@ -3,6 +3,7 @@ local Parent = BuildExperience.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local RoactUtilsModule = require(Parent.RoactUtils)
+local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local ChatSheetViewModule = require(BuildExperience.Components.ChatSheet.ChatSheetView)
 local _ = require(BuildExperience.Components.ChatSheet.useChatSheetViewModel)
@@ -18,7 +19,7 @@ local function onBoundsChanged(p1, p2)
 	LibraryStoreModule.setWorldChatLeft(p2)
 end
 
-local Computed = require(Parent.Signals).createComputed(function(p1)
+local Computed = SignalsModule.createComputed(function(p1)
 	-- upvalues: GetLibraryStoreModule (copy)
 	local WorldViewportRect = GetLibraryStoreModule().getWorldViewportRect(p1)
 	

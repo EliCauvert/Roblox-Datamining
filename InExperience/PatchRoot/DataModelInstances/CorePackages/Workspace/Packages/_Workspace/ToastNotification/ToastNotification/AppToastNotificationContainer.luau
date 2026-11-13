@@ -1,8 +1,9 @@
 ﻿local Parent = script.Parent
 local Parent1 = Parent.Parent
 local ReactModule = require(Parent1.React)
+local ExperienceServiceModule = require(Parent1.ExperienceService)
 local ToastNotificationWrapperModule = require(Parent.ToastNotificationWrapper)
-local ExperienceService = require(Parent1.ExperienceService).ExperienceService
+local ExperienceService = ExperienceServiceModule.ExperienceService
 
 return function(p1)
 	-- upvalues: ReactModule (copy), ExperienceService (copy), ToastNotificationWrapperModule (copy)

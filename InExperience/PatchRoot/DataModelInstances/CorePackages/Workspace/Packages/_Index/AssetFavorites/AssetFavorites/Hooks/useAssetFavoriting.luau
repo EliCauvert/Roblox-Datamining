@@ -3,6 +3,7 @@ local CryoModule = require(AssetFavorites.Parent.Cryo)
 local ReactModule = require(AssetFavorites.Parent.React)
 local StatusCodes = require(AssetFavorites.Parent.Http).StatusCodes
 local HttpRequestModule = require(AssetFavorites.Parent.HttpRequest)
+local FFlagLuaAppDefaultHttpRetry = require(AssetFavorites.Parent.SharedFlags).FFlagLuaAppDefaultHttpRetry
 local UseLocalUserIdModule = require(AssetFavorites.Hooks.useLocalUserId)
 local GetFavoriteForAssetModule = require(AssetFavorites.Requests.GetFavoriteForAsset)
 local PostFavoriteForAssetModule = require(AssetFavorites.Requests.PostFavoriteForAsset)
@@ -17,7 +18,7 @@ local UseRefFunction = ReactModule.useRef
 local UseMemoFunction = ReactModule.useMemo
 local ConfigResult = HttpRequestModule.config({
 	requestFunction = HttpRequestModule.requestFunctions.RequestInternal,
-	maxRetryCount = if require(AssetFavorites.Parent.SharedFlags).FFlagLuaAppDefaultHttpRetry then game:DefineFastInt("UseAssetFavoritingHttpRetryCount", 4) else nil
+	maxRetryCount = if FFlagLuaAppDefaultHttpRetry then game:DefineFastInt("UseAssetFavoritingHttpRetryCount", 4) else nil
 })
 
 return function(p1)

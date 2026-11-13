@@ -6,11 +6,12 @@ local Parent1 = Parent.Parent
 local ReactModule = require(Parent1.React)
 local ReactRobloxModule = require(Parent1.ReactRoblox)
 local InExperienceLocalesModule = require(Parent1.InExperienceLocales)
+local LocalizationModule = require(Parent1.Localization)
 local FoundationModule = require(Parent1.Foundation)
 local RoactModule = require(Parent1.Roact)
 local DisclosureButtonListenerComponentModule = require(Parent.DisclosureButtonListenerComponent)
 local AdsInteractivityControlsModule = require(Parent.AdsInteractivityControls)
-local LocalizationProvider = require(Parent1.Localization).LocalizationProvider
+local LocalizationProvider = LocalizationModule.LocalizationProvider
 local FoundationProvider = FoundationModule.FoundationProvider
 
 local function initializeImmersiveAds()

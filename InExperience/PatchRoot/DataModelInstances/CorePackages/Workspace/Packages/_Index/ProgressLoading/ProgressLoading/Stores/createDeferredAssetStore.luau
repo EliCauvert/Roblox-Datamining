@@ -1,7 +1,8 @@
 ﻿local ProgressLoading = script:FindFirstAncestor("ProgressLoading")
+local Parent = ProgressLoading.Parent
 local EngineFeatureEnableDeferredAssetManagerServiceModule = require(ProgressLoading.Flags.EngineFeatureEnableDeferredAssetManagerService)
 local DeferredAssetManagerService = if EngineFeatureEnableDeferredAssetManagerServiceModule then game:GetService("DeferredAssetManagerService") else nil
-local SignalsModule = require(ProgressLoading.Parent.Signals)
+local SignalsModule = require(Parent.Signals)
 
 return function(p1)
 	-- upvalues: DeferredAssetManagerService (copy), EngineFeatureEnableDeferredAssetManagerServiceModule (copy), SignalsModule (copy)

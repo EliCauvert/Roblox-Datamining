@@ -1,7 +1,8 @@
 ﻿local Parent = script:FindFirstAncestor("SocialServerDrivenUi").Parent
 local ReactModule = require(Parent.React)
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local FriendsOwnedChip = require(Parent.SocialProof).Chips.FriendsOwnedChip
-local SduiErrorType = require(Parent.SduiCoreSystem).SduiErrors.SduiErrorType
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 local config = { Asset = "Asset", Bundle = "Bundle" }
 
 local function _(p1)

@@ -106,7 +106,7 @@ function HttpRequestModule.post(p1, Url, Input)
 			-- upvalues: rejectFromNetworkImpl (upval), p2 (copy)
 			rejectFromNetworkImpl(p2, p3)
 		end)
-	end) else PromiseModule.new(function(Callback1, Callback)
+	end) else PromiseModule.new(function(Callback, Callback1)
 		-- upvalues: p1 (copy), Url (copy), Input (copy), ErrorTransferModelModule (upval)
 		p1.http:RequestInternal({
 			Method = "POST",
@@ -117,25 +117,25 @@ function HttpRequestModule.post(p1, Url, Input)
 			},
 			Body = p1.http:JSONEncode(Input)
 		}):Start(function(_, p2)
-			-- upvalues: Callback1 (copy), p1 (upval), ErrorTransferModelModule (upval), Callback (copy)
+			-- upvalues: Callback (copy), p1 (upval), ErrorTransferModelModule (upval), Callback1 (copy)
 			if p2.StatusCode == 200 then
-				Callback1(p1.http:JSONDecode(p2.Body))
+				Callback(p1.http:JSONDecode(p2.Body))
 				
 				return
 			end
 			if p2.StatusCode ~= 400 and p2.StatusCode ~= 403 then
-				Callback({ status = p2.StatusCode, body = p2.Body })
+				Callback1({ status = p2.StatusCode, body = p2.Body })
 				
 				return
 			end
 			local Data = if p2.Body and p2.Body ~= "" then p1.http:JSONDecode(p2.Body) else nil
 			
 			if Data then
-				Callback((ErrorTransferModelModule.format(Data)))
+				Callback1((ErrorTransferModelModule.format(Data)))
 				
 				return
 			else
-				Callback({ status = p2.StatusCode, body = p2.Body })
+				Callback1({ status = p2.StatusCode, body = p2.Body })
 			end
 		end)
 	end)

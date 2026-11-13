@@ -1,8 +1,9 @@
 ﻿local Parent = script:FindFirstAncestor("SplitPane").Parent
 local ReactModule = require(Parent.React)
+local RobloxAppNavigationModule = require(Parent.RobloxAppNavigation)
 local FFlagNavigationCommandHandle = require(Parent.SharedFlags).FFlagNavigationCommandHandle
 local OnScreenStoreModule = require(script.Parent.Parent.Stores.OnScreenStore)
-local OnScreenContext = require(Parent.RobloxAppNavigation).OnScreenContext
+local OnScreenContext = RobloxAppNavigationModule.OnScreenContext
 
 return function(p1)
 	-- upvalues: ReactModule (copy), FFlagNavigationCommandHandle (copy), OnScreenStoreModule (copy), OnScreenContext (copy)

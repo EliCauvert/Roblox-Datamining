@@ -22,6 +22,11 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseCursorModule (copy), ReactModule (copy), LoggerModule (copy), InputSizeModule (copy), FillBehaviorModule (copy), DashModule (copy), ButtonModule (copy), UseScaledValueModule (copy), ViewModule (copy), WithCommonPropsModule (copy), ImageModule (copy), TextModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()
+	local UseCursorModuleResult = UseCursorModule({
+		radius = UDim.new(0, UseTokensModuleResult.Radius.Medium),
+		offset = UseTokensModuleResult.Size.Size_200,
+		borderWidth = UseTokensModuleResult.Stroke.Thicker
+	})
 	local Actions = WithDefaultsModuleResult.actions
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Actions (copy), LoggerModule (upval), InputSizeModule (upval), FillBehaviorModule (upval), DashModule (upval), ReactModule (upval), ButtonModule (upval)
@@ -53,11 +58,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 		Position = UDim2.fromScale(0.5, 0.1),
 		selection = {
 			Selectable = false,
-			SelectionImageObject = UseCursorModule({
-				radius = UDim.new(0, UseTokensModuleResult.Radius.Medium),
-				offset = UseTokensModuleResult.Size.Size_200,
-				borderWidth = UseTokensModuleResult.Stroke.Thicker
-			})
+			SelectionImageObject = UseCursorModuleResult
 		},
 		ref = Ref
 	}), {

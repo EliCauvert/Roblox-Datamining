@@ -158,7 +158,7 @@ local Default = nil
 local NewCurrentTime = -1
 local X = RobloxGui.AbsoluteSize.X
 local Y = RobloxGui.AbsoluteSize.Y
-local config3 = {
+local config4 = {
 	NONE = 1,
 	RECONNECT_PLACELAUNCH = 2,
 	RECONNECT_DISCONNECT = 3,
@@ -176,49 +176,49 @@ local config3 = {
 }
 
 if ConnectionEnableAutoReconnect then
-	config3.AUTO_RECONNECTING = 15
+	config4.AUTO_RECONNECTING = 15
 end
-local NONE = config3.NONE
+local NONE = config4.NONE
 local OK = Enum.ConnectionError.OK
-local config4 = {
-	[config3.RECONNECT_PLACELAUNCH] = "Join Error",
-	[config3.RECONNECT_DISABLED_PLACELAUNCH] = "Join Error",
-	[config3.RECONNECT_DISCONNECT] = "Disconnected",
-	[config3.RECONNECT_DISABLED_DISCONNECT] = "Disconnected",
-	[config3.TELEPORT_FAILED] = "Teleport Failed",
-	[config3.RECONNECT_DISABLED] = "Error",
-	[config3.OUT_OF_MEMORY_KEEPPLAYING_LEAVE] = "Low Memory Warning",
-	[config3.RECONNECT_CONNECT_FAILURE] = "Connection Failed",
-	[config3.RECONNECT_DISABLED_CONNECT_FAILURE] = "Connection Failed",
-	[config3.RECONNECT_AGE_CHECK_REQUIRED] = "Join Error",
-	[config3.RECONNECT_PARENT_APPROVAL_REQUIRED] = "Join Error"
+local config5 = {
+	[config4.RECONNECT_PLACELAUNCH] = "Join Error",
+	[config4.RECONNECT_DISABLED_PLACELAUNCH] = "Join Error",
+	[config4.RECONNECT_DISCONNECT] = "Disconnected",
+	[config4.RECONNECT_DISABLED_DISCONNECT] = "Disconnected",
+	[config4.TELEPORT_FAILED] = "Teleport Failed",
+	[config4.RECONNECT_DISABLED] = "Error",
+	[config4.OUT_OF_MEMORY_KEEPPLAYING_LEAVE] = "Low Memory Warning",
+	[config4.RECONNECT_CONNECT_FAILURE] = "Connection Failed",
+	[config4.RECONNECT_DISABLED_CONNECT_FAILURE] = "Connection Failed",
+	[config4.RECONNECT_AGE_CHECK_REQUIRED] = "Join Error",
+	[config4.RECONNECT_PARENT_APPROVAL_REQUIRED] = "Join Error"
 }
 
 if AddCollaborationCoreGatedConnectionError2 then
-	config4[config3.RECONNECT_COLLABORATION_CORE_GATED] = "Join Error"
+	config5[config4.RECONNECT_COLLABORATION_CORE_GATED] = "Join Error"
 end
 if ConnectionEnableAutoReconnect then
-	config4[config3.AUTO_RECONNECTING] = "Disconnected"
+	config5[config4.AUTO_RECONNECTING] = "Disconnected"
 end
-local config2 = {
-	[config3.RECONNECT_PLACELAUNCH] = "InGame.ConnectionError.Title.JoinError",
-	[config3.RECONNECT_DISABLED_PLACELAUNCH] = "InGame.ConnectionError.Title.JoinError",
-	[config3.RECONNECT_DISCONNECT] = "InGame.ConnectionError.Title.Disconnected",
-	[config3.RECONNECT_DISABLED_DISCONNECT] = "InGame.ConnectionError.Title.Disconnected",
-	[config3.TELEPORT_FAILED] = "InGame.ConnectionError.Title.TeleportFailed",
-	[config3.RECONNECT_DISABLED] = "InGame.CommonUI.Title.Error",
-	[config3.OUT_OF_MEMORY_KEEPPLAYING_LEAVE] = "InGame.ConnectionError.Title.LowMemoryWarning",
-	[config3.RECONNECT_CONNECT_FAILURE] = "InGame.ConnectionError.Title.ConnectionFailed",
-	[config3.RECONNECT_DISABLED_CONNECT_FAILURE] = "InGame.ConnectionError.Title.ConnectionFailed",
-	[config3.RECONNECT_AGE_CHECK_REQUIRED] = "InGame.ConnectionError.Title.JoinError",
-	[config3.RECONNECT_PARENT_APPROVAL_REQUIRED] = "InGame.ConnectionError.Title.JoinError"
+local config3 = {
+	[config4.RECONNECT_PLACELAUNCH] = "InGame.ConnectionError.Title.JoinError",
+	[config4.RECONNECT_DISABLED_PLACELAUNCH] = "InGame.ConnectionError.Title.JoinError",
+	[config4.RECONNECT_DISCONNECT] = "InGame.ConnectionError.Title.Disconnected",
+	[config4.RECONNECT_DISABLED_DISCONNECT] = "InGame.ConnectionError.Title.Disconnected",
+	[config4.TELEPORT_FAILED] = "InGame.ConnectionError.Title.TeleportFailed",
+	[config4.RECONNECT_DISABLED] = "InGame.CommonUI.Title.Error",
+	[config4.OUT_OF_MEMORY_KEEPPLAYING_LEAVE] = "InGame.ConnectionError.Title.LowMemoryWarning",
+	[config4.RECONNECT_CONNECT_FAILURE] = "InGame.ConnectionError.Title.ConnectionFailed",
+	[config4.RECONNECT_DISABLED_CONNECT_FAILURE] = "InGame.ConnectionError.Title.ConnectionFailed",
+	[config4.RECONNECT_AGE_CHECK_REQUIRED] = "InGame.ConnectionError.Title.JoinError",
+	[config4.RECONNECT_PARENT_APPROVAL_REQUIRED] = "InGame.ConnectionError.Title.JoinError"
 }
 
 if AddCollaborationCoreGatedConnectionError2 then
-	config2[config3.RECONNECT_COLLABORATION_CORE_GATED] = "InGame.ConnectionError.Title.JoinError"
+	config3[config4.RECONNECT_COLLABORATION_CORE_GATED] = "InGame.ConnectionError.Title.JoinError"
 end
 if ConnectionEnableAutoReconnect then
-	config2[config3.AUTO_RECONNECTING] = "InGame.ConnectionError.Title.Disconnected"
+	config3[config4.AUTO_RECONNECTING] = "InGame.ConnectionError.Title.Disconnected"
 end
 local v4 = CreateFunction("Frame")({
 	Name = "promptOverlay",
@@ -290,10 +290,10 @@ local function Callback()
 end
 
 local function Callback1()
-	-- upvalues: NONE (ref), config3 (copy), TelemetryService (copy), config (copy), RbxAnalyticsService (copy), Default (ref), FFlagConnectionRelaunchBuildPlaytest (copy), PlaytestReconnectModule (ref), TeleportService (copy), FFlagCoreScriptShowTeleportPromptModule (copy), RefactorReconnectUnblockTeleport (copy), GuiService (copy)
+	-- upvalues: NONE (ref), config4 (copy), TelemetryService (copy), config (copy), RbxAnalyticsService (copy), Default (ref), FFlagConnectionRelaunchBuildPlaytest (copy), PlaytestReconnectModule (ref), TeleportService (copy), FFlagCoreScriptShowTeleportPromptModule (copy), RefactorReconnectUnblockTeleport (copy), GuiService (copy)
 	local _ = tick()
 	
-	if NONE == config3.IS_RECONNECTING then
+	if NONE == config4.IS_RECONNECTING then
 		TelemetryService:LogCounter(config, {
 			customFields = { selectedItem = "UserClickWhileReconnecting" }
 		}, 1)
@@ -302,7 +302,7 @@ local function Callback1()
 	end
 	TelemetryService:LogCounter(config, { customFields = { selectedItem = "ReconnectInitiated" } }, 1)
 	RbxAnalyticsService:ReportCounter("ReconnectPrompt-ReconnectActivated")
-	NONE = config3.IS_RECONNECTING
+	NONE = config4.IS_RECONNECTING
 	Default:primaryShimmerPlay()
 	local RelaunchPlaceId = if FFlagConnectionRelaunchBuildPlaytest then PlaytestReconnectModule.getRelaunchPlaceId() else nil
 	
@@ -327,9 +327,9 @@ local function Callback1()
 	end
 end
 
-local function v97()
-	-- upvalues: NONE (ref), config3 (copy), TelemetryService (copy), config (copy), Default (ref), GuiService (copy), TeleportService (copy)
-	if NONE == config3.IS_RECONNECTING then
+local function v98()
+	-- upvalues: NONE (ref), config4 (copy), TelemetryService (copy), config (copy), Default (ref), GuiService (copy), TeleportService (copy)
+	if NONE == config4.IS_RECONNECTING then
 		TelemetryService:LogCounter(config, {
 			customFields = { selectedItem = "UserClickWhileReconnecting" }
 		}, 1)
@@ -342,7 +342,7 @@ local function v97()
 		TelemetryService:LogCounter(config, {
 			customFields = { selectedItem = "PlacelaunchRetryInitiated" }
 		}, 1)
-		NONE = config3.IS_RECONNECTING
+		NONE = config4.IS_RECONNECTING
 		Default:primaryShimmerPlay()
 		GuiService:ClearError()
 		TeleportService:Teleport(PlaceId)
@@ -380,7 +380,7 @@ local function Callback3()
 	GuiService:ClearError()
 end
 
-local config5 = {
+local config6 = {
 	active = false,
 	attempt = 0,
 	pendingThread = nil,
@@ -405,20 +405,20 @@ local _ = function(p1, p2)
 end
 
 local function renderAutoReconnectPrompt()
-	-- upvalues: Default (ref), NONE (ref), config3 (copy), config5 (copy), translateString (copy), GetFFlagDisplayChannelNameOnErrorPromptModule (copy)
+	-- upvalues: Default (ref), NONE (ref), config4 (copy), config6 (copy), translateString (copy), GetFFlagDisplayChannelNameOnErrorPromptModule (copy)
 	if not Default then return end
-	if NONE ~= config3.AUTO_RECONNECTING and NONE ~= config3.IS_RECONNECTING then return end
-	local Largest: number = if NONE == config3.IS_RECONNECTING then -1 else math.max(0, (math.ceil(config5.nextAttemptAt - tick())))
+	if NONE ~= config4.AUTO_RECONNECTING and NONE ~= config4.IS_RECONNECTING then return end
+	local Largest: number = if NONE == config4.IS_RECONNECTING then -1 else math.max(0, (math.ceil(config6.nextAttemptAt - tick())))
 	
-	if Largest == config5.lastRemaining then return end
-	config5.lastRemaining = Largest
-	local Attempt = config5.attempt
+	if Largest == config6.lastRemaining then return end
+	config6.lastRemaining = Largest
+	local Attempt = config6.attempt
 	local InGameConnectionErrorReconnectingAttempt = if Largest <= 0 then translateString("InGame.ConnectionError.ReconnectingAttempt", { RBX_ATTEMPT = Attempt }) elseif Largest == 1 then translateString("InGame.ConnectionError.ReconnectingAttemptInSecond", { RBX_ATTEMPT = Attempt }) else translateString("InGame.ConnectionError.ReconnectingAttemptInSeconds", { RBX_ATTEMPT = Attempt, RBX_SECONDS = Largest })
-	local Text = if config5.baseMessage and config5.baseMessage ~= "" then config5.baseMessage .. "\n" .. InGameConnectionErrorReconnectingAttempt else InGameConnectionErrorReconnectingAttempt
+	local Text = if config6.baseMessage and config6.baseMessage ~= "" then config6.baseMessage .. "\n" .. InGameConnectionErrorReconnectingAttempt else InGameConnectionErrorReconnectingAttempt
 	
-	if Text == config5.lastRenderedText then return end
-	config5.lastRenderedText = Text
-	local ErrorCode = config5.errorCode
+	if Text == config6.lastRenderedText then return end
+	config6.lastRenderedText = Text
+	local ErrorCode = config6.errorCode
 	
 	if not Default then return end
 	if GetFFlagDisplayChannelNameOnErrorPromptModule() then
@@ -431,15 +431,15 @@ local function renderAutoReconnectPrompt()
 end
 
 local _ = function()
-	-- upvalues: config5 (copy), renderAutoReconnectPrompt (copy)
-	if not config5.tickerThread then
-		config5.tickerThread = task.spawn(function()
-			-- upvalues: config5 (upval), renderAutoReconnectPrompt (upval)
-			while config5.active do
+	-- upvalues: config6 (copy), renderAutoReconnectPrompt (copy)
+	if not config6.tickerThread then
+		config6.tickerThread = task.spawn(function()
+			-- upvalues: config6 (upval), renderAutoReconnectPrompt (upval)
+			while config6.active do
 				task.wait(0.25)
 				renderAutoReconnectPrompt()
 			end
-			config5.tickerThread = nil
+			config6.tickerThread = nil
 		end)
 		
 		return
@@ -447,22 +447,22 @@ local _ = function()
 end
 
 local _ = function()
-	-- upvalues: config5 (copy)
-	config5.active = false
-	config5.attempt = 0
-	config5.nextAttemptAt = 0
-	config5.errorCode = nil
-	config5.baseMessage = nil
-	config5.lastRenderedText = nil
-	config5.lastRemaining = nil
+	-- upvalues: config6 (copy)
+	config6.active = false
+	config6.attempt = 0
+	config6.nextAttemptAt = 0
+	config6.errorCode = nil
+	config6.baseMessage = nil
+	config6.lastRenderedText = nil
+	config6.lastRemaining = nil
 	
-	if config5.pendingThread then
-		task.cancel(config5.pendingThread)
-		config5.pendingThread = nil
+	if config6.pendingThread then
+		task.cancel(config6.pendingThread)
+		config6.pendingThread = nil
 	end
-	if config5.tickerThread then
-		task.cancel(config5.tickerThread)
-		config5.tickerThread = nil
+	if config6.tickerThread then
+		task.cancel(config6.tickerThread)
+		config6.tickerThread = nil
 	end
 end
 
@@ -471,18 +471,18 @@ local _ = function(p1: number): string
 end
 
 local function fireAutoReconnect()
-	-- upvalues: config5 (copy), NONE (ref), config3 (copy), TelemetryService (copy), config (copy), renderAutoReconnectPrompt (copy), Default (ref), TeleportService (copy), FFlagCoreScriptShowTeleportPromptModule (copy), RefactorReconnectUnblockTeleport (copy), GuiService (copy)
-	config5.pendingThread = nil
+	-- upvalues: config6 (copy), NONE (ref), config4 (copy), TelemetryService (copy), config (copy), renderAutoReconnectPrompt (copy), Default (ref), TeleportService (copy), FFlagCoreScriptShowTeleportPromptModule (copy), RefactorReconnectUnblockTeleport (copy), GuiService (copy)
+	config6.pendingThread = nil
 	
-	if NONE == config3.IS_RECONNECTING then return end
-	local Attempt: number = config5.attempt
+	if NONE == config4.IS_RECONNECTING then return end
+	local Attempt: number = config6.attempt
 	TelemetryService:LogCounter(config, {
 		customFields = {
 			selectedItem = "AutoReconnectAttempt",
 			attemptBucket = if Attempt <= 5 then tostring(Attempt) elseif Attempt <= 8 then "6-8" else "9+"
 		}
 	}, 1)
-	NONE = config3.IS_RECONNECTING
+	NONE = config4.IS_RECONNECTING
 	renderAutoReconnectPrompt()
 	
 	if Default then
@@ -501,44 +501,44 @@ local function fireAutoReconnect()
 end
 
 local function scheduleAutoReconnect()
-	-- upvalues: config5 (copy), ConnectionAutoReconnectFirstDelayMs (copy), ConnectionAutoReconnectBaseDelayMs (copy), ConnectionAutoReconnectMaxDelayMs (copy), ConnectionAutoReconnectJitterMs (copy), _Random (ref), TelemetryService (copy), config (copy), renderAutoReconnectPrompt (copy), fireAutoReconnect (copy)
-	config5.active = true
+	-- upvalues: config6 (copy), ConnectionAutoReconnectFirstDelayMs (copy), ConnectionAutoReconnectBaseDelayMs (copy), ConnectionAutoReconnectMaxDelayMs (copy), ConnectionAutoReconnectJitterMs (copy), _Random (ref), TelemetryService (copy), config (copy), renderAutoReconnectPrompt (copy), fireAutoReconnect (copy)
+	config6.active = true
 	
-	if config5.pendingThread then
-		task.cancel(config5.pendingThread)
-		config5.pendingThread = nil
+	if config6.pendingThread then
+		task.cancel(config6.pendingThread)
+		config6.pendingThread = nil
 	end
-	config5.attempt += 1
-	local Attempt: number = config5.attempt
+	config6.attempt += 1
+	local Attempt: number = config6.attempt
 	local ConnectionAutoReconnectFirstDelayMs1 = if Attempt <= 1 then ConnectionAutoReconnectFirstDelayMs elseif Attempt == 2 then ConnectionAutoReconnectBaseDelayMs else math.min(ConnectionAutoReconnectBaseDelayMs * 2 ^ (Attempt - 2), ConnectionAutoReconnectMaxDelayMs)
 	
 	if ConnectionAutoReconnectJitterMs > 0 then
 		ConnectionAutoReconnectFirstDelayMs1 += _Random:NextInteger(0, ConnectionAutoReconnectJitterMs)
 	end
 	local Delay = ConnectionAutoReconnectFirstDelayMs1 / 1000
-	config5.nextAttemptAt = tick() + Delay
-	config5.lastRenderedText = nil
-	config5.lastRemaining = nil
+	config6.nextAttemptAt = tick() + Delay
+	config6.lastRenderedText = nil
+	config6.lastRemaining = nil
 	TelemetryService:LogCounter(config, {
 		customFields = { selectedItem = "AutoReconnectScheduled" }
 	}, 1)
 	
-	if not config5.tickerThread then
-		config5.tickerThread = task.spawn(function()
-			-- upvalues: config5 (upval), renderAutoReconnectPrompt (upval)
-			while config5.active do
+	if not config6.tickerThread then
+		config6.tickerThread = task.spawn(function()
+			-- upvalues: config6 (upval), renderAutoReconnectPrompt (upval)
+			while config6.active do
 				task.wait(0.25)
 				renderAutoReconnectPrompt()
 			end
-			config5.tickerThread = nil
+			config6.tickerThread = nil
 		end)
 	end
-	config5.pendingThread = task.delay(Delay, fireAutoReconnect)
+	config6.pendingThread = task.delay(Delay, fireAutoReconnect)
 end
 
 local function autoReconnectNowFunction()
-	-- upvalues: NONE (ref), config3 (copy), TelemetryService (copy), config (copy), config5 (copy), fireAutoReconnect (copy)
-	if NONE == config3.IS_RECONNECTING then
+	-- upvalues: NONE (ref), config4 (copy), TelemetryService (copy), config (copy), config6 (copy), fireAutoReconnect (copy)
+	if NONE == config4.IS_RECONNECTING then
 		TelemetryService:LogCounter(config, {
 			customFields = { selectedItem = "UserClickWhileReconnecting" }
 		}, 1)
@@ -549,36 +549,36 @@ local function autoReconnectNowFunction()
 		customFields = { selectedItem = "AutoReconnectManualNow" }
 	}, 1)
 	
-	if config5.pendingThread then
-		task.cancel(config5.pendingThread)
-		config5.pendingThread = nil
+	if config6.pendingThread then
+		task.cancel(config6.pendingThread)
+		config6.pendingThread = nil
 	end
 	fireAutoReconnect()
 end
 
 local function Callback4()
-	-- upvalues: TelemetryService (copy), config (copy), config5 (copy), Callback2 (copy)
+	-- upvalues: TelemetryService (copy), config (copy), config6 (copy), Callback2 (copy)
 	TelemetryService:LogCounter(config, { customFields = { selectedItem = "AutoReconnectLeave" } }, 1)
-	config5.active = false
-	config5.attempt = 0
-	config5.nextAttemptAt = 0
-	config5.errorCode = nil
-	config5.baseMessage = nil
-	config5.lastRenderedText = nil
-	config5.lastRemaining = nil
+	config6.active = false
+	config6.attempt = 0
+	config6.nextAttemptAt = 0
+	config6.errorCode = nil
+	config6.baseMessage = nil
+	config6.lastRenderedText = nil
+	config6.lastRemaining = nil
 	
-	if config5.pendingThread then
-		task.cancel(config5.pendingThread)
-		config5.pendingThread = nil
+	if config6.pendingThread then
+		task.cancel(config6.pendingThread)
+		config6.pendingThread = nil
 	end
-	if config5.tickerThread then
-		task.cancel(config5.tickerThread)
-		config5.tickerThread = nil
+	if config6.tickerThread then
+		task.cancel(config6.tickerThread)
+		config6.tickerThread = nil
 	end
 	Callback2()
 end
 
-local config6 = {
+local config7 = {
 	[Enum.ConnectionError.IPRecentlyConnected] = true,
 	[Enum.ConnectionError.ConnectionBanned] = true,
 	[Enum.ConnectionError.InvalidPassword] = true,
@@ -614,37 +614,37 @@ local config6 = {
 }
 
 if CoreGuiOverflowDetectionEngineFeature then
-	config6[Enum.ConnectionError.DisconnectClientFailure] = true
+	config7[Enum.ConnectionError.DisconnectClientFailure] = true
 end
 if ShowScreentimeLockoutKickMessage then
-	config6[Enum.ConnectionError.ScreentimeLockoutKick] = true
+	config7[Enum.ConnectionError.ScreentimeLockoutKick] = true
 end
 if AddPlacelaunchDeviceBlock2 then
-	config6[Enum.ConnectionError.PlacelaunchDeviceBlock] = true
+	config7[Enum.ConnectionError.PlacelaunchDeviceBlock] = true
 end
 if AddContextualPlayabilityConnectionErrors then
-	config6[Enum.ConnectionError.PlacelaunchAgeVerificationRequired] = true
-	config6[Enum.ConnectionError.PlacelaunchParentalApprovalRequired] = true
-	config6[Enum.ConnectionError.PlacelaunchCoreGated] = true
+	config7[Enum.ConnectionError.PlacelaunchAgeVerificationRequired] = true
+	config7[Enum.ConnectionError.PlacelaunchParentalApprovalRequired] = true
+	config7[Enum.ConnectionError.PlacelaunchCoreGated] = true
 end
 if AddVipOwnerNotPresentConnectionError and not VipOwnerNotPresentEnableReconnect then
-	config6[Enum.ConnectionError.PlacelaunchVipOwnerNotPresent] = true
+	config7[Enum.ConnectionError.PlacelaunchVipOwnerNotPresent] = true
 end
 local PlacelaunchCollaborationCoreGated = if AddCollaborationCoreGatedConnectionError2 and PlacelaunchCollaborationCoreGatedConnectionErrorEngineFeature then Enum.ConnectionError.PlacelaunchCollaborationCoreGated else nil
 
 if AddCollaborationCoreGatedConnectionError2 and PlacelaunchCollaborationCoreGated then
-	config6[PlacelaunchCollaborationCoreGated] = true
+	config7[PlacelaunchCollaborationCoreGated] = true
 end
 if RAKickLogic2 and Flag then
-	config6[Enum.ConnectionError.DisconnectRemoteAttestationUnsupported] = true
-	config6[Enum.ConnectionError.DisconnectRemoteAttestationGeneralFailure] = true
-	config6[Enum.ConnectionError.DisconnectRemoteAttestationOSOutOfDate] = true
-	config6[Enum.ConnectionError.DisconnectRemoteAttestationBootValidationFailure] = true
+	config7[Enum.ConnectionError.DisconnectRemoteAttestationUnsupported] = true
+	config7[Enum.ConnectionError.DisconnectRemoteAttestationGeneralFailure] = true
+	config7[Enum.ConnectionError.DisconnectRemoteAttestationOSOutOfDate] = true
+	config7[Enum.ConnectionError.DisconnectRemoteAttestationBootValidationFailure] = true
 end
-local t = {}
+local config8 = {}
 
 if ConnectionEnableAutoReconnect then
-	t = {
+	config8 = {
 		[Enum.ConnectionError.DisconnectConnectionLost] = true,
 		[Enum.ConnectionError.DisconnectTimeout] = true,
 		[Enum.ConnectionError.DisconnectRaknetErrors] = true,
@@ -659,11 +659,11 @@ if ConnectionEnableAutoReconnect then
 	}
 	
 	if RbxTransportHandleUniqueErrors and RbxTransportUniqueConnectionErrorsEngineFeature then
-		t[Enum.ConnectionError.DisconnectTransportIoInternetError] = true
+		config8[Enum.ConnectionError.DisconnectTransportIoInternetError] = true
 	end
 end
-local config7 = {
-	[config3.RECONNECT_PLACELAUNCH] = {
+local config9 = {
+	[config4.RECONNECT_PLACELAUNCH] = {
 		{
 			Text = "Retry",
 			LocalizationKey = "InGame.CommonUI.Button.Retry",
@@ -678,7 +678,7 @@ local config7 = {
 			Callback = Callback2
 		}
 	},
-	[config3.RECONNECT_DISCONNECT] = {
+	[config4.RECONNECT_DISCONNECT] = {
 		{
 			Text = "Reconnect",
 			LocalizationKey = "InGame.ConnectionError.Button.Reconnect",
@@ -693,7 +693,7 @@ local config7 = {
 			Callback = Callback2
 		}
 	},
-	[config3.TELEPORT_FAILED] = {
+	[config4.TELEPORT_FAILED] = {
 		{
 			Text = "OK",
 			LocalizationKey = "InGame.CommonUI.Button.Ok",
@@ -702,7 +702,7 @@ local config7 = {
 			Callback = Callback3
 		}
 	},
-	[config3.RECONNECT_DISABLED_DISCONNECT] = {
+	[config4.RECONNECT_DISABLED_DISCONNECT] = {
 		{
 			Text = "Leave",
 			LocalizationKey = "Feature.SettingsHub.Label.LeaveButton",
@@ -711,7 +711,7 @@ local config7 = {
 			Callback = Callback2
 		}
 	},
-	[config3.RECONNECT_DISABLED_PLACELAUNCH] = {
+	[config4.RECONNECT_DISABLED_PLACELAUNCH] = {
 		{
 			Text = "Leave",
 			LocalizationKey = "Feature.SettingsHub.Label.LeaveButton",
@@ -720,7 +720,7 @@ local config7 = {
 			Callback = Callback2
 		}
 	},
-	[config3.RECONNECT_DISABLED] = {
+	[config4.RECONNECT_DISABLED] = {
 		{
 			Text = "Leave",
 			LocalizationKey = "Feature.SettingsHub.Label.LeaveButton",
@@ -729,7 +729,7 @@ local config7 = {
 			Callback = Callback2
 		}
 	},
-	[config3.OUT_OF_MEMORY_KEEPPLAYING_LEAVE] = {
+	[config4.OUT_OF_MEMORY_KEEPPLAYING_LEAVE] = {
 		{
 			Text = "Keep Playing",
 			LocalizationKey = "InGame.CommonUI.Button.KeepPlaying",
@@ -744,7 +744,7 @@ local config7 = {
 			Callback = Callback2
 		}
 	},
-	[config3.RECONNECT_CONNECT_FAILURE] = {
+	[config4.RECONNECT_CONNECT_FAILURE] = {
 		{
 			Text = "Retry",
 			LocalizationKey = "InGame.CommonUI.Button.Retry",
@@ -759,7 +759,7 @@ local config7 = {
 			Callback = Callback2
 		}
 	},
-	[config3.RECONNECT_DISABLED_CONNECT_FAILURE] = {
+	[config4.RECONNECT_DISABLED_CONNECT_FAILURE] = {
 		{
 			Text = "Leave",
 			LocalizationKey = "Feature.SettingsHub.Label.LeaveButton",
@@ -768,7 +768,7 @@ local config7 = {
 			Callback = Callback2
 		}
 	},
-	[config3.RECONNECT_AGE_CHECK_REQUIRED] = {
+	[config4.RECONNECT_AGE_CHECK_REQUIRED] = {
 		{
 			Text = "Leave",
 			LocalizationKey = "Feature.SettingsHub.Label.LeaveButton",
@@ -780,13 +780,13 @@ local config7 = {
 			Primary = true,
 			Text = ConnectionAmpUpsellOnLeaveModule.PrimaryButtonText,
 			LocalizationKey = ConnectionAmpUpsellOnLeaveModule.PrimaryButtonLocalizationKey,
-			Callback = ConnectionAmpUpsellOnLeaveModule.createAgeCheckCallback(config, v97, 9)
+			Callback = ConnectionAmpUpsellOnLeaveModule.createAgeCheckCallback(config, v98, 9)
 		}
 	}
 }
 
 if FFlagConnectionAmpParentalApprovalUpsell then
-	config7[config3.RECONNECT_PARENT_APPROVAL_REQUIRED] = {
+	config9[config4.RECONNECT_PARENT_APPROVAL_REQUIRED] = {
 		{
 			Text = "Leave",
 			LocalizationKey = "Feature.SettingsHub.Label.LeaveButton",
@@ -798,12 +798,12 @@ if FFlagConnectionAmpParentalApprovalUpsell then
 			Primary = true,
 			Text = ConnectionAmpUpsellOnLeaveModule.PrimaryButtonText,
 			LocalizationKey = ConnectionAmpUpsellOnLeaveModule.PrimaryButtonLocalizationKey,
-			Callback = ConnectionAmpUpsellOnLeaveModule.createParentalApprovalCallback(config, v97, 9)
+			Callback = ConnectionAmpUpsellOnLeaveModule.createParentalApprovalCallback(config, v98, 9)
 		}
 	}
 end
 if FFlagConnectionParentalApprovalLeaveOnly then
-	config7[config3.RECONNECT_PARENT_APPROVAL_REQUIRED] = {
+	config9[config4.RECONNECT_PARENT_APPROVAL_REQUIRED] = {
 		{
 			Text = "Leave",
 			LocalizationKey = "Feature.SettingsHub.Label.LeaveButton",
@@ -814,7 +814,7 @@ if FFlagConnectionParentalApprovalLeaveOnly then
 	}
 end
 if AddCollaborationCoreGatedConnectionError2 then
-	config7[config3.RECONNECT_COLLABORATION_CORE_GATED] = {
+	config9[config4.RECONNECT_COLLABORATION_CORE_GATED] = {
 		{
 			Text = "Ok",
 			LocalizationKey = "InGame.ConnectionError.Action.Ok",
@@ -831,7 +831,7 @@ if AddCollaborationCoreGatedConnectionError2 then
 	}
 end
 if ConnectionEnableAutoReconnect then
-	config7[config3.AUTO_RECONNECTING] = {
+	config9[config4.AUTO_RECONNECTING] = {
 		{
 			Text = "Reconnect Now",
 			LocalizationKey = "InGame.ConnectionError.Button.ReconnectNow",
@@ -848,23 +848,23 @@ if ConnectionEnableAutoReconnect then
 	}
 end
 if IsPioneerLaunchFunction() then
-	for _, value in pairs(config7) do
-		for _, value1 in ipairs(value) do
-			if value1.Callback == Callback2 or value1.Callback == Callback4 then
-				value1.Text = "Quit"
-				value1.LocalizationKey = "Feature.SettingsHub.Label.QuitButton"
+	for _, value3 in pairs(config9) do
+		for _, value in ipairs(value3) do
+			if value.Callback == Callback2 or value.Callback == Callback4 then
+				value.Text = "Quit"
+				value.LocalizationKey = "Feature.SettingsHub.Label.QuitButton"
 			end
 		end
 	end
 end
-local config8 = {
-	[config3.NONE] = function()
+local config1 = {
+	[config4.NONE] = function()
 		-- upvalues: RunService (copy), v4 (copy)
 		RunService:SetRobloxGuiFocused(false)
 		v4.Active = false
 		v4.Transparency = 1
 	end,
-	[config3.RECONNECT_DISCONNECT] = function()
+	[config4.RECONNECT_DISCONNECT] = function()
 		-- upvalues: VRService (copy), RunService (copy), v4 (copy)
 		if VRService.VREnabled then
 			RunService:SetRobloxGuiFocused(false)
@@ -874,19 +874,19 @@ local config8 = {
 		v4.Active = true
 		v4.Transparency = 1
 	end,
-	[config3.RECONNECT_PLACELAUNCH] = function()
+	[config4.RECONNECT_PLACELAUNCH] = function()
 		-- upvalues: RunService (copy), v4 (copy)
 		RunService:SetRobloxGuiFocused(false)
 		v4.Active = true
 		v4.Transparency = 0.3
 	end,
-	[config3.TELEPORT_FAILED] = function()
+	[config4.TELEPORT_FAILED] = function()
 		-- upvalues: RunService (copy), v4 (copy)
 		RunService:SetRobloxGuiFocused(false)
 		v4.Active = true
 		v4.Transparency = 0.3
 	end,
-	[config3.RECONNECT_DISABLED_DISCONNECT] = function()
+	[config4.RECONNECT_DISABLED_DISCONNECT] = function()
 		-- upvalues: VRService (copy), RunService (copy), v4 (copy)
 		if VRService.VREnabled then
 			RunService:SetRobloxGuiFocused(false)
@@ -896,13 +896,13 @@ local config8 = {
 		v4.Active = true
 		v4.Transparency = 1
 	end,
-	[config3.RECONNECT_DISABLED_PLACELAUNCH] = function()
+	[config4.RECONNECT_DISABLED_PLACELAUNCH] = function()
 		-- upvalues: RunService (copy), v4 (copy)
 		RunService:SetRobloxGuiFocused(false)
 		v4.Active = true
 		v4.Transparency = 0.3
 	end,
-	[config3.RECONNECT_DISABLED] = function()
+	[config4.RECONNECT_DISABLED] = function()
 		-- upvalues: VRService (copy), RunService (copy), v4 (copy)
 		if VRService.VREnabled then
 			RunService:SetRobloxGuiFocused(false)
@@ -912,27 +912,27 @@ local config8 = {
 		v4.Active = true
 		v4.Transparency = 1
 	end,
-	[config3.RECONNECT_CONNECT_FAILURE] = function()
+	[config4.RECONNECT_CONNECT_FAILURE] = function()
 		-- upvalues: RunService (copy), v4 (copy)
 		RunService:SetRobloxGuiFocused(false)
 		v4.Active = true
 		v4.Transparency = 0.3
 	end,
-	[config3.RECONNECT_DISABLED_CONNECT_FAILURE] = function()
+	[config4.RECONNECT_DISABLED_CONNECT_FAILURE] = function()
 		-- upvalues: RunService (copy), v4 (copy)
 		RunService:SetRobloxGuiFocused(false)
 		v4.Active = true
 		v4.Transparency = 0.3
 	end
 }
-local Entry = config8[config3.RECONNECT_PLACELAUNCH]
-config8[config3.RECONNECT_AGE_CHECK_REQUIRED] = Entry
+local Entry = config1[config4.RECONNECT_PLACELAUNCH]
+config1[config4.RECONNECT_AGE_CHECK_REQUIRED] = Entry
 
 if FFlagConnectionAmpParentalApprovalUpsell then
-	config8[config3.RECONNECT_PARENT_APPROVAL_REQUIRED] = Entry
+	config1[config4.RECONNECT_PARENT_APPROVAL_REQUIRED] = Entry
 end
 if AddCollaborationCoreGatedConnectionError2 then
-	config8[config3.RECONNECT_COLLABORATION_CORE_GATED] = function()
+	config1[config4.RECONNECT_COLLABORATION_CORE_GATED] = function()
 		-- upvalues: RunService (copy), v4 (copy)
 		RunService:SetRobloxGuiFocused(false)
 		v4.Active = true
@@ -940,10 +940,10 @@ if AddCollaborationCoreGatedConnectionError2 then
 	end
 end
 if ConnectionEnableAutoReconnect then
-	config8[config3.AUTO_RECONNECTING] = config8[config3.RECONNECT_DISCONNECT]
+	config1[config4.AUTO_RECONNECTING] = config1[config4.RECONNECT_DISCONNECT]
 end
 local function onEnter(AUTORECONNECTING)
-	-- upvalues: Default (ref), DebugEnableErrorStringTesting (copy), ErrorPromptModule (copy), v4 (copy), X (ref), Y (ref), config8 (copy), config4 (copy), config2 (copy), config7 (copy)
+	-- upvalues: Default (ref), DebugEnableErrorStringTesting (copy), ErrorPromptModule (copy), v4 (copy), X (ref), Y (ref), config1 (copy), config5 (copy), config3 (copy), config9 (copy)
 	if not Default then
 		Default = ErrorPromptModule.new("Default", {
 			MenuIsOpenKey = "ConnectionErrorPrompt",
@@ -952,32 +952,32 @@ local function onEnter(AUTORECONNECTING)
 		Default:setParent(v4)
 		Default:resizeWidthAndHeight(X, Y)
 	end
-	if config8[AUTORECONNECTING] then
-		config8[AUTORECONNECTING]()
+	if config1[AUTORECONNECTING] then
+		config1[AUTORECONNECTING]()
 	end
-	Default:setErrorTitle(config4[AUTORECONNECTING], config2[AUTORECONNECTING])
-	Default:updateButtons(config7[AUTORECONNECTING])
+	Default:setErrorTitle(config5[AUTORECONNECTING], config3[AUTORECONNECTING])
+	Default:updateButtons(config9[AUTORECONNECTING])
 end
 
 local _ = function(ISRECONNECTING)
-	-- upvalues: config3 (copy), Default (ref)
-	if ISRECONNECTING == config3.IS_RECONNECTING then
+	-- upvalues: config4 (copy), Default (ref)
+	if ISRECONNECTING == config4.IS_RECONNECTING then
 		Default:primaryShimmerStop()
 	end
 end
 
 local function stateTransit(ConnectionError, ConnectionError1, NONE)
-	-- upvalues: FFlagAllowDisconnectGuiForOkUnknownModule (copy), config3 (copy), ReconnectDisabledFFlag (copy), CurrentTime (ref), NewCurrentTime (ref), v2 (copy), OK (ref), config6 (copy), TelemetryService (copy), config (copy), RbxAnalyticsService (copy), FFlagConnectionRelaunchBuildPlaytest (copy), PlaytestReconnectModule (ref), ConnectionEnableAutoReconnect (copy), t (ref), ConnectionAmpUpsellOnLeaveModule (copy), FFlagConnectionUpsellAnalytics (copy), FFlagConnectionAmpParentalApprovalUpsell (copy), AddCollaborationCoreGatedConnectionError2 (copy), PlacelaunchCollaborationCoreGated (copy), PotentialClientTimeoutSeconds (copy), config5 (copy), ConnectionAutoReconnectMaxDurationSeconds (copy)
+	-- upvalues: FFlagAllowDisconnectGuiForOkUnknownModule (copy), config4 (copy), ReconnectDisabledFFlag (copy), CurrentTime (ref), NewCurrentTime (ref), v2 (copy), OK (ref), config7 (copy), TelemetryService (copy), config (copy), RbxAnalyticsService (copy), FFlagConnectionRelaunchBuildPlaytest (copy), PlaytestReconnectModule (ref), ConnectionEnableAutoReconnect (copy), config8 (ref), ConnectionAmpUpsellOnLeaveModule (copy), FFlagConnectionUpsellAnalytics (copy), FFlagConnectionAmpParentalApprovalUpsell (copy), AddCollaborationCoreGatedConnectionError2 (copy), PlacelaunchCollaborationCoreGated (copy), PotentialClientTimeoutSeconds (copy), config6 (copy), ConnectionAutoReconnectMaxDurationSeconds (copy)
 	if FFlagAllowDisconnectGuiForOkUnknownModule then
 		if ConnectionError1 == Enum.ConnectionError.OK then
-			return config3.NONE
+			return config4.NONE
 		end
 	elseif ConnectionError == Enum.ConnectionError.OK then
-		return config3.NONE
+		return config4.NONE
 	end
-	if NONE == config3.NONE then
+	if NONE == config4.NONE then
 		if ReconnectDisabledFFlag then
-			return config3.RECONNECT_DISABLED
+			return config4.RECONNECT_DISABLED
 		end
 		CurrentTime = tick()
 		
@@ -985,34 +985,34 @@ local function stateTransit(ConnectionError, ConnectionError1, NONE)
 			assert(ConnectionError1 ~= Enum.ConnectionError.OK)
 			
 			if ConnectionError == Enum.ConnectionError.OK then
-				return config3.RECONNECT_DISCONNECT
+				return config4.RECONNECT_DISCONNECT
 			end
 		end
 		if ConnectionError == Enum.ConnectionError.ConnectErrors then
 			NewCurrentTime = tick() + v2
 			OK = Enum.ConnectionError.ConnectErrors
 			
-			if config6[ConnectionError1] then
-				return config3.RECONNECT_DISABLED_CONNECT_FAILURE
+			if config7[ConnectionError1] then
+				return config4.RECONNECT_DISABLED_CONNECT_FAILURE
 			else
 				TelemetryService:LogCounter(config, { customFields = { selectedItem = "ConnectError" } }, 1)
 				TelemetryService:LogCounter(config, { customFields = { selectedItem = "ConnectFailed" } }, 1)
 				
-				return config3.RECONNECT_CONNECT_FAILURE
+				return config4.RECONNECT_CONNECT_FAILURE
 			end
 		elseif ConnectionError == Enum.ConnectionError.DisconnectErrors then
 			NewCurrentTime = tick() + v2
 			OK = Enum.ConnectionError.DisconnectErrors
 			
 			if ConnectionError1 == Enum.ConnectionError.DisconnectOutOfMemoryKeepPlayingLeave then
-				return config3.OUT_OF_MEMORY_KEEPPLAYING_LEAVE
-			elseif config6[ConnectionError1] then
-				return config3.RECONNECT_DISABLED_DISCONNECT
+				return config4.OUT_OF_MEMORY_KEEPPLAYING_LEAVE
+			elseif config7[ConnectionError1] then
+				return config4.RECONNECT_DISABLED_DISCONNECT
 			else
 				TelemetryService:LogCounter(config, { customFields = { selectedItem = "Disconnected" } }, 1)
 				RbxAnalyticsService:ReportCounter("ReconnectPrompt-Disconnect")
 				
-				return if FFlagConnectionRelaunchBuildPlaytest and PlaytestReconnectModule.getRelaunchPlaceId() ~= nil then config3.RECONNECT_DISCONNECT elseif ConnectionEnableAutoReconnect and t[ConnectionError1] then config3.AUTO_RECONNECTING else config3.RECONNECT_DISCONNECT
+				return if FFlagConnectionRelaunchBuildPlaytest and PlaytestReconnectModule.getRelaunchPlaceId() ~= nil then config4.RECONNECT_DISCONNECT elseif ConnectionEnableAutoReconnect and config8[ConnectionError1] then config4.AUTO_RECONNECTING else config4.RECONNECT_DISCONNECT
 			end
 		elseif ConnectionError == Enum.ConnectionError.PlacelaunchErrors then
 			OK = Enum.ConnectionError.PlacelaunchErrors
@@ -1026,7 +1026,7 @@ local function stateTransit(ConnectionError, ConnectionError1, NONE)
 				if FFlagConnectionUpsellAnalytics then
 					ConnectionAmpUpsellOnLeaveModule.fireImpressionAgeCheck(config, game.PlaceId)
 				end
-				return config3.RECONNECT_AGE_CHECK_REQUIRED
+				return config4.RECONNECT_AGE_CHECK_REQUIRED
 			else
 				if FFlagConnectionAmpParentalApprovalUpsell then
 					local ParentalApprovalRequiredEnum = ConnectionAmpUpsellOnLeaveModule.ParentalApprovalRequiredEnum
@@ -1039,7 +1039,7 @@ local function stateTransit(ConnectionError, ConnectionError1, NONE)
 						if FFlagConnectionUpsellAnalytics then
 							ConnectionAmpUpsellOnLeaveModule.fireImpressionParentalApproval(config, game.PlaceId)
 						end
-						return config3.RECONNECT_PARENT_APPROVAL_REQUIRED
+						return config4.RECONNECT_PARENT_APPROVAL_REQUIRED
 					end
 				end
 				if AddCollaborationCoreGatedConnectionError2 and PlacelaunchCollaborationCoreGated and ConnectionError1 == PlacelaunchCollaborationCoreGated then
@@ -1047,24 +1047,24 @@ local function stateTransit(ConnectionError, ConnectionError1, NONE)
 						customFields = { selectedItem = "PlaceLaunchCollaborationCoreGated" }
 					}, 1)
 					
-					return config3.RECONNECT_COLLABORATION_CORE_GATED
-				elseif config6[ConnectionError1] then
-					return config3.RECONNECT_DISABLED_PLACELAUNCH
+					return config4.RECONNECT_COLLABORATION_CORE_GATED
+				elseif config7[ConnectionError1] then
+					return config4.RECONNECT_DISABLED_PLACELAUNCH
 				else
 					TelemetryService:LogCounter(config, { customFields = { selectedItem = "PlaceLaunchError" } }, 1)
 					RbxAnalyticsService:ReportCounter("ReconnectPrompt-PlaceLaunch")
 					
-					return config3.RECONNECT_PLACELAUNCH
+					return config4.RECONNECT_PLACELAUNCH
 				end
 			end
 		elseif ConnectionError == Enum.ConnectionError.TeleportErrors then
 			TelemetryService:LogCounter(config, { customFields = { selectedItem = "TeleportError" } }, 1)
 			RbxAnalyticsService:ReportCounter("ReconnectPrompt-TeleportFailed")
 			
-			return config3.TELEPORT_FAILED
+			return config4.TELEPORT_FAILED
 		end
 	end
-	if NONE == config3.IS_RECONNECTING then
+	if NONE == config4.IS_RECONNECTING then
 		TelemetryService:LogCounter(config, { customFields = { selectedItem = "ReconnectFailed" } }, 1)
 		RbxAnalyticsService:ReportCounter("ReconnectPrompt-ReconnectFailed")
 		
@@ -1072,39 +1072,39 @@ local function stateTransit(ConnectionError, ConnectionError1, NONE)
 			if CurrentTime + PotentialClientTimeoutSeconds < tick() then
 				TelemetryService:LogCounter(config, { customFields = { selectedItem = "ReconnectTimedOut" } }, 1)
 				
-				return if OK == Enum.ConnectionError.PlacelaunchErrors then config3.RECONNECT_DISABLED_PLACELAUNCH else config3.RECONNECT_DISABLED_DISCONNECT
+				return if OK == Enum.ConnectionError.PlacelaunchErrors then config4.RECONNECT_DISABLED_PLACELAUNCH else config4.RECONNECT_DISABLED_DISCONNECT
 			end
 			if OK == Enum.ConnectionError.PlacelaunchErrors then
 				TelemetryService:LogCounter(config, {
 					customFields = { selectedItem = "PlaceLaunchReconnectFailed" }
 				}, 1)
 				
-				return config3.RECONNECT_PLACELAUNCH
+				return config4.RECONNECT_PLACELAUNCH
 			end
 			if OK == Enum.ConnectionError.DisconnectErrors then
 				TelemetryService:LogCounter(config, {
 					customFields = { selectedItem = "DisconnectReconnectFailed" }
 				}, 1)
 				
-				if ConnectionEnableAutoReconnect and config5.active then
+				if ConnectionEnableAutoReconnect and config6.active then
 					if ConnectionAutoReconnectMaxDurationSeconds <= 0 or tick() <= CurrentTime + ConnectionAutoReconnectMaxDurationSeconds then
-						return config3.AUTO_RECONNECTING
+						return config4.AUTO_RECONNECTING
 					end
 					TelemetryService:LogCounter(config, {
 						customFields = { selectedItem = "AutoReconnectExhausted" }
 					}, 1)
 				end
-				return config3.RECONNECT_DISCONNECT
+				return config4.RECONNECT_DISCONNECT
 			elseif OK == Enum.ConnectionError.ConnectErrors then
 				TelemetryService:LogCounter(config, {
 					customFields = { selectedItem = "ConnectReconnectFailed" }
 				}, 1)
 				
-				return config3.RECONNECT_CONNECT_FAILURE
+				return config4.RECONNECT_CONNECT_FAILURE
 			end
 		end
 	end
-	return if ConnectionEnableAutoReconnect and NONE == config3.AUTO_RECONNECTING then if ReconnectDisabledFFlag then config3.RECONNECT_DISABLED elseif ConnectionError == Enum.ConnectionError.DisconnectErrors and config6[ConnectionError1] then config3.RECONNECT_DISABLED_DISCONNECT else NONE else NONE
+	return if ConnectionEnableAutoReconnect and NONE == config4.AUTO_RECONNECTING then if ReconnectDisabledFFlag then config4.RECONNECT_DISABLED elseif ConnectionError == Enum.ConnectionError.DisconnectErrors and config7[ConnectionError1] then config4.RECONNECT_DISABLED_DISCONNECT else NONE else NONE
 end
 
 local function getCreatorBanString(p1)
@@ -1155,7 +1155,7 @@ local function getCreatorBanString(p1)
 end
 
 local RemoveRefToMissingLocInConnection = game:DefineFastFlag("RemoveRefToMissingLocInConnection", false)
-local config1 = {
+local config2 = {
 	[Enum.ConnectionError.ConnectErrors] = "InGame.ConnectionError.ConnectErrors",
 	[Enum.ConnectionError.AlreadyConnected] = "InGame.ConnectionError.ConnectionFailedWaitAndTry",
 	[Enum.ConnectionError.NoFreeIncomingConnections] = "InGame.ConnectionError.ConnectionFailedWaitAndTry",
@@ -1241,39 +1241,39 @@ local config1 = {
 }
 
 if ShowScreentimeLockoutKickMessage then
-	config1[Enum.ConnectionError.ScreentimeLockoutKick] = "Feature.Screentime.Content.ScreentimeLimitDialog"
+	config2[Enum.ConnectionError.ScreentimeLockoutKick] = "Feature.Screentime.Content.ScreentimeLimitDialog"
 end
 if AddPlacelaunchDeviceBlock2 then
-	config1[Enum.ConnectionError.PlacelaunchDeviceBlock] = "InGame.ConnectionError.PlacelaunchDeviceBlock"
+	config2[Enum.ConnectionError.PlacelaunchDeviceBlock] = "InGame.ConnectionError.PlacelaunchDeviceBlock"
 end
 if AddContextualPlayabilityConnectionErrors then
-	config1[Enum.ConnectionError.PlacelaunchAgeVerificationRequired] = "InGame.ConnectionError.Description.AgeCheckRequired"
-	config1[Enum.ConnectionError.PlacelaunchParentalApprovalRequired] = "InGame.ConnectionError.Description.ParentalApprovalRequired"
-	config1[Enum.ConnectionError.PlacelaunchCoreGated] = "InGame.ConnectionError.Description.LockedByAge"
+	config2[Enum.ConnectionError.PlacelaunchAgeVerificationRequired] = "InGame.ConnectionError.Description.AgeCheckRequired"
+	config2[Enum.ConnectionError.PlacelaunchParentalApprovalRequired] = "InGame.ConnectionError.Description.ParentalApprovalRequired"
+	config2[Enum.ConnectionError.PlacelaunchCoreGated] = "InGame.ConnectionError.Description.LockedByAge"
 end
 if AddVipOwnerNotPresentConnectionError then
-	config1[Enum.ConnectionError.PlacelaunchVipOwnerNotPresent] = "InGame.ConnectionError.Description.VipOwnerNotPresent"
+	config2[Enum.ConnectionError.PlacelaunchVipOwnerNotPresent] = "InGame.ConnectionError.Description.VipOwnerNotPresent"
 end
 if AddCollaborationCoreGatedConnectionError2 and PlacelaunchCollaborationCoreGated then
-	config1[PlacelaunchCollaborationCoreGated] = "InGame.ConnectionError.Description.CollaborationRequiresTrustedFriends"
+	config2[PlacelaunchCollaborationCoreGated] = "InGame.ConnectionError.Description.CollaborationRequiresTrustedFriends"
 end
 if RAKickLogic2 and Flag then
-	config1[Enum.ConnectionError.DisconnectRemoteAttestationTimeout] = "InGame.ConnectionError.RemoteAttestationTimeout"
-	config1[Enum.ConnectionError.DisconnectRemoteAttestationUnsupported] = "InGame.ConnectionError.RemoteAttestationUnsupported"
-	config1[Enum.ConnectionError.DisconnectRemoteAttestationGeneralFailure] = "InGame.ConnectionError.RemoteAttestationGeneralFailure"
-	config1[Enum.ConnectionError.DisconnectRemoteAttestationOSOutOfDate] = "InGame.ConnectionError.RemoteAttestationOSOutOfDate"
-	config1[Enum.ConnectionError.DisconnectRemoteAttestationBootValidationFailure] = "InGame.ConnectionError.RemoteAttestationBootValidationFailure"
+	config2[Enum.ConnectionError.DisconnectRemoteAttestationTimeout] = "InGame.ConnectionError.RemoteAttestationTimeout"
+	config2[Enum.ConnectionError.DisconnectRemoteAttestationUnsupported] = "InGame.ConnectionError.RemoteAttestationUnsupported"
+	config2[Enum.ConnectionError.DisconnectRemoteAttestationGeneralFailure] = "InGame.ConnectionError.RemoteAttestationGeneralFailure"
+	config2[Enum.ConnectionError.DisconnectRemoteAttestationOSOutOfDate] = "InGame.ConnectionError.RemoteAttestationOSOutOfDate"
+	config2[Enum.ConnectionError.DisconnectRemoteAttestationBootValidationFailure] = "InGame.ConnectionError.RemoteAttestationBootValidationFailure"
 end
 if RbxTransportHandleUniqueErrors and RbxTransportUniqueConnectionErrorsEngineFeature then
-	config1[Enum.ConnectionError.DisconnectTransportIoError] = "InGame.ConnectionError.DisconnectTryAgain"
-	config1[Enum.ConnectionError.DisconnectTransportIoInternetError] = "InGame.ConnectionError.DisconnectConnectionLost"
-	config1[Enum.ConnectionError.DisconnectTransportProtocolError] = "InGame.ConnectionError.DisconnectTryAgain"
-	config1[Enum.ConnectionError.DisconnectTransportNgtcp2Error] = "InGame.ConnectionError.DisconnectTryAgain"
-	config1[Enum.ConnectionError.DisconnectTransportQuicError] = "InGame.ConnectionError.DisconnectTryAgain"
-	config1[Enum.ConnectionError.DisconnectTransportRnaError] = "InGame.ConnectionError.DisconnectTryAgain"
+	config2[Enum.ConnectionError.DisconnectTransportIoError] = "InGame.ConnectionError.DisconnectTryAgain"
+	config2[Enum.ConnectionError.DisconnectTransportIoInternetError] = "InGame.ConnectionError.DisconnectConnectionLost"
+	config2[Enum.ConnectionError.DisconnectTransportProtocolError] = "InGame.ConnectionError.DisconnectTryAgain"
+	config2[Enum.ConnectionError.DisconnectTransportNgtcp2Error] = "InGame.ConnectionError.DisconnectTryAgain"
+	config2[Enum.ConnectionError.DisconnectTransportQuicError] = "InGame.ConnectionError.DisconnectTryAgain"
+	config2[Enum.ConnectionError.DisconnectTransportRnaError] = "InGame.ConnectionError.DisconnectTryAgain"
 end
 local function getErrorString(Text: string, ConnectionError, p1)
-	-- upvalues: translateString (copy), MaxKickMessageLength (copy), config1 (copy), MutedErrorFunction (copy), ShouldMuteUnlocalizedError (copy)
+	-- upvalues: translateString (copy), MaxKickMessageLength (copy), config2 (copy), MutedErrorFunction (copy), ShouldMuteUnlocalizedError (copy)
 	if ConnectionError == Enum.ConnectionError.OK then
 		return ""
 	end
@@ -1288,7 +1288,7 @@ local function getErrorString(Text: string, ConnectionError, p1)
 		
 		return if InGameConnectionErrorDisconnectLuaKickWithMessage == "" then Text else InGameConnectionErrorDisconnectLuaKickWithMessage
 	end
-	local Entry = config1[ConnectionError]
+	local Entry = config2[ConnectionError]
 	
 	if not Entry then
 		MutedErrorFunction("Cannot find localization key for " .. tostring(ConnectionError))
@@ -1300,7 +1300,7 @@ local function getErrorString(Text: string, ConnectionError, p1)
 end
 
 local function updateErrorPrompt(ErrorMessage, ConnectionError, ConnectionError1)
-	-- upvalues: GuiService (copy), BuildRobloxExperienceKickContentModule (copy), translateString (copy), ShowFeatureRestrictionDirectModule (copy), Callback2 (copy), TelemetryService (copy), config (copy), stateTransit (copy), NONE (ref), config3 (copy), Default (ref), onEnter (copy), ConnectionEnableAutoReconnect (copy), scheduleAutoReconnect (copy), config5 (copy), getCreatorBanString (copy), getErrorString (copy), Result1_1 (copy), renderAutoReconnectPrompt (copy), GetFFlagDisplayChannelNameOnErrorPromptModule (copy)
+	-- upvalues: GuiService (copy), BuildRobloxExperienceKickContentModule (copy), translateString (copy), ShowFeatureRestrictionDirectModule (copy), Callback2 (copy), TelemetryService (copy), config (copy), stateTransit (copy), NONE (ref), config4 (copy), Default (ref), onEnter (copy), ConnectionEnableAutoReconnect (copy), scheduleAutoReconnect (copy), config6 (copy), getCreatorBanString (copy), getErrorString (copy), Result1_1 (copy), renderAutoReconnectPrompt (copy), GetFFlagDisplayChannelNameOnErrorPromptModule (copy)
 	if ConnectionError == Enum.ConnectionError.DisconnectLuaKick then
 		local ErrorDetails = GuiService:GetErrorDetails()
 		
@@ -1319,31 +1319,31 @@ local function updateErrorPrompt(ErrorMessage, ConnectionError, ConnectionError1
 	local StateTransitResult = stateTransit(ConnectionError1, ConnectionError, NONE)
 	
 	if StateTransitResult ~= NONE then
-		if NONE == config3.IS_RECONNECTING then
+		if NONE == config4.IS_RECONNECTING then
 			Default:primaryShimmerStop()
 		end
 		NONE = StateTransitResult
 		onEnter(StateTransitResult)
 		
 		if ConnectionEnableAutoReconnect then
-			if StateTransitResult == config3.AUTO_RECONNECTING then
+			if StateTransitResult == config4.AUTO_RECONNECTING then
 				scheduleAutoReconnect()
 			else
-				config5.active = false
-				config5.attempt = 0
-				config5.nextAttemptAt = 0
-				config5.errorCode = nil
-				config5.baseMessage = nil
-				config5.lastRenderedText = nil
-				config5.lastRemaining = nil
+				config6.active = false
+				config6.attempt = 0
+				config6.nextAttemptAt = 0
+				config6.errorCode = nil
+				config6.baseMessage = nil
+				config6.lastRenderedText = nil
+				config6.lastRemaining = nil
 				
-				if config5.pendingThread then
-					task.cancel(config5.pendingThread)
-					config5.pendingThread = nil
+				if config6.pendingThread then
+					task.cancel(config6.pendingThread)
+					config6.pendingThread = nil
 				end
-				if config5.tickerThread then
-					task.cancel(config5.tickerThread)
-					config5.tickerThread = nil
+				if config6.tickerThread then
+					task.cancel(config6.tickerThread)
+					config6.tickerThread = nil
 				end
 			end
 		end
@@ -1351,7 +1351,7 @@ local function updateErrorPrompt(ErrorMessage, ConnectionError, ConnectionError1
 	local CreatorBanString = nil
 	if ConnectionError == Enum.ConnectionError.PlacelaunchCreatorBan then
 		CreatorBanString = getCreatorBanString(ErrorMessage)
-	elseif ConnectionError1 == Enum.ConnectionError.TeleportErrors and NONE ~= config3.TELEPORT_FAILED then
+	elseif ConnectionError1 == Enum.ConnectionError.TeleportErrors and NONE ~= config4.TELEPORT_FAILED then
 		if ConnectionError == Enum.ConnectionError.OK then
 			CreatorBanString = ""
 		else
@@ -1361,13 +1361,13 @@ local function updateErrorPrompt(ErrorMessage, ConnectionError, ConnectionError1
 	else
 		CreatorBanString = getErrorString(ErrorMessage, ConnectionError)
 	end
-	if NONE == config3.RECONNECT_DISABLED then
+	if NONE == config4.RECONNECT_DISABLED then
 		CreatorBanString = Result1_1
 	end
-	if ConnectionEnableAutoReconnect and NONE == config3.AUTO_RECONNECTING then
-		if config5.baseMessage == nil then
-			config5.baseMessage = CreatorBanString
-			config5.errorCode = ConnectionError
+	if ConnectionEnableAutoReconnect and NONE == config4.AUTO_RECONNECTING then
+		if config6.baseMessage == nil then
+			config6.baseMessage = CreatorBanString
+			config6.errorCode = ConnectionError
 		end
 		renderAutoReconnectPrompt()
 		
@@ -1403,30 +1403,30 @@ updateErrorPrompt(GuiService:GetErrorMessage(), GuiService:GetErrorCode(), (GuiS
 GuiService.ErrorMessageChanged:connect(onErrorMessageChanged)
 
 if DebugEnableErrorStringTesting then
-	for i, value2 in pairs((require(RobloxGui.Modules.ErrorTestSets))) do
-		for _, value3 in pairs(value2) do
-			updateErrorPrompt("Should show localized strings, please file a jira ticket for missing translation.", value3, i)
+	for i, value1 in pairs((require(RobloxGui.Modules.ErrorTestSets))) do
+		for _, value2 in pairs(value1) do
+			updateErrorPrompt("Should show localized strings, please file a jira ticket for missing translation.", value2, i)
 			wait(2)
 			
 			if ConnectionEnableAutoReconnect then
-				config5.active = false
-				config5.attempt = 0
-				config5.nextAttemptAt = 0
-				config5.errorCode = nil
-				config5.baseMessage = nil
-				config5.lastRenderedText = nil
-				config5.lastRemaining = nil
+				config6.active = false
+				config6.attempt = 0
+				config6.nextAttemptAt = 0
+				config6.errorCode = nil
+				config6.baseMessage = nil
+				config6.lastRenderedText = nil
+				config6.lastRemaining = nil
 				
-				if config5.pendingThread then
-					task.cancel(config5.pendingThread)
-					config5.pendingThread = nil
+				if config6.pendingThread then
+					task.cancel(config6.pendingThread)
+					config6.pendingThread = nil
 				end
-				if config5.tickerThread then
-					task.cancel(config5.tickerThread)
-					config5.tickerThread = nil
+				if config6.tickerThread then
+					task.cancel(config6.tickerThread)
+					config6.tickerThread = nil
 				end
 			end
-			NONE = config3.NONE
+			NONE = config4.NONE
 		end
 	end
 end

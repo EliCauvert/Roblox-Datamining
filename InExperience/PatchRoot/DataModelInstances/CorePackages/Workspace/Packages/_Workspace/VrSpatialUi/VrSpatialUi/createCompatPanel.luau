@@ -1,10 +1,11 @@
 ﻿local VrSpatialUi = script:FindFirstAncestor("VrSpatialUi")
+local Parent = VrSpatialUi.Parent
 local CoreGui = game:GetService("CoreGui")
 local CurvedSurfaceGuisEnabledEngineFeature = game:GetEngineFeature("CurvedSurfaceGuisEnabled")
 local FFlagSpatialUIHiddenPanelRaycastFixModule = require(VrSpatialUi.Flags.FFlagSpatialUIHiddenPanelRaycastFix)
 local ConstantsModule = require(VrSpatialUi.Constants)
 local SpatialUIType = ConstantsModule.SpatialUIType
-local Object = require(VrSpatialUi.Parent.LuauPolyfill).Object
+local Object = require(Parent.LuauPolyfill).Object
 local VRService = game:GetService("VRService")
 local config = {
 	spatialPanelProps = nil,

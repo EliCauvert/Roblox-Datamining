@@ -5,10 +5,11 @@ local PriceFooterModule = require(script.Parent.PriceFooter)
 local UserLibModule = require(Parent.UserLib)
 local Constants = UserLibModule.Utils.Constants
 local GetRbxthumbWithTypeSizeAndOptionsFunction = UserLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
+local UIBloxModule = require(Parent.UIBlox)
 local EnumsModule = require(ProfilePlatform.Common.Enums)
 local FFlagProfilePlatformEnableBundlesInAssetsCarousel = require(Parent.SharedFlags).FFlagProfilePlatformEnableBundlesInAssetsCarousel
 local FFlagProfilePlatformFixResaleLimitedPriceModule = require(ProfilePlatform.Flags.FFlagProfilePlatformFixResaleLimitedPrice)
-local ItemTile = require(Parent.UIBlox).Tile.ItemTile
+local ItemTile = UIBloxModule.Tile.ItemTile
 
 return function(p1)
 	-- upvalues: FFlagProfilePlatformEnableBundlesInAssetsCarousel (copy), EnumsModule (copy), Constants (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), ReactModule (copy), ItemTile (copy), PriceFooterModule (copy), FFlagProfilePlatformFixResaleLimitedPriceModule (copy)

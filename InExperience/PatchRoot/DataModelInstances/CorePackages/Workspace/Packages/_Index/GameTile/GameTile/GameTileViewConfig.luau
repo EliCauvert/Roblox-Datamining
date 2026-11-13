@@ -2,11 +2,12 @@
 local Parent = GameTile.Parent
 local _ = require(Parent.Style)
 local _ = require(Parent.Foundation)
+local MemoizeFunction = require(Parent.AppCommonLib).memoize
 local _ = require(GameTile.GameTileTypes)
 local FFlagLuaAppUnifyPlayButtonTile = require(Parent.SharedFlags).FFlagLuaAppUnifyPlayButtonTile
 local FFlagLuaAppUnifyPlayButtonTileIxp = require(Parent.SharedFlags).FFlagLuaAppUnifyPlayButtonTileIxp
 local GameTileExperimentationModule = require(GameTile.GameTileExperimentation)
-local MemoizeResult = require(Parent.AppCommonLib).memoize(function(p1, p2, p3, p4, p5, p6)
+local MemoizeResult = MemoizeFunction(function(p1, p2, p3, p4, p5, p6)
 	-- upvalues: FFlagLuaAppUnifyPlayButtonTileIxp (copy), GameTileExperimentationModule (copy), FFlagLuaAppUnifyPlayButtonTile (copy)
 	local IsPlayButtonMigrationEnabled = if FFlagLuaAppUnifyPlayButtonTileIxp then GameTileExperimentationModule.getIsPlayButtonMigrationEnabled() else nil
 	

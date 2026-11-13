@@ -1,6 +1,7 @@
 ﻿local GameTile = script:FindFirstAncestor("GameTile")
+local GameTileConstantsModule = require(GameTile.GameTileConstants)
 local SharedFlagsModule = require(GameTile.Parent.SharedFlags)
-local TileOverflowMenuItems = require(GameTile.GameTileConstants).TileOverflowMenuItems
+local TileOverflowMenuItems = GameTileConstantsModule.TileOverflowMenuItems
 local FFlagLuaAppContinueSortInstantPlay = SharedFlagsModule.FFlagLuaAppContinueSortInstantPlay
 local FFlagLuaAppEnableReportExperience = SharedFlagsModule.FFlagLuaAppEnableReportExperience
 

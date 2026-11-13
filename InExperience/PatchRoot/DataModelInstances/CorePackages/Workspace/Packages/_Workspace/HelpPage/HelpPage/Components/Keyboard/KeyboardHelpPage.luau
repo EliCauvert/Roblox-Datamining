@@ -1,11 +1,12 @@
 ﻿local Parent = script.Parent.Parent.Parent
 local Parent1 = Parent.Parent
 local ReactModule = require(Parent1.React)
+local FoundationModule = require(Parent1.Foundation)
 local UseKeybindsModule = require(Parent.Hooks.useKeybinds)
 local KeyboardGroupModule = require(script.Parent.KeyboardGroup)
 local _ = require(Parent.Configs.ConfigTypes)
 local FFlagHelpPageCCLModule = require(Parent.Flags.FFlagHelpPageCCL)
-local View = require(Parent1.Foundation).View
+local View = FoundationModule.View
 
 return ReactModule.memo(function()
 	-- upvalues: UseKeybindsModule (copy), ReactModule (copy), View (copy), KeyboardGroupModule (copy), FFlagHelpPageCCLModule (copy)

@@ -3,12 +3,13 @@ local SelfieQr = script:FindFirstAncestor("SelfieQr")
 local Parent = SelfieQr.Parent
 local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
 local ReactModule = require(Parent.React)
+local ReactUtilsModule = require(Parent.ReactUtils)
 local SelfieQRCodeModule = require(SelfieQr.SelfieQRCode)
 local FocusRoot = FocusNavigationUtilsModule.FocusRoot
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local UseEventConnectionFunction = require(Parent.ReactUtils).useEventConnection
+local UseEventConnectionFunction = ReactUtilsModule.useEventConnection
 
-local function v8(p1)
+local function v9(p1)
 	-- upvalues: ReactModule (copy), UseEventConnectionFunction (copy), AvatarCreationService (copy)
 	UseEventConnectionFunction(AvatarCreationService.OpenSelfieQRCode, (ReactModule.useCallback(function(Url, JobId)
 		-- upvalues: p1 (copy)
@@ -21,7 +22,7 @@ local function v8(p1)
 end
 
 return function(_)
-	-- upvalues: ReactModule (copy), SelfieQRCodeModule (copy), v8 (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
+	-- upvalues: ReactModule (copy), SelfieQRCodeModule (copy), v9 (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local Current = ReactModule.useRef({ url = "", jobId = "" }).current
 	local Element = if UseStateResult then ReactModule.createElement(SelfieQRCodeModule, {
@@ -31,7 +32,7 @@ return function(_)
 	}) else nil
 	
 	return ReactModule.createElement(ReactModule.Fragment, {}, {
-		EventListener = ReactModule.createElement(v8, { displaySelfieQRCode = UseStateResult2, jobData = Current }),
+		EventListener = ReactModule.createElement(v9, { displaySelfieQRCode = UseStateResult2, jobData = Current }),
 		FocusNavigationCoreScriptsWrapper = if Element == nil then nil else ReactModule.createElement(FocusRoot, {
 			isIsolated = true,
 			isAutoFocusRoot = true,

@@ -2,9 +2,10 @@
 local GuiService = game:GetService("GuiService")
 local Roact = require(PurchasePrompt.Parent.PurchasePromptDeps).Roact
 local RetryAfterUpsellModule = require(PurchasePrompt.Thunks.retryAfterUpsell)
+local ConnectToStoreModule = require(PurchasePrompt.connectToStore)
 local ExternalEventConnectionModule = require(script.Parent.ExternalEventConnection)
 
-return (require(PurchasePrompt.connectToStore)(nil, function(Callback)
+return (ConnectToStoreModule(nil, function(Callback)
 	-- upvalues: RetryAfterUpsellModule (copy)
 	return {
 		onBrowserWindowClosed = function()

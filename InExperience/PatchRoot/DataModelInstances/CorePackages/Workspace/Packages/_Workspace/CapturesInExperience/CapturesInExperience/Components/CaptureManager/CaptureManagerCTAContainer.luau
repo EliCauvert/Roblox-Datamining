@@ -1,5 +1,6 @@
 ﻿local Parent = script.Parent.Parent.Parent
 local Parent1 = Parent.Parent
+local LocalizationModule = require(Parent1.Localization)
 local ReactModule = require(Parent1.React)
 local RoactUtilsModule = require(Parent1.RoactUtils)
 local SocialStopwatchModule = require(Parent1.SocialStopwatch)
@@ -11,9 +12,10 @@ local Images = UIBloxModule.App.ImageSet.Images
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local UseAnalyticsModule = require(Parent.Analytics.useAnalytics)
 local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
-local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local UseRefFunction = ReactModule.useRef
 local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
+local CapturesPolicyModule = require(Parent.App.CapturesPolicy)
 local CaptureTypeModule = require(Parent.Enums.CaptureType)
 local ConstantsModule = require(Parent.Constants)
 local DeleteWarningModalOpenedModule = require(Parent.Actions.DeleteWarningModalOpened)
@@ -27,7 +29,7 @@ local CapturesSaveToExternalStorageLimit = game:DefineFastInt("CapturesSaveToExt
 local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 local _UDim2 = UDim2.new(0.33, 0, 0, 36)
 
-return (require(Parent.App.CapturesPolicy).connect(function(p1)
+return (CapturesPolicyModule.connect(function(p1)
 	return { enableShareCaptureCTA = p1.enableShareCaptureCTA() }
 end)(function(Frame: Frame)
 	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseStyleFunction (copy), UseRefFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), ReactModule (copy), CapturesSaveToExternalStorageLimit (copy), UseLocalizationFunction (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy), GetSaveToStoragePermissionModule (copy), EventNamesModule (copy), SocialStopwatchModule (copy), ShareCaptureModule (copy), ExternalShareSourceTypeModule (copy), GetIsDeleteWarningModalOptedOutModule (copy), DeleteWarningModalOpenedModule (copy), NormalizeFontFaceFunction (copy), IconButton (copy), Images (copy), IconSize (copy), _UDim2 (copy)

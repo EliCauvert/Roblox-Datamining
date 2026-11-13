@@ -6,6 +6,8 @@ local ArgCheckModule = require(Parent.ArgCheck)
 local CalculateRelativeColumnGapModule = require(CollectionViews.Grid.calculateRelativeColumnGap)
 local LuaAppFixCollectionGridWindowAbsoluteCanvasSize = game:DefineFastFlag("LuaAppFixCollectionGridWindowAbsoluteCanvasSize", false)
 local LuaAppGridReuseUnchangedTileElements = game:DefineFastFlag("LuaAppGridReuseUnchangedTileElements", false)
+local FFlagLuaAppCollectionGridRemeasureOnMove = require(Parent.SharedFlags).FFlagLuaAppCollectionGridRemeasureOnMove
+local LuaAppCollectionGridScrollSettleMs = game:DefineFastInt("LuaAppCollectionGridScrollSettleMs", 150)
 local config = {
 	maxNumRows = 1e999,
 	numColumns = 1,
@@ -18,7 +20,7 @@ local config = {
 }
 
 return ReactModule.memo(function(p1)
-	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), LuaAppFixCollectionGridWindowAbsoluteCanvasSize (copy), LuaAppGridReuseUnchangedTileElements (copy), ArgCheckModule (copy), CalculateRelativeColumnGapModule (copy)
+	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), LuaAppFixCollectionGridWindowAbsoluteCanvasSize (copy), FFlagLuaAppCollectionGridRemeasureOnMove (copy), LuaAppCollectionGridScrollSettleMs (copy), LuaAppGridReuseUnchangedTileElements (copy), ArgCheckModule (copy), CalculateRelativeColumnGapModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseRefResult = ReactModule.useRef(nil)
 	local Smallest = math.min(math.ceil(#JoinResult.items / JoinResult.numColumns), JoinResult.maxNumRows)
@@ -30,8 +32,9 @@ return ReactModule.memo(function(p1)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(-1)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(JoinResult.bufferRowsBelowScreen + JoinResult.bufferRowsAboveScreen)
 	ReactModule.useEffect(function()
-		-- upvalues: JoinResult (copy), UseRefResult (copy), Smallest (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), LuaAppFixCollectionGridWindowAbsoluteCanvasSize (upval)
+		-- upvalues: JoinResult (copy), UseRefResult (copy), Smallest (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), LuaAppFixCollectionGridWindowAbsoluteCanvasSize (upval), FFlagLuaAppCollectionGridRemeasureOnMove (upval), LuaAppCollectionGridScrollSettleMs (upval)
 		local List = {}
+		local DelayedThread = nil
 		
 		if JoinResult.verticalScrollingFrameRef and JoinResult.verticalScrollingFrameRef.current and UseRefResult.current then
 			local Current = UseRefResult.current
@@ -83,7 +86,39 @@ return ReactModule.memo(function(p1)
 			table.insert(List, Current1:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateWindowParams))
 			table.insert(List, Current1:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(updateWindowParams))
 			table.insert(List, Current1:GetPropertyChangedSignal(if LuaAppFixCollectionGridWindowAbsoluteCanvasSize then "AbsoluteCanvasSize" else "CanvasSize"):Connect(updateWindowParams))
-			table.insert(List, Current1:GetPropertyChangedSignal("CanvasPosition"):Connect(updateRowsToRender))
+			
+			if FFlagLuaAppCollectionGridRemeasureOnMove then
+				local LuaAppCollectionGridScrollSettleMsRatio = LuaAppCollectionGridScrollSettleMs / 1000
+				local ClockTime = 0
+				
+				local function onSettleTimer()
+					-- upvalues: LuaAppCollectionGridScrollSettleMsRatio (copy), ClockTime (ref), DelayedThread (ref), onSettleTimer (copy), Current (copy), Current1 (copy), updateWindowParams (copy)
+					local LuaAppCollectionGridScrollSettleMsRatioDelta = LuaAppCollectionGridScrollSettleMsRatio - (os.clock() - ClockTime)
+					
+					if LuaAppCollectionGridScrollSettleMsRatioDelta > 0 then
+						DelayedThread = task.delay(LuaAppCollectionGridScrollSettleMsRatioDelta, onSettleTimer)
+						
+						return
+					end
+					DelayedThread = nil
+					
+					if Current.Parent and Current1.Parent then
+						updateWindowParams()
+					end
+				end
+				
+				table.insert(List, Current1:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
+					-- upvalues: ClockTime (ref), DelayedThread (ref), LuaAppCollectionGridScrollSettleMsRatio (copy), onSettleTimer (copy), updateRowsToRender (copy)
+					ClockTime = os.clock()
+					
+					if not DelayedThread then
+						DelayedThread = task.delay(LuaAppCollectionGridScrollSettleMsRatio, onSettleTimer)
+					end
+					updateRowsToRender()
+				end))
+			else
+				table.insert(List, Current1:GetPropertyChangedSignal("CanvasPosition"):Connect(updateRowsToRender))
+			end
 			updateWindowParams()
 		else
 			UseStateResult2(1)
@@ -91,7 +126,11 @@ return ReactModule.memo(function(p1)
 			UseStateResult2_2(Smallest)
 		end
 		return function()
-			-- upvalues: List (copy)
+			-- upvalues: FFlagLuaAppCollectionGridRemeasureOnMove (upval), DelayedThread (ref), List (copy)
+			if FFlagLuaAppCollectionGridRemeasureOnMove and DelayedThread then
+				task.cancel(DelayedThread)
+				DelayedThread = nil
+			end
 			for _, Connection in List do
 				Connection:Disconnect()
 			end
@@ -192,7 +231,7 @@ return ReactModule.memo(function(p1)
 					local RenderItemResult = nil
 					local RenderItemResult2 = nil
 					
-					if CurrentEntry and CurrentEntry.entry == Item and CurrentEntry.renderItem == JoinResult.renderItem and CurrentEntry.rowNum == Ceiled then
+					if CurrentEntry and CurrentEntry.entry == Item and (CurrentEntry.renderItem == JoinResult.renderItem and CurrentEntry.rowNum == Ceiled) then
 						RenderItemResult = CurrentEntry.element
 						RenderItemResult2 = CurrentEntry.keyPrefix
 					else

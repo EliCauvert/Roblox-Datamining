@@ -1,8 +1,9 @@
 ﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local AnalyticsMetricChartModule = require(Parent.AnalyticsMetricChart)
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local UseMetricChartContentModule = require(script.Parent.useMetricChartContent)
-local DeriveChartAxesFunction = require(Parent.AnalyticsMetricChart).deriveChartAxes
+local DeriveChartAxesFunction = AnalyticsMetricChartModule.deriveChartAxes
 
 return function(p1)
 	-- upvalues: UseMetricChartContentModule (copy), FoundationModule (copy), ReactModule (copy), DeriveChartAxesFunction (copy)

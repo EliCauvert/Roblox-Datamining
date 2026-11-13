@@ -1,4 +1,5 @@
 ﻿local Parent = script:FindFirstAncestor("AvatarExperienceModel").Parent
+local EnumerateModule = require(Parent.enumerate)
 local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local FFlagAXCatalogMakeupTaxonomy = AvatarExperienceFlagsModule.FFlagAXCatalogMakeupTaxonomy
 local FFlagAXCatalogM41Props = AvatarExperienceFlagsModule.FFlagAXCatalogM41Props
@@ -7,7 +8,7 @@ local FFlagAXCatalogM41HandAndArm = AvatarExperienceFlagsModule.FFlagAXCatalogM4
 local FFlagAXM41AllCategoriesToTaxonomy = AvatarExperienceFlagsModule.FFlagAXM41AllCategoriesToTaxonomy
 local FFlagAXCatalogBackgroundsSupport = AvatarExperienceFlagsModule.FFlagAXCatalogBackgroundsSupport
 
-return require(Parent.enumerate)(script.Name, {
+return EnumerateModule(script.Name, {
 	AllItems = if FFlagAXM41AllCategoriesToTaxonomy then "tZsUsd2BqGViQrJ9Vs3Wah" else nil,
 	Body = if FFlagAXM41AllCategoriesToTaxonomy then "mwkR3QvDBVzYk4o9RAVVa2" else nil,
 	FullBodies = if FFlagAXM41AllCategoriesToTaxonomy then "kfHzJwaNYM8s2CWRqYUhRa" else nil,

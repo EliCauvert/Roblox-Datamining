@@ -12,8 +12,9 @@ local AXFixAverageFPSCasing = game:DefineFastFlag("AXFixAverageFPSCasing", false
 local AXIntervalPerformanceTrackerScrollFrameCounters = game:DefineFastFlag("AXIntervalPerformanceTrackerScrollFrameCounters", false)
 local IntervalPerformanceTrackerScrollPositionSamples = game:DefineFastFlag("IntervalPerformanceTrackerScrollPositionSamples", false)
 local IntervalPerformanceTrackerCancelOnAppHide = game:DefineFastFlag("IntervalPerformanceTrackerCancelOnAppHide", false)
+local GetFIntIntervalPerformanceTrackerEventStreamFunction = require(Parent.SharedFlags).GetFIntIntervalPerformanceTrackerEventStream
 local RandomValue = math.random(0, 1000)
-local FIntIntervalPerformanceTrackerEventStream = require(Parent.SharedFlags).GetFIntIntervalPerformanceTrackerEventStream()
+local FIntIntervalPerformanceTrackerEventStream = GetFIntIntervalPerformanceTrackerEventStreamFunction()
 local IsRandomValueBelow = RandomValue < FIntIntervalPerformanceTrackerEventStream
 
 local function _(p1: number): boolean

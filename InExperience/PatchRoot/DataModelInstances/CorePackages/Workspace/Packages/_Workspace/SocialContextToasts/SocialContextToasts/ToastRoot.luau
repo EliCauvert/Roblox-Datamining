@@ -6,15 +6,14 @@ local ReactModule = require(Parent.React)
 local ToastTypesModule = require(SocialContextToasts.Enums.ToastTypes)
 local ButtonType = require(Parent.UIBlox).App.Button.Enum.ButtonType
 local CryoModule = require(Parent.Cryo)
-local GetFFlagSocialContextToastEventStreamFunction = require(Parent.SharedFlags).GetFFlagSocialContextToastEventStream
 local GetFFlagEnableReferredPlayerJoinRemoteEventFunction = require(Parent.SharedFlags).GetFFlagEnableReferredPlayerJoinRemoteEvent
 
 return function(p1)
-	-- upvalues: UseSelectorFunction (copy), GetFFlagSocialContextToastEventStreamFunction (copy), CryoModule (copy), ToastTypesModule (copy), ReactModule (copy), ToastWrapperModule (copy), ButtonType (copy), GetFFlagEnableReferredPlayerJoinRemoteEventFunction (copy)
+	-- upvalues: UseSelectorFunction (copy), CryoModule (copy), ToastTypesModule (copy), ReactModule (copy), ToastWrapperModule (copy), ButtonType (copy), GetFFlagEnableReferredPlayerJoinRemoteEventFunction (copy)
 	local UseSelectorResult = UseSelectorFunction(function(p2)
 		return p2.ToastContent
 	end)
-	local JoinResult = if GetFFlagSocialContextToastEventStreamFunction() then CryoModule.Dictionary.join(p1.analyticsProps, { toastType = UseSelectorResult.toastType }) else nil
+	local JoinResult = CryoModule.Dictionary.join(p1.analyticsProps, { toastType = UseSelectorResult.toastType })
 	
 	if UseSelectorResult.toastType == ToastTypesModule.None then
 		return nil

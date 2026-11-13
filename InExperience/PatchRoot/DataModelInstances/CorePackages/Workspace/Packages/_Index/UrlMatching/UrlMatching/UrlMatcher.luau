@@ -73,8 +73,9 @@ function UrlMatcherModule.match(p1, Text)
 			local v2 = #Unpacked + 1 + #Unpacked2 + #Unpacked3
 			local v3 = v2 + #Unpacked4
 			local v4 = v3 + #Unpacked6
-			local Segment1: string = Segment:sub(v3, v4 - 1)
-			local Segment2: string = Segment:sub(v4, v4 + #Unpacked7 - 1)
+			local Segment1: string = Segment:sub(v2, v3 - 1)
+			local Segment2: string = Segment:sub(v3, v4 - 1)
+			local Segment3: string = Segment:sub(v4, v4 + #Unpacked7 - 1)
 			table.insert(List, {
 				startIndex = NewIndex,
 				endIndex = NewIndexDelta,
@@ -84,9 +85,9 @@ function UrlMatcherModule.match(p1, Text)
 					protocol = StringTrimFunction(Unpacked, ":/", { right = true }),
 					subdomain = StringTrimFunction(Unpacked2, ".", { right = true }),
 					domain = Unpacked3,
-					path = Segment:sub(v2, v3 - 1),
-					query = if Segment1 == "" then nil else StringTrimFunction(Segment1, "?", { left = true }),
-					fragment = if Segment2 == "" then nil else StringTrimFunction(Segment2, "#", { left = true })
+					path = Segment1,
+					query = if Segment2 == "" then nil else StringTrimFunction(Segment2, "?", { left = true }),
+					fragment = if Segment3 == "" then nil else StringTrimFunction(Segment3, "#", { left = true })
 				}
 			})
 		end

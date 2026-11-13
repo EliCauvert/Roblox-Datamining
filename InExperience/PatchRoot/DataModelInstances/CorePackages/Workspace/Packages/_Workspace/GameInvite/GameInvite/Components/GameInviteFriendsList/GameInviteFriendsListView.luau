@@ -3,15 +3,18 @@ local Parent = GameInvite.Parent
 local ReactModule = require(Parent.React)
 local ReactRobloxModule = require(Parent.ReactRoblox)
 local FoundationModule = require(Parent.Foundation)
+local FriendsMenuModule = require(Parent.FriendsMenu)
+local UserListModule = require(Parent.UserList)
 local FFlagGameInviteInExpJoinCtaModule = require(GameInvite.Flags.FFlagGameInviteInExpJoinCta)
+local FFlagUserListFixedRowHeightConfig = require(Parent.SharedFlags).FFlagUserListFixedRowHeightConfig
 local _ = require(script.Parent.useGameInviteJoinCard)
-local VerticalUserList = require(Parent.UserList).VerticalUserList.VerticalUserList
-local FriendsMenuShareGameInviteLink = require(Parent.FriendsMenu).FriendsMenuShareGameInviteLink
+local VerticalUserList = UserListModule.VerticalUserList.VerticalUserList
+local FriendsMenuShareGameInviteLink = FriendsMenuModule.FriendsMenuShareGameInviteLink
 local Configs = {
 	disableRowActivation = true,
 	showTrustedFriendIndicator = false,
 	disableVirtualization = true,
-	fixedRowHeight = if require(Parent.SharedFlags).FFlagUserListFixedRowHeightConfig then true else nil
+	fixedRowHeight = if FFlagUserListFixedRowHeightConfig then true else nil
 }
 
 local function GameInviteJoinCardPortal(p1)

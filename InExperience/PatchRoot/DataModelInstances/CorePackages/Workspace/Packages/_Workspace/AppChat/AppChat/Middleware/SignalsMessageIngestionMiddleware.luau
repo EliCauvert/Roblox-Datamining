@@ -7,6 +7,13 @@ local BuildConversationMessageFromApiModule = require(AppChat.Stores.Ingestion.b
 local IngestBatchModule = require(AppChat.Stores.Ingestion.ingestBatch)
 local IngestOperationModule = require(AppChat.Stores.Ingestion.IngestOperation)
 local ConversationsModule = require(AppChat.Conversations)
+local ReceivedMessages = ConversationsModule.Actions.ReceivedMessages
+local SendingMessage = ConversationsModule.Actions.SendingMessage
+local SentMessage = ConversationsModule.Actions.SentMessage
+local MessageModerated = ConversationsModule.Actions.MessageModerated
+local MessageFailedToSend = ConversationsModule.Actions.MessageFailedToSend
+local RemovedConversationModule = require(AppChat.Conversations.Actions.RemovedConversation)
+local ReloadedMessagesForConversationsModule = require(AppChat.Conversations.Actions.ReloadedMessagesForConversations)
 local _ = require(AppChat.MessageData.Types)
 local EnumsModule = require(AppChat.MessageData.Enums)
 local MessageStatus = EnumsModule.MessageStatus
@@ -112,7 +119,7 @@ local function ingestConversationsFromResponse(ResponseBody, _)
 end
 
 local config = {
-	[ConversationsModule.Actions.ReceivedMessages.name] = function(p2, _)
+	[ReceivedMessages.name] = function(p2, _)
 		-- upvalues: CryoModule (copy), buildFromLegacy (copy), IngestBatchModule (copy), IngestOperationModule (copy)
 		local ConversationId = p2.conversationId
 		local Messages = p2.messages
@@ -124,7 +131,7 @@ local config = {
 			end), IngestOperationModule.Prepend)
 		end
 	end,
-	[ConversationsModule.Actions.SendingMessage.name] = function(p2, _)
+	[SendingMessage.name] = function(p2, _)
 		-- upvalues: buildFromLegacy (copy), MessageStatus (copy), IngestBatchModule (copy), IngestOperationModule (copy)
 		local ConversationId = p2.conversationId
 		local Message = p2.message
@@ -135,7 +142,7 @@ local config = {
 			IngestBatchModule(ConversationId, { FromLegacy }, IngestOperationModule.Prepend)
 		end
 	end,
-	[ConversationsModule.Actions.SentMessage.name] = function(p2, p3)
+	[SentMessage.name] = function(p2, p3)
 		local ConversationId = p2.conversationId
 		local MessageId = p2.messageId
 		
@@ -144,7 +151,7 @@ local config = {
 			p3.conversationMessageStore.removeMessage(MessageId)
 		end
 	end,
-	[ConversationsModule.Actions.MessageModerated.name] = function(p2, p3)
+	[MessageModerated.name] = function(p2, p3)
 		-- upvalues: MessageStatus (copy), FFlagAppChatIncrementalPaginationProjectionModule (copy)
 		local MessageId = p2.messageId
 		
@@ -156,7 +163,7 @@ local config = {
 			end
 		end
 	end,
-	[ConversationsModule.Actions.MessageFailedToSend.name] = function(p2, p3)
+	[MessageFailedToSend.name] = function(p2, p3)
 		-- upvalues: MessageStatus (copy), FFlagAppChatIncrementalPaginationProjectionModule (copy)
 		local MessageId = p2.messageId
 		
@@ -205,7 +212,7 @@ local config = {
 		-- upvalues: ingestConversationsFromResponse (copy)
 		ingestConversationsFromResponse(p2.responseBody, p3)
 	end,
-	[require(AppChat.Conversations.Actions.RemovedConversation).name] = function(p2, p3)
+	[RemovedConversationModule.name] = function(p2, p3)
 		-- upvalues: clearConversationStores (copy)
 		local ConversationId = p2.conversationId
 		
@@ -213,7 +220,7 @@ local config = {
 			clearConversationStores(p3, ConversationId)
 		end
 	end,
-	[require(AppChat.Conversations.Actions.ReloadedMessagesForConversations).name] = function(p2, p3)
+	[ReloadedMessagesForConversationsModule.name] = function(p2, p3)
 		-- upvalues: clearConversationStores (copy)
 		local ConversationIds = p2.conversationIds
 		

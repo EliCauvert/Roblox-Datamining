@@ -6,11 +6,11 @@ return function(XOffset: number, YOffset2: number, Bottom, Vector: number, Vecto
 	local NewVector = Vector + Vector1 * 0.5
 	local NewVector1 = Vector + Vector1
 	local XOffset2 = 0
-	local YOffset = 0
+	local YOffset1 = 0
 	local ClampedValue = nil
-	local YOffset1 = nil
-	local ClampedValue1 = nil
 	local XOffset1 = nil
+	local YOffset = nil
+	local ClampedValue1 = nil
 	
 	if Bottom == TooltipOrientationModule.Bottom or Bottom == TooltipOrientationModule.Top then
 		if not Vector4 and Vector3.Y - NewVector1.Y < YOffset2 + 8 + 12 then
@@ -36,20 +36,20 @@ return function(XOffset: number, YOffset2: number, Bottom, Vector: number, Vecto
 		
 		if Bottom == TooltipOrientationModule.Bottom then
 			ClampedValue = Vector.Y + Vector1.Y
-			YOffset1 = Vector1.Y
+			YOffset = Vector1.Y
 			t.caretLayoutOrder = 1
 			t.contentLayoutOrder = 2
-			YOffset = 4
+			YOffset1 = 4
 		else
 			ClampedValue = Vector.Y - YOffset2 - 8
-			YOffset1 = -(YOffset2 + 8)
+			YOffset = -(YOffset2 + 8)
 			t.caretLayoutOrder = 2
 			t.contentLayoutOrder = 1
-			YOffset = -4
+			YOffset1 = -4
 		end
 	else
 		ClampedValue = math.clamp(NewVector.Y - YOffset2 * 0.5, 12, Vector3.Y - 12 - YOffset2)
-		YOffset1 = ClampedValue - Vector.Y
+		YOffset = ClampedValue - Vector.Y
 		local MaxValue = YOffset2 - 12 - 16
 		
 		if Vector4 then
@@ -79,8 +79,8 @@ return function(XOffset: number, YOffset2: number, Bottom, Vector: number, Vecto
 		end
 	end
 	t.absolutePosition = UDim2.fromOffset(ClampedValue1, ClampedValue)
-	t.position = UDim2.fromOffset(XOffset1, YOffset1)
-	t.animatedDistance = UDim2.fromOffset(XOffset2, YOffset)
+	t.position = UDim2.fromOffset(XOffset1, YOffset)
+	t.animatedDistance = UDim2.fromOffset(XOffset2, YOffset1)
 	t.updatedOrientation = Bottom
 	
 	return t

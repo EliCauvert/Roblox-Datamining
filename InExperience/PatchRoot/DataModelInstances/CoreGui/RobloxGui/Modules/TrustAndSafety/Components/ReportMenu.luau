@@ -29,6 +29,7 @@ local VoiceIndicatorFuncModule = require(RobloxGui.Modules.VoiceChat.Components.
 local VoiceStateContextModule = require(RobloxGui.Modules.VoiceChat.VoiceStateContext)
 local ConstantsModule1 = require(RobloxGui.Modules.VoiceChat.Constants)
 local ReactModule = require(CorePackages.Packages.React)
+local Colors = UIBloxModule.App.Style.Colors
 local HeaderBar = UIBloxModule.App.Bar.HeaderBar
 local IconButton = UIBloxModule.App.Button.IconButton
 local IconSize = UIBloxModule.App.ImageSet.Enum.IconSize
@@ -38,14 +39,11 @@ local WithStyleFunction = UIBloxModule.Core.Style.withStyle
 local IsPlayerVerifiedFunction = require(CorePackages.Workspace.Packages.UserLib).Utils.isPlayerVerified
 local MakeBackButtonFunction = require(CorePackages.Workspace.Packages.AppHeaderBar).makeBackButton
 local config = {
-	BackgroundDefault = {
-		Transparency = 1,
-		Color = UIBloxModule.App.Style.Colors.Flint
-	}
+	BackgroundDefault = { Transparency = 1, Color = Colors.Flint }
 }
 local ReportMenu = RoactModule.PureComponent:extend("ReportMenu")
 
-local function v38(p1)
+local function v39(p1)
 	-- upvalues: ReactModule (copy), VoiceStateContextModule (copy), VoiceIndicatorFuncModule (copy), CryoModule (copy)
 	return if ReactModule.useContext(VoiceStateContextModule.Context).voiceEnabled then ReactModule.createElement(VoiceIndicatorFuncModule, CryoModule.Dictionary.join(p1, {})) else nil
 end
@@ -207,7 +205,7 @@ function ReportMenu.renderHeaderBar(p2)
 end
 
 function ReportMenu.renderContents(p2)
-	-- upvalues: ConstantsModule (copy), RoactModule (copy), GameCellModule (copy), Default (copy), DividerModule (copy), PlayerCellModule (copy), IsPlayerVerifiedFunction (copy), v38 (copy), ConstantsModule1 (copy), WithStyleFunction (copy), CryoModule (copy), config (copy), Provider (copy), BarOnTopScrollingFrameModule (copy)
+	-- upvalues: ConstantsModule (copy), RoactModule (copy), GameCellModule (copy), Default (copy), DividerModule (copy), PlayerCellModule (copy), IsPlayerVerifiedFunction (copy), v39 (copy), ConstantsModule1 (copy), WithStyleFunction (copy), CryoModule (copy), config (copy), Provider (copy), BarOnTopScrollingFrameModule (copy)
 	local Props = p2.props
 	local IsReportCategoryMatch = p2.props.reportCategory == ConstantsModule.Category.Voice
 	local v1 = 0
@@ -266,7 +264,7 @@ function ReportMenu.renderContents(p2)
 				end,
 				memoKey = Count
 			}, {
-				VoiceIndicator = IsReportCategoryMatch and p2.props.isReportMenuOpen and RoactModule.createElement(v38, {
+				VoiceIndicator = IsReportCategoryMatch and p2.props.isReportMenuOpen and RoactModule.createElement(v39, {
 					hideOnError = true,
 					iconStyle = "SpeakerLight",
 					userId = tostring(Player.UserId),

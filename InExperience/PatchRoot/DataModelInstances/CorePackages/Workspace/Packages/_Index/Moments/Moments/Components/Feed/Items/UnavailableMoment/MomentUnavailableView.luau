@@ -1,6 +1,7 @@
 ﻿local Parent = script:FindFirstAncestor("Moments").Parent
 local BuilderIconsModule = require(Parent.BuilderIcons)
 local FoundationModule = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
 local ReactModule = require(Parent.React)
 local ReactOtterModule = require(Parent.ReactOtter)
 local Icon = FoundationModule.Icon
@@ -8,7 +9,7 @@ local Text = FoundationModule.Text
 local View = FoundationModule.View
 local IconSize = FoundationModule.Enums.IconSize
 local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local config = {
 	title = "Feature.Moments.Label.MomentRemovedTitle",

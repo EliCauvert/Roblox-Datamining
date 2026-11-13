@@ -73,17 +73,18 @@ local function validateBasedOnAttachmentYPos(Child, Child1, ChildName, p1)
 	local Size1: number = Child.Size
 	local Position = GetAttachmentCFrameInPartSpaceModule(ChildName1).Position
 	local Position1 = GetAttachmentCFrameInPartSpaceModule(ChildName2).Position
-	local Y = (Size / 2 + Position).Y
-	local Y1 = (Size1 / 2 + Position1).Y
+	local Y = (Size / 2 - Position).Y
+	local Y1 = (Size / 2 + Position).Y
+	local Y2 = (Size1 / 2 + Position1).Y
 	
-	if (Size1 / 2 - Position1).Y < (Size / 2 - Position).Y then
+	if (Size1 / 2 - Position1).Y < Y then
 		p1:fail(ErrorSourceStringsModule.Keys.Extents_PartAboveParent, {
 			lowerPart = Child1.Name,
 			upperPart = Child.Name,
 			attachmentName = ChildName
 		}, Child1)
 	end
-	if Y < Y1 then
+	if Y1 < Y2 then
 		p1:fail(ErrorSourceStringsModule.Keys.Extents_ParentBelowPart, {
 			upperPart = Child.Name,
 			lowerPart = Child1.Name,

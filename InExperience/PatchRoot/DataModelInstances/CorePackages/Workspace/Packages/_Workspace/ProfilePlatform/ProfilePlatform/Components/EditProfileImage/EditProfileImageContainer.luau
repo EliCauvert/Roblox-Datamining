@@ -3,6 +3,7 @@ local Parent = ProfilePlatform.Parent
 local ReactModule = require(Parent.React)
 local RoactUtilsModule = require(Parent.RoactUtils)
 local NavigationRoduxModule = require(Parent.NavigationRodux)
+local RobloxAppEnumsModule = require(Parent.RobloxAppEnums)
 local AvatarExperienceProfilePictureEditorModule = require(Parent.AvatarExperienceProfilePictureEditor)
 local EditProfileImage = AvatarExperienceProfilePictureEditorModule.EditProfileImage
 local Enums = AvatarExperienceProfilePictureEditorModule.Enums
@@ -26,7 +27,7 @@ local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local SignalsModule = require(Parent.Signals)
 local Selectors = NavigationRoduxModule.Selectors
 local GetLegacyNavigationStoreFunction = NavigationRoduxModule.GetLegacyNavigationStore
-local AppPage = require(Parent.RobloxAppEnums).AppPage
+local AppPage = RobloxAppEnumsModule.AppPage
 local AXEditProfileImageFillCardHeight = game:DefineFastFlag("AXEditProfileImageFillCardHeight", false)
 
 local function _(AvatarExperienceWrapper): boolean

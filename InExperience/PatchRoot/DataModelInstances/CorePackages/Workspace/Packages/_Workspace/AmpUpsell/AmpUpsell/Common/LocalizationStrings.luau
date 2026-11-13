@@ -1,6 +1,7 @@
 ﻿local EnumsModule = require(script.Parent.Enums)
 local _ = require(script.Parent.Types)
 local ActionTypeEnum = EnumsModule.ActionTypeEnum
+local UserSettingsSettingNameEnum = EnumsModule.UserSettingsSettingNameEnum
 local VPCErrorCategoriesEnum = EnumsModule.VPCErrorCategoriesEnum
 local AccountSettingsUpsellStrings = {
 	[ActionTypeEnum.GovernmentId] = {
@@ -29,7 +30,7 @@ local AccountSettingsUpsellStrings = {
 	}
 }
 local config = {
-	[EnumsModule.UserSettingsSettingNameEnum.AllowFacialAgeEstimation] = {
+	[UserSettingsSettingNameEnum.AllowFacialAgeEstimation] = {
 		title = "Feature.AgeVerificationUpsell.Title.AgeSettingsRedirect",
 		message = "Feature.AgeVerificationUpsell.Body.AgeSettingsRedirect",
 		buttonCancel = "Feature.AgeVerificationUpsell.Button.Cancel",

@@ -1,9 +1,12 @@
 ﻿local Parent = script.Parent.Parent.Parent
+local ConstantsModule = require(Parent.Constants)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 local ParseContentIdsModule = require(Parent.util.ParseContentIds)
 local _ = require(Parent.util.Types)
 local UnpublishedDependenciesModule = require(Parent.util.UnpublishedDependencies)
 local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local GetFFlagUGCValidateDescendantIdsPublishedModule = require(Parent.flags.getFFlagUGCValidateDescendantIdsPublished)
+local GetFFlagUGCValidateDescendantIdsPublishedShadowModule = require(Parent.flags.getFFlagUGCValidateDescendantIdsPublishedShadow)
 local config = {
 	AnimationId = true,
 	TexturePack = true,
@@ -12,13 +15,13 @@ local config = {
 local config1 = { MODERATION_STATE_REJECTED = true, Rejected = true }
 
 return {
-	categories = require(Parent.Constants).AllUploadCategories,
+	categories = ConstantsModule.AllUploadCategories,
 	requiredData = {
 		ValidationEnumsModule.SharedDataMember.consumerConfig,
 		ValidationEnumsModule.SharedDataMember.contentIds
 	},
-	fflag = require(Parent.flags.getFFlagUGCValidateDescendantIdsPublished),
-	shadowFlag = require(Parent.flags.getFFlagUGCValidateDescendantIdsPublishedShadow),
+	fflag = GetFFlagUGCValidateDescendantIdsPublishedModule,
+	shadowFlag = GetFFlagUGCValidateDescendantIdsPublishedShadowModule,
 	run = function(p1, p2)
 		-- upvalues: ValidationEnumsModule (copy), ParseContentIdsModule (copy), config (copy), UnpublishedDependenciesModule (copy), config1 (copy), ErrorSourceStringsModule (copy)
 		if p2.consumerConfig.validationEnv ~= ValidationEnumsModule.ValidationEnv.Backend then return end

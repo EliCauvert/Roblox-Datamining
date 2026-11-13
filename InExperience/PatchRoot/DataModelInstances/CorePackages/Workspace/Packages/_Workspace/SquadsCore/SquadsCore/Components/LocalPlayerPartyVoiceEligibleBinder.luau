@@ -1,7 +1,8 @@
 ﻿local Parent = script:FindFirstAncestor("SquadsCore").Parent
 local ReactModule = require(Parent.React)
+local CrossExperienceVoiceModule = require(Parent.CrossExperienceVoice)
 local UseIsLocalPlayerPartyVoiceEligibleModule = require(script.Parent.Parent.Hooks.useIsLocalPlayerPartyVoiceEligible)
-local UseIsBackgroundDMActiveFunction = require(Parent.CrossExperienceVoice).Hooks.useIsBackgroundDMActive
+local UseIsBackgroundDMActiveFunction = CrossExperienceVoiceModule.Hooks.useIsBackgroundDMActive
 
 return function(p1)
 	-- upvalues: UseIsLocalPlayerPartyVoiceEligibleModule (copy), UseIsBackgroundDMActiveFunction (copy), ReactModule (copy)

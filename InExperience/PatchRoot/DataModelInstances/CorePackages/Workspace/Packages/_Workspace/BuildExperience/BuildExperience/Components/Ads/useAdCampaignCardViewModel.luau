@@ -1,8 +1,10 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
-local ButtonVariant = require(Parent.Foundation).Enums.ButtonVariant
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
 
 return function(p1)
 	-- upvalues: LocalizationStringsModule (copy), UseLocalizationFunction (copy), ButtonVariant (copy)

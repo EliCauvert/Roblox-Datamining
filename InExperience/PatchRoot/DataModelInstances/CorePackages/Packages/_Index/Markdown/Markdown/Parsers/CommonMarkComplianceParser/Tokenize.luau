@@ -328,8 +328,8 @@ local list9 = { { "HEADING", "^  ? ?(#+)%s*\n", 1 } }
 
 local function tokenizeTextSpan(Text: string, NewOffset: number, p2, p3)
 	-- upvalues: Flags (copy), createInlineCodeTracker (copy), isTableRow (copy), config1 (copy), WithoutTableRowResult1 (copy), list8 (copy), list (copy), WithoutTableRowResult (copy), config2 (copy), list9 (copy), UtilsModule (copy), config (copy), ConstantsModule (copy), InsertFunction (copy), PostProcessTokensModule (copy)
-	local StartIndex1 = 0
 	local StartIndex = 0
+	local StartIndex1 = 0
 	local v4 = 0
 	local t = {}
 	local v5 = nil
@@ -340,10 +340,10 @@ local function tokenizeTextSpan(Text: string, NewOffset: number, p2, p3)
 	local v7 = nil
 	local Segment = nil
 	local Flag = nil
-	while StartIndex1 <= #Text do
-		Segment = if StartIndex1 == 0 and not p2 then "\n" else string.sub(Text, StartIndex1, StartIndex1)
+	while StartIndex <= #Text do
+		Segment = if StartIndex == 0 and not p2 then "\n" else string.sub(Text, StartIndex, StartIndex)
 		local NoP11: boolean = Segment == "\n" and not p2
-		local IsTableRow = Flags.FFlagMarkdownTables and (NoP11 and isTableRow(Text, StartIndex1 + 1, IsTABLEROW, IsIsStreaming and (StartIndex1 <= 1 or string.sub(Text, StartIndex1 - 1, StartIndex1 - 1) == "\n")))
+		local IsTableRow = Flags.FFlagMarkdownTables and (NoP11 and isTableRow(Text, StartIndex + 1, IsTABLEROW, IsIsStreaming and (StartIndex <= 1 or string.sub(Text, StartIndex - 1, StartIndex - 1) == "\n")))
 		local NoIsTableRow: boolean = Flags.FFlagMarkdownTables and (NoP11 and not IsTableRow)
 		local Entry = if p2 then config1[Segment] or {} elseif Segment == "\n" and v5 == "QUOTE" then if NoIsTableRow then WithoutTableRowResult1 else list8 elseif IsTableRow then list elseif NoIsTableRow then WithoutTableRowResult else config2[Segment] or list9
 		Flag = false
@@ -352,16 +352,16 @@ local function tokenizeTextSpan(Text: string, NewOffset: number, p2, p3)
 		
 		if Segment == "\n" and not p2 then
 			v7 = 1
-			v4 = StartIndex1
+			v4 = StartIndex
 		end
+		local Entry1 = nil
 		local list1 = nil
 		local CharacterContext = nil
 		local Segment1 = nil
-		local Entry1 = nil
 		local v8 = nil
 		for _, value in Entry do
 			local Pattern = value[2]
-			local StartIndex2, EndIndex = string.find(Text, Pattern, StartIndex1 + v7)
+			local StartIndex2, EndIndex = string.find(Text, Pattern, StartIndex + v7)
 			
 			if StartIndex2 and EndIndex then
 				Segment1 = string.sub(Text, StartIndex2, EndIndex)
@@ -378,18 +378,18 @@ local function tokenizeTextSpan(Text: string, NewOffset: number, p2, p3)
 				end
 				local IsSegmentMatch: boolean = Flags.FFlagMarkdownTables and (v5 == "TABLE_ROW" and Segment1 == "\\|")
 				
-				if (Entry1 ~= "ESCAPE" or IsSegmentMatch or not (if InlineCodeTracker then InlineCodeTracker.isInside(v4) else UtilsModule.isInsideInlineCode(t, v4))) and (not InlineCodeTracker or not config[Entry1] or not InlineCodeTracker.isInsideClosed(v4, StartIndex1)) then
+				if (Entry1 ~= "ESCAPE" or IsSegmentMatch or not (if InlineCodeTracker then InlineCodeTracker.isInside(v4) else UtilsModule.isInsideInlineCode(t, v4))) and (not InlineCodeTracker or not config[Entry1] or not InlineCodeTracker.isInsideClosed(v4, StartIndex)) then
 					if ConstantsModule.STYLED_TEXT[Entry1] then
-						CharacterContext = UtilsModule.getCharacterContext(Text, StartIndex1, v7 + v8)
+						CharacterContext = UtilsModule.getCharacterContext(Text, StartIndex, v7 + v8)
 					end
-					list1 = { string.match(Text, Pattern, StartIndex1 + v7) }
+					list1 = { string.match(Text, Pattern, StartIndex + v7) }
 					
 					if not p2 or Segment ~= "<" or #list1 <= 0 or p3.inlineTags[list1[1]] then
-						if StartIndex1 ~= StartIndex then
+						if StartIndex ~= StartIndex1 then
 							InsertFunction(t, {
 								name = "TEXT",
-								text = string.sub(Text, StartIndex, StartIndex1 - 1),
-								offset = StartIndex + NewOffset
+								text = string.sub(Text, StartIndex1, StartIndex - 1),
+								offset = StartIndex1 + NewOffset
 							})
 						end
 						local IsSegmentMatch1: boolean = not p2 and Segment == "\n"
@@ -402,15 +402,15 @@ local function tokenizeTextSpan(Text: string, NewOffset: number, p2, p3)
 							text = Segment1,
 							capture = if #list1 > 0 then list1 else nil,
 							isBlock = IsSegmentMatch1,
-							offset = StartIndex1 + NewOffset,
+							offset = StartIndex + NewOffset,
 							context = CharacterContext
 						})
 						
 						if InlineCodeTracker and Entry1 == "INLINE_CODE" then
-							InlineCodeTracker.addBacktick(v4, StartIndex1)
+							InlineCodeTracker.addBacktick(v4, StartIndex)
 						end
-						StartIndex1 += v7 + v8
-						StartIndex = StartIndex1
+						StartIndex += v7 + v8
+						StartIndex1 = StartIndex
 						Flag = true
 						v6 = Entry1
 						break
@@ -419,17 +419,17 @@ local function tokenizeTextSpan(Text: string, NewOffset: number, p2, p3)
 			end
 		end
 		if not Flag then
-			StartIndex1 += 1
+			StartIndex += 1
 		end
 		if Flags.FFlagMarkdownTables and NoP11 then
 			IsTABLEROW = v6 == "TABLE_ROW"
 		end
 	end
-	if StartIndex1 ~= StartIndex then
+	if StartIndex ~= StartIndex1 then
 		InsertFunction(t, {
 			name = "TEXT",
-			text = string.sub(Text, StartIndex, StartIndex1 - 1),
-			offset = StartIndex + NewOffset
+			text = string.sub(Text, StartIndex1, StartIndex - 1),
+			offset = StartIndex1 + NewOffset
 		})
 	end
 	return PostProcessTokensModule(t)

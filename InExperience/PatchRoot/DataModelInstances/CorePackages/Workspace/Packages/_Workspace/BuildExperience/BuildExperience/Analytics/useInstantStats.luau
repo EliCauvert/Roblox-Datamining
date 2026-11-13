@@ -11,15 +11,17 @@ return function(p1)
 	local AndFetchGameInfo = GetGameInfoStoreFunction(false).getAndFetchGameInfo(Text)
 	local AndFetchVote = GetVotesStoreFunction(false).getAndFetchVote(Text)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(AndFetchGameInfo.data)
-	local UseSignalStateResult1 = SignalsReactModule.useSignalState(AndFetchVote.data)
-	local IsUseSignalStateResultMatch = SignalsReactModule.useSignalState(AndFetchGameInfo.status) == DataStatus.NotReady
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(AndFetchGameInfo.status)
+	local UseSignalStateResult2 = SignalsReactModule.useSignalState(AndFetchVote.data)
+	local UseSignalStateResult3 = SignalsReactModule.useSignalState(AndFetchVote.status)
+	local IsUseSignalStateResultMatch = UseSignalStateResult1 == DataStatus.NotReady
 	
 	return {
 		visits = if UseSignalStateResult == nil then nil else UseSignalStateResult.totalVisits,
 		players = if UseSignalStateResult == nil then nil else UseSignalStateResult.playerCount,
-		likes = if UseSignalStateResult1 == nil then nil else UseSignalStateResult1.upVotes,
+		likes = if UseSignalStateResult2 == nil then nil else UseSignalStateResult2.upVotes,
 		visitsLoading = IsUseSignalStateResultMatch,
 		playersLoading = IsUseSignalStateResultMatch,
-		likesLoading = SignalsReactModule.useSignalState(AndFetchVote.status) == DataStatus.NotReady
+		likesLoading = UseSignalStateResult3 == DataStatus.NotReady
 	}
 end

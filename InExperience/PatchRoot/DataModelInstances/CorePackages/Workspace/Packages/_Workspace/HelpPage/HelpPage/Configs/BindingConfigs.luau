@@ -2,6 +2,7 @@
 local ExtraKeysEnumModule = require(Parent.Enums.ExtraKeysEnum)
 local TouchControlsEnumModule = require(Parent.Enums.TouchControlsEnum)
 local _ = require(script.Parent.ConfigTypes)
+local FFlagEnableConsoleExpControls = require(Parent.Parent.SharedFlags).FFlagEnableConsoleExpControls
 local FFlagHelpPageCCLModule = require(Parent.Flags.FFlagHelpPageCCL)
 local ControlGroups = {
 	CharacterMovement = {
@@ -337,7 +338,7 @@ local Controls = {
 	}
 }
 
-if not require(Parent.Parent.SharedFlags).FFlagEnableConsoleExpControls then
+if not FFlagEnableConsoleExpControls then
 	Controls.Chat.gamepadInput = nil
 end
 return { ControlGroups = ControlGroups, Controls = Controls }

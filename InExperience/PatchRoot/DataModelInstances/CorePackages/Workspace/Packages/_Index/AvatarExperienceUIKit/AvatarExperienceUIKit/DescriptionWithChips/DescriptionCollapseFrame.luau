@@ -2,8 +2,9 @@
 local Parent = AvatarExperienceUIKit.Parent
 local ReactModule = require(Parent.React)
 local ReactOtterModule = require(Parent.ReactOtter)
+local FoundationModule = require(Parent.Foundation)
 local MakeOtterSpringValueModule = require(AvatarExperienceUIKit.Utils.makeOtterSpringValue)
-local View = require(Parent.Foundation).View
+local View = FoundationModule.View
 local config = { dampingRatio = 1, frequency = 3.5 }
 
 local function toFullWidthSize(YOffset): UDim2

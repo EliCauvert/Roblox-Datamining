@@ -68,9 +68,10 @@ return {
 			return p1:Get(Segment, (string.sub(Text, EndIndex1 + 1)))
 		end
 		local Segment1 = string.sub(Text, EndIndex1 + 1, StartIndex2 - 1)
+		local Segment2 = string.sub(Text, EndIndex2 + 1)
 		local t = {}
 		
-		for i, value in string.gmatch(string.sub(Text, EndIndex2 + 1), "([^%s]+)=([^%s]+)") do
+		for i, value in string.gmatch(Segment2, "([^%s]+)=([^%s]+)") do
 			t[i] = value
 		end
 		return p1:Get(Segment, Segment1, t)

@@ -5,6 +5,7 @@ local Parent = ExpChat.Parent
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
+local DataHydrationModule = require(Parent.DataHydration)
 local UserProfilesModule = require(Parent.UserProfiles)
 local VerifiedBadgeDisplayStore = UserProfilesModule.Stores.VerifiedBadgeDisplayStore
 local SharedFlagsModule = require(Parent.SharedFlags)
@@ -55,7 +56,7 @@ local GetPresetChatStoreModule = require(ExpChat.Stores.GetPresetChatStore)
 local IsChatRegionLockedModule = require(ExpChat.isChatRegionLocked)
 local ShowChatEnabledUIModule = require(ExpChat.showChatEnabledUI)
 local GetIsARButtonVisibleModule = require(ExpChat.getIsARButtonVisible)
-local GetResult = require(Parent.DataHydration).TrustedConnections.TrustedConnectionsStore.get()
+local GetResult = DataHydrationModule.TrustedConnections.TrustedConnectionsStore.get()
 local ExpChatSlotBatchSize = game:DefineFastInt("ExpChatSlotBatchSize", 10)
 
 local function createSlot(ChatWindowSettings)
@@ -77,13 +78,13 @@ local function createSlot(ChatWindowSettings)
 	local v3 = nil
 	
 	if FFlagExpChatPresetChatEnabled then
-		v2, v85 = ReactModule.createBinding(false)
+		v2, v86 = ReactModule.createBinding(false)
 	end
 	local v4 = nil
 	local v5 = nil
 	
 	if IsChatWindowEnlargeEnabledModule() then
-		v4, v87 = ReactModule.createBinding(nil)
+		v4, v88 = ReactModule.createBinding(nil)
 	end
 	Ref.current = {}
 	

@@ -9,5 +9,6 @@
 	"RestrictedUser", "SubscriptionPurchasePlatformNotSupported",
 	"SubscriptionInvalidSaleLocation", "SubscriptionNotForSale", "VpcRequired",
 	"ExceedParentalSpendLimit", "EconomicRestriction",
-	"PendingProductsLimitExceeded", "UnsupportedInStudio", "VIPServerUnavailable"
+	"PendingProductsLimitExceeded", "UnsupportedInStudio", "VIPServerUnavailable",
+	"VIPServerTooManyFreeServersOnGame", "VIPServerTooManyTotalActiveFreeServers"
 }))

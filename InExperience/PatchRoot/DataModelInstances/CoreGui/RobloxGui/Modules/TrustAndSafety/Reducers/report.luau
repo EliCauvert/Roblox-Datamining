@@ -1,12 +1,13 @@
 ﻿local CorePackages = game:GetService("CorePackages")
 local CryoModule = require(CorePackages.Packages.Cryo)
+local RoduxModule = require(CorePackages.Packages.Rodux)
 local Parent = script.Parent.Parent
 local _ = require(Parent.Actions.OpenReportDialog)
 local _ = require(Parent.Actions.OpenCategoryMenu)
 local _ = require(Parent.Actions.CloseReportSentDialog)
 local ConstantsModule = require(Parent.Resources.Constants)
 
-return require(CorePackages.Packages.Rodux).createReducer({
+return RoduxModule.createReducer({
 	voiceReportingFlowEnabled = true,
 	targetPlayer = nil,
 	beginningTimestamp = 0,

@@ -1,5 +1,6 @@
 ﻿local ExpChat = script:FindFirstAncestor("ExpChat")
 local ConfigModule = require(ExpChat.Config)
+local MemoizeModule = require(ExpChat.memoize)
 local FFlagEnableInExpChatRewriteModule = require(ExpChat.Flags.FFlagEnableInExpChatRewrite)
 local FFlagExpChatGlobalTabDefaultModule = require(ExpChat.Flags.FFlagExpChatGlobalTabDefault)
 local FormatGlobalChatPrefixModule = require(ExpChat.formatGlobalChatPrefix)
@@ -8,7 +9,7 @@ local function _(p1): boolean
 	return p1 == nil or p1 == ""
 end
 
-return (require(ExpChat.memoize)(function(p1, p2, p3)
+return (MemoizeModule(function(p1, p2, p3)
 	-- upvalues: FFlagExpChatGlobalTabDefaultModule (copy), FormatGlobalChatPrefixModule (copy), FFlagEnableInExpChatRewriteModule (copy), ConfigModule (copy)
 	local config = {
 		text = p1.text or "",

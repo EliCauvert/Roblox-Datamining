@@ -1,5 +1,7 @@
 ﻿local Parent = script:FindFirstAncestor("SplitPane").Parent
 local ReactModule = require(Parent.React)
+local RoactServices = require(Parent.RoactServices).RoactServices
+local AppSessionService = require(Parent.RoactServiceTags).AppSessionService
 local SignalsReactModule = require(Parent.SignalsReact)
 local SplitL3SessionHelperModule = require(script.Parent.Parent.Utils.SplitL3SessionHelper)
 local SplitL3StoreModule = require(script.Parent.Parent.Stores.SplitL3Store)
@@ -9,20 +11,21 @@ local SplitPaneContextModule = require(script.Parent.Parent.Context.SplitPaneCon
 local function SplitL3SessionManagerActive(p1)
 	-- upvalues: SplitL3StoreModule (copy), SignalsReactModule (copy), ReactModule (copy), SplitL3SessionHelperModule (copy)
 	local Store = SplitL3StoreModule.getStore()
-	local UseSignalStateResult = SignalsReactModule.useSignalState(Store.getPendingSplitSubPaneTag)
-	local UseSignalStateResult1 = SignalsReactModule.useSignalState(Store.getPendingSplitSubPaneDetail)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(Store.getSplitL2SessionVersion)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(Store.getPendingSplitSubPaneTag)
+	local UseSignalStateResult2 = SignalsReactModule.useSignalState(Store.getPendingSplitSubPaneDetail)
 	local SessionService = p1.sessionService
 	ReactModule.useLayoutEffect(function()
-		-- upvalues: SessionService (copy), SplitL3SessionHelperModule (upval), UseSignalStateResult (copy), UseSignalStateResult1 (copy)
+		-- upvalues: SessionService (copy), SplitL3SessionHelperModule (upval), UseSignalStateResult1 (copy), UseSignalStateResult2 (copy)
 		if SessionService ~= nil then
-			SplitL3SessionHelperModule.applySplitSubPaneSession(SessionService, UseSignalStateResult, UseSignalStateResult1)
+			SplitL3SessionHelperModule.applySplitSubPaneSession(SessionService, UseSignalStateResult1, UseSignalStateResult2)
 			
 			return
 		end
 	end, {
-		SignalsReactModule.useSignalState(Store.getSplitL2SessionVersion),
 		UseSignalStateResult,
 		UseSignalStateResult1,
+		UseSignalStateResult2,
 		SessionService
 	})
 	ReactModule.useEffect(function()
@@ -44,9 +47,7 @@ local function SplitL3SessionManagerActive(p1)
 	return nil
 end
 
-return require(Parent.RoactServices).RoactServices.connect({
-	sessionService = require(Parent.RoactServiceTags).AppSessionService
-})(function(p1)
+return RoactServices.connect({ sessionService = AppSessionService })(function(p1)
 	-- upvalues: SignalsReactModule (copy), SplitPaneStoreModule (copy), ReactModule (copy), SplitPaneContextModule (copy), SplitL3SessionHelperModule (copy), SplitL3SessionManagerActive (copy)
 	local SessionService = p1.sessionService
 	local UseSignalStateResult = SignalsReactModule.useSignalState(SplitPaneStoreModule.getStore().getIsBreakpointEnabled)

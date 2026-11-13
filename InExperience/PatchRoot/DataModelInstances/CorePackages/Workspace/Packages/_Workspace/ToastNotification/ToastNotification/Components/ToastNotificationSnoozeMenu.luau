@@ -1,6 +1,7 @@
 ﻿local Parent = script.Parent.Parent
 local Parent1 = Parent.Parent
 local DependenciesModule = require(Parent.dependencies)
+local NotificationTypeEnum = require(Parent.type).NotificationTypeEnum
 local ShowNotificationSnoozeMenuSignal = require(Parent.Signals).ShowNotificationSnoozeMenuSignal
 local DismissNotificationSnoozeMenuSignal = require(Parent.Signals).DismissNotificationSnoozeMenuSignal
 local NotificationSnoozeMenuVisibleSignal = require(Parent.Signals).NotificationSnoozeMenuVisibleSignal
@@ -30,8 +31,9 @@ local EventMap = {
 	[Enum.KeyCode.ButtonB] = FocusNavigationEventNameEnum.NavigateBack,
 	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
+local UniversalAppPolicyModule = require(Parent1.UniversalAppPolicy)
 local config = {
-	[require(Parent.type).NotificationTypeEnum.ChatNewMessage] = if require(Parent1.UniversalAppPolicy).getAppFeaturePolicies().getCanSeeChatTerminology() then "CommonUI.Features.Label.Chat" else "Feature.Squads.Label.Party"
+	[NotificationTypeEnum.ChatNewMessage] = if UniversalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then "CommonUI.Features.Label.Chat" else "Feature.Squads.Label.Party"
 }
 local config1 = nil
 config1 = {

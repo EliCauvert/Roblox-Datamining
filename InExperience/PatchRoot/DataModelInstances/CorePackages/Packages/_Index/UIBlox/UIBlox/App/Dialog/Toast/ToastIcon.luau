@@ -4,13 +4,14 @@ local RoactModule = require(Parent1.Roact)
 local CryoModule = require(Parent1.Cryo)
 local TModule = require(Parent1.t)
 local ImageSetComponentModule = require(Parent.Core.ImageSet.ImageSetComponent)
+local ValidateColorInfoModule = require(Parent.Core.Style.Validator.validateColorInfo)
 local WithStyleModule = require(Parent.Core.Style.withStyle)
 local ToastIcon = RoactModule.PureComponent:extend("ToastIcon")
 ToastIcon.validateProps = TModule.interface({
 	Image = TModule.union(TModule.table, TModule.string, TModule.callback),
 	Size = TModule.UDim2,
 	AnchorPoint = TModule.optional(TModule.Vector2),
-	colorStyle = TModule.optional((require(Parent.Core.Style.Validator.validateColorInfo))),
+	colorStyle = TModule.optional(ValidateColorInfoModule),
 	LayoutOrder = TModule.optional(TModule.integer),
 	Position = TModule.optional(TModule.UDim2)
 })

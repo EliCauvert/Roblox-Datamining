@@ -4,6 +4,7 @@ local ReactModule = require(Parent1.React)
 local ReactUtilsModule = require(Parent1.ReactUtils)
 local UseProperties = ReactUtilsModule.useProperties
 local UsePropertiesDeferred = ReactUtilsModule.usePropertiesDeferred
+local UIBloxConfigModule = require(Parent.UIBloxConfig)
 local ResponsiveRowModule = require(Parent.Core.Layout.Responsive.ResponsiveRow)
 local UseResponsiveLayoutModule = require(Parent.Core.Layout.Responsive.useResponsiveLayout)
 
@@ -29,7 +30,7 @@ local function useCellAbsoluteHeight(RelativeHeight, Kind)
 end
 
 local _NumberRange = NumberRange.new(0, 0)
-local _NumberRange1 = if require(Parent.UIBloxConfig).responsiveGridDisplayLinesNonNil then _NumberRange else nil
+local _NumberRange1 = if UIBloxConfigModule.responsiveGridDisplayLinesNonNil then _NumberRange else nil
 
 return ReactModule.forwardRef(function(p1, p2)
 	-- upvalues: ReactModule (copy), _NumberRange1 (copy), useCellAbsoluteHeight (copy), UsePropertiesDeferred (copy), UseProperties (copy), ResponsiveRowModule (copy)

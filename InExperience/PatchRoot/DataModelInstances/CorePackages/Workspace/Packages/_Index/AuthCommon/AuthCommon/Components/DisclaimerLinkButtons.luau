@@ -58,6 +58,7 @@ end
 return function(p1)
 	-- upvalues: UseDesignTokensFunction (copy), v7 (copy), ReactModule (copy), v8 (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
+	local Size1400 = UseDesignTokensResult.Size.Size_1400 or 80
 	local Size300 = UseDesignTokensResult.Size.Size_300 or 18
 	local FillDirection = p1.fillDirection or Enum.FillDirection.Vertical
 	
@@ -73,7 +74,7 @@ return function(p1)
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = FillDirection,
 			CellPadding = UDim2.new(0, Size300, 0, Size300),
-			CellSize = v7(FillDirection, UseDesignTokensResult.Size.Size_1400 or 80, Size300).CellSize
+			CellSize = v7(FillDirection, Size1400, Size300).CellSize
 		}),
 		ButtonTos = ReactModule.createElement(v8, {
 			layoutOrder = 1,

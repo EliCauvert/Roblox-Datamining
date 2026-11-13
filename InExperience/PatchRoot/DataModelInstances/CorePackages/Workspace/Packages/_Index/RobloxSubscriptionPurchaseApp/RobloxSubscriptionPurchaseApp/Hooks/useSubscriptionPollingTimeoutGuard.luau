@@ -7,18 +7,20 @@ local PromptStateModule = require(RobloxSubscriptionPurchaseApp.Enums.PromptStat
 local FinalizeRobloxSubscriptionUpsellFlowModule = require(RobloxSubscriptionPurchaseApp.Actions.finalizeRobloxSubscriptionUpsellFlow)
 local TransitionToErrorModule = require(RobloxSubscriptionPurchaseApp.Actions.transitionToError)
 local ErrorReasonModule = require(RobloxSubscriptionPurchaseApp.Enums.ErrorReason)
+local FFlagPlusMembershipConfigChangeCheck = require(Parent.SharedFlags).FFlagPlusMembershipConfigChangeCheck
+local FIntPlusUpgradePollingTimeoutSecondsModule = require(RobloxSubscriptionPurchaseApp.Flags.FIntPlusUpgradePollingTimeoutSeconds)
 local RobloxSubscriptionPurchasePollingTimeoutSeconds = game:DefineFastInt("RobloxSubscriptionPurchasePollingTimeoutSeconds", 4)
 
 return function()
-	-- upvalues: RobloxSubscriptionStoreModule (copy), ReactModule (copy), SignalsReactModule (copy), PromptStateModule (copy), RobloxSubscriptionPurchasePollingTimeoutSeconds (copy), TransitionToErrorModule (copy), ErrorReasonModule (copy), FinalizeRobloxSubscriptionUpsellFlowModule (copy)
+	-- upvalues: RobloxSubscriptionStoreModule (copy), ReactModule (copy), SignalsReactModule (copy), PromptStateModule (copy), FFlagPlusMembershipConfigChangeCheck (copy), FIntPlusUpgradePollingTimeoutSecondsModule (copy), RobloxSubscriptionPurchasePollingTimeoutSeconds (copy), TransitionToErrorModule (copy), ErrorReasonModule (copy), FinalizeRobloxSubscriptionUpsellFlowModule (copy)
 	local GetResult = RobloxSubscriptionStoreModule.get()
 	local UseRefResult = ReactModule.useRef(GetResult)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetResult.getPromptState)
 	ReactModule.useEffect(function()
-		-- upvalues: UseSignalStateResult (copy), PromptStateModule (upval), RobloxSubscriptionPurchasePollingTimeoutSeconds (upval), UseRefResult (copy), TransitionToErrorModule (upval), ErrorReasonModule (upval), FinalizeRobloxSubscriptionUpsellFlowModule (upval)
+		-- upvalues: UseSignalStateResult (copy), PromptStateModule (upval), FFlagPlusMembershipConfigChangeCheck (upval), UseRefResult (copy), FIntPlusUpgradePollingTimeoutSecondsModule (upval), RobloxSubscriptionPurchasePollingTimeoutSeconds (upval), TransitionToErrorModule (upval), ErrorReasonModule (upval), FinalizeRobloxSubscriptionUpsellFlowModule (upval)
 		if UseSignalStateResult ~= PromptStateModule.SubscriptionStatusPolling then return end
 		local Flag = false
-		task.delay(RobloxSubscriptionPurchasePollingTimeoutSeconds, function()
+		task.delay(if FFlagPlusMembershipConfigChangeCheck and UseRefResult.current.getMembershipConfigSnapshot() ~= nil then FIntPlusUpgradePollingTimeoutSecondsModule else RobloxSubscriptionPurchasePollingTimeoutSeconds, function()
 			-- upvalues: Flag (ref), UseRefResult (upval), PromptStateModule (upval), TransitionToErrorModule (upval), ErrorReasonModule (upval), FinalizeRobloxSubscriptionUpsellFlowModule (upval)
 			if Flag then return end
 			local Current = UseRefResult.current

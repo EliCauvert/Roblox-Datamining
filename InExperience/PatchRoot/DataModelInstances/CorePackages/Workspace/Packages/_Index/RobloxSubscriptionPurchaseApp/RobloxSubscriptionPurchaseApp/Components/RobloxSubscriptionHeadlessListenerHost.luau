@@ -4,10 +4,12 @@ local UseNativePurchaseFinishedListenerModule = require(RobloxSubscriptionPurcha
 local FFlagEnableHeadlessSubscriptionNativePurchaseCancelCallbackModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagEnableHeadlessSubscriptionNativePurchaseCancelCallback)
 local UseRobloxSubscriptionChangedListenerModule = require(RobloxSubscriptionPurchaseApp.Hooks.useRobloxSubscriptionChangedListener)
 local UseSubscriptionPollingTimeoutGuardModule = require(RobloxSubscriptionPurchaseApp.Hooks.useSubscriptionPollingTimeoutGuard)
+local UseMembershipConfigChangePollerModule = require(RobloxSubscriptionPurchaseApp.Hooks.useMembershipConfigChangePoller)
+local FFlagPlusMembershipConfigChangeCheck = require(RobloxSubscriptionPurchaseApp.Parent.SharedFlags).FFlagPlusMembershipConfigChangeCheck
 local UseHeadlessSubscriptionErrorCompletionModule = require(RobloxSubscriptionPurchaseApp.Hooks.useHeadlessSubscriptionErrorCompletion)
 
 return function()
-	-- upvalues: FFlagEnableHeadlessSubscriptionNativePurchaseCancelCallbackModule (copy), UseNativePurchaseFinishedListenerModule (copy), CompleteRobloxSubscriptionUpsellFlowModule (copy), UseRobloxSubscriptionChangedListenerModule (copy), UseSubscriptionPollingTimeoutGuardModule (copy), UseHeadlessSubscriptionErrorCompletionModule (copy)
+	-- upvalues: FFlagEnableHeadlessSubscriptionNativePurchaseCancelCallbackModule (copy), UseNativePurchaseFinishedListenerModule (copy), CompleteRobloxSubscriptionUpsellFlowModule (copy), UseRobloxSubscriptionChangedListenerModule (copy), UseSubscriptionPollingTimeoutGuardModule (copy), FFlagPlusMembershipConfigChangeCheck (copy), UseMembershipConfigChangePollerModule (copy), UseHeadlessSubscriptionErrorCompletionModule (copy)
 	if FFlagEnableHeadlessSubscriptionNativePurchaseCancelCallbackModule then
 		UseNativePurchaseFinishedListenerModule(nil, nil, function()
 			-- upvalues: CompleteRobloxSubscriptionUpsellFlowModule (upval)
@@ -18,6 +20,10 @@ return function()
 	end
 	UseRobloxSubscriptionChangedListenerModule()
 	UseSubscriptionPollingTimeoutGuardModule()
+	
+	if FFlagPlusMembershipConfigChangeCheck then
+		UseMembershipConfigChangePollerModule()
+	end
 	UseHeadlessSubscriptionErrorCompletionModule()
 	
 	return nil

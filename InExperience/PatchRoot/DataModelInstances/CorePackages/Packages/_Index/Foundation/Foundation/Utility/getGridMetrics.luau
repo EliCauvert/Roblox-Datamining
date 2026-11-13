@@ -25,6 +25,7 @@ return function(p1, p2, p3, p4)
 	local ColumnMetrics = getColumnMetrics(p1, p2)
 	local ColumnMetrics1 = if p4 then getColumnMetrics(p1, p2, p4) else ColumnMetrics
 	local Grid = p1.grid
+	local Gap = Grid.gaps[p2]
 	local Gutter = Grid.gutters[p2]
 	local Margin: number = Grid.margins[p2]
 	local Largest = math.max(0, p3 - Margin * 2)
@@ -37,7 +38,7 @@ return function(p1, p2, p3, p4)
 		full = DashModule.assign(ColumnMetrics, { margin = Margin }),
 		margin = Margin,
 		colWidth = Largest1,
-		gapHeight = Grid.gaps[p2],
+		gapHeight = Gap,
 		gutterWidth = Gutter,
 		gridWidth = Largest,
 		cellSize = UDim2.fromOffset(Floored, 0),

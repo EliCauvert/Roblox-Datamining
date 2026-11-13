@@ -18,5 +18,6 @@
 	GameJoinEarlyAccessUpsell = "GameJoinEarlyAccessUpsell",
 	PlusReferralLandingSheet = "PlusReferralLandingSheet",
 	TTGrantSheet = "TTGrantSheet",
-	HomepageLaunchPrompt = "HomepageLaunchPrompt"
+	HomepageLaunchPrompt = "HomepageLaunchPrompt",
+	MarketplaceHeroUnit = "MarketplaceHeroUnit"
 }

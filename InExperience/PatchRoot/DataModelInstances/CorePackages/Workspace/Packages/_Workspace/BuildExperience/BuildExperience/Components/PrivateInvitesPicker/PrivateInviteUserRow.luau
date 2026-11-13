@@ -1,8 +1,9 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local UseUserProfileInfoModule = require(BuildExperience.Components.UserPicker.useUserProfileInfo)
-local Text = require(Parent.Foundation).Text
+local Text = FoundationModule.Text
 
 return function(p1)
 	-- upvalues: UseUserProfileInfoModule (copy), ReactModule (copy), Text (copy)

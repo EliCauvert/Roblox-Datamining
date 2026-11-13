@@ -2,10 +2,12 @@
 local Parent1 = Parent.Parent
 local DashModule = require(Parent1.Dash)
 local RoactModule = require(Parent1.Roact)
+local SocialTestHelpersModule = require(Parent1.Dev.SocialTestHelpers)
 local UIBloxModule = require(Parent1.UIBlox)
+local RobloxAppUIBloxConfigModule = require(Parent1.Dev.RobloxAppUIBloxConfig)
 local CapturesContextModule = require(Parent.Context.CapturesContext)
-local MockLocaleFunction = require(Parent1.Dev.SocialTestHelpers).StoryHelpers.mockLocale
-UIBloxModule.init((require(Parent1.Dev.RobloxAppUIBloxConfig)))
+local MockLocaleFunction = SocialTestHelpersModule.StoryHelpers.mockLocale
+UIBloxModule.init(RobloxAppUIBloxConfigModule)
 local AppStyleProvider = UIBloxModule.App.Style.AppStyleProvider
 RoactModule.setGlobalConfig({ elementTracing = true })
 local config = {

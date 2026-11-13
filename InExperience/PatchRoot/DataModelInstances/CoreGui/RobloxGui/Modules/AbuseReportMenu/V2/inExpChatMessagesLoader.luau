@@ -1,33 +1,35 @@
 ﻿local CorePackages = game:GetService("CorePackages")
 local Players = game:GetService("Players")
+local ExpChatModule = require(CorePackages.Workspace.Packages.ExpChat)
 local ExpChatSharedModule = require(CorePackages.Workspace.Packages.ExpChatShared)
+local Localization = require(CorePackages.Workspace.Packages.InExperienceLocales).Localization
 local PromiseModule = require(CorePackages.Packages.Promise)
 local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
 local ExpChatMessageHelpersModule = require(script.Parent.ExpChatMessageHelpers)
 local EnrichMissingUsernamesFunction = require(script.Parent.inExpChatMessagesLoaderUsernameEnrichment).enrichMissingUsernames
 local ChannelTabDisplayLabel = ExpChatSharedModule.ChannelTabDisplayLabel
-local GetChannelTabsStoreFunction = require(CorePackages.Workspace.Packages.ExpChat).Stores.GetChannelTabsStore
+local GetChannelTabsStoreFunction = ExpChatModule.Stores.GetChannelTabsStore
 local FFlagExpChatUseChannelTabsStore = SharedFlagsModule.FFlagExpChatUseChannelTabsStore
 local FFlagExpChatUseSharedChannelTabDisplayLabel = SharedFlagsModule.FFlagExpChatUseSharedChannelTabDisplayLabel
-local NewResult = require(CorePackages.Workspace.Packages.InExperienceLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId)
+local NewLocalization = Localization.new(game:GetService("LocalizationService").RobloxLocaleId)
 
 local function getLocalizedChannelTabLabels()
-	-- upvalues: ChannelTabDisplayLabel (copy), NewResult (copy)
+	-- upvalues: ChannelTabDisplayLabel (copy), NewLocalization (copy)
 	local LocalizationKeys = ChannelTabDisplayLabel.LocalizationKeys
 	
 	return {
-		yourServer = NewResult:Format(LocalizationKeys.yourServer),
-		moreServers = NewResult:Format(LocalizationKeys.moreServers),
-		friends = NewResult:Format(LocalizationKeys.friends),
-		system = NewResult:Format(LocalizationKeys.system),
-		team = NewResult:Format(LocalizationKeys.team)
+		yourServer = NewLocalization:Format(LocalizationKeys.yourServer),
+		moreServers = NewLocalization:Format(LocalizationKeys.moreServers),
+		friends = NewLocalization:Format(LocalizationKeys.friends),
+		system = NewLocalization:Format(LocalizationKeys.system),
+		team = NewLocalization:Format(LocalizationKeys.team)
 	}
 end
 
 return {
 	type = "groupedListItem",
 	fetch = function(_)
-		-- upvalues: ExpChatSharedModule (copy), PromiseModule (copy), ExpChatMessageHelpersModule (copy), NewResult (copy), FFlagExpChatUseSharedChannelTabDisplayLabel (copy), ChannelTabDisplayLabel (copy), EnrichMissingUsernamesFunction (copy), GetChannelTabsStoreFunction (copy), getLocalizedChannelTabLabels (copy), FFlagExpChatUseChannelTabsStore (copy), Players (copy)
+		-- upvalues: ExpChatSharedModule (copy), PromiseModule (copy), ExpChatMessageHelpersModule (copy), NewLocalization (copy), FFlagExpChatUseSharedChannelTabDisplayLabel (copy), ChannelTabDisplayLabel (copy), EnrichMissingUsernamesFunction (copy), GetChannelTabsStoreFunction (copy), getLocalizedChannelTabLabels (copy), FFlagExpChatUseChannelTabsStore (copy), Players (copy)
 		local Store = ExpChatSharedModule.context.store
 		
 		if not Store then
@@ -108,12 +110,12 @@ return {
 			end
 			local List3 = {}
 			local CollectItemsResult = ExpChatMessageHelpersModule.collectItems(ByMessageId, List)
-			ExpChatMessageHelpersModule.annotateWhisperItems(CollectItemsResult, ByMessageId, NewResult:Format("Feature.ReportAbuse.Label.SentPrivately"))
+			ExpChatMessageHelpersModule.annotateWhisperItems(CollectItemsResult, ByMessageId, NewLocalization:Format("Feature.ReportAbuse.Label.SentPrivately"))
 			
 			if #CollectItemsResult > 0 then
 				table.insert(List3, {
 					id = ExpChatMessageHelpersModule.CHANNEL_GENERAL,
-					label = NewResult:Format(if FFlagExpChatUseSharedChannelTabDisplayLabel then ChannelTabDisplayLabel.LocalizationKeys.yourServer else "CoreScripts.TextChat.ChannelTabs.Here"),
+					label = NewLocalization:Format(if FFlagExpChatUseSharedChannelTabDisplayLabel then ChannelTabDisplayLabel.LocalizationKeys.yourServer else "CoreScripts.TextChat.ChannelTabs.Here"),
 					items = CollectItemsResult
 				})
 			end
@@ -122,7 +124,7 @@ return {
 			if #CollectItemsResult1 > 0 then
 				table.insert(List3, {
 					id = ExpChatMessageHelpersModule.CHANNEL_GLOBAL,
-					label = NewResult:Format("CoreScripts.TextChat.ChannelTabs.Global2"),
+					label = NewLocalization:Format("CoreScripts.TextChat.ChannelTabs.Global2"),
 					items = CollectItemsResult1
 				})
 			end

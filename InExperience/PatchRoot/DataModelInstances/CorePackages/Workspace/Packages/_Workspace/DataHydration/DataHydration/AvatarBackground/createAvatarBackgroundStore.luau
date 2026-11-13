@@ -49,19 +49,19 @@ return function(p1)
 			-- upvalues: SingleEntityResolverModule (copy), PromiseModule (upval), T (ref), SignalsModule (upval), DataStatus (upval)
 			local AndFetch = SingleEntityResolverModule.getAndFetch((tonumber(p2)))
 			
-			return PromiseModule.new(function(Callback2, Callback3, Callback: (any) -> ())
+			return PromiseModule.new(function(Callback1, Callback3, Callback: (any) -> ())
 				-- upvalues: T (upval), SignalsModule (upval), AndFetch (copy), DataStatus (upval)
 				local Flag = false
-				local Callback1 = nil
+				local Callback2 = nil
 				local t = {}
 				
 				local function settle()
-					-- upvalues: Flag (ref), T (upval), t (copy), Callback1 (ref)
+					-- upvalues: Flag (ref), T (upval), t (copy), Callback2 (ref)
 					Flag = true
 					T[t] = nil
 					
-					if Callback1 then
-						Callback1()
+					if Callback2 then
+						Callback2()
 					end
 				end
 				
@@ -76,21 +76,21 @@ return function(p1)
 					end
 				end
 				
-				Callback1 = SignalsModule.createEffect(function(p3)
-					-- upvalues: AndFetch (upval), Flag (ref), DataStatus (upval), Callback2 (copy), Callback3 (copy), T (upval), t (copy), Callback1 (ref)
+				Callback2 = SignalsModule.createEffect(function(p3)
+					-- upvalues: AndFetch (upval), Flag (ref), DataStatus (upval), Callback1 (copy), Callback3 (copy), T (upval), t (copy), Callback2 (ref)
 					local StatusResult = AndFetch.status(p3)
 					
 					if Flag or StatusResult == DataStatus.NotReady then return end
 					if StatusResult == DataStatus.Ready then
-						Callback2(AndFetch.data(false) or {})
+						Callback1(AndFetch.data(false) or {})
 					else
 						Callback3("Avatar background lookup failed")
 					end
 					Flag = true
 					T[t] = nil
 					
-					if Callback1 then
-						Callback1()
+					if Callback2 then
+						Callback2()
 					end
 				end)
 				
@@ -98,8 +98,8 @@ return function(p1)
 					Flag = true
 					T[t] = nil
 					
-					if Callback1 then
-						Callback1()
+					if Callback2 then
+						Callback2()
 					end
 				end
 				Callback(settle)

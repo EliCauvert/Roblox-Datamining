@@ -7,6 +7,7 @@ local StarterGui = game:GetService("StarterGui")
 local ReactModule = require(CorePackages.Packages.React)
 local SignalsModule = require(CorePackages.Packages.Signals)
 local ServiceModule = require(Chrome.Service)
+local WindowSizeSignalModule = require(Chrome.ChromeShared.Service.WindowSizeSignal)
 local ConstantsModule = require(Chrome.ChromeShared.Unibar.Constants)
 local CommonIconModule = require(Chrome.Integrations.CommonIcon)
 local InitializeShopMenuControllerModule: (any, any) -> () = require(Chrome.Integrations.InExperienceShop.initializeShopMenuController)
@@ -22,6 +23,7 @@ local FFlagCenterInExperienceShopWindow = InExperienceShopModule.FFlagCenterInEx
 local FFlagFixInExperienceShopCursorLock = InExperienceShopModule.FFlagFixInExperienceShopCursorLock
 local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
 local FFlagEnableMenuTrailingBadge = SharedFlagsModule.FFlagEnableMenuTrailingBadge
+local FFlagShowOfferBadge = SharedFlagsModule.FFlagShowOfferBadge
 local FFlagExperienceShopNewIconography = InExperienceShopModule.FFlagExperienceShopNewIconography
 local FFlagEnableAnyFreeTrialToolTipModule = require(CorePackages.Workspace.Packages.InExperienceShop.FFlagEnableAnyFreeTrialToolTip)
 local FFlagEnableFreeTrialShopMenuBadge = InExperienceShopModule.FFlagEnableFreeTrialShopMenuBadge
@@ -34,7 +36,7 @@ local NewResult = ChromeUtilsModule.MappedSignal.new(ServiceModule:onIntegration
 end)
 local MAXWINDOWWIDTH = ShopWindowLayoutModule.MAX_WINDOW_WIDTH
 local MAXWINDOWHEIGHT = ShopWindowLayoutModule.MAX_WINDOW_HEIGHT
-local NewResult1 = require(Chrome.ChromeShared.Service.WindowSizeSignal).new(MAXWINDOWWIDTH, MAXWINDOWHEIGHT, false, true)
+local NewWindowSizeSignal = WindowSizeSignalModule.new(MAXWINDOWWIDTH, MAXWINDOWHEIGHT, false, true)
 local InExperienceShopNewBadgeStorageKey = game:DefineFastString("InExperienceShopNewBadgeStorageKey", "InExperienceShopNewBadgeStorageKey")
 local NewBadgeDismissalMaxCountInExperienceShop = game:DefineFastInt("NewBadgeDismissalMaxCountInExperienceShop", 5)
 local FFlagEnableMenuTrailingBadge1 = game:DefineFastFlag("EnableNewBadgeInExperienceShop", false) and FFlagEnableMenuTrailingBadge
@@ -42,7 +44,7 @@ local CustomText = nil
 local OfferBadgeTextSignal = nil
 local DismissFunction = nil
 
-if SharedFlagsModule.FFlagShowOfferBadge then
+if FFlagShowOfferBadge then
 	local InExperienceOffersModule = require(CorePackages.Workspace.Packages.InExperienceOffers)
 	OfferBadgeTextSignal = InExperienceOffersModule.Utils.createOfferBadgeTextSignal(InExperienceOffersModule.FeatureKeys.RobloxShop)
 	CustomText = OfferBadgeTextSignal
@@ -151,7 +153,7 @@ end
 config.initialAvailability = Unavailable
 config.id = ConstantsModule.IN_EXPERIENCE_SHOP_ID
 config.sideSheetPlacement = SideSheetPlacement.AboveFold
-config.windowSize = NewResult1
+config.windowSize = NewWindowSizeSignal
 config.startingWindowPosition = ShopWindowLayoutModule.getStartingWindowPosition()
 
 function config:activated()
@@ -176,9 +178,9 @@ config.components = {
 		return CommonIconModule(if FFlagExperienceShopNewIconography then "ShoppingBasket" else "BuildingStore", nil, NewResult)
 	end,
 	Window = function()
-		-- upvalues: ReactModule (copy), ShopChromeWrapperModule (copy), NewResult1 (copy), MAXWINDOWWIDTH (copy), MAXWINDOWHEIGHT (copy)
+		-- upvalues: ReactModule (copy), ShopChromeWrapperModule (copy), NewWindowSizeSignal (copy), MAXWINDOWWIDTH (copy), MAXWINDOWHEIGHT (copy)
 		return ReactModule.createElement(ShopChromeWrapperModule, {
-			windowSize = NewResult1,
+			windowSize = NewWindowSizeSignal,
 			maxWindowWidth = MAXWINDOWWIDTH,
 			maxWindowHeight = MAXWINDOWHEIGHT
 		})

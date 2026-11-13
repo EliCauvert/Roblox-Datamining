@@ -1,5 +1,6 @@
 ﻿local Parent = script.Parent.Parent.Parent
 local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 local ConstantsModule = require(Parent.Constants)
 local GetFFlagUGCValidateAQScoreWarningsModule = require(Parent.flags.getFFlagUGCValidateAQScoreWarnings)
@@ -8,9 +9,7 @@ local UGCValidateLCCagingIncorrectUVThresholdBodyPart = game:DefineFastInt("UGCV
 local UGCValidateLCCageUVAvatarMinScore = game:DefineFastInt("UGCValidateLCCageUVAvatarMinScore", 95)
 
 return {
-	categories = {
-		require(Parent.validationSystem.ValidationEnums).UploadCategory.FULL_BODY
-	},
+	categories = { ValidationEnumsModule.UploadCategory.FULL_BODY },
 	run = function(p1, p2)
 		-- upvalues: GetFFlagUGCValidateLCCageUVScoreCheckModule (copy), ConstantsModule (copy), UGCValidateLCCageUVAvatarMinScore (copy), ErrorSourceStringsModule (copy), GetFFlagUGCValidateAQScoreWarningsModule (copy), UGCValidateLCCagingIncorrectUVThresholdBodyPart (copy)
 		local MeasureCageUVAvatar = p2.aqsSummaryData.Measure_Cage_UV_Avatar

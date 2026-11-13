@@ -17,6 +17,8 @@ return function(p1)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseNavigationResult = UseNavigationFunction()
 	local UseTokensResult = UseTokensFunction()
+	local Title = p1.title or UseNavigationPropsResult.title
+	local Body = p1.body or UseNavigationPropsResult.body
 	local HeadingSmall = UseTokensResult.Typography.HeadingSmall
 	local Emphasis = UseTokensResult.Color.Content.Emphasis
 	local BodyLarge = UseTokensResult.Typography.BodyLarge
@@ -53,7 +55,7 @@ return function(p1)
 			BackgroundTransparency = 1,
 			TextWrapped = true,
 			LayoutOrder = 1,
-			Text = p1.title or UseNavigationPropsResult.title,
+			Text = Title,
 			FontFace = NormalizeFontFaceFunction(HeadingSmall.Font),
 			TextSize = HeadingSmall.FontSize,
 			TextColor3 = Emphasis.Color3,
@@ -66,7 +68,7 @@ return function(p1)
 			BackgroundTransparency = 1,
 			TextWrapped = true,
 			LayoutOrder = 2,
-			Text = p1.body or UseNavigationPropsResult.body,
+			Text = Body,
 			FontFace = NormalizeFontFaceFunction(BodyLarge.Font),
 			TextSize = BodyLarge.FontSize,
 			TextColor3 = Default.Color3,

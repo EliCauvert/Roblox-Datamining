@@ -2,12 +2,13 @@
 local ReactModule = require(Parent.React)
 local ResponsiveModule = require(Parent.Responsive)
 local AppUserLayers = require(Parent.ExperimentLayers).AppUserLayers
+local RoactAppExperimentModule = require(Parent.RoactAppExperiment)
 local InteractionFeedbackContext = require(Parent.InteractionFeedback).InteractionFeedbackContext
 local SpatialConfigModule = require(script.Parent.SpatialConfig)
 local DirectionalConfigModule = require(script.Parent.DirectionalConfig)
 local PointerConfigModule = require(script.Parent.PointerConfig)
 local TouchConfigModule = require(script.Parent.TouchConfig)
-local UseUserExperimentFunction = require(Parent.RoactAppExperiment).useUserExperiment
+local UseUserExperimentFunction = RoactAppExperimentModule.useUserExperiment
 local MobileSoundAndHapticsEnabledIXP = game:DefineFastFlag("MobileSoundAndHapticsEnabledIXP", false)
 local MobileSoundAndHapticsIXPBypass = game:DefineFastFlag("MobileSoundAndHapticsIXPBypass", false)
 

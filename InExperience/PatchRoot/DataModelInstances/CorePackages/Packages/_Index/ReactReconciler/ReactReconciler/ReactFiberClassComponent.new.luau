@@ -5,6 +5,7 @@ local Console = require(Parent.Shared).console
 local _ = require(script.Parent.ReactInternalTypes)
 local ReactUpdateQueueNewModule = require(script.Parent["ReactUpdateQueue.new"])
 local _ = require(Parent.Shared)
+local ReactModule = require(Parent.React)
 local ReactFiberFlagsModule = require(script.Parent.ReactFiberFlags)
 local Update = ReactFiberFlagsModule.Update
 local Snapshot = ReactFiberFlagsModule.Snapshot
@@ -60,7 +61,7 @@ local SchedulingProfilerModule = require(script.Parent.SchedulingProfiler)
 local MarkForceUpdateScheduledFunction = SchedulingProfilerModule.markForceUpdateScheduled
 local MarkStateUpdateScheduledFunction = SchedulingProfilerModule.markStateUpdateScheduled
 local _reactInternalInstance = {}
-local Refs = require(Parent.React).Component:extend("").__refs
+local Refs = ReactModule.Component:extend("").__refs
 local v1 = nil
 local v2 = nil
 local v3 = nil
@@ -681,7 +682,7 @@ return {
 					p4.flags = bit32.bor(p4.flags, Snapshot)
 				end
 			else
-				if StateNode.componentDidUpdate ~= nil and (type(StateNode.componentDidUpdate) == "function" and (MemoizedProps1 ~= p3.memoizedProps or MemoizedState ~= p3.memoizedState)) then
+				if StateNode.componentDidUpdate ~= nil and type(StateNode.componentDidUpdate) == "function" and (MemoizedProps1 ~= p3.memoizedProps or MemoizedState ~= p3.memoizedState) then
 					p4.flags = bit32.bor(p4.flags, Update)
 				end
 				if StateNode.getSnapshotBeforeUpdate ~= nil and type(StateNode.getSnapshotBeforeUpdate) == "function" and (MemoizedProps1 ~= p3.memoizedProps or MemoizedState ~= p3.memoizedState) then

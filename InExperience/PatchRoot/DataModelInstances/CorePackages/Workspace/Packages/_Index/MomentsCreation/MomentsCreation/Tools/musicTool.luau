@@ -1,29 +1,32 @@
 ﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
 local Parent = MomentsCreation.Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
 local ReactModule = require(Parent.React)
+local CreationFlowStateModule = require(MomentsCreation.Enums.CreationFlowState)
 local MomentTypeModule = require(MomentsCreation.Enums.MomentType)
 local _ = require(MomentsCreation.Types.CreationFlowTypes)
 local CreateEditSessionModule = require(MomentsCreation.Stores.createEditSession)
 local MusicOverlayModule = require(MomentsCreation.Components.MusicOverlay)
 local MusicPickerV2ContainerModule = require(MomentsCreation.Components.MusicPickerV2Container)
 local FFlagMomentsCreationMusicPickerV2Module = require(MomentsCreation.Flags.FFlagMomentsCreationMusicPickerV2)
+local FFlagMomentsCreateAvatarPosts = require(Parent.SharedFlags).FFlagMomentsCreateAvatarPosts
 local EventNames = require(Parent.MomentsCommon).Analytics.EventNames
 
 return {
 	kind = "music",
 	presentation = "Overlay",
 	zIndex = 2,
-	step = require(MomentsCreation.Enums.CreationFlowState).Music,
+	step = CreationFlowStateModule.Music,
 	cta = {
 		localizationKey = "Feature.Moments.Action.AddMusic",
 		order = 2,
-		icon = require(Parent.BuilderIcons).Icon.MusicNote,
+		icon = BuilderIconsModule.Icon.MusicNote,
 		analyticsEvent = EventNames.EditingFlowMusicButtonPressed,
 		commitAnalyticsEvent = EventNames.EditingFlowMusicDoneButtonPressed,
 		cancelAnalyticsEvent = EventNames.EditingFlowMusicBackButtonPressed
 	},
 	supportedCaptureTypes = { Enum.CaptureType.Video, Enum.CaptureType.Screenshot },
-	supportedMomentTypes = if require(Parent.SharedFlags).FFlagMomentsCreateAvatarPosts then { MomentTypeModule.Avatar } else nil,
+	supportedMomentTypes = if FFlagMomentsCreateAvatarPosts then { MomentTypeModule.Avatar } else nil,
 	createSession = function()
 		-- upvalues: CreateEditSessionModule (copy)
 		return CreateEditSessionModule()

@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("BustAvatarCacheAfterSubscriptionPurchase", false)
+﻿return game:DefineFastFlag("BustAvatarCacheAfterSubscriptionPurchase2", false)

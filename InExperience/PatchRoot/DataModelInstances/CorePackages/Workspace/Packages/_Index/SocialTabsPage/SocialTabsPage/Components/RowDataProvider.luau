@@ -1,5 +1,6 @@
 ﻿local SocialTabsPage = script:FindFirstAncestor("SocialTabsPage")
 local Parent = SocialTabsPage.Parent
+local ReactModule = require(Parent.React)
 local UseJoinUserInExperienceFunction = require(Parent.SocialExperienceJoin).useJoinUserInExperience
 local UseCTAForRowModule = require(SocialTabsPage.Hooks.useCTAForRow)
 local _ = require(SocialTabsPage.Common.Types)
@@ -9,7 +10,7 @@ local config = {
 	userPresenceType = require(Parent.DataHydration).Presence.PresenceEnums.PresenceType.Offline
 }
 
-return require(Parent.React).memo(function(p1)
+return ReactModule.memo(function(p1)
 	-- upvalues: UseGetPresenceByUserIdFunction (copy), config (copy), UseJoinUserInExperienceFunction (copy), UseCTAForRowModule (copy)
 	local UseGetPresenceByUserIdResult = UseGetPresenceByUserIdFunction(p1.entity.id) or config
 	

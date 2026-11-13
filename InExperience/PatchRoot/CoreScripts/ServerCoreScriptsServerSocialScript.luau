@@ -336,7 +336,7 @@ local function canCreatePartyNudge(Player)
 	end
 end
 
-local function Callback2(Player: Player)
+local function Callback1(Player: Player)
 	-- upvalues: Players (copy), FFlagEnablePartyNudgeAfterJoin (copy), EnableCreatePartyNudge (copy), canCreatePartyNudge (copy), Url (copy), HttpService (copy), EnableCreatePartyNudgeWithVersion (copy), GatePrivateServerNudge (copy), HttpRbxApiService (copy), CreateOrJoinParty (copy), FFlagShowFriendJoinedYouToastForNonReferredJoins (copy), ShouldShowFriendJoinedPlayerToastModule (copy), ShowFriendJoinedPlayerToast (ref), ShowPlayerJoinedFriendsToast (ref)
 	local Player1 = nil
 	local Players1 = Players:GetPlayers()
@@ -384,7 +384,7 @@ local function Callback2(Player: Player)
 end
 
 local function onPlayerAdded(Player: Player)
-	-- upvalues: sendPlayerBlockList (copy), NewPlayerGroupDetails (copy), t1 (copy), getPlayerGroupDetails (copy), FFlagInExperienceUserProfileSettingsEnabledModule (copy), sendPlayerAllInExperienceNameEnabled (copy), Callback (copy), sendPlayerAllCanManage (copy), getPlayerCanManage (copy), sendCanChatWith (copy), FFlagEnablePartyNudgeAfterJoin (copy), FFlagShowFriendJoinedYouToastForNonReferredJoins (copy), Callback2 (copy)
+	-- upvalues: sendPlayerBlockList (copy), NewPlayerGroupDetails (copy), t1 (copy), getPlayerGroupDetails (copy), FFlagInExperienceUserProfileSettingsEnabledModule (copy), sendPlayerAllInExperienceNameEnabled (copy), Callback (copy), sendPlayerAllCanManage (copy), getPlayerCanManage (copy), sendCanChatWith (copy), FFlagEnablePartyNudgeAfterJoin (copy), FFlagShowFriendJoinedYouToastForNonReferredJoins (copy), Callback1 (copy)
 	coroutine.wrap(sendPlayerBlockList)(Player)
 	NewPlayerGroupDetails:FireClient(Player, t1)
 	
@@ -400,7 +400,7 @@ local function onPlayerAdded(Player: Player)
 	sendCanChatWith(Player)
 	
 	if FFlagEnablePartyNudgeAfterJoin or FFlagShowFriendJoinedYouToastForNonReferredJoins then
-		coroutine.wrap(Callback2)(Player)
+		coroutine.wrap(Callback1)(Player)
 	end
 end
 
@@ -462,7 +462,7 @@ if FFlagEnableModerateChatRemoteEvent then
 		end
 	end)
 end
-if FFlagEnableSummarySystemMessageOnLua or FFlagAIRephraseSettingEnabled or FFlagChatSummariesSettingEnabled then
+if FFlagEnableSummarySystemMessageOnLua or (FFlagAIRephraseSettingEnabled or FFlagChatSummariesSettingEnabled) then
 	TextChatService.ExpChatFeatureValueChanged:Connect(function(UserId, FeatureName, FeatureValue)
 		-- upvalues: Players (copy), ExpChatFeatureValueChanged (ref)
 		local Player = Players:GetPlayerByUserId(UserId)
@@ -507,10 +507,10 @@ Players.PlayerRemoving:connect(function(Player)
 	end
 end)
 
-local function Callback1() end
+local function Callback2() end
 
 for _, RemoteEvent in ipairs(RobloxReplicatedStorage:GetChildren()) do
 	if RemoteEvent:IsA("RemoteEvent") then
-		RemoteEvent.OnServerEvent:Connect(Callback1)
+		RemoteEvent.OnServerEvent:Connect(Callback2)
 	end
 end

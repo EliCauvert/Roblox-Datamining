@@ -4,6 +4,7 @@ local LuaUtils = Parent.luaUtils
 local LuauPolyfillModule = require(Parent1.LuauPolyfill)
 local Error1 = LuauPolyfillModule.Error
 local Number = LuauPolyfillModule.Number
+local RegExpModule = require(Parent1.RegExp)
 local InspectFunction = require(Parent.jsutils.inspect).inspect
 local InvariantFunction = require(Parent.jsutils.invariant).invariant
 local IsObjectLikeFunction = require(Parent.jsutils.isObjectLike).isObjectLike
@@ -95,6 +96,6 @@ local function astFromValue(List, OfType)
 	end
 end
 
-_01909 = require(Parent1.RegExp)("^-?(?:0|[1-9][0-9]*)$")
+_01909 = RegExpModule("^-?(?:0|[1-9][0-9]*)$")
 
 return { astFromValue = astFromValue, NULL = NullModule }

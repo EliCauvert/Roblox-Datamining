@@ -6,6 +6,7 @@ local ShareGame = RobloxGui.Modules.Settings.Pages.ShareGame
 local GetFFlagShareGameSearchBoxFocusAnalyticsModule = require(RobloxGui.Modules.Settings.Flags.GetFFlagShareGameSearchBoxFocusAnalytics)
 local SearchBoxModule = require(ShareGame.Components.SearchBox)
 local IconButtonModule = require(ShareGame.Components.IconButton)
+local ConstantsModule = require(ShareGame.Constants)
 local Text = require(CorePackages.Workspace.Packages.AppCommonLib).Text
 local ThemeModule = require(RobloxGui.Modules.Settings.Theme)
 local SetSearchAreaActiveModule = require(ShareGame.Actions.SetSearchAreaActive)
@@ -15,7 +16,7 @@ local Translator = require(ShareGame.getTranslator)()
 local ImagePath = ShareGameIconsModule:GetImagePath()
 local SearchLargeFrame = ShareGameIconsModule:GetFrame("search_large")
 local FontResult = ThemeModule.font(Enum.Font.SourceSans)
-local GRAY3 = require(ShareGame.Constants).Color.GRAY3
+local GRAY3 = ConstantsModule.Color.GRAY3
 local TextSizeResult = ThemeModule.textSize(20)
 local SearchArea = RoactModule.PureComponent:extend("SearchArea")
 

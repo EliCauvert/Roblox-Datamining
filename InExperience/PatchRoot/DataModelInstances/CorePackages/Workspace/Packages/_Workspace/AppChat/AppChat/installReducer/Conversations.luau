@@ -2,8 +2,26 @@
 local AppChat = script:FindFirstAncestor("AppChat")
 local Parent = AppChat.Parent
 local AppChatNetworkingModule = require(Parent.AppChatNetworking)
+local RoduxModule = require(Parent.Rodux)
 local LuauPolyfillModule = require(Parent.LuauPolyfill)
 local ConversationsModule = require(AppChat.Conversations)
+local ChangedParticipantsModule = require(AppChat.Conversations.Actions.ChangedParticipants)
+local MessageFailedToSend = ConversationsModule.Actions.MessageFailedToSend
+local MessageModerated = ConversationsModule.Actions.MessageModerated
+local ReceivedConversationModule = require(AppChat.Conversations.Actions.ReceivedConversation)
+local ReceivedMessages = ConversationsModule.Actions.ReceivedMessages
+local RemovedConversationModule = require(AppChat.Conversations.Actions.RemovedConversation)
+local ReceivedChannelsMigrationConflictModule = require(AppChat.Conversations.Actions.ReceivedChannelsMigrationConflict)
+local RenamedGroupConversationModule = require(AppChat.Conversations.Actions.RenamedGroupConversation)
+local SendingMessage = ConversationsModule.Actions.SendingMessage
+local SentMessage = ConversationsModule.Actions.SentMessage
+local SetUserTypingModule = require(AppChat.Conversations.Actions.SetUserTyping)
+local FriendConversationCreatedModule = require(AppChat.Conversations.Actions.FriendConversationCreated)
+local FriendshipDestroyedModule = require(AppChat.Actions.FriendshipDestroyed)
+local ReloadedMessagesForConversationsModule = require(AppChat.Conversations.Actions.ReloadedMessagesForConversations)
+local ConversationModerationTypeChangedModule = require(AppChat.Conversations.Actions.ConversationModerationTypeChanged)
+local NetworkingChatModule = require(AppChat.Http.NetworkingChat)
+local NetworkingBlockingModule = require(AppChat.Http.NetworkingBlocking)
 local ConversationModule = require(AppChat.Models.Conversation)
 local ConversationChannelsModule = require(AppChat.Models.ConversationChannels)
 local Immutable = require(Parent.AppCommonLib).Immutable
@@ -15,13 +33,14 @@ local GetFFlagAppChatPCMFixBlockingFunction = require(Parent.SharedFlags).getFFl
 local UpdateConversationReducerModule = require(script.Parent.updateConversationReducer)
 local GetOneToOneConversationIdFromFriendIdModule = require(AppChat.Utils.getOneToOneConversationIdFromFriendId)
 local GetFFlagAppChatEnableManualTranslationModule = require(AppChat.Flags.getFFlagAppChatEnableManualTranslation)
+local FFlagAppChatEnableU13ChatOptIn = require(Parent.SharedFlags).FFlagAppChatEnableU13ChatOptIn
 local ConstantsModule = require(AppChat.Constants)
 local config = {
 	[ConstantsModule.OptInVariant.OsaContextCard] = {
 		field = "osaAcknowledgementStatus",
 		value = ConversationChannelsModule.OsaAcknowledgementStatus.Acknowledged
 	},
-	[ConstantsModule.OptInVariant.ChatOptInInfoCard] = if require(Parent.SharedFlags).FFlagAppChatEnableU13ChatOptIn then {
+	[ConstantsModule.OptInVariant.ChatOptInInfoCard] = if FFlagAppChatEnableU13ChatOptIn then {
 		field = "userOptedIntoChatMessages",
 		value = ConversationChannelsModule.UserOptedIntoChatMessagesStatus.OptedIn
 	} else nil
@@ -166,8 +185,8 @@ local function getShouldMarkConversationUnread(p3, Messages): boolean
 	return false
 end
 
-return require(Parent.Rodux).createReducer({}, {
-	[require(AppChat.Conversations.Actions.ReceivedConversation).name] = function(p4, p5)
+return RoduxModule.createReducer({}, {
+	[ReceivedConversationModule.name] = function(p4, p5)
 		-- upvalues: UpdateConversationReducerModule (copy)
 		return UpdateConversationReducerModule(p4, p5.conversation)
 	end,
@@ -189,11 +208,11 @@ return require(Parent.Rodux).createReducer({}, {
 		end
 		return p4
 	end,
-	[ConversationsModule.Actions.ReceivedMessages.name] = function(p4, p5)
+	[ReceivedMessages.name] = function(p4, p5)
 		-- upvalues: addMessagesToConversation (copy)
 		return addMessagesToConversation(p4, p5.conversationId, p5)
 	end,
-	[ConversationsModule.Actions.SendingMessage.name] = function(p4, p5)
+	[SendingMessage.name] = function(p4, p5)
 		-- upvalues: OrderedMap (copy), Immutable (copy)
 		local v3 = p4[p5.conversationId]
 		
@@ -203,7 +222,7 @@ return require(Parent.Rodux).createReducer({}, {
 		end
 		return p4
 	end,
-	[ConversationsModule.Actions.SentMessage.name] = function(p4, p5)
+	[SentMessage.name] = function(p4, p5)
 		-- upvalues: OrderedMap (copy), Immutable (copy)
 		local v3 = p4[p5.conversationId]
 		
@@ -213,7 +232,7 @@ return require(Parent.Rodux).createReducer({}, {
 		end
 		return p4
 	end,
-	[require(AppChat.Conversations.Actions.RenamedGroupConversation).name] = function(p4, p5)
+	[RenamedGroupConversationModule.name] = function(p4, p5)
 		-- upvalues: Immutable (copy)
 		local ConversationId = p5.conversationId
 		local v3 = p4[ConversationId]
@@ -227,7 +246,7 @@ return require(Parent.Rodux).createReducer({}, {
 		end
 		return p4
 	end,
-	[require(AppChat.Conversations.Actions.ChangedParticipants).name] = function(p4, p5)
+	[ChangedParticipantsModule.name] = function(p4, p5)
 		-- upvalues: Immutable (copy)
 		local ConversationId = p5.conversationId
 		local Participants = p5.participants
@@ -242,11 +261,11 @@ return require(Parent.Rodux).createReducer({}, {
 		end
 		return p4
 	end,
-	[require(AppChat.Conversations.Actions.RemovedConversation).name] = function(p4, p5)
+	[RemovedConversationModule.name] = function(p4, p5)
 		-- upvalues: Immutable (copy)
 		return Immutable.Set(p4, p5.conversationId, nil)
 	end,
-	[require(AppChat.Conversations.Actions.SetUserTyping).name] = function(p4, p5)
+	[SetUserTypingModule.name] = function(p4, p5)
 		-- upvalues: Immutable (copy)
 		local v3 = p4[p5.conversationId]
 		
@@ -256,7 +275,7 @@ return require(Parent.Rodux).createReducer({}, {
 		end
 		return p4
 	end,
-	[ConversationsModule.Actions.MessageModerated.name] = function(p4, p5)
+	[MessageModerated.name] = function(p4, p5)
 		-- upvalues: Immutable (copy)
 		local v3 = p4[p5.conversationId]
 		
@@ -270,7 +289,7 @@ return require(Parent.Rodux).createReducer({}, {
 		end
 		return p4
 	end,
-	[ConversationsModule.Actions.MessageFailedToSend.name] = function(p4, p5)
+	[MessageFailedToSend.name] = function(p4, p5)
 		-- upvalues: Immutable (copy)
 		local v3 = p4[p5.conversationId]
 		
@@ -284,7 +303,7 @@ return require(Parent.Rodux).createReducer({}, {
 		end
 		return p4
 	end,
-	[require(AppChat.Http.NetworkingChat).GetUserConversations.Succeeded.name] = function(p4, p5)
+	[NetworkingChatModule.GetUserConversations.Succeeded.name] = function(p4, p5)
 		-- upvalues: ConversationModule (copy), UpdateConversationReducerModule (copy)
 		for _, value in ipairs(p5.responseBody) do
 			p4 = UpdateConversationReducerModule(p4, (ConversationModule.fromWeb(value)))
@@ -441,14 +460,14 @@ return require(Parent.Rodux).createReducer({}, {
 		
 		return if p11.postBody.conversation_id and p11.postBody.message_id then updateMessageContentToDisplay(p10, p11.postBody.conversation_id, p11.postBody.message_id, ContentToDisplay) else p10
 	end else nil,
-	[require(AppChat.Conversations.Actions.ReceivedChannelsMigrationConflict).name] = function(_, _)
+	[ReceivedChannelsMigrationConflictModule.name] = function(_, _)
 		return {}
 	end,
-	[require(AppChat.Conversations.Actions.FriendConversationCreated).name] = function(p10, p11)
+	[FriendConversationCreatedModule.name] = function(p10, p11)
 		-- upvalues: Immutable (copy)
 		return if p10[p11.oldFriendConversationId] then Immutable.Set(p10, p11.oldFriendConversationId, nil) else p10
 	end,
-	[require(AppChat.Actions.FriendshipDestroyed).name] = function(p10, p11)
+	[FriendshipDestroyedModule.name] = function(p10, p11)
 		-- upvalues: ConversationChannelsModule (copy), Immutable (copy)
 		local UserId2 = if p11.userId1 == "localUserId" then if p11.userId2 == "localUserId" then nil else p11.userId2 else p11.userId1
 		
@@ -461,7 +480,7 @@ return require(Parent.Rodux).createReducer({}, {
 			return p10
 		end
 	end,
-	[require(AppChat.Http.NetworkingBlocking).BlockUserById.Succeeded.name] = if GetFFlagAppChatPCMFixBlockingFunction() then function(SetResult, p10)
+	[NetworkingBlockingModule.BlockUserById.Succeeded.name] = if GetFFlagAppChatPCMFixBlockingFunction() then function(SetResult, p10)
 		-- upvalues: GetOneToOneConversationIdFromFriendIdModule (copy), Immutable (copy), ConversationChannelsModule (copy)
 		local Text = tostring(p10.namedIds.users)
 		
@@ -481,7 +500,7 @@ return require(Parent.Rodux).createReducer({}, {
 		end
 		return SetResult1
 	end else nil,
-	[require(AppChat.Conversations.Actions.ReloadedMessagesForConversations).name] = function(JoinResult, p10)
+	[ReloadedMessagesForConversationsModule.name] = function(JoinResult, p10)
 		-- upvalues: CryoModule (copy), ConversationChannelsModule (copy)
 		local JoinResult1 = JoinResult
 		
@@ -498,7 +517,7 @@ return require(Parent.Rodux).createReducer({}, {
 		end
 		return JoinResult1
 	end,
-	[require(AppChat.Conversations.Actions.ConversationModerationTypeChanged).name] = function(p11, p12)
+	[ConversationModerationTypeChangedModule.name] = function(p11, p12)
 		-- upvalues: Immutable (copy)
 		local ConversationId = p12.conversationId
 		local ModerationType = p12.moderationType

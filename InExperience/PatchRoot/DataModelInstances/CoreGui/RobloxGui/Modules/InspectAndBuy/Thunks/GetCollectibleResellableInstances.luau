@@ -3,10 +3,11 @@ local Parent = script.Parent.Parent
 local ThunkModule = require(Parent.Thunk)
 local NetworkModule = require(Parent.Services.Network)
 local SetCollectibleResellableInstancesModule = require(Parent.Actions.SetCollectibleResellableInstances)
+local CreateInspectAndBuyKeyMapperModule = require(Parent.createInspectAndBuyKeyMapper)
 local SendCounterModule = require(Parent.Thunks.SendCounter)
 local ConstantsModule = require(Parent.Constants)
 local list = { NetworkModule }
-local GetCollectibleResellableInstances = require(Parent.createInspectAndBuyKeyMapper)("getCollectibleResellableInstances")
+local GetCollectibleResellableInstances = CreateInspectAndBuyKeyMapperModule("getCollectibleResellableInstances")
 
 return function(p1, p2)
 	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), GetCollectibleResellableInstances (copy), PerformFetch (copy), SetCollectibleResellableInstancesModule (copy), SendCounterModule (copy), ConstantsModule (copy)

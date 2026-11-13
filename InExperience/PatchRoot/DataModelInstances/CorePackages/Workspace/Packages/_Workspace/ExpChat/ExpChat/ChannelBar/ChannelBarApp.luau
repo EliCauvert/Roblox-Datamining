@@ -3,6 +3,7 @@ local UserInputService = game:GetService("UserInputService")
 local ExpChat = script:FindFirstAncestor("ExpChat")
 local Parent = ExpChat.Parent
 local ReactModule = require(Parent.React)
+local RoactModule = require(Parent.Roact)
 local RoactRoduxModule = require(Parent.RoactRodux)
 local CryoModule = require(Parent.Cryo)
 local SignalsReactModule = require(Parent.SignalsReact)
@@ -22,7 +23,7 @@ local GetChannelTabsStoreModule = require(ExpChat.Stores.GetChannelTabsStore)
 local SignalsModule = require(Parent.Signals)
 local CreateEffectFunction = SignalsModule.createEffect
 local ChannelBarModule = require(script.Parent.UI.ChannelBar)
-local ChannelBarApp = require(Parent.Roact).Component:extend("ChannelBarApp")
+local ChannelBarApp = RoactModule.Component:extend("ChannelBarApp")
 
 if FFlagExpChatUseChatConfigStore then
 	function ChannelBarApp.init(p1)

@@ -1,10 +1,11 @@
 ﻿local AvatarExperienceSave = script:FindFirstAncestor("AvatarExperienceSave")
 local Parent = AvatarExperienceSave.Parent
+local AvatarExperienceCommonModule = require(Parent.AvatarExperienceCommon)
 local GetSubstateToTrackForChangesModule = require(script.Parent.getSubstateToTrackForChanges)
 local AssetOrderRelativelyEqualModule = require(script.Parent.assetOrderRelativelyEqual)
 local TutilsModule = require(Parent.tutils)
 local _ = require(AvatarExperienceSave.Context.AvatarSaveContext)
-local Constants = require(Parent.AvatarExperienceCommon).Constants
+local Constants = AvatarExperienceCommonModule.Constants
 
 return function(p1, p2)
 	-- upvalues: TutilsModule (copy), GetSubstateToTrackForChangesModule (copy), AssetOrderRelativelyEqualModule (copy), Constants (copy)

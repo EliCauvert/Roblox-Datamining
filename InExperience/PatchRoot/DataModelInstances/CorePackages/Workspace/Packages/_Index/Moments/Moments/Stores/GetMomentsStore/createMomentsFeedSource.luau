@@ -213,19 +213,19 @@ return function(Callback, p2)
 					local t = {}
 					local Moment = nil
 					
-					for _, moment in v3.moments do
-						t[moment.momentId] = true
+					for _, moment1 in v3.moments do
+						t[moment1.momentId] = true
 						
 						if Moment == nil then
 							local IsFeedItemIdMatch = nil
-							if moment.momentId == DeepLinkedMomentId then
+							if moment1.momentId == DeepLinkedMomentId then
 								IsFeedItemIdMatch = true
 							else
-								local RecommendationMetadata = moment.recommendationMetadata
+								local RecommendationMetadata = moment1.recommendationMetadata
 								IsFeedItemIdMatch = RecommendationMetadata ~= nil and RecommendationMetadata.feedItemId == DeepLinkedMomentId
 							end
 							if IsFeedItemIdMatch then
-								Moment = moment
+								Moment = moment1
 							end
 						end
 					end
@@ -263,20 +263,20 @@ return function(Callback, p2)
 							if DeepLinkedMomentsForUnavailableDialog.shareInfoByMomentId then
 								GetShareCountsStoreModule(false).setBatchShareCounts(DeepLinkedMomentsForUnavailableDialog.shareInfoByMomentId)
 							end
-							for _, moment1 in DeepLinkedMomentsForUnavailableDialog.moments do
+							for _, moment2 in DeepLinkedMomentsForUnavailableDialog.moments do
 								local IsFeedItemIdMatch = nil
-								if moment1.momentId == DeepLinkedMomentId then
+								if moment2.momentId == DeepLinkedMomentId then
 									IsFeedItemIdMatch = true
 								else
-									local RecommendationMetadata = moment1.recommendationMetadata
+									local RecommendationMetadata = moment2.recommendationMetadata
 									IsFeedItemIdMatch = RecommendationMetadata ~= nil and RecommendationMetadata.feedItemId == DeepLinkedMomentId
 								end
-								if ShouldShowMomentInFeedModule(moment1) and IsFeedItemIdMatch then
-									table.insert(List, { kind = "moment", moment = moment1 })
+								if ShouldShowMomentInFeedModule(moment2) and IsFeedItemIdMatch then
+									table.insert(List, { kind = "moment", moment = moment2 })
 									Flag = true
 									
 									if FFlagMomentsCommentDeepLinks then
-										FeedItemId = moment1.recommendationMetadata.feedItemId
+										FeedItemId = moment2.recommendationMetadata.feedItemId
 									end
 								end
 							end
@@ -325,14 +325,14 @@ return function(Callback, p2)
 					MomentId1 = Entry.targetId
 				end
 			end
-			for _, moment2 in v3.moments do
+			for _, moment in v3.moments do
 				Analytics.reportMomentsFeedItemsReceived(RecommendationSource.Trending)
 				
-				if MomentId == nil or moment2.momentId ~= MomentId then
-					if ShouldShowMomentInFeedModule(moment2) then
-						table.insert(List, { kind = "moment", moment = moment2 })
+				if MomentId == nil or moment.momentId ~= MomentId then
+					if ShouldShowMomentInFeedModule(moment) then
+						table.insert(List, { kind = "moment", moment = moment })
 					else
-						ReportUnavailableFeedItemModule(moment2, RecommendationSource.Trending)
+						ReportUnavailableFeedItemModule(moment, RecommendationSource.Trending)
 					end
 				end
 			end

@@ -453,8 +453,8 @@ return function(p1)
 		[AcpProtocolModule.Methods.SessionLoad] = function(p5)
 			-- upvalues: t (copy), AcpProtocolModule (upval), FFlagBuildExperienceModelPickerData (upval), P8 (copy)
 			local Entry = t[p5.sessionId]
-			local config = nil
 			local v2 = nil
+			local config = nil
 			
 			if Entry == nil or Entry.closedUtc ~= nil then
 				v2 = nil

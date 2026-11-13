@@ -6,6 +6,7 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local FFlagEnableExperienceShopGlobalIconModule = require(InExperienceShop.Flags.FFlagEnableExperienceShopGlobalIcon)
 local FFlagEnableShopIconTelemetryModule = require(InExperienceShop.Flags.FFlagEnableShopIconTelemetry)
+local FFlagEnableFreeTrialBlueDotModule = require(InExperienceShop.Flags.FFlagEnableFreeTrialBlueDot)
 local FFlagOfferNotifyOnGlobalIcon = require(Parent.SharedFlags).FFlagOfferNotifyOnGlobalIcon
 local FFlagEnableAnyFreeTrialToolTipModule = require(InExperienceShop.Flags.FFlagEnableAnyFreeTrialToolTip)
 local ShopGlobalIconAnimGracePeriodMs = game:DefineFastInt("ShopGlobalIconAnimGracePeriodMs", 3000)
@@ -33,7 +34,7 @@ else
 	end)
 end
 return function(p1)
-	-- upvalues: FFlagEnableExperienceShopGlobalIconModule (copy), UseTokensFunction (copy), FFlagOfferNotifyOnGlobalIcon (copy), FFlagEnableAnyFreeTrialToolTipModule (copy), GetShopGlobalIconStoreModule (copy), ReactModule (copy), ShopGlobalIconAnimGracePeriodMs (copy), CurrentTime (ref), TweenService (copy), _TweenInfo (copy), _TweenInfo2 (copy), _TweenInfo3 (copy), _TweenInfo1 (copy), FFlagEnableShopIconTelemetryModule (copy), RunService (copy), Parent (copy), InExperienceShop (copy), FoundationModule (copy), FFlagExperienceShopNewIconographyModule (copy), IconName (copy), IconVariant (copy), v2 (copy), v1 (copy)
+	-- upvalues: FFlagEnableExperienceShopGlobalIconModule (copy), UseTokensFunction (copy), FFlagOfferNotifyOnGlobalIcon (copy), FFlagEnableAnyFreeTrialToolTipModule (copy), GetShopGlobalIconStoreModule (copy), ReactModule (copy), ShopGlobalIconAnimGracePeriodMs (copy), CurrentTime (ref), TweenService (copy), _TweenInfo (copy), _TweenInfo2 (copy), _TweenInfo3 (copy), _TweenInfo1 (copy), FFlagEnableFreeTrialBlueDotModule (copy), InExperienceShop (copy), FFlagEnableShopIconTelemetryModule (copy), RunService (copy), Parent (copy), FoundationModule (copy), FFlagExperienceShopNewIconographyModule (copy), IconName (copy), IconVariant (copy), v2 (copy), v1 (copy)
 	if FFlagEnableExperienceShopGlobalIconModule then
 		local UseTokensResult = UseTokensFunction()
 		local ButtonSize: number = p1.buttonSize
@@ -251,7 +252,14 @@ return function(p1)
 		end
 		
 		local function onActivated()
-			-- upvalues: FFlagEnableShopIconTelemetryModule (upval), RunService (upval), Parent (upval), InExperienceShop (upval), p1 (copy)
+			-- upvalues: FFlagEnableFreeTrialBlueDotModule (upval), InExperienceShop (upval), FFlagEnableShopIconTelemetryModule (upval), RunService (upval), Parent (upval), p1 (copy)
+			if FFlagEnableFreeTrialBlueDotModule then
+				local SubmitFreeTrialBlueDotModule = require(InExperienceShop.submitFreeTrialBlueDot)
+				
+				if SubmitFreeTrialBlueDotModule.isShopIconBlueDotShowing(false) then
+					SubmitFreeTrialBlueDotModule.reportActivated()
+				end
+			end
 			if FFlagEnableShopIconTelemetryModule and not RunService:IsStudio() then
 				local LoggingProtocolModule = require(Parent.LoggingProtocol)
 				LoggingProtocolModule.default:logRobloxTelemetryEvent(require(InExperienceShop.Events.ShopIconClickEvent), {

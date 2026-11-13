@@ -2,10 +2,12 @@
 local ReactModule = require(Parent.React)
 local UIBloxModule = require(Parent.UIBlox)
 local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
+local LocalizationHelper = require(Parent.NotificationsCommon).LocalizationHelper
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local GetLocalizedStringsFunction = require(Parent.NotificationsCommon).LocalizationHelper.getLocalizedStrings
-local IconsMenuFriendsLarge = UIBloxModule.App.ImageSet.Images["icons/menu/friends_large"]
+local Images = UIBloxModule.App.ImageSet.Images
+local GetLocalizedStringsFunction = LocalizationHelper.getLocalizedStrings
+local IconsMenuFriendsLarge = Images["icons/menu/friends_large"]
 
 return function()
 	-- upvalues: UseStyleFunction (copy), GetLocalizedStringsFunction (copy), ReactModule (copy), ImageSetLabel (copy), IconsMenuFriendsLarge (copy), NormalizeFontFaceFunction (copy)

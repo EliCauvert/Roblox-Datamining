@@ -48,7 +48,7 @@ local UsePlusReferralFlyoutBannerBlindnessModule = if FFlagEnablePlusReferralFly
 local PlusReferralRecipientFlyoutBannerMaxImpressions = game:DefineFastInt("PlusReferralRecipientFlyoutBannerMaxImpressions", 10)
 local PlusReferralBannerModule = if FFlagEnablePlusReferralFlyoutEntry then require(script.Parent.PlusReferralBanner) else nil
 local PlusReferralRecipientBannerModule = if FFlagEnablePlusReferralRecipientFlyoutEntry then require(script.Parent.PlusReferralRecipientBanner) else nil
-local BlackbirdUpsellBannerModule = if FFlagEnableBlackbird and (FFlagEnableBlackbirdOnFlyoutMenu and EnableBlackbirdUpsellOnFlyoutMenu) then require(script.Parent.BlackbirdUpsellBanner) else nil
+local BlackbirdUpsellBannerModule = if FFlagEnableBlackbird and FFlagEnableBlackbirdOnFlyoutMenu and EnableBlackbirdUpsellOnFlyoutMenu then require(script.Parent.BlackbirdUpsellBanner) else nil
 
 local function selectStatusBarHeight(p1)
 	return p1.TopBar.statusBarHeight or 0

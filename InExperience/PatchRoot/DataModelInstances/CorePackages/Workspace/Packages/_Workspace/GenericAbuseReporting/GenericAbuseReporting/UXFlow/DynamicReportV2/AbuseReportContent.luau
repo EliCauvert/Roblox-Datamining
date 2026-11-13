@@ -8,9 +8,10 @@ local _ = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetF
 local _ = require(GenericAbuseReporting.Enums.AbuseVector)
 local ArTranslationProvider = require(GenericAbuseReporting.BeduiV2.Utils.Translate.arTranslation).ArTranslationProvider
 local LayoutSlotsModule = require(GenericAbuseReporting.BeduiV2.Components.LayoutSlots)
+local LoaderContextModule = require(GenericAbuseReporting.BeduiV2.Loaders.LoaderContext)
 local UseAbuseSheetFlowModule = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.useAbuseSheetFlow)
 local LayoutSlotsProvider = LayoutSlotsModule.LayoutSlotsProvider
-local LoaderProvider = require(GenericAbuseReporting.BeduiV2.Loaders.LoaderContext).LoaderProvider
+local LoaderProvider = LoaderContextModule.LoaderProvider
 local SheetSlots = LayoutSlotsModule.sheetSlots
 
 return (ReactModule.forwardRef(function(p1, p2)

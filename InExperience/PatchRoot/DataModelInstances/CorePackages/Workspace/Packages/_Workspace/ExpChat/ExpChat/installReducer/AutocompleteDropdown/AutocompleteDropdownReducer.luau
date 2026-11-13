@@ -1,9 +1,10 @@
 ﻿local ExpChat = script:FindFirstAncestor("ExpChat")
 local Parent = ExpChat.Parent
+local RoduxModule = require(Parent.Rodux)
 local Dictionary = require(Parent.llama).Dictionary
 local Actions = ExpChat.Actions
 
-return require(Parent.Rodux).createReducer({
+return RoduxModule.createReducer({
 	activated = false,
 	query = "",
 	selectedIndex = 1,

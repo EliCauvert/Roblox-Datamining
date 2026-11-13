@@ -100,6 +100,7 @@ end
 function ReportDialog.renderButtons(p1, _, p2, p3)
 	-- upvalues: list (copy), Roact (copy), Button (copy), ButtonType (copy), FFlagIGMDialogButtonsUseUIBloxButtonModule (copy)
 	local Length = utf8.len(utf8.nfcnormalize(p1.state.abuseDescription))
+	local IsLengthBelow: boolean = Length >= 0 and Length <= 160
 	local IsTypeOfAbuseIndexAbove: boolean = p1.state.typeOfAbuseIndex > 0 or p1.props.userId == nil
 	p3.ButtonContainer = Roact.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -125,7 +126,7 @@ function ReportDialog.renderButtons(p1, _, p2, p3)
 			layoutOrder = 2,
 			buttonType = ButtonType.PrimarySystem,
 			size = UDim2.fromOffset(144, 36),
-			isDisabled = not (Length >= 0 and Length <= 160 and IsTypeOfAbuseIndexAbove),
+			isDisabled = not (IsLengthBelow and IsTypeOfAbuseIndexAbove),
 			text = p2.report,
 			onActivated = function()
 				-- upvalues: p1 (copy), list (upval)

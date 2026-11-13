@@ -5,12 +5,11 @@ local SignalsReactModule = require(Parent1.SignalsReact)
 local FoundationModule = require(Parent1.Foundation)
 local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
+local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
 local PlayerListVisibilityStoreModule = require(Parent.Common.PlayerListVisibilityStore)
 local PlayerContextualMenuStoreModule = require(Parent.Common.PlayerContextualMenuStore)
 local ConstantsModule = require(Parent.Common.Constants)
-local StateLayer = {
-	affordance = FoundationModule.Enums.StateLayerAffordance.None
-}
+local StateLayer = { affordance = StateLayerAffordance.None }
 
 local function LeaderboardScrimMobile()
 	-- upvalues: UseTokensFunction (copy), SignalsReactModule (copy), PlayerListVisibilityStoreModule (copy), ReactModule (copy), PlayerContextualMenuStoreModule (copy), View (copy), StateLayer (copy), ConstantsModule (copy)

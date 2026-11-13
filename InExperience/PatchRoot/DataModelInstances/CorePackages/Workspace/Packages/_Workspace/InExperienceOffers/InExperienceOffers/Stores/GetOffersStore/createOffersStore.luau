@@ -1,6 +1,7 @@
 ﻿local InExperienceOffers = script:FindFirstAncestor("InExperienceOffers")
 local Parent = InExperienceOffers.Parent
 local _ = require(Parent.Promise)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local SignalsModule = require(Parent.Signals)
 local CreateSessionScopedSignalFunction = require(Parent.SignalsUtils).createSessionScopedSignal
 local GetAllUserOffersModule = require(InExperienceOffers.Api.getAllUserOffers)
@@ -12,7 +13,7 @@ local GetSecondsUntilAnyKeyEmptiesModule = require(InExperienceOffers.Utils.getS
 local IsNotificationEligibleModule = require(InExperienceOffers.Utils.isNotificationEligible)
 local FeatureKeyModule = require(InExperienceOffers.Enums.FeatureKey)
 local NotificationLocationModule = require(InExperienceOffers.Enums.NotificationLocation)
-local FFlagHideOfferNotificationsWhenShopEmpty = require(Parent.SharedFlags).FFlagHideOfferNotificationsWhenShopEmpty
+local FFlagHideOfferNotificationsWhenShopEmpty = SharedFlagsModule.FFlagHideOfferNotificationsWhenShopEmpty
 local FFlagOffersRespectExpirationModule = require(InExperienceOffers.Flags.FFlagOffersRespectExpiration)
 local FFlagOffersMergeStoreResultsModule = require(InExperienceOffers.Flags.FFlagOffersMergeStoreResults)
 local FFlagUseMockUserOffersModule = require(InExperienceOffers.Flags.FFlagUseMockUserOffers)

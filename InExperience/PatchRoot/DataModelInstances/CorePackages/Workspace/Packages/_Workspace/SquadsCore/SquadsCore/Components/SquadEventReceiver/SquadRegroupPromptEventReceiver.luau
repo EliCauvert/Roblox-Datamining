@@ -129,8 +129,9 @@ return function(p1)
 	local UseResult1 = ReactModule.useCallback(function(p2)
 		return if p2.Squad and p2.Squad.Squad then p2.Squad.Squad.currentExperienceInvite else nil
 	end, {})
+	local UseSelectorResult = if FFlagUseSignalsForSquadExperienceInvite then nil else UseSelectorFunction(UseResult1)
 	local UseRefResult2 = ReactModule.useRef(nil)
-	UseRefResult2.current = if FFlagUseSignalsForSquadExperienceInvite then nil else UseSelectorFunction(UseResult1)
+	UseRefResult2.current = UseSelectorResult
 	local SquadRegroupPromptDebounceTimeMsRatio = SquadRegroupPromptDebounceTimeMs / 1000
 	local UseRefResult3 = ReactModule.useRef(nil)
 	

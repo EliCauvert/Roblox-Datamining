@@ -17,7 +17,8 @@ return function()
 	-- upvalues: PromiseModule (copy)
 	local EligibilityChecks = {}
 	local Reservations = {}
-	local ReleasedTokens = {}
+	local List = {}
+	local ReportedDecisions = {}
 	local Tbl = {}
 	
 	return {
@@ -52,8 +53,16 @@ return function()
 				return NewPromise
 			end,
 			releaseReservation = function(p1)
-				-- upvalues: ReleasedTokens (copy)
-				table.insert(ReleasedTokens, p1)
+				-- upvalues: List (copy)
+				table.insert(List, p1)
+			end,
+			reportDecision = function(Value, Decision)
+				-- upvalues: ReportedDecisions (copy), List (copy)
+				table.insert(ReportedDecisions, {
+					reservationToken = Value,
+					decision = Decision,
+					wasReleased = table.find(List, Value) ~= nil
+				})
 			end,
 			onReservationExpired = function(Key)
 				-- upvalues: Tbl (copy)
@@ -69,7 +78,8 @@ return function()
 		},
 		eligibilityChecks = EligibilityChecks,
 		reservations = Reservations,
-		releasedTokens = ReleasedTokens,
+		releasedTokens = List,
+		reportedDecisions = ReportedDecisions,
 		getExpiredListenerCount = function(): number
 			-- upvalues: Tbl (copy)
 			local Count = 0

@@ -4,10 +4,11 @@ local PlayWithRewardComponent = script:FindFirstAncestor("PlayWithRewardComponen
 local FetchPlayWithRewardStateModule = require(PlayWithRewardComponent.FetchPlayWithRewardState)
 local ShouldRenderPlayWithRewardBannerModule = require(PlayWithRewardComponent.shouldRenderPlayWithRewardBanner)
 local Parent = PlayWithRewardComponent.Parent
+local PlayWithRewardStateModule = require(Parent.PlayWithRewardState)
 local ReactModule = require(Parent.React)
 local RoactUtilsModule = require(Parent.RoactUtils)
 local FFlagPlayWithRewardClearOnExperienceLeave = require(Parent.SharedFlags).FFlagPlayWithRewardClearOnExperienceLeave
-local SetPlayWithRewardStateFunction = require(Parent.PlayWithRewardState).SetPlayWithRewardState
+local SetPlayWithRewardStateFunction = PlayWithRewardStateModule.SetPlayWithRewardState
 local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
 local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
 

@@ -1,11 +1,12 @@
 ﻿local ExpChat = script:FindFirstAncestor("ExpChat")
 local Parent = ExpChat.Parent
 local ReactModule = require(Parent.React)
+local RoactUtilsModule = require(Parent.RoactUtils)
 local SignalsReactModule = require(Parent.SignalsReact)
 local ExpChatPresetChatEmojiTabExperimentation = require(Parent.SocialExperiments).ExpChatPresetChatEmojiTabExperimentation
 local GetChatStatusStoreModule = require(ExpChat.Stores.GetChatStatusStore)
 local IsUserChatEnabledModule = require(ExpChat.isUserChatEnabled)
-local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
 
 local function selectIsChatWindowVisible(p1)
 	return p1.ChatVisibility.isChatWindowEnabled.value

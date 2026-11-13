@@ -1,6 +1,7 @@
 ﻿local ServerTriggeredModals = script:FindFirstAncestor("ServerTriggeredModals")
 local Parent = ServerTriggeredModals.Parent
 local ReactModule = require(Parent.React)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local SduiFeatureEntryPoint = require(Parent.SduiSharedUtilities).SduiFeatureEntryPoint
 local LoggerModule = require(ServerTriggeredModals.Logger)
 local ReportPromptImpressionModule = require(ServerTriggeredModals.reportPromptImpression)
@@ -9,7 +10,7 @@ local PromptStyleModule = require(ServerTriggeredModals.SduiV2.PromptStyle)
 local UsePromptEntriesModule = require(ServerTriggeredModals.SduiV2.usePromptEntries)
 local UseModalSignalStoreModule = require(ServerTriggeredModals.SignalStores.useModalSignalStore)
 local FFlagPromptsActionEventLoggingModule = require(ServerTriggeredModals.Flags.FFlagPromptsActionEventLogging)
-local FFlagPromptsCoachmarkImpressionOnShow = require(Parent.SharedFlags).FFlagPromptsCoachmarkImpressionOnShow
+local FFlagPromptsCoachmarkImpressionOnShow = SharedFlagsModule.FFlagPromptsCoachmarkImpressionOnShow
 
 return ReactModule.memo(function(p1)
 	-- upvalues: UseModalSignalStoreModule (copy), ReactModule (copy), UsePromptEntriesModule (copy), PromptStyleModule (copy), FFlagPromptsCoachmarkImpressionOnShow (copy), ReportPromptImpressionModule (copy), LoggerModule (copy), SendModalImpressionEventFunction (copy), SduiFeatureEntryPoint (copy), FFlagPromptsActionEventLoggingModule (copy)

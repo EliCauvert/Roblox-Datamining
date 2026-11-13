@@ -2,9 +2,10 @@
 local Parent = BuildExperience.Parent
 local ReactModule = require(Parent.React)
 local FFlagBuildExperienceLibrary = require(Parent.SharedFlags).FFlagBuildExperienceLibrary
+local ProgressLoadingModule = require(Parent.ProgressLoading)
 local LaunchExperienceModule = require(Parent.BuildExperiencePlaytestLaunch.launchExperience)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
-local PregameOverride = require(Parent.ProgressLoading).PregameOverride
+local PregameOverride = ProgressLoadingModule.PregameOverride
 
 local function renderPregameSkeleton(p1)
 	-- upvalues: BuildExperience (copy), ReactModule (copy)

@@ -1,6 +1,7 @@
 ﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
 local Parent = ProfilePlatform.Parent
 local SharedFlagsModule = require(Parent.SharedFlags)
+local DataHydrationModule = require(Parent.DataHydration)
 local Images = require(Parent.UIBlox).App.ImageSet.Images
 local AppPage = require(Parent.RobloxAppEnums).AppPage
 local Sources = require(Parent.SocialLuaAnalytics).Analytics.Enums.Sources
@@ -13,7 +14,7 @@ local ProfileTypes = EnumsModule.ProfileTypes
 local FFlagProfilePlatformAddTC = SharedFlagsModule.FFlagProfilePlatformAddTC
 local FFlagFixTFLinksVRGatingModule = require(ProfilePlatform.Flags.FFlagFixTFLinksVRGating)
 local FFlagProfileTFCardUseQrScanContext = SharedFlagsModule.FFlagProfileTFCardUseQrScanContext
-local GetResult = require(Parent.DataHydration).TrustedConnections.TrustedConnectionsStore.get()
+local GetResult = DataHydrationModule.TrustedConnections.TrustedConnectionsStore.get()
 
 return {
 	[EnumsModule.ProfileActions.RemoveTrustedConnection] = function(p1)

@@ -1,5 +1,7 @@
 ﻿local VirtualEventsState = script:FindFirstAncestor("VirtualEventsState")
 local HttpRequestModule = require(VirtualEventsState.Parent.HttpRequest)
+local NetworkingVirtualEventsModule = require(VirtualEventsState.Parent.NetworkingVirtualEvents)
+local NetworkingGamesModule = require(VirtualEventsState.Parent.NetworkingGames)
 local LoggerModule = require(VirtualEventsState.logger)
 local ConfigResult = require(VirtualEventsState.Parent.RoduxNetworking).config({
 	keyPath = "VirtualEvents.networkStatus",
@@ -20,6 +22,6 @@ local ConfigResult = require(VirtualEventsState.Parent.RoduxNetworking).config({
 
 return {
 	RoduxNetworking = ConfigResult,
-	NetworkingVirtualEvents = require(VirtualEventsState.Parent.NetworkingVirtualEvents).config({ roduxNetworking = ConfigResult }),
-	NetworkingGames = require(VirtualEventsState.Parent.NetworkingGames).config({ roduxNetworking = ConfigResult })
+	NetworkingVirtualEvents = NetworkingVirtualEventsModule.config({ roduxNetworking = ConfigResult }),
+	NetworkingGames = NetworkingGamesModule.config({ roduxNetworking = ConfigResult })
 }

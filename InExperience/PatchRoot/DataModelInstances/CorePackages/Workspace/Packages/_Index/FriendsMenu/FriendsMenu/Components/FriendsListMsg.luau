@@ -1,8 +1,9 @@
 ﻿local Parent = script:FindFirstAncestor("FriendsMenu").Parent
 local ReactModule = require(Parent.React)
 local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
+local LocalizationHelper = require(Parent.NotificationsCommon).LocalizationHelper
 local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
-local GetLocalizedStringsFunction = require(Parent.NotificationsCommon).LocalizationHelper.getLocalizedStrings
+local GetLocalizedStringsFunction = LocalizationHelper.getLocalizedStrings
 
 return function(p1)
 	-- upvalues: UseStyleFunction (copy), GetLocalizedStringsFunction (copy), ReactModule (copy), NormalizeFontFaceFunction (copy)

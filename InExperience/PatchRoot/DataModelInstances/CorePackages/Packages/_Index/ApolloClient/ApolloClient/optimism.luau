@@ -8,6 +8,9 @@ local Cache = require(script.cache).Cache
 local Entry = require(script.entry).Entry
 local ParentEntrySlot = require(script.context).parentEntrySlot
 local ContextModule = require(script.context)
+local BindContext = ContextModule.bindContext
+local NoContext = ContextModule.noContext
+local SetTimeout = ContextModule.setTimeout
 
 local function _()
 	-- upvalues: Trie (copy)
@@ -20,21 +23,18 @@ local function _()
 end
 
 local NewTrie = Trie.new(true)
-
-local function DefaultMakeCacheKey(_, ...)
-	-- upvalues: NewTrie (copy)
-	return NewTrie:lookupArray({ ... })
-end
-
 local _ = require(script.initTypes)
 local NewResult = LuauPolyfillModule.Set.new()
 
 return {
-	bindContext = ContextModule.bindContext,
-	noContext = ContextModule.noContext,
-	setTimeout = ContextModule.setTimeout,
+	bindContext = BindContext,
+	noContext = NoContext,
+	setTimeout = SetTimeout,
 	dep = require(script.dep).dep,
-	defaultMakeCacheKey = DefaultMakeCacheKey,
+	defaultMakeCacheKey = function(_, ...)
+		-- upvalues: NewTrie (copy)
+		return NewTrie:lookupArray({ ... })
+	end,
 	KeyTrie = Trie,
 	wrap = function(Callback1, p1, p2)
 		-- upvalues: Cache (copy), Boolean (copy), Trie (copy), Entry (copy), Array (copy), NewResult (copy), ParentEntrySlot (copy), Object (copy)
@@ -139,7 +139,7 @@ return {
 			return dirtyKey(...)
 		end
 		
-		local function v22(...)
+		local function v24(...)
 			-- upvalues: MakeCacheKeyFunction (copy), NewCache (copy), Boolean (upval)
 			local GetResult = NewCache:get((MakeCacheKeyFunction(nil, ...)))
 			
@@ -149,8 +149,8 @@ return {
 		end
 		
 		function self:dirty(...)
-			-- upvalues: v22 (copy)
-			return v22(...)
+			-- upvalues: v24 (copy)
+			return v24(...)
 		end
 		
 		local function peekKey(p3)
@@ -166,14 +166,14 @@ return {
 			return peekKey(...)
 		end
 		
-		local function v24(...)
+		local function v26(...)
 			-- upvalues: peekKey (copy), MakeCacheKeyFunction (copy)
 			return peekKey(MakeCacheKeyFunction(nil, ...))
 		end
 		
 		function self:peek(...)
-			-- upvalues: v24 (copy)
-			return v24(...)
+			-- upvalues: v26 (copy)
+			return v26(...)
 		end
 		
 		local function forgetKey(p3)
@@ -186,27 +186,27 @@ return {
 			return forgetKey(...)
 		end
 		
-		local function v26(...)
+		local function v28(...)
 			-- upvalues: forgetKey (copy), MakeCacheKeyFunction (copy)
 			return forgetKey(MakeCacheKeyFunction(nil, ...))
 		end
 		
 		function self:forget(...)
-			-- upvalues: v26 (copy)
-			return v26(...)
+			-- upvalues: v28 (copy)
+			return v28(...)
 		end
 		
 		self.makeCacheKey = MakeCacheKeyFunction
 		
 		if Boolean.toJSBoolean(KeyArgsFunction) then
-			local function v27(...)
+			local function v29(...)
 				-- upvalues: MakeCacheKeyFunction (copy), KeyArgsFunction (copy)
 				return MakeCacheKeyFunction(nil, table.unpack(KeyArgsFunction(...)))
 			end
 			
 			function self:getKey(...)
-				-- upvalues: v27 (copy)
-				return v27(...)
+				-- upvalues: v29 (copy)
+				return v29(...)
 			end
 		else
 			self.getKey = MakeCacheKeyFunction

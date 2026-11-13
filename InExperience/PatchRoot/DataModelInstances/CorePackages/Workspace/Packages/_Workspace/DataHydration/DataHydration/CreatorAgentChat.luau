@@ -1,5 +1,6 @@
 ﻿local SharedFlagsModule = require(script:FindFirstAncestor("DataHydration").Parent.SharedFlags)
 local TypesModule = require(script.types)
+local FFlagBuildExperienceManageGamePass = SharedFlagsModule.FFlagBuildExperienceManageGamePass
 local FFlagBuildExperienceManageSubscription = SharedFlagsModule.FFlagBuildExperienceManageSubscription
 local FFlagBuildExperienceManageMonetizationTool = SharedFlagsModule.FFlagBuildExperienceManageMonetizationTool
 
@@ -21,7 +22,7 @@ return {
 	StudioClientLogsTool = require(script.StudioClientLogsTool),
 	StudioClientDataModelTools = require(script.StudioClientDataModelTools),
 	StudioManageDevProductTool = require(script.StudioManageDevProductTool),
-	StudioManageGamePassTool = if SharedFlagsModule.FFlagBuildExperienceManageGamePass then require(script.StudioManageGamePassTool) else nil,
+	StudioManageGamePassTool = if FFlagBuildExperienceManageGamePass then require(script.StudioManageGamePassTool) else nil,
 	StudioManageSubscriptionTool = if FFlagBuildExperienceManageSubscription then require(script.StudioManageSubscriptionTool) else nil,
 	StudioManageMonetizationTool = if FFlagBuildExperienceManageMonetizationTool then require(script.StudioManageMonetizationTool) else nil,
 	ClientToolItems = require(script.ClientToolItems),

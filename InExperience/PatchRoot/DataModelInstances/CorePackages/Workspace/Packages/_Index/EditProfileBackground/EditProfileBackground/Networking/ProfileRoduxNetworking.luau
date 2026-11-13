@@ -1,9 +1,10 @@
 ﻿local Parent = script:FindFirstAncestor("EditProfileBackground").Parent
 local LuaSocialLibrariesDepsModule = require(Parent.LuaSocialLibrariesDeps)
+local RoduxNetworking = LuaSocialLibrariesDepsModule.RoduxNetworking
 local HttpRequest = LuaSocialLibrariesDepsModule.httpRequest
 local EditProfileBackgroundNetworking = require(Parent.Lumberyak).Logger.new(nil, "EditProfileBackground"):new("EditProfileBackground Networking")
 
-return (LuaSocialLibrariesDepsModule.RoduxNetworking.config({
+return (RoduxNetworking.config({
 	keyPath = "EditProfileBackground.networkStatus",
 	networkImpl = HttpRequest.config({
 		requestFunction = function(p1, p2, p3)

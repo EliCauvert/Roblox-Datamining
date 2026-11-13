@@ -1,7 +1,8 @@
 ﻿local Parent = script:FindFirstAncestor("AvatarExperienceGifting").Parent
 local ReactModule = require(Parent.React)
+local GiftingModule = require(Parent.Gifting)
 local AvatarGiftInfoPanelViewModule = require(script.Parent.Parent.AvatarGiftInfoPanel.AvatarGiftInfoPanelView)
-local GiftSendView = require(Parent.Gifting).Components.GiftSendView
+local GiftSendView = GiftingModule.Components.GiftSendView
 
 return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), AvatarGiftInfoPanelViewModule (copy), GiftSendView (copy)

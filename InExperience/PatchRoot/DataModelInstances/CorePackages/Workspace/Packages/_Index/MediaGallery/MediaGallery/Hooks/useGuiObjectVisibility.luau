@@ -7,11 +7,11 @@ local MediaGalleryConstantsModule = require(MediaGallery.MediaGalleryConstants)
 local VIDEOVISIBLEPERCENT = MediaGalleryConstantsModule.VIDEO_VISIBLE_PERCENT
 local VISIBILITYSCANDEBOUNCESEC = MediaGalleryConstantsModule.VISIBILITY_SCAN_DEBOUNCE_SEC
 
-return function(p1, p2, Callback1, Callback)
+return function(p1, p2, Callback, Callback1)
 	-- upvalues: ReactModule (copy), GetIsInstanceVisibleFunction (copy), VIDEOVISIBLEPERCENT (copy), RunService (copy), VISIBILITYSCANDEBOUNCESEC (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	ReactModule.useEffect(function()
-		-- upvalues: p2 (copy), p1 (copy), GetIsInstanceVisibleFunction (upval), VIDEOVISIBLEPERCENT (upval), UseRefResult (copy), Callback (copy), RunService (upval), Callback1 (copy), VISIBILITYSCANDEBOUNCESEC (upval)
+		-- upvalues: p2 (copy), p1 (copy), GetIsInstanceVisibleFunction (upval), VIDEOVISIBLEPERCENT (upval), UseRefResult (copy), Callback1 (copy), RunService (upval), Callback (copy), VISIBILITYSCANDEBOUNCESEC (upval)
 		if not p2 or not p1.current then
 			return nil
 		end
@@ -44,13 +44,13 @@ return function(p1, p2, Callback1, Callback)
 		local Callback2 = nil
 		
 		local _ = function()
-			-- upvalues: UseRefResult (upval), Callback (upval)
+			-- upvalues: UseRefResult (upval), Callback1 (upval)
 			if UseRefResult.current then
 				UseRefResult.current:Disconnect()
 				UseRefResult.current = nil
 				
-				if Callback then
-					Callback()
+				if Callback1 then
+					Callback1()
 				end
 			end
 		end
@@ -69,11 +69,11 @@ return function(p1, p2, Callback1, Callback)
 		end
 		
 		v1 = function()
-			-- upvalues: UseRefResult (upval), disconnectLayoutSignals (copy), RunService (upval), GetIsInstanceVisibleFunction (upval), Current (copy), VIDEOVISIBLEPERCENT (upval), Callback1 (upval), Callback (upval), Callback2 (ref)
+			-- upvalues: UseRefResult (upval), disconnectLayoutSignals (copy), RunService (upval), GetIsInstanceVisibleFunction (upval), Current (copy), VIDEOVISIBLEPERCENT (upval), Callback (upval), Callback1 (upval), Callback2 (ref)
 			if not UseRefResult.current then
 				disconnectLayoutSignals()
 				UseRefResult.current = RunService.RenderStepped:Connect(function(DeltaTime)
-					-- upvalues: GetIsInstanceVisibleFunction (upval), Current (upval), VIDEOVISIBLEPERCENT (upval), Callback1 (upval), UseRefResult (upval), Callback (upval), Callback2 (upval)
+					-- upvalues: GetIsInstanceVisibleFunction (upval), Current (upval), VIDEOVISIBLEPERCENT (upval), Callback (upval), UseRefResult (upval), Callback1 (upval), Callback2 (upval)
 					local CurrentCamera = workspace.CurrentCamera
 					local Config = if CurrentCamera then {
 						min = Vector2.new(0, 0),
@@ -85,13 +85,13 @@ return function(p1, p2, Callback1, Callback)
 							UseRefResult.current:Disconnect()
 							UseRefResult.current = nil
 							
-							if Callback then
-								Callback()
+							if Callback1 then
+								Callback1()
 							end
 						end
 						Callback2()
-					elseif Callback1 then
-						Callback1(DeltaTime)
+					elseif Callback then
+						Callback(DeltaTime)
 						
 						return
 					end
@@ -160,17 +160,17 @@ return function(p1, p2, Callback1, Callback)
 			Callback2()
 		end
 		return function()
-			-- upvalues: disconnectLayoutSignals (copy), UseRefResult (upval), Callback (upval)
+			-- upvalues: disconnectLayoutSignals (copy), UseRefResult (upval), Callback1 (upval)
 			disconnectLayoutSignals()
 			
 			if UseRefResult.current then
 				UseRefResult.current:Disconnect()
 				UseRefResult.current = nil
 				
-				if Callback then
-					Callback()
+				if Callback1 then
+					Callback1()
 				end
 			end
 		end
-	end, { p2, p1, Callback1, Callback })
+	end, { p2, p1, Callback, Callback1 })
 end

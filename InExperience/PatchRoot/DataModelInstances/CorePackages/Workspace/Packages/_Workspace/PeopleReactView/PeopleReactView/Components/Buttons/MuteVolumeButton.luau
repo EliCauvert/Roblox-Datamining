@@ -2,6 +2,7 @@
 local Parent = PeopleReactView.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
 local SignalsModule = require(Parent.Signals)
 local PeopleServiceModule = require(Parent.PeopleService)
 local FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry = PeopleServiceModule.getService("Flags").FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry
@@ -13,7 +14,7 @@ local ControlState = FoundationModule.Enums.ControlState
 local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UseCursorFunction = FoundationModule.Hooks.useCursor
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseSignalStateFunction = SignalsReactModule.useSignalState
 local VoiceVolumePopoverModule = require(PeopleReactView.Components.Buttons.VoiceVolumePopover)
 local Signal = SignalsModule.createSignal("")
 local Signal1 = SignalsModule.createSignal(false)

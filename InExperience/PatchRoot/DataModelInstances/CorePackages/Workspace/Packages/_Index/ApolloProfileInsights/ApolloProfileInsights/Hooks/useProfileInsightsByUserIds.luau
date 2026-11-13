@@ -1,6 +1,7 @@
 ﻿local Parent = script:FindFirstAncestor("ApolloProfileInsights").Parent
+local ApolloLocalStateModule = require(Parent.ApolloLocalState)
 local UseQueryFunction = require(Parent.ApolloClient).useQuery
-local Queries = require(Parent.ApolloLocalState).queries
+local Queries = ApolloLocalStateModule.queries
 
 return function(p1)
 	-- upvalues: UseQueryFunction (copy), Queries (copy)

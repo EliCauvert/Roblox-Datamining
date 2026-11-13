@@ -1,14 +1,20 @@
 ﻿local Parent = script:FindFirstAncestor("PinShortcut").Parent
+local AppBloxModule = require(Parent.AppBlox)
+local LocalizationModule = require(Parent.Localization)
 local LoggingProtocolModule = require(Parent.LoggingProtocol)
+local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local RoactUtilsModule = require(Parent.RoactUtils)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local UniversalAppPolicyModule = require(Parent.UniversalAppPolicy)
 local CloseCentralOverlayFunction = require(Parent.CentralOverlay).Thunks.CloseCentralOverlay
-local Enums = require(Parent.Foundation).Enums
-local GetAppFeaturePoliciesFunction = require(Parent.UniversalAppPolicy).getAppFeaturePolicies
-local SnackbarWrapper = require(Parent.AppBlox).SnackbarWrapper
+local Enums = FoundationModule.Enums
+local GetAppFeaturePoliciesFunction = UniversalAppPolicyModule.getAppFeaturePolicies
+local SnackbarWrapper = AppBloxModule.SnackbarWrapper
 local TelemetryCountersModule = require(script.Parent.TelemetryCounters)
-local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
-local FFlagAddPinExperienceTargetDestinationGUACPolicy = require(Parent.SharedFlags).FFlagAddPinExperienceTargetDestinationGUACPolicy
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
+local FFlagAddPinExperienceTargetDestinationGUACPolicy = SharedFlagsModule.FFlagAddPinExperienceTargetDestinationGUACPolicy
 local FFlagPinShortcutSnackbarTelemetryEnabledModule = require(script.Parent.Flags.FFlagPinShortcutSnackbarTelemetryEnabled)
 
 return ReactModule.memo(function(p1)

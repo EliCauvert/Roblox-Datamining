@@ -188,9 +188,10 @@ function InteractionFrame.init(p1)
 		if not ActiveInput then return end
 		local CurrentTime = tick()
 		local CurrentTimeDelta = CurrentTime - p1.lastPanTime
+		local ChangedThisFrame = IsUserInputTypeMatch2 and ActiveInput.changedThisFrame
 		local IsCurrentTimeDeltaAbove: boolean = p1.numActiveInputs == 1 and CurrentTimeDelta > 0.1
 		
-		if (IsUserInputTypeMatch2 and ActiveInput.changedThisFrame or IsUserInputTypeMatch) and IsCurrentTimeDeltaAbove then
+		if (ChangedThisFrame or IsUserInputTypeMatch) and IsCurrentTimeDeltaAbove then
 			local PositionDelta = nil
 			local CurrentTimeDelta1 = nil
 			if IsUserInputTypeMatch then

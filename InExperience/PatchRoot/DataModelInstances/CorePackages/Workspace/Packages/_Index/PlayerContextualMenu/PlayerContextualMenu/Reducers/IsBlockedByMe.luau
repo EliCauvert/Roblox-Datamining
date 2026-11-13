@@ -1,9 +1,10 @@
 ﻿local PlayerContextualMenu = script:FindFirstAncestor("PlayerContextualMenu")
 local Parent = PlayerContextualMenu.Parent
+local RoduxModule = require(Parent.Rodux)
 local DashModule = require(Parent.Dash)
 local BlockingModule = require(PlayerContextualMenu.Http.Blocking)
 
-return require(Parent.Rodux).createReducer({}, {
+return RoduxModule.createReducer({}, {
 	[BlockingModule.GetBlockedUsers.Succeeded.name] = function(_, p1)
 		local t = {}
 		

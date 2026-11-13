@@ -21,7 +21,6 @@ local GetFStringTopSongsSortExploreApiPageTypeFunction = SharedFlagsModule.GetFS
 local FFlagSduiChartsRequestPlaceholders = SharedFlagsModule.FFlagSduiChartsRequestPlaceholders
 local FFlagSduiChartsPlaceholderMergeStrategySupport = SharedFlagsModule.FFlagSduiChartsPlaceholderMergeStrategySupport
 local FFlagChartsHydrationStreaming = SharedFlagsModule.FFlagChartsHydrationStreaming
-local FFlagSduiAdvertiseRuntimeSupportSets = SharedFlagsModule.FFlagSduiAdvertiseRuntimeSupportSets
 
 local function _()
 	-- upvalues: GetSduiClientPageScopeFunction (copy), ChartsConstantsModule (copy), ChartsPageScopeFieldsModule (copy)
@@ -58,7 +57,7 @@ local function extractNextFeedPageToken(p1)
 end
 
 return function(LoadTimer, p2)
-	-- upvalues: ChartsConstantsModule (copy), GetSduiApiStoreFunction (copy), ChartsPageSessionModule (copy), FFlagChartsHydrationStreaming (copy), GetChartsPageStreamUrlModule (copy), GetChartsPagePostUrlModule (copy), Parent (copy), FFlagSduiAdvertiseRuntimeSupportSets (copy), SduiCapabilities (copy), BuildChartsPageRequestModule (copy), GetSduiClientPageScopeFunction (copy), ChartsPageScopeFieldsModule (copy), FFlagEnableTopSongsSort (copy), GetFStringTopSongsSortExploreApiPageTypeFunction (copy), FFlagSduiChartsRequestPlaceholders (copy), GetSduiTemplateStoreFunction (copy), AppPage (copy), SduiResponseType (copy), FFlagSduiChartsPlaceholderMergeStrategySupport (copy), ChartsMergeStrategyModule (copy), SduiApiStorePostConfigContentType (copy), extractNextFeedPageToken (copy)
+	-- upvalues: ChartsConstantsModule (copy), GetSduiApiStoreFunction (copy), ChartsPageSessionModule (copy), FFlagChartsHydrationStreaming (copy), GetChartsPageStreamUrlModule (copy), GetChartsPagePostUrlModule (copy), Parent (copy), SduiCapabilities (copy), BuildChartsPageRequestModule (copy), GetSduiClientPageScopeFunction (copy), ChartsPageScopeFieldsModule (copy), FFlagEnableTopSongsSort (copy), GetFStringTopSongsSortExploreApiPageTypeFunction (copy), FFlagSduiChartsRequestPlaceholders (copy), GetSduiTemplateStoreFunction (copy), AppPage (copy), SduiResponseType (copy), FFlagSduiChartsPlaceholderMergeStrategySupport (copy), ChartsMergeStrategyModule (copy), SduiApiStorePostConfigContentType (copy), extractNextFeedPageToken (copy)
 	local ConfigKey = ChartsConstantsModule.ConfigKey
 	local SduiApiStore = GetSduiApiStoreFunction()
 	local _, Data2 = SduiApiStore.getData(ConfigKey)
@@ -67,16 +66,11 @@ return function(LoadTimer, p2)
 		ChartsPageSessionModule:Refresh()
 	end
 	local ChartsPageStreamUrlModule = if FFlagChartsHydrationStreaming then GetChartsPageStreamUrlModule() else GetChartsPagePostUrlModule()
-	local ServiceContractsProtoModule = require(Parent.ServiceContractsProto)
-	local ChartsPage = ServiceContractsProtoModule.apppageplatform.charts.charts_page
-	local ClientCapabilities = ServiceContractsProtoModule.apppageplatform.shared.client_capabilities.ClientCapabilities
-	local ClientCapabilities1 = nil
-	ClientCapabilities1 = if FFlagSduiAdvertiseRuntimeSupportSets then SduiCapabilities.buildClientCapabilities() else ClientCapabilities.new({
-		enabled_capabilities = SduiCapabilities.getEnabledCapabilityNumbers({ "CAPABILITY_SUPPORTS_HYDRATION_CLIENT_HINTS" })
-	})
+	local ChartsPage = require(Parent.ServiceContractsProto).apppageplatform.charts.charts_page
+	local ClientCapabilities = SduiCapabilities.buildClientCapabilities()
 	
 	local function buildBody(FeedPageToken)
-		-- upvalues: BuildChartsPageRequestModule (upval), ChartsPage (copy), ChartsPageSessionModule (upval), GetSduiClientPageScopeFunction (upval), ChartsConstantsModule (upval), ChartsPageScopeFieldsModule (upval), FFlagEnableTopSongsSort (upval), GetFStringTopSongsSortExploreApiPageTypeFunction (upval), FFlagSduiChartsRequestPlaceholders (upval), FFlagChartsHydrationStreaming (upval), GetSduiTemplateStoreFunction (upval), AppPage (upval), ClientCapabilities1 (ref)
+		-- upvalues: BuildChartsPageRequestModule (upval), ChartsPage (copy), ChartsPageSessionModule (upval), GetSduiClientPageScopeFunction (upval), ChartsConstantsModule (upval), ChartsPageScopeFieldsModule (upval), FFlagEnableTopSongsSort (upval), GetFStringTopSongsSortExploreApiPageTypeFunction (upval), FFlagSduiChartsRequestPlaceholders (upval), FFlagChartsHydrationStreaming (upval), GetSduiTemplateStoreFunction (upval), AppPage (upval), ClientCapabilities (copy)
 		return BuildChartsPageRequestModule(ChartsPage, {
 			feedPageToken = FeedPageToken,
 			sessionId = ChartsPageSessionModule:Get(),
@@ -85,7 +79,7 @@ return function(LoadTimer, p2)
 			includePlaceholders = if FFlagSduiChartsRequestPlaceholders then true else nil,
 			hydrationStreamEnabled = if FFlagChartsHydrationStreaming then true else nil,
 			cachedRobloxComponentToTemplateId = GetSduiTemplateStoreFunction().getCachedRobloxComponentToTemplateId(AppPage.Games),
-			clientCapabilities = ClientCapabilities1
+			clientCapabilities = ClientCapabilities
 		})
 	end
 	

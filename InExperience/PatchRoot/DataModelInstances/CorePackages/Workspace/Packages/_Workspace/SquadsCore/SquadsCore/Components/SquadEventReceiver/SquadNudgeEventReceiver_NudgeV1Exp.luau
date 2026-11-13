@@ -10,12 +10,13 @@ local ActOnPartyNudgeModule = require(SquadsCore.Thunks.actOnPartyNudge)
 local ExperienceServiceModule = require(Parent.ExperienceService)
 local ReactModule = require(Parent.React)
 local ToastNotificationModule = require(Parent.ToastNotification)
+local ToastNotificationsProtocolModule = require(Parent.ToastNotificationsProtocol)
 local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local ExperienceService = ExperienceServiceModule.ExperienceService
 local GameParams = ExperienceServiceModule.GameParams
 local LifecycleEvents = ToastNotificationModule.LifecycleEvents
 local NotificationTypeEnum = ToastNotificationModule.ToastNotificationTypeModule.NotificationTypeEnum
-local Default = require(Parent.ToastNotificationsProtocol).ToastNotificationProtocol.default
+local Default = ToastNotificationsProtocolModule.ToastNotificationProtocol.default
 
 return function(p1)
 	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), SquadExternalContractContextModule (copy), Default (copy), HttpService (copy), EventNamesModule (copy), SquadToastActionsAndStatesModule (copy), ConstantsModule (copy), NotificationTypeEnum (copy), ActOnPartyNudgeModule (copy), LifecycleEvents (copy), GameParams (copy), ExperienceService (copy), SquadGameJoinOriginModule (copy)

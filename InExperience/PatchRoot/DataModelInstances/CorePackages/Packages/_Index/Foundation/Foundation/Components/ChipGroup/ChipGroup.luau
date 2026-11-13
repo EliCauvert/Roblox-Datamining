@@ -1,6 +1,8 @@
 ﻿local Foundation = script:FindFirstAncestor("Foundation")
 local ReactModule = require(Foundation.Parent.React)
+local ChipGroupVariantModule = require(Foundation.Enums.ChipGroupVariant)
 local FlagsModule = require(Foundation.Utility.Flags)
+local ChipSizeModule = require(Foundation.Enums.ChipSize)
 local _ = require(Foundation.Enums.ChipVariant)
 local _ = require(Foundation.Components.Chip.Accessory)
 local VisibilityModule = require(Foundation.Enums.Visibility)
@@ -27,8 +29,8 @@ local NumberSequence2 = NumberSequence.new({
 })
 local config = {
 	testId = "--foundation-chip-group",
-	size = require(Foundation.Enums.ChipSize).Medium,
-	variant = require(Foundation.Enums.ChipGroupVariant).Row
+	size = ChipSizeModule.Medium,
+	variant = ChipGroupVariantModule.Row
 }
 
 local function Scrim(Frame)

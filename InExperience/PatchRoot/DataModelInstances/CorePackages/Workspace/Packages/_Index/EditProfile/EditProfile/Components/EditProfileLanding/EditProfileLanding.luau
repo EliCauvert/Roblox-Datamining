@@ -13,18 +13,19 @@ local UserTileModule = require(Parent.UserTile)
 local EditComponentRowModule = require(EditProfile.BaseComponents.EditComponentRow)
 local EditProfileHeaderBarModule = require(EditProfile.BaseComponents.EditProfileHeaderBar)
 local TextKeysModule = require(EditProfile.Common.TextKeys)
+local FFlagEditProfileAlignBioTranslationKeysModule = require(EditProfile.Flags.FFlagEditProfileAlignBioTranslationKeys)
 local FFlagAXEnableProfileTab = require(Parent.SharedFlags).FFlagAXEnableProfileTab
 local FFlagSplitPaneFullBleedEditProfile = require(Parent.SharedFlags).FFlagSplitPaneFullBleedEditProfile
 
 return function(p1)
-	-- upvalues: UseProfileCardWidthFunction (copy), FFlagAXEnableProfileTab (copy), FFlagSplitPaneFullBleedEditProfile (copy), TextKeysModule (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), EditProfileHeaderBarModule (copy), UserTileModule (copy), IconButton (copy), IconName (copy), IconSize (copy), ButtonVariant (copy), EditComponentRowModule (copy)
+	-- upvalues: UseProfileCardWidthFunction (copy), FFlagAXEnableProfileTab (copy), FFlagSplitPaneFullBleedEditProfile (copy), TextKeysModule (copy), UseLocalizationFunction (copy), FFlagEditProfileAlignBioTranslationKeysModule (copy), ReactModule (copy), View (copy), EditProfileHeaderBarModule (copy), UserTileModule (copy), IconButton (copy), IconName (copy), IconSize (copy), ButtonVariant (copy), EditComponentRowModule (copy)
 	local UseProfileCardWidthResult = UseProfileCardWidthFunction()
 	local IsFullBleed: boolean = if FFlagAXEnableProfileTab then p1.fullBleed == true else FFlagSplitPaneFullBleedEditProfile and p1.fullBleed == true
 	local UseLocalizationResult = UseLocalizationFunction({
 		TopBarTitle = TextKeysModule.Title,
 		UsernameLabel = TextKeysModule.Username,
 		DisplayNameLabel = if p1.isPolicyEnabled then TextKeysModule.AgedUpDisplayName else TextKeysModule.DisplayName,
-		BioLabel = TextKeysModule.About,
+		BioLabel = if FFlagEditProfileAlignBioTranslationKeysModule then TextKeysModule.Bio else TextKeysModule.About,
 		BioPlaceholder = TextKeysModule.AboutPlaceholder
 	})
 	

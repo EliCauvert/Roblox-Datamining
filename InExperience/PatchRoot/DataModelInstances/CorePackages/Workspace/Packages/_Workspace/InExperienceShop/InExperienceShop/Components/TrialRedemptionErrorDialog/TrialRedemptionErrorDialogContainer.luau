@@ -1,10 +1,11 @@
 ﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
 local Parent = InExperienceShop.Parent
 local ReactModule = require(Parent.React)
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
 local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
 local ShopErrorDialogModule = require(InExperienceShop.Components.ShopErrorDialog)
 local UseTrialRedemptionErrorDialogViewModelModule = require(script.Parent.useTrialRedemptionErrorDialogViewModel)
-local Provider = require(Parent.FocusNavigationUtils).FocusNavigableSurfaceRegistry.Provider
+local Provider = FocusNavigationUtilsModule.FocusNavigableSurfaceRegistry.Provider
 
 local function FocusNavigableShopErrorDialog(p1)
 	-- upvalues: ReactModule (copy), ReactFocusNavigationModule (copy), Provider (copy), ShopErrorDialogModule (copy)

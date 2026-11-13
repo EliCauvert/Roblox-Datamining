@@ -1,6 +1,7 @@
 ﻿local SharedFlagsModule = require(script.Parent.Parent.SharedFlags)
+local GetFIntMaquettesAppPanelDistanceMultiplierPercentageFunction = SharedFlagsModule.GetFIntMaquettesAppPanelDistanceMultiplierPercentage
 local v1: number = if SharedFlagsModule.GetFFlagEnableVRChartsTab() then 1 else 0.8
-local FIntMaquettesAppPanelDistanceMultiplierPercentageRatio = SharedFlagsModule.GetFIntMaquettesAppPanelDistanceMultiplierPercentage() / 100
+local FIntMaquettesAppPanelDistanceMultiplierPercentageRatio = GetFIntMaquettesAppPanelDistanceMultiplierPercentageFunction() / 100
 
 return {
 	MainScreenCurvature = 0,

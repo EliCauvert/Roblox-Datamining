@@ -4,6 +4,7 @@ local FoundationModule = require(Parent.Foundation)
 local Text = FoundationModule.Text
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local FFlagAXAddTextXAlignmentProp = require(Parent.AvatarExperienceFlags).FFlagAXAddTextXAlignmentProp
+local FFlagAXItemCardComponentsMemo = require(Parent.AvatarExperienceFlags).FFlagAXItemCardComponentsMemo
 
 local function ItemCardTitle(Label)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Text (copy), FFlagAXAddTextXAlignmentProp (copy)
@@ -21,4 +22,4 @@ local function ItemCardTitle(Label)
 	})
 end
 
-return if require(Parent.AvatarExperienceFlags).FFlagAXItemCardComponentsMemo then ReactModule.memo(ItemCardTitle) else ItemCardTitle
+return if FFlagAXItemCardComponentsMemo then ReactModule.memo(ItemCardTitle) else ItemCardTitle

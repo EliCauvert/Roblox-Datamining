@@ -5,6 +5,7 @@ local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
 local InputHandlersModule = require(Parent.InputHandlers)
 local ReactModule = require(Parent.React)
 local _ = require(Parent.ReactFocusNavigation)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local ChatConversationTelemetryLayerModule = require(AppChat.Telemetry.Layers.ChatConversationTelemetryLayer)
@@ -30,7 +31,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
 local UseAppFocusRootFunction = FocusNavigationUtilsModule.useAppFocusRoot
-local FFlagPartyDevAPIToRespectThirdPartySettingsEnabled = require(Parent.SharedFlags).FFlagPartyDevAPIToRespectThirdPartySettingsEnabled
+local FFlagPartyDevAPIToRespectThirdPartySettingsEnabled = SharedFlagsModule.FFlagPartyDevAPIToRespectThirdPartySettingsEnabled
 
 return ReactModule.memo(function(p1)
 	-- upvalues: UseTelemetryModule (copy), ChatConversationTelemetryLayerModule (copy), UseDispatchFunction (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), UseCurrentSquadIdFunction (copy), UseCurrentSquadParentChannelIdFunction (copy), ReactModule (copy), SquadExternalContractContext (copy), FFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseAppFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventNamesModule (copy), ScheduledSquadActionEnum (copy), ScheduledSquadActionSourceEnum (copy), LeaveSquadFunction (copy), SquadPromptType (copy), SquadButtonSourceEnum (copy), SquadButtonClickIntentionEnum (copy), ChatConversationTelemetryEventsModule (copy), ConversationActionTypeModule (copy), IconName (copy), FoundationModule (copy), ScheduledSquadSheetModule (copy), Menu (copy), PopoverSide (copy), PopoverAlign (copy)

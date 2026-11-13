@@ -4,12 +4,13 @@ local Parent = CoreGuiCommon.Parent
 local ConstantsModule = require(CoreGuiCommon.Constants)
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local RobloxAppHooksModule = require(Parent.RobloxAppHooks)
 local RobloxAppEnumsModule = require(Parent.RobloxAppEnums)
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local GetLocalHumanoidStore = require(CoreGuiCommon.Stores).GetLocalHumanoidStore
 local View = FoundationModule.View
-local UseDeviceOrientationFunction = require(Parent.RobloxAppHooks).useDeviceOrientation
+local UseDeviceOrientationFunction = RobloxAppHooksModule.useDeviceOrientation
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local HealthBarColors = ConstantsModule.HealthBarColors
 

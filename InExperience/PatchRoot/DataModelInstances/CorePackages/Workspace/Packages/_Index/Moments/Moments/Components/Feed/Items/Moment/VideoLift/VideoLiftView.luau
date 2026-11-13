@@ -1,7 +1,8 @@
 ﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local MomentsCommonModule = require(Parent.MomentsCommon)
 local ReactModule = require(Parent.React)
 local View = require(Parent.Foundation).View
-local MediaSurfaceContext = require(Parent.MomentsCommon).Media.MediaSurfaceContext
+local MediaSurfaceContext = MomentsCommonModule.Media.MediaSurfaceContext
 local _Vector2 = Vector2.new(0.5, 0.5)
 
 return function(p1)

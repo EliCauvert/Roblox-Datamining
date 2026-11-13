@@ -3,6 +3,7 @@ local Parent = DataHydration.Parent
 local HttpService = game:GetService("HttpService")
 local HttpModule = require(Parent.Http)
 local HttpClientModule = require(Parent.HttpClient)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local _ = require(DataHydration.Moments.MomentsStoreTypes)
 local FFlagArgusUseMockFeedItemsModule = require(DataHydration.Moments.FFlagArgusUseMockFeedItems)
 local MockTrendingMomentsModule = require(DataHydration.Moments.MockTrendingMoments)
@@ -11,7 +12,7 @@ local ExtractCommentsByFeedItemIdModule = require(DataHydration.Moments.Util.ext
 local ExtractReactionsByMomentIdModule = require(DataHydration.Moments.Util.extractReactionsByMomentId)
 local ExtractShareInfoByMomentIdModule = require(DataHydration.Moments.Util.extractShareInfoByMomentId)
 local ConstructApiUrlModule = require(DataHydration.Moments.Util.constructApiUrl)
-local FFlagMomentsComments = require(Parent.SharedFlags).FFlagMomentsComments
+local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
 local MockNetwork = HttpClientModule.createMockNetwork({
 	fallback = function()
 		-- upvalues: HttpService (copy)

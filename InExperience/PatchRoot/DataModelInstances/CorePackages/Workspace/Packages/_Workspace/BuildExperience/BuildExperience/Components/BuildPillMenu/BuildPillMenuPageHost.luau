@@ -18,6 +18,7 @@ local UseOverlayFunction = FoundationModule.Hooks.useOverlay
 local BuildOverflowMenuScreensModule = require(script.Parent.BuildOverflowMenuScreens)
 local FFlagBuildExperiencePageImpressionsModule = require(BuildExperience.Flags.FFlagBuildExperiencePageImpressions)
 local UseBuildPageImpressionModule = require(BuildExperience.Telemetry.useBuildPageImpression)
+local FFlagBuildExperienceMonetizationNativeUIModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
 local FFlagBuildExperienceModelPickerModule = require(BuildExperience.Flags.FFlagBuildExperienceModelPicker)
 local PrivateInvitesPickerContainerModule = require(BuildExperience.Components.PrivateInvitesPicker.PrivateInvitesPickerContainer)
 local PrivateInvitesManagementContainerModule = require(BuildExperience.Components.GameConfigurations.PrivateInvitesManagement.PrivateInvitesManagementContainer)
@@ -211,7 +212,7 @@ local List = {
 	}
 }
 
-if require(BuildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI) then
+if FFlagBuildExperienceMonetizationNativeUIModule then
 	table.insert(List, {
 		[BuildOverflowMenuScreensModule.Screens.BuildMonetization] = {
 			screen = BuildOverflowMenuScreensModule.BuildMonetizationScreen

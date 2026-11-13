@@ -1,5 +1,6 @@
 ﻿local ExpChatShared = script:FindFirstAncestor("ExpChatShared")
 local Parent = ExpChatShared.Parent
+local RoduxModule = require(Parent.Rodux)
 local Dictionary = require(Parent.llama).Dictionary
 local None = require(Parent.llama).None
 local NewResult = require(ExpChatShared.Logger):new("ExpChat/Reducers/" .. script.Name)
@@ -18,7 +19,7 @@ local function _(List, p1)
 	return nil
 end
 
-return require(Parent.Rodux).createReducer({
+return RoduxModule.createReducer({
 	targetTextChannel = nil,
 	selectedChannelName = nil,
 	currentTeam = nil,

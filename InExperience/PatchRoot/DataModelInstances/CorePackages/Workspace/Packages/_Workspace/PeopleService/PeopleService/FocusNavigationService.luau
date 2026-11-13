@@ -294,9 +294,10 @@ return ((function()
 			-- upvalues: PeopleListStore (upval), PeopleUtilityModule (upval)
 			if p3 then
 				local Text: string = PeopleListStore.getPlatformName(p3)(false)
+				local IsLengthAbove: boolean = Text and (type(Text) == "string" and string.len(Text) > 0)
 				local CanShowPlatformProfile = PeopleUtilityModule.canShowPlatformProfile(PeopleListStore.getPlatformProfileId(p3)(false) or "")
 				
-				return Text and (type(Text) == "string" and string.len(Text) > 0) and CanShowPlatformProfile
+				return IsLengthAbove and CanShowPlatformProfile
 			else
 				return false
 			end

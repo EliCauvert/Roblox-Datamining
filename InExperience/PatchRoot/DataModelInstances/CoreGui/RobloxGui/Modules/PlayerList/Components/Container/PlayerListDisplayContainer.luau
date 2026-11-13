@@ -1,6 +1,7 @@
 ﻿local CorePackages = game:GetService("CorePackages")
 local Parent = script.Parent.Parent.Parent
 local ReactModule = require(CorePackages.Packages.React)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
 local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
 local PlayerListModule = require(CorePackages.Workspace.Packages.PlayerList)
 local _ = require(CorePackages.Workspace.Packages.LeaderboardStore)
@@ -35,7 +36,7 @@ local function PlayerListDisplayContainer(p1)
 	})) else nil
 end
 
-return ReactModule.memo(require(CorePackages.Packages.RoactRodux).connect(function(p1)
+return ReactModule.memo(RoactRoduxModule.connect(function(p1)
 	-- upvalues: FFlagAddNewPlayerListFocusNav (copy)
 	return {
 		isVisible = if FFlagAddNewPlayerListFocusNav then nil else p1.displayOptions.isVisible,

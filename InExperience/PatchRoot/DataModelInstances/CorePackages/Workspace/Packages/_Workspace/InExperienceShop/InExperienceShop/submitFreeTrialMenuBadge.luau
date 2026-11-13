@@ -121,6 +121,19 @@ return (setmetatable({
 			return
 		end
 	end,
+	reportActivated = function()
+		-- upvalues: NotificationsOrchestratorModule (copy), Signal (copy)
+		if not NotificationsOrchestratorModule.Flags.FFlagEnableNotificationsOrchestratorUnifiedLogging then return end
+		local config = { type = "activated" }
+		local v2 = NotificationsOrchestratorModule.getActiveForSlot(NotificationsOrchestratorModule.SlotId.ShopMenuBadge)(false)
+		local Handle = if v2 == nil or v2.payload.slot ~= "ShopMenuBadge" or v2.handle ~= Signal(false) then nil else v2.handle
+		
+		if Handle ~= nil then
+			NotificationsOrchestratorModule.report(NotificationsOrchestratorModule.SlotId.ShopMenuBadge, Handle, config)
+			
+			return
+		end
+	end,
 	dismiss = function()
 		-- upvalues: NotificationsOrchestratorModule (copy), Signal (copy)
 		local config = { type = "dismissed", reason = "activated" }

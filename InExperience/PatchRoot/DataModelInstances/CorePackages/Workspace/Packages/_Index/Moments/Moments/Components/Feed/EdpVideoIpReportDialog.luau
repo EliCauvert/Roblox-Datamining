@@ -2,13 +2,14 @@
 local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
 local FoundationModule = require(Parent.Foundation)
 local InputHandlersModule = require(Parent.InputHandlers)
+local LocalizationModule = require(Parent.Localization)
 local ReactModule = require(Parent.React)
 local _ = require(Parent.ReactFocusNavigation)
 local Dialog = FoundationModule.Dialog
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
 local UseFocusRootFunction = FocusNavigationUtilsModule.useFocusRoot
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local EventMap = {
 	[Enum.KeyCode.ButtonB] = FocusNavigationEventNameEnum.NavigateBack,
 	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack

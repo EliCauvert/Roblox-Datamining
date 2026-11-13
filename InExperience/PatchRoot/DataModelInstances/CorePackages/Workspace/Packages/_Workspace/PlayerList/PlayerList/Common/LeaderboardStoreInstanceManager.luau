@@ -1,8 +1,9 @@
 ﻿local Parent = script.Parent.Parent.Parent
+local SignalsModule = require(Parent.Signals)
 local LeaderboardStore = require(Parent.LeaderboardStore).createLeaderboardStore()
 local Signal = nil
 local Signal2 = nil
-Signal, Signal2 = require(Parent.Signals).createSignal(nil)
+Signal, Signal2 = SignalsModule.createSignal(nil)
 
 return {
 	createLeaderboardStoreInstance = function()

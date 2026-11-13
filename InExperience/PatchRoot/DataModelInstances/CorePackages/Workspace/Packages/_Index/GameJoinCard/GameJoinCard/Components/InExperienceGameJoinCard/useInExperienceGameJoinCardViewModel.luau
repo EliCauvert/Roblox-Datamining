@@ -5,6 +5,7 @@ local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local FoundationModule = require(Parent.Foundation)
 local DataHydrationModule = require(Parent.DataHydration)
+local UserProfileStore = require(Parent.UserProfiles.Stores).UserProfileStore
 local UseExperienceBannerImageFunction = require(Parent.GameDetail).useExperienceBannerImage
 local UserCtaAction = require(Parent.UserCtaCommon).Enums.UserCtaAction
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
@@ -20,7 +21,7 @@ local InputSize = FoundationModule.Enums.InputSize
 local DataStatus = DataHydrationModule.DataStatus
 local PresenceType = DataHydrationModule.Presence.PresenceEnums.PresenceType
 local GetResult = DataHydrationModule.Presence.PresenceStore.get()
-local GetResult1 = require(Parent.UserProfiles.Stores).UserProfileStore.get()
+local GetResult1 = UserProfileStore.get()
 
 local function noop() end
 

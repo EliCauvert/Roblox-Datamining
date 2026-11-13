@@ -1088,9 +1088,10 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 				local LoopCountDelta = LoopCount - LoopCount1
 				Largest = if LoopCountDelta == 0 then math.max(0, PlaybackPositionMs - PlaybackPositionMs1) elseif LengthMs == nil or LengthMs <= 0 then 0 else math.max(0, LoopCountDelta * LengthMs + PlaybackPositionMs - PlaybackPositionMs1)
 			end
+			local IsLoopCountBelow: boolean = LastSnapshot1 ~= nil and LastSnapshot1.loopCount < LoopCount
 			local IsEndedCountBelow: boolean = EndedCount1 ~= nil and EndedCount < EndedCount1
 			local IsEndedCountBelow1: boolean = EndedCount1 ~= nil and (not IsEndedCountBelow and EndedCount1 < EndedCount)
-			local IsLoopCountBelow: boolean = LastSnapshot1 ~= nil and LastSnapshot1.loopCount < LoopCount or IsEndedCountBelow1
+			local IsLoopCountBelow1: boolean = IsLoopCountBelow or IsEndedCountBelow1
 			local IsPlaying = LastSnapshot.isPlaying
 			local IsPlaying1 = LastSnapshot1 ~= nil and LastSnapshot1.isPlaying and (Largest > 0 and (not IsEndedCountBelow and (IsPlaying or IsEndedCountBelow1)))
 			local NoIsEndedCountBelow1: boolean = IsPlaying1 and (IsPlaying and not IsEndedCountBelow1)
@@ -1110,7 +1111,7 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 			if IsPlaying1 then
 				Video.cumulativePlaytimeMs += Smallest
 				
-				if LastSnapshot1 ~= nil and (LastSnapshot1 ~= nil and (LastSnapshot1.isPlaying and LastSnapshot1.audioLevel > 0) and (LastSnapshot ~= nil and (LastSnapshot.isPlaying and LastSnapshot.audioLevel > 0) or IsEndedCountBelow1)) then
+				if LastSnapshot1 ~= nil and (LastSnapshot1 ~= nil and (LastSnapshot1.isPlaying and LastSnapshot1.audioLevel > 0)) and (LastSnapshot ~= nil and (LastSnapshot.isPlaying and LastSnapshot.audioLevel > 0) or IsEndedCountBelow1) then
 					Video.cumulativeAudioPlaybackMs += Smallest
 					Video.maxAudioLevel = math.max(Video.maxAudioLevel, LastSnapshot1.audioLevel, LastSnapshot.audioLevel)
 					
@@ -1119,9 +1120,9 @@ function SponsoredAdViewabilityStateModule:_advanceVideo(EnteredAtMs, LastRatio:
 					end
 				end
 			end
-			if (IsPlaying1 or IsLoopCountBelow) and _latchedGeometry ~= nil then
+			if (IsPlaying1 or IsLoopCountBelow1) and _latchedGeometry ~= nil then
 				local LengthMs1: number = Video.lengthMs
-				local ClampedValue: number = if IsLoopCountBelow then 100 elseif LengthMs1 == nil or LengthMs1 <= 0 then 0 else math.clamp(PlaybackPositionMs / LengthMs1 * 100, 0, 100)
+				local ClampedValue: number = if IsLoopCountBelow1 then 100 elseif LengthMs1 == nil or LengthMs1 <= 0 then 0 else math.clamp(PlaybackPositionMs / LengthMs1 * 100, 0, 100)
 				for _, highestProgress in HighestProgresses do
 					if (Video.highestProgress == nil or Video.highestProgress < highestProgress) and highestProgress <= ClampedValue then
 						local VideoProgressMilestone = self:_buildVideoProgressMilestone(highestProgress, _latchedGeometry)

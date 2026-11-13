@@ -77,8 +77,8 @@ return function(_)
 	local UseUserNameFromUserIdModuleResult = UseUserNameFromUserIdModule(if IsFailureReasonMatch and TargetId and TargetId ~= 0 then TargetId else nil)
 	local TargetName = if UseSignalStateResult1_1 and (UseSignalStateResult1_1.targetName or UseSignalStateResult1_1.targetDisplayName) then UseSignalStateResult1_1.targetName or UseSignalStateResult1_1.targetDisplayName elseif IsFailureReasonMatch and UseUserNameFromUserIdModuleResult and UseUserNameFromUserIdModuleResult ~= "" then UseUserNameFromUserIdModuleResult else nil
 	local UseLocalizationResult = UseLocalizationFunction(TransferLocalizationKeysModule.Presets.ReceiveErrorSheet)
-	local TryAgain = nil
 	local GenericError = nil
+	local TryAgain = nil
 	
 	if FailureReason then
 		local OK = UseLocalizationResult.OK

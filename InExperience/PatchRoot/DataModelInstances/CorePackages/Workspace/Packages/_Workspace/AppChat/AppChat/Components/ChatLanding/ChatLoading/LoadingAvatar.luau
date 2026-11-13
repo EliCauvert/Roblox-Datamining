@@ -6,13 +6,14 @@ local FoundationModule = require(Parent.Foundation)
 local Radius = FoundationModule.Enums.Radius
 local Skeleton = FoundationModule.Skeleton
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local Images = UIBloxModule.App.ImageSet.Images
 local LoadingAvatar = RoactModule.PureComponent:extend("LoadingAvatar")
 local AppChatLoadingIndicatorTransparency = game:DefineFastFlag("AppChatLoadingIndicatorTransparency", false)
 LoadingAvatar.defaultProps = {
 	cellHeight = 64,
 	avatarSize = 36,
 	LayoutOrder = 0,
-	avatarImage = UIBloxModule.App.ImageSet.Images["component_assets/circle_49_mask"]
+	avatarImage = Images["component_assets/circle_49_mask"]
 }
 
 function LoadingAvatar.render(p1)

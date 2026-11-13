@@ -13,6 +13,7 @@ local ConversationChannelsModule = require(AppChat.Models.ConversationChannels)
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local SignalsReactModule = require(Parent.SignalsReact)
 local AppHeaderBarModule = require(Parent.AppHeaderBar)
 local SquadJoinButtonModule = require(Parent.Squads.SquadJoinButton)
 local SquadButtonSourceEnum = require(Parent.Squads.Enums).SquadButtonSourceEnum
@@ -22,7 +23,7 @@ local FFlagFriendsCallingClientGateDEV = SharedFlagsModule.FFlagFriendsCallingCl
 local FFlagFriendsCallingServiceLuaMigration = SharedFlagsModule.FFlagFriendsCallingServiceLuaMigration
 local GetFFlagIsSquadEnabledFunction = SharedFlagsModule.GetFFlagIsSquadEnabled
 local NewResult = require(AppChat.Logger):new(script.Name)
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseSignalStateFunction = SignalsReactModule.useSignalState
 
 local function noOp()
 	return nil

@@ -169,10 +169,11 @@ return function(Current, p4: number, p5: number, p6, p7, p8, p9)
 						end
 						Count = #Current
 					end
+					local Smallest2 = math.min(#Current, (math.max(Count, Current3)))
 					local v1 = if Count < Current3 then Largest1 else 1
 					local Total1 = 0
 					
-					for i = 1, math.min(#Current, (math.max(Count, Current3))) do
+					for i = 1, Smallest2 do
 						local v2: number = Current[i]
 						Total1 += if v2 > 0 then v2 else 1
 					end
@@ -274,10 +275,11 @@ return function(Current, p4: number, p5: number, p6, p7, p8, p9)
 						end
 						Count = #Current
 					end
+					local Smallest2 = math.min(#Current, (math.max(Count, Current6)))
 					local v4 = if Count < Current6 then Largest1 else 1
 					local Total1 = 0
 					
-					for i = 1, math.min(#Current, (math.max(Count, Current6))) do
+					for i = 1, Smallest2 do
 						local v5: number = Current[i]
 						Total1 += if v5 > 0 then v5 else 1
 					end
@@ -361,10 +363,11 @@ return function(Current, p4: number, p5: number, p6, p7, p8, p9)
 						end
 						Count = #Current
 					end
+					local Smallest2 = math.min(#Current, (math.max(Count, Current5)))
 					local v7 = if Count < Current5 then Largest1 else 1
 					local Total1 = 0
 					
-					for i = 1, math.min(#Current, (math.max(Count, Current5))) do
+					for i = 1, Smallest2 do
 						local v8: number = Current[i]
 						Total1 += if v8 > 0 then v8 else 1
 					end
@@ -459,10 +462,11 @@ return function(Current, p4: number, p5: number, p6, p7, p8, p9)
 									end
 									Count = #Current
 								end
+								local Smallest2 = math.min(#Current, (math.max(Count, Current2)))
 								local v10 = if Count < Current2 then Largest1 else 1
 								local Total1 = 0
 								
-								for i = 1, math.min(#Current, (math.max(Count, Current2))) do
+								for i = 1, Smallest2 do
 									local v11: number = Current[i]
 									Total1 += if v11 > 0 then v11 else 1
 								end
@@ -568,10 +572,11 @@ return function(Current, p4: number, p5: number, p6, p7, p8, p9)
 											end
 											Count = #Current
 										end
+										local Smallest2 = math.min(#Current, (math.max(Count, Current2)))
 										local v10 = if Count < Current2 then Largest1 else 1
 										local Total1 = 0
 										
-										for i = 1, math.min(#Current, (math.max(Count, Current2))) do
+										for i = 1, Smallest2 do
 											local v11: number = Current[i]
 											Total1 += if v11 > 0 then v11 else 1
 										end
@@ -674,10 +679,11 @@ return function(Current, p4: number, p5: number, p6, p7, p8, p9)
 											end
 											Count = #Current
 										end
+										local Smallest2 = math.min(#Current, (math.max(Count, Current2)))
 										local v10 = if Count < Current2 then Largest1 else 1
 										local Total1 = 0
 										
-										for i = 1, math.min(#Current, (math.max(Count, Current2))) do
+										for i = 1, Smallest2 do
 											local v11: number = Current[i]
 											Total1 += if v11 > 0 then v11 else 1
 										end
@@ -781,10 +787,11 @@ return function(Current, p4: number, p5: number, p6, p7, p8, p9)
 											end
 											Count = #Current
 										end
+										local Smallest2 = math.min(#Current, (math.max(Count, Current2)))
 										local v10 = if Count < Current2 then Largest1 else 1
 										local Total1 = 0
 										
-										for i = 1, math.min(#Current, (math.max(Count, Current2))) do
+										for i = 1, Smallest2 do
 											local v11: number = Current[i]
 											Total1 += if v11 > 0 then v11 else 1
 										end
@@ -888,10 +895,11 @@ return function(Current, p4: number, p5: number, p6, p7, p8, p9)
 								end
 								Count = #Current
 							end
+							local Smallest2 = math.min(#Current, (math.max(Count, Current2)))
 							local v10 = if Count < Current2 then Largest1 else 1
 							local Total1 = 0
 							
-							for i = 1, math.min(#Current, (math.max(Count, Current2))) do
+							for i = 1, Smallest2 do
 								local v11: number = Current[i]
 								Total1 += if v11 > 0 then v11 else 1
 							end

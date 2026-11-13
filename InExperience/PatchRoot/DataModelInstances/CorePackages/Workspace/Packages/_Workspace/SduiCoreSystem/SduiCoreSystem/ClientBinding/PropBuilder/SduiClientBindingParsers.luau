@@ -7,6 +7,7 @@ local InputHandlersModule = require(Parent.InputHandlers)
 local GetSduiTokensStoreModule = require(SduiCoreSystem.ClientBinding.getSduiTokensStore)
 local ProtoVariableMapperModule = require(SduiCoreSystem.ClientBinding.ProtoVariableMapper)
 local SplitDottedPathModule = require(SduiCoreSystem.ClientBinding.splitDottedPath)
+local ParsePymkItemsModule = require(SduiCoreSystem.ClientBinding.PropBuilder.parsePymkItems)
 local FFlagSduiPropParsersShouldHandleTokens = require(Parent.SharedFlags).FFlagSduiPropParsersShouldHandleTokens
 local FFlagSduiUnwrapStructPropEnvelope = require(Parent.SharedFlags).FFlagSduiUnwrapStructPropEnvelope
 
@@ -62,7 +63,7 @@ local function getTokenOrNumber(p1, p2, p3, p4)
 	end
 end
 
-local Callback = if FFlagSduiPropParsersShouldHandleTokens then function(Text, p1, p2)
+local Callback1 = if FFlagSduiPropParsersShouldHandleTokens then function(Text, p1, p2)
 	-- upvalues: getTokenOrNumber (copy)
 	local Success, Result = pcall(function(): UDim2?
 		-- upvalues: Text (copy), getTokenOrNumber (upval), p1 (copy), p2 (copy)
@@ -108,7 +109,7 @@ end else function(Text, p1, p2)
 		error(if typeof(Result) == "string" then Result else nil)
 	end
 end
-local Callback1 = if FFlagSduiPropParsersShouldHandleTokens then function(Text, p1, p2)
+local Callback = if FFlagSduiPropParsersShouldHandleTokens then function(Text, p1, p2)
 	-- upvalues: getTokenOrNumber (copy)
 	local Success, Result = pcall(function(): UDim?
 		-- upvalues: Text (copy), getTokenOrNumber (upval), p1 (copy), p2 (copy)
@@ -280,8 +281,8 @@ local config = {
 }
 
 return {
-	parseUDim = Callback1,
-	parseUDim2 = Callback,
+	parseUDim = Callback,
+	parseUDim2 = Callback1,
 	parseNumber = parseNumber,
 	applyTokenScaling = function(p3, p4)
 		return p3 * (p4 and p4.Config.UI.Scale or 1)
@@ -291,12 +292,12 @@ return {
 		return parseNumber(p3, p4, true)
 	end,
 	parseUiScaledUDim = function(p3, p4)
-		-- upvalues: Callback1 (copy)
-		return Callback1(p3, p4, true)
-	end,
-	parseUiScaledUDim2 = function(p3, p4)
 		-- upvalues: Callback (copy)
 		return Callback(p3, p4, true)
+	end,
+	parseUiScaledUDim2 = function(p3, p4)
+		-- upvalues: Callback1 (copy)
+		return Callback1(p3, p4, true)
 	end,
 	parseStruct = parseStruct,
 	parseArrayOfStruct = function(List)
@@ -311,7 +312,7 @@ return {
 		end
 		return t
 	end,
-	parsePymkItems = require(SduiCoreSystem.ClientBinding.PropBuilder.parsePymkItems),
+	parsePymkItems = ParsePymkItemsModule,
 	parseStringArray = function(p3)
 		return if typeof(p3) == "table" then p3.items or p3 else nil
 	end,

@@ -2,14 +2,16 @@
 local Parent = FriendsCalling.Parent
 local HttpService = game:GetService("HttpService")
 local ReactModule = require(Parent.React)
+local ReactUtilsModule = require(Parent.ReactUtils)
 local NewResult = require(Parent.Loggers).Logger:new(script.Name)
 local ToastNotificationModule = require(Parent.ToastNotification)
+local ToastNotificationsProtocolModule = require(Parent.ToastNotificationsProtocol)
 local CallingStatusModule = require(FriendsCalling.Enums.CallingStatus)
 local FFlagFriendsCallingServiceLuaMigrationModule = require(Parent.SharedFlags.FFlagFriendsCallingServiceLuaMigration)
 local LifecycleEvents = ToastNotificationModule.LifecycleEvents
 local NotificationTypeEnum = ToastNotificationModule.ToastNotificationTypeModule.NotificationTypeEnum
-local UseEventConnectionFunction = require(Parent.ReactUtils).useEventConnection
-local Default = require(Parent.ToastNotificationsProtocol).ToastNotificationProtocol.default
+local UseEventConnectionFunction = ReactUtilsModule.useEventConnection
+local Default = ToastNotificationsProtocolModule.ToastNotificationProtocol.default
 
 return function(p1)
 	-- upvalues: FFlagFriendsCallingServiceLuaMigrationModule (copy), ReactModule (copy), Default (copy), NotificationTypeEnum (copy), HttpService (copy), CallingStatusModule (copy), UseEventConnectionFunction (copy), LifecycleEvents (copy), NewResult (copy)

@@ -5,9 +5,10 @@ local ReactRobloxModule = require(Parent.ReactRoblox)
 local LocalizationProvider = require(Parent.Localization).LocalizationProvider
 local Localization = require(Parent.InExperienceLocales).Localization
 local PlayerFeedbackPromptsModule = require(CoreScriptsPlayerFeedback.Components.PlayerFeedbackPrompts)
+local GetFFlagEnablePlayerSupportPromptModule = require(CoreScriptsPlayerFeedback.Flags.GetFFlagEnablePlayerSupportPrompt)
 local CoreGui = game:GetService("CoreGui")
 local RobloxGui = CoreGui:FindFirstChild("RobloxGui") or CoreGui:WaitForChild("RobloxGui")
-local v1 = require(CoreScriptsPlayerFeedback.Flags.GetFFlagEnablePlayerSupportPrompt)()
+local FFlagEnablePlayerSupportPromptModule = GetFFlagEnablePlayerSupportPromptModule()
 local Result1 = nil
 local Success, Result = pcall(function()
 	-- upvalues: RobloxGui (copy)
@@ -18,10 +19,10 @@ Result1 = if Success and Result then Result else function(p1)
 end
 
 return function(p1)
-	-- upvalues: Result1 (ref), v1 (copy), ReactRobloxModule (copy), ReactModule (copy), LocalizationProvider (copy), Localization (copy), PlayerFeedbackPromptsModule (copy)
+	-- upvalues: Result1 (ref), FFlagEnablePlayerSupportPromptModule (copy), ReactRobloxModule (copy), ReactModule (copy), LocalizationProvider (copy), Localization (copy), PlayerFeedbackPromptsModule (copy)
 	local Callback = p1 or Result1
 	local ScreenGui = Instance.new("ScreenGui")
-	ScreenGui.IgnoreGuiInset = not v1
+	ScreenGui.IgnoreGuiInset = not FFlagEnablePlayerSupportPromptModule
 	ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	ScreenGui.AutoLocalize = false
 	ScreenGui.DisplayOrder = -1

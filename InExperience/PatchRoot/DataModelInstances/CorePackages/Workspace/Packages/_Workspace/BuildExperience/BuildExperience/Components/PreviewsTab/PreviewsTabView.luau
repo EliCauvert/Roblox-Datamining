@@ -1,13 +1,15 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
+local DataHydrationModule = require(Parent.DataHydration)
 local FoundationModule = require(Parent.Foundation)
+local LuaSocialLibrariesDepsModule = require(Parent.LuaSocialLibrariesDeps)
 local ReactModule = require(Parent.React)
 local BuildEmptyStateModule = require(BuildExperience.Components.BuildEmptyState.BuildEmptyState)
 local ExperienceResultsLoadingSkeletonModule = require(BuildExperience.Components.MyCreationsTab.ExperienceResultsLoadingSkeleton)
 local List = FoundationModule.List
 local View = FoundationModule.View
-local RefreshScrollingFrame = require(Parent.LuaSocialLibrariesDeps).SocialLibraries.config({}).Components.RefreshScrollingFrame
-local DataStatus = require(Parent.DataHydration).DataStatus
+local RefreshScrollingFrame = LuaSocialLibrariesDepsModule.SocialLibraries.config({}).Components.RefreshScrollingFrame
+local DataStatus = DataHydrationModule.DataStatus
 local InputSize = FoundationModule.Enums.InputSize
 
 return function(Frame)

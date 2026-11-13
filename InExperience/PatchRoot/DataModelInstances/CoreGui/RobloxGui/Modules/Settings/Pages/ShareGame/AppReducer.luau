@@ -12,8 +12,9 @@ local InvitesModule = require(ShareGame.Reducers.Invites)
 local GameInfoModule = require(ShareGame.Reducers.GameInfo)
 local PageModule = require(ShareGame.Reducers.Page)
 local ToastsModule = require(ShareGame.Reducers.Toasts)
+local ShareLinksRodux = ReducerDependencies.ShareLinksRodux
 local InstallReducerResult = ReducerDependencies.RoduxNetworking.installReducer()
-local InstallReducerResult1 = ReducerDependencies.ShareLinksRodux.installReducer()
+local InstallReducerResult1 = ShareLinksRodux.installReducer()
 
 return function(p1, p2)
 	-- upvalues: ConversationsSearchModule (copy), DeviceInfoModule (copy), InvitesModule (copy), PageModule (copy), PlaceInfosReducerFunction (copy), ToastsModule (copy), UserReducerFunction (copy), FriendsFunction (copy), FFlagRemoveUnusedFriendCountRoduxSlice (copy), FriendCountFunction (copy), InstallReducerResult1 (copy), GameInfoModule (copy), InstallReducerResult (copy)

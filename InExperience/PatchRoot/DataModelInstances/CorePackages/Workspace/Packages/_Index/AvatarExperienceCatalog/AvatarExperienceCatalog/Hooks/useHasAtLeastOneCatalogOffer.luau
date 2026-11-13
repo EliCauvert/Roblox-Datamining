@@ -1,9 +1,10 @@
 ﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
 local Parent = AvatarExperienceCatalog.Parent
+local SignalsModule = require(Parent.Signals)
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local UseAXCatalogStoreContextModule = require(AvatarExperienceCatalog.Context.useAXCatalogStoreContext)
 local _ = require(AvatarExperienceCatalog.Stores.createCatalogOffersBannerStore)
-local Signal = require(Parent.Signals).createSignal(nil)
+local Signal = SignalsModule.createSignal(nil)
 
 return function(): boolean
 	-- upvalues: UseAXCatalogStoreContextModule (copy), Signal (copy), UseSignalStateFunction (copy)

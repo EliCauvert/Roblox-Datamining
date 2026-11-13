@@ -2,12 +2,13 @@
 local CorePackages = game:GetService("CorePackages")
 local TModule = require(CorePackages.Packages.t)
 local RoactModule = require(CorePackages.Packages.Roact)
+local FoundationModule = require(CorePackages.Packages.Foundation)
 local BlockingModalContainerModule = require(script.Parent.BlockingModalContainer)
 local RenderWithCoreScriptsStyleProviderModule = require(CoreGui:WaitForChild("RobloxGui").Modules.Common.renderWithCoreScriptsStyleProvider)
 local FocusNavigationUtilsModule = require(CorePackages.Workspace.Packages.FocusNavigationUtils)
 local FocusRoot = FocusNavigationUtilsModule.FocusRoot
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local UseOverlayFunction = require(CorePackages.Packages.Foundation).Hooks.useOverlay
+local UseOverlayFunction = FoundationModule.Hooks.useOverlay
 local BlockingModalScreen = RoactModule.PureComponent:extend("BlockingModalScreen")
 BlockingModalScreen.validateProps = TModule.interface({
 	closeModal = TModule.callback,

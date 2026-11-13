@@ -3,17 +3,19 @@ local SocialCarousel = script:FindFirstAncestor("SocialCarousel")
 local Parent = SocialCarousel.Parent
 local ReactModule = require(Parent.React)
 local SharedFlagsModule = require(Parent.SharedFlags)
+local SocialLuaAnalyticsModule = require(Parent.SocialLuaAnalytics)
+local UIBloxModule = require(Parent.UIBlox)
 local UseSocialCarouselContextModule = require(SocialCarousel.Contexts.useSocialCarouselContext)
 local InitializeSocialCarouselAnalyticsModule = require(SocialCarousel.Analytics.initializeSocialCarouselAnalytics)
 local EventNamesModule = require(SocialCarousel.Analytics.EventNames)
 local GetFriendStatusFromTileTypeModule = require(SocialCarousel.Analytics.getFriendStatusFromTileType)
 local _ = require(SocialCarousel.Common.Types)
-local RetrievalStatus = require(Parent.UIBlox).App.Loading.Enum.RetrievalStatus
+local RetrievalStatus = UIBloxModule.App.Loading.Enum.RetrievalStatus
 local FFlagSocialCarouselEnableUserSeenEvents = require(SocialCarousel.Flags).FFlagSocialCarouselEnableUserSeenEvents
 local FFlagSocialCarouselLogNewFriendRequestsBadgeModule = require(SocialCarousel.Flags.FFlagSocialCarouselLogNewFriendRequestsBadge)
 local FFlagSocialCarouselShareQREnabled = SharedFlagsModule.FFlagSocialCarouselShareQREnabled
 local FFlagLuaAppUserSeenCollectionUnifiedFields = SharedFlagsModule.FFlagLuaAppUserSeenCollectionUnifiedFields
-local RepeatValueFunction = require(Parent.SocialLuaAnalytics).Analytics.Formatters.repeatValue
+local RepeatValueFunction = SocialLuaAnalyticsModule.Analytics.Formatters.repeatValue
 
 return function()
 	-- upvalues: UseSocialCarouselContextModule (copy), ReactModule (copy), InitializeSocialCarouselAnalyticsModule (copy), EventNamesModule (copy), GetFriendStatusFromTileTypeModule (copy), HttpService (copy), FFlagSocialCarouselEnableUserSeenEvents (copy), FFlagLuaAppUserSeenCollectionUnifiedFields (copy), RepeatValueFunction (copy), FFlagSocialCarouselShareQREnabled (copy), FFlagSocialCarouselLogNewFriendRequestsBadgeModule (copy), RetrievalStatus (copy)

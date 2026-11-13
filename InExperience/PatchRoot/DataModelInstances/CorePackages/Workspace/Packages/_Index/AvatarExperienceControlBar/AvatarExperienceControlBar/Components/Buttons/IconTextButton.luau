@@ -14,6 +14,7 @@ return (ReactModule.forwardRef(function(Frame, Ref)
 	local UseSemanticTokensModuleResult = UseSemanticTokensModule()
 	local UseHoverBindingModuleResult, UseHoverBindingModuleResult2 = UseHoverBindingModule()
 	local UseLocalizationResult = UseLocalizationFunction({ text = Frame.localizedTextKey })
+	local Text = if UseLocalizationResult.text then UseLocalizationResult.text else Frame.text
 	local IconSize = if Frame.iconSize then Frame.iconSize else UseSemanticTokensModuleResult.defaultIconSize
 	local IsBuilderIcon = FFlagAXMigrateBuilderIcons and IsBuilderIconFunction(Frame.icon)
 	
@@ -62,7 +63,7 @@ return (ReactModule.forwardRef(function(Frame, Ref)
 		}),
 		Text = ReactModule.createElement(FoundationModule.Text, {
 			tag = "auto-xy text-title-medium content-emphasis",
-			Text = if UseLocalizationResult.text then UseLocalizationResult.text else Frame.text
+			Text = Text
 		})
 	})
 end))

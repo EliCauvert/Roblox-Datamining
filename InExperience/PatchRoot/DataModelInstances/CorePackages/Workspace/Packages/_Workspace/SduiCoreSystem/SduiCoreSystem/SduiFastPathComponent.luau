@@ -7,6 +7,7 @@ local _ = require(SduiCoreSystem.SduiComponentType)
 local _ = require(SduiCoreSystem.SduiConfigTypes)
 local SduiErrorType = require(SduiCoreSystem.SduiErrors).SduiErrorType
 local SduiBuilderProcessingPhase = require(SduiCoreSystem.SduiBuilderTypes).SduiBuilderProcessingPhase
+local CompareSduiPropsModule = require(SduiCoreSystem.compareSduiProps)
 local CompareSduiAnalyticsContextModule = require(SduiCoreSystem.compareSduiAnalyticsContext)
 local ParsePropsModule = require(SduiCoreSystem.parseProps)
 
@@ -60,4 +61,4 @@ return ReactModule.memo(function(p1)
 	else
 		return ReactModule.createElement(Component, Copy)
 	end
-end, (require(SduiCoreSystem.compareSduiProps)))
+end, CompareSduiPropsModule)

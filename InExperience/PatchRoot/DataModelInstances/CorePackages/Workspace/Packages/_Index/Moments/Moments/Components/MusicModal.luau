@@ -2,6 +2,7 @@
 local Parent = Moments.Parent
 local BuilderIconsModule = require(Parent.BuilderIcons)
 local FoundationModule = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
 local MomentsCommonModule = require(Parent.MomentsCommon)
 local ReactModule = require(Parent.React)
 local SongbirdModule = require(Parent.Songbird)
@@ -9,7 +10,7 @@ local IconButton = FoundationModule.IconButton
 local Sheet = FoundationModule.Sheet
 local Text = FoundationModule.Text
 local View = FoundationModule.View
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local SendAudioPlayerAnalyticsFunction = SongbirdModule.Analytics.sendAudioPlayerAnalytics
 local AnalyticActions = SongbirdModule.Analytics.AnalyticActions
 local MusicThumbnailIcon = MomentsCommonModule.Components.MusicThumbnailIcon

@@ -9,6 +9,7 @@ local RoactRoduxModule = require(Parent.RoactRodux)
 local CryoModule = require(Parent.Cryo)
 local SignalsReactModule = require(Parent.SignalsReact)
 local List = require(Parent.llama).List
+local ExpChatSharedModule = require(Parent.ExpChatShared)
 local MemoizeModule = require(ExpChat.memoize)
 local SignalsModule = require(Parent.Signals)
 local CreateEffectFunction = SignalsModule.createEffect
@@ -18,7 +19,7 @@ local ChatWindowMessageSourceModule = require(script.Parent.UI.ChatWindow.ChatWi
 local FFlagExpChatUseChannelTabsStore = require(Parent.SharedFlags).FFlagExpChatUseChannelTabsStore
 local GetChannelTabsStoreModule = if FFlagExpChatUseChannelTabsStore then require(ExpChat.Stores.GetChannelTabsStore) else nil
 local ExpChatMoveMessagesStoreToInit = game:DefineFastFlag("ExpChatMoveMessagesStoreToInit", false)
-local GetFFlagTextChatEnableUniverseChatTabsFunction = require(Parent.ExpChatShared).Flags.GetFFlagTextChatEnableUniverseChatTabs
+local GetFFlagTextChatEnableUniverseChatTabsFunction = ExpChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
 local FFlagExpChatMessagesStoreUseProxyModule = require(ExpChat.Flags.FFlagExpChatMessagesStoreUseProxy)
 
 local function readByMessageIdAsTable(MessagesStore, p1)

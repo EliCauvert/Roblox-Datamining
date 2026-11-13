@@ -1,9 +1,10 @@
 ﻿local CorePackages = game:GetService("CorePackages")
 local ReactModule = require(CorePackages.Packages.React)
 local _ = require(script:FindFirstAncestor("AbuseReportMenu").Components.Types)
+local TnSAdIdentificationModule = require(CorePackages.Workspace.Packages.TnSAdIdentification)
 local ScreenshotManager = require(CorePackages.Workspace.Packages.TnSScreenshot).ScreenshotManager
 local AvatarIdentification = require(CorePackages.Workspace.Packages.TnSAvatarIdentification).AvatarIdentification
-local AdIdentification = require(CorePackages.Workspace.Packages.TnSAdIdentification).AdIdentification
+local AdIdentification = TnSAdIdentificationModule.AdIdentification
 
 return function(p1, p2, Callback)
 	-- upvalues: ReactModule (copy), ScreenshotManager (copy), AvatarIdentification (copy), AdIdentification (copy)

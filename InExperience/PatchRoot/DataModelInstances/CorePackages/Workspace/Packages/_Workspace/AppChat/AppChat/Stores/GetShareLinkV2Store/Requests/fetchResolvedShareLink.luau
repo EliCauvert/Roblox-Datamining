@@ -1,16 +1,22 @@
 ﻿local AppChat = script:FindFirstAncestor("AppChat")
 local Parent = AppChat.Parent
+local HttpModule = require(Parent.Http)
 local HttpClientModule = require(Parent.HttpClient)
 local _ = require(Parent.ShareLinksNetworking)
+local ShareLinkV2EnumsModule = require(AppChat.Components.ChatConversation.Utils.RobloxUrlUtils.ShareLinkV2Enums)
 local FFlagAppChatPlusReferralAssetCardModule = require(AppChat.Flags.FFlagAppChatPlusReferralAssetCard)
-local Text = require(Parent.Http).Url.APIS_URL .. "deeplinks/v2/resolve"
+local FFlagAppChatGenericShareLinkCardModule = require(AppChat.Flags.FFlagAppChatGenericShareLinkCard)
+local Text = HttpModule.Url.APIS_URL .. "deeplinks/v2/resolve"
 
 local function decodeResolvedShareLink(p1)
-	-- upvalues: FFlagAppChatPlusReferralAssetCardModule (copy)
+	-- upvalues: FFlagAppChatGenericShareLinkCardModule (copy), ShareLinkV2EnumsModule (copy), FFlagAppChatPlusReferralAssetCardModule (copy)
+	if FFlagAppChatGenericShareLinkCardModule and type(p1) == "table" and p1.targetId == nil and p1.status ~= ShareLinkV2EnumsModule.Status.Valid then
+		p1.targetId = ""
+	end
 	if type(p1) ~= "table" or type(p1.linkType) ~= "string" or type(p1.targetId) ~= "string" or type(p1.status) ~= "string" then
 		error("Malformed deeplinks/v2/resolve response")
 	end
-	if FFlagAppChatPlusReferralAssetCardModule then
+	if FFlagAppChatPlusReferralAssetCardModule or FFlagAppChatGenericShareLinkCardModule then
 		if p1.customData ~= nil and type(p1.customData) ~= "string" then
 			error("Malformed deeplinks/v2/resolve response")
 		end

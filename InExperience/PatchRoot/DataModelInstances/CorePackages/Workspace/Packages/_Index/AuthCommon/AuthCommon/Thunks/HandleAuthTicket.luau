@@ -42,10 +42,10 @@ local function parsePlaceLauncherUrl(Text: string)
 	return t
 end
 
-return function(p1, p2, p3, Callback, Callback1)
+return function(p1, p2, p3, Callback1, Callback)
 	-- upvalues: RedeemAuthenticationTicketModule (copy), parsePlaceLauncherUrl (copy), GameParams (copy), AppStorageUtilitiesModule (copy), UserModule (copy), FFlagEnableLuaAccountSwitch (copy), PromiseModule (copy), FFlagLuaEnableLoginAndSignupDifferentiatedStatusValues (copy), AccountSwitcherConstantsModule (copy), GuiService (copy), NotificationType (copy), ExperienceService (copy)
 	return (RedeemAuthenticationTicketModule(p1, p2):andThen(function(Result)
-		-- upvalues: parsePlaceLauncherUrl (upval), p3 (copy), GameParams (upval), AppStorageUtilitiesModule (upval), UserModule (upval), FFlagEnableLuaAccountSwitch (upval), PromiseModule (upval), Callback1 (copy), FFlagLuaEnableLoginAndSignupDifferentiatedStatusValues (upval), AccountSwitcherConstantsModule (upval), GuiService (upval), NotificationType (upval), Callback (copy), ExperienceService (upval)
+		-- upvalues: parsePlaceLauncherUrl (upval), p3 (copy), GameParams (upval), AppStorageUtilitiesModule (upval), UserModule (upval), FFlagEnableLuaAccountSwitch (upval), PromiseModule (upval), Callback (copy), FFlagLuaEnableLoginAndSignupDifferentiatedStatusValues (upval), AccountSwitcherConstantsModule (upval), GuiService (upval), NotificationType (upval), Callback1 (copy), ExperienceService (upval)
 		local ParsePlaceLauncherUrlResult = parsePlaceLauncherUrl(p3)
 		local Number: number? = tonumber(ParsePlaceLauncherUrlResult.placeId)
 		
@@ -62,12 +62,12 @@ return function(p1, p2, p3, Callback, Callback1)
 			local IsNotUserIdMatch = UserModule.fromLocalStorage().userId ~= -1
 			
 			if not FFlagEnableLuaAccountSwitch or not IsNotUserIdMatch and AccountBlob == "" then
-				return PromiseModule.resolve(Callback()):andThen(function()
+				return PromiseModule.resolve(Callback1()):andThen(function()
 					-- upvalues: ExperienceService (upval), FromPlaceIdResult (copy)
 					ExperienceService:LaunchExperience(FromPlaceIdResult, "AuthTicket", nil)
 				end)
 			end
-			PromiseModule.resolve(Callback1()):andThen(function()
+			PromiseModule.resolve(Callback()):andThen(function()
 				-- upvalues: FFlagLuaEnableLoginAndSignupDifferentiatedStatusValues (upval), AccountSwitcherConstantsModule (upval), AppStorageUtilitiesModule (upval), Result (copy), ParsePlaceLauncherUrlResult (copy), GuiService (upval), NotificationType (upval)
 				AppStorageUtilitiesModule.setAccountSwitchStatus(if FFlagLuaEnableLoginAndSignupDifferentiatedStatusValues then AccountSwitcherConstantsModule.AccountSwitcherSwitchedFromLoginStatus else AccountSwitcherConstantsModule.AccountSwitcherSwitchedStatus)
 				AppStorageUtilitiesModule.setAccountBlob(Result.responseBody.accountBlob)

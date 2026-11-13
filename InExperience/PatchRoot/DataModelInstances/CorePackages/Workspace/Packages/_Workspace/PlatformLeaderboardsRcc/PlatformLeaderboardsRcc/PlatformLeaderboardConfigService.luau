@@ -1,11 +1,12 @@
 ﻿local Parent = script.Parent
 local Parent1 = Parent.Parent
+local SharedFlagsModule = require(Parent1.SharedFlags)
 local Signal = require(Parent1.AppCommonLib).Signal
 local _ = require(Parent.PlatformLeaderboardTypes)
 local _ = require(Parent.PlatformLeaderboardFetcher)
 local PlatformLeaderboardConfigPollIntervalSeconds = game:DefineFastInt("PlatformLeaderboardConfigPollIntervalSeconds", 300)
 local PlatformLeaderboardConfigPollMaxJitterSeconds = game:DefineFastInt("PlatformLeaderboardConfigPollMaxJitterSeconds", 60)
-local FFlagPlatformLeaderboardDebugLogging = require(Parent1.SharedFlags).FFlagPlatformLeaderboardDebugLogging
+local FFlagPlatformLeaderboardDebugLogging = SharedFlagsModule.FFlagPlatformLeaderboardDebugLogging
 local PlatformLeaderboardConfigService = {}
 PlatformLeaderboardConfigService.__index = PlatformLeaderboardConfigService
 

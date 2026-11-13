@@ -11,6 +11,7 @@ local ConstantsModule = require(SocialCarousel.Common.Constants)
 local FIntSocialCarouselShowRecsLimit = require(SocialCarousel.Flags).FIntSocialCarouselShowRecsLimit
 local FFlagSocialCarouselShareQREnabled = SharedFlagsModule.FFlagSocialCarouselShareQREnabled
 local FFlagLuaAppUserSeenCollectionUnifiedFields = SharedFlagsModule.FFlagLuaAppUserSeenCollectionUnifiedFields
+local FFlagSocialCarouselLogNewFriendRequestsBadgeModule = require(SocialCarousel.Flags.FFlagSocialCarouselLogNewFriendRequestsBadge)
 
 local function Source(p1)
 	return p1
@@ -73,7 +74,7 @@ return {
 			interactionUuid = Source
 		}
 	},
-	[EventNamesModule.AddFriendsTileSeen] = if require(SocialCarousel.Flags.FFlagSocialCarouselLogNewFriendRequestsBadge) then {
+	[EventNamesModule.AddFriendsTileSeen] = if FFlagSocialCarouselLogNewFriendRequestsBadgeModule then {
 		context = Contexts.HomePage,
 		eventType = EventTypes.AddFriendsTileSeen,
 		formatRulesForAdditionalInfo = {

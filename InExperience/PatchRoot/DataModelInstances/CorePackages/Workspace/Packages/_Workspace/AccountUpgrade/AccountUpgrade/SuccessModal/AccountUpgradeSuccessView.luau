@@ -1,13 +1,14 @@
 ﻿local Parent = script:FindFirstAncestor("AccountUpgrade").Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
 local AccountUpgradeDialogModule = require(script.Parent.AccountUpgradeDialog)
 local AccountUpgradeIdentityHeaderModule = require(script.Parent.AccountUpgradeIdentityHeader)
 local AccountUpgradeDialogActionsModule = require(script.Parent.AccountUpgradeDialogActions)
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 
 return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ButtonVariant (copy), ReactModule (copy), View (copy), AccountUpgradeIdentityHeaderModule (copy), Text (copy), AccountUpgradeDialogActionsModule (copy), AccountUpgradeDialogModule (copy)

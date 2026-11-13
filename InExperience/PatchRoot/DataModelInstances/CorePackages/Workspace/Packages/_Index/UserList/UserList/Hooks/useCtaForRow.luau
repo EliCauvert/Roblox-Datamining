@@ -1,6 +1,7 @@
 ﻿local UserList = script:FindFirstAncestor("UserList")
 local Parent = UserList.Parent
 local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
 local EnumsModule = require(UserList.Common.Enums)
 local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
@@ -19,7 +20,7 @@ local NavigationCommands = require(Parent.RobloxAppNavigation).NavigationCommand
 local AppPage = require(Parent.RobloxAppEnums).AppPage
 local DataStatus = require(Parent.DataHydration).DataStatus
 local ButtonTypes = EnumsModule.ButtonTypes
-local ButtonVariant = require(Parent.Foundation).Enums.ButtonVariant
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local MapServerActionsToRowCtaModule = require(UserList.Cta.mapServerActionsToRowCta)
 local _ = require(UserList.Common.Types)
 local config = { primaryCta = nil, secondaryCta = nil, isLoading = true }

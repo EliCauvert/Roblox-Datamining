@@ -11,6 +11,7 @@ local FFlagAppChatExtendConversationListRowDividersModule = require(AppChat.Flag
 local FFlagAppChatRemoveConversationListDividerModule = require(AppChat.Flags.FFlagAppChatRemoveConversationListDivider)
 local FFlagAppChatUseBindingConversationFacePileModule = require(AppChat.Flags.FFlagAppChatUseBindingConversationFacePile)
 local FFlagAppChatTimestampInSubtitleConversationRowModule = require(AppChat.Flags.FFlagAppChatTimestampInSubtitleConversationRow)
+local ConversationFacePileModule = require(AppChat.Components.Cells.ConversationFacePile)
 local ConversationFacePileBindingModule = require(script.Parent.ConversationFacePileBinding)
 local ConversationRowSubtitleModule = require(script.Parent.ConversationRowSubtitle)
 local UseGetOneToOneFriendIdFromConversationIdModule = require(AppChat.Hooks.useGetOneToOneFriendIdFromConversationId)
@@ -18,7 +19,7 @@ local UseIsRobloxSubscriberBindingFunction = require(Parent.UserProfiles).Hooks.
 local SquadButtonSourceEnum = SquadsModule.Enums.SquadButtonSourceEnum
 local SquadComponentAccessWrapper = SquadsModule.SquadComponentAccessWrapper
 local SquadJoinButton = SquadsModule.SquadJoinButton
-local MemoResult = ReactModule.memo((require(AppChat.Components.Cells.ConversationFacePile)))
+local MemoResult = ReactModule.memo(ConversationFacePileModule)
 
 local function SubscriptionBadge(p1)
 	-- upvalues: FoundationModule (copy), ReactModule (copy)

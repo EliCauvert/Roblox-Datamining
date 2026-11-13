@@ -4,6 +4,7 @@ local ReactModule = require(Parent.React)
 local DashModule = require(Parent.Dash)
 local ConstantsModule = require(ProfilePlatform.Common.Constants)
 local RoactUtilsModule = require(Parent.RoactUtils)
+local MemoizeFunction = require(Parent.AppCommonLib).memoize
 local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
 local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
 local EnumsModule = require(ProfilePlatform.Common.Enums)
@@ -31,7 +32,7 @@ local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.Robl
 local HttpService = game:GetService("HttpService")
 local StoreGridModule = require(script.Parent.StoreGrid)
 local StoreGridSkeletonModule = require(script.Parent.StoreGridSkeleton)
-local MemoizeResult = require(Parent.AppCommonLib).memoize(function(List, p1, p2)
+local MemoizeResult = MemoizeFunction(function(List, p1, p2)
 	-- upvalues: EnumsModule (copy)
 	local t = {}
 	local Count = 1

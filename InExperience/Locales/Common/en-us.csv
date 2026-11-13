@@ -982,6 +982,9 @@ CoreScripts.InGameMenu.ExitModal.Subtitle,Discover new experiences without leavi
 CoreScripts.InGameMenu.ExitModal.Title,New to the Roblox App
 CoreScripts.InGameMenu.GameSettings.AIRephraseMessages,Rephrased messages
 CoreScripts.InGameMenu.GameSettings.AIRephraseMessagesDescription,Roblox may rephrase messages that break safety rules.
+CoreScripts.InGameMenu.GameSettings.AccountHeader,Account
+CoreScripts.InGameMenu.GameSettings.AccountManagement,Account management
+CoreScripts.InGameMenu.GameSettings.AccountManagementDescription,"Review, manage or delete your account."
 CoreScripts.InGameMenu.GameSettings.AdvancedSettingsTitle,ADVANCED SETTINGS
 CoreScripts.InGameMenu.GameSettings.AudioHeader,Audio
 CoreScripts.InGameMenu.GameSettings.AutoGraphicsQuality,Auto Quality Mode
@@ -3725,6 +3728,7 @@ Feature.Groups.Description.RequiresAccountTenureTooltipOneMonth,You must have an
 Feature.Groups.Description.RequiresAccountTenureTooltipOneWeek,You must have an account for 7 days before joining this community.
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeDays,You must have an account for 3 days before joining this community.
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeMonths,You must have an account for 90 days before joining this community.
+Feature.Groups.Header.UppercaseMyGroups,MY COMMUNITIES
 Feature.Groups.Heading.Community,Community
 Feature.Groups.Heading.Followers,
 Feature.Groups.Heading.Groups,
@@ -3950,11 +3954,13 @@ Feature.Moments.Description.HowToCaptureStep2,Enable the Capture controls
 Feature.Moments.Description.HowToCaptureStep3,Capture photos and videos of gameplay
 Feature.Moments.Description.LeaveAvatarMomentsCreation,"You'll lose all of your changes, but your outfit will remain unchanged."
 Feature.Moments.Description.LeaveMomentsCreation,"You'll lose all your changes, but you can still find this capture in your <b>Captures</b> gallery."
+Feature.Moments.Description.MomentsOffBody,Ask a parent to turn on Moments in parental controls.
 Feature.Moments.Description.NoMusicResults,No music found
 Feature.Moments.Description.NonInfiniteScrollEndBody,We've paused your feed. You can decide if you'd like to continue watching.
 Feature.Moments.Description.NothingHereYet,Nothing here yet...
 Feature.Moments.Description.PublishMoment,Describe your Moment
 Feature.Moments.Description.StayFriendly,Let's keep things friendly
+Feature.Moments.Description.TimeLimitReachedBody,Limits are based on age. Watch Moments tomorrow.
 Feature.Moments.Description.TooManyUploads,You have uploaded too many videos today. Try again tomorrow.
 Feature.Moments.Disclaimer.EveryoneMoments,Everyone in Moments can view what is published
 Feature.Moments.Label.All,
@@ -4025,6 +4031,7 @@ Feature.Moments.Label.MomentRemovedTitle,We removed this Moment
 Feature.Moments.Label.MomentUnavailable,Moment unavailable
 Feature.Moments.Label.MomentUnavailableDefault,This Moment isn't available.
 Feature.Moments.Label.MomentsExperienceName,
+Feature.Moments.Label.MomentsOffTitle,Moments is turned off
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,No comments yet
 Feature.Moments.Label.NonInfiniteScrollEndTitle,There are more Moments to watch
@@ -4059,6 +4066,7 @@ Feature.Moments.Label.TextGenerationFailedBody,Couldn't generate text. Please tr
 Feature.Moments.Label.TextGenerationFailedTitle,Generation Failed
 Feature.Moments.Label.TextGenerationFilteredBody,"Can't perform generation for this captured video, content filtered."
 Feature.Moments.Label.TextGenerationFilteredTitle,Generation Filtered
+Feature.Moments.Label.TimeLimitReachedTitle,You've hit the time limit for Moments
 Feature.Moments.Label.Tone,Tone
 Feature.Moments.Label.Tone.Cinematic,Cinematic
 Feature.Moments.Label.Tone.Funny,Funny
@@ -4923,6 +4931,8 @@ Feature.UniversalShareSheet.Response.SharedMessage,Message was sent
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Messages were sent
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} others
 Feature.UserLibrary.Label.MyLibrary,My Library
+Feature.VIPServer.Message.TooManyFreeServersOnGame,You can not have more free private servers on this game.
+Feature.VIPServer.Message.TooManyTotalActiveFreeServers,You cannot have more active free private servers. Please deactivate some other servers first.
 Feature.VerificationUpsell.Action.AddPhone,Add Phone
 Feature.VerificationUpsell.Action.AddPhoneNumber,Add Phone Number
 Feature.VerificationUpsell.Action.AddPhoneVoice,Add Phone for Voice Chat
@@ -5483,6 +5493,12 @@ InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,Successfully added 
 InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,Successfully added {experience_name} to home screen
 InstantApps.Shortcuts.Label.TryAgain,Try Again
 InstantApps.Shortcuts.Label.ViewShortcut,View Shortcut
+Notifications.Moments.Body.MomentPostFailed,"Something went wrong, try again later"
+Notifications.Moments.Body.MomentPostModerated,
+Notifications.Moments.Body.MomentPostSuccess,Others can now watch and react to it
+Notifications.Moments.Title.MomentPostFailed,Moment wasn't posted
+Notifications.Moments.Title.MomentPostModerated,
+Notifications.Moments.Title.MomentPostSuccess,Your Moment is live
 Notifications.NotificationStream.Bundle.ShowLess,
 Notifications.NotificationStream.Bundle.ShowMoreV2,{notificationCount} more
 Notifications.NotificationStream.Label.AllCaughtUp,All caught up!

@@ -1,4 +1,5 @@
 ﻿local Parent = script:FindFirstAncestor("TextChannelWindow").Parent
+local SharedFlagsModule = require(Parent.SharedFlags)
 local MessageModule = require(script.Parent.Message)
 local TextChannelWindowAnalyticsModule = require(script.Parent.TextChannelWindowAnalytics)
 local TextChannelWindowPerfTracker = require(Parent.ChatUIPrimitives).Telemetry.TextChannelWindowPerfTracker
@@ -7,7 +8,7 @@ local _ = require(script.Parent.createChannelMessagesStore)
 local IsTextSourceMutedModule = require(script.Parent.isTextSourceMuted)
 local ConnectHistoryReplayModule = require(script.Parent.connectHistoryReplay)
 local FFlagExpChatTextChannelWindowHistoryReplayModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowHistoryReplay)
-local GetFFlagExpChatProtectedChatInternalAPIsFunction = require(Parent.SharedFlags).getFFlagExpChatProtectedChatInternalAPIs
+local GetFFlagExpChatProtectedChatInternalAPIsFunction = SharedFlagsModule.getFFlagExpChatProtectedChatInternalAPIs
 local GetFFlagExpChatUseChatMuteStoreModule = require(script.Parent.getFFlagExpChatUseChatMuteStore)
 
 local function getMessageStatus(p1): string

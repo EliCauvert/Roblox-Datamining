@@ -9,8 +9,9 @@ local RobloxSwitchView = ReactModule.Component:extend("RobloxSwitchView")
 function RobloxSwitchView.getDerivedStateFromProps(p1, p2)
 	-- upvalues: Object (copy), config (copy)
 	local State = p1.navigation.state
+	local Key = State.routes[State.index].key
 	local Descriptors = p1.descriptors
-	local VisitedScreenKeys = { [State.routes[State.index].key] = true }
+	local VisitedScreenKeys = { [Key] = true }
 	
 	if Object.assign(table.clone(config), p1.navigationConfig or {}).keepVisitedScreensMounted and p2.visitedScreenKeys then
 		for visitedScreenKey in p2.visitedScreenKeys do

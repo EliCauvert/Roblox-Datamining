@@ -87,6 +87,7 @@ return function(Frame)
 			return if UseMomentMediaControllerModuleResult == nil then Frozen else UseMomentMediaControllerModuleResult.getVisualLayers(p1)
 		end)
 	end, { UseMomentMediaControllerModuleResult })))
+	local IsNotReady: boolean = Frame.showLoadingSkeleton == true and UseSignalStateResult ~= "Ready"
 	local Copy = table.clone((ReactModule.useMemo(function()
 		-- upvalues: UseMomentMediaControllerModuleResult (copy), UseSignalStateResult1 (copy), UseMemoResult1 (copy), UseSignalBindingResult (copy), GetScaleType (ref), CornerRadius (copy), ReactModule (upval), View (upval), UseSignalBindingResult1 (ref)
 		local Elements = {}
@@ -124,7 +125,7 @@ return function(Frame)
 		UseSignalBindingResult1
 	})))
 	
-	if Frame.showLoadingSkeleton == true and UseSignalStateResult ~= "Ready" then
+	if IsNotReady then
 		Copy.LoadingSkeleton = ReactModule.createElement(View, { tag = "size-full", ZIndex = 100 }, {
 			Shimmer = ReactModule.createElement(Skeleton, { Size = UDim2.fromScale(1, 1) })
 		})

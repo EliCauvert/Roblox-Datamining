@@ -1,9 +1,10 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
+local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local CreationMenuViewModule = require(Moments.Components.CreationMenuView)
 local UseCreationMenuViewModelModule = require(Moments.Components.useCreationMenuViewModel)
-local _ = require(Parent.Foundation).Enums.ButtonVariant
+local _ = FoundationModule.Enums.ButtonVariant
 
 return function(p1)
 	-- upvalues: UseCreationMenuViewModelModule (copy), ReactModule (copy), CreationMenuViewModule (copy)

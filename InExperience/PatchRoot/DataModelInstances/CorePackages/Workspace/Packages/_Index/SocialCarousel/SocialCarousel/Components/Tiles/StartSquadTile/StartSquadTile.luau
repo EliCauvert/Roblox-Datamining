@@ -1,13 +1,14 @@
 ﻿local SocialCarousel = script:FindFirstAncestor("SocialCarousel")
 local Parent = SocialCarousel.Parent
 local AppPage = require(Parent.RobloxAppEnums).AppPage
+local LocalizationModule = require(Parent.Localization)
 local UseNavigationFunction = require(Parent.Navigation).useNavigation
 local ReactModule = require(Parent.React)
 local UseSocialCarouselAnalyticsModule = require(SocialCarousel.Analytics.useSocialCarouselAnalytics)
 local UseSocialCarouselContextModule = require(SocialCarousel.Contexts.useSocialCarouselContext)
 local TileModule = require(SocialCarousel.BaseComponents.Tile)
 local FFlagSocialCarouselXXSmallTilesModule = require(SocialCarousel.Flags.FFlagSocialCarouselXXSmallTiles)
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local ConstantsModule = require(SocialCarousel.Common.Constants)
 
 return function(p1)

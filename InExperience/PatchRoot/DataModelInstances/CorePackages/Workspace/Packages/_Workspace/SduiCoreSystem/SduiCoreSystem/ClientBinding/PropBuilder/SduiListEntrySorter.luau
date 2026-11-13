@@ -51,8 +51,9 @@ local function resolveItemSortRank(SortRankProp, Item, Template, p1, p2, p3)
 	else
 		local Kind = Template and Template.kind
 		local Value = Kind and Kind.value
+		local Data = Value and (Value.shared and Value.shared.data)
 		local Item1 = if typeof(Item) == "table" then Item else t
-		local DataBindingSourcesForTemplateModule = BuildDataBindingSourcesForTemplateModule(Item1, Value and (Value.shared and Value.shared.data) or t)
+		local DataBindingSourcesForTemplateModule = BuildDataBindingSourcesForTemplateModule(Item1, Data or t)
 		local Success, Result = pcall(resolvePropToValue, SortRankProp, function()
 			-- upvalues: DataBindingSourcesForTemplateModule (copy)
 			return DataBindingSourcesForTemplateModule
@@ -104,7 +105,7 @@ return {
 		end
 		local Flag = false
 		
-		for _, value2 in List do
+		for i, value2 in List do
 			if value2.sortRankProp ~= nil then
 				Flag = true
 				break

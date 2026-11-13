@@ -5,11 +5,12 @@ local NetworkModule = require(Parent.Services.Network)
 local BundleInfoModule = require(Parent.Models.BundleInfo)
 local SetBundlesModule = require(Parent.Actions.SetBundles)
 local GetProductInfoModule = require(Parent.Thunks.GetProductInfo)
+local CreateInspectAndBuyKeyMapperModule = require(Parent.createInspectAndBuyKeyMapper)
 local SetAssetToBundlesMappingModule = require(Parent.Actions.SetAssetToBundlesMapping)
 local SendCounterModule = require(Parent.Thunks.SendCounter)
 local ConstantsModule = require(Parent.Constants)
 local list = { NetworkModule }
-local GetAssetBundles = require(Parent.createInspectAndBuyKeyMapper)("getAssetBundles")
+local GetAssetBundles = CreateInspectAndBuyKeyMapperModule("getAssetBundles")
 
 return function(p1)
 	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), GetAssetBundles (copy), PerformFetch (copy), BundleInfoModule (copy), GetProductInfoModule (copy), SetBundlesModule (copy), SetAssetToBundlesMappingModule (copy), SendCounterModule (copy), ConstantsModule (copy)

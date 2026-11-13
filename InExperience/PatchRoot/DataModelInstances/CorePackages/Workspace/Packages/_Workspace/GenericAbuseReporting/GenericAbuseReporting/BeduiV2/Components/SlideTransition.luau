@@ -1,9 +1,10 @@
 ﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
 local Parent = GenericAbuseReporting.Parent
+local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local ReactOtterModule = require(Parent.ReactOtter)
 local SlideTransitionContextModule = require(GenericAbuseReporting.BeduiV2.Components.SlideTransitionContext)
-local View = require(Parent.Foundation).View
+local View = FoundationModule.View
 local config = {
 	stiffness = 400,
 	damping = 40,

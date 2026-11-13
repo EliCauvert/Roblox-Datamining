@@ -16,15 +16,17 @@ return function(p1)
 	-- upvalues: UseProfileWrapperContextModule (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), VerifiedBadgesModule (copy), GetDeepValueModule (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), Constants (copy), FFlagEnablePressingCommunityOwnerInPeekViewModule (copy), ReactModule (copy), CommunityProfileHeaderModule (copy)
 	local ProfileId = UseProfileWrapperContextModule().profileId
 	local UseProfileJsonComponentModuleResult = UseProfileJsonComponentModule(EnumsModule.Components.CommunityProfileHeader)
+	local CountsMembersCount = GetDeepValueModule(UseProfileJsonComponentModuleResult, "counts.membersCount") or 0
+	local RbxthumbWithTypeSizeAndOptions = GetRbxthumbWithTypeSizeAndOptionsFunction(ProfileId, Constants.RbxthumbTypes.GroupIcon, 150)
 	local OwnerUserId = if FFlagEnablePressingCommunityOwnerInPeekViewModule then UseProfileJsonComponentModuleResult.ownerUserId else nil
 	
 	return ReactModule.createElement(CommunityProfileHeaderModule, {
 		layoutOrder = p1.layoutOrder,
 		name = if UseProfileJsonComponentModuleResult.isVerified then `{UseProfileJsonComponentModuleResult.name}{VerifiedBadgesModule.emoji.verified}` else UseProfileJsonComponentModuleResult.name,
 		ownerName = if UseProfileJsonComponentModuleResult.ownerIsVerified then `{UseProfileJsonComponentModuleResult.ownerName}{VerifiedBadgesModule.emoji.verified}` else UseProfileJsonComponentModuleResult.ownerName,
-		membersCount = GetDeepValueModule(UseProfileJsonComponentModuleResult, "counts.membersCount") or 0,
+		membersCount = CountsMembersCount,
 		hasSocialModules = UseProfileJsonComponentModuleResult.hasSocialModules,
-		thumbnail = GetRbxthumbWithTypeSizeAndOptionsFunction(ProfileId, Constants.RbxthumbTypes.GroupIcon, 150),
+		thumbnail = RbxthumbWithTypeSizeAndOptions,
 		ownerUserId = if FFlagEnablePressingCommunityOwnerInPeekViewModule then OwnerUserId else nil
 	})
 end

@@ -2,10 +2,11 @@
 local Parent = GenericAbuseReporting.Parent
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
+local FoundationModule = require(Parent.Foundation)
 local PromiseModule = require(Parent.Promise)
 local FFlagAbuseReportInExpPlayerListV3 = require(Parent.SharedFlags).FFlagAbuseReportInExpPlayerListV3
 local RecentlyLeftSignalsModule = require(GenericAbuseReporting.BeduiV2.Utils.Signals.recentlyLeftSignals)
-local AccessoryType = require(Parent.Foundation).Enums.AccessoryType
+local AccessoryType = FoundationModule.Enums.AccessoryType
 
 local function appendRecentlyLeftItems(List, p1, Tbl)
 	-- upvalues: AccessoryType (copy)

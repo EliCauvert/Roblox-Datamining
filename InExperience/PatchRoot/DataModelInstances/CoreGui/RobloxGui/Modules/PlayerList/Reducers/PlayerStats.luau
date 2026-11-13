@@ -1,8 +1,9 @@
 ﻿local CorePackages = game:GetService("CorePackages")
+local RoduxModule = require(CorePackages.Packages.Rodux)
 local CryoModule = require(CorePackages.Packages.Cryo)
 local Actions = script.Parent.Parent.Actions
 
-return (require(CorePackages.Packages.Rodux).createReducer({}, {
+return (RoduxModule.createReducer({}, {
 	[require(Actions.AddPlayer).name] = function(p1, p2)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p1, { [p2.userId] = {} })

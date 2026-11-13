@@ -18,7 +18,7 @@ return function(p1)
 		end
 	end, { p1.onClose })
 	
-	return if UseOverlayResult == nil then nil else ReactRobloxModule.createPortal(ReactModule.createElement(FoundationModule.Snackbar, {
+	return if UseOverlayResult == nil then nil else ReactRobloxModule.createPortal(ReactModule.createElement(FoundationModule.Snackbar_DEPRECATED, {
 		testId = "build-agent-rollback-snackbar",
 		ZIndex = 999,
 		AnchorPoint = Vector2.new(0.5, 1),

@@ -2,19 +2,22 @@
 local Parent1 = Parent.Parent
 local GuiService = game:GetService("GuiService")
 local UserInputService = game:GetService("UserInputService")
+local LocalizationModule = require(Parent1.Localization)
 local ReactModule = require(Parent1.React)
+local UIBloxModule = require(Parent1.UIBlox)
 local GetTextSizeFunction = require(Parent1.Style).GetTextSize
 local NormalizeFontFaceFunction = require(Parent1.Foundation).Utility.normalizeFontFace
-local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
-local UseStyleFunction = require(Parent1.UIBlox).Core.Style.useStyle
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local CapturesContextModule = require(Parent.Context.CapturesContext)
+local CapturesPolicyModule = require(Parent.App.CapturesPolicy)
 local OnOffButtonModule = require(Parent.Components.CoreUI.OnOffButton)
 local VideoCaptureCTAModule = require(Parent.Components.CoreUI.VideoCaptureCTA)
 local UseKeyboardEnabledModule = require(Parent.Hooks.useKeyboardEnabled)
 local _UDim = UDim.new(0, 8)
 local Opt: string = if UserInputService:GetPlatform() == Enum.Platform.OSX then "Opt" else "Alt"
 
-return (require(Parent.App.CapturesPolicy).connect(function(p1)
+return (CapturesPolicyModule.connect(function(p1)
 	return { eligibleForVideoCapture = p1.eligibleForVideoCapture() }
 end)(function(Frame)
 	-- upvalues: UseStyleFunction (copy), ReactModule (copy), CapturesContextModule (copy), GuiService (copy), UseLocalizationFunction (copy), Opt (copy), UserInputService (copy), UseKeyboardEnabledModule (copy), GetTextSizeFunction (copy), _UDim (copy), NormalizeFontFaceFunction (copy), OnOffButtonModule (copy), VideoCaptureCTAModule (copy)

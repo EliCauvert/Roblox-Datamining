@@ -8,6 +8,7 @@ local _ = require(SduiCoreSystem.SduiComponentType)
 local _ = require(SduiCoreSystem.SduiErrors)
 local FFlagLuaAppAddHasOneByTwoField = require(Parent.SharedFlags).FFlagLuaAppAddHasOneByTwoField
 local FFlagLuaAppAddHasOneByTwoFieldSdui = require(Parent.SharedFlags).FFlagLuaAppAddHasOneByTwoFieldSdui
+local FFlagLuaAppSduiHomeFeedStats = require(Parent.SharedFlags).FFlagLuaAppSduiHomeFeedStats
 local config = {
 	eventName = "DiscoverySdui_ErrorDetails",
 	description = "Error details related to discovery server-driven ui",
@@ -184,7 +185,7 @@ return {
 			LoggingProtocolModule.StandardizedFields.addOsInfo
 		}, t2, AppPage)
 	end,
-	reportSduiV2FeedStats = if require(Parent.SharedFlags).FFlagLuaAppSduiHomeFeedStats then function(List, AppPage, SduiResponseRequestId, p5, HasOneByTwo)
+	reportSduiV2FeedStats = if FFlagLuaAppSduiHomeFeedStats then function(List, AppPage, SduiResponseRequestId, p5, HasOneByTwo)
 		-- upvalues: LoggingProtocolModule (copy), FFlagLuaAppAddHasOneByTwoFieldSdui (copy), config3 (copy)
 		local P22 = p5 or LoggingProtocolModule.default
 		assert(P22, "loggingProtocol must exist")

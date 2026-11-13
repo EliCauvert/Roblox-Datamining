@@ -15,6 +15,7 @@ local ResponsiveModule = require(Parent.Responsive)
 local UseBreakpointXFunction = ResponsiveModule.useBreakpointX
 local UseIsSpatialFunction = require(Parent.Responsive).useIsSpatial
 local UsePreferredInputFunction = ResponsiveModule.usePreferredInput
+local FoundationModule = require(Parent.Foundation)
 local AssetTileModule = require(script.Parent.AssetTile)
 local MarketplaceAssetTileModule = require(script.Parent.MarketplaceAssetTile)
 local _ = require(ProfilePlatform.Common.AssetInfo)
@@ -30,7 +31,7 @@ local FFlagSplitPaneProfileMaxWidth = require(Parent.SharedFlags).FFlagSplitPane
 local SeeMoreCurrentlyWearingCompact = game:DefineFastFlag("SeeMoreCurrentlyWearingCompact", false)
 local SeeMoreCurrentlyWearingWide = game:DefineFastFlag("SeeMoreCurrentlyWearingWide", false)
 local ProfilePlatformUseNewLayoutForAssetsCarousel = game:DefineFastFlag("ProfilePlatformUseNewLayoutForAssetsCarousel", false)
-local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 local v1 = 2
 
 return function(p1)
@@ -141,7 +142,7 @@ return function(p1)
 			renderItem = UseResult,
 			getItemHeight = UseResult1,
 			numColumns = if FFlagAXEnableProfileTab then v2 else v1,
-			columnGap = if FFlagAXEnableProfileTab and IsTileVariantMatch and IsFormFactorMatch then 12 elseif ProfilePlatformUseNewLayoutForAssetsCarousel then UseTokensResult.Gap.Medium else 8,
+			columnGap = if FFlagAXEnableProfileTab and (IsTileVariantMatch and IsFormFactorMatch) then 12 elseif ProfilePlatformUseNewLayoutForAssetsCarousel then UseTokensResult.Gap.Medium else 8,
 			sideMargin = UseDynamicSizeMarginModuleResult,
 			onActivateHeader = p1.onActivateHeader
 		})

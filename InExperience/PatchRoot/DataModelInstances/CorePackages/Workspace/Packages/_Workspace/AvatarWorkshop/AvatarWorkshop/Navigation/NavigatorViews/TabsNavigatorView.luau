@@ -1,13 +1,14 @@
 ﻿local AvatarWorkshop = script:FindFirstAncestor("AvatarWorkshop")
 local Parent = AvatarWorkshop.Parent
 local _ = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
 local RoactNavigationModule = require(Parent.RoactNavigation)
 local ReactModule = require(Parent.React)
 local _ = require(AvatarWorkshop.Navigation.NavigationTypes)
 local TabsLayoutModule = require(AvatarWorkshop.Components.Layouts.TabsLayout)
 local GetActiveRouteModule = require(AvatarWorkshop.Navigation.getActiveRoute)
 local ScreenTitlesModule = require(AvatarWorkshop.Constants.ScreenTitles)
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 
 return function(p1)
 	-- upvalues: GetActiveRouteModule (copy), UseLocalizationFunction (copy), ScreenTitlesModule (copy), ReactModule (copy), TabsLayoutModule (copy), RoactNavigationModule (copy)

@@ -6,6 +6,7 @@ local Kind = require(Parent.GraphQL).Kind
 local Error1 = LuauPolyfillModule.Error
 local Number = LuauPolyfillModule.Number
 local Object = LuauPolyfillModule.Object
+local LuauRegExpModule = require(Parent.LuauRegExp)
 local _01909 = nil
 
 local function _(Value)
@@ -82,6 +83,7 @@ local function astFromValueUntyped(Value)
 	end
 end
 
-_01909 = require(Parent.LuauRegExp)("^-?(?:0|[1-9][0-9]*)$")
+local AstFromValueUntypedModule = { astFromValueUntyped = astFromValueUntyped }
+_01909 = LuauRegExpModule("^-?(?:0|[1-9][0-9]*)$")
 
-return { astFromValueUntyped = astFromValueUntyped }
+return AstFromValueUntypedModule

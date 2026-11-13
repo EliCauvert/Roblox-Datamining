@@ -1,6 +1,8 @@
 ﻿local ExpChat = script:FindFirstAncestor("ExpChat")
 local Parent = ExpChat.Parent
+local IsTenFootInterfaceFunction = require(Parent.AppCommonLib).isTenFootInterface
 local Config1 = require(Parent.ExpChatShared).Config
+local FFlagExpChatChannelTabSizingUpdateModule = require(ExpChat.Flags.FFlagExpChatChannelTabSizingUpdate)
 local Config = {
 	ChatInputBarFont = Enum.Font.BuilderSansMedium,
 	ChatInputBarFontFace = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal),
@@ -51,7 +53,7 @@ local Config = {
 		UnreadDotColor3 = Color3.fromRGB(255, 255, 255),
 		DividerColor3 = Color3.fromRGB(255, 255, 255),
 		BorderColor3 = Color3.fromRGB(100, 100, 100),
-		MinTabWidth = if require(ExpChat.Flags.FFlagExpChatChannelTabSizingUpdate) then 72 else 100
+		MinTabWidth = if FFlagExpChatChannelTabSizingUpdateModule then 72 else 100
 	},
 	DefaultChannelNames = Config1.DefaultChannelNames,
 	MessageCharacterLimit = 200,
@@ -155,7 +157,7 @@ local Config = {
 	}
 }
 
-if require(Parent.AppCommonLib).isTenFootInterface() then
+if IsTenFootInterfaceFunction() then
 	Config.ChatWindowSize = UDim2.fromScale(0.4, 0.4)
 	Config.ChatWindowMaxWidth = 768
 	Config.ChatWindowMaxHeight = 432

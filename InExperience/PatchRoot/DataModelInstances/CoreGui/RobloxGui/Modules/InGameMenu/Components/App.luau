@@ -1,5 +1,6 @@
 ﻿local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
 local Roact = InGameMenuDependenciesModule.Roact
+local RoactRodux = InGameMenuDependenciesModule.RoactRodux
 local Parent = script.Parent.Parent
 local ViewportOverlayModule = require(script.Parent.ViewportOverlay)
 local SideNavigationModule = require(script.Parent.SideNavigation)
@@ -16,7 +17,7 @@ local FullscreenTitleBarModule = require(script.Parent.FullscreenTitleBar)
 local FFlagLuaMenuPerfImprovementsModule = require(Parent.Flags.FFlagLuaMenuPerfImprovements)
 local ConstantsModule = require(Parent.Resources.Constants)
 
-return InGameMenuDependenciesModule.RoactRodux.connect(function(p1, _)
+return RoactRodux.connect(function(p1, _)
 	return { isMenuOpen = p1.isMenuOpen }
 end, nil)((require(Parent.InGameMenuPolicy).connect(function(p1, _)
 	return {

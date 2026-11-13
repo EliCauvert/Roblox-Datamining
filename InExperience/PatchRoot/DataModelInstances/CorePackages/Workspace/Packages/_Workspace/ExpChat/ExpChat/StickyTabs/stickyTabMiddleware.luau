@@ -1,14 +1,17 @@
 ﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local FriendsChatChannelAddedModule = require(ExpChat.Actions.FriendsChatChannelAdded)
+local LocalTextChannelParticipantAddedModule = require(ExpChat.Actions.LocalTextChannelParticipantAdded)
+local UniverseChatChannelAddedModule = require(ExpChat.Actions.UniverseChatChannelAdded)
 local StickyTabObserverModule = require(script.Parent.StickyTabObserver)
 local _ = require(script.Parent.StickyTabsStore)
 local config = {
-	[require(ExpChat.Actions.LocalTextChannelParticipantAdded).name] = function(p1)
+	[LocalTextChannelParticipantAddedModule.name] = function(p1)
 		return p1.textChannel.Name
 	end,
-	[require(ExpChat.Actions.UniverseChatChannelAdded).name] = function(p1)
+	[UniverseChatChannelAddedModule.name] = function(p1)
 		return p1.channelName
 	end,
-	[require(ExpChat.Actions.FriendsChatChannelAdded).name] = function(p1)
+	[FriendsChatChannelAddedModule.name] = function(p1)
 		return p1.channelName
 	end
 }

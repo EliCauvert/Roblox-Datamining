@@ -5,6 +5,7 @@ local FoundationModule = require(Parent.Foundation)
 local AvatarExperienceCommonModule = require(Parent.AvatarExperienceCommon)
 local CatalogRowItemCard = AvatarExperienceCommonModule.Components.CatalogItemCard.CatalogRowItemCard
 local ItemCardThumbnail = require(Parent.AvatarExperienceUIKit).ItemCardComponents.ItemCardThumbnail
+local TutilsModule = require(Parent.tutils)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local _ = require(AvatarExperienceCatalog.Stores.createAXShoppingCartStore)
 local PurchaseItemsErrorStatusMapModule = require(AvatarExperienceCatalog.Enums.PurchaseItemsErrorStatusMap)
@@ -321,4 +322,4 @@ return ReactModule.memo(function(Frame)
 			Divider = ReactModule.createElement(FoundationModule.Divider)
 		}) else nil
 	})
-end, require(Parent.tutils).deepEqual)
+end, TutilsModule.deepEqual)

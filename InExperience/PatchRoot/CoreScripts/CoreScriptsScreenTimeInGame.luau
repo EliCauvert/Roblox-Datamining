@@ -4,6 +4,7 @@ local RobloxGui = game:GetService("CoreGui").RobloxGui
 local NotificationService = game:GetService("NotificationService")
 local HttpService = game:GetService("HttpService")
 local ScreenTimeModule = require(CorePackages.Workspace.Packages.ScreenTime)
+local HttpRequests = ScreenTimeModule.HttpRequests
 local Constants = ScreenTimeModule.Constants
 local GetFFlagScreenTimeSignalRFunction = ScreenTimeModule.GetFFlagScreenTimeSignalR
 local Logging = require(CorePackages.Workspace.Packages.AppCommonLib).Logging
@@ -14,7 +15,7 @@ local function _()
 	game:Shutdown()
 end
 
-local NewResult = ScreenTimeModule.HttpRequests:new(HttpService)
+local NewResult = HttpRequests:new(HttpService)
 local Connection = nil
 
 local _ = function()

@@ -1,9 +1,10 @@
 ﻿local ExpChat = script:FindFirstAncestor("ExpChat")
 local Parent = ExpChat.Parent
 local ReactModule = require(Parent.React)
+local ExpChatSharedModule = require(Parent.ExpChatShared)
 local UseCursorFunction = require(Parent.UIBlox).App.SelectionCursor.useCursor
 local ConfigModule = require(ExpChat.Config)
-local GetFFlagTextChatEnableUniverseChatTabsFunction = require(Parent.ExpChatShared).Flags.GetFFlagTextChatEnableUniverseChatTabs
+local GetFFlagTextChatEnableUniverseChatTabsFunction = ExpChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
 
 return function(p1)
 	-- upvalues: UseCursorFunction (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), ReactModule (copy), ConfigModule (copy)

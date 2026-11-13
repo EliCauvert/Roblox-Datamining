@@ -2,13 +2,14 @@
 local ReactModule = require(Parent.React)
 local UserProfilesModule = require(Parent.UserProfiles)
 local DashModule = require(Parent.Dash)
+local DataHydrationModule = require(Parent.DataHydration)
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local SignalsModule = require(Parent.Signals)
 local FriendTileModule = require(script.Parent.FriendTile)
 local FFlagFriendsPageUserListEnabled = require(Parent.SharedFlags).FFlagFriendsPageUserListEnabled
 local FFlagEnableBlackbirdCheck = require(Parent.SharedFlags).FFlagEnableBlackbirdCheck
 local UseIsRobloxSubscriberFunction = UserProfilesModule.Hooks.useIsRobloxSubscriber
-local GetResult = require(Parent.DataHydration).TrustedConnections.TrustedConnectionsStore.get()
+local GetResult = DataHydrationModule.TrustedConnections.TrustedConnectionsStore.get()
 
 return function(p1)
 	-- upvalues: FFlagFriendsPageUserListEnabled (copy), UserProfilesModule (copy), FFlagEnableBlackbirdCheck (copy), UseIsRobloxSubscriberFunction (copy), ReactModule (copy), SignalsModule (copy), GetResult (copy), UseSignalStateFunction (copy), FriendTileModule (copy), DashModule (copy)

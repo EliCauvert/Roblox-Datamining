@@ -1,9 +1,10 @@
 ﻿local Parent = script:FindFirstAncestor("Moments").Parent
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
+local MomentsCommonModule = require(Parent.MomentsCommon)
 local _ = require(script.Parent.FeedTypes)
 local SwipeLatencyMachineModule = require(script.Parent.swipeLatencyMachine)
-local Analytics = require(Parent.MomentsCommon).Analytics
+local Analytics = MomentsCommonModule.Analytics
 local config = {
 	video = "video",
 	screenshot = "screenshot",

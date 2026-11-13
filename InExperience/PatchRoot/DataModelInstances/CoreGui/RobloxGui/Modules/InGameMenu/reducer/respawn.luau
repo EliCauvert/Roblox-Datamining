@@ -1,8 +1,9 @@
 ﻿local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
 local Cryo = InGameMenuDependenciesModule.Cryo
+local Rodux = InGameMenuDependenciesModule.Rodux
 local Parent = script.Parent.Parent
 
-return InGameMenuDependenciesModule.Rodux.createReducer({ dialogOpen = false, enabled = true, customCallback = nil }, {
+return Rodux.createReducer({ dialogOpen = false, enabled = true, customCallback = nil }, {
 	[require(Parent.Actions.SetRespawning).name] = function(p1, p2)
 		-- upvalues: Cryo (copy)
 		return Cryo.Dictionary.join(p1, { dialogOpen = p2.respawning })

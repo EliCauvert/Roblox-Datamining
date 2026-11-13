@@ -10,6 +10,8 @@ local AppScreensModule = require(AmpUpsell.Common.AppScreens)
 local IDVWithQRCodeUpsellModule = require(script.Parent.IDVWithQRCodeUpsell)
 local IDVApiProvider = require(Parent.IdentityVerification).IDVApiProvider
 local GetFStringBiometricPrivacyPolicyLinkModule = require(AmpUpsell.Flags.GetFStringBiometricPrivacyPolicyLink)
+local GetFIntIDVPollDelayFunction = require(Parent.IdentityVerification).GetFIntIDVPollDelay
+local GetFIntIDVMaxRetriesFunction = require(Parent.IdentityVerification).GetFIntIDVMaxRetries
 local UseNavigationFunction = require(Parent.Navigation).useNavigation
 local EnumsModule = require(AmpUpsell.Common.Enums)
 local IDVStep = EnumsModule.IDVStep
@@ -35,8 +37,8 @@ local AuthAnalyticsModule = require(Parent.AuthAnalytics)
 local AuthMsgShownFunction = AuthAnalyticsModule.Events.authMsgShown
 local AuthModalShownFunction = AuthAnalyticsModule.Events.authModalShown
 local AuthFormInteractionFunction = AuthAnalyticsModule.Events.authFormInteraction
-local FIntIDVPollDelay = require(Parent.IdentityVerification).GetFIntIDVPollDelay()
-local FIntIDVMaxRetries = require(Parent.IdentityVerification).GetFIntIDVMaxRetries()
+local FIntIDVPollDelay = GetFIntIDVPollDelayFunction()
+local FIntIDVMaxRetries = GetFIntIDVMaxRetriesFunction()
 
 local function _(Expired): boolean
 	-- upvalues: IDVSessionStatusEnum (copy)
@@ -123,9 +125,9 @@ return function(p1)
 		end
 	end
 	
-	local function pollIDVStatus(SessionIdentifier, FIntIDVMaxRetries, SessionId)
+	local function pollIDVStatus(SessionIdentifier, p2, SessionId)
 		-- upvalues: UseStateResult2_2 (copy), UseStateResult2_3 (copy), UseLocalizationResult (copy), GetFFlagEnableAmpIDVUpsellAnalyticsModule (upval), AuthModalShownFunction (upval), EntryPointEventCtx (copy), IdvApiProvider (copy), updateChecklist (copy), IDVSessionStatusEnum (upval), AuthMsgShownFunction (upval), UseStateResult2_1 (copy), ActionStatusEnum (upval), SchedulePoll (copy), UseRefResult (copy), pollIDVStatus (copy), FIntIDVPollDelay (upval)
-		if FIntIDVMaxRetries == 0 then
+		if p2 == 0 then
 			UseStateResult2_2(true)
 			UseStateResult2_3(UseLocalizationResult.timeout)
 			
@@ -136,7 +138,7 @@ return function(p1)
 			end
 		else
 			IdvApiProvider.getVerifiedStatus(SessionIdentifier):andThen(function(Result)
-				-- upvalues: updateChecklist (upval), IDVSessionStatusEnum (upval), GetFFlagEnableAmpIDVUpsellAnalyticsModule (upval), AuthMsgShownFunction (upval), EntryPointEventCtx (upval), SessionId (copy), UseStateResult2_1 (upval), ActionStatusEnum (upval), UseStateResult2_2 (upval), UseStateResult2_3 (upval), UseLocalizationResult (upval), AuthModalShownFunction (upval), SchedulePoll (upval), UseRefResult (upval), pollIDVStatus (upval), SessionIdentifier (copy), FIntIDVMaxRetries (copy), FIntIDVPollDelay (upval)
+				-- upvalues: updateChecklist (upval), IDVSessionStatusEnum (upval), GetFFlagEnableAmpIDVUpsellAnalyticsModule (upval), AuthMsgShownFunction (upval), EntryPointEventCtx (upval), SessionId (copy), UseStateResult2_1 (upval), ActionStatusEnum (upval), UseStateResult2_2 (upval), UseStateResult2_3 (upval), UseLocalizationResult (upval), AuthModalShownFunction (upval), SchedulePoll (upval), UseRefResult (upval), pollIDVStatus (upval), SessionIdentifier (copy), p2 (copy), FIntIDVPollDelay (upval)
 				local IsVerified = Result.isVerified
 				local SessionStatus = Result.sessionStatus
 				updateChecklist(SessionStatus)
@@ -160,9 +162,9 @@ return function(p1)
 					end
 				else
 					SchedulePoll(function()
-						-- upvalues: UseRefResult (upval), pollIDVStatus (upval), SessionIdentifier (upval), FIntIDVMaxRetries (upval), SessionId (upval)
+						-- upvalues: UseRefResult (upval), pollIDVStatus (upval), SessionIdentifier (upval), p2 (upval), SessionId (upval)
 						if UseRefResult.current then
-							pollIDVStatus(SessionIdentifier, FIntIDVMaxRetries - 1, SessionId)
+							pollIDVStatus(SessionIdentifier, p2 - 1, SessionId)
 						end
 					end, FIntIDVPollDelay)
 				end

@@ -1,8 +1,9 @@
 ﻿local Parent = script.Parent.Parent
 local Parent1 = Parent.Parent
 local Array = require(Parent1.LuauPolyfill).Array
+local ReactModule = require(Parent1.React)
 local EventsModule = require(Parent.Events)
-local NavigationEventManager = require(Parent1.React).Component:extend("NavigationEventManager")
+local NavigationEventManager = ReactModule.Component:extend("NavigationEventManager")
 
 function NavigationEventManager.didMount(p1)
 	-- upvalues: EventsModule (copy)

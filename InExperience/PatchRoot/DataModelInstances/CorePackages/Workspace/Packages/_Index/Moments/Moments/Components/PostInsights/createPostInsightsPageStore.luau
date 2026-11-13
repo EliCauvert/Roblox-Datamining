@@ -1,8 +1,9 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
 local _ = require(Parent.MomentsTypes)
+local SignalsModule = require(Parent.Signals)
 local _ = require(Moments.Components.Feed.Items.Moment.createMomentStore)
-local CreateSignalFunction = require(Parent.Signals).createSignal
+local CreateSignalFunction = SignalsModule.createSignal
 
 return function()
 	-- upvalues: CreateSignalFunction (copy)

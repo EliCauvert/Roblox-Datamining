@@ -60,6 +60,8 @@ local function OverlayInfoFrame(p1)
 	local HorizontalPadding: number = p1.horizontalPadding
 	local VerticalPadding: number = p1.verticalPadding
 	local SafeAreaInsets = p1.safeAreaInsets
+	local Left = if SafeAreaInsets == nil then 0 else SafeAreaInsets.left
+	local Right = if SafeAreaInsets == nil then 0 else SafeAreaInsets.right
 	local Bottom = if SafeAreaInsets == nil then 0 else SafeAreaInsets.bottom
 	local UseMomentOverlayInsetResult1 = if FFlagMomentsFeedAboveNavBarModule then 0 else UseMomentOverlayInsetResult
 	
@@ -69,8 +71,8 @@ local function OverlayInfoFrame(p1)
 		ZIndex = 2,
 		padding = {
 			top = UDim.new(0, VerticalPadding),
-			left = UDim.new(0, (math.max(HorizontalPadding, if SafeAreaInsets == nil then 0 else SafeAreaInsets.left))),
-			right = UDim.new(0, (math.max(HorizontalPadding, if SafeAreaInsets == nil then 0 else SafeAreaInsets.right))),
+			left = UDim.new(0, (math.max(HorizontalPadding, Left))),
+			right = UDim.new(0, (math.max(HorizontalPadding, Right))),
 			bottom = UDim.new(0, if UseMomentOverlayInsetResult > 0 then UseTokensResult.Padding.Medium + UseMomentOverlayInsetResult1 else math.max(VerticalPadding, Bottom) + UseMomentOverlayInsetResult1)
 		},
 		sizeConstraint = { MaxSize = p1.maxSize },

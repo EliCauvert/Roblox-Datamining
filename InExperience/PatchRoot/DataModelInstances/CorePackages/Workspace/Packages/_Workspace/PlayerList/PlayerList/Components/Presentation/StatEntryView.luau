@@ -1,12 +1,13 @@
 ﻿local Parent = script.Parent.Parent.Parent
 local Parent1 = Parent.Parent
 local ReactModule = require(Parent1.React)
+local UIBloxModule = require(Parent1.UIBlox)
 local FoundationModule = require(Parent1.Foundation)
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local FFlagFontFacePlayerList = require(Parent1.SharedFlags).FFlagFontFacePlayerList
 local FormatStatStringModule = require(Parent.Common.FormatStatString)
-local UseStyleFunction = require(Parent1.UIBlox).Core.Style.useStyle
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local UseLayoutValuesModule = require(Parent.Common.useLayoutValues)
 local FFlagRemoveNewPlayerListOverlayModule = require(Parent.Flags.FFlagRemoveNewPlayerListOverlay)
 local FFlagEnableMobilePlayerListOnConsoleModule = require(Parent.Flags.FFlagEnableMobilePlayerListOnConsole)
@@ -85,7 +86,7 @@ return ReactModule.memo(function(p1)
 			}),
 			StatText = ReactModule.createElement("TextLabel", UseMemoResult)
 		}) else ReactModule.createElement("TextLabel", UseMemoResult),
-		DoubleOverLay = if FFlagRemoveNewPlayerListOverlayModule or (not p1.doubleOverlay or not p1.overlayStyle) then nil else ReactModule.createElement("Frame", {
+		DoubleOverLay = if FFlagRemoveNewPlayerListOverlayModule or not p1.doubleOverlay or not p1.overlayStyle then nil else ReactModule.createElement("Frame", {
 			ZIndex = 1,
 			BorderSizePixel = 0,
 			Size = UDim2.new(1, 0, 1, 0),

@@ -223,25 +223,25 @@ return function(p2)
 	local UseSignalStateResult4 = UseSignalStateFunction(ShoppingCartStore.getPurchasableItemsTotalOriginalPriceInRobux)
 	local UseSignalStateResult5 = UseSignalStateFunction(ShoppingCartStore.getErroredItemCount)
 	local IsSaveOptionsOpen = nil
-	local Callback = nil
+	local Callback2 = nil
 	
 	if FFlagAXMISWithOffers then
-		IsSaveOptionsOpen, Callback = ReactModule.useState(false)
+		IsSaveOptionsOpen, Callback2 = ReactModule.useState(false)
 	end
 	local UseStateResult, UseStateResult2 = ReactModule.useState(not FFlagAXMISWithOffers or not UseSaveOptionsStoredValuesModuleResult or UseSaveOptionsStoredValuesModuleResult.getWearAfterPurchase())
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(if FFlagAXMISWithOffers and UseSaveOptionsStoredValuesModuleResult then UseSaveOptionsStoredValuesModuleResult.getAddToAvatars() else false)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
 	local v4 = nil
-	local Callback1 = nil
+	local Callback = nil
 	
 	if FFlagAXMISWithBlackbird then
-		v4, Callback1 = ReactModule.useState({})
+		v4, Callback = ReactModule.useState({})
 	end
 	local v5 = nil
-	local Callback2 = nil
+	local Callback1 = nil
 	
 	if FFlagAXMISWithOffers then
-		v5, Callback2 = ReactModule.useState(false)
+		v5, Callback1 = ReactModule.useState(false)
 	end
 	local UseSelectorResult1 = UseSelectorFunction(selectTryOnItems, TutilsModule.deepEqual)
 	local UseSelectorResult2 = UseSelectorFunction(selectTryOnBodyColor3s, TutilsModule.deepEqual)
@@ -296,14 +296,14 @@ return function(p2)
 		end
 	end
 	ReactModule.useEffect(function()
-		-- upvalues: p2 (copy), UseSelectorResult13 (copy), FFlagAXMISWithBlackbird (upval), GetRobloxSubscriptionProductsFunction (upval), Callback1 (ref), MutedErrorFunction (upval), FFlagAXEnableExpiredUserLookCheckout (upval), UseRefResult1 (ref)
+		-- upvalues: p2 (copy), UseSelectorResult13 (copy), FFlagAXMISWithBlackbird (upval), GetRobloxSubscriptionProductsFunction (upval), Callback (ref), MutedErrorFunction (upval), FFlagAXEnableExpiredUserLookCheckout (upval), UseRefResult1 (ref)
 		if p2.fetchUserRobux and not UseSelectorResult13 then
 			p2.fetchUserRobux()
 		end
 		if FFlagAXMISWithBlackbird then
 			GetRobloxSubscriptionProductsFunction():andThen(function(Result)
-				-- upvalues: Callback1 (upval)
-				Callback1(Result)
+				-- upvalues: Callback (upval)
+				Callback(Result)
 			end):catch(function(Err)
 				-- upvalues: MutedErrorFunction (upval)
 				MutedErrorFunction("CheckoutPageViewModel", "Failed to fetch Roblox subscription products: " .. tostring(Err))
@@ -325,11 +325,11 @@ return function(p2)
 		end
 	end, { UseNavigationFocusResult, p2.fetchUserRobux })
 	ReactModule.useLayoutEffect(function()
-		-- upvalues: ShoppingCartStore (copy), UseSelectorResult10 (copy), UseAppPolicyResult (copy), FFlagAXMISWithOffers (upval), Callback2 (ref), FFlagAXEnableExpiredUserLookCheckout (upval), UseAvatarRouteResult (copy), AvatarScreen (upval), UseNavigationResult (copy)
+		-- upvalues: ShoppingCartStore (copy), UseSelectorResult10 (copy), UseAppPolicyResult (copy), FFlagAXMISWithOffers (upval), Callback1 (ref), FFlagAXEnableExpiredUserLookCheckout (upval), UseAvatarRouteResult (copy), AvatarScreen (upval), UseNavigationResult (copy)
 		ShoppingCartStore.syncFromTryOns(UseSelectorResult10, UseAppPolicyResult)
 		
 		if FFlagAXMISWithOffers then
-			Callback2(true)
+			Callback1(true)
 		end
 		local Name = if FFlagAXEnableExpiredUserLookCheckout then UseAvatarRouteResult and (UseAvatarRouteResult.current and UseAvatarRouteResult.current.name) else nil
 		
@@ -881,8 +881,8 @@ return function(p2)
 			if FFlagAXMISWithOffers then UseSaveOptionsStoredValuesModuleResult else nil
 		}),
 		onSaveOptionsOpenToggle = if FFlagAXMISWithOffers then ReactModule.useCallback(function()
-			-- upvalues: Callback (ref), IsSaveOptionsOpen (ref)
-			Callback(not IsSaveOptionsOpen)
+			-- upvalues: Callback2 (ref), IsSaveOptionsOpen (ref)
+			Callback2(not IsSaveOptionsOpen)
 		end, { IsSaveOptionsOpen }) else nil,
 		purchasableItemsTotalPriceInRobux = if FFlagAXMISWithOffers then math.max(UseSignalStateResult3 - UseOffersCartPricingCalculationsForCartItemsModuleResult.totalSelectedOffersDiscount, 0) else UseSignalStateResult3,
 		purchasableItemsTotalOriginalPriceInRobux = UseSignalStateResult4,

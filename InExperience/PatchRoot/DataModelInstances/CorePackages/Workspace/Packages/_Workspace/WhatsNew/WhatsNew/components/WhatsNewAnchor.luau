@@ -1,8 +1,9 @@
 ﻿local WhatsNew = script:FindFirstAncestor("WhatsNew")
 local Parent = WhatsNew.Parent
+local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local GetWhatsNewStoreModule = require(WhatsNew.store.GetWhatsNewStore)
-local View = require(Parent.Foundation).View
+local View = FoundationModule.View
 
 local function _(Frame): boolean
 	local AbsoluteSize = Frame.AbsoluteSize

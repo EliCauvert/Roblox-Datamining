@@ -3,11 +3,10 @@ local DependenciesModule = require(Parent.dependencies)
 local Roact = DependenciesModule.Roact
 local WithLocalizationFunction = DependenciesModule.withLocalization
 local Images = DependenciesModule.UIBlox.App.ImageSet.Images
+local TextKeysModule = require(Parent.Common.TextKeys)
 local ContactsInformationModalModule = require(Parent.ContactsList.Components.ContactsInformationModal)
 local ContactsEmptyList = Roact.PureComponent:extend("ContactsEmptyList")
-ContactsEmptyList.defaultProps = {
-	errorTextKey = require(Parent.Common.TextKeys).EMPTY_STATE
-}
+ContactsEmptyList.defaultProps = { errorTextKey = TextKeysModule.EMPTY_STATE }
 
 function ContactsEmptyList.render(p1)
 	-- upvalues: WithLocalizationFunction (copy), Roact (copy), ContactsInformationModalModule (copy), Images (copy)

@@ -2,6 +2,7 @@
 local EnumScreensModule = require(AppChat.EnumScreens)
 local IsPlacementInExperienceFunction = require(AppChat.Contexts.ChatPlacementContext).isPlacementInExperience
 local FFlagAppChatOnConsoles = require(AppChat.Parent.SharedFlags).FFlagAppChatOnConsoles
+local FFlagAppChatHidePrivacySettingsWithoutWebViewModule = require(AppChat.Flags.FFlagAppChatHidePrivacySettingsWithoutWebView)
 local config = {
 	[EnumScreensModule.AddFriends] = true,
 	[EnumScreensModule.PrivacySettings] = true,
@@ -11,7 +12,7 @@ local config = {
 }
 local config1 = {
 	[EnumScreensModule.Groups] = true,
-	[EnumScreensModule.PrivacySettings] = require(AppChat.Flags.FFlagAppChatHidePrivacySettingsWithoutWebView)
+	[EnumScreensModule.PrivacySettings] = FFlagAppChatHidePrivacySettingsWithoutWebViewModule
 }
 
 return function(p1, p2, Enabled): boolean

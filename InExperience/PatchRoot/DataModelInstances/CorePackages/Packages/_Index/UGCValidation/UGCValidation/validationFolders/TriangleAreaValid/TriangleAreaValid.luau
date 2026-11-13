@@ -3,6 +3,12 @@ local Parent = script.Parent.Parent.Parent
 local _ = require(Parent.util.Types)
 local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local Categories = {
+	ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+	ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
+}
+local RequiredData = { ValidationEnumsModule.SharedDataMember.renderMeshesData }
+local ConditionalData = { ValidationEnumsModule.SharedDataMember.outerCagesData }
 
 local function _(p1, EditableMesh, MeshName)
 	-- upvalues: UGCValidationService (copy), ErrorSourceStringsModule (copy)
@@ -12,12 +18,9 @@ local function _(p1, EditableMesh, MeshName)
 end
 
 return {
-	categories = {
-		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
-	},
-	requiredData = { ValidationEnumsModule.SharedDataMember.renderMeshesData },
-	conditionalData = { ValidationEnumsModule.SharedDataMember.outerCagesData },
+	categories = Categories,
+	requiredData = RequiredData,
+	conditionalData = ConditionalData,
 	expectedFailures = {},
 	run = function(p1, p2)
 		-- upvalues: UGCValidationService (copy), ErrorSourceStringsModule (copy)

@@ -6,9 +6,11 @@ else
 	local Parent = AppChat.Parent
 	local CryoModule = require(Parent.Cryo)
 	local DataHydrationModule = require(Parent.DataHydration)
+	local ReactModule = require(Parent.React)
+	local RoactUtilsModule = require(Parent.RoactUtils)
 	local SetUserPresencesFunction = require(Parent.UserLib).Thunks.SetUserPresences
-	local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
-	local UseEffectFunction = require(Parent.React).useEffect
+	local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+	local UseEffectFunction = ReactModule.useEffect
 	local AppChatRealtimeExternal = require(AppChat.Logger):new("AppChat.RealtimeExternal")
 	local NetworkingPresenceModule = require(AppChat.Http.NetworkingPresence)
 	local ChatFriendshipDestroyedModule = require(AppChat.App.Thunks.ChatFriendshipDestroyed)

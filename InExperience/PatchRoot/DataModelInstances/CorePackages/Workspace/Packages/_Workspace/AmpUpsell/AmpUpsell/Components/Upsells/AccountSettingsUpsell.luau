@@ -14,8 +14,8 @@ local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 
 function AccountSettingsUpsell(p1)
 	-- upvalues: UseLocalizationFunction (copy), UseStyleFunction (copy), AnalyticsServiceModule (copy), ReactModule (copy), PartialPageModal (copy), SendButtonClickEventModule (copy), AppScreensModule (copy), ButtonType (copy), StyledTextLabel (copy)
-	local OnCloseModalFunction = p1.onCloseModal
 	local OnCloseModalFunction1 = p1.onCloseModal
+	local OnCloseModalFunction = p1.onCloseModal
 	local FeatureName = p1.featureName
 	local UseLocalizationResult = UseLocalizationFunction(p1.localizationStrings)
 	local UseStyleResult = UseStyleFunction()
@@ -38,9 +38,9 @@ function AccountSettingsUpsell(p1)
 				title = UseLocalizationResult.title,
 				screenSize = p1.screenSize,
 				onCloseClicked = function()
-					-- upvalues: SendButtonClickEventModule (upval), AnalyticsService (copy), AppScreensModule (upval), FeatureName (copy), OnCloseModalFunction (copy)
+					-- upvalues: SendButtonClickEventModule (upval), AnalyticsService (copy), AppScreensModule (upval), FeatureName (copy), OnCloseModalFunction1 (copy)
 					SendButtonClickEventModule(AnalyticsService, AppScreensModule.AccountSettingsUpsell, FeatureName, "CloseModal")
-					OnCloseModalFunction()
+					OnCloseModalFunction1()
 				end,
 				buttonStackProps = {
 					buttonHeight = 48,
@@ -51,9 +51,9 @@ function AccountSettingsUpsell(p1)
 							props = {
 								isDisabled = false,
 								onActivated = function()
-									-- upvalues: SendButtonClickEventModule (upval), AnalyticsService (copy), AppScreensModule (upval), FeatureName (copy), OnCloseModalFunction1 (copy)
+									-- upvalues: SendButtonClickEventModule (upval), AnalyticsService (copy), AppScreensModule (upval), FeatureName (copy), OnCloseModalFunction (copy)
 									SendButtonClickEventModule(AnalyticsService, AppScreensModule.AccountSettingsUpsell, FeatureName, "Cancelled")
-									OnCloseModalFunction1()
+									OnCloseModalFunction()
 								end,
 								text = UseLocalizationResult.buttonCancel
 							}

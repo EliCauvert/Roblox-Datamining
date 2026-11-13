@@ -1,16 +1,18 @@
 ﻿local AccountUpgrade = script:FindFirstAncestor("AccountUpgrade")
 local Parent = AccountUpgrade.Parent
 local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local AuthSignupModule = require(Parent.AuthSignup)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local UseRequireManualSelectionModule = require(AccountUpgrade.Hooks.useRequireManualSelection)
 local FFlagAccountUpgradeOAuthTelemetryModule = require(AccountUpgrade.Flags.FFlagAccountUpgradeOAuthTelemetry)
 local AccountUpgradeDialogModule = require(AccountUpgrade.SuccessModal.AccountUpgradeDialog)
 local AccountUpgradeDialogActionsModule = require(AccountUpgrade.SuccessModal.AccountUpgradeDialogActions)
 local BirthdayPicker = AuthSignupModule.Components.BirthdayPicker
 local UseValidatedBirthdayFunction = AuthSignupModule.Hooks.useValidatedBirthday
-local FIntSinglePageSignupMinimumAge = require(Parent.SharedFlags).FIntSinglePageSignupMinimumAge
-local ButtonVariant = require(Parent.Foundation).Enums.ButtonVariant
+local FIntSinglePageSignupMinimumAge = SharedFlagsModule.FIntSinglePageSignupMinimumAge
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
 
 local function BirthdayPickerDialog(p1)
 	-- upvalues: UseValidatedBirthdayFunction (copy), FIntSinglePageSignupMinimumAge (copy), UseRequireManualSelectionModule (copy), FFlagAccountUpgradeOAuthTelemetryModule (copy), ReactModule (copy), UseLocalizationFunction (copy), AccountUpgradeDialogModule (copy), BirthdayPicker (copy), AccountUpgradeDialogActionsModule (copy), ButtonVariant (copy)

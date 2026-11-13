@@ -1,7 +1,8 @@
 ﻿local Parent = script.Parent.Parent
 local SignalsExperimentalModule = require(Parent.SignalsExperimental)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local ActionHandlersModule = require(script.Parent.ActionHandlers)
-local FFlagSignalsRegistryOwnedFanout = require(Parent.SharedFlags).FFlagSignalsRegistryOwnedFanout
+local FFlagSignalsRegistryOwnedFanout = SharedFlagsModule.FFlagSignalsRegistryOwnedFanout
 
 return function(p1)
 	-- upvalues: FFlagSignalsRegistryOwnedFanout (copy), SignalsExperimentalModule (copy), ActionHandlersModule (copy)

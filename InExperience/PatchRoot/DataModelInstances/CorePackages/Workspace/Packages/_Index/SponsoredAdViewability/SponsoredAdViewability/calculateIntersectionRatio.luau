@@ -5,8 +5,9 @@
 		return 0
 	else
 		local NewVector = Vector + Vector1
+		local NewLargest = math.max(0, p1.min.Y - Vector.Y) + math.max(0, NewVector.Y - p1.max.Y)
 		local XDelta = Vector1.X - (math.max(0, p1.min.X - Vector.X) + math.max(0, NewVector.X - p1.max.X))
-		local YDelta = Vector1.Y - (math.max(0, p1.min.Y - Vector.Y) + math.max(0, NewVector.Y - p1.max.Y))
+		local YDelta = Vector1.Y - NewLargest
 		
 		return if XDelta <= 0 or YDelta <= 0 then 0 else XDelta * YDelta / ScaledX
 	end

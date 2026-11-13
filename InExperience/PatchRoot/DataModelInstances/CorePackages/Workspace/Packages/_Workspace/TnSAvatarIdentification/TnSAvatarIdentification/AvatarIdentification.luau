@@ -1,12 +1,15 @@
 ﻿local TnSAvatarIdentification = script:FindFirstAncestor("TnSAvatarIdentification")
+local GetFIntReportAnythingAvatarIdentificationCloseDiscardDistanceHundredthsModule = require(TnSAvatarIdentification.Flags.GetFIntReportAnythingAvatarIdentificationCloseDiscardDistanceHundredths)
+local GetFIntReportAnythingAvatarIdentificationDiscardFractionSkipThresholdPercentModule = require(TnSAvatarIdentification.Flags.GetFIntReportAnythingAvatarIdentificationDiscardFractionSkipThresholdPercent)
+local GetFIntReportAnythingAvatarIdentificationOffScreenDiscardDistancePercentModule = require(TnSAvatarIdentification.Flags.GetFIntReportAnythingAvatarIdentificationOffScreenDiscardDistancePercent)
 local Players = game:GetService("Players")
 local Parent = TnSAvatarIdentification.Parent
 local GetFFlagGetHumanoidDescriptionUpdatesV2EFunction = require(Parent.SharedFlags).GetFFlagGetHumanoidDescriptionUpdatesV2E
 local GetHumanoidDescriptionModule = require(Parent.GetHumanoidDescription)
 local IdentificationUtilsModule = require(script.Parent.IdentificationUtils)
-local v1 = require(TnSAvatarIdentification.Flags.GetFIntReportAnythingAvatarIdentificationCloseDiscardDistanceHundredths)() / 100
-local v2 = require(TnSAvatarIdentification.Flags.GetFIntReportAnythingAvatarIdentificationOffScreenDiscardDistancePercent)() / 100
-local v3 = require(TnSAvatarIdentification.Flags.GetFIntReportAnythingAvatarIdentificationDiscardFractionSkipThresholdPercent)() / 100
+local FIntReportAnythingAvatarIdentificationCloseDiscardDistanceHundredthsModuleRatio = GetFIntReportAnythingAvatarIdentificationCloseDiscardDistanceHundredthsModule() / 100
+local FIntReportAnythingAvatarIdentificationOffScreenDiscardDistancePercentModuleRatio = GetFIntReportAnythingAvatarIdentificationOffScreenDiscardDistancePercentModule() / 100
+local FIntReportAnythingAvatarIdentificationDiscardFractionSkipThresholdPercentModuleRatio = GetFIntReportAnythingAvatarIdentificationDiscardFractionSkipThresholdPercentModule() / 100
 
 function getBBCorners(CF, Vector)
 	local Buffer = table.create(8)
@@ -30,12 +33,12 @@ function getBBCorners(CF, Vector)
 	return Buffer
 end
 
-local v4 = v2 + 1
-local Negated = -v2
+local NewFIntReportAnythingAvatarIdentificationOffScreenDiscardDistancePercentModuleRatio = FIntReportAnythingAvatarIdentificationOffScreenDiscardDistancePercentModuleRatio + 1
+local Negated = -FIntReportAnythingAvatarIdentificationOffScreenDiscardDistancePercentModuleRatio
 
 local function _(Vector): boolean
-	-- upvalues: v4 (copy), Negated (copy)
-	return v4 < Vector.Y or (Vector.Y < Negated or (v4 < Vector.X or Vector.X < Negated))
+	-- upvalues: NewFIntReportAnythingAvatarIdentificationOffScreenDiscardDistancePercentModuleRatio (copy), Negated (copy)
+	return NewFIntReportAnythingAvatarIdentificationOffScreenDiscardDistancePercentModuleRatio < Vector.Y or (Vector.Y < Negated or (NewFIntReportAnythingAvatarIdentificationOffScreenDiscardDistancePercentModuleRatio < Vector.X or Vector.X < Negated))
 end
 
 local config = {
@@ -46,7 +49,7 @@ local config = {
 }
 
 function getCoveringPolygon(List, p1, p2)
-	-- upvalues: config (copy), IdentificationUtilsModule (copy), v1 (copy), v4 (copy), Negated (copy), v3 (copy)
+	-- upvalues: config (copy), IdentificationUtilsModule (copy), FIntReportAnythingAvatarIdentificationCloseDiscardDistanceHundredthsModuleRatio (copy), NewFIntReportAnythingAvatarIdentificationOffScreenDiscardDistancePercentModuleRatio (copy), Negated (copy), FIntReportAnythingAvatarIdentificationDiscardFractionSkipThresholdPercentModuleRatio (copy)
 	if #List == 0 then
 		return {}, config
 	end
@@ -67,9 +70,9 @@ function getCoveringPolygon(List, p1, p2)
 	for _, value2 in ipairs(List1) do
 		local WorldToFullViewportPointNormalizedResult, WorldToFullViewportPointNormalizedResult2, _ = IdentificationUtilsModule.worldToFullViewportPointNormalized(value2, p1, p2)
 		
-		if WorldToFullViewportPointNormalizedResult2 < v1 then
+		if WorldToFullViewportPointNormalizedResult2 < FIntReportAnythingAvatarIdentificationCloseDiscardDistanceHundredthsModuleRatio then
 			TooCloseDiscardCount += 1
-		elseif v4 < WorldToFullViewportPointNormalizedResult.Y or (WorldToFullViewportPointNormalizedResult.Y < Negated or (v4 < WorldToFullViewportPointNormalizedResult.X or WorldToFullViewportPointNormalizedResult.X < Negated)) then
+		elseif NewFIntReportAnythingAvatarIdentificationOffScreenDiscardDistancePercentModuleRatio < WorldToFullViewportPointNormalizedResult.Y or (WorldToFullViewportPointNormalizedResult.Y < Negated or (NewFIntReportAnythingAvatarIdentificationOffScreenDiscardDistancePercentModuleRatio < WorldToFullViewportPointNormalizedResult.X or WorldToFullViewportPointNormalizedResult.X < Negated)) then
 			OffScreenDiscardCount += 1
 		else
 			Vectors[#Vectors + 1] = WorldToFullViewportPointNormalizedResult
@@ -82,7 +85,7 @@ function getCoveringPolygon(List, p1, p2)
 		tooCloseDiscardCount = TooCloseDiscardCount
 	}
 	
-	if v3 < (TooCloseDiscardCount + OffScreenDiscardCount) / #List1 then
+	if FIntReportAnythingAvatarIdentificationDiscardFractionSkipThresholdPercentModuleRatio < (TooCloseDiscardCount + OffScreenDiscardCount) / #List1 then
 		config1.wasSkipped = true
 		
 		return {}, config1
@@ -198,26 +201,27 @@ function getConvexHull(Entry)
 end
 
 function projectVertices(List, p4, p5)
-	local v5 = 1e999
-	local v6 = -1e999
+	local v1 = 1e999
+	local v2 = -1e999
 	
 	for _, value in ipairs(List) do
 		local DotProduct = (value * p5):Dot(p4)
 		
-		if DotProduct < v5 then
-			v5 = DotProduct
+		if DotProduct < v1 then
+			v1 = DotProduct
 		end
-		if v6 < DotProduct then
-			v6 = DotProduct
+		if v2 < DotProduct then
+			v2 = DotProduct
 		end
 	end
-	return v5, v6
+	return v1, v2
 end
 
 function projectCircle(p6, p7, Direction)
 	local ScaledUnit = Direction.Unit * p7
+	local Vector = p6 - ScaledUnit
 	local DotProduct = (p6 + ScaledUnit):Dot(Direction)
-	local DotProduct1 = (p6 - ScaledUnit):Dot(Direction)
+	local DotProduct1 = Vector:Dot(Direction)
 	
 	if DotProduct1 < DotProduct then
 		local DotProduct2 = DotProduct
@@ -228,19 +232,19 @@ function projectCircle(p6, p7, Direction)
 end
 
 function getClosestPoint(Vector, List, p6): number
-	local v7 = -1
-	local v8 = 1e999
+	local v3 = -1
+	local v4 = 1e999
 	
 	for i, value in ipairs(List) do
 		local Vector1 = value * p6
 		local SquareRoot = math.sqrt(math.pow(Vector1.X - Vector.X, 2) + math.pow(Vector1.Y - Vector.Y, 2))
 		
-		if SquareRoot < v8 then
-			v8 = SquareRoot
-			v7 = i
+		if SquareRoot < v4 then
+			v4 = SquareRoot
+			v3 = i
 		end
 	end
-	return v7
+	return v3
 end
 
 function intersectCirclePolygon(p7, p8, List, p9): boolean
@@ -296,9 +300,9 @@ end
 return {
 	getAvatarsForRegion = function(List, p10, p11, p12, p13)
 		local Players = {}
-		local v9 = p13 < p12
-		local X = if v9 then p12 / p13 else p13 / p12
-		local _Vector2: Vector2 = if v9 then Vector2.new(X, 1) else Vector2.new(1, X)
+		local v5 = p13 < p12
+		local X = if v5 then p12 / p13 else p13 / p12
+		local _Vector2: Vector2 = if v5 then Vector2.new(X, 1) else Vector2.new(1, X)
 		for _, value in pairs(List) do
 			if intersectCircleBox(p10 * _Vector2, p11 * X, value.boundingBox.min * _Vector2, value.boundingBox.max * _Vector2, _Vector2) and #value.convexHull >= 3 and intersectCirclePolygon(p10 * _Vector2, p11 * X, value.convexHull, _Vector2) then
 				Players[value.player.UserId] = value.player
@@ -320,16 +324,16 @@ return {
 			end
 			if not IsXBelow then
 				local ConvexHullEntry = ConvexHull[#ConvexHull]
-				local v10 = true
-				local v11 = true
+				local v6 = true
+				local v7 = true
 				
 				for _, value1 in ipairs(ConvexHull) do
 					local CrossProduct: number = (value1 - ConvexHullEntry):Cross(Vector - ConvexHullEntry)
-					v11 = v11 and CrossProduct <= 0
-					v10 = v10 and CrossProduct >= 0
+					v7 = v7 and CrossProduct <= 0
+					v6 = v6 and CrossProduct >= 0
 					ConvexHullEntry = value1
 				end
-				if v10 or v11 then
+				if v6 or v7 then
 					Players[value.player.UserId] = value.player
 				end
 			end

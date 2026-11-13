@@ -1,17 +1,21 @@
 ﻿local Parent = script:FindFirstAncestor("BuildExperiencePlaytestLaunch").Parent
 local CentralOverlayModule = require(Parent.CentralOverlay)
+local FoundationModule = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
+local NavigationModule = require(Parent.Navigation)
 local ReactModule = require(Parent.React)
+local RoactUtilsModule = require(Parent.RoactUtils)
 local RobloxAppEnumsModule = require(Parent.RobloxAppEnums)
 local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
 local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
-local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local UseNavigationFunction = require(Parent.Navigation).useNavigation
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local UseNavigationFunction = NavigationModule.useNavigation
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local AppPage = RobloxAppEnumsModule.AppPage
 local CentralOverlayType = RobloxAppEnumsModule.CentralOverlayType
 local SetCentralOverlayFunction = CentralOverlayModule.Actions.SetCentralOverlay
 local CloseCentralOverlayFunction = CentralOverlayModule.Thunks.CloseCentralOverlay
-local DialogSize = require(Parent.Foundation).Enums.DialogSize
+local DialogSize = FoundationModule.Enums.DialogSize
 
 return function()
 	-- upvalues: UseDispatchFunction (copy), UseNavigationFunction (copy), UseAppPolicyFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), DialogSize (copy), CloseCentralOverlayFunction (copy), AppPage (copy), UrlBuilder (copy)

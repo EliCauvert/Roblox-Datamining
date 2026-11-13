@@ -2,13 +2,14 @@
 local Parent1 = Parent.Parent
 local ReactModule = require(Parent1.React)
 local DashModule = require(Parent1.Dash)
+local InlineElementTypeModule = require(Parent.Utils.InlineElementType)
 local _ = require(Parent.Components.InlineLayout.InlineLayoutElements.RenderableInlineElement)
 local HardBreakElementModule = require(Parent.Components.InlineLayout.InlineLayoutElements.HardBreakElement)
 local IsInlineElementModule = require(Parent.Utils.isInlineElement)
 local RenderInMeasuredFrameModule = require(Parent.Utils.renderInMeasuredFrame)
 local InlineSpanElementModule = {}
 InlineSpanElementModule.__index = InlineSpanElementModule
-InlineSpanElementModule.__type = require(Parent.Utils.InlineElementType)
+InlineSpanElementModule.__type = InlineElementTypeModule
 
 local function getSplitPoint(Elements, p1: number)
 	local Total = 0
@@ -117,13 +118,7 @@ function InlineSpanElementModule:split(p2, p3)
 	if SplitPoint < #self.Elements then
 		table.move(self.Elements, SplitPoint + 1, #self.Elements, #Elements + 1, Elements)
 	end
-	local NewInlineSpanElement = InlineSpanElementModule.new(self.WrapperElement, self.wrapperElementProps, List, self.startingIndex)
-	
-	if #Elements > 0 then
-		return NewInlineSpanElement, (InlineSpanElementModule.new(self.WrapperElement, self.wrapperElementProps, Elements, NewSplitPoint))
-	else
-		return NewInlineSpanElement, nil
-	end
+	return InlineSpanElementModule.new(self.WrapperElement, self.wrapperElementProps, List, self.startingIndex), if #Elements > 0 then InlineSpanElementModule.new(self.WrapperElement, self.wrapperElementProps, Elements, NewSplitPoint) else nil
 end
 
 function InlineSpanElementModule:trimStart()

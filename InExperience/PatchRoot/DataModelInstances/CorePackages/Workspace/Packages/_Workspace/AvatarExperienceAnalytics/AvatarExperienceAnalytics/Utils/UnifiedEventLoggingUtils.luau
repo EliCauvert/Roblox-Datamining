@@ -2,6 +2,7 @@
 local CoreGui = game:GetService("CoreGui")
 local DashModule = require(Parent.Dash)
 local UnifiedEventLogConstantsModule = require(script.Parent.Parent.UnifiedEventLogConstants)
+local FFlagAXMISEnableMultiShoppingUnifiedEvents = require(Parent.AvatarExperienceFlags).FFlagAXMISEnableMultiShoppingUnifiedEvents
 local FFlagCleanupTenFootUiPaddingAndAnalytics = require(Parent.SharedFlags).FFlagCleanupTenFootUiPaddingAndAnalytics
 
 local function getParentScrollingFrames(ScrollingFrame, List)
@@ -34,7 +35,7 @@ local UnifiedEventLoggingUtils = {
 	end
 }
 
-if require(Parent.AvatarExperienceFlags).FFlagAXMISEnableMultiShoppingUnifiedEvents then
+if FFlagAXMISEnableMultiShoppingUnifiedEvents then
 	function UnifiedEventLoggingUtils.getFieldsToSendFromInstanceAttributes(List)
 		-- upvalues: UnifiedEventLoggingUtils (copy)
 		local t = {}

@@ -7,6 +7,7 @@ local ChromeModule = require(CorePackages.Workspace.Packages.Chrome)
 local InExperienceShopModule = require(CorePackages.Workspace.Packages.InExperienceShop)
 local InExperienceSideSheetModule = require(CorePackages.Workspace.Packages.InExperienceSideSheet)
 local IsSideSheetEnabledModule = require(CorePackages.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
+local FFlagEnableSideSheetRobuxWidgetModule = require(Chrome.Flags.FFlagEnableSideSheetRobuxWidget)
 local FFlagHideHeaderForBuyRobuxInExperienceShop = require(CorePackages.Workspace.Packages.SharedFlags).FFlagHideHeaderForBuyRobuxInExperienceShop
 
 local function openShop()
@@ -32,7 +33,7 @@ local function RobuxWidgetIntegration(p1)
 	})
 end
 
-return (if require(Chrome.Flags.FFlagEnableSideSheetRobuxWidget) and IsSideSheetEnabledModule then ServiceModule:register({
+return (if FFlagEnableSideSheetRobuxWidgetModule and IsSideSheetEnabledModule then ServiceModule:register({
 	id = "RobuxWidget",
 	label = "Feature.Catalog.Label.BuyRobux",
 	activated = function() end,

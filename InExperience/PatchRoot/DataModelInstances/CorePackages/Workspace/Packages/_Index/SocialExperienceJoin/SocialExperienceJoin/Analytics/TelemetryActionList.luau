@@ -1,5 +1,6 @@
 ﻿local Parent = script:FindFirstAncestor("SocialExperienceJoin").Parent
 local SupportedTelemetryBackends = require(Parent.SocialLuaAnalytics).Analytics.Enums.SupportedTelemetryBackends
+local FFlagJoinabilityCTARefactor = require(Parent.SharedFlags).FFlagJoinabilityCTARefactor
 local EventNamesModule = require(script.Parent.EventNames)
 
 return {
@@ -17,7 +18,7 @@ return {
 					status = function(p1)
 						return p1
 					end,
-					followUser = if require(Parent.SharedFlags).FFlagJoinabilityCTARefactor then function(p1)
+					followUser = if FFlagJoinabilityCTARefactor then function(p1)
 						return p1
 					end else nil
 				}

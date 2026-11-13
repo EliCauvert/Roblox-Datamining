@@ -1,5 +1,6 @@
 ﻿local CorePackages = game:GetService("CorePackages")
 local ReactModule = require(CorePackages.Packages.React)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
 local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
 local PlayerListModule = require(CorePackages.Workspace.Packages.PlayerList)
 local LeaderboardStoreModule = require(CorePackages.Workspace.Packages.LeaderboardStore)
@@ -8,7 +9,7 @@ local UseLeaderboardStoreFunction = PlayerListModule.Hooks.useLeaderboardStore
 local TeamListViewModule = require(script.Parent.Parent.Parent.Components.PresentationCommon.TeamListView)
 local FFlagPlayerListUseFocusNavHook = PlayerListModule.Flags.FFlagPlayerListUseFocusNavHook
 
-return ReactModule.memo(require(CorePackages.Packages.RoactRodux).connect(function(p1)
+return ReactModule.memo(RoactRoduxModule.connect(function(p1)
 	return {
 		isSmallTouchDevice = p1.displayOptions.isSmallTouchDevice,
 		isDirectionalPreferred = p1.displayOptions.isTenFootInterface,
@@ -39,7 +40,7 @@ end)(function(p1)
 	local v2 = nil
 	
 	if FFlagPlayerListUseFocusNavHook then
-		v1, v13 = ReactModule.useMemo(function()
+		v1, v14 = ReactModule.useMemo(function()
 			-- upvalues: p1 (copy)
 			if p1.registerTeamInstance and p1.teamId then
 				local RegisterTeamInstanceResult = p1.registerTeamInstance(p1.teamId, p1.teamData.order)

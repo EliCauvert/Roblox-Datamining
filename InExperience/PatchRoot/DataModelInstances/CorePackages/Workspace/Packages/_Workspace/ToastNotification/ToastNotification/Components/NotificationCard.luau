@@ -19,6 +19,7 @@ return function(p1)
 	-- upvalues: UseNotificationCardDataModule (copy), ConstantsModule (copy), DefaultCardPadding (copy), UseStyleFunction (copy), UseNotificationCardStateModule (copy), ReactModule (copy), Interactable (copy), DefaultCardCornerRadius (copy), DefaultContentPadding (copy), NotificationContentFrameModule (copy), NotificationActionsFrameModule (copy)
 	local UseNotificationCardDataModuleResult = UseNotificationCardDataModule()
 	local CardSize = UseNotificationCardDataModuleResult.cardSize
+	local CardTransparency = if UseNotificationCardDataModuleResult.cardTransparency then UseNotificationCardDataModuleResult.cardTransparency else ConstantsModule.CardTransparency.Default
 	local CardPadding = if CardSize and CardSize.cardPadding then CardSize.cardPadding else DefaultCardPadding
 	local UseStyleResult = UseStyleFunction()
 	local HandleActionsFunction = UseNotificationCardDataModuleResult.handleActions
@@ -28,7 +29,7 @@ return function(p1)
 	return ReactModule.createElement(Interactable, {
 		AutoButtonColor = false,
 		BackgroundColor3 = UseStyleResult.Theme.BackgroundUIDefault.Color,
-		BackgroundTransparency = if UseNotificationCardDataModuleResult.cardTransparency then UseNotificationCardDataModuleResult.cardTransparency else ConstantsModule.CardTransparency.Default,
+		BackgroundTransparency = CardTransparency,
 		BorderSizePixel = 0,
 		AutomaticSize = Enum.AutomaticSize.Y,
 		onStateChanged = function() end,

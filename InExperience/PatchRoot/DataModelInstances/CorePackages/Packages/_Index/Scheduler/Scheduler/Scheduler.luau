@@ -13,6 +13,10 @@
 	local CancelHostTimeoutFunction = P0.cancelHostTimeout
 	local ShouldYieldToHost = P0.shouldYieldToHost
 	local GetCurrentTimeFunction = P0.getCurrentTime
+	local ForceFrameRate = P0.forceFrameRate
+	local RequestPaint = P0.requestPaint
+	local SetSchedulerFlags = P0.setSchedulerFlags
+	local GetSchedulerFlags = P0.getSchedulerFlags
 	local NoYieldModule = require(script.Parent.NoYield)
 	local Callback2 = nil
 	local Callback = nil
@@ -167,8 +171,8 @@
 		end
 	end
 	
-	local function v35(p7)
-		-- upvalues: Flag3 (ref), advanceTimers (copy), Flag2 (ref), t (copy), RequestHostCallbackFunction (copy), v5 (ref), t1 (copy), RequestHostTimeoutFunction (copy), v35 (ref)
+	local function v39(p7)
+		-- upvalues: Flag3 (ref), advanceTimers (copy), Flag2 (ref), t (copy), RequestHostCallbackFunction (copy), v5 (ref), t1 (copy), RequestHostTimeoutFunction (copy), v39 (ref)
 		Flag3 = false
 		advanceTimers(p7)
 		
@@ -182,7 +186,7 @@
 			local Entry = t1[1]
 			
 			if Entry ~= nil then
-				RequestHostTimeoutFunction(v35, Entry.startTime - p7)
+				RequestHostTimeoutFunction(v39, Entry.startTime - p7)
 			end
 		end
 	end
@@ -200,8 +204,8 @@
 		end
 		Flag1 = true
 		local PriorityLevel1 = PriorityLevel
-		local CallbackResult = nil
 		local Flag = nil
+		local CallbackResult = nil
 		
 		if ReactGlobalsModule.__YOLO__ then
 			Flag = true
@@ -231,7 +235,7 @@
 	end
 	
 	Callback3 = function(p7, p8): boolean
-		-- upvalues: ReactGlobalsModule (copy), ReactFeatureFlags (copy), advanceTimers (copy), v4 (ref), t (copy), EnableSchedulerDebugging (copy), Flag (ref), ShouldYieldToHost (copy), PriorityLevel (ref), MarkTaskRunFunction (copy), NoYieldModule (copy), GetCurrentTimeFunction (copy), MarkTaskYieldFunction (copy), EnableProfiling (copy), MarkTaskCompletedFunction (copy), Callback1 (ref), t1 (copy), RequestHostTimeoutFunction (copy), v35 (ref)
+		-- upvalues: ReactGlobalsModule (copy), ReactFeatureFlags (copy), advanceTimers (copy), v4 (ref), t (copy), EnableSchedulerDebugging (copy), Flag (ref), ShouldYieldToHost (copy), PriorityLevel (ref), MarkTaskRunFunction (copy), NoYieldModule (copy), GetCurrentTimeFunction (copy), MarkTaskYieldFunction (copy), EnableProfiling (copy), MarkTaskCompletedFunction (copy), Callback1 (ref), t1 (copy), RequestHostTimeoutFunction (copy), v39 (ref)
 		local CatchYieldingInDEV = ReactGlobalsModule.__DEV__ and ReactFeatureFlags.catchYieldingInDEV
 		local v7 = p8
 		advanceTimers(v7)
@@ -295,7 +299,7 @@
 		local Entry = t1[1]
 		
 		if Entry ~= nil then
-			RequestHostTimeoutFunction(v35, Entry.startTime - v7)
+			RequestHostTimeoutFunction(v39, Entry.startTime - v7)
 		end
 		return false
 	end
@@ -350,7 +354,7 @@
 			return Result
 		end,
 		unstable_scheduleCallback = function(PriorityLevel, Callback1, p9)
-			-- upvalues: GetCurrentTimeFunction (copy), ImmediatePriority (copy), UserBlockingPriority (copy), IdlePriority (copy), LowPriority (copy), Id (ref), EnableProfiling (copy), t1 (copy), Callback (ref), t (copy), Flag3 (ref), CancelHostTimeoutFunction (copy), RequestHostTimeoutFunction (copy), v35 (ref), MarkTaskStartFunction (copy), Flag2 (ref), Flag1 (ref), RequestHostCallbackFunction (copy), v5 (ref)
+			-- upvalues: GetCurrentTimeFunction (copy), ImmediatePriority (copy), UserBlockingPriority (copy), IdlePriority (copy), LowPriority (copy), Id (ref), EnableProfiling (copy), t1 (copy), Callback (ref), t (copy), Flag3 (ref), CancelHostTimeoutFunction (copy), RequestHostTimeoutFunction (copy), v39 (ref), MarkTaskStartFunction (copy), Flag2 (ref), Flag1 (ref), RequestHostCallbackFunction (copy), v5 (ref)
 			local CurrentTime: number = GetCurrentTimeFunction()
 			local NewCurrentTime = nil
 			
@@ -386,7 +390,7 @@
 					else
 						Flag3 = true
 					end
-					RequestHostTimeoutFunction(v35, NewCurrentTime - CurrentTime)
+					RequestHostTimeoutFunction(v39, NewCurrentTime - CurrentTime)
 					
 					return config
 				end
@@ -445,7 +449,7 @@
 			return PriorityLevel
 		end,
 		unstable_shouldYield = ShouldYieldToHost,
-		unstable_requestPaint = P0.requestPaint,
+		unstable_requestPaint = RequestPaint,
 		unstable_continueExecution = function()
 			-- upvalues: Flag (ref), Flag2 (ref), Flag1 (ref), RequestHostCallbackFunction (copy), v5 (ref)
 			Flag = false
@@ -464,9 +468,9 @@
 			return t[1]
 		end,
 		unstable_now = GetCurrentTimeFunction,
-		unstable_forceFrameRate = P0.forceFrameRate,
-		unstable_setSchedulerFlags = P0.setSchedulerFlags,
-		unstable_getSchedulerFlags = P0.getSchedulerFlags,
+		unstable_forceFrameRate = ForceFrameRate,
+		unstable_setSchedulerFlags = SetSchedulerFlags,
+		unstable_getSchedulerFlags = GetSchedulerFlags,
 		unstable_Profiling = if EnableProfiling then {
 			startLoggingProfilingEvents = StartLoggingProfilingEvents,
 			stopLoggingProfilingEvents = StopLoggingProfilingEvents

@@ -3,6 +3,7 @@ local Parent = AppChat.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local _ = require(Parent.MomentsTypes)
+local RoactUtilsModule = require(Parent.RoactUtils)
 local UserProfilesModule = require(Parent.UserProfiles)
 local _ = require(script.Parent.MomentShareCardView)
 local MomentDetailsStatusModule = require(script.Parent.MomentDetailsStatus)
@@ -20,7 +21,7 @@ local FFlagAppChatUseUserProfileHydrationModule = require(AppChat.Flags.FFlagApp
 local UseProfileNameModule = require(AppChat.Hooks.useProfileName)
 local DataStatus = require(Parent.DataHydration).DataStatus
 local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
-local UseAssetFetchStatusFunction = require(Parent.RoactUtils).Hooks.useAssetFetchStatus
+local UseAssetFetchStatusFunction = RoactUtilsModule.Hooks.useAssetFetchStatus
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
 return function(Frame)
@@ -73,6 +74,7 @@ return function(Frame)
 	local UseMomentShareCardVideoFrameModuleResult = UseMomentShareCardVideoFrameModule(if UseMemoResult == nil or UseMemoResult.captureType ~= Enum.CaptureType.Video then nil else UseMemoResult.content)
 	local UseMomentShareCardVideoFrameModuleResult1 = if UseMemoResult == nil then nil elseif IsCaptureTypeMatch then UseMomentShareCardVideoFrameModuleResult else UseMemoResult.posterContent
 	local IsUseAssetFetchStatusResultMatch = UseAssetFetchStatusFunction(if IsCaptureTypeMatch or UseMomentShareCardVideoFrameModuleResult1 == nil then nil else UseMomentShareCardVideoFrameModuleResult1.Uri) == Enum.AssetFetchStatus.Success
+	local HasUseMomentShareCardVideoFrameModuleResult: boolean = if IsCaptureTypeMatch then UseMomentShareCardVideoFrameModuleResult ~= nil else IsUseAssetFetchStatusResultMatch
 	local Size500 = UseTokensResult.Size.Size_500
 	local OpenMomentsDeepLinkFunction = Frame.openMomentsDeepLink
 	
@@ -83,7 +85,7 @@ return function(Frame)
 		isVideo = IsCaptureTypeMatch,
 		playIconStyle = UseTokensResult.Color.Content.Emphasis,
 		posterContent = UseMomentShareCardVideoFrameModuleResult1,
-		isPosterLoaded = if IsCaptureTypeMatch then UseMomentShareCardVideoFrameModuleResult ~= nil else IsUseAssetFetchStatusResultMatch,
+		isPosterLoaded = HasUseMomentShareCardVideoFrameModuleResult,
 		cornerRadii = ReactModule.useMemo(function()
 			-- upvalues: GetMomentShareCardCornerRadiiModule (upval), Frame (copy), Size500 (copy)
 			return GetMomentShareCardCornerRadiiModule(Frame.isStartOfGroup, Frame.isIncoming, Size500)

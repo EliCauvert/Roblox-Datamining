@@ -10,6 +10,7 @@ local CrossExperience = DependenciesModule.CrossExperience
 local Communication = CrossExperience.Communication
 local SharedFlags = DependenciesModule.SharedFlags
 local LuauPolyfill = DependenciesModule.LuauPolyfill
+local ConstantsModule = require(CrossExperienceVoice.Common.Constants)
 local CrossExperienceVoiceAnalyticsModule = require(CrossExperienceVoice.CrossExperienceVoiceAnalytics)
 local LoggerModule = require(CrossExperienceVoice.Logger)
 local FlagsModule = require(CrossExperienceVoice.Flags)
@@ -32,9 +33,9 @@ local PersistenceMiddleware = CrossExperience.Middlewares.createPersistenceMiddl
 local SetTimeoutFunction = LuauPolyfill.setTimeout
 local ClearTimeoutFunction = LuauPolyfill.clearTimeout
 local FFlagFixCrossExperienceVoiceExecutePrint = SharedFlags.FFlagFixCrossExperienceVoiceExecutePrint
-local CrossExpVoicePlaceId = game:DefineFastString("CrossExpVoicePlaceId", (tostring(require(CrossExperienceVoice.Common.Constants).DEFAULT_EXPERIENCE_PLACE_ID)))
+local CrossExpVoicePlaceId = game:DefineFastString("CrossExpVoicePlaceId", (tostring(ConstantsModule.DEFAULT_EXPERIENCE_PLACE_ID)))
 
-local function v26() end
+local function v27() end
 
 local function _()
 	-- upvalues: CrossExperience (copy)
@@ -215,14 +216,14 @@ end
 
 function CrossExperienceVoiceManager:getPartyVoiceDebugStats()
 	-- upvalues: FlagsModule (copy), Promise (copy), Communication (copy), CrossExperience (copy)
-	return if FlagsModule.FFlagVoiceDebugConsoleV2 then Promise.new(function(Callback, Callback1)
+	return if FlagsModule.FFlagVoiceDebugConsoleV2 then Promise.new(function(Callback1, Callback)
 		-- upvalues: Communication (upval), CrossExperience (upval)
 		Communication.execute(CrossExperience.Constants.COMMUNICATIONS.EXECUTE_GET_PARTY_VOICE_DEBUG_STATS, {}, function(p1)
-			-- upvalues: Callback (copy)
-			Callback(p1)
-		end, function()
 			-- upvalues: Callback1 (copy)
-			Callback1()
+			Callback1(p1)
+		end, function()
+			-- upvalues: Callback (copy)
+			Callback()
 		end)
 	end) else Promise.resolve({})
 end
@@ -262,9 +263,9 @@ function CrossExperienceVoiceManager:performJoinFeasibilityCheck()
 end
 
 function CrossExperienceVoiceManager:ignoreMemoryWarning()
-	-- upvalues: GetFFlagEnableCrossExpVoiceMemoryCheckFunction (copy), Communication (copy), CrossExperience (copy), v26 (copy)
+	-- upvalues: GetFFlagEnableCrossExpVoiceMemoryCheckFunction (copy), Communication (copy), CrossExperience (copy), v27 (copy)
 	if GetFFlagEnableCrossExpVoiceMemoryCheckFunction() then
-		Communication.execute(CrossExperience.Constants.COMMUNICATIONS.EXECUTE_PARTY_VOICE_IGNORE_LOW_MEMORY, {}, v26, v26)
+		Communication.execute(CrossExperience.Constants.COMMUNICATIONS.EXECUTE_PARTY_VOICE_IGNORE_LOW_MEMORY, {}, v27, v27)
 		
 		return
 	end
@@ -385,13 +386,13 @@ function CrossExperienceVoiceManager:join(p1)
 end
 
 function CrossExperienceVoiceManager:changeInputDevice(DeviceName, DeviceGuid)
-	-- upvalues: Communication (copy), CrossExperience (copy), v26 (copy)
-	Communication.execute(CrossExperience.Constants.COMMUNICATIONS.EXECUTE_CHANGE_PARTY_VOICE_INPUT_DEVICE, { deviceName = DeviceName, deviceGuid = DeviceGuid }, v26, v26)
+	-- upvalues: Communication (copy), CrossExperience (copy), v27 (copy)
+	Communication.execute(CrossExperience.Constants.COMMUNICATIONS.EXECUTE_CHANGE_PARTY_VOICE_INPUT_DEVICE, { deviceName = DeviceName, deviceGuid = DeviceGuid }, v27, v27)
 end
 
 function CrossExperienceVoiceManager:changeOutputDevice(DeviceName, DeviceGuid)
-	-- upvalues: Communication (copy), CrossExperience (copy), v26 (copy)
-	Communication.execute(CrossExperience.Constants.COMMUNICATIONS.EXECUTE_CHANGE_PARTY_VOICE_OUTPUT_DEVICE, { deviceName = DeviceName, deviceGuid = DeviceGuid }, v26, v26)
+	-- upvalues: Communication (copy), CrossExperience (copy), v27 (copy)
+	Communication.execute(CrossExperience.Constants.COMMUNICATIONS.EXECUTE_CHANGE_PARTY_VOICE_OUTPUT_DEVICE, { deviceName = DeviceName, deviceGuid = DeviceGuid }, v27, v27)
 end
 
 function CrossExperienceVoiceManager:muteVoiceParticipant(UserId)

@@ -1,7 +1,8 @@
 ﻿local Parent = script:FindFirstAncestor("InGameAssetReporting").Parent
 local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
 local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
-local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 
 return function(p1)
 	-- upvalues: UseStyleFunction (copy), ReactModule (copy), NormalizeFontFaceFunction (copy)

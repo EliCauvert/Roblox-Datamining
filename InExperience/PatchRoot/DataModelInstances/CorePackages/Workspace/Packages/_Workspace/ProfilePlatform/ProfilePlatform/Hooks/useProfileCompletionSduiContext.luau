@@ -1,10 +1,11 @@
 ﻿local Parent = script:FindFirstAncestor("ProfilePlatform").Parent
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local CalculateItemWidthFunction = require(Parent.CollectionViews).calculateItemWidth
 local AppPage = require(Parent.RobloxAppEnums).AppPage
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
-local GetSduiServiceDependenciesStoreFunction = require(Parent.SduiCoreSystem).getSduiServiceDependenciesStore
+local GetSduiServiceDependenciesStoreFunction = SduiCoreSystemModule.getSduiServiceDependenciesStore
 
 local function _(p1, p2, p3: number, p4, p5): number
 	local v1 = p5 - p4

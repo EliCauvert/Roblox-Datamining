@@ -1,9 +1,10 @@
 ﻿local CorePackages = game:GetService("CorePackages")
+local RoduxModule = require(CorePackages.Packages.Rodux)
 local CryoModule = require(CorePackages.Packages.Cryo)
 local Parent = script.Parent.Parent
 local CollectibleInstanceModule = require(Parent.Models.CollectibleInstance)
 
-return require(CorePackages.Packages.Rodux).createReducer({}, {
+return RoduxModule.createReducer({}, {
 	[require(Parent.Actions.SetCollectibleResellableInstances).name] = function(p1, p2)
 		-- upvalues: CollectibleInstanceModule (copy), CryoModule (copy)
 		local CollectibleItemId = p2.collectibleItemId

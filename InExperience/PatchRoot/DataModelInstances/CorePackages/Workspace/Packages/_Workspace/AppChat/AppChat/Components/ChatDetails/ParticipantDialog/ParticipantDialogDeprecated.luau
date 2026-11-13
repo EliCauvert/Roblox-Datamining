@@ -1,6 +1,7 @@
 ﻿local AppChat = script:FindFirstAncestor("AppChat")
 local Parent = AppChat.Parent
 local _ = require(AppChat.types)
+local UIBloxModule = require(Parent.UIBlox)
 local LoggerModule = require(script.Parent.Logger)
 local CryoModule = require(Parent.Cryo)
 local ReactModule = require(Parent.React)
@@ -8,7 +9,7 @@ local MemoFunction = ReactModule.memo
 local UseTelemetryModule = require(AppChat.Telemetry.useTelemetry)
 local ChatDetailsTelemetryEventsModule = require(AppChat.Components.ChatDetails.ChatDetailsTelemetryEvents)
 local ChatDialogTelemetryLayerModule = require(AppChat.Telemetry.Layers.ChatDialogTelemetryLayer)
-local ModalBottomSheet = require(Parent.UIBlox).ModalBottomSheet
+local ModalBottomSheet = UIBloxModule.ModalBottomSheet
 local config = {
 	conversationId = nil,
 	participantId = nil,

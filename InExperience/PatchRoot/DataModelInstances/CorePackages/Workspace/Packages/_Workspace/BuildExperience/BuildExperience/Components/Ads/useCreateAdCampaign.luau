@@ -1,6 +1,7 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
 local HttpService = game:GetService("HttpService")
+local HttpClientModule = require(Parent.HttpClient)
 local ReactModule = require(Parent.React)
 local _ = require(Parent.DataHydration.AdCampaignEligibility)
 local _ = require(Parent.DataHydration.AdCampaigns)
@@ -11,7 +12,7 @@ local FFlagBuildAgentAdCampaignToolCallStatusFallbackModule = require(BuildExper
 local UseRefreshAdsDataModule = require(script.Parent.useRefreshAdsData)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 local FFlagEnablePaidAdsModule = require(BuildExperience.Flags.FFlagEnablePaidAds)
-local AsPromiseFunction = require(Parent.HttpClient).asPromise
+local AsPromiseFunction = HttpClientModule.asPromise
 local ClassifyAdCampaignFailureFunction = CreatorAgentChatModule.classifyAdCampaignFailure
 
 return function(UniverseId, ConversationId, p1)
@@ -77,9 +78,10 @@ return function(UniverseId, ConversationId, p1)
 				UseRefResult1.current = Current
 			end
 			local Current1 = if FFlagEnablePaidAdsModule then UseRefResult1.current else nil
+			local IsNotPaymentTypeMatch: boolean = Current1 ~= nil and (Current1.paymentType ~= Current.paymentType or Current1.campaignOption ~= Current.campaignOption)
 			local Current2 = FFlagEnablePaidAdsModule and UseRefResult2.current
 			
-			if Current1 ~= nil and (Current1.paymentType ~= Current.paymentType or Current1.campaignOption ~= Current.campaignOption) and not Current2 then
+			if IsNotPaymentTypeMatch and not Current2 then
 				UseRefResult.current = nil
 			end
 			if UseRefResult.current == nil then

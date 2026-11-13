@@ -3,6 +3,7 @@ local Parent = BuildExperience.Parent
 local NavigationModule = require(Parent.Navigation)
 local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
 local UseOpenWebViewFunction = require(Parent.WebViewUtils).useOpenWebView
 local _ = require(Parent.DataHydration.CreatorAgentChat)
 local GoalLockedActionIdModule = require(BuildExperience.Analytics.Goals.GoalLockedActionId)
@@ -23,7 +24,7 @@ local ExperienceShareOverlaysModule = require(BuildExperience.Components.ShareAu
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local BuildNavigationParamsModule = require(BuildExperience.utils.BuildNavigationParams)
 local UseExperienceShareFlowModule = require(BuildExperience.utils.useExperienceShareFlow)
-local DeveloperProducts = require(Parent.UrlBuilder).UrlBuilder.fromString("create:dashboard/creations/experiences/{universeId}/monetization/developer-products")
+local DeveloperProducts = UrlBuilder.fromString("create:dashboard/creations/experiences/{universeId}/monetization/developer-products")
 
 local function useCreateAdAction(p1)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseOpenWebViewFunction (copy), UseGetAdCampaignEligibilityModule (copy), FFlagEnablePaidAdsModule (copy), UseCreateAdCampaignModule (copy), ReactModule (copy), AdCampaignEligibilityUtilsModule (copy), UseGetAdCampaignsModule (copy), AdCampaignScheduleUtilsModule (copy), GetAdsManagerUrlFunction (copy), CreateAdCampaignSheetContainerModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), AdCampaignCreatedToastModule (copy)

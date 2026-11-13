@@ -2,6 +2,7 @@
 local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
 local DeveloperSubscriptionModule = require(Parent.DataHydration.DeveloperSubscription)
 local PromiseModule = require(Parent.Promise)
+local FFlagBuildExperienceManageMonetizationTool = require(Parent.SharedFlags).FFlagBuildExperienceManageMonetizationTool
 local _ = require(script.Parent.chatTypes)
 local _ = require(script.Parent.localToolOverlay)
 local CreateManageSubscriptionStoreModule = require(script.Parent.createManageSubscriptionStore)
@@ -36,7 +37,7 @@ end
 local config1 = {
 	itemKind = "subscription",
 	resultKey = "subscription",
-	tool = if require(Parent.SharedFlags).FFlagBuildExperienceManageMonetizationTool then CreatorAgentChatModule.StudioManageMonetizationTool.forKind("subscription") else CreatorAgentChatModule.StudioManageSubscriptionTool,
+	tool = if FFlagBuildExperienceManageMonetizationTool then CreatorAgentChatModule.StudioManageMonetizationTool.forKind("subscription") else CreatorAgentChatModule.StudioManageSubscriptionTool,
 	list = function(p1)
 		-- upvalues: v1 (ref), CreateManageSubscriptionStoreModule (copy), PromiseModule (copy)
 		if v1 == nil then

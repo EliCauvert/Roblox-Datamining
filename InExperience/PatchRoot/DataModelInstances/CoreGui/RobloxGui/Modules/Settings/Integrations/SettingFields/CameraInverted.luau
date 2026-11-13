@@ -2,6 +2,7 @@
 local SettingsServiceModule = require(game:GetService("CorePackages").Workspace.Packages.SettingsService)
 local ValueChangedSignal = SettingsServiceModule.ValueChangedSignal
 local AvailabilitySignal = SettingsServiceModule.AvailabilitySignal
+local SettingEnum = SettingsServiceModule.SettingEnum
 local LAYOUTORDER = require(script:FindFirstAncestor("Settings").Integrations.Constants).GAMESETTINGS.LAYOUT_ORDER
 
 local function _()
@@ -36,7 +37,7 @@ local CameraInvertedModule = {
 	id = "camera-inverted",
 	label = "CoreScripts.InGameMenu.GameSettings.InvertedCamera",
 	alreadyLocalized = false,
-	field_type = SettingsServiceModule.SettingEnum.Toggle
+	field_type = SettingEnum.Toggle
 }
 local NewValueChangedSignal = ValueChangedSignal.new(GameSettings.CameraYInverted)
 NewValueChangedSignal:connect(function(CameraYInverted)

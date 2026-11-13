@@ -1,4 +1,4 @@
-﻿local ChatMainModule = {
+﻿local config = {
 	Visible = nil,
 	IsCoreGuiEnabled = nil,
 	TopbarEnabled = nil,
@@ -62,7 +62,7 @@ if Result1_1 then
 	end
 end
 local Count = 10
-local config = {
+local config1 = {
 	OnNewMessage = "RemoteEvent",
 	OnMessageDoneFiltering = "RemoteEvent",
 	OnNewSystemMessage = "RemoteEvent",
@@ -78,9 +78,9 @@ local t = {}
 local BindableEvent = Instance.new("BindableEvent")
 
 function TryRemoveChildWithVerifyingIsCorrectType(Object)
-	-- upvalues: config (copy), t (copy), Count (ref)
-	if config[Object.Name] and Object:IsA(config[Object.Name]) then
-		config[Object.Name] = nil
+	-- upvalues: config1 (copy), t (copy), Count (ref)
+	if config1[Object.Name] and Object:IsA(config1[Object.Name]) then
+		config1[Object.Name] = nil
 		t[Object.Name] = Object
 		Count -= 1
 	end
@@ -291,8 +291,8 @@ function bubbleChatOnly()
 end
 
 function UpdateMousePosition(p1)
-	-- upvalues: ChatMainModule (copy), ChatSettingsModule (copy), NewResult (copy), v3 (ref)
-	if not ChatMainModule.Visible or not ChatMainModule.IsCoreGuiEnabled or not ChatMainModule.TopbarEnabled and not ChatSettingsModule.ChatOnWithTopBarOff then return end
+	-- upvalues: config (copy), ChatSettingsModule (copy), NewResult (copy), v3 (ref)
+	if not config.Visible or not config.IsCoreGuiEnabled or not config.TopbarEnabled and not ChatSettingsModule.ChatOnWithTopBarOff then return end
 	if bubbleChatOnly() then return end
 	local AbsolutePosition = NewResult.GuiObject.AbsolutePosition
 	local CheckIfPointIsInSquareResult = CheckIfPointIsInSquare(p1, AbsolutePosition, AbsolutePosition + NewResult.GuiObject.AbsoluteSize)
@@ -325,7 +325,7 @@ UserInputService.Changed:connect(function(Property)
 end)
 UpdateFadingForMouseState(true)
 UpdateFadingForMouseState(false)
-local config1 = {
+local config2 = {
 	Signal = function()
 		local BindableEvent = Instance.new("BindableEvent")
 		local List = nil
@@ -360,12 +360,12 @@ local config1 = {
 }
 
 function SetVisibility(Visible)
-	-- upvalues: NewResult (copy), ChatMainModule (copy)
+	-- upvalues: NewResult (copy), config (copy)
 	NewResult:SetVisible(Visible)
-	ChatMainModule.VisibilityStateChanged:fire(Visible)
-	ChatMainModule.Visible = Visible
+	config.VisibilityStateChanged:fire(Visible)
+	config.Visible = Visible
 	
-	if ChatMainModule.IsCoreGuiEnabled then
+	if config.IsCoreGuiEnabled then
 		if Visible then
 			InstantFadeIn()
 			
@@ -376,88 +376,88 @@ function SetVisibility(Visible)
 end
 
 local Callback = nil
-ChatMainModule.TopbarEnabled = true
-ChatMainModule.MessageCount = 0
-ChatMainModule.Visible = true
-ChatMainModule.IsCoreGuiEnabled = true
+config.TopbarEnabled = true
+config.MessageCount = 0
+config.Visible = true
+config.IsCoreGuiEnabled = true
 
-function ChatMainModule:ToggleVisibility()
+function config:ToggleVisibility()
 	-- upvalues: NewResult (copy)
 	SetVisibility(not NewResult:GetVisible())
 end
 
-function ChatMainModule:SetVisible(Visible)
+function config:SetVisible(Visible)
 	-- upvalues: NewResult (copy)
 	if NewResult:GetVisible() ~= Visible then
 		SetVisibility(Visible)
 	end
 end
 
-function ChatMainModule:FocusChatBar()
+function config:FocusChatBar()
 	-- upvalues: NewResult3 (copy)
 	NewResult3:CaptureFocus()
 end
 
-function ChatMainModule:EnterWhisperState(p1)
+function config:EnterWhisperState(p1)
 	-- upvalues: NewResult3 (copy)
 	NewResult3:EnterWhisperState(p1)
 end
 
-function ChatMainModule:GetVisibility()
+function config:GetVisibility()
 	-- upvalues: NewResult (copy)
 	return NewResult:GetVisible()
 end
 
-function ChatMainModule.GetMessageCount(p1)
+function config.GetMessageCount(p1)
 	return p1.MessageCount
 end
 
-function ChatMainModule.TopbarEnabledChanged(p1, TopbarEnabled)
+function config.TopbarEnabledChanged(p1, TopbarEnabled)
 	p1.TopbarEnabled = TopbarEnabled
 	p1.CoreGuiEnabled:fire(game:GetService("StarterGui"):GetCoreGuiEnabled(Enum.CoreGuiType.Chat))
 end
 
-function ChatMainModule:IsFocused(_)
+function config:IsFocused(_)
 	-- upvalues: NewResult3 (copy)
 	return NewResult3:IsFocused()
 end
 
-ChatMainModule.ChatBarFocusChanged = config1.Signal()
-ChatMainModule.VisibilityStateChanged = config1.Signal()
-ChatMainModule.MessagesChanged = config1.Signal()
-ChatMainModule.MessagePosted = config1.Signal()
-ChatMainModule.CoreGuiEnabled = config1.Signal()
-ChatMainModule.ChatMakeSystemMessageEvent = config1.Signal()
-ChatMainModule.ChatWindowPositionEvent = config1.Signal()
-ChatMainModule.ChatWindowSizeEvent = config1.Signal()
-ChatMainModule.ChatBarDisabledEvent = config1.Signal()
+config.ChatBarFocusChanged = config2.Signal()
+config.VisibilityStateChanged = config2.Signal()
+config.MessagesChanged = config2.Signal()
+config.MessagePosted = config2.Signal()
+config.CoreGuiEnabled = config2.Signal()
+config.ChatMakeSystemMessageEvent = config2.Signal()
+config.ChatWindowPositionEvent = config2.Signal()
+config.ChatWindowSizeEvent = config2.Signal()
+config.ChatBarDisabledEvent = config2.Signal()
 
-function ChatMainModule:fChatWindowPosition()
+function config:fChatWindowPosition()
 	-- upvalues: NewResult (copy)
 	return NewResult.GuiObject.Position
 end
 
-function ChatMainModule:fChatWindowSize()
+function config:fChatWindowSize()
 	-- upvalues: NewResult (copy)
 	return NewResult.GuiObject.Size
 end
 
-function ChatMainModule:fChatBarDisabled(): boolean
+function config:fChatBarDisabled(): boolean
 	-- upvalues: NewResult3 (copy)
 	return not NewResult3:GetEnabled()
 end
 
-function ChatMainModule:SpecialKeyPressed(SpecialKey, _)
+function config:SpecialKeyPressed(SpecialKey, _)
 	-- upvalues: IsStudio (ref), Callback (ref)
 	if SpecialKey == Enum.SpecialKey.ChatHotkey and IsStudio then
 		Callback()
 	end
 end
 
-ChatMainModule.CoreGuiEnabled:connect(function(IsCoreGuiEnabled)
-	-- upvalues: ChatMainModule (copy), ChatSettingsModule (copy), NewResult (copy), NewResult3 (copy)
-	ChatMainModule.IsCoreGuiEnabled = IsCoreGuiEnabled
-	local TopbarEnabled = IsCoreGuiEnabled and (ChatMainModule.TopbarEnabled or ChatSettingsModule.ChatOnWithTopBarOff)
+config.CoreGuiEnabled:connect(function(IsCoreGuiEnabled)
+	-- upvalues: config (copy), ChatSettingsModule (copy), NewResult (copy), NewResult3 (copy)
+	config.IsCoreGuiEnabled = IsCoreGuiEnabled
+	local TopbarEnabled = IsCoreGuiEnabled and (config.TopbarEnabled or ChatSettingsModule.ChatOnWithTopBarOff)
 	NewResult:SetCoreGuiEnabled(TopbarEnabled)
 	
 	if TopbarEnabled then
@@ -478,8 +478,8 @@ function trimTrailingSpaces(Text: string): string
 	return Text:sub(1, CountText)
 end
 
-ChatMainModule.ChatMakeSystemMessageEvent:connect(function(ExtraData)
-	-- upvalues: Flag (ref), ChatSettingsModule (copy), NewResult (copy), ChatConstantsModule (copy), NewResult1 (copy), ChatMainModule (copy)
+config.ChatMakeSystemMessageEvent:connect(function(ExtraData)
+	-- upvalues: Flag (ref), ChatSettingsModule (copy), NewResult (copy), ChatConstantsModule (copy), NewResult1 (copy), config (copy)
 	if ExtraData.Text and type(ExtraData.Text) == "string" then
 		while not Flag do
 			wait()
@@ -502,12 +502,12 @@ ChatMainModule.ChatMakeSystemMessageEvent:connect(function(ExtraData)
 				ExtraData = ExtraData
 			})
 			NewResult1:UpdateMessagePostedInChannel(GeneralChannelName)
-			ChatMainModule.MessageCount += 1
-			ChatMainModule.MessagesChanged:fire(ChatMainModule.MessageCount)
+			config.MessageCount += 1
+			config.MessagesChanged:fire(config.MessageCount)
 		end
 	end
 end)
-ChatMainModule.ChatBarDisabledEvent:connect(function(p1)
+config.ChatBarDisabledEvent:connect(function(p1)
 	-- upvalues: IsStudio (ref), NewResult3 (copy)
 	if IsStudio then
 		NewResult3:SetEnabled(not p1)
@@ -517,30 +517,30 @@ ChatMainModule.ChatBarDisabledEvent:connect(function(p1)
 		end
 	end
 end)
-ChatMainModule.ChatWindowSizeEvent:connect(function(Size)
+config.ChatWindowSizeEvent:connect(function(Size)
 	-- upvalues: NewResult (copy)
 	NewResult.GuiObject.Size = Size
 end)
-ChatMainModule.ChatWindowPositionEvent:connect(function(Position)
+config.ChatWindowPositionEvent:connect(function(Position)
 	-- upvalues: NewResult (copy)
 	NewResult.GuiObject.Position = Position
 end)
 
 Callback = function()
-	-- upvalues: NewResult (copy), NewResult3 (copy), ChatMainModule (copy)
+	-- upvalues: NewResult (copy), NewResult3 (copy), config (copy)
 	if not NewResult:GetCoreGuiEnabled() then return end
 	if not NewResult3:GetEnabled() then return end
 	if not NewResult3:IsFocused() and NewResult3:GetVisible() then
-		ChatMainModule:SetVisible(true)
+		config:SetVisible(true)
 		InstantFadeIn()
 		NewResult3:CaptureFocus()
-		ChatMainModule.ChatBarFocusChanged:fire(true)
+		config.ChatBarFocusChanged:fire(true)
 	end
 end
 
 BindableEvent3.Event:connect(function(p1)
-	-- upvalues: ChatMainModule (copy)
-	ChatMainModule.ChatBarFocusChanged:fire(p1)
+	-- upvalues: config (copy)
+	config.ChatBarFocusChanged:fire(p1)
 end)
 
 function DoSwitchCurrentChannel(p1)
@@ -584,7 +584,7 @@ function chatBarFocused()
 end
 
 function chatBarFocusLost(p1, _)
-	-- upvalues: BindableEvent3 (copy), NewResult3 (copy), ChatMainModule (copy), NewResult2 (copy), NewResult (copy), ChatSettingsModule (copy), MessageSenderModule (copy)
+	-- upvalues: BindableEvent3 (copy), NewResult3 (copy), config (copy), NewResult2 (copy), NewResult (copy), ChatSettingsModule (copy), MessageSenderModule (copy)
 	DoBackgroundFadeIn()
 	BindableEvent3:Fire(false)
 	
@@ -605,7 +605,7 @@ function chatBarFocusLost(p1, _)
 		NewResult3:GetTextBox().Text = ""
 		
 		if Text ~= "" then
-			ChatMainModule.MessagePosted:fire(Text)
+			config.MessagePosted:fire(Text)
 			
 			if not NewResult2:ProcessCompletedChatMessage(Text, NewResult) then
 				if ChatSettingsModule.DisallowedWhiteSpace then
@@ -669,7 +669,7 @@ t.OnMessageDoneFiltering.OnClientEvent:connect(function(p2)
 	end
 end)
 t.OnNewMessage.OnClientEvent:connect(function(p2, GeneralChannelName)
-	-- upvalues: NewResult (copy), LocalPlayer (ref), NewResult1 (copy), ChatSettingsModule (copy), ChatMainModule (copy)
+	-- upvalues: NewResult (copy), LocalPlayer (ref), NewResult1 (copy), ChatSettingsModule (copy), config (copy)
 	local Channel = NewResult:GetChannel(GeneralChannelName)
 	
 	if Channel then
@@ -685,21 +685,21 @@ t.OnNewMessage.OnClientEvent:connect(function(p2, GeneralChannelName)
 				Channel1:AddMessageToChannel(p2)
 			end
 		end
-		ChatMainModule.MessageCount += 1
-		ChatMainModule.MessagesChanged:fire(ChatMainModule.MessageCount)
+		config.MessageCount += 1
+		config.MessagesChanged:fire(config.MessageCount)
 		DoFadeInFromNewInformation()
 	end
 end)
 t.OnNewSystemMessage.OnClientEvent:connect(function(p2, p3)
-	-- upvalues: NewResult (copy), NewResult1 (copy), ChatMainModule (copy), ChatSettingsModule (copy)
+	-- upvalues: NewResult (copy), NewResult1 (copy), config (copy), ChatSettingsModule (copy)
 	local P59 = p3 or "System"
 	local Channel = NewResult:GetChannel(P59)
 	
 	if Channel then
 		Channel:AddMessageToChannel(p2)
 		NewResult1:UpdateMessagePostedInChannel(P59)
-		ChatMainModule.MessageCount += 1
-		ChatMainModule.MessagesChanged:fire(ChatMainModule.MessageCount)
+		config.MessageCount += 1
+		config.MessagesChanged:fire(config.MessageCount)
 		DoFadeInFromNewInformation()
 		
 		if getEchoMessagesInGeneral() and ChatSettingsModule.GeneralChannelName and P59 ~= ChatSettingsModule.GeneralChannelName then
@@ -959,4 +959,4 @@ for _, channel1 in pairs(ServerResult.Channels) do
 		HandleChannelJoined(channel1[1], channel1[2], channel1[3], channel1[4], true, false)
 	end
 end
-return ChatMainModule
+return config

@@ -6,6 +6,7 @@ local ViewModule = require(Foundation.Components.View)
 local UseChipVariantsModule = require(Foundation.Components.Chip.useChipVariants)
 local ChipSizeModule = require(Foundation.Enums.ChipSize)
 local ChipVariantModule = require(Foundation.Enums.ChipVariant)
+local ColorNamespaceModule = require(Foundation.Enums.ColorNamespace)
 local PaginationSizeModule = require(Foundation.Enums.PaginationSize)
 local PresentationContextModule = require(Foundation.Providers.Style.PresentationContext)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
@@ -26,7 +27,7 @@ end
 
 local config = {
 	isIconSize = true,
-	colorNamespace = require(Foundation.Enums.ColorNamespace).Color
+	colorNamespace = ColorNamespaceModule.Color
 }
 local config1 = {
 	[PaginationSizeModule.Small] = "size-0-600",

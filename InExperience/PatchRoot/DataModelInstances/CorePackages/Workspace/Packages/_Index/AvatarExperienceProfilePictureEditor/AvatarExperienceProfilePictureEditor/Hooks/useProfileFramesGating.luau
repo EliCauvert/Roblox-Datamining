@@ -1,10 +1,11 @@
 ﻿local AvatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
 local Parent = AvatarExperienceProfilePictureEditor.Parent
 local ReactModule = require(Parent.React)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
 local ComputeProfileFramesGatingModule = require(AvatarExperienceProfilePictureEditor.Utils.computeProfileFramesGating)
 local GetProfileFrameAmpAccessModule = require(AvatarExperienceProfilePictureEditor.Utils.getProfileFrameAmpAccess)
-local FFlagEditProfileFramesEnabled = require(Parent.SharedFlags).FFlagEditProfileFramesEnabled
+local FFlagEditProfileFramesEnabled = SharedFlagsModule.FFlagEditProfileFramesEnabled
 
 return function()
 	-- upvalues: FFlagEditProfileFramesEnabled (copy), UseAppPolicyFunction (copy), ReactModule (copy), GetProfileFrameAmpAccessModule (copy), ComputeProfileFramesGatingModule (copy)

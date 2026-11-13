@@ -41,8 +41,9 @@ return function(Entry, p1, p2, p3, p4, p5, p6, Callback: (any, any, any, any, an
 		
 		if v2 then
 			local ComponentType = SduiBuilder.getComponentType(v2, p6)
+			local IsTile: boolean = ComponentType == "Tile" or ComponentType == "GameTile"
 			local v3: boolean = v2.props and (v2.props.imageAspectRatio or 0) > 1
-			v1 = (ComponentType == "Tile" or ComponentType == "GameTile") and v3
+			v1 = IsTile and v3
 		end
 		local SortSubId = if FFlagLuaAppSduiPassSortSubId then FindAnalyticsFieldInAncestorsFunction("sortSubId", p3) else nil
 		

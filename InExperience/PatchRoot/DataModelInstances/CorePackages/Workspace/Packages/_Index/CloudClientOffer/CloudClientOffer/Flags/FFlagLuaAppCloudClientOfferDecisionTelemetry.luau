@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("LuaAppCloudClientOfferDecisionTelemetry", false) and game:GetEngineFeature("CloudClientFlowEvent")

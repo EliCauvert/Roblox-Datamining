@@ -1,6 +1,7 @@
 ﻿local RobloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
 local Parent = RobloxSubscriptionPurchaseApp.Parent
 local PromiseModule = require(Parent.Promise)
+local Url = require(Parent.Http).Url
 local SurfaceContextModule = require(RobloxSubscriptionPurchaseApp.Enums.SurfaceContext)
 local SurfaceNameModule = require(RobloxSubscriptionPurchaseApp.Enums.SurfaceName)
 local _ = require(RobloxSubscriptionPurchaseApp.types)
@@ -11,7 +12,7 @@ local LogRobloxSubscriptionUpsellTelemetryEventModule = require(RobloxSubscripti
 local RobloxSubscriptionUpsellTelemetryModule = require(RobloxSubscriptionPurchaseApp.Events.RobloxSubscriptionUpsellTelemetry)
 local FFlagSubscriptionUpsellCounterWithErrorReasonModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagSubscriptionUpsellCounterWithErrorReason)
 local HttpService = game:GetService("HttpService")
-local Text = require(Parent.Http).Url.APIS_URL .. "payments-gateway/v1/payment-sessions"
+local Text = Url.APIS_URL .. "payments-gateway/v1/payment-sessions"
 
 return function(p1)
 	-- upvalues: SurfaceContextModule (copy), SurfaceNameModule (copy), HttpRequestModule (copy), Text (copy), LogRobloxSubscriptionUpsellCounterModule (copy), RobloxSubscriptionUpsellTelemetryModule (copy), FFlagSubscriptionUpsellCounterWithErrorReasonModule (copy), LogRobloxSubscriptionUpsellTelemetryEventModule (copy), HttpService (copy), PromiseModule (copy)

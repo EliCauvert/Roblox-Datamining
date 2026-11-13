@@ -7,7 +7,7 @@ local GetScoreValueModule = require(script.Parent.getScoreValue)
 local _ = require(script.Parent.LeaderboardStoreTypes)
 local FFlagPlayerListFixLeaderstatsStacking = require(Parent.SharedFlags).FFlagPlayerListFixLeaderstatsStacking
 
-return function(Player: Player, Callback, Callback3, Callback2, Callback1, Callback4)
+return function(Player: Player, Callback, Callback3, Callback1, Callback2, Callback4)
 	-- upvalues: SignalsModule (copy), CreateSignalMapFunction (copy), CreateRBXEventSignalModule (copy), GetScoreValueModule (copy), IsValidStatModule (copy), FFlagPlayerListFixLeaderstatsStacking (copy)
 	local Connections = {}
 	local t = {}
@@ -45,7 +45,7 @@ return function(Player: Player, Callback, Callback3, Callback2, Callback1, Callb
 	end
 	
 	local function onStatAdded(p1)
-		-- upvalues: CreateRBXEventSignalModule (upval), SignalsModule (upval), GetScoreValueModule (upval), Callback (copy), SignalMap (copy), Callback2 (copy), Team (ref), Callback1 (copy), t (ref)
+		-- upvalues: CreateRBXEventSignalModule (upval), SignalsModule (upval), GetScoreValueModule (upval), Callback (copy), SignalMap (copy), Callback1 (copy), Team (ref), Callback2 (copy), t (ref)
 		local RBXEventSignalModule, RBXEventSignalModule2 = CreateRBXEventSignalModule(p1.Changed, p1.Value)
 		local Computed = SignalsModule.createComputed(function(p2)
 			-- upvalues: GetScoreValueModule (upval), RBXEventSignalModule (copy)
@@ -54,10 +54,10 @@ return function(Player: Player, Callback, Callback3, Callback2, Callback1, Callb
 		Callback(p1)
 		SignalMap.setData(p1.Name, Computed, false)
 		local Effect = SignalsModule.createEffect(function(p2)
-			-- upvalues: Computed (copy), Callback2 (upval), Team (upval), p1 (copy), Callback1 (upval)
+			-- upvalues: Computed (copy), Callback1 (upval), Team (upval), p1 (copy), Callback2 (upval)
 			Computed(p2)
-			Callback2(Team, p1.Name)
 			Callback1(Team, p1.Name)
+			Callback2(Team, p1.Name)
 		end)
 		local Name = p1.Name
 		local StatChanged = {
@@ -149,7 +149,7 @@ return function(Player: Player, Callback, Callback3, Callback2, Callback1, Callb
 	end
 	
 	local function onPlayerChildRemoved(Object)
-		-- upvalues: IsValidStatModule (upval), onStatRemoved (copy), FFlagPlayerListFixLeaderstatsStacking (upval), Callback4 (copy), Callback1 (copy), Team (ref)
+		-- upvalues: IsValidStatModule (upval), onStatRemoved (copy), FFlagPlayerListFixLeaderstatsStacking (upval), Callback4 (copy), Callback2 (copy), Team (ref)
 		if Object.Name == "leaderstats" then
 			for _, child in ipairs((Object:GetChildren())) do
 				if IsValidStatModule(child) then
@@ -160,7 +160,7 @@ return function(Player: Player, Callback, Callback3, Callback2, Callback1, Callb
 				Callback4()
 			end
 		end
-		Callback1(Team)
+		Callback2(Team)
 	end
 	
 	Team = Player.Team or "Neutral";

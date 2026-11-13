@@ -12,14 +12,12 @@ local Icon = FoundationModule.Icon
 local IconName = FoundationModule.Enums.IconName
 local Popover = FoundationModule.Popover
 local PopoverAlign = FoundationModule.Enums.PopoverAlign
+local PopoverSide = FoundationModule.Enums.PopoverSide
 local Radius = FoundationModule.Enums.Radius
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 local SideModalDropdownButtonModule = require(GenericAbuseReporting.Common.SideModalDropdownButton)
-local Side = {
-	offset = 5,
-	position = FoundationModule.Enums.PopoverSide.Bottom
-}
+local Side = { offset = 5, position = PopoverSide.Bottom }
 
 return ReactModule.memo(function(Frame)
 	-- upvalues: ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), View (copy), Text (copy), Icon (copy), IconName (copy), Popover (copy), SideModalDropdownButtonModule (copy), PopoverAlign (copy), Side (copy), Radius (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
@@ -50,6 +48,7 @@ return ReactModule.memo(function(Frame)
 		-- upvalues: UseResult (copy)
 		UseResult(false)
 	end, { UseResult })
+	local Text1 = if UseMemoResult then UseMemoResult.text else Frame.placeholder or ""
 	local Items = Frame.items
 	local OnItemChangedFunction = Frame.onItemChanged
 	local Value = Frame.value
@@ -69,7 +68,7 @@ return ReactModule.memo(function(Frame)
 					-- upvalues: UseResult (copy), UseStateResult (copy)
 					UseResult(not UseStateResult)
 				end, { UseStateResult, UseResult }),
-				text = if UseMemoResult then UseMemoResult.text else Frame.placeholder or ""
+				text = Text1
 			}),
 			Anchor = ReactModule.createElement(Popover.Anchor, { anchorRef = UseRefResult }),
 			Menu = ReactModule.createElement(Popover.Content, {

@@ -36,8 +36,9 @@ return function(UniverseId, p1, p2, p3, PageName, Callback)
 			
 			return
 		end
+		local v1 = if FFlagLuaAppEnableVirtualEventPlaceId then p1 else p2
 		local CloudClientOfferStore = CloudClientOfferModule.GetCloudClientOfferStore(false)
-		local RequestResult = CloudClientOfferStore.request(tostring(if FFlagLuaAppEnableVirtualEventPlaceId then p1 else p2), function(p7)
+		local RequestResult = CloudClientOfferStore.request(tostring(v1), function(p7)
 			-- upvalues: UseRefResult (upval), Callback (upval), p4 (copy), p5 (copy)
 			UseRefResult.current = nil
 			

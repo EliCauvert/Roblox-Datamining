@@ -1,12 +1,14 @@
 ﻿local ChatLineReporting = script:FindFirstAncestor("ChatLineReporting")
 local Parent = ChatLineReporting.Parent
+local CryoModule = require(Parent.Cryo)
 local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.Dev.ReactRoblox)
 local MockProvidersModule = require(script.Parent.MockProviders)
-local Dictionary = require(Parent.Cryo).Dictionary
+local Dictionary = CryoModule.Dictionary
 
 return {
 	roact = ReactModule,
-	reactRoblox = require(Parent.Dev.ReactRoblox),
+	reactRoblox = ReactRobloxModule,
 	mapStory = function(p1)
 		-- upvalues: Dictionary (copy), ReactModule (copy), MockProvidersModule (copy)
 		return function(p2)

@@ -93,10 +93,11 @@ end
 local function validateUrlParams(Url, p1)
 	-- upvalues: StringTrimFunction (copy), StringSplitFunction (copy), ParseQueryFunction (copy), CryoModule (copy), validatePathParams (copy), validateParams (copy)
 	local StringTrimResult = if Url.path then StringTrimFunction(Url.path, "/") else ""
+	local T = if StringTrimResult == "" then {} else StringSplitFunction(StringTrimResult, "/")
 	local MapResult = CryoModule.Dictionary.map(ParseQueryFunction(Url.query), function(Entry)
 		return if #Entry == 1 then Entry[1] else Entry
 	end)
-	local ValidatePathParamsResult, ValidatePathParamsResult2 = validatePathParams(if StringTrimResult == "" then {} else StringSplitFunction(StringTrimResult, "/"), p1.pathParams or {})
+	local ValidatePathParamsResult, ValidatePathParamsResult2 = validatePathParams(T, p1.pathParams or {})
 	
 	if not ValidatePathParamsResult then
 		return false, {}

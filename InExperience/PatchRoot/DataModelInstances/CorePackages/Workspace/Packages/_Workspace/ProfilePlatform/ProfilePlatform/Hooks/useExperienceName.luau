@@ -1,7 +1,8 @@
 ﻿local Parent = script:FindFirstAncestor("ProfilePlatform").Parent
+local SignalsModule = require(Parent.Signals)
 local GameGetGameInfoStoreModule = require(Parent.DataHydration.GameGetGameInfoStore)
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
-local Computed = require(Parent.Signals).createComputed(function()
+local Computed = SignalsModule.createComputed(function()
 	return nil
 end)
 

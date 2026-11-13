@@ -10,6 +10,7 @@ local GetUnifiedEventsForMISFunction = AvatarExperienceAnalyticsModule.Utils.get
 local CartIdService = AvatarExperienceAnalyticsModule.Lib.CartIdService
 local AvatarScreenProperties = require(Parent.AvatarExperienceNavigation).AvatarRoute.AvatarScreenProperties
 local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local FFlagAXMISEnableMultiShoppingUnifiedEvents = AvatarExperienceFlagsModule.FFlagAXMISEnableMultiShoppingUnifiedEvents
 local FFlagAXUnifiedEventStrictPayloads = AvatarExperienceFlagsModule.FFlagAXUnifiedEventStrictPayloads
 local FFlagAXMISSaveWearFix = AvatarExperienceFlagsModule.FFlagAXMISSaveWearFix
 local FFlagAXBackgroundsCustomizeHydration = AvatarExperienceFlagsModule.FFlagAXBackgroundsCustomizeHydration
@@ -33,7 +34,7 @@ end
 local FFlagSignalsNavP3gAvatarExperience = require(Parent.SharedFlags).FFlagSignalsNavP3gAvatarExperience
 local GetLegacyNavigationStoreFunction = require(Parent.NavigationRodux).GetLegacyNavigationStore
 
-return if AvatarExperienceFlagsModule.FFlagAXMISEnableMultiShoppingUnifiedEvents then function(Items, EquippableAssets, ReplaceAllEquippedAssets, BodyColor3s, BodyScales, BodyPartColorRangeIds, p2, Callback1, p3, p4, p5, Callback)
+return if FFlagAXMISEnableMultiShoppingUnifiedEvents then function(Items, EquippableAssets, ReplaceAllEquippedAssets, BodyColor3s, BodyScales, BodyPartColorRangeIds, p2, Callback1, p3, p4, p5, Callback)
 	-- upvalues: FFlagSignalsNavP3gAvatarExperience (copy), GetLegacyNavigationStoreFunction (copy), AvatarScreenProperties (copy), GetUnifiedEventsForMISFunction (copy), UnifiedEventLogEnums (copy), FFlagAXUnifiedEventStrictPayloads (copy), SendUnifiedEventsForMultiItemShoppingFunction (copy), MutedErrorFunction (copy), CartIdService (copy), UnifiedSelectionListStore (copy), FFlagAXMISSaveWearFix (copy), PurchaseItemsSuccessModule (copy), FFlagAXBackgroundsCustomizeHydration (copy), maybeApplyPurchasedBackground (copy)
 	return function(p6, _)
 		-- upvalues: FFlagSignalsNavP3gAvatarExperience (upval), GetLegacyNavigationStoreFunction (upval), AvatarScreenProperties (upval), p4 (copy), p5 (copy), GetUnifiedEventsForMISFunction (upval), Items (copy), p2 (copy), UnifiedEventLogEnums (upval), FFlagAXUnifiedEventStrictPayloads (upval), SendUnifiedEventsForMultiItemShoppingFunction (upval), MutedErrorFunction (upval), CartIdService (upval), UnifiedSelectionListStore (upval), FFlagAXMISSaveWearFix (upval), Callback (copy), BodyScales (ref), Callback1 (copy), PurchaseItemsSuccessModule (upval), EquippableAssets (copy), ReplaceAllEquippedAssets (copy), p3 (copy), BodyColor3s (copy), BodyPartColorRangeIds (copy), FFlagAXBackgroundsCustomizeHydration (upval), maybeApplyPurchasedBackground (upval)

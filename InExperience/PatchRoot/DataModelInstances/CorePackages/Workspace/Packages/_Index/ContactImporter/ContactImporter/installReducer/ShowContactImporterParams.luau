@@ -1,9 +1,12 @@
 ﻿local Parent = script.Parent.Parent
 local DependenciesModule = require(Parent.dependencies)
+local UpdateContactImporterModalLogic = DependenciesModule.SocialModalsCommon.Actions.UpdateContactImporterModalLogic
+local UpdateIsDiscoverabilityUnset = DependenciesModule.SocialModalsCommon.Actions.UpdateIsDiscoverabilityUnset
+local Rodux = DependenciesModule.Rodux
 local Llama = DependenciesModule.llama
 local ConstantsModule = require(Parent.Common.Constants)
 
-return DependenciesModule.Rodux.createReducer({
+return Rodux.createReducer({
 	[ConstantsModule.SHOULD_SHOW_CONTACT_IMPORTER_FEATURE] = false,
 	[ConstantsModule.SHOULD_SHOW_CONTACT_IMPORTER_UPSELL_MODAL] = false,
 	hasOSPermissions = false,
@@ -23,7 +26,7 @@ return DependenciesModule.Rodux.createReducer({
 			isDiscoverabilityUnset = p1.phoneNumberDiscoverability == ConstantsModule.DISCOVERABILITY_UNSET
 		}
 	end,
-	[DependenciesModule.SocialModalsCommon.Actions.UpdateContactImporterModalLogic.name] = function(p1, p2)
+	[UpdateContactImporterModalLogic.name] = function(p1, p2)
 		-- upvalues: Llama (copy), ConstantsModule (copy)
 		return (Llama.Dictionary.join(p1, {
 			hasOSPermissions = p2.hasOSPermissions,
@@ -34,7 +37,7 @@ return DependenciesModule.Rodux.createReducer({
 		-- upvalues: Llama (copy)
 		return Llama.Dictionary.join(p1, { isPhoneVerified = p2.isPhoneVerified })
 	end,
-	[DependenciesModule.SocialModalsCommon.Actions.UpdateIsDiscoverabilityUnset.name] = function(p1, p2)
+	[UpdateIsDiscoverabilityUnset.name] = function(p1, p2)
 		-- upvalues: Llama (copy)
 		return Llama.Dictionary.join(p1, { isDiscoverabilityUnset = p2.isDiscoverabilityUnset })
 	end

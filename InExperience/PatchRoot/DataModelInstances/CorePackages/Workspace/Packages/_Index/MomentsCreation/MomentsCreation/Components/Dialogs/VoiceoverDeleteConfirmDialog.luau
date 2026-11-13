@@ -1,8 +1,9 @@
 ﻿local Parent = script:FindFirstAncestor("MomentsCreation").Parent
 local FoundationModule = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
 local ReactModule = require(Parent.React)
 local Dialog = FoundationModule.Dialog
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 
 return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), Dialog (copy), FoundationModule (copy)

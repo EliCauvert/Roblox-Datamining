@@ -17,6 +17,7 @@ return ReactModule.memo(function(p1)
 		defaultRewrittenReasonLabelText = "CoreScripts.TextChat.ChatWindows.RewrittenReasonLabel",
 		rewrittenReasonLabelText = FStringInExpChatRewriteReasonKeyModule
 	})
+	local RewrittenReasonLabelText = if UseLocalizationResult.rewrittenReasonLabelText and UseLocalizationResult.rewrittenReasonLabelText ~= "" then UseLocalizationResult.rewrittenReasonLabelText else UseLocalizationResult.defaultRewrittenReasonLabelText
 	local MessagesStoreModule = GetMessagesStoreModule(false)
 	local RewriteDropdownStoreModule = GetRewriteDropdownStoreModule(false)
 	local UseMemoResult = ReactModule.useMemo(function()
@@ -130,7 +131,7 @@ return ReactModule.memo(function(p1)
 				tag = "text-body-small text-align-x-left text-wrap size-full-0 auto-y",
 				LayoutOrder = 3,
 				RichText = true,
-				Text = if UseLocalizationResult.rewrittenReasonLabelText and UseLocalizationResult.rewrittenReasonLabelText ~= "" then UseLocalizationResult.rewrittenReasonLabelText else UseLocalizationResult.defaultRewrittenReasonLabelText,
+				Text = RewrittenReasonLabelText,
 				textStyle = {
 					Color3 = UseTokensResult.Color.Content.Default.Color3,
 					Transparency = MergeBindableScalarModule(UseTokensResult.Color.Content.Default.Transparency, p1.textTransparency)

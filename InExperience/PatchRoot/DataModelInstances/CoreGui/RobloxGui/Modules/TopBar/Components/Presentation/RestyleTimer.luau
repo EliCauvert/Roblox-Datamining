@@ -2,6 +2,7 @@
 local Chrome = game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Chrome
 local Stores = require(CorePackages.Workspace.Packages.CoreGuiCommon).Stores
 local ReactModule = require(CorePackages.Packages.React)
+local SignalsModule = require(CorePackages.Packages.Signals)
 local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
 local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
 local FFlagTopBarRefactor = require(CorePackages.Workspace.Packages.InExperienceTopBar).Flags.FFlagTopBarRefactor
@@ -11,7 +12,7 @@ local UseObservableValueModule = require(Chrome.ChromeShared.Hooks.useObservable
 local EnabledResult = require(CorePackages.Workspace.Packages.Chrome).Enabled()
 local GamepadConnectorModule = if SharedFlagsModule.FFlagEnableConsoleExpControls and EnabledResult then require(script.Parent.Parent.GamepadConnector) else nil
 local UILessStore = if SharedFlagsModule.FFlagAddUILessMode and SharedFlagsModule.FIntAddUILessModeVariant ~= 0 and Stores.GetUILessStore then Stores.GetUILessStore(false) else nil
-local Computed = require(CorePackages.Packages.Signals).createComputed(function(p1): boolean
+local Computed = SignalsModule.createComputed(function(p1): boolean
 	-- upvalues: UILessStore (copy)
 	return UILessStore ~= nil and (UILessStore.getUILessModeEnabled(p1) and not UILessStore.getUIVisible(p1))
 end)

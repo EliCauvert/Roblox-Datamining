@@ -10,10 +10,12 @@ local AssetInfoModule = require(Parent.Models.AssetInfo)
 local BundleInfoModule = require(Parent.Models.BundleInfo)
 local SetAssetsModule = require(Parent.Actions.SetAssets)
 local SetBundlesModule = require(Parent.Actions.SetBundles)
+local AvatarExperienceInspectAndBuyModule = require(CorePackages.Workspace.Packages.AvatarExperienceInspectAndBuy)
+local AvatarExperienceFlagsModule = require(CorePackages.Workspace.Packages.AvatarExperienceFlags)
 local ItemTypeEnum = require(CorePackages.Workspace.Packages.AvatarExperienceModel).Enums.ItemTypeEnum
 local GetItemDetailsModule = require(Parent.Thunks.GetItemDetails)
-local FFlagAXEnableBatchItemDetailsFetchV2 = require(CorePackages.Workspace.Packages.AvatarExperienceFlags).FFlagAXEnableBatchItemDetailsFetchV2
-local BatchItemDetailsPerformFetchKey = require(CorePackages.Workspace.Packages.AvatarExperienceInspectAndBuy).Constants.BatchItemDetailsPerformFetchKey
+local FFlagAXEnableBatchItemDetailsFetchV2 = AvatarExperienceFlagsModule.FFlagAXEnableBatchItemDetailsFetchV2
+local BatchItemDetailsPerformFetchKey = AvatarExperienceInspectAndBuyModule.Constants.BatchItemDetailsPerformFetchKey
 local FFlagAXWrapInspectAndBuyThunksInTasksModule = require(Parent.Flags.FFlagAXWrapInspectAndBuyThunksInTasks)
 local list = { NetworkModule }
 

@@ -131,10 +131,10 @@ end
 
 function InviteFriendsPage.loadFriends(p1)
 	-- upvalues: PromiseModule (copy), Cryo (copy), sortFriends (copy)
-	PromiseModule.new(function(Callback1, Callback)
+	PromiseModule.new(function(Callback, Callback1)
 		-- upvalues: p1 (copy), Cryo (upval), sortFriends (upval)
 		coroutine.wrap(function()
-			-- upvalues: p1 (upval), Callback (copy), Cryo (upval), sortFriends (upval), Callback1 (copy)
+			-- upvalues: p1 (upval), Callback1 (copy), Cryo (upval), sortFriends (upval), Callback (copy)
 			local LocalPlayer = p1.props.PlayersService.LocalPlayer
 			local Success, Result = pcall(function()
 				-- upvalues: p1 (upval), LocalPlayer (copy)
@@ -142,7 +142,7 @@ function InviteFriendsPage.loadFriends(p1)
 			end)
 			
 			if not Success then
-				Callback("Error loading friends")
+				Callback1("Error loading friends")
 				
 				return
 			end
@@ -163,7 +163,7 @@ function InviteFriendsPage.loadFriends(p1)
 					Result:AdvanceToNextPageAsync()
 				end) then continue end
 			end
-			Callback1((Cryo.List.sort(t, sortFriends)))
+			Callback((Cryo.List.sort(t, sortFriends)))
 		end)()
 	end):andThen(function(Result)
 		-- upvalues: p1 (copy)

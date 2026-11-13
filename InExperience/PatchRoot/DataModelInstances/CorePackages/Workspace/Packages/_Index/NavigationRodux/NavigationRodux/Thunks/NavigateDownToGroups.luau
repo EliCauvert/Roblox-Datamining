@@ -2,9 +2,10 @@
 local Parent = NavigationRodux.Parent
 local GetFFlagUseCommunitiesTranslationFunction = require(Parent.SharedFlags).GetFFlagUseCommunitiesTranslation
 local NavigateDownModule = require(NavigationRodux.Thunks.NavigateDown)
+local UrlBuilderModule = require(Parent.UrlBuilder)
 local TModule = require(Parent.t)
 local AppPage = require(Parent.RobloxAppEnums).AppPage
-local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local UrlBuilder = UrlBuilderModule.UrlBuilder
 
 return function(OnClose)
 	-- upvalues: TModule (copy), NavigateDownModule (copy), AppPage (copy), UrlBuilder (copy), GetFFlagUseCommunitiesTranslationFunction (copy)

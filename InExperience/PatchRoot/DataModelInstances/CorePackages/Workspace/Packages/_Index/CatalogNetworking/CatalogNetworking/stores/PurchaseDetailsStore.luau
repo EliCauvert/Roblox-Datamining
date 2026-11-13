@@ -1,10 +1,11 @@
 ﻿local CatalogNetworking = script:FindFirstAncestor("CatalogNetworking")
 local Parent = CatalogNetworking.Parent
+local SignalsModule = require(Parent.Signals)
 local PromiseModule = require(Parent.Promise)
 local DashModule = require(Parent.Dash)
 local _ = require(CatalogNetworking.Types)
 local FetchPurchaseDetailsModule = require(CatalogNetworking.networkRequests.fetchPurchaseDetails)
-local Signal, Signal2 = require(Parent.Signals).createSignal({})
+local Signal, Signal2 = SignalsModule.createSignal({})
 
 local function mergeResponse(Result)
 	-- upvalues: Signal (copy), Signal2 (copy)

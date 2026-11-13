@@ -104,15 +104,40 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 			return (math.clamp((Entry1 - HeaderFadeParams) / HeaderFadeParams2, 0, 1))
 		end
 	end)
+	local UseResult = ReactModule.useCallback(function(Frame)
+		-- upvalues: UseBindingResult2_3 (copy), UseStateResult2_4 (copy), NoIsFullscreen (copy), UseRefResult (copy), DetailsPageLayoutUtilsModule (upval), FullBleedAspectRatio1 (copy), NewTop (copy), ScaledFullBleedOverlapOffset (copy), p1 (copy), UseStateResult2_3 (copy), UseBindingResult2_4 (copy)
+		local AbsoluteSize = Frame.AbsoluteSize
+		UseBindingResult2_3(AbsoluteSize)
+		
+		if AbsoluteSize.X > 0 and AbsoluteSize.Y > 0 then
+			UseStateResult2_4(true)
+			
+			if NoIsFullscreen and not UseRefResult.current then
+				UseRefResult.current = true
+				local InitialScrollYForSize = DetailsPageLayoutUtilsModule.computeInitialScrollYForSize(AbsoluteSize, {
+					fullBleedAspectRatio = FullBleedAspectRatio1,
+					headerBarHeight = NewTop,
+					fullBleedOverlapOffset = ScaledFullBleedOverlapOffset,
+					hasFullBleed = NoIsFullscreen,
+					bannerBottomVisiblePercent = p1.bannerBottomVisiblePercent
+				})
+				UseStateResult2_3(InitialScrollYForSize)
+				UseBindingResult2_4(InitialScrollYForSize)
+			end
+		end
+	end, {
+		NoIsFullscreen, FullBleedAspectRatio1, NewTop, ScaledFullBleedOverlapOffset,
+		p1.bannerBottomVisiblePercent, ContainerSize
+	})
 	local UseRefResult1 = ReactModule.useRef(0)
-	local UseResult = ReactModule.useCallback(function(Current)
+	local UseResult1 = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult1 (copy), UseBindingResult2_5 (copy)
 		if math.abs(Current - UseRefResult1.current) > 0.5 then
 			UseRefResult1.current = Current
 			UseBindingResult2_5(Current)
 		end
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function(ScrollFrame)
+	local UseResult2 = ReactModule.useCallback(function(ScrollFrame)
 		-- upvalues: UseBindingResult2_4 (copy), NoIsFullscreen (copy), MapResult2 (copy), UseBindingResult6 (copy), DetailsPageLayoutUtilsModule (upval), ScaledFullBleedOverlapOffset (copy), UseStateResult2_2 (copy)
 		local Y = ScrollFrame.CanvasPosition.Y
 		UseBindingResult2_4(Y)
@@ -126,7 +151,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	
 	return ReactModule.createElement(DetailsPageLayoutContextModule.Provider, {
 		value = ReactModule.useMemo(function()
-			-- upvalues: NoIsFullscreen (copy), UseBindingResult (copy), UseBindingResult2 (copy), UseBindingResult1 (copy), UseBindingResult2_1 (copy), WithDefaultsResult (copy), NewTop (copy), UseBindingResult3 (copy), UseBindingResult2_2 (copy), UseResult1 (copy), MapResult2 (copy), ScaledFullBleedOverlapOffset (copy), ScaledGradientTopBleedOffset (copy), FFlagLuaAppEdpDirectionalGradientMidTransparency (upval), UseStateResult4 (copy), UseStateResult5 (copy), FFlagLuaAppMediaGalleryGamepadSupport (upval), MapResult (copy), MapResult4 (copy), NoNoIsFullscreen (copy), UseResult (copy), HasUseStateResult (copy), UseStateResult2 (copy), UseStateResult1 (copy), UseStateResult2_1 (copy)
+			-- upvalues: NoIsFullscreen (copy), UseBindingResult (copy), UseBindingResult2 (copy), UseBindingResult1 (copy), UseBindingResult2_1 (copy), WithDefaultsResult (copy), NewTop (copy), UseBindingResult3 (copy), UseBindingResult2_2 (copy), UseResult2 (copy), MapResult2 (copy), ScaledFullBleedOverlapOffset (copy), ScaledGradientTopBleedOffset (copy), FFlagLuaAppEdpDirectionalGradientMidTransparency (upval), UseStateResult4 (copy), UseStateResult5 (copy), FFlagLuaAppMediaGalleryGamepadSupport (upval), MapResult (copy), MapResult4 (copy), NoNoIsFullscreen (copy), UseResult1 (copy), HasUseStateResult (copy), UseStateResult2 (copy), UseStateResult1 (copy), UseStateResult2_1 (copy)
 			return {
 				hasFullBleed = NoIsFullscreen,
 				hasHeader = UseBindingResult,
@@ -137,7 +162,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 				headerBarHeight = NewTop,
 				actionBarHeight = UseBindingResult3,
 				setActionBarHeight = UseBindingResult2_2,
-				onCanvasPositionChanged = UseResult1,
+				onCanvasPositionChanged = UseResult2,
 				contentTopOffset = MapResult2,
 				fullBleedOverlapOffset = ScaledFullBleedOverlapOffset,
 				gradientTopBleedOffset = ScaledGradientTopBleedOffset,
@@ -150,7 +175,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 				stickyHeaderActive = NoNoIsFullscreen,
 				onClose = WithDefaultsResult.onClose,
 				testId = WithDefaultsResult.testId,
-				onCanvasSizeChanged = UseResult,
+				onCanvasSizeChanged = UseResult1,
 				isFullscreenOverlay = HasUseStateResult,
 				setFullscreenContent = UseStateResult2,
 				onExitFullscreenOverlay = UseStateResult1,
@@ -161,38 +186,14 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 			ScaledFullBleedOverlapOffset, ScaledGradientTopBleedOffset,
 			if FFlagLuaAppEdpDirectionalGradientMidTransparency then WithDefaultsResult.gradientMidTransparency else nil,
 			UseStateResult4, UseStateResult5, NoNoIsFullscreen, WithDefaultsResult.onClose,
-			WithDefaultsResult.testId, MapResult, MapResult4, UseResult1, UseResult,
+			WithDefaultsResult.testId, MapResult, MapResult4, UseResult2, UseResult1,
 			HasUseStateResult, UseStateResult1,
 			if FFlagLuaAppMediaGalleryGamepadSupport then WithDefaultsResult.disableFocusNavEngineScroll else nil
 		})
 	}, ReactModule.createElement(View, {
 		tag = `size-full clip bg-surface-0 {CompositionLayoutTag}`,
 		stateLayer = { affordance = StateLayerAffordance.None },
-		onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame)
-			-- upvalues: UseBindingResult2_3 (copy), UseStateResult2_4 (copy), NoIsFullscreen (copy), UseRefResult (copy), DetailsPageLayoutUtilsModule (upval), FullBleedAspectRatio1 (copy), NewTop (copy), ScaledFullBleedOverlapOffset (copy), p1 (copy), UseStateResult2_3 (copy), UseBindingResult2_4 (copy)
-			local AbsoluteSize = Frame.AbsoluteSize
-			UseBindingResult2_3(AbsoluteSize)
-			
-			if AbsoluteSize.X > 0 and AbsoluteSize.Y > 0 then
-				UseStateResult2_4(true)
-				
-				if NoIsFullscreen and not UseRefResult.current then
-					UseRefResult.current = true
-					local InitialScrollYForSize = DetailsPageLayoutUtilsModule.computeInitialScrollYForSize(AbsoluteSize, {
-						fullBleedAspectRatio = FullBleedAspectRatio1,
-						headerBarHeight = NewTop,
-						fullBleedOverlapOffset = ScaledFullBleedOverlapOffset,
-						hasFullBleed = NoIsFullscreen,
-						bannerBottomVisiblePercent = p1.bannerBottomVisiblePercent
-					})
-					UseStateResult2_3(InitialScrollYForSize)
-					UseBindingResult2_4(InitialScrollYForSize)
-				end
-			end
-		end, {
-			NoIsFullscreen, FullBleedAspectRatio1, NewTop, ScaledFullBleedOverlapOffset,
-			p1.bannerBottomVisiblePercent, ContainerSize
-		}),
+		onAbsoluteSizeChanged = UseResult,
 		ref = Ref,
 		selectionGroup = WithDefaultsResult.selectionGroup,
 		testId = `{WithDefaultsResult.testId}--root`

@@ -1,5 +1,6 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
+local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
 local FFlagBuildExperienceDevProductRecoveryModule = require(BuildExperience.Flags.FFlagBuildExperienceDevProductRecovery)
 local FFlagBuildExperienceMonetizationFailureCausesModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationFailureCauses)
 local HttpClientModule = require(Parent.HttpClient)
@@ -9,7 +10,7 @@ local ChatConstantsModule = require(script.Parent.chatConstants)
 local _ = require(script.Parent.localToolOverlay)
 local ToolControllerUtilsModule = require(script.Parent.toolControllerUtils)
 local MonetizationFailureCausesModule = require(BuildExperience.utils.monetizationFailureCauses)
-local Debug = require(Parent.DataHydration.CreatorAgentChat).debug
+local Debug = CreatorAgentChatModule.debug
 local config = {
 	outcome = "unverified",
 	errorMessage = "The request timed out and its outcome is unknown. List again before retrying."

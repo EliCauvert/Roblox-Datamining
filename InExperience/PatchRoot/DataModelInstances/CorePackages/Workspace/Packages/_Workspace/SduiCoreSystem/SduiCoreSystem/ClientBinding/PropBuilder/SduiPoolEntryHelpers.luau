@@ -26,9 +26,10 @@ local function getOneByTwoTileFlowId(p1, p2, p3, Kind)
 		Entry = HttpService:GenerateGUID(false):lower()
 		T[Formatted] = Entry
 	end
+	local NativeAdData1 = if typeof(NativeAdData) == "string" and NativeAdData ~= "" then NativeAdData else nil
 	local Type = Kind and Kind.type
 	
-	return Entry, if typeof(NativeAdData) == "string" and NativeAdData ~= "" then NativeAdData else nil, if Type == "universe" then "Game" elseif Type == "ad_link" then "AdLink" else nil
+	return Entry, NativeAdData1, if Type == "universe" then "Game" elseif Type == "ad_link" then "AdLink" else nil
 end
 
 local function getOneByTwoTileFlowIdsFromPools(List)
@@ -183,12 +184,13 @@ local function poolSectionFromEntry(p1, p2)
 			CollectionItemSize1 = v1.collectionItemSize
 		end
 	end
+	local MaxVisibleRows1 = if MaxVisibleRows == -1 and PoolId ~= nil then -1 elseif typeof(MaxVisibleRows) == "number" and MaxVisibleRows > 0 then MaxVisibleRows else 1
 	local CallbackResult = if FFlagSduiSkipFeedAnalyticsPosition then Callback(p1.template) else nil
 	
 	return {
 		sectionId = Identifier,
 		poolId = PoolId,
-		numberOfRows = if MaxVisibleRows == -1 and PoolId ~= nil then -1 elseif typeof(MaxVisibleRows) == "number" and MaxVisibleRows > 0 then MaxVisibleRows else 1,
+		numberOfRows = MaxVisibleRows1,
 		doesNotAdvanceStartRow = if FFlagSduiSkipFeedAnalyticsPosition then CallbackResult else nil,
 		entryCollectionItemSize = if FFlagSduiPerSectionPoolSizing then CollectionItemSize else nil,
 		templateCollectionItemSize = if FFlagSduiPerSectionPoolSizing then CollectionItemSize1 else nil,

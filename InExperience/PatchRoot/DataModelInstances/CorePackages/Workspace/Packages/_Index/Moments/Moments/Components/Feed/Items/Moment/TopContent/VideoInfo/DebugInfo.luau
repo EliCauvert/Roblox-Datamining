@@ -2,12 +2,13 @@
 local Parent = Moments.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
 local MomentContextModule = require(script.Parent.Parent.Parent.MomentContext)
 local GetMomentsPreferencesStoreModule = require(Moments.Stores.GetMomentsPreferencesStore)
 local TextInput = FoundationModule.TextInput
 local View = FoundationModule.View
 local InputSize = FoundationModule.Enums.InputSize
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseSignalStateFunction = SignalsReactModule.useSignalState
 
 local function noop() end
 

@@ -1,4 +1,5 @@
 ﻿local Parent = script.Parent.Parent
+local ReactGlobalsModule = require(Parent.ReactGlobals)
 local LuauPolyfillModule = require(Parent.LuauPolyfill)
 local Array = LuauPolyfillModule.Array
 local Error1 = LuauPolyfillModule.Error
@@ -22,32 +23,32 @@ local ReactSymbols = require(Parent.Shared).ReactSymbols
 local REACTFORWARDREFTYPE = ReactSymbols.REACT_FORWARD_REF_TYPE
 local REACTMEMOTYPE = ReactSymbols.REACT_MEMO_TYPE
 local REACTLAZYTYPE = ReactSymbols.REACT_LAZY_TYPE
-local DEV = require(Parent.ReactGlobals).__DEV__
-local Callback = nil
+local DEV = ReactGlobalsModule.__DEV__
+local Callback1 = nil
 local NewResult = nil
 local Callback4 = nil
 local Callback3 = nil
+local Callback = nil
 local Callback2 = nil
-local Callback1 = nil
 
 local function scheduleRefresh(p1, p2)
-	-- upvalues: DEV (copy), Callback (ref), Callback1 (ref)
+	-- upvalues: DEV (copy), Callback1 (ref), Callback2 (ref)
 	if DEV then
-		if Callback == nil then return end
+		if Callback1 == nil then return end
 		local StaleFamilies = p2.staleFamilies
 		local UpdatedFamilies = p2.updatedFamilies
 		local ReactFiberWorkLoopNewModule = require(script.Parent["ReactFiberWorkLoop.new"])
 		local FlushSyncFunction: (any) -> () = ReactFiberWorkLoopNewModule.flushSync
 		ReactFiberWorkLoopNewModule.flushPassiveEffects()
 		FlushSyncFunction(function()
-			-- upvalues: Callback1 (upval), p1 (copy), UpdatedFamilies (copy), StaleFamilies (copy)
-			Callback1(p1.current, UpdatedFamilies, StaleFamilies)
+			-- upvalues: Callback2 (upval), p1 (copy), UpdatedFamilies (copy), StaleFamilies (copy)
+			Callback2(p1.current, UpdatedFamilies, StaleFamilies)
 		end)
 	end
 end
 
-Callback1 = function(Child, UpdatedFamilies, StaleFamilies)
-	-- upvalues: DEV (copy), FunctionComponent (copy), SimpleMemoComponent (copy), ClassComponent (copy), ForwardRef (copy), Callback (ref), Error1 (copy), NewResult (ref), SyncLane (copy), NoTimestamp (copy), Callback1 (ref)
+Callback2 = function(Child, UpdatedFamilies, StaleFamilies)
+	-- upvalues: DEV (copy), FunctionComponent (copy), SimpleMemoComponent (copy), ClassComponent (copy), ForwardRef (copy), Callback1 (ref), Error1 (copy), NewResult (ref), SyncLane (copy), NoTimestamp (copy), Callback2 (ref)
 	if DEV then
 		local Alternate = Child.alternate
 		local Child1 = Child.child
@@ -61,14 +62,14 @@ Callback1 = function(Child, UpdatedFamilies, StaleFamilies)
 		elseif Tag == ForwardRef then
 			Render = Type.render
 		end
-		if Callback == nil then
+		if Callback1 == nil then
 			error(Error1.new("Expected resolveFamily to be set during hot reload."))
 		end
 		local Flag = false
 		local Flag1 = false
 		
 		if Render ~= nil then
-			local CallbackResult = Callback(Render)
+			local CallbackResult = Callback1(Render)
 			
 			if CallbackResult ~= nil then
 				if StaleFamilies:has(CallbackResult) then
@@ -92,54 +93,54 @@ Callback1 = function(Child, UpdatedFamilies, StaleFamilies)
 			require(script.Parent["ReactFiberWorkLoop.new"]).scheduleUpdateOnFiber(Child, SyncLane, NoTimestamp)
 		end
 		if Child1 ~= nil and not Flag1 then
-			Callback1(Child1, UpdatedFamilies, StaleFamilies)
+			Callback2(Child1, UpdatedFamilies, StaleFamilies)
 		end
 		if Sibling ~= nil then
-			Callback1(Sibling, UpdatedFamilies, StaleFamilies)
+			Callback2(Sibling, UpdatedFamilies, StaleFamilies)
 		end
 	end
 end
 
 local ReactFiberHotReloadingModule = {
 	setRefreshHandler = function(Value)
-		-- upvalues: DEV (copy), Callback (ref)
+		-- upvalues: DEV (copy), Callback1 (ref)
 		if DEV then
-			Callback = Value
+			Callback1 = Value
 		end
 	end,
 	resolveFunctionForHotReloading = function(p1)
-		-- upvalues: DEV (copy), Callback (ref)
+		-- upvalues: DEV (copy), Callback1 (ref)
 		if not DEV then
 			return p1
-		elseif Callback == nil then
+		elseif Callback1 == nil then
 			return p1
 		else
-			local CallbackResult = Callback(p1)
+			local CallbackResult = Callback1(p1)
 			
 			return if CallbackResult == nil then p1 else CallbackResult.current
 		end
 	end,
 	resolveClassForHotReloading = function(p1)
-		-- upvalues: DEV (copy), Callback (ref)
+		-- upvalues: DEV (copy), Callback1 (ref)
 		if not DEV then
 			return p1
-		elseif Callback == nil then
+		elseif Callback1 == nil then
 			return p1
 		else
-			local CallbackResult = Callback(p1)
+			local CallbackResult = Callback1(p1)
 			
 			return if CallbackResult == nil then p1 else CallbackResult.current
 		end
 	end,
 	resolveForwardRefForHotReloading = function(p1)
-		-- upvalues: DEV (copy), Callback (ref), REACTFORWARDREFTYPE (copy)
+		-- upvalues: DEV (copy), Callback1 (ref), REACTFORWARDREFTYPE (copy)
 		if not DEV then
 			return p1
 		end
-		if Callback == nil then
+		if Callback1 == nil then
 			return p1
 		end
-		local CallbackResult = Callback(p1)
+		local CallbackResult = Callback1(p1)
 		
 		if CallbackResult ~= nil then
 			return CallbackResult.current
@@ -149,10 +150,10 @@ local ReactFiberHotReloadingModule = {
 			local Render1 = nil
 			
 			if DEV then
-				if Callback == nil then
+				if Callback1 == nil then
 					Render1 = Render
 				else
-					local CallbackResult1 = Callback(Render)
+					local CallbackResult1 = Callback1(Render)
 					Render1 = if CallbackResult1 == nil then Render else CallbackResult1.current
 				end
 			else
@@ -174,11 +175,11 @@ local ReactFiberHotReloadingModule = {
 		return p1
 	end,
 	isCompatibleFamilyForHotReloading = function(p1, p2): boolean
-		-- upvalues: DEV (copy), Callback (ref), ClassComponent (copy), FunctionComponent (copy), REACTLAZYTYPE (copy), ForwardRef (copy), REACTFORWARDREFTYPE (copy), MemoComponent (copy), SimpleMemoComponent (copy), REACTMEMOTYPE (copy)
+		-- upvalues: DEV (copy), Callback1 (ref), ClassComponent (copy), FunctionComponent (copy), REACTLAZYTYPE (copy), ForwardRef (copy), REACTFORWARDREFTYPE (copy), MemoComponent (copy), SimpleMemoComponent (copy), REACTMEMOTYPE (copy)
 		if not DEV then
 			return false
 		end
-		if Callback == nil then
+		if Callback1 == nil then
 			return false
 		end
 		local ElementType = p1.elementType
@@ -214,18 +215,18 @@ local ReactFiberHotReloadingModule = {
 			end
 		end
 		if Flag then
-			local CallbackResult = Callback(ElementType)
+			local CallbackResult = Callback1(ElementType)
 			
-			if CallbackResult ~= nil and CallbackResult == Callback(Type) then
+			if CallbackResult ~= nil and CallbackResult == Callback1(Type) then
 				return true
 			end
 		end
 		return false
 	end,
 	markFailedErrorBoundaryForHotReloading = function(p1)
-		-- upvalues: DEV (copy), Callback (ref), NewResult (ref), Set (copy)
+		-- upvalues: DEV (copy), Callback1 (ref), NewResult (ref), Set (copy)
 		if DEV then
-			if Callback == nil then return end
+			if Callback1 == nil then return end
 			if NewResult == nil then
 				NewResult = Set.new()
 			end
@@ -247,14 +248,14 @@ local ReactFiberHotReloadingModule = {
 		end
 	end,
 	findHostInstancesForRefresh = function(p1, p2)
-		-- upvalues: DEV (copy), Set (copy), Array (copy), Callback2 (ref), Error1 (copy)
+		-- upvalues: DEV (copy), Set (copy), Array (copy), Callback (ref), Error1 (copy)
 		if not DEV then
 			error(Error1.new("Did not expect findHostInstancesForRefresh to be called in production."))
 			
 			return
 		end
 		local NewSet = Set.new()
-		Callback2(p1.current, Set.new(Array.map(p2, function(p3)
+		Callback(p1.current, Set.new(Array.map(p2, function(p3)
 			return p3.current
 		end)), NewSet)
 		
@@ -262,8 +263,8 @@ local ReactFiberHotReloadingModule = {
 	end
 }
 
-Callback2 = function(Child, NewResult, NewResult1)
-	-- upvalues: DEV (copy), FunctionComponent (copy), SimpleMemoComponent (copy), ClassComponent (copy), ForwardRef (copy), Callback3 (ref), Callback2 (ref)
+Callback = function(Child, NewResult, NewResult1)
+	-- upvalues: DEV (copy), FunctionComponent (copy), SimpleMemoComponent (copy), ClassComponent (copy), ForwardRef (copy), Callback3 (ref), Callback (ref)
 	if DEV then
 		local Child1 = Child.child
 		local Sibling = Child.sibling
@@ -274,10 +275,10 @@ Callback2 = function(Child, NewResult, NewResult1)
 		if if Type1 ~= nil and NewResult:has(Type1) then true else false then
 			Callback3(Child, NewResult1)
 		elseif Child1 ~= nil then
-			Callback2(Child1, NewResult, NewResult1)
+			Callback(Child1, NewResult, NewResult1)
 		end
 		if Sibling ~= nil then
-			Callback2(Sibling, NewResult, NewResult1)
+			Callback(Sibling, NewResult, NewResult1)
 		end
 	end
 end

@@ -4,13 +4,14 @@ local ContextActionService = game:GetService("ContextActionService")
 local GuiService = game:GetService("GuiService")
 local UserInputService = game:GetService("UserInputService")
 local ReactModule = require(Parent1.React)
+local CoreGuiCommonModule = require(Parent1.CoreGuiCommon)
 local SignalsReactModule = require(Parent1.SignalsReact)
 local _ = require(Parent1.LeaderboardStore)
 local ScrollView = require(Parent1.Foundation).ScrollView
 local PlayerListVisibilityStoreModule = require(Parent.Common.PlayerListVisibilityStore)
 local PlayerContextualMenuStoreModule = require(Parent.Common.PlayerContextualMenuStore)
 local TeamListViewModule = require(Parent.Components.Presentation.TeamListView)
-local UseGamepadStickScrollFunction = require(Parent1.CoreGuiCommon).Hooks.useGamepadStickScroll
+local UseGamepadStickScrollFunction = CoreGuiCommonModule.Hooks.useGamepadStickScroll
 
 local function _(): boolean
 	-- upvalues: UserInputService (copy)

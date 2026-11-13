@@ -1,11 +1,14 @@
 ﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
 local Parent = MomentsCreation.Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
 local ReactModule = require(Parent.React)
+local CreationFlowStateModule = require(MomentsCreation.Enums.CreationFlowState)
 local MomentTypeModule = require(MomentsCreation.Enums.MomentType)
 local _ = require(MomentsCreation.Types.CreationFlowTypes)
 local CreateEditSessionModule = require(MomentsCreation.Stores.createEditSession)
 local TextOverlayControlsModule = require(MomentsCreation.Components.TextOverlay.TextOverlayControls)
 local TextOverlayLayerModule = require(MomentsCreation.Components.TextOverlay.TextOverlayLayer)
+local FFlagMomentsTextOverlayOnPhotosModule = require(MomentsCreation.Flags.FFlagMomentsTextOverlayOnPhotos)
 local FFlagMomentsCreateAvatarPosts = require(Parent.SharedFlags).FFlagMomentsCreateAvatarPosts
 local EventNames = require(Parent.MomentsCommon).Analytics.EventNames
 
@@ -13,16 +16,16 @@ return {
 	kind = "text",
 	presentation = "Step",
 	zIndex = 3,
-	step = require(MomentsCreation.Enums.CreationFlowState).TextOverlay,
+	step = CreationFlowStateModule.TextOverlay,
 	cta = {
 		localizationKey = "Feature.Moments.Action.AddText",
 		order = 3,
-		icon = require(Parent.BuilderIcons).Icon.TextUppercaseALowercaseA,
+		icon = BuilderIconsModule.Icon.TextUppercaseALowercaseA,
 		analyticsEvent = EventNames.EditingFlowTextOverlayButtonPressed,
 		commitAnalyticsEvent = EventNames.EditingFlowTextOverlayDoneButtonPressed,
 		cancelAnalyticsEvent = EventNames.EditingFlowTextOverlayBackButtonPressed
 	},
-	supportedCaptureTypes = if require(MomentsCreation.Flags.FFlagMomentsTextOverlayOnPhotos) then { Enum.CaptureType.Video, Enum.CaptureType.Screenshot } else { Enum.CaptureType.Video },
+	supportedCaptureTypes = if FFlagMomentsTextOverlayOnPhotosModule then { Enum.CaptureType.Video, Enum.CaptureType.Screenshot } else { Enum.CaptureType.Video },
 	supportedMomentTypes = if FFlagMomentsCreateAvatarPosts then { MomentTypeModule.Avatar } else nil,
 	createSession = function()
 		-- upvalues: CreateEditSessionModule (copy)

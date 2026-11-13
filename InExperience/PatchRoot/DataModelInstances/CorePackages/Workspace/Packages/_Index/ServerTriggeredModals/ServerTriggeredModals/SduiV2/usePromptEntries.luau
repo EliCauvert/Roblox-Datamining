@@ -1,8 +1,10 @@
 ﻿local Parent = script:FindFirstAncestor("ServerTriggeredModals").Parent
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
+local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
 local _ = require(script.Parent.PromptStyle)
-local GetSduiApiStoreFunction = require(Parent.SduiSharedUtilities).getSduiApiStore
+local _ = require(script.Parent.Types.PromptEntry)
+local GetSduiApiStoreFunction = SduiSharedUtilitiesModule.getSduiApiStore
 
 return function(p1, Category)
 	-- upvalues: SignalsReactModule (copy), GetSduiApiStoreFunction (copy), ReactModule (copy)

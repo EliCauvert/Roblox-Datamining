@@ -222,8 +222,9 @@ return function(p1)
 			local AbsoluteSize = UseStateResult.AbsoluteSize
 			local XRatio = AbsoluteSize.X / NewItemsPerRow1
 			local X = UseRefResult.current.CanvasPosition.X
+			local X1 = AbsoluteSize.X
 			local Largest = math.max(1, math.floor(X / XRatio) + 1)
-			local Smallest = math.min(#UseSocialCarouselContextModuleResult.tiles, (math.ceil((X + AbsoluteSize.X) / XRatio)))
+			local Smallest = math.min(#UseSocialCarouselContextModuleResult.tiles, (math.ceil((X + X1) / XRatio)))
 			UseRefResult1.current = { startIndex = Largest, endIndex = Smallest }
 			
 			for i = Largest, Smallest do

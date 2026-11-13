@@ -16,14 +16,16 @@ local IconPositionModule = require(Foundation.Enums.IconPosition)
 local ColorNamespaceModule = require(Foundation.Enums.ColorNamespace)
 local StateLayerModeModule = require(Foundation.Enums.StateLayerMode)
 local _ = require(Foundation.Enums.CursorType)
+local ChipSizeModule = require(Foundation.Enums.ChipSize)
+local ChipVariantModule = require(Foundation.Enums.ChipVariant)
 local UseChipVariantsModule = require(script.Parent.useChipVariants)
 local config = {
 	isChecked = false,
 	Selectable = true,
 	isDisabled = false,
 	testId = "--foundation-chip",
-	size = require(Foundation.Enums.ChipSize).Medium,
-	variant = require(Foundation.Enums.ChipVariant).Standard
+	size = ChipSizeModule.Medium,
+	variant = ChipVariantModule.Standard
 }
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)

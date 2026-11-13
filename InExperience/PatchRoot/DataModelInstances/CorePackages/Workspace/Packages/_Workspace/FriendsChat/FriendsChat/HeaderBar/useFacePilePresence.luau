@@ -3,9 +3,10 @@ local Parent = FriendsChat.Parent
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
+local FoundationModule = require(Parent.Foundation)
 local DataHydrationModule = require(Parent.DataHydration)
 local FFlagFriendsChatFacePileGroupPresenceModule = require(FriendsChat.Flags.FFlagFriendsChatFacePileGroupPresence)
-local UserPresence = require(Parent.Foundation).Enums.UserPresence
+local UserPresence = FoundationModule.Enums.UserPresence
 local PresenceType = DataHydrationModule.Presence.PresenceEnums.PresenceType
 local GetResult = DataHydrationModule.Presence.PresenceStore.get()
 

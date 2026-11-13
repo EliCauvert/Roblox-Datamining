@@ -1,6 +1,7 @@
 ﻿local Parent = script.Parent.Parent.Parent
 local Parent1 = Parent.Parent
 local Array = require(Parent1.LuauPolyfill).Array
+local LuauRegExpModule = require(Parent1.LuauRegExp)
 local _ = require(Parent1.GraphQL)
 local _ = require(script.Parent.types)
 local UtilitiesModule = require(Parent.utilities)
@@ -11,6 +12,13 @@ local ResultKeyNameFromFieldfFunction = UtilitiesModule.resultKeyNameFromFieldf
 local ShouldIncludeFunction = UtilitiesModule.shouldInclude
 local IsNonNullObjectFunction = UtilitiesModule.isNonNullObject
 local HasOwnPropertyModule = require(Parent.luaUtils.hasOwnProperty)
+
+local function getTypenameFromStoreObject(p1, p2)
+	-- upvalues: IsReferenceFunction (copy)
+	return if IsReferenceFunction(p2) then p1:get(p2.__ref, "__typename") elseif p2 then p2.__typename else nil
+end
+
+local AZAZ09aZAZ = LuauRegExpModule("^[_a-zA-Z][_0-9a-zA-Z]*", "i")
 local Matches = {}
 
 local function selectionSetMatchesResult(SelectionSet, p1, p2)
@@ -32,11 +40,8 @@ end
 
 return {
 	hasOwn = HasOwnPropertyModule,
-	getTypenameFromStoreObject = function(p1, p2)
-		-- upvalues: IsReferenceFunction (copy)
-		return if IsReferenceFunction(p2) then p1:get(p2.__ref, "__typename") elseif p2 then p2.__typename else nil
-	end,
-	TypeOrFieldNameRegExp = require(Parent1.LuauRegExp)("^[_a-zA-Z][_0-9a-zA-Z]*", "i"),
+	getTypenameFromStoreObject = getTypenameFromStoreObject,
+	TypeOrFieldNameRegExp = AZAZ09aZAZ,
 	fieldNameFromStoreName = function(Text: string)
 		-- upvalues: Matches (copy)
 		if Matches[Text] then

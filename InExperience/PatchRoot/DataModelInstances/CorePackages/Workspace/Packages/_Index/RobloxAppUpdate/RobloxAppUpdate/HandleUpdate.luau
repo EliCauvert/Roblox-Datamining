@@ -1,9 +1,10 @@
 ﻿local RobloxAppUpdate = script:FindFirstAncestor("RobloxAppUpdate")
+local Parent = RobloxAppUpdate.Parent
 local _ = require(RobloxAppUpdate.Types)
 local ThunksModule = require(RobloxAppUpdate.Thunks)
 local GetUpdateMessageTypeFunction = ThunksModule.GetUpdateMessageType
 local OpenCentralOverlayForUpdateRequiredPromptFunction = ThunksModule.OpenCentralOverlayForUpdateRequiredPrompt
-local SetNetworkingErrorToastFunction = require(RobloxAppUpdate.Parent.RobloxAppToastsRodux).Thunks.SetNetworkingErrorToast
+local SetNetworkingErrorToastFunction = require(Parent.RobloxAppToastsRodux).Thunks.SetNetworkingErrorToast
 
 return function(Callback, p1, p2, p3, p4, Callback1)
 	-- upvalues: GetUpdateMessageTypeFunction (copy), OpenCentralOverlayForUpdateRequiredPromptFunction (copy), SetNetworkingErrorToastFunction (copy)

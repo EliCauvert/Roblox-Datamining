@@ -1,6 +1,7 @@
 ﻿local VirtualEvents = script:FindFirstAncestor("VirtualEvents")
 local Parent = VirtualEvents.Parent
 local ReactModule = require(Parent.React)
+local LocalizationModule = require(Parent.Localization)
 local Default = require(Parent.LoggingProtocol).default
 local NotificationsUpsellModule = require(Parent.NotificationsUpsell)
 local PermissionsProtocol = require(Parent.PermissionsProtocol).PermissionsProtocol
@@ -12,7 +13,7 @@ local _ = require(script.Parent.PushUpsellPromptView)
 local ModalEventConstants = NotificationsUpsellModule.ModalEventConstants
 local PushUpsellEventConfig = NotificationsUpsellModule.PushUpsellEventConfig
 local RequestPushNotificationPermissionFunction = NotificationsUpsellModule.requestPushNotificationPermission
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 
 return function(p1)
 	-- upvalues: UseScreenSizeFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), ModalEventConstants (copy), Default (copy), PushUpsellEventConfig (copy), MouseIconOverrideService (copy), FetchInGameRsvpPushUpsellModule (copy), PermissionsProtocol (copy), RequestPushNotificationPermissionFunction (copy)

@@ -8,8 +8,10 @@ local AnalyticsConstantsModule = require(InExperienceSideSheet.Analytics.Analyti
 local SidesheetAnalyticsModule = require(InExperienceSideSheet.Analytics.SidesheetAnalytics)
 local ClosePeoplePageOpenedWithSideSheetModule = require(InExperienceSideSheet.Utils.closePeoplePageOpenedWithSideSheet)
 local ToggleSideSheetModule = require(InExperienceSideSheet.Utils.toggleSideSheet)
-local FFlagSideSheetOpenPeoplePage = require(InExperienceSideSheet.Flags).FFlagSideSheetOpenPeoplePage
-local FFlagSideSheetFocusNav = require(Parent.SharedFlags).FFlagSideSheetFocusNav
+local FlagsModule = require(InExperienceSideSheet.Flags)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagSideSheetOpenPeoplePage = FlagsModule.FFlagSideSheetOpenPeoplePage
+local FFlagSideSheetFocusNav = SharedFlagsModule.FFlagSideSheetFocusNav
 
 return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), FFlagSideSheetOpenPeoplePage (copy), ClosePeoplePageOpenedWithSideSheetModule (copy), ToggleSideSheetModule (copy), SidesheetAnalyticsModule (copy), AnalyticsConstantsModule (copy), FFlagSideSheetFocusNav (copy), View (copy), Text (copy)

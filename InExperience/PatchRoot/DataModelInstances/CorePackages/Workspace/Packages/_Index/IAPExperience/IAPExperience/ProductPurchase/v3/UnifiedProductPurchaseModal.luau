@@ -161,11 +161,20 @@ local function UnifiedProductPurchaseModal(p1)
 	for i, value in pairs(UseMemoResult) do
 		Copy[i] = value
 	end
+	local Element = ReactModule.createElement(View, {
+		tag = "col gap-medium auto-y size-full-0 align-x-start align-y-start",
+		LayoutOrder = 2
+	}, Copy)
 	local ItemPrice = p1.product.itemPrice
 	local PriceInRobux = if ItemPrice then ItemPrice.priceInRobux else p1.product.itemRobuxCost
 	local FreeWithPlus = if FFlagLuaAppsEnablePromptVIPServerPurchase and PriceInRobux == 0 then if p1.isFreeWithRobloxPlus then UseLocalizationResult.FreeWithPlus elseif p1.isMonthlyPrice then UseLocalizationResult.Free else nil else nil
 	local IsPurchaseModalTypeMatch: boolean = FFlagEnableUnifiedPurchaseFlowForDevSubs and p1.purchaseModalType == UnifiedPurchaseModalTypeEnumModule.DeveloperSubscription
-	local Element = ReactModule.createElement(CartPricingProductDetailsModule, {
+	local Element1 = if IsPurchaseModalTypeMatch then ReactModule.createElement(Text, {
+		LayoutOrder = 4,
+		tag = "wrap size-full-0 auto-y text-caption-small text-wrap text-align-x-left",
+		Text = string.gsub(string.gsub(UseLocalizationResult.SubscribeTermsAgreement or "", "<a.->(.-)</a>", "%1"), "<.->", "")
+	}) else nil
+	local Element2 = ReactModule.createElement(CartPricingProductDetailsModule, {
 		cartPricing = UseCartPricingModuleResult,
 		purchaseModalType = p1.purchaseModalType,
 		priceSuffix = PerMonth,
@@ -192,7 +201,7 @@ local function UnifiedProductPurchaseModal(p1)
 			SheetContentContainer = ReactModule.createElement(View, {
 				tag = "col gap-medium auto-y size-full-0 align-x-center align-y-center"
 			}, {
-				ProductDetailsContainer = if Element then Element else ReactModule.createElement(View, {
+				ProductDetailsContainer = if Element2 then Element2 else ReactModule.createElement(View, {
 					tag = "col gap-medium auto-y size-full-0 align-x-center align-y-center",
 					LayoutOrder = 1
 				}, {
@@ -207,10 +216,7 @@ local function UnifiedProductPurchaseModal(p1)
 						model = p1.product.model
 					})
 				}),
-				PostPurchaseActions = ReactModule.createElement(View, {
-					tag = "col gap-medium auto-y size-full-0 align-x-start align-y-start",
-					LayoutOrder = 2
-				}, Copy)
+				PostPurchaseActions = Element
 			})
 		}),
 		Actions = ReactModule.createElement(Sheet.Actions, { LayoutOrder = 3 }, {
@@ -239,11 +245,7 @@ local function UnifiedProductPurchaseModal(p1)
 					LayoutOrder = 3,
 					Text = UseLocalizationResult.TestPurchaseDisclaimer
 				}) else nil,
-				SubscribeTerms = if IsPurchaseModalTypeMatch then ReactModule.createElement(Text, {
-					LayoutOrder = 4,
-					tag = "wrap size-full-0 auto-y text-caption-small text-wrap text-align-x-left",
-					Text = string.gsub(string.gsub(UseLocalizationResult.SubscribeTermsAgreement or "", "<a.->(.-)</a>", "%1"), "<.->", "")
-				}) else nil
+				SubscribeTerms = Element1
 			})
 		})
 	})

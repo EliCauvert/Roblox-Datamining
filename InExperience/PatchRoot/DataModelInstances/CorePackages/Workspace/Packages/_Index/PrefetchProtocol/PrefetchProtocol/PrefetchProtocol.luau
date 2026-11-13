@@ -1,10 +1,11 @@
 ﻿local Parent = script.Parent.Parent
 local MessageBus = require(Parent.MessageBus).MessageBus
+local TModule = require(Parent.t)
 local _ = require(script.Parent.PrefetchProtocolTypes)
 local PrefetchProtocolModule = {
 	POP_GUID_DESCRIPTOR = {
 		fid = MessageBus.getMessageId("Prefetch", "popPendingPrefetchGuid"),
-		validateParams = require(Parent.t).table
+		validateParams = TModule.table
 	}
 }
 PrefetchProtocolModule.__index = PrefetchProtocolModule

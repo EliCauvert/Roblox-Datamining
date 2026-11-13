@@ -1,6 +1,7 @@
 ﻿local Parent = script.Parent.Parent
 local LuauPolyfillModule = require(Parent.Parent.LuauPolyfill)
 local Array = LuauPolyfillModule.Array
+local Object = LuauPolyfillModule.Object
 local InspectFunction = require(Parent.jsutils.inspect).inspect
 local _ = require(Parent.language.ast)
 local IsNodeFunction = require(script.Parent.ast).isNode
@@ -90,7 +91,7 @@ local QueryDocumentKeys = {
 	EnumTypeExtension = { "name", "directives", "values" },
 	InputObjectTypeExtension = { "name", "directives", "fields" }
 }
-local FreezeResult = LuauPolyfillModule.Object.freeze({})
+local FreezeResult = Object.freeze({})
 local NullModule = require(Parent.luaUtils.null)
 local Callback = nil
 

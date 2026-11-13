@@ -7,7 +7,9 @@ local _ = require(Parent.Dash)
 local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local FFlagAXEditorSubcategoryFilters = AvatarExperienceFlagsModule.FFlagAXEditorSubcategoryFilters
 local FFlagAXEnableExpiredUserLookCheckout = AvatarExperienceFlagsModule.FFlagAXEnableExpiredUserLookCheckout
+local FFlagAXOutfitPageRevamp = AvatarExperienceFlagsModule.FFlagAXOutfitPageRevamp
 local FFlagAXAvatarFoldersEnabled = AvatarExperienceFlagsModule.FFlagAXAvatarFoldersEnabled
+local FFlagAXBackgroundGenerationAnalytics = AvatarExperienceFlagsModule.FFlagAXBackgroundGenerationAnalytics
 local FFlagAXPhotoboothMomentsPage = AvatarExperienceFlagsModule.FFlagAXPhotoboothMomentsPage
 local FFlagAXPhotoboothMomentsLogging = AvatarExperienceFlagsModule.FFlagAXPhotoboothMomentsLogging
 local FFlagAXFixAvatarScreenVR = AvatarExperienceFlagsModule.FFlagAXFixAvatarScreenVR
@@ -36,7 +38,7 @@ local config1 = {
 	[AvatarScreenModule.AvatarExperienceRoot] = {},
 	[AvatarScreenModule.AvatarBackground] = { isTransparent = false },
 	[AvatarScreenModule.BackgroundGeneration] = {
-		analyticsData = if AvatarExperienceFlagsModule.FFlagAXBackgroundGenerationAnalytics then {
+		analyticsData = if FFlagAXBackgroundGenerationAnalytics then {
 			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.BACKGROUND_GENERATION
 		} else nil
 	},
@@ -221,7 +223,7 @@ local config1 = {
 	}
 }
 
-if AvatarExperienceFlagsModule.FFlagAXOutfitPageRevamp then
+if FFlagAXOutfitPageRevamp then
 	config1[AvatarScreenModule.AddOutfitDialog] = {
 		isTransparent = false,
 		VRPanelPlacement = "Left",

@@ -1,11 +1,12 @@
 ﻿local AvatarExperienceRodux = script:FindFirstAncestor("AvatarExperienceRodux")
 local Parent = AvatarExperienceRodux.Parent
+local RoduxModule = require(Parent.Rodux)
 local _ = require(Parent.AvatarExperienceCommon)
 local _ = require(Parent.AvatarExperienceModel)
 local FFlagAXDurablesForMIS = require(Parent.AvatarExperienceFlags).FFlagAXDurablesForMIS
 local _ = require(AvatarExperienceRodux.Types.OutfitTryOn)
 
-return require(Parent.Rodux).makeActionCreator(script.Name, function(ItemType, ItemSubType, ItemId, SelectedInTryOnManager, OverrideOrder, BundleInfo, WidgetInfo, ReceivedBundleInfo, IsRecolorable, BundleItems, ResetTryOnsBeforeToggleOn, p1)
+return RoduxModule.makeActionCreator(script.Name, function(ItemType, ItemSubType, ItemId, SelectedInTryOnManager, OverrideOrder, BundleInfo, WidgetInfo, ReceivedBundleInfo, IsRecolorable, BundleItems, ResetTryOnsBeforeToggleOn, p1)
 	-- upvalues: FFlagAXDurablesForMIS (copy)
 	return {
 		itemType = ItemType,

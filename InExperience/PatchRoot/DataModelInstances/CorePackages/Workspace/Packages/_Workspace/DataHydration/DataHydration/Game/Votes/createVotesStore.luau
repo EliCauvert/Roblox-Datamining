@@ -16,16 +16,14 @@ local DiscoveryEventErrorLogger = DiscoveryUtilsModule.DiscoveryEventErrorLogger
 local FetchVotesModule = require(script.Parent.fetchVotes)
 local FetchUserVoteModule = require(script.Parent.fetchUserVote)
 local RequestUserVoteUpdateModule = require(script.Parent.requestUserVoteUpdate)
-local SharedFlagsModule = require(Parent.SharedFlags)
-local FFlagLuaAppDataHydrationVotesStoreTrackOptimisticVotes = SharedFlagsModule.FFlagLuaAppDataHydrationVotesStoreTrackOptimisticVotes
 local ReasonNotVoteable = VotesStoreTypesModule.ReasonNotVoteable
 local FFlagLuaAppInExperienceDetailsPrompt = require(Parent.SharedFlags).FFlagLuaAppInExperienceDetailsPrompt
-local FFlagLuaAppDataHydrationUpdateItem = SharedFlagsModule.FFlagLuaAppDataHydrationUpdateItem
+local FFlagLuaAppDataHydrationUpdateItem = require(Parent.SharedFlags).FFlagLuaAppDataHydrationUpdateItem
 local GetGameInfoStoreModule = require(DataHydration.Game.GameInfo.getGameInfoStore)
 local USERVOTECACHETTLSECONDS = game:DefineFastInt("USER_VOTE_CACHE_TTL_SECONDS", 600)
 
 return function()
-	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), DashModule (copy), FetchVotesModule (copy), FFlagLuaAppInExperienceDetailsPrompt (copy), VotesUtilsModule (copy), USERVOTECACHETTLSECONDS (copy), LogResponseErrorFunction (copy), FetchUserVoteModule (copy), VotesStoreTypesModule (copy), DiscoveryEventErrorLogger (copy), SignalsModule (copy), CryoModule (copy), FFlagLuaAppDataHydrationVotesStoreTrackOptimisticVotes (copy), GetGameInfoStoreModule (copy), RequestUserVoteUpdateModule (copy), HttpService (copy), ReasonNotVoteable (copy), StatusCodes (copy), FFlagLuaAppDataHydrationUpdateItem (copy)
+	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), DashModule (copy), FetchVotesModule (copy), FFlagLuaAppInExperienceDetailsPrompt (copy), VotesUtilsModule (copy), USERVOTECACHETTLSECONDS (copy), LogResponseErrorFunction (copy), FetchUserVoteModule (copy), VotesStoreTypesModule (copy), DiscoveryEventErrorLogger (copy), SignalsModule (copy), CryoModule (copy), GetGameInfoStoreModule (copy), RequestUserVoteUpdateModule (copy), HttpService (copy), ReasonNotVoteable (copy), StatusCodes (copy), FFlagLuaAppDataHydrationUpdateItem (copy)
 	local DataCacheModule = CreateDataCacheModule()
 	local DataResolverModule = CreateDataResolverModule({
 		cache = DataCacheModule,
@@ -104,7 +102,7 @@ return function()
 		getAndFetchUserVote = DataResolverModule1.getOptimisticAndFetchItem,
 		getAndFetchUserVotes = DataResolverModule1.getOptimisticAndFetchItems,
 		updateUserVote = function(UniverseId, Enabled)
-			-- upvalues: SignalsModule (upval), DataResolverModule1 (copy), DataCacheModule (copy), CryoModule (upval), FFlagLuaAppDataHydrationVotesStoreTrackOptimisticVotes (upval), VotesUtilsModule (upval), GetGameInfoStoreModule (upval), RequestUserVoteUpdateModule (upval), HttpService (upval), VotesStoreTypesModule (upval), ReasonNotVoteable (upval), StatusCodes (upval), DiscoveryEventErrorLogger (upval), LogResponseErrorFunction (upval)
+			-- upvalues: SignalsModule (upval), DataResolverModule1 (copy), DataCacheModule (copy), CryoModule (upval), VotesUtilsModule (upval), GetGameInfoStoreModule (upval), RequestUserVoteUpdateModule (upval), HttpService (upval), VotesStoreTypesModule (upval), ReasonNotVoteable (upval), StatusCodes (upval), DiscoveryEventErrorLogger (upval), LogResponseErrorFunction (upval)
 			local Signal, Signal2 = SignalsModule.createSignal(nil)
 			local OptimisticCachedItem, OptimisticCachedItem2 = DataResolverModule1.getOptimisticCachedItem(UniverseId)
 			local DataResult = OptimisticCachedItem and OptimisticCachedItem.data(false)
@@ -125,26 +123,12 @@ return function()
 			})
 			
 			if DataResult1 then
-				local v1 = nil
-				local v2 = nil
-				if FFlagLuaAppDataHydrationVotesStoreTrackOptimisticVotes then
-					v1 = (if Enabled == true then 1 else 0) - (if UserVote == true then 1 else 0)
-					v2 = (if Enabled == false then 1 else 0) - (if UserVote == false then 1 else 0)
-				else
-					v1 = if Enabled == true then 1 else 0
-					v2 = if Enabled == false then 1 else 0
-				end
-				local NewUpVotes = DataResult1.upVotes + v1
-				local NewDownVotes = DataResult1.downVotes + v2
-				
-				if FFlagLuaAppDataHydrationVotesStoreTrackOptimisticVotes then
-					NewUpVotes = math.max(0, NewUpVotes)
-					NewDownVotes = math.max(0, NewDownVotes)
-				end
+				local Largest = math.max(0, DataResult1.upVotes + ((if Enabled == true then 1 else 0) - (if UserVote == true then 1 else 0)))
+				local Largest1 = math.max(0, DataResult1.downVotes + ((if Enabled == false then 1 else 0) - (if UserVote == false then 1 else 0)))
 				DataCacheModule.updateItem(UniverseId, {
-					upVotes = NewUpVotes,
-					downVotes = NewDownVotes,
-					rating = VotesUtilsModule.calculateRating(NewUpVotes, NewDownVotes)
+					upVotes = Largest,
+					downVotes = Largest1,
+					rating = VotesUtilsModule.calculateRating(Largest, Largest1)
 				})
 			end
 			local ApplyVoteChangeResult = nil

@@ -2,6 +2,7 @@
 local Parent = script:FindFirstAncestor("AvatarExperienceAnalytics").Parent
 local ReactModule = require(Parent.React)
 local RobloxAppEnumsModule = require(Parent.RobloxAppEnums)
+local AvatarScreen = require(Parent.AvatarExperienceNavigation).Enums.AvatarScreen
 local UnifiedEventLogConstantsModule = require(script.Parent.UnifiedEventLogConstants)
 local UnifiedEventPageStoreModule = require(script.Parent.Store.UnifiedEventPageStore)
 local config = {
@@ -10,7 +11,7 @@ local config = {
 	[RobloxAppEnumsModule.SwitchTab.AvatarExperienceTab] = true
 }
 
-for _, value in require(Parent.AvatarExperienceNavigation).Enums.AvatarScreen do
+for _, value in AvatarScreen do
 	config[value] = true
 end
 local function _(): boolean

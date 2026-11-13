@@ -5,13 +5,15 @@ local FoundationModule = require(Parent1.Foundation)
 local UseKeybindsModule = require(Parent.Hooks.useKeybinds)
 local TouchControlsEnumModule = require(Parent.Enums.TouchControlsEnum)
 local TouchActionModule = require(Parent.Components.Touch.TouchAction)
+local RobloxAppHooksModule = require(Parent1.RobloxAppHooks)
+local RobloxAppEnumsModule = require(Parent1.RobloxAppEnums)
 local DisplayModule = require(Parent1.Display)
 local ConstantsModule = require(Parent.Constants)
 local UserGameSettings = UserSettings():GetService("UserGameSettings")
 local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
-local UseDeviceOrientationFunction = require(Parent1.RobloxAppHooks).useDeviceOrientation
-local DeviceOrientationMode = require(Parent1.RobloxAppEnums).DeviceOrientationMode
+local UseDeviceOrientationFunction = RobloxAppHooksModule.useDeviceOrientation
+local DeviceOrientationMode = RobloxAppEnumsModule.DeviceOrientationMode
 local TouchHelpPageResponsiveUnits = game:DefineFastFlag("TouchHelpPageResponsiveUnits", false)
 
 local function _(p1, p2, p3)

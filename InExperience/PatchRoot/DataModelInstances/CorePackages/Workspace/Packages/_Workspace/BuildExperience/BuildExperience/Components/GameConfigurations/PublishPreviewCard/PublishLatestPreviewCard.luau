@@ -1,9 +1,10 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local _ = require(BuildExperience.Chat.chatTypes)
 local PublishExperienceTitleModule = require(script.Parent.PublishExperienceTitle)
-local View = require(Parent.Foundation).View
+local View = FoundationModule.View
 
 return function(p1)
 	-- upvalues: ReactModule (copy), View (copy), PublishExperienceTitleModule (copy)

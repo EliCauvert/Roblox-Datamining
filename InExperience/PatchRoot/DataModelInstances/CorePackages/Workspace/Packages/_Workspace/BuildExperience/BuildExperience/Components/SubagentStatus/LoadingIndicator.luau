@@ -1,4 +1,5 @@
 ﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local Icon = FoundationModule.Icon
@@ -8,7 +9,7 @@ local IconName = FoundationModule.Enums.IconName
 local IconSize = FoundationModule.Enums.IconSize
 local ProgressShape = FoundationModule.Enums.ProgressShape
 local ProgressSize = FoundationModule.Enums.ProgressSize
-local SubagentTaskStatus = require(Parent.DataHydration.CreatorAgentChat).SubagentTaskStatus
+local SubagentTaskStatus = CreatorAgentChatModule.SubagentTaskStatus
 
 return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), SubagentTaskStatus (copy), View (copy), Progress (copy), ProgressShape (copy), ProgressSize (copy), Icon (copy), IconName (copy), IconSize (copy)

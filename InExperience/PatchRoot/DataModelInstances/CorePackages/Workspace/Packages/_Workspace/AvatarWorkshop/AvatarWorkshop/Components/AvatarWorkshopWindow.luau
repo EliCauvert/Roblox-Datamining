@@ -2,8 +2,9 @@
 local Parent = AvatarWorkshop.Parent
 local ReactModule = require(Parent.React)
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local RoactNavigationModule = require(Parent.RoactNavigation)
 local WorkshopWindowContextModule = require(AvatarWorkshop.Contexts.WorkshopWindowContext)
-local AppContainer = require(Parent.RoactNavigation).createAppContainer((require(AvatarWorkshop.Navigation.Navigators.WorkshopNavigator)))
+local AppContainer = RoactNavigationModule.createAppContainer((require(AvatarWorkshop.Navigation.Navigators.WorkshopNavigator)))
 
 return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), WorkshopWindowContextModule (copy), AppContainer (copy)

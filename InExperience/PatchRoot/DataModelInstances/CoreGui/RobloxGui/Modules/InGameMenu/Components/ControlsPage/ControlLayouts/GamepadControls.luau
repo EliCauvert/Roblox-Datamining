@@ -2,6 +2,7 @@
 local CorePackages = game:GetService("CorePackages")
 local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDependencies)
 local Roact = InGameMenuDependenciesModule.Roact
+local UIBlox = InGameMenuDependenciesModule.UIBlox
 local Parent = script.Parent.Parent.Parent.Parent
 local ControlLayoutContainerModule = require(script.Parent.Parent.ControlLayoutContainer)
 local ThemedTextLabelModule = require(Parent.Components.ThemedTextLabel)
@@ -9,7 +10,7 @@ local AssetsModule = require(Parent.Resources.Assets)
 local ControlsModule = require(Parent.Resources.Controls)
 local ReactModule = require(CorePackages.Packages.React)
 local WithLocalizationModule = require(Parent.Localization.withLocalization)
-local ImageSetLabel = InGameMenuDependenciesModule.UIBlox.Core.ImageSet.ImageSetLabel
+local ImageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
 local Image = require(CorePackages.Packages.Foundation).Image
 local FFlagCoreUiMigrateUIBloxToFoundation = require(CorePackages.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
 local YOffset = #ControlsModule.gamepadLabels.right * 43 + 62

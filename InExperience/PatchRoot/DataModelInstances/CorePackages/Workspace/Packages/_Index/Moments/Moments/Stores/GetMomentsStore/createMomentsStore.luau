@@ -1,9 +1,10 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
 local HttpService = game:GetService("HttpService")
+local SignalsModule = require(Parent.Signals)
 local FFlagEnableArgus = require(Parent.SharedFlags).FFlagEnableArgus
 local GetMomentsPreferencesStoreModule = require(Moments.Stores.GetMomentsPreferencesStore)
-local CreateSignalFunction = require(Parent.Signals).createSignal
+local CreateSignalFunction = SignalsModule.createSignal
 
 return function()
 	-- upvalues: CreateSignalFunction (copy), HttpService (copy), GetMomentsPreferencesStoreModule (copy), FFlagEnableArgus (copy)

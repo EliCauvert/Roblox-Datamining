@@ -8,6 +8,11 @@ local R15plusUtilsModule = require(Parent.util.R15plusUtils)
 local Vector3UtilsModule = require(Parent.util.Vector3Utils)
 local ValueToStringModule = require(Parent.util.valueToString)
 local CFrameUtilsModule = require(Parent.util.CFrameUtils)
+local Categories = {
+	ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+	ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
+}
+local RequiredData = { ValidationEnumsModule.SharedDataMember.rootInstance }
 local UGCValidationHrdJointSizeHundredthsLimitRatio = game:DefineFastInt("UGCValidationHrdJointSizeHundredthsLimit", 150) / 100
 local _Vector3 = Vector3.new(game:DefineFastInt("UGCValidationHrdJointRangeMinXHundredths", 0) / 100, game:DefineFastInt("UGCValidationHrdJointRangeMinYHundredths", 0) / 100, game:DefineFastInt("UGCValidationHrdJointRangeMinZHundredths", 0) / 100)
 local _Vector3_1 = Vector3.new(game:DefineFastInt("UGCValidationHrdJointRangeMaxXHundredths", 0) / 100, game:DefineFastInt("UGCValidationHrdJointRangeMaxYHundredths", 0) / 100, game:DefineFastInt("UGCValidationHrdJointRangeMaxZHundredths", 0) / 100)
@@ -44,11 +49,8 @@ local function checkSize(p1, JointName, PropertyName, IndexSize: number, UGCVali
 end
 
 return {
-	categories = {
-		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
-	},
-	requiredData = { ValidationEnumsModule.SharedDataMember.rootInstance },
+	categories = Categories,
+	requiredData = RequiredData,
 	fflag = R15plusUtilsModule.checkFlagEnabledForAllowHrd,
 	run = function(p1, p2)
 		-- upvalues: GetAllInstancesIsAModule (copy), ValidationRulesUtilModule (copy), CFrameUtilsModule (copy), Vector3UtilsModule (copy), _Vector3_2 (copy), _Vector3_3 (copy), ErrorSourceStringsModule (copy), ValueToStringModule (copy), R15plusUtilsModule (copy), checkSize (copy), UGCValidationHrdJointSizeHundredthsLimitRatio (copy), checkVectorRange (copy), _Vector3 (copy), _Vector3_1 (copy), UGCValidationDrdJointSizeHundredthsLimitRatio (copy), _Vector3_4 (copy), _Vector3_5 (copy)

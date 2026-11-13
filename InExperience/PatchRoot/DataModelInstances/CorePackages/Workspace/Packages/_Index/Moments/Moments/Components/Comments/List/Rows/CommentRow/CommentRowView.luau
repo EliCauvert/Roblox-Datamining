@@ -2,6 +2,7 @@
 local Parent = Moments.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local ReactUtilsModule = require(Parent.ReactUtils)
 local FFlagMomentsCommentRowRedesignModule = require(Moments.Flags.FFlagMomentsCommentRowRedesign)
 local FFlagMomentsCommentRowTrailingReactionModule = require(Moments.Flags.FFlagMomentsCommentRowTrailingReaction)
 local FFlagMomentsCommentsAttachSheetScrollerModule = require(Moments.Flags.FFlagMomentsCommentsAttachSheetScroller)
@@ -17,7 +18,7 @@ local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
 local ThumbnailSize = FoundationModule.Enums.ThumbnailSize
 local ThumbnailType = FoundationModule.Enums.ThumbnailType
 local GetRbxThumbFunction = FoundationModule.Utility.getRbxThumb
-local UseComposedRefFunction = require(Parent.ReactUtils).useComposedRef
+local UseComposedRefFunction = ReactUtilsModule.useComposedRef
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
 local function noop() end
@@ -225,7 +226,7 @@ return function(Frame)
 					})
 				}) else nil
 			}),
-			ActionsMenu = if FFlagMomentsCommentRowTrailingReactionModule or ActionsMenu == nil or HasAnchorRef then nil else ReactModule.createElement(CommentActionsMenuModule, {
+			ActionsMenu = if FFlagMomentsCommentRowTrailingReactionModule or (ActionsMenu == nil or HasAnchorRef) then nil else ReactModule.createElement(CommentActionsMenuModule, {
 				LayoutOrder = 3,
 				commentId = Frame.commentId,
 				items = ActionsMenu.items,

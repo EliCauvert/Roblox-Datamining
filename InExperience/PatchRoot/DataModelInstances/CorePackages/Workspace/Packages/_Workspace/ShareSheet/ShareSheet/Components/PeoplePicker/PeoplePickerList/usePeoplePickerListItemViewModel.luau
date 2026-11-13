@@ -1,13 +1,15 @@
 ﻿local Parent = script:FindFirstAncestor("ShareSheet").Parent
 local FoundationModule = require(Parent.Foundation)
+local FriendsCommonModule = require(Parent.FriendsCommon)
 local ReactModule = require(Parent.React)
+local SocialCommonModule = require(Parent.SocialCommon)
 local _ = require(script.Parent.PeoplePickerListView)
 local Icon = FoundationModule.Icon
 local IconName = FoundationModule.Enums.IconName
 local IconSize = FoundationModule.Enums.IconSize
 local UseTokensFunction = FoundationModule.Hooks.useTokens
-local UseGetPresenceByUserIdFunction = require(Parent.FriendsCommon).Hooks.useGetPresenceByUserId
-local ConvertToFoundationPresenceEnumFunction = require(Parent.SocialCommon).Utils.convertToFoundationPresenceEnum
+local UseGetPresenceByUserIdFunction = FriendsCommonModule.Hooks.useGetPresenceByUserId
+local ConvertToFoundationPresenceEnumFunction = SocialCommonModule.Utils.convertToFoundationPresenceEnum
 
 return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseGetPresenceByUserIdFunction (copy), ConvertToFoundationPresenceEnumFunction (copy), FoundationModule (copy), ReactModule (copy), Icon (copy), IconName (copy), IconSize (copy)

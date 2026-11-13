@@ -7,6 +7,7 @@ local FFlagUserListCanonicalCtaAnalyticsModule = require(UserList.Flags.FFlagUse
 local FFlagUserListActionsV2 = require(Parent.SharedFlags).FFlagUserListActionsV2
 local FFlagUserListHideNotJoinableJoin = require(Parent.SharedFlags).FFlagUserListHideNotJoinableJoin
 local IconName = FoundationModule.Enums.IconName
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local ButtonTypes = EnumsModule.ButtonTypes
 local Joinability = EnumsModule.Joinability
 local config = {
@@ -24,12 +25,12 @@ local config = {
 	Chat = {
 		buttonType = ButtonTypes.Chat,
 		handlerKey = ButtonTypes.Chat,
-		variant = FoundationModule.Enums.ButtonVariant.Standard
+		variant = ButtonVariant.Standard
 	},
 	JoinExperience = { buttonType = ButtonTypes.Join }
 }
 
-local function v12() end
+local function v13() end
 
 local function _(List, p1): boolean
 	if not List then
@@ -49,7 +50,7 @@ local _ = function(p2, p3): boolean
 end
 
 return function(p2, p3, p4, p5, p6)
-	-- upvalues: config (copy), FFlagUserListHideNotJoinableJoin (copy), ButtonTypes (copy), Joinability (copy), FFlagUserListCanonicalCtaAnalyticsModule (copy), v12 (copy), FFlagUserListActionsV2 (copy), IconName (copy)
+	-- upvalues: config (copy), FFlagUserListHideNotJoinableJoin (copy), ButtonTypes (copy), Joinability (copy), FFlagUserListCanonicalCtaAnalyticsModule (copy), v13 (copy), FFlagUserListActionsV2 (copy), IconName (copy)
 	if not p2 or not p2.buttons then
 		return { primaryCta = nil, secondaryCta = nil }
 	end
@@ -81,7 +82,7 @@ return function(p2, p3, p4, p5, p6)
 					onActivated = if Callback then function()
 						-- upvalues: Callback (copy), p4 (copy), FFlagUserListCanonicalCtaAnalyticsModule (upval), p6 (copy)
 						Callback(p4, if FFlagUserListCanonicalCtaAnalyticsModule then p6 else nil)
-					end else v12,
+					end else v13,
 					isDisabled = if FFlagUserListActionsV2 then if Entry.isDisabled or button.disabledReason ~= nil then true else nil else Entry.isDisabled,
 					disabledReason = button.disabledReason,
 					variant = Entry.variant,
@@ -98,7 +99,7 @@ return function(p2, p3, p4, p5, p6)
 						onActivated = if Callback1 then function()
 							-- upvalues: Callback1 (copy), p4 (copy), FFlagUserListCanonicalCtaAnalyticsModule (upval), p6 (copy)
 							Callback1(p4, if FFlagUserListCanonicalCtaAnalyticsModule then p6 else nil)
-						end else v12
+						end else v13
 					}
 				end
 				return { primaryCta = PrimaryCta, secondaryCta = SecondaryCta }

@@ -10,6 +10,7 @@ local OpenGameDetailsFunction = require(Parent.GameDetail).OpenGameDetails
 local UseOpenBlockingModalModule = require(Parent.MomentsCommon.useOpenBlockingModal)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagMomentsOptimisticProfilePending = SharedFlagsModule.FFlagMomentsOptimisticProfilePending
+local FFlagEnableArgusImmersiveNav = SharedFlagsModule.FFlagEnableArgusImmersiveNav
 local FFlagEnableMomentsCommentReporting = SharedFlagsModule.FFlagEnableMomentsCommentReporting
 local FFlagEnableMomentsCommentBlocking = SharedFlagsModule.FFlagEnableMomentsCommentBlocking
 local FFlagAbuseReportSubmissionTargetV4 = SharedFlagsModule.FFlagAbuseReportSubmissionTargetV4
@@ -46,6 +47,8 @@ local function MomentsFeedPageImmersive()
 	local UseNavigationResult = UseNavigationFunction()
 	local ExtraPropsParam = UseNavigationResult.getParam("extraProps")
 	local TargetUserId = if ExtraPropsParam and ExtraPropsParam.targetUserId then ExtraPropsParam.targetUserId else 0
+	local InitialIndex = if ExtraPropsParam and ExtraPropsParam.initialIndex then ExtraPropsParam.initialIndex else 1
+	local InitialMomentId = if FFlagMomentsOptimisticProfilePending and ExtraPropsParam ~= nil then ExtraPropsParam.initialMomentId else nil
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: FireAnalyticsEventFunction (upval), EventNames (upval), TargetUserId (copy), UseNavigationResult (copy)
 		FireAnalyticsEventFunction(EventNames.ProfileClosePressed, { userId = tostring(TargetUserId) })
@@ -171,8 +174,8 @@ local function MomentsFeedPageImmersive()
 			sessionSource = "profile",
 			feedKind = ImmersiveFeedKind.User,
 			targetUserId = TargetUserId,
-			initialIndex = if ExtraPropsParam and ExtraPropsParam.initialIndex then ExtraPropsParam.initialIndex else 1,
-			initialMomentId = if FFlagMomentsOptimisticProfilePending and ExtraPropsParam ~= nil then ExtraPropsParam.initialMomentId else nil,
+			initialIndex = InitialIndex,
+			initialMomentId = InitialMomentId,
 			onBack = UseResult,
 			openMomentsFeedReport = UseResult1,
 			openMomentCommentReport = if FFlagEnableMomentsCommentReporting then ReactModule.useCallback(function(p1)
@@ -252,4 +255,4 @@ local function MomentsFeedPageLegacy()
 	})
 end
 
-return if SharedFlagsModule.FFlagEnableArgusImmersiveNav then MomentsFeedPageImmersive else MomentsFeedPageLegacy
+return if FFlagEnableArgusImmersiveNav then MomentsFeedPageImmersive else MomentsFeedPageLegacy

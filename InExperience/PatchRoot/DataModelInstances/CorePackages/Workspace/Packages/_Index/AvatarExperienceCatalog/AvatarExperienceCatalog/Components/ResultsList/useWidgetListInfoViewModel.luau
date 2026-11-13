@@ -7,7 +7,9 @@ local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 local ResponsiveModule = require(Parent.Responsive)
 local InputModeStore = ResponsiveModule.GetInputModeStore(false)
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local FFlagAXNoCarouselsOnCatalogWithGamepadModule = require(AvatarExperienceCatalog.Flags.FFlagAXNoCarouselsOnCatalogWithGamepad)
+local FFlagAXHeroUnitActionButton = AvatarExperienceFlagsModule.FFlagAXHeroUnitActionButton
 local _ = require(AvatarExperienceCatalog.Models.WidgetListInfo)
 local _ = require(script.Parent.WidgetListInfoViewModel)
 local WidgetListBreakPointEnumModule = require(script.Parent.WidgetListBreakPointEnum)
@@ -435,7 +437,7 @@ local function formatWidgetTemplateAsCarousel(JoinResult, p3, p4)
 end
 
 local function formatWidgetTemplateAsHeroUnit(p3, p4, p5)
-	-- upvalues: config3 (copy), getFormattedBackgroundLayers (copy)
+	-- upvalues: config3 (copy), getFormattedBackgroundLayers (copy), FFlagAXHeroUnitActionButton (copy)
 	local PreviewColumns = p3.previewColumns
 	local Default = nil
 	
@@ -492,6 +494,7 @@ local function formatWidgetTemplateAsHeroUnit(p3, p4, p5)
 	config.previewRows = Default21
 	config.previewColumns = Default1
 	config.availableUntil = p3.availableUntil
+	config.button = if FFlagAXHeroUnitActionButton then p3.button else nil
 	
 	return config
 end
@@ -554,7 +557,7 @@ local function mergeCarouselTemplates(JoinResult, Template)
 end
 
 local function mergeHeroUnitTemplates(p3, Template)
-	-- upvalues: mergeWidgetStyle (copy), mergeCardStyle (copy), CryoModule (copy)
+	-- upvalues: mergeWidgetStyle (copy), mergeCardStyle (copy), CryoModule (copy), FFlagAXHeroUnitActionButton (copy)
 	return {
 		type = "HeroUnit",
 		numItemsToShow = if Template.numItemsToShow == nil then p3.numItemsToShow else Template.numItemsToShow,
@@ -568,7 +571,8 @@ local function mergeHeroUnitTemplates(p3, Template)
 		cardStyle = mergeCardStyle(p3.cardStyle, Template.cardStyle),
 		previewRows = CryoModule.Dictionary.join(p3.previewRows or {}, Template.previewRows or {}),
 		previewColumns = CryoModule.Dictionary.join(p3.previewColumns or {}, Template.previewColumns or {}),
-		availableUntil = if Template.availableUntil == nil then p3.availableUntil else Template.availableUntil
+		availableUntil = if Template.availableUntil == nil then p3.availableUntil else Template.availableUntil,
+		button = if FFlagAXHeroUnitActionButton then if Template.button == nil then p3.button else Template.button else nil
 	}
 end
 

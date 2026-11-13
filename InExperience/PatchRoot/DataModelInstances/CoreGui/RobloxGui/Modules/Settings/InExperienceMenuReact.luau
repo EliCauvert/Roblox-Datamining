@@ -5,6 +5,7 @@ local ReactModule = require(CorePackages.Packages.React)
 local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
 local Analytics = require(CorePackages.Workspace.Packages.Analytics).Analytics
 local EventIngest = require(CorePackages.Workspace.Packages.Analytics).AnalyticsReporters.EventIngest
+local InExperienceLocalesModule = require(CorePackages.Workspace.Packages.InExperienceLocales)
 local LocalizationModule = require(CorePackages.Workspace.Packages.Localization)
 local ServiceProvider = require(CorePackages.Workspace.Packages.RoactServices).RoactServices.ServiceProvider
 local RoactServiceTagsModule = require(CorePackages.Workspace.Packages.RoactServiceTags)
@@ -13,7 +14,7 @@ local AppEventIngestService = RoactServiceTagsModule.AppEventIngestService
 local RoactAnalytics = RoactServiceTagsModule.RoactAnalytics
 local LocalizationProvider = LocalizationModule.LocalizationProvider
 local GetLocalizationServiceStoreFunction = LocalizationModule.GetLocalizationServiceStore
-local Localization = require(CorePackages.Workspace.Packages.InExperienceLocales).Localization
+local Localization = InExperienceLocalesModule.Localization
 local FoundationProvider = FoundationModule.FoundationProvider
 local config = { colorMode = FoundationModule.Enums.ColorMode.Dark }
 

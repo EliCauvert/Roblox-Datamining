@@ -1,5 +1,6 @@
 ﻿local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
 local ReactModule = require(Parent.React)
+local TutilsModule = require(Parent.tutils)
 local FoundationModule = require(Parent.Foundation)
 local ReactOtterModule = require(Parent.ReactOtter)
 local FFlagAXMISWithBlackbird = require(Parent.SharedFlags).FFlagAXMISWithBlackbird
@@ -49,4 +50,4 @@ return ReactModule.memo(function(Frame)
 			end)
 		})
 	})
-end, require(Parent.tutils).deepEqual)
+end, TutilsModule.deepEqual)

@@ -3,6 +3,7 @@ local CorePackages = game:GetService("CorePackages")
 local Players = game:GetService("Players")
 local HttpRbxApiService = game:GetService("HttpRbxApiService")
 local ReactModule = require(CorePackages.Packages.React)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
 local Modules = game:GetService("CoreGui").RobloxGui.Modules
 local RenderWithCoreScriptsStyleProviderModule = require(Modules.Common.renderWithCoreScriptsStyleProvider)
 local ShareGame = Modules.Settings.Pages.ShareGame
@@ -34,7 +35,7 @@ local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local _Color3 = Color3.fromRGB(41, 41, 41)
 
-local function v34(p1)
+local function v35(p1)
 	-- upvalues: UseStyleFunction (copy), ReactModule (copy), FFlagFixPromptGameInviteUIMissingDisplayName (copy), UserProfileStore (copy), SignalsModule (copy), SignalsReactModule (copy), ConstantsModule (copy), GameInviteEvents (copy), InviteStatus (copy), GetFFlagAbuseReportAnalyticsHasLaunchDataModule (copy), Players (copy), GetFFlagSingleUserInvitePageKeybindModule (copy), ContextActionService (copy), GetFFlagThrottleInviteSendEndpointModule (copy), ThrottleFunctionCallModule (copy), GetFIntThrottleInviteSendEndpointDelayModule (copy), RetrievalStatus (copy), LoadingModalModule (copy), _Color3 (copy), StyledTextLabel (copy), Translator (copy), COLORS (copy), SingleUserThumbnailModule (copy), Button (copy), ButtonType (copy)
 	local Friend = p1.friends[tostring(p1.inviteUserId)]
 	local Invite = Friend and p1.invites[Friend.id]
@@ -245,7 +246,7 @@ local function v34(p1)
 	end
 end
 
-return require(CorePackages.Packages.RoactRodux).connect(function(p1)
+return RoactRoduxModule.connect(function(p1)
 	-- upvalues: Players (copy)
 	return {
 		friends = p1.Users,
@@ -264,6 +265,6 @@ end, function(Callback)
 		end
 	}
 end)(function(p1)
-	-- upvalues: RenderWithCoreScriptsStyleProviderModule (copy), ReactModule (copy), v34 (copy)
-	return RenderWithCoreScriptsStyleProviderModule({ SingleUserInvite = ReactModule.createElement(v34, p1) })
+	-- upvalues: RenderWithCoreScriptsStyleProviderModule (copy), ReactModule (copy), v35 (copy)
+	return RenderWithCoreScriptsStyleProviderModule({ SingleUserInvite = ReactModule.createElement(v35, p1) })
 end)

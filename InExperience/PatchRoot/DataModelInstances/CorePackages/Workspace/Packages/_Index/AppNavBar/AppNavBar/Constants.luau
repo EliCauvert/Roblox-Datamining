@@ -3,6 +3,7 @@ local AppPage = require(Parent.RobloxAppEnums).AppPage
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagAppIaHomeSubTab = SharedFlagsModule.FFlagAppIaHomeSubTab
 local FFlagAppIaHomeCampaignSubTab = SharedFlagsModule.FFlagAppIaHomeCampaignSubTab
+local FFlagEnableIsChartsInSubTab = SharedFlagsModule.FFlagEnableIsChartsInSubTab
 local FlyoutSidePanelIXP = require(Parent.SharedExperimentDefinition).FlyoutSidePanelIXP
 local config = {
 	STUDIO_CTA_EVENT_CONTEXT = "StudioCTA",
@@ -11,7 +12,7 @@ local config = {
 	HOME_CONTAINER_SUB_TAB_PAGES = if FFlagAppIaHomeSubTab then { AppPage.Home, AppPage.Games } else nil
 }
 
-if SharedFlagsModule.FFlagEnableIsChartsInSubTab and FFlagAppIaHomeSubTab and not FlyoutSidePanelIXP.isChartsInSubTab() then
+if FFlagEnableIsChartsInSubTab and FFlagAppIaHomeSubTab and not FlyoutSidePanelIXP.isChartsInSubTab() then
 	table.remove(config.HOME_CONTAINER_SUB_TAB_PAGES, 2)
 end
 if FFlagAppIaHomeCampaignSubTab and FFlagAppIaHomeSubTab then

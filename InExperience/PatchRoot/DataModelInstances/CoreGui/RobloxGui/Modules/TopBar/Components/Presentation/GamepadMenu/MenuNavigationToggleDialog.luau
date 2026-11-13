@@ -39,13 +39,8 @@ return function(p1)
 		local NewLocalization = Localization.new(UseStateResult)
 		local Success, Result = pcall(NewLocalization.Format, NewLocalization, "CoreScripts.InGameMenu.VirtualCursorHintPreIcon")
 		local Success1, Result1 = pcall(NewLocalization.Format, NewLocalization, "CoreScripts.InGameMenu.VirtualCursorHintPostIcon")
-		local Result2 = if Success then Result else "Some experiences require pressing"
 		
-		if Success1 then
-			return Result2, Result1
-		else
-			return Result2, "to toggle menu navigation"
-		end
+		return if Success then Result else "Some experiences require pressing", if Success1 then Result1 else "to toggle menu navigation"
 	end, { UseStateResult })
 	local UseMemoResult1, UseMemoResult2_1 = ReactModule.useMemo(function()
 		-- upvalues: GetTextSizeFunction (upval), UseMemoResult (ref), CaptionMedium (copy), UseMemoResult2 (ref)

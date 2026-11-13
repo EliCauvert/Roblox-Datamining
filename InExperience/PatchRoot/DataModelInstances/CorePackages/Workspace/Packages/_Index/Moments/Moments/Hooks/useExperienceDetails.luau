@@ -1,14 +1,16 @@
 ﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local SignalsModule = require(Parent.Signals)
 local GameGetGameInfoStoreModule = require(Parent.DataHydration.GameGetGameInfoStore)
 local FFlagMomentsServeEDPVideos = require(Parent.SharedFlags).FFlagMomentsServeEDPVideos
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local CreateComputedFunction = SignalsModule.createComputed
 local config = {
 	name = nil,
 	creatorName = nil,
 	isCreatorVerified = false,
 	rootPlaceId = nil
 }
-local Computed = require(Parent.Signals).createComputed(function()
+local Computed = CreateComputedFunction(function()
 	return nil
 end)
 

@@ -10,6 +10,7 @@ local GameTileLayoutType = GameTileModule.GameTileTypes.GameTileLayoutType
 local AppGameTile = GameTileModule.AppGameTile
 local GetTileBadgeByPositionConfigFromEntryFunction = GameTileModule.getTileBadgeByPositionConfigFromEntry
 local UseTriggerGameTileFeedbackCallbacksModule = require(GameCollections.useTriggerGameTileFeedbackCallbacks)
+local UseTriggerFeedbackFunction = require(Parent.InteractionFeedback).useTriggerFeedback
 local SeeAllTileModule = require(GameCollections.SeeAllTile)
 local UseNavigateToGameDetailsFunction = require(Parent.GameTile).useNavigateToGameDetails
 local _ = require(Parent.HoldToPlay)
@@ -21,15 +22,17 @@ local FFlagLuaAppNarrowTileHidePlayerCount = require(Parent.SharedFlags).FFlagLu
 local FFlagLuaAppEnableNxMRoduxApportioning = require(Parent.SharedFlags).FFlagLuaAppEnableNxMRoduxApportioning
 local FFlagLuaAppUsePrevalidatedVideoGamePlayability = require(Parent.SharedFlags).FFlagLuaAppUsePrevalidatedVideoGamePlayability
 local FFlagLuaAppEmphasisGameTileVideo = require(Parent.SharedFlags).FFlagLuaAppEmphasisGameTileVideo
+local FFlagLuaAppSduiGameTileInteractionFeedback = require(Parent.SharedFlags).FFlagLuaAppSduiGameTileInteractionFeedback
 local GameCollectionItemType = require(Parent.DiscoveryTypes).GameCollectionItemTypes.GameCollectionItemType
 
 return function(PlayerCountStyle, IsSponsoredFooterAllowed, GameTileLayoutType1, FriendFooterEnabled, ShowFriendActivity, ImpressionsTag, p1, ReportGameDetailOpened, ReportExperienceLaunched, LaunchExperienceEventContext, ReferralSource, Source, OnActivated, TopicId, Index, HideGameStats, PlayButtonStyle, IsContained, HideTitle, HideMetadata, OnSelectionGained, OnSelectionLost, Callback, TextSizeOffset: number, ContentTextLineCount, UseExperienceTileMetadata, ForceHideAgeRatings, VideoAnalytics, OnPeekViewClosed, p2, EnableExplicitFeedback, p3, SetGameHidden, AppPage, SponsoredUserCohort, EnableSponsoredFeedback, EnableReportAd, p4, MaxItemIndex, IsSponsoredRatingFooterAllowed, _, _, _, CompactMetadataFormat, p5, p6, VideoPlaybackContext, p7, p8, p9)
-	-- upvalues: UsePreferredInputFunction (copy), UseNavigateToGameDetailsFunction (copy), UseTriggerGameTileFeedbackCallbacksModule (copy), ResponsiveModule (copy), FFlagLuaAppContinueSortInstantPlay (copy), UseBreakpointXOrSmallerFunction (copy), FFlagLuaAppNarrowTileHideRating (copy), FFlagLuaAppNarrowTileHidePlayerCount (copy), GameTileConstants (copy), GameTileLayoutType (copy), ReactModule (copy), SeeAllTileModule (copy), GameCollectionItemType (copy), FFlagLuaAppEnableReportExperience (copy), FFlagLuaAppEmphasisGameTileVideo (copy), FFlagLuaAppEnableNxMRoduxApportioning (copy), GetTileBadgeByPositionConfigFromEntryFunction (copy), AppGameTile (copy), FFlagLuaAppUsePrevalidatedVideoGamePlayability (copy)
+	-- upvalues: UsePreferredInputFunction (copy), UseNavigateToGameDetailsFunction (copy), FFlagLuaAppSduiGameTileInteractionFeedback (copy), UseTriggerFeedbackFunction (copy), UseTriggerGameTileFeedbackCallbacksModule (copy), ResponsiveModule (copy), FFlagLuaAppContinueSortInstantPlay (copy), UseBreakpointXOrSmallerFunction (copy), FFlagLuaAppNarrowTileHideRating (copy), FFlagLuaAppNarrowTileHidePlayerCount (copy), GameTileConstants (copy), GameTileLayoutType (copy), ReactModule (copy), SeeAllTileModule (copy), GameCollectionItemType (copy), FFlagLuaAppEnableReportExperience (copy), FFlagLuaAppEmphasisGameTileVideo (copy), FFlagLuaAppEnableNxMRoduxApportioning (copy), GetTileBadgeByPositionConfigFromEntryFunction (copy), AppGameTile (copy), FFlagLuaAppUsePrevalidatedVideoGamePlayability (copy)
 	local UsePreferredInputResult = UsePreferredInputFunction()
 	local UseNavigateToGameDetailsResult = UseNavigateToGameDetailsFunction()
+	local UseTriggerFeedbackResult = if FFlagLuaAppSduiGameTileInteractionFeedback then UseTriggerFeedbackFunction() else nil
 	local UseTriggerGameTileFeedbackCallbacksModuleResult = nil
 	local UseTriggerGameTileFeedbackCallbacksModuleResult2 = nil
-	UseTriggerGameTileFeedbackCallbacksModuleResult, UseTriggerGameTileFeedbackCallbacksModuleResult2 = UseTriggerGameTileFeedbackCallbacksModule()
+	UseTriggerGameTileFeedbackCallbacksModuleResult, UseTriggerGameTileFeedbackCallbacksModuleResult2 = UseTriggerGameTileFeedbackCallbacksModule(if FFlagLuaAppSduiGameTileInteractionFeedback then UseTriggerFeedbackResult else nil)
 	local IsUsePreferredInputResultMatch: boolean = p1 and UsePreferredInputResult == ResponsiveModule.Input.Pointer
 	local IsUsePreferredInputResultMatch1 = if FFlagLuaAppContinueSortInstantPlay then UsePreferredInputResult == ResponsiveModule.Input.Touch else nil
 	local IsWide: boolean = GameTileLayoutType1 == "Wide" or GameTileLayoutType1 == "Event"

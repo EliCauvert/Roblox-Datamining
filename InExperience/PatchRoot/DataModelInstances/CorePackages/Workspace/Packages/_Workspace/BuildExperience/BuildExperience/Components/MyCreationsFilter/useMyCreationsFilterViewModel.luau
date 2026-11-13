@@ -1,9 +1,11 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
 local CreatorGroupsModule = require(Parent.DataHydration.CreatorGroups)
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
 local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseSignalStateFunction = SignalsReactModule.useSignalState
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local FFlagBuildExperienceFiltersSaveLabelModule = require(BuildExperience.Flags.FFlagBuildExperienceFiltersSaveLabel)
 local FFlagBuildExperiencePreviewsTabModule = require(BuildExperience.Flags.FFlagBuildExperiencePreviewsTab)
@@ -12,7 +14,7 @@ local GetMyCreationsFilterStoreModule = require(BuildExperience.Stores.GetMyCrea
 local MatchesSearchQueryModule = require(BuildExperience.utils.matchesSearchQuery)
 local UseClosableFocusRootModule = require(BuildExperience.utils.useClosableFocusRoot)
 local _ = require(script.Parent.MyCreationsFilterView)
-local FocusNavigableSurfaceIdentifierEnum = require(Parent.FocusNavigationUtils).FocusNavigableSurfaceIdentifierEnum
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local config = { games = "MyGames" }
 local list = { "All", "MyGames", "GroupGames", "SharedGames" }
 
@@ -166,7 +168,7 @@ return function(Frame)
 	end, { UseStateResult1, Groups, UseResult3, GroupId })
 	local Name = nil
 	
-	if UseFilterResult.games == "GroupGames" and (UseFilterResult.groupId ~= nil and Groups ~= nil) then
+	if UseFilterResult.games == "GroupGames" and UseFilterResult.groupId ~= nil and Groups ~= nil then
 		for _, group in Groups do
 			if group.id == UseFilterResult.groupId then
 				Name = group.name

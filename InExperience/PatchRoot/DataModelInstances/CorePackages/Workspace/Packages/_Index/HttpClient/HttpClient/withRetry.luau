@@ -1,6 +1,5 @@
 ﻿local MutedErrorFunction = require(script:FindFirstAncestor("HttpClient").Parent.Loggers).mutedError
 local _ = require(script.Parent.types)
-local FFlagHttpClientRetryExtensionsModule = require(script.Parent.Flags.FFlagHttpClientRetryExtensions)
 local config = { [408] = true, [503] = true, [504] = true }
 
 local function _(p1: number, p2, p3)
@@ -8,14 +7,11 @@ local function _(p1: number, p2, p3)
 end
 
 local function shouldRetry(p1, RetryOnStatuses, RetryOnHttpErrors)
-	-- upvalues: FFlagHttpClientRetryExtensionsModule (copy)
-	if FFlagHttpClientRetryExtensionsModule then
-		if p1.wasTransportFailure and RetryOnHttpErrors == nil then
-			return true, nil
-		end
-		if RetryOnHttpErrors ~= nil and p1.httpError ~= nil and p1.httpError ~= Enum.HttpError.OK and RetryOnHttpErrors[p1.httpError] then
-			return true, nil
-		end
+	if p1.wasTransportFailure and RetryOnHttpErrors == nil then
+		return true, nil
+	end
+	if RetryOnHttpErrors ~= nil and p1.httpError ~= nil and p1.httpError ~= Enum.HttpError.OK and RetryOnHttpErrors[p1.httpError] then
+		return true, nil
 	end
 	if RetryOnStatuses[p1.statusCode] then
 		return true, nil
@@ -31,14 +27,14 @@ local function shouldRetry(p1, RetryOnStatuses, RetryOnHttpErrors)
 end
 
 return function(p1, p2)
-	-- upvalues: config (copy), FFlagHttpClientRetryExtensionsModule (copy), MutedErrorFunction (copy), shouldRetry (copy)
+	-- upvalues: config (copy), MutedErrorFunction (copy), shouldRetry (copy)
 	local P7 = p2 or {}
 	local MaxRetryCount = P7.maxRetryCount or 4
 	local RetryJitterMinMs = P7.retryJitterMinMs or 0
 	local RetryJitterMaxMs = P7.retryJitterMaxMs or 4000
 	local RetryOnStatuses = P7.retryOnStatuses or config
-	local RetryOnHttpErrors = if FFlagHttpClientRetryExtensionsModule then P7.retryOnHttpErrors else nil
-	local RetryBudgetSec = if FFlagHttpClientRetryExtensionsModule then P7.retryBudgetSec else nil
+	local RetryOnHttpErrors = P7.retryOnHttpErrors
+	local RetryBudgetSec = P7.retryBudgetSec
 	
 	if MaxRetryCount < 0 then
 		MutedErrorFunction(`withRetry: maxRetryCount must be >= 0, got {MaxRetryCount}; falling back to default`)
@@ -55,9 +51,9 @@ return function(p1, p2)
 	end
 	return {
 		request = function(Tbl, Callback)
-			-- upvalues: FFlagHttpClientRetryExtensionsModule (upval), P7 (copy), p1 (copy), shouldRetry (upval), RetryOnStatuses (copy), RetryOnHttpErrors (copy), MaxRetryCount (ref), RetryJitterMinMs (ref), RetryJitterMaxMs (ref), RetryBudgetSec (ref)
+			-- upvalues: P7 (copy), p1 (copy), shouldRetry (upval), RetryOnStatuses (copy), RetryOnHttpErrors (copy), MaxRetryCount (ref), RetryJitterMinMs (ref), RetryJitterMaxMs (ref), RetryBudgetSec (ref)
 			local Count = 0
-			local ClockTime = if FFlagHttpClientRetryExtensionsModule then os.clock() else nil
+			local ClockTime = os.clock()
 			local Flag = false
 			local Flag1 = false
 			local RequestResult = nil
@@ -71,12 +67,12 @@ return function(p1, p2)
 				OnMessageFunction(p3)
 			end
 			
-			local function v21()
-				-- upvalues: Flag (ref), Tbl (copy), FFlagHttpClientRetryExtensionsModule (upval), OnMessageFunction (copy), handleMessage (copy), Count (ref), P7 (upval), RequestResult (ref), p1 (upval), Flag1 (ref), Callback (copy), shouldRetry (upval), RetryOnStatuses (upval), RetryOnHttpErrors (upval), MaxRetryCount (upval), RetryJitterMinMs (upval), RetryJitterMaxMs (upval), RetryBudgetSec (upval), ClockTime (copy), DelayedThread (ref), v21 (ref)
+			local function v20()
+				-- upvalues: Flag (ref), Tbl (copy), OnMessageFunction (copy), handleMessage (copy), Count (ref), P7 (upval), RequestResult (ref), p1 (upval), Flag1 (ref), Callback (copy), shouldRetry (upval), RetryOnStatuses (upval), RetryOnHttpErrors (upval), MaxRetryCount (upval), RetryJitterMinMs (upval), RetryJitterMaxMs (upval), RetryBudgetSec (upval), ClockTime (copy), DelayedThread (ref), v20 (ref)
 				if Flag then return end
 				local Copy = Tbl
 				
-				if FFlagHttpClientRetryExtensionsModule and OnMessageFunction ~= nil then
+				if OnMessageFunction ~= nil then
 					Copy = table.clone(Tbl)
 					Copy.onMessage = handleMessage
 				end
@@ -84,29 +80,21 @@ return function(p1, p2)
 					local Copy1 = if Tbl.headers then table.clone(Tbl.headers) else {}
 					Copy1["X-Retry-Attempt"] = tostring(Count)
 					
-					if FFlagHttpClientRetryExtensionsModule then
-						if Copy == Tbl then
-							Copy = table.clone(Tbl)
-						end
-						Copy.headers = Copy1
-					else
-						Copy = {
-							url = Tbl.url,
-							method = Tbl.method,
-							body = Tbl.body,
-							headers = Copy1
-						}
+					if Copy == Tbl then
+						Copy = table.clone(Tbl)
 					end
-					if FFlagHttpClientRetryExtensionsModule and P7.onRetry ~= nil then
+					Copy.headers = Copy1
+					
+					if P7.onRetry ~= nil then
 						P7.onRetry(Count)
 					end
 				end
 				RequestResult = p1.request(Copy, function(p3, p4)
-					-- upvalues: RequestResult (upval), Flag (upval), FFlagHttpClientRetryExtensionsModule (upval), Flag1 (upval), Callback (upval), shouldRetry (upval), RetryOnStatuses (upval), RetryOnHttpErrors (upval), Count (upval), MaxRetryCount (upval), RetryJitterMinMs (upval), RetryJitterMaxMs (upval), RetryBudgetSec (upval), ClockTime (upval), DelayedThread (upval), v21 (upval)
+					-- upvalues: RequestResult (upval), Flag (upval), Flag1 (upval), Callback (upval), shouldRetry (upval), RetryOnStatuses (upval), RetryOnHttpErrors (upval), Count (upval), MaxRetryCount (upval), RetryJitterMinMs (upval), RetryJitterMaxMs (upval), RetryBudgetSec (upval), ClockTime (upval), DelayedThread (upval), v20 (upval)
 					RequestResult = nil
 					
 					if Flag then return end
-					if FFlagHttpClientRetryExtensionsModule and Flag1 then
+					if Flag1 then
 						Callback(p3, p4)
 						
 						return
@@ -134,21 +122,21 @@ return function(p1, p2)
 						local RetryJitterMinMs1 = RetryJitterMinMs
 						Delay = (RetryJitterMinMs1 + math.random() * (RetryJitterMaxMs - RetryJitterMinMs1)) * math.pow(2, Count - 1) / 1000
 					end
-					if FFlagHttpClientRetryExtensionsModule and RetryBudgetSec ~= nil and ClockTime ~= nil and RetryBudgetSec <= os.clock() - ClockTime + Delay then
-						Callback(p3, p4)
+					if RetryBudgetSec == nil or ClockTime == nil or RetryBudgetSec > os.clock() - ClockTime + Delay then
+						DelayedThread = task.delay(Delay, function()
+							-- upvalues: DelayedThread (upval), v20 (upval)
+							DelayedThread = nil
+							v20()
+						end)
 						
 						return
 					else
-						DelayedThread = task.delay(Delay, function()
-							-- upvalues: DelayedThread (upval), v21 (upval)
-							DelayedThread = nil
-							v21()
-						end)
+						Callback(p3, p4)
 					end
 				end)
 			end
 			
-			v21()
+			v20()
 			
 			return function()
 				-- upvalues: Flag (ref), DelayedThread (ref), RequestResult (ref)

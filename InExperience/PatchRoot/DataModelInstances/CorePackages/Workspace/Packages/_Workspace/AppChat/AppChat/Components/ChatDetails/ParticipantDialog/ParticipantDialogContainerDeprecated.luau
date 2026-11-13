@@ -78,6 +78,7 @@ function ParticipantDialogContainerDeprecated(p1)
 			UseSelectorResult
 		})
 	end
+	local ShowChatButton: boolean = if UseSelectorResult and IsUseGetFriendshipStatusResultMatch then true else false
 	local UseLocalizationResult = UseLocalizationFunction({
 		viewProfileText = JoinResult.viewProfileText,
 		chatText = JoinResult.chatText,
@@ -99,7 +100,7 @@ function ParticipantDialogContainerDeprecated(p1)
 	end, { JoinResult.onDismiss })
 	local JoinResult1 = CryoModule.Dictionary.join(JoinResult, UseLocalizationResult, {
 		showViewProfileButton = UseAppPolicyModuleResult,
-		showChatButton = if UseSelectorResult and IsUseGetFriendshipStatusResultMatch then true else false,
+		showChatButton = ShowChatButton,
 		isWideMode = JoinResult.isWideMode
 	})
 	

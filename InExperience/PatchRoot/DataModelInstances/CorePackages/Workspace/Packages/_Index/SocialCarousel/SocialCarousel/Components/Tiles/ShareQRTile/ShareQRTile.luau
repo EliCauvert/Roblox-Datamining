@@ -1,8 +1,9 @@
 ﻿local SocialCarousel = script:FindFirstAncestor("SocialCarousel")
 local Parent = SocialCarousel.Parent
 local ReactModule = require(Parent.React)
+local LocalizationModule = require(Parent.Localization)
 local FFlagSocialCarouselXXSmallTilesModule = require(SocialCarousel.Flags.FFlagSocialCarouselXXSmallTiles)
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local ConstantsModule = require(SocialCarousel.Common.Constants)
 local TileModule = require(SocialCarousel.BaseComponents.Tile)
 

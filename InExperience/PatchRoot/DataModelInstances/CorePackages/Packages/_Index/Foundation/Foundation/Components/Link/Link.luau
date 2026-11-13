@@ -1,7 +1,10 @@
 ﻿local Foundation = script:FindFirstAncestor("Foundation")
 local ReactModule = require(Foundation.Parent.React)
 local ControlStateModule = require(Foundation.Enums.ControlState)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local LinkVariantModule = require(Foundation.Enums.LinkVariant)
 local StateLayerAffordanceModule = require(Foundation.Enums.StateLayerAffordance)
+local TextOverflowModule = require(Foundation.Enums.TextOverflow)
 local TextModule = require(Foundation.Components.Text)
 local _ = require(Foundation.Components.Types)
 local ViewModule = require(Foundation.Components.View)
@@ -19,9 +22,9 @@ local config = {
 local config1 = {
 	hasUnderline = false,
 	testId = "--foundation-link",
-	variant = require(Foundation.Enums.LinkVariant).Standard,
-	size = require(Foundation.Enums.InputSize).Medium,
-	textOverflow = require(Foundation.Enums.TextOverflow).None
+	variant = LinkVariantModule.Standard,
+	size = InputSizeModule.Medium,
+	textOverflow = TextOverflowModule.None
 }
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)

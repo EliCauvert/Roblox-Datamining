@@ -2,9 +2,11 @@
 local DependenciesModule = require(PYMKCarousel.dependencies)
 local Dash = DependenciesModule.Dash
 local RoduxFriends = DependenciesModule.RoduxFriends
+local RoduxUsers = DependenciesModule.RoduxUsers
+local SocialCommon = DependenciesModule.SocialCommon
 local Recommendation = RoduxFriends.Models.Recommendation
 local RecommendationContextType = RoduxFriends.Enums.RecommendationContextType
-local User = DependenciesModule.RoduxUsers.Models.User
+local User = RoduxUsers.Models.User
 local RecommendationIds = {
 	longName = "1_longName",
 	noContext = "2_noContext",
@@ -42,7 +44,7 @@ return {
 			Friends = {
 				recommendations = {
 					bySource = {
-						[DependenciesModule.SocialCommon.Enums.RecommendationSourceEnum.HomepagePYMKCarousel] = {
+						[SocialCommon.Enums.RecommendationSourceEnum.HomepagePYMKCarousel] = {
 							[RecommendationIds.longName] = true,
 							[RecommendationIds.noContext] = true,
 							[RecommendationIds.mutualContextPlural] = true,

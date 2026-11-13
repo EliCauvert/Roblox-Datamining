@@ -2,16 +2,22 @@
 local Parent = AppChat.Parent
 local SquadQuickStartExperimentation = require(Parent.SocialExperiments).SquadQuickStartExperimentation
 local EnumScreensModule = require(AppChat.EnumScreens)
+local ChatLandingScreenModule = require(AppChat.Components.ChatLanding.ChatLandingScreen)
+local ChatConversationScreenModule = require(AppChat.Components.ChatConversation.ChatConversationScreen)
+local ChatDetailsScreenModule = require(AppChat.Components.ChatDetails.ChatDetailsScreen)
 local ChatDetailsNavigationOptionsModule = require(AppChat.Components.ChatDetails.ChatDetailsNavigationOptions)
+local CreateNewChatScreenModule = require(AppChat.Components.CreateNewChat.CreateNewChatScreen)
+local EditChatMembersScreenModule = require(AppChat.Components.EditChatMembers.EditChatMembersScreen)
 local SquadInviteFriendsScreenModule = require(AppChat.Components.Squads.SquadInviteFriendsScreen)
 local SquadLobbyScreenModule = require(AppChat.Components.Squads.SquadLobbyScreen)
 local QuickStartSquadInviteFriendsScreenModule = require(AppChat.Components.Squads.QuickStartSquadInviteFriendsScreen)
+local GetFFlagAppChatRemoveDynamicRequiresModule = require(AppChat.Flags.getFFlagAppChatRemoveDynamicRequires)
 local FFlagEnablePartyQuickStartButton = require(Parent.SharedFlags).FFlagEnablePartyQuickStartButton
 local List = {
 	{
 		[EnumScreensModule.ChatLanding] = {
-			screen = require(AppChat.Components.ChatLanding.ChatLandingScreen),
-			navigationOptions = if require(AppChat.Flags.getFFlagAppChatRemoveDynamicRequires)() then function()
+			screen = ChatLandingScreenModule,
+			navigationOptions = if GetFFlagAppChatRemoveDynamicRequiresModule() then function()
 				return {
 					isRoot = true,
 					backButtonEnabled = false,
@@ -26,7 +32,7 @@ local List = {
 	},
 	{
 		[EnumScreensModule.ChatConversation] = {
-			screen = require(AppChat.Components.ChatConversation.ChatConversationScreen),
+			screen = ChatConversationScreenModule,
 			navigationOptions = {
 				backButtonEnabled = true,
 				tabBarVisible = false,
@@ -37,7 +43,7 @@ local List = {
 	},
 	{
 		[EnumScreensModule.ChatDetails] = {
-			screen = require(AppChat.Components.ChatDetails.ChatDetailsScreen),
+			screen = ChatDetailsScreenModule,
 			navigationOptions = function(p1)
 				-- upvalues: ChatDetailsNavigationOptionsModule (copy)
 				return ChatDetailsNavigationOptionsModule.getNavigationOptions(p1, { tabBarVisible = false })
@@ -46,13 +52,13 @@ local List = {
 	},
 	{
 		[EnumScreensModule.CreateNewChat] = {
-			screen = require(AppChat.Components.CreateNewChat.CreateNewChatScreen),
+			screen = CreateNewChatScreenModule,
 			navigationOptions = { backButtonEnabled = true, tabBarVisible = false }
 		}
 	},
 	{
 		[EnumScreensModule.EditChatMembers] = {
-			screen = require(AppChat.Components.EditChatMembers.EditChatMembersScreen),
+			screen = EditChatMembersScreenModule,
 			navigationOptions = { backButtonEnabled = true, tabBarVisible = false }
 		}
 	}

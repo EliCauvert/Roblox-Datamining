@@ -53,10 +53,11 @@ local function v25(p1)
 		return p2.TopBar
 	end)
 	local IsConsole = DeviceInfo.isConsole()
+	local IsCompact = UseContextResult.modalMode == "compact"
 	local PromptMessage = UseContextResult1.promptMessage
 	local v1: boolean = PromptMessage and #PromptMessage > 0
 	local NewTitleHeight = TitleHeight + 12
-	local NoIsConsole: boolean = not (UseContextResult.modalMode == "compact") and not IsConsole
+	local NoIsConsole: boolean = not IsCompact and not IsConsole
 	
 	if NoIsConsole then
 		NewTitleHeight += 48

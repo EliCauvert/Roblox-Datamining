@@ -1,12 +1,13 @@
 ﻿local CorePackages = game:GetService("CorePackages")
 local RoactModule = require(CorePackages.Packages.Roact)
 local TModule = require(CorePackages.Packages.t)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
 local FoundationModule = require(CorePackages.Packages.Foundation)
 local IconSize = FoundationModule.Enums.IconSize
 local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
 local FFlagCoreUiMigrateUIBloxToFoundation = require(CorePackages.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
 local WithLayoutValuesFunction = require(script.Parent.Parent.Connection.LayoutValues).WithLayoutValues
-local ImageSetLabel = require(CorePackages.Packages.UIBlox).Core.ImageSet.ImageSetLabel
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local IconButton = RoactModule.PureComponent:extend("IconButton")
 IconButton.validateProps = TModule.strictInterface({
 	size = TModule.UDim2,

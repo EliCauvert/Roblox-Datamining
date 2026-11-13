@@ -1,14 +1,16 @@
 ﻿local HttpService = game:GetService("HttpService")
 local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
 local PromiseModule = require(Parent.Promise)
+local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
 local PlaceVersionHistoryModule = require(Parent.DataHydration.PlaceVersionHistory)
 local _ = require(BuildExperience.Chat.chatTypes)
 local FeedbackActionModule = require(script.Parent.FeedbackAction)
 local _ = require(script.Parent.UserFeedback)
 local GetAgentRollbackRequestStoreModule = require(BuildExperience.Stores.GetAgentRollbackRequestStore)
-local IconName = require(Parent.Foundation).Enums.IconName
-local Debug = require(Parent.DataHydration.CreatorAgentChat).debug
+local IconName = FoundationModule.Enums.IconName
+local Debug = CreatorAgentChatModule.debug
 local BuildAgentRollbackNoteTimeoutSeconds = game:DefineFastInt("BuildAgentRollbackNoteTimeoutSeconds", 5)
 
 local function _(RawError)

@@ -8,6 +8,7 @@ local Text = require(Parent.AppCommonLib).Text
 local BuilderIconsModule = require(Parent.BuilderIcons)
 local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
 local IsKeyCodePressedModule = require(AppChat.Components.ChatConversation.Utils.isKeyCodePressed)
+local Default = require(Parent.LoggingProtocol).default
 local CryoModule = require(Parent.Cryo)
 local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
 local FocusNavigationEventNameEnum = require(Parent.FocusNavigationUtils).FocusNavigationEventNameEnum
@@ -44,7 +45,7 @@ local config = {
 	onSendBtnClicked = function(_) end,
 	onSendChat = function(_) end,
 	onTextChanged = function(_) end,
-	eventLoggingFunc = require(Parent.LoggingProtocol).default.logRobloxTelemetryEvent
+	eventLoggingFunc = Default.logRobloxTelemetryEvent
 }
 
 local function _(p1: number, p2, p3, p4)
@@ -244,6 +245,7 @@ return ReactModule.memo(function(p1)
 	end, {})
 	local MoreMenuEnabled = UnionResult.moreMenuEnabled
 	local UseIsSpatialResult = UseIsSpatialFunction()
+	local YOffset = if UseStateResult1 == 0 then UseResult2(UseRefResult3.current, UseStateResult) else UseStateResult1
 	local XOffset = ScaledBaseSize + UseMemoResult1
 	local IsDisabled = UnionResult.isDisabled
 	
@@ -252,7 +254,7 @@ return ReactModule.memo(function(p1)
 			["padding-x-xlarge"] = not MoreMenuEnabled,
 			fill = MoreMenuEnabled
 		},
-		Size = UDim2.new(if MoreMenuEnabled then 0 else 1, 0, 0, if UseStateResult1 == 0 then UseResult2(UseRefResult3.current, UseStateResult) else UseStateResult1),
+		Size = UDim2.new(if MoreMenuEnabled then 0 else 1, 0, 0, YOffset),
 		LayoutOrder = UnionResult.LayoutOrder,
 		onAbsolutePositionChanged = UnionResult.onPositionChanged
 	}, {

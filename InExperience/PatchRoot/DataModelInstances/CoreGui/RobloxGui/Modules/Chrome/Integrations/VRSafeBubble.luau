@@ -1,10 +1,11 @@
 ﻿local Chrome = script:FindFirstAncestor("Chrome")
 local CorePackages = game:GetService("CorePackages")
 local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local IsSpatialFunction = require(CorePackages.Workspace.Packages.AppCommonLib).isSpatial
 local VRHub = require(CorePackages.Workspace.Packages.VrCommon).VRHub
 local ServiceModule = require(Chrome.Service)
 local CommonIconModule = require(Chrome.Integrations.CommonIcon)
-local Available = if require(CorePackages.Workspace.Packages.AppCommonLib).isSpatial() then ServiceModule.AvailabilitySignal.Available else ServiceModule.AvailabilitySignal.Unavailable
+local Available = if IsSpatialFunction() then ServiceModule.AvailabilitySignal.Available else ServiceModule.AvailabilitySignal.Unavailable
 local NewResult = require(CorePackages.Workspace.Packages.AppCommonLib).Signal.new()
 local NewResult1 = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(NewResult, function()
 	-- upvalues: VRHub (copy)

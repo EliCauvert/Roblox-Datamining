@@ -1,4 +1,5 @@
 ﻿return {
 	LeaveButtonClick = "leaveButtonClick",
-	ReportSubmitted = "reportSubmitted"
+	ReportSubmitted = "reportSubmitted",
+	ReportHistoryClosed = "reportHistoryClosed"
 }

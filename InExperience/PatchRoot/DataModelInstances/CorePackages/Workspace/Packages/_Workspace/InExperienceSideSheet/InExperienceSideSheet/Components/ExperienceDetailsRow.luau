@@ -21,6 +21,16 @@ return ReactModule.memo(function(p1)
 	local ScaledXXSmall = UseTokensResult.Padding.XXSmall * 2
 	local LineHeightDelta = UseTokensResult.Typography.TitleMedium.LineHeight * UseTokensResult.Typography.TitleMedium.FontSize - ScaledXXSmall
 	local LineHeightDelta1 = UseTokensResult.Typography.BodyMedium.LineHeight * UseTokensResult.Typography.BodyMedium.FontSize - ScaledXXSmall
+	local Element = if UseExperienceDetailsModuleResult or not UseExperienceDetailsModuleResult3 then nil else ReactModule.createElement(View, {
+		LayoutOrder = 1,
+		tag = "size-full-0 auto-y padding-y-xxsmall"
+	}, {
+		Skeleton = ReactModule.createElement(Skeleton, {
+			testId = "experience-name-placeholder",
+			Size = UDim2.new(1, 0, 0, LineHeightDelta),
+			radius = Radius.Small
+		})
+	})
 	local Name = if UseExperienceDetailsModuleResult2 then UseExperienceDetailsModuleResult2.name else nil
 	local IsHasVerifiedBadge: boolean = if UseExperienceDetailsModuleResult2 then UseExperienceDetailsModuleResult2.hasVerifiedBadge == true else false
 	
@@ -45,16 +55,7 @@ return ReactModule.memo(function(p1)
 					tag = "size-full-0 auto-y text-title-medium text-align-x-left text-truncate-split content-emphasis",
 					Text = UseExperienceDetailsModuleResult
 				}),
-				ExperienceNameSkeleton = if UseExperienceDetailsModuleResult or not UseExperienceDetailsModuleResult3 then nil else ReactModule.createElement(View, {
-					LayoutOrder = 1,
-					tag = "size-full-0 auto-y padding-y-xxsmall"
-				}, {
-					Skeleton = ReactModule.createElement(Skeleton, {
-						testId = "experience-name-placeholder",
-						Size = UDim2.new(1, 0, 0, LineHeightDelta),
-						radius = Radius.Small
-					})
-				}),
+				ExperienceNameSkeleton = Element,
 				CreatorRow = if Name == nil or Name == "" then if UseExperienceDetailsModuleResult3 then ReactModule.createElement(View, {
 					LayoutOrder = 2,
 					tag = "size-full-0 auto-y padding-y-xxsmall"

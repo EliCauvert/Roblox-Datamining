@@ -1,22 +1,24 @@
 ﻿local AmpV2Wizard = script:FindFirstAncestor("AmpV2Wizard")
 local Parent = AmpV2Wizard.Parent
 local HttpService = game:GetService("HttpService")
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local UrlBase = require(Parent.UrlBuilder).UrlBase
 local FetchModule = require(Parent.Fetch)
 local PromiseModule = require(Parent.Promise)
 local _ = require(AmpV2Wizard.OdpVerification.Types)
 local FetchFunction = FetchModule.fetch
 local Response = FetchModule.Response
-local NewResult = require(Parent.UrlBuilder).UrlBuilder.new({
+local NewUrlBuilder = UrlBuilder.new({
 	path = "age-verification-service/v1/age-verification/start-odp-verification",
-	base = require(Parent.UrlBuilder).UrlBase.APIS
+	base = UrlBase.APIS
 })
 
 return {
 	startOdpVerification = function(p1)
-		-- upvalues: PromiseModule (copy), FetchFunction (copy), NewResult (copy), HttpService (copy), Response (copy)
+		-- upvalues: PromiseModule (copy), FetchFunction (copy), NewUrlBuilder (copy), HttpService (copy), Response (copy)
 		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ())
-			-- upvalues: FetchFunction (upval), NewResult (upval), HttpService (upval), p1 (copy), Response (upval)
-			local v1 = FetchFunction(NewResult(), {
+			-- upvalues: FetchFunction (upval), NewUrlBuilder (upval), HttpService (upval), p1 (copy), Response (upval)
+			local v1 = FetchFunction(NewUrlBuilder(), {
 				method = "POST",
 				body = HttpService:JSONEncode({
 					sessionId = p1.sessionId,

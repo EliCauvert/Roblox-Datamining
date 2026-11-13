@@ -2,6 +2,7 @@
 local Parent = SocialCards.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.Dev.ReactRoblox)
 local AppStyleProvider = require(Parent.Dev.UIBlox).App.Style.AppStyleProvider
 local config = {
 	Default = FoundationModule.Enums.ColorMode.Dark,
@@ -17,7 +18,7 @@ local config1 = {
 return {
 	name = SocialCards.Name,
 	roact = ReactModule,
-	reactRoblox = require(Parent.Dev.ReactRoblox),
+	reactRoblox = ReactRobloxModule,
 	storyRoot = SocialCards,
 	mapStory = function(p1)
 		-- upvalues: config (copy), ReactModule (copy), FoundationModule (copy), config1 (copy), AppStyleProvider (copy)

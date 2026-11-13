@@ -1,9 +1,11 @@
 ﻿local Parent = script:FindFirstAncestor("SocialServerDrivenUi").Parent
 local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SocialLuaAnalyticsModule = require(Parent.SocialLuaAnalytics)
+local SocialUpsellModule = require(Parent.SocialUpsell)
 local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 local GetActionTelemetryFieldValueFunction = SduiCoreSystemModule.getActionTelemetryFieldValue
-local EventTypes = require(Parent.SocialLuaAnalytics).Analytics.Enums.EventTypes
-local SocialUpsellAnalytics = require(Parent.SocialUpsell).Analytics.SocialUpsellAnalytics
+local EventTypes = SocialLuaAnalyticsModule.Analytics.Enums.EventTypes
+local SocialUpsellAnalytics = SocialUpsellModule.Analytics.SocialUpsellAnalytics
 local list = { "upsellEntrySurface", "upsellComponent", "upsellPurpose" }
 
 return function(p1, p2, p3)

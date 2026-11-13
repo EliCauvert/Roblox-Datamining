@@ -104,9 +104,10 @@ function ChromeShortcutBar(_)
 			ServiceModule:setHideShortcutBar("SideSheet", SideSheetVisibility or UseDrawerAnimatingResult)
 		end, { SideSheetVisibility, UseDrawerAnimatingResult })
 	end
+	local UseStateResult3 = if #UseStateResult1 > 0 then UseStateResult1 else UseStateResult
 	local Items = {}
 	
-	for _, value in if #UseStateResult1 > 0 then UseStateResult1 else UseStateResult do
+	for _, value in UseStateResult3 do
 		if value.label then
 			local config = { icon = "", text = "" }
 			

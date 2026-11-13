@@ -1,8 +1,9 @@
 ﻿local CorePackages = game:GetService("CorePackages")
 local CryoModule = require(CorePackages.Packages.Cryo)
+local RoduxModule = require(CorePackages.Packages.Rodux)
 local Actions = script.Parent.Parent.Actions
 
-return require(CorePackages.Packages.Rodux).createReducer({
+return RoduxModule.createReducer({
 	menuVisible = false,
 	guiInset = 0,
 	errorVisible = false,

@@ -101,6 +101,7 @@ return {
 		local T = if p1 == nil then {} else p1
 		local T1 = if p2 == nil then {} else p2
 		local ReverseDirectives = if p3 then p3.reverseDirectives else p3
+		local T2 = if Boolean.toJSBoolean(ReverseDirectives) then T1 else T
 		local FilterResult = Array.filter(Array.map(Array.concat({}, if Boolean.toJSBoolean(ReverseDirectives) then T else T1), function(p4, Index, p5)
 			-- upvalues: Array (upval), mergeArguments (upval)
 			local Index1 = Array.findIndex(p5, function(p6): boolean
@@ -117,7 +118,7 @@ return {
 			end
 		end), IsSome)
 		
-		for _, value in if Boolean.toJSBoolean(ReverseDirectives) then T1 else T do
+		for _, value in T2 do
 			if Boolean.toJSBoolean(directiveAlreadyExists(FilterResult, value)) then
 				local Index = Array.findIndex(FilterResult, function(p4): boolean
 					-- upvalues: value (copy)

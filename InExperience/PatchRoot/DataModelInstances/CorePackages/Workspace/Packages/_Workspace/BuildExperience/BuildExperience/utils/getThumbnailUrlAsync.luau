@@ -1,10 +1,11 @@
 ﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
 local HttpClientModule = require(Parent.HttpClient)
 local PromiseModule = require(Parent.Promise)
+local Url = require(Parent.Http).Url
 local Debug = require(Parent.DataHydration.CreatorAgentChat).debug
 local FetchFunction = HttpClientModule.fetch
 local AsPromiseFunction = HttpClientModule.asPromise
-local Text = require(Parent.Http).Url.THUMBNAILS_URL .. "v1/batch"
+local Text = Url.THUMBNAILS_URL .. "v1/batch"
 
 return function(AssetId, p1)
 	-- upvalues: Debug (copy), PromiseModule (copy), FetchFunction (copy), Text (copy), AsPromiseFunction (copy)

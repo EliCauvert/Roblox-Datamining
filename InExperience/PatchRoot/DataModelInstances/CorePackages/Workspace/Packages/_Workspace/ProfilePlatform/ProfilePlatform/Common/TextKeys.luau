@@ -1,4 +1,5 @@
 ﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local FFlagJoinabilityCTARefactor = require(ProfilePlatform.Parent.SharedFlags).FFlagJoinabilityCTARefactor
 local FFlagProfilePlatformTradeActionLabelModule = require(ProfilePlatform.Flags.FFlagProfilePlatformTradeActionLabel)
 local ProfilePlatformExperiencesGamesLabel = game:DefineFastFlag("ProfilePlatformExperiencesGamesLabel", false)
 
@@ -26,7 +27,7 @@ return {
 	EditProfile = "Feature.Friends.Action.EditProfile",
 	IgnoreFriendRequest = "Feature.AddFriends.Action.IgnoreFriendRequest",
 	Join = "Feature.Chat.Drawer.Join",
-	Play = if require(ProfilePlatform.Parent.SharedFlags).FFlagJoinabilityCTARefactor then "Feature.ExperienceDetails.PlayButtonText.Play" else nil,
+	Play = if FFlagJoinabilityCTARefactor then "Feature.ExperienceDetails.PlayButtonText.Play" else nil,
 	More = "Feature.Groups.Action.More",
 	PendingRequest = "Feature.Friends.Action.PendingRequest",
 	Report = "Feature.Catalog.Action.Report",

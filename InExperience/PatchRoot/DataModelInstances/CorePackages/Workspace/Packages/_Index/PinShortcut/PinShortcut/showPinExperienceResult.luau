@@ -1,6 +1,7 @@
 ﻿local Parent = script:FindFirstAncestor("PinShortcut").Parent
+local RobloxAppEnumsModule = require(Parent.RobloxAppEnums)
 local SetCentralOverlayFunction = require(Parent.CentralOverlay).Actions.SetCentralOverlay
-local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
+local CentralOverlayType = RobloxAppEnumsModule.CentralOverlayType
 
 return function(Callback: (any) -> (), Status, ExperienceName, p1)
 	-- upvalues: SetCentralOverlayFunction (copy), CentralOverlayType (copy)

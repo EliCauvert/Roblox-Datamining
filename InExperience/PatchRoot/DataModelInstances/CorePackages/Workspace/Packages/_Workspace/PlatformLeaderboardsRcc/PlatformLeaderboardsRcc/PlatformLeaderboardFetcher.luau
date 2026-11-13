@@ -1,12 +1,13 @@
 ﻿local HttpService = game:GetService("HttpService")
 local Parent = script.Parent.Parent
 local HttpRequestModule = require(Parent.HttpRequest)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local LeaderboardName: string = `{require(Parent.CoreScriptsCommon).Url.APIS_URL .. "platform-leaderboards-api"}/v1/rcc/universes/{game.GameId}/leaderboard`
 local LeaderboardType = require(script.Parent.PlatformLeaderboardTypes).LeaderboardType
 local PlatformLeaderboardFetcherDefaultCount = game:DefineFastInt("PlatformLeaderboardFetcherDefaultCount", 100)
 local PlatformLeaderboardDisplayNameEnabled = game:DefineFastFlag("PlatformLeaderboardDisplayNameEnabled", false)
 local PlatformLeaderboardBadgeMetadataEnabled = game:DefineFastFlag("PlatformLeaderboardBadgeMetadataEnabled", false)
-local FFlagPlatformLeaderboardDebugLogging = require(Parent.SharedFlags).FFlagPlatformLeaderboardDebugLogging
+local FFlagPlatformLeaderboardDebugLogging = SharedFlagsModule.FFlagPlatformLeaderboardDebugLogging
 local ConfigResult = HttpRequestModule.config({
 	requestFunction = HttpRequestModule.requestFunctions.HttpRbxApi,
 	maxRetryCount = game:DefineFastInt("PlatformLeaderboardFetcherHttpRetryCount", 0)

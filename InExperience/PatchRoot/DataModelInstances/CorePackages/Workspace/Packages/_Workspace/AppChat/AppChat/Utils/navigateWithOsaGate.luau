@@ -1,5 +1,6 @@
 ﻿local HttpService = game:GetService("HttpService")
 local AppChat = script:FindFirstAncestor("AppChat")
+local SharedFlagsModule = require(AppChat.Parent.SharedFlags)
 local ConstantsModule = require(AppChat.Constants)
 local GetOverlayStoreModule = require(AppChat.Stores.GetOverlayStore)
 local OverlayTypesModule = require(AppChat.Stores.GetOverlayStore.OverlayTypes)
@@ -13,7 +14,7 @@ local GetConversationStoreModule = require(AppChat.Stores.GetConversationStore)
 local ConversationModule = require(AppChat.Models.Conversation)
 local ConversationRoduxSeedModule = require(AppChat.Utils.ConversationRoduxSeed)
 local IsFriendsPlaceholderConversationFunction = ConversationRoduxSeedModule.isFriendsPlaceholderConversation
-local FFlagAppChatShowOSAOnPageEntry = require(AppChat.Parent.SharedFlags).FFlagAppChatShowOSAOnPageEntry
+local FFlagAppChatShowOSAOnPageEntry = SharedFlagsModule.FFlagAppChatShowOSAOnPageEntry
 
 local function evaluateAndShowGate(p1, p2)
 	-- upvalues: ShouldShowU13ChatOptInForConversationModule (copy), ConversationModule (copy), ConstantsModule (copy), ShouldShowOSAForConversationModule (copy), GetOverlayStoreModule (copy), LoggerModule (copy), OverlayTypesModule (copy), HttpService (copy), RemovedConversationModule (copy)

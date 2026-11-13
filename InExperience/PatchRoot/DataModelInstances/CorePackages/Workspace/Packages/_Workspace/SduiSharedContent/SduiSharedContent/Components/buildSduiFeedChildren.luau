@@ -3,6 +3,7 @@ local Parent = SduiSharedContent.Parent
 local FFlagSduiErrorPaths = require(Parent.SharedFlags).FFlagSduiErrorPaths
 local ReactModule = require(Parent.React)
 local CryoModule = require(Parent.Cryo)
+local DiscoveryTypesModule = require(Parent.DiscoveryTypes)
 local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local FindAnalyticsFieldFunction = SduiCoreSystemModule.findAnalyticsField
 local GetSduiComponentWrapperFunction = SduiCoreSystemModule.getSduiComponentWrapper
@@ -16,7 +17,7 @@ local FFlagAppPageShellScrollToTopFocus = SharedFlagsModule.FFlagAppPageShellScr
 local FFlagSduiIndividualFeedItemSpacing = SharedFlagsModule.FFlagSduiIndividualFeedItemSpacing
 local FFlagSduiSamePoolFeedItemSpacing = SharedFlagsModule.FFlagSduiSamePoolFeedItemSpacing
 local SduiFeedDebugNameWithImpressionsTag = game:DefineFastFlag("SduiFeedDebugNameWithImpressionsTag", false)
-local SORTINDEXSELECTIONORDERMULTIPLIER = require(Parent.DiscoveryTypes).Constants.SORT_INDEX_SELECTION_ORDER_MULTIPLIER
+local SORTINDEXSELECTIONORDERMULTIPLIER = DiscoveryTypesModule.Constants.SORT_INDEX_SELECTION_ORDER_MULTIPLIER
 local t = {}
 
 local function _(p1, p2, p3: number, p4, p5)

@@ -1,12 +1,13 @@
 ﻿local Parent = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
+local AvatarExperienceUIKitModule = require(Parent.AvatarExperienceUIKit)
 local AssetPickerErrorBodyModule = require(script.Parent.AssetPickerErrorBody)
 local AssetPickerTileModule = require(script.Parent.AssetPickerTile)
 local View = FoundationModule.View
 local Loading = FoundationModule.Loading
 local IconSize = FoundationModule.Enums.IconSize
-local VirtualizedFeed = require(Parent.AvatarExperienceUIKit).FeedComponents.VirtualizedFeed
+local VirtualizedFeed = AvatarExperienceUIKitModule.FeedComponents.VirtualizedFeed
 
 return function(Frame)
 	-- upvalues: ReactModule (copy), View (copy), AssetPickerTileModule (copy), Loading (copy), IconSize (copy), AssetPickerErrorBodyModule (copy), VirtualizedFeed (copy)

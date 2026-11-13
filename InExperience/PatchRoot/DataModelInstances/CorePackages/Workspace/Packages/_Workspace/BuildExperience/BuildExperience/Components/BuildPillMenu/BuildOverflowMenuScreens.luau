@@ -262,7 +262,7 @@ local function ConfigurationScreen(p1, Page, TestId)
 			onClose = UseResult10,
 			onInvitesSent = UseResult12
 		}) else nil,
-		VersionHistory = if UseStateResult1 and TargetWithGameInfo ~= nil and TargetWithGameInfo.placeId ~= nil then ReactModule.createElement(require(BuildExperience.Components.VersionHistory.VersionHistoryContainer), {
+		VersionHistory = if UseStateResult1 and (TargetWithGameInfo ~= nil and TargetWithGameInfo.placeId ~= nil) then ReactModule.createElement(require(BuildExperience.Components.VersionHistory.VersionHistoryContainer), {
 			isOpen = true,
 			testId = "build-publish-version-history",
 			universeId = TargetWithGameInfo.universeId,

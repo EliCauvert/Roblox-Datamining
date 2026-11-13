@@ -1,5 +1,6 @@
 ﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
 local FFlagMomentsCreationBackCta = require(MomentsCreation.Parent.MomentsCommon).Flags.FFlagMomentsCreationBackCta
+local FFlagMomentsTextOverlayDragToDeleteRefinementModule = require(MomentsCreation.Flags.FFlagMomentsTextOverlayDragToDeleteRefinement)
 local CreationFlowStringsModule = {
 	CommunityStandardsText = "Feature.Moments.Description.CommunityStandards",
 	CreationTooltip = "Feature.Moments.Disclaimer.EveryoneMoments",
@@ -41,7 +42,7 @@ local CreationFlowStringsModule = {
 	StayFriendlyModeration = "Feature.Moments.Label.StayFriendlyModeration"
 }
 
-if require(MomentsCreation.Flags.FFlagMomentsTextOverlayDragToDeleteRefinement) then
+if FFlagMomentsTextOverlayDragToDeleteRefinementModule then
 	CreationFlowStringsModule.TextOverlayDragHereToDelete = "Feature.Moments.Label.DragHereToDelete"
 end
 return CreationFlowStringsModule

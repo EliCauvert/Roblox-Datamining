@@ -2,6 +2,7 @@
 local Parent = MusicPicker.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.Dev.ReactRoblox)
 local ColorMode = FoundationModule.Enums.ColorMode
 local Device = FoundationModule.Enums.Device
 local FoundationProvider = FoundationModule.FoundationProvider
@@ -10,7 +11,7 @@ local config = { Dark = ColorMode.Dark, Light = ColorMode.Light }
 return {
 	name = "MusicPicker",
 	roact = ReactModule,
-	reactRoblox = require(Parent.Dev.ReactRoblox),
+	reactRoblox = ReactRobloxModule,
 	mapStory = function(p1)
 		-- upvalues: ReactModule (copy), FoundationProvider (copy), config (copy), ColorMode (copy), Device (copy)
 		return function(p2)

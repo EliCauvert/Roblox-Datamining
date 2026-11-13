@@ -34,6 +34,8 @@ local NewResult = require(Parent1.CoreScriptsInitializer).CoreLogger:new(script.
 local StringKeyFixForParticipantsTable = game:DefineFastFlag("StringKeyFixForParticipantsTable", false)
 local ConsoleVoiceIXPEnabled = game:DefineFastFlag("ConsoleVoiceIXPEnabled", false)
 local FFlagExpChatDictation = require(Parent1.SharedFlags).FFlagExpChatDictation
+local FFlagMicIndicatorRequiresVoiceDevice = require(Parent1.SharedFlags).FFlagMicIndicatorRequiresVoiceDevice
+local FFlagFaeEnablesVoiceDevice = require(Parent1.SharedFlags).FFlagFaeEnablesVoiceDevice
 local ConsoleVoiceIXPLayerName = game:DefineFastString("ConsoleVoiceIXPLayerName", "User.Communication.ConsoleVoice")
 local ConsoleVoiceEnabledIXPLayerValue = game:DefineFastString("ConsoleVoiceEnabledIXPLayerValue", "ConsoleVoiceEnabled")
 local SendVoiceCapturedDuringVideoCaptureEvent = game:DefineFastFlag("SendVoiceCapturedDuringVideoCaptureEvent", false)
@@ -167,7 +169,10 @@ local config1 = {
 	voiceCapturedDuringVideoCapture = false,
 	_voiceJoinTimestampMs = nil,
 	_voiceVolumeSliderEligibleAtJoin = false,
-	_gameSettingsOpenedTimestampMs = nil
+	_gameSettingsOpenedTimestampMs = nil,
+	_userAudioEnabledConnection = nil,
+	_voiceConsumerAwaitingDevice = false,
+	_voiceConsumerDevice = nil
 }
 local config2 = {
 	localMuted = true,
@@ -215,6 +220,7 @@ function config1.new(BlockStatusChanged, PermissionsService, HttpRbxApiService, 
 		SequenceNumbers = {},
 		SignalREventTable = {},
 		audioDevices = {},
+		_localAudioDevices = {},
 		BlockStatusChanged = BlockStatusChanged,
 		AppStorageService = p1 or AppStorageService,
 		ThirdPartyUserService = ThirdPartyUserService,
@@ -817,13 +823,13 @@ function config1:OptUserToJoinVoice()
 end
 
 function config1:SetupFAECompleteListener()
-	-- upvalues: NewResult (copy)
+	-- upvalues: NewResult (copy), FFlagFaeEnablesVoiceDevice (copy)
 	NewResult:debug("Setting up FAE complete listener")
 	
 	if game:GetEngineFeature("ChatReconcileAccess") then
 		NewResult:debug("Using ChatService ReconcileCommunicationAccessCompleted event")
 		self.ChatService.ReconcileCommunicationAccessCompleted:Connect(function()
-			-- upvalues: NewResult (upval), self (copy)
+			-- upvalues: NewResult (upval), self (copy), FFlagFaeEnablesVoiceDevice (upval)
 			NewResult:debug("FAE complete listener triggered, re-fetching voice permissions")
 			self.communicationPermissionsResult = nil
 			self:FetchVoicePermissions()
@@ -834,11 +840,80 @@ function config1:SetupFAECompleteListener()
 				
 				if self:IsSeamlessVoice() then
 					NewResult:debug("Opting-in user to voice")
+					
+					if FFlagFaeEnablesVoiceDevice then
+						self:_enableVoiceThenRejoinWhenUserAudioEnabled()
+						
+						return
+					end
 					self.AvatarChatService:EnableVoice()
 					self.attemptVoiceRejoin:Fire()
 				end
 			end
 		end)
+	end
+end
+
+function config1:_enableVoiceThenRejoinWhenUserAudioEnabled()
+	-- upvalues: NewResult (copy)
+	local AvatarChatService = self.AvatarChatService
+	
+	local function _()
+		-- upvalues: AvatarChatService (copy)
+		return AvatarChatService:IsEnabled(AvatarChatService.ClientFeatures, Enum.AvatarChatServiceFeature.UserAudio)
+	end
+	
+	if self._userAudioEnabledConnection then
+		self._userAudioEnabledConnection:Disconnect()
+		self._userAudioEnabledConnection = nil
+	end
+	local Flag = false
+	
+	local _ = function()
+		-- upvalues: Flag (ref), self (copy), NewResult (upval)
+		if Flag then return end
+		Flag = true
+		
+		if self._userAudioEnabledConnection then
+			self._userAudioEnabledConnection:Disconnect()
+			self._userAudioEnabledConnection = nil
+		end
+		NewResult:debug("UserAudio enabled, attempting voice rejoin")
+		self.attemptVoiceRejoin:Fire()
+	end
+	
+	self._userAudioEnabledConnection = AvatarChatService:GetPropertyChangedSignal("ClientFeatures"):Connect(function()
+		-- upvalues: AvatarChatService (copy), NewResult (upval), Flag (ref), self (copy)
+		local IsEnabled = AvatarChatService:IsEnabled(AvatarChatService.ClientFeatures, Enum.AvatarChatServiceFeature.UserAudio)
+		NewResult:debug("ClientFeatures changed while waiting for UserAudio. UserAudio enabled: {}", IsEnabled)
+		
+		if IsEnabled then
+			if Flag then return end
+			Flag = true
+			
+			if self._userAudioEnabledConnection then
+				self._userAudioEnabledConnection:Disconnect()
+				self._userAudioEnabledConnection = nil
+			end
+			NewResult:debug("UserAudio enabled, attempting voice rejoin")
+			self.attemptVoiceRejoin:Fire()
+		end
+	end)
+	AvatarChatService:EnableVoice()
+	
+	if AvatarChatService:IsEnabled(AvatarChatService.ClientFeatures, Enum.AvatarChatServiceFeature.UserAudio) then
+		if not Flag then
+			Flag = true
+			
+			if self._userAudioEnabledConnection then
+				self._userAudioEnabledConnection:Disconnect()
+				self._userAudioEnabledConnection = nil
+			end
+			NewResult:debug("UserAudio enabled, attempting voice rejoin")
+			self.attemptVoiceRejoin:Fire()
+		end
+	else
+		NewResult:debug("Waiting for UserAudio before voice rejoin")
 	end
 end
 
@@ -1337,7 +1412,7 @@ function config1:_updateRecentUsersInteractionData()
 end
 
 function config1:SetupParticipantListeners()
-	-- upvalues: NewResult (copy), GetFFlagClearUserFromRecentVoiceDataOnLeaveModule (copy), StringKeyFixForParticipantsTable (copy), GetFFlagFixGetPlayerByUserIdStringCastModule (copy), Players (copy), VoiceChatService (copy), FFlagEnablePartyVoiceChangersInLua (copy), GetFFlagBatchVoiceParticipantsUpdatesModule (copy), FFlagEnableVoiceChatMuteForVideoCaptures (copy), GetFFlagMicConsumerRegistryModule (copy), GetFFlagCoreMicManagerRefactorModule (copy), FFlagMicSyncVoiceDeviceAcrossRejoinModule (copy), GetFFlagVoiceChatClientRewriteMasterLuaFunction (copy), StopModerationConnectionOnLeave (copy), VoiceVolumeControlsEnableVoiceVolumeEligibilityTelemetry (copy), v2 (copy), VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature (copy), GetFFlagEnableVoiceSignalFunction (copy), VOICEJOINPROGRESS (copy), VoiceVolumeControlsEligibilityModule (copy), v1 (copy), MINVOICECHATAPIVERSIONLOCALMICACTIVITY (copy), GetFFlagLocalMutedNilFixFunction (copy), GetFFlagLuaConsumePlayerModeratedModule (copy), GetFFlagEnableVoiceReverseNudgeModule (copy), UtilsModule (copy), config (copy)
+	-- upvalues: NewResult (copy), GetFFlagClearUserFromRecentVoiceDataOnLeaveModule (copy), StringKeyFixForParticipantsTable (copy), GetFFlagFixGetPlayerByUserIdStringCastModule (copy), Players (copy), VoiceChatService (copy), FFlagEnablePartyVoiceChangersInLua (copy), GetFFlagBatchVoiceParticipantsUpdatesModule (copy), FFlagEnableVoiceChatMuteForVideoCaptures (copy), GetFFlagMicConsumerRegistryModule (copy), GetFFlagCoreMicManagerRefactorModule (copy), FFlagMicSyncVoiceDeviceAcrossRejoinModule (copy), GetFFlagVoiceChatClientRewriteMasterLuaFunction (copy), StopModerationConnectionOnLeave (copy), FFlagMicIndicatorRequiresVoiceDevice (copy), VoiceVolumeControlsEnableVoiceVolumeEligibilityTelemetry (copy), v2 (copy), VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature (copy), GetFFlagEnableVoiceSignalFunction (copy), VOICEJOINPROGRESS (copy), VoiceVolumeControlsEligibilityModule (copy), v1 (copy), MINVOICECHATAPIVERSIONLOCALMICACTIVITY (copy), GetFFlagLocalMutedNilFixFunction (copy), GetFFlagLuaConsumePlayerModeratedModule (copy), GetFFlagEnableVoiceReverseNudgeModule (copy), UtilsModule (copy), config (copy)
 	self:ensureInitialized("setup participant listeners")
 	
 	if not self.participants then
@@ -1427,7 +1502,7 @@ function config1:SetupParticipantListeners()
 		local FFlagCoreMicManagerRefactorModule = GetFFlagMicConsumerRegistryModule() and GetFFlagCoreMicManagerRefactorModule()
 		
 		local function onStateChanged(OldState, NewState)
-			-- upvalues: self (copy), FFlagMicSyncVoiceDeviceAcrossRejoinModule (upval), GetFFlagVoiceChatClientRewriteMasterLuaFunction (upval), NewResult (upval), StopModerationConnectionOnLeave (upval), FFlagCoreMicManagerRefactorModule (copy), VoiceVolumeControlsEnableVoiceVolumeEligibilityTelemetry (upval), v2 (upval), VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature (upval), GetFFlagEnableVoiceSignalFunction (upval), VOICEJOINPROGRESS (upval), VoiceVolumeControlsEligibilityModule (upval), VoiceChatService (upval)
+			-- upvalues: self (copy), FFlagMicSyncVoiceDeviceAcrossRejoinModule (upval), GetFFlagVoiceChatClientRewriteMasterLuaFunction (upval), NewResult (upval), StopModerationConnectionOnLeave (upval), FFlagCoreMicManagerRefactorModule (copy), FFlagMicIndicatorRequiresVoiceDevice (upval), VoiceVolumeControlsEnableVoiceVolumeEligibilityTelemetry (upval), v2 (upval), VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature (upval), GetFFlagEnableVoiceSignalFunction (upval), VOICEJOINPROGRESS (upval), VoiceVolumeControlsEligibilityModule (upval), VoiceChatService (upval)
 			self:emit("OnStateChanged", OldState, NewState)
 			local IsNewStateMatch = NewState == Enum.VoiceChatState.Failed
 			local IsNewStateMatch1 = NewState == Enum.VoiceChatState.Joining
@@ -1470,6 +1545,9 @@ function config1:SetupParticipantListeners()
 				if FFlagCoreMicManagerRefactorModule then
 					self.micManager:UnregisterConsumer("voice_chat")
 				end
+				if FFlagMicIndicatorRequiresVoiceDevice then
+					self:_clearVoiceConsumerDevice()
+				end
 				if VoiceVolumeControlsEnableVoiceVolumeEligibilityTelemetry then
 					self._voiceVolumeEligibilityReported = false
 				end
@@ -1503,7 +1581,7 @@ function config1:SetupParticipantListeners()
 				self._voiceJoinTimestampMs = DateTime.now().UnixTimestampMillis
 				self._voiceVolumeSliderEligibleAtJoin = VoiceVolumeControlsEligibilityModule.isVoiceChatVolumeSliderVisible(true, VoiceChatService.UseNewAudioApi)
 			end
-			if VoiceVolumeControlsEnableVoiceVolumeEligibilityTelemetry and (VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature and NewState == Enum.VoiceChatState.Joined and not self._voiceVolumeEligibilityReported) then
+			if VoiceVolumeControlsEnableVoiceVolumeEligibilityTelemetry and VoiceVolumeControlsApplyGameSettingsVoiceVolumeEngineFeature and NewState == Enum.VoiceChatState.Joined and not self._voiceVolumeEligibilityReported then
 				local Success, Result = pcall(function()
 					return UserSettings():GetService("UserGameSettings").VoiceChatVolume
 				end)
@@ -1530,7 +1608,9 @@ function config1:SetupParticipantListeners()
 		if GetFFlagCoreMicManagerRefactorModule() then
 			self.micManager:SetupMicActivityListener(self.service)
 			
-			if GetFFlagMicConsumerRegistryModule() then
+			if GetFFlagMicConsumerRegistryModule() and FFlagMicIndicatorRequiresVoiceDevice then
+				self:_registerVoiceConsumerWhenDeviceReady()
+			elseif GetFFlagMicConsumerRegistryModule() then
 				local LocalPlayer = Players.LocalPlayer
 				self.micManager:RegisterConsumer({
 					id = "voice_chat",
@@ -1692,15 +1772,83 @@ local function _(Object)
 end
 
 function config1:_onAudioDeviceInputAdded(AudioDeviceInput)
-	-- upvalues: FFlagExpChatDictation (copy), CoreGui (copy), NewResult (copy)
-	if not FFlagExpChatDictation or not AudioDeviceInput:IsDescendantOf(CoreGui) then
-		NewResult:debug("Found new audio device instance for {}", AudioDeviceInput.Player and AudioDeviceInput.Player.Name)
-		self.audioDevices[AudioDeviceInput] = self:CreateAudioDeviceData(AudioDeviceInput)
-		self:emit("OnAudioDeviceInputAdded")
-		self:StartAnalysis(AudioDeviceInput)
+	-- upvalues: FFlagExpChatDictation (copy), CoreGui (copy), NewResult (copy), FFlagMicIndicatorRequiresVoiceDevice (copy), Players (copy)
+	if FFlagExpChatDictation and AudioDeviceInput:IsDescendantOf(CoreGui) then return end
+	NewResult:debug("Found new audio device instance for {}", AudioDeviceInput.Player and AudioDeviceInput.Player.Name)
+	self.audioDevices[AudioDeviceInput] = self:CreateAudioDeviceData(AudioDeviceInput)
+	
+	if FFlagMicIndicatorRequiresVoiceDevice then
+		self:_setLocalAudioDevice(AudioDeviceInput, AudioDeviceInput.Player == Players.LocalPlayer)
+	end
+	self:emit("OnAudioDeviceInputAdded")
+	self:StartAnalysis(AudioDeviceInput)
+end
+
+function config1:_registerVoiceConsumerWhenDeviceReady()
+	-- upvalues: Players (copy), VoiceChatService (copy), NewResult (copy)
+	local LocalPlayer = Players.LocalPlayer
+	local AudioDeviceInput = if LocalPlayer then LocalPlayer:FindFirstChildOfClass("AudioDeviceInput") else nil
+	
+	if AudioDeviceInput or not VoiceChatService.UseNewAudioApi then
+		self:_registerVoiceConsumer(AudioDeviceInput)
 		
 		return
+	else
+		NewResult:debug("No local AudioDeviceInput yet, registering voice consumer once it's added")
+		self._voiceConsumerAwaitingDevice = true
 	end
+end
+
+function config1:_registerVoiceConsumerForLocalDevice(Device)
+	-- upvalues: NewResult (copy)
+	self._voiceConsumerAwaitingDevice = false
+	NewResult:debug("Local AudioDeviceInput added, registering voice consumer")
+	self:_registerVoiceConsumer(Device)
+end
+
+function config1:_registerVoiceConsumer(Device)
+	-- upvalues: FFlagMicIndicatorRequiresVoiceDevice (copy)
+	local RegisterConsumerResult = self.micManager:RegisterConsumer({
+		id = "voice_chat",
+		consumerType = "VoiceChat",
+		device = Device
+	})
+	
+	if FFlagMicIndicatorRequiresVoiceDevice and RegisterConsumerResult then
+		self._voiceConsumerDevice = Device
+	end
+end
+
+function config1:_clearVoiceConsumerDevice()
+	self._voiceConsumerAwaitingDevice = false
+	self._voiceConsumerDevice = nil
+end
+
+function config1:_setLocalAudioDevice(AudioDeviceInput, IsPlayerMatch)
+	-- upvalues: NewResult (copy)
+	if IsPlayerMatch == (self._localAudioDevices[AudioDeviceInput] ~= nil) then return end
+	if IsPlayerMatch then
+		self._localAudioDevices[AudioDeviceInput] = true
+		
+		if self._voiceConsumerAwaitingDevice then
+			self:_registerVoiceConsumerForLocalDevice(AudioDeviceInput)
+		end
+	else
+		self._localAudioDevices[AudioDeviceInput] = nil
+		
+		if self._voiceConsumerDevice == AudioDeviceInput then
+			NewResult:debug("Voice consumer's AudioDeviceInput removed, registering voice consumer once a new one is added")
+			self.micManager:UnregisterConsumer("voice_chat", true)
+			self._voiceConsumerDevice = nil
+			self._voiceConsumerAwaitingDevice = true
+		end
+	end
+	self:emit("OnLocalAudioDeviceChanged")
+end
+
+function config1:HasLocalVoiceDevice(): boolean
+	-- upvalues: VoiceChatService (copy)
+	return not VoiceChatService.UseNewAudioApi or next(self._localAudioDevices) ~= nil
 end
 
 function config1:onInstanceAdded(AudioDeviceInput)
@@ -1919,7 +2067,7 @@ function config1:SetAndSyncActive(p4, Active)
 end
 
 function config1:CreateAudioDeviceData(Object)
-	-- upvalues: Players (copy), EnableMutedByLocalUserEngineFeature (copy), NewResult (copy), FFlagDebugShowAudioDeviceInputDebugger (copy), VoiceChatService (copy)
+	-- upvalues: Players (copy), EnableMutedByLocalUserEngineFeature (copy), NewResult (copy), FFlagMicIndicatorRequiresVoiceDevice (copy), FFlagDebugShowAudioDeviceInputDebugger (copy), VoiceChatService (copy)
 	local t = {}
 	local IsPlayerMatch = Object.Player == Players.LocalPlayer
 	
@@ -1963,7 +2111,7 @@ function config1:CreateAudioDeviceData(Object)
 		end
 	end
 	t.onPlayerChanged = Object:GetPropertyChangedSignal("Player"):Connect(function()
-		-- upvalues: IsPlayerMatch (ref), Object (copy), Players (upval), self (copy), NewResult (upval), EnableMutedByLocalUserEngineFeature (upval)
+		-- upvalues: IsPlayerMatch (ref), Object (copy), Players (upval), self (copy), NewResult (upval), EnableMutedByLocalUserEngineFeature (upval), FFlagMicIndicatorRequiresVoiceDevice (upval)
 		IsPlayerMatch = Object.Player == Players.LocalPlayer
 		
 		if IsPlayerMatch then
@@ -1980,6 +2128,9 @@ function config1:CreateAudioDeviceData(Object)
 			else
 				Object.Active = false
 			end
+		end
+		if FFlagMicIndicatorRequiresVoiceDevice then
+			self:_setLocalAudioDevice(Object, IsPlayerMatch)
 		end
 		self:emit("OnDevicePlayerChanged")
 		self:StartAnalysis(Object)
@@ -2025,7 +2176,7 @@ function config1:CreateAudioDeviceData(Object)
 end
 
 function config1:onInstanceRemove(AudioDeviceInput)
-	-- upvalues: FFlagExpChatDictation (copy), CoreGui (copy), NewResult (copy), EnableMutedByLocalUserEngineFeature (copy), FFlagDebugShowAudioDeviceInputDebugger (copy), v1 (copy)
+	-- upvalues: FFlagExpChatDictation (copy), CoreGui (copy), NewResult (copy), EnableMutedByLocalUserEngineFeature (copy), FFlagDebugShowAudioDeviceInputDebugger (copy), FFlagMicIndicatorRequiresVoiceDevice (copy), v1 (copy)
 	if AudioDeviceInput:IsA("AudioDeviceInput") then
 		if FFlagExpChatDictation and AudioDeviceInput:IsDescendantOf(CoreGui) then return end
 		self:StopAnalysis(AudioDeviceInput)
@@ -2053,6 +2204,10 @@ function config1:onInstanceRemove(AudioDeviceInput)
 			end
 		end
 		self.audioDevices[AudioDeviceInput] = nil
+		
+		if FFlagMicIndicatorRequiresVoiceDevice then
+			self:_setLocalAudioDevice(AudioDeviceInput, false)
+		end
 		self:emit("OnAudioDeviceInputRemoved")
 		
 		if v1 and AudioDeviceInput.Player then
@@ -2404,16 +2559,19 @@ function config1:_reportJoinFailed(p4, ERROR)
 end
 
 function config1:_registerVoiceChatConsumerOnJoined(VoiceChatState)
-	-- upvalues: GetFFlagMicConsumerRegistryModule (copy), GetFFlagCoreMicManagerRefactorModule (copy), Players (copy)
-	if GetFFlagMicConsumerRegistryModule() and GetFFlagCoreMicManagerRefactorModule() and VoiceChatState == Enum.VoiceChatState.Joined then
+	-- upvalues: GetFFlagMicConsumerRegistryModule (copy), GetFFlagCoreMicManagerRefactorModule (copy), FFlagMicIndicatorRequiresVoiceDevice (copy), Players (copy)
+	if not GetFFlagMicConsumerRegistryModule() or not GetFFlagCoreMicManagerRefactorModule() or VoiceChatState ~= Enum.VoiceChatState.Joined then return end
+	if FFlagMicIndicatorRequiresVoiceDevice then
+		self:_registerVoiceConsumerWhenDeviceReady()
+		
+		return
+	else
 		local LocalPlayer = Players.LocalPlayer
 		self.micManager:RegisterConsumer({
 			id = "voice_chat",
 			consumerType = "VoiceChat",
 			device = if LocalPlayer then LocalPlayer:FindFirstChildOfClass("AudioDeviceInput") else nil
 		})
-		
-		return
 	end
 end
 
@@ -2666,7 +2824,14 @@ function config1:GetChannelId()
 end
 
 function config1:Disconnect()
-	-- upvalues: GetFFlagCoreMicManagerRefactorModule (copy), GetFFlagMicConsumerRegistryModule (copy), FFlagEnableVoiceChatMuteForVideoCaptures (copy)
+	-- upvalues: FFlagFaeEnablesVoiceDevice (copy), FFlagMicIndicatorRequiresVoiceDevice (copy), GetFFlagCoreMicManagerRefactorModule (copy), GetFFlagMicConsumerRegistryModule (copy), FFlagEnableVoiceChatMuteForVideoCaptures (copy)
+	if FFlagFaeEnablesVoiceDevice and self._userAudioEnabledConnection then
+		self._userAudioEnabledConnection:Disconnect()
+		self._userAudioEnabledConnection = nil
+	end
+	if FFlagMicIndicatorRequiresVoiceDevice then
+		self:_clearVoiceConsumerDevice()
+	end
 	if GetFFlagCoreMicManagerRefactorModule() then
 		if GetFFlagMicConsumerRegistryModule() then
 			self.micManager:UnregisterConsumer("voice_chat")
