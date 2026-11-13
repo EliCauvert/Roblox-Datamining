@@ -119,7 +119,8 @@ local PushProviderFunction = ReactFiberNewContextNewModule.pushProvider
 local config = {
 	renderWithHooksRef = nil,
 	bailoutHooksRef = nil,
-	shouldSuspendRef = nil
+	shouldSuspendRef = nil,
+	classMemoCache = require(script.Parent["ReactFiberClassMemoCache.new"])
 }
 
 local _ = function(p1)
@@ -205,8 +206,8 @@ local DisableLogsFunction = ConsolePatchingDev.disableLogs
 local ReenableLogsFunction = ConsolePatchingDev.reenableLogs
 local ReactCurrentOwner = ReactSharedInternals.ReactCurrentOwner
 local ReactFiberBeginWorkModule = {}
-local Callback = nil
-local Callback2 = nil
+local Callback1 = nil
+local Callback3 = nil
 local IsNotBitsMatch = false
 local config1 = {
 	didWarnAboutBadClass = {},
@@ -216,7 +217,7 @@ local config1 = {
 	didWarnAboutFunctionRefs = {},
 	didWarnAboutDefaultPropsOnFunctionComponent = {}
 }
-local Callback1 = nil
+local Callback2 = nil
 
 if DEV then
 	config1.didWarnAboutBadClass = {}
@@ -254,7 +255,7 @@ local _ = function(p1, p2, p3, p4)
 end
 
 local function updateForwardRef(p1, Current, InitResult, p2, BaseLanes)
-	-- upvalues: DEV (copy), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), CheckPropTypesFunction (copy), GetComponentNameFunction (copy), PrepareToReadContextFunction (copy), ReactFiberBeginWorkModule (copy), ReactCurrentOwner (copy), SetIsRenderingFunction (copy), renderWithHooks (copy), DebugRenderPhaseSideEffectsForStrictMode (copy), StrictMode (copy), DisableLogsFunction (copy), DescribeError (copy), ReenableLogsFunction (copy), IsNotBitsMatch (ref), bailoutHooks (copy), Callback (ref), PerformedWork (copy), reconcileChildren (copy)
+	-- upvalues: DEV (copy), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), CheckPropTypesFunction (copy), GetComponentNameFunction (copy), PrepareToReadContextFunction (copy), ReactFiberBeginWorkModule (copy), ReactCurrentOwner (copy), SetIsRenderingFunction (copy), renderWithHooks (copy), DebugRenderPhaseSideEffectsForStrictMode (copy), StrictMode (copy), DisableLogsFunction (copy), DescribeError (copy), ReenableLogsFunction (copy), IsNotBitsMatch (ref), bailoutHooks (copy), Callback1 (ref), PerformedWork (copy), reconcileChildren (copy)
 	if (DEV or DISABLEALLWARNINGSEXCEPTPROPVALIDATION) and Current.type ~= Current.elementType then
 		local PropTypes = InitResult.propTypes
 		local ValidateProps = InitResult.validateProps
@@ -298,12 +299,12 @@ local function updateForwardRef(p1, Current, InitResult, p2, BaseLanes)
 	else
 		bailoutHooks(p1, Current, BaseLanes)
 		
-		return Callback(p1, Current, BaseLanes)
+		return Callback1(p1, Current, BaseLanes)
 	end
 end
 
 local function updateMemoComponent(p1, Return_, InitResult, p2, Lanes, BaseLanes)
-	-- upvalues: IsSimpleFunctionComponentFunction (copy), DEV (copy), ResolveFunctionForHotReloadingFunction (copy), SimpleMemoComponent (copy), Callback1 (ref), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), CheckPropTypesFunction (copy), GetComponentNameFunction (copy), CreateFiberFromTypeAndPropsFunction (copy), ReactFiberLaneModule (copy), ShallowEqualFunction (copy), Callback (ref), PerformedWork (copy), CreateWorkInProgressFunction (copy)
+	-- upvalues: IsSimpleFunctionComponentFunction (copy), DEV (copy), ResolveFunctionForHotReloadingFunction (copy), SimpleMemoComponent (copy), Callback2 (ref), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), CheckPropTypesFunction (copy), GetComponentNameFunction (copy), CreateFiberFromTypeAndPropsFunction (copy), ReactFiberLaneModule (copy), ShallowEqualFunction (copy), Callback1 (ref), PerformedWork (copy), CreateWorkInProgressFunction (copy)
 	if p1 == nil then
 		local Type1 = InitResult.type
 		
@@ -315,7 +316,7 @@ local function updateMemoComponent(p1, Return_, InitResult, p2, Lanes, BaseLanes
 			if DEV then
 				validateFunctionComponentInDev(Return_, Type1)
 			end
-			return Callback1(p1, Return_, ResolveFunctionForHotReloadingResult, p2, Lanes, BaseLanes)
+			return Callback2(p1, Return_, ResolveFunctionForHotReloadingResult, p2, Lanes, BaseLanes)
 		else
 			if DEV or DISABLEALLWARNINGSEXCEPTPROPVALIDATION then
 				local PropTypes = nil
@@ -360,7 +361,7 @@ local function updateMemoComponent(p1, Return_, InitResult, p2, Lanes, BaseLanes
 				CompareFunction = ShallowEqualFunction
 			end
 			if CompareFunction(MemoizedProps, p2) and p1.ref == Return_.ref then
-				return Callback(p1, Return_, BaseLanes)
+				return Callback1(p1, Return_, BaseLanes)
 			end
 		end
 		Return_.flags = bit32.bor(Return_.flags, PerformedWork)
@@ -373,8 +374,8 @@ local function updateMemoComponent(p1, Return_, InitResult, p2, Lanes, BaseLanes
 	end
 end
 
-Callback1 = function(p1, Current, Type1, PendingProps, Lanes, BaseLanes)
-	-- upvalues: DEV (copy), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), REACTLAZYTYPE (copy), DescribeError (copy), CheckPropTypesFunction (copy), GetComponentNameFunction (copy), ShallowEqualFunction (copy), IsNotBitsMatch (ref), ReactFiberLaneModule (copy), Callback (ref), ForceUpdateForLegacySuspense (copy), NoFlags (copy), Callback2 (ref)
+Callback2 = function(p1, Current, Type1, PendingProps, Lanes, BaseLanes)
+	-- upvalues: DEV (copy), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), REACTLAZYTYPE (copy), DescribeError (copy), CheckPropTypesFunction (copy), GetComponentNameFunction (copy), ShallowEqualFunction (copy), IsNotBitsMatch (ref), ReactFiberLaneModule (copy), Callback1 (ref), ForceUpdateForLegacySuspense (copy), NoFlags (copy), Callback3 (ref)
 	if (DEV or DISABLEALLWARNINGSEXCEPTPROPVALIDATION) and Current.type ~= Current.elementType then
 		local ElementType = Current.elementType
 		
@@ -402,14 +403,14 @@ Callback1 = function(p1, Current, Type1, PendingProps, Lanes, BaseLanes)
 			if not ReactFiberLaneModule.includesSomeLane(BaseLanes, Lanes) then
 				Current.lanes = p1.lanes
 				
-				return Callback(p1, Current, BaseLanes)
+				return Callback1(p1, Current, BaseLanes)
 			end
 			if bit32.band(p1.flags, ForceUpdateForLegacySuspense) ~= NoFlags then
 				IsNotBitsMatch = true
 			end
 		end
 	end
-	return Callback2(p1, Current, Type1, PendingProps, BaseLanes)
+	return Callback3(p1, Current, Type1, PendingProps, BaseLanes)
 end
 
 local function updateOffscreenComponent(p1, Current, BaseLanes)
@@ -489,32 +490,32 @@ do
 		end
 	end
 
-	Callback2 = function(p1, Current, Callback1, p2, BaseLanes)
-		-- upvalues: DEV (copy), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), CheckPropTypesFunction (copy), GetComponentNameFunction (copy), DisableLegacyContext (copy), GetUnmaskedContextFunction (copy), GetMaskedContextFunction (copy), PrepareToReadContextFunction (copy), ReactFiberBeginWorkModule (copy), ReactCurrentOwner (copy), SetIsRenderingFunction (copy), renderWithHooks (copy), DebugRenderPhaseSideEffectsForStrictMode (copy), StrictMode (copy), DisableLogsFunction (copy), DescribeError (copy), ReenableLogsFunction (copy), IsNotBitsMatch (ref), bailoutHooks (copy), Callback (ref), PerformedWork (copy), reconcileChildren (copy)
-		if (DEV or DISABLEALLWARNINGSEXCEPTPROPVALIDATION) and (type(Callback1) ~= "function" and Current.type ~= Current.elementType) then
+	Callback3 = function(p1, Current, Callback, p2, BaseLanes)
+		-- upvalues: DEV (copy), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), CheckPropTypesFunction (copy), GetComponentNameFunction (copy), DisableLegacyContext (copy), GetUnmaskedContextFunction (copy), GetMaskedContextFunction (copy), PrepareToReadContextFunction (copy), ReactFiberBeginWorkModule (copy), ReactCurrentOwner (copy), SetIsRenderingFunction (copy), renderWithHooks (copy), DebugRenderPhaseSideEffectsForStrictMode (copy), StrictMode (copy), DisableLogsFunction (copy), DescribeError (copy), ReenableLogsFunction (copy), IsNotBitsMatch (ref), bailoutHooks (copy), Callback1 (ref), PerformedWork (copy), reconcileChildren (copy)
+		if (DEV or DISABLEALLWARNINGSEXCEPTPROPVALIDATION) and (type(Callback) ~= "function" and Current.type ~= Current.elementType) then
 			local PropTypes = nil
 			local ValidateProps = nil
 			
-			if type(Callback1) == "table" then
-				PropTypes = Callback1.propTypes
-				ValidateProps = Callback1.validateProps
+			if type(Callback) == "table" then
+				PropTypes = Callback.propTypes
+				ValidateProps = Callback.validateProps
 			end
 			if PropTypes or ValidateProps then
-				CheckPropTypesFunction(PropTypes, ValidateProps, p2, "prop", GetComponentNameFunction(Callback1))
+				CheckPropTypesFunction(PropTypes, ValidateProps, p2, "prop", GetComponentNameFunction(Callback))
 			end
 		end
-		local MaskedContext = if DisableLegacyContext then nil else GetMaskedContextFunction(Current, (GetUnmaskedContextFunction(Current, Callback1, true)))
+		local MaskedContext = if DisableLegacyContext then nil else GetMaskedContextFunction(Current, (GetUnmaskedContextFunction(Current, Callback, true)))
 		PrepareToReadContextFunction(Current, BaseLanes, ReactFiberBeginWorkModule.markWorkInProgressReceivedUpdate)
 		local RenderWithHooksResult = nil
 		
 		if DEV then
 			ReactCurrentOwner.current = Current
 			SetIsRenderingFunction(true)
-			RenderWithHooksResult = renderWithHooks(p1, Current, Callback1, p2, MaskedContext, BaseLanes)
+			RenderWithHooksResult = renderWithHooks(p1, Current, Callback, p2, MaskedContext, BaseLanes)
 			
 			if DebugRenderPhaseSideEffectsForStrictMode and bit32.band(Current.mode, StrictMode) ~= 0 then
 				DisableLogsFunction()
-				local Success, Result = xpcall(renderWithHooks, DescribeError, p1, Current, Callback1, p2, MaskedContext, BaseLanes)
+				local Success, Result = xpcall(renderWithHooks, DescribeError, p1, Current, Callback, p2, MaskedContext, BaseLanes)
 				ReenableLogsFunction()
 				
 				if Success then
@@ -525,7 +526,7 @@ do
 			end
 			SetIsRenderingFunction(false)
 		else
-			RenderWithHooksResult = renderWithHooks(p1, Current, Callback1, p2, MaskedContext, BaseLanes)
+			RenderWithHooksResult = renderWithHooks(p1, Current, Callback, p2, MaskedContext, BaseLanes)
 		end
 		if p1 == nil or IsNotBitsMatch then
 			Current.flags = bit32.bor(Current.flags, PerformedWork)
@@ -535,7 +536,7 @@ do
 		else
 			bailoutHooks(p1, Current, BaseLanes)
 			
-			return Callback(p1, Current, BaseLanes)
+			return Callback1(p1, Current, BaseLanes)
 		end
 	end
 
@@ -587,7 +588,7 @@ do
 	end
 
 	function finishClassComponent(p1, Current, p2, p3, p4, p5)
-		-- upvalues: Ref (copy), DidCapture (copy), NoFlags (copy), InvalidateContextProviderFunction (copy), Callback (ref), ReactCurrentOwner (copy), EnableProfilerTimer (copy), StopProfilerTimerIfRunningFunction (copy), DEV (copy), SetIsRenderingFunction (copy), DebugRenderPhaseSideEffectsForStrictMode (copy), StrictMode (copy), DisableLogsFunction (copy), DescribeError (copy), ReenableLogsFunction (copy), PerformedWork (copy), ReconcileChildFibersFunction (copy), reconcileChildren (copy)
+		-- upvalues: Ref (copy), DidCapture (copy), NoFlags (copy), InvalidateContextProviderFunction (copy), Callback1 (ref), ReactCurrentOwner (copy), EnableProfilerTimer (copy), StopProfilerTimerIfRunningFunction (copy), DEV (copy), SetIsRenderingFunction (copy), ReactFeatureFlags (copy), config (copy), DebugRenderPhaseSideEffectsForStrictMode (copy), StrictMode (copy), DisableLogsFunction (copy), DescribeError (copy), ReenableLogsFunction (copy), PerformedWork (copy), ReconcileChildFibersFunction (copy), reconcileChildren (copy)
 		local Ref1 = Current.ref
 		
 		if p1 == nil and Ref1 ~= nil or p1 ~= nil and p1.ref ~= Ref1 then
@@ -608,11 +609,26 @@ do
 				end
 			elseif DEV then
 				SetIsRenderingFunction(true)
+				
+				if ReactFeatureFlags.enableClassCompilerRuntimeRelease1 then
+					config.classMemoCache.prepareToRender(Current)
+				end
 				RenderResult = StateNode:render()
 				
+				if ReactFeatureFlags.enableClassCompilerRuntimeRelease1 then
+					config.classMemoCache.finishRendering()
+				end
 				if DebugRenderPhaseSideEffectsForStrictMode and bit32.band(Current.mode, StrictMode) ~= 0 then
 					DisableLogsFunction()
+					
+					if ReactFeatureFlags.enableClassCompilerRuntimeRelease1 then
+						config.classMemoCache.prepareToRender(Current)
+					end
 					local Success, Result = xpcall(StateNode.render, DescribeError, StateNode)
+					
+					if ReactFeatureFlags.enableClassCompilerRuntimeRelease1 then
+						config.classMemoCache.finishRendering()
+					end
 					ReenableLogsFunction()
 					
 					if not Success then
@@ -621,7 +637,14 @@ do
 				end
 				SetIsRenderingFunction(false)
 			else
+				if ReactFeatureFlags.enableClassCompilerRuntimeRelease1 then
+					config.classMemoCache.prepareToRender(Current)
+				end
 				RenderResult = StateNode:render()
+				
+				if ReactFeatureFlags.enableClassCompilerRuntimeRelease1 then
+					config.classMemoCache.finishRendering()
+				end
 			end
 			Current.flags = bit32.bor(Current.flags, PerformedWork)
 			
@@ -641,7 +664,7 @@ do
 			if p4 then
 				InvalidateContextProviderFunction(Current, p2, false)
 			end
-			return Callback(p1, Current, p5)
+			return Callback1(p1, Current, p5)
 		end
 	end
 
@@ -658,7 +681,7 @@ do
 	end
 
 	local function updateHostRoot(p1, Current, BaseLanes)
-		-- upvalues: PushTopLevelContextObjectFunction (copy), PushHostContainerFunction (copy), InvariantFunction (copy), CloneUpdateQueueFunction (copy), ProcessUpdateQueueFunction (copy), ResetHydrationStateFunction (copy), Callback (ref), EnterHydrationStateFunction (copy), SupportsHydration (copy), SetWorkInProgressVersionFunction (copy), MountChildFibersFunction (copy), Placement (copy), Hydrating (copy), reconcileChildren (copy)
+		-- upvalues: PushTopLevelContextObjectFunction (copy), PushHostContainerFunction (copy), InvariantFunction (copy), CloneUpdateQueueFunction (copy), ProcessUpdateQueueFunction (copy), ResetHydrationStateFunction (copy), Callback1 (ref), EnterHydrationStateFunction (copy), SupportsHydration (copy), SetWorkInProgressVersionFunction (copy), MountChildFibersFunction (copy), Placement (copy), Hydrating (copy), reconcileChildren (copy)
 		local StateNode = Current.stateNode
 		
 		if StateNode.pendingContext then
@@ -679,7 +702,7 @@ do
 		if Element1 == Element then
 			ResetHydrationStateFunction()
 			
-			return Callback(p1, Current, BaseLanes)
+			return Callback1(p1, Current, BaseLanes)
 		end
 		local StateNode1 = Current.stateNode
 		
@@ -744,7 +767,7 @@ do
 	end
 
 	local function mountLazyComponent(p2, Current, ElementType, Lanes, BaseLanes)
-		-- upvalues: Placement (copy), ResolveLazyComponentTagFunction (copy), ResolveDefaultPropsFunction (copy), FunctionComponent (copy), DEV (copy), ResolveFunctionForHotReloadingFunction (copy), Callback2 (ref), ClassComponent (copy), ResolveClassForHotReloadingFunction (copy), updateClassComponent (copy), ForwardRef (copy), ResolveForwardRefForHotReloadingFunction (copy), updateForwardRef (copy), MemoComponent (copy), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), CheckPropTypesFunction (copy), GetComponentNameFunction (copy), updateMemoComponent (copy), REACTLAZYTYPE (copy), InspectFunction (copy), InvariantFunction (copy)
+		-- upvalues: Placement (copy), ResolveLazyComponentTagFunction (copy), ResolveDefaultPropsFunction (copy), FunctionComponent (copy), DEV (copy), ResolveFunctionForHotReloadingFunction (copy), Callback3 (ref), ClassComponent (copy), ResolveClassForHotReloadingFunction (copy), updateClassComponent (copy), ForwardRef (copy), ResolveForwardRefForHotReloadingFunction (copy), updateForwardRef (copy), MemoComponent (copy), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), CheckPropTypesFunction (copy), GetComponentNameFunction (copy), updateMemoComponent (copy), REACTLAZYTYPE (copy), InspectFunction (copy), InvariantFunction (copy)
 		if p2 ~= nil then
 			p2.alternate = nil
 			Current.alternate = nil
@@ -763,7 +786,7 @@ do
 				InitResult = ResolveFunctionForHotReloadingFunction(InitResult)
 				Current.type = InitResult
 			end
-			return (Callback2(nil, Current, InitResult, ResolveDefaultPropsResult, BaseLanes))
+			return (Callback3(nil, Current, InitResult, ResolveDefaultPropsResult, BaseLanes))
 		elseif Tag == ClassComponent then
 			if DEV then
 				InitResult = ResolveClassForHotReloadingFunction(InitResult)
@@ -1002,14 +1025,14 @@ do
 		return ReactFiberLaneModule.removeLanes(p2.childLanes, p3)
 	end
 
-	local Callback7 = nil
-	local Callback3 = nil
+	local Callback = nil
 	local Callback6 = nil
-	local Callback5 = nil
 	local Callback4 = nil
+	local Callback5 = nil
+	local Callback7 = nil
 
 	local function updateSuspenseComponent(p2, Return, BaseLanes)
-		-- upvalues: DEV (copy), config (copy), DidCapture (copy), SuspenseStackCursor (copy), NoFlags (copy), HasSuspenseContextFunction (copy), ForceSuspenseFallback (copy), AddSubtreeSuspenseContextFunction (copy), InvisibleParentSuspenseContext (copy), SetDefaultShallowSuspenseContextFunction (copy), PushSuspenseContextFunction (copy), TryToClaimNextHydratableInstanceFunction (copy), EnableSuspenseServerRenderer (copy), Callback3 (ref), MemoizedState (copy), ReactFiberLaneModule (copy), EnableSchedulerTracing (copy), MarkSpawnedWorkFunction (copy), Callback6 (ref), Callback4 (ref), Callback5 (ref), Callback7 (ref)
+		-- upvalues: DEV (copy), config (copy), DidCapture (copy), SuspenseStackCursor (copy), NoFlags (copy), HasSuspenseContextFunction (copy), ForceSuspenseFallback (copy), AddSubtreeSuspenseContextFunction (copy), InvisibleParentSuspenseContext (copy), SetDefaultShallowSuspenseContextFunction (copy), PushSuspenseContextFunction (copy), TryToClaimNextHydratableInstanceFunction (copy), EnableSuspenseServerRenderer (copy), Callback6 (ref), MemoizedState (copy), ReactFiberLaneModule (copy), EnableSchedulerTracing (copy), MarkSpawnedWorkFunction (copy), Callback4 (ref), Callback7 (ref), Callback5 (ref), Callback (ref)
 		local PendingProps = Return.pendingProps
 		
 		if DEV then
@@ -1043,7 +1066,7 @@ do
 						local Dehydrated = MemoizedState2.dehydrated
 						
 						if Dehydrated ~= nil then
-							return Callback3(Return, Dehydrated, BaseLanes)
+							return Callback6(Return, Dehydrated, BaseLanes)
 						end
 					end
 				end
@@ -1058,7 +1081,7 @@ do
 				return (mountSuspenseFallbackChildren(Return, Children, Fallback, BaseLanes))
 			end
 			if PendingProps.unstable_expectedLoadTime == nil or type(PendingProps.unstable_expectedLoadTime) ~= "number" then
-				return Callback6(Return, Children, BaseLanes)
+				return Callback4(Return, Children, BaseLanes)
 			end
 			local MountSuspenseFallbackChildrenResult = mountSuspenseFallbackChildren(Return, Children, Fallback, BaseLanes)
 			Return.child.memoizedState = { baseLanes = BaseLanes }
@@ -1076,7 +1099,7 @@ do
 				if not Flag then
 					Return.memoizedState = nil
 					
-					return (Callback7(p2, Return, PendingProps.children, BaseLanes))
+					return (Callback(p2, Return, PendingProps.children, BaseLanes))
 				end
 				local CallbackResult1 = Callback5(p2, Return, PendingProps.children, PendingProps.fallback, BaseLanes)
 				local Child = Return.child
@@ -1099,7 +1122,7 @@ do
 					
 					if Dehydrated ~= nil then
 						if not IsNotBitsMatch then
-							return Callback4(p2, Return, Dehydrated, MemoizedState1, BaseLanes)
+							return Callback7(p2, Return, Dehydrated, MemoizedState1, BaseLanes)
 						elseif Return.memoizedState == nil then
 							Return.child.memoizedState = { baseLanes = BaseLanes }
 							Return.memoizedState = MemoizedState
@@ -1116,7 +1139,7 @@ do
 				if not Flag then
 					Return.memoizedState = nil
 					
-					return (Callback7(p2, Return, PendingProps.children, BaseLanes))
+					return (Callback(p2, Return, PendingProps.children, BaseLanes))
 				end
 				local CallbackResult = Callback5(p2, Return, PendingProps.children, PendingProps.fallback, BaseLanes)
 				local Child = Return.child
@@ -1137,7 +1160,7 @@ do
 		end
 	end
 
-	Callback6 = function(Return, Children, BaseLanes)
+	Callback4 = function(Return, Children, BaseLanes)
 		-- upvalues: CreateFiberFromOffscreenFunction (copy)
 		local FiberFromOffscreen = CreateFiberFromOffscreenFunction({ mode = "visible", children = Children }, Return.mode, BaseLanes, nil)
 		FiberFromOffscreen.return_ = Return
@@ -1183,7 +1206,7 @@ do
 		return CreateWorkInProgressFunction(p2, p3)
 	end
 
-	Callback7 = function(p2, Return, Children, BaseLanes)
+	Callback = function(p2, Return, Children, BaseLanes)
 		-- upvalues: CreateWorkInProgressFunction (copy), BlockingMode (copy), NoMode (copy), Deletion (copy)
 		local Child = p2.child
 		local Sibling = Child.sibling
@@ -1250,9 +1273,9 @@ do
 	end
 
 	local _ = function(p2, Return, p3)
-		-- upvalues: ReconcileChildFibersFunction (copy), Callback6 (ref), Placement (copy)
+		-- upvalues: ReconcileChildFibersFunction (copy), Callback4 (ref), Placement (copy)
 		ReconcileChildFibersFunction(Return, p2.child, nil, p3)
-		local CallbackResult = Callback6(Return, Return.pendingProps.children, p3)
+		local CallbackResult = Callback4(Return, Return.pendingProps.children, p3)
 		CallbackResult.flags = bit32.bor(CallbackResult.flags, Placement)
 		Return.memoizedState = nil
 		
@@ -1276,7 +1299,7 @@ do
 		return FiberFromFragment
 	end
 
-	Callback3 = function(p2, Dehydrated, _)
+	Callback6 = function(p2, Dehydrated, _)
 		-- upvalues: BlockingMode (copy), NoMode (copy), DEV (copy), Console (copy), ReactFiberLaneModule (copy), IsSuspenseInstanceFallbackFunction (copy), EnableSchedulerTracing (copy), MarkSpawnedWorkFunction (copy)
 		if bit32.band(p2.mode, BlockingMode) == NoMode then
 			if DEV then
@@ -1298,13 +1321,13 @@ do
 		return nil
 	end
 
-	Callback4 = function(p2, Return, Dehydrated, MemoizedState, BaseLanes)
-		-- upvalues: WarnIfHydratingFunction (copy), GetExecutionContextFunction (copy), RetryAfterError (copy), NoContext (copy), ReconcileChildFibersFunction (copy), Callback6 (ref), Placement (copy), BlockingMode (copy), NoMode (copy), IsSuspenseInstanceFallbackFunction (copy), ReactFiberLaneModule (copy), IsNotBitsMatch (ref), GetWorkInProgressRootFunction (copy), ScheduleUpdateOnFiberFunction (copy), RenderDidSuspendDelayIfPossibleFunction (copy), IsSuspenseInstancePendingFunction (copy), DidCapture (copy), RetryDehydratedSuspenseBoundaryFunction (copy), EnableSchedulerTracing (copy), UnstableWrap (ref), Parent (copy), RegisterSuspenseInstanceRetryFunction (copy), ReenterHydrationStateFromDehydratedSuspenseInstanceFunction (copy), Hydrating (copy)
+	Callback7 = function(p2, Return, Dehydrated, MemoizedState, BaseLanes)
+		-- upvalues: WarnIfHydratingFunction (copy), GetExecutionContextFunction (copy), RetryAfterError (copy), NoContext (copy), ReconcileChildFibersFunction (copy), Callback4 (ref), Placement (copy), BlockingMode (copy), NoMode (copy), IsSuspenseInstanceFallbackFunction (copy), ReactFiberLaneModule (copy), IsNotBitsMatch (ref), GetWorkInProgressRootFunction (copy), ScheduleUpdateOnFiberFunction (copy), RenderDidSuspendDelayIfPossibleFunction (copy), IsSuspenseInstancePendingFunction (copy), DidCapture (copy), RetryDehydratedSuspenseBoundaryFunction (copy), EnableSchedulerTracing (copy), UnstableWrap (ref), Parent (copy), RegisterSuspenseInstanceRetryFunction (copy), ReenterHydrationStateFromDehydratedSuspenseInstanceFunction (copy), Hydrating (copy)
 		WarnIfHydratingFunction()
 		
 		if bit32.band(GetExecutionContextFunction(), RetryAfterError) ~= NoContext then
 			ReconcileChildFibersFunction(Return, p2.child, nil, BaseLanes)
-			local CallbackResult = Callback6(Return, Return.pendingProps.children, BaseLanes)
+			local CallbackResult = Callback4(Return, Return.pendingProps.children, BaseLanes)
 			CallbackResult.flags = bit32.bor(CallbackResult.flags, Placement)
 			Return.memoizedState = nil
 			
@@ -1312,7 +1335,7 @@ do
 		end
 		if bit32.band(Return.mode, BlockingMode) == NoMode then
 			ReconcileChildFibersFunction(Return, p2.child, nil, BaseLanes)
-			local CallbackResult = Callback6(Return, Return.pendingProps.children, BaseLanes)
+			local CallbackResult = Callback4(Return, Return.pendingProps.children, BaseLanes)
 			CallbackResult.flags = bit32.bor(CallbackResult.flags, Placement)
 			Return.memoizedState = nil
 			
@@ -1320,7 +1343,7 @@ do
 		end
 		if IsSuspenseInstanceFallbackFunction(Dehydrated) then
 			ReconcileChildFibersFunction(Return, p2.child, nil, BaseLanes)
-			local CallbackResult = Callback6(Return, Return.pendingProps.children, BaseLanes)
+			local CallbackResult = Callback4(Return, Return.pendingProps.children, BaseLanes)
 			CallbackResult.flags = bit32.bor(CallbackResult.flags, Placement)
 			Return.memoizedState = nil
 			
@@ -1341,7 +1364,7 @@ do
 			end
 			RenderDidSuspendDelayIfPossibleFunction()
 			ReconcileChildFibersFunction(Return, p2.child, nil, BaseLanes)
-			local CallbackResult = Callback6(Return, Return.pendingProps.children, BaseLanes)
+			local CallbackResult = Callback4(Return, Return.pendingProps.children, BaseLanes)
 			CallbackResult.flags = bit32.bor(CallbackResult.flags, Placement)
 			Return.memoizedState = nil
 			
@@ -1349,7 +1372,7 @@ do
 		else
 			if not IsSuspenseInstancePendingFunction(Dehydrated) then
 				ReenterHydrationStateFromDehydratedSuspenseInstanceFunction(Return, Dehydrated)
-				local CallbackResult = Callback6(Return, Return.pendingProps.children, BaseLanes)
+				local CallbackResult = Callback4(Return, Return.pendingProps.children, BaseLanes)
 				CallbackResult.flags = bit32.bor(CallbackResult.flags, Hydrating)
 				
 				return CallbackResult
@@ -1390,7 +1413,7 @@ do
 	local Flag = false
 
 	local function updateContextProvider(p2, Current, BaseLanes)
-		-- upvalues: DEV (copy), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), Array (copy), Object (copy), Flag (ref), Console (copy), CheckPropTypesFunction (copy), PushProviderFunction (copy), CalculateChangedBitsFunction (copy), HasContextChangedFunction (copy), Callback (ref), PropagateContextChangeFunction (copy), reconcileChildren (copy)
+		-- upvalues: DEV (copy), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), Array (copy), Object (copy), Flag (ref), Console (copy), CheckPropTypesFunction (copy), PushProviderFunction (copy), CalculateChangedBitsFunction (copy), HasContextChangedFunction (copy), Callback1 (ref), PropagateContextChangeFunction (copy), reconcileChildren (copy)
 		local Context = Current.type._context
 		local PendingProps = Current.pendingProps
 		local MemoizedProps = Current.memoizedProps
@@ -1416,7 +1439,7 @@ do
 			if ChangedBits ~= 0 then
 				PropagateContextChangeFunction(Current, Context, ChangedBits, BaseLanes)
 			elseif MemoizedProps.children == PendingProps.children and not HasContextChangedFunction() then
-				return Callback(p2, Current, BaseLanes)
+				return Callback1(p2, Current, BaseLanes)
 			end
 		end
 		reconcileChildren(p2, Current, PendingProps.children, BaseLanes)
@@ -1481,7 +1504,7 @@ do
 		IsNotBitsMatch = true
 	end
 
-	Callback = function(p2, Current, BaseLanes)
+	Callback1 = function(p2, Current, BaseLanes)
 		-- upvalues: EnableProfilerTimer (copy), StopProfilerTimerIfRunningFunction (copy), MarkSkippedUpdateLanesFunction (copy), ReactFiberLaneModule (copy), CloneChildFibersFunction (copy)
 		if p2 then
 			Current.dependencies = p2.dependencies
@@ -1552,7 +1575,7 @@ do
 	end
 
 	function ReactFiberBeginWorkModule.beginWork(p3, Current, BaseLanes)
-		-- upvalues: DEV (copy), CreateFiberFromTypeAndPropsFunction (copy), HasContextChangedFunction (copy), IsNotBitsMatch (ref), ReactFiberLaneModule (copy), HostRoot (copy), PushTopLevelContextObjectFunction (copy), PushHostContainerFunction (copy), ResetHydrationStateFunction (copy), HostComponent (copy), PushHostContextFunction (copy), ClassComponent (copy), IsContextProviderFunction (copy), PushContextProviderFunction (copy), HostPortal (copy), ContextProvider (copy), PushProviderFunction (copy), Profiler (copy), EnableProfilerTimer (copy), SuspenseComponent (copy), EnableSuspenseServerRenderer (copy), PushSuspenseContextFunction (copy), SetDefaultShallowSuspenseContextFunction (copy), SuspenseStackCursor (copy), DidCapture (copy), updateSuspenseComponent (copy), Callback (ref), SuspenseListComponent (copy), OffscreenComponent (copy), LegacyHiddenComponent (copy), updateOffscreenComponent (copy), ForceUpdateForLegacySuspense (copy), NoFlags (copy), ReactWorkTagsModule (copy), mountIndeterminateComponent (copy), LazyComponent (copy), mountLazyComponent (copy), FunctionComponent (copy), ResolveDefaultPropsFunction (copy), Callback2 (ref), updateClassComponent (copy), updateHostRoot (copy), updateHostComponent (copy), HostText (copy), TryToClaimNextHydratableInstanceFunction (copy), ForwardRef (copy), updateForwardRef (copy), Fragment (copy), Mode (copy), updateContextProvider (copy), ContextConsumer (copy), MemoComponent (copy), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), CheckPropTypesFunction (copy), GetComponentNameFunction (copy), updateMemoComponent (copy), SimpleMemoComponent (copy), Callback1 (ref), IncompleteClassComponent (copy), updateOffscreenComponent (copy), InvariantFunction (copy)
+		-- upvalues: DEV (copy), CreateFiberFromTypeAndPropsFunction (copy), HasContextChangedFunction (copy), IsNotBitsMatch (ref), ReactFiberLaneModule (copy), HostRoot (copy), PushTopLevelContextObjectFunction (copy), PushHostContainerFunction (copy), ResetHydrationStateFunction (copy), HostComponent (copy), PushHostContextFunction (copy), ClassComponent (copy), IsContextProviderFunction (copy), PushContextProviderFunction (copy), HostPortal (copy), ContextProvider (copy), PushProviderFunction (copy), Profiler (copy), EnableProfilerTimer (copy), SuspenseComponent (copy), EnableSuspenseServerRenderer (copy), PushSuspenseContextFunction (copy), SetDefaultShallowSuspenseContextFunction (copy), SuspenseStackCursor (copy), DidCapture (copy), updateSuspenseComponent (copy), Callback1 (ref), SuspenseListComponent (copy), OffscreenComponent (copy), LegacyHiddenComponent (copy), updateOffscreenComponent (copy), ForceUpdateForLegacySuspense (copy), NoFlags (copy), ReactWorkTagsModule (copy), mountIndeterminateComponent (copy), LazyComponent (copy), mountLazyComponent (copy), FunctionComponent (copy), ResolveDefaultPropsFunction (copy), Callback3 (ref), updateClassComponent (copy), updateHostRoot (copy), updateHostComponent (copy), HostText (copy), TryToClaimNextHydratableInstanceFunction (copy), ForwardRef (copy), updateForwardRef (copy), Fragment (copy), Mode (copy), updateContextProvider (copy), ContextConsumer (copy), MemoComponent (copy), DISABLEALLWARNINGSEXCEPTPROPVALIDATION (copy), CheckPropTypesFunction (copy), GetComponentNameFunction (copy), updateMemoComponent (copy), SimpleMemoComponent (copy), Callback2 (ref), IncompleteClassComponent (copy), updateOffscreenComponent (copy), InvariantFunction (copy)
 		local Lanes = Current.lanes
 		
 		if DEV and Current._debugNeedsRemount and p3 ~= nil then
@@ -1606,7 +1629,7 @@ do
 						return updateSuspenseComponent(p3, Current, BaseLanes)
 					else
 						PushSuspenseContextFunction(Current, SetDefaultShallowSuspenseContextFunction(SuspenseStackCursor.current))
-						local CallbackResult = Callback(p3, Current, BaseLanes)
+						local CallbackResult = Callback1(p3, Current, BaseLanes)
 						
 						return if CallbackResult == nil then nil else CallbackResult.sibling
 					end
@@ -1620,7 +1643,7 @@ do
 					
 					return (updateOffscreenComponent(p3, Current, BaseLanes))
 				end
-				return Callback(p3, Current, BaseLanes)
+				return Callback1(p3, Current, BaseLanes)
 			end
 		else
 			IsNotBitsMatch = true
@@ -1637,7 +1660,7 @@ do
 			local Type1 = Current.type
 			local PendingProps = Current.pendingProps
 			
-			return Callback2(p3, Current, Type1, if Current.elementType == Type1 then PendingProps else ResolveDefaultPropsFunction(Type1, PendingProps), BaseLanes)
+			return Callback3(p3, Current, Type1, if Current.elementType == Type1 then PendingProps else ResolveDefaultPropsFunction(Type1, PendingProps), BaseLanes)
 		end
 		if Current.tag == ClassComponent then
 			local Type2 = Current.type
@@ -1702,7 +1725,7 @@ do
 				end
 				return updateMemoComponent(p3, Current, Type5, ResolveDefaultPropsFunction(Type5.type, ResolveDefaultPropsResult), Lanes, BaseLanes)
 			elseif Current.tag == SimpleMemoComponent then
-				return Callback1(p3, Current, Current.type, Current.pendingProps, Lanes, BaseLanes)
+				return Callback2(p3, Current, Current.type, Current.pendingProps, Lanes, BaseLanes)
 			elseif Current.tag == IncompleteClassComponent then
 				local Type3 = Current.type
 				local PendingProps = Current.pendingProps
