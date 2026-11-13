@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "1f922f5f-6edb-760b-3b23-581e46f02680")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "9c454db5-e1f6-aca0-31b3-da58afdcaa22")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 908740, e => {
@@ -88,7 +88,7 @@
             tagClassName: o
         });
         return (0, t.jsxs)("div", {
-            className: "d-flex-inline gap-1 justify-content-start align-items-center",
+            className: "inline-flex items-center gap-xsmall",
             children: [c && (0, t.jsx)("span", {
                 className: u,
                 children: "-"
@@ -1837,5 +1837,5 @@
     p.displayName = "Avatar", e.s(["Avatar", 0, p])
 }]);
 
-//# debugId=1f922f5f-6edb-760b-3b23-581e46f02680
-//# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/14-tbo32ow04r.js.map
+//# debugId=9c454db5-e1f6-aca0-31b3-da58afdcaa22
+//# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/0cgtu-cxf2~nq.js.map

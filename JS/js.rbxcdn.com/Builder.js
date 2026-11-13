@@ -2,48 +2,35 @@
     try {
         var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "837222793d053b739a1006d8d8100193c380b802"
+            id: "294af7ba7a76d2f5eb5991ccb0123c62b29f38d0"
         };
         var o = (new e.Error).stack;
-        o && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[o] = "bc67c1c0-100c-41a4-932c-c6c3e2acaa0d", e._sentryDebugIdIdentifier = "sentry-dbid-bc67c1c0-100c-41a4-932c-c6c3e2acaa0d")
+        o && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[o] = "9a495f1b-34c9-4ff1-8cb3-46f7985666eb", e._sentryDebugIdIdentifier = "sentry-dbid-9a495f1b-34c9-4ff1-8cb3-46f7985666eb")
     } catch (e) {}
 }(),
 function() {
     "use strict";
-    var e, o, t = {
-            9518: function(e) {
-                e.exports = "https://css.rbxcdn.com/3e19a797e2ce0522.woff2"
-            },
-            3366: function(e) {
-                e.exports = "https://css.rbxcdn.com/7f3ddcb5a3796526.woff2"
-            },
-            1369: function(e) {
-                e.exports = "https://css.rbxcdn.com/5f8b8d5d1962b747.woff2"
-            },
-            6668: function(e) {
-                e.exports = "https://css.rbxcdn.com/77cbcd18c888e0f1.woff2"
-            }
-        },
-        c = {};
+    var e = {},
+        o = {};
 
-    function r(e) {
-        var o = c[e];
-        if (void 0 !== o) return o.exports;
-        var n = c[e] = {
+    function t(n) {
+        var r = o[n];
+        if (void 0 !== r) return r.exports;
+        var u = o[n] = {
             exports: {}
         };
-        return t[e](n, n.exports, r), n.exports
+        return e[n](u, u.exports, t), u.exports
     }
-    r.m = t, r.r = function(e) {
+    t.m = e, t.r = function(e) {
         "u" > typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, {
             value: "Module"
         }), Object.defineProperty(e, "__esModule", {
             value: !0
         })
-    }, r.rv = function() {
+    }, t.rv = function() {
         return "1.7.12"
-    }, r.ruid = "bundler=rspack@1.7.12", e = r(1369), o = r(3366), [e, o, r(6668), r(9518)].map(function(e) {
+    }, t.ruid = "bundler=rspack@1.7.12", ["https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-Regular.woff2", "https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-Medium.woff2", "https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-SemiBold.woff2", "https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-Bold.woff2"].map(function(e) {
         return '<link rel="preload" as="font" type="font/woff2" crossorigin href="'.concat(e, '">')
     }).join("")
-}(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("Builder");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/builder-cd1e223ad79de3c0.js.map
+}(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected(document.currentScript && document.currentScript.getAttribute("data-bundlename") || "Builder");
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/builder-fa11f13cb27850e5.js.map

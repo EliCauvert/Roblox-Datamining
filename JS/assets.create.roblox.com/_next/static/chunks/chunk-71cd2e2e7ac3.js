@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "da4697dd-f0f7-7260-cfb8-d329d0107fc5")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "4ad8cfb1-4a3b-3f26-084c-dc8b960cf4cf")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 634130, e => {
@@ -20,7 +20,7 @@
         m = e.i(785517),
         u = "Checkbox",
         [c, f] = (0, n.c)(u),
-        [p, g] = c(u);
+        [g, p] = c(u);
 
     function h(e) {
         let {
@@ -33,7 +33,7 @@
             name: o,
             onCheckedChange: c,
             required: f,
-            value: g = "on",
+            value: p = "on",
             internal_do_not_use_render: h
         } = e, [v, b] = (0, i.f)({
             prop: n,
@@ -48,7 +48,7 @@
             setControl: w,
             name: o,
             form: d,
-            value: g,
+            value: p,
             hasConsumerStoppedPropagationRef: S,
             required: f,
             defaultChecked: !k(r) && r,
@@ -56,7 +56,7 @@
             bubbleInput: y,
             setBubbleInput: E
         };
-        return (0, m.jsx)(p, {
+        return (0, m.jsx)(g, {
             scope: a,
             ...M,
             children: "function" == typeof h ? h(M) : l
@@ -73,14 +73,14 @@
                 control: u,
                 value: c,
                 disabled: f,
-                checked: p,
+                checked: g,
                 required: h,
                 setControl: b,
                 setChecked: x,
                 hasConsumerStoppedPropagationRef: w,
                 isFormControl: y,
                 bubbleInput: E
-            } = g(v, i), S = (0, a.j)(n, b), M = t.useRef(p);
+            } = p(v, i), S = (0, a.j)(n, b), M = t.useRef(g);
             return t.useEffect(() => {
                 let e = null == u ? void 0 : u.form;
                 if (e) {
@@ -90,9 +90,9 @@
             }, [u, x]), (0, m.jsx)(o.f.button, {
                 type: "button",
                 role: "checkbox",
-                "aria-checked": k(p) ? "mixed" : p,
+                "aria-checked": k(g) ? "mixed" : g,
                 "aria-required": h,
-                "data-state": N(p),
+                "data-state": N(g),
                 "data-disabled": f ? "" : void 0,
                 disabled: f,
                 value: c,
@@ -153,7 +153,7 @@
                 __scopeCheckbox: a,
                 forceMount: n,
                 ...l
-            } = e, i = g(w, a);
+            } = e, i = p(w, a);
             return (0, m.jsx)(d.f, {
                 present: n || k(i.checked) || !0 === i.checked,
                 children: (0, m.jsx)(o.f.span, {
@@ -179,14 +179,14 @@
                 hasConsumerStoppedPropagationRef: u,
                 checked: c,
                 defaultChecked: f,
-                required: p,
+                required: g,
                 disabled: h,
                 name: v,
                 value: b,
                 form: x,
                 bubbleInput: w,
                 setBubbleInput: y
-            } = g(E, l), S = (0, a.j)(n, y), N = (0, r.f)(c), M = (0, s.f)(d);
+            } = p(E, l), S = (0, a.j)(n, y), N = (0, r.f)(c), M = (0, s.f)(d);
             t.useEffect(() => {
                 if (!w) return;
                 let e = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "checked").set,
@@ -203,7 +203,7 @@
                 type: "checkbox",
                 "aria-hidden": !0,
                 defaultChecked: null != f ? f : L.current,
-                required: p,
+                required: g,
                 disabled: h,
                 name: v,
                 value: b,
@@ -302,9 +302,9 @@
                 f = "function" == typeof u ? u({
                     present: c.isPresent
                 }) : t.Children.only(u),
-                p = (0, a.j)(c.ref, (o = (d = null == (r = Object.getOwnPropertyDescriptor((l = f).props, "ref")) ? void 0 : r.get) && "isReactWarning" in d && d.isReactWarning) ? l.ref : (o = (d = null == (s = Object.getOwnPropertyDescriptor(l, "ref")) ? void 0 : s.get) && "isReactWarning" in d && d.isReactWarning) ? l.props.ref : l.props.ref || l.ref);
+                g = (0, a.j)(c.ref, (o = (d = null == (r = Object.getOwnPropertyDescriptor((l = f).props, "ref")) ? void 0 : r.get) && "isReactWarning" in d && d.isReactWarning) ? l.ref : (o = (d = null == (s = Object.getOwnPropertyDescriptor(l, "ref")) ? void 0 : s.get) && "isReactWarning" in d && d.isReactWarning) ? l.props.ref : l.props.ref || l.ref);
             return "function" == typeof u || c.isPresent ? t.cloneElement(f, {
-                ref: p
+                ref: g
             }) : null
         };
 
@@ -333,7 +333,7 @@
                 size: m = "Medium",
                 className: u,
                 ...c
-            } = e, [f, p] = (0, n.useState)(), g = !!r && r !== f;
+            } = e, [f, g] = (0, n.useState)(), p = !!r && r !== f;
             return n.default.createElement("span", {
                 ref: i,
                 role: s ? "img" : void 0,
@@ -341,11 +341,11 @@
                 "aria-hidden": !s || void 0,
                 ...c,
                 className: (0, a.U)("foundation-web-avatar-icon inline-flex items-center justify-center shrink-0 [overflow:hidden] radius-circle select-none bg-shift-200 content-emphasis", l[m], u)
-            }, g ? n.default.createElement("img", {
+            }, p ? n.default.createElement("img", {
                 src: r,
                 alt: "",
                 className: "size-full [object-fit:cover]",
-                onError: () => p(r)
+                onError: () => g(r)
             }) : n.default.createElement("span", {
                 "aria-hidden": !0,
                 className: "inline-flex items-center justify-center size-full"
@@ -430,11 +430,11 @@
             Small: "XSmall",
             XSmall: "XSmall"
         },
-        p = {
+        g = {
             Pill: "radius-circle",
             Box: "radius-small"
         },
-        g = n.default.forwardRef((e, g) => {
+        p = n.default.forwardRef((e, p) => {
             let {
                 className: h,
                 label: v,
@@ -452,14 +452,14 @@
                 className: r[b]
             });
             return n.default.createElement("div", {
-                ref: g,
+                ref: p,
                 ...S,
-                className: (0, a.U)("foundation-web-badge flex items-center select-none gap-[var(--size-150)]", p[E], d[y], k ? [m[y], "justify-center"] : ["width-[fit-content]", o[y]], l[b], i[b], s[b], h)
+                className: (0, a.U)("foundation-web-badge flex items-center select-none gap-[var(--size-150)]", g[E], d[y], k ? [m[y], "justify-center"] : ["width-[fit-content]", o[y]], l[b], i[b], s[b], h)
             }, "Leading" === w && M, v && n.default.createElement("span", {
                 className: (0, a.U)("text-no-wrap text-truncate-split", u[y], c[y], N, i[b])
             }, v), "Trailing" === w && M)
         });
-    g.displayName = "Badge", e.s(["t", 0, g, "y", 0, ["Neutral", "Standard", "Contrast", "Emphasis", "Success", "Warning", "Alert", "OverMediaLight", "OverMedia"]])
+    p.displayName = "Badge", e.s(["t", 0, p, "y", 0, ["Neutral", "Standard", "Contrast", "Emphasis", "Success", "Warning", "Alert", "OverMediaLight", "OverMedia"]])
 }, 147325, e => {
     "use strict";
     var t = e.i(27213),
@@ -493,9 +493,9 @@
             Large: "padding-top-xxsmall"
         };
     e.s(["f", 0, e => {
-        var u, c, f, p;
+        var u, c, f, g;
         let {
-            label: g,
+            label: p,
             className: h,
             isChecked: v,
             isDisabled: b,
@@ -506,33 +506,33 @@
             id: S,
             "aria-describedby": k,
             ...N
-        } = e, M = (0, i.useContext)(n.i), L = null != (u = null != (c = null == M ? void 0 : M.size) ? c : x) ? u : "Medium", C = null != (f = null != (p = null == M ? void 0 : M.placement) ? p : y) ? f : "Start", U = b || (null == M ? void 0 : M.isDisabled), z = (0, a.f)(), P = S || z, O = M && g && w ? "".concat(P, "Hint") : void 0, X = g && i.default.createElement("label", {
-            htmlFor: P,
+        } = e, M = (0, i.useContext)(n.i), L = null != (u = null != (c = null == M ? void 0 : M.size) ? c : x) ? u : "Medium", C = null != (f = null != (g = null == M ? void 0 : M.placement) ? g : y) ? f : "Start", U = b || (null == M ? void 0 : M.isDisabled), z = (0, a.f)(), X = S || z, P = M && p && w ? "".concat(X, "Hint") : void 0, O = p && i.default.createElement("label", {
+            htmlFor: X,
             className: (0, l.U)("flex flex-col grow-1 gap-xsmall", !U && "cursor-pointer")
         }, i.default.createElement("span", {
             className: (0, l.U)(o[L], m[L], "content-emphasis")
-        }, g), w && i.default.createElement("span", {
-            id: O,
+        }, p), w && i.default.createElement("span", {
+            id: P,
             className: (0, l.U)(M ? o[L] : "text-body-medium", "content-default")
         }, w));
         return i.default.createElement("div", {
             className: (0, l.U)("foundation-web-checkbox flex gap-medium", U && "opacity-[0.5]", !U && "cursor-pointer", h)
-        }, "End" === C && X, i.default.createElement("div", {
+        }, "End" === C && O, i.default.createElement("div", {
             className: (0, l.U)(d[L])
         }, i.default.createElement(r.F, {
             "data-slot": "checkbox",
             className: (0, l.U)(s[L], t.Y, !U && "cursor-pointer", "flex items-center justify-center radius-small padding-none content-default", "data-[state=unchecked]:bg-none data-[state=unchecked]:stroke-standard data-[state=unchecked]:stroke-contrast-alpha", "data-[state=indeterminate]:bg-system-contrast data-[state=indeterminate]:stroke-none", "data-[state=checked]:bg-system-contrast data-[state=checked]:stroke-none"),
-            id: P,
+            id: X,
             checked: v,
             disabled: U,
             onCheckedChange: E,
-            "aria-label": g,
-            "aria-describedby": [k, O].filter(Boolean).join(" ") || void 0,
+            "aria-label": p,
+            "aria-describedby": [k, P].filter(Boolean).join(" ") || void 0,
             ...N
         }, i.default.createElement(t.v, null), i.default.createElement(r.S, {
             "data-slot": "checkbox-indicator",
             className: (0, l.U)(s[L], "content-[var(--inverse-content-emphasis)] icon", "data-[state=indeterminate]:icon-filled-minus", "data-[state=checked]:icon-filled-check")
-        }))), "Start" === C && X)
+        }))), "Start" === C && O)
     }])
 }, 435431, e => {
     "use strict";
@@ -621,13 +621,13 @@
             Medium: "text-body-medium",
             Large: "text-body-large"
         },
-        p = {
+        g = {
             XSmall: "gap-xsmall",
             Small: "gap-small",
             Medium: "gap-small",
             Large: "gap-small"
         },
-        g = {
+        p = {
             XSmall: "radius-small",
             Small: "radius-medium",
             Medium: "radius-medium",
@@ -654,14 +654,14 @@
                 hasError: C,
                 hint: U,
                 onValueChange: z,
-                onOpenChange: P,
-                children: O
-            } = e, X = (0, a.f)(), [T, R] = (0, s.useState)(!1), [_, j] = (0, s.useState)(!1), D = void 0 !== N && "" !== N || T;
+                onOpenChange: X,
+                children: P
+            } = e, O = (0, a.f)(), [T, R] = (0, s.useState)(!1), [j, _] = (0, s.useState)(!1), D = void 0 !== N && "" !== N || T;
             (0, s.useEffect)(() => {
                 let e = e => {
-                        e.metaKey || e.ctrlKey || e.altKey || l.includes(e.key) || j(!0)
+                        e.metaKey || e.ctrlKey || e.altKey || l.includes(e.key) || _(!0)
                     },
-                    t = () => j(!1);
+                    t = () => _(!1);
                 return window.addEventListener("keydown", e, !0), window.addEventListener("pointerdown", t, !0), () => {
                     window.removeEventListener("keydown", e, !0), window.removeEventListener("pointerdown", t, !0)
                 }
@@ -669,16 +669,16 @@
             let I = (0, s.useMemo)(() => ({
                     size: S,
                     hasSelection: D,
-                    isKeyboardNavigation: _
-                }), [S, D, _]),
+                    isKeyboardNavigation: j
+                }), [S, D, j]),
                 A = b ? s.default.createElement("span", {
-                    id: X,
+                    id: O,
                     className: (0, r.U)(c[S], "content-emphasis")
                 }, b) : null;
             return s.default.createElement(o.Provider, {
                 value: I
             }, s.default.createElement("div", {
-                className: (0, r.U)("flex flex-col", L && ["opacity-[0.5]", "pointer-events-none"], p[S], E)
+                className: (0, r.U)("flex flex-col", L && ["opacity-[0.5]", "pointer-events-none"], g[S], E)
             }, A && (x ? s.default.createElement("div", {
                 className: "flex items-center gap-xsmall"
             }, A, s.default.createElement(n.f, x)) : A), s.default.createElement(d.F, {
@@ -687,12 +687,12 @@
                 onValueChange: e => {
                     void 0 === N && R(!0), null == z || z(e)
                 },
-                onOpenChange: P
+                onOpenChange: X
             }, s.default.createElement(d.d, {
-                onPointerDownCapture: () => j(!1),
-                className: (0, r.U)("relative clip group/interactable outline-none", "foundation-web-input flex items-center justify-between width-full cursor-pointer", i.L[k], i.U[k], g[S], h[S], u[S], f[S], C ? "stroke-system-alert" : "stroke-contrast-alpha", _ && (C ? "focus-visible:stroke-system-alert" : "focus-visible:stroke-system-emphasis"), D ? "content-emphasis" : "content-default"),
+                onPointerDownCapture: () => _(!1),
+                className: (0, r.U)("relative clip group/interactable outline-none", "foundation-web-input flex items-center justify-between width-full cursor-pointer", i.L[k], i.U[k], p[S], h[S], u[S], f[S], C ? "stroke-system-alert" : "stroke-contrast-alpha", j && (C ? "focus-visible:stroke-system-alert" : "focus-visible:stroke-system-emphasis"), D ? "content-emphasis" : "content-default"),
                 ref: v,
-                "aria-labelledby": b ? X : w,
+                "aria-labelledby": b ? O : w,
                 "aria-label": y
             }, s.default.createElement(t.v, null), s.default.createElement("div", {
                 className: "grow-1 text-truncate-split text-align-x-left"
@@ -702,12 +702,12 @@
                 className: (0, r.U)(m[S], "icon icon-regular-chevron-large-down")
             })), s.default.createElement(d.z, null, s.default.createElement(d.c, {
                 position: "popper",
-                onPointerMoveCapture: () => j(!1),
+                onPointerMoveCapture: () => _(!1),
                 className: "padding-y-small foundation-web-portal-zindex",
                 style: {
                     maxHeight: "var(--radix-select-content-available-height)"
                 }
-            }, O))), U && s.default.createElement("span", {
+            }, P))), U && s.default.createElement("span", {
                 className: (0, r.U)("text-caption-small", {
                     "content-system-alert": C,
                     "content-default": !C
@@ -737,13 +737,13 @@
                 children: u,
                 className: c,
                 size: f,
-                color: p = "Emphasis",
-                variant: g = "Standalone",
+                color: g = "Emphasis",
+                variant: p = "Standalone",
                 underline: h = "hover",
                 isExternal: v,
                 asChild: b,
                 ...x
-            } = e, w = (o = null != (d = x.as) ? d : "a", m = "button" === x.as ? void 0 : x.target, void 0 !== v ? v : "button" !== o && void 0 !== m && !l.has(m)), y = (0, t.U)("foundation-web-link", "button" === x.as && "bg-none stroke-none padding-none appearance-none [text-align:inherit]", ("Standalone" === g || w) && "inline-flex items-center gap-xsmall", void 0 !== f && i[f], r[p], "always" === h ? "underline" : "no-underline", "hover" === h && "hover:underline", "motion-safe:transition-opacity", "hover:cursor-pointer hover:[opacity:0.8]", "radius-xsmall focus-visible:[outline-style:solid] focus-visible:[outline-width:var(--stroke-standard)] focus-visible:[outline-color:var(--color-system-emphasis)]", c), E = w ? a.default.createElement("span", {
+            } = e, w = (o = null != (d = x.as) ? d : "a", m = "button" === x.as ? void 0 : x.target, void 0 !== v ? v : "button" !== o && void 0 !== m && !l.has(m)), y = (0, t.U)("foundation-web-link", "button" === x.as && "bg-none stroke-none padding-none appearance-none [text-align:inherit]", ("Standalone" === p || w) && "inline-flex items-center gap-xsmall", void 0 !== f && i[f], r[g], "always" === h ? "underline" : "no-underline", "hover" === h && "hover:underline", "motion-safe:transition-opacity", "hover:cursor-pointer hover:[opacity:0.8]", "radius-xsmall focus-visible:[outline-style:solid] focus-visible:[outline-width:var(--stroke-standard)] focus-visible:[outline-color:var(--color-system-emphasis)]", c), E = w ? a.default.createElement("span", {
                 "aria-hidden": !0,
                 "data-testid": "foundation-web-icon",
                 className: (0, t.U)("grow-0 shrink-0 basis-auto icon size-[1em]", "icon-regular-arrow-up-right-from-square")
@@ -787,28 +787,28 @@
     "use strict";
     var t = e.i(27213),
         a = e.i(154570),
-        n = e.i(651235);
-    e.i(79533);
-    var l = e.i(590252),
-        i = e.i(854145),
-        r = e.i(335020),
-        s = e.i(643766),
-        d = e.i(637068),
-        o = e.i(548223),
-        m = e.i(114903);
-    let u = {
+        n = e.i(651235),
+        l = e.i(79533),
+        i = e.i(590252),
+        r = e.i(854145),
+        s = e.i(335020),
+        d = e.i(643766),
+        o = e.i(637068),
+        m = e.i(548223),
+        u = e.i(114903);
+    let c = {
             XSmall: "radius-medium",
             Small: "radius-large",
             Medium: "radius-large",
             Large: "radius-large"
         },
-        c = {
+        f = {
             XSmall: "padding-xsmall",
             Small: "padding-small",
             Medium: "padding-small",
             Large: "padding-small"
         },
-        f = {
+        g = {
             XSmall: "[.foundation-web-menu-section+&]:[margin-block-start:calc(var(--padding-xsmall)*2)]",
             Small: "[.foundation-web-menu-section+&]:[margin-block-start:calc(var(--padding-small)*2)]",
             Medium: "[.foundation-web-menu-section+&]:[margin-block-start:calc(var(--padding-small)*2)]",
@@ -820,35 +820,29 @@
             Medium: "[margin-inline:calc(var(--padding-small)*-1)] [margin-block:var(--padding-small)]",
             Large: "[margin-inline:calc(var(--padding-small)*-1)] [margin-block:var(--padding-small)]"
         },
-        g = {
+        h = {
             XSmall: "padding-x-medium",
             Small: "padding-x-medium",
             Medium: "padding-x-medium",
             Large: "padding-x-large"
         },
-        h = {
+        v = {
             XSmall: "padding-y-xsmall",
             Small: "padding-y-small",
             Medium: "padding-y-small",
             Large: "padding-y-medium"
         },
-        v = {
+        b = {
             XSmall: "gap-x-[var(--size-150)]",
             Small: "gap-x-[var(--size-150)]",
             Medium: "gap-x-[var(--size-150)]",
             Large: "gap-x-small"
         },
-        b = {
+        x = {
             XSmall: "size-400",
             Small: "size-500",
             Medium: "size-500",
             Large: "size-600"
-        },
-        x = {
-            XSmall: "Small",
-            Small: "Medium",
-            Medium: "Medium",
-            Large: "Large"
         },
         w = {
             XSmall: "Small",
@@ -858,146 +852,164 @@
         },
         y = {
             XSmall: "Small",
-            Small: "Small",
+            Small: "Medium",
             Medium: "Medium",
             Large: "Large"
         },
         E = {
-            XSmall: "min-height-600",
-            Small: "min-height-800",
-            Medium: "min-height-1000",
-            Large: "min-height-1200"
+            XSmall: "XSmall",
+            Small: "Small",
+            Medium: "Medium",
+            Large: "Large"
         },
         S = {
-            XSmall: "gap-y-xxsmall",
-            Small: "gap-y-xxsmall",
-            Medium: "gap-y-xsmall",
-            Large: "gap-y-xsmall"
-        },
-        k = {
-            XSmall: "text-body-small",
-            Small: "text-body-small",
-            Medium: "text-body-medium",
-            Large: "text-body-large"
-        },
-        N = {
-            XSmall: "text-body-small",
-            Small: "text-body-small",
-            Medium: "text-body-small",
-            Large: "text-body-medium"
-        },
-        M = {
-            XSmall: "radius-small",
-            Small: "radius-medium",
-            Medium: "radius-medium",
-            Large: "radius-medium"
-        },
-        L = {
-            XSmall: "width-500",
-            Small: "width-600",
-            Medium: "width-700",
-            Large: "width-800"
-        },
-        C = {
-            XSmall: "height-400",
-            Small: "height-400",
-            Medium: "height-500",
-            Large: "height-600"
-        },
-        U = "height-[1lh]",
-        z = (e, t) => (0, r.U)(L[e], t ? U : C[e]),
-        P = e => {
-            let {
-                children: t
-            } = e;
-            return s.default.createElement("span", {
-                className: (0, r.U)("flex items-center shrink-0", U)
-            }, t)
-        },
-        O = (e, t) => t && null != e ? s.default.createElement(P, null, e) : e,
-        X = (e, t, n) => {
-            if (null == e || !1 === e) return null;
-            let l = s.default.isValidElement(e) && (e.type === F || e.type === a.f),
-                i = s.default.isValidElement(e) && e.type === a.f ? s.default.cloneElement(e, {
-                    size: w[t]
-                }) : e,
-                d = s.default.createElement("span", {
-                    "data-testid": "foundation-web-menu-leading",
-                    className: (0, r.U)("inline-flex shrink-0 items-center justify-center", l && b[t])
-                }, i);
-            return n ? s.default.createElement(P, null, d) : d
-        },
-        T = {
             XSmall: "Small",
             Small: "Small",
             Medium: "Medium",
             Large: "Large"
         },
-        R = s.default.forwardRef((e, t) => {
+        k = {
+            XSmall: "XSmall",
+            Small: "XSmall",
+            Medium: "XSmall",
+            Large: "Small"
+        },
+        N = {
+            XSmall: "min-height-600",
+            Small: "min-height-800",
+            Medium: "min-height-1000",
+            Large: "min-height-1200"
+        },
+        M = {
+            XSmall: "gap-y-xxsmall",
+            Small: "gap-y-xxsmall",
+            Medium: "gap-y-xsmall",
+            Large: "gap-y-xsmall"
+        },
+        L = {
+            XSmall: "text-body-small",
+            Small: "text-body-small",
+            Medium: "text-body-medium",
+            Large: "text-body-large"
+        },
+        C = {
+            XSmall: "text-body-small",
+            Small: "text-body-small",
+            Medium: "text-body-small",
+            Large: "text-body-medium"
+        },
+        U = {
+            XSmall: "radius-small",
+            Small: "radius-medium",
+            Medium: "radius-medium",
+            Large: "radius-medium"
+        },
+        z = {
+            XSmall: "width-500",
+            Small: "width-600",
+            Medium: "width-700",
+            Large: "width-800"
+        },
+        X = {
+            XSmall: "height-400",
+            Small: "height-400",
+            Medium: "height-500",
+            Large: "height-600"
+        },
+        P = "height-[1lh]",
+        O = (e, t) => (0, s.U)(z[e], t ? P : X[e]),
+        T = e => {
+            let {
+                children: t
+            } = e;
+            return d.default.createElement("span", {
+                className: (0, s.U)("flex items-center shrink-0", P)
+            }, t)
+        },
+        R = (e, t) => t && null != e ? d.default.createElement(T, null, e) : e,
+        j = (e, t, n) => {
+            if (null == e || !1 === e) return null;
+            let l = d.default.isValidElement(e) && (e.type === B || e.type === a.f),
+                i = d.default.isValidElement(e) && e.type === a.f ? d.default.cloneElement(e, {
+                    size: y[t]
+                }) : e,
+                r = d.default.createElement("span", {
+                    "data-testid": "foundation-web-menu-leading",
+                    className: (0, s.U)("inline-flex shrink-0 items-center justify-center", l && x[t])
+                }, i);
+            return n ? d.default.createElement(T, null, r) : r
+        },
+        _ = {
+            XSmall: "Small",
+            Small: "Small",
+            Medium: "Medium",
+            Large: "Large"
+        },
+        D = d.default.forwardRef((e, t) => {
             let {
                 size: n,
                 className: l,
                 ...i
             } = e;
-            return s.default.createElement(a.f, {
+            return d.default.createElement(a.f, {
                 ref: t,
                 name: "icon-regular-check",
-                size: T[n],
-                className: (0, r.U)("content-emphasis", l),
+                size: _[n],
+                className: (0, s.U)("content-emphasis", l),
                 ...i
             })
         });
-    R.displayName = "CheckIcon";
-    let _ = e => {
+    D.displayName = "CheckIcon";
+    let I = e => {
             let {
                 size: t,
                 mode: a,
                 checked: n,
                 hasDescription: l
             } = e;
-            return s.default.createElement("span", {
+            return d.default.createElement("span", {
                 "aria-hidden": !0,
                 "data-testid": "foundation-web-menu-item-check",
-                className: (0, r.U)("flex items-center justify-center shrink-0", z(t, l))
-            }, "dropdown" === a ? s.default.createElement(o.j, {
+                className: (0, s.U)("flex items-center justify-center shrink-0", O(t, l))
+            }, "dropdown" === a ? d.default.createElement(m.j, {
                 asChild: !0
-            }, s.default.createElement(R, {
+            }, d.default.createElement(D, {
                 size: t
-            })) : n && s.default.createElement(R, {
+            })) : n && d.default.createElement(D, {
                 size: t
             }))
         },
-        j = (0, s.createContext)(null),
-        D = (0, s.createContext)(null),
-        I = (0, s.createContext)(!1),
-        A = () => {
-            let e = (0, s.useContext)(j);
+        A = (0, d.createContext)(null),
+        F = (0, d.createContext)(null),
+        W = (0, d.createContext)(!1),
+        K = () => {
+            let e = (0, d.useContext)(A);
             if (!e) throw Error("Menu components must be used within a Menu");
             return e
         },
-        F = e => {
+        B = e => {
             let {
                 type: t,
                 src: a,
                 alt: n
             } = e, {
-                size: i
-            } = A(), [d, o] = (0, s.useState)();
+                size: l
+            } = K(), [r, o] = (0, d.useState)();
             if ("Media" === t) {
-                let e = !!a && a !== d;
-                return s.default.createElement("span", {
+                let e = !!a && a !== r;
+                return d.default.createElement("span", {
                     "data-testid": "foundation-web-menu-leading-media",
-                    className: (0, r.U)("inline-flex shrink-0 [overflow:hidden] radius-xsmall bg-shift-200", b[i])
-                }, e ? s.default.createElement("img", {
+                    className: (0, s.U)("inline-flex shrink-0 [overflow:hidden] radius-xsmall bg-shift-200", x[l])
+                }, e ? d.default.createElement("img", {
                     alt: null != n ? n : "",
                     className: "size-full [object-fit:cover]",
                     src: a,
                     onError: () => o(a)
                 }) : null)
             }
-            return s.default.createElement(l.f, {
+            return d.default.createElement(i.f, {
                 alt: n,
-                size: x[i],
+                size: w[l],
                 src: a
             })
         };
@@ -1007,107 +1019,107 @@
             children: a,
             className: n,
             size: l
-        } = e, d = (0, s.useContext)(i.d), f = d ? "dropdown" : "standalone", p = null != (t = null != l ? l : null == d ? void 0 : d.size) ? t : "Medium", [g, h] = (0, s.useState)(0), v = (0, s.useCallback)(() => (h(e => e + 1), () => h(e => e - 1)), []), b = "standalone" === f && g > 0, x = (0, s.useContext)(I), w = (0, s.useMemo)(() => ({
-            size: p,
-            mode: f,
+        } = e, i = (0, d.useContext)(r.d), o = i ? "dropdown" : "standalone", g = null != (t = null != l ? l : null == i ? void 0 : i.size) ? t : "Medium", [p, h] = (0, d.useState)(0), v = (0, d.useCallback)(() => (h(e => e + 1), () => h(e => e - 1)), []), b = "standalone" === o && p > 0, x = (0, d.useContext)(W), w = (0, d.useMemo)(() => ({
+            size: g,
+            mode: o,
             hasCheckedItem: b,
             registerCheckedItem: v
-        }), [p, f, b, v]), y = (0, r.U)("foundation-web-menu bg-surface-200 stroke-standard stroke-default shadow-transient-high", u[p], c[p], "[box-sizing:border-box]", n), E = "standalone" === f ? s.default.createElement(m.F, {
+        }), [g, o, b, v]), y = (0, s.U)("foundation-web-menu bg-surface-200 stroke-standard stroke-default shadow-transient-high", c[g], f[g], "[box-sizing:border-box]", n), E = "standalone" === o ? d.default.createElement(u.F, {
             asChild: !0,
             orientation: "vertical",
             loop: !0
-        }, s.default.createElement("div", {
+        }, d.default.createElement("div", {
             role: x ? "none" : "menu",
             tabIndex: -1,
             className: y
-        }, a)) : s.default.createElement("div", {
+        }, a)) : d.default.createElement("div", {
             className: y
         }, a);
-        return s.default.createElement(j.Provider, {
+        return d.default.createElement(A.Provider, {
             value: w
-        }, "dropdown" === f ? s.default.createElement(o.n, {
+        }, "dropdown" === o ? d.default.createElement(m.n, {
             asChild: !0,
             style: {
                 width: "var(--radix-popper-anchor-width)"
             }
         }, E) : E)
     }, "d", 0, e => {
-        let l, u, {
+        let l, i, {
                 value: c,
                 leading: f,
-                title: p,
-                description: b,
+                title: g,
+                description: p,
                 submenu: x,
                 trailing: w,
-                isChecked: L = !1,
-                disabled: C,
-                className: U,
+                isChecked: y = !1,
+                disabled: E,
+                className: k,
                 onSelect: z,
-                asChild: P,
-                children: T,
-                ...R
+                asChild: X,
+                children: P,
+                ...O
             } = e,
             {
-                size: j,
-                mode: F,
-                hasCheckedItem: W,
-                registerCheckedItem: K
-            } = A(),
-            B = (0, s.useContext)(i.d);
-        (0, s.useLayoutEffect)(() => {
-            if ("standalone" === F && L) return K()
-        }, [F, L, K]);
+                size: T,
+                mode: _,
+                hasCheckedItem: D,
+                registerCheckedItem: A
+            } = K(),
+            B = (0, d.useContext)(r.d);
+        (0, d.useLayoutEffect)(() => {
+            if ("standalone" === _ && y) return A()
+        }, [_, y, A]);
         let q = void 0 !== x,
-            V = "standalone" === F && q,
-            H = (0, s.useContext)(D),
-            [J, Y] = (0, s.useState)(!1),
-            Z = (0, s.useCallback)(() => {
+            V = "standalone" === _ && q,
+            H = (0, d.useContext)(F),
+            [J, Y] = (0, d.useState)(!1),
+            Z = (0, d.useCallback)(() => {
                 Y(!1), null == H || H()
             }, [H]);
-        if ("dropdown" === F && q) throw Error("MenuItem `submenu` is only supported in a standalone Menu.");
-        let G = "dropdown" === F && (null == B ? void 0 : B.hasSelection) === !0 || "standalone" === F && W,
-            Q = (0, r.U)(t.Y, "foundation-web-menu-item flex content-default text-truncate-split focus-visible:hover:outline-none cursor-pointer stroke-none bg-none text-align-x-left width-full [box-sizing:border-box]", b ? "items-start" : "items-center", "dropdown" === F && !(null == B ? void 0 : B.isKeyboardNavigation) && "focus-visible:outline-none", k[j], E[j], G ? "padding-left-none" : g[j], G && ("Large" === j ? "padding-right-large" : "padding-right-medium"), h[j], G ? void 0 : v[j], M[j], C && "opacity-[0.5]", C && "pointer-events-none", U),
-            $ = "dropdown" === F ? "group-data-[highlighted]/interactable:bg-[var(--color-state-hover)]" : void 0,
-            ee = s.default.createElement("span", {
+        if ("dropdown" === _ && q) throw Error("MenuItem `submenu` is only supported in a standalone Menu.");
+        let G = "dropdown" === _ && (null == B ? void 0 : B.hasSelection) === !0 || "standalone" === _ && D,
+            Q = (0, s.U)(t.Y, "foundation-web-menu-item flex content-default text-truncate-split focus-visible:hover:outline-none cursor-pointer stroke-none bg-none text-align-x-left width-full [box-sizing:border-box]", p ? "items-start" : "items-center", "dropdown" === _ && !(null == B ? void 0 : B.isKeyboardNavigation) && "focus-visible:outline-none", L[T], N[T], G ? "padding-left-none" : h[T], G && ("Large" === T ? "padding-right-large" : "padding-right-medium"), v[T], G ? void 0 : b[T], U[T], E && "opacity-[0.5]", E && "pointer-events-none", k),
+            $ = "dropdown" === _ ? "group-data-[highlighted]/interactable:bg-[var(--color-state-hover)]" : void 0,
+            ee = d.default.createElement("span", {
                 className: "foundation-web-menu-item-title min-width-0 text-no-wrap text-truncate-split content-emphasis"
-            }, p);
-        switch (F) {
+            }, g);
+        switch (_) {
             case "dropdown":
-                ee = s.default.createElement(o.s, {
+                ee = d.default.createElement(m.s, {
                     asChild: !0
                 }, ee);
                 break;
             case "standalone":
                 break;
             default:
-                console.error("Invalid menu mode:", F)
+                console.error("Invalid menu mode:", _)
         }
-        let et = s.default.createElement(s.default.Fragment, null, X(f, j, !!b), s.default.createElement("div", {
-                className: (0, r.U)("grow-1 min-width-0 flex flex-col", S[j])
-            }, ee, b && s.default.createElement("div", {
-                className: (0, r.U)("foundation-web-menu-item-description content-muted min-width-0", N[j])
-            }, b)), O(V ? s.default.createElement(a.f, {
+        let et = d.default.createElement(d.default.Fragment, null, j(f, T, !!p), d.default.createElement("div", {
+                className: (0, s.U)("grow-1 min-width-0 flex flex-col", M[T])
+            }, ee, p && d.default.createElement("div", {
+                className: (0, s.U)("foundation-web-menu-item-description content-muted min-width-0", C[T])
+            }, p)), R(V ? d.default.createElement(a.f, {
                 className: "content-emphasis",
                 "data-testid": "foundation-web-menu-item-chevron",
                 name: "icon-regular-chevron-small-right",
-                size: y[j]
-            }) : w, !!b)),
-            ea = e => s.default.createElement(s.default.Fragment, null, !C && s.default.createElement(t.v, {
+                size: S[T]
+            }) : w, !!p)),
+            ea = e => d.default.createElement(d.default.Fragment, null, !E && d.default.createElement(t.v, {
                 className: $
-            }), G && s.default.createElement(_, {
-                size: j,
-                mode: F,
-                checked: L,
-                hasDescription: !!b
-            }), G ? s.default.createElement("div", {
+            }), G && d.default.createElement(I, {
+                size: T,
+                mode: _,
+                checked: y,
+                hasDescription: !!p
+            }), G ? d.default.createElement("div", {
                 "data-testid": "foundation-web-menu-item-row",
-                className: (0, r.U)("flex grow-1 min-width-0", b ? "items-start" : "items-center", v[j])
+                className: (0, s.U)("flex grow-1 min-width-0", p ? "items-start" : "items-center", b[T])
             }, e) : e),
             en = ea(et);
-        "standalone" === F && (l = W ? "menuitemcheckbox" : "menuitem");
-        let el = "standalone" === F && W ? L : void 0,
+        "standalone" === _ && (l = D ? "menuitemcheckbox" : "menuitem");
+        let el = "standalone" === _ && D ? y : void 0,
             ei = e => {
-                if (!C) {
+                if (!E) {
                     if (V) {
                         e.preventDefault(), Y(e => !e);
                         return
@@ -1117,93 +1129,93 @@
             },
             er = e => {
                 var t;
-                null == (t = R.onKeyDown) || t.call(R, e), e.defaultPrevented || C || !V || "ArrowRight" !== e.key || (e.preventDefault(), Y(!0))
+                null == (t = O.onKeyDown) || t.call(O, e), e.defaultPrevented || E || !V || "ArrowRight" !== e.key || (e.preventDefault(), Y(!0))
             };
-        if (P) {
+        if (X) {
             let {
                 as: e,
                 ...t
-            } = R, a = s.default.Children.only(T), n = void 0 === p && a.props.children;
-            u = s.default.createElement(d.M, {
+            } = O, a = d.default.Children.only(P), n = void 0 === g && a.props.children;
+            i = d.default.createElement(o.M, {
                 ...t,
                 role: l,
                 "aria-checked": el,
-                "aria-disabled": C || void 0,
+                "aria-disabled": E || void 0,
                 "aria-haspopup": V ? "menu" : void 0,
                 className: Q,
                 style: {
                     outlineOffset: 0
                 },
-                onClick: C ? void 0 : ei,
+                onClick: E ? void 0 : ei,
                 onKeyDown: er
-            }, n ? s.default.cloneElement(a, {}, ea(a.props.children)) : s.default.cloneElement(a, {}, en))
-        } else if ("a" === R.as) {
+            }, n ? d.default.cloneElement(a, {}, ea(a.props.children)) : d.default.cloneElement(a, {}, en))
+        } else if ("a" === O.as) {
             let {
                 as: e,
                 href: t,
                 ...a
-            } = R;
-            u = s.default.createElement("a", {
+            } = O;
+            i = d.default.createElement("a", {
                 ...a,
                 role: l,
                 "aria-checked": el,
-                "aria-disabled": C,
+                "aria-disabled": E,
                 "aria-haspopup": V ? "menu" : void 0,
-                href: C || V ? void 0 : t,
+                href: E || V ? void 0 : t,
                 className: Q,
                 style: {
                     outlineOffset: 0,
                     textDecoration: "none"
                 },
-                onClick: C ? void 0 : ei,
+                onClick: E ? void 0 : ei,
                 onKeyDown: er
             }, en)
         } else {
             let {
                 as: e,
                 ...t
-            } = R;
-            u = s.default.createElement("button", {
+            } = O;
+            i = d.default.createElement("button", {
                 type: "button",
                 ...t,
                 role: l,
                 "aria-checked": el,
-                "aria-disabled": C,
+                "aria-disabled": E,
                 "aria-haspopup": V ? "menu" : void 0,
                 className: Q,
                 style: {
                     outlineOffset: 0
                 },
-                onClick: C ? void 0 : ei,
+                onClick: E ? void 0 : ei,
                 onKeyDown: er
             }, en)
         }
-        if ("dropdown" === F) return s.default.createElement(o.M, {
+        if ("dropdown" === _) return d.default.createElement(m.M, {
             value: c,
-            disabled: C,
+            disabled: E,
             asChild: !0
-        }, u);
-        let es = s.default.createElement(m.M, {
+        }, i);
+        let es = d.default.createElement(u.M, {
             asChild: !0,
-            focusable: !C,
+            focusable: !E,
             tabStopId: c
-        }, u);
-        return V && !C ? s.default.createElement(n.V, {
+        }, i);
+        return V && !E ? d.default.createElement(n.V, {
             open: J,
             onOpenChange: Y
-        }, s.default.createElement(n.J, {
+        }, d.default.createElement(n.J, {
             asChild: !0
-        }, es), s.default.createElement(n.T, {
+        }, es), d.default.createElement(n.T, {
             side: "right",
             align: "start",
             role: "menu",
-            "aria-label": null != p ? p : c,
+            "aria-label": null != g ? g : c,
             onKeyDown: e => {
                 "ArrowLeft" === e.key && (e.preventDefault(), e.stopPropagation(), Y(!1))
             }
-        }, s.default.createElement(I.Provider, {
+        }, d.default.createElement(W.Provider, {
             value: !0
-        }, s.default.createElement(D.Provider, {
+        }, d.default.createElement(F.Provider, {
             value: Z
         }, x)))) : es
     }, "U", 0, e => {
@@ -1212,29 +1224,29 @@
             description: a,
             leading: n,
             trailing: l,
-            disabled: d,
+            disabled: i,
             className: o
         } = e, {
             size: m,
             mode: u,
             hasCheckedItem: c
-        } = A(), f = (0, s.useContext)(i.d), p = "dropdown" === u && (null == f ? void 0 : f.hasSelection) === !0 || "standalone" === u && c, b = (0, r.U)("foundation-web-menu-label flex content-default text-truncate-split text-align-x-left width-full [box-sizing:border-box]", a ? "items-start" : "items-center", k[m], E[m], p ? "padding-left-none" : g[m], p && ("Large" === m ? "padding-right-large" : "padding-right-medium"), h[m], p ? void 0 : v[m], d && "opacity-[0.5]", o), x = s.default.createElement(s.default.Fragment, null, X(n, m, !!a), s.default.createElement("div", {
-            className: (0, r.U)("grow-1 min-width-0 flex flex-col", S[m])
-        }, s.default.createElement("span", {
+        } = K(), f = (0, d.useContext)(r.d), g = "dropdown" === u && (null == f ? void 0 : f.hasSelection) === !0 || "standalone" === u && c, p = (0, s.U)("foundation-web-menu-label flex content-default text-truncate-split text-align-x-left width-full [box-sizing:border-box]", a ? "items-start" : "items-center", L[m], N[m], g ? "padding-left-none" : h[m], g && ("Large" === m ? "padding-right-large" : "padding-right-medium"), v[m], g ? void 0 : b[m], i && "opacity-[0.5]", o), x = d.default.createElement(d.default.Fragment, null, j(n, m, !!a), d.default.createElement("div", {
+            className: (0, s.U)("grow-1 min-width-0 flex flex-col", M[m])
+        }, d.default.createElement("span", {
             className: "foundation-web-menu-label-title min-width-0 text-no-wrap text-truncate-split content-emphasis"
-        }, t), a && s.default.createElement("div", {
-            className: (0, r.U)("foundation-web-menu-label-description content-muted min-width-0", N[m])
-        }, a)), O(l, !!a));
-        return s.default.createElement("div", {
+        }, t), a && d.default.createElement("div", {
+            className: (0, s.U)("foundation-web-menu-label-description content-muted min-width-0", C[m])
+        }, a)), R(l, !!a));
+        return d.default.createElement("div", {
             role: "none",
             "data-testid": "foundation-web-menu-label",
-            className: b
-        }, p && s.default.createElement("span", {
+            className: p
+        }, g && d.default.createElement("span", {
             "aria-hidden": !0,
             "data-testid": "foundation-web-menu-label-check-spacer",
-            className: (0, r.U)("shrink-0", z(m, !!a))
-        }), p ? s.default.createElement("div", {
-            className: (0, r.U)("flex grow-1 min-width-0", a ? "items-start" : "items-center", v[m])
+            className: (0, s.U)("shrink-0", O(m, !!a))
+        }), g ? d.default.createElement("div", {
+            className: (0, s.U)("flex grow-1 min-width-0", a ? "items-start" : "items-center", b[m])
         }, x) : x)
     }, "T", 0, e => {
         let {
@@ -1242,21 +1254,62 @@
             className: a
         } = e, {
             size: n
-        } = A();
-        return s.default.createElement("div", {
+        } = K();
+        return d.default.createElement("div", {
             role: "group",
-            className: (0, r.U)("foundation-web-menu-section", f[n], a)
+            className: (0, s.U)("foundation-web-menu-section", g[n], a)
         }, t)
     }, "Z", 0, e => {
         let {
             className: t
         } = e, {
             size: a
-        } = A();
-        return s.default.createElement("div", {
+        } = K();
+        return d.default.createElement("div", {
             role: "separator",
-            className: (0, r.U)("foundation-web-menu-separator", p[a], t)
+            className: (0, s.U)("foundation-web-menu-separator", p[a], t)
         })
+    }, "K", 0, e => {
+        let {
+            size: t
+        } = K(), {
+            type: n
+        } = e;
+        if ("Hint" === n) {
+            let {
+                text: t
+            } = e;
+            return d.default.createElement("span", {
+                "data-testid": "foundation-web-menu-trailing-hint",
+                className: "inline-flex items-center shrink-0 padding-x-xsmall radius-small bg-shift-200 text-caption-medium content-muted"
+            }, t)
+        }
+        if ("Badge" === n) {
+            let {
+                icon: a,
+                label: n,
+                variant: i = "Contrast"
+            } = e;
+            return d.default.createElement(l.t, {
+                className: "shrink-0",
+                "data-testid": "foundation-web-menu-trailing-badge",
+                icon: a,
+                label: n,
+                size: k[t],
+                variant: i
+            })
+        }
+        let {
+            name: i
+        } = e;
+        return d.default.createElement("span", {
+            "data-testid": "foundation-web-menu-trailing",
+            className: (0, s.U)("inline-flex shrink-0 items-center justify-center", x[t])
+        }, d.default.createElement(a.f, {
+            className: "content-emphasis",
+            name: i,
+            size: E[t]
+        }))
     }])
 }, 651235, e => {
     "use strict";
@@ -1361,9 +1414,9 @@
             } = e, {
                 dimension: c,
                 strokeWidth: f,
-                textClass: p,
-                valueContainerSize: g
-            } = n[r], h = (c - f) / 2, v = 2 * Math.PI * h, b = c / 2, x = Math.min(100, Math.max(0, d)), w = o && void 0 !== g ? g : c, y = "Determinate" === s;
+                textClass: g,
+                valueContainerSize: p
+            } = n[r], h = (c - f) / 2, v = 2 * Math.PI * h, b = c / 2, x = Math.min(100, Math.max(0, d)), w = o && void 0 !== p ? p : c, y = "Determinate" === s;
             return a.default.createElement("div", {
                 ref: l,
                 className: (0, t.U)("foundation-web-progress-circle inline-flex items-center justify-center", i),
@@ -1411,7 +1464,7 @@
                     transformOrigin: "50% 50%"
                 }
             })), y && o && "Large" === r && a.default.createElement("div", {
-                className: (0, t.U)("absolute content-emphasis flex items-center justify-center", p),
+                className: (0, t.U)("absolute content-emphasis flex items-center justify-center", g),
                 "aria-hidden": "true"
             }, a.default.createElement("span", null, Math.round(x)), a.default.createElement("span", null, "%")))
         });
@@ -1432,8 +1485,8 @@
             actions: u,
             onClose: c,
             closeIconAriaLabel: f = "Dismiss snackbar",
-            shouldAutoDismiss: p,
-            autoDismissDurationMs: g,
+            shouldAutoDismiss: g,
+            autoDismissDurationMs: p,
             className: h,
             ...v
         } = e, [b, x] = (0, i.useState)("enter"), w = (0, i.useRef)(void 0), y = (0, i.useRef)(void 0), E = (0, i.useRef)(void 0), S = (0, i.useRef)(null), k = null != u ? u : o && m && i.default.createElement(a.f, {
@@ -1442,9 +1495,9 @@
             className: "content-inverse-emphasis",
             onClick: m,
             ref: S
-        }, o), N = !!k, M = s.length > 80, L = null == p || p, C = 4e3;
+        }, o), N = !!k, M = s.length > 80, L = null == g || g, C = 4e3;
         N && (C = M ? 1e4 : 7e3);
-        let U = null != g ? g : C,
+        let U = null != p ? p : C,
             z = (0, i.useCallback)(() => {
                 "exit" !== b && (x("exit"), void 0 !== y.current && (window.clearTimeout(y.current), y.current = void 0), E.current = window.setTimeout(() => {
                     null == c || c()
@@ -1464,24 +1517,24 @@
         }, [N]), (0, i.useEffect)(() => () => {
             void 0 !== y.current && window.clearTimeout(y.current), void 0 !== E.current && window.clearTimeout(E.current), void 0 !== w.current && window.cancelAnimationFrame(w.current)
         }, []);
-        let P = {
+        let X = {
                 position: "fixed",
                 left: "50%",
                 bottom: "max(var(--padding-xxlarge, 32px), env(safe-area-inset-bottom))",
                 transform: "translate(-50%, ".concat("idle" === b ? "0" : "120%", ")"),
                 zIndex: "var(--foundation-portal-zindex, 9999)"
             },
-            O = v.style ? {
-                ...P,
+            P = v.style ? {
+                ...X,
                 ...v.style
-            } : P;
+            } : X;
         return i.default.createElement("div", {
             ref: r,
             role: "status",
             "aria-live": "polite",
             className: (0, l.U)("flex items-center gap-xxlarge radius-medium shadow-transient-low bg-inverse-surface-0 padding-x-medium padding-y-medium stroke-standard shrink-0", "max-width-[480px] min-height-[48px]", "min-width-[min(100%-max(2_*_var(--margin-small),env(safe-area-inset-left)+env(safe-area-inset-right)),393px)]", "foundation-web-portal-zindex pointer-events-auto", "exit" === b ? "ease-standard-in" : "ease-standard-out", h),
             style: {
-                ...O,
+                ...P,
                 transitionDuration: "".concat("exit" === b ? 150 : 200, "ms"),
                 transitionProperty: "transform"
             },
@@ -1592,8 +1645,8 @@
                 let u = l.options,
                     c = null == (d = l.fetchOptions) || null == (s = d.meta) || null == (r = s.fetchMore) ? void 0 : r.direction,
                     f = (null == (o = l.state.data) ? void 0 : o.pages) || [],
-                    p = (null == (m = l.state.data) ? void 0 : m.pageParams) || [],
-                    g = {
+                    g = (null == (m = l.state.data) ? void 0 : m.pageParams) || [],
+                    p = {
                         pages: [],
                         pageParams: []
                     },
@@ -1631,20 +1684,20 @@
                             let e = "backward" === c,
                                 t = {
                                     pages: f,
-                                    pageParams: p
+                                    pageParams: g
                                 },
                                 l = (e ? n : a)(u, t);
-                            g = await s(t, l, e)
+                            p = await s(t, l, e)
                         } else {
                             let t = null != e ? e : f.length;
                             do {
                                 var d;
-                                let e = 0 === h ? null != (d = p[0]) ? d : u.initialPageParam : a(u, g);
+                                let e = 0 === h ? null != (d = g[0]) ? d : u.initialPageParam : a(u, p);
                                 if (h > 0 && null == e) break;
-                                g = await s(g, e), h++
+                                p = await s(p, e), h++
                             } while (h < t)
                         }
-                        return g
+                        return p
                     };
                 l.options.persister ? l.fetchFn = () => {
                     var e, t;
@@ -1668,5 +1721,5 @@
     e.s(["f", 0, t])
 }]);
 
-//# debugId=da4697dd-f0f7-7260-cfb8-d329d0107fc5
-//# sourceMappingURL=3-stvs4a8k0lb.js.map
+//# debugId=4ad8cfb1-4a3b-3f26-084c-dc8b960cf4cf
+//# sourceMappingURL=20i8h3yvwz0wh.js.map

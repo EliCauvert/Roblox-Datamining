@@ -3,19 +3,19 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "7bf496a8-10c2-344c-4a0c-b7cbef947564")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "cc06a7b1-f470-1865-638a-b33ee3e1324e")
     } catch (e) {}
 }();
-(globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 252250, 83311, e => {
+(globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 739473, 83311, e => {
     "use strict";
     var t = e.i(868275),
         r = e.i(420482);
-    e.s(["createObsErrorBoundary", 0, function(e) {
+    e.s(["createObsErrorBoundary", 0, function(e, n) {
         let {
-            publish: n,
-            captureException: i,
-            featureName: o
-        } = e;
+            publish: i,
+            captureException: o,
+            featureName: a
+        } = n ?? e;
         return class extends r.Component {
             static getDerivedStateFromError(e) {
                 return {
@@ -23,16 +23,14 @@
                 }
             }
             componentDidCatch(e, t) {
-                let {
-                    name: r
-                } = this.props;
-                n(r, {
+                let r = this.props.name ?? "ReactCrash";
+                i(r, {
                     severity: "critical",
                     errorType: e.name || "Error"
                 });
-                let a = o ? `${o}_${r}` : r;
-                i?.(e, {
-                    error_counter: a,
+                let n = a ? `${a}_${r}` : r;
+                o?.(e, {
+                    error_counter: n,
                     ...t.componentStack ? {
                         componentStack: t.componentStack
                     } : {}
@@ -56,7 +54,7 @@
                 })
             }
         }
-    }], 252250);
+    }], 739473);
     var n = e.i(10224);
 
     function i(e) {
@@ -422,8 +420,8 @@
     F.displayName = "PopoverArrow", e.s(["Anchor", 0, R, "Arrow", 0, F, "Close", 0, _, "Content", 0, q, "Portal", 0, D, "Root", 0, I, "Trigger", 0, x])
 }, 598887, e => {
     "use strict";
-    var t = e.i(9701),
-        r = e.i(252250),
+    var t = e.i(518250),
+        r = e.i(739473),
         n = e.i(248951),
         i = e.i(83311),
         o = e.i(333982);
@@ -482,7 +480,7 @@
             captureException: n.captureException
         }),
         d = (0, i.createWithApiMetricsV2)(s, n.captureException);
-    (0, r.createObsErrorBoundary)({
+    (0, r.createObsErrorBoundary)(a, {
         publish: s,
         captureException: n.captureException,
         featureName: a.featureName
@@ -2430,5 +2428,5 @@
     }, "SubscriptionsV2Api", 0, eE], 309380)
 }]);
 
-//# debugId=7bf496a8-10c2-344c-4a0c-b7cbef947564
-//# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/133ksxfo7ml4h.js.map
+//# debugId=cc06a7b1-f470-1865-638a-b33ee3e1324e
+//# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/0v7aezevhdrb..js.map

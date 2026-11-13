@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "a7410b82-096f-ba7e-57ef-871245588d42")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "2988ddc9-c97d-aee2-f32a-8e1a9d2f0d4b")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 579149, (e, t, r) => {
@@ -680,43 +680,43 @@
     t.exports = e.r(354624)
 }, 518623, e => {
     "use strict";
-    let t, r, n;
-    var a, i, s, l, o, c, u, d, m, p, h, f, g, x, b, y, v, S, P, C, E, w, N, k, T, j, A, M, R, I, U = e.i(19836),
-        _ = e.i(910030),
-        F = e.i(391855),
-        L = e.i(420482),
-        D = e.i(144674),
-        B = e.i(778935),
-        O = e.i(55001),
-        G = e.i(520250),
-        z = e.i(326404),
-        V = e.i(378944),
-        W = e.i(7284);
-    let K = {
+    let t, r, n, a, i, s;
+    var l, o, c, u, d, m, p, h, f, g, x, b, y, v, S, P, C, E, w, N, k, T, j, A, M, R, I, U, _, F, L = e.i(19836),
+        D = e.i(910030),
+        B = e.i(391855),
+        O = e.i(420482),
+        G = e.i(144674),
+        z = e.i(778935),
+        V = e.i(55001),
+        W = e.i(520250),
+        K = e.i(326404),
+        H = e.i(378944),
+        Q = e.i(7284);
+    let $ = {
             Info: "icon-filled-circle-i",
             Warning: "icon-filled-triangle-exclamation",
             Success: "icon-filled-circle-check",
             Error: "icon-filled-circle-x"
         },
-        H = {
+        q = {
             Info: "var(--color-system-emphasis)",
             Warning: "var(--color-system-warning)",
             Success: "var(--color-extended-green-700, var(--color-system-success))",
             Error: "var(--color-action-alert-foreground)"
         },
-        Q = {
+        Y = {
             Info: "stroke-emphasis",
             Warning: "stroke-system-warning",
             Success: "stroke-emphasis",
             Error: "stroke-system-alert"
         },
-        $ = {
+        X = {
             Info: "rgb(from var(--color-system-neutral) r g b / 0.1)",
             Warning: "rgb(from var(--color-system-warning) r g b / 0.16)",
             Success: "rgb(from var(--color-system-success) r g b / 0.1)",
             Error: "rgb(from var(--color-system-alert) r g b / 0.16)"
         },
-        q = e => {
+        J = e => {
             let {
                 label: t,
                 href: r,
@@ -724,43 +724,43 @@
                 onAction: a,
                 variant: i
             } = e;
-            return n ? L.default.createElement(O.Button, {
+            return n ? O.default.createElement(V.Button, {
                 asChild: !0,
                 size: "Small",
                 variant: i,
                 onClick: a
-            }, L.default.cloneElement(n, {}, t)) : r ? L.default.createElement(O.Button, {
+            }, O.default.cloneElement(n, {}, t)) : r ? O.default.createElement(V.Button, {
                 as: "a",
                 href: r,
                 size: "Small",
                 variant: i,
                 onClick: a
-            }, t) : L.default.createElement(O.Button, {
+            }, t) : O.default.createElement(V.Button, {
                 size: "Small",
                 variant: i,
                 onClick: a
             }, t)
         },
-        Y = e => {
+        Z = e => {
             let {
                 label: t,
                 href: r,
                 linkTarget: n,
                 onAction: a
             } = e;
-            return n ? L.default.createElement(z.Link, {
+            return n ? O.default.createElement(K.Link, {
                 asChild: !0,
                 onClick: a,
                 size: "Medium",
                 variant: "Standalone",
                 underline: "always"
-            }, L.default.cloneElement(n, {}, t)) : r ? L.default.createElement(z.Link, {
+            }, O.default.cloneElement(n, {}, t)) : r ? O.default.createElement(K.Link, {
                 href: r,
                 onClick: a,
                 size: "Medium",
                 variant: "Standalone",
                 underline: "always"
-            }, t) : L.default.createElement(z.Link, {
+            }, t) : O.default.createElement(K.Link, {
                 as: "button",
                 onClick: a,
                 size: "Medium",
@@ -768,7 +768,7 @@
                 underline: "always"
             }, t)
         },
-        X = (0, L.forwardRef)((e, t) => {
+        ee = (0, O.forwardRef)((e, t) => {
             let {
                 children: r,
                 variant: n = "System",
@@ -787,45 +787,45 @@
                 className: g,
                 style: x,
                 ...b
-            } = e, y = (0, G.default)("foundation-web-alert-message-"), v = !!i, S = !!c, P = !!(p && f), C = "Feedback" === n && (v || S || P), E = "Warning" === a || "Error" === a ? "alert" : "status", w = null;
-            v && (w = S ? L.default.createElement(q, {
+            } = e, y = (0, W.default)("foundation-web-alert-message-"), v = !!i, S = !!c, P = !!(p && f), C = "Feedback" === n && (v || S || P), E = "Warning" === a || "Error" === a ? "alert" : "status", w = null;
+            v && (w = S ? O.default.createElement(J, {
                 label: i || "",
                 href: s,
                 linkTarget: l,
                 onAction: o,
                 variant: "Standard"
-            }) : L.default.createElement(Y, {
+            }) : O.default.createElement(Z, {
                 label: i || "",
                 href: s,
                 linkTarget: l,
                 onAction: o
             }));
-            let N = S ? L.default.createElement(q, {
+            let N = S ? O.default.createElement(J, {
                 label: c || "",
                 href: u,
                 linkTarget: d,
                 onAction: m,
                 variant: "Utility"
             }) : null;
-            return L.default.createElement("div", {
+            return O.default.createElement("div", {
                 ref: t,
                 role: C ? "region" : E,
                 "aria-labelledby": C ? y : void 0,
-                className: (0, W.default)("foundation-web-alert relative width-full stroke-standard", "System" === n ? "[border-left-width:0] [border-right-width:0]" : "radius-medium", Q[a], g),
+                className: (0, Q.default)("foundation-web-alert relative width-full stroke-standard", "System" === n ? "[border-left-width:0] [border-right-width:0]" : "radius-medium", Y[a], g),
                 ...b
-            }, L.default.createElement("div", {
+            }, O.default.createElement("div", {
                 "aria-hidden": "true",
-                className: (0, W.default)("absolute inset-[0] pointer-events-none", "Feedback" === n && "radius-medium"),
+                className: (0, Q.default)("absolute inset-[0] pointer-events-none", "Feedback" === n && "radius-medium"),
                 style: {
-                    backgroundColor: $[a]
+                    backgroundColor: X[a]
                 }
-            }), L.default.createElement("div", {
+            }), O.default.createElement("div", {
                 className: "relative flex items-start gap-x-medium padding-x-large padding-y-small min-width-0"
-            }, L.default.createElement("div", {
+            }, O.default.createElement("div", {
                 className: "flex items-start padding-y-xsmall self-stretch shrink-0"
-            }, L.default.createElement("div", {
+            }, O.default.createElement("div", {
                 className: "relative flex items-start padding-y-xxsmall"
-            }, "Warning" !== a && L.default.createElement("span", {
+            }, "Warning" !== a && O.default.createElement("span", {
                 "aria-hidden": "true",
                 className: "absolute width-[10px] height-[14px] top-[5px]",
                 style: {
@@ -833,23 +833,23 @@
                     transform: "translateX(-50%)",
                     backgroundColor: "var(--dark-mode-content-emphasis)"
                 }
-            }), L.default.createElement(B.Icon, {
+            }), O.default.createElement(z.Icon, {
                 "aria-hidden": "true",
-                name: K[a],
+                name: $[a],
                 size: "Medium",
                 className: "relative",
                 style: {
-                    color: H[a]
+                    color: q[a]
                 }
-            }))), L.default.createElement("div", {
-                className: (0, W.default)("flex grow-1 basis-0 min-width-0 items-start gap-x-medium gap-y-small", S ? "flex-col" : "wrap")
-            }, L.default.createElement("div", {
+            }))), O.default.createElement("div", {
+                className: (0, Q.default)("flex grow-1 basis-0 min-width-0 items-start gap-x-medium gap-y-small", S ? "flex-col" : "wrap")
+            }, O.default.createElement("div", {
                 id: C ? y : void 0,
                 role: C ? E : void 0,
-                className: (0, W.default)("flex items-center padding-top-[var(--size-150)] text-body-medium text-wrap content-emphasis [overflow-wrap:anywhere]", S ? "width-full min-width-0" : "grow-1 basis-0 min-width-[min(200px,100%)]")
-            }, r), (w || N) && L.default.createElement("div", {
-                className: (0, W.default)("flex items-center gap-small wrap shrink-0", !S && "padding-y-[var(--size-150)]")
-            }, w, N)), P && L.default.createElement(V.CloseAffordance, {
+                className: (0, Q.default)("flex items-center padding-top-[var(--size-150)] text-body-medium text-wrap content-emphasis [overflow-wrap:anywhere]", S ? "width-full min-width-0" : "grow-1 basis-0 min-width-[min(200px,100%)]")
+            }, r), (w || N) && O.default.createElement("div", {
+                className: (0, Q.default)("flex items-center gap-small wrap shrink-0", !S && "padding-y-[var(--size-150)]")
+            }, w, N)), P && O.default.createElement(H.CloseAffordance, {
                 variant: "Utility",
                 size: "Medium",
                 isCircular: !0,
@@ -858,20 +858,20 @@
                 onClick: f
             })))
         });
-    var J = e.i(357355);
-    let Z = (0, L.createContext)(null),
-        ee = e => {
+    var et = e.i(357355);
+    let er = (0, O.createContext)(null),
+        en = e => {
             let {
                 children: t,
                 closeLabel: r
-            } = e, [n, a] = (0, L.useState)(null), i = (0, L.useRef)(0), s = (0, L.useCallback)((e, t, r) => {
+            } = e, [n, a] = (0, O.useState)(null), i = (0, O.useRef)(0), s = (0, O.useCallback)((e, t, r) => {
                 i.current += 1, a({
                     id: i.current,
                     title: t,
                     severity: e,
                     shouldAutoDismiss: r?.shouldAutoDismiss ?? "Success" === e
                 })
-            }, []), l = (0, L.useMemo)(() => ({
+            }, []), l = (0, O.useMemo)(() => ({
                 success: (e, t) => {
                     s("Success", e, t)
                 },
@@ -884,23 +884,23 @@
                 info: (e, t) => {
                     s("Info", e, t)
                 }
-            }), [s]), o = (0, L.useMemo)(() => ({
+            }), [s]), o = (0, O.useMemo)(() => ({
                 toastService: l
-            }), [l]), c = (0, L.useCallback)(() => {
+            }), [l]), c = (0, O.useCallback)(() => {
                 a(null)
             }, []);
-            return (0, L.useEffect)(() => {
-                if (!n?.shouldAutoDismiss || !J.window) return;
+            return (0, O.useEffect)(() => {
+                if (!n?.shouldAutoDismiss || !et.window) return;
                 let e = n.id,
-                    t = J.window.setTimeout(() => {
+                    t = et.window.setTimeout(() => {
                         a(t => t?.id === e ? null : t)
                     }, 4e3);
                 return () => {
-                    J.window?.clearTimeout(t)
+                    et.window?.clearTimeout(t)
                 }
-            }, [n]), (0, U.jsxs)(Z.Provider, {
+            }, [n]), (0, L.jsxs)(er.Provider, {
                 value: o,
-                children: [t, n && (0, U.jsx)("div", {
+                children: [t, n && (0, L.jsx)("div", {
                     className: "bg-surface-0",
                     style: {
                         position: "fixed",
@@ -910,7 +910,7 @@
                         zIndex: "var(--foundation-portal-zindex, 9999)",
                         width: "min(480px, calc(100% - 2 * var(--margin-small, 16px)))"
                     },
-                    children: (0, U.jsx)(X, {
+                    children: (0, L.jsx)(ee, {
                         variant: "Feedback",
                         severity: n.severity,
                         onDismiss: c,
@@ -922,19 +922,19 @@
                 })]
             })
         },
-        et = () => {
-            let e = (0, L.useContext)(Z);
+        ea = () => {
+            let e = (0, O.useContext)(er);
             if (!e) throw Error("useToast must be used within a ToastProvider");
             return e
         };
-    var er = e.i(361185),
-        en = e.i(883355),
-        ea = e.i(126392),
-        ei = e.i(245837);
-    async function es(e, t) {
+    var ei = e.i(361185),
+        es = e.i(883355),
+        el = e.i(126392),
+        eo = e.i(245837);
+    async function ec(e, t) {
         return t({
             method: "GET",
-            url: `${ei.EnvironmentUrls.apiGatewayUrl}/payments-gateway/v1/feature/metadata`,
+            url: `${eo.EnvironmentUrls.apiGatewayUrl}/payments-gateway/v1/feature/metadata`,
             config: {
                 withCredentials: !0,
                 params: {
@@ -947,11 +947,11 @@
         })
     }
 
-    function el(e) {
+    function eu(e) {
         return `firstTimePurchaseConsentAcknowledged_${e}`
     }
-    var eo = e.i(673518);
-    let ec = (0, L.createContext)({
+    var ed = e.i(673518);
+    let em = (0, O.createContext)({
             limitedTimeBonusItem: {
                 bannerImageUrls: [],
                 creatorDisplayNames: [],
@@ -987,16 +987,16 @@
             markConsentAcknowledged: () => void 0,
             productBadgeSlotCount: 0,
             atLeastOneProductHasBonusAmount: !1,
-            deviceMeta: eo.defaultDeviceMeta
+            deviceMeta: ed.defaultDeviceMeta
         }),
-        eu = "buyRobuxCtx",
-        ed = "buyRobuxProductId";
-    var em = e.i(9701),
-        ep = e.i(252250),
-        eh = e.i(248951),
-        ef = e.i(83311),
-        eg = e.i(333982);
-    let ex = {
+        ep = "buyRobuxCtx",
+        eh = "buyRobuxProductId";
+    var ef = e.i(518250),
+        eg = e.i(739473),
+        ex = e.i(248951),
+        eb = e.i(83311),
+        ey = e.i(333982);
+    let ev = {
             featureName: "BuyRobuxRedesign",
             team: "Economy > Payments & Fraud",
             internalPageName: ["Robux", "LeanerRobuxRedesignModel", "robuxRedesign"],
@@ -1241,52 +1241,56 @@
                 }
             }
         },
-        eb = (0, eg.createFireTelemetryCounter)(ex.featureName),
+        eS = (0, ey.createFireTelemetryCounter)(ev.featureName),
         {
-            trackCounter: ey,
-            trackError: ev,
-            trackCriticalError: eS
-        } = (0, em.createTrackers)(ex, {
-            publish: eb,
-            captureException: eh.captureException
+            trackCounter: eP,
+            trackError: eC,
+            trackCriticalError: eE
+        } = (0, ef.createTrackers)(ev, {
+            publish: eS,
+            captureException: ex.captureException
         }),
-        eP = (0, ef.createWithApiMetricsV2)(eb, eh.captureException),
+        ew = (0, eb.createWithApiMetricsV2)(eS, ex.captureException),
         {
-            reportPageLoad: eC,
-            reportPageView: eE
-        } = (t = "function" == typeof(a = {
-            publishCounter: eb
-        }) ? a : a.publishCounter, r = !1, n = !1, {
-            reportPageLoad: function() {
+            reportPageLoad: eN,
+            reportPageView: ek
+        } = (l = {
+            publishCounter: eS
+        }, n = "function" == typeof(r = (t = !1, l)) ? r : r.publishCounter, i = (a = (e, t) => {
+            let r = !1;
+            return a => {
                 if (!r) {
                     r = !0;
                     try {
-                        t("PageLoad")
-                    } catch {}
-                }
-            },
-            reportPageView: function() {
-                if (!n) {
-                    n = !0;
-                    try {
-                        t("PageView")
+                        let r = t ? {
+                            ...a,
+                            severity: t
+                        } : a;
+                        r ? n(e, r) : n(e)
                     } catch {}
                 }
             }
+        })("PageLoad"), s = a("PageView"), t ? {
+            reportPageLoad: i,
+            reportPageView: s
+        } : {
+            reportPageLoad: i,
+            reportPageView: s,
+            reportNoRoot: a("NoRoot", "critical")
         }),
-        ew = (0, ep.createObsErrorBoundary)({
-            publish: eb,
-            captureException: eh.captureException,
-            featureName: ex.featureName
+        eT = (0, eg.createObsErrorBoundary)(ev, {
+            publish: eS,
+            captureException: ex.captureException,
+            featureName: ev.featureName
         });
-    var eN = ((i = {}).GET = "GET", i.POST = "POST", i),
-        ek = ((s = {}).ACKNOWLEDGE_PURCHASE_WARNING = "AcknowledgePurchaseWarning", s.CHECK_USER_PURCHASE_SETTING = "CheckUserPurchaseSetting", s.GET_ENABLE_PURCHASES_SETTING = "GetEnablePurchaseSetting", s.GET_PAYMENT_PROFILES = "GetPaymentProfiles", s.GET_PENDING_ENABLE_PURCHASE_CONSENT_REQUESTS = "GetPendingEnablePurchaseConsentRequests", s.GET_PURCHASE_WARNING = "GetPurchaseWarning", s.GET_QUICK_PAY_METADATA = "GetQuickPayMetadata", s.GET_ROBUX_BALANCE = "GetRobuxBalance", s.GET_THUMBNAILS = "GetThumbnails", s.PREPARE_PAYMENT = "PreparePayment", s.PROCESS_PAYMENT = "ProcessPayment", s.GET_CLIENT_ASSERTION_V2 = "GetClientAssertionV2", s.GET_AUTH_TICKET_V2 = "GetAuthTicketV2", s.GET_MY_FRIENDS = "GetMyFriends", s.USER_SEARCH = "UserSearch", s);
-    async function eT(e, t, r, n, a, i) {
+    var ej = ((o = {}).GET = "GET", o.POST = "POST", o),
+        eA = ((c = {}).ACKNOWLEDGE_PURCHASE_WARNING = "AcknowledgePurchaseWarning", c.CHECK_USER_PURCHASE_SETTING = "CheckUserPurchaseSetting", c.GET_ENABLE_PURCHASES_SETTING = "GetEnablePurchaseSetting", c.GET_PAYMENT_PROFILES = "GetPaymentProfiles", c.GET_PENDING_ENABLE_PURCHASE_CONSENT_REQUESTS = "GetPendingEnablePurchaseConsentRequests", c.GET_PURCHASE_WARNING = "GetPurchaseWarning", c.GET_QUICK_PAY_METADATA = "GetQuickPayMetadata", c.GET_ROBUX_BALANCE = "GetRobuxBalance", c.GET_THUMBNAILS = "GetThumbnails", c.PREPARE_PAYMENT = "PreparePayment", c.PROCESS_PAYMENT = "ProcessPayment", c.GET_CLIENT_ASSERTION_V2 = "GetClientAssertionV2", c.GET_AUTH_TICKET_V2 = "GetAuthTicketV2", c.GET_MY_FRIENDS = "GetMyFriends", c.USER_SEARCH = "UserSearch", c);
+    async function eM(e, t, r, n, a, i) {
         let {
             url: s,
             ...l
         } = r;
-        return ("GET" === e ? eP({
+        return ("GET" === e ? ew({
             method: "GET",
             url: s,
             config: {
@@ -1296,7 +1300,7 @@
             eventCounterProps: {
                 call: t
             }
-        }) : eP({
+        }) : ew({
             method: "POST",
             url: s,
             config: l,
@@ -1314,15 +1318,15 @@
             if (i) throw e
         })
     }
-    let ej = async e => eT(eN.GET, ek.GET_ROBUX_BALANCE, {
-        url: `${ei.EnvironmentUrls.economyApi}/v1/users/${e}/currency`,
+    let eR = async e => eM(ej.GET, eA.GET_ROBUX_BALANCE, {
+        url: `${eo.EnvironmentUrls.economyApi}/v1/users/${e}/currency`,
         withCredentials: !0
     });
-    var eA = ((l = {}).Completed = "Completed", l.Pending = "Pending", l);
-    let eM = async e => eT(eN.POST, ek.GET_THUMBNAILS, {
-        url: `${ei.EnvironmentUrls.thumbnailsApi}/v1/batch`,
+    var eI = ((u = {}).Completed = "Completed", u.Pending = "Pending", u);
+    let eU = async e => eM(ej.POST, eA.GET_THUMBNAILS, {
+        url: `${eo.EnvironmentUrls.thumbnailsApi}/v1/batch`,
         withCredentials: !0
-    }, e), eR = (0, L.createContext)({
+    }, e), e_ = (0, O.createContext)({
         trackEconomicRestrictionErrorShown: () => void 0,
         trackGiftCardClick: () => void 0,
         trackPurchase: () => void 0,
@@ -1353,68 +1357,68 @@
         trackPendingTransfersImpression: () => void 0,
         trackPendingTransfersSheetView: () => void 0,
         trackPendingTransfersAcceptClick: () => void 0
-    }), eI = e => e.isDesktop && !e.isUWPApp && !e.isPcGdkApp || !e.isAmazonApp && !e.isUWPApp && !e.isIosApp && !e.isAndroidApp && !e.isPcGdkApp, eU = e => e.isAmazonApp || e.isUWPApp || e.isIosApp || e.isAndroidApp || e.isPcGdkApp, {
+    }), eF = e => e.isDesktop && !e.isUWPApp && !e.isPcGdkApp || !e.isAmazonApp && !e.isUWPApp && !e.isIosApp && !e.isAndroidApp && !e.isPcGdkApp, eL = e => e.isAmazonApp || e.isUWPApp || e.isIosApp || e.isAndroidApp || e.isPcGdkApp, {
         ENUM_TRIGGERING_CONTEXT: {
-            MOBILE_WEB_PREMIUM_PURCHASE: e_,
-            MOBILE_WEB_ROBUX_PURCHASE: eF,
-            WEBVIEW_PREMIUM_PURCHASE: eL,
-            WEBVIEW_ROBUX_PURCHASE: eD,
-            WEB_PREMIUM_PURCHASE: eB,
-            WEB_ROBUX_PURCHASE: eO
+            MOBILE_WEB_PREMIUM_PURCHASE: eD,
+            MOBILE_WEB_ROBUX_PURCHASE: eB,
+            WEBVIEW_PREMIUM_PURCHASE: eO,
+            WEBVIEW_ROBUX_PURCHASE: eG,
+            WEB_PREMIUM_PURCHASE: ez,
+            WEB_ROBUX_PURCHASE: eV
         }
-    } = D.paymentFlowAnalyticsService;
+    } = G.paymentFlowAnalyticsService;
 
-    function eG(e) {
+    function eW(e) {
         let t = arguments.length > 1 && void 0 !== arguments[1] && arguments[1];
-        return eU(e) ? t ? eL : eD : e.isDesktop ? t ? eB : eO : t ? e_ : eF
+        return eL(e) ? t ? eO : eG : e.isDesktop ? t ? ez : eV : t ? eD : eB
     }
-    var ez = e.i(836931);
-    let eV = "data-section-type",
-        eW = "data-product-id",
-        eK = "data-subscription-product-id",
-        eH = "data-subscription-product-type",
-        eQ = [eV, eW, eK].map(e => `[${e}]`).join(", ");
+    var eK = e.i(836931);
+    let eH = "data-section-type",
+        eQ = "data-product-id",
+        e$ = "data-subscription-product-id",
+        eq = "data-subscription-product-type",
+        eY = [eH, eQ, e$].map(e => `[${e}]`).join(", ");
 
-    function e$(e) {
+    function eX(e) {
         return {
-            [eV]: e.sectionType
+            [eH]: e.sectionType
         }
     }
     let {
         ENUM_VIEW_NAME: {
-            ROBLOX_PLUS_BUY_ROBUX: eq
+            ROBLOX_PLUS_BUY_ROBUX: eJ
         },
         ENUM_PURCHASE_EVENT_TYPE: {
-            USER_INPUT: eY,
-            VIEW_SHOWN: eX
+            USER_INPUT: eZ,
+            VIEW_SHOWN: e0
         },
         ENUM_VIEW_MESSAGE: {
-            ROBLOX_PLUS_FREE_TRIAL: eJ,
-            ROBLOX_PLUS_SUBSCRIBE: eZ,
-            ROBLOX_PLUS_LEARN_MORE: e0
+            ROBLOX_PLUS_FREE_TRIAL: e1,
+            ROBLOX_PLUS_SUBSCRIBE: e2,
+            ROBLOX_PLUS_LEARN_MORE: e3
         }
-    } = D.paymentFlowAnalyticsService;
-    var e1 = e.i(951605);
+    } = G.paymentFlowAnalyticsService;
+    var e5 = e.i(951605);
     let {
         ENUM_VIEW_NAME: {
-            ROBUX_SEND_TRANSFERS: e2,
-            ROBUX_PENDING_TRANSFERS: e3
+            ROBUX_SEND_TRANSFERS: e4,
+            ROBUX_PENDING_TRANSFERS: e8
         },
         ENUM_PURCHASE_EVENT_TYPE: {
-            VIEW_SHOWN: e5,
-            USER_INPUT: e4
+            VIEW_SHOWN: e6,
+            USER_INPUT: e9
         },
         ENUM_VIEW_MESSAGE: {
-            TRANSFER_SEND_BUTTON: e8,
-            TRANSFER_SEND_SHEET: e6,
-            TRANSFER_SEND_USER_SELECTED: e9,
-            TRANSFER_PENDING_BUTTON: e7,
-            TRANSFER_PENDING_SHEET: te,
-            TRANSFER_PENDING_ACCEPT_CLICK: tt
+            TRANSFER_SEND_BUTTON: e7,
+            TRANSFER_SEND_SHEET: te,
+            TRANSFER_SEND_USER_SELECTED: tt,
+            TRANSFER_PENDING_BUTTON: tr,
+            TRANSFER_PENDING_SHEET: tn,
+            TRANSFER_PENDING_ACCEPT_CLICK: ta
         }
-    } = D.paymentFlowAnalyticsService;
+    } = G.paymentFlowAnalyticsService;
 
-    function tr(e) {
+    function ti(e) {
         let {
             children: t
         } = e, r = function() {
@@ -1428,21 +1432,21 @@
                 subscriptionProductIds: s,
                 urlParams: l,
                 deviceMeta: o
-            } = (0, L.useContext)(ec), c = function() {
-                let [e, t] = (0, L.useState)();
-                return (0, L.useEffect)(() => {
-                    if (void 0 === J.window) return;
-                    let e = J.window.location.href.includes("sitetest1") ? "merchant.sitetest1.robloxlabs.com.stripe" : "merchant.www.roblox.com.stripe",
+            } = (0, O.useContext)(em), c = function() {
+                let [e, t] = (0, O.useState)();
+                return (0, O.useEffect)(() => {
+                    if (void 0 === et.window) return;
+                    let e = et.window.location.href.includes("sitetest1") ? "merchant.sitetest1.robloxlabs.com.stripe" : "merchant.www.roblox.com.stripe",
                         {
                             ApplePaySession: r
-                        } = J.window;
+                        } = et.window;
                     (async () => {
                         try {
                             if (!r?.canMakePayments()) return void t(!1);
                             let n = await r.canMakePaymentsWithActiveCard(e);
                             t(!!n)
                         } catch (e) {
-                            ev("ApplePayAvailabilityException", null, e), t(!1)
+                            eC("ApplePayAvailabilityException", null, e), t(!1)
                         }
                     })()
                 }, []), e
@@ -1451,15 +1455,15 @@
                 seenSections: d,
                 seenSubscriptionProducts: m
             } = function() {
-                let e = (0, L.useRef)(new Set),
-                    t = (0, L.useRef)(new Set),
-                    r = (0, L.useRef)(new Map),
-                    [n, a] = (0, L.useState)({
+                let e = (0, O.useRef)(new Set),
+                    t = (0, O.useRef)(new Set),
+                    r = (0, O.useRef)(new Map),
+                    [n, a] = (0, O.useState)({
                         seenProducts: [],
                         seenSections: [],
                         seenSubscriptionProducts: []
                     }),
-                    i = (0, L.useCallback)(() => {
+                    i = (0, O.useCallback)(() => {
                         a({
                             seenProducts: [...t.current],
                             seenSections: [...e.current],
@@ -1472,7 +1476,7 @@
                             })
                         })
                     }, []),
-                    [s, l] = (0, L.useMemo)(() => {
+                    [s, l] = (0, O.useMemo)(() => {
                         let e;
                         return [function() {
                             for (var t = arguments.length, r = Array(t), n = 0; n < t; n++) r[n] = arguments[n];
@@ -1483,28 +1487,28 @@
                             clearTimeout(e)
                         }]
                     }, [i]),
-                    o = (0, L.useMemo)(() => [{
-                        attr: eV,
+                    o = (0, O.useMemo)(() => [{
+                        attr: eH,
                         record: t => {
-                            let r = t.getAttribute(eV);
+                            let r = t.getAttribute(eH);
                             return !(!r || e.current.has(r)) && (e.current.add(r), !0)
                         }
                     }, {
-                        attr: eW,
+                        attr: eQ,
                         record: e => {
-                            let r = e.getAttribute(eW);
+                            let r = e.getAttribute(eQ);
                             return !(!r || t.current.has(r)) && (t.current.add(r), !0)
                         }
                     }, {
-                        attr: eK,
+                        attr: e$,
                         record: e => {
-                            let t = e.getAttribute(eK);
+                            let t = e.getAttribute(e$);
                             if (!t || r.current.has(t)) return !1;
-                            let n = e.getAttribute(eH) ?? "";
+                            let n = e.getAttribute(eq) ?? "";
                             return r.current.set(t, n), !0
                         }
                     }], []),
-                    c = (0, L.useCallback)((e, t) => {
+                    c = (0, O.useCallback)((e, t) => {
                         let r = !1;
                         for (let n of e) {
                             if (!n.isIntersecting) continue;
@@ -1523,12 +1527,12 @@
                         }
                         r && s()
                     }, [s, o]);
-                return (0, L.useEffect)(() => {
-                    let e = J.document?.getElementById("robux-redesign-page");
+                return (0, O.useEffect)(() => {
+                    let e = et.document?.getElementById("robux-redesign-page");
                     if (!e) return;
-                    let t = [...e.querySelectorAll(eQ)];
+                    let t = [...e.querySelectorAll(eY)];
                     if (0 === t.length) return;
-                    let r = (0, ez.observeIntersection)({
+                    let r = (0, eK.observeIntersection)({
                         elements: t,
                         threshold: .5
                     }, c);
@@ -1546,7 +1550,7 @@
                     VIEW_SHOWN: g,
                     USER_INPUT: x
                 }
-            } = D.paymentFlowAnalyticsService, b = (0, L.useMemo)(() => ({
+            } = G.paymentFlowAnalyticsService, b = (0, O.useMemo)(() => ({
                 applePayAvailability: c?.toString() ?? "",
                 ctx: l.ctx ?? "",
                 limitedTimeBonusItemIds: e.ids.toString(),
@@ -1556,9 +1560,9 @@
                 robuxPackageIds: n.toString(),
                 sectionNames: i.toString(),
                 subscriptionProductIds: s.toString()
-            }), [c, l, e, r, t, a, n, i, s]), y = (0, L.useCallback)((e, t, r, n) => {
-                D.paymentFlowAnalyticsService.sendUserPurchaseFlowEvent({
-                    triggerContext: eG(o, e === p),
+            }), [c, l, e, r, t, a, n, i, s]), y = (0, O.useCallback)((e, t, r, n) => {
+                G.paymentFlowAnalyticsService.sendUserPurchaseFlowEvent({
+                    triggerContext: eW(o, e === p),
                     isMidPurchaseStep: !0,
                     viewName: e,
                     purchaseEventType: t,
@@ -1568,17 +1572,17 @@
                         ...n
                     }
                 })
-            }, [b, p, o]), v = (0, L.useCallback)((e, t, r) => {
-                D.paymentFlowAnalyticsService.sendUserPurchaseStatusEvent({
-                    triggerContext: eG(o, e === p),
+            }, [b, p, o]), v = (0, O.useCallback)((e, t, r) => {
+                G.paymentFlowAnalyticsService.sendUserPurchaseStatusEvent({
+                    triggerContext: eW(o, e === p),
                     status: t,
                     viewMessage: r,
                     viewName: e
                 })
             }, [p, o]);
-            return (0, L.useEffect)(() => {
+            return (0, O.useEffect)(() => {
                 void 0 !== a && void 0 !== c && y(h, g)
-            }, [a, c, y, h, g]), (0, L.useEffect)(() => {
+            }, [a, c, y, h, g]), (0, O.useEffect)(() => {
                 (u.length > 0 || d.length > 0 || m.length > 0) && y(f, x, void 0, {
                     seenProducts: u.toString(),
                     seenSections: d.toString(),
@@ -1601,36 +1605,36 @@
                 ENUM_PURCHASE_EVENT_TYPE: {
                     USER_INPUT: a
                 }
-            } = D.paymentFlowAnalyticsService;
+            } = G.paymentFlowAnalyticsService;
             return {
-                trackGiftCardClick: (0, L.useCallback)(() => {
+                trackGiftCardClick: (0, O.useCallback)(() => {
                     t(n, a, r)
                 }, [t, n, a, r])
             }
         }(r), a = function(e) {
             let {
                 trackFlow: t
-            } = e, r = (0, L.useCallback)(() => {
-                t(e2, e5, e8), ey("TransferSendImpression")
-            }, [t]), n = (0, L.useCallback)(() => {
-                t(e2, e5, e6), ey("TransferSendSheetView")
-            }, [t]), a = (0, L.useCallback)(e => {
-                t(e2, e4, e9), ey("TransferSendUserSelected", {
+            } = e, r = (0, O.useCallback)(() => {
+                t(e4, e6, e7), eP("TransferSendImpression")
+            }, [t]), n = (0, O.useCallback)(() => {
+                t(e4, e6, te), eP("TransferSendSheetView")
+            }, [t]), a = (0, O.useCallback)(e => {
+                t(e4, e9, tt), eP("TransferSendUserSelected", {
                     source: e
                 })
-            }, [t]), i = (0, L.useCallback)(() => {
-                t(e3, e5, e7), ey("TransferPendingImpression")
+            }, [t]), i = (0, O.useCallback)(() => {
+                t(e8, e6, tr), eP("TransferPendingImpression")
             }, [t]);
             return {
                 trackTransferSendImpression: r,
                 trackTransferSendSheetView: n,
                 trackTransferSendUserSelected: a,
                 trackPendingTransfersImpression: i,
-                trackPendingTransfersSheetView: (0, L.useCallback)(() => {
-                    t(e3, e5, te), ey("TransferPendingSheetView")
+                trackPendingTransfersSheetView: (0, O.useCallback)(() => {
+                    t(e8, e6, tn), eP("TransferPendingSheetView")
                 }, [t]),
-                trackPendingTransfersAcceptClick: (0, L.useCallback)(() => {
-                    t(e3, e4, tt), ey("TransferPendingAcceptClick")
+                trackPendingTransfersAcceptClick: (0, O.useCallback)(() => {
+                    t(e8, e9, ta), eP("TransferPendingAcceptClick")
                 }, [t])
             }
         }(r), i = function(e) {
@@ -1651,18 +1655,18 @@
                     USER_INPUT: o,
                     VIEW_SHOWN: c
                 }
-            } = D.paymentFlowAnalyticsService, u = (0, L.useCallback)(() => {
+            } = G.paymentFlowAnalyticsService, u = (0, O.useCallback)(() => {
                 t(i, o, r)
-            }, [t, i, o, r]), d = (0, L.useCallback)(() => {
+            }, [t, i, o, r]), d = (0, O.useCallback)(() => {
                 t(s, o, n)
             }, [t, s, o, n]);
             return {
                 trackSamsungPaymentMethodsCancel: u,
                 trackSamsungPaymentMethodsRedeemCreditClick: d,
-                trackSamsungPaymentMethodsSamsungPayClick: (0, L.useCallback)(() => {
+                trackSamsungPaymentMethodsSamsungPayClick: (0, O.useCallback)(() => {
                     t(l, o, a)
                 }, [t, l, o, a]),
-                trackSamsungPaymentMethodsShown: (0, L.useCallback)(() => {
+                trackSamsungPaymentMethodsShown: (0, O.useCallback)(() => {
                     t(i, c)
                 }, [t, i, c])
             }
@@ -1677,9 +1681,9 @@
                 ENUM_PURCHASE_EVENT_TYPE: {
                     USER_INPUT: a
                 }
-            } = D.paymentFlowAnalyticsService;
+            } = G.paymentFlowAnalyticsService;
             return {
-                trackPurchase: (0, L.useCallback)((e, i, s) => {
+                trackPurchase: (0, O.useCallback)((e, i, s) => {
                     let {
                         defaultDisplayName: l,
                         productId: o
@@ -1708,19 +1712,19 @@
                     USER_INPUT: o,
                     VIEW_SHOWN: c
                 }
-            } = D.paymentFlowAnalyticsService, u = (0, L.useCallback)(() => {
+            } = G.paymentFlowAnalyticsService, u = (0, O.useCallback)(() => {
                 t(i, c)
-            }, [t, i, c]), d = (0, L.useCallback)(e => {
+            }, [t, i, c]), d = (0, O.useCallback)(e => {
                 t(e ? s : l, o, a)
             }, [t, s, l, o, a]);
             return {
                 trackEconomicRestrictionErrorShown: u,
                 trackPurchaseDisabledConfirm: d,
-                trackPurchaseDisabledNeutral: (0, L.useCallback)(e => {
+                trackPurchaseDisabledNeutral: (0, O.useCallback)(e => {
                     t(e ? s : l, o, e ? n : r)
                 }, [t, s, l, o, n, r]),
-                trackPurchaseDisabledShown: (0, L.useCallback)(e => {
-                    t(e ? s : l, c, e1.UserPurchaseSettingFailureReason.PurchaseNotEnabled)
+                trackPurchaseDisabledShown: (0, O.useCallback)(e => {
+                    t(e ? s : l, c, e5.UserPurchaseSettingFailureReason.PurchaseNotEnabled)
                 }, [t, s, l, c])
             }
         }(r), o = function(e) {
@@ -1733,9 +1737,9 @@
                 ENUM_PURCHASE_EVENT_TYPE: {
                     VIEW_SHOWN: n
                 }
-            } = D.paymentFlowAnalyticsService;
+            } = G.paymentFlowAnalyticsService;
             return {
-                trackPurchaseWarningShown: (0, L.useCallback)(e => {
+                trackPurchaseWarningShown: (0, O.useCallback)(e => {
                     t(r, n, e)
                 }, [t, r, n])
             }
@@ -1761,15 +1765,15 @@
                     USER_INPUT: u,
                     VIEW_SHOWN: d
                 }
-            } = D.paymentFlowAnalyticsService, m = (0, L.useCallback)(() => {
+            } = G.paymentFlowAnalyticsService, m = (0, O.useCallback)(() => {
                 t(o, u, i)
-            }, [t, o, u, i]), p = (0, L.useCallback)(() => {
+            }, [t, o, u, i]), p = (0, O.useCallback)(() => {
                 t(o, u, s)
-            }, [t, o, u, s]), h = (0, L.useCallback)(() => {
+            }, [t, o, u, s]), h = (0, O.useCallback)(() => {
                 t(o, u, a)
-            }, [t, o, u, a]), f = (0, L.useCallback)(e => {
+            }, [t, o, u, a]), f = (0, O.useCallback)(e => {
                 r(o, n, e?.productId)
-            }, [r, o, n]), g = (0, L.useCallback)(e => {
+            }, [r, o, n]), g = (0, O.useCallback)(e => {
                 let {
                     productId: r
                 } = e;
@@ -1778,7 +1782,7 @@
                 })
             }, [t, o, d]);
             return {
-                trackQuickPay3DSShown: (0, L.useCallback)(() => {
+                trackQuickPay3DSShown: (0, O.useCallback)(() => {
                     t(c, d)
                 }, [t, c, d]),
                 trackQuickPayClick: m,
@@ -1786,7 +1790,7 @@
                 trackQuickPayClose: h,
                 trackQuickPayPurchase: f,
                 trackQuickPayShown: g,
-                trackQuickPayUseDifferentPaymentMethod: (0, L.useCallback)(() => {
+                trackQuickPayUseDifferentPaymentMethod: (0, O.useCallback)(() => {
                     t(o, u, l)
                 }, [t, o, u, l])
             }
@@ -1805,43 +1809,43 @@
                     USER_INPUT: i,
                     VIEW_SHOWN: s
                 }
-            } = D.paymentFlowAnalyticsService;
+            } = G.paymentFlowAnalyticsService;
             return {
-                trackRobuxGiftClick: (0, L.useCallback)(() => {
+                trackRobuxGiftClick: (0, O.useCallback)(() => {
                     t(n, i, r)
                 }, [t, n, i, r]),
-                trackRobuxGiftShown: (0, L.useCallback)(() => {
+                trackRobuxGiftShown: (0, O.useCallback)(() => {
                     t(a, s, r)
                 }, [t, a, s, r])
             }
         }(r), d = function(e) {
             let {
                 trackFlow: t
-            } = e, r = (0, L.useCallback)(e => {
-                t(eq, eX, void 0, {
+            } = e, r = (0, O.useCallback)(e => {
+                t(eJ, e0, void 0, {
                     isFreeTrial: String(e)
                 })
             }, [t]);
             return {
                 trackSubscriptionV2Shown: r,
-                trackSubscriptionV2SubscribeClick: (0, L.useCallback)(e => {
+                trackSubscriptionV2SubscribeClick: (0, O.useCallback)(e => {
                     let {
                         isFreeTrial: r,
                         productId: n,
                         isRedirect: a
                     } = e;
-                    ey("SubscriptionV2SubscribeClick", {
+                    eP("SubscriptionV2SubscribeClick", {
                         isFreeTrial: String(r),
                         productId: n,
                         isRedirect: String(a)
-                    }), t(eq, eY, r ? eJ : eZ, {
+                    }), t(eJ, eZ, r ? e1 : e2, {
                         isFreeTrial: String(r),
                         productId: n,
                         isRedirect: String(a)
                     })
                 }, [t]),
-                trackSubscriptionV2LearnMoreClick: (0, L.useCallback)(() => {
-                    ey("SubscriptionV2LearnMoreClick"), t(eq, eY, e0)
+                trackSubscriptionV2LearnMoreClick: (0, O.useCallback)(() => {
+                    eP("SubscriptionV2LearnMoreClick"), t(eJ, eZ, e3)
                 }, [t])
             }
         }(r), m = function(e) {
@@ -1849,20 +1853,20 @@
                 trackFlow: t
             } = e;
             return {
-                trackRedirectClick: (0, L.useCallback)(e => {
+                trackRedirectClick: (0, O.useCallback)(e => {
                     let {
                         product: r,
                         isSubscriptionRedirect: n,
                         loginRedirectVersion: a
                     } = e;
-                    ey("MobileToWebPurchaseRedirect", {
+                    eP("MobileToWebPurchaseRedirect", {
                         version: a ?? "none"
-                    }), t(r ? n ? D.paymentFlowAnalyticsService.ENUM_VIEW_NAME.PREMIUM_PURCHASE : D.paymentFlowAnalyticsService.ENUM_VIEW_NAME.PRODUCT_PURCHASE : D.paymentFlowAnalyticsService.ENUM_VIEW_NAME.ROBUX_REDIRECT_BANNER, D.paymentFlowAnalyticsService.ENUM_PURCHASE_EVENT_TYPE.USER_INPUT, D.paymentFlowAnalyticsService.ENUM_VIEW_MESSAGE.BUY_REDIRECT, {
+                    }), t(r ? n ? G.paymentFlowAnalyticsService.ENUM_VIEW_NAME.PREMIUM_PURCHASE : G.paymentFlowAnalyticsService.ENUM_VIEW_NAME.PRODUCT_PURCHASE : G.paymentFlowAnalyticsService.ENUM_VIEW_NAME.ROBUX_REDIRECT_BANNER, G.paymentFlowAnalyticsService.ENUM_PURCHASE_EVENT_TYPE.USER_INPUT, G.paymentFlowAnalyticsService.ENUM_VIEW_MESSAGE.BUY_REDIRECT, {
                         productId: r?.productId.toString() ?? ""
                     })
                 }, [t])
             }
-        }(r), p = (0, L.useMemo)(() => ({
+        }(r), p = (0, O.useMemo)(() => ({
             ...n,
             ...i,
             ...s,
@@ -1874,29 +1878,29 @@
             ...m,
             ...a
         }), [n, i, s, l, o, c, u, d, m, a]);
-        return (0, U.jsx)(eR.Provider, {
+        return (0, L.jsx)(e_.Provider, {
             value: p,
             children: t
         })
     }
-    var tn = e.i(579149),
-        ta = e.i(420546),
-        ti = e.i(679025),
-        ts = e.i(695524),
-        tl = L;
-    let to = "u" < typeof __SENTRY_DEBUG__ || __SENTRY_DEBUG__;
-    var tc = e.i(285586),
-        tu = e.i(59172);
-    let td = Symbol.for("react.forward_ref"),
-        tm = Symbol.for("react.memo"),
-        tp = {};
-    tp[td] = {
+    var ts = e.i(579149),
+        tl = e.i(420546),
+        to = e.i(679025),
+        tc = e.i(695524),
+        tu = O;
+    let td = "u" < typeof __SENTRY_DEBUG__ || __SENTRY_DEBUG__;
+    var tm = e.i(285586),
+        tp = e.i(59172);
+    let th = Symbol.for("react.forward_ref"),
+        tf = Symbol.for("react.memo"),
+        tg = {};
+    tg[th] = {
         $$typeof: !0,
         render: !0,
         defaultProps: !0,
         displayName: !0,
         propTypes: !0
-    }, tp[tm] = {
+    }, tg[tf] = {
         $$typeof: !0,
         compare: !0,
         defaultProps: !0,
@@ -1904,12 +1908,12 @@
         propTypes: !0,
         type: !0
     }, Object.defineProperty.bind(Object), Object.getOwnPropertyNames.bind(Object), Object.getOwnPropertySymbols?.bind(Object), Object.getOwnPropertyDescriptor.bind(Object), Object.getPrototypeOf.bind(Object);
-    let th = {
+    let tx = {
         componentStack: null,
         error: null,
         eventId: null
     };
-    class tf extends tl.Component {
+    class tb extends tu.Component {
         componentDidCatch(e, t) {
             let {
                 componentStack: r
@@ -1919,13 +1923,13 @@
                 showDialog: i,
                 dialogOptions: s
             } = this.props;
-            (0, ta.withScope)(l => {
+            (0, tl.withScope)(l => {
                 n && n(l, e, r);
                 let o = function(e, t, r) {
                     let n, {
                         componentStack: a
                     } = t;
-                    if (null !== (n = L.version.match(/^([^.]+)/)) && parseInt(n[0]) >= 17 && (0, tu.isError)(e) && a) {
+                    if (null !== (n = O.version.match(/^([^.]+)/)) && parseInt(n[0]) >= 17 && (0, tp.isError)(e) && a) {
                         let t, r = Error(e.message);
                         r.name = `React ErrorBoundary ${e.name}`, r.stack = a, t = new WeakSet,
                             function e(r, n) {
@@ -1935,16 +1939,16 @@
                                 }
                             }(e, r)
                     }
-                    return (0, ta.withScope)(t => (t.setContext("react", {
+                    return (0, tl.withScope)(t => (t.setContext("react", {
                         componentStack: a
-                    }), (0, tc.captureException)(e, r)))
+                    }), (0, tm.captureException)(e, r)))
                 }(e, t, {
                     mechanism: {
                         handled: null != this.props.handled ? this.props.handled : !!this.props.fallback,
                         type: "auto.function.react.error_boundary"
                     }
                 });
-                a && a(e, r, o), i && (this._lastEventId = o, this._openFallbackReportDialog && (0, ti.showReportDialog)({
+                a && a(e, r, o), i && (this._lastEventId = o, this._openFallbackReportDialog && (0, to.showReportDialog)({
                     ...s,
                     eventId: o
                 })), this.setState({
@@ -1968,7 +1972,7 @@
             } = this.state, {
                 onUnmount: n
             } = this.props;
-            n && (this.state === th ? n(null, null, null) : n(e, t, r)), this._cleanupHook && (this._cleanupHook(), this._cleanupHook = void 0)
+            n && (this.state === tx ? n(null, null, null) : n(e, t, r)), this._cleanupHook && (this._cleanupHook(), this._cleanupHook = void 0)
         }
         resetErrorBoundary() {
             let {
@@ -1978,7 +1982,7 @@
                 componentStack: r,
                 eventId: n
             } = this.state;
-            e && e(t, r, n), this.setState(th)
+            e && e(t, r, n), this.setState(tx)
         }
         render() {
             let {
@@ -1986,29 +1990,29 @@
                 children: t
             } = this.props, r = this.state;
             if (null === r.componentStack) return "function" == typeof t ? t() : t;
-            let n = "function" == typeof e ? tl.createElement(e, {
+            let n = "function" == typeof e ? tu.createElement(e, {
                 error: r.error,
                 componentStack: r.componentStack,
                 resetError: () => this.resetErrorBoundary(),
                 eventId: r.eventId
             }) : e;
-            return tl.isValidElement(n) ? n : (e && to && ts.debug.warn("fallback did not produce a valid ReactElement"), null)
+            return tu.isValidElement(n) ? n : (e && td && tc.debug.warn("fallback did not produce a valid ReactElement"), null)
         }
         constructor(e) {
-            super(e), this.state = th, this._openFallbackReportDialog = !0;
-            const t = (0, ta.getClient)();
+            super(e), this.state = tx, this._openFallbackReportDialog = !0;
+            const t = (0, tl.getClient)();
             t && e.showDialog && (this._openFallbackReportDialog = !1, this._cleanupHook = t.on("afterSendEvent", t => {
-                !t.type && this._lastEventId && t.event_id === this._lastEventId && (0, ti.showReportDialog)({
+                !t.type && this._lastEventId && t.event_id === this._lastEventId && (0, to.showReportDialog)({
                     ...e.dialogOptions,
                     eventId: this._lastEventId
                 })
             }))
         }
     }
-    var tg = e.i(698178),
-        tx = e.i(251734);
+    var ty = e.i(698178),
+        tv = e.i(251734);
 
-    function tb(e) {
+    function tS(e) {
         let {
             isOpen: t,
             onConfirm: r,
@@ -2020,45 +2024,45 @@
             confirmation: o,
             continueLabel: c,
             cancelLabel: u
-        } = e, [d, m] = (0, L.useState)(!1), p = (0, L.useRef)(!1);
-        (0, L.useEffect)(() => {
-            t && !p.current && (p.current = !0, D.paymentFlowAnalyticsService.sendUserPurchaseFlowEvent({
+        } = e, [d, m] = (0, O.useState)(!1), p = (0, O.useRef)(!1);
+        (0, O.useEffect)(() => {
+            t && !p.current && (p.current = !0, G.paymentFlowAnalyticsService.sendUserPurchaseFlowEvent({
                 triggerContext: i,
                 isMidPurchaseStep: !0,
-                viewName: D.paymentFlowAnalyticsService.ENUM_VIEW_NAME.FIRST_TIME_PURCHASE_CONSENT_MODAL,
-                purchaseEventType: D.paymentFlowAnalyticsService.ENUM_PURCHASE_EVENT_TYPE.VIEW_SHOWN
+                viewName: G.paymentFlowAnalyticsService.ENUM_VIEW_NAME.FIRST_TIME_PURCHASE_CONSENT_MODAL,
+                purchaseEventType: G.paymentFlowAnalyticsService.ENUM_PURCHASE_EVENT_TYPE.VIEW_SHOWN
             })), t || (p.current = !1)
         }, [t, i]);
-        let h = (0, L.useCallback)(e => {
-                m(!0 === e), D.paymentFlowAnalyticsService.sendUserPurchaseFlowEvent({
+        let h = (0, O.useCallback)(e => {
+                m(!0 === e), G.paymentFlowAnalyticsService.sendUserPurchaseFlowEvent({
                     triggerContext: i,
                     isMidPurchaseStep: !0,
-                    viewName: D.paymentFlowAnalyticsService.ENUM_VIEW_NAME.FIRST_TIME_PURCHASE_CONSENT_MODAL,
-                    purchaseEventType: D.paymentFlowAnalyticsService.ENUM_PURCHASE_EVENT_TYPE.USER_INPUT,
+                    viewName: G.paymentFlowAnalyticsService.ENUM_VIEW_NAME.FIRST_TIME_PURCHASE_CONSENT_MODAL,
+                    purchaseEventType: G.paymentFlowAnalyticsService.ENUM_PURCHASE_EVENT_TYPE.USER_INPUT,
                     eventMetadata: {
                         checkboxState: String(!0 === e)
                     }
                 })
             }, [i]),
-            f = (0, L.useCallback)(() => {
-                a("FirstTimePurchaseConsent_Confirmed"), D.paymentFlowAnalyticsService.sendUserPurchaseFlowEvent({
+            f = (0, O.useCallback)(() => {
+                a("FirstTimePurchaseConsent_Confirmed"), G.paymentFlowAnalyticsService.sendUserPurchaseFlowEvent({
                     triggerContext: i,
                     isMidPurchaseStep: !0,
-                    viewName: D.paymentFlowAnalyticsService.ENUM_VIEW_NAME.FIRST_TIME_PURCHASE_CONSENT_MODAL,
-                    purchaseEventType: D.paymentFlowAnalyticsService.ENUM_PURCHASE_EVENT_TYPE.USER_INPUT,
-                    viewMessage: D.paymentFlowAnalyticsService.ENUM_VIEW_MESSAGE.CONFIRM
+                    viewName: G.paymentFlowAnalyticsService.ENUM_VIEW_NAME.FIRST_TIME_PURCHASE_CONSENT_MODAL,
+                    purchaseEventType: G.paymentFlowAnalyticsService.ENUM_PURCHASE_EVENT_TYPE.USER_INPUT,
+                    viewMessage: G.paymentFlowAnalyticsService.ENUM_VIEW_MESSAGE.CONFIRM
                 }), m(!1), r()
             }, [r, a, i]),
-            g = (0, L.useCallback)(() => {
-                a("FirstTimePurchaseConsent_Cancelled"), D.paymentFlowAnalyticsService.sendUserPurchaseFlowEvent({
+            g = (0, O.useCallback)(() => {
+                a("FirstTimePurchaseConsent_Cancelled"), G.paymentFlowAnalyticsService.sendUserPurchaseFlowEvent({
                     triggerContext: i,
                     isMidPurchaseStep: !0,
-                    viewName: D.paymentFlowAnalyticsService.ENUM_VIEW_NAME.FIRST_TIME_PURCHASE_CONSENT_MODAL,
-                    purchaseEventType: D.paymentFlowAnalyticsService.ENUM_PURCHASE_EVENT_TYPE.USER_INPUT,
-                    viewMessage: D.paymentFlowAnalyticsService.ENUM_VIEW_MESSAGE.CANCEL
+                    viewName: G.paymentFlowAnalyticsService.ENUM_VIEW_NAME.FIRST_TIME_PURCHASE_CONSENT_MODAL,
+                    purchaseEventType: G.paymentFlowAnalyticsService.ENUM_PURCHASE_EVENT_TYPE.USER_INPUT,
+                    viewMessage: G.paymentFlowAnalyticsService.ENUM_VIEW_MESSAGE.CANCEL
                 }), m(!1), n()
             }, [n, a, i]);
-        return (0, U.jsx)(tx.Dialog, {
+        return (0, L.jsx)(tv.Dialog, {
             open: t,
             onOpenChange: e => {
                 e || g()
@@ -2066,37 +2070,37 @@
             size: "Small",
             isModal: !0,
             hasCloseAffordance: !1,
-            children: (0, U.jsxs)(tx.DialogContent, {
-                children: [(0, U.jsxs)(tx.DialogBody, {
-                    children: [(0, U.jsx)("div", {
+            children: (0, L.jsxs)(tv.DialogContent, {
+                children: [(0, L.jsxs)(tv.DialogBody, {
+                    children: [(0, L.jsx)("div", {
                         className: "text-heading-small content-emphasis padding-y-[4px]",
                         children: s
-                    }), (0, U.jsx)("div", {
+                    }), (0, L.jsx)("div", {
                         className: "text-body-medium padding-bottom-large content-default",
                         children: l
-                    }), (0, U.jsxs)("div", {
+                    }), (0, L.jsxs)("div", {
                         className: "flex flex-row gap-medium",
-                        children: [(0, U.jsx)(tg.Checkbox, {
+                        children: [(0, L.jsx)(ty.Checkbox, {
                             isChecked: d,
                             onCheckedChange: h,
                             label: "",
                             size: "Medium",
                             placement: "Start"
-                        }), (0, U.jsx)("div", {
+                        }), (0, L.jsx)("div", {
                             className: "text-body-small content-emphasis",
                             children: o
                         })]
                     })]
-                }), (0, U.jsx)(tx.DialogFooter, {
-                    children: (0, U.jsxs)("div", {
+                }), (0, L.jsx)(tv.DialogFooter, {
+                    children: (0, L.jsxs)("div", {
                         className: "flex flex-col gap-small padding-top-xsmall",
-                        children: [(0, U.jsx)(O.Button, {
+                        children: [(0, L.jsx)(V.Button, {
                             isDisabled: !d,
                             onClick: f,
                             variant: "Emphasis",
                             size: "Medium",
                             children: c
-                        }), (0, U.jsx)(O.Button, {
+                        }), (0, L.jsx)(V.Button, {
                             className: "width-full",
                             onClick: g,
                             variant: "Standard",
@@ -2108,7 +2112,7 @@
             })
         })
     }
-    let ty = (0, L.createContext)({
+    let tP = (0, O.createContext)({
         purchaseDisabled: {
             closeModal: () => void 0,
             hasUserDisabledPurchases: !1,
@@ -2159,16 +2163,16 @@
             openModal: () => void 0
         }
     });
-    var tv = ((o = {}).U13PaymentModal = "U13PaymentModal", o.U13MonthlyThreshold1Modal = "U13MonthlyThreshold1Modal", o.U13MonthlyThreshold2Modal = "U13MonthlyThreshold2Modal", o.ParentalConsentWarningPaymentModal13To17 = "ParentalConsentWarningPaymentModal13To17", o);
-    let tS = async (e, t) => eT(eN.GET, ek.GET_PURCHASE_WARNING, {
-        url: `${ei.EnvironmentUrls.apiGatewayUrl}/purchase-warning/v1/purchase-warnings`,
+    var tC = ((d = {}).U13PaymentModal = "U13PaymentModal", d.U13MonthlyThreshold1Modal = "U13MonthlyThreshold1Modal", d.U13MonthlyThreshold2Modal = "U13MonthlyThreshold2Modal", d.ParentalConsentWarningPaymentModal13To17 = "ParentalConsentWarningPaymentModal13To17", d);
+    let tE = async (e, t) => eM(ej.GET, eA.GET_PURCHASE_WARNING, {
+        url: `${eo.EnvironmentUrls.apiGatewayUrl}/purchase-warning/v1/purchase-warnings`,
         withCredentials: !0
     }, {
         is13To17ScaryModalEnabled: e,
         productId: t
-    }), tP = async e => eP({
+    }), tw = async e => ew({
         method: "POST",
-        url: `${ei.EnvironmentUrls.apiGatewayUrl}/purchase-warning/v1/purchase-warnings/acknowledge`,
+        url: `${eo.EnvironmentUrls.apiGatewayUrl}/purchase-warning/v1/purchase-warnings/acknowledge`,
         data: {
             acknowledgement: `Confirmed${e}`
         },
@@ -2178,9 +2182,9 @@
         eventCounterProps: {
             call: "AcknowledgePurchaseWarning"
         }
-    }), tC = "<br /><br />";
+    }), tN = "<br /><br />";
 
-    function tE() {
+    function tk() {
         let {
             purchaseWarning: {
                 action: e,
@@ -2188,49 +2192,49 @@
                 continuePurchase: r,
                 isOpen: n
             }
-        } = (0, L.useContext)(ty), a = (0, er.useTranslations)("Feature.Premium"), i = (0, er.useTranslations)("CommonUI.Controls"), s = (0, L.useMemo)(() => {
+        } = (0, O.useContext)(tP), a = (0, ei.useTranslations)("Feature.Premium"), i = (0, ei.useTranslations)("CommonUI.Controls"), s = (0, O.useMemo)(() => {
             switch (e) {
-                case tv.U13PaymentModal:
+                case tC.U13PaymentModal:
                     return a("Description.ScaryModalBodyNew", {
-                        lineBreak: tC
+                        lineBreak: tN
                     });
-                case tv.ParentalConsentWarningPaymentModal13To17:
+                case tC.ParentalConsentWarningPaymentModal13To17:
                     return a("Description.ScaryModalBody13To17");
-                case tv.U13MonthlyThreshold1Modal:
+                case tC.U13MonthlyThreshold1Modal:
                     return a("Description.ScaryModalThreshold1Body", {
-                        linebreak: tC
+                        linebreak: tN
                     });
-                case tv.U13MonthlyThreshold2Modal:
+                case tC.U13MonthlyThreshold2Modal:
                     return a("Description.ScaryModalThreshold2Body", {
-                        linebreak: tC
+                        linebreak: tN
                     });
                 default:
                     return null
             }
-        }, [e, a]), l = (0, L.useCallback)(() => {
-            e && tP(e).then(() => {
-                ey("PurchaseWarningAcknowledged")
+        }, [e, a]), l = (0, O.useCallback)(() => {
+            e && tw(e).then(() => {
+                eP("PurchaseWarningAcknowledged")
             }).catch(e => {
-                ev("PurchaseWarningAcknowledgeFailed", {}, e)
+                eC("PurchaseWarningAcknowledgeFailed", {}, e)
             }).finally(() => {
                 t(), r?.()
             })
         }, [e, t, r]);
-        return (0, U.jsx)(tx.Dialog, {
+        return (0, L.jsx)(tv.Dialog, {
             open: n,
             onOpenChange: t,
             isModal: !0,
             hasCloseAffordance: !0,
             closeLabel: i("Action.Close"),
             size: "Medium",
-            children: (0, U.jsxs)(tx.DialogContent, {
-                children: [(0, U.jsxs)(tx.DialogBody, {
+            children: (0, L.jsxs)(tv.DialogContent, {
+                children: [(0, L.jsxs)(tv.DialogBody, {
                     className: "flex flex-col gap-medium",
-                    children: [(0, U.jsx)(tx.DialogTitle, {
+                    children: [(0, L.jsx)(tv.DialogTitle, {
                         children: a("Heading.ScaryModalTitle")
-                    }), (0, U.jsx)("div", {
-                        children: s && (0, U.jsx)("div", {
-                            children: (0, U.jsx)("span", {
+                    }), (0, L.jsx)("div", {
+                        children: s && (0, L.jsx)("div", {
+                            children: (0, L.jsx)("span", {
                                 className: "text-description",
                                 dangerouslySetInnerHTML: {
                                     __html: s
@@ -2238,15 +2242,15 @@
                             })
                         })
                     })]
-                }), (0, U.jsx)(tx.DialogFooter, {
-                    children: (0, U.jsxs)("div", {
+                }), (0, L.jsx)(tv.DialogFooter, {
+                    children: (0, L.jsxs)("div", {
                         className: "flex flex-row gap-medium",
-                        children: [(0, U.jsx)(O.Button, {
+                        children: [(0, L.jsx)(V.Button, {
                             onClick: l,
                             variant: "Emphasis",
                             className: "width-full",
                             children: i("Action.OK")
-                        }), (0, U.jsx)(O.Button, {
+                        }), (0, L.jsx)(V.Button, {
                             onClick: t,
                             variant: "Standard",
                             className: "width-full",
@@ -2258,7 +2262,7 @@
         })
     }
 
-    function tw() {
+    function tT() {
         let {
             purchaseDisabled: {
                 closeModal: e,
@@ -2266,15 +2270,15 @@
                 isOpen: r,
                 showVPCOptimization: n
             }
-        } = (0, L.useContext)(ty), {
+        } = (0, O.useContext)(tP), {
             trackPurchaseDisabledConfirm: a,
             trackPurchaseDisabledNeutral: i
-        } = (0, L.useContext)(eR), s = (0, er.useTranslations)("Common.VerifiedParentalConsent"), [l, o] = (0, L.useMemo)(() => n && !t ? [s("Label.RequestPending"), s("Description.ExistingPendingRequestRedirectToSettings")] : n && t ? [s("Label.UpdateYourSettings"), s("Description.EnablePurchasesInSettings")] : [s("Label.AskParent"), s("Description.SpendingRestrictionWithSettings")], [n, t, s]), c = (0, L.useCallback)(() => {
-            void 0 !== J.window && (a(n), J.window.location.href = "/my/account#!/billing")
-        }, [a, n]), u = (0, L.useCallback)(() => {
+        } = (0, O.useContext)(e_), s = (0, ei.useTranslations)("Common.VerifiedParentalConsent"), [l, o] = (0, O.useMemo)(() => n && !t ? [s("Label.RequestPending"), s("Description.ExistingPendingRequestRedirectToSettings")] : n && t ? [s("Label.UpdateYourSettings"), s("Description.EnablePurchasesInSettings")] : [s("Label.AskParent"), s("Description.SpendingRestrictionWithSettings")], [n, t, s]), c = (0, O.useCallback)(() => {
+            void 0 !== et.window && (a(n), et.window.location.href = "/my/account#!/billing")
+        }, [a, n]), u = (0, O.useCallback)(() => {
             i(n), e()
         }, [i, n, e]);
-        return (0, U.jsx)(tx.Dialog, {
+        return (0, L.jsx)(tv.Dialog, {
             open: r,
             onOpenChange: e => {
                 e || u()
@@ -2283,25 +2287,25 @@
             isModal: !0,
             hasCloseAffordance: !0,
             closeLabel: s("Action.Close"),
-            children: (0, U.jsxs)(tx.DialogContent, {
-                children: [(0, U.jsxs)(tx.DialogBody, {
-                    children: [(0, U.jsx)(tx.DialogTitle, {
-                        children: (0, U.jsx)("div", {
+            children: (0, L.jsxs)(tv.DialogContent, {
+                children: [(0, L.jsxs)(tv.DialogBody, {
+                    children: [(0, L.jsx)(tv.DialogTitle, {
+                        children: (0, L.jsx)("div", {
                             children: l
                         })
-                    }), (0, U.jsx)("div", {
+                    }), (0, L.jsx)("div", {
                         className: "text-body-large",
                         children: o
                     })]
-                }), (0, U.jsx)(tx.DialogFooter, {
-                    children: (0, U.jsxs)("div", {
+                }), (0, L.jsx)(tv.DialogFooter, {
+                    children: (0, L.jsxs)("div", {
                         className: "flex flex-row gap-small",
-                        children: [(0, U.jsx)(O.Button, {
+                        children: [(0, L.jsx)(V.Button, {
                             onClick: c,
                             variant: "Emphasis",
                             className: "width-full",
                             children: s("Action.GoToSettings")
-                        }), (0, U.jsx)(O.Button, {
+                        }), (0, L.jsx)(V.Button, {
                             onClick: u,
                             variant: "Standard",
                             className: "width-full",
@@ -2312,102 +2316,102 @@
             })
         })
     }
-    var tN = e.i(424935),
-        tk = e.i(677810),
-        tT = e.i(263730),
-        tj = e.i(698870);
+    var tj = e.i(424935),
+        tA = e.i(677810),
+        tM = e.i(263730),
+        tR = e.i(698870);
 
-    function tA() {
-        let [e, t] = (0, L.useState)(!1), {
+    function tI() {
+        let [e, t] = (0, O.useState)(!1), {
             deviceMeta: r,
             giftingAvatarImageUrl: n,
             giftingUrl: a
-        } = (0, L.useContext)(ec), {
+        } = (0, O.useContext)(em), {
             robuxGifting: {
                 closeModal: i,
                 isOpen: s
             }
-        } = (0, L.useContext)(ty), l = (0, er.useTranslations)("Feature.GiftingProducts"), {
+        } = (0, O.useContext)(tP), l = (0, ei.useTranslations)("Feature.GiftingProducts"), {
             handleCopyUrl: o,
             handleShareLink: c,
             qrImgSrc: u
         } = function(e, t) {
-            let [r, n] = (0, L.useState)("");
-            return (0, L.useEffect)(() => {
+            let [r, n] = (0, O.useState)("");
+            return (0, O.useEffect)(() => {
                 async function t() {
                     try {
-                        n(await (0, tj.toDataURL)(e, {
+                        n(await (0, tR.toDataURL)(e, {
                             errorCorrectionLevel: "H",
                             margin: 0,
                             width: 306
-                        })), ey("RobuxGiftingQrGenerated")
+                        })), eP("RobuxGiftingQrGenerated")
                     } catch (e) {
-                        ev("QRCodeGenerationFailed", null, e)
+                        eC("QRCodeGenerationFailed", null, e)
                     }
                 }
                 e && t()
             }, [e]), {
-                handleCopyUrl: (0, L.useCallback)(() => {
-                    void 0 !== J.navigator && e && J.navigator.clipboard.writeText(e).catch(e => {
-                        ev("RobuxGiftingCopyFailed", null, e)
+                handleCopyUrl: (0, O.useCallback)(() => {
+                    void 0 !== et.navigator && e && et.navigator.clipboard.writeText(e).catch(e => {
+                        eC("RobuxGiftingCopyFailed", null, e)
                     })
                 }, [e]),
-                handleShareLink: (0, L.useCallback)(() => {
-                    if (void 0 === J.window || void 0 === J.navigator || !e) return;
+                handleShareLink: (0, O.useCallback)(() => {
+                    if (void 0 === et.window || void 0 === et.navigator || !e) return;
                     let {
                         DOMException: r
-                    } = J.window;
+                    } = et.window;
                     if (t.isIosDevice || t.isAndroidDevice || t.isUniversalApp) {
-                        ey("RobuxGiftingShare", {
+                        eP("RobuxGiftingShare", {
                             method: "native"
-                        }), J.navigator.share({
+                        }), et.navigator.share({
                             url: e
                         }).catch(e => {
-                            e instanceof r && "AbortError" === e.name ? ey("RobuxGiftingShareDismissed") : ev("RobuxGiftingShareFailed", null, e)
+                            e instanceof r && "AbortError" === e.name ? eP("RobuxGiftingShareDismissed") : eC("RobuxGiftingShareFailed", null, e)
                         });
                         return
                     }
-                    ey("RobuxGiftingShare", {
+                    eP("RobuxGiftingShare", {
                         method: "mailto"
-                    }), J.window.location.href = `mailto:?body=${encodeURIComponent(e)}`
+                    }), et.window.location.href = `mailto:?body=${encodeURIComponent(e)}`
                 }, [t, e]),
                 qrImgSrc: r
             }
-        }(a, r), d = (0, ea.getCurrentUser)(), m = null != d, p = (0, L.useRef)(!1);
-        if ((0, L.useEffect)(() => {
-                m && (s ? ey("RobuxGiftingModalShown") : p.current && ey("RobuxGiftingModalClosed"), p.current = s)
+        }(a, r), d = (0, el.getCurrentUser)(), m = null != d, p = (0, O.useRef)(!1);
+        if ((0, O.useEffect)(() => {
+                m && (s ? eP("RobuxGiftingModalShown") : p.current && eP("RobuxGiftingModalClosed"), p.current = s)
             }, [m, s]), !d) return null;
         let {
             displayName: h,
             userName: f
         } = d, g = `@${f}`;
-        return (0, U.jsx)(tx.Dialog, {
+        return (0, L.jsx)(tv.Dialog, {
             open: s,
             onOpenChange: i,
             size: "Medium",
             isModal: !0,
             hasCloseAffordance: !0,
             closeLabel: l("Action.Gifting.Close"),
-            children: (0, U.jsxs)(tx.DialogContent, {
-                children: [(0, U.jsxs)(tx.DialogBody, {
+            children: (0, L.jsxs)(tv.DialogContent, {
+                children: [(0, L.jsxs)(tv.DialogBody, {
                     className: "flex flex-col gap-large",
-                    children: [(0, U.jsx)(tx.DialogTitle, {
-                        children: (0, U.jsx)("div", {
+                    children: [(0, L.jsx)(tv.DialogTitle, {
+                        children: (0, L.jsx)("div", {
                             className: "text-heading-medium",
                             children: l("Heading.Gifting.RequestRobux")
                         })
-                    }), (0, U.jsxs)("div", {
+                    }), (0, L.jsxs)("div", {
                         className: "flex flex-col gap-medium",
-                        children: [(0, U.jsx)("div", {
+                        children: [(0, L.jsx)("div", {
                             className: "text-body-large",
                             children: l("Message.Gifting.RequestRobuxDescriptionLine1")
-                        }), (0, U.jsx)("div", {
+                        }), (0, L.jsx)("div", {
                             className: "text-body-small",
                             children: l("Message.Gifting.RequestRobuxDescriptionLine2")
                         })]
-                    }), (0, U.jsxs)("div", {
+                    }), (0, L.jsxs)("div", {
                         className: "flex flex-col gap-medium bg-[var(--color-extended-white-100)] items-center justify-center radius-large padding-large",
-                        children: [(0, U.jsx)("div", {
+                        children: [(0, L.jsx)("div", {
                             className: "width-[158px] height-[158px] flex justify-center items-center",
                             style: {
                                 backgroundImage: `url(${u})`,
@@ -2417,14 +2421,14 @@
                                 marginTop: 28,
                                 marginBottom: 20
                             },
-                            children: (0, U.jsx)("div", {
+                            children: (0, L.jsx)("div", {
                                 className: "width-[56px] height-[56px] bg-[var(--color-extended-white-100)]",
-                                children: (0, U.jsx)("span", {
+                                children: (0, L.jsx)("span", {
                                     className: "clip",
                                     style: {
                                         float: "left"
                                     },
-                                    children: n && (0, U.jsx)("img", {
+                                    children: n && (0, L.jsx)("img", {
                                         className: "width-full height-full",
                                         style: {
                                             opacity: 1,
@@ -2436,37 +2440,37 @@
                                     })
                                 })
                             })
-                        }), (0, U.jsxs)("div", {
+                        }), (0, L.jsxs)("div", {
                             className: "text-align-x-center content-[var(--color-extended-gray-700)]",
-                            children: [h && (0, U.jsx)("div", {
+                            children: [h && (0, L.jsx)("div", {
                                 className: "text-title-large",
                                 children: h
-                            }), g && (0, U.jsx)("div", {
+                            }), g && (0, L.jsx)("div", {
                                 className: "text-body-small",
                                 children: g
                             })]
                         })]
-                    }), (0, U.jsx)("div", {
-                        children: (0, U.jsxs)("div", {
+                    }), (0, L.jsx)("div", {
+                        children: (0, L.jsxs)("div", {
                             className: "flex flex-row gap-small items-end",
-                            children: [(0, U.jsx)(tk.TextInput, {
+                            children: [(0, L.jsx)(tA.TextInput, {
                                 value: a,
                                 onClick: e => {
                                     e.currentTarget.select()
                                 },
                                 label: l("Action.Gifting.CopyAndShareUrl")
-                            }), (0, U.jsx)(tT.Tooltip, {
+                            }), (0, L.jsx)(tM.Tooltip, {
                                 position: "left-center",
                                 open: e,
                                 title: l("Message.Gifting.UrlCopied"),
-                                children: (0, U.jsx)(tT.TooltipTrigger, {
+                                children: (0, L.jsx)(tM.TooltipTrigger, {
                                     asChild: !0,
-                                    children: (0, U.jsx)(tN.IconButton, {
+                                    children: (0, L.jsx)(tj.IconButton, {
                                         icon: "icon-regular-chain-link",
                                         size: "Large",
                                         ariaLabel: l("Action.Gifting.CopyAndShareUrl"),
                                         onClick: () => {
-                                            ey("RobuxGiftingCopyUrl"), o(), t(!0), setTimeout(() => {
+                                            eP("RobuxGiftingCopyUrl"), o(), t(!0), setTimeout(() => {
                                                 t(!1)
                                             }, 2e3)
                                         },
@@ -2476,15 +2480,15 @@
                             })]
                         })
                     })]
-                }), (0, U.jsx)(tx.DialogFooter, {
-                    children: (0, U.jsxs)("div", {
+                }), (0, L.jsx)(tv.DialogFooter, {
+                    children: (0, L.jsxs)("div", {
                         className: "flex flex-row gap-small justify-center",
-                        children: [(0, U.jsx)(O.Button, {
+                        children: [(0, L.jsx)(V.Button, {
                             variant: "Standard",
                             onClick: i,
                             className: "width-full",
                             children: l("Action.Gifting.Close")
-                        }), (0, U.jsx)(O.Button, {
+                        }), (0, L.jsx)(V.Button, {
                             variant: "Emphasis",
                             onClick: c,
                             icon: "icon-regular-arrow-up-from-landscape-rectangle",
@@ -2496,46 +2500,46 @@
             })
         })
     }
-    var tM = e.i(155581),
-        tR = e.i(967715),
-        tI = e.i(495039),
-        tU = e.i(908740),
-        t_ = e.i(453893);
-    let tF = L.createContext({
+    var tU = e.i(155581),
+        t_ = e.i(967715),
+        tF = e.i(495039),
+        tL = e.i(908740),
+        tD = e.i(453893);
+    let tB = O.createContext({
             hasCloseAffordance: !1,
             titleId: "",
             descriptionId: ""
         }),
-        tL = e => {
+        tO = e => {
             let t = window.matchMedia?.("(pointer: coarse)")?.matches ?? !1,
                 r = document.activeElement?.matches(":focus-visible");
             t && !r && e.preventDefault()
         },
-        tD = e => {
+        tG = e => {
             let {
                 open: t,
                 defaultOpen: r,
                 onOpenChange: n,
                 children: a
             } = e;
-            return L.createElement(t_.Root, {
+            return O.createElement(tD.Root, {
                 open: t,
                 defaultOpen: r,
                 onOpenChange: n
             }, a)
         },
-        tB = e => {
+        tz = e => {
             let {
                 asChild: t,
                 className: r,
                 children: n
             } = e;
-            return L.createElement(t_.Trigger, {
+            return O.createElement(tD.Trigger, {
                 asChild: t,
                 className: r
             }, n)
         },
-        tO = e => {
+        tV = e => {
             let {
                 position: t,
                 hasBeak: r = !0,
@@ -2544,68 +2548,68 @@
                 onOpenAutoFocus: i,
                 className: s,
                 children: l
-            } = e, [o, c] = t.split("-"), u = "dark" === (0, tU.default)() ? "light" : "dark", d = (0, G.default)("fui-edu-tooltip"), m = `${d}-title`, p = `${d}-desc`, h = L.useMemo(() => ({
+            } = e, [o, c] = t.split("-"), u = "dark" === (0, tL.default)() ? "light" : "dark", d = (0, W.default)("fui-edu-tooltip"), m = `${d}-title`, p = `${d}-desc`, h = O.useMemo(() => ({
                 hasCloseAffordance: !!n,
                 titleId: m,
                 descriptionId: p
             }), [n, m, p]);
-            return L.createElement(t_.Portal, null, L.createElement(t_.Content, {
+            return O.createElement(tD.Portal, null, O.createElement(tD.Content, {
                 side: o,
                 align: c,
                 sideOffset: 6,
                 "aria-labelledby": m,
                 "aria-describedby": p,
-                onOpenAutoFocus: i ?? tL,
-                className: (0, W.default)("light" === u ? "color-mode-light" : "color-mode-dark", "relative foundation-web-portal-zindex bg-surface-100 radius-medium shadow-transient-low", "min-width-[240px] max-width-[296px]", s)
-            }, r && L.createElement(t_.Arrow, {
+                onOpenAutoFocus: i ?? tO,
+                className: (0, Q.default)("light" === u ? "color-mode-light" : "color-mode-dark", "relative foundation-web-portal-zindex bg-surface-100 radius-medium shadow-transient-low", "min-width-[240px] max-width-[296px]", s)
+            }, r && O.createElement(tD.Arrow, {
                 asChild: !0
-            }, L.createElement("div", {
+            }, O.createElement("div", {
                 style: {
                     color: "var(--color-surface-100)"
                 }
-            }, L.createElement(tI.Beak, null))), n && L.createElement("div", {
+            }, O.createElement(tF.Beak, null))), n && O.createElement("div", {
                 className: "absolute top-[var(--size-50)] right-[var(--size-100)]"
-            }, L.createElement(t_.Close, {
+            }, O.createElement(tD.Close, {
                 asChild: !0
-            }, L.createElement(V.CloseAffordance, {
+            }, O.createElement(H.CloseAffordance, {
                 variant: "Utility",
                 size: "Medium",
                 isCircular: !0,
                 "aria-label": a || ""
-            }))), L.createElement(tF.Provider, {
+            }))), O.createElement(tB.Provider, {
                 value: h
             }, l)))
         },
-        tG = e => {
+        tW = e => {
             let {
                 children: t,
                 className: r
             } = e, {
                 hasCloseAffordance: n
-            } = L.useContext(tF);
-            return L.createElement("div", {
-                className: (0, W.default)("padding-medium", n && "padding-right-[var(--size-1100)]", r)
+            } = O.useContext(tB);
+            return O.createElement("div", {
+                className: (0, Q.default)("padding-medium", n && "padding-right-[var(--size-1100)]", r)
             }, t)
         },
-        tz = e => {
+        tK = e => {
             let {
                 children: t,
                 className: r
             } = e, {
                 descriptionId: n
-            } = L.useContext(tF);
-            return L.createElement("div", {
+            } = O.useContext(tB);
+            return O.createElement("div", {
                 id: n,
-                className: (0, W.default)("text-body-medium content-default padding-top-xsmall", r)
+                className: (0, Q.default)("text-body-medium content-default padding-top-xsmall", r)
             }, t)
         };
-    var tV = e.i(433424),
-        tW = e.i(417902);
-    let tK = e => {
+    var tH = e.i(433424),
+        tQ = e.i(417902);
+    let t$ = e => {
         let {
             ariaLabel: t
         } = e;
-        return (0, U.jsx)("div", {
+        return (0, L.jsx)("div", {
             className: "fixed width-full height-full flex items-center justify-center",
             style: {
                 zIndex: 1030,
@@ -2613,77 +2617,77 @@
                 left: 0,
                 backgroundColor: "var(--color-common-backdrop)"
             },
-            children: (0, U.jsx)(tV.ProgressCircle, {
+            children: (0, L.jsx)(tH.ProgressCircle, {
                 ariaLabel: t,
                 variant: "Indeterminate",
                 size: "Large"
             })
         })
     };
-    var tH = e.i(120274),
-        tQ = e.i(682259);
-    let t$ = ["icon-regular-star", "icon-regular-circle-star", "icon-regular-shopping-basket-check", "icon-regular-flame", "icon-filled-robux", "icon-regular-wallet", "icon-regular-tag"],
-        tq = e => (0, tQ.arrayIncludes)(t$, e);
+    var tq = e.i(120274),
+        tY = e.i(682259);
+    let tX = ["icon-regular-star", "icon-regular-circle-star", "icon-regular-shopping-basket-check", "icon-regular-flame", "icon-filled-robux", "icon-regular-wallet", "icon-regular-tag"],
+        tJ = e => (0, tY.arrayIncludes)(tX, e);
 
-    function tY(e) {
+    function tZ(e) {
         return (Number(e.units ?? "0") + (e.nanos ?? 0) / 1e9).toString()
     }
-    let tX = e => {
+    let t0 = e => {
         let {
             Nanos: t,
             Units: r
         } = e;
         return parseFloat((r + t / 1e9).toFixed(2))
     };
-    var tJ = e.i(255447),
-        tZ = e.i(559170);
-    let t0 = e => e?.paymentProfileType === "paypal",
-        t1 = "****";
+    var t1 = e.i(255447),
+        t2 = e.i(559170);
+    let t3 = e => e?.paymentProfileType === "paypal",
+        t5 = "****";
 
-    function t2(e, t) {
+    function t4(e, t) {
         return new Intl.DateTimeFormat("default", {
             month: "2-digit",
             year: "2-digit"
         }).format(new Date(t, e - 1))
     }
 
-    function t3(e) {
+    function t8(e) {
         let {
             expirationLabel: t,
             payload: r
         } = e, n = "payment-method-container text-body-small medium:text-body-large";
-        return t0(r) ? (0, U.jsxs)("span", {
+        return t3(r) ? (0, L.jsxs)("span", {
             className: n,
-            children: [(0, U.jsx)("span", {
+            children: [(0, L.jsx)("span", {
                 className: "payment-method-image card-icon icon-paypal"
-            }), (0, U.jsx)("span", {
+            }), (0, L.jsx)("span", {
                 className: "paypal-email",
                 children: r.Email
             })]
-        }) : (0, U.jsxs)("span", {
+        }) : (0, L.jsxs)("span", {
             className: n,
-            children: [(0, U.jsx)("span", {
+            children: [(0, L.jsx)("span", {
                 className: `payment-method-image card-icon ${function(e){switch(e.toLowerCase()){case"amex":case"americanexpress":return"icon-amex";case"discover":return"icon-discover";case"mastercard":return"icon-mastercard";case"visa":return"icon-visa";case"debit":return"icon-debit";default:return"icon-generic-card"}}(r.CardNetwork)}`
-            }), (0, U.jsxs)("span", {
+            }), (0, L.jsxs)("span", {
                 className: "card-number",
-                children: [(0, U.jsx)("span", {
+                children: [(0, L.jsx)("span", {
                     className: "card-asterisk-mask",
-                    children: t1
-                }), (0, U.jsx)("span", {
+                    children: t5
+                }), (0, L.jsx)("span", {
                     className: "payment-profile-label",
                     children: r.Last4Digits
                 })]
-            }), (0, U.jsx)("span", {
+            }), (0, L.jsx)("span", {
                 className: "card-exp-key",
                 children: t
-            }), (0, U.jsx)("span", {
+            }), (0, L.jsx)("span", {
                 className: "card-exp-value",
-                children: t2(r.ExpMonth, r.ExpYear)
+                children: t4(r.ExpMonth, r.ExpYear)
             })]
         })
     }
 
-    function t5(e) {
+    function t6(e) {
         var t, r;
         let {
             error: n,
@@ -2692,11 +2696,11 @@
             selectedPaymentProfile: s
         } = e, {
             trackQuickPayClickPaymentMethodDropdown: l
-        } = (0, L.useContext)(eR), o = (0, er.useTranslations)("Feature.Premium"), c = i.length > 1;
-        return s?.providerPayload ? (0, U.jsx)(tJ.Dropdown, {
+        } = (0, O.useContext)(e_), o = (0, ei.useTranslations)("Feature.Premium"), c = i.length > 1;
+        return s?.providerPayload ? (0, L.jsx)(t1.Dropdown, {
             size: "Large",
             value: s.id,
-            placeholder: (t = s.providerPayload, r = o("QuickPay.Expiration"), t0(t) ? t.Email ?? "" : `${t1}${t.Last4Digits} ${r} ${t2(t.ExpMonth,t.ExpYear)}`),
+            placeholder: (t = s.providerPayload, r = o("QuickPay.Expiration"), t3(t) ? t.Email ?? "" : `${t5}${t.Last4Digits} ${r} ${t4(t.ExpMonth,t.ExpYear)}`),
             hasError: !!n,
             hint: n && o.has(n) ? o(n) : void 0,
             onOpenChange: e => {
@@ -2707,11 +2711,11 @@
                 let t = i.find(t => t.id === e);
                 t && a(t)
             },
-            children: (0, U.jsx)(tZ.Menu, {
-                children: (0, U.jsx)(tZ.MenuSection, {
-                    children: i.map(e => (0, U.jsx)(tZ.MenuItem, {
+            children: (0, L.jsx)(t2.Menu, {
+                children: (0, L.jsx)(t2.MenuSection, {
+                    children: i.map(e => (0, L.jsx)(t2.MenuItem, {
                         value: e.id,
-                        title: (0, U.jsx)(t3, {
+                        title: (0, L.jsx)(t8, {
                             expirationLabel: o("QuickPay.Expiration"),
                             payload: e.providerPayload
                         })
@@ -2720,43 +2724,43 @@
             })
         }) : null
     }
-    var t4 = e.i(371078);
-    let t8 = "https://stripe.com/legal/consumer",
-        t6 = (0, t4.getAbsoluteUrl)("/info/terms"),
-        t9 = (0, t4.getAbsoluteUrl)("/info/privacy"),
-        t7 = (0, t4.getAbsoluteUrl)("/my/account#!/billing");
+    var t9 = e.i(371078);
+    let t7 = "https://stripe.com/legal/consumer",
+        re = (0, t9.getAbsoluteUrl)("/info/terms"),
+        rt = (0, t9.getAbsoluteUrl)("/info/privacy"),
+        rr = (0, t9.getAbsoluteUrl)("/my/account#!/billing");
 
-    function re(e, t, r) {
+    function rn(e, t, r) {
         return {
             closing: t,
             opening: e,
-            render: e => (0, U.jsx)("a", {
+            render: e => (0, L.jsx)("a", {
                 href: r,
                 className: "text-link",
                 children: e
             })
         }
     }
-    let rt = [re("termsLinkStart", "termsLinkEnd", t6), re("privacyLinkStart", "privacyLinkEnd", t9), re("billingLinkStart", "billingLinkEnd", t7), re("stripeTermsLinkStart", "stripeTermsLinkEnd", t8), re("stripePrivacyLinkStart", "stripePrivacyLinkEnd", t8)];
+    let ra = [rn("termsLinkStart", "termsLinkEnd", re), rn("privacyLinkStart", "privacyLinkEnd", rt), rn("billingLinkStart", "billingLinkEnd", rr), rn("stripeTermsLinkStart", "stripeTermsLinkEnd", t7), rn("stripePrivacyLinkStart", "stripePrivacyLinkEnd", t7)];
 
-    function rr(e) {
+    function ri(e) {
         let {
             translationKey: t
         } = e, {
             translateFullKey: r
-        } = (0, er.useFullKeyTranslations)();
-        return (0, U.jsx)("div", {
+        } = (0, ei.useFullKeyTranslations)();
+        return (0, L.jsx)("div", {
             className: "legal-disclosure-container",
-            children: (0, U.jsx)("p", {
+            children: (0, L.jsx)("p", {
                 className: "text-footer legal-text-holder content-default",
                 style: {
                     fontSize: 10
                 },
-                children: r.html(t ?? "Feature.BuyRobux.Message.QuickPay.LegalDisclosureText", rt)
+                children: r.html(t ?? "Feature.BuyRobux.Message.QuickPay.LegalDisclosureText", ra)
             })
         })
     }
-    let rn = e => {
+    let rs = e => {
         let {
             amount: {
                 nanos: t,
@@ -2766,7 +2770,7 @@
         return Number(r ?? 0) + (t ?? 0) / 1e9
     };
 
-    function ra(e) {
+    function rl(e) {
         let {
             isChecked: t,
             onToggle: r,
@@ -2775,15 +2779,15 @@
                 recurringPrice: a,
                 robuxAmount: i
             }
-        } = e, s = (0, er.useTranslations)("Feature.Payment");
-        return (0, U.jsx)("div", {
+        } = e, s = (0, ei.useTranslations)("Feature.Payment");
+        return (0, L.jsx)("div", {
             className: "margin-top-small",
             "data-testid": "quick-pay-subscribe-and-save-offer",
-            children: (0, U.jsx)(tg.Checkbox, {
+            children: (0, L.jsx)(ty.Checkbox, {
                 label: s.html("Label.SubscribeAndSaveV2", [{
                     opening: "robuxIconStart",
                     closing: "robuxIconEnd",
-                    render: () => (0, U.jsx)(B.Icon, {
+                    render: () => (0, L.jsx)(z.Icon, {
                         name: "icon-regular-robux",
                         size: "Small",
                         style: {
@@ -2793,22 +2797,22 @@
                 }, {
                     opening: "initialPriceStart",
                     closing: "initialPriceEnd",
-                    render: () => (0, U.jsx)(tH.PriceTag, {
-                        amount: rn(n),
+                    render: () => (0, L.jsx)(tq.PriceTag, {
+                        amount: rs(n),
                         currencyCode: n.amount.currencyCode,
                         tagClassName: "line-through"
                     })
                 }, {
                     opening: "recurringPriceStart",
                     closing: "recurringPriceEnd",
-                    render: () => (0, U.jsx)(tH.PriceTag, {
-                        amount: rn(a),
+                    render: () => (0, L.jsx)(tq.PriceTag, {
+                        amount: rs(a),
                         currencyCode: a.amount.currencyCode
                     })
                 }, {
                     opening: "subscriptionTermsStart",
                     closing: "subscriptionTermsEnd",
-                    render: e => (0, U.jsx)("a", {
+                    render: e => (0, L.jsx)("a", {
                         href: "https://en.help.roblox.com/hc/en-us/articles/46804865425300-Roblox-Subscription-Terms",
                         target: "_blank",
                         rel: "noopener noreferrer",
@@ -2816,7 +2820,7 @@
                         children: e
                     })
                 }], {
-                    robuxAmount: (0, tM.formatNumber)(i)
+                    robuxAmount: (0, tU.formatNumber)(i)
                 }),
                 size: "Medium",
                 placement: "Start",
@@ -2825,8 +2829,8 @@
             })
         })
     }
-    var ri = e.i(564035);
-    let rs = {
+    var ro = e.i(564035);
+    let rc = {
         src: e.i(921743).default,
         width: 12,
         height: 12,
@@ -2834,12 +2838,12 @@
         blurHeight: 0
     };
 
-    function rl(e) {
+    function ru(e) {
         let {
             size: t
         } = e;
-        return (0, U.jsx)("img", {
-            src: (0, ri.assetUrl)(rs),
+        return (0, L.jsx)("img", {
+            src: (0, ro.assetUrl)(rc),
             alt: "blue check icon",
             style: {
                 width: t,
@@ -2848,7 +2852,7 @@
         })
     }
 
-    function ro(e) {
+    function rd(e) {
         let {
             isBonusItem: t,
             legalDisclosureTranslationKey: r,
@@ -2872,60 +2876,60 @@
             collectibleBonusItemMetadata: y,
             buyRobuxPageData: v,
             getPurchaseUrl: S
-        } = (0, L.useContext)(ec), {
+        } = (0, O.useContext)(em), {
             quickPay: {
                 closeModal: P,
                 isOpen: C
             }
-        } = (0, L.useContext)(ty), {
+        } = (0, O.useContext)(tP), {
             trackQuickPayClose: E,
             trackQuickPayUseDifferentPaymentMethod: w
-        } = (0, L.useContext)(eR), N = (0, er.useTranslations)("Feature.Premium"), k = (0, er.useTranslations)("Feature.BuyRobux"), T = (0, er.useTranslations)("Feature.PersonalizedBonus"), j = (0, er.useTranslations)("Feature.Payment"), {
+        } = (0, O.useContext)(e_), N = (0, ei.useTranslations)("Feature.Premium"), k = (0, ei.useTranslations)("Feature.BuyRobux"), T = (0, ei.useTranslations)("Feature.PersonalizedBonus"), j = (0, ei.useTranslations)("Feature.Payment"), {
             translateFullKey: A
-        } = (0, er.useFullKeyTranslations)(), M = (0, L.useMemo)(() => {
+        } = (0, ei.useFullKeyTranslations)(), M = (0, O.useMemo)(() => {
             if (u)
                 for (let e of v.sections) {
                     let t = e.limitedTimeBonus?.limitedTimeBonuses.find(e => e.robuxProductIds.includes(u.productId));
                     if (t) return t.displayableBonus.collectibleItemMetadata
                 }
-        }, [u, v.sections]), R = !!(M ?? (t && x) ?? y), I = u ? p.find(e => e.productId === u.productId) : void 0, _ = !!(h && I), F = u?.price.amount ?? {
+        }, [u, v.sections]), R = !!(M ?? (t && x) ?? y), I = u ? p.find(e => e.productId === u.productId) : void 0, U = !!(h && I), _ = u?.price.amount ?? {
             currencyCode: "USD"
-        }, [D, G] = (0, L.useState)(!1), [z, V] = (0, L.useState)(!1), [W, K] = (0, L.useState)(""), H = (0, L.useCallback)(async e => {
-            K(""), G(!0);
+        }, [F, D] = (0, O.useState)(!1), [B, G] = (0, O.useState)(!1), [W, K] = (0, O.useState)(""), H = (0, O.useCallback)(async e => {
+            K(""), D(!0);
             let {
                 error: t,
                 isLoading: r
             } = await i(e);
-            t && K(t), G(r)
-        }, [i]), Q = (0, L.useCallback)(() => {
+            t && K(t), D(r)
+        }, [i]), Q = (0, O.useCallback)(() => {
             E(), P(), K("")
-        }, [E, P]), $ = (0, L.useCallback)(() => {
-            if (!u || void 0 === J.window) return;
+        }, [E, P]), $ = (0, O.useCallback)(() => {
+            if (!u || void 0 === et.window) return;
             let e = S(u, !1),
                 t = e.includes("?") ? "&" : "?";
-            ey("QuickPaySubscribeAndSaveRedirect"), J.window.location.href = `${e}${t}subscribeAndSave=1`
-        }, [S, u]), q = (0, L.useCallback)(() => {
+            eP("QuickPaySubscribeAndSaveRedirect"), et.window.location.href = `${e}${t}subscribeAndSave=1`
+        }, [S, u]), q = (0, O.useCallback)(() => {
             w(), l(), P()
-        }, [w, l, P]), [Y = 0, X = 0] = (0, L.useMemo)(() => a ? [tX(a.amountTotal), tX(a.taxAmountExclusive)] : [], [a]), Z = (0, L.useCallback)(e => {
+        }, [w, l, P]), [Y = 0, X = 0] = (0, O.useMemo)(() => a ? [t0(a.amountTotal), t0(a.taxAmountExclusive)] : [], [a]), J = (0, O.useCallback)(e => {
             (async e => {
                 let t = await s(e);
                 t && K(t)
             })(e)
-        }, [s]), ee = (0, L.useMemo)(() => (0, U.jsxs)("div", {
+        }, [s]), Z = (0, O.useMemo)(() => (0, L.jsxs)("div", {
             className: "flex-container Placeholder Placeholder--animating",
-            children: [(0, U.jsx)("span", {
+            children: [(0, L.jsx)("span", {
                 className: "Text Text-color--gray400 Text-fontSize--14 Text--tabularNumbers"
-            }), (0, U.jsx)("span", {
+            }), (0, L.jsx)("span", {
                 children: "$0.00"
             })]
         }), []);
-        if ((0, L.useEffect)(() => (J.window?.addEventListener("message", Z), () => {
-                J.window?.removeEventListener("message", Z)
-            }), [Z]), !d || !u || !c) return null;
-        let et = N("Label.PlusAmountMoreLower", {
-            amount: (0, tM.formatNumber)(Number(u.bonusRobuxAmount))
+        if ((0, O.useEffect)(() => (et.window?.addEventListener("message", J), () => {
+                et.window?.removeEventListener("message", J)
+            }), [J]), !d || !u || !c) return null;
+        let ee = N("Label.PlusAmountMoreLower", {
+            amount: (0, tU.formatNumber)(Number(u.bonusRobuxAmount))
         });
-        return (0, U.jsx)(tx.Dialog, {
+        return (0, L.jsx)(tv.Dialog, {
             open: C,
             onOpenChange: e => {
                 e || Q()
@@ -2934,20 +2938,20 @@
             hasCloseAffordance: !0,
             closeLabel: N("Button.OneClickPay.Cancel"),
             isModal: !0,
-            children: (0, U.jsxs)(tx.DialogContent, {
-                children: [(0, U.jsxs)(tx.DialogBody, {
-                    children: [(0, U.jsx)(tx.DialogTitle, {
+            children: (0, L.jsxs)(tv.DialogContent, {
+                children: [(0, L.jsxs)(tv.DialogBody, {
+                    children: [(0, L.jsx)(tv.DialogTitle, {
                         className: "text-heading-medium content-emphasis",
-                        children: (0, U.jsx)("div", {
+                        children: (0, L.jsx)("div", {
                             children: N("Message.OneClickPay.Title")
                         })
-                    }), (0, U.jsx)(tW.Divider, {
+                    }), (0, L.jsx)(tQ.Divider, {
                         className: "margin-y-small"
-                    }), (0, U.jsxs)("div", {
+                    }), (0, L.jsxs)("div", {
                         className: "product",
-                        children: [(0, U.jsxs)("div", {
+                        children: [(0, L.jsxs)("div", {
                             className: "icon-wrapper",
-                            children: [(0, U.jsx)(B.Icon, {
+                            children: [(0, L.jsx)(z.Icon, {
                                 name: "icon-filled-robux",
                                 size: "XXLarge",
                                 style: {
@@ -2955,72 +2959,72 @@
                                     width: 60,
                                     color: "var(--color-content-emphasis)"
                                 }
-                            }), (0, U.jsxs)("div", {
+                            }), (0, L.jsxs)("div", {
                                 className: "product-detail",
-                                children: [(0, U.jsx)("div", {
+                                children: [(0, L.jsx)("div", {
                                     className: "product-name",
                                     children: k("Label.RobuxQuantity", {
-                                        quantity: (0, tM.formatNumber)(Number(u.robuxAmount))
+                                        quantity: (0, tU.formatNumber)(Number(u.robuxAmount))
                                     })
-                                }), (0, U.jsx)(tH.PriceTag, {
+                                }), (0, L.jsx)(tq.PriceTag, {
                                     tagClassName: "product-price",
-                                    amount: Number(tY(F)),
-                                    currencyCode: F.currencyCode
+                                    amount: Number(tZ(_)),
+                                    currencyCode: _.currencyCode
                                 })]
-                            }), u.bonusRobuxAmount && u.bonusRobuxTagIcon && tq(u.bonusRobuxTagIcon) && (0, U.jsx)("div", {
+                            }), u.bonusRobuxAmount && u.bonusRobuxTagIcon && tJ(u.bonusRobuxTagIcon) && (0, L.jsx)("div", {
                                 className: "margin-top-[14px] margin-left-[6px] self-start",
-                                children: (0, U.jsx)(tR.Badge, {
+                                children: (0, L.jsx)(t_.Badge, {
                                     variant: "Contrast",
                                     icon: u.bonusRobuxTagIcon,
                                     label: u.bonusRobuxTagTranslationKey ? A(u.bonusRobuxTagTranslationKey, {
-                                        amount: (0, tM.formatNumber)(Number(u.bonusRobuxAmount))
-                                    }, et) : et,
+                                        amount: (0, tU.formatNumber)(Number(u.bonusRobuxAmount))
+                                    }, ee) : ee,
                                     className: "text-overflow",
                                     size: "XSmall"
                                 })
                             })]
-                        }), R && (0, U.jsxs)(L.Fragment, {
-                            children: [(0, U.jsx)(B.Icon, {
+                        }), R && (0, L.jsxs)(O.Fragment, {
+                            children: [(0, L.jsx)(z.Icon, {
                                 name: "icon-filled-plus-large",
                                 size: "XXLarge"
-                            }), (0, U.jsxs)("div", {
+                            }), (0, L.jsxs)("div", {
                                 className: "bonus-item-card-small",
-                                children: [M ? (0, U.jsx)("img", {
+                                children: [M ? (0, L.jsx)("img", {
                                     src: M.image2dUrl,
                                     alt: "bonus item",
                                     className: "height-[60px] width-auto max-width-full object-contain shrink-0"
-                                }) : b ? (0, U.jsx)("div", {
+                                }) : b ? (0, L.jsx)("div", {
                                     className: "icon-upsell-item-small-preview thumbnail-2d-container",
-                                    children: (0, U.jsx)("img", {
+                                    children: (0, L.jsx)("img", {
                                         src: b,
                                         alt: "bonus item",
                                         className: "width-full height-full"
                                     })
-                                }) : y ? (0, U.jsx)("img", {
+                                }) : y ? (0, L.jsx)("img", {
                                     src: y.image2dUrl,
                                     alt: "bonus item",
                                     className: "width-[60px] height-[60px]"
-                                }) : null, (0, U.jsxs)("div", {
+                                }) : null, (0, L.jsxs)("div", {
                                     className: "description-container",
-                                    children: [(0, U.jsx)("div", {
+                                    children: [(0, L.jsx)("div", {
                                         className: "description-title",
                                         children: M ? A(M.translationKey, void 0, "Bonus Item") : g ?? A(y?.translationKey ?? "", void 0, "Bonus Item")
-                                    }), (0, U.jsx)("div", {
+                                    }), (0, L.jsx)("div", {
                                         className: "description-subtitle",
-                                        children: M?.creatorDisplayName ? (0, U.jsxs)("div", {
+                                        children: M?.creatorDisplayName ? (0, L.jsxs)("div", {
                                             className: "flex flex-row gap-xsmall self-stretch items-center justify-start margin-top-[8px]",
-                                            children: [(0, U.jsx)("div", {
+                                            children: [(0, L.jsx)("div", {
                                                 className: "text-label-small medium:text-label-medium content-default",
                                                 children: M.creatorDisplayName
-                                            }), M.creatorIsVerified && (0, U.jsx)(rl, {
+                                            }), M.creatorIsVerified && (0, L.jsx)(ru, {
                                                 size: 12
                                             })]
-                                        }) : b ? N("Message.OneClickPay.BonusVirtualItem") : y ? (0, U.jsxs)("div", {
+                                        }) : b ? N("Message.OneClickPay.BonusVirtualItem") : y ? (0, L.jsxs)("div", {
                                             className: "flex flex-row gap-xsmall self-stretch items-center justify-start margin-top-[8px]",
-                                            children: [(0, U.jsx)("div", {
+                                            children: [(0, L.jsx)("div", {
                                                 className: "text-label-small medium:text-label-medium content-default",
                                                 children: T("Label.ByRoblox")
-                                            }), (0, U.jsx)(rl, {
+                                            }), (0, L.jsx)(ru, {
                                                 size: 12
                                             })]
                                         }) : null
@@ -3028,117 +3032,117 @@
                                 })]
                             })]
                         })]
-                    }), I && (0, U.jsx)(ra, {
+                    }), I && (0, L.jsx)(rl, {
                         isChecked: h,
                         onToggle: f,
                         offer: I
-                    }), (0, U.jsxs)("div", {
+                    }), (0, L.jsxs)("div", {
                         className: "price-info space-between-container",
-                        children: [(0, U.jsx)("div", {
+                        children: [(0, L.jsx)("div", {
                             className: "subtotal",
                             children: N("Message.OneClickPay.Subtotal")
-                        }), (0, U.jsx)(tH.PriceTag, {
+                        }), (0, L.jsx)(tq.PriceTag, {
                             tagClassName: "subtotal-price",
-                            amount: Number(tY(F)),
-                            currencyCode: F.currencyCode
+                            amount: Number(tZ(_)),
+                            currencyCode: _.currencyCode
                         })]
-                    }), (0, U.jsxs)("div", {
+                    }), (0, L.jsxs)("div", {
                         className: "tax-info space-between-container",
-                        children: [(0, U.jsx)("div", {
+                        children: [(0, L.jsx)("div", {
                             className: "tax",
-                            children: a ? (0, U.jsxs)(L.Fragment, {
-                                children: [(0, U.jsx)("span", {
+                            children: a ? (0, L.jsxs)(O.Fragment, {
+                                children: [(0, L.jsx)("span", {
                                     className: "tax-text",
                                     children: m
-                                }), (0, U.jsxs)(tD, {
-                                    open: z,
-                                    onOpenChange: V,
-                                    children: [(0, U.jsx)(tB, {
+                                }), (0, L.jsxs)(tG, {
+                                    open: B,
+                                    onOpenChange: G,
+                                    children: [(0, L.jsx)(tz, {
                                         asChild: !0,
-                                        children: (0, U.jsx)(tN.IconButton, {
+                                        children: (0, L.jsx)(tj.IconButton, {
                                             icon: "icon-regular-circle-question",
                                             size: "XSmall",
                                             variant: "Utility",
                                             ariaLabel: N("Message.OneClickPay.TaxTooltip")
                                         })
-                                    }), (0, U.jsx)(tO, {
+                                    }), (0, L.jsx)(tV, {
                                         position: "right-center",
                                         hasCloseAffordance: !0,
                                         closeLabel: N("Action.Close"),
-                                        children: (0, U.jsx)(tG, {
-                                            children: (0, U.jsx)(tz, {
+                                        children: (0, L.jsx)(tW, {
+                                            children: (0, L.jsx)(tK, {
                                                 children: N("Message.OneClickPay.TaxTooltip")
                                             })
                                         })
                                     })]
                                 })]
-                            }) : ee
-                        }), a ? (0, U.jsx)(tH.PriceTag, {
+                            }) : Z
+                        }), a ? (0, L.jsx)(tq.PriceTag, {
                             tagClassName: "tax-price",
                             amount: X,
-                            currencyCode: F.currencyCode
-                        }) : ee]
-                    }), (0, U.jsx)(tW.Divider, {
+                            currencyCode: _.currencyCode
+                        }) : Z]
+                    }), (0, L.jsx)(tQ.Divider, {
                         style: {
                             margin: "8px 0"
                         }
-                    }), (0, U.jsxs)("div", {
+                    }), (0, L.jsxs)("div", {
                         className: "space-between-container",
-                        children: [(0, U.jsx)("div", {
+                        children: [(0, L.jsx)("div", {
                             className: "total-due",
                             children: N("Message.OneClickPay.TotalDue")
-                        }), a ? (0, U.jsx)(tH.PriceTag, {
+                        }), a ? (0, L.jsx)(tq.PriceTag, {
                             tagClassName: "total-due-price",
                             amount: Y,
-                            currencyCode: F.currencyCode
-                        }) : ee]
-                    }), (0, U.jsxs)("div", {
+                            currencyCode: _.currencyCode
+                        }) : Z]
+                    }), (0, L.jsxs)("div", {
                         className: "payment-method-info flex flex-col gap-small",
-                        children: [(0, U.jsx)("span", {
+                        children: [(0, L.jsx)("span", {
                             children: N("Message.OneClickPay.AmountChargedTo")
-                        }), (0, U.jsx)(t5, {
+                        }), (0, L.jsx)(t6, {
                             error: W,
                             onSelectPaymentProfile: o,
                             paymentProfiles: n,
                             selectedPaymentProfile: c
                         })]
-                    }), (0, U.jsx)("div", {
+                    }), (0, L.jsx)("div", {
                         className: "use-a-different-payment-method",
-                        children: (0, U.jsx)("div", {
+                        children: (0, L.jsx)("div", {
                             role: "button",
                             tabIndex: 0,
                             onClick: q,
                             children: N("Message.OneClickPay.RedirectToOldFlow")
                         })
-                    }), (0, U.jsx)(tW.Divider, {
+                    }), (0, L.jsx)(tQ.Divider, {
                         style: {
                             margin: "8px 0"
                         }
-                    }), (0, U.jsx)("div", {
+                    }), (0, L.jsx)("div", {
                         className: "margin-top-small",
-                        children: (0, U.jsx)(rr, {
+                        children: (0, L.jsx)(ri, {
                             translationKey: r
                         })
                     })]
-                }), (0, U.jsxs)(tx.DialogFooter, {
-                    children: [(0, U.jsx)("div", {
+                }), (0, L.jsxs)(tv.DialogFooter, {
+                    children: [(0, L.jsx)("div", {
                         className: "loading text-align-x-center",
-                        children: D && (0, U.jsx)(tV.ProgressCircle, {
+                        children: F && (0, L.jsx)(tH.ProgressCircle, {
                             variant: "Indeterminate",
                             ariaLabel: k("Label.Loading")
                         })
-                    }), !D && (0, U.jsxs)("div", {
+                    }), !F && (0, L.jsxs)("div", {
                         className: "flex flex-row gap-small justify-center",
-                        children: [(0, U.jsx)(O.Button, {
-                            isDisabled: !_ && !a,
+                        children: [(0, L.jsx)(V.Button, {
+                            isDisabled: !U && !a,
                             variant: "Emphasis",
                             className: "min-width-[90px]",
                             size: "Medium",
                             onClick: () => {
-                                _ ? $() : a && H(a)
+                                U ? $() : a && H(a)
                             },
-                            children: _ ? j("Action.Continue") : N("Button.OneClickPay.PayNow")
-                        }), (0, U.jsx)(O.Button, {
+                            children: U ? j("Action.Continue") : N("Button.OneClickPay.PayNow")
+                        }), (0, L.jsx)(V.Button, {
                             variant: "Standard",
                             onClick: Q,
                             className: "min-width-[90px]",
@@ -3150,40 +3154,40 @@
             })
         })
     }
-    let rc = e => {
-        let t = (0, er.useTranslations)("Feature.BuyRobux");
-        return (0, U.jsxs)("div", {
-            children: [e.isQuickPayLoading && (0, U.jsx)(tK, {
+    let rm = e => {
+        let t = (0, ei.useTranslations)("Feature.BuyRobux");
+        return (0, L.jsxs)("div", {
+            children: [e.isQuickPayLoading && (0, L.jsx)(t$, {
                 ariaLabel: t("Label.Loading")
-            }), (0, U.jsx)(ro, {
+            }), (0, L.jsx)(rd, {
                 ...e
             })]
         })
     };
 
-    function ru() {
+    function rp() {
         let {
             quickPay3DS: {
                 closeModal: e,
                 isOpen: t,
                 url: r
             }
-        } = (0, L.useContext)(ty), n = (0, er.useTranslations)("Feature.Premium");
-        return (0, U.jsx)(tx.Dialog, {
+        } = (0, O.useContext)(tP), n = (0, ei.useTranslations)("Feature.Premium");
+        return (0, L.jsx)(tv.Dialog, {
             open: t,
             onOpenChange: e,
             isModal: !0,
             hasCloseAffordance: !0,
             closeLabel: n("Action.Close"),
             size: "Small",
-            children: (0, U.jsx)(tx.DialogContent, {
-                children: (0, U.jsxs)(tx.DialogBody, {
+            children: (0, L.jsx)(tv.DialogContent, {
+                children: (0, L.jsxs)(tv.DialogBody, {
                     className: "flex flex-col gap-medium",
-                    children: [(0, U.jsx)(tx.DialogTitle, {
+                    children: [(0, L.jsx)(tv.DialogTitle, {
                         children: n("QuickPay.Authentication")
-                    }), (0, U.jsx)("div", {
+                    }), (0, L.jsx)("div", {
                         className: "width-full clip",
-                        children: (0, U.jsx)("iframe", {
+                        children: (0, L.jsx)("iframe", {
                             title: "3DS Modal",
                             src: r,
                             width: 400,
@@ -3197,24 +3201,24 @@
             })
         })
     }
-    let rd = e => {
+    let rh = e => {
         let {
             onClick: t,
             title: r,
             iconComponent: n
         } = e;
-        return (0, U.jsxs)("button", {
+        return (0, L.jsxs)("button", {
             className: "width-full flex flex-row gap-small bg-action-standard stroke-none justify-between items-center padding-large radius-medium",
             type: "button",
             onClick: t,
-            children: [n, (0, U.jsx)("div", {
+            children: [n, (0, L.jsx)("div", {
                 className: "text-body-large",
                 children: r
             })]
         })
     };
 
-    function rm(e) {
+    function rf(e) {
         let {
             handleClose: t,
             handleRedeemCreditClick: r,
@@ -3223,34 +3227,34 @@
             samsungPaymentMethods: {
                 isOpen: a
             }
-        } = (0, L.useContext)(ty), i = (0, er.useTranslations)("Feature.Premium");
-        return (0, U.jsx)(tx.Dialog, {
+        } = (0, O.useContext)(tP), i = (0, ei.useTranslations)("Feature.Premium");
+        return (0, L.jsx)(tv.Dialog, {
             open: a,
             onOpenChange: t,
             isModal: !0,
             hasCloseAffordance: !0,
             closeLabel: i("Action.Close"),
             size: "Large",
-            children: (0, U.jsx)(tx.DialogContent, {
-                children: (0, U.jsxs)(tx.DialogBody, {
+            children: (0, L.jsx)(tv.DialogContent, {
+                children: (0, L.jsxs)(tv.DialogBody, {
                     className: "flex flex-col gap-medium",
-                    children: [(0, U.jsx)(tx.DialogTitle, {
-                        children: (0, U.jsx)("div", {
+                    children: [(0, L.jsx)(tv.DialogTitle, {
+                        children: (0, L.jsx)("div", {
                             className: "margin-right-large",
                             children: i("Message.MobilePaymentMethod.BottomSheetTitle")
                         })
-                    }), (0, U.jsxs)("div", {
+                    }), (0, L.jsxs)("div", {
                         className: "flex flex-col gap-medium",
-                        children: [(0, U.jsx)(rd, {
+                        children: [(0, L.jsx)(rh, {
                             onClick: n,
                             title: i("Message.MobilePaymentMethod.MilkyWayCheckout"),
-                            iconComponent: (0, U.jsx)("div", {
+                            iconComponent: (0, L.jsx)("div", {
                                 className: "icon-samsung-pay width-[34px] height-[34px]"
                             })
-                        }), (0, U.jsx)(rd, {
+                        }), (0, L.jsx)(rh, {
                             onClick: r,
                             title: i("Message.MobilePaymentMethod.RobloxCredit"),
-                            iconComponent: (0, U.jsx)("div", {
+                            iconComponent: (0, L.jsx)("div", {
                                 className: "payment-method-image robloxCredit width-[42px] height-[28px]"
                             })
                         })]
@@ -3259,15 +3263,15 @@
             })
         })
     }
-    let rp = [
+    let rg = [
             ["responseEnd", "PrimaryDataReady", ["startTime", "redirectStart", "redirectEnd", "domainLookupStart", "domainLookupEnd", "connectStart", "secureConnectionStart", "connectEnd", "requestStart", "responseStart", "domInteractive"]],
             ["domContentLoadedEventStart", "DataProcessingStarted", []],
             ["domContentLoadedEventEnd", "RenderStarted", ["loadEventStart", "loadEventEnd"]]
         ],
         {
-            reportInteractive: rh
+            reportInteractive: rx
         } = function(e) {
-            if (!J.window) return {
+            if (!et.window) return {
                 reportInteractive: () => void 0
             };
             try {
@@ -3282,7 +3286,7 @@
                         try {
                             let l;
                             if (u) return;
-                            let c = new URLSearchParams(J.window?.location.search ?? "").get("ttiStartMs"),
+                            let c = new URLSearchParams(et.window?.location.search ?? "").get("ttiStartMs"),
                                 d = null === c ? NaN : Number(c);
                             if (!Number.isFinite(d)) {
                                 u = !0;
@@ -3299,7 +3303,7 @@
                                         deltaMs: a,
                                         serverDeltaMs: i
                                     } = e;
-                                    return t ? rp.reduce((e, s) => {
+                                    return t ? rg.reduce((e, s) => {
                                         let [l, o, c] = s, u = t[l], d = c?.reduce((e, r) => {
                                             let n = t[r];
                                             return n ? [...e, {
@@ -3362,7 +3366,7 @@
                                 ...e,
                                 subphases: e.subphases.filter(e => Number.isFinite(e.deltaMs))
                             } : e);
-                            (l = J.window?.Roblox, l?.Hybrid?.Navigation)?.navigateToFeature({
+                            (l = et.window?.Roblox, l?.Hybrid?.Navigation)?.navigateToFeature({
                                 feature: "TTIComplete",
                                 eventName: e,
                                 milestones: f
@@ -3379,13 +3383,13 @@
                             partial: !0
                         })
                     };
-                if (J.document && ("complete" === J.document.readyState ? o = !0 : J.window && J.window.addEventListener("load", () => {
+                if (et.document && ("complete" === et.document.readyState ? o = !0 : et.window && et.window.addEventListener("load", () => {
                         o = !0, m()
                     }, {
                         once: !0
-                    }), J.document.addEventListener("visibilitychange", () => {
-                        J.document?.visibilityState === "hidden" && p()
-                    })), J.window && (J.window.addEventListener("pagehide", p), J.window.addEventListener("unload", p)), "u" > typeof PerformanceObserver) try {
+                    }), et.document.addEventListener("visibilitychange", () => {
+                        et.document?.visibilityState === "hidden" && p()
+                    })), et.window && (et.window.addEventListener("pagehide", p), et.window.addEventListener("unload", p)), "u" > typeof PerformanceObserver) try {
                     (i = new PerformanceObserver(e => {
                         for (let t of e.getEntries())
                             if ("first-paint" === t.name ? r = t.startTime : "first-contentful-paint" === t.name && (n = t.startTime), void 0 !== r && void 0 !== n) {
@@ -3414,30 +3418,30 @@
                 }
             }
         }("BuyRobux_WebView_TTI"),
-        rf = (0, eg.createFireTelemetryCounter)("BuyRobuxRedesign"),
-        rg = (0, ef.createWithApiMetrics)(rf);
+        rb = (0, ey.createFireTelemetryCounter)("BuyRobuxRedesign"),
+        ry = (0, eb.createWithApiMetrics)(rb);
 
-    function rx() {
-        let e = (0, er.useTranslations)("CommonUI.Controls"),
-            t = (0, er.useTranslations)("Feature.Premium"),
+    function rv() {
+        let e = (0, ei.useTranslations)("CommonUI.Controls"),
+            t = (0, ei.useTranslations)("Feature.Premium"),
             {
                 redirectError: {
                     isOpen: r,
                     closeModal: n
                 }
-            } = (0, L.useContext)(ty);
-        return (0, U.jsx)(tx.Dialog, {
+            } = (0, O.useContext)(tP);
+        return (0, L.jsx)(tv.Dialog, {
             open: r,
             onOpenChange: n,
             size: "Medium",
             isModal: !0,
             hasCloseAffordance: !0,
             closeLabel: e("Action.Close"),
-            children: (0, U.jsx)(tx.DialogContent, {
-                children: (0, U.jsxs)(tx.DialogBody, {
-                    children: [(0, U.jsx)(tx.DialogTitle, {
+            children: (0, L.jsx)(tv.DialogContent, {
+                children: (0, L.jsxs)(tv.DialogBody, {
+                    children: [(0, L.jsx)(tv.DialogTitle, {
                         children: t("Message.SomethingWentWrong")
-                    }), (0, U.jsx)("div", {
+                    }), (0, L.jsx)("div", {
                         className: "text-body-large",
                         children: t("Message.PleaseTryAgain")
                     })]
@@ -3445,63 +3449,63 @@
             })
         })
     }
-    let rb = () => {
-            if (void 0 === J.navigator) return null;
-            let e = /RobloxApp\/\d+\.(\d+)/.exec(J.navigator.userAgent);
+    let rS = () => {
+            if (void 0 === et.navigator) return null;
+            let e = /RobloxApp\/\d+\.(\d+)/.exec(et.navigator.userAgent);
             if (e?.[1] == null) return null;
             let t = Number.parseInt(e[1], 10);
             return Number.isNaN(t) ? null : t
         },
-        ry = e => {
+        rP = e => {
             if (!e.isAndroidApp) return !1;
-            let t = rb();
+            let t = rS();
             return null !== t && t >= 743
         },
-        rv = e => {
-            let t = J.window ? new URL(e, J.window.location.href).href : e;
+        rC = e => {
+            let t = et.window ? new URL(e, et.window.location.href).href : e;
             return `roblox://open-external?url=${encodeURIComponent(t)}`
         },
-        rS = (e, t) => ry(t) ? {
-            href: rv(e)
+        rE = (e, t) => rP(t) ? {
+            href: rC(e)
         } : {
             href: e,
             target: "_blank"
         },
-        rP = e => {
+        rw = e => {
             let {
                 children: t,
                 modals: r,
                 quickPay: n,
                 samsungPaymentMethods: a
-            } = e, i = (0, er.useTranslations)("Feature.VerifiedParentalControls"), {
+            } = e, i = (0, ei.useTranslations)("Feature.VerifiedParentalControls"), {
                 markConsentAcknowledged: s,
                 deviceMeta: l
-            } = (0, L.useContext)(ec), o = (0, L.useCallback)(e => {
-                eS("StripeReactCrash", null, e)
-            }, []), c = (0, L.useCallback)(() => {
-                ey("FirstTimePurchaseConsentConfirmed"), s(), r.firstTimePurchaseConsent.closeModal(), r.firstTimePurchaseConsent.continuePurchase?.()
-            }, [s, r.firstTimePurchaseConsent]), u = (0, L.useCallback)(() => {
-                ey("FirstTimePurchaseConsentDismiss"), r.firstTimePurchaseConsent.closeModal()
+            } = (0, O.useContext)(em), o = (0, O.useCallback)(e => {
+                eE("StripeReactCrash", null, e)
+            }, []), c = (0, O.useCallback)(() => {
+                eP("FirstTimePurchaseConsentConfirmed"), s(), r.firstTimePurchaseConsent.closeModal(), r.firstTimePurchaseConsent.continuePurchase?.()
+            }, [s, r.firstTimePurchaseConsent]), u = (0, O.useCallback)(() => {
+                eP("FirstTimePurchaseConsentDismiss"), r.firstTimePurchaseConsent.closeModal()
             }, [r.firstTimePurchaseConsent]);
-            return (0, U.jsxs)(ty.Provider, {
+            return (0, L.jsxs)(tP.Provider, {
                 value: r,
-                children: [t, (0, U.jsx)(rm, {
+                children: [t, (0, L.jsx)(rf, {
                     ...a
-                }), (0, U.jsx)(tE, {}), (0, U.jsx)(tw, {}), (0, U.jsx)(tA, {}), n.stripe && (0, U.jsx)(tf, {
+                }), (0, L.jsx)(tk, {}), (0, L.jsx)(tT, {}), (0, L.jsx)(tI, {}), n.stripe && (0, L.jsx)(tb, {
                     onError: o,
-                    children: (0, U.jsxs)(tn.Elements, {
+                    children: (0, L.jsxs)(ts.Elements, {
                         stripe: n.stripe,
-                        children: [(0, U.jsx)(rc, {
+                        children: [(0, L.jsx)(rm, {
                             ...n
-                        }), (0, U.jsx)(ru, {})]
+                        }), (0, L.jsx)(rp, {})]
                     })
-                }), (0, U.jsx)(rx, {}), (0, U.jsx)(tb, {
+                }), (0, L.jsx)(rv, {}), (0, L.jsx)(tS, {
                     title: i("Label.AskParentFirst"),
                     description: i.html("Description.ParentalApprovalRequired", [{
                         opening: "learnLinkStart",
                         closing: "learnLinkEnd",
-                        render: e => (0, U.jsx)("a", {
-                            ...rS("https://en.help.roblox.com/hc/en-us/articles/4409558125460-Monthly-Spending-Limits-and-Notifications-FAQ", l),
+                        render: e => (0, L.jsx)("a", {
+                            ...rE("https://en.help.roblox.com/hc/en-us/articles/4409558125460-Monthly-Spending-Limits-and-Notifications-FAQ", l),
                             className: "color-content-default [text-decoration:underline] [text-underline-position:from-font]",
                             rel: "noreferrer",
                             children: e
@@ -3510,8 +3514,8 @@
                     confirmation: i.html("Description.ParentalApprovalConfirmation", [{
                         opening: "termsLinkStart",
                         closing: "termsLinkEnd",
-                        render: e => (0, U.jsx)("a", {
-                            ...rS("https://en.help.roblox.com/hc/en-us/articles/115004647846-Roblox-Terms-of-Use", l),
+                        render: e => (0, L.jsx)("a", {
+                            ...rE("https://en.help.roblox.com/hc/en-us/articles/115004647846-Roblox-Terms-of-Use", l),
                             className: "color-content-emphasis [text-decoration:underline] [text-underline-position:from-font]",
                             rel: "noreferrer",
                             children: e
@@ -3522,42 +3526,42 @@
                     isOpen: r.firstTimePurchaseConsent.isOpen,
                     onConfirm: c,
                     onCancel: u,
-                    publishMetric: rf,
-                    triggerContext: eG(l)
+                    publishMetric: rb,
+                    triggerContext: eW(l)
                 })]
             })
         },
-        rC = (0, L.createContext)({
+        rN = (0, O.createContext)({
             selectedProduct: void 0,
             purchaseProduct: () => void 0,
             purchaseNonRedirectProduct: () => Promise.resolve()
         });
-    (c = {}).AllAges = "AllAges", c.NinePlus = "NinePlus", c.ThirteenPlus = "ThirteenPlus", c.SeventeenPlus = "SeventeenPlus", c.EighteenPlus = "EighteenPlus", (u = {}).Discoverable = "Discoverable", u.NotDiscoverable = "NotDiscoverable", (d = {}).Light = "Light", d.Dark = "Dark", (m = {}).Default = "Default", m.Amethyst = "Amethyst", m.Emerald = "Emerald", m.Peridot = "Peridot", m.Rose = "Rose", m.Ruby = "Ruby", m.CosmicDust = "CosmicDust", m.PolarFreeze = "PolarFreeze", m.SuperCharge = "SuperCharge", m.ElectricLime = "ElectricLime", m.LavaGlow = "LavaGlow", m.StarBurst = "StarBurst", m.PixelPop = "PixelPop", m.NebulaDrift = "NebulaDrift", m.NitroFrost = "NitroFrost", m.CircuitRush = "CircuitRush", m.KineticEnergy = "KineticEnergy", m.InfernoBlast = "InfernoBlast", m.HyperPlum = "HyperPlum", m.QuantumPulse = "QuantumPulse", m.Classic = "Classic", m.Halloween2026 = "Halloween2026", (p = {}).AllUsers = "All", p.Friends = "Friends", p.Following = "Following", p.Followers = "Followers", p.NoOne = "NoOne", p.TrustedFriends = "TrustedFriends", (h = {}).AllUsers = "AllUsers", h.Friends = "Friends", h.FriendsAndFollowing = "FriendsAndFollowing", h.FriendsFollowingAndFollowers = "FriendsFollowingAndFollowers", h.NoOne = "NoOne", h.TrustedFriends = "TrustedFriends", (f = {}).Default = "NotificationsOnlyOnThresholdPassed", f.AllNotifications = "NotificationsEveryAmountSpent", f.NotificationsOff = "NotificationsOff", (g = {}).Yes = "Yes", g.No = "No", (x = {}).Enabled = "Enabled", x.Disabled = "Disabled", (b = {}).Allowed = "Allowed", b.Disallowed = "Disallowed", (y = {}).OlderAgeGroupsAllowed = "OlderAgeGroupsAllowed", y.SimilarAgeGroupsOnly = "SimilarAgeGroupsOnly", y.SimilarOrTrustedConnections = "SimilarOrTrustedConnections", y.NoOne = "NoOne", (v = {}).AllAgeGroups = "AllAgeGroups", v.SimilarAgeGroupsAndTrustedFriends = "SimilarAgeGroupsAndTrustedFriends", v.TrustedFriends = "TrustedFriends", v.NoOne = "NoOne", (S = {}).AllConnections = "AllConnections", S.TrustedConnectionsOnly = "TrustedConnectionsOnly", S.NoOne = "NoOne", (P = {}).None = "None", P.Low = "Low", P.Medium = "Medium", P.High = "High", (C = {}).G = "ACB_AGE_G", C.PG = "ACB_AGE_PG", C.M = "ACB_AGE_M", C.MA15 = "ACB_AGE_MA15", C.R18 = "ACB_AGE_R18", (E = {}).AlwaysAsk = "AlwaysAsk", E.TrustedFriendsAutoApproved = "TrustedFriendsAutoApproved", (w = {}).contentAgeRestriction = "contentAgeRestriction", w.phoneNumberDiscoverability = "phoneNumberDiscoverability", w.whoCanChatWithMeInApp = "whoCanChatWithMeInApp", w.whoCanJoinMeInExperiences = "whoCanJoinMeInExperiences", w.whoCanSeeMyInventory = "whoCanSeeMyInventory", w.whoCanTradeWithMe = "whoCanTradeWithMe", w.tradeQualityFilter = "tradeQualityFilter", w.themeType = "themeType", w.accountTheme = "accountTheme", w.canUploadContacts = "canUploadContacts", w.updateFriendsAboutMyActivity = "updateFriendsAboutMyActivity", w.privateServerPrivacy = "privateServerPrivacy", w.allowSellShareData = "allowSellShareData", w.allowPersonalizedAdvertising = "allowPersonalizedAdvertising", w.monthlySpendLimit = "monthlySpendLimit", w.spendNotifications = "spendNotifications", w.monthlySpendLimitCurrencyCode = "monthlySpendLimitCurrencyCode", w.monthlySpendLimitNotificationType = "monthlySpendLimitNotificationType", w.enablePurchases = "enablePurchases", w.whoCanGroupChatWithMeInApp = "whoCanGroupChatWithMeInApp", w.whoCanWhisperChatWithMeInExperiences = "whoCanWhisperChatWithMeInExperiences", w.whoCanChatWithMeInExperiences = "whoCanChatWithMeInExperiences", w.dailyScreenTimeLimit = "dailyScreenTimeLimit", w.whoCanSeeMySocialNetworks = "whoCanSeeMySocialNetworks", w.allowThirdPartyAppPermissions = "allowThirdPartyAppPermissions", w.allowEnablePushNotifications = "allowEnablePushNotifications", w.allowEnableEmailNotifications = "allowEnableEmailNotifications", w.allowEnableGroupNotifications = "allowEnableGroupNotifications", w.allowEnableExperienceNotifications = "allowEnableExperienceNotifications", w.allowVoiceDataUsage = "allowVoiceDataUsage", w.whoCanOneOnOnePartyWithMe = "whoCanOneOnOnePartyWithMe", w.whoCanGroupPartyWithMe = "whoCanGroupPartyWithMe", w.doNotDisturb = "doNotDisturb", w.doNotDisturbTimeWindow = "doNotDisturbTimeWindow", w.whoCanSeeMyOnlineStatus = "whoCanSeeMyOnlineStatus", w.allowSensitiveIssues = "allowSensitiveIssues", w.allowMarketingEmailNotifications = "allowMarketingEmailNotifications", w.AllowPromotionalOffersNotifications = "AllowPromotionalOffersNotifications", w.allowCrossAgeGroupStudioCollaboration = "allowCrossAgeGroupStudioCollaboration", w.allowFacialAgeEstimation = "allowFacialAgeEstimation", w.whoCanPartyWithMe = "whoCanPartyWithMe", w.whoCanUsePartyChatWithMe = "whoCanUsePartyChatWithMe", w.whoCanUsePartyVoiceWithMe = "whoCanUsePartyVoiceWithMe", w.aggregatedDesktopNotifications = "aggregatedDesktopNotifications", w.allowPresetChat = "allowPresetChat", w.privatePlaytest = "privatePlaytest", w.allowIdentityVerification = "allowIdentityVerification", w.robuxTransferLimits = "robuxTransferLimits", w.robuxTransferApprovalMode = "robuxTransferApprovalMode", w.iarcAgeRating = "iarcAgeRating", w.allowThirdPartyFriendAccess = "allowThirdPartyFriendAccess", w.whoCanSeeMyFriendsList = "whoCanSeeMyFriendsList", w.whoCanSeeMyPastUsernames = "whoCanSeeMyPastUsernames", w.whoCanSeeMyAboutSection = "whoCanSeeMyAboutSection", (N = {}).Value = "Value", N.Integer = "Integer";
-    var rE = ((k = {}).None = "None", k.ParentalConsent = "ParentalConsent", k.SelfUpdateSetting = "SelfUpdateSetting", k.ContentAgeRestrictionVerification = "ContentAgeRestrictionVerification", k.FacialAgeEstimation = "FacialAgeEstimation", k.IdVerification = "IdVerification", k.VpcForFae = "VpcForFae", k.AgeCheckPending = "AgeCheckPending", k.ParentConsentInherited = "ParentConsentInherited", k.Inherited = "Inherited", k.ReadableButNotActionable = "ReadableButNotActionable", k),
-        rw = e.i(266712),
-        rN = ((T = {}).FraudPaymentAuthorizationAttempt = "FraudPaymentAuthorizationAttempt", T.FraudVirtualEconomyAbuse = "FraudVirtualEconomyAbuse", T.FraudAbuseOfAffiliateSystem = "FraudAbuseOfAffiliateSystem", T.FraudAttemptedUnauthorizedPaymentMethodUse = "FraudAttemptedUnauthorizedPaymentMethodUse", T.FraudRepeatedRefundRequests = "FraudRepeatedRefundRequests", T.FraudSuspiciousRefundRequests = "FraudSuspiciousRefundRequests", T.FraudUnauthorizedPurchase = "FraudUnauthorizedPurchase", T.FraudUseOfUnauthorizedOffPlatformTransactions = "FraudUseOfUnauthorizedOffPlatformTransactions", T.FraudUseOfUnauthorizedPaymentMethod = "FraudUseOfUnauthorizedPaymentMethod", T.FraudSuspiciousAccountPatterns = "FraudSuspiciousAccountPatterns", T.FraudChargeback = "FraudChargeback", T.None = "None", T.PurchaseNotEnabled = "PurchaseNotEnabled", T.SpendLimitExceeded = "SpendLimitExceeded", T),
-        rk = ((j = {}).BuyRobuxPage = "BuyRobuxPage", j.BuyRobuxPagePreselectedProduct = "BuyRobuxPagePreselectedProduct", j),
-        rT = ((A = {}).INVALID = "Invalid", A.AMUSEMENT_TAX = "AmusementTax", A.COMMUNICATIONS_TAX = "CommunicationsTax", A.GST = "Gst", A.HST = "Hst", A.IGST = "Igst", A.JCT = "Jct", A.LEASE_TAX = "LeaseTax", A.PST = "Pst", A.QST = "Qst", A.RST = "Rst", A.SALES_TAX = "SalesTax", A.VAT = "Vat", A.SUMMED = "Summed", A.SERVICE_TAX = "ServiceTax", A.UNKNOWN = "Unknown", A),
-        rj = ((M = {}).INCORRECT_CVC = "incorrect_cvc", M.CARD_DECLINED = "card_declined", M.EXPIRED_CARD = "expired_card", M.INSUFFICIENT_FUNDS = "insufficient_funds", M.BALANCE_INSUFFICIENT = "balance_insufficient", M);
-    let rA = async () => eT(eN.POST, ek.CHECK_USER_PURCHASE_SETTING, {
-        url: `${ei.EnvironmentUrls.apiGatewayUrl}/payments-gateway/v1/check-user-purchase-settings`,
+    (m = {}).AllAges = "AllAges", m.NinePlus = "NinePlus", m.ThirteenPlus = "ThirteenPlus", m.SeventeenPlus = "SeventeenPlus", m.EighteenPlus = "EighteenPlus", (p = {}).Discoverable = "Discoverable", p.NotDiscoverable = "NotDiscoverable", (h = {}).Light = "Light", h.Dark = "Dark", (f = {}).Default = "Default", f.Amethyst = "Amethyst", f.Emerald = "Emerald", f.Peridot = "Peridot", f.Rose = "Rose", f.Ruby = "Ruby", f.CosmicDust = "CosmicDust", f.PolarFreeze = "PolarFreeze", f.SuperCharge = "SuperCharge", f.ElectricLime = "ElectricLime", f.LavaGlow = "LavaGlow", f.StarBurst = "StarBurst", f.PixelPop = "PixelPop", f.NebulaDrift = "NebulaDrift", f.NitroFrost = "NitroFrost", f.CircuitRush = "CircuitRush", f.KineticEnergy = "KineticEnergy", f.InfernoBlast = "InfernoBlast", f.HyperPlum = "HyperPlum", f.QuantumPulse = "QuantumPulse", f.Classic = "Classic", f.Halloween2026 = "Halloween2026", (g = {}).AllUsers = "All", g.Friends = "Friends", g.Following = "Following", g.Followers = "Followers", g.NoOne = "NoOne", g.TrustedFriends = "TrustedFriends", (x = {}).AllUsers = "AllUsers", x.Friends = "Friends", x.FriendsAndFollowing = "FriendsAndFollowing", x.FriendsFollowingAndFollowers = "FriendsFollowingAndFollowers", x.NoOne = "NoOne", x.TrustedFriends = "TrustedFriends", (b = {}).Default = "NotificationsOnlyOnThresholdPassed", b.AllNotifications = "NotificationsEveryAmountSpent", b.NotificationsOff = "NotificationsOff", (y = {}).Yes = "Yes", y.No = "No", (v = {}).Enabled = "Enabled", v.Disabled = "Disabled", (S = {}).Allowed = "Allowed", S.Disallowed = "Disallowed", (P = {}).OlderAgeGroupsAllowed = "OlderAgeGroupsAllowed", P.SimilarAgeGroupsOnly = "SimilarAgeGroupsOnly", P.SimilarOrTrustedConnections = "SimilarOrTrustedConnections", P.NoOne = "NoOne", (C = {}).AllAgeGroups = "AllAgeGroups", C.SimilarAgeGroupsAndTrustedFriends = "SimilarAgeGroupsAndTrustedFriends", C.TrustedFriends = "TrustedFriends", C.NoOne = "NoOne", (E = {}).AllConnections = "AllConnections", E.TrustedConnectionsOnly = "TrustedConnectionsOnly", E.NoOne = "NoOne", (w = {}).None = "None", w.Low = "Low", w.Medium = "Medium", w.High = "High", (N = {}).G = "ACB_AGE_G", N.PG = "ACB_AGE_PG", N.M = "ACB_AGE_M", N.MA15 = "ACB_AGE_MA15", N.R18 = "ACB_AGE_R18", (k = {}).AlwaysAsk = "AlwaysAsk", k.TrustedFriendsAutoApproved = "TrustedFriendsAutoApproved", (T = {}).contentAgeRestriction = "contentAgeRestriction", T.phoneNumberDiscoverability = "phoneNumberDiscoverability", T.whoCanChatWithMeInApp = "whoCanChatWithMeInApp", T.whoCanJoinMeInExperiences = "whoCanJoinMeInExperiences", T.whoCanSeeMyInventory = "whoCanSeeMyInventory", T.whoCanTradeWithMe = "whoCanTradeWithMe", T.tradeQualityFilter = "tradeQualityFilter", T.themeType = "themeType", T.accountTheme = "accountTheme", T.canUploadContacts = "canUploadContacts", T.updateFriendsAboutMyActivity = "updateFriendsAboutMyActivity", T.privateServerPrivacy = "privateServerPrivacy", T.allowSellShareData = "allowSellShareData", T.allowPersonalizedAdvertising = "allowPersonalizedAdvertising", T.monthlySpendLimit = "monthlySpendLimit", T.spendNotifications = "spendNotifications", T.monthlySpendLimitCurrencyCode = "monthlySpendLimitCurrencyCode", T.monthlySpendLimitNotificationType = "monthlySpendLimitNotificationType", T.enablePurchases = "enablePurchases", T.whoCanGroupChatWithMeInApp = "whoCanGroupChatWithMeInApp", T.whoCanWhisperChatWithMeInExperiences = "whoCanWhisperChatWithMeInExperiences", T.whoCanChatWithMeInExperiences = "whoCanChatWithMeInExperiences", T.dailyScreenTimeLimit = "dailyScreenTimeLimit", T.whoCanSeeMySocialNetworks = "whoCanSeeMySocialNetworks", T.allowThirdPartyAppPermissions = "allowThirdPartyAppPermissions", T.allowEnablePushNotifications = "allowEnablePushNotifications", T.allowEnableEmailNotifications = "allowEnableEmailNotifications", T.allowEnableGroupNotifications = "allowEnableGroupNotifications", T.allowEnableExperienceNotifications = "allowEnableExperienceNotifications", T.allowVoiceDataUsage = "allowVoiceDataUsage", T.whoCanOneOnOnePartyWithMe = "whoCanOneOnOnePartyWithMe", T.whoCanGroupPartyWithMe = "whoCanGroupPartyWithMe", T.doNotDisturb = "doNotDisturb", T.doNotDisturbTimeWindow = "doNotDisturbTimeWindow", T.whoCanSeeMyOnlineStatus = "whoCanSeeMyOnlineStatus", T.allowSensitiveIssues = "allowSensitiveIssues", T.allowMarketingEmailNotifications = "allowMarketingEmailNotifications", T.AllowPromotionalOffersNotifications = "AllowPromotionalOffersNotifications", T.allowCrossAgeGroupStudioCollaboration = "allowCrossAgeGroupStudioCollaboration", T.allowFacialAgeEstimation = "allowFacialAgeEstimation", T.whoCanPartyWithMe = "whoCanPartyWithMe", T.whoCanUsePartyChatWithMe = "whoCanUsePartyChatWithMe", T.whoCanUsePartyVoiceWithMe = "whoCanUsePartyVoiceWithMe", T.aggregatedDesktopNotifications = "aggregatedDesktopNotifications", T.allowPresetChat = "allowPresetChat", T.privatePlaytest = "privatePlaytest", T.allowIdentityVerification = "allowIdentityVerification", T.robuxTransferLimits = "robuxTransferLimits", T.robuxTransferApprovalMode = "robuxTransferApprovalMode", T.iarcAgeRating = "iarcAgeRating", T.allowThirdPartyFriendAccess = "allowThirdPartyFriendAccess", T.whoCanSeeMyFriendsList = "whoCanSeeMyFriendsList", T.whoCanSeeMyPastUsernames = "whoCanSeeMyPastUsernames", T.whoCanSeeMyAboutSection = "whoCanSeeMyAboutSection", (j = {}).Value = "Value", j.Integer = "Integer";
+    var rk = ((A = {}).None = "None", A.ParentalConsent = "ParentalConsent", A.SelfUpdateSetting = "SelfUpdateSetting", A.ContentAgeRestrictionVerification = "ContentAgeRestrictionVerification", A.FacialAgeEstimation = "FacialAgeEstimation", A.IdVerification = "IdVerification", A.VpcForFae = "VpcForFae", A.AgeCheckPending = "AgeCheckPending", A.ParentConsentInherited = "ParentConsentInherited", A.Inherited = "Inherited", A.ReadableButNotActionable = "ReadableButNotActionable", A),
+        rT = e.i(266712),
+        rj = ((M = {}).FraudPaymentAuthorizationAttempt = "FraudPaymentAuthorizationAttempt", M.FraudVirtualEconomyAbuse = "FraudVirtualEconomyAbuse", M.FraudAbuseOfAffiliateSystem = "FraudAbuseOfAffiliateSystem", M.FraudAttemptedUnauthorizedPaymentMethodUse = "FraudAttemptedUnauthorizedPaymentMethodUse", M.FraudRepeatedRefundRequests = "FraudRepeatedRefundRequests", M.FraudSuspiciousRefundRequests = "FraudSuspiciousRefundRequests", M.FraudUnauthorizedPurchase = "FraudUnauthorizedPurchase", M.FraudUseOfUnauthorizedOffPlatformTransactions = "FraudUseOfUnauthorizedOffPlatformTransactions", M.FraudUseOfUnauthorizedPaymentMethod = "FraudUseOfUnauthorizedPaymentMethod", M.FraudSuspiciousAccountPatterns = "FraudSuspiciousAccountPatterns", M.FraudChargeback = "FraudChargeback", M.None = "None", M.PurchaseNotEnabled = "PurchaseNotEnabled", M.SpendLimitExceeded = "SpendLimitExceeded", M),
+        rA = ((R = {}).BuyRobuxPage = "BuyRobuxPage", R.BuyRobuxPagePreselectedProduct = "BuyRobuxPagePreselectedProduct", R),
+        rM = ((I = {}).INVALID = "Invalid", I.AMUSEMENT_TAX = "AmusementTax", I.COMMUNICATIONS_TAX = "CommunicationsTax", I.GST = "Gst", I.HST = "Hst", I.IGST = "Igst", I.JCT = "Jct", I.LEASE_TAX = "LeaseTax", I.PST = "Pst", I.QST = "Qst", I.RST = "Rst", I.SALES_TAX = "SalesTax", I.VAT = "Vat", I.SUMMED = "Summed", I.SERVICE_TAX = "ServiceTax", I.UNKNOWN = "Unknown", I),
+        rR = ((U = {}).INCORRECT_CVC = "incorrect_cvc", U.CARD_DECLINED = "card_declined", U.EXPIRED_CARD = "expired_card", U.INSUFFICIENT_FUNDS = "insufficient_funds", U.BALANCE_INSUFFICIENT = "balance_insufficient", U);
+    let rI = async () => eM(ej.POST, eA.CHECK_USER_PURCHASE_SETTING, {
+        url: `${eo.EnvironmentUrls.apiGatewayUrl}/payments-gateway/v1/check-user-purchase-settings`,
         withCredentials: !0
-    }, {}), rM = async function(e) {
+    }, {}), rU = async function(e) {
         let t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : [],
             r = new URLSearchParams({
                 quickPayFlowType: e
             });
         return t.forEach(e => {
             r.append("productIds", e)
-        }), eT(eN.GET, ek.GET_QUICK_PAY_METADATA, {
-            url: `${ei.EnvironmentUrls.apiGatewayUrl}/payments-gateway/v1/get-quick-pay-metadata`,
+        }), eM(ej.GET, eA.GET_QUICK_PAY_METADATA, {
+            url: `${eo.EnvironmentUrls.apiGatewayUrl}/payments-gateway/v1/get-quick-pay-metadata`,
             withCredentials: !0
         }, r)
-    }, rR = async () => eT(eN.GET, ek.GET_PAYMENT_PROFILES, {
-        url: `${ei.EnvironmentUrls.apiGatewayUrl}/payments-gateway/v1/payment-profiles`,
+    }, r_ = async () => eM(ej.GET, eA.GET_PAYMENT_PROFILES, {
+        url: `${eo.EnvironmentUrls.apiGatewayUrl}/payments-gateway/v1/payment-profiles`,
         withCredentials: !0
-    }), rI = async (e, t, r, n, a) => eT(eN.POST, ek.PREPARE_PAYMENT, {
-        url: `${ei.EnvironmentUrls.apiGatewayUrl}/payments-gateway/v1/prepare-payment`,
+    }), rF = async (e, t, r, n, a) => eM(ej.POST, eA.PREPARE_PAYMENT, {
+        url: `${eo.EnvironmentUrls.apiGatewayUrl}/payments-gateway/v1/prepare-payment`,
         withCredentials: !0
     }, {
         isQuickPay: !0,
@@ -3566,21 +3570,21 @@
         paymentSessionId: r,
         productId: n,
         quickPaySelectedPaymentProfileId: a
-    }, void 0, !0), rU = async e => eT(eN.POST, ek.PROCESS_PAYMENT, {
-        url: `${ei.EnvironmentUrls.apiGatewayUrl}/payments-gateway/v1/process-payment`,
+    }, void 0, !0), rL = async e => eM(ej.POST, eA.PROCESS_PAYMENT, {
+        url: `${eo.EnvironmentUrls.apiGatewayUrl}/payments-gateway/v1/process-payment`,
         withCredentials: !0
-    }, e), r_ = async (e, t, r) => eT(eN.GET, ek.GET_PENDING_ENABLE_PURCHASE_CONSENT_REQUESTS, {
-        url: `${ei.EnvironmentUrls.apiGatewayUrl}/parental-controls-api/v1/parental-controls/consents`,
+    }, e), rD = async (e, t, r) => eM(ej.GET, eA.GET_PENDING_ENABLE_PURCHASE_CONSENT_REQUESTS, {
+        url: `${eo.EnvironmentUrls.apiGatewayUrl}/parental-controls-api/v1/parental-controls/consents`,
         withCredentials: !0
     }, {
         childUserId: e,
         consentStatus: "Pending",
         consentType: t,
         cursor: r
-    }), rF = async (e, t) => {
+    }), rB = async (e, t) => {
         let r, n = [];
         do {
-            let a = await r_(e, t, r);
+            let a = await rD(e, t, r);
             a ? (n = [...n, ...a.consents], r = a.nextCursor) : r = void 0
         } while (r) return n.find(e => {
             let {
@@ -3588,66 +3592,66 @@
             } = e;
             return t?.enablePurchases
         })
-    }, rL = async () => eT(eN.GET, ek.GET_ENABLE_PURCHASES_SETTING, {
-        url: `${ei.EnvironmentUrls.userSettingsApi}/v1/user-settings/settings-and-options?requestedUserSettings=enablePurchases`,
+    }, rO = async () => eM(ej.GET, eA.GET_ENABLE_PURCHASES_SETTING, {
+        url: `${eo.EnvironmentUrls.userSettingsApi}/v1/user-settings/settings-and-options?requestedUserSettings=enablePurchases`,
         withCredentials: !0
     });
-    var rD = e.i(139047);
-    let rB = async () => await (0, rD.callBehaviour)("texas-u18-vpc-optimization"), rO = async () => {
+    var rG = e.i(139047);
+    let rz = async () => await (0, rG.callBehaviour)("texas-u18-vpc-optimization"), rV = async () => {
         try {
-            return await (0, rD.callBehaviour)("app-policy")
+            return await (0, rG.callBehaviour)("app-policy")
         } catch {
             return {}
         }
     };
-    var rG = e.i(868275),
-        rz = e.i(154286);
-    let rV = "/login-redirect",
-        rW = "Payments.LoginRedirect.ExposureBased",
-        rK = new class {
+    var rW = e.i(868275),
+        rK = e.i(154286);
+    let rH = "/login-redirect",
+        rQ = "Payments.LoginRedirect.ExposureBased",
+        r$ = new class {
             async getExperimentBasedPathname(e) {
-                if (!(0, ea.getCurrentUser)()?.id) return {
-                    pathname: rV,
+                if (!(0, el.getCurrentUser)()?.id) return {
+                    pathname: rH,
                     isInExperiment: !1
                 };
                 let t = e.appType.trim().replace(/\s+/g, "_"),
                     r = (() => {
-                        if (void 0 === J.navigator) return null;
-                        let e = /(?:iPhone OS|CPU OS) (\d+)[._]/.exec(J.navigator.userAgent);
+                        if (void 0 === et.navigator) return null;
+                        let e = /(?:iPhone OS|CPU OS) (\d+)[._]/.exec(et.navigator.userAgent);
                         if (e?.[1] == null) return null;
                         let t = Number.parseInt(e[1], 10);
                         return Number.isNaN(t) ? null : t
                     })();
-                if (null !== r && r < 18) return ey("LoginRedirectUnsupportedIos", {
+                if (null !== r && r < 18) return eP("LoginRedirectUnsupportedIos", {
                     iosMajorVersion: r.toString(),
                     appType: t
                 }), {
-                    pathname: rV,
+                    pathname: rH,
                     isInExperiment: !1
                 };
-                let n = (await rz.default.getAllValuesForLayer(rW)).variant;
-                return "number" == typeof n ? (this.isExperimentAccessed = !0, ey("LoginRedirectExperimentEvaluated", {
+                let n = (await rK.default.getAllValuesForLayer(rQ)).variant;
+                return "number" == typeof n ? (this.isExperimentAccessed = !0, eP("LoginRedirectExperimentEvaluated", {
                     variant: n.toString(),
                     appType: t
                 }), {
-                    pathname: 1 === n ? "/login-redirect/v2" : rV,
+                    pathname: 1 === n ? "/login-redirect/v2" : rH,
                     isInExperiment: !0
-                }) : (ey("LoginRedirectExperimentEvaluated", {
+                }) : (eP("LoginRedirectExperimentEvaluated", {
                     variant: "unknown",
                     appType: t
                 }), {
-                    pathname: rV,
+                    pathname: rH,
                     isInExperiment: !1
                 })
             }
             logLayerExposure() {
-                this.isExperimentAccessed ? (ey("LoginRedirectExperimentExposed"), rz.default.logLayerExposure(rW)) : ey("LoginRedirectLoggingExposureWithoutExperimentAccess")
+                this.isExperimentAccessed ? (eP("LoginRedirectExperimentExposed"), rK.default.logLayerExposure(rQ)) : eP("LoginRedirectLoggingExposureWithoutExperimentAccess")
             }
             constructor() {
-                (0, rG._)(this, "isExperimentAccessed", !1)
+                (0, rW._)(this, "isExperimentAccessed", !1)
             }
         },
-        rH = [{
+        rq = [{
             maxMs: 12e4,
             label: "0-2"
         }, {
@@ -3664,24 +3668,24 @@
             label: "8-10"
         }];
 
-    function rQ(e) {
-        if (void 0 !== J.window) try {
+    function rY(e) {
+        if (void 0 !== et.window) try {
             let {
                 currentTarget: t
             } = e;
-            if (!(t instanceof J.window.HTMLAnchorElement) || !t.getAttribute("href")) return;
+            if (!(t instanceof et.window.HTMLAnchorElement) || !t.getAttribute("href")) return;
             t.href = function(e) {
                 let t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : Date.now();
-                if (void 0 === J.window) return e;
-                let r = new URL(e, J.window.location.origin);
+                if (void 0 === et.window) return e;
+                let r = new URL(e, et.window.location.origin);
                 return (r.searchParams.set("redirectStartTs", String(t)), /^https?:\/\//i.test(e)) ? r.toString() : `${r.pathname}${r.search}${r.hash}`
             }(t.href)
         } catch {
-            ey("StampRedirectStartTsFailed")
+            eP("StampRedirectStartTsFailed")
         }
     }
-    let r$ = null,
-        rq = [{
+    let rX = null,
+        rJ = [{
             maxMs: 1e3,
             label: "0-1s"
         }, {
@@ -3697,7 +3701,7 @@
             maxMs: 3e4,
             label: "10-30s"
         }],
-        rY = [{
+        rZ = [{
             max: 1,
             label: "1"
         }, {
@@ -3708,34 +3712,34 @@
             label: "3"
         }];
 
-    function rX(e, t, r) {
+    function r0(e, t, r) {
         let n;
         if (!e.isIosApp && !e.isAndroidApp) return;
         let a = {
-            appMinorVersion: null == (n = rb()) ? "unknown" : String(n),
+            appMinorVersion: null == (n = rS()) ? "unknown" : String(n),
             isSub: String(t),
             productId: r,
-            triggerContext: eG(e, t)
+            triggerContext: eW(e, t)
         };
         ! function(e) {
             let {
                 onUiShown: t,
                 uiShownTimeoutMs: r = 3e4
-            } = e, n = J.window, a = J.document;
+            } = e, n = et.window, a = et.document;
             if (void 0 === n || void 0 === a) return;
-            if (r$) return r$.recordTap();
+            if (rX) return rX.recordTap();
             let i = Date.now(),
                 s = {
                     tapCount: 1,
                     recordTap: () => void 0
                 },
                 l = () => {
-                    r$ === s && (r$ = null, void 0 !== s.shownTimer && n.clearTimeout(s.shownTimer), void 0 !== s.onBlur && n.removeEventListener("blur", s.onBlur))
+                    rX === s && (rX = null, void 0 !== s.shownTimer && n.clearTimeout(s.shownTimer), void 0 !== s.onBlur && n.removeEventListener("blur", s.onBlur))
                 };
             s.recordTap = () => {
                 s.tapCount += 1
-            }, r$ = s, s.onBlur = e => {
-                if (e.target !== n || r$ !== s) return;
+            }, rX = s, s.onBlur = e => {
+                if (e.target !== n || rX !== s) return;
                 let r = Date.now() - i,
                     {
                         tapCount: a
@@ -3746,7 +3750,7 @@
                     tapCount: a
                 })
             }, s.shownTimer = n.setTimeout(() => {
-                if (r$ !== s) return;
+                if (rX !== s) return;
                 let {
                     tapCount: e
                 } = s;
@@ -3759,14 +3763,14 @@
             onUiShown: e => {
                 var t, r;
                 let n, i;
-                ey("NativePurchaseUiShownTime", {
-                    bucket: "shown" === e.outcome ? (t = e.elapsedMs, n = rq.find(e => {
+                eP("NativePurchaseUiShownTime", {
+                    bucket: "shown" === e.outcome ? (t = e.elapsedMs, n = rJ.find(e => {
                         let {
                             maxMs: r
                         } = e;
                         return t <= r
                     }), n?.label ?? "timeout") : e.outcome,
-                    tapCount: (r = e.tapCount, i = rY.find(e => {
+                    tapCount: (r = e.tapCount, i = rZ.find(e => {
                         let {
                             max: t
                         } = e;
@@ -3774,11 +3778,11 @@
                     }), i?.label ?? "4+"),
                     appMinorVersion: a.appMinorVersion,
                     isSub: a.isSub
-                }), D.paymentFlowAnalyticsService.sendUserPurchaseFlowEvent({
+                }), G.paymentFlowAnalyticsService.sendUserPurchaseFlowEvent({
                     triggerContext: a.triggerContext,
                     isMidPurchaseStep: !0,
-                    viewName: D.paymentFlowAnalyticsService.ENUM_VIEW_NAME.NATIVE_PURCHASE_UI_SHOWN_TIME,
-                    purchaseEventType: D.paymentFlowAnalyticsService.ENUM_PURCHASE_EVENT_TYPE.VIEW_SHOWN,
+                    viewName: G.paymentFlowAnalyticsService.ENUM_VIEW_NAME.NATIVE_PURCHASE_UI_SHOWN_TIME,
+                    purchaseEventType: G.paymentFlowAnalyticsService.ENUM_PURCHASE_EVENT_TYPE.VIEW_SHOWN,
                     eventMetadata: {
                         appMinorVersion: a.appMinorVersion,
                         isSub: a.isSub,
@@ -3794,13 +3798,13 @@
         })
     }
 
-    function rJ(e) {
+    function r1(e) {
         let {
             children: t,
             quickPay: r,
             samsungPaymentMethods: n
         } = e;
-        return (0, U.jsx)(rC.Provider, {
+        return (0, L.jsx)(rN.Provider, {
             value: function(e, t) {
                 let {
                     isQuickPay: r,
@@ -3817,7 +3821,7 @@
                     redirect: d,
                     shouldShowFirstTimePurchaseConsent: m,
                     deviceMeta: p
-                } = (0, L.useContext)(ec), h = eU(p), f = eI(p), {
+                } = (0, O.useContext)(em), h = eL(p), f = eF(p), {
                     quickPay: {
                         openModal: g
                     },
@@ -3830,32 +3834,32 @@
                     firstTimePurchaseConsent: {
                         openModal: y
                     }
-                } = (0, L.useContext)(ty), {
+                } = (0, O.useContext)(tP), {
                     trackPurchase: v,
                     trackRedirectClick: S
-                } = (0, L.useContext)(eR), {
+                } = (0, O.useContext)(e_), {
                     isStoppedByPurchaseWarning: P
                 } = function() {
                     let {
                         isSubscriber: e,
                         deviceMeta: t
-                    } = (0, L.useContext)(ec), r = eU(t), n = eI(t), {
+                    } = (0, O.useContext)(em), r = eL(t), n = eF(t), {
                         purchaseWarning: {
                             openModal: a
                         }
-                    } = (0, L.useContext)(ty), [i, s] = (0, L.useState)(!1);
-                    return (0, L.useEffect)(() => {
-                        let e = J.document?.getElementById("robux-container-base")?.dataset;
+                    } = (0, O.useContext)(tP), [i, s] = (0, O.useState)(!1);
+                    return (0, O.useEffect)(() => {
+                        let e = et.document?.getElementById("robux-container-base")?.dataset;
                         e && s("true" === e.isScaryModalEnabled)
                     }, []), {
-                        isStoppedByPurchaseWarning: (0, L.useCallback)(async (t, s, l, o) => {
+                        isStoppedByPurchaseWarning: (0, O.useCallback)(async (t, s, l, o) => {
                             if (n && !i) return !1;
-                            let c = await tS(!n && !e && !s, t.productId);
+                            let c = await tE(!n && !e && !s, t.productId);
                             if (!c) return !1;
                             let {
                                 action: u
-                            } = c, d = u === tv.U13PaymentModal || u === tv.U13MonthlyThreshold1Modal || u === tv.U13MonthlyThreshold2Modal, m = u === tv.ParentalConsentWarningPaymentModal13To17 && r;
-                            return (!!d || !!m) && (ey("PurchaseWarningModalShown", {
+                            } = c, d = u === tC.U13PaymentModal || u === tC.U13MonthlyThreshold1Modal || u === tC.U13MonthlyThreshold2Modal, m = u === tC.ParentalConsentWarningPaymentModal13To17 && r;
+                            return (!!d || !!m) && (eP("PurchaseWarningModalShown", {
                                 action: u
                             }), a(u, () => {
                                 o(t, s, l)
@@ -3867,19 +3871,19 @@
                 } = function() {
                     let {
                         toastService: e
-                    } = et(), {
+                    } = ea(), {
                         purchaseDisabled: {
                             openModal: t
                         }
-                    } = (0, L.useContext)(ty), {
+                    } = (0, O.useContext)(tP), {
                         trackEconomicRestrictionErrorShown: r
-                    } = (0, L.useContext)(eR), {
+                    } = (0, O.useContext)(e_), {
                         deviceMeta: n
-                    } = (0, L.useContext)(ec), a = eU(n), i = eI(n), s = (0, er.useTranslations)("Feature.Premium"), l = (0, er.useTranslations)("Feature.NotApproved"), o = (0, er.useTranslations)("IAPExperience.PurchaseError"), [c, u] = (0, L.useState)(), d = (0, L.useCallback)(async () => {
-                        let e = (0, ea.getCurrentUser)()?.id;
-                        return void 0 !== e && !!await rF(e, "UpdateUserSetting")
-                    }, []), m = (0, L.useCallback)(async () => {
-                        let e = await rL();
+                    } = (0, O.useContext)(em), a = eL(n), i = eF(n), s = (0, ei.useTranslations)("Feature.Premium"), l = (0, ei.useTranslations)("Feature.NotApproved"), o = (0, ei.useTranslations)("IAPExperience.PurchaseError"), [c, u] = (0, O.useState)(), d = (0, O.useCallback)(async () => {
+                        let e = (0, el.getCurrentUser)()?.id;
+                        return void 0 !== e && !!await rB(e, "UpdateUserSetting")
+                    }, []), m = (0, O.useCallback)(async () => {
+                        let e = await rO();
                         if (!e?.enablePurchases) return !1;
                         let {
                             currentValue: t,
@@ -3892,17 +3896,17 @@
                                 },
                                 requirement: n
                             } = e;
-                            return r !== t && n === rE.SelfUpdateSetting
+                            return r !== t && n === rk.SelfUpdateSetting
                         }) ?? !1
-                    }, []), p = (0, L.useCallback)(async () => {
+                    }, []), p = (0, O.useCallback)(async () => {
                         let {
                             texasU18VPCOptimizationEnabled: e,
                             texasU18VPCOptimizationEnabledForEveryone: t
-                        } = await rB();
+                        } = await rz();
                         u(!!(e && t))
-                    }, []), h = (0, L.useCallback)(async () => {
+                    }, []), h = (0, O.useCallback)(async () => {
                         try {
-                            let e = await (0, rw.startAccessManagementUpsell)({
+                            let e = await (0, rT.startAccessManagementUpsell)({
                                 ampRecourseData: {
                                     enablePurchases: "Enabled"
                                 },
@@ -3911,46 +3915,46 @@
                                 isAsyncCall: !1,
                                 usePrologue: !0
                             });
-                            "boolean" == typeof e && ey("AccessManagementUpsellResult", {
+                            "boolean" == typeof e && eP("AccessManagementUpsellResult", {
                                 result: String(e)
                             })
                         } catch (e) {
-                            ev("AccessManagementUpsellException", null, e)
+                            eC("AccessManagementUpsellException", null, e)
                         }
-                    }, []), f = (0, L.useCallback)(async () => {
+                    }, []), f = (0, O.useCallback)(async () => {
                         if (i || !a) return !0;
-                        let n = await rA();
-                        if (!n) return ey("PurchaseEligibilityFailedToFetch"), e.warning(s("Heading.GeneralError")), !1;
+                        let n = await rI();
+                        if (!n) return eP("PurchaseEligibilityFailedToFetch"), e.warning(s("Heading.GeneralError")), !1;
                         if (n.expirationTimeInMinutes) {
                             r();
                             let t = Math.ceil(n.expirationTimeInMinutes / 60),
                                 a = function(e) {
                                     switch (e) {
-                                        case rN.FraudPaymentAuthorizationAttempt:
+                                        case rj.FraudPaymentAuthorizationAttempt:
                                             return "Label.Sublabel.FraudPaymentAbuse";
-                                        case rN.FraudVirtualEconomyAbuse:
+                                        case rj.FraudVirtualEconomyAbuse:
                                             return "Label.Sublabel.FraudVirtualEconomyAbuse";
-                                        case rN.FraudAbuseOfAffiliateSystem:
+                                        case rj.FraudAbuseOfAffiliateSystem:
                                             return "Label.Sublabel.FraudAbuseOfTheAffiliateSystem";
-                                        case rN.FraudAttemptedUnauthorizedPaymentMethodUse:
+                                        case rj.FraudAttemptedUnauthorizedPaymentMethodUse:
                                             return "Label.Sublabel.FraudAttemptedUnauthorizedPaymentMethodUse";
-                                        case rN.FraudRepeatedRefundRequests:
+                                        case rj.FraudRepeatedRefundRequests:
                                             return "Label.Sublabel.FraudRepeatedRefundRequests";
-                                        case rN.FraudSuspiciousRefundRequests:
+                                        case rj.FraudSuspiciousRefundRequests:
                                             return "Label.Sublabel.FraudSuspiciousRefundRequests";
-                                        case rN.FraudUnauthorizedPurchase:
+                                        case rj.FraudUnauthorizedPurchase:
                                             return "Label.Sublabel.FraudUnauthorizedPurchase";
-                                        case rN.FraudUseOfUnauthorizedOffPlatformTransactions:
+                                        case rj.FraudUseOfUnauthorizedOffPlatformTransactions:
                                             return "Label.Sublabel.FraudUseOfUnauthorizedOffPlatformTransactions";
-                                        case rN.FraudUseOfUnauthorizedPaymentMethod:
+                                        case rj.FraudUseOfUnauthorizedPaymentMethod:
                                             return "Label.Sublabel.FraudUseOfUnauthorizedPaymentMethod";
-                                        case rN.FraudSuspiciousAccountPatterns:
+                                        case rj.FraudSuspiciousAccountPatterns:
                                             return "Label.Sublabel.FraudSuspiciousAccountPatterns";
-                                        case rN.FraudChargeback:
+                                        case rj.FraudChargeback:
                                             return "Label.AbuseType.Chargeback";
-                                        case rN.None:
-                                        case rN.PurchaseNotEnabled:
-                                        case rN.SpendLimitExceeded:
+                                        case rj.None:
+                                        case rj.PurchaseNotEnabled:
+                                        case rj.SpendLimitExceeded:
                                             return "";
                                         default:
                                             return "Label.Sublabel.FraudPaymentAbuse"
@@ -3963,40 +3967,40 @@
                             }) : o("Text.EconomicRestrictionsHours", {
                                 hour: t,
                                 violation: i
-                            })), ey("EconomicRestrictionModalShown"), !1
+                            })), eP("EconomicRestrictionModalShown"), !1
                         }
                         if (n.isEligible) return !0;
                         let u = await d(),
                             p = await m();
-                        return !c || u || p || n.failureReason !== rN.PurchaseNotEnabled ? c && p && n.failureReason === rN.PurchaseNotEnabled ? (ey("PurchaseDisabledModalShownDisabledBySelf"), t(c, p)) : u || n.failureReason === rN.PurchaseNotEnabled ? (ey("PurchaseDisabledModalShownParentalConsent"), t(!!c, p)) : (ey("PurchaseEligibility", {
+                        return !c || u || p || n.failureReason !== rj.PurchaseNotEnabled ? c && p && n.failureReason === rj.PurchaseNotEnabled ? (eP("PurchaseDisabledModalShownDisabledBySelf"), t(c, p)) : u || n.failureReason === rj.PurchaseNotEnabled ? (eP("PurchaseDisabledModalShownParentalConsent"), t(!!c, p)) : (eP("PurchaseEligibility", {
                             failureReason: n.failureReason
-                        }), e.warning(s("Heading.GeneralError"))) : (ey("AccessManagementUpsellModalShown"), await h()), !1
+                        }), e.warning(s("Heading.GeneralError"))) : (eP("AccessManagementUpsellModalShown"), await h()), !1
                     }, [r, e, s, l, o, d, m, c, h, t, a, i]);
-                    return (0, L.useEffect)(() => {
+                    return (0, O.useEffect)(() => {
                         p()
                     }, [p]), {
                         isUserEligibleForPurchase: f
                     }
-                }(), [E, w] = (0, L.useState)(), [N, k] = (0, L.useState)(), [T, j] = (0, L.useState)(!1), [A, M] = (0, L.useState)(!1), [R, I] = (0, L.useState)(""), [U, _] = (0, L.useState)(), F = (0, L.useCallback)((e, t, r) => {
-                    if (void 0 !== J.window) {
+                }(), [E, w] = (0, O.useState)(), [N, k] = (0, O.useState)(), [T, j] = (0, O.useState)(!1), [A, M] = (0, O.useState)(!1), [R, I] = (0, O.useState)(""), [U, _] = (0, O.useState)(), F = (0, O.useCallback)((e, t, r) => {
+                    if (void 0 !== et.window) {
                         if (f) {
-                            ey("DesktopPurchaseRedirect"), J.window.location.href = r;
+                            eP("DesktopPurchaseRedirect"), et.window.location.href = r;
                             return
                         }
-                        if (!h) return void ey("UnsupportedPlatform");
-                        rX(p, t, e.productId), ey("MobilePurchaseRedirect"), J.window.location.href = r
+                        if (!h) return void eP("UnsupportedPlatform");
+                        r0(p, t, e.productId), eP("MobilePurchaseRedirect"), et.window.location.href = r
                     }
-                }, [p, h, f]), D = (0, L.useCallback)(async (e, t, n, a) => {
-                    r && !n ? await i(e, t, n) : await P(e, n, a, F) ? ey("StoppedPurchaseWarning", {
+                }, [p, h, f]), L = (0, O.useCallback)(async (e, t, n, a) => {
+                    r && !n ? await i(e, t, n) : await P(e, n, a, F) ? eP("StoppedPurchaseWarning", {
                         action: "PurchaseFlow"
                     }) : F(e, n, a)
-                }, [r, i, P, F]), B = (0, L.useCallback)(async (e, t, n, a) => {
-                    ey("StartPurchase", {
+                }, [r, i, P, F]), D = (0, O.useCallback)(async (e, t, n, a) => {
+                    eP("StartPurchase", {
                         isQuickPay: r ? "true" : "false"
                     }), v(e, t, a);
                     let i = c(e, t);
-                    (I(i), await C()) ? await D(e, n, t, i): ey("IneligiblePurchase")
-                }, [r, v, c, C, D]), O = (0, L.useCallback)(e => {
+                    (I(i), await C()) ? await L(e, n, t, i): eP("IneligiblePurchase")
+                }, [r, v, c, C, L]), B = (0, O.useCallback)(e => {
                     let {
                         product: t,
                         event: r,
@@ -4005,8 +4009,8 @@
                     try {
                         var a;
                         let e;
-                        ey("RedirectClickTime", {
-                            bucket: (a = performance.now(), e = rH.find(e => {
+                        eP("RedirectClickTime", {
+                            bucket: (a = performance.now(), e = rq.find(e => {
                                 let {
                                     maxMs: t
                                 } = e;
@@ -4015,30 +4019,30 @@
                         })
                     } catch {}
                     if (!d) {
-                        r.preventDefault(), ey("UnexpectedPurchaseRedirectCall");
+                        r.preventDefault(), eP("UnexpectedPurchaseRedirectCall");
                         return
                     }
                     if ("" === d.url) {
-                        r.preventDefault(), ey("PurchaseRedirectUrlEmpty"), d.refreshAuthTicket(), b();
+                        r.preventDefault(), eP("PurchaseRedirectUrlEmpty"), d.refreshAuthTicket(), b();
                         return
                     }
-                    rQ(r), S({
+                    rY(r), S({
                         isSubscriptionRedirect: n,
                         loginRedirectVersion: d.isInExperiment ? d.url.includes("/v2") ? "v2" : "v1" : void 0,
                         product: t
                     }), d.refreshAuthTicket()
-                }, [d, S, b]), G = (0, L.useCallback)(async function(e) {
+                }, [d, S, b]), G = (0, O.useCallback)(async function(e) {
                     let t = arguments.length > 1 && void 0 !== arguments[1] && arguments[1],
                         r = arguments.length > 2 && void 0 !== arguments[2] && arguments[2],
                         n = arguments.length > 3 ? arguments[3] : void 0;
-                    (w(e), k(n), j(t), M(r), p.isSamsungGalaxyStoreApp) ? x(e, t, r): await B(e, t, r, n)
-                }, [p.isSamsungGalaxyStoreApp, x, B]), z = (0, L.useCallback)(async function(e) {
+                    (w(e), k(n), j(t), M(r), p.isSamsungGalaxyStoreApp) ? x(e, t, r): await D(e, t, r, n)
+                }, [p.isSamsungGalaxyStoreApp, x, D]), z = (0, O.useCallback)(async function(e) {
                     let t = arguments.length > 1 && void 0 !== arguments[1] && arguments[1],
                         r = arguments.length > 2 && void 0 !== arguments[2] && arguments[2],
                         n = arguments.length > 3 ? arguments[3] : void 0;
                     if (!1 === m) return void await G(e, t, r, n);
                     if (void 0 === m) {
-                        ey("FirstTimePurchaseConsentNotFetchedInTime"), _({
+                        eP("FirstTimePurchaseConsentNotFetchedInTime"), _({
                             product: e,
                             isSub: t,
                             isBonus: r,
@@ -4049,7 +4053,7 @@
                     y(() => {
                         G(e, t, r, n)
                     })
-                }, [m, y, G]), V = (0, L.useCallback)(e => {
+                }, [m, y, G]), V = (0, O.useCallback)(e => {
                     let {
                         product: t,
                         isRedirect: r,
@@ -4059,14 +4063,14 @@
                     } = e;
                     if (r) {
                         try {
-                            rK.logLayerExposure()
+                            r$.logLayerExposure()
                         } catch (e) {
-                            ev("LoginRedirectLayerExposureError", null, e)
+                            eC("LoginRedirectLayerExposureError", null, e)
                         }
-                        O(e)
+                        B(e)
                     } else z(t, n, a, i)
-                }, [O, z]);
-                return (0, L.useEffect)(() => {
+                }, [B, z]);
+                return (0, O.useEffect)(() => {
                     if (void 0 === m || !U) return;
                     _(void 0);
                     let {
@@ -4078,13 +4082,13 @@
                     m ? y(() => {
                         G(e, t, r, n)
                     }) : G(e, t, r, n)
-                }, [m, U, y, G]), (0, L.useEffect)(() => {
+                }, [m, U, y, G]), (0, O.useEffect)(() => {
                     s && E && (F(E, T, R), a())
-                }, [s, E, F, T, R, a]), (0, L.useEffect)(() => {
-                    o && E && (B(E, T, A, N), l())
-                }, [o, E, B, T, A, N, l]), (0, L.useEffect)(() => {
-                    r && p.isUniversalApp && u && n.length && (ey("QuickPayUpsell"), g(u), z(u))
-                }, [p.isUniversalApp, r, u, n, g, z]), (0, L.useMemo)(() => ({
+                }, [s, E, F, T, R, a]), (0, O.useEffect)(() => {
+                    o && E && (D(E, T, A, N), l())
+                }, [o, E, D, T, A, N, l]), (0, O.useEffect)(() => {
+                    r && p.isUniversalApp && u && n.length && (eP("QuickPayUpsell"), g(u), z(u))
+                }, [p.isUniversalApp, r, u, n, g, z]), (0, O.useMemo)(() => ({
                     selectedProduct: E,
                     purchaseProduct: V,
                     purchaseNonRedirectProduct: z
@@ -4093,20 +4097,20 @@
             children: t
         })
     }
-    var rZ = e.i(562528),
-        r0 = e.i(871623),
-        r1 = ((R = {}).CardDeclined = "Message.QuickPay.CardDeclinedError", R.CardExpired = "Message.QuickPay.ExpiredCardError", R.GenericError = "Message.QuickPay.GenericError", R.InsufficientFunds = "Message.QuickPay.InsufficientFundsError", R);
-    let r2 = (e, t) => {
-        ev("QuickPay3DSFlow", {
+    var r2 = e.i(562528),
+        r3 = e.i(871623),
+        r5 = ((_ = {}).CardDeclined = "Message.QuickPay.CardDeclinedError", _.CardExpired = "Message.QuickPay.ExpiredCardError", _.GenericError = "Message.QuickPay.GenericError", _.InsufficientFunds = "Message.QuickPay.InsufficientFundsError", _);
+    let r4 = (e, t) => {
+        eC("QuickPay3DSFlow", {
             step: e
-        }, t), ev("QuickPayPaymentFlow", {
+        }, t), eC("QuickPayPaymentFlow", {
             step: "3dsError"
         })
     };
-    (I = {}).Default = "Message.QuickPay.Tax", I.GST = "Message.QuickPay.GST", I.HST = "Message.QuickPay.HST", I.IVA = "Message.QuickPay.IVA", I.JCT = "Message.QuickPay.JCT", I.Sales = "Message.QuickPay.SalesTax", I.Service = "Message.QuickPay.ServiceTax", I.TVA = "Messsage.QuickPay.TVA", I.VAT = "Message.QuickPay.VAT";
-    var r3 = e.i(851460);
+    (F = {}).Default = "Message.QuickPay.Tax", F.GST = "Message.QuickPay.GST", F.HST = "Message.QuickPay.HST", F.IVA = "Message.QuickPay.IVA", F.JCT = "Message.QuickPay.JCT", F.Sales = "Message.QuickPay.SalesTax", F.Service = "Message.QuickPay.ServiceTax", F.TVA = "Messsage.QuickPay.TVA", F.VAT = "Message.QuickPay.VAT";
+    var r8 = e.i(851460);
 
-    function r5(e) {
+    function r6(e) {
         let {
             children: t
         } = e, r = function() {
@@ -4117,40 +4121,40 @@
                 trackQuickPay3DSShown: n,
                 trackRobuxGiftShown: a,
                 trackSamsungPaymentMethodsShown: i
-            } = (0, L.useContext)(eR), [s, l] = (0, L.useState)(!1), [o, c] = (0, L.useState)(!1), [u, d] = (0, L.useState)(!1), [m, p] = (0, L.useState)(!1), [h, f] = (0, L.useState)(!1), [g, x] = (0, L.useState)(!1), [b, y] = (0, L.useState)(!1), [v, S] = (0, L.useState)(), [P, C] = (0, L.useState)(), [E, w] = (0, L.useState)(!1), [N, k] = (0, L.useState)(!1), [T, j] = (0, L.useState)(), [A, M] = (0, L.useState)(!1), [R, I] = (0, L.useState)(!1), [U, _] = (0, L.useState)(""), [F, D] = (0, L.useState)(!1), [B, O] = (0, L.useState)(), G = (0, L.useCallback)((t, r) => {
+            } = (0, O.useContext)(e_), [s, l] = (0, O.useState)(!1), [o, c] = (0, O.useState)(!1), [u, d] = (0, O.useState)(!1), [m, p] = (0, O.useState)(!1), [h, f] = (0, O.useState)(!1), [g, x] = (0, O.useState)(!1), [b, y] = (0, O.useState)(!1), [v, S] = (0, O.useState)(), [P, C] = (0, O.useState)(), [E, w] = (0, O.useState)(!1), [N, k] = (0, O.useState)(!1), [T, j] = (0, O.useState)(), [A, M] = (0, O.useState)(!1), [R, I] = (0, O.useState)(!1), [U, _] = (0, O.useState)(""), [F, L] = (0, O.useState)(!1), [D, B] = (0, O.useState)(), G = (0, O.useCallback)((t, r) => {
                 e(t), I(t), M(r), c(!0)
-            }, [e]), z = (0, L.useCallback)((e, r) => {
+            }, [e]), z = (0, O.useCallback)((e, r) => {
                 t(e), S(e), C(() => r), l(!0)
-            }, [t]), V = (0, L.useCallback)(e => {
+            }, [t]), V = (0, O.useCallback)(e => {
                 r(e), d(!0)
-            }, [r]), W = (0, L.useCallback)(e => {
+            }, [r]), W = (0, O.useCallback)(e => {
                 n(), _(e), p(!0)
-            }, [n]), K = (0, L.useCallback)(() => {
+            }, [n]), K = (0, O.useCallback)(() => {
                 a(), f(!0)
-            }, [a]), H = (0, L.useCallback)((e, t, r) => {
+            }, [a]), H = (0, O.useCallback)((e, t, r) => {
                 i(), j(e), k(t), w(r), y(!0)
-            }, [i]), Q = (0, L.useCallback)(() => {
+            }, [i]), Q = (0, O.useCallback)(() => {
                 c(!1), I(!1), M(!1)
-            }, []), $ = (0, L.useCallback)(() => {
+            }, []), $ = (0, O.useCallback)(() => {
                 l(!1), S(void 0), C(void 0)
-            }, []), q = (0, L.useCallback)(() => {
+            }, []), q = (0, O.useCallback)(() => {
                 d(!1)
-            }, []), Y = (0, L.useCallback)(() => {
+            }, []), Y = (0, O.useCallback)(() => {
                 p(!1)
-            }, []), X = (0, L.useCallback)(() => {
+            }, []), X = (0, O.useCallback)(() => {
                 f(!1)
-            }, []), J = (0, L.useCallback)(() => {
+            }, []), J = (0, O.useCallback)(() => {
                 x(!1)
-            }, []), Z = (0, L.useCallback)(() => {
+            }, []), Z = (0, O.useCallback)(() => {
                 x(!0)
-            }, []), ee = (0, L.useCallback)(() => {
+            }, []), ee = (0, O.useCallback)(() => {
                 y(!1)
-            }, []), et = (0, L.useCallback)(e => {
-                ey("FirstTimePurchaseConsentShown"), O(() => e), D(!0)
-            }, []), er = (0, L.useCallback)(() => {
-                D(!1), O(void 0)
+            }, []), et = (0, O.useCallback)(e => {
+                eP("FirstTimePurchaseConsentShown"), B(() => e), L(!0)
+            }, []), er = (0, O.useCallback)(() => {
+                L(!1), B(void 0)
             }, []);
-            return (0, L.useMemo)(() => ({
+            return (0, O.useMemo)(() => ({
                 purchaseDisabled: {
                     closeModal: Q,
                     hasUserDisabledPurchases: A,
@@ -4196,11 +4200,11 @@
                 },
                 firstTimePurchaseConsent: {
                     closeModal: er,
-                    continuePurchase: B,
+                    continuePurchase: D,
                     isOpen: F,
                     openModal: et
                 }
-            }), [ee, E, b, N, H, T, Q, A, o, G, R, v, $, P, s, z, q, u, V, Y, m, W, U, X, h, K, J, g, Z, er, B, F, et])
+            }), [ee, E, b, N, H, T, Q, A, o, G, R, v, $, P, s, z, q, u, V, Y, m, W, U, X, h, K, J, g, Z, er, D, F, et])
         }(), n = function(e) {
             let {
                 quickPay: {
@@ -4218,73 +4222,73 @@
                 purchaseFlowId: o,
                 urlParams: c,
                 deviceMeta: u
-            } = (0, L.useContext)(ec), d = eU(u), {
+            } = (0, O.useContext)(em), d = eL(u), {
                 trackQuickPayClick: m,
                 trackQuickPayPurchase: p
-            } = (0, L.useContext)(eR), h = (0, er.useTranslations)("Feature.Premium"), [f, g] = (0, L.useState)(), [x, b] = (0, L.useState)(!1), [y, v] = (0, L.useState)(!1), [S, P] = (0, L.useState)(!1), [C, E] = (0, L.useState)(""), [w, N] = (0, L.useState)([]), [k, T] = (0, L.useState)(), [j, A] = (0, L.useState)(!1), [M, R] = (0, L.useState)(), [I, U] = (0, L.useState)(), [_, F] = (0, L.useState)(null), [D, B] = (0, L.useState)(!1), [O, G] = (0, L.useState)([]), [z, V] = (0, L.useState)(!1), W = (0, L.useRef)(0), K = (0, L.useCallback)(e => {
+            } = (0, O.useContext)(e_), h = (0, ei.useTranslations)("Feature.Premium"), [f, g] = (0, O.useState)(), [x, b] = (0, O.useState)(!1), [y, v] = (0, O.useState)(!1), [S, P] = (0, O.useState)(!1), [C, E] = (0, O.useState)(""), [w, N] = (0, O.useState)([]), [k, T] = (0, O.useState)(), [j, A] = (0, O.useState)(!1), [M, R] = (0, O.useState)(), [I, U] = (0, O.useState)(), [_, F] = (0, O.useState)(null), [L, D] = (0, O.useState)(!1), [B, G] = (0, O.useState)([]), [z, V] = (0, O.useState)(!1), W = (0, O.useRef)(0), K = (0, O.useCallback)(e => {
                 let t;
                 if (!e) return;
                 let r = "unknown";
-                (t = e.providerPayload, t?.paymentProfileType === "card") ? r = "card": t0(e.providerPayload) && (r = "paypal"), ey("QuickPayPaymentMethodSelected", {
+                (t = e.providerPayload, t?.paymentProfileType === "card") ? r = "card": t3(e.providerPayload) && (r = "paypal"), eP("QuickPayPaymentMethodSelected", {
                     method: r
                 })
-            }, []), H = (0, L.useCallback)(async () => {
-                let e = rk.BuyRobuxPage;
-                c.product_id && u.isUniversalApp && (e = rk.BuyRobuxPagePreselectedProduct), ey("QuickPayGetMetadataFlow", {
+            }, []), H = (0, O.useCallback)(async () => {
+                let e = rA.BuyRobuxPage;
+                c.product_id && u.isUniversalApp && (e = rA.BuyRobuxPagePreselectedProduct), eP("QuickPayGetMetadataFlow", {
                     step: "start"
                 });
-                let t = await rM(e, l);
-                if (!t) return void ev("QuickPayGetMetadataFlow", {
+                let t = await rU(e, l);
+                if (!t) return void eC("QuickPayGetMetadataFlow", {
                     step: "noData"
                 });
                 let r = t.subscribedRobuxProductOffers ?? [];
-                if (E(t.legalDisclosureTranslationKey), G(r), !t.isUserEligible) return void ey("QuickPayGetMetadataFlow", {
+                if (E(t.legalDisclosureTranslationKey), G(r), !t.isUserEligible) return void eP("QuickPayGetMetadataFlow", {
                     step: "ineligible"
                 });
-                let n = await rR();
-                if (!n?.length) return void ev("QuickPayGetMetadataFlow", {
+                let n = await r_();
+                if (!n?.length) return void eC("QuickPayGetMetadataFlow", {
                     step: "noPaymentProfiles"
                 });
                 let a = n.filter(e => void 0 === e.isQuickPayEnabled || !0 === e.isQuickPayEnabled);
-                a.length ? (ey("QuickPayGetMetadataFlow", {
+                a.length ? (eP("QuickPayGetMetadataFlow", {
                     step: "success"
-                }), a.sort((e, t) => t.lastChargeTime - e.lastChargeTime), v(!0), N(a), R(a[0]), K(a[0])) : ev("QuickPayGetMetadataFlow", {
+                }), a.sort((e, t) => t.lastChargeTime - e.lastChargeTime), v(!0), N(a), R(a[0]), K(a[0])) : eC("QuickPayGetMetadataFlow", {
                     step: "noEligiblePaymentProfiles"
                 })
-            }, [u.isUniversalApp, c.product_id, K, l]), Q = (0, L.useCallback)(async () => {
-                if (void 0 !== J.window) try {
+            }, [u.isUniversalApp, c.product_id, K, l]), Q = (0, O.useCallback)(async () => {
+                if (void 0 !== et.window) try {
                     let e = function() {
-                            if (void 0 === J.window) throw Error("Stripe public API key selection requires a browser environment");
-                            return J.window.location.href.includes("sitetest1") ? "pk_test_51LNM0XG5RADBkfjhYJlpADA2ArzWIh7gTWTodYNbpEzSiT55dul3VJhaBIVHL0CNyO0gECOz1vPnWArAkjwQ8NBO00Cdf2PxED" : J.window.location.href.includes("sitetest3") ? "pk_test_51LNOeQHDRNiW7vlLcKH8TGCpJ7zhaidLdSegE22GCuvQbVUX2xDiGJY6WYaldYyo6qgVxmy1SnSVpSdaqyjfqclU00NQwWntIe" : "pk_live_51LKpO9C8tJWGhK4HEHtny9Dg7xXiQJ1i349cq6KBDusbl8bRHO7QmCKKhX18LPjSirMNTvj3tesq6mhIQuPioeAd0062ZCgoF3"
+                            if (void 0 === et.window) throw Error("Stripe public API key selection requires a browser environment");
+                            return et.window.location.href.includes("sitetest1") ? "pk_test_51LNM0XG5RADBkfjhYJlpADA2ArzWIh7gTWTodYNbpEzSiT55dul3VJhaBIVHL0CNyO0gECOz1vPnWArAkjwQ8NBO00Cdf2PxED" : et.window.location.href.includes("sitetest3") ? "pk_test_51LNOeQHDRNiW7vlLcKH8TGCpJ7zhaidLdSegE22GCuvQbVUX2xDiGJY6WYaldYyo6qgVxmy1SnSVpSdaqyjfqclU00NQwWntIe" : "pk_live_51LKpO9C8tJWGhK4HEHtny9Dg7xXiQJ1i349cq6KBDusbl8bRHO7QmCKKhX18LPjSirMNTvj3tesq6mhIQuPioeAd0062ZCgoF3"
                         }(),
-                        t = await (0, rZ.loadStripe)(e);
+                        t = await (0, r2.loadStripe)(e);
                     F(t)
                 } catch (e) {
-                    ev("QuickPayStripeException", null, e)
+                    eC("QuickPayStripeException", null, e)
                 }
-            }, []), $ = (0, L.useCallback)(async (e, r, n, a) => {
-                if (void 0 === J.window) return;
-                T(void 0), g(void 0), b(r), P(n), U(e), B(!0);
+            }, []), $ = (0, O.useCallback)(async (e, r, n, a) => {
+                if (void 0 === et.window) return;
+                T(void 0), g(void 0), b(r), P(n), U(e), D(!0);
                 let l = a ?? M;
                 if (!l) {
-                    ev("QuickPayPreparePaymentNoPaymentProfile"), B(!1);
+                    eC("QuickPayPreparePaymentNoPaymentProfile"), D(!1);
                     return
                 }
                 if (!o || !s) return;
                 W.current += 1;
                 let c = W.current,
-                    u = t0(l.providerPayload);
-                ey("QuickPayPreparePaymentFlow", {
+                    u = t3(l.providerPayload);
+                eP("QuickPayPreparePaymentFlow", {
                     step: "start"
                 });
                 let {
                     data: d,
                     isError: m
-                } = await rI(o, u ? "BraintreePaypal" : "StripeCard", s.id, e.productId, l.id).then(r => (B(!1), t(e), {
+                } = await rF(o, u ? "BraintreePaypal" : "StripeCard", s.id, e.productId, l.id).then(r => (D(!1), t(e), {
                     data: r,
                     isError: !1
                 })).catch(t => {
-                    B(!1), T(null), g(null), "object" == typeof t && null !== t && "parameters" in t && "object" == typeof t.parameters && null !== t.parameters && "kind" in t.parameters && "abandoned" === t.parameters.kind ? ev("QuickPayPreparePaymentFlow", {
+                    D(!1), T(null), g(null), "object" == typeof t && null !== t && "parameters" in t && "object" == typeof t.parameters && null !== t.parameters && "kind" in t.parameters && "abandoned" === t.parameters.kind ? eC("QuickPayPreparePaymentFlow", {
                         step: "genericChallengeAbandoned"
                     }) : "RemovedPaymentProfile" === (e => {
                         if (!("object" == typeof e && null !== e && "config" in e)) return;
@@ -4294,20 +4298,20 @@
                             failureReason: r
                         } = t;
                         return "string" == typeof r ? r : void 0
-                    })(t) ? ev("QuickPayPreparePaymentFlow", {
+                    })(t) ? eC("QuickPayPreparePaymentFlow", {
                         step: "profileRemovedByFraud"
-                    }) : ev("QuickPayPreparePaymentFlow", {
+                    }) : eC("QuickPayPreparePaymentFlow", {
                         step: "error"
                     }, t);
                     let r = i(e, n);
-                    return void 0 !== J.window && (J.window.location.href = r), {
+                    return void 0 !== et.window && (et.window.location.href = r), {
                         data: void 0,
                         isError: !0
                     }
                 });
                 if (W.current === c) {
                     if (!d) {
-                        m || ev("QuickPayPreparePaymentFlow", {
+                        m || eC("QuickPayPreparePaymentFlow", {
                             step: "noData"
                         });
                         return
@@ -4315,38 +4319,38 @@
                     if (d.providerPayload?.redirectionPath) {
                         T(null), g(null);
                         let t = i(e, n);
-                        1 === w.length && t && (ey("QuickPayPreparePaymentFlow", {
+                        1 === w.length && t && (eP("QuickPayPreparePaymentFlow", {
                             step: "redirect"
-                        }), J.window.location.href = t);
+                        }), et.window.location.href = t);
                         return
                     }
-                    ey("QuickPayPreparePaymentFlow", {
+                    eP("QuickPayPreparePaymentFlow", {
                         step: "success"
                     }), T(d.providerPayload), g(d.checkoutSessionId)
                 }
-            }, [t, M, o, s, i, w.length]), q = (0, L.useCallback)(async e => {
-                if (void 0 === J.window) return {
+            }, [t, M, o, s, i, w.length]), q = (0, O.useCallback)(async e => {
+                if (void 0 === et.window) return {
                     isLoading: !1
                 };
                 m();
-                let t = t0(M?.providerPayload);
+                let t = t3(M?.providerPayload);
                 if (!s) return {
                     isLoading: !1
                 };
-                ey("QuickPayPaymentFlow", {
+                eP("QuickPayPaymentFlow", {
                     step: "start"
                 });
-                let r = await rU({
+                let r = await rL({
                     checkoutSessionId: f ?? void 0,
                     paymentProviderType: t ? "BraintreePayPal" : "StripeCard",
                     paymentSessionId: s.id,
                     providerPayload: e,
                     quickPaySelectedPaymentProfileId: M?.id
                 });
-                if (!r) return ev("QuickPayPaymentFlow", {
+                if (!r) return eC("QuickPayPaymentFlow", {
                     step: "noData"
                 }), I && await $(I, x, S), {
-                    error: r1.GenericError,
+                    error: r5.GenericError,
                     isLoading: !1
                 };
                 let {
@@ -4356,24 +4360,24 @@
                 } = a;
                 if (i) {
                     let e;
-                    switch (ev("QuickPayStripeProcessPaymentError", {
+                    switch (eC("QuickPayStripeProcessPaymentError", {
                             stripeErrorCode: i
-                        }), ev("QuickPayPaymentFlow", {
+                        }), eC("QuickPayPaymentFlow", {
                             step: "error"
                         }), i) {
-                        case rj.CARD_DECLINED:
-                            e = r1.CardDeclined;
+                        case rR.CARD_DECLINED:
+                            e = r5.CardDeclined;
                             break;
-                        case rj.EXPIRED_CARD:
-                            e = r1.CardExpired;
+                        case rR.EXPIRED_CARD:
+                            e = r5.CardExpired;
                             break;
-                        case rj.INSUFFICIENT_FUNDS:
-                        case rj.BALANCE_INSUFFICIENT:
-                            e = r1.InsufficientFunds;
+                        case rR.INSUFFICIENT_FUNDS:
+                        case rR.BALANCE_INSUFFICIENT:
+                            e = r5.InsufficientFunds;
                             break;
-                        case rj.INCORRECT_CVC:
+                        case rR.INCORRECT_CVC:
                         default:
-                            e = r1.GenericError
+                            e = r5.GenericError
                     }
                     return {
                         error: e,
@@ -4382,24 +4386,24 @@
                 }
                 let l = a.redirectToUrl ?? a.RedirectionUrl;
                 if (l)
-                    if (t) return ey("QuickPayPaymentFlow", {
+                    if (t) return eP("QuickPayPaymentFlow", {
                         step: "redirect"
-                    }), J.window.location.href = l, {
+                    }), et.window.location.href = l, {
                         isLoading: !0
                     };
-                    else return ey("QuickPayPaymentFlow", {
+                    else return eP("QuickPayPaymentFlow", {
                         step: "3dsModalShown"
-                    }), ey("QuickPay3DSFlow", {
+                    }), eP("QuickPay3DSFlow", {
                         step: "start"
                     }), n(l), {
                         isLoading: !1
                     };
-                return ey("QuickPayPaymentFlow", {
+                return eP("QuickPayPaymentFlow", {
                     step: "complete"
-                }), p(I), J.window.location.href = `/upgrades/checkout/success?checkoutSessionId=${f}`, {
+                }), p(I), et.window.location.href = `/upgrades/checkout/success?checkoutSessionId=${f}`, {
                     isLoading: !0
                 }
-            }, [m, $, I, x, S, p, f, n, M, s]), Y = (0, L.useMemo)(() => {
+            }, [m, $, I, x, S, p, f, n, M, s]), Y = (0, O.useMemo)(() => {
                 let e;
                 if (!k) return h("Message.QuickPay.Tax");
                 let {
@@ -4411,17 +4415,17 @@
                 if (0 === r.Units && 0 === r.Nanos || !t) return h("Message.QuickPay.Tax");
                 let i = "";
                 try {
-                    let e = new r0.default,
+                    let e = new r3.default,
                         t = parseFloat(a);
                     t > 0 && (i = e.n(t))
                 } catch (e) {
-                    ev("QuickPayPercentStringException", null, e)
+                    eC("QuickPayPercentStringException", null, e)
                 }
                 switch (t) {
-                    case rT.GST:
+                    case rM.GST:
                         e = "Message.QuickPay.GST";
                         break;
-                    case rT.VAT:
+                    case rM.VAT:
                         if (["AE", "CO", "ID", "IS", "TR", "UA", "VN", "ZA"].includes(n.toUpperCase())) {
                             e = "Message.QuickPay.Tax";
                             break
@@ -4436,35 +4440,35 @@
                         }
                         e = "Message.QuickPay.VAT";
                         break;
-                    case rT.JCT:
+                    case rM.JCT:
                         e = "Message.QuickPay.JCT";
                         break;
-                    case rT.HST:
+                    case rM.HST:
                         e = "Message.QuickPay.HST";
                         break;
-                    case rT.SALES_TAX:
+                    case rM.SALES_TAX:
                         e = "Message.QuickPay.SalesTax";
                         break;
-                    case rT.SERVICE_TAX:
+                    case rM.SERVICE_TAX:
                         e = "Message.QuickPay.ServiceTax";
                         break;
-                    case rT.SUMMED:
-                    case rT.UNKNOWN:
-                    case rT.INVALID:
-                    case rT.AMUSEMENT_TAX:
-                    case rT.COMMUNICATIONS_TAX:
-                    case rT.IGST:
-                    case rT.LEASE_TAX:
-                    case rT.PST:
-                    case rT.QST:
-                    case rT.RST:
+                    case rM.SUMMED:
+                    case rM.UNKNOWN:
+                    case rM.INVALID:
+                    case rM.AMUSEMENT_TAX:
+                    case rM.COMMUNICATIONS_TAX:
+                    case rM.IGST:
+                    case rM.LEASE_TAX:
+                    case rM.PST:
+                    case rM.QST:
+                    case rM.RST:
                     default:
                         e = "Message.QuickPay.Tax"
                 }
                 return h(e) + (i.length > 0 ? ` (${i}%)` : "")
-            }, [k, h]), X = (0, L.useCallback)(async e => {
-                if (void 0 !== J.window && "3DS-authentication-complete" === e.data.type && e.data.url && _) {
-                    ey("QuickPay3DSFlow", {
+            }, [k, h]), X = (0, O.useCallback)(async e => {
+                if (void 0 !== et.window && "3DS-authentication-complete" === e.data.type && e.data.url && _) {
+                    eP("QuickPay3DSFlow", {
                         step: "messageReceived"
                     });
                     try {
@@ -4473,63 +4477,63 @@
                                     let t = new URL(e);
                                     return "http:" === t.protocol || "https:" === t.protocol
                                 } catch (e) {
-                                    return (0, eh.captureException)(e), !1
+                                    return (0, ex.captureException)(e), !1
                                 }
-                            })(a)) return r2("urlNotSet"), r1.GenericError;
+                            })(a)) return r4("urlNotSet"), r5.GenericError;
                         let e = new URL(a).searchParams.get("payment_intent_client_secret");
-                        if (!e) return r2("clientSecretNotSet"), r1.GenericError;
+                        if (!e) return r4("clientSecretNotSet"), r5.GenericError;
                         let {
                             error: t,
                             paymentIntent: r
                         } = await _.retrievePaymentIntent(e);
-                        if (t) return r2("stripeError", t), r1.GenericError;
-                        if ("succeeded" !== r.status) return r2("unsuccessful"), r1.GenericError;
-                        ey("QuickPay3DSFlow", {
+                        if (t) return r4("stripeError", t), r5.GenericError;
+                        if ("succeeded" !== r.status) return r4("unsuccessful"), r5.GenericError;
+                        eP("QuickPay3DSFlow", {
                             step: "success"
-                        }), J.window.location.href = `/upgrades/checkout/success?checkoutSessionId=${f}`;
+                        }), et.window.location.href = `/upgrades/checkout/success?checkoutSessionId=${f}`;
                         return
                     } catch (e) {
-                        return r2("error", e), r1.GenericError
+                        return r4("error", e), r5.GenericError
                     } finally {
                         r()
                     }
                 }
-            }, [_, a, r, f]), Z = (0, L.useCallback)(e => {
-                R(e), K(e), I && $(I, x, S, e).catch(eh.captureException)
-            }, [K, I, $, x, S]), ee = (0, L.useCallback)(() => {
+            }, [_, a, r, f]), J = (0, O.useCallback)(e => {
+                R(e), K(e), I && $(I, x, S, e).catch(ex.captureException)
+            }, [K, I, $, x, S]), Z = (0, O.useCallback)(() => {
                 V(e => !e)
-            }, []), et = (0, L.useCallback)(() => {
+            }, []), ee = (0, O.useCallback)(() => {
                 A(!0)
-            }, []), en = (0, L.useCallback)(() => {
+            }, []), er = (0, O.useCallback)(() => {
                 A(!1)
             }, []);
-            return (0, L.useEffect)(() => {
-                d || H().catch(eh.captureException)
-            }, [H, d]), (0, L.useEffect)(() => {
-                !d && y && Q().catch(eh.captureException)
-            }, [d, y, Q]), (0, L.useMemo)(() => ({
+            return (0, O.useEffect)(() => {
+                d || H().catch(ex.captureException)
+            }, [H, d]), (0, O.useEffect)(() => {
+                !d && y && Q().catch(ex.captureException)
+            }, [d, y, Q]), (0, O.useMemo)(() => ({
                 checkoutSessionId: f,
                 isBonusItem: x,
                 isQuickPay: y,
                 legalDisclosureTranslationKey: C,
-                markRedirectHandled: en,
+                markRedirectHandled: er,
                 paymentProfiles: w,
                 preparePaymentForQuickPay: $,
                 preparePaymentProviderPayload: k,
                 process3DSForQuickPay: X,
                 processPaymentForQuickPay: q,
-                redirectToPurchase: et,
-                selectPaymentProfile: Z,
+                redirectToPurchase: ee,
+                selectPaymentProfile: J,
                 selectedPaymentProfile: M,
                 selectedProduct: I,
                 shouldRedirectToPurchase: j,
                 stripe: _,
                 taxTitle: Y,
-                isQuickPayLoading: D,
-                subscribedRobuxProductOffers: O,
+                isQuickPayLoading: L,
+                subscribedRobuxProductOffers: B,
                 isSubscribeAndSaveChecked: z,
-                toggleSubscribeAndSave: ee
-            }), [f, x, y, C, en, w, $, k, q, et, Z, M, I, j, _, O, z, ee, Y, X, D])
+                toggleSubscribeAndSave: Z
+            }), [f, x, y, C, er, w, $, k, q, ee, J, M, I, j, _, B, z, Z, Y, X, L])
         }(r), a = function(e) {
             let {
                 samsungPaymentMethods: {
@@ -4540,89 +4544,89 @@
                 trackSamsungPaymentMethodsCancel: n,
                 trackSamsungPaymentMethodsRedeemCreditClick: a,
                 trackSamsungPaymentMethodsSamsungPayClick: i
-            } = (0, L.useContext)(eR), [s, l] = (0, L.useState)(!1), o = (0, L.useCallback)(() => {
+            } = (0, O.useContext)(e_), [s, l] = (0, O.useState)(!1), o = (0, O.useCallback)(() => {
                 i(), l(!0), t()
-            }, [i, t]), c = (0, L.useCallback)(() => {
-                void 0 !== J.window && (a(), J.window.location.href = `/upgrades/redeem?${r3.UrlSearchParams.new({ap:r?.productId??"",pm:"redeemCard"}).toString()}`, t())
+            }, [i, t]), c = (0, O.useCallback)(() => {
+                void 0 !== et.window && (a(), et.window.location.href = `/upgrades/redeem?${r8.UrlSearchParams.new({ap:r?.productId??"",pm:"redeemCard"}).toString()}`, t())
             }, [a, r, t]);
             return {
-                handleClose: (0, L.useCallback)(() => {
+                handleClose: (0, O.useCallback)(() => {
                     n(), t()
                 }, [n, t]),
                 handleRedeemCreditClick: c,
                 handleSamsungPayClick: o,
-                markRedirectHandled: (0, L.useCallback)(() => {
+                markRedirectHandled: (0, O.useCallback)(() => {
                     l(!1)
                 }, []),
                 shouldRedirectToPurchase: s
             }
         }(r);
-        return (0, U.jsx)(rP, {
+        return (0, L.jsx)(rw, {
             modals: r,
             quickPay: n,
             samsungPaymentMethods: a,
-            children: (0, U.jsx)(rJ, {
+            children: (0, L.jsx)(r1, {
                 quickPay: n,
                 samsungPaymentMethods: a,
                 children: t
             })
         })
     }
-    let r4 = "/mobile-app-upgrades/buy";
-    var r8 = e.i(264458);
+    let r9 = "/mobile-app-upgrades/buy";
+    var r7 = e.i(264458);
 
-    function r6(e) {
+    function ne(e) {
         let {
             ...t
         } = e;
-        return (0, U.jsx)("div", {
+        return (0, L.jsx)("div", {
             "data-slot": "card",
             className: "self-stretch flex flex-col items-start gap-medium",
             ...t
         })
     }
 
-    function r9(e) {
+    function nt(e) {
         let {
             className: t,
             ...r
         } = e;
-        return (0, U.jsx)("div", {
-            className: (0, r8.default)("buy-robux-section-header self-stretch flex flex-row items-start text-heading-small medium:text-heading-large", t),
+        return (0, L.jsx)("div", {
+            className: (0, r7.default)("buy-robux-section-header self-stretch flex flex-row items-start text-heading-small medium:text-heading-large", t),
             ...r
         })
     }
 
-    function r7(e) {
+    function nr(e) {
         let {
             ...t
         } = e;
-        return (0, U.jsx)("div", {
-            className: (0, r8.default)("self-stretch flex flex-row items-start content-emphasis text-body-medium", t.className),
+        return (0, L.jsx)("div", {
+            className: (0, r7.default)("self-stretch flex flex-row items-start content-emphasis text-body-medium", t.className),
             ...t
         })
     }
 
-    function ne(e) {
+    function nn(e) {
         let {
             banner: t,
             children: r,
             isPrimary: n,
             ...a
         } = e;
-        return t ? (0, U.jsxs)("div", {
-            className: (0, r8.default)("radius-large flex flex-col items-start self-stretch", {
+        return t ? (0, L.jsxs)("div", {
+            className: (0, r7.default)("radius-large flex flex-col items-start self-stretch", {
                 "bg-surface-100": n,
                 "stroke-standard": !n,
                 "stroke-default": !n
             }),
-            children: [t, (0, U.jsx)("div", {
+            children: [t, (0, L.jsx)("div", {
                 className: "flex flex-col items-start self-stretch gap-xlarge robux-section",
                 ...a,
                 children: r
             })]
-        }) : (0, U.jsx)("div", {
-            className: (0, r8.default)("radius-large flex flex-col items-start self-stretch gap-xlarge robux-section", {
+        }) : (0, L.jsx)("div", {
+            className: (0, r7.default)("radius-large flex flex-col items-start self-stretch gap-xlarge robux-section", {
                 "bg-surface-100": n,
                 "stroke-standard": !n,
                 "stroke-default": !n
@@ -4631,12 +4635,12 @@
             children: r
         })
     }
-    let nt = e => {
+    let na = e => {
         let {
             icon: t,
             label: r
-        } = e, n = t && tq(t);
-        return (0, U.jsx)(tR.Badge, {
+        } = e, n = t && tJ(t);
+        return (0, L.jsx)(t_.Badge, {
             variant: "Neutral",
             icon: n ? t : void 0,
             label: r,
@@ -4644,7 +4648,7 @@
         })
     };
 
-    function nr(e) {
+    function ni(e) {
         let {
             amount: t,
             nonPromotionalAmount: r,
@@ -4656,66 +4660,66 @@
         } = e, {
             productBadgeSlotCount: o,
             deviceMeta: c
-        } = (0, L.useContext)(ec), u = eU(c), d = (0, er.useTranslations)("Feature.Premium"), {
+        } = (0, O.useContext)(em), u = eL(c), d = (0, ei.useTranslations)("Feature.Premium"), {
             translateFullKey: m
-        } = (0, er.useFullKeyTranslations)(), p = i ? (0, tM.formatNumber)(Number(i)) : void 0, h = d("Label.PlusAmountMoreLower", {
+        } = (0, ei.useFullKeyTranslations)(), p = i ? (0, tU.formatNumber)(Number(i)) : void 0, h = d("Label.PlusAmountMoreLower", {
             amount: p ?? ""
         });
-        return (0, U.jsxs)("div", {
+        return (0, L.jsxs)("div", {
             className: `robux-amount-item flex ${r?"flex-col":"flex-row"} num-badges-${o} justify-start gap-small wrap`,
-            children: [(0, U.jsx)("div", {
+            children: [(0, L.jsx)("div", {
                 className: "flex gap-small items-center",
-                children: (0, U.jsxs)("div", {
+                children: (0, L.jsxs)("div", {
                     className: `flex flex-row justify-start items-center gap-small margin-right-xsmall ${s?"medium:width-[230px]":"large:width-[230px]"} wrap`,
                     "data-testid": "robux-amount-column",
-                    children: [(0, U.jsxs)("div", {
+                    children: [(0, L.jsxs)("div", {
                         className: "flex flex-row justify-start items-center gap-xsmall content-emphasis",
-                        children: [(0, U.jsx)(B.Icon, {
+                        children: [(0, L.jsx)(z.Icon, {
                             name: "icon-filled-robux",
                             size: "Small",
                             className: "robux-amount-icon"
-                        }), (0, U.jsx)("span", {
+                        }), (0, L.jsx)("span", {
                             className: "text-title-large small:text-heading-small min-[400px]:text-heading-medium large:text-heading-large",
                             style: {
                                 lineHeight: "var(--line-height-100)"
                             },
-                            children: (0, tM.formatNumber)(Number(t))
+                            children: (0, tU.formatNumber)(Number(t))
                         })]
-                    }), r && (0, U.jsxs)("div", {
+                    }), r && (0, L.jsxs)("div", {
                         className: "flex flex-row justify-start items-center gap-xsmall relative text-overflow content-muted",
-                        children: [(0, U.jsx)("div", {
+                        children: [(0, L.jsx)("div", {
                             className: "robux-amount-strike-through"
-                        }), (0, U.jsx)(B.Icon, {
+                        }), (0, L.jsx)(z.Icon, {
                             name: "icon-filled-robux",
                             size: "XSmall",
                             className: "robux-amount-strike-icon"
-                        }), (0, U.jsx)("span", {
+                        }), (0, L.jsx)("span", {
                             className: "text-title-medium min-[400px]:text-title-large large:text-heading-small",
-                            children: (0, tM.formatNumber)(Number(r))
+                            children: (0, tU.formatNumber)(Number(r))
                         })]
                     })]
                 })
-            }), (i ?? a) && (0, U.jsxs)("div", {
+            }), (i ?? a) && (0, L.jsxs)("div", {
                 className: "flex flex-row gap-small",
-                children: [i && (s ? (0, U.jsx)(nt, {
+                children: [i && (s ? (0, L.jsx)(na, {
                     icon: s,
                     label: l ? m(l, {
                         amount: p ?? ""
                     }, h) : h
-                }) : (0, U.jsx)("div", {
-                    className: (0, r8.default)(u ? "block" : "hidden", "large:block"),
+                }) : (0, L.jsx)("div", {
+                    className: (0, r7.default)(u ? "block" : "hidden", "large:block"),
                     "data-testid": "bonus-pill",
-                    children: (0, U.jsx)(nt, {
+                    children: (0, L.jsx)(na, {
                         label: h
                     })
-                })), a && (0, U.jsx)(nt, {
+                })), a && (0, L.jsx)(na, {
                     icon: n,
                     label: m(a)
                 })]
             })]
         })
     }
-    let nn = e => {
+    let ns = e => {
         let {
             product: t,
             isExpanded: r,
@@ -4725,14 +4729,14 @@
             className: i,
             ...s
         } = a ?? {};
-        return (0, U.jsxs)("div", {
+        return (0, L.jsxs)("div", {
             ...{
-                [eW]: t.productId
+                [eQ]: t.productId
             },
-            className: (0, r8.default)("self-stretch flex flex-row justify-between items-center gap-small", {
+            className: (0, r7.default)("self-stretch flex flex-row justify-between items-center gap-small", {
                 hidden: t.isCollapsible && !r
             }),
-            children: [(0, U.jsx)(nr, {
+            children: [(0, L.jsx)(ni, {
                 amount: t.robuxAmount,
                 nonPromotionalAmount: t.nonPromotionalPlatformRobuxAmount,
                 bonusRobuxAmount: t.bonusRobuxAmount,
@@ -4740,57 +4744,57 @@
                 bonusRobuxTagTranslationKey: t.bonusRobuxTagTranslationKey,
                 inlineBadgeIcon: t.inlineBadgeIcon,
                 inlineBadgeTranslationKey: t.inlineBadgeTranslationKey
-            }), (0, U.jsx)(O.Button, {
+            }), (0, L.jsx)(V.Button, {
                 variant: t.isCallToAction ? "Emphasis" : "Standard",
                 size: "Small",
-                className: (0, r8.default)(i, "text-label-medium shrink-0", "small:height-1000 small:padding-x-medium small:text-label-medium small:[&_.icon]:size-[var(--icon-size-medium)] small:[&>span]:gap-small"),
+                className: (0, r7.default)(i, "text-label-medium shrink-0", "small:height-1000 small:padding-x-medium small:text-label-medium small:[&_.icon]:size-[var(--icon-size-medium)] small:[&>span]:gap-small"),
                 onClick: e => {
                     n(t, e)
                 },
                 ...s,
                 icon: "a" === s.as && s.href ? "icon-regular-arrow-up-right-from-square" : void 0,
-                children: (0, U.jsx)(tH.PriceTag, {
+                children: (0, L.jsx)(tq.PriceTag, {
                     tagClassName: "robux-price-tag",
                     currencyCode: t.price.amount.currencyCode,
-                    amount: Number(tY(t.price.amount))
+                    amount: Number(tZ(t.price.amount))
                 })
             })]
         }, t.productId)
     };
 
-    function na(e) {
+    function nl(e) {
         let {
             onProductClick: t,
             products: r,
             OverrideProductItemComponent: n
-        } = e, a = (0, er.useTranslations)("Feature.Premium"), [i, s] = (0, L.useState)(!1), l = (0, L.useMemo)(() => r.some(e => e.isCollapsible), [r]), o = (0, L.useCallback)(() => {
-            ey("ClickShowMore"), s(e => !e)
-        }, []), c = n ?? nn;
-        return (0, U.jsxs)(L.Fragment, {
-            children: [r.map(e => (0, U.jsx)(c, {
+        } = e, a = (0, ei.useTranslations)("Feature.Premium"), [i, s] = (0, O.useState)(!1), l = (0, O.useMemo)(() => r.some(e => e.isCollapsible), [r]), o = (0, O.useCallback)(() => {
+            eP("ClickShowMore"), s(e => !e)
+        }, []), c = n ?? ns;
+        return (0, L.jsxs)(O.Fragment, {
+            children: [r.map(e => (0, L.jsx)(c, {
                 product: e,
                 isExpanded: i,
                 onProductClick: t,
                 buttonProps: {
                     className: "min-width-[90px] small:min-width-[120px] medium:min-width-[200px]"
                 }
-            }, e.productId)), l && (0, U.jsx)(O.Button, {
+            }, e.productId)), l && (0, L.jsx)(V.Button, {
                 variant: "ActionUtility",
                 size: "Small",
                 className: "self-stretch flex flex-row height-500",
                 onClick: o,
-                children: (0, U.jsxs)("div", {
+                children: (0, L.jsxs)("div", {
                     className: "flex flex-row justify-center items-center gap-small text-title-medium content-default padding-none",
-                    children: [a(i ? "Action.ShowLess" : "Action.ShowMore"), i ? (0, U.jsx)(B.Icon, {
+                    children: [a(i ? "Action.ShowLess" : "Action.ShowMore"), i ? (0, L.jsx)(z.Icon, {
                         name: "icon-filled-chevron-large-up"
-                    }) : (0, U.jsx)(B.Icon, {
+                    }) : (0, L.jsx)(z.Icon, {
                         name: "icon-filled-chevron-large-down"
                     })]
                 })
             })]
         })
     }
-    let ni = e => t => (0, U.jsx)(nn, {
+    let no = e => t => (0, L.jsx)(ns, {
         ...t,
         buttonProps: {
             className: t.buttonProps?.className,
@@ -4802,30 +4806,30 @@
         }
     });
 
-    function ns(e) {
+    function nc(e) {
         let {
             metadata: t
-        } = e, r = (0, er.useTranslations)("Feature.PersonalizedBonus"), {
+        } = e, r = (0, ei.useTranslations)("Feature.PersonalizedBonus"), {
             bonusItemBannerImageUrl: n,
             bonusItemImageUrl: a,
             deviceMeta: i
-        } = (0, L.useContext)(ec), s = eU(i), l = eI(i), o = (0, L.useCallback)(() => {
-            void 0 !== J.window && (s || l ? J.window.location.href = "/support" : J.window.open("/support", "_blank"))
+        } = (0, O.useContext)(em), s = eL(i), l = eF(i), o = (0, O.useCallback)(() => {
+            void 0 !== et.window && (s || l ? et.window.location.href = "/support" : et.window.open("/support", "_blank"))
         }, [s, l]);
-        return (0, U.jsxs)("div", {
+        return (0, L.jsxs)("div", {
             className: "color-mode-dark dark-theme self-stretch flex flex-row justify-start items-center gap-large clip relative buy-robux-page min-height-[112px]",
             style: {
                 borderTopLeftRadius: "var(--radius-large)",
                 borderTopRightRadius: "var(--radius-large)"
             },
-            children: [(0, U.jsx)("div", {
+            children: [(0, L.jsx)("div", {
                 className: "absolute height-full width-full",
                 style: {
                     flexGrow: 0,
                     flexShrink: 0,
                     backgroundColor: "var(--color-extended-gray-1200)"
                 }
-            }), n && (0, U.jsx)("div", {
+            }), n && (0, L.jsx)("div", {
                 className: "absolute height-full width-full",
                 style: {
                     backgroundImage: `url("${n}")`,
@@ -4835,39 +4839,39 @@
                     opacity: .4
                 },
                 title: "bonus item banner image"
-            }), (0, U.jsx)("div", {
+            }), (0, L.jsx)("div", {
                 className: "absolute height-full width-full",
                 style: {
                     backgroundImage: "linear-gradient(to right, rgba(18, 18, 21, 1), rgb(18, 18, 21, 0))"
                 }
-            }), (0, U.jsx)("div", {
+            }), (0, L.jsx)("div", {
                 className: "width-2000 height-2000 margin-left-small",
                 style: {
                     zIndex: 1
                 },
-                children: a && (0, U.jsx)("img", {
+                children: a && (0, L.jsx)("img", {
                     src: a,
                     alt: "bonus item",
                     className: "width-full height-full"
                 })
-            }), (0, U.jsx)("div", {
+            }), (0, L.jsx)("div", {
                 style: {
                     margin: "auto auto auto 0",
                     padding: "21px 16px 21px 0",
                     zIndex: 1
                 },
-                children: (0, U.jsxs)("div", {
+                children: (0, L.jsxs)("div", {
                     className: "flex flex-col gap-xsmall self-stretch items-start justify-center",
-                    children: [(0, U.jsxs)("div", {
+                    children: [(0, L.jsxs)("div", {
                         className: "flex flex-row items-center text-title-large content-[var(--dark-mode-content-emphasis)] text-wrap",
-                        children: [(0, U.jsx)("div", {
+                        children: [(0, L.jsx)("div", {
                             children: t.experienceDisplayName
-                        }), (0, U.jsx)(tT.Tooltip, {
+                        }), (0, L.jsx)(tM.Tooltip, {
                             position: "bottom-center",
                             title: r("Action.ReportItem"),
-                            children: (0, U.jsx)(tT.TooltipTrigger, {
+                            children: (0, L.jsx)(tM.TooltipTrigger, {
                                 asChild: !0,
-                                children: (0, U.jsx)(tN.IconButton, {
+                                children: (0, L.jsx)(tj.IconButton, {
                                     variant: "Utility",
                                     size: "XSmall",
                                     icon: "icon-regular-circle-i",
@@ -4876,7 +4880,7 @@
                                 })
                             })
                         })]
-                    }), (0, U.jsx)("div", {
+                    }), (0, L.jsx)("div", {
                         className: "text-body-large content-[var(--dark-mode-content-default)] text-wrap",
                         children: t.gamePassDisplayName
                     })]
@@ -4884,49 +4888,49 @@
             })]
         })
     }
-    let nl = new Intl.DateTimeFormat("en-US", {
+    let nu = new Intl.DateTimeFormat("en-US", {
             timeZone: "America/Los_Angeles",
             year: "numeric",
             month: "numeric",
             day: "numeric"
         }),
-        no = Date.UTC(2026, 3, 1);
+        nd = Date.UTC(2026, 3, 1);
 
-    function nc(e) {
+    function nm(e) {
         let {
             metadata: t
         } = e, {
             translateFullKey: r
-        } = (0, er.useFullKeyTranslations)(), n = (0, er.useTranslations)("Feature.PersonalizedBonus"), a = (0, L.useMemo)(() => {
+        } = (0, ei.useFullKeyTranslations)(), n = (0, ei.useTranslations)("Feature.PersonalizedBonus"), a = (0, O.useMemo)(() => {
             let e, t;
-            return e = nl.formatToParts(new Date), t = Number(e.find(e => "year" === e.type)?.value), Math.max(Math.ceil((no - Date.UTC(t, Number(e.find(e => "month" === e.type)?.value) - 1, Number(e.find(e => "day" === e.type)?.value))) / 864e5), 0)
+            return e = nu.formatToParts(new Date), t = Number(e.find(e => "year" === e.type)?.value), Math.max(Math.ceil((nd - Date.UTC(t, Number(e.find(e => "month" === e.type)?.value) - 1, Number(e.find(e => "day" === e.type)?.value))) / 864e5), 0)
         }, []);
-        return (0, U.jsxs)("div", {
+        return (0, L.jsxs)("div", {
             className: "collectible-item-bonus-item-banner flex flex-row gap-large self-stretch items-center justify-start overflow-hidden padding-x-medium padding-bottom-medium padding-top-large medium:padding-x-xlarge buy-robux-page",
             style: {
                 borderTopLeftRadius: "8px",
                 borderTopRightRadius: "8px"
             },
-            children: [(0, U.jsx)("img", {
+            children: [(0, L.jsx)("img", {
                 src: t.image2dUrl,
                 alt: "bonus item",
                 className: "min-width-2000 max-width-2000 min-height-2000 max-height-2000 medium:min-width-3000 medium:max-width-3000 medium:min-height-3000 medium:max-height-3000"
-            }), (0, U.jsxs)("div", {
+            }), (0, L.jsxs)("div", {
                 className: "flex flex-col gap-small medium:gap-medium self-stretch items-start justify-center",
-                children: [(0, U.jsx)("div", {
+                children: [(0, L.jsx)("div", {
                     className: "text-title-large medium:text-heading-small content-emphasis text-wrap",
                     children: r(t.translationKey)
-                }), (0, U.jsxs)("div", {
+                }), (0, L.jsxs)("div", {
                     className: "flex flex-col small:flex-row gap-medium self-stretch items-start justify-start",
-                    children: [(0, U.jsxs)("div", {
+                    children: [(0, L.jsxs)("div", {
                         className: "flex flex-row gap-xsmall self-stretch items-center justify-start",
-                        children: [(0, U.jsx)("div", {
+                        children: [(0, L.jsx)("div", {
                             className: "text-label-small medium:text-label-medium content-default",
                             children: n("Label.ByRoblox")
-                        }), (0, U.jsx)(rl, {
+                        }), (0, L.jsx)(ru, {
                             size: 12
                         })]
-                    }), (0, U.jsx)(tR.Badge, {
+                    }), (0, L.jsx)(t_.Badge, {
                         variant: "Contrast",
                         icon: "icon-regular-clock",
                         label: n(1 === a ? "Label.LastDay" : "Label.DaysLeft", {
@@ -4938,7 +4942,7 @@
             })]
         })
     }
-    let nu = e => {
+    let np = e => {
         let {
             personalizedBonus: t
         } = e, [r] = t.bonuses;
@@ -4948,31 +4952,31 @@
             gamePassMetadata: a,
             virtualPurchasingProductType: i
         } = r, s = i.toString();
-        return "PRODUCT_TYPE_COLLECTIBLE_ITEM" === s ? n ? (0, U.jsx)(nc, {
+        return "PRODUCT_TYPE_COLLECTIBLE_ITEM" === s ? n ? (0, L.jsx)(nm, {
             metadata: n
-        }) : (ey("BonusItemMissingMetadata", {
+        }) : (eP("BonusItemMissingMetadata", {
             productType: s
-        }), null) : "PRODUCT_TYPE_GAME_PASS_PRODUCT" === s ? a ? (0, U.jsx)(ns, {
+        }), null) : "PRODUCT_TYPE_GAME_PASS_PRODUCT" === s ? a ? (0, L.jsx)(nc, {
             metadata: a
-        }) : (ey("BonusItemMissingMetadata", {
+        }) : (eP("BonusItemMissingMetadata", {
             productType: s
-        }), null) : (ey("BonusItemUnsupportedType", {
+        }), null) : (eP("BonusItemUnsupportedType", {
             productType: s
         }), null)
     };
 
-    function nd(e) {
+    function nh(e) {
         let {
             isPrimary: t,
             sectionBase: r,
             personalizedBonus: n
         } = e, {
             purchaseProduct: a
-        } = (0, L.useContext)(rC), {
+        } = (0, O.useContext)(rN), {
             redirect: i
-        } = (0, L.useContext)(ec), {
+        } = (0, O.useContext)(em), {
             translateFullKey: s
-        } = (0, er.useFullKeyTranslations)(), l = (0, L.useCallback)((e, t) => {
+        } = (0, ei.useFullKeyTranslations)(), l = (0, O.useCallback)((e, t) => {
             a({
                 product: e,
                 event: t,
@@ -4981,21 +4985,21 @@
                 isBonus: !0,
                 sectionType: "PersonalizedBonus"
             })
-        }, [a, n.isRedirect, i]), o = (0, L.useMemo)(() => n.isRedirect && i?.url ? ni(i.url) : nn, [n.isRedirect, i?.url]);
-        return (0, U.jsxs)(r6, {
-            ...e$(r),
-            children: [(0, U.jsxs)("div", {
-                children: [(0, U.jsx)(r9, {
+        }, [a, n.isRedirect, i]), o = (0, O.useMemo)(() => n.isRedirect && i?.url ? no(i.url) : ns, [n.isRedirect, i?.url]);
+        return (0, L.jsxs)(ne, {
+            ...eX(r),
+            children: [(0, L.jsxs)("div", {
+                children: [(0, L.jsx)(nt, {
                     children: s(r.sectionHeaderTranslationKey)
-                }), n.bodyTranslationKey && (0, U.jsx)(r7, {
+                }), n.bodyTranslationKey && (0, L.jsx)(nr, {
                     children: s(n.bodyTranslationKey)
                 })]
-            }), (0, U.jsx)(ne, {
+            }), (0, L.jsx)(nn, {
                 isPrimary: t,
-                banner: (0, U.jsx)(nu, {
+                banner: (0, L.jsx)(np, {
                     personalizedBonus: n
                 }),
-                children: (0, U.jsx)(na, {
+                children: (0, L.jsx)(nl, {
                     onProductClick: l,
                     products: r.products ?? [],
                     OverrideProductItemComponent: o
@@ -5004,11 +5008,11 @@
         })
     }
 
-    function nm(e) {
+    function nf(e) {
         let {
             daysLeft: t
-        } = e, r = (0, er.useTranslations)("Feature.PersonalizedBonus");
-        return (0, U.jsx)(tR.Badge, {
+        } = e, r = (0, ei.useTranslations)("Feature.PersonalizedBonus");
+        return (0, L.jsx)(t_.Badge, {
             variant: "Contrast",
             label: 1 === t ? r("Label.LastDay", {
                 daysLeft: 1
@@ -5019,13 +5023,13 @@
         })
     }
 
-    function np(e) {
+    function ng(e) {
         if (void 0 === e) return {
             success: !1,
             error: "ABSENT"
         };
         let t = Number(e);
-        if ("string" == typeof e && "" === e.trim() || !Number.isFinite(t)) return ev("ResolveLimitedTimeBonusExpirationInvalidTimestamp"), {
+        if ("string" == typeof e && "" === e.trim() || !Number.isFinite(t)) return eC("ResolveLimitedTimeBonusExpirationInvalidTimestamp"), {
             success: !1,
             error: "INVALID_TIMESTAMP"
         };
@@ -5039,50 +5043,50 @@
         }
     }
 
-    function nh(e) {
+    function nx(e) {
         let {
             isPrimary: t,
             sectionBase: r
         } = e, {
             purchaseNonRedirectProduct: n
-        } = (0, L.useContext)(rC), {
+        } = (0, O.useContext)(rN), {
             atLeastOneProductHasBonusAmount: a,
             deviceMeta: i
-        } = (0, L.useContext)(ec), {
+        } = (0, O.useContext)(em), {
             translateFullKey: s
-        } = (0, er.useFullKeyTranslations)(), l = r.productsList?.bodyTranslationKey, o = np(r.productsList?.promotionExpirationTimestampMs), c = l ? s.html(l, [{
+        } = (0, ei.useFullKeyTranslations)(), l = r.productsList?.bodyTranslationKey, o = ng(r.productsList?.promotionExpirationTimestampMs), c = l ? s.html(l, [{
             opening: "termsLinkStart",
             closing: "termsLinkEnd",
-            render: e => (0, U.jsx)("a", {
-                ...rS("/info/terms", i),
+            render: e => (0, L.jsx)("a", {
+                ...rE("/info/terms", i),
                 className: "text-link",
                 children: e
             })
-        }]) : void 0, u = (0, L.useCallback)(e => {
+        }]) : void 0, u = (0, O.useCallback)(e => {
             n(e, !1, !1, "ProductsList")
         }, [n]);
-        return (0, U.jsxs)(r6, {
-            ...e$(r),
-            children: [(0, U.jsxs)("div", {
+        return (0, L.jsxs)(ne, {
+            ...eX(r),
+            children: [(0, L.jsxs)("div", {
                 className: "flex flex-col gap-xsmall self-stretch",
-                children: [(0, U.jsxs)("div", {
+                children: [(0, L.jsxs)("div", {
                     className: "flex flex-row justify-between items-center self-stretch",
-                    children: [(0, U.jsx)(r9, {
+                    children: [(0, L.jsx)(nt, {
                         children: s(r.sectionHeaderTranslationKey)
-                    }), o.success && (0, U.jsx)(nm, {
+                    }), o.success && (0, L.jsx)(nf, {
                         daysLeft: o.value
                     })]
-                }), l && (0, U.jsx)(r7, {
-                    className: (0, r8.default)({
+                }), l && (0, L.jsx)(nr, {
+                    className: (0, r7.default)({
                         "text-body-small": !a
                     }),
-                    children: (0, U.jsx)("span", {
+                    children: (0, L.jsx)("span", {
                         children: c ?? s(l)
                     })
                 })]
-            }), (0, U.jsx)(ne, {
+            }), (0, L.jsx)(nn, {
                 isPrimary: t,
-                children: (0, U.jsx)(na, {
+                children: (0, L.jsx)(nl, {
                     onProductClick: u,
                     products: r.products ?? []
                 })
@@ -5090,44 +5094,44 @@
         })
     }
 
-    function nf(e) {
+    function nb(e) {
         let {
             isPrimary: t,
             sectionBase: r
         } = e, {
             purchaseNonRedirectProduct: n
-        } = (0, L.useContext)(rC), {
+        } = (0, O.useContext)(rN), {
             translateFullKey: a
-        } = (0, er.useFullKeyTranslations)(), i = (0, L.useCallback)(e => {
+        } = (0, ei.useFullKeyTranslations)(), i = (0, O.useCallback)(e => {
             n(e, !1, !1, "Recommended")
         }, [n]), [s] = r.products ?? [];
-        return s ? (0, U.jsxs)(r6, {
-            ...e$(r),
-            children: [(0, U.jsx)(r9, {
+        return s ? (0, L.jsxs)(ne, {
+            ...eX(r),
+            children: [(0, L.jsx)(nt, {
                 children: a(r.sectionHeaderTranslationKey)
-            }), (0, U.jsx)(ne, {
+            }), (0, L.jsx)(nn, {
                 isPrimary: t,
-                children: (0, U.jsxs)("div", {
+                children: (0, L.jsxs)("div", {
                     className: "flex flex-col self-stretch medium:flex-row medium:justify-between medium:items-center",
-                    children: [(0, U.jsx)("div", {
+                    children: [(0, L.jsx)("div", {
                         className: "flex flex-col self-stretch gap-small padding-bottom-large medium:padding-bottom-none medium:self-auto",
-                        children: (0, U.jsx)(nr, {
+                        children: (0, L.jsx)(ni, {
                             amount: s.robuxAmount,
                             nonPromotionalAmount: s.nonPromotionalPlatformRobuxAmount
                         })
-                    }), (0, U.jsx)(O.Button, {
+                    }), (0, L.jsx)(V.Button, {
                         onClick: () => {
                             i(s)
                         },
                         ...{
-                            [eW]: s.productId
+                            [eQ]: s.productId
                         },
                         className: "text-label-medium shrink-0 width-full medium:width-[200px]",
                         variant: s.isCallToAction ? "Emphasis" : "Standard",
                         size: "Medium",
-                        children: (0, U.jsx)(tH.PriceTag, {
+                        children: (0, L.jsx)(tq.PriceTag, {
                             tagClassName: "robux-price-tag",
-                            amount: Number(tY(s.price.amount)),
+                            amount: Number(tZ(s.price.amount)),
                             currencyCode: s.price.amount.currencyCode
                         })
                     })]
@@ -5136,7 +5140,7 @@
         }) : null
     }
 
-    function ng(e) {
+    function ny(e) {
         let {
             isPrimary: t,
             title: r,
@@ -5144,18 +5148,18 @@
             buttonText: a,
             buttonClickHandler: i
         } = e;
-        return (0, U.jsxs)("div", {
+        return (0, L.jsxs)("div", {
             className: "flex flex-col self-stretch medium:flex-row medium:justify-between medium:items-center",
-            children: [(0, U.jsxs)("div", {
+            children: [(0, L.jsxs)("div", {
                 className: "flex flex-col self-stretch gap-small padding-bottom-large medium:padding-bottom-none",
-                children: [(0, U.jsx)("div", {
+                children: [(0, L.jsx)("div", {
                     className: "self-stretch text-heading-small content-emphasis",
                     children: r
-                }), (0, U.jsx)("div", {
+                }), (0, L.jsx)("div", {
                     className: "self-stretch text-body-medium content-emphasis",
                     children: n
                 })]
-            }), (0, U.jsx)(O.Button, {
+            }), (0, L.jsx)(V.Button, {
                 onClick: i,
                 className: "text-label-medium width-full medium:width-[200px]",
                 size: "Medium",
@@ -5165,27 +5169,27 @@
         })
     }
 
-    function nx(e) {
+    function nv(e) {
         let {
             isPrimary: t,
             sectionBase: r,
             giftCard: n
         } = e, {
             trackGiftCardClick: a
-        } = (0, L.useContext)(eR), {
+        } = (0, O.useContext)(e_), {
             deviceMeta: i
-        } = (0, L.useContext)(ec), {
+        } = (0, O.useContext)(em), {
             translateFullKey: s
-        } = (0, er.useFullKeyTranslations)(), l = (0, er.useTranslations)("Feature.Premium"), o = (0, L.useCallback)(() => {
-            a(), J.window?.location.assign(ry(i) ? rv(n.redirectUrl) : n.redirectUrl)
+        } = (0, ei.useFullKeyTranslations)(), l = (0, ei.useTranslations)("Feature.Premium"), o = (0, O.useCallback)(() => {
+            a(), et.window?.location.assign(rP(i) ? rC(n.redirectUrl) : n.redirectUrl)
         }, [i, a, n.redirectUrl]);
-        return (0, U.jsxs)(r6, {
-            ...e$(r),
-            children: [(0, U.jsx)(r9, {
+        return (0, L.jsxs)(ne, {
+            ...eX(r),
+            children: [(0, L.jsx)(nt, {
                 children: s(r.sectionHeaderTranslationKey)
-            }), (0, U.jsx)(ne, {
+            }), (0, L.jsx)(nn, {
                 isPrimary: t,
-                children: (0, U.jsx)(ng, {
+                children: (0, L.jsx)(ny, {
                     title: s(n.titleTranslationKey, void 0, l("Description.GiftCard")),
                     body: s(n.bodyTranslationKey),
                     buttonText: s(n.buttonTextTranslationKey),
@@ -5195,7 +5199,7 @@
         })
     }
 
-    function nb(e) {
+    function nS(e) {
         let {
             isPrimary: t,
             robuxGift: r,
@@ -5204,20 +5208,20 @@
             robuxGifting: {
                 openModal: a
             }
-        } = (0, L.useContext)(ty), {
+        } = (0, O.useContext)(tP), {
             trackRobuxGiftClick: i
-        } = (0, L.useContext)(eR), {
+        } = (0, O.useContext)(e_), {
             translateFullKey: s
-        } = (0, er.useFullKeyTranslations)(), l = (0, L.useCallback)(() => {
+        } = (0, ei.useFullKeyTranslations)(), l = (0, O.useCallback)(() => {
             i(), a()
         }, [i, a]);
-        return (0, U.jsxs)(r6, {
-            ...e$(n),
-            children: [(0, U.jsx)(r9, {
+        return (0, L.jsxs)(ne, {
+            ...eX(n),
+            children: [(0, L.jsx)(nt, {
                 children: s(n.sectionHeaderTranslationKey)
-            }), (0, U.jsx)(ne, {
+            }), (0, L.jsx)(nn, {
                 isPrimary: t,
-                children: (0, U.jsx)(ng, {
+                children: (0, L.jsx)(ny, {
                     title: s(r.titleTranslationKey),
                     body: s(r.bodyTranslationKey),
                     buttonText: s(r.buttonTextTranslationKey),
@@ -5226,56 +5230,56 @@
             })]
         })
     }
-    var ny = e.i(309380),
-        nv = e.i(431545),
-        nS = e.i(660053),
-        nP = e.i(349030),
-        nC = e.i(380688),
-        nE = e.i(190187),
-        nw = e.i(176489),
-        nN = e.i(231756),
-        nk = e.i(306627);
-    let nT = {
+    var nP = e.i(309380),
+        nC = e.i(431545),
+        nE = e.i(660053),
+        nw = e.i(349030),
+        nN = e.i(380688),
+        nk = e.i(190187),
+        nT = e.i(176489),
+        nj = e.i(231756),
+        nA = e.i(306627);
+    let nM = {
             XSmall: "size-400",
             Small: "size-500",
             Medium: "size-600"
         },
-        nj = {
+        nR = {
             XSmall: "size-150",
             Small: "size-200",
             Medium: "size-250"
         },
-        nA = {
+        nI = {
             XSmall: "size-1200",
             Small: "size-1400",
             Medium: "size-1600"
         },
-        nM = {
+        nU = {
             XSmall: "text-title-small",
             Small: "text-title-small",
             Medium: "text-title-medium"
         },
-        nR = {
+        n_ = {
             XSmall: void 0,
             Small: "padding-top-xxsmall",
             Medium: "padding-y-xxsmall"
         },
-        nI = {
+        nF = {
             XSmall: "text-body-small",
             Small: "text-body-small",
             Medium: "text-body-medium"
         },
-        nU = {
+        nL = {
             XSmall: "padding-medium",
             Small: "padding-large",
             Medium: "padding-xlarge"
         },
-        n_ = {
+        nD = {
             XSmall: "Small",
             Small: "Medium",
             Medium: "Large"
         },
-        nF = (0, L.forwardRef)((e, t) => {
+        nB = (0, O.forwardRef)((e, t) => {
             let {
                 layout: r,
                 size: n,
@@ -5289,82 +5293,82 @@
                 isSelected: d,
                 onSelect: m,
                 hideSelectedIndicator: p = !1
-            } = e, h = (0, L.useMemo)(() => s && L.default.createElement("div", {
-                className: (0, W.default)(nM[n], nR[n], "content-emphasis text-align-x-start", "clip [display:-webkit-box] [-webkit-line-clamp:3] [-webkit-box-orient:vertical]")
-            }, s), [s, n]), f = (0, L.useMemo)(() => u && L.default.createElement("div", {
-                className: (0, W.default)("text-caption-small content-default text-align-x-start", "text-truncate-split text-no-wrap width-full")
-            }, u), [u]), g = (0, L.useMemo)(() => l && L.default.createElement("div", {
-                className: (0, W.default)(nI[n], "content-default text-align-x-start")
-            }, l), [l, n]), x = (0, L.useMemo)(() => c && L.default.createElement(nk.Icon, {
+            } = e, h = (0, O.useMemo)(() => s && O.default.createElement("div", {
+                className: (0, Q.default)(nU[n], n_[n], "content-emphasis text-align-x-start", "clip [display:-webkit-box] [-webkit-line-clamp:3] [-webkit-box-orient:vertical]")
+            }, s), [s, n]), f = (0, O.useMemo)(() => u && O.default.createElement("div", {
+                className: (0, Q.default)("text-caption-small content-default text-align-x-start", "text-truncate-split text-no-wrap width-full")
+            }, u), [u]), g = (0, O.useMemo)(() => l && O.default.createElement("div", {
+                className: (0, Q.default)(nF[n], "content-default text-align-x-start")
+            }, l), [l, n]), x = (0, O.useMemo)(() => c && O.default.createElement(nA.Icon, {
                 name: c,
-                size: n_[n]
-            }), [c, n]), b = (0, L.useMemo)(() => {
+                size: nD[n]
+            }), [c, n]), b = (0, O.useMemo)(() => {
                 switch (a) {
                     case "Checkmark":
-                        return d && L.default.createElement(nk.Icon, {
+                        return d && O.default.createElement(nA.Icon, {
                             name: "icon-filled-check",
-                            size: n_[n]
+                            size: nD[n]
                         });
                     case "Checkbox":
-                        return L.default.createElement("div", {
-                            className: (0, W.default)(nT[n], "flex items-center justify-center radius-small padding-none content-default", d ? "stroke-none" : "stroke-standard stroke-emphasis", d ? "bg-system-contrast" : "bg-none")
-                        }, d && L.default.createElement("div", {
-                            className: (0, W.default)(nT[n], "content-inverse-emphasis icon icon-filled-check")
+                        return O.default.createElement("div", {
+                            className: (0, Q.default)(nM[n], "flex items-center justify-center radius-small padding-none content-default", d ? "stroke-none" : "stroke-standard stroke-emphasis", d ? "bg-system-contrast" : "bg-none")
+                        }, d && O.default.createElement("div", {
+                            className: (0, Q.default)(nM[n], "content-inverse-emphasis icon icon-filled-check")
                         }));
                     case "Radio":
-                        return L.default.createElement("div", {
-                            className: (0, W.default)(nT[n], "radius-circle flex items-center justify-center stroke-emphasis stroke-standard", d ? "bg-system-contrast" : "bg-none")
-                        }, d && L.default.createElement("div", {
-                            className: (0, W.default)("radius-circle bg-inverse-action-sub-emphasis", nj[n])
+                        return O.default.createElement("div", {
+                            className: (0, Q.default)(nM[n], "radius-circle flex items-center justify-center stroke-emphasis stroke-standard", d ? "bg-system-contrast" : "bg-none")
+                        }, d && O.default.createElement("div", {
+                            className: (0, Q.default)("radius-circle bg-inverse-action-sub-emphasis", nR[n])
                         }));
                     default:
                         return console.error(`Invalid OptionSelector type ${a}`), null
                 }
-            }, [a, n, d]), y = (0, L.useMemo)(() => o && L.default.createElement("div", {
-                className: (0, W.default)(nA[n], "flex items-center justify-center clip shrink-0")
-            }, o), [o, n]), v = (0, L.useMemo)(() => {
-                let e = !p && L.default.createElement("div", {
-                    className: nT[n]
+            }, [a, n, d]), y = (0, O.useMemo)(() => o && O.default.createElement("div", {
+                className: (0, Q.default)(nI[n], "flex items-center justify-center clip shrink-0")
+            }, o), [o, n]), v = (0, O.useMemo)(() => {
+                let e = !p && O.default.createElement("div", {
+                    className: nM[n]
                 }, b);
                 switch (r) {
                     case "Horizontal":
-                        return L.default.createElement("div", {
+                        return O.default.createElement("div", {
                             className: "flex gap-large"
-                        }, y, L.default.createElement("div", {
+                        }, y, O.default.createElement("div", {
                             className: "flex flex-col gap-xsmall fill clip"
-                        }, L.default.createElement("div", {
+                        }, O.default.createElement("div", {
                             className: "flex gap-small items-start"
-                        }, L.default.createElement("div", {
+                        }, O.default.createElement("div", {
                             className: "flex flex-col items-start fill clip"
-                        }, L.default.createElement("div", {
+                        }, O.default.createElement("div", {
                             className: "flex gap-small items-center width-full"
                         }, x, h), f), e), g));
                     case "Vertical":
-                        return L.default.createElement("div", {
+                        return O.default.createElement("div", {
                             className: "flex flex-col gap-xsmall"
-                        }, L.default.createElement("div", {
+                        }, O.default.createElement("div", {
                             className: "flex gap-small"
-                        }, L.default.createElement("div", {
+                        }, O.default.createElement("div", {
                             className: "flex flex-col gap-medium fill min-width-0"
-                        }, y, L.default.createElement("div", {
+                        }, y, O.default.createElement("div", {
                             className: "flex flex-col gap-xsmall"
                         }, x, h, f)), e), g);
                     default:
                         return console.error(`Invalid OptionSelector layout ${r}`), null
                 }
             }, [r, y, x, h, g, b, n, f, p]);
-            return L.default.createElement("button", {
+            return O.default.createElement("button", {
                 type: "button",
-                className: (0, W.default)("bg-none width-full radius-medium stroke-standard", nw.interactable, d ? "stroke-system-contrast" : "stroke-emphasis", nU[n], i ? nN.disabledOpacity : "cursor-pointer"),
+                className: (0, Q.default)("bg-none width-full radius-medium stroke-standard", nT.interactable, d ? "stroke-system-contrast" : "stroke-emphasis", nL[n], i ? nj.disabledOpacity : "cursor-pointer"),
                 disabled: i,
                 ref: t,
                 onClick: () => m()
-            }, L.default.createElement(nw.StateLayer, null), v)
+            }, O.default.createElement(nT.StateLayer, null), v)
         });
-    nF.displayName = "OptionSelector";
-    var nL = e.i(782009);
+    nB.displayName = "OptionSelector";
+    var nO = e.i(782009);
 
-    function nD(e) {
+    function nG(e) {
         let {
             price: t,
             strikethroughPrice: r
@@ -5373,7 +5377,7 @@
         let n = Math.round((1 - t.amount / r.amount) * 100);
         return n > 0 ? n : void 0
     }
-    let nB = e => {
+    let nz = e => {
         let t, {
                 option: r,
                 isSelected: n,
@@ -5382,8 +5386,8 @@
             } = e,
             {
                 translate: s
-            } = (0, nv.useTranslation)(),
-            l = (0, nL.useFormatter)(),
+            } = (0, nC.useTranslation)(),
+            l = (0, nO.useFormatter)(),
             o = e => {
                 let {
                     amount: t,
@@ -5394,27 +5398,27 @@
                     currency: r
                 })
             },
-            c = nD(r),
+            c = nG(r),
             u = o({
                 amount: r.price.amount / r.months,
                 currencyCode: r.price.currencyCode
             });
         r.months > 1 && (t = void 0 === c ? s("Action.PricePerMonth", {
             price: u,
-            periodType: ny.PeriodType.Month
+            periodType: nP.PeriodType.Month
         }) : s("Label.BillingPeriodSavings", {
             pricePerMonth: u,
             savingsPercent: l.number(c / 100, {
                 style: "percent"
             })
         }));
-        let d = (0, U.jsxs)("div", {
+        let d = (0, L.jsxs)("div", {
             className: "width-full min-height-1000 gap-small flex flex-row items-center justify-between",
-            children: [(0, U.jsxs)("div", {
+            children: [(0, L.jsxs)("div", {
                 className: "min-width-0 flex flex-col items-start",
-                children: [(0, U.jsxs)("div", {
+                children: [(0, L.jsxs)("div", {
                     className: "gap-xsmall flex flex-row items-center",
-                    children: [(0, U.jsx)("span", {
+                    children: [(0, L.jsx)("span", {
                         className: "text-title-medium content-emphasis",
                         children: ((e, t) => {
                             switch (e) {
@@ -5427,34 +5431,34 @@
                                 case 12:
                                     return t("Label.BillingPeriodYearly");
                                 default:
-                                    return t((0, nP.getSubscriptionPeriodTranslationKey)(ny.PeriodType.Month, e), {
+                                    return t((0, nw.getSubscriptionPeriodTranslationKey)(nP.PeriodType.Month, e), {
                                         periodCount: e
                                     })
                             }
                         })(r.months, s)
-                    }), a && (0, U.jsx)(nE.Badge, {
+                    }), a && (0, L.jsx)(nk.Badge, {
                         label: s("Label.BestValue"),
                         size: "XSmall",
                         variant: "Neutral"
                     })]
-                }), t && (0, U.jsx)("span", {
+                }), t && (0, L.jsx)("span", {
                     className: "text-body-medium content-default",
                     children: t
                 })]
-            }), (0, U.jsxs)("div", {
+            }), (0, L.jsxs)("div", {
                 className: "gap-small flex shrink-0 flex-row items-center",
-                children: [void 0 !== c && r.strikethroughPrice && (0, U.jsx)("span", {
+                children: [void 0 !== c && r.strikethroughPrice && (0, L.jsx)("span", {
                     className: "text-label-medium line-through [color:var(--color-extended-gray-600)]",
                     children: o(r.strikethroughPrice)
-                }), (0, U.jsx)("span", {
+                }), (0, L.jsx)("span", {
                     className: "text-label-medium content-emphasis",
                     children: o(r.price)
                 })]
             })]
         });
-        return (0, U.jsx)("div", {
+        return (0, L.jsx)("div", {
             "data-testid": `billing-period-option-${r.productId}`,
-            children: (0, U.jsx)(nF, {
+            children: (0, L.jsx)(nB, {
                 hideSelectedIndicator: !0,
                 isSelected: n,
                 label: void 0,
@@ -5466,8 +5470,8 @@
             })
         })
     };
-    var nO = e.i(559659);
-    let nG = {
+    var nV = e.i(559659);
+    let nW = {
             featureName: "SubscriptionsCommon",
             team: "Economy > Payments & Fraud > Subscriptions",
             features: {
@@ -5491,23 +5495,23 @@
                 }
             }
         },
-        nz = (0, eg.createFireTelemetryCounter)(nG.featureName),
-        nV = (0, nO.createFireTelemetryHistogram)(nG.featureName, {}),
+        nK = (0, ey.createFireTelemetryCounter)(nW.featureName),
+        nH = (0, nV.createFireTelemetryHistogram)(nW.featureName, {}),
         {
-            trackCounter: nW
-        } = (0, em.createTrackers)(nG, {
-            publish: nz
+            trackCounter: nQ
+        } = (0, ef.createTrackers)(nW, {
+            publish: nK
         }),
         {
-            ENUM_PURCHASE_EVENT_TYPE: nK,
-            ENUM_VIEW_MESSAGE: nH
-        } = D.paymentFlowAnalyticsService,
-        nQ = (e, t, r, n) => {
+            ENUM_PURCHASE_EVENT_TYPE: n$,
+            ENUM_VIEW_MESSAGE: nq
+        } = G.paymentFlowAnalyticsService,
+        nY = (e, t, r, n) => {
             let {
                 analyticsContext: a,
                 paymentSessionId: i
             } = e;
-            D.paymentFlowAnalyticsService.sendUserPurchaseFlowEvent({
+            G.paymentFlowAnalyticsService.sendUserPurchaseFlowEvent({
                 triggerContext: a.triggeringContext,
                 isMidPurchaseStep: !1,
                 viewName: a.viewName,
@@ -5519,24 +5523,24 @@
                 } : n
             })
         },
-        n$ = e => ({
+        nX = e => ({
             productId: e.productId,
             months: String(e.months)
         });
-    var nq = e.i(910866),
-        nY = e.i(482131);
-    let nX = [{
+    var nJ = e.i(910866),
+        nZ = e.i(482131);
+    let n0 = [{
             opening: "linkStart",
             closing: "linkEnd",
-            render: e => (0, U.jsx)("a", {
+            render: e => (0, L.jsx)("a", {
                 className: "underline",
-                href: nq.SUBSCRIPTION_TERMS_URL,
+                href: nJ.SUBSCRIPTION_TERMS_URL,
                 rel: "noopener noreferrer",
                 target: "_blank",
                 children: e
             })
         }],
-        nJ = e => {
+        n1 = e => {
             let {
                 isOpen: t,
                 onOpenChange: r,
@@ -5551,10 +5555,10 @@
                 onMobilePurchaseInitiated: d
             } = e, {
                 translate: m
-            } = (0, nv.useTranslation)(), [p, h] = (0, L.useState)(), f = (0, L.useRef)(!1), g = (0, L.useMemo)(() => {
+            } = (0, nC.useTranslation)(), [p, h] = (0, O.useState)(), f = (0, O.useRef)(!1), g = (0, O.useMemo)(() => {
                 let e;
                 return n.forEach(t => {
-                    let r = nD(t);
+                    let r = nG(t);
                     void 0 !== r && (!e || r > e.savings || r === e.savings && t.months > e.months) && (e = {
                         productId: t.productId,
                         savings: r,
@@ -5562,7 +5566,7 @@
                     })
                 }), e?.productId
             }, [n]);
-            (0, L.useEffect)(() => {
+            (0, O.useEffect)(() => {
                 if (!t) {
                     f.current = !1;
                     return
@@ -5573,9 +5577,9 @@
                     f.current = !0, e = {
                         analyticsContext: a,
                         paymentSessionId: s
-                    }, t = n.map(e => e.months).sort((e, t) => e - t).join(","), nQ(e, nK.VIEW_SHOWN, nH.ROBLOX_PLUS_BILLING_PERIOD_SHEET_OPENED, {
+                    }, t = n.map(e => e.months).sort((e, t) => e - t).join(","), nY(e, n$.VIEW_SHOWN, nq.ROBLOX_PLUS_BILLING_PERIOD_SHEET_OPENED, {
                         termMonths: t
-                    }), nW("BillingPeriodSheetShown", {
+                    }), nQ("BillingPeriodSheetShown", {
                         viewName: e.analyticsContext.viewName,
                         termMonths: t
                     })
@@ -5592,13 +5596,13 @@
                     freeTrialDuration: v,
                     freeTrialPeriodType: S
                 } = x,
-                P = void 0 !== v && void 0 !== S ? (0, nP.getFreeTrialDisplay)({
+                P = void 0 !== v && void 0 !== S ? (0, nw.getFreeTrialDisplay)({
                     freeTrialOffer: {
                         duration: v,
                         periodType: S
                     }
-                }, ny.PeriodType.Month) : null,
-                C = void 0 === y ? (0, nC.translateHtml)(m, "Description.SubscriptionLegalBillingCycle", nX) : P ? (0, nC.translateHtml)(m, "Description.SubscriptionFreeTrialLegalV2", nX, {
+                }, nP.PeriodType.Month) : null,
+                C = void 0 === y ? (0, nN.translateHtml)(m, "Description.SubscriptionLegalBillingCycle", n0) : P ? (0, nN.translateHtml)(m, "Description.SubscriptionFreeTrialLegalV2", n0, {
                     date: y.toLocaleDateString(void 0, {
                         year: "numeric",
                         month: "long",
@@ -5607,51 +5611,51 @@
                     trialDuration: String(P.trialDuration),
                     trialPeriodLabel: m(P.trialPeriodKey),
                     billingPeriodLabel: m(P.billingPeriodKey)
-                }) : (0, nC.translateHtml)(m, "Description.SubscriptionFreeTrialLegal", nX, {
+                }) : (0, nN.translateHtml)(m, "Description.SubscriptionFreeTrialLegal", n0, {
                     date: y.toLocaleDateString(void 0, {
                         year: "numeric",
                         month: "long",
                         day: "numeric"
                     })
                 });
-            return (0, U.jsx)(nS.SheetRoot, {
+            return (0, L.jsx)(nE.SheetRoot, {
                 open: t,
                 onOpenChange: e => {
-                    e || (nQ(b, nK.USER_INPUT, nH.ROBLOX_PLUS_BILLING_PERIOD_SHEET_DISMISSED, n$(x)), nW("BillingPeriodSheetDismissed", {
+                    e || (nY(b, n$.USER_INPUT, nq.ROBLOX_PLUS_BILLING_PERIOD_SHEET_DISMISSED, nX(x)), nQ("BillingPeriodSheetDismissed", {
                         viewName: b.analyticsContext.viewName,
                         months: String(x.months)
                     })), r(e)
                 },
-                children: (0, U.jsxs)(nS.SheetContent, {
+                children: (0, L.jsxs)(nE.SheetContent, {
                     centerSheetSize: "Medium",
                     closeLabel: m("Action.Close"),
                     largeScreenVariant: "center",
-                    children: [(0, U.jsx)(nS.SheetTitle, {
+                    children: [(0, L.jsx)(nE.SheetTitle, {
                         children: m("Heading.ChooseBillingPeriod")
-                    }), (0, U.jsxs)(nS.SheetBody, {
+                    }), (0, L.jsxs)(nE.SheetBody, {
                         className: "gap-y-xxlarge padding-bottom-medium flex flex-col",
                         "data-testid": "billing-period-sheet-body",
-                        children: [(0, U.jsx)("p", {
+                        children: [(0, L.jsx)("p", {
                             className: "text-body-medium content-default",
                             children: m("Description.ChooseBillingPeriod")
-                        }), (0, U.jsx)("div", {
+                        }), (0, L.jsx)("div", {
                             className: "gap-y-medium flex flex-col",
-                            children: n.map(e => (0, U.jsx)(nB, {
+                            children: n.map(e => (0, L.jsx)(nz, {
                                 isBestValue: e.productId === g,
                                 isSelected: e.productId === x.productId,
                                 option: e,
                                 onSelect: () => {
-                                    e.productId !== x.productId && (nQ(b, nK.USER_INPUT, nH.ROBLOX_PLUS_BILLING_PERIOD_SELECTED, n$(e)), nW("BillingPeriodOptionSelected", {
+                                    e.productId !== x.productId && (nY(b, n$.USER_INPUT, nq.ROBLOX_PLUS_BILLING_PERIOD_SELECTED, nX(e)), nQ("BillingPeriodOptionSelected", {
                                         viewName: b.analyticsContext.viewName,
                                         months: String(e.months)
                                     })), h(e.productId), c?.(e)
                                 }
                             }, e.productId))
                         })]
-                    }), (0, U.jsx)(nS.SheetActions, {
-                        children: (0, U.jsxs)("div", {
+                    }), (0, L.jsx)(nE.SheetActions, {
+                        children: (0, L.jsxs)("div", {
                             className: "gap-y-medium flex flex-col",
-                            children: [(0, U.jsx)(nY.default, {
+                            children: [(0, L.jsx)(nZ.default, {
                                 className: "width-full",
                                 deviceMeta: i,
                                 isDisabled: o,
@@ -5662,10 +5666,10 @@
                                 size: "Medium",
                                 trackSubscriptionButtonClick: () => {
                                     let e;
-                                    e = void 0 !== x.freeTrialEndDate, nQ(b, nK.USER_INPUT, e ? nH.ROBLOX_PLUS_FREE_TRIAL : nH.ROBLOX_PLUS_SUBSCRIBE, {
-                                        ...n$(x),
+                                    e = void 0 !== x.freeTrialEndDate, nY(b, n$.USER_INPUT, e ? nq.ROBLOX_PLUS_FREE_TRIAL : nq.ROBLOX_PLUS_SUBSCRIBE, {
+                                        ...nX(x),
                                         isFreeTrial: String(e)
-                                    }), nW("BillingPeriodSubscribeClick", {
+                                    }), nQ("BillingPeriodSubscribeClick", {
                                         viewName: b.analyticsContext.viewName,
                                         months: String(x.months),
                                         isFreeTrial: String(e)
@@ -5673,7 +5677,7 @@
                                 },
                                 onMobilePurchaseInitiated: d,
                                 children: m(void 0 === y ? "Action.Subscribe" : "Action.TryItForFree")
-                            }), (0, U.jsx)("p", {
+                            }), (0, L.jsx)("p", {
                                 className: "text-body-small content-default text-align-x-left",
                                 "data-testid": "billing-period-legal-footer",
                                 children: C
@@ -5683,21 +5687,21 @@
                 })
             })
         },
-        nZ = () => {
+        n2 = () => {
             let {
                 translate: e
-            } = (0, nv.useTranslation)(), t = e("Label.Learnmore");
-            return (0, U.jsxs)(nS.SheetContent, {
+            } = (0, nC.useTranslation)(), t = e("Label.Learnmore");
+            return (0, L.jsxs)(nE.SheetContent, {
                 centerSheetSize: "Large",
                 closeLabel: e("Action.Close"),
                 largeScreenVariant: "center",
                 mobilePortraitClassName: "![height:97vh] ![max-height:97vh]",
-                children: [(0, U.jsx)(nS.SheetTitle, {
+                children: [(0, L.jsx)(nE.SheetTitle, {
                     visuallyHideTitleText: !0,
                     children: t
-                }), (0, U.jsx)(nS.SheetBody, {
+                }), (0, L.jsx)(nE.SheetBody, {
                     hasPaddingX: !1,
-                    children: (0, U.jsx)("iframe", {
+                    children: (0, L.jsx)("iframe", {
                         className: "width-full medium:[height:88vh] [height:95vh]",
                         sandbox: "allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-modals",
                         src: "/plus",
@@ -5711,40 +5715,40 @@
                 })]
             })
         };
-    var n0 = e.i(801354),
-        n1 = e.i(51267);
-    let n2 = ["icon-regular-tag", "icon-regular-controller", "icon-regular-robux"],
-        n3 = ["icon-regular-tag", "icon-regular-tag-arrow-up", "icon-regular-controller", "icon-regular-robux", "icon-regular-hand-two-arrows-horizontal", "icon-regular-arrow-up-from-landscape-rectangle"];
+    var n3 = e.i(801354),
+        n5 = e.i(51267);
+    let n4 = ["icon-regular-tag", "icon-regular-controller", "icon-regular-robux"],
+        n8 = ["icon-regular-tag", "icon-regular-tag-arrow-up", "icon-regular-controller", "icon-regular-robux", "icon-regular-hand-two-arrows-horizontal", "icon-regular-arrow-up-from-landscape-rectangle"];
 
-    function n5(e) {
-        let t = n3.indexOf(e);
+    function n6(e) {
+        let t = n8.indexOf(e);
         return -1 === t ? Number.MAX_SAFE_INTEGER : t
     }
 
-    function n4(e) {
-        let t = n2.indexOf(e);
+    function n9(e) {
+        let t = n4.indexOf(e);
         return -1 === t ? Number.MAX_SAFE_INTEGER : t
     }
-    let n8 = {
+    let n7 = {
             PERIOD_TYPE_WEEK: "weeks",
             PERIOD_TYPE_MONTH: "months",
             PERIOD_TYPE_YEAR: "years"
         },
-        n6 = {
+        ae = {
             discountPercentage: {
                 rename: "discountPercent"
             },
             periodType: {
-                mapValue: e => n8[String(e)] ?? String(e)
+                mapValue: e => n7[String(e)] ?? String(e)
             }
         };
 
-    function n9(e) {
+    function at(e) {
         let t = {};
         for (let [r, n] of Object.entries(e))
             if ("iconName" !== r && "benefitTranslationKey" !== r && "object" == typeof n)
                 for (let [e, r] of Object.entries(n)) {
-                    let n = n6[e],
+                    let n = ae[e],
                         a = n?.rename ?? e,
                         i = n?.mapValue ? n.mapValue(r) : r;
                     t[a] = i
@@ -5752,60 +5756,60 @@
         return Object.keys(t).length > 0 ? t : void 0
     }
 
-    function n7(e) {
+    function ar(e) {
         let {
             benefits: t,
             translate: r
         } = e, n = t.filter(e => {
             var t;
-            return t = e.iconName, n2.includes(t)
-        }).sort((e, t) => n4(e.iconName) - n4(t.iconName));
-        return (0, U.jsx)(L.Fragment, {
-            children: n.map((e, t) => (0, U.jsx)(n1.BenefitItem, {
+            return t = e.iconName, n4.includes(t)
+        }).sort((e, t) => n9(e.iconName) - n9(t.iconName));
+        return (0, L.jsx)(O.Fragment, {
+            children: n.map((e, t) => (0, L.jsx)(n5.BenefitItem, {
                 iconName: e.iconName,
-                label: r(e.benefitTranslationKey, n9(e))
+                label: r(e.benefitTranslationKey, at(e))
             }, `compact-${e.benefitTranslationKey}-${String(t)}`))
         })
     }
 
-    function ae(e) {
+    function an(e) {
         let {
             benefits: t,
             translate: r
         } = e;
         if (0 === t.length) return null;
-        let n = t.toSorted((e, t) => n5(e.iconName) - n5(t.iconName)),
+        let n = t.toSorted((e, t) => n6(e.iconName) - n6(t.iconName)),
             a = Math.ceil(n.length / 2),
             i = n.slice(0, a),
             s = n.slice(a);
-        return (0, U.jsxs)("div", {
+        return (0, L.jsxs)("div", {
             className: "gap-x-large gap-y-large width-full grid [grid-template-columns:repeat(2,minmax(0,1fr))]",
-            children: [(0, U.jsx)("div", {
+            children: [(0, L.jsx)("div", {
                 className: "gap-y-large min-width-0 flex flex-col",
-                children: i.map((e, t) => (0, U.jsx)(n1.BenefitItem, {
+                children: i.map((e, t) => (0, L.jsx)(n5.BenefitItem, {
                     iconName: e.iconName,
-                    label: r(e.benefitTranslationKey, n9(e))
+                    label: r(e.benefitTranslationKey, at(e))
                 }, `lg-left-${e.benefitTranslationKey}-${String(t)}`))
-            }), (0, U.jsx)("div", {
+            }), (0, L.jsx)("div", {
                 className: "gap-y-large min-width-0 flex flex-col",
-                children: s.map((e, t) => (0, U.jsx)(n1.BenefitItem, {
+                children: s.map((e, t) => (0, L.jsx)(n5.BenefitItem, {
                     iconName: e.iconName,
-                    label: r(e.benefitTranslationKey, n9(e))
+                    label: r(e.benefitTranslationKey, at(e))
                 }, `lg-right-${e.benefitTranslationKey}-${String(t)}`))
             })]
         })
     }
-    var at = e.i(836260),
-        ar = e.i(882792);
-    let an = {
-            PRODUCT_TYPE_ROBLOX_PLUS: ny.ProductType.Blackbird
+    var aa = e.i(836260),
+        ai = e.i(882792);
+    let as = {
+            PRODUCT_TYPE_ROBLOX_PLUS: nP.ProductType.Blackbird
         },
-        aa = {
-            PERIOD_TYPE_MONTH: ny.PeriodType.Month,
-            PERIOD_TYPE_YEAR: ny.PeriodType.Year,
-            PERIOD_TYPE_WEEK: ny.PeriodType.Week
+        al = {
+            PERIOD_TYPE_MONTH: nP.PeriodType.Month,
+            PERIOD_TYPE_YEAR: nP.PeriodType.Year,
+            PERIOD_TYPE_WEEK: nP.PeriodType.Week
         },
-        ai = e => {
+        ao = e => {
             let {
                 subscriptionV2: t,
                 deviceMeta: r,
@@ -5818,11 +5822,11 @@
                 onSubscribeOverride: c
             } = e, {
                 translate: u
-            } = (0, nv.useTranslation)(), d = t.products[0], m = d ? an[d.subscriptionProductType] : void 0, p = d ? aa[d.periodType] : void 0, h = null != d && void 0 !== m;
-            (0, L.useEffect)(() => {
+            } = (0, nC.useTranslation)(), d = t.products[0], m = d ? as[d.subscriptionProductType] : void 0, p = d ? al[d.periodType] : void 0, h = null != d && void 0 !== m;
+            (0, O.useEffect)(() => {
                 h && a()
-            }, [h, a]), (0, L.useEffect)(() => {
-                d ? m || (0, ar.trackCounter)("Error_RobloxSubscriptionWidget_InvalidSubscriptionProductType") : (0, ar.trackCounter)("Error_RobloxSubscriptionWidget_NoPrimaryProduct")
+            }, [h, a]), (0, O.useEffect)(() => {
+                d ? m || (0, ai.trackCounter)("Error_RobloxSubscriptionWidget_InvalidSubscriptionProductType") : (0, ai.trackCounter)("Error_RobloxSubscriptionWidget_NoPrimaryProduct")
             }, [d, m]);
             let f = null != d ? {
                     currencyCode: d.price.currencyCode,
@@ -5838,64 +5842,64 @@
                     units: 0,
                     nanos: 0
                 },
-                g = (0, at.default)(f);
+                g = (0, aa.default)(f);
             if (!d || !m) return null;
             let x = (Array.isArray(d.offers) ? d.offers : []).some(e => null != e.freeTrial),
                 b = Array.isArray(d.benefits) ? d.benefits : [],
                 y = x ? u("Action.TryItForFree") : u("Action.PricePerMonth", {
                     price: g,
-                    periodType: p ?? ny.PeriodType.Month
+                    periodType: p ?? nP.PeriodType.Month
                 }),
                 v = u("Label.Learnmore"),
                 S = "width-full text-label-medium height-1000 [display:none] medium:[display:flex]";
-            return (0, U.jsxs)("div", {
+            return (0, L.jsxs)("div", {
                 className: "gap-y-xlarge flex flex-col",
-                children: [(0, U.jsxs)("div", {
+                children: [(0, L.jsxs)("div", {
                     className: "gap-x-small min-width-0 flex flex-row flex-wrap justify-between",
-                    children: [(0, U.jsxs)("div", {
+                    children: [(0, L.jsxs)("div", {
                         className: "gap-x-medium flex items-center",
-                        children: [(0, U.jsx)(nk.Icon, {
+                        children: [(0, L.jsx)(nA.Icon, {
                             name: "icon-regular-roblox-plus",
                             size: "Large"
-                        }), (0, U.jsx)("span", {
+                        }), (0, L.jsx)("span", {
                             className: "text-label-large content-emphasis text-no-wrap",
                             children: u("Title.GetBlackbird")
                         })]
-                    }), x && (0, U.jsxs)("div", {
+                    }), x && (0, L.jsxs)("div", {
                         className: "gap-x-small text-label-large flex shrink-0 flex-row items-center",
-                        children: [(0, U.jsxs)("div", {
+                        children: [(0, L.jsxs)("div", {
                             className: "relative flex flex-row [color:var(--color-extended-gray-600)]",
-                            children: [(0, U.jsx)("span", {
+                            children: [(0, L.jsx)("span", {
                                 className: "robux-amount-strike-through"
-                            }), (0, U.jsx)("span", {
+                            }), (0, L.jsx)("span", {
                                 children: g
                             })]
-                        }), (0, U.jsx)("span", {
+                        }), (0, L.jsx)("span", {
                             children: u("Label.Free") || "Free"
                         })]
                     })]
-                }), (0, U.jsx)("div", {
+                }), (0, L.jsx)("div", {
                     className: "gap-x-large gap-y-small medium:hidden flex flex-col",
                     "data-testid": "subscription-compact-benefits",
-                    children: (0, U.jsx)(n7, {
+                    children: (0, L.jsx)(ar, {
                         benefits: b,
                         translate: u
                     })
-                }), (0, U.jsx)("div", {
+                }), (0, L.jsx)("div", {
                     className: "medium:block hidden",
-                    children: (0, U.jsx)(ae, {
+                    children: (0, L.jsx)(an, {
                         benefits: b,
                         translate: u
                     })
-                }), (0, U.jsxs)("div", {
+                }), (0, L.jsxs)("div", {
                     className: "gap-x-small medium:gap-x-xlarge width-full flex flex-row",
-                    children: [c ? (0, U.jsx)(n0.Button, {
+                    children: [c ? (0, L.jsx)(n3.Button, {
                         className: "width-full text-label-medium",
                         size: "Medium",
                         variant: n ? "Emphasis" : "Standard",
                         onClick: c,
                         children: y
-                    }) : (0, U.jsx)(nY.default, {
+                    }) : (0, L.jsx)(nZ.default, {
                         className: "width-full text-label-medium",
                         deviceMeta: r,
                         loadingStateDisabled: !0,
@@ -5906,7 +5910,7 @@
                         trackSubscriptionButtonClick: i,
                         variant: n ? "Emphasis" : "Standard",
                         children: y
-                    }), null != l ? (0, U.jsx)(n0.Button, {
+                    }), null != l ? (0, L.jsx)(n3.Button, {
                         as: "a",
                         className: S,
                         href: l,
@@ -5914,7 +5918,7 @@
                         variant: "Standard",
                         onClick: s,
                         children: v
-                    }) : (0, U.jsx)(n0.Button, {
+                    }) : (0, L.jsx)(n3.Button, {
                         className: S,
                         size: "Medium",
                         variant: "Standard",
@@ -5924,74 +5928,74 @@
                 })]
             })
         };
-    var as = e.i(418945);
-    let al = "Payments.BuyRobux.PlusBillingPeriodSelection",
-        ao = new class {
+    var ac = e.i(418945);
+    let au = "Payments.BuyRobux.PlusBillingPeriodSelection",
+        ad = new class {
             isTreatment() {
                 return this.assignment ??= this.fetchIsTreatment().finally(() => {
                     this.isResolved = !0
                 }), this.assignment
             }
             async fetchIsTreatment() {
-                if (!(0, ea.getCurrentUser)()?.id) return !1;
+                if (!(0, el.getCurrentUser)()?.id) return !1;
                 try {
-                    let e = (await rz.default.getAllValuesForLayer(al)).plusBillingPeriodSelectionVariant;
-                    if (0 !== e && 1 !== e) return ey("PlusBillingPeriodSelectionExperimentEvaluated", {
+                    let e = (await rK.default.getAllValuesForLayer(au)).plusBillingPeriodSelectionVariant;
+                    if (0 !== e && 1 !== e) return eP("PlusBillingPeriodSelectionExperimentEvaluated", {
                         variant: "unknown"
                     }), !1;
-                    return this.isEnrolled = !0, ey("PlusBillingPeriodSelectionExperimentEvaluated", {
+                    return this.isEnrolled = !0, eP("PlusBillingPeriodSelectionExperimentEvaluated", {
                         variant: e.toString()
                     }), 1 === e
                 } catch (e) {
-                    return ev("PlusBillingPeriodSelectionExperimentFetchFailed", null, e), !1
+                    return eC("PlusBillingPeriodSelectionExperimentFetchFailed", null, e), !1
                 }
             }
             logLayerExposure() {
-                if (!this.isResolved) return void ey("PlusBillingPeriodSelectionExposureBeforeAssignment");
+                if (!this.isResolved) return void eP("PlusBillingPeriodSelectionExposureBeforeAssignment");
                 if (this.isEnrolled && !this.hasLoggedExposure) {
                     this.hasLoggedExposure = !0;
                     try {
-                        rz.default.logLayerExposure(al), ey("PlusBillingPeriodSelectionExperimentExposed")
+                        rK.default.logLayerExposure(au), eP("PlusBillingPeriodSelectionExperimentExposed")
                     } catch (e) {
                         throw this.hasLoggedExposure = !1, e
                     }
                 }
             }
             constructor() {
-                (0, rG._)(this, "isEnrolled", !1), (0, rG._)(this, "isResolved", !1), (0, rG._)(this, "hasLoggedExposure", !1), (0, rG._)(this, "assignment", void 0)
+                (0, rW._)(this, "isEnrolled", !1), (0, rW._)(this, "isResolved", !1), (0, rW._)(this, "hasLoggedExposure", !1), (0, rW._)(this, "assignment", void 0)
             }
         };
-    var ac = e.i(31081);
+    var am = e.i(31081);
 
-    function au() {}
-    let ad = (0, L.createContext)({
+    function ap() {}
+    let ah = (0, O.createContext)({
             itemCount: 0,
             currentPage: -1,
             canNext: !1,
             canPrev: !1,
             allVisible: !0,
-            goTo: au,
-            next: au,
-            prev: au,
-            registerItem: () => au
+            goTo: ap,
+            next: ap,
+            prev: ap,
+            registerItem: () => ap
         }),
-        am = (0, L.createContext)(null),
-        ap = 0,
-        ah = {
+        af = (0, O.createContext)(null),
+        ag = 0,
+        ax = {
             position: "absolute",
             top: "50%",
             left: 0,
             transform: "translateY(-50%)",
             zIndex: 10
         },
-        af = {
+        ab = {
             position: "absolute",
             top: "50%",
             right: 0,
             transform: "translateY(-50%)",
             zIndex: 10
         },
-        ag = {
+        ay = {
             borderRadius: "9999px",
             border: "none",
             padding: 0,
@@ -5999,15 +6003,15 @@
             transition: "opacity var(--time-100) var(--ease-linear)"
         };
 
-    function ax(e, t) {
+    function av(e, t) {
         return `Page ${String(e+1)} of ${String(t)}`
     }
-    let ab = Object.assign(function(e) {
+    let aS = Object.assign(function(e) {
         let {
             children: t,
             className: r,
             ariaLabel: n
-        } = e, a = (0, L.useRef)(null), i = (0, L.useRef)(new Map), s = (0, L.useRef)(null), [, l] = (0, L.useState)(0), o = (0, L.useCallback)(() => {
+        } = e, a = (0, O.useRef)(null), i = (0, O.useRef)(new Map), s = (0, O.useRef)(null), [, l] = (0, O.useState)(0), o = (0, O.useCallback)(() => {
             l(e => e + 1)
         }, []), c = [], u = 0;
         i.current.forEach(e => {
@@ -6020,28 +6024,28 @@
             f = p > 0,
             g = h >= 0 && h < d - 1,
             x = d > 0 && m === d,
-            b = (0, L.useCallback)(e => {
+            b = (0, O.useCallback)(e => {
                 let t = [...i.current.values()][e];
                 null != t && null != a.current && a.current.scrollTo({
                     left: t.element.offsetLeft - a.current.offsetLeft,
                     behavior: "smooth"
                 })
             }, []),
-            y = (0, L.useCallback)(() => {
+            y = (0, O.useCallback)(() => {
                 b(h >= 0 ? Math.min(d - 1, h + 1) : 0)
             }, [b, d, h]),
-            v = (0, L.useCallback)(() => {
+            v = (0, O.useCallback)(() => {
                 p <= 0 ? b(0) : b(Math.max(0, p - Math.max(1, m)))
             }, [p, b, m]),
-            S = (0, L.useCallback)((e, t) => (i.current.set(e, {
+            S = (0, O.useCallback)((e, t) => (i.current.set(e, {
                 element: t,
                 isVisible: !1
             }), s.current?.observe(t), o(), () => {
                 s.current?.unobserve(t), i.current.delete(e), o()
             }), [o]);
-        (0, L.useEffect)(() => {
+        (0, O.useEffect)(() => {
             let e = a.current,
-                t = J.window?.IntersectionObserver;
+                t = et.window?.IntersectionObserver;
             if (null == e || void 0 === t) return;
             let r = new t(e => {
                 let t = [];
@@ -6069,7 +6073,7 @@
                 r.disconnect(), s.current = null
             }
         }, [o]);
-        let P = (0, L.useMemo)(() => ({
+        let P = (0, O.useMemo)(() => ({
             itemCount: d,
             currentPage: p,
             canPrev: f,
@@ -6080,13 +6084,13 @@
             prev: v,
             registerItem: S
         }), [x, g, f, p, b, d, y, v, S]);
-        return (0, U.jsx)(ad.Provider, {
+        return (0, L.jsx)(ah.Provider, {
             value: P,
-            children: (0, U.jsx)(am.Provider, {
+            children: (0, L.jsx)(af.Provider, {
                 value: a,
-                children: (0, U.jsx)("div", {
+                children: (0, L.jsx)("div", {
                     "aria-label": n,
-                    className: (0, r8.default)("relative min-width-0 clip-x", r),
+                    className: (0, r7.default)("relative min-width-0 clip-x", r),
                     "data-testid": "carousel-root",
                     role: null != n ? "region" : void 0,
                     children: t
@@ -6100,12 +6104,12 @@
                 children: r,
                 gap: n = "medium",
                 ...a
-            } = e, i = (0, L.useContext)(am), s = (0, L.useCallback)(e => {
+            } = e, i = (0, O.useContext)(af), s = (0, O.useCallback)(e => {
                 null != i && (i.current = e)
             }, [i]);
-            return (0, U.jsx)("div", {
+            return (0, L.jsx)("div", {
                 ref: s,
-                className: (0, r8.default)("flex flex-row min-width-0 width-full scroll-x", "large" === n ? "gap-large" : "gap-medium", t),
+                className: (0, r7.default)("flex flex-row min-width-0 width-full scroll-x", "large" === n ? "gap-large" : "gap-medium", t),
                 "data-testid": "carousel-track",
                 style: {
                     scrollSnapType: "x mandatory",
@@ -6123,13 +6127,13 @@
                 ...n
             } = e, {
                 registerItem: a
-            } = (0, L.useContext)(ad), i = (0, L.useRef)(null), s = (0, L.useRef)("");
-            return "" === s.current && (ap += 1, s.current = `carousel-item-${String(ap)}`), (0, L.useEffect)(() => {
+            } = (0, O.useContext)(ah), i = (0, O.useRef)(null), s = (0, O.useRef)("");
+            return "" === s.current && (ag += 1, s.current = `carousel-item-${String(ag)}`), (0, O.useEffect)(() => {
                 let e = i.current;
                 if (null != e) return a(s.current, e)
-            }, [a]), (0, U.jsx)("div", {
+            }, [a]), (0, L.jsx)("div", {
                 ref: i,
-                className: (0, r8.default)("carousel-item shrink-0", t),
+                className: (0, r7.default)("carousel-item shrink-0", t),
                 style: {
                     scrollSnapAlign: "start"
                 },
@@ -6144,16 +6148,16 @@
             } = e, {
                 canPrev: n,
                 prev: a
-            } = (0, L.useContext)(ad);
-            return n ? (0, U.jsx)(tN.IconButton, {
+            } = (0, O.useContext)(ah);
+            return n ? (0, L.jsx)(tj.IconButton, {
                 ariaLabel: t,
-                className: (0, r8.default)(r),
+                className: (0, r7.default)(r),
                 "data-testid": "carousel-prev-button",
                 icon: "icon-filled-chevron-large-left",
                 isCircular: !0,
                 onClick: a,
                 size: "Medium",
-                style: ah,
+                style: ax,
                 variant: "OverMedia"
             }) : null
         },
@@ -6164,38 +6168,38 @@
             } = e, {
                 canNext: n,
                 next: a
-            } = (0, L.useContext)(ad);
-            return n ? (0, U.jsx)(tN.IconButton, {
+            } = (0, O.useContext)(ah);
+            return n ? (0, L.jsx)(tj.IconButton, {
                 ariaLabel: t,
-                className: (0, r8.default)(r),
+                className: (0, r7.default)(r),
                 "data-testid": "carousel-next-button",
                 icon: "icon-filled-chevron-large-right",
                 isCircular: !0,
                 onClick: a,
                 size: "Medium",
-                style: af,
+                style: ab,
                 variant: "OverMedia"
             }) : null
         },
         Indicator: function(e) {
             let {
                 className: t,
-                formatDotLabel: r = ax
+                formatDotLabel: r = av
             } = e, {
                 itemCount: n,
                 currentPage: a,
                 allVisible: i,
                 goTo: s
-            } = (0, L.useContext)(ad);
-            return n <= 1 || i ? null : (0, U.jsx)("div", {
-                className: (0, r8.default)("flex flex-row items-center justify-center gap-small", t),
+            } = (0, O.useContext)(ah);
+            return n <= 1 || i ? null : (0, L.jsx)("div", {
+                className: (0, r7.default)("flex flex-row items-center justify-center gap-small", t),
                 "data-testid": "carousel-indicator",
                 role: "tablist",
                 children: Array.from({
                     length: n
                 }, (e, t) => {
                     let i = t === a;
-                    return (0, U.jsx)("button", {
+                    return (0, L.jsx)("button", {
                         "aria-label": r(t, n),
                         "aria-selected": i,
                         className: "content-emphasis size-[8px] bg-action-standard",
@@ -6205,7 +6209,7 @@
                         },
                         role: "tab",
                         style: {
-                            ...ag,
+                            ...ay,
                             opacity: i ? 1 : .22
                         },
                         type: "button"
@@ -6214,8 +6218,8 @@
             })
         }
     });
-    var ay = e.i(745911);
-    let av = [{
+    var aP = e.i(745911);
+    let aC = [{
             iconName: "icon-regular-tag",
             translationKey: "Description.Benefit.DiscountBuyRobux",
             getParams: e => {
@@ -6236,7 +6240,7 @@
             iconName: "icon-regular-paint-brush",
             translationKey: "Description.Benefit.ProfileFrameAppTheme"
         }],
-        aS = [{
+        aE = [{
             iconName: "icon-regular-roblox-plus",
             translationKey: "Description.Benefit.AllPlus.V2"
         }, {
@@ -6268,50 +6272,50 @@
                 }
             }
         }],
-        aP = e => {
+        aw = e => {
             let {
                 iconName: t,
                 benefit: r
             } = e;
-            return (0, U.jsxs)("li", {
+            return (0, L.jsxs)("li", {
                 className: "flex flex-row items-center gap-medium medium:gap-large",
-                children: [(0, U.jsx)(B.Icon, {
+                children: [(0, L.jsx)(z.Icon, {
                     className: "size-[20px]",
                     name: t,
                     size: "Medium"
-                }), (0, U.jsx)("span", {
+                }), (0, L.jsx)("span", {
                     className: "text-body-medium content-default",
                     children: r
                 })]
             })
         };
 
-    function aC(e) {
+    function aN(e) {
         if (null == e) return 0;
         if ("number" == typeof e) return Number.isFinite(e) ? e : 0;
         let t = Number(e);
         return Number.isFinite(t) ? t : 0
     }
-    let aE = e => {
+    let ak = e => {
             let {
                 product: t,
                 robuxAllowance: r
-            } = e, n = (0, er.useTranslations)("Feature.RobloxSubscription"), a = (0, ay.useFormatter)(), i = (t.benefits ?? []).reduce((e, t) => Math.max(e, t.plusDiscountSubscriptionBenefits?.discountPercentage ?? 0), 0), s = a.number(i / 100, {
+            } = e, n = (0, ei.useTranslations)("Feature.RobloxSubscription"), a = (0, aP.useFormatter)(), i = (t.benefits ?? []).reduce((e, t) => Math.max(e, t.plusDiscountSubscriptionBenefits?.discountPercentage ?? 0), 0), s = a.number(i / 100, {
                 style: "percent",
                 maximumFractionDigits: 0
-            }), l = a.number(aC(t.price.units) + (t.price.nanos ?? 0) * 1e-9, {
+            }), l = a.number(aN(t.price.units) + (t.price.nanos ?? 0) * 1e-9, {
                 style: "currency",
                 currency: t.price.currencyCode
-            }), o = t.strikethroughPrice ? a.number(aC(t.strikethroughPrice.units) + (t.strikethroughPrice.nanos ?? 0) * 1e-9, {
+            }), o = t.strikethroughPrice ? a.number(aN(t.strikethroughPrice.units) + (t.strikethroughPrice.nanos ?? 0) * 1e-9, {
                 style: "currency",
                 currency: t.strikethroughPrice.currencyCode
-            }) : null, c = a.number(r), u = r > 0 ? aS : av, d = {
+            }) : null, c = a.number(r), u = r > 0 ? aE : aC, d = {
                 discountPercent: s,
                 robuxAmount: c,
                 oldAmount: o,
                 newAmount: l
             };
-            return (0, U.jsx)("ul", {
+            return (0, L.jsx)("ul", {
                 className: "flex flex-col gap-medium padding-y-small",
                 style: {
                     listStyle: "none",
@@ -6324,24 +6328,24 @@
                         translationKey: a,
                         getParams: i
                     } = e;
-                    return (0, U.jsx)(aP, {
+                    return (0, L.jsx)(aw, {
                         benefit: n(a, i?.(d)),
                         iconName: r
                     }, `${r}-${String(t)}`)
                 })
             })
         },
-        aw = {
+        aT = {
             PRODUCT_TYPE_ROBLOX_PLUS: "Blackbird"
         };
 
-    function aN(e) {
+    function aj(e) {
         if (null == e) return 0;
         let t = Number.parseInt(e, 10);
         return Number.isFinite(t) && t > 0 ? t : 0
     }
 
-    function ak(e) {
+    function aA(e) {
         return function(e) {
             if (null == e) return 0;
             if ("number" == typeof e) return Number.isFinite(e) ? e : 0;
@@ -6350,7 +6354,7 @@
         }(e.units) + (e.nanos ?? 0) * 1e-9
     }
 
-    function aT(e) {
+    function aM(e) {
         switch (e) {
             case "PERIOD_TYPE_WEEK":
                 return "Week";
@@ -6360,14 +6364,14 @@
                 return "Year"
         }
     }
-    let aj = e => {
+    let aR = e => {
             let {
                 href: t,
                 onClick: r,
                 isEmphasized: n,
                 children: a
             } = e;
-            return (0, U.jsx)(O.Button, {
+            return (0, L.jsx)(V.Button, {
                 as: "a",
                 className: "width-full",
                 href: t,
@@ -6381,7 +6385,7 @@
                 children: a
             })
         },
-        aA = e => {
+        aI = e => {
             let {
                 product: t,
                 deviceMeta: r,
@@ -6391,61 +6395,61 @@
                 onSubscribeOverride: s,
                 paymentSessionId: l,
                 redirect: o
-            } = e, c = (0, er.useTranslations)("Feature.RobloxSubscription"), u = (0, ay.useFormatter)(), d = (0, L.useMemo)(() => {
-                if (void 0 === J.window || !o?.url) return "";
-                let e = new URL(o.url, J.window.location.origin);
+            } = e, c = (0, ei.useTranslations)("Feature.RobloxSubscription"), u = (0, aP.useFormatter)(), d = (0, O.useMemo)(() => {
+                if (void 0 === et.window || !o?.url) return "";
+                let e = new URL(o.url, et.window.location.origin);
                 return e.searchParams.set("ctx", "subscription"), e.searchParams.set("type", "RobloxPlus"), e.searchParams.set("id", t.subscriptionProductId), `${e.pathname}${e.search}`
-            }, [o?.url, t.subscriptionProductId]), m = aw[t.subscriptionProductType];
+            }, [o?.url, t.subscriptionProductId]), m = aT[t.subscriptionProductType];
             if (null == m) return null;
-            let p = aN(t.robuxAmount),
+            let p = aj(t.robuxAmount),
                 h = p > 0 ? `Plus ${String(p)}` : "Roblox Plus",
                 f = (Array.isArray(t.offers) ? t.offers : []).some(e => e.freeTrial),
                 g = !!t.isRedirect,
-                x = u.number(ak(t.price), {
+                x = u.number(aA(t.price), {
                     style: "currency",
                     currency: t.price.currencyCode
                 }),
-                b = t.strikethroughPrice ? u.number(ak(t.strikethroughPrice), {
+                b = t.strikethroughPrice ? u.number(aA(t.strikethroughPrice), {
                     style: "currency",
                     currency: t.strikethroughPrice.currencyCode
                 }) : null,
                 y = f ? c("Action.TryItForFree") : c("Action.PricePerMonth", {
                     price: x,
-                    periodType: aT(t.periodType)
+                    periodType: aM(t.periodType)
                 });
-            return (0, U.jsxs)("div", {
-                className: (0, r8.default)("radius-large padding-medium flex flex-col items-stretch justify-between gap-small height-full", {
+            return (0, L.jsxs)("div", {
+                className: (0, r7.default)("radius-large padding-medium flex flex-col items-stretch justify-between gap-small height-full", {
                     "bg-surface-100": a,
                     "stroke-standard": !a,
                     "stroke-default": !a
                 }),
                 "data-testid": `subscription-tile-${t.subscriptionProductId}`,
                 ...{
-                    [eK]: t.subscriptionProductId,
-                    [eH]: t.subscriptionProductType
+                    [e$]: t.subscriptionProductId,
+                    [eq]: t.subscriptionProductType
                 },
-                children: [(0, U.jsxs)("div", {
+                children: [(0, L.jsxs)("div", {
                     className: "flex flex-row items-center justify-between gap-large",
-                    children: [(0, U.jsx)("h3", {
+                    children: [(0, L.jsx)("h3", {
                         className: "text-label-large content-emphasis text-truncate-end",
                         children: h
-                    }), (0, U.jsxs)("div", {
+                    }), (0, L.jsxs)("div", {
                         className: "flex flex-row items-center justify-end gap-small",
-                        children: [b && (0, U.jsx)("span", {
+                        children: [b && (0, L.jsx)("span", {
                             className: "text-title-medium text-no-wrap content-muted line-through",
                             children: b
-                        }), (0, U.jsx)("span", {
+                        }), (0, L.jsx)("span", {
                             className: "text-title-medium content-emphasis text-no-wrap",
                             children: x
                         })]
                     })]
-                }), (0, U.jsx)(aE, {
+                }), (0, L.jsx)(ak, {
                     product: t,
                     robuxAllowance: p
-                }), g ? (0, U.jsx)(aj, {
+                }), g ? (0, L.jsx)(aR, {
                     href: d,
                     onClick: e => {
-                        rQ(e), i?.({
+                        rY(e), i?.({
                             isFreeTrial: !1,
                             productId: t.subscriptionProductId,
                             isRedirect: !0
@@ -6453,13 +6457,13 @@
                     },
                     isEmphasized: n,
                     children: y
-                }) : s ? (0, U.jsx)(O.Button, {
+                }) : s ? (0, L.jsx)(V.Button, {
                     className: "width-full",
                     onClick: s,
                     size: "Medium",
                     variant: n ? "Emphasis" : "Standard",
                     children: y
-                }) : (0, U.jsx)(nY.default, {
+                }) : (0, L.jsx)(nZ.default, {
                     className: "width-full",
                     deviceMeta: r,
                     paymentSessionId: l,
@@ -6479,7 +6483,7 @@
             })
         };
 
-    function aM(e) {
+    function aU(e) {
         let {
             subscriptionV2: t,
             deviceMeta: r,
@@ -6492,23 +6496,23 @@
             redirect: c
         } = e, {
             products: u
-        } = t, d = "dark" === (0, ac.useResolvedColorMode)() ? "color-mode-light light-theme" : "color-mode-dark dark-theme";
-        return ((0, L.useEffect)(() => {
+        } = t, d = "dark" === (0, am.useResolvedColorMode)() ? "color-mode-light light-theme" : "color-mode-dark dark-theme";
+        return ((0, O.useEffect)(() => {
             u.length > 0 && a()
-        }, []), 0 === u.length) ? null : (0, U.jsxs)(ab, {
+        }, []), 0 === u.length) ? null : (0, L.jsxs)(aS, {
             ariaLabel: "Roblox Plus subscription tiers",
             className: "self-stretch bleed-section-padding",
-            children: [(0, U.jsx)("div", {
+            children: [(0, L.jsx)("div", {
                 className: d,
-                children: (0, U.jsx)(ab.PrevButton, {
+                children: (0, L.jsx)(aS.PrevButton, {
                     ariaLabel: "Previous tier",
                     className: "hidden medium:flex"
                 })
-            }), (0, U.jsx)(ab.Track, {
+            }), (0, L.jsx)(aS.Track, {
                 className: "bleed-section-padding-track bundle-carousel-track-cap",
-                children: u.map((e, t) => (0, U.jsx)(ab.Item, {
+                children: u.map((e, t) => (0, L.jsx)(aS.Item, {
                     className: "flex flex-col width-[313px] medium:width-[242px]",
-                    children: (0, U.jsx)(aA, {
+                    children: (0, L.jsx)(aI, {
                         deviceMeta: r,
                         isEmphasized: n && 0 === t,
                         isPrimary: n,
@@ -6519,110 +6523,110 @@
                         redirect: c
                     })
                 }, e.subscriptionProductId))
-            }), (0, U.jsx)("div", {
+            }), (0, L.jsx)("div", {
                 className: d,
-                children: (0, U.jsx)(ab.NextButton, {
+                children: (0, L.jsx)(aS.NextButton, {
                     ariaLabel: "Next tier",
                     className: "hidden medium:flex"
                 })
-            }), (0, U.jsx)(ab.Indicator, {
+            }), (0, L.jsx)(aS.Indicator, {
                 className: "padding-top-medium medium:hidden"
             })]
         })
     }
-    let aR = e => (function(e, t) {
+    let a_ = e => (function(e, t) {
             let r = null != t && t > 0 ? t : 1;
             switch (e) {
-                case ny.PeriodType.Month:
+                case nP.PeriodType.Month:
                     return r;
-                case ny.PeriodType.Year:
+                case nP.PeriodType.Year:
                     return 12 * r;
-                case ny.PeriodType.Week:
+                case nP.PeriodType.Week:
                     return
             }
-        })(aT(e.periodType), e.periodCount),
-        aI = e => void 0 !== aw[e.subscriptionProductType] && 0 === aN(e.robuxAmount) && void 0 !== aR(e),
-        aU = e => {
+        })(aM(e.periodType), e.periodCount),
+        aF = e => void 0 !== aT[e.subscriptionProductType] && 0 === aj(e.robuxAmount) && void 0 !== a_(e),
+        aL = e => {
             let t = (e => {
                 var t;
                 let r = e.offers?.find(e => e.freeTrial)?.freeTrial;
                 if (r && ("PERIOD_TYPE_WEEK" === (t = r.periodType) || "PERIOD_TYPE_MONTH" === t || "PERIOD_TYPE_YEAR" === t)) return {
                     duration: r.duration,
-                    periodType: aT(r.periodType)
+                    periodType: aM(r.periodType)
                 }
             })(e);
             return {
                 productId: e.subscriptionProductId,
-                productType: aw[e.subscriptionProductType] ?? "",
-                months: aR(e) ?? 1,
+                productType: aT[e.subscriptionProductType] ?? "",
+                months: a_(e) ?? 1,
                 price: {
-                    amount: ak(e.price),
+                    amount: aA(e.price),
                     currencyCode: e.price.currencyCode
                 },
                 strikethroughPrice: e.strikethroughPrice && {
-                    amount: ak(e.strikethroughPrice),
+                    amount: aA(e.strikethroughPrice),
                     currencyCode: e.strikethroughPrice.currencyCode
                 },
-                freeTrialEndDate: t ? (0, nP.addBillingPeriod)(Date.now(), t.duration, t.periodType) : void 0,
+                freeTrialEndDate: t ? (0, nw.addBillingPeriod)(Date.now(), t.duration, t.periodType) : void 0,
                 freeTrialDuration: t?.duration,
                 freeTrialPeriodType: t?.periodType
             }
         },
-        a_ = "/plus",
-        aF = "text-label-medium text-default [text-decoration:underline] [text-underline-position:from-font]";
+        aD = "/plus",
+        aB = "text-label-medium text-default [text-decoration:underline] [text-underline-position:from-font]";
 
-    function aL(e) {
+    function aO(e) {
         let t, {
                 isPrimary: r,
                 sectionBase: n,
                 subscriptionV2: a
             } = e,
-            i = (0, er.useTranslations)("Feature.RobloxSubscription"),
+            i = (0, ei.useTranslations)("Feature.RobloxSubscription"),
             {
                 translateFullKey: s
-            } = (0, er.useFullKeyTranslations)(),
+            } = (0, ei.useFullKeyTranslations)(),
             {
                 paymentSession: l,
                 redirect: o,
                 deviceMeta: c
-            } = (0, L.useContext)(ec),
+            } = (0, O.useContext)(em),
             {
                 trackSubscriptionV2Shown: u,
                 trackSubscriptionV2SubscribeClick: d,
                 trackSubscriptionV2LearnMoreClick: m
             } = {
-                trackSubscriptionV2Shown: (t = (0, L.useContext)(eR)).trackSubscriptionV2Shown,
+                trackSubscriptionV2Shown: (t = (0, O.useContext)(e_)).trackSubscriptionV2Shown,
                 trackSubscriptionV2SubscribeClick: t.trackSubscriptionV2SubscribeClick,
                 trackSubscriptionV2LearnMoreClick: t.trackSubscriptionV2LearnMoreClick
             },
-            [p, h] = (0, L.useState)(!1),
+            [p, h] = (0, O.useState)(!1),
             {
                 isInApp: f
             } = c,
-            g = (0, L.useCallback)(() => {
+            g = (0, O.useCallback)(() => {
                 m(), f && h(!0)
             }, [f, m]),
-            x = (0, L.useCallback)(e => {
+            x = (0, O.useCallback)(e => {
                 e || h(!1)
             }, []),
-            b = (0, L.useCallback)(e => {
+            b = (0, O.useCallback)(e => {
                 ("Enter" === e.key || " " === e.key) && (e.preventDefault(), g())
             }, [g]),
             {
                 tileProducts: y,
                 billingPeriodOptions: v
-            } = (0, L.useMemo)(() => {
+            } = (0, O.useMemo)(() => {
                 var e;
                 let t, r, n;
-                return r = (t = (e = a.products).filter(aI)).some(e => 1 === aR(e)), n = t.some(e => (aR(e) ?? 0) > 1), r && n ? {
-                    tileProducts: e.filter(e => !aI(e) || 1 === aR(e)),
-                    billingPeriodOptions: t.map(aU)
+                return r = (t = (e = a.products).filter(aF)).some(e => 1 === a_(e)), n = t.some(e => (a_(e) ?? 0) > 1), r && n ? {
+                    tileProducts: e.filter(e => !aF(e) || 1 === a_(e)),
+                    billingPeriodOptions: t.map(aL)
                 } : {
                     tileProducts: e,
                     billingPeriodOptions: []
                 }
             }, [a.products]),
-            S = (0, L.useMemo)(() => ({
+            S = (0, O.useMemo)(() => ({
                 ...a,
                 products: y
             }), [a, y]),
@@ -6632,17 +6636,17 @@
                 isTreatment: E,
                 logExposure: w
             } = function(e) {
-                let [t, r] = (0, L.useState)(!1);
-                (0, L.useEffect)(() => {
+                let [t, r] = (0, O.useState)(!1);
+                (0, O.useEffect)(() => {
                     e && (async () => {
-                        r(await ao.isTreatment())
+                        r(await ad.isTreatment())
                     })()
                 }, [e]);
-                let n = (0, L.useCallback)(() => {
+                let n = (0, O.useCallback)(() => {
                     if (e) try {
-                        ao.logLayerExposure()
+                        ad.logLayerExposure()
                     } catch (e) {
-                        ev("PlusBillingPeriodSelectionLayerExposureError", null, e)
+                        eC("PlusBillingPeriodSelectionLayerExposureError", null, e)
                     }
                 }, [e]);
                 return {
@@ -6650,113 +6654,113 @@
                     logExposure: n
                 }
             }(y.some(e => e.subscriptionProductId === C && !e.isRedirect)),
-            [N, k] = (0, L.useState)(!1),
-            T = (0, L.useMemo)(() => ({
-                triggeringContext: eG(c),
-                viewName: D.paymentFlowAnalyticsService.ENUM_VIEW_NAME.ROBLOX_PLUS_BUY_ROBUX
+            [N, k] = (0, O.useState)(!1),
+            T = (0, O.useMemo)(() => ({
+                triggeringContext: eW(c),
+                viewName: G.paymentFlowAnalyticsService.ENUM_VIEW_NAME.ROBLOX_PLUS_BUY_ROBUX
             }), [c]),
-            j = (0, L.useCallback)(() => {
+            j = (0, O.useCallback)(() => {
                 w(), k(!0)
             }, [w]),
-            A = (0, L.useCallback)(() => {
+            A = (0, O.useCallback)(() => {
                 k(!1)
             }, []),
-            M = (0, L.useCallback)(e => {
-                e.productId === C && w(), d(e), e.isRedirect || rX(c, !0, e.productId)
+            M = (0, O.useCallback)(e => {
+                e.productId === C && w(), d(e), e.isRedirect || r0(c, !0, e.productId)
             }, [C, c, w, d]),
-            R = (0, L.useCallback)(e => {
-                ey("SubscriptionV2SubscribeClick", {
+            R = (0, O.useCallback)(e => {
+                eP("SubscriptionV2SubscribeClick", {
                     isFreeTrial: String(void 0 !== e.freeTrialEndDate),
                     productId: e.productId,
                     isRedirect: "false"
-                }), rX(c, !0, e.productId)
+                }), r0(c, !0, e.productId)
             }, [c]),
-            I = (0, L.useMemo)(() => y.some(e => e.offers?.some(e => !!e.freeTrial) ?? !1), [y]),
-            _ = null != P;
-        (0, L.useEffect)(() => {
-            _ && ey("SubscriptionV2SectionShown", {
+            I = (0, O.useMemo)(() => y.some(e => e.offers?.some(e => !!e.freeTrial) ?? !1), [y]),
+            U = null != P;
+        (0, O.useEffect)(() => {
+            U && eP("SubscriptionV2SectionShown", {
                 variant: y.length > 1 ? "carousel" : "single",
                 tierCount: String(y.length),
                 isFreeTrial: String(I)
             })
         }, []);
-        let F = (0, L.useCallback)(() => {
+        let _ = (0, O.useCallback)(() => {
                 u(I)
             }, [u, I]),
-            O = (0, L.useCallback)(() => {
+            F = (0, O.useCallback)(() => {
                 M({
                     isFreeTrial: I,
                     productId: P?.subscriptionProductId ?? "Unknown",
                     isRedirect: !1
                 })
             }, [M, I, P]);
-        if (!P) return ey("SubscriptionV2NoPrimaryProduct"), null;
-        let G = i("Label.Learnmore"),
-            z = y.length > 1;
-        return (0, U.jsxs)(r6, {
+        if (!P) return eP("SubscriptionV2NoPrimaryProduct"), null;
+        let D = i("Label.Learnmore"),
+            B = y.length > 1;
+        return (0, L.jsxs)(ne, {
             "data-testid": "section-subscription-v2",
-            ...e$(n),
-            children: [(0, U.jsx)(r9, {
-                children: (0, U.jsxs)("div", {
+            ...eX(n),
+            children: [(0, L.jsx)(nt, {
+                children: (0, L.jsxs)("div", {
                     className: "flex flex-row width-full justify-between items-center",
-                    children: [(0, U.jsxs)("div", {
+                    children: [(0, L.jsxs)("div", {
                         className: "flex flex-row items-center gap-x-small medium:gap-x-medium",
-                        children: [(0, U.jsx)(B.Icon, {
+                        children: [(0, L.jsx)(z.Icon, {
                             name: "icon-regular-roblox-plus",
                             size: "Large",
                             className: "medium:size-[var(--icon-size-xlarge)]"
                         }), s(n.sectionHeaderTranslationKey)]
-                    }), f ? (0, U.jsx)("span", {
-                        className: (0, r8.default)(aF, "cursor-pointer", {
-                            "medium:[display:none]": !z
+                    }), f ? (0, L.jsx)("span", {
+                        className: (0, r7.default)(aB, "cursor-pointer", {
+                            "medium:[display:none]": !B
                         }),
                         "data-testid": "header-learn-more-trigger",
                         onClick: g,
                         onKeyDown: b,
                         role: "button",
                         tabIndex: 0,
-                        children: G
-                    }) : (0, U.jsx)("a", {
-                        className: (0, r8.default)(aF, {
-                            "medium:[display:none]": !z
+                        children: D
+                    }) : (0, L.jsx)("a", {
+                        className: (0, r7.default)(aB, {
+                            "medium:[display:none]": !B
                         }),
                         "data-testid": "header-learn-more-link",
-                        href: a_,
+                        href: aD,
                         onClick: m,
-                        children: G
+                        children: D
                     })]
                 })
-            }), z ? (0, U.jsx)(aM, {
+            }), B ? (0, L.jsx)(aU, {
                 baseProductId: C,
                 deviceMeta: c,
                 isPrimary: !!r,
                 onBaseProductSubscribe: E ? j : void 0,
-                onSubscriptionSectionViewShown: F,
+                onSubscriptionSectionViewShown: _,
                 onSubscriptionSubscribeClick: M,
                 paymentSessionId: l?.id,
                 redirect: o,
                 subscriptionV2: S
-            }) : (0, U.jsx)(ne, {
+            }) : (0, L.jsx)(nn, {
                 isPrimary: r,
-                children: (0, U.jsx)("div", {
+                children: (0, L.jsx)("div", {
                     className: "self-stretch medium:flex-row medium:justify-between",
-                    children: (0, U.jsx)(ai, {
+                    children: (0, L.jsx)(ao, {
                         deviceMeta: c,
                         isPrimary: !!r,
-                        onSubscriptionSectionViewShown: F,
-                        onSubscriptionSubscribeClick: O,
+                        onSubscriptionSectionViewShown: _,
+                        onSubscriptionSubscribeClick: F,
                         subscriptionV2: S,
                         onLearnMoreClick: g,
-                        learnMoreHref: f ? void 0 : a_,
+                        learnMoreHref: f ? void 0 : aD,
                         paymentSessionId: l?.id,
                         onSubscribeOverride: E ? j : void 0
                     })
                 })
-            }), f && (0, U.jsx)(as.SheetRoot, {
+            }), f && (0, L.jsx)(ac.SheetRoot, {
                 open: p,
                 onOpenChange: x,
-                children: (0, U.jsx)(nZ, {})
-            }), E && (0, U.jsx)(nJ, {
+                children: (0, L.jsx)(n2, {})
+            }), E && (0, L.jsx)(n1, {
                 analyticsContext: T,
                 deviceMeta: c,
                 isOpen: N,
@@ -6768,21 +6772,21 @@
             })]
         })
     }
-    let aD = () => {
+    let aG = () => {
         let {
             robuxBalance: e
-        } = (0, L.useContext)(ec);
-        return "number" != typeof e ? null : (0, U.jsxs)(L.Fragment, {
-            children: [(0, U.jsx)(B.Icon, {
+        } = (0, O.useContext)(em);
+        return "number" != typeof e ? null : (0, L.jsxs)(O.Fragment, {
+            children: [(0, L.jsx)(z.Icon, {
                 name: "icon-filled-robux"
-            }), (0, U.jsx)("span", {
+            }), (0, L.jsx)("span", {
                 className: "text-label-medium content-action-standard",
-                children: (0, tM.formatNumber)(e)
+                children: (0, tU.formatNumber)(e)
             })]
         })
     };
 
-    function aB(e) {
+    function az(e) {
         let {
             transfers: t
         } = e, {
@@ -6791,9 +6795,9 @@
             },
             urlParams: n,
             deviceMeta: a
-        } = (0, L.useContext)(ec), i = eU(a), {
+        } = (0, O.useContext)(em), i = eL(a), {
             translateFullKey: s
-        } = (0, er.useFullKeyTranslations)(), l = "true" === n.showHeader, o = l && !t ? (0, U.jsx)("div", {
+        } = (0, ei.useFullKeyTranslations)(), l = "true" === n.showHeader, o = l && !t ? (0, L.jsx)("div", {
             className: "self-stretch flex flex-row space-between items-center",
             style: {
                 position: "sticky",
@@ -6801,9 +6805,9 @@
                 zIndex: 1,
                 marginTop: "-4px"
             },
-            children: (0, U.jsx)("div", {
+            children: (0, L.jsx)("div", {
                 className: "flex flex-row justify-center items-center gap-small height-1000 padding-left-medium padding-right-large radius-circle bg-surface-0 margin-left-auto",
-                children: (0, U.jsx)(aD, {})
+                children: (0, L.jsx)(aG, {})
             })
         }) : null;
         if (!r) return o;
@@ -6816,36 +6820,36 @@
         }, p = c && u ? s.html(d, [{
             opening: "divTagStart",
             closing: "divTagEnd",
-            render: e => (m.used = !0, (0, U.jsx)("span", {
+            render: e => (m.used = !0, (0, L.jsx)("span", {
                 className: "line-through [font-weight:normal] [color:var(--color-extended-gray-600)]",
                 children: e
             }))
         }], {
             strikethroughPercentage: u,
             percentage: c
-        }) : void 0, h = null != p, f = h && m.used, g = (0, U.jsx)("h1", {
-            className: (0, r8.default)("self-stretch text-align-x-left text-section-title content-emphasis large:text-align-x-center padding-y-none", !f && "large:margin-x-[120px]"),
+        }) : void 0, h = null != p, f = h && m.used, g = (0, L.jsx)("h1", {
+            className: (0, r7.default)("self-stretch text-align-x-left text-section-title content-emphasis large:text-align-x-center padding-y-none", !f && "large:margin-x-[120px]"),
             children: h ? p : s(d, c ? {
                 percentage: c
             } : {})
         });
-        return l ? (0, U.jsxs)(L.Fragment, {
-            children: [o, (0, U.jsx)("div", {
+        return l ? (0, L.jsxs)(O.Fragment, {
+            children: [o, (0, L.jsx)("div", {
                 className: "flex flex-col justify-center items-center self-stretch padding-bottom-medium large:padding-y-xxlarge large:gap-large gap-small",
                 children: g
             })]
-        }) : (0, U.jsxs)("div", {
+        }) : (0, L.jsxs)("div", {
             className: "flex flex-col justify-center items-center self-stretch padding-bottom-medium large:padding-y-xxlarge large:gap-large gap-small padding-top-xlarge",
-            children: [!i && !t && (0, U.jsx)("div", {
+            children: [!i && !t && (0, L.jsx)("div", {
                 className: "self-stretch flex flex-row justify-end items-center large:hidden",
-                children: (0, U.jsx)("div", {
+                children: (0, L.jsx)("div", {
                     className: "flex flex-row justify-center items-center gap-small height-1000 padding-left-medium padding-right-large radius-circle bg-surface-0",
-                    children: (0, U.jsx)(aD, {})
+                    children: (0, L.jsx)(aG, {})
                 })
             }), g]
         })
     }
-    let aO = [{
+    let aV = [{
             questionKey: "Action.WhatAreRobuxQuestion",
             answerKey: "Action.WhatAreRobuxAnswer"
         }, {
@@ -6855,28 +6859,28 @@
             questionKey: "Action.DoRobuxExpireQuestion",
             answerKey: "Action.DoRobuxExpireAnswer"
         }],
-        aG = {
+        aW = {
             questionKey: "Action.HowToRedeemGiftCardQuestion",
             answerKey: "Action.HowToRedeemGiftCardAnswer"
         };
 
-    function az() {
-        let e = (0, er.useTranslations)("Feature.BuyRobux"),
+    function aK() {
+        let e = (0, ei.useTranslations)("Feature.BuyRobux"),
             {
                 deviceMeta: t
-            } = (0, L.useContext)(ec),
-            [r, n] = (0, L.useState)(() => new Set),
-            a = eI(t) ? [...aO, aG] : aO,
-            i = (0, L.useCallback)(e => {
+            } = (0, O.useContext)(em),
+            [r, n] = (0, O.useState)(() => new Set),
+            a = eF(t) ? [...aV, aW] : aV,
+            i = (0, O.useCallback)(e => {
                 n(t => {
                     let r = new Set(t);
                     return r.has(e) ? r.delete(e) : r.add(e), r
                 })
             }, []);
-        return (0, U.jsxs)(r6, {
-            children: [(0, U.jsx)(r9, {
+        return (0, L.jsxs)(ne, {
+            children: [(0, L.jsx)(nt, {
                 children: e("Heading.FAQ")
-            }), (0, U.jsx)("div", {
+            }), (0, L.jsx)("div", {
                 className: "self-stretch flex flex-col items-stretch gap-medium large:gap-large",
                 children: a.map(t => {
                     let {
@@ -6888,25 +6892,25 @@
                     "Action.WhereAreMyRobuxAnswer" === a ? o = [{
                         opening: "transactionsLinkStart",
                         closing: "transactionsLinkEnd",
-                        render: e => (0, U.jsx)("a", {
-                            href: (0, t4.getAbsoluteUrl)("/transactions"),
+                        render: e => (0, L.jsx)("a", {
+                            href: (0, t9.getAbsoluteUrl)("/transactions"),
                             className: "text-link",
                             children: e
                         })
-                    }] : a === aG.answerKey && (o = [{
+                    }] : a === aW.answerKey && (o = [{
                         opening: "redeemLinkStart",
                         closing: "redeemLinkEnd",
-                        render: e => (0, U.jsx)("a", {
-                            href: (0, t4.getAbsoluteUrl)("/redeem"),
+                        render: e => (0, L.jsx)("a", {
+                            href: (0, t9.getAbsoluteUrl)("/redeem"),
                             className: "text-link",
                             children: e
                         })
                     }]);
                     let c = r.has(n),
                         u = `faq-panel-${n}`;
-                    return (0, U.jsxs)("div", {
+                    return (0, L.jsxs)("div", {
                         className: "radius-medium stroke-standard stroke-default overflow-hidden padding-x-medium padding-y-small",
-                        children: [(0, U.jsxs)("div", {
+                        children: [(0, L.jsxs)("div", {
                             role: "button",
                             "aria-expanded": c,
                             "aria-controls": u,
@@ -6918,15 +6922,15 @@
                             onKeyDown: e => {
                                 ("Enter" === e.key || " " === e.key) && (e.preventDefault(), i(n))
                             },
-                            children: [(0, U.jsx)("span", {
+                            children: [(0, L.jsx)("span", {
                                 className: "text-align-x-left text-title-medium",
                                 children: e(n)
-                            }), (0, U.jsx)(B.Icon, {
+                            }), (0, L.jsx)(z.Icon, {
                                 name: c ? "icon-regular-chevron-large-up" : "icon-regular-chevron-large-down",
                                 size: "Medium",
                                 className: "content-emphasis"
                             })]
-                        }), c && (0, U.jsx)("div", {
+                        }), c && (0, L.jsx)("div", {
                             id: u,
                             role: "region",
                             "aria-label": e(n),
@@ -6941,23 +6945,23 @@
             })]
         })
     }
-    var aV = e.i(708923),
-        aW = e.i(739472),
-        aK = e.i(309937),
-        aH = e.i(641928);
-    let aQ = async (e, t) => {
+    var aH = e.i(708923),
+        aQ = e.i(739472),
+        a$ = e.i(309937),
+        aq = e.i(641928);
+    let aY = async (e, t) => {
         let r = `${e}_API`,
             n = performance.now();
-        nz(r, {
+        nK(r, {
             statusCode: "Throughput"
         });
         try {
             let e = await t();
-            return nz(r, {
+            return nK(r, {
                 statusCode: "200"
             }), e
         } catch (e) {
-            throw nz(r, {
+            throw nK(r, {
                 statusCode: (e => {
                     if (null == e) return "NetworkError";
                     if ("object" == typeof e) {
@@ -6976,14 +6980,14 @@
                 })(e)
             }), e
         } finally {
-            nV(`${r}_LatencyMs`, void 0, performance.now() - n)
+            nH(`${r}_LatencyMs`, void 0, performance.now() - n)
         }
-    }, a$ = [];
-    var aq = e.i(938759),
-        aq = aq,
-        aY = e.i(283023);
+    }, aX = [];
+    var aJ = e.i(938759),
+        aJ = aJ,
+        aZ = e.i(283023);
 
-    function aX(e) {
+    function a0(e) {
         let {
             surface: t,
             entrypoint: r,
@@ -6994,10 +6998,10 @@
         };
         return void 0 !== n && (i.referrer_id = String(n)), a.search = new URLSearchParams(i).toString(), a.toString()
     }
-    var aJ = e.i(907119),
-        aJ = aJ,
-        aZ = e.i(41621);
-    let a0 = {
+    var a1 = e.i(907119),
+        a1 = a1,
+        a2 = e.i(41621);
+    let a3 = {
         XSmall: {
             containerSize: "height-600 width-600",
             iconSize: "Small"
@@ -7008,7 +7012,7 @@
         }
     };
 
-    function a1(e) {
+    function a5(e) {
         let {
             thumbnailUrl: t,
             displayName: r,
@@ -7017,22 +7021,22 @@
         } = e, {
             containerSize: i,
             iconSize: s
-        } = a0[n];
-        return (0, U.jsx)("div", {
+        } = a3[n];
+        return (0, L.jsx)("div", {
             className: `${i} radius-circle clip flex items-center justify-center shrink-0 ${a}`,
-            children: t ? (0, U.jsx)("img", {
+            children: t ? (0, L.jsx)("img", {
                 src: t,
                 alt: r,
                 className: "height-full width-full object-cover"
-            }) : (0, U.jsx)(B.Icon, {
+            }) : (0, L.jsx)(z.Icon, {
                 name: "icon-regular-person",
                 size: s
             })
         })
     }
-    let a2 = "radial-gradient(circle at -10px 12px, transparent 14px, black 14px)";
+    let a4 = "radial-gradient(circle at -10px 12px, transparent 14px, black 14px)";
 
-    function a3(e) {
+    function a8(e) {
         let {
             pendingTransfers: t
         } = e;
@@ -7045,26 +7049,26 @@
                 marginLeft: 0 === e ? 0 : -2,
                 zIndex: a - e,
                 ...e > 0 && {
-                    maskImage: a2,
-                    WebkitMaskImage: a2
+                    maskImage: a4,
+                    WebkitMaskImage: a4
                 }
             });
-        return (0, U.jsxs)("div", {
+        return (0, L.jsxs)("div", {
             className: "flex flex-row items-center shrink-0",
-            children: [n.map((e, t) => (0, U.jsx)("div", {
+            children: [n.map((e, t) => (0, L.jsx)("div", {
                 style: i(t),
-                children: (0, U.jsx)(a1, {
+                children: (0, L.jsx)(a5, {
                     thumbnailUrl: e.sender.thumbnailUrl,
                     displayName: e.sender.displayName,
                     size: "XSmall",
                     className: "bg-shift-200"
                 })
-            }, e.transferRequestId)), r && (0, U.jsx)("div", {
+            }, e.transferRequestId)), r && (0, L.jsx)("div", {
                 style: i(n.length),
-                children: (0, U.jsx)("div", {
+                children: (0, L.jsx)("div", {
                     "aria-hidden": "true",
                     className: "height-600 width-600 radius-circle bg-shift-200 flex items-center justify-center shrink-0",
-                    children: (0, U.jsx)(B.Icon, {
+                    children: (0, L.jsx)(z.Icon, {
                         name: "icon-filled-three-dots-horizontal",
                         size: "XSmall"
                     })
@@ -7072,25 +7076,25 @@
             })]
         })
     }
-    var aq = aq,
-        aJ = aJ,
-        a5 = e.i(941127),
-        a4 = e.i(459475);
+    var aJ = aJ,
+        a1 = a1,
+        a6 = e.i(941127),
+        a9 = e.i(459475);
 
-    function a8(e) {
+    function a7(e) {
         let {
             iconName: t,
             title: r,
             metadata: n,
             onSelect: a
         } = e;
-        return (0, U.jsx)(a5.ListItem, {
+        return (0, L.jsx)(a6.ListItem, {
             className: "padding-x-none [&>div]:padding-y-small",
             divider: "None",
             isContained: !0,
-            leading: (0, U.jsx)("span", {
+            leading: (0, L.jsx)("span", {
                 className: "bg-shift-200 radius-circle size-1200 flex items-center justify-center",
-                children: (0, U.jsx)(B.Icon, {
+                children: (0, L.jsx)(z.Icon, {
                     name: t,
                     size: "Large"
                 })
@@ -7098,60 +7102,60 @@
             metadata: n,
             size: "Medium",
             title: r,
-            trailing: (0, U.jsx)(a4.ListItemChevronTrailingAccessory, {}),
+            trailing: (0, L.jsx)(a9.ListItemChevronTrailingAccessory, {}),
             onSelect: a
         })
     }
-    var a6 = e.i(358239),
-        a9 = e.i(175067);
+    var ie = e.i(358239),
+        it = e.i(175067);
 
-    function a7(e, t) {
-        if (void 0 !== J.window)
-            if (eU(t)) J.window.location.href = e;
-            else if (t.isIosDevice || t.isAndroidDevice || (0, a6.isIos13Ipad)() || t.isChromeOs) {
+    function ir(e, t) {
+        if (void 0 !== et.window)
+            if (eL(t)) et.window.location.href = e;
+            else if (t.isIosDevice || t.isAndroidDevice || (0, ie.isIos13Ipad)() || t.isChromeOs) {
             let t;
-            J.window.location.href = ((t = new URL("https://ro.blox.com/Ebh5")).search = new URLSearchParams({
+            et.window.location.href = ((t = new URL("https://ro.blox.com/Ebh5")).search = new URLSearchParams({
                 pid: "buy-robux-currency-transfer",
                 is_retargeting: "false",
                 deep_link_value: e
             }).toString(), t.toString())
         } else if (t.isDesktop && !t.isUniversalApp) {
-            let t = (0, a9.getGameLauncher)();
-            t ? t.startDeepLinkFlow(e) : J.window.Roblox.ProtocolHandlerClientInterface?.startDeepLinkFlow ? J.window.Roblox.ProtocolHandlerClientInterface.startDeepLinkFlow(e) : J.window.location.href = e
-        } else J.window.location.href = e
+            let t = (0, it.getGameLauncher)();
+            t ? t.startDeepLinkFlow(e) : et.window.Roblox.ProtocolHandlerClientInterface?.startDeepLinkFlow ? et.window.Roblox.ProtocolHandlerClientInterface.startDeepLinkFlow(e) : et.window.location.href = e
+        } else et.window.location.href = e
     }
 
-    function ie(e) {
+    function ia(e) {
         let t = new URL("roblox://navigation/currency_transfer");
         return t.search = new URLSearchParams(e).toString(), t.toString()
     }
 
-    function it(e) {
+    function ii(e) {
         let {
             transfer: t,
             acceptTranslationKey: r
         } = e, {
             translateFullKey: n
-        } = (0, er.useFullKeyTranslations)(), {
+        } = (0, ei.useFullKeyTranslations)(), {
             trackPendingTransfersAcceptClick: a
-        } = (0, L.useContext)(eR), {
+        } = (0, O.useContext)(e_), {
             deviceMeta: i
-        } = (0, L.useContext)(ec);
-        return (0, U.jsxs)("div", {
+        } = (0, O.useContext)(em);
+        return (0, L.jsxs)("div", {
             className: "flex flex-row items-center justify-between gap-small padding-medium radius-medium stroke-standard stroke-default",
-            children: [(0, U.jsxs)("div", {
+            children: [(0, L.jsxs)("div", {
                 className: "flex flex-row items-center gap-small",
-                children: [(0, U.jsx)(a1, {
+                children: [(0, L.jsx)(a5, {
                     thumbnailUrl: t.sender.thumbnailUrl,
                     displayName: t.sender.displayName,
                     size: "Small",
                     className: "bg-surface-200"
-                }), (0, U.jsxs)("div", {
+                }), (0, L.jsxs)("div", {
                     className: "flex flex-col",
-                    children: [(0, U.jsx)("span", {
+                    children: [(0, L.jsx)("span", {
                         className: "text-label-medium content-emphasis",
                         children: t.sender.displayName
-                    }), (0, U.jsx)("span", {
+                    }), (0, L.jsx)("span", {
                         className: "text-body-small content-muted",
                         children: new Date(Number(t.createdTimestampMs)).toLocaleDateString("default", {
                             month: "short",
@@ -7160,23 +7164,23 @@
                         })
                     })]
                 })]
-            }), (0, U.jsxs)("div", {
+            }), (0, L.jsxs)("div", {
                 className: "flex flex-row items-center gap-small",
-                children: [(0, U.jsxs)("div", {
+                children: [(0, L.jsxs)("div", {
                     className: "flex flex-row items-center gap-xsmall",
-                    children: [(0, U.jsx)(B.Icon, {
+                    children: [(0, L.jsx)(z.Icon, {
                         name: "icon-regular-robux",
                         size: "Small"
-                    }), (0, U.jsx)("span", {
+                    }), (0, L.jsx)("span", {
                         className: "text-label-medium content-emphasis",
-                        children: (0, tM.formatNumber)(Number(t.netTransferRobuxAmount))
+                        children: (0, tU.formatNumber)(Number(t.netTransferRobuxAmount))
                     })]
-                }), (0, U.jsx)(O.Button, {
+                }), (0, L.jsx)(V.Button, {
                     size: "Small",
                     variant: "Standard",
                     onClick: () => {
                         var e;
-                        a(), e = t.transferRequestId, ey("PendingTransferDeepLink"), a7(ie({
+                        a(), e = t.transferRequestId, eP("PendingTransferDeepLink"), ir(ia({
                             direction: "receive",
                             transferrequestid: `RXT-${e}`
                         }), i)
@@ -7187,24 +7191,24 @@
         })
     }
 
-    function ir(e) {
+    function is(e) {
         let {
             pendingTransfers: t,
             acceptTransfersTranslationKey: r
-        } = e, n = (0, er.useTranslations)("Feature.BuyRobux");
-        return (0, U.jsxs)(as.SheetContent, {
+        } = e, n = (0, ei.useTranslations)("Feature.BuyRobux");
+        return (0, L.jsxs)(ac.SheetContent, {
             centerSheetSize: "Medium",
             closeLabel: "Close",
             largeScreenVariant: "center",
-            children: [(0, U.jsx)(as.SheetTitle, {
+            children: [(0, L.jsx)(ac.SheetTitle, {
                 children: n("Heading.PendingTransfers")
-            }), (0, U.jsx)(as.SheetBody, {
-                children: (0, U.jsx)("div", {
+            }), (0, L.jsx)(ac.SheetBody, {
+                children: (0, L.jsx)("div", {
                     className: "flex flex-col gap-medium padding-bottom-xlarge overflow-y-auto",
                     style: {
                         maxHeight: "60vh"
                     },
-                    children: t.map(e => (0, U.jsx)(it, {
+                    children: t.map(e => (0, L.jsx)(ii, {
                         transfer: e,
                         acceptTranslationKey: r
                     }, e.transferRequestId))
@@ -7213,13 +7217,13 @@
         })
     }
 
-    function ia(e) {
+    function il(e) {
         let {
             pendingTransfers: t,
             acceptTransfersTranslationKey: r
-        } = e, n = (0, er.useTranslations)("Feature.BuyRobux"), [a, i] = (0, L.useState)(!1), s = (0, L.useMemo)(() => t.reduce((e, t) => e + Number(t.netTransferRobuxAmount), 0), [t]), l = (0, tM.formatNumber)(t.length), o = (0, tM.formatNumber)(s), c = 1 === t.length;
-        return (0, U.jsxs)(L.Fragment, {
-            children: [(0, U.jsx)(a8, {
+        } = e, n = (0, ei.useTranslations)("Feature.BuyRobux"), [a, i] = (0, O.useState)(!1), s = (0, O.useMemo)(() => t.reduce((e, t) => e + Number(t.netTransferRobuxAmount), 0), [t]), l = (0, tU.formatNumber)(t.length), o = (0, tU.formatNumber)(s), c = 1 === t.length;
+        return (0, L.jsxs)(O.Fragment, {
+            children: [(0, L.jsx)(a7, {
                 iconName: "icon-regular-robux",
                 metadata: n("Label.AcceptTheseRobux", void 0, "Accept these Robux"),
                 title: n(c ? "Label.PendingTransfersSummary.Singular" : "Label.PendingTransfersSummary.Plural", {
@@ -7229,10 +7233,10 @@
                 onSelect: () => {
                     i(!0)
                 }
-            }), (0, U.jsx)(as.SheetRoot, {
+            }), (0, L.jsx)(ac.SheetRoot, {
                 open: a,
                 onOpenChange: i,
-                children: (0, U.jsx)(ir, {
+                children: (0, L.jsx)(is, {
                     acceptTransfersTranslationKey: r,
                     pendingTransfers: t
                 })
@@ -7240,20 +7244,20 @@
         })
     }
 
-    function ii(e) {
+    function io(e) {
         let {
             referral: t,
             shouldDeeplinkToReferral: r
-        } = e, n = (0, er.useTranslations)("Feature.RobloxSubscription"), a = (0, ay.useFormatter)(), {
+        } = e, n = (0, ei.useTranslations)("Feature.RobloxSubscription"), a = (0, aP.useFormatter)(), {
             handle: i,
             isLoading: s
-        } = (0, aZ.useReferrerHandle)(String(t.senderUserId)), {
+        } = (0, a2.useReferrerHandle)(String(t.senderUserId)), {
             deviceMeta: l
-        } = (0, L.useContext)(ec), [o, c] = (0, L.useState)(!1), u = n("Heading.ReferralRecipientEntry", {
-            amount: a.number(nq.REFERRAL_REWARD_ROBUX)
-        }, `Join Plus to get ${a.number(nq.REFERRAL_REWARD_ROBUX)} Robux`);
-        return s ? null : (0, U.jsxs)(L.Fragment, {
-            children: [(0, U.jsx)(a8, {
+        } = (0, O.useContext)(em), [o, c] = (0, O.useState)(!1), u = n("Heading.ReferralRecipientEntry", {
+            amount: a.number(nJ.REFERRAL_REWARD_ROBUX)
+        }, `Join Plus to get ${a.number(nJ.REFERRAL_REWARD_ROBUX)} Robux`);
+        return s ? null : (0, L.jsxs)(O.Fragment, {
+            children: [(0, L.jsx)(a7, {
                 iconName: "icon-regular-roblox-plus",
                 metadata: i ? u : void 0,
                 title: i ? n("Description.ReferralPendingRequest", {
@@ -7261,7 +7265,7 @@
                 }, `${i} referred you to Plus`) : u,
                 onSelect: () => {
                     if (r) {
-                        aJ.default.buyRobuxReferralReviewClick(String(t.senderUserId), t.referralId), a7(aX({
+                        a1.default.buyRobuxReferralReviewClick(String(t.senderUserId), t.referralId), ir(a0({
                             surface: "PlusReferralLandingSheet",
                             entrypoint: "BuyRobuxPage",
                             referrerId: t.senderUserId
@@ -7270,40 +7274,40 @@
                     }
                     c(!0)
                 }
-            }), (0, U.jsx)(aq.default, {
+            }), (0, L.jsx)(aJ.default, {
                 invite: {
                     referrerId: String(t.senderUserId)
                 },
                 open: o,
-                surface: aY.PlusReferralSurface.BuyRobuxPage,
+                surface: aZ.PlusReferralSurface.BuyRobuxPage,
                 onOpenChange: c
             })]
         })
     }
 
-    function is(e) {
+    function ic(e) {
         let {
             pendingTransfers: t,
             acceptTransfersTranslationKey: r,
             pendingReferrals: n,
             shouldDeeplinkToReferral: a
-        } = e, i = (0, er.useTranslations)("Feature.BuyRobux");
-        return (0, U.jsxs)(as.SheetContent, {
+        } = e, i = (0, ei.useTranslations)("Feature.BuyRobux");
+        return (0, L.jsxs)(ac.SheetContent, {
             centerSheetSize: "Medium",
             closeLabel: "Close",
             largeScreenVariant: "center",
-            children: [(0, U.jsx)(as.SheetTitle, {
+            children: [(0, L.jsx)(ac.SheetTitle, {
                 children: i("Heading.ReviewPendingRequests", void 0, "Review pending requests")
-            }), (0, U.jsx)(as.SheetBody, {
-                children: (0, U.jsxs)("div", {
+            }), (0, L.jsx)(ac.SheetBody, {
+                children: (0, L.jsxs)("div", {
                     className: "flex flex-col gap-xsmall padding-bottom-xlarge overflow-y-auto",
                     style: {
                         maxHeight: "60vh"
                     },
-                    children: [r && t.length > 0 ? (0, U.jsx)(ia, {
+                    children: [r && t.length > 0 ? (0, L.jsx)(il, {
                         acceptTransfersTranslationKey: r,
                         pendingTransfers: t
-                    }) : null, n.map(e => (0, U.jsx)(ii, {
+                    }) : null, n.map(e => (0, L.jsx)(io, {
                         referral: e,
                         shouldDeeplinkToReferral: a
                     }, e.referralId))]
@@ -7312,9 +7316,9 @@
         })
     }
 
-    function il(e) {
-        let [t, r] = (0, L.useState)({}), n = (0, L.useRef)(t);
-        return n.current = t, (0, L.useEffect)(() => {
+    function iu(e) {
+        let [t, r] = (0, O.useState)({}), n = (0, O.useRef)(t);
+        return n.current = t, (0, O.useEffect)(() => {
             let t = e.map(e => "contentId" in e ? e.contentId : e.id).filter(e => !(e in n.current));
             if (0 === t.length) return;
             let a = t.map(e => ({
@@ -7326,10 +7330,10 @@
                 type: "AvatarHeadshot"
             }));
             (async () => {
-                let e = await eM(a);
+                let e = await eU(a);
                 if (!e?.data) return;
                 let t = {};
-                for (let r of e.data) r.state === eA.Completed && (t[r.targetId] = r.imageUrl);
+                for (let r of e.data) r.state === eI.Completed && (t[r.targetId] = r.imageUrl);
                 r(e => ({
                     ...e,
                     ...t
@@ -7338,42 +7342,42 @@
         }, [e]), t
     }
 
-    function io(e) {
+    function id(e) {
         let {
             countLabel: t
         } = e;
-        return (0, U.jsxs)(L.Fragment, {
-            children: [(0, U.jsxs)("span", {
+        return (0, L.jsxs)(O.Fragment, {
+            children: [(0, L.jsxs)("span", {
                 className: "relative flex shrink-0 items-center justify-center",
-                children: [(0, U.jsx)("span", {
+                children: [(0, L.jsx)("span", {
                     className: "radius-circle absolute size-[11px] bg-[var(--color-extended-gray-100)]",
                     "data-testid": "info-mark-disc"
-                }), (0, U.jsx)(B.Icon, {
+                }), (0, L.jsx)(z.Icon, {
                     className: "content-system-emphasis relative",
                     name: "icon-filled-circle-i",
                     size: "Medium"
                 })]
-            }), (0, U.jsx)("span", {
+            }), (0, L.jsx)("span", {
                 className: "text-label-medium content-emphasis",
                 children: t
             })]
         })
     }
 
-    function ic(e) {
+    function im(e) {
         let {
             referral: t,
             handle: r
-        } = e, n = (0, er.useTranslations)("Feature.RobloxSubscription"), a = il((0, L.useMemo)(() => [{
+        } = e, n = (0, ei.useTranslations)("Feature.RobloxSubscription"), a = iu((0, O.useMemo)(() => [{
             id: t.senderUserId
         }], [t.senderUserId]));
-        return (0, U.jsxs)(L.Fragment, {
-            children: [(0, U.jsx)(a1, {
+        return (0, L.jsxs)(O.Fragment, {
+            children: [(0, L.jsx)(a5, {
                 className: "bg-shift-200",
                 displayName: r,
                 size: "XSmall",
                 thumbnailUrl: a[t.senderUserId]
-            }), (0, U.jsx)("span", {
+            }), (0, L.jsx)("span", {
                 className: "text-label-medium content-emphasis text-truncate-end",
                 children: n.has("Label.ReferralPendingRequestSummary") ? n("Label.ReferralPendingRequestSummary", {
                     displayName: r
@@ -7382,55 +7386,55 @@
         })
     }
 
-    function iu(e) {
+    function ip(e) {
         let {
             pendingTransfers: t,
             totalRobux: r
-        } = e, n = (0, er.useTranslations)("Feature.BuyRobux"), a = 1 === t.length ? "Label.PendingTransfersSummary.Singular" : "Label.PendingTransfersSummary.Plural";
-        return (0, U.jsxs)(L.Fragment, {
-            children: [(0, U.jsx)(a3, {
+        } = e, n = (0, ei.useTranslations)("Feature.BuyRobux"), a = 1 === t.length ? "Label.PendingTransfersSummary.Singular" : "Label.PendingTransfersSummary.Plural";
+        return (0, L.jsxs)(O.Fragment, {
+            children: [(0, L.jsx)(a8, {
                 pendingTransfers: t
-            }), (0, U.jsx)("span", {
+            }), (0, L.jsx)("span", {
                 className: "text-label-medium content-emphasis",
                 children: n(a, {
-                    count: (0, tM.formatNumber)(t.length),
-                    robux: (0, tM.formatNumber)(r)
+                    count: (0, tU.formatNumber)(t.length),
+                    robux: (0, tU.formatNumber)(r)
                 })
             })]
         })
     }
 
-    function id(e) {
+    function ih(e) {
         let {
             transfers: t,
             pendingReferrals: r,
             shouldDeeplinkToReferral: n
-        } = e, a = (0, er.useTranslations)("Feature.BuyRobux"), i = (0, er.useTranslations)("Feature.RobloxSubscription"), {
+        } = e, a = (0, ei.useTranslations)("Feature.BuyRobux"), i = (0, ei.useTranslations)("Feature.RobloxSubscription"), {
             translateFullKey: s
-        } = (0, er.useFullKeyTranslations)(), {
+        } = (0, ei.useFullKeyTranslations)(), {
             trackPendingTransfersImpression: l,
             trackPendingTransfersSheetView: o
-        } = (0, L.useContext)(eR), {
+        } = (0, O.useContext)(e_), {
             deviceMeta: c
-        } = (0, L.useContext)(ec), [u, d] = (0, L.useState)(!1), [m, p] = (0, L.useState)(!1), h = (0, L.useMemo)(() => t?.pendingTransfers ?? [], [t]), f = 0 === h.length ? r.at(0) : void 0, {
+        } = (0, O.useContext)(em), [u, d] = (0, O.useState)(!1), [m, p] = (0, O.useState)(!1), h = (0, O.useMemo)(() => t?.pendingTransfers ?? [], [t]), f = 0 === h.length ? r.at(0) : void 0, {
             handle: g,
             isLoading: x
-        } = (0, aZ.useReferrerHandle)(f ? String(f.senderUserId) : void 0);
-        (0, L.useEffect)(() => {
+        } = (0, a2.useReferrerHandle)(f ? String(f.senderUserId) : void 0);
+        (0, O.useEffect)(() => {
             h.length > 0 && l()
-        }, [h, l]), (0, L.useEffect)(() => {
+        }, [h, l]), (0, O.useEffect)(() => {
             let e = r.at(0);
-            void 0 !== e && aJ.default.buyRobuxReferralImpression(String(e.senderUserId), e.referralId)
+            void 0 !== e && a1.default.buyRobuxReferralImpression(String(e.senderUserId), e.referralId)
         }, [r]);
         let b = e => {
                 e && h.length > 0 && o(), d(e)
             },
-            y = (0, L.useMemo)(() => h.reduce((e, t) => e + Number(t.netTransferRobuxAmount), 0), [h]),
+            y = (0, O.useMemo)(() => h.reduce((e, t) => e + Number(t.netTransferRobuxAmount), 0), [h]),
             v = h.length + r.length;
         if (0 === v || void 0 !== f && x) return null;
         let S = void 0 !== g ? f : void 0,
             P = h.length > 0 && 0 === r.length,
-            C = (0, tM.formatNumber)(v),
+            C = (0, tU.formatNumber)(v),
             E = a(1 === v ? "Label.PendingRequestsSummary.Singular" : "Label.PendingRequestsSummary.Plural", {
                 count: C
             }, 1 === v ? `${C} pending request` : `${C} pending requests`),
@@ -7438,7 +7442,7 @@
                 if (n && 0 === h.length) {
                     let e = r.at(0);
                     if (void 0 !== e) {
-                        aJ.default.buyRobuxReferralReviewClick(String(e.senderUserId), e.referralId), a7(aX({
+                        a1.default.buyRobuxReferralReviewClick(String(e.senderUserId), e.referralId), ir(a0({
                             surface: "PlusReferralLandingSheet",
                             entrypoint: "BuyRobuxPage",
                             referrerId: e.senderUserId
@@ -7447,30 +7451,30 @@
                     }
                 }
                 if (void 0 !== S) {
-                    aJ.default.buyRobuxReferralReviewClick(String(S.senderUserId), S.referralId), p(!0);
+                    a1.default.buyRobuxReferralReviewClick(String(S.senderUserId), S.referralId), p(!0);
                     return
                 }
                 let e = r.at(0);
-                void 0 !== e && aJ.default.buyRobuxReferralReviewClick(String(e.senderUserId), e.referralId), b(!0)
+                void 0 !== e && a1.default.buyRobuxReferralReviewClick(String(e.senderUserId), e.referralId), b(!0)
             };
-        return (0, U.jsxs)(L.Fragment, {
-            children: [(0, U.jsxs)("div", {
+        return (0, L.jsxs)(O.Fragment, {
+            children: [(0, L.jsxs)("div", {
                 className: `flex flex-row items-center justify-between gap-small width-full${P?" medium:justify-end":""}`,
-                children: [(0, U.jsx)("div", {
+                children: [(0, L.jsx)("div", {
                     className: "flex flex-row items-center gap-small min-width-0",
-                    children: P ? (0, U.jsx)(iu, {
+                    children: P ? (0, L.jsx)(ip, {
                         pendingTransfers: h,
                         totalRobux: y
-                    }) : void 0 === S ? (0, U.jsx)(io, {
+                    }) : void 0 === S ? (0, L.jsx)(id, {
                         countLabel: E
-                    }) : (0, U.jsx)(ic, {
+                    }) : (0, L.jsx)(im, {
                         handle: g ?? "",
                         referral: S
                     })
-                }), P && (0, U.jsx)("span", {
+                }), P && (0, L.jsx)("span", {
                     className: "content-default none medium:block",
                     children: "•"
-                }), (0, U.jsx)("a", {
+                }), (0, L.jsx)("a", {
                     className: "text-title-medium text-link underline cursor-pointer shrink-0",
                     onClick: w,
                     onKeyDown: e => {
@@ -7480,82 +7484,82 @@
                     tabIndex: 0,
                     children: P && t ? s(t.acceptTransfersTranslationKey) : i("Action.Review", void 0, "Review")
                 })]
-            }), P && t ? (0, U.jsx)(as.SheetRoot, {
+            }), P && t ? (0, L.jsx)(ac.SheetRoot, {
                 open: u,
                 onOpenChange: b,
-                children: (0, U.jsx)(ir, {
+                children: (0, L.jsx)(is, {
                     pendingTransfers: h,
                     acceptTransfersTranslationKey: t.acceptTransfersTranslationKey
                 })
-            }) : void 0 === S ? (0, U.jsx)(as.SheetRoot, {
+            }) : void 0 === S ? (0, L.jsx)(ac.SheetRoot, {
                 open: u,
                 onOpenChange: b,
-                children: (0, U.jsx)(is, {
+                children: (0, L.jsx)(ic, {
                     pendingTransfers: h,
                     acceptTransfersTranslationKey: t?.acceptTransfersTranslationKey,
                     pendingReferrals: r,
                     shouldDeeplinkToReferral: n
                 })
-            }) : (0, U.jsx)(aq.default, {
+            }) : (0, L.jsx)(aJ.default, {
                 invite: {
                     referrerId: String(S.senderUserId)
                 },
                 open: m,
-                surface: aY.PlusReferralSurface.BuyRobuxPage,
+                surface: aZ.PlusReferralSurface.BuyRobuxPage,
                 onOpenChange: p
             })]
         })
     }
 
-    function im(e) {
+    function ig(e) {
         let {
             iconSize: t,
             textClassName: r
         } = e, {
             robuxBalance: n
-        } = (0, L.useContext)(ec);
-        return "number" != typeof n ? null : (0, U.jsxs)(L.Fragment, {
-            children: [(0, U.jsx)(B.Icon, {
+        } = (0, O.useContext)(em);
+        return "number" != typeof n ? null : (0, L.jsxs)(O.Fragment, {
+            children: [(0, L.jsx)(z.Icon, {
                 name: "icon-filled-robux",
                 size: t
-            }), (0, U.jsx)("span", {
-                className: (0, r8.default)("font-builder-extended content-action-standard", r),
-                children: (0, tM.formatNumber)(n)
+            }), (0, L.jsx)("span", {
+                className: (0, r7.default)("font-builder-extended content-action-standard", r),
+                children: (0, tU.formatNumber)(n)
             })]
         })
     }
-    var ip = e.i(932598);
-    let ih = async (e, t) => eT(eN.GET, ek.USER_SEARCH, {
-        url: `${ei.EnvironmentUrls.apiGatewayUrl}/search-api/omni-search`,
+    var ix = e.i(932598);
+    let ib = async (e, t) => eM(ej.GET, eA.USER_SEARCH, {
+        url: `${eo.EnvironmentUrls.apiGatewayUrl}/search-api/omni-search`,
         withCredentials: !0
     }, {
         verticalType: "user",
         searchQuery: e,
         sessionId: t,
         globalSessionId: t
-    }), ig = [];
-    var ix = e.i(941918),
-        ib = e.i(986592),
-        iy = e.i(556010);
-    let iv = {
+    }), iy = [];
+    var iv = e.i(941918),
+        iS = e.i(986592),
+        iP = e.i(556010);
+    let iC = {
             XSmall: "padding-x-small",
             Small: "padding-x-medium",
             Medium: "padding-x-medium",
             Large: "padding-x-medium"
         },
-        iS = {
+        iE = {
             XSmall: "gap-x-xsmall",
             Small: "gap-x-small",
             Medium: "gap-x-small",
             Large: "gap-x-small"
         },
-        iP = {
+        iw = {
             XSmall: "height-600",
             Small: "height-800",
             Medium: "height-1000",
             Large: "height-1200"
         },
-        iC = {
+        iN = {
             Rounded: {
                 XSmall: "radius-small",
                 Small: "radius-medium",
@@ -7575,14 +7579,14 @@
                 Large: "radius-none"
             }
         },
-        iE = {
+        ik = {
             XSmall: ["text-body-small", "placeholder:text-body-small"],
             Small: ["text-body-small", "placeholder:text-body-small"],
             Medium: ["text-body-medium", "placeholder:text-body-medium"],
             Large: ["text-body-large", "placeholder:text-body-large"]
         },
-        iw = "Large",
-        iN = (0, L.forwardRef)((e, t) => {
+        iT = "Large",
+        ij = (0, O.forwardRef)((e, t) => {
             let {
                 label: r,
                 leadingIconName: n,
@@ -7592,7 +7596,7 @@
                 hasError: l,
                 error: o,
                 helperText: c,
-                size: u = iw,
+                size: u = iT,
                 variant: d = "Standard",
                 shape: m = "Rounded",
                 isRequired: p,
@@ -7604,66 +7608,66 @@
                 id: y,
                 placeholder: v = "Search",
                 ...S
-            } = e, P = (0, G.default)(), C = y || P, E = `${C}-description`, w = u ?? iw, N = l || !!o, k = o || c, T = n ?? (void 0 === i ? "icon-regular-magnifying-glass" : void 0), j = (0, L.useMemo)(() => T ? L.default.createElement(B.Icon, {
+            } = e, P = (0, W.default)(), C = y || P, E = `${C}-description`, w = u ?? iT, N = l || !!o, k = o || c, T = n ?? (void 0 === i ? "icon-regular-magnifying-glass" : void 0), j = (0, O.useMemo)(() => T ? O.default.createElement(z.Icon, {
                 name: T,
                 size: w,
                 className: "content-emphasis",
                 "data-testid": "search-input-leading-icon"
-            }) : i, [T, i, w]), A = (0, L.useMemo)(() => a ? L.default.createElement(B.Icon, {
+            }) : i, [T, i, w]), A = (0, O.useMemo)(() => a ? O.default.createElement(z.Icon, {
                 name: a,
                 size: w,
                 className: "content-emphasis",
                 "data-testid": "search-input-trailing-icon"
             }) : s, [w, a, s]);
-            return L.default.createElement("div", {
+            return O.default.createElement("div", {
                 "data-testid": "search-input-wrapper",
-                className: (0, W.default)("flex width-full flex-col gap-small", f, {
-                    [ib.disabledOpacity]: h
+                className: (0, Q.default)("flex width-full flex-col gap-small", f, {
+                    [iS.disabledOpacity]: h
                 }),
                 style: g
-            }, r && L.default.createElement("label", {
+            }, r && O.default.createElement("label", {
                 htmlFor: C,
-                className: (0, W.default)("text-title-small content-emphasis")
-            }, r, p && L.default.createElement(L.default.Fragment, null, " ", L.default.createElement("span", {
+                className: (0, Q.default)("text-title-small content-emphasis")
+            }, r, p && O.default.createElement(O.default.Fragment, null, " ", O.default.createElement("span", {
                 className: "content-default"
-            }, "*"))), L.default.createElement("div", {
+            }, "*"))), O.default.createElement("div", {
                 "data-testid": "search-input-container",
-                className: (0, W.default)("foundation-web-input flex items-center width-full", !h && "relative clip group/interactable focus-visible:outline-focus disabled:outline-none", iy.INPUT_STROKE_BY_VARIANT[d], iy.INPUT_BACKGROUND_BY_VARIANT[d], x, iP[w], iC[m][w], iv[w], iS[w], N ? "stroke-system-alert focus-within:stroke-system-alert" : "stroke-contrast-alpha focus-within:stroke-system-emphasis"),
+                className: (0, Q.default)("foundation-web-input flex items-center width-full", !h && "relative clip group/interactable focus-visible:outline-focus disabled:outline-none", iP.INPUT_STROKE_BY_VARIANT[d], iP.INPUT_BACKGROUND_BY_VARIANT[d], x, iw[w], iN[m][w], iC[w], iE[w], N ? "stroke-system-alert focus-within:stroke-system-alert" : "stroke-contrast-alpha focus-within:stroke-system-emphasis"),
                 style: b
-            }, L.default.createElement(ix.StateLayer, {
+            }, O.default.createElement(iv.StateLayer, {
                 className: "pointer-events-none"
-            }), j && L.default.createElement("div", {
+            }), j && O.default.createElement("div", {
                 className: "flex shrink-0 items-center"
-            }, j), L.default.createElement("input", {
+            }, j), O.default.createElement("input", {
                 type: "search",
                 id: C,
                 ref: t,
                 placeholder: v,
-                className: (0, W.default)("width-full min-width-0 padding-none bg-none stroke-none outline-none content-emphasis placeholder:content-muted [appearance:none]", iE[w], "[&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-webkit-search-results-button]:hidden [&::-webkit-search-results-decoration]:hidden"),
+                className: (0, Q.default)("width-full min-width-0 padding-none bg-none stroke-none outline-none content-emphasis placeholder:content-muted [appearance:none]", ik[w], "[&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-webkit-search-results-button]:hidden [&::-webkit-search-results-decoration]:hidden"),
                 "aria-invalid": N,
                 "aria-describedby": k ? E : void 0,
                 required: p,
                 disabled: h,
                 ...S
-            }), A && L.default.createElement("div", {
+            }), A && O.default.createElement("div", {
                 className: "flex shrink-0 items-center",
                 "data-testid": "search-input-trailing-accessory"
-            }, A)), k && L.default.createElement("span", {
+            }, A)), k && O.default.createElement("span", {
                 id: E,
-                className: (0, W.default)("text-caption-small", {
+                className: (0, Q.default)("text-caption-small", {
                     "content-system-alert": N,
                     "content-default": !N
                 })
             }, k))
         });
 
-    function ik(e) {
+    function iA(e) {
         let {
             searchText: t,
             setSearchText: r,
             clearSearch: n
-        } = e, a = (0, er.useTranslations)("Feature.BuyRobux")("Label.Search");
-        return (0, U.jsx)(iN, {
+        } = e, a = (0, ei.useTranslations)("Feature.BuyRobux")("Label.Search");
+        return (0, L.jsx)(ij, {
             size: "Medium",
             shape: "Pill",
             className: "send-robux-search-input",
@@ -7688,24 +7692,24 @@
             "aria-label": a
         })
     }
-    iN.displayName = "SearchInput";
-    var iT = e.i(361261),
-        ij = e.i(177326),
-        iA = e.i(809510);
+    ij.displayName = "SearchInput";
+    var iM = e.i(361261),
+        iR = e.i(177326),
+        iI = e.i(809510);
 
-    function iM(e) {
+    function iU(e) {
         let {
             friend: t,
             thumbnailUrl: r,
             onSelectUser: n,
             isFocused: a = !1
-        } = e, i = (0, er.useTranslations)("Feature.RobloxSubscription"), s = () => {
+        } = e, i = (0, ei.useTranslations)("Feature.RobloxSubscription"), s = () => {
             n({
                 id: t.id
             })
-        }, l = (0, ij.useIsPlusBadgeEnabled)() && !0 === t.isRobloxPlus;
-        return (0, U.jsxs)("div", {
-            className: (0, r8.default)("flex flex-row items-center gap-small padding-small width-full cursor-pointer shrink-0", a ? "bg-surface-300" : "bg-none"),
+        }, l = (0, iR.useIsPlusBadgeEnabled)() && !0 === t.isRobloxPlus;
+        return (0, L.jsxs)("div", {
+            className: (0, r7.default)("flex flex-row items-center gap-small padding-small width-full cursor-pointer shrink-0", a ? "bg-surface-300" : "bg-none"),
             style: {
                 borderRadius: 12
             },
@@ -7717,34 +7721,34 @@
             tabIndex: 0,
             "aria-selected": a,
             "aria-label": t.combinedName ?? "",
-            children: [(0, U.jsx)("div", {
+            children: [(0, L.jsx)("div", {
                 className: "height-800 width-800 radius-circle clip shrink-0 bg-surface-300 flex items-center justify-center",
-                children: r ? (0, U.jsx)("img", {
+                children: r ? (0, L.jsx)("img", {
                     src: r,
                     alt: t.combinedName ?? "",
                     className: "height-full width-full object-cover"
-                }) : (0, U.jsx)(B.Icon, {
+                }) : (0, L.jsx)(z.Icon, {
                     name: "icon-regular-person",
                     size: "Small"
                 })
-            }), (0, U.jsxs)("div", {
+            }), (0, L.jsxs)("div", {
                 className: "flex flex-row items-center gap-xsmall",
-                children: [(0, U.jsx)("span", {
+                children: [(0, L.jsx)("span", {
                     className: "text-body-medium content-emphasis",
                     children: t.combinedName
-                }), t.hasVerifiedBadge && (0, U.jsx)(rl, {
+                }), t.hasVerifiedBadge && (0, L.jsx)(ru, {
                     size: 12
-                }), l && (0, U.jsx)(iT.DisplayNameBadges, {
+                }), l && (0, L.jsx)(iM.DisplayNameBadges, {
                     isRobloxPlus: !0,
                     size: "Small",
-                    plusBadgeAriaLabel: i(iA.PLUS_BADGE_ARIA_LABEL_KEY, void 0, iA.PLUS_BADGE_ARIA_LABEL)
+                    plusBadgeAriaLabel: i(iI.PLUS_BADGE_ARIA_LABEL_KEY, void 0, iI.PLUS_BADGE_ARIA_LABEL)
                 })]
             })]
         })
     }
-    var iR = e.i(992228);
+    var i_ = e.i(992228);
 
-    function iI(e) {
+    function iF(e) {
         let {
             displayName: t,
             username: r,
@@ -7753,8 +7757,8 @@
             isFocused: i = !1,
             onSelect: s
         } = e, l = r ? `@${r}` : void 0;
-        return (0, U.jsxs)("div", {
-            className: (0, r8.default)("flex flex-row items-center gap-medium padding-x-none send-robux-user-row width-full cursor-pointer shrink-0 radius-medium", i ? "bg-surface-300" : "bg-none", !i && "hover:bg-shift-200"),
+        return (0, L.jsxs)("div", {
+            className: (0, r7.default)("flex flex-row items-center gap-medium padding-x-none send-robux-user-row width-full cursor-pointer shrink-0 radius-medium", i ? "bg-surface-300" : "bg-none", !i && "hover:bg-shift-200"),
             onClick: s,
             onKeyDown: e => {
                 ("Enter" === e.key || " " === e.key) && (e.preventDefault(), s())
@@ -7763,22 +7767,22 @@
             tabIndex: 0,
             "aria-selected": i,
             "aria-label": l ? `${t} ${l}` : t,
-            children: [(0, U.jsx)(iR.Avatar, {
+            children: [(0, L.jsx)(i_.Avatar, {
                 src: n,
                 alt: t,
                 size: "Large",
                 className: "bg-shift-200"
-            }), (0, U.jsxs)("div", {
+            }), (0, L.jsxs)("div", {
                 className: "flex flex-col min-width-0 width-full padding-y-xsmall",
                 "data-testid": "user-row-text",
-                children: [(0, U.jsxs)("span", {
+                children: [(0, L.jsxs)("span", {
                     className: "inline-flex items-center gap-xsmall content-emphasis min-width-0 width-full clip",
                     "data-testid": "user-row-name",
-                    children: [(0, U.jsx)("span", {
+                    children: [(0, L.jsx)("span", {
                         className: "min-width-0 text-title-medium text-truncate-end text-no-wrap",
                         children: t
                     }), a]
-                }), l && (0, U.jsx)("span", {
+                }), l && (0, L.jsx)("span", {
                     className: "text-body-medium content-default text-truncate-end text-no-wrap width-full",
                     children: l
                 })]
@@ -7786,19 +7790,19 @@
         })
     }
 
-    function iU(e) {
+    function iL(e) {
         let {
             friend: t,
             thumbnailUrl: r,
             onSelectUser: n
-        } = e, a = (0, er.useTranslations)("Feature.RobloxSubscription"), i = (0, ij.useIsPlusBadgeEnabled)() && !0 === t.isRobloxPlus, s = [t.hasVerifiedBadge ? (0, U.jsx)(rl, {
+        } = e, a = (0, ei.useTranslations)("Feature.RobloxSubscription"), i = (0, iR.useIsPlusBadgeEnabled)() && !0 === t.isRobloxPlus, s = [t.hasVerifiedBadge ? (0, L.jsx)(ru, {
             size: 12
-        }, "verified") : null, i ? (0, U.jsx)(iT.DisplayNameBadges, {
+        }, "verified") : null, i ? (0, L.jsx)(iM.DisplayNameBadges, {
             isRobloxPlus: !0,
             size: "Small",
-            plusBadgeAriaLabel: a(iA.PLUS_BADGE_ARIA_LABEL_KEY, void 0, iA.PLUS_BADGE_ARIA_LABEL)
+            plusBadgeAriaLabel: a(iI.PLUS_BADGE_ARIA_LABEL_KEY, void 0, iI.PLUS_BADGE_ARIA_LABEL)
         }, "roblox-plus") : null];
-        return (0, U.jsx)(iI, {
+        return (0, L.jsx)(iF, {
             displayName: t.combinedName ?? "",
             thumbnailUrl: r,
             badges: s,
@@ -7810,7 +7814,7 @@
         })
     }
 
-    function i_(e) {
+    function iD(e) {
         let {
             friends: t,
             isLoading: r,
@@ -7820,75 +7824,75 @@
             showEmptyState: s = !0,
             rowVariant: l = "Dropdown",
             useInternalScroll: o = !0
-        } = e, c = (0, er.useTranslations)("Feature.BuyRobux"), u = il(t), d = (0, r8.default)("flex flex-col", o && "overflow-y-auto hide-scrollbar friends-listbox-cap");
-        return s && (n || !r && 0 === t.length) ? (0, U.jsx)("div", {
+        } = e, c = (0, ei.useTranslations)("Feature.BuyRobux"), u = iu(t), d = (0, r7.default)("flex flex-col", o && "overflow-y-auto hide-scrollbar friends-listbox-cap");
+        return s && (n || !r && 0 === t.length) ? (0, L.jsx)("div", {
             className: "flex items-center justify-center padding-medium",
-            children: (0, U.jsx)("span", {
+            children: (0, L.jsx)("span", {
                 className: "text-body-medium content-muted",
                 children: c("EmptyState.NoFriends")
             })
-        }) : r || 0 !== t.length ? r ? (0, U.jsx)("div", {
-            className: (0, r8.default)(d, "gap-small"),
+        }) : r || 0 !== t.length ? r ? (0, L.jsx)("div", {
+            className: (0, r7.default)(d, "gap-small"),
             role: "listbox",
             "aria-label": a,
-            children: (0, U.jsxs)("div", {
+            children: (0, L.jsxs)("div", {
                 className: "flex flex-row items-center gap-small padding-small",
                 "aria-busy": "true",
-                children: [(0, U.jsx)("div", {
-                    className: (0, r8.default)("radius-circle shrink-0", "InlineFilter" === l ? "height-1200 width-1200 bg-shift-200" : "height-800 width-800 bg-surface-300")
-                }), (0, U.jsx)("div", {
+                children: [(0, L.jsx)("div", {
+                    className: (0, r7.default)("radius-circle shrink-0", "InlineFilter" === l ? "height-1200 width-1200 bg-shift-200" : "height-800 width-800 bg-surface-300")
+                }), (0, L.jsx)("div", {
                     className: "height-xsmall width-full bg-surface-300 radius-medium"
                 })]
             })
-        }) : (0, U.jsx)("div", {
+        }) : (0, L.jsx)("div", {
             className: d,
             role: "listbox",
             "aria-label": a,
-            children: t.map(e => "InlineFilter" === l ? (0, U.jsx)(iU, {
+            children: t.map(e => "InlineFilter" === l ? (0, L.jsx)(iL, {
                 friend: e,
                 thumbnailUrl: u[e.id],
                 onSelectUser: i
-            }, e.id) : (0, U.jsx)(iM, {
+            }, e.id) : (0, L.jsx)(iU, {
                 friend: e,
                 thumbnailUrl: u[e.id],
                 onSelectUser: i
             }, e.id))
         }) : null
     }
-    var iF = e.i(888104);
+    var iB = e.i(888104);
     e.i(350223);
-    var iL = e.i(874296),
-        iD = e.i(646424),
-        iB = e.i(587541);
-    let iO = iL.object({
-            profileDetails: iL.nullish(iL.array(iL.looseObject({
-                userId: iL.number(),
-                hasRobloxSubscription: iL.nullish(iL.boolean())
+    var iO = e.i(874296),
+        iG = e.i(646424),
+        iz = e.i(587541);
+    let iV = iO.object({
+            profileDetails: iO.nullish(iO.array(iO.looseObject({
+                userId: iO.number(),
+                hasRobloxSubscription: iO.nullish(iO.boolean())
             })))
         }),
-        iG = async e => {
+        iW = async e => {
             let t = [...new Set(e)];
             if (0 === t.length) return {};
-            let r = iB.Url.parse(ei.default.apiGatewayUrl).getOrThrow().withPath("/user-profile-api/v1/user/profiles/get-profiles"),
-                n = await iD.post(r, {
+            let r = iz.Url.parse(eo.default.apiGatewayUrl).getOrThrow().withPath("/user-profile-api/v1/user/profiles/get-profiles"),
+                n = await iG.post(r, {
                     userIds: t,
-                    fields: [iA.PLUS_PROFILE_FIELD]
-                }, iO, {
+                    fields: [iI.PLUS_PROFILE_FIELD]
+                }, iV, {
                     credentials: "include",
                     headers: {
                         Accept: "application/json"
                     },
-                    retry: iD.defaultBrowserRetryDelay
+                    retry: iG.defaultBrowserRetryDelay
                 }),
                 a = {};
             for (let e of n.getOrThrow().profileDetails ?? []) a[e.userId] = !0 === e.hasRobloxSubscription;
             return a
-        }, iz = new Map, iV = !1, iW = async () => {
-            let e = iz;
-            if (iz = new Map, iV = !1, 0 === e.size) return;
+        }, iK = new Map, iH = !1, iQ = async () => {
+            let e = iK;
+            if (iK = new Map, iH = !1, 0 === e.size) return;
             let t = [...e.keys()];
             try {
-                let r = await iG(t);
+                let r = await iW(t);
                 for (let n of t)
                     for (let {
                             resolve: t
@@ -7903,29 +7907,29 @@
             }
         };
 
-    function iK(e) {
+    function i$(e) {
         var t;
         let r, n, a, i, s, {
                 users: l,
                 onSelectUser: o,
                 hasSectionAbove: c = !1
             } = e,
-            u = (0, er.useTranslations)("Feature.RobloxSubscription"),
-            d = (0, er.useTranslations)("Feature.BuyRobux"),
-            m = u(iA.PLUS_BADGE_ARIA_LABEL_KEY),
-            p = il(l),
+            u = (0, ei.useTranslations)("Feature.RobloxSubscription"),
+            d = (0, ei.useTranslations)("Feature.BuyRobux"),
+            m = u(iI.PLUS_BADGE_ARIA_LABEL_KEY),
+            p = iu(l),
             {
                 data: h
-            } = (t = (0, L.useMemo)(() => l.map(e => e.contentId), [l]), r = (0, ij.useIsPlusBadgeEnabled)(), n = (0, L.useMemo)(() => [...new Set(t)].sort((e, t) => e - t), [t]), a = (0, iF.useQueries)({
+            } = (t = (0, O.useMemo)(() => l.map(e => e.contentId), [l]), r = (0, iR.useIsPlusBadgeEnabled)(), n = (0, O.useMemo)(() => [...new Set(t)].sort((e, t) => e - t), [t]), a = (0, iB.useQueries)({
                 queries: n.map(e => ({
                     queryKey: ["identity-badges/plusStatus/byUser", e],
                     queryFn: () => new Promise((t, r) => {
-                        let n = iz.get(e) ?? [];
+                        let n = iK.get(e) ?? [];
                         n.push({
                             resolve: t,
                             reject: r
-                        }), iz.set(e, n), iV || (iV = !0, queueMicrotask(() => {
-                            iW().catch(() => void 0)
+                        }), iK.set(e, n), iH || (iH = !0, queueMicrotask(() => {
+                            iQ().catch(() => void 0)
                         }))
                     }),
                     enabled: r,
@@ -7937,17 +7941,17 @@
                 data: i,
                 isLoading: s
             }),
-            f = (0, L.useCallback)(e => {
-                ey("UserSearchUserSelected"), o(e)
+            f = (0, O.useCallback)(e => {
+                eP("UserSearchUserSelected"), o(e)
             }, [o]);
         if (0 === l.length) return null;
         let g = d("Label.PeopleWithCount", {
             count: l.length
         });
-        return (0, U.jsxs)("div", {
-            className: (0, r8.default)("flex flex-col", c && "padding-top-large"),
+        return (0, L.jsxs)("div", {
+            className: (0, r7.default)("flex flex-col", c && "padding-top-large"),
             "data-testid": "people-search-results",
-            children: [(0, U.jsx)("h2", {
+            children: [(0, L.jsx)("h2", {
                 className: "text-title-large content-emphasis bg-surface-100 send-robux-section-heading",
                 style: {
                     position: "sticky",
@@ -7955,18 +7959,18 @@
                     zIndex: 1
                 },
                 children: g
-            }), (0, U.jsx)("div", {
+            }), (0, L.jsx)("div", {
                 role: "listbox",
                 "aria-label": g,
                 children: l.map(e => {
-                    let t = [e.hasVerifiedBadge ? (0, U.jsx)(rl, {
+                    let t = [e.hasVerifiedBadge ? (0, L.jsx)(ru, {
                         size: 12
-                    }, "verified") : null, !0 === h[e.contentId] ? (0, U.jsx)(iT.DisplayNameBadges, {
+                    }, "verified") : null, !0 === h[e.contentId] ? (0, L.jsx)(iM.DisplayNameBadges, {
                         isRobloxPlus: !0,
                         size: "Small",
                         plusBadgeAriaLabel: m
                     }, "roblox-plus") : null];
-                    return (0, U.jsx)(iI, {
+                    return (0, L.jsx)(iF, {
                         displayName: e.displayName,
                         username: e.username,
                         thumbnailUrl: p[e.contentId],
@@ -7979,16 +7983,16 @@
             })]
         })
     }
-    let iH = e => e.trim().toLowerCase().replace(/\s+/g, "");
+    let iq = e => e.trim().toLowerCase().replace(/\s+/g, "");
 
-    function iQ(e) {
+    function iY(e) {
         let {
             friends: t,
             isLoading: r,
             error: n,
             isLoggedIn: a,
             onSelectUser: i
-        } = e, s = (0, er.useTranslations)("Feature.BuyRobux"), l = (0, ea.getCurrentUser)(), o = void 0 === l ? void 0 : (0, ea.userIdToNumber)(l.id), {
+        } = e, s = (0, ei.useTranslations)("Feature.BuyRobux"), l = (0, el.getCurrentUser)(), o = void 0 === l ? void 0 : (0, el.userIdToNumber)(l.id), {
             searchText: c,
             setSearchText: u,
             users: d,
@@ -7997,34 +8001,34 @@
         } = function() {
             let {
                 maxResults: e = 3,
-                excludedUserIds: t = ig,
+                excludedUserIds: t = iy,
                 invalidateRequestOnClear: r = !1
-            } = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}, [n, a] = (0, L.useState)(""), i = (0, nv.useDebounce)(n, 500), [s, l] = (0, L.useState)([]), [o, c] = (0, L.useState)(!1), u = (0, L.useRef)(""), d = (0, L.useMemo)(() => (0, ip.generateRandomUuid)(), []);
-            (0, L.useEffect)(() => {
+            } = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}, [n, a] = (0, O.useState)(""), i = (0, nC.useDebounce)(n, 500), [s, l] = (0, O.useState)([]), [o, c] = (0, O.useState)(!1), u = (0, O.useRef)(""), d = (0, O.useMemo)(() => (0, ix.generateRandomUuid)(), []);
+            (0, O.useEffect)(() => {
                 n !== i && c(!0)
             }, [n, i]);
-            let m = (0, L.useCallback)(() => {
+            let m = (0, O.useCallback)(() => {
                     r && (u.current = ""), a(""), l([])
                 }, [r]),
-                p = (0, L.useCallback)(async n => {
+                p = (0, O.useCallback)(async n => {
                     let a = n.trim();
                     if (a.length < 3) {
                         r && (u.current = ""), l([]), c(!1);
                         return
                     }
-                    let i = (0, ip.generateRandomUuid)();
+                    let i = (0, ix.generateRandomUuid)();
                     u.current = i;
                     try {
-                        c(!0), ey("UserSearchStarted");
-                        let r = await ih(a, d);
+                        c(!0), eP("UserSearchStarted");
+                        let r = await ib(a, d);
                         if (u.current !== i) return;
                         let n = r?.searchResults[0]?.contents.filter(e => !t.includes(e.contentId)).slice(0, e) ?? [];
-                        l(n), void 0 !== r && 0 === n.length && ey("UserSearchNoResults")
+                        l(n), void 0 !== r && 0 === n.length && eP("UserSearchNoResults")
                     } finally {
                         u.current === i && c(!1)
                     }
                 }, [t, r, e, d]);
-            return (0, L.useEffect)(() => {
+            return (0, O.useEffect)(() => {
                 p(i)
             }, [i, p]), {
                 searchText: n,
@@ -8035,9 +8039,9 @@
             }
         }({
             maxResults: 25,
-            excludedUserIds: (0, L.useMemo)(() => void 0 !== o && o > 0 ? [o] : [], [o]),
+            excludedUserIds: (0, O.useMemo)(() => void 0 !== o && o > 0 ? [o] : [], [o]),
             invalidateRequestOnClear: !0
-        }), h = iH(c), f = h.length > 0, g = (0, L.useMemo)(() => new Set(m ? [] : d.map(e => e.contentId)), [m, d]), x = (0, L.useMemo)(() => f ? t.filter(e => iH(e.combinedName ?? "").includes(h) || g.has(e.id)) : t, [t, f, h, g]), b = (0, L.useMemo)(() => new Set(t.map(e => e.id)), [t]), y = (0, L.useMemo)(() => d.filter(e => !b.has(e.contentId)), [b, d]), v = (0, L.useCallback)(e => {
+        }), h = iq(c), f = h.length > 0, g = (0, O.useMemo)(() => new Set(m ? [] : d.map(e => e.contentId)), [m, d]), x = (0, O.useMemo)(() => f ? t.filter(e => iq(e.combinedName ?? "").includes(h) || g.has(e.id)) : t, [t, f, h, g]), b = (0, O.useMemo)(() => new Set(t.map(e => e.id)), [t]), y = (0, O.useMemo)(() => d.filter(e => !b.has(e.contentId)), [b, d]), v = (0, O.useCallback)(e => {
             i({
                 userId: e.contentId,
                 context: "search"
@@ -8045,23 +8049,23 @@
         }, [i]), S = {
             count: x.length
         }, P = a ? s("Label.MyFriendsWithCount", S) : "", C = a && (r || x.length > 0), E = h.length >= 3 && !m && !r && 0 === x.length && 0 === y.length;
-        return (0, U.jsxs)(L.default.Fragment, {
-            children: [(0, U.jsx)("div", {
+        return (0, L.jsxs)(O.default.Fragment, {
+            children: [(0, L.jsx)("div", {
                 className: "send-robux-search-row shrink-0 bg-surface-100 padding-x-xlarge padding-top-xsmall padding-bottom-large",
                 "data-testid": "send-robux-search-row",
-                children: (0, U.jsx)(ik, {
+                children: (0, L.jsx)(iA, {
                     searchText: c,
                     setSearchText: u,
                     clearSearch: p
                 })
-            }), (0, U.jsx)(as.SheetBody, {
+            }), (0, L.jsx)(ac.SheetBody, {
                 className: "hide-scrollbar clip-x send-robux-sheet-body-inset",
-                children: (0, U.jsxs)("div", {
+                children: (0, L.jsxs)("div", {
                     className: "flex flex-col padding-bottom-large",
-                    children: [C && (0, U.jsxs)("div", {
+                    children: [C && (0, L.jsxs)("div", {
                         className: "flex flex-col",
                         "data-testid": "send-robux-friends-section",
-                        children: [(0, U.jsx)("h2", {
+                        children: [(0, L.jsx)("h2", {
                             className: "text-title-large content-emphasis bg-surface-100 send-robux-section-heading",
                             style: {
                                 position: "sticky",
@@ -8069,7 +8073,7 @@
                                 zIndex: 1
                             },
                             children: P
-                        }), (0, U.jsx)(i_, {
+                        }), (0, L.jsx)(iD, {
                             friends: x,
                             isLoading: r,
                             error: n,
@@ -8084,15 +8088,15 @@
                                 })
                             }
                         })]
-                    }), !m && f && (0, U.jsx)(iK, {
+                    }), !m && f && (0, L.jsx)(i$, {
                         users: y,
                         onSelectUser: v,
                         hasSectionAbove: C
-                    }), E && (0, U.jsx)("div", {
+                    }), E && (0, L.jsx)("div", {
                         className: "flex items-center justify-center padding-medium",
                         role: "status",
                         "aria-live": "polite",
-                        children: (0, U.jsx)("span", {
+                        children: (0, L.jsx)("span", {
                             className: "text-body-medium content-muted",
                             children: s("Label.NoResultsFound")
                         })
@@ -8101,19 +8105,19 @@
             })]
         })
     }
-    var i$ = e.i(10224);
-    let iq = async e => {
+    var iX = e.i(10224);
+    let iJ = async e => {
         let t = {
-                url: `${ei.default.friendsApi}/v1/users/${e}/friends/online`,
+                url: `${eo.default.friendsApi}/v1/users/${e}/friends/online`,
                 retryable: !0,
                 withCredentials: !0
             },
             {
                 data: r
-            } = await i$.get(t);
+            } = await iX.get(t);
         return r
-    }, iY = async (e, t) => {
-        let r = `${ei.default.friendsApi}/v1/users/${e}/friends/find`,
+    }, iZ = async (e, t) => {
+        let r = `${eo.default.friendsApi}/v1/users/${e}/friends/find`,
             n = {
                 url: t ? `${r}?userSort=1` : r,
                 retryable: !0,
@@ -8121,42 +8125,42 @@
             },
             {
                 data: a
-            } = await i$.get(n);
+            } = await iX.get(n);
         return a
-    }, iX = async e => {
+    }, i0 = async e => {
         let t = {
-                url: `${ei.default.apiGatewayUrl}/user-profile-api/v1/user/profiles/get-profiles`,
+                url: `${eo.default.apiGatewayUrl}/user-profile-api/v1/user/profiles/get-profiles`,
                 retryable: !0,
                 withCredentials: !0
             },
             {
                 data: r
-            } = await i$.post(t, {
+            } = await iX.post(t, {
                 userIds: e,
                 fields: ["names.combinedName", "isVerified", "hasRobloxSubscription"]
             });
         return r
-    }, iJ = async (e, t) => {
+    }, i1 = async (e, t) => {
         if (!t) return [];
         try {
             let {
                 data: t
-            } = await iq(e);
+            } = await iJ(e);
             return t
         } catch (e) {
             return console.error("Error fetching online friends:", e), []
         }
-    }, iZ = async (e, t) => {
+    }, i2 = async (e, t) => {
         try {
             let {
                 PageItems: r
-            } = await iY(e, t);
+            } = await iZ(e, t);
             return r
         } catch (e) {
             return console.error("Error fetching friends:", e), []
         }
-    }, i0 = async (e, t) => {
-        let [r, n] = await Promise.all([iJ(e, t), iZ(e, t)]);
+    }, i3 = async (e, t) => {
+        let [r, n] = await Promise.all([i1(e, t), i2(e, t)]);
         r.sort((e, t) => t.sortScore - e.sortScore);
         let a = new Map;
         for (let e of r) a.set(e.id, e.userPresence);
@@ -8164,7 +8168,7 @@
             s = n.filter(e => !i.includes(e.id)).map(e => e.id),
             l = [...i, ...s];
         if (0 === l.length) return [];
-        let o = new Map((await iX(l)).profileDetails.map(e => [e.userId, e])),
+        let o = new Map((await i0(l)).profileDetails.map(e => [e.userId, e])),
             c = [];
         return l.forEach(e => {
             let t = a.has(e),
@@ -8187,56 +8191,56 @@
         }), c
     };
 
-    function i1() {
+    function i5() {
         let {
             robuxBalance: e
-        } = (0, L.useContext)(ec);
-        return null == e ? null : (0, U.jsxs)("div", {
+        } = (0, O.useContext)(em);
+        return null == e ? null : (0, L.jsxs)("div", {
             className: "flex flex-row items-center gap-xsmall",
-            children: [(0, U.jsx)(B.Icon, {
+            children: [(0, L.jsx)(z.Icon, {
                 name: "icon-regular-robux",
                 size: "Small"
-            }), (0, U.jsx)("span", {
+            }), (0, L.jsx)("span", {
                 className: "text-label-medium content-emphasis",
-                children: (0, tM.formatNumber)(e)
+                children: (0, tU.formatNumber)(e)
             })]
         })
     }
 
-    function i2() {
-        let e = (0, er.useTranslations)("Feature.BuyRobux"),
+    function i4() {
+        let e = (0, ei.useTranslations)("Feature.BuyRobux"),
             {
                 trackTransferSendUserSelected: t
-            } = (0, L.useContext)(eR),
+            } = (0, O.useContext)(e_),
             {
                 deviceMeta: r
-            } = (0, L.useContext)(ec),
+            } = (0, O.useContext)(em),
             {
                 friends: n,
                 isLoading: a,
                 error: i,
                 isLoggedIn: s
             } = function() {
-                let [e, t] = (0, L.useState)([]), [r, n] = (0, L.useState)(!0), [a, i] = (0, L.useState)(null), s = (0, ea.getCurrentUser)()?.id, l = void 0 !== s;
-                return (0, L.useEffect)(() => {
+                let [e, t] = (0, O.useState)([]), [r, n] = (0, O.useState)(!0), [a, i] = (0, O.useState)(null), s = (0, el.getCurrentUser)()?.id, l = void 0 !== s;
+                return (0, O.useEffect)(() => {
                     if (void 0 === s) return void n(!1);
                     let e = {
                         cancelled: !1
                     };
                     return (async () => {
-                        ey("GetMyFriends_API", {
+                        eP("GetMyFriends_API", {
                             status: "Throughput"
                         });
                         try {
-                            let r = await i0((0, ea.userIdToNumber)(s), !0);
-                            ey("GetMyFriends_API", {
+                            let r = await i3((0, el.userIdToNumber)(s), !0);
+                            eP("GetMyFriends_API", {
                                 status: "200"
                             }), e.cancelled || t(r)
                         } catch (r) {
                             let t = r instanceof Error ? r : Error(String(r));
-                            ((0, eh.captureException)(t), "object" == typeof r && null !== r && ("response" in r || "status" in r)) ? ey("GetMyFriends_API", {
+                            ((0, ex.captureException)(t), "object" == typeof r && null !== r && ("response" in r || "status" in r)) ? eP("GetMyFriends_API", {
                                 status: (r.response?.status ?? r.status)?.toString() ?? "UnknownError"
-                            }): ey("GetMyFriends_API", {
+                            }): eP("GetMyFriends_API", {
                                 status: "UnknownError"
                             }), e.cancelled || i(t)
                         } finally {
@@ -8252,33 +8256,33 @@
                     isLoggedIn: l
                 }
             }(),
-            l = (0, L.useCallback)(e => {
+            l = (0, O.useCallback)(e => {
                 let {
                     userId: n,
                     context: a
                 } = e;
-                t(a), ey("SendTransferDeepLink"), a7(ie({
+                t(a), eP("SendTransferDeepLink"), ir(ia({
                     direction: "send",
                     userid: String(n),
                     transferorigination: "buyRobux"
                 }), r)
             }, [r, t]);
-        return (0, U.jsxs)(as.SheetContent, {
+        return (0, L.jsxs)(ac.SheetContent, {
             centerSheetSize: "Medium",
             closeLabel: "Close",
             largeScreenVariant: "center",
             mobilePortraitClassName: "![height:92vh] ![max-height:92vh] ![padding-bottom:env(safe-area-inset-bottom)]",
-            children: [(0, U.jsx)(as.SheetTitle, {
+            children: [(0, L.jsx)(ac.SheetTitle, {
                 className: "relative bg-surface-100 shrink-0 [z-index:6] ![padding-top:11px]",
-                utilities: (0, U.jsx)(i1, {}),
-                children: (0, U.jsxs)("div", {
+                utilities: (0, L.jsx)(i5, {}),
+                children: (0, L.jsxs)("div", {
                     className: "flex flex-row items-center gap-xsmall",
-                    children: [(0, U.jsx)(B.Icon, {
+                    children: [(0, L.jsx)(z.Icon, {
                         name: "icon-regular-roblox-plus",
                         size: "Large"
                     }), e("Heading.SendRobux")]
                 })
-            }), (0, U.jsx)(iQ, {
+            }), (0, L.jsx)(iY, {
                 friends: n,
                 isLoading: a,
                 error: i,
@@ -8288,54 +8292,54 @@
         })
     }
 
-    function i3(e) {
+    function i8(e) {
         let {
             translationKey: t,
             className: r,
             size: n = "Medium"
         } = e, {
             translateFullKey: a
-        } = (0, er.useFullKeyTranslations)(), [i, s] = (0, L.useState)(!1), {
+        } = (0, ei.useFullKeyTranslations)(), [i, s] = (0, O.useState)(!1), {
             trackTransferSendImpression: l,
             trackTransferSendSheetView: o
-        } = (0, L.useContext)(eR), c = !!(0, ea.getCurrentUser)()?.id, u = (0, L.useCallback)(e => {
+        } = (0, O.useContext)(e_), c = !!(0, el.getCurrentUser)()?.id, u = (0, O.useCallback)(e => {
             e && o(), s(e)
         }, [o]);
-        (0, L.useEffect)(() => {
+        (0, O.useEffect)(() => {
             l()
         }, [l]);
-        let d = (0, L.useCallback)(e => {
-                eS("SendRobuxButtonReactCrash", null, e)
+        let d = (0, O.useCallback)(e => {
+                eE("SendRobuxButtonReactCrash", null, e)
             }, []),
-            m = (0, L.useCallback)(() => {
+            m = (0, O.useCallback)(() => {
                 if (!c) {
-                    if (void 0 === J.window) return;
-                    let e = `${J.window.location.pathname}${J.window.location.search}`;
-                    J.window.location.href = `/login?ReturnUrl=${encodeURIComponent(e)}`;
+                    if (void 0 === et.window) return;
+                    let e = `${et.window.location.pathname}${et.window.location.search}`;
+                    et.window.location.href = `/login?ReturnUrl=${encodeURIComponent(e)}`;
                     return
                 }
                 u(!0)
             }, [c, u]);
-        return (0, U.jsxs)(tf, {
+        return (0, L.jsxs)(tb, {
             onError: d,
-            children: [(0, U.jsx)(O.Button, {
+            children: [(0, L.jsx)(V.Button, {
                 className: r,
                 icon: "icon-regular-arrow-up-from-line",
                 size: n,
                 variant: "Standard",
                 onClick: m,
                 children: a(t)
-            }), (0, U.jsx)(as.SheetRoot, {
+            }), (0, L.jsx)(ac.SheetRoot, {
                 open: i,
                 onOpenChange: u,
-                children: (0, U.jsx)(i2, {})
+                children: (0, L.jsx)(i4, {})
             })]
         })
     }
-    let i5 = "sticky medium:static top-[env(safe-area-inset-top)] medium:top-[auto] margin-top-[env(safe-area-inset-top)] [z-index:10] flex flex-col self-stretch medium:self-end medium:margin-top-[16px] medium:margin-right-[16px]",
-        i4 = "flex flex-col gap-large bg-surface-100 padding-y-medium padding-x-large small:padding-x-xlarge self-stretch";
+    let i6 = "sticky medium:static top-[env(safe-area-inset-top)] medium:top-[auto] margin-top-[env(safe-area-inset-top)] [z-index:10] flex flex-col self-stretch medium:self-end medium:margin-top-[16px] medium:margin-right-[16px]",
+        i9 = "flex flex-col gap-large bg-surface-100 padding-y-medium padding-x-large small:padding-x-xlarge self-stretch";
 
-    function i8(e) {
+    function i7(e) {
         let {
             transfersSection: t,
             robuxGiftSection: r
@@ -8343,77 +8347,77 @@
             robuxGifting: {
                 openModal: n
             }
-        } = (0, L.useContext)(ty), {
+        } = (0, O.useContext)(tP), {
             trackRobuxGiftClick: a
-        } = (0, L.useContext)(eR), {
+        } = (0, O.useContext)(e_), {
             deviceMeta: i
-        } = (0, L.useContext)(ec), s = eU(i), {
+        } = (0, O.useContext)(em), s = eL(i), {
             translateFullKey: l
-        } = (0, er.useFullKeyTranslations)(), {
+        } = (0, ei.useFullKeyTranslations)(), {
             pendingReferrals: o
         } = (() => {
-            let e = (0, aW.isReferralEnabled)() && null !== (0, aK.userId)() && !(0, aK.isBlackbirdUser)(),
+            let e = (0, aQ.isReferralEnabled)() && null !== (0, a$.userId)() && !(0, a$.isBlackbirdUser)(),
                 {
                     data: t,
                     isLoading: r
-                } = (0, aV.useQuery)({
+                } = (0, aH.useQuery)({
                     queryKey: ["plus-referrals", "pending"],
                     enabled: e,
                     queryFn: async () => {
                         let {
                             referrals: e
-                        } = await aQ("PendingPlusReferrals", () => aH.subscriptionsV2Api.subscriptionsV2ListSubscriptionReferrals({
-                            status: ny.SubscriptionReferralStatus.NUMBER_1,
+                        } = await aY("PendingPlusReferrals", () => aq.subscriptionsV2Api.subscriptionsV2ListSubscriptionReferrals({
+                            status: nP.SubscriptionReferralStatus.NUMBER_1,
                             pageSize: 5
                         }));
                         return e
                     }
                 }),
-                n = t ?? a$;
+                n = t ?? aX;
             return {
                 pendingReferrals: n,
                 latestPendingReferral: n.at(0),
                 isLoading: e && r
             }
-        })(), c = (0, aV.useQuery)({
+        })(), c = (0, aH.useQuery)({
             queryKey: ["guac/app-policy"],
-            queryFn: rO,
+            queryFn: rV,
             staleTime: 1 / 0,
             enabled: s
-        }), u = s && c.data?.ShouldDeeplinkToReferral === !0, d = s && !u ? [] : o, m = t?.transfers, p = r?.robuxGift, h = !!m?.pendingTransfers?.length || d.length > 0, f = h ? (0, U.jsx)("div", {
+        }), u = s && c.data?.ShouldDeeplinkToReferral === !0, d = s && !u ? [] : o, m = t?.transfers, p = r?.robuxGift, h = !!m?.pendingTransfers?.length || d.length > 0, f = h ? (0, L.jsx)("div", {
             className: "flex padding-y-medium padding-x-medium medium:padding-x-large self-stretch radius-medium justify-center bg-shift-100 stroke-standard stroke-default",
-            children: (0, U.jsx)(id, {
+            children: (0, L.jsx)(ih, {
                 transfers: m,
                 pendingReferrals: d,
                 shouldDeeplinkToReferral: u
             })
         }) : null;
-        return m ? (0, U.jsx)("div", {
-            ...e$(t),
-            className: i5,
-            children: (0, U.jsxs)("div", {
-                className: (0, r8.default)(i4, {
+        return m ? (0, L.jsx)("div", {
+            ...eX(t),
+            className: i6,
+            children: (0, L.jsxs)("div", {
+                className: (0, r7.default)(i9, {
                     "medium:radius-medium": h,
                     "medium:radius-circle": !h
                 }),
-                children: [(0, U.jsxs)("div", {
-                    className: (0, r8.default)("flex flex-row items-center gap-large medium:padding-left-none justify-between medium:justify-end", {
+                children: [(0, L.jsxs)("div", {
+                    className: (0, r7.default)("flex flex-row items-center gap-large medium:padding-left-none justify-between medium:justify-end", {
                         "padding-left-[58px]": s
                     }),
-                    children: [(0, U.jsx)("div", {
+                    children: [(0, L.jsx)("div", {
                         className: "flex flex-row justify-center items-center gap-xsmall medium:padding-left-none",
-                        children: (0, U.jsx)(im, {
+                        children: (0, L.jsx)(ig, {
                             iconSize: "Large",
                             textClassName: "text-title-large [font-size:var(--font-size-500)] medium:[font-size:var(--font-size-600)]"
                         })
-                    }), (0, U.jsxs)("div", {
+                    }), (0, L.jsxs)("div", {
                         className: "flex flex-row gap-small",
-                        children: [(0, U.jsx)(i3, {
+                        children: [(0, L.jsx)(i8, {
                             translationKey: m.sendButtonTextTranslationKey,
                             className: "text-label-medium content-action-standard shrink-0 [padding-right:12px]",
                             size: "Small"
-                        }), p && (0, U.jsx)(O.Button, {
-                            ...e$(r),
+                        }), p && (0, L.jsx)(V.Button, {
+                            ...eX(r),
                             className: "text-label-medium content-action-standard shrink-0 [padding-right:12px]",
                             icon: "icon-regular-arrow-down-to-line",
                             size: "Small",
@@ -8426,45 +8430,45 @@
                     })]
                 }), f]
             })
-        }) : f ? (0, U.jsx)("div", {
-            className: i5,
-            children: (0, U.jsx)("div", {
-                className: (0, r8.default)(i4, "medium:radius-medium"),
+        }) : f ? (0, L.jsx)("div", {
+            className: i6,
+            children: (0, L.jsx)("div", {
+                className: (0, r7.default)(i9, "medium:radius-medium"),
                 children: f
             })
         }) : null
     }
 
-    function i6(e) {
+    function se(e) {
         let {
             isPrimary: t,
             sectionBase: r,
             redirectOptions: n
         } = e, {
             translateFullKey: a
-        } = (0, er.useFullKeyTranslations)(), {
+        } = (0, ei.useFullKeyTranslations)(), {
             purchaseProduct: i
-        } = (0, L.useContext)(rC), {
+        } = (0, O.useContext)(rN), {
             atLeastOneProductHasBonusAmount: s,
             redirect: l
-        } = (0, L.useContext)(ec), o = np(n.promotionExpirationTimestampMs), c = (0, L.useMemo)(() => ni(l?.url ?? ""), [l?.url]);
-        return (0, U.jsxs)(r6, {
-            ...e$(r),
-            children: [(0, U.jsxs)("div", {
+        } = (0, O.useContext)(em), o = ng(n.promotionExpirationTimestampMs), c = (0, O.useMemo)(() => no(l?.url ?? ""), [l?.url]);
+        return (0, L.jsxs)(ne, {
+            ...eX(r),
+            children: [(0, L.jsxs)("div", {
                 className: "flex flex-col gap-xsmall self-stretch",
-                children: [(0, U.jsxs)("div", {
+                children: [(0, L.jsxs)("div", {
                     className: "flex flex-row justify-between items-center self-stretch",
-                    children: [(0, U.jsx)(r9, {
+                    children: [(0, L.jsx)(nt, {
                         children: a(s ? r.sectionHeaderTranslationKey : n.titleTranslationKey)
-                    }), o.success && (0, U.jsx)(nm, {
+                    }), o.success && (0, L.jsx)(nf, {
                         daysLeft: o.value
                     })]
-                }), n.bodyTranslationKey && (0, U.jsx)(r7, {
+                }), n.bodyTranslationKey && (0, L.jsx)(nr, {
                     children: a(n.bodyTranslationKey)
                 })]
-            }), (0, U.jsx)(ne, {
+            }), (0, L.jsx)(nn, {
                 isPrimary: t,
-                children: (0, U.jsx)(na, {
+                children: (0, L.jsx)(nl, {
                     onProductClick: (e, t) => {
                         i({
                             product: e,
@@ -8481,7 +8485,7 @@
             })]
         })
     }
-    let i9 = {
+    let st = {
             "1:1": "aspect-1-1",
             "5:4": "aspect-5-4",
             "4:5": "aspect-4-5",
@@ -8489,7 +8493,7 @@
             "16:9": "aspect-16-9",
             "2:1": "aspect-2-1"
         },
-        i7 = (0, L.forwardRef)((e, t) => {
+        sr = (0, O.forwardRef)((e, t) => {
             let {
                 className: r,
                 aspectRatio: n = "1:1",
@@ -8497,17 +8501,17 @@
                 containerClassName: i,
                 ...s
             } = e;
-            return L.default.createElement("div", {
-                className: (0, W.default)("foundation-web-media clip", i9[n], i)
-            }, L.default.createElement("img", {
+            return O.default.createElement("div", {
+                className: (0, Q.default)("foundation-web-media clip", st[n], i)
+            }, O.default.createElement("img", {
                 ref: t,
-                className: (0, W.default)("foundation-web-media-image", r),
+                className: (0, Q.default)("foundation-web-media-image", r),
                 alt: a,
                 ...s
             }))
         });
 
-    function se(e) {
+    function sn(e) {
         let {
             product: t,
             redirectUrl: r,
@@ -8519,14 +8523,14 @@
             role: "button",
             target: "_blank"
         } : {};
-        return (0, U.jsxs)("div", {
+        return (0, L.jsxs)("div", {
             className: "self-stretch flex flex-row justify-between items-center gap-small",
             ...{
-                [eW]: t.productId
+                [eQ]: t.productId
             },
-            children: [(0, U.jsx)("div", {
+            children: [(0, L.jsx)("div", {
                 className: "min-width-0 flex-1",
-                children: (0, U.jsx)(nr, {
+                children: (0, L.jsx)(ni, {
                     amount: t.robuxAmount,
                     nonPromotionalAmount: t.nonPromotionalPlatformRobuxAmount,
                     bonusRobuxAmount: t.bonusRobuxAmount,
@@ -8535,25 +8539,25 @@
                     inlineBadgeIcon: t.inlineBadgeIcon,
                     inlineBadgeTranslationKey: t.inlineBadgeTranslationKey
                 })
-            }), (0, U.jsx)(O.Button, {
+            }), (0, L.jsx)(V.Button, {
                 variant: t.isCallToAction ? "Emphasis" : "Standard",
                 size: "Small",
-                className: (0, r8.default)("min-width-[90px] small:min-width-[120px] medium:min-width-[200px] text-label-medium shrink-0", "small:height-1000 small:padding-x-medium small:text-label-medium small:[&_.icon]:size-[var(--icon-size-medium)] small:[&>span]:gap-small"),
+                className: (0, r7.default)("min-width-[90px] small:min-width-[120px] medium:min-width-[200px] text-label-medium shrink-0", "small:height-1000 small:padding-x-medium small:text-label-medium small:[&_.icon]:size-[var(--icon-size-medium)] small:[&>span]:gap-small"),
                 onClick: e => {
                     n(t, e)
                 },
                 ...a,
                 icon: r ? "icon-regular-arrow-up-right-from-square" : void 0,
-                children: (0, U.jsx)(tH.PriceTag, {
+                children: (0, L.jsx)(tq.PriceTag, {
                     tagClassName: "robux-price-tag",
                     currencyCode: t.price.amount.currencyCode,
-                    amount: Number(tY(t.price.amount))
+                    amount: Number(tZ(t.price.amount))
                 })
             })]
         })
     }
 
-    function st(e) {
+    function sa(e) {
         let {
             item: t,
             products: r,
@@ -8562,51 +8566,51 @@
             onPurchaseClick: i
         } = e, {
             translateFullKey: s
-        } = (0, er.useFullKeyTranslations)(), l = t.displayableBonus.collectibleItemMetadata, o = l ? s(l.translationKey, void 0, "Bonus Item") : t.displayableBonus.gamePassMetadata?.gamePassDisplayName ?? "";
-        return (0, U.jsxs)("div", {
+        } = (0, ei.useFullKeyTranslations)(), l = t.displayableBonus.collectibleItemMetadata, o = l ? s(l.translationKey, void 0, "Bonus Item") : t.displayableBonus.gamePassMetadata?.gamePassDisplayName ?? "";
+        return (0, L.jsxs)("div", {
             className: "self-stretch radius-large flex flex-col",
             style: {
                 overflow: "hidden"
             },
-            children: [(0, U.jsxs)("div", {
+            children: [(0, L.jsxs)("div", {
                 className: `relative bg-shift-200 ${n>1?"min-height-[120px]":"min-height-[186px] medium:min-height-[204px]"}`,
-                children: [l?.backgroundImage2dUrl && (0, U.jsx)(i7, {
+                children: [l?.backgroundImage2dUrl && (0, L.jsx)(sr, {
                     aspectRatio: "16:9",
                     src: l.backgroundImage2dUrl,
                     alt: "",
                     containerClassName: "absolute inset-0 width-full height-full",
                     className: "width-full height-full object-cover"
-                }), (0, U.jsx)("div", {
+                }), (0, L.jsx)("div", {
                     className: "absolute inset-0 bg-[rgba(0,0,0,0.4)]"
-                }), (0, U.jsxs)("div", {
-                    className: (0, r8.default)("relative z-10 padding-xlarge flex height-full", 1 === n ? "flex-col items-center justify-end" : "flex-row items-center", {
+                }), (0, L.jsxs)("div", {
+                    className: (0, r7.default)("relative z-10 padding-xlarge flex height-full", 1 === n ? "flex-col items-center justify-end" : "flex-row items-center", {
                         "gap-medium": 1 === n,
                         "gap-xlarge": 1 !== n
                     }),
-                    children: [l?.image2dUrl && (0, U.jsx)("img", {
+                    children: [l?.image2dUrl && (0, L.jsx)("img", {
                         src: l.image2dUrl,
                         alt: o,
-                        className: (0, r8.default)("radius-medium object-contain shrink-0", {
+                        className: (0, r7.default)("radius-medium object-contain shrink-0", {
                             "height-[150px] width-auto max-width-full": 1 === n,
                             "height-[75px] width-auto max-width-full": 1 !== n
                         })
-                    }), (0, U.jsxs)("div", {
+                    }), (0, L.jsxs)("div", {
                         className: `flex flex-col gap-xsmall medium:gap-small ${1===n?"self-start":""}`,
-                        children: [(0, U.jsx)("span", {
+                        children: [(0, L.jsx)("span", {
                             className: "text-title-large medium:text-heading-medium content-emphasis",
                             children: o
-                        }), l?.creatorDisplayName && (0, U.jsxs)("span", {
+                        }), l?.creatorDisplayName && (0, L.jsxs)("span", {
                             className: "text-body-medium content-emphasis flex items-center gap-xsmall",
-                            children: [l.creatorDisplayName, l.creatorIsVerified && (0, U.jsx)(rl, {
+                            children: [l.creatorDisplayName, l.creatorIsVerified && (0, L.jsx)(ru, {
                                 size: 16
                             })]
                         })]
                     })]
                 })]
-            }), (0, U.jsx)("div", {
+            }), (0, L.jsx)("div", {
                 className: "self-stretch flex flex-col gap-xlarge padding-medium medium:padding-xlarge bg-shift-400",
                 "data-testid": "ltb-robux-packages",
-                children: r.map(e => (0, U.jsx)(se, {
+                children: r.map(e => (0, L.jsx)(sn, {
                     product: e,
                     redirectUrl: a,
                     onPurchaseClick: i
@@ -8615,25 +8619,25 @@
         })
     }
 
-    function sr(e) {
+    function si(e) {
         let {
             isPrimary: t,
             sectionBase: r,
             limitedTimeBonus: n
         } = e, {
             purchaseProduct: a
-        } = (0, L.useContext)(rC), {
+        } = (0, O.useContext)(rN), {
             redirect: i
-        } = (0, L.useContext)(ec), {
+        } = (0, O.useContext)(em), {
             translateFullKey: s
-        } = (0, er.useFullKeyTranslations)(), l = (0, L.useMemo)(() => {
+        } = (0, ei.useFullKeyTranslations)(), l = (0, O.useMemo)(() => {
             let e = r.products ?? [];
             return n.limitedTimeBonuses.reduce((t, r) => {
                 let {
                     collectibleItemMetadata: n,
                     gamePassMetadata: a
                 } = r.displayableBonus;
-                if (!n && !a) return ey("BonusItemMissingMetadata", {
+                if (!n && !a) return eP("BonusItemMissingMetadata", {
                     productType: "LimitedTimeBonus"
                 }), t;
                 let i = e.filter(e => r.robuxProductIds.some(t => t === e.productId));
@@ -8642,7 +8646,7 @@
                     products: i
                 }), t
             }, [])
-        }, [n.limitedTimeBonuses, r.products]), o = (0, L.useCallback)((e, t) => {
+        }, [n.limitedTimeBonuses, r.products]), o = (0, O.useCallback)((e, t) => {
             a({
                 product: e,
                 event: t,
@@ -8653,28 +8657,28 @@
             })
         }, [a, n.isRedirect, i]);
         if (0 === l.length) return null;
-        let c = np(n.expirationTimestampMs);
-        return (0, U.jsxs)(r6, {
-            ...e$(r),
-            children: [(0, U.jsxs)("div", {
+        let c = ng(n.expirationTimestampMs);
+        return (0, L.jsxs)(ne, {
+            ...eX(r),
+            children: [(0, L.jsxs)("div", {
                 className: "self-stretch flex flex-row items-center justify-between gap-medium",
                 "data-testid": "ltb-section-header-row",
-                children: [(0, U.jsx)(r9, {
+                children: [(0, L.jsx)(nt, {
                     className: "self-auto min-width-0 flex-1 medium:self-stretch medium:flex-none",
                     children: s(r.sectionHeaderTranslationKey, void 0, "Limited-time avatar items")
-                }), c.success && (0, U.jsx)(nm, {
+                }), c.success && (0, L.jsx)(nf, {
                     daysLeft: c.value
                 })]
-            }), n.bodyTranslationKey && (0, U.jsx)(r7, {
+            }), n.bodyTranslationKey && (0, L.jsx)(nr, {
                 children: s(n.bodyTranslationKey)
-            }), (0, U.jsx)("div", {
+            }), (0, L.jsx)("div", {
                 className: "self-stretch flex flex-col gap-xlarge medium:gap-xxlarge",
                 children: l.map(e => {
                     let {
                         item: t,
                         products: r
                     } = e;
-                    return (0, U.jsx)(st, {
+                    return (0, L.jsx)(sa, {
                         item: t,
                         products: r,
                         totalCards: l.length,
@@ -8686,13 +8690,13 @@
         })
     }
 
-    function sn() {
+    function ss() {
         let {
             buyRobuxPageData: e,
             deviceMeta: t
-        } = (0, L.useContext)(ec), r = eU(t), n = (0, L.useMemo)(() => e.sections.find(e => e.transfers), [e.sections]), a = n?.transfers, i = (0, L.useMemo)(() => e.sections.find(e => e.robuxGift), [e.sections]), s = (0, L.useCallback)(e => {
-            eS("SectionReactCrash", null, e)
-        }, []), l = (0, L.useCallback)((e, t) => {
+        } = (0, O.useContext)(em), r = eL(t), n = (0, O.useMemo)(() => e.sections.find(e => e.transfers), [e.sections]), a = n?.transfers, i = (0, O.useMemo)(() => e.sections.find(e => e.robuxGift), [e.sections]), s = (0, O.useCallback)(e => {
+            eE("SectionReactCrash", null, e)
+        }, []), l = (0, O.useCallback)((e, t) => {
             let r;
             if (t.transfers || null != a && t.robuxGift) return e;
             let n = {
@@ -8710,22 +8714,22 @@
                     subscriptionV2: p,
                     redirect: h
                 } = t;
-            if (h) r = (0, U.jsx)(i6, {
+            if (h) r = (0, L.jsx)(se, {
                 ...n,
                 redirectOptions: h
             });
-            else if (c) r = (0, U.jsx)(nh, {
+            else if (c) r = (0, L.jsx)(nx, {
                 ...n
             });
-            else if (u) r = (0, U.jsx)(nf, {
+            else if (u) r = (0, L.jsx)(nb, {
                 ...n,
                 recommended: u
             });
-            else if (o) r = (0, U.jsx)(nd, {
+            else if (o) r = (0, L.jsx)(nh, {
                 ...n,
                 personalizedBonus: o
             });
-            else if (d) r = (0, U.jsx)(nb, {
+            else if (d) r = (0, L.jsx)(nS, {
                 ...n,
                 robuxGift: d
             });
@@ -8733,56 +8737,56 @@
                 e.benefits?.forEach(t => {
                     t.plusDiscountSubscriptionBenefits && (t.plusDiscountSubscriptionBenefits.periodType = e.periodType)
                 })
-            }), r = (0, U.jsx)(aL, {
+            }), r = (0, L.jsx)(aO, {
                 ...n,
                 subscriptionV2: p
             });
-            else if (i) r = (0, U.jsx)(nx, {
+            else if (i) r = (0, L.jsx)(nv, {
                 ...n,
                 giftCard: i
             });
             else {
                 if (!l) return console.error(`Unknown section type: ${m}`), e;
-                r = (0, U.jsx)(sr, {
+                r = (0, L.jsx)(si, {
                     ...n,
                     limitedTimeBonus: l
                 })
             }
-            return [...e, (0, U.jsx)(tf, {
+            return [...e, (0, L.jsx)(tb, {
                 onError: s,
                 children: r
             }, m)]
-        }, [s, a]), o = (0, L.useMemo)(() => e.sections.reduce(l, []), [e.sections, l]);
-        return (0, U.jsxs)("div", {
+        }, [s, a]), o = (0, O.useMemo)(() => e.sections.reduce(l, []), [e.sections, l]);
+        return (0, L.jsxs)("div", {
             className: "flex flex-col items-center",
-            children: [(0, U.jsx)("div", {
+            children: [(0, L.jsx)("div", {
                 className: "buy-robux-background"
-            }), (0, U.jsx)(i8, {
+            }), (0, L.jsx)(i7, {
                 transfersSection: n,
                 robuxGiftSection: i
-            }), (0, U.jsxs)("div", {
-                className: (0, r8.default)("buy-robux-content padding-x-large small:padding-x-xlarge", {
+            }), (0, L.jsxs)("div", {
+                className: (0, r7.default)("buy-robux-content padding-x-large small:padding-x-xlarge", {
                     "is-in-app": r
                 }),
-                children: [(0, U.jsx)(aB, {
+                children: [(0, L.jsx)(az, {
                     transfers: a
-                }), o, (0, U.jsx)(az, {})]
+                }), o, (0, L.jsx)(aK, {})]
             })]
         })
     }
-    i7.displayName = "Media";
-    let sa = async () => eT(eN.GET, ek.GET_CLIENT_ASSERTION_V2, {
-        url: `${ei.EnvironmentUrls.authApi}/v1/client-assertion/`,
+    sr.displayName = "Media";
+    let sl = async () => eM(ej.GET, eA.GET_CLIENT_ASSERTION_V2, {
+        url: `${eo.EnvironmentUrls.authApi}/v1/client-assertion/`,
         withCredentials: !0
-    }), si = async e => eT(eN.POST, ek.GET_AUTH_TICKET_V2, {
-        url: `${ei.EnvironmentUrls.authApi}/v1/authentication-ticket/`,
+    }), so = async e => eM(ej.POST, eA.GET_AUTH_TICKET_V2, {
+        url: `${eo.EnvironmentUrls.authApi}/v1/authentication-ticket/`,
         withCredentials: !0
     }, {
         clientAssertion: e
-    }, (e, t) => t["rbx-authentication-ticket"]), ss = async () => {
-        let e = await sa();
-        return si(e?.clientAssertion)
-    }, sl = async () => await ss() ?? "", so = `paymentSession-${(0,ea.getCurrentUser)()?.id??"loggedout"}`, sc = e => {
+    }, (e, t) => t["rbx-authentication-ticket"]), sc = async () => {
+        let e = await sl();
+        return so(e?.clientAssertion)
+    }, su = async () => await sc() ?? "", sd = `paymentSession-${(0,el.getCurrentUser)()?.id??"loggedout"}`, sm = e => {
         let t, {
             enhancedBuyRobuxPageData: r,
             urlParams: n,
@@ -8791,22 +8795,22 @@
         ! function() {
             let {
                 urlParams: e
-            } = (0, L.useContext)(ec), [t, r] = (0, L.useMemo)(() => [e.ctx, e.product_id], [e]);
-            (0, L.useEffect)(() => {
-                t ? (0, en.setItem)(eu, t) : (0, en.removeItem)(eu)
-            }, [t]), (0, L.useEffect)(() => {
-                r ? (0, en.setItem)(ed, r) : (0, en.removeItem)(ed)
+            } = (0, O.useContext)(em), [t, r] = (0, O.useMemo)(() => [e.ctx, e.product_id], [e]);
+            (0, O.useEffect)(() => {
+                t ? (0, es.setItem)(ep, t) : (0, es.removeItem)(ep)
+            }, [t]), (0, O.useEffect)(() => {
+                r ? (0, es.setItem)(eh, r) : (0, es.removeItem)(eh)
             }, [r])
         }();
-        let i = et(),
-            s = (0, L.useRef)(!1),
+        let i = ea(),
+            s = (0, O.useRef)(!1),
             l = r.buyRobuxPageData.legalDisclosureTermsUrlPath;
-        (0, L.useEffect)(() => {
-            a.isIosApp && l && !s.current && (s.current = !0, ey("IosPurchaseRestartAlertShown"), D.paymentFlowAnalyticsService.sendUserPurchaseFlowEvent({
-                triggerContext: eG(a),
+        (0, O.useEffect)(() => {
+            a.isIosApp && l && !s.current && (s.current = !0, eP("IosPurchaseRestartAlertShown"), G.paymentFlowAnalyticsService.sendUserPurchaseFlowEvent({
+                triggerContext: eW(a),
                 isMidPurchaseStep: !0,
-                viewName: D.paymentFlowAnalyticsService.ENUM_VIEW_NAME.IOS_PURCHASE_RESTART_ALERT,
-                purchaseEventType: D.paymentFlowAnalyticsService.ENUM_PURCHASE_EVENT_TYPE.VIEW_SHOWN
+                viewName: G.paymentFlowAnalyticsService.ENUM_VIEW_NAME.IOS_PURCHASE_RESTART_ALERT,
+                purchaseEventType: G.paymentFlowAnalyticsService.ENUM_PURCHASE_EVENT_TYPE.VIEW_SHOWN
             }), i.toastService.info(l))
         }, [a, i.toastService, l]);
         let {
@@ -8828,23 +8832,23 @@
             paymentSession: P,
             purchaseFlowId: C
         } = r.buyRobuxPageData;
-        (0, L.useEffect)(() => {
-            P && (0, en.setItem)(so, P)
+        (0, O.useEffect)(() => {
+            P && (0, es.setItem)(sd, P)
         }, [P]);
-        let E = (t = P?.id, (0, L.useCallback)((e, r) => {
+        let E = (t = P?.id, (0, O.useCallback)((e, r) => {
                 let {
                     productId: n,
                     providerProductId: i
                 } = e;
-                return a.isAndroidApp && i ? `${r4}?${r3.UrlSearchParams.new({id:i.toLowerCase(),...void 0!==t?{paymentSessionId:t}:{},recurring:r&&!i.endsWith("onemonth")}).toString()}` : (a.isAmazonApp || a.isUWPApp) && i ? `${r4}?${r3.UrlSearchParams.new({id:i.toLowerCase()}).toString()}` : a.isIosApp && i ? `${r4}?${r3.UrlSearchParams.new({id:i,...void 0!==t?{paymentSessionId:t}:{}}).toString()}` : `/upgrades/paymentmethods?${r3.UrlSearchParams.new({ap:n,page:"RobuxRedesign",...void 0!==t?{paymentSessionId:t}:{}}).toString()}`
+                return a.isAndroidApp && i ? `${r9}?${r8.UrlSearchParams.new({id:i.toLowerCase(),...void 0!==t?{paymentSessionId:t}:{},recurring:r&&!i.endsWith("onemonth")}).toString()}` : (a.isAmazonApp || a.isUWPApp) && i ? `${r9}?${r8.UrlSearchParams.new({id:i.toLowerCase()}).toString()}` : a.isIosApp && i ? `${r9}?${r8.UrlSearchParams.new({id:i,...void 0!==t?{paymentSessionId:t}:{}}).toString()}` : `/upgrades/paymentmethods?${r8.UrlSearchParams.new({ap:n,page:"RobuxRedesign",...void 0!==t?{paymentSessionId:t}:{}}).toString()}`
             }, [a, t])),
             w = function() {
                 let e = arguments.length > 0 && void 0 !== arguments[0] && arguments[0],
-                    [t, r] = (0, L.useState)(void 0);
-                return (0, L.useEffect)(() => {
-                    let e = (0, ea.getCurrentUser)()?.id;
+                    [t, r] = (0, O.useState)(void 0);
+                return (0, O.useEffect)(() => {
+                    let e = (0, el.getCurrentUser)()?.id;
                     void 0 === e ? r(0) : (async e => {
-                        let t = await ej(e);
+                        let t = await eR(e);
                         t ? r(t.robux) : r(null)
                     })(e)
                 }, [e]), t
@@ -8853,46 +8857,46 @@
                 shouldShowFirstTimePurchaseConsent: N,
                 markConsentAcknowledged: k
             } = function(e, t) {
-                let [r, n] = (0, L.useState)();
-                return (0, L.useEffect)(() => {
+                let [r, n] = (0, O.useState)();
+                return (0, O.useEffect)(() => {
                     let r = !1;
-                    return e && "true" !== (0, en.getItem)(el(e)) ? ((async () => {
-                        let a = await es(e, t);
+                    return e && "true" !== (0, es.getItem)(eu(e)) ? ((async () => {
+                        let a = await ec(e, t);
                         r || n(!!a?.shouldShowFirstTimePurchaseConsent)
                     })(), () => {
                         r = !0
                     }) : void n(!1)
                 }, [e, t]), {
                     shouldShowFirstTimePurchaseConsent: r,
-                    markConsentAcknowledged: (0, L.useCallback)(() => {
-                        e && (0, en.setItem)(el(e), "true")
+                    markConsentAcknowledged: (0, O.useCallback)(() => {
+                        e && (0, es.setItem)(eu(e), "true")
                     }, [e])
                 }
-            }((0, ea.getCurrentUser)()?.id, rg),
+            }((0, el.getCurrentUser)()?.id, ry),
             T = function(e) {
                 let {
                     deviceMeta: t,
                     paymentSession: r,
                     isEnabled: n
-                } = e, [a, i] = (0, L.useState)(), [s, l] = (0, L.useState)(rV), [o, c] = (0, L.useState)(!1), u = r?.id, d = (0, L.useCallback)(() => {
-                    ey("MobileRedirectUrlGenerationStarted"), sl().then(i).catch(e => {
-                        ev("MobileRedirectUrlGenerationFailed", null, e)
+                } = e, [a, i] = (0, O.useState)(), [s, l] = (0, O.useState)(rH), [o, c] = (0, O.useState)(!1), u = r?.id, d = (0, O.useCallback)(() => {
+                    eP("MobileRedirectUrlGenerationStarted"), su().then(i).catch(e => {
+                        eC("MobileRedirectUrlGenerationFailed", null, e)
                     })
                 }, []);
-                (0, L.useEffect)(() => {
-                    n && u && (d(), rK.getExperimentBasedPathname(t).then(e => {
+                (0, O.useEffect)(() => {
+                    n && u && (d(), r$.getExperimentBasedPathname(t).then(e => {
                         let {
                             pathname: t,
                             isInExperiment: r
                         } = e;
                         l(t), c(r)
                     }).catch(e => {
-                        ev("LoginRedirectExperimentFetchFailed", null, e)
+                        eC("LoginRedirectExperimentFetchFailed", null, e)
                     }))
                 }, [t, d, n, u]);
-                let m = (0, L.useMemo)(() => {
+                let m = (0, O.useMemo)(() => {
                     if (!a || !u) return "";
-                    let e = (0, ea.getCurrentUser)();
+                    let e = (0, el.getCurrentUser)();
                     return (e => {
                         let {
                             authTicket: t,
@@ -8901,8 +8905,8 @@
                             loginRedirectPathname: a,
                             isInExperiment: i,
                             userId: s
-                        } = e, l = r3.UrlSearchParams.new({
-                            analyticId: D.paymentFlowAnalyticsService.purchaseFlowUuid,
+                        } = e, l = r8.UrlSearchParams.new({
+                            analyticId: G.paymentFlowAnalyticsService.purchaseFlowUuid,
                             at: t,
                             ctx: "redirect",
                             ...i && {
@@ -8919,7 +8923,7 @@
                         returnUrl: "/upgrades/paymentmethods",
                         loginRedirectPathname: s,
                         isInExperiment: o,
-                        userId: void 0 === e ? 0 : (0, ea.userIdToNumber)(e.id)
+                        userId: void 0 === e ? 0 : (0, el.userIdToNumber)(e.id)
                     })
                 }, [a, u, s, o]);
                 if (n && u) return {
@@ -8941,12 +8945,12 @@
                     bonusItemId: t,
                     giftingUrl: r,
                     bonusItemRootPlaceId: n
-                } = e, [a, i] = (0, L.useState)(""), [s, l] = (0, L.useState)(""), [o, c] = (0, L.useState)(""), u = (0, L.useCallback)(async e => {
+                } = e, [a, i] = (0, O.useState)(""), [s, l] = (0, O.useState)(""), [o, c] = (0, O.useState)(""), u = (0, O.useCallback)(async e => {
                     let {
                         bonusItemId: t,
                         giftingUrl: r,
                         bonusItemRootPlaceId: n
-                    } = e, a = [], s = (0, ea.getCurrentUser)()?.id;
+                    } = e, a = [], s = (0, el.getCurrentUser)()?.id;
                     t && a.push({
                         format: "png",
                         requestId: t,
@@ -8966,12 +8970,12 @@
                         targetId: n,
                         type: "GameThumbnail"
                     });
-                    let o = await eM(a);
+                    let o = await eU(a);
                     o?.data.forEach(e => {
-                        e.state === eA.Completed && (e.targetId.toString() === t && l(e.imageUrl), e.targetId.toString() === s && c(e.imageUrl), e.targetId.toString() === n && i(e.imageUrl))
+                        e.state === eI.Completed && (e.targetId.toString() === t && l(e.imageUrl), e.targetId.toString() === s && c(e.imageUrl), e.targetId.toString() === n && i(e.imageUrl))
                     })
                 }, []);
-                return (0, L.useEffect)(() => {
+                return (0, O.useEffect)(() => {
                     (n || t || r) && u({
                         bonusItemId: t,
                         bonusItemRootPlaceId: n,
@@ -8987,7 +8991,7 @@
                 bonusItemRootPlaceId: d,
                 giftingUrl: m
             }),
-            R = (0, L.useMemo)(() => ({
+            R = (0, O.useMemo)(() => ({
                 deviceMeta: a,
                 limitedTimeBonusItem: o,
                 bonusItemBannerImageUrl: j,
@@ -9014,18 +9018,18 @@
                 productBadgeSlotCount: y,
                 atLeastOneProductHasBonusAmount: v
             }), [o, u, j, c, A, S, E, M, m, p, P, h, C, w, f, g, x, n, T, b, N, k, y, v, a]);
-        return (0, U.jsxs)(ec.Provider, {
+        return (0, L.jsxs)(em.Provider, {
             value: R,
-            children: [(0, U.jsx)("div", {
+            children: [(0, L.jsx)("div", {
                 id: "generic-challenge-container",
                 "data-testid": "generic-challenge-container"
-            }), (0, U.jsx)(tr, {
-                children: (0, U.jsx)(r5, {
-                    children: (0, U.jsx)(sn, {})
+            }), (0, L.jsx)(ti, {
+                children: (0, L.jsx)(r6, {
+                    children: (0, L.jsx)(ss, {})
                 })
             })]
         })
-    }, su = new _.QueryClient({
+    }, sp = new D.QueryClient({
         defaultOptions: {
             queries: {
                 retry: !1,
@@ -9034,35 +9038,35 @@
                 refetchOnReconnect: !1
             }
         }
-    }), sd = e => {
+    }), sh = e => {
         let {
             children: t
-        } = e, r = (0, er.useTranslations)("CommonUI.Controls");
-        return (0, U.jsx)(ee, {
+        } = e, r = (0, ei.useTranslations)("CommonUI.Controls");
+        return (0, L.jsx)(en, {
             closeLabel: r("Action.Close"),
             children: t
         })
     };
     e.s(["RobuxRedesign", 0, e => {
-        D.paymentFlowAnalyticsService.setWebStack("nextjs"), (0, L.useEffect)(() => {
-            eC(), rh(), eE()
+        G.paymentFlowAnalyticsService.setWebStack("nextjs"), (0, O.useEffect)(() => {
+            eN(), rx(), ek()
         });
         let {
             purchaseFlowId: t
         } = e.enhancedBuyRobuxPageData.buyRobuxPageData;
-        return t && D.paymentFlowAnalyticsService.setPaymentFlowUuid(t), (0, U.jsx)(ew, {
+        return t && G.paymentFlowAnalyticsService.setPaymentFlowUuid(t), (0, L.jsx)(eT, {
             name: "BuyRobuxPageReactCrash",
-            children: (0, U.jsx)(F.QueryClientProvider, {
-                client: su,
-                children: (0, U.jsx)(sd, {
-                    children: (0, U.jsx)(sc, {
+            children: (0, L.jsx)(B.QueryClientProvider, {
+                client: sp,
+                children: (0, L.jsx)(sh, {
+                    children: (0, L.jsx)(sm, {
                         ...e
                     })
                 })
             })
         })
-    }, "queryClient", 0, su], 518623)
+    }, "queryClient", 0, sp], 518623)
 }]);
 
-//# debugId=a7410b82-096f-ba7e-57ef-871245588d42
-//# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/0e4drnsef.~1s.js.map
+//# debugId=2988ddc9-c97d-aee2-f32a-8e1a9d2f0d4b
+//# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/0v3t51rbth3pr.js.map

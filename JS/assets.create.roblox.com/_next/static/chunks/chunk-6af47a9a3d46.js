@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "6450de13-8a28-4340-71b1-0693d0be0d53")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "dc88dfc0-7dc5-0ec2-3b70-d537002b2a75")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 796701, (e, t, a) => {
@@ -2823,6 +2823,15 @@
             contextType: "static"
         }
     }, {
+        flag: A.s,
+        metadata: {
+            namespace: "monetization",
+            name: "isManagedPricingHolidayFreezeAlertEnabled",
+            defaultValue: !1,
+            valueType: "boolean",
+            contextType: "static"
+        }
+    }, {
         flag: A.$,
         metadata: {
             namespace: "monetization",
@@ -3317,10 +3326,15 @@
         }),
         s = (0, t.e)({
             namespace: "monetization",
+            name: "isManagedPricingHolidayFreezeAlertEnabled",
+            defaultValue: !1
+        }),
+        o = (0, t.e)({
+            namespace: "monetization",
             name: "mockShopItemsExternalEligibility",
             defaultValue: !1
         });
-    e.s(["D", 0, r, "X", 0, i, "d", 0, n, "Y", 0, a, "$", 0, s])
+    e.s(["s", 0, s, "D", 0, r, "X", 0, i, "d", 0, n, "Y", 0, a, "$", 0, o])
 }, 100022, e => {
     "use strict";
     let t = (0, e.i(157700).e)({
@@ -5582,7 +5596,7 @@
             let M = (0, a.useCallback)(() => {
                     r(void 0)
                 }, [r]),
-                D = (0, a.useCallback)(async () => {
+                z = (0, a.useCallback)(async () => {
                     if ((null == l ? void 0 : l.organizationId) && (null == l ? void 0 : l.id)) {
                         V(!0);
                         try {
@@ -5594,7 +5608,7 @@
                         }
                     }
                 }, [l.id, l.organizationId, r, A, u]),
-                z = (0, a.useCallback)(async () => {
+                D = (0, a.useCallback)(async () => {
                     if ((null == l ? void 0 : l.organizationId) && (null == l ? void 0 : l.id)) {
                         V(!0);
                         try {
@@ -5651,14 +5665,14 @@
                                 variant: "outlined",
                                 color: "primary",
                                 size: "small",
-                                onClick: D,
+                                onClick: z,
                                 disabled: O,
                                 children: u("Action.Decline")
                             }), (0, t.jsx)(d.f, {
                                 variant: "contained",
                                 color: "primaryBrand",
                                 size: "small",
-                                onClick: z,
+                                onClick: D,
                                 loading: O,
                                 children: u("Action.Accept")
                             })]
@@ -6447,28 +6461,32 @@
             pageLoggerConfig: c,
             path: d,
             url: p,
-            isReady: f = !0
-        } = e, m = null != (o = null == c ? void 0 : c.tags) ? o : i, v = null == c ? void 0 : c.rosId, y = (0, t.useMemo)(() => ({
-            tags: m,
-            rosId: v,
+            isReady: f = !0,
+            getPageLoadPath: m
+        } = e, v = null != (o = null == c ? void 0 : c.tags) ? o : i, y = null == c ? void 0 : c.rosId, h = (0, t.useMemo)(() => ({
+            tags: v,
+            rosId: y,
             path: d,
             url: p,
             isReady: f
-        }), [m, v, d, p, f]), h = (0, t.useRef)(y), g = (0, t.useRef)(y);
+        }), [v, y, d, p, f]), g = (0, t.useRef)(h), b = (0, t.useRef)(h), T = (0, t.useRef)(m);
         (0, t.useLayoutEffect)(() => {
-            g.current = y, void 0 === h.current.path && void 0 !== y.path && (h.current = {
-                ...h.current,
-                path: y.path
+            T.current = m
+        }, [m]), (0, t.useLayoutEffect)(() => {
+            b.current = h, void 0 === g.current.path && void 0 !== h.path && (g.current = {
+                ...g.current,
+                path: h.path
             })
-        }, [y]), (0, t.useLayoutEffect)(() => {
+        }, [h]), (0, t.useLayoutEffect)(() => {
             let e = e => {
                 var t;
                 let n;
                 if (e instanceof a.W && void 0 !== e.pageContext) return;
-                let i = (n = null == (t = e.parameters) ? void 0 : t.metricName, "webvitals" === e.eventType && void 0 !== n && s.has(n)) ? h.current : g.current;
-                void 0 !== i.path && (e.parameters = {
+                let i = (n = null == (t = e.parameters) ? void 0 : t.metricName, "webvitals" === e.eventType && void 0 !== n && s.has(n)) ? g.current : b.current,
+                    r = "pageload" === e.eventType && T.current ? T.current() : i.path;
+                void 0 !== r && (e.parameters = {
                     ...e.parameters,
-                    path: i.path
+                    path: r
                 }), i.tags.forEach(t => e.addTag(t)), void 0 !== i.rosId && e.addTag("owner: ".concat(i.rosId))
             };
             return r.forEach(t => {
@@ -6479,12 +6497,12 @@
                 })
             }
         }, [u]);
-        let b = (0, t.useMemo)(() => ({
+        let w = (0, t.useMemo)(() => ({
             unifiedLogger: u,
-            pageContext: y
-        }), [u, y]);
+            pageContext: h
+        }), [u, h]);
         return t.default.createElement(n.Provider, {
-            value: b
+            value: w
         }, l)
     }, "W", 0, function() {
         return (0, t.useContext)(n)
@@ -6514,5 +6532,5 @@
     }, "X", 0, o])
 }]);
 
-//# debugId=6450de13-8a28-4340-71b1-0693d0be0d53
-//# sourceMappingURL=10fi7gib1-5k7.js.map
+//# debugId=dc88dfc0-7dc5-0ec2-3b70-d537002b2a75
+//# sourceMappingURL=2ts_eyuxwnau2.js.map
