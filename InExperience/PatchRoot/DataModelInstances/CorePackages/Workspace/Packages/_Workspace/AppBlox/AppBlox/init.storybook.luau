@@ -1,12 +1,13 @@
 ﻿local AppBlox = script:FindFirstAncestor("AppBlox")
 local Parent = AppBlox.Parent
 local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.Dev.ReactRoblox)
 local FoundationProvider = require(Parent.Foundation).FoundationProvider
 
 return {
 	name = AppBlox.Name,
 	roact = ReactModule,
-	reactRoblox = require(Parent.Dev.ReactRoblox),
+	reactRoblox = ReactRobloxModule,
 	mapStory = function(p1)
 		-- upvalues: ReactModule (copy), FoundationProvider (copy)
 		return function(p2)

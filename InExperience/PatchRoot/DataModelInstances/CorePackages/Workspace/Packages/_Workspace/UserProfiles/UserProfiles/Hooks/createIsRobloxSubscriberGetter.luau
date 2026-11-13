@@ -1,8 +1,9 @@
 ﻿local UserProfiles = script:FindFirstAncestor("UserProfiles")
 local Parent = UserProfiles.Parent
+local SignalsModule = require(Parent.Signals)
 local FFlagEnableBlackbirdCheck = require(Parent.SharedFlags).FFlagEnableBlackbirdCheck
 local UserProfileStoreModule = require(UserProfiles.Stores.UserProfileStore)
-local CreateComputedFunction = require(Parent.Signals).createComputed
+local CreateComputedFunction = SignalsModule.createComputed
 
 return function(p1)
 	-- upvalues: FFlagEnableBlackbirdCheck (copy), CreateComputedFunction (copy), UserProfileStoreModule (copy)

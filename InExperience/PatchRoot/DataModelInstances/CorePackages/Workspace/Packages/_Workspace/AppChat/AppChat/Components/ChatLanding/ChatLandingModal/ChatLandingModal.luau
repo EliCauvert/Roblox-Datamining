@@ -7,6 +7,7 @@ local ReactModule = require(Parent.React)
 local UIBloxModule = require(Parent.UIBlox)
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local ButtonStack = UIBloxModule.App.Button.ButtonStack
+local ButtonEnum = UIBloxModule.App.Button.Enum
 local LabelModule = require(AppChat.Components.Label.Label)
 local UseChatPagePaddingModule = require(AppChat.Contexts.ChatPagePadding.useChatPagePadding)
 local AppChatNetworkingModule = require(Parent.AppChatNetworking)
@@ -62,7 +63,7 @@ local config1 = {
 	paddingX = 12,
 	hideActionButton = false,
 	additionalContent = {},
-	buttonType = UIBloxModule.App.Button.Enum.ButtonType.PrimarySystem,
+	buttonType = ButtonEnum.ButtonType.PrimarySystem,
 	onActivated = function() end,
 	onDismissed = function() end
 }

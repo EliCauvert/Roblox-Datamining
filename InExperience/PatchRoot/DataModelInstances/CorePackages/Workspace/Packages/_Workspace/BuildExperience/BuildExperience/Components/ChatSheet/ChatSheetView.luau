@@ -153,7 +153,19 @@ return function(p1)
 			Permissions = ReactModule.createElement(ChatPermissionsContextModule.Provider, { value = p1.chatPermissions }, ChatMessageListModuleResult)
 		}
 	end
-	local Element1 = ReactModule.createElement(ChatActionsModule, {
+	local Element1 = ReactModule.createElement(View, {
+		testId = "ChatSheet.MessageList",
+		layout = {
+			FillDirection = Enum.FillDirection.Vertical,
+			Padding = UDim.new(0, UseTokensResult.Size.Size_800)
+		},
+		padding = if FFlagBuildExperienceLibrary and p1.reservesHandleSpace == true then { top = UDim.new(0, UseTokensResult.Size.Size_600) } else nil,
+		tag = {
+			["size-full"] = #p1.messages == 0 and not HasAnswerForm,
+			["size-full-0 auto-y"] = #p1.messages > 0 or HasAnswerForm
+		}
+	}, ChatMessageListModuleResult)
+	local Element2 = ReactModule.createElement(ChatActionsModule, {
 		LayoutOrder = if Element == nil then nil else 2,
 		modelPicker = if FFlagBuildExperienceModelPickerModule then p1.modelPicker else nil,
 		composerText = p1.composerText,
@@ -177,7 +189,7 @@ return function(p1)
 		onSend = p1.onSend,
 		onStop = p1.onStop
 	})
-	local Element2 = ReactModule.createElement(SheetComponent.Root, {
+	local Element3 = ReactModule.createElement(SheetComponent.Root, {
 		ref = UseComposedRefResult,
 		isOpen = p1.isOpen,
 		snapPoints = p1.snapPoints,
@@ -191,22 +203,9 @@ return function(p1)
 			sheetComponent = SheetComponent,
 			sheet = UseStateResult,
 			onFramesChanged = p1.onFramesChanged
-		}, {
-			MessageList = ReactModule.createElement(View, {
-				testId = "ChatSheet.MessageList",
-				layout = {
-					FillDirection = Enum.FillDirection.Vertical,
-					Padding = UDim.new(0, UseTokensResult.Size.Size_800)
-				},
-				padding = if FFlagBuildExperienceLibrary and p1.reservesHandleSpace == true then { top = UDim.new(0, UseTokensResult.Size.Size_600) } else nil,
-				tag = {
-					["size-full"] = #p1.messages == 0 and not HasAnswerForm,
-					["size-full-0 auto-y"] = #p1.messages > 0 or HasAnswerForm
-				}
-			}, ChatMessageListModuleResult)
-		}),
+		}, { MessageList = Element1 }),
 		Actions = if HasAnswerForm then nil else ReactModule.createElement(SheetComponent.Actions, nil, {
-			Footer = if Element == nil then Element1 else ReactModule.createElement(View, { tag = "col gap-medium size-full-0 auto-y" }, { FundingRecovery = Element, Composer = Element1 })
+			Footer = if Element == nil then Element2 else ReactModule.createElement(View, { tag = "col gap-medium size-full-0 auto-y" }, { FundingRecovery = Element, Composer = Element2 })
 		}),
 		CreatorCreditPage = if CreatorCreditRecovery == nil or CreatorCreditRecovery.page == nil then nil else ReactModule.createElement(BuildPillMenuPageHostModule, CreatorCreditRecovery.page),
 		TopBarPillMenu = if FFlagBuildExperienceInGameShell or p1.topBarPillMenuTarget == nil then nil else ReactModule.createElement(BuildPillMenuPortalModule, {
@@ -217,5 +216,5 @@ return function(p1)
 		})
 	})
 	
-	return if FFlagBuildExperienceChatCardEmphasisModule then ReactModule.createElement(ChatCardEmphasisProviderModule, nil, Element2) else Element2
+	return if FFlagBuildExperienceChatCardEmphasisModule then ReactModule.createElement(ChatCardEmphasisProviderModule, nil, Element3) else Element3
 end

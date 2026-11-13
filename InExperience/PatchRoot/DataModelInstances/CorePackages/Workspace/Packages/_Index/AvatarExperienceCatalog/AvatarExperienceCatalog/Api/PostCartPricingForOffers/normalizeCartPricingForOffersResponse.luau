@@ -1,4 +1,5 @@
 ﻿local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local Normalize = require(Parent.AvatarExperienceCommon).Utils.normalize
 local NormalizeBoolean = Normalize.normalizeBoolean
 local NormalizeNumber = Normalize.normalizeNumber
@@ -7,7 +8,7 @@ local MakeNormalizeTableFnFunction = Normalize.makeNormalizeTableFn
 local MakeNormalizeListFnFunction = Normalize.makeNormalizeListFn
 local MakeRequiredFunction = Normalize.makeRequired
 local _ = require(script.Parent.CartPricingForOffersTypes)
-local FFlagAXUpdateOffersEndsUIWithBadge = require(Parent.AvatarExperienceFlags).FFlagAXUpdateOffersEndsUIWithBadge
+local FFlagAXUpdateOffersEndsUIWithBadge = AvatarExperienceFlagsModule.FFlagAXUpdateOffersEndsUIWithBadge
 local NormalizeTableFn = MakeNormalizeTableFnFunction({
 	collectibleItemId = MakeRequiredFunction(NormalizeNotEmptyStringFunction),
 	discountInformation = {

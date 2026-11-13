@@ -2,9 +2,10 @@
 local _ = require(DataHydration.Parent.HttpClient)
 local CreateDataCacheModule = require(DataHydration.createDataCache)
 local _ = require(DataHydration.DataHydrationTypes)
+local DataHydrationUtilsModule = require(DataHydration.DataHydrationUtils)
 local FetchAvatarInventoryPageModule = require(script.Parent.fetchAvatarInventoryPage)
 local _ = require(script.Parent.AvatarInventoryStoreTypes)
-local GetLocalPlayerUserIdFunction = require(DataHydration.DataHydrationUtils).getLocalPlayerUserId
+local GetLocalPlayerUserIdFunction = DataHydrationUtilsModule.getLocalPlayerUserId
 
 return function(p1)
 	-- upvalues: CreateDataCacheModule (copy), GetLocalPlayerUserIdFunction (copy), FetchAvatarInventoryPageModule (copy)

@@ -3,6 +3,7 @@ local Parent = ExpChat.Parent
 local RoactModule = require(Parent.Roact)
 local ReactIsModule = require(Parent.ReactIs)
 local OtterModule = require(Parent.Otter)
+local MessageEffectModule = require(ExpChat.MessageEffects.MessageEffect)
 local RunService = game:GetService("RunService")
 local UserGameSettings = UserSettings():GetService("UserGameSettings")
 local BubbleChat = script:FindFirstAncestor("BubbleChat")
@@ -10,9 +11,7 @@ local GetSpringFromSettingsModule = require(BubbleChat.Helpers.getSpringFromSett
 local SendBubbleChatRenderedTelemetryModule = require(BubbleChat.Helpers.sendBubbleChatRenderedTelemetry)
 local GetBorderlessBubbleChatAnimationModule = require(BubbleChat.Helpers.getBorderlessBubbleChatAnimation)
 local GetServerTimeNowMillisModule = require(BubbleChat.Helpers.getServerTimeNowMillis)
-local list = {
-	require(ExpChat.MessageEffects.MessageEffect).BorderlessBubbleChat
-}
+local list = { MessageEffectModule.BorderlessBubbleChat }
 
 local function getScale(p1): number
 	return if p1 then 0.75 else 1

@@ -7,6 +7,7 @@ local _ = game:GetService("StarterGui")
 local TextChatService = game:GetService("TextChatService")
 local RobloxGui = CoreGui.RobloxGui
 local RoduxModule = require(CorePackages.Packages.Rodux)
+local ChatReducerModule = require(RobloxGui.Modules.InGameChat.BubbleChat.Reducers.chatReducer)
 local SetMessageTextModule = require(RobloxGui.Modules.InGameChat.BubbleChat.Actions.SetMessageText)
 local AddMessageFromEventModule = require(RobloxGui.Modules.InGameChat.BubbleChat.Actions.AddMessageFromEvent)
 local AddMessageWithTimeoutModule = require(RobloxGui.Modules.InGameChat.BubbleChat.Actions.AddMessageWithTimeout)
@@ -70,7 +71,7 @@ local config = {
 		ExpChatModule.Events.VoiceParticipantRemoved(p1.userId)
 	end
 }
-NewResult = RoduxModule.Store.new(require(RobloxGui.Modules.InGameChat.BubbleChat.Reducers.chatReducer), nil, {
+NewResult = RoduxModule.Store.new(ChatReducerModule, nil, {
 	RoduxModule.thunkMiddleware,
 	function(Callback)
 		-- upvalues: config (copy)

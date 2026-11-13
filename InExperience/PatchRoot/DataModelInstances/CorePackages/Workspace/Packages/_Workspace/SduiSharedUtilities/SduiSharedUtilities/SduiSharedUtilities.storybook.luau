@@ -4,12 +4,13 @@ local FoundationModule = require(Parent.Foundation)
 local FoundationProvider = FoundationModule.FoundationProvider
 local ColorMode = FoundationModule.Enums.ColorMode
 local Device = FoundationModule.Enums.Device
+local ReactRobloxModule = require(Parent.ReactRoblox)
 local config = { Light = ColorMode.Light, Dark = ColorMode.Dark }
 
 return {
 	name = "SduiSharedUtilities",
 	roact = ReactModule,
-	reactRoblox = require(Parent.ReactRoblox),
+	reactRoblox = ReactRobloxModule,
 	mapStory = function(p1)
 		-- upvalues: ReactModule (copy), FoundationProvider (copy), config (copy), Device (copy)
 		return function(p2)

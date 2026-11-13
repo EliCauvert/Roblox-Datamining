@@ -45,6 +45,7 @@ return function(Frame)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseScreenHeightResult: number = useScreenHeight(UseStateResult)
+	local Smallest: number = if UseScreenHeightResult > 0 then math.min(800, (math.floor(UseScreenHeightResult * 0.5 * 16 / 9))) else 800
 	local OnActivatedFunction = Frame.onActivated
 	local UseResult = ReactModule.useCallback(function(_, p1)
 		-- upvalues: UseRefResult (copy), IsTapReleaseModule (upval), OnActivatedFunction (copy)
@@ -87,9 +88,7 @@ return function(Frame)
 			tag = "size-full-0 auto-y",
 			padding = { left = _UDim, right = _UDim },
 			ref = UseStateResult2,
-			sizeConstraint = {
-				MaxSize = Vector2.new((if UseScreenHeightResult > 0 then math.min(800, (math.floor(UseScreenHeightResult * 0.5 * 16 / 9))) else 800) + 2 * Frame.inset, 1e999)
-			}
+			sizeConstraint = { MaxSize = Vector2.new(Smallest + 2 * Frame.inset, 1e999) }
 		}, {
 			Window = if Frame.isLoading then ReactModule.createElement(View, {
 				testId = "Library.WorldCutout.Skeleton",

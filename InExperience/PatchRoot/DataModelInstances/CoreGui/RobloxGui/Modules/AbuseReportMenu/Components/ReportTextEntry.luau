@@ -1,7 +1,8 @@
 ﻿local CorePackages = game:GetService("CorePackages")
 local ReactModule = require(CorePackages.Packages.React)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
 local NormalizeFontFaceFunction = require(CorePackages.Packages.Foundation).Utility.normalizeFontFace
-local UseStyleFunction = require(CorePackages.Packages.UIBlox).Core.Style.useStyle
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 
 return function(p1)
 	-- upvalues: UseStyleFunction (copy), ReactModule (copy), NormalizeFontFaceFunction (copy)

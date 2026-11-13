@@ -1,7 +1,8 @@
 ﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local SignalsModule = require(Parent.Signals)
 local AdCampaignEligibilityModule = require(Parent.DataHydration.AdCampaignEligibility)
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
-local CreateComputedFunction = require(Parent.Signals).createComputed
+local CreateComputedFunction = SignalsModule.createComputed
 local Computed = CreateComputedFunction(function()
 	return nil
 end)

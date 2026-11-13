@@ -5,7 +5,7 @@ local MomentsCommonModule = require(Parent.MomentsCommon)
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
 local FoundationProvider = FoundationModule.FoundationProvider
-local Snackbar = FoundationModule.Snackbar
+local SnackbarDEPRECATED = FoundationModule.Snackbar_DEPRECATED
 local Toast = FoundationModule.Toast
 local View = FoundationModule.View
 local ColorMode = FoundationModule.Enums.ColorMode
@@ -15,11 +15,12 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local GetToastStoreModule = require(Moments.Stores.GetToastStore)
 local _ = require(Moments.Stores.GetToastStore.createToastStore)
 local ConstantsModule = require(Moments.Constants)
+local MomentLayoutModule = require(Moments.Components.Feed.Items.Moment.momentLayout)
 local UseScreenBottomInsetModule = require(Moments.Hooks.useScreenBottomInset)
 local FFlagMomentsPostFeedback = require(Parent.SharedFlags).FFlagMomentsPostFeedback
 
 local function ToastItem(p1)
-	-- upvalues: ReactModule (copy), Snackbar (copy), Toast (copy)
+	-- upvalues: ReactModule (copy), SnackbarDEPRECATED (copy), Toast (copy)
 	local Entry = p1.entry
 	local OnDismissFunction = p1.onDismiss
 	ReactModule.useEffect(function()
@@ -35,7 +36,7 @@ local function ToastItem(p1)
 		end
 	end, { Entry.id, OnDismissFunction })
 	
-	return if Entry.data.variant == "snackbar" then ReactModule.createElement(Snackbar, { title = Entry.data.title, LayoutOrder = Entry.id }) else ReactModule.createElement(Toast, {
+	return if Entry.data.variant == "snackbar" then ReactModule.createElement(SnackbarDEPRECATED, { title = Entry.data.title, LayoutOrder = Entry.id }) else ReactModule.createElement(Toast, {
 		title = Entry.data.title,
 		text = if Entry.data.text == "" then nil else Entry.data.text,
 		LayoutOrder = Entry.id,
@@ -44,15 +45,16 @@ local function ToastItem(p1)
 end
 
 local function BottomToastStack(p1)
-	-- upvalues: UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseScreenBottomInsetModule (copy), ReactModule (copy), View (copy), ConstantsModule (copy), FoundationProvider (copy), ColorMode (copy)
+	-- upvalues: UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseScreenBottomInsetModule (copy), MomentLayoutModule (copy), ReactModule (copy), View (copy), ConstantsModule (copy), FoundationProvider (copy), ColorMode (copy)
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseTokensResult = UseTokensFunction()
+	local UseScreenBottomInsetModuleResult = UseScreenBottomInsetModule()
 	
 	return ReactModule.createElement(View, {
 		tag = "position-bottom-center anchor-bottom-center size-full-0 auto-y",
 		ZIndex = ConstantsModule.ZIndex.Toasts,
 		padding = {
-			bottom = UDim.new(0, UseScreenBottomInsetModule() + UseTokensResult.Padding.Large),
+			bottom = UDim.new(0, UseScreenBottomInsetModuleResult + MomentLayoutModule.getInfoBottomGap(UseTokensResult, UseScreenBottomInsetModuleResult, UseDeviceInsetsResult.bottom) + UseTokensResult.Padding.Large - UseTokensResult.Padding.Medium),
 			left = UDim.new(0, UseDeviceInsetsResult.left + UseTokensResult.Padding.Large),
 			right = UDim.new(0, UseDeviceInsetsResult.right + UseTokensResult.Padding.Large)
 		}

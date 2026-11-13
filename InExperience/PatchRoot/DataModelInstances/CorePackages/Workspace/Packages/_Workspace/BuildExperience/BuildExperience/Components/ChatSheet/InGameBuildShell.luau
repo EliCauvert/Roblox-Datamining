@@ -277,132 +277,133 @@ return function(p1)
 			Transparency = 1 - (1 - Surface100.Transparency) * p2
 		}
 	end)
+	local Element = ReactModule.createElement(View, {
+		tag = "size-full",
+		Visible = UseStateResult6,
+		testId = p1.testId or "in-game-build-shell"
+	}, {
+		FloatingToolbarBounds = if IsNotUseSignalStateResultMatch then ReactModule.createElement(View, {
+			testId = "in-game-build-shell-floating-toolbar-bounds",
+			Position = UDim2.fromOffset(UseHardwareInsetsModuleResult.left + UseTokensResult.Padding.Large, UseHardwareInsetsModuleResult.top + UseTokensResult.Padding.Large),
+			Size = UDim2.new(1, -(UseHardwareInsetsModuleResult.left + UseHardwareInsetsModuleResult.right + UseTokensResult.Padding.Large * 2), 1, -(UseHardwareInsetsModuleResult.top + UseHardwareInsetsModuleResult.bottom + UseTokensResult.Padding.Large * 2)),
+			ref = UseResult4
+		}, {
+			Toolbar = ReactModule.createElement(View, {
+				ZIndex = 1000,
+				tag = "col align-x-center gap-xsmall position-center-right anchor-center-right auto-xy padding-xsmall radius-medium bg-surface-100",
+				testId = "in-game-build-shell-floating-toolbar",
+				Visible = IsNotUseSignalStateResultMatch1,
+				onActivated = noop,
+				stateLayer = { affordance = StateLayerAffordance.None }
+			}, {
+				DragDetector = ReactModule.createElement("UIDragDetector", {
+					BoundingBehavior = Enum.UIDragDetectorBoundingBehavior.EntireObject,
+					BoundingUI = UseStateResult5,
+					DragStyle = Enum.UIDragDetectorDragStyle.TranslatePlane,
+					ReferenceUIInstance = UseStateResult5,
+					ResponseStyle = Enum.UIDragDetectorResponseStyle.Scale
+				}),
+				Buttons = ReactModule.createElement(ReactModule.Fragment, nil, (createToolbarButtons(p1, UseResult, "in-game-build-shell-floating", UseGamePermissionsModuleResult))),
+				DragAffordance = ReactModule.createElement(View, {
+					LayoutOrder = 6,
+					tag = "position-center-center anchor-center-center auto-xy padding-xxsmall"
+				}, {
+					Icon = ReactModule.createElement(Image, {
+						Image = "component_assets/dragger_small",
+						tag = "position-center-center anchor-center-center size-600-400 content-muted"
+					})
+				})
+			})
+		}) else nil,
+		InsetReporter = ReactModule.createElement(View, {
+			testId = "in-game-build-shell-inset-reporter",
+			Size = Progress:map(function(p2): UDim2
+				-- upvalues: IsNotUseSignalStateResultMatch (copy), IsYBelow (copy), UseStateResult8 (copy), UseStateResult7 (copy)
+				return if IsNotUseSignalStateResultMatch then UDim2.fromOffset(0, 0) else UDim2.fromOffset((if IsYBelow then UseStateResult8 else 0) * p2, (if IsYBelow then 0 else UseStateResult7) * p2)
+			end),
+			onAbsoluteSizeChanged = UseResult7
+		}),
+		RightInset = if IsYBelow and not IsNotUseSignalStateResultMatch then ReactModule.createElement(View, {
+			ZIndex = 1000,
+			tag = "col align-x-center align-y-center gap-xsmall anchor-top-right size-0-full auto-x bg-surface-100",
+			testId = "in-game-build-shell-right-toolbar",
+			Position = MapResult,
+			padding = {
+				left = UDim.new(0, UseTokensResult.Padding.Small),
+				right = UDim.new(0, (math.max(UseHardwareInsetsModuleResult.right, UseTokensResult.Padding.Small)))
+			},
+			onAbsolutePositionChanged = UseResult6,
+			onAbsoluteSizeChanged = UseResult6
+		}, (createToolbarButtons(p1, UseResult, "in-game-build-shell-landscape", UseGamePermissionsModuleResult))) else nil,
+		TopRightInnerCorner = if IsYBelow and not IsNotUseSignalStateResultMatch then ReactModule.createElement(View, {
+			ZIndex = 1000,
+			tag = "anchor-top-right clip",
+			testId = "in-game-build-shell-top-right-inner-corner",
+			Position = MapResult1,
+			Size = UDim2.fromOffset(Size1200, Size1200)
+		}, {
+			Image = ReactModule.createElement(Image, {
+				Image = "rbxasset://textures/ui/AvatarExperience/CircleCutoutLargeNoBorder.png",
+				ZIndex = 1000,
+				testId = "in-game-build-shell-top-right-inner-corner-image",
+				Position = UDim2.fromOffset(-Size1200, 0),
+				Size = UDim2.fromOffset(Size1200 * 2, Size1200 * 2),
+				imageStyle = MapResult4
+			})
+		}) else nil,
+		BottomLeftInnerCorner = if IsNotUseSignalStateResultMatch or IsYBelow or UseStateResult7 == 0 then nil else ReactModule.createElement(View, {
+			ZIndex = 1000,
+			tag = "anchor-bottom-left clip",
+			testId = "in-game-build-shell-bottom-left-inner-corner",
+			Position = MapResult2,
+			Size = UDim2.fromOffset(Size1200, Size1200)
+		}, {
+			Image = ReactModule.createElement(Image, {
+				Image = "rbxasset://textures/ui/AvatarExperience/CircleCutoutLargeNoBorder.png",
+				ZIndex = 1000,
+				testId = "in-game-build-shell-bottom-left-inner-corner-image",
+				Position = UDim2.fromOffset(0, -Size1200),
+				Size = UDim2.fromOffset(Size1200 * 2, Size1200 * 2),
+				imageStyle = MapResult4
+			})
+		}),
+		BottomRightInnerCorner = if IsNotUseSignalStateResultMatch or not IsYBelow and UseStateResult7 == 0 then nil else ReactModule.createElement(View, {
+			ZIndex = 1000,
+			tag = "anchor-bottom-right clip",
+			testId = "in-game-build-shell-bottom-right-inner-corner",
+			Position = MapResult3,
+			Size = UDim2.fromOffset(Size1200, Size1200)
+		}, {
+			Image = ReactModule.createElement(Image, {
+				Image = "rbxasset://textures/ui/AvatarExperience/CircleCutoutLargeNoBorder.png",
+				ZIndex = 1000,
+				testId = "in-game-build-shell-bottom-right-inner-corner-image",
+				Position = UDim2.fromOffset(-Size1200, -Size1200),
+				Size = UDim2.fromOffset(Size1200 * 2, Size1200 * 2),
+				imageStyle = MapResult4
+			})
+		}),
+		BottomBar = ReactModule.createElement(View, {
+			tag = "row align-x-center align-y-center gap-xsmall anchor-bottom-left size-full-0 auto-y bg-surface-100",
+			testId = "in-game-build-shell-bottom-inset",
+			Position = Progress:map(function(p2: number): UDim2
+				-- upvalues: UseStateResult7 (copy)
+				return UDim2.new(0, 0, 1, UseStateResult7 * (1 - p2))
+			end),
+			Visible = not IsYBelow and not IsNotUseSignalStateResultMatch,
+			onAbsoluteSizeChanged = UseResult5,
+			padding = {
+				top = UDim.new(0, UseTokensResult.Padding.Small),
+				left = UDim.new(0, UseTokensResult.Padding.Large),
+				right = UDim.new(0, UseTokensResult.Padding.Large),
+				bottom = UDim.new(0, UseTokensResult.Margin.Small + UseHardwareInsetsModuleResult.bottom)
+			}
+		}, (createToolbarButtons(p1, UseResult, "in-game-build-shell", UseGamePermissionsModuleResult)))
+	})
 	local NewTop = UseHardwareInsetsModuleResult.top + UseSignalStateResult.top
 	
 	return ReactModule.createElement(ReactModule.Fragment, nil, {
-		Shell = ReactModule.createElement(View, {
-			tag = "size-full",
-			Visible = UseStateResult6,
-			testId = p1.testId or "in-game-build-shell"
-		}, {
-			FloatingToolbarBounds = if IsNotUseSignalStateResultMatch then ReactModule.createElement(View, {
-				testId = "in-game-build-shell-floating-toolbar-bounds",
-				Position = UDim2.fromOffset(UseHardwareInsetsModuleResult.left + UseTokensResult.Padding.Large, UseHardwareInsetsModuleResult.top + UseTokensResult.Padding.Large),
-				Size = UDim2.new(1, -(UseHardwareInsetsModuleResult.left + UseHardwareInsetsModuleResult.right + UseTokensResult.Padding.Large * 2), 1, -(UseHardwareInsetsModuleResult.top + UseHardwareInsetsModuleResult.bottom + UseTokensResult.Padding.Large * 2)),
-				ref = UseResult4
-			}, {
-				Toolbar = ReactModule.createElement(View, {
-					ZIndex = 1000,
-					tag = "col align-x-center gap-xsmall position-center-right anchor-center-right auto-xy padding-xsmall radius-medium bg-surface-100",
-					testId = "in-game-build-shell-floating-toolbar",
-					Visible = IsNotUseSignalStateResultMatch1,
-					onActivated = noop,
-					stateLayer = { affordance = StateLayerAffordance.None }
-				}, {
-					DragDetector = ReactModule.createElement("UIDragDetector", {
-						BoundingBehavior = Enum.UIDragDetectorBoundingBehavior.EntireObject,
-						BoundingUI = UseStateResult5,
-						DragStyle = Enum.UIDragDetectorDragStyle.TranslatePlane,
-						ReferenceUIInstance = UseStateResult5,
-						ResponseStyle = Enum.UIDragDetectorResponseStyle.Scale
-					}),
-					Buttons = ReactModule.createElement(ReactModule.Fragment, nil, (createToolbarButtons(p1, UseResult, "in-game-build-shell-floating", UseGamePermissionsModuleResult))),
-					DragAffordance = ReactModule.createElement(View, {
-						LayoutOrder = 6,
-						tag = "position-center-center anchor-center-center auto-xy padding-xxsmall"
-					}, {
-						Icon = ReactModule.createElement(Image, {
-							Image = "component_assets/dragger_small",
-							tag = "position-center-center anchor-center-center size-600-400 content-muted"
-						})
-					})
-				})
-			}) else nil,
-			InsetReporter = ReactModule.createElement(View, {
-				testId = "in-game-build-shell-inset-reporter",
-				Size = Progress:map(function(p2): UDim2
-					-- upvalues: IsNotUseSignalStateResultMatch (copy), IsYBelow (copy), UseStateResult8 (copy), UseStateResult7 (copy)
-					return if IsNotUseSignalStateResultMatch then UDim2.fromOffset(0, 0) else UDim2.fromOffset((if IsYBelow then UseStateResult8 else 0) * p2, (if IsYBelow then 0 else UseStateResult7) * p2)
-				end),
-				onAbsoluteSizeChanged = UseResult7
-			}),
-			RightInset = if IsYBelow and not IsNotUseSignalStateResultMatch then ReactModule.createElement(View, {
-				ZIndex = 1000,
-				tag = "col align-x-center align-y-center gap-xsmall anchor-top-right size-0-full auto-x bg-surface-100",
-				testId = "in-game-build-shell-right-toolbar",
-				Position = MapResult,
-				padding = {
-					left = UDim.new(0, UseTokensResult.Padding.Small),
-					right = UDim.new(0, (math.max(UseHardwareInsetsModuleResult.right, UseTokensResult.Padding.Small)))
-				},
-				onAbsolutePositionChanged = UseResult6,
-				onAbsoluteSizeChanged = UseResult6
-			}, (createToolbarButtons(p1, UseResult, "in-game-build-shell-landscape", UseGamePermissionsModuleResult))) else nil,
-			TopRightInnerCorner = if IsYBelow and not IsNotUseSignalStateResultMatch then ReactModule.createElement(View, {
-				ZIndex = 1000,
-				tag = "anchor-top-right clip",
-				testId = "in-game-build-shell-top-right-inner-corner",
-				Position = MapResult1,
-				Size = UDim2.fromOffset(Size1200, Size1200)
-			}, {
-				Image = ReactModule.createElement(Image, {
-					Image = "rbxasset://textures/ui/AvatarExperience/CircleCutoutLargeNoBorder.png",
-					ZIndex = 1000,
-					testId = "in-game-build-shell-top-right-inner-corner-image",
-					Position = UDim2.fromOffset(-Size1200, 0),
-					Size = UDim2.fromOffset(Size1200 * 2, Size1200 * 2),
-					imageStyle = MapResult4
-				})
-			}) else nil,
-			BottomLeftInnerCorner = if IsNotUseSignalStateResultMatch or IsYBelow or UseStateResult7 == 0 then nil else ReactModule.createElement(View, {
-				ZIndex = 1000,
-				tag = "anchor-bottom-left clip",
-				testId = "in-game-build-shell-bottom-left-inner-corner",
-				Position = MapResult2,
-				Size = UDim2.fromOffset(Size1200, Size1200)
-			}, {
-				Image = ReactModule.createElement(Image, {
-					Image = "rbxasset://textures/ui/AvatarExperience/CircleCutoutLargeNoBorder.png",
-					ZIndex = 1000,
-					testId = "in-game-build-shell-bottom-left-inner-corner-image",
-					Position = UDim2.fromOffset(0, -Size1200),
-					Size = UDim2.fromOffset(Size1200 * 2, Size1200 * 2),
-					imageStyle = MapResult4
-				})
-			}),
-			BottomRightInnerCorner = if IsNotUseSignalStateResultMatch or not IsYBelow and UseStateResult7 == 0 then nil else ReactModule.createElement(View, {
-				ZIndex = 1000,
-				tag = "anchor-bottom-right clip",
-				testId = "in-game-build-shell-bottom-right-inner-corner",
-				Position = MapResult3,
-				Size = UDim2.fromOffset(Size1200, Size1200)
-			}, {
-				Image = ReactModule.createElement(Image, {
-					Image = "rbxasset://textures/ui/AvatarExperience/CircleCutoutLargeNoBorder.png",
-					ZIndex = 1000,
-					testId = "in-game-build-shell-bottom-right-inner-corner-image",
-					Position = UDim2.fromOffset(-Size1200, -Size1200),
-					Size = UDim2.fromOffset(Size1200 * 2, Size1200 * 2),
-					imageStyle = MapResult4
-				})
-			}),
-			BottomBar = ReactModule.createElement(View, {
-				tag = "row align-x-center align-y-center gap-xsmall anchor-bottom-left size-full-0 auto-y bg-surface-100",
-				testId = "in-game-build-shell-bottom-inset",
-				Position = Progress:map(function(p2: number): UDim2
-					-- upvalues: UseStateResult7 (copy)
-					return UDim2.new(0, 0, 1, UseStateResult7 * (1 - p2))
-				end),
-				Visible = not IsYBelow and not IsNotUseSignalStateResultMatch,
-				onAbsoluteSizeChanged = UseResult5,
-				padding = {
-					top = UDim.new(0, UseTokensResult.Padding.Small),
-					left = UDim.new(0, UseTokensResult.Padding.Large),
-					right = UDim.new(0, UseTokensResult.Padding.Large),
-					bottom = UDim.new(0, UseTokensResult.Margin.Small + UseHardwareInsetsModuleResult.bottom)
-				}
-			}, (createToolbarButtons(p1, UseResult, "in-game-build-shell", UseGamePermissionsModuleResult)))
-		}),
+		Shell = Element,
 		PublishOverlay = if UseStateResult3 == nil or p1.isLibraryMode then nil else ReactModule.createElement(View, {
 			ZIndex = 2,
 			testId = "in-game-build-shell-publish-overlay",

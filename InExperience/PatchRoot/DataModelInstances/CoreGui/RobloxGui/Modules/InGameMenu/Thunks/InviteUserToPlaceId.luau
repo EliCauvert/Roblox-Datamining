@@ -2,16 +2,17 @@
 local Parent = script.Parent.Parent
 local Network = Parent.Network
 local AppChatNetworkingModule = require(game:GetService("CorePackages").Workspace.Packages.AppChatNetworking)
+local HttpRequestModule = require(Network.httpRequest)
 local GetPlaceInfosModule = require(Network.Requests.GetPlaceInfos)
 local ConstructGameLinkUrlModule = require(Parent.Utility.constructGameLinkUrl)
-local v1 = require(Network.httpRequest)((game:GetService("HttpRbxApiService")))
+local HttpRequestModuleResult = HttpRequestModule((game:GetService("HttpRbxApiService")))
 local InviteStatus = require(Parent.Resources.Constants).InviteStatus
 local ReceivedUserInviteStatusModule = require(Parent.Actions.ReceivedUserInviteStatus)
 
 return function(p1, p2)
-	-- upvalues: InviteStatus (copy), ReceivedUserInviteStatusModule (copy), RunService (copy), GetPlaceInfosModule (copy), v1 (copy), ConstructGameLinkUrlModule (copy), AppChatNetworkingModule (copy)
+	-- upvalues: InviteStatus (copy), ReceivedUserInviteStatusModule (copy), RunService (copy), GetPlaceInfosModule (copy), HttpRequestModuleResult (copy), ConstructGameLinkUrlModule (copy), AppChatNetworkingModule (copy)
 	return function(p3)
-		-- upvalues: p1 (copy), InviteStatus (upval), ReceivedUserInviteStatusModule (upval), RunService (upval), GetPlaceInfosModule (upval), v1 (upval), p2 (copy), ConstructGameLinkUrlModule (upval), AppChatNetworkingModule (upval)
+		-- upvalues: p1 (copy), InviteStatus (upval), ReceivedUserInviteStatusModule (upval), RunService (upval), GetPlaceInfosModule (upval), HttpRequestModuleResult (upval), p2 (copy), ConstructGameLinkUrlModule (upval), AppChatNetworkingModule (upval)
 		if p3:getState().invites[tostring(p1)] == InviteStatus.Pending then return end
 		p3:dispatch(ReceivedUserInviteStatusModule(p1, InviteStatus.Pending))
 		
@@ -23,7 +24,7 @@ return function(p1, p2)
 			
 			return
 		else
-			return GetPlaceInfosModule(v1, { p2 }):andThen(function(Result)
+			return GetPlaceInfosModule(HttpRequestModuleResult, { p2 }):andThen(function(Result)
 				local ResponseBodyEntry = Result.responseBody[1]
 				assert(ResponseBodyEntry, "Error fetching placeInfos")
 				ResponseBodyEntry.placeId = tostring(ResponseBodyEntry.placeId)
@@ -45,9 +46,10 @@ return function(p1, p2)
 						-- upvalues: Conversation (copy), Result (upval)
 						local Message = Result1.responseBody.messages[1]
 						assert(Message, "Failed to send message")
+						local Status = Message.status
 						
 						return {
-							resultType = if Message.status == "success" then "Success" else "Failed",
+							resultType = if Status == "success" then "Success" else "Failed",
 							conversationId = Conversation.id,
 							placeId = Result.universeRootPlaceId
 						}
@@ -57,11 +59,11 @@ return function(p1, p2)
 				end)
 			end):andThen(function(Result)
 				-- upvalues: InviteStatus (upval), p3 (copy), ReceivedUserInviteStatusModule (upval), p1 (upval)
-				local v2, v3 = Result:await()
-				assert(v2, "Failed to unroll promise after friend invitation: " .. tostring(v3))
-				p3:dispatch(ReceivedUserInviteStatusModule(p1, InviteStatus[v3.resultType] or InviteStatus.Failed))
+				local v1, v2 = Result:await()
+				assert(v1, "Failed to unroll promise after friend invitation: " .. tostring(v2))
+				p3:dispatch(ReceivedUserInviteStatusModule(p1, InviteStatus[v2.resultType] or InviteStatus.Failed))
 				
-				return v3
+				return v2
 			end, function(_)
 				-- upvalues: p3 (copy), ReceivedUserInviteStatusModule (upval), p1 (upval), InviteStatus (upval)
 				p3:dispatch(ReceivedUserInviteStatusModule(p1, InviteStatus.Failed))

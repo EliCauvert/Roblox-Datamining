@@ -1,9 +1,11 @@
 ﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local ChartsModule = require(Parent.Charts)
 local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
 local SduiActionType = SduiCoreSystemModule.SduiActionType
 local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
-local SduiLoadTimer = require(Parent.SduiSharedUtilities).SduiLoadTimer
-local RefreshChartsSortDetailGenreFunction = require(Parent.Charts).refreshChartsSortDetailGenre
+local SduiLoadTimer = SduiSharedUtilitiesModule.SduiLoadTimer
+local RefreshChartsSortDetailGenreFunction = ChartsModule.refreshChartsSortDetailGenre
 
 local function _(p1, Message, PropName)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy)

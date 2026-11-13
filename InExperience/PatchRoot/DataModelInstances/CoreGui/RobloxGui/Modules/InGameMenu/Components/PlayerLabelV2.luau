@@ -22,8 +22,9 @@ local config = {
 	Position = UDim2.new(0, 24, 1, 1),
 	Size = UDim2.new(0, 56, 0, 56)
 }
+local ValidatePropsWithForwardRefFunction = require(CorePackages.Workspace.Packages.RoactUtils).validatePropsWithForwardRef
 local PlayerLabelV2 = Roact.PureComponent:extend("PlayerLabelV2")
-PlayerLabelV2.validateProps = T.strictInterface(require(CorePackages.Workspace.Packages.RoactUtils).validatePropsWithForwardRef({
+PlayerLabelV2.validateProps = T.strictInterface(ValidatePropsWithForwardRefFunction({
 	userId = T.number,
 	username = T.string,
 	displayName = T.string,

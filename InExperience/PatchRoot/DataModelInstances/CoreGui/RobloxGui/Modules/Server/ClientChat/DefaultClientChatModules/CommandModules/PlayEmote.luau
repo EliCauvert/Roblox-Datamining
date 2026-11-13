@@ -112,14 +112,14 @@ return {
 				end
 			end
 		end
-		local Entry = t[string.lower(Segment)]
+		local EmoteName = t[string.lower(Segment)]
 		
-		if Entry then
+		if EmoteName then
 			spawn(function()
-				-- upvalues: Humanoid (copy), Entry (ref), CurrentChannel (copy), ChatLocalizationModule (upval), config1 (upval), _Color3 (upval), UtilModule (upval)
+				-- upvalues: Humanoid (copy), EmoteName (ref), CurrentChannel (copy), ChatLocalizationModule (upval), config1 (upval), _Color3 (upval), UtilModule (upval)
 				local Success, Result = pcall(function()
-					-- upvalues: Humanoid (upval), Entry (upval)
-					return Humanoid:PlayEmote(Entry)
+					-- upvalues: Humanoid (upval), EmoteName (upval)
+					return Humanoid:PlayEmote(EmoteName)
 				end)
 				
 				if not Success then

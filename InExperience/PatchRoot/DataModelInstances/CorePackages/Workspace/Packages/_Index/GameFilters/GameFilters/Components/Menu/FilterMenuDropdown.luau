@@ -69,6 +69,21 @@ return function(p1)
 	local MapResult1 = if FFlagLuaAppChartsFilterOptionTextTag then nil else MapResult:map(function(p2)
 		return p2.X
 	end)
+	local MapResult2 = ReactModule.joinBindings({
+		UseBindingResult1,
+		if FFlagLuaAppChartsFilterOptionTextTag then v3 else v1
+	}):map(function(Entry): UDim2
+		-- upvalues: FFlagLuaAppChartsFilterOptionTextTag (upval), ScaledScale1 (copy)
+		local Entry1 = Entry[1]
+		
+		if FFlagLuaAppChartsFilterOptionTextTag then
+			return UDim2.fromOffset(0, Entry1 + Entry[2] + ScaledScale1)
+		else
+			local Entry2 = Entry[2]
+			
+			return UDim2.fromOffset(Entry2.X, Entry1 + Entry2.Y + ScaledScale1)
+		end
+	end)
 	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseDispatchResult (copy), p1 (copy), FilterClickButtonNameModule (upval), UseStateResult (copy), FFlagLuaAppChartsFilterOptionTextTag (upval), GetOptionContextTagModule (upval)
 		UseDispatchResult(p1.closeCentralOverlayThunk())
@@ -106,21 +121,7 @@ return function(p1)
 			BorderColor3 = Border.Color3,
 			Position = _UDim2,
 			AnchorPoint = _Vector2,
-			Size = ReactModule.joinBindings({
-				UseBindingResult1,
-				if FFlagLuaAppChartsFilterOptionTextTag then v3 else v1
-			}):map(function(Entry): UDim2
-				-- upvalues: FFlagLuaAppChartsFilterOptionTextTag (upval), ScaledScale1 (copy)
-				local Entry1 = Entry[1]
-				
-				if FFlagLuaAppChartsFilterOptionTextTag then
-					return UDim2.fromOffset(0, Entry1 + Entry[2] + ScaledScale1)
-				else
-					local Entry2 = Entry[2]
-					
-					return UDim2.fromOffset(Entry2.X, Entry1 + Entry2.Y + ScaledScale1)
-				end
-			end),
+			Size = MapResult2,
 			AutomaticSize = if FFlagLuaAppChartsFilterOptionTextTag then Enum.AutomaticSize.X else nil
 		}, {
 			Corner = ReactModule.createElement("UICorner", {

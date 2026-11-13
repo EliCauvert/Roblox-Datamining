@@ -5,13 +5,14 @@ local FoundationModule = require(Parent.Foundation)
 local DisplayModule = require(Parent.Display)
 local SignalsReactModule = require(Parent.SignalsReact)
 local RobloxAppHooksModule = require(Parent.RobloxAppHooks)
+local RobloxAppEnumsModule = require(Parent.RobloxAppEnums)
 local ConstantsModule = require(HelpPage.Constants)
 local BindingConfigsModule = require(HelpPage.Configs.BindingConfigs)
 local _ = require(HelpPage.Configs.ConfigTypes)
 local UseKeybindsModule = require(HelpPage.Hooks.useKeybinds)
 local _ = require(HelpPage.Components.Touch.TouchControlList)
 local _ = require(script.Parent.CCLTouchHelpPageView)
-local DeviceOrientationMode = require(Parent.RobloxAppEnums).DeviceOrientationMode
+local DeviceOrientationMode = RobloxAppEnumsModule.DeviceOrientationMode
 
 local function createMockLayout(UseTokensResult, SmallButtonSize: number)
 	local SmallButtonSizeRatio = SmallButtonSize / UseTokensResult.Size.Size_400

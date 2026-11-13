@@ -654,12 +654,12 @@ return function(p1)
 							end
 							local Copy2 = table.clone(Result3)
 							Copy2.adCampaignCards = Copy
-							local Success1, Result1 = pcall(p1.writeData, Copy2)
+							local v3, Result1 = pcall(p1.writeData, Copy2)
 							
-							if Success1 then
-								Success1 = Result1 == true
+							if v3 then
+								v3 = Result1 == true
 							end
-							if Success1 then
+							if v3 then
 								v1 = Copy
 								
 								return true, true

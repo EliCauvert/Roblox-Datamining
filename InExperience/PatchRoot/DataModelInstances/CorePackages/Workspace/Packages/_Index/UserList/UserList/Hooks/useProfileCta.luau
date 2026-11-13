@@ -1,9 +1,11 @@
 ﻿local UserList = script:FindFirstAncestor("UserList")
 local Parent = UserList.Parent
 local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local ProfileCtaServiceModule = require(Parent.ProfileCtaService)
 local _ = require(UserList.Common.Types)
-local ProfileCTAService = require(Parent.ProfileCtaService).ProfileCTAService
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local ProfileCTAService = ProfileCtaServiceModule.ProfileCTAService
+local UseSignalStateFunction = SignalsReactModule.useSignalState
 
 return function(p1)
 	-- upvalues: ReactModule (copy), ProfileCTAService (copy), UseSignalStateFunction (copy)

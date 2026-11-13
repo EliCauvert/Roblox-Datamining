@@ -4,6 +4,7 @@ local Parent = BuildExperience.Parent
 local FoundationModule = require(Parent.Foundation)
 local LocalizationModule = require(Parent.Localization)
 local ReactModule = require(Parent.React)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local UseOpenWebViewFunction = require(Parent.WebViewUtils).useOpenWebView
@@ -33,7 +34,7 @@ local SendConfigurationRowClickModule = require(BuildExperience.Telemetry.sendCo
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 local IconName = FoundationModule.Enums.IconName
-local CaptureServiceStartUploadCoreScriptBypassEngineFeature = require(Parent.SharedFlags).FFlagMyStatsMediaSelector and (CaptureService.PromptCaptureGalleryPermissionAsync and game:GetEngineFeature("CaptureServiceStartUploadCoreScriptBypass"))
+local CaptureServiceStartUploadCoreScriptBypassEngineFeature = SharedFlagsModule.FFlagMyStatsMediaSelector and (CaptureService.PromptCaptureGalleryPermissionAsync and game:GetEngineFeature("CaptureServiceStartUploadCoreScriptBypass"))
 local PrivacyType = UniverseConfigurationModule.PrivacyType
 local Signal = SignalsModule.createSignal(nil)
 
@@ -260,7 +261,7 @@ return function(p1)
 		UseResult1, Config, OnShare, p1.onOpenAudiencePage, Audience, ContentRating,
 		PrivateInvitesShareLink
 	})
-	local UseMemoResult31 = ReactModule.useMemo(function()
+	local UseMemoResult4 = ReactModule.useMemo(function()
 		-- upvalues: CreatorHub (copy), CreatorHubDescription (copy), IconName (upval), UseResult (copy), NoFFlagBuildCheckGamePermissionsModule2 (copy)
 		return {
 			{
@@ -335,7 +336,7 @@ return function(p1)
 		CreatorHub = ReactModule.createElement(GameConfigurationListModule, {
 			layoutOrder = if FFlagBuildExperienceMonetizationNativeUIModule then 4 else 3,
 			title = CreatorHub,
-			rows = UseMemoResult31,
+			rows = UseMemoResult4,
 			onRowActivated = UseResult2,
 			testId = `{TestId}-creator-hub`
 		}),

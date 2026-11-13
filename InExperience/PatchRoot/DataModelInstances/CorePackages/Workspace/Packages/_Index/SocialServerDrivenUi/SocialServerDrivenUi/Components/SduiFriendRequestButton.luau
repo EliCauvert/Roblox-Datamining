@@ -12,25 +12,25 @@ local FriendsStore = require(Parent.DataHydration).Friends.FriendsStore
 local FriendsStoreChallengeNetworkModule = require(SocialServerDrivenUi.Networking.friendsStoreChallengeNetwork)
 local FFlagEnableFriendsStoreChallengeInterceptor = require(Parent.SharedFlags).FFlagEnableFriendsStoreChallengeInterceptor
 local SetCurrentToastMessageFunction = require(Parent.ToastRodux).Actions.SetCurrentToastMessage
+local Enums = require(Parent.FriendsNetworking).Enums
 local SduiActionType = require(Parent.SduiCoreSystem).SduiActionType
 local IconButton = FoundationModule.IconButton
-local Enums = FoundationModule.Enums
+local Enums1 = FoundationModule.Enums
 local FFlagSduiSearchPeoplePlayerTileTelemetry = SharedFlagsModule.FFlagSduiSearchPeoplePlayerTileTelemetry
-local FFlagSduiRequestFriendshipActionHandler = SharedFlagsModule.FFlagSduiRequestFriendshipActionHandler
 local FFlagSduiFriendRequestButtonHideForSelfModule = require(SocialServerDrivenUi.Flags.FFlagSduiFriendRequestButtonHideForSelf)
-local Small = Enums.InputSize.Small
-local RawValueResult = require(Parent.FriendsNetworking).Enums.FriendshipOriginSourceType.PlayerSearch.rawValue()
+local Small = Enums1.InputSize.Small
+local RawValueResult = Enums.FriendshipOriginSourceType.PlayerSearch.rawValue()
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseDispatchFunction (copy), SignalsReactModule (copy), FriendsStore (copy), ReactModule (copy), FFlagSduiRequestFriendshipActionHandler (copy), SduiRequestFriendshipActionModule (copy), SduiActionType (copy), RawValueResult (copy), FFlagEnableFriendsStoreChallengeInterceptor (copy), FriendsStoreChallengeNetworkModule (copy), SetCurrentToastMessageFunction (copy), FFlagSduiSearchPeoplePlayerTileTelemetry (copy), FirePlayerFriendAddTelemetryModule (copy), FFlagSduiFriendRequestButtonHideForSelfModule (copy), GetCurrentUserIdModule (copy), IconButton (copy), Enums (copy), Small (copy)
+	-- upvalues: UseDispatchFunction (copy), SignalsReactModule (copy), FriendsStore (copy), ReactModule (copy), SduiRequestFriendshipActionModule (copy), SduiActionType (copy), RawValueResult (copy), FFlagEnableFriendsStoreChallengeInterceptor (copy), FriendsStoreChallengeNetworkModule (copy), SetCurrentToastMessageFunction (copy), FFlagSduiSearchPeoplePlayerTileTelemetry (copy), FirePlayerFriendAddTelemetryModule (copy), FFlagSduiFriendRequestButtonHideForSelfModule (copy), GetCurrentUserIdModule (copy), IconButton (copy), Enums1 (copy), Small (copy)
 	local UserId = p1.userId
 	local UseDispatchResult = UseDispatchFunction()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(FriendsStore.get().GetFriendshipStatus(UserId or "").data)
 	local IsUseSignalStateResultMatch: boolean = UseSignalStateResult == Enum.FriendStatus.FriendRequestSent or UseSignalStateResult == Enum.FriendStatus.FriendRequestReceived
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: IsUseSignalStateResultMatch (copy), UserId (copy), FFlagSduiRequestFriendshipActionHandler (upval), p1 (copy), SduiRequestFriendshipActionModule (upval), SduiActionType (upval), RawValueResult (upval), FriendsStore (upval), FFlagEnableFriendsStoreChallengeInterceptor (upval), FriendsStoreChallengeNetworkModule (upval), UseDispatchResult (copy), SetCurrentToastMessageFunction (upval), FFlagSduiSearchPeoplePlayerTileTelemetry (upval), FirePlayerFriendAddTelemetryModule (upval)
+		-- upvalues: IsUseSignalStateResultMatch (copy), UserId (copy), p1 (copy), SduiRequestFriendshipActionModule (upval), SduiActionType (upval), RawValueResult (upval), FriendsStore (upval), FFlagEnableFriendsStoreChallengeInterceptor (upval), FriendsStoreChallengeNetworkModule (upval), UseDispatchResult (copy), SetCurrentToastMessageFunction (upval), FFlagSduiSearchPeoplePlayerTileTelemetry (upval), FirePlayerFriendAddTelemetryModule (upval)
 		if IsUseSignalStateResultMatch or UserId == nil then return end
-		if FFlagSduiRequestFriendshipActionHandler and p1.sduiContext then
+		if p1.sduiContext then
 			SduiRequestFriendshipActionModule({
 				actionType = SduiActionType.RequestFriendship,
 				actionParams = { targetUserId = UserId, source = p1.source }
@@ -57,8 +57,7 @@ return ReactModule.memo(function(p1)
 		end
 	end, {
 		IsUseSignalStateResultMatch, UserId, p1.source, UseDispatchResult,
-		if FFlagSduiSearchPeoplePlayerTileTelemetry or FFlagSduiRequestFriendshipActionHandler then p1.analyticsContext else nil,
-		if FFlagSduiSearchPeoplePlayerTileTelemetry or FFlagSduiRequestFriendshipActionHandler then p1.sduiContext else nil
+		p1.analyticsContext, p1.sduiContext
 	})
 	
 	return if UseSignalStateResult == nil or UseSignalStateResult == Enum.FriendStatus.Friend then nil elseif FFlagSduiFriendRequestButtonHideForSelfModule and UserId ~= nil and UserId == GetCurrentUserIdModule() then nil else ReactModule.createElement("TextButton", {
@@ -71,7 +70,7 @@ return ReactModule.memo(function(p1)
 		Button = ReactModule.createElement(IconButton, {
 			icon = "icons/common/plus_small",
 			isCircular = true,
-			variant = Enums.ButtonVariant.OverMedia,
+			variant = Enums1.ButtonVariant.OverMedia,
 			isDisabled = IsUseSignalStateResultMatch,
 			size = p1.size or Small,
 			onActivated = UseResult

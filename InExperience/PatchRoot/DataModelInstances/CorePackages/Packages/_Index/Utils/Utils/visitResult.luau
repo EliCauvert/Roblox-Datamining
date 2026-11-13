@@ -20,8 +20,8 @@ local CollectSubFieldsFunction = CollectFieldsModule.collectSubFields
 local _ = require(script.Parent.Interfaces)
 local _ = require(script.Parent.types)
 local NULL = GraphQLModule.NULL
-local Callback = nil
 local Callback1 = nil
+local Callback = nil
 local Callback2 = nil
 local Callback3 = nil
 local Callback4 = nil
@@ -59,7 +59,7 @@ local VisitResultModule = {
 		end)
 	end,
 	visitResult = function(p2, p3, p4, p5, p6)
-		-- upvalues: Array (copy), Kind (copy), Boolean (copy), Map (copy), Set (copy), GetOperationASTFromRequestFunction (copy), Callback (ref), Callback1 (ref)
+		-- upvalues: Array (copy), Kind (copy), Boolean (copy), Map (copy), Set (copy), GetOperationASTFromRequestFunction (copy), Callback1 (ref), Callback (ref)
 		local ReduceResult = Array.reduce(p3.document.definitions, function(p7, p8)
 			-- upvalues: Kind (upval)
 			if p8.kind == Kind.FRAGMENT_DEFINITION then
@@ -75,16 +75,16 @@ local VisitResultModule = {
 		local OperationASTFromRequest = GetOperationASTFromRequestFunction(p3)
 		
 		if Data ~= nil and OperationASTFromRequest ~= nil then
-			p2.data = Callback(Data, OperationASTFromRequest, p4, ReduceResult, Variables, p5, if Boolean.toJSBoolean(v1) then Errors else nil, config)
+			p2.data = Callback1(Data, OperationASTFromRequest, p4, ReduceResult, Variables, p5, if Boolean.toJSBoolean(v1) then Errors else nil, config)
 		end
 		if Boolean.toJSBoolean(Errors ~= nil and p6) then
-			p2.errors = Callback1(Errors, p6, config)
+			p2.errors = Callback(Errors, p6, config)
 		end
 		return p2
 	end
 }
 
-Callback1 = function(Errors, p2, p3)
+Callback = function(Errors, p2, p3)
 	-- upvalues: Array (copy), Boolean (copy)
 	local SegmentInfoMap = p3.segmentInfoMap
 	local UnpathedErrors = p3.unpathedErrors
@@ -116,7 +116,7 @@ local function _(p2, p3)
 	return if Operation == "query" then p2:getQueryType() elseif Operation == "mutation" then p2:getMutationType() elseif Operation == "subscription" then p2:getSubscriptionType() else nil
 end
 
-Callback = function(p2, p3, p4, ReduceResult, Variables, p5, p6, p7)
+Callback1 = function(p2, p3, p4, ReduceResult, Variables, p5, p6, p7)
 	-- upvalues: CollectFieldsFunction (copy), Map (copy), Set (copy), Callback2 (ref)
 	local Operation = p3.operation
 	local QueryType = if Operation == "query" then p4:getQueryType() elseif Operation == "mutation" then p4:getMutationType() elseif Operation == "subscription" then p4:getSubscriptionType() else nil

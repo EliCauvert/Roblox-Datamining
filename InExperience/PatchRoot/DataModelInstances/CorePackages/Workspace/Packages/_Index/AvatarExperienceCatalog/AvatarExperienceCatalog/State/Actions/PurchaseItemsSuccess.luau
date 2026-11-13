@@ -1,9 +1,10 @@
 ﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
 local Parent = AvatarExperienceCatalog.Parent
+local RoduxModule = require(Parent.Rodux)
 local _ = require(AvatarExperienceCatalog.Stores.createAXShoppingCartStore)
 local FFlagAXMISSaveWearFix = require(Parent.AvatarExperienceFlags).FFlagAXMISSaveWearFix
 
-return require(Parent.Rodux).makeActionCreator(script.Name, function(p1)
+return RoduxModule.makeActionCreator(script.Name, function(p1)
 	-- upvalues: FFlagAXMISSaveWearFix (copy)
 	return {
 		equippableAssets = p1.equippableAssets,

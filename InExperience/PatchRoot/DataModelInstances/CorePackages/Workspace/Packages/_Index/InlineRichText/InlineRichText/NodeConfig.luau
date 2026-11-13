@@ -3,6 +3,7 @@ local Parent = InlineRichText.Parent
 local _ = require(InlineRichText.Types)
 local NodeTypeModule = require(InlineRichText.Enums.NodeType)
 local NewResult = require(InlineRichText.Logger):new(script.Name)
+local CryoModule = require(Parent.Cryo)
 local IsDescendantModule = require(InlineRichText.Utils.isDescendant)
 local ReactIsModule = require(Parent.ReactIs)
 local IsInlineElementFunction = require(Parent.InlineLayout).Utils.isInlineElement
@@ -57,7 +58,7 @@ local config = {
 		end
 	}
 }
-local UnionResult = require(Parent.Cryo).Dictionary.union(config, {
+local UnionResult = CryoModule.Dictionary.union(config, {
 	[NodeTypeModule.Root] = {
 		getDefault = function()
 			-- upvalues: NodeTypeModule (copy)

@@ -5,18 +5,21 @@ local RoactModule = require(Parent.Roact)
 local GetTextSizeFunction = require(Parent.Style).GetTextSize
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
+local ValidateImage = UIBloxModule.Core.ImageSet.Validator.validateImage
+local IconSize = UIBloxModule.App.ImageSet.Enum.IconSize
+local GetIconSizeFunction = UIBloxModule.App.ImageSet.getIconSize
 local WithStyleFunction = UIBloxModule.Core.Style.withStyle
 local ActionBar = UIBloxModule.App.Button.ActionBar
 local FFlagUIBloxEnableActionBarButtonOverride = require(Parent.SharedFlags).UIBlox.FFlagUIBloxEnableActionBarButtonOverride
 local FFlagUIBloxEnableActionBarButtonOverride1 = game:DefineFastFlag("LuaAppFixUnifiedPlayButtonStickyActionBar", false) and FFlagUIBloxEnableActionBarButtonOverride
-local IconSize = UIBloxModule.App.ImageSet.getIconSize(UIBloxModule.App.ImageSet.Enum.IconSize.Large)
+local IconSize1 = GetIconSizeFunction(IconSize.Large)
 local StickyActionBar = RoactModule.PureComponent:extend("StickyActionBar")
 StickyActionBar.validateProps = TModule.strictInterface({
 	actionBarProps = TModule.optional(TModule.table),
 	actionBarWidth = TModule.optional(TModule.number),
 	infoProps = TModule.optional(TModule.strictInterface({
 		title = TModule.string,
-		icon = TModule.optional(UIBloxModule.Core.ImageSet.Validator.validateImage),
+		icon = TModule.optional(ValidateImage),
 		enableInfoAtStart = TModule.optional(TModule.boolean),
 		infoSectionWidth = TModule.optional(TModule.integer)
 	})),
@@ -59,7 +62,7 @@ function StickyActionBar.init(p1)
 		end
 	end
 	
-	local function v13(p2: number, NewX: number, p3, p4)
+	local function v15(p2: number, NewX: number, p3, p4)
 		-- upvalues: p1 (copy)
 		if p4 or not p3 then
 			return {
@@ -83,7 +86,7 @@ function StickyActionBar.init(p1)
 	end
 	
 	function p1.getLayoutConfig(p2: number, HasActionBarProps, InfoProps, XOffset: number, Title, Header, p3)
-		-- upvalues: p1 (copy), GetTextSizeFunction (upval), v13 (copy)
+		-- upvalues: p1 (copy), GetTextSizeFunction (upval), v15 (copy)
 		local v1: boolean = if p1.props.infoProps and p1.props.infoProps.enableInfoAtStart then true else false
 		local NewX = GetTextSizeFunction(Title, Header.RelativeSize * p3.Font.BaseSize, Header.Font, (Vector2.new(10000, 10000))).X + XOffset + (if XOffset > 0 then 12 else 0)
 		local config = {
@@ -99,7 +102,7 @@ function StickyActionBar.init(p1)
 			InfoSectionWidth = HasActionBarProps and p2 - 80 - Offset or p2 - 80
 		end
 		config.infoSectionWidth = InfoSectionWidth
-		config.infoSectionPadding = v13(p2, NewX, HasActionBarProps, v1)
+		config.infoSectionPadding = v15(p2, NewX, HasActionBarProps, v1)
 		config.actionBarSectionSize = UDim2.fromOffset(p1.props.actionBarWidth, 48)
 		config.actionBarSectionMarginOverride = { left = 0, right = 0, top = 0, bottom = 0 }
 		
@@ -108,18 +111,18 @@ function StickyActionBar.init(p1)
 end
 
 function StickyActionBar.render(p1)
-	-- upvalues: WithStyleFunction (copy), IconSize (copy), RoactModule (copy), ActionBar (copy), FFlagUIBloxEnableActionBarButtonOverride1 (copy), ImageSetLabel (copy), StyledTextLabel (copy)
+	-- upvalues: WithStyleFunction (copy), IconSize1 (copy), RoactModule (copy), ActionBar (copy), FFlagUIBloxEnableActionBarButtonOverride1 (copy), ImageSetLabel (copy), StyledTextLabel (copy)
 	local HasActionBarProps = p1.props.actionBarProps ~= nil
 	local HasInfoProps = p1.props.infoProps ~= nil
 	local Width = p1.props.width or p1.state.containerWidth
 	assert(HasActionBarProps or HasInfoProps, "Either actionbar or info should be present!")
 	
 	return WithStyleFunction(function(p2)
-		-- upvalues: HasInfoProps (copy), p1 (copy), IconSize (upval), Width (copy), HasActionBarProps (copy), RoactModule (upval), ActionBar (upval), FFlagUIBloxEnableActionBarButtonOverride1 (upval), ImageSetLabel (upval), StyledTextLabel (upval)
-		local IconSize1 = HasInfoProps and p1.props.infoProps.icon and IconSize or 0
+		-- upvalues: HasInfoProps (copy), p1 (copy), IconSize1 (upval), Width (copy), HasActionBarProps (copy), RoactModule (upval), ActionBar (upval), FFlagUIBloxEnableActionBarButtonOverride1 (upval), ImageSetLabel (upval), StyledTextLabel (upval)
+		local IconSize1_1 = HasInfoProps and p1.props.infoProps.icon and IconSize1 or 0
 		local Title = HasInfoProps and p1.props.infoProps.title or ""
 		local Header2 = p2.Font.Header2
-		local LayoutConfig = p1.getLayoutConfig(Width or 0, HasActionBarProps, p1.props.infoProps, IconSize1, Title, Header2, p2)
+		local LayoutConfig = p1.getLayoutConfig(Width or 0, HasActionBarProps, p1.props.infoProps, IconSize1_1, Title, Header2, p2)
 		
 		return p1:renderHorizontalLayout({
 			layoutOrder = p1.props.layoutOrder,
@@ -151,7 +154,7 @@ function StickyActionBar.render(p1)
 				Icon = p1.props.infoProps.icon and RoactModule.createElement(ImageSetLabel, {
 					LayoutOrder = 1,
 					BackgroundTransparency = 1,
-					Size = UDim2.new(0, IconSize1, 0, IconSize1),
+					Size = UDim2.new(0, IconSize1_1, 0, IconSize1_1),
 					Position = UDim2.new(0, 0, 0, 0),
 					Image = p1.props.infoProps.icon,
 					ScaleType = Enum.ScaleType.Crop

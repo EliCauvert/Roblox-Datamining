@@ -11,6 +11,12 @@ local Uiblox = require(Parent3.BuilderIcons).Migration.uiblox
 local ButtonTypeModule = require(Parent.Enum.ButtonType)
 local StandardButtonSizeModule = require(Core.Button.Enum.StandardButtonSize)
 local ImagesInverseModule = require(Parent1.ImageSet.ImagesInverse)
+local ButtonMapping = {
+	[ButtonTypeModule.Alert] = ButtonVariant.Alert,
+	[ButtonTypeModule.PrimaryContextual] = ButtonVariant.Emphasis,
+	[ButtonTypeModule.PrimarySystem] = ButtonVariant.SubEmphasis,
+	[ButtonTypeModule.Secondary] = ButtonVariant.Subtle
+}
 local SizeMapping = {
 	[StandardButtonSizeModule.Regular] = InputSize.Large,
 	[StandardButtonSizeModule.Small] = InputSize.Small,
@@ -46,12 +52,7 @@ local config1 = {
 local _Vector2 = Vector2.new(10000, 10000)
 
 return {
-	buttonMapping = {
-		[ButtonTypeModule.Alert] = ButtonVariant.Alert,
-		[ButtonTypeModule.PrimaryContextual] = ButtonVariant.Emphasis,
-		[ButtonTypeModule.PrimarySystem] = ButtonVariant.SubEmphasis,
-		[ButtonTypeModule.Secondary] = ButtonVariant.Subtle
-	},
+	buttonMapping = ButtonMapping,
 	sizeMapping = SizeMapping,
 	findIcon = function(p1)
 		-- upvalues: Uiblox (copy), ImagesInverseModule (copy)

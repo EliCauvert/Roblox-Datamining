@@ -2,6 +2,7 @@
 local Parent = InExperienceCloudPlay.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
 local ColorMode = FoundationModule.Enums.ColorMode
 local Device = FoundationModule.Enums.Device
 local FoundationProvider = FoundationModule.FoundationProvider
@@ -10,7 +11,7 @@ local config = { Light = ColorMode.Light, Dark = ColorMode.Dark }
 return {
 	name = "InExperienceCloudPlay",
 	roact = ReactModule,
-	reactRoblox = require(Parent.ReactRoblox),
+	reactRoblox = ReactRobloxModule,
 	mapStory = function(p1)
 		-- upvalues: ReactModule (copy), FoundationProvider (copy), config (copy), Device (copy)
 		return function(p2)

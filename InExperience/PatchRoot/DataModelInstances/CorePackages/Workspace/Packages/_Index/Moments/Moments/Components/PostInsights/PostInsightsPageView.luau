@@ -27,6 +27,7 @@ local ReactionSize = MomentsCommonModule.Enums.ReactionSize
 local FormFactor = MomentsCommonModule.Enums.FormFactor
 local UseDeviceInsetsFunction = MomentsCommonModule.Hooks.useDeviceInsets
 local UseFormFactorFunction = MomentsCommonModule.Hooks.useFormFactor
+local ConstantsModule = require(Moments.Constants)
 local _ = require(script.Parent.usePostInsightsPageViewModel)
 local _Vector2 = Vector2.new(83, 124)
 local _Vector2_1 = Vector2.new(94, 140)
@@ -35,7 +36,7 @@ local EventMap = {
 	[Enum.KeyCode.ButtonB] = FocusNavigationEventNameEnum.NavigateBack,
 	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
-local Frozen = table.freeze({ ZIndex = require(Moments.Constants).DisplayOrder.Modals })
+local Frozen = table.freeze({ ZIndex = ConstantsModule.DisplayOrder.Modals })
 
 local function noop() end
 

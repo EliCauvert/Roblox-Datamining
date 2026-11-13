@@ -2,18 +2,20 @@
 local Parent = AppChat.Parent
 local _ = require(AppChat.types)
 local ReactModule = require(Parent.React)
+local TrustedContactsModule = require(Parent.TrustedContacts)
+local AppTabBarRoduxModule = require(Parent.AppTabBarRodux)
 local _ = require(Parent.AppChatNetworking).Constants.ConversationOverlay
 local UseIsAppChatVerticallyConstrainedModule = require(AppChat.App.Hooks.useIsAppChatVerticallyConstrained)
 local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local RefreshConversationUnfilteredThreadsDetailsModule = require(AppChat.Conversations.Thunks.refreshConversationUnfilteredThreadsDetails)
 local PromiseModule = require(Parent.Promise)
 local UseIsInExperienceModule = require(AppChat.Hooks.useIsInExperience)
-local SetTabBarVisibleFromChatFunction = require(Parent.AppTabBarRodux).Thunks.SetTabBarVisibleFromChat
+local SetTabBarVisibleFromChatFunction = AppTabBarRoduxModule.Thunks.SetTabBarVisibleFromChat
 local ConversationOverlayTelemetryModule = require(AppChat.Components.ChatConversation.PartialModal.ConversationOverlayTelemetry)
 local ModalTelemetryModule = require(AppChat.Components.ModalTelemetry)
 local UseTelemetryModule = require(AppChat.Telemetry.useTelemetry)
 local AppTelemetryLayerModule = require(AppChat.Telemetry.Layers.AppTelemetryLayer)
-local TrustedFriendsModalEntry = require(Parent.TrustedContacts).TrustedFriendsModalEntry
+local TrustedFriendsModalEntry = TrustedContactsModule.TrustedFriendsModalEntry
 local FIntUnfilteredThreadsPvDelayMsModule = require(AppChat.Flags.FIntUnfilteredThreadsPvDelayMs)
 
 return function(p1)

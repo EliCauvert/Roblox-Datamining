@@ -3,8 +3,12 @@ local Parent = AppChat.Parent
 local RoactNavigationModule = require(Parent.RoactNavigation)
 local SquadQuickStartExperimentation = require(Parent.SocialExperiments).SquadQuickStartExperimentation
 local EnumScreensModule = require(AppChat.EnumScreens)
+local ChatLandingScreenWithSwitchNavigatorModule = require(AppChat.Components.ChatLanding.ChatLandingScreenWithSwitchNavigator)
+local CreateNewChatScreenModule = require(AppChat.Components.CreateNewChat.CreateNewChatScreen)
+local EditChatMembersScreenModule = require(AppChat.Components.EditChatMembers.EditChatMembersScreen)
 local QuickStartSquadInviteFriendsScreenModule = require(AppChat.Components.Squads.QuickStartSquadInviteFriendsScreen)
 local CreateOverlayTopBarStackNavigatorWithFocusModule = require(AppChat.Navigators.createOverlayTopBarStackNavigatorWithFocus)
+local GetFFlagAppChatRemoveDynamicRequiresModule = require(AppChat.Flags.getFFlagAppChatRemoveDynamicRequires)
 local FFlagEnablePartyQuickStartButton = require(Parent.SharedFlags).FFlagEnablePartyQuickStartButton
 local FFlagAppChatDisableAbsorbInputSelectableModule = require(AppChat.Flags.FFlagAppChatDisableAbsorbInputSelectable)
 
@@ -23,8 +27,8 @@ local NavigationOptions = {
 local List = {
 	{
 		[EnumScreensModule.ChatLanding] = {
-			screen = require(AppChat.Components.ChatLanding.ChatLandingScreenWithSwitchNavigator),
-			navigationOptions = if require(AppChat.Flags.getFFlagAppChatRemoveDynamicRequires)() then function()
+			screen = ChatLandingScreenWithSwitchNavigatorModule,
+			navigationOptions = if GetFFlagAppChatRemoveDynamicRequiresModule() then function()
 				return { backButtonEnabled = false, tabBarVisible = true }
 			end else { backButtonEnabled = false, tabBarVisible = true }
 		}
@@ -33,7 +37,7 @@ local List = {
 		CreateNewChatScreenWrapper = {
 			screen = CreateOverlayTopBarStackNavigatorWithFocusModule({
 				{
-					[EnumScreensModule.CreateNewChat] = require(AppChat.Components.CreateNewChat.CreateNewChatScreen)
+					[EnumScreensModule.CreateNewChat] = CreateNewChatScreenModule
 				}
 			}),
 			navigationOptions = NavigationOptions
@@ -43,7 +47,7 @@ local List = {
 		EditChatMembersScreenWrapper = {
 			screen = CreateOverlayTopBarStackNavigatorWithFocusModule({
 				{
-					[EnumScreensModule.EditChatMembers] = require(AppChat.Components.EditChatMembers.EditChatMembersScreen)
+					[EnumScreensModule.EditChatMembers] = EditChatMembersScreenModule
 				}
 			}),
 			navigationOptions = NavigationOptions

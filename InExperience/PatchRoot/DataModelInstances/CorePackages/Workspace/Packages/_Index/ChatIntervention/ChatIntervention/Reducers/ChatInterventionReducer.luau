@@ -1,9 +1,10 @@
 ﻿local ChatIntervention = script:FindFirstAncestor("ChatIntervention")
 local Parent = ChatIntervention.Parent
+local RoduxModule = require(Parent.Rodux)
 local Actions = ChatIntervention.Actions
 local Dictionary = require(Parent.llama).Dictionary
 
-return require(Parent.Rodux).createReducer({
+return RoduxModule.createReducer({
 	isShowChatFeedbackModal = false,
 	isShowChatFeedbackPill = false,
 	isShowChatNudgeModal = false,

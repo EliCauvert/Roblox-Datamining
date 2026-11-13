@@ -25904,29 +25904,29 @@ do
 					Buffer4, v4931 = ProtoModule.readBuffer(Buf, v120)
 					NewModule.payment_session_id = buffer.tostring(Buffer4)
 				elseif Tag == 5 then
-					local Buffer6
-					Buffer6, v4931 = ProtoModule.readBuffer(Buf, v120)
-					NewModule.purchase_flow_id = buffer.tostring(Buffer6)
-				elseif Tag == 6 then
-					local Buffer7
-					Buffer7, v4931 = ProtoModule.readBuffer(Buf, v120)
-					NewModule.login_redirect_pathname = buffer.tostring(Buffer7)
-				elseif Tag == 8 then
-					local Buffer8
-					Buffer8, v4931 = ProtoModule.readBuffer(Buf, v120)
-					NewModule.transfers = t.BuyRobuxTransfersInputData.decode(Buffer8)
-				elseif Tag == 9 then
-					local Buffer9
-					Buffer9, v4931 = ProtoModule.readBuffer(Buf, v120)
-					NewModule.system_banner = t.TextInputData.decode(Buffer9)
-				elseif Tag == 10 then
-					local Buffer10
-					Buffer10, v4931 = ProtoModule.readBuffer(Buf, v120)
-					NewModule.faq = t.BuyRobuxFaqInputData.decode(Buffer10)
-				elseif Tag == 11 then
 					local Buffer5
 					Buffer5, v4931 = ProtoModule.readBuffer(Buf, v120)
-					NewModule.analytics = t.BuyRobuxPageAnalyticsData.decode(Buffer5)
+					NewModule.purchase_flow_id = buffer.tostring(Buffer5)
+				elseif Tag == 6 then
+					local Buffer6
+					Buffer6, v4931 = ProtoModule.readBuffer(Buf, v120)
+					NewModule.login_redirect_pathname = buffer.tostring(Buffer6)
+				elseif Tag == 8 then
+					local Buffer7
+					Buffer7, v4931 = ProtoModule.readBuffer(Buf, v120)
+					NewModule.transfers = t.BuyRobuxTransfersInputData.decode(Buffer7)
+				elseif Tag == 9 then
+					local Buffer8
+					Buffer8, v4931 = ProtoModule.readBuffer(Buf, v120)
+					NewModule.system_banner = t.TextInputData.decode(Buffer8)
+				elseif Tag == 10 then
+					local Buffer9
+					Buffer9, v4931 = ProtoModule.readBuffer(Buf, v120)
+					NewModule.faq = t.BuyRobuxFaqInputData.decode(Buffer9)
+				elseif Tag == 11 then
+					local Buffer10
+					Buffer10, v4931 = ProtoModule.readBuffer(Buf, v120)
+					NewModule.analytics = t.BuyRobuxPageAnalyticsData.decode(Buffer10)
 				else
 					local VarInt1, VarInt2 = ProtoModule.readVarInt(Buf, v120)
 					v120 = VarInt2 + VarInt1

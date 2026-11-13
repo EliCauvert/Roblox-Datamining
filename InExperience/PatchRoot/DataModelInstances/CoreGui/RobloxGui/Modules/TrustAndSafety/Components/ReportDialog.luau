@@ -10,6 +10,7 @@ local GameIconModule = require(DependenciesModule.GameIcon)
 local PlayerCellModule = require(DependenciesModule.PlayerCell)
 local ThemedTextLabelModule = require(DependenciesModule.ThemedTextLabel)
 local WithLocalizationModule = require(DependenciesModule.withLocalization)
+local PlayerInterfaceModule = require(DependenciesModule.playerInterface)
 local NavigateBackModule = require(Parent.Actions.NavigateBack)
 local EndReportFlowModule = require(Parent.Actions.EndReportFlow)
 local ConstantsModule = require(Parent.Resources.Constants)
@@ -32,7 +33,7 @@ local VoiceStateContextModule = require(RobloxGui.Modules.VoiceChat.VoiceStateCo
 local ConstantsModule1 = require(RobloxGui.Modules.VoiceChat.Constants)
 local ReactModule = require(CorePackages.Packages.React)
 
-local function v31(p1)
+local function v32(p1)
 	-- upvalues: ReactModule (copy), VoiceStateContextModule (copy), VoiceIndicatorFuncModule (copy), CryoModule (copy)
 	return if ReactModule.useContext(VoiceStateContextModule.Context).voiceEnabled then ReactModule.createElement(VoiceIndicatorFuncModule, CryoModule.Dictionary.join(p1, {})) else nil
 end
@@ -53,7 +54,7 @@ local ReportDialog = RoactModule.PureComponent:extend("ReportDialog")
 ReportDialog.validateProps = TModule.strictInterface({
 	isReportDialogOpen = TModule.boolean,
 	reportType = TModule.optional(TModule.valueOf(ConstantsModule.ReportType)),
-	targetPlayer = TModule.optional((require(DependenciesModule.playerInterface))),
+	targetPlayer = TModule.optional(PlayerInterfaceModule),
 	placeName = TModule.string,
 	screenSize = TModule.Vector2,
 	navigateBack = TModule.optional(TModule.callback),
@@ -114,11 +115,11 @@ function ReportDialog:renderUKOSALink()
 end
 
 function ReportDialog.renderPlayerInfo(p1)
-	-- upvalues: ConstantsModule (copy), WithStyleFunction (copy), CryoModule (copy), config (copy), RoactModule (copy), Provider (copy), PlayerCellModule (copy), IsPlayerVerifiedFunction (copy), v31 (copy), Default (copy), ConstantsModule1 (copy)
+	-- upvalues: ConstantsModule (copy), WithStyleFunction (copy), CryoModule (copy), config (copy), RoactModule (copy), Provider (copy), PlayerCellModule (copy), IsPlayerVerifiedFunction (copy), v32 (copy), Default (copy), ConstantsModule1 (copy)
 	local IsReportCategoryMatch = p1.props.reportCategory == ConstantsModule.Category.Voice
 	
 	return WithStyleFunction(function(p2)
-		-- upvalues: CryoModule (upval), config (upval), IsReportCategoryMatch (copy), p1 (copy), RoactModule (upval), Provider (upval), PlayerCellModule (upval), IsPlayerVerifiedFunction (upval), v31 (upval), Default (upval), ConstantsModule1 (upval)
+		-- upvalues: CryoModule (upval), config (upval), IsReportCategoryMatch (copy), p1 (copy), RoactModule (upval), Provider (upval), PlayerCellModule (upval), IsPlayerVerifiedFunction (upval), v32 (upval), Default (upval), ConstantsModule1 (upval)
 		local JoinResult = CryoModule.Dictionary.join(p2, { Theme = CryoModule.Dictionary.join(p2.Theme, config) })
 		local MemoKey = 0
 		
@@ -137,7 +138,7 @@ function ReportDialog.renderPlayerInfo(p1)
 				key = tostring(p1.props.targetPlayer.UserId),
 				memoKey = MemoKey
 			}, {
-				VoiceIndicator = IsReportCategoryMatch and p1.props.isReportDialogOpen and RoactModule.createElement(v31, {
+				VoiceIndicator = IsReportCategoryMatch and p1.props.isReportDialogOpen and RoactModule.createElement(v32, {
 					hideOnError = true,
 					iconStyle = "SpeakerLight",
 					userId = tostring(p1.props.targetPlayer.UserId),

@@ -1,6 +1,7 @@
 ﻿local CorePackages = game:GetService("CorePackages")
 local ReactModule = require(CorePackages.Packages.React)
 local CrossExperienceVoiceModule = require(CorePackages.Workspace.Packages.CrossExperienceVoice)
+local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
 local GetColorFromUserIdModule = require(CorePackages.Workspace.Packages.SquadsCore.getColorFromUserId)
 local UseLastActiveParticipantFunction = CrossExperienceVoiceModule.Hooks.useLastActiveParticipant
 local UseSequentialAnimationFunction = CrossExperienceVoiceModule.Hooks.useSequentialAnimation
@@ -8,7 +9,7 @@ local UsePreviousFunction = require(CorePackages.Workspace.Packages.RoactUtils).
 local GetStandardSizeAvatarHeadShotRbxthumbFunction = require(CorePackages.Workspace.Packages.UserLib).Utils.getStandardSizeAvatarHeadShotRbxthumb
 local PartyVoiceTopbarActivityIndicatorAnimationMs = game:DefineFastInt("PartyVoiceTopbarActivityIndicatorAnimationMs", 50)
 local PartyVoiceTopbarActivityIndicatorDebounceMs = game:DefineFastInt("PartyVoiceTopbarActivityIndicatorDebounceMs", 50)
-local GetFFlagEnableCrossExpVoiceFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagEnableCrossExpVoice
+local GetFFlagEnableCrossExpVoiceFunction = SharedFlagsModule.GetFFlagEnableCrossExpVoice
 
 function createAnimations(Value, Value1)
 	-- upvalues: PartyVoiceTopbarActivityIndicatorAnimationMs (copy)

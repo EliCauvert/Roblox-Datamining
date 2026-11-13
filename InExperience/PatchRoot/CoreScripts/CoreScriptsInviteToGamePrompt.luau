@@ -10,13 +10,15 @@ local GetFFlagFixSettingshubImportOrderModule = require(Modules.Flags.GetFFlagFi
 local SettingsHubModule = if GetFFlagFixSettingshubImportOrderModule() then nil else require(Settings.SettingsHub)
 local GetFFlagEnableNewInviteMenuCustomizationModule = require(Modules.Flags.GetFFlagEnableNewInviteMenuCustomization)
 local GetFFlagEnableInvitePromptLoadingStateModule = require(Modules.Flags.GetFFlagEnableInvitePromptLoadingState)
+local Diag = require(CorePackages.Workspace.Packages.Analytics).AnalyticsReporters.Diag
+local EventStream = require(CorePackages.Workspace.Packages.Analytics).AnalyticsReporters.EventStream
 local GameInviteAnalytics = require(CorePackages.Workspace.Packages.GameInvite).GameInviteAnalytics
 local GameInviteModule = require(CorePackages.Workspace.Packages.GameInvite)
 local GameInviteModalManager = GameInviteModule.GameInviteModalManager
 local GetCustomizedInvitePromptTriggerFunction = GameInviteModule.GetCustomizedInvitePromptTrigger
 local GameInviteConstants = GameInviteModule.GameInviteConstants
 local GameInviteAnalyticsManager = GameInviteModule.GameInviteAnalyticsManager
-local WithAnalyticsResult = require(ShareGame.InviteToGamePrompt).new(CoreGui):withSocialServiceAndLocalPlayer(SocialService, Players.LocalPlayer):withAnalytics((GameInviteAnalytics.new():withEventStream((require(CorePackages.Workspace.Packages.Analytics).AnalyticsReporters.EventStream.new(RbxAnalyticsService))):withDiag(require(CorePackages.Workspace.Packages.Analytics).AnalyticsReporters.Diag.new(RbxAnalyticsService)):withButtonName(GameInviteAnalytics.ButtonName.ModalPrompt)))
+local WithAnalyticsResult = require(ShareGame.InviteToGamePrompt).new(CoreGui):withSocialServiceAndLocalPlayer(SocialService, Players.LocalPlayer):withAnalytics((GameInviteAnalytics.new():withEventStream((EventStream.new(RbxAnalyticsService))):withDiag(Diag.new(RbxAnalyticsService)):withButtonName(GameInviteAnalytics.ButtonName.ModalPrompt)))
 local ApiGetCanSendAndCanCustomizeInvitesModule = require(ShareGame.Thunks.ApiGetCanSendAndCanCustomizeInvites)
 local GetCustomizedInvitePromptParamsModule = require(ShareGame.getCustomizedInvitePromptParams)
 

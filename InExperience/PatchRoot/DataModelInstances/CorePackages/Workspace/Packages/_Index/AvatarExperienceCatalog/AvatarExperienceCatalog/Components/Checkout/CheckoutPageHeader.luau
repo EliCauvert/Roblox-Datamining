@@ -2,6 +2,7 @@
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local AvatarExperienceNavigationModule = require(Parent.AvatarExperienceNavigation)
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local UseNavigationFunction = require(Parent.Navigation).useNavigation
 local CanGoBackFunction = require(Parent.Navigation).canGoBack
@@ -9,7 +10,7 @@ local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispa
 local ClearTryOnsFunction = require(Parent.AvatarExperienceRodux).Actions.ClearTryOns
 local UseAvatarRouteFunction = AvatarExperienceNavigationModule.AvatarRoute.Hooks.useAvatarRoute
 local AvatarScreen = AvatarExperienceNavigationModule.Enums.AvatarScreen
-local FFlagAXEnableExpiredUserLookCheckout = require(Parent.AvatarExperienceFlags).FFlagAXEnableExpiredUserLookCheckout
+local FFlagAXEnableExpiredUserLookCheckout = AvatarExperienceFlagsModule.FFlagAXEnableExpiredUserLookCheckout
 
 return ReactModule.memo(function()
 	-- upvalues: FFlagAXEnableExpiredUserLookCheckout (copy), UseDispatchFunction (copy), UseNavigationFunction (copy), FoundationModule (copy), UseAvatarRouteFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), AvatarScreen (copy), ClearTryOnsFunction (copy), CanGoBackFunction (copy)

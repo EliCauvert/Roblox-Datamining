@@ -42,7 +42,7 @@ return function(p1, p2)
 	local DiscountInformation = nil
 	local Flag2 = nil
 	
-	for _, item in ipairs(Look.items) do
+	for Type, item in ipairs(Look.items) do
 		local Text = tostring(item.id)
 		
 		if (item.itemType ~= "Asset" or not t[Text]) and (item.itemType ~= "Bundle" or not t1[Text]) then

@@ -2,12 +2,13 @@
 local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
 local FoundationModule = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
 local ReactModule = require(Parent.React)
 local EscapeRichTextModule = require(Moments.Utils.escapeRichText)
 local TruncateCommentTextModule = require(script.Parent.truncateCommentText)
 local IsPointInGuiObjectBoundsFunction = FoundationModule.Utility.isPointInGuiObjectBounds
 local UseTokensFunction = FoundationModule.Hooks.useTokens
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local config = {
 	showMore = "Feature.Moments.Action.CommentShowMore",
 	showLess = "Feature.Moments.Action.CommentShowLess"

@@ -11,11 +11,14 @@ return function(p1, p2, p3)
 	-- upvalues: DisplayModule (copy), CollectionViewsModule (copy), FFlagSduiPreferredTextSizeLineBudgets (copy), Parent (copy), GetPreferredTextSizeLineBudgetModule (copy), FIntLuaAppSduiCarouselPlaceholderHeaderHeightPx (copy)
 	local DisplayStore = DisplayModule.GetDisplayStore(false)
 	local MainCollectionLayoutStore = CollectionViewsModule.getMainCollectionLayoutStore(false)
+	local ViewportSize = DisplayStore.getViewportSize(false)
+	local TopBarHeight = DisplayStore.getTopBarHeight(false)
 	local PlatformScale: number = DisplayStore.getPlatformScale(false)
 	local PlatformScale1 = if PlatformScale and PlatformScale > 0 then PlatformScale else 1
+	local DesignSpaceContainerWidth = MainCollectionLayoutStore.getDesignSpaceContainerWidth(false)
 	local NumItemsForAllCategories = MainCollectionLayoutStore.getNumItemsForAllCategories(false)
-	local YRatio = (DisplayStore.getViewportSize(false).Y - DisplayStore.getTopBarHeight(false)) / PlatformScale1
-	local NewDesignSpaceContainerWidth = MainCollectionLayoutStore.getDesignSpaceContainerWidth(false) / math.max(1, NumItemsForAllCategories[p1] or 1) * p2.Scale + p2.Offset
+	local YRatio = (ViewportSize.Y - TopBarHeight) / PlatformScale1
+	local NewDesignSpaceContainerWidth = DesignSpaceContainerWidth / math.max(1, NumItemsForAllCategories[p1] or 1) * p2.Scale + p2.Offset
 	
 	if FFlagSduiPreferredTextSizeLineBudgets then
 		local Largest = math.max(p3 or 0, 0)

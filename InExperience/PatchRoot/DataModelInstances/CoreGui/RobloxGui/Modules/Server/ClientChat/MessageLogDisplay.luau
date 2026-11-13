@@ -10,9 +10,10 @@ end)
 Result2_1 = Success1 and Result2
 local MessageLogDisplayModule = { ScrollBarThickness = 4 }
 local Parent = script.Parent
+local MessageLabelCreatorModule = require(Parent:WaitForChild("MessageLabelCreator"))
 local CurveUtilModule = require(Parent:WaitForChild("CurveUtil"))
 local ChatSettingsModule = require(game:GetService("Chat"):WaitForChild("ClientChatModules"):WaitForChild("ChatSettings"))
-local NewResult = require(Parent:WaitForChild("MessageLabelCreator")).new()
+local NewMessageLabelCreator = MessageLabelCreatorModule.new()
 local Module = {}
 Module.__index = Module
 
@@ -103,12 +104,12 @@ function Module.RefreshMessagePlacement(p3, p4)
 end
 
 function Module.AddMessage(p5, p6)
-	-- upvalues: Result2_1 (ref), NewResult (copy)
+	-- upvalues: Result2_1 (ref), NewMessageLabelCreator (copy)
 	p5:WaitUntilParentedCorrectly()
-	local MessageLabel_Chat = if Result2_1 then NewResult:CreateMessageLabel_Chat(p6, p5.CurrentChannelName, function()
+	local MessageLabel_Chat = if Result2_1 then NewMessageLabelCreator:CreateMessageLabel_Chat(p6, p5.CurrentChannelName, function()
 		-- upvalues: p5 (copy), p6 (copy)
 		p5:RefreshMessagePlacement(p6)
-	end) else NewResult:CreateMessageLabel(p6, p5.CurrentChannelName)
+	end) else NewMessageLabelCreator:CreateMessageLabel(p6, p5.CurrentChannelName)
 	
 	if MessageLabel_Chat ~= nil then
 		table.insert(p5.MessageObjectLog, MessageLabel_Chat)
@@ -129,11 +130,11 @@ function Module.RemoveMessageAtIndex(p5, Index)
 end
 
 function Module.AddMessageAtIndex(p5, p6, p7)
-	-- upvalues: Result2_1 (ref), NewResult (copy)
-	local MessageLabel_Chat = if Result2_1 then NewResult:CreateMessageLabel_Chat(p6, p5.CurrentChannelName, function()
+	-- upvalues: Result2_1 (ref), NewMessageLabelCreator (copy)
+	local MessageLabel_Chat = if Result2_1 then NewMessageLabelCreator:CreateMessageLabel_Chat(p6, p5.CurrentChannelName, function()
 		-- upvalues: p5 (copy), p6 (copy)
 		p5:RefreshMessagePlacement(p6)
-	end) else NewResult:CreateMessageLabel(p6, p5.CurrentChannelName)
+	end) else NewMessageLabelCreator:CreateMessageLabel(p6, p5.CurrentChannelName)
 	
 	if MessageLabel_Chat ~= nil then
 		table.insert(p5.MessageObjectLog, p7, MessageLabel_Chat)

@@ -82,11 +82,12 @@ local Panel3DModule = {
 	RaycastOntoPanel = function(Part, Frame: Frame, Frame1: Frame, p1)
 		-- upvalues: VRUtilModule (copy)
 		local Size = Part.Size
+		local Z = Size.Z
 		local X: number = Size.X
 		local Y = Size.Y
 		local RenderCFrame = Part:GetRenderCFrame()
 		local LookVector = RenderCFrame.lookVector
-		local RayPlaneIntersectionResult = VRUtilModule.RayPlaneIntersection(p1, LookVector, RenderCFrame.p + LookVector * Size.Z * 0.5)
+		local RayPlaneIntersectionResult = VRUtilModule.RayPlaneIntersection(p1, LookVector, RenderCFrame.p + LookVector * Z * 0.5)
 		
 		if RayPlaneIntersectionResult then
 			local NewVector = RenderCFrame:pointToObjectSpace(RayPlaneIntersectionResult) * vector.create(-1, 1, 1) + Vector3.new(X / 2, -Y / 2, 0)

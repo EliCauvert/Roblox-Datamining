@@ -1,12 +1,14 @@
 ﻿local Parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
+local AppUserLayers = require(Parent.ExperimentLayers).AppUserLayers
+local IXPUtilsModule = require(Parent.IXPUtils)
 local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local FFlagAXAvatarsTabIXP = AvatarExperienceFlagsModule.FFlagAXAvatarsTabIXP
 local FFlagAXAvatarsTabIXPEnabledForAll = AvatarExperienceFlagsModule.FFlagAXAvatarsTabIXPEnabledForAll
 
-return require(Parent.IXPUtils).defineIXPTest({
+return IXPUtilsModule.defineIXPTest({
 	name = "AvatarExperience.UA.MarketplaceView.AvatarsTab",
 	recordExposure = false,
-	layer = require(Parent.ExperimentLayers).AppUserLayers.AvatarExperienceUAMarketplaceView,
+	layer = AppUserLayers.AvatarExperienceUAMarketplaceView,
 	getIsUserInExperiment = function(p1): boolean
 		return p1.IsAvatarsTabEnabled ~= nil
 	end,

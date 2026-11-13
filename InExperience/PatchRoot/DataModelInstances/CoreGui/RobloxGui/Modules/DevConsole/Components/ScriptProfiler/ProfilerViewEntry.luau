@@ -1,5 +1,6 @@
 ﻿local CorePackages = game:GetService("CorePackages")
 local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
 local _ = require(script.Parent.ProfilerDataFormatV2)
 local ProfilerUtilModule = require(script.Parent.ProfilerUtil)
 local GetDurationsFunction = ProfilerUtilModule.getDurations
@@ -20,7 +21,7 @@ local ValueCellWidth = ConstantsModule.ScriptProfilerFormatting.ValueCellWidth
 local CellPadding = ConstantsModule.ScriptProfilerFormatting.CellPadding
 local ValuePadding = ConstantsModule.ScriptProfilerFormatting.ValuePadding
 local ProfilerViewEntry = RoactModule.PureComponent:extend("ProfilerViewEntry")
-local v1 = require(CorePackages.Packages.RoactRodux).UNSTABLE_connect2(nil, function(Callback)
+local v1 = RoactRoduxModule.UNSTABLE_connect2(nil, function(Callback)
 	-- upvalues: SetScriptProfilerRootModule (copy)
 	return {
 		dispatchSetScriptProfilerRoot = function(p1, p2, p3)

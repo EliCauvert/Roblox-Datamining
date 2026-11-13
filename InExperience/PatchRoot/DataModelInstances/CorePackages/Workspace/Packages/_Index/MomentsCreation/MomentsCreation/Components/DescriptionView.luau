@@ -4,6 +4,8 @@ local CryoModule = require(Parent.Cryo)
 local FoundationModule = require(Parent.Foundation)
 local MomentsCommonModule = require(Parent.MomentsCommon)
 local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagMomentsComments = require(Parent.SharedFlags).FFlagMomentsComments
 local Button = FoundationModule.Button
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
@@ -14,7 +16,7 @@ local Toggle = FoundationModule.Toggle
 local View = FoundationModule.View
 local UseCallbackFunction = ReactModule.useCallback
 local UseDeviceInsetsFunction = MomentsCommonModule.Hooks.useDeviceInsets
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseSignalStateFunction = SignalsReactModule.useSignalState
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local GetCreationFlowStoreModule = require(MomentsCreation.Stores.GetCreationFlowStore)
 local FireAnalyticsEventModule = require(MomentsCreation.Analytics.fireAnalyticsEvent)
@@ -27,7 +29,7 @@ local SessionManager = MomentsCommonModule.Analytics.SessionManager
 local FunnelEventNames = MomentsCommonModule.Analytics.FunnelEventNames
 local FFlagMomentTextGenerationFilteredSignal = MomentsCommonModule.Flags.FFlagMomentTextGenerationFilteredSignal
 local GetFFlagMomentsUseUploadPostAsyncFunction = MomentsCommonModule.Flags.GetFFlagMomentsUseUploadPostAsync
-local FFlagMomentsRenderCreatePostStatus = require(Parent.SharedFlags).FFlagMomentsRenderCreatePostStatus
+local FFlagMomentsRenderCreatePostStatus = SharedFlagsModule.FFlagMomentsRenderCreatePostStatus
 local FFlagMomentsCommentsCreatorControlModule = require(MomentsCreation.Flags.FFlagMomentsCommentsCreatorControl)
 
 local function AllowCommentsToggle(p1)

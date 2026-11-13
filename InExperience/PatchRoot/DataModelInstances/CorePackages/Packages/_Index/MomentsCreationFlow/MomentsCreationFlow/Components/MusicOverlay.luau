@@ -1,5 +1,6 @@
 ﻿local MomentsCreationFlow = script:FindFirstAncestor("MomentsCreationFlow")
 local Parent = MomentsCreationFlow.Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
 local DashModule = require(Parent.Dash)
 local FoundationModule = require(Parent.Foundation)
 local MomentsCommonModule = require(Parent.MomentsCommon)
@@ -10,7 +11,7 @@ local ScrollView = FoundationModule.ScrollView
 local Text = FoundationModule.Text
 local TextInput = FoundationModule.TextInput
 local View = FoundationModule.View
-local MagnifyingGlass = require(Parent.BuilderIcons).Icon.MagnifyingGlass
+local MagnifyingGlass = BuilderIconsModule.Icon.MagnifyingGlass
 local MusicEditorModule = require(MomentsCreationFlow.Components.MusicEditor)
 local MusicPreviewItemModule = require(MomentsCreationFlow.Components.MusicPreviewItem)
 local SearchMusicModule = require(MomentsCreationFlow.Thunks.SearchMusic)

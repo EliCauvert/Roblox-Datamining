@@ -2,6 +2,7 @@
 local Parent = MomentsCommon.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.Dev.ReactRoblox)
 local config = {
 	Default = FoundationModule.Enums.ColorMode.Dark,
 	Light = FoundationModule.Enums.ColorMode.Light,
@@ -11,7 +12,7 @@ local config = {
 return {
 	name = MomentsCommon.Name,
 	roact = ReactModule,
-	reactRoblox = require(Parent.Dev.ReactRoblox),
+	reactRoblox = ReactRobloxModule,
 	storyRoot = MomentsCommon,
 	mapStory = function(p1)
 		-- upvalues: config (copy), ReactModule (copy), FoundationModule (copy)

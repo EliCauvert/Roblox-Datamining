@@ -1,5 +1,6 @@
 ﻿local Foundation = script:FindFirstAncestor("Foundation")
 local ReactModule = require(Foundation.Parent.React)
+local OrientationModule = require(Foundation.Enums.Orientation)
 local OptionSelectorGroupSizeModule = require(Foundation.Enums.OptionSelectorGroupSize)
 local _ = require(Foundation.Enums.FillBehavior)
 local InputLabelModule = require(Foundation.Components.InputLabel)
@@ -13,7 +14,7 @@ local UseOptionSelectorGroupVariantsModule = require(script.Parent.useOptionSele
 local config = {
 	Selectable = true,
 	testId = "--foundation-option-selector-group",
-	orientation = require(Foundation.Enums.Orientation).Vertical,
+	orientation = OrientationModule.Vertical,
 	size = OptionSelectorGroupSizeModule.Medium
 }
 

@@ -5,8 +5,9 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local _ = require(Parent.SduiCoreSystem)
 local EnumsModule = require(ProfilePlatform.Common.Enums)
 local CreateProfileCompletionPromptsConfigFunction = require(Parent.ProfilePlatformCommon).Utils.createProfileCompletionPromptsConfig
+local ServerTriggeredModalsModule = require(Parent.ServerTriggeredModals)
 local GetSduiApiStoreFunction = require(Parent.SduiSharedUtilities).getSduiApiStore
-local FetchPromptsFunction = require(Parent.ServerTriggeredModals).fetchPrompts
+local FetchPromptsFunction = ServerTriggeredModalsModule.fetchPrompts
 
 return function()
 	-- upvalues: ReactModule (copy), CreateProfileCompletionPromptsConfigFunction (copy), FetchPromptsFunction (copy), GetSduiApiStoreFunction (copy), EnumsModule (copy), SignalsReactModule (copy)

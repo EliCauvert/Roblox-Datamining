@@ -15,11 +15,12 @@ local ComposeFunction = DependenciesModule.SocialLibraries.RoduxTools.compose
 local FriendsNetworking = DependenciesModule.FriendsNetworking
 local EnumScreensModule = require(FriendsLanding.EnumScreens)
 local MemoizeFunction = DependenciesModule.memoize
+local Otter = DependenciesModule.Otter
 local FFlagMigrateFriendshipStatusesRemainingActions = require(Parent.SharedFlags).FFlagMigrateFriendshipStatusesRemainingActions
 local GetResult = require(Parent.DataHydration).Friends.FriendsStore.get()
 local FriendsLandingContextualMenu = Roact.PureComponent:extend("FriendsLandingContextualMenu")
 local MotorOverrideOptions = {
-	motorCallback = DependenciesModule.Otter.instant,
+	motorCallback = Otter.instant,
 	open = { targetValue = 1 },
 	close = { targetValue = 0 }
 }

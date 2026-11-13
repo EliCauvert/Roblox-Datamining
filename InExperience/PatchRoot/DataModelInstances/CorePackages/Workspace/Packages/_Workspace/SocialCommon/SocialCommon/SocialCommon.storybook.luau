@@ -1,14 +1,17 @@
 ﻿local SocialCommon = script:FindFirstAncestor("SocialCommon")
 local Parent = SocialCommon.Parent
 local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.Dev.ReactRoblox)
 local RoactRoduxModule = require(Parent.RoactRodux)
 local RoduxModule = require(Parent.Rodux)
 local LocalizationModule = require(Parent.Localization)
+local UnitTestHelpersModule = require(Parent.Dev.UnitTestHelpers)
+local SocialTestHelpersModule = require(Parent.Dev.SocialTestHelpers)
 local FoundationProvider = require(Parent.Foundation).FoundationProvider
 local LocalizationProvider = LocalizationModule.LocalizationProvider
 local LocalizationRoactContext = LocalizationModule.LocalizationRoactContext
-local CreateStyleProviderFunction = require(Parent.Dev.UnitTestHelpers).createStyleProvider
-local MockLocaleFunction = require(Parent.Dev.SocialTestHelpers).StoryHelpers.mockLocale
+local CreateStyleProviderFunction = UnitTestHelpersModule.createStyleProvider
+local MockLocaleFunction = SocialTestHelpersModule.StoryHelpers.mockLocale
 local NewResult = RoduxModule.Store.new(function(p1)
 	return p1
 end, { ScreenSize = Vector2.new(390, 844) }, { RoduxModule.thunkMiddleware })
@@ -42,10 +45,10 @@ return {
 	name = "SocialCommon",
 	storyRoots = { SocialCommon },
 	roact = ReactModule,
-	reactRoblox = require(Parent.Dev.ReactRoblox),
+	reactRoblox = ReactRobloxModule,
 	mapStory = function(p1)
 		-- upvalues: ReactModule (copy), LocalizationRoactContext (copy), LocalizationProvider (copy), FoundationProvider (copy), RoactRoduxModule (copy), NewResult (copy), CreateStyleProviderFunction (copy), MockLocaleFunction (copy)
-		local function v14(p2)
+		local function v17(p2)
 			-- upvalues: ReactModule (upval), LocalizationRoactContext (upval), LocalizationProvider (upval), p1 (copy)
 			local UseContextResult = ReactModule.useContext(LocalizationRoactContext)
 			
@@ -68,13 +71,13 @@ return {
 		end
 		
 		return function(p2)
-			-- upvalues: ReactModule (upval), FoundationProvider (upval), RoactRoduxModule (upval), NewResult (upval), CreateStyleProviderFunction (upval), MockLocaleFunction (upval), v14 (copy)
+			-- upvalues: ReactModule (upval), FoundationProvider (upval), RoactRoduxModule (upval), NewResult (upval), CreateStyleProviderFunction (upval), MockLocaleFunction (upval), v17 (copy)
 			return ReactModule.createElement(FoundationProvider, {
 				device = "Phone",
 				colorMode = if p2 and p2.theme == "Light" then "Light" else "Dark"
 			}, {
 				Store = ReactModule.createElement(RoactRoduxModule.StoreProvider, { store = NewResult }, {
-					Style = CreateStyleProviderFunction({ Localization = MockLocaleFunction(v14, p2) })
+					Style = CreateStyleProviderFunction({ Localization = MockLocaleFunction(v17, p2) })
 				})
 			})
 		end

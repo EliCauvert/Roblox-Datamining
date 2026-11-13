@@ -1,9 +1,10 @@
 ﻿local AppChat = script:FindFirstAncestor("AppChat")
 local Parent = AppChat.Parent
 local PromiseModule = require(Parent.Promise)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local Sources = require(Parent.SocialLuaAnalytics).Analytics.Enums.Sources
 local GetProfileTrustedFriendActionsModule = require(AppChat.Http.getProfileTrustedFriendActions)
-local FFlagProfilePlatformAddTC = require(Parent.SharedFlags).FFlagProfilePlatformAddTC
+local FFlagProfilePlatformAddTC = SharedFlagsModule.FFlagProfilePlatformAddTC
 
 local function _(RawActionType, ActionType, IsDisabled, ModalVariantOverride)
 	return {

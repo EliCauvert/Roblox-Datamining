@@ -8,10 +8,11 @@ local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
 local UseUiModeInfoFunction = require(Parent.RobloxAppHooks).useUiModeInfo
 local UiMode = require(Parent.RobloxAppEnums).UiMode
 local IsPioneerLaunchFunction = require(Parent.PioneerUtils).isPioneerLaunch
+local AppBtidLayers = require(Parent.ExperimentLayers).AppBtidLayers
 local FFlagGoogleAppleSsoDesktopModule = require(AuthCommon.Flags.FFlagGoogleAppleSsoDesktop)
 local FFlagEnableAccountSwitchSsoLogin = require(Parent.SharedFlags).FFlagEnableAccountSwitchSsoLogin
 local DebugAuthEntryVariantOverride = game:DefineFastInt("DebugAuthEntryVariantOverride", -1)
-local UniversalAppAuthEntryLayer = require(Parent.ExperimentLayers).AppBtidLayers.UniversalAppAuthEntryLayer
+local UniversalAppAuthEntryLayer = AppBtidLayers.UniversalAppAuthEntryLayer
 local AuthEntryVariant = { Control = 0, Foundation = 1, FoundationSso = 2 }
 
 local function _(Platform)

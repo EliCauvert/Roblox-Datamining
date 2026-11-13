@@ -1,13 +1,16 @@
 ﻿local Parent = script.Parent.Parent.Parent
 local Parent1 = Parent.Parent
+local FFlagUserProfilePlatformProfile = require(Parent1.SharedFlags).FFlagUserProfilePlatformProfile
 local SocialStopwatchModule = require(Parent1.SocialStopwatch)
+local SocialLuaAnalyticsModule = require(Parent1.SocialLuaAnalytics)
+local RoactUtilsModule = require(Parent1.RoactUtils)
 local DependenciesModule = require(Parent.dependencies)
 local SetAliasModalModule = require(script.Parent.SetAliasModal)
 local ConstantsModule = require(Parent.Common.Constants)
 local AnalyticsModule = require(Parent.Analytics)
 local EventNames = AnalyticsModule.EventNames
 local UseAnalyticsFunction = AnalyticsModule.useAnalytics
-local LoadingStages = require(Parent1.SocialLuaAnalytics).Analytics.Enums.LoadingStages
+local LoadingStages = SocialLuaAnalyticsModule.Analytics.Enums.LoadingStages
 local React = DependenciesModule.React
 local NetworkingAliases = DependenciesModule.NetworkingAliases
 local GetDeepValueFunction = DependenciesModule.SocialLibraries.Dictionary.getDeepValue
@@ -15,9 +18,9 @@ local UseSelectorFunction = DependenciesModule.Hooks.useSelector
 local UseDispatchFunction = DependenciesModule.Hooks.useDispatch
 local UseEffectOnMountFunction = DependenciesModule.Hooks.useEffectOnMount
 local UseUserProfilesFetchFunction = DependenciesModule.UserProfiles.Hooks.useUserProfilesFetch
-local UserProfilesBasicNamesByUserIds = if require(Parent1.SharedFlags).FFlagUserProfilePlatformProfile then DependenciesModule.UserProfiles.Queries.userProfilesBasicNamesByUserIds else DependenciesModule.UserProfiles.Queries.userProfilesAllNamesByUserIds
+local UserProfilesBasicNamesByUserIds = if FFlagUserProfilePlatformProfile then DependenciesModule.UserProfiles.Queries.userProfilesBasicNamesByUserIds else DependenciesModule.UserProfiles.Queries.userProfilesAllNamesByUserIds
 local WriteNamesQueryFunction = DependenciesModule.UserProfiles.Mutations.writeNamesQuery
-local UseEffectOnceFunction = require(Parent1.RoactUtils).Hooks.useEffectOnce
+local UseEffectOnceFunction = RoactUtilsModule.Hooks.useEffectOnce
 
 return function(p1)
 	-- upvalues: UseDispatchFunction (copy), ConstantsModule (copy), React (copy), UseUserProfilesFetchFunction (copy), UserProfilesBasicNamesByUserIds (copy), UseAnalyticsFunction (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), UseEffectOnMountFunction (copy), EventNames (copy), SocialStopwatchModule (copy), LoadingStages (copy), UseEffectOnceFunction (copy), NetworkingAliases (copy), WriteNamesQueryFunction (copy), SetAliasModalModule (copy)

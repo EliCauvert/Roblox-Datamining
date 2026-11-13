@@ -9,6 +9,7 @@ local _ = require(Parent.CrossExperience)
 local CrossExperienceVoiceModule = require(Parent.CrossExperienceVoice)
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local RobloxAppSessionizationModule = require(Parent.RobloxAppSessionization)
 local UIBloxModule = require(Parent.UIBlox)
 local VoiceChatModule = require(Parent.VoiceChat)
 local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
@@ -34,7 +35,7 @@ local ExternalEventConnection = require(Parent.RoactUtils).ExternalEventConnecti
 local EventNamesModule = require(Parent.SquadsCore.EventNames)
 local SquadExternalContractContext = require(Parent.SquadsCore.SquadExternalContractProvider).SquadExternalContractContext
 local InputUtilities = require(Parent.SocialCommon).Utils.InputUtilities
-local SessionType = require(Parent.RobloxAppSessionization).SessionType
+local SessionType = RobloxAppSessionizationModule.SessionType
 local ControlState = UIBloxModule.Core.Control.Enum.ControlState
 local WithHoverTooltipFunction = UIBloxModule.App.Dialog.TooltipV2.withHoverTooltip
 local WithTooltipFunction = UIBloxModule.App.Dialog.TooltipV2.withTooltip
@@ -85,7 +86,7 @@ local _ = function(p1)
 	end)
 end
 
-local function v40(p1)
+local function v41(p1)
 	-- upvalues: ReactModule (copy), ControlState (copy), UseTokensFunction (copy), UseLastInputMethodFunction (copy), SquadCoordinationExperienceJoinExperimentation (copy), AppStorageService (copy), SquadExperiencePickerTooltipSeenStorageValue (copy), InputUtilities (copy), CoreGui (copy), ExternalEventConnection (copy), UserInputService (copy), FoundationModule (copy), WithTooltipFunction (copy), WithHoverTooltipFunction (copy)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(ControlState.Initialize)
 	local UseTokensResult = UseTokensFunction()
@@ -141,7 +142,7 @@ local function v40(p1)
 		triggerPointName = p1.triggerPointName
 	}
 	
-	local function v56(p2, p3, Callback)
+	local function v57(p2, p3, Callback)
 		-- upvalues: ReactModule (upval), ControlState (upval), SquadCoordinationExperienceJoinExperimentation (upval), p1 (copy), UseBindingResult (copy), UseBindingResult2 (copy), UseStateResult (copy), ExternalEventConnection (upval), UserInputService (upval), UseResult (copy), FoundationModule (upval), UseTokensResult (copy)
 		local UseResult1 = ReactModule.useCallback(function()
 			-- upvalues: p1 (upval), UseStateResult (upval)
@@ -193,17 +194,17 @@ local function v40(p1)
 		})
 	end
 	
-	local function v57(p2)
-		-- upvalues: v56 (copy)
-		return v56(p2, p2, nil)
+	local function v58(p2)
+		-- upvalues: v57 (copy)
+		return v57(p2, p2, nil)
 	end
 	
-	local function v58(p2, p3)
-		-- upvalues: v56 (copy)
-		return v56(p2, p2, p3)
+	local function v59(p2, p3)
+		-- upvalues: v57 (copy)
+		return v57(p2, p2, p3)
 	end
 	
-	return if SquadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() and UseStateResult then WithTooltipFunction(config, config1, v57) else WithHoverTooltipFunction(config, config1, v58)
+	return if SquadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() and UseStateResult then WithTooltipFunction(config, config1, v58) else WithHoverTooltipFunction(config, config1, v59)
 end
 
 local _ = function(p1)
@@ -252,8 +253,8 @@ local function getLoadingIndicatorIcon(p1, Input, p2, p3, p4)
 end
 
 local function renderToggleAudioFocusButton(p1, TooltipText, OnActivated, p2, UseResult)
-	-- upvalues: ReactModule (copy), v40 (copy), SquadCoordinationExperienceJoinExperimentation (copy), FoundationModule (copy), FFlagSquadsEnableFoundationTestIdsModule (copy)
-	return ReactModule.createElement(v40, {
+	-- upvalues: ReactModule (copy), v41 (copy), SquadCoordinationExperienceJoinExperimentation (copy), FoundationModule (copy), FFlagSquadsEnableFoundationTestIdsModule (copy)
+	return ReactModule.createElement(v41, {
 		isDisabled = false,
 		layoutOrder = 0,
 		triggerPointName = "ToggleAudioFocusButton",
@@ -289,7 +290,7 @@ local function renderToggleAudioFocusButton(p1, TooltipText, OnActivated, p2, Us
 end
 
 return function(p1)
-	-- upvalues: UseDispatchFunction (copy), UseLocalizationFunction (copy), SquadCoordinationExperienceJoinExperimentation (copy), UseTokensFunction (copy), UseCurrentSquadParentChannelIdFunction (copy), UseCurrentSquadSelectorFunction (copy), UseVoiceStatusFunction (copy), ReactModule (copy), UseAppPolicyFunction (copy), HttpService (copy), SquadLobbySessionProvider (copy), SquadExternalContractContext (copy), FFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy), EventNamesModule (copy), SquadPartySheetActionEnumModule (copy), SessionType (copy), LeaveSquadFunction (copy), SquadState (copy), FFlagSquadsEnableFoundationTestIdsModule (copy), v40 (copy), Badge (copy), BadgeVariant (copy), renderStandardImage (copy), Search (copy), Size (copy), GetFFlagEnableCrossExpVoiceFunction (copy), UseLocalUserIdFunction (copy), UseBackgroundExperienceFunction (copy), UseParticipantFunction (copy), UseIsVoiceConnectedFunction (copy), UseIsVoiceDisconnectedFunction (copy), UseIsVoiceFocusedFunction (copy), UseParticipantsFunction (copy), UseIsActiveParticipantFunction (copy), FFlagSquadLobbyActionBarFixMicLevelRerenderModule (copy), UseIsParticipantMutedFunction (copy), AudioFocusManagementEngineFeature (copy), CrossExperienceVoiceManager (copy), RunService (copy), renderToggleAudioFocusButton (copy), EnableCrossExpVoiceDebug (copy), getLoadingIndicatorIcon (copy), FoundationModule (copy), ConstantsModule (copy)
+	-- upvalues: UseDispatchFunction (copy), UseLocalizationFunction (copy), SquadCoordinationExperienceJoinExperimentation (copy), UseTokensFunction (copy), UseCurrentSquadParentChannelIdFunction (copy), UseCurrentSquadSelectorFunction (copy), UseVoiceStatusFunction (copy), ReactModule (copy), UseAppPolicyFunction (copy), HttpService (copy), SquadLobbySessionProvider (copy), SquadExternalContractContext (copy), FFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy), EventNamesModule (copy), SquadPartySheetActionEnumModule (copy), SessionType (copy), LeaveSquadFunction (copy), SquadState (copy), FFlagSquadsEnableFoundationTestIdsModule (copy), v41 (copy), Badge (copy), BadgeVariant (copy), renderStandardImage (copy), Search (copy), Size (copy), GetFFlagEnableCrossExpVoiceFunction (copy), UseLocalUserIdFunction (copy), UseBackgroundExperienceFunction (copy), UseParticipantFunction (copy), UseIsVoiceConnectedFunction (copy), UseIsVoiceDisconnectedFunction (copy), UseIsVoiceFocusedFunction (copy), UseParticipantsFunction (copy), UseIsActiveParticipantFunction (copy), FFlagSquadLobbyActionBarFixMicLevelRerenderModule (copy), UseIsParticipantMutedFunction (copy), AudioFocusManagementEngineFeature (copy), CrossExperienceVoiceManager (copy), RunService (copy), renderToggleAudioFocusButton (copy), EnableCrossExpVoiceDebug (copy), getLoadingIndicatorIcon (copy), FoundationModule (copy), ConstantsModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
 		audioText = "Feature.Squads.Label.Audio",
@@ -390,8 +391,8 @@ return function(p1)
 	})
 	local IsNotSquadStateMatch = p1.squadState ~= SquadState.Active
 	local UseMemoResult1 = ReactModule.useMemo(function()
-		-- upvalues: FFlagSquadsEnableFoundationTestIdsModule (upval), ReactModule (upval), v40 (upval), SquadCoordinationExperienceJoinExperimentation (upval), UseStateResult (copy), IsNotSquadStateMatch (copy), UseResult1 (copy), UseResult (copy), UseLocalizationResult (copy), p1 (copy), Badge (upval), UseTokensResult (copy), BadgeVariant (upval), renderStandardImage (upval)
-		return ReactModule.createElement(v40, {
+		-- upvalues: FFlagSquadsEnableFoundationTestIdsModule (upval), ReactModule (upval), v41 (upval), SquadCoordinationExperienceJoinExperimentation (upval), UseStateResult (copy), IsNotSquadStateMatch (copy), UseResult1 (copy), UseResult (copy), UseLocalizationResult (copy), p1 (copy), Badge (upval), UseTokensResult (copy), BadgeVariant (upval), renderStandardImage (upval)
+		return ReactModule.createElement(v41, {
 			layoutOrder = 2,
 			triggerPointName = "ChatButton",
 			currentHoveredButton = if SquadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then UseStateResult else nil,
@@ -419,10 +420,10 @@ return function(p1)
 		p1.hasUnreadMessages
 	})
 	local UseMemoResult2 = ReactModule.useMemo(function()
-		-- upvalues: FFlagSquadsEnableFoundationTestIdsModule (upval), p1 (copy), ReactModule (upval), v40 (upval), SquadCoordinationExperienceJoinExperimentation (upval), UseStateResult (copy), IsNotSquadStateMatch (copy), UseResult2 (copy), UseResult (copy), CountMembers (copy), UseLocalizationResult (copy), renderStandardImage (upval), Search (upval), Size (upval), UseTokensResult (copy)
+		-- upvalues: FFlagSquadsEnableFoundationTestIdsModule (upval), p1 (copy), ReactModule (upval), v41 (upval), SquadCoordinationExperienceJoinExperimentation (upval), UseStateResult (copy), IsNotSquadStateMatch (copy), UseResult2 (copy), UseResult (copy), CountMembers (copy), UseLocalizationResult (copy), renderStandardImage (upval), Search (upval), Size (upval), UseTokensResult (copy)
 		local SocialSquadLobbyActionBarPickExperienceButtonIcon = if FFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-action-bar--pick-experience-button--icon" else nil
 		
-		return if p1.isInExperience then nil else ReactModule.createElement(v40, {
+		return if p1.isInExperience then nil else ReactModule.createElement(v41, {
 			layoutOrder = 3,
 			triggerPointName = "PickExperienceButton",
 			currentHoveredButton = if SquadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then UseStateResult else nil,
@@ -443,8 +444,8 @@ return function(p1)
 		p1.isInExperience, p1.navigateToHomePage
 	})
 	local UseMemoResult3 = ReactModule.useMemo(function()
-		-- upvalues: IsNotSquadStateMatch (copy), UseTokensResult (copy), FFlagSquadsEnableFoundationTestIdsModule (upval), ReactModule (upval), v40 (upval), SquadCoordinationExperienceJoinExperimentation (upval), UseStateResult (copy), UseResult3 (copy), UseResult (copy), UseLocalizationResult (copy), renderStandardImage (upval)
-		return ReactModule.createElement(v40, {
+		-- upvalues: IsNotSquadStateMatch (copy), UseTokensResult (copy), FFlagSquadsEnableFoundationTestIdsModule (upval), ReactModule (upval), v41 (upval), SquadCoordinationExperienceJoinExperimentation (upval), UseStateResult (copy), UseResult3 (copy), UseResult (copy), UseLocalizationResult (copy), renderStandardImage (upval)
+		return ReactModule.createElement(v41, {
 			layoutOrder = 4,
 			triggerPointName = "EndCallButton",
 			backgroundStyle = if IsNotSquadStateMatch then UseTokensResult.Color.ActionStandard.Background else UseTokensResult.Color.System.Alert,
@@ -535,8 +536,8 @@ return function(p1)
 		
 		if EnableCrossExpVoiceDebug then
 			UseMemoResult5 = ReactModule.useMemo(function()
-				-- upvalues: FFlagSquadsEnableFoundationTestIdsModule (upval), ReactModule (upval), v40 (upval), SquadCoordinationExperienceJoinExperimentation (upval), UseStateResult (copy), IsNotSquadStateMatch (copy), UseResult4 (copy), UseResult (copy), renderStandardImage (upval), UseTokensResult (copy)
-				return ReactModule.createElement(v40, {
+				-- upvalues: FFlagSquadsEnableFoundationTestIdsModule (upval), ReactModule (upval), v41 (upval), SquadCoordinationExperienceJoinExperimentation (upval), UseStateResult (copy), IsNotSquadStateMatch (copy), UseResult4 (copy), UseResult (copy), renderStandardImage (upval), UseTokensResult (copy)
+				return ReactModule.createElement(v41, {
 					layoutOrder = 5,
 					tooltipText = "Debug voice",
 					triggerPointName = "DebugVoiceButton",
@@ -565,14 +566,14 @@ return function(p1)
 			if FFlagSquadLobbyActionBarFixMicLevelRerenderModule then IsUseIsParticipantMutedResult else nil
 		})
 		UseMemoResult6 = ReactModule.useMemo(function()
-			-- upvalues: UseIsVoiceDisconnectedResult (copy), IsNotSquadStateMatch (copy), AudioFocusManagementEngineFeature (upval), UseIsVoiceFocusedResult (copy), UseIsVoiceConnectedResult (copy), UseParticipantResult (copy), FFlagSquadsEnableFoundationTestIdsModule (upval), ReactModule (upval), v40 (upval), SquadCoordinationExperienceJoinExperimentation (upval), UseStateResult (copy), UseResult5 (copy), UseResult (copy), UseLocalizationResult (copy), renderStandardImage (upval), UseMemoResult7 (copy), UseTokensResult (copy)
+			-- upvalues: UseIsVoiceDisconnectedResult (copy), IsNotSquadStateMatch (copy), AudioFocusManagementEngineFeature (upval), UseIsVoiceFocusedResult (copy), UseIsVoiceConnectedResult (copy), UseParticipantResult (copy), FFlagSquadsEnableFoundationTestIdsModule (upval), ReactModule (upval), v41 (upval), SquadCoordinationExperienceJoinExperimentation (upval), UseStateResult (copy), UseResult5 (copy), UseResult (copy), UseLocalizationResult (copy), renderStandardImage (upval), UseMemoResult7 (copy), UseTokensResult (copy)
 			if UseIsVoiceDisconnectedResult then
 				return nil
 			elseif IsNotSquadStateMatch or not AudioFocusManagementEngineFeature or UseIsVoiceFocusedResult then
 				local NoUseIsVoiceConnectedResult = not UseIsVoiceConnectedResult or (UseParticipantResult == nil or IsNotSquadStateMatch)
 				local NoUseIsVoiceConnectedResult1 = not UseIsVoiceConnectedResult or (not UseParticipantResult or UseParticipantResult.isMuted)
 				
-				return ReactModule.createElement(v40, {
+				return ReactModule.createElement(v41, {
 					layoutOrder = 1,
 					triggerPointName = "ToggleMicButton",
 					currentHoveredButton = if SquadCoordinationExperienceJoinExperimentation.getShouldShowFTUXOnExpPickerEnabled() then UseStateResult else nil,

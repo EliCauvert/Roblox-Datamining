@@ -1,13 +1,14 @@
 ﻿local UserInputService = game:GetService("UserInputService")
 local GuiService = game:GetService("GuiService")
 local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
 local TypeModule = require(Parent.type)
 local ConstantsModule = require(Parent.constants)
 local DependenciesModule = require(Parent.dependencies)
 local LoggerModule = require(Parent.Logger)
 local Cryo = DependenciesModule.Cryo
 local TimeTrigger = DependenciesModule.ToastNotificationProtocolEnums.TimeTrigger
-local FFlagFriendshipNotifsUseSendrExperiment = require(Parent.Parent.SharedFlags).FFlagFriendshipNotifsUseSendrExperiment
+local FFlagFriendshipNotifsUseSendrExperiment = require(Parent1.SharedFlags).FFlagFriendshipNotifsUseSendrExperiment
 
 local function _(List, p1)
 	if List then
@@ -23,7 +24,7 @@ local _ = function(VisualItems): string
 	return if VisualItems.button == nil then if VisualItems.textBody == nil then if VisualItems.thumbnail == nil then if VisualItems.metaAction == nil then if VisualItems.singleMetaAction == nil then "unknown" else "singleMetaAction" else "metaAction" else "thumbnail" else "textBody" else "button"
 end
 
-local function v12(State)
+local function v13(State)
 	if not State then
 		return nil
 	end
@@ -95,12 +96,12 @@ local _ = function(p1)
 	return p1.Y * (ConstantsModule.FRRToastPosition.NotificationFrameTopScale + ConstantsModule.FRRToastPosition.NotificationFrameHeightScale) - ConstantsModule.FRRToastPosition.NotificationRightInset
 end
 
-local function v19(Vector)
+local function v20(Vector)
 	-- upvalues: ConstantsModule (copy)
 	return -ConstantsModule.FRRToastPosition.NotificationRightInset, Vector.Y * (ConstantsModule.FRRToastPosition.NotificationFrameTopScale + ConstantsModule.FRRToastPosition.NotificationFrameHeightScale) - ConstantsModule.FRRToastPosition.NotificationRightInset - Vector.Y
 end
 
-local function v20(p1, p2, Vector)
+local function v21(p1, p2, Vector)
 	-- upvalues: ConstantsModule (copy)
 	local YDelta = Vector.Y * (ConstantsModule.FRRToastPosition.NotificationFrameTopScale + ConstantsModule.FRRToastPosition.NotificationFrameHeightScale) - ConstantsModule.FRRToastPosition.NotificationRightInset - Vector.Y
 	local config = {
@@ -125,9 +126,9 @@ end
 
 return {
 	calculateToastPosition = function(p1, p2, PositionYOffset, p3, p4, p5)
-		-- upvalues: FFlagFriendshipNotifsUseSendrExperiment (copy), _Vector2 (copy), v20 (copy), GuiService (copy), Cryo (copy), config (copy), config2 (copy), config1 (copy), config3 (copy)
+		-- upvalues: FFlagFriendshipNotifsUseSendrExperiment (copy), _Vector2 (copy), v21 (copy), GuiService (copy), Cryo (copy), config (copy), config2 (copy), config1 (copy), config3 (copy)
 		if FFlagFriendshipNotifsUseSendrExperiment and p4 == "legacyBottomRight" then
-			return (v20(p1, p3, p5 or (workspace.CurrentCamera and workspace.CurrentCamera.ViewportSize or _Vector2)))
+			return (v21(p1, p3, p5 or (workspace.CurrentCamera and workspace.CurrentCamera.ViewportSize or _Vector2)))
 		else
 			local GuiInset = if GuiService then GuiService:GetGuiInset() else Vector2.new(0, 0)
 			local NewY: number = if GuiService then GuiInset.Y + 20 else 60
@@ -135,7 +136,7 @@ return {
 			return if p1 then if p2 then Cryo.Dictionary.union(config, { positionYOffset = PositionYOffset }) else Cryo.Dictionary.union(config2, { positionYOffset = PositionYOffset + GuiInset.Y }) elseif p2 then if p3 then Cryo.Dictionary.union(config, { positionYOffset = PositionYOffset }) else Cryo.Dictionary.union(config1, { positionYOffset = PositionYOffset }) elseif p3 then Cryo.Dictionary.union(config2, { positionYOffset = PositionYOffset + GuiInset.Y }) else Cryo.Dictionary.union(config3, { positionYOffset = -1 * NewY })
 		end
 	end,
-	getNotificationScript2LegacyToastOffsets = if FFlagFriendshipNotifsUseSendrExperiment then v19 else nil,
+	getNotificationScript2LegacyToastOffsets = if FFlagFriendshipNotifsUseSendrExperiment then v20 else nil,
 	calculateTimeRemaining = function(TimerFromCardData, p1, p2): number
 		-- upvalues: TimeTrigger (copy)
 		local P24 = p1 or DateTime.now().UnixTimestampMillis
@@ -152,7 +153,7 @@ return {
 		return if p2 < ConstantsModule.FullWidthDeviceThreshold then UDim2.new(0, p2 - 24, 0, 0) elseif p1 and p2 < ConstantsModule.CompactCardThreashold then UDim2.new(0, ConstantsModule.InExperienceToastWidth, 0, 0) else UDim2.new(0, ConstantsModule.InAppToastWidth, 0, 0)
 	end,
 	marshalNotificationData = function(p1)
-		-- upvalues: v12 (copy)
+		-- upvalues: v13 (copy)
 		local config = {
 			currentState = p1.content.currentState,
 			notificationType = p1.content.notificationType,
@@ -166,7 +167,7 @@ return {
 		}
 		
 		if p1.content.states then
-			config.state = v12(p1.content.states[p1.content.currentState])
+			config.state = v13(p1.content.states[p1.content.currentState])
 		end
 		return config
 	end,

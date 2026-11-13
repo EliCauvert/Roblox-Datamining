@@ -2,10 +2,11 @@
 local Parent = ProfilePlatform.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
 local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
 local Text = FoundationModule.Text
 local View = FoundationModule.View
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 
 return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), View (copy), Text (copy)

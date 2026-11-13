@@ -2,19 +2,22 @@
 local Parent = EditProfile.Parent
 local ReactModule = require(Parent.React)
 local EnumsModule = require(EditProfile.Common.Enums)
+local EditDisplayNameModule = require(EditProfile.Components.EditDisplayName)
+local EditBioModule = require(EditProfile.Components.EditBio)
 local TextKeysModule = require(EditProfile.Common.TextKeys)
+local FFlagEditProfileAlignBioTranslationKeysModule = require(EditProfile.Flags.FFlagEditProfileAlignBioTranslationKeys)
 local UseRealNamesInDisplayNamesEnabledModule = require(EditProfile.Hooks.useRealNamesInDisplayNamesEnabled)
 local UseNavigationFunction = require(Parent.Navigation).useNavigation
 local PromiseModule = require(Parent.Promise)
 local ProfileRefreshSignal = require(Parent.ProfilePlatformCommon).Signals.ProfileRefreshSignal
 local config = {
 	[EnumsModule.Screens.EditDisplayName] = {
-		component = require(EditProfile.Components.EditDisplayName),
+		component = EditDisplayNameModule,
 		titleKey = TextKeysModule.EditDisplayName
 	},
 	[EnumsModule.Screens.EditBio] = {
-		component = require(EditProfile.Components.EditBio),
-		titleKey = TextKeysModule.About
+		component = EditBioModule,
+		titleKey = if FFlagEditProfileAlignBioTranslationKeysModule then TextKeysModule.EditBio else TextKeysModule.About
 	}
 }
 

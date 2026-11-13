@@ -65,6 +65,7 @@
 	IconButton = "IconButton",
 	GroupForumPostPreview = "GroupForumPostPreview",
 	GroupSection = "GroupSection",
+	GroupSidebar = "GroupSidebar",
 	Image = "Image",
 	VerticalListWithImpressions = "VerticalListWithImpressions",
 	InfoTable = "InfoTable",

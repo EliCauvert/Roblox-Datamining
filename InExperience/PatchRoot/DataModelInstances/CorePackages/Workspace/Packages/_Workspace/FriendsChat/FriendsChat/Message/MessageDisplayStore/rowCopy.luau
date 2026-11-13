@@ -1,10 +1,11 @@
 ﻿local Parent = script:FindFirstAncestor("FriendsChat").Parent
+local FoundationModule = require(Parent.Foundation)
 local GetModeratedMaskTextModule = require(Parent.AppChat.getModeratedMaskText)
 local GetReplyLabelDescriptorModule = require(Parent.AppChat.getReplyLabelDescriptor)
 local NameInfoModule = require(script.Parent.NameInfo)
 local _ = require(script.Parent.classifyMessage)
 local _ = require(script.Parent.Parent.Parent.Utils.useLocalize)
-local IconName = require(Parent.Foundation).Enums.IconName
+local IconName = FoundationModule.Enums.IconName
 
 return {
 	MODERATED_ICON = IconName.TriangleExclamation,

@@ -17,6 +17,7 @@ local InviteToParentChannelModule = require(Squads.Thunks.InviteToParentChannel)
 local SquadInviteSourceEnumModule = require(Squads.Enums.SquadInviteSourceEnum)
 local Cryo = DependenciesModule.Cryo
 local React = DependenciesModule.React
+local SharedFlags = DependenciesModule.SharedFlags
 local ConstantsModule1 = require(Parent.SquadsCore.Constants)
 local SquadExternalContractContext = require(Parent.SquadsCore.SquadExternalContractProvider).SquadExternalContractContext
 local EventNamesModule = require(Parent.SquadsCore.EventNames)
@@ -33,7 +34,7 @@ local FriendsMenuSearch = FriendsMenuModule.FriendsMenuSearch
 local FriendMenuType = FriendsMenuModule.FriendMenuType
 local SelectedUsersScroller = FriendsMenuModule.SelectedUsersScroller
 local SelectedUsersContext = FriendsMenuModule.SelectedUsersContext
-local FFlagEnablePartyQuickStartButton = DependenciesModule.SharedFlags.FFlagEnablePartyQuickStartButton
+local FFlagEnablePartyQuickStartButton = SharedFlags.FFlagEnablePartyQuickStartButton
 local Images = UIBloxModule.App.ImageSet.Images
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local SquadInviteFriendsButtonModule = require(script.Parent.SquadInviteFriendsButton)
@@ -149,7 +150,7 @@ return function(p1)
 			return Set[p3] == nil
 		end)
 		
-		local function v65()
+		local function v66()
 			-- upvalues: Cryo (upval), UseGetConversationFromIdResult (upval), KeysResult (copy), UseLocalUserIdResult (upval), UseContextResult1 (upval), UseDispatchResult (upval), PromiseModule (upval), FilterResult (copy), InviteToParentChannelModule (upval), UseNavigationResult (upval), InviteToSquadModule (upval), UseCurrentSquadSelectorResult (upval), UseResult1 (upval), UseResult2 (upval), p2 (copy)
 			local FilterResult1 = Cryo.List.filter(UseGetConversationFromIdResult.participants, function(p3): boolean
 				-- upvalues: Cryo (upval), KeysResult (upval), UseLocalUserIdResult (upval)
@@ -194,14 +195,14 @@ return function(p1)
 				hideCancelButton = false,
 				promptType = SquadPromptType.ConfirmInviteToSquad,
 				onConfirm = function()
-					-- upvalues: v65 (copy)
-					v65()
+					-- upvalues: v66 (copy)
+					v66()
 				end
 			})
 			
 			return
 		else
-			v65()
+			v66()
 		end
 	end, {
 		UseCurrentSquadSelectorResult, UseDispatchResult, UseNavigationResult,

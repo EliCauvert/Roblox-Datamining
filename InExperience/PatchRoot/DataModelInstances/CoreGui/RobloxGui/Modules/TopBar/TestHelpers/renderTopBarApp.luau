@@ -8,19 +8,21 @@ local UIBloxModule = require(CorePackages.Packages.UIBlox)
 local ReactSceneUnderstandingModule = require(CorePackages.Packages.ReactSceneUnderstanding)
 local Localization = require(CorePackages.Workspace.Packages.InExperienceLocales).Localization
 local LocalizationProvider = require(CorePackages.Workspace.Packages.Localization).LocalizationProvider
+local RobloxAppEnumsModule = require(CorePackages.Workspace.Packages.RobloxAppEnums)
 local DesignTokenProvider = require(CorePackages.Workspace.Packages.Style).DesignTokenProvider
 local UniversalAppPolicyModule = require(CorePackages.Workspace.Packages.UniversalAppPolicy)
+local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
 local Parent = script.Parent.Parent
 local MenuNavigationPromptTokenMapperModule = require(Parent.TokenMappers.MenuNavigationPromptTokenMapper)
 local ReducerModule = require(Parent.Reducer)
 local TopBarAppPolicyModule = require(Parent.TopBarAppPolicy)
 local RoactAppPolicy = UniversalAppPolicyModule.RoactAppPolicy
 local AppFeaturePolicies = UniversalAppPolicyModule.AppFeaturePolicies
-local FFlagShowGameAgeRating = require(CorePackages.Workspace.Packages.SharedFlags).FFlagShowGameAgeRating
+local FFlagShowGameAgeRating = SharedFlagsModule.FFlagShowGameAgeRating
 local Style = {
 	themeName = "dark",
 	fontName = "gotham",
-	deviceType = require(CorePackages.Workspace.Packages.RobloxAppEnums).DeviceType.Console
+	deviceType = RobloxAppEnumsModule.DeviceType.Console
 }
 
 if not CoreGui.RobloxGui:FindFirstChild("SendNotificationInfo") then

@@ -1,8 +1,9 @@
 ﻿local WhatsNew = script:FindFirstAncestor("WhatsNew")
+local AppCommonLibModule = require(WhatsNew.Parent.AppCommonLib)
 local _ = require(WhatsNew.Types)
 local AppStorageService = game:GetService("AppStorageService")
 local HttpService = game:GetService("HttpService")
-local NewResult = require(WhatsNew.Parent.AppCommonLib).Utils.AppStorageJsonCacheUtils.new(AppStorageService)
+local NewResult = AppCommonLibModule.Utils.AppStorageJsonCacheUtils.new(AppStorageService)
 
 local function _(p1, Key)
 	local v1 = p1[Key]

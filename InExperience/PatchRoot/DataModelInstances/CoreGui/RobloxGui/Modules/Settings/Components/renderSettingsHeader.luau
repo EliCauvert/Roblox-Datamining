@@ -2,11 +2,13 @@
 local ReactModule = require(CorePackages.Packages.React)
 local ReactRobloxModule = require(CorePackages.Packages.ReactRoblox)
 local FoundationModule = require(CorePackages.Packages.Foundation)
+local SettingReactViewModule = require(CorePackages.Workspace.Packages.SettingReactView)
+local CoreScriptsCommonModule = require(CorePackages.Workspace.Packages.CoreScriptsCommon)
 local InExperienceMenuReactModule = require(script.Parent.Parent.InExperienceMenuReact)
 local CreateFunction = require(CorePackages.Workspace.Packages.AppCommonLib).Create
 local UseLocalizationFunction = require(CorePackages.Workspace.Packages.Localization).Hooks.useLocalization
-local HeaderText = require(CorePackages.Workspace.Packages.SettingReactView).HeaderText
-local SettingsShowSignal = require(CorePackages.Workspace.Packages.CoreScriptsCommon).SettingsShowSignal
+local HeaderText = SettingReactViewModule.HeaderText
+local SettingsShowSignal = CoreScriptsCommonModule.SettingsShowSignal
 local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 

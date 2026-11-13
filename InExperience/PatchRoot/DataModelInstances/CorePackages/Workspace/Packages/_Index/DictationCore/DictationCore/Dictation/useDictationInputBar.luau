@@ -61,6 +61,7 @@ return function(p1)
 		containerName = p1.containerName
 	})
 	local UseSignalStateResult = SignalsReactModule.useSignalState(UseDictationResult.getDictationState)
+	local IsUseSignalStateResultMatch: boolean = UseSignalStateResult == DictationState.Recording or UseSignalStateResult == DictationState.Listening
 	local HasText = p1.hasText
 	local IsIdle = UseDictationResult.bindings.isIdle
 	local UseMemoResult = ReactModule.useMemo(function()
@@ -73,7 +74,7 @@ return function(p1)
 	return {
 		dictation = UseDictationResult,
 		inputMode = p1.inputMode or DictationInputModeModule.Standard,
-		isAudioActive = UseSignalStateResult == DictationState.Recording or UseSignalStateResult == DictationState.Listening,
+		isAudioActive = IsUseSignalStateResultMatch,
 		isMicVisible = UseMemoResult,
 		isSubmitVisible = ReactModule.useMemo(function()
 			-- upvalues: UseMemoResult (copy)

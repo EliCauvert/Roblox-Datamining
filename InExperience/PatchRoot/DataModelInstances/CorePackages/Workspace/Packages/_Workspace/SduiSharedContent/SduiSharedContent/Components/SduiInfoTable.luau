@@ -1,8 +1,10 @@
 ﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
 local ReactModule = require(Parent.React)
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local FoundationModule = require(Parent.Foundation)
 local InfoTable = require(Parent.AppBlox).InfoTable
-local View = require(Parent.Foundation).View
-local GetSduiComponentWrapperFunction = require(Parent.SduiCoreSystem).getSduiComponentWrapper
+local View = FoundationModule.View
+local GetSduiComponentWrapperFunction = SduiCoreSystemModule.getSduiComponentWrapper
 
 return ReactModule.memo(function(p1)
 	-- upvalues: GetSduiComponentWrapperFunction (copy), ReactModule (copy), View (copy), InfoTable (copy)

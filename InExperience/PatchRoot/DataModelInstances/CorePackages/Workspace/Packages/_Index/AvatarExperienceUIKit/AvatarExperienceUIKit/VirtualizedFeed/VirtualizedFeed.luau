@@ -4,6 +4,7 @@ local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local FFlagAXVirtualizedFeedVerticalPadding = require(Parent.SharedFlags).FFlagAXVirtualizedFeedVerticalPadding
 local FFlagAXSduiFeedBackToTopAndNavClearance = require(Parent.AvatarExperienceFlags).FFlagAXSduiFeedBackToTopAndNavClearance
+local FFlagAXSduiFeedSkipScrollWithoutContent = require(Parent.AvatarExperienceFlags).FFlagAXSduiFeedSkipScrollWithoutContent
 local FFlagAXFixVirtualizedFeedUpdateDepthModule = require(script.Parent.FFlagAXFixVirtualizedFeedUpdateDepth)
 local FoundationModule = require(Parent.Foundation)
 local Button = FoundationModule.Button
@@ -11,7 +12,9 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local View = FoundationModule.View
 local Loading = FoundationModule.Loading
 local IconSize = FoundationModule.Enums.IconSize
-local FlatList = require(Parent.VirtualizedList).FlatList
+local VirtualizedListModule = require(Parent.VirtualizedList)
+local FlatList = VirtualizedListModule.FlatList
+local ScrollView = VirtualizedListModule.ScrollView
 local IsFeedContentScrollableModule = require(script.Parent.isFeedContentScrollable)
 local FFlagVirtualizedFeedFooterWrapperProp = require(Parent.SharedFlags).FFlagVirtualizedFeedFooterWrapperProp
 local FFlagAXScrollTelemetryIntegration2 = require(Parent.SharedFlags).FFlagAXScrollTelemetryIntegration2
@@ -37,6 +40,21 @@ local function _(p1)
 		end
 	end
 	return nil
+end
+
+local function renderScrollViewSkippingScrollsWithoutContent(Tbl)
+	-- upvalues: ReactModule (copy), ScrollView (copy)
+	local OnScrollFunction = Tbl.onScroll
+	local Copy = table.clone(Tbl)
+	
+	function Copy.onScroll(Y)
+		-- upvalues: OnScrollFunction (copy)
+		if OnScrollFunction ~= nil and Y:GetChildren()[1] ~= nil then
+			OnScrollFunction(Y)
+		end
+	end
+	
+	return ReactModule.createElement(ScrollView, Copy)
 end
 
 local function VirtualizedFeedBackToTopButton(p1)
@@ -65,7 +83,7 @@ local _ = function(p1)
 end
 
 return ReactModule.forwardRef(function(Frame, Ref)
-	-- upvalues: FFlagAXVirtualizedFeedVerticalPadding (copy), FFlagVirtualizedFeedFooterWrapperProp (copy), ReactModule (copy), FFlagAXScrollTelemetryIntegration2 (copy), UseFlatListScrollPerformanceTrackerModule (copy), FFlagAXSduiFeedBackToTopAndNavClearance (copy), FFlagAXFixVirtualizedFeedUpdateDepthModule (copy), IsFeedContentScrollableModule (copy), UserGameSettings (copy), VirtualizedFeedBackToTopButton (copy), Loading (copy), IconSize (copy), View (copy), VirtualizedFeedFooterLayout (copy), FlatList (copy), ContentContainerStyle (copy), Style (copy)
+	-- upvalues: FFlagAXVirtualizedFeedVerticalPadding (copy), FFlagVirtualizedFeedFooterWrapperProp (copy), ReactModule (copy), FFlagAXScrollTelemetryIntegration2 (copy), UseFlatListScrollPerformanceTrackerModule (copy), FFlagAXSduiFeedBackToTopAndNavClearance (copy), FFlagAXFixVirtualizedFeedUpdateDepthModule (copy), IsFeedContentScrollableModule (copy), UserGameSettings (copy), VirtualizedFeedBackToTopButton (copy), Loading (copy), IconSize (copy), View (copy), VirtualizedFeedFooterLayout (copy), FlatList (copy), ContentContainerStyle (copy), Style (copy), FFlagAXSduiFeedSkipScrollWithoutContent (copy), renderScrollViewSkippingScrollsWithoutContent (copy)
 	local HorizontalPadding = Frame.horizontalPadding or 0
 	local VerticalPadding = FFlagAXVirtualizedFeedVerticalPadding and Frame.verticalPadding or 0
 	local NoFFlagVirtualizedFeedFooterWrapperProp: boolean = not FFlagVirtualizedFeedFooterWrapperProp or Frame.shouldWrapFooter ~= false
@@ -289,7 +307,8 @@ return ReactModule.forwardRef(function(Frame, Ref)
 			onEndReached = Frame.onEndReached,
 			ListHeaderComponent = Frame.ListHeaderComponent,
 			ListFooterComponent = Element,
-			scrollEnabled = Frame.scrollEnabled
+			scrollEnabled = Frame.scrollEnabled,
+			renderScrollComponent = if FFlagAXSduiFeedSkipScrollWithoutContent and Frame.skipScrollWithoutContent then renderScrollViewSkippingScrollsWithoutContent else nil
 		})
 	})
 end)

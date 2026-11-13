@@ -2,12 +2,14 @@
 local Parent = IAPExperience.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
+local GetIconRichTextFunction = FoundationModule.Utility.getIconRichText
+local IconName = FoundationModule.Enums.IconName
 local FormatNumberModule = require(IAPExperience.Utility.formatNumber)
 local LocalizationService = game:GetService("LocalizationService")
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local PriceLineItemModule = require(IAPExperience.Generic.PriceLineItem)
 local DiscountType = require(IAPExperience.ProductPurchase.PricingTypes).DiscountType
-local IconRichText = FoundationModule.Utility.getIconRichText(FoundationModule.Enums.IconName.Robux)
+local IconRichText = GetIconRichTextFunction(IconName.Robux)
 
 local function _(p1, p2)
 	return if p1 == nil or p1 == "" then p2 else p1

@@ -8,6 +8,7 @@ local UseRobloxLocaleModule = require(ChatUIPrimitives.Hooks.useRobloxLocale)
 local _ = require(script.Parent.groupMessages)
 local FormatTimestampModule = require(script.Parent.formatTimestamp)
 local SizingModule = require(script.Parent.Parent.Sizing)
+local FFlagExpChatLocalizeMessageTimestampModule = require(ChatUIPrimitives.Flags.FFlagExpChatLocalizeMessageTimestamp)
 
 local function TimestampText(p1)
 	-- upvalues: SizingModule (copy), FoundationModule (copy), ReactModule (copy)
@@ -47,4 +48,4 @@ local function TimestampItemDefault(p1)
 	})
 end
 
-return if require(ChatUIPrimitives.Flags.FFlagExpChatLocalizeMessageTimestamp) then TimestampItemLocalized else TimestampItemDefault
+return if FFlagExpChatLocalizeMessageTimestampModule then TimestampItemLocalized else TimestampItemDefault

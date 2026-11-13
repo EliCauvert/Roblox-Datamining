@@ -3,8 +3,10 @@ local Parent = BuildExperience.Parent
 local _ = require(BuildExperience.Components.ModelPicker.ModelPickerTypes)
 local FFlagBuildExperienceModelPickerModule = require(BuildExperience.Flags.FFlagBuildExperienceModelPicker)
 local FFlagBuildEnableFTUXChipsModule = require(BuildExperience.Flags.FFlagBuildEnableFTUXChips)
+local FFlagBuildExperienceFTUXChipSendGuidanceModule = require(BuildExperience.Flags.FFlagBuildExperienceFTUXChipSendGuidance)
 local FFlagBuildExperienceFTUXChipExhaustedTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceFTUXChipExhaustedTelemetry)
 local IsImageAttachmentSupportedModule = require(BuildExperience.utils.isImageAttachmentSupported)
+local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local CreateGalleryCaptureSourceModule = require(Parent.Moments.createGalleryCaptureSource)
 local _ = require(BuildExperience.Chat.chatTypes)
@@ -13,16 +15,18 @@ local ChatComposerModule = require(script.Parent.ChatComposer)
 local ChatImagePreviewListModule = require(script.Parent.ChatImagePreviewList)
 local PromptChipGroupModule = require(script.Parent.PromptChipGroup)
 local ChatResourceAttachmentListModule = require(script.Parent.ChatResourceAttachmentList)
-local View = require(Parent.Foundation).View
+local View = FoundationModule.View
+local Text = FoundationModule.Text
 
 return function(Frame)
-	-- upvalues: FFlagBuildEnableFTUXChipsModule (copy), ReactModule (copy), IsImageAttachmentSupportedModule (copy), CreateGalleryCaptureSourceModule (copy), View (copy), ChatResourceAttachmentListModule (copy), ChatImagePreviewListModule (copy), ChatComposerModule (copy), FFlagBuildExperienceModelPickerModule (copy), PromptChipGroupModule (copy), FFlagBuildExperienceFTUXChipExhaustedTelemetryModule (copy), ChatCaptureGalleryContainerModule (copy)
+	-- upvalues: FFlagBuildEnableFTUXChipsModule (copy), FFlagBuildExperienceFTUXChipSendGuidanceModule (copy), ReactModule (copy), IsImageAttachmentSupportedModule (copy), CreateGalleryCaptureSourceModule (copy), View (copy), ChatResourceAttachmentListModule (copy), ChatImagePreviewListModule (copy), ChatComposerModule (copy), FFlagBuildExperienceModelPickerModule (copy), PromptChipGroupModule (copy), FFlagBuildExperienceFTUXChipExhaustedTelemetryModule (copy), Text (copy), ChatCaptureGalleryContainerModule (copy)
 	local Images = Frame.images or {}
 	local ResourceAttachments = Frame.resourceAttachments or {}
 	local PromptChips = Frame.promptChips or {}
 	local v1 = #Images > 0
 	local v2 = #ResourceAttachments > 0
 	local v3: boolean = FFlagBuildEnableFTUXChipsModule and (#PromptChips > 0 or Frame.isPromptChipsLoading == true)
+	local HasFtuxGuidanceText: boolean = FFlagBuildExperienceFTUXChipSendGuidanceModule and (v3 and Frame.ftuxGuidanceText ~= nil)
 	local LayoutOrder: number = if v2 then if v1 then 3 else 2 elseif v1 then 2 else 1
 	local Unmounted, Unmounted2 = ReactModule.useState("unmounted")
 	local UseRefResult = ReactModule.useRef(nil)
@@ -122,6 +126,7 @@ return function(Frame)
 			allowsTypingWhileResponding = Frame.allowsTypingWhileResponding,
 			images = Images,
 			isSendBlocked = Frame.isSendBlocked,
+			isFtuxSendGated = if FFlagBuildExperienceFTUXChipSendGuidanceModule then Frame.isFtuxSendGated else nil,
 			isReadOnly = Frame.isReadOnly,
 			tracksExternalText = Frame.tracksExternalText,
 			isAttachmentSupported = IsImageAttachmentSupportedModule1,
@@ -132,13 +137,18 @@ return function(Frame)
 			composerDebug = Frame.composerDebug
 		}),
 		PromptChips = if v3 then ReactModule.createElement(PromptChipGroupModule, {
-			LayoutOrder = LayoutOrder + 1,
+			LayoutOrder = LayoutOrder + (if HasFtuxGuidanceText then 2 else 1),
 			promptChips = PromptChips,
 			isLoading = Frame.isPromptChipsLoading,
 			onActivated = Frame.onPromptChipActivated,
 			onExhausted = if FFlagBuildExperienceFTUXChipExhaustedTelemetryModule then Frame.onPromptChipExhausted else nil
 		}) else nil,
-		Gallery = if Unmounted == "unmounted" or UseRefResult.current == nil then nil else ReactModule.createElement(ChatCaptureGalleryContainerModule, {
+		FtuxGuidance = if HasFtuxGuidanceText then ReactModule.createElement(Text, {
+			tag = "size-full-0 auto-y text-caption-medium text-align-x-left content-muted",
+			LayoutOrder = LayoutOrder + 1,
+			Text = Frame.ftuxGuidanceText
+		}) else nil,
+		Gallery = if Unmounted == "unmounted" or UseRefResult == nil or UseRefResult.current == nil then nil else ReactModule.createElement(ChatCaptureGalleryContainerModule, {
 			maxSelections = 2,
 			captureSource = UseRefResult.current,
 			initialCaptures = InitialCaptures,

@@ -3,12 +3,13 @@ local TeleportService = game:GetService("TeleportService")
 local Parent = script:FindFirstAncestor("BuildExperiencePlaytestLaunch").Parent
 local SharedFlagsModule = require(Parent.SharedFlags)
 local TeamCreateUtilsModule = require(script.Parent.teamCreateUtils)
+local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
 local BuildModeLaunchModule = require(script.Parent.BuildModeLaunch)
 local PlaytestRejoinModule = require(script.Parent.PlaytestRejoin)
 local LaunchExperienceModule = require(script.Parent.launchExperience)
 local LeaveExperienceModule = require(script.Parent.leaveExperience)
 local TeleportToPlaceModule = require(script.Parent.teleportToPlace)
-local Debug = require(Parent.DataHydration.CreatorAgentChat).debug
+local Debug = CreatorAgentChatModule.debug
 local FFlagBuildExperienceLibrary = SharedFlagsModule.FFlagBuildExperienceLibrary
 local FFlagLuaAppPrivatePlaytestEarlyTesting = SharedFlagsModule.FFlagLuaAppPrivatePlaytestEarlyTesting
 
@@ -53,7 +54,7 @@ return function(PlaceId, Source, p1): string
 		if p1 and p1.onTeleportFailed then
 			local OnTeleportFailedFunction = p1.onTeleportFailed
 			
-			local function v21()
+			local function v22()
 				-- upvalues: Callback3 (ref), OnTeleportFailedFunction (copy)
 				if Callback3 then
 					Callback3()
@@ -64,9 +65,9 @@ return function(PlaceId, Source, p1): string
 			
 			local LocalPlayer = Players.LocalPlayer
 			local TeleportInitFailedConnection = TeleportService.TeleportInitFailed:Connect(function(Player)
-				-- upvalues: LocalPlayer (copy), v21 (copy)
+				-- upvalues: LocalPlayer (copy), v22 (copy)
 				if Player == LocalPlayer then
-					v21()
+					v22()
 				end
 			end)
 			

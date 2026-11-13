@@ -1,8 +1,9 @@
 ﻿local Parent = script:FindFirstAncestor("Moments").Parent
 local _ = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
 local ReactModule = require(Parent.React)
 local _ = require(script.Parent.CommentRowView)
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local config = {
 	report = "Feature.Moments.Action.Report",
 	block = "Feature.Moments.Action.Block",

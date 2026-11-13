@@ -1,8 +1,10 @@
 ﻿local Parent = script:FindFirstAncestor("SplitPane").Parent
+local AppSplitViewModule = require(Parent.AppSplitView)
 local ResponsiveModule = require(Parent.Responsive)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local SplitPaneStoreModule = require(script.Parent.Parent.Stores.SplitPaneStore)
-local SupportPaneMode = require(Parent.AppSplitView).Enums.SupportPaneMode
-local FFlagLuaAppSduiEdpEnabled = require(Parent.SharedFlags).FFlagLuaAppSduiEdpEnabled
+local SupportPaneMode = AppSplitViewModule.Enums.SupportPaneMode
+local FFlagLuaAppSduiEdpEnabled = SharedFlagsModule.FFlagLuaAppSduiEdpEnabled
 
 return {
 	resolveOpenedMode = function(Directional)

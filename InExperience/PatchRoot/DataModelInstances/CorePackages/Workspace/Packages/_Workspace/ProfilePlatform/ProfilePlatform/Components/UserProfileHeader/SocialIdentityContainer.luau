@@ -5,13 +5,14 @@ local ReactModule = require(Parent.React)
 local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
 local UseEffectOnceFunction = require(Parent.RoactUtils).Hooks.useEffectOnce
 local CryoModule = require(Parent.Cryo)
+local DataHydrationModule = require(Parent.DataHydration)
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local SignalsModule = require(Parent.Signals)
 local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
 local SocialIdentityModule = require(ProfilePlatform.Components.UserProfileHeader.SocialIdentity)
 local FFlagEnableBlackbirdCheck = require(Parent.SharedFlags).FFlagEnableBlackbirdCheck
 local UseIsRobloxSubscriberFunction = require(Parent.UserProfiles).Hooks.useIsRobloxSubscriber
-local GetResult = require(Parent.DataHydration).TrustedConnections.TrustedConnectionsStore.get()
+local GetResult = DataHydrationModule.TrustedConnections.TrustedConnectionsStore.get()
 
 return function(p1)
 	-- upvalues: UseProfileWrapperContextModule (copy), UseLocalUserIdFunction (copy), AppStorageService (copy), ReactModule (copy), UseEffectOnceFunction (copy), FFlagEnableBlackbirdCheck (copy), UseIsRobloxSubscriberFunction (copy), SignalsModule (copy), GetResult (copy), UseSignalStateFunction (copy), SocialIdentityModule (copy), CryoModule (copy)

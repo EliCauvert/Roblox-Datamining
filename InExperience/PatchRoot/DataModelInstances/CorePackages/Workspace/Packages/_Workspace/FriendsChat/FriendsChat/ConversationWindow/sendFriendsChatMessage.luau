@@ -3,6 +3,7 @@ local Players = game:GetService("Players")
 local FriendsChat = script:FindFirstAncestor("FriendsChat")
 local Parent = FriendsChat.Parent
 local SignalsExperimentalModule = require(Parent.SignalsExperimental)
+local ExpChatSharedModule = require(Parent.ExpChatShared)
 local ExpChatPerfTracker = require(Parent.ChatUIPrimitives).Telemetry.ExpChatPerfTracker
 local AppChatNetworkingModule = require(Parent.AppChatNetworking)
 local CreateConversationFromFriendPlaceholderModule = require(Parent.AppChat.createConversationFromFriendPlaceholder)
@@ -16,7 +17,7 @@ local GetConversationMessageSentInfoModule = require(script.Parent.Parent.Teleme
 local FFlagFriendsChatMessageSendPerfTrackingModule = require(FriendsChat.Flags.FFlagFriendsChatMessageSendPerfTracking)
 local FriendsChatTabNameModule = require(FriendsChat.FriendsChatTabName)
 local SerializeParticipantIdsForTelemetryModule = require(script.Parent.Parent.Telemetry.App.serializeParticipantIdsForTelemetry)
-local NewResult = require(Parent.ExpChatShared).Logger:new(script.Name)
+local NewResult = ExpChatSharedModule.Logger:new(script.Name)
 
 local function isSendResponseAccepted(p1): boolean
 	if p1 == nil or p1.responseBody == nil then

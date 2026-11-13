@@ -1,6 +1,7 @@
 ﻿local Chrome = script:FindFirstAncestor("Chrome")
 local CorePackages = game:GetService("CorePackages")
 local ConstantsModule = require(Chrome.ChromeShared.Unibar.Constants)
+local FlagsModule = require(Chrome.ChromeShared.Flags)
 local FoundationModule = require(CorePackages.Packages.Foundation)
 local ReactModule = require(CorePackages.Packages.React)
 local UseMappedSignalFunction = require(CorePackages.Workspace.Packages.Chrome).Hooks.useMappedSignal
@@ -10,7 +11,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UnibarStyle = require(CorePackages.Workspace.Packages.Chrome).UnibarStyle
 local SubMenuContextModule = require(Chrome.ChromeShared.Unibar.SubMenuContext)
 local InExperienceAppChatModalModule = require(CorePackages.Workspace.Packages.AppChat.InExperienceAppChatModal)
-local FFlagTokenizeUnibarConstantsWithStyleProvider = require(Chrome.ChromeShared.Flags).FFlagTokenizeUnibarConstantsWithStyleProvider
+local FFlagTokenizeUnibarConstantsWithStyleProvider = FlagsModule.FFlagTokenizeUnibarConstantsWithStyleProvider
 
 return function()
 	-- upvalues: UseTokensFunction (copy), FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule (copy), MappedSignal (copy), InExperienceAppChatModalModule (copy), UseMappedSignalFunction (copy), UsePartyIconModule (copy), ReactModule (copy), SubMenuContextModule (copy), FoundationModule (copy)

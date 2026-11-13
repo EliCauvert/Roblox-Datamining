@@ -125,7 +125,7 @@ function NetworkChart.render(p1)
 		})
 	end
 	local YOffset2 = 0
-	local YOffset = -1
+	local YOffset1 = -1
 	local Total = 0
 	local CountHttpEntryList = #HttpEntryList
 	local Count = 0
@@ -145,21 +145,21 @@ function NetworkChart.render(p1)
 			if Entry.RequestType ~= "Default" and IsSearchTermMatch then
 				Count += 1
 				local IsExpandIndexMatch = ExpandIndex == Entry.Num
-				local YOffset1: number = EntryFrameHeight
+				local YOffset: number = EntryFrameHeight
 				local NewY = 0
 				
 				if IsExpandIndexMatch then
-					YOffset1 += ResponseStrHeight
+					YOffset += ResponseStrHeight
 					
 					if p1.ref.current then
 						NewY = ResponseStrHeight + TextService:GetTextSize(Entry.Response, MainWindow, MainWindow1, (Vector2.new(p1.ref.current.AbsoluteSize.X * ResponseWidthRatio, 100000000))).Y
-						YOffset1 += NewY
+						YOffset += NewY
 					end
 				end
-				if CanvasPos.Y <= YOffset2 + YOffset1 then
+				if CanvasPos.Y <= YOffset2 + YOffset then
 					if Total < AbsScrollSize.Y then
 						config[i2] = RoactModule.createElement(NetworkChartEntryModule, {
-							size = UDim2.new(1, 0, 0, YOffset1),
+							size = UDim2.new(1, 0, 0, YOffset),
 							entry = Entry,
 							entryCellSize = List2,
 							cellOffset = List,
@@ -170,20 +170,20 @@ function NetworkChart.render(p1)
 							onButtonPress = p1.getOnExpandEntry(Entry.Num)
 						})
 					end
-					if YOffset < 0 then
-						YOffset = YOffset2
+					if YOffset1 < 0 then
+						YOffset1 = YOffset2
 					else
-						Total += YOffset1
+						Total += YOffset
 					end
 				end
-				YOffset2 += YOffset1
+				YOffset2 += YOffset
 			end
 		end
 		if Count > 0 then
 			config.WindowingPadding = RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
-				Size = UDim2.new(1, 0, 0, YOffset)
+				Size = UDim2.new(1, 0, 0, YOffset1)
 			})
 		end
 	end

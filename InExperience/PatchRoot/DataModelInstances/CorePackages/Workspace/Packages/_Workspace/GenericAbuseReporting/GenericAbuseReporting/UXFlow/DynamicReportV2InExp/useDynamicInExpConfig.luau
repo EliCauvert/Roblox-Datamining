@@ -5,6 +5,7 @@ local ReactModule = require(Parent.React)
 local RoactNetworking = require(Parent.RoactServiceTags).RoactNetworking
 local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
 local _ = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
+local AbuseVectorModule = require(GenericAbuseReporting.Enums.AbuseVector)
 local AnalyticsServiceModule = require(GenericAbuseReporting.BeduiV2.Analytics.analyticsService)
 local FetchConfigWithAttributesModule = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.fetchConfigWithAttributes)
 local _ = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.inExperienceConfig)
@@ -13,7 +14,7 @@ local FormatErrorDetailForAnalyticsFunction = AnalyticsServiceModule.formatError
 local GetNewRunIdFunction = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.reducer).getNewRunId
 local SendAnalyticsEventFunction = AnalyticsServiceModule.sendAnalyticsEvent
 local TelemetryEventType = AnalyticsServiceModule.TelemetryEventType
-local InExperience = require(GenericAbuseReporting.Enums.AbuseVector).InExperience
+local InExperience = AbuseVectorModule.InExperience
 
 local function getCacheKey(InExperience, List): string
 	local List1 = {}

@@ -146,17 +146,17 @@ if FFlagLuaAppEnableInExperienceDataModelStreamStarter then
 end
 if game:GetEngineFeature("ProtocolLaunchPrivateChannelUpdateCheckEngineFeature") then
 	local ChannelUpdatePrompt = Modules.ChannelUpdatePrompt
-	local Success1, Result2 = pcall(require, ChannelUpdatePrompt)
-	local Result3 = nil
+	local Success, Result = pcall(require, ChannelUpdatePrompt)
+	local Result2 = nil
 	
-	if Success1 then
-		Result3 = Result2
+	if Success then
+		Result2 = Result
 	else
-		warn("Failure to Start CoreScript module " .. ChannelUpdatePrompt.Name .. ".\n" .. Result2)
-		Result3 = nil
+		warn("Failure to Start CoreScript module " .. ChannelUpdatePrompt.Name .. ".\n" .. Result)
+		Result2 = nil
 	end
-	if Result3 then
-		Result3.init()
+	if Result2 then
+		Result2.init()
 	end
 end
 if not IsViewer and GetFFlagChromeCentralizedConfigurationFunction() then
@@ -255,11 +255,11 @@ ScriptContext:AddCoreScriptLocal("CoreScripts/PerformanceStatsManagerScript", Ro
 ScriptContext:AddCoreScriptLocal("CoreScripts/PlayerRagdoll", RobloxGui)
 coroutine.wrap(safeRequire)(RobloxGui.Modules.ChatSelector)
 coroutine.wrap(safeRequire)(RobloxGui.Modules.PlayerList.PlayerListManager)
-local Success2, Result4 = pcall(function()
+local Success1, Result1 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserRoactBubbleChatBeta")
 end)
 
-if game:GetEngineFeature("EnableBubbleChatFromChatService") or Success2 and Result4 then
+if game:GetEngineFeature("EnableBubbleChatFromChatService") or Success1 and Result1 then
 	ScriptContext:AddCoreScriptLocal("CoreScripts/PlayerBillboards", RobloxGui)
 end
 coroutine.wrap(function()
@@ -298,17 +298,17 @@ ScriptContext:AddCoreScriptLocal("CoreScripts/FriendPlayerPrompt", RobloxGui)
 
 if EnablePromptAgeCheckListener then
 	local PromptAgeCheckHandler = Modules.PromptAgeCheckHandler
-	local Success3, Result5 = pcall(require, PromptAgeCheckHandler)
-	local Result6 = nil
+	local Success3, Result4 = pcall(require, PromptAgeCheckHandler)
+	local Result5 = nil
 	
 	if Success3 then
-		Result6 = Result5
+		Result5 = Result4
 	else
-		warn("Failure to Start CoreScript module " .. PromptAgeCheckHandler.Name .. ".\n" .. Result5)
-		Result6 = nil
+		warn("Failure to Start CoreScript module " .. PromptAgeCheckHandler.Name .. ".\n" .. Result4)
+		Result5 = nil
 	end
-	if Result6 then
-		Result6.init()
+	if Result5 then
+		Result5.init()
 	end
 end
 ScriptContext:AddCoreScriptLocal("CoreScripts/AvatarContextMenu", RobloxGui)
@@ -477,16 +477,16 @@ end)()
 
 if game:GetEngineFeature("EnableLuaAdPlayer") then
 	local AdPlayer = CorePackages.Workspace.Packages.AdPlayer
-	local Success, Result = pcall(require, AdPlayer)
-	local Result1 = nil
+	local Success2, Result3 = pcall(require, AdPlayer)
+	local v5 = nil
 	
-	if Success then
-		Result1 = Result
+	if Success2 then
+		v5 = Result3
 	else
-		warn("Failure to Start CoreScript module " .. AdPlayer.Name .. ".\n" .. Result)
-		Result1 = nil
+		warn("Failure to Start CoreScript module " .. AdPlayer.Name .. ".\n" .. Result3)
+		v5 = nil
 	end
-	Result1.init()
+	v5.init()
 end
 if game:GetEngineFeature("EnableVoiceAttention") then
 	ScriptContext:AddCoreScriptLocal("CoreScripts/VoiceAttention", script.Parent)

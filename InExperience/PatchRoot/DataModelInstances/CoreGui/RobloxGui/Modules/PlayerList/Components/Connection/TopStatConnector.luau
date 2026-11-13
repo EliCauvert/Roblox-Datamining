@@ -7,12 +7,13 @@ local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
 local TenFootInterfaceModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.TenFootInterface)
 local Parent = script.Parent.Parent.Parent
 local FFlagPlayerListReduceRerendersModule = require(Parent.Flags.FFlagPlayerListReduceRerenders)
+local FFlagPlayerListRemoveTopStatModule = require(Parent.Flags.FFlagPlayerListRemoveTopStat)
 local FFlagEnableMobilePlayerListOnConsole = require(CorePackages.Workspace.Packages.PlayerList).Flags.FFlagEnableMobilePlayerListOnConsole
 local PlayerListTopStatCheckGamepad = game:DefineFastFlag("PlayerListTopStatCheckGamepad", false)
 local FFlagLuaSupportMicroGamepadPreferredInput = require(CorePackages.Workspace.Packages.SharedFlags).FFlagLuaSupportMicroGamepadPreferredInput
 local SetupTopStatResult = nil
 
-if not require(Parent.Flags.FFlagPlayerListRemoveTopStat) then
+if not FFlagPlayerListRemoveTopStatModule then
 	local NoPlayerListTopStatCheckGamepad: boolean = not PlayerListTopStatCheckGamepad or (UserInputService.PreferredInput == Enum.PreferredInput.Gamepad or FFlagLuaSupportMicroGamepadPreferredInput and UserInputService.PreferredInput == Enum.PreferredInput.MicroGamepad)
 	
 	if if FFlagEnableMobilePlayerListOnConsole then GuiService.ViewportDisplaySize == Enum.DisplaySize.Large and NoPlayerListTopStatCheckGamepad else TenFootInterfaceModule:IsEnabled() then

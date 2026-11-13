@@ -2,12 +2,13 @@
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 local CorePackages = game:GetService("CorePackages")
+local CreateFunction = require(CorePackages.Workspace.Packages.AppCommonLib).Create
 local Panel3D = require(CorePackages.Workspace.Packages.VrCommon).Panel3D
 local _ = Color3.new(0.2, 0.2, 0.2)
 local _ = Enum.FontSize.Size36
 local _ = Color3.new(1, 1, 1)
 local LocalCF = CFrame.new(0, 0, -7) * CFrame.Angles(0, 3.141592653589793, 0)
-local _ = require(CorePackages.Workspace.Packages.AppCommonLib).Create("ImageLabel")({
+local _ = CreateFunction("ImageLabel")({
 	Name = "EmptySelectionImage",
 	Image = "",
 	BackgroundTransparency = 1,
@@ -32,9 +33,10 @@ function Dialog:CalculateTransparency(): number
 	-- upvalues: UserInputService (copy), v2 (ref), v1 (ref), Flag (ref)
 	local UserCFrame = UserInputService:GetUserCFrame(Enum.UserCFrame.Head)
 	local ScaledLookVector = UserCFrame.lookVector * vector.create(1, 0, 1)
+	local AsinResult = math.asin(UserCFrame.lookVector.Y)
 	local _Vector3 = Vector3.new(math.cos(v2 + v1 + 1.5707963267948966), 0, -math.sin(v2 + v1 + 1.5707963267948966))
 	
-	if math.abs((math.asin(UserCFrame.lookVector.Y))) > 0.767944870877505 then
+	if math.abs(AsinResult) > 0.767944870877505 then
 		Flag = true
 	end
 	return (math.min(math.max(0, (math.acos((ScaledLookVector:Dot(_Vector3))) - 0.6544984694978736) / 0.11344640137963136), 1))

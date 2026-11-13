@@ -3,19 +3,22 @@ local CorePackages = game:GetService("CorePackages")
 local RoactModule = require(CorePackages.Packages.Roact)
 local TModule = require(CorePackages.Packages.t)
 local PromiseModule = require(CorePackages.Packages.Promise)
+local EnumerateModule = require(CorePackages.Packages.enumerate)
 local WithStyleFunction = require(CorePackages.Packages.UIBlox).Core.Style.withStyle
 local FFlagCoreUiMigrateUIBloxToFoundation = require(CorePackages.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
+local BlockingUtilityModule = require(CorePackages.Workspace.Packages.BlockingUtility)
 local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local Default = require(RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
 local ConstantsModule = require(RobloxGui.Modules.VoiceChat.Constants)
 local GetFFlagVoiceARUnblockingUnmutingEnabledModule = require(RobloxGui.Modules.Flags.GetFFlagVoiceARUnblockingUnmutingEnabled)
 local ReportActionSelectionModule = require(script.Parent.ReportActionSelection)
 local ReportActionAreYouSureModule = require(script.Parent.ReportActionAreYouSure)
-local ReportPages = require(CorePackages.Packages.enumerate)("ReportPages", { SelectActions = 1, ConfirmAction = 2 })
+local ReportPages = EnumerateModule("ReportPages", { SelectActions = 1, ConfirmAction = 2 })
 local ReportConfirmationContainer = RoactModule.PureComponent:extend("ReportConfirmationContainer")
 ReportConfirmationContainer.defaultProps = {
 	isVoiceReport = false,
-	blockingUtility = require(CorePackages.Workspace.Packages.BlockingUtility),
-	voiceChatServiceManager = require(RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default,
+	blockingUtility = BlockingUtilityModule,
+	voiceChatServiceManager = Default,
 	closeMenu = function() end
 }
 ReportConfirmationContainer.validateProps = TModule.interface({

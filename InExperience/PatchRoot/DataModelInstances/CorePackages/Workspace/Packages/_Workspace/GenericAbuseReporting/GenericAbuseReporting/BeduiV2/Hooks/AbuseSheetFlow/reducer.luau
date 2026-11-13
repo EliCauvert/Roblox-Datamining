@@ -83,10 +83,11 @@ return {
 				if p2.payload.expectedFromNodeId ~= LastResult.nodeId then
 					return InitialState
 				elseif InitialState.navigationState == "idle" then
-					local SliceResult = DashModule.slice(InitialState.stack, 1, #InitialState.stack - 1)
-					table.insert(SliceResult, (DashModule.join(LastResult, {
+					local JoinResult1 = DashModule.join(LastResult, {
 						store = DashModule.join(LastResult.store, p2.payload.store)
-					})))
+					})
+					local SliceResult = DashModule.slice(InitialState.stack, 1, #InitialState.stack - 1)
+					table.insert(SliceResult, JoinResult1)
 					JoinResult = DashModule.join(InitialState, { navigationState = "gotoNext", stack = SliceResult })
 					
 					return JoinResult

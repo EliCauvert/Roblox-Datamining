@@ -1,6 +1,7 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
 local FoundationModule = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
@@ -18,6 +19,7 @@ local MomentsGetMomentsReactionsStoreModule = require(Parent.DataHydration.Momen
 local MomentsResolveEmoteIdModule = require(Parent.DataHydration.MomentsResolveEmoteId)
 local _ = require(Parent.MomentsTypes)
 local GetCommentCollectionStoreModule = require(Moments.Components.Comments.GetCommentCollectionStore)
+local CommentCollectionTypesModule = require(Moments.Components.Comments.GetCommentCollectionStore.CommentCollectionTypes)
 local GetCommentsListCoordinatorModule = require(script.Parent.Parent.getCommentsListCoordinator)
 local GetCommentsSheetStoreModule = require(Moments.Components.Comments.Sheet.getCommentsSheetStore)
 local UseCommentCapabilitiesModule = require(Moments.Components.Comments.useCommentCapabilities)
@@ -33,8 +35,8 @@ local CreateExpandedCommentsStoreModule = require(script.Parent.createExpandedCo
 local CreateToggledTranslationsStoreModule = require(script.Parent.createToggledTranslationsStore)
 local UseCommentsListRevealModule = require(script.Parent.useCommentsListReveal)
 local Players = game:GetService("Players")
-local LoadStatus = require(Moments.Components.Comments.GetCommentCollectionStore.CommentCollectionTypes).LoadStatus
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LoadStatus = CommentCollectionTypesModule.LoadStatus
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local config = {
 	deleteFailed = "Feature.Moments.Label.CommentDeleteFailed"
 }

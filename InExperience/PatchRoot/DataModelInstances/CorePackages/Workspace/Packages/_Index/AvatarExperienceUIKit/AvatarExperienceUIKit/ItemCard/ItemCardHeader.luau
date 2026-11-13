@@ -3,6 +3,7 @@ local ReactModule = require(Parent.React)
 local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
 local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local FFlagAXAddTransparencyToItemCardHeader = AvatarExperienceFlagsModule.FFlagAXAddTransparencyToItemCardHeader
+local FFlagAXItemCardComponentsMemo = AvatarExperienceFlagsModule.FFlagAXItemCardComponentsMemo
 
 local function ItemCardHeader(Frame: Frame)
 	-- upvalues: UseDesignTokensFunction (copy), ReactModule (copy), FFlagAXAddTransparencyToItemCardHeader (copy)
@@ -30,4 +31,4 @@ local function ItemCardHeader(Frame: Frame)
 	})
 end
 
-return if AvatarExperienceFlagsModule.FFlagAXItemCardComponentsMemo then ReactModule.memo(ItemCardHeader) else ItemCardHeader
+return if FFlagAXItemCardComponentsMemo then ReactModule.memo(ItemCardHeader) else ItemCardHeader

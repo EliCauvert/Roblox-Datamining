@@ -2,11 +2,12 @@
 local ReactModule = require(Parent.React)
 local InputHandlersModule = require(Parent.InputHandlers)
 local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
 local UseFocusRootFunction = FocusNavigationUtilsModule.useFocusRoot
 local UseFocusOnMountFunction = FocusNavigationUtilsModule.useFocusOnMount
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
-local UseMostRecentOrDefaultFocusBehaviorFunction = require(Parent.ReactFocusNavigation).useMostRecentOrDefaultFocusBehavior
+local UseMostRecentOrDefaultFocusBehaviorFunction = ReactFocusNavigationModule.useMostRecentOrDefaultFocusBehavior
 local EventMap = {
 	[Enum.KeyCode.ButtonB] = FocusNavigationEventNameEnum.NavigateBack,
 	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack

@@ -576,7 +576,7 @@ function AppChatEntryPoint(p1)
 		
 		return if CurrentSquad and CurrentSquad.squadId then CurrentSquad.squadId else nil
 	end) else nil
-	local Element11 = ReactModule.createElement(AnalyticsProviderModule, {
+	local Element2 = ReactModule.createElement(AnalyticsProviderModule, {
 		localUserId = UseSelectorResult,
 		entryPoint = UseSignalStateResult
 	}, {
@@ -623,7 +623,7 @@ function AppChatEntryPoint(p1)
 			UseSelectorResult2
 		})
 	end
-	return ReactModule.createElement(RoactChatAnalyticsProviderModule, { entryPoint = UseSignalStateResult }, { Element11 })
+	return ReactModule.createElement(RoactChatAnalyticsProviderModule, { entryPoint = UseSignalStateResult }, { Element2 })
 end
 
 return MemoFunction(AppChatEntryPoint)

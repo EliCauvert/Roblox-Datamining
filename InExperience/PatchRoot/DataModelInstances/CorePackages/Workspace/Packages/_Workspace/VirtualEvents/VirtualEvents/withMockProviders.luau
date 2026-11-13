@@ -9,6 +9,7 @@ local RobloxAppLocalesModule = require(VirtualEvents.Parent.RobloxAppLocales)
 local LocalizationModule = require(VirtualEvents.Parent.Localization)
 local UIBloxModule = require(VirtualEvents.Parent.UIBlox)
 local DesignTokenProvider = require(VirtualEvents.Parent.Style).DesignTokenProvider
+local VirtualEventsStateModule = require(VirtualEvents.Parent.VirtualEventsState)
 local MockContentProvider = UIBloxModule.UnitTestHelpers.MockContentProvider
 local FoundationModule = require(VirtualEvents.Parent.Foundation)
 local FoundationProvider = FoundationModule.FoundationProvider
@@ -17,7 +18,7 @@ local AppStyleProvider = UIBloxModule.App.Style.AppStyleProvider
 local Constants = UIBloxModule.App.Style.Constants
 local ContentProvider = UIBloxModule.App.Context.ContentProvider
 local CombineReducersResult = RoduxModule.combineReducers({
-	VirtualEvents = require(VirtualEvents.Parent.VirtualEventsState).installReducer()
+	VirtualEvents = VirtualEventsStateModule.installReducer()
 })
 
 return function(p1, p2)

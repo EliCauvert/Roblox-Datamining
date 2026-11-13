@@ -1,10 +1,11 @@
 ﻿local EditProfile = script:FindFirstAncestor("EditProfile")
 local Parent = EditProfile.Parent
+local HttpModule = require(Parent.Http)
 local HttpRequestModule = require(Parent.HttpRequest)
 local PromiseModule = require(Parent.Promise)
 local EnumsModule = require(EditProfile.Common.Enums)
 local HttpService = game:GetService("HttpService")
-local Url = require(Parent.Http).Url
+local Url = HttpModule.Url
 local ConfigResult = HttpRequestModule.config({
 	requestFunction = function(p1, p2, p3)
 		-- upvalues: HttpRequestModule (copy)

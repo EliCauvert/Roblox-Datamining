@@ -1,19 +1,21 @@
 ﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
 local Parent = MomentsCreation.Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
 local MomentsCommonModule = require(Parent.MomentsCommon)
 local _ = require(MomentsCreation.Types.CreationFlowTypes)
 local DialogTypeModule = require(MomentsCreation.Enums.DialogType)
 local GetFFlagMomentsTextGenTonePickerModule = require(MomentsCreation.Flags.GetFFlagMomentsTextGenTonePicker)
 local GetFFlagMomentsGenerateTextInTextOverlayModule = require(MomentsCreation.Flags.GetFFlagMomentsGenerateTextInTextOverlay)
+local GetFFlagEnableMomentTextGenerationFunction = MomentsCommonModule.Flags.GetFFlagEnableMomentTextGeneration
 
 return {
 	kind = "generateText",
 	presentation = "InstantAction",
 	cta = {
 		localizationKey = "Feature.Moments.Action.GenerateText",
-		icon = require(Parent.BuilderIcons).Icon.TagSparkle,
+		icon = BuilderIconsModule.Icon.TagSparkle,
 		analyticsEvent = MomentsCommonModule.Analytics.EventNames.EditingFlowGenerateTextButtonPressed,
-		order = if MomentsCommonModule.Flags.GetFFlagEnableMomentTextGeneration() then 5 else 4
+		order = if GetFFlagEnableMomentTextGenerationFunction() then 5 else 4
 	},
 	supportedCaptureTypes = { Enum.CaptureType.Video },
 	isAvailable = function(p1): boolean

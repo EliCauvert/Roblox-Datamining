@@ -110,8 +110,8 @@ return {
 			return #p3 > 0
 		end) do
 			local v1 = Text:split(":")
-			local TrimResult = nil
 			local FromStringResult = nil
+			local TrimResult = nil
 			
 			if #v1 == 2 then
 				local Unpacked, Unpacked2 = table.unpack(v1)

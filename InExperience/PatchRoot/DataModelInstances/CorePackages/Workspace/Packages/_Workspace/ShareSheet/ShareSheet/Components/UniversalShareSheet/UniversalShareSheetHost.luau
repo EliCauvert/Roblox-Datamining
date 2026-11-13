@@ -58,7 +58,7 @@ return ReactModule.memo(function()
 			telemetryId = UseUniversalShareSheetViewModelModuleResult.telemetryId,
 			url = UseUniversalShareSheetViewModelModuleResult.url
 		}) else nil,
-		ShareSendResultSnackbar = if UseStateResult and UseOverlayResult then ReactRobloxModule.createPortal(ReactModule.createElement(FoundationModule.Snackbar, {
+		ShareSendResultSnackbar = if UseStateResult and UseOverlayResult then ReactRobloxModule.createPortal(ReactModule.createElement(FoundationModule.Snackbar_DEPRECATED, {
 			testId = "share-sheet-snackbar",
 			ZIndex = 999,
 			action = Config,

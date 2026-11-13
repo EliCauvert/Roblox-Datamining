@@ -6,6 +6,7 @@ local TModule = require(Parent1.t)
 local CryoModule = require(Parent1.Cryo)
 local WithStyleModule = require(Parent.Core.Style.withStyle)
 local OtterModule = require(Parent1.Otter)
+local ImagesModule = require(Parent.App.ImageSet.Images)
 local RoactGamepadModule = require(Parent1.RoactGamepad)
 local ControlStateModule = require(Core.Control.Enum.ControlState)
 local SegmentedControlTabNameModule = require(script.Parent.SegmentedControlTabName)
@@ -15,7 +16,7 @@ local GetTextSizeModule = require(Parent.Core.Text.GetTextSize)
 local GetFontFromFontStyleModule = require(Parent.Core.Text.GetFontFromFontStyle)
 local v1 = require(Parent.App.ImageSet.getIconSize)(require(Parent.App.ImageSet.Enum.IconSize).Medium)
 local config = { frequency = 10, dampingRatio = 1 }
-local ComponentAssetsCircle17 = require(Parent.App.ImageSet.Images)["component_assets/circle_17"]
+local ComponentAssetsCircle17 = ImagesModule["component_assets/circle_17"]
 local config1 = { [ControlStateModule.Default] = "BackgroundUIDefault" }
 local config2 = { [ControlStateModule.Default] = "Divider" }
 local config3 = { [ControlStateModule.Default] = "UIEmphasis" }
@@ -110,10 +111,11 @@ function SegmentedControl.render(p1)
 			for i = 1, CountTabs do
 				Largest = math.max(Largest, GetTextSizeModule(p1.props.tabs[i].tabName, ScaledRelativeSize, GetFontFromFontStyleModule(p2.Font.Header2), Vector2.new(1e999, 1e999)).X)
 			end
+			local NewLargest = Largest + 8
 			local NewCountTabs = (v2 + 80) * CountTabs + 8
-			local NewLargest = (v2 + (Largest + 8)) * CountTabs + 8
+			local NewNewLargest = (v2 + NewLargest) * CountTabs + 8
 			p1:setState({
-				computedMinFrameWidth = if p1.props.maxWidth then math.min(NewLargest, p1.props.maxWidth) else math.max(NewLargest, NewCountTabs)
+				computedMinFrameWidth = if p1.props.maxWidth then math.min(NewNewLargest, p1.props.maxWidth) else math.max(NewNewLargest, NewCountTabs)
 			})
 		end
 		local Frames = {}
@@ -144,7 +146,7 @@ function SegmentedControl.render(p1)
 				end
 			end
 			
-			local function v48()
+			local function v50()
 				-- upvalues: p3 (copy), p1 (upval)
 				p3.moveFocusTo(p1.rootRef)
 			end
@@ -217,7 +219,7 @@ function SegmentedControl.render(p1)
 						SortOrder = Enum.SortOrder.LayoutOrder
 					}),
 					RoactModule.createFragment((CryoModule.List.map(p1.props.tabs, function(p4, LayoutOrder: number)
-						-- upvalues: RoactModule (upval), RoactGamepadModule (upval), TabWidth (upval), Height (upval), p1 (upval), CountTabs (upval), v48 (copy), p3 (copy), SegmentedControlTabNameModule (upval), IconStateColorMap (upval)
+						-- upvalues: RoactModule (upval), RoactGamepadModule (upval), TabWidth (upval), Height (upval), p1 (upval), CountTabs (upval), v50 (copy), p3 (copy), SegmentedControlTabNameModule (upval), IconStateColorMap (upval)
 						return RoactModule.createElement(RoactGamepadModule.Focusable.Frame, {
 							key = p4.tabName,
 							LayoutOrder = LayoutOrder,
@@ -227,8 +229,8 @@ function SegmentedControl.render(p1)
 							NextSelectionLeft = LayoutOrder > 1 and p1.tabRefs[LayoutOrder - 1] or nil,
 							NextSelectionRight = LayoutOrder < CountTabs and p1.tabRefs[LayoutOrder + 1] or nil,
 							inputBindings = {
-								LeaveA = RoactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonA, v48),
-								LeaveB = RoactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonB, v48),
+								LeaveA = RoactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonA, v50),
+								LeaveB = RoactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonB, v50),
 								SelectNext1 = RoactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonR1, function()
 									-- upvalues: LayoutOrder (copy), CountTabs (upval), p3 (upval), p1 (upval)
 									if LayoutOrder < CountTabs then

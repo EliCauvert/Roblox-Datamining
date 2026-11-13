@@ -1,9 +1,10 @@
 ﻿local AppChat = script:FindFirstAncestor("AppChat")
 local Parent = AppChat.Parent
+local NetworkingChatModule = require(AppChat.Http.NetworkingChat)
 local Immutable = require(Parent.AppCommonLib).Immutable
 
 return require(Parent.Rodux).createReducer({}, {
-	[require(AppChat.Http.NetworkingChat).GetUserConversations.Succeeded.name] = function(p1, p2)
+	[NetworkingChatModule.GetUserConversations.Succeeded.name] = function(p1, p2)
 		-- upvalues: Immutable (copy)
 		return if #p2.responseBody < p2.queryArgs.pageSize then Immutable.JoinDictionaries(p1, { oldestConversationIsFetched = true }) else p1
 	end,

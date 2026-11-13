@@ -1,7 +1,8 @@
 ﻿local Parent = script.Parent
 local _ = require(script.Types)
+local FFlagSocialEnableProfileInspectAndBuy = require(Parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy
 local FFlagAXIaBEnableShopContext = require(Parent.AvatarExperienceFlags).FFlagAXIaBEnableShopContext
-local FFlagSocialEnableProfileInspectAndBuy = require(Parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy or FFlagAXIaBEnableShopContext
+local FFlagSocialEnableProfileInspectAndBuy1 = FFlagSocialEnableProfileInspectAndBuy or FFlagAXIaBEnableShopContext
 local _ = require(script.Stores.createItemSelectionStore)
 
 return {
@@ -12,8 +13,8 @@ return {
 	},
 	Utils = {
 		getPriceStatus = require(script.Utils.getPriceStatus),
-		getPriceStatusInShop = if FFlagSocialEnableProfileInspectAndBuy then require(script.Utils.getPriceStatusInShop) else nil,
-		getPriceLineContent = if FFlagSocialEnableProfileInspectAndBuy then require(script.Utils.getPriceLineContent) else nil,
+		getPriceStatusInShop = if FFlagSocialEnableProfileInspectAndBuy1 then require(script.Utils.getPriceStatusInShop) else nil,
+		getPriceLineContent = if FFlagSocialEnableProfileInspectAndBuy1 then require(script.Utils.getPriceLineContent) else nil,
 		getViewType = require(script.Utils.getViewType),
 		applyTryOnItemToHumanoidDescription = require(script.Utils.applyTryOnItemToHumanoidDescription),
 		convertAssetInfoToItemData = require(script.Utils.convertAssetInfoToItemData),

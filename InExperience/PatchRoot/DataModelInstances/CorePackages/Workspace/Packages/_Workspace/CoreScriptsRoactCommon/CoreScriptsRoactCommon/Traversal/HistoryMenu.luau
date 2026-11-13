@@ -1,6 +1,7 @@
 ﻿local Parent = script:FindFirstAncestor("CoreScriptsRoactCommon").Parent
 local CryoModule = require(Parent.Cryo)
 local FoundationModule = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
 local ReactModule = require(Parent.React)
 local ConstantsModule = require(script.Parent.Constants)
 local TraversalTelemetryModule = require(script.Parent.TraversalTelemetry)
@@ -10,7 +11,7 @@ local Menu = FoundationModule.Menu
 local PopoverAlign = FoundationModule.Enums.PopoverAlign
 local PopoverSide = FoundationModule.Enums.PopoverSide
 local View = FoundationModule.View
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 
 local function _(p1)
 	return if typeof(p1) == "table" then p1 else { [p1] = true }

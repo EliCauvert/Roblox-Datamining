@@ -3948,11 +3948,13 @@ Feature.Moments.Description.HowToCaptureStep1,Entre em uma experiência com o re
 Feature.Moments.Description.HowToCaptureStep2,Habilite os controles de captura
 Feature.Moments.Description.HowToCaptureStep3,Capture fotos e vídeos enquanto joga
 Feature.Moments.Description.LeaveMomentsCreation,"Você vai perder todas as suas alterações, mas ainda pode encontrar esta captura na sua galeria de <b>Capturas</b>."
+Feature.Moments.Description.MomentsOffBody,Peça a um responsável para ativar os Momentos no controle dos responsáveis.
 Feature.Moments.Description.NoMusicResults,Nenhuma música encontrada
 Feature.Moments.Description.NonInfiniteScrollEndBody,Pausamos seu feed. Você pode decidir se quer continuar assistindo.
 Feature.Moments.Description.NothingHereYet,Nada aqui ainda…
 Feature.Moments.Description.PublishMoment,Descreva seu Momento
 Feature.Moments.Description.StayFriendly,Vamos manter o clima amigável
+Feature.Moments.Description.TimeLimitReachedBody,Os limites são baseados na idade. Assista mais Momentos amanhã.
 Feature.Moments.Description.TooManyUploads,Você enviou muitos vídeos hoje. Tente novamente amanhã.
 Feature.Moments.Disclaimer.EveryoneMoments,Todos nos Momentos podem ver o que é publicado
 Feature.Moments.Label.All,
@@ -4023,6 +4025,7 @@ Feature.Moments.Label.MomentRemovedTitle,Removemos este Momento
 Feature.Moments.Label.MomentUnavailable,Momento indisponível
 Feature.Moments.Label.MomentUnavailableDefault,Este Momento não está disponível.
 Feature.Moments.Label.MomentsExperienceName,
+Feature.Moments.Label.MomentsOffTitle,Os Momentos estão desativados
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,Nenhum comentário ainda
 Feature.Moments.Label.NonInfiniteScrollEndTitle,Há mais Momentos para assistir
@@ -4052,6 +4055,7 @@ Feature.Moments.Label.TextGenerationFailedBody,Não foi possível gerar o texto.
 Feature.Moments.Label.TextGenerationFailedTitle,Falha na geração
 Feature.Moments.Label.TextGenerationFilteredBody,Não é possível gerar um texto para esta captura de vídeo porque o conteúdo foi bloqueado.
 Feature.Moments.Label.TextGenerationFilteredTitle,Geração filtrada
+Feature.Moments.Label.TimeLimitReachedTitle,Você atingiu o limite de tempo para Momentos
 Feature.Moments.Label.Tone,Tom
 Feature.Moments.Label.Tone.Cinematic,Modo cinema
 Feature.Moments.Label.Tone.Funny,Engraçado
@@ -4907,6 +4911,8 @@ Feature.UniversalShareSheet.Response.SharedMessage,A mensagem foi enviada
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,As mensagens foram enviadas
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} outras pessoas
 Feature.UserLibrary.Label.MyLibrary,Minha biblioteca
+Feature.VIPServer.Message.TooManyFreeServersOnGame,Você não pode ter mais servidores privados gratuitos nesta experiência.
+Feature.VIPServer.Message.TooManyTotalActiveFreeServers,"Você não pode ter mais servidores gratuitos ativos. Primeiro, desative alguns dos outros servidores."
 Feature.VerificationUpsell.Action.AddPhone,Adicionar telefone
 Feature.VerificationUpsell.Action.AddPhoneNumber,Adicionar número de telefone
 Feature.VerificationUpsell.Action.AddPhoneVoice,Número de telefone para o Bate-papo de voz

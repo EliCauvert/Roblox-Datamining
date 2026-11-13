@@ -37,7 +37,7 @@ local Replaced4 = string.gsub(Replaced, "https://www.", "https://catalog.")
 local Replaced5 = string.gsub(Replaced, "https://www.", "https://economy.")
 local Replaced6 = string.gsub(Replaced, "https://www", "https://users")
 
-local function request(Options, Callback, Callback1)
+local function request(Options, Callback1, Callback)
 	-- upvalues: DebugLogModule (copy), SerializeTableModule (copy), HttpService (copy)
 	DebugLogModule(function(): string
 		-- upvalues: Options (copy), SerializeTableModule (upval)
@@ -45,25 +45,25 @@ local function request(Options, Callback, Callback1)
 	end)
 	
 	return HttpService:RequestInternal(Options):Start(function(p1, p2)
-		-- upvalues: DebugLogModule (upval), Options (copy), SerializeTableModule (upval), HttpService (upval), Callback (copy), Callback1 (copy)
+		-- upvalues: DebugLogModule (upval), Options (copy), SerializeTableModule (upval), HttpService (upval), Callback1 (copy), Callback (copy)
 		DebugLogModule(function(): string
 			-- upvalues: Options (upval), SerializeTableModule (upval), p2 (copy)
 			return "Response " .. Options.Url .. "\n" .. SerializeTableModule(p2)
 		end)
 		
 		if not p1 then
-			Callback1((tostring(p2.StatusMessage)))
+			Callback((tostring(p2.StatusMessage)))
 			
 			return
 		end
 		local Success, Result = pcall(HttpService.JSONDecode, HttpService, p2.Body)
 		
 		if Success then
-			Callback(Result)
+			Callback1(Result)
 			
 			return
 		else
-			Callback1("Could not parse JSON.")
+			Callback("Could not parse JSON.")
 		end
 	end)
 end

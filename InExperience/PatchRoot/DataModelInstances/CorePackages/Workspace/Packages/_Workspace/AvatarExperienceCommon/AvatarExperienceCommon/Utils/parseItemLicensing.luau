@@ -3,6 +3,7 @@ local RunService = game:GetService("RunService")
 local ItemLicenseType = require(Parent.AvatarExperienceModel).Enums.ItemLicenseType
 local NormalizeModule = require(script.Parent.normalize)
 local GetRawItemLicensingInfoModule = require(script.Parent.getRawItemLicensingInfo)
+local FFlagAXMarketplaceLicensingItemDetails = require(Parent.AvatarExperienceFlags).FFlagAXMarketplaceLicensingItemDetails
 local List = { ItemLicenseType.FirstParty, ItemLicenseType.ThirdParty }
 local NormalizeTableFn = NormalizeModule.makeNormalizeTableFn({
 	id = { fn = NormalizeModule.normalizeString },
@@ -10,7 +11,7 @@ local NormalizeTableFn = NormalizeModule.makeNormalizeTableFn({
 	badgeAssetId = { fn = NormalizeModule.normalizeString },
 	name = { fn = NormalizeModule.normalizeString },
 	licenseHolder = { fn = NormalizeModule.normalizeString },
-	licenseDisplayName = if require(Parent.AvatarExperienceFlags).FFlagAXMarketplaceLicensingItemDetails then { fn = NormalizeModule.normalizeString } else nil
+	licenseDisplayName = if FFlagAXMarketplaceLicensingItemDetails then { fn = NormalizeModule.normalizeString } else nil
 })
 
 return function(p1)

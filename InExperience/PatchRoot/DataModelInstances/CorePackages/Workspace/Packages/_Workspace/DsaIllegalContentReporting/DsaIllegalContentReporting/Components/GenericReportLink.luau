@@ -1,12 +1,13 @@
 ﻿local Parent = script:FindFirstAncestor("DsaIllegalContentReporting").Parent
 local FoundationModule = require(Parent.Foundation)
 local Default = require(Parent.LinkingProtocol).LinkingProtocol.default
+local LocalizationModule = require(Parent.Localization)
 local ReactModule = require(Parent.React)
 local ControlState = FoundationModule.Enums.ControlState
 local GetIconRichTextFunction = FoundationModule.Utility.getIconRichText
 local IconName = FoundationModule.Enums.IconName
 local Text = FoundationModule.Text
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local View = FoundationModule.View
 local GenericReportLink1 = game:DefineFastString("GenericReportLink", "https://www.roblox.com/illegal-content-reporting")
 local ImproveIllegalContentReportingLinkLook = game:DefineFastFlag("ImproveIllegalContentReportingLinkLook", false)

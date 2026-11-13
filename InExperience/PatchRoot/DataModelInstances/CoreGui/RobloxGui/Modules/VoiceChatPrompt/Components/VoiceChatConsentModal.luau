@@ -2,6 +2,7 @@
 local RoactModule = require(CorePackages.Packages.Roact)
 local ReactModule = require(CorePackages.Packages.React)
 local TModule = require(CorePackages.Packages.t)
+local ArgCheckModule = require(CorePackages.Workspace.Packages.ArgCheck)
 local UIBloxModule = require(CorePackages.Packages.UIBlox)
 local Checkbox = require(CorePackages.Packages.Foundation).Checkbox
 local GetTextSizeFunction = require(CorePackages.Workspace.Packages.Style).GetTextSize
@@ -15,7 +16,7 @@ local GetFFlagDisablePVUpsellDataConsentFunction = require(CorePackages.Workspac
 local FeatureSettingsHubActionTurnOn = RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.Action.TurnOn")
 local FeatureSettingsHubActionNotNow = RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.Action.NotNow")
 local FeatureSettingsHubPromptSubtitleSelectingTurnOn = RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.Prompt.Subtitle.SelectingTurnOn")
-local WrapResult = require(CorePackages.Workspace.Packages.ArgCheck).wrap(TModule.strictInterface({
+local WrapResult = ArgCheckModule.wrap(TModule.strictInterface({
 	titleText = TModule.optional(TModule.string),
 	bodyText = TModule.optional(TModule.string),
 	handlePrimaryActivated = TModule.optional(TModule.callback),

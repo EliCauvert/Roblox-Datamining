@@ -3,9 +3,10 @@ local GuiService = game:GetService("GuiService")
 local VRService = game:GetService("VRService")
 local Parent = script:FindFirstAncestor("CoreGuiCommon").Parent
 local FoundationModule = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
 local ReactModule = require(Parent.React)
 local Dialog = FoundationModule.Dialog
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 
 function HeadsetDisconnectDialog(p1)
 	-- upvalues: GuiService (copy), VRService (copy), UseLocalizationFunction (copy), ReactModule (copy), ContextActionService (copy), Dialog (copy), FoundationModule (copy)

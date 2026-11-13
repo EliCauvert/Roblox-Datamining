@@ -3,11 +3,12 @@ local RoactModule = require(CorePackages.Packages.Roact)
 local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
 local Parent = script.Parent.Parent
 local Actions = Parent.Actions
+local Thunks = Parent.Thunks
 local ConstantsModule = require(Parent.Constants)
 local GetSegmentFromPositionModule = require(Parent.Utility.GetSegmentFromPosition)
 local FocusSegmentModule = require(Actions.FocusSegment)
 local HideMenuModule = require(Actions.HideMenu)
-local PlayEmoteModule = require(Parent.Thunks.PlayEmote)
+local PlayEmoteModule = require(Thunks.PlayEmote)
 local EmotesButtons = RoactModule.PureComponent:extend("EmotesButtons")
 
 local function _(Frame, Offset): boolean

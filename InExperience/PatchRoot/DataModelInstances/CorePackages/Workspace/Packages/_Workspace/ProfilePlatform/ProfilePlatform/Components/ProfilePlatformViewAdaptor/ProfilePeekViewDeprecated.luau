@@ -1,9 +1,10 @@
 ﻿local Parent = script:FindFirstAncestor("ProfilePlatform").Parent
 local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
 local PeekViewModule = require(Parent.PeekView)
 local PeekViewState = PeekViewModule.PeekViewState
 local PeekView = PeekViewModule.PeekView
-local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 
 return function(p1)
 	-- upvalues: UseStyleFunction (copy), ReactModule (copy), PeekViewState (copy), PeekView (copy)

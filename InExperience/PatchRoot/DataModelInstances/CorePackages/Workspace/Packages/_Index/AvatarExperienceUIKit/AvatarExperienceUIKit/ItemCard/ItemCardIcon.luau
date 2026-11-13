@@ -4,6 +4,7 @@ local FoundationModule = require(Parent.Foundation)
 local Icon = FoundationModule.Icon
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local IconSize = FoundationModule.Enums.IconSize
+local FFlagAXItemCardComponentsMemo = require(Parent.AvatarExperienceFlags).FFlagAXItemCardComponentsMemo
 
 local function ItemCardIcon(Frame)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Icon (copy), IconSize (copy)
@@ -18,4 +19,4 @@ local function ItemCardIcon(Frame)
 	})
 end
 
-return if require(Parent.AvatarExperienceFlags).FFlagAXItemCardComponentsMemo then ReactModule.memo(ItemCardIcon) else ItemCardIcon
+return if FFlagAXItemCardComponentsMemo then ReactModule.memo(ItemCardIcon) else ItemCardIcon

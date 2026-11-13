@@ -244,9 +244,10 @@ return function()
 						
 						if not Callback1(p8, SortIndex, if FFlagLuaAppAddRequestIdToRfySignalApportioning then p9 else nil)(false) then
 							local GetResult = t1[CallbackResult].get(false)
+							local GridApportioningMetadata = GetResult and GetResult.getGridApportioningMetadata(false) or {}
 							local List = {}
 							
-							for _, value in GetResult and GetResult.getGridApportioningMetadata(false) or {} do
+							for _, value in GridApportioningMetadata do
 								table.insert(List, value.sortIndex)
 							end
 							Joined = if #List > 0 then table.concat(List, ",") else "none"
@@ -260,10 +261,12 @@ return function()
 					
 					return {}
 				end
-				local Joined = v3.startingItemIndex
+				local StartingItemIndex = v3.startingItemIndex
+				local Joined = math.min
+				Joined = Joined(StartingItemIndex + v3.capacity - 1, #Items)
 				local List = {}
 				
-				for i = Joined, math.min(Joined + v3.capacity - 1, #Items) do
+				for i = StartingItemIndex, Joined do
 					table.insert(List, Items[i])
 				end
 				return List

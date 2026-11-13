@@ -2,6 +2,7 @@
 local _ = require(VirtualEvents.Parent.GraphQLServer)
 local CryoModule = require(VirtualEvents.Parent.Cryo)
 local ReactModule = require(VirtualEvents.Parent.React)
+local UIBloxModule = require(VirtualEvents.Parent.UIBlox)
 local UseDeviceTypeFunction = require(VirtualEvents.Parent.RobloxAppHooks).useDeviceType
 local _ = require(VirtualEvents.Parent.RobloxAppEnums)
 local UseRoactServiceFunction = require(VirtualEvents.Parent.RobloxAppHooks).useRoactService
@@ -27,7 +28,7 @@ local DetailsPageTemplate = AppBloxModule.DetailsPageTemplate
 local ContentPosition = AppBloxModule.ContentPosition
 local MediaGalleryPreview = AppBloxModule.MediaGalleryPreview
 local CalcMediaGallerySizesFromWidthFunction = AppBloxModule.calcMediaGallerySizesFromWidth
-local ListTable = require(VirtualEvents.Parent.UIBlox).App.Table.ListTable
+local ListTable = UIBloxModule.App.Table.ListTable
 
 local function OnClose() end
 

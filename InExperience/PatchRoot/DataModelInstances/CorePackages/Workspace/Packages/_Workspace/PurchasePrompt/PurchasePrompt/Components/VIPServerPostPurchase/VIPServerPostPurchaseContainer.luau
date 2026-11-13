@@ -10,6 +10,7 @@ local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
 local UseFocusRootFunction = FocusNavigationUtilsModule.useFocusRoot
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local Provider = FocusNavigationUtilsModule.FocusNavigableSurfaceRegistry.Provider
+local ConnectToStoreModule = require(PurchasePrompt.connectToStore)
 local GenerateVIPServerLinkModule = require(PurchasePrompt.Thunks.generateVIPServerLink)
 local SaveVIPServerConfigurationModule = require(PurchasePrompt.Thunks.saveVIPServerConfiguration)
 local SearchUsersModule = require(PurchasePrompt.Thunks.searchUsers)
@@ -108,7 +109,7 @@ local function VIPServerPostPurchase(p1)
 	})
 end
 
-return require(PurchasePrompt.connectToStore)(function(p1)
+return ConnectToStoreModule(function(p1)
 	-- upvalues: SelectProductPriceModule (copy), SelectVIPServerOfferTypeModule (copy)
 	return {
 		serverName = p1.promptRequest.vipServerName or "",

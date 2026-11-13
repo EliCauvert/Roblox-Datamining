@@ -1,5 +1,7 @@
 ﻿local Parent = script.Parent.Parent
+local PolicyProviderModule = require(Parent.PolicyProvider)
+local Logger = require(Parent.Loggers).Logger
 local UniversalAppPolicyModule = require(script.Parent.UniversalAppPolicy)
-require(Parent.PolicyProvider).Logger:setParent(require(Parent.Loggers).Logger)
+PolicyProviderModule.Logger:setParent(Logger)
 
 return UniversalAppPolicyModule

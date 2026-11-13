@@ -1,4 +1,6 @@
-﻿local _ = require(script:FindFirstAncestor("RobloxAppNavigation").Parent.Navigation)
+﻿local Parent = script:FindFirstAncestor("RobloxAppNavigation").Parent
+local _ = require(Parent.Navigation)
+local _ = require(Parent.Signals)
 local v1 = nil
 local Flag = false
 local config = {
@@ -28,6 +30,13 @@ return {
 	isRegistered = function(): boolean
 		-- upvalues: v1 (ref)
 		return v1 ~= nil
+	end,
+	isNavigationLocked = function(p1)
+		-- upvalues: v1 (ref), config (copy)
+		local V3 = v1 or config
+		local GetIsPendingFunction = V3.getIsPending
+		
+		return V3.getIsNavigating(p1) or GetIsPendingFunction ~= nil and GetIsPendingFunction(p1)
 	end,
 	_resetForTest = function()
 		-- upvalues: v1 (ref)

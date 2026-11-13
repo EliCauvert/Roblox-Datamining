@@ -9,6 +9,7 @@ local LocalUserIdStore = require(Parent.LocalUserIdStore).LocalUserIdStore
 local RequestsModule = require(script.Parent.Requests)
 local _ = require(script.Parent.FriendsRecommendationsStoreTypes)
 local ContextTypeModule = require(script.Parent.Enums.ContextType)
+local FFlagShowClassmatesOnPYMKModule = require(Parent.SharedFlags.FFlagShowClassmatesOnPYMK)
 local config = {
 	[ContextTypeModule.None] = true,
 	[ContextTypeModule.MutualFriends] = true,
@@ -16,7 +17,7 @@ local config = {
 	[ContextTypeModule.Contacts] = true
 }
 
-if require(Parent.SharedFlags.FFlagShowClassmatesOnPYMK) then
+if FFlagShowClassmatesOnPYMKModule then
 	config[ContextTypeModule.Classmates] = true
 end
 local function _()

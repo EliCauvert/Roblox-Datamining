@@ -3,13 +3,17 @@ local Parent = PhoneUpsell.Parent
 local UserInputService = game:GetService("UserInputService")
 local ReactModule = require(Parent.React)
 local RoactModule = require(Parent.Roact)
+local RoactRoduxModule = require(Parent.RoactRodux)
 local CryoModule = require(Parent.Cryo)
 local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 local UseSignalState = require(Parent.SignalsReact).useSignalState
 local FFlagUseSignalsForCountryCodeList = require(Parent.SharedFlags).FFlagUseSignalsForCountryCodeList
 local GetCountryCodeListStore = require(Parent.AuthCommon).Stores.GetCountryCodeListStore
 local _ = require(Parent.LuauPolyfill)
+local RoactNetworking = require(Parent.RoactServiceTags).RoactNetworking
+local RoactServices = require(Parent.RoactServices).RoactServices
 local EventStreamConstantsModule = require(PhoneUpsell.DuplicateAnalytics.EventStreamConstants)
+local RoactAnalyticsAuthEventsModule = require(PhoneUpsell.DuplicateAnalytics.RoactAnalyticsAuthEvents)
 local DebounceModule = require(PhoneUpsell.Utils.debounce)
 local MergePropsModule = require(PhoneUpsell.Utils.mergeProps)
 local PhoneVerificationUpsellStateModule = require(PhoneUpsell.Components.PhoneVerificationUpsellState)
@@ -26,6 +30,7 @@ local VerifyPhoneCodeModule = require(PhoneUpsell.Thunks.VerifyPhoneCode)
 local ResendPhoneCodeModule = require(PhoneUpsell.Thunks.ResendPhoneCode)
 local SetIsPhoneVerifiedFunction = require(Parent.ContactImporter).Actions.SetIsPhoneVerified
 local GetPrefixAndNationalNumberFromRawPhoneAndDefaultPrefixModule = require(PhoneUpsell.Utils.GetPrefixAndNationalNumberFromRawPhoneAndDefaultPrefix)
+local RoactAppExperimentModule = require(Parent.RoactAppExperiment)
 local GetFStringAndroidPhoneVerificationLayerFunction = require(Parent.SharedFlags).GetFStringAndroidPhoneVerificationLayer
 local GetFStringIOSPhoneVerificationLayerFunction = require(Parent.SharedFlags).GetFStringIOSPhoneVerificationLayer
 local GetFFlagLuaUsePhoneNumberTextTypeForPhoneUpsellModule = require(PhoneUpsell.Flags.GetFFlagLuaUsePhoneNumberTextTypeForPhoneUpsell)
@@ -63,7 +68,7 @@ local MemoResult = if FFlagUseSignalsForCountryCodeList then ReactModule.memo(fu
 	return ReactModule.createElement(MemoResult, CryoModule.Dictionary.union(p1, {
 		countryCodeList = UseSignalState(GetCountryCodeListStore(false).getCountryCodeList)
 	}))
-end) else require(Parent.RoactRodux).connect(if FFlagUseSignalsForCountryCodeList then nil else function(p1, _)
+end) else RoactRoduxModule.connect(if FFlagUseSignalsForCountryCodeList then nil else function(p1, _)
 	return { countryCodeList = p1.CountryCodeList }
 end, function(Callback)
 	-- upvalues: SetPhoneNumberModule (copy), VerifyPhoneCodeModule (copy), ResendPhoneCodeModule (copy), SetIsPhoneVerifiedFunction (copy)
@@ -547,7 +552,7 @@ end)(function(p1)
 	})
 end)
 
-return (require(Parent.RoactAppExperiment).connectUserLayer({
+return (RoactAppExperimentModule.connectUserLayer({
 	GetFStringAndroidPhoneVerificationLayerFunction(),
 	GetFStringIOSPhoneVerificationLayerFunction()
 }, function(p2, _)
@@ -561,7 +566,7 @@ return (require(Parent.RoactAppExperiment).connectUserLayer({
 		isOTPInputTypeEnabled = v2.IsAutofillSMSOtpEnabled,
 		isPhoneNumberTextTypeEnabled = v2.IsAutofillPhoneNumberEnabled
 	}
-end)((require(Parent.RoactServices).RoactServices.connect({
-	networking = require(Parent.RoactServiceTags).RoactNetworking,
-	authEventAnalytics = require(PhoneUpsell.DuplicateAnalytics.RoactAnalyticsAuthEvents)
+end)((RoactServices.connect({
+	networking = RoactNetworking,
+	authEventAnalytics = RoactAnalyticsAuthEventsModule
 })(MemoResult))))

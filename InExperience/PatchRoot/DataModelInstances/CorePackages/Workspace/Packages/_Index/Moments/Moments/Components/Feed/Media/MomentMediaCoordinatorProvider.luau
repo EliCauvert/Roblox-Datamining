@@ -11,13 +11,14 @@ pcall(function()
 	AppLifecycleObserverService = game:GetService("AppLifecycleObserverService")
 end)
 local ReactModule = require(Parent.React)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local SignalsModule = require(Parent.Signals)
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local EnableAudioPlaybackInAppFunction = require(Parent.MediaPlayback).enableAudioPlaybackInApp
 local MomentsCommonModule = require(Parent.MomentsCommon)
 local Media = MomentsCommonModule.Media
 local GetMomentsCapabilitiesFunction = MomentsCommonModule.Stores.GetMomentsCapabilities
-local FFlagMomentsAutoplayAmpPolicy = require(Parent.SharedFlags).FFlagMomentsAutoplayAmpPolicy
+local FFlagMomentsAutoplayAmpPolicy = SharedFlagsModule.FFlagMomentsAutoplayAmpPolicy
 local _ = require(Moments.Components.Feed.FeedTypes)
 local CreateFeedMediaSourceModule = require(script.Parent.createFeedMediaSource)
 

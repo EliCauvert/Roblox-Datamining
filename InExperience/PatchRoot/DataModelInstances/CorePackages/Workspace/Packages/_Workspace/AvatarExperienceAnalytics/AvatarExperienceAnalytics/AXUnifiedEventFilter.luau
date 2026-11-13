@@ -198,18 +198,18 @@ function AXUnifiedEventFilterModule.hasValidEntityData(p1): boolean
 		local IsNotUiTreatmentTypeMatch: boolean = if p1.uiTreatmentType then p1.uiTreatmentType ~= WidgetUiTreatment.UNKNOWN_WIDGET_UI else false
 		local IsNotThemeIdMatch: boolean = p1.themeId ~= nil and p1.themeId ~= ""
 		local Inverted: boolean = not (p1.widgetType == "ThemedAvatarItemsWidget") or IsNotThemeIdMatch
-		local IsNumberAbove = nil
+		local IsWidgetItemPriceAbove = nil
 		
 		if FFlagAXUnifiedEventCounters then
 			local Number: number? = tonumber(p1.widgetItemPrice)
-			IsNumberAbove = Number ~= nil and Number >= 0
+			IsWidgetItemPriceAbove = Number ~= nil and Number >= 0
 		else
-			IsNumberAbove = p1.widgetItemPrice ~= nil and p1.widgetItemPrice >= 0
+			IsWidgetItemPriceAbove = p1.widgetItemPrice ~= nil and p1.widgetItemPrice >= 0
 		end
 		if p1.action == MarketplaceUnifiedAction.WIDGET_IMPRESSION then
-			IsNumberAbove = true
+			IsWidgetItemPriceAbove = true
 		end
-		return IsNotWidgetIdMatch and (IsNotWidgetTypeMatch and (IsNotWidgetItemIdsMatch and (IsNotItemTypeMatch and (IsNotUiTreatmentTypeMatch and (Inverted and IsNumberAbove)))))
+		return IsNotWidgetIdMatch and (IsNotWidgetTypeMatch and (IsNotWidgetItemIdsMatch and (IsNotItemTypeMatch and (IsNotUiTreatmentTypeMatch and (Inverted and IsWidgetItemPriceAbove)))))
 	end
 end
 

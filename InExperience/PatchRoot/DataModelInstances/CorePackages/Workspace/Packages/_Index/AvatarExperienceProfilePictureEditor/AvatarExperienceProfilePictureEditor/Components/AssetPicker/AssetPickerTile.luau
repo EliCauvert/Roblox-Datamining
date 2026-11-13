@@ -1,11 +1,13 @@
 ﻿local Parent = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
+local AvatarExperienceCommonModule = require(Parent.AvatarExperienceCommon)
+local AvatarExperienceUIKitModule = require(Parent.AvatarExperienceUIKit)
 local View = FoundationModule.View
 local Icon = FoundationModule.Icon
 local IconSize = FoundationModule.Enums.IconSize
-local CatalogItemCard = require(Parent.AvatarExperienceCommon).Components.CatalogItemCard.CatalogItemCard
-local ItemCardThumbnail = require(Parent.AvatarExperienceUIKit).ItemCardComponents.ItemCardThumbnail
+local CatalogItemCard = AvatarExperienceCommonModule.Components.CatalogItemCard.CatalogItemCard
+local ItemCardThumbnail = AvatarExperienceUIKitModule.ItemCardComponents.ItemCardThumbnail
 
 local function buildPresentationSlot(Name, Url)
 	-- upvalues: ReactModule (copy), Icon (copy), IconSize (copy), ItemCardThumbnail (copy), View (copy)

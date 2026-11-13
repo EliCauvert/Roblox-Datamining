@@ -1,10 +1,11 @@
 ﻿local Parent = script.Parent.Parent
 local MessageBus = require(Parent.MessageBus).MessageBus
+local TModule = require(Parent.t)
 local _ = require(script.Parent.SystemInfoProtocolTypes)
 local SystemInfoProtocolModule = {
 	GET_SYSTEM_INFO_DESCRIPTOR = {
 		fid = MessageBus.getMessageId("SystemInfo", "getSystemInfo"),
-		validateParams = require(Parent.t).table
+		validateParams = TModule.table
 	},
 	InfoNames = {
 		MANUFACTURER = "manufacturer",

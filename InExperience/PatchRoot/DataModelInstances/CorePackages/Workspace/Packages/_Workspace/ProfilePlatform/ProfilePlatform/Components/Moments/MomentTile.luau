@@ -2,6 +2,7 @@
 local Parent = ProfilePlatform.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
+local MomentsCommonModule = require(Parent.MomentsCommon)
 local _ = require(Parent.DataHydration.MomentsStoreTypes)
 local ToMediaItemModule = require(Parent.Moments.ToMediaItem)
 local UseSceneOutfitMediaItemModule = require(script.Parent.useSceneOutfitMediaItem)
@@ -14,7 +15,7 @@ local View = FoundationModule.View
 local Text = FoundationModule.Text
 local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
 local UseTokensFunction = FoundationModule.Hooks.useTokens
-local MomentMediaTile = require(Parent.MomentsCommon).Media.MomentMediaTile
+local MomentMediaTile = MomentsCommonModule.Media.MomentMediaTile
 
 return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseExperienceNameModule (copy), ReactModule (copy), ToMediaItemModule (copy), FFlagProfileMomentSceneOutfitPoster (copy), UseSceneOutfitMediaItemModule (copy), View (copy), StateLayerAffordance (copy), MomentMediaTile (copy), SceneOutfitPosterModule (copy), FFlagMomentsPostFeedback (copy), PostStatusBadgeModule (copy), Text (copy)

@@ -2,8 +2,9 @@
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
+local FriendsRequestsModule = require(Parent.DataHydration.FriendsRequests)
 local GetResult = require(Parent.DataHydration).Friends.FriendsStore.get()
-local GetResult1 = require(Parent.DataHydration.FriendsRequests).FriendsRequestsStore.get()
+local GetResult1 = FriendsRequestsModule.FriendsRequestsStore.get()
 local config = { skipFetch = true }
 
 return function(Enabled)

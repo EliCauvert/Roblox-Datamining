@@ -10,7 +10,10 @@ local PlayWithRewardStateModule = require(Parent.PlayWithRewardState)
 local FoundationModule = require(Parent.Foundation)
 local GamePlayButtonModule = require(Parent.GamePlayButton)
 local ReactModule = require(Parent.React)
+local RobloxAppHooksModule = require(Parent.RobloxAppHooks)
+local RobloxAppUpdateModule = require(Parent.RobloxAppUpdate)
 local RoactServiceTagsModule = require(Parent.RoactServiceTags)
+local RoactUtilsModule = require(Parent.RoactUtils)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local SetPlayWithRewardStateFunction = PlayWithRewardStateModule.SetPlayWithRewardState
 local Button = FoundationModule.Button
@@ -25,9 +28,9 @@ local PlayButtonReferralSource = GamePlayButtonModule.PlayButtonReferralSource
 local UsePlayButtonLaunchGameFunction = GamePlayButtonModule.usePlayButtonLaunchGame
 local RoactAnalytics = RoactServiceTagsModule.RoactAnalytics
 local AppUpdateService = RoactServiceTagsModule.AppUpdateService
-local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
-local HandleUpdateFunction = require(Parent.RobloxAppUpdate).HandleUpdate
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local UseRoactServiceFunction = RobloxAppHooksModule.useRoactService
+local HandleUpdateFunction = RobloxAppUpdateModule.HandleUpdate
 local CanPerformBinaryUpdateEnabledEngineFeature = game:GetEngineFeature("CanPerformBinaryUpdateEnabled")
 local FIntPlayWithRewardFallbackBannerProductImageAssetId = SharedFlagsModule.FIntPlayWithRewardFallbackBannerProductImageAssetId
 local LuaAppPlayWithRewardMobileEdpLayoutOrder = game:DefineFastInt("LuaAppPlayWithRewardMobileEdpLayoutOrder", 120)
@@ -107,7 +110,7 @@ function PlayWithRewardComponent(p1)
 		ProductName, IsProductImageAssetIdMatch, ProductId
 	})
 	local XOffset1: number? = nil
-	local Offset1 = nil
+	local Offset = nil
 	local XOffset = nil
 	local Medium = nil
 	local v1: string? = nil
@@ -117,14 +120,14 @@ function PlayWithRewardComponent(p1)
 	local Flag: boolean? = nil
 	local v4: string? = nil
 	local Size1000 = nil
-	local Offset = nil
+	local Offset1 = nil
 	local v5 = if FFlagLuaAppEnableContainedRewardUi then if p1.useLargerStyles then 108 else 76 else nil
 	
 	if not FFlagLuaAppEnableContainedRewardUi then
 		local XLarge = nil
 		if p1.useLargerStyles then
 			XOffset1 = 98
-			Offset1 = UseTokensResult.Padding.XLarge
+			Offset = UseTokensResult.Padding.XLarge
 			XOffset = UseTokensResult.Padding.XLarge
 			Medium = UseTokensResult.Padding.XLarge
 			XLarge = UseTokensResult.Gap.XLarge
@@ -137,7 +140,7 @@ function PlayWithRewardComponent(p1)
 			Size1000 = UseTokensResult.Size.Size_1200
 		else
 			XOffset1 = 66
-			Offset1 = UseTokensResult.Padding.Medium
+			Offset = UseTokensResult.Padding.Medium
 			XOffset = UseTokensResult.Padding.Small
 			Medium = UseTokensResult.Padding.Medium
 			XLarge = UseTokensResult.Gap.Medium
@@ -149,14 +152,14 @@ function PlayWithRewardComponent(p1)
 			v4 = "size-800-1000"
 			Size1000 = UseTokensResult.Size.Size_1000
 		end
-		Offset = XOffset + XOffset1 + XLarge
+		Offset1 = XOffset + XOffset1 + XLarge
 	end
 	local LayoutOrder = FFlagSduiPlayWithReward and p1.layoutOrder or LuaAppPlayWithRewardMobileEdpLayoutOrder
 	
 	if IsAdDataExpected then
 		return ReactModule.createElement(Skeleton, {
 			tag = if FFlagLuaAppEnableContainedRewardUi then nil else v1,
-			Size = UDim2.new(1, 0, 0, if FFlagLuaAppEnableContainedRewardUi then v5 else Size1000 + Offset1 * 2 + Medium),
+			Size = UDim2.new(1, 0, 0, if FFlagLuaAppEnableContainedRewardUi then v5 else Size1000 + Offset * 2 + Medium),
 			LayoutOrder = LayoutOrder
 		})
 	end
@@ -177,7 +180,7 @@ function PlayWithRewardComponent(p1)
 		local XLarge = nil
 		if p1.useLargerStyles then
 			XOffset1 = if KeepRewardContained then 76 else 98
-			Offset1 = if KeepRewardContained then UseTokensResult.Padding.Large else UseTokensResult.Padding.XLarge
+			Offset = if KeepRewardContained then UseTokensResult.Padding.Large else UseTokensResult.Padding.XLarge
 			XOffset = UseTokensResult.Padding.XLarge
 			Medium = UseTokensResult.Padding.XLarge
 			XLarge = UseTokensResult.Gap.XLarge
@@ -189,7 +192,7 @@ function PlayWithRewardComponent(p1)
 			v4 = "size-1000-1200"
 		else
 			XOffset1 = if KeepRewardContained then 60 else 66
-			Offset1 = if KeepRewardContained then UseTokensResult.Padding.Small else UseTokensResult.Padding.Medium
+			Offset = if KeepRewardContained then UseTokensResult.Padding.Small else UseTokensResult.Padding.Medium
 			XOffset = UseTokensResult.Padding.Small
 			Medium = UseTokensResult.Padding.Medium
 			XLarge = UseTokensResult.Gap.Medium
@@ -200,7 +203,7 @@ function PlayWithRewardComponent(p1)
 			Flag = false
 			v4 = "size-800-1000"
 		end
-		Offset = XOffset + XOffset1 + XLarge
+		Offset1 = XOffset + XOffset1 + XLarge
 	end
 	local Element = if IsProductImageAssetIdMatch then ReactModule.createElement(Icon, {
 		ZIndex = 2,
@@ -227,11 +230,11 @@ function PlayWithRewardComponent(p1)
 			ProductImage = if KeepRewardContained then nil else Element,
 			ContentView = ReactModule.createElement(View, {
 				tag = "row align-y-center gap-medium size-full-0 auto-y",
-				padding = if KeepRewardContained then Offset1 else {
-					left = UDim.new(0, Offset),
-					top = UDim.new(0, Offset1),
-					right = UDim.new(0, Offset1),
-					bottom = UDim.new(0, Offset1)
+				padding = if KeepRewardContained then Offset else {
+					left = UDim.new(0, Offset1),
+					top = UDim.new(0, Offset),
+					right = UDim.new(0, Offset),
+					bottom = UDim.new(0, Offset)
 				}
 			}, {
 				ContainedProductImage = if KeepRewardContained then Element else nil,

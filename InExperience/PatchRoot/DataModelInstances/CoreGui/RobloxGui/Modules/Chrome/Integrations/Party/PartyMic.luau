@@ -1,6 +1,7 @@
 ﻿local Chrome = script:FindFirstAncestor("Chrome")
 local CorePackages = game:GetService("CorePackages")
 local Players = game:GetService("Players")
+local CrossExperienceVoiceModule = require(CorePackages.Workspace.Packages.CrossExperienceVoice)
 local GetFFlagEnableCrossExpVoiceFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagEnableCrossExpVoice
 local SideSheetPlacement = require(CorePackages.Workspace.Packages.Chrome).Enums.SideSheetPlacement
 local ServiceModule = require(Chrome.Service)
@@ -8,7 +9,7 @@ local PartyMicIconModule = require(Chrome.Integrations.Party.PartyMicIcon)
 local ConstantsModule = require(Chrome.Integrations.Party.Constants)
 local Signal = require(CorePackages.Workspace.Packages.AppCommonLib).Signal
 local MappedSignal = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal
-local Default = require(CorePackages.Workspace.Packages.CrossExperienceVoice).CrossExperienceVoiceManager.default
+local Default = CrossExperienceVoiceModule.CrossExperienceVoiceManager.default
 local Enabled = nil
 local v1 = false
 local NewSignal = Signal.new()

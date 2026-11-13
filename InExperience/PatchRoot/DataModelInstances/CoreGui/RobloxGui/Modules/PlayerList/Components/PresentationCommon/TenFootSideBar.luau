@@ -3,13 +3,14 @@ local CoreGui = game:GetService("CoreGui")
 local Players = game:GetService("Players")
 local GuiService = game:GetService("GuiService")
 local RunService = game:GetService("RunService")
+local RoactModule = require(CorePackages.Packages.Roact)
 local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
 local Parent = script.Parent.Parent.Parent
 local ClosePlayerDropDownModule = require(Parent.Actions.ClosePlayerDropDown)
 local SetPlayerListVisibilityModule = require(Parent.Actions.SetPlayerListVisibility)
 local IsNewInGameMenuEnabledModule = require(CoreGui.RobloxGui.Modules.isNewInGameMenuEnabled)
 local RobloxGui = CoreGui:WaitForChild("RobloxGui")
-local TenFootSideBar = require(CorePackages.Packages.Roact).PureComponent:extend("TenFootSideBar")
+local TenFootSideBar = RoactModule.PureComponent:extend("TenFootSideBar")
 
 function TenFootSideBar.init(p1)
 	p1.sideBar = nil

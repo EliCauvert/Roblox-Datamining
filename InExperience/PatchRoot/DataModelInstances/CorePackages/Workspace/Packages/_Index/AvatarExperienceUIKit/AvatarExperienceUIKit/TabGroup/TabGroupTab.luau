@@ -4,7 +4,9 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local GetFixedTabHeightModule = require(AvatarExperienceUIKit.Utils.getFixedTabHeight)
-local FFlagAXCategoryMenuVisualFixes = require(Parent.AvatarExperienceFlags).FFlagAXCategoryMenuVisualFixes
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local FFlagAXCategoryMenuVisualFixes = AvatarExperienceFlagsModule.FFlagAXCategoryMenuVisualFixes
+local FFlagAXCategoryTabFullRowTapArea = AvatarExperienceFlagsModule.FFlagAXCategoryTabFullRowTapArea
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 local BackgroundStyle = { Transparency = 1 }
@@ -15,9 +17,10 @@ local config = {
 	SortOrder = Enum.SortOrder.LayoutOrder
 }
 local BackgroundStyle1 = { Transparency = 1 }
+local config1 = { offset = 0 }
 
 return (ReactModule.forwardRef(function(Frame, Ref)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), BackgroundStyle (copy), FFlagAXCategoryMenuVisualFixes (copy), GetFixedTabHeightModule (copy), config (copy), Text (copy), BackgroundStyle1 (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), BackgroundStyle (copy), FFlagAXCategoryMenuVisualFixes (copy), GetFixedTabHeightModule (copy), config (copy), FFlagAXCategoryTabFullRowTapArea (copy), config1 (copy), Text (copy), BackgroundStyle1 (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Padding = Frame.padding or Vector2.new(UseTokensResult.Padding.Small, UseTokensResult.Padding.Medium)
 	
@@ -29,6 +32,7 @@ return (ReactModule.forwardRef(function(Frame, Ref)
 		Size = if FFlagAXCategoryMenuVisualFixes then UDim2.fromOffset(0, GetFixedTabHeightModule(UseTokensResult)) else UDim2.fromScale(0, 0),
 		AutomaticSize = if FFlagAXCategoryMenuVisualFixes then Enum.AutomaticSize.X else Enum.AutomaticSize.XY,
 		layout = if FFlagAXCategoryMenuVisualFixes then config else nil,
+		cursor = if FFlagAXCategoryMenuVisualFixes and FFlagAXCategoryTabFullRowTapArea then config1 else nil,
 		LayoutOrder = Frame.LayoutOrder
 	}, {
 		Text = ReactModule.createElement(Text, {

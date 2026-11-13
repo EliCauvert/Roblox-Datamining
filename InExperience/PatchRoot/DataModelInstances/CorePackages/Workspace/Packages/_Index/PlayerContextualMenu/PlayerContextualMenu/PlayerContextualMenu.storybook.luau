@@ -3,8 +3,9 @@ local Parent = PlayerContextualMenu.Parent
 local DashModule = require(Parent.Dash)
 local RoactModule = require(Parent.Dev.Roact)
 local UIBloxModule = require(Parent.UIBlox)
+local RobloxAppUIBloxConfigModule = require(Parent.Dev.RobloxAppUIBloxConfig)
 local MockLocaleFunction = require(Parent.Dev.SocialTestHelpers).StoryHelpers.mockLocale
-UIBloxModule.init((require(Parent.Dev.RobloxAppUIBloxConfig)))
+UIBloxModule.init(RobloxAppUIBloxConfigModule)
 local AppStyleProvider = UIBloxModule.App.Style.AppStyleProvider
 RoactModule.setGlobalConfig({ elementTracing = true })
 local config = {

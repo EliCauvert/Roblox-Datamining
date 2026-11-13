@@ -1,12 +1,13 @@
 ﻿local ReactSceneUnderstanding = script:FindFirstAncestor("ReactSceneUnderstanding")
 local CryoModule = require(ReactSceneUnderstanding.Parent.Cryo)
 local ReactModule = require(ReactSceneUnderstanding.Parent.React)
+local ReactUtilsModule = require(ReactSceneUnderstanding.Parent.ReactUtils)
 local SceneUnderstandingModule = require(ReactSceneUnderstanding.Parent.SceneUnderstanding)
 local DataModelTraversalOptions = SceneUnderstandingModule.DataModelTraversalOptions
 local UseEffectFunction = ReactModule.useEffect
 local UseMemoFunction = ReactModule.useMemo
 local UseStateFunction = ReactModule.useState
-local UsePreviousFunction = require(ReactSceneUnderstanding.Parent.ReactUtils).usePrevious
+local UsePreviousFunction = ReactUtilsModule.usePrevious
 
 return function(p1, p2, p3)
 	-- upvalues: DataModelTraversalOptions (copy), UsePreviousFunction (copy), UseMemoFunction (copy), SceneUnderstandingModule (copy), CryoModule (copy), UseStateFunction (copy), UseEffectFunction (copy)

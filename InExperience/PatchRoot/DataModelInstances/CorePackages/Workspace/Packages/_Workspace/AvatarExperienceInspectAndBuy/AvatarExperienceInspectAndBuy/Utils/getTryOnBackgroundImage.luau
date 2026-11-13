@@ -1,9 +1,11 @@
 ﻿local AvatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
 local Parent = AvatarExperienceInspectAndBuy.Parent
+local AXCommonModule = require(Parent.AXCommon)
+local AvatarExperienceModelModule = require(Parent.AvatarExperienceModel)
 local _ = require(AvatarExperienceInspectAndBuy.Types)
 local GetItemThumbnailUrlModule = require(AvatarExperienceInspectAndBuy.Utils.getItemThumbnailUrl)
-local ItemTypeEnum = require(Parent.AvatarExperienceModel).Enums.ItemTypeEnum
-local AvatarBackground = require(Parent.AXCommon).Constants.ASSET_TYPE_NAME_TO_ID_STRING.AvatarBackground
+local ItemTypeEnum = AvatarExperienceModelModule.Enums.ItemTypeEnum
+local AvatarBackground = AXCommonModule.Constants.ASSET_TYPE_NAME_TO_ID_STRING.AvatarBackground
 
 return function(p1)
 	-- upvalues: ItemTypeEnum (copy), AvatarBackground (copy), GetItemThumbnailUrlModule (copy)

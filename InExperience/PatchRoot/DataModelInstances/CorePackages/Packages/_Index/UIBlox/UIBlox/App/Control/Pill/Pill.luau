@@ -8,6 +8,7 @@ local FoundationModule = require(Parent2.Foundation)
 local IconSizeModule = require(Parent.ImageSet.Enum.IconSize)
 local GetIconSizeModule = require(Parent.ImageSet.getIconSize)
 local WithStyleModule = require(Core.Style.withStyle)
+local ValidateImageSetDataModule = require(Core.ImageSet.Validator.validateImageSetData)
 local ControlStateModule = require(Core.Control.Enum.ControlState)
 local InteractableModule = require(Core.Control.Interactable)
 local GetContentStyleModule = require(Core.Button.getContentStyle)
@@ -23,7 +24,7 @@ Pill.validateProps = TModule.strictInterface({
 	isSelected = TModule.optional(TModule.boolean),
 	isDisabled = TModule.optional(TModule.boolean),
 	isLoading = TModule.optional(TModule.boolean),
-	icon = TModule.union(TModule.string, (require(Core.ImageSet.Validator.validateImageSetData))),
+	icon = TModule.union(TModule.string, ValidateImageSetDataModule),
 	onActivated = TModule.callback
 })
 Pill.defaultProps = {

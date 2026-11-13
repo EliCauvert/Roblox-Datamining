@@ -1,5 +1,6 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
+local MomentsCommonModule = require(Parent.MomentsCommon)
 local ReactModule = require(Parent.React)
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local InExperienceDetailsPromptContainerModule = require(Parent.InExperienceDetailsPrompt.InExperienceDetailsPromptContainer)
@@ -11,7 +12,7 @@ local FFlagMomentsTabsBehindModalScrimModule = require(Moments.Flags.FFlagMoment
 local FFlagMomentsNavigationEventModule = require(Moments.Flags.FFlagMomentsNavigationEvent)
 local FFlagMomentsPlayEventModule = require(Moments.Flags.FFlagMomentsPlayEvent)
 local NavigationDestinationTypeModule = require(Moments.Enums.NavigationDestinationType)
-local Analytics = require(Parent.MomentsCommon).Analytics
+local Analytics = MomentsCommonModule.Analytics
 local EventNames = Analytics.EventNames
 local FireAnalyticsEventFunction = Analytics.fireAnalyticsEvent
 

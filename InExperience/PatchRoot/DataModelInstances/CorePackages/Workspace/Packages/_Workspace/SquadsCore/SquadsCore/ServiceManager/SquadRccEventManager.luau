@@ -1,9 +1,10 @@
 ﻿local SquadsCore = script:FindFirstAncestor("SquadsCore")
 local SocialService = game:GetService("SocialService")
+local SharedFlagsModule = require(SquadsCore.Parent.SharedFlags)
 local ValidateSquadIdModule = require(SquadsCore.Common.validateSquadId)
 local Module = {}
 Module.__index = Module
-local FFlagPartyDevAPIToRespectThirdPartySettingsEnabled = require(SquadsCore.Parent.SharedFlags).FFlagPartyDevAPIToRespectThirdPartySettingsEnabled
+local FFlagPartyDevAPIToRespectThirdPartySettingsEnabled = SharedFlagsModule.FFlagPartyDevAPIToRespectThirdPartySettingsEnabled
 
 function Module.new()
 	-- upvalues: Module (copy)

@@ -1,6 +1,7 @@
 ﻿local TextChatService = game:GetService("TextChatService")
 local Parent = script:FindFirstAncestor("TextChannelWindow").Parent
 local SocialLuaAnalyticsModule = require(Parent.SocialLuaAnalytics)
+local LoggingProtocolModule = require(Parent.LoggingProtocol)
 local TextChannelWindowAnalyticsModule = {
 	getChannelCategory = function(p1): string
 		return if p1 and p1 ~= "" then if p1:match("^RBXGeneral") then "general" elseif p1:match("^RBXTeam") then "team" elseif p1:match("^RBXWhisper") then "whisper" elseif p1:match("^RBXSystem") then "system" else "custom" else "none"
@@ -12,7 +13,7 @@ local TextChannelWindowAnalyticsModule = {
 }
 local Emitter = SocialLuaAnalyticsModule.Telemetry.createEmitter({
 	shouldUseTelemetryService = true,
-	telemetryImpl = require(Parent.LoggingProtocol).default,
+	telemetryImpl = LoggingProtocolModule.default,
 	defaultTelemetryConfig = {
 		throttlingThousandths = 10000,
 		links = "https://roblox.atlassian.net/wiki/spaces/SOCIAL/pages/4918804707"
@@ -139,12 +140,12 @@ end
 function TextChannelWindowAnalyticsModule.createOnScrollCallback(p1)
 	-- upvalues: TextChannelWindowAnalyticsModule (copy), TextChatService (copy)
 	if TextChannelWindowAnalyticsModule.getFFlagExpChatTelemetryEnabled() then
-		local function v12()
+		local function v13()
 			-- upvalues: TextChatService (upval), p1 (copy)
 			TextChatService:SendExpChatWindowScroll("text_channel_window", p1 or "")
 		end
 		
-		local function v13()
+		local function v14()
 			-- upvalues: TextChannelWindowAnalyticsModule (upval)
 			return TextChannelWindowAnalyticsModule.FIntTextChannelWindowScrollThrottleMs
 		end
@@ -152,10 +153,10 @@ function TextChannelWindowAnalyticsModule.createOnScrollCallback(p1)
 		local DelayedThread = nil
 		
 		return function()
-			-- upvalues: DelayedThread (ref), v12 (copy), v13 (copy)
+			-- upvalues: DelayedThread (ref), v13 (copy), v14 (copy)
 			if not DelayedThread then
-				v12()
-				DelayedThread = task.delay(v13() / 1000, function()
+				v13()
+				DelayedThread = task.delay(v14() / 1000, function()
 					-- upvalues: DelayedThread (upval)
 					DelayedThread = nil
 				end)

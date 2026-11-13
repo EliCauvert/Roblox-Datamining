@@ -52,6 +52,7 @@ local function toTextOverlay(p1, p2, TextOverlayStyleFont)
 	-- upvalues: toEnumFont (copy), config (copy)
 	local Transform = p1.transform
 	local FontSource = if p2.font == nil then nil else p2.font.font_source
+	local EnumFont = if FontSource == nil or FontSource.type ~= "enumerated_font" then nil else toEnumFont(FontSource.value)
 	local FontColor = p2.font_color
 	
 	return {
@@ -60,7 +61,7 @@ local function toTextOverlay(p1, p2, TextOverlayStyleFont)
 		scale = if Transform == nil or Transform.scale == 0 then 1 else Transform.scale,
 		text = p2.text,
 		textOverlayStyle = {
-			font = (if FontSource == nil or FontSource.type ~= "enumerated_font" then nil else toEnumFont(FontSource.value)) or (TextOverlayStyleFont or Enum.Font.BuilderSansMedium),
+			font = EnumFont or (TextOverlayStyleFont or Enum.Font.BuilderSansMedium),
 			fontColor = if FontColor == nil then Color3.new(0, 0, 0) else Color3.new(FontColor.r, FontColor.g, FontColor.b),
 			fontSize = if p2.font_size > 0 then p2.font_size else 16,
 			textXAlignment = config[p2.text_x_alignment] or Enum.TextXAlignment.Center

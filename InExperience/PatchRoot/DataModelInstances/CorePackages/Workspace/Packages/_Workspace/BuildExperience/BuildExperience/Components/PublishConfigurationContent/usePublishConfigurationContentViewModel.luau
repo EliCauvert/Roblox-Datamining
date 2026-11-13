@@ -1,6 +1,7 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
 local ReactModule = require(Parent.React)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local SignalsReactModule = require(Parent.SignalsReact)
 local UseOpenWebViewFunction = require(Parent.WebViewUtils).useOpenWebView
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
@@ -16,7 +17,7 @@ local UseGamePermissionsModule = require(BuildExperience.useGamePermissions)
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local FFlagBuildExperienceConfigurationRowTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceConfigurationRowTelemetry)
 local SendConfigurationRowClickModule = require(BuildExperience.Telemetry.sendConfigurationRowClick)
-local FFlagMyStatsMediaSelector = require(Parent.SharedFlags).FFlagMyStatsMediaSelector
+local FFlagMyStatsMediaSelector = SharedFlagsModule.FFlagMyStatsMediaSelector
 
 return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseOpenWebViewFunction (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), ExperienceGuidelinesModule (copy), ReactModule (copy), SignalsReactModule (copy), UniverseActivationModule (copy), ContentMaturityUtilsModule (copy), GameConfigurationLabelsModule (copy), GameConfigurationActionsModule (copy), RefreshPublishEligibilityModule (copy), FFlagBuildExperienceConfigurationRowTelemetryModule (copy), SendConfigurationRowClickModule (copy), FFlagMyStatsMediaSelector (copy)
@@ -49,6 +50,7 @@ return function(p1)
 	if IsSealBroken and IsContentUnrated then
 		BuildMaturityBannerText = QuestionnaireRequiredBanner
 	end
+	local ContentMaturityText = GameConfigurationLabelsModule.getContentMaturityText(UseSignalStateResult, ProvisionalRating, NoIsSealBroken) or Loading
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseOpenWebViewResult (copy), GameConfigurationActionsModule (upval), p1 (copy), CreatorHub (copy)
 		UseOpenWebViewResult(GameConfigurationActionsModule.getCreatorHubConfigureUrl(p1.universeId), CreatorHub)
@@ -64,7 +66,7 @@ return function(p1)
 	
 	return {
 		buildMaturityBannerText = BuildMaturityBannerText,
-		contentMaturityText = GameConfigurationLabelsModule.getContentMaturityText(UseSignalStateResult, ProvisionalRating, NoIsSealBroken) or Loading,
+		contentMaturityText = ContentMaturityText,
 		onOpenIconAndThumbnails = if FFlagMyStatsMediaSelector then p1.onOpenMediaSelectionPage else UseResult,
 		onOpenTitleDescriptionPage = p1.onOpenTitleDescriptionPage,
 		onOpenContentMaturity = ReactModule.useCallback(function()

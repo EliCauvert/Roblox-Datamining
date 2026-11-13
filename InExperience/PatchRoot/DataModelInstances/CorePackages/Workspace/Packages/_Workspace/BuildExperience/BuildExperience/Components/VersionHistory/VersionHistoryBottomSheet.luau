@@ -85,6 +85,54 @@ return function(p1)
 		p1.onRestoreStarted,
 		UseStateResult1
 	})
+	local config = {
+		AutosaveFilter = ReactModule.createElement(View, { LayoutOrder = 1, tag = "row size-full-0 auto-y" }, {
+			Checkbox = ReactModule.createElement(Checkbox, {
+				label = UseLocalizationResult.hideAutosaved,
+				isChecked = UseStateResult3,
+				onActivated = UseStateResult2_2,
+				testId = `{TestId}-autosave-filter`
+			})
+		}),
+		Status = if p1.statusText then ReactModule.createElement(Text, {
+			LayoutOrder = 2,
+			tag = "size-full-0 auto-y padding-bottom-medium text-body-medium text-wrap text-align-x-left content-default",
+			Text = p1.statusText
+		}) else nil,
+		Cards = ReactModule.createElement(View, {
+			LayoutOrder = 3,
+			tag = "col gap-medium size-full-0 auto-y padding-bottom-large"
+		}, (ReactModule.useMemo(function()
+			-- upvalues: p1 (copy), ReactModule (upval), LatestVersionCardViewModule (upval), UseStateResult3 (copy), TestId (copy), VersionHistoryCardModule (upval), UseResult (copy)
+			local Elements = {}
+			local HasLatestVersion = p1.latestVersion ~= nil
+			
+			if HasLatestVersion then
+				Elements.LatestVersionCard = ReactModule.createElement(LatestVersionCardViewModule, p1.latestVersion)
+			end
+			for LayoutOrder, entry in p1.entries do
+				if (not HasLatestVersion or LayoutOrder ~= 1) and (not UseStateResult3 or not entry.isAutosaved) then
+					Elements[entry.id] = ReactModule.createElement(VersionHistoryCardModule, {
+						layoutOrder = LayoutOrder,
+						versionLabel = entry.versionLabel,
+						title = entry.title,
+						description = entry.description,
+						badgeText = entry.badgeText,
+						isRestoreDisabled = p1.isRestoreDisabled,
+						onRestore = function()
+							-- upvalues: UseResult (upval), entry (copy)
+							UseResult(entry)
+						end,
+						testId = `{TestId}-card-{entry.id}`
+					})
+				end
+			end
+			return Elements
+		end, {
+			p1.entries, p1.isRestoreDisabled, p1.latestVersion, UseStateResult3, UseResult,
+			TestId
+		})))
+	}
 	local Published = UseLocalizationResult.published
 	
 	return ReactModule.createElement(ReactModule.Fragment, nil, {
@@ -132,54 +180,7 @@ return function(p1)
 						layoutOrder = 2,
 						title = UseLocalizationResult.allVersions,
 						testId = `{TestId}-all-versions`
-					}, {
-						AutosaveFilter = ReactModule.createElement(View, { LayoutOrder = 1, tag = "row size-full-0 auto-y" }, {
-							Checkbox = ReactModule.createElement(Checkbox, {
-								label = UseLocalizationResult.hideAutosaved,
-								isChecked = UseStateResult3,
-								onActivated = UseStateResult2_2,
-								testId = `{TestId}-autosave-filter`
-							})
-						}),
-						Status = if p1.statusText then ReactModule.createElement(Text, {
-							LayoutOrder = 2,
-							tag = "size-full-0 auto-y padding-bottom-medium text-body-medium text-wrap text-align-x-left content-default",
-							Text = p1.statusText
-						}) else nil,
-						Cards = ReactModule.createElement(View, {
-							LayoutOrder = 3,
-							tag = "col gap-medium size-full-0 auto-y padding-bottom-large"
-						}, (ReactModule.useMemo(function()
-							-- upvalues: p1 (copy), ReactModule (upval), LatestVersionCardViewModule (upval), UseStateResult3 (copy), TestId (copy), VersionHistoryCardModule (upval), UseResult (copy)
-							local Elements = {}
-							local HasLatestVersion = p1.latestVersion ~= nil
-							
-							if HasLatestVersion then
-								Elements.LatestVersionCard = ReactModule.createElement(LatestVersionCardViewModule, p1.latestVersion)
-							end
-							for LayoutOrder, entry in p1.entries do
-								if (not HasLatestVersion or LayoutOrder ~= 1) and (not UseStateResult3 or not entry.isAutosaved) then
-									Elements[entry.id] = ReactModule.createElement(VersionHistoryCardModule, {
-										layoutOrder = LayoutOrder,
-										versionLabel = entry.versionLabel,
-										title = entry.title,
-										description = entry.description,
-										badgeText = entry.badgeText,
-										isRestoreDisabled = p1.isRestoreDisabled,
-										onRestore = function()
-											-- upvalues: UseResult (upval), entry (copy)
-											UseResult(entry)
-										end,
-										testId = `{TestId}-card-{entry.id}`
-									})
-								end
-							end
-							return Elements
-						end, {
-							p1.entries, p1.isRestoreDisabled, p1.latestVersion, UseStateResult3, UseResult,
-							TestId
-						})))
-					})
+					}, config)
 				})
 			})
 		}),

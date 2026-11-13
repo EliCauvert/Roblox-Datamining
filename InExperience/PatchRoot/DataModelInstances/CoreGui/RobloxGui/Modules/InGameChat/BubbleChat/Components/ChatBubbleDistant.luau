@@ -4,6 +4,7 @@ local RoactModule = require(CorePackages.Packages.Roact)
 local TModule = require(CorePackages.Packages.t)
 local CryoModule = require(CorePackages.Packages.Cryo)
 local Parent = script.Parent.Parent
+local TypesModule = require(Parent.Types)
 local GetSizeSpringFromSettingsModule = require(Parent.Helpers.getSizeSpringFromSettings)
 local GetTransparencySpringFromSettingsModule = require(Parent.Helpers.getTransparencySpringFromSettings)
 local AppFonts = require(CorePackages.Workspace.Packages.Style).AppFonts
@@ -14,7 +15,7 @@ ChatBubbleDistant.validateProps = TModule.strictInterface({
 	height = TModule.optional(TModule.number),
 	fadingOut = TModule.optional(TModule.boolean),
 	onFadeOut = TModule.optional(TModule.callback),
-	chatSettings = require(Parent.Types).IChatSettings,
+	chatSettings = TypesModule.IChatSettings,
 	renderInsert = TModule.optional(TModule.callback),
 	insertSize = TModule.optional(TModule.Vector2)
 })

@@ -1,10 +1,11 @@
 ﻿local Parent = script.Parent.Parent.Parent
 local Parent1 = Parent.Parent
+local FoundationModule = require(Parent1.Foundation)
 local ReactModule = require(Parent1.React)
 local ReactOtterModule = require(Parent1.ReactOtter)
 local _ = require(script.Parent.GalleryButtonContentView)
 local _ = require(Parent.Types)
-local UseTokensFunction = require(Parent1.Foundation).Hooks.useTokens
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 local config = { dampingRatio = 1, frequency = 4 }
 
 local function _(p1): number

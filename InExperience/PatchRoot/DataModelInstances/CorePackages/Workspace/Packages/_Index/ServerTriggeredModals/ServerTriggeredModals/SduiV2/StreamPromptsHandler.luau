@@ -1,9 +1,10 @@
 ﻿local Parent = script:FindFirstAncestor("ServerTriggeredModals").Parent
 local ReactModule = require(Parent.React)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local PromptsHandler = require(script.Parent.PromptsHandler).PromptsHandler
 local PromptsEntryPointModule = require(script.Parent.PromptsEntryPoint)
 local PromptStyleModule = require(script.Parent.PromptStyle)
-local FFlagPromptsEdpOpenReplaceOnFetch = require(Parent.SharedFlags).FFlagPromptsEdpOpenReplaceOnFetch
+local FFlagPromptsEdpOpenReplaceOnFetch = SharedFlagsModule.FFlagPromptsEdpOpenReplaceOnFetch
 
 return function(p1)
 	-- upvalues: ReactModule (copy), PromptsHandler (copy), PromptsEntryPointModule (copy), PromptStyleModule (copy), FFlagPromptsEdpOpenReplaceOnFetch (copy)

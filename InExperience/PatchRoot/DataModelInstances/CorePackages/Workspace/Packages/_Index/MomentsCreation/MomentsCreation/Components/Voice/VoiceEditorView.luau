@@ -2,6 +2,7 @@
 local Parent = MomentsCreation.Parent
 local BuilderIconsModule = require(Parent.BuilderIcons)
 local FoundationModule = require(Parent.Foundation)
+local MomentsCommonModule = require(Parent.MomentsCommon)
 local ReactModule = require(Parent.React)
 local Button = FoundationModule.Button
 local Icon = FoundationModule.Icon
@@ -11,7 +12,7 @@ local View = FoundationModule.View
 local InputSize = FoundationModule.Enums.InputSize
 local InputVariant = FoundationModule.Enums.InputVariant
 local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
-local UseDeviceInsetsFunction = require(Parent.MomentsCommon).Hooks.useDeviceInsets
+local UseDeviceInsetsFunction = MomentsCommonModule.Hooks.useDeviceInsets
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local AudioWaveformOverlayModule = require(MomentsCreation.Components.Voice.AudioWaveformOverlay)
 local VideoTimelineModule = require(MomentsCreation.Components.VideoTimeline)

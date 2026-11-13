@@ -1,14 +1,16 @@
 ﻿local Parent = script:FindFirstAncestor("CollectionViews").Parent
+local DiscoveryTypesModule = require(Parent.DiscoveryTypes)
 local DiscoveryUtilsModule = require(Parent.DiscoveryUtils)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local ApportioningDiagnosticTelemetry = DiscoveryUtilsModule.ApportioningDiagnosticTelemetry
 local DiscoveryEventErrorLogger = DiscoveryUtilsModule.DiscoveryEventErrorLogger
-local GameCollectionItemTypes = require(Parent.DiscoveryTypes).GameCollectionItemTypes
+local GameCollectionItemTypes = DiscoveryTypesModule.GameCollectionItemTypes
+local GameCollectionItemType = GameCollectionItemTypes.GameCollectionItemType
 local SpanForItemType = GameCollectionItemTypes.SpanForItemType
 local FFlagLuaAppEnableNxMRoduxApportioning = SharedFlagsModule.FFlagLuaAppEnableNxMRoduxApportioning
 local FFlagLuaAppEnableNxMApportioningExtraLogging = SharedFlagsModule.FFlagLuaAppEnableNxMApportioningExtraLogging
 local config = {
-	[GameCollectionItemTypes.GameCollectionItemType.TwoByOneTile] = { colSpan = 2, rowSpan = 1 }
+	[GameCollectionItemType.TwoByOneTile] = { colSpan = 2, rowSpan = 1 }
 }
 
 local function defaultGetSpanConfig(p1)

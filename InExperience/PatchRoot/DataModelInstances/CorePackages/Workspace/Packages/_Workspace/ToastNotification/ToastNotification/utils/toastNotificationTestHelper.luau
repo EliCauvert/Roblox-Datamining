@@ -4,6 +4,7 @@ local RoduxModule = require(Parent.Rodux)
 local RoactRoduxModule = require(Parent.RoactRodux)
 local RoactServices = require(Parent.RoactServices).RoactServices
 local LocalizationProvider = require(Parent.Localization).LocalizationProvider
+local Localization = require(Parent.RobloxAppLocales).Localization
 local FoundationModule = require(Parent.Foundation)
 local FoundationProvider = FoundationModule.FoundationProvider
 local ColorMode = FoundationModule.Enums.ColorMode
@@ -18,20 +19,20 @@ local config = {
 	SetAlias = { Aliases = { byUserId = { ["1"] = "foo" } } }
 }
 
-local function v12(p1, p2)
+local function v13(p1, p2)
 	-- upvalues: RoduxModule (copy)
 	return RoduxModule.Store.new(p2 or function(p3)
 		return p3
 	end, p1 or {}, { RoduxModule.thunkMiddleware })
 end
 
-local EnUs = require(Parent.RobloxAppLocales).Localization.new("en-us")
+local EnUs = Localization.new("en-us")
 
 return {
 	mockServices = function(p1)
-		-- upvalues: ReactModule (copy), RoactRoduxModule (copy), v12 (copy), config (copy), FoundationProvider (copy), ColorMode (copy), AppStyleProvider (copy), Style (copy), LocalizationProvider (copy), EnUs (copy), RoactServices (copy)
+		-- upvalues: ReactModule (copy), RoactRoduxModule (copy), v13 (copy), config (copy), FoundationProvider (copy), ColorMode (copy), AppStyleProvider (copy), Style (copy), LocalizationProvider (copy), EnUs (copy), RoactServices (copy)
 		return (ReactModule.createElement(RoactServices.ServiceProvider, {}, {
-			storeProvider = ReactModule.createElement(RoactRoduxModule.StoreProvider, { store = v12(config) }, {
+			storeProvider = ReactModule.createElement(RoactRoduxModule.StoreProvider, { store = v13(config) }, {
 				foundationProvider = ReactModule.createElement(FoundationProvider, { colorMode = ColorMode.Dark }, {
 					styleProvider = ReactModule.createElement(AppStyleProvider, { style = Style }, {
 						localizationProvider = ReactModule.createElement(LocalizationProvider, { localization = EnUs }, p1)

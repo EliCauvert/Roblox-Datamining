@@ -1,4 +1,5 @@
 ﻿local Parent = script.Parent.Parent
+local DependenciesModule = require(Parent.dependencies)
 local Parent1 = Parent.Parent
 local EventNamesModule = require(script.Parent.EventNames)
 local SocialLuaAnalyticsModule = require(Parent1.SocialLuaAnalytics)
@@ -9,6 +10,8 @@ local EventTypes = Enums.EventTypes
 local BtnValuesModule = require(script.Parent.BtnValues)
 local ConstantsModule = require(Parent.Common.Constants)
 local FormatRecommendationContextType = SocialLuaAnalyticsModule.Analytics.Formatters.formatRecommendationContextType
+local GetFFlagPYMKAddFriendsEntryFunction = DependenciesModule.getFFlagPYMKAddFriendsEntry
+local FFlagLuaAppPYMKSendUserSeenCollection = SharedFlagsModule.FFlagLuaAppPYMKSendUserSeenCollection
 local FFlagLuaAppUserSeenCollectionUnifiedFields = SharedFlagsModule.FFlagLuaAppUserSeenCollectionUnifiedFields
 local FFlagPymkCarouselExtendProps = SharedFlagsModule.FFlagPymkCarouselExtendProps
 
@@ -121,7 +124,7 @@ local EventStreamActionListModule = {
 		additionalInfo = { source = "HomepagePYMKUserPresence" },
 		formatRulesForAdditionalInfo = { loadingTime = AbsolutePosition }
 	},
-	[EventNamesModule.UserSeenCollection] = if SharedFlagsModule.FFlagLuaAppPYMKSendUserSeenCollection then {
+	[EventNamesModule.UserSeenCollection] = if FFlagLuaAppPYMKSendUserSeenCollection then {
 		context = Contexts.HomePage,
 		eventType = EventTypes.UserSeenCollection,
 		additionalInfo = {
@@ -150,7 +153,7 @@ local EventStreamActionListModule = {
 	} else nil
 }
 
-if require(Parent.dependencies).getFFlagPYMKAddFriendsEntry() then
+if GetFFlagPYMKAddFriendsEntryFunction() then
 	EventStreamActionListModule[EventNamesModule.CarouselGenericTileClicked] = {
 		context = Contexts.HomePage,
 		eventType = EventTypes.ButtonClick,

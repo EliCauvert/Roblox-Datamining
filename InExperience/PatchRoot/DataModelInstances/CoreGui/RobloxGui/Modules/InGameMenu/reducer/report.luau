@@ -1,8 +1,9 @@
 ﻿local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
+local Rodux = InGameMenuDependenciesModule.Rodux
 local Cryo = InGameMenuDependenciesModule.Cryo
 local Parent = script.Parent.Parent
 
-return InGameMenuDependenciesModule.Rodux.createReducer({
+return Rodux.createReducer({
 	dialogOpen = false,
 	reportSentOpen = false,
 	userId = nil,

@@ -131,10 +131,10 @@ return function()
 			end)
 		end
 	})
-	local GetOptimisticCachedItemFunction = DataResolverModule.getOptimisticCachedItem
-	local GetOptimisticAndFetchItemFunction1 = DataResolverModule.getOptimisticAndFetchItem
-	local GetOptimisticCachedItemFunction1 = DataResolverModule1.getOptimisticCachedItem
-	local GetOptimisticAndFetchItemFunction = DataResolverModule1.getOptimisticAndFetchItem
+	local GetOptimisticCachedItemFunction1 = DataResolverModule.getOptimisticCachedItem
+	local GetOptimisticAndFetchItemFunction = DataResolverModule.getOptimisticAndFetchItem
+	local GetOptimisticCachedItemFunction = DataResolverModule1.getOptimisticCachedItem
+	local GetOptimisticAndFetchItemFunction1 = DataResolverModule1.getOptimisticAndFetchItem
 	
 	local function writeFollowing(p4, IsFollowing, Callback, p5)
 		-- upvalues: DataResolverModule (copy), PromiseModule (upval), ClassifyFollowingErrorModule (upval)
@@ -155,12 +155,12 @@ return function()
 	
 	return {
 		GetIsFollowing = function(p4, p5)
-			-- upvalues: GetOptimisticCachedItemFunction (copy), DataResolverModule1 (copy), GetOptimisticAndFetchItemFunction1 (copy)
-			return if p5 and p5.skipFetch then GetOptimisticCachedItemFunction(p4) elseif DataResolverModule1.isRequestInQueueOrInFlight(p4) then GetOptimisticCachedItemFunction(p4) else GetOptimisticAndFetchItemFunction1(p4)
+			-- upvalues: GetOptimisticCachedItemFunction1 (copy), DataResolverModule1 (copy), GetOptimisticAndFetchItemFunction (copy)
+			return if p5 and p5.skipFetch then GetOptimisticCachedItemFunction1(p4) elseif DataResolverModule1.isRequestInQueueOrInFlight(p4) then GetOptimisticCachedItemFunction1(p4) else GetOptimisticAndFetchItemFunction(p4)
 		end,
 		GetIsFollowed = function(p4, p5)
-			-- upvalues: GetOptimisticCachedItemFunction1 (copy), DataResolverModule (copy), GetOptimisticAndFetchItemFunction (copy)
-			return if p5 and p5.skipFetch then GetOptimisticCachedItemFunction1(p4) elseif DataResolverModule.isRequestInQueueOrInFlight(p4) then GetOptimisticCachedItemFunction1(p4) else GetOptimisticAndFetchItemFunction(p4)
+			-- upvalues: GetOptimisticCachedItemFunction (copy), DataResolverModule (copy), GetOptimisticAndFetchItemFunction1 (copy)
+			return if p5 and p5.skipFetch then GetOptimisticCachedItemFunction(p4) elseif DataResolverModule.isRequestInQueueOrInFlight(p4) then GetOptimisticCachedItemFunction(p4) else GetOptimisticAndFetchItemFunction1(p4)
 		end,
 		Follow = function(p4, p5)
 			-- upvalues: writeFollowing (copy), RequestsModule (upval)

@@ -2,9 +2,10 @@
 local Parent = MomentsCommon.Parent
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
 local _ = require(MomentsCommon.Media.MediaTypes)
 local MediaPreloadProviderModule = require(MomentsCommon.Media.Components.MediaPreloadProvider)
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseSignalStateFunction = SignalsReactModule.useSignalState
 
 return function(p1)
 	-- upvalues: MediaPreloadProviderModule (copy), ReactModule (copy), SignalsModule (copy), UseSignalStateFunction (copy)

@@ -8,6 +8,7 @@ local ChromeUtilsModule = require(Chrome.ChromeShared.Service.ChromeUtils)
 local CommonIconModule = require(Chrome.Integrations.CommonIcon)
 local FFlagEnableConsoleExpControls = require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnableConsoleExpControls
 local _ = ServiceModule.AvailabilitySignal.Available
+local Available = if StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.All) or StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.Captures) then ServiceModule.AvailabilitySignal.Available else ServiceModule.AvailabilitySignal.Unavailable
 local NewResult = ChromeUtilsModule.MappedSignal.new(CapturesAppModule.onIsActiveChanged, function()
 	-- upvalues: CapturesAppModule (copy)
 	return CapturesAppModule.getIsActive()
@@ -15,7 +16,7 @@ end)
 local RegisterResult = ServiceModule:register({
 	id = "camera_entrypoint",
 	label = "Feature.SettingsHub.Label.Captures",
-	initialAvailability = if StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.All) or StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.Captures) then ServiceModule.AvailabilitySignal.Available else ServiceModule.AvailabilitySignal.Unavailable,
+	initialAvailability = Available,
 	sideSheetPlacement = require(CorePackages.Workspace.Packages.Chrome).Enums.SideSheetPlacement.BelowFold,
 	activated = function(_)
 		-- upvalues: CapturesAppModule (copy)

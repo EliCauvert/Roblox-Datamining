@@ -1,10 +1,11 @@
 ﻿local ExpChat = script:FindFirstAncestor("ExpChat")
 local Parent = ExpChat.Parent
+local RoduxModule = require(Parent.Rodux)
 local Dictionary = require(Parent.llama).Dictionary
 local ConfigModule = require(ExpChat.Config)
 local Actions = ExpChat.Actions
 
-return require(Parent.Rodux).createReducer({
+return RoduxModule.createReducer({
 	BackgroundTransparency = ConfigModule.ChannelTabsSettings.BackgroundTransparency,
 	BackgroundColor3 = ConfigModule.ChannelTabsSettings.BackgroundColor3,
 	HoverBackgroundColor3 = ConfigModule.ChannelTabsSettings.HoverBackgroundColor3,

@@ -3,6 +3,7 @@ local Parent = PeopleReactView.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local ReactRobloxModule = require(Parent.ReactRoblox)
+local Signal = require(Parent.AppCommonLib).Signal
 local LocalizationProvider = require(Parent.Localization).LocalizationProvider
 local FoundationProvider = FoundationModule.FoundationProvider
 local UseStyleSheetFunction = FoundationModule.Hooks.useStyleSheet
@@ -30,7 +31,7 @@ local Localization = {
 		-- upvalues: config1 (copy)
 		return config1[p1] or p1
 	end,
-	changed = require(Parent.AppCommonLib).Signal.new(),
+	changed = Signal.new(),
 	GetLocale = function(): string
 		return "en-us"
 	end

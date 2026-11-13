@@ -41,6 +41,7 @@ return function(p1, _, p2, _)
 		
 		return
 	end
+	local Ctx = ActionParams.ctx or ""
 	local VotesStore = Game1.getVotesStore(false)
 	local DataResult = VotesStore.getUserVote(UniverseId).data(false)
 	local UserVote = if DataResult then DataResult.userVote else nil
@@ -51,7 +52,7 @@ return function(p1, _, p2, _)
 		vote = if VoteDirection1 == true then "UpVoted" elseif VoteDirection1 == false then "DownVoted" else "NotVoted",
 		prevVote = if UserVote == true then "UpVoted" elseif UserVote == false then "DownVoted" else "NotVoted",
 		targetId = if FFlagLuaAppAddUniverseIdToEngagementEvents then UniverseId else nil
-	}, ActionParams.ctx or "")
+	}, Ctx)
 	
 	if GetFFlagEdpPlayerFeedbackEnabledFunction() and PlaceId then
 		Game1.getUserVoteFeedbackMetadataStore(false).clearItem(PlaceId)

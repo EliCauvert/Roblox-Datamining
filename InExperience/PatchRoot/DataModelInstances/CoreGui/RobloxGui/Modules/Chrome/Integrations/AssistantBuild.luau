@@ -2,12 +2,13 @@
 local VRService = game:GetService("VRService")
 local FFlagBuildExperienceInGameShell = require(CorePackages.Workspace.Packages.SharedFlags).FFlagBuildExperienceInGameShell
 local ReactModule = require(CorePackages.Packages.React)
+local FoundationModule = require(CorePackages.Packages.Foundation)
 local SignalsModule = if FFlagBuildExperienceInGameShell then require(CorePackages.Packages.Signals) else nil
 local BuildExperienceModule = require(CorePackages.Workspace.Packages.BuildExperience)
 local BuildModeLaunchModule = require(CorePackages.Workspace.Packages.BuildExperiencePlaytestLaunch.BuildModeLaunch)
 local DisplayModule = if FFlagBuildExperienceInGameShell then require(CorePackages.Workspace.Packages.Display) else nil
 local ServiceModule = require(script:FindFirstAncestor("Chrome").Service)
-local ButtonVariant = require(CorePackages.Packages.Foundation).Enums.ButtonVariant
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
 
 local function _(p1): boolean
 	-- upvalues: BuildModeLaunchModule (copy), VRService (copy), FFlagBuildExperienceInGameShell (copy), DisplayModule (copy)

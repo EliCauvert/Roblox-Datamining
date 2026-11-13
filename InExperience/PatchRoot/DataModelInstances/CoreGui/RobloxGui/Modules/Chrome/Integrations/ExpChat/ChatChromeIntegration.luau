@@ -40,6 +40,7 @@ local GetFriendsChatIconUnreadStoreModule = require(CorePackages.Workspace.Packa
 local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
 local FFlagEnableConsoleExpControls = SharedFlagsModule.FFlagEnableConsoleExpControls
 local FFlagExpChatWindowSyncUnibar = SharedFlagsModule.FFlagExpChatWindowSyncUnibar
+local FFlagExpChatInitializeWindowFromGameSettings = SharedFlagsModule.FFlagExpChatInitializeWindowFromGameSettings
 local FFlagRemoveFriendsChatUnibarEntrypoints = SharedFlagsModule.FFlagRemoveFriendsChatUnibarEntrypoints
 local FFlagExpChatCanShowFriendsTab = SharedFlagsModule.FFlagExpChatCanShowFriendsTab
 local FFlagSideSheetHeaderChatIcon = SharedFlagsModule.FFlagSideSheetHeaderChatIcon
@@ -59,10 +60,12 @@ local ExpChatUnibarAvailabilityRefactor = game:DefineFastFlag("ExpChatUnibarAvai
 local IsInExperienceUIVREnabled = require(CorePackages.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
 local InExperienceUIVRIXP = require(CorePackages.Workspace.Packages.SharedExperimentDefinition).InExperienceUIVRIXP
 local ExpChatPerfTracker = ExpChatModule.ExpChatPerfTracker
+local ExpChatJoinIntentModule = require(CorePackages.Workspace.Packages.ExpChatJoinIntent)
+local FStringOpenChatOnJoinNotificationTypes = ExpChatJoinIntentModule.FStringOpenChatOnJoinNotificationTypes
 local Count = 0
 local ChatVisible = nil
 
-if SharedFlagsModule.FFlagExpChatInitializeWindowFromGameSettings then
+if FFlagExpChatInitializeWindowFromGameSettings then
 	ChatVisible = GameSettings.ChatVisible
 	ChatSelectorModule:SetVisible(ChatVisible)
 else
@@ -478,8 +481,40 @@ local _ = function()
 	ChatSelectorModule:SetVisible(ChatVisible1)
 end
 
+if FStringOpenChatOnJoinNotificationTypes ~= "" then
+	require(CorePackages.Workspace.Packages.NotificationsCommon).DeeplinkTapListeners.connect(ExpChatJoinIntentModule.handleDeeplinkTap)
+end
+local function openChatForJoinIntent(p1)
+	-- upvalues: ExpChatJoinIntentModule (copy), TextChatService (copy), ChatVisible (ref), RegisterResult1 (ref), ServiceModule (copy), GameSettings (copy), ChatSelectorModule (copy), ExpChatSharedModule (copy)
+	local ReadResult = ExpChatJoinIntentModule.read(game.PlaceId)
+	
+	if ReadResult.result == "none" then return end
+	local Result = ReadResult.result
+	
+	if ReadResult.result == "accepted" then
+		if not game:IsLoaded() then
+			game.Loaded:Wait()
+		end
+		local ChatWindowConfiguration = TextChatService:FindFirstChildOfClass("ChatWindowConfiguration")
+		Result = if p1 then if ChatVisible then "alreadyOpen" elseif RegisterResult1.availability:get() ~= ServiceModule.AvailabilitySignal.Unavailable then if ChatWindowConfiguration and not ChatWindowConfiguration.Enabled then "chatWindowDisabled" else "opened" else "chatUnavailable" else "cannotChat"
+	end
+	if Result == "opened" then
+		GameSettings.ChatVisible = true
+		ChatVisible = true
+		ChatSelectorModule:SetVisible(true)
+	end
+	local Intent = ReadResult.intent
+	ExpChatSharedModule.Analytics.FireClientAnalyticsWithEventName("joinIntentChatOpen", {
+		result = Result,
+		notificationType = if Intent then Intent.notificationType else "",
+		notificationId = Intent and Intent.notificationId or "",
+		chatTarget = Intent and Intent.chatTarget or "",
+		source = if Intent then Intent.source else ""
+	})
+end
+
 coroutine.wrap(function()
-	-- upvalues: Players (copy), RunService (copy), Chat (copy), ExpChatUnibarAvailabilityRefactor (copy), Default (copy), GameSettings (copy), ViewportUtilModule (copy), ChatVisible (ref), ChatSelectorModule (copy), RegisterResult1 (ref), ChromeUtilsModule (copy)
+	-- upvalues: Players (copy), RunService (copy), Chat (copy), ExpChatUnibarAvailabilityRefactor (copy), Default (copy), GameSettings (copy), ViewportUtilModule (copy), ChatVisible (ref), ChatSelectorModule (copy), RegisterResult1 (ref), ChromeUtilsModule (copy), FStringOpenChatOnJoinNotificationTypes (copy), openChatForJoinIntent (copy)
 	local LocalPlayer = Players.LocalPlayer
 	while not LocalPlayer do
 		Players:GetPropertyChangedSignal("LocalPlayer"):Wait()
@@ -502,8 +537,6 @@ coroutine.wrap(function()
 			local ChatVisible1 = not ViewportUtilModule.isSmallTouchScreen() and GameSettings.ChatVisible
 			ChatVisible = ChatVisible1
 			ChatSelectorModule:SetVisible(ChatVisible1)
-			
-			return
 		end
 	elseif Result1 and RegisterResult1.availability then
 		ChromeUtilsModule.setCoreGuiAvailability(RegisterResult1, Enum.CoreGuiType.Chat, function(p1)
@@ -519,6 +552,9 @@ coroutine.wrap(function()
 		local ChatVisible2 = not ViewportUtilModule.isSmallTouchScreen() and GameSettings.ChatVisible
 		ChatVisible = ChatVisible2
 		ChatSelectorModule:SetVisible(ChatVisible2)
+	end
+	if FStringOpenChatOnJoinNotificationTypes ~= "" then
+		openChatForJoinIntent(Result1)
 	end
 end)()
 

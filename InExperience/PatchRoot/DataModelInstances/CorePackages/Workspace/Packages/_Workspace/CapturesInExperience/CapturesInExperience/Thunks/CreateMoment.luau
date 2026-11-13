@@ -23,12 +23,13 @@ if require(Parent.Flags.FFlagCapturesInExpUseMomentsCreation) then
 	end
 else
 	local _ = require(Parent1.MomentsCreationFlow)
+	local MomentsCreationModule = require(Parent1.MomentsCreation)
 	local MomentsCommonModule = require(Parent1.MomentsCommon)
 	local _ = require(Parent1.MomentsTypes)
 	local NormalizeMomentMetadataModule = require(Parent.Utils.normalizeMomentMetadata)
 	local GetFFlagMomentsUseUploadPostAsyncFunction = MomentsCommonModule.Flags.GetFFlagMomentsUseUploadPostAsync
 	local GetFFlagMomentsUseMomentsServiceForUploadFunction = MomentsCommonModule.Flags.GetFFlagMomentsUseMomentsServiceForUpload
-	local MakePostMetadataFunction = require(Parent1.MomentsCreation).makePostMetadata
+	local MakePostMetadataFunction = MomentsCreationModule.makePostMetadata
 	
 	return function(Capture, p1, FeedRegistrationInfo, p2)
 		-- upvalues: NormalizeMomentMetadataModule (copy), GetFFlagMomentsUseUploadPostAsyncFunction (copy), MakePostMetadataFunction (copy), GetFFlagMomentsUseMomentsServiceForUploadFunction (copy), CaptureService (copy), ToastTriggeredModule (copy), CapturesToastTypeModule (copy)

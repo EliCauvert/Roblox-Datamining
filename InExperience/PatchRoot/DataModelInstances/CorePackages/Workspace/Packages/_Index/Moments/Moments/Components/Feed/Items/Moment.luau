@@ -5,11 +5,13 @@ local _ = require(Moments.Components.Feed.FeedTypes)
 local MomentItemModule = require(script.MomentItem)
 local MomentItemSkeletonModule = require(script.MomentItemSkeleton)
 local _ = require(script.createMomentStore)
+local MomentsCommonModule = require(Parent.MomentsCommon)
 local MomentsTypesModule = require(Parent.MomentsTypes)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagMomentsServeEDPVideos = SharedFlagsModule.FFlagMomentsServeEDPVideos
 local FFlagMomentsOptimisticProfilePending = SharedFlagsModule.FFlagMomentsOptimisticProfilePending
 local FFlagMomentsHideOfficialContentLabel = SharedFlagsModule.FFlagMomentsHideOfficialContentLabel
+local FStringMomentsOfficialContentCreatorIdModule = require(Moments.Flags.FStringMomentsOfficialContentCreatorId)
 local GetMomentsPreferencesStoreModule = require(Moments.Stores.GetMomentsPreferencesStore)
 local GetFFlagMomentsRenderPostAssetsModule = require(Parent.MomentsCommon.GetFFlagMomentsRenderPostAssets)
 local FFlagMomentsAvatarLookTryOn = SharedFlagsModule.FFlagMomentsAvatarLookTryOn
@@ -17,8 +19,8 @@ local MakeRecommendationAttributionModule = require(Moments.Analytics.makeRecomm
 local FFlagMomentsRecommendationContentTypeModule = require(Moments.Flags.FFlagMomentsRecommendationContentType)
 local ToMediaItemModule = require(Moments.Components.Feed.Media.toMediaItem)
 local CommentsModule = require(Moments.Components.Comments)
-local MomentMediaView = require(Parent.MomentsCommon).Media.MomentMediaView
-local Number: number? = tonumber((require(Moments.Flags.FStringMomentsOfficialContentCreatorId)))
+local MomentMediaView = MomentsCommonModule.Media.MomentMediaView
+local Number: number? = tonumber(FStringMomentsOfficialContentCreatorIdModule)
 
 local function momentAttribution(Moment)
 	-- upvalues: MakeRecommendationAttributionModule (copy), FFlagMomentsRecommendationContentTypeModule (copy)

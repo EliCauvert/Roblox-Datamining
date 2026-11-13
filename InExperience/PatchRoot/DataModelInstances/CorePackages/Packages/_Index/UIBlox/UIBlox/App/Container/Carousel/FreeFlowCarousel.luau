@@ -4,6 +4,7 @@ local Parent2 = Parent1.Parent
 local RoactModule = require(Parent2.Roact)
 local TModule = require(Parent2.t)
 local FitFrameOnAxis = require(Parent2.FitFrame).FitFrameOnAxis
+local IsCallableModule = require(Parent1.Utility.isCallable)
 local CarouselHeaderModule = require(Parent.CarouselHeader)
 local HorizontalCarouselModule = require(Parent.HorizontalCarousel)
 local FreeFlowCarousel = RoactModule.PureComponent:extend("FreeFlowCarousel")
@@ -27,7 +28,7 @@ FreeFlowCarousel.validateProps = TModule.strictInterface({
 			itemVisiblePercentThreshold = TModule.optional(TModule.number),
 			waitForInteraction = TModule.optional(TModule.boolean)
 		}),
-		onViewableItemsChanged = require(Parent1.Utility.isCallable)
+		onViewableItemsChanged = IsCallableModule
 	})))
 })
 FreeFlowCarousel.defaultProps = {

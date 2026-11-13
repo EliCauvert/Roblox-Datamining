@@ -1,9 +1,10 @@
 ﻿local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
 local Roact = InGameMenuDependenciesModule.Roact
 local T = InGameMenuDependenciesModule.t
+local UIBlox = InGameMenuDependenciesModule.UIBlox
 local Parent = script.Parent.Parent
 local AssetsModule = require(Parent.Resources.Assets)
-local ImageSetButton = InGameMenuDependenciesModule.UIBlox.Core.ImageSet.ImageSetButton
+local ImageSetButton = UIBlox.Core.ImageSet.ImageSetButton
 local GlobalConfigModule = require(Parent.GlobalConfig)
 local StrictInterfaceResult = T.strictInterface({ onClick = T.callback })
 

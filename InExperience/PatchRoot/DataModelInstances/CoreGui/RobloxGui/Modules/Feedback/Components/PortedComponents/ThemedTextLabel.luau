@@ -2,9 +2,11 @@
 local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDependencies)
 local Roact = InGameMenuDependenciesModule.Roact
 local Cryo = InGameMenuDependenciesModule.Cryo
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local FoundationModule = require(CorePackages.Packages.Foundation)
 local T = InGameMenuDependenciesModule.t
-local WithStyleFunction = require(CorePackages.Packages.UIBlox).Core.Style.withStyle
-local NormalizeFontFaceFunction = require(CorePackages.Packages.Foundation).Utility.normalizeFontFace
+local WithStyleFunction = UIBloxModule.Core.Style.withStyle
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local GlobalConfigModule = require(script.Parent.Parent.Parent.GlobalConfig)
 local config = {
 	Title = "HeadingLarge",

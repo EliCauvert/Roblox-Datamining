@@ -11,9 +11,10 @@ local SduiTileFooterModule = require(ServerDrivenUi.Content.SduiTileFooter)
 local SduiInGameFriendsDataModule = require(ServerDrivenUi.DataStore.SduiInGameFriendsData)
 local FFlagLuaAppFixInlineSignalsReactPattern = require(Parent.SharedFlags).FFlagLuaAppFixInlineSignalsReactPattern
 local FFlagSduiGameTileUseFooterComponentAsDefault = require(Parent.SharedFlags).FFlagSduiGameTileUseFooterComponentAsDefault
+local FFlagSduiActiveFriendsFooterTreatment = require(Parent.SharedFlags).FFlagSduiActiveFriendsFooterTreatment
 
 return ReactModule.memo(function(p1)
-	-- upvalues: SduiInGameFriendsDataModule (copy), FFlagLuaAppFixInlineSignalsReactPattern (copy), ReactModule (copy), SignalsReactModule (copy), SduiTileFooterModule (copy), SduiGameTileActiveFriendsFooterModule (copy), FFlagSduiGameTileUseFooterComponentAsDefault (copy), Images (copy), AbbreviateCountFunction (copy)
+	-- upvalues: SduiInGameFriendsDataModule (copy), FFlagLuaAppFixInlineSignalsReactPattern (copy), ReactModule (copy), SignalsReactModule (copy), SduiTileFooterModule (copy), FFlagSduiActiveFriendsFooterTreatment (copy), SduiGameTileActiveFriendsFooterModule (copy), FFlagSduiGameTileUseFooterComponentAsDefault (copy), Images (copy), AbbreviateCountFunction (copy)
 	local GetInGameFriendsByGameFunction = SduiInGameFriendsDataModule.getInGameFriendsByGame
 	local UseSignalStateResult = if FFlagLuaAppFixInlineSignalsReactPattern then SignalsReactModule.useSignalState((ReactModule.useCallback(function(p2): boolean
 		-- upvalues: GetInGameFriendsByGameFunction (copy), p1 (copy)
@@ -46,7 +47,7 @@ return ReactModule.memo(function(p1)
 		})
 	end
 	if UseSignalStateResult then
-		return ReactModule.createElement(SduiGameTileActiveFriendsFooterModule, {
+		return if FFlagSduiActiveFriendsFooterTreatment and p1.activeFriendsFooterComponent then p1.activeFriendsFooterComponent else ReactModule.createElement(SduiGameTileActiveFriendsFooterModule, {
 			testId = "--sdui-game-tile-footer-active-friends",
 			hideBorder = true,
 			placeId = p1.placeId,

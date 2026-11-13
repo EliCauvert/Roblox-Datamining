@@ -2,16 +2,21 @@
 local Parent = ServerDrivenUi.Parent
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
+local RoactUtilsModule = require(Parent.RoactUtils)
 local CryoModule = require(Parent.Cryo)
 local Game = require(Parent.DataHydration).Game
 local _ = require(Parent.SduiCoreSystem)
+local PlayerFeedbackModule = require(Parent.PlayerFeedback)
+local CentralOverlayModule = require(Parent.CentralOverlay)
+local RobloxAppEnumsModule = require(Parent.RobloxAppEnums)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
-local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local GamePlayerFeedbackPrompt = require(Parent.PlayerFeedback).GamePlayerFeedbackPrompt
-local SetCentralOverlayFunction = require(Parent.CentralOverlay).Actions.SetCentralOverlay
-local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local GamePlayerFeedbackPrompt = PlayerFeedbackModule.GamePlayerFeedbackPrompt
+local SetCentralOverlayFunction = CentralOverlayModule.Actions.SetCentralOverlay
+local CentralOverlayType = RobloxAppEnumsModule.CentralOverlayType
 local SduiAssociatedItemsRowModule = require(ServerDrivenUi.Content.SduiAssociatedItemsRow)
-local GetFFlagEdpPlayerFeedbackEnabledFunction = require(Parent.SharedFlags).GetFFlagEdpPlayerFeedbackEnabled
+local GetFFlagEdpPlayerFeedbackEnabledFunction = SharedFlagsModule.GetFFlagEdpPlayerFeedbackEnabled
 
 return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), Game (copy), SignalsReactModule (copy), ReactModule (copy), GetFFlagEdpPlayerFeedbackEnabledFunction (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), SduiAssociatedItemsRowModule (copy), CryoModule (copy), GamePlayerFeedbackPrompt (copy)

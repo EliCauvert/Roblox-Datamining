@@ -1,5 +1,6 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
+local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
@@ -15,7 +16,7 @@ local ScrollBarVisibility = FoundationModule.Enums.ScrollBarVisibility
 local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
 local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
 local UseTokensFunction = FoundationModule.Hooks.useTokens
-local SubagentTaskCategory = require(Parent.DataHydration.CreatorAgentChat).SubagentTaskCategory
+local SubagentTaskCategory = CreatorAgentChatModule.SubagentTaskCategory
 local Names = {
 	SubagentTaskCategory.Gameplay,
 	SubagentTaskCategory.Art,

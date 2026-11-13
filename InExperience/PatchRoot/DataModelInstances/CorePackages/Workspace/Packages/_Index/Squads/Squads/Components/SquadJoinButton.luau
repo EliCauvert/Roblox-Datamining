@@ -140,7 +140,7 @@ return function(p1)
 				MaxSize = Vector2.new(UseTokensResult.Size.Size_2800, UseTokensResult.Size.Size_800)
 			}
 		}),
-		SignifierImage = if p1.shouldShowSignifier and UsePreferredInputResult == ResponsiveModule.Input.Directional and not UseIsTvRemoteDeviceResult then React.createElement(Foundation.Icon, {
+		SignifierImage = if p1.shouldShowSignifier and (UsePreferredInputResult == ResponsiveModule.Input.Directional and not UseIsTvRemoteDeviceResult) then React.createElement(Foundation.Icon, {
 			LayoutOrder = 3,
 			name = UserInputService:GetImageForKeyCode(Enum.KeyCode.ButtonX),
 			size = Foundation.Enums.IconSize.Small,

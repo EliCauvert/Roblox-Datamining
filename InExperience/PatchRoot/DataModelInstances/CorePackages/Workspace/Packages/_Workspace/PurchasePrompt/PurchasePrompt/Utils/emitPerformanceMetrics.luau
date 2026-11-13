@@ -10,12 +10,13 @@ local ProductPurchaseContainerFPSDuration = game:DefineFastInt("ProductPurchaseC
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FIntTTIUnifiedPurchaseSamplingRate = SharedFlagsModule.FIntTTIUnifiedPurchaseSamplingRate
 local FFlagEnableEdpPreviewPurchaseSurface = SharedFlagsModule.FFlagEnableEdpPreviewPurchaseSurface
+local FFlagEnableInExperiencePurchaseModalMetricsModule = require(PurchasePrompt.Flags.FFlagEnableInExperiencePurchaseModalMetrics)
 local config = {
 	[Enums.ProductPurchaseSurface.Catalog] = true,
 	[Enums.ProductPurchaseSurface.EDP] = true
 }
 
-if require(PurchasePrompt.Flags.FFlagEnableInExperiencePurchaseModalMetrics) then
+if FFlagEnableInExperiencePurchaseModalMetricsModule then
 	config[Enums.ProductPurchaseSurface.InExperience] = true
 end
 if FFlagEnableEdpPreviewPurchaseSurface then

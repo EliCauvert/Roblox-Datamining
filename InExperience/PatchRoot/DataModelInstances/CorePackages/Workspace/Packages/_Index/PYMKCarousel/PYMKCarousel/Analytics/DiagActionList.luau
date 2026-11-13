@@ -1,6 +1,9 @@
 ﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local DependenciesModule = require(Parent.dependencies)
 local EventNamesModule = require(script.Parent.EventNames)
-local SocialLuaAnalyticsModule = require(Parent.Parent.SocialLuaAnalytics)
+local SocialLuaAnalyticsModule = require(Parent1.SocialLuaAnalytics)
+local GetFFlagPYMKAddFriendsEntryFunction = DependenciesModule.getFFlagPYMKAddFriendsEntry
 local DiagActionListModule = {
 	[EventNamesModule.CarouselLoadedWithUsers] = {
 		name = game:DefineFastString("PYMKCarouselLoadedWithUsers", "PYMKCarouselLoadedWithUsers")
@@ -21,7 +24,7 @@ local DiagActionListModule = {
 	}
 }
 
-if require(Parent.dependencies).getFFlagPYMKAddFriendsEntry() then
+if GetFFlagPYMKAddFriendsEntryFunction() then
 	DiagActionListModule[EventNamesModule.CarouselGenericTileClicked] = {
 		name = game:DefineFastString("PYMKCarouselGenericTileClicked", "PYMKCarouselGenericTileClicked")
 	}

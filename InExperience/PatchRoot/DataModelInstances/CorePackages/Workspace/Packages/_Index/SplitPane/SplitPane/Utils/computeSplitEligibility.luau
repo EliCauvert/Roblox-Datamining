@@ -1,9 +1,10 @@
 ﻿local Parent = script:FindFirstAncestor("SplitPane").Parent
 local RoactNavigationModule = require(Parent.RoactNavigation)
+local Constants = require(Parent.NavigationRodux).Constants
 local SplitPaneSlot = require(Parent.AppSplitView).Enums.SplitPaneSlot
 local FFlagAXFixSplitPaneHomeTryOnReset = require(Parent.SharedFlags).FFlagAXFixSplitPaneHomeTryOnReset
 local ViewState = require(Parent.Navigation).ViewState
-local TempRnSwitchNavigatorName = require(Parent.NavigationRodux).Constants.TempRnSwitchNavigatorName
+local TempRnSwitchNavigatorName = Constants.TempRnSwitchNavigatorName
 
 local function _(p1)
 	local DangerouslyGetParentResult = if p1._dangerouslyGetParent then p1._dangerouslyGetParent() else nil

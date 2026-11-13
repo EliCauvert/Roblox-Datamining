@@ -1,5 +1,6 @@
 ﻿local CorePackages = game:GetService("CorePackages")
 local GameSettings = UserSettings().GameSettings
+local CachedPolicyServiceModule = require(CorePackages.Workspace.Packages.CachedPolicyService)
 local SettingsServiceModule = require(CorePackages.Workspace.Packages.SettingsService)
 local ValueChangedSignal = SettingsServiceModule.ValueChangedSignal
 
@@ -26,6 +27,6 @@ return {
 		
 		return NewValueChangedSignal
 	end)(),
-	availability = SettingsServiceModule.AvailabilitySignal.new(not require(CorePackages.Workspace.Packages.CachedPolicyService):IsSubjectToChinaPolicies()),
+	availability = SettingsServiceModule.AvailabilitySignal.new(not CachedPolicyServiceModule:IsSubjectToChinaPolicies()),
 	layoutOrder = require(script:FindFirstAncestor("Settings").Integrations.Constants).GAMESETTINGS.LAYOUT_ORDER.PerformanceStatsFrame
 }

@@ -3,8 +3,10 @@ local Parent = AppChat.Parent
 local ReactModule = require(Parent.React)
 local CryoModule = require(Parent.Cryo)
 local _ = require(Parent.UIBlox)
+local SocialLibrariesModule = require(AppChat.SocialLibraries)
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebugAppChatEnableDomLocators)
+local FFlagAppChatRemoveConversationListDividerModule = require(AppChat.Flags.FFlagAppChatRemoveConversationListDivider)
 local PresenceBubbleCellModule = require(script.Parent.PresenceBubbleCell)
 local config = {
 	avatarCirclePresenceImage = nil,
@@ -21,8 +23,8 @@ local config = {
 	paddingRight = 0,
 	Size = UDim2.new(1, 0, 1, 0),
 	thumbnails = {},
-	style = CryoModule.Dictionary.join(require(AppChat.SocialLibraries).Components.TestStyle, { Tokens = { Color = { None = {} } } }),
-	showDivider = not require(AppChat.Flags.FFlagAppChatRemoveConversationListDivider)
+	style = CryoModule.Dictionary.join(SocialLibrariesModule.Components.TestStyle, { Tokens = { Color = { None = {} } } }),
+	showDivider = not FFlagAppChatRemoveConversationListDividerModule
 }
 
 return ReactModule.memo(function(p1)

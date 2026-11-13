@@ -1,5 +1,6 @@
 ﻿local SplitPane = script:FindFirstAncestor("SplitPane")
 local Parent = SplitPane.Parent
+local NavigationRoduxModule = require(Parent.NavigationRodux)
 local SessionType = require(Parent.RobloxAppSessionization).SessionType
 local SignalsModule = require(Parent.Signals)
 local SessionTypeModule = require(SplitPane.SessionType)
@@ -7,7 +8,7 @@ local SplitL3StoreModule = require(SplitPane.Stores.SplitL3Store)
 local SplitPaneStoreModule = require(SplitPane.Stores.SplitPaneStore)
 local AppPage = require(Parent.RobloxAppEnums).AppPage
 local SplitPaneSlot = require(Parent.AppSplitView).Enums.SplitPaneSlot
-local TempRnSwitchNavigatorName = require(Parent.NavigationRodux).Constants.TempRnSwitchNavigatorName
+local TempRnSwitchNavigatorName = NavigationRoduxModule.Constants.TempRnSwitchNavigatorName
 
 local function routeHasSupportAboveContent(p1, p2): boolean
 	-- upvalues: SplitPaneSlot (copy)
@@ -41,7 +42,7 @@ local function getLevel2RouteAndExclusions(List, p3)
 	local t = {}
 	local Flag = false
 	local Flag1 = v1 == nil
-	local V11 = v1 or {}
+	local V12 = v1 or {}
 	for _, value in List do
 		local Content = p3[value.name]
 		
@@ -49,7 +50,7 @@ local function getLevel2RouteAndExclusions(List, p3)
 			Flag = true
 			t[value.name] = true
 			
-			if not Flag1 and V11[value.name] == nil then
+			if not Flag1 and V12[value.name] == nil then
 				Flag1 = true
 			end
 		elseif Content == SplitPaneSlot.Content or not Flag then
@@ -57,13 +58,13 @@ local function getLevel2RouteAndExclusions(List, p3)
 		else
 			t[value.name] = true
 			
-			if not Flag1 and V11[value.name] == nil then
+			if not Flag1 and V12[value.name] == nil then
 				Flag1 = true
 			end
 		end
 	end
 	if not Flag1 then
-		for i in V11 do
+		for i in V12 do
 			if t[i] == nil then
 				Flag1 = true
 				break

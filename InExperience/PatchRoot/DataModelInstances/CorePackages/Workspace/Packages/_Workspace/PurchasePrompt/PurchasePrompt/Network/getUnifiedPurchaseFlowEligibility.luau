@@ -1,8 +1,9 @@
 ﻿local AppStorageService = game:GetService("AppStorageService")
 local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local Parent = PurchasePrompt.Parent
 local PromiseModule = require(PurchasePrompt.Promise)
 local ProductTypeEnum = require(PurchasePrompt.types).ProductTypeEnum
-local FFlagShipUnifiedPurchaseInExperience = require(PurchasePrompt.Parent.SharedFlags).FFlagShipUnifiedPurchaseInExperience
+local FFlagShipUnifiedPurchaseInExperience = require(Parent.SharedFlags).FFlagShipUnifiedPurchaseInExperience
 
 local function _(): boolean
 	-- upvalues: AppStorageService (copy)

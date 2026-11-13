@@ -1,10 +1,11 @@
 ﻿local AppChat = script:FindFirstAncestor("AppChat")
 local Parent = AppChat.Parent
+local RoduxModule = require(Parent.Rodux)
 local _ = require(Parent.SocialCommon)
 local FFlagAppChatPerfTrackingModule = require(AppChat.Flags.FFlagAppChatPerfTracking)
 local TrackChatLandingModule = require(AppChat.Telemetry.trackChatLanding)
 
-return require(Parent.Rodux).createReducer("NotSet", {
+return RoduxModule.createReducer("NotSet", {
 	[require(AppChat.Actions.EnteredChatFromEntryPoint).name] = function(_, p1)
 		-- upvalues: FFlagAppChatPerfTrackingModule (copy), TrackChatLandingModule (copy)
 		if FFlagAppChatPerfTrackingModule then

@@ -1,6 +1,7 @@
 ﻿local CorePackages = game:GetService("CorePackages")
 local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDependencies)
 local Roact = InGameMenuDependenciesModule.Roact
+local RoactRodux = InGameMenuDependenciesModule.RoactRodux
 local T = InGameMenuDependenciesModule.t
 local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
 local Parent = script.Parent.Parent
@@ -16,7 +17,7 @@ local StrictInterfaceResult = T.strictInterface({
 	screenSize = T.Vector2
 })
 
-return InGameMenuDependenciesModule.RoactRodux.UNSTABLE_connect2(function(p1, _)
+return RoactRodux.UNSTABLE_connect2(function(p1, _)
 	return {
 		occupiedWidth = 464,
 		currentPage = p1.menuPage,

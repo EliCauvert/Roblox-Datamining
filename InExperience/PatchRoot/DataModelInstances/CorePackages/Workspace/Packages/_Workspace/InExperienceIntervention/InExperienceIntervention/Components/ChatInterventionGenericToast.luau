@@ -2,8 +2,9 @@
 local Parent = InExperienceIntervention.Parent
 local ReactModule = require(Parent.React)
 local UIBloxModule = require(Parent.UIBlox)
+local FoundationModule = require(Parent.Foundation)
 local Images = UIBloxModule.App.ImageSet.Images
-local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 local InExperienceInterventionAnalyticsModule = require(InExperienceIntervention.InExperienceInterventionAnalytics)
 local Toast = UIBloxModule.App.Dialog.Toast
 local InExperienceInterventionToastDuration = game:DefineFastInt("InExperienceInterventionToastDuration", 5)

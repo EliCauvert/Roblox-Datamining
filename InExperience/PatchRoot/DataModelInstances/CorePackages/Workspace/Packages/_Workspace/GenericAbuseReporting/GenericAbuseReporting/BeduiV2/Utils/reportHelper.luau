@@ -2,6 +2,7 @@
 local Parent = GenericAbuseReporting.Parent
 local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
+local GetHumanoidDescriptionModule = require(Parent.GetHumanoidDescription)
 local PromiseModule = require(Parent.Promise)
 local _ = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
 local FFlagEnableChatReportingTextChannelTag = require(Parent.SharedFlags).FFlagEnableChatReportingTextChannelTag
@@ -9,7 +10,7 @@ local GetFFlagGetHumanoidDescriptionUpdatesV2EFunction = require(Parent.SharedFl
 local FFlagAbuseReportForwardCustomTagFieldsModule = require(GenericAbuseReporting.Flags.FFlagAbuseReportForwardCustomTagFields)
 local FFlagGenericAbuseReportingAvatarHumanoidDescriptionModule = require(GenericAbuseReporting.Flags.FFlagGenericAbuseReportingAvatarHumanoidDescription)
 local AppendReportAnythingTagsFunction = require(GenericAbuseReporting.BeduiV2.Utils.appendReportAnythingTags).appendReportAnythingTags
-local GetHumanoidDescriptionFunction = require(Parent.GetHumanoidDescription).getHumanoidDescription
+local GetHumanoidDescriptionFunction = GetHumanoidDescriptionModule.getHumanoidDescription
 
 local function tag(AbuseVector)
 	return if AbuseVector then { valueList = { { data = AbuseVector } } } else nil

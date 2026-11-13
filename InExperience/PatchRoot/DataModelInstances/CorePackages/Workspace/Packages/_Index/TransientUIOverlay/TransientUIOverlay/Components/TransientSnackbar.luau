@@ -3,14 +3,14 @@ local Parent = TransientUIOverlay.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local FoundationProvider = FoundationModule.FoundationProvider
-local Snackbar = FoundationModule.Snackbar
+local SnackbarDEPRECATED = FoundationModule.Snackbar_DEPRECATED
 local View = FoundationModule.View
 local UsePreferencesFunction = FoundationModule.Hooks.usePreferences
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local _ = require(TransientUIOverlay.Types)
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), UsePreferencesFunction (copy), ReactModule (copy), Snackbar (copy), View (copy), FoundationProvider (copy)
+	-- upvalues: UseTokensFunction (copy), UsePreferencesFunction (copy), ReactModule (copy), SnackbarDEPRECATED (copy), View (copy), FoundationProvider (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UsePreferencesResult = UsePreferencesFunction()
 	local Element = ReactModule.createElement(View, {
@@ -18,7 +18,7 @@ return function(p1)
 		testId = "transient-snackbar-anchor",
 		Position = UDim2.new(0.5, 0, 1, -UseTokensResult.Padding.XLarge)
 	}, {
-		Snackbar = ReactModule.createElement(Snackbar, {
+		Snackbar = ReactModule.createElement(SnackbarDEPRECATED, {
 			LayoutOrder = 1,
 			testId = "transient-snackbar",
 			title = p1.title,

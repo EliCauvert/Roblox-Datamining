@@ -9,6 +9,10 @@ local InlineLayout = require(Parent.InlineLayout).Components.InlineLayout
 local NodeTypeModule = require(InlineRichText.Enums.NodeType)
 local ParseXmlModule = require(InlineRichText.Parser.parseXml)
 local ProcessChildrenModule = require(InlineRichText.Renderer.processChildren)
+local TextSpanRendererModule = require(InlineRichText.Renderer.NodeRenderers.TextSpanRenderer)
+local LinkRendererModule = require(InlineRichText.Renderer.NodeRenderers.LinkRenderer)
+local IconRendererModule = require(InlineRichText.Renderer.NodeRenderers.IconRenderer)
+local HardbreakRendererModule = require(InlineRichText.Renderer.NodeRenderers.HardbreakRenderer)
 local UseLinkerOnActivatedModule = require(InlineRichText.Linker.useLinkerOnActivated)
 local LinkTypeModule = require(InlineRichText.Enums.LinkType)
 local LinkBehaviorModule = require(InlineRichText.Enums.LinkBehavior)
@@ -45,10 +49,10 @@ local function createDefaultRootNode(Text)
 end
 
 local config = {
-	TEXT_SPAN = require(InlineRichText.Renderer.NodeRenderers.TextSpanRenderer),
-	LINK = require(InlineRichText.Renderer.NodeRenderers.LinkRenderer),
-	ICON = require(InlineRichText.Renderer.NodeRenderers.IconRenderer),
-	BREAK = require(InlineRichText.Renderer.NodeRenderers.HardbreakRenderer)
+	TEXT_SPAN = TextSpanRendererModule,
+	LINK = LinkRendererModule,
+	ICON = IconRendererModule,
+	BREAK = HardbreakRendererModule
 }
 local config1 = {
 	[LinkTypeModule.Http] = LinkBehaviorModule.Webview,

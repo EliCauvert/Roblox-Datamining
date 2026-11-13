@@ -30,5 +30,12 @@ return {
 		-- upvalues: GetNotificationsStoreModule (copy)
 		return GetNotificationsStoreModule(false).getActiveForSlot(p1)
 	end,
+	setInExperienceShopOpen = function(p1)
+		-- upvalues: GetNotificationsStoreModule (copy)
+		GetNotificationsStoreModule(false).setInExperienceShopOpen(p1)
+	end,
+	Flags = {
+		FFlagEnableNotificationsOrchestratorUnifiedLogging = require(script.Flags.FFlagEnableNotificationsOrchestratorUnifiedLogging)
+	},
 	["jest.config"] = script["jest.config"]
 }

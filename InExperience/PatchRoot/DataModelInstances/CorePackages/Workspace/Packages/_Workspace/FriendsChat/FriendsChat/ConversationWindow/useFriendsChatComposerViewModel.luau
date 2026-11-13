@@ -2,11 +2,12 @@
 local Parent = FriendsChat.Parent
 local ReactModule = require(Parent.React)
 local _ = require(Parent.Foundation)
+local ExpChatSharedModule = require(Parent.ExpChatShared)
 local AutocompleteModule = require(Parent.ChatUIPrimitives.Autocomplete)
 local _ = require(Parent.ChatUIPrimitives.MessageComposer)
 local MessageDraftModelModule = require(Parent.ChatUIPrimitives.MessageDraftModel)
 local FFlagFriendsChatVoiceTypingModule = require(FriendsChat.Flags.FFlagFriendsChatVoiceTyping)
-local NewResult = require(Parent.ExpChatShared).Logger:new(script.Name)
+local NewResult = ExpChatSharedModule.Logger:new(script.Name)
 
 return function(p1)
 	-- upvalues: ReactModule (copy), MessageDraftModelModule (copy), AutocompleteModule (copy), FFlagFriendsChatVoiceTypingModule (copy), NewResult (copy)

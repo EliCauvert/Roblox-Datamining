@@ -1,5 +1,6 @@
 ﻿local ReactSceneUnderstanding = script:FindFirstAncestor("ReactSceneUnderstanding")
 local UserInputService = game:GetService("UserInputService")
+local ReactUtilsModule = require(ReactSceneUnderstanding.Parent.ReactUtils)
 local ReactModule = require(ReactSceneUnderstanding.Parent.React)
 local EnumsModule = require(ReactSceneUnderstanding.enums)
 local UseCurrentCameraModule = require(ReactSceneUnderstanding.useCurrentCamera)
@@ -7,7 +8,7 @@ local UseCallbackFunction = ReactModule.useCallback
 local UseEffectFunction = ReactModule.useEffect
 local UseRefFunction = ReactModule.useRef
 local UseStateFunction = ReactModule.useState
-local UseEventConnectionFunction = require(ReactSceneUnderstanding.Parent.ReactUtils).useEventConnection
+local UseEventConnectionFunction = ReactUtilsModule.useEventConnection
 
 return function(p1)
 	-- upvalues: UseCurrentCameraModule (copy), UseStateFunction (copy), EnumsModule (copy), UseRefFunction (copy), UseCallbackFunction (copy), UseEventConnectionFunction (copy), UserInputService (copy), UseEffectFunction (copy)

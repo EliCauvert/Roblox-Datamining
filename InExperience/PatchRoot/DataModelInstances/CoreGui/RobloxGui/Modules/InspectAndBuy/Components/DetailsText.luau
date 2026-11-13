@@ -5,6 +5,7 @@ local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
 local CryoModule = require(CorePackages.Packages.Cryo)
 local UIBloxModule = require(CorePackages.Packages.UIBlox)
 local AppFonts = require(CorePackages.Workspace.Packages.Style).AppFonts
+local Images = UIBloxModule.App.ImageSet.Images
 local IconSize = UIBloxModule.App.Constant.IconSize
 local NotificationModule = require(Parent.Components.Notification)
 local FavoritesModule = require(Parent.Components.Favorites)
@@ -13,7 +14,7 @@ local ColorsModule = require(Parent.Colors)
 local ConstantsModule = require(Parent.Constants)
 local GetSelectionImageObjectRegularModule = require(Parent.getSelectionImageObjectRegular)
 local InspectAndBuyContextModule = require(Parent.Components.InspectAndBuyContext)
-local IconsStatusPremium = UIBloxModule.App.ImageSet.Images["icons/status/premium"]
+local IconsStatusPremium = Images["icons/status/premium"]
 local DetailsText = RoactModule.PureComponent:extend("DetailsText")
 
 function DetailsText.init(p1)

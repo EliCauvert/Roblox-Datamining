@@ -1,12 +1,14 @@
 ﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
 local ReactModule = require(Parent.React)
+local RoduxModule = require(Parent.Rodux)
 local FoundationModule = require(Parent.Foundation)
 local FoundationProvider = FoundationModule.FoundationProvider
 local ColorMode = FoundationModule.Enums.ColorMode
 local Device = FoundationModule.Enums.Device
+local ReactRobloxModule = require(Parent.Dev.ReactRoblox)
 local RoactRoduxModule = require(Parent.Dev.RoactRodux)
 local config = { Light = ColorMode.Light, Dark = ColorMode.Dark }
-local NewResult = require(Parent.Rodux).Store.new(function(p1)
+local NewResult = RoduxModule.Store.new(function(p1)
 	return p1
 end, {
 	ScreenSize = Vector2.new(1920, 1080),
@@ -26,7 +28,7 @@ end, {
 return {
 	name = "ServerDrivenUiContent",
 	roact = ReactModule,
-	reactRoblox = require(Parent.Dev.ReactRoblox),
+	reactRoblox = ReactRobloxModule,
 	mapStory = function(p1)
 		-- upvalues: ReactModule (copy), RoactRoduxModule (copy), NewResult (copy), FoundationProvider (copy), config (copy), Device (copy)
 		return function(p2)

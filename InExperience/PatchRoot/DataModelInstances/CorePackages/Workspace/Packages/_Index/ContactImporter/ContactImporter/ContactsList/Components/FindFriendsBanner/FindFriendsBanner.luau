@@ -8,10 +8,11 @@ local Button = UIBlox.App.Button.Button
 local ButtonType = UIBlox.App.Button.Enum.ButtonType
 local IconSize = UIBlox.App.Constant.IconSize
 local StandardButtonSize = UIBlox.App.Button.Enum.StandardButtonSize
+local Images = UIBlox.App.ImageSet.Images
 local ImageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
 local StyledTextLabel = UIBlox.App.Text.StyledTextLabel
 local TextKeysModule = require(ContactImporter.Common.TextKeys)
-local IconsGraphicContactsLarge = UIBlox.App.ImageSet.Images["icons/graphic/contacts_large"]
+local IconsGraphicContactsLarge = Images["icons/graphic/contacts_large"]
 
 return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), UseStyleFunction (copy), React (copy), ImageSetLabel (copy), IconSize (copy), IconsGraphicContactsLarge (copy), StyledTextLabel (copy), Button (copy), ButtonType (copy), StandardButtonSize (copy)

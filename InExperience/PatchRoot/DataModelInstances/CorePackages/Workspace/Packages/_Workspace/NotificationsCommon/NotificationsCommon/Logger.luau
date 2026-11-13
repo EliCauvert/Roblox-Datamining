@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("NotificationsCommon").Parent.Loggers).Logger:new("NotificationsCommon")

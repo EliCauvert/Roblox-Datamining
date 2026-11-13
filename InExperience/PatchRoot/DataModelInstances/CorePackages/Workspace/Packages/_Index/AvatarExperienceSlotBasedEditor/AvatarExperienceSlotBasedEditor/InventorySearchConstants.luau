@@ -2,6 +2,7 @@
 local Parent = AvatarExperienceSlotBasedEditor.Parent
 local AXCommonModule = require(Parent.AXCommon)
 local AvatarExperienceModelModule = require(Parent.AvatarExperienceModel)
+local ASSETTYPEIDSTRINGTONAME = AXCommonModule.Constants.ASSET_TYPE_ID_STRING_TO_NAME
 local ASSETTYPENAMETOIDSTRING = AXCommonModule.Constants.ASSET_TYPE_NAME_TO_ID_STRING
 local InventoryOutfitTypeToInventoryTypeId = AvatarExperienceModelModule.Constants.InventoryOutfitTypeToInventoryTypeId
 local InventoryOutfitType = AvatarExperienceModelModule.Enums.InventoryOutfitType
@@ -13,7 +14,7 @@ local config = {
 }
 local AssetSubtypes = {}
 
-for i, value in AXCommonModule.Constants.ASSET_TYPE_ID_STRING_TO_NAME do
+for i, value in ASSETTYPEIDSTRINGTONAME do
 	if not config[i] then
 		AssetSubtypes[tonumber(i)] = value
 	end

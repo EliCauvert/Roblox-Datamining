@@ -8,6 +8,7 @@ local FFlagChatInputBarGuardInvalidUtf8 = require(Parent.SharedFlags).FFlagChatI
 local FFlagExpChatHidePlaceholderUnderOverlayModule = require(ChatUIPrimitives.Flags.FFlagExpChatHidePlaceholderUnderOverlay)
 local FFlagExpChatComposerKeepTrayEntryMountedModule = require(ChatUIPrimitives.Flags.FFlagExpChatComposerKeepTrayEntryMounted)
 local FFlagExpChatComposerKeepTrayEntryOnDisabledOverlayModule = require(ChatUIPrimitives.Flags.FFlagExpChatComposerKeepTrayEntryOnDisabledOverlay)
+local FFlagExpChatComposerReportFocusAfterPickModule = require(ChatUIPrimitives.Flags.FFlagExpChatComposerReportFocusAfterPick)
 local GetTextLengthIfValidUtf8Module = require(script.Parent.getTextLengthIfValidUtf8)
 local ChannelChipModule = require(script.Parent.ChannelChip)
 local _ = require(ChatUIPrimitives.universal.Autocomplete.AutocompleteTypes)
@@ -433,7 +434,7 @@ local function renderComposer(p1)
 end
 
 return ReactModule.memo(function(Props)
-	-- upvalues: FoundationModule (copy), ReactModule (copy), ReactIsModule (copy), deriveBackgroundStyle (copy), deriveTransparency (copy), UseChatAutocompleteEngineModule (copy), UseAutocompleteSourcesModule (copy), FFlagChatInputBarGuardInvalidUtf8 (copy), GetTextLengthIfValidUtf8Module (copy), UseExpressionTrayModule (copy), ExpressionTrayViewModule (copy), FFlagExpChatComposerKeepTrayEntryOnDisabledOverlayModule (copy), FFlagExpChatComposerKeepTrayEntryMountedModule (copy), renderComposer (copy), renderLegacy (copy)
+	-- upvalues: FoundationModule (copy), ReactModule (copy), ReactIsModule (copy), deriveBackgroundStyle (copy), deriveTransparency (copy), UseChatAutocompleteEngineModule (copy), UseAutocompleteSourcesModule (copy), FFlagExpChatComposerReportFocusAfterPickModule (copy), FFlagChatInputBarGuardInvalidUtf8 (copy), GetTextLengthIfValidUtf8Module (copy), UseExpressionTrayModule (copy), ExpressionTrayViewModule (copy), FFlagExpChatComposerKeepTrayEntryOnDisabledOverlayModule (copy), FFlagExpChatComposerKeepTrayEntryMountedModule (copy), renderComposer (copy), renderLegacy (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local ThemedColors = Props.themedColors
 	local SurfaceColor3 = if ThemedColors then UseTokensResult.Color.Surface.Surface_100.Color3 else UseTokensResult.DarkMode.Surface.Surface_100.Color3
@@ -503,7 +504,7 @@ return ReactModule.memo(function(Props)
 	local TextBoxRef = Props.textBoxRef or UseRefResult
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseChatAutocompleteEngineModuleResult = UseChatAutocompleteEngineModule(TextBoxRef, Props.autocomplete)
-	local UseAutocompleteSourcesModuleResult = UseAutocompleteSourcesModule(TextBoxRef, Props.autocompleteOptions)
+	local UseAutocompleteSourcesModuleResult = UseAutocompleteSourcesModule(TextBoxRef, Props.autocompleteOptions, nil, if FFlagExpChatComposerReportFocusAfterPickModule then Props.onFocusGained else nil)
 	local UseChatAutocompleteEngineModuleResult1 = if Props.autocompleteOptions == nil then UseChatAutocompleteEngineModuleResult else UseAutocompleteSourcesModuleResult
 	local UseRefResult11 = ReactModule.useRef(Props.defaultValue or "")
 	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): boolean

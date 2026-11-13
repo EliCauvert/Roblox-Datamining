@@ -6,6 +6,7 @@ local RoactNavigationModule = require(Parent.RoactNavigation)
 local SignalsReactModule = require(Parent.SignalsReact)
 local AppSplitViewModule = require(Parent.AppSplitView)
 local ViewState = require(Parent.Navigation).ViewState
+local Constants = require(Parent.NavigationRodux).Constants
 local SplitPaneContextModule = require(script.Parent.Parent.Context.SplitPaneContext)
 local SplitPaneStoreModule = require(script.Parent.Parent.Stores.SplitPaneStore)
 local UseInitializeSplitPaneTelemetrySessionModule = require(script.Parent.useInitializeSplitPaneTelemetrySession)
@@ -13,7 +14,7 @@ local ComputeSplitEligibilityModule = require(script.Parent.Parent.Utils.compute
 local SplitPaneVariantModule = require(script.Parent.Parent.Utils.SplitPaneVariant)
 local SupportPaneMode = AppSplitViewModule.Enums.SupportPaneMode
 local SplitPaneSlot = AppSplitViewModule.Enums.SplitPaneSlot
-local TempRnSwitchNavigatorName = require(Parent.NavigationRodux).Constants.TempRnSwitchNavigatorName
+local TempRnSwitchNavigatorName = Constants.TempRnSwitchNavigatorName
 
 return function(Entry, p1: number)
 	-- upvalues: SplitPaneStoreModule (copy), SignalsReactModule (copy), FFlagEnableSplitPaneStackFallbackFix (copy), ComputeSplitEligibilityModule (copy), ReactModule (copy), SplitPaneContextModule (copy), TempRnSwitchNavigatorName (copy), SplitPaneVariantModule (copy), SupportPaneMode (copy), SplitPaneSlot (copy), ViewState (copy), RoactNavigationModule (copy), FFlagEnableSplitPaneTelemetry (copy), UseInitializeSplitPaneTelemetrySessionModule (copy)

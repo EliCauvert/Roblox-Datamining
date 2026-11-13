@@ -1,7 +1,8 @@
 ﻿local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
 local ReactModule = require(Parent.React)
+local AvatarExperienceNavigationModule = require(Parent.AvatarExperienceNavigation)
 local UseMakeupFtuxModule = require(script.Parent.useMakeupFtux)
-local AvatarScreen = require(Parent.AvatarExperienceNavigation).Enums.AvatarScreen
+local AvatarScreen = AvatarExperienceNavigationModule.Enums.AvatarScreen
 local AXMakeupReleaseFtuxPromptDelayMS = game:DefineFastInt("AXMakeupReleaseFtuxPromptDelayMS", 500)
 
 return function(p1, p2, Callback)

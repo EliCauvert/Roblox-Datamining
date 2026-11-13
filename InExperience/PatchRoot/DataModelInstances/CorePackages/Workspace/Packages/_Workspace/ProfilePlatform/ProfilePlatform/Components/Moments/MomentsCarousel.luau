@@ -1,6 +1,8 @@
 ﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
 local Parent = ProfilePlatform.Parent
 local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local NavigationModule = require(Parent.Navigation)
 local _ = require(Parent.DataHydration.MomentsStoreTypes)
 local MomentTileModule = require(script.Parent.MomentTile)
 local MomentsCarouselMediaProviderModule = require(script.Parent.MomentsCarouselMediaProvider)
@@ -11,8 +13,8 @@ local UseProfileFormFactorModule = require(ProfilePlatform.Hooks.useProfileFormF
 local EnumsModule = require(ProfilePlatform.Common.Enums)
 local FFlagProfileMomentSceneOutfitPoster = require(Parent.SharedFlags).FFlagProfileMomentSceneOutfitPoster
 local CollectionCarousel = require(Parent.CollectionViews).CollectionCarousel
-local UseNavigationFocusFunction = require(Parent.Navigation).useNavigationFocus
-local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local UseNavigationFocusFunction = NavigationModule.useNavigationFocus
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
 return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseProfileFormFactorModule (copy), EnumsModule (copy), UseNavigationFocusFunction (copy), UseDynamicSizeMarginModule (copy), ReactModule (copy), FFlagProfileMomentSceneOutfitPoster (copy), IsPlayableVideoMomentModule (copy), GetVisibleTileRangeModule (copy), MomentTileModule (copy), CollectionCarousel (copy), MomentsCarouselMediaProviderModule (copy)

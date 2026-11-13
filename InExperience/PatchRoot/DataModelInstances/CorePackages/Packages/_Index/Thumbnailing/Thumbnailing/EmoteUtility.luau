@@ -539,8 +539,8 @@ local function getArmRestGeometry(Object, Text)
 		C0 = inPart(Text3.Attachment0)
 		C1 = inPart(Text3.Attachment1)
 	end
-	local C0_1 = nil
 	local C1_1 = nil
+	local C0_1 = nil
 	if Text6:IsA("Motor6D") then
 		C0_1 = Text6.C0
 		C1_1 = Text6.C1
@@ -1357,18 +1357,18 @@ local function loadKeyframesForPoseR15(p8, OriginalAnimationAssetId, AnimationAs
 				local AnimationAndIsIdle1, _ = getAnimationAndIsIdle(AnimationAssetIdOrUrl)
 				
 				if AnimationAndIsIdle1 == nil then
-					v6 = nil
 					v7 = nil
+					v6 = nil
 				else
 					assert(AnimationAndIsIdle1, "animation is non-nil. Silence type checker.")
-					v6, v269 = getThumbnailKeyframeFromAnimationOrUrl(AnimationAndIsIdle1, 0)
+					v7, v269 = getThumbnailKeyframeFromAnimationOrUrl(AnimationAndIsIdle1, 0)
 				end
 			else
-				v6 = nil
 				v7 = nil
+				v6 = nil
 			end
-			ThumbnailKeyframe = v6
-			AnimationRigData = v7
+			ThumbnailKeyframe = v7
+			AnimationRigData = v6
 		end
 	end
 	config.poseKeyframe = MainThumbnailKeyframe
@@ -1500,9 +1500,10 @@ function EmoteUtilityModule.ThumbnailZoomExtents(Model: Model, Degrees: number, 
 		LookVector = HumanoidRootPart.CFrame.LookVector
 	end
 	local _CFrame = CFrame.new(ModelCFrame.Position + LookVector * 5, ModelCFrame.Position)
+	local NewPosition = ModelCFrame.Position + Vector3.new(X, -p8, 0)
 	local ExtentsSize = Model:GetExtentsSize()
 	
-	return _CFrame - _CFrame.Position + (ModelCFrame.Position + Vector3.new(X, -p8, 0)) + LookVector * (math.sqrt(ExtentsSize.X ^ 2 + ExtentsSize.Y ^ 2 + ExtentsSize.Z ^ 2) / 2 * (1 / math.tan(math.rad(Degrees) / 2)) * (1 / p9))
+	return _CFrame - _CFrame.Position + NewPosition + LookVector * (math.sqrt(ExtentsSize.X ^ 2 + ExtentsSize.Y ^ 2 + ExtentsSize.Z ^ 2) / 2 * (1 / math.tan(math.rad(Degrees) / 2)) * (1 / p9))
 end
 
 return EmoteUtilityModule

@@ -217,10 +217,10 @@ function MessageContextMenu(p1)
 		UseResult12, UnionResult.userOwnsMessage
 	})
 	local Offset = #UseMemoResult * 56
-	local ScreenSize = nil
-	local BorderCornerRadius = nil
-	local _Vector2 = nil
 	local _UDim = nil
+	local BorderCornerRadius = nil
+	local ScreenSize = nil
+	local _Vector2 = nil
 	local _UDim1 = nil
 	
 	if UnitTestDeviceType == DeviceType.Desktop or UnitTestDeviceType == DeviceType.Tablet then

@@ -2,6 +2,7 @@
 local Parent1 = Parent.Parent
 local CaptureService = game:GetService("CaptureService")
 local Default = require(Parent1.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
+local Localization = require(Parent1.RobloxAppLocales).Localization
 local SocialStopwatchModule = require(Parent1.SocialStopwatch)
 local CaptureTypeModule = require(Parent.Enums.CaptureType)
 local ConstantsModule = require(Parent.Constants)
@@ -16,16 +17,16 @@ local FFlagUseRbxstorageInGalleryModule = require(Parent.Flags.FFlagUseRbxstorag
 local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 local ShareLinksNetworking = NetworkingModule.ShareLinksNetworking
 local LinkType = NetworkingModule.ShareLinksRodux.Enums.LinkType
-local NewResult = require(Parent1.RobloxAppLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId)
+local NewLocalization = Localization.new(game:GetService("LocalizationService").RobloxLocaleId)
 
 local function shareImage(Image, Url)
-	-- upvalues: Default (copy), ConstantsModule (copy), NewResult (copy)
+	-- upvalues: Default (copy), ConstantsModule (copy), NewLocalization (copy)
 	if Default then
 		assert(Default ~= nil, "ExternalContentSharingProtocol is required")
 		Default:shareImage({
 			context = ConstantsModule.CapturesContext,
 			image = Image,
-			shareSheetTitle = NewResult:Format("Feature.Captures.Action.ShareYourCapture"),
+			shareSheetTitle = NewLocalization:Format("Feature.Captures.Action.ShareYourCapture"),
 			url = Url
 		})
 		
@@ -34,12 +35,12 @@ local function shareImage(Image, Url)
 end
 
 local function shareVideo(Video, Url)
-	-- upvalues: Default (copy), ConstantsModule (copy), NewResult (copy)
+	-- upvalues: Default (copy), ConstantsModule (copy), NewLocalization (copy)
 	if Default then
 		assert(Default ~= nil, "ExternalContentSharingProtocol is required")
 		Default:shareVideo({
 			context = ConstantsModule.CapturesContext,
-			shareSheetTitle = NewResult:Format("Feature.Captures.Action.ShareYourCapture"),
+			shareSheetTitle = NewLocalization:Format("Feature.Captures.Action.ShareYourCapture"),
 			url = Url,
 			video = Video
 		})

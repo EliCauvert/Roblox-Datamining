@@ -47,7 +47,9 @@ return function(p1)
 	emitCompletionTelemetry(UpsellPurchaseSucceeded)
 	
 	if FFlagBustAvatarCacheAfterSubscriptionPurchaseModule and UpsellPurchaseSucceeded == RobloxSubscriptionFlowCompleteReasonModule.UpsellPurchaseSucceeded then
-		game:GetService("AvatarEditorService"):BustAvatarFetchCache()
+		pcall(function()
+			game:GetService("AvatarEditorService"):BustAvatarFetchCache()
+		end)
 	end
 	GetResult.triggerOnFlowComplete(UpsellPurchaseSucceeded)
 	CleanupSubscriptionFlowModule()

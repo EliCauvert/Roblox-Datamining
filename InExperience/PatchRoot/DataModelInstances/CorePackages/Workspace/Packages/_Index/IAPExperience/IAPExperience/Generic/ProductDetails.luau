@@ -4,6 +4,7 @@ local FormatNumberModule = require(Parent.Utility.formatNumber)
 local LoggerModule = require(Parent.Utility.logger)
 local ReactModule = require(Parent1.React)
 local UIBloxModule = require(Parent1.UIBlox)
+local Images = UIBloxModule.App.ImageSet.Images
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local FoundationModule = require(Parent1.Foundation)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
@@ -16,7 +17,7 @@ local LocalizationService = game:GetService("LocalizationService")
 local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
 local Default = require(Parent1.LoggingProtocol).default
 local VirtualItemBadgeShownCounter = require(Parent.Generic.Events.VirtualItemBadgeCounter).VirtualItemBadgeShownCounter
-local IconsStatusImageunavailable = UIBloxModule.App.ImageSet.Images["icons/status/imageunavailable"]
+local IconsStatusImageunavailable = Images["icons/status/imageunavailable"]
 
 local function _(Text: string): string
 	return if #Text > 50 then Text:sub(1, 50) .. "..." else Text

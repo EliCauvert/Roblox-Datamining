@@ -11,11 +11,12 @@ local Text = FoundationModule.Text
 local Image = FoundationModule.Image
 local PopoverSide = FoundationModule.Enums.PopoverSide
 local TraversalHistoryMenuModule = require(RobloxGui.Modules.Settings.Components.Traversal.TraversalHistoryMenu)
+local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
 local FFlagAddTraversalHistoryReactMenuButtonsModule = require(RobloxGui.Modules.Settings.Flags.FFlagAddTraversalHistoryReactMenuButtons)
 local FIntRelocateMobileMenuButtonsVariantModule = require(RobloxGui.Modules.Settings.Flags.FIntRelocateMobileMenuButtonsVariant)
 local MenuButtonsIncreaseIconSize = game:DefineFastFlag("MenuButtonsIncreaseIconSize", false)
 local FFlagIEMFocusNavSupportNewButtonsModule = require(RobloxGui.Modules.Settings.Flags.FFlagIEMFocusNavSupportNewButtons)
-local FFlagGamepadIconSupportCheck = require(CorePackages.Workspace.Packages.SharedFlags).FFlagGamepadIconSupportCheck
+local FFlagGamepadIconSupportCheck = SharedFlagsModule.FFlagGamepadIconSupportCheck
 
 local function _(p1: number): number
 	return p1 + (1 - p1) * 0.5

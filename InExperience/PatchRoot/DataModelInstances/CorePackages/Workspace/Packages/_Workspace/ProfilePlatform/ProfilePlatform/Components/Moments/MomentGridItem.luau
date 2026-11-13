@@ -2,8 +2,10 @@
 local Parent = ProfilePlatform.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
+local BuilderIconsModule = require(Parent.BuilderIcons)
 local MomentsCommonModule = require(Parent.MomentsCommon)
 local _ = require(Parent.DataHydration.MomentsStoreTypes)
+local SignalsReactModule = require(Parent.SignalsReact)
 local ToMediaItemModule = require(Parent.Moments.ToMediaItem)
 local UseSceneOutfitMediaItemModule = require(script.Parent.useSceneOutfitMediaItem)
 local SceneOutfitPosterModule = require(script.Parent.SceneOutfitPoster)
@@ -16,7 +18,7 @@ local View = FoundationModule.View
 local ControlState = FoundationModule.Enums.ControlState
 local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
 local UseTokensFunction = FoundationModule.Hooks.useTokens
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseSignalStateFunction = SignalsReactModule.useSignalState
 local Analytics = MomentsCommonModule.Analytics
 local GetMomentsCapabilitiesFunction = MomentsCommonModule.Stores.GetMomentsCapabilities
 local FireAnalyticsEventFunction = Analytics.fireAnalyticsEvent
@@ -24,7 +26,7 @@ local EventNames = Analytics.EventNames
 local MakeProfileTileFieldsModule = require(ProfilePlatform.Analytics.makeProfileTileFields)
 local MomentMediaTile = MomentsCommonModule.Media.MomentMediaTile
 local GradientBackdrop = MomentsCommonModule.Components.GradientBackdrop
-local ThumbUp = require(Parent.BuilderIcons).Icon.ThumbUp
+local ThumbUp = BuilderIconsModule.Icon.ThumbUp
 
 return function(p1)
 	-- upvalues: UseTokensFunction (copy), FFlagMomentsEngagementMetricsFeature (copy), UseSignalStateFunction (copy), GetMomentsCapabilitiesFunction (copy), ReactModule (copy), MakeProfileTileFieldsModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), ToMediaItemModule (copy), FFlagProfileMomentSceneOutfitPoster (copy), UseSceneOutfitMediaItemModule (copy), ControlState (copy), View (copy), StateLayerAffordance (copy), MomentMediaTile (copy), SceneOutfitPosterModule (copy), GradientBackdrop (copy), MomentEngagementCountModule (copy), ThumbUp (copy), FFlagMomentsPostFeedback (copy), PostStatusBadgeModule (copy)

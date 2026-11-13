@@ -1,5 +1,6 @@
 ﻿local Parent = script.Parent
 local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
 local SharedModule = require(Parent.Shared)
 local RoactTreeModule = require(script.RoactTree)
 
@@ -24,5 +25,5 @@ return {
 	Change = SharedModule.Change,
 	createBinding = ReactModule.createBinding,
 	joinBindings = ReactModule.joinBindings,
-	act = require(Parent.ReactRoblox).act
+	act = ReactRobloxModule.act
 }

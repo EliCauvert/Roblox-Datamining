@@ -5,6 +5,7 @@ local ExtraKeysEnumModule = require(Parent.Enums.ExtraKeysEnum)
 local TouchControlsEnumModule = require(Parent.Enums.TouchControlsEnum)
 local Enums = FoundationModule.Enums
 local IconName = FoundationModule.Enums.IconName
+local FFlagHelpPageCCLModule = require(Parent.Flags.FFlagHelpPageCCL)
 local FFlagRenameHelpToControls = require(Parent1.SharedFlags).FFlagRenameHelpToControls
 local config = {
 	ZOOM = Enums.IconName.HandDualArrows,
@@ -183,7 +184,7 @@ return {
 			NO_PADDING_CUTOFF_Y = 650,
 			COL_SIZE = 0.25,
 			COL_SIZE_PORTRAIT = 0.5,
-			LEFT_COL_SCALE = if require(Parent.Flags.FFlagHelpPageCCL) then 0.25 else 0.285
+			LEFT_COL_SCALE = if FFlagHelpPageCCLModule then 0.25 else 0.285
 		},
 		TOUCH_ENUM_TO_ICON = {
 			[TouchControlsEnumModule.TopLeft] = config.ZOOM,

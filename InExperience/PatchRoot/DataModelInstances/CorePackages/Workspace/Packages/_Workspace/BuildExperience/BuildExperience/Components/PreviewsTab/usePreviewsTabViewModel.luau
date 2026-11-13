@@ -1,5 +1,7 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
+local GameDetailModule = require(Parent.GameDetail)
+local LocalizationModule = require(Parent.Localization)
 local NavigationModule = require(Parent.Navigation)
 local ReactModule = require(Parent.React)
 local UseStoreFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useStore
@@ -9,9 +11,9 @@ local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local _ = require(script.Parent.PreviewsTabView)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 local _ = require(script.Parent.usePreviewResults)
-local OpenGameDetailsFunction = require(Parent.GameDetail).OpenGameDetails
+local OpenGameDetailsFunction = GameDetailModule.OpenGameDetails
 local GetRootNavigationFunction = NavigationModule.getRootNavigation
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local UseNavigationFunction = NavigationModule.useNavigation
 
 return function(p1)

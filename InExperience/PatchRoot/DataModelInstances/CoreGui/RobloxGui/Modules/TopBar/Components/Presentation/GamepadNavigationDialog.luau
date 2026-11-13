@@ -7,11 +7,14 @@ local ReactModule = require(CorePackages.Packages.React)
 local _ = require(CorePackages.Packages.Roact)
 local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
 local _ = require(CorePackages.Packages.t)
+local RoactAppExperimentModule = require(CorePackages.Packages.RoactAppExperiment)
 local _ = require(CorePackages.Packages.UIBlox).Core.Style.withStyle
 local GamepadNavigationDialogShowCounterModule = require(script.GamepadNavigationDialogShowCounter)
 local Parent = script.Parent.Parent.Parent
 local SetGamepadNavigationDialogOpenModule = require(script.Parent.Parent.Parent.Actions.SetGamepadNavigationDialogOpen)
+local GetFStringGamepadNavigationDialogABTestLayerNameModule = require(Parent.Flags.GetFStringGamepadNavigationDialogABTestLayerName)
 local FFlagAlwaysShowGamepadNavigationDialogModule = require(Parent.Flags.FFlagAlwaysShowGamepadNavigationDialog)
+local FFlagTopBarDeprecateGamepadNavigationDialogRoduxModule = require(Parent.Flags.FFlagTopBarDeprecateGamepadNavigationDialogRodux)
 
 local function GamepadNavigationDialogContainer(_)
 	-- upvalues: ReactModule (copy), UserInputService (copy), GuiService (copy), GamepadNavigationDialogShowCounterModule (copy), FFlagAlwaysShowGamepadNavigationDialogModule (copy)
@@ -56,20 +59,20 @@ local function GamepadNavigationDialogContainer(_)
 	}) else nil
 end
 
-local v1 = require(Parent.Flags.GetFStringGamepadNavigationDialogABTestLayerName)()
-local v2 = require(CorePackages.Packages.RoactAppExperiment).connectUserLayer({ v1 }, function(p1, _)
-	-- upvalues: v1 (copy), FFlagAlwaysShowGamepadNavigationDialogModule (copy)
-	local v3 = p1[v1] or {}
+local FStringGamepadNavigationDialogABTestLayerNameModule = GetFStringGamepadNavigationDialogABTestLayerNameModule()
+local v1 = RoactAppExperimentModule.connectUserLayer({ FStringGamepadNavigationDialogABTestLayerNameModule }, function(p1, _)
+	-- upvalues: FStringGamepadNavigationDialogABTestLayerNameModule (copy), FFlagAlwaysShowGamepadNavigationDialogModule (copy)
+	local v2 = p1[FStringGamepadNavigationDialogABTestLayerNameModule] or {}
 	
 	return {
 		appStorageKey = "GamepadMenuVirtualCursorPromptShown",
 		maxShownCount = 1,
-		isGamepadNavigationDialogEnabled = FFlagAlwaysShowGamepadNavigationDialogModule or v3.isGamepadNavigationDialogEnabled,
-		selectButtonDismissesGamepadNavigationDialog = v3.selectButtonDismissesGamepadNavigationDialog
+		isGamepadNavigationDialogEnabled = FFlagAlwaysShowGamepadNavigationDialogModule or v2.isGamepadNavigationDialogEnabled,
+		selectButtonDismissesGamepadNavigationDialog = v2.selectButtonDismissesGamepadNavigationDialog
 	}
 end)(GamepadNavigationDialogShowCounterModule)
 
-return if require(Parent.Flags.FFlagTopBarDeprecateGamepadNavigationDialogRodux) then GamepadNavigationDialogContainer else RoactRoduxModule.connect(function(p1)
+return if FFlagTopBarDeprecateGamepadNavigationDialogRoduxModule then GamepadNavigationDialogContainer else RoactRoduxModule.connect(function(p1)
 	return {
 		isGamepadNavigationDialogOpen = p1.displayOptions.isGamepadNavigationDialogOpen
 	}
@@ -81,4 +84,4 @@ end, function(Callback)
 			return Callback(SetGamepadNavigationDialogOpenModule(p1))
 		end
 	}
-end)(v2)
+end)(v1)

@@ -1,4 +1,5 @@
 ﻿local Parent = script.Parent.Parent
+local Context = Parent.context
 local DependenciesModule = require(Parent.dependencies)
 local React = DependenciesModule.React
 local UIBlox = DependenciesModule.UIBlox
@@ -14,9 +15,9 @@ local Images = UIBlox.App.ImageSet.Images
 local ImageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
 local IconsLogoBlock = Images["icons/logo/block"]
 local IconsCommonSafety = Images["icons/common/safety"]
-local UseNotificationCardStateModule = require(Parent.context.useNotificationCardState)
+local UseNotificationCardStateModule = require(Context.useNotificationCardState)
 
-local function v15(IdType)
+local function v16(IdType)
 	-- upvalues: TypeModule (copy), UserLibConstants (copy), EnableStreamAvatarImageUrlThumbnail (copy)
 	return if IdType == TypeModule.SENDERThumbnailTypeEnum.Game then UserLibConstants.RbxthumbTypes.GameIcon elseif IdType == TypeModule.SENDERThumbnailTypeEnum.User then UserLibConstants.RbxthumbTypes.AvatarHeadShot elseif IdType == TypeModule.SENDERThumbnailTypeEnum.Group then UserLibConstants.RbxthumbTypes.GroupIcon elseif IdType == TypeModule.SENDERThumbnailTypeEnum.Asset then UserLibConstants.RbxthumbTypes.Asset elseif IdType == TypeModule.SENDERThumbnailTypeEnum.Bundle then UserLibConstants.RbxthumbTypes.BundleThumbnail elseif IdType == TypeModule.SENDERThumbnailTypeEnum.GamePass then UserLibConstants.RbxthumbTypes.GamePass elseif EnableStreamAvatarImageUrlThumbnail and IdType == TypeModule.SENDERThumbnailTypeEnum.AvatarImageUrl then UserLibConstants.RbxthumbTypes.AvatarImageUrl else UserLibConstants.RbxthumbTypes.GameIcon
 end
@@ -27,7 +28,7 @@ local function _(p1): boolean
 end
 
 return function()
-	-- upvalues: UseNotificationCardStateModule (copy), EnableStreamAvatarImageUrlThumbnail (copy), TypeModule (copy), UseStyleFunction (copy), ConstantsModule (copy), React (copy), ImageSetLabel (copy), IconsCommonSafety (copy), IconsLogoBlock (copy), v15 (copy), UserLibConstants (copy), FFlagNotificationThumbnailUseProfileFrameThumbnailModule (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), LoadableImage (copy)
+	-- upvalues: UseNotificationCardStateModule (copy), EnableStreamAvatarImageUrlThumbnail (copy), TypeModule (copy), UseStyleFunction (copy), ConstantsModule (copy), React (copy), ImageSetLabel (copy), IconsCommonSafety (copy), IconsLogoBlock (copy), v16 (copy), UserLibConstants (copy), FFlagNotificationThumbnailUseProfileFrameThumbnailModule (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), LoadableImage (copy)
 	local Thumbnail = UseNotificationCardStateModule("thumbnail")
 	
 	if Thumbnail == nil or #Thumbnail == 0 then
@@ -83,7 +84,7 @@ return function()
 				useShimmerAnimationWhileLoading = true,
 				ZIndex = 1,
 				BackgroundColor3 = UseStyleResult.Theme.BackgroundDefault.Color,
-				Image = if EnableStreamAvatarImageUrlThumbnail and v15(ThumbnailEntry.idType) == UserLibConstants.RbxthumbTypes.AvatarImageUrl then ThumbnailEntry.id elseif FFlagNotificationThumbnailUseProfileFrameThumbnailModule then GetRbxthumbWithTypeSizeAndOptionsFunction(ThumbnailEntry.id, v15(ThumbnailEntry.idType), 150, nil, nil, ThumbnailEntry.idType == TypeModule.SENDERThumbnailTypeEnum.User or EnableStreamAvatarImageUrlThumbnail and ThumbnailEntry.idType == TypeModule.SENDERThumbnailTypeEnum.AvatarImageUrl) else GetRbxthumbWithTypeSizeAndOptionsFunction(ThumbnailEntry.id, v15(ThumbnailEntry.idType), 150),
+				Image = if EnableStreamAvatarImageUrlThumbnail and v16(ThumbnailEntry.idType) == UserLibConstants.RbxthumbTypes.AvatarImageUrl then ThumbnailEntry.id elseif FFlagNotificationThumbnailUseProfileFrameThumbnailModule then GetRbxthumbWithTypeSizeAndOptionsFunction(ThumbnailEntry.id, v16(ThumbnailEntry.idType), 150, nil, nil, ThumbnailEntry.idType == TypeModule.SENDERThumbnailTypeEnum.User or EnableStreamAvatarImageUrlThumbnail and ThumbnailEntry.idType == TypeModule.SENDERThumbnailTypeEnum.AvatarImageUrl) else GetRbxthumbWithTypeSizeAndOptionsFunction(ThumbnailEntry.id, v16(ThumbnailEntry.idType), 150),
 				Size = UDim2.fromScale(1, 1),
 				cornerRadius = if IsIdTypeMatch then UDim.new(0.5, 0) else UDim.new(0, 8)
 			}

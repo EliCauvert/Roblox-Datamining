@@ -1,9 +1,12 @@
 ﻿local ExpChat = script:FindFirstAncestor("ExpChat")
 local Parent = ExpChat.Parent
 local ReactModule = require(Parent.React)
+local ExpChatSharedModule = require(Parent.ExpChatShared)
+local CryoModule = require(Parent.Cryo)
+local FFlagGlobalTextChatAddPlaySessionFieldModule = require(ExpChat.Flags.FFlagGlobalTextChatAddPlaySessionField)
 local FFlagExpChatGlobalTabDefaultModule = require(ExpChat.Flags.FFlagExpChatGlobalTabDefault)
-local Analytics = require(Parent.ExpChatShared).Analytics
-local JoinResult = require(Parent.Cryo).List.join(Analytics.DefaultStandardizedFields, { "addPlaceInstanceId" }, if require(ExpChat.Flags.FFlagGlobalTextChatAddPlaySessionField) then { "addPlaySessionId" } else {})
+local Analytics = ExpChatSharedModule.Analytics
+local JoinResult = CryoModule.List.join(Analytics.DefaultStandardizedFields, { "addPlaceInstanceId" }, if FFlagGlobalTextChatAddPlaySessionFieldModule then { "addPlaySessionId" } else {})
 
 return function(p1)
 	-- upvalues: ReactModule (copy), Analytics (copy), FFlagExpChatGlobalTabDefaultModule (copy), JoinResult (copy)

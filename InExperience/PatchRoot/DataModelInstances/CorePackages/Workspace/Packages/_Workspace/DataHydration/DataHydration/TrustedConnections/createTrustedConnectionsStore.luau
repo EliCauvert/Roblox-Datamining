@@ -49,7 +49,7 @@ return function()
 	local Flag = false
 	local DataCacheModule5 = if FFlagTrustedFriendCandidatesSection then CreateDataCacheModule(TrustedConnectionsStoreDataTtlSec1) else nil
 	local Flag1 = not FFlagTrustedFriendCandidatesSection and nil
-	local Callback = if FFlagAddFriendsPageTrustedFriendRequestSection then function(Id)
+	local Callback1 = if FFlagAddFriendsPageTrustedFriendRequestSection then function(Id)
 		-- upvalues: GetLocalPlayerUserIdFunction (upval), DataCacheModule3 (copy), FFlagAddFriendsPageHighlightUnseenTrustedRequests (upval), MergeListsWithoutDuplicatesFunction (upval), DataCacheModule4 (copy)
 		local Text = tostring(GetLocalPlayerUserIdFunction())
 		local DataResult = DataCacheModule3.getItem(Text).data(false)
@@ -122,7 +122,7 @@ return function()
 			DataCacheModule4.replaceItem(Text, (math.max(DataResult1 - 1, 0)))
 		end
 	end else nil
-	local Callback1 = if FFlagTrustedFriendCandidatesSection then function(Id)
+	local Callback = if FFlagTrustedFriendCandidatesSection then function(Id)
 		-- upvalues: GetLocalPlayerUserIdFunction (upval), DataCacheModule5 (copy), CryoModule (upval)
 		local Text = tostring(GetLocalPlayerUserIdFunction())
 		local DataResult = DataCacheModule5.getItem(Text).data(false)
@@ -159,17 +159,17 @@ return function()
 		end
 	}) else nil
 	local TrustedConnectionEventListenerModule = CreateTrustedConnectionEventListenerModule(function(p1, TrustedFriends)
-		-- upvalues: DataCacheModule (copy), DataCacheModule1 (copy), TrustedConnectionStatusModule (upval), FFlagAddFriendsPageTrustedFriendRequestSection (upval), Callback (copy), FFlagTrustedFriendCandidatesSection (upval), Callback1 (copy), FFlagConnectionManagementChips (upval), GetLocalPlayerUserIdFunction (upval), DataResolverModule (copy)
+		-- upvalues: DataCacheModule (copy), DataCacheModule1 (copy), TrustedConnectionStatusModule (upval), FFlagAddFriendsPageTrustedFriendRequestSection (upval), Callback1 (copy), FFlagTrustedFriendCandidatesSection (upval), Callback (copy), FFlagConnectionManagementChips (upval), GetLocalPlayerUserIdFunction (upval), DataResolverModule (copy)
 		DataCacheModule.updateItems({ [p1] = TrustedFriends })
 		DataCacheModule1.updateItems({
 			[p1] = TrustedFriends == TrustedConnectionStatusModule.TrustedFriends
 		})
 		
 		if FFlagAddFriendsPageTrustedFriendRequestSection and TrustedFriends == TrustedConnectionStatusModule.RequestReceived then
-			Callback(p1)
+			Callback1(p1)
 		end
 		if FFlagTrustedFriendCandidatesSection and TrustedFriends == TrustedConnectionStatusModule.TrustedFriends then
-			Callback1(p1)
+			Callback(p1)
 		end
 		if FFlagConnectionManagementChips then
 			local LocalPlayerUserId = GetLocalPlayerUserIdFunction()
@@ -180,7 +180,7 @@ return function()
 		end
 	end)
 	local FriendshipEventListenerModule = if FFlagAddFriendsPageTrustedFriendRequestSection then CreateFriendshipEventListenerModule(function(p1, NotFriends)
-		-- upvalues: DataCacheModule (copy), DataCacheModule1 (copy), TrustedConnectionStatusModule (upval), Callback2 (copy), FFlagTrustedFriendCandidatesSection (upval), Callback1 (copy)
+		-- upvalues: DataCacheModule (copy), DataCacheModule1 (copy), TrustedConnectionStatusModule (upval), Callback2 (copy), FFlagTrustedFriendCandidatesSection (upval), Callback (copy)
 		DataCacheModule.updateItems({ [p1] = NotFriends })
 		DataCacheModule1.updateItems({
 			[p1] = NotFriends == TrustedConnectionStatusModule.TrustedFriends
@@ -190,7 +190,7 @@ return function()
 			Callback2(p1)
 			
 			if FFlagTrustedFriendCandidatesSection then
-				Callback1(p1)
+				Callback(p1)
 			end
 		end
 	end) else nil
@@ -473,9 +473,9 @@ return function()
 			end)
 		end,
 		acceptTrustedConnectionRequest = function(p3)
-			-- upvalues: RequestsModule (upval), DataCacheModule (copy), TrustedConnectionStatusModule (upval), DataCacheModule1 (copy), FFlagAddFriendsPageTrustedFriendRequestSection (upval), Callback2 (copy), FFlagTrustedFriendCandidatesSection (upval), Callback1 (copy)
+			-- upvalues: RequestsModule (upval), DataCacheModule (copy), TrustedConnectionStatusModule (upval), DataCacheModule1 (copy), FFlagAddFriendsPageTrustedFriendRequestSection (upval), Callback2 (copy), FFlagTrustedFriendCandidatesSection (upval), Callback (copy)
 			return RequestsModule.PostUserAcceptTrustedConnectionRequest(p3):andThen(function()
-				-- upvalues: DataCacheModule (upval), p3 (copy), TrustedConnectionStatusModule (upval), DataCacheModule1 (upval), FFlagAddFriendsPageTrustedFriendRequestSection (upval), Callback2 (upval), FFlagTrustedFriendCandidatesSection (upval), Callback1 (upval)
+				-- upvalues: DataCacheModule (upval), p3 (copy), TrustedConnectionStatusModule (upval), DataCacheModule1 (upval), FFlagAddFriendsPageTrustedFriendRequestSection (upval), Callback2 (upval), FFlagTrustedFriendCandidatesSection (upval), Callback (upval)
 				DataCacheModule.updateItems({ [p3] = TrustedConnectionStatusModule.TrustedFriends })
 				DataCacheModule1.updateItems({ [p3] = true })
 				
@@ -483,7 +483,7 @@ return function()
 					Callback2(p3)
 				end
 				if FFlagTrustedFriendCandidatesSection then
-					Callback1(p3)
+					Callback(p3)
 				end
 			end)
 		end,

@@ -1,7 +1,8 @@
 ﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
+local HttpModule = require(Parent.Http)
 local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
 local _ = require(script.Parent.MarketplaceItemFavoriteStoreTypes)
-local Url = require(Parent.Http).Url
+local Url = HttpModule.Url
 local config = { Asset = "assets", Bundle = "bundles" }
 local config1 = {
 	Asset = "catalog/v1/favorites/users/assets/favorite",

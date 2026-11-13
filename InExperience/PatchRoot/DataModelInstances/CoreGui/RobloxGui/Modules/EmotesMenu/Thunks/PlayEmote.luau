@@ -2,13 +2,15 @@
 local LocalPlayer = game:GetService("Players").LocalPlayer
 local Parent = script.Parent.Parent
 local Actions = Parent.Actions
+local AnalyticsModule = require(Parent.Analytics)
 local ConstantsModule = require(Parent.Constants)
+local EventStream = require(CorePackages.Workspace.Packages.Analytics).AnalyticsReporters.EventStream
 local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
 local MaybeSendEmoteFailureAnalyticsFromPlayerModule = require(game:GetService("CoreGui").RobloxGui.Modules.EmotesMenu.Utility.MaybeSendEmoteFailureAnalyticsFromPlayer)
 local HideMenuModule = require(Actions.HideMenu)
 local HideErrorModule = require(Actions.HideError)
 local ShowErrorModule = require(Actions.ShowError)
-local WithEventStreamResult = require(Parent.Analytics).new():withEventStream(require(CorePackages.Workspace.Packages.Analytics).AnalyticsReporters.EventStream.new((game:GetService("RbxAnalyticsService"))))
+local WithEventStreamResult = AnalyticsModule.new():withEventStream(EventStream.new((game:GetService("RbxAnalyticsService"))))
 
 local function handlePlayFailure(p1, TemporarilyUnavailable, p2, EmoteId)
 	-- upvalues: WithEventStreamResult (copy), ConstantsModule (copy), RobloxTranslatorModule (copy), ShowErrorModule (copy), HideErrorModule (copy), HideMenuModule (copy)

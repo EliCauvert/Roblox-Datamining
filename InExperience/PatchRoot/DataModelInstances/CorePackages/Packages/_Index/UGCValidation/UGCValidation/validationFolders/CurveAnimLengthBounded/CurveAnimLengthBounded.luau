@@ -4,10 +4,11 @@ local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 local GetFStringUGCValidateCurveAnimationMinLengthModule = require(Parent.flags.GetFStringUGCValidateCurveAnimationMinLength)
 local GetFStringUGCValidationMaxAnimationLengthModule = require(Parent.flags.GetFStringUGCValidationMaxAnimationLength)
+local GetEngineFeatureEngineUGCValidateEmoteAnimationExportModule = require(Parent.flags.getEngineFeatureEngineUGCValidateEmoteAnimationExport)
 local GetFFlagUGCValidateAQEmoteDurationModule = require(Parent.flags.getFFlagUGCValidateAQEmoteDuration)
 local CurveAnimLengthBoundedModule = { categories = {} }
 
-if not require(Parent.flags.getEngineFeatureEngineUGCValidateEmoteAnimationExport)() or not GetFFlagUGCValidateAQEmoteDurationModule() then
+if not GetEngineFeatureEngineUGCValidateEmoteAnimationExportModule() or not GetFFlagUGCValidateAQEmoteDurationModule() then
 	table.insert(CurveAnimLengthBoundedModule.categories, ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION)
 end
 table.insert(CurveAnimLengthBoundedModule.categories, ValidationEnumsModule.UploadCategory.ANIMATION)

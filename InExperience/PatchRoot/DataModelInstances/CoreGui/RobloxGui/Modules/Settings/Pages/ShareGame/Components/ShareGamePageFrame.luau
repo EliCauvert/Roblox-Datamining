@@ -7,6 +7,7 @@ local Modules = CoreGui.RobloxGui.Modules
 local ShareGame = Modules.Settings.Pages.ShareGame
 local PromiseModule = require(CorePackages.Packages.Promise)
 local UtilityModule = require(CoreGui:WaitForChild("RobloxGui", 1e999).Modules.Settings.Utility)
+local GetFFlagEnableNewInviteMenuModule = require(Modules.Flags.GetFFlagEnableNewInviteMenu)
 local RoactModule = require(CorePackages.Packages.Roact)
 local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
 local RoactAppPolicy = require(CorePackages.Workspace.Packages.UniversalAppPolicy).RoactAppPolicy
@@ -21,7 +22,7 @@ local SetGameInfoCreatedModule = require(ShareGame.Actions.SetGameInfoCreated)
 local v1 = 10
 local YOffset = 44
 
-if require(Modules.Flags.GetFFlagEnableNewInviteMenu)() then
+if GetFFlagEnableNewInviteMenuModule() then
 	v1 = 16
 	YOffset = 52
 end

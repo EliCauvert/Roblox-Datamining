@@ -1,10 +1,11 @@
 ﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
 local Parent = GenericAbuseReporting.Parent
+local RoduxModule = require(Parent.Rodux)
 local Dictionary = require(Parent.Cryo).Dictionary
 local AbuseReportAnalytics = require(GenericAbuseReporting.Logger):new("AbuseReport Analytics")
 
 return {
-	reducer = require(Parent.Rodux).createReducer({}, {
+	reducer = RoduxModule.createReducer({}, {
 		[require(GenericAbuseReporting.Analytics.Actions.OnFormLoaded).name] = function(p1, p2)
 			-- upvalues: AbuseReportAnalytics (copy), Dictionary (copy)
 			AbuseReportAnalytics:trace("OnFormLoaded")

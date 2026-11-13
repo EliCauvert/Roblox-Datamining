@@ -15,9 +15,10 @@ local RobloxPlusUpsellBannerCTAModule = require(script.Parent.RobloxPlusUpsellBa
 local FFlagRobloxPlusUpsellBannerUseTryItForFreeModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusUpsellBannerUseTryItForFree)
 local BoldBlackbirdUpsellBannerStroke = game:DefineFastFlag("BoldBlackbirdUpsellBannerStroke", false)
 local FFlagLuaAppsEnablePromptVIPServerPurchase = require(Parent.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
+local FFlagTTOnboardingSheetModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagTTOnboardingSheet)
 
 return function(Frame)
-	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), FFlagRobloxPlusUpsellBannerUseTryItForFreeModule (copy), ReactModule (copy), FFlagSupportNewBadgeRobloxPlusModule (copy), UseRobloxPlusUpsellBannerNewBadgeInteractionModule (copy), View (copy), Icon (copy), IconName (copy), IconSize (copy), Text (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), RobloxPlusUpsellBannerCTAModule (copy), BoldBlackbirdUpsellBannerStroke (copy)
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), FFlagRobloxPlusUpsellBannerUseTryItForFreeModule (copy), ReactModule (copy), FFlagSupportNewBadgeRobloxPlusModule (copy), UseRobloxPlusUpsellBannerNewBadgeInteractionModule (copy), View (copy), Icon (copy), IconName (copy), IconSize (copy), Text (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), FFlagTTOnboardingSheetModule (copy), RobloxPlusUpsellBannerCTAModule (copy), BoldBlackbirdUpsellBannerStroke (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
 		subscribe = "Feature.RobloxSubscription.Action.Subscribe",
@@ -55,7 +56,7 @@ return function(Frame)
 				LayoutOrder = 2,
 				Size = UDim2.new(0.7, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Text = if FFlagLuaAppsEnablePromptVIPServerPurchase and Frame.bannerText then Frame.bannerText else UseLocalizationResult.bannerText
+				Text = if (FFlagLuaAppsEnablePromptVIPServerPurchase or FFlagTTOnboardingSheetModule) and Frame.bannerText then Frame.bannerText else UseLocalizationResult.bannerText
 			})
 		}),
 		SubscribeText = if FFlagSupportNewBadgeRobloxPlusModule then nil else ReactModule.createElement(Text, {
@@ -67,7 +68,8 @@ return function(Frame)
 		}),
 		SubscribeCTA = if FFlagSupportNewBadgeRobloxPlusModule then ReactModule.createElement(RobloxPlusUpsellBannerCTAModule, {
 			productInfo = Frame.productInfo,
-			shouldShowNewBadge = UseRobloxPlusUpsellBannerNewBadgeInteractionModuleResult.shouldShowNewBadge
+			shouldShowNewBadge = UseRobloxPlusUpsellBannerNewBadgeInteractionModuleResult.shouldShowNewBadge,
+			ctaText = if FFlagTTOnboardingSheetModule then Frame.ctaText else nil
 		}) else nil,
 		UIStroke = ReactModule.createElement("UIStroke", {
 			Color = UseTokensResult.Color.Stroke.Default.Color3,

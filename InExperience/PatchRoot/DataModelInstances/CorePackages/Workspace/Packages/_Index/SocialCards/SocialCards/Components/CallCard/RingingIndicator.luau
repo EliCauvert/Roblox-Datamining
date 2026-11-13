@@ -2,8 +2,9 @@
 local RunService = game:GetService("RunService")
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local ReactUtilsModule = require(Parent.ReactUtils)
 local View = FoundationModule.View
-local UseEventConnectionFunction = require(Parent.ReactUtils).useEventConnection
+local UseEventConnectionFunction = ReactUtilsModule.useEventConnection
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
 return function(Frame)

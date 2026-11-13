@@ -120,18 +120,18 @@ return function()
 			
 			return
 		elseif UpsellFlowModule1 == UpsellFlowModule.Xbox then
-			local RobuxProductId2 = SelectedRobuxPackageModule.getRobuxProductId(State)
+			local RobuxProductId1 = SelectedRobuxPackageModule.getRobuxProductId(State)
 			local ProductId1 = State.productInfo.productId
 			local RequestType = State.requestType
-			v1.signalProductPurchaseUpsellConfirmed(ProductId1, RequestType, RobuxProductId2)
+			v1.signalProductPurchaseUpsellConfirmed(ProductId1, RequestType, RobuxProductId1)
 			p1:dispatch(SetPromptStateModule(PromptStateModule.UpsellInProgress))
 			
 			return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any) -> ())
-				-- upvalues: v4 (copy), RobuxProductId2 (copy)
+				-- upvalues: v4 (copy), RobuxProductId1 (copy)
 				local BeginPlatformStorePurchaseResult = nil
 				local Success, Result = pcall(function()
-					-- upvalues: BeginPlatformStorePurchaseResult (ref), v4 (upval), RobuxProductId2 (upval)
-					BeginPlatformStorePurchaseResult = v4.beginPlatformStorePurchase(RobuxProductId2)
+					-- upvalues: BeginPlatformStorePurchaseResult (ref), v4 (upval), RobuxProductId1 (upval)
+					BeginPlatformStorePurchaseResult = v4.beginPlatformStorePurchase(RobuxProductId1)
 				end)
 				
 				if Success then
@@ -140,13 +140,13 @@ return function()
 					Callback1(Result)
 				end
 			end):andThen(function(Result)
-				-- upvalues: ConstantsModule (upval), v1 (copy), ProductId1 (copy), RequestType (copy), RobuxProductId2 (copy), p1 (copy), RetryAfterUpsellModule (upval), ErrorOccurredModule (upval), PurchaseErrorModule (upval)
+				-- upvalues: ConstantsModule (upval), v1 (copy), ProductId1 (copy), RequestType (copy), RobuxProductId1 (copy), p1 (copy), RetryAfterUpsellModule (upval), ErrorOccurredModule (upval), PurchaseErrorModule (upval)
 				if Result == ConstantsModule.PlatformPurchaseResult.PurchaseResult_Success then
-					v1.signalXboxInGamePurchaseSuccess(ProductId1, RequestType, RobuxProductId2)
+					v1.signalXboxInGamePurchaseSuccess(ProductId1, RequestType, RobuxProductId1)
 				elseif Result == ConstantsModule.PlatformPurchaseResult.PurchaseResult_UserCancelled then
-					v1.signalXboxInGamePurchaseCanceled(ProductId1, RequestType, RobuxProductId2)
+					v1.signalXboxInGamePurchaseCanceled(ProductId1, RequestType, RobuxProductId1)
 				else
-					v1.signalXboxInGamePurchaseFailure(ProductId1, RequestType, RobuxProductId2)
+					v1.signalXboxInGamePurchaseFailure(ProductId1, RequestType, RobuxProductId1)
 				end
 				return if Result == ConstantsModule.PlatformPurchaseResult.PurchaseResult_Success or Result == ConstantsModule.PlatformPurchaseResult.PurchaseResult_RobuxUpdated then p1:dispatch(RetryAfterUpsellModule()) else p1:dispatch(ErrorOccurredModule(PurchaseErrorModule.UnknownFailure))
 			end)

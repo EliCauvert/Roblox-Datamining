@@ -2,13 +2,14 @@
 local Parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
 local TModule = require(Parent.t)
 local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
+local FFlagLuaAppAddUniverseIdToEngagementEvents = require(Parent.SharedFlags).FFlagLuaAppAddUniverseIdToEngagementEvents
 local GameCopyExperienceLinkThrottleHundrethsPercent = game:DefineFastInt("GameCopyExperienceLinkThrottleHundrethsPercent", 10000)
 local StrictInterfaceResult = TModule.strictInterface({
 	placeId = TModule.string,
 	uid = TModule.string,
 	ctx = TModule.string,
 	stamp = TModule.optional(TModule.string),
-	targetId = if require(Parent.SharedFlags).FFlagLuaAppAddUniverseIdToEngagementEvents then TModule.optional(TModule.string) else nil
+	targetId = if FFlagLuaAppAddUniverseIdToEngagementEvents then TModule.optional(TModule.string) else nil
 })
 
 return function(CustomFields, EventContext)

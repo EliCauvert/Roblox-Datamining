@@ -13,15 +13,16 @@ local Constants = require(CorePackages.Workspace.Packages.CoreScriptsCommon).Con
 local ShimmerModule = require(RobloxGui.Modules.Shimmer)
 local GetFFlagDisplayChannelNameOnErrorPromptModule = require(RobloxGui.Modules.Flags.GetFFlagDisplayChannelNameOnErrorPrompt)
 local FFlagLuaSupportMicroGamepadPreferredInput = require(CorePackages.Workspace.Packages.SharedFlags).FFlagLuaSupportMicroGamepadPreferredInput
+local Localization = require(CorePackages.Workspace.Packages.InExperienceLocales).Localization
 local LocalizeErrorCodeStringFFlag = settings():GetFFlag("LocalizeErrorCodeString")
 local _TweenInfo = TweenInfo.new(0.15, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut, 0, false, 0)
-local NewResult = require(CorePackages.Workspace.Packages.InExperienceLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId)
+local NewLocalization = Localization.new(game:GetService("LocalizationService").RobloxLocaleId)
 
 local function _(p1, p2, p3)
-	-- upvalues: NewResult (copy)
+	-- upvalues: NewLocalization (copy)
 	local Success, Result = pcall(function()
-		-- upvalues: NewResult (upval), p1 (copy), p3 (copy)
-		return NewResult:Format(p1, p3)
+		-- upvalues: NewLocalization (upval), p1 (copy), p3 (copy)
+		return NewLocalization:Format(p1, p3)
 	end)
 	
 	return Success and Result or p2
@@ -172,10 +173,10 @@ local config1 = {
 local ErrorPromptModule = {}
 ErrorPromptModule.__index = ErrorPromptModule
 
-function ErrorPromptModule.new(p1, p2)
+function ErrorPromptModule.new(RobloxLocaleId, p1)
 	-- upvalues: ErrorPromptModule (copy), config (copy), TweenService (copy), _TweenInfo (copy), VRService (copy), UserInputService (copy), GuiService (copy)
 	local self = setmetatable({}, ErrorPromptModule)
-	self._frame = p1 and config[p1]() or config.Default()
+	self._frame = RobloxLocaleId and config[RobloxLocaleId]() or config.Default()
 	self._isOpen = false
 	self._openAnimation = TweenService:Create(self._frame.PromptScale, _TweenInfo, { Scale = 1 })
 	self._closeAnimation = TweenService:Create(self._frame.PromptScale, _TweenInfo, { Scale = 0 })
@@ -184,17 +185,17 @@ function ErrorPromptModule.new(p1, p2)
 	self._hideErrorCode = false
 	self._menuIsOpenKey = "ErrorPrompt"
 	
-	if p2 then
-		if p2.PlayAnimation ~= nil then
-			self._playAnimation = p2.PlayAnimation
+	if p1 then
+		if p1.PlayAnimation ~= nil then
+			self._playAnimation = p1.PlayAnimation
 		end
-		if p2.HideErrorCode ~= nil then
-			self._hideErrorCode = p2.HideErrorCode
+		if p1.HideErrorCode ~= nil then
+			self._hideErrorCode = p1.HideErrorCode
 		end
-		if p2.MenuIsOpenKey ~= nil then
-			self._menuIsOpenKey = p2.MenuIsOpenKey
+		if p1.MenuIsOpenKey ~= nil then
+			self._menuIsOpenKey = p1.MenuIsOpenKey
 		end
-		self._frame.MessageArea.ErrorFrame.ErrorMessage.TextScaled = p2.MessageTextScaled or false
+		self._frame.MessageArea.ErrorFrame.ErrorMessage.TextScaled = p1.MessageTextScaled or false
 	end
 	if not VRService.VREnabled and UserInputService.GamepadEnabled then
 		GuiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function()
@@ -259,7 +260,7 @@ function ErrorPromptModule:setParent(Parent)
 end
 
 function ErrorPromptModule:setErrorText(Text, p1, p2)
-	-- upvalues: RunService (copy), LocalizeErrorCodeStringFFlag (copy), NewResult (copy), GetFFlagDisplayChannelNameOnErrorPromptModule (copy)
+	-- upvalues: RunService (copy), LocalizeErrorCodeStringFFlag (copy), NewLocalization (copy), GetFFlagDisplayChannelNameOnErrorPromptModule (copy)
 	local ErrorMessage = self._frame.MessageArea.ErrorFrame.ErrorMessage
 	local RobloxClientChannel = RunService:GetRobloxClientChannel()
 	
@@ -274,11 +275,11 @@ function ErrorPromptModule:setErrorText(Text, p1, p2)
 		local config = { ERROR_CODE = tostring(Value) }
 		local v1 = "InGame.ConnectionError.Message.ErrorCode"
 		local Success, Result = pcall(function()
-			-- upvalues: NewResult (upval), v1 (copy), config (copy)
-			return NewResult:Format(v1, config)
+			-- upvalues: NewLocalization (upval), v1 (copy), config (copy)
+			return NewLocalization:Format(v1, config)
 		end)
 		local Result1 = Success and Result or Message
-		ErrorMessage.Text = (if GetFFlagDisplayChannelNameOnErrorPromptModule() and p2 and RobloxClientChannel then ("%s\n(%s, %s)"):format(Text, Result1, NewResult:Format("InGame.ConnectionError.Message.ChannelName", { CHANNEL_NAME = RobloxClientChannel }) or ("Channel: %s"):format(RobloxClientChannel)) else nil) or ("%s\n(%s)"):format(Text, Result1)
+		ErrorMessage.Text = (if GetFFlagDisplayChannelNameOnErrorPromptModule() and p2 and RobloxClientChannel then ("%s\n(%s, %s)"):format(Text, Result1, NewLocalization:Format("InGame.ConnectionError.Message.ChannelName", { CHANNEL_NAME = RobloxClientChannel }) or ("Channel: %s"):format(RobloxClientChannel)) else nil) or ("%s\n(%s)"):format(Text, Result1)
 		
 		return
 	elseif p1 then
@@ -291,15 +292,15 @@ function ErrorPromptModule:setErrorText(Text, p1, p2)
 end
 
 function ErrorPromptModule:setErrorTitle(Text, p1)
-	-- upvalues: NewResult (copy)
+	-- upvalues: NewLocalization (copy)
 	if not Text then return end
 	local ErrorTitle = self._frame.TitleFrame.ErrorTitle
 	
 	if p1 then
 		local v1 = nil
 		local Success, Result = pcall(function()
-			-- upvalues: NewResult (upval), p1 (copy), v1 (copy)
-			return NewResult:Format(p1, v1)
+			-- upvalues: NewLocalization (upval), p1 (copy), v1 (copy)
+			return NewLocalization:Format(p1, v1)
 		end)
 		ErrorTitle.Text = Success and Result or Text
 		
@@ -348,7 +349,7 @@ function ErrorPromptModule:clearButtons()
 end
 
 function ErrorPromptModule:updateButtons(Frames, p1: string)
-	-- upvalues: NewResult (copy), config1 (copy), ShimmerModule (copy)
+	-- upvalues: NewLocalization (copy), config1 (copy), ShimmerModule (copy)
 	if not Frames then
 		Frames = {}
 	end
@@ -367,8 +368,8 @@ function ErrorPromptModule:updateButtons(Frames, p1: string)
 			local Text1 = frame.Text
 			local v1 = nil
 			local Success, Result = pcall(function()
-				-- upvalues: NewResult (upval), LocalizationKey (copy), v1 (copy)
-				return NewResult:Format(LocalizationKey, v1)
+				-- upvalues: NewLocalization (upval), LocalizationKey (copy), v1 (copy)
+				return NewLocalization:Format(LocalizationKey, v1)
 			end)
 			Text = Success and Result or Text1
 		end

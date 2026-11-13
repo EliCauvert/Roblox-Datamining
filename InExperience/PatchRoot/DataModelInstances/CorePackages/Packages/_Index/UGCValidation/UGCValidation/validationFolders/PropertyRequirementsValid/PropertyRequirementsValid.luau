@@ -5,6 +5,18 @@ local _ = require(Parent.util.Types)
 local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
 local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 local ValueToStringModule = require(Parent.util.valueToString)
+local Categories = {
+	ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+	ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD,
+	ValidationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+	ValidationEnumsModule.UploadCategory.EYEBROW_EYELASH,
+	ValidationEnumsModule.UploadCategory.RIGID_ACCESSORY,
+	ValidationEnumsModule.UploadCategory.MAKEUP
+}
+local RequiredData = {
+	ValidationEnumsModule.SharedDataMember.rootInstance,
+	ValidationEnumsModule.SharedDataMember.uploadEnum
+}
 
 local function comparitorMethodImpl(B, B1, FOUNDIN): boolean?
 	-- upvalues: ConstantsModule (copy)
@@ -119,18 +131,8 @@ local function getAllActiveTestsOnProperty(Value, PropertyName, CF, List)
 end
 
 return {
-	categories = {
-		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD,
-		ValidationEnumsModule.UploadCategory.LAYERED_CLOTHING,
-		ValidationEnumsModule.UploadCategory.EYEBROW_EYELASH,
-		ValidationEnumsModule.UploadCategory.RIGID_ACCESSORY,
-		ValidationEnumsModule.UploadCategory.MAKEUP
-	},
-	requiredData = {
-		ValidationEnumsModule.SharedDataMember.rootInstance,
-		ValidationEnumsModule.SharedDataMember.uploadEnum
-	},
+	categories = Categories,
+	requiredData = RequiredData,
 	expectedFailures = {},
 	run = function(p1, p2)
 		-- upvalues: ConstantsModule (copy), ErrorSourceStringsModule (copy), getAllActiveTestsOnProperty (copy), doesPropertyMatchExpectations (copy), ValueToStringModule (copy)

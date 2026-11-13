@@ -3,9 +3,10 @@ local Parent = InExperienceSideSheet.Parent
 local DisplayModule = require(Parent.Display)
 local _ = require(Parent.Signals)
 local ConstantsModule = require(InExperienceSideSheet.Common.Constants)
+local FlagsModule = require(InExperienceSideSheet.Flags)
 local GetSideSheetDrawerWidthModule = require(script.Parent.getSideSheetDrawerWidth)
 local HasRoomForPeoplePageModule = require(script.Parent.hasRoomForPeoplePage)
-local FFlagClosePeoplePageWhenNoRoomBesideSideSheet = require(InExperienceSideSheet.Flags).FFlagClosePeoplePageWhenNoRoomBesideSideSheet
+local FFlagClosePeoplePageWhenNoRoomBesideSideSheet = FlagsModule.FFlagClosePeoplePageWhenNoRoomBesideSideSheet
 
 return function(p1, p2)
 	-- upvalues: FFlagClosePeoplePageWhenNoRoomBesideSideSheet (copy), DisplayModule (copy), GetSideSheetDrawerWidthModule (copy), ConstantsModule (copy), HasRoomForPeoplePageModule (copy)

@@ -1,10 +1,11 @@
 ﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
 local Parent = GenericAbuseReporting.Parent
 local FoundationModule = require(Parent.Foundation)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local GetIconRichTextFunction = FoundationModule.Utility.getIconRichText
 local IconName = FoundationModule.Enums.IconName
 local FFlagAbuseReportTranslateColorWrapperModule = require(GenericAbuseReporting.Flags.FFlagAbuseReportTranslateColorWrapper)
-local FFlagUpdateTranslateInReportRevamp = require(Parent.SharedFlags).FFlagUpdateTranslateInReportRevamp
+local FFlagUpdateTranslateInReportRevamp = SharedFlagsModule.FFlagUpdateTranslateInReportRevamp
 
 local function getWrappedText(p1, Text: string)
 	-- upvalues: GetIconRichTextFunction (copy), IconName (copy)

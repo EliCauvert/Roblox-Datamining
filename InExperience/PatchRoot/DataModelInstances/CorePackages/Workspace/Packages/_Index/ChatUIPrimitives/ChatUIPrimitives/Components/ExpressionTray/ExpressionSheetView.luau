@@ -4,10 +4,11 @@ local Parent = ChatUIPrimitives.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local ReactRobloxModule = require(Parent.ReactRoblox)
+local ReactUtilsModule = require(Parent.ReactUtils)
 local OtterModule = require(Parent.Otter)
 local UseDismissOnEscapeOrMenuModule = require(ChatUIPrimitives.Hooks.useDismissOnEscapeOrMenu)
 local FFlagExpChatExpressionTrayReducedMotionModule = require(ChatUIPrimitives.Flags.FFlagExpChatExpressionTrayReducedMotion)
-local UseEventConnectionFunction = require(Parent.ReactUtils).useEventConnection
+local UseEventConnectionFunction = ReactUtilsModule.useEventConnection
 local config = { dampingRatio = 1, frequency = 3.5 }
 
 local function getSafeInsets()

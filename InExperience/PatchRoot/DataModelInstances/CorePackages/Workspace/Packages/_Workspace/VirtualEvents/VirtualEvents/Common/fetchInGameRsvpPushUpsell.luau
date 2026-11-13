@@ -98,7 +98,7 @@ end
 
 local _ = function(Url, Method, Body)
 	-- upvalues: PromiseModule (copy), FetchInGameRsvpPushUpsellModule (copy)
-	return PromiseModule.new(function(Callback1, Callback)
+	return PromiseModule.new(function(Callback, Callback1)
 		-- upvalues: FetchInGameRsvpPushUpsellModule (upval), Url (copy), Method (copy), Body (copy)
 		FetchInGameRsvpPushUpsellModule._sendRequest({
 			Url = Url,
@@ -106,15 +106,15 @@ local _ = function(Url, Method, Body)
 			Headers = if Method == "POST" then { ["Content-Type"] = "application/json" } else { Accept = "application/json" },
 			Body = Body
 		}, function(p3)
-			-- upvalues: Method (upval), Callback1 (copy), Callback (copy), Url (upval)
+			-- upvalues: Method (upval), Callback (copy), Callback1 (copy), Url (upval)
 			local StatusCode: number = p3.StatusCode
 			
 			if if Method == "POST" then typeof(StatusCode) == "number" and (StatusCode >= 200 and StatusCode < 300) else StatusCode == 200 then
-				Callback1(p3)
+				Callback(p3)
 				
 				return
 			else
-				Callback(`{Method} {Url} failed: {tostring(p3.StatusCode)}`)
+				Callback1(`{Method} {Url} failed: {tostring(p3.StatusCode)}`)
 			end
 		end)
 	end)
@@ -154,7 +154,7 @@ function FetchInGameRsvpPushUpsellModule.fetch()
 				local Method = "GET"
 				local Body = nil
 				
-				return PromiseModule.new(function(Callback1, Callback)
+				return PromiseModule.new(function(Callback, Callback1)
 					-- upvalues: FetchInGameRsvpPushUpsellModule (upval), PromptsUrl (copy), Method (copy), Body (copy)
 					FetchInGameRsvpPushUpsellModule._sendRequest({
 						Url = PromptsUrl,
@@ -162,15 +162,15 @@ function FetchInGameRsvpPushUpsellModule.fetch()
 						Headers = if Method == "POST" then { ["Content-Type"] = "application/json" } else { Accept = "application/json" },
 						Body = Body
 					}, function(p3)
-						-- upvalues: Method (upval), Callback1 (copy), Callback (copy), PromptsUrl (upval)
+						-- upvalues: Method (upval), Callback (copy), Callback1 (copy), PromptsUrl (upval)
 						local StatusCode: number = p3.StatusCode
 						
 						if if Method == "POST" then typeof(StatusCode) == "number" and (StatusCode >= 200 and StatusCode < 300) else StatusCode == 200 then
-							Callback1(p3)
+							Callback(p3)
 							
 							return
 						else
-							Callback(`{Method} {PromptsUrl} failed: {tostring(p3.StatusCode)}`)
+							Callback1(`{Method} {PromptsUrl} failed: {tostring(p3.StatusCode)}`)
 						end
 					end)
 				end):andThen(function(Result)
@@ -202,7 +202,7 @@ local function postPromptEvent(Path, PromptId)
 	local Url = UrlBuilder.new({ base = UrlBase.APIS, path = Path })()
 	local Json = HttpService:JSONEncode({ promptType = PromptId, promptId = PromptId })
 	local Method = "POST"
-	PromiseModule.new(function(Callback1, Callback)
+	PromiseModule.new(function(Callback, Callback1)
 		-- upvalues: FetchInGameRsvpPushUpsellModule (upval), Url (copy), Method (copy), Json (copy)
 		FetchInGameRsvpPushUpsellModule._sendRequest({
 			Url = Url,
@@ -210,15 +210,15 @@ local function postPromptEvent(Path, PromptId)
 			Headers = if Method == "POST" then { ["Content-Type"] = "application/json" } else { Accept = "application/json" },
 			Body = Json
 		}, function(p3)
-			-- upvalues: Method (upval), Callback1 (copy), Callback (copy), Url (upval)
+			-- upvalues: Method (upval), Callback (copy), Callback1 (copy), Url (upval)
 			local StatusCode: number = p3.StatusCode
 			
 			if if Method == "POST" then typeof(StatusCode) == "number" and (StatusCode >= 200 and StatusCode < 300) else StatusCode == 200 then
-				Callback1(p3)
+				Callback(p3)
 				
 				return
 			else
-				Callback(`{Method} {Url} failed: {tostring(p3.StatusCode)}`)
+				Callback1(`{Method} {Url} failed: {tostring(p3.StatusCode)}`)
 			end
 		end)
 	end):catch(function(Err)

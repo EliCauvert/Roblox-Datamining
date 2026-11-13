@@ -1,4 +1,5 @@
 ﻿local Parent = script:FindFirstAncestor("DiscoveryAvailability").Parent
+local AppBloxModule = require(Parent.AppBlox)
 local ReactModule = require(Parent.React)
 local ResponsiveModule = require(Parent.Responsive)
 local FoundationModule = require(Parent.Foundation)
@@ -7,7 +8,7 @@ local UIBloxModule = require(Parent.UIBlox)
 local _ = require(Parent.LuauPolyfill)
 local NotificationModalsManagerModule = require(Parent.NotificationModalsManager)
 local UsePageSideMarginFunction = require(Parent.CollectionViews).usePageSideMargin
-local Banner = require(Parent.AppBlox).Banner
+local Banner = AppBloxModule.Banner
 local View = FoundationModule.View
 local Enums = FoundationModule.Enums
 local UseTokensFunction = FoundationModule.Hooks.useTokens

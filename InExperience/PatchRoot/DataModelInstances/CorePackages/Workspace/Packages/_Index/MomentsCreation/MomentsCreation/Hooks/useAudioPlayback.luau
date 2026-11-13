@@ -1,6 +1,7 @@
 ﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
 local Parent = MomentsCreation.Parent
 local RunService = game:GetService("RunService")
+local MomentsCommonModule = require(Parent.MomentsCommon)
 local ReactModule = require(Parent.React)
 local FadeVolumeModule = require(MomentsCreation.Audio.fadeVolume)
 local StartAudioOnLoadModule = require(MomentsCreation.Audio.startAudioOnLoad)
@@ -11,7 +12,7 @@ local UseEffectFunction = ReactModule.useEffect
 local UseMemoFunction = ReactModule.useMemo
 local UseRefFunction = ReactModule.useRef
 local UseStateFunction = ReactModule.useState
-local UseToggleStateFunction = require(Parent.MomentsCommon).Hooks.useToggleState
+local UseToggleStateFunction = MomentsCommonModule.Hooks.useToggleState
 local LocalPlayer = game:GetService("Players").LocalPlayer
 
 local function _(p1)

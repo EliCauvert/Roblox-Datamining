@@ -6,15 +6,21 @@ local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
 local AppPage = require(Parent.RobloxAppEnums).AppPage
 local FlyoutSidePanelIXP = require(Parent.SharedExperimentDefinition).FlyoutSidePanelIXP
 local ConstantsModule = require(script.Parent.Parent.Constants)
+local FAVORITESURI = ConstantsModule.FAVORITES_URI
+local CONTINUEPLAYINGURI = ConstantsModule.CONTINUE_PLAYING_URI
 local SharedFlagsModule = require(Parent.SharedFlags)
 local GetFStringPlatformEventUrlFunction = SharedFlagsModule.GetFStringPlatformEventUrl
 local FlyoutMomentsPlaceURI = game:DefineFastString("FlyoutMomentsPlaceURI", "roblox://experiences/start?placeId=119524072047648")
+local FFlagCreateConnectionsHub = SharedFlagsModule.FFlagCreateConnectionsHub
 local FFlagEnableArgus = SharedFlagsModule.FFlagEnableArgus
+local FFlagEnableBlackbird = SharedFlagsModule.FFlagEnableBlackbird
 local FFlagEnableBlackbirdOnFlyoutMenu = SharedFlagsModule.FFlagEnableBlackbirdOnFlyoutMenu
 local FFlagFlyoutAddAdjustScreenModule = require(script.Parent.Parent.Flags.FFlagFlyoutAddAdjustScreen)
 local FFlagFlyoutSidePanelTradesEntryModule = require(script.Parent.Parent.Flags.FFlagFlyoutSidePanelTradesEntry)
 local FFlagFlyoutFilterWebViewsAndBrowserLinks = SharedFlagsModule.FFlagFlyoutFilterWebViewsAndBrowserLinks
+local FFlagEnableLuaCommunityList = SharedFlagsModule.FFlagEnableLuaCommunityList
 local FFlagFlyoutResolveItemContextOnActivationModule = require(FlyoutSidePanel.Flags.FFlagFlyoutResolveItemContextOnActivation)
+local FFlagEnableChartsInFlyout = SharedFlagsModule.FFlagEnableChartsInFlyout
 local FFlagUserLibrary = SharedFlagsModule.FFlagUserLibrary
 local CommunityListRouting = require(Parent.Groups).CommunityListRouting
 local ItemType = {
@@ -122,14 +128,14 @@ local function itemIsGameSortDeeplink(p1): boolean
 	return (if Context then Context.destinationType else nil) == DestinationType.GameSortDeeplink
 end
 
-local FFlagFlyoutResolveItemContextOnActivationModule1 = SharedFlagsModule.FFlagEnableLuaCommunityList and FFlagFlyoutResolveItemContextOnActivationModule
+local FFlagFlyoutResolveItemContextOnActivationModule1 = FFlagEnableLuaCommunityList and FFlagFlyoutResolveItemContextOnActivationModule
 local ItemInfo = {
 	[ItemType.Favorites] = {
 		itemType = ItemType.Favorites,
 		textKey = ItemTextKey[ItemType.Favorites],
 		icon = BuilderIconsModule.Icon.Bookmark,
 		context = {
-			appUri = ConstantsModule.FAVORITES_URI,
+			appUri = FAVORITESURI,
 			destinationType = DestinationType.GameSortDeeplink
 		}
 	},
@@ -138,7 +144,7 @@ local ItemInfo = {
 		textKey = ItemTextKey[ItemType.ContinuePlaying],
 		icon = BuilderIconsModule.Icon.ClockSpinReverse,
 		context = {
-			appUri = ConstantsModule.CONTINUE_PLAYING_URI,
+			appUri = CONTINUEPLAYINGURI,
 			destinationType = DestinationType.GameSortDeeplink
 		}
 	},
@@ -159,7 +165,7 @@ local ItemInfo = {
 		textKey = ItemTextKey[ItemType.Connections],
 		icon = BuilderIconsModule.Icon.TwoPeople,
 		context = {
-			appPage = if SharedFlagsModule.FFlagCreateConnectionsHub then AppPage.CoHubMyConnections else AppPage.ViewFriends,
+			appPage = if FFlagCreateConnectionsHub then AppPage.CoHubMyConnections else AppPage.ViewFriends,
 			destinationType = DestinationType.AppPage
 		}
 	},
@@ -226,7 +232,7 @@ local ItemInfo = {
 		textKey = ItemTextKey[ItemType.Charts],
 		icon = BuilderIconsModule.Icon.ChartThreeVerticalBars,
 		context = {
-			appPage = if SharedFlagsModule.FFlagEnableChartsInFlyout and FlyoutSidePanelIXP.isChartsInFlyoutEnabled() then AppPage.Games else nil,
+			appPage = if FFlagEnableChartsInFlyout and FlyoutSidePanelIXP.isChartsInFlyoutEnabled() then AppPage.Games else nil,
 			destinationType = DestinationType.AppPage
 		}
 	},
@@ -341,7 +347,7 @@ local ItemInfo = {
 	}
 }
 
-if SharedFlagsModule.FFlagEnableBlackbird and FFlagEnableBlackbirdOnFlyoutMenu then
+if FFlagEnableBlackbird and FFlagEnableBlackbirdOnFlyoutMenu then
 	ItemType.Blackbird = "Blackbird"
 	EventNameMappings[ItemType.Blackbird] = "Blackbird"
 	ItemTextKey[ItemType.Blackbird] = "CommonUI.Features.Label.X"

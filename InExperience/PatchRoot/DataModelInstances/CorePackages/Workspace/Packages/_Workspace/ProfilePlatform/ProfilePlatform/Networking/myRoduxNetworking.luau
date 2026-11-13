@@ -5,6 +5,7 @@ local HttpRequest = LuaSocialLibrariesDepsModule.httpRequest
 local RODUXKEY = require(ProfilePlatform.Common.Constants).RODUX_KEY
 local NewResult = require(Parent.Lumberyak).Logger.new(nil, RODUXKEY):new(RODUXKEY .. " Networking")
 local ChallengeRequestWrapperFunction = require(Parent.GenericChallenges).Middleware.ChallengeRequestWrapper
+local FFlagProfilePlatformUseRoduxNetworkingRefactorModule = require(ProfilePlatform.Flags.FFlagProfilePlatformUseRoduxNetworkingRefactor)
 local MyRoduxNetworkingImplModule = require(ProfilePlatform.Networking.myRoduxNetworkingImpl)
 local ConfigResult = HttpRequest.config({
 	requestFunction = function(p1, p2, p3)
@@ -19,9 +20,10 @@ local ConfigResult = HttpRequest.config({
 	end,
 	maxRetryCount = game:DefineFastInt("ProfilePlatformHttpRetryCount", 3)
 })
-local MyRoduxNetworkingImplModule1 = if require(ProfilePlatform.Flags.FFlagProfilePlatformUseRoduxNetworkingRefactor) then MyRoduxNetworkingImplModule else ConfigResult
+local RoduxNetworking = LuaSocialLibrariesDepsModule.RoduxNetworking
+local MyRoduxNetworkingImplModule1 = if FFlagProfilePlatformUseRoduxNetworkingRefactorModule then MyRoduxNetworkingImplModule else ConfigResult
 
-return (LuaSocialLibrariesDepsModule.RoduxNetworking.config({
+return (RoduxNetworking.config({
 	keyPath = RODUXKEY .. ".NetworkStatus",
 	networkImpl = game:DefineFastFlag("EnableProfilePlatformChallengeInterceptor", false) and ChallengeRequestWrapperFunction(MyRoduxNetworkingImplModule1) or MyRoduxNetworkingImplModule1
 }))

@@ -3,6 +3,7 @@ local GameSettings = UserSettings().GameSettings
 local SettingsServiceModule = require(game:GetService("CorePackages").Workspace.Packages.SettingsService)
 local ValueChangedSignal = SettingsServiceModule.ValueChangedSignal
 local AvailabilitySignal = SettingsServiceModule.AvailabilitySignal
+local SettingEnum = SettingsServiceModule.SettingEnum
 local LAYOUTORDER = require(script:FindFirstAncestor("Settings").Integrations.Constants).GAMESETTINGS.LAYOUT_ORDER
 
 local function _()
@@ -36,7 +37,7 @@ local UINavToggleModule = {
 	label = "CoreScripts.InGameMenu.GameSettings.UINavToggle",
 	description = "CoreScripts.InGameMenu.GameSettings.UINavToggleDescription",
 	alreadyLocalized = false,
-	field_type = SettingsServiceModule.SettingEnum.Toggle
+	field_type = SettingEnum.Toggle
 }
 local NewValueChangedSignal = ValueChangedSignal.new(GameSettings.UiNavigationKeyBindEnabled)
 NewValueChangedSignal:connect(function(UiNavigationKeyBindEnabled)

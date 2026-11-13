@@ -185,17 +185,17 @@ return (ReactModule.memo(function(p2)
 	local v1 = nil
 	local v2 = nil
 	local v3 = nil
-	local Callback1 = nil
-	local SelectedKeys = nil
 	local Callback = nil
+	local SelectedKeys = nil
+	local Callback1 = nil
 	local Capture = nil
 	local Callback2 = nil
 	
 	if FFlagEnablePlayerSupportCaptureAttachmentsModule then
 		v1 = UseCaptureUploadsModule()
 		v2 = UseGalleryCapturesModule()
-		v3, Callback1 = ReactModule.useState(false)
-		SelectedKeys, Callback = ReactModule.useState({})
+		v3, Callback = ReactModule.useState(false)
+		SelectedKeys, Callback1 = ReactModule.useState({})
 		Capture, Callback2 = ReactModule.useState(nil)
 	end
 	local MINFEEDBACKLENGTH = ConstantsModule.MIN_FEEDBACK_LENGTH
@@ -277,17 +277,17 @@ return (ReactModule.memo(function(p2)
 	
 	if FFlagEnablePlayerSupportCaptureAttachmentsModule then
 		UseResult = ReactModule.useCallback(function()
-			-- upvalues: Category (copy), Callback1 (ref)
+			-- upvalues: Category (copy), Callback (ref)
 			if Category ~= "" then
-				Callback1(true)
+				Callback(true)
 				
 				return
 			end
 		end, { Category })
 		ReactModule.useEffect(function()
-			-- upvalues: v3 (ref), Callback (ref), Callback2 (ref), v1 (ref), v2 (ref)
+			-- upvalues: v3 (ref), Callback1 (ref), Callback2 (ref), v1 (ref), v2 (ref)
 			if not v3 then
-				Callback({})
+				Callback1({})
 				Callback2(nil)
 				
 				return
@@ -297,7 +297,7 @@ return (ReactModule.memo(function(p2)
 			for uploadStatus in v1.uploadStatuses do
 				t[uploadStatus] = true
 			end
-			Callback(t)
+			Callback1(t)
 			Callback2(nil)
 			v2.load()
 		end, { v3 })
@@ -315,9 +315,9 @@ return (ReactModule.memo(function(p2)
 		Count = #UseMemoResult
 		v4 = Count >= 5
 		UseResult1 = ReactModule.useCallback(function(p3)
-			-- upvalues: GetCaptureKeyModule (upval), Callback (ref), v4 (ref)
+			-- upvalues: GetCaptureKeyModule (upval), Callback1 (ref), v4 (ref)
 			local CaptureKeyModule = GetCaptureKeyModule(p3)
-			Callback(function(Tbl)
+			Callback1(function(Tbl)
 				-- upvalues: CaptureKeyModule (copy), v4 (upval)
 				local IsEntry = Tbl[CaptureKeyModule] == true
 				
@@ -340,10 +340,10 @@ return (ReactModule.memo(function(p2)
 		local HasNextEntry = next(v1.uploadStatuses) ~= nil
 		
 		OnActivated = function()
-			-- upvalues: Count (ref), HasNextEntry (copy), v1 (ref), UseMemoResult (ref), Callback1 (ref)
+			-- upvalues: Count (ref), HasNextEntry (copy), v1 (ref), UseMemoResult (ref), Callback (ref)
 			if Count ~= 0 or HasNextEntry then
 				v1.onCapturesAdded(UseMemoResult)
-				Callback1(false)
+				Callback(false)
 				
 				return
 			end
@@ -506,26 +506,26 @@ return (ReactModule.memo(function(p2)
 		p2.onFormAbandoned
 	} else { p2.closePrompt, p2.onFormAbandoned })
 	UseEscapeDismissModule("PlayerSupportPromptCancel", if FFlagEnablePlayerSupportCaptureAttachmentsModule then ReactModule.useCallback(function()
-		-- upvalues: Capture (ref), Callback2 (ref), v3 (ref), Callback1 (ref), UseResult5 (copy)
+		-- upvalues: Capture (ref), Callback2 (ref), v3 (ref), Callback (ref), UseResult5 (copy)
 		if Capture then
 			Callback2(nil)
 			
 			return
 		end
 		if v3 then
-			Callback1(false)
+			Callback(false)
 			
 			return
 		else
 			UseResult5()
 		end
 	end, { Capture, v3, UseResult5 }) else UseResult5)
-	local CreateElementFunction1 = ReactModule.createElement
+	local CreateElementFunction = ReactModule.createElement
 	local Root = Dialog.Root
 	local config1 = { hasBackdrop = true, onClose = UseResult4 }
 	local config2 = {
 		Title = ReactModule.createElement(Dialog.Title, {
-			text = if FFlagEnablePlayerSupportCaptureAttachmentsModule and (v3 and Capture ~= nil) then if Capture.CaptureTime == nil then UseLocalizationResult.CapturesAdd else v5.dateTime elseif FFlagEnablePlayerSupportCaptureAttachmentsModule and v3 then UseLocalizationResult.CapturesAdd else UseLocalizationResult.Title
+			text = if FFlagEnablePlayerSupportCaptureAttachmentsModule and v3 and Capture ~= nil then if Capture.CaptureTime == nil then UseLocalizationResult.CapturesAdd else v5.dateTime elseif FFlagEnablePlayerSupportCaptureAttachmentsModule and v3 then UseLocalizationResult.CapturesAdd else UseLocalizationResult.Title
 		}),
 		Content = if FFlagEnablePlayerSupportCaptureAttachmentsModule and v3 then ReactModule.createElement(Dialog.Content, { LayoutOrder = 1 }, {
 			PickerBody = if Capture == nil then ReactModule.createElement(CapturePickerGridModule, {
@@ -687,7 +687,7 @@ return (ReactModule.memo(function(p2)
 	local Element = nil
 	
 	if FFlagEnablePlayerSupportCaptureAttachmentsModule and v3 then
-		local CreateElementFunction = ReactModule.createElement
+		local CreateElementFunction1 = ReactModule.createElement
 		local Actions = Dialog.Actions
 		local config3 = { LayoutOrder = 2 }
 		local Actions1 = nil
@@ -704,8 +704,8 @@ return (ReactModule.memo(function(p2)
 					text = UseLocalizationResult.Cancel,
 					variant = ButtonVariant.Standard,
 					onActivated = function()
-						-- upvalues: Callback1 (ref)
-						Callback1(false)
+						-- upvalues: Callback (ref)
+						Callback(false)
 					end
 				}
 			}
@@ -734,7 +734,7 @@ return (ReactModule.memo(function(p2)
 			}
 		end
 		config3.actions = Actions1
-		Element = CreateElementFunction(Actions, config3)
+		Element = CreateElementFunction1(Actions, config3)
 	else
 		Element = ReactModule.createElement(Dialog.Actions, {
 			LayoutOrder = 2,
@@ -750,5 +750,5 @@ return (ReactModule.memo(function(p2)
 	end
 	config2.Actions = Element
 	
-	return CreateElementFunction1(Root, config1, config2)
+	return CreateElementFunction(Root, config1, config2)
 end))

@@ -2,14 +2,16 @@
 local HttpService = game:GetService("HttpService")
 local RobloxSubscriptionStoreModule = require(RobloxSubscriptionPurchaseApp.Store.RobloxSubscriptionStore)
 local FFlagEnablePlusReferralTelemetryModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagEnablePlusReferralTelemetry)
-local FFlagEnablePlusReferralEntrypointTelemetry = require(RobloxSubscriptionPurchaseApp.Parent.SharedFlags).FFlagEnablePlusReferralEntrypointTelemetry
+local Parent = RobloxSubscriptionPurchaseApp.Parent
+local FFlagEnablePlusReferralEntrypointTelemetry = require(Parent.SharedFlags).FFlagEnablePlusReferralEntrypointTelemetry
 local IsRobloxSubscriptionProductFreeTrialModule = require(RobloxSubscriptionPurchaseApp.Utils.isRobloxSubscriptionProductFreeTrial)
 local _ = require(RobloxSubscriptionPurchaseApp.Models.GetRobloxSubscriptionProductsModel)
 local RobloxPlusSheetKindModule = require(RobloxSubscriptionPurchaseApp.Enums.RobloxPlusSheetKind)
 local FFlagTTOnboardingSheetModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagTTOnboardingSheet)
+local FFlagPlusMembershipConfigChangeCheck = require(Parent.SharedFlags).FFlagPlusMembershipConfigChangeCheck
 
 return function(Event_name)
-	-- upvalues: RobloxSubscriptionStoreModule (copy), FFlagTTOnboardingSheetModule (copy), IsRobloxSubscriptionProductFreeTrialModule (copy), FFlagEnablePlusReferralTelemetryModule (copy), FFlagEnablePlusReferralEntrypointTelemetry (copy), RobloxPlusSheetKindModule (copy), HttpService (copy)
+	-- upvalues: RobloxSubscriptionStoreModule (copy), FFlagTTOnboardingSheetModule (copy), IsRobloxSubscriptionProductFreeTrialModule (copy), FFlagEnablePlusReferralTelemetryModule (copy), FFlagEnablePlusReferralEntrypointTelemetry (copy), RobloxPlusSheetKindModule (copy), HttpService (copy), FFlagPlusMembershipConfigChangeCheck (copy)
 	local GetResult = RobloxSubscriptionStoreModule.get()
 	local EntryContext = GetResult.getEntryContext()
 	local RobloxSubscriptionProduct = GetResult.getRobloxSubscriptionProduct()
@@ -69,6 +71,11 @@ return function(Event_name)
 	end
 	if FFlagTTOnboardingSheetModule and PurchaseUIOptions and PurchaseUIOptions.sheetKind == RobloxPlusSheetKindModule.TT then
 		config.event_metadata = HttpService:JSONEncode({ sheet_kind = PurchaseUIOptions.sheetKind })
+	end
+	if FFlagPlusMembershipConfigChangeCheck and GetResult.getPurchaseFlowOptions().includeUpgrades == true then
+		local Data = if config.event_metadata then HttpService:JSONDecode(config.event_metadata) else {}
+		Data.include_upgrades = true
+		config.event_metadata = HttpService:JSONEncode(Data)
 	end
 	return config
 end

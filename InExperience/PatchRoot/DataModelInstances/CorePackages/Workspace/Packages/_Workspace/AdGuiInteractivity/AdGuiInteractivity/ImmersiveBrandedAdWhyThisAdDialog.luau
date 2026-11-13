@@ -1,16 +1,18 @@
 ﻿local AdGuiInteractivity = script:FindFirstAncestor("AdGuiInteractivity")
 local Parent = AdGuiInteractivity.Parent
 local ReactModule = require(Parent.React)
+local LinkingProtocolModule = require(Parent.LinkingProtocol)
 local FoundationModule = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
 local AdsInteractivityTelemetryModule = require(AdGuiInteractivity.AdsInteractivityTelemetry)
-local Default = require(Parent.LinkingProtocol).LinkingProtocol.default
+local Default = LinkingProtocolModule.LinkingProtocol.default
 local Dialog = FoundationModule.Dialog
 local View = FoundationModule.View
 local Button = FoundationModule.Button
 local DialogSize = FoundationModule.Enums.DialogSize
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local InputSize = FoundationModule.Enums.InputSize
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local ImmersiveBrandedAdsLearnMoreUrl = game:DefineFastString("ImmersiveBrandedAdsLearnMoreUrl", "www.roblox.com")
 
 return function(p1)

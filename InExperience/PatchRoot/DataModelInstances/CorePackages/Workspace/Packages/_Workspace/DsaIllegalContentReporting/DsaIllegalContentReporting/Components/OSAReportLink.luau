@@ -3,11 +3,12 @@ local GuiService = game:GetService("GuiService")
 local HttpService = game:GetService("HttpService")
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local LocalizationModule = require(Parent.Localization)
 local ResponsiveModule = require(Parent.Responsive)
 local UsePreferredInputFunction = ResponsiveModule.usePreferredInput
 local ControlState = FoundationModule.Enums.ControlState
 local Text = FoundationModule.Text
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local View = FoundationModule.View
 

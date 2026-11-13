@@ -3,6 +3,7 @@ local Parent = Foundation.Parent
 local DashModule = require(Parent.Dash)
 local ReactModule = require(Parent.React)
 local InternalDrawerOpenPhaseModule = require(Foundation.Enums.InternalDrawerOpenPhase)
+local ScrollBarVisibilityModule = require(Foundation.Enums.ScrollBarVisibility)
 local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 local InternalDrawerEdgeSwipeModule = require(script.Parent.InternalDrawerEdgeSwipe)
 local InternalDrawerOverlayModule = require(script.Parent.InternalDrawerOverlay)
@@ -14,7 +15,7 @@ local config = {
 	outerBleed = 0,
 	scrolls = true,
 	testId = "--foundation-internal-drawer",
-	scrollBarVisibility = require(Foundation.Enums.ScrollBarVisibility).None
+	scrollBarVisibility = ScrollBarVisibilityModule.None
 }
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)

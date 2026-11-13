@@ -4,11 +4,14 @@ local CryoModule = require(InlineRichText.Parent.Cryo)
 local _ = require(InlineRichText.Types)
 local NodeTypeModule = require(InlineRichText.Enums.NodeType)
 local NodeRenderers = script.Parent.NodeRenderers
+local PlaintextRendererModule = require(NodeRenderers.PlaintextRenderer)
+local EngineTagRendererModule = require(NodeRenderers.EngineTagRenderer)
+local InlineCustomRendererModule = require(NodeRenderers.InlineCustomRenderer)
 local NodeConfigModule = require(InlineRichText.NodeConfig)
 local config = {
-	[NodeTypeModule.Plaintext] = require(NodeRenderers.PlaintextRenderer),
-	[NodeTypeModule.EngineTag] = require(NodeRenderers.EngineTagRenderer),
-	[NodeTypeModule.InlineCustom] = require(NodeRenderers.InlineCustomRenderer)
+	[NodeTypeModule.Plaintext] = PlaintextRendererModule,
+	[NodeTypeModule.EngineTag] = EngineTagRendererModule,
+	[NodeTypeModule.InlineCustom] = InlineCustomRendererModule
 }
 
 return function(p1, p2)

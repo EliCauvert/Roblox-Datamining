@@ -6,9 +6,10 @@ local DependenciesModule = require(Parent.dependencies)
 local NotificationSnoozedSignal = require(Parent.Signals).NotificationSnoozedSignal
 local TypeModule = require(Parent.type)
 local Cryo = DependenciesModule.Cryo
+local LocalStorage = DependenciesModule.LocalStorage
 local NotificationModalsManager = DependenciesModule.NotificationModalsManager
 local Images = DependenciesModule.UIBlox.App.ImageSet.Images
-local LocalStorageKey = DependenciesModule.LocalStorage.Enums.LocalStorageKey
+local LocalStorageKey = LocalStorage.Enums.LocalStorageKey
 local ToastNotificationSnoozeManager = {}
 ToastNotificationSnoozeManager.__index = ToastNotificationSnoozeManager
 

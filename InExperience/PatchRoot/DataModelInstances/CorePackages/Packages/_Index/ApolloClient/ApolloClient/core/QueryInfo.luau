@@ -17,12 +17,13 @@ local _ = require(script.Parent.Parent.link.core)
 local UtilitiesModule = require(script.Parent.Parent.utilities)
 local IsNonEmptyArrayFunction = UtilitiesModule.isNonEmptyArray
 local GraphQLResultHasErrorFunction = UtilitiesModule.graphQLResultHasError
+local CanUseWeakMap = UtilitiesModule.canUseWeakMap
 local NetworkStatusModule = require(script.Parent.networkStatus)
 local NetworkStatus = NetworkStatusModule.NetworkStatus
 local IsNetworkRequestInFlightFunction = NetworkStatusModule.isNetworkRequestInFlight
 local _ = require(script.Parent.Parent.errors)
 local CacheWriteBehavior = { FORBID = 0, OVERWRITE = 1, MERGE = 2 }
-local NewWeakMap = if UtilitiesModule.canUseWeakMap then WeakMap.new() else Map.new(nil)
+local NewWeakMap = if CanUseWeakMap then WeakMap.new() else Map.new(nil)
 
 local function _(Cache, Key)
 	-- upvalues: NewWeakMap (copy)

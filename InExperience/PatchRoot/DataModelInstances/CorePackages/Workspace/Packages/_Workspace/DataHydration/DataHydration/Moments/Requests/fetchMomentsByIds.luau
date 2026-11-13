@@ -3,6 +3,7 @@ local Parent = DataHydration.Parent
 local HttpModule = require(Parent.Http)
 local HttpClientModule = require(Parent.HttpClient)
 local MomentsTypesModule = require(Parent.MomentsTypes)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local _ = require(DataHydration.Moments.MomentsStoreTypes)
 local ConvertApiMomentsToMomentItemsModule = require(DataHydration.Moments.Util.convertApiMomentsToMomentItems)
 local ExtractCommentsByFeedItemIdModule = require(DataHydration.Moments.Util.extractCommentsByFeedItemId)
@@ -10,7 +11,7 @@ local ExtractReactionsByMomentIdModule = require(DataHydration.Moments.Util.extr
 local ExtractShareInfoByMomentIdModule = require(DataHydration.Moments.Util.extractShareInfoByMomentId)
 local ConstructApiUrlModule = require(DataHydration.Moments.Util.constructApiUrl)
 local MomentsFixBatchedGetMomentsQueryParams = game:DefineFastFlag("MomentsFixBatchedGetMomentsQueryParams", false)
-local FFlagMomentsComments = require(Parent.SharedFlags).FFlagMomentsComments
+local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
 local MomentGetIdType = MomentsTypesModule.Enums.MomentGetIdType
 local ShareLinkTargetIdType = MomentsTypesModule.Enums.ShareLinkTargetIdType
 

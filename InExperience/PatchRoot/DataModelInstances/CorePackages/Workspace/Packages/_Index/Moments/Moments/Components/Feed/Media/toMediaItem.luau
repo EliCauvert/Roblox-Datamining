@@ -167,19 +167,19 @@ return function(p1, p2)
 				captureType = Moment.metadata.captureType,
 				edits = Edits
 			}
-			local LocalTts = nil
+			local Tts1 = nil
 			
 			if FFlagMomentsTTSPendingPreviewPlaybackModule and FFlagMomentsTTSFeedPlaybackModule and IsIncludeLocalTts then
 				if LocalContent == nil or Edits == nil then
-					LocalTts = nil
+					Tts1 = nil
 				else
 					local Tts = Edits.tts
-					LocalTts = if Tts == nil or Tts.text == nil or Tts.text == "" then nil else Tts
+					Tts1 = if Tts == nil or Tts.text == nil or Tts.text == "" then nil else Tts
 				end
 			else
-				LocalTts = nil
+				Tts1 = nil
 			end
-			config.localTts = LocalTts
+			config.localTts = Tts1
 			
 			return config
 		end

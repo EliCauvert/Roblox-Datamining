@@ -29,7 +29,7 @@ local UseComponentConfigModule = require(SduiSharedUtilities.hooks.useComponentC
 local UseUiStatusModule = require(SduiSharedUtilities.hooks.useUiStatus)
 local UseDataUpdatedTimestampModule = require(SduiSharedUtilities.hooks.useDataUpdatedTimestamp)
 local UiStatus = require(SduiSharedUtilities.SduiIntegrationTypes).UiStatus
-local Snackbar = FoundationModule.Snackbar
+local SnackbarDEPRECATED = FoundationModule.Snackbar_DEPRECATED
 local FFlagLuaAppSduiPageEntryPointSnackbar = require(Parent.SharedFlags).FFlagLuaAppSduiPageEntryPointSnackbar
 local FFlagSduiPageEntryUseSharedHooks = require(Parent.SharedFlags).FFlagSduiPageEntryUseSharedHooks
 local FFlagLuaAppMediaGalleryGamepadSupport = require(Parent.SharedFlags).FFlagLuaAppMediaGalleryGamepadSupport
@@ -40,7 +40,7 @@ local FFlagLuaAppSduiVideoThumbnail = require(Parent.SharedFlags).FFlagLuaAppSdu
 local FFlagLuaAppOneByTwoHoverIdleAutoplay = require(Parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
 
 local function SduiPageEntryPoint(p1, p2)
-	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), FFlagSduiPageEntryUseSharedHooks (copy), UseComponentConfigModule (copy), ReactModule (copy), GetSduiApiStoreModule (copy), SignalsReactModule (copy), UseUiStatusModule (copy), UiStatus (copy), FFlagSduiPageEntryPointResolvedSlot (copy), UseComponentLifecycleTimingModule (copy), UseLocalAnalyticsDataModule (copy), UseStatefulRefModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateBackFunction (copy), ReactFocusNavigationModule (copy), UseCloseWithBackButtonFunction (copy), FFlagLuaAppSduiPageEntryPointSnackbar (copy), UsePageEntrySnackbarModule (copy), UseDataUpdatedTimestampModule (copy), UseCreateClientBindingSduiContextModule (copy), FFlagLuaAppSduiVideoThumbnail (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), GetSduiComponentWrapperFunction (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), FFlagSduiVerticalFeedScrollTelemetry (copy), FFlagAppThemeHalloween2026HomeBackground (copy), SduiPageNavigationHeaderModule (copy), CompositionTags (copy), NavButtonType (copy), FoundationModule (copy), Loading (copy), SduiPageErrorStateModule (copy), ReactRobloxModule (copy), Snackbar (copy), CoreGui (copy)
+	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), FFlagSduiPageEntryUseSharedHooks (copy), UseComponentConfigModule (copy), ReactModule (copy), GetSduiApiStoreModule (copy), SignalsReactModule (copy), UseUiStatusModule (copy), UiStatus (copy), FFlagSduiPageEntryPointResolvedSlot (copy), UseComponentLifecycleTimingModule (copy), UseLocalAnalyticsDataModule (copy), UseStatefulRefModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateBackFunction (copy), ReactFocusNavigationModule (copy), UseCloseWithBackButtonFunction (copy), FFlagLuaAppSduiPageEntryPointSnackbar (copy), UsePageEntrySnackbarModule (copy), UseDataUpdatedTimestampModule (copy), UseCreateClientBindingSduiContextModule (copy), FFlagLuaAppSduiVideoThumbnail (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), GetSduiComponentWrapperFunction (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), FFlagSduiVerticalFeedScrollTelemetry (copy), FFlagAppThemeHalloween2026HomeBackground (copy), SduiPageNavigationHeaderModule (copy), CompositionTags (copy), NavButtonType (copy), FoundationModule (copy), Loading (copy), SduiPageErrorStateModule (copy), ReactRobloxModule (copy), SnackbarDEPRECATED (copy), CoreGui (copy)
 	local AppPage = p1.appPage
 	local ConfigKey = p1.configKey or AppPage
 	local SduiPageEntryPointName: string = `SduiPageEntryPoint-{ConfigKey}`
@@ -192,7 +192,7 @@ local function SduiPageEntryPoint(p1, p2)
 				DisplayOrder = p1.snackbarPortalLayoutOrder,
 				ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 			}, {
-				Snackbar = ReactModule.createElement(Snackbar, {
+				Snackbar = ReactModule.createElement(SnackbarDEPRECATED, {
 					title = UsePageEntrySnackbarModuleResult.snackbarConfig.title,
 					icon = UsePageEntrySnackbarModuleResult.snackbarConfig.icon,
 					Position = UDim2.new(0.5, 0, 1, -UseTokensResult.Padding.XLarge),

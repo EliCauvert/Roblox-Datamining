@@ -1,9 +1,10 @@
 ﻿local Parent = script:FindFirstAncestor("AppChat").Parent
 local RoactModule = require(Parent.Roact)
 local MemoizeFunction = require(Parent.AppCommonLib).memoize
+local UIBloxModule = require(Parent.UIBlox)
 local GetTextSizeFunction = require(Parent.Style).GetTextSize
 local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
-local WithStyleFunction = require(Parent.UIBlox).Style.withStyle
+local WithStyleFunction = UIBloxModule.Style.withStyle
 local SystemMessage = RoactModule.PureComponent:extend("SystemMessage")
 SystemMessage.defaultProps = {
 	LayoutOrder = nil,

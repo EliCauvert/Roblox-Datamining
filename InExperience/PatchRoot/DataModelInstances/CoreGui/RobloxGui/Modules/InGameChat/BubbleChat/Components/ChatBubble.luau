@@ -7,6 +7,7 @@ local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
 local TModule = require(CorePackages.Packages.t)
 local CryoModule = require(CorePackages.Packages.Cryo)
 local Parent = script.Parent.Parent
+local TypesModule = require(Parent.Types)
 local GetSizeSpringFromSettingsModule = require(Parent.Helpers.getSizeSpringFromSettings)
 local GetTransparencySpringFromSettingsModule = require(Parent.Helpers.getTransparencySpringFromSettings)
 local CoreGui = game:GetService("CoreGui")
@@ -19,7 +20,7 @@ ChatBubble.validateProps = TModule.strictInterface({
 	theme = TModule.optional(TModule.string),
 	renderInsert = TModule.optional(TModule.callback),
 	insertSize = TModule.optional(TModule.Vector2),
-	chatSettings = require(Parent.Types).IChatSettings,
+	chatSettings = TypesModule.IChatSettings,
 	text = TModule.string,
 	timestamp = TModule.number
 })

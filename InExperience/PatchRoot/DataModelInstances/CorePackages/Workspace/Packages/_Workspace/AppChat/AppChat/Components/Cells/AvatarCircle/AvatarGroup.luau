@@ -16,9 +16,9 @@ return function(Frame)
 	
 	for LayoutOrder, thumbnail in Frame.thumbnails do
 		local XScale = 0
+		local Element = nil
 		local _UDim2 = nil
 		local Elements = nil
-		local Element = nil
 		
 		if LayoutOrder <= Value1 then
 			_UDim2 = UDim2.new(1 / Value1, 0, 1 / Value1, 0)

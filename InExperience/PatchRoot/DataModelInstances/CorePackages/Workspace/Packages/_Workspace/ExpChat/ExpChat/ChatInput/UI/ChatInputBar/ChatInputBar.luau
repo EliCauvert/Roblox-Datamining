@@ -23,6 +23,7 @@ local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local UseCursorFunction = UIBloxModule.App.SelectionCursor.useCursor
 local UseInterpolatedClientSettingsModule = require(ExpChat.ClientSettings.useInterpolatedClientSettings)
 local ConfigModule = require(ExpChat.Config)
+local GetFocusNavigationStoreModule = require(ExpChat.Stores.GetFocusNavigationStore)
 local GetPresetChatStoreModule = require(ExpChat.Stores.GetPresetChatStore)
 local NewResult = ExpChatSharedModule.Logger:new("ExpChat/" .. script.Name)
 local AutoCastCommandFunction = ExpChatSharedModule.Commands.autoCastCommand
@@ -84,7 +85,7 @@ local UseSendTelemetryModule = require(script.Parent.Dictation.useSendTelemetry)
 local UsePresetAutocompleteAnalyticsModule = require(script.Parent.usePresetAutocompleteAnalytics)
 local ExpChatPresetChatAutocompleteExperimentation = require(Parent.SocialExperiments).ExpChatPresetChatAutocompleteExperimentation
 local ActionBindableEvent = ExpChatSharedModule.ActionBindableEvent
-local v1 = require(ExpChat.Stores.GetFocusNavigationStore)(false)
+local FocusNavigationStoreModule = GetFocusNavigationStoreModule(false)
 local FIntPresetChatCooldownLuaMsRatio = ExpChatSharedModule.Flags.FIntPresetChatCooldownLuaMs / 1000
 
 local function setTransparency(p1, p2)
@@ -130,15 +131,15 @@ local function onChatInputBarFocusLost(Callback1, Keybinds, Callback)
 end
 
 local function useEffectChatInputBarFocus(UseRefResult, UseRefResult1, UseRefResult2, Callback, Callback1)
-	-- upvalues: FFlagConsoleChatUseChromeFocusUtils (copy), ReactModule (copy), SignalsModule (copy), v1 (copy), GuiService (copy), UserInputService (copy), FocusUtils (copy), FFlagChromeChatGamepadSupportFix (copy), FFlagEnableConsoleExpControls (copy), onChatInputBarFocusLost (copy), ActionBindableEvent (copy)
+	-- upvalues: FFlagConsoleChatUseChromeFocusUtils (copy), ReactModule (copy), SignalsModule (copy), FocusNavigationStoreModule (copy), GuiService (copy), UserInputService (copy), FocusUtils (copy), FFlagChromeChatGamepadSupportFix (copy), FFlagEnableConsoleExpControls (copy), onChatInputBarFocusLost (copy), ActionBindableEvent (copy)
 	if FFlagConsoleChatUseChromeFocusUtils then
 		ReactModule.useEffect(function()
-			-- upvalues: SignalsModule (upval), v1 (upval), UseRefResult1 (copy), UseRefResult (copy), UseRefResult2 (copy), GuiService (upval), Callback (copy), UserInputService (upval), FocusUtils (upval), Callback1 (copy)
+			-- upvalues: SignalsModule (upval), FocusNavigationStoreModule (upval), UseRefResult1 (copy), UseRefResult (copy), UseRefResult2 (copy), GuiService (upval), Callback (copy), UserInputService (upval), FocusUtils (upval), Callback1 (copy)
 			local t = {}
 			local InputBeganConnection = nil
 			local Effect = SignalsModule.createEffect(function(p1)
-				-- upvalues: v1 (upval), UseRefResult1 (upval), UseRefResult (upval), UseRefResult2 (upval), GuiService (upval), Callback (upval), InputBeganConnection (ref), UserInputService (upval), t (copy), FocusUtils (upval), Callback1 (upval)
-				local ChatInputBarFocused = v1.getChatInputBarFocused(p1)
+				-- upvalues: FocusNavigationStoreModule (upval), UseRefResult1 (upval), UseRefResult (upval), UseRefResult2 (upval), GuiService (upval), Callback (upval), InputBeganConnection (ref), UserInputService (upval), t (copy), FocusUtils (upval), Callback1 (upval)
+				local ChatInputBarFocused = FocusNavigationStoreModule.getChatInputBarFocused(p1)
 				local Current = (if UseRefResult1.current then UseRefResult1.current else UseRefResult.current) or UseRefResult2.current
 				
 				if not Current then return end
@@ -149,11 +150,11 @@ local function useEffectChatInputBarFocus(UseRefResult, UseRefResult1, UseRefRes
 					
 					if not InputBeganConnection then
 						InputBeganConnection = UserInputService.InputBegan:Connect(function(Input)
-							-- upvalues: t (upval), FocusUtils (upval), v1 (upval)
+							-- upvalues: t (upval), FocusUtils (upval), FocusNavigationStoreModule (upval)
 							if Input and t[Input.KeyCode] then
 								FocusUtils.FocusOnChrome(function()
-									-- upvalues: v1 (upval)
-									v1.unfocusChatInputBar()
+									-- upvalues: FocusNavigationStoreModule (upval)
+									FocusNavigationStoreModule.unfocusChatInputBar()
 								end, "chat")
 							end
 						end)
@@ -255,7 +256,7 @@ return ReactModule.memo((LocalizationModule.connect(function(p1)
 		targetTextChannelDisplayName = TargetTextChannelDisplayName
 	}
 end)(function(Frame)
-	-- upvalues: ReactModule (copy), FFlagExpChatUseUnifiedTooltipStore (copy), GetChatTooltipStoreModule (copy), ExpChatMainInputBarClickAnalytics (copy), FFlagExpChatDictation1 (copy), UseSendTelemetryModule (copy), FFlagExpChatEmojiDropdownDismissAnalyticsModule (copy), ReactFocusNavigationModule (copy), SignalsReactModule (copy), v1 (copy), GetMessagesStoreModule (copy), FFlagExpChatPresetChatEnabled (copy), GetPresetChatStoreModule (copy), FFlagExpChatTabShortcutNav (copy), UseFocusInputBarFunction (copy), UseInputBarTabNavigationFunction (copy), SignalsModule (copy), TextChatService (copy), NewResult2 (ref), AutocompleteTextModule (copy), InitializeCommandsModule (copy), GetEnableChatInputBarConfigurationAutocompleteEnabledModule (copy), NewResult1 (ref), InitializeEmojisModule (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), NewResult3 (ref), InitializeGlobalCommandsModule (copy), InitialCommandsModule (copy), NewResult (copy), FFlagExpChatDictation (copy), FFlagExpChatPresetChatGamepadEnabledModule (copy), GuiService (copy), FFlagExpChatPresetChatAutocompleteAnalyticsEnabledModule (copy), UsePresetAutocompleteAnalyticsModule (copy), PresetSearchModule (copy), FIntPresetChatCooldownLuaMsRatio (copy), SendPresetModule (copy), ExpChatSharedModule (copy), ConstantsModule (copy), FFlagExpChatAutocompleteDropdownRedesignModule (copy), FFlagExpChatPresetChatAutocompleteEnabledModule (copy), PresetEntryTextModule (copy), ExpChatDoNotSetCursorPosition (copy), ExpChatPresetChatIXPExposure (copy), IXPServiceWrapper (copy), ExpChatPresetChatIXPLayerName (copy), FFlagExpChatBackspaceExitsTargetChannelInGlobalTabsModule (copy), FFlagExpChatFixBackspaceNilTargetChannel (copy), ConfigModule (copy), Players (copy), FFlagEnableConsoleExpControls (copy), FFlagChromeChatGamepadSupportFix (copy), onChatInputBarFocusLost (copy), ActionBindableEvent (copy), useEffectChatInputBarFocus (copy), FFlagExpChatUniverseChatPresetEnabledModule (copy), ExpChatPresetAutocompleteSearchVariants (copy), ExpChatPresetChatAutocompleteExperimentation (copy), SortCommandResultsCallbackModule (copy), SortEmojiResultsCallbackModule (copy), List (copy), Name (ref), RBXTeamCommand (copy), Name1 (ref), RBXWhisperCommand (copy), ChatOptimizeCommandProcessing (copy), AutoCastCommandFunction (copy), PromiseModule (copy), UseCursorFunction (copy), ExpChatDictationIXPExposure (copy), ExpChatDictationIXPLayerName (copy), ExpChatPresetAutocompleteIxpEnabled (copy), ExpChatPresetAutocompleteIxpLayer (copy), FFlagExpChatPresetChatSendEnabled (copy), UseInterpolatedClientSettingsModule (copy), FFlagExpChatNewInputBarModule (copy), AutocompleteDropdownModule (copy), setTransparency (copy), FFlagExpChatEmojiDropdownShowAnalyticsModule (copy), FFlagExpChatNewInputBarDictationModule (copy), ChatInputBarV2DictationModule (copy), ChatInputBarV2Module (copy), DictationInputBarModule (copy), ChannelChipModule (copy), ImageSetLabel (copy), Images (copy)
+	-- upvalues: ReactModule (copy), FFlagExpChatUseUnifiedTooltipStore (copy), GetChatTooltipStoreModule (copy), ExpChatMainInputBarClickAnalytics (copy), FFlagExpChatDictation1 (copy), UseSendTelemetryModule (copy), FFlagExpChatEmojiDropdownDismissAnalyticsModule (copy), ReactFocusNavigationModule (copy), SignalsReactModule (copy), FocusNavigationStoreModule (copy), GetMessagesStoreModule (copy), FFlagExpChatPresetChatEnabled (copy), GetPresetChatStoreModule (copy), FFlagExpChatTabShortcutNav (copy), UseFocusInputBarFunction (copy), UseInputBarTabNavigationFunction (copy), SignalsModule (copy), TextChatService (copy), NewResult2 (ref), AutocompleteTextModule (copy), InitializeCommandsModule (copy), GetEnableChatInputBarConfigurationAutocompleteEnabledModule (copy), NewResult1 (ref), InitializeEmojisModule (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), NewResult3 (ref), InitializeGlobalCommandsModule (copy), InitialCommandsModule (copy), NewResult (copy), FFlagExpChatDictation (copy), FFlagExpChatPresetChatGamepadEnabledModule (copy), GuiService (copy), FFlagExpChatPresetChatAutocompleteAnalyticsEnabledModule (copy), UsePresetAutocompleteAnalyticsModule (copy), PresetSearchModule (copy), FIntPresetChatCooldownLuaMsRatio (copy), SendPresetModule (copy), ExpChatSharedModule (copy), ConstantsModule (copy), FFlagExpChatAutocompleteDropdownRedesignModule (copy), FFlagExpChatPresetChatAutocompleteEnabledModule (copy), PresetEntryTextModule (copy), ExpChatDoNotSetCursorPosition (copy), ExpChatPresetChatIXPExposure (copy), IXPServiceWrapper (copy), ExpChatPresetChatIXPLayerName (copy), FFlagExpChatBackspaceExitsTargetChannelInGlobalTabsModule (copy), FFlagExpChatFixBackspaceNilTargetChannel (copy), ConfigModule (copy), Players (copy), FFlagEnableConsoleExpControls (copy), FFlagChromeChatGamepadSupportFix (copy), onChatInputBarFocusLost (copy), ActionBindableEvent (copy), useEffectChatInputBarFocus (copy), FFlagExpChatUniverseChatPresetEnabledModule (copy), ExpChatPresetAutocompleteSearchVariants (copy), ExpChatPresetChatAutocompleteExperimentation (copy), SortCommandResultsCallbackModule (copy), SortEmojiResultsCallbackModule (copy), List (copy), Name (ref), RBXTeamCommand (copy), Name1 (ref), RBXWhisperCommand (copy), ChatOptimizeCommandProcessing (copy), AutoCastCommandFunction (copy), PromiseModule (copy), UseCursorFunction (copy), ExpChatDictationIXPExposure (copy), ExpChatDictationIXPLayerName (copy), ExpChatPresetAutocompleteIxpEnabled (copy), ExpChatPresetAutocompleteIxpLayer (copy), FFlagExpChatPresetChatSendEnabled (copy), UseInterpolatedClientSettingsModule (copy), FFlagExpChatNewInputBarModule (copy), AutocompleteDropdownModule (copy), setTransparency (copy), FFlagExpChatEmojiDropdownShowAnalyticsModule (copy), FFlagExpChatNewInputBarDictationModule (copy), ChatInputBarV2DictationModule (copy), ChatInputBarV2Module (copy), DictationInputBarModule (copy), ChannelChipModule (copy), ImageSetLabel (copy), Images (copy)
 	local UseRefResult = ReactModule.useRef("")
 	
 	if FFlagExpChatUseUnifiedTooltipStore then
@@ -299,7 +300,7 @@ end)(function(Frame)
 	local UseRefResult9 = ReactModule.useRef(nil)
 	local UseRefResult10 = ReactModule.useRef(false)
 	local UseFocusGuiObjectResult = ReactFocusNavigationModule.useFocusGuiObject()
-	local UseSignalStateResult = SignalsReactModule.useSignalState(v1.getChatInputBarFocused)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(FocusNavigationStoreModule.getChatInputBarFocused)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(GetMessagesStoreModule(false).getCanLocalUserChat)
 	local UseSignalStateResult2 = if FFlagExpChatPresetChatEnabled then SignalsReactModule.useSignalState(GetPresetChatStoreModule(false).getIsTrayOpen) else nil
 	local UseSignalStateResult3 = if FFlagExpChatPresetChatEnabled then SignalsReactModule.useSignalState(GetPresetChatStoreModule(false).getIsEnabled) else nil
@@ -318,17 +319,17 @@ end)(function(Frame)
 		UseInputBarTabNavigationFunction(UseRefResult12, Frame.userInputService)
 	end
 	ReactModule.useEffect(function()
-		-- upvalues: FFlagExpChatTabShortcutNav (upval), SignalsModule (upval), v1 (upval), FocusFunction (ref)
+		-- upvalues: FFlagExpChatTabShortcutNav (upval), SignalsModule (upval), FocusNavigationStoreModule (upval), FocusFunction (ref)
 		if not FFlagExpChatTabShortcutNav then return end
 		return SignalsModule.createEffect(function(p2)
-			-- upvalues: v1 (upval), FocusFunction (upval)
-			local ChatInputBarFocusRequestTime = v1.getChatInputBarFocusRequestTime(p2)
+			-- upvalues: FocusNavigationStoreModule (upval), FocusFunction (upval)
+			local ChatInputBarFocusRequestTime = FocusNavigationStoreModule.getChatInputBarFocusRequestTime(p2)
 			
 			if ChatInputBarFocusRequestTime == nil then return end
 			if os.clock() - ChatInputBarFocusRequestTime <= 5 then
 				FocusFunction()
 			end
-			v1.clearChatInputBarFocusRequest()
+			FocusNavigationStoreModule.clearChatInputBarFocusRequest()
 		end)
 	end, { FocusFunction })
 	ReactModule.useEffect(function()
@@ -675,15 +676,15 @@ end)(function(Frame)
 		UseRefResult8.current = Frame.userInputService.InputEnded:connect(function(Input, _)
 			-- upvalues: UseRefResult4 (upval), UseRefResult3 (upval), Frame (upval), UseRefResult10 (upval), NoIsChannelBarVisible (copy), FFlagExpChatFixBackspaceNilTargetChannel (upval), NewResult (upval), UseStateResult (upval)
 			if if UseRefResult4.current then UseRefResult4.current and (UseRefResult4.current:IsFocused() and (Input and Input.KeyCode == Enum.KeyCode.Backspace)) else UseRefResult3.current and (UseRefResult3.current:IsFocused() and (Input and Input.KeyCode == Enum.KeyCode.Backspace)) then
-				local v2 = (Frame.targetTextChannelDisplayName or "") ~= ""
+				local v1 = (Frame.targetTextChannelDisplayName or "") ~= ""
 				
-				if UseRefResult10.current and NoIsChannelBarVisible and (not FFlagExpChatFixBackspaceNilTargetChannel or v2) then
+				if UseRefResult10.current and NoIsChannelBarVisible and (not FFlagExpChatFixBackspaceNilTargetChannel or v1) then
 					Frame.resetTargetChannel(if FFlagExpChatFixBackspaceNilTargetChannel then Frame.isGlobalChatTabActive else nil)
 					NewResult:debug("ChatInputBar ChatInputBarResetTargetChannel()")
 					UseRefResult10.current = false
 					
 					return
-				elseif UseStateResult == "" and (if FFlagExpChatFixBackspaceNilTargetChannel then v2 else Frame.targetTextChannelDisplayName ~= "") then
+				elseif UseStateResult == "" and (if FFlagExpChatFixBackspaceNilTargetChannel then v1 else Frame.targetTextChannelDisplayName ~= "") then
 					UseRefResult10.current = true
 				end
 			end
@@ -965,8 +966,8 @@ end)(function(Frame)
 					local Current = UseRefResult6.current
 					
 					if Current then
-						local TextLabelButton = nil
 						local TextLabelButton1 = nil
+						local TextLabelButton = nil
 						for _, Frame1 in ipairs(Current.ScrollBarFrame.ScrollViewFrame.ScrollView.OffsetFrame:GetChildren()) do
 							if FFlagExpChatAutocompleteDropdownRedesignModule then
 								if Frame1.ClassName == "Frame" and Frame.autocompleteDropdownReducer.results[Frame1.LayoutOrder] == Lowered then
@@ -1184,8 +1185,8 @@ end)(function(Frame)
 	local BackgroundTransparency = UseInterpolatedClientSettingsModule(ChatInputBarSettings).BackgroundTransparency
 	local BackgroundTransparency1 = UseInterpolatedClientSettingsModule(ChatWindowSettings).BackgroundTransparency
 	local IsSpatialUIEnabled = Frame.isSpatialUIEnabled
-	local CreateElementFunction3 = ReactModule.createElement
-	local v2 = "Frame"
+	local CreateElementFunction4 = ReactModule.createElement
+	local v1 = "Frame"
 	local config = {
 		AutomaticSize = Enum.AutomaticSize.Y,
 		BackgroundColor3 = UseInterpolatedClientSettingsModule(ChatWindowSettings).BackgroundColor3,
@@ -1314,12 +1315,12 @@ end)(function(Frame)
 			isGlobalChatTabActive = if FFlagExpChatFixBackspaceNilTargetChannel then Frame.isGlobalChatTabActive else nil
 		}) else nil
 	}
-	local Element = nil
+	local Element1 = nil
 	
 	if FFlagExpChatNewInputBarModule then
-		Element = nil
+		Element1 = nil
 	elseif FFlagExpChatDictation1 and CanLocalUserChat then
-		Element = ReactModule.createElement(DictationInputBarModule, {
+		Element1 = ReactModule.createElement(DictationInputBarModule, {
 			chatInputBarSettings = ChatInputBarSettings,
 			transparencyValue = Frame.transparencyValue,
 			chatInputBarBackgroundTransparency = BackgroundTransparency,
@@ -1359,8 +1360,8 @@ end)(function(Frame)
 			placeholderSelectionImageObject = UseCursorResult
 		})
 	else
-		local CreateElementFunction1 = ReactModule.createElement
-		local v3 = "Frame"
+		local CreateElementFunction2 = ReactModule.createElement
+		local v2 = "Frame"
 		local config2 = {
 			AutomaticSize = Enum.AutomaticSize.XY,
 			BackgroundColor3 = ChatInputBarSettings.BackgroundColor3,
@@ -1382,27 +1383,27 @@ end)(function(Frame)
 			}),
 			Corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 3) })
 		}
-		local CreateElementFunction2 = ReactModule.createElement
-		local v4 = "Frame"
+		local CreateElementFunction3 = ReactModule.createElement
+		local v3 = "Frame"
 		local config4 = {
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.fromScale(1, 0)
 		}
-		local t1 = {}
-		local CreateElementFunction = ReactModule.createElement
-		local v5 = "Frame"
+		local t = {}
+		local CreateElementFunction1 = ReactModule.createElement
+		local v4 = "Frame"
 		local config5 = {
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.new(1, -Frame.sendButtonContainerWidth, 0, 0)
 		}
-		local v6 = 0
+		local v5 = 0
 		local config6 = {
 			TargetChannelChip = ReactModule.createElement(ChannelChipModule, {
 				transparency = Frame.transparencyValue:map(function(p3): number
-					-- upvalues: v6 (copy)
-					return v6 + p3 * (1 - v6)
+					-- upvalues: v5 (copy)
+					return v5 + p3 * (1 - v5)
 				end),
 				onAbsoluteSizeChanged = UseResult7,
 				onChannelChipActivated = if FFlagExpChatFixBackspaceNilTargetChannel then function()
@@ -1417,7 +1418,7 @@ end)(function(Frame)
 		local NoUseSignalStateResult1 = not UseSignalStateResult1
 		
 		if NoUseSignalStateResult1 then
-			local v7: number = if NoUseStateResult4 then 0.5 else 0
+			local v6: number = if NoUseStateResult4 then 0.5 else 0
 			NoUseSignalStateResult1 = ReactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				Selectable = true,
@@ -1433,8 +1434,8 @@ end)(function(Frame)
 				TextColor3 = NoUseStateResult4 and ChatInputBarSettings.PlaceholderColor3 or ChatInputBarSettings.TextColor3,
 				TextSize = if IsSpatialUIEnabled then ChatInputBarSettings.SpatialPanelTextSize else ChatInputBarSettings.TextSize,
 				TextTransparency = Frame.transparencyValue:map(function(p3): number
-					-- upvalues: v7 (copy)
-					return v7 + p3 * (1 - v7)
+					-- upvalues: v6 (copy)
+					return v6 + p3 * (1 - v6)
 				end),
 				SelectionImageObject = UseCursorResult,
 				TextXAlignment = Enum.TextXAlignment.Left,
@@ -1443,12 +1444,12 @@ end)(function(Frame)
 			})
 		end
 		config6.DisabledPlaceholderLabel = NoUseSignalStateResult1
-		local TextBoxContainer = UseSignalStateResult1
+		local Element = UseSignalStateResult1
 		
-		if TextBoxContainer then
-			local CreateElementFunction4 = ReactModule.createElement
-			local v8 = "Frame"
-			local config21 = {
+		if Element then
+			local CreateElementFunction = ReactModule.createElement
+			local v7 = "Frame"
+			local config7 = {
 				BackgroundTransparency = 1,
 				AnchorPoint = Vector2.new(1, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
@@ -1457,11 +1458,11 @@ end)(function(Frame)
 					return UDim2.new(1, -(p3 + 8), 0, 0)
 				end)
 			}
-			local t = {}
+			local t1 = {}
 			local TextBox = UseSignalStateResult1
 			
 			if TextBox then
-				local v9: number = if NoUseStateResult4 then 0.5 else 0
+				local v8: number = if NoUseStateResult4 then 0.5 else 0
 				local TextStrokeTransparency = ChatInputBarSettings.TextStrokeTransparency
 				TextBox = ReactModule.createElement("TextBox", {
 					AnchorPoint = Vector2.new(0, 0),
@@ -1478,8 +1479,8 @@ end)(function(Frame)
 					TextColor3 = ChatInputBarSettings.TextColor3,
 					TextSize = if IsSpatialUIEnabled then ChatInputBarSettings.SpatialPanelTextSize else ChatInputBarSettings.TextSize,
 					TextTransparency = Frame.transparencyValue:map(function(p3): number
-						-- upvalues: v9 (copy)
-						return v9 + p3 * (1 - v9)
+						-- upvalues: v8 (copy)
+						return v8 + p3 * (1 - v8)
 					end),
 					TextStrokeTransparency = Frame.transparencyValue:map(function(p3): number
 						-- upvalues: TextStrokeTransparency (copy)
@@ -1497,19 +1498,19 @@ end)(function(Frame)
 					ref = if ChatInputBarSettings.TextBox then UseRefResult4 else UseRefResult3
 				})
 			end
-			t.TextBox = TextBox
-			TextBoxContainer = CreateElementFunction4(v8, config21, t)
+			t1.TextBox = TextBox
+			Element = CreateElementFunction(v7, config7, t1)
 		end
-		config6.TextBoxContainer = TextBoxContainer
+		config6.TextBoxContainer = Element
 		config6.UIPadding = ReactModule.createElement("UIPadding", {
 			PaddingBottom = UDim.new(0, 10),
 			PaddingLeft = UDim.new(0, 10),
 			PaddingRight = UDim.new(0, 10),
 			PaddingTop = UDim.new(0, 10)
 		})
-		t1.TextContainer = CreateElementFunction(v5, config5, config6)
-		local v10: number = if IsUseStateResultMatch then 0.5 else 0
-		t1.SendButton = ReactModule.createElement("TextButton", {
+		t.TextContainer = CreateElementFunction1(v4, config5, config6)
+		local v9: number = if IsUseStateResultMatch then 0.5 else 0
+		t.SendButton = ReactModule.createElement("TextButton", {
 			AnchorPoint = Vector2.new(1, 0),
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
@@ -1528,17 +1529,17 @@ end)(function(Frame)
 				ZIndex = 2,
 				ImageColor3 = IsUseStateResultMatch and ChatInputBarSettings.PlaceholderColor3 or ChatInputBarSettings.TextColor3,
 				ImageTransparency = Frame.transparencyValue:map(function(p3): number
-					-- upvalues: v10 (copy)
-					return v10 + p3 * (1 - v10)
+					-- upvalues: v9 (copy)
+					return v9 + p3 * (1 - v9)
 				end),
 				Image = Images["icons/actions/send"],
 				Size = UDim2.new(0, 30, 0, 30)
 			})
 		})
-		config3.Container = CreateElementFunction2(v4, config4, t1)
-		Element = CreateElementFunction1(v3, config2, config3)
+		config3.Container = CreateElementFunction3(v3, config4, t)
+		Element1 = CreateElementFunction2(v2, config2, config3)
 	end
-	config1.Background = Element
+	config1.Background = Element1
 	
-	return CreateElementFunction3(v2, config, config1)
+	return CreateElementFunction4(v1, config, config1)
 end)))

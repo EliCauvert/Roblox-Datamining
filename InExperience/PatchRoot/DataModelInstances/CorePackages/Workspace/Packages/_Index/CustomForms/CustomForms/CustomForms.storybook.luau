@@ -4,6 +4,7 @@ local FoundationModule = require(Parent.Foundation)
 local FoundationProvider = FoundationModule.FoundationProvider
 local ColorMode = FoundationModule.Enums.ColorMode
 local Device = FoundationModule.Enums.Device
+local ReactRobloxModule = require(Parent.Dev.ReactRoblox)
 local LocalizationProvider = require(Parent.Localization).LocalizationProvider
 local CustomFormTestlocalizationModule = require(script.Parent.Form["CustomForm.testlocalization"])
 local config = { Light = ColorMode.Light, Dark = ColorMode.Dark }
@@ -11,7 +12,7 @@ local config = { Light = ColorMode.Light, Dark = ColorMode.Dark }
 return {
 	name = "CustomForms",
 	roact = ReactModule,
-	reactRoblox = require(Parent.Dev.ReactRoblox),
+	reactRoblox = ReactRobloxModule,
 	mapStory = function(p1)
 		-- upvalues: ReactModule (copy), LocalizationProvider (copy), CustomFormTestlocalizationModule (copy), FoundationProvider (copy), config (copy), Device (copy)
 		return function(p2)

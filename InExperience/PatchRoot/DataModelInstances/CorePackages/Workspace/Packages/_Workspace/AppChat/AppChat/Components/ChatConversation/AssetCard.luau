@@ -15,6 +15,7 @@ local ShareLinkV2PresentationModule = require(AppChat.Components.ChatConversatio
 local UseShareLinkV2PresentationModule = require(AppChat.Components.ChatConversation.ShareLinkComponents.useShareLinkV2Presentation)
 local PlainTextModule = require(script.Parent.PlainText)
 local ChatMessageContainerConstantsModule = require(script.Parent.ChatMessageContainerConstants)
+local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local ChatBubbleEnumModule = require(script.Parent.Bubble.ChatBubbleEnum)
 local RepliedToMarkerModule = require(script.Parent.Bubble.RepliedToMarker)
@@ -28,6 +29,7 @@ local FFlagAppChatResolveShareLinkV2Module = require(AppChat.Flags.FFlagAppChatR
 local FFlagAppChatPlusReferralAssetCardModule = require(AppChat.Flags.FFlagAppChatPlusReferralAssetCard)
 local FFlagAppChatMomentAssetCardModule = require(AppChat.Flags.FFlagAppChatMomentAssetCard)
 local FFlagAppChatGameAssetCardModule = require(AppChat.Flags.FFlagAppChatGameAssetCard)
+local FFlagAppChatGenericShareLinkCardModule = require(AppChat.Flags.FFlagAppChatGenericShareLinkCard)
 local BUBBLEPADDING = ChatMessageContainerConstantsModule.BUBBLE_PADDING
 local TEXTBUBBLEXPADDING = ChatMessageContainerConstantsModule.TEXT_BUBBLE_X_PADDING
 local TEXTBUBBLEXWIDEADDITIONALPADDING = ChatMessageContainerConstantsModule.TEXT_BUBBLE_X_WIDE_ADDITIONAL_PADDING
@@ -50,7 +52,7 @@ local config = {
 		openGameDetailsPage = function() end
 	}
 }
-local Signal = require(Parent.Signals).createSignal(nil)
+local Signal = SignalsModule.createSignal(nil)
 
 local function useRendersAssetCardView(ShareLink)
 	-- upvalues: FFlagAppChatResolveShareLinkV2Module (copy), GetShareLinkV2StoreModule (copy), ReactModule (copy), SignalsReactModule (copy), Signal (copy), FFlagAppChatGameAssetCardModule (copy), IsAssetCardClassificationModule (copy)
@@ -86,7 +88,7 @@ local function renderAssetCardViewRow(Frame, Card)
 end
 
 return function(p1)
-	-- upvalues: CryoModule (copy), config (copy), ShareLinkContainerModule (copy), PlaceIdContainerModule (copy), GameCardContainerModule (copy), UseScaledValueFunction (copy), ConstantsModule (copy), FFlagAppChatShareLinkV2FallbacksModule (copy), UseShareLinkV2PresentationModule (copy), FFlagAppChatPlusReferralAssetCardModule (copy), FFlagAppChatMomentAssetCardModule (copy), FFlagAppChatGameAssetCardModule (copy), useRendersAssetCardView (copy), ReactModule (copy), ToMessageGroupShapeModule (copy), ShareLinkV2PresentationModule (copy), FFlagAppChatFullPlaintextBeforeGameCardsModule (copy), TEXTBUBBLEXPADDING (copy), BUBBLEPADDING (copy), TEXTBUBBLEXWIDEADDITIONALPADDING (copy), GetTextSizeFunction (copy), RoactModule (copy), PlainTextModule (copy), renderAssetCardViewRow (copy), ChatBubbleContainerModule (copy), FFlagAppChatIntrinsicAssetCardHeightModule (copy)
+	-- upvalues: CryoModule (copy), config (copy), ShareLinkContainerModule (copy), PlaceIdContainerModule (copy), GameCardContainerModule (copy), UseScaledValueFunction (copy), ConstantsModule (copy), FFlagAppChatShareLinkV2FallbacksModule (copy), UseShareLinkV2PresentationModule (copy), FFlagAppChatPlusReferralAssetCardModule (copy), FFlagAppChatMomentAssetCardModule (copy), FFlagAppChatGameAssetCardModule (copy), FFlagAppChatGenericShareLinkCardModule (copy), useRendersAssetCardView (copy), ReactModule (copy), ToMessageGroupShapeModule (copy), ShareLinkV2PresentationModule (copy), FFlagAppChatFullPlaintextBeforeGameCardsModule (copy), TEXTBUBBLEXPADDING (copy), BUBBLEPADDING (copy), TEXTBUBBLEXWIDEADDITIONALPADDING (copy), GetTextSizeFunction (copy), RoactModule (copy), PlainTextModule (copy), renderAssetCardViewRow (copy), ChatBubbleContainerModule (copy), FFlagAppChatIntrinsicAssetCardHeightModule (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local UnionResult1 = CryoModule.Dictionary.union(config.additionalProps, UnionResult.additionalProps)
 	local ShareLinkContainerModule1 = if UnionResult1.shareLink then ShareLinkContainerModule else UnionResult1.placeId and PlaceIdContainerModule or GameCardContainerModule
@@ -102,7 +104,7 @@ return function(p1)
 	local v1 = false
 	local UseMemoResult = nil
 	
-	if FFlagAppChatPlusReferralAssetCardModule or FFlagAppChatMomentAssetCardModule or FFlagAppChatGameAssetCardModule then
+	if FFlagAppChatPlusReferralAssetCardModule or FFlagAppChatMomentAssetCardModule or FFlagAppChatGameAssetCardModule or FFlagAppChatGenericShareLinkCardModule then
 		v1 = useRendersAssetCardView(UnionResult1.shareLink)
 		UseMemoResult = ReactModule.useMemo(function()
 			-- upvalues: ToMessageGroupShapeModule (upval), UnionResult (copy)

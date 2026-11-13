@@ -2,10 +2,12 @@
 local CorePackages = game:GetService("CorePackages")
 local PromiseModule = require(CorePackages.Packages.Promise)
 local NewResult = require(CorePackages.Workspace.Packages.CoreScriptsInitializer).CoreLogger:new(script.Name)
+local GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoice
 local ConstantsModule = require(RobloxGui.Modules.VoiceChat.Constants)
 local Default = require(RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
+local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
 local Constants = require(CorePackages.Workspace.Packages.CrossExperience).Constants
-local FIntPartyVoiceUndeafenDelayMS = require(CorePackages.Workspace.Packages.SharedFlags).FIntPartyVoiceUndeafenDelayMS
+local FIntPartyVoiceUndeafenDelayMS = SharedFlagsModule.FIntPartyVoiceUndeafenDelayMS
 local FixJoinVoiceDelayedAFMInit = game:DefineFastFlag("FixJoinVoiceDelayedAFMInit", false)
 local Flag = false
 local VoiceChatState = nil
@@ -15,7 +17,7 @@ local Flag3 = false
 local Flag4 = false
 local DelayedThread = nil
 
-if require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoice() then
+if GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction() then
 	Default:subscribe("OnStateChanged", function(_, VoiceChatState1)
 		-- upvalues: VoiceChatState (ref), Flag2 (ref)
 		VoiceChatState = VoiceChatState1
@@ -66,7 +68,7 @@ if require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagFixSeamlessVoice
 			local FOCUSPRIORITY = Constants.AUDIO_FOCUS_MANAGEMENT.UGC.FOCUS_PRIORITY
 			Result:RegisterContextIdFromLua(CONTEXTID)
 			
-			local function v21()
+			local function v22()
 				-- upvalues: FIntPartyVoiceUndeafenDelayMS (upval), DelayedThread (upval), Default (upval)
 				if isConnectedToPublicVoice() then
 					if FIntPartyVoiceUndeafenDelayMS > 0 and DelayedThread then
@@ -82,7 +84,7 @@ if require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagFixSeamlessVoice
 				end
 			end
 			
-			local function v22()
+			local function v23()
 				-- upvalues: FIntPartyVoiceUndeafenDelayMS (upval), DelayedThread (upval), Default (upval)
 				if isConnectedToPublicVoice() then
 					if FIntPartyVoiceUndeafenDelayMS > 0 and DelayedThread then
@@ -99,34 +101,34 @@ if require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagFixSeamlessVoice
 			end
 			
 			Result.OnDeafenVoiceAudio:Connect(function(ContextId)
-				-- upvalues: CONTEXTID (copy), FIntPartyVoiceUndeafenDelayMS (upval), DelayedThread (upval), NewResult (upval), v21 (copy)
+				-- upvalues: CONTEXTID (copy), FIntPartyVoiceUndeafenDelayMS (upval), DelayedThread (upval), NewResult (upval), v22 (copy)
 				if ContextId == CONTEXTID then
 					if FIntPartyVoiceUndeafenDelayMS > 0 and DelayedThread then
 						task.cancel(DelayedThread)
 						DelayedThread = nil
 					end
 					NewResult:info("UGC OnDeafenVoiceAudio fired" .. ContextId)
-					performVoiceOperationWhenReady(v21)
+					performVoiceOperationWhenReady(v22)
 				end
 			end)
 			Result.OnUndeafenVoiceAudio:Connect(function(ContextId)
-				-- upvalues: CONTEXTID (copy), FIntPartyVoiceUndeafenDelayMS (upval), DelayedThread (upval), NewResult (upval), v22 (copy)
+				-- upvalues: CONTEXTID (copy), FIntPartyVoiceUndeafenDelayMS (upval), DelayedThread (upval), NewResult (upval), v23 (copy)
 				if ContextId == CONTEXTID then
 					if FIntPartyVoiceUndeafenDelayMS > 0 then
 						if DelayedThread then
 							task.cancel(DelayedThread)
 						end
 						DelayedThread = task.delay(FIntPartyVoiceUndeafenDelayMS / 1000, function()
-							-- upvalues: DelayedThread (upval), NewResult (upval), ContextId (copy), v22 (upval)
+							-- upvalues: DelayedThread (upval), NewResult (upval), ContextId (copy), v23 (upval)
 							DelayedThread = nil
 							NewResult:info("UGC OnUndeafenVoiceAudio fired delayed" .. ContextId)
-							performVoiceOperationWhenReady(v22)
+							performVoiceOperationWhenReady(v23)
 						end)
 						
 						return
 					else
 						NewResult:info("UGC OnUndeafenVoiceAudio fired" .. ContextId)
-						performVoiceOperationWhenReady(v22)
+						performVoiceOperationWhenReady(v23)
 					end
 				end
 			end)
@@ -151,7 +153,7 @@ if require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagFixSeamlessVoice
 				end)
 			end
 			
-			local function v24(p1, IsConnectedToPublicVoice1)
+			local function v25(p1, IsConnectedToPublicVoice1)
 				-- upvalues: NewResult (upval), Default (upval)
 				if p1 ~= nil then
 					if IsConnectedToPublicVoice1 then
@@ -168,12 +170,12 @@ if require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagFixSeamlessVoice
 			end
 			
 			local _ = function(p1, p2)
-				-- upvalues: Flag2 (upval), Flag (upval), v24 (copy)
+				-- upvalues: Flag2 (upval), Flag (upval), v25 (copy)
 				if not Flag2 then
 					performVoiceOperationWhenReady(function()
-						-- upvalues: Flag (upval), v24 (upval), p1 (copy), p2 (copy)
+						-- upvalues: Flag (upval), v25 (upval), p1 (copy), p2 (copy)
 						if not Flag then
-							v24(p1, p2)
+							v25(p1, p2)
 						end
 					end)
 					Flag2 = true
@@ -195,17 +197,17 @@ if require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagFixSeamlessVoice
 					Callback1("Failed to call RequestFocus due to an error")
 				end
 			end):andThen(function(Result)
-				-- upvalues: Default (upval), Flag4 (upval), Flag2 (upval), Flag (upval), v24 (copy)
+				-- upvalues: Default (upval), Flag4 (upval), Flag2 (upval), Flag (upval), v25 (copy)
 				Default.muteChanged.Event:Connect(function(p1)
-					-- upvalues: Flag4 (upval), Result (copy), Flag2 (upval), Flag (upval), v24 (upval)
+					-- upvalues: Flag4 (upval), Result (copy), Flag2 (upval), Flag (upval), v25 (upval)
 					if Flag4 then
 						local IsConnectedToPublicVoice1 = isConnectedToPublicVoice()
 						
 						if not Flag2 then
 							performVoiceOperationWhenReady(function()
-								-- upvalues: Flag (upval), v24 (upval), p1 (copy), IsConnectedToPublicVoice1 (copy)
+								-- upvalues: Flag (upval), v25 (upval), p1 (copy), IsConnectedToPublicVoice1 (copy)
 								if not Flag then
-									v24(p1, IsConnectedToPublicVoice1)
+									v25(p1, IsConnectedToPublicVoice1)
 								end
 							end)
 							Flag2 = true
@@ -214,9 +216,9 @@ if require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagFixSeamlessVoice
 					else
 						if not Flag2 then
 							performVoiceOperationWhenReady(function()
-								-- upvalues: Flag (upval), v24 (upval), p1 (copy), Result (copy)
+								-- upvalues: Flag (upval), v25 (upval), p1 (copy), Result (copy)
 								if not Flag then
-									v24(p1, Result)
+									v25(p1, Result)
 								end
 							end)
 							Flag2 = true

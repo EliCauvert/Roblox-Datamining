@@ -264,17 +264,17 @@ local function pruneFeed(Tbl, TopicIdToNumCacheItems)
 					local TopicIdToNumCacheItem = TopicIdToNumCacheItems[value3]
 					
 					if TopicIdToNumCacheItem ~= nil then
-						local Copy1 = table.clone(Value)
+						local Copy = table.clone(Value)
 						
 						if PoolId1 ~= nil then
 							local ContentPool = (Tbl.content_pools or {})[PoolId1]
 							
 							if ContentPool ~= nil then
 								if Content_pools[PoolId1] == nil then
-									local Copy2 = table.clone(ContentPool)
-									Copy2.items = takeItems(ContentPool.items, (math.max(TopicIdToNumCacheItem.cap - TopicIdToNumCacheItem.count, 0)))
-									TopicIdToNumCacheItem.count += #Copy2.items
-									Content_pools[PoolId1] = Copy2
+									local Copy1 = table.clone(ContentPool)
+									Copy1.items = takeItems(ContentPool.items, (math.max(TopicIdToNumCacheItem.cap - TopicIdToNumCacheItem.count, 0)))
+									TopicIdToNumCacheItem.count += #Copy1.items
+									Content_pools[PoolId1] = Copy1
 								end
 							else
 								continue
@@ -283,15 +283,15 @@ local function pruneFeed(Tbl, TopicIdToNumCacheItems)
 							for _, value4 in ItemListFieldsResult do
 								local TakeItemsResult = takeItems(Value[value4], (math.max(TopicIdToNumCacheItem.cap - TopicIdToNumCacheItem.count, 0)))
 								TopicIdToNumCacheItem.count += #TakeItemsResult
-								Copy1[value4] = TakeItemsResult
+								Copy[value4] = TakeItemsResult
 							end
 						end
-						local Copy3 = table.clone(Entry)
+						local Copy2 = table.clone(Entry)
 						local InputData1 = Entry.input_data
-						local Copy4 = table.clone(InputData1)
-						Copy4.kind = { type = InputData1.kind.type, value = Copy1 }
-						Copy3.input_data = Copy4
-						Entry_map[value2] = Copy3
+						local Copy3 = table.clone(InputData1)
+						Copy3.kind = { type = InputData1.kind.type, value = Copy }
+						Copy2.input_data = Copy3
+						Entry_map[value2] = Copy2
 					end
 				end
 			end

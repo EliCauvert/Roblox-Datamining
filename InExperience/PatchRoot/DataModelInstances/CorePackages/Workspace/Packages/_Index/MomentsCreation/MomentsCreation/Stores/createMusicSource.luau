@@ -1,12 +1,13 @@
 ﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
 local Parent = MomentsCreation.Parent
 local DashModule = require(Parent.Dash)
+local MomentsCommonModule = require(Parent.MomentsCommon)
 local ConstantsModule = require(MomentsCreation.Constants)
 local _ = require(MomentsCreation.Types.Music)
 local FFlagMomentsCreationSkipRecordingCodeFilterModule = require(MomentsCreation.Flags.FFlagMomentsCreationSkipRecordingCodeFilter)
 local FFlagMomentsCreationMusicSkipMetadataFetchModule = require(MomentsCreation.Flags.FFlagMomentsCreationMusicSkipMetadataFetch)
 local FFlagMomentsCreationAudioSearchV2SortTypeModule = require(MomentsCreation.Flags.FFlagMomentsCreationAudioSearchV2SortType)
-local ReportMusicSearchCountsFunction = require(Parent.MomentsCommon).Analytics.reportMusicSearchCounts
+local ReportMusicSearchCountsFunction = MomentsCommonModule.Analytics.reportMusicSearchCounts
 
 local function formatMusic(AudioMetadataAsync)
 	-- upvalues: FFlagMomentsCreationSkipRecordingCodeFilterModule (copy)

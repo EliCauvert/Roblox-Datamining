@@ -1,8 +1,9 @@
 ﻿local Parent = script:FindFirstAncestor("AvatarSwitcher").Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
+local FoundationCloudAssetsModule = require(Parent.FoundationCloudAssets)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
-local PictogramsCollaborators = require(Parent.FoundationCloudAssets).Assets["pictograms/collaborators"]
+local PictogramsCollaborators = FoundationCloudAssetsModule.Assets["pictograms/collaborators"]
 
 function EmptyState(p1)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), FoundationModule (copy), PictogramsCollaborators (copy)

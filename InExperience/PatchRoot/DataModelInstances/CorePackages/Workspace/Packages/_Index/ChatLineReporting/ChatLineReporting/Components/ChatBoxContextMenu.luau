@@ -2,6 +2,7 @@
 local ChatLineReporting = script:FindFirstAncestor("ChatLineReporting")
 local Parent = ChatLineReporting.Parent
 local UIBloxModule = require(Parent.UIBlox)
+local OtterModule = require(Parent.Otter)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local CurrentCamera = game.Workspace.CurrentCamera
 local ConstantsModule = require(ChatLineReporting.Common.Constants)
@@ -12,7 +13,7 @@ local MenuDirection = UIBloxModule.App.Menu.MenuDirection
 local ChatLineReportRootModule = require(ChatLineReporting.Components.ChatLineReportRoot)
 local GetFFlagMemoizeChatReportingMenuFunction = require(Parent.SharedFlags).GetFFlagMemoizeChatReportingMenu
 local MotorOverrideOptions = {
-	motorCallback = require(Parent.Otter).instant,
+	motorCallback = OtterModule.instant,
 	open = { targetValue = 1 },
 	close = { targetValue = 0 }
 }

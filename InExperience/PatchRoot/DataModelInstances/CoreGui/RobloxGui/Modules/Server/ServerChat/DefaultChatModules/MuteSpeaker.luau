@@ -1,8 +1,9 @@
 ﻿local Chat = game:GetService("Chat")
 local ClientChatModules = Chat:WaitForChild("ClientChatModules")
+local ChatModules = Chat:WaitForChild("ChatModules")
 local ChatConstantsModule = require(ClientChatModules:WaitForChild("ChatConstants"))
 local ChatSettingsModule = require(ClientChatModules:WaitForChild("ChatSettings"))
-local DisplayNameHelpersModule = require(Chat:WaitForChild("ChatModules").Utility.DisplayNameHelpers)
+local DisplayNameHelpersModule = require(ChatModules.Utility.DisplayNameHelpers)
 local ChatLocalizationModule = nil
 pcall(function()
 	-- upvalues: ChatLocalizationModule (ref)

@@ -1,10 +1,11 @@
 ﻿local PeopleReactView = script:FindFirstAncestor("PeopleReactView")
 local Parent = PeopleReactView.Parent
+local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local GetScrollingFrameStoreModule = require(PeopleReactView.Stores.GetScrollingFrameStore)
-local PopoverSide = require(Parent.Foundation).Enums.PopoverSide
+local PopoverSide = FoundationModule.Enums.PopoverSide
 
 local function choosePopoverSideForViewport(p1, p2, Y, NewY, AbsolutePositionY, p3, p4: number, p5: number)
 	-- upvalues: PopoverSide (copy)

@@ -2,10 +2,11 @@
 local ReactModule = require(Parent.React)
 local ReactOtterModule = require(Parent.ReactOtter)
 local UIBloxModule = require(Parent.UIBlox)
+local LocalizationModule = require(Parent.Localization)
 local FoundationModule = require(Parent.Foundation)
 local Text = FoundationModule.Text
 local View = FoundationModule.View
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 local config = { stiffness = 400, damping = 40, mass = 1 }

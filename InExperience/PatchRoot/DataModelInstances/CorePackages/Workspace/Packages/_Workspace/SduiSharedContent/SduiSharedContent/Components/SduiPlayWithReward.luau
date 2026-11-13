@@ -1,13 +1,15 @@
 ﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+local NavigationModule = require(Parent.Navigation)
 local ReactModule = require(Parent.React)
 local PlayWithRewardComponentModule = require(Parent.PlayWithRewardComponent)
 local GamePlayButtonModule = require(Parent.GamePlayButton)
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local PlayWithRewardComponent = PlayWithRewardComponentModule.PlayWithRewardComponent
 local UsePlayWithRewardDataFunction = PlayWithRewardComponentModule.usePlayWithRewardData
 local UsePlayButtonStateFunction = GamePlayButtonModule.usePlayButtonState
 local PlayButtonStates = GamePlayButtonModule.PlayButtonStates
-local UseNavigationFocusFunction = require(Parent.Navigation).useNavigationFocus
-local GetSduiClientPageScopeFunction = require(Parent.SduiCoreSystem).getSduiClientPageScope
+local UseNavigationFocusFunction = NavigationModule.useNavigationFocus
+local GetSduiClientPageScopeFunction = SduiCoreSystemModule.getSduiClientPageScope
 
 return ReactModule.memo(function(p1)
 	-- upvalues: UseNavigationFocusFunction (copy), ReactModule (copy), UsePlayButtonStateFunction (copy), PlayButtonStates (copy), UsePlayWithRewardDataFunction (copy), GetSduiClientPageScopeFunction (copy), PlayWithRewardComponent (copy)

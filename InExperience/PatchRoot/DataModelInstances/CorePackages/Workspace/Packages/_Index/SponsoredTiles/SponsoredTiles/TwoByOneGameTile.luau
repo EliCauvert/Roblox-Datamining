@@ -96,12 +96,12 @@ return function(p1)
 	local UseTokensResult = UseTokensFunction()
 	local _UDim = UDim.new(0, UseTokensResult.Radius.Medium)
 	local TitleSmall = nil
+	local CaptionSmall = nil
+	local BodySmall = nil
 	local TitleLarge = nil
 	local Medium = nil
 	local Small = nil
 	local Medium1 = nil
-	local BodySmall = nil
-	local CaptionSmall = nil
 	local XXSmall = nil
 	local Size800 = nil
 	

@@ -10,6 +10,12 @@ return {
 	isOnScreen = function(p1, p2): boolean
 		return p2.Max.X >= p1.Min.X and p1.Max.X >= p2.Min.X and p2.Max.Y >= p1.Min.Y and p1.Max.Y >= p2.Min.Y
 	end,
+	clampRectToScreen = function(p1, p2): Rect
+		local MaxDelta = p1.Max - p1.Min
+		local _Vector2 = Vector2.new(math.max(p2.Min.X, (math.min(p1.Min.X, p2.Max.X - MaxDelta.X))), (math.max(p2.Min.Y, (math.min(p1.Min.Y, p2.Max.Y - MaxDelta.Y)))))
+		
+		return Rect.new(_Vector2, _Vector2 + MaxDelta)
+	end,
 	calculateSide = function(Bottom, p1, p2, Vector)
 		-- upvalues: PopoverSideModule (copy)
 		if Bottom == PopoverSideModule.Top then

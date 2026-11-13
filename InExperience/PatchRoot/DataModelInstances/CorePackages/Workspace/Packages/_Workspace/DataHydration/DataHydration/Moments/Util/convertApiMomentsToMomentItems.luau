@@ -1,5 +1,6 @@
 ﻿local DataHydration = script:FindFirstAncestor("DataHydration")
 local Parent = DataHydration.Parent
+local MomentsTypesModule = require(Parent.MomentsTypes)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagMomentsServeEDPVideos = SharedFlagsModule.FFlagMomentsServeEDPVideos
 local GetFFlagMomentsRenderPostAssetsModule = require(Parent.MomentsCommon.GetFFlagMomentsRenderPostAssets)
@@ -11,7 +12,7 @@ local FFlagMomentsCommentsIxpEnabled = SharedFlagsModule.FFlagMomentsCommentsIxp
 local FFlagProfileMomentSceneOutfitPoster = SharedFlagsModule.FFlagProfileMomentSceneOutfitPoster
 local FFlagEnableMomentsCommentReporting = SharedFlagsModule.FFlagEnableMomentsCommentReporting
 local FFlagMomentsRenderAvatarPostsInFeed = SharedFlagsModule.FFlagMomentsRenderAvatarPostsInFeed
-local MomentStatus = require(Parent.MomentsTypes).Enums.MomentStatus
+local MomentStatus = MomentsTypesModule.Enums.MomentStatus
 local BuilderSansMedium = Enum.Font.BuilderSansMedium
 local _Color3 = Color3.new(0, 0, 0)
 local Center = Enum.TextXAlignment.Center
@@ -285,7 +286,7 @@ local function convertApiMomentToMomentItem(p2)
 		config.metadata.isMomentScene = true
 		local PostAsset = p2.postAsset
 		
-		if config.postAsset == nil and (PostAsset ~= nil and PostAsset.postAssetId ~= nil) then
+		if config.postAsset == nil and PostAsset ~= nil and PostAsset.postAssetId ~= nil then
 			config.postAsset = { postAssetId = PostAsset.postAssetId }
 		end
 	end

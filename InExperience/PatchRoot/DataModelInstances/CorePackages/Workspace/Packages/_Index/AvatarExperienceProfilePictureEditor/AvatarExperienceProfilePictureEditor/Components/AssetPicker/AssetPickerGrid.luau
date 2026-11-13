@@ -2,16 +2,18 @@
 local Parent = AvatarExperienceProfilePictureEditor.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
+local AvatarExperienceUIKitModule = require(Parent.AvatarExperienceUIKit)
 local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local TextKeysModule = require(AvatarExperienceProfilePictureEditor.Common.TextKeys)
 local SectionTitleModule = require(AvatarExperienceProfilePictureEditor.Components.SectionTitle.SectionTitle)
 local AssetPickerGridBodyModule = require(script.Parent.AssetPickerGridBody)
 local _ = require(script.Parent.AssetPickerTile)
 local _ = require(AvatarExperienceProfilePictureEditor.Utils.getAssetPickerStatus)
 local GetGridMetricsModule = require(AvatarExperienceProfilePictureEditor.Utils.getGridMetrics)
-local WidgetHeader = require(Parent.AvatarExperienceUIKit).WidgetComponents.WidgetHeader
+local WidgetHeader = AvatarExperienceUIKitModule.WidgetComponents.WidgetHeader
 
 return function(p1)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), GetGridMetricsModule (copy), View (copy), AssetPickerGridBodyModule (copy), WidgetHeader (copy), SectionTitleModule (copy)

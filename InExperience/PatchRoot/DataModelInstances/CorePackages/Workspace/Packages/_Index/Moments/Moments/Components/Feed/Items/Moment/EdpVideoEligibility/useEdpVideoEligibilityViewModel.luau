@@ -2,11 +2,12 @@
 local Parent = Moments.Parent
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
+local VerticalPagerContextModule = require(Moments.Components.VerticalPager.VerticalPagerContext)
 local _ = require(Moments.Components.Feed.FeedTypes)
 local GameGetPlayabilityStoreModule = require(Parent.DataHydration.GameGetPlayabilityStore)
 local IsVideoEligibleForPlayabilityFunction = require(Parent.VideoUtils).isVideoEligibleForPlayability
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
-local UseVerticalPagerFunction = require(Moments.Components.VerticalPager.VerticalPagerContext).useVerticalPager
+local UseVerticalPagerFunction = VerticalPagerContextModule.useVerticalPager
 local config = {
 	data = SignalsModule.createComputed(function()
 		return nil

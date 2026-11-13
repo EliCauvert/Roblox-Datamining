@@ -1,6 +1,7 @@
 ﻿local UserList = script:FindFirstAncestor("UserList")
 local Parent = UserList.Parent
 local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
 local RoactRoduxModule = require(Parent.RoactRodux)
 local RoduxModule = require(Parent.Rodux)
 local StyleModule = require(Parent.Style)
@@ -44,7 +45,7 @@ return {
 	name = "UserList",
 	storyRoot = UserList,
 	roact = ReactModule,
-	reactRoblox = require(Parent.ReactRoblox),
+	reactRoblox = ReactRobloxModule,
 	mapStory = function(Callback)
 		-- upvalues: ReactModule (copy), StyleProviderWithDefaultTheme (copy), RoactRoduxModule (copy), createStore (copy), mockNavigation (copy), FoundationProvider (copy), FoundationModule (copy), DesignTokenProvider (copy)
 		return function(p1)

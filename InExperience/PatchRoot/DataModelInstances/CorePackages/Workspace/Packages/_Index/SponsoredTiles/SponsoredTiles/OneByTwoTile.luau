@@ -58,6 +58,7 @@ local UseOverflowMenuOpenFunction = AppBloxModule.useOverflowMenuOpen
 local UseTriggerFeedbackFunction = require(Parent.InteractionFeedback).useTriggerFeedback
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagLuaAppDemoModePlayButtonTelemetry = SharedFlagsModule.FFlagLuaAppDemoModePlayButtonTelemetry
+local FFlagLuaAppFeatureTileHapticsFix = SharedFlagsModule.FFlagLuaAppFeatureTileHapticsFix
 local FIntLuaAppGameTileVideoDwellTimeInSec = SharedFlagsModule.FIntLuaAppGameTileVideoDwellTimeInSec
 local FIntLuaAppGameTileVideoVisiblePercent = SharedFlagsModule.FIntLuaAppGameTileVideoVisiblePercent
 local FFlagLuaAppGameTileSelectionVideoPlayback = SharedFlagsModule.FFlagLuaAppGameTileSelectionVideoPlayback
@@ -73,7 +74,7 @@ local FFlagLuaAppSponsoredTileBadgeContentPaddingModule = require(SponsoredTiles
 local FFlagLuaAppAdClickoutEventModule = require(SponsoredTiles.Flags.FFlagLuaAppAdClickoutEvent)
 local LuaAppOneByTwoTileLogoWidthPercentLandscapeRatio = game:DefineFastInt("LuaAppOneByTwoTileLogoWidthPercentLandscape", 40) / 100
 local LuaAppOneByTwoTileLogoWidthPercentSquareRatio = game:DefineFastInt("LuaAppOneByTwoTileLogoWidthPercentSquare", 25) / 100
-local TileLongPress: string = if SharedFlagsModule.FFlagLuaAppFeatureTileHapticsFix then "TileLongPress" else "OneByTwoTileLongPress"
+local TileLongPress: string = if FFlagLuaAppFeatureTileHapticsFix then "TileLongPress" else "OneByTwoTileLongPress"
 local LuaAppOneByTwoTileGradientBottomTransparencyPercentRatio = game:DefineFastInt("LuaAppOneByTwoTileGradientBottomTransparencyPercent", 25) / 100
 local LuaAppOneByTwoTileGradientTopTransparencyPercentRatio = game:DefineFastInt("LuaAppOneByTwoTileGradientTopTransparencyPercent", 100) / 100
 local LuaAppOneByTwoTileGradientBottomHeightPercentRatio = game:DefineFastInt("LuaAppOneByTwoTileGradientBottomHeightPercent", 50) / 100
@@ -514,13 +515,13 @@ return ReactModule.memo(function(p1)
 	local Number: number? = tonumber(p1.logoAspectRatio)
 	local Number1: number = if Number and Number > 0 then Number else 1
 	local LuaAppOneByTwoTileLogoWidthPercentLandscapeRatio1 = if Number1 == 3 then LuaAppOneByTwoTileLogoWidthPercentLandscapeRatio else LuaAppOneByTwoTileLogoWidthPercentSquareRatio
-	local Small = nil
-	local Medium = nil
-	local Size500 = nil
-	local TitleLarge = nil
-	local Size600 = nil
-	local BodySmall = nil
 	local Size800 = nil
+	local Size500 = nil
+	local Medium = nil
+	local Small = nil
+	local TitleLarge = nil
+	local BodySmall = nil
+	local Size600 = nil
 	local XXSmall = nil
 	local TitleSmall = nil
 	

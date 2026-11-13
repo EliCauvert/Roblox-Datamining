@@ -1,5 +1,1 @@
-﻿local SharedFlagsModule = require(script:FindFirstAncestor("AvatarExperienceFlags").Parent.SharedFlags)
-local FFlagMomentsCreateAvatarPosts = SharedFlagsModule.FFlagMomentsCreateAvatarPosts
-local FFlagMomentsRenderCreatePostStatus = SharedFlagsModule.FFlagMomentsRenderCreatePostStatus
-
-return game:DefineFastFlag("AXAvatarMomentsCreation4", false) and (FFlagMomentsCreateAvatarPosts and FFlagMomentsRenderCreatePostStatus)
+﻿return require(script:FindFirstAncestor("AvatarExperienceFlags").Parent.SharedFlags).FFlagAXAvatarMomentsCreation

@@ -14,6 +14,7 @@ local REACTPROVIDERTYPE = ReactSymbols.REACT_PROVIDER_TYPE
 local REACTSTRICTMODETYPE = ReactSymbols.REACT_STRICT_MODE_TYPE
 local REACTSUSPENSETYPE = ReactSymbols.REACT_SUSPENSE_TYPE
 local REACTSUSPENSELISTTYPE = ReactSymbols.REACT_SUSPENSE_LIST_TYPE
+local IsValidElementType = require(Parent.Shared).isValidElementType
 local REACTBINDINGTYPE = ReactSymbols.REACT_BINDING_TYPE
 local v1 = require(Parent.SafeFlags).createGetFFlag("ReactIsProtectedTypeOf", false)()
 
@@ -68,7 +69,7 @@ return {
 	StrictMode = REACTSTRICTMODETYPE,
 	Suspense = REACTSUSPENSETYPE,
 	Binding = ReactSymbols.REACT_BINDING_TYPE,
-	isValidElementType = require(Parent.Shared).isValidElementType,
+	isValidElementType = IsValidElementType,
 	isAsyncMode = function(_): boolean
 		-- upvalues: ReactGlobalsModule (copy), Flag (ref), Console (copy)
 		if ReactGlobalsModule.__DEV__ and not Flag then

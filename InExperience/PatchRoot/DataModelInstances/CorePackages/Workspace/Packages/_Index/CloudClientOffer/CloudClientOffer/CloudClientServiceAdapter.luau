@@ -65,6 +65,13 @@ local function createCloudClientServiceAdapter(p1)
 				p1:ReleaseReservation(p2)
 			end)
 		end,
+		reportDecision = function(p2, p3)
+			-- upvalues: p1 (copy)
+			pcall(function()
+				-- upvalues: p1 (upval), p2 (copy), p3 (copy)
+				p1:ReportOfferDecision(p2, p3)
+			end)
+		end,
 		onReservationExpired = function(Callback)
 			-- upvalues: p1 (copy)
 			local Success, Result = pcall(function()

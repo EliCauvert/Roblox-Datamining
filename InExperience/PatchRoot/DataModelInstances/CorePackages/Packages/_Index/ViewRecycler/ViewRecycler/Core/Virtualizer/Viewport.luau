@@ -263,11 +263,10 @@ return function(p1)
 				local ItemLayout = Layout.getItemLayout((math.clamp(Value, 1, ItemCount)))
 				local ContentLength = Layout.getContentLength()
 				local Largest = math.max(0, Size - Insets - Insets1 - ContentLength)
-				local NewInsets = Insets + ContentLength + Insets1
-				local NewInsets1 = Insets + (if ContentAlignment == ScrollAlignmentModule.End then Largest elseif ContentAlignment == ScrollAlignmentModule.Center then Largest / 2 else 0)
+				local NewInsets = Insets + (if ContentAlignment == ScrollAlignmentModule.End then Largest elseif ContentAlignment == ScrollAlignmentModule.Center then Largest / 2 else 0)
 				local Largest1 = math.max(0, Size - Insets - Insets1)
 				
-				return (math.clamp(if Center == ScrollAlignmentModule.Center then NewInsets1 + ItemLayout.startOffset + ItemLayout.length / 2 - Insets - Largest1 / 2 elseif Center == ScrollAlignmentModule.End then NewInsets1 + ItemLayout.startOffset + ItemLayout.length - Size + Insets1 else NewInsets1 + ItemLayout.startOffset - Insets, 0, (math.max(0, NewInsets - Size))))
+				return (math.clamp(if Center == ScrollAlignmentModule.Center then NewInsets + ItemLayout.startOffset + ItemLayout.length / 2 - Insets - Largest1 / 2 elseif Center == ScrollAlignmentModule.End then NewInsets + ItemLayout.startOffset + ItemLayout.length - Size + Insets1 else NewInsets + ItemLayout.startOffset - Insets, 0, (math.max(0, Insets + ContentLength + Insets1 - Size))))
 			end
 		end,
 		scrollState = function(p2)

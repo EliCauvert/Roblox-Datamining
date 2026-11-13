@@ -10,6 +10,7 @@ local ToastRoduxModule = require(Parent.ToastRodux)
 local MutedErrorFunction = require(Parent.Loggers).mutedError
 local Constants = AvatarExperienceCommonModule.Constants
 local AVATAREDITORCONSTANTS = AvatarExperienceCommonModule.Constants.AVATAR_EDITOR_CONSTANTS
+local ToastType = ToastRoduxModule.Enums.ToastType
 local SetCurrentToastMessageFunction = ToastRoduxModule.Actions.SetCurrentToastMessage
 local IsMakeupOrEyebrowEyelashAssetTypeFunction = AvatarExperienceCommonModule.Utils.isMakeupOrEyebrowEyelashAssetType
 local Constants1 = AvatarExperienceAnalyticsModule.Constants
@@ -24,7 +25,7 @@ local FFlagAXDeprecateAvatarEditorServiceTelemetryV1 = AvatarExperienceFlagsModu
 local config = {
 	toastMessage = "Feature.Avatar.Message.UnknownErrorCreatingMakeupLook",
 	isLocalized = false,
-	toastType = ToastRoduxModule.Enums.ToastType.InformationMessage
+	toastType = ToastType.InformationMessage
 }
 
 return function(p1, Name, p2, Callback1, Callback)

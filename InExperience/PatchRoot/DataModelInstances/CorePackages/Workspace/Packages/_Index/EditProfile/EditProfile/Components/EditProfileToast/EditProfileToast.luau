@@ -1,11 +1,11 @@
 ﻿local Parent = script:FindFirstAncestor("EditProfile").Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
-local Snackbar = FoundationModule.Snackbar
+local SnackbarDEPRECATED = FoundationModule.Snackbar_DEPRECATED
 local Enums = FoundationModule.Enums
 
 return function(p1)
-	-- upvalues: ReactModule (copy), Snackbar (copy), Enums (copy)
+	-- upvalues: ReactModule (copy), SnackbarDEPRECATED (copy), Enums (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
 	local UseRefResult = ReactModule.useRef(nil)
 	ReactModule.useEffect(function()
@@ -27,7 +27,7 @@ return function(p1)
 		end
 	end, {})
 	
-	return if UseStateResult then ReactModule.createElement(Snackbar, {
+	return if UseStateResult then ReactModule.createElement(SnackbarDEPRECATED, {
 		title = p1.text,
 		icon = {
 			name = Enums.IconName.CircleCheck,

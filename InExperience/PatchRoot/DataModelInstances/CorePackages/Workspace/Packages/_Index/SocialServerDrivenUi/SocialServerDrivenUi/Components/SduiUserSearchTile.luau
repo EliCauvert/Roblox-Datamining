@@ -14,7 +14,7 @@ local FFlagLuaAppSearchPeopleUnifiedSchemaFields = SharedFlagsModule.FFlagLuaApp
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseDispatchFunction (copy), FindAnalyticsFieldInAncestorsFunction (copy), ReactModule (copy), AnalyticsFunction (copy), CalculateRowPositionFieldsFunction (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), UserSearchTile (copy), FFlagLuaAppSearchPeopleUnifiedSchemaFields (copy)
+	-- upvalues: UseDispatchFunction (copy), FindAnalyticsFieldInAncestorsFunction (copy), ReactModule (copy), AnalyticsFunction (copy), CalculateRowPositionFieldsFunction (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), UserSearchTile (copy), SharedFlagsModule (copy), FFlagLuaAppSearchPeopleUnifiedSchemaFields (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UserId = p1.userId
 	local SearchQuery = FindAnalyticsFieldInAncestorsFunction("searchQuery", p1.analyticsContext) or ""
@@ -73,7 +73,8 @@ return ReactModule.memo(function(p1)
 			id = UserId,
 			name = p1.name or "",
 			displayName = p1.displayName or "",
-			previousUsernames = p1.previousUsernames or {}
+			previousUsernames = if SharedFlagsModule.FFlagUserSearchUsePreviousUsernameMatch then nil else p1.previousUsernames or {},
+			isPreviousUsernameMatch = if SharedFlagsModule.FFlagUserSearchUsePreviousUsernameMatch then p1.isPreviousUsernameMatch else nil
 		},
 		index = p1.index or 0,
 		size = UDim2.fromScale(1, 1),

@@ -1,13 +1,15 @@
 ﻿local GameInvite = script:FindFirstAncestor("GameInvite")
 local Parent = GameInvite.Parent
 local ReactModule = require(Parent.React)
+local DataHydrationModule = require(Parent.DataHydration)
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
 local InputHandlersModule = require(Parent.InputHandlers)
 local _ = require(Parent.ReactFocusNavigation)
 local UseGetPresenceByUserIdFunction = require(Parent.FriendsCommon).Hooks.useGetPresenceByUserId
 local IsInThisServerModule = require(GameInvite.utils.isInThisServer)
 local _ = require(script.Parent.joinFriendFromExperience)
-local NavigateBack = require(Parent.FocusNavigationUtils).FocusNavigationEventNameEnum.NavigateBack
-local InGame = require(Parent.DataHydration).Presence.PresenceEnums.PresenceType.InGame
+local NavigateBack = FocusNavigationUtilsModule.FocusNavigationEventNameEnum.NavigateBack
+local InGame = DataHydrationModule.Presence.PresenceEnums.PresenceType.InGame
 local config = { skipFetch = true }
 
 local function getJoinTarget(UserId, p1)

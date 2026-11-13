@@ -2,6 +2,7 @@
 local DependenciesModule = require(SocialLibraries.dependencies)
 local Cryo = DependenciesModule.Cryo
 local Roact = DependenciesModule.Roact
+local TestStyleModule = require(SocialLibraries.Components.Style.TestStyle)
 local CallbackInputBoxModule = require(script.Parent.CallbackInputBox)
 local GetTextBoundsAsyncFunction = DependenciesModule.Foundation.Utility.getTextBoundsAsync
 local NormalizeFontFaceFunction = DependenciesModule.Foundation.Utility.normalizeFontFace
@@ -14,7 +15,7 @@ InputBoxWithCharacterCounter.defaultProps = {
 	characterLimit = 150,
 	validInputTextColor3 = Color3.fromRGB(0, 255, 0),
 	invalidInputTextColor3 = Color3.fromRGB(255, 0, 0),
-	style = require(SocialLibraries.Components.Style.TestStyle)
+	style = TestStyleModule
 }
 
 function InputBoxWithCharacterCounter.init(p1)
@@ -78,8 +79,8 @@ function InputBoxWithCharacterCounter.render(p1)
 	local CaptionSubHeaderFont = Style.Font.CaptionSubHeader.Font
 	local ScaledBaseSize = Style.Font.BaseSize * Style.Font.CaptionSubHeader.RelativeSize
 	local Y = (p1.state.textBounds or Vector2.new(0, ScaledBaseSize)).Y
-	local ValidInputTextColor3 = nil
 	local ValidInputTextTransparency = nil
+	local ValidInputTextColor3 = nil
 	
 	if CountInputText <= p1.props.characterLimit then
 		ValidInputTextColor3 = p1.props.validInputTextColor3

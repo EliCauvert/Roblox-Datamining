@@ -2,6 +2,8 @@
 local Parent = DictationCore.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
 local DictationState = require(DictationCore.Dictation.useDictation).DictationState
 local DictationModeModule = require(DictationCore.Dictation.DictationMode)
 local DictationInputModeModule = require(DictationCore.Dictation.DictationInputMode)
@@ -10,8 +12,8 @@ local CountdownRingModule = require(script.Parent.CountdownRing)
 local StopCountdownButtonModule = require(script.Parent.StopCountdownButton)
 local UseLongPressModule = require(script.Parent.useLongPress)
 local FFlagDictationMicKeepsFocusModule = require(DictationCore.Flags.FFlagDictationMicKeepsFocus)
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
-local Signal = require(Parent.Signals).createSignal(false)
+local UseSignalStateFunction = SignalsReactModule.useSignalState
+local Signal = SignalsModule.createSignal(false)
 
 local function noop() end
 

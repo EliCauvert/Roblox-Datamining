@@ -1,8 +1,9 @@
 ﻿local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
-local FFlagAXShowMoreButtonOnOwnedItems = require(Parent.AvatarExperienceFlags).FFlagAXShowMoreButtonOnOwnedItems
+local FFlagAXShowMoreButtonOnOwnedItems = AvatarExperienceFlagsModule.FFlagAXShowMoreButtonOnOwnedItems
 
 return ReactModule.memo((ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: FoundationModule (copy), UseLocalizationFunction (copy), ReactModule (copy), FFlagAXShowMoreButtonOnOwnedItems (copy)

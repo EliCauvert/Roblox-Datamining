@@ -3,8 +3,9 @@ local Parent1 = Parent.Parent
 local RoactModule = require(Parent1.Roact)
 local UIBloxModule = require(Parent1.UIBlox)
 local AppStyleProvider = UIBloxModule.App.Style.AppStyleProvider
+local Constants = UIBloxModule.App.Style.Constants
 local Dark = require(Parent1.Foundation).Enums.ColorMode.Dark
-local Gotham = UIBloxModule.App.Style.Constants.FontName.Gotham
+local Gotham = Constants.FontName.Gotham
 local LocaleProviderModule = require(Parent.Locale.LocaleProvider)
 
 return function(p1)

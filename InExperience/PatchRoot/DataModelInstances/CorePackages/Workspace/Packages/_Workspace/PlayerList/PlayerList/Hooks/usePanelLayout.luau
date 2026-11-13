@@ -33,8 +33,8 @@ return function(p1, p2: number, p3)
 	local UseScaledValueResult1 = UseScaledValueFunction(ConstantsModule.PANEL_SIZE_MAX_CAP)
 	local MOBILEMAXSTATCOLUMNS = if p1 then ConstantsModule.MOBILE_MAX_STAT_COLUMNS else ConstantsModule.DESKTOP_MAX_STAT_COLUMNS
 	local NewScaledPEOPLEMINWIDTH = ScaledPEOPLEMINWIDTH + math.min(p2, MOBILEMAXSTATCOLUMNS) * ScaledSTATCOLUMNWIDTH
-	local Y = nil
 	local X = nil
+	local Y = nil
 	
 	if p1 then
 		local Largest = math.max(ConstantsModule.MOBILE_EDGE_GAP, ConstantsModule.MOBILE_EDGE_GAP * Scale)

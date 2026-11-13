@@ -7,6 +7,7 @@ local TextSplitByModule = require(Parent.Enums.TextSplitBy)
 local SplitTextModule = require(Parent.Utils.SplitText)
 local _ = require(Parent.Types)
 local Escape = require(Parent1.MarkdownCore).Utils.Escape
+local InlineElementTypeModule = require(Parent.Utils.InlineElementType)
 local GetFontFaceModule = require(Parent.Utils.getFontFace)
 local JoinFunction = DashModule.join
 local t = {}
@@ -34,7 +35,7 @@ end
 
 local BaseTextElementModule = {}
 BaseTextElementModule.__index = BaseTextElementModule
-BaseTextElementModule.__type = require(Parent.Utils.InlineElementType)
+BaseTextElementModule.__type = InlineElementTypeModule
 
 function BaseTextElementModule.new(Element, Props, MapProps)
 	-- upvalues: BaseTextElementModule (copy), DashModule (copy), TextSplitByModule (copy), Escape (copy)

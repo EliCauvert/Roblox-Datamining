@@ -116,7 +116,7 @@ return function()
 					end
 					SessionScopedSignal2_1(config)
 				end,
-				connect = function(p1, Callback1, Callback)
+				connect = function(p1, Callback, Callback1)
 					-- upvalues: FFlagBuildAdsNotificationRouting (upval), t (upval), SessionScopedSignal1 (copy), SessionScopedSignal (upval), Idle2 (upval), Idle (upval), SessionScopedSignal2 (upval), SignalsModule (upval), SessionScopedSignal3 (upval), SessionScopedSignal2_2 (upval), CanCreateCampaignFunction (upval), SessionScopedSignal2_3 (copy)
 					if FFlagBuildAdsNotificationRouting then
 						t[SessionScopedSignal1] = true
@@ -129,7 +129,7 @@ return function()
 					local DeferredThread = nil
 					
 					local function complete(Outcome: string): boolean
-						-- upvalues: v2 (ref), DeferredThread (ref), DelayedThread (ref), SessionScopedSignal (upval), Idle2 (upval), Idle (upval), SessionScopedSignal2 (upval), Callback1 (copy)
+						-- upvalues: v2 (ref), DeferredThread (ref), DelayedThread (ref), SessionScopedSignal (upval), Idle2 (upval), Idle (upval), SessionScopedSignal2 (upval), Callback (copy)
 						local v5 = v2
 						
 						if v5 == nil then
@@ -166,13 +166,13 @@ return function()
 								SessionScopedSignal2(nil)
 							end
 						end
-						Callback1("AD_CAMPAIGN_DEEP_LINK_ELIGIBILITY", { universeId = v5.universeId }, { requestId = v5.id, outcome = Outcome })
+						Callback("AD_CAMPAIGN_DEEP_LINK_ELIGIBILITY", { universeId = v5.universeId }, { requestId = v5.id, outcome = Outcome })
 						
 						return Outcome == "eligible"
 					end
 					
 					local Effect = SignalsModule.createEffect(function(p2)
-						-- upvalues: SessionScopedSignal (upval), SessionScopedSignal1 (upval), v2 (ref), complete (copy), p1 (copy), SessionScopedSignal3 (upval), SessionScopedSignal2_2 (upval), v3 (ref), v4 (ref), IsNotReady (ref), Idle2 (upval), DelayedThread (ref), FFlagBuildAdsNotificationRouting (upval), DeferredThread (ref), CanCreateCampaignFunction (upval), Callback (copy), SessionScopedSignal2_3 (upval), Callback1 (copy)
+						-- upvalues: SessionScopedSignal (upval), SessionScopedSignal1 (upval), v2 (ref), complete (copy), p1 (copy), SessionScopedSignal3 (upval), SessionScopedSignal2_2 (upval), v3 (ref), v4 (ref), IsNotReady (ref), Idle2 (upval), DelayedThread (ref), FFlagBuildAdsNotificationRouting (upval), DeferredThread (ref), CanCreateCampaignFunction (upval), Callback1 (copy), SessionScopedSignal2_3 (upval), Callback (copy)
 						local SessionScopedSignalResult = SessionScopedSignal(p2)
 						local SessionScopedSignalResult1 = SessionScopedSignal1(p2)
 						local IsUniverseIdMatch: boolean = SessionScopedSignalResult1 ~= nil and (SessionScopedSignalResult1.isPageVisible and (SessionScopedSignalResult ~= nil and SessionScopedSignalResult1.universeId == SessionScopedSignalResult.universeId))
@@ -243,9 +243,9 @@ return function()
 							if StatusResult == "Ready" then
 								if v4 == "Ready" and DataResult == v3 then return end
 								if FFlagBuildAdsNotificationRouting and SessionScopedSignalResult1 ~= nil and SessionScopedSignalResult1.canPresent == false and CanCreateCampaignFunction(DataResult) then return end
-								if complete(if CanCreateCampaignFunction(DataResult) then "eligible" else "ineligible") and Callback(DataResult) then
+								if complete(if CanCreateCampaignFunction(DataResult) then "eligible" else "ineligible") and Callback1(DataResult) then
 									SessionScopedSignal2_3(SessionScopedSignalResult.id)
-									Callback1("AD_CAMPAIGN_DEEP_LINK_PRESENTED", { universeId = SessionScopedSignalResult.universeId }, { requestId = SessionScopedSignalResult.id })
+									Callback("AD_CAMPAIGN_DEEP_LINK_PRESENTED", { universeId = SessionScopedSignalResult.universeId }, { requestId = SessionScopedSignalResult.id })
 									
 									return
 								end

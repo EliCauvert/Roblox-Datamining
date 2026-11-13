@@ -96,8 +96,8 @@ return ReactModule.memo(function(p1)
 	local HasCtaButtonComponent = p1.ctaButtonComponent ~= nil
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local IsContained = p1.isContained
-	local BackgroundStyleColor3 = nil
 	local BackgroundStyle = nil
+	local BackgroundStyleColor3 = nil
 	
 	if p1.backgroundStyle == nil then
 		BackgroundStyle = UseTokensResult.Color.Surface.Surface_100

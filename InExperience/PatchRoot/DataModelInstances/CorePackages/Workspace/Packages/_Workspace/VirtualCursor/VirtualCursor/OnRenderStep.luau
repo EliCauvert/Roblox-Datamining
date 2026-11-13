@@ -58,9 +58,11 @@ local function handleScrollingFrame(ScrollFrame, Vector, p1): boolean
 	if PropertiesModule.ThumbstickDeadzone < AbsFunction(Thumbstick2Vector.y) and IsScrollingDirectionMatch1 then
 		ScrollFrame.CanvasPosition += Vector2.new(0, Thumbstick2Vector.y * ScaledScrollingSpeed)
 	end
+	local _Vector2 = Vector2.new(CosFunction(ScaledRotation), (SinFunction(ScaledRotation)))
+	local _Vector2_1 = Vector2.new(-SinFunction(ScaledRotation), (CosFunction(ScaledRotation)))
 	local VectorDelta = Vector2.new(Vector.X, Vector.Y) - AbsolutePosition
-	local DotProductDelta = VectorDelta:Dot((Vector2.new(CosFunction(ScaledRotation), (SinFunction(ScaledRotation))))) - AbsoluteSize1.X / 2
-	local DotProductDelta1 = VectorDelta:Dot((Vector2.new(-SinFunction(ScaledRotation), (CosFunction(ScaledRotation))))) - AbsoluteSize1.Y / 2
+	local DotProductDelta = VectorDelta:Dot(_Vector2) - AbsoluteSize1.X / 2
+	local DotProductDelta1 = VectorDelta:Dot(_Vector2_1) - AbsoluteSize1.Y / 2
 	local VectorDelta1 = Vector2.new(AbsFunction(DotProductDelta), (AbsFunction(DotProductDelta1))) - AbsoluteSize1 / 2
 	
 	if AbsFunction(MinFunction(MaxFunction(VectorDelta1.x, VectorDelta1.y), 0) + Vector2.new(MaxFunction(VectorDelta1.x, 0), (MaxFunction(VectorDelta1.y, 0))).Magnitude) < ScrollingRadius then

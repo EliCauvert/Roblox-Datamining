@@ -3,6 +3,7 @@ local Parent = ServerDrivenUi.Parent
 local EdpStoreAnalyticsModule = require(Parent.EdpStoreAnalytics)
 local EdpStoreAnalyticsLogger = EdpStoreAnalyticsModule.EdpStoreAnalyticsLogger
 local StoreEnums = EdpStoreAnalyticsModule.Constants.StoreEnums
+local UnifiedEventLogEnums = require(Parent.AvatarExperienceAnalytics).UnifiedEventLogEnums
 local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local SduiErrors = SduiCoreSystemModule.SduiErrors
 local SduiLogger = SduiCoreSystemModule.SduiLogger
@@ -10,7 +11,7 @@ local FindAnalyticsFieldInAncestorsFunction = SduiCoreSystemModule.findAnalytics
 local GetSduiClientPageScopeFunction = SduiCoreSystemModule.getSduiClientPageScope
 local FFlagSduiErrorPaths = require(Parent.SharedFlags).FFlagSduiErrorPaths
 local SduiMarketplaceItemImpressionsHandlerModule = require(ServerDrivenUi.Impressions.SduiMarketplaceItemImpressionsHandler)
-local MarketplaceUnifiedItemType = require(Parent.AvatarExperienceAnalytics).UnifiedEventLogEnums.MarketplaceUnifiedItemType
+local MarketplaceUnifiedItemType = UnifiedEventLogEnums.MarketplaceUnifiedItemType
 local self = setmetatable({}, { __mode = "k" })
 
 return function(Key, p1, p2, AnalyticsData, p3, p4)

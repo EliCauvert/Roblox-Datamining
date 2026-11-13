@@ -2,8 +2,9 @@
 local Parent = ExpChat.Parent
 local RoactModule = require(Parent.Roact)
 local Dictionary = require(Parent.llama).Dictionary
+local ExpChatSharedModule = require(Parent.ExpChatShared)
 local FFlagExpChatEnableV2ChatWindowModule = require(ExpChat.Flags.FFlagExpChatEnableV2ChatWindow)
-local GetFFlagTextChatEnableUniverseChatTabsFunction = require(Parent.ExpChatShared).Flags.GetFFlagTextChatEnableUniverseChatTabs
+local GetFFlagTextChatEnableUniverseChatTabsFunction = ExpChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
 local BottomLockedScrollViewV3Module = require(ExpChat.ChatWindow.UI.BottomLockedScrollViewV3)
 local ScrollingView = RoactModule.PureComponent:extend("ScrollingView")
 ScrollingView.defaultProps = {}

@@ -4,6 +4,7 @@ local ReactModule = require(Parent.React)
 local CryoModule = require(Parent.Cryo)
 local FoundationModule = require(Parent.Foundation)
 local ConstantsModule = require(AppChat.Constants)
+local RoundedVariantModule = require(AppChat.Enums.RoundedVariant)
 local Text = FoundationModule.Text
 local Skeleton = FoundationModule.Skeleton
 local Icon = FoundationModule.Icon
@@ -19,7 +20,7 @@ local config = {
 	isRepliedTo = false,
 	isIncoming = false,
 	isPending = false,
-	thumbnailRoundedVariant = require(AppChat.Enums.RoundedVariant).Top
+	thumbnailRoundedVariant = RoundedVariantModule.Top
 }
 
 function GameCardGroupable(p1)

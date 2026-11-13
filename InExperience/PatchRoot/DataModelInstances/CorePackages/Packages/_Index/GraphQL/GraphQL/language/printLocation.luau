@@ -16,15 +16,16 @@ end
 Callback = function(Source, p1): string
 	-- upvalues: Callback1 (ref), String1 (copy), Callback2 (ref), Array (copy)
 	local ColumnDelta = Source.locationOffset.column - 1
+	local Text1 = Callback1(ColumnDelta) .. Source.body
 	local NewLine = p1.line - 1 + 1
 	local NewLine1 = p1.line + (Source.locationOffset.line - 1)
 	local NewColumn = p1.column + (p1.line == 1 and ColumnDelta or 0)
-	local Text1 = Source.name .. ":" .. NewLine1 .. ":" .. NewColumn .. "\n"
-	local SplitResult = String1.split(Callback1(ColumnDelta) .. Source.body, { "\r\n", "\n", "\r" })
+	local Text2 = Source.name .. ":" .. NewLine1 .. ":" .. NewColumn .. "\n"
+	local SplitResult = String1.split(Text1, { "\r\n", "\n", "\r" })
 	local Text: string = SplitResult[NewLine]
 	
 	if string.len(Text) <= 120 then
-		return Text1 .. Callback2({
+		return Text2 .. Callback2({
 			{ NewLine1 - 1, SplitResult[NewLine - 1] },
 			{ NewLine1, Text },
 			{ "", Callback1(NewColumn - 1) .. "^" },
@@ -38,7 +39,7 @@ Callback = function(Source, p1): string
 	for i = 1, string.len(Text), 80 do
 		table.insert(List, String1.slice(Text, i, i + 80))
 	end
-	return Text1 .. Callback2(Array.concat({ { tostring(NewLine1), List[1] } }, Array.map(Array.slice(List, 2, NewFloored + 1), function(p2)
+	return Text2 .. Callback2(Array.concat({ { tostring(NewLine1), List[1] } }, Array.map(Array.slice(List, 2, NewFloored + 1), function(p2)
 		return { "", p2 }
 	end), { { " ", Callback1(NewColumnRemainder - 1) .. "^" } }, { { "", List[NewFloored + 1] } }))
 end

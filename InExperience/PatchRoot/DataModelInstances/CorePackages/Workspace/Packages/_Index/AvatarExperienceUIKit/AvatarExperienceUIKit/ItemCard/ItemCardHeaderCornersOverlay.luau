@@ -2,6 +2,7 @@
 local ReactModule = require(Parent.React)
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local FFlagAXItemCardComponentsMemo = AvatarExperienceFlagsModule.FFlagAXItemCardComponentsMemo
 local FFlagAXMarketplaceItemCardIndicatorStack = AvatarExperienceFlagsModule.FFlagAXMarketplaceItemCardIndicatorStack
 local FFlagAXMarketplaceLicensingItemCards = AvatarExperienceFlagsModule.FFlagAXMarketplaceLicensingItemCards
 
@@ -51,4 +52,4 @@ local function ItemCardHeaderCornersOverlay(p1)
 	})
 end
 
-return if AvatarExperienceFlagsModule.FFlagAXItemCardComponentsMemo then ReactModule.memo(ItemCardHeaderCornersOverlay) else ItemCardHeaderCornersOverlay
+return if FFlagAXItemCardComponentsMemo then ReactModule.memo(ItemCardHeaderCornersOverlay) else ItemCardHeaderCornersOverlay

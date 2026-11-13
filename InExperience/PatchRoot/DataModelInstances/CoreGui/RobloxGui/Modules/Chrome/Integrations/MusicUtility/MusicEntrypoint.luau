@@ -9,14 +9,16 @@ local SongbirdModule = require(CorePackages.Workspace.Packages.Songbird)
 local ServiceModule = require(Chrome.Service)
 local CommonIconModule = require(Chrome.Integrations.CommonIcon)
 local ResponsiveModule = require(CorePackages.Workspace.Packages.Responsive)
+local SignalsModule = require(CorePackages.Packages.Signals)
+local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
 local MUSICWINDOWMAXSIZE = require(Chrome.Integrations.MusicUtility.Constants).MUSIC_WINDOW_MAX_SIZE
-local UseSignalStateFunction = require(CorePackages.Packages.SignalsReact).useSignalState
+local UseSignalStateFunction = SignalsReactModule.useSignalState
 local NewResult = require(Chrome.ChromeShared.Service.WindowSizeSignal).new(MUSICWINDOWMAXSIZE.X, MUSICWINDOWMAXSIZE.Y)
 local NewResult1 = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(ServiceModule:onIntegrationStatusChanged(), function()
 	-- upvalues: ServiceModule (copy)
 	return ServiceModule:isWindowOpen("music_entrypoint")
 end)
-local Signal, Signal2 = require(CorePackages.Packages.Signals).createSignal(false)
+local Signal, Signal2 = SignalsModule.createSignal(false)
 
 local function focusMusicWindow()
 	-- upvalues: GuiService (copy), Signal2 (copy)

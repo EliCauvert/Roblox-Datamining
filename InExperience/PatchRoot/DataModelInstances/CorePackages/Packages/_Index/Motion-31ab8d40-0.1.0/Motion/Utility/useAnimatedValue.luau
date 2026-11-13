@@ -156,12 +156,12 @@ return function(Vector)
 		local X = Vector.X
 		local X1 = if type(X) == "number" then X else 0
 		local Y = Vector.Y
-		local UseAnimatedBindingResult5, UseAnimatedBindingResult2_4 = ReactOtterModule.useAnimatedBinding({ x = X1, y = if type(Y) == "number" then Y else 0 }, UseResult)
+		local UseAnimatedBindingResult4, UseAnimatedBindingResult2_3 = ReactOtterModule.useAnimatedBinding({ x = X1, y = if type(Y) == "number" then Y else 0 }, UseResult)
 		
-		return UseAnimatedBindingResult5:map(function(Vector): Vector2
+		return UseAnimatedBindingResult4:map(function(Vector): Vector2
 			return Vector2.new(Vector.x, Vector.y)
 		end), function(Vector, p1)
-			-- upvalues: UseRefResult (copy), Preset (upval), UseAnimatedBindingResult2_4 (copy), ReactOtterModule (upval)
+			-- upvalues: UseRefResult (copy), Preset (upval), UseAnimatedBindingResult2_3 (copy), ReactOtterModule (upval)
 			if not Vector then return end
 			if typeof(Vector) == "Vector2" then
 				UseRefResult.current = p1 and p1.onComplete or nil
@@ -172,7 +172,7 @@ return function(Vector)
 				local X = Vector.X
 				local X1 = if type(X) == "number" then X else 0
 				local Y = Vector.Y
-				UseAnimatedBindingResult2_4({
+				UseAnimatedBindingResult2_3({
 					x = ReactOtterModule.ease(X1, Config),
 					y = ReactOtterModule.ease(if type(Y) == "number" then Y else 0, Config)
 				})
@@ -188,12 +188,12 @@ return function(Vector)
 		local G = Vector.G
 		local G2 = if type(G) == "number" then G else 0
 		local B = Vector.B
-		local UseAnimatedBindingResult6, UseAnimatedBindingResult2_5 = ReactOtterModule.useAnimatedBinding({ r = R2, g = G2, b = if type(B) == "number" then B else 0 }, UseResult)
+		local UseAnimatedBindingResult5, UseAnimatedBindingResult2_4 = ReactOtterModule.useAnimatedBinding({ r = R2, g = G2, b = if type(B) == "number" then B else 0 }, UseResult)
 		
-		return UseAnimatedBindingResult6:map(function(p1): Color3
+		return UseAnimatedBindingResult5:map(function(p1): Color3
 			return Color3.new(p1.r, p1.g, p1.b)
 		end), function(p1, p2)
-			-- upvalues: UseRefResult (copy), Preset (upval), UseAnimatedBindingResult2_5 (copy), ReactOtterModule (upval)
+			-- upvalues: UseRefResult (copy), Preset (upval), UseAnimatedBindingResult2_4 (copy), ReactOtterModule (upval)
 			if not p1 then return end
 			if typeof(p1) == "Color3" then
 				UseRefResult.current = p2 and p2.onComplete or nil
@@ -206,7 +206,7 @@ return function(Vector)
 				local G = p1.G
 				local G1 = if type(G) == "number" then G else 0
 				local B = p1.B
-				UseAnimatedBindingResult2_5({
+				UseAnimatedBindingResult2_4({
 					r = ReactOtterModule.ease(R1, Config),
 					g = ReactOtterModule.ease(G1, Config),
 					b = ReactOtterModule.ease(if type(B) == "number" then B else 0, Config)
@@ -218,15 +218,15 @@ return function(Vector)
 			end
 		end
 	elseif typeof(Vector) == "number" then
-		local UseAnimatedBindingResult4, UseAnimatedBindingResult2_3 = ReactOtterModule.useAnimatedBinding(if type(Vector) == "number" then Vector else 0, UseResult)
+		local UseAnimatedBindingResult6, UseAnimatedBindingResult2_5 = ReactOtterModule.useAnimatedBinding(if type(Vector) == "number" then Vector else 0, UseResult)
 		
-		return UseAnimatedBindingResult4:map(function(p1)
+		return UseAnimatedBindingResult6:map(function(p1)
 			return p1
 		end), function(p1, p2)
-			-- upvalues: UseRefResult (copy), Preset (upval), UseAnimatedBindingResult2_3 (copy), ReactOtterModule (upval)
+			-- upvalues: UseRefResult (copy), Preset (upval), UseAnimatedBindingResult2_5 (copy), ReactOtterModule (upval)
 			if typeof(p1) == "number" then
 				UseRefResult.current = p2 and p2.onComplete or nil
-				UseAnimatedBindingResult2_3(ReactOtterModule.ease(p1, if p2 then {
+				UseAnimatedBindingResult2_5(ReactOtterModule.ease(p1, if p2 then {
 					duration = p2.duration or Preset.duration,
 					easingStyle = p2.easingStyle
 				} else nil))

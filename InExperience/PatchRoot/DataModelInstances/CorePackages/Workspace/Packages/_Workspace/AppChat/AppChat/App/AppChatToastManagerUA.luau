@@ -4,9 +4,10 @@ local AppChatToastEventReceiverModule = require(AppChat.Components.EventReceiver
 local EnteredChatFromEntryPointModule = require(AppChat.Actions.EnteredChatFromEntryPoint)
 local NavigateIntoChatModule = require(AppChat.Conversations.Thunks.NavigateIntoChat)
 local ReactModule = require(Parent.React)
+local RoactUtilsModule = require(Parent.RoactUtils)
 local SocialCommonModule = require(Parent.SocialCommon)
 local OverlayHostModule = require(AppChat.Components.OSA.OverlayHost)
-local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
 
 function AppChatToastManagerUA()
 	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), NavigateIntoChatModule (copy), EnteredChatFromEntryPointModule (copy), SocialCommonModule (copy), AppChatToastEventReceiverModule (copy), OverlayHostModule (copy)

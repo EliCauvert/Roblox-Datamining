@@ -9,6 +9,8 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local UseNativePurchaseFinishedListenerModule = require(RobloxSubscriptionPurchaseApp.Hooks.useNativePurchaseFinishedListener)
 local UseRobloxSubscriptionChangedListenerModule = require(RobloxSubscriptionPurchaseApp.Hooks.useRobloxSubscriptionChangedListener)
 local UseSubscriptionPollingTimeoutGuardModule = require(RobloxSubscriptionPurchaseApp.Hooks.useSubscriptionPollingTimeoutGuard)
+local UseMembershipConfigChangePollerModule = require(RobloxSubscriptionPurchaseApp.Hooks.useMembershipConfigChangePoller)
+local FFlagPlusMembershipConfigChangeCheck = require(Parent.SharedFlags).FFlagPlusMembershipConfigChangeCheck
 local Sheet = FoundationModule.Sheet
 local DialogSize = FoundationModule.Enums.DialogSize
 local BlackbirdSheetContentModule = require(script.Parent.BlackbirdSheetContent)
@@ -22,11 +24,15 @@ local config1 = {
 }
 
 return function()
-	-- upvalues: RobloxSubscriptionStoreModule (copy), SignalsReactModule (copy), UseNativePurchaseFinishedListenerModule (copy), UseRobloxSubscriptionChangedListenerModule (copy), UseSubscriptionPollingTimeoutGuardModule (copy), BlackbirdSheetContentModule (copy), ErrorSheetContentModule (copy), config (copy), config1 (copy), ReactModule (copy), Sheet (copy), CompleteRobloxSubscriptionUpsellFlowModule (copy), DialogSize (copy)
+	-- upvalues: RobloxSubscriptionStoreModule (copy), SignalsReactModule (copy), UseNativePurchaseFinishedListenerModule (copy), UseRobloxSubscriptionChangedListenerModule (copy), UseSubscriptionPollingTimeoutGuardModule (copy), FFlagPlusMembershipConfigChangeCheck (copy), UseMembershipConfigChangePollerModule (copy), BlackbirdSheetContentModule (copy), ErrorSheetContentModule (copy), config (copy), config1 (copy), ReactModule (copy), Sheet (copy), CompleteRobloxSubscriptionUpsellFlowModule (copy), DialogSize (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(RobloxSubscriptionStoreModule.get().getPromptState)
 	UseNativePurchaseFinishedListenerModule()
 	UseRobloxSubscriptionChangedListenerModule()
 	UseSubscriptionPollingTimeoutGuardModule()
+	
+	if FFlagPlusMembershipConfigChangeCheck then
+		UseMembershipConfigChangePollerModule()
+	end
 	local BlackbirdSheetContentModuleResult = BlackbirdSheetContentModule()
 	local ErrorSheetContentModuleResult = ErrorSheetContentModule()
 	local ErrorSheetContentModuleResult1 = if config[UseSignalStateResult] == true then ErrorSheetContentModuleResult else BlackbirdSheetContentModuleResult

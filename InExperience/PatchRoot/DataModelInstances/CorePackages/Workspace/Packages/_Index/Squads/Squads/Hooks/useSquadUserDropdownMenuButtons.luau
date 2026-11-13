@@ -1,5 +1,6 @@
 ﻿local Squads = script:FindFirstAncestor("Squads")
 local Parent = Squads.Parent
+local CrossExperienceVoiceModule = require(Parent.CrossExperienceVoice)
 local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
 local DependenciesModule = require(Squads.dependencies)
 local React = DependenciesModule.React
@@ -12,7 +13,7 @@ local HooksModule = require(Parent.SquadsCore.Hooks)
 local UseIsLocalPlayerPartyVoiceEligibleFunction = HooksModule.useIsLocalPlayerPartyVoiceEligible
 local UseIsUserPartyVoiceEligibleFunction = HooksModule.useIsUserPartyVoiceEligible
 local UseIsCurrentSquadPartyVoiceEligibleFunction = HooksModule.useIsCurrentSquadPartyVoiceEligible
-local UseBackgroundExperienceFunction = require(Parent.CrossExperienceVoice).Hooks.useBackgroundExperience
+local UseBackgroundExperienceFunction = CrossExperienceVoiceModule.Hooks.useBackgroundExperience
 local UseCurrentSquadParentChannelIdFunction = HooksModule.useCurrentSquadParentChannelId
 local UseSelectorFunction = DependenciesModule.Hooks.useSelector
 local GetFFlagEnableCrossExpVoiceFunction = DependenciesModule.SharedFlags.GetFFlagEnableCrossExpVoice

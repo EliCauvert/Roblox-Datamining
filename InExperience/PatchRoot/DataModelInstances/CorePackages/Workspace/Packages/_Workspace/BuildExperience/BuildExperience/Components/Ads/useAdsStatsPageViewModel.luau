@@ -12,6 +12,7 @@ local AdCampaignEligibilityUtilsModule = require(script.Parent.adCampaignEligibi
 local AdCampaignScheduleUtilsModule = require(script.Parent.adCampaignScheduleUtils)
 local GetAdsManagerUrlModule = require(script.Parent.getAdsManagerUrl)
 local UseOpenWebViewWithResumeRefreshModule = require(BuildExperience.utils.useOpenWebViewWithResumeRefresh)
+local CampaignStatsModule = require(Parent.DataHydration.CampaignStats)
 local _ = require(script.Parent.AdsStatsView)
 local _ = require(script.Parent.PastCampaignRow)
 local _ = require(BuildExperience.Components.Analytics.StatsCard.StatsCard)
@@ -27,7 +28,7 @@ local MSPERDAY = AdCampaignScheduleUtilsModule.MS_PER_DAY
 local ToStartMsFunction = AdCampaignScheduleUtilsModule.toStartMs
 local CampaignEndMsFunction = AdCampaignScheduleUtilsModule.campaignEndMs
 local CampaignEndExclusiveMsFunction = AdCampaignScheduleUtilsModule.campaignEndExclusiveMs
-local WINDOWDAYS = require(Parent.DataHydration.CampaignStats).WINDOW_DAYS
+local WINDOWDAYS = CampaignStatsModule.WINDOW_DAYS
 local config = {
 	plays = 0,
 	adClicks = 0,
@@ -299,12 +300,15 @@ return function(p1, p2, p3, p4, p5, p6)
 	local HasCampaigns: boolean = #UseMemoResult1.activeCampaigns > 0 or #UseMemoResult1.pastCampaigns > 0
 	local IsFailed: boolean = UseGetAdCampaignsModuleResult2 == "Failed" or Flag and UseGetCampaignStatsModuleResult2 == "Failed"
 	local IsNotReady: boolean = not IsFailed and (UseGetAdCampaignsModuleResult2 == "NotReady" or (Flag and UseGetCampaignStatsModuleResult2 == "NotReady" or not HasCampaigns and (p1 ~= nil and UseGetAdCampaignEligibilityModuleResult2 == "NotReady")))
+	local NoIsFailed: boolean = UseStateResult4 and (not IsNotReady and not IsFailed)
 	local Offer = if UseGetAdCampaignEligibilityModuleResult == nil then nil else UseGetAdCampaignEligibilityModuleResult.offer
 	local SelectableOffers = if FFlagEnablePaidAdsModule then AdCampaignEligibilityUtilsModule.getSelectableOffers(UseGetAdCampaignEligibilityModuleResult) else nil
 	local DurationDays = if Offer == nil then nil else Offer.durationDays
 	local HasFreeCredit = AdCampaignEligibilityUtilsModule.hasFreeCredit(UseGetAdCampaignEligibilityModuleResult)
 	local HasFreeCredit1 = AdCampaignEligibilityUtilsModule.isEligibleForFreePromotion(UseGetAdCampaignEligibilityModuleResult) and HasFreeCredit
 	local CanCreateCampaign = AdCampaignEligibilityUtilsModule.canCreateCampaign(UseGetAdCampaignEligibilityModuleResult)
+	local EmptyTitleFree = if HasFreeCredit1 then UseLocalizationResult.emptyTitleFree else UseLocalizationResult.emptyTitle
+	local EmptySubtitleFree = if HasFreeCredit1 then UseLocalizationResult.emptySubtitleFree else UseLocalizationResult.emptySubtitle
 	local AdsManager = UseLocalizationResult.adsManager
 	local UseOpenWebViewWithResumeRefreshModuleResult = nil
 	UseOpenWebViewWithResumeRefreshModuleResult = if FFlagBuildAdsManagerUniverseUrlModule then UseOpenWebViewWithResumeRefreshModule(GetAdsManagerUrlModule.getAdsManagerUrl(p1), AdsManager, UseCreateAdCampaignModuleResult.refresh) else UseOpenWebViewWithResumeRefreshModule(GetAdsManagerUrlModule.getDefaultAdsManagerUrl(), AdsManager, UseCreateAdCampaignModuleResult.refresh)
@@ -318,14 +322,14 @@ return function(p1, p2, p3, p4, p5, p6)
 		isLoading = IsNotReady,
 		isFailed = IsFailed,
 		hasCampaigns = HasCampaigns,
-		emptyTitle = if HasFreeCredit1 then UseLocalizationResult.emptyTitleFree else UseLocalizationResult.emptyTitle,
-		emptySubtitle = if HasFreeCredit1 then UseLocalizationResult.emptySubtitleFree else UseLocalizationResult.emptySubtitle,
+		emptyTitle = EmptyTitleFree,
+		emptySubtitle = EmptySubtitleFree,
 		createButtonText = UseLocalizationResult.create,
 		createButtonIsExternal = not CanCreateCampaign,
 		isPromotionCreatePending = UseCreateAdCampaignModuleResult.isCreatePending or UseStateResult3,
 		hasPromotionCreateError = UseCreateAdCampaignModuleResult.hasCreateError,
 		promotionCreateErrorKind = UseCreateAdCampaignModuleResult.createErrorKind,
-		showCreateSuccessToast = UseStateResult4 and (not IsNotReady and not IsFailed),
+		showCreateSuccessToast = NoIsFailed,
 		createSuccessToastText = UseLocalizationResult.createSuccess,
 		onDismissCreateSuccessToast = UseResult1,
 		isPromotionSheetOpen = UseStateResult,

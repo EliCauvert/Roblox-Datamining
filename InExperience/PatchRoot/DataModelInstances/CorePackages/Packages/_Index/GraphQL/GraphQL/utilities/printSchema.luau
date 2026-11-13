@@ -28,20 +28,20 @@ local Callback7 = nil
 local Callback6 = nil
 local Callback = nil
 local IsDefinedType = nil
+local Callback2 = nil
 local Callback3 = nil
 local Callback4 = nil
-local Callback2 = nil
 local Callback5 = nil
 local Callback8 = nil
 local Callback17 = nil
 local Callback16 = nil
+local Callback1 = nil
 local Callback15 = nil
-local Callback14 = nil
 local Callback9 = nil
 local Callback10 = nil
-local Callback1 = nil
 local Callback11 = nil
 local Callback12 = nil
+local Callback14 = nil
 local Callback13 = nil
 
 local function printSchema(p1)
@@ -63,20 +63,20 @@ IsDefinedType = function(p1): boolean
 end
 
 Callback = function(p1, IsSpecifiedDirective, IsDefinedType): string
-	-- upvalues: Array (copy), Callback3 (ref), Callback4 (ref), Callback2 (ref), Boolean (copy)
-	return Array.join(Array.filter(Array.concat({ Callback3(p1) }, Array.map(Array.filter(p1:getDirectives(), IsSpecifiedDirective), function(p2)
+	-- upvalues: Array (copy), Callback2 (ref), Callback3 (ref), Callback4 (ref), Boolean (copy)
+	return Array.join(Array.filter(Array.concat({ Callback2(p1) }, Array.map(Array.filter(p1:getDirectives(), IsSpecifiedDirective), function(p2)
+		-- upvalues: Callback3 (upval)
+		return Callback3(p2)
+	end), Array.map(Array.filter(p1:getTypeMap():values(), IsDefinedType), function(p2)
 		-- upvalues: Callback4 (upval)
 		return Callback4(p2)
-	end), Array.map(Array.filter(p1:getTypeMap():values(), IsDefinedType), function(p2)
-		-- upvalues: Callback2 (upval)
-		return Callback2(p2)
 	end)), function(p2)
 		-- upvalues: Boolean (upval)
 		return Boolean.toJSBoolean(p2)
 	end), "\n\n") .. "\n"
 end
 
-Callback3 = function(p1): string?
+Callback2 = function(p1): string?
 	-- upvalues: IsNillishFunction (copy), Callback5 (ref), IsNotNillishFunction (copy), Callback6 (ref), Array (copy)
 	if IsNillishFunction(p1.description) and Callback5(p1) then return end
 	local List = {}
@@ -116,8 +116,8 @@ Callback5 = function(p1): boolean
 	end
 end
 
-Callback2 = function(p1)
-	-- upvalues: IsScalarTypeFunction (copy), Callback7 (ref), IsObjectTypeFunction (copy), Callback8 (ref), IsInterfaceTypeFunction (copy), Callback9 (ref), IsUnionTypeFunction (copy), Callback10 (ref), IsEnumTypeFunction (copy), Callback1 (ref), IsInputObjectTypeFunction (copy), Callback11 (ref), InvariantFunction (copy), InspectFunction (copy)
+Callback4 = function(p1)
+	-- upvalues: IsScalarTypeFunction (copy), Callback7 (ref), IsObjectTypeFunction (copy), Callback8 (ref), IsInterfaceTypeFunction (copy), Callback9 (ref), IsUnionTypeFunction (copy), Callback10 (ref), IsEnumTypeFunction (copy), Callback11 (ref), IsInputObjectTypeFunction (copy), Callback12 (ref), InvariantFunction (copy), InspectFunction (copy)
 	if IsScalarTypeFunction(p1) then
 		return Callback7(p1)
 	elseif IsObjectTypeFunction(p1) then
@@ -127,9 +127,9 @@ Callback2 = function(p1)
 	elseif IsUnionTypeFunction(p1) then
 		return Callback10(p1)
 	elseif IsEnumTypeFunction(p1) then
-		return Callback1(p1)
-	elseif IsInputObjectTypeFunction(p1) then
 		return Callback11(p1)
+	elseif IsInputObjectTypeFunction(p1) then
+		return Callback12(p1)
 	else
 		InvariantFunction(false, "Unexpected type: " .. InspectFunction(p1))
 		
@@ -138,8 +138,8 @@ Callback2 = function(p1)
 end
 
 Callback7 = function(p1): string
-	-- upvalues: Callback6 (ref), Callback12 (ref)
-	return Callback6(p1) .. ("scalar %s"):format(p1.name) .. Callback12(p1)
+	-- upvalues: Callback6 (ref), Callback14 (ref)
+	return Callback6(p1) .. ("scalar %s"):format(p1.name) .. Callback14(p1)
 end
 
 local function printImplementedInterfaces(p1): string
@@ -168,31 +168,31 @@ Callback10 = function(p1): string
 	return Callback6(p1) .. "union " .. p1.name .. (if #Types > 0 then " = " .. Array.join(Types, " | ") else "")
 end
 
-Callback1 = function(p1): string
-	-- upvalues: Array (copy), Callback6 (ref), Callback15 (ref), Callback14 (ref)
-	return Callback6(p1) .. ("enum %s"):format(p1.name) .. Callback14((Array.map(p1:getValues(), function(p2, p3): string
-		-- upvalues: Callback6 (upval), Callback15 (upval)
-		return Callback6(p2, "  ", p3 == 1) .. "  " .. p2.name .. Callback15(p2.deprecationReason)
+Callback11 = function(p1): string
+	-- upvalues: Array (copy), Callback6 (ref), Callback1 (ref), Callback15 (ref)
+	return Callback6(p1) .. ("enum %s"):format(p1.name) .. Callback15((Array.map(p1:getValues(), function(p2, p3): string
+		-- upvalues: Callback6 (upval), Callback1 (upval)
+		return Callback6(p2, "  ", p3 == 1) .. "  " .. p2.name .. Callback1(p2.deprecationReason)
 	end)))
 end
 
-Callback11 = function(p1): string
-	-- upvalues: Array (copy), Callback6 (ref), Callback16 (ref), Callback14 (ref)
-	return Callback6(p1) .. ("input %s"):format(p1.name) .. Callback14((Array.map(p1:getFields():values(), function(p2, p3): string
+Callback12 = function(p1): string
+	-- upvalues: Array (copy), Callback6 (ref), Callback16 (ref), Callback15 (ref)
+	return Callback6(p1) .. ("input %s"):format(p1.name) .. Callback15((Array.map(p1:getFields():values(), function(p2, p3): string
 		-- upvalues: Callback6 (upval), Callback16 (upval)
 		return Callback6(p2, "  ", p3 == 1) .. "  " .. Callback16(p2)
 	end)))
 end
 
 Callback13 = function(p1)
-	-- upvalues: Array (copy), Callback6 (ref), Callback17 (ref), Callback15 (ref), Callback14 (ref)
-	return Callback14((Array.map(p1.getFields(p1):values(), function(p2, p3): string
-		-- upvalues: Callback6 (upval), Callback17 (upval), Callback15 (upval)
-		return Callback6(p2, "  ", p3 == 1) .. "  " .. p2.name .. Callback17(p2.args, "  ") .. ": " .. tostring(p2.type) .. Callback15(p2.deprecationReason)
+	-- upvalues: Array (copy), Callback6 (ref), Callback17 (ref), Callback1 (ref), Callback15 (ref)
+	return Callback15((Array.map(p1.getFields(p1):values(), function(p2, p3): string
+		-- upvalues: Callback6 (upval), Callback17 (upval), Callback1 (upval)
+		return Callback6(p2, "  ", p3 == 1) .. "  " .. p2.name .. Callback17(p2.args, "  ") .. ": " .. tostring(p2.type) .. Callback1(p2.deprecationReason)
 	end)))
 end
 
-Callback14 = function(MapResult): string
+Callback15 = function(MapResult): string
 	-- upvalues: Array (copy)
 	return if #MapResult == 0 then "" else " {\n" .. Array.join(MapResult, "\n") .. "\n}"
 end
@@ -211,22 +211,22 @@ Callback17 = function(Args, p1): string
 end
 
 Callback16 = function(p1): string
-	-- upvalues: AstFromValueFunction (copy), IsNotNillishFunction (copy), PrintFunction (copy), Callback15 (ref)
+	-- upvalues: AstFromValueFunction (copy), IsNotNillishFunction (copy), PrintFunction (copy), Callback1 (ref)
 	local AstFromValueResult = AstFromValueFunction(p1.defaultValue, p1.type)
 	local Text = p1.name .. ": " .. tostring(p1.type)
 	
 	if IsNotNillishFunction(AstFromValueResult) then
 		Text ..= (" = %s"):format(PrintFunction(AstFromValueResult))
 	end
-	return Text .. Callback15(p1.deprecationReason)
+	return Text .. Callback1(p1.deprecationReason)
 end
 
-Callback4 = function(p1): string
+Callback3 = function(p1): string
 	-- upvalues: Callback6 (ref), Callback17 (ref), Array (copy)
 	return Callback6(p1) .. "directive @" .. p1.name .. Callback17(p1.args) .. (if p1.isRepeatable then " repeatable" else "") .. " on " .. Array.join(p1.locations, " | ")
 end
 
-Callback15 = function(DeprecationReason): string
+Callback1 = function(DeprecationReason): string
 	-- upvalues: IsNillishFunction (copy), AstFromValueFunction (copy), GraphQLString (copy), DEFAULTDEPRECATIONREASON (copy), PrintFunction (copy)
 	if IsNillishFunction(DeprecationReason) then
 		return ""
@@ -237,7 +237,7 @@ Callback15 = function(DeprecationReason): string
 	end
 end
 
-Callback12 = function(p1): string
+Callback14 = function(p1): string
 	-- upvalues: IsNillishFunction (copy), AstFromValueFunction (copy), GraphQLString (copy), InvariantFunction (copy), PrintFunction (copy)
 	if IsNillishFunction(p1.specifiedByUrl) then
 		return ""
@@ -268,6 +268,6 @@ end
 return {
 	printSchema = printSchema,
 	printIntrospectionSchema = printIntrospectionSchema,
-	printType = Callback2,
+	printType = Callback4,
 	NULL = require(script.Parent.astFromValue).NULL
 }

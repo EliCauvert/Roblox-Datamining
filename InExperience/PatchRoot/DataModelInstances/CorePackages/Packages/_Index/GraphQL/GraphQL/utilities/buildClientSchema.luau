@@ -43,16 +43,16 @@ return {
 		local getObjectType = nil
 		local getInterfaceType = nil
 		local buildType = nil
-		local Callback3 = nil
+		local Callback2 = nil
 		local buildImplementationsList = nil
+		local Callback3 = nil
 		local Callback4 = nil
 		local Callback5 = nil
-		local Callback1 = nil
 		local Callback6 = nil
+		local Callback1 = nil
 		local Callback7 = nil
-		local Callback8 = nil
 		local BuildField = nil
-		local Callback2 = nil
+		local Callback8 = nil
 		local BuildInputValue = nil
 		local v1 = nil
 		
@@ -104,26 +104,26 @@ return {
 		end
 		
 		buildType = function(p3)
-			-- upvalues: IsNotNillishFunction (upval), TypeKind (upval), Callback3 (ref), Callback4 (ref), Callback5 (ref), Callback1 (ref), Callback6 (ref), Callback7 (ref), InspectFunction (upval), Error1 (upval)
+			-- upvalues: IsNotNillishFunction (upval), TypeKind (upval), Callback2 (ref), Callback3 (ref), Callback4 (ref), Callback5 (ref), Callback6 (ref), Callback1 (ref), InspectFunction (upval), Error1 (upval)
 			if IsNotNillishFunction(p3) and IsNotNillishFunction(p3.name) and IsNotNillishFunction(p3.kind) then
 				if p3.kind == TypeKind.SCALAR then
-					return Callback3(p3)
+					return Callback2(p3)
 				elseif p3.kind == TypeKind.OBJECT then
-					return Callback4(p3)
+					return Callback3(p3)
 				elseif p3.kind == TypeKind.INTERFACE then
-					return Callback5(p3)
+					return Callback4(p3)
 				elseif p3.kind == TypeKind.UNION then
-					return Callback1(p3)
+					return Callback5(p3)
 				elseif p3.kind == TypeKind.ENUM then
 					return Callback6(p3)
 				elseif p3.kind == TypeKind.INPUT_OBJECT then
-					return Callback7(p3)
+					return Callback1(p3)
 				end
 			end
 			error(Error1.new(("Invalid or incomplete introspection result. Ensure that a full introspection query is used in order to build a client schema: %s."):format((InspectFunction(p3)))))
 		end
 		
-		Callback3 = function(p3)
+		Callback2 = function(p3)
 			-- upvalues: GraphQLScalarType (upval)
 			return GraphQLScalarType.new({
 				name = p3.name,
@@ -143,8 +143,8 @@ return {
 			return Array.map(p3.interfaces, getInterfaceType)
 		end
 		
-		Callback4 = function(p3)
-			-- upvalues: GraphQLObjectType (upval), buildImplementationsList (ref), Callback8 (ref)
+		Callback3 = function(p3)
+			-- upvalues: GraphQLObjectType (upval), buildImplementationsList (ref), Callback7 (ref)
 			return GraphQLObjectType.new({
 				name = p3.name,
 				description = p3.description,
@@ -153,14 +153,14 @@ return {
 					return buildImplementationsList(p3)
 				end,
 				fields = function()
-					-- upvalues: Callback8 (upval), p3 (copy)
-					return Callback8(p3)
+					-- upvalues: Callback7 (upval), p3 (copy)
+					return Callback7(p3)
 				end
 			})
 		end
 		
-		Callback5 = function(p3)
-			-- upvalues: GraphQLInterfaceType (upval), buildImplementationsList (ref), Callback8 (ref)
+		Callback4 = function(p3)
+			-- upvalues: GraphQLInterfaceType (upval), buildImplementationsList (ref), Callback7 (ref)
 			return GraphQLInterfaceType.new({
 				name = p3.name,
 				description = p3.description,
@@ -169,13 +169,13 @@ return {
 					return buildImplementationsList(p3)
 				end,
 				fields = function()
-					-- upvalues: Callback8 (upval), p3 (copy)
-					return Callback8(p3)
+					-- upvalues: Callback7 (upval), p3 (copy)
+					return Callback7(p3)
 				end
 			})
 		end
 		
-		Callback1 = function(p3)
+		Callback5 = function(p3)
 			-- upvalues: InspectFunction (upval), Error1 (upval), GraphQLUnionType (upval), Array (upval), getObjectType (ref)
 			if not p3.possibleTypes then
 				error(Error1.new(("Introspection result missing possibleTypes: %s."):format((InspectFunction(p3)))))
@@ -209,8 +209,8 @@ return {
 			})
 		end
 		
-		Callback7 = function(p3)
-			-- upvalues: InspectFunction (upval), Error1 (upval), GraphQLInputObjectType (upval), Callback2 (ref)
+		Callback1 = function(p3)
+			-- upvalues: InspectFunction (upval), Error1 (upval), GraphQLInputObjectType (upval), Callback8 (ref)
 			if not p3.inputFields then
 				error(Error1.new(("Introspection result missing inputFields: %s."):format((InspectFunction(p3)))))
 			end
@@ -218,13 +218,13 @@ return {
 				name = p3.name,
 				description = p3.description,
 				fields = function()
-					-- upvalues: Callback2 (upval), p3 (copy)
-					return Callback2(p3.inputFields)
+					-- upvalues: Callback8 (upval), p3 (copy)
+					return Callback8(p3.inputFields)
 				end
 			})
 		end
 		
-		Callback8 = function(p3)
+		Callback7 = function(p3)
 			-- upvalues: Error1 (upval), InspectFunction (upval), KeyValMapFunction (upval), BuildField (ref)
 			if not p3.fields then
 				error(Error1.new(("Introspection result missing fields: %s."):format(InspectFunction(p3))))
@@ -235,7 +235,7 @@ return {
 		end
 		
 		BuildField = function(Field)
-			-- upvalues: getType (ref), IsOutputTypeFunction (upval), InspectFunction (upval), Error1 (upval), Callback2 (ref)
+			-- upvalues: getType (ref), IsOutputTypeFunction (upval), InspectFunction (upval), Error1 (upval), Callback8 (ref)
 			local Type = getType(Field.type)
 			
 			if not IsOutputTypeFunction(Type) then
@@ -248,11 +248,11 @@ return {
 				description = Field.description,
 				deprecationReason = Field.deprecationReason,
 				type = Type,
-				args = Callback2(Field.args)
+				args = Callback8(Field.args)
 			}
 		end
 		
-		Callback2 = function(Args)
+		Callback8 = function(Args)
 			-- upvalues: KeyValMapFunction (upval), BuildInputValue (ref)
 			return KeyValMapFunction(Args, function(p3)
 				return p3.name
@@ -275,7 +275,7 @@ return {
 		end
 		
 		local function buildDirective(p3)
-			-- upvalues: InspectFunction (upval), Error1 (upval), GraphQLDirective (upval), Array (upval), Callback2 (ref)
+			-- upvalues: InspectFunction (upval), Error1 (upval), GraphQLDirective (upval), Array (upval), Callback8 (ref)
 			if not p3.args then
 				error(Error1.new(("Introspection result missing directive args: %s."):format((InspectFunction(p3)))))
 			end
@@ -287,7 +287,7 @@ return {
 				description = p3.description,
 				isRepeatable = p3.isRepeatable,
 				locations = Array.slice(p3.locations),
-				args = Callback2(p3.args)
+				args = Callback8(p3.args)
 			})
 		end
 		

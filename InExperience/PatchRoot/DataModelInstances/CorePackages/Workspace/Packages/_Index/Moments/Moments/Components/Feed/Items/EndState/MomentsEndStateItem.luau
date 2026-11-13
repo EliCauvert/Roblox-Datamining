@@ -1,10 +1,11 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
 local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local UseFeedFunction = require(Moments.Components.Feed.FeedContext).useFeed
 local MomentsEndStateViewModule = require(script.Parent.MomentsEndStateView)
-local Signal = require(Parent.Signals).createSignal(true)
+local Signal = SignalsModule.createSignal(true)
 
 return function(Frame)
 	-- upvalues: UseFeedFunction (copy), SignalsReactModule (copy), Signal (copy), ReactModule (copy), MomentsEndStateViewModule (copy)

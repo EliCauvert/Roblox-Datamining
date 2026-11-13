@@ -16,6 +16,7 @@ local Diag = SocialLuaAnalyticsModule.Analytics.DefaultAnalyticsService.Diag
 local GetPlatformSuffixFunction = SocialLuaAnalyticsModule.Analytics.FireEvent.getPlatformSuffix
 local PlatformSpecificity = SocialLuaAnalyticsModule.Analytics.Enums.PlatformSpecificity
 local HttpService = game:GetService("HttpService")
+local LoggingProtocolModule = require(Parent.LoggingProtocol)
 local SupportedTelemetryBackends = SocialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends
 local NewUrlBuilder = UrlBuilder.new({
 	path = "users/{userId}/friends/find",
@@ -40,7 +41,7 @@ local function _(): string
 end
 
 local Emitter = SocialLuaAnalyticsModule.Telemetry.createEmitter({
-	telemetryImpl = require(Parent.LoggingProtocol).default,
+	telemetryImpl = LoggingProtocolModule.default,
 	defaultTelemetryConfig = {
 		links = "https://docs.google.com/document/d/1uRCdl8pEuiW9wDiOTL39JPMGLhgxtpvVgiXovE8Xof4",
 		throttlingThousandths = game:DefineFastInt("FriendsCommonAnalyticsThrottlingThousandths", 10000)

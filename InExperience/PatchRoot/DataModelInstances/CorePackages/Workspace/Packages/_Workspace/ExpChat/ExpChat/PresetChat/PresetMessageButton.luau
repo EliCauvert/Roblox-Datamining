@@ -1,9 +1,10 @@
 ﻿local TweenService = game:GetService("TweenService")
 local Parent = script:FindFirstAncestor("ExpChat").Parent
+local ExpChatSharedModule = require(Parent.ExpChatShared)
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local PresetCooldownContextModule = require(script.Parent.PresetCooldownContext)
-local FIntPresetChatCooldownLuaMsRatio = require(Parent.ExpChatShared).Flags.FIntPresetChatCooldownLuaMs / 1000
+local FIntPresetChatCooldownLuaMsRatio = ExpChatSharedModule.Flags.FIntPresetChatCooldownLuaMs / 1000
 
 return ReactModule.memo(function(p1)
 	-- upvalues: FoundationModule (copy), ReactModule (copy), PresetCooldownContextModule (copy), FIntPresetChatCooldownLuaMsRatio (copy), TweenService (copy)

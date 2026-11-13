@@ -84,10 +84,10 @@ return function()
 		return nil
 	end
 	
-	local Callback1 = nil
 	local Callback = nil
+	local Callback1 = nil
 	local Effect2 = SignalsModule.createEffect(function(p2)
-		-- upvalues: Signal (copy), FFlagAXTimeoutAcknowledgementGating (upval), Callback (ref), Callback1 (ref)
+		-- upvalues: Signal (copy), FFlagAXTimeoutAcknowledgementGating (upval), Callback1 (ref), Callback (ref)
 		local SignalResult = Signal(p2)
 		local EndDate = if SignalResult.details and SignalResult.details.endDate then SignalResult.details.endDate elseif SignalResult.timeoutAction and SignalResult.timeoutAction.endTime then SignalResult.timeoutAction.endTime else nil
 		
@@ -106,8 +106,8 @@ return function()
 			
 			if UnixTimestampMillisDelta <= 0 then return end
 			local DelayedThread = task.delay(UnixTimestampMillisDelta / 1000 + 1, function()
-				-- upvalues: Callback (upval), SignalResult (copy)
-				Callback(SignalResult.featureName)
+				-- upvalues: Callback1 (upval), SignalResult (copy)
+				Callback1(SignalResult.featureName)
 			end)
 			
 			return function()
@@ -115,13 +115,13 @@ return function()
 				task.cancel(DelayedThread)
 			end
 		elseif UnixTimestampDelta <= 0 then
-			Callback1()
+			Callback()
 			
 			return
 		else
 			local DelayedThread1 = task.delay(UnixTimestampDelta, function()
-				-- upvalues: Callback1 (upval)
-				Callback1()
+				-- upvalues: Callback (upval)
+				Callback()
 			end)
 			
 			return function()
@@ -410,7 +410,7 @@ return function()
 		end)
 	end
 	
-	Callback = function(FeatureName, p5)
+	Callback1 = function(FeatureName, p5)
 		-- upvalues: doFetchStatus (copy)
 		local Count = 3
 		
@@ -443,7 +443,7 @@ return function()
 		return Signal(p5).details
 	end)
 	
-	Callback1 = function()
+	Callback = function()
 		-- upvalues: Effect1 (ref), Effect (ref), Flag1 (ref), Flag (ref), Signal2 (copy), resolvePendingFetches (copy)
 		if Effect1 then
 			Effect1()
@@ -472,19 +472,19 @@ return function()
 		getTimeoutDetails = Computed1,
 		fetchStatus = fetchStatus,
 		fetchStatusAsync = fetchStatusAsync,
-		refreshStatus = Callback,
+		refreshStatus = Callback1,
 		setStatus = function(p5)
 			-- upvalues: Signal2 (copy)
 			Signal2(p5)
 		end,
-		clearStatus = Callback1,
+		clearStatus = Callback,
 		clearStatusIfServed = function(): boolean
-			-- upvalues: Signal (copy), getEndDateTime (upval), Callback1 (ref)
+			-- upvalues: Signal (copy), getEndDateTime (upval), Callback (ref)
 			local SignalResult = Signal(false)
 			local EndDateTime = getEndDateTime(SignalResult)
 			
 			if SignalResult.isTimedOut and EndDateTime and DateTime.now().UnixTimestampMillis >= EndDateTime.UnixTimestampMillis then
-				Callback1()
+				Callback()
 				
 				return true
 			else

@@ -2,8 +2,9 @@
 local Parent1 = Parent.Parent
 local DependenciesModule = require(Parent1.dependencies)
 local React = DependenciesModule.React
+local UIBlox = DependenciesModule.UIBlox
 local NotificationContentFrameModule = require(Parent.NotificationContentFrame)
-local UseStyleFunction = DependenciesModule.UIBlox.Core.Style.useStyle
+local UseStyleFunction = UIBlox.Core.Style.useStyle
 local ConstantsModule = require(Parent1.constants)
 local UseNotificationCardDataModule = require(Parent1.context.useNotificationCardData)
 local DefaultCardPadding = ConstantsModule.Padding.DefaultCardPadding
@@ -14,13 +15,14 @@ return function(p1)
 	-- upvalues: UseNotificationCardDataModule (copy), ConstantsModule (copy), DefaultCardPadding (copy), UseStyleFunction (copy), React (copy), DefaultCardCornerRadius (copy), DefaultContentPadding (copy), NotificationContentFrameModule (copy)
 	local UseNotificationCardDataModuleResult = UseNotificationCardDataModule()
 	local CardSize = UseNotificationCardDataModuleResult.cardSize
+	local CardTransparency = if UseNotificationCardDataModuleResult.cardTransparency then UseNotificationCardDataModuleResult.cardTransparency else ConstantsModule.CardTransparency.Default
 	local CardPadding = if CardSize and CardSize.cardPadding then CardSize.cardPadding else DefaultCardPadding
 	
 	return React.createElement("Frame", {
 		BorderSizePixel = 0,
 		Size = UDim2.new(1, 0, 0, 0),
 		BackgroundColor3 = UseStyleFunction().Theme.BackgroundUIDefault.Color,
-		BackgroundTransparency = if UseNotificationCardDataModuleResult.cardTransparency then UseNotificationCardDataModuleResult.cardTransparency else ConstantsModule.CardTransparency.Default,
+		BackgroundTransparency = CardTransparency,
 		AutomaticSize = Enum.AutomaticSize.Y,
 		LayoutOrder = p1.layoutOrder
 	}, {

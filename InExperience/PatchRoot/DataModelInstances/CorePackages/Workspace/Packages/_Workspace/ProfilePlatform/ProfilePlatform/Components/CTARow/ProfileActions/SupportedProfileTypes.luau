@@ -12,6 +12,7 @@ local FFlagProfilePlatformEnableTradeItemsModule = require(ProfilePlatform.Flags
 local FFlagProfilePlatformAddTC = SharedFlagsModule.FFlagProfilePlatformAddTC
 local FFlagFixTFLinksVRGatingModule = require(ProfilePlatform.Flags.FFlagFixTFLinksVRGating)
 local FFlagProfilePlatformEnableUserFollowModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnableUserFollow)
+local FFlagFriendsCallingClientGateDEV = SharedFlagsModule.FFlagFriendsCallingClientGate_DEV
 local FFlagJoinabilityCTARefactor = SharedFlagsModule.FFlagJoinabilityCTARefactor
 local List = {
 	EnumsModule.ProfileActions.AddFriend,
@@ -30,7 +31,7 @@ local List = {
 	EnumsModule.ProfileActions.UnlockChat
 }
 
-if SharedFlagsModule.FFlagFriendsCallingClientGate_DEV then
+if FFlagFriendsCallingClientGateDEV then
 	table.insert(List, EnumsModule.ProfileActions.Call)
 end
 if FFlagJoinabilityCTARefactor then

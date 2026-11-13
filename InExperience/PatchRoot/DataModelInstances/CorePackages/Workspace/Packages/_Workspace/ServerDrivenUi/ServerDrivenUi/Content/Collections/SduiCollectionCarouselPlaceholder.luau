@@ -97,6 +97,7 @@ return ReactModule.memo(function(p2)
 			if FFlagSduiPreferredTextSizeLineBudgets then UsePreferredTextSizeLineBudgetResult else nil
 		})
 	end
+	local Medium = if FFlagSduiCollectionCarouselPlaceholderItem and p2.hideHeader then 0 else UseTokensResult.Padding.Medium
 	local UseMemoResult2 = ReactModule.useMemo(function(): number
 		-- upvalues: LuaAppSduiCarouselPlaceholderHeaderMinWidthPct (upval), LuaAppSduiCarouselPlaceholderHeaderMaxWidthPct (upval)
 		local LuaAppSduiCarouselPlaceholderHeaderMinWidthPctRatio = LuaAppSduiCarouselPlaceholderHeaderMinWidthPct / 100
@@ -119,7 +120,7 @@ return ReactModule.memo(function(p2)
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, if FFlagSduiCollectionCarouselPlaceholderItem and p2.hideHeader then 0 else UseTokensResult.Padding.Medium)
+			Padding = UDim.new(0, Medium)
 		}),
 		Header = if FFlagSduiCollectionCarouselPlaceholderItem and p2.hideHeader then nil else ReactModule.createElement(SduiPlaceholder, {
 			layoutOrder = 1,

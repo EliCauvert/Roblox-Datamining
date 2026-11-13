@@ -1,6 +1,7 @@
 ﻿local Parent = script:FindFirstAncestor("ProfileInsights").Parent
 local SignalsModule = require(Parent.Signals)
 local CreateSignalFunction = SignalsModule.createSignal
+local CreateComputedFunction = SignalsModule.createComputed
 local ProfileInsightsModelModule = require(script.Parent.ProfileInsightsModel)
 local HttpService = game:GetService("HttpService")
 local ProfileInsightsStoreHttpTimeout = game:DefineFastInt("ProfileInsightsStoreHttpTimeout", 1500)
@@ -50,7 +51,7 @@ local function _(Status, Data)
 	return { status = Status, data = Data }
 end
 
-return SignalsModule.createComputed(function(_)
+return CreateComputedFunction(function(_)
 	-- upvalues: ProfileInsightsModelModule (copy), CreateSignalFunction (copy), FFlagProfileInsightsSkipFetchNoCacheEntry (copy), FFlagAddFriendsPageTrustedFriendRequestSection (copy), makeHttpCall (copy), HttpService (copy)
 	local ProfileInsightsSignalLists = {}
 	local ProfileInsightsSignalLists1 = {}

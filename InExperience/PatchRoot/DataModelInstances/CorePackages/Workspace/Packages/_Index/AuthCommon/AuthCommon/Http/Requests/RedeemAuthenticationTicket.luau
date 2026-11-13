@@ -2,8 +2,9 @@
 local Parent = AuthCommon.Parent
 local HttpService = game:GetService("HttpService")
 local HttpModule = require(Parent.Http)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local AppStorageUtilitiesModule = require(AuthCommon.Utils.AppStorageUtilities)
-local FFlagEnableLuaAccountSwitch = require(Parent.SharedFlags).FFlagEnableLuaAccountSwitch
+local FFlagEnableLuaAccountSwitch = SharedFlagsModule.FFlagEnableLuaAccountSwitch
 
 return function(Callback, AuthenticationTicket)
 	-- upvalues: HttpService (copy), FFlagEnableLuaAccountSwitch (copy), AppStorageUtilitiesModule (copy), HttpModule (copy)

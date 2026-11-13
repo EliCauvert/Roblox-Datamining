@@ -1,9 +1,11 @@
 ﻿local CoreScriptsRoactCommon = script:FindFirstAncestor("CoreScriptsRoactCommon")
 local Parent = CoreScriptsRoactCommon.Parent
 local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local Localization = require(Parent.InExperienceLocales).Localization
 local LocalizationProvider = require(Parent.Localization).LocalizationProvider
 local FoundationStorybookMiddlewareModule = require(script.Parent.FoundationStorybookMiddleware)
-local EnUs = require(Parent.InExperienceLocales).Localization.new("en-us")
+local EnUs = Localization.new("en-us")
 
 local function _(p1)
 	-- upvalues: ReactModule (copy), LocalizationProvider (copy), EnUs (copy)
@@ -17,7 +19,7 @@ return {
 	name = CoreScriptsRoactCommon.Name,
 	storyRoot = CoreScriptsRoactCommon,
 	roact = ReactModule,
-	reactRoblox = require(Parent.ReactRoblox),
+	reactRoblox = ReactRobloxModule,
 	mapStory = function(p1)
 		-- upvalues: FoundationStorybookMiddlewareModule (copy), ReactModule (copy), LocalizationProvider (copy), EnUs (copy)
 		return FoundationStorybookMiddlewareModule(function(p2)

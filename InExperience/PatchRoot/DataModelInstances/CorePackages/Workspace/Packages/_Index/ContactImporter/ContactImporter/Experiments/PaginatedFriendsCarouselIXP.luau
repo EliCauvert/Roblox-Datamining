@@ -1,6 +1,7 @@
 ﻿local Parent = script.Parent.Parent.Parent
+local SharedFlagsModule = require(Parent.SharedFlags)
 local UseUserExperimentFunction = require(Parent.RoactAppExperiment).useUserExperiment
-local FStringPaginatedCarouselExperimentLayer = require(Parent.SharedFlags).FStringPaginatedCarouselExperimentLayer
+local FStringPaginatedCarouselExperimentLayer = SharedFlagsModule.FStringPaginatedCarouselExperimentLayer
 
 return {
 	usePaginatedFriendsCarouselExperiment = function()

@@ -2,6 +2,7 @@
 local Parent = Moments.Parent
 local ReactModule = require(Parent.React)
 local _ = require(Parent.Signals)
+local FoundationModule = require(Parent.Foundation)
 local MomentsCommonModule = require(Parent.MomentsCommon)
 local _ = require(script.Parent.FeedTypes)
 local UseImmersiveChromeModule = require(script.Parent.useImmersiveChrome)
@@ -10,7 +11,7 @@ local _ = require(Moments.Components.VerticalPager)
 local MediaPreloadProvider = MomentsCommonModule.Media.MediaPreloadProvider
 local UseFormFactorFunction = MomentsCommonModule.Hooks.useFormFactor
 local FormFactor = MomentsCommonModule.Enums.FormFactor
-local UsePreferencesFunction = require(Parent.Foundation).Hooks.usePreferences
+local UsePreferencesFunction = FoundationModule.Hooks.usePreferences
 
 return function(p1)
 	-- upvalues: MediaPreloadProvider (copy), UsePreferredInputModule (copy), UseFormFactorFunction (copy), UsePreferencesFunction (copy), FormFactor (copy), ReactModule (copy), UseImmersiveChromeModule (copy)

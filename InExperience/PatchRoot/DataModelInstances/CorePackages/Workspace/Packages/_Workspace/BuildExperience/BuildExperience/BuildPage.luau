@@ -69,6 +69,7 @@ local FFlagAppThemeHalloween2026BuildBackgroundModule = require(script.Parent.Fl
 local UseThemeBackgroundFunction = require(Parent.ThemeBackground).useThemeBackground
 local FFlagBuildWithGroupsModule = require(script.Parent.Flags.FFlagBuildWithGroups)
 local BuildHomeTabsContainerModule = if FFlagBuildExperiencePreviewsTabModule then require(script.Parent.Components.BuildHomeTabs.BuildHomeTabsContainer) else nil
+local FFlagEnableBuildTabOverride = SharedFlagsModule.FFlagEnableBuildTabOverride
 local FFlagBuildExperienceHomeTelemetryModule = require(script.Parent.Flags.FFlagBuildExperienceHomeTelemetry)
 local FFlagBuildExperienceAnalytics = SharedFlagsModule.FFlagBuildExperienceAnalytics
 local FFlagBuildExperienceHideNavBarOnSubPages = SharedFlagsModule.FFlagBuildExperienceHideNavBarOnSubPages
@@ -79,7 +80,7 @@ local UseBuildPageImpressionModule = require(BuildExperience.Telemetry.useBuildP
 local GetAdsCampaignDeepLinkStoreModule = require(BuildExperience.Stores.GetAdsCampaignDeepLinkStore)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 local FFlagBuildAdUpsellModule1 = FFlagBuildAdUpsellModule or FFlagBuildExperienceMonetizationNativeUIModule
-local NoFFlagEnableBuildTabOverride = not SharedFlagsModule.FFlagEnableBuildTabOverride
+local NoFFlagEnableBuildTabOverride = not FFlagEnableBuildTabOverride
 local BuildEligibilityDialogModule = require(script.Parent.Components.BuildEligibilityDialog)
 local UseBuildPageEligibilityModule = require(script.Parent.useBuildPageEligibility)
 local PublishSheetControllerModule = if FFlagBuildPublishNavigationSheetModule then require(script.Parent.Components.PublishSheet.PublishSheetController) else nil
@@ -528,7 +529,7 @@ local List = {
 							}) else Element
 						})
 					}),
-					PublishSheet = if FFlagBuildPublishNavigationSheetModule and UseHomeConfigurationPagesResult ~= nil and PublishSheetTarget ~= nil and PublishSheetTarget.universeId ~= nil then ReactModule.createElement(PublishSheetControllerModule, {
+					PublishSheet = if FFlagBuildPublishNavigationSheetModule and UseHomeConfigurationPagesResult ~= nil and (PublishSheetTarget ~= nil and PublishSheetTarget.universeId ~= nil) then ReactModule.createElement(PublishSheetControllerModule, {
 						isOpen = UseHomeConfigurationPagesResult.isPublishSheetOpen,
 						target = PublishSheetTarget,
 						onClose = UseHomeConfigurationPagesResult.onClosePublishSheet,
@@ -654,6 +655,20 @@ local List = {
 					Navigation.setParams({ target = Target })
 					BuildExperienceRefreshStoreModule.bumpRefreshTick()
 				end, { Navigation, BuildExperienceRefreshStoreModule })
+				local Element = if Target == nil then nil else ReactModule.createElement(BuildChatPageModule, {
+					target = Target,
+					onOpenLibrary = UseResult6,
+					initialPrompt = InitialPrompt,
+					onClose = UseResult,
+					onOpenAgentsPage = UseResult8,
+					onOpenCreatorCreditPage = UseResult9,
+					onOpenGetUsersPage = UseResult11,
+					onOpenConfigurationPage = UseResult2,
+					onOpenInvitePicker = UseResult3,
+					onOpenInviteManagement = UseResult5,
+					onNavigateToResolvedTarget = UseResult12,
+					isFocused = if FFlagBuildAdUpsellModule1 then NoFFlagBuildAdUpsellModule1 else nil
+				})
 				local UniverseId = if Target == nil then nil else Target.universeId
 				
 				return ReactModule.createElement(ReactModule.Fragment, nil, {
@@ -662,22 +677,7 @@ local List = {
 						BackgroundColor3 = UseBuildPageLayoutModuleResult.tokens.Color.Surface.Surface_0.Color3,
 						BackgroundTransparency = UseBuildPageLayoutModuleResult.tokens.Color.Surface.Surface_0.Transparency,
 						includeBottomBar = UseBuildPageLayoutModuleResult.shouldIncludeBottomBar and not UseOnScreenKeyboardVisibleModuleResult
-					}, {
-						Page = if Target == nil then nil else ReactModule.createElement(BuildChatPageModule, {
-							target = Target,
-							onOpenLibrary = UseResult6,
-							initialPrompt = InitialPrompt,
-							onClose = UseResult,
-							onOpenAgentsPage = UseResult8,
-							onOpenCreatorCreditPage = UseResult9,
-							onOpenGetUsersPage = UseResult11,
-							onOpenConfigurationPage = UseResult2,
-							onOpenInvitePicker = UseResult3,
-							onOpenInviteManagement = UseResult5,
-							onNavigateToResolvedTarget = UseResult12,
-							isFocused = if FFlagBuildAdUpsellModule1 then NoFFlagBuildAdUpsellModule1 else nil
-						})
-					}),
+					}, { Page = Element }),
 					Picker = if UseStateResult and UniverseId ~= nil then ReactModule.createElement(PrivateInvitesPickerHostModule, {
 						universeId = UniverseId,
 						onClose = UseResult4,

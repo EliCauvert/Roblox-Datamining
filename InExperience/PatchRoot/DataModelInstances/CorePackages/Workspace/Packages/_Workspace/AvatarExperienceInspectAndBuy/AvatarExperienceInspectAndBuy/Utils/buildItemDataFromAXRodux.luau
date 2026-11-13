@@ -12,11 +12,12 @@ local function buildCollectibleItemDetails(p1, CollectibleItemDetails)
 	local CollectibleItemId = CollectibleItemDetails.collectibleItemId
 	local CollectiblesItem = if Collectibles and CollectibleItemId and Collectibles.CollectiblesItemInfo then Collectibles.CollectiblesItemInfo[CollectibleItemId] else nil
 	local CollectiblesResellableInstance = if Collectibles and CollectibleItemId and Collectibles.CollectiblesResellableInstances then Collectibles.CollectiblesResellableInstances[CollectibleItemId] else nil
+	local FieldCountResult = if CollectiblesResellableInstance then TutilsModule.fieldCount(CollectiblesResellableInstance) else 0
 	local LowestAvailableResaleProductId = if CollectiblesItem then CollectiblesItem.lowestAvailableResaleProductId else nil
 	
 	return {
 		quantityLimitPerUser = if CollectiblesItem then CollectiblesItem.quantityLimitPerUser else nil,
-		resellableCount = if CollectiblesResellableInstance then TutilsModule.fieldCount(CollectiblesResellableInstance) else 0,
+		resellableCount = FieldCountResult,
 		collectibleProductId = if CollectiblesItem then CollectiblesItem.collectibleProductId else nil,
 		collectibleLowestAvailableResaleProductId = LowestAvailableResaleProductId,
 		collectibleLowestAvailableResaleItemInstanceId = if CollectiblesItem then CollectiblesItem.lowestAvailableResaleItemInstanceId else nil,

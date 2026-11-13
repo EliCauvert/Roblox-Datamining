@@ -339,8 +339,7 @@ return function(Tbl)
 	local UseSignalStateResult2 = "NotReady"
 	
 	if FFlagBuildExperienceMonetizationNativeUIModule then
-		local Signal1 = Signal3
-		UseSignalStateResult1 = SignalsReactModule.useSignalState(if UseMemoResult == nil then Signal1 else UseMemoResult.data)
+		UseSignalStateResult1 = SignalsReactModule.useSignalState(if UseMemoResult == nil then Signal3 else UseMemoResult.data)
 		UseSignalStateResult2 = SignalsReactModule.useSignalState(if UseMemoResult == nil then NotReady else UseMemoResult.status)
 	end
 	local UseMemoResult1 = if FFlagBuildExperienceMonetizationNativeUIModule then ReactModule.useMemo(function()
@@ -509,12 +508,12 @@ return function(Tbl)
 	local OnRetrySource = if UseMixedCatalogResult == nil then nil else UseMixedCatalogResult.onRetrySource
 	local UseResult2 = ReactModule.useCallback(function(p4, IsManagedPricingEnabled)
 		-- upvalues: ComputedResult (copy), Tbl (copy), FFlagBuildExperienceMonetizationNativeUIModule (upval), v3 (ref)
-		local function v125()
+		local function v124()
 			-- upvalues: ComputedResult (upval), Tbl (upval), p4 (copy), IsManagedPricingEnabled (copy)
 			return ComputedResult.update(Tbl.universeId, p4, { isManagedPricingEnabled = IsManagedPricingEnabled })
 		end
 		
-		return if FFlagBuildExperienceMonetizationNativeUIModule and IsManagedPricingEnabled then v3.ensureManagedPricingAccepted(Tbl.universeId):andThen(v125) else v125()
+		return if FFlagBuildExperienceMonetizationNativeUIModule and IsManagedPricingEnabled then v3.ensureManagedPricingAccepted(Tbl.universeId):andThen(v124) else v124()
 	end, { ComputedResult, v3, Tbl.universeId })
 	local UseResult21 = ReactModule.useCallback(function(p4, IsForSale)
 		-- upvalues: ComputedResult (copy), Tbl (copy)
@@ -625,7 +624,7 @@ return function(Tbl)
 	Copy.onRetryCatalog = UseResult1
 	Copy.onUpdateProductManagedPricing = if Tbl.universeId == nil or not IsCanMonetize then nil else UseResult2
 	
-	if FFlagBuildExperienceMonetizationProductEditingModule and (Tbl.universeId ~= nil and IsCanMonetize) then
+	if FFlagBuildExperienceMonetizationProductEditingModule and Tbl.universeId ~= nil and IsCanMonetize then
 		Copy.onUpdateProductSaleStatus = UseResult21
 		Copy.onUpdateProduct = UseResult3
 		

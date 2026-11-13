@@ -3,11 +3,12 @@ local RunService = game:GetService("RunService")
 local CryoModule = require(Songbird.Parent.Cryo)
 local FoundationModule = require(Songbird.Parent.Foundation)
 local ReactModule = require(Songbird.Parent.React)
+local ReactUtilsModule = require(Songbird.Parent.ReactUtils)
 local UseCallbackFunction = ReactModule.useCallback
 local UseBindingFunction = ReactModule.useBinding
 local UseStateFunction = ReactModule.useState
 local UseTokensFunction = FoundationModule.Hooks.useTokens
-local UseEventConnectionFunction = require(Songbird.Parent.ReactUtils).useEventConnection
+local UseEventConnectionFunction = ReactUtilsModule.useEventConnection
 local config = { speed = 20, direction = Enum.TextDirection.LeftToRight }
 
 local function _(p1, p2): number

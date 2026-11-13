@@ -3,6 +3,7 @@ local Parent = ProfileQRCode.Parent
 local QRCodeDisplayModule = require(Parent.QRCodeDisplay)
 local ReactModule = require(Parent.React)
 local UIBloxModule = require(Parent.UIBlox)
+local Images = UIBloxModule.App.ImageSet.Images
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local LightTheme = UIBloxModule.App.Style.Themes.LightTheme
 local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
@@ -14,7 +15,7 @@ local FFlagProfileQrCodeDeprecateUserReduxModule = require(ProfileQRCode.Flags.F
 local DisplayQRCode = QRCodeDisplayModule.DisplayQRCode
 local GetStandardSizeAvatarHeadShotRbxthumbFunction = require(Parent.UserLib).Utils.getStandardSizeAvatarHeadShotRbxthumb
 local GetFFlagLuaAppEnableOpenTypeSupportFunction = require(Parent.SharedFlags).GetFFlagLuaAppEnableOpenTypeSupport
-local ComponentAssetsDropshadow568 = UIBloxModule.App.ImageSet.Images["component_assets/dropshadow_56_8"]
+local ComponentAssetsDropshadow568 = Images["component_assets/dropshadow_56_8"]
 
 return function(p1)
 	-- upvalues: UseLocalUserIdFunction (copy), UseLocalUserInfoModule (copy), UseStyleFunction (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), ReactModule (copy), LightTheme (copy), DisplayQRCode (copy), QRCodeDisplayModule (copy), ImageSetLabel (copy), ComponentAssetsDropshadow568 (copy), StyledTextLabel (copy), FFlagProfileQrCodeDeprecateUserReduxModule (copy), GetFFlagLuaAppEnableOpenTypeSupportFunction (copy), OpenTypeSupport (copy)

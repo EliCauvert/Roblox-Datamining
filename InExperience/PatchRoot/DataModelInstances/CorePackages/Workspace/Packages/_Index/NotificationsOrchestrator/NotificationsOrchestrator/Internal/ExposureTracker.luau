@@ -2,11 +2,12 @@
 local Players = game:GetService("Players")
 local NotificationsOrchestrator = script:FindFirstAncestor("NotificationsOrchestrator")
 local Parent = NotificationsOrchestrator.Parent
+local CreateSessionScopedSignalFunction = require(Parent.SignalsUtils).createSessionScopedSignal
 local LocalUserIdStore = require(Parent.LocalUserIdStore).LocalUserIdStore
 local SafeAppStorageService = require(Parent.AvatarExperienceCommon).Lib.SafeAppStorageService
 local FIntNotificationsOrchestratorExposureTrackerVersionModule = require(NotificationsOrchestrator.Flags.FIntNotificationsOrchestratorExposureTrackerVersion)
 local _ = require(NotificationsOrchestrator.Types)
-local SessionScopedSignal, SessionScopedSignal2 = require(Parent.SignalsUtils).createSessionScopedSignal({})
+local SessionScopedSignal, SessionScopedSignal2 = CreateSessionScopedSignalFunction({})
 
 local function _()
 	-- upvalues: LocalUserIdStore (copy), Players (copy)

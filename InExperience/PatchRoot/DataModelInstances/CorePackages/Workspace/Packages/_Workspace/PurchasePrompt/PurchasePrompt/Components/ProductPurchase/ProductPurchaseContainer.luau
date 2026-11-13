@@ -649,7 +649,7 @@ function ExtendResult.determinePrompt(p1)
 					})
 				end
 			})
-		elseif PromptState == PromptStateModule.Error and PurchaseError == PurchaseErrorModule.NotEnoughRobuxXbox and DesktopUpsellExperiment.shouldShowNewModal() then
+		elseif PromptState == PromptStateModule.Error and (PurchaseError == PurchaseErrorModule.NotEnoughRobuxXbox and DesktopUpsellExperiment.shouldShowNewModal()) then
 			return Roact.createElement(RobuxUpsellModalTooExpensiveFallback, {
 				screenSize = p1.state.screenSize,
 				product = {

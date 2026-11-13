@@ -1,5 +1,6 @@
 ﻿local ExpChat = script:FindFirstAncestor("ExpChat")
 local Parent = ExpChat.Parent
+local RoduxModule = require(Parent.Rodux)
 local Dictionary = require(Parent.llama).Dictionary
 local ExpChatSharedModule = require(Parent.ExpChatShared)
 local ShouldRenderTextChannelInDefaultWindowFunction = ExpChatSharedModule.shouldRenderTextChannelInDefaultWindow
@@ -7,12 +8,28 @@ local GetTextChannelDisplayModeFunction = ExpChatSharedModule.getTextChannelDisp
 local SharedFlagsModule = require(Parent.SharedFlags)
 local NewResult = ExpChatSharedModule.Logger:new("ExpChat/Reducers/" .. script.Name)
 local Actions = ExpChat.Actions
+local LocalTextChannelParticipantAddedModule = require(Actions.LocalTextChannelParticipantAdded)
+local LocalTextChannelParticipantRemoved = ExpChatSharedModule.Actions.LocalTextChannelParticipantRemoved
+local TextChannelRemoved = ExpChatSharedModule.Actions.TextChannelRemoved
+local TargetTextChannelPropertyChanged = ExpChatSharedModule.Actions.TargetTextChannelPropertyChanged
+local TextChatChannelSelected = ExpChatSharedModule.Actions.TextChatChannelSelected
+local IncomingMessageReceivedModule = require(Actions.IncomingMessageReceived)
+local UniverseChatSystemMessageAddedModule = require(Actions.UniverseChatSystemMessageAdded)
+local UniverseChatChannelAddedModule = require(Actions.UniverseChatChannelAdded)
+local UniverseChatChannelSelected = ExpChatSharedModule.Actions.UniverseChatChannelSelected
+local FriendsChatChannelAddedModule = require(Actions.FriendsChatChannelAdded)
+local FriendsChatChannelRemovedModule = require(Actions.FriendsChatChannelRemoved)
+local FriendsChatChannelSelected = ExpChatSharedModule.Actions.FriendsChatChannelSelected
 local FriendsChatTabNameModule = require(Parent.FriendsChat.FriendsChatTabName)
+local MarkChannelUnreadForSystemMessageModule = require(Actions.MarkChannelUnreadForSystemMessage)
+local MarkChannelUnreadForIncomingMessageModule = require(Actions.MarkChannelUnreadForIncomingMessage)
+local SetChannelUnreadStatusModule = require(Actions.SetChannelUnreadStatus)
 local FFlagExpChatUnreadTabIndicatorV2WindowModule = require(ExpChat.Flags.FFlagExpChatUnreadTabIndicatorV2Window)
 local GetFFlagExpChatFixChannelTabsMidExperienceToggleModule = require(ExpChat.Flags.getFFlagExpChatFixChannelTabsMidExperienceToggle)
 local FFlagExpChatFriendsTabRequireDefaultChannels = SharedFlagsModule.FFlagExpChatFriendsTabRequireDefaultChannels
 local GetFFlagTextChatEnableUniverseChatTabsFunction = ExpChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
 local GetFFlagExpChatSuppressWelcomeMessageTabUnreadFunction = ExpChatSharedModule.Flags.GetFFlagExpChatSuppressWelcomeMessageTabUnread
+local ChannelTabsConfigurationEnabledModule = require(Actions.ChannelTabsConfigurationEnabled)
 local ShouldSuppressUnreadForTabMetadataModule = require(ExpChat.shouldSuppressUnreadForTabMetadata)
 local IsGlobalTabFirstModule = require(ExpChat.isGlobalTabFirst)
 local GetDefaultTabNameModule = require(ExpChat.getDefaultTabName)
@@ -209,13 +226,13 @@ local function selectTextChannelTabByName(JoinResult, ChannelName, ShouldReorder
 	})
 end
 
-return require(Parent.Rodux).createReducer({
+return RoduxModule.createReducer({
 	selectedTabName = nil,
 	channelTabsConfigurationEnabled = false,
 	hasUserSelectedTab = false,
 	allChannelTabs = {}
 }, {
-	[require(Actions.ChannelTabsConfigurationEnabled).name] = function(p3, p4)
+	[ChannelTabsConfigurationEnabledModule.name] = function(p3, p4)
 		-- upvalues: GetFFlagTextChatEnableUniverseChatTabsFunction (copy), GetFFlagExpChatFixChannelTabsMidExperienceToggleModule (copy), Dictionary (copy), pruneNonSpecialTabs (copy), FFlagExpChatGlobalTabDefaultModule (copy), GetDefaultTabNameModule (copy), IsUserSelectedTabTrackedModule (copy)
 		if not GetFFlagTextChatEnableUniverseChatTabsFunction() then
 			return p3
@@ -241,7 +258,7 @@ return require(Parent.Rodux).createReducer({
 			hasUserSelectedTab = if IsUserSelectedTabTrackedModule() then p3.hasUserSelectedTab else nil
 		}
 	end,
-	[require(Actions.LocalTextChannelParticipantAdded).name] = function(p3, p4)
+	[LocalTextChannelParticipantAddedModule.name] = function(p3, p4)
 		-- upvalues: NewResult (copy), ShouldRenderTextChannelInDefaultWindowFunction (copy), GetTextChannelDisplayModeFunction (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), FFlagExpChatFriendsTabRequireDefaultChannels (copy), FFlagExpChatGlobalTabDefaultModule (copy), IsGlobalTabFirstModule (copy), FriendsChatTabNameModule (copy), insertTabAndReorder (copy), CanReplaceUserSelectedTabModule (copy), Dictionary (copy)
 		local Name = p4.textChannel.Name
 		NewResult:trace("LocalTextChannelParticipantAdded dispatched: {}", Name)
@@ -303,36 +320,36 @@ return require(Parent.Rodux).createReducer({
 			selectedTabName = SelectedTabName
 		})
 	end,
-	[ExpChatSharedModule.Actions.LocalTextChannelParticipantRemoved.name] = function(p3, p4)
+	[LocalTextChannelParticipantRemoved.name] = function(p3, p4)
 		-- upvalues: NewResult (copy), removeChannelTab (copy)
 		NewResult:trace("LocalTextChannelParticipantRemoved dispatched: {}", p4.textChannel.Name)
 		
 		return (removeChannelTab(p3, p4.textChannel.Name))
 	end,
-	[ExpChatSharedModule.Actions.TextChannelRemoved.name] = function(p3, p4)
+	[TextChannelRemoved.name] = function(p3, p4)
 		-- upvalues: NewResult (copy), removeChannelTab (copy)
 		NewResult:trace("TextChannelRemoved dispatched: {}", p4.textChannel.Name)
 		
 		return (removeChannelTab(p3, p4.textChannel.Name))
 	end,
-	[ExpChatSharedModule.Actions.TargetTextChannelPropertyChanged.name] = function(p3, p4)
+	[TargetTextChannelPropertyChanged.name] = function(p3, p4)
 		-- upvalues: NewResult (copy), FFlagExpChatStickyTabs (copy), Dictionary (copy), selectTextChannelTabByName (copy)
 		NewResult:trace("TargetTextChannelPropertyChanged dispatched")
 		local Name = if p4.textChannel then p4.textChannel.Name else nil
 		
 		return if FFlagExpChatStickyTabs then selectTextChannelTabByName(if p4.isUserInitiated then Dictionary.join(p3, { hasUserSelectedTab = true }) else p3, Name, p4.shouldReorderTabs) else selectTextChannelTabByName(p3, Name, p4.shouldReorderTabs)
 	end,
-	[ExpChatSharedModule.Actions.TextChatChannelSelected.name] = function(p3, p4)
+	[TextChatChannelSelected.name] = function(p3, p4)
 		-- upvalues: NewResult (copy), IsUserSelectedTabTrackedModule (copy), selectTextChannelTabByName (copy), Dictionary (copy)
 		NewResult:trace("TextChatChannelSelected dispatched: {}", p4.channelName)
 		
 		return if IsUserSelectedTabTrackedModule() then selectTextChannelTabByName(Dictionary.join(p3, { hasUserSelectedTab = true }), p4.channelName, p4.shouldReorderTabs) else selectTextChannelTabByName(p3, p4.channelName, p4.shouldReorderTabs)
 	end,
-	[require(Actions.IncomingMessageReceived).name] = handleIncomingMessageReceived,
-	[require(Actions.MarkChannelUnreadForIncomingMessage).name] = if FFlagExpChatUnreadTabIndicatorV2WindowModule then handleIncomingMessageReceived else nil,
-	[require(Actions.UniverseChatSystemMessageAdded).name] = handleUniverseChatSystemMessageAdded,
-	[require(Actions.MarkChannelUnreadForSystemMessage).name] = if FFlagExpChatUnreadTabIndicatorV2WindowModule then handleUniverseChatSystemMessageAdded else nil,
-	[require(Actions.UniverseChatChannelAdded).name] = function(p3, p4)
+	[IncomingMessageReceivedModule.name] = handleIncomingMessageReceived,
+	[MarkChannelUnreadForIncomingMessageModule.name] = if FFlagExpChatUnreadTabIndicatorV2WindowModule then handleIncomingMessageReceived else nil,
+	[UniverseChatSystemMessageAddedModule.name] = handleUniverseChatSystemMessageAdded,
+	[MarkChannelUnreadForSystemMessageModule.name] = if FFlagExpChatUnreadTabIndicatorV2WindowModule then handleUniverseChatSystemMessageAdded else nil,
+	[UniverseChatChannelAddedModule.name] = function(p3, p4)
 		-- upvalues: NewResult (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), FFlagExpChatGlobalTabDefaultModule (copy), IsGlobalTabFirstModule (copy), insertTabAndReorder (copy), GetDefaultTabNameModule (copy), FriendsChatTabNameModule (copy), CanReplaceUserSelectedTabModule (copy), Dictionary (copy)
 		NewResult:trace("UniverseChatChannelAdded dispatched: {}", p4.channelName)
 		
@@ -375,7 +392,7 @@ return require(Parent.Rodux).createReducer({
 			selectedTabName = SelectedTabName
 		})
 	end,
-	[require(Actions.FriendsChatChannelAdded).name] = function(p3, p4)
+	[FriendsChatChannelAddedModule.name] = function(p3, p4)
 		-- upvalues: NewResult (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), insertTabAndReorder (copy), FFlagExpChatGlobalTabDefaultModule (copy), GetDefaultTabNameModule (copy), Dictionary (copy)
 		NewResult:trace("FriendsChatChannelAdded dispatched: {}", p4.channelName)
 		
@@ -402,13 +419,13 @@ return require(Parent.Rodux).createReducer({
 			selectedTabName = SelectedTabName
 		})
 	end,
-	[require(Actions.FriendsChatChannelRemoved).name] = function(p3, p4)
+	[FriendsChatChannelRemovedModule.name] = function(p3, p4)
 		-- upvalues: NewResult (copy), removeChannelTab (copy)
 		NewResult:trace("FriendsChatChannelRemoved dispatched: {}", p4.channelName)
 		
 		return (removeChannelTab(p3, p4.channelName))
 	end,
-	[ExpChatSharedModule.Actions.FriendsChatChannelSelected.name] = function(p3, p4)
+	[FriendsChatChannelSelected.name] = function(p3, p4)
 		-- upvalues: NewResult (copy), FFlagExpChatStickyTabs (copy), Dictionary (copy)
 		NewResult:trace("FriendsChatChannelSelected dispatched: {}", p4.channelName)
 		
@@ -417,7 +434,7 @@ return require(Parent.Rodux).createReducer({
 			selectedTabName = p4.channelName
 		}) else Dictionary.join(p3, { selectedTabName = p4.channelName })
 	end,
-	[require(Actions.SetChannelUnreadStatus).name] = function(p3, p4)
+	[SetChannelUnreadStatusModule.name] = function(p3, p4)
 		-- upvalues: Dictionary (copy)
 		local AllChannelTab = p3.allChannelTabs[p4.channelName]
 		
@@ -427,7 +444,7 @@ return require(Parent.Rodux).createReducer({
 			})
 		})
 	end,
-	[ExpChatSharedModule.Actions.UniverseChatChannelSelected.name] = function(p3, p4)
+	[UniverseChatChannelSelected.name] = function(p3, p4)
 		-- upvalues: NewResult (copy), IsUserSelectedTabTrackedModule (copy), Dictionary (copy)
 		NewResult:trace("UniverseChatChannelSelected dispatched: {}", p4.channelName)
 		local AllChannelTab = p3.allChannelTabs[p4.channelName]

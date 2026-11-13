@@ -4,14 +4,16 @@ local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local SharedFlagsModule = require(Parent.SharedFlags)
+local FStringAppChatFriendsTabIxpLayerModule = require(AppChat.Flags.FStringAppChatFriendsTabIxpLayer)
 local GetFriendsChatSettingsStoreModule = require(AppChat.Stores.GetFriendsChatSettingsStore)
+local IXPNavigationUtilsModule = require(AppChat.Utils.IXPNavigationUtils)
 local FFlagExpChatFriendsTabUsePolicy = SharedFlagsModule.FFlagExpChatFriendsTabUsePolicy
 local FFlagExpChatFriendsTabRequireDefaultChannels = SharedFlagsModule.FFlagExpChatFriendsTabRequireDefaultChannels
 local FFlagFriendsChatHasFriendsGate = SharedFlagsModule.FFlagFriendsChatHasFriendsGate
 local Players = game:GetService("Players")
 local GetAppPolicyStore = if FFlagExpChatFriendsTabUsePolicy then require(Parent.UniversalAppPolicy).GetAppPolicyStore else nil
 local GetResult = if FFlagFriendsChatHasFriendsGate then require(Parent.DataHydration).Friends.FriendsStore.get() else nil
-local Exposure = require(AppChat.Utils.IXPNavigationUtils).createExposureHandler((require(AppChat.Flags.FStringAppChatFriendsTabIxpLayer)))
+local Exposure = IXPNavigationUtilsModule.createExposureHandler(FStringAppChatFriendsTabIxpLayerModule)
 
 return function()
 	-- upvalues: GetFriendsChatSettingsStoreModule (copy), ReactModule (copy), SignalsModule (copy), FFlagExpChatFriendsTabUsePolicy (copy), GetAppPolicyStore (ref), FFlagFriendsChatHasFriendsGate (copy), Players (copy), GetResult (ref), FFlagExpChatFriendsTabRequireDefaultChannels (copy), SignalsReactModule (copy), Exposure (copy)

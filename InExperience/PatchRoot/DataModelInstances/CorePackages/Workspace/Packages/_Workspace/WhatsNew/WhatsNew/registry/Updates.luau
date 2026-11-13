@@ -1,4 +1,5 @@
 ﻿local WhatsNew = script:FindFirstAncestor("WhatsNew")
+local ConstantsModule = require(WhatsNew.Constants)
 local _ = require(WhatsNew.Types)
 local FoundationModule = require(WhatsNew.Parent.Foundation)
 local PopoverAlign = FoundationModule.Enums.PopoverAlign
@@ -8,7 +9,7 @@ local RoseWhatsNewTourPublishedTime = game:DefineFastString("RoseWhatsNewTourPub
 local RoseWhatsNewTourDisabledTime = game:DefineFastString("RoseWhatsNewTourDisabledTime", "2026-09-30T00:00:00Z")
 
 return {
-	constants = require(WhatsNew.Constants).DEFAULT,
+	constants = ConstantsModule.DEFAULT,
 	scopeTours = {
 		InGame = { id = "InGame", parentScopeId = nil },
 		TiltMenu = {

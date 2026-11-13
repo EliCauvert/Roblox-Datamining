@@ -4,9 +4,9 @@ local IsArrayModule = require(Parent.Array.isArray)
 local _ = require(Parent.Parent.ES7Types)
 local Callback = nil
 local Callback1 = nil
-local Callback4 = nil
 local Callback3 = nil
 local Callback2 = nil
+local Callback4 = nil
 
 local function inspect(p1, p2)
 	-- upvalues: Callback (ref)
@@ -88,7 +88,7 @@ Callback = function(JSON, p3, p4)
 end
 
 Callback1 = function(Value, List, p3)
-	-- upvalues: Callback (ref), IsArrayModule (copy), Callback4 (ref), Callback3 (ref)
+	-- upvalues: Callback (ref), IsArrayModule (copy), Callback3 (ref), Callback2 (ref)
 	if table.find(List, Value) ~= nil then
 		return "[Circular]"
 	end
@@ -102,13 +102,13 @@ Callback1 = function(Value, List, p3)
 			return if typeof(JSON) == "string" then JSON else Callback(JSON, List1, p3)
 		end
 	elseif IsArrayModule(Value) then
-		return Callback4(Value, List1, p3)
+		return Callback3(Value, List1, p3)
 	end
-	return Callback3(Value, List1, p3)
+	return Callback2(Value, List1, p3)
 end
 
-Callback3 = function(p3, p4, p5): string
-	-- upvalues: getFragmentedKeys (copy), Callback2 (ref), Callback (ref)
+Callback2 = function(p3, p4, p5): string
+	-- upvalues: getFragmentedKeys (copy), Callback4 (ref), Callback (ref)
 	local Text = ""
 	local Meta = getmetatable(p3)
 	
@@ -123,7 +123,7 @@ Callback3 = function(p3, p4, p5): string
 		return Text
 	end
 	if p5.depth < #p4 then
-		Text ..= "[" .. Callback2(p3) .. "]"
+		Text ..= "[" .. Callback4(p3) .. "]"
 		
 		return Text
 	end
@@ -139,7 +139,7 @@ Callback3 = function(p3, p4, p5): string
 	return Text .. "{ " .. table.concat(List, ", ") .. " }"
 end
 
-Callback4 = function(p6, p7, p8): string
+Callback3 = function(p6, p7, p8): string
 	-- upvalues: Callback (ref)
 	local CountP15 = #p6
 	
@@ -164,7 +164,7 @@ Callback4 = function(p6, p7, p8): string
 	return "[" .. table.concat(List, ", ") .. "]"
 end
 
-Callback2 = function(_): string
+Callback4 = function(_): string
 	return "Object"
 end
 

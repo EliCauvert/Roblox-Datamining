@@ -1,9 +1,10 @@
 ﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
 local HttpService = game:GetService("HttpService")
 local HttpClientModule = require(Parent.HttpClient)
+local UrlBase = require(Parent.UrlBuilder).UrlBase
 local FetchFunction = HttpClientModule.fetch
 local AsPromiseFunction = HttpClientModule.asPromise
-local Text = require(Parent.UrlBuilder).UrlBase.APIS .. "/sharelinks/v1/get-or-create-link"
+local Text = UrlBase.APIS .. "/sharelinks/v1/get-or-create-link"
 
 local function decodeShareLink(p1)
 	return if type(p1) == "table" and type(p1.shortUrl) == "string" then p1.shortUrl else nil

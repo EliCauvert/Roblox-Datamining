@@ -70,7 +70,7 @@ local function groupContentByType(List)
 	return t
 end
 
-return function(Callback1, p2, Callback, p3, p4)
+return function(Callback, p2, Callback1, p3, p4)
 	-- upvalues: getSortedEntries (copy), PromiseModule (copy), collectContent (copy), groupContentByType (copy), BuildHydrationReduxPayloadModule (copy), Logging (copy)
 	local SortedEntries = getSortedEntries(p4)
 	
@@ -86,12 +86,12 @@ return function(Callback1, p2, Callback, p3, p4)
 	
 	for _, value in groupContentByType(CollectContentResult) do
 		table.insert(List, (p3.HydrateWidgetContent(p2, value):andThen(function(Result)
-			-- upvalues: BuildHydrationReduxPayloadModule (upval), value (copy), Callback1 (copy), Callback (copy)
+			-- upvalues: BuildHydrationReduxPayloadModule (upval), value (copy), Callback (copy), Callback1 (copy)
 			local ResponseBody = if Result then Result.responseBody else nil
 			local HydratedContent = if ResponseBody then ResponseBody.hydratedContent else nil
 			
 			if HydratedContent ~= nil then
-				Callback1(Callback((BuildHydrationReduxPayloadModule(HydratedContent, value))))
+				Callback(Callback1((BuildHydrationReduxPayloadModule(HydratedContent, value))))
 				
 				return
 			end

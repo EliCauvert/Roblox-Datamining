@@ -1,10 +1,11 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
 local _ = require(Parent.DataHydration.MomentsStoreTypes)
+local MomentsCommonModule = require(Parent.MomentsCommon)
 local FFlagMomentsRenderAvatarPostsInFeed = require(Parent.SharedFlags).FFlagMomentsRenderAvatarPostsInFeed
 local _ = require(Moments.Components.Feed.FeedTypes)
 local DeriveMomentFromPostModule = require(Moments.Utils.deriveMomentFromPost)
-local Analytics = require(Parent.MomentsCommon).Analytics
+local Analytics = MomentsCommonModule.Analytics
 
 local function getAvatarPostPayload(DataResult)
 	local v1 = nil

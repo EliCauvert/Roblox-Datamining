@@ -1,5 +1,6 @@
 ﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
 local Parent = ProfilePlatform.Parent
+local EnumsModule = require(ProfilePlatform.Common.Enums)
 local _ = require(Parent.CurrencyTransfers)
 local FFlagProfilePlatformEnableStore = require(Parent.SharedFlags).FFlagProfilePlatformEnableStore
 local FFlagAddSocialLinksToCommunityProfile = require(Parent.SharedFlags).FFlagAddSocialLinksToCommunityProfile
@@ -11,7 +12,7 @@ local FFlagProfilePlatformEnableCurrencyTransfer = require(Parent.SharedFlags).F
 return require(Parent.React).createContext({
 	profileId = "TEST_ID",
 	profilePlatformId = if require(Parent.SharedFlags).FFlagEnablePlatformProfileContextualMenuOption then "TEST_PLATFORM_ID" else nil,
-	profileType = require(ProfilePlatform.Common.Enums).ProfileTypes.User,
+	profileType = EnumsModule.ProfileTypes.User,
 	navigateTo = {
 		qRCodePage = function() end,
 		previousView = function() end,

@@ -1,0 +1,17 @@
+﻿local _ = require("./types")
+local _ = require("./navigation_types")
+local _ = require("./control_types")
+local NavSurfacePartsModule = require("./nav_surface_parts")
+local NavDisclosureModule = require("./nav_disclosure")
+local NavCollapsibleModule = require("./nav_collapsible")
+local NavAlertModule = require("./nav_alert")
+local NavCalloutModule = require("./nav_callout")
+
+return function(p1, p2, p3)
+	-- upvalues: NavSurfacePartsModule (copy), NavDisclosureModule (copy), NavCollapsibleModule (copy), NavAlertModule (copy), NavCalloutModule (copy)
+	local NavSurfacePartsModuleResult = NavSurfacePartsModule(p1)
+	NavDisclosureModule(p1, p2, p3, NavSurfacePartsModuleResult)
+	NavCollapsibleModule(p1, p2, p3, NavSurfacePartsModuleResult)
+	NavAlertModule(p1, p2, p3, NavSurfacePartsModuleResult)
+	NavCalloutModule(p1, p2, p3, NavSurfacePartsModuleResult)
+end

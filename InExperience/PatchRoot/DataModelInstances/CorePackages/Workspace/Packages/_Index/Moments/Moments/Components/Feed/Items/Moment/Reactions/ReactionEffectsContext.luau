@@ -36,12 +36,13 @@ return {
 						if MAXCONCURRENTEXPLOSIONS > #GetResult then
 							local AbsoluteSizeRatio = if p2 == nil then Current.AbsoluteSize / 2 else p2 - Current.AbsolutePosition
 							UseRefResult.current += 1
-							local Copy = table.clone(GetResult)
-							table.insert(Copy, {
+							local config = {
 								id = UseRefResult.current,
 								reactionType = ReactionType,
 								originLocal = AbsoluteSizeRatio
-							})
+							}
+							local Copy = table.clone(GetResult)
+							table.insert(Copy, config)
 							UseMemoResult.set(Copy)
 							
 							return

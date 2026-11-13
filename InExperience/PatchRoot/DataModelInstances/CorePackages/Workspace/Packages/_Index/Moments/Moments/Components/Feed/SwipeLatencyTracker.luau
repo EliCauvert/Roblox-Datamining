@@ -1,10 +1,11 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
 local ReactModule = require(Parent.React)
+local MomentsCommonModule = require(Parent.MomentsCommon)
 local _ = require(script.Parent.FeedTypes)
 local UseSwipeLatencyModule = require(script.Parent.useSwipeLatency)
 local _ = require(Moments.Components.VerticalPager)
-local MediaPreloadProvider = require(Parent.MomentsCommon).Media.MediaPreloadProvider
+local MediaPreloadProvider = MomentsCommonModule.Media.MediaPreloadProvider
 
 return function(p1)
 	-- upvalues: MediaPreloadProvider (copy), ReactModule (copy), UseSwipeLatencyModule (copy)

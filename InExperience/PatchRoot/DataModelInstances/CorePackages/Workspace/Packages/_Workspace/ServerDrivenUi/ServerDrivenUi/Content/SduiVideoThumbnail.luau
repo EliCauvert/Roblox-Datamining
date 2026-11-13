@@ -2,6 +2,7 @@
 local ReactModule = require(Parent.React)
 local ResponsiveModule = require(Parent.Responsive)
 local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local VideoUtilsModule = require(Parent.VideoUtils)
 local FFlagLuaAppOneByTwoHoverIdleAutoplay = require(Parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
@@ -11,7 +12,7 @@ local GetSduiComponentWrapperFunction = SduiCoreSystemModule.getSduiComponentWra
 local GetPlaybackDetectionMethodFunction = VideoUtilsModule.getPlaybackDetectionMethod
 local VideoPlaybackDetectionMethod = VideoUtilsModule.VideoPlaybackDetectionMethod
 local UseTagAsViewportAutoplayCandidateFunction = VideoUtilsModule.useTagAsViewportAutoplayCandidate
-local Signal = require(Parent.Signals).createSignal(false)
+local Signal = SignalsModule.createSignal(false)
 
 return function(p1)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), UseTagAsViewportAutoplayCandidateFunction (copy), SduiCoreSystemModule (copy), ResponsiveModule (copy), GetPlaybackDetectionMethodFunction (copy), FFlagLuaAppSduiSuppressVideoDetectorDuringScroll (copy), SignalsReactModule (copy), Signal (copy), GetSduiComponentWrapperFunction (copy), VideoUtilsModule (copy), VideoPlaybackDetectionMethod (copy)

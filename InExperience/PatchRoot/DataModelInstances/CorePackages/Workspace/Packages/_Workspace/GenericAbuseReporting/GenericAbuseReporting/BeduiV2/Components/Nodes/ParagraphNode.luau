@@ -2,6 +2,7 @@
 local Parent = GenericAbuseReporting.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local Button = FoundationModule.Button
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local _ = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
@@ -11,7 +12,7 @@ local TextWithTranslationModule = require(GenericAbuseReporting.BeduiV2.Utils.Tr
 local _ = require(GenericAbuseReporting.BeduiV2.Utils.Translate.translate)
 local UseArTranslationFunction = require(GenericAbuseReporting.BeduiV2.Utils.Translate.arTranslation).useArTranslation
 local UseLayoutSlotsFunction = require(GenericAbuseReporting.BeduiV2.Components.LayoutSlots).useLayoutSlots
-local FFlagSupportSubmissionOnAllReportNodes = require(Parent.SharedFlags).FFlagSupportSubmissionOnAllReportNodes
+local FFlagSupportSubmissionOnAllReportNodes = SharedFlagsModule.FFlagSupportSubmissionOnAllReportNodes
 
 return ReactModule.memo(function(p1)
 	-- upvalues: UseArTranslationFunction (copy), UseLayoutSlotsFunction (copy), ReactModule (copy), EyebrowModule (copy), TextWithTranslationModule (copy), FooterModule (copy), Button (copy), ButtonVariant (copy), FoundationModule (copy), FFlagSupportSubmissionOnAllReportNodes (copy)

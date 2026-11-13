@@ -48,9 +48,9 @@ return function(Text: string)
 	local StartIndex = 0
 	local List = {}
 	local Replaced = string.gsub(Text, "\n+", " ")
-	local Flag = nil
 	local StartIndex1 = nil
 	local Name = nil
+	local Flag = nil
 	local Entry1 = nil
 	local EndIndex = nil
 	local Entry = nil

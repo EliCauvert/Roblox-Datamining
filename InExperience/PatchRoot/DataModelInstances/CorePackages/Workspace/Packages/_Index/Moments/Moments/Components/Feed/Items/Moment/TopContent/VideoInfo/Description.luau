@@ -2,10 +2,11 @@
 local Parent = Moments.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
-local UseSignalBindingFunction = require(Parent.SignalsReact).useSignalBinding
+local UseSignalBindingFunction = SignalsReactModule.useSignalBinding
 local MomentContextModule = require(script.Parent.Parent.Parent.MomentContext)
 local GetColorStyleWithTransparencyModule = require(Moments.Utils.getColorStyleWithTransparency)
 

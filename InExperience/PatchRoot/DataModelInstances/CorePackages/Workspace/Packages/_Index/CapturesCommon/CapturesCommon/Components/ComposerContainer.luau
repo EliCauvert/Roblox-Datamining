@@ -20,6 +20,7 @@ return function(p1)
 	local Y = UseScreenSizeModuleResult.Y
 	local X = UseScreenSizeModuleResult.X
 	local IsYBelow: boolean = p1.enableLargeScreenMode and (_Vector2.X < UseStateResult.X and _Vector2.Y < UseStateResult.Y)
+	local IsYBelow1 = Y < X
 	local XScale: number = if p1.children == nil then 1 else 0.6
 	
 	return ReactModule.createElement(View, {
@@ -74,7 +75,7 @@ return function(p1)
 				}),
 				CaptureContainer = ReactModule.createElement(View, {
 					ZIndex = 1,
-					Size = if Y < X then UDim2.new(XScale, if IsYBelow then UseTokensResult.Padding.Large else 0, 1, 0) else UDim2.fromScale(1, XScale),
+					Size = if IsYBelow1 then UDim2.new(XScale, if IsYBelow then UseTokensResult.Padding.Large else 0, 1, 0) else UDim2.fromScale(1, XScale),
 					tag = {
 						["bg-surface-100 clip"] = true,
 						["padding-right-large"] = IsYBelow and p1.children ~= nil,

@@ -1,21 +1,23 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
 local SignalsModule = require(Parent.Signals)
-local v1 = require(Parent.DataHydration.MomentsGetMomentsCommentsStore)(false)
-local v2 = require(Moments.Components.Comments.GetCommentCollectionStore)(false)
-local OwnerGeneration = v1.getOwnerGeneration(false)
+local MomentsGetMomentsCommentsStoreModule = require(Parent.DataHydration.MomentsGetMomentsCommentsStore)
+local GetCommentCollectionStoreModule = require(Moments.Components.Comments.GetCommentCollectionStore)
+local MomentsGetMomentsCommentsStoreModuleResult = MomentsGetMomentsCommentsStoreModule(false)
+local CommentCollectionStoreModule = GetCommentCollectionStoreModule(false)
+local OwnerGeneration = MomentsGetMomentsCommentsStoreModuleResult.getOwnerGeneration(false)
 local config = {
 	stopObservingOwner = nil,
 	store = require(script.Parent.createCommentsSheetStore)()
 }
 config.stopObservingOwner = SignalsModule.createEffect(function(p1)
-	-- upvalues: v1 (copy), OwnerGeneration (ref), config (copy), v2 (copy)
-	local OwnerGeneration1 = v1.getOwnerGeneration(p1)
+	-- upvalues: MomentsGetMomentsCommentsStoreModuleResult (copy), OwnerGeneration (ref), config (copy), CommentCollectionStoreModule (copy)
+	local OwnerGeneration1 = MomentsGetMomentsCommentsStoreModuleResult.getOwnerGeneration(p1)
 	
 	if OwnerGeneration1 ~= OwnerGeneration then
 		OwnerGeneration = OwnerGeneration1
 		config.store.reset()
-		v2.clear()
+		CommentCollectionStoreModule.clear()
 		
 		return
 	end

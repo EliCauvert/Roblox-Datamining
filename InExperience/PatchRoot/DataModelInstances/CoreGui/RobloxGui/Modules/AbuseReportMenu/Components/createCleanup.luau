@@ -4,9 +4,11 @@ local CorePackages = game:GetService("CorePackages")
 local ConstantsModule = require(AbuseReportMenu.Components.Constants)
 local ReportTypes = ConstantsModule.ReportTypes
 local ReportAnythingAnalyticsModule = require(AbuseReportMenu.ReportAnything.Utility.ReportAnythingAnalytics)
+local EventIngest = require(CorePackages.Workspace.Packages.Analytics).AnalyticsReporters.EventIngest
+local NewResult = require(CorePackages.Workspace.Packages.Analytics).Analytics.new((game:GetService("RbxAnalyticsService")))
 local ReportAbuseAnalyticsModule = require(AbuseReportMenu.Analytics.ReportAbuseAnalytics)
 local CollectAnalyticsParametersModule = require(AbuseReportMenu.Analytics.collectAnalyticsParameters)
-local NewReportAbuseAnalytics = ReportAbuseAnalyticsModule.new(require(CorePackages.Workspace.Packages.Analytics).AnalyticsReporters.EventIngest.new((game:GetService("EventIngestService"))), require(CorePackages.Workspace.Packages.Analytics).Analytics.new((game:GetService("RbxAnalyticsService"))).Diag, ReportAbuseAnalyticsModule.MenuContexts.NewMenu)
+local NewReportAbuseAnalytics = ReportAbuseAnalyticsModule.new(EventIngest.new((game:GetService("EventIngestService"))), NewResult.Diag, ReportAbuseAnalyticsModule.MenuContexts.NewMenu)
 
 return function(p1, Callback, Callback1, Person)
 	-- upvalues: ReportTypes (copy), CollectAnalyticsParametersModule (copy), ReportAnythingAnalyticsModule (copy), NewReportAbuseAnalytics (copy), ConstantsModule (copy)

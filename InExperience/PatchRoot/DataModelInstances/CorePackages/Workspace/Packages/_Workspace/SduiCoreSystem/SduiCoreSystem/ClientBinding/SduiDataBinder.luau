@@ -9,6 +9,7 @@ local ResponsiveModule = require(Parent.Responsive)
 local SduiDataBindingResponsiveFieldName = require(SduiCoreSystem.ClientBinding.SduiDataBindingFieldNames).SduiDataBindingResponsiveFieldName
 local TryGetPathFromDataModule = require(SduiCoreSystem.ClientBinding.tryGetPathFromData)
 local SduiDataBindingContentTypeModule = require(SduiCoreSystem.ClientBinding.SduiDataBindingContentType)
+local SduiDataBinderTransformUtilsModule = require(SduiCoreSystem.ClientBinding.SduiDataBinderTransformUtils)
 local GetZendeskUrlFunction = require(Parent.DiscoveryUtils).getZendeskUrl
 local GetSduiPolicyStoreModule = require(SduiCoreSystem.ClientBinding.getSduiPolicyStore)
 local ResolveSduiPolicyFieldModule = require(SduiCoreSystem.ClientBinding.resolveSduiPolicyField)
@@ -33,7 +34,7 @@ local FFlagSduiNotificationBadgeHydration = SharedFlagsModule.FFlagSduiNotificat
 local FFlagSduiAddMarketplaceItemFavoriteHydrationModule = require(SduiCoreSystem.FFlagSduiAddMarketplaceItemFavoriteHydration)
 local FFlagSduiBuyRobuxHydration = SharedFlagsModule.FFlagSduiBuyRobuxHydration
 local DataStatus = DataHydrationModule.DataHydrationTypes.DataStatus
-local ProtobufTimestampToLocalTimeStringFunction = require(SduiCoreSystem.ClientBinding.SduiDataBinderTransformUtils).protobufTimestampToLocalTimeString
+local ProtobufTimestampToLocalTimeStringFunction = SduiDataBinderTransformUtilsModule.protobufTimestampToLocalTimeString
 
 local function _(p1)
 	-- upvalues: DataHydrationModule (copy)
@@ -391,6 +392,7 @@ local function getUniverseVoteRatingText(p3, p4, p5)
 	-- upvalues: DataHydrationModule (copy)
 	local Vote = DataHydrationModule.Game.getVotesStore(false).getVote(p3)
 	local DataResult = Vote.data(p4)
+	local StatusResult = Vote.status(p4)
 	local UpVotes = if DataResult then DataResult.upVotes else 0
 	local DownVotes = if DataResult then DataResult.downVotes else 0
 	
@@ -398,7 +400,7 @@ local function getUniverseVoteRatingText(p3, p4, p5)
 		upVotes = UpVotes,
 		downVotes = DownVotes,
 		rating = DataHydrationModule.Game.VotesUtils.calculateRating(UpVotes, DownVotes)
-	}, p5), (Vote.status(p4))
+	}, p5), StatusResult
 end
 
 local _ = function(p3, Entry, p4, p5)
@@ -472,8 +474,8 @@ local config1 = {
 		local GameInfo, GameInfo2 = GameInfoStore.getGameInfo(p8)
 		local DataResult = GameInfo.data(p9)
 		local StatusResult = GameInfo.status(p9)
-		local Flag = nil
 		local v1 = nil
+		local Flag = nil
 		
 		if DataResult == nil then
 			Flag = false

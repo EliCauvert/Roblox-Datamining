@@ -1,10 +1,11 @@
 ﻿local CorePackages = game:GetService("CorePackages")
 local GetClientReplicatorModule = require(script.Parent.Parent.Parent.Util.getClientReplicator)
+local RoactModule = require(CorePackages.Packages.Roact)
 local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
 local Actions = script.Parent.Parent.Parent.Actions
 local AppendRecentDumpPathModule = require(Actions.AppendRecentDumpPath)
 local SetRCCProfilerStateModule = require(Actions.SetRCCProfilerState)
-local RCCProfilerDataCompleteListener = require(CorePackages.Packages.Roact).Component:extend("RCCProfilerDataCompleteListener")
+local RCCProfilerDataCompleteListener = RoactModule.Component:extend("RCCProfilerDataCompleteListener")
 
 function RCCProfilerDataCompleteListener.didMount(p1)
 	-- upvalues: GetClientReplicatorModule (copy)

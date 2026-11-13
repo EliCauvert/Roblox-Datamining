@@ -1,5 +1,7 @@
 ﻿local SocialLuaAnalyticsModule = require(script:FindFirstAncestor("SocialExperienceJoin").Parent.SocialLuaAnalytics)
+local Contexts = SocialLuaAnalyticsModule.Analytics.Enums.Contexts
 local EventTypes = SocialLuaAnalyticsModule.Analytics.Enums.EventTypes
+local SubPages = SocialLuaAnalyticsModule.Analytics.Enums.SubPages
 local EventNamesModule = require(script.Parent.EventNames)
 local BtnValuesModule = require(script.Parent.BtnValues)
 
@@ -7,8 +9,8 @@ local function ProfileUserId(p1)
 	return p1
 end
 
-local PlayerProfile = SocialLuaAnalyticsModule.Analytics.Enums.Contexts.PlayerProfile
-local PeekView = SocialLuaAnalyticsModule.Analytics.Enums.SubPages.PeekView
+local PlayerProfile = Contexts.PlayerProfile
+local PeekView = SubPages.PeekView
 
 return function(p1)
 	-- upvalues: PlayerProfile (copy), PeekView (copy), EventNamesModule (copy), EventTypes (copy), BtnValuesModule (copy), ProfileUserId (copy)

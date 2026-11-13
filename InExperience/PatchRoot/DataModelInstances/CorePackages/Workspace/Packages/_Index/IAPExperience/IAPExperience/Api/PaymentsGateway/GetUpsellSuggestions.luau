@@ -1,5 +1,6 @@
 ﻿local Parent = script.Parent.Parent.Parent
 local Parent1 = Parent.Parent
+local Url = require(Parent1.Http).Url
 local IXPServiceWrapper = require(Parent1.IXPServiceWrapper).IXPServiceWrapper
 local HttpRbxApiService = game:GetService("HttpRbxApiService")
 local HttpService = game:GetService("HttpService")
@@ -7,7 +8,7 @@ local LoggerModule = require(Parent.Utility.logger)
 local GetUpsellSuggestionsTypesModule = require(Parent.Api.PaymentsGateway.GetUpsellSuggestionsTypes)
 local FStringIXPLayerMobileUpsellModule = require(Parent.Flags.FStringIXPLayerMobileUpsell)
 local FFlagEnableRobuxUpsellPlusButtonExperimentModule = require(Parent.Flags.FFlagEnableRobuxUpsellPlusButtonExperiment)
-local Text = require(Parent1.Http).Url.APIS_URL .. "payments-gateway/v1/products/get-upsell-suggestions"
+local Text = Url.APIS_URL .. "payments-gateway/v1/products/get-upsell-suggestions"
 local EnableUpsellVirtualItemBadge = game:DefineFastFlag("EnableUpsellVirtualItemBadge", false)
 
 return function(Upsell_platform, User_robux_balance, Attempt_robux_amount, Max_packages, Item_product_id, Item_name, Universe_id, Analytic_id, Enabled)

@@ -2,6 +2,7 @@
 local ReactModule = require(Parent.React)
 local BuilderIconsModule = require(Parent.BuilderIcons)
 local FoundationModule = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
 local FFlagMomentsRenderAvatarPostsInFeed = require(Parent.SharedFlags).FFlagMomentsRenderAvatarPostsInFeed
 local Badge = FoundationModule.Badge
 local Chip = FoundationModule.Chip
@@ -11,7 +12,7 @@ local BadgeSize = FoundationModule.Enums.BadgeSize
 local BadgeVariant = FoundationModule.Enums.BadgeVariant
 local ChipSize = FoundationModule.Enums.ChipSize
 local ChipVariant = FoundationModule.Enums.ChipVariant
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local MomentContextModule = require(script.Parent.Parent.Parent.MomentContext)
 local config = {
 	partnerContent = "Feature.Moments.Label.RobloxPartnerContent"

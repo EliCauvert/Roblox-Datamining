@@ -1,6 +1,7 @@
 ﻿local Parent = script:FindFirstAncestor("Moments").Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
 local ScrubberBarModule = require(script.Parent.ScrubberBar)
 local MomentContextModule = require(script.Parent.Parent.MomentContext)
 local UseMomentProgressModule = require(script.Parent.Parent.Hooks.useMomentProgress)
@@ -8,7 +9,7 @@ local PreviewPopoverModule = require(script.Parent.PreviewPopover)
 local View = FoundationModule.View
 local ControlState = FoundationModule.Enums.ControlState
 local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
-local UseSignalBindingFunction = require(Parent.SignalsReact).useSignalBinding
+local UseSignalBindingFunction = SignalsReactModule.useSignalBinding
 
 return ReactModule.memo(function(Frame)
 	-- upvalues: MomentContextModule (copy), ReactModule (copy), UseMomentProgressModule (copy), UseSignalBindingFunction (copy), View (copy), StateLayerAffordance (copy), ControlState (copy), ScrubberBarModule (copy), PreviewPopoverModule (copy)

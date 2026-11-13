@@ -2,13 +2,14 @@
 local Parent = DataHydration.Parent
 local HttpModule = require(Parent.Http)
 local HttpClientModule = require(Parent.HttpClient)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local _ = require(DataHydration.Moments.MomentsStoreTypes)
 local ConvertApiMomentsToMomentItemsModule = require(DataHydration.Moments.Util.convertApiMomentsToMomentItems)
 local ExtractCommentsByFeedItemIdModule = require(DataHydration.Moments.Util.extractCommentsByFeedItemId)
 local ExtractReactionsByMomentIdModule = require(DataHydration.Moments.Util.extractReactionsByMomentId)
 local ExtractShareInfoByMomentIdModule = require(DataHydration.Moments.Util.extractShareInfoByMomentId)
 local ConstructApiUrlModule = require(DataHydration.Moments.Util.constructApiUrl)
-local FFlagMomentsComments = require(Parent.SharedFlags).FFlagMomentsComments
+local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
 
 return function(PaginationContext, Network)
 	-- upvalues: ConstructApiUrlModule (copy), HttpModule (copy), HttpClientModule (copy), ConvertApiMomentsToMomentItemsModule (copy), ExtractReactionsByMomentIdModule (copy), ExtractShareInfoByMomentIdModule (copy), FFlagMomentsComments (copy), ExtractCommentsByFeedItemIdModule (copy)

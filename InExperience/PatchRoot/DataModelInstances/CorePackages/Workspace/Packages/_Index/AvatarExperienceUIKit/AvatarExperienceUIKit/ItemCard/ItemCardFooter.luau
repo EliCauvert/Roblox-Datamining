@@ -5,6 +5,7 @@ local ItemCardPriceLineModule = require(script.Parent.ItemCardPriceLine)
 local ItemCardCreatorNameModule = require(script.Parent.ItemCardCreatorName)
 local ItemCardTitleModule = require(script.Parent.ItemCardTitle)
 local FFlagAXAddTextXAlignmentProp = require(Parent.AvatarExperienceFlags).FFlagAXAddTextXAlignmentProp
+local FFlagAXItemCardComponentsMemo = require(Parent.AvatarExperienceFlags).FFlagAXItemCardComponentsMemo
 
 local function ItemCardFooter(Label)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), ItemCardTitleModule (copy), FFlagAXAddTextXAlignmentProp (copy), ItemCardCreatorNameModule (copy), ItemCardPriceLineModule (copy)
@@ -54,4 +55,4 @@ local function ItemCardFooter(Label)
 	})
 end
 
-return if require(Parent.AvatarExperienceFlags).FFlagAXItemCardComponentsMemo then ReactModule.memo(ItemCardFooter) else ItemCardFooter
+return if FFlagAXItemCardComponentsMemo then ReactModule.memo(ItemCardFooter) else ItemCardFooter

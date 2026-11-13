@@ -1736,7 +1736,7 @@ Feature.Avatar.Label.FaceMakeup,脸部
 Feature.Avatar.Label.FacialAnimation,脸部动画
 Feature.Avatar.Label.Fall,下落
 Feature.Avatar.Label.FallAnimations,下落动画
-Feature.Avatar.Label.FromMarketplace,来自商城
+Feature.Avatar.Label.FromMarketplace,商城结果
 Feature.Avatar.Label.Front,正面
 Feature.Avatar.Label.FullBody,全身
 Feature.Avatar.Label.FullMasks,全脸面具
@@ -2154,6 +2154,7 @@ Feature.Build.Action.Resume,
 Feature.Build.Action.Retry,
 Feature.Build.Action.Revert,
 Feature.Build.Action.Save,
+Feature.Build.Action.SaveFilters,
 Feature.Build.Action.SetDailyLimit,设置每日限额
 Feature.Build.Action.SetLimit,设置限额
 Feature.Build.Action.Settings,
@@ -3874,7 +3875,7 @@ Feature.Moments.Action.AddMusic,添加音乐
 Feature.Moments.Action.AddSticker,添加贴纸
 Feature.Moments.Action.AddText,添加文本
 Feature.Moments.Action.AddVoice,添加语音
-Feature.Moments.Action.Analytics,
+Feature.Moments.Action.Analytics,查看统计数据
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
@@ -3925,12 +3926,15 @@ Feature.Moments.Description.GenerateTextFeedbackDisclosure,AI 生成的内容。
 Feature.Moments.Description.HowToCaptureStep1,加入已启用“截图”功能的体验，然后选择汉堡菜单
 Feature.Moments.Description.HowToCaptureStep2,启用“截图”控件
 Feature.Moments.Description.HowToCaptureStep3,截取游戏的照片和视频
+Feature.Moments.Description.LeaveAvatarMomentsCreation,你所做的所有更改都将丢失，但当前装扮不会发生变化。
 Feature.Moments.Description.LeaveMomentsCreation,你将丢失所有更改，但仍然可以在<b>截图</b>图库中找到此截图。
+Feature.Moments.Description.MomentsOffBody,请让家长使用家长控制功能开启“精彩瞬间”。
 Feature.Moments.Description.NoMusicResults,未找到音乐
 Feature.Moments.Description.NonInfiniteScrollEndBody,我们已暂停你的推送。你可以决定是否要继续观看。
 Feature.Moments.Description.NothingHereYet,这里什么都没有...
 Feature.Moments.Description.PublishMoment,描述你的精彩瞬间
 Feature.Moments.Description.StayFriendly,请保持友好氛围
+Feature.Moments.Description.TimeLimitReachedBody,限制基于年龄。请明天再来观看“精彩瞬间”。
 Feature.Moments.Description.TooManyUploads,你今天上传的视频太多了。请明天再试。
 Feature.Moments.Disclaimer.EveryoneMoments,“精彩瞬间”中的每个人都可以查看已发布的内容
 Feature.Moments.Label.All,
@@ -4001,6 +4005,7 @@ Feature.Moments.Label.MomentRemovedTitle,我们移除了该精彩瞬间
 Feature.Moments.Label.MomentUnavailable,精彩瞬间不可用
 Feature.Moments.Label.MomentUnavailableDefault,此精彩瞬间不可用。
 Feature.Moments.Label.MomentsExperienceName,
+Feature.Moments.Label.MomentsOffTitle,“精彩瞬间”已关闭
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,暂无评论
 Feature.Moments.Label.NonInfiniteScrollEndTitle,还有更多精彩瞬间可供观看
@@ -4030,6 +4035,7 @@ Feature.Moments.Label.TextGenerationFailedBody,无法生成文本。请重试。
 Feature.Moments.Label.TextGenerationFailedTitle,生成失败
 Feature.Moments.Label.TextGenerationFilteredBody,无法为此截取的视频执行生成，内容已过滤。
 Feature.Moments.Label.TextGenerationFilteredTitle,生成已过滤
+Feature.Moments.Label.TimeLimitReachedTitle,你已达到“精彩瞬间”的观看时间上限
 Feature.Moments.Label.Tone,语气
 Feature.Moments.Label.Tone.Cinematic,电影感
 Feature.Moments.Label.Tone.Funny,搞笑
@@ -4885,6 +4891,8 @@ Feature.UniversalShareSheet.Response.SharedMessage,信息已发送
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE}和另外 {N} 人
 Feature.UserLibrary.Label.MyLibrary,我的资源库
+Feature.VIPServer.Message.TooManyFreeServersOnGame,您无法为此作品添加更多免费私人服务器。
+Feature.VIPServer.Message.TooManyTotalActiveFreeServers,您无法激活更多免费私人服务器。请先关闭一些其他的服务器。
 Feature.VerificationUpsell.Action.AddPhone,添加手机
 Feature.VerificationUpsell.Action.AddPhoneNumber,添加手机号码
 Feature.VerificationUpsell.Action.AddPhoneVoice,添加手机号码，以使用语音聊天

@@ -9,6 +9,7 @@ local CompletePurchaseModule = require(PurchasePrompt.Thunks.completePurchase)
 local InitiatePurchaseModule = require(PurchasePrompt.Thunks.initiatePurchase)
 local InitiateBundlePurchaseModule = require(PurchasePrompt.Thunks.initiateBundlePurchase)
 local InitiateSubscriptionPurchaseModule = require(PurchasePrompt.Thunks.initiateSubscriptionPurchase)
+local ConnectToStoreModule = require(PurchasePrompt.connectToStore)
 local ExternalEventConnectionModule = require(script.Parent.ExternalEventConnection)
 local GetFFlagEnablePromptPurchaseRequestedV2Module = require(PurchasePrompt.Flags.GetFFlagEnablePromptPurchaseRequestedV2)
 local GetFFlagEnablePromptPurchaseRequestedV2Take2Module = require(PurchasePrompt.Flags.GetFFlagEnablePromptPurchaseRequestedV2Take2)
@@ -20,7 +21,7 @@ local RobloxSubscriptionPurchaseAppModule = require(Parent.RobloxSubscriptionPur
 local SurfaceContext = RobloxSubscriptionPurchaseAppModule.SurfaceContext
 local SurfaceName = RobloxSubscriptionPurchaseAppModule.SurfaceName
 
-return (require(PurchasePrompt.connectToStore)(nil, function(Callback)
+return (ConnectToStoreModule(nil, function(Callback)
 	-- upvalues: Players (copy), InitiatePurchaseModule (copy), ErrorOccurredModule (copy), PurchaseErrorModule (copy), CompletePurchaseModule (copy), InitiateBundlePurchaseModule (copy), RobloxSubscriptionPurchaseAppModule (copy), SurfaceName (copy), SurfaceContext (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), ProductTypeEnum (copy), InitiateSubscriptionPurchaseModule (copy), FFlagEnablePromptRobloxSubscriptionPurchaseBindingModule (copy)
 	return {
 		onPurchaseRequest = function(LocalPlayer, p1, p2, _)

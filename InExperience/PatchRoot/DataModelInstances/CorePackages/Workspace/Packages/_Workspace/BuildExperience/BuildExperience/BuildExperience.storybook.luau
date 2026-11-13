@@ -2,13 +2,15 @@
 local Parent = BuildExperience.Parent
 local LocalizationService = game:GetService("LocalizationService")
 local FoundationModule = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
 local ReactModule = require(Parent.React)
 local ReactRobloxModule = require(Parent.ReactRoblox)
+local RobloxAppLocalesModule = require(Parent.RobloxAppLocales)
 local FoundationProvider = FoundationModule.FoundationProvider
-local LocalizationProvider = require(Parent.Localization).LocalizationProvider
+local LocalizationProvider = LocalizationModule.LocalizationProvider
 local Device = FoundationModule.Enums.Device
 local ColorMode = FoundationModule.Enums.ColorMode
-local Localization = require(Parent.RobloxAppLocales).Localization
+local Localization = RobloxAppLocalesModule.Localization
 local UseStyleSheetFunction = FoundationModule.Hooks.useStyleSheet
 local config = { Light = ColorMode.Light, Dark = ColorMode.Dark }
 local config1 = { Console = Device.Console, Desktop = Device.Desktop }

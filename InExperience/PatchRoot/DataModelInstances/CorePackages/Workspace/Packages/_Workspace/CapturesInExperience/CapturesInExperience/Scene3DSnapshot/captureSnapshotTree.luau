@@ -50,6 +50,7 @@ return {
 			return nil
 		end
 		local LocalPlayer = Players.LocalPlayer
+		local LocalCharacter = P3.localCharacter or (if LocalPlayer == nil then nil else LocalPlayer.Character)
 		local MaxDepth = P3.maxDepth or 800
 		local FovMargin = P3.fovMargin or 25
 		local CameraCFrame = Camera.CFrame
@@ -63,7 +64,7 @@ return {
 			aspect = XRatio,
 			maxDepth = MaxDepth,
 			fovMargin = FovMargin,
-			localCharacter = P3.localCharacter or (if LocalPlayer == nil then nil else LocalPlayer.Character)
+			localCharacter = LocalCharacter
 		})
 		
 		if #SelectSnapshotSourcesModuleResult.looseParts == 0 and #SelectSnapshotSourcesModuleResult.characters == 0 then
@@ -82,8 +83,8 @@ return {
 		local Copy = table.clone(SelectSnapshotSourcesModuleResult.looseParts)
 		local v1 = #Copy + 1
 		
-		for _, character in SelectSnapshotSourcesModuleResult.characters do
-			table.insert(Copy, character)
+		for _, character1 in SelectSnapshotSourcesModuleResult.characters do
+			table.insert(Copy, character1)
 		end
 		table.insert(Copy, SnapshotHeader)
 		local Success1, Result1 = pcall(function()
@@ -105,11 +106,11 @@ return {
 			end
 			freeze(root)
 		end
-		for i, character1 in SelectSnapshotSourcesModuleResult.characters do
+		for i, character in SelectSnapshotSourcesModuleResult.characters do
 			local Root = Roots[v1 + i - 1]
 			
-			if Root ~= nil and Root.ClassName == character1.ClassName and Root.Name == character1.Name then
-				local Humanoid = character1:FindFirstChildOfClass("Humanoid")
+			if Root ~= nil and Root.ClassName == character.ClassName and Root.Name == character.Name then
+				local Humanoid = character:FindFirstChildOfClass("Humanoid")
 				local Scene3DInspectDescription = nil
 				
 				if Humanoid == nil then

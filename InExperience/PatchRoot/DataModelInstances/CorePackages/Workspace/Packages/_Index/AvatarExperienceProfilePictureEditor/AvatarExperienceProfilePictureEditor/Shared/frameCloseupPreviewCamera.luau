@@ -28,9 +28,10 @@ return function(p1): CFrame?
 		})
 		local TargetCFrame = CFrameUtility.CalculateTargetCFrame(Head.CFrame)
 		local HeadExtents, HeadExtents2 = CharacterUtility.CalculateHeadExtents(Character, TargetCFrame)
+		local ScaledBaseDistanceToCamera = CameraUtility.CalculateBaseDistanceToCamera(math.rad(FieldOfViewForDistanceScaleDeg), HeadExtents, HeadExtents2, CameraUtility.DefaultHeadMarginScale) * p1.distanceScale
 		local NewTargetCFrame = TargetCFrame + Vector3.new(0, (HeadExtents.Y + HeadExtents2.Y) / 2, 0)
 		
-		return CFrame.lookAt((NewTargetCFrame * CFrame.Angles(0, math.rad(p1.yRotDeg), 0) * CFrame.new(0, 0, -(CameraUtility.CalculateBaseDistanceToCamera(math.rad(FieldOfViewForDistanceScaleDeg), HeadExtents, HeadExtents2, CameraUtility.DefaultHeadMarginScale) * p1.distanceScale))).Position, NewTargetCFrame.Position) * CFrame.fromEulerAnglesXYZ(-FocusAngleAboveCenterRadModule, 0, 0)
+		return CFrame.lookAt((NewTargetCFrame * CFrame.Angles(0, math.rad(p1.yRotDeg), 0) * CFrame.new(0, 0, -ScaledBaseDistanceToCamera)).Position, NewTargetCFrame.Position) * CFrame.fromEulerAnglesXYZ(-FocusAngleAboveCenterRadModule, 0, 0)
 	else
 		return nil
 	end

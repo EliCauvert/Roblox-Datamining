@@ -50,12 +50,13 @@ return function(p1, p2, Callback)
 			
 			return
 		end
-		local Floored = math.floor((os.clock() - ClockTime) * 1000 + 0.5)
-		local SubmitActiveToolResultResult = p1.submitActiveToolResult(ClientLogsCollectorModule.collectToolResultContent({
+		local config = {
 			universeId = p1.universeId,
 			placeId = p1.placeId,
 			minimumPlaceVersion = LatestSavedVersion
-		}), false, p3.turnId, p3.referenceId)
+		}
+		local Floored = math.floor((os.clock() - ClockTime) * 1000 + 0.5)
+		local SubmitActiveToolResultResult = p1.submitActiveToolResult(ClientLogsCollectorModule.collectToolResultContent(config), false, p3.turnId, p3.referenceId)
 		
 		if SubmitActiveToolResultResult == nil then
 			Debug.log("warn", "ask_for_logs tool_result submit aborted (no active session)", { toolCallId = p3.toolCallId, collectDurationMs = Floored })

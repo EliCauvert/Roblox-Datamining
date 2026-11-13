@@ -7,6 +7,7 @@ local ResponsiveModule = require(CorePackages.Workspace.Packages.Responsive)
 local InExperienceAppChatModalModule = require(CorePackages.Workspace.Packages.AppChat.InExperienceAppChatModal)
 local ChromeIntegrationUtilsModule = require(Chrome.Integrations.ChromeIntegrationUtils)
 local LocalStoreModule = require(Chrome.ChromeShared.Service.LocalStore)
+local MappedSignal = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal
 local GetFStringConnectTooltipLocalStorageKeyModule = require(Chrome.Flags.GetFStringConnectTooltipLocalStorageKey)
 local MouseIconOverrideService = require(CorePackages.Workspace.Packages.CoreScriptsCommon).MouseIconOverrideService
 local Symbol = require(CorePackages.Workspace.Packages.AppCommonLib).Symbol
@@ -18,13 +19,13 @@ local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
 local GetFFlagIsSquadEnabledFunction = SharedFlagsModule.GetFFlagIsSquadEnabled
 local FFlagAppChatDistinctUnibarEntryPoint = SharedFlagsModule.FFlagAppChatDistinctUnibarEntryPoint
 local ChatEntryPointNames = require(CorePackages.Workspace.Packages.SocialCommon).Enums.ChatEntryPointNames
-local NewResult = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(InExperienceAppChatModalModule.default.visibilitySignal.Event, function()
+local NewMappedSignal = MappedSignal.new(InExperienceAppChatModalModule.default.visibilitySignal.Event, function()
 	-- upvalues: InExperienceAppChatModalModule (copy)
 	return InExperienceAppChatModalModule:getVisible()
 end)
 
 return function(Id, InitialAvailability)
-	-- upvalues: GetFFlagIsSquadEnabledFunction (copy), FFlagAppChatDistinctUnibarEntryPoint (copy), ChatEntryPointNames (copy), ServiceModule (copy), SideSheetPlacement (copy), UniversalAppPolicyModule (copy), InExperienceAppChatModalModule (copy), ChromeIntegrationUtilsModule (copy), ResponsiveModule (copy), FocusUtils (copy), LocalStoreModule (copy), GetFStringConnectTooltipLocalStorageKeyModule (copy), NewResult (copy), ReactModule (copy), ConnectIconModule (copy), AppChatInExpUseUnibarNotification (copy), Symbol (copy), MouseIconOverrideService (copy)
+	-- upvalues: GetFFlagIsSquadEnabledFunction (copy), FFlagAppChatDistinctUnibarEntryPoint (copy), ChatEntryPointNames (copy), ServiceModule (copy), SideSheetPlacement (copy), UniversalAppPolicyModule (copy), InExperienceAppChatModalModule (copy), ChromeIntegrationUtilsModule (copy), ResponsiveModule (copy), FocusUtils (copy), LocalStoreModule (copy), GetFStringConnectTooltipLocalStorageKeyModule (copy), NewMappedSignal (copy), ReactModule (copy), ConnectIconModule (copy), AppChatInExpUseUnibarNotification (copy), Symbol (copy), MouseIconOverrideService (copy)
 	local FFlagIsSquadEnabled = Id == "connect_unibar" and GetFFlagIsSquadEnabledFunction()
 	local ChromeUnibar = if FFlagAppChatDistinctUnibarEntryPoint and Id == "connect_unibar" then ChatEntryPointNames.ChromeUnibar else nil
 	local RegisterResult = ServiceModule:register({
@@ -46,7 +47,7 @@ return function(Id, InitialAvailability)
 			end
 			LocalStoreModule.storeForLocalPlayer(GetFStringConnectTooltipLocalStorageKeyModule(), true)
 		end,
-		isActivated = NewResult,
+		isActivated = NewMappedSignal,
 		components = {
 			Icon = function(p1)
 				-- upvalues: ReactModule (upval), ConnectIconModule (upval), Id (copy), AppChatInExpUseUnibarNotification (upval), FFlagIsSquadEnabled (copy)

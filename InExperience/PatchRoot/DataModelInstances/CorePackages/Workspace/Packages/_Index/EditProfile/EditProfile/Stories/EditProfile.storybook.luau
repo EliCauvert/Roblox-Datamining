@@ -2,6 +2,7 @@
 local Parent = EditProfile.Parent
 require(Parent.UIBlox).init((require(Parent.Dev.RobloxAppUIBloxConfig)))
 local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
 local RoactRoduxModule = require(Parent.RoactRodux)
 local RoduxModule = require(Parent.Rodux)
 local CryoModule = require(Parent.Cryo)
@@ -19,7 +20,7 @@ local config = { language = "en-us" }
 local config1 = { Light = ColorMode.Light, Dark = ColorMode.Dark }
 local config2 = { Console = Device.Console, Desktop = Device.Desktop }
 
-local function v17(State)
+local function v18(State)
 	-- upvalues: RoduxModule (copy), CryoModule (copy)
 	return RoduxModule.Store.new(function()
 		-- upvalues: CryoModule (upval), State (copy)
@@ -35,7 +36,7 @@ return {
 	name = "EditProfile",
 	storyRoot = EditProfile,
 	roact = ReactModule,
-	reactRoblox = require(Parent.ReactRoblox),
+	reactRoblox = ReactRobloxModule,
 	roactRodux = RoactRoduxModule,
 	mapDefinition = function(p1)
 		-- upvalues: CryoModule (copy), config (copy)
@@ -44,11 +45,11 @@ return {
 		})
 	end,
 	mapStory = function(p1)
-		-- upvalues: config1 (copy), ReactModule (copy), StyleProviderWithDefaultTheme (copy), RoactRoduxModule (copy), v17 (copy), UniversalAppPolicyModule (copy), ApolloClientModule (copy), MockApolloClientFunction (copy), FoundationProvider (copy), config2 (copy), DesignTokenProvider (copy), MockLocaleFunction (copy)
+		-- upvalues: config1 (copy), ReactModule (copy), StyleProviderWithDefaultTheme (copy), RoactRoduxModule (copy), v18 (copy), UniversalAppPolicyModule (copy), ApolloClientModule (copy), MockApolloClientFunction (copy), FoundationProvider (copy), config2 (copy), DesignTokenProvider (copy), MockLocaleFunction (copy)
 		return function(p2)
-			-- upvalues: config1 (upval), ReactModule (upval), StyleProviderWithDefaultTheme (upval), RoactRoduxModule (upval), v17 (upval), UniversalAppPolicyModule (upval), ApolloClientModule (upval), MockApolloClientFunction (upval), FoundationProvider (upval), config2 (upval), DesignTokenProvider (upval), MockLocaleFunction (upval), p1 (copy)
+			-- upvalues: config1 (upval), ReactModule (upval), StyleProviderWithDefaultTheme (upval), RoactRoduxModule (upval), v18 (upval), UniversalAppPolicyModule (upval), ApolloClientModule (upval), MockApolloClientFunction (upval), FoundationProvider (upval), config2 (upval), DesignTokenProvider (upval), MockLocaleFunction (upval), p1 (copy)
 			return ReactModule.createElement(StyleProviderWithDefaultTheme, { withDarkTheme = true, withUiModeSupport = false }, {
-				storeProvider = ReactModule.createElement(RoactRoduxModule.StoreProvider, { store = v17(p2.definition.state or {}) }, {
+				storeProvider = ReactModule.createElement(RoactRoduxModule.StoreProvider, { store = v18(p2.definition.state or {}) }, {
 					policyProvider = ReactModule.createElement(UniversalAppPolicyModule.RoactAppPolicy.Provider, { policy = { UniversalAppPolicyModule.AppFeaturePolicies } }, {
 						apolloClient = ReactModule.createElement(ApolloClientModule.ApolloProvider, { client = MockApolloClientFunction({}) }, {
 							foundationProvider = ReactModule.createElement(FoundationProvider, {

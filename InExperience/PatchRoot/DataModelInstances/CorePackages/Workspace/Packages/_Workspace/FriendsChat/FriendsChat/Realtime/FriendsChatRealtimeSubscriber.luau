@@ -2,6 +2,7 @@
 local Players = game:GetService("Players")
 local ReactModule = require(Parent.React)
 local RealtimeDeliveryModule = require(Parent.RealtimeDelivery)
+local ExpChatSharedModule = require(Parent.ExpChatShared)
 local ConversationChannelsModule = require(Parent.AppChat.ConversationChannels)
 local FetchNewerMessagesModule = require(Parent.AppChat.fetchNewerMessages)
 local GetConversationMessageListStoreModule = require(Parent.AppChat.GetConversationMessageListStore)
@@ -10,7 +11,7 @@ local ExpChatConversationListAdapterModule = require(script.Parent.Parent.Conver
 local GetFriendsChatNavigationStoreModule = require(script.Parent.Parent.Stores.GetFriendsChatNavigationStore)
 local GetFriendsChatRealtimeStoreModule = require(script.Parent.Parent.Stores.GetFriendsChatRealtimeStore)
 local FStringDebugFriendsChatConversationIdModule = require(script.Parent.Parent.Flags.FStringDebugFriendsChatConversationId)
-local NewResult = require(Parent.ExpChatShared).Logger:new(script.Name)
+local NewResult = ExpChatSharedModule.Logger:new(script.Name)
 local FriendshipNotificationsModule = require(script.Parent.FriendshipNotifications)
 
 local function fetchNewerMessagesSafe(ActiveConversationId, Callback)
@@ -26,11 +27,12 @@ local function fetchNewerMessagesSafe(ActiveConversationId, Callback)
 		-- upvalues: GetFriendsChatRealtimeStoreModule (upval), Players (upval), ActiveConversationId (copy), ExpChatConversationListAdapterModule (upval), LastUpdated (copy), Callback (copy), t (copy)
 		local Response = Result and Result.response
 		local ResponseBody = Response and Response.responseBody
+		local Messages = if ResponseBody then ResponseBody.messages or {} else {}
 		local IngestedIds = Result and Result.ingestedIds
 		local FriendsChatRealtimeStoreModule = GetFriendsChatRealtimeStoreModule(false)
 		local ActiveConversationId1 = FriendsChatRealtimeStoreModule.getActiveConversationId(false)
 		local LocalPlayer = Players.LocalPlayer
-		local _, UpdateConversationPreviewFromMessagesResult2 = ExpChatConversationListAdapterModule.updateConversationPreviewFromMessages(ActiveConversationId, if ResponseBody then ResponseBody.messages or {} else {}, {
+		local _, UpdateConversationPreviewFromMessagesResult2 = ExpChatConversationListAdapterModule.updateConversationPreviewFromMessages(ActiveConversationId, Messages, {
 			refreshListOnMissingConversation = true,
 			hasUnreadMessages = ActiveConversationId1 ~= ActiveConversationId,
 			localUserId = if LocalPlayer then LocalPlayer.UserId else 0,

@@ -106,6 +106,7 @@ function EventPropagationService:propagateEvent(p4, p5, p6, p7)
 	-- upvalues: EventPropagationEventModule (copy), GetAncestorsFunction (copy), DEBUGEVENTPROPAGATION (copy)
 	local P31 = p7 or {}
 	local Synthetic = P31.synthetic or false
+	local Silent = P31.silent or false
 	
 	local function _(p8, p9)
 		-- upvalues: self (copy), p5 (copy), EventPropagationEventModule (upval), p4 (copy), Synthetic (copy), p6 (copy)
@@ -123,7 +124,7 @@ function EventPropagationService:propagateEvent(p4, p5, p6, p7)
 		end
 	end
 	
-	local List = if P31.silent or false then { p4 } else GetAncestorsFunction(p4)
+	local List = if Silent then { p4 } else GetAncestorsFunction(p4)
 	
 	if DEBUGEVENTPROPAGATION then
 		print(">>> capture event", p5, "for", (tostring(p4)))

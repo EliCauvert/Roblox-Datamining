@@ -1,12 +1,13 @@
 ﻿local TextChannelWindow = script:FindFirstAncestor("TextChannelWindow")
 local Parent = TextChannelWindow.Parent
 local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
 local FoundationProvider = require(Parent.Foundation).FoundationProvider
 
 return {
 	name = TextChannelWindow.Name,
 	roact = ReactModule,
-	reactRoblox = require(Parent.ReactRoblox),
+	reactRoblox = ReactRobloxModule,
 	storyRoots = { TextChannelWindow },
 	mapStory = function(p1)
 		-- upvalues: ReactModule (copy), FoundationProvider (copy)

@@ -1,9 +1,11 @@
 ﻿local AvatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
 local Parent = AvatarExperienceProfilePictureEditor.Parent
 local ReactModule = require(Parent.React)
+local LocalizationModule = require(Parent.Localization)
+local UIBloxModule = require(Parent.UIBlox)
 local View = require(Parent.Foundation).View
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
-local EmptyState = require(Parent.UIBlox).App.Indicator.EmptyState
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
+local EmptyState = UIBloxModule.App.Indicator.EmptyState
 local TextKeysModule = require(AvatarExperienceProfilePictureEditor.Common.TextKeys)
 
 return function(p1)

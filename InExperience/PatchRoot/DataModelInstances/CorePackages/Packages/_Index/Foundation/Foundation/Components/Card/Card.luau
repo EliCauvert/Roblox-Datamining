@@ -5,6 +5,7 @@ local CardHeaderSizeModule = require(Foundation.Enums.CardHeaderSize)
 local CardHeightModule = require(Foundation.Enums.CardHeight)
 local CardMediaAspectRatioModule = require(Foundation.Enums.CardMediaAspectRatio)
 local CardMediaPlacementModule = require(Foundation.Enums.CardMediaPlacement)
+local CardVariantModule = require(Foundation.Enums.CardVariant)
 local CardActionsModule = require(script.Parent.Subcomponents.CardActions)
 local CardHeaderModule = require(script.Parent.Subcomponents.CardHeader)
 local CardMediaModule = require(script.Parent.Subcomponents.CardMedia)
@@ -25,7 +26,7 @@ local config = {
 }
 local config1 = {
 	testId = "--foundation-card",
-	variant = require(Foundation.Enums.CardVariant).Standard,
+	variant = CardVariantModule.Standard,
 	density = CardDensityModule.Default,
 	height = CardHeightModule.Fit
 }

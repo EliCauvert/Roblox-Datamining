@@ -17,7 +17,9 @@ local GetFixedTabHeightModule = require(AvatarExperienceUIKit.Utils.getFixedTabH
 local GradientTransparencyModule = require(script.Parent.gradientTransparency)
 local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local FFlagAXCategoryMenuVisualFixes = AvatarExperienceFlagsModule.FFlagAXCategoryMenuVisualFixes
+local FFlagAXCategoryTabFullRowTapArea = AvatarExperienceFlagsModule.FFlagAXCategoryTabFullRowTapArea
 local FFlagAXFixScrollingFrameGradientOverlap = AvatarExperienceFlagsModule.FFlagAXFixScrollingFrameGradientOverlap
+local FFlagAXTabGroupScrollOnlyWhenClipped = AvatarExperienceFlagsModule.FFlagAXTabGroupScrollOnlyWhenClipped
 local config = { dampingRatio = 1, frequency = 5 }
 local Icon = {
 	name = IconName.ChevronLargeLeft,
@@ -86,28 +88,38 @@ local function isVisibleFromTransparency(p1: number): boolean
 end
 
 return ReactModule.forwardRef(function(Frame: Frame, Ref)
-	-- upvalues: UseTokensFunction (copy), FFlagAXCategoryMenuVisualFixes (copy), UseAnimatedBindingFunction (copy), ReactModule (copy), ResponsiveModule (copy), ShouldShowScrollArrowsForInputTypeModule (copy), getCanvasPosition (copy), FFlagAXFixScrollingFrameGradientOverlap (copy), GradientTransparencyModule (copy), gradientTransparency (copy), makeButtonTransparency (copy), isVisibleFromTransparency (copy), ReactOtterModule (copy), MakeOtterSpringValueModule (copy), config (copy), GetFixedTabHeightModule (copy), View (copy), IconButton (copy), InputSize (copy), Icon (copy), Icon1 (copy)
+	-- upvalues: UseTokensFunction (copy), FFlagAXCategoryMenuVisualFixes (copy), FFlagAXCategoryTabFullRowTapArea (copy), UseAnimatedBindingFunction (copy), ReactModule (copy), ResponsiveModule (copy), ShouldShowScrollArrowsForInputTypeModule (copy), FFlagAXTabGroupScrollOnlyWhenClipped (copy), getCanvasPosition (copy), FFlagAXFixScrollingFrameGradientOverlap (copy), GradientTransparencyModule (copy), gradientTransparency (copy), makeButtonTransparency (copy), isVisibleFromTransparency (copy), ReactOtterModule (copy), MakeOtterSpringValueModule (copy), config (copy), GetFixedTabHeightModule (copy), View (copy), IconButton (copy), InputSize (copy), Icon (copy), Icon1 (copy)
 	local UseTokensResult = UseTokensFunction()
 	local BackgroundTransparency = Frame.BackgroundTransparency or UseTokensResult.Color.Common.NavigationBar.Transparency
 	local BackgroundColor3 = Frame.BackgroundColor3 or UseTokensResult.Color.Common.NavigationBar.Color3
-	local Size150 = if FFlagAXCategoryMenuVisualFixes then UseTokensResult.Size.Size_150 else UseTokensResult.Size.Size_100
+	local Size150 = if FFlagAXCategoryTabFullRowTapArea then 0 elseif FFlagAXCategoryMenuVisualFixes then UseTokensResult.Size.Size_150 else UseTokensResult.Size.Size_100
 	local Offset = if FFlagAXCategoryMenuVisualFixes then Size150 * 2 else Size150
+	local ScaledSize = UseTokensResult.Size.Size_300 * 2
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = UseAnimatedBindingFunction(0)
 	local UseAnimatedBindingResult1, UseAnimatedBindingResult2_1 = UseAnimatedBindingFunction(0)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
 	local UseAnimatedBindingResult3, UseAnimatedBindingResult2_2 = UseAnimatedBindingFunction(0)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local ShouldShowScrollArrowsForInputTypeModule1 = if FFlagAXCategoryMenuVisualFixes then ShouldShowScrollArrowsForInputTypeModule((ResponsiveModule.useLastInput())) else nil
-	local UseAnimatedBindingResult4, UseAnimatedBindingResult2_3 = UseAnimatedBindingFunction(0)
-	local UseRefResult = ReactModule.useRef(nil)
+	local v1 = nil
+	local UseResult = nil
+	
+	if FFlagAXTabGroupScrollOnlyWhenClipped then
+		local UseRefResult = ReactModule.useRef(nil)
+		v1 = UseRefResult
+		UseResult = ReactModule.useCallback(function()
+			-- upvalues: UseRefResult (copy)
+			UseRefResult.current = nil
+		end, {})
+	end
+	local UseAnimatedBindingResult4, UseAnimatedBindingResult2_3 = UseAnimatedBindingFunction(0, UseResult)
+	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseAnimatedBindingResult4 (copy), getCanvasPosition (upval)
 		return UseAnimatedBindingResult4:map(getCanvasPosition)
 	end, {})
 	local UseMemoResult1 = ReactModule.useMemo(function()
-		-- upvalues: ReactModule (upval), UseAnimatedBindingResult (copy), UseAnimatedBindingResult1 (copy), UseBindingResult (copy), UseTokensResult (copy), BackgroundTransparency (copy), FFlagAXFixScrollingFrameGradientOverlap (upval), GradientTransparencyModule (upval), gradientTransparency (upval)
-		local ScaledSize = UseTokensResult.Size.Size_300 * 2
-		
+		-- upvalues: ReactModule (upval), UseAnimatedBindingResult (copy), UseAnimatedBindingResult1 (copy), UseBindingResult (copy), ScaledSize (copy), BackgroundTransparency (copy), FFlagAXFixScrollingFrameGradientOverlap (upval), GradientTransparencyModule (upval), gradientTransparency (upval)
 		return ReactModule.joinBindings({
 			UseAnimatedBindingResult,
 			UseAnimatedBindingResult1,
@@ -116,7 +128,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref)
 			-- upvalues: FFlagAXFixScrollingFrameGradientOverlap (upval), GradientTransparencyModule (upval), ScaledSize (copy), BackgroundTransparency (copy), gradientTransparency (upval)
 			return if FFlagAXFixScrollingFrameGradientOverlap then GradientTransparencyModule.fittedGradientTransparency(p1, ScaledSize, BackgroundTransparency) else gradientTransparency(p1, ScaledSize, BackgroundTransparency)
 		end)
-	end, { UseTokensResult, BackgroundTransparency })
+	end, if FFlagAXTabGroupScrollOnlyWhenClipped then { ScaledSize, BackgroundTransparency } else { UseTokensResult, BackgroundTransparency })
 	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), UseAnimatedBindingResult1 (copy), UseAnimatedBindingResult3 (copy), makeButtonTransparency (upval)
 		return ReactModule.joinBindings({ UseAnimatedBindingResult1, UseAnimatedBindingResult3 }):map(makeButtonTransparency)
@@ -133,22 +145,30 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref)
 		-- upvalues: UseMemoResult2 (copy), isVisibleFromTransparency (upval)
 		return UseMemoResult2:map(isVisibleFromTransparency)
 	end, {})
-	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: UseRefResult (copy), UseAnimatedBindingResult2_3 (copy), ReactOtterModule (upval), MakeOtterSpringValueModule (upval), config (upval)
-		local Current = UseRefResult.current
+	local UseResult1 = ReactModule.useCallback(function()
+		-- upvalues: UseRefResult1 (copy), UseAnimatedBindingResult2_3 (copy), ReactOtterModule (upval), MakeOtterSpringValueModule (upval), config (upval), FFlagAXTabGroupScrollOnlyWhenClipped (upval), v1 (ref)
+		local Current = UseRefResult1.current
 		
 		if Current then
 			UseAnimatedBindingResult2_3(ReactOtterModule.instant(Current.CanvasPosition.X))
 			UseAnimatedBindingResult2_3(MakeOtterSpringValueModule(Current.AbsoluteCanvasSize.X - Current.AbsoluteSize.X, config))
+			
+			if FFlagAXTabGroupScrollOnlyWhenClipped and v1 then
+				v1.current = Current.AbsoluteCanvasSize.X - Current.AbsoluteSize.X
+			end
 		end
 	end, {})
-	local UseResult1 = ReactModule.useCallback(function()
-		-- upvalues: UseRefResult (copy), UseAnimatedBindingResult2_3 (copy), ReactOtterModule (upval), MakeOtterSpringValueModule (upval), config (upval)
-		local Current = UseRefResult.current
+	local UseResult11 = ReactModule.useCallback(function()
+		-- upvalues: UseRefResult1 (copy), UseAnimatedBindingResult2_3 (copy), ReactOtterModule (upval), MakeOtterSpringValueModule (upval), config (upval), FFlagAXTabGroupScrollOnlyWhenClipped (upval), v1 (ref)
+		local Current = UseRefResult1.current
 		
 		if Current then
 			UseAnimatedBindingResult2_3(ReactOtterModule.instant(Current.CanvasPosition.X))
 			UseAnimatedBindingResult2_3(MakeOtterSpringValueModule(0, config))
+			
+			if FFlagAXTabGroupScrollOnlyWhenClipped and v1 then
+				v1.current = 0
+			end
 		end
 	end, {})
 	
@@ -195,8 +215,8 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref)
 	end
 	
 	ReactModule.useEffect(function()
-		-- upvalues: UseRefResult (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseAnimatedBindingResult2_1 (copy)
-		local Current = UseRefResult.current
+		-- upvalues: UseRefResult1 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseAnimatedBindingResult2_1 (copy)
+		local Current = UseRefResult1.current
 		
 		if Current then
 			local IsXAbove = Current.CanvasPosition.X > 0
@@ -207,36 +227,52 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref)
 	end, {})
 	
 	if FFlagAXCategoryMenuVisualFixes then
-		local UseResult2 = ReactModule.useCallback(function(p1)
-			-- upvalues: UseRefResult (copy), UseAnimatedBindingResult2_3 (copy), ReactOtterModule (upval), MakeOtterSpringValueModule (upval), config (upval)
-			local Current = UseRefResult.current
+		local UseResult2 = ReactModule.useCallback(function(Current)
+			-- upvalues: UseRefResult1 (copy), UseAnimatedBindingResult2_3 (copy), ReactOtterModule (upval), MakeOtterSpringValueModule (upval), config (upval), FFlagAXTabGroupScrollOnlyWhenClipped (upval), v1 (ref)
+			local Current1 = UseRefResult1.current
 			
-			if Current then
-				UseAnimatedBindingResult2_3(ReactOtterModule.instant(Current.CanvasPosition.X))
-				UseAnimatedBindingResult2_3(MakeOtterSpringValueModule(p1, config))
+			if Current1 then
+				UseAnimatedBindingResult2_3(ReactOtterModule.instant(Current1.CanvasPosition.X))
+				UseAnimatedBindingResult2_3(MakeOtterSpringValueModule(Current, config))
+				
+				if FFlagAXTabGroupScrollOnlyWhenClipped and v1 then
+					v1.current = Current
+				end
 			end
 		end, {})
 		local UseResult3 = ReactModule.useCallback(function(p1)
-			-- upvalues: UseRefResult (copy), UseAnimatedBindingResult2_3 (copy), ReactOtterModule (upval)
-			if UseRefResult.current then
+			-- upvalues: UseRefResult1 (copy), UseAnimatedBindingResult2_3 (copy), ReactOtterModule (upval), FFlagAXTabGroupScrollOnlyWhenClipped (upval), v1 (ref)
+			if UseRefResult1.current then
 				UseAnimatedBindingResult2_3(ReactOtterModule.instant(p1))
+				
+				if FFlagAXTabGroupScrollOnlyWhenClipped and v1 then
+					v1.current = nil
+				end
 			end
 		end, {})
 		ReactModule.useImperativeHandle(Frame.controllerRef, function()
-			-- upvalues: UseResult2 (copy), UseResult3 (copy), UseRefResult (copy)
+			-- upvalues: UseResult2 (copy), UseResult3 (copy), UseRefResult1 (copy), v1 (ref), ScaledSize (copy)
 			return {
 				scrollToOffset = UseResult2,
 				setOffset = UseResult3,
 				getScrollingFrame = function()
-					-- upvalues: UseRefResult (upval)
-					return UseRefResult.current
+					-- upvalues: UseRefResult1 (upval)
+					return UseRefResult1.current
+				end,
+				getScrollTarget = function()
+					-- upvalues: v1 (upval)
+					return if v1 then v1.current else nil
+				end,
+				getObscuredEdgeInset = function(): number
+					-- upvalues: ScaledSize (upval)
+					return ScaledSize * 2
 				end
 			}
-		end, { UseResult2, UseResult3 })
+		end, if FFlagAXTabGroupScrollOnlyWhenClipped then { UseResult2, UseResult3, ScaledSize } else { UseResult2, UseResult3 })
 	end
 	local Size1000 = UseTokensResult.Size.Size_1000
 	local FixedTabHeightModule: number = GetFixedTabHeightModule(UseTokensResult)
-	local NewSize = Size150 + FixedTabHeightModule + Offset
+	local YOffset = Size150 + FixedTabHeightModule + Offset
 	
 	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
@@ -252,7 +288,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref)
 	}, {
 		ScrollingFrame = ReactModule.createElement("ScrollingFrame", {
 			ClipsDescendants = true,
-			Size = if FFlagAXCategoryMenuVisualFixes then UDim2.new(1, 0, 0, NewSize) else UDim2.fromScale(1, 0),
+			Size = if FFlagAXCategoryMenuVisualFixes then UDim2.new(1, 0, 0, YOffset) else UDim2.fromScale(1, 0),
 			Position = if FFlagAXCategoryMenuVisualFixes then UDim2.fromOffset(0, -Size150) else nil,
 			AutomaticSize = if FFlagAXCategoryMenuVisualFixes then Enum.AutomaticSize.None else Enum.AutomaticSize.Y,
 			Selectable = false,
@@ -270,7 +306,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref)
 			[ReactModule.Change.CanvasPosition] = onCanvasChanged,
 			[ReactModule.Event.MouseEnter] = onMouseEnter,
 			[ReactModule.Event.MouseLeave] = onMouseLeave,
-			ref = UseRefResult
+			ref = UseRefResult1
 		}, if FFlagAXCategoryMenuVisualFixes then {
 			FocusCursorInset = ReactModule.createElement("UIPadding", {
 				PaddingTop = UDim.new(0, Size150),
@@ -298,7 +334,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref)
 				isDisabled = not UseStateResult,
 				size = InputSize.Small,
 				icon = Icon,
-				onActivated = UseResult1
+				onActivated = UseResult11
 			})),
 			RightButton = ReactModule.createElement(View, {
 				BackgroundTransparency = 1,
@@ -311,7 +347,7 @@ return ReactModule.forwardRef(function(Frame: Frame, Ref)
 				isDisabled = not UseStateResult,
 				size = InputSize.Small,
 				icon = Icon1,
-				onActivated = UseResult
+				onActivated = UseResult1
 			}))
 		})
 	})

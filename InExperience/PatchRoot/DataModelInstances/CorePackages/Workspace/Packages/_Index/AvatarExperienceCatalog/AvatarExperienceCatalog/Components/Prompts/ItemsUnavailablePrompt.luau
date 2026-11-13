@@ -2,9 +2,11 @@
 local Parent = AvatarExperienceCatalog.Parent
 local ReactModule = require(Parent.React)
 local RoactNavigationModule = require(Parent.RoactNavigation)
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local SendAXCounterV2Function = require(Parent.AvatarExperienceAnalytics).sendAXCounterV2
 local ConstantsModule = require(AvatarExperienceCatalog.Constants)
 local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local WithMappedNavigationParamsFunction = require(Parent.AvatarExperienceNavigation).withMappedNavigationParams
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local FoundationModule = require(Parent.Foundation)
 local View = FoundationModule.View
@@ -14,9 +16,9 @@ local ModalWindow = require(Parent.UIBlox).App.Dialog.Modal.ModalWindow
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local FillBehavior = FoundationModule.Enums.FillBehavior
 local InputSize = FoundationModule.Enums.InputSize
-local FFlagAXInventoryDurablesSupport = require(Parent.AvatarExperienceFlags).FFlagAXInventoryDurablesSupport
+local FFlagAXInventoryDurablesSupport = AvatarExperienceFlagsModule.FFlagAXInventoryDurablesSupport
 
-local function v14(p1)
+local function v15(p1)
 	return p1.ScreenSize
 end
 
@@ -46,8 +48,8 @@ local config = {
 	} else nil
 }
 
-return (require(Parent.AvatarExperienceNavigation).withMappedNavigationParams(function(p1)
-	-- upvalues: ReactModule (copy), SendAXCounterV2Function (copy), ConstantsModule (copy), FFlagAXInventoryDurablesSupport (copy), UseLocalizationFunction (copy), config (copy), UseSelectorFunction (copy), v14 (copy), RoactNavigationModule (copy), View (copy), Text (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy), InputSize (copy), ModalWindow (copy)
+return (WithMappedNavigationParamsFunction(function(p1)
+	-- upvalues: ReactModule (copy), SendAXCounterV2Function (copy), ConstantsModule (copy), FFlagAXInventoryDurablesSupport (copy), UseLocalizationFunction (copy), config (copy), UseSelectorFunction (copy), v15 (copy), RoactNavigationModule (copy), View (copy), Text (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy), InputSize (copy), ModalWindow (copy)
 	ReactModule.useEffect(function()
 		-- upvalues: SendAXCounterV2Function (upval), ConstantsModule (upval), p1 (copy)
 		SendAXCounterV2Function(ConstantsModule.COUNTERS.ItemsUnavailablePromptShown, { messageType = p1.messageType })
@@ -151,7 +153,7 @@ return (require(Parent.AvatarExperienceNavigation).withMappedNavigationParams(fu
 	
 	return ReactModule.createElement(ModalWindow, {
 		isFullHeight = false,
-		screenSize = UseSelectorFunction(v14)
+		screenSize = UseSelectorFunction(v15)
 	}, {
 		ViewFrame = ReactModule.createElement(View, {
 			tag = "auto-y size-full-0 padding-xxlarge col align-x-left align-y-top"

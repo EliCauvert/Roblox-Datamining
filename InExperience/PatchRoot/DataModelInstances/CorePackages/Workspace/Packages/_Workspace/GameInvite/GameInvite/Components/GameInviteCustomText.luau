@@ -1,9 +1,11 @@
 ﻿local GameInvite = script:FindFirstAncestor("GameInvite")
 local Parent = GameInvite.Parent
 local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
 local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
-local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
-local SidePadding = require(GameInvite.GameInviteConstants).Layout.SidePadding
+local GameInviteConstantsModule = require(GameInvite.GameInviteConstants)
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local SidePadding = GameInviteConstantsModule.Layout.SidePadding
 
 return function(p1)
 	-- upvalues: UseStyleFunction (copy), ReactModule (copy), SidePadding (copy), NormalizeFontFaceFunction (copy)

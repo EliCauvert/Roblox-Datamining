@@ -1,8 +1,9 @@
 ﻿local ExpChat = script:FindFirstAncestor("ExpChat")
 local Parent = ExpChat.Parent
 local ExpChatSharedModule = require(Parent.ExpChatShared)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local GetChannelTabsStoreModule = require(ExpChat.Stores.GetChannelTabsStore)
-local FFlagExpChatUseChannelTabsStore = require(Parent.SharedFlags).FFlagExpChatUseChannelTabsStore
+local FFlagExpChatUseChannelTabsStore = SharedFlagsModule.FFlagExpChatUseChannelTabsStore
 
 return function(p1, p2): boolean
 	-- upvalues: ExpChatSharedModule (copy), FFlagExpChatUseChannelTabsStore (copy), GetChannelTabsStoreModule (copy)

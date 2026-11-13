@@ -4,13 +4,14 @@ local SignalsModule = require(Parent.Signals)
 local CryoModule = require(Parent.Cryo)
 local Debounce = require(Parent.Dash).debounce
 local _ = require(Parent.DataHydration.MomentsStoreTypes)
+local MomentsTypesModule = require(Parent.MomentsTypes)
 local ReactionActionModule = require(Moments.Enums.ReactionAction)
 local MomentsGetMomentsReactionsStoreModule = require(Parent.DataHydration.MomentsGetMomentsReactionsStore)
 local MomentsResolveEmoteIdModule = require(Parent.DataHydration.MomentsResolveEmoteId)
 local FFlagMomentsReactToFeedItemV2Module = require(Moments.Flags.FFlagMomentsReactToFeedItemV2)
 local CreateSignalFunction = SignalsModule.createSignal
 local CreateComputedFunction = SignalsModule.createComputed
-local ReactionType = require(Parent.MomentsTypes).Enums.ReactionType
+local ReactionType = MomentsTypesModule.Enums.ReactionType
 local t = {}
 
 return function(p1)

@@ -1,8 +1,9 @@
 ﻿local Parent = script:FindFirstAncestor("FriendsChat").Parent
 local ReactModule = require(Parent.React)
 local _ = require(Parent.Signals)
+local ExpChatSharedModule = require(Parent.ExpChatShared)
 local UseChatWindowModule = require(script.Parent.Parent.Bridge.useChatWindow)
-local NewResult = require(Parent.ExpChatShared).Logger:new(script.Name)
+local NewResult = ExpChatSharedModule.Logger:new(script.Name)
 
 return function(p1)
 	-- upvalues: UseChatWindowModule (copy), ReactModule (copy), NewResult (copy)

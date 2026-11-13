@@ -1,7 +1,8 @@
 ﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local SignalsModule = require(Parent.Signals)
 local MomentsGetOutfitLookStoreModule = require(Parent.DataHydration.MomentsGetOutfitLookStore)
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
-local CreateComputedFunction = require(Parent.Signals).createComputed
+local CreateComputedFunction = SignalsModule.createComputed
 local config = {
 	data = CreateComputedFunction(function()
 		return nil

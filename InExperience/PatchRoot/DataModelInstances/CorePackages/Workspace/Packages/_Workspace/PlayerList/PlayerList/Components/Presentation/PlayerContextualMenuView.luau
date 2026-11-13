@@ -9,6 +9,7 @@ local FoundationModule = require(Parent1.Foundation)
 local View = FoundationModule.View
 local Divider = FoundationModule.Divider
 local UseTokensFunction = FoundationModule.Hooks.useTokens
+local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
 local PlayerContextualMenuStoreModule = require(Parent.Common.PlayerContextualMenuStore)
 local PlayerContextMenuHeaderModule = require(Parent.Components.Presentation.PlayerContextMenuHeader)
 local MenuActionRowModule = require(Parent.Components.Presentation.MenuActionRow)
@@ -19,11 +20,9 @@ local UseSlideOpenCloseAnimationFunction = UseSlideOpenCloseAnimationModule.useS
 local MENUSLIDECONFIG = UseSlideOpenCloseAnimationModule.MENU_SLIDE_CONFIG
 local MENUZOOMCLOSEDSCALE = UseSlideOpenCloseAnimationModule.MENU_ZOOM_CLOSED_SCALE
 local BackgroundStyle = { Transparency = 1, Color3 = Color3.new(0, 0, 0) }
-local StateLayer = {
-	affordance = FoundationModule.Enums.StateLayerAffordance.None
-}
+local StateLayer = { affordance = StateLayerAffordance.None }
 
-local function v20() end
+local function v21() end
 
 local function _(Frame: Frame, Vector): boolean
 	local AbsolutePosition = Frame.AbsolutePosition
@@ -82,7 +81,7 @@ local _ = function(): boolean
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: SignalsReactModule (copy), PlayerContextualMenuStoreModule (copy), UseTokensFunction (copy), UsePreferredBackgroundStyleModule (copy), ReactModule (copy), UseSlideOpenCloseAnimationFunction (copy), MENUSLIDECONFIG (copy), UserInputService (copy), ContextActionService (copy), isPositionOnMenu (copy), isPositionOnRow (copy), GuiService (copy), MENUZOOMCLOSEDSCALE (copy), PlayerContextMenuHeaderModule (copy), Divider (copy), MenuActionRowModule (copy), ConstantsModule (copy), View (copy), BackgroundStyle (copy), v20 (copy), StateLayer (copy)
+	-- upvalues: SignalsReactModule (copy), PlayerContextualMenuStoreModule (copy), UseTokensFunction (copy), UsePreferredBackgroundStyleModule (copy), ReactModule (copy), UseSlideOpenCloseAnimationFunction (copy), MENUSLIDECONFIG (copy), UserInputService (copy), ContextActionService (copy), isPositionOnMenu (copy), isPositionOnRow (copy), GuiService (copy), MENUZOOMCLOSEDSCALE (copy), PlayerContextMenuHeaderModule (copy), Divider (copy), MenuActionRowModule (copy), ConstantsModule (copy), View (copy), BackgroundStyle (copy), v21 (copy), StateLayer (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(PlayerContextualMenuStoreModule.getMenuData)
 	local UseTokensResult = UseTokensFunction()
 	local UsePreferredBackgroundStyleModuleResult = UsePreferredBackgroundStyleModule(UseTokensResult.Color.OverMedia.OverMedia_100)
@@ -263,7 +262,7 @@ return ReactModule.memo(function(p1)
 			tag = "size-full",
 			ZIndex = 1,
 			backgroundStyle = BackgroundStyle,
-			onActivated = if p1.isSmallTouchDevice and HasUseSignalStateResult then v20 else nil,
+			onActivated = if p1.isSmallTouchDevice and HasUseSignalStateResult then v21 else nil,
 			stateLayer = StateLayer,
 			selection = ConstantsModule.NOT_SELECTABLE
 		}),
@@ -283,7 +282,7 @@ return ReactModule.memo(function(p1)
 				["col align-x-left gap-xxsmall auto-y padding-small radius-large"] = p1.isSmallTouchDevice
 			},
 			backgroundStyle = if p1.isSmallTouchDevice then UsePreferredBackgroundStyleModuleResult else nil,
-			onActivated = if p1.isSmallTouchDevice then nil else v20,
+			onActivated = if p1.isSmallTouchDevice then nil else v21,
 			stateLayer = if p1.isSmallTouchDevice then nil else StateLayer
 		}, config1)
 	})

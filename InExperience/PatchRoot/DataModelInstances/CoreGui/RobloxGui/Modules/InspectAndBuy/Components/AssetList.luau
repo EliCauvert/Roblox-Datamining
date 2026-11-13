@@ -5,10 +5,11 @@ local RoactModule = require(CorePackages.Packages.Roact)
 local CryoModule = require(CorePackages.Packages.Cryo)
 local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
 local Skeleton = require(CorePackages.Packages.Foundation).Skeleton
+local PlayerListModule = require(CorePackages.Workspace.Packages.PlayerList)
 local AssetCardModule = require(Parent.Components.AssetCard)
 local InspectAndBuyContextModule = require(Parent.Components.InspectAndBuyContext)
 local SetAssetFromBundleInfoModule = require(Parent.Actions.SetAssetFromBundleInfo)
-local FFlagAddNewPlayerListMobileFocusNav = require(CorePackages.Workspace.Packages.PlayerList).Flags.FFlagAddNewPlayerListMobileFocusNav
+local FFlagAddNewPlayerListMobileFocusNav = PlayerListModule.Flags.FFlagAddNewPlayerListMobileFocusNav
 local AssetList = RoactModule.PureComponent:extend("AssetList")
 
 function AssetList.calculateCanvasSize(p1, MaxAssetCardsPerRow, Count, AssetCardSizeY: number)

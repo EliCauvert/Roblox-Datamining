@@ -2,6 +2,7 @@
 local Parent = DataHydration.Parent
 local PromiseModule = require(Parent.Promise)
 local SignalsModule = require(Parent.Signals)
+local Url = require(Parent.Http).Url
 local DiscoveryUtilsModule = require(Parent.DiscoveryUtils)
 local LogResponseErrorFunction = DiscoveryUtilsModule.logResponseError
 local DiscoveryEventErrorLogger = DiscoveryUtilsModule.DiscoveryEventErrorLogger
@@ -10,7 +11,7 @@ local CreateDataResolverModule = require(DataHydration.createDataResolver)
 local _ = require(DataHydration.DataHydrationTypes)
 local _ = require(script.Parent.CommunityUserMembershipStoreTypes)
 local RequestJoinCommunityModule = require(script.Parent.requestJoinCommunity)
-local GroupsName: string = `{require(Parent.Http).Url.GROUPS_URL}v1/groups/`
+local GroupsName: string = `{Url.GROUPS_URL}v1/groups/`
 
 return function()
 	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), PromiseModule (copy), SignalsModule (copy), RequestJoinCommunityModule (copy), LogResponseErrorFunction (copy), GroupsName (copy), DiscoveryEventErrorLogger (copy)

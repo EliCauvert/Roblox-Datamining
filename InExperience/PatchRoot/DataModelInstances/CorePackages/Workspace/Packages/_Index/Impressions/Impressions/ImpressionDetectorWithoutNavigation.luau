@@ -1,12 +1,13 @@
 ﻿local CollectionService = game:GetService("CollectionService")
 local Parent = script:FindFirstAncestor("Impressions").Parent
+local RoactModule = require(Parent.Roact)
 local ArgCheckModule = require(Parent.ArgCheck)
 local TModule = require(Parent.t)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local ConstantsModule = require(script.Parent.Constants)
 local FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions = SharedFlagsModule.FFlagLuaAppUseScreenFillBoundsForFrameBoundsImpressions
 local FFlagLuaAppSduiGameDwell = SharedFlagsModule.FFlagLuaAppSduiGameDwell
-local ImpressionsDetectorWithoutNavigation = require(Parent.Roact).PureComponent:extend("ImpressionsDetectorWithoutNavigation")
+local ImpressionsDetectorWithoutNavigation = RoactModule.PureComponent:extend("ImpressionsDetectorWithoutNavigation")
 ImpressionsDetectorWithoutNavigation.validateProps = TModule.strictInterface({
 	scanDebounceSeconds = TModule.optional(TModule.number),
 	viewFillPercent = TModule.optional(TModule.number),

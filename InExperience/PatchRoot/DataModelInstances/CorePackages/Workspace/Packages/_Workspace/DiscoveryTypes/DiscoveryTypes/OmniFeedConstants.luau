@@ -6,6 +6,7 @@ local FFlagLuaAppUsePrevalidatedVideoGamePlayability = require(Parent.SharedFlag
 local FFlagLuaAppRfyRevealRows = require(Parent.SharedFlags).FFlagLuaAppRfyRevealRows
 local FFlagLuaAppSortHeaderAnchorTag = require(Parent.SharedFlags).FFlagLuaAppSortHeaderAnchorTag
 local FFlagLuaAppContinueSortInstantPlay = require(Parent.SharedFlags).FFlagLuaAppContinueSortInstantPlay
+local FFlagLuaAppSupportHomeBackToTop = require(Parent.SharedFlags).FFlagLuaAppSupportHomeBackToTop
 local _ = require(script.Parent.RoduxTypes)
 
 return {
@@ -13,7 +14,7 @@ return {
 	OmniSortRetrievalStatus = { Exception = "Exception", Success = "Success" },
 	GlobalLayoutDataKeys = {
 		JYFRefresh = "JYFRefresh",
-		ShowBackToTop = if require(Parent.SharedFlags).FFlagLuaAppSupportHomeBackToTop then "showBackToTop" else nil
+		ShowBackToTop = if FFlagLuaAppSupportHomeBackToTop then "showBackToTop" else nil
 	},
 	TopicLayoutDataKeys = {
 		PYMKFindFriendsEnabled = "PYMKFindFriendsEnabled",

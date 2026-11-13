@@ -1,12 +1,13 @@
 ﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
 local Parent = InExperienceShop.Parent
 local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
 local ContextProvidersModule = require(InExperienceShop.Internal.ContextProviders)
 
 return {
 	name = InExperienceShop.Name,
 	roact = ReactModule,
-	reactRoblox = require(Parent.ReactRoblox),
+	reactRoblox = ReactRobloxModule,
 	storyRoots = { InExperienceShop.Components },
 	mapStory = function(p1)
 		-- upvalues: ReactModule (copy), ContextProvidersModule (copy)

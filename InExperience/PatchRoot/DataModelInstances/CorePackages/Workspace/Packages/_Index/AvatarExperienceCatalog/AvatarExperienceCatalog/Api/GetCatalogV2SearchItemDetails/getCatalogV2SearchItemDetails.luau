@@ -7,9 +7,10 @@ local _ = require(AvatarExperienceCatalog.Models.CatalogV2SearchItemDetails)
 local MakeAXResponseHandlerModule = require(AvatarExperienceCatalog.Utils.makeAXResponseHandler)
 local NormalizeCatalogV2SearchItemDetailsModule = require(script.Parent.normalizeCatalogV2SearchItemDetails)
 local ConstantsModule = require(script.Parent.constants)
+local FFlagAXCatalogSpecialFeaturesFilter = require(Parent.AvatarExperienceFlags).FFlagAXCatalogSpecialFeaturesFilter
 local config = { assetTypeIds = true, bundleTypeIds = true }
 
-if require(Parent.AvatarExperienceFlags).FFlagAXCatalogSpecialFeaturesFilter then
+if FFlagAXCatalogSpecialFeaturesFilter then
 	config.requiredPropertyFilters = true
 end
 local function buildQueryStringWithArrayParams(List): string

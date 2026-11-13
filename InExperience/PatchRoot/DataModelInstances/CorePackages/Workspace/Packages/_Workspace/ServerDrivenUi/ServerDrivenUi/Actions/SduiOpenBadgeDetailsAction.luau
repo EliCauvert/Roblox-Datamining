@@ -1,6 +1,7 @@
 ﻿local IXPService = game:GetService("IXPService")
 local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
 local AppPage = require(Parent.RobloxAppEnums).AppPage
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
 local FFlagLuaAppBadgeDetailsEnabled = require(Parent.SharedFlags).FFlagLuaAppBadgeDetailsEnabled
 local FetchBadgeDetailsPageFunction = require(Parent.Badges).fetchBadgeDetailsPage
 local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
@@ -12,7 +13,7 @@ local FFlagLuaAppBadgeDetailsLogExposure = require(Parent.SharedFlags).FFlagLuaA
 local FStringLuaAppBadgeDetailsIxpLayer = require(Parent.SharedFlags).FStringLuaAppBadgeDetailsIxpLayer
 local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 local SduiActionType = SduiCoreSystemModule.SduiActionType
-local v1 = require(Parent.UrlBuilder).UrlBuilder.fromString("www:badges")()
+local v1 = UrlBuilder.fromString("www:badges")()
 
 return function(p1, _, p2, _)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy), FFlagLuaAppBadgeDetailsLogExposure (copy), IXPService (copy), FStringLuaAppBadgeDetailsIxpLayer (copy), FFlagLuaAppBadgeDetailsEnabled (copy), SduiLoadTimer (copy), FetchBadgeDetailsPageFunction (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), v1 (copy)

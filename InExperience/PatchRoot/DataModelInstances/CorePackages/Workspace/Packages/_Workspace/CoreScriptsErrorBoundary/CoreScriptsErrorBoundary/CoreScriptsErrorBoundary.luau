@@ -1,9 +1,10 @@
 ﻿local Parent = script.Parent
 local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
 local LoggingProtocolModule = require(Parent1.LoggingProtocol)
 local ReactTreeCrashedConfigModule = require(Parent.ReactTreeCrashedConfig)
 local ReportCaughtErrorModule = require(Parent.reportCaughtError)
-local CoreScriptsErrorBoundary = require(Parent1.React).Component:extend("CoreScriptsErrorBoundary")
+local CoreScriptsErrorBoundary = ReactModule.Component:extend("CoreScriptsErrorBoundary")
 
 function CoreScriptsErrorBoundary:getDerivedStateFromError()
 	return { hasError = true }

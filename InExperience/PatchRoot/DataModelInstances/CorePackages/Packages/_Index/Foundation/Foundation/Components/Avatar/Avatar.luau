@@ -13,11 +13,13 @@ local GetRbxThumbModule = require(Foundation.Utility.getRbxThumb)
 local UseAvatarVariantsModule = require(script.Parent.useAvatarVariants)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local UsePresentationContextFunction = require(Foundation.Providers.Style.PresentationContext).usePresentationContext
+local AvatarSizeModule = require(Foundation.Enums.AvatarSize)
+local UserPresenceModule = require(Foundation.Enums.UserPresence)
 local GetAvatarSizeModule = require(script.Parent.getAvatarSize)
 local config = {
 	testId = "--foundation-avatar",
-	size = require(Foundation.Enums.AvatarSize).Medium,
-	userPresence = require(Foundation.Enums.UserPresence).None
+	size = AvatarSizeModule.Medium,
+	userPresence = UserPresenceModule.None
 }
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)

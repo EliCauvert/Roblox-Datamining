@@ -2,6 +2,8 @@
 local Parent = BuildExperience.Parent
 local LocalizationModule = require(Parent.Localization)
 local ReactModule = require(Parent.React)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local Default = require(Parent.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
@@ -18,8 +20,8 @@ local RestoreVersionDialogModule = require(BuildExperience.Components.VersionHis
 local GetAgentRollbackRequestStoreModule = require(BuildExperience.Stores.GetAgentRollbackRequestStore)
 local GetPlaytestLoadingStoreModule = require(Parent.BuildExperiencePlaytestLaunch.GetPlaytestLoadingStore)
 local IconName = require(Parent.Foundation).Enums.IconName
-local FFlagEnableTeamTestLua = require(Parent.SharedFlags).FFlagEnableTeamTestLua
-local Signal = require(Parent.Signals).createSignal(false)
+local FFlagEnableTeamTestLua = SharedFlagsModule.FFlagEnableTeamTestLua
+local Signal = SignalsModule.createSignal(false)
 
 local function useAgentMessageCopy(Text)
 	-- upvalues: ReactModule (copy), Default (copy), IconName (copy)

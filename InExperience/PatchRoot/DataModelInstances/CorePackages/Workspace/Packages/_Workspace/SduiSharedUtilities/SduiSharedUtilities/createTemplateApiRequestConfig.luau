@@ -7,11 +7,7 @@ local SduiTemplateApiModule = require(SduiSharedUtilities.SduiTemplateApi)
 
 return function(p1)
 	-- upvalues: SduiTemplateApiModule (copy), SduiIntegrationTypesModule (copy), SduiProtobufResponseHelpersModule (copy)
-	local Request = SduiTemplateApiModule.createRequest({
-		surfaceKeys = { p1.surfaceKey },
-		locale = p1.locale,
-		capabilities = p1.capabilities
-	})
+	local Request = SduiTemplateApiModule.createRequest({ surfaceKeys = { p1.surfaceKey }, locale = p1.locale })
 	
 	return if Request == nil then nil else {
 		enableTemplateCache = true,

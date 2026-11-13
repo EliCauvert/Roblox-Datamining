@@ -4,12 +4,14 @@ local ReactModule = require(Parent.React)
 local DataHydrationModule = require(Parent.DataHydration)
 local FoundationModule = require(Parent.Foundation)
 local _ = require(Parent.MomentsTypes)
+local RoactUtilsModule = require(Parent.RoactUtils)
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local GameCardContainerModule = require(script.Parent.GameCardComponents.GameCardContainer)
 local GameCardGroupableModule = require(script.Parent.GameCardComponents.GameCardGroupable)
 local MomentShareCardContainerModule = require(script.Parent.MomentShareCard.MomentShareCardContainer)
 local MomentAssetCardModule = require(script.Parent.MomentShareCard.MomentAssetCard)
 local PlusReferralAssetCardModule = require(script.Parent.PlusReferralAssetCard.PlusReferralAssetCard)
+local GenericShareLinkAssetCardModule = require(script.Parent.GenericShareLinkAssetCard.GenericShareLinkAssetCard)
 local IsAssetCardClassificationModule = require(script.Parent.isAssetCardClassification)
 local MessageGroupShapeModule = require(AppChat.Components.ChatConversation.Grouping.MessageGroupShape)
 local ShareLinkClassificationModule = require(AppChat.Components.ChatConversation.Utils.RobloxUrlUtils.ShareLinkClassification)
@@ -18,7 +20,7 @@ local ShareLinkV2PresentationModule = require(script.Parent.ShareLinkV2Presentat
 local GetShareLinkV2PresentationModule = require(script.Parent.getShareLinkV2Presentation)
 local NewResult = require(AppChat.Logger):new(script.Name)
 local UseEffectFunction = ReactModule.useEffect
-local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
 local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
 local GetShareLinkStoreModule = require(AppChat.Stores.GetShareLinkStore)
 local GetShareLinkV2StoreModule = require(AppChat.Stores.GetShareLinkV2Store)
@@ -26,6 +28,7 @@ local FFlagAppChatResolveShareLinkV2Module = require(AppChat.Flags.FFlagAppChatR
 local FFlagAppChatMomentShareCardModule = require(AppChat.Flags.FFlagAppChatMomentShareCard)
 local FFlagAppChatIntrinsicAssetCardHeightModule = require(AppChat.Flags.FFlagAppChatIntrinsicAssetCardHeight)
 local FFlagAppChatShareLinkV2FallbacksModule = require(AppChat.Flags.FFlagAppChatShareLinkV2Fallbacks)
+local FFlagAppChatGenericShareLinkCardModule = require(AppChat.Flags.FFlagAppChatGenericShareLinkCard)
 local Frozen = table.freeze({
 	direction = MessageGroupShapeModule.Direction.Incoming,
 	position = MessageGroupShapeModule.Position.Only
@@ -71,7 +74,7 @@ local function ShareLinkV1Container(p1)
 end
 
 local function ShareLinkV2Container(Frame: Frame)
-	-- upvalues: GetShareLinkV2StoreModule (copy), ReactModule (copy), UseSignalStateFunction (copy), FFlagAppChatIntrinsicAssetCardHeightModule (copy), FFlagAppChatMomentShareCardModule (copy), UseScaledValueFunction (copy), ConstantsModule (copy), FFlagAppChatShareLinkV2FallbacksModule (copy), IsAssetCardClassificationModule (copy), Frozen (copy), ShareLinkClassificationModule (copy), PlusReferralAssetCardModule (copy), MomentAssetCardModule (copy), MomentShareCardContainerModule (copy), GetShareLinkV2PresentationModule (copy), ShareLinkV2PresentationModule (copy), GameCardGroupableModule (copy), DataHydrationModule (copy), FoundationModule (copy)
+	-- upvalues: GetShareLinkV2StoreModule (copy), ReactModule (copy), UseSignalStateFunction (copy), FFlagAppChatIntrinsicAssetCardHeightModule (copy), FFlagAppChatMomentShareCardModule (copy), UseScaledValueFunction (copy), ConstantsModule (copy), FFlagAppChatShareLinkV2FallbacksModule (copy), IsAssetCardClassificationModule (copy), Frozen (copy), ShareLinkClassificationModule (copy), PlusReferralAssetCardModule (copy), MomentAssetCardModule (copy), FFlagAppChatGenericShareLinkCardModule (copy), GenericShareLinkAssetCardModule (copy), MomentShareCardContainerModule (copy), GetShareLinkV2PresentationModule (copy), ShareLinkV2PresentationModule (copy), GameCardGroupableModule (copy), DataHydrationModule (copy), FoundationModule (copy)
 	local LinkId = Frame.shareLink.linkId
 	local ShareLinkV2StoreModule = GetShareLinkV2StoreModule(false)
 	local UseMemoResult = ReactModule.useMemo(function()
@@ -97,6 +100,26 @@ local function ShareLinkV2Container(Frame: Frame)
 				momentId = UseSignalStateResult.momentId,
 				targetIdType = UseSignalStateResult.targetIdType,
 				openMomentsDeepLink = Frame.openMomentsDeepLink,
+				groupShape = GroupShape,
+				mediaRef = Frame.mediaRef
+			})
+		elseif FFlagAppChatGenericShareLinkCardModule and UseSignalStateResult and UseSignalStateResult.type == ShareLinkClassificationModule.Unhandled and Frame.shareLink.url then
+			return ReactModule.createElement(GenericShareLinkAssetCardModule, {
+				isInvalid = false,
+				linkId = LinkId,
+				url = Frame.shareLink.url,
+				linkType = UseSignalStateResult.linkType,
+				preview = UseSignalStateResult.preview,
+				groupShape = GroupShape,
+				mediaRef = Frame.mediaRef
+			})
+		elseif FFlagAppChatGenericShareLinkCardModule and UseSignalStateResult and UseSignalStateResult.type == ShareLinkClassificationModule.Invalid and Frame.shareLink.url then
+			return ReactModule.createElement(GenericShareLinkAssetCardModule, {
+				isInvalid = true,
+				linkId = LinkId,
+				url = Frame.shareLink.url,
+				linkType = UseSignalStateResult.linkType,
+				status = UseSignalStateResult.status,
 				groupShape = GroupShape,
 				mediaRef = Frame.mediaRef
 			})

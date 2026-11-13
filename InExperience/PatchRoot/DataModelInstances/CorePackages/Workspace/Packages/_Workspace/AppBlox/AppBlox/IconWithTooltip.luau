@@ -42,19 +42,20 @@ return function(p1)
 	elseif UseUiModeInfoResult.uiMode == UiMode.TenFoot and not p1.supportTenFootUi then
 		return nil
 	else
-		local Size = p1.size or UDim2.new(0, Size600, 0, Size600)
-		
-		return WithHoverTooltipFunction({ useLargeDropShadow = true, bodyText = p1.hoverText }, {
+		local config = {
 			DisplayOrder = 10,
 			delayTime = 0.2,
 			preferredOrientation = p1.tooltipOrientation,
 			guiTarget = CoreGui,
 			triggerPointName = p1.triggerPointName,
 			disabled = IsUiModeMatch
-		}, function(Callback, Callback1)
+		}
+		local Size = p1.size or UDim2.new(0, Size600, 0, Size600)
+		
+		return WithHoverTooltipFunction({ useLargeDropShadow = true, bodyText = p1.hoverText }, config, function(Callback, Callback1)
 			-- upvalues: LuaAppGateTooltipPositionTracking (upval), UseRefResult (copy), ControlState (upval), UseRefResult1 (copy), ReactModule (upval), Size (copy), p1 (copy), GetFFlagTenFootUiSupportSortHeaderTooltipFunction (upval), UseCursorResult (copy), ImageSetLabel (upval), IconsActionsInfo (upval), EmphasisColor3 (copy), Interactable (upval), _Vector2 (upval)
 			if LuaAppGateTooltipPositionTracking then
-				local function v23(p2)
+				local function v24(p2)
 					-- upvalues: UseRefResult (upval), Callback (copy)
 					if UseRefResult.current then
 						Callback(p2)

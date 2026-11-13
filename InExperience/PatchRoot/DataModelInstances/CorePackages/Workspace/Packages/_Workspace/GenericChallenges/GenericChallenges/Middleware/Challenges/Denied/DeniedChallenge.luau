@@ -1,10 +1,12 @@
 ﻿local GenericChallenges = script:FindFirstAncestor("GenericChallenges")
 local Parent = GenericChallenges.Parent
 local ReactModule = require(Parent.React)
+local LoggingProtocolModule = require(Parent.LoggingProtocol)
+local ChallengeEventConstantsModule = require(GenericChallenges.Utils.ChallengeEventConstants)
 local DeniedChallengeViewModule = require(script.Parent.DeniedChallengeView)
 local DeniedChallengeEventModule = require(script.Parent.DeniedChallengeEvent)
-local ChallengeLifecycleEventConstants = require(GenericChallenges.Utils.ChallengeEventConstants).ChallengeLifecycleEventConstants
-local Default = require(Parent.LoggingProtocol).default
+local ChallengeLifecycleEventConstants = ChallengeEventConstantsModule.ChallengeLifecycleEventConstants
+local Default = LoggingProtocolModule.default
 
 return function(p1)
 	-- upvalues: Default (copy), ReactModule (copy), DeniedChallengeEventModule (copy), ChallengeLifecycleEventConstants (copy), DeniedChallengeViewModule (copy)
@@ -44,6 +46,7 @@ return function(p1)
 			if UseRefResult.current then
 				UseRefResult.current()
 			end
-		end, { UseResult })
+		end, { UseResult }),
+		opaqueBackdrop = p1.opaqueBackdrop
 	})
 end

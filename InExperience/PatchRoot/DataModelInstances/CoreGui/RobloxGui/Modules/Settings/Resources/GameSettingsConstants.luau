@@ -78,6 +78,9 @@ local config = {
 	UiToggleRowBillboards = NextOrder(),
 	UiToggleRowNameplates = NextOrder(),
 	FreecamToggleRow = NextOrder(),
+	AccountDivider = NextOrder(),
+	AccountHeader = NextOrder(),
+	AccountManagementFrame = NextOrder(),
 	InformationFrame = NextOrder()
 }
 

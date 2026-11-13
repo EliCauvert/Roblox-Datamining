@@ -1,15 +1,18 @@
 ﻿local ExpChat = script:FindFirstAncestor("ExpChat")
 local Parent = ExpChat.Parent
+local RoduxModule = require(Parent.Rodux)
 local Dictionary = require(Parent.llama).Dictionary
 local Actions = ExpChat.Actions
+local LegacyBubbleChatEnabledChangedModule = require(Actions.LegacyBubbleChatEnabledChanged)
+local LegacyBubbleChatSettingsChangedModule = require(Actions.LegacyBubbleChatSettingsChanged)
 local LegacyDefaultSettingsModule = require(script.Parent.LegacyDefaultSettings)
 
-return require(Parent.Rodux).createReducer(LegacyDefaultSettingsModule, {
-	[require(Actions.LegacyBubbleChatEnabledChanged).name] = function(p1, p2)
+return RoduxModule.createReducer(LegacyDefaultSettingsModule, {
+	[LegacyBubbleChatEnabledChangedModule.name] = function(p1, p2)
 		-- upvalues: Dictionary (copy)
 		return Dictionary.join(p1, { Enabled = p2.value })
 	end,
-	[require(Actions.LegacyBubbleChatSettingsChanged).name] = function(_, p1)
+	[LegacyBubbleChatSettingsChangedModule.name] = function(_, p1)
 		-- upvalues: Dictionary (copy), LegacyDefaultSettingsModule (copy)
 		local ChatSettings = p1.chatSettings
 		

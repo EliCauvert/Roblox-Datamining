@@ -2,6 +2,7 @@
 local Parent1 = Parent.Parent
 local ContextActionService = game:GetService("ContextActionService")
 local UserInputService = game:GetService("UserInputService")
+local ReactModule = require(Parent1.React)
 local RoactUtilsModule = require(Parent1.RoactUtils)
 local SocialStopwatchModule = require(Parent1.SocialStopwatch)
 local ConstantsModule = require(Parent.Constants)
@@ -10,7 +11,7 @@ local GetCaptureShortcutSetupKeysModule = require(Parent.Utils.getCaptureShortcu
 local TakeCaptureModule = require(Parent.Thunks.TakeCapture)
 local UseAnalyticsModule = require(Parent.Analytics.useAnalytics)
 local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
-local UseEffectFunction = require(Parent1.React).useEffect
+local UseEffectFunction = ReactModule.useEffect
 local UseKeyboardEnabledModule = require(Parent.Hooks.useKeyboardEnabled)
 local UsePlayShutterSoundModule = require(Parent.Hooks.usePlayShutterSound)
 local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
@@ -43,7 +44,7 @@ return function()
 		-- upvalues: UseKeyboardEnabledModuleResult (copy), UseSelectorResult1 (copy), UsePlayShutterSoundModuleResult (copy), SocialStopwatchModule (upval), UseAnalyticsModuleResult (copy), EventNamesModule (upval), UseDispatchResult (copy), TakeCaptureModule (upval), ContextActionService (upval), GetCaptureShortcutSetupKeysModule (upval), UserInputService (upval)
 		if not UseKeyboardEnabledModuleResult then return end
 		if not UseSelectorResult1 then return end
-		local function v20()
+		local function v21()
 			-- upvalues: UsePlayShutterSoundModuleResult (upval), SocialStopwatchModule (upval), UseAnalyticsModuleResult (upval), EventNamesModule (upval), UseDispatchResult (upval), TakeCaptureModule (upval)
 			UsePlayShutterSoundModuleResult()
 			
@@ -56,7 +57,7 @@ return function()
 		end
 		
 		ContextActionService:BindCoreAction("CaptureShortcutAction", function(_, UserInputState)
-			-- upvalues: GetCaptureShortcutSetupKeysModule (upval), UserInputService (upval), v20 (copy)
+			-- upvalues: GetCaptureShortcutSetupKeysModule (upval), UserInputService (upval), v21 (copy)
 			if UserInputState == Enum.UserInputState.Begin then
 				local Flag = false
 				
@@ -67,7 +68,7 @@ return function()
 					end
 				end
 				if Flag then
-					v20()
+					v21()
 					
 					return Enum.ContextActionResult.Sink
 				end

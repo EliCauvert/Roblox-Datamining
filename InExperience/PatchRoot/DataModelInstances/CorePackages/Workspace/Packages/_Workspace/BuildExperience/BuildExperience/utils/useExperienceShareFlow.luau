@@ -1,6 +1,7 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
 local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local Logger = require(Parent.Loggers).Logger
 local UniverseConfigurationModule = require(Parent.DataHydration.UniverseConfiguration)
@@ -10,7 +11,7 @@ local SharePrivateExperienceModule = require(BuildExperience.utils.sharePrivateE
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 local FFlagBuildExperiencePrivateInvitesModule = require(BuildExperience.Flags.FFlagBuildExperiencePrivateInvites)
 local PrivacyType = UniverseConfigurationModule.PrivacyType
-local Signal = require(Parent.Signals).createSignal(nil)
+local Signal = SignalsModule.createSignal(nil)
 
 return function(UniverseId, p1)
 	-- upvalues: UseSharePublishedExperienceFunction (copy), ReactModule (copy), Signal (copy), UniverseConfigurationModule (copy), SignalsReactModule (copy), GameConfigurationLabelsModule (copy), PrivacyType (copy), FFlagBuildExperiencePrivateInvitesModule (copy), SendBuildExperienceEventModule (copy), SharePrivateExperienceModule (copy), Logger (copy)

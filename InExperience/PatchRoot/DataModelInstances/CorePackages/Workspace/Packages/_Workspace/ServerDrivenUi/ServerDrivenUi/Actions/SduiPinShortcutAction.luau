@@ -1,12 +1,13 @@
 ﻿local IXPService = game:GetService("IXPService")
 local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
 local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiActionType = SduiCoreSystemModule.SduiActionType
 local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 local FFlagPinShortcutEnableOnCompleteCallback = require(Parent.SharedFlags).FFlagPinShortcutEnableOnCompleteCallback
 local FFlagEdpPinnedShortcutsLogExposure = require(Parent.SharedFlags).FFlagEdpPinnedShortcutsLogExposure
 local FStringEdpPinnedShortcutsIxpLayer = require(Parent.SharedFlags).FStringEdpPinnedShortcutsIxpLayer
 local PinExperienceAndNotifyFunction = require(Parent.PinShortcut).pinExperienceAndNotify
-local PinExperienceShortcut = SduiCoreSystemModule.SduiActionType.PinExperienceShortcut
+local PinExperienceShortcut = SduiActionType.PinExperienceShortcut
 
 local function _()
 	return game:GetEngineFeature("PinShortcutServiceEnabled")

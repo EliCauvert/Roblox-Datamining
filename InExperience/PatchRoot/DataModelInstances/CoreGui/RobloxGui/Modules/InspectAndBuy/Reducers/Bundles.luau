@@ -1,18 +1,20 @@
 ﻿local CorePackages = game:GetService("CorePackages")
 local CryoModule = require(CorePackages.Packages.Cryo)
+local RoduxModule = require(CorePackages.Packages.Rodux)
 local Parent = script.Parent.Parent
 local ItemTypeEnum = require(CorePackages.Workspace.Packages.AvatarExperienceModel).Enums.ItemTypeEnum
 local FFlagAXEnableFetchAvatarPreviewModule = require(Parent.Flags.FFlagAXEnableFetchAvatarPreview)
+local FFlagAXEnableInspectAndBuyBulkPurchase = require(CorePackages.Workspace.Packages.SharedFlags).FFlagAXEnableInspectAndBuyBulkPurchase
 local BundleInfoModule = require(Parent.Models.BundleInfo)
 
-return require(CorePackages.Packages.Rodux).createReducer({}, {
+return RoduxModule.createReducer({}, {
 	[require(Parent.Actions.SetFavoriteBundle).name] = function(JoinResults, p1)
 		-- upvalues: CryoModule (copy), BundleInfoModule (copy)
 		JoinResults[p1.id] = CryoModule.Dictionary.join(CryoModule.Dictionary.join({}, JoinResults[p1.id] or {}), BundleInfoModule.fromGetFavoriteForAsset(p1.id, p1.isFavorite))
 		
 		return JoinResults
 	end,
-	[require(Parent.Actions.UpdateBulkPuchaseResults).name] = if require(CorePackages.Workspace.Packages.SharedFlags).FFlagAXEnableInspectAndBuyBulkPurchase then function(JoinResults, p1)
+	[require(Parent.Actions.UpdateBulkPuchaseResults).name] = if FFlagAXEnableInspectAndBuyBulkPurchase then function(JoinResults, p1)
 		-- upvalues: CryoModule (copy), BundleInfoModule (copy)
 		for _, item in p1.result.Items do
 			if item.type == Enum.MarketplaceProductType.AvatarBundle then

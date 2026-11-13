@@ -10,6 +10,7 @@ local FieldNames = AnalyticsModule.FieldNames
 local EventNames = AnalyticsModule.EventNames
 local SetupFireAnalyticsEventsModule = require(Parent.Analytics.setupFireAnalyticsEvents)
 local FormatContactsModule = require(Parent.Utils.formatContacts)
+local ContactsProtocol = DependenciesModule.ContactsProtocol
 local Dash = DependenciesModule.Dash
 local EnumScreens = DependenciesModule.SocialModalsCommon.EnumScreens
 local AmpApiProvider = DependenciesModule.AmpUpsell.AmpApiProvider
@@ -23,9 +24,7 @@ local UploadContactsSourcesModule = require(Parent.Analytics.Enums.UploadContact
 local GetFIntContactImporterUploadContactsMinModule = require(Parent.Flags.getFIntContactImporterUploadContactsMin)
 local DiscoverabilityAnalytics = DependenciesModule.DiscoverabilityAnalytics
 local ContactsListContainer = Roact.PureComponent:extend("ContactsListContainer")
-ContactsListContainer.defaultProps = {
-	contactsProtocol = DependenciesModule.ContactsProtocol.default
-}
+ContactsListContainer.defaultProps = { contactsProtocol = ContactsProtocol.default }
 
 function ContactsListContainer.init(p1)
 	-- upvalues: SetupFireAnalyticsEventsModule (copy), AnalyticsModule (copy), GetDeepValueFunction (copy), AmpApiProvider (copy), Promise (copy), EventNames (copy), FieldNames (copy), FormatContactsModule (copy), UploadContactsSourcesModule (copy), GetFIntContactImporterUploadContactsMinModule (copy), ConstantsModule (copy), AccessResponseEnum (copy), EnumScreens (copy), DiscoverabilityAnalytics (copy), GetFFlagFindFriendsClickedEventEnabledModule (copy), Dash (copy)
@@ -345,7 +344,7 @@ function ContactsListContainer.init(p1)
 		local PropOrParam = p1.getPropOrParam(ConstantsModule.OPEN_AMP_UPSELL)
 		p1.openAmpUpsell = if PropOrParam then function()
 			-- upvalues: AccessResponseEnum (upval), p1 (upval), GetFFlagFindFriendsClickedEventEnabledModule (upval), EventNames (upval), PropOrParam (copy), ConstantsModule (upval)
-			local function v52(Granted, _)
+			local function v53(Granted, _)
 				-- upvalues: AccessResponseEnum (upval), p1 (upval)
 				if Granted == AccessResponseEnum.Granted then
 					p1.getContacts()
@@ -356,7 +355,7 @@ function ContactsListContainer.init(p1)
 			if GetFFlagFindFriendsClickedEventEnabledModule() then
 				p1.fireAnalyticsEvent(EventNames.FindFriendsButtonClicked)
 			end
-			PropOrParam(ConstantsModule.SHOW_MATCHED_CONTACTS, v52)
+			PropOrParam(ConstantsModule.SHOW_MATCHED_CONTACTS, v53)
 		end else Dash.noop
 	end
 end

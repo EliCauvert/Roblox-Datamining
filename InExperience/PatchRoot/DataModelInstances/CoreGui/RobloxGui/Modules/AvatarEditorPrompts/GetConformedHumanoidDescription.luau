@@ -42,17 +42,17 @@ return function(HumanoidDescription1, p1)
 	return if HumanoidDescription1 == HumanoidDescription then if p1 then PromiseModule.resolve(v1) else PromiseModule.new(function(p2, p3)
 		-- upvalues: removeDefaultClothing (upval), v1 (upval)
 		removeDefaultClothing(v1, p2, p3)
-	end) else PromiseModule.new(function(Callback, Callback1)
+	end) else PromiseModule.new(function(Callback1, Callback)
 		-- upvalues: AvatarEditorService (upval), HumanoidDescription1 (copy), HumanoidDescription (upval), v1 (upval), p1 (copy), removeDefaultClothing (upval)
 		coroutine.wrap(function()
-			-- upvalues: AvatarEditorService (upval), HumanoidDescription1 (upval), HumanoidDescription (upval), v1 (upval), p1 (upval), Callback (copy), removeDefaultClothing (upval), Callback1 (copy)
+			-- upvalues: AvatarEditorService (upval), HumanoidDescription1 (upval), HumanoidDescription (upval), v1 (upval), p1 (upval), Callback1 (copy), removeDefaultClothing (upval), Callback (copy)
 			local Success, Result = pcall(function()
 				-- upvalues: AvatarEditorService (upval), HumanoidDescription1 (upval)
 				return AvatarEditorService:ConformToAvatarRulesAsync(HumanoidDescription1)
 			end)
 			
 			if not Success then
-				Callback1(Result)
+				Callback(Result)
 				
 				return
 			end
@@ -60,11 +60,11 @@ return function(HumanoidDescription1, p1)
 			v1 = Result
 			
 			if p1 then
-				Callback(Result)
+				Callback1(Result)
 				
 				return
 			else
-				removeDefaultClothing(Result, Callback, Callback1)
+				removeDefaultClothing(Result, Callback1, Callback)
 			end
 		end)()
 	end)

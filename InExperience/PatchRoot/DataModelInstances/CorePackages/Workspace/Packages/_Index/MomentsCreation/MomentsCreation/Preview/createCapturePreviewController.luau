@@ -2,7 +2,7 @@
 local _ = require(MomentsCreation.Types.CreationFlowTypes)
 local CreateSignalFunction = require(MomentsCreation.Parent.Signals).createSignal
 
-return function(p1, Callback, Callback1)
+return function(p1, Callback1, Callback)
 	-- upvalues: CreateSignalFunction (copy)
 	local Signal, Signal2 = CreateSignalFunction(0)
 	local Signal1, Signal2_1 = CreateSignalFunction(0)
@@ -40,11 +40,11 @@ return function(p1, Callback, Callback1)
 		end,
 		playback = {
 			getPosition = function(p2)
-				-- upvalues: Signal6 (copy), Callback (copy), Signal (copy)
+				-- upvalues: Signal6 (copy), Callback1 (copy), Signal (copy)
 				local SignalResult = Signal6(p2)
 				
 				if SignalResult == nil then
-					local CallbackResult = if Callback == nil then nil else Callback(p2)
+					local CallbackResult = if Callback1 == nil then nil else Callback1(p2)
 					
 					return if CallbackResult == nil then Signal(p2) else math.clamp(Signal(p2) - CallbackResult.startTime, 0, (math.max(0, CallbackResult.endTime - CallbackResult.startTime)))
 				else
@@ -52,11 +52,11 @@ return function(p1, Callback, Callback1)
 				end
 			end,
 			getDuration = function(p2)
-				-- upvalues: Signal6 (copy), Callback (copy), Signal1 (copy)
+				-- upvalues: Signal6 (copy), Callback1 (copy), Signal1 (copy)
 				local SignalResult = Signal6(p2)
 				
 				if SignalResult == nil then
-					local CallbackResult = if Callback == nil then nil else Callback(p2)
+					local CallbackResult = if Callback1 == nil then nil else Callback1(p2)
 					
 					return if CallbackResult == nil then Signal1(p2) else math.max(0, CallbackResult.endTime - CallbackResult.startTime)
 				else
@@ -70,12 +70,12 @@ return function(p1, Callback, Callback1)
 				return if SignalResult == nil then Signal3(p2) else SignalResult.getState(p2).timeLength
 			end,
 			getRegion = function(p2)
-				-- upvalues: Callback (copy)
-				return if Callback == nil then nil else Callback(p2)
-			end,
-			getMusic = function(p2)
 				-- upvalues: Callback1 (copy)
 				return if Callback1 == nil then nil else Callback1(p2)
+			end,
+			getMusic = function(p2)
+				-- upvalues: Callback (copy)
+				return if Callback == nil then nil else Callback(p2)
 			end,
 			getIsPlaying = function(p2)
 				-- upvalues: Signal6 (copy), Signal4 (copy)
@@ -136,7 +136,7 @@ return function(p1, Callback, Callback1)
 				end
 			end,
 			seek = function(p2)
-				-- upvalues: Signal6 (copy), Callback (copy), Signal2 (copy), v1 (ref)
+				-- upvalues: Signal6 (copy), Callback1 (copy), Signal2 (copy), v1 (ref)
 				local SignalResult = Signal6(false)
 				
 				if SignalResult ~= nil then
@@ -144,7 +144,7 @@ return function(p1, Callback, Callback1)
 					
 					return
 				end
-				local CallbackResult = if Callback == nil then nil else Callback(false)
+				local CallbackResult = if Callback1 == nil then nil else Callback1(false)
 				local v2 = p2 + (if CallbackResult == nil then 0 else CallbackResult.startTime)
 				Signal2(v2)
 				

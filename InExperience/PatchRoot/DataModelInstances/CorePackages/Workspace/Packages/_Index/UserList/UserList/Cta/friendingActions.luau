@@ -6,9 +6,10 @@ local Requests = DataHydrationModule.Friends.Requests
 local FriendsStore = DataHydrationModule.Friends.FriendsStore
 local FriendsStoreChallengeNetworkModule = require(UserList.Networking.friendsStoreChallengeNetwork)
 local FFlagEnableFriendsStoreChallengeInterceptor = require(Parent.SharedFlags).FFlagEnableFriendsStoreChallengeInterceptor
+local Images = require(Parent.UIBlox).App.ImageSet.Images
 local SetCurrentToastMessageFunction = require(Parent.ToastRodux).Actions.SetCurrentToastMessage
 local FriendingErrorCodesModule = require(script.Parent.FriendingErrorCodes)
-local IconsActionsFriendsFriendAdd = require(Parent.UIBlox).App.ImageSet.Images["icons/actions/friends/friendAdd"]
+local IconsActionsFriendsFriendAdd = Images["icons/actions/friends/friendAdd"]
 
 local function _(p1)
 	-- upvalues: ProfileCTAStore (copy)

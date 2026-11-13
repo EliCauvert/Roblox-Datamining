@@ -1,9 +1,10 @@
 ﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
 local HttpService = game:GetService("HttpService")
+local AvatarExperienceModelModule = require(Parent.AvatarExperienceModel)
 local HttpModule = require(Parent.Http)
 local HttpClientModule = require(Parent.HttpClient)
 local _ = require(script.Parent.AvatarInventoryStoreTypes)
-local InventoryOutfitTypeToInventoryTypeId = require(Parent.AvatarExperienceModel).Constants.InventoryOutfitTypeToInventoryTypeId
+local InventoryOutfitTypeToInventoryTypeId = AvatarExperienceModelModule.Constants.InventoryOutfitTypeToInventoryTypeId
 
 local function parseAvatarInventoryResponse(p1)
 	local NextPageToken = if typeof(p1) == "table" then p1.nextPageToken else nil

@@ -4,13 +4,18 @@ local AppChatNetworkingModule = require(Parent.AppChatNetworking)
 local RetrievalStatus = require(Parent.Http).Enum.RetrievalStatus
 local ConversationModule = require(AppChat.Models.Conversation)
 local ConversationChannelsModule = require(AppChat.Models.ConversationChannels)
+local CreateConversationModule = require(AppChat.Conversations.Thunks.createConversation)
+local CreateFriendConversationModule = require(AppChat.Conversations.Thunks.createFriendConversation)
 local ModerationType = require(AppChat.Models.ConversationChannels).ModerationType
 local ExpandToGroupConversationModule = require(AppChat.Conversations.Thunks.expandToGroupConversation)
 local FetchLatestConversationDetailsModule = require(AppChat.Conversations.Thunks.fetchLatestConversationDetails)
 local GetConversationTitleModule = require(AppChat.Conversations.getConversationTitle)
+local NavigateIntoSquadLobbyModule = require(AppChat.Conversations.Thunks.NavigateIntoSquadLobby)
 local UseGetConversationFromIdModule = require(AppChat.Hooks.useGetConversationFromId)
 local UseGetConversationHasGroupUpFromIdModule = require(AppChat.Hooks.useGetConversationHasGroupUpFromId)
 local UseIsUserPendingModule = require(AppChat.Hooks.useIsUserPending)
+local UseIsChatEnabledModule = require(AppChat.Hooks.useIsChatEnabled)
+local UseIsChatUserMessagesEnabledModule = require(AppChat.Hooks.useIsChatUserMessagesEnabled)
 local UseChatSettingsRetrievalStatusModule = require(AppChat.Hooks.useChatSettingsRetrievalStatus)
 local FFlagReadAppChatFetchingVariable = require(Parent.SharedFlags).FFlagReadAppChatFetchingVariable
 local FFlagAppChatNavigateBackIfOSAUnacknowledged = require(Parent.SharedFlags).FFlagAppChatNavigateBackIfOSAUnacknowledged
@@ -34,13 +39,13 @@ return {
 			return Result.id
 		end)
 	end,
-	navigateIntoSquadLobby = require(AppChat.Conversations.Thunks.NavigateIntoSquadLobby),
+	navigateIntoSquadLobby = NavigateIntoSquadLobbyModule,
 	removeUserFromParentChannel = function(Callback, p1, p2)
 		-- upvalues: AppChatNetworkingModule (copy)
 		return Callback(AppChatNetworkingModule.rodux.RemoveUserFromConversation.API(p1, p2))
 	end,
-	createConversation = require(AppChat.Conversations.Thunks.createConversation),
-	createFriendConversation = require(AppChat.Conversations.Thunks.createFriendConversation),
+	createConversation = CreateConversationModule,
+	createFriendConversation = CreateFriendConversationModule,
 	createExperienceInvite = if require(Parent.SharedFlags).FFlagEnableSquadRegroupExperimentation then function(p1, p2, p3)
 		-- upvalues: CreateExperienceInviteFunction (copy)
 		return CreateExperienceInviteFunction(p1, p2, p3)
@@ -73,14 +78,14 @@ return {
 		-- upvalues: UseGetConversationFromIdModule (copy), GetConversationTitleModule (copy)
 		return GetConversationTitleModule((UseGetConversationFromIdModule(p1)))
 	end,
-	useIsChatEnabled = require(AppChat.Hooks.useIsChatEnabled),
+	useIsChatEnabled = UseIsChatEnabledModule,
 	useIsLoadingChatSettings = function()
 		-- upvalues: UseChatSettingsRetrievalStatusModule (copy), FFlagReadAppChatFetchingVariable (copy), RetrievalStatus (copy)
 		local UseChatSettingsRetrievalStatusModuleResult = UseChatSettingsRetrievalStatusModule()
 		
 		return if FFlagReadAppChatFetchingVariable then UseChatSettingsRetrievalStatusModuleResult ~= RetrievalStatus.Done else nil
 	end,
-	useIsChatUserMessagesEnabled = require(AppChat.Hooks.useIsChatUserMessagesEnabled),
+	useIsChatUserMessagesEnabled = UseIsChatUserMessagesEnabledModule,
 	shouldShowOSAForConversation = if FFlagAppChatNavigateBackIfOSAUnacknowledged then ShouldShowOSAForConversationModule else nil,
 	showGroupOSADialog = function(ConversationId, Callback, Callback1)
 		-- upvalues: GetOverlayStoreModule (copy), OverlayTypesModule (copy), HttpService (copy)

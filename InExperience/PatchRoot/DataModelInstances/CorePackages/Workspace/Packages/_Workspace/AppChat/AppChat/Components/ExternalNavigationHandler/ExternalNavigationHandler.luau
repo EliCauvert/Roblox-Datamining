@@ -1,9 +1,10 @@
 ﻿local Parent = script:FindFirstAncestor("AppChat").Parent
 local ReactModule = require(Parent.React)
+local RoactUtilsModule = require(Parent.RoactUtils)
 local MemoFunction = ReactModule.memo
 local UseEffectFunction = ReactModule.useEffect
 local UseRefFunction = ReactModule.useRef
-local UsePreviousFunction = require(Parent.RoactUtils).Hooks.usePrevious
+local UsePreviousFunction = RoactUtilsModule.Hooks.usePrevious
 
 function ExternalNavigationHandler(p1)
 	-- upvalues: UseRefFunction (copy), UseEffectFunction (copy), UsePreviousFunction (copy)
@@ -14,7 +15,7 @@ function ExternalNavigationHandler(p1)
 	
 	local UseRefResult = UseRefFunction({})
 	
-	local function v4()
+	local function v5()
 		-- upvalues: p1 (copy), UseRefResult (copy)
 		local Screen = p1.screen
 		local NavigationByScreenEntry: (any) -> () = p1.navigationByScreen[Screen]
@@ -31,9 +32,9 @@ function ExternalNavigationHandler(p1)
 	end
 	
 	UseEffectFunction(function()
-		-- upvalues: p1 (copy), v4 (copy)
+		-- upvalues: p1 (copy), v5 (copy)
 		if p1.requestId ~= p1.completedRequestId and p1.screen then
-			v4()
+			v5()
 		end
 	end, { p1.requestId, p1.completedRequestId, p1.screen })
 	local UsePreviousResult = UsePreviousFunction(p1.navigationByScreen)

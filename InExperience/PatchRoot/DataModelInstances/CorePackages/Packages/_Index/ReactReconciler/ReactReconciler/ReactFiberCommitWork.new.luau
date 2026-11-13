@@ -162,14 +162,14 @@ local function v74()
 	return DidWarnAboutReassigningProps
 end
 
-local Callback6 = nil
-local getHostSibling = nil
-local Callback1 = nil
 local Callback5 = nil
+local getHostSibling = nil
+local Callback2 = nil
+local Callback6 = nil
+local Callback4 = nil
+local Callback1 = nil
 local Callback3 = nil
 local Callback = nil
-local Callback2 = nil
-local Callback4 = nil
 local commitNestedUnmounts = nil
 local commitUnmount = nil
 local v1 = nil
@@ -357,7 +357,7 @@ function commitProfilerPassiveEffect(p1, p2)
 end
 
 local function recursivelyCommitLayoutEffects(Child, p1, CaptureCommitPhaseError, SchedulePassiveEffectCallback)
-	-- upvalues: captureCommitPhaseError (ref), schedulePassiveEffectCallback (ref), Profiler (copy), EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), v1 (ref), ReactFeatureFlags (copy), LayoutMask (copy), NoFlags (copy), DEV (copy), Current (copy), SetCurrentFiberFunction (copy), InvokeGuardedCallbackFunction (copy), recursivelyCommitLayoutEffects (copy), HasCaughtErrorFunction (copy), ClearCaughtErrorFunction (copy), ResetCurrentFiberFunction (copy), DescribeError (copy), Update (copy), Callback7 (copy), ReactCurrentFiberModule (copy), Count (ref), YOLO (copy), FunctionComponent (copy), ForwardRef (copy), SimpleMemoComponent (copy), Block (copy), ProfileMode (copy), StartLayoutEffectTimerFunction (copy), commitHookEffectListMount (copy), Layout (copy), HasEffect (copy), RecordLayoutEffectDurationFunction (copy), PassiveMask (copy), ClassComponent (copy), Callback2 (ref), HostRoot (copy), Callback3 (ref), HostComponent (copy), Callback (ref), SuspenseComponent (copy), FundamentalComponent (copy), HostPortal (copy), HostText (copy), IncompleteClassComponent (copy), LegacyHiddenComponent (copy), OffscreenComponent (copy), ScopeComponent (copy), SuspenseListComponent (copy), InvariantFunction (copy), Ref (copy)
+	-- upvalues: captureCommitPhaseError (ref), schedulePassiveEffectCallback (ref), Profiler (copy), EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), v1 (ref), ReactFeatureFlags (copy), LayoutMask (copy), NoFlags (copy), DEV (copy), Current (copy), SetCurrentFiberFunction (copy), InvokeGuardedCallbackFunction (copy), recursivelyCommitLayoutEffects (copy), HasCaughtErrorFunction (copy), ClearCaughtErrorFunction (copy), ResetCurrentFiberFunction (copy), DescribeError (copy), Update (copy), Callback7 (copy), ReactCurrentFiberModule (copy), Count (ref), YOLO (copy), FunctionComponent (copy), ForwardRef (copy), SimpleMemoComponent (copy), Block (copy), ProfileMode (copy), StartLayoutEffectTimerFunction (copy), commitHookEffectListMount (copy), Layout (copy), HasEffect (copy), RecordLayoutEffectDurationFunction (copy), PassiveMask (copy), ClassComponent (copy), Callback3 (ref), HostRoot (copy), Callback4 (ref), HostComponent (copy), Callback1 (ref), SuspenseComponent (copy), FundamentalComponent (copy), HostPortal (copy), HostText (copy), IncompleteClassComponent (copy), LegacyHiddenComponent (copy), OffscreenComponent (copy), ScopeComponent (copy), SuspenseListComponent (copy), InvariantFunction (copy), Ref (copy)
 	if CaptureCommitPhaseError ~= nil then
 		captureCommitPhaseError = CaptureCommitPhaseError
 	end
@@ -565,11 +565,11 @@ local function recursivelyCommitLayoutEffects(Child, p1, CaptureCommitPhaseError
 					schedulePassiveEffectCallback()
 				end
 			elseif Tag == ClassComponent then
-				Callback2(Child)
-			elseif Tag == HostRoot then
 				Callback3(Child)
+			elseif Tag == HostRoot then
+				Callback4(Child)
 			elseif Tag == HostComponent then
-				Callback(Child)
+				Callback1(Child)
 			elseif Tag == SuspenseComponent then
 				commitSuspenseHydrationCallbacks(p1, Child)
 			elseif Tag ~= FundamentalComponent and Tag ~= HostPortal and Tag ~= HostText and Tag ~= IncompleteClassComponent and Tag ~= LegacyHiddenComponent and Tag ~= OffscreenComponent and Tag ~= ScopeComponent and Tag ~= SuspenseListComponent then
@@ -654,7 +654,7 @@ function commitLayoutEffectsForProfiler(p2, p3)
 	end
 end
 
-Callback2 = function(p2)
+Callback3 = function(p2)
 	-- upvalues: Update (copy), DEV (copy), v74 (copy), Console (copy), GetComponentNameFunction (copy), EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), ProfileMode (copy), StartLayoutEffectTimerFunction (copy), DescribeError (copy), RecordLayoutEffectDurationFunction (copy), ResolveDefaultPropsFunction (copy), CommitUpdateQueueFunction (copy)
 	local StateNode = p2.stateNode
 	local Alternate = p2.alternate
@@ -726,7 +726,7 @@ Callback2 = function(p2)
 	end
 end
 
-Callback3 = function(p2)
+Callback4 = function(p2)
 	-- upvalues: HostComponent (copy), GetPublicInstanceFunction (copy), ClassComponent (copy), CommitUpdateQueueFunction (copy)
 	local UpdateQueue = p2.updateQueue
 	
@@ -746,7 +746,7 @@ Callback3 = function(p2)
 	end
 end
 
-Callback = function(p2)
+Callback1 = function(p2)
 	-- upvalues: Update (copy), CommitMountFunction (copy)
 	local StateNode = p2.stateNode
 	
@@ -828,7 +828,7 @@ function commitDetachRef(p2)
 end
 
 commitUnmount = function(p2, Child, p3, p4)
-	-- upvalues: OnCommitUnmountFunction (copy), FunctionComponent (copy), ForwardRef (copy), MemoComponent (copy), SimpleMemoComponent (copy), Block (copy), Layout (copy), NoFlags1 (copy), EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), ProfileMode (copy), StartLayoutEffectTimerFunction (copy), DescribeError (copy), captureCommitPhaseError (ref), RecordLayoutEffectDurationFunction (copy), ClassComponent (copy), HostComponent (copy), HostPortal (copy), SupportsMutation (copy), Callback4 (ref), SupportsPersistence (copy), unimplemented (copy)
+	-- upvalues: OnCommitUnmountFunction (copy), FunctionComponent (copy), ForwardRef (copy), MemoComponent (copy), SimpleMemoComponent (copy), Block (copy), Layout (copy), NoFlags1 (copy), EnableProfilerTimer (copy), EnableProfilerCommitHooks (copy), ProfileMode (copy), StartLayoutEffectTimerFunction (copy), DescribeError (copy), captureCommitPhaseError (ref), RecordLayoutEffectDurationFunction (copy), ClassComponent (copy), HostComponent (copy), HostPortal (copy), SupportsMutation (copy), Callback (ref), SupportsPersistence (copy), unimplemented (copy)
 	OnCommitUnmountFunction(Child)
 	
 	if Child.tag == FunctionComponent or Child.tag == ForwardRef or Child.tag == MemoComponent or Child.tag == SimpleMemoComponent or Child.tag == Block then
@@ -902,7 +902,7 @@ commitUnmount = function(p2, Child, p3, p4)
 		return
 	elseif Child.tag ~= HostPortal then return end
 	if SupportsMutation then
-		Callback4(p2, Child, p3, p4)
+		Callback(p2, Child, p3, p4)
 		
 		return
 	end
@@ -947,10 +947,10 @@ local _ = function(p5)
 end
 
 local function getHostParentFiber(p5)
-	-- upvalues: Callback6 (ref), Error1 (copy)
+	-- upvalues: Callback5 (ref), Error1 (copy)
 	local Return = p5.return_
 	while Return ~= nil do
-		if Callback6(Return) then
+		if Callback5(Return) then
 			return Return
 		end
 		Return = Return.return_
@@ -958,19 +958,19 @@ local function getHostParentFiber(p5)
 	error(Error1.new("Expected to find a host parent. This error is likely caused by a bug in React. Please file an issue."))
 end
 
-Callback6 = function(Return): boolean
+Callback5 = function(Return): boolean
 	-- upvalues: HostComponent (copy), HostRoot (copy), HostPortal (copy)
 	return Return.tag == HostComponent or (Return.tag == HostRoot or Return.tag == HostPortal)
 end
 
 getHostSibling = function(Child)
-	-- upvalues: Callback6 (ref), HostComponent (copy), HostText (copy), DehydratedFragment (copy), Placement (copy), HostPortal (copy)
+	-- upvalues: Callback5 (ref), HostComponent (copy), HostText (copy), DehydratedFragment (copy), Placement (copy), HostPortal (copy)
 	local Child1 = Child
 	local Flag = nil
 	while true do
 		Flag = false
 		while Child1.sibling == nil do
-			if Child1.return_ == nil or Callback6(Child1.return_) then
+			if Child1.return_ == nil or Callback5(Child1.return_) then
 				return nil
 			end
 			Child1 = Child1.return_
@@ -997,7 +997,7 @@ getHostSibling = function(Child)
 end
 
 local function commitPlacement(p6)
-	-- upvalues: SupportsMutation (copy), getHostParentFiber (copy), HostComponent (copy), HostRoot (copy), HostPortal (copy), InvariantFunction (copy), ContentReset (copy), ResetTextContentFunction (copy), IsNotSupportsChildOrdering (copy), getHostSibling (ref), Callback5 (ref), Callback1 (ref)
+	-- upvalues: SupportsMutation (copy), getHostParentFiber (copy), HostComponent (copy), HostRoot (copy), HostPortal (copy), InvariantFunction (copy), ContentReset (copy), ResetTextContentFunction (copy), IsNotSupportsChildOrdering (copy), getHostSibling (ref), Callback6 (ref), Callback2 (ref)
 	if not SupportsMutation then return end
 	local HostParentFiber = getHostParentFiber(p6)
 	local ContainerInfo = nil
@@ -1023,16 +1023,16 @@ local function commitPlacement(p6)
 	local HostSibling = if IsNotSupportsChildOrdering then nil else getHostSibling(p6)
 	
 	if Flag then
-		Callback5(p6, HostSibling, ContainerInfo)
+		Callback6(p6, HostSibling, ContainerInfo)
 		
 		return
 	else
-		Callback1(p6, HostSibling, ContainerInfo)
+		Callback2(p6, HostSibling, ContainerInfo)
 	end
 end
 
-Callback5 = function(Child, p6, ContainerInfo)
-	-- upvalues: HostComponent (copy), HostText (copy), InsertInContainerBeforeFunction (copy), AppendChildToContainerFunction (copy), HostPortal (copy), Callback5 (ref)
+Callback6 = function(Child, p6, ContainerInfo)
+	-- upvalues: HostComponent (copy), HostText (copy), InsertInContainerBeforeFunction (copy), AppendChildToContainerFunction (copy), HostPortal (copy), Callback6 (ref)
 	local Tag = Child.tag
 	
 	if Tag == HostComponent or Tag == HostText then
@@ -1052,18 +1052,18 @@ Callback5 = function(Child, p6, ContainerInfo)
 		local Child1 = Child.child
 		
 		if Child1 ~= nil then
-			Callback5(Child1, p6, ContainerInfo)
+			Callback6(Child1, p6, ContainerInfo)
 			local Sibling = Child1.sibling
 			while Sibling ~= nil do
-				Callback5(Sibling, p6, ContainerInfo)
+				Callback6(Sibling, p6, ContainerInfo)
 				Sibling = Sibling.sibling
 			end
 		end
 	end
 end
 
-Callback1 = function(Child, p7, ContainerInfo)
-	-- upvalues: HostComponent (copy), HostText (copy), InsertBeforeFunction (copy), AppendChildFunction (copy), HostPortal (copy), Callback1 (ref)
+Callback2 = function(Child, p7, ContainerInfo)
+	-- upvalues: HostComponent (copy), HostText (copy), InsertBeforeFunction (copy), AppendChildFunction (copy), HostPortal (copy), Callback2 (ref)
 	local Tag = Child.tag
 	
 	if Tag == HostComponent or Tag == HostText then
@@ -1083,17 +1083,17 @@ Callback1 = function(Child, p7, ContainerInfo)
 		local Child1 = Child.child
 		
 		if Child1 ~= nil then
-			Callback1(Child1, p7, ContainerInfo)
+			Callback2(Child1, p7, ContainerInfo)
 			local Sibling = Child1.sibling
 			while Sibling ~= nil do
-				Callback1(Sibling, p7, ContainerInfo)
+				Callback2(Sibling, p7, ContainerInfo)
 				Sibling = Sibling.sibling
 			end
 		end
 	end
 end
 
-Callback4 = function(p8, Child, p9, p10)
+Callback = function(p8, Child, p9, p10)
 	-- upvalues: Error1 (copy), HostComponent (copy), HostRoot (copy), HostPortal (copy), HostText (copy), commitNestedUnmounts (ref), RemoveChildFromContainerFunction (copy), RemoveChildFunction (copy), commitUnmount (ref)
 	local Child1 = Child
 	local Flag = false
@@ -1167,8 +1167,8 @@ Callback4 = function(p8, Child, p9, p10)
 end
 
 local function commitDeletion(p11, Child, p12, p13)
-	-- upvalues: Callback4 (ref), EnableNewTreeCleanupPath (copy)
-	Callback4(p11, Child, p12, p13)
+	-- upvalues: Callback (ref), EnableNewTreeCleanupPath (copy)
+	Callback(p11, Child, p12, p13)
 	local Alternate = if EnableNewTreeCleanupPath then nil else Child.alternate
 	local Alternate1 = Child.alternate
 	

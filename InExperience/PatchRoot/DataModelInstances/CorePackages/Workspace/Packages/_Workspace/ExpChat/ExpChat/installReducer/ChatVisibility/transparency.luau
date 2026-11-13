@@ -1,7 +1,15 @@
 ﻿local ExpChat = script:FindFirstAncestor("ExpChat")
 local Parent = ExpChat.Parent
+local ExpChatSharedModule = require(Parent.ExpChatShared)
+local RoduxModule = require(Parent.Rodux)
 local Dictionary = require(Parent.llama).Dictionary
 local Actions = ExpChat.Actions
+local ChatInputBarConfigurationEnabledModule = require(Actions.ChatInputBarConfigurationEnabled)
+local ChatTopBarButtonActivatedModule = require(Actions.ChatTopBarButtonActivated)
+local SetCoreGuiEnabledChangedModule = require(Actions.SetCoreGuiEnabledChanged)
+local ClientAppLoaded = ExpChatSharedModule.Actions.ClientAppLoaded
+local UserInteractionModule = require(ExpChat.Actions.UserInteraction)
+local IncomingMessageReceivedModule = require(Actions.IncomingMessageReceived)
 local config = {
 	textDurationUntilFadeout = 30,
 	backgroundDurationUntilFadeout = 3.5,
@@ -29,24 +37,24 @@ local function resetTextOnly(p1)
 	})
 end
 
-return require(Parent.Rodux).createReducer(config, {
-	[require(Actions.ChatInputBarConfigurationEnabled).name] = function(p1, p2)
+return RoduxModule.createReducer(config, {
+	[ChatInputBarConfigurationEnabledModule.name] = function(p1, p2)
 		-- upvalues: reset (copy)
 		return if p2.enabled then reset(p1) else p1
 	end,
-	[require(Actions.ChatTopBarButtonActivated).name] = function(p1, p2)
+	[ChatTopBarButtonActivatedModule.name] = function(p1, p2)
 		-- upvalues: reset (copy)
 		return if p2.isVisible then reset(p1) else p1
 	end,
-	[require(Actions.SetCoreGuiEnabledChanged).name] = function(p1, p2)
+	[SetCoreGuiEnabledChangedModule.name] = function(p1, p2)
 		-- upvalues: reset (copy)
 		return if p2.enabled then reset(p1) else p1
 	end,
-	[require(Parent.ExpChatShared).Actions.ClientAppLoaded.name] = function(p1, _)
+	[ClientAppLoaded.name] = function(p1, _)
 		-- upvalues: reset (copy)
 		return reset(p1)
 	end,
-	[require(ExpChat.Actions.UserInteraction).name] = function(p1, p2)
+	[UserInteractionModule.name] = function(p1, p2)
 		-- upvalues: Dictionary (copy), config (copy), reset (copy)
 		if p2.interaction == "focus" then
 			local ClockTime = os.clock()
@@ -68,7 +76,7 @@ return require(Parent.Rodux).createReducer(config, {
 			return reset(p1)
 		end
 	end,
-	[require(Actions.IncomingMessageReceived).name] = function(p1, _)
+	[IncomingMessageReceivedModule.name] = function(p1, _)
 		-- upvalues: resetTextOnly (copy)
 		return resetTextOnly(p1)
 	end

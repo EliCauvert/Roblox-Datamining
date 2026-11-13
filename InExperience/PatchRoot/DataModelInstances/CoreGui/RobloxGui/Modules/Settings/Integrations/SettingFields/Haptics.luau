@@ -1,6 +1,7 @@
 ﻿local GameSettings = UserSettings().GameSettings
 local SettingsServiceModule = require(game:GetService("CorePackages").Workspace.Packages.SettingsService)
 local ValueChangedSignal = SettingsServiceModule.ValueChangedSignal
+local SettingEnum = SettingsServiceModule.SettingEnum
 local config = { ON = true, OFF = false }
 local config1 = { MAX = 1, MIN = 0 }
 
@@ -8,7 +9,7 @@ return {
 	id = "haptics",
 	label = "CoreScripts.InGameMenu.GameSettings.Haptics",
 	alreadyLocalized = false,
-	field_type = SettingsServiceModule.SettingEnum.Toggle,
+	field_type = SettingEnum.Toggle,
 	layoutOrder = require(script:FindFirstAncestor("Settings").Integrations.Constants).GAMESETTINGS.LAYOUT_ORDER.HapticsFrame,
 	onChanged = (function()
 		-- upvalues: GameSettings (copy), ValueChangedSignal (copy), config1 (copy), config (copy)

@@ -3,6 +3,7 @@ local CryoModule = require(CorePackages.Packages.Cryo)
 local RoactModule = require(CorePackages.Packages.Roact)
 local ReactModule = require(CorePackages.Packages.React)
 local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
 local FoundationModule = require(CorePackages.Packages.Foundation)
 local TModule = require(CorePackages.Packages.t)
 local Parent = script.Parent.Parent
@@ -15,7 +16,7 @@ local FFlagHidePremiumIconography = SharedFlagsModule.FFlagHidePremiumIconograph
 local FFlagCoreUiMigrateUIBloxToFoundation = SharedFlagsModule.FFlagCoreUiMigrateUIBloxToFoundation
 local FFlagPlayerListReduceRerendersModule = require(Parent.Parent.Flags.FFlagPlayerListReduceRerenders)
 local FFlagPlayerListFoundationSubscriptionIcon = PlayerListModule.Flags.FFlagPlayerListFoundationSubscriptionIcon
-local ImageSetLabel = require(CorePackages.Packages.UIBlox).Core.ImageSet.ImageSetLabel
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 
 local function _(p1): boolean
 	return p1 ~= nil and (p1 ~= "" and p1:match("^%w+://.*$") == nil)
@@ -199,9 +200,9 @@ local function mapStateToProps(p1)
 	}
 end
 
-local function v21(p1)
+local function v22(p1)
 	-- upvalues: UseLayoutValuesFunction (copy), ReactModule (copy), PlayerIcon (copy), CryoModule (copy)
 	return ReactModule.createElement(PlayerIcon, CryoModule.Dictionary.join(p1, { layoutValues = UseLayoutValuesFunction() }))
 end
 
-return if FFlagPlayerListReduceRerendersModule then ReactModule.memo(RoactRoduxModule.connect(mapStateToProps, nil)(v21)) else RoactRoduxModule.connect(mapStateToProps, nil)(v21)
+return if FFlagPlayerListReduceRerendersModule then ReactModule.memo(RoactRoduxModule.connect(mapStateToProps, nil)(v22)) else RoactRoduxModule.connect(mapStateToProps, nil)(v22)

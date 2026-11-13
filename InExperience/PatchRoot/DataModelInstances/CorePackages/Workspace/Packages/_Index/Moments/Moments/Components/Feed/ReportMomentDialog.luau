@@ -1,11 +1,12 @@
 ﻿local Parent = script:FindFirstAncestor("Moments").Parent
 local FoundationModule = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
 local ReactModule = require(Parent.React)
 local Dialog = FoundationModule.Dialog
 local RadioGroup = FoundationModule.RadioGroup
 local Text = FoundationModule.Text
 local View = FoundationModule.View
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local config = {
 	report = "Feature.Moments.Action.Report",
 	cancel = "Feature.Moments.Action.Cancel",

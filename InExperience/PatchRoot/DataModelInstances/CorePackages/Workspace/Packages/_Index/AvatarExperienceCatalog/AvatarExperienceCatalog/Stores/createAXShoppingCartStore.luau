@@ -5,12 +5,13 @@ local TutilsModule = require(Parent.tutils)
 local AvatarExperienceCommonModule = require(Parent.AvatarExperienceCommon)
 local PurchaseItemsErrorStatusMapModule = require(AvatarExperienceCatalog.Enums.PurchaseItemsErrorStatusMap)
 local CryoModule = require(Parent.Cryo)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local ItemTileEnums = require(Parent.UIBlox).Tile.ItemTileEnums
 local GetTryOnItemReducerKeyFunction = AvatarExperienceCommonModule.Utils.getTryOnItemReducerKey
 local Constants = AvatarExperienceCommonModule.Constants
 local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local FFlagAXDurablesForMIS = AvatarExperienceFlagsModule.FFlagAXDurablesForMIS
-local FFlagAXMISWithBlackbird = require(Parent.SharedFlags).FFlagAXMISWithBlackbird
+local FFlagAXMISWithBlackbird = SharedFlagsModule.FFlagAXMISWithBlackbird
 local FFlagAXMISSmallUIChanges = AvatarExperienceFlagsModule.FFlagAXMISSmallUIChanges
 local FFlagAXMISWithOffers = AvatarExperienceFlagsModule.FFlagAXMISWithOffers
 local FFlagAXGifting = AvatarExperienceFlagsModule.FFlagAXGifting
@@ -126,15 +127,15 @@ return function()
 	-- upvalues: CreateSignalFunction (copy), FFlagAXMISWithBlackbird (copy), CreateComputedFunction (copy), PurchaseItemsErrorStatusMapModule (copy), TutilsModule (copy), GetTryOnItemReducerKeyFunction (copy), getItemCartData (copy), CryoModule (copy), FFlagAXDurablesForMIS (copy)
 	local Signal, Signal2 = CreateSignalFunction({})
 	local Signal1, Signal2_1 = CreateSignalFunction(0)
-	local Callback = nil
 	local Callback1 = nil
+	local Callback = nil
 	
 	if FFlagAXMISWithBlackbird then
-		Callback, Callback1 = CreateSignalFunction({})
+		Callback1, Callback = CreateSignalFunction({})
 	end
 	local Computed = if FFlagAXMISWithBlackbird then CreateComputedFunction(function(p3)
-		-- upvalues: Callback (ref)
-		return Callback(p3)
+		-- upvalues: Callback1 (ref)
+		return Callback1(p3)
 	end) else nil
 	
 	local function updateItemPrice(p3, p4, PriceInRobux, SelectedTimedOptionDays)
@@ -235,7 +236,7 @@ return function()
 			return NewOriginalPrice
 		end),
 		syncFromTryOns = function(List, p7)
-			-- upvalues: Signal (copy), GetTryOnItemReducerKeyFunction (upval), getItemCartData (upval), CryoModule (upval), FFlagAXMISWithBlackbird (upval), Callback1 (ref), TutilsModule (upval), Signal2 (copy), Signal2_1 (copy)
+			-- upvalues: Signal (copy), GetTryOnItemReducerKeyFunction (upval), getItemCartData (upval), CryoModule (upval), FFlagAXMISWithBlackbird (upval), Callback (ref), TutilsModule (upval), Signal2 (copy), Signal2_1 (copy)
 			local SignalResult = Signal(false)
 			local JoinResults = {}
 			local Discounts = nil
@@ -251,7 +252,7 @@ return function()
 				end
 			end
 			if FFlagAXMISWithBlackbird and Discounts then
-				Callback1(Discounts)
+				Callback(Discounts)
 			end
 			if not TutilsModule.deepEqual(SignalResult, JoinResults) then
 				Signal2(JoinResults)

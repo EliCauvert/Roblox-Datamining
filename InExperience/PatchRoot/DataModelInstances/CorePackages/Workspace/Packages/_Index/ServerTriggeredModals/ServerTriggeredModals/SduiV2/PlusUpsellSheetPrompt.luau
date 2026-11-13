@@ -2,6 +2,7 @@
 local Parent = ServerTriggeredModals.Parent
 local ReactModule = require(Parent.React)
 local RoactNavigationModule = require(Parent.RoactNavigation)
+local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local LocalUserIdStore = require(Parent.LocalUserIdStore).LocalUserIdStore
 local RobloxSubscriptionPurchaseAppModule = require(Parent.RobloxSubscriptionPurchaseApp)
@@ -18,7 +19,7 @@ local SurfaceName = RobloxSubscriptionPurchaseAppModule.SurfaceName
 local SurfaceContext = RobloxSubscriptionPurchaseAppModule.SurfaceContext
 local RobloxPlusSheetKind = RobloxSubscriptionPurchaseAppModule.RobloxPlusSheetKind
 local Tbl = {}
-local Signal, Signal2 = require(Parent.Signals).createSignal(nil)
+local Signal, Signal2 = SignalsModule.createSignal(nil)
 
 local function useIsScreenFocused()
 	-- upvalues: ReactModule (copy), RoactNavigationModule (copy)

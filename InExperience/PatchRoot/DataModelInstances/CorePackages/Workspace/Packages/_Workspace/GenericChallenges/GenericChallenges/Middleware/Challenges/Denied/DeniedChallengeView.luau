@@ -134,7 +134,7 @@ local function DialogContent(p1)
 		Backdrop = ReactModule.createElement("Frame", {
 			Size = UDim2.fromScale(1, 1),
 			BackgroundColor3 = UseTokensResult.Color.Common.Backdrop.Color3,
-			BackgroundTransparency = UseTokensResult.Color.Common.Backdrop.Transparency,
+			BackgroundTransparency = if p1.opaqueBackdrop then 0 else UseTokensResult.Color.Common.Backdrop.Transparency,
 			BorderSizePixel = 0,
 			ZIndex = 1,
 			[ReactModule.Change.AbsoluteSize] = function(Frame)
@@ -225,6 +225,18 @@ end
 
 return function(p2)
 	-- upvalues: ReactModule (copy), ReactFocusNavigationModule (copy), FoundationProvider (copy), ColorMode (copy), FocusNavigableSurfaceRegistry (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), DialogContent (copy)
+	local UseMemoResult = ReactModule.useMemo(function()
+		-- upvalues: ReactFocusNavigationModule (upval)
+		return ReactFocusNavigationModule.FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)
+	end, {})
+	ReactModule.useEffect(function()
+		-- upvalues: UseMemoResult (copy)
+		return function()
+			-- upvalues: UseMemoResult (upval)
+			UseMemoResult:teardown()
+		end
+	end, { UseMemoResult })
+	
 	return ReactModule.createElement("ScreenGui", {
 		DisplayOrder = 200,
 		IgnoreGuiInset = true,
@@ -232,19 +244,18 @@ return function(p2)
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	}, {
 		FoundationRoot = ReactModule.createElement(FoundationProvider, { colorMode = ColorMode.Dark }, {
-			FocusNavigationProvider = ReactModule.createElement(ReactFocusNavigationModule.FocusNavigationContext.Provider, {
-				value = ReactModule.useMemo(function()
-					-- upvalues: ReactFocusNavigationModule (upval)
-					return ReactFocusNavigationModule.FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)
-				end, {})
-			}, {
+			FocusNavigationProvider = ReactModule.createElement(ReactFocusNavigationModule.FocusNavigationContext.Provider, { value = UseMemoResult }, {
 				FocusNavigationRegistryProvider = ReactModule.createElement(FocusNavigableSurfaceRegistry.Provider, nil, {
 					FocusNavigableSurface = ReactModule.createElement(FocusRoot, {
 						isIsolated = true,
 						isAutoFocusRoot = true,
 						surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.ModerationOverlay
 					}, {
-						Content = ReactModule.createElement(DialogContent, { prompt = p2.prompt, onAcknowledge = p2.onAcknowledge })
+						Content = ReactModule.createElement(DialogContent, {
+							prompt = p2.prompt,
+							onAcknowledge = p2.onAcknowledge,
+							opaqueBackdrop = p2.opaqueBackdrop
+						})
 					})
 				})
 			})

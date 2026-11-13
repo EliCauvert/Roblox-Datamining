@@ -24,13 +24,13 @@ return function(Callback, Callback1)
 				totalMemoryMB = if MemoryMbModule then MemoryMbModule.totalMemoryMB else nil,
 				luaHeapMB = if MemoryMbModule then MemoryMbModule.luaHeapMB else nil
 			}
-			Callback1(function(Tbl)
+			Callback1(function(Tbl1)
 				-- upvalues: p1 (copy), config (copy)
-				local Entry = Tbl[p1]
+				local Tbl = Tbl1[p1]
 				
-				if Entry then
-					local Copy = table.clone(Tbl)
-					local Copy1 = table.clone(Entry)
+				if Tbl then
+					local Copy = table.clone(Tbl1)
+					local Copy1 = table.clone(Tbl)
 					local Copy2 = if Copy1.milestones then table.clone(Copy1.milestones) else {}
 					table.insert(Copy2, config)
 					Copy1.milestones = Copy2
@@ -38,7 +38,7 @@ return function(Callback, Callback1)
 					
 					return Copy
 				else
-					return Tbl
+					return Tbl1
 				end
 			end)
 			

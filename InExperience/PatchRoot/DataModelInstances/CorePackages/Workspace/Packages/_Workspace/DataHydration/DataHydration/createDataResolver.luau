@@ -29,15 +29,15 @@ return function(p1)
 	local DelayedThread = nil
 	local LocalPlayerUserId = GetLocalPlayerUserIdFunction()
 	local Callback1 = nil
+	local Callback2 = nil
 	local Callback = nil
 	local Callback3 = nil
-	local Callback2 = nil
 	
 	if FFlagDataHydrationAccountReset then
-		Callback1, Callback = SignalsModule.createSignal(0)
+		Callback1, Callback2 = SignalsModule.createSignal(0)
 	end
 	if FFlagBuildExperienceMonetizationMultiKindModule then
-		Callback3, Callback2 = SignalsModule.createSignal(0)
+		Callback, Callback3 = SignalsModule.createSignal(0)
 	end
 	local MutationLayerModule = if p1.supportsMutations then CreateMutationLayerModule() else nil
 	
@@ -566,9 +566,9 @@ return function(p1)
 	end
 	
 	local function clearResolverState(IsKeepCacheOnAccountReset)
-		-- upvalues: FFlagDataHydrationAccountReset (upval), Callback (ref), Callback1 (ref), DelayedThread (ref), t (ref), RequestQueueModule (copy), MutationLayerModule (ref), p1 (copy), Cache (copy)
+		-- upvalues: FFlagDataHydrationAccountReset (upval), Callback2 (ref), Callback1 (ref), DelayedThread (ref), t (ref), RequestQueueModule (copy), MutationLayerModule (ref), p1 (copy), Cache (copy)
 		if FFlagDataHydrationAccountReset then
-			Callback(Callback1(false) + 1)
+			Callback2(Callback1(false) + 1)
 		end
 		if DelayedThread then
 			task.cancel(DelayedThread)
@@ -616,17 +616,17 @@ return function(p1)
 	
 	if FFlagDataHydrationAccountReset then
 		Callback4 = ObserveLocalPlayerUserIdFunction(function(p15)
-			-- upvalues: LocalPlayerUserId (ref), clearResolverState (copy), p1 (copy), FFlagBuildExperienceMonetizationMultiKindModule (upval), Callback2 (ref), Callback3 (ref)
+			-- upvalues: LocalPlayerUserId (ref), clearResolverState (copy), p1 (copy), FFlagBuildExperienceMonetizationMultiKindModule (upval), Callback3 (ref), Callback (ref)
 			LocalPlayerUserId = p15
 			clearResolverState(p1.keepCacheOnAccountReset == true)
 			
 			if FFlagBuildExperienceMonetizationMultiKindModule then
-				Callback2(Callback3(false) + 1)
+				Callback3(Callback(false) + 1)
 			end
 		end)
 	else
 		Connection = Players:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
-			-- upvalues: GetLocalPlayerUserIdFunction (upval), LocalPlayerUserId (ref), clearResolverState (copy), FFlagBuildExperienceMonetizationMultiKindModule (upval), Callback2 (ref), Callback3 (ref)
+			-- upvalues: GetLocalPlayerUserIdFunction (upval), LocalPlayerUserId (ref), clearResolverState (copy), FFlagBuildExperienceMonetizationMultiKindModule (upval), Callback3 (ref), Callback (ref)
 			local LocalPlayerUserId1 = GetLocalPlayerUserIdFunction()
 			
 			if LocalPlayerUserId1 ~= LocalPlayerUserId then
@@ -634,7 +634,7 @@ return function(p1)
 				clearResolverState(false)
 				
 				if FFlagBuildExperienceMonetizationMultiKindModule then
-					Callback2(Callback3(false) + 1)
+					Callback3(Callback(false) + 1)
 				end
 			end
 		end)
@@ -666,7 +666,7 @@ return function(p1)
 		end,
 		clear = clear,
 		getAccountGeneration = if FFlagDataHydrationAccountReset then Callback1 else nil,
-		getAccountResetGeneration = if FFlagBuildExperienceMonetizationMultiKindModule then Callback3 else nil,
+		getAccountResetGeneration = if FFlagBuildExperienceMonetizationMultiKindModule then Callback else nil,
 		isCurrentRequest = if FFlagDataHydrationAccountReset then isCurrentRequest else nil
 	}
 	

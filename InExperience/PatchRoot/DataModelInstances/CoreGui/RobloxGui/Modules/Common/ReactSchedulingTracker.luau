@@ -47,10 +47,11 @@ if ReactSchedulingTracker <= RandomValue then
 end
 local TelemetryService = game:GetService("TelemetryService")
 local MutedErrorFunction = require(CorePackages.Workspace.Packages.Loggers).mutedError
+local ReactRobloxModule = require(CorePackages.Packages.ReactRoblox)
 local _ = require(CorePackages.Packages.ReactReconciler)
 local KllSketch = require(CorePackages.Workspace.Packages.InExperiencePerformance).KllSketch
 local Parts = string.split(ReactSchedulingPercentiles)
-local SchedulingProfiler = require(CorePackages.Packages.ReactRoblox).schedulingProfiler
+local SchedulingProfiler = ReactRobloxModule.schedulingProfiler
 local ProfilerEventTypes = SchedulingProfiler.profilerEventTypes
 
 local function _(): number

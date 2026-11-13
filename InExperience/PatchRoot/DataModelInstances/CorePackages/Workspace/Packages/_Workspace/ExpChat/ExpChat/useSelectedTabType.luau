@@ -2,10 +2,14 @@
 local Parent = ExpChat.Parent
 local _ = require(Parent.ExpChatShared)
 local ReactModule = require(Parent.React)
+local RoactUtilsModule = require(Parent.RoactUtils)
 local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local GetChannelTabsStoreModule = require(ExpChat.Stores.GetChannelTabsStore)
-local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
+local UseSignalStateFunction = SignalsReactModule.useSignalState
+local FFlagExpChatUseChannelTabsStore = SharedFlagsModule.FFlagExpChatUseChannelTabsStore
 
 local function selectRoduxTabType(p1)
 	local ChannelTabs = p1.ChannelTabs
@@ -44,4 +48,4 @@ local function useSelectedTabTypeFromRodux()
 	return UseSelectorFunction(selectRoduxTabType)
 end
 
-return if require(Parent.SharedFlags).FFlagExpChatUseChannelTabsStore then useSelectedTabTypeFromSignals else useSelectedTabTypeFromRodux
+return if FFlagExpChatUseChannelTabsStore then useSelectedTabTypeFromSignals else useSelectedTabTypeFromRodux

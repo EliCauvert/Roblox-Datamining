@@ -7,7 +7,7 @@ local TutilsModule = require(Parent.tutils)
 local DataHydrationModule = require(Parent.DataHydration)
 local _ = require(Parent.DiscoveryTypes)
 
-return function(_, p1, List, Callback, Callback2, Callback1)
+return function(_, p1, List, Callback, Callback1, Callback2)
 	-- upvalues: GameInfosReducerModule (copy), TutilsModule (copy), AddGamesModule (copy), SyncGameInfosToStoreModule (copy), DataHydrationModule (copy)
 	local PersonalizationEntry = p1:getState().Personalization[GameInfosReducerModule.key]
 	local t = {}
@@ -16,19 +16,19 @@ return function(_, p1, List, Callback, Callback2, Callback1)
 	
 	for _, value in List do
 		Callback(value):match(function(p2)
-			-- upvalues: t1 (copy), TutilsModule (upval), PersonalizationEntry (copy), t (copy), Callback1 (copy), List1 (copy), Callback2 (copy), value (copy)
+			-- upvalues: t1 (copy), TutilsModule (upval), PersonalizationEntry (copy), t (copy), Callback2 (copy), List1 (copy), Callback1 (copy), value (copy)
 			local UniverseId = p2.universeId
 			t1[UniverseId] = p2
 			
 			if not TutilsModule.shallowEqual(p2, PersonalizationEntry[UniverseId]) then
 				t[UniverseId] = p2
 				
-				if not Callback1 or Callback1(UniverseId) then
+				if not Callback2 or Callback2(UniverseId) then
 					table.insert(List1, UniverseId)
 				end
 			end
-			if Callback2 then
-				Callback2(value, p2)
+			if Callback1 then
+				Callback1(value, p2)
 			end
 		end):matchError(function(p2)
 			warn(`parseAndAddGameInfos could not parse gameInfo: {p2}`)

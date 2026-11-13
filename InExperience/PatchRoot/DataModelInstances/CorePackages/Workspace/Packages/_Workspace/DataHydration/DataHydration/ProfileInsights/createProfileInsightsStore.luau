@@ -7,6 +7,7 @@ local _ = require(DataHydration.DataHydrationTypes)
 local ProfileInsightsModel = require(Parent.ProfileInsights).ProfileInsightsModel
 local MultiGetProfileInsightsModule = require(script.Parent.Requests.MultiGetProfileInsights)
 local _ = require(script.Parent.ProfileInsightsStoreTypes)
+local FFlagProfileInsightsKeyByRankingStrategy = require(Parent.SharedFlags).FFlagProfileInsightsKeyByRankingStrategy
 local ProfileInsightsStoreProcessDelaySec = game:DefineFastInt("ProfileInsightsStoreProcessDelaySec", 0)
 
 local function createInsightBucket()
@@ -187,4 +188,4 @@ local function createProfileInsightsStore()
 	}
 end
 
-return if require(Parent.SharedFlags).FFlagProfileInsightsKeyByRankingStrategy then createProfileInsightsStoreKeyedByRankingStrategy else createProfileInsightsStore
+return if FFlagProfileInsightsKeyByRankingStrategy then createProfileInsightsStoreKeyedByRankingStrategy else createProfileInsightsStore

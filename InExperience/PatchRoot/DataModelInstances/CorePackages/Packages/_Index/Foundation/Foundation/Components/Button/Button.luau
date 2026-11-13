@@ -5,6 +5,7 @@ local UseMotionFunction = MotionModule.useMotion
 local AnimatePresence = MotionModule.AnimatePresence
 local ReactModule = require(Parent.React)
 local ReactOtterModule = require(Parent.ReactOtter)
+local InputSizeModule = require(Foundation.Enums.InputSize)
 local SpinnerModule = require(script.Parent.Spinner)
 local EndAlignedIconsModule = require(script.Parent.endAlignedIcons)
 local ButtonVariantModule = require(Foundation.Enums.ButtonVariant)
@@ -52,7 +53,7 @@ local config1 = {
 	inputDelay = 0,
 	testId = "--foundation-button",
 	variant = ButtonVariantModule.Standard,
-	size = require(Foundation.Enums.InputSize).Medium,
+	size = InputSizeModule.Medium,
 	width = UDim.new(0, 0)
 }
 

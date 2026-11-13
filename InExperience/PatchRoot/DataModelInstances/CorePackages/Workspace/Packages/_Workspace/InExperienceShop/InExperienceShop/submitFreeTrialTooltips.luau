@@ -2,6 +2,7 @@
 local Parent = InExperienceShop.Parent
 local SignalsModule = require(Parent.Signals)
 local NotificationsOrchestratorModule = require(Parent.NotificationsOrchestrator)
+local MarketplaceUnifiedItemType = require(Parent.AvatarExperienceAnalytics).UnifiedEventLogEnums.MarketplaceUnifiedItemType
 local InExperienceOffersModule = require(Parent.InExperienceOffers)
 local GetInExperienceShopStoreModule = require(InExperienceShop.Stores.getInExperienceShopStore)
 local GetShopGlobalIconStoreModule = require(InExperienceShop.Stores.GetShopGlobalIconStore)
@@ -110,8 +111,8 @@ local function chooseSlot(p1)
 	end
 end
 
-local function submitTooltip(SlotId, p1)
-	-- upvalues: TrialNotificationTooltipOnStudio (copy), NotificationsOrchestratorModule (copy)
+local function submitTooltip(SlotId, p1, ItemId)
+	-- upvalues: MarketplaceUnifiedItemType (copy), TrialNotificationTooltipOnStudio (copy), NotificationsOrchestratorModule (copy)
 	local config = {
 		priority = 0,
 		slotId = SlotId,
@@ -133,12 +134,16 @@ local function submitTooltip(SlotId, p1)
 			slot = "EducationTooltipOnHamburger",
 			title = p1.titleKey,
 			actionText = p1.actionTextKey
-		}
+		},
+		itemId = ItemId,
+		itemType = if ItemId == nil then nil else MarketplaceUnifiedItemType.GAME_PASS
 	}
 	
 	if TrialNotificationTooltipOnStudio then
 		config.enableOnStudio = true
 	end
+	config.suppressWhileInExperienceShopOpen = true
+	
 	return NotificationsOrchestratorModule.submit(config)
 end
 
@@ -265,7 +270,7 @@ local _ = function()
 				v7 = firstRedeemedGamePassId(TrialAvailabilities)
 			until true
 			GamePassId = v7
-			Signal2(submitTooltip(SlotId, ActiveTooltip))
+			Signal2(submitTooltip(SlotId, ActiveTooltip, GamePassId))
 		end)
 		v1 = isTrialTooltipShowing
 		

@@ -1,5 +1,6 @@
 ﻿local Parent = script:FindFirstAncestor("ToastLite").Parent
 local CryoModule = require(Parent.Cryo)
+local RoduxModule = require(Parent.Rodux)
 local ToastRoduxModule = require(Parent.ToastRodux)
 
 local function _(p1, p2): boolean
@@ -17,7 +18,7 @@ end
 
 local SequenceNumber = 0
 
-return require(Parent.Rodux).createReducer({}, {
+return RoduxModule.createReducer({}, {
 	[ToastRoduxModule.Actions.SetCurrentToastMessage.name] = function(List, p2)
 		-- upvalues: CryoModule (copy), SequenceNumber (ref)
 		local JoinResult = CryoModule.Dictionary.join(p2.toastMessage, { sequenceNumber = SequenceNumber })

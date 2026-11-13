@@ -6,15 +6,17 @@ local Button = FoundationModule.Button
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local FillBehavior = FoundationModule.Enums.FillBehavior
 local TextArea = FoundationModule.TextArea
+local AbuseReportAnalyticsContextModule = require(GenericAbuseReporting.BeduiV2.Analytics.AbuseReportAnalyticsContext)
 local _ = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
 local EyebrowModule = require(GenericAbuseReporting.BeduiV2.Components.Eyebrow)
 local FooterModule = require(GenericAbuseReporting.BeduiV2.Components.Footer)
 local GetCodePointLengthModule = require(GenericAbuseReporting.BeduiV2.Utils.getCodePointLength)
+local LayoutSlotsModule = require(GenericAbuseReporting.BeduiV2.Components.LayoutSlots)
 local TranslateModule = require(GenericAbuseReporting.BeduiV2.Utils.Translate.translate)
 local UseArTranslationFunction = require(GenericAbuseReporting.BeduiV2.Utils.Translate.arTranslation).useArTranslation
 local TelemetryEventType = require(GenericAbuseReporting.BeduiV2.Analytics.analyticsService).TelemetryEventType
-local UseAbuseReportAnalyticsFunction = require(GenericAbuseReporting.BeduiV2.Analytics.AbuseReportAnalyticsContext).useAbuseReportAnalytics
-local UseLayoutSlotsFunction = require(GenericAbuseReporting.BeduiV2.Components.LayoutSlots).useLayoutSlots
+local UseAbuseReportAnalyticsFunction = AbuseReportAnalyticsContextModule.useAbuseReportAnalytics
+local UseLayoutSlotsFunction = LayoutSlotsModule.useLayoutSlots
 
 return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), TranslateModule (copy), UseArTranslationFunction (copy), UseAbuseReportAnalyticsFunction (copy), UseLayoutSlotsFunction (copy), GetCodePointLengthModule (copy), TelemetryEventType (copy), EyebrowModule (copy), TextArea (copy), FooterModule (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy)

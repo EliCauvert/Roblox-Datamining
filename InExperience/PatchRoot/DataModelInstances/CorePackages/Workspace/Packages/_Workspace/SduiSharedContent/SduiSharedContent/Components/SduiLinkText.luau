@@ -2,10 +2,11 @@
 local Parent = SduiSharedContent.Parent
 local ReactModule = require(Parent.React)
 local CryoModule = require(Parent.Cryo)
+local FoundationModule = require(Parent.Foundation)
 local _ = require(Parent.SduiCompat)
 local CheckAndFormatPossibleLinkFunction = require(Parent.CollectionViews).checkAndFormatPossibleLink
 local SduiTextModule = require(script.Parent.SduiText)
-local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 local FFlagSduiLinkTextStyleOverrideModule = require(SduiSharedContent.Flags.FFlagSduiLinkTextStyleOverride)
 
 return function(p1)
@@ -16,8 +17,9 @@ return function(p1)
 	
 	if Text then
 		local LinkStyleColor3 = if p1.linkStyle and p1.linkStyle.Color3 then p1.linkStyle.Color3 else UseTokensResult.Color.Content.Link.Color3
+		local Formatted = string.format("rgb(%d, %d, %d)", math.round(LinkStyleColor3.R * 255), math.round(LinkStyleColor3.G * 255), (math.round(LinkStyleColor3.B * 255)))
 		local NoFFlagSduiLinkTextStyleOverrideModule: boolean = not FFlagSduiLinkTextStyleOverrideModule or p1.isLinkBold ~= false
-		local ColorName: string = `<font color="{string.format("rgb(%d, %d, %d)", math.round(LinkStyleColor3.R * 255), math.round(LinkStyleColor3.G * 255), (math.round(LinkStyleColor3.B * 255)))}">`
+		local ColorName: string = `<font color="{Formatted}">`
 		local Text1 = "</font>"
 		
 		if if FFlagSduiLinkTextStyleOverrideModule then p1.isLinkUnderlined == true else false then

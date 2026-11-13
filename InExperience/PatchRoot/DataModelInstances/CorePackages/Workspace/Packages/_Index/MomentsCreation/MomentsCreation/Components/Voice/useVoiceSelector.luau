@@ -1,5 +1,6 @@
 ﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
 local Parent = MomentsCreation.Parent
+local MomentsCommonModule = require(Parent.MomentsCommon)
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 local UseCallbackFunction = ReactModule.useCallback
@@ -11,7 +12,7 @@ local VoiceCatalogModule = require(MomentsCreation.Components.Voice.voiceCatalog
 local CreateTTSAudioManagerModule = require(MomentsCreation.Audio.createTTSAudioManager)
 local DialogTypeModule = require(MomentsCreation.Enums.DialogType)
 local _ = require(MomentsCreation.Types.CreationFlowTypes)
-local EventNames = require(Parent.MomentsCommon).Analytics.EventNames
+local EventNames = MomentsCommonModule.Analytics.EventNames
 local FStringMomentsTTSPreviewTextModule = require(MomentsCreation.Flags.FStringMomentsTTSPreviewText)
 
 local function _(Text: string): string

@@ -1,6 +1,7 @@
 ﻿local CorePackages = game:GetService("CorePackages")
 local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDependencies)
 local Roact = InGameMenuDependenciesModule.Roact
+local RoactRodux = InGameMenuDependenciesModule.RoactRodux
 local UIBlox = InGameMenuDependenciesModule.UIBlox
 local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
 local FoundationModule = require(CorePackages.Packages.Foundation)
@@ -91,7 +92,7 @@ local function renderWithSelectionCursor(p1, Callback)
 	end)
 end
 
-return InGameMenuDependenciesModule.RoactRodux.UNSTABLE_connect2(nil, function(Callback)
+return RoactRodux.UNSTABLE_connect2(nil, function(Callback)
 	-- upvalues: NavigateUpModule (copy)
 	return {
 		navigateUp = function()

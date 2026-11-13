@@ -1,11 +1,12 @@
 ﻿local AppChat = script:FindFirstAncestor("AppChat")
 local Parent = AppChat.Parent
 local _ = require(AppChat.types)
+local SocialLibrariesModule = require(AppChat.SocialLibraries)
 local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
 local CryoModule = require(Parent.Cryo)
 local ReactModule = require(Parent.React)
 local MemoFunction = ReactModule.memo
-local ResponseIndicator = require(AppChat.SocialLibraries).Components.ResponseIndicator
+local ResponseIndicator = SocialLibrariesModule.Components.ResponseIndicator
 local RemoveUserDialogModule = require(script.Parent.RemoveUserDialog)
 local t = {}
 

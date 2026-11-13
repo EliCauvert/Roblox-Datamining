@@ -11,9 +11,10 @@ local FFlagEnableCategoryLoggingInShopModule = require(InExperienceShop.Flags.FF
 local FFlagEnableShopRobuxBuyTelemetryModule = require(InExperienceShop.Flags.FFlagEnableShopRobuxBuyTelemetry)
 local FFlagShopRobuxTermsDisclosureModule = require(InExperienceShop.Flags.FFlagShopRobuxTermsDisclosure)
 local ConstantsModule = require(InExperienceShop.Analytics.Constants)
+local FFlagPassShopPurchaseSurfaceToBuyModal = require(Parent.SharedFlags).FFlagPassShopPurchaseSurfaceToBuyModal
 local _ = require(InExperienceShop.Types)
 local FindSectionModule = require(InExperienceShop.Utils.findSection)
-local ShopPageType = if require(Parent.SharedFlags).FFlagPassShopPurchaseSurfaceToBuyModal then ConstantsModule.ShopPageType else nil
+local ShopPageType = if FFlagPassShopPurchaseSurfaceToBuyModal then ConstantsModule.ShopPageType else nil
 local ShopPageType1 = if FFlagEnableInExperienceShopUnifiedLoggingModule then ConstantsModule.ShopPageType else nil
 local _ = require(script.Parent.CategoryPageView)
 local t = {}
@@ -160,8 +161,8 @@ return function(Frame)
 				})
 			})
 		else
-			local V36 = v1 or HasFeaturedRobuxPackage and LayoutOrder == 1
-			local TileWrapperPropsResult = tileWrapperProps(if p2 == nil or p2.rowWidth <= 0 then nil elseif p2.isFeaturedDoubleWidthRobux(p1, LayoutOrder) and p2.featuredRobuxWidth ~= nil then p2.featuredRobuxWidth else p2.shopWidth, if V36 then 2 else 1)
+			local V37 = v1 or HasFeaturedRobuxPackage and LayoutOrder == 1
+			local TileWrapperPropsResult = tileWrapperProps(if p2 == nil or p2.rowWidth <= 0 then nil elseif p2.isFeaturedDoubleWidthRobux(p1, LayoutOrder) and p2.featuredRobuxWidth ~= nil then p2.featuredRobuxWidth else p2.shopWidth, if V37 then 2 else 1)
 			
 			return ReactModule.createElement(View, {
 				tag = TileWrapperPropsResult.tag,

@@ -11,6 +11,7 @@ return {
 	withNavigationFocusIgnoringNavigation = if require(Parent.SharedFlags).FFlagSignalsNavP3hMisc then require(script.withNavigationFocusIgnoringNavigation) else nil,
 	CurrentTabContext = require(script.CurrentTabContext),
 	TopBarContext = require(script.TopBarContext),
+	resolveNavigationTarget = require(script.resolveNavigationTarget),
 	useIsRouteOnScreen = if FFlagEnableOnScreenAPIIntegration then require(script.useIsRouteOnScreen) else nil,
 	OnScreenContext = if FFlagEnableOnScreenAPIIntegration then require(script.OnScreenContext) else nil,
 	useOnScreenNavigationListener = if FFlagEnableOnScreenAPIIntegration then require(script.useOnScreenNavigationListener) else nil,

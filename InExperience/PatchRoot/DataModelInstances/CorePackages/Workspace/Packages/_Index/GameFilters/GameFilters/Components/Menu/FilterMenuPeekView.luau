@@ -68,6 +68,14 @@ return function()
 	local MapResult = if FFlagLuaAppChartsFilterOptionTextTag then nil else UseBindingResult:map(function(p1)
 		return p1.X
 	end)
+	local MapResult1 = ReactModule.joinBindings({
+		UseBindingResult,
+		UseBindingResult1,
+		if FFlagLuaAppChartsFilterOptionTextTag then v3 else v1
+	}):map(function(Entry): UDim2
+		-- upvalues: FFlagLuaAppChartsFilterOptionTextTag (upval), UseTopBarHeightSelectorModuleResult (copy)
+		return UDim2.new(1, 0, 0, (math.min(Entry[2] + (if FFlagLuaAppChartsFilterOptionTextTag then Entry[3] else Entry[3].Y), Entry[1].Y - 84 - 25 - UseTopBarHeightSelectorModuleResult)))
+	end)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseRefResult2 = ReactModule.useRef(Signal.new())
 	local UseResult2 = ReactModule.useCallback(function()
@@ -116,14 +124,7 @@ return function()
 			Content = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
-				Size = ReactModule.joinBindings({
-					UseBindingResult,
-					UseBindingResult1,
-					if FFlagLuaAppChartsFilterOptionTextTag then v3 else v1
-				}):map(function(Entry): UDim2
-					-- upvalues: FFlagLuaAppChartsFilterOptionTextTag (upval), UseTopBarHeightSelectorModuleResult (copy)
-					return UDim2.new(1, 0, 0, (math.min(Entry[2] + (if FFlagLuaAppChartsFilterOptionTextTag then Entry[3] else Entry[3].Y), Entry[1].Y - 84 - 25 - UseTopBarHeightSelectorModuleResult)))
-				end),
+				Size = MapResult1,
 				[ReactModule.Change.AbsoluteSize] = ReactModule.useCallback(function(Frame)
 					-- upvalues: UseRefResult1 (copy)
 					local Current = UseRefResult1.current

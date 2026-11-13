@@ -6,6 +6,7 @@ local ReactModule = require(Parent.React)
 local UIBloxModule = require(Parent.UIBlox)
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local IconButton = UIBloxModule.App.Button.IconButton
+local IconSize = UIBloxModule.App.ImageSet.Enum.IconSize
 local BaseCellModule = require(AppChat.Components.Cells.BaseCell)
 local UseIsInExperienceModule = require(AppChat.Hooks.useIsInExperience)
 local FoundationModule = require(Parent.Foundation)
@@ -16,7 +17,7 @@ local config = {
 	iconCellWidth = 30,
 	shouldShowIcon = true,
 	cellHeight = 28,
-	iconSize = UIBloxModule.App.ImageSet.Enum.IconSize.Small,
+	iconSize = IconSize.Small,
 	onIconActivated = function() end
 }
 

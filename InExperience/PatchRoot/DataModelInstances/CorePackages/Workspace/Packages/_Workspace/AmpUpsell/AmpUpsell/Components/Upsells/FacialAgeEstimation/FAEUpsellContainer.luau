@@ -292,7 +292,7 @@ return function()
 		entryPointEventCtx = EntryPointEventCtx,
 		webLink = UseStateResult1,
 		onCancel = OnCancelFunction
-	}) elseif GetFFlagShowFAELoadingModalModule() and UseStateResult5 and not UseStateResult4 then ReactModule.createElement(FAELoadingModalModule, {
+	}) elseif GetFFlagShowFAELoadingModalModule() and (UseStateResult5 and not UseStateResult4) then ReactModule.createElement(FAELoadingModalModule, {
 		sessionId = UseStateResult6,
 		entryPointEventCtx = EntryPointEventCtx,
 		onCancel = OnCancelFunction

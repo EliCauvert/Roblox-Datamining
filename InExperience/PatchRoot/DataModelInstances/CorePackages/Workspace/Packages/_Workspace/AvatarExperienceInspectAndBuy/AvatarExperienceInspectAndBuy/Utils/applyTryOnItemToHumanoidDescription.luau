@@ -1,8 +1,9 @@
 ﻿local AvatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
 local Parent = AvatarExperienceInspectAndBuy.Parent
+local AvatarExperienceModelModule = require(Parent.AvatarExperienceModel)
 local CryoModule = require(Parent.Cryo)
 local Constants = require(Parent.AXCommon).Constants
-local ItemTypeEnum = require(Parent.AvatarExperienceModel).Enums.ItemTypeEnum
+local ItemTypeEnum = AvatarExperienceModelModule.Enums.ItemTypeEnum
 local ASSETTYPETOACCESSORYTYPE = Constants.ASSET_TYPE_TO_ACCESSORY_TYPE
 local ASSETTYPENAMETOIDSTRING = Constants.ASSET_TYPE_NAME_TO_ID_STRING
 local ASSETTYPEIDSTRINGTOHUMANOIDDESCRIPTIONPROP = Constants.ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP
@@ -36,7 +37,7 @@ local _ = function(p1, AccessoryTypes)
 	end)
 end
 
-local function v16(AssetsInBundle, List)
+local function v17(AssetsInBundle, List)
 	-- upvalues: ASSETTYPETOACCESSORYTYPE (copy), LAYEREDCLOTHINGORDER (copy), LAYEREDASSETTYPES (copy)
 	local List1 = {}
 	local Flag = nil
@@ -72,7 +73,7 @@ local function v16(AssetsInBundle, List)
 	return List1
 end
 
-local function v17(Humanoid: Humanoid, List)
+local function v18(Humanoid: Humanoid, List)
 	-- upvalues: CryoModule (copy)
 	local Accessories = Humanoid:GetAccessories(true)
 	local AccessoryTypes = {}
@@ -92,14 +93,14 @@ local function v17(Humanoid: Humanoid, List)
 end
 
 return function(p2, Humanoid: Humanoid)
-	-- upvalues: ItemTypeEnum (copy), ASSETTYPETOACCESSORYTYPE (copy), ASSETTYPEIDSTRINGTOHUMANOIDDESCRIPTIONPROP (copy), ASSETTYPENAMETOIDSTRING (copy), LAYEREDCLOTHINGORDER (copy), LAYEREDASSETTYPES (copy), v17 (copy), BODYBUNDLETYPEID (copy), v16 (copy), SHOESBUNDLETYPEID (copy), DYNAMICHEADBUNDLETYPEID (copy)
+	-- upvalues: ItemTypeEnum (copy), ASSETTYPETOACCESSORYTYPE (copy), ASSETTYPEIDSTRINGTOHUMANOIDDESCRIPTIONPROP (copy), ASSETTYPENAMETOIDSTRING (copy), LAYEREDCLOTHINGORDER (copy), LAYEREDASSETTYPES (copy), v18 (copy), BODYBUNDLETYPEID (copy), v17 (copy), SHOESBUNDLETYPEID (copy), DYNAMICHEADBUNDLETYPEID (copy)
 	if p2.itemType == ItemTypeEnum.Asset and (ASSETTYPETOACCESSORYTYPE[p2.itemSubType] or ASSETTYPEIDSTRINGTOHUMANOIDDESCRIPTIONPROP[p2.itemSubType]) then
 		local ItemSubType = p2.itemSubType
 		local ItemId = p2.itemId
 		local ASSETTYPEIDSTRINGTOHUMANOIDDESCRIPTIONPROPEntry = ASSETTYPEIDSTRINGTOHUMANOIDDESCRIPTIONPROP[ItemSubType]
 		
 		if ItemId and ItemSubType ~= ASSETTYPENAMETOIDSTRING.Gear and ASSETTYPETOACCESSORYTYPE[ItemSubType] then
-			v17(Humanoid, {
+			v18(Humanoid, {
 				{
 					AssetId = tonumber(ItemId) or 0,
 					Order = LAYEREDCLOTHINGORDER[ItemSubType],
@@ -112,10 +113,10 @@ return function(p2, Humanoid: Humanoid)
 		end
 	end
 	if p2.itemType == ItemTypeEnum.Bundle and p2.assetsInBundle and p2.itemSubType == BODYBUNDLETYPEID then
-		local v1 = v16(p2.assetsInBundle, { Enum.AccessoryType.Hair })
+		local v1 = v17(p2.assetsInBundle, { Enum.AccessoryType.Hair })
 		
 		if #v1 > 0 then
-			v17(Humanoid, v1)
+			v18(Humanoid, v1)
 		end
 		for _, value in p2.assetsInBundle do
 			local AssetType = value.assetType
@@ -130,13 +131,13 @@ return function(p2, Humanoid: Humanoid)
 		end
 	end
 	if p2.itemSubType == SHOESBUNDLETYPEID and p2.assetsInBundle then
-		local v2 = v16(p2.assetsInBundle, {
+		local v2 = v17(p2.assetsInBundle, {
 			Enum.AccessoryType.LeftShoe,
 			Enum.AccessoryType.RightShoe
 		})
 		
 		if #v2 > 0 then
-			v17(Humanoid, v2)
+			v18(Humanoid, v2)
 		end
 	end
 	if p2.itemSubType == DYNAMICHEADBUNDLETYPEID and p2.assetsInBundle then

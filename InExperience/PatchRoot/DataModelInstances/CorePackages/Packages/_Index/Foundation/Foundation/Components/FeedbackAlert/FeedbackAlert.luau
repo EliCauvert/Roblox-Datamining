@@ -5,6 +5,7 @@ local ReactUtilsModule = require(Parent.ReactUtils)
 local AlertActionsModule = require(Foundation.Components.AlertActions)
 local AlertConstantsModule = require(Foundation.Components.AlertActions.AlertConstants)
 local _ = require(Foundation.Enums.AlertSeverity)
+local BuilderIconsModule = require(Parent.BuilderIcons)
 local CloseAffordanceModule = require(Foundation.Components.CloseAffordance)
 local CloseAffordanceVariantModule = require(Foundation.Enums.CloseAffordanceVariant)
 local ControlStateModule = require(Foundation.Enums.ControlState)
@@ -19,7 +20,7 @@ local EscapeRichTextModule = require(Foundation.Utility.escapeRichText)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
 local WithDefaultsModule = require(Foundation.Utility.withDefaults)
-local IconVariant = require(Parent.BuilderIcons).IconVariant
+local IconVariant = BuilderIconsModule.IconVariant
 local UseFeedbackAlertVariantsModule = require(script.Parent.useFeedbackAlertVariants)
 local config = { testId = "--foundation-feedback-alert" }
 

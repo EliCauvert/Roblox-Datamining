@@ -1,8 +1,9 @@
 ﻿local CoreScriptsPlayerFeedback = script:FindFirstAncestor("CoreScriptsPlayerFeedback")
 local Parent = CoreScriptsPlayerFeedback.Parent
+local GetFFlagEnablePlayerSupportPromptModule = require(CoreScriptsPlayerFeedback.Flags.GetFFlagEnablePlayerSupportPrompt)
 local ReactModule = require(Parent.React)
 local UseEventConnectionFunction = require(Parent.ReactUtils).useEventConnection
-local v1 = require(CoreScriptsPlayerFeedback.Flags.GetFFlagEnablePlayerSupportPrompt)()
+local FFlagEnablePlayerSupportPromptModule = GetFFlagEnablePlayerSupportPromptModule()
 local MemoResult = ReactModule.memo(function(p1)
 	-- upvalues: UseEventConnectionFunction (copy)
 	UseEventConnectionFunction(p1.event, p1.handler)
@@ -11,7 +12,7 @@ local MemoResult = ReactModule.memo(function(p1)
 end)
 
 return (ReactModule.memo(function(p1)
-	-- upvalues: ReactModule (copy), v1 (copy), MemoResult (copy)
+	-- upvalues: ReactModule (copy), FFlagEnablePlayerSupportPromptModule (copy), MemoResult (copy)
 	local SocialService = game:GetService("SocialService")
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
@@ -33,7 +34,7 @@ return (ReactModule.memo(function(p1)
 			p1.openFeedbackPrompt()
 		end
 	end, { p1.openFeedbackPrompt, p1.openPlayerSupportPrompt })
-	local UseResult2 = if v1 then UseResult1 else UseResult
+	local UseResult2 = if FFlagEnablePlayerSupportPromptModule then UseResult1 else UseResult
 	local UseResult3 = ReactModule.useCallback(function(p2)
 		-- upvalues: p1 (copy)
 		if p1.openUnavailablePrompt then
@@ -59,7 +60,7 @@ return (ReactModule.memo(function(p1)
 		p1.openUnavailablePrompt,
 		p1.openPlayerSupportUnavailablePrompt
 	})
-	local UseResult4 = if v1 then UseResult31 else UseResult3
+	local UseResult4 = if FFlagEnablePlayerSupportPromptModule then UseResult31 else UseResult3
 	local Event = nil
 	local Event1 = nil
 	

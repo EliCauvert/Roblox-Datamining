@@ -99,8 +99,9 @@ function ObjectViewport.setupViewportForAsset(p1)
 	local Camera = p1:createCamera()
 	local FieldOfView = if p1.props.fieldOfView then p1.props.fieldOfView else 30
 	local Z: number = V37.Z
+	local NewLargest = math.max(V37.X, V37.Y, Z) / 2 * (1 / math.tan(math.rad(FieldOfView) / 2)) + Z / 2
 	local _Vector2 = Vector2.new(5, 20)
-	Camera.CFrame = CFrame.new(V36.Position + CFrame.fromAxisAngle(vector.create(0, 1, 0), (math.rad(_Vector2.Y))):VectorToWorldSpace((CFrame.fromAxisAngle(vector.create(1, 0, 0), (math.rad(_Vector2.X))):VectorToWorldSpace(V36.lookVector))) * (math.max(V37.X, V37.Y, Z) / 2 * (1 / math.tan(math.rad(FieldOfView) / 2)) + Z / 2), V36.Position)
+	Camera.CFrame = CFrame.new(V36.Position + CFrame.fromAxisAngle(vector.create(0, 1, 0), (math.rad(_Vector2.Y))):VectorToWorldSpace((CFrame.fromAxisAngle(vector.create(1, 0, 0), (math.rad(_Vector2.X))):VectorToWorldSpace(V36.lookVector))) * NewLargest, V36.Position)
 	Camera.FieldOfView = FieldOfView
 	p1.updateCamera(Camera)
 end

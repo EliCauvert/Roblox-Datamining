@@ -4,6 +4,7 @@ local InExperienceAppChatModalModule = require(CorePackages.Workspace.Packages.A
 local UniversalAppPolicyModule = require(CorePackages.Workspace.Packages.UniversalAppPolicy)
 local RegisterPartyIntegrationModule = require(script.Parent.registerPartyIntegration)
 local ServiceModule = require(Chrome.Service)
+local IsConnectUnibarEnabledModule = require(Chrome.Integrations.Connect.isConnectUnibarEnabled)
 local IsConnectDropdownEnabledModule = require(Chrome.Integrations.Connect.isConnectDropdownEnabled)
 local GetFFlagIsSquadEnabledFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagIsSquadEnabled
 local AppPolicy = require(CorePackages.Packages.PolicyProvider).GetPolicyImplementations.MemStorageService("app-policy")
@@ -64,7 +65,7 @@ local function handlePolicyUpdate()
 	updatePartyIntegration(GetFFlagIsSquadEnabledFunction() and (UniversalAppPolicyModule.getAppFeaturePolicies().getCanAccessParty() and IsConnectDropdownEnabledModule()))
 end
 
-if require(Chrome.Integrations.Connect.isConnectUnibarEnabled)() then
+if IsConnectUnibarEnabledModule() then
 	updatePartyIntegration(GetFFlagIsSquadEnabledFunction() and (UniversalAppPolicyModule.getAppFeaturePolicies().getCanAccessParty() and IsConnectDropdownEnabledModule()))
 	AppPolicy.onPolicyChanged(handlePolicyUpdate)
 end

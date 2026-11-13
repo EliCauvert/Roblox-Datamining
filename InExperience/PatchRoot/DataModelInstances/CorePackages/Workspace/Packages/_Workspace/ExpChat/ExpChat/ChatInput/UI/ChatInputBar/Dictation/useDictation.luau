@@ -2,6 +2,8 @@
 local Parent = ExpChat.Parent
 local ReactModule = require(Parent.React)
 local ReactOtterModule = require(Parent.ReactOtter)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
 local Dictation = require(Parent.ExpChatShared).Logger:new("ExpChat/Dictation")
 local FFlagExpChatDictationStateStore = require(Parent.SharedFlags).FFlagExpChatDictationStateStore
 local GetDictationStateStoreModule = require(ExpChat.Stores.GetDictationStateStore)
@@ -13,8 +15,8 @@ local UseDictationAudioPipelineModule = require(script.Parent.useDictationAudioP
 local RequestMicPermissionModule = require(script.Parent.requestMicPermission)
 local RequestMicPermissionFunction = RequestMicPermissionModule.requestMicPermission
 local PermissionStatus = RequestMicPermissionModule.PermissionStatus
-local CreateSignalFunction = require(Parent.Signals).createSignal
-local UseSignalBindingFunction = require(Parent.SignalsReact).useSignalBinding
+local CreateSignalFunction = SignalsModule.createSignal
+local UseSignalBindingFunction = SignalsReactModule.useSignalBinding
 
 local function _(p1)
 	-- upvalues: GetDictationStateStoreModule (copy)

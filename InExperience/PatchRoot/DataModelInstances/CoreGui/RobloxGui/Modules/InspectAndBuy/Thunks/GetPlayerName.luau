@@ -3,10 +3,11 @@ local Parent = script.Parent.Parent
 local ThunkModule = require(Parent.Thunk)
 local NetworkModule = require(Parent.Services.Network)
 local SetPlayerNameModule = require(Parent.Actions.SetPlayerName)
+local CreateInspectAndBuyKeyMapperModule = require(Parent.createInspectAndBuyKeyMapper)
 local SendCounterModule = require(Parent.Thunks.SendCounter)
 local ConstantsModule = require(Parent.Constants)
 local list = { NetworkModule }
-local GetPlayerName = require(Parent.createInspectAndBuyKeyMapper)("getPlayerName")
+local GetPlayerName = CreateInspectAndBuyKeyMapperModule("getPlayerName")
 
 return function(p1)
 	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), GetPlayerName (copy), PerformFetch (copy), SetPlayerNameModule (copy), SendCounterModule (copy), ConstantsModule (copy)

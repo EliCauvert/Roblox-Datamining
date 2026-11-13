@@ -2,6 +2,7 @@
 local Parent = WhatsNew.Parent
 local EnumsModule = require(WhatsNew.Enums)
 local FoundationModule = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
 local ReactModule = require(Parent.React)
 local GetWhatsNewStoreModule = require(WhatsNew.store.GetWhatsNewStore)
 local UseWhatsNewRuntimeStateModule = require(WhatsNew.hooks.useWhatsNewRuntimeState)
@@ -11,7 +12,7 @@ local View = FoundationModule.View
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local PopoverAlign = FoundationModule.Enums.PopoverAlign
 local PopoverSide = FoundationModule.Enums.PopoverSide
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 
 local function _(Vector): boolean
 	return Vector.X > 0 and Vector.Y > 0

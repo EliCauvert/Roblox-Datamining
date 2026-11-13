@@ -5,9 +5,10 @@ local EmojiTypesModule = require(script.Parent.ContentKinds.Emoji.EmojiTypes)
 local ArrayResult = TModule.array(TModule.union(TModule.strictInterface({ plainText = PlainTextTypesModule.isValid }), TModule.strictInterface({ preset = PresetTypesModule.isValid }), TModule.strictInterface({ emoji = EmojiTypesModule.isValid }), TModule.strictInterface({
 	system = require(script.Parent.ContentKinds.System.SystemTypes).isValid
 })))
+local config = { emoji = EmojiTypesModule.isValidDraft }
 local InterfaceResult = TModule.interface({ userId = TModule.string, displayName = TModule.string })
 local InterfaceResult1 = TModule.interface({
-	contents = TModule.array(TModule.union(TModule.strictInterface({ plainText = PlainTextTypesModule.isValidDraft }), TModule.strictInterface({ preset = PresetTypesModule.isValidDraft }), TModule.strictInterface({ emoji = EmojiTypesModule.isValidDraft }))),
+	contents = TModule.array(TModule.union(TModule.strictInterface({ plainText = PlainTextTypesModule.isValidDraft }), TModule.strictInterface({ preset = PresetTypesModule.isValidDraft }), TModule.strictInterface(config))),
 	repliesToIds = TModule.optional(TModule.array(TModule.string))
 })
 local InterfaceResult2 = TModule.interface({

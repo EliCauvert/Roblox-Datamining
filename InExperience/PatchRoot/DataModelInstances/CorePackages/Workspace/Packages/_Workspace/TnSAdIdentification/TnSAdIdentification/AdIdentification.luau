@@ -1,12 +1,13 @@
 ﻿local AdService = game:GetService("AdService")
 local Players = game:GetService("Players")
 local TnSAdIdentification = script:FindFirstAncestor("TnSAdIdentification")
+local GetFIntAdIdentificationMinimumAreaPerMyriadModule = require(TnSAdIdentification.Flags.GetFIntAdIdentificationMinimumAreaPerMyriad)
 local GetFIntAdIdentifiedTelemetryThrottleHundredthsPercentModule = require(TnSAdIdentification.Flags.GetFIntAdIdentifiedTelemetryThrottleHundredthsPercent)
 local Parent = TnSAdIdentification.Parent
 local LoggingProtocolModule = require(Parent.LoggingProtocol)
 local Default = LoggingProtocolModule.default
 local IdentificationUtils = require(Parent.AvatarIdentification).IdentificationUtils
-local Largest = math.max(require(TnSAdIdentification.Flags.GetFIntAdIdentificationMinimumAreaPerMyriad)() / 10000, 0)
+local Largest = math.max(GetFIntAdIdentificationMinimumAreaPerMyriadModule() / 10000, 0)
 
 function getLocalCharacterPosition(Object)
 	local HumanoidRootPart = Object:FindFirstChild("HumanoidRootPart")

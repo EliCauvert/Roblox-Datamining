@@ -49,12 +49,12 @@ function MenuRow(Integration)
 	-- upvalues: UseStyleFunction (copy), FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule (copy), ReactModule (copy), SubMenuContextModule (copy), FFlagEnableConsoleExpControls (copy), MenuIconContextModule (copy), ControlState (copy), FFlagEnableMenuTrailingBadge (copy), ServiceModule (copy), GuiService (copy), StyledTextLabel (copy), IconHostModule (copy), MenuTrailingBadgeModule (copy), IsInExperienceUIVREnabled (copy), InExperienceUIVRIXP (copy), UIManager (ref), Interactable (copy), UseCursorFunction (copy), RoundedSlot (copy), FixChromeIntegrationLayoutBug (copy)
 	local Theme = UseStyleFunction().Theme
 	local config = { Transparency = 1, Color = Color3.new(0, 0, 0) }
-	local SUBMENUROWPADDING = nil
-	local ICONSIZE = nil
+	local SUBMENUROWLABELFONT = nil
+	local SUBMENUPADDINGRIGHT = nil
 	local SUBMENUROWHEIGHT = nil
 	local SUBMENUPADDINGLEFT = nil
-	local SUBMENUPADDINGRIGHT = nil
-	local SUBMENUROWLABELFONT = nil
+	local SUBMENUROWPADDING = nil
+	local ICONSIZE = nil
 	local SUBMENUROWCORNERRADIUS = nil
 	
 	if FFlagTokenizeUnibarConstantsWithStyleProvider then
@@ -184,10 +184,10 @@ function SubMenu(p1)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseObservableValueModuleResult = UseObservableValueModule(ViewportUtilModule.screenSize)
 	local UseTopbarInsetHeightModuleResult: number = UseTopbarInsetHeightModule()
+	local SUBMENUROWHEIGHT = nil
+	local UNIBARLEFTMARGIN = nil
 	local ICONCELLWIDTH = nil
 	local UNIBARENDPADDING = nil
-	local UNIBARLEFTMARGIN = nil
-	local SUBMENUROWHEIGHT = nil
 	local SUBMENUCORNERRADIUS = nil
 	local SUBMENUBOTTOMPADDING = nil
 	

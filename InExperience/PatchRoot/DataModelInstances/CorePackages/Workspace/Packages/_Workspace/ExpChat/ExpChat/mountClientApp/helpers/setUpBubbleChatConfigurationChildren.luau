@@ -4,8 +4,9 @@ local Actions = ExpChat.Actions
 local BubbleChatSettingsChangedModule = require(Actions.BubbleChatSettingsChanged)
 local BubbleChatChildSettingChangedModule = require(Actions.BubbleChatChildSettingChanged)
 local BubbleChatChildRemovedModule = require(Actions.BubbleChatChildRemoved)
+local ConfigModule = require(ExpChat.Config)
 local GetSetUpBubbleChatConfigurationChildPropertiesModule = require(ExpChat.Flags.getSetUpBubbleChatConfigurationChildProperties)
-local DefaultBubbleChatChildrenCustomizationProperties = require(ExpChat.Config).DefaultBubbleChatChildrenCustomizationProperties
+local DefaultBubbleChatChildrenCustomizationProperties = ConfigModule.DefaultBubbleChatChildrenCustomizationProperties
 local ClassNames = { "ImageLabel", "UIGradient", "UICorner", "UIPadding" }
 
 local function getSettingsFromInstance(ClassName)

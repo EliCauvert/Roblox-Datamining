@@ -3,10 +3,11 @@ local TimeToInteractiveTracker = script:FindFirstAncestor("TimeToInteractiveTrac
 local _ = require(TimeToInteractiveTracker.Stores.types)
 local _ = require(TimeToInteractiveTracker.Milestones.types)
 local FFlagTTITrackerMemoryTrackingModule = require(script.Parent.FFlagTTITrackerMemoryTracking)
+local ConstantsModule = require(TimeToInteractiveTracker.Milestones.constants)
 local t = {}
 local t1 = {}
 
-for _, value in require(TimeToInteractiveTracker.Milestones.constants) do
+for _, value in ConstantsModule do
 	if type(value) == "string" then
 		t[value] = true
 	else

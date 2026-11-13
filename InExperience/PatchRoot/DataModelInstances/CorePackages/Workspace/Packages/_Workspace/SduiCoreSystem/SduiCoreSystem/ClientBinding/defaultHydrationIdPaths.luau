@@ -1,6 +1,7 @@
 ﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
 local SduiDataBindingContentTypeModule = require(SduiCoreSystem.ClientBinding.SduiDataBindingContentType)
 local SharedFlagsModule = require(SduiCoreSystem.Parent.SharedFlags)
+local FFlagSduiMarketplaceCatalogCategorySupport = SharedFlagsModule.FFlagSduiMarketplaceCatalogCategorySupport
 local FFlagSduiMarketplaceCatalogSortSupport = SharedFlagsModule.FFlagSduiMarketplaceCatalogSortSupport
 local FFlagSduiDevStoreSeeAllSupport = SharedFlagsModule.FFlagSduiDevStoreSeeAllSupport
 local FFlagSduiAddCollectibleItemDataHydration = SharedFlagsModule.FFlagSduiAddCollectibleItemDataHydration
@@ -13,7 +14,7 @@ return {
 	[SduiDataBindingContentTypeModule.universe] = { "universe_id" },
 	[SduiDataBindingContentTypeModule.ageRecommendation] = { "universe_id" },
 	[SduiDataBindingContentTypeModule.socialLink] = { "social_link_id" },
-	[SduiDataBindingContentTypeModule.marketplaceCatalogCategory] = if SharedFlagsModule.FFlagSduiMarketplaceCatalogCategorySupport then { "marketplace_catalog_category_item_id" } else nil,
+	[SduiDataBindingContentTypeModule.marketplaceCatalogCategory] = if FFlagSduiMarketplaceCatalogCategorySupport then { "marketplace_catalog_category_item_id" } else nil,
 	[SduiDataBindingContentTypeModule.song] = { "song_id" },
 	[SduiDataBindingContentTypeModule.marketplaceCatalogSort] = if FFlagSduiMarketplaceCatalogSortSupport then { "catalog_sort_id" } else nil,
 	[SduiDataBindingContentTypeModule.gamePass] = { "game_pass_id" },

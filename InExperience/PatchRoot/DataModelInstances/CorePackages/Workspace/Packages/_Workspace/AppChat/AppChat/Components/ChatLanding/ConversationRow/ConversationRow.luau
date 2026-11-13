@@ -8,12 +8,13 @@ local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebu
 local FFlagAppChatExtendConversationListRowDividersModule = require(AppChat.Flags.FFlagAppChatExtendConversationListRowDividers)
 local FFlagAppChatRemoveConversationListDividerModule = require(AppChat.Flags.FFlagAppChatRemoveConversationListDivider)
 local FFlagAppChatTimestampInSubtitleConversationRowModule = require(AppChat.Flags.FFlagAppChatTimestampInSubtitleConversationRow)
+local ConversationFacePileModule = require(AppChat.Components.Cells.ConversationFacePile)
 local ConversationRowSubtitleModule = require(script.Parent.ConversationRowSubtitle)
 local UseConversationRowPresentationModule = require(script.Parent.useConversationRowPresentation)
 local SquadButtonSourceEnum = SquadsModule.Enums.SquadButtonSourceEnum
 local SquadComponentAccessWrapper = SquadsModule.SquadComponentAccessWrapper
 local SquadJoinButton = SquadsModule.SquadJoinButton
-local MemoResult = ReactModule.memo((require(AppChat.Components.Cells.ConversationFacePile)))
+local MemoResult = ReactModule.memo(ConversationFacePileModule)
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Callback)
 	-- upvalues: UseConversationRowPresentationModule (copy), FoundationModule (copy), ReactModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), FFlagAppChatExtendConversationListRowDividersModule (copy), MemoResult (copy), FFlagAppChatTimestampInSubtitleConversationRowModule (copy), ConversationRowSubtitleModule (copy), SquadComponentAccessWrapper (copy), SquadJoinButton (copy), SquadButtonSourceEnum (copy), DomLocatorsModule (copy), FFlagAppChatRemoveConversationListDividerModule (copy)

@@ -1,8 +1,9 @@
 ﻿local Parent = script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local SignalsModule = require(Parent.Signals)
 local InventoryFiltersModule = require(script.Parent.Parent.Enums.InventoryFilters)
 local InventorySortsModule = require(script.Parent.Parent.Enums.InventorySorts)
-local FFlagAXInventoryDurablesExpiredFilter = require(Parent.AvatarExperienceFlags).FFlagAXInventoryDurablesExpiredFilter
+local FFlagAXInventoryDurablesExpiredFilter = AvatarExperienceFlagsModule.FFlagAXInventoryDurablesExpiredFilter
 
 return function()
 	-- upvalues: SignalsModule (copy), FFlagAXInventoryDurablesExpiredFilter (copy), InventoryFiltersModule (copy), InventorySortsModule (copy)

@@ -2,9 +2,10 @@
 local Parent1 = Parent.Parent
 local CapturesCommonNetworking = require(Parent.Networking).CapturesCommonNetworking
 local ReactModule = require(Parent1.React)
+local RoactUtilsModule = require(Parent1.RoactUtils)
 local AssetTypeModule = require(Parent.Enums.AssetType)
 local ThumbnailStateModule = require(Parent.Enums.ThumbnailState)
-local UseDispatchFunction = require(Parent1.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
 local UseEffectFunction = ReactModule.useEffect
 local UseStateFunction = ReactModule.useState
 local ContentPostsThumbnailsInitialDelayTimeMs = game:DefineFastInt("ContentPostsThumbnailsInitialDelayTimeMs", 100)

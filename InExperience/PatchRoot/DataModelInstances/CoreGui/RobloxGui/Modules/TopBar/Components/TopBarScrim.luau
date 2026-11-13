@@ -2,10 +2,11 @@
 local ReactModule = require(CorePackages.Packages.React)
 local SignalsModule = require(CorePackages.Packages.Signals)
 local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
+local CoreScriptsRoactCommonModule = require(CorePackages.Workspace.Packages.CoreScriptsRoactCommon)
 local CoreGuiCommonModule = require(CorePackages.Workspace.Packages.CoreGuiCommon)
 local ExpChatModule = require(CorePackages.Workspace.Packages.ExpChat)
 local GamepadConnectorModule = require(script.Parent.GamepadConnector)
-local Scrim = require(CorePackages.Workspace.Packages.CoreScriptsRoactCommon).Scrim
+local Scrim = CoreScriptsRoactCommonModule.Scrim
 local FFlagEnableUISelector = CoreGuiCommonModule.Flags.FFlagEnableUISelector
 local GetUiSelectorSignalStore = if FFlagEnableUISelector then CoreGuiCommonModule.Stores.GetUiSelectorSignalStore else nil
 

@@ -1,8 +1,10 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
 local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
 local MomentsCommonModule = require(Parent.MomentsCommon)
 local _ = require(Parent.MomentsTypes)
+local SignalsReactModule = require(Parent.SignalsReact)
 local MomentContextModule = require(script.Parent.Parent.Parent.MomentContext)
 local FFlagMomentsEngagementMetricsFeature = MomentsCommonModule.Flags.FFlagMomentsEngagementMetricsFeature
 local FFlagMomentsServeEDPVideos = require(Parent.SharedFlags).FFlagMomentsServeEDPVideos
@@ -13,9 +15,9 @@ local DescriptionModule = require(script.Parent.Description)
 local ReactionsModule = require(script.Parent.Reactions)
 local StatusChipModule = require(script.Parent.StatusChip)
 local UseMomentsSessionFunction = require(Moments.Stores.GetMomentsStore.MomentsSessionContext).useMomentsSession
-local View = require(Parent.Foundation).View
+local View = FoundationModule.View
 local GetMomentsCapabilitiesFunction = MomentsCommonModule.Stores.GetMomentsCapabilities
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseSignalStateFunction = SignalsReactModule.useSignalState
 
 return ReactModule.memo(function(Frame)
 	-- upvalues: MomentContextModule (copy), UseSignalStateFunction (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), FFlagMomentsServeEDPVideos (copy), FFlagMomentsEngagementMetricsFeature (copy), GetMomentsCapabilitiesFunction (copy), UseMomentsSessionFunction (copy), ReactModule (copy), DebugInfoModule (copy), CreatorAttributionModule (copy), DescriptionModule (copy), ReactionsModule (copy), StatusChipModule (copy), View (copy)

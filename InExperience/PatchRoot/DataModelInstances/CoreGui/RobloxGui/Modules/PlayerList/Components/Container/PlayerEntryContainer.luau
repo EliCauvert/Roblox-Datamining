@@ -1,6 +1,7 @@
 ﻿local CorePackages = game:GetService("CorePackages")
 local Parent = script.Parent.Parent.Parent
 local ReactModule = require(CorePackages.Packages.React)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
 local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
 local PlayerListModule = require(CorePackages.Workspace.Packages.PlayerList)
 local _ = require(CorePackages.Workspace.Packages.LeaderboardStore)
@@ -15,7 +16,7 @@ local PlayerIconInfoStore = if FFlagReplacePlayerIconRoduxWithSignal then Player
 local FFlagPlayerListFixLeaderstatsStacking = SharedFlagsModule.FFlagPlayerListFixLeaderstatsStacking
 local FFlagPlayerListUseFocusNavHook = PlayerListModule.Flags.FFlagPlayerListUseFocusNavHook
 
-return ReactModule.memo(require(CorePackages.Packages.RoactRodux).connect(function(p1)
+return ReactModule.memo(RoactRoduxModule.connect(function(p1)
 	return {
 		selectedPlayer = p1.playerDropDown.selectedPlayer,
 		dropdownOpen = p1.playerDropDown.isVisible,

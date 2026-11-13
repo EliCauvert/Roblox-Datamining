@@ -1,6 +1,7 @@
 ﻿local PeopleReactView = script:FindFirstAncestor("PeopleReactView")
 local Parent = PeopleReactView.Parent
 local ReactModule = require(Parent.React)
+local PeopleServiceModule = require(Parent.PeopleService)
 local RobloxAppEnumsModule = require(Parent.RobloxAppEnums)
 local UseDeviceOrientationFunction = require(Parent.RobloxAppHooks).useDeviceOrientation
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
@@ -13,7 +14,7 @@ local Button = FoundationModule.Button
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 local ConstantsModule = require(PeopleReactView.Constants)
-local GetFFlagFixPeoplePageCardTooltipFunction = require(Parent.PeopleService).getService("Flags").GetFFlagFixPeoplePageCardTooltip
+local GetFFlagFixPeoplePageCardTooltipFunction = PeopleServiceModule.getService("Flags").GetFFlagFixPeoplePageCardTooltip
 
 return function(p1)
 	-- upvalues: UseTokensFunction (copy), GetFFlagFixPeoplePageCardTooltipFunction (copy), UseDeviceOrientationFunction (copy), RobloxAppEnumsModule (copy), ReactModule (copy), UseLocalizationFunction (copy), ConstantsModule (copy), View (copy), StateLayerMode (copy), Text (copy), Button (copy), InputSize (copy), ButtonVariant (copy)

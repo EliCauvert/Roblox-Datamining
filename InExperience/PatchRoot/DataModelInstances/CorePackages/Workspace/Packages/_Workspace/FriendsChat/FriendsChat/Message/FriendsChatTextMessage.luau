@@ -106,6 +106,9 @@ return ReactModule.memo(function(p1)
 			Flag = true
 		end
 	end, { NormalizeFontFaceResult, MessageTextSize })
+	local MapResult = UseSignalBindingResult:map(function(p2)
+		return if p2 == nil then "" elseif p2.skeletonWidth == "prefix" then `          {p2.content}` else p2.content
+	end)
 	local config = {
 		font = NormalizeFontFaceResult,
 		textSize = MessageTextSize,
@@ -116,17 +119,26 @@ return ReactModule.memo(function(p1)
 		textSize = Largest,
 		textColor = MutedColor3
 	}
-	local MapResult = UseSignalBindingResult:map(function(p2)
+	local MapResult1 = UseSignalBindingResult:map(function(p2)
 		-- upvalues: config1 (copy), config (copy)
 		local IsSystem: boolean = p2 ~= nil and p2.displayStyle == "system"
 		
 		return if IsSystem then config1 else config
 	end)
-	local MapResult1 = TextTransparency:map(function(p2): number
+	local MapResult2 = MapResult1:map(function(p2)
+		return p2.font
+	end)
+	local MapResult3 = MapResult1:map(function(p2)
+		return p2.textSize
+	end)
+	local MapResult4 = MapResult1:map(function(p2)
+		return p2.textColor
+	end)
+	local MapResult5 = TextTransparency:map(function(p2): number
 		-- upvalues: TextStrokeTransparency (copy)
 		return TextStrokeTransparency + p2 * (1 - TextStrokeTransparency)
 	end)
-	local MapResult2 = ReactModule.joinBindings({
+	local MapResult6 = ReactModule.joinBindings({
 		display = UseSignalBindingResult,
 		textTransparency = TextTransparency
 	}):map(function(p2): boolean
@@ -138,13 +150,16 @@ return ReactModule.memo(function(p1)
 			return Display ~= nil and (Display.skeletonWidth == "prefix" or Display.skeletonWidth == "full")
 		end
 	end)
-	local MapResult3 = ReactModule.joinBindings({
+	local MapResult7 = ReactModule.joinBindings({
 		display = UseSignalBindingResult,
 		placeholder = UseBindingResult
 	}):map(function(p2)
 		local Display = p2.display
 		
 		return if Display == nil or Display.skeletonWidth ~= "full" then p2.placeholder else UDim2.new(1, 0, 0, p2.placeholder.Y.Offset)
+	end)
+	local MapResult8 = UseSignalBindingResult:map(function(p2): boolean
+		return p2 ~= nil
 	end)
 	local NoFFlagFriendsChatLazyMountMessageSkeletonModule = not FFlagFriendsChatLazyMountMessageSkeletonModule or SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), UseMemoResult1 (copy)
@@ -161,48 +176,38 @@ return ReactModule.memo(function(p1)
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.new(1, 0, 0, 0),
 		LayoutOrder = UseSignalBindingResult1,
-		Visible = UseSignalBindingResult:map(function(p2): boolean
-			return p2 ~= nil
-		end),
+		Visible = MapResult8,
 		ref = p1.guiObjectRef
 	}, {
 		body = ReactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.new(1, 0, 0, 0),
-			FontFace = MapResult:map(function(p2)
-				return p2.font
-			end),
-			TextSize = MapResult:map(function(p2)
-				return p2.textSize
-			end),
-			TextColor3 = MapResult:map(function(p2)
-				return p2.textColor
-			end),
+			FontFace = MapResult2,
+			TextSize = MapResult3,
+			TextColor3 = MapResult4,
 			TextStrokeColor3 = TextStrokeColor3,
-			TextStrokeTransparency = MapResult1,
+			TextStrokeTransparency = MapResult5,
 			TextTransparency = TextTransparency,
 			TextWrapped = true,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Top,
 			RichText = true,
-			Text = UseSignalBindingResult:map(function(p2)
-				return if p2 == nil then "" elseif p2.skeletonWidth == "prefix" then `          {p2.content}` else p2.content
-			end),
+			Text = MapResult,
 			ref = UseRefResult,
 			[ReactModule.Change.Text] = UseResult
 		}, {
 			stroke = ReactModule.createElement("UIStroke", {
 				Color = TextStrokeColor3 or Color3.fromRGB(0, 0, 0),
 				Thickness = UseTokensResult.Stroke.Thin,
-				Transparency = MapResult1
+				Transparency = MapResult5
 			})
 		}),
 		skeleton = if NoFFlagFriendsChatLazyMountMessageSkeletonModule then ReactModule.createElement(FoundationModule.Skeleton, {
-			Size = MapResult3,
+			Size = MapResult7,
 			Position = UDim2.fromOffset(0, 0),
 			AnchorPoint = Vector2.new(0, 0),
-			Visible = MapResult2
+			Visible = MapResult6
 		}) else nil
 	})
 end)

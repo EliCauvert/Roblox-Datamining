@@ -4,11 +4,29 @@ local PeopleService = script:FindFirstAncestor("PeopleService")
 local GameInviteModule = require(PeopleService.Parent.GameInvite)
 local FlagsModule = require(PeopleService.Flags)
 local ConstantsModule = require(PeopleService.Constants)
+local GetFIntInspectButtonThrottleHundredthsPercentFunction = FlagsModule.GetFIntInspectButtonThrottleHundredthsPercent
 local GetFIntGameInviteEntryPointThrottleHundredthsPercentFunction = FlagsModule.GetFIntGameInviteEntryPointThrottleHundredthsPercent
+local GetFIntMuteAllThrottleHundredthsPercentFunction = FlagsModule.GetFIntMuteAllThrottleHundredthsPercent
+local GetFIntUnmuteAllThrottleHundredthsPercentFunction = FlagsModule.GetFIntUnmuteAllThrottleHundredthsPercent
+local GetFIntMutePlayerThrottleHundredthsPercentFunction = FlagsModule.GetFIntMutePlayerThrottleHundredthsPercent
+local GetFIntUnmutePlayerThrottleHundredthsPercentFunction = FlagsModule.GetFIntUnmutePlayerThrottleHundredthsPercent
+local GetFIntRequestFriendshipThrottleHundredthsPercentFunction = FlagsModule.GetFIntRequestFriendshipThrottleHundredthsPercent
+local GetFIntMuteSelfThrottleHundredthsPercentFunction = FlagsModule.GetFIntMuteSelfThrottleHundredthsPercent
+local GetFIntUnmuteSelfThrottleHundredthsPercentFunction = FlagsModule.GetFIntUnmuteSelfThrottleHundredthsPercent
+local GetFIntBlockUserButtonClickThrottleHundredthsPercentFunction = FlagsModule.GetFIntBlockUserButtonClickThrottleHundredthsPercent
+local GetFIntBlockUserThrottleHundredthsPercentFunction = FlagsModule.GetFIntBlockUserThrottleHundredthsPercent
+local GetFIntUnblockUserThrottleHundredthsPercentFunction = FlagsModule.GetFIntUnblockUserThrottleHundredthsPercent
+local GetFIntPeoplePageLayoutChangedThrottleHundredthsPercentFunction = FlagsModule.GetFIntPeoplePageLayoutChangedThrottleHundredthsPercent
+local GetFIntPersonCardMenuToggledThrottleHundredthsPercentFunction = FlagsModule.GetFIntPersonCardMenuToggledThrottleHundredthsPercent
 local GetFFlagAddPeoplePageCardLayoutFunction = FlagsModule.GetFFlagAddPeoplePageCardLayout
 local FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry = FlagsModule.FFlagVoiceVolumeControlsEnablePerUserVolumeInteractionTelemetry
 local FFlagVoiceVolumeControlsPerUserPlayerListButton = FlagsModule.FFlagVoiceVolumeControlsPerUserPlayerListButton
 local FFlagVoiceVolumeControlsPerUserPlayerGridMenu = FlagsModule.FFlagVoiceVolumeControlsPerUserPlayerGridMenu
+local FIntPerUserVoiceVolumeChangedThrottleHundredthsPercent = FlagsModule.FIntPerUserVoiceVolumeChangedThrottleHundredthsPercent
+local FIntPerUserVoiceVolumeSessionThrottleHundredthsPercent = FlagsModule.FIntPerUserVoiceVolumeSessionThrottleHundredthsPercent
+local FIntPerUserVoiceVolumeSliderTouchThrottleHundredthsPercent = FlagsModule.FIntPerUserVoiceVolumeSliderTouchThrottleHundredthsPercent
+local FIntPerUserVoiceVolumeMutedViaSliderThrottleHundredthsPercent = FlagsModule.FIntPerUserVoiceVolumeMutedViaSliderThrottleHundredthsPercent
+local FIntPerUserVoiceVolumeUnmutedViaSliderThrottleHundredthsPercent = FlagsModule.FIntPerUserVoiceVolumeUnmutedViaSliderThrottleHundredthsPercent
 local FFlagVoiceChatVolumePerUserMuteVolumeSync = FlagsModule.FFlagVoiceChatVolumePerUserMuteVolumeSync
 local FFlagVoiceChatVolumePerUserDisableInteractionWhenMuted = FlagsModule.FFlagVoiceChatVolumePerUserDisableInteractionWhenMuted
 local VOICEVOLUME = ConstantsModule.VOICE_CHAT.VOICE_VOLUME
@@ -62,7 +80,7 @@ local TelemetryConfigs = {
 			description = "Event to track inspect button click from people tab.",
 			eventName = PeopleAnalyticsManager.EventName.InspectButton,
 			backends = { "EventIngest" },
-			throttlingPercentage = FlagsModule.GetFIntInspectButtonThrottleHundredthsPercent(),
+			throttlingPercentage = GetFIntInspectButtonThrottleHundredthsPercentFunction(),
 			lastUpdated = { 2025, 7, 14 }
 		}
 	},
@@ -71,7 +89,7 @@ local TelemetryConfigs = {
 			description = "Event to track mute all button click.",
 			eventName = PeopleAnalyticsManager.EventName.MuteAll,
 			backends = { "EventIngest" },
-			throttlingPercentage = FlagsModule.GetFIntMuteAllThrottleHundredthsPercent(),
+			throttlingPercentage = GetFIntMuteAllThrottleHundredthsPercentFunction(),
 			lastUpdated = { 2025, 6, 26 }
 		}
 	},
@@ -80,7 +98,7 @@ local TelemetryConfigs = {
 			description = "Event to track unmute all button click.",
 			eventName = PeopleAnalyticsManager.EventName.UnmuteAll,
 			backends = { "EventIngest" },
-			throttlingPercentage = FlagsModule.GetFIntUnmuteAllThrottleHundredthsPercent(),
+			throttlingPercentage = GetFIntUnmuteAllThrottleHundredthsPercentFunction(),
 			lastUpdated = { 2025, 6, 26 }
 		}
 	},
@@ -89,7 +107,7 @@ local TelemetryConfigs = {
 			description = "Event to track individual player mute button click.",
 			eventName = PeopleAnalyticsManager.EventName.MutePlayer,
 			backends = { "EventIngest" },
-			throttlingPercentage = FlagsModule.GetFIntMutePlayerThrottleHundredthsPercent(),
+			throttlingPercentage = GetFIntMutePlayerThrottleHundredthsPercentFunction(),
 			lastUpdated = { 2025, 7, 9 }
 		}
 	},
@@ -98,7 +116,7 @@ local TelemetryConfigs = {
 			description = "Event to track individual player unmute button click.",
 			eventName = PeopleAnalyticsManager.EventName.UnmutePlayer,
 			backends = { "EventIngest" },
-			throttlingPercentage = FlagsModule.GetFIntUnmutePlayerThrottleHundredthsPercent(),
+			throttlingPercentage = GetFIntUnmutePlayerThrottleHundredthsPercentFunction(),
 			lastUpdated = { 2025, 7, 9 }
 		}
 	},
@@ -107,7 +125,7 @@ local TelemetryConfigs = {
 			description = "Event to track mute self button click.",
 			eventName = PeopleAnalyticsManager.EventName.MuteSelf,
 			backends = { "EventIngest" },
-			throttlingPercentage = FlagsModule.GetFIntMuteSelfThrottleHundredthsPercent(),
+			throttlingPercentage = GetFIntMuteSelfThrottleHundredthsPercentFunction(),
 			lastUpdated = { 2025, 7, 23 }
 		}
 	},
@@ -116,7 +134,7 @@ local TelemetryConfigs = {
 			description = "Event to track unmute self button click.",
 			eventName = PeopleAnalyticsManager.EventName.UnmuteSelf,
 			backends = { "EventIngest" },
-			throttlingPercentage = FlagsModule.GetFIntUnmuteSelfThrottleHundredthsPercent(),
+			throttlingPercentage = GetFIntUnmuteSelfThrottleHundredthsPercentFunction(),
 			lastUpdated = { 2025, 7, 23 }
 		}
 	},
@@ -125,7 +143,7 @@ local TelemetryConfigs = {
 			description = "Event to track players menu actions.",
 			eventName = if GetFFlagAddPeoplePageCardLayoutFunction() then PeopleAnalyticsManager.EventName.RequestFriendship else PeopleAnalyticsManager.EventName.PlayersMenu,
 			backends = { "EventIngest" },
-			throttlingPercentage = FlagsModule.GetFIntRequestFriendshipThrottleHundredthsPercent(),
+			throttlingPercentage = GetFIntRequestFriendshipThrottleHundredthsPercentFunction(),
 			lastUpdated = { 2025, 7, 9 }
 		},
 		counterConfig = {
@@ -140,7 +158,7 @@ local TelemetryConfigs = {
 			description = "Event to track block user button clicks from people tab.",
 			eventName = PeopleAnalyticsManager.EventName.BlockUserButtonClick,
 			backends = { "EventIngest" },
-			throttlingPercentage = FlagsModule.GetFIntBlockUserButtonClickThrottleHundredthsPercent(),
+			throttlingPercentage = GetFIntBlockUserButtonClickThrottleHundredthsPercentFunction(),
 			lastUpdated = { 2025, 7, 22 }
 		}
 	},
@@ -149,7 +167,7 @@ local TelemetryConfigs = {
 			description = "Event to track successful user blocking from people tab.",
 			eventName = PeopleAnalyticsManager.EventName.BlockUser,
 			backends = { "EventIngest" },
-			throttlingPercentage = FlagsModule.GetFIntBlockUserThrottleHundredthsPercent(),
+			throttlingPercentage = GetFIntBlockUserThrottleHundredthsPercentFunction(),
 			lastUpdated = { 2025, 7, 22 }
 		}
 	},
@@ -158,7 +176,7 @@ local TelemetryConfigs = {
 			description = "Event to track user unblocking from people tab.",
 			eventName = PeopleAnalyticsManager.EventName.UnblockUser,
 			backends = { "EventIngest" },
-			throttlingPercentage = FlagsModule.GetFIntUnblockUserThrottleHundredthsPercent(),
+			throttlingPercentage = GetFIntUnblockUserThrottleHundredthsPercentFunction(),
 			lastUpdated = { 2025, 7, 22 }
 		}
 	},
@@ -167,7 +185,7 @@ local TelemetryConfigs = {
 			description = "Event to track people page layout change.",
 			eventName = PeopleAnalyticsManager.EventName.PeoplePageLayoutChanged,
 			backends = { "EventIngest" },
-			throttlingPercentage = FlagsModule.GetFIntPeoplePageLayoutChangedThrottleHundredthsPercent(),
+			throttlingPercentage = GetFIntPeoplePageLayoutChangedThrottleHundredthsPercentFunction(),
 			lastUpdated = { 2025, 9, 2 }
 		}
 	},
@@ -176,7 +194,7 @@ local TelemetryConfigs = {
 			description = "Event to track person card menu toggle.",
 			eventName = PeopleAnalyticsManager.EventName.PersonCardMenuToggled,
 			backends = { "EventIngest" },
-			throttlingPercentage = FlagsModule.GetFIntPersonCardMenuToggledThrottleHundredthsPercent(),
+			throttlingPercentage = GetFIntPersonCardMenuToggledThrottleHundredthsPercentFunction(),
 			lastUpdated = { 2025, 9, 2 }
 		}
 	},
@@ -186,7 +204,7 @@ local TelemetryConfigs = {
 			links = "https://github.rbx.com/Roblox/proto-schemas/blob/master/production/eventstream/voice/per_user_voice_volume_changed.proto",
 			eventName = PeopleAnalyticsManager.EventName.PerUserVoiceVolumeChanged,
 			backends = { "EventIngest" },
-			throttlingPercentage = FlagsModule.FIntPerUserVoiceVolumeChangedThrottleHundredthsPercent,
+			throttlingPercentage = FIntPerUserVoiceVolumeChangedThrottleHundredthsPercent,
 			lastUpdated = { 2026, 7, 27 }
 		}
 	},
@@ -196,7 +214,7 @@ local TelemetryConfigs = {
 			links = "https://github.rbx.com/Roblox/proto-schemas/blob/master/production/eventstream/voice/per_user_voice_volume_session.proto",
 			eventName = PeopleAnalyticsManager.EventName.PerUserVoiceVolumeSession,
 			backends = { "EventIngest" },
-			throttlingPercentage = FlagsModule.FIntPerUserVoiceVolumeSessionThrottleHundredthsPercent,
+			throttlingPercentage = FIntPerUserVoiceVolumeSessionThrottleHundredthsPercent,
 			lastUpdated = { 2026, 7, 27 }
 		}
 	},
@@ -205,7 +223,7 @@ local TelemetryConfigs = {
 			description = "Counter for per-user voice volume slider drag starts.",
 			eventName = PeopleAnalyticsManager.EventName.PerUserVoiceVolumeSliderTouch,
 			backends = { "RobloxTelemetryCounter" },
-			throttlingPercentage = FlagsModule.FIntPerUserVoiceVolumeSliderTouchThrottleHundredthsPercent,
+			throttlingPercentage = FIntPerUserVoiceVolumeSliderTouchThrottleHundredthsPercent,
 			lastUpdated = { 2026, 7, 27 }
 		}
 	},
@@ -214,7 +232,7 @@ local TelemetryConfigs = {
 			description = "Counter for muting a player by dragging per-user volume to MIN.",
 			eventName = PeopleAnalyticsManager.EventName.PerUserVoiceVolumeMutedViaSlider,
 			backends = { "RobloxTelemetryCounter" },
-			throttlingPercentage = FlagsModule.FIntPerUserVoiceVolumeMutedViaSliderThrottleHundredthsPercent,
+			throttlingPercentage = FIntPerUserVoiceVolumeMutedViaSliderThrottleHundredthsPercent,
 			lastUpdated = { 2026, 7, 27 }
 		}
 	},
@@ -223,7 +241,7 @@ local TelemetryConfigs = {
 			description = "Counter for unmuting a player by raising per-user volume above MIN.",
 			eventName = PeopleAnalyticsManager.EventName.PerUserVoiceVolumeUnmutedViaSlider,
 			backends = { "RobloxTelemetryCounter" },
-			throttlingPercentage = FlagsModule.FIntPerUserVoiceVolumeUnmutedViaSliderThrottleHundredthsPercent,
+			throttlingPercentage = FIntPerUserVoiceVolumeUnmutedViaSliderThrottleHundredthsPercent,
 			lastUpdated = { 2026, 7, 27 }
 		}
 	}

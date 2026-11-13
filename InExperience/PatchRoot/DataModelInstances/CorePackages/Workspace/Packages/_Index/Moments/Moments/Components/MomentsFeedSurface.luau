@@ -5,11 +5,12 @@ local ReactModule = require(Parent.React)
 local View = FoundationModule.View
 local FoundationProvider = FoundationModule.FoundationProvider
 local ColorMode = FoundationModule.Enums.ColorMode
+local FeedModule = require(Moments.Components.Feed)
 local ConstantsModule = require(Moments.Constants)
 local MomentsHostContextModule = require(Moments.MomentsHostContext)
 local FFlagMomentsRenderAvatarPostsInFeed = require(Parent.SharedFlags).FFlagMomentsRenderAvatarPostsInFeed
 local FFlagProfileRenderAvatarMoments = require(Parent.SharedFlags).FFlagProfileRenderAvatarMoments
-local Feed = require(Moments.Components.Feed).Feed
+local Feed = FeedModule.Feed
 
 return function(p1)
 	-- upvalues: FFlagProfileRenderAvatarMoments (copy), MomentsHostContextModule (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), ReactModule (copy), Feed (copy), View (copy), ConstantsModule (copy), FoundationProvider (copy), ColorMode (copy)

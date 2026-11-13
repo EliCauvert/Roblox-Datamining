@@ -15,6 +15,7 @@ local ThumbnailType = FoundationModule.Enums.ThumbnailType
 local ThumbnailSize = FoundationModule.Enums.ThumbnailSize
 local Image = FoundationModule.Image
 local View = FoundationModule.View
+local PeopleServiceModule = require(Parent.PeopleService)
 local PersonButtonConfigsModule = require(PeopleReactView.Configs.PersonButtonConfigs)
 local UseGetPeopleServiceModule = require(PeopleReactView.Hooks.useGetPeopleService)
 local UseIsComponentInputEndedModule = require(PeopleReactView.Hooks.useIsComponentInputEnded)
@@ -23,7 +24,7 @@ local ConnectButtonModule = require(PeopleReactView.Components.Card.ConnectButto
 local FFlagSideSheetOpenPeoplePage = require(Parent.SharedFlags).FFlagSideSheetOpenPeoplePage
 local FFlagPeoplePageAvatarBackgroundModule = require(PeopleReactView.Flags.FFlagPeoplePageAvatarBackground)
 local UseAvatarBackgroundImageModule = if FFlagPeoplePageAvatarBackgroundModule then require(PeopleReactView.Hooks.useAvatarBackgroundImage) else nil
-local GetFFlagPeoplePageLazyRenderCardsFunction = require(Parent.PeopleService).getService("Flags").GetFFlagPeoplePageLazyRenderCards
+local GetFFlagPeoplePageLazyRenderCardsFunction = PeopleServiceModule.getService("Flags").GetFFlagPeoplePageLazyRenderCards
 local PeoplePageCardMenuUseVisibleProperty = game:DefineFastFlag("PeoplePageCardMenuUseVisibleProperty", false)
 local PeoplePageFixCardMenuZIndex = game:DefineFastFlag("PeoplePageFixCardMenuZIndex", false)
 

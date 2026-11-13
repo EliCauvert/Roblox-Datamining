@@ -1,7 +1,9 @@
 ﻿local Parent = script:FindFirstAncestor("SplitPane").Parent
+local AppCompositionModule = require(Parent.AppComposition)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local Breakpoint = require(Parent.Foundation).Enums.Breakpoint
-local ResolveBreakpointFunction = require(Parent.AppComposition).resolveBreakpoint
-local FFlagEnableSplitPane = require(Parent.SharedFlags).FFlagEnableSplitPane
+local ResolveBreakpointFunction = AppCompositionModule.resolveBreakpoint
+local FFlagEnableSplitPane = SharedFlagsModule.FFlagEnableSplitPane
 local Large = Breakpoint.Large
 local config = {
 	[Breakpoint.XSmall] = 1,

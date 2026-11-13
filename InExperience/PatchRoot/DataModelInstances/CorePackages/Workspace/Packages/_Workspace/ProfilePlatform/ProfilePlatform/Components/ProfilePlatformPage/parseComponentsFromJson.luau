@@ -2,12 +2,18 @@
 local Parent = ProfilePlatform.Parent
 local CryoModule = require(Parent.Cryo)
 local ReactModule = require(Parent.React)
+local UserProfileHeaderModule = require(ProfilePlatform.Components.UserProfileHeader)
 local MeTabUserProfileHeaderModule = require(ProfilePlatform.Components.UserProfileHeader.MeTabUserProfileHeader)
 local AboutModule = require(ProfilePlatform.Components.About)
+local ContactDescriptionModule = require(ProfilePlatform.Components.ContactDescription)
+local CommunityProfileHeaderModule = require(ProfilePlatform.Components.CommunityProfileHeader)
+local CoverPhotoModule = require(ProfilePlatform.Components.CoverPhoto)
+local CurrentlyWearingModule = require(ProfilePlatform.Components.CurrentlyWearing)
 local StoreModule = require(ProfilePlatform.Components.Store)
 local ViewFullProfileModule = require(ProfilePlatform.Components.ViewFullProfile)
 local InventoryModule = require(ProfilePlatform.Components.Inventory)
 local FavoriteExperiencesModule = require(ProfilePlatform.Components.FavoriteExperiences)
+local ContactProfileHeaderModule = require(ProfilePlatform.Components.ContactProfileHeader)
 local ExperiencesModule = require(ProfilePlatform.Components.Experiences)
 local ExperiencesWideCarouselModule = require(ProfilePlatform.Components.ExperiencesWideCarousel)
 local SocialLinksModule = require(ProfilePlatform.Components.SocialLinks)
@@ -28,6 +34,7 @@ local FFlagAXEnableProfileTab = require(Parent.SharedFlags).FFlagAXEnableProfile
 local FFlagProfilePlatformEnableInventory = require(Parent.SharedFlags).FFlagProfilePlatformEnableInventory
 local FFlagAddSocialLinksToCommunityProfile = require(Parent.SharedFlags).FFlagAddSocialLinksToCommunityProfile
 local FFlagAddCommunityLockedToCommunityProfile = require(Parent.SharedFlags).FFlagAddCommunityLockedToCommunityProfile
+local FFlagExperiencesOnProfile = require(Parent.SharedFlags).FFlagExperiencesOnProfile
 local FFlagEnableProfileCompletion = require(Parent.SharedFlags).FFlagEnableProfileCompletion
 local FFlagProfilePlatformEnableLazyLoadingComponentsModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnableLazyLoadingComponents)
 local FFlagAddEventsToCommunityProfileModule = require(ProfilePlatform.Flags.FFlagAddEventsToCommunityProfile)
@@ -106,10 +113,10 @@ local function moveMomentsToTop(List)
 end
 
 local config = {
-	[EnumsModule.Components.UserProfileHeader] = require(ProfilePlatform.Components.UserProfileHeader),
-	[EnumsModule.Components.CurrentlyWearing] = require(ProfilePlatform.Components.CurrentlyWearing),
+	[EnumsModule.Components.UserProfileHeader] = UserProfileHeaderModule,
+	[EnumsModule.Components.CurrentlyWearing] = CurrentlyWearingModule,
 	[EnumsModule.Components.Actions] = CTARowModule,
-	[EnumsModule.Components.Experiences] = if require(Parent.SharedFlags).FFlagExperiencesOnProfile then ExperiencesWideCarouselModule else ExperiencesModule,
+	[EnumsModule.Components.Experiences] = if FFlagExperiencesOnProfile then ExperiencesWideCarouselModule else ExperiencesModule,
 	[EnumsModule.Components.ViewFullProfile] = ViewFullProfileModule,
 	[EnumsModule.Components.About] = AboutModule.About,
 	[EnumsModule.Components.FavoriteExperiences] = if FFlagProfilePlatformEnableFavoriteExperiencesModule then FavoriteExperiencesModule else nil,
@@ -120,8 +127,8 @@ local config = {
 	[EnumsModule.Components.Moments] = if FFlagProfilePlatformEnableMomentsModule then MomentsModule else nil
 }
 local config1 = {
-	[EnumsModule.Components.CoverPhoto] = require(ProfilePlatform.Components.CoverPhoto),
-	[EnumsModule.Components.CommunityProfileHeader] = require(ProfilePlatform.Components.CommunityProfileHeader),
+	[EnumsModule.Components.CoverPhoto] = CoverPhotoModule,
+	[EnumsModule.Components.CommunityProfileHeader] = CommunityProfileHeaderModule,
 	[EnumsModule.Components.About] = AboutModule.About,
 	[EnumsModule.Components.Actions] = CTARowModule,
 	[EnumsModule.Components.Experiences] = ExperiencesModule,
@@ -134,8 +141,8 @@ local config1 = {
 	[EnumsModule.Components.GroupForumsDiscovery] = if FFlagGroupForumsDiscoverySdui then GroupForumsDiscoveryModule else nil
 }
 local config2 = {
-	[EnumsModule.Components.ContactProfileHeader] = require(ProfilePlatform.Components.ContactProfileHeader),
-	[EnumsModule.Components.ContactDescription] = require(ProfilePlatform.Components.ContactDescription),
+	[EnumsModule.Components.ContactProfileHeader] = ContactProfileHeaderModule,
+	[EnumsModule.Components.ContactDescription] = ContactDescriptionModule,
 	[EnumsModule.Components.Actions] = CTARowModule
 }
 local JoinResult = if FFlagAXEnableProfileTab then CryoModule.Dictionary.join(config, {

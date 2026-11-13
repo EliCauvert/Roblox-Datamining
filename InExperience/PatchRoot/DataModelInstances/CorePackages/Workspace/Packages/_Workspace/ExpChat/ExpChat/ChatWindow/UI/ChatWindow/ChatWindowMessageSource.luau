@@ -2,6 +2,7 @@
 local Parent = ExpChat.Parent
 local ReactModule = require(Parent.React)
 local Dictionary = require(Parent.llama).Dictionary
+local ExpChatSharedModule = require(Parent.ExpChatShared)
 local UseStableSignalFunction = require(Parent.ChatUIPrimitives).Hooks.useStableSignal
 local GetMessagesStoreModule = require(ExpChat.Stores.GetMessagesStore)
 local ChatWindowModule = require(script.Parent.ChatWindow)
@@ -10,7 +11,7 @@ local UseV2MessagePoolModule = require(ExpChat.ChatWindow.UI.BottomLockedScrollV
 local FFlagExpChatEnableV2ChatWindowModule = require(ExpChat.Flags.FFlagExpChatEnableV2ChatWindow)
 local FFlagExpChatRewriteInlineModule = require(ExpChat.Flags.FFlagExpChatRewriteInline)
 local GetFFlagChatWindowUseCallbackOptimizationsModule = require(ExpChat.Flags.getFFlagChatWindowUseCallbackOptimizations)
-local GetFFlagTextChatEnableUniverseChatTabsFunction = require(Parent.ExpChatShared).Flags.GetFFlagTextChatEnableUniverseChatTabs
+local GetFFlagTextChatEnableUniverseChatTabsFunction = ExpChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
 local IsGlobalChatMessageModule = require(ExpChat.isGlobalChatMessage)
 
 return function(p1)

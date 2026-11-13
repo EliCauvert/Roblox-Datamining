@@ -1,12 +1,13 @@
 ﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
 local Parent = GenericAbuseReporting.Parent
 local DashModule = require(Parent.Dash)
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local FFlagAbuseReportImproveErrorEventsModule = require(GenericAbuseReporting.Flags.FFlagAbuseReportImproveErrorEvents)
 local Button = FoundationModule.Button
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
-local FocusNavigableSurfaceIdentifierEnum = require(Parent.FocusNavigationUtils).FocusNavigableSurfaceIdentifierEnum
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local DialogSize = FoundationModule.Enums.DialogSize
 local FillBehavior = FoundationModule.Enums.FillBehavior
 local Icon = FoundationModule.Icon
@@ -20,11 +21,14 @@ local Skeleton = FoundationModule.Skeleton
 local Text = FoundationModule.Text
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local View = FoundationModule.View
+local UseInExpCustomSubmitModule = require(GenericAbuseReporting.BeduiV2.Hooks.useInExpCustomSubmit)
 local UseInExpFocusNavigationRefsModule = require(GenericAbuseReporting.BeduiV2.Hooks.FocusNavigation.useInExpFocusNavigationRefs)
+local AbuseReportAnalyticsContextModule = require(GenericAbuseReporting.BeduiV2.Analytics.AbuseReportAnalyticsContext)
 local _ = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
 local AnalyticsServiceModule = require(GenericAbuseReporting.BeduiV2.Analytics.analyticsService)
 local FooterModule = require(GenericAbuseReporting.BeduiV2.Components.Footer)
 local InExpDropdownWithPopoverModule = require(GenericAbuseReporting.BeduiV2.Components.InExpDropdownWithPopover)
+local LayoutSlotsModule = require(GenericAbuseReporting.BeduiV2.Components.LayoutSlots)
 local ScrollToItemModule = require(GenericAbuseReporting.BeduiV2.Utils.scrollToItem)
 local TextWithTranslationModule = require(GenericAbuseReporting.BeduiV2.Utils.Translate.TextWithTranslation)
 local _ = require(GenericAbuseReporting.BeduiV2.Utils.Translate.translate)
@@ -32,8 +36,8 @@ local UseArTranslationFunction = require(GenericAbuseReporting.BeduiV2.Utils.Tra
 local UseGroupedListLoaderFunction = require(GenericAbuseReporting.BeduiV2.Loaders.useLoader).useGroupedListLoader
 local FormatErrorDetailForAnalyticsFunction = AnalyticsServiceModule.formatErrorDetailForAnalytics
 local TelemetryEventType = AnalyticsServiceModule.TelemetryEventType
-local UseAbuseReportAnalyticsFunction = require(GenericAbuseReporting.BeduiV2.Analytics.AbuseReportAnalyticsContext).useAbuseReportAnalytics
-local UseLayoutSlotsFunction = require(GenericAbuseReporting.BeduiV2.Components.LayoutSlots).useLayoutSlots
+local UseAbuseReportAnalyticsFunction = AbuseReportAnalyticsContextModule.useAbuseReportAnalytics
+local UseLayoutSlotsFunction = LayoutSlotsModule.useLayoutSlots
 local FixChatSelectorDropdownPadding = game:DefineFastFlag("FixChatSelectorDropdownPadding", false)
 
 local function _(Id, p1)
@@ -89,7 +93,7 @@ local function _(Id, p1)
 	end, { Id })
 end
 
-local REPORTMESSAGENOTSHOWNITEMID = require(GenericAbuseReporting.BeduiV2.Hooks.useInExpCustomSubmit).REPORT_MESSAGE_NOT_SHOWN_ITEM_ID
+local REPORTMESSAGENOTSHOWNITEMID = UseInExpCustomSubmitModule.REPORT_MESSAGE_NOT_SHOWN_ITEM_ID
 
 local function LoadingContent()
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Sheet (copy), View (copy), DashModule (copy), Skeleton (copy), Radius (copy)
@@ -348,6 +352,7 @@ return ReactModule.memo(function(p1)
 		UseStateResult2_2(false)
 	end, {})
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(false)
+	local UseInExpFocusNavigationRefsModuleResult = UseInExpFocusNavigationRefsModule(FocusNavigableSurfaceIdentifierEnum.CentralOverlay, UseResult1, not UseStateResult4)
 	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: DashModule (upval), Data (copy)
 		return DashModule.map(Data, function(Current)
@@ -369,7 +374,7 @@ return ReactModule.memo(function(p1)
 		ChatSelectionSheet = ReactModule.createElement(Sheet.Root, {
 			centerSheetHeight = 1,
 			preferCenterSheet = true,
-			ref = UseInExpFocusNavigationRefsModule(FocusNavigableSurfaceIdentifierEnum.CentralOverlay, UseResult1, not UseStateResult4),
+			ref = UseInExpFocusNavigationRefsModuleResult,
 			isOpen = UseStateResult3,
 			size = DialogSize.Medium,
 			snapPoints = { 0.9 },

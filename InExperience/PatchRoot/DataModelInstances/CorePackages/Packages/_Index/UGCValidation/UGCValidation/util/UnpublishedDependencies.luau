@@ -1,9 +1,10 @@
 ﻿local Parent = script.Parent.Parent
+local APIUtilModule = require(Parent.util.APIUtil)
 local _ = require(Parent.util.Types)
 local GetFFlagUGCValidateDescendantIdsPublishedModule = require(Parent.flags.getFFlagUGCValidateDescendantIdsPublished)
 local HttpRbxApiService = game:GetService("HttpRbxApiService")
 local HttpService = game:GetService("HttpService")
-local Url: string = `https://apis.{require(Parent.util.APIUtil).getBaseDomain()}assets/rcc/v1/assets/`
+local Url: string = `https://apis.{APIUtilModule.getBaseDomain()}assets/rcc/v1/assets/`
 local UnpublishedDependenciesModule = {
 	getLatestVersionNumber = function(Text)
 		-- upvalues: HttpService (copy), HttpRbxApiService (copy), Url (copy)

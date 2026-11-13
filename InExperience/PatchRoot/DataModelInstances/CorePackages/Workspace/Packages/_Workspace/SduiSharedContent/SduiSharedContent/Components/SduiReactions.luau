@@ -1,12 +1,14 @@
 ﻿local SduiSharedContent = script:FindFirstAncestor("SduiSharedContent")
 local Parent = SduiSharedContent.Parent
+local DataHydrationModule = require(Parent.DataHydration)
+local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local ReactionsModule = require(Parent.Reactions)
 local _ = require(SduiSharedContent.Stores.ContentReactionsStoreTypes)
 local AddReactionButtonModule = require(SduiSharedContent.Components.AddReactionButton)
 local UseOptimisticReactionsModule = require(SduiSharedContent.Components.useOptimisticReactions)
-local GetLocalPlayerUserIdFunction = require(Parent.DataHydration).DataHydrationUtils.getLocalPlayerUserId
-local View = require(Parent.Foundation).View
+local GetLocalPlayerUserIdFunction = DataHydrationModule.DataHydrationUtils.getLocalPlayerUserId
+local View = FoundationModule.View
 
 local function findReaction(AvailableByTypeEntry, List)
 	local ReactionType = AvailableByTypeEntry.reactionType

@@ -2,6 +2,7 @@
 local Parent = Foundation.Parent
 local BuilderIconsModule = require(Parent.BuilderIcons)
 local ReactModule = require(Parent.React)
+local ChipSizeModule = require(Foundation.Enums.ChipSize)
 local DividerModule = require(Foundation.Components.Divider)
 local IconModule = require(Foundation.Components.Icon)
 local OrientationModule = require(Foundation.Enums.Orientation)
@@ -18,7 +19,7 @@ local IconVariant = BuilderIconsModule.IconVariant
 local config = {
 	Selectable = true,
 	testId = "--foundation-rating",
-	size = require(Foundation.Enums.ChipSize).Medium,
+	size = ChipSizeModule.Medium,
 	value = RatingValueModule.None
 }
 

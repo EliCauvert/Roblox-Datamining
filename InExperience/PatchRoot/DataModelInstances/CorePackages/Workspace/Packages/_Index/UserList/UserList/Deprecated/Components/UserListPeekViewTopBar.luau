@@ -1,8 +1,9 @@
 ﻿local Parent = script:FindFirstAncestor("UserList").Parent
 local ReactModule = require(Parent.React)
+local RoactUtilsModule = require(Parent.RoactUtils)
 local FoundationModule = require(Parent.Foundation)
 local UseTopBarHeightFunction = require(Parent.RobloxAppHooks).useTopBarHeight
-local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
 local View = FoundationModule.View
 local IconButton = FoundationModule.IconButton
 

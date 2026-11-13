@@ -15,6 +15,7 @@ local Body = CompositionTagsModule.ContentRegion.Body
 local Detail = CompositionTagsModule.Layout.Detail
 local ClipAtMaxWidth = CompositionTagsModule.Utility.ClipAtMaxWidth
 local Root = if FFlagEnableSplitPane then CompositionTagsModule.SupportRegion.Root else nil
+local Collapsed = if FFlagEnableSplitPane then CompositionTagsModule.SupportRegion.Collapsed else nil
 local CompositionSupportMinSize = if FFlagEnableSplitPane then "CompositionSupportMinSize" else nil
 local CompositionSupportMaxSize = if FFlagEnableSplitPane then "CompositionSupportMaxSize" else nil
 local RegionOverrides = if FFlagEnableSplitPane then CompositionConfigModule.getRegionOverrides(AppCompositionEnumsModule.RegionName.SupportRegion) else nil
@@ -50,7 +51,7 @@ local config = {
 		MinSize = "$" .. CompositionSupportMinSize,
 		MaxSize = "$" .. CompositionSupportMaxSize
 	} else nil,
-	[`.{if FFlagEnableSplitPane then CompositionTagsModule.SupportRegion.Collapsed else nil}`] = if FFlagEnableSplitPane then { Size = UDim2.new(0, 0, 1, 0) } else nil
+	[`.{Collapsed}`] = if FFlagEnableSplitPane then { Size = UDim2.new(0, 0, 1, 0) } else nil
 }
 
 local function applyRules(Parent, List)

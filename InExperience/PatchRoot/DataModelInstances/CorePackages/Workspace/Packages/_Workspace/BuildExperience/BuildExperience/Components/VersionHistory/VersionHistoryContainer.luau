@@ -1,9 +1,11 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
+local DataHydrationModule = require(Parent.DataHydration)
 local LocalizationModule = require(Parent.Localization)
 local PlaceVersionHistoryModule = require(Parent.DataHydration.PlaceVersionHistory)
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
+local TimeModule = require(Parent.Time)
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local GetAgentRollbackRequestStoreModule = require(BuildExperience.Stores.GetAgentRollbackRequestStore)
 local GetPlaytestLoadingStoreModule = require(Parent.BuildExperiencePlaytestLaunch.GetPlaytestLoadingStore)
@@ -16,8 +18,8 @@ local VersionHistoryUtilsModule = require(script.Parent.VersionHistoryUtils)
 local UseScrollToTopAfterRestoreModule = require(script.Parent.useScrollToTopAfterRestore)
 local UseGamePermissionsModule = require(BuildExperience.useGamePermissions)
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
-local DataStatus = require(Parent.DataHydration).DataStatus
-local DateHelper = require(Parent.Time).DateHelper
+local DataStatus = DataHydrationModule.DataStatus
+local DateHelper = TimeModule.DateHelper
 local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 
 local function _(p1: number, p2)
@@ -193,6 +195,15 @@ return function(p4)
 	})
 	local UseGamePermissionsModuleResult = if FFlagBuildCheckGamePermissionsModule then UseGamePermissionsModule({ universeId = p4.universeId }) else nil
 	local NoFFlagBuildCheckGamePermissionsModule = not FFlagBuildCheckGamePermissionsModule or UseGamePermissionsModuleResult.canEditOnBuild
+	local UseLatestVersionCardViewModelModuleResult = UseLatestVersionCardViewModelModule({
+		layoutOrder = 0,
+		entry = UseMemoResult2[1],
+		placeId = p4.placeId,
+		universeId = p4.universeId,
+		onClose = p4.onClose,
+		permissions = UseGamePermissionsModuleResult,
+		testId = if p4.testId then `{p4.testId}-latest-version-card` else nil
+	})
 	local VERSIONHISTORYLOADING = if UseSignalStateResult1 == DataStatus.NotReady then LocalizationStringsModule.VERSION_HISTORY_LOADING elseif UseSignalStateResult1 == DataStatus.Failed then LocalizationStringsModule.VERSION_HISTORY_LOAD_FAILED elseif #UseMemoResult2 == 0 then LocalizationStringsModule.VERSION_HISTORY_EMPTY else nil
 	local Loading = UseLocalizationResult1.loading
 	local LoadFailed = UseLocalizationResult1.loadFailed
@@ -211,15 +222,7 @@ return function(p4)
 			onEndReached = UseNextHistoryPageModuleResult,
 			testId = p4.testId,
 			liveVersion = UseLiveVersionCardViewModelModuleResult,
-			latestVersion = UseLatestVersionCardViewModelModule({
-				layoutOrder = 0,
-				entry = UseMemoResult2[1],
-				placeId = p4.placeId,
-				universeId = p4.universeId,
-				onClose = p4.onClose,
-				permissions = UseGamePermissionsModuleResult,
-				testId = if p4.testId then `{p4.testId}-latest-version-card` else nil
-			})
+			latestVersion = UseLatestVersionCardViewModelModuleResult
 		}),
 		RestoreErrorSnackbar = if UseAgentRollbackRestoreResult.errorText == nil then nil else ReactModule.createElement(AgentRollbackSnackbarModule, {
 			title = UseAgentRollbackRestoreResult.errorText,

@@ -18,6 +18,7 @@ local CorePackages = game:GetService("CorePackages")
 local UserGameSettings = UserSettings():GetService("UserGameSettings")
 local FFlagRefactorMenuConfirmationButtonsModule = require(RobloxGui.Modules.Settings.Flags.FFlagRefactorMenuConfirmationButtons)
 local RepositionDropDownScrim = game:DefineFastFlag("RepositionDropDownScrim", false)
+local FFlagEnablePioneerIGMAccountSectionModule = require(RobloxGui.Modules.Settings.Flags.FFlagEnablePioneerIGMAccountSection)
 local FFlagUIScaleEngineOptions = require(CorePackages.Workspace.Packages.SharedFlags).FFlagUIScaleEngineOptions
 local FFlagUIScaleSliderImprovementsModule = require(RobloxGui.Modules.Settings.Flags.FFlagUIScaleSliderImprovements)
 local Chrome = RobloxGui.Modules.Chrome
@@ -1084,18 +1085,18 @@ local function CreateSelector(p7, CurrentIndex)
 	})
 	
 	if UserInputService.PreferredInput ~= Enum.PreferredInput.Touch then
-		local function v175(Image)
+		local function v176(Image)
 			-- upvalues: ARROWCOLOR (upval)
 			Image.ImageColor3 = ARROWCOLOR
 		end
 		
-		local function v176(Image)
+		local function v177(Image)
 			-- upvalues: ARROWCOLORHOVER (upval)
 			Image.ImageColor3 = ARROWCOLORHOVER
 		end
 		
-		addHoverState(Parent, Image, v175, v176)
-		addHoverState(Parent1, Image1, v175, v176)
+		addHoverState(Parent, Image, v176, v177)
+		addHoverState(Parent1, Image1, v176, v177)
 	end
 	config.Selections = {}
 	local t1 = {}
@@ -1764,18 +1765,18 @@ local function CreateNewSlider(p9, CurrentStep, MinStep, Text, Text1)
 	})
 	
 	if UserInputService.PreferredInput ~= Enum.PreferredInput.Touch then
-		local function v242(Image)
+		local function v243(Image)
 			-- upvalues: ARROWCOLOR (upval)
 			Image.ImageColor3 = ARROWCOLOR
 		end
 		
-		local function v243(Image)
+		local function v244(Image)
 			-- upvalues: ARROWCOLORHOVER (upval)
 			Image.ImageColor3 = ARROWCOLORHOVER
 		end
 		
-		addHoverState(Parent1, v6, v242, v243)
-		addHoverState(Parent2, v7, v242, v243)
+		addHoverState(Parent1, v6, v243, v244)
+		addHoverState(Parent2, v7, v243, v244)
 	end
 	t.Steps = {}
 	local XScale = 1 / Number
@@ -2252,7 +2253,7 @@ local function CreateNewSlider(p9, CurrentStep, MinStep, Text, Text1)
 		end
 	end)
 	
-	local function v254()
+	local function v255()
 		-- upvalues: CurrentTime (ref), setCurrentStep (copy), CurrentStep1 (ref), v4 (ref)
 		if CurrentTime == nil then return end
 		if tick() - CurrentTime >= 0.2 then
@@ -2350,7 +2351,7 @@ local function CreateNewSlider(p9, CurrentStep, MinStep, Text, Text1)
 	end)
 	local Flag1 = false
 	GuiService.Changed:Connect(function(p13)
-		-- upvalues: GuiService (upval), t (copy), Flag1 (ref), CurrentTime (ref), RunService (upval), Guid (copy), v254 (copy)
+		-- upvalues: GuiService (upval), t (copy), Flag1 (ref), CurrentTime (ref), RunService (upval), Guid (copy), v255 (copy)
 		if p13 ~= "SelectedCoreObject" then return end
 		local SelectedCoreObject = GuiService.SelectedCoreObject
 		
@@ -2358,7 +2359,7 @@ local function CreateNewSlider(p9, CurrentStep, MinStep, Text, Text1)
 			if not Flag1 then
 				Flag1 = true
 				CurrentTime = tick()
-				RunService:BindToRenderStep(Guid, Enum.RenderPriority.Input.Value + 1, v254)
+				RunService:BindToRenderStep(Guid, Enum.RenderPriority.Input.Value + 1, v255)
 				
 				return
 			end
@@ -2831,8 +2832,8 @@ local function AddNewRow(Key, Text, p13, p14, p15, Amount: number, Text1, p16, p
 	return Parent, Label, Config
 end
 
-local function AddNewRowObject(Key, Text, Gui, Amount, p13)
-	-- upvalues: Totals (copy), CreateFunction (copy), YOffset (ref), SelectionImageObject (copy), ThemeModule (copy), NoFFlagResponsiveUnitsDeprecateTenFoot (copy), t (copy), GuiService (copy), VRService (copy)
+local function AddNewRowObject(Key, Text, Gui, Amount, p13, Text1)
+	-- upvalues: Totals (copy), CreateFunction (copy), YOffset (ref), SelectionImageObject (copy), ThemeModule (copy), FFlagEnablePioneerIGMAccountSectionModule (copy), NoFFlagResponsiveUnitsDeprecateTenFoot (copy), t (copy), GuiService (copy), VRService (copy)
 	local Total = if Totals[Key] then Totals[Key] else 0
 	local Image = CreateFunction("ImageButton")({
 		BackgroundTransparency = 1,
@@ -2866,30 +2867,86 @@ local function AddNewRowObject(Key, Text, Gui, Amount, p13)
 		CornerRadius = ThemeModule.DefaultCornerRadius,
 		Parent = Image
 	})
-	local Label = CreateFunction("TextLabel")({
-		TextWrapped = true,
-		BackgroundTransparency = 1,
-		ZIndex = 2,
-		Name = Text .. "Label",
-		Text = Text,
-		Font = ThemeModule.font(Enum.Font.SourceSansBold, "UtilityRow"),
-		TextSize = ThemeModule.textSize(16, "UtilityRow"),
-		TextColor3 = Color3.fromRGB(255, 255, 255),
-		TextXAlignment = Enum.TextXAlignment.Left,
-		AutomaticSize = Enum.AutomaticSize.Y,
-		Size = UDim2.new(0.4, -20, 1, 0),
-		Position = UDim2.new(0, 10, 0, 0),
-		Parent = Image
-	})
-	CreateFunction("UIPadding")({
-		Name = Text .. "UIPadding",
-		PaddingBottom = UDim.new(0, 10),
-		PaddingTop = UDim.new(0, 10),
-		Parent = Label
-	})
+	local Label = nil
 	
+	if FFlagEnablePioneerIGMAccountSectionModule and Text1 then
+		local Parent = CreateFunction("Frame")({
+			BackgroundTransparency = 1,
+			Name = Text .. "RowLabelAndDescriptionFrame",
+			Position = UDim2.new(0, 10, 0, 0),
+			Size = UDim2.new(0.4, -20, 0, 50),
+			AutomaticSize = Enum.AutomaticSize.Y,
+			Parent = Image
+		})
+		Label = CreateFunction("TextLabel")({
+			BackgroundTransparency = 1,
+			TextWrapped = true,
+			ZIndex = 2,
+			LayoutOrder = 1,
+			Name = Text .. "Label",
+			Text = Text,
+			Font = ThemeModule.font(Enum.Font.SourceSansBold, "UtilityRow"),
+			TextSize = ThemeModule.textSize(16, "UtilityRow"),
+			TextColor3 = Color3.fromRGB(255, 255, 255),
+			TextXAlignment = Enum.TextXAlignment.Left,
+			Size = UDim2.fromScale(1, 0),
+			AutomaticSize = Enum.AutomaticSize.Y,
+			Parent = Parent
+		})
+		CreateFunction("TextLabel")({
+			TextTransparency = 0.25,
+			TextWrapped = true,
+			BackgroundTransparency = 1,
+			ZIndex = 2,
+			LayoutOrder = 2,
+			Name = Text .. "Description",
+			Text = Text1,
+			Font = ThemeModule.font(Enum.Font.SourceSans, "UtilityRow"),
+			TextSize = ThemeModule.textSize(18, "UtilityRow"),
+			TextColor3 = Color3.fromRGB(255, 255, 255),
+			TextXAlignment = Enum.TextXAlignment.Left,
+			Size = UDim2.fromScale(1, 0),
+			AutomaticSize = Enum.AutomaticSize.Y,
+			Parent = Parent
+		})
+		CreateFunction("UIListLayout")({
+			Name = Text .. "UIListLayout",
+			VerticalAlignment = Enum.VerticalAlignment.Center,
+			SortOrder = Enum.SortOrder.LayoutOrder,
+			Padding = UDim.new(0, 8),
+			Parent = Parent
+		})
+		CreateFunction("UIPadding")({
+			Name = Text .. "UIPadding",
+			PaddingBottom = UDim.new(0, 10),
+			PaddingTop = UDim.new(0, 10),
+			Parent = Parent
+		})
+	else
+		Label = CreateFunction("TextLabel")({
+			TextWrapped = true,
+			BackgroundTransparency = 1,
+			ZIndex = 2,
+			Name = Text .. "Label",
+			Text = Text,
+			Font = ThemeModule.font(Enum.Font.SourceSansBold, "UtilityRow"),
+			TextSize = ThemeModule.textSize(16, "UtilityRow"),
+			TextColor3 = Color3.fromRGB(255, 255, 255),
+			TextXAlignment = Enum.TextXAlignment.Left,
+			AutomaticSize = Enum.AutomaticSize.Y,
+			Size = UDim2.new(0.4, -20, 1, 0),
+			Position = UDim2.new(0, 10, 0, 0),
+			Parent = Image
+		})
+		CreateFunction("UIPadding")({
+			Name = Text .. "UIPadding",
+			PaddingBottom = UDim.new(0, 10),
+			PaddingTop = UDim.new(0, 10),
+			Parent = Label
+		})
+	end
 	local function onResized(_, IsXBelow)
-		-- upvalues: p13 (copy), Label (copy), ThemeModule (upval), NoFFlagResponsiveUnitsDeprecateTenFoot (upval)
+		-- upvalues: p13 (copy), Label (ref), ThemeModule (upval), NoFFlagResponsiveUnitsDeprecateTenFoot (upval)
 		if p13 then
 			UDim2.new(0, 200, 1, 0)
 		end
@@ -2974,9 +3031,9 @@ local UtilityModule = {
 		-- upvalues: AddNewRow (copy)
 		return AddNewRow(p13, p14, p15, p16, p17, p18, p19, p20, p21, Interactable)
 	end,
-	AddNewRowObject = function(_, p13, p14, p15, p16, p17)
+	AddNewRowObject = function(_, p13, p14, p15, p16, p17, p18)
 		-- upvalues: AddNewRowObject (copy)
-		return (AddNewRowObject(p13, p14, p15, p16, p17))
+		return (AddNewRowObject(p13, p14, p15, p16, p17, p18))
 	end,
 	ShowAlert = function(_, p13, p14, p15, p16, p17)
 		-- upvalues: ShowAlert (copy)

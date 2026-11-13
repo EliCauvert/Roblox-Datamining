@@ -31,6 +31,7 @@ local IconPosition = FoundationModule.Enums.IconPosition
 local IconVariant = FoundationModule.Enums.IconVariant
 local Text = FoundationModule.Text
 local View = FoundationModule.View
+local Images = require(Parent.FoundationImages).Images
 local UseInterventionFocusRootModule = require(InterventionShared.Hooks.useInterventionFocusRoot)
 local UseInterventionPlacementModule = require(InterventionShared.Hooks.useInterventionPlacement)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
@@ -42,7 +43,7 @@ local FFlagInterventionDialogBlockExperienceInputModule = require(InterventionSh
 local FFlagNavigateToSafetyDashboardForAppeals = require(Parent.SharedFlags).FFlagNavigateToSafetyDashboardForAppeals
 local FFlagUFRDialogContentCutoffFixModule = require(InterventionShared.Flags.FFlagUFRDialogContentCutoffFix)
 local FFlagUFRImprovementsModule = require(InterventionShared.Flags.FFlagUFRImprovements)
-local IconsActionsAccept = require(Parent.FoundationImages).Images["icons/actions/accept"]
+local IconsActionsAccept = Images["icons/actions/accept"]
 
 local function _(p1)
 	return if p1 == "" then nil else p1

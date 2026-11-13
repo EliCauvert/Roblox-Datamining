@@ -1,5 +1,7 @@
 ﻿local Songbird = script:FindFirstAncestor("Songbird")
+local AssetFavoritesModule = require(Songbird.Parent.AssetFavorites)
 local CryoModule = require(Songbird.Parent.Cryo)
+local ReactSceneUnderstandingModule = require(Songbird.Parent.ReactSceneUnderstanding)
 local UseAudioMetadataModule = require(Songbird.Hooks.useAudioMetadata)
 local GetAssetIdForAudioSourceModule = require(Songbird.Common.getAssetIdForAudioSource)
 local _ = require(Songbird.types)
@@ -7,8 +9,8 @@ local LoggerModule = require(Songbird.logger)
 local AnalyticActionsModule = require(Songbird.Analytics.AnalyticActions)
 local SendChromeWindowAnalyticsModule = require(Songbird.Analytics.sendChromeWindowAnalytics)
 local UseMemoFunction = require(Songbird.Parent.React).useMemo
-local UseAudibleSoundsFunction = require(Songbird.Parent.ReactSceneUnderstanding).useAudibleSounds
-local UseAssetFavoritingFunction = require(Songbird.Parent.AssetFavorites).useAssetFavoriting
+local UseAudibleSoundsFunction = ReactSceneUnderstandingModule.useAudibleSounds
+local UseAssetFavoritingFunction = AssetFavoritesModule.useAssetFavoriting
 
 return function()
 	-- upvalues: UseAudibleSoundsFunction (copy), UseMemoFunction (copy), CryoModule (copy), GetAssetIdForAudioSourceModule (copy), UseAudioMetadataModule (copy), UseAssetFavoritingFunction (copy), LoggerModule (copy), SendChromeWindowAnalyticsModule (copy), AnalyticActionsModule (copy)

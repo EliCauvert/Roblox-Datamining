@@ -92,9 +92,10 @@ end, function(Frame, Frame1)
 	elseif FFlagBuildAgentAdCampaignCardModule and (hasCampaignCard(Message) or hasCampaignCard(Message1)) and (Frame.onAgentAdCampaignOfferSelected ~= Frame1.onAgentAdCampaignOfferSelected or Frame.getAgentAdCampaignCardState ~= Frame1.getAgentAdCampaignCardState or Frame.onAgentAdCampaignActive ~= Frame1.onAgentAdCampaignActive or Frame.isPageVisible ~= Frame1.isPageVisible or Frame.scrollingFrameRef ~= Frame1.scrollingFrameRef or Frame.isAgentAdCampaignCreateDisabled ~= Frame1.isAgentAdCampaignCreateDisabled) then
 		return false
 	elseif Message.isLatestPublishTurn == Message1.isLatestPublishTurn then
-		local IsIsDone = Message1.isDone == true
+		local IsIsDone = Message.isDone == true
+		local IsIsDone1 = Message1.isDone == true
 		
-		return Message.isDone == true and IsIsDone
+		return IsIsDone and IsIsDone1
 	else
 		return false
 	end

@@ -14,6 +14,8 @@ local function v6()
 	local LocalPlayer = (if AXSubscriptionSignalsPlayersServiceOverride and PlayersServiceForTesting ~= nil then PlayersServiceForTesting else Players).LocalPlayer
 	local Signal, Signal2 = SignalsModule.createSignal(LocalPlayer.HasRobloxSubscription == true)
 	local Signal1, Signal2_1 = SignalsModule.createSignal(false)
+	local Signal3, Signal2_2 = SignalsModule.createSignal(false)
+	local Signal4, Signal2_3 = SignalsModule.createSignal(false)
 	local Connection = LocalPlayer:GetPropertyChangedSignal("HasRobloxSubscription"):Connect(function()
 		-- upvalues: LocalPlayer (copy), Signal (copy), Signal2 (copy), Signal2_1 (copy)
 		local IsHasRobloxSubscription = LocalPlayer.HasRobloxSubscription == true
@@ -28,6 +30,10 @@ local function v6()
 	return {
 		getHasRobloxSubscription = Signal,
 		getGainedRobloxSubscriptionThisSession = Signal1,
+		getHasRobloxSubscriptionUpgradedThisSession = Signal3,
+		setHasRobloxSubscriptionUpgradedThisSession = Signal2_2,
+		getExistingSubscriptionUpgradedThisSession = Signal4,
+		setExistingSubscriptionUpgradedThisSession = Signal2_3,
 		setHasRobloxSubscriptionForTesting = Signal2,
 		setGainedRobloxSubscriptionThisSessionForTesting = Signal2_1,
 		cleanup = function()

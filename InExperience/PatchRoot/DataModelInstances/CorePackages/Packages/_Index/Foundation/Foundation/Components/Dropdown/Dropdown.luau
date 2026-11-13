@@ -5,20 +5,20 @@ local PopoverModule = require(Foundation.Components.Popover)
 local _ = require(Foundation.Components.Types)
 local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
 local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local InputVariantModule = require(Foundation.Enums.InputVariant)
 local PopoverAlignModule = require(Foundation.Enums.PopoverAlign)
+local PopoverSideModule = require(Foundation.Enums.PopoverSide)
 local RadiusModule = require(Foundation.Enums.Radius)
 local DropdownControlModule = require(script.Parent.DropdownControl)
 local MarkSelectedItemModule = require(script.Parent.markSelectedItem)
 local config = {
 	testId = "--foundation-dropdown",
-	variant = require(Foundation.Enums.InputVariant).Standard,
+	variant = InputVariantModule.Standard,
 	width = UDim.new(0, 400),
-	size = require(Foundation.Enums.InputSize).Medium
+	size = InputSizeModule.Medium
 }
-local Side = {
-	offset = 5,
-	position = require(Foundation.Enums.PopoverSide).Bottom
-}
+local Side = { offset = 5, position = PopoverSideModule.Bottom }
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), MarkSelectedItemModule (copy), PopoverModule (copy), DropdownControlModule (copy), WithCommonPropsModule (copy), PopoverAlignModule (copy), Side (copy), RadiusModule (copy), BaseMenuModule (copy)

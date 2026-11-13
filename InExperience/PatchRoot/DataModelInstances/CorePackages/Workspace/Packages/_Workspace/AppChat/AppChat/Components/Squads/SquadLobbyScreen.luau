@@ -1,6 +1,7 @@
 ﻿local AppChat = script:FindFirstAncestor("AppChat")
 local EnumScreensModule = require(AppChat.EnumScreens)
 local Parent = AppChat.Parent
+local SharedFlagsModule = require(Parent.SharedFlags)
 local CryoModule = require(Parent.Cryo)
 local ReactModule = require(Parent.React)
 local _ = require(Parent.Squads.ModelTypes)
@@ -11,7 +12,7 @@ local SquadLobbyScreen = ReactModule.PureComponent:extend("SquadLobbyScreen")
 local ChatPlacementContextModule = require(AppChat.Contexts.ChatPlacementContext)
 local WithChatPlacementContextFunction = ChatPlacementContextModule.withChatPlacementContext
 local ParentContainerContextModule = require(AppChat.Contexts.ParentContainer.ParentContainerContext)
-local FFlagEnablePartyVoiceChangersInLua = require(Parent.SharedFlags).FFlagEnablePartyVoiceChangersInLua
+local FFlagEnablePartyVoiceChangersInLua = SharedFlagsModule.FFlagEnablePartyVoiceChangersInLua
 local FFlagAppChatIxpScreenExposureModule = require(AppChat.Flags.FFlagAppChatIxpScreenExposure)
 local IXPNavigationUtilsModule = require(AppChat.Utils.IXPNavigationUtils)
 local GetTopBarStoreModule = require(AppChat.Stores.GetTopBarStore)
@@ -133,7 +134,7 @@ function SquadLobbyScreen.render(p2)
 		local IsPlacementInExperience = ChatPlacementContextModule.isPlacementInExperience(p3.chatPlacement)
 		
 		if p2.state.isFocused then
-			local function v29(NavigateToChat)
+			local function v30(NavigateToChat)
 				-- upvalues: ReactModule (upval), SquadLobbyModule (upval), p2 (upval), FFlagEnablePartyVoiceChangersInLua (upval), IsPlacementInExperience (copy)
 				return ReactModule.createElement(SquadLobbyModule, {
 					navigateToHomePage = p2.navigateToHomePage,
@@ -150,8 +151,8 @@ function SquadLobbyScreen.render(p2)
 			
 			return if IsPlacementInExperience then ReactModule.createElement(ParentContainerContextModule.Consumer, {
 				render = function(p4)
-					-- upvalues: v29 (copy), p2 (upval)
-					return v29(function(p5)
+					-- upvalues: v30 (copy), p2 (upval)
+					return v30(function(p5)
 						-- upvalues: p4 (copy), p2 (upval)
 						return p4.openFriendsChatConversation(p5):andThen(function(Result)
 							-- upvalues: p2 (upval)
@@ -161,7 +162,7 @@ function SquadLobbyScreen.render(p2)
 						end)
 					end)
 				end
-			}) else v29(nil)
+			}) else v30(nil)
 		else
 			return nil
 		end

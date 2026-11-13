@@ -2,8 +2,9 @@
 local CryoModule = require(Songbird.Parent.Cryo)
 local ReactModule = require(Songbird.Parent.React)
 local FoundationModule = require(Songbird.Parent.Foundation)
+local ReactUtilsModule = require(Songbird.Parent.ReactUtils)
 local UseCallbackFunction = ReactModule.useCallback
-local CreateNextOrderFunction = require(Songbird.Parent.ReactUtils).createNextOrder
+local CreateNextOrderFunction = ReactUtilsModule.createNextOrder
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local config = { iconSize = FoundationModule.Enums.IconSize.Medium }
 

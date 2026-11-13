@@ -1,13 +1,14 @@
 ﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
 local Parent = ProfilePlatform.Parent
 local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local UseProfileJsonComponentModule = require(ProfilePlatform.Hooks.useProfileJsonComponent)
 local SocialLinksCarouselModule = require(ProfilePlatform.Components.SocialLinks.SocialLinksCarousel)
 local EnumsModule = require(ProfilePlatform.Common.Enums)
 local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
 local SocialMediaTypes = EnumsModule.SocialMediaTypes
-local Images = require(Parent.UIBlox).App.ImageSet.Images
+local Images = UIBloxModule.App.ImageSet.Images
 local config = {
 	[SocialMediaTypes.Twitter] = Images["icons/brands/x"],
 	[SocialMediaTypes.Facebook] = Images["icons/brands/facebook"],
@@ -31,7 +32,7 @@ return function(p1)
 		x = TextKeysModule.X
 	})
 	
-	local function v12(List)
+	local function v13(List)
 		-- upvalues: UseLocalizationResult (copy), config (upval)
 		local List1 = {}
 		
@@ -52,8 +53,8 @@ return function(p1)
 	end
 	
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: v12 (copy), UseProfileJsonComponentModuleResult (copy)
-		return (v12(UseProfileJsonComponentModuleResult))
+		-- upvalues: v13 (copy), UseProfileJsonComponentModuleResult (copy)
+		return (v13(UseProfileJsonComponentModuleResult))
 	end, {
 		UseProfileJsonComponentModuleResult,
 		UseLocalizationResult

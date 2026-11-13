@@ -1,13 +1,14 @@
 ﻿local UserGameSettings = UserSettings():GetService("UserGameSettings")
 local Parent = script:FindFirstAncestor("AppBlox").Parent
 local RoactModule = require(Parent.Roact)
+local UIBloxModule = require(Parent.UIBlox)
 local OtterModule = require(Parent.Otter)
 local CryoModule = require(Parent.Cryo)
 local TModule = require(Parent.t)
 local ArgCheckModule = require(Parent.ArgCheck)
 local AppCarouselModule = require(script.Parent.AppCarousel)
 local ScrollButtonModule = require(script.Parent.ScrollButton)
-local Images = require(Parent.UIBlox).App.ImageSet.Images
+local Images = UIBloxModule.App.ImageSet.Images
 local AXFixScrollingCarouselShowRightButton = game:DefineFastFlag("AXFixScrollingCarouselShowRightButton", false)
 local IconsActionsCycleLeft = Images["icons/actions/cycleLeft"]
 local IconsActionsCycleRight = Images["icons/actions/cycleRight"]

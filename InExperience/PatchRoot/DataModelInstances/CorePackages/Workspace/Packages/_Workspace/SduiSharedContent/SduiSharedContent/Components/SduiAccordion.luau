@@ -1,12 +1,13 @@
 ﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
 local FFlagSduiErrorPaths = require(Parent.SharedFlags).FFlagSduiErrorPaths
+local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local GetSduiComponentWrapperFunction = SduiCoreSystemModule.getSduiComponentWrapper
 local SduiBuilder = SduiCoreSystemModule.SduiBuilder
 local SduiErrors = SduiCoreSystemModule.SduiErrors
 local AddSduiErrorContextFieldsFunction = SduiCoreSystemModule.addSduiErrorContextFields
-local Accordion = require(Parent.Foundation).Accordion
+local Accordion = FoundationModule.Accordion
 local Frozen = table.freeze({})
 
 return ReactModule.memo(function(p1)

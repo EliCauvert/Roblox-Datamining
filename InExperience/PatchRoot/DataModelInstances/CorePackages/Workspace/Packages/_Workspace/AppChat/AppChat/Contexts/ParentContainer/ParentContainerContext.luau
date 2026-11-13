@@ -1,9 +1,11 @@
 ﻿local AppChat = script:FindFirstAncestor("AppChat")
 local Parent = AppChat.Parent
 local PromiseModule = require(Parent.Promise)
+local ReactModule = require(Parent.React)
+local SocialCommonModule = require(Parent.SocialCommon)
 local _ = require(AppChat.App.InExperienceAppChatModal)
 
-return require(Parent.React).createContext({
+return ReactModule.createContext({
 	getParentContainer = function()
 		return nil
 	end,
@@ -16,7 +18,7 @@ return require(Parent.React).createContext({
 	getShouldSetAppChatVisible = function(): boolean
 		return false
 	end,
-	entryPoint = require(Parent.SocialCommon).Enums.ChatEntryPointNames.Unknown,
+	entryPoint = SocialCommonModule.Enums.ChatEntryPointNames.Unknown,
 	showParentContainer = function() end,
 	hideParentContainer = function() end,
 	updateCurrentSquadId = function() end,

@@ -7,14 +7,16 @@ local LoggerModule = require(SquadsCore.Logger)
 local ScheduledSquadModelModule = require(SquadsCore.Models.ScheduledSquadModel)
 local SerializeTableModule = require(SquadsCore.Utils.serializeTable)
 local _ = require(SquadsCore.Types)
+local UrlBuilder = UrlBuilderModule.UrlBuilder
+local UrlBase = UrlBuilderModule.UrlBase
 local StrictInterfaceResult = TModule.strictInterface({
 	parentChannelId = TModule.string,
 	title = TModule.string,
 	startTime = TModule.string
 })
-local Url = UrlBuilderModule.UrlBuilder.new({
+local Url = UrlBuilder.new({
 	path = "group-up/v1/create-scheduled-group-up",
-	base = UrlBuilderModule.UrlBase.APIS
+	base = UrlBase.APIS
 })()
 
 return function(p1, Callback, Callback1)

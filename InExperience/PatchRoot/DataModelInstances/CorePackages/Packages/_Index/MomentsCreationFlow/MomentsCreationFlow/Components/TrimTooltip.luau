@@ -1,11 +1,12 @@
 ﻿local MomentsCreationFlow = script:FindFirstAncestor("MomentsCreationFlow")
 local Parent = MomentsCreationFlow.Parent
 local FoundationModule = require(Parent.Foundation)
+local MomentsCommonModule = require(Parent.MomentsCommon)
 local ReactModule = require(Parent.React)
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
-local GetFormatTimeFunction = require(Parent.MomentsCommon).Utils.getFormatTime
+local GetFormatTimeFunction = MomentsCommonModule.Utils.getFormatTime
 local DragHandleModule = require(MomentsCreationFlow.Enums.DragHandle)
 
 return function(p1)

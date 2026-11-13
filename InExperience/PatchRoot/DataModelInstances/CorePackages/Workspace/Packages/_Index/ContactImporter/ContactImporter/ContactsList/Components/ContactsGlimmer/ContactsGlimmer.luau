@@ -1,7 +1,8 @@
 ﻿local DependenciesModule = require(script:FindFirstAncestor("ContactImporter").dependencies)
 local Roact = DependenciesModule.Roact
+local UIBlox = DependenciesModule.UIBlox
 local Skeleton = DependenciesModule.Foundation.Skeleton
-local WithStyleFunction = DependenciesModule.UIBlox.Style.withStyle
+local WithStyleFunction = UIBlox.Style.withStyle
 local ContactsGlimmer = Roact.PureComponent:extend("ContactsGlimmer")
 
 function ContactsGlimmer.render(p1)

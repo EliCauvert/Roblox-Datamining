@@ -1,6 +1,7 @@
 ﻿local CorePackages = game:GetService("CorePackages")
 local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDependencies)
 local Roact = InGameMenuDependenciesModule.Roact
+local RoactRodux = InGameMenuDependenciesModule.RoactRodux
 local UIBlox = InGameMenuDependenciesModule.UIBlox
 local T = InGameMenuDependenciesModule.t
 local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
@@ -131,7 +132,7 @@ local function ControlLayoutContainerWithSelectionCursor(p1, Callback)
 	end)
 end
 
-return InGameMenuDependenciesModule.RoactRodux.UNSTABLE_connect2(nil, function(Callback)
+return RoactRodux.UNSTABLE_connect2(nil, function(Callback)
 	-- upvalues: NavigateBackModule (copy)
 	return {
 		onClosed = function()

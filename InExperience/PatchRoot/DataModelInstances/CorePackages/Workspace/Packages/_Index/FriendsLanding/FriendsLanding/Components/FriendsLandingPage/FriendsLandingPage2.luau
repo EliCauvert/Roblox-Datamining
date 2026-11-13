@@ -248,8 +248,10 @@ return function(p1)
 	local UseRefResult = ReactModule.useRef({})
 	local UseAnimatedScrollToSelectionResult, UseAnimatedScrollToSelectionResult2 = UseAnimatedScrollToSelectionFunction(Enum.ScrollingDirection.Y, 0, UseDesignTokensResult.Size.Size_2000, UseDesignTokensResult.LuaApps.App.Page.ScrollAnimationConfig)
 	local UseSignalStateResult = if FFlagExtendScrollingFramesBySafeInsets then UseSignalStateFunction(DisplayModule.GetDisplayStore().getDeviceSafePadding) else nil
+	local YOffset1 = (if IsUiModeMatch then if IsTotalFriendCountMatch or IsTotalFriendCountAbove or IsCursor then 8 else 1000 else 8) + (if FFlagExtendScrollingFramesBySafeInsets then UseSignalStateResult.bottom else 0)
 	local IsFromConnectionsHubModule1 = FFlagCreateConnectionsHub and IsFromConnectionsHubModule(UseNavigationResult)
 	local HasUseThemeBackgroundResult: boolean = if FFlagAppThemeHalloween2026FriendsBackground then UseThemeBackgroundFunction() ~= nil else false
+	local YOffset = -(if FFlagFixFriendsListGapInConnectionsHubModule then 0 else ConstantsModule.TOP_BAR_HEIGHT) + (if FFlagExtendScrollingFramesBySafeInsets then UseSignalStateResult.bottom else 0)
 	local UseFocusOnMountResult = UseFocusOnMountFunction()
 	local UseResult10 = if FFlagFriendsPageUserListEnabled then ReactModule.useCallback(function(CreateRow, User, Index)
 		-- upvalues: ReactModule (upval), FriendTileModule (upval), UseResult1 (copy), PageLoadingTimeReport (copy)
@@ -275,7 +277,7 @@ return function(p1)
 			}),
 			scrollView = ReactModule.createElement(RefreshScrollingFrame, {
 				scrollingElementProps = {
-					Size = UDim2.new(1, 0, 1, -(if FFlagFixFriendsListGapInConnectionsHubModule then 0 else ConstantsModule.TOP_BAR_HEIGHT) + (if FFlagExtendScrollingFramesBySafeInsets then UseSignalStateResult.bottom else 0)),
+					Size = UDim2.new(1, 0, 1, YOffset),
 					BackgroundTransparency = 1,
 					ScrollingDirection = Enum.ScrollingDirection.Y,
 					ScrollBarThickness = 0,
@@ -358,7 +360,7 @@ return function(p1)
 				additionalPadding = ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 8,
-					Size = UDim2.new(1, 0, 0, (if IsUiModeMatch then if IsTotalFriendCountMatch or IsTotalFriendCountAbove or IsCursor then 8 else 1000 else 8) + (if FFlagExtendScrollingFramesBySafeInsets then UseSignalStateResult.bottom else 0))
+					Size = UDim2.new(1, 0, 0, YOffset1)
 				})
 			})
 		})

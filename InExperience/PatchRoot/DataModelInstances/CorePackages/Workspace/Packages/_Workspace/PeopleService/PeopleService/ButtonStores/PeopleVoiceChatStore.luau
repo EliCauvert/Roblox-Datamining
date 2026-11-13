@@ -6,12 +6,13 @@ local Parent1 = Parent.Parent
 local SignalsModule = require(Parent1.Signals)
 local Modules = game:GetService("CoreGui"):WaitForChild("RobloxGui"):WaitForChild("Modules")
 local VoiceChat = Modules:WaitForChild("VoiceChat")
+local Flags = Modules:WaitForChild("Flags")
 local Default = require(VoiceChat:WaitForChild("VoiceChatServiceManager")).default
 local ConstantsModule = require(VoiceChat:WaitForChild("Constants"))
 local VOICESTATE = ConstantsModule.VOICE_STATE
 local VoiceStore = require(Parent1.ExpChat).Stores.GetVoiceStore(false)
 local NewResult = require(Parent1.CoreScriptsInitializer).CoreLogger:new(script.Name)
-local GetFFlagVoiceChatUILoggingModule = require(Modules:WaitForChild("Flags"):WaitForChild("GetFFlagVoiceChatUILogging"))
+local GetFFlagVoiceChatUILoggingModule = require(Flags:WaitForChild("GetFFlagVoiceChatUILogging"))
 local GetFFlagNewPeoplePageIconsFunction = require(Parent.Flags).GetFFlagNewPeoplePageIcons
 local GetFFlagAddPeoplePageCardLayoutFunction = require(Parent.Flags).GetFFlagAddPeoplePageCardLayout
 local FFlagVoiceVolumeControlsPerUserPlayerListButton = require(Parent.Flags).FFlagVoiceVolumeControlsPerUserPlayerListButton
@@ -291,7 +292,7 @@ return ((function()
 		return VOICEVOLUME.DEFAULT
 	end
 	
-	local function subscribePlayerVoiceVolume(UserId, Callback1)
+	local function subscribePlayerVoiceVolume(UserId, Callback)
 		-- upvalues: FFlagVoiceVolumeControlsPerUserPlayerListButton (upval), FFlagVoiceVolumeControlsPerUserPlayerGridMenu (upval), Players (upval), FFlagVoiceChatVolumePerUserMuteVolumeSync (upval), VoiceStore (upval), VOICESTATE (upval), VOICEVOLUME (upval), SignalsModule (upval)
 		if not FFlagVoiceVolumeControlsPerUserPlayerListButton and not FFlagVoiceVolumeControlsPerUserPlayerGridMenu then
 			return function() end
@@ -302,7 +303,7 @@ return ((function()
 			return function() end
 		end
 		local Connection = Player:GetPropertyChangedSignal("VoiceChatVolume"):Connect(function()
-			-- upvalues: Callback1 (copy), UserId (copy), FFlagVoiceVolumeControlsPerUserPlayerListButton (upval), FFlagVoiceVolumeControlsPerUserPlayerGridMenu (upval), Players (upval), FFlagVoiceChatVolumePerUserMuteVolumeSync (upval), VoiceStore (upval), VOICESTATE (upval), VOICEVOLUME (upval)
+			-- upvalues: Callback (copy), UserId (copy), FFlagVoiceVolumeControlsPerUserPlayerListButton (upval), FFlagVoiceVolumeControlsPerUserPlayerGridMenu (upval), Players (upval), FFlagVoiceChatVolumePerUserMuteVolumeSync (upval), VoiceStore (upval), VOICESTATE (upval), VOICEVOLUME (upval)
 			local DEFAULT = nil
 			repeat
 				if FFlagVoiceVolumeControlsPerUserPlayerListButton or FFlagVoiceVolumeControlsPerUserPlayerGridMenu then
@@ -315,17 +316,17 @@ return ((function()
 				end
 				DEFAULT = VOICEVOLUME.DEFAULT
 			until true
-			Callback1(DEFAULT)
+			Callback(DEFAULT)
 		end)
-		local Callback = nil
+		local Callback1 = nil
 		
 		if FFlagVoiceChatVolumePerUserMuteVolumeSync then
 			local Computed = SignalsModule.createComputed(function(p4): boolean
 				-- upvalues: UserId (copy), VoiceStore (upval), VOICESTATE (upval)
 				return if UserId then VoiceStore.getOrCreateVoiceState(UserId)(p4) == VOICESTATE.LOCAL_MUTED else false
 			end)
-			Callback = SignalsModule.createEffect(function(p4)
-				-- upvalues: Computed (copy), Callback1 (copy), UserId (copy), FFlagVoiceVolumeControlsPerUserPlayerListButton (upval), FFlagVoiceVolumeControlsPerUserPlayerGridMenu (upval), Players (upval), FFlagVoiceChatVolumePerUserMuteVolumeSync (upval), VoiceStore (upval), VOICESTATE (upval), VOICEVOLUME (upval)
+			Callback1 = SignalsModule.createEffect(function(p4)
+				-- upvalues: Computed (copy), Callback (copy), UserId (copy), FFlagVoiceVolumeControlsPerUserPlayerListButton (upval), FFlagVoiceVolumeControlsPerUserPlayerGridMenu (upval), Players (upval), FFlagVoiceChatVolumePerUserMuteVolumeSync (upval), VoiceStore (upval), VOICESTATE (upval), VOICEVOLUME (upval)
 				Computed(p4)
 				local DEFAULT = nil
 				repeat
@@ -339,15 +340,15 @@ return ((function()
 					end
 					DEFAULT = VOICEVOLUME.DEFAULT
 				until true
-				Callback1(DEFAULT)
+				Callback(DEFAULT)
 			end)
 		end
 		return function()
-			-- upvalues: Connection (copy), Callback (ref)
+			-- upvalues: Connection (copy), Callback1 (ref)
 			Connection:Disconnect()
 			
-			if Callback then
-				Callback()
+			if Callback1 then
+				Callback1()
 			end
 		end
 	end

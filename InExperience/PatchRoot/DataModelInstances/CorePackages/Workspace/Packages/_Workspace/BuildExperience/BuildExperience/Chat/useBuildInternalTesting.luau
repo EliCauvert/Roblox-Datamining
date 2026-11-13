@@ -3,9 +3,10 @@ local Parent = BuildExperience.Parent
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
+local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
 local _ = require(BuildExperience.Stores.GetBuildModelSelectionStore.createBuildModelSelectionStore)
 local _ = require(BuildExperience.Components.ModelPicker.ModelPickerTypes)
-local ExperimentOverride = require(Parent.DataHydration.CreatorAgentChat).experimentOverride
+local ExperimentOverride = CreatorAgentChatModule.experimentOverride
 local self = setmetatable({}, { __mode = "k" })
 
 return function(Entry, Session, RouteSessionId)

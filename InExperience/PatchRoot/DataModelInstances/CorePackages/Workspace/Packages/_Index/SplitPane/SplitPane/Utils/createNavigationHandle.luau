@@ -1,8 +1,9 @@
 ﻿local Parent = script:FindFirstAncestor("SplitPane").Parent
 local SignalsModule = require(Parent.Signals)
+local NavigationModule = require(Parent.Navigation)
 local OnScreenStoreModule = require(script.Parent.Parent.Stores.OnScreenStore)
 local RouteIdentityModule = require(script.Parent.routeIdentity)
-local GetRouteKeyIsInNavigationStateFunction = require(Parent.Navigation).getRouteKeyIsInNavigationState
+local GetRouteKeyIsInNavigationStateFunction = NavigationModule.getRouteKeyIsInNavigationState
 
 local function createNavigationHandle(Callback, Callback3, Callback1)
 	-- upvalues: SignalsModule (copy), GetRouteKeyIsInNavigationStateFunction (copy), OnScreenStoreModule (copy), RouteIdentityModule (copy)

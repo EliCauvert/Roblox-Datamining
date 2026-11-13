@@ -81,7 +81,7 @@ return {
 		end
 		if FFlagLuaAppMigrateGameTileActiveFriendsHydrationFix then
 			local UseFetchSortedDisplayNamesResult = useFetchSortedDisplayNames(p1.friendUserIds or {})
-			local CreateElementFunction1 = ReactModule.createElement
+			local CreateElementFunction2 = ReactModule.createElement
 			local v1 = "TextButton"
 			local config = {
 				Size = UDim2.new(1, 0, 0, Size.Size_500 + UseTextSizeOffsetResult),
@@ -92,7 +92,7 @@ return {
 				Selectable = false
 			}
 			local t = {}
-			local CreateElementFunction = ReactModule.createElement
+			local CreateElementFunction1 = ReactModule.createElement
 			local config1 = { faceGroupCount = 2 }
 			local Users = {}
 			
@@ -117,9 +117,9 @@ return {
 				badgeBackgroundColor = { Transparency = 0, Color = Colors.Smoke },
 				badgeContentColor = { Transparency = 0, Color = Colors.White }
 			}
-			t.OnlineFriends = CreateElementFunction(CoPlayFooter, config1)
+			t.OnlineFriends = CreateElementFunction1(CoPlayFooter, config1)
 			
-			return (CreateElementFunction1(v1, config, t))
+			return (CreateElementFunction2(v1, config, t))
 		else
 			local CreateElementFunction3 = ReactModule.createElement
 			local v2 = "Frame"
@@ -128,7 +128,7 @@ return {
 				Size = UDim2.new(1, 0, 0, Size.Size_500 + UseTextSizeOffsetResult)
 			}
 			local t1 = {}
-			local CreateElementFunction2 = ReactModule.createElement
+			local CreateElementFunction = ReactModule.createElement
 			local config3 = { faceGroupCount = 2 }
 			local Friends = p1.friends or {}
 			local Users1 = {}
@@ -154,7 +154,7 @@ return {
 				badgeBackgroundColor = { Transparency = 0, Color = Colors.Smoke },
 				badgeContentColor = { Transparency = 0, Color = Colors.White }
 			}
-			t1.OnlineFriends = CreateElementFunction2(CoPlayFooter, config3)
+			t1.OnlineFriends = CreateElementFunction(CoPlayFooter, config3)
 			
 			return CreateElementFunction3(v2, config2, t1)
 		end

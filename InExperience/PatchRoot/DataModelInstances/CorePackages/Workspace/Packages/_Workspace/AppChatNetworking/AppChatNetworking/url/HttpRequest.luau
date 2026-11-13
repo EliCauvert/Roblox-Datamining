@@ -2,9 +2,11 @@
 local AppChatNetworking = script:FindFirstAncestor("AppChatNetworking")
 local Parent = AppChatNetworking.Parent
 local HttpRequestModule = require(Parent.HttpRequest)
+local FFlagLuaAppDefaultHttpRetry = require(Parent.SharedFlags).FFlagLuaAppDefaultHttpRetry
 local AppChatNetworking1 = require(Parent.Loggers).Logger:new("AppChat.Networking")
 local AppChatNetworkingTelemetryModule = require(AppChatNetworking.analytics.AppChatNetworkingTelemetry)
 local GetFFlagDebugUnfilteredThreadsFunction = require(Parent.SharedFlags).getFFlagDebugUnfilteredThreads
+local ChallengeRequestWrapperFunction = require(Parent.GenericChallenges).Middleware.ChallengeRequestWrapper
 local AppChatNetworkResponse = require(Parent.SocialLuaAnalytics).Telemetry.new({
 	name = "AppChat.NetworkResponse",
 	description = "Event when a response is received from AppChat's networking layer",
@@ -36,7 +38,7 @@ local function chunkAndLogString(CONVERSATIONSName: string)
 end
 
 return {
-	default = require(Parent.GenericChallenges).Middleware.ChallengeRequestWrapper((HttpRequestModule.config({
+	default = ChallengeRequestWrapperFunction((HttpRequestModule.config({
 		requestFunction = function(Text: string, p1, p2)
 			-- upvalues: AppChatNetworking1 (copy), GetFFlagDebugUnfilteredThreadsFunction (copy), chunkAndLogString (copy), HttpRequestModule (copy)
 			AppChatNetworking1:info(`Fetching: [ requestMethod = "{p2}", url = "{Text}" ]`)
@@ -91,7 +93,7 @@ return {
 				end
 			end
 		end,
-		maxRetryCount = if require(Parent.SharedFlags).FFlagLuaAppDefaultHttpRetry then game:DefineFastInt("AppChatNetworkingHttpRetryCount", 4) else nil
+		maxRetryCount = if FFlagLuaAppDefaultHttpRetry then game:DefineFastInt("AppChatNetworkingHttpRetryCount", 4) else nil
 	}))),
 	logger = AppChatNetworking1
 }

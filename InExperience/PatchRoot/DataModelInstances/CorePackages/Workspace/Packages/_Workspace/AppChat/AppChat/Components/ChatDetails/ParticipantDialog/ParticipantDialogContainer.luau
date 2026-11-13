@@ -12,17 +12,20 @@ local InputHandlersModule = require(Parent.InputHandlers)
 local NotificationModalsManagerModule = require(Parent.NotificationModalsManager)
 local ReactModule = require(Parent.React)
 local _ = require(Parent.ReactFocusNavigation)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local UseGetFriendshipStatusFunction = require(Parent.FriendsHydrationReact).useGetFriendshipStatus
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local SocialCommonModule = require(Parent.SocialCommon)
+local SocialLuaAnalyticsModule = require(Parent.SocialLuaAnalytics)
 local NetworkingFriendsModule = require(AppChat.Http.NetworkingFriends)
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local FocusNavigableSurfaceWrapper = FocusNavigationUtilsModule.FocusNavigableSurfaceWrapper
 local AppFocusRoot = FocusNavigationUtilsModule.AppFocusRoot
 local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
-local FFlagDisableBlockAndReport = require(Parent.SharedFlags).FFlagDisableBlockAndReport
+local FFlagDisableBlockAndReport = SharedFlagsModule.FFlagDisableBlockAndReport
 local FFlagAppChatMigrateFriendshipStatusesModule = require(AppChat.Flags.FFlagAppChatMigrateFriendshipStatuses)
 local MemoFunction = ReactModule.memo
 local GenericDialogTypeModule = require(script.Parent.Parent.Dialogs.GenericDialogType)
@@ -33,10 +36,10 @@ local ConnectAnalyticsModule = require(AppChat.LegacyAnalytics.connectAnalytics)
 local RoactChatAnalyticsModule = require(AppChat.LegacyAnalytics.RoactChatAnalytics)
 local CreateConversationModule = require(AppChat.Conversations.Thunks.createConversation)
 local ParseCreateConversationErrorsModule = require(AppChat.Conversations.Thunks.parseCreateConversationErrors)
-local ChatEntryPointNames = require(Parent.SocialCommon).Enums.ChatEntryPointNames
+local ChatEntryPointNames = SocialCommonModule.Enums.ChatEntryPointNames
 local EnteredChatFromEntryPointFunction = require(AppChat.Actions).EnteredChatFromEntryPoint
 local LoggerModule = require(script.Parent.Logger)
-local Sources = require(Parent.SocialLuaAnalytics).Analytics.Enums.Sources
+local Sources = SocialLuaAnalyticsModule.Analytics.Enums.Sources
 local config = { skipFetch = true }
 local config1 = {
 	conversationId = nil,
@@ -103,6 +106,7 @@ function ParticipantDialogContainer(p1)
 			UseSelectorResult
 		})
 	end
+	local ShowChatButton: boolean = if UseSelectorResult and IsUseGetFriendshipStatusResultMatch then true else false
 	local UseLocalizationResult = UseLocalizationFunction({
 		chatUnavailableWithUser = "Feature.Chat.Message.ChatUnavailableWithUser",
 		networkErrorText = "Feature.Toast.NetworkingError.SomethingIsWrong",
@@ -166,7 +170,7 @@ function ParticipantDialogContainer(p1)
 	end, { UseNavigationResult, JoinResult.onDismiss })
 	local JoinResult1 = CryoModule.Dictionary.join(JoinResult, UseLocalizationResult, {
 		showViewProfileButton = UseAppPolicyModuleResult,
-		showChatButton = if UseSelectorResult and IsUseGetFriendshipStatusResultMatch then true else false,
+		showChatButton = ShowChatButton,
 		showTrustedFriendButton = UseIsExternalNavigationAvailableModuleResultEntry and Action ~= nil,
 		trustedFriendText = UseTrustedFriendActionModuleResult.actionText,
 		isTrustedFriendButtonDisabled = Action ~= nil and Action.isDisabled,

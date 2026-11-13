@@ -3948,11 +3948,13 @@ Feature.Moments.Description.HowToCaptureStep1,切り抜きが有効になって�
 Feature.Moments.Description.HowToCaptureStep2,切り抜き操作を有効化します
 Feature.Moments.Description.HowToCaptureStep3,ゲームプレイの写真とビデオを切り抜きます
 Feature.Moments.Description.LeaveMomentsCreation,変更内容はすべて失われますが、この切り抜きは引き続き<b>切り抜き</b>ギャラリーに保存されます。
+Feature.Moments.Description.MomentsOffBody,保護者の方に、保護者コントロールでモーメントをオンにしてもらってください。
 Feature.Moments.Description.NoMusicResults,音楽が見つかりません
 Feature.Moments.Description.NonInfiniteScrollEndBody,フィードを一時停止しました。引き続き視聴するかどうかを決定できます。
 Feature.Moments.Description.NothingHereYet,まだ何もありません...
 Feature.Moments.Description.PublishMoment,モーメントの説明をしてください
 Feature.Moments.Description.StayFriendly,フレンドリーな雰囲気を保ちましょう
+Feature.Moments.Description.TimeLimitReachedBody,視聴時間の上限は年齢に応じて決まります。モーメントは明日また見られます。
 Feature.Moments.Description.TooManyUploads,本日アップロードしたビデオの数が多すぎます。明日もう一度お試しください。
 Feature.Moments.Disclaimer.EveryoneMoments,モーメント内の全員が、公開されているものを閲覧できます
 Feature.Moments.Label.All,
@@ -4023,6 +4025,7 @@ Feature.Moments.Label.MomentRemovedTitle,このモーメントは削除されま
 Feature.Moments.Label.MomentUnavailable,モーメントは使用できません
 Feature.Moments.Label.MomentUnavailableDefault,このモーメントは使用できません。
 Feature.Moments.Label.MomentsExperienceName,
+Feature.Moments.Label.MomentsOffTitle,モーメントはオフになっています
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,コメントはまだありません
 Feature.Moments.Label.NonInfiniteScrollEndTitle,他にも視聴可能なモーメントがあります
@@ -4052,6 +4055,7 @@ Feature.Moments.Label.TextGenerationFailedBody,テキストを生成できませ
 Feature.Moments.Label.TextGenerationFailedTitle,生成に失敗しました
 Feature.Moments.Label.TextGenerationFilteredBody,この切り抜きビデオの生成を実行できません。コンテンツが内容規制されています。
 Feature.Moments.Label.TextGenerationFilteredTitle,生成が内容規制されました
+Feature.Moments.Label.TimeLimitReachedTitle,モーメントの視聴時間が今日の上限に達しました
 Feature.Moments.Label.Tone,トーン
 Feature.Moments.Label.Tone.Cinematic,シネマモード
 Feature.Moments.Label.Tone.Funny,面白い
@@ -4907,6 +4911,8 @@ Feature.UniversalShareSheet.Response.SharedMessage,メッセージが送信さ�
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + その他{N}件
 Feature.UserLibrary.Label.MyLibrary,マイライブラリ
+Feature.VIPServer.Message.TooManyFreeServersOnGame,このバーチャル空間上では、これ以上は無料のプライベートサーバーを持つことができません。
+Feature.VIPServer.Message.TooManyTotalActiveFreeServers,これ以上、無料プライベートサーバーを持つことはできません。まず、他のサーバーを無効化してください。
 Feature.VerificationUpsell.Action.AddPhone,電話番号を追加
 Feature.VerificationUpsell.Action.AddPhoneNumber,
 Feature.VerificationUpsell.Action.AddPhoneVoice,ボイスチャット用の電話番号を追加

@@ -6,13 +6,14 @@ local RoactUtilsModule = require(Parent.RoactUtils)
 local ThrottleFunction = require(Parent.NotificationsCommon).Throttle
 local ReducerDependencies = require(Parent.NotificationsCommon).ReducerDependencies
 local Default = require(Parent.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
+local LocalizationHelper = require(Parent.NotificationsCommon).LocalizationHelper
 local GameInviteAnalyticsManagerModule = require(GameInvite.analytics.GameInviteAnalyticsManager)
 local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
 local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
 local ShareLinksNetworking = ReducerDependencies.ShareLinksNetworking
 local ShareLinksRodux = ReducerDependencies.ShareLinksRodux
 local NetworkStatus = ReducerDependencies.RoduxNetworking.Enum.NetworkStatus
-local GetLocalizedStringsFunction = require(Parent.NotificationsCommon).LocalizationHelper.getLocalizedStrings
+local GetLocalizedStringsFunction = LocalizationHelper.getLocalizedStrings
 local LinkButton = UIBloxModule.App.Button.LinkButton
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local ImageSetButton = UIBloxModule.Core.ImageSet.ImageSetButton
@@ -36,7 +37,7 @@ return function(p1)
 	local LocalizedStrings = GetLocalizedStringsFunction(config)
 	local ShareInviteLink = UseSelectorResult.ShareLinks.Invites.ShareInviteLink
 	
-	local function v24()
+	local function v25()
 		-- upvalues: UseDispatchResult (copy), ShareLinksNetworking (upval), ShareLinksRodux (upval), GameInviteAnalyticsManagerModule (upval), Default (upval)
 		UseDispatchResult(ShareLinksNetworking.GenerateLink.API({
 			linkType = ShareLinksRodux.Enums.LinkType.ExperienceInvite.rawValue()
@@ -54,16 +55,16 @@ return function(p1)
 	end
 	
 	ReactModule.useEffect(function()
-		-- upvalues: ShareInviteLink (copy), v24 (copy)
+		-- upvalues: ShareInviteLink (copy), v25 (copy)
 		if not game:GetFastFlag("generateGameInviteShareLinkOnClick") and not ShareInviteLink then
-			v24()
+			v25()
 		end
 	end, {})
 	local Status = ShareLinksNetworking.GenerateLink.getStatus(UseSelectorResult, {
 		linkType = ShareLinksRodux.Enums.LinkType.ExperienceInvite.rawValue()
 	})
 	local ThrottleResult = ThrottleFunction(function()
-		-- upvalues: ShareInviteLink (copy), GameInviteAnalyticsManagerModule (upval), Default (upval), v24 (copy), p1 (copy), UseStateResult2 (copy)
+		-- upvalues: ShareInviteLink (copy), GameInviteAnalyticsManagerModule (upval), Default (upval), v25 (copy), p1 (copy), UseStateResult2 (copy)
 		GameInviteAnalyticsManagerModule:onShareButtonClick(if ShareInviteLink then ShareInviteLink.linkId else nil)
 		
 		if ShareInviteLink then
@@ -71,7 +72,7 @@ return function(p1)
 				Default:shareUrl({ context = "V1Menu", url = ShareInviteLink.shortUrl })
 			end
 		else
-			v24()
+			v25()
 		end
 		if p1.isDesktop then
 			UseStateResult2(true)

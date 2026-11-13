@@ -4,12 +4,13 @@ local Parent = script.Parent
 local PlatformLeaderboardTypesModule = require(Parent.PlatformLeaderboardTypes)
 local PlatformLeaderboardCacheModule = require(Parent.PlatformLeaderboardCache)
 local _ = require(Parent.PlatformLeaderboardConfigService)
+local SharedFlagsModule = require(Parent.Parent.SharedFlags)
 local EventType = PlatformLeaderboardTypesModule.EventType
 local LeaderboardType = PlatformLeaderboardTypesModule.LeaderboardType
 local RemoteEventName = PlatformLeaderboardTypesModule.RemoteEventName
 local PlatformLeaderboardTabEventRateLimit = game:DefineFastInt("PlatformLeaderboardTabEventRateLimit", 20)
 local PlatformLeaderboardTabEventRateWindowSeconds = game:DefineFastInt("PlatformLeaderboardTabEventRateWindowSeconds", 10)
-local FFlagPlatformLeaderboardDebugLogging = require(Parent.Parent.SharedFlags).FFlagPlatformLeaderboardDebugLogging
+local FFlagPlatformLeaderboardDebugLogging = SharedFlagsModule.FFlagPlatformLeaderboardDebugLogging
 local PlatformLeaderboardController = {}
 PlatformLeaderboardController.__index = PlatformLeaderboardController
 

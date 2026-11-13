@@ -1,11 +1,12 @@
 ﻿local Parent = script:FindFirstAncestor("ShareSheet").Parent
 local AppCompositionModule = require(Parent.AppComposition)
 local DisplayModule = require(Parent.Display)
+local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local GetShareSheetRowLayoutModule = require(script.Parent.getShareSheetRowLayout)
-local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
 return function()
 	-- upvalues: UseTokensFunction (copy), SignalsReactModule (copy), DisplayModule (copy), ReactModule (copy), SignalsModule (copy), AppCompositionModule (copy), GetShareSheetRowLayoutModule (copy)

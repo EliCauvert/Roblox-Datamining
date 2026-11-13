@@ -1,6 +1,7 @@
 ﻿local GameTile = script:FindFirstAncestor("GameTile")
 local Parent = GameTile.Parent
 local CryoModule = require(Parent.Cryo)
+local DiscoveryAnalyticsModule = require(Parent.DiscoveryAnalytics)
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local SharedFlagsModule = require(Parent.SharedFlags)
@@ -11,7 +12,7 @@ local IconButton = FoundationModule.IconButton
 local IconSize = FoundationModule.Enums.IconSize
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local View = FoundationModule.View
-local GameTileOverflowMenuActionFunction = require(Parent.DiscoveryAnalytics).Events.gameTileOverflowMenuAction
+local GameTileOverflowMenuActionFunction = DiscoveryAnalyticsModule.Events.gameTileOverflowMenuAction
 local FFlagLuaAppEnableNxMRoduxApportioning = SharedFlagsModule.FFlagLuaAppEnableNxMRoduxApportioning
 local FFlagLuaAppGameTileDirectActionTelemetry = SharedFlagsModule.FFlagLuaAppGameTileDirectActionTelemetry
 

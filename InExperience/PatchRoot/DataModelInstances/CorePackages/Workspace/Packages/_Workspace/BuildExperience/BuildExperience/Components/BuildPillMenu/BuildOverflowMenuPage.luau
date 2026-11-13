@@ -1,5 +1,6 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
@@ -13,7 +14,7 @@ local PublishFooterModule = require(BuildExperience.Components.GameConfiguration
 local PublishLatestPreviewCardModule = require(BuildExperience.Components.GameConfigurations.PublishPreviewCard.PublishLatestPreviewCard)
 local PublishPreviewCardModule = require(BuildExperience.Components.GameConfigurations.PublishPreviewCard.PublishPreviewCard)
 local PublishStatusModule = require(BuildExperience.Chat.PublishStatus)
-local View = require(Parent.Foundation).View
+local View = FoundationModule.View
 local config = {
 	publish = "LuaApp_Build_Publish_Scroll",
 	settings = "LuaApp_Build_Settings_Scroll"

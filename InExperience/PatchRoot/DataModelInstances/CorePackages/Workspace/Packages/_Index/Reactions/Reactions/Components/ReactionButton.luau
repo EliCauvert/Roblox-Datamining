@@ -73,6 +73,12 @@ return ReactModule.memo(function(p1)
 		entry = UseAnimatedBindingResult1,
 		hover = UseAnimatedBindingResult
 	})
+	local MapResult = JoinBindingsResult:map(function(p2): UDim2
+		return UDim2.new(0.5, 0, 0.5, (1 - p2.entry) * 12 - p2.hover * 8)
+	end)
+	local MapResult1 = JoinBindingsResult:map(function(p2)
+		return p2.entry * (p2.hover * 0.1 + 1)
+	end)
 	local OnActivatedFunction = p1.onActivated
 	
 	return ReactModule.createElement(View, {
@@ -93,13 +99,9 @@ return ReactModule.memo(function(p1)
 		Glyph = ReactModule.createElement(View, {
 			tag = "auto-xy",
 			ZIndex = 2,
-			Position = JoinBindingsResult:map(function(p2): UDim2
-				return UDim2.new(0.5, 0, 0.5, (1 - p2.entry) * 12 - p2.hover * 8)
-			end),
+			Position = MapResult,
 			AnchorPoint = _Vector2,
-			scale = JoinBindingsResult:map(function(p2)
-				return p2.entry * (p2.hover * 0.1 + 1)
-			end),
+			scale = MapResult1,
 			testId = if p1.testId then `{p1.testId}--glyph` else nil
 		}, {
 			Reaction = ReactModule.createElement(ReactionModule, {

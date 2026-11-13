@@ -2,12 +2,13 @@
 local Parent = AppChat.Parent
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
+local DataHydrationModule = require(Parent.DataHydration)
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local GetShareLinkV2StoreModule = require(AppChat.Stores.GetShareLinkV2Store)
 local _ = require(script.Parent.ShareLinkV2Presentation)
 local GetShareLinkV2PresentationModule = require(script.Parent.getShareLinkV2Presentation)
 local Signal = SignalsModule.createSignal(nil)
-local Signal1 = SignalsModule.createSignal(require(Parent.DataHydration).DataStatus.NotReady)
+local Signal1 = SignalsModule.createSignal(DataHydrationModule.DataStatus.NotReady)
 
 return function(p1)
 	-- upvalues: GetShareLinkV2StoreModule (copy), ReactModule (copy), UseSignalStateFunction (copy), Signal (copy), Signal1 (copy), GetShareLinkV2PresentationModule (copy)

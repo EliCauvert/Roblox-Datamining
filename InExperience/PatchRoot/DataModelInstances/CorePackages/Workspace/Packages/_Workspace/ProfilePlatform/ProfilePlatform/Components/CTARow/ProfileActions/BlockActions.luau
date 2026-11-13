@@ -9,8 +9,9 @@ local RefreshProfilePlatformActionInfoModule = require(ProfilePlatform.Networkin
 local EnumsModule = require(ProfilePlatform.Common.Enums)
 local _ = require(ProfilePlatform.Components.CTARow.Types)
 local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
+local ConstantsModule = require(ProfilePlatform.Common.Constants)
 local ProfileTypes = EnumsModule.ProfileTypes
-local USERBLOCKINGERRORS = require(ProfilePlatform.Common.Constants).USER_BLOCKING_ERRORS
+local USERBLOCKINGERRORS = ConstantsModule.USER_BLOCKING_ERRORS
 
 return {
 	[EnumsModule.ProfileActions.Block] = function(p1)

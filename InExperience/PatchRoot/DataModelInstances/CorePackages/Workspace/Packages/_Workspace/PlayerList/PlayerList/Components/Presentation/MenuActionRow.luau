@@ -6,12 +6,11 @@ local FoundationModule = require(Parent1.Foundation)
 local View = FoundationModule.View
 local Text = FoundationModule.Text
 local UseTokensFunction = FoundationModule.Hooks.useTokens
+local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
 local PlayerListIconModule = require(Parent.Common.PlayerListIcon)
 local PlayerContextualMenuStoreModule = require(Parent.Common.PlayerContextualMenuStore)
 local ConstantsModule = require(Parent.Common.Constants)
-local config = {
-	affordance = FoundationModule.Enums.StateLayerAffordance.Background
-}
+local config = { affordance = StateLayerAffordance.Background }
 
 return ReactModule.memo(function(p1)
 	-- upvalues: UseTokensFunction (copy), SignalsReactModule (copy), PlayerContextualMenuStoreModule (copy), ReactModule (copy), PlayerListIconModule (copy), View (copy), Text (copy), config (copy), ConstantsModule (copy)
@@ -19,6 +18,7 @@ return ReactModule.memo(function(p1)
 	local Item = p1.item
 	local UseSignalStateResult = SignalsReactModule.useSignalState(PlayerContextualMenuStoreModule.getPendingConfirmKey)
 	local IsUseSignalStateResultMatch: boolean = Item.requiresConfirm == true and UseSignalStateResult == Item.key
+	local ConfirmLabel = if IsUseSignalStateResultMatch and Item.confirmLabel ~= nil then Item.confirmLabel else Item.label
 	local IsIsInteractable = p1.isInteractable ~= false
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: IsIsInteractable (copy), PlayerContextualMenuStoreModule (upval), Item (copy)
@@ -57,7 +57,7 @@ return ReactModule.memo(function(p1)
 			Text = ReactModule.createElement(Text, {
 				tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
 				testId = "menu-action-row-label",
-				Text = if IsUseSignalStateResultMatch and Item.confirmLabel ~= nil then Item.confirmLabel else Item.label
+				Text = ConfirmLabel
 			})
 		})
 	})

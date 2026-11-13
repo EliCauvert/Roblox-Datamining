@@ -1,4 +1,5 @@
 ﻿local SignalsSchedulerModule = require(script.Parent.Parent.SignalsScheduler)
+local Batch = SignalsSchedulerModule.batch
 local FlushFunction = SignalsSchedulerModule.flush
 local ScheduleFunction = SignalsSchedulerModule.schedule
 local CallUserSpaceModule = require(script.Parent.callUserSpace)
@@ -605,7 +606,7 @@ return {
 	peek = function(Callback)
 		return if type(Callback) == "function" then Callback(false) else Callback
 	end,
-	batch = SignalsSchedulerModule.batch,
+	batch = Batch,
 	flush = FlushFunction,
 	schedule = ScheduleFunction,
 	setHooks = function(p6)

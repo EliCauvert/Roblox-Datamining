@@ -3,13 +3,14 @@ local Parent1 = Parent.Parent
 local CryoModule = require(Parent1.Cryo)
 local RoactModule = require(Parent1.Roact)
 local IsRoact17Module = require(Parent.isRoact17)
+local RectModule = require(Parent.Rect)
 local Axis = { Horizontal = {}, Vertical = {}, Both = {} }
 local FitFrameOnAxis = RoactModule.PureComponent:extend("FitFrameOnAxis")
 FitFrameOnAxis.defaultProps = {
 	textProps = nil,
 	axis = Axis.Vertical,
 	minimumSize = UDim2.new(UDim.new(0, 0), UDim.new(0, 0)),
-	margin = require(Parent.Rect).square(0),
+	margin = RectModule.square(0),
 	FillDirection = Enum.FillDirection.Vertical,
 	HorizontalAlignment = Enum.HorizontalAlignment.Left,
 	ImageSet = {},

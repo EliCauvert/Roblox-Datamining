@@ -1,8 +1,9 @@
 ﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local DiscoveryAnalyticsModule = require(Parent.DiscoveryAnalytics)
 local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local FFlagSduiGameTileDirectAction = require(Parent.SharedFlags).FFlagSduiGameTileDirectAction
 local FindAnalyticsFieldInAncestorsFunction = SduiCoreSystemModule.findAnalyticsFieldInAncestors
-local GameTileOverflowMenuActionFunction = require(Parent.DiscoveryAnalytics).Events.gameTileOverflowMenuAction
+local GameTileOverflowMenuActionFunction = DiscoveryAnalyticsModule.Events.gameTileOverflowMenuAction
 local GetActionTelemetryFieldValueFunction = SduiCoreSystemModule.getActionTelemetryFieldValue
 
 return function(p1, p2, p3)

@@ -2,10 +2,11 @@
 local Parent = ProfileQRCode.Parent
 local LuaSocialLibrariesDepsModule = require(Parent.LuaSocialLibrariesDeps)
 local HttpRequest = LuaSocialLibrariesDepsModule.httpRequest
+local RODUXKEY = require(ProfileQRCode.Common.Constants).RODUX_KEY
 local ProfileQRCodeNetworking = require(Parent.Lumberyak).Logger.new(nil, "ProfileQRCode"):new("ProfileQRCode Networking")
 
 return (LuaSocialLibrariesDepsModule.RoduxNetworking.config({
-	keyPath = require(ProfileQRCode.Common.Constants).RODUX_KEY .. ".NetworkStatus",
+	keyPath = RODUXKEY .. ".NetworkStatus",
 	networkImpl = HttpRequest.config({
 		requestFunction = function(p1, p2, p3)
 			-- upvalues: ProfileQRCodeNetworking (copy), HttpRequest (copy)

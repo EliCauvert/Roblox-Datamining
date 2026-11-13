@@ -49,7 +49,22 @@ return ReactModule.memo(function(Frame)
 		end
 	end, { Frame.commentId, Frame.isReactionSelected })
 	local Emphasis = if FFlagMomentsCommentRowRedesignModule then UseTokensResult.Color.Content.Emphasis else UseTokensResult.Color.Content.Default
+	local MapResult = UseAnimatedBindingResult:map(function(Value: number)
+		-- upvalues: GetColorStyleWithTransparencyModule (upval), Emphasis (copy)
+		return GetColorStyleWithTransparencyModule(Emphasis, (math.clamp(Value, 0, 1)))
+	end)
+	local MapResult1 = UseAnimatedBindingResult:map(function(Value: number): number
+		return (math.lerp(1, 0.6, (math.clamp(Value, 0, 1))))
+	end)
+	local MapResult2 = UseAnimatedBindingResult:map(function(Value: number)
+		-- upvalues: GetColorStyleWithTransparencyModule (upval), config (upval)
+		return GetColorStyleWithTransparencyModule(config, 1 - math.clamp(Value, 0, 1))
+	end)
 	local SizeRatio = if FFlagMomentsUseSharedReactionsModule and FFlagMomentsCommentRowRedesignModule then UseTokensResult.Size.Size_400 / UseTokensResult.Size.Size_500 elseif FFlagMomentsCommentRowRedesignModule then UseTokensResult.Size.Size_400 / ReactionAssets.getSizePixels(ReactionSize.XSmall) else 1
+	local MapResult3 = UseAnimatedBindingResult:map(function(Alpha: number)
+		-- upvalues: SizeRatio (ref)
+		return math.lerp(0.6, 1, Alpha) * SizeRatio
+	end)
 	local Small = UseTokensResult.Padding.Small
 	local SmallDelta = if FFlagMomentsCommentRowRedesignModule then Small - (UseTokensResult.Size.Size_600 - UseTokensResult.Size.Size_400) / 2 else Small
 	
@@ -85,17 +100,12 @@ return ReactModule.memo(function(Frame)
 				}, {
 					Thumb = ReactModule.createElement(View, {
 						tag = "position-center-center anchor-center-center size-full",
-						scale = UseAnimatedBindingResult:map(function(Value: number): number
-							return (math.lerp(1, 0.6, (math.clamp(Value, 0, 1))))
-						end)
+						scale = MapResult1
 					}, {
 						Icon = ReactModule.createElement(Icon, {
 							name = BuilderIconsModule.Icon.ThumbUp,
 							size = if FFlagMomentsCommentRowRedesignModule then IconSize.Small else IconSize.Medium,
-							style = UseAnimatedBindingResult:map(function(Value: number)
-								-- upvalues: GetColorStyleWithTransparencyModule (upval), Emphasis (copy)
-								return GetColorStyleWithTransparencyModule(Emphasis, (math.clamp(Value, 0, 1)))
-							end),
+							style = MapResult,
 							AnchorPoint = Vector2.new(0.5, 0.5),
 							Position = UDim2.fromScale(0.5, 0.5),
 							testId = `{ReactionName}--icon`
@@ -104,14 +114,8 @@ return ReactModule.memo(function(Frame)
 					Reacted = ReactModule.createElement(ReactionModule, {
 						reactionType = ReactionType.ThumbsUp,
 						size = ReactionSize.XSmall,
-						imageStyle = UseAnimatedBindingResult:map(function(Value: number)
-							-- upvalues: GetColorStyleWithTransparencyModule (upval), config (upval)
-							return GetColorStyleWithTransparencyModule(config, 1 - math.clamp(Value, 0, 1))
-						end),
-						scale = UseAnimatedBindingResult:map(function(Alpha: number)
-							-- upvalues: SizeRatio (ref)
-							return math.lerp(0.6, 1, Alpha) * SizeRatio
-						end),
+						imageStyle = MapResult2,
+						scale = MapResult3,
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						Position = UDim2.fromScale(0.5, 0.5),
 						testId = `{ReactionName}--image`

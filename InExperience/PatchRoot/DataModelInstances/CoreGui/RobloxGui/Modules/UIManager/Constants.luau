@@ -41,8 +41,8 @@ return {
 				name = "RobloxGuiPanel-PartOnly",
 				faceCamera = true,
 				lerp = true,
-				transparency = 0.5,
-				partSize = ScaledVector1
+				partSize = ScaledVector1,
+				transparency = if require(game:GetService("CorePackages").Workspace.Packages.SharedFlags).FFlagSpatialUIRobloxGuiPanelTransparent then 1 else 0.5
 			}
 		}
 	},

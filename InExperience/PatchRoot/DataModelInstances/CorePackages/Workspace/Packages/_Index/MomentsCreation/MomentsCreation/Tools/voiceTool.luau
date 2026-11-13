@@ -1,5 +1,6 @@
 ﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
 local Parent = MomentsCreation.Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
 local ReactModule = require(Parent.React)
 local EventNames = require(Parent.MomentsCommon).Analytics.EventNames
 local _ = require(MomentsCreation.Types.CreationFlowTypes)
@@ -16,7 +17,7 @@ return {
 		localizationKey = "Feature.Moments.Action.AddVoice",
 		order = 4,
 		commitRequiresEdit = true,
-		icon = require(Parent.BuilderIcons).Icon.FiveVerticalLinesWave,
+		icon = BuilderIconsModule.Icon.FiveVerticalLinesWave,
 		analyticsEvent = EventNames.EditingFlowVoiceButtonPressed,
 		commitAnalyticsEvent = EventNames.EditingFlowVoiceDoneButtonPressed,
 		cancelAnalyticsEvent = EventNames.EditingFlowVoiceDeleteChangePressed

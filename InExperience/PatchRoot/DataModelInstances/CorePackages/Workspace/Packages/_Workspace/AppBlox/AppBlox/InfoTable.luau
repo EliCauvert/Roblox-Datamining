@@ -5,8 +5,9 @@ local UseBreakpointFunction = require(Parent.Foundation).Hooks.useBreakpoint
 local UseResponsiveFunction = require(Parent.Foundation).Hooks.useResponsive
 local ResponsiveProvider = require(Parent.Foundation).ResponsiveProvider
 local CryoModule = require(Parent.Cryo)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local LuaAppInfoTableResponsiveProviderOverride = game:DefineFastFlag("LuaAppInfoTableResponsiveProviderOverride", false)
-local FFlagInfoTableStableItemKeys = require(Parent.SharedFlags).FFlagInfoTableStableItemKeys
+local FFlagInfoTableStableItemKeys = SharedFlagsModule.FFlagInfoTableStableItemKeys
 local Breakpoint = FoundationModule.Enums.Breakpoint
 
 local function buildColumnMajorChildren(Items, NumColumns, Size)

@@ -1,13 +1,16 @@
 ﻿local Parent = script.Parent.Parent.Parent
 local Parent1 = Parent.Parent
+local LocalizationModule = require(Parent1.Localization)
 local ReactModule = require(Parent1.React)
+local RoactUtilsModule = require(Parent1.RoactUtils)
+local RobloxAppHooksModule = require(Parent1.RobloxAppHooks)
 local UIBloxModule = require(Parent1.UIBlox)
 local Text = require(Parent1.Foundation).Text
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
-local UseDispatchFunction = require(Parent1.RoactUtils).Hooks.RoactRodux.useDispatch
-local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
-local UseScreenSizeFunction = require(Parent1.RobloxAppHooks).useScreenSize
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
+local UseScreenSizeFunction = RobloxAppHooksModule.useScreenSize
 local PermissionPromptFinishedModule = require(Parent.Thunks.PermissionPromptFinished)
 
 return function(p1)

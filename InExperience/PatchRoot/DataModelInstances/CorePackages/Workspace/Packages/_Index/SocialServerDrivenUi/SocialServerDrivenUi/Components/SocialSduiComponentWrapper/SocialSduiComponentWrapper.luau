@@ -1,8 +1,9 @@
 ﻿local Parent = script:FindFirstAncestor("SocialServerDrivenUi").Parent
 local ReactModule = require(Parent.React)
 local _ = require(Parent.AppCommonLib)
+local FoundationModule = require(Parent.Foundation)
 local GetSduiComponentWrapperFunction = require(Parent.SduiCoreSystem).getSduiComponentWrapper
-local View = require(Parent.Foundation).View
+local View = FoundationModule.View
 
 return ReactModule.memo(function(p1)
 	-- upvalues: GetSduiComponentWrapperFunction (copy), ReactModule (copy), View (copy)

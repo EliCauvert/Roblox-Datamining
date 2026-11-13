@@ -1,17 +1,19 @@
 ﻿local AppChat = script:FindFirstAncestor("AppChat")
 local Parent = AppChat.Parent
+local FFlagLuaAppDefaultHttpRetry = require(Parent.SharedFlags).FFlagLuaAppDefaultHttpRetry
+local HttpModule = require(Parent.Http)
 local HttpRequestModule = require(Parent.HttpRequest)
 local PromiseModule = require(Parent.Promise)
 local _ = require(Parent.LuauPolyfill)
 local SendTextMessageModule = require(script.Parent.SendTextMessage)
 local NewResult = require(AppChat.Logger):new(script.Name)
-local Url = require(Parent.Http).Url
+local Url = HttpModule.Url
 local ConfigResult = HttpRequestModule.config({
 	requestFunction = function(p1, p2, p3)
 		-- upvalues: HttpRequestModule (copy)
 		return HttpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
 	end,
-	maxRetryCount = if require(Parent.SharedFlags).FFlagLuaAppDefaultHttpRetry then game:DefineFastInt("SendGameLinkMessageHttpRetryCount", 4) else nil
+	maxRetryCount = if FFlagLuaAppDefaultHttpRetry then game:DefineFastInt("SendGameLinkMessageHttpRetryCount", 4) else nil
 })
 
 local function _(p1)

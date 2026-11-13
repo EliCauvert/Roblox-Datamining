@@ -2,8 +2,9 @@
 local Parent1 = Parent.Parent
 local ReactModule = require(Parent1.React)
 local PlatformLeaderboardsClientModule = require(Parent1.PlatformLeaderboardsClient)
+local SharedFlagsModule = require(Parent1.SharedFlags)
 local PlatformLeaderboardStoreContextModule = require(Parent.Common.PlatformLeaderboardStoreContext)
-local FFlagPlatformLeaderboardPersistStoreOnRemount = require(Parent1.SharedFlags).FFlagPlatformLeaderboardPersistStoreOnRemount
+local FFlagPlatformLeaderboardPersistStoreOnRemount = SharedFlagsModule.FFlagPlatformLeaderboardPersistStoreOnRemount
 local PlatformLeaderboardClientStore = PlatformLeaderboardsClientModule.PlatformLeaderboardClientStore
 
 return ReactModule.memo(function(p1)

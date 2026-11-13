@@ -1,4 +1,5 @@
 ﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local FFlagEnablePlatformProfileContextualMenuOption = require(ProfilePlatform.Parent.SharedFlags).FFlagEnablePlatformProfileContextualMenuOption
 local GetPlatformFriendsServiceModule = require(ProfilePlatform.Utils.getPlatformFriendsService)
 local EnumsModule = require(ProfilePlatform.Common.Enums)
 local _ = require(ProfilePlatform.Components.CTARow.Types)
@@ -6,7 +7,7 @@ local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
 local ProfileTypes = EnumsModule.ProfileTypes
 
 return {
-	[EnumsModule.ProfileActions.ViewPlatformProfile] = if require(ProfilePlatform.Parent.SharedFlags).FFlagEnablePlatformProfileContextualMenuOption then function(p1)
+	[EnumsModule.ProfileActions.ViewPlatformProfile] = if FFlagEnablePlatformProfileContextualMenuOption then function(p1)
 		-- upvalues: EnumsModule (copy), ProfileTypes (copy), EventNamesModule (copy), GetPlatformFriendsServiceModule (copy)
 		local ProfilePlatformId = p1.profileWrapperContext.profilePlatformId
 		

@@ -5,6 +5,7 @@ local _ = require(ProfilePlatform.Common.Enums)
 local _ = require(ProfilePlatform.Components.CTARow.Types)
 local SupportedProfileTypesModule = require(script.SupportedProfileTypes)
 local SharedFlagsModule = require(ProfilePlatform.Parent.SharedFlags)
+local FFlagFriendsCallingClientGateDEV = SharedFlagsModule.FFlagFriendsCallingClientGate_DEV
 local FFlagJoinabilityCTARefactor = SharedFlagsModule.FFlagJoinabilityCTARefactor
 local t = {}
 local List = {
@@ -22,7 +23,7 @@ local List = {
 	require(script.ViewAboutAction), (require(script.ViewPlatformProfileAction))
 }
 
-if SharedFlagsModule.FFlagFriendsCallingClientGate_DEV then
+if FFlagFriendsCallingClientGateDEV then
 	table.insert(List, CallActionModule)
 end
 if FFlagJoinabilityCTARefactor then
@@ -47,28 +48,28 @@ local function _(Value, Callback)
 end
 
 for _, value in List do
-	for i1, value3 in value do
-		assert(t[i1] == nil, "Duplicate ProfileAction key: " .. tostring(i1))
+	for i, value1 in value do
+		assert(t[i] == nil, "Duplicate ProfileAction key: " .. tostring(i))
 		
-		t[i1] = function(p1)
-			-- upvalues: value3 (copy), i1 (copy), SupportedProfileTypesModule (copy)
-			local CallbackResult = value3(p1)
+		t[i] = function(p1)
+			-- upvalues: value1 (copy), i (copy), SupportedProfileTypesModule (copy)
+			local CallbackResult = value1(p1)
 			
 			if CallbackResult ~= nil then
-				assert(type(CallbackResult.onActivated) == "table", i1 .. " has onActivated as " .. type(CallbackResult.onActivated) .. ", expected table")
+				assert(type(CallbackResult.onActivated) == "table", i .. " has onActivated as " .. type(CallbackResult.onActivated) .. ", expected table")
 				
 				for i in CallbackResult.onActivated do
 					local SupportedProfileTypesModuleEntry = SupportedProfileTypesModule[i]
-					assert(SupportedProfileTypesModuleEntry and table.find(SupportedProfileTypesModuleEntry, i1), i1 .. " has onActivated for " .. tostring(i) .. " but is missing from SupportedProfileTypes")
+					assert(SupportedProfileTypesModuleEntry and table.find(SupportedProfileTypesModuleEntry, i), i .. " has onActivated for " .. tostring(i) .. " but is missing from SupportedProfileTypes")
 				end
 			end
 			return CallbackResult
 		end
 	end
 end
-for i, value1 in SupportedProfileTypesModule do
-	for _, value2 in value1 do
-		assert(t[value2] ~= nil, value2 .. " is listed in SupportedProfileTypes for " .. tostring(i) .. " but has no matching factory")
+for i1, value2 in SupportedProfileTypesModule do
+	for _, value3 in value2 do
+		assert(t[value3] ~= nil, value3 .. " is listed in SupportedProfileTypes for " .. tostring(i1) .. " but has no matching factory")
 	end
 end
 return t

@@ -1,9 +1,10 @@
 ﻿local ExpChatShared = script:FindFirstAncestor("ExpChatShared")
 local Parent = ExpChatShared.Parent
+local RoduxModule = require(Parent.Rodux)
 local Set = require(Parent.llama).Set
 local Actions = ExpChatShared.Actions
 
-return require(Parent.Rodux).createReducer({}, {
+return RoduxModule.createReducer({}, {
 	[require(Actions.UserMuted).name] = function(p1, p2)
 		-- upvalues: Set (copy)
 		return Set.add(p1, p2.userId)

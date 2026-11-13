@@ -1,12 +1,13 @@
-﻿local function _(Value1: number, Value2: number): number
-	local Shifted = bit32.rshift(Value1, 16)
-	local Bits = bit32.band(Value1, 65535)
-	local Shifted1 = bit32.rshift(Value2, 16)
-	local Bits1 = bit32.band(Value2, 65535)
-	local Value = Shifted * Bits1 + Bits * Shifted1
-	local _ = Shifted * Shifted1 + bit32.rshift(Value, 16)
+﻿local function _(Value: number, Value1: number): number
+	local Shifted = bit32.rshift(Value, 16)
+	local Bits = bit32.band(Value, 65535)
+	local Shifted1 = bit32.rshift(Value1, 16)
+	local Bits1 = bit32.band(Value1, 65535)
+	local ScaledBits = Bits * Bits1
+	local Value2 = Shifted * Bits1 + Bits * Shifted1
+	local _ = Shifted * Shifted1 + bit32.rshift(Value2, 16)
 	
-	return (bit32.band(Bits * Bits1 + bit32.lshift(bit32.band(Value, 65535), 16), 4294967295))
+	return (bit32.band(ScaledBits + bit32.lshift(bit32.band(Value2, 65535), 16), 4294967295))
 end
 
 return {
@@ -30,9 +31,10 @@ return {
 			local Bits = bit32.bxor(Value, value)
 			local Shifted = bit32.rshift(Bits, 16)
 			local Bits1 = bit32.band(Bits, 65535)
+			local ScaledBits = Bits1 * 403
 			local Value1 = Shifted * 403 + Bits1 * 256
 			local _ = Shifted * 256 + bit32.rshift(Value1, 16)
-			Value = bit32.band(Bits1 * 403 + bit32.lshift(bit32.band(Value1, 65535), 16), 4294967295)
+			Value = bit32.band(ScaledBits + bit32.lshift(bit32.band(Value1, 65535), 16), 4294967295)
 		end
 		return (string.format("%08x", Value))
 	end

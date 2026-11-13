@@ -10,7 +10,6 @@ local CoPlayFooter = UIBloxModule.App.Tile.ExperienceTileMetadata.CoPlayFooter
 local GetLocalizedStringsFunction = require(Parent.NotificationsCommon).LocalizationHelper.getLocalizedStrings
 local SocialContextToastAnalyticsActionTypesModule = require(SocialContextToasts.Enums.SocialContextToastAnalyticsActionTypes)
 local SocialContextToastEventsModule = require(SocialContextToasts.SocialContextToastEvents)
-local GetFFlagSocialContextToastEventStreamFunction = require(Parent.SharedFlags).GetFFlagSocialContextToastEventStream
 local _Vector2 = Vector2.new(48, 48)
 local _Vector2_1 = Vector2.new(36, 36)
 
@@ -43,29 +42,22 @@ end
 local config = { areUsersActive = true }
 
 return function(p1)
-	-- upvalues: CryoModule (copy), config (copy), GetFFlagSocialContextToastEventStreamFunction (copy), ReactModule (copy), SocialContextToastEventsModule (copy), SocialContextToastAnalyticsActionTypesModule (copy), UseStyleFunction (copy), GetLocalizedStringsFunction (copy), Toast (copy), CoPlayFooter (copy), Colors (copy), _Vector2 (copy), _Vector2_1 (copy)
+	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), SocialContextToastEventsModule (copy), SocialContextToastAnalyticsActionTypesModule (copy), UseStyleFunction (copy), GetLocalizedStringsFunction (copy), Toast (copy), CoPlayFooter (copy), Colors (copy), _Vector2 (copy), _Vector2_1 (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
-	local UseResult = nil
+	local AnalyticsProps = JoinResult.analyticsProps
+	local UseResult = ReactModule.useCallback(function()
+		-- upvalues: JoinResult (copy), SocialContextToastEventsModule (upval), AnalyticsProps (copy), SocialContextToastAnalyticsActionTypesModule (upval)
+		SocialContextToastEventsModule(AnalyticsProps.eventIngest, {
+			toastType = AnalyticsProps.toastType,
+			friendId = if JoinResult.userIdList then table.concat(JoinResult.userIdList) else nil,
+			universeId = AnalyticsProps.gameId,
+			placeId = AnalyticsProps.placeId,
+			actionType = SocialContextToastAnalyticsActionTypesModule.ForceDismissed
+		})
+	end)
 	
-	if GetFFlagSocialContextToastEventStreamFunction() then
-		local AnalyticsProps = JoinResult.analyticsProps
-		UseResult = ReactModule.useCallback(function()
-			-- upvalues: JoinResult (copy), SocialContextToastEventsModule (upval), AnalyticsProps (copy), SocialContextToastAnalyticsActionTypesModule (upval)
-			SocialContextToastEventsModule(AnalyticsProps.eventIngest, {
-				toastType = AnalyticsProps.toastType,
-				friendId = if JoinResult.userIdList then table.concat(JoinResult.userIdList) else nil,
-				universeId = AnalyticsProps.gameId,
-				placeId = AnalyticsProps.placeId,
-				actionType = SocialContextToastAnalyticsActionTypesModule.ForceDismissed
-			})
-		end)
-	end
 	if JoinResult.onActivated == nil then
-		if GetFFlagSocialContextToastEventStreamFunction() then
-			JoinResult.onActivated = UseResult
-		else
-			function JoinResult.onActivated() end
-		end
+		JoinResult.onActivated = UseResult
 	end
 	local UseStyleResult = UseStyleFunction()
 	local LocalizedStrings = GetLocalizedStringsFunction(JoinResult.toastStrings)
@@ -108,7 +100,7 @@ return function(p1)
 	ToastContent.onActivated = JoinResult.onActivated
 	ToastContent.buttonText = LocalizedStrings.button
 	ToastContent.buttonType = JoinResult.buttonType
-	ToastContent.onTouchSwipeUp = if GetFFlagSocialContextToastEventStreamFunction() then UseResult else nil
+	ToastContent.onTouchSwipeUp = UseResult
 	config1.toastContent = ToastContent
 	
 	return CreateElementFunction(Toast, config1)

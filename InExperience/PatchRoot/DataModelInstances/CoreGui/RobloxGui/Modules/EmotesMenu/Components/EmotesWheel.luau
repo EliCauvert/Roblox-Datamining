@@ -9,6 +9,7 @@ local MouseIconOverrideService = require(CorePackages.Workspace.Packages.CoreScr
 local Parent = script.Parent
 local Parent1 = Parent.Parent
 local Actions = Parent1.Actions
+local Thunks = Parent1.Thunks
 local ConstantsModule = require(Parent1.Constants)
 local GetSegmentFromPositionModule = require(Parent1.Utility.GetSegmentFromPosition)
 local EmotesButtonsModule = require(Parent.EmotesButtons)
@@ -16,7 +17,7 @@ local SlotNumbersModule = require(Parent.SlotNumbers)
 local WheelBackgroundModule = require(Parent.WheelBackground)
 local FocusSegmentModule = require(Actions.FocusSegment)
 local HideMenuModule = require(Actions.HideMenu)
-local PlayEmoteModule = require(Parent1.Thunks.PlayEmote)
+local PlayEmoteModule = require(Thunks.PlayEmote)
 local Value = Enum.ContextActionPriority.High.Value
 local EmotesWheel = RoactModule.PureComponent:extend("EmotesWheel")
 

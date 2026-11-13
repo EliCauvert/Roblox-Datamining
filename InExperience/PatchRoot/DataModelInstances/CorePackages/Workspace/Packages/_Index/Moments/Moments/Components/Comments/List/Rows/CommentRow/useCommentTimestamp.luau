@@ -1,7 +1,8 @@
 ﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local LocalizationModule = require(Parent.Localization)
 local ReactModule = require(Parent.React)
 local CommentTimestampModule = require(script.Parent.commentTimestamp)
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local config = {
 	minutes = "Feature.Moments.Label.CommentTimestampMinutes",
 	hours = "Feature.Moments.Label.CommentTimestampHours",

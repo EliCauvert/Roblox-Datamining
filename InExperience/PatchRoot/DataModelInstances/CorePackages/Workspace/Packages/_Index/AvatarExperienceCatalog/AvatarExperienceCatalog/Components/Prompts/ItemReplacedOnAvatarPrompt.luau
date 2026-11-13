@@ -3,6 +3,7 @@ local ReactModule = require(Parent.React)
 local BuilderIconsModule = require(Parent.BuilderIcons)
 local RoactNavigationModule = require(Parent.RoactNavigation)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local WithMappedNavigationParamsFunction = require(Parent.AvatarExperienceNavigation).withMappedNavigationParams
 local AvatarExperienceCommonModule = require(Parent.AvatarExperienceCommon)
 local AXPartialPageModal = AvatarExperienceCommonModule.Components.AXPartialPageModal
 local CatalogItemCard = AvatarExperienceCommonModule.Components.CatalogItemCard.CatalogItemCard
@@ -18,7 +19,7 @@ local function _(p1, p2): string
 	return `rbxthumb://type={p2}&id={p1}&w=150&h=150`
 end
 
-return (require(Parent.AvatarExperienceNavigation).withMappedNavigationParams(function(p1)
+return (WithMappedNavigationParamsFunction(function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), RoactNavigationModule (copy), View (copy), CatalogItemCard (copy), ItemCardThumbnail (copy), FoundationModule (copy), BuilderIconsModule (copy), IconSize (copy), Text (copy), AXPartialPageModal (copy), ButtonVariant (copy), InputSize (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		confirmButtonText = "CommonUI.Controls.Action.OK",

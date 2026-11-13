@@ -1,5 +1,6 @@
 ﻿local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
 local Parent = script.Parent.Parent
+local SharedFlagsModule = require(Parent.SharedFlags)
 local SignalsModule = require(Parent.Signals)
 local CoreScriptsRoactCommonModule = require(Parent.CoreScriptsRoactCommon)
 local CreateSignalMapFunction = CoreScriptsRoactCommonModule.Utilities.createSignalMap
@@ -9,7 +10,7 @@ local CreateTeamStoreModule = require(script.Parent.createTeamStore)
 local _ = require(script.Parent.LeaderboardStoreTypes)
 local FilterNewPlayerListValueStat = game:DefineFastFlag("FilterNewPlayerListValueStat", false)
 local PlayerListHideUnusedStats = game:DefineFastFlag("PlayerListHideUnusedStats", false)
-local FFlagPlayerListFixLeaderstatsStacking = require(Parent.SharedFlags).FFlagPlayerListFixLeaderstatsStacking
+local FFlagPlayerListFixLeaderstatsStacking = SharedFlagsModule.FFlagPlayerListFixLeaderstatsStacking
 local PlayerListSortByLowercaseUsername = game:DefineFastFlag("PlayerListSortByLowercaseUsername", false)
 local LeaderboardStore = {}
 LeaderboardStore.__index = LeaderboardStore

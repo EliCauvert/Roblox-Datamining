@@ -1,8 +1,9 @@
 ﻿local CorePackages = game:GetService("CorePackages")
 local CryoModule = require(CorePackages.Packages.Cryo)
+local RoduxModule = require(CorePackages.Packages.Rodux)
 local Parent = script.Parent.Parent
 
-return require(CorePackages.Packages.Rodux).createReducer({
+return RoduxModule.createReducer({
 	numFeedbackSubmissionAttempts = nil,
 	showHelpModal = false,
 	showOnboardingModal = true,

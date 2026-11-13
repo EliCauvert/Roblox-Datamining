@@ -2,6 +2,7 @@
 local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
 local GamePassConfigModule = require(Parent.DataHydration.GamePassConfig)
 local PromiseModule = require(Parent.Promise)
+local FFlagBuildExperienceManageMonetizationTool = require(Parent.SharedFlags).FFlagBuildExperienceManageMonetizationTool
 local _ = require(script.Parent.chatTypes)
 local _ = require(script.Parent.localToolOverlay)
 local CreateManageGamePassStoreModule = require(script.Parent.createManageGamePassStore)
@@ -20,7 +21,7 @@ end
 local config = {
 	itemKind = "gamePass",
 	resultKey = "gamePass",
-	tool = if require(Parent.SharedFlags).FFlagBuildExperienceManageMonetizationTool then CreatorAgentChatModule.StudioManageMonetizationTool.forKind("gamePass") else CreatorAgentChatModule.StudioManageGamePassTool,
+	tool = if FFlagBuildExperienceManageMonetizationTool then CreatorAgentChatModule.StudioManageMonetizationTool.forKind("gamePass") else CreatorAgentChatModule.StudioManageGamePassTool,
 	list = function(p1)
 		-- upvalues: v1 (ref), CreateManageGamePassStoreModule (copy), GamePassConfigModule (copy), PromiseModule (copy)
 		if v1 == nil then

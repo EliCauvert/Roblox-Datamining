@@ -10,6 +10,7 @@ local UserModel = require(Parent.UserLib).Models.UserModel
 local _ = require(Parent.NotificationsCommon)
 local _ = require(FriendsMenu.friendsMenuModalType)
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local Images = UIBloxModule.App.ImageSet.Images
 local OpenTypeSupport = UIBloxModule.Utility.OpenTypeSupport
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local GetLocalizedStringsFunction = require(Parent.NotificationsCommon).LocalizationHelper.getLocalizedStrings
@@ -20,7 +21,7 @@ local config = {
 	online = "Common.Presence.Label.Online",
 	inStudio = "Common.Presence.Label.RobloxStudio"
 }
-local IconsLogoStudiologoSmall = UIBloxModule.App.ImageSet.Images["icons/logo/studiologo_small"]
+local IconsLogoStudiologoSmall = Images["icons/logo/studiologo_small"]
 
 local function _(p1, p2)
 	-- upvalues: UserModel (copy)

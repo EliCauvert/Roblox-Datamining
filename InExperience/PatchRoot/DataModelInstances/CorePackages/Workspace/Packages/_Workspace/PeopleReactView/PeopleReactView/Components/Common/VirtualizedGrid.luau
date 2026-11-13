@@ -4,10 +4,11 @@ local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local View = require(Parent.Foundation).View
+local PeopleServiceModule = require(Parent.PeopleService)
 local VirtualizedItemModule = require(script.Parent.VirtualizedItem)
 local _ = require(PeopleReactView.Stores.GetScrollingFrameStore)
 local GetVirtualizedGridStoreModule = require(PeopleReactView.Stores.GetVirtualizedGridStore)
-local FFlagFixVirtualizedGridNumItems = require(Parent.PeopleService).getService("Flags").FFlagFixVirtualizedGridNumItems
+local FFlagFixVirtualizedGridNumItems = PeopleServiceModule.getService("Flags").FFlagFixVirtualizedGridNumItems
 
 return ReactModule.memo(function(p1)
 	-- upvalues: SignalsReactModule (copy), GetVirtualizedGridStoreModule (copy), ReactModule (copy), SignalsModule (copy), FFlagFixVirtualizedGridNumItems (copy), VirtualizedItemModule (copy), View (copy)

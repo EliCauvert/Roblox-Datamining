@@ -8,13 +8,14 @@ local GetUserRecentExperiencesModule = require(Achievements.Requests.GetUserRece
 local DashModule = require(Parent.Dash)
 local TimeRefresherModule = require(Achievements.AchievementDataRefresher.TimeRefresher)
 local FriendCountRefresherModule = require(Achievements.AchievementDataRefresher.FriendCountRefresher)
+local FFlagLuaAppDefaultHttpRetry = require(Parent.SharedFlags).FFlagLuaAppDefaultHttpRetry
 local FFlagInExpAchievementsIsolateStartUpErrorsModule = require(Achievements.Flags.FFlagInExpAchievementsIsolateStartUpErrors)
 local ConfigResult = HttpRequestModule.config({
 	requestFunction = function(p1, p2, p3)
 		-- upvalues: HttpRequestModule (copy)
 		return HttpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
 	end,
-	maxRetryCount = if require(Parent.SharedFlags).FFlagLuaAppDefaultHttpRetry then game:DefineFastInt("InExpAchievementManagerHttpRetryCount", 4) else nil
+	maxRetryCount = if FFlagLuaAppDefaultHttpRetry then game:DefineFastInt("InExpAchievementManagerHttpRetryCount", 4) else nil
 })
 local PlatformFriendsService = nil
 pcall(function()

@@ -1,11 +1,12 @@
 ﻿local ShareSheet = script:FindFirstAncestor("ShareSheet")
 local Parent = ShareSheet.Parent
+local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local PeoplePickerEmptyStateModule = require(script.Parent.PeoplePickerEmptyState)
 local PeoplePickerVirtualizedListModule = require(script.Parent.PeoplePickerVirtualizedList)
 local UsePeoplePickerListViewModelModule = require(script.Parent.usePeoplePickerListViewModel)
 local _ = require(ShareSheet.Components.PeoplePicker.usePeoplePickerPagination)
-local View = require(Parent.Foundation).View
+local View = FoundationModule.View
 
 return function(Frame)
 	-- upvalues: UsePeoplePickerListViewModelModule (copy), ReactModule (copy), View (copy), PeoplePickerVirtualizedListModule (copy), PeoplePickerEmptyStateModule (copy)

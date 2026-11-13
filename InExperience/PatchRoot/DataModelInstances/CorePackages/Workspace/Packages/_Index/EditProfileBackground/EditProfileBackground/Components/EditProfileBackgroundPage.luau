@@ -13,6 +13,7 @@ local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelec
 local UseEffectOnMountFunction = require(Parent.RoactUtils).Hooks.useEffectOnMount
 local View = require(Parent.Foundation).View
 local SocialToastModule = require(Parent.SocialToast)
+local ErrorHandlingModule = require(EditProfileBackground.Common.ErrorHandling)
 local ConstantsModule = require(EditProfileBackground.Common.Constants)
 local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
 local FocusNavigableSurfaceWrapper = FocusNavigationUtilsModule.FocusNavigableSurfaceWrapper
@@ -25,7 +26,7 @@ local UseAnalyticsFunction = AnalyticsModule.useAnalytics
 local EventNames = AnalyticsModule.EventNames
 local ErrorTypes = AnalyticsModule.ErrorTypes
 local BACKGROUNDASSETID = ConstantsModule.BACKGROUND_ASSET_IDS[1]
-local DEFAULTERRORMESSAGES = require(EditProfileBackground.Common.ErrorHandling).DEFAULT_ERROR_MESSAGES
+local DEFAULTERRORMESSAGES = ErrorHandlingModule.DEFAULT_ERROR_MESSAGES
 local InsertService = game:GetService("InsertService")
 
 local function _(p1)

@@ -1,11 +1,13 @@
 ﻿local Parent = script:FindFirstAncestor("GameJoinCard").Parent
 local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
 local DataHydrationModule = require(Parent.DataHydration)
 local FFlagJoinabilityCTARefactor = require(Parent.SharedFlags).FFlagJoinabilityCTARefactor
 local ProfileCTAStore = DataHydrationModule.Profile.ProfileCTAStore
 local DataStatus = DataHydrationModule.DataStatus
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
-local CreateComputedFunction = require(Parent.Signals).createComputed
+local UseSignalStateFunction = SignalsReactModule.useSignalState
+local CreateComputedFunction = SignalsModule.createComputed
 local Computed = CreateComputedFunction(function()
 	return nil
 end)

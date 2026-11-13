@@ -4,10 +4,11 @@ local FetchModule = require(Parent.Fetch)
 local FetchFunction = FetchModule.fetch
 local Response = FetchModule.Response
 local PromiseModule = require(Parent.Promise)
+local Url = require(Parent.Http).Url
 local PioneerLeaveReasonModule = require(PioneerUtils.PioneerLeaveReason)
 local IsPioneerLaunchModule = require(PioneerUtils.isPioneerLaunch)
 local LeaveExperienceModule = require(PioneerUtils.leaveExperience)
-local Formatted = string.format("%s/users/authenticated/app-launch-info", require(Parent.Http).Url.USERS_URL)
+local Formatted = string.format("%s/users/authenticated/app-launch-info", Url.USERS_URL)
 
 local function _()
 	-- upvalues: PromiseModule (copy), FetchFunction (copy), Formatted (copy), Response (copy)

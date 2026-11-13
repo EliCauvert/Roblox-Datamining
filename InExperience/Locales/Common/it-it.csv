@@ -1048,7 +1048,7 @@ CoreScripts.InGameMenu.InviteFriends.Loading,Caricamento!
 CoreScripts.InGameMenu.InviteFriends.MakeFriendsNow,Stringi amicizie
 CoreScripts.InGameMenu.InviteFriends.NoFriends,Non hai ancora amici. Invia richieste di amicizia tramite il menu giocatori.
 CoreScripts.InGameMenu.InviteFriends.Search,
-CoreScripts.InGameMenu.Label.TouchpadButton,Pulsante touchpad
+CoreScripts.InGameMenu.Label.TouchpadButton,Pulsante del touchpad
 CoreScripts.InGameMenu.Label.ViewButton,Pulsante Visualizza
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.LeaveGame,
@@ -1737,7 +1737,7 @@ Feature.Avatar.Label.FaceMakeup,Viso
 Feature.Avatar.Label.FacialAnimation,Animazione facciale
 Feature.Avatar.Label.Fall,Cadi
 Feature.Avatar.Label.FallAnimations,Animazioni caduta
-Feature.Avatar.Label.FromMarketplace,Dal Marketplace
+Feature.Avatar.Label.FromMarketplace,Risultati del Marketplace
 Feature.Avatar.Label.Front,Fronte
 Feature.Avatar.Label.FullBody,Corpo intero
 Feature.Avatar.Label.FullMasks,Maschere integrali
@@ -2154,6 +2154,7 @@ Feature.Build.Action.Resume,
 Feature.Build.Action.Retry,
 Feature.Build.Action.Revert,
 Feature.Build.Action.Save,
+Feature.Build.Action.SaveFilters,
 Feature.Build.Action.SetDailyLimit,Imposta un limite giornaliero
 Feature.Build.Action.SetLimit,Imposta limite
 Feature.Build.Action.Settings,
@@ -3877,7 +3878,7 @@ Feature.Moments.Action.AddMusic,Aggiungi musica
 Feature.Moments.Action.AddSticker,Aggiungi adesivo
 Feature.Moments.Action.AddText,Aggiungi testo
 Feature.Moments.Action.AddVoice,Aggiungi Voce
-Feature.Moments.Action.Analytics,Analitiche
+Feature.Moments.Action.Analytics,Mostra statistiche
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
@@ -3928,12 +3929,15 @@ Feature.Moments.Description.GenerateTextFeedbackDisclosure,Generato dall'IA. Ric
 Feature.Moments.Description.HowToCaptureStep1,Partecipa a un'esperienza con le acquisizioni abilitate e seleziona il menu a tre linee
 Feature.Moments.Description.HowToCaptureStep2,Abilita i controlli per l'acquisizione
 Feature.Moments.Description.HowToCaptureStep3,Acquisisci foto e video della partita
+Feature.Moments.Description.LeaveAvatarMomentsCreation,"Perderai tutte le modifiche, ma il tuo outfit rimarrà invariato."
 Feature.Moments.Description.LeaveMomentsCreation,"Perderai tutte le modifiche, ma potrai comunque trovare questa cattura nella tua galleria <b>catture</b>."
+Feature.Moments.Description.MomentsOffBody,Chiedi a un genitore di attivare Momenti nel Controllo Parentale.
 Feature.Moments.Description.NoMusicResults,Nessuna musica trovata
 Feature.Moments.Description.NonInfiniteScrollEndBody,Abbiamo messo in pausa il tuo feed. Puoi decidere se desideri continuare a guardare.
 Feature.Moments.Description.NothingHereYet,Qui non c'è ancora niente...
 Feature.Moments.Description.PublishMoment,Descrivi il tuo Momento
 Feature.Moments.Description.StayFriendly,Manteniamo un tono amichevole
+Feature.Moments.Description.TimeLimitReachedBody,I limiti si basano sull'età. Guarda i Momenti domani.
 Feature.Moments.Description.TooManyUploads,Hai caricato troppi video oggi. Riprova domani.
 Feature.Moments.Disclaimer.EveryoneMoments,Tutti i partecipanti ai Momenti possono visualizzare ciò che viene pubblicato
 Feature.Moments.Label.All,
@@ -4004,6 +4008,7 @@ Feature.Moments.Label.MomentRemovedTitle,Abbiamo rimosso questo Momento
 Feature.Moments.Label.MomentUnavailable,Momento non disponibile
 Feature.Moments.Label.MomentUnavailableDefault,Questo Momento non è disponibile.
 Feature.Moments.Label.MomentsExperienceName,
+Feature.Moments.Label.MomentsOffTitle,Moments è disattivato
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,Ancora nessun commento
 Feature.Moments.Label.NonInfiniteScrollEndTitle,Ci sono altri Momenti da guardare
@@ -4033,6 +4038,7 @@ Feature.Moments.Label.TextGenerationFailedBody,Non è stato possibile generare i
 Feature.Moments.Label.TextGenerationFailedTitle,Generazione non riuscita
 Feature.Moments.Label.TextGenerationFilteredBody,Impossibile eseguire la generazione per questo video acquisito: contenuto filtrato.
 Feature.Moments.Label.TextGenerationFilteredTitle,Generazione filtrata
+Feature.Moments.Label.TimeLimitReachedTitle,Hai raggiunto il limite di tempo per i Momenti
 Feature.Moments.Label.Tone,Tono
 Feature.Moments.Label.Tone.Cinematic,Da film
 Feature.Moments.Label.Tone.Funny,Divertente
@@ -4889,6 +4895,8 @@ Feature.UniversalShareSheet.Response.SharedMessage,Il messaggio è stato inviato
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,I messaggi sono stati inviati
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + altri {N}
 Feature.UserLibrary.Label.MyLibrary,La mia libreria
+Feature.VIPServer.Message.TooManyFreeServersOnGame,Non puoi avere più server privati gratuiti su questa esperienza.
+Feature.VIPServer.Message.TooManyTotalActiveFreeServers,Non puoi avere più server attivi privati gratuiti. Prima disattiva alcuni dei server.
 Feature.VerificationUpsell.Action.AddPhone,Aggiungi Telefono
 Feature.VerificationUpsell.Action.AddPhoneNumber,Aggiungi numero di telefono
 Feature.VerificationUpsell.Action.AddPhoneVoice,Aggiungi telefono per la chat vocale

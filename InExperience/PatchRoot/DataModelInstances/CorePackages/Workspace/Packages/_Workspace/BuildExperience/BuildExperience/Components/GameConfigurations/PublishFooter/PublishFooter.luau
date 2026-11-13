@@ -2,12 +2,14 @@
 local Parent = BuildExperience.Parent
 local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
 local FoundationModule = require(Parent.Foundation)
+local GameDetailModule = require(Parent.GameDetail)
 local NavigationModule = require(Parent.Navigation)
 local ReactModule = require(Parent.React)
 local ResponsiveModule = require(Parent.Responsive)
 local SignalsReactModule = require(Parent.SignalsReact)
 local UseOpenWebViewFunction = require(Parent.WebViewUtils).useOpenWebView
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
 local ExperienceGuidelinesModule = require(Parent.DataHydration.ExperienceGuidelines)
 local PlaceVersionHistoryModule = require(Parent.DataHydration.PlaceVersionHistory)
 local UniverseConfigurationModule = require(Parent.DataHydration.UniverseConfiguration)
@@ -26,7 +28,7 @@ local UseGamePermissionsModule = require(BuildExperience.useGamePermissions)
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local Button = FoundationModule.Button
 local Popover = FoundationModule.Popover
-local Snackbar = FoundationModule.Snackbar
+local SnackbarDEPRECATED = FoundationModule.Snackbar_DEPRECATED
 local View = FoundationModule.View
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local FillBehavior = FoundationModule.Enums.FillBehavior
@@ -43,8 +45,8 @@ local GetAdUpsellEventStoreModule = if FFlagBuildAdUpsellModule then require(Bui
 local UseStoreFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useStore
 local GetRootNavigationFunction = NavigationModule.getRootNavigation
 local UseNavigationFunction = NavigationModule.useNavigation
-local OpenGameDetailsFunction = require(Parent.GameDetail).OpenGameDetails
-local Debug = require(Parent.DataHydration.CreatorAgentChat).debug
+local OpenGameDetailsFunction = GameDetailModule.OpenGameDetails
+local Debug = CreatorAgentChatModule.debug
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 local ConfigurationActionTelemetryModule = require(BuildExperience.Telemetry.ConfigurationActionTelemetry)
 local SharePublishedExperienceModule = require(BuildExperience.utils.sharePublishedExperience)
@@ -135,7 +137,7 @@ local function PreviewButton(p1)
 end
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseSharePublishedExperienceFunction (copy), SignalsReactModule (copy), PlaceVersionHistoryModule (copy), UniverseConfigurationModule (copy), ReactModule (copy), GameConfigurationLabelsModule (copy), UniverseActivationModule (copy), ContentMaturityUtilsModule (copy), UseOpenWebViewFunction (copy), PrivacyType (copy), FFlagBuildExperienceActionOutcomeTelemetryModule (copy), FIntBuildPostPublishSnackbarAutoDismissSecondsModule (copy), FFlagEnableShareSheet (copy), SharePublishedExperienceFunction (copy), ConfigurationActionTelemetryModule (copy), Action (copy), Context (copy), GameConfigurationActionsModule (copy), RefreshPublishEligibilityModule (copy), GetVersionInformationStoreModule (copy), SendBuildExperienceEventModule (copy), Stage (copy), GetAdUpsellEventStoreModule (copy), FFlagBuildAdUpsellModule (copy), buildPublicAudiences (copy), ExperienceGuidelinesModule (copy), t (copy), Debug (copy), FailureReason (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), getPublishFailure (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), FoundationModule (copy), UseClosableFocusRootModule (copy), FocusNavigationUtilsModule (copy), ResponsiveModule (copy), Snackbar (copy), View (copy), FFlagBuildPublishNavigationSheetModule (copy), Popover (copy), PopoverAlign (copy), PopoverSide (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), PreviewButton (copy), FriendsOnlyShareDialogModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseSharePublishedExperienceFunction (copy), SignalsReactModule (copy), PlaceVersionHistoryModule (copy), UniverseConfigurationModule (copy), ReactModule (copy), GameConfigurationLabelsModule (copy), UniverseActivationModule (copy), ContentMaturityUtilsModule (copy), UseOpenWebViewFunction (copy), PrivacyType (copy), FFlagBuildExperienceActionOutcomeTelemetryModule (copy), FIntBuildPostPublishSnackbarAutoDismissSecondsModule (copy), FFlagEnableShareSheet (copy), SharePublishedExperienceFunction (copy), ConfigurationActionTelemetryModule (copy), Action (copy), Context (copy), GameConfigurationActionsModule (copy), RefreshPublishEligibilityModule (copy), GetVersionInformationStoreModule (copy), SendBuildExperienceEventModule (copy), Stage (copy), GetAdUpsellEventStoreModule (copy), FFlagBuildAdUpsellModule (copy), buildPublicAudiences (copy), ExperienceGuidelinesModule (copy), t (copy), Debug (copy), FailureReason (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), getPublishFailure (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), FoundationModule (copy), UseClosableFocusRootModule (copy), FocusNavigationUtilsModule (copy), ResponsiveModule (copy), SnackbarDEPRECATED (copy), View (copy), FFlagBuildPublishNavigationSheetModule (copy), Popover (copy), PopoverAlign (copy), PopoverSide (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), PreviewButton (copy), FriendsOnlyShareDialogModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		accountTooNewError = LocalizationStringsModule.GAME_CONFIGURATION_PUBLISH_ACCOUNT_TOO_NEW_ERROR,
 		creatorHub = LocalizationStringsModule.GAME_CONFIGURATION_CREATOR_HUB,
@@ -518,7 +520,7 @@ return function(p1)
 				backgroundStyle = FoundationModule.Hooks.useTokens().Color.None,
 				side = PopoverSide.Top
 			}, {
-				Snackbar = ReactModule.createElement(Snackbar, {
+				Snackbar = ReactModule.createElement(SnackbarDEPRECATED, {
 					LayoutOrder = 1,
 					ref = UseClosableFocusRootModule({
 						surfaceIdentifier = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum.PopUp,

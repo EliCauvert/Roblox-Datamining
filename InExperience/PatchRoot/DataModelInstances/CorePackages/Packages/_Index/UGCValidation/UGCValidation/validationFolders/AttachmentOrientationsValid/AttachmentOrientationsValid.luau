@@ -7,9 +7,18 @@ local FloatEqualsModule = require(Parent.util.floatEquals)
 local ValueToStringModule = require(Parent.util.valueToString)
 local R15plusUtilsModule = require(Parent.util.R15plusUtils)
 local GetAttachmentCFrameInPartSpaceModule = require(Parent.util.getAttachmentCFrameInPartSpace)
+local AttachmentRotationFIntsModule = require(Parent.util.AttachmentRotationFInts)
 local UGCValidateRigAttachmentRotationUsesDiff = game:DefineFastFlag("UGCValidateRigAttachmentRotationUsesDiff", false)
-local ThresholdGetters = require(Parent.util.AttachmentRotationFInts).thresholdGetters
+local ThresholdGetters = AttachmentRotationFIntsModule.thresholdGetters
 local v1 = CFrame.new(vector.create(0, 0, 0), vector.create(0, 0, -1)) * CFrame.fromEulerAnglesXYZ(-1.5707963267948966, 0, 0)
+local Categories = {
+	ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+	ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
+}
+local RequiredData = {
+	ValidationEnumsModule.SharedDataMember.rootInstance,
+	ValidationEnumsModule.SharedDataMember.uploadEnum
+}
 
 local function expectedGripAttCFrameRotation(Object, AssetType)
 	-- upvalues: R15plusUtilsModule (copy), GetAttachmentCFrameInPartSpaceModule (copy), v1 (copy)
@@ -36,14 +45,8 @@ local function expectedGripAttCFrameRotation(Object, AssetType)
 end
 
 return {
-	categories = {
-		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
-	},
-	requiredData = {
-		ValidationEnumsModule.SharedDataMember.rootInstance,
-		ValidationEnumsModule.SharedDataMember.uploadEnum
-	},
+	categories = Categories,
+	requiredData = RequiredData,
 	expectedFailures = {},
 	run = function(p1, p2)
 		-- upvalues: UGCValidateRigAttachmentRotationUsesDiff (copy), GetDiffBetweenOrientationsModule (copy), GetAttachmentCFrameInPartSpaceModule (copy), ThresholdGetters (copy), FloatEqualsModule (copy), ErrorSourceStringsModule (copy), expectedGripAttCFrameRotation (copy), ValueToStringModule (copy)

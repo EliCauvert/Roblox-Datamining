@@ -1,5 +1,6 @@
 ﻿local Gifting = script:FindFirstAncestor("Gifting")
 local Parent = Gifting.Parent
+local DataHydrationModule = require(Parent.DataHydration)
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
@@ -7,7 +8,7 @@ local _ = require(Gifting.Stores.createCanGiftStore)
 local _ = require(Gifting.Models.FindRecipientsResponseModel)
 local GetCanGiftStoreModule = require(Gifting.Stores.getCanGiftStore)
 local _ = require(Gifting.Types)
-local DataStatus = require(Parent.DataHydration).DataStatus
+local DataStatus = DataHydrationModule.DataStatus
 local BuildItemGiftabilityKeyFunction = require(Gifting.Stores.itemGiftabilityCacheKey).buildItemGiftabilityKey
 local t = {}
 local config = {

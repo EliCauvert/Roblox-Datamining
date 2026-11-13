@@ -2,6 +2,8 @@
 local Parent = AccountUpgrade.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local HttpModule = require(Parent.Dev.Http)
 local MockHttpResponse = require(Parent.Dev.UnitTestHelpers).mockHttpResponse
 local PromiseModule = require(Parent.Promise)
 local RoactNetworking = require(Parent.RoactServiceTags).RoactNetworking
@@ -9,7 +11,7 @@ local MockServicesFunction = require(Parent.Dev.AuthTestHelpers).TestHelpers.moc
 local FoundationProvider = FoundationModule.FoundationProvider
 local ColorMode = FoundationModule.Enums.ColorMode
 local Device = FoundationModule.Enums.Device
-local StatusCodes = require(Parent.Dev.Http).StatusCodes
+local StatusCodes = HttpModule.StatusCodes
 
 local function validationEndpoint(p1)
 	-- upvalues: PromiseModule (copy), MockHttpResponse (copy), StatusCodes (copy)
@@ -37,7 +39,7 @@ local config2 = {
 return {
 	name = "AccountUpgrade",
 	roact = ReactModule,
-	reactRoblox = require(Parent.ReactRoblox),
+	reactRoblox = ReactRobloxModule,
 	mapStory = function(p1)
 		-- upvalues: config (copy), config2 (copy), config1 (copy), MockServicesFunction (copy), ReactModule (copy), FoundationProvider (copy), Device (copy), RoactNetworking (copy), validationEndpoint (copy)
 		return function(p2)

@@ -6,6 +6,7 @@ local InviteToSquadModule = require(Squads.Thunks.inviteToSquad)
 local InviteToParentChannelModule = require(Squads.Thunks.InviteToParentChannel)
 local NotificationModalsManagerModule = require(Parent.NotificationModalsManager)
 local PromiseModule = require(Parent.Promise)
+local UIBloxModule = require(Parent.UIBlox)
 local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
 local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
 local Cryo = DependenciesModule.Cryo
@@ -19,7 +20,7 @@ local EventNamesModule = require(Parent.SquadsCore.EventNames)
 local SquadPromptType = require(Parent.SquadsCore.Enums).SquadPromptType
 local UseNavigationFunction = DependenciesModule.useNavigation
 local UseStoreFunction = DependenciesModule.Hooks.useStore
-local Images = require(Parent.UIBlox).App.ImageSet.Images
+local Images = UIBloxModule.App.ImageSet.Images
 local SquadInviteFriendsModule = require(script.Parent.SquadInviteFriends)
 
 return function(p1)
@@ -82,7 +83,7 @@ return function(p1)
 				return Set[p3] == nil
 			end)
 			
-			local function v34()
+			local function v35()
 				-- upvalues: Cryo (upval), UseGetConversationFromIdResult (upval), KeysResult (copy), UseLocalUserIdResult (upval), UseContextResult (upval), UseDispatchResult (upval), PromiseModule (upval), FilterResult (copy), InviteToParentChannelModule (upval), UseNavigationResult (upval), InviteToSquadModule (upval), UseCurrentSquadSelectorResult (upval), UseResult1 (upval), UseResult (upval), p2 (copy)
 				local FilterResult1 = Cryo.List.filter(UseGetConversationFromIdResult.participants, function(p3): boolean
 					-- upvalues: Cryo (upval), KeysResult (upval), UseLocalUserIdResult (upval)
@@ -141,14 +142,14 @@ return function(p1)
 					hideCancelButton = false,
 					promptType = SquadPromptType.ConfirmInviteToSquad,
 					onConfirm = function()
-						-- upvalues: v34 (copy)
-						v34()
+						-- upvalues: v35 (copy)
+						v35()
 					end
 				})
 				
 				return
 			else
-				v34()
+				v35()
 			end
 		end, {
 			UseCurrentSquadSelectorResult, UseDispatchResult, UseNavigationResult,

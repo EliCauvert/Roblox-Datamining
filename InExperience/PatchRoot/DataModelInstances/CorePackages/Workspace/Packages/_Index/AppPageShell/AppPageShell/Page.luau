@@ -4,6 +4,7 @@ local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 local View = require(Parent.Foundation).View
 local UseDeviceInsetsFunction = require(Parent.Responsive).useDeviceInsets
+local PageConstantsModule = require(AppPageShell.PageConstants)
 local PageContextModule = require(AppPageShell.PageContext)
 local PageStickyHeaderModule = require(AppPageShell.PageStickyHeader)
 local _ = require(AppPageShell.PageTypes)
@@ -17,7 +18,7 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagSduiFeedScrollBarFixes = SharedFlagsModule.FFlagSduiFeedScrollBarFixes
 local FFlagAppPageShellScrollTelemetry = SharedFlagsModule.FFlagAppPageShellScrollTelemetry
 local Frozen = table.freeze({
-	contentMode = require(AppPageShell.PageConstants).PageContentMode.Scroll,
+	contentMode = PageConstantsModule.PageContentMode.Scroll,
 	content = table.freeze({})
 })
 

@@ -3,12 +3,13 @@ local Parent1 = Parent.Parent
 local ReactModule = require(Parent1.React)
 local FoundationModule = require(Parent1.Foundation)
 local _ = require(Parent.Configs.ConfigTypes)
+local LocalizationModule = require(Parent1.Localization)
 local KeyboardActionModule = require(script.Parent.KeyboardAction)
 local FFlagHelpPageCCLModule = require(Parent.Flags.FFlagHelpPageCCL)
 local View = FoundationModule.View
 local Text = FoundationModule.Text
 local UseTokensFunction = FoundationModule.Hooks.useTokens
-local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local MemoResult = ReactModule.memo(function(Frame)
 	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), Text (copy), FFlagHelpPageCCLModule (copy)
 	return ReactModule.createElement(View, {

@@ -1,7 +1,9 @@
 ﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local AppChatNetworkingModule = require(Parent.AppChatNetworking)
+local UserLibModule = require(Parent.UserLib)
 local Immutable = require(Parent.AppCommonLib).Immutable
-local UpdateUsersFunction = require(Parent.UserLib).Thunks.UpdateUsers
-local GetConversationMetadata = require(Parent.AppChatNetworking).rodux.GetConversationMetadata
+local UpdateUsersFunction = UserLibModule.Thunks.UpdateUsers
+local GetConversationMetadata = AppChatNetworkingModule.rodux.GetConversationMetadata
 
 return function(p1)
 	-- upvalues: Immutable (copy), UpdateUsersFunction (copy), GetConversationMetadata (copy)

@@ -1,6 +1,9 @@
 ﻿local Parent = script:FindFirstAncestor("SplitPane").Parent
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
+local ResponsiveModule = require(Parent.Responsive)
+local AppSplitViewModule = require(Parent.AppSplitView)
+local Constants = require(Parent.NavigationRodux).Constants
 local SplitPaneContextModule = require(script.Parent.Parent.Context.SplitPaneContext)
 local SplitPaneStoreModule = require(script.Parent.Parent.Stores.SplitPaneStore)
 local IsSupportPaneScreenModule = require(script.Parent.Parent.Utils.isSupportPaneScreen)
@@ -11,9 +14,9 @@ local FFlagAXPauseSceneWhenSplitPaneCollapsed = require(Parent.SharedFlags).FFla
 local FFlagFixSplitPaneGamepadLayoutJitter = require(Parent.SharedFlags).FFlagFixSplitPaneGamepadLayoutJitter
 local FFlagSplitPaneAvatarOnlyAlwaysExpanded = require(Parent.SharedFlags).FFlagSplitPaneAvatarOnlyAlwaysExpanded
 local SupportPaneInputRulesModule = require(script.Parent.Parent.Utils.supportPaneInputRules)
-local UsePreferredInputFunction = require(Parent.Responsive).usePreferredInput
-local SupportPaneMode = require(Parent.AppSplitView).Enums.SupportPaneMode
-local TempRnSwitchNavigatorName = require(Parent.NavigationRodux).Constants.TempRnSwitchNavigatorName
+local UsePreferredInputFunction = ResponsiveModule.usePreferredInput
+local SupportPaneMode = AppSplitViewModule.Enums.SupportPaneMode
+local TempRnSwitchNavigatorName = Constants.TempRnSwitchNavigatorName
 
 local function resolveTemporarySupportPaneMode(Current: number, Count: number, p1, p2)
 	-- upvalues: FFlagSplitPaneAvatarOnlyAlwaysExpanded (copy), SplitPaneVariantModule (copy), SupportPaneMode (copy), SupportPaneInputRulesModule (copy)
@@ -51,8 +54,8 @@ return function(Entry, Tbl, List, p1)
 		local IsCountListMatch: boolean = Current > 0 and CountList == 0
 		local IsCountListAbove: boolean = Current == 0 and CountList > 0
 		
-		local Flag = nil
 		local ResolveOpenedModeResult = nil
+		local Flag = nil
 		if IsCountListAbove then
 			if FFlagSplitPaneAvatarOnlyAlwaysExpanded and SplitPaneVariantModule.isSupportPaneAlwaysExpanded() then
 				ResolveOpenedModeResult = SupportPaneMode.Expanded

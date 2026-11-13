@@ -2,20 +2,19 @@
 local PromiseModule = require(Parent.Promise)
 local SignalsModule = require(Parent.Signals)
 local _ = require(script.Parent.types)
-local FFlagHttpClientRetryExtensionsModule = require(script.Parent.Flags.FFlagHttpClientRetryExtensions)
 local Effects = {}
 
 return function(p1)
-	-- upvalues: PromiseModule (copy), Effects (copy), FFlagHttpClientRetryExtensionsModule (copy), SignalsModule (copy)
+	-- upvalues: PromiseModule (copy), Effects (copy), SignalsModule (copy)
 	local t = {}
 	
 	return PromiseModule.new(function(Callback1, Callback2, Callback: (any) -> ())
-		-- upvalues: Effects (upval), t (copy), FFlagHttpClientRetryExtensionsModule (upval), p1 (copy), SignalsModule (upval)
+		-- upvalues: Effects (upval), t (copy), p1 (copy), SignalsModule (upval)
 		local Flag = false
 		local Flag1 = false
 		
 		local function _()
-			-- upvalues: Flag1 (ref), Effects (upval), t (upval), FFlagHttpClientRetryExtensionsModule (upval), p1 (upval)
+			-- upvalues: Flag1 (ref), Effects (upval), t (upval), p1 (upval)
 			if Flag1 then return end
 			Flag1 = true
 			local Effect: () -> () = Effects[t]
@@ -24,13 +23,11 @@ return function(p1)
 			if Effect ~= nil then
 				Effect()
 			end
-			if FFlagHttpClientRetryExtensionsModule then
-				p1.dispose()
-			end
+			p1.dispose()
 		end
 		
 		local function settle(StateResult)
-			-- upvalues: Flag (ref), Flag1 (ref), Effects (upval), t (upval), FFlagHttpClientRetryExtensionsModule (upval), p1 (upval), Callback1 (copy), Callback2 (copy)
+			-- upvalues: Flag (ref), Flag1 (ref), Effects (upval), t (upval), p1 (upval), Callback1 (copy), Callback2 (copy)
 			if Flag then return end
 			Flag = true
 			
@@ -42,27 +39,17 @@ return function(p1)
 				if Effect ~= nil then
 					Effect()
 				end
-				if FFlagHttpClientRetryExtensionsModule then
-					p1.dispose()
-				end
+				p1.dispose()
 			end
 			if StateResult.status == "succeeded" then
 				Callback1(StateResult.result)
 				
 				return
-			end
-			if FFlagHttpClientRetryExtensionsModule then
+			else
 				Callback2({
 					responseCode = StateResult.errorCode,
 					errorMessage = StateResult.error,
 					response = StateResult.response
-				})
-				
-				return
-			else
-				Callback2({
-					responseCode = StateResult.errorCode,
-					errorMessage = StateResult.error
 				})
 			end
 		end
@@ -91,7 +78,7 @@ return function(p1)
 			Effects[t] = Effect
 		end
 		Callback(function()
-			-- upvalues: Flag (ref), Flag1 (ref), Effects (upval), t (upval), FFlagHttpClientRetryExtensionsModule (upval), p1 (upval)
+			-- upvalues: Flag (ref), Flag1 (ref), Effects (upval), t (upval), p1 (upval)
 			if Flag then return end
 			Flag = true
 			
@@ -103,9 +90,7 @@ return function(p1)
 			if Effect ~= nil then
 				Effect()
 			end
-			if FFlagHttpClientRetryExtensionsModule then
-				p1.dispose()
-			end
+			p1.dispose()
 		end)
 	end)
 end

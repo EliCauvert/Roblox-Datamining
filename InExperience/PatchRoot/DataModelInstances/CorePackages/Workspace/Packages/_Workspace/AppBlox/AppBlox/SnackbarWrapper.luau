@@ -1,15 +1,16 @@
 ﻿local Parent = script:FindFirstAncestor("AppBlox").Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local RoactUtilsModule = require(Parent.RoactUtils)
 local UseDeviceInsetsFunction = require(Parent.Responsive).useDeviceInsets
 local ShouldUseDeviceSafeInsets = require(Parent.Display).shouldUseDeviceSafeInsets
 local FFlagFixOverlayTopInsetForDeviceSafeInsets = require(Parent.SharedFlags).FFlagFixOverlayTopInsetForDeviceSafeInsets
-local Snackbar = FoundationModule.Snackbar
+local SnackbarDEPRECATED = FoundationModule.Snackbar_DEPRECATED
 local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
-local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: ReactModule (copy), UseSelectorFunction (copy), FFlagFixOverlayTopInsetForDeviceSafeInsets (copy), UseDeviceInsetsFunction (copy), ShouldUseDeviceSafeInsets (copy), UseScaledValueFunction (copy), Snackbar (copy)
+	-- upvalues: ReactModule (copy), UseSelectorFunction (copy), FFlagFixOverlayTopInsetForDeviceSafeInsets (copy), UseDeviceInsetsFunction (copy), ShouldUseDeviceSafeInsets (copy), UseScaledValueFunction (copy), SnackbarDEPRECATED (copy)
 	ReactModule.useEffect(function()
 		-- upvalues: Frame (copy)
 		local DelayedThread = if Frame.autoDismissDelaySeconds then task.delay(Frame.autoDismissDelaySeconds, Frame.closeSnackbar) else nil
@@ -55,7 +56,7 @@ return ReactModule.memo(function(Frame)
 		Active = true,
 		[ReactModule.Event.TouchSwipe] = UseResult
 	}, {
-		ReactModule.createElement(Snackbar, {
+		ReactModule.createElement(SnackbarDEPRECATED, {
 			title = Frame.titleText,
 			icon = Frame.icon,
 			action = Config,

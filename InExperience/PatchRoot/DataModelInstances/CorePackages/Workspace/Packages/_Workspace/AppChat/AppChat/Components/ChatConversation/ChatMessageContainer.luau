@@ -57,6 +57,9 @@ local FFlagAppChatEnableMessageContextMenuModule = require(AppChat.Flags.FFlagAp
 local FFlagAppChatConsoleFocusFixesModule = require(AppChat.Flags.FFlagAppChatConsoleFocusFixes)
 local FFlagAppChatAlignAvatarToMessageGroupBottomModule = require(AppChat.Flags.FFlagAppChatAlignAvatarToMessageGroupBottom)
 local UseDescendantSelectedFunction = require(script.Parent.Hooks.useDescendantSelected).useDescendantSelected
+local MessageReactionChipModule = require(script.Parent.MessageReactions.MessageReactionChip)
+local UseIsInExperienceModule = require(AppChat.Hooks.useIsInExperience)
+local FFlagAppChatEnableReactions = require(Parent.SharedFlags).FFlagAppChatEnableReactions
 local AppChatEnableRepliesUIIxpEnabled2 = game:DefineFastFlag("AppChatEnableRepliesUIIxpEnabled2", false)
 local AppChatEnableRepliesUIIxpLayer1 = game:DefineFastString("AppChatEnableRepliesUIIxpLayer1", "Party.ConversationPage")
 local AppChatMessageLongPressDistanceThreshold = game:DefineFastInt("AppChatMessageLongPressDistanceThreshold", 25)
@@ -104,9 +107,10 @@ local config = {
 local TextButton: string = if GetFFlagDebugAppChatModule() then "TextButton" else "Frame"
 
 function ChatMessageContainer(p1)
-	-- upvalues: CryoModule (copy), config (copy), MessageModelModule (copy), ReactModule (copy), FFlagAppChatConsoleFocusFixesModule (copy), UseStyleFunction (copy), UseChatPagePaddingModule (copy), FoundationModule (copy), AppChatUseSymmetricSwipe (copy), SwipeDirectionModule (copy), _UDim2 (copy), _UDim2_1 (copy), AppChatReplyIconSwipeOffset (copy), _Vector2 (copy), _Vector2_1 (copy), FFlagAppChatMessageModelOnDemandModule (copy), ChatConversationTelemetryLayerModule (copy), CreateTelemetryEmitterModule (copy), UseTelemetryModule (copy), UseTriggerFeedbackFunction (copy), UseDescendantSelectedFunction (copy), ReactFocusNavigationModule (copy), GlobalLongPressSignalModule (copy), MessageFtuxTooltipDismissSignal (copy), MessageFtuxTooltipVariant (copy), ChatConversationTelemetryEventsModule (copy), UseNavigationFunction (copy), UseGetConversationFromIdModule (copy), FFlagAppChatSignalsReplyStoreModule (copy), GetReplyingToStoreModule (copy), ShouldReadMessageListFromSignalsStore (copy), GetConversationMessageViewModelStoreModule (copy), UseReplyingToMessageDispatchModule (copy), UseLocalUserIdFunction (copy), HapticFeedbackContext (copy), HapticFeedbackType (copy), UseSwipeGestureModule (copy), EnumScreensModule (copy), SetTimeoutFunction (copy), AppChatMessageLongPressDistanceThreshold (copy), UserInputService (copy), FFlagAppChatEnableMessageContextMenuModule (copy), ChatMessageContainerConstantsModule (copy), OptionsEnumModule (copy), ConversationModule (copy), GetReplyLabelDescriptorModule (copy), FFlagAppChatUseUserProfileHydrationModule (copy), UseProfileNamesModule (copy), UserProfilesModule (copy), GetCombinedNameFromProfileNamesModule (copy), DataStatus (copy), UseLocalizationFunction (copy), GetTextSizeFunction (copy), GetFFlagDebugAppChatModule (copy), OptionsModule (copy), FFlagAppChatAlignAvatarToMessageGroupBottomModule (copy), UserTile (copy), LayoutMode (copy), UserPresence (copy), NormalizeFontFaceFunction (copy), Skeleton (copy), MessageFtuxTooltip (copy), AppChatEnableRepliesUIIxpEnabled2 (copy), IXPService (copy), AppChatEnableRepliesUIIxpLayer1 (copy), TextButton (copy), SystemMessageModule (copy), NoticeTextModule (copy)
+	-- upvalues: CryoModule (copy), config (copy), MessageModelModule (copy), FFlagAppChatEnableReactions (copy), UseIsInExperienceModule (copy), ReactModule (copy), FFlagAppChatConsoleFocusFixesModule (copy), UseStyleFunction (copy), UseChatPagePaddingModule (copy), FoundationModule (copy), AppChatUseSymmetricSwipe (copy), SwipeDirectionModule (copy), _UDim2 (copy), _UDim2_1 (copy), AppChatReplyIconSwipeOffset (copy), _Vector2 (copy), _Vector2_1 (copy), FFlagAppChatMessageModelOnDemandModule (copy), ChatConversationTelemetryLayerModule (copy), CreateTelemetryEmitterModule (copy), UseTelemetryModule (copy), UseTriggerFeedbackFunction (copy), UseDescendantSelectedFunction (copy), ReactFocusNavigationModule (copy), GlobalLongPressSignalModule (copy), MessageFtuxTooltipDismissSignal (copy), MessageFtuxTooltipVariant (copy), ChatConversationTelemetryEventsModule (copy), UseNavigationFunction (copy), UseGetConversationFromIdModule (copy), FFlagAppChatSignalsReplyStoreModule (copy), GetReplyingToStoreModule (copy), ShouldReadMessageListFromSignalsStore (copy), GetConversationMessageViewModelStoreModule (copy), UseReplyingToMessageDispatchModule (copy), UseLocalUserIdFunction (copy), HapticFeedbackContext (copy), HapticFeedbackType (copy), UseSwipeGestureModule (copy), EnumScreensModule (copy), SetTimeoutFunction (copy), AppChatMessageLongPressDistanceThreshold (copy), UserInputService (copy), FFlagAppChatEnableMessageContextMenuModule (copy), ChatMessageContainerConstantsModule (copy), OptionsEnumModule (copy), ConversationModule (copy), GetReplyLabelDescriptorModule (copy), FFlagAppChatUseUserProfileHydrationModule (copy), UseProfileNamesModule (copy), UserProfilesModule (copy), GetCombinedNameFromProfileNamesModule (copy), DataStatus (copy), UseLocalizationFunction (copy), GetTextSizeFunction (copy), GetFFlagDebugAppChatModule (copy), OptionsModule (copy), FFlagAppChatAlignAvatarToMessageGroupBottomModule (copy), UserTile (copy), LayoutMode (copy), UserPresence (copy), NormalizeFontFaceFunction (copy), Skeleton (copy), MessageFtuxTooltip (copy), MessageReactionChipModule (copy), AppChatEnableRepliesUIIxpEnabled2 (copy), IXPService (copy), AppChatEnableRepliesUIIxpLayer1 (copy), TextButton (copy), SystemMessageModule (copy), NoticeTextModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local IsVisibilityMatch: boolean = if JoinResult.visibility then JoinResult.visibility == MessageModelModule.VisibilityTypes.Hidden else false
+	local Inverted: boolean = if FFlagAppChatEnableReactions then not UseIsInExperienceModule() else false
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: JoinResult (copy)
 		if JoinResult.viewProfileOnAvatarPressed then
@@ -173,7 +177,7 @@ function ChatMessageContainer(p1)
 	local v2 = nil
 	
 	if FFlagAppChatConsoleFocusFixesModule then
-		v1, v98 = UseDescendantSelectedFunction()
+		v1, v102 = UseDescendantSelectedFunction()
 	end
 	local UseResult1 = nil
 	
@@ -529,7 +533,7 @@ function ChatMessageContainer(p1)
 	end) else nil
 	
 	local function renderMessage()
-		-- upvalues: ReactModule (upval), MapResult1 (copy), UseResult8 (ref), UseResult9 (ref), NewMessageTypePaddingOffset (ref), JoinResult (copy), Left (copy), NewLeft (copy), UseChatPagePaddingModuleResult (copy), Left1 (copy), FoundationModule (upval), FFlagAppChatAlignAvatarToMessageGroupBottomModule (upval), UserTile (upval), LayoutMode (upval), UserPresence (upval), UseResult (copy), UseTokensResult (copy), ShouldShowName (copy), ChatMessageContainerConstantsModule (upval), IsIncoming (copy), SenderTargetId (copy), NoCombinedNameFromProfileNamesModule (ref), NormalizeFontFaceFunction (upval), UseResult12 (copy), DisplayName (ref), UseStyleResult (copy), Skeleton (upval), FFlagAppChatConsoleFocusFixesModule (upval), IsVisibilityMatch (copy), v2 (ref), UseResult1 (ref), UseResult6 (ref), UseResult7 (ref), UseResult10 (ref), UseResult11 (ref), UseStateResult (ref), UseMemoResult5 (ref), UseRefResult1 (copy), UseRefResult (copy), MessageFtuxTooltip (upval), MessageFtuxTooltipVariant (upval), UseMemoResult (copy), MapResult2 (copy), MapResult (copy)
+		-- upvalues: ReactModule (upval), MapResult1 (copy), UseResult8 (ref), UseResult9 (ref), NewMessageTypePaddingOffset (ref), JoinResult (copy), Left (copy), NewLeft (copy), UseChatPagePaddingModuleResult (copy), Left1 (copy), FoundationModule (upval), FFlagAppChatAlignAvatarToMessageGroupBottomModule (upval), UserTile (upval), LayoutMode (upval), UserPresence (upval), UseResult (copy), FFlagAppChatEnableReactions (upval), UseTokensResult (copy), ShouldShowName (copy), ChatMessageContainerConstantsModule (upval), IsIncoming (copy), SenderTargetId (copy), NoCombinedNameFromProfileNamesModule (ref), NormalizeFontFaceFunction (upval), UseResult12 (copy), DisplayName (ref), UseStyleResult (copy), Skeleton (upval), FFlagAppChatConsoleFocusFixesModule (upval), IsVisibilityMatch (copy), v2 (ref), UseResult1 (ref), UseResult6 (ref), UseResult7 (ref), UseResult10 (ref), UseResult11 (ref), UseStateResult (ref), UseMemoResult5 (ref), UseRefResult1 (copy), UseRefResult (copy), MessageFtuxTooltip (upval), MessageFtuxTooltipVariant (upval), Inverted (copy), MessageReactionChipModule (upval), UseMemoResult (copy), MapResult2 (copy), MapResult (copy)
 		local Frame = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
@@ -576,7 +580,8 @@ function ChatMessageContainer(p1)
 			}, {
 				Layout = ReactModule.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Vertical,
-					HorizontalAlignment = Left1
+					HorizontalAlignment = Left1,
+					SortOrder = if FFlagAppChatEnableReactions then Enum.SortOrder.LayoutOrder else nil
 				}),
 				Padding = ReactModule.createElement("UIPadding", {
 					PaddingLeft = UDim.new(0, JoinResult.isIncoming and UseTokensResult.Size.Size_200 or 0)
@@ -649,7 +654,12 @@ function ChatMessageContainer(p1)
 						messageRef = UseRefResult,
 						isReversed = JoinResult.isIncoming
 					}) else nil
-				})
+				}),
+				MessageReactionChip = if Inverted then ReactModule.createElement(MessageReactionChipModule, {
+					layoutOrder = 3,
+					messageId = JoinResult.messageId,
+					isIncoming = JoinResult.isIncoming
+				}) else nil
 			})
 		})
 		

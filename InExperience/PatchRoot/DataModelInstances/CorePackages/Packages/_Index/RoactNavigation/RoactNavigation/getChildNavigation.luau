@@ -75,10 +75,10 @@ local function getChildNavigation(AssignResult, Key, Callback)
 		
 		return AssignResult3
 	else
-		local AssignResult3 = GetEventManagerModule
-		AssignResult3 = AssignResult3(Key)
-		local AssignResult2 = nil
-		AssignResult2 = Object.assign(table.clone(Tbl1), {
+		local AssignResult3 = Key
+		local EventManagerModule = GetEventManagerModule(AssignResult3)
+		AssignResult3 = nil
+		AssignResult3 = Object.assign(table.clone(Tbl1), {
 			state = Route,
 			router = ChildRouterModule,
 			actions = AssignResult1,
@@ -89,8 +89,8 @@ local function getChildNavigation(AssignResult, Key, Callback)
 				return if Params and Params[p1] ~= nil then Params[p1] else p2
 			end,
 			getChildNavigation = function(Key1)
-				-- upvalues: getChildNavigation (upval), AssignResult2 (ref), Callback (copy), Key (copy)
-				return getChildNavigation(AssignResult2, Key1, function()
+				-- upvalues: getChildNavigation (upval), AssignResult3 (ref), Callback (copy), Key (copy)
+				return getChildNavigation(AssignResult3, Key1, function()
 					-- upvalues: Callback (upval), Key (upval)
 					local CallbackResult = Callback()
 					
@@ -118,12 +118,12 @@ local function getChildNavigation(AssignResult, Key, Callback)
 			dispatch = AssignResult.dispatch,
 			getScreenProps = AssignResult.getScreenProps,
 			_dangerouslyGetParent = Callback,
-			addListener = AssignResult3.addListener,
-			emit = AssignResult3.emit
+			addListener = EventManagerModule.addListener,
+			emit = EventManagerModule.emit
 		})
-		ChildrenNavigationCacheModule[Key] = AssignResult2
+		ChildrenNavigationCacheModule[Key] = AssignResult3
 		
-		return AssignResult2
+		return AssignResult3
 	end
 end
 

@@ -1,15 +1,17 @@
 ﻿local FriendsMenu = script:FindFirstAncestor("FriendsMenu")
 local Parent = FriendsMenu.Parent
+local Context = FriendsMenu.Context
 local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
 local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFontFace
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local ResponsiveModule = require(Parent.Responsive)
 local UseFocusGuiObjectFunction = require(Parent.ReactFocusNavigation).useFocusGuiObject
 local UseLastInputModeFunction = require(Parent.FocusNavigationUtils).useLastInputMode
-local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local ConstantsModule = require(FriendsMenu.Constants)
 local FriendsMenuUserCardModule = require(script.Parent.FriendsMenuUserCard)
-local SelectedUsersContextModule = require(FriendsMenu.Context.SelectedUsersContext)
+local SelectedUsersContextModule = require(Context.SelectedUsersContext)
 
 return function(p1)
 	-- upvalues: ReactModule (copy), SelectedUsersContextModule (copy), ResponsiveModule (copy), UseLastInputModeFunction (copy), UseFocusGuiObjectFunction (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), FriendsMenuUserCardModule (copy), NormalizeFontFaceFunction (copy), ConstantsModule (copy)

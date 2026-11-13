@@ -61,6 +61,36 @@ return function(p1)
 			LayoutOrder = LayoutOrder
 		})
 	end
+	local Element = ReactModule.createElement(View, { tag = "col gap-xlarge size-full-0 auto-y" }, {
+		TitleAndBody = ReactModule.createElement(View, {
+			tag = "col gap-xsmall size-full-0 auto-y",
+			LayoutOrder = 1
+		}, {
+			Title = ReactModule.createElement(Text, {
+				tag = "size-full-0 auto-y text-heading-medium text-wrap text-align-x-left text-align-y-top content-emphasis",
+				LayoutOrder = 1,
+				Text = Props.title
+			}),
+			Description = ReactModule.createElement(Text, {
+				tag = "size-full-0 auto-y text-body-large text-wrap text-align-x-left text-align-y-top content-default",
+				LayoutOrder = 2,
+				Text = Props.description
+			})
+		}),
+		Options = ReactModule.createElement(View, {
+			tag = "col gap-small size-full-0 auto-y padding-x-xsmall",
+			LayoutOrder = 2
+		}, {
+			OptionsLabel = ReactModule.createElement(InputLabel, { LayoutOrder = 1, Text = Props.optionsLabel }),
+			OptionList = ReactModule.createElement(OptionSelectorGroup.Root, {
+				LayoutOrder = 2,
+				value = UseStateResult,
+				onValueChanged = UseResult2
+			}, {
+				Items = ReactModule.createElement(View, { tag = "col gap-medium size-full-0 auto-y" }, Elements)
+			})
+		})
+	})
 	local HasBack: boolean = p1.transitions ~= nil and p1.transitions.Back ~= nil
 	
 	return ReactModule.createElement(FullPageChromeModule, {
@@ -80,38 +110,7 @@ return function(p1)
 			}, {
 				Content = ReactModule.createElement(View, {
 					tag = "col gap-none size-full-0 auto-y padding-x-xlarge padding-y-xlarge"
-				}, {
-					Body = ReactModule.createElement(View, { tag = "col gap-xlarge size-full-0 auto-y" }, {
-						TitleAndBody = ReactModule.createElement(View, {
-							tag = "col gap-xsmall size-full-0 auto-y",
-							LayoutOrder = 1
-						}, {
-							Title = ReactModule.createElement(Text, {
-								tag = "size-full-0 auto-y text-heading-medium text-wrap text-align-x-left text-align-y-top content-emphasis",
-								LayoutOrder = 1,
-								Text = Props.title
-							}),
-							Description = ReactModule.createElement(Text, {
-								tag = "size-full-0 auto-y text-body-large text-wrap text-align-x-left text-align-y-top content-default",
-								LayoutOrder = 2,
-								Text = Props.description
-							})
-						}),
-						Options = ReactModule.createElement(View, {
-							tag = "col gap-small size-full-0 auto-y padding-x-xsmall",
-							LayoutOrder = 2
-						}, {
-							OptionsLabel = ReactModule.createElement(InputLabel, { LayoutOrder = 1, Text = Props.optionsLabel }),
-							OptionList = ReactModule.createElement(OptionSelectorGroup.Root, {
-								LayoutOrder = 2,
-								value = UseStateResult,
-								onValueChanged = UseResult2
-							}, {
-								Items = ReactModule.createElement(View, { tag = "col gap-medium size-full-0 auto-y" }, Elements)
-							})
-						})
-					})
-				})
+				}, { Body = Element })
 			}),
 			Footer = if UseStateResult == nil then nil else ReactModule.createElement(View, {
 				tag = "col gap-small size-full-0 auto-y padding-x-xlarge padding-bottom-large",

@@ -254,10 +254,10 @@ local function updateClone(Player1: Player)
 					playingAnimationTrack:Destroy()
 				end
 			end
-			for _, value in ipairs(PlayingAnimationTracksCoreScript) do
-				if value ~= nil then
-					value:Stop(0)
-					value:Destroy()
+			for _, value1 in ipairs(PlayingAnimationTracksCoreScript) do
+				if value1 ~= nil then
+					value1:Stop(0)
+					value1:Destroy()
 				end
 			end
 			if TrackerStreamAnimation then
@@ -269,8 +269,8 @@ local function updateClone(Player1: Player)
 			if SelfViewRestorePoseSynchronization then
 				Animator:SynchronizeWith(Animator1)
 			else
-				for _, value1 in ipairs(Animator1:GetPlayingAnimationTracksCoreScript()) do
-					syncTrack(Animator, value1)
+				for _, value in ipairs(Animator1:GetPlayingAnimationTracksCoreScript()) do
+					syncTrack(Animator, value)
 				end
 				Player.AnimationPlayedCoreScript = Animator1.AnimationPlayedCoreScript:Connect(function(AnimationTrack)
 					-- upvalues: syncTrack (upval), Animator (upval)
@@ -760,12 +760,13 @@ function startRenderStepped(Player)
 								local DeviceCameraCFrameForSelfView = game:GetService("PlayerViewService"):GetDeviceCameraCFrameForSelfView()
 								local Position2 = DeviceCameraCFrameForSelfView.Position
 								local Rx, Ry, Rz = DeviceCameraCFrameForSelfView:ToEulerAnglesYXZ()
+								local _CFrame1 = CFrame.fromEulerAnglesYXZ(Rx, Ry, Rz)
 								local Negated = -(VectorDelta.Z + 1)
-								Camera.CFrame = Camera.CFrame:Lerp(CFrame.lookAt(CFrame.fromEulerAnglesYXZ(Rx, Ry, Rz) * (Position + Vector3.new(0, 0.105, math.floor((Negated + (if Position2.Z > 0 then math.clamp(0.5 - Position2.Z * 3, -0.5, 0.5) else 0) * Negated) * 100) / 100)), Position1), 0.5)
+								Camera.CFrame = Camera.CFrame:Lerp(CFrame.lookAt(_CFrame1 * (Position + Vector3.new(0, 0.105, math.floor((Negated + (if Position2.Z > 0 then math.clamp(0.5 - Position2.Z * 3, -0.5, 0.5) else 0) * Negated) * 100) / 100)), Position1), 0.5)
 							elseif CF then
-								local _Vector3_1 = Vector3.new(0, 0.105, -(VectorDelta.Z + 1))
+								local _Vector3 = Vector3.new(0, 0.105, -(VectorDelta.Z + 1))
 								local Rx1, Ry1, Rz1 = CF:ToEulerAnglesXYZ()
-								Camera.CFrame = CFrame.lookAt(CFrame.Angles(-Rx1 * 0.5, -Ry1 * 0.5, -Rz1 * 0.5) * (Position + _Vector3_1), Position1)
+								Camera.CFrame = CFrame.lookAt(CFrame.Angles(-Rx1 * 0.5, -Ry1 * 0.5, -Rz1 * 0.5) * (Position + _Vector3), Position1)
 							end
 						else
 							local _Vector3 = Vector3.new(0, Y * 0.25 - 1.25, -(VectorDelta.Z + 1) + 0.125)

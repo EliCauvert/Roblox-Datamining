@@ -18,6 +18,8 @@ local FetchPromptsModule = require(ServerTriggeredModals.SduiV2.fetchPrompts)
 local PromptsEntryPointModule = require(ServerTriggeredModals.SduiV2.PromptsEntryPoint)
 local PromptStyleModule = require(ServerTriggeredModals.SduiV2.PromptStyle)
 local UsePromptEntriesModule = require(ServerTriggeredModals.SduiV2.usePromptEntries)
+local LogPromptModalSkippedModule = require(ServerTriggeredModals.logPromptModalSkipped)
+local FFlagPromptsModalSkipTelemetryModule = require(ServerTriggeredModals.Flags.FFlagPromptsModalSkipTelemetry)
 local FFlagSduiAllowNoConfigsBuilt = SharedFlagsModule.FFlagSduiAllowNoConfigsBuilt
 local FFlagEnableHomepagePromptsForModalsAndBanners = SharedFlagsModule.FFlagEnableHomepagePromptsForModalsAndBanners
 local FFlagPromptsImpressionUsesTitle = SharedFlagsModule.FFlagPromptsImpressionUsesTitle
@@ -29,7 +31,7 @@ local function _(p1): boolean
 end
 
 local function CheckForPrompts(p1)
-	-- upvalues: UseDispatchFunction (copy), UseModalSignalStoreModule (copy), UseSignalStateFunction (copy), EntryPointModule (copy), ReactModule (copy), PromptsEntryPointModule (copy), FFlagSduiAllowNoConfigsBuilt (copy), SduiLoadTimer (copy), FetchPromptsModule (copy), FFlagEnableHomepagePromptsForModalsAndBanners (copy), UsePromptEntriesModule (copy), PromptStyleModule (copy), GetSduiApiStoreFunction (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), AppPage (copy), FFlagPromptsImpressionUsesTitle (copy)
+	-- upvalues: UseDispatchFunction (copy), UseModalSignalStoreModule (copy), UseSignalStateFunction (copy), EntryPointModule (copy), ReactModule (copy), PromptsEntryPointModule (copy), FFlagSduiAllowNoConfigsBuilt (copy), SduiLoadTimer (copy), FetchPromptsModule (copy), FFlagEnableHomepagePromptsForModalsAndBanners (copy), UsePromptEntriesModule (copy), PromptStyleModule (copy), GetSduiApiStoreFunction (copy), FFlagPromptsModalSkipTelemetryModule (copy), LogPromptModalSkippedModule (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), AppPage (copy), FFlagPromptsImpressionUsesTitle (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseModalSignalStoreModuleResult = UseModalSignalStoreModule()
 	local UseSignalStateResult = UseSignalStateFunction(UseModalSignalStoreModuleResult.getMetadataGetter(EntryPointModule.HomepageLaunch))
@@ -53,34 +55,60 @@ local function CheckForPrompts(p1)
 		-- upvalues: FetchPromptsModule (upval), UseMemoResult (copy)
 		FetchPromptsModule(UseMemoResult)
 	end, { UseMemoResult })
-	local HomepagePrompt = nil
-	HomepagePrompt = if FFlagEnableHomepagePromptsForModalsAndBanners then UsePromptEntriesModule("HomepagePrompts", PromptStyleModule.Modal)[1] else UseSignalStateFunction((ReactModule.useCallback(function(p2)
-		-- upvalues: GetSduiApiStoreFunction (upval)
-		local DataResult = GetSduiApiStoreFunction().getData("HomepagePrompts").data(p2)
-		
-		return DataResult and DataResult.HomepagePrompts
-	end, {})))
-	ReactModule.useEffect(function()
-		-- upvalues: UseSignalStateResult1 (copy), UseSignalStateResult (copy), IsFocused (copy), HomepagePrompt (ref), UseModalSignalStoreModuleResult (copy), EntryPointModule (upval), UseDispatchResult (copy), SetCentralOverlayFunction (upval), CentralOverlayType (upval), AppPage (upval), FFlagPromptsImpressionUsesTitle (upval)
-		if UseSignalStateResult1 then return end
-		if UseSignalStateResult then return end
-		if not IsFocused then return end
-		local HomepagePrompt1 = HomepagePrompt
-		
-		if HomepagePrompt1 ~= nil and (HomepagePrompt1.config ~= nil and (HomepagePrompt1.identifier ~= nil and (HomepagePrompt1.robloxComponentType ~= nil and HomepagePrompt1.title ~= nil))) then
-			UseModalSignalStoreModuleResult.setHasShown(EntryPointModule.HomepageLaunch, true)
-			UseDispatchResult(SetCentralOverlayFunction(CentralOverlayType.SduiPromptModal, {
-				configKey = "HomepagePrompts",
-				appPage = AppPage.Home,
-				modalId = HomepagePrompt.identifier,
-				modalType = if FFlagPromptsImpressionUsesTitle then HomepagePrompt.title else HomepagePrompt.robloxComponentType
-			}))
+	local Entry1 = nil
+	local Entry = nil
+	
+	if FFlagEnableHomepagePromptsForModalsAndBanners then
+		Entry = UsePromptEntriesModule("HomepagePrompts", PromptStyleModule.Modal)
+		Entry1 = Entry[1]
+	else
+		Entry1 = UseSignalStateFunction((ReactModule.useCallback(function(p2)
+			-- upvalues: GetSduiApiStoreFunction (upval)
+			local DataResult = GetSduiApiStoreFunction().getData("HomepagePrompts").data(p2)
 			
+			return DataResult and DataResult.HomepagePrompts
+		end, {})))
+	end
+	ReactModule.useEffect(function()
+		-- upvalues: UseSignalStateResult1 (copy), FFlagPromptsModalSkipTelemetryModule (upval), LogPromptModalSkippedModule (upval), EntryPointModule (upval), Entry (ref), Entry1 (ref), UseSignalStateResult (copy), IsFocused (copy), UseModalSignalStoreModuleResult (copy), UseDispatchResult (copy), SetCentralOverlayFunction (upval), CentralOverlayType (upval), AppPage (upval), FFlagPromptsImpressionUsesTitle (upval)
+		if not UseSignalStateResult1 then
+			if not UseSignalStateResult then
+				if IsFocused then
+					local Entry2 = Entry1
+					
+					if Entry2 ~= nil and (Entry2.config ~= nil and (Entry2.identifier ~= nil and (Entry2.robloxComponentType ~= nil and Entry2.title ~= nil))) then
+						UseModalSignalStoreModuleResult.setHasShown(EntryPointModule.HomepageLaunch, true)
+						
+						if FFlagPromptsModalSkipTelemetryModule then
+							LogPromptModalSkippedModule.markShown(EntryPointModule.HomepageLaunch, Entry1)
+						end
+						UseDispatchResult(SetCentralOverlayFunction(CentralOverlayType.SduiPromptModal, {
+							configKey = "HomepagePrompts",
+							appPage = AppPage.Home,
+							modalId = Entry1.identifier,
+							modalType = if FFlagPromptsImpressionUsesTitle then Entry1.title else Entry1.robloxComponentType
+						}))
+						
+						return
+					elseif FFlagPromptsModalSkipTelemetryModule and Entry1 ~= nil then
+						LogPromptModalSkippedModule.log(LogPromptModalSkippedModule.Reason.IncompleteEntry, EntryPointModule.HomepageLaunch, Entry1)
+					end
+					return
+				elseif FFlagPromptsModalSkipTelemetryModule then
+					LogPromptModalSkippedModule.logAll(LogPromptModalSkippedModule.Reason.NotFocused, EntryPointModule.HomepageLaunch, Entry or { Entry1 })
+				end
+				return
+			elseif FFlagPromptsModalSkipTelemetryModule then
+				LogPromptModalSkippedModule.logAll(LogPromptModalSkippedModule.Reason.LegacyMetadata, EntryPointModule.HomepageLaunch, Entry or { Entry1 })
+			end
 			return
+		elseif FFlagPromptsModalSkipTelemetryModule then
+			LogPromptModalSkippedModule.logAll(LogPromptModalSkippedModule.Reason.AlreadyShown, EntryPointModule.HomepageLaunch, Entry or { Entry1 })
 		end
 	end, {
 		UseSignalStateResult1, UseSignalStateResult, IsFocused, UseDispatchResult,
-		UseModalSignalStoreModuleResult, HomepagePrompt
+		UseModalSignalStoreModuleResult, Entry1,
+		if FFlagPromptsModalSkipTelemetryModule then Entry else nil
 	})
 	
 	return nil

@@ -6,6 +6,7 @@ local DashModule = require(Parent.Dash)
 local UIBloxModule = require(Parent.UIBlox)
 local IconSize = UIBloxModule.App.Constant.IconSize
 local TextButton = UIBloxModule.App.Button.TextButton
+local Images = UIBloxModule.App.ImageSet.Images
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local FoundationModule = require(Parent.Foundation)
@@ -15,7 +16,7 @@ local Icon = FoundationModule.Icon
 local Enums = FoundationModule.Enums
 local GetTextSizeFunction = require(Parent.Style).GetTextSize
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local IconsActionsEditClearSmall = UIBloxModule.App.ImageSet.Images["icons/actions/edit/clear_small"]
+local IconsActionsEditClearSmall = Images["icons/actions/edit/clear_small"]
 local FFlagDisableAutocorrectSocialUserSearch = require(Parent.SharedFlags).FFlagDisableAutocorrectSocialUserSearch
 local FFlagLuaAppLogSocialUserSearchUXExposure = require(Parent.SharedFlags).FFlagLuaAppLogSocialUserSearchUXExposure
 local DisableAutocorrectExperimentLayer = game:DefineFastString("DisableAutocorrectExperimentLayer", "Social.UserSearchUX")
@@ -53,6 +54,7 @@ return function(p1)
 		end
 	end, {})
 	local X = GetTextSizeFunction(JoinResult.cancelText, UseStyleResult.Font.BaseSize * UseStyleResult.Font.Header2.RelativeSize, UseStyleResult.Tokens.Typography.TitleLarge.Font, Vector2.new(10000, 10000)).X
+	local _UDim2: UDim2 = if JoinResult.isDisabled then UDim2.new(1, 0, 1, 0) else UDim2.new(1, -X - 12, 1, 0)
 	local Body = UseStyleResult.Font.Body
 	local ScaledBaseSize = UseStyleResult.Font.BaseSize * Body.RelativeSize
 	
@@ -98,7 +100,7 @@ return function(p1)
 		FilterBoxBackground = ReactModule.createElement(ImageSetLabel, {
 			BorderSizePixel = 0,
 			LayoutOrder = 1,
-			Size = if JoinResult.isDisabled then UDim2.new(1, 0, 1, 0) else UDim2.new(1, -X - 12, 1, 0),
+			Size = _UDim2,
 			BackgroundColor3 = UseStyleResult.Theme.UIMuted.Color,
 			BackgroundTransparency = UseStyleResult.Theme.UIMuted.Transparency
 		}, {

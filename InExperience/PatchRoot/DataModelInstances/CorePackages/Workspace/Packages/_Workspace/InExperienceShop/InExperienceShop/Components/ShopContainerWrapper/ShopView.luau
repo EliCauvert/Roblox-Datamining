@@ -71,6 +71,20 @@ return function(p1)
 			onOfferChipActivated = p1.offer.onOfferChipActivated
 		})
 	})
+	local Element1 = if HasOfferModal and OfferModal ~= nil then ReactModule.createElement(View, {
+		tag = "size-full-0 auto-y padding-x-xlarge padding-top-medium",
+		LayoutOrder = 4
+	}, {
+		Banner = ReactModule.createElement(DesktopOfferBannerModule, {
+			testId = "DesktopOfferBanner",
+			text = p1.offer.offerBodyText,
+			icon = p1.offer.offerChipIcon,
+			link = if OfferModal.termsAndConditions == nil then nil else {
+				text = p1.offer.offerViewTermsText,
+				onActivated = p1.offer.onOfferViewTerms
+			}
+		})
+	}) else nil
 	local FFlagRemoveBottomPaddingInExperienceShopModuleResult = FFlagRemoveBottomPaddingInExperienceShopModule()
 	local FFlagShopBlockClickPassThroughModuleResult = FFlagShopBlockClickPassThroughModule()
 	local UseTokensResult = if FFlagShopBlockClickPassThroughModuleResult then UseTokensFunction() else nil
@@ -118,20 +132,7 @@ return function(p1)
 						tabs = p1.tabs
 					})
 				}) else nil,
-				OfferBanner = if HasOfferModal and OfferModal ~= nil then ReactModule.createElement(View, {
-					tag = "size-full-0 auto-y padding-x-xlarge padding-top-medium",
-					LayoutOrder = 4
-				}, {
-					Banner = ReactModule.createElement(DesktopOfferBannerModule, {
-						testId = "DesktopOfferBanner",
-						text = p1.offer.offerBodyText,
-						icon = p1.offer.offerChipIcon,
-						link = if OfferModal.termsAndConditions == nil then nil else {
-							text = p1.offer.offerViewTermsText,
-							onActivated = p1.offer.onOfferViewTerms
-						}
-					})
-				}) else nil,
+				OfferBanner = Element1,
 				PageSlot = ReactModule.createElement(View, {
 					tag = "col fill size-full-0 padding-top-medium",
 					LayoutOrder = if FFlagShowLargerOfferBannerOnDesktop2Module then 5 else 4,
@@ -183,7 +184,7 @@ return function(p1)
 			onViewTerms = p1.offer.onOfferViewTerms,
 			onClose = p1.offer.onOfferDetailsClose
 		}) else nil,
-		OfferTerms = if p1.offer.offerDialog == OfferDialogStateModule.Terms and (p1.offer.offerModal ~= nil and p1.offer.offerModal.termsAndConditions ~= nil) then ReactModule.createElement(OfferTermsDialogModule, {
+		OfferTerms = if p1.offer.offerDialog == OfferDialogStateModule.Terms and p1.offer.offerModal ~= nil and p1.offer.offerModal.termsAndConditions ~= nil then ReactModule.createElement(OfferTermsDialogModule, {
 			terms = p1.offer.offerModal.termsAndConditions,
 			onClose = p1.offer.onOfferTermsClose
 		}) else nil,

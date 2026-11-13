@@ -170,6 +170,7 @@ function LightUtilityModule.SetupSpotLightsIn3PointLightingWithJsonConfig(p3)
 	local v1 = P11.keyCFrame and P11.keyCFrame:split(",") or {
 		"2.219", "103.178", "4.675", "30", "60", "-90"
 	}
+	local WorldPoint = _CFrame:ToWorldSpace(CFrame.new(tonumber(v1[1]) or 0, tonumber(v1[2]) or 0, tonumber(v1[3]) or 0) * CFrame.Angles(math.rad(tonumber(v1[4]) or 0), math.rad(tonumber(v1[5]) or 0), (math.rad(tonumber(v1[6]) or 0))))
 	local v2 = P11.fillCFrame and P11.fillCFrame:split(",") or {
 		"3.554", "107.01", "-1.036", "-15", "90", "-90"
 	}
@@ -177,7 +178,7 @@ function LightUtilityModule.SetupSpotLightsIn3PointLightingWithJsonConfig(p3)
 	local v4 = P11.fillColor and P11.fillColor:split(",") or { "255", "255", "255" }
 	LightUtilityModule.SetupSpotLightsIn3PointLighting({
 		keyLight = {
-			partCFrame = _CFrame:ToWorldSpace(CFrame.new(tonumber(v1[1]) or 0, tonumber(v1[2]) or 0, tonumber(v1[3]) or 0) * CFrame.Angles(math.rad(tonumber(v1[4]) or 0), math.rad(tonumber(v1[5]) or 0), (math.rad(tonumber(v1[6]) or 0)))),
+			partCFrame = WorldPoint,
 			color = Color3.fromRGB(tonumber(v3[1]), tonumber(v3[2]), (tonumber(v3[3]))),
 			brightness = P11.keyBrightness and tonumber(P11.keyBrightness) or 11.2,
 			range = P11.keyRange and tonumber(P11.keyRange) or 12,

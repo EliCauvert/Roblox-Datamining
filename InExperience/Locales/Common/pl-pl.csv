@@ -3948,11 +3948,13 @@ Feature.Moments.Description.HowToCaptureStep1,Dołącz do projektu z włączoną
 Feature.Moments.Description.HowToCaptureStep2,Włącz elementy sterujące przechwytywaniem
 Feature.Moments.Description.HowToCaptureStep3,Przechwytuj zdjęcia i filmy z rozgrywki
 Feature.Moments.Description.LeaveMomentsCreation,"Utracisz wszystkie wprowadzone zmiany, ale ten przechwycony element będzie nadal dostępny w galerii <b>przechwyconych elementów</b>."
+Feature.Moments.Description.MomentsOffBody,Poproś rodzica o włączenie Momentów w sekcji Kontrola rodzicielska.
 Feature.Moments.Description.NoMusicResults,Nie znaleziono muzyki
 Feature.Moments.Description.NonInfiniteScrollEndBody,"Wstrzymaliśmy Twój kanał aktualności. Możesz zdecydować, czy chcesz oglądać dalej."
 Feature.Moments.Description.NothingHereYet,Niczego tu jeszcze nie ma...
 Feature.Moments.Description.PublishMoment,Opisz swój moment
 Feature.Moments.Description.StayFriendly,Zachowajmy przyjazny ton
+Feature.Moments.Description.TimeLimitReachedBody,Limity zależą od wieku. Obejrzyj Momenty jutro.
 Feature.Moments.Description.TooManyUploads,Przesłano dziś zbyt wiele filmów. Spróbuj ponownie jutro.
 Feature.Moments.Disclaimer.EveryoneMoments,Wszystkie osoby w tym momencie mogą wyświetlić opublikowane treści
 Feature.Moments.Label.All,
@@ -4023,6 +4025,7 @@ Feature.Moments.Label.MomentRemovedTitle,Usunęliśmy ten moment
 Feature.Moments.Label.MomentUnavailable,Moment niedostępny
 Feature.Moments.Label.MomentUnavailableDefault,Ten moment nie jest dostępny.
 Feature.Moments.Label.MomentsExperienceName,
+Feature.Moments.Label.MomentsOffTitle,Funkcja Momenty jest wyłączona
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,Nie ma jeszcze komentarzy
 Feature.Moments.Label.NonInfiniteScrollEndTitle,Jest więcej momentów do obejrzenia
@@ -4052,6 +4055,7 @@ Feature.Moments.Label.TextGenerationFailedBody,Nie udało się wygenerować teks
 Feature.Moments.Label.TextGenerationFailedTitle,Nie udało się wygenerować
 Feature.Moments.Label.TextGenerationFilteredBody,"Nie można wygenerować tekstu dla tego przechwyconego filmu, treść jest filtrowana."
 Feature.Moments.Label.TextGenerationFilteredTitle,Generowanie przefiltrowane
+Feature.Moments.Label.TimeLimitReachedTitle,Osiągnięto limit czasu dla funkcji Momenty
 Feature.Moments.Label.Tone,Ton
 Feature.Moments.Label.Tone.Cinematic,Kinowy
 Feature.Moments.Label.Tone.Funny,Zabawny
@@ -4908,6 +4912,8 @@ Feature.UniversalShareSheet.Response.SharedMessage,Wiadomość została wysłana
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Wiadomości zostały wysłane
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} i jeszcze {N} osobom
 Feature.UserLibrary.Label.MyLibrary,Moja biblioteka
+Feature.VIPServer.Message.TooManyFreeServersOnGame,Osiągnięto limit darmowych serwerów prywatnych dotyczący tego projektu.
+Feature.VIPServer.Message.TooManyTotalActiveFreeServers,Osiągnięto limit aktywnych darmowych serwerów prywatnych. Najpierw dezaktywuj niektóre z innych serwerów.
 Feature.VerificationUpsell.Action.AddPhone,Dodaj numer telefonu
 Feature.VerificationUpsell.Action.AddPhoneNumber,
 Feature.VerificationUpsell.Action.AddPhoneVoice,Dodaj telefon do czatu głosowego

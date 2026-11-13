@@ -1,12 +1,13 @@
 ﻿local Parent = script:FindFirstAncestor("UserTile").Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
+local UserLibModule = require(Parent.UserLib)
 local Image = FoundationModule.Image
 local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UseCumulativeBackgroundFunction = FoundationModule.Hooks.useCumulativeBackground
 local UserPresence = FoundationModule.Enums.UserPresence
-local GetStandardSizeAvatarHeadShotRbxthumbFunction = require(Parent.UserLib).Utils.getStandardSizeAvatarHeadShotRbxthumb
+local GetStandardSizeAvatarHeadShotRbxthumbFunction = UserLibModule.Utils.getStandardSizeAvatarHeadShotRbxthumb
 
 return function(p1)
 	-- upvalues: UseTokensFunction (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), UseCumulativeBackgroundFunction (copy), ReactModule (copy), View (copy), Image (copy), UserPresence (copy)

@@ -3,10 +3,13 @@ local LuauPolyfillModule = require(Parent.Parent.LuauPolyfill)
 local ErrorFunction = LuauPolyfillModule.Error
 local Map = LuauPolyfillModule.Map
 local _ = require(Parent.jsutils.invariant).invariant
+local GraphQLSchema = require(Parent.type.schema).GraphQLSchema
 local GraphQLString = require(Parent.type.scalars).GraphQLString
 local DefinitionModule = require(Parent.type.definition)
 local GraphQLList = DefinitionModule.GraphQLList
 local GraphQLNonNull = DefinitionModule.GraphQLNonNull
+local GraphQLEnumType = DefinitionModule.GraphQLEnumType
+local GraphQLInterfaceType = DefinitionModule.GraphQLInterfaceType
 local GraphQLObjectType = DefinitionModule.GraphQLObjectType
 local StarWarsDataModule = require(script.Parent.starWarsData)
 local GetFriendsFunction = StarWarsDataModule.getFriends
@@ -16,7 +19,7 @@ local GetDroidFunction = StarWarsDataModule.getDroid
 local Character = nil
 local Human = nil
 local Droid = nil
-local Episode = DefinitionModule.GraphQLEnumType.new({
+local Episode = GraphQLEnumType.new({
 	name = "Episode",
 	description = "One of the films in the Star Wars Trilogy",
 	values = Map.new({
@@ -31,7 +34,7 @@ local Episode = DefinitionModule.GraphQLEnumType.new({
 		{ "JEDI", { value = 6, description = "Released in 1983." } }
 	})
 })
-Character = DefinitionModule.GraphQLInterfaceType.new({
+Character = GraphQLInterfaceType.new({
 	name = "Character",
 	description = "A character in the Star Wars Trilogy",
 	fields = function()
@@ -207,7 +210,7 @@ Droid = GraphQLObjectType.new({
 })
 
 return {
-	StarWarsSchema = require(Parent.type.schema).GraphQLSchema.new({
+	StarWarsSchema = GraphQLSchema.new({
 		query = GraphQLObjectType.new({
 			name = "Query",
 			fields = function()

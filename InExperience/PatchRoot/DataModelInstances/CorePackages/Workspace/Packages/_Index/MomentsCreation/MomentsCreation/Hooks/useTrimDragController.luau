@@ -13,7 +13,7 @@ local function _(p1, p2: number, p3)
 	return if p1 == nil or p2 <= 0 then p3 else p1 / p2
 end
 
-return function(p1, Callback3, Callback, Callback2, Callback4, p2, p3: number, Callback1)
+return function(p1, Callback3, Callback1, Callback2, Callback4, p2, p3: number, Callback)
 	-- upvalues: UseRefFunction (copy), UseBindingFunction (copy), UseCallbackFunction (copy), ValidateRefsModule (copy), DragHandleModule (copy), UseEffectFunction (copy)
 	local UseRefResult = UseRefFunction(nil)
 	local UseRefResult1 = UseRefFunction(nil)
@@ -31,25 +31,25 @@ return function(p1, Callback3, Callback, Callback2, Callback4, p2, p3: number, C
 	local UseRefResult9 = UseRefFunction(nil)
 	local v1: number = if p3 > 0 then 1 / p3 else 0
 	local UseCallbackResult = UseCallbackFunction(function()
-		-- upvalues: ValidateRefsModule (upval), UseRefResult1 (copy), UseRefResult9 (copy), DragHandleModule (upval), UseRefResult6 (copy), UseBindingResult (copy), Callback (copy)
+		-- upvalues: ValidateRefsModule (upval), UseRefResult1 (copy), UseRefResult9 (copy), DragHandleModule (upval), UseRefResult6 (copy), UseBindingResult (copy), Callback1 (copy)
 		if ValidateRefsModule({ UseRefResult1 }) and not UseRefResult9.current then
 			UseRefResult9.current = DragHandleModule.LeftHandle
 			UseRefResult6.current = UseBindingResult:getValue()
-			Callback(DragHandleModule.LeftHandle)
+			Callback1(DragHandleModule.LeftHandle)
 			
 			return
 		end
-	end, { Callback })
+	end, { Callback1 })
 	local UseCallbackResult1 = UseCallbackFunction(function()
-		-- upvalues: ValidateRefsModule (upval), UseRefResult6 (copy), UseRefResult1 (copy), UseBindingResult1 (copy), v1 (copy), UseBindingResult2 (copy), Callback1 (copy), DragHandleModule (upval)
+		-- upvalues: ValidateRefsModule (upval), UseRefResult6 (copy), UseRefResult1 (copy), UseBindingResult1 (copy), v1 (copy), UseBindingResult2 (copy), Callback (copy), DragHandleModule (upval)
 		if not ValidateRefsModule({ UseRefResult6, UseRefResult1 }) then return end
 		local ClampedValue = math.clamp(UseRefResult6.current + UseRefResult1.current.DragUDim2.X.Scale, 0, UseBindingResult1:getValue() - v1)
 		UseBindingResult2(ClampedValue)
 		
-		if Callback1 then
-			Callback1(DragHandleModule.LeftHandle, ClampedValue, UseBindingResult1:getValue())
+		if Callback then
+			Callback(DragHandleModule.LeftHandle, ClampedValue, UseBindingResult1:getValue())
 		end
-	end, { v1, Callback1 })
+	end, { v1, Callback })
 	local UseCallbackResult2 = UseCallbackFunction(function()
 		-- upvalues: UseRefResult9 (copy), DragHandleModule (upval), Callback2 (copy), UseBindingResult (copy), p3 (copy), UseRefResult6 (copy), Callback3 (copy)
 		if UseRefResult9.current == DragHandleModule.LeftHandle then
@@ -62,25 +62,25 @@ return function(p1, Callback3, Callback, Callback2, Callback4, p2, p3: number, C
 		end
 	end, { Callback3, Callback2, p3 })
 	local UseCallbackResult3 = UseCallbackFunction(function()
-		-- upvalues: ValidateRefsModule (upval), UseRefResult2 (copy), UseRefResult9 (copy), DragHandleModule (upval), UseRefResult7 (copy), UseBindingResult1 (copy), Callback (copy)
+		-- upvalues: ValidateRefsModule (upval), UseRefResult2 (copy), UseRefResult9 (copy), DragHandleModule (upval), UseRefResult7 (copy), UseBindingResult1 (copy), Callback1 (copy)
 		if ValidateRefsModule({ UseRefResult2 }) and not UseRefResult9.current then
 			UseRefResult9.current = DragHandleModule.RightHandle
 			UseRefResult7.current = UseBindingResult1:getValue()
-			Callback(DragHandleModule.RightHandle)
+			Callback1(DragHandleModule.RightHandle)
 			
 			return
 		end
-	end, { Callback })
+	end, { Callback1 })
 	local UseCallbackResult4 = UseCallbackFunction(function()
-		-- upvalues: ValidateRefsModule (upval), UseRefResult7 (copy), UseRefResult2 (copy), UseBindingResult (copy), v1 (copy), UseBindingResult2_1 (copy), Callback1 (copy), DragHandleModule (upval)
+		-- upvalues: ValidateRefsModule (upval), UseRefResult7 (copy), UseRefResult2 (copy), UseBindingResult (copy), v1 (copy), UseBindingResult2_1 (copy), Callback (copy), DragHandleModule (upval)
 		if not ValidateRefsModule({ UseRefResult7, UseRefResult2 }) then return end
 		local ClampedValue = math.clamp(UseRefResult7.current + UseRefResult2.current.DragUDim2.X.Scale, UseBindingResult:getValue() + v1, 1)
 		UseBindingResult2_1(ClampedValue)
 		
-		if Callback1 then
-			Callback1(DragHandleModule.RightHandle, UseBindingResult:getValue(), ClampedValue)
+		if Callback then
+			Callback(DragHandleModule.RightHandle, UseBindingResult:getValue(), ClampedValue)
 		end
-	end, { v1, Callback1 })
+	end, { v1, Callback })
 	local UseCallbackResult5 = UseCallbackFunction(function()
 		-- upvalues: UseRefResult9 (copy), DragHandleModule (upval), Callback2 (copy), UseBindingResult1 (copy), p3 (copy), UseRefResult7 (copy), Callback3 (copy)
 		if UseRefResult9.current == DragHandleModule.RightHandle then
@@ -93,15 +93,15 @@ return function(p1, Callback3, Callback, Callback2, Callback4, p2, p3: number, C
 		end
 	end, { Callback3, Callback2, p3 })
 	local UseCallbackResult6 = UseCallbackFunction(function()
-		-- upvalues: ValidateRefsModule (upval), UseRefResult5 (copy), UseRefResult4 (copy), UseRefResult9 (copy), DragHandleModule (upval), UseRefResult8 (copy), Callback (copy)
+		-- upvalues: ValidateRefsModule (upval), UseRefResult5 (copy), UseRefResult4 (copy), UseRefResult9 (copy), DragHandleModule (upval), UseRefResult8 (copy), Callback1 (copy)
 		if ValidateRefsModule({ UseRefResult5, UseRefResult4 }) and not UseRefResult9.current then
 			UseRefResult9.current = DragHandleModule.Scrubber
 			UseRefResult8.current = UseRefResult4.current.Position.X.Scale
-			Callback(DragHandleModule.Scrubber)
+			Callback1(DragHandleModule.Scrubber)
 			
 			return
 		end
-	end, { Callback })
+	end, { Callback1 })
 	local UseCallbackResult7 = UseCallbackFunction(function()
 		-- upvalues: ValidateRefsModule (upval), UseRefResult8 (copy), UseRefResult5 (copy), Callback4 (copy)
 		if ValidateRefsModule({ UseRefResult8, UseRefResult5 }) then
@@ -121,16 +121,16 @@ return function(p1, Callback3, Callback, Callback2, Callback4, p2, p3: number, C
 		end
 	end, { Callback3 })
 	local UseCallbackResult9 = UseCallbackFunction(function()
-		-- upvalues: ValidateRefsModule (upval), UseRefResult3 (copy), UseRefResult9 (copy), DragHandleModule (upval), UseRefResult6 (copy), UseBindingResult (copy), UseRefResult7 (copy), UseBindingResult1 (copy), Callback (copy)
+		-- upvalues: ValidateRefsModule (upval), UseRefResult3 (copy), UseRefResult9 (copy), DragHandleModule (upval), UseRefResult6 (copy), UseBindingResult (copy), UseRefResult7 (copy), UseBindingResult1 (copy), Callback1 (copy)
 		if ValidateRefsModule({ UseRefResult3 }) and not UseRefResult9.current then
 			UseRefResult9.current = DragHandleModule.Segment
 			UseRefResult6.current = UseBindingResult:getValue()
 			UseRefResult7.current = UseBindingResult1:getValue()
-			Callback(DragHandleModule.Segment)
+			Callback1(DragHandleModule.Segment)
 			
 			return
 		end
-	end, { Callback })
+	end, { Callback1 })
 	local UseCallbackResult10 = UseCallbackFunction(function()
 		-- upvalues: ValidateRefsModule (upval), UseRefResult3 (copy), UseRefResult6 (copy), UseRefResult1 (copy), UseRefResult7 (copy), UseRefResult2 (copy), UseBindingResult2 (copy), UseBindingResult2_1 (copy), Callback2 (copy), p3 (copy)
 		if not ValidateRefsModule({

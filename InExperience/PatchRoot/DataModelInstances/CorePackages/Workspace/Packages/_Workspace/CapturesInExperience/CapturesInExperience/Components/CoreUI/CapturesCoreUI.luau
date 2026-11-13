@@ -1,5 +1,6 @@
 ﻿local Parent = script.Parent.Parent.Parent
 local Parent1 = Parent.Parent
+local ReactUtilsModule = require(Parent1.ReactUtils)
 local CaptureService = game:GetService("CaptureService")
 local ReactModule = require(Parent1.React)
 local RoactUtilsModule = require(Parent1.RoactUtils)
@@ -10,7 +11,7 @@ local MakeVideoCaptureStartFailedHandlerModule = require(Parent.Utils.makeVideoC
 local ToastContainerModule = require(Parent.Components.Common.ToastContainer)
 local UseCallbackFunction = ReactModule.useCallback
 local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
-local UseEventConnectionFunction = require(Parent1.ReactUtils).useEventConnection
+local UseEventConnectionFunction = ReactUtilsModule.useEventConnection
 local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
 
 return function(_)

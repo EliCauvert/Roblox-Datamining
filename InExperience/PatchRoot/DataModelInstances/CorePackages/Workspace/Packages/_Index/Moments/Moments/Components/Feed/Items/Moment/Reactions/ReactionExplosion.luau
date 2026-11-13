@@ -2,9 +2,10 @@
 local ReactModule = require(Parent.React)
 local MomentsCommonModule = require(Parent.MomentsCommon)
 local Reaction = MomentsCommonModule.Components.Reaction
+local ReactionSize = MomentsCommonModule.Enums.ReactionSize
 local ReactionExplosionTickerModule = require(script.Parent.reactionExplosionTicker)
 local ReactionExplosionMathModule = require(script.Parent.reactionExplosionMath)
-local Medium = MomentsCommonModule.Enums.ReactionSize.Medium
+local Medium = ReactionSize.Medium
 local _Color3 = Color3.new(1, 1, 1)
 local MemoResult = ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), ReactionExplosionMathModule (copy), _Color3 (copy), Reaction (copy), Medium (copy)

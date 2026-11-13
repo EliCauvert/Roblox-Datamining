@@ -1,10 +1,11 @@
 ﻿local UserInputService = game:GetService("UserInputService")
 local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
 local RoactRodux = InGameMenuDependenciesModule.RoactRodux
 local Parent = script.Parent.Parent.Parent
 local ControlsModule = require(Parent.Resources.Controls)
 local SetControlLayoutModule = require(Parent.Actions.SetControlLayout)
-local ControlLayoutSetter = InGameMenuDependenciesModule.Roact.PureComponent:extend("ControlLayoutSetter")
+local ControlLayoutSetter = Roact.PureComponent:extend("ControlLayoutSetter")
 
 function ControlLayoutSetter.init(p1)
 	-- upvalues: ControlsModule (copy), UserInputService (copy)

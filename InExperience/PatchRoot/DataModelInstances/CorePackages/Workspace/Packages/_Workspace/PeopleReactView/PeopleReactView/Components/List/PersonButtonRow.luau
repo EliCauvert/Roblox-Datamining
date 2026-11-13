@@ -248,30 +248,7 @@ return function(p1)
 	local Elements = {}
 	
 	if GetFFlagAddPeoplePageCardLayoutFunction() then
-		for _, Config in PersonButtonConfigsModuleResult do
-			if Config.shouldShow() then
-				if FFlagVoiceVolumeControlsPerUserPlayerListButton and UseSignalStateResult and Config.id == UseMemoResult1.PERSON_BUTTONS.MUTE_PLAYER then
-					table.insert(Elements, ReactModule.createElement(MuteVolumeButtonModule, {
-						key = Config.id,
-						config = Config,
-						userId = p1.userId,
-						entryPoint = UseMemoResult1.ANALYTICS.ENTRY_POINT.PEOPLE_LIST,
-						muteButtonName = Config.id,
-						volumeButtonName = Config.id .. "_volume",
-						onButtonMount = UseResult
-					}))
-				else
-					table.insert(Elements, ReactModule.createElement(MemoizedButton, {
-						key = Config.id,
-						config = Config,
-						buttonId = Config.id,
-						onButtonMount = UseResult
-					}))
-				end
-			end
-		end
-	else
-		for _, Config1 in ipairs(PersonButtonConfigsModuleResult) do
+		for _, Config1 in PersonButtonConfigsModuleResult do
 			if Config1.shouldShow() then
 				if FFlagVoiceVolumeControlsPerUserPlayerListButton and UseSignalStateResult and Config1.id == UseMemoResult1.PERSON_BUTTONS.MUTE_PLAYER then
 					table.insert(Elements, ReactModule.createElement(MuteVolumeButtonModule, {
@@ -288,6 +265,29 @@ return function(p1)
 						key = Config1.id,
 						config = Config1,
 						buttonId = Config1.id,
+						onButtonMount = UseResult
+					}))
+				end
+			end
+		end
+	else
+		for _, Config in ipairs(PersonButtonConfigsModuleResult) do
+			if Config.shouldShow() then
+				if FFlagVoiceVolumeControlsPerUserPlayerListButton and UseSignalStateResult and Config.id == UseMemoResult1.PERSON_BUTTONS.MUTE_PLAYER then
+					table.insert(Elements, ReactModule.createElement(MuteVolumeButtonModule, {
+						key = Config.id,
+						config = Config,
+						userId = p1.userId,
+						entryPoint = UseMemoResult1.ANALYTICS.ENTRY_POINT.PEOPLE_LIST,
+						muteButtonName = Config.id,
+						volumeButtonName = Config.id .. "_volume",
+						onButtonMount = UseResult
+					}))
+				else
+					table.insert(Elements, ReactModule.createElement(MemoizedButton, {
+						key = Config.id,
+						config = Config,
+						buttonId = Config.id,
 						onButtonMount = UseResult
 					}))
 				end

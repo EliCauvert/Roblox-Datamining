@@ -1,10 +1,13 @@
 ﻿local Players = game:GetService("Players")
 local Parent = script.Parent
 local Parent1 = Parent.Parent
+local Utils = Parent1.utils
 local Parent2 = Parent1.Parent
 local FriendsMenuDependenciesModule = require(Parent1.FriendsMenuDependencies)
+local ConstantsModule = require(Parent1.Constants)
 local _ = require(Parent1.friendsMenuModalType)
 local ReactModule = require(Parent2.React)
+local Requests = require(Parent2.Http).Requests
 local UserLibModule = require(Parent2.UserLib)
 local RoactUtilsModule = require(Parent2.RoactUtils)
 local UserProfilesModule = require(Parent2.UserProfiles)
@@ -13,15 +16,16 @@ local UserModel = UserLibModule.Models.UserModel
 local Constants = UserLibModule.Utils.Constants
 local ApiFetchUsersPresencesFunction = UserLibModule.Thunks.ApiFetchUsersPresences
 local UpdateUsersFunction = UserLibModule.Thunks.UpdateUsers
+local ThumbnailRequest = UserLibModule.Utils.ThumbnailRequest
 local PreloadUsersThumbnailFunction = UserLibModule.Thunks.PreloadUsersThumbnail
 local NetworkImpl = FriendsMenuDependenciesModule.networkImpl
 local SortFriendsByCorrectedPresenceAndRank = FriendsMenuDependenciesModule.sortFriendsByCorrectedPresenceAndRank
 local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
 local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
 local FriendsListContextModule = require(Parent.FriendsListContext)
-local GenerateDummyFriendsModule = require(Parent1.utils.generateDummyFriends)
-local DEPRECATEDUsersGetFriendsFunction = require(Parent2.Http).Requests.DEPRECATED_UsersGetFriends
-local UserSorts = require(Parent1.Constants).UserSorts
+local GenerateDummyFriendsModule = require(Utils.generateDummyFriends)
+local DEPRECATEDUsersGetFriendsFunction = Requests.DEPRECATED_UsersGetFriends
+local UserSorts = ConstantsModule.UserSorts
 local config = {
 	InviteAvatarThumbnailType = Constants.RbxAvatarThumbnailTypesFromEnum.HeadShot,
 	InviteAvatarThumbnailSize = Constants.RbxThumbnailSizes.Size150x150,
@@ -29,7 +33,7 @@ local config = {
 }
 config.ThumbnailRequest = {
 	InviteToGame = {
-		UserLibModule.Utils.ThumbnailRequest.fromData(config.InviteAvatarThumbnailType, config.InviteAvatarThumbnailSize)
+		ThumbnailRequest.fromData(config.InviteAvatarThumbnailType, config.InviteAvatarThumbnailSize)
 	}
 }
 
@@ -49,7 +53,7 @@ return function(p1)
 		query = UserProfilesModule.Queries.userProfilesAllNamesByUserIds
 	})
 	
-	local function v33(p2): boolean
+	local function v37(p2): boolean
 		-- upvalues: p1 (copy), UseStateResult4 (copy), UseUserProfilesFetchResult (ref), UserProfilesModule (upval), GetFFlagEnableFriendsListSearchNormalizationErrorFixFunction (upval)
 		if not p2 or not p2.isFriend then
 			return false
@@ -158,7 +162,7 @@ return function(p1)
 		return p2.Users
 	end)
 	ReactModule.useEffect(function()
-		-- upvalues: UseStateResult (copy), UseStateResult2_4 (copy), GenerateDummyFriendsModule (upval), UseSelectorResult (copy), v33 (copy), UseUserProfilesFetchResult (ref), UserProfilesModule (upval), SortFriendsByCorrectedPresenceAndRank (upval)
+		-- upvalues: UseStateResult (copy), UseStateResult2_4 (copy), GenerateDummyFriendsModule (upval), UseSelectorResult (copy), v37 (copy), UseUserProfilesFetchResult (ref), UserProfilesModule (upval), SortFriendsByCorrectedPresenceAndRank (upval)
 		if UseStateResult then
 			UseStateResult2_4(GenerateDummyFriendsModule(7))
 			
@@ -167,7 +171,7 @@ return function(p1)
 		local List = {}
 		
 		for _, value in pairs(UseSelectorResult) do
-			if v33(value) then
+			if v37(value) then
 				List[#List + 1] = value
 				local CombinedNameFromId = if UseUserProfilesFetchResult and UseUserProfilesFetchResult.data then UserProfilesModule.Selectors.getCombinedNameFromId(UseUserProfilesFetchResult.data, value.id) else nil
 				value.displayName = if CombinedNameFromId == nil then value.displayName else CombinedNameFromId

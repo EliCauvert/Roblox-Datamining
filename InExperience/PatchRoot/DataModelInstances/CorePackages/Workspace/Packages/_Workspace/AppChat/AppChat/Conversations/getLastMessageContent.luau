@@ -2,11 +2,12 @@
 local AppChat = script:FindFirstAncestor("AppChat")
 local Parent = AppChat.Parent
 local GetDeepValueModule = require(AppChat.Utils.getDeepValue)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local Url = require(Parent.Http).Url
 local Localization = require(Parent.RobloxAppLocales).Localization
 local EnumMessageTypesModule = require(AppChat.Components.ChatConversation.EnumMessageTypes)
 local MessageModelModule = require(AppChat.Models.MessageModel)
-local GetFFlagEnableSocialCardsFunction = require(Parent.SharedFlags).GetFFlagEnableSocialCards
+local GetFFlagEnableSocialCardsFunction = SharedFlagsModule.GetFFlagEnableSocialCards
 
 local function getMessageContent(p1)
 	-- upvalues: MessageModelModule (copy), Localization (copy), LocalizationService (copy), EnumMessageTypesModule (copy), Url (copy), GetFFlagEnableSocialCardsFunction (copy)

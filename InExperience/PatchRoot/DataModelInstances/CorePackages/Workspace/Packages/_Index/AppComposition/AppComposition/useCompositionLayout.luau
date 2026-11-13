@@ -1,6 +1,7 @@
 ﻿local AppComposition = script:FindFirstAncestor("AppComposition")
 local Parent = AppComposition.Parent
 local DisplayModule = require(Parent.Display)
+local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local _ = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
@@ -9,7 +10,7 @@ local _ = require(AppComposition.AppCompositionTypes)
 local CompositionConfigModule = require(AppComposition.CompositionConfig)
 local CreateBreakpointComputedModule = require(AppComposition.createBreakpointComputed)
 local GetGlobalViewportBreakpointModule = require(AppComposition.getGlobalViewportBreakpoint)
-local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
 return function(Callback)
 	-- upvalues: UseTokensFunction (copy), FFlagAppCompositionContainerWidth (copy), ReactModule (copy), CreateBreakpointComputedModule (copy), DisplayModule (copy), GetGlobalViewportBreakpointModule (copy), SignalsReactModule (copy), CompositionConfigModule (copy)

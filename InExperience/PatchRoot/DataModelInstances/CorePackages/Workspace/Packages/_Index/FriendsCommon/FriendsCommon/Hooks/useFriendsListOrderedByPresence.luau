@@ -51,9 +51,10 @@ local function shouldRefetchOnlineFriends(p1, Variables, p2): boolean
 		query = Queries.onlineFriendsByUserId,
 		variables = Variables
 	})
+	local OnlineFriendsByUserId = if Query then Query.onlineFriendsByUserId else {}
 	local Presences = {}
-	local OnlineFriendsByUserId = (if Query then Query.onlineFriendsByUserId else {}) or {}
-	for _, value in OnlineFriendsByUserId do
+	local OnlineFriendsByUserId1 = OnlineFriendsByUserId or {}
+	for _, value in OnlineFriendsByUserId1 do
 		Presences[value.id] = value.presence
 	end
 	return #CryoModule.List.filter(p2, function(p3): boolean

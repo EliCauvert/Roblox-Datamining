@@ -1,8 +1,9 @@
 ﻿local Parent = script.Parent.Parent.Parent.Parent
 local Types = Parent.Types
+local Parent1 = Parent.Parent
 local _ = require(Types.ActionTypes)
 local _ = require(Types.ReducerTypes)
-local DashModule = require(Parent.Parent.Dash)
+local DashModule = require(Parent1.Dash)
 
 return function(p1, p2)
 	-- upvalues: DashModule (copy)

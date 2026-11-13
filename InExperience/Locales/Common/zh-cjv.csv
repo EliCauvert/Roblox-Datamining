@@ -973,6 +973,9 @@ CoreScripts.InGameMenu.ExitModal.Subtitle,留在 App 中继续探索新的作品
 CoreScripts.InGameMenu.ExitModal.Title,初次使用 Roblox App
 CoreScripts.InGameMenu.GameSettings.AIRephraseMessages,信息重新表述
 CoreScripts.InGameMenu.GameSettings.AIRephraseMessagesDescription,如果消息违反安全规则，Roblox 可能会重新调整其表述。
+CoreScripts.InGameMenu.GameSettings.AccountHeader,
+CoreScripts.InGameMenu.GameSettings.AccountManagement,
+CoreScripts.InGameMenu.GameSettings.AccountManagementDescription,
 CoreScripts.InGameMenu.GameSettings.AdvancedSettingsTitle,高级设置
 CoreScripts.InGameMenu.GameSettings.AudioHeader,音频
 CoreScripts.InGameMenu.GameSettings.AutoGraphicsQuality,自动质量模式
@@ -1747,7 +1750,7 @@ Feature.Avatar.Label.FaceMakeup,脸部
 Feature.Avatar.Label.FacialAnimation,脸部动画
 Feature.Avatar.Label.Fall,下落
 Feature.Avatar.Label.FallAnimations,下落动画
-Feature.Avatar.Label.FromMarketplace,来自商城
+Feature.Avatar.Label.FromMarketplace,商城结果
 Feature.Avatar.Label.Front,正面
 Feature.Avatar.Label.FullBody,全身
 Feature.Avatar.Label.FullMasks,全脸面具
@@ -3715,6 +3718,7 @@ Feature.Groups.Description.RequiresAccountTenureTooltipOneMonth,你的帐户必�
 Feature.Groups.Description.RequiresAccountTenureTooltipOneWeek,你的帐户必须注册满 7 天才能加入此社区。
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeDays,你的帐户必须注册满 3 天才能加入此社区。
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeMonths,你的帐户必须注册满 90 天才能加入此社区。
+Feature.Groups.Header.UppercaseMyGroups,
 Feature.Groups.Heading.Community,
 Feature.Groups.Heading.Followers,
 Feature.Groups.Heading.Groups,
@@ -3886,7 +3890,7 @@ Feature.Moments.Action.AddMusic,添加音乐
 Feature.Moments.Action.AddSticker,添加贴纸
 Feature.Moments.Action.AddText,添加文本
 Feature.Moments.Action.AddVoice,添加语音
-Feature.Moments.Action.Analytics,
+Feature.Moments.Action.Analytics,查看统计数据
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
@@ -3937,13 +3941,15 @@ Feature.Moments.Description.GenerateTextFeedbackDisclosure,AI 生成的内容。
 Feature.Moments.Description.HowToCaptureStep1,加入已启用“截图”功能的体验，然后选择汉堡菜单
 Feature.Moments.Description.HowToCaptureStep2,启用“截图”控件
 Feature.Moments.Description.HowToCaptureStep3,截取游戏的照片和视频
-Feature.Moments.Description.LeaveAvatarMomentsCreation,
+Feature.Moments.Description.LeaveAvatarMomentsCreation,你所做的所有更改都将丢失，但当前装扮不会发生变化。
 Feature.Moments.Description.LeaveMomentsCreation,你将丢失所有更改，但仍然可以在<b>截图</b>图库中找到此截图。
+Feature.Moments.Description.MomentsOffBody,请让家长使用家长控制功能开启“精彩瞬间”。
 Feature.Moments.Description.NoMusicResults,未找到音乐
 Feature.Moments.Description.NonInfiniteScrollEndBody,我们已暂停你的推送。你可以决定是否要继续观看。
 Feature.Moments.Description.NothingHereYet,这里什么都没有...
 Feature.Moments.Description.PublishMoment,描述你的精彩瞬间
 Feature.Moments.Description.StayFriendly,请保持友好氛围
+Feature.Moments.Description.TimeLimitReachedBody,限制基于年龄。请明天再来观看“精彩瞬间”。
 Feature.Moments.Description.TooManyUploads,你今天上传的视频太多了。请明天再试。
 Feature.Moments.Disclaimer.EveryoneMoments,“精彩瞬间”中的每个人都可以查看已发布的内容
 Feature.Moments.Label.All,
@@ -4014,6 +4020,7 @@ Feature.Moments.Label.MomentRemovedTitle,我们移除了该精彩瞬间
 Feature.Moments.Label.MomentUnavailable,精彩瞬间不可用
 Feature.Moments.Label.MomentUnavailableDefault,此精彩瞬间不可用。
 Feature.Moments.Label.MomentsExperienceName,
+Feature.Moments.Label.MomentsOffTitle,“精彩瞬间”已关闭
 Feature.Moments.Label.Music,
 Feature.Moments.Label.NoCommentsYet,暂无评论
 Feature.Moments.Label.NonInfiniteScrollEndTitle,还有更多精彩瞬间可供观看
@@ -4048,6 +4055,7 @@ Feature.Moments.Label.TextGenerationFailedBody,无法生成文本。请重试。
 Feature.Moments.Label.TextGenerationFailedTitle,生成失败
 Feature.Moments.Label.TextGenerationFilteredBody,无法为此截取的视频执行生成，内容已过滤。
 Feature.Moments.Label.TextGenerationFilteredTitle,生成已过滤
+Feature.Moments.Label.TimeLimitReachedTitle,你已达到“精彩瞬间”的观看时间上限
 Feature.Moments.Label.Tone,语气
 Feature.Moments.Label.Tone.Cinematic,电影感
 Feature.Moments.Label.Tone.Funny,搞笑
@@ -4912,6 +4920,8 @@ Feature.UniversalShareSheet.Response.SharedMessage,信息已发送
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE}和另外 {N} 人
 Feature.UserLibrary.Label.MyLibrary,我的资源库
+Feature.VIPServer.Message.TooManyFreeServersOnGame,您无法为此作品添加更多免费私人服务器。
+Feature.VIPServer.Message.TooManyTotalActiveFreeServers,您无法激活更多免费私人服务器。请先关闭一些其他的服务器。
 Feature.VerificationUpsell.Action.AddPhone,添加手机
 Feature.VerificationUpsell.Action.AddPhoneNumber,添加手机号码
 Feature.VerificationUpsell.Action.AddPhoneVoice,添加手机号码，以使用语音聊天
@@ -5472,6 +5482,12 @@ InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,已成功将“{exp
 InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,已成功将“{experience_name}”添加至主屏幕
 InstantApps.Shortcuts.Label.TryAgain,
 InstantApps.Shortcuts.Label.ViewShortcut,查看快捷键
+Notifications.Moments.Body.MomentPostFailed,
+Notifications.Moments.Body.MomentPostModerated,
+Notifications.Moments.Body.MomentPostSuccess,
+Notifications.Moments.Title.MomentPostFailed,
+Notifications.Moments.Title.MomentPostModerated,
+Notifications.Moments.Title.MomentPostSuccess,
 Notifications.NotificationStream.Bundle.ShowLess,
 Notifications.NotificationStream.Bundle.ShowMoreV2,其他 {notificationCount} 个
 Notifications.NotificationStream.Label.AllCaughtUp,没有新的通知了！

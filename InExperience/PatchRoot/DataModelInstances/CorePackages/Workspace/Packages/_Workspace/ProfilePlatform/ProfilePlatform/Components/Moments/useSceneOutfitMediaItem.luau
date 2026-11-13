@@ -1,5 +1,6 @@
 ﻿local Parent = script:FindFirstAncestor("ProfilePlatform").Parent
 local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local _ = require(Parent.MomentsCommon)
 local _ = require(Parent.DataHydration.MomentsStoreTypes)
@@ -8,7 +9,7 @@ local UserLibModule = require(Parent.UserLib)
 local ReadSceneOutfitIdFromPostModule = require(script.Parent.readSceneOutfitIdFromPost)
 local GetRbxthumbWithTypeSizeAndOptionsFunction = UserLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
 local RbxthumbTypes = UserLibModule.Utils.Constants.RbxthumbTypes
-local Signal = require(Parent.Signals).createSignal(nil)
+local Signal = SignalsModule.createSignal(nil)
 
 return function(p1, Tbl)
 	-- upvalues: SignalsReactModule (copy), MomentsGetPostAssetStoreModule (copy), Signal (copy), ReactModule (copy), ReadSceneOutfitIdFromPostModule (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), RbxthumbTypes (copy)

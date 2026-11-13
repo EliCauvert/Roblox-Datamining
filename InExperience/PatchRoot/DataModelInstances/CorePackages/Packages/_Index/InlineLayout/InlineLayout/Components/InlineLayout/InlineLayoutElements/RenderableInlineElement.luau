@@ -2,10 +2,11 @@
 local Parent1 = Parent.Parent
 local ReactModule = require(Parent1.React)
 local DashModule = require(Parent1.Dash)
+local InlineElementTypeModule = require(Parent.Utils.InlineElementType)
 local JoinFunction = DashModule.join
 local RenderableInlineElementModule = {}
 RenderableInlineElementModule.__index = RenderableInlineElementModule
-RenderableInlineElementModule.__type = require(Parent.Utils.InlineElementType)
+RenderableInlineElementModule.__type = InlineElementTypeModule
 
 function RenderableInlineElementModule.new(Element, Props, p1)
 	-- upvalues: RenderableInlineElementModule (copy), DashModule (copy)

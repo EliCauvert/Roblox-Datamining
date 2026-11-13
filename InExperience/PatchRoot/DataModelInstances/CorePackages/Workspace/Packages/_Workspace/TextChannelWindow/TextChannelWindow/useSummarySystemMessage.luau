@@ -2,10 +2,11 @@
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 local FoundationModule = require(Parent.Foundation)
+local ChatUIPrimitivesModule = require(Parent.ChatUIPrimitives)
 local MessageModule = require(script.Parent.Message)
 local MessageWriterContextModule = require(script.Parent.MessageWriterContext)
 local FFlagExpChatTextChannelWindowWelcomeAndSummaryModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowWelcomeAndSummary)
-local UseInExperienceLocalizationFunction = require(Parent.ChatUIPrimitives).Hooks.useInExperienceLocalization
+local UseInExperienceLocalizationFunction = ChatUIPrimitivesModule.Hooks.useInExperienceLocalization
 local self = setmetatable({}, { __mode = "k" })
 
 return function(p1, Callback)

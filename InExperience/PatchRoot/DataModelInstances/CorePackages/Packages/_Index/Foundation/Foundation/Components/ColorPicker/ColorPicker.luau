@@ -6,7 +6,9 @@ local ColorInputsModule = require(Foundation.Components.ColorPicker.ColorInputs)
 local ColorSliderModule = require(Foundation.Components.ColorPicker.ColorSlider)
 local ColorSliderTypeModule = require(Foundation.Enums.ColorSliderType)
 local SVPickerModule = require(Foundation.Components.ColorPicker.SVPicker)
+local ColorSliderModule1 = require(Foundation.Components.ColorSlider)
 local ViewModule = require(Foundation.Components.View)
+local FlagsModule = require(Foundation.Utility.Flags)
 local ColorUtilsModule = require(Foundation.Components.ColorPicker.colorUtils)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
@@ -27,7 +29,7 @@ local function _(p1)
 end
 
 return function(p1)
-	-- upvalues: ColorInputModeModule (copy), WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), ColorUtilsModule (copy), ViewModule (copy), WithCommonPropsModule (copy), ColorInputsModule (copy), BrickColorPickerModule (copy), SVPickerModule (copy), ColorSliderModule (copy), ColorSliderTypeModule (copy)
+	-- upvalues: ColorInputModeModule (copy), WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), ColorUtilsModule (copy), ViewModule (copy), WithCommonPropsModule (copy), ColorInputsModule (copy), BrickColorPickerModule (copy), SVPickerModule (copy), FlagsModule (copy), ColorSliderModule1 (copy), ColorSliderTypeModule (copy), ColorSliderModule (copy)
 	local AvailableModes = p1.availableModes or {
 		ColorInputModeModule.RGB,
 		ColorInputModeModule.HSV,
@@ -47,7 +49,7 @@ return function(p1)
 		v1 = (InitialColor.S or 100) / 100
 		v2 = (InitialColor.V or 100) / 100
 	else
-		HRatio, v1, v24 = InitialColor:ToHSV()
+		HRatio, v1, v26 = InitialColor:ToHSV()
 	end
 	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(HRatio)
 	local UseBindingResult3, UseBindingResult2_2 = ReactModule.useBinding(v1)
@@ -156,7 +158,18 @@ return function(p1)
 				testId = `{WithDefaultsModuleResult.testId}--sv-picker`
 			})
 		}),
-		HueSlider = if UseStateResult == ColorInputModeModule.Brick then nil else ReactModule.createElement(ColorSliderModule, {
+		HueSlider = if UseStateResult == ColorInputModeModule.Brick then nil elseif FlagsModule.FoundationColorPickerSliderRebuild then ReactModule.createElement(ColorSliderModule1, {
+			LayoutOrder = 3,
+			type = ColorSliderTypeModule.Hue,
+			value = UseBindingResult1,
+			onValueChanged = function(p2)
+				-- upvalues: UseResult4 (copy), UseBindingResult3 (copy), UseBindingResult4 (copy)
+				UseResult4(p2, UseBindingResult3:getValue(), UseBindingResult4:getValue())
+			end,
+			onDragStarted = WithDefaultsModuleResult.onDragStarted,
+			onDragEnded = WithDefaultsModuleResult.onDragEnded,
+			testId = `{WithDefaultsModuleResult.testId}--hue-slider`
+		}) else ReactModule.createElement(ColorSliderModule, {
 			LayoutOrder = 3,
 			sliderType = ColorSliderTypeModule.Hue,
 			value = UseBindingResult1,
@@ -168,7 +181,16 @@ return function(p1)
 			onDragEnded = WithDefaultsModuleResult.onDragEnded,
 			testId = `{WithDefaultsModuleResult.testId}--hue-slider`
 		}),
-		AlphaSlider = if HasOnAlphaChanged then ReactModule.createElement(ColorSliderModule, {
+		AlphaSlider = if HasOnAlphaChanged then if FlagsModule.FoundationColorPickerSliderRebuild then ReactModule.createElement(ColorSliderModule1, {
+			LayoutOrder = 4,
+			type = ColorSliderTypeModule.Alpha,
+			value = UseBindingResult5,
+			baseColor = MapResult,
+			onValueChanged = UseResult1,
+			onDragStarted = WithDefaultsModuleResult.onDragStarted,
+			onDragEnded = WithDefaultsModuleResult.onDragEnded,
+			testId = `{WithDefaultsModuleResult.testId}--alpha-slider`
+		}) else ReactModule.createElement(ColorSliderModule, {
 			LayoutOrder = 4,
 			sliderType = ColorSliderTypeModule.Alpha,
 			value = UseBindingResult5,

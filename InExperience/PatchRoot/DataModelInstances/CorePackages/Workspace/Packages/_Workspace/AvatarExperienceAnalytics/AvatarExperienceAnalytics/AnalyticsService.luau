@@ -3,11 +3,12 @@ local SessionService = game:GetService("SessionService")
 local Parent = script:FindFirstAncestor("AvatarExperienceAnalytics").Parent
 local Default = require(Parent.LoggingProtocol).default
 local AnalyticsModule = require(Parent.Analytics)
+local NewResult = AnalyticsModule.Analytics.new((game:GetService("RbxAnalyticsService")))
 local GetPlatformTargetFunction = AnalyticsModule.getPlatformTarget
 local AXSendSessionForEvents = game:DefineFastFlag("AXSendSessionForEvents", false)
 
 return {
-	Diag = AnalyticsModule.Analytics.new((game:GetService("RbxAnalyticsService"))).Diag,
+	Diag = NewResult.Diag,
 	EventStream = {
 		setRBXEventStream = function(_, EventContext, EventName, p1)
 			-- upvalues: EventIngestService (copy), GetPlatformTargetFunction (copy)

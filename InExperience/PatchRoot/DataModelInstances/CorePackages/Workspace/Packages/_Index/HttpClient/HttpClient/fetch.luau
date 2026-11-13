@@ -6,7 +6,6 @@ local DecodersModule = require(script.Parent.decoders)
 local EncodersModule = require(script.Parent.encoders)
 local IsSuccessFunction = require(script.Parent.httpStatus).isSuccess
 local StatusCodeActionsModule = require(script.Parent.statusCodeActions)
-local FFlagHttpClientRetryExtensionsModule = require(script.Parent.Flags.FFlagHttpClientRetryExtensions)
 local v1 = nil
 
 local function _()
@@ -68,7 +67,7 @@ local _ = function(List)
 end
 
 return function(p1)
-	-- upvalues: EncodersModule (copy), IsSuccessFunction (copy), asBuffer (copy), DecodersModule (copy), CreateRequestModule (copy), WithRetryModule (copy), CreateRequestInternalNetworkModule (copy), v1 (ref), StatusCodeActionsModule (copy), FFlagHttpClientRetryExtensionsModule (copy)
+	-- upvalues: EncodersModule (copy), IsSuccessFunction (copy), asBuffer (copy), DecodersModule (copy), CreateRequestModule (copy), WithRetryModule (copy), CreateRequestInternalNetworkModule (copy), v1 (ref), StatusCodeActionsModule (copy)
 	local XProtobuf = if (p1.requestEncoding or "json") == "protobuf" then EncodersModule.encodeRaw("application/x-protobuf") else nil
 	
 	if (p1.responseEncoding or "json") == "protobuf" then
@@ -127,8 +126,8 @@ return function(p1)
 		StatusCodeActions1 = SnapshotResult
 	end
 	t.statusCodeActions = StatusCodeActions1
-	t.onMessage = if FFlagHttpClientRetryExtensionsModule then p1.onMessage else nil
-	t.priority = if FFlagHttpClientRetryExtensionsModule then p1.priority else nil
+	t.onMessage = p1.onMessage
+	t.priority = p1.priority
 	
 	return CreateRequestModule(t)
 end

@@ -5,6 +5,7 @@ local Text = FoundationModule.Text
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local VerifiedBadgesModule = require(Parent.VerifiedBadges)
 local FFlagAXAddTextXAlignmentProp = require(Parent.AvatarExperienceFlags).FFlagAXAddTextXAlignmentProp
+local FFlagAXItemCardComponentsMemo = require(Parent.AvatarExperienceFlags).FFlagAXItemCardComponentsMemo
 
 local function ItemCardCreatorName(Label)
 	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Text (copy), VerifiedBadgesModule (copy), FFlagAXAddTextXAlignmentProp (copy)
@@ -22,4 +23,4 @@ local function ItemCardCreatorName(Label)
 	})
 end
 
-return if require(Parent.AvatarExperienceFlags).FFlagAXItemCardComponentsMemo then ReactModule.memo(ItemCardCreatorName) else ItemCardCreatorName
+return if FFlagAXItemCardComponentsMemo then ReactModule.memo(ItemCardCreatorName) else ItemCardCreatorName

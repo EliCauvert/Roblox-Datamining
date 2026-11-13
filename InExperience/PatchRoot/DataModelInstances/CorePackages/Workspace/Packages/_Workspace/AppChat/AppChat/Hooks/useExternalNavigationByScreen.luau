@@ -1,8 +1,9 @@
 ﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local AppCommonLibModule = require(Parent.AppCommonLib)
 local ReactModule = require(Parent.React)
 local UseCallbackFunction = ReactModule.useCallback
 local UseReducerFunction = ReactModule.useReducer
-local Immutable = require(Parent.AppCommonLib).Immutable
+local Immutable = AppCommonLibModule.Immutable
 
 local function externalNavigationByScreenReducer(p1, p2)
 	-- upvalues: Immutable (copy)

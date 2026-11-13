@@ -1,10 +1,11 @@
 ﻿local AppChat = script:FindFirstAncestor("AppChat")
 local Parent = AppChat.Parent
 local ReactModule = require(Parent.React)
+local RoactUtilsModule = require(Parent.RoactUtils)
 local EnteredChatFromEntryPointModule = require(AppChat.Actions.EnteredChatFromEntryPoint)
 local SetAppChatVisibleFunction = require(AppChat.App.AppChatVisible).setAppChatVisible
 local ParentContainerContextModule = require(AppChat.Contexts.ParentContainer.ParentContainerContext)
-local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
 
 return function()
 	-- upvalues: ReactModule (copy), ParentContainerContextModule (copy), UseDispatchFunction (copy), SetAppChatVisibleFunction (copy), EnteredChatFromEntryPointModule (copy)

@@ -7,6 +7,7 @@ local ButtonModule = require(Foundation.Components.Button)
 local ButtonGroupModule = require(Foundation.Components.ButtonGroup)
 local CloseAffordanceModule = require(Foundation.Components.CloseAffordance)
 local CloseAffordanceVariantModule = require(Foundation.Enums.CloseAffordanceVariant)
+local ColorNamespaceModule = require(Foundation.Enums.ColorNamespace)
 local FillBehaviorModule = require(Foundation.Enums.FillBehavior)
 local FlagsModule = require(Foundation.Utility.Flags)
 local InputSizeModule = require(Foundation.Enums.InputSize)
@@ -31,9 +32,7 @@ local config = {
 	side = require(Foundation.Enums.PopoverSide).Right,
 	actionsFillBehavior = if FlagsModule.FoundationEducationalTooltipRefresh then FillBehaviorModule.Fill else nil
 }
-local config1 = {
-	colorNamespace = require(Foundation.Enums.ColorNamespace).Inverse
-}
+local config1 = { colorNamespace = ColorNamespaceModule.Inverse }
 
 local function _(Current, Total)
 	-- upvalues: TranslatorModule (copy)

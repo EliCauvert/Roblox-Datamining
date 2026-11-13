@@ -1,11 +1,12 @@
 ﻿local Parent = script:FindFirstAncestor("MomentsCreationFlow").Parent
 local DashModule = require(Parent.Dash)
 local FoundationModule = require(Parent.Foundation)
+local MomentsCommonModule = require(Parent.MomentsCommon)
 local ReactModule = require(Parent.React)
 local Image = require(Parent.BuilderIcons).Icon.Image
 local Icon = FoundationModule.Icon
 local View = FoundationModule.View
-local LoadableVideo = require(Parent.MomentsCommon).LoadableVideo
+local LoadableVideo = MomentsCommonModule.LoadableVideo
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
 return function(p1)

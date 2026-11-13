@@ -5,21 +5,26 @@ local SendTTIStatModule = require(TimeToInteractiveTracker.Utils.sendTTIStat)
 local BuildTTIStatArgsModule = require(TimeToInteractiveTracker.Utils.buildTTIStatArgs)
 local FrameSignalModule = require(TimeToInteractiveTracker.Utils.frameSignal)
 local GetAppLifecycleObserverServiceModule = require(TimeToInteractiveTracker.Utils.getAppLifecycleObserverService)
+local LogTTIDiscardModule = require(TimeToInteractiveTracker.Utils.logTTIDiscard)
 local FFlagTTITrackerDropEventsOnAppHideModule = require(TimeToInteractiveTracker.Utils.FFlagTTITrackerDropEventsOnAppHide)
 local FIntTTIFirstFrameMaxWaitMsModuleRatio = require(TimeToInteractiveTracker.Utils.FIntTTIFirstFrameMaxWaitMs) / 1000
 
 return function(p1, Callback)
-	-- upvalues: NowModule (copy), FrameSignalModule (copy), FIntTTIFirstFrameMaxWaitMsModuleRatio (copy), BuildTTIStatArgsModule (copy), SendTTIStatModule (copy), FFlagTTITrackerDropEventsOnAppHideModule (copy), GetAppLifecycleObserverServiceModule (copy)
+	-- upvalues: NowModule (copy), FrameSignalModule (copy), FIntTTIFirstFrameMaxWaitMsModuleRatio (copy), LogTTIDiscardModule (copy), BuildTTIStatArgsModule (copy), SendTTIStatModule (copy), FFlagTTITrackerDropEventsOnAppHideModule (copy), GetAppLifecycleObserverServiceModule (copy)
 	local NowModuleResult = NowModule()
 	local Connection = nil
 	local OnceResult = FrameSignalModule.once(function()
-		-- upvalues: NowModule (upval), Connection (ref), NowModuleResult (copy), FIntTTIFirstFrameMaxWaitMsModuleRatio (upval), BuildTTIStatArgsModule (upval), p1 (copy), Callback (copy), SendTTIStatModule (upval)
+		-- upvalues: NowModule (upval), Connection (ref), NowModuleResult (copy), FIntTTIFirstFrameMaxWaitMsModuleRatio (upval), LogTTIDiscardModule (upval), p1 (copy), BuildTTIStatArgsModule (upval), Callback (copy), SendTTIStatModule (upval)
 		local NowModuleResult1 = NowModule()
 		
 		if Connection then
 			Connection:Disconnect()
 		end
-		if FIntTTIFirstFrameMaxWaitMsModuleRatio < NowModuleResult1 - NowModuleResult then return end
+		if FIntTTIFirstFrameMaxWaitMsModuleRatio < NowModuleResult1 - NowModuleResult then
+			LogTTIDiscardModule(p1.statName, "lateFrame")
+			
+			return
+		end
 		local TTIStatArgsModule = BuildTTIStatArgsModule(p1, NowModuleResult1)
 		
 		if Callback then
@@ -48,8 +53,9 @@ return function(p1, Callback)
 		
 		if AppLifecycleObserverServiceModule then
 			Connection = AppLifecycleObserverServiceModule.OnHide:Once(function()
-				-- upvalues: OnceResult (copy)
+				-- upvalues: OnceResult (copy), LogTTIDiscardModule (upval), p1 (copy)
 				OnceResult:Disconnect()
+				LogTTIDiscardModule(p1.statName, "backgrounded")
 			end)
 		end
 	end

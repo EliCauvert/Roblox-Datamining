@@ -62,6 +62,7 @@ return function(p1)
 		blackbirdSummaryText = UseLocalizationResult.BlackbirdSummary,
 		savingsSummary = p1.savingsSummary
 	})
+	local ShowAccordion = UseDiscountAccordionConfigModuleResult.showAccordion
 	local AccordionHeaderText = UseDiscountAccordionConfigModuleResult.accordionHeaderText
 	local AccordionLeadingIcon = UseDiscountAccordionConfigModuleResult.accordionLeadingIcon
 	local UseMemoResult1 = ReactModule.useMemo(function()
@@ -84,7 +85,7 @@ return function(p1)
 		UseMemoResult2
 	})
 	
-	return if UseDiscountAccordionConfigModuleResult.showAccordion then ReactModule.createElement(View, {
+	return if ShowAccordion then ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y padding-x-small stroke-default radius-medium"
 	}, {
 		AccordionContent = ReactModule.createElement(Accordion.Root, { size = "Small", width = UDim.new(1, 0) }, {

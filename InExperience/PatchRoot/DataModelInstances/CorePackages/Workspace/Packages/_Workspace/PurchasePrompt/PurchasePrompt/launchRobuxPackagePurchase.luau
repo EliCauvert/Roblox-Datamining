@@ -159,10 +159,11 @@ return function(p1)
 	end
 	if FFlagEnableBonusJwtInShop then
 		local UpsellFlowModule1 = GetUpsellFlowModule(UserInputService:GetPlatform())
+		local IsNotUpsellFlowModuleMatch: boolean = UpsellFlowModule1 ~= UpsellFlowModule.Mobile and UpsellFlowModule1 ~= UpsellFlowModule.Web
 		local BonusJwt = p1.bonusJwt
 		local RedeemBonusTokenFunction = p1.redeemBonusToken
 		
-		if (UpsellFlowModule1 == UpsellFlowModule.Mobile or UpsellFlowModule1 == UpsellFlowModule.Web) and typeof(BonusJwt) == "string" and BonusJwt ~= "" and RedeemBonusTokenFunction ~= nil then
+		if not IsNotUpsellFlowModuleMatch and typeof(BonusJwt) == "string" and BonusJwt ~= "" and RedeemBonusTokenFunction ~= nil then
 			local Success, Result = pcall(function()
 				-- upvalues: RedeemBonusTokenFunction (copy), BonusJwt (copy)
 				return RedeemBonusTokenFunction(BonusJwt, game.GameId)

@@ -1,6 +1,7 @@
 ﻿local GameJoinCard = script:FindFirstAncestor("GameJoinCard")
 local Parent = GameJoinCard.Parent
 local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.Dev.ReactRoblox)
 local CryoModule = require(Parent.Dev.Cryo)
 local StyleModule = require(Parent.Style)
 local StyleProviderWithDefaultTheme = StyleModule.StyleProviderWithDefaultTheme
@@ -25,7 +26,7 @@ return {
 	name = "GameJoinCard",
 	storyRoot = GameJoinCard.Stories,
 	roact = ReactModule,
-	reactRoblox = require(Parent.Dev.ReactRoblox),
+	reactRoblox = ReactRobloxModule,
 	mapDefinition = function(p1)
 		-- upvalues: CryoModule (copy), t (copy)
 		return CryoModule.Dictionary.join(p1, {

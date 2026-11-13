@@ -9,9 +9,13 @@ local EnabledResult = require(CorePackages.Workspace.Packages.Chrome).Enabled()
 if require(RobloxGui.Modules.Flags.GetFFlagFixSettingshubImportOrder)() and (not FFlagRemoveLoadingTimeoutModule or not EnabledResult) then
 	CoreGui:WaitForChild("TopBarApp", if FFlagRemoveLoadingTimeoutModule then 1e999 else nil)
 end
+local SettingsHubModule = require(RobloxGui.Modules.Settings.SettingsHub)
 local ParentContainerModule = require(CorePackages.Workspace.Packages.AppChat.ParentContainer)
 local InExperienceAppChatModalModule = require(CorePackages.Workspace.Packages.AppChat.InExperienceAppChatModal)
 local RenderCoreScriptInExperienceAppChatModule: (any, any, any) -> () = require(CorePackages.Workspace.Packages.AppChat.renderCoreScriptInExperienceAppChat)
+local ViewportUtilModule = require(RobloxGui.Modules.Chrome.ChromeShared.Service.ViewportUtil)
+local ChatSelectorModule = require(RobloxGui.Modules.ChatSelector)
+local PlayerListManagerModule = require(RobloxGui.Modules.PlayerList.PlayerListManager)
 local ConstantsModule = require(RobloxGui.Modules.TopBar.Constants)
 local GetFFlagIsSquadEnabledFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagIsSquadEnabled
 local ChatChromeIntegrationModule = if EnabledResult then require(RobloxGui.Modules.Chrome.Integrations.ExpChat.ChatChromeIntegration) else nil
@@ -19,7 +23,7 @@ local ExpChatModule = require(CorePackages.Workspace.Packages.ExpChat)
 local OpenConversationModule = require(CorePackages.Workspace.Packages.FriendsChat.openConversation)
 local PromiseModule = require(CorePackages.Packages.Promise)
 local SSUIMetaLuaEngineFeature = game:GetEngineFeature("SSUIMetaLua")
-InExperienceAppChatModalModule.default:initialize(ConstantsModule.ApplyDisplayScale(ConstantsModule.TopBarTopMargin), require(RobloxGui.Modules.Settings.SettingsHub), require(RobloxGui.Modules.Chrome.ChromeShared.Service.ViewportUtil), require(RobloxGui.Modules.ChatSelector), (require(RobloxGui.Modules.PlayerList.PlayerListManager)))
+InExperienceAppChatModalModule.default:initialize(ConstantsModule.ApplyDisplayScale(ConstantsModule.TopBarTopMargin), SettingsHubModule, ViewportUtilModule, ChatSelectorModule, PlayerListManagerModule)
 
 if SSUIMetaLuaEngineFeature then
 	pcall(function()

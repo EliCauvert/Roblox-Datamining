@@ -178,7 +178,7 @@ return function(p1, p2)
 		if not BubbleChatConfiguration then
 			return {}
 		end
-		for _, value in ipairs({
+		for i, value in ipairs({
 			"Enabled", "AdorneeName", "BubbleDuration", "BubblesSpacing",
 			"VerticalStudsOffset", "LocalPlayerStudsOffset", "MinimizeDistance",
 			"MaxDistance", "BackgroundColor3", "TextColor3", "TextSize", "FontFace",

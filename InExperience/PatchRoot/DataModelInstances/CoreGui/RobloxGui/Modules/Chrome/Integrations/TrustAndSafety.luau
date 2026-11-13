@@ -1,23 +1,25 @@
 ﻿local Chrome = script:FindFirstAncestor("Chrome")
 local CorePackages = game:GetService("CorePackages")
 local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
 local ServiceModule = require(Chrome.Service)
 local CommonIconModule = require(Chrome.Integrations.CommonIcon)
+local Signal = require(CorePackages.Workspace.Packages.AppCommonLib).Signal
 local SideSheetPlacement = require(CorePackages.Workspace.Packages.Chrome).Enums.SideSheetPlacement
-local FFlagStandardizeSafetyIcon = require(CorePackages.Workspace.Packages.SharedFlags).FFlagStandardizeSafetyIcon
+local FFlagStandardizeSafetyIcon = SharedFlagsModule.FFlagStandardizeSafetyIcon
 local IsNameMatch = false
-local NewResult = require(CorePackages.Workspace.Packages.AppCommonLib).Signal.new()
-local NewResult1 = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(NewResult, function()
+local NewSignal = Signal.new()
+local NewResult = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(NewSignal, function()
 	-- upvalues: IsNameMatch (ref)
 	return IsNameMatch
 end)
 task.defer(function()
-	-- upvalues: RobloxGui (copy), IsNameMatch (ref), NewResult (copy)
+	-- upvalues: RobloxGui (copy), IsNameMatch (ref), NewSignal (copy)
 	local SettingsHubModule = require(RobloxGui.Modules.Settings.SettingsHub)
 	SettingsHubModule.CurrentPageSignal:connect(function(Name)
-		-- upvalues: IsNameMatch (upval), SettingsHubModule (copy), NewResult (upval)
+		-- upvalues: IsNameMatch (upval), SettingsHubModule (copy), NewSignal (upval)
 		IsNameMatch = Name == SettingsHubModule.Instance.ReportAbusePage.Page.Name
-		NewResult:fire()
+		NewSignal:fire()
 	end)
 end)
 
@@ -43,11 +45,11 @@ return ServiceModule:register({
 			SettingsHubModule:SwitchToPage(SettingsHubModule.Instance.ReportAbusePage, true)
 		end
 	end,
-	isActivated = NewResult1,
+	isActivated = NewResult,
 	components = {
 		Icon = function(_)
-			-- upvalues: FFlagStandardizeSafetyIcon (copy), CommonIconModule (copy), NewResult1 (copy)
-			return if FFlagStandardizeSafetyIcon then CommonIconModule("Flag", nil, NewResult1) else CommonIconModule("icons/menu/safety_off", "icons/menu/safety_on", NewResult1)
+			-- upvalues: FFlagStandardizeSafetyIcon (copy), CommonIconModule (copy), NewResult (copy)
+			return if FFlagStandardizeSafetyIcon then CommonIconModule("Flag", nil, NewResult) else CommonIconModule("icons/menu/safety_off", "icons/menu/safety_on", NewResult)
 		end
 	}
 })

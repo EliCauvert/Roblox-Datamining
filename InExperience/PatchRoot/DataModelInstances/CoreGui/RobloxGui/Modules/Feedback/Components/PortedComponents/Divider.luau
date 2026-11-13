@@ -1,9 +1,10 @@
 ﻿local CorePackages = game:GetService("CorePackages")
 local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDependencies)
 local Roact = InGameMenuDependenciesModule.Roact
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
 local Cryo = InGameMenuDependenciesModule.Cryo
 local T = InGameMenuDependenciesModule.t
-local WithStyleFunction = require(CorePackages.Packages.UIBlox).Core.Style.withStyle
+local WithStyleFunction = UIBloxModule.Core.Style.withStyle
 local GlobalConfigModule = require(script.Parent.Parent.Parent.GlobalConfig)
 local StrictInterfaceResult = T.strictInterface({
 	Size = T.optional(T.UDim2),

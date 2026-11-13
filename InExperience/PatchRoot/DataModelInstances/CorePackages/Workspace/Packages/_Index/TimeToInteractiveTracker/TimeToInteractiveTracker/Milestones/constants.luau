@@ -5,6 +5,7 @@ return {
 	SurfaceMounted = "SurfaceMounted",
 	FunctionallyReady = "FunctionallyReady",
 	SurfaceReady = "SurfaceReady",
+	NavigationCommitted = "NavigationCommitted",
 	PrimaryDataStarted = {
 		Name = "PrimaryDataStarted",
 		Subphase = {

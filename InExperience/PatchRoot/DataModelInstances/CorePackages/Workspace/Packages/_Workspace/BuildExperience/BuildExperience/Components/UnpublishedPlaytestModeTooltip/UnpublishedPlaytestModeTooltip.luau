@@ -2,6 +2,7 @@
 local Parent = BuildExperience.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local BuildAppStorageModule = require(BuildExperience.Storage.BuildAppStorage)
@@ -10,7 +11,7 @@ local EducationalTooltip = FoundationModule.EducationalTooltip
 local OverlayProvider = FoundationModule.OverlayProvider
 local PopoverSide = FoundationModule.Enums.PopoverSide
 local PopoverAlign = FoundationModule.Enums.PopoverAlign
-local FIntUnpublishedPlaytestModeTooltipDisplayLimit = require(Parent.SharedFlags).FIntUnpublishedPlaytestModeTooltipDisplayLimit
+local FIntUnpublishedPlaytestModeTooltipDisplayLimit = SharedFlagsModule.FIntUnpublishedPlaytestModeTooltipDisplayLimit
 
 local function _(p1): boolean
 	-- upvalues: FIntUnpublishedPlaytestModeTooltipDisplayLimit (copy), BuildModeLaunchModule (copy), BuildAppStorageModule (copy)

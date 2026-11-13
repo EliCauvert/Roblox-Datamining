@@ -1,10 +1,11 @@
 ﻿local Parent = script.Parent
 local Parent1 = Parent.Parent.Parent
 local Parent2 = Parent1.Parent
+local IconButtonModule = require(Parent.IconButton)
 local BenchmarksModule = require(Parent1.Utility.benchmarks)
 local MountComponentTimesFunction = BenchmarksModule.mountComponentTimes
 local ScrollComponentTimesFunction = BenchmarksModule.scrollComponentTimes
-local Element = require(Parent2.React).createElement(require(Parent.IconButton), {
+local Element = require(Parent2.React).createElement(IconButtonModule, {
 	icon = "rbxassetid://7173696656978",
 	onActivated = function() end
 })

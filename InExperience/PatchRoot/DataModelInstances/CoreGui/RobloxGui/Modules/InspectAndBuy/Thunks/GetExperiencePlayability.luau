@@ -2,12 +2,13 @@
 local Parent = script.Parent.Parent
 local ThunkModule = require(Parent.Thunk)
 local NetworkModule = require(Parent.Services.Network)
+local CreateInspectAndBuyKeyMapperModule = require(Parent.createInspectAndBuyKeyMapper)
 local ExperienceInfoModule = require(Parent.Models.ExperienceInfo)
 local SetExperienceInfoModule = require(Parent.Actions.SetExperienceInfo)
 local SendCounterModule = require(Parent.Thunks.SendCounter)
 local ConstantsModule = require(Parent.Constants)
 local list = { NetworkModule }
-local GetExperiencePlayabilityStatus = require(Parent.createInspectAndBuyKeyMapper)("getExperiencePlayabilityStatus")
+local GetExperiencePlayabilityStatus = CreateInspectAndBuyKeyMapperModule("getExperiencePlayabilityStatus")
 
 return function(p1)
 	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), GetExperiencePlayabilityStatus (copy), PerformFetch (copy), ExperienceInfoModule (copy), SetExperienceInfoModule (copy), SendCounterModule (copy), ConstantsModule (copy)

@@ -2,14 +2,15 @@
 local Parent = Groups.Parent
 local AppPage = require(Parent.RobloxAppEnums).AppPage
 local CompositionTags = require(Parent.AppComposition).CompositionTags
+local FoundationModule = require(Parent.Foundation)
 local NavigationModule = require(Parent.Navigation)
 local ReactModule = require(Parent.React)
 local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
 local FFlagGroupSduiPublishContainerWidth = require(Parent.SharedFlags).FFlagGroupSduiPublishContainerWidth
 local UseGroupsWrapperContextModule = require(Groups.Contexts.useGroupsWrapperContext)
-local GetGroupOverviewPaneConfigModule = require(Groups.Common.getGroupOverviewPaneConfig)
-local FetchGroupOverviewPaneModule = require(Groups.Common.fetchGroupOverviewPane)
-local View = require(Parent.Foundation).View
+local GetGroupSduiPageConfigModule = require(Groups.Common.getGroupSduiPageConfig)
+local FetchGroupSduiPageModule = require(Groups.Common.fetchGroupSduiPage)
+local View = FoundationModule.View
 local SduiPageEntryPoint = SduiSharedUtilitiesModule.SduiPageEntryPoint
 local SduiPageNavigationHeader = SduiSharedUtilitiesModule.SduiPageNavigationHeader
 local SduiPageAnalytics = SduiSharedUtilitiesModule.SduiPageAnalytics
@@ -60,7 +61,7 @@ local function ContainerWidthFrame(p1)
 end
 
 local function GroupOverviewPaneContent(p1)
-	-- upvalues: NavigationModule (copy), UsePageScopeRefFunction (copy), ReactModule (copy), createPageTimer (copy), FetchGroupOverviewPaneModule (copy), useFinishPageTimerWhenEmpty (copy), SduiPageEntryPoint (copy), AppPage (copy), FFlagGroupSduiPublishContainerWidth (copy), ContainerWidthFrame (copy)
+	-- upvalues: NavigationModule (copy), UsePageScopeRefFunction (copy), ReactModule (copy), createPageTimer (copy), FetchGroupSduiPageModule (copy), useFinishPageTimerWhenEmpty (copy), SduiPageEntryPoint (copy), AppPage (copy), FFlagGroupSduiPublishContainerWidth (copy), ContainerWidthFrame (copy)
 	local Config = p1.config
 	local UseRouteNameResult = NavigationModule.useRouteName()
 	UsePageScopeRefFunction(Config.configKey)
@@ -71,14 +72,14 @@ local function GroupOverviewPaneContent(p1)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseStateResult1 = UseStateResult or UseMemoResult
 	ReactModule.useEffect(function()
-		-- upvalues: FetchGroupOverviewPaneModule (upval), Config (copy), UseMemoResult (copy)
-		FetchGroupOverviewPaneModule(Config, UseMemoResult)
+		-- upvalues: FetchGroupSduiPageModule (upval), Config (copy), UseMemoResult (copy)
+		FetchGroupSduiPageModule(Config, UseMemoResult)
 	end, { Config, UseMemoResult })
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: createPageTimer (upval), Config (copy), UseStateResult2 (copy), FetchGroupOverviewPaneModule (upval)
+		-- upvalues: createPageTimer (upval), Config (copy), UseStateResult2 (copy), FetchGroupSduiPageModule (upval)
 		local Refresh = createPageTimer(Config, "refresh")
 		UseStateResult2(Refresh)
-		FetchGroupOverviewPaneModule(Config, Refresh, true)
+		FetchGroupSduiPageModule(Config, Refresh, true)
 	end, { Config })
 	useFinishPageTimerWhenEmpty(Config.configKey, UseStateResult1)
 	local Element = ReactModule.createElement(SduiPageEntryPoint, {
@@ -115,15 +116,15 @@ local function GroupOverviewPaneEmpty(p1)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseGroupsWrapperContextModule (copy), ReactModule (copy), GetGroupOverviewPaneConfigModule (copy), View (copy), GroupOverviewPaneContent (copy), GroupOverviewPaneEmpty (copy)
+	-- upvalues: UseGroupsWrapperContextModule (copy), ReactModule (copy), GetGroupSduiPageConfigModule (copy), View (copy), GroupOverviewPaneContent (copy), GroupOverviewPaneEmpty (copy)
 	local Navigation = p1.navigation
 	local GroupIdParam = if p1.groupId == nil then if Navigation then Navigation.getParam("groupId", nil) else nil else p1.groupId
 	local SourceParam = if p1.source == nil then if Navigation then Navigation.getParam("source", nil) else nil else p1.source
 	local GoBack = if Navigation then Navigation.goBack else nil
 	local UseGroupsWrapperContextModuleResult = UseGroupsWrapperContextModule()
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: GetGroupOverviewPaneConfigModule (upval), UseGroupsWrapperContextModuleResult (copy), GroupIdParam (copy)
-		return GetGroupOverviewPaneConfigModule(UseGroupsWrapperContextModuleResult.userId, GroupIdParam)
+		-- upvalues: GetGroupSduiPageConfigModule (upval), UseGroupsWrapperContextModuleResult (copy), GroupIdParam (copy)
+		return GetGroupSduiPageConfigModule.getGroupSduiPageConfig("overview", UseGroupsWrapperContextModuleResult.userId, GroupIdParam)
 	end, { UseGroupsWrapperContextModuleResult.userId, GroupIdParam })
 	
 	return ReactModule.createElement(View, {

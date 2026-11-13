@@ -3,10 +3,11 @@ local ReactModule = require(BuildExperience.Parent.React)
 local _ = require(BuildExperience.Chat.chatTypes)
 local _ = require(BuildExperience.Stores.GetBuildPromptChipsStore)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
+local FIntBuildPromptChipEditDebounceMsModule: number = require(BuildExperience.Flags.FIntBuildPromptChipEditDebounceMs)
 local FFlagBuildExperienceFTUXChipExhaustedTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceFTUXChipExhaustedTelemetry)
 local FFlagBuildExperienceEventContextTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceEventContextTelemetry)
 local PROMPTCHIPSSTATUS = require(BuildExperience.Stores.GetBuildPromptChipsStore.promptChipsStatus).PROMPT_CHIPS_STATUS
-local FIntBuildPromptChipEditDebounceMsModuleRatio = require(BuildExperience.Flags.FIntBuildPromptChipEditDebounceMs) / 1000
+local Delay = FIntBuildPromptChipEditDebounceMsModule / 1000
 
 local function getChipClickParameters(p1, Text: string, Value)
 	local Chips = p1.getChips()
@@ -21,7 +22,7 @@ local function getChipClickParameters(p1, Text: string, Value)
 end
 
 return function(p1, p2)
-	-- upvalues: ReactModule (copy), SendBuildExperienceEventModule (copy), PROMPTCHIPSSTATUS (copy), FIntBuildPromptChipEditDebounceMsModuleRatio (copy), FFlagBuildExperienceEventContextTelemetryModule (copy), getChipClickParameters (copy), FFlagBuildExperienceFTUXChipExhaustedTelemetryModule (copy)
+	-- upvalues: ReactModule (copy), SendBuildExperienceEventModule (copy), PROMPTCHIPSSTATUS (copy), Delay (copy), FFlagBuildExperienceEventContextTelemetryModule (copy), getChipClickParameters (copy), FFlagBuildExperienceFTUXChipExhaustedTelemetryModule (copy)
 	local IsActive = p2.isActive
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
@@ -105,7 +106,7 @@ return function(p1, p2)
 	
 	return {
 		requestChipsForEdit = ReactModule.useCallback(function(Text: string)
-			-- upvalues: IsActive (copy), UseResult1 (copy), UseRefResult1 (copy), p1 (copy), PROMPTCHIPSSTATUS (upval), UseRefResult (copy), FIntBuildPromptChipEditDebounceMsModuleRatio (upval), SendBuildExperienceEventModule (upval), TelemetryGranularity (copy), UseResult (copy)
+			-- upvalues: IsActive (copy), UseResult1 (copy), UseRefResult1 (copy), p1 (copy), PROMPTCHIPSSTATUS (upval), UseRefResult (copy), Delay (upval), SendBuildExperienceEventModule (upval), TelemetryGranularity (copy), UseResult (copy)
 			if not IsActive then return end
 			UseResult1()
 			local Match: string = string.match(Text, "^%s*(.-)%s*$") or ""
@@ -115,7 +116,7 @@ return function(p1, p2)
 				
 				if Status ~= PROMPTCHIPSSTATUS.Idle and Status ~= PROMPTCHIPSSTATUS.Failed then return end
 			end
-			UseRefResult.current = task.delay(FIntBuildPromptChipEditDebounceMsModuleRatio, function()
+			UseRefResult.current = task.delay(Delay, function()
 				-- upvalues: UseRefResult (upval), UseRefResult1 (upval), Match (copy), SendBuildExperienceEventModule (upval), TelemetryGranularity (upval), UseResult (upval)
 				UseRefResult.current = nil
 				UseRefResult1.current = Match

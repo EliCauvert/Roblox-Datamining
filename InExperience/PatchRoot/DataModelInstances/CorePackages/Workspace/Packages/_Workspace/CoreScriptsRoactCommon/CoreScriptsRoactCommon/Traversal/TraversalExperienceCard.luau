@@ -1,11 +1,13 @@
 ﻿local Parent = script:FindFirstAncestor("CoreScriptsRoactCommon").Parent
 local FoundationModule = require(Parent.Foundation)
+local ImpressionsModule = require(Parent.Impressions)
+local LocalizationModule = require(Parent.Localization)
 local ReactModule = require(Parent.React)
 local View = FoundationModule.View
 local Text = FoundationModule.Text
 local Image = FoundationModule.Image
-local ImpressionsTagUtility = require(Parent.Impressions).ImpressionsTagUtility
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local ImpressionsTagUtility = ImpressionsModule.ImpressionsTagUtility
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Callback)
 	-- upvalues: FoundationModule (copy), UseLocalizationFunction (copy), ReactModule (copy), ImpressionsTagUtility (copy), View (copy), Image (copy), Text (copy)

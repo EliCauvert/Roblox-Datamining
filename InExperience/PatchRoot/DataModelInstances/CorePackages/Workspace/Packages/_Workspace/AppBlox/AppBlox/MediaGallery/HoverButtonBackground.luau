@@ -2,12 +2,13 @@
 local RoactModule = require(Parent.Roact)
 local UIBloxModule = require(Parent.UIBlox)
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local ValidateImage = UIBloxModule.Core.ImageSet.Validator.validateImage
 local WithStyleFunction = UIBloxModule.Core.Style.withStyle
 local TModule = require(Parent.t)
 local HoverButtonBackground = RoactModule.PureComponent:extend("HoverButtonBackground")
 HoverButtonBackground.validateProps = TModule.strictInterface({
 	sidePadding = TModule.optional(TModule.number),
-	image = TModule.optional(UIBloxModule.Core.ImageSet.Validator.validateImage),
+	image = TModule.optional(ValidateImage),
 	sliceCenter = TModule.optional(TModule.Rect)
 })
 

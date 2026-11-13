@@ -27,11 +27,12 @@ return function(p1)
 	else
 		local Resolution = p1.resolution
 		local Smallest = math.min(BandBottomDelta / (if p1.scaleType == Enum.ScaleType.Fit and Resolution ~= nil then p1.itemSize.Y * GetFitSizeFunction(p1.itemSize, Resolution).Y.Scale else p1.itemSize.Y), 1)
+		local NewBandTopDelta = NewBandTop + BandBottomDelta / 2 - (p1.itemTop + ItemSize.Y / 2)
 		local Value = TweenService:GetValue(math.min(Lift.progress, 1), Quad, Enum.EasingDirection.In)
 		
 		return {
 			scale = 1 + (Smallest - 1) * Value,
-			offsetY = (NewBandTop + BandBottomDelta / 2 - (p1.itemTop + ItemSize.Y / 2)) * Value,
+			offsetY = NewBandTopDelta * Value,
 			cornerRadius = if Smallest < 1 then p1.cornerRadius * Value else 0
 		}
 	end

@@ -9,6 +9,7 @@ local ReactModule = require(Parent.React)
 local RoactRoduxModule = require(Parent.RoactRodux)
 local Dictionary = require(Parent.llama).Dictionary
 local None = require(Parent.llama).None
+local SharedFlagsModule = require(Parent.SharedFlags)
 local NewResult = ExpChatSharedModule.Logger:new("ExpChat/" .. script.Name)
 local WithSignalsDataModule = require(script.Parent.withSignalsData)
 local Permissions = require(ExpChat.Config).Permissions
@@ -16,7 +17,7 @@ local GlobalFlagsModule = require(ExpChat.GlobalFlags)
 local GetFFlagUseCharacterStoreFunction = ExpChatSharedModule.Flags.getFFlagUseCharacterStore
 local ExpChatRemoveBubbleChatAppUserMessagesState = game:DefineFastFlag("ExpChatRemoveBubbleChatAppUserMessagesState", false)
 local MemoizeBubbleChatApp = game:DefineFastFlag("MemoizeBubbleChatApp", false)
-local GetFFlagExpChatUseVoiceParticipantsStoreFunction = require(Parent.SharedFlags).GetFFlagExpChatUseVoiceParticipantsStore
+local GetFFlagExpChatUseVoiceParticipantsStoreFunction = SharedFlagsModule.GetFFlagExpChatUseVoiceParticipantsStore
 local ExpChatBubbleChatRerenderOnAncestryChange = game:DefineFastFlag("ExpChatBubbleChatRerenderOnAncestryChange", false)
 local BubbleChatApp = RoactModule.PureComponent:extend("BubbleChatApp")
 local GetFStringVoicePerformanceIXPLayerNameModule = require(ExpChat.Flags.GetFStringVoicePerformanceIXPLayerName)
@@ -82,7 +83,7 @@ function BubbleChatApp.init(p1)
 end
 
 function BubbleChatApp.getPermissions(p1)
-	local function v26(HasCameraPermissions, HasMicPermissions)
+	local function v27(HasCameraPermissions, HasMicPermissions)
 		-- upvalues: p1 (copy)
 		p1:setState({
 			hasCameraPermissions = HasCameraPermissions,
@@ -91,31 +92,31 @@ function BubbleChatApp.getPermissions(p1)
 	end
 	
 	if p1.props.getPermissions then
-		p1.props.getPermissions(v26)
+		p1.props.getPermissions(v27)
 	end
 end
 
 function BubbleChatApp.getMicPermission(p1)
 	-- upvalues: Permissions (copy)
-	local function v27(_, HasMicPermissions)
+	local function v28(_, HasMicPermissions)
 		-- upvalues: p1 (copy)
 		p1:setState({ hasMicPermissions = HasMicPermissions })
 	end
 	
 	if p1.props.getPermissions then
-		p1.props.getPermissions(v27, Permissions.MICROPHONE_ACCESS)
+		p1.props.getPermissions(v28, Permissions.MICROPHONE_ACCESS)
 	end
 end
 
 function BubbleChatApp.getCameraPermissionWithoutRequest(p1)
 	-- upvalues: Permissions (copy)
-	local function v28(HasCameraPermissions, _)
+	local function v29(HasCameraPermissions, _)
 		-- upvalues: p1 (copy)
 		p1:setState({ hasCameraPermissions = HasCameraPermissions })
 	end
 	
 	if p1.props.getPermissions then
-		p1.props.getPermissions(v28, Permissions.CAMERA_ACCESS, true)
+		p1.props.getPermissions(v29, Permissions.CAMERA_ACCESS, true)
 	end
 end
 

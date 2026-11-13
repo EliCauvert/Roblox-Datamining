@@ -1,11 +1,12 @@
 ﻿local ExpChatShared = script:FindFirstAncestor("ExpChatShared")
 local Parent = ExpChatShared.Parent
+local RoduxModule = require(Parent.Rodux)
 local Dictionary = require(Parent.llama).Dictionary
 local Commands = ExpChatShared.Commands
 local RBXWhisperCommandModule = require(Commands.Whisper.RBXWhisperCommand)
 local RBXTeamCommandModule = require(Commands.RBXTeamCommand)
 
-return require(Parent.Rodux).createReducer({
+return RoduxModule.createReducer({
 	RBXWhisperCommand = {
 		primaryAlias = RBXWhisperCommandModule.alias[1],
 		secondaryAlias = RBXWhisperCommandModule.alias[2]

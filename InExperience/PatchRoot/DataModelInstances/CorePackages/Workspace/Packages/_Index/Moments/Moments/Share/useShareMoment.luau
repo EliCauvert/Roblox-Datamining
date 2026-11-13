@@ -1,6 +1,7 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
 local ReactModule = require(Parent.React)
+local LocalizationModule = require(Parent.Localization)
 local _ = require(Parent.MomentsTypes)
 local FeedContextModule = require(Moments.Components.Feed.FeedContext)
 local SignalActionTypeModule = require(Moments.Enums.SignalActionType)
@@ -8,7 +9,7 @@ local MomentContextModule = require(Moments.Components.Feed.Items.Moment.MomentC
 local MakeRecommendationAttributionModule = require(Moments.Analytics.makeRecommendationAttribution)
 local FFlagMomentsRecommendationContentTypeModule = require(Moments.Flags.FFlagMomentsRecommendationContentType)
 local ShareMomentModule = require(script.Parent.shareMoment)
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local config = {
 	shareLinkTitle = "Feature.Moments.Label.ShareLinkTitle",
 	linkCopied = "Feature.Moments.Label.LinkCopied",

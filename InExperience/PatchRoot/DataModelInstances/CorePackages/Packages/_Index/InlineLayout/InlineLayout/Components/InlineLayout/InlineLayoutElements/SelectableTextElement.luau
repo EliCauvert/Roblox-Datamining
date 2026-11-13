@@ -1,10 +1,11 @@
 ﻿local Parent = script:FindFirstAncestor("Components").Parent
 local Parent1 = Parent.Parent
 local DashModule = require(Parent1.Dash)
+local FoundationModule = require(Parent1.Foundation)
 local ReactModule = require(Parent1.React)
 local BaseTextElementModule = require(script:FindFirstAncestor("InlineLayoutElements").BaseTextElement)
 local GetFontFaceModule = require(Parent.Utils.getFontFace)
-local View = require(Parent1.Foundation).View
+local View = FoundationModule.View
 
 function mapProps(p1)
 	-- upvalues: DashModule (copy)

@@ -2,6 +2,7 @@
 local UserModule = require(AuthCommon.Thunks.User)
 local Default = require(AuthCommon.Parent.LinkingProtocol).LinkingProtocol.default
 local PreAuthDeepLinkMapModule = require(script.Parent.PreAuthDeepLinkMap)
+local FFlagEnablePreAuthDeepLinkHandlerModule = require(AuthCommon.Flags.FFlagEnablePreAuthDeepLinkHandler)
 
 local function parseQueryParams(Text: string)
 	local t = {}
@@ -66,7 +67,7 @@ local function registerPatterns()
 	end
 end
 
-if require(AuthCommon.Flags.FFlagEnablePreAuthDeepLinkHandler) then
+if FFlagEnablePreAuthDeepLinkHandlerModule then
 	registerPatterns()
 end
 return {

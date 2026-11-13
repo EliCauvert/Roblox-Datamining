@@ -58,6 +58,10 @@ return function(p1)
 		isGroupChatEnabled = IsGroupChatEnabled,
 		maxCount = ShareSheetConstantsModule.FIntShareSheetPeoplePickerMaxConversations
 	})
+	local PeoplePickerRecipients = {
+		recipients = if UseEligibleRecipientsResult1.isLoading and not UseEligibleRecipientsResult.isLoading and SearchResult == nil then UseEligibleRecipientsResult.recipients else UseEligibleRecipientsResult1.recipients,
+		isLoading = if SearchResult then SearchResult.status == ListRecipientsStatusModule.Loading or SearchResult.status == ListRecipientsStatusModule.Ready and UseEligibleRecipientsResult1.isLoading else not IsStatusMatch and UseEligibleRecipientsResult1.isLoading
+	}
 	local IsStatusMatch1_1: boolean = HasChatShare and IsStatusMatch1
 	
 	return {
@@ -69,10 +73,7 @@ return function(p1)
 			isLoading = UseEligibleRecipientsResult.isLoading
 		},
 		isSocialRowLoading = IsAvailable and IsStatusMatch1_1,
-		peoplePickerRecipients = {
-			recipients = if UseEligibleRecipientsResult1.isLoading and not UseEligibleRecipientsResult.isLoading and SearchResult == nil then UseEligibleRecipientsResult.recipients else UseEligibleRecipientsResult1.recipients,
-			isLoading = if SearchResult then SearchResult.status == ListRecipientsStatusModule.Loading or SearchResult.status == ListRecipientsStatusModule.Ready and UseEligibleRecipientsResult1.isLoading else not IsStatusMatch and UseEligibleRecipientsResult1.isLoading
-		},
+		peoplePickerRecipients = PeoplePickerRecipients,
 		peoplePickerListResult = p1.searchResult or ListResult,
 		shouldShowSocialRow = IsAvailable and (v1 or IsStatusMatch1_1)
 	}

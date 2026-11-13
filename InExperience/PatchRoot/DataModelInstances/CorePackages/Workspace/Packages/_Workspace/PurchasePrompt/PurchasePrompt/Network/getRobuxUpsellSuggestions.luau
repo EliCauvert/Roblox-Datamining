@@ -12,13 +12,13 @@ return function(p1, p2, p3, p4, p5, p6, p7, p8)
 	-- upvalues: PaymentPlatformToUpsellPlatformModule (copy), PromiseModule (copy), GetUpsellSuggestionsFunction (copy), UpsellSuggestionsAPIMaxPackages (copy), PurchaseErrorModule (copy)
 	local PaymentPlatformToUpsellPlatformModuleResult = PaymentPlatformToUpsellPlatformModule(p3)
 	
-	return (PromiseModule.new(function(Callback, Callback1)
+	return (PromiseModule.new(function(Callback1, Callback)
 		-- upvalues: GetUpsellSuggestionsFunction (upval), PaymentPlatformToUpsellPlatformModuleResult (copy), p2 (copy), p1 (copy), UpsellSuggestionsAPIMaxPackages (upval), p5 (copy), p6 (copy), p7 (copy), p8 (copy), p4 (copy), PurchaseErrorModule (upval)
 		spawn(function()
-			-- upvalues: GetUpsellSuggestionsFunction (upval), PaymentPlatformToUpsellPlatformModuleResult (upval), p2 (upval), p1 (upval), UpsellSuggestionsAPIMaxPackages (upval), p5 (upval), p6 (upval), p7 (upval), p8 (upval), p4 (upval), Callback1 (copy), PurchaseErrorModule (upval), Callback (copy)
+			-- upvalues: GetUpsellSuggestionsFunction (upval), PaymentPlatformToUpsellPlatformModuleResult (upval), p2 (upval), p1 (upval), UpsellSuggestionsAPIMaxPackages (upval), p5 (upval), p6 (upval), p7 (upval), p8 (upval), p4 (upval), Callback (copy), PurchaseErrorModule (upval), Callback1 (copy)
 			local UpsellSuggestions, UpsellSuggestions2 = GetUpsellSuggestionsFunction(PaymentPlatformToUpsellPlatformModuleResult, p2, p1, UpsellSuggestionsAPIMaxPackages, p5, p6, p7, p8, p4)
 			
-			return if UpsellSuggestions and (UpsellSuggestions2 and UpsellSuggestions2.products and #UpsellSuggestions2.products ~= 0) then Callback(UpsellSuggestions2) else Callback1(PurchaseErrorModule.UnknownFailure)
+			return if UpsellSuggestions and (UpsellSuggestions2 and UpsellSuggestions2.products and #UpsellSuggestions2.products ~= 0) then Callback1(UpsellSuggestions2) else Callback(PurchaseErrorModule.UnknownFailure)
 		end)
 	end))
 end

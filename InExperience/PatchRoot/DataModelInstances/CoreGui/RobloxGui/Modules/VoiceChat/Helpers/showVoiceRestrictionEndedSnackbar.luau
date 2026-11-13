@@ -4,6 +4,7 @@ local ReactModule = require(CorePackages.Packages.React)
 local ReactRobloxModule = require(CorePackages.Packages.ReactRoblox)
 local FoundationModule = require(CorePackages.Packages.Foundation)
 local LuauPolyfillModule = require(CorePackages.Packages.LuauPolyfill)
+local SignalsModule = require(CorePackages.Packages.Signals)
 local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
 local CoreScriptsRootProvider = require(CorePackages.Workspace.Packages.CoreScriptsRoactCommon).CoreScriptsRootProvider
 local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
@@ -13,7 +14,7 @@ local ClearTimeoutFunction = LuauPolyfillModule.clearTimeout
 local VoiceRestrictionEndedSnackbarDismissSeconds = game:DefineFastInt("VoiceRestrictionEndedSnackbarDismissSeconds", 4)
 local Object = nil
 local v1 = nil
-local Signal, Signal2 = require(CorePackages.Packages.Signals).createSignal(0)
+local Signal, Signal2 = SignalsModule.createSignal(0)
 
 local function _()
 	-- upvalues: v1 (ref), Object (ref)
@@ -68,7 +69,7 @@ local function VoiceRestrictionEndedSnackbar(p1)
 		p1.onDismiss
 	})
 	
-	return ReactModule.createElement(FoundationModule.Snackbar, {
+	return ReactModule.createElement(FoundationModule.Snackbar_DEPRECATED, {
 		title = RobloxTranslatorModule:FormatByKey("Feature.InExperienceIntervention.Description.StartNewGameToTurnOnVoiceChat"),
 		AnchorPoint = UseSnackbarSlideMotionFromBottomModuleResult.anchorPoint,
 		Position = UseSnackbarSlideMotionFromBottomModuleResult.position

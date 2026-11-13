@@ -204,9 +204,10 @@ function LuauHeapView.renderChildrenRefs(p5)
 		return {}
 	end
 	assert(Refs)
+	local Roots = Refs.Roots
 	local Elements = {}
 	
-	for i, root in Refs.Roots do
+	for i, root in Roots do
 		Elements[i] = RoactModule.createElement(LuauHeapViewRefEntryModule, { depth = 0, layoutOrder = -root.Instances, data = root })
 	end
 	return Elements

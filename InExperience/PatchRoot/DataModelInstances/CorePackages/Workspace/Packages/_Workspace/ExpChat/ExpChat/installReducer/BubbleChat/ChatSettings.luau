@@ -1,9 +1,10 @@
 ﻿local ExpChat = script:FindFirstAncestor("ExpChat")
 local Parent = ExpChat.Parent
+local RoduxModule = require(Parent.Rodux)
 local Dictionary = require(Parent.llama).Dictionary
 local Actions = ExpChat.Actions
 
-return require(Parent.Rodux).createReducer(require(script.Parent.DefaultSettings), {
+return RoduxModule.createReducer(require(script.Parent.DefaultSettings), {
 	[require(Actions.ConfigurationObjectsLoaded).name] = function(p1, p2)
 		-- upvalues: Dictionary (copy)
 		return Dictionary.join(p1, p2.bubbleChatSettings)

@@ -94,15 +94,15 @@ function GenericSlider.onMoveStep(p1, p2, p3)
 	local v3 = nil
 	
 	if IsMagnitudeAbove then
-		v2 = if Position.x > 0 then 1 else -1
-		v3 = 0.2
-		v1 = 12
+		v1 = if Position.x > 0 then 1 else -1
+		v2 = 0.2
+		v3 = 12
 	else
-		v2 = (if p2[Enum.KeyCode.DPadLeft].UserInputState == Enum.UserInputState.Begin then -1 else 0) + (if p2[Enum.KeyCode.DPadRight].UserInputState == Enum.UserInputState.Begin then 1 else 0)
-		v3 = 0.5
-		v1 = 8
+		v1 = (if p2[Enum.KeyCode.DPadLeft].UserInputState == Enum.UserInputState.Begin then -1 else 0) + (if p2[Enum.KeyCode.DPadRight].UserInputState == Enum.UserInputState.Begin then 1 else 0)
+		v2 = 0.5
+		v3 = 8
 	end
-	if v2 == 0 then
+	if v1 == 0 then
 		p1.totalMoveTime = 0
 		p1.isFirstMove = true
 	elseif p1.isFirstMove then
@@ -110,16 +110,16 @@ function GenericSlider.onMoveStep(p1, p2, p3)
 		p1.totalMoveTime = 0
 		p1.unhandledTime = 0
 		Floored = 1
-	elseif v3 < p1.totalMoveTime then
-		local NewLargest = p3 - math.max(v3 - p1.totalMoveTime - p3, 0) + p1.unhandledTime
-		Floored = math.floor(v1 * NewLargest)
-		p1.unhandledTime = NewLargest - Floored / v1
+	elseif v2 < p1.totalMoveTime then
+		local NewLargest = p3 - math.max(v2 - p1.totalMoveTime - p3, 0) + p1.unhandledTime
+		Floored = math.floor(v3 * NewLargest)
+		p1.unhandledTime = NewLargest - Floored / v3
 	else
 		Floored = 0
 		p1.unhandledTime = 0
 	end
 	if Floored > 0 then
-		p1:processGamepadInput(v2, Floored)
+		p1:processGamepadInput(v1, Floored)
 	end
 end
 

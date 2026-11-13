@@ -4,13 +4,15 @@ local _ = require(Parent.LuauPolyfill)
 local UrlBuilderModule = require(Parent.UrlBuilder)
 local PromiseModule = require(Parent.Promise)
 local FetchModule = require(Parent.Fetch)
+local UrlBuilder = UrlBuilderModule.UrlBuilder
+local UrlBase = UrlBuilderModule.UrlBase
 local GraphQLError = require(Parent.GraphQL).GraphQLError
 local Fetch = FetchModule.fetch
 local Response = FetchModule.Response
 local _ = require(script.Parent.Parent.generatedTypes)
-local v1 = UrlBuilderModule.UrlBuilder.new({
+local v1 = UrlBuilder.new({
 	path = "sharelinks/v1/get-or-create-link",
-	base = UrlBuilderModule.UrlBase.APIS
+	base = UrlBase.APIS
 })()
 
 return {

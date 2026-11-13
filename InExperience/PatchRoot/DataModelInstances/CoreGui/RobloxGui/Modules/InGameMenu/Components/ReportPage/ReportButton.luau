@@ -1,6 +1,7 @@
 ﻿local CorePackages = game:GetService("CorePackages")
 local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDependencies)
 local Roact = InGameMenuDependenciesModule.Roact
+local RoactRodux = InGameMenuDependenciesModule.RoactRodux
 local T = InGameMenuDependenciesModule.t
 local UIBlox = InGameMenuDependenciesModule.UIBlox
 local Parent = script.Parent.Parent.Parent
@@ -20,7 +21,7 @@ local StrictInterfaceResult = T.strictInterface({
 	dispatchOpenReportDialog = T.callback
 })
 
-return InGameMenuDependenciesModule.RoactRodux.UNSTABLE_connect2(nil, function(Callback)
+return RoactRodux.UNSTABLE_connect2(nil, function(Callback)
 	-- upvalues: OpenReportDialogModule (copy)
 	return {
 		dispatchOpenReportDialog = function(UserId, UserName)

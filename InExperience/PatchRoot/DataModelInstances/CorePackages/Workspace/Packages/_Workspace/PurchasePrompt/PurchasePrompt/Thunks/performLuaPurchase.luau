@@ -31,12 +31,13 @@ local FFlagPurchasePromptFetchCartPricingForLooks = require(Parent.SharedFlags).
 local FFlagEnablePriceChangedErrorHandlingModule = require(PurchasePrompt.Flags.FFlagEnablePriceChangedErrorHandling)
 local FFlagEnableRequestLocationTypeForSduiPurchaseModule = require(PurchasePrompt.Flags.FFlagEnableRequestLocationTypeForSduiPurchase)
 local FFlagEnableSearchGameItemOwnershipUpdate = require(Parent.SharedFlags).FFlagEnableSearchGameItemOwnershipUpdate
+local FFlagEnableEdpPreviewPurchaseSurface = require(Parent.SharedFlags).FFlagEnableEdpPreviewPurchaseSurface
 local FFlagLuaAppsEnablePromptVIPServerPurchase = require(Parent.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
 local RobloxTranslatorModule = require(Parent.RobloxTranslator)
 local ProductPurchaseSurface = require(Parent.PurchasePromptLite).Enums.ProductPurchaseSurface
 local config = {
 	[ProductPurchaseSurface.EDP] = "ExperienceDetailPage",
-	[ProductPurchaseSurface.EDPPreview] = if require(Parent.SharedFlags).FFlagEnableEdpPreviewPurchaseSurface then "ExperienceDetailPagePreview" else nil,
+	[ProductPurchaseSurface.EDPPreview] = if FFlagEnableEdpPreviewPurchaseSurface then "ExperienceDetailPagePreview" else nil,
 	[ProductPurchaseSurface.HomePageGameItemShop] = "HomePageGameItemShop",
 	[ProductPurchaseSurface.SearchPageGameItemShop] = if FFlagEnableSearchGameItemOwnershipUpdate then "SearchPageGameItemShop" else nil
 }

@@ -3,6 +3,7 @@ local Parent = SduiCoreSystem.Parent
 local CryoModule = require(Parent.Cryo)
 local ReactModule = require(Parent.React)
 local GetInputModeStoreFunction = require(Parent.Responsive).GetInputModeStore
+local CompareSduiPropsModule = require(SduiCoreSystem.compareSduiProps)
 local _ = require(SduiCoreSystem.SduiBuilderTypes)
 local _ = require(SduiCoreSystem.SduiConfigTypes)
 local SduiResponsiveDetectorModule = require(SduiCoreSystem.ConditionalProps.SduiResponsiveDetector)
@@ -132,4 +133,4 @@ return ReactModule.memo(function(p1)
 	SduiContext.dependencies.instrumentation:stopTimerFlow("SduiConditionalPropWrapper", SduiContext)
 	
 	return ReactModule.createElement(ReactModule.Fragment, nil, UseMemoResult2)
-end, (require(SduiCoreSystem.compareSduiProps)))
+end, CompareSduiPropsModule)

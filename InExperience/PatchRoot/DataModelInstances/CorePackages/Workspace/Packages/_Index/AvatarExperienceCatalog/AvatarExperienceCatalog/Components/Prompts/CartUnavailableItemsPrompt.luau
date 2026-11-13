@@ -2,6 +2,7 @@
 local ReactModule = require(Parent.React)
 local RoactNavigationModule = require(Parent.RoactNavigation)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local WithMappedNavigationParamsFunction = require(Parent.AvatarExperienceNavigation).withMappedNavigationParams
 local AXPartialPageModal = require(Parent.AvatarExperienceCommon).Components.AXPartialPageModal
 local FoundationModule = require(Parent.Foundation)
 local View = FoundationModule.View
@@ -9,7 +10,7 @@ local Text = FoundationModule.Text
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local InputSize = FoundationModule.Enums.InputSize
 
-return (require(Parent.AvatarExperienceNavigation).withMappedNavigationParams(function(p1)
+return (WithMappedNavigationParamsFunction(function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), RoactNavigationModule (copy), View (copy), Text (copy), AXPartialPageModal (copy), ButtonVariant (copy), InputSize (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		confirmButtonText = "Feature.Catalog.Action.Checkout.UnavailableItems",

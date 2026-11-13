@@ -1,11 +1,12 @@
 ﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
 local GameTileModule = require(Parent.GameTile)
+local LocalizationModule = require(Parent.Localization)
 local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local SduiActionType = SduiCoreSystemModule.SduiActionType
 local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 local ActivateGameNotInterestedFunction = GameTileModule.activateGameNotInterested
 local GetGameTileHiddenStoreFunction = GameTileModule.getGameTileHiddenStore
-local LocalizeStringsFunction = require(Parent.Localization).localizeStrings
+local LocalizeStringsFunction = LocalizationModule.localizeStrings
 
 local function _(p1, Message, PropName)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy)

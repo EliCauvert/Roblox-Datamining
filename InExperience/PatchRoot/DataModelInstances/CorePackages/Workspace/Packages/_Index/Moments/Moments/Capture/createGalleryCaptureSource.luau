@@ -1,8 +1,9 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
+local SharedFlagsModule = require(Parent.SharedFlags)
 local SignalsModule = require(Parent.Signals)
 local FFlagMomentsCreationEntryOutcomeModule = require(Moments.Flags.FFlagMomentsCreationEntryOutcome)
-local FFlagMyStatsMediaSelector = require(Parent.SharedFlags).FFlagMyStatsMediaSelector
+local FFlagMyStatsMediaSelector = SharedFlagsModule.FFlagMyStatsMediaSelector
 
 local function _(Sound: Sound): boolean
 	return Sound.CaptureType ~= Enum.CaptureType.Video or Sound.TimeLength == nil or Sound.TimeLength >= 1

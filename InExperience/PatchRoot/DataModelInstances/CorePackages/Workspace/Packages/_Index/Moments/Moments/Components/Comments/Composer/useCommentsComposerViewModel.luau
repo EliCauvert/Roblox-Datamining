@@ -1,5 +1,6 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
+local LocalizationModule = require(Parent.Localization)
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
 local UseEventCallbackFunction = require(Parent.ReactUtils).useEventCallback
@@ -9,7 +10,7 @@ local GetCommentsListCoordinatorModule = require(Moments.Components.Comments.Lis
 local _ = require(script.Parent.CommentsComposerView)
 local NormalizeCommentTextModule = require(script.Parent.normalizeCommentText)
 local TruncateToMaxLengthModule = require(script.Parent.truncateToMaxLength)
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local config = {
 	textFilterRejected = "Feature.Moments.Label.CommentRejectedByFilter",
 	rateLimited = "Feature.Moments.Label.CommentRateLimited",

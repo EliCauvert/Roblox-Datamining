@@ -1,9 +1,10 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
 local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
 local GetUsersStoreModule = require(Moments.Stores.GetUsersStore)
 local Players = game:GetService("Players")
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseSignalStateFunction = SignalsReactModule.useSignalState
 
 return function(UserId)
 	-- upvalues: GetUsersStoreModule (copy), UseSignalStateFunction (copy), ReactModule (copy), Players (copy)

@@ -3,6 +3,7 @@ local Parent = SocialUpsell.Parent
 local HttpService = game:GetService("HttpService")
 local ReactModule = require(Parent.React)
 local UseEffectFunction = ReactModule.useEffect
+local AppBloxModule = require(Parent.AppBlox)
 local FoundationModule = require(Parent.Foundation)
 local UseCallbackFunction = ReactModule.useCallback
 local CryoModule = require(Parent.Cryo)
@@ -17,7 +18,7 @@ local EventTypes = require(Parent.SocialLuaAnalytics).Analytics.Enums.EventTypes
 local FFlagAgeBasedUXHomepageVerificationBannerGreyButton = require(Parent.SharedFlags).FFlagAgeBasedUXHomepageVerificationBannerGreyButton
 local UPSELLBUTTONACTION = ConstantsModule.UPSELL_BUTTON_ACTION
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
-local Banner = require(Parent.AppBlox).Banner
+local Banner = AppBloxModule.Banner
 local config = { isContained = true }
 
 local function _(p1, p2)

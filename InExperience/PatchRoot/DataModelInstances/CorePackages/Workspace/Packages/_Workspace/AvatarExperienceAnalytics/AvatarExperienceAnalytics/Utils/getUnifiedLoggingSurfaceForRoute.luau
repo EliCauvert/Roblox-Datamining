@@ -1,9 +1,10 @@
 ﻿local Parent = script:FindFirstAncestor("AvatarExperienceAnalytics").Parent
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local AvatarExperienceNavigationModule = require(Parent.AvatarExperienceNavigation)
 local AvatarScreenProperties = AvatarExperienceNavigationModule.AvatarRoute.AvatarScreenProperties
 local UnifiedLoggingSurface = AvatarExperienceNavigationModule.Enums.UnifiedLoggingSurface
 local GetUnifiedLoggingSurfaceModule = require(script.Parent.getUnifiedLoggingSurface)
-local FFlagAXUnifiedEventStrictPayloads = require(Parent.AvatarExperienceFlags).FFlagAXUnifiedEventStrictPayloads
+local FFlagAXUnifiedEventStrictPayloads = AvatarExperienceFlagsModule.FFlagAXUnifiedEventStrictPayloads
 
 return function(p1)
 	-- upvalues: FFlagAXUnifiedEventStrictPayloads (copy), UnifiedLoggingSurface (copy), AvatarScreenProperties (copy), GetUnifiedLoggingSurfaceModule (copy)

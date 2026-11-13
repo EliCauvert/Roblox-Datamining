@@ -1,9 +1,10 @@
 ﻿local InExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
 local Parent = InExperienceSideSheet.Parent
+local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
 local GetSideSheetConfigStoreModule = require(InExperienceSideSheet.Stores.GetSideSheetConfigStore)
-local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
 local function getBackgroundTransparency(p1)
 	-- upvalues: GetSideSheetConfigStoreModule (copy)

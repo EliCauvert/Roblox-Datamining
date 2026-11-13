@@ -2,6 +2,7 @@
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local ReactUtilsModule = require(Parent.ReactUtils)
+local SignalsReactModule = require(Parent.SignalsReact)
 local MomentsCommonModule = require(Parent.MomentsCommon)
 local PreviewPopoverMathModule = require(script.Parent.previewPopoverMath)
 local _ = require(script.Parent.Parent.Hooks.useMomentProgress)
@@ -13,7 +14,7 @@ local View = FoundationModule.View
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UseScreenSizeFunction = MomentsCommonModule.Hooks.useScreenSize
 local UseDeviceInsetsFunction = MomentsCommonModule.Hooks.useDeviceInsets
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseSignalStateFunction = SignalsReactModule.useSignalState
 local SCRUBFADESECONDS = MomentContextModule.SCRUB_FADE_SECONDS
 
 return ReactModule.memo(function(p1)

@@ -10,17 +10,19 @@ local ActOnPartyNudgeModule = require(SquadsCore.Thunks.actOnPartyNudge)
 local CreateConversationModule = require(SquadsCore.Thunks.createConversation)
 local ReactModule = require(Parent.React)
 local ToastNotificationModule = require(Parent.ToastNotification)
+local ToastNotificationsProtocolModule = require(Parent.ToastNotificationsProtocol)
 local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
 local RealtimeDeliveryModule = require(Parent.RealtimeDelivery)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local UserProfilesModule = require(Parent.UserProfiles)
 local GetStandardSizeAvatarHeadShotRbxthumbFunction = require(Parent.UserLib).Utils.getStandardSizeAvatarHeadShotRbxthumb
 local LifecycleEvents = ToastNotificationModule.LifecycleEvents
 local NotificationTypeEnum = ToastNotificationModule.ToastNotificationTypeModule.NotificationTypeEnum
 local ShowNotificationSnoozeMenuSignal = ToastNotificationModule.Signals.ShowNotificationSnoozeMenuSignal
 local NotificationGroups = ToastNotificationModule.NotificationGroups
-local Default = require(Parent.ToastNotificationsProtocol).ToastNotificationProtocol.default
-local UserProfileStore = require(Parent.UserProfiles).Stores.UserProfileStore
+local Default = ToastNotificationsProtocolModule.ToastNotificationProtocol.default
+local UserProfileStore = UserProfilesModule.Stores.UserProfileStore
 
 return function(p1)
 	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), SquadExternalContractContextModule (copy), UseLocalUserIdFunction (copy), UseLocalizationFunction (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), UserProfileStore (copy), GuiService (copy), RealtimeDeliveryModule (copy), ConstantsModule (copy), EventNamesModule (copy), Default (copy), SquadToastActionsAndStatesModule (copy), NotificationTypeEnum (copy), ActOnPartyNudgeModule (copy), LifecycleEvents (copy), ShowNotificationSnoozeMenuSignal (copy), NotificationGroups (copy), HttpService (copy), CreateConversationModule (copy)

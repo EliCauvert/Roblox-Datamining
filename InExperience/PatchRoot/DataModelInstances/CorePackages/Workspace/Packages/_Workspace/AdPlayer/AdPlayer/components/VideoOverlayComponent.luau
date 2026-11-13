@@ -1,6 +1,7 @@
 ﻿local AdPlayer = script:FindFirstAncestor("AdPlayer")
 local Parent = AdPlayer.Parent
 local ReactModule = require(Parent.React)
+local AdGuiInteractivityModule = require(Parent.AdGuiInteractivity)
 local ReactOtterModule = require(Parent.ReactOtter)
 local FoundationModule = require(Parent.Foundation)
 local Text = FoundationModule.Text
@@ -12,7 +13,7 @@ local FlagsModule = require(AdPlayer.Flags)
 local Components = script:FindFirstAncestor("components")
 local AdLabelComponentModule = require(Components.AdLabelComponent)
 local LinearProgressComponentModule = require(Components.LinearProgressComponent)
-local AdDropdownMenu = require(Parent.AdGuiInteractivity).AdDropdownMenu
+local AdDropdownMenu = AdGuiInteractivityModule.AdDropdownMenu
 local AdDropdownButtonDefault = FlagsModule.GetAdDropdownButtonDefault()
 local AdDropdownButtonOpen = FlagsModule.GetAdDropdownButtonOpen()
 local AdPlayerExitButton = FlagsModule.GetAdPlayerExitButton()

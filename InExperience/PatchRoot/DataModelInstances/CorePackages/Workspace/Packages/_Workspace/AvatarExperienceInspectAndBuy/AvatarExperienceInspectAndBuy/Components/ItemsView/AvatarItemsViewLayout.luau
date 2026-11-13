@@ -1,6 +1,7 @@
 ﻿local AvatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
 local Parent = AvatarExperienceInspectAndBuy.Parent
 local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
 local ItemsViewHeaderModule = require(AvatarExperienceInspectAndBuy.Components.ItemsView.ItemsViewHeader)
 local AvatarItemsViewModule = require(AvatarExperienceInspectAndBuy.Components.ItemsView.AvatarItemsView)
 local BuyActionBarLayoutModule = require(AvatarExperienceInspectAndBuy.Components.ItemsView.BuyActionBarLayout)
@@ -8,9 +9,9 @@ local _ = require(AvatarExperienceInspectAndBuy.Components.Common.SubheaderLabel
 local _ = require(AvatarExperienceInspectAndBuy.Components.Common.BuyActionBar)
 local _ = require(AvatarExperienceInspectAndBuy.Types)
 local ViewTypeModule = require(AvatarExperienceInspectAndBuy.Enums.ViewType)
-local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function v10(View, p1)
+local function v11(View, p1)
 	-- upvalues: ViewTypeModule (copy)
 	return if View == ViewTypeModule.Compact then {
 		left = UDim.new(0, p1.Padding.Medium),
@@ -28,7 +29,7 @@ local function v10(View, p1)
 end
 
 return (ReactModule.forwardRef(function(p1, Ref)
-	-- upvalues: UseTokensFunction (copy), ViewTypeModule (copy), ReactModule (copy), ItemsViewHeaderModule (copy), v10 (copy), AvatarItemsViewModule (copy), BuyActionBarLayoutModule (copy)
+	-- upvalues: UseTokensFunction (copy), ViewTypeModule (copy), ReactModule (copy), ItemsViewHeaderModule (copy), v11 (copy), AvatarItemsViewModule (copy), BuyActionBarLayoutModule (copy)
 	local View = p1.view
 	local UseTokensResult = UseTokensFunction()
 	local OnInspectMenuClosedFunction = p1.onInspectMenuClosed
@@ -38,7 +39,7 @@ return (ReactModule.forwardRef(function(p1, Ref)
 		Header = ReactModule.createElement(ItemsViewHeaderModule, {
 			view = View,
 			headerHeight = UseTokensResult.Size.Size_1300,
-			padding = v10(View, UseTokensResult),
+			padding = v11(View, UseTokensResult),
 			headerText = p1.headerText,
 			subheaderText = p1.subheaderText,
 			onBackButtonClick = function()

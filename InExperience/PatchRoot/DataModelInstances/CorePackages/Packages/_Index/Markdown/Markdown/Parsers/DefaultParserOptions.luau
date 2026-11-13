@@ -1,8 +1,9 @@
 ﻿local Markdown = script:FindFirstAncestor("Markdown")
 local NodeTypeModule = require(Markdown.Enums.NodeType)
+local Flags = require(Markdown.Parent.MarkdownCore).Flags
 
 return {
-	inlineTags = if require(Markdown.Parent.MarkdownCore).Flags.FFlagMarkdownTagFallbacks then {
+	inlineTags = if Flags.FFlagMarkdownTagFallbacks then {
 		font = true,
 		img = true,
 		a = true,

@@ -1,8 +1,11 @@
 ﻿local Parent = script:FindFirstAncestor("SplitPane").Parent
+local AppSplitViewModule = require(Parent.AppSplitView)
+local NavigationModule = require(Parent.Navigation)
+local Constants = require(Parent.NavigationRodux).Constants
 local _ = require(script.Parent.Parent.Hooks.useSplitLayoutStatus)
-local GetCurrentNavigationStateFunction = require(Parent.Navigation).getCurrentNavigationState
-local SupportPaneMode = require(Parent.AppSplitView).Enums.SupportPaneMode
-local TempRnSwitchNavigatorName = require(Parent.NavigationRodux).Constants.TempRnSwitchNavigatorName
+local GetCurrentNavigationStateFunction = NavigationModule.getCurrentNavigationState
+local SupportPaneMode = AppSplitViewModule.Enums.SupportPaneMode
+local TempRnSwitchNavigatorName = Constants.TempRnSwitchNavigatorName
 local config = { isOnScreen = false }
 
 local function _(p1)

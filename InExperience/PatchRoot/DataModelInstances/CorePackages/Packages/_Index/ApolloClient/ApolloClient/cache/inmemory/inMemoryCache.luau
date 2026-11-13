@@ -28,13 +28,14 @@ local MakeVar = ReactiveVarsModule.makeVar
 local ForgetCacheFunction = ReactiveVarsModule.forgetCache
 local RecallCacheFunction = ReactiveVarsModule.recallCache
 local PoliciesModule = require(script.Parent.policies)
+local DefaultDataIdFromObject = PoliciesModule.defaultDataIdFromObject
 local Policies = PoliciesModule.Policies
 local HasOwnFunction = require(script.Parent.helpers).hasOwn
 local CanonicalStringifyFunction = require(script.Parent["object-canon"]).canonicalStringify
 local config = {
 	addTypename = true,
 	resultCaching = true,
-	dataIdFromObject = PoliciesModule.defaultDataIdFromObject,
+	dataIdFromObject = DefaultDataIdFromObject,
 	typePolicies = {}
 }
 local self = setmetatable({}, { __index = ApolloCache })

@@ -1,6 +1,7 @@
 ﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
 local Parent = SduiCoreSystem.Parent
 local TModule = require(Parent.t)
+local CryoModule = require(Parent.Cryo)
 local _ = require(SduiCoreSystem.SduiErrors)
 local _ = require(SduiCoreSystem.SduiComponentType)
 local UiComponentInterface = {
@@ -24,5 +25,5 @@ return {
 		skipUnifiedLogging = TModule.optional(TModule.boolean)
 	},
 	UiComponentInterface = UiComponentInterface,
-	SduiTemplateInterface = require(Parent.Cryo).Dictionary.join(UiComponentInterface, { componentType = TModule.optional(TModule.string) })
+	SduiTemplateInterface = CryoModule.Dictionary.join(UiComponentInterface, { componentType = TModule.optional(TModule.string) })
 }

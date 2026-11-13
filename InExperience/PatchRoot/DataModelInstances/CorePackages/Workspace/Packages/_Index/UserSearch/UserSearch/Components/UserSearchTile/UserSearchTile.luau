@@ -35,6 +35,7 @@ local FFlagUserSearchUseProfileFrameThumbnailModule = require(UserSearch.Flags.F
 local FFlagUserSearchCancelTileActivationOnHoldIntent = require(Parent.SharedFlags).FFlagUserSearchCancelTileActivationOnHoldIntent
 local FFlagSduiUserSearchTile = require(Parent.SharedFlags).FFlagSduiUserSearchTile
 local FFlagPlayerSearchEnableOnlineFrequentsForAll = require(Parent.SharedFlags).FFlagPlayerSearchEnableOnlineFrequentsForAll
+local FFlagUserSearchUsePreviousUsernameMatch = require(Parent.SharedFlags).FFlagUserSearchUsePreviousUsernameMatch
 local FFlagUserSearchClassmatesInsight = require(Parent.SharedFlags).FFlagUserSearchClassmatesInsight
 local RODUXKEY = require(UserSearch.Common.Constants).RODUX_KEY
 local PresenceHelpersModule = require(UserSearch.Utils.PresenceHelpers)
@@ -46,7 +47,7 @@ local function _(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: FFlagUserSearchAddFocusActionsSupport (copy), ReactModule (copy), FFlagUserSearchCancelTileActivationOnHoldIntent (copy), UseStyleFunction (copy), FFlagSduiUserSearchTile (copy), FFlagPlayerSearchEnableOnlineFrequentsForAll (copy), ProfileInsightsStore (copy), FFlagUserSearchClassmatesInsight (copy), SignalsReactModule (copy), UseUserExperimentFunction (copy), AppUserLayers (copy), UseLastInputModeFunction (copy), FFlagUserSearchPresenceStoreMigrationModule (copy), UseGetPresenceByUserIdFunction (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), RODUXKEY (copy), UseContextualInfoModule (copy), ResponsiveModule (copy), CryoModule (copy), FFlagLuaAppSearchPeopleUnifiedSchemaFields (copy), HttpService (copy), EventNamesModule (copy), UseSearchTileButtonsModule (copy), UseProfileNamesModule (copy), PresenceHelpersModule (copy), PlayerTile (copy), FFlagBlendedSerpUserPresenceInLineEnabled (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), FFlagUserSearchUseProfileFrameThumbnailModule (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), Constants (copy), GetFFlagLuaAppEnableOpenTypeSupportFunction (copy), OpenTypeSupport (copy), UserTileEventHandlers (copy), RoundCTAButtonModule (copy)
+	-- upvalues: FFlagUserSearchAddFocusActionsSupport (copy), ReactModule (copy), FFlagUserSearchCancelTileActivationOnHoldIntent (copy), UseStyleFunction (copy), FFlagSduiUserSearchTile (copy), FFlagPlayerSearchEnableOnlineFrequentsForAll (copy), ProfileInsightsStore (copy), FFlagUserSearchClassmatesInsight (copy), SignalsReactModule (copy), UseUserExperimentFunction (copy), AppUserLayers (copy), UseLastInputModeFunction (copy), FFlagUserSearchPresenceStoreMigrationModule (copy), UseGetPresenceByUserIdFunction (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), RODUXKEY (copy), UseContextualInfoModule (copy), FFlagUserSearchUsePreviousUsernameMatch (copy), ResponsiveModule (copy), CryoModule (copy), FFlagLuaAppSearchPeopleUnifiedSchemaFields (copy), HttpService (copy), EventNamesModule (copy), UseSearchTileButtonsModule (copy), UseProfileNamesModule (copy), PresenceHelpersModule (copy), PlayerTile (copy), FFlagBlendedSerpUserPresenceInLineEnabled (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), FFlagUserSearchUseProfileFrameThumbnailModule (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), Constants (copy), GetFFlagLuaAppEnableOpenTypeSupportFunction (copy), OpenTypeSupport (copy), UserTileEventHandlers (copy), RoundCTAButtonModule (copy)
 	local UseRefResult = if FFlagUserSearchAddFocusActionsSupport then ReactModule.useRef(nil) else nil
 	local v1 = nil
 	local UseResult = nil
@@ -74,7 +75,8 @@ return function(p1)
 	end)
 	local UseContextualInfoModuleResult, UseContextualInfoModuleResult2 = UseContextualInfoModule({
 		userId = User.id,
-		previousUsernames = User.previousUsernames,
+		previousUsernames = if FFlagUserSearchUsePreviousUsernameMatch then nil else User.previousUsernames,
+		isPreviousUsernameMatch = if FFlagUserSearchUsePreviousUsernameMatch then User.isPreviousUsernameMatch else nil,
 		searchKeyword = p1.searchParameters.searchKeyword,
 		profileInsight = if FFlagSduiUserSearchTile then SignalsReactModule.useSignalState(ReactModule.useMemo(function()
 			-- upvalues: FFlagPlayerSearchEnableOnlineFrequentsForAll (upval), ProfileInsightsStore (upval), User (copy), FFlagUserSearchClassmatesInsight (upval)
@@ -90,7 +92,7 @@ return function(p1)
 	})
 	local IsUsePreferredInputResultMatch = if FFlagUserSearchAddFocusActionsSupport then ResponsiveModule.usePreferredInput() == ResponsiveModule.Input.Directional else nil
 	
-	local function v47(PlayerTileClick, p2)
+	local function v48(PlayerTileClick, p2)
 		-- upvalues: p1 (copy), CryoModule (upval), User (copy), UseContextualInfoModuleResult2 (copy), FFlagLuaAppSearchPeopleUnifiedSchemaFields (upval), HttpService (upval)
 		if p1.fireAnalyticsEvent then
 			p1.fireAnalyticsEvent(PlayerTileClick, CryoModule.Dictionary.join({
@@ -107,7 +109,7 @@ return function(p1)
 	end
 	
 	local function OnActivated()
-		-- upvalues: FFlagUserSearchCancelTileActivationOnHoldIntent (upval), v1 (ref), p1 (copy), User (copy), UseContextualInfoModuleResult2 (copy), UseContextualInfoModuleResult (copy), v47 (copy), EventNamesModule (upval)
+		-- upvalues: FFlagUserSearchCancelTileActivationOnHoldIntent (upval), v1 (ref), p1 (copy), User (copy), UseContextualInfoModuleResult2 (copy), UseContextualInfoModuleResult (copy), v48 (copy), EventNamesModule (upval)
 		if FFlagUserSearchCancelTileActivationOnHoldIntent and v1.current then
 			v1.current = false
 			
@@ -120,7 +122,7 @@ return function(p1)
 				contextualInfoType = UseContextualInfoModuleResult2,
 				contextualInfoDisplay = UseContextualInfoModuleResult
 			})
-			v47(EventNamesModule.PlayerTileClick)
+			v48(EventNamesModule.PlayerTileClick)
 		end
 	end
 	
@@ -132,7 +134,7 @@ return function(p1)
 		userPresence = UseGetPresenceByUserIdResult,
 		subpage = p1.subpage,
 		shouldAddFocusEventName = if FFlagUserSearchAddFocusActionsSupport then IsUsePreferredInputResultMatch else nil
-	}, v47)
+	}, v48)
 	local Config = UseContextualInfoModuleResult and {
 		text = UseContextualInfoModuleResult.text,
 		fontStyle = UseStyleResult.Font.CaptionBody,
@@ -142,7 +144,7 @@ return function(p1)
 	} or nil
 	local UseProfileNamesModuleResult = UseProfileNamesModule({ userId = User.id })
 	
-	local function v52(UserPresence, p2)
+	local function v53(UserPresence, p2)
 		-- upvalues: PresenceHelpersModule (upval), UseStyleResult (copy)
 		if not p2 or not p2.combinedName then
 			return ""
@@ -170,7 +172,7 @@ return function(p1)
 				Selectable = true,
 				buttonRef = if FFlagUserSearchAddFocusActionsSupport then UseRefResult else nil,
 				tileSize = p1.size,
-				title = if NoShouldUseCompactTiles or UseUserExperimentResult or FFlagBlendedSerpUserPresenceInLineEnabled then v52(UseGetPresenceByUserIdResult, UseProfileNamesModuleResult) else UseProfileNamesModuleResult and UseProfileNamesModuleResult.combinedName,
+				title = if NoShouldUseCompactTiles or UseUserExperimentResult or FFlagBlendedSerpUserPresenceInLineEnabled then v53(UseGetPresenceByUserIdResult, UseProfileNamesModuleResult) else UseProfileNamesModuleResult and UseProfileNamesModuleResult.combinedName,
 				subtitle = UseProfileNamesModuleResult and UseProfileNamesModuleResult.username,
 				thumbnail = if p1.shouldUseCompactTiles then GetStandardSizeAvatarHeadShotRbxthumbFunction(tostring(Id), FFlagUserSearchUseProfileFrameThumbnailModule) else GetRbxthumbWithTypeSizeAndOptionsFunction(tostring(Id), Constants.RbxthumbTypes.Avatar, 720),
 				onActivated = OnActivated,

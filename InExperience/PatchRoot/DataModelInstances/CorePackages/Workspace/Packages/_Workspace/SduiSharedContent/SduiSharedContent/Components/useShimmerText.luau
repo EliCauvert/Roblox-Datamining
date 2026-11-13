@@ -1,11 +1,12 @@
 ﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
 local ReactModule = require(Parent.React)
+local ReactUtilsModule = require(Parent.ReactUtils)
 local FoundationModule = require(Parent.Foundation)
 local _ = require(Parent.SduiCompat)
 local UsePreferencesFunction = FoundationModule.Hooks.usePreferences
 local UsePulseBindingFunction = FoundationModule.Hooks.usePulseBinding
 local UseTokensFunction = FoundationModule.Hooks.useTokens
-local UseClockFunction = require(Parent.ReactUtils).useClock
+local UseClockFunction = ReactUtilsModule.useClock
 local _Color3 = Color3.new(1, 1, 1)
 
 local function generateShimmerGradient(p1): ColorSequence

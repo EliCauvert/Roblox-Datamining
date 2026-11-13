@@ -8,9 +8,11 @@ local ReactModule = require(Parent.React)
 local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
 local SignalsReactModule = require(Parent.SignalsReact)
 local CreateEffectFunction = require(Parent.Signals).createEffect
+local CryoModule = require(Parent.Cryo)
 local UIBloxModule = require(Parent.UIBlox)
 local Analytics = require(Parent.ExpChatShared).Analytics
 local CursorKind = UIBloxModule.App.SelectionImage.CursorKind
+local Images = UIBloxModule.App.ImageSet.Images
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local UseSelectionCursorFunction = UIBloxModule.App.SelectionImage.useSelectionCursor
 local UseInterpolatedClientSettingsModule = require(ExpChat.ClientSettings.useInterpolatedClientSettings)
@@ -19,10 +21,11 @@ local FFlagExpChatUseChannelTabsStore = require(Parent.SharedFlags).FFlagExpChat
 local FFlagExpChatTabShortcutNav = require(Parent.SharedFlags).FFlagExpChatTabShortcutNav
 local ExpChatPerfTracker = require(Parent.ChatUIPrimitives).Telemetry.ExpChatPerfTracker
 local FFlagExpChatPerfTrackerTabName = require(Parent.ChatUIPrimitives).Flags.FFlagExpChatPerfTrackerTabName
+local FFlagGlobalTextChatAddPlaySessionFieldModule = require(ExpChat.Flags.FFlagGlobalTextChatAddPlaySessionField)
 local GetChatLayoutStoreModule = require(ExpChat.Stores.GetChatLayoutStore)
 local ChannelTabModule = require(script.Parent.Parent.ChannelTab)
-local JoinResult = require(Parent.Cryo).List.join(Analytics.DefaultStandardizedFields, { "addPlaceInstanceId" }, if require(ExpChat.Flags.FFlagGlobalTextChatAddPlaySessionField) then { "addPlaySessionId" } else {})
-local IconsNavigationCycleDown = UIBloxModule.App.ImageSet.Images["icons/navigation/cycleDown"]
+local JoinResult = CryoModule.List.join(Analytics.DefaultStandardizedFields, { "addPlaceInstanceId" }, if FFlagGlobalTextChatAddPlaySessionFieldModule then { "addPlaySessionId" } else {})
+local IconsNavigationCycleDown = Images["icons/navigation/cycleDown"]
 local _Color3 = Color3.fromRGB(255, 255, 255)
 local _Color3_1 = Color3.fromRGB(100, 100, 100)
 local ExpChatTabNavFocusPollDelayFrames = game:DefineFastInt("ExpChatTabNavFocusPollDelayFrames", 3)
@@ -68,7 +71,7 @@ return function(p1)
 	local v3 = nil
 	
 	if FFlagExpChatTabShortcutNav then
-		v2, v48 = ReactModule.useState(nil)
+		v2, v51 = ReactModule.useState(nil)
 	end
 	local UseRefResult1 = if FFlagExpChatTabShortcutNav then ReactModule.useRef({}) else nil
 	local v4 = nil
@@ -276,9 +279,9 @@ return function(p1)
 	local ChannelTabsSettings = p1.channelTabsSettings
 	local BackgroundTransparency = UseInterpolatedClientSettingsModule(ChannelTabsSettings).BackgroundTransparency
 	local BackgroundColor3 = UseInterpolatedClientSettingsModule(ChannelTabsSettings).BackgroundColor3
-	local CreateElementFunction = ReactModule.createElement
+	local CreateElementFunction1 = ReactModule.createElement
 	local v5 = "Frame"
-	local config4 = {
+	local config2 = {
 		Size = UDim2.new(1, 0, 0, ConfigModule.ChannelTabsSettings.HorizontalBarHeight),
 		BackgroundTransparency = 1,
 		Visible = p1.visible,
@@ -304,7 +307,7 @@ return function(p1)
 		end
 	}
 	local BorderTransparency = ConfigModule.ChannelTabsSettings.BorderTransparency
-	local config5 = {
+	local config3 = {
 		HorizontalBar = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
@@ -357,9 +360,9 @@ return function(p1)
 	local DropdownButton = IsUseSignalStateResultBelow
 	
 	if DropdownButton then
-		local CreateElementFunction1 = ReactModule.createElement
+		local CreateElementFunction = ReactModule.createElement
 		local v6 = "Frame"
-		local config2 = {
+		local config4 = {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			AnchorPoint = Vector2.new(1, 0),
@@ -369,7 +372,7 @@ return function(p1)
 		}
 		local v7: number = if UseStateResult then 0.3 else 1
 		local v8 = 0
-		local config3 = {
+		local config41 = {
 			TextButton = ReactModule.createElement("TextButton", {
 				AnchorPoint = Vector2.new(1, 0.5),
 				Position = UDim2.new(1, -ConfigModule.ChannelTabsSettings.DropdownIconPadding / 2, 0.5, -4),
@@ -414,11 +417,11 @@ return function(p1)
 				})
 			})
 		}
-		local Frame = UseMemoResult
+		local Frame1 = UseMemoResult
 		
-		if Frame then
+		if Frame1 then
 			local v9 = 0
-			Frame = ReactModule.createElement("Frame", {
+			Frame1 = ReactModule.createElement("Frame", {
 				BorderSizePixel = 0,
 				Size = UDim2.new(0, 8, 0, 8),
 				Position = UDim2.new(0, 18, 0.5, -4),
@@ -432,13 +435,13 @@ return function(p1)
 				UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) })
 			})
 		end
-		config3.UnreadDot = Frame
-		DropdownButton = CreateElementFunction1(v6, config2, config3)
+		config41.UnreadDot = Frame1
+		DropdownButton = CreateElementFunction(v6, config4, config41)
 	end
-	config5.DropdownButton = DropdownButton
-	local Frame1 = IsUseSignalStateResultBelow
+	config3.DropdownButton = DropdownButton
+	local Frame = IsUseSignalStateResultBelow
 	
-	if Frame1 then
+	if Frame then
 		local BorderTransparency1 = ConfigModule.ChannelTabsSettings.BorderTransparency
 		local v10 = 0
 		local MapResult = p1.transparencyValue:map(function(p3): number
@@ -446,7 +449,7 @@ return function(p1)
 			return if v10 == nil then 1 else v10 + p3 * (1 - v10)
 		end)
 		local v11 = 0
-		Frame1 = ReactModule.createElement("Frame", {
+		Frame = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			AnchorPoint = Vector2.new(1, 0),
 			Position = UDim2.new(1, -1, 0, ConfigModule.ChannelTabsSettings.HorizontalBarHeight + 1),
@@ -479,7 +482,7 @@ return function(p1)
 			}, config1)
 		})
 	end
-	config5.DropdownMenu = Frame1
+	config3.DropdownMenu = Frame
 	
-	return CreateElementFunction(v5, config4, config5)
+	return CreateElementFunction1(v5, config2, config3)
 end

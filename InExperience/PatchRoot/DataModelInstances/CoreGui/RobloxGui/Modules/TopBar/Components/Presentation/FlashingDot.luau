@@ -3,6 +3,7 @@ local CorePackages = game:GetService("CorePackages")
 local VideoCaptureService = game:GetService("VideoCaptureService")
 local FaceAnimatorService = game:GetService("FaceAnimatorService")
 local RoactModule = require(CorePackages.Packages.Roact)
+local TModule = require(CorePackages.Packages.t)
 local EventConnection = require(CorePackages.Packages.ReactUtils).EventConnection
 local Modules = game:GetService("CoreGui").RobloxGui.Modules
 local Default = require(Modules.VoiceChat.VoiceChatServiceManager).default
@@ -13,7 +14,7 @@ local function _(p1, p2, p3)
 	return p1 + (p2 - p1) * p3
 end
 
-FlashingDot.validateProps = require(CorePackages.Packages.t).strictInterface({})
+FlashingDot.validateProps = TModule.strictInterface({})
 
 function FlashingDot.init(p1)
 	-- upvalues: RoactModule (copy), Default (copy), FaceAnimatorService (copy), VideoCaptureService (copy)

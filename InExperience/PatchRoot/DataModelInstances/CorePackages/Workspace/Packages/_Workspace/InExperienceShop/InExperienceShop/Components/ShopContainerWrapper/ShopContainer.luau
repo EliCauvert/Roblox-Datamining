@@ -15,10 +15,10 @@ local UseShopViewModelModule = require(script.Parent.useShopViewModel)
 local Flag = false
 
 return function(p1)
-	-- upvalues: SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), ReactModule (copy), FFlagEnableShopPrefetchModule (copy), Flag (ref), ShopDebugLoggerModule (copy), LogCounterModule (copy), OpenCounterModule (copy), FirstOpenCounterModule (copy), FirstOpenPrefetchHitCounterModule (copy), FFlagEnableFreeTrialBlueDotModule (copy), InExperienceShop (copy), UseShopViewModelModule (copy), ShopViewModule (copy)
+	-- upvalues: SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), ReactModule (copy), FFlagEnableShopPrefetchModule (copy), Flag (ref), ShopDebugLoggerModule (copy), LogCounterModule (copy), OpenCounterModule (copy), FirstOpenCounterModule (copy), FirstOpenPrefetchHitCounterModule (copy), FFlagEnableFreeTrialBlueDotModule (copy), InExperienceShop (copy), Parent (copy), UseShopViewModelModule (copy), ShopViewModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetInExperienceShopStoreModule)
 	ReactModule.useEffect(function()
-		-- upvalues: FFlagEnableShopPrefetchModule (upval), Flag (upval), ShopDebugLoggerModule (upval), LogCounterModule (upval), OpenCounterModule (upval), FirstOpenCounterModule (upval), UseSignalStateResult (copy), FirstOpenPrefetchHitCounterModule (upval), FFlagEnableFreeTrialBlueDotModule (upval), InExperienceShop (upval)
+		-- upvalues: FFlagEnableShopPrefetchModule (upval), Flag (upval), ShopDebugLoggerModule (upval), LogCounterModule (upval), OpenCounterModule (upval), FirstOpenCounterModule (upval), UseSignalStateResult (copy), FirstOpenPrefetchHitCounterModule (upval), FFlagEnableFreeTrialBlueDotModule (upval), InExperienceShop (upval), Parent (upval)
 		local NoFlag: boolean = FFlagEnableShopPrefetchModule and not Flag
 		ShopDebugLoggerModule.logLazy(function(): string
 			-- upvalues: NoFlag (copy)
@@ -42,11 +42,18 @@ return function(p1)
 		if FFlagEnableFreeTrialBlueDotModule then
 			require(InExperienceShop.submitFreeTrialBlueDot).dismiss()
 		end
+		local NotificationsOrchestratorModule = require(Parent.NotificationsOrchestrator)
+		NotificationsOrchestratorModule.setInExperienceShopOpen(true)
 		task.spawn(function()
 			-- upvalues: ShopDebugLoggerModule (upval), UseSignalStateResult (upval)
 			ShopDebugLoggerModule.log("ShopContainer: calling onShopOpened")
 			UseSignalStateResult.onShopOpened()
 		end)
+		
+		return function()
+			-- upvalues: NotificationsOrchestratorModule (copy)
+			NotificationsOrchestratorModule.setInExperienceShopOpen(false)
+		end
 	end, {
 		UseSignalStateResult.onShopOpened,
 		UseSignalStateResult.getCategories

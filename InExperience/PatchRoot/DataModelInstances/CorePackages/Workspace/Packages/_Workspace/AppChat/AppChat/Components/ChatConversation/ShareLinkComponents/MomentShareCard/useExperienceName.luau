@@ -1,10 +1,11 @@
 ﻿local AppChat = script:FindFirstAncestor("AppChat")
 local Parent = AppChat.Parent
+local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local GameGetGameInfoStoreModule = require(Parent.DataHydration.GameGetGameInfoStore)
 local DataStatus = require(Parent.DataHydration).DataStatus
 local FFlagAppChatMomentShareCardLoadingSkeletonsModule = require(AppChat.Flags.FFlagAppChatMomentShareCardLoadingSkeletons)
-local Computed = require(Parent.Signals).createComputed(function()
+local Computed = SignalsModule.createComputed(function()
 	return nil
 end)
 

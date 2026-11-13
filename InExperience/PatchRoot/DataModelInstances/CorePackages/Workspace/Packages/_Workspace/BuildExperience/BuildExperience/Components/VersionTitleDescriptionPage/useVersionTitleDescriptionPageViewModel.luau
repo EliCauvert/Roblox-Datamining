@@ -1,5 +1,6 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
+local DataHydrationModule = require(Parent.DataHydration)
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
 local PlaceVersionHistoryModule = require(Parent.DataHydration.PlaceVersionHistory)
@@ -7,7 +8,7 @@ local GetVersionInformationStoreModule = require(BuildExperience.Stores.GetVersi
 local ConfigurationActionTelemetryModule = require(BuildExperience.Telemetry.ConfigurationActionTelemetry)
 local FFlagBuildExperienceActionOutcomeTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceActionOutcomeTelemetry)
 local _ = require(script.Parent.VersionTitleDescriptionPageView)
-local DataStatus = require(Parent.DataHydration).DataStatus
+local DataStatus = DataHydrationModule.DataStatus
 
 return function(p1)
 	-- upvalues: GetVersionInformationStoreModule (copy), PlaceVersionHistoryModule (copy), ReactModule (copy), SignalsReactModule (copy), DataStatus (copy), FFlagBuildExperienceActionOutcomeTelemetryModule (copy), ConfigurationActionTelemetryModule (copy)

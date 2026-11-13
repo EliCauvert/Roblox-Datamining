@@ -148,7 +148,9 @@ return function(p1)
 		
 		if Coachmark == nil or Coachmark.kind ~= Kind then
 			Elements["Tool_" .. Kind] = Element
-		elseif GetFFlagMomentsCoachmarkPersistenceFunction() and Coachmark.impressionCache ~= nil then
+			continue
+		end
+		if GetFFlagMomentsCoachmarkPersistenceFunction() and Coachmark.impressionCache ~= nil then
 			Elements["Tool_" .. Kind] = ReactModule.createElement(PersistentToolCoachmark, {
 				layoutOrder = tool1.cta.order or i,
 				titleKey = Coachmark.titleKey,

@@ -1,5 +1,6 @@
 ﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
 local Parent = ProfilePlatform.Parent
+local SharedFlagsModule = require(Parent.SharedFlags)
 local Enums = require(Parent.CurrencyTransfers).Enums
 local TransferDirection = Enums.TransferDirection
 local TransferOrigination = Enums.TransferOrigination
@@ -9,7 +10,7 @@ local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
 local ProfileTypes = EnumsModule.ProfileTypes
 
 return {
-	[EnumsModule.ProfileActions.CurrencyTransfer] = if require(Parent.SharedFlags).FFlagProfilePlatformEnableCurrencyTransfer then function(p1)
+	[EnumsModule.ProfileActions.CurrencyTransfer] = if SharedFlagsModule.FFlagProfilePlatformEnableCurrencyTransfer then function(p1)
 		-- upvalues: EnumsModule (copy), ProfileTypes (copy), EventNamesModule (copy), TransferDirection (copy), TransferOrigination (copy)
 		return {
 			text = p1.localized[EnumsModule.ProfileActions.CurrencyTransfer],

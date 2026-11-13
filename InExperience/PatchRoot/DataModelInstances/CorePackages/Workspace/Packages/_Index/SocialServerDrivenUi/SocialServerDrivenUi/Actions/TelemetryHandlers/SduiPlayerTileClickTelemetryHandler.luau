@@ -16,6 +16,7 @@ return function(p1, p2, p3)
 	if PlayerId ~= nil then
 		local TilePos = GetActionTelemetryFieldValueFunction(p1, p2, "tilePos") or GetActionTelemetryFieldValueFunction(p1, p2, "itemPosition")
 		local UserSearchSessionId = GetActionTelemetryFieldValueFunction(p1, p2, "userSearchSessionId")
+		local Text = if UserSearchSessionId == nil then nil else tostring(UserSearchSessionId)
 		local CollectionId = GetActionTelemetryFieldValueFunction(p1, p2, "collectionId")
 		local CollectionPosition = GetActionTelemetryFieldValueFunction(p1, p2, "collectionPosition")
 		local CollectionData = if p2 and p2.getCollectionData then p2.getCollectionData() else nil
@@ -37,7 +38,7 @@ return function(p1, p2, p3)
 				pageContext = GetActionTelemetryFieldValueFunction(p1, p2, "pageContext") or p3.appPage,
 				interactionUuid = HttpService:GenerateGUID(false),
 				locale = LocalizationService.RobloxLocaleId,
-				userSearchSessionId = if UserSearchSessionId == nil then nil else tostring(UserSearchSessionId),
+				userSearchSessionId = Text,
 				feedRowNumber = GetActionTelemetryFieldValueFunction(p1, p2, "feedRowNumber") or (if RowPositionFields.rowOnPage == -1 then nil else RowPositionFields.rowOnPage),
 				positionInRow = GetActionTelemetryFieldValueFunction(p1, p2, "positionInRow") or (if RowPositionFields.positionInRow == -1 then nil else RowPositionFields.positionInRow),
 				rowInSort = GetActionTelemetryFieldValueFunction(p1, p2, "rowInSort") or (if RowPositionFields.rowInSort == -1 then nil else RowPositionFields.rowInSort),

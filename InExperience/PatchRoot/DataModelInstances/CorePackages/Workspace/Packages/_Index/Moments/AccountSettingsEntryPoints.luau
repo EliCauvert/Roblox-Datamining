@@ -1,1 +1,1 @@
-﻿return (require(script.Parent.Parent.Parent._Index.AccountSettingsEntryPoints.AccountSettingsEntryPoints))
+﻿return (require(script.Parent.Parent.Parent._Workspace.AccountSettingsEntryPoints.AccountSettingsEntryPoints))

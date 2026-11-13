@@ -2,6 +2,7 @@
 local SharedFlagsModule = require(Parent.SharedFlags)
 local SignalsReactModule = require(Parent.SignalsReact)
 local GetMomentsCapabilitiesFunction = require(Parent.MomentsCommon).Stores.GetMomentsCapabilities
+local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
 local FFlagMomentsCommentsIxpEnabled = SharedFlagsModule.FFlagMomentsCommentsIxpEnabled
 local Frozen = table.freeze({ canRead = true, canWrite = true, canReact = true })
 
@@ -21,4 +22,4 @@ local function useAllowedCommentCapabilities()
 	return Frozen
 end
 
-return if SharedFlagsModule.FFlagMomentsComments or FFlagMomentsCommentsIxpEnabled then useGuacCommentCapabilities else useAllowedCommentCapabilities
+return if FFlagMomentsComments or FFlagMomentsCommentsIxpEnabled then useGuacCommentCapabilities else useAllowedCommentCapabilities

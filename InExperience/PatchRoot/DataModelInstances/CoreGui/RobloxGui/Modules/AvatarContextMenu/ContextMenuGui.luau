@@ -1,11 +1,12 @@
 ﻿local GuiService = game:GetService("GuiService")
 local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 local Modules = RobloxGui:WaitForChild("Modules")
+local Settings = Modules:WaitForChild("Settings")
 local AvatarContextMenu = Modules:WaitForChild("AvatarContextMenu")
 local NewResult = nil
 local BindableEvent = Instance.new("BindableEvent")
 local _ = require(AvatarContextMenu:WaitForChild("ContextMenuUtil"))
-local _ = require(Modules:WaitForChild("Settings"):WaitForChild("Utility"))
+local _ = require(Settings:WaitForChild("Utility"))
 local Module = {}
 Module.__index = Module
 

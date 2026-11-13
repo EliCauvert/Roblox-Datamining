@@ -36,6 +36,9 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 		end
 	end, {})
 	local _UDim2 = UDim2.new(1, 0, WithDefaultsModuleResult.height.Scale, WithDefaultsModuleResult.height.Offset)
+	local MapResult = if WithDefaultsModuleResult.sticky then _UDim2 elseif InnerScrollY and FullBleedHeight then ReactModule.joinBindings({ scrollY = InnerScrollY, height = FullBleedHeight }):map(function(p2): UDim2
+		return if p2.height == 0 then UDim2.fromScale(1, 1) else UDim2.new(1, 0, 0, (math.max(0, p2.height - p2.scrollY)))
+	end) else nil
 	local config1 = {
 		RoundedCorners = if HasRadius then ReactModule.createElement(ImageModule, {
 			tag = "radius-large",
@@ -67,9 +70,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	local Element = ReactModule.createElement(ViewModule, {
 		ClipsDescendants = true,
 		ZIndex = 2,
-		Size = if WithDefaultsModuleResult.sticky then _UDim2 elseif InnerScrollY and FullBleedHeight then ReactModule.joinBindings({ scrollY = InnerScrollY, height = FullBleedHeight }):map(function(p2): UDim2
-			return if p2.height == 0 then UDim2.fromScale(1, 1) else UDim2.new(1, 0, 0, (math.max(0, p2.height - p2.scrollY)))
-		end) else nil,
+		Size = MapResult,
 		aspectRatio = if WithDefaultsModuleResult.sticky then WithDefaultsModuleResult.aspectRatio else nil,
 		LayoutOrder = if WithDefaultsModuleResult.sticky then ConstantsModule.MIN_LAYOUT_ORDER else nil,
 		testId = `{TestId}--full-bleed`,

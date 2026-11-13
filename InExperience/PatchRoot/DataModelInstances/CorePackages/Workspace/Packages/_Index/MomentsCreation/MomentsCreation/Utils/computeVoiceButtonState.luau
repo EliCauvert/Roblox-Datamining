@@ -17,6 +17,7 @@ return function(p1)
 	local HasW = SS:match("%w") ~= nil
 	local HasW1: boolean = Length > 0 and (not IsMaxCharsBelow and HasW)
 	local NoNoIsNotSSMatch1: boolean = IsError and (not NoIsNotSSMatch and not NoIsNotSSMatch1)
+	local NoIsLoading: boolean = if IsNotSSMatch1 then if IsNotSSMatch then not IsLoading else NoNoIsNotSSMatch1 and not IsLoading else HasW1 and (if IsNotSSMatch then not IsLoading else NoNoIsNotSSMatch1 and not IsLoading)
 	local IsNotLastGeneratedTextMatch = p1.lastGeneratedText ~= p1.lastSavedText
 	local v1: boolean = p1.hasGenerated and (p1.startTime or 0) ~= (p1.lastSavedStartTime or 0)
 	local v2: boolean = p1.hasGenerated and (p1.voiceId or 0) ~= (p1.lastSavedVoiceId or 0)
@@ -26,7 +27,7 @@ return function(p1)
 		isError = IsError,
 		charCount = Length1,
 		isOverLimit = IsMaxCharsBelow,
-		canGenerate = if IsNotSSMatch1 then if IsNotSSMatch then not IsLoading else NoNoIsNotSSMatch1 and not IsLoading else HasW1 and (if IsNotSSMatch then not IsLoading else NoNoIsNotSSMatch1 and not IsLoading),
+		canGenerate = NoIsLoading,
 		isModerated = NoIsNotSSMatch,
 		isTooManyDigits = NoIsNotSSMatch1,
 		showSave = (p1.hasGenerated or p1.hasCleared) and (if IsNotLastGeneratedTextMatch or v1 then not IsNotSSMatch and (not IsLoading and not IsError) else v2 and (not IsNotSSMatch and (not IsLoading and not IsError)))

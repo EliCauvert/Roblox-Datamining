@@ -1,8 +1,9 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
+local LocalizationModule = require(Parent.Localization)
 local ReactModule = require(Parent.React)
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 
 return function(Callback1, Callback)
 	-- upvalues: ReactModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy)

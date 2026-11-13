@@ -15,7 +15,6 @@ local RoactRoduxModule = require(Parent.RoactRodux)
 local CryoModule = require(Parent.Cryo)
 local DisplayOrderEnum = require(Parent.DisplayOrder).DisplayOrderEnum
 local StyleProviderWithDefaultTheme = require(Parent.Style).StyleProviderWithDefaultTheme
-local GetFFlagSocialContextToastEventStreamFunction = require(Parent.SharedFlags).GetFFlagSocialContextToastEventStream
 
 local function _(p1)
 	-- upvalues: ReactModule (copy), StyleProviderWithDefaultTheme (copy)
@@ -23,7 +22,7 @@ local function _(p1)
 end
 
 return function(Services, GameId, PlaceId)
-	-- upvalues: CoreGui (copy), ToastTypesModule (copy), RoduxModule (copy), CryoModule (copy), ReactModule (copy), RoactRoduxModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), DisplayOrderEnum (copy), SocialContextToastDispatcherModule (copy), ToastRootModule (copy), GetFFlagSocialContextToastEventStreamFunction (copy), ConfirmationModalRootModule (copy), StyleProviderWithDefaultTheme (copy), ReactRobloxModule (copy)
+	-- upvalues: CoreGui (copy), ToastTypesModule (copy), RoduxModule (copy), CryoModule (copy), ReactModule (copy), RoactRoduxModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), DisplayOrderEnum (copy), SocialContextToastDispatcherModule (copy), ToastRootModule (copy), ConfirmationModalRootModule (copy), StyleProviderWithDefaultTheme (copy), ReactRobloxModule (copy)
 	local SocialContextToast = Instance.new("Folder")
 	SocialContextToast.Name = "SocialContextToast"
 	SocialContextToast.Parent = CoreGui
@@ -54,11 +53,11 @@ return function(Services, GameId, PlaceId)
 				}, {
 					ToastDispatcher = ReactModule.createElement(SocialContextToastDispatcherModule, { services = Services, gameId = GameId, placeId = PlaceId }),
 					ToastRoot = ReactModule.createElement(ToastRootModule, {
-						analyticsProps = if GetFFlagSocialContextToastEventStreamFunction() then {
+						analyticsProps = {
 							eventIngest = Services.eventIngest,
 							gameId = GameId,
 							placeId = PlaceId
-						} else nil
+						}
 					}),
 					ConfirmationModalRoot = ReactModule.createElement(ConfirmationModalRootModule)
 				})

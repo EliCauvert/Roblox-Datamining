@@ -9,6 +9,7 @@ local Skeleton = Foundation.Skeleton
 local IconSize = UIBlox.App.ImageSet.Enum.IconSize
 local GetIconSizeFunction = UIBlox.App.ImageSet.getIconSize
 local WithStyleFunction = UIBlox.Core.Style.withStyle
+local ValidateImage = UIBlox.Core.ImageSet.Validator.validateImage
 local ControlState = UIBlox.Core.Control.Enum.ControlState
 local Interactable = UIBlox.Core.Control.Interactable
 local Badge = UIBlox.App.Indicator.Badge
@@ -16,7 +17,7 @@ local BadgeStates = UIBlox.App.Indicator.Enum.BadgeStates
 local StyledTextLabel = UIBlox.App.Text.StyledTextLabel
 local ImageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
 
-local function v15(p1, ControlState1, p2)
+local function v16(p1, ControlState1, p2)
 	-- upvalues: ControlState (copy)
 	local v1 = p1[ControlState1] or p1[ControlState.Default]
 	local config = {
@@ -36,7 +37,7 @@ Pill.validateProps = T.strictInterface({
 	isSelected = T.optional(T.boolean),
 	isDisabled = T.optional(T.boolean),
 	isLoading = T.optional(T.boolean),
-	icon = T.union(T.string, UIBlox.Core.ImageSet.Validator.validateImage),
+	icon = T.union(T.string, ValidateImage),
 	onActivated = T.callback
 })
 
@@ -51,9 +52,9 @@ function Pill.init(p1)
 end
 
 function Pill.render(p1)
-	-- upvalues: WithStyleFunction (copy), ControlState (copy), v15 (copy), GetIconSizeFunction (copy), IconSize (copy), TextService (copy), Roact (copy), Interactable (copy), ImageSetLabel (copy), StyledTextLabel (copy), Badge (copy), BadgeStates (copy), Skeleton (copy), Radius (copy)
+	-- upvalues: WithStyleFunction (copy), ControlState (copy), v16 (copy), GetIconSizeFunction (copy), IconSize (copy), TextService (copy), Roact (copy), Interactable (copy), ImageSetLabel (copy), StyledTextLabel (copy), Badge (copy), BadgeStates (copy), Skeleton (copy), Radius (copy)
 	return WithStyleFunction(function(p2)
-		-- upvalues: p1 (copy), ControlState (upval), v15 (upval), GetIconSizeFunction (upval), IconSize (upval), TextService (upval), Roact (upval), Interactable (upval), ImageSetLabel (upval), StyledTextLabel (upval), Badge (upval), BadgeStates (upval), Skeleton (upval), Radius (upval)
+		-- upvalues: p1 (copy), ControlState (upval), v16 (upval), GetIconSizeFunction (upval), IconSize (upval), TextService (upval), Roact (upval), Interactable (upval), ImageSetLabel (upval), StyledTextLabel (upval), Badge (upval), BadgeStates (upval), Skeleton (upval), Radius (upval)
 		local _Font = p2.Font
 		local IsSelected = p1.props.isSelected
 		local IsDisabled = p1.props.isDisabled
@@ -69,12 +70,12 @@ function Pill.render(p1)
 			[ControlState.Default] = if IsSelected then "SystemPrimaryDefault" else "BackgroundUIDefault",
 			[ControlState.Hover] = if IsSelected then "SystemPrimaryOnHover" else "BackgroundUIDefault"
 		}
-		local v1 = v15({
+		local v1 = v16({
 			[ControlState.Default] = if IsSelected then "SystemPrimaryContent" else "IconDefault",
 			[ControlState.Hover] = if IsSelected then "SystemPrimaryContent" else "IconEmphasis"
 		}, p1.state.controlState, p2)
-		local ColorStyle = v15(config, p1.state.controlState, p2)
-		local v2 = v15(config1, p1.state.controlState, p2)
+		local ColorStyle = v16(config, p1.state.controlState, p2)
+		local v2 = v16(config1, p1.state.controlState, p2)
 		local IconSize1: number = GetIconSizeFunction(IconSize.Small)
 		local ScaledRelativeSize = _Font.CaptionHeader.RelativeSize * _Font.BaseSize
 		local X: number = TextService:GetTextSize(Text, ScaledRelativeSize, _Font.CaptionHeader.Font, Vector2.new(10000, 10000)).X

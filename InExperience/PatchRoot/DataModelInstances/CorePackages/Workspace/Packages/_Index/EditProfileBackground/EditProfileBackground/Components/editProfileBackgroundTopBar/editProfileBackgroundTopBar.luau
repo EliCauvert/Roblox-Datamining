@@ -1,10 +1,11 @@
 ﻿local Parent = script:FindFirstAncestor("EditProfileBackground").Parent
 local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
 local HeaderBar = require(Parent.UIBlox).App.Bar.HeaderBar
 local MakeBackButtonFunction = require(Parent.AppHeaderBar).makeBackButton
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local UseLastInputModeFunction = require(Parent.FocusNavigationUtils).useLastInputMode
-local View = require(Parent.Foundation).View
+local View = FoundationModule.View
 
 return function(p1)
 	-- upvalues: UseLastInputModeFunction (copy), UseLocalizationFunction (copy), MakeBackButtonFunction (copy), ReactModule (copy), View (copy), HeaderBar (copy)

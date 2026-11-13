@@ -1,7 +1,8 @@
 ﻿local Songbird = script:FindFirstAncestor("Songbird")
+local ReactModule = require(Songbird.Parent.React)
 local TryLoadRbxthumbAsyncModule = require(Songbird.Common.tryLoadRbxthumbAsync)
 local UseAsyncFunction = require(Songbird.Parent.ReactUtils).useAsync
-local UseMemoFunction = require(Songbird.Parent.React).useMemo
+local UseMemoFunction = ReactModule.useMemo
 local list = {
 	"rbxasset://textures/ui/LuaApp/graphic/album_art_fallback_blue.png",
 	"rbxasset://textures/ui/LuaApp/graphic/album_art_fallback_green.png",

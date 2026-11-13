@@ -18,13 +18,14 @@ return ReactModule.memo(function(p1)
 	local UseIsRobloxSubscriberResult = if FFlagEnableBlackbirdCheck then UseIsRobloxSubscriberFunction(if p1.entityId then p1.entityId else nil) else nil
 	local NoConfigs = not p1.configs or p1.configs.showSubtitle == nil or p1.configs.showSubtitle
 	local Text = if UseUserDataValuesModuleResult.username == "" then nil else `@{UseUserDataValuesModuleResult.username}`
+	local Text1 = if NoConfigs then Text else nil
 	local NoConfigs1 = not p1.configs or p1.configs.showPresence == nil or p1.configs.showPresence
 	
 	return ReactModule.createElement(BaseRowModule, {
 		userId = p1.entityId,
 		userPresenceType = if NoConfigs1 and p1.presence then ConvertToFoundationPresenceEnumFunction(p1.presence) else FoundationModule.Enums.UserPresence.None,
 		title = if UseUserDataValuesModuleResult.combinedName == "" then nil else UseUserDataValuesModuleResult.combinedName,
-		subtitle = if NoConfigs then Text else nil,
+		subtitle = Text1,
 		layoutMode = p1.layoutMode,
 		onActivated = p1.onActivated,
 		isTitleLoading = if p1.loadingState and p1.loadingState.title ~= nil then p1.loadingState.title else UseUserDataValuesModuleResult.isLoading,

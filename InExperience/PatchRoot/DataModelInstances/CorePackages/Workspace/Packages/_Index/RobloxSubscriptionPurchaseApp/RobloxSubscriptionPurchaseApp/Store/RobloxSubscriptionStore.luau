@@ -23,6 +23,7 @@ local function v8()
 	local Callback2 = nil
 	local Callback = nil
 	local OnCtaOverride = nil
+	local MembershipConfigSnapshot = nil
 	
 	return {
 		getPromptState = Signal,
@@ -89,6 +90,14 @@ local function v8()
 		getOnCtaOverride = function()
 			-- upvalues: OnCtaOverride (ref)
 			return OnCtaOverride
+		end,
+		setMembershipConfigSnapshot = function(Value)
+			-- upvalues: MembershipConfigSnapshot (ref)
+			MembershipConfigSnapshot = Value
+		end,
+		getMembershipConfigSnapshot = function()
+			-- upvalues: MembershipConfigSnapshot (ref)
+			return MembershipConfigSnapshot
 		end
 	}
 end

@@ -1,6 +1,7 @@
 ﻿local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local AvatarExperienceCommonModule = require(Parent.AvatarExperienceCommon)
 local FFlagParseHeadShapeFromAPIResponse = require(Parent.AvatarExperienceFlags).FFlagParseHeadShapeFromAPIResponse
-local Constants = require(Parent.AvatarExperienceCommon).Constants
+local Constants = AvatarExperienceCommonModule.Constants
 
 return function(List)
 	-- upvalues: Constants (copy), FFlagParseHeadShapeFromAPIResponse (copy)

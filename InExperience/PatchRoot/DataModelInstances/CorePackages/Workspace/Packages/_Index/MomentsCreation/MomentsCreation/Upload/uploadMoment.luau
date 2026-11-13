@@ -201,7 +201,7 @@ return function(Capture, Tbl, FeedRegistrationInfo, Localizations, UploadStore, 
 				CaptureDescriptorFields.creationSessionId = CreationSessionId
 				FireAnalyticsEventModule(EventNames.EditingFlowMomentPublished, CaptureDescriptorFields)
 				local Flag = false
-				local UploadCaptureResult = nil
+				local v2 = nil
 				local MomentsUploadPollIntervalSecondsFastInt = game:GetFastInt("MomentsUploadPollIntervalSeconds")
 				local MomentsUploadMaxPollAttemptsFastInt = game:GetFastInt("MomentsUploadMaxPollAttempts")
 				local Result1 = nil
@@ -214,17 +214,17 @@ return function(Capture, Tbl, FeedRegistrationInfo, Localizations, UploadStore, 
 						-- upvalues: P9 (upval), Result3_1 (copy)
 						return P9:CheckUploadCaptureStatusAsync(Result3_1)
 					end)
-					local NoFlag: boolean = not Flag or Success1 and Result1 ~= UploadCaptureResult
+					local Inverted: boolean = not Flag or Success1 and Result1 ~= v2
 					local NoSuccess1: boolean = not Success1 or Result1 ~= Enum.UploadCaptureResult.UploadPending
-					local v2 = i % 6 == 0
+					local v3 = i % 6 == 0
 					
 					if Success1 then
 						Flag = true
-						UploadCaptureResult = Result1
+						v2 = Result1
 					end
-					if i == 1 or NoFlag or NoSuccess1 or v2 then
+					if i == 1 or Inverted or NoSuccess1 or v3 then
 						if Success1 then
-							LoggerModule:debug("event=poll localId={} attempt={} pcallSuccess=true status={} assetId={} heartbeat={}", string.gsub(string.gsub(EnumNameFunction(Capture.LocalId) or "nil", "\r", "\\r"), "\n", "\\n"), tostring(i), string.gsub(string.gsub(EnumNameFunction(Result1) or "nil", "\r", "\\r"), "\n", "\\n"), string.gsub(string.gsub(EnumNameFunction(Result3) or "nil", "\r", "\\r"), "\n", "\\n"), (tostring(v2 and not NoFlag)))
+							LoggerModule:debug("event=poll localId={} attempt={} pcallSuccess=true status={} assetId={} heartbeat={}", string.gsub(string.gsub(EnumNameFunction(Capture.LocalId) or "nil", "\r", "\\r"), "\n", "\\n"), tostring(i), string.gsub(string.gsub(EnumNameFunction(Result1) or "nil", "\r", "\\r"), "\n", "\\n"), string.gsub(string.gsub(EnumNameFunction(Result3) or "nil", "\r", "\\r"), "\n", "\\n"), (tostring(v3 and not Inverted)))
 						else
 							LoggerModule:debug("event=poll localId={} attempt={} pcallSuccess=false status=pcall_error errorClass={}", string.gsub(string.gsub(EnumNameFunction(Capture.LocalId) or "nil", "\r", "\\r"), "\n", "\\n"), tostring(i), (typeof(Result1)))
 						end

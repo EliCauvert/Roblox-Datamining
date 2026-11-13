@@ -3,13 +3,17 @@ local Parent1 = Parent.Parent
 local Object = require(Parent1.LuauPolyfill).Object
 local DEV = require(Parent.utilities).DEV
 local ApolloClientModule = require(script.ApolloClient)
+local ApolloClient = ApolloClientModule.ApolloClient
+local MergeOptions = ApolloClientModule.mergeOptions
 local ObservableQueryModule = require(script.ObservableQuery)
+local ApplyNextFetchPolicy = ObservableQueryModule.applyNextFetchPolicy
+local ObservableQuery = ObservableQueryModule.ObservableQuery
 local _ = require(script.watchQueryOptions)
 local CoreModule = {
-	ApolloClient = ApolloClientModule.ApolloClient,
-	mergeOptions = ApolloClientModule.mergeOptions,
-	applyNextFetchPolicy = ObservableQueryModule.applyNextFetchPolicy,
-	ObservableQuery = ObservableQueryModule.ObservableQuery,
+	ApolloClient = ApolloClient,
+	mergeOptions = MergeOptions,
+	applyNextFetchPolicy = ApplyNextFetchPolicy,
+	ObservableQuery = ObservableQuery,
 	NetworkStatus = require(script.networkStatus).NetworkStatus
 }
 Object.assign(CoreModule, (require(script.types)))

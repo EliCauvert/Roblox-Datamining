@@ -1,9 +1,10 @@
 ﻿local CatalogNetworking = script:FindFirstAncestor("CatalogNetworking")
 local Parent = CatalogNetworking.Parent
+local SignalsModule = require(Parent.Signals)
 local PromiseModule = require(Parent.Promise)
 local _ = require(CatalogNetworking.Types)
 local FetchItemDetailsModule = require(CatalogNetworking.networkRequests.fetchItemDetails)
-local Signal, Signal2 = require(Parent.Signals).createSignal({})
+local Signal, Signal2 = SignalsModule.createSignal({})
 
 return {
 	getCache = Signal,

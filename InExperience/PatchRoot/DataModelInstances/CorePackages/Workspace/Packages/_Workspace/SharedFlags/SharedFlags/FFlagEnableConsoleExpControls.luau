@@ -1,5 +1,6 @@
 ﻿local Parent = script.Parent
+local FFlagEnableConsoleExpControlsIXPModule = require(Parent:WaitForChild("FFlagEnableConsoleExpControlsIXP"))
 local FFlagEnableInExperienceHandheldControlsModule = require(Parent:WaitForChild("FFlagEnableInExperienceHandheldControls"))
 local EnableConsoleExpControls684 = game:DefineFastFlag("EnableConsoleExpControls684", false)
 
-return require(Parent:WaitForChild("FFlagEnableConsoleExpControlsIXP")) or (FFlagEnableInExperienceHandheldControlsModule or EnableConsoleExpControls684)
+return FFlagEnableConsoleExpControlsIXPModule or (FFlagEnableInExperienceHandheldControlsModule or EnableConsoleExpControls684)

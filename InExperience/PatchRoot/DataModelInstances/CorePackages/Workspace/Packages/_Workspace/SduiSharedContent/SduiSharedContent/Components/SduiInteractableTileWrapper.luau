@@ -1,12 +1,15 @@
 ﻿local SduiSharedContent = script:FindFirstAncestor("SduiSharedContent")
 local Parent = SduiSharedContent.Parent
+local AppBloxModule = require(Parent.AppBlox)
 local CryoModule = require(Parent.Cryo)
 local ReactModule = require(Parent.React)
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
 local SduiTileOverflowMenuModule = require(SduiSharedContent.Components.SduiTileOverflowMenu)
-local GetOverflowMenuSignalStoreFunction = require(Parent.AppBlox).getOverflowMenuSignalStore
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
-local UseUidRefStringFunction = require(Parent.SduiCoreSystem).useUidRefString
+local GetOverflowMenuSignalStoreFunction = AppBloxModule.getOverflowMenuSignalStore
+local UseSignalStateFunction = SignalsReactModule.useSignalState
+local UseUidRefStringFunction = SduiCoreSystemModule.useUidRefString
 
 local function InteractableTileWrapperMenu(p1)
 	-- upvalues: UseSignalStateFunction (copy), ReactModule (copy), SduiTileOverflowMenuModule (copy)

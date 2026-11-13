@@ -3,6 +3,7 @@ local Parent1 = Parent.Parent
 local RoactModule = require(Parent1.Roact)
 local TModule = require(Parent1.t)
 local CryoModule = require(Parent1.Cryo)
+local BindingValidatorModule = require(Parent.Core.Utility.bindingValidator)
 local ControlStateModule = require(Parent.Core.Control.Enum.ControlState)
 local InteractableListItemModule = require(script.Parent.InteractableListItem)
 local SelectionModeModule = require(script.Parent.Enum.SelectionMode)
@@ -23,7 +24,7 @@ InteractableList.validateProps = TModule.strictInterface({
 	verticalAlignment = TModule.optional(TModule.enum(Enum.VerticalAlignment)),
 	sortOrder = TModule.optional(TModule.enum(Enum.SortOrder)),
 	automaticSize = TModule.optional(TModule.enum(Enum.AutomaticSize)),
-	itemSize = TModule.optional(TModule.union(TModule.UDim2, require(Parent.Core.Utility.bindingValidator)(TModule.UDim2)))
+	itemSize = TModule.optional(TModule.union(TModule.UDim2, BindingValidatorModule(TModule.UDim2)))
 })
 InteractableList.defaultProps = {
 	renderList = function(List, Callback, p1)

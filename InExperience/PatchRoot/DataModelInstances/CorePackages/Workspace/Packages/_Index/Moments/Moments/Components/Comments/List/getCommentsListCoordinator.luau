@@ -4,6 +4,7 @@ local MomentsCommentsModule = require(Parent.DataHydration.MomentsComments)
 local MomentsGetMomentsCommentsStoreModule = require(Parent.DataHydration.MomentsGetMomentsCommentsStore)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local MomentsGetMomentsReactionsStoreModule = require(Parent.DataHydration.MomentsGetMomentsReactionsStore)
+local SignalsModule = require(Parent.Signals)
 local GetCommentCollectionStoreModule = require(Moments.Components.Comments.GetCommentCollectionStore)
 local GetCommentSessionFiltersStoreModule = require(Moments.Components.Comments.GetCommentSessionFiltersStore)
 local GetCommentReactionsStoreModule = require(Moments.Stores.GetCommentReactionsStore)
@@ -29,7 +30,7 @@ local function getCommentDeletedCallback(p1, p2)
 	return if RecommendationSession == nil then nil else RecommendationSession.logCommentDelete
 end
 
-return require(Parent.Signals).createComputed(function(_)
+return SignalsModule.createComputed(function(_)
 	-- upvalues: MomentsGetMomentsCommentsStoreModule (copy), CreateCommentsListCoordinatorModule (copy), GetCommentCollectionStoreModule (copy), FFlagMomentsComments (copy), GetCommentReactionsStoreModule (copy), MomentsGetMomentsReactionsStoreModule (copy), GetCommentSessionFiltersStoreModule (copy), MomentsCommentsModule (copy), getCommentPostedCallback (copy), getCommentDeletedCallback (copy), FFlagMomentsCommentDeepLinks (copy), getPinnedCommentId (copy)
 	return CreateCommentsListCoordinatorModule({
 		collectionStore = GetCommentCollectionStoreModule(false),

@@ -1,9 +1,11 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
 local FoundationModule = require(Parent.Foundation)
+local FoundationCloudAssetsModule = require(Parent.FoundationCloudAssets)
+local LocalizationModule = require(Parent.Localization)
 local ReactModule = require(Parent.React)
 local CommentsListSkeletonViewModule = require(Moments.Components.Comments.List.CommentsListSkeletonView)
-local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local Button = FoundationModule.Button
 local Empty = FoundationModule.Empty
 local Text = FoundationModule.Text
@@ -18,7 +20,7 @@ local config = {
 	unavailable = "Feature.Moments.Label.CommentsUnavailable",
 	retry = "Feature.Moments.Action.Retry"
 }
-require(Parent.FoundationCloudAssets).preloadAsset("pictograms/chat")
+FoundationCloudAssetsModule.preloadAsset("pictograms/chat")
 
 return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), CommentsListSkeletonViewModule (copy), Empty (copy), IconSize (copy), View (copy), Text (copy), Button (copy), InputSize (copy), ButtonVariant (copy)

@@ -2,6 +2,7 @@
 local Parent = AvatarExperienceCatalog.Parent
 local AppCommonLibModule = require(Parent.AppCommonLib)
 local AvatarExperienceCommonModule = require(Parent.AvatarExperienceCommon)
+local Constants = AvatarExperienceCommonModule.Constants
 local ConstantsModule = require(AvatarExperienceCatalog.Constants)
 local SendAXCounterV2Function = require(Parent.AvatarExperienceAnalytics).sendAXCounterV2
 local SignalsModule = require(Parent.Signals)
@@ -13,7 +14,7 @@ local FFlagEnableSplitPane = require(Parent.SharedFlags).FFlagEnableSplitPane
 local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local FFlagAXMarketplaceBreakpointEstimateFix = AvatarExperienceFlagsModule.FFlagAXMarketplaceBreakpointEstimateFix
 local FFlagAXMarketplaceBreakpointMismatchCounter = AvatarExperienceFlagsModule.FFlagAXMarketplaceBreakpointMismatchCounter
-local LANDSCAPEUIWIDTHPERCENTAGE = AvatarExperienceCommonModule.Constants.LANDSCAPE_UI_WIDTH_PERCENTAGE
+local LANDSCAPEUIWIDTHPERCENTAGE = Constants.LANDSCAPE_UI_WIDTH_PERCENTAGE
 local CATALOGRESULTSHORIZONTALMARGIN = ConstantsModule.CATALOG_RESULTS_HORIZONTAL_MARGIN
 
 local function getInitialScreenSizeEstimate()

@@ -2017,8 +2017,8 @@ if Result3_1 then
 			return
 		end
 		Panel.Visible = true
-		local Index = nil
 		local Modes = nil
+		local Index = nil
 		
 		if #t._navigationStack > 0 then
 			local NavigationStackEntry = t._navigationStack[#t._navigationStack]

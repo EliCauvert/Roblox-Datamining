@@ -1,11 +1,13 @@
 ﻿local Parent = script:FindFirstAncestor("FriendsChat").Parent
 local ReactModule = require(Parent.React)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local UniversalAppPolicyModule = require(Parent.UniversalAppPolicy)
+local UserProfilesModule = require(Parent.UserProfiles)
 local FriendsChatTextMessageModule = require(script.Parent.Parent.Message.FriendsChatTextMessage)
 local BuildRowDisplayModule = require(script.Parent.Parent.Message.MessageDisplayStore.buildRowDisplay)
 local FriendsChatOsaAcknowledgementModule = require(script.Parent.FriendsChatOsaAcknowledgement)
-local FFlagFriendsChatDiscloseUpdateSecondVersion = require(Parent.SharedFlags).FFlagFriendsChatDiscloseUpdateSecondVersion
-local UserProfileStore = require(Parent.UserProfiles).Stores.UserProfileStore
+local FFlagFriendsChatDiscloseUpdateSecondVersion = SharedFlagsModule.FFlagFriendsChatDiscloseUpdateSecondVersion
+local UserProfileStore = UserProfilesModule.Stores.UserProfileStore
 
 local function getProfileDisplayName(p1, p2)
 	if p1 == nil then

@@ -104,19 +104,19 @@ local _ = function(p1, Name, Count)
 	return nil
 end
 
-local function resolvePath(Text: string, p2)
+local function resolvePath(Text1: string, p2)
 	-- upvalues: splitPath (copy), getChildPathEntries (copy)
-	if Text == nil or Text == "" or string.lower(Text) == "game" then
+	if Text1 == nil or Text1 == "" or string.lower(Text1) == "game" then
 		return p2.root, ""
 	end
-	local SplitPathResult = splitPath(Text)
+	local SplitPathResult = splitPath(Text1)
 	
 	if #SplitPathResult == 0 then
 		return p2.root, ""
 	end
-	local Text1: string = SplitPathResult[1]
-	local Match, Match2 = string.match(Text1, "^(.*)%[(%d+)%]$")
-	local Match1 = Match or Text1
+	local Text2: string = SplitPathResult[1]
+	local Match, Match2 = string.match(Text2, "^(.*)%[(%d+)%]$")
+	local Match1 = Match or Text2
 	local _25 = if Match1 == "%00" then "" else Match1:gsub("%%2E", "."):gsub("%%5B", "["):gsub("%%5D", "]"):gsub("%%25", "%%")
 	local _: number = tonumber(Match2) or 1
 	local Service = p2.getService(_25)
@@ -139,9 +139,9 @@ local function resolvePath(Text: string, p2)
 	until true
 	local LocalPlayer = nil
 	for i = 2, #SplitPathResult do
-		local Text2: string = SplitPathResult[i]
-		local Match3, Match2_1 = string.match(Text2, "^(.*)%[(%d+)%]$")
-		local Match3_1 = Match3 or Text2
+		local Text: string = SplitPathResult[i]
+		local Match3, Match2_1 = string.match(Text, "^(.*)%[(%d+)%]$")
+		local Match3_1 = Match3 or Text
 		local _251 = if Match3_1 == "%00" then "" else Match3_1:gsub("%%2E", "."):gsub("%%5B", "["):gsub("%%5D", "]"):gsub("%%25", "%%")
 		local Number: number = tonumber(Match2_1) or 1
 		

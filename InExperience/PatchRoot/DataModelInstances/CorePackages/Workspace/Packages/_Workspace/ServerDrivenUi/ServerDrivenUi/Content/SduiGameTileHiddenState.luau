@@ -1,9 +1,11 @@
 ﻿local GuiService = game:GetService("GuiService")
 local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
 local ReactModule = require(Parent.React)
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local View = require(Parent.Foundation).View
-local GetSduiComponentWrapperFunction = require(Parent.SduiCoreSystem).getSduiComponentWrapper
-local UseFocusGuiObjectFunction = require(Parent.ReactFocusNavigation).useFocusGuiObject
+local GetSduiComponentWrapperFunction = SduiCoreSystemModule.getSduiComponentWrapper
+local UseFocusGuiObjectFunction = ReactFocusNavigationModule.useFocusGuiObject
 
 return ReactModule.memo(function(p1)
 	-- upvalues: ReactModule (copy), UseFocusGuiObjectFunction (copy), GuiService (copy), GetSduiComponentWrapperFunction (copy), View (copy)

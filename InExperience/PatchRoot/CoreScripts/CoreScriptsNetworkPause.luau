@@ -10,6 +10,8 @@ while not LocalPlayer do
 	wait()
 	LocalPlayer = Players.LocalPlayer
 end
+local NetworkPauseNotificationModule = require(Modules.NetworkPauseNotification)
+local CreateFunction = require(CorePackages.Workspace.Packages.AppCommonLib).Create
 local RapidGameplayPauseIntervalMs = game:DefineFastInt("RapidGameplayPauseIntervalMs", 1000)
 local RapidGameplayPauseMinNotificationDurationMs = game:DefineFastInt("RapidGameplayPauseMinNotificationDurationMs", 500)
 local GameplayPauseShowDelayMs = game:DefineFastInt("GameplayPauseShowDelayMs", 300)
@@ -36,8 +38,8 @@ local ClockTime2 = -1e999
 local IsClockTimeBelow = false
 local DelayedThread = nil
 local DelayedThread1 = nil
-local NewResult = require(Modules.NetworkPauseNotification).new()
-local v1 = require(CorePackages.Workspace.Packages.AppCommonLib).Create("ScreenGui")({
+local NewNetworkPauseNotification = NetworkPauseNotificationModule.new()
+local v1 = CreateFunction("ScreenGui")({
 	Name = "RobloxNetworkPauseNotification",
 	OnTopOfCoreBlur = true,
 	DisplayOrder = 8,
@@ -64,11 +66,11 @@ local function reportPauseSessionAnalytics()
 end
 
 local function _(Focus)
-	-- upvalues: NewResult (copy), RunService (copy), ClockTime1 (ref), Count (ref), NewClockTime (ref)
+	-- upvalues: NewNetworkPauseNotification (copy), RunService (copy), ClockTime1 (ref), Count (ref), NewClockTime (ref)
 	if Focus then
-		NewResult:Show()
+		NewNetworkPauseNotification:Show()
 	else
-		NewResult:Hide()
+		NewNetworkPauseNotification:Hide()
 	end
 	RunService:SetRobloxGuiFocused(Focus)
 	
@@ -103,7 +105,7 @@ local _ = function(): boolean
 end
 
 local function enterStage(UNPAUSED1)
-	-- upvalues: UNPAUSED (ref), DelayedThread (ref), DelayedThread1 (ref), Frozen (copy), IsClockTimeBelow (ref), NewResult (copy), RunService (copy), ClockTime1 (ref), NewClockTime (ref), GameplayPauseShowDelayMs (copy), LocalPlayer (ref), v1 (copy), enterStage (copy), ClockTime2 (ref), RapidGameplayPauseIntervalMs (copy), Count (ref), RapidGameplayPauseMinNotificationDurationMs (copy)
+	-- upvalues: UNPAUSED (ref), DelayedThread (ref), DelayedThread1 (ref), Frozen (copy), IsClockTimeBelow (ref), NewNetworkPauseNotification (copy), RunService (copy), ClockTime1 (ref), NewClockTime (ref), GameplayPauseShowDelayMs (copy), LocalPlayer (ref), v1 (copy), enterStage (copy), ClockTime2 (ref), RapidGameplayPauseIntervalMs (copy), Count (ref), RapidGameplayPauseMinNotificationDurationMs (copy)
 	UNPAUSED = UNPAUSED1
 	
 	if DelayedThread ~= nil then
@@ -116,7 +118,7 @@ local function enterStage(UNPAUSED1)
 	end
 	if UNPAUSED1 == Frozen.UNPAUSED then
 		IsClockTimeBelow = false
-		NewResult:Hide()
+		NewNetworkPauseNotification:Hide()
 		RunService:SetRobloxGuiFocused(false)
 		
 		if ClockTime1 ~= nil then
@@ -139,7 +141,7 @@ local function enterStage(UNPAUSED1)
 	else
 		if UNPAUSED1 == Frozen.PAUSED then
 			IsClockTimeBelow = (os.clock() - ClockTime2) * 1000 < RapidGameplayPauseIntervalMs
-			NewResult:Show()
+			NewNetworkPauseNotification:Show()
 			RunService:SetRobloxGuiFocused(true)
 			
 			if ClockTime1 == nil then
@@ -211,6 +213,6 @@ local function enableNotification(Enabled)
 	end
 end
 
-NewResult:SetParent(v1)
+NewNetworkPauseNotification:SetParent(v1)
 GuiService.NetworkPausedEnabledChanged:Connect(enableNotification)
 game.Close:Connect(reportPauseSessionAnalytics)

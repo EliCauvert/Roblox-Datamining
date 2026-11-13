@@ -168,19 +168,21 @@ return function(Navigator, Callback, p1, p2)
 		local Index1 = State1.index
 		local Route1 = State1.routes and State1.routes[Index1]
 		local ActiveChildParams1 = if Route1 then getActiveChildParams(Route1) else State1.params
-		local Id = if ActiveChildParams1 then if ActiveChildParams1.conversation then ActiveChildParams1.conversation.id else ActiveChildParams1.conversationId else nil
+		local Id = if ActiveChildParams then if ActiveChildParams.conversation then ActiveChildParams.conversation.id else ActiveChildParams.conversationId else nil
+		local Id1 = if ActiveChildParams1 then if ActiveChildParams1.conversation then ActiveChildParams1.conversation.id else ActiveChildParams1.conversationId else nil
 		
-		if (if ActiveChildParams then if ActiveChildParams.conversation then ActiveChildParams.conversation.id else ActiveChildParams.conversationId else nil) ~= Id then
-			p3.props.setActiveConversationId(Id)
+		if Id ~= Id1 then
+			p3.props.setActiveConversationId(Id1)
 		end
 		if not (if FFlagSignalsNavDeferProjection then GetIsChatVisibleNow() else p4.chatIsVisible) then return end
 		local State2 = p4.navigation.state
+		local Route2 = State2.routes[State2.index]
 		local Navigation = p4.navigation
-		local State11 = Navigation.state
-		local Index2 = State11.index
-		local Route2 = State11.routes and State11.routes[Index2]
-		local ActiveChildNavigationOptions = if Route2 and Route2.routes then getActiveChildNavigationOptions((Navigation.getChildNavigation(Route2.key))) else RoactNavigationModule.getActiveChildNavigationOptions(Navigation)
-		local v1 = GetTopBarStoreModule(false).getScreenTopBar(State2.routes[State2.index].routeName)()
+		local State3 = Navigation.state
+		local Index2 = State3.index
+		local Route11 = State3.routes and State3.routes[Index2]
+		local ActiveChildNavigationOptions = if Route11 and Route11.routes then getActiveChildNavigationOptions((Navigation.getChildNavigation(Route11.key))) else RoactNavigationModule.getActiveChildNavigationOptions(Navigation)
+		local v1 = GetTopBarStoreModule(false).getScreenTopBar(Route2.routeName)()
 		
 		if v1.backButtonEnabled ~= nil then
 			p3.props.setBackButtonEnabled(v1.backButtonEnabled)

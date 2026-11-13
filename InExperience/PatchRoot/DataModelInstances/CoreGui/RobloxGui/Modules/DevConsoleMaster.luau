@@ -13,10 +13,20 @@ local DevConsoleWindowModule = require(Components.DevConsoleWindow)
 local DataProviderModule = require(Components.DataProvider)
 local MainViewLogModule = require(Components.Log.MainViewLog)
 local MainViewMemoryModule = require(Components.Memory.MainViewMemory)
+local MainViewNetworkModule = require(Components.Network.MainViewNetwork)
+local MainViewScriptsModule = require(Components.Scripts.MainViewScripts)
+local MainViewDataStoresModule = require(Components.DataStores.MainViewDataStores)
+local MainViewServerStatsModule = require(Components.ServerStats.MainViewServerStats)
+local MainViewActionBindingsModule = require(Components.ActionBindings.MainViewActionBindings)
+local MainViewServerJobsModule = require(Components.ServerJobs.MainViewServerJobs)
+local MainViewMicroProfilerModule = require(Components.MicroProfiler.MainViewMicroProfiler)
 local MainViewScriptProfilerModule = require(Components.ScriptProfiler.MainViewScriptProfiler)
+local MainViewDebugVisualizationsModule = require(Components.DebugVisualizations.MainViewDebugVisualizations)
 local MainViewLuauHeapModule = require(Components.LuauHeap.MainViewLuauHeap)
 local MainViewVoiceChatModule = require(Components.VoiceChat.MainViewVoiceChat)
+local MainViewVoiceDebugModule = require(Components.VoiceDebug.MainViewVoiceDebug)
 local GetFFlagVoiceDebugConsoleV2Module = require(Components.VoiceDebug.GetFFlagVoiceDebugConsoleV2)
+local MainViewRequestOrchestratorModule = require(Components.RequestOrchestrator.MainViewRequestOrchestrator)
 local RCCProfilerDataCompleteListenerModule = require(Components.MicroProfiler.RCCProfilerDataCompleteListener)
 local GetClientReplicatorModule = require(DevConsole.Util.getClientReplicator)
 local MainViewModule = require(DevConsole.Reducers.MainView)
@@ -45,35 +55,17 @@ local config = {
 	Network = {
 		layoutOrder = 3,
 		hasClientServer = true,
-		tab = require(Components.Network.MainViewNetwork)
+		tab = MainViewNetworkModule
 	},
-	Scripts = {
-		layoutOrder = 4,
-		tab = require(Components.Scripts.MainViewScripts)
-	},
-	DataStores = {
-		layoutOrder = 5,
-		tab = require(Components.DataStores.MainViewDataStores)
-	},
-	ServerStats = {
-		layoutOrder = 6,
-		tab = require(Components.ServerStats.MainViewServerStats)
-	},
-	ActionBindings = {
-		layoutOrder = 7,
-		tab = require(Components.ActionBindings.MainViewActionBindings)
-	},
-	ServerJobs = {
-		layoutOrder = 8,
-		tab = require(Components.ServerJobs.MainViewServerJobs)
-	},
-	MicroProfiler = {
-		layoutOrder = 9,
-		tab = require(Components.MicroProfiler.MainViewMicroProfiler)
-	},
+	Scripts = { layoutOrder = 4, tab = MainViewScriptsModule },
+	DataStores = { layoutOrder = 5, tab = MainViewDataStoresModule },
+	ServerStats = { layoutOrder = 6, tab = MainViewServerStatsModule },
+	ActionBindings = { layoutOrder = 7, tab = MainViewActionBindingsModule },
+	ServerJobs = { layoutOrder = 8, tab = MainViewServerJobsModule },
+	MicroProfiler = { layoutOrder = 9, tab = MainViewMicroProfilerModule },
 	DebugVisualizations = {
 		layoutOrder = 10,
-		tab = require(Components.DebugVisualizations.MainViewDebugVisualizations)
+		tab = MainViewDebugVisualizationsModule
 	},
 	ScriptProfiler = if ScriptProfilerEngineFeature then { layoutOrder = 11, tab = MainViewScriptProfilerModule } else nil,
 	LuauHeap = { layoutOrder = 12, tab = MainViewLuauHeapModule }
@@ -100,7 +92,7 @@ local config2 = {
 	},
 	VoiceDebug = {
 		layoutOrder = 14,
-		tab = require(Components.VoiceDebug.MainViewVoiceDebug),
+		tab = MainViewVoiceDebugModule,
 		isEnabled = function()
 			-- upvalues: v1 (ref)
 			return v1
@@ -108,7 +100,7 @@ local config2 = {
 	},
 	RequestOrchestrator = {
 		layoutOrder = 100,
-		tab = require(Components.RequestOrchestrator.MainViewRequestOrchestrator),
+		tab = MainViewRequestOrchestratorModule,
 		isEnabled = function()
 			-- upvalues: DevConsoleRequestOrchestratorTab2 (copy)
 			return DevConsoleRequestOrchestratorTab2

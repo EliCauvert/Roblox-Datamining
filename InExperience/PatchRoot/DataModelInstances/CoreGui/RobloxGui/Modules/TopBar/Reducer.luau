@@ -4,6 +4,7 @@ local CrossExperienceVoiceModule = require(CorePackages.Workspace.Packages.Cross
 local CrossExperienceModule = require(CorePackages.Workspace.Packages.CrossExperience)
 local CreatePersistenceMiddlewareFunction = CrossExperienceModule.Middlewares.createPersistenceMiddleware
 local FFlagTopBarSignalizeHealthBar = require(CorePackages.Workspace.Packages.CoreGuiCommon).Flags.FFlagTopBarSignalizeHealthBar
+local GetFFlagEnableCrossExpVoiceFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagEnableCrossExpVoice
 local Parent = script.Parent
 local FFlagTopBarDeprecateChatRoduxModule = require(Parent.Flags.FFlagTopBarDeprecateChatRodux)
 local CoreGuiEnabledModule = require(script.CoreGuiEnabled)
@@ -19,7 +20,7 @@ local config = {
 	gameInfo = require(script.GameInfo)
 }
 
-if require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagEnableCrossExpVoice() then
+if GetFFlagEnableCrossExpVoiceFunction() then
 	local CrossExperienceVoice = nil
 	local RestoreResult = CreatePersistenceMiddlewareFunction({
 		storeKey = CrossExperienceModule.Constants.STORAGE_CEV_STORE_KEY

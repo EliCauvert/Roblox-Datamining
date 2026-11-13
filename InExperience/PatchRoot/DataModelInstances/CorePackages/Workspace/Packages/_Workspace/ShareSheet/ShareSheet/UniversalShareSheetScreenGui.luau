@@ -1,6 +1,7 @@
 ﻿local Parent = script:FindFirstAncestor("ShareSheet").Parent
 local AppCommonLibModule = require(Parent.AppCommonLib)
 local FoundationModule = require(Parent.Foundation)
+local InExperienceLocalesModule = require(Parent.InExperienceLocales)
 local LocalizationModule = require(Parent.Localization)
 local ReactModule = require(Parent.React)
 local ReactRobloxModule = require(Parent.ReactRoblox)
@@ -8,7 +9,7 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local FFlagShareSheetFoundationDeviceModule = require(script.Parent.Flags.FFlagShareSheetFoundationDevice)
 local UniversalShareSheetHostModule = require(script.Parent.Components.UniversalShareSheet.UniversalShareSheetHost)
 local GetLocalizationServiceStoreFunction = LocalizationModule.GetLocalizationServiceStore
-local Localization = require(Parent.InExperienceLocales).Localization
+local Localization = InExperienceLocalesModule.Localization
 local LocalizationProvider = LocalizationModule.LocalizationProvider
 
 local function UniversalShareSheetScreenGui()

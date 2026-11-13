@@ -1,7 +1,8 @@
 ﻿local Parent = script:FindFirstAncestor("GameInvite").Parent
+local DataHydrationModule = require(Parent.DataHydration)
 local UserModel = require(Parent.UserLib).Models.UserModel
 local IsInThisServerModule = require(script.Parent.isInThisServer)
-local InGame = require(Parent.DataHydration).Presence.PresenceEnums.PresenceType.InGame
+local InGame = DataHydrationModule.Presence.PresenceEnums.PresenceType.InGame
 
 return function(p1, p2, p3): boolean
 	-- upvalues: InGame (copy), IsInThisServerModule (copy), UserModel (copy)

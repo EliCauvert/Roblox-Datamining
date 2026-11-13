@@ -1,10 +1,11 @@
 ﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
 local Parent = GenericAbuseReporting.Parent
+local CryoModule = require(Parent.Cryo)
 local ReactModule = require(Parent.React)
 local ReactRobloxModule = require(Parent.Dev.ReactRoblox)
 local FoundationProvider = require(Parent.Foundation).FoundationProvider
 local MockProvidersModule = require(script.Parent.MockProviders)
-local Dictionary = require(Parent.Cryo).Dictionary
+local Dictionary = CryoModule.Dictionary
 local LoggerModule = require(GenericAbuseReporting.Logger)
 LoggerModule:addSink({
 	maxLevel = LoggerModule.Levels.fromString("trace"),

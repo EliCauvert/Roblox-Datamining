@@ -1,7 +1,10 @@
 ﻿local Parent = script:FindFirstAncestor("FriendsChat").Parent
 local AppChatNetworkingModule = require(Parent.AppChatNetworking)
 local ConversationChannelsModule = require(Parent.AppChat.ConversationChannels)
+local CreateConversationFromFriendPlaceholderModule = require(Parent.AppChat.createConversationFromFriendPlaceholder)
+local FetchConversationDetailsToSignalsModule = require(Parent.AppChat.fetchConversationDetailsToSignals)
 local FetchConversationListPageToSignalsModule = require(Parent.AppChat.fetchConversationListPageToSignals)
+local GetConversationTitleModule = require(Parent.AppChat.getConversationTitle)
 local GetConversationStoreModule = require(Parent.AppChat.GetConversationStore)
 local Logger = require(Parent.AppChat).Components.ChatConversation.logger
 
@@ -150,14 +153,14 @@ end
 
 return {
 	ConversationSource = ConversationChannelsModule.Source,
-	createConversationFromFriendPlaceholder = require(Parent.AppChat.createConversationFromFriendPlaceholder),
-	fetchConversationDetailsToSignals = require(Parent.AppChat.fetchConversationDetailsToSignals),
+	createConversationFromFriendPlaceholder = CreateConversationFromFriendPlaceholderModule,
+	fetchConversationDetailsToSignals = FetchConversationDetailsToSignalsModule,
 	fetchConversationListPageToSignals = FetchConversationListPageToSignalsModule,
 	getConversationStore = function()
 		-- upvalues: GetConversationStoreModule (copy)
 		return GetConversationStoreModule(false)
 	end,
-	getConversationTitle = require(Parent.AppChat.getConversationTitle),
+	getConversationTitle = GetConversationTitleModule,
 	isFriendPlaceholder = function(Text: string, p2): boolean
 		-- upvalues: GetConversationStoreModule (copy), ConversationChannelsModule (copy)
 		if Text == nil or Text == "" then

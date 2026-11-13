@@ -3,11 +3,12 @@ local Parent1 = Parent.Parent
 local UserInputService = game:GetService("UserInputService")
 local ReactModule = require(Parent1.React)
 local ReactOtterModule = require(Parent1.ReactOtter)
+local ReactUtilsModule = require(Parent1.ReactUtils)
 local IsPointWithinBoundsModule = require(Parent.Utils.isPointWithinBounds)
 local UseMotorFunction = ReactOtterModule.useMotor
 local UseCallbackFunction = ReactModule.useCallback
 local UseEffectFunction = ReactModule.useEffect
-local UseEventConnectionFunction = require(Parent1.ReactUtils).useEventConnection
+local UseEventConnectionFunction = ReactUtilsModule.useEventConnection
 local UseRefFunction = ReactModule.useRef
 local UseStateFunction = ReactModule.useState
 local config = { dampingRatio = 1, frequency = 4 }

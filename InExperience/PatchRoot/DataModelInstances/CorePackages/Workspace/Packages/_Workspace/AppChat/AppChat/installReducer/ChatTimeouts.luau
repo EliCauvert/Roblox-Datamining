@@ -1,6 +1,8 @@
 ﻿local AppChat = script:FindFirstAncestor("AppChat")
 local Parent = AppChat.Parent
 local CryoModule = require(Parent.Cryo)
+local RemovedConversationModule = require(AppChat.Conversations.Actions.RemovedConversation)
+local CurrentConversationTimeoutEndedModule = require(AppChat.Conversations.Actions.CurrentConversationTimeoutEnded)
 local SerializeChatTimeoutRangeModule = require(AppChat.Utils.serializeChatTimeoutRange)
 local FFlagAppChatReactiveFeatureRestrictions = require(Parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
 
@@ -41,13 +43,13 @@ return (require(Parent.Rodux).createReducer({ userTimeout = {}, byConversationId
 		end
 		return JoinResult
 	end,
-	[require(AppChat.Conversations.Actions.RemovedConversation).name] = function(p2, p3)
+	[RemovedConversationModule.name] = function(p2, p3)
 		-- upvalues: CryoModule (copy)
 		return CryoModule.Dictionary.join(p2, {
 			byConversationId = CryoModule.Dictionary.join(p2.byConversationId, { [p3.conversationId] = CryoModule.None })
 		})
 	end,
-	[require(AppChat.Conversations.Actions.CurrentConversationTimeoutEnded).name] = function(JoinResult, p2)
+	[CurrentConversationTimeoutEndedModule.name] = function(JoinResult, p2)
 		-- upvalues: FFlagAppChatReactiveFeatureRestrictions (copy), CryoModule (copy)
 		local JoinResult1 = JoinResult
 		local UnixTimestamp = DateTime.now().UnixTimestamp

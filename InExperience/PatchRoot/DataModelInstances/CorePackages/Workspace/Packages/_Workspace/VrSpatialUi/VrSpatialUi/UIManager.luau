@@ -27,8 +27,9 @@ local SpatialUIEnablePanelsRefocusing = game:DefineFastFlag("SpatialUIEnablePane
 local SpatialUIDisableBottomBarFading = game:DefineFastFlag("SpatialUIDisableBottomBarFading", false)
 local SpatialUIDisableBottomBarInteractionOnAnimating = game:DefineFastFlag("SpatialUIDisableBottomBarInteractionOnAnimating", false)
 local VRSpatialUIGuardNilHeadScale = game:DefineFastFlag("VRSpatialUIGuardNilHeadScale", false)
+local _CFrame: CFrame = if IsInExperienceUIVREnabled then CFrame.new(0, 0, math.min(math.max(SpatialUIPanelDistance, 0), 500) / 100 * -1 * 3.3333333333333335) else CFrame.new(-0.46666666666666673, -0.8, -2.1333333333333333)
 local _Vector2 = Vector2.new(2.666666666666667, 1.866666666666667)
-local DefaultGroupHeadRotation = (if IsInExperienceUIVREnabled then CFrame.new(0, 0, math.min(math.max(SpatialUIPanelDistance, 0), 500) / 100 * -1 * 3.3333333333333335) else CFrame.new(-0.46666666666666673, -0.8, -2.1333333333333333)) * (if IsInExperienceUIVREnabled then CFrame.Angles(0, 0, 0) else CFrame.Angles(-0.3141592653589793, 0.17453292519943295, 0))
+local DefaultGroupHeadRotation: CFrame = _CFrame * (if IsInExperienceUIVREnabled then CFrame.Angles(0, 0, 0) else CFrame.Angles(-0.3141592653589793, 0.17453292519943295, 0))
 
 local function _(CF): CFrame
 	local Rx, Ry, _ = CF:ToOrientation()

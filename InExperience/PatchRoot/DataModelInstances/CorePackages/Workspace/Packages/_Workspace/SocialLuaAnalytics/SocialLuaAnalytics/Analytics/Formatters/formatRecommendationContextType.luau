@@ -1,6 +1,7 @@
 ﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
 local RecommendationContextTypes = require(Parent.Analytics.Enums).RecommendationContextTypes
-local FFlagSocialCarouselMigrateRecommendations = require(Parent.Parent.SharedFlags).FFlagSocialCarouselMigrateRecommendations
+local FFlagSocialCarouselMigrateRecommendations = require(Parent1.SharedFlags).FFlagSocialCarouselMigrateRecommendations
 
 return function(p1)
 	-- upvalues: FFlagSocialCarouselMigrateRecommendations (copy), RecommendationContextTypes (copy)

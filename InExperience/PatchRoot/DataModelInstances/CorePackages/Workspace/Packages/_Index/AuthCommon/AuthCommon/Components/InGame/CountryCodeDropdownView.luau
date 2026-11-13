@@ -1,12 +1,13 @@
 ﻿local AuthCommon = script:FindFirstAncestor("AuthCommon")
 local Parent = AuthCommon.Parent
 local ReactModule = require(Parent.React)
+local Colors = require(Parent.Style).Colors
 local FunctionalCountryCodeSelectorButtonModule = require(AuthCommon.Components.FunctionalCountryCodeSelectorButton)
 local _ = require(AuthCommon.Common.Types)
 local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
 local GetImageDataFunction = require(Parent.RobloxAppAssets).GetImageData
 local ImageSetLabel = require(Parent.UIBlox).Core.ImageSet.ImageSetLabel
-local Graphite = require(Parent.Style).Colors.Graphite
+local Graphite = Colors.Graphite
 
 return function(p1)
 	-- upvalues: UseStyleFunction (copy), ReactModule (copy), FunctionalCountryCodeSelectorButtonModule (copy), Graphite (copy), ImageSetLabel (copy), GetImageDataFunction (copy)

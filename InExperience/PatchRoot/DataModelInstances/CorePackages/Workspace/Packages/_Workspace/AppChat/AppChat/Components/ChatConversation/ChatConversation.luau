@@ -221,10 +221,10 @@ function ChatConversation.init(p1)
 		})
 	end
 	
-	p1.onSendChat = MemoizeFunction(function(Callback, p2, Callback3, p3, p4, Callback1, Callback2, p5)
+	p1.onSendChat = MemoizeFunction(function(Callback2, p2, Callback3, p3, p4, Callback1, Callback, p5)
 		-- upvalues: NewResult (upval), FFlagAppChatPerfTrackingModule (upval), FFlagAppChatMessageTTIMilestonesModule (upval), AppChatPerfTrackerModule (upval), FFlagAppChatSignalsReplyStoreModule (upval), p1 (copy), StatusCodes (upval), SendMessageErrorModule (upval), ChatConversationTelemetryEventsModule (upval), _DateTime (upval)
 		return function(p6)
-			-- upvalues: p4 (copy), NewResult (upval), p2 (ref), Callback1 (copy), p3 (copy), Callback2 (copy), FFlagAppChatPerfTrackingModule (upval), FFlagAppChatMessageTTIMilestonesModule (upval), AppChatPerfTrackerModule (upval), FFlagAppChatSignalsReplyStoreModule (upval), p1 (upval), Callback (copy), StatusCodes (upval), Callback3 (copy), SendMessageErrorModule (upval), p5 (copy), ChatConversationTelemetryEventsModule (upval), _DateTime (upval)
+			-- upvalues: p4 (copy), NewResult (upval), p2 (ref), Callback1 (copy), p3 (copy), Callback (copy), FFlagAppChatPerfTrackingModule (upval), FFlagAppChatMessageTTIMilestonesModule (upval), AppChatPerfTrackerModule (upval), FFlagAppChatSignalsReplyStoreModule (upval), p1 (upval), Callback2 (copy), StatusCodes (upval), Callback3 (copy), SendMessageErrorModule (upval), p5 (copy), ChatConversationTelemetryEventsModule (upval), _DateTime (upval)
 			if p4 and p4.source == "friends" then
 				NewResult:info("Creating a conversation for friend conversation {} via onSendChat", p2)
 				local v1, v2 = Callback1(p2, p3):await()
@@ -236,7 +236,7 @@ function ChatConversation.init(p1)
 				end
 				NewResult:debug("Created conversation {} for friend conversation {} via onSendChat", v2.id, p2)
 				p2 = v2.id
-				Callback2(v2.id)
+				Callback(v2.id)
 			end
 			NewResult:info("Sending message '{}' to conversationId {} via onSendChat", p6, p2)
 			
@@ -248,7 +248,7 @@ function ChatConversation.init(p1)
 					AppChatPerfTrackerModule.start(AppChatPerfTrackerModule.Events.MessageSendToFinalRender, { conversationId = tostring(p2) })
 				end
 			end
-			local CallbackResult = Callback(p2, p6, if FFlagAppChatSignalsReplyStoreModule and p1.props.replyingToMessageId then { id = p1.props.replyingToMessageId } elseif FFlagAppChatSignalsReplyStoreModule then nil else p1.props.replyingToMessage)
+			local CallbackResult = Callback2(p2, p6, if FFlagAppChatSignalsReplyStoreModule and p1.props.replyingToMessageId then { id = p1.props.replyingToMessageId } elseif FFlagAppChatSignalsReplyStoreModule then nil else p1.props.replyingToMessage)
 			
 			if CallbackResult then
 				CallbackResult:andThen(function(Result)

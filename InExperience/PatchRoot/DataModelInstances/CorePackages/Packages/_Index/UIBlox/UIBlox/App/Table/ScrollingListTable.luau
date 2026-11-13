@@ -1,9 +1,10 @@
 ﻿local Parent = script.Parent.Parent.Parent
+local Core = Parent.Core
 local Parent1 = Parent.Parent
 local ReactModule = require(Parent1.React)
 local VirtualizedList = require(Parent1.VirtualizedList).VirtualizedList
 local CryoModule = require(Parent1.Cryo)
-local WithStyleModule = require(Parent.Core.Style.withStyle)
+local WithStyleModule = require(Core.Style.withStyle)
 local config = { selectable = true, size = UDim2.fromScale(1, 1) }
 
 return function(p1)

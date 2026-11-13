@@ -6,13 +6,12 @@ local ShareGame = Modules.Settings.Pages.ShareGame
 local RoactModule = require(CorePackages.Packages.Roact)
 local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
 local HttpRequestModule = require(Modules.Common.httpRequest)
+local ShareGamePageFrameModule = require(ShareGame.Components.ShareGamePageFrame)
 local ConstantsModule = require(ShareGame.Constants)
 local FetchUserFriendsModule = require(ShareGame.Thunks.FetchUserFriends)
 local ClosePageModule = require(ShareGame.Actions.ClosePage)
 local ShareGameContainer = RoactModule.PureComponent:extend("ShareGameContainer")
-ShareGameContainer.defaultProps = {
-	skeletonComponent = require(ShareGame.Components.ShareGamePageFrame)
-}
+ShareGameContainer.defaultProps = { skeletonComponent = ShareGamePageFrameModule }
 
 function ShareGameContainer.init(p1)
 	p1.props.reFetch(p1.props.requestImpl)

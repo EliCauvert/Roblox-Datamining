@@ -2,7 +2,12 @@
 local Parent = ServerDrivenUi.Parent
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
-local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local StatusIndicator = FoundationModule.StatusIndicator
+local StatusIndicatorShape = FoundationModule.Enums.StatusIndicatorShape
+local StatusIndicatorSize = FoundationModule.Enums.StatusIndicatorSize
+local StatusIndicatorVariant = FoundationModule.Enums.StatusIndicatorVariant
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local SduiTileFooterModule = require(ServerDrivenUi.Content.SduiTileFooter)
 local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
@@ -15,6 +20,8 @@ local DataHydrationModule = require(Parent.DataHydration)
 local _ = require(Parent.DataHydration.UserProfile)
 local GetAndFetchUserNamesByUserIdsFunction = DataHydrationModule.UserProfile.getAndFetchUserNamesByUserIds
 local FFlagHomeFriendNamesUseUserProfileHydration = require(Parent.SharedFlags).FFlagHomeFriendNamesUseUserProfileHydration
+local FFlagSduiActiveFriendsFooterTreatment = require(Parent.SharedFlags).FFlagSduiActiveFriendsFooterTreatment
+local FFlagSduiGameTileFixFacePileZIndex = require(Parent.SharedFlags).FFlagSduiGameTileFixFacePileZIndex
 
 local function _(p1, p2)
 	local UserIds = {}
@@ -32,6 +39,21 @@ local function getDisplayText(UseMemoResult, Separator: string, Smallest): strin
 		DisplayNames[i] = UseMemoResult[i].displayName
 	end
 	return table.concat(DisplayNames, Separator)
+end
+
+local function getFormattedText(Entry, Count: number, p3)
+	if Count == 0 then
+		return nil
+	end
+	local TextFormatOne = if Count == 1 then p3.textFormatOne elseif Count == 2 then p3.textFormatTwo else p3.textFormatMany
+	
+	if TextFormatOne and TextFormatOne ~= "" then
+		local DisplayName = if Entry[1] then Entry[1].displayName else nil
+		
+		return if DisplayName or not TextFormatOne:find("{name}", 1, true) then TextFormatOne:gsub("{(%w+)}", { name = DisplayName or "", count = tostring(Count - 1) }) else nil
+	else
+		return nil
+	end
 end
 
 local function alphabeticalSort(A, B): boolean
@@ -79,7 +101,7 @@ local function getSortedFriendDisplayNames(UseMemoResult, p3)
 end
 
 return ReactModule.memo(function(p4)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), SduiParsers (copy), SduiActionType (copy), UseLocalizationFunction (copy), SduiInGameFriendsDataModule (copy), SignalsReactModule (copy), FFlagHomeFriendNamesUseUserProfileHydration (copy), UseUserProfilesFetchFunction (copy), UserProfilesModule (copy), GetAndFetchUserNamesByUserIdsFunction (copy), getSortedFriendNames (copy), getSortedFriendDisplayNames (copy), getDisplayText (copy), SduiTileFooterModule (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), SduiParsers (copy), SduiActionType (copy), UseLocalizationFunction (copy), SduiInGameFriendsDataModule (copy), SignalsReactModule (copy), FFlagHomeFriendNamesUseUserProfileHydration (copy), UseUserProfilesFetchFunction (copy), UserProfilesModule (copy), GetAndFetchUserNamesByUserIdsFunction (copy), getSortedFriendNames (copy), getSortedFriendDisplayNames (copy), FFlagSduiActiveFriendsFooterTreatment (copy), getFormattedText (copy), getDisplayText (copy), FFlagSduiGameTileFixFacePileZIndex (copy), StatusIndicator (copy), StatusIndicatorVariant (copy), StatusIndicatorShape (copy), StatusIndicatorSize (copy), SduiTileFooterModule (copy)
 	local LayoutOrder = p4.layoutOrder
 	local AnchorPoint = p4.anchorPoint
 	local AutomaticSize = p4.automaticSize
@@ -144,7 +166,7 @@ return ReactModule.memo(function(p4)
 		UseSignalStateResult1
 	})
 	local Smallest = math.min(p4.maxAvatars or 3, #UseMemoResult1)
-	local DisplayText = getDisplayText(UseMemoResult1, UseLocalizationResult.separator, Smallest)
+	local FormattedText = FFlagSduiActiveFriendsFooterTreatment and getFormattedText(UseMemoResult1, #UseMemoResult, p4) or getDisplayText(UseMemoResult1, UseLocalizationResult.separator, Smallest)
 	local UserIds = {}
 	
 	for i = 1, Smallest do
@@ -159,7 +181,8 @@ return ReactModule.memo(function(p4)
 			BackgroundColor3 = UseTokensResult.Color.Content.Muted.Color3,
 			Image = `rbxthumb://type=AvatarHeadShot&id={UserIds[i1]}&w=100&h=100`,
 			Size = UDim2.fromOffset(IconWidth, IconWidth),
-			Position = UDim2.fromOffset((i1 - 1) * IconWidth / 2, 0)
+			Position = UDim2.fromOffset((i1 - 1) * IconWidth / 2, 0),
+			ZIndex = if FFlagSduiGameTileFixFacePileZIndex then Smallest - i1 + 1 else nil
 		}, {
 			BorderRadius = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0.5, 0) }),
 			Border = if p4.hideBorder then nil else ReactModule.createElement("UIStroke", {
@@ -167,7 +190,14 @@ return ReactModule.memo(function(p4)
 				Thickness = 1,
 				ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
 				Color = UseTokensResult.Color.System.Emphasis.Color3
-			})
+			}),
+			PresenceDot = if FFlagSduiActiveFriendsFooterTreatment and p4.showPresenceDot then ReactModule.createElement(StatusIndicator, {
+				variant = StatusIndicatorVariant.Success,
+				shape = StatusIndicatorShape.Circle,
+				size = StatusIndicatorSize.XSmall,
+				AnchorPoint = Vector2.new(1, 1),
+				Position = UDim2.fromScale(1, 1)
+			}) else nil
 		})
 	end
 	return ReactModule.createElement(SduiTileFooterModule, {
@@ -178,8 +208,8 @@ return ReactModule.memo(function(p4)
 		layoutOrder = LayoutOrder,
 		zIndex = ZIndex,
 		sduiContext = p4.sduiContext,
-		textIconGap = UseTokensResult.Gap.Small,
-		leftText = DisplayText,
+		textIconGap = FFlagSduiActiveFriendsFooterTreatment and p4.textIconGap or UseTokensResult.Gap.Small,
+		leftText = FormattedText,
 		leftTextFlexMode = Enum.UIFlexMode.Shrink,
 		leftIconComponent = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,

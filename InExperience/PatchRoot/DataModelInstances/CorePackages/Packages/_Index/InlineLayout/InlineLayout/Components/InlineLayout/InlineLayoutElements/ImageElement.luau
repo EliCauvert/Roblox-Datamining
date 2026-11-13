@@ -1,7 +1,8 @@
 ﻿local Parent = script:FindFirstAncestor("Components").Parent.Parent
+local FoundationModule = require(Parent.Foundation)
 local DashModule = require(Parent.Dash)
 local RenderableInlineElementModule = require(script:FindFirstAncestor("InlineLayoutElements").RenderableInlineElement)
-local Image = require(Parent.Foundation).Image
+local Image = FoundationModule.Image
 
 local function mapProps(p1)
 	-- upvalues: DashModule (copy)

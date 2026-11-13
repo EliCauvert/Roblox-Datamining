@@ -1,13 +1,14 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
 local LocalizationService = game:GetService("LocalizationService")
+local FoundationModule = require(Parent.Foundation)
 local NumberLocalization = require(Parent.Localization).NumberLocalization
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local GetCreatorCreditStoreFunction = require(Parent.DataHydration.CreatorCredit).getCreatorCreditStore
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
-local IconName = require(Parent.Foundation).Enums.IconName
+local IconName = FoundationModule.Enums.IconName
 
 local function _(Value: number)
 	-- upvalues: NumberLocalization (copy), LocalizationService (copy)

@@ -1,11 +1,12 @@
 ﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local LoadingIndicatorModule = require(script.Parent.LoadingIndicator)
 local List = FoundationModule.List
 local View = FoundationModule.View
 local InputSize = FoundationModule.Enums.InputSize
-local SubagentTaskStatus = require(Parent.DataHydration.CreatorAgentChat).SubagentTaskStatus
+local SubagentTaskStatus = CreatorAgentChatModule.SubagentTaskStatus
 
 local function createTrailingIndicator(p1, TestId)
 	-- upvalues: SubagentTaskStatus (copy), ReactModule (copy), View (copy), LoadingIndicatorModule (copy)

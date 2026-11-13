@@ -46,7 +46,7 @@ return ReactModule.memo(function(Frame)
 			Padding = UDim.new(0, XSmall)
 		})
 	}
-	local Total = 0
+	local NewSize = 0
 	
 	for LayoutOrder, icon in Icons do
 		config[`Icon{LayoutOrder}`] = ReactModule.createElement(Icon, {
@@ -55,7 +55,7 @@ return ReactModule.memo(function(Frame)
 			size = IconSize.Small,
 			style = ContentColorStyle
 		})
-		Total += Size400 + XSmall
+		NewSize += Size400 + XSmall
 	end
 	if v2 then
 		config.BadgeText = ReactModule.createElement("TextLabel", {
@@ -73,8 +73,8 @@ return ReactModule.memo(function(Frame)
 		}, {
 			UISizeConstraint = ReactModule.createElement("UISizeConstraint", {
 				MaxSize = Frame.maxWidthBinding:map(function(p1)
-					-- upvalues: Size200 (copy), Total (ref)
-					local SizeDelta = p1 - 2 * Size200 - Total
+					-- upvalues: Size200 (copy), NewSize (ref)
+					local SizeDelta = p1 - 2 * Size200 - NewSize
 					
 					return if SizeDelta > 0 then Vector2.new(SizeDelta, 1e999) else nil
 				end)

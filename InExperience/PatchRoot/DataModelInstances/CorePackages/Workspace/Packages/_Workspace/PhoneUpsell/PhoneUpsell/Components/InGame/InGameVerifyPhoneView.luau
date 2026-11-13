@@ -66,12 +66,13 @@ return function(p1)
 		return Text:gsub("{phoneNumber}", "+" .. p1.prefix .. p1.phoneNumber)
 	end
 	
+	local Text = if IsNotUseStateResultMatch then UseLocalizationResult.buttonDisabledKey .. " (" .. UseStateResult .. ")" else UseLocalizationResult.buttonKey
 	local IsNotErrorMessageMatch: boolean = p1.errorMessage and p1.errorMessage ~= ""
 	
 	return ReactModule.createElement(InteractiveAlert, {
 		title = UseLocalizationResult.titleKey,
 		screenSize = p1.screenSize,
-		buttonStackInfo = getButtonStackProps(if IsNotUseStateResultMatch then UseLocalizationResult.buttonDisabledKey .. " (" .. UseStateResult .. ")" else UseLocalizationResult.buttonKey, function()
+		buttonStackInfo = getButtonStackProps(Text, function()
 			-- upvalues: p1 (copy), UseStateResult2 (copy)
 			p1.onResendPhoneCode()
 			UseStateResult2(10)

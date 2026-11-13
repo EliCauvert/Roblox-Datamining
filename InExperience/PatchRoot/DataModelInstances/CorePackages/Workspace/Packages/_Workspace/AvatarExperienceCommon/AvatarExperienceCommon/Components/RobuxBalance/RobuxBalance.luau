@@ -1,9 +1,10 @@
 ﻿local Parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local CursorType = FoundationModule.Enums.CursorType
 local UseCursorFunction = FoundationModule.Hooks.useCursor
-local FFlagAXResetAvatarButton = require(Parent.AvatarExperienceFlags).FFlagAXResetAvatarButton
+local FFlagAXResetAvatarButton = AvatarExperienceFlagsModule.FFlagAXResetAvatarButton
 
 return (ReactModule.forwardRef(function(p1, Ref)
 	-- upvalues: FoundationModule (copy), UseCursorFunction (copy), CursorType (copy), ReactModule (copy), FFlagAXResetAvatarButton (copy)

@@ -297,6 +297,40 @@ return function(p1, Callback)
 						isLoading = IsLifetimeViewsStatusMatch
 					})
 				end
+				local ViewsChart = {
+					hideHeader = true,
+					isDeltaPositive = false,
+					testId = "post-insights-views-chart",
+					plotId = `views:{Moment.momentId}`,
+					series = if ViewsSeries == nil then nil else {
+						{
+							id = "views",
+							name = UseLocalizationResult.totalViews,
+							points = ViewsSeries.points
+						}
+					},
+					hasData = HasData,
+					title = UseLocalizationResult.totalViews,
+					valueText = AbbreviateCountResult,
+					yAxisFormatter = function(p2)
+						-- upvalues: AbbreviateCountFunction (upval), RobloxLocaleId (copy)
+						return AbbreviateCountFunction(p2.value, RobloxLocaleId)
+					end,
+					xAxisFormatter = function(p2)
+						-- upvalues: IsGranularityMatch (copy), RobloxLocaleId (copy)
+						local Value = p2.value
+						local _DateTime = DateTime.fromIsoDate(Value)
+						
+						return if _DateTime == nil then Value elseif IsGranularityMatch then _DateTime:FormatLocalTime("LT", RobloxLocaleId) else _DateTime:FormatUniversalTime("MMM D", RobloxLocaleId)
+					end,
+					tooltipFormatters = {
+						formatXForPoint = formatTime,
+						formatSeriesValueForPoint = function(p2)
+							-- upvalues: NumberLocalization (upval), RobloxLocaleId (copy)
+							return NumberLocalization.localize(p2.y, RobloxLocaleId)
+						end
+					}
+				}
 				local Description = Moment.metadata.description
 				local IsCountIsCapped: boolean = Moment.comments ~= nil and Moment.comments.countIsCapped == true
 				
@@ -329,40 +363,7 @@ return function(p1, Callback)
 					totalViewsLabel = UseLocalizationResult.totalViews,
 					totalViewsText = AbbreviateCountResult,
 					isTotalViewsLoading = IsLifetimeViewsStatusMatch,
-					viewsChart = {
-						hideHeader = true,
-						isDeltaPositive = false,
-						testId = "post-insights-views-chart",
-						plotId = `views:{Moment.momentId}`,
-						series = if ViewsSeries == nil then nil else {
-							{
-								id = "views",
-								name = UseLocalizationResult.totalViews,
-								points = ViewsSeries.points
-							}
-						},
-						hasData = HasData,
-						title = UseLocalizationResult.totalViews,
-						valueText = AbbreviateCountResult,
-						yAxisFormatter = function(p2)
-							-- upvalues: AbbreviateCountFunction (upval), RobloxLocaleId (copy)
-							return AbbreviateCountFunction(p2.value, RobloxLocaleId)
-						end,
-						xAxisFormatter = function(p2)
-							-- upvalues: IsGranularityMatch (copy), RobloxLocaleId (copy)
-							local Value = p2.value
-							local _DateTime = DateTime.fromIsoDate(Value)
-							
-							return if _DateTime == nil then Value elseif IsGranularityMatch then _DateTime:FormatLocalTime("LT", RobloxLocaleId) else _DateTime:FormatUniversalTime("MMM D", RobloxLocaleId)
-						end,
-						tooltipFormatters = {
-							formatXForPoint = formatTime,
-							formatSeriesValueForPoint = function(p2)
-								-- upvalues: NumberLocalization (upval), RobloxLocaleId (copy)
-								return NumberLocalization.localize(p2.y, RobloxLocaleId)
-							end
-						}
-					},
+					viewsChart = ViewsChart,
 					isViewsChartLoading = IsViewsStatusMatch,
 					isViewsChartVisible = HasData,
 					overviewMetrics = OverviewMetrics,

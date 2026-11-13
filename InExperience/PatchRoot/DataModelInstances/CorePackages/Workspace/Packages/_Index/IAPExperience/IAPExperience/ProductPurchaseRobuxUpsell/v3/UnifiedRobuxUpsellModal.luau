@@ -1,6 +1,7 @@
 ﻿local Parent = script.Parent.Parent.Parent
 local Parent1 = Parent.Parent
 local ReactModule = require(Parent1.React)
+local SharedFlagsModule = require(Parent1.SharedFlags)
 local FoundationModule = require(Parent1.Foundation)
 local View = FoundationModule.View
 local Text = FoundationModule.Text
@@ -36,7 +37,7 @@ local ConstantsModule = require(Parent.Generic.Constants)
 local UNIFIEDROBUXUPSELLMODALMINHEIGHTPIXELSSINGLEPACKAGE = ConstantsModule.UNIFIED_ROBUX_UPSELL_MODAL_MIN_HEIGHT_PIXELS_SINGLE_PACKAGE
 local UNIFIEDROBUXUPSELLMODALMINHEIGHTPIXELSDEFAULT = ConstantsModule.UNIFIED_ROBUX_UPSELL_MODAL_MIN_HEIGHT_PIXELS_DEFAULT
 local UNIFIEDROBUXUPSELLMODALMINHEIGHTPIXELSWITHMULTIPLEPACKAGES = ConstantsModule.UNIFIED_ROBUX_UPSELL_MODAL_MIN_HEIGHT_PIXELS_WITH_MULTIPLE_PACKAGES
-local FFlagAXMISWithBlackbird = require(Parent1.SharedFlags).FFlagAXMISWithBlackbird
+local FFlagAXMISWithBlackbird = SharedFlagsModule.FFlagAXMISWithBlackbird
 local FFlagEnableRobuxUpsellPlusButtonExperimentModule = require(Parent.Flags.FFlagEnableRobuxUpsellPlusButtonExperiment)
 local FFlagUnifiedPurchaseFlowMarketplaceUIImprovements = require(Parent.Parent.SharedFlags).FFlagUnifiedPurchaseFlowMarketplaceUIImprovements
 local CompactUpsellModalBreakpoint = game:DefineFastInt("CompactUpsellModalBreakpoint", 400)
@@ -383,11 +384,16 @@ local function UnifiedRobuxUpsellModal(p1)
 	end
 	local IsPurchaseModalTypeMatch: boolean = FFlagEnableUnifiedPurchaseFlowForDevSubs and p1.purchaseModalType == UnifiedPurchaseModalTypeEnumModule.DeveloperSubscription
 	local PerMonth = if IsPurchaseModalTypeMatch then UseLocalizationResult.PerMonth elseif FFlagLuaAppsEnablePromptVIPServerPurchase and p1.isMonthlyPrice then UseLocalizationResult.PerMonth else nil
+	local Subscribe = if IsPurchaseModalTypeMatch then UseLocalizationResult.Subscribe else UseLocalizationResult.Buy
 	local CartPricingOfferCheckboxesModule = BuildCartPricingOfferCheckboxesModule({
 		cartPricing = UseCartPricingModuleResult,
 		isDisabled = p1.isCartPricingLoading == true or UseInitialButtonDisableDelayModuleResult
 	})
-	local Element = ReactModule.createElement(ProductDetailsContainerModule, {
+	local Element = if next(CartPricingOfferCheckboxesModule) then ReactModule.createElement(View, {
+		tag = "col gap-medium size-full-0 auto-y",
+		LayoutOrder = 3
+	}, CartPricingOfferCheckboxesModule) else nil
+	local Element1 = ReactModule.createElement(ProductDetailsContainerModule, {
 		purchaseModalType = p1.purchaseModalType,
 		product = UseMemoResult,
 		isCompact = IsYBelow,
@@ -404,7 +410,7 @@ local function UnifiedRobuxUpsellModal(p1)
 	local Small = if IsYBelow then "Small" elseif FFlagIAPExperienceEnableMultiDisplayUpsellModule then "Medium" else nil
 	local config = {
 		LayoutOrder = 1,
-		text = if IsPurchaseModalTypeMatch then UseLocalizationResult.Subscribe else UseLocalizationResult.Buy,
+		text = Subscribe,
 		onActivated = p1.buttons.buyItemActivated,
 		inputDelay = if p1.buttons.buyItemEnableInputDelayed and not UseInitialButtonDisableDelayModuleResult then 2.5 else 0,
 		isDisabled = UseInitialButtonDisableDelayModuleResult,
@@ -443,7 +449,7 @@ local function UnifiedRobuxUpsellModal(p1)
 		tag = if FFlagIAPExperienceEnableMultiDisplayUpsellModule then "col align-x-center align-y-start gap-medium size-full-0 auto-y" else "col gap-medium auto-y size-full-0 align-x-center align-y-start"
 	}
 	local config5 = {
-		ProductDetailsContainer = if Element then Element else ReactModule.createElement(View, {
+		ProductDetailsContainer = if Element1 then Element1 else ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = ColAlignXCenterAlignYCenterGapMediumSizeFull0AutoY
 		}, {
@@ -459,10 +465,7 @@ local function UnifiedRobuxUpsellModal(p1)
 			})
 		}),
 		CartPricingLoading = ReactModule.createElement(CartPricingLoadingModule, { LayoutOrder = 1, isLoading = p1.isCartPricingLoading }),
-		PostPurchaseActions = if next(CartPricingOfferCheckboxesModule) then ReactModule.createElement(View, {
-			tag = "col gap-medium size-full-0 auto-y",
-			LayoutOrder = 3
-		}, CartPricingOfferCheckboxesModule) else nil
+		PostPurchaseActions = Element
 	}
 	local CreateElementFunction = ReactModule.createElement
 	local config6 = {

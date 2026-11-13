@@ -1,12 +1,13 @@
 ﻿local AppComposition = script:FindFirstAncestor("AppComposition")
 local Parent = AppComposition.Parent
 local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.Dev.ReactRoblox)
 local FoundationProvider = require(Parent.Foundation).FoundationProvider
 
 return {
 	name = AppComposition.Name,
 	roact = ReactModule,
-	reactRoblox = require(Parent.Dev.ReactRoblox),
+	reactRoblox = ReactRobloxModule,
 	mapStory = function(p1)
 		-- upvalues: ReactModule (copy), FoundationProvider (copy)
 		return function(p2)

@@ -1,5 +1,6 @@
 ﻿local Foundation = script:FindFirstAncestor("Foundation")
 local Parent = Foundation.Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
 local ReactModule = require(Parent.React)
 local ButtonVariantModule = require(Foundation.Enums.ButtonVariant)
 local IconButtonModule = require(Foundation.Components.IconButton)
@@ -7,7 +8,7 @@ local InputSizeModule = require(Foundation.Enums.InputSize)
 local PaginationDirectionModule = require(Foundation.Enums.PaginationDirection)
 local _ = require(Foundation.Components.Types)
 local PaginationSizeModule = require(Foundation.Enums.PaginationSize)
-local Icon = require(Parent.BuilderIcons).Icon
+local Icon = BuilderIconsModule.Icon
 local config = {
 	[PaginationDirectionModule.First] = {
 		testIdSuffix = "first",

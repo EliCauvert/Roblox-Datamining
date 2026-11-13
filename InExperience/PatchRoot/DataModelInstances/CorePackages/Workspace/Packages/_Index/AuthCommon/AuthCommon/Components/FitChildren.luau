@@ -62,10 +62,11 @@ function FitChildrenModule.wrap(p1)
 		
 		if Current == nil then return end
 		local AbsolutePosition = Current.AbsolutePosition
+		local Children = Current:GetChildren()
 		local Largest = 0
 		local Largest1 = 0
 		
-		for _, Gui in ipairs((Current:GetChildren())) do
+		for _, Gui in ipairs(Children) do
 			if Gui:IsA("GuiBase2d") then
 				local AbsoluteSize = Gui.AbsoluteSize
 				local AbsolutePosition1 = Gui.AbsolutePosition

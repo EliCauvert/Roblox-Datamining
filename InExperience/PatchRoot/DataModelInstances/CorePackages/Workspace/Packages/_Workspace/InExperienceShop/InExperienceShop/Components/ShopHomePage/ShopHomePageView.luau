@@ -1,8 +1,9 @@
 ﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
 local Parent = InExperienceShop.Parent
 local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
 local FlatList = require(Parent.VirtualizedList).FlatList
-local View = require(Parent.Foundation).View
+local View = FoundationModule.View
 local _ = require(InExperienceShop.Types)
 
 return function(Frame)

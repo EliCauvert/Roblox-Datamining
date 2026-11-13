@@ -1,10 +1,11 @@
 ﻿local ExpChat = script:FindFirstAncestor("ExpChat")
 local Parent = ExpChat.Parent
+local RoduxModule = require(Parent.Rodux)
 local Dictionary = require(Parent.llama).Dictionary
 local ConfigModule = require(ExpChat.Config)
 local Actions = ExpChat.Actions
 
-return require(Parent.Rodux).createReducer({
+return RoduxModule.createReducer({
 	HeightScale = 1,
 	WidthScale = 1,
 	Font = ConfigModule.ChatWindowFont,

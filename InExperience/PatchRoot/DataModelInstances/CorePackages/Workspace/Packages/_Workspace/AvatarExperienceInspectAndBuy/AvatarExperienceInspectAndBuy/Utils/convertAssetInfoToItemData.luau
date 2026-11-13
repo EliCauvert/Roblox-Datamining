@@ -1,8 +1,9 @@
 ﻿local AvatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
 local Parent = AvatarExperienceInspectAndBuy.Parent
 local _ = require(AvatarExperienceInspectAndBuy.Types)
+local AvatarExperienceModelModule = require(AvatarExperienceInspectAndBuy.Parent.AvatarExperienceModel)
 local TutilsModule = require(Parent.tutils)
-local ItemTypeEnum = require(AvatarExperienceInspectAndBuy.Parent.AvatarExperienceModel).Enums.ItemTypeEnum
+local ItemTypeEnum = AvatarExperienceModelModule.Enums.ItemTypeEnum
 local FFlagAXMarketplaceLicensingItemCards = require(Parent.AvatarExperienceFlags).FFlagAXMarketplaceLicensingItemCards
 
 return function(p1, p2)

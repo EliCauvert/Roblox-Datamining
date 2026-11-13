@@ -1,9 +1,10 @@
 ﻿local Foundation = script:FindFirstAncestor("Foundation")
 local ConnectionModule = require(Foundation.Utility.Wrappers.Connection)
 local DragIntentModule = require(Foundation.Enums.DragIntent)
+local ServicesModule = require(Foundation.Utility.Wrappers.Services)
 local SignalModule = require(Foundation.Utility.Wrappers.Signal)
 local SwipeMathModule = require(script.Parent.swipeMath)
-local UserInputService = require(Foundation.Utility.Wrappers.Services).UserInputService
+local UserInputService = ServicesModule.UserInputService
 
 local function _(Input): boolean
 	return Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch

@@ -1,10 +1,12 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
 local AnalyticsKeysModule = require(BuildExperience.Analytics.AnalyticsKeys)
+local CreatorAnalyticsModule = require(Parent.DataHydration.CreatorAnalytics)
 local AnalyticsUnitModule = require(BuildExperience.Analytics.AnalyticsUnit)
 local FFlagBuildAnalyticsGoalsModule = require(BuildExperience.Flags.FFlagBuildAnalyticsGoals)
-local MetricId = require(Parent.DataHydration.CreatorAnalytics).MetricId
-local IconName = require(Parent.Foundation).Enums.IconName
+local MetricId = CreatorAnalyticsModule.MetricId
+local IconName = FoundationModule.Enums.IconName
 local DailyActiveUsers = {
 	overviewPath = "analytics/engagement",
 	id = MetricId.DailyActiveUsers,

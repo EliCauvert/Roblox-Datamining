@@ -1,11 +1,12 @@
 ﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local FoundationModule = require(Parent.Foundation)
 local _ = require(Parent.MomentsCommon)
 local ReactModule = require(Parent.React)
 local MomentContextModule = require(script.Parent.Parent.Parent.Parent.MomentContext)
 local UseReactionCommitModule = require(script.Parent.Parent.Parent.Parent.Reactions.useReactionCommit)
 local PickerItemModule = require(script.Parent.PickerItem)
 local UsePickerReactionsModule = require(script.Parent.usePickerReactions)
-local View = require(Parent.Foundation).View
+local View = FoundationModule.View
 
 return ReactModule.memo(function()
 	-- upvalues: MomentContextModule (copy), UseReactionCommitModule (copy), UsePickerReactionsModule (copy), ReactModule (copy), PickerItemModule (copy), View (copy)

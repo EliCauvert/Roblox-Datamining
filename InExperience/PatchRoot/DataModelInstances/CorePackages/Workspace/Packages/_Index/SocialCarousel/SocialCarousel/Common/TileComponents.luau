@@ -8,6 +8,7 @@ local FriendsHintTileModule = require(SocialCarousel.Components.Tiles.FriendsHin
 local StartSquadTileModule = require(SocialCarousel.Components.Tiles.StartSquadTile)
 local ShareQRTileModule = require(SocialCarousel.Components.Tiles.ShareQRTile)
 local TileModule = require(SocialCarousel.BaseComponents.Tile)
+local FFlagSocialCarouselShareQREnabled = require(Parent.SharedFlags).FFlagSocialCarouselShareQREnabled
 local FFlagSocialCarouselInGameTitleMarquee = require(Parent.SharedFlags).FFlagSocialCarouselInGameTitleMarquee
 local FFlagSocialCarouselXXSmallTilesModule = require(SocialCarousel.Flags.FFlagSocialCarouselXXSmallTiles)
 
@@ -64,7 +65,7 @@ return {
 			isCompact = if FFlagSocialCarouselXXSmallTilesModule then p1 else nil
 		})
 	end,
-	[Tile.ShareQR] = if require(Parent.SharedFlags).FFlagSocialCarouselShareQREnabled then function(_, Index, ItemSize, SelectionOrder, _, p1)
+	[Tile.ShareQR] = if FFlagSocialCarouselShareQREnabled then function(_, Index, ItemSize, SelectionOrder, _, p1)
 		-- upvalues: ReactModule (copy), ShareQRTileModule (copy), FFlagSocialCarouselXXSmallTilesModule (copy)
 		return ReactModule.createElement(ShareQRTileModule, {
 			index = Index,

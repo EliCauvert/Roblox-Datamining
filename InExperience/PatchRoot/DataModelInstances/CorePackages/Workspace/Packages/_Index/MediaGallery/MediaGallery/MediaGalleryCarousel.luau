@@ -237,7 +237,7 @@ return ReactModule.memo(function(Frame)
 		if Item then
 			local Element = nil
 			if IsValidIdentifierModule(Item.videoId) and not IsYouTubeVideoModule(Item.assetTypeId) then
-				local config2 = {
+				local config1 = {
 					videoId = Item.videoId,
 					videoAccessContext = if FFlagLuaAppEdpMomentVideo then Item.videoAccessContext else nil,
 					trimStartTime = if FFlagLuaAppVideoPlayerTrimAndMusic then Item.trimStartTime else nil,
@@ -277,12 +277,12 @@ return ReactModule.memo(function(Frame)
 				
 				if Item.itemProps then
 					for i, itemProp in Item.itemProps do
-						config2[i] = itemProp
+						config1[i] = itemProp
 					end
 				end
-				Element = ReactModule.createElement(MediaGalleryVideoItemModule, config2)
+				Element = ReactModule.createElement(MediaGalleryVideoItemModule, config1)
 			else
-				local config1 = {
+				local config2 = {
 					imageId = Item.imageId,
 					isYouTubeVideo = IsYouTubeVideoModule(Item.assetTypeId),
 					videoHash = Item.videoHash,
@@ -299,10 +299,10 @@ return ReactModule.memo(function(Frame)
 				
 				if Item.itemProps then
 					for i1, itemProp1 in Item.itemProps do
-						config1[i1] = itemProp1
+						config2[i1] = itemProp1
 					end
 				end
-				Element = ReactModule.createElement(MediaGalleryImageItemModule, config1)
+				Element = ReactModule.createElement(MediaGalleryImageItemModule, config2)
 			end
 			config["Item" .. visibleIndice] = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
@@ -377,7 +377,7 @@ return ReactModule.memo(function(Frame)
 					useSpring = true,
 					numberOfItems = CountItems,
 					startIndex = Frame.startIndex or 1,
-					currentItemProgressBinding = if FFlagLuaAppMediaGalleryPageIndicatorOpacity and Frame.autoAdvanceEnabled == false and not UseStateResult1 then nil else UseAutoAdvanceModuleResult.progressBinding,
+					currentItemProgressBinding = if FFlagLuaAppMediaGalleryPageIndicatorOpacity and (Frame.autoAdvanceEnabled == false and not UseStateResult1) then nil else UseAutoAdvanceModuleResult.progressBinding,
 					mediaGalleryScrolledSignal = UseSnapScrollModuleResult.scrolledSignal,
 					springConfig = MediaGalleryConstantsModule.SPRING_CONFIG
 				}),

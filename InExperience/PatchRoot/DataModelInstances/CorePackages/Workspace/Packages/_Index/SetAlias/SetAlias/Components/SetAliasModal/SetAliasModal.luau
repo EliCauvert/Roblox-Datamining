@@ -12,6 +12,8 @@ local Radius = Foundation.Enums.Radius
 local Skeleton = Foundation.Skeleton
 local RoactFitComponents = DependenciesModule.RoactFitComponents
 local UseLocalizationFunction = DependenciesModule.Hooks.useLocalization
+local SocialLibraries = DependenciesModule.SocialLibraries
+local RoactUtilsModule = require(Parent1.RoactUtils)
 local FocusNavigationUtilsModule = require(Parent1.FocusNavigationUtils)
 local FocusRoot = FocusNavigationUtilsModule.FocusRoot
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
@@ -26,8 +28,8 @@ local UseStyleFunction = UIBlox.Core.Style.useStyle
 local ImageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
 local Images = UIBlox.App.ImageSet.Images
 local IconSize = UIBlox.App.Constant.IconSize
-local UseEffectOnceFunction = require(Parent1.RoactUtils).Hooks.useEffectOnce
-local CallbackInputBox = DependenciesModule.SocialLibraries.Components.CallbackInputBox
+local UseEffectOnceFunction = RoactUtilsModule.Hooks.useEffectOnce
+local CallbackInputBox = SocialLibraries.Components.CallbackInputBox
 local FFlagSetAliasFixFocusNavigationModule = require(Parent.Flags.FFlagSetAliasFixFocusNavigation)
 
 return function(p1)

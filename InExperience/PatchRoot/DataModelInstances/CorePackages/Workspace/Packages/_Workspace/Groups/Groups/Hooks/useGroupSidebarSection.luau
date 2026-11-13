@@ -8,7 +8,7 @@ local DataHydrationModule = require(Parent.DataHydration)
 local UseGroupsWrapperContextModule = require(Groups.Contexts.useGroupsWrapperContext)
 local GroupSidebarContextModule = require(Groups.Contexts.GroupSidebarContext)
 local ConstantsModule = require(Groups.Common.constants)
-local GetGroupSduiPageConfigModule = require(Groups.Common.getGroupSduiPageConfig)
+local GetGroupSduiPageConfigFunction = require(Groups.Common.getGroupSduiPageConfig).getGroupSduiPageConfig
 local FetchGroupSduiPageModule = require(Groups.Common.fetchGroupSduiPage)
 
 local function _(p1): boolean
@@ -21,13 +21,13 @@ local function noRefreshes(): number
 end
 
 return function(p1, GroupId)
-	-- upvalues: UseGroupsWrapperContextModule (copy), ReactModule (copy), GroupSidebarContextModule (copy), GetGroupSduiPageConfigModule (copy), SduiSharedUtilitiesModule (copy), SignalsReactModule (copy), FetchGroupSduiPageModule (copy), ConstantsModule (copy), noRefreshes (copy), DataHydrationModule (copy)
+	-- upvalues: UseGroupsWrapperContextModule (copy), ReactModule (copy), GroupSidebarContextModule (copy), GetGroupSduiPageConfigFunction (copy), SduiSharedUtilitiesModule (copy), SignalsReactModule (copy), FetchGroupSduiPageModule (copy), ConstantsModule (copy), noRefreshes (copy), DataHydrationModule (copy)
 	local UseGroupsWrapperContextModuleResult = UseGroupsWrapperContextModule()
 	local UseContextResult = ReactModule.useContext(GroupSidebarContextModule)
 	local ConfigKey = p1.configKey
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: GetGroupSduiPageConfigModule (upval), UseGroupsWrapperContextModuleResult (copy), GroupId (copy)
-		return GetGroupSduiPageConfigModule("sidebarSection", UseGroupsWrapperContextModuleResult.userId, GroupId)
+		-- upvalues: GetGroupSduiPageConfigFunction (upval), UseGroupsWrapperContextModuleResult (copy), GroupId (copy)
+		return GetGroupSduiPageConfigFunction("sidebarSection", UseGroupsWrapperContextModuleResult.userId, GroupId)
 	end, { UseGroupsWrapperContextModuleResult.userId, GroupId })
 	local ConfigKey1 = if UseMemoResult then UseMemoResult.configKey else ""
 	local UseResult = ReactModule.useCallback(function(p2)
@@ -66,7 +66,16 @@ return function(p1, GroupId)
 	local UseResult2 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseMemoResult (copy), SduiSharedUtilitiesModule (upval), FetchGroupSduiPageModule (upval), ConstantsModule (upval)
 		if UseMemoResult then
-			FetchGroupSduiPageModule(UseMemoResult, SduiSharedUtilitiesModule.SduiLoadTimer.createLoadTimer(UseMemoResult.surfaceKey), p2, ConstantsModule.SIDEBAR_STALE_TIME_SEC)
+			local LoadTimer = SduiSharedUtilitiesModule.SduiLoadTimer.createLoadTimer(UseMemoResult.surfaceKey)
+			LoadTimer.start(if p2 then "refresh" else "mount")
+			local GroupSduiPageModule = FetchGroupSduiPageModule(UseMemoResult, LoadTimer, p2, ConstantsModule.SIDEBAR_STALE_TIME_SEC)
+			
+			if p2 then
+				GroupSduiPageModule:finally(LoadTimer.logRefreshComplete)
+				
+				return
+			end
+			GroupSduiPageModule:andThen(LoadTimer.logComponentReady, function() end)
 		end
 	end, { UseMemoResult })
 	ReactModule.useEffect(function()

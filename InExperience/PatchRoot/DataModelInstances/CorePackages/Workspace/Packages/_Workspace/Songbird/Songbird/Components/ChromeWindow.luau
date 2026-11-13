@@ -3,13 +3,14 @@ local ConstantsModule = require(Songbird.constants)
 local CryoModule = require(Songbird.Parent.Cryo)
 local FoundationModule = require(Songbird.Parent.Foundation)
 local ReactModule = require(Songbird.Parent.React)
+local ReactUtilsModule = require(Songbird.Parent.ReactUtils)
 local ChromeWindowFrameModule = require(Songbird.Components.ChromeWindowFrame)
 local MarqueeScrollerModule = require(Songbird.Components.MarqueeScroller)
 local MusicIconModule = require(Songbird.Components.MusicIcon)
 local LikeButtonModule = require(Songbird.Components.LikeButton)
 local TrackingAudioIconModule = require(Songbird.Components.TrackingAudioIcon)
 local UseLocalizationFunction = require(Songbird.Parent.Localization).Hooks.useLocalization
-local CreateNextOrderFunction = require(Songbird.Parent.ReactUtils).createNextOrder
+local CreateNextOrderFunction = ReactUtilsModule.createNextOrder
 local UseCallbackFunction = ReactModule.useCallback
 local UseMemoFunction = ReactModule.useMemo
 local config = { isLoading = false, maxSize = Vector2.new(300, 1e999) }

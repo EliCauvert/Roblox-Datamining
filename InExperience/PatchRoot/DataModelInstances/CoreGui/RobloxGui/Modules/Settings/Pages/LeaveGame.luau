@@ -240,7 +240,7 @@ v1 = (function()
 	elseif NoFFlagResponsiveUnitsDeprecateTenFoot then
 		Parent.FontSize = Enum.FontSize.Size48
 	end
-	NewPage.LeaveGameButton = UtilityModule:MakeStyledButton("LeaveGame", if IsPioneerLaunchFunction() and not FFlagPioneerLeaveLogsOut then RobloxTranslatorModule:FormatByKey(LocalizationKeys.QuitButton) elseif FFlagPioneerLogoutButtonLabel and (IsPioneerLaunchFunction() and FFlagPioneerLeaveLogsOut) then RobloxTranslatorModule:FormatByKey(LocalizationKeys.LogoutButton) else "Leave", nil, function()
+	NewPage.LeaveGameButton = UtilityModule:MakeStyledButton("LeaveGame", if IsPioneerLaunchFunction() and not FFlagPioneerLeaveLogsOut then RobloxTranslatorModule:FormatByKey(LocalizationKeys.QuitButton) elseif FFlagPioneerLogoutButtonLabel and IsPioneerLaunchFunction() and FFlagPioneerLeaveLogsOut then RobloxTranslatorModule:FormatByKey(LocalizationKeys.LogoutButton) else "Leave", nil, function()
 		-- upvalues: FFlagPioneerLeaveLogsOut (upval), IsPioneerLaunchFunction (upval), LeaveGameModule (upval), PioneerLeaveReason (upval)
 		if FFlagPioneerLeaveLogsOut and IsPioneerLaunchFunction() then
 			LeaveGameModule(false, {

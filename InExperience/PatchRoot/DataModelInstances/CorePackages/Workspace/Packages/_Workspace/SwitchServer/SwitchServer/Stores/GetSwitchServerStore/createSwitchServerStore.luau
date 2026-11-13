@@ -3,9 +3,10 @@ local RunService = game:GetService("RunService")
 local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
 local SwitchServer = script:FindFirstAncestor("SwitchServer")
 local Parent = SwitchServer.Parent
+local CoreScriptsCommonModule = require(Parent.CoreScriptsCommon)
 local SignalsModule = require(Parent.Signals)
 local SwitchServerTelemetryModule = require(SwitchServer.Telemetry.SwitchServerTelemetry)
-local STANDARDSERVER = require(Parent.CoreScriptsCommon).Constants.STANDARD_SERVER
+local STANDARDSERVER = CoreScriptsCommonModule.Constants.STANDARD_SERVER
 
 local function _(p1)
 	-- upvalues: RunService (copy), Players (copy), RobloxReplicatedStorage (copy), STANDARDSERVER (copy)

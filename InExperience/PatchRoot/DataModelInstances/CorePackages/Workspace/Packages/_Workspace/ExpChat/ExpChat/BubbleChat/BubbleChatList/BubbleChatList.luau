@@ -2,6 +2,7 @@
 local Parent = ExpChat.Parent
 local RoactModule = require(Parent.Roact)
 local List = require(Parent.llama).List
+local ExpChatSharedModule = require(Parent.ExpChatShared)
 local ChatBubbleModule = require(ExpChat.BubbleChat.ChatBubble)
 local BorderlessBubbleChatModule = require(ExpChat.BubbleChat.BorderlessBubbleChat)
 local IsBorderlessBubbleChatMessageModule = require(ExpChat.BubbleChat.Helpers.isBorderlessBubbleChatMessage)
@@ -12,7 +13,7 @@ local GlobalFlagsModule = require(ExpChat.GlobalFlags)
 local BubbleChatList = RoactModule.PureComponent:extend("BubbleChatList")
 local GetFFlagChatTranslationUIEnabledBubbleChatModule = require(ExpChat.Flags.getFFlagChatTranslationUIEnabledBubbleChat)
 local GetFFlagExpChatUseUpdatedMessageRenderedModule = require(ExpChat.Flags.getFFlagExpChatUseUpdatedMessageRendered)
-local FFlagExpChatPresetChatEnabled = require(Parent.ExpChatShared).Flags.FFlagExpChatPresetChatEnabled
+local FFlagExpChatPresetChatEnabled = ExpChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
 local IsBorderlessBubbleChatEnabledModule = require(ExpChat.isBorderlessBubbleChatEnabled)
 
 function BubbleChatList.getDerivedStateFromProps(p1, p2)

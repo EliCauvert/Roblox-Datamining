@@ -8,8 +8,10 @@ local MoveToGoalEventModule = require(Parent.Events.VR.MoveToGoalEvent)
 local PerspectiveTooltipEventModule = require(Parent.Events.VR.PerspectiveTooltipEvent)
 local MovementTooltipEventModule = require(Parent.Events.VR.MovementTooltipEvent)
 local LeaveGameIconHighlightEventModule = require(Parent.Events.VR.LeaveGameIconHighlightEvent)
+local PlatformEnumModule = require(Parent.Enums.PlatformEnum)
+local FTUXEventTypesModule = require(Parent.Resources.FTUXEventTypes)
 local _ = require(script.Parent.Parent.EventType)
-local FTUXEventTypesModuleEntry = require(Parent.Resources.FTUXEventTypes)[require(Parent.Enums.PlatformEnum).QuestVR]
+local FTUXEventTypesModuleEntry = FTUXEventTypesModule[PlatformEnumModule.QuestVR]
 
 return {
 	Name = "VRFTUXEventHandler",

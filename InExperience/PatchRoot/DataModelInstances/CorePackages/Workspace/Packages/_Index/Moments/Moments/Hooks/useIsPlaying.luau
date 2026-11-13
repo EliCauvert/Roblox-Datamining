@@ -2,8 +2,9 @@
 local Parent = Moments.Parent
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
 local MomentContextModule = require(Moments.Components.Feed.Items.Moment.MomentContext)
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseSignalStateFunction = SignalsReactModule.useSignalState
 
 return function()
 	-- upvalues: MomentContextModule (copy), ReactModule (copy), SignalsModule (copy), UseSignalStateFunction (copy)

@@ -13,6 +13,7 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagSignalsNavP2NavigationPrimitives = SharedFlagsModule.FFlagSignalsNavP2NavigationPrimitives
 local FFlagSignalsNavP3fGameDetails = SharedFlagsModule.FFlagSignalsNavP3fGameDetails
 local FFlagSignalsNavP3Dispatch = SharedFlagsModule.FFlagSignalsNavP3Dispatch
+local FFlagSignalsNavPendingLock = SharedFlagsModule.FFlagSignalsNavPendingLock
 local FFlagUseNavigationSelectors = SharedFlagsModule.FFlagUseNavigationSelectors
 local FFlagLuaAppSduiEdpEnabled = SharedFlagsModule.FFlagLuaAppSduiEdpEnabled
 local FFlagFixSduiEdpTtiPeekCategory = SharedFlagsModule.FFlagFixSduiEdpTtiPeekCategory
@@ -35,15 +36,17 @@ local FFlagEDPTTITrackingEnabled = GameDetailTelemetryModule.FFlagEDPTTITracking
 local EDPTTIConstants = GameDetailTelemetryModule.EDPTTIConstants
 
 return function(p1, p2, ExtraProps, p3)
-	-- upvalues: FFlagSignalsNavP3fGameDetails (copy), AppNavigationRegistry (copy), FFlagUseNavigationSelectors (copy), Selectors (copy), FFlagEDPTTITrackingEnabled (copy), FFlagFixSduiEdpTtiColdStart (copy), FFlagLuaAppSduiEdpEnabled (copy), FFlagEDPTTIParityDefinitions (copy), EDPTTIManager (copy), EDPTTIConstants (copy), FFlagFixSduiEdpTtiPeekCategory (copy), DisplayModule (copy), ResponsiveModule (copy), DeviceType (copy), CreateExperienceDetailsPageTimerModule (copy), GetExperienceDetailsPageKeyModule (copy), SduiSurfaceLoadTimeTracker (copy), CryoModule (copy), FetchGamePlayButtonData (copy), FetchExperienceDetailsPageModule (copy), FormFactor (copy), UseGameDetailsPeekViewModule (copy), AppPage (copy), PeekViewState (copy), SetGameDetailsPeekViewStateModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), FFlagSignalsNavP2NavigationPrimitives (copy), NavigateDownFunction (copy)
+	-- upvalues: FFlagSignalsNavP3fGameDetails (copy), FFlagSignalsNavPendingLock (copy), AppNavigationRegistry (copy), FFlagUseNavigationSelectors (copy), Selectors (copy), FFlagEDPTTITrackingEnabled (copy), FFlagFixSduiEdpTtiColdStart (copy), FFlagLuaAppSduiEdpEnabled (copy), FFlagEDPTTIParityDefinitions (copy), EDPTTIManager (copy), EDPTTIConstants (copy), FFlagFixSduiEdpTtiPeekCategory (copy), DisplayModule (copy), ResponsiveModule (copy), DeviceType (copy), CreateExperienceDetailsPageTimerModule (copy), GetExperienceDetailsPageKeyModule (copy), SduiSurfaceLoadTimeTracker (copy), CryoModule (copy), FetchGamePlayButtonData (copy), FetchExperienceDetailsPageModule (copy), FormFactor (copy), UseGameDetailsPeekViewModule (copy), AppPage (copy), PeekViewState (copy), SetGameDetailsPeekViewStateModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), FFlagSignalsNavP2NavigationPrimitives (copy), NavigateDownFunction (copy)
 	return function(p4)
-		-- upvalues: FFlagSignalsNavP3fGameDetails (upval), AppNavigationRegistry (upval), FFlagUseNavigationSelectors (upval), Selectors (upval), FFlagEDPTTITrackingEnabled (upval), FFlagFixSduiEdpTtiColdStart (upval), FFlagLuaAppSduiEdpEnabled (upval), FFlagEDPTTIParityDefinitions (upval), EDPTTIManager (upval), EDPTTIConstants (upval), FFlagFixSduiEdpTtiPeekCategory (upval), DisplayModule (upval), ResponsiveModule (upval), DeviceType (upval), CreateExperienceDetailsPageTimerModule (upval), GetExperienceDetailsPageKeyModule (upval), p1 (copy), SduiSurfaceLoadTimeTracker (upval), ExtraProps (ref), CryoModule (upval), p3 (copy), FetchGamePlayButtonData (upval), FetchExperienceDetailsPageModule (upval), FormFactor (upval), UseGameDetailsPeekViewModule (upval), AppPage (upval), PeekViewState (upval), SetGameDetailsPeekViewStateModule (upval), p2 (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), FFlagSignalsNavP2NavigationPrimitives (upval), NavigateDownFunction (upval)
+		-- upvalues: FFlagSignalsNavP3fGameDetails (upval), FFlagSignalsNavPendingLock (upval), AppNavigationRegistry (upval), FFlagUseNavigationSelectors (upval), Selectors (upval), FFlagEDPTTITrackingEnabled (upval), FFlagFixSduiEdpTtiColdStart (upval), FFlagLuaAppSduiEdpEnabled (upval), FFlagEDPTTIParityDefinitions (upval), EDPTTIManager (upval), EDPTTIConstants (upval), FFlagFixSduiEdpTtiPeekCategory (upval), DisplayModule (upval), ResponsiveModule (upval), DeviceType (upval), CreateExperienceDetailsPageTimerModule (upval), GetExperienceDetailsPageKeyModule (upval), p1 (copy), SduiSurfaceLoadTimeTracker (upval), ExtraProps (ref), CryoModule (upval), p3 (copy), FetchGamePlayButtonData (upval), FetchExperienceDetailsPageModule (upval), FormFactor (upval), UseGameDetailsPeekViewModule (upval), AppPage (upval), PeekViewState (upval), SetGameDetailsPeekViewStateModule (upval), p2 (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), FFlagSignalsNavP2NavigationPrimitives (upval), NavigateDownFunction (upval)
 		local State = p4:getState()
 		local FormFactor1 = State.FormFactor
 		local ViewState = State.GameDetailsPeekView.viewState
 		
 		if FFlagSignalsNavP3fGameDetails then
-			if AppNavigationRegistry.get().getIsNavigating() then return end
+			if FFlagSignalsNavPendingLock then
+				if AppNavigationRegistry.isNavigationLocked(false) then return end
+			elseif AppNavigationRegistry.get().getIsNavigating() then return end
 		elseif FFlagUseNavigationSelectors then
 			if Selectors.selectNavigationLocked(State) then return end
 		elseif State.Navigation.lockNavigationActions then return end

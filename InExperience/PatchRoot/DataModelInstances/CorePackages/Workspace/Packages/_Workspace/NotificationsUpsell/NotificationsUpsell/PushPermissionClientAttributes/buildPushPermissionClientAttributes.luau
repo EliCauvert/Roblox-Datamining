@@ -1,7 +1,9 @@
 ﻿local UserInputService = game:GetService("UserInputService")
 local NotificationsUpsell = script:FindFirstAncestor("NotificationsUpsell")
 local Parent = NotificationsUpsell.Parent
+local PermissionsProtocol = require(Parent.PermissionsProtocol).PermissionsProtocol
 local PromiseModule = require(Parent.Promise)
+local SystemInfoProtocol = require(Parent.SystemInfoProtocol).SystemInfoProtocol
 local FIntStreamPushPermissionClientAttributesTimeoutMsModule = require(NotificationsUpsell.Flags.FIntStreamPushPermissionClientAttributesTimeoutMs)
 local Keys = {
 	PERMISSION_STATUS = "pushNotificationPermissionStatus",
@@ -18,8 +20,8 @@ local BuildPushPermissionClientAttributesModule = {
 		-- upvalues: UserInputService (copy)
 		return UserInputService:GetPlatform()
 	end,
-	_permissionsProtocol = require(Parent.PermissionsProtocol).PermissionsProtocol,
-	_systemInfoProtocol = require(Parent.SystemInfoProtocol).SystemInfoProtocol
+	_permissionsProtocol = PermissionsProtocol,
+	_systemInfoProtocol = SystemInfoProtocol
 }
 
 local function _(p1)

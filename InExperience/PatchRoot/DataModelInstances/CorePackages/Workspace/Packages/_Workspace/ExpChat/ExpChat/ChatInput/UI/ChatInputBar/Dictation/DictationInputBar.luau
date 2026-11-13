@@ -246,7 +246,7 @@ return ReactModule.memo(function(p1)
 			[ReactModule.Event.InputEnded] = MicGestureHandlers[ReactModule.Event.InputEnded]
 		}) else nil
 	})
-	config1.FTUX = if FFlagExpChatDictationFTUXModule and UseDictationInputBarModuleResult.ftux and UseDictationInputBarModuleResult.ftux.shouldShow then ReactModule.createElement(DictationFTUXModule, {
+	config1.FTUX = if FFlagExpChatDictationFTUXModule and (UseDictationInputBarModuleResult.ftux and UseDictationInputBarModuleResult.ftux.shouldShow) then ReactModule.createElement(DictationFTUXModule, {
 		anchorRef = UseDictationInputBarModuleResult.micButtonSlotRef,
 		onDismiss = if FFlagExpChatDictationFTUXModule then UseDictationInputBarModuleResult.ftux.dismiss else nil
 	}) else nil

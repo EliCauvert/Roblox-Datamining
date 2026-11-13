@@ -1,6 +1,8 @@
 ﻿local Markdown = script:FindFirstAncestor("Markdown")
 local _ = require(Markdown.Adapter)
 local CommonMarkModule = require(Markdown.Parent.CommonMark)
+local FlagsModule = require(Markdown.Flags)
+local FormattingTagsExtensionModule = require(Markdown.Parsers.FormattingTags.FormattingTagsExtension)
 local _ = require(Markdown.Types)
 local CreateParserModule = require(Markdown.Adapter.createParser)
 local Frozen = table.freeze({
@@ -13,7 +15,7 @@ local Frozen = table.freeze({
 local Frozen1 = table.freeze({
 	"Code", "BackslashEscape", "Emphasis", "Link", "Image", "HardLineBreak"
 })
-local Frozen2 = table.freeze(require(Markdown.Parsers.FormattingTags.FormattingTagsExtension).create({ parseTags = true, maxNesting = 32 }))
+local Frozen2 = table.freeze(FormattingTagsExtensionModule.create({ parseTags = true, maxNesting = 32 }))
 local List = {
 	table.freeze(require(script.NoNestedQuote).extension()),
 	table.freeze(CommonMarkModule.Ext.Gfm.Strikethrough.StrikethroughExtension.builder():requireTwoTildes(false):build()),
@@ -21,7 +23,7 @@ local List = {
 	table.freeze(require(script.Mention.MentionExtension).create())
 }
 
-if require(Markdown.Flags).FFlagMarkdownFormattingTags then
+if FlagsModule.FFlagMarkdownFormattingTags then
 	table.insert(List, Frozen2)
 end
 local Frozen3 = table.freeze(List)

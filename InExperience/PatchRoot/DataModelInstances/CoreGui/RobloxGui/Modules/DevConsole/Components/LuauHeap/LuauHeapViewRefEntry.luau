@@ -80,13 +80,15 @@ end
 function LuauHeapViewRefEntry.render(p2)
 	-- upvalues: RefEntryFrameHeight (copy), ValueCellWidth (copy), RoactModule (copy), BannerButtonModule (copy), CellLabelModule (copy), CellPadding (copy)
 	local Props = p2.props
+	local Size = Props.size or UDim2.new(1, 0, 0, RefEntryFrameHeight)
+	local LayoutOrder = Props.layoutOrder or 0
 	local Data = Props.data
 	local list = { `{Data.Count}`, `{Data.Instances}` }
 	
 	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = Props.size or UDim2.new(1, 0, 0, RefEntryFrameHeight),
-		LayoutOrder = Props.layoutOrder or 0,
+		Size = Size,
+		LayoutOrder = LayoutOrder,
 		AutomaticSize = Enum.AutomaticSize.Y
 	}, {
 		layout = RoactModule.createElement("UIListLayout", {

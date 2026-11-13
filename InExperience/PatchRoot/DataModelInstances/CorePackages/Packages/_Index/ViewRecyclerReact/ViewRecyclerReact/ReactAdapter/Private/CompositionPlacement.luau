@@ -276,7 +276,7 @@ return {
 				if FFlagViewRecyclerReact08 then
 					Success, Result = pcall(NewPlacement.exchange, List1, List2)
 				else
-					v6, v74 = pcall(SlotBinder.apply, List1, List2)
+					v6, v75 = pcall(SlotBinder.apply, List1, List2)
 				end
 			end
 			if not (if FFlagViewRecyclerReact084 then Success elseif FFlagViewRecyclerReact08 then Success else v6) then

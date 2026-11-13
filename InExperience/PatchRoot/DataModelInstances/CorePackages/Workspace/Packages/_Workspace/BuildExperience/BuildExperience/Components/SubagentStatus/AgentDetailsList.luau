@@ -1,5 +1,6 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
+local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
@@ -17,7 +18,7 @@ local IconName = FoundationModule.Enums.IconName
 local InputSize = FoundationModule.Enums.InputSize
 local PopoverAlign = FoundationModule.Enums.PopoverAlign
 local PopoverSide = FoundationModule.Enums.PopoverSide
-local SubagentTaskStatus = require(Parent.DataHydration.CreatorAgentChat).SubagentTaskStatus
+local SubagentTaskStatus = CreatorAgentChatModule.SubagentTaskStatus
 local BuildAgentDetailsStatusMenuWidth = game:DefineFastInt("BuildAgentDetailsStatusMenuWidth", 172)
 
 local function _(List, Status)
@@ -193,12 +194,12 @@ return ReactModule.memo(function(Frame)
 	local t1 = {}
 	local CreateElementFunction = ReactModule.createElement
 	local config6 = { LayoutOrder = 1 }
-	local UseStateResult1_1 = nil
+	local Text = nil
 	
 	for _, value in list do
 		if value.status == UseStateResult1 then
-			UseStateResult1_1 = value.text
-			config6.text = UseStateResult1_1
+			Text = value.text
+			config6.text = Text
 			config6.trailing = IconName.ChevronLargeDown
 			config6.variant = ChipVariant.Standard
 			config6.size = ChipSize.Medium
@@ -213,5 +214,5 @@ return ReactModule.memo(function(Frame)
 			return CreateElementFunction4(View, config1, t)
 		end
 	end
-	UseStateResult1_1 = UseStateResult1 or "All"
+	Text = UseStateResult1 or "All"
 end)

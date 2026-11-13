@@ -203,6 +203,14 @@ return (setmetatable({
 		-- upvalues: report (copy)
 		report({ type = "viewed" })
 	end,
+	reportActivated = function()
+		-- upvalues: NotificationsOrchestratorModule (copy), report (copy)
+		if NotificationsOrchestratorModule.Flags.FFlagEnableNotificationsOrchestratorUnifiedLogging then
+			report({ type = "activated" })
+			
+			return
+		end
+	end,
 	dismiss = function()
 		-- upvalues: Flag (ref), report (copy)
 		Flag = true

@@ -1,4 +1,5 @@
 ﻿local Parent = script.Parent.Parent
+local DEV = require(Parent.ReactGlobals).__DEV__
 local SharedModule = require(Parent.Shared)
 local ReactSharedInternals = SharedModule.ReactSharedInternals
 local ReactCurrentDispatcher = ReactSharedInternals.ReactCurrentDispatcher
@@ -21,7 +22,7 @@ local function useMemoCacheDev(p1)
 end
 
 return {
-	c = if require(Parent.ReactGlobals).__DEV__ then useMemoCacheDev else useMemoCacheProd,
+	c = if DEV then useMemoCacheDev else useMemoCacheProd,
 	cg = function(p1, RenderingComponent)
 		-- upvalues: ReactCurrentCompilerRuntime (copy), ReactCurrentDispatcher (copy), REACTMEMOCACHESENTINEL (copy)
 		if RenderingComponent == nil or ReactCurrentCompilerRuntime.renderingComponent ~= RenderingComponent or ReactCurrentCompilerRuntime.guardedCacheGranted then

@@ -2,12 +2,13 @@
 local Parent = FriendsCalling.Parent
 local Players = game:GetService("Players")
 local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
 local _ = require(FriendsCalling.Components.CallParticipant.CallParticipantCard)
 local GetFriendsCallingStoreModule = require(FriendsCalling.Stores.GetFriendsCallingStore)
 local LoggerModule = require(FriendsCalling.Logger)
 local FriendsCallingParticipantStatus = Enum.FriendsCallingParticipantStatus
 local FriendsCallingPhase = Enum.FriendsCallingPhase
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseSignalStateFunction = SignalsReactModule.useSignalState
 local config = {
 	userId = 0,
 	name = "",

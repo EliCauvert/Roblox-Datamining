@@ -1,6 +1,7 @@
 ﻿local Parent = script.Parent.Parent.Parent
+local DependenciesModule = require(Parent.dependencies)
 local PresenceTypes = require(Parent.Analytics.Enums).PresenceTypes
-local PresenceType = require(Parent.dependencies).RoduxPresence.Enums.PresenceType
+local PresenceType = DependenciesModule.RoduxPresence.Enums.PresenceType
 local config = {
 	[PresenceType.InGame] = PresenceTypes.InGame.rawValue(),
 	[PresenceType.InStudio] = PresenceTypes.InStudio.rawValue(),

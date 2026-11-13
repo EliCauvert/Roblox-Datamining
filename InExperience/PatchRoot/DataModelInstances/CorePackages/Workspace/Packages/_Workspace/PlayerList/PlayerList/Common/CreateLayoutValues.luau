@@ -1,10 +1,11 @@
 ﻿local Parent = script.Parent.Parent
 local Parent1 = Parent.Parent
+local MemoizeFunction = require(Parent1.AppCommonLib).memoize
 local Images = require(Parent1.UIBlox).App.ImageSet.Images
 local FoundationModule = require(Parent1.Foundation)
 local FFlagPlayerListFoundationSubscriptionIconModule = require(Parent.Flags.FFlagPlayerListFoundationSubscriptionIcon)
 
-return (require(Parent1.AppCommonLib).memoize(function(IsTenFoot, p1)
+return (MemoizeFunction(function(IsTenFoot, p1)
 	-- upvalues: Images (copy), FFlagPlayerListFoundationSubscriptionIconModule (copy), FoundationModule (copy)
 	local config = { IsTenFoot = IsTenFoot }
 	

@@ -1,7 +1,8 @@
 ﻿local HttpService = game:GetService("HttpService")
 local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local HttpModule = require(Parent.Http)
 local FFlagAXMISEnableMultiShoppingUnifiedEvents = require(Parent.AvatarExperienceFlags).FFlagAXMISEnableMultiShoppingUnifiedEvents
-local MarketplaceName: string = `{require(Parent.Http).Url.APIS_URL}cloud/v2/avatar-marketplace-orders`
+local MarketplaceName: string = `{HttpModule.Url.APIS_URL}cloud/v2/avatar-marketplace-orders`
 
 return function(p1)
 	-- upvalues: FFlagAXMISEnableMultiShoppingUnifiedEvents (copy), HttpService (copy), MarketplaceName (copy)

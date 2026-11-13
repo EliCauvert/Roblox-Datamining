@@ -4,11 +4,12 @@ local Parent = Squads.Parent
 local ReactModule = require(Parent.React)
 local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
 local Cryo = DependenciesModule.Cryo
+local Foundation = DependenciesModule.Foundation
 local Roact = DependenciesModule.Roact
 local UseSelectorFunction = DependenciesModule.Hooks.useSelector
 local SquadState = require(Parent.SquadsCore.Enums).SquadState
 local UseSquadStateFunction = require(Parent.SquadsCore.Hooks).useSquadState
-local UseTokensFunction = DependenciesModule.Foundation.Hooks.useTokens
+local UseTokensFunction = Foundation.Hooks.useTokens
 local _ = require(Squads.Common.ModelTypes)
 local SquadUserPartyStatusModule = require(Squads.Enums.SquadUserPartyStatus)
 local SquadLobbyUserCardModule = require(script.Parent.SquadLobbyUserCard)
@@ -33,8 +34,8 @@ return function(p1)
 			-- upvalues: SquadUserPartyStatusModule (upval)
 			return p2.partyStatus ~= SquadUserPartyStatusModule.Inactive
 		end), 2) else 1
-		local Ceiled = nil
 		local Largest1 = nil
+		local Ceiled = nil
 		
 		if Largest <= 3 and XDeltaRatio > 1.75 and Largest * 120 + (Largest - 1) * Medium <= XDelta then
 			Ceiled = 1
@@ -60,7 +61,7 @@ return function(p1)
 		end
 		local List = {}
 		
-		local function v29(LayoutOrder, User, IsPartyStatusMatch)
+		local function v30(LayoutOrder, User, IsPartyStatusMatch)
 			-- upvalues: ReactModule (upval), SquadLobbyUserCardModule (upval), UseMemoResult (upval), UseSelectorResult (upval), p1 (upval)
 			return ReactModule.createElement(SquadLobbyUserCardModule, {
 				size = UDim2.fromOffset(UseMemoResult.X, UseMemoResult.Y),
@@ -77,9 +78,9 @@ return function(p1)
 		for i, user in ipairs(p1.users) do
 			if user.partyStatus ~= SquadUserPartyStatusModule.Inactive then
 				if user.userId == Number then
-					table.insert(List, v29(0, user, user.partyStatus == SquadUserPartyStatusModule.Connecting))
+					table.insert(List, v30(0, user, user.partyStatus == SquadUserPartyStatusModule.Connecting))
 				else
-					table.insert(List, v29(i, user, user.partyStatus == SquadUserPartyStatusModule.Connecting))
+					table.insert(List, v30(i, user, user.partyStatus == SquadUserPartyStatusModule.Connecting))
 				end
 			end
 		end

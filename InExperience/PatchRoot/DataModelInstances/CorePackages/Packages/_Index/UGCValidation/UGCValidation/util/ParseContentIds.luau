@@ -46,32 +46,32 @@ local _ = function(Text: string)
 	end
 end
 
-local function tryParseVersionedContentId(Text1: string)
+local function tryParseVersionedContentId(Text: string)
 	-- upvalues: getAssetUrlId (copy), getAssetDeliveryAssetUrlId (copy)
-	local Match, Match2, Match3 = string.match(Text1, "^(.*)&(%a+)=(%d+)$")
+	local Match, Match2, Match3 = string.match(Text, "^(.*)&(%a+)=(%d+)$")
 	local v1 = nil
-	local Text = nil
+	local Text1 = nil
 	
 	if Match == nil or string.lower(Match2) ~= "version" or #Match3 > 10 then
-		Text = Text1
+		Text1 = Text
 		v1 = nil
 	else
 		local Number: number? = tonumber(Match3)
 		
 		if Number == nil or Number < 1 then
-			Text = Text1
+			Text1 = Text
 			v1 = nil
 		else
-			Text = Match
+			Text1 = Match
 			v1 = Number
 		end
 	end
-	local Match1: string? = string.match(Text, "^%d+$")
+	local Match1: string? = string.match(Text1, "^%d+$")
 	
 	if Match1 ~= nil and v1 ~= nil then
 		return nil, nil
 	end
-	local Text2: string = Match1 or (string.match(Text, "^rbxassetid://(%d+)$") or (getAssetUrlId(Text) or getAssetDeliveryAssetUrlId(Text)))
+	local Text2: string = Match1 or (string.match(Text1, "^rbxassetid://(%d+)$") or (getAssetUrlId(Text1) or getAssetDeliveryAssetUrlId(Text1)))
 	
 	if Text2 == nil then
 		return nil, nil

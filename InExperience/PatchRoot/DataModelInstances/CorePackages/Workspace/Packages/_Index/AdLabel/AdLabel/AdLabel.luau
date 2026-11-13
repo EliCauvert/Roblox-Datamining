@@ -2,6 +2,7 @@
 local Parent1 = Parent.Parent
 local ReactModule = require(Parent1.React)
 local FoundationModule = require(Parent1.Foundation)
+local LocalizationModule = require(Parent1.Localization)
 local Icon = FoundationModule.Icon
 local View = FoundationModule.View
 local Text = FoundationModule.Text
@@ -9,7 +10,7 @@ local Menu = FoundationModule.Menu
 local Enums = FoundationModule.Enums
 local WhyThisAdModalModule = require(Parent.WhyThisAdModal)
 local AdDisclosureTelemetryModule = require(Parent.AdDisclosureTelemetry)
-local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 
 return ReactModule.memo(function(p1)
 	-- upvalues: UseLocalizationFunction (copy), Enums (copy), ReactModule (copy), AdDisclosureTelemetryModule (copy), View (copy), Menu (copy), Text (copy), Icon (copy), WhyThisAdModalModule (copy)

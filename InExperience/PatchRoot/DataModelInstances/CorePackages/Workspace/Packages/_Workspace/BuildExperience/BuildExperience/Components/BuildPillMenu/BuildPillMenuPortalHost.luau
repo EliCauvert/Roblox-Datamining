@@ -1,8 +1,9 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local GetBuildPillMenuPortalStoreModule = require(BuildExperience.Stores.GetBuildPillMenuPortalStore)
-local View = require(Parent.Foundation).View
+local View = FoundationModule.View
 
 return ReactModule.memo(function(p1)
 	-- upvalues: GetBuildPillMenuPortalStoreModule (copy), ReactModule (copy), View (copy)

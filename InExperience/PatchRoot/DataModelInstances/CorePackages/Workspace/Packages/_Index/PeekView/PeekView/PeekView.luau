@@ -25,6 +25,7 @@ local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
 local FocusNavigableSurfaceWrapper = FocusNavigationUtilsModule.FocusNavigableSurfaceWrapper
 local UsePeekViewFocusNavigationBindingsModule = require(script.Parent.usePeekViewFocusNavigationBindings)
 local GetFFlagEnablePeekViewStateOnMountParamFunction = require(Parent.SharedFlags).GetFFlagEnablePeekViewStateOnMountParam
+local GetFIntPeekViewTransitionDelayTimingFunction = require(Parent.SharedFlags).GetFIntPeekViewTransitionDelayTiming
 local FFlagProfilePlatformNewProfileHeader = require(Parent.SharedFlags).FFlagProfilePlatformNewProfileHeader
 local FFlagProfilePlatformPeekDraggerContrast = require(Parent.SharedFlags).FFlagProfilePlatformPeekDraggerContrast
 local EnableFastScrollingFixTest = game:DefineFastFlag("EnableFastScrollingFixTest", false)
@@ -34,7 +35,7 @@ local FixPeekViewAnimationJitter = game:DefineFastFlag("FixPeekViewAnimationJitt
 local FFlagPeekViewFixBriefHeightLayoutRace = require(Parent.SharedFlags).FFlagPeekViewFixBriefHeightLayoutRace
 local _Rect = Rect.new(9, 9, 9, 9)
 local IconsNavigationSwipe = UIBloxModule.App.ImageSet.Images["icons/navigation/swipe"]
-local ScaledFIntPeekViewTransitionDelayTiming = 0.1 * require(Parent.SharedFlags).GetFIntPeekViewTransitionDelayTiming()
+local ScaledFIntPeekViewTransitionDelayTiming = 0.1 * GetFIntPeekViewTransitionDelayTimingFunction()
 local Hidden = PeekViewStateModule.Hidden
 local Closed = PeekViewStateModule.Closed
 local SuperBrief = PeekViewStateModule.SuperBrief
@@ -788,9 +789,10 @@ function PeekView.renderWithStyle(p1, p2)
 		local Current = if AXMigratePeekViewToFocusNavigation then p1.props.swipeScrollingFrameRef.current else p1.swipeScrollingFrameRef.current
 		
 		if Current then
+			local Y = Current.CanvasPosition.Y
 			local BriefViewY = p1.getBriefViewY()
 			
-			return Transparency + math.max(0, (math.min(1, (Current.CanvasPosition.Y - BriefViewY) / ((if AXMigratePeekViewToFocusNavigation then p1.props.getFullViewY() else p1.getFullViewY()) - BriefViewY)))) * (1 - Transparency)
+			return Transparency + math.max(0, (math.min(1, (Y - BriefViewY) / ((if AXMigratePeekViewToFocusNavigation then p1.props.getFullViewY() else p1.getFullViewY()) - BriefViewY)))) * (1 - Transparency)
 		else
 			return Transparency
 		end

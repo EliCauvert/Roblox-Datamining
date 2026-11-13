@@ -6,11 +6,12 @@ local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDep
 local Roact = InGameMenuDependenciesModule.Roact
 local RoactRodux = InGameMenuDependenciesModule.RoactRodux
 local T = InGameMenuDependenciesModule.t
+local UIBlox = InGameMenuDependenciesModule.UIBlox
 local Parent = script.Parent.Parent
 local WithLocalizationModule = require(Parent.Localization.withLocalization)
 local SetMenuIconTooltipOpenModule = require(Parent.Actions.SetMenuIconTooltipOpen)
 local ConstantsModule = require(Parent.Parent.TopBar.Constants)
-local Tooltip = InGameMenuDependenciesModule.UIBlox.App.Dialog.Tooltip
+local Tooltip = UIBlox.App.Dialog.Tooltip
 local MenuIconTooltip = Roact.PureComponent:extend("MenuIconTooltip")
 MenuIconTooltip.validateProps = T.strictInterface({ isTooltipOpen = T.boolean, onDismiss = T.callback })
 

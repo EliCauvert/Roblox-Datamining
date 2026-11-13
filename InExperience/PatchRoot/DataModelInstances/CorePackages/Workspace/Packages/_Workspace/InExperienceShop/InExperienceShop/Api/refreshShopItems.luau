@@ -136,7 +136,7 @@ return {
 		local t1 = {}
 		local List5 = {}
 		
-		for _, value1 in ipairs(List4) do
+		for i, value1 in ipairs(List4) do
 			local Entry = t[MakeRequestKeyFunction(value1.id, value1.infoType)]
 			
 			if Entry == nil or not Entry.ok then

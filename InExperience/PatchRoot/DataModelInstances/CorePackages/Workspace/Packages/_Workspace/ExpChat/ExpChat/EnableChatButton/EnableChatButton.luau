@@ -3,6 +3,7 @@ local ExpChat = script:FindFirstAncestor("ExpChat")
 local Parent = ExpChat.Parent
 local ReactModule = require(Parent.React)
 local UseCursorFunction = require(Parent.UIBlox).App.SelectionCursor.useCursor
+local LocalizationModule = require(ExpChat.Localization)
 local ConfigModule = require(ExpChat.Config)
 local UseInterpolatedClientSettingsModule = require(ExpChat.ClientSettings.useInterpolatedClientSettings)
 local EnableChatButtonTelemetryEnabledEngineFeature = game:GetEngineFeature("EnableChatButtonTelemetryEnabled")
@@ -15,7 +16,7 @@ local function _(p1, p2)
 	end)
 end
 
-return require(ExpChat.Localization).connect(function()
+return LocalizationModule.connect(function()
 	return {
 		EnableChatButtonText = "CoreScripts.TextChat.EnableChatButton.Label.UnlockChat"
 	}

@@ -1,9 +1,12 @@
 ﻿local ExpChat = script:FindFirstAncestor("ExpChat")
 local Parent = ExpChat.Parent
 local ReactModule = require(Parent.React)
+local RoactUtilsModule = require(Parent.RoactUtils)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local GetChannelTabsStoreModule = require(ExpChat.Stores.GetChannelTabsStore)
 local SetChannelUnreadStatusModule = require(ExpChat.Actions.SetChannelUnreadStatus)
-local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local FFlagExpChatUseChannelTabsStore = SharedFlagsModule.FFlagExpChatUseChannelTabsStore
 
 local function useSignalsChannelTabUnreadWriter(p1)
 	-- upvalues: GetChannelTabsStoreModule (copy), ReactModule (copy)
@@ -25,4 +28,4 @@ local function useRoduxChannelTabUnreadWriter(p1)
 	end, { UseDispatchResult, p1 })
 end
 
-return if require(Parent.SharedFlags).FFlagExpChatUseChannelTabsStore then useSignalsChannelTabUnreadWriter else useRoduxChannelTabUnreadWriter
+return if FFlagExpChatUseChannelTabsStore then useSignalsChannelTabUnreadWriter else useRoduxChannelTabUnreadWriter

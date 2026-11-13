@@ -1,10 +1,11 @@
 ﻿local Parent = script:FindFirstAncestor("RobloxApolloClient").Parent
 local ApolloClientModule = require(Parent.ApolloClient)
+local ApolloLocalStateModule = require(Parent.ApolloLocalState)
 local GraphQLServer = require(Parent.GraphQLServer).GraphQLServer
 local ApolloClient = ApolloClientModule.ApolloClient
 local HttpLink = ApolloClientModule.HttpLink
 local InMemoryCache = ApolloClientModule.InMemoryCache
-local TypePolicies = require(Parent.ApolloLocalState).typePolicies
+local TypePolicies = ApolloLocalStateModule.typePolicies
 
 function initalizeApolloClient(p1)
 	-- upvalues: GraphQLServer (copy), HttpLink (copy), InMemoryCache (copy), TypePolicies (copy), ApolloClient (copy)

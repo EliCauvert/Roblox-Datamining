@@ -1,8 +1,9 @@
 ﻿local EditProfile = script:FindFirstAncestor("EditProfile")
 local Parent = EditProfile.Parent
+local RoduxNetworkingModule = require(Parent.RoduxNetworking)
 local HttpRequest = require(Parent.LuaSocialLibrariesDeps).httpRequest
 
-return (require(Parent.RoduxNetworking).config({
+return (RoduxNetworkingModule.config({
 	keyPath = require(EditProfile.Common.Constants).RODUX_KEY .. ".NetworkStatus",
 	networkImpl = HttpRequest.config({
 		requestFunction = function(p1, p2, p3)

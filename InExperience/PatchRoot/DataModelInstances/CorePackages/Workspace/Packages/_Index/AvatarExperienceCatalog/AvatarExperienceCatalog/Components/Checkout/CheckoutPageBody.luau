@@ -4,16 +4,18 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local TutilsModule = require(Parent.tutils)
 local CryoModule = require(Parent.Cryo)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local AvatarExperienceCommonModule = require(Parent.AvatarExperienceCommon)
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local GetTryOnItemReducerKeyFunction = AvatarExperienceCommonModule.Utils.getTryOnItemReducerKey
 local Constants = AvatarExperienceCommonModule.Constants
 local CheckoutRowItemCardModule = require(AvatarExperienceCatalog.Components.Checkout.CheckoutRowItemCard)
 local CheckoutErrorBannerModule = require(AvatarExperienceCatalog.Components.Checkout.CheckoutErrorBanner)
 local UseTimedOptionsFtuxModule = require(AvatarExperienceCatalog.Hooks.useTimedOptionsFtux)
-local FFlagAXMISWithBlackbird = require(Parent.SharedFlags).FFlagAXMISWithBlackbird
-local FFlagAXDurables2Option = require(Parent.AvatarExperienceFlags).FFlagAXDurables2Option
+local FFlagAXMISWithBlackbird = SharedFlagsModule.FFlagAXMISWithBlackbird
+local FFlagAXDurables2Option = AvatarExperienceFlagsModule.FFlagAXDurables2Option
 
 local function filterCartItems(CartItems, Callback)
 	-- upvalues: GetTryOnItemReducerKeyFunction (copy), ReactModule (copy), CheckoutRowItemCardModule (copy), CryoModule (copy)

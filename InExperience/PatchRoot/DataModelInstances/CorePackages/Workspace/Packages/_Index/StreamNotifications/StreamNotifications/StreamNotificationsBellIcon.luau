@@ -10,6 +10,7 @@ local UIBloxModule = require(Parent.UIBlox)
 local Badge = UIBloxModule.App.Indicator.Badge
 local IconButton = UIBloxModule.App.Button.IconButton
 local IconSize = UIBloxModule.App.Constant.IconSize
+local Images = UIBloxModule.App.ImageSet.Images
 local BadgeVariant = UIBloxModule.App.Indicator.Enum.BadgeVariant
 local UtilityActionIcon = UIBloxModule.App.Button.UtilityActionIcon
 local FoundationModule = require(Parent.Foundation)
@@ -34,14 +35,14 @@ local FFlagSignalsNavP3bTopBar = SharedFlagsModule.FFlagSignalsNavP3bTopBar
 local FFlagEnableHeaderBarButtonsUpdate = SharedFlagsModule.FFlagEnableHeaderBarButtonsUpdate
 local FFlagStreamNotificationDropdownSingleOwner = SharedFlagsModule.FFlagStreamNotificationDropdownSingleOwner
 local FFlagStreamNotificationDropdownFocusedOwner = SharedFlagsModule.FFlagStreamNotificationDropdownFocusedOwner
-local IconsCommonNotificationOff = UIBloxModule.App.ImageSet.Images["icons/common/notificationOff"]
+local IconsCommonNotificationOff = Images["icons/common/notificationOff"]
 
 local function _(): boolean
 	-- upvalues: ThirdPartyUserService (copy)
 	return ThirdPartyUserService and (ThirdPartyUserService:IsChatRestrictionSupported() and ThirdPartyUserService.FriendCommunicationRestrictionStatus ~= Enum.ChatRestrictionStatus.NotRestricted)
 end
 
-local function v33(p1)
+local function v34(p1)
 	-- upvalues: ReactModule (copy), FFlagStreamNotificationDropdownSingleOwner (copy), FFlagStreamNotificationDropdownFocusedOwner (copy), HttpService (copy), StreamNotificationStoreModule (copy), FFlagEnableNotificationsDeeplink (copy), UseSignalStateFunction (copy), StreamNotificationDropdownExperimentationModule (copy), UseTokensFunction (copy), FFlagStreamNotificationBellEntryPoint (copy), FFlagSignalsNavP3bTopBar (copy), NotificationHelper (copy), EventStream (copy), AnalyticsConstantsModule (copy), ConstantsModule (copy), StreamNotificationsModule (copy), GetFFlagNotificationsComplianceShouldRestrictStreamFunction (copy), ThirdPartyUserService (copy), IxpHelper (copy), GetFStringNotificationsStreamNotificationUXLayerFunction (copy), FFlagEnableHeaderBarButtonsUpdate (copy), FoundationModule (copy), IsAppNavEnabledFunction (copy), Popover (copy), PopoverSide (copy), PopoverAlign (copy), IconsCommonNotificationOff (copy), UtilityActionIcon (copy), IconButton (copy), IconSize (copy), Badge (copy), BadgeVariant (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local Current = nil
@@ -276,10 +277,10 @@ local function v33(p1)
 end
 
 if GetFFlagNotificationsComplianceShouldRestrictStreamFunction() then
-	v33 = RoactAppPolicy.connect(function(p1, _)
+	v34 = RoactAppPolicy.connect(function(p1, _)
 		return {
 			shouldRestrictStream = p1.getNotificationsCanReceiveStream() or false
 		}
-	end)(v33)
+	end)(v34)
 end
-return v33
+return v34

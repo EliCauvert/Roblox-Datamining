@@ -1,8 +1,9 @@
 ﻿local Parent = script:FindFirstAncestor("PeopleReactView").Parent
 local ReactModule = require(Parent.React)
 local PeopleServiceModule = require(Parent.PeopleService)
+local SignalsReactModule = require(Parent.SignalsReact)
 local View = require(Parent.Foundation).View
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseSignalStateFunction = SignalsReactModule.useSignalState
 local MenuButtonsModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui"):WaitForChild("Modules"):WaitForChild("Settings"):WaitForChild("Components"):WaitForChild("MenuButtons"):WaitForChild("MenuButtons"))
 
 return function()

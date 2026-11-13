@@ -10,6 +10,7 @@ local PerUserAppStorageModule = require(ExpChat.Utils.perUserAppStorage)
 local _ = require(script.Parent.StickyTabsStore)
 local SelectTabByTypeModule = require(ExpChat.TabNavigation.selectTabByType)
 local HasUserSelectedTabModule = require(ExpChat.mountClientApp.helpers.hasUserSelectedTab)
+local StickyTabCountersModule = require(script.Parent.StickyTabCounters)
 local ExpChatStickyTabTimeLimitSeconds = game:DefineFastInt("ExpChatStickyTabTimeLimitSeconds", 10)
 local StickyTabObserverModule = {}
 local v1 = nil
@@ -43,18 +44,25 @@ local _ = function(p1)
 end
 
 local _ = function(p1)
-	-- upvalues: FriendsChatTabNameModule (copy)
-	if type(p1) ~= "table" then
-		return nil
-	end
-	local TabName = p1.tabName
+	-- upvalues: FFlagExpChatUseChannelTabsStore (copy), GetChannelTabsStoreModule (copy)
+	return if FFlagExpChatUseChannelTabsStore then GetChannelTabsStoreModule(false).getSelectedTabName(false) else p1:getState().ChannelTabs.selectedTabName
+end
+
+local _ = function()
+	-- upvalues: PerUserAppStorageModule (copy), FriendsChatTabNameModule (copy)
+	local ExpChatStickyTabEntry = PerUserAppStorageModule.getEntry("ExpChatStickyTab")
 	
-	if type(TabName) == "string" then
-		local IsNotTabNameMatch: boolean = TabName ~= "RBXGeneral" and (TabName ~= "RBXGlobal" and TabName ~= FriendsChatTabNameModule)
-		
-		return if IsNotTabNameMatch and p1.experienceId ~= game.GameId then nil else TabName
+	if type(ExpChatStickyTabEntry) ~= "table" then
+		return nil, nil
+	end
+	local TabName = ExpChatStickyTabEntry.tabName
+	
+	if type(TabName) ~= "string" then
+		return nil, nil
+	elseif TabName ~= "RBXGeneral" and (TabName ~= "RBXGlobal" and TabName ~= FriendsChatTabNameModule) and ExpChatStickyTabEntry.experienceId ~= game.GameId then
+		return TabName, nil
 	else
-		return nil
+		return TabName, TabName
 	end
 end
 
@@ -117,74 +125,94 @@ local function watchForTabChanges(p1)
 end
 
 local function watchForDeveloperDefault()
-	-- upvalues: TextChatService (copy), ChannelName (ref), Connection (ref)
+	-- upvalues: TextChatService (copy), ChannelName (ref), v1 (ref), HasUserSelectedTabModule (copy), StickyTabCountersModule (copy), Connection (ref)
 	local ChatInputBarConfiguration = TextChatService:FindFirstChildOfClass("ChatInputBarConfiguration")
 	
 	if ChatInputBarConfiguration == nil then return end
 	local function onTargetChanged()
-		-- upvalues: ChatInputBarConfiguration (copy), ChannelName (upval)
+		-- upvalues: ChatInputBarConfiguration (copy), ChannelName (upval), v1 (upval), HasUserSelectedTabModule (upval), StickyTabCountersModule (upval)
 		local TargetTextChannel = ChatInputBarConfiguration.TargetTextChannel
 		
-		if TargetTextChannel and TargetTextChannel.Name ~= "RBXGeneral" and TargetTextChannel.Name ~= ChannelName then
+		if ChannelName and TargetTextChannel and TargetTextChannel.Name ~= "RBXGeneral" and TargetTextChannel.Name ~= ChannelName then
+			local HasUserSelectedTabModule1 = v1 ~= nil and HasUserSelectedTabModule(v1)
+			StickyTabCountersModule.reportRestored(ChannelName, if HasUserSelectedTabModule1 then "other_tab_pinned" else "developer_default")
 			ChannelName = nil
 		end
 	end
 	
 	local TargetTextChannel = ChatInputBarConfiguration.TargetTextChannel
 	
-	if TargetTextChannel and TargetTextChannel.Name ~= "RBXGeneral" and TargetTextChannel.Name ~= ChannelName then
+	if ChannelName and TargetTextChannel and TargetTextChannel.Name ~= "RBXGeneral" and TargetTextChannel.Name ~= ChannelName then
+		local HasUserSelectedTabModule1 = v1 ~= nil and HasUserSelectedTabModule(v1)
+		StickyTabCountersModule.reportRestored(ChannelName, if HasUserSelectedTabModule1 then "other_tab_pinned" else "developer_default")
 		ChannelName = nil
 	end
 	Connection = ChatInputBarConfiguration:GetPropertyChangedSignal("TargetTextChannel"):Connect(onTargetChanged)
 end
 
 function StickyTabObserverModule.start(p1, p2)
-	-- upvalues: v1 (ref), ClockTime (ref), ChannelName (ref), PerUserAppStorageModule (copy), FriendsChatTabNameModule (copy), watchForTabChanges (copy), watchForDeveloperDefault (copy), FFlagExpChatUseChannelTabsStore (copy), GetChannelTabsStoreModule (copy)
+	-- upvalues: v1 (ref), ClockTime (ref), PerUserAppStorageModule (copy), FriendsChatTabNameModule (copy), ChannelName (ref), StickyTabCountersModule (copy), watchForTabChanges (copy), watchForDeveloperDefault (copy)
 	p1:stop()
 	v1 = p2
 	ClockTime = os.clock()
 	local ExpChatStickyTabEntry = PerUserAppStorageModule.getEntry("ExpChatStickyTab")
+	local ChannelName1 = nil
 	local v3 = nil
 	
 	if type(ExpChatStickyTabEntry) == "table" then
 		local TabName = ExpChatStickyTabEntry.tabName
 		
 		if type(TabName) == "string" then
-			local IsNotTabNameMatch: boolean = TabName ~= "RBXGeneral" and (TabName ~= "RBXGlobal" and TabName ~= FriendsChatTabNameModule)
-			v3 = if IsNotTabNameMatch and ExpChatStickyTabEntry.experienceId ~= game.GameId then nil else TabName
+			if TabName ~= "RBXGeneral" and (TabName ~= "RBXGlobal" and TabName ~= FriendsChatTabNameModule) and ExpChatStickyTabEntry.experienceId ~= game.GameId then
+				v3 = TabName
+				ChannelName1 = nil
+			else
+				v3 = TabName
+				ChannelName1 = TabName
+			end
 		else
 			v3 = nil
+			ChannelName1 = nil
 		end
 	else
 		v3 = nil
+		ChannelName1 = nil
 	end
-	ChannelName = v3
+	ChannelName = ChannelName1
+	StickyTabCountersModule.reportStarted(v3, ChannelName1 ~= nil)
 	watchForTabChanges(p2)
 	watchForDeveloperDefault()
-	local ChannelName1 = ChannelName
 	
-	if ChannelName1 ~= nil and (if FFlagExpChatUseChannelTabsStore then GetChannelTabsStoreModule(false).getChannelTabsState(false).allChannelTabs else p2:getState().ChannelTabs.allChannelTabs)[ChannelName1] then
+	if ChannelName1 ~= nil then
 		p1:goToStickyTab(ChannelName1)
 	end
 end
 
 function StickyTabObserverModule:goToStickyTab(ChannelName1)
-	-- upvalues: ChannelName (ref), v1 (ref), FFlagExpChatUseChannelTabsStore (copy), GetChannelTabsStoreModule (copy), ClockTime (ref), ExpChatStickyTabTimeLimitSeconds (copy), HasUserSelectedTabModule (copy), SelectTabByTypeModule (copy), FriendsChatTabNameModule (copy)
-	if ChannelName1 ~= ChannelName then return end
+	-- upvalues: v1 (ref), ChannelName (ref), FFlagExpChatUseChannelTabsStore (copy), GetChannelTabsStoreModule (copy), ClockTime (ref), ExpChatStickyTabTimeLimitSeconds (copy), StickyTabCountersModule (copy), HasUserSelectedTabModule (copy), SelectTabByTypeModule (copy), FriendsChatTabNameModule (copy)
 	local v3 = v1
 	
-	if v3 == nil or not (if FFlagExpChatUseChannelTabsStore then GetChannelTabsStoreModule(false).getChannelTabsState(false).allChannelTabs else v3:getState().ChannelTabs.allChannelTabs)[ChannelName1] then return end
-	if ExpChatStickyTabTimeLimitSeconds < os.clock() - ClockTime or HasUserSelectedTabModule(v3) then
-		ChannelName = nil
-		
-		return
-	else
+	if ChannelName1 == ChannelName and v3 ~= nil and (if FFlagExpChatUseChannelTabsStore then GetChannelTabsStoreModule(false).getChannelTabsState(false).allChannelTabs else v3:getState().ChannelTabs.allChannelTabs)[ChannelName1] then
+		local IsExpChatStickyTabTimeLimitSecondsBelow = ExpChatStickyTabTimeLimitSeconds < os.clock() - ClockTime
 		task.defer(function()
-			-- upvalues: v1 (upval), v3 (copy), ChannelName (upval), ChannelName1 (copy), HasUserSelectedTabModule (upval), FFlagExpChatUseChannelTabsStore (upval), GetChannelTabsStoreModule (upval), SelectTabByTypeModule (upval), FriendsChatTabNameModule (upval)
+			-- upvalues: v1 (upval), v3 (copy), ChannelName (upval), ChannelName1 (copy), FFlagExpChatUseChannelTabsStore (upval), GetChannelTabsStoreModule (upval), StickyTabCountersModule (upval), IsExpChatStickyTabTimeLimitSecondsBelow (copy), HasUserSelectedTabModule (upval), SelectTabByTypeModule (upval), FriendsChatTabNameModule (upval)
 			if v1 ~= v3 or ChannelName ~= ChannelName1 then return end
 			ChannelName = nil
 			
-			if not HasUserSelectedTabModule(v3) and (if FFlagExpChatUseChannelTabsStore then GetChannelTabsStoreModule(false).getChannelTabsState(false).allChannelTabs else v3:getState().ChannelTabs.allChannelTabs)[ChannelName1] then
+			if not (if FFlagExpChatUseChannelTabsStore then GetChannelTabsStoreModule(false).getChannelTabsState(false).allChannelTabs else v3:getState().ChannelTabs.allChannelTabs)[ChannelName1] then
+				StickyTabCountersModule.reportRestored(ChannelName1, "tab_removed")
+				
+				return
+			end
+			if IsExpChatStickyTabTimeLimitSecondsBelow then
+				StickyTabCountersModule.reportRestored(ChannelName1, "too_late")
+				
+				return
+			end
+			local IsChannelNameMatch = (if FFlagExpChatUseChannelTabsStore then GetChannelTabsStoreModule(false).getSelectedTabName(false) else v3:getState().ChannelTabs.selectedTabName) == ChannelName1
+			
+			if IsChannelNameMatch or not HasUserSelectedTabModule(v3) then
+				StickyTabCountersModule.reportRestored(ChannelName1, if IsChannelNameMatch then "already_on_tab" else "switched")
 				SelectTabByTypeModule(function(p1)
 					-- upvalues: v3 (upval)
 					return v3:dispatch(p1)
@@ -196,8 +224,12 @@ function StickyTabObserverModule:goToStickyTab(ChannelName1)
 				})
 				
 				return
+			else
+				StickyTabCountersModule.reportRestored(ChannelName1, "other_tab_pinned")
 			end
 		end)
+		
+		return
 	end
 end
 

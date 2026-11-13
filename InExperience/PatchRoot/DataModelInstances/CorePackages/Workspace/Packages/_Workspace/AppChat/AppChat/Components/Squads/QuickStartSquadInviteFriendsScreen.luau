@@ -56,10 +56,11 @@ function QuickStartSquadInviteFriendsScreen.render(p1)
 	-- upvalues: ArgCheckModule (copy), ReactModule (copy), QuickStartSquadInviteFriendsContainerModule (copy)
 	local NavigationInCreateNewChatScreen = ArgCheckModule.isNotNil(p1.props.navigation, "navigation in CreateNewChatScreen")
 	local TopBarHeightScreenProps = NavigationInCreateNewChatScreen.getScreenProps("topBarHeight", 0)
+	local WideModeScreenProps = NavigationInCreateNewChatScreen.getScreenProps("wideMode", false)
 	
 	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = UDim2.new(1, 0, 1, if NavigationInCreateNewChatScreen.getScreenProps("wideMode", false) then -TopBarHeightScreenProps else 0)
+		Size = UDim2.new(1, 0, 1, if WideModeScreenProps then -TopBarHeightScreenProps else 0)
 	}, {
 		ReactModule.createElement(QuickStartSquadInviteFriendsContainerModule, {
 			navigateIntoSquadLobby = p1.navigateIntoSquadLobby,

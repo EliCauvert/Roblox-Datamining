@@ -21,10 +21,11 @@ local config = {
 	Position = UDim2.new(0, 24, 0.5, 0),
 	Size = UDim2.new(0, 44, 0, 44)
 }
+local ValidatePropsWithForwardRefFunction = require(CorePackages.Workspace.Packages.RoactUtils).validatePropsWithForwardRef
 local GetFFlagLuaAppEnableOpenTypeSupportFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagLuaAppEnableOpenTypeSupport
 local GetFFlagLuaAppEnableOpenTypeIGMFixFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagLuaAppEnableOpenTypeIGMFix
 local PlayerLabel = Roact.PureComponent:extend("PlayerLabel")
-PlayerLabel.validateProps = T.strictInterface(require(CorePackages.Workspace.Packages.RoactUtils).validatePropsWithForwardRef({
+PlayerLabel.validateProps = T.strictInterface(ValidatePropsWithForwardRefFunction({
 	userId = T.number,
 	username = T.string,
 	isOnline = T.boolean,
