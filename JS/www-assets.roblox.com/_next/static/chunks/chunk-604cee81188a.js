@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "9c0da28c-e568-ce32-9739-433baaa3390d")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "f6239778-5153-ebbc-134e-e45c5f4e9ca3")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 645020, e => {
@@ -729,7 +729,8 @@
             isWindows: !1
         },
         c = e => /Firefox\/|FxiOS\//i.test(e) ? "firefox" : /Edg(?:e|A|iOS)?\//i.test(e) ? "edge" : /Chrome\/|CriOS\//i.test(e) ? "chrome" : /Safari\//i.test(e) ? "safari" : "unknown";
-    e.s(["browserFromUserAgent", 0, c, "defaultDeviceMeta", 0, p], 673518), e.s(["getDeviceClient", 0, () => {
+    e.s(["browserFromUserAgent", 0, c, "defaultDeviceMeta", 0, p], 673518);
+    let u = () => {
         if (null == t.document) return p;
         let e = t.document.querySelector('meta[name="device-meta"]');
         if (null != e) {
@@ -740,7 +741,8 @@
             }
         }
         return p
-    }, "isIos13Ipad", 0, () => t.navigator?.platform === "MacIntel" && t.navigator.maxTouchPoints > 1], 358239)
+    };
+    e.s(["getDeviceClient", 0, u, "getDeviceMeta", 0, u, "isIos13Ipad", 0, () => t.navigator?.platform === "MacIntel" && t.navigator.maxTouchPoints > 1], 358239)
 }, 782009, e => {
     "use strict";
     var t = e.i(420482),
@@ -835,5 +837,5 @@
     }, "hashStringWithSha256", 0, d, "sign", 0, c, "stringToArrayBuffer", 0, n, "stringToUrlSafeBase64", 0, e => l(h(e).buffer).replace(/\+/g, "-").replace(/\//g, "_").replace(/=/g, ""), "textEncode", 0, h], 44170)
 }]);
 
-//# debugId=9c0da28c-e568-ce32-9739-433baaa3390d
-//# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/0ob_2dfe545f4.js.map
+//# debugId=f6239778-5153-ebbc-134e-e45c5f4e9ca3
+//# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/05-om1a7.w58f.js.map

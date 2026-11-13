@@ -1,183 +1,193 @@
 @font-face {
-    font-family: Comic Neue;
-    src: url(https://css.rbxcdn.com/7a41d8172d76c558.woff2)format("woff2");
-    font-weight: 400;
-    font-style: normal
-}
-
-@font-face {
-    font-family: Comic Neue;
-    src: url(https://css.rbxcdn.com/7a22b12771b98d4d.woff2)format("woff2");
-    font-weight: 700;
-    font-style: normal
-}
-
-@font-face {
     font-family: Builder Sans;
-    src: url(https://css.rbxcdn.com/751845fb13435230.woff2)format("woff2"), url(https://css.rbxcdn.com/6a0f34f41a26b66e.woff)format("woff");
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-Thin.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-Thin.woff)format("woff");
     font-weight: 100;
-    font-style: normal
+    font-style: normal;
+    font-display: swap
 }
 
 @font-face {
     font-family: Builder Sans;
-    src: url(https://css.rbxcdn.com/4f1026e53496b1d3.woff2)format("woff2"), url(https://css.rbxcdn.com/b4872f02f108cdab.woff)format("woff");
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-ThinItalic.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-ThinItalic.woff)format("woff");
     font-weight: 100;
-    font-style: italic
+    font-style: italic;
+    font-display: swap
 }
 
 @font-face {
     font-family: Builder Sans;
-    src: url(https://css.rbxcdn.com/9a0cad3cab3175e0.woff2)format("woff2"), url(https://css.rbxcdn.com/65a6fb4faaf36f36.woff)format("woff");
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-Light.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-Light.woff)format("woff");
     font-weight: 300;
-    font-style: normal
+    font-style: normal;
+    font-display: swap
 }
 
 @font-face {
     font-family: Builder Sans;
-    src: url(https://css.rbxcdn.com/46d5aa6758bddd3e.woff2)format("woff2"), url(https://css.rbxcdn.com/1aaf6d6423b57891.woff)format("woff");
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-LightItalic.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-LightItalic.woff)format("woff");
     font-weight: 300;
-    font-style: italic
+    font-style: italic;
+    font-display: swap
 }
 
 @font-face {
     font-family: Builder Sans;
-    src: url(https://css.rbxcdn.com/5f8b8d5d1962b747.woff2)format("woff2"), url(https://css.rbxcdn.com/a65216302c08dda8.woff)format("woff");
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-Regular.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-Regular.woff)format("woff");
     font-weight: 400;
-    font-style: normal
+    font-style: normal;
+    font-display: swap
 }
 
 @font-face {
     font-family: Builder Sans;
-    src: url(https://css.rbxcdn.com/622196842d3c64c2.woff2)format("woff2"), url(https://css.rbxcdn.com/348cff8a779b1813.woff)format("woff");
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-Italic.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-Italic.woff)format("woff");
     font-weight: 400;
-    font-style: italic
+    font-style: italic;
+    font-display: swap
 }
 
 @font-face {
     font-family: Builder Sans;
-    src: url(https://css.rbxcdn.com/7f3ddcb5a3796526.woff2)format("woff2"), url(https://css.rbxcdn.com/2a2531d511d57934.woff)format("woff");
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-Medium.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-Medium.woff)format("woff");
     font-weight: 500;
-    font-style: normal
+    font-style: normal;
+    font-display: swap
 }
 
 @font-face {
     font-family: Builder Sans;
-    src: url(https://css.rbxcdn.com/4f9472a07e64b815.woff2)format("woff2"), url(https://css.rbxcdn.com/410528d6d85fefed.woff)format("woff");
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-MediumItalic.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-MediumItalic.woff)format("woff");
     font-weight: 500;
-    font-style: italic
+    font-style: italic;
+    font-display: swap
 }
 
 @font-face {
     font-family: Builder Sans;
-    src: url(https://css.rbxcdn.com/77cbcd18c888e0f1.woff2)format("woff2"), url(https://css.rbxcdn.com/59280cfefe63a569.woff)format("woff");
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-SemiBold.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-SemiBold.woff)format("woff");
     font-weight: 600;
-    font-style: normal
+    font-style: normal;
+    font-display: swap
 }
 
 @font-face {
     font-family: Builder Sans;
-    src: url(https://css.rbxcdn.com/4c70c58728d4c988.woff2)format("woff2"), url(https://css.rbxcdn.com/1fed58db0025ed4f.woff)format("woff");
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-SemiBoldItalic.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-SemiBoldItalic.woff)format("woff");
     font-weight: 600;
-    font-style: italic
+    font-style: italic;
+    font-display: swap
 }
 
 @font-face {
     font-family: Builder Sans;
-    src: url(https://css.rbxcdn.com/3e19a797e2ce0522.woff2)format("woff2"), url(https://css.rbxcdn.com/ab14aff12bcddc27.woff)format("woff");
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-Bold.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-Bold.woff)format("woff");
     font-weight: 700;
-    font-style: normal
+    font-style: normal;
+    font-display: swap
 }
 
 @font-face {
     font-family: Builder Sans;
-    src: url(https://css.rbxcdn.com/a29e1d8162e123a2.woff2)format("woff2"), url(https://css.rbxcdn.com/794cfc49734a16e2.woff)format("woff");
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-BoldItalic.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-BoldItalic.woff)format("woff");
     font-weight: 700;
-    font-style: italic
+    font-style: italic;
+    font-display: swap
 }
 
 @font-face {
     font-family: Builder Sans;
-    src: url(https://css.rbxcdn.com/be234b98e1d313a5.woff2)format("woff2"), url(https://css.rbxcdn.com/b075e642010b513b.woff)format("woff");
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-ExtraBold.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-ExtraBold.woff)format("woff");
     font-weight: 800;
-    font-style: normal
+    font-style: normal;
+    font-display: swap
 }
 
 @font-face {
     font-family: Builder Sans;
-    src: url(https://css.rbxcdn.com/7c55f039ae2704c7.woff2)format("woff2"), url(https://css.rbxcdn.com/9e1e6f3d60c5013c.woff)format("woff");
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-ExtraBoldItalic.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-sans/BuilderSans-ExtraBoldItalic.woff)format("woff");
     font-weight: 800;
-    font-style: italic
+    font-style: italic;
+    font-display: swap
 }
 
 @font-face {
     font-family: Builder Extended;
-    src: url(https://css.rbxcdn.com/fc4541b407a52a92.woff2)format("woff2"), url(https://css.rbxcdn.com/cbc550e9bc3e6ff5.woff)format("woff");
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-Light.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-Light.woff)format("woff");
     font-weight: 300;
-    font-style: normal
+    font-style: normal;
+    font-display: swap
 }
 
 @font-face {
     font-family: Builder Extended;
-    src: url(https://css.rbxcdn.com/8c73eb363138b7d5.woff2)format("woff2"), url(https://css.rbxcdn.com/a427089d1f45e42e.woff)format("woff");
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-LightItalic.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-LightItalic.woff)format("woff");
     font-weight: 300;
-    font-style: italic
+    font-style: italic;
+    font-display: swap
 }
 
 @font-face {
     font-family: Builder Extended;
-    src: url(https://css.rbxcdn.com/e33616070474b1ec.woff2)format("woff2"), url(https://css.rbxcdn.com/426c2134590f8f5c.woff)format("woff");
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-Regular.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-Regular.woff)format("woff");
     font-weight: 400;
-    font-style: normal
+    font-style: normal;
+    font-display: swap
 }
 
 @font-face {
     font-family: Builder Extended;
-    src: url(https://css.rbxcdn.com/821fef81e7b819f3.woff2)format("woff2"), url(https://css.rbxcdn.com/543675eceb00fd2e.woff)format("woff");
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-Italic.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-Italic.woff)format("woff");
     font-weight: 400;
-    font-style: italic
+    font-style: italic;
+    font-display: swap
 }
 
 @font-face {
     font-family: Builder Extended;
-    src: url(https://css.rbxcdn.com/24a7ffe24ef1e616.woff2)format("woff2"), url(https://css.rbxcdn.com/e8839199d4d1895e.woff)format("woff");
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-SemiBold.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-SemiBold.woff)format("woff");
     font-weight: 600;
-    font-style: normal
+    font-style: normal;
+    font-display: swap
 }
 
 @font-face {
     font-family: Builder Extended;
-    src: url(https://css.rbxcdn.com/12937f3ca7bf40a7.woff2)format("woff2"), url(https://css.rbxcdn.com/3f5ccd571c3efd76.woff)format("woff");
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-SemiBoldItalic.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-SemiBoldItalic.woff)format("woff");
     font-weight: 600;
-    font-style: italic
+    font-style: italic;
+    font-display: swap
 }
 
 @font-face {
     font-family: Builder Extended;
-    src: url(https://css.rbxcdn.com/bbdb90c69a1ab78f.woff2)format("woff2"), url(https://css.rbxcdn.com/ae3d7668e0e4a202.woff)format("woff");
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-Bold.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-Bold.woff)format("woff");
     font-weight: 700;
-    font-style: normal
+    font-style: normal;
+    font-display: swap
 }
 
 @font-face {
     font-family: Builder Extended;
-    src: url(https://css.rbxcdn.com/7da4b595b449bac9.woff2)format("woff2"), url(https://css.rbxcdn.com/2a7ba8d66e3e4cc9.woff)format("woff");
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-BoldItalic.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-BoldItalic.woff)format("woff");
     font-weight: 700;
-    font-style: italic
+    font-style: italic;
+    font-display: swap
 }
 
 @font-face {
     font-family: Builder Extended;
-    src: url(https://css.rbxcdn.com/24fe8b0edbc0ca90.woff2)format("woff2"), url(https://css.rbxcdn.com/b7adb341f0e49d34.woff)format("woff");
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-ExtraBold.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-ExtraBold.woff)format("woff");
     font-weight: 800;
-    font-style: normal
+    font-style: normal;
+    font-display: swap
 }
 
 @font-face {
     font-family: Builder Extended;
-    src: url(https://css.rbxcdn.com/878f196c39133a6a.woff2)format("woff2"), url(https://css.rbxcdn.com/17c40ff1da118169.woff)format("woff");
+    src: url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-ExtraBoldItalic.woff2)format("woff2"), url(https://cdn.foundation.roblox.com/current/fonts/builder-extended/BuilderExtended-ExtraBoldItalic.woff)format("woff");
     font-weight: 800;
-    font-style: italic
+    font-style: italic;
+    font-display: swap
 }
 
 .dark-theme.builder-font .refresh-link-icon:after,
@@ -634,4 +644,4 @@
     font-weight: var(--font-weight-700)
 }
 
-/*# sourceMappingURL=https://sourcemaps.rbxcdn.com/builder-e3f53096fe970658.css.map*/
+/*# sourceMappingURL=https://sourcemaps.rbxcdn.com/builder-4760232c3252aa72.css.map*/

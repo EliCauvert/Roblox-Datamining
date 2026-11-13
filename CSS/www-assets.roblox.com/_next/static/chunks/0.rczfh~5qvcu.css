@@ -1,0 +1,1985 @@
+.d-inline {
+    display: inline
+}
+
+.d-flex {
+    display: flex
+}
+
+.d-flex-inline {
+    display: inline-flex
+}
+
+.gap-1 {
+    gap: .25rem !important
+}
+
+.justify-content-between {
+    justify-content: space-between
+}
+
+.justify-content-start {
+    justify-content: flex-start
+}
+
+.align-items-center {
+    align-items: center
+}
+
+.ml-1 {
+    margin-left: .25rem !important
+}
+
+.game-update-card p,
+.game-update-card span {
+    overflow-wrap: anywhere
+}
+
+.game-update-card>.gap-large {
+    row-gap: var(--gap-small, 8px)
+}
+
+.game-update-emphasis {
+    font-weight: 500
+}
+
+.game-update-action {
+    flex: auto
+}
+
+.game-update-spinner {
+    background-color: #0000;
+    background-image: url(../media/loading.0eecf3.9f87_1.gif);
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: auto 16px;
+    width: 100%;
+    height: 16px;
+    margin: 6px auto;
+    display: inline-block
+}
+
+.dark-theme .game-update-spinner {
+    background-image: url(../media/loading_dark.17~bhuv5_ekwm.gif)
+}
+
+.light-theme .game-update-spinner {
+    background-image: url(../media/loading_light.0xr60_-7a8~-5.gif)
+}
+
+.game-update-chevron {
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-size: 28px 28px;
+    width: 28px;
+    height: 28px;
+    display: inline-block
+}
+
+.light-theme .game-update-chevron {
+    opacity: .5;
+    background-image: url(../media/chevron-right-light.svg.03wavaw33q8dg.svg)
+}
+
+.dark-theme .game-update-chevron {
+    opacity: .7;
+    background-image: url(../media/chevron-right-dark.svg.0ili~mz9ypnon.svg)
+}
+
+.game-updates-panel {
+    flex-direction: column;
+    display: flex
+}
+
+.game-updates-panel-header {
+    align-items: center;
+    display: flex
+}
+
+.game-updates-panel-back {
+    cursor: pointer;
+    background: 0 0;
+    border: none;
+    align-items: center;
+    gap: 4px;
+    padding: 0;
+    display: flex
+}
+
+.game-updates-panel-list {
+    max-height: 600px;
+    overflow-y: auto
+}
+
+.game-updates-panel-row {
+    margin-bottom: 8px
+}
+
+.game-updates-panel-title {
+    font-weight: 500
+}
+
+.game-updates-panel-back-icon {
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-size: 28px 28px;
+    width: 28px;
+    height: 28px;
+    display: inline-block
+}
+
+.light-theme .game-updates-panel-back-icon {
+    opacity: .5;
+    background-image: url(../media/arrow-left-light.svg.033m57ryb030h.svg)
+}
+
+.dark-theme .game-updates-panel-back-icon {
+    opacity: .7;
+    background-image: url(../media/arrow-left-dark.svg.03ixc2gl6j.5f.svg)
+}
+
+.notification-stream-base {
+    border-radius: 8px;
+    width: 420px;
+    overflow: hidden
+}
+
+.notification-stream-scroll {
+    overscroll-behavior: contain;
+    padding: 8px;
+    overflow-x: hidden
+}
+
+.light-theme .notification-stream-scroll,
+.dark-theme .notification-stream-scroll {
+    background-color: var(--color-surface-200)
+}
+
+.notification-stream-header {
+    color: #fff;
+    background-color: #fff
+}
+
+.notification-stream-header.light-theme {
+    background-color: var(--color-surface-200);
+    color: var(--color-content-emphasis)
+}
+
+.notification-stream-header.light-theme.remove-panel {
+    background-color: #0000
+}
+
+.light-theme .notification-stream-header {
+    background-color: var(--color-surface-200);
+    color: var(--color-content-emphasis)
+}
+
+.light-theme .notification-stream-header.remove-panel {
+    background-color: #0000
+}
+
+.notification-stream-header.dark-theme {
+    background-color: var(--color-surface-200);
+    color: var(--color-content-emphasis)
+}
+
+.notification-stream-header.dark-theme.remove-panel {
+    background-color: #0000
+}
+
+.dark-theme .notification-stream-header {
+    background-color: var(--color-surface-200);
+    color: var(--color-content-emphasis)
+}
+
+.dark-theme .notification-stream-header.remove-panel {
+    background-color: #0000
+}
+
+.notification-stream-header:before,
+.notification-stream-header:after {
+    content: " ";
+    display: table
+}
+
+.notification-stream-header:after {
+    clear: both
+}
+
+.notification-stream-header {
+    z-index: 11;
+    border: 0;
+    border-radius: 8px 8px 0 0;
+    padding: 0;
+    line-height: 1.4em;
+    position: relative
+}
+
+.light-theme .notification-stream-header,
+.dark-theme .notification-stream-header {
+    background-color: var(--color-surface-100)
+}
+
+.notification-stream-header .text-label {
+    float: left;
+    padding: 7px 12px
+}
+
+.notification-stream-header .text-link {
+    float: right;
+    color: var(--color-extended-blue-500);
+    padding: 7px 12px
+}
+
+.notification-stream-banner:before,
+.notification-stream-banner:after {
+    content: " ";
+    display: table
+}
+
+.notification-stream-banner:after {
+    clear: both
+}
+
+.notification-stream-banner {
+    text-align: center;
+    z-index: 15;
+    width: 100%;
+    padding: 3px 0 0;
+    line-height: 1.4em;
+    transition: top .2s;
+    position: absolute;
+    top: -26px;
+    left: 0
+}
+
+.notification-stream-banner.banner-new {
+    background-color: var(--color-extended-gray-500);
+    text-align: center;
+    color: var(--color-extended-gray-100);
+    border: 0;
+    margin: 0
+}
+
+.notification-stream-banner.banner-new a,
+.notification-stream-banner.banner-new .alert-link,
+.notification-stream-banner.banner-new a:link,
+.notification-stream-banner.banner-new a:visited,
+.notification-stream-banner.banner-new a:hover,
+.notification-stream-banner.banner-new a:focus,
+.notification-stream-banner.banner-new a:active,
+.notification-stream-banner.banner-new .alert-link:link,
+.notification-stream-banner.banner-new .alert-link:visited,
+.notification-stream-banner.banner-new .alert-link:hover,
+.notification-stream-banner.banner-new .alert-link:focus,
+.notification-stream-banner.banner-new .alert-link:active {
+    color: var(--color-extended-gray-100)
+}
+
+.notification-stream-banner.banner-new {
+    padding: 3px
+}
+
+.notification-stream-banner.banner-new:hover {
+    cursor: pointer
+}
+
+.notification-stream-banner .banner-text {
+    width: calc(100% - 20px);
+    display: inline-block
+}
+
+.notification-stream-banner .icon-close-white {
+    float: right;
+    background-position: 0 -616px;
+    background-size: 28px;
+    width: 14px;
+    height: 14px;
+    position: relative;
+    top: 3px;
+    right: 5px
+}
+
+.notification-stream-banner .icon-close-white:hover {
+    cursor: pointer
+}
+
+.notification-stream-banner.on {
+    top: 0
+}
+
+.dark-theme .notification-stream-banner.banner-new {
+    background-color: var(--color-extended-gray-700);
+    text-align: center;
+    color: var(--color-extended-gray-500);
+    border: 0;
+    margin: 0
+}
+
+.dark-theme .notification-stream-banner.banner-new a,
+.dark-theme .notification-stream-banner.banner-new .alert-link,
+.dark-theme .notification-stream-banner.banner-new a:link,
+.dark-theme .notification-stream-banner.banner-new a:visited,
+.dark-theme .notification-stream-banner.banner-new a:hover,
+.dark-theme .notification-stream-banner.banner-new a:focus,
+.dark-theme .notification-stream-banner.banner-new a:active,
+.dark-theme .notification-stream-banner.banner-new .alert-link:link,
+.dark-theme .notification-stream-banner.banner-new .alert-link:visited,
+.dark-theme .notification-stream-banner.banner-new .alert-link:hover,
+.dark-theme .notification-stream-banner.banner-new .alert-link:focus,
+.dark-theme .notification-stream-banner.banner-new .alert-link:active {
+    color: var(--color-extended-gray-500)
+}
+
+.light-theme .notification-stream-banner.banner-new {
+    background-color: var(--color-extended-gray-500);
+    text-align: center;
+    color: var(--color-extended-gray-800);
+    border: 0;
+    margin: 0
+}
+
+.light-theme .notification-stream-banner.banner-new a,
+.light-theme .notification-stream-banner.banner-new .alert-link,
+.light-theme .notification-stream-banner.banner-new a:link,
+.light-theme .notification-stream-banner.banner-new a:visited,
+.light-theme .notification-stream-banner.banner-new a:hover,
+.light-theme .notification-stream-banner.banner-new a:focus,
+.light-theme .notification-stream-banner.banner-new a:active,
+.light-theme .notification-stream-banner.banner-new .alert-link:link,
+.light-theme .notification-stream-banner.banner-new .alert-link:visited,
+.light-theme .notification-stream-banner.banner-new .alert-link:hover,
+.light-theme .notification-stream-banner.banner-new .alert-link:focus,
+.light-theme .notification-stream-banner.banner-new .alert-link:active {
+    color: var(--color-extended-gray-800)
+}
+
+.notification-stream-banner-v2 {
+    position: relative
+}
+
+.notification-stream-banner-v2__text {
+    text-align: center
+}
+
+.notification-stream-banner-v2__close {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%)
+}
+
+.notification-stream-banner-v2--error {
+    color: #fff;
+    background-color: #e75750
+}
+
+.light-theme .notification-stream-banner-v2--new {
+    color: #353741;
+    background-color: #bcbec8
+}
+
+.dark-theme .notification-stream-banner-v2--new {
+    color: #bcbec8;
+    background-color: #494d5a
+}
+
+.sendr-notification-dismissed,
+.sendr-notification-visible {
+    width: 100%;
+    transition: right .8s;
+    position: relative;
+    right: 0
+}
+
+.sendr-notification-dismissed {
+    right: 100%
+}
+
+.legacy-notif-base {
+    background: 0 0;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    width: 100%;
+    min-height: 66px;
+    padding: 9px;
+    position: relative
+}
+
+.legacy-notif-base .notification-background-interaction {
+    background: 0 0;
+    border: none;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0
+}
+
+.legacy-notif-base .notification-background-unclickable {
+    cursor: default
+}
+
+.legacy-notif-base .notif-content-container {
+    align-items: flex-start;
+    display: flex
+}
+
+.legacy-notif-base .notif-content-container .avatar-sndr-overides {
+    position: inherit
+}
+
+.legacy-notif-base .meta-actions-toggle {
+    z-index: 1;
+    background: 0 0;
+    border: none;
+    padding: 0
+}
+
+.legacy-notif-base .text-content {
+    text-align: start;
+    flex-direction: column;
+    flex: 1;
+    align-items: flex-start;
+    padding-inline-start: 12px;
+    display: flex
+}
+
+.legacy-notif-base .text-content span {
+    overflow-wrap: anywhere
+}
+
+.legacy-notif-base .text-content {
+    line-height: 1.4em
+}
+
+.legacy-notif-base .game-icon-container,
+.legacy-notif-base .avatar-icon-container,
+.legacy-notif-base .group-icon-container,
+.legacy-notif-base .asset-icon-container {
+    border-radius: 8px;
+    width: 48px;
+    min-width: 48px;
+    height: 48px;
+    padding: 0
+}
+
+.legacy-notif-base .avatar-icon-container {
+    border-radius: 50%
+}
+
+.legacy-notif-base .button-row-container {
+    flex-direction: row;
+    width: 100%;
+    height: 28px;
+    margin-top: 6px;
+    display: flex
+}
+
+.legacy-notif-base .notif-row-left-button,
+.legacy-notif-base .notif-row-right-button {
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    padding: 0
+}
+
+.legacy-notif-base .notif-row-right-button {
+    margin-inline-start: 6px
+}
+
+.meta-actions-list-base {
+    z-index: 100;
+    background: #000000d9;
+    flex-direction: column;
+    justify-content: center;
+    padding: 12px;
+    display: flex;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0
+}
+
+.meta-actions-list-base .meta-actions-overlay {
+    background-color: var(--color-extended-gray-300)
+}
+
+.meta-actions-list-base .meta-actions-overlay.light-theme {
+    background-color: var(--color-surface-300);
+    color: var(--color-content-emphasis)
+}
+
+.meta-actions-list-base .meta-actions-overlay.light-theme.remove-panel {
+    background-color: #0000
+}
+
+.light-theme .meta-actions-list-base .meta-actions-overlay {
+    background-color: var(--color-surface-300);
+    color: var(--color-content-emphasis)
+}
+
+.light-theme .meta-actions-list-base .meta-actions-overlay.remove-panel {
+    background-color: #0000
+}
+
+.meta-actions-list-base .meta-actions-overlay.dark-theme {
+    background-color: var(--color-surface-300);
+    color: var(--color-content-emphasis)
+}
+
+.meta-actions-list-base .meta-actions-overlay.dark-theme.remove-panel {
+    background-color: #0000
+}
+
+.dark-theme .meta-actions-list-base .meta-actions-overlay {
+    background-color: var(--color-surface-300);
+    color: var(--color-content-emphasis)
+}
+
+.dark-theme .meta-actions-list-base .meta-actions-overlay.remove-panel {
+    background-color: #0000
+}
+
+.meta-actions-list-base .meta-actions-overlay {
+    border: none;
+    border-radius: 8px
+}
+
+.meta-actions-list-base .meta-action-button-group {
+    margin-top: 9px
+}
+
+.meta-actions-list-base .meta-action-button-group .meta-action-button {
+    text-align: start;
+    background: 0 0;
+    border: none;
+    width: 100%;
+    padding: 12px 16px;
+    display: flex
+}
+
+.meta-actions-list-base .meta-action-button-group .meta-action-button-text {
+    margin-top: auto;
+    margin-bottom: auto;
+    text-align: center;
+    height: 100%;
+    margin-inline-start: 14px;
+    font-size: small;
+    line-height: 100%
+}
+
+.light-theme .experience-join-failure-modal {
+    background-color: var(--color-surface-300);
+    border-radius: 0
+}
+
+.light-theme .experience-join-failure-modal .join-failure-modal-title {
+    color: var(--color-content-emphasis);
+    padding: 12px
+}
+
+.light-theme .experience-join-failure-modal .join-failure-modal-content-root {
+    padding: 12px
+}
+
+.light-theme .experience-join-failure-modal .join-failure-modal-body {
+    color: var(--color-content-default)
+}
+
+.light-theme .experience-join-failure-modal .join-failure-modal-actions {
+    justify-content: center;
+    padding-top: 0;
+    padding-bottom: 24px
+}
+
+.light-theme .experience-join-failure-modal .join-failure-modal-button {
+    border-color: var(--color-extended-black-50);
+    color: var(--color-extended-black-50);
+    text-transform: none;
+    border-radius: 5px;
+    min-width: 90px;
+    font-size: 16px
+}
+
+.light-theme .experience-join-failure-modal .join-failure-modal-button:hover {
+    border-color: var(--color-extended-gray-900);
+    color: var(--color-extended-gray-900);
+    transition: none
+}
+
+.dark-theme .experience-join-failure-modal {
+    background-color: var(--color-surface-300);
+    border-radius: 0
+}
+
+.dark-theme .experience-join-failure-modal .join-failure-modal-title {
+    color: var(--color-content-emphasis);
+    padding: 12px
+}
+
+.dark-theme .experience-join-failure-modal .join-failure-modal-content-root {
+    padding: 12px
+}
+
+.dark-theme .experience-join-failure-modal .join-failure-modal-body {
+    color: var(--color-content-default)
+}
+
+.dark-theme .experience-join-failure-modal .join-failure-modal-actions {
+    justify-content: center;
+    padding-top: 0;
+    padding-bottom: 24px
+}
+
+.dark-theme .experience-join-failure-modal .join-failure-modal-button {
+    border-color: var(--color-extended-white-70);
+    color: var(--color-extended-white-70);
+    text-transform: none;
+    border-radius: 5px;
+    min-width: 90px;
+    font-size: 16px
+}
+
+.dark-theme .experience-join-failure-modal .join-failure-modal-button:hover {
+    border-color: var(--color-extended-white-100);
+    color: var(--color-extended-white-100);
+    transition: none
+}
+
+.report-notification-modal .reported-notification {
+    margin: 8px 0
+}
+
+.report-notification-modal .MuiGrid-item:not(:last-of-type) {
+    margin-bottom: 12px
+}
+
+.report-notification-modal .MuiGrid-item:last-of-type {
+    margin-bottom: 4px
+}
+
+.report-notification-modal .notification-api-error {
+    padding: 12px 24px 0
+}
+
+.report-notification-modal .report-eu-dsa-text {
+    text-align: center;
+    padding: 0 12px 12px
+}
+
+.report-notification-modal .report-eu-dsa-text .text-link {
+    color: var(--color-extended-blue-500)
+}
+
+#notifications-bell-badge.bell-red-badge {
+    background-color: var(--color-extended-red-800);
+    color: var(--color-extended-white-100)
+}
+
+@keyframes hideItems {
+    0% {
+        margin-top: 0
+    }
+
+    to {
+        opacity: 0;
+        margin-top: -15%;
+        transform: scale(.95)
+    }
+}
+
+@keyframes showItems {
+    to {
+        opacity: 1;
+        margin-top: 0;
+        transform: scale(1)
+    }
+
+    10% {
+        opacity: 0
+    }
+
+    0% {
+        opacity: 0;
+        margin-top: -25%;
+        transform: scale(.95)
+    }
+}
+
+.notification-bundle {
+    margin: auto;
+    position: relative
+}
+
+.notification-bundle.open {
+    margin-top: 4px;
+    padding-top: 36px
+}
+
+.notification-bundle.closed {
+    margin-bottom: 29px
+}
+
+.notification-bundle.closed .sendr-notification-visible:first-of-type {
+    border-radius: 8px
+}
+
+.notification-bundle.closed .sendr-notification-visible:not(:first-of-type) {
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0
+}
+
+.light-theme .notification-bundle.closed.multiple-shadows .sendr-notification-visible:first-of-type {
+    box-shadow: 0 3px 4px -2px var(--color-extended-black-10), 0 10px 0 -4px var(--color-extended-gray-200), 0px 16px 0px -5.5px color-mix(in srgb, var(--color-extended-gray-300) 90%, transparent), 0 16px 10px -8px var(--color-extended-black-10);
+    z-index: 1;
+    transition: box-shadow .3s .5s
+}
+
+.dark-theme .notification-bundle.closed.multiple-shadows .sendr-notification-visible:first-of-type {
+    box-shadow: 0 3px 4px -2px color-mix(in srgb, var(--color-extended-gray-1200) 80%, transparent), 0 10px 0 -4px color-mix(in srgb, var(--color-extended-gray-900) 90%, transparent), 0px 16px 0px -5.5px var(--color-extended-gray-600), 0 16px 10px -8px color-mix(in srgb, var(--color-extended-gray-1200) 80%, transparent);
+    z-index: 1;
+    transition: box-shadow .3s .5s
+}
+
+.notification-bundle.closed.multiple-shadows .sendr-notification-visible:not(:first-of-type) {
+    animation: forwards hideItems
+}
+
+.light-theme .notification-bundle.closed.single-shadow .sendr-notification-visible:first-of-type {
+    box-shadow: 0 3px 4px -2px var(--color-extended-black-10), 0 10px 0 -4px color-mix(in srgb, var(--color-extended-gray-300) 90%, transparent), 0 16px 10px -8px var(--color-extended-black-10);
+    z-index: 1;
+    transition: box-shadow .3s .5s
+}
+
+.dark-theme .notification-bundle.closed.single-shadow .sendr-notification-visible:first-of-type {
+    box-shadow: 0 3px 4px -2px color-mix(in srgb, var(--color-extended-gray-1200) 80%, transparent), 0 10px 0 -4px var(--color-extended-gray-600), 0 16px 10px -8px color-mix(in srgb, var(--color-extended-gray-1200) 80%, transparent);
+    z-index: 1;
+    transition: box-shadow .3s .5s
+}
+
+.notification-bundle.closed.single-shadow .sendr-notification-visible:not(:first-of-type) {
+    animation: forwards hideItems
+}
+
+.notification-bundle.closed.multiple-shadows.animation-enabled .sendr-notification-visible:not(:first-of-type),
+.notification-bundle.closed.single-shadow.animation-enabled .sendr-notification-visible:not(:first-of-type) {
+    animation: .7s cubic-bezier(.25, 1, .5, 1) forwards hideItems
+}
+
+.notification-bundle.open .sendr-notification-visible:first-of-type {
+    z-index: 1;
+    transition: box-shadow .3s
+}
+
+.notification-bundle.open .sendr-notification-visible:not(:first-of-type) {
+    animation: .7s cubic-bezier(.25, 1, .5, 1) forwards showItems
+}
+
+.notification-bundle.open .sendr-notification-visible:not(:last-of-type) {
+    margin-bottom: 8px
+}
+
+.bundle-button {
+    font-size: 12px;
+    font-weight: var(--font-weight-700);
+    border: none;
+    border-radius: 16px;
+    height: 32px;
+    padding: 0 16px
+}
+
+.light-theme .bundle-button {
+    background-color: color-mix(in srgb, var(--color-extended-gray-300) 90%, transparent)
+}
+
+.dark-theme .bundle-button {
+    background-color: var(--color-extended-gray-600)
+}
+
+.bundle-button.closed {
+    position: absolute;
+    bottom: -21px;
+    left: 50%;
+    transform: translate(-50%)
+}
+
+.bundle-button.open {
+    position: absolute;
+    top: 0;
+    right: 0
+}
+
+.light-theme .bundle-button.open,
+.dark-theme .bundle-button.open {
+    background-color: var(--color-surface-100)
+}
+
+.bundle-button-label {
+    margin-right: 3px
+}
+
+.bundle-wrapper-button {
+    margin: none;
+    padding: none;
+    cursor: pointer;
+    z-index: 2;
+    background: 0 0;
+    border: none;
+    width: 100%;
+    height: 95%;
+    position: absolute;
+    top: 0;
+    bottom: -10px;
+    left: 0;
+    right: 0
+}
+
+.sendr-notification-kebab {
+    flex-shrink: 0;
+    line-height: 0
+}
+
+.notification-card-tight>.gap-large {
+    row-gap: var(--gap-small, 8px)
+}
+
+button.sendr-notification-button {
+    box-sizing: border-box;
+    border: 1px solid #0000
+}
+
+button.sendr-notification-button--growth {
+    color: #f7f7f8;
+    background-color: #335fff
+}
+
+button.sendr-notification-button--secondary,
+button.sendr-notification-button--alert {
+    background-color: #0000
+}
+
+button.sendr-notification-button--alert {
+    color: #e75750;
+    border-color: #e75750
+}
+
+.light-theme button.sendr-notification-button--primary {
+    color: #fff;
+    background-color: #272930;
+    border-color: #272930
+}
+
+.dark-theme button.sendr-notification-button--primary {
+    color: #272930;
+    background-color: #fff;
+    border-color: #fff
+}
+
+.light-theme button.sendr-notification-button--secondary {
+    color: #6a6f81;
+    border-color: #494d5a
+}
+
+.dark-theme button.sendr-notification-button--secondary {
+    color: #bcbec8;
+    border-color: #d5d7dd
+}
+
+:where(.notification-stream-base, .report-notification-modal) {
+    color: var(--color-content-emphasis)
+}
+
+:where(.notification-stream-base, .report-notification-modal) .app-icon-bluebg {
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: inline-block
+}
+
+:where(.notification-stream-base, .report-notification-modal) .app-icon-windows {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDI0IiBoZWlnaHQ9IjEwMjQiIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAxMDI0IDEwMjQiPjxnIGNsaXAtcGF0aD0idXJsKCNhKSI+PG1hc2sgaWQ9ImIiIHdpZHRoPSIxMDI0IiBoZWlnaHQ9IjEwMjQiIHg9IjAiIHk9IjAiIG1hc2tVbml0cz0idXNlclNwYWNlT25Vc2UiIHN0eWxlPSJtYXNrLXR5cGU6YWxwaGEiPjxwYXRoIGZpbGw9IiNkOWQ5ZDkiIGQ9Ik0wIDM2NS44NTZjMC0xMjguMDYxIDAtMTkyLjA5MiAyNC45MjMtMjQxLjAwNWEyMjguNjYgMjI4LjY2IDAgMCAxIDk5LjkyOC05OS45MjhDMTczLjc2NCAwIDIzNy43OTUgMCAzNjUuODU2IDBoMjkyLjI4OGMxMjguMDYxIDAgMTkyLjA5MiAwIDI0MS4wMDUgMjQuOTIzYTIyOC42NiAyMjguNjYgMCAwIDEgOTkuOTI5IDk5LjkyOEMxMDI0IDE3My43NjQgMTAyNCAyMzcuNzk1IDEwMjQgMzY1Ljg1NnYyOTIuMjg4YzAgMTI4LjA2MSAwIDE5Mi4wOTItMjQuOTIyIDI0MS4wMDVhMjI4LjY2IDIyOC42NiAwIDAgMS05OS45MjkgOTkuOTI5Qzg1MC4yMzYgMTAyNCA3ODYuMjA1IDEwMjQgNjU4LjE0NCAxMDI0SDM2NS44NTZjLTEyOC4wNjEgMC0xOTIuMDkyIDAtMjQxLjAwNS0yNC45MjJhMjI4LjY2IDIyOC42NiAwIDAgMS05OS45MjgtOTkuOTI5QzAgODUwLjIzNiAwIDc4Ni4yMDUgMCA2NTguMTQ0eiIvPjwvbWFzaz48ZyBtYXNrPSJ1cmwoI2IpIj48cGF0aCBmaWxsPSIjMzM1ZmZmIiBkPSJNMCAwaDEwMjR2MTAyNEgweiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Im0zMDcuMjAxIDE1Ny4yODEtMTQ5LjkyIDU1OS41MTggNTU5LjUxOCAxNDkuOTIgMTQ5LjkyLTU1OS41MTh6bTI2Mi4wNDEgNDUzLjg3Ni0xNTYuMzQ5LTQxLjkxNSA0MS45MTQtMTU2LjM0OSAxNTYuNDEyIDQxLjkxNHoiLz48L2c+PC9nPjxkZWZzPjxjbGlwUGF0aCBpZD0iYSI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTAgMGgxMDI0djEwMjRIMHoiLz48L2NsaXBQYXRoPjwvZGVmcz48L3N2Zz4=)
+}
+
+:where(.notification-stream-base, .report-notification-modal) a {
+    background: 0 0
+}
+
+:where(.notification-stream-base, .report-notification-modal) a:active,
+:where(.notification-stream-base, .report-notification-modal) a:hover {
+    outline: 0
+}
+
+:where(.notification-stream-base, .report-notification-modal) button,
+:where(.notification-stream-base, .report-notification-modal) select,
+:where(.notification-stream-base, .report-notification-modal) textarea {
+    color: inherit;
+    font: inherit;
+    margin: 0
+}
+
+:where(.notification-stream-base, .report-notification-modal) button {
+    overflow: visible
+}
+
+:where(.notification-stream-base, .report-notification-modal) button,
+:where(.notification-stream-base, .report-notification-modal) select {
+    text-transform: none
+}
+
+:where(.notification-stream-base, .report-notification-modal) button {
+    -webkit-appearance: button;
+    appearance: button;
+    cursor: pointer
+}
+
+:where(.notification-stream-base, .report-notification-modal) textarea {
+    overflow: auto
+}
+
+:where(.notification-stream-base, .report-notification-modal) h2 {
+    font-size: 20px;
+    line-height: 1.4em;
+    font-weight: var(--font-weight-700);
+    margin: 0;
+    padding: 5px 0
+}
+
+@media (max-width:767px) {
+    :where(.notification-stream-base, .report-notification-modal) h2 {
+        font-size: 16px
+    }
+}
+
+:where(.notification-stream-base, .report-notification-modal) p {
+    font-size: 16px;
+    font-weight: var(--font-weight-400)
+}
+
+:where(.notification-stream-base, .report-notification-modal) .text {
+    color: var(--color-extended-gray-1200)
+}
+
+:where(.notification-stream-base, .report-notification-modal) .text-link,
+:where(.notification-stream-base, .report-notification-modal) .text-link:link,
+:where(.notification-stream-base, .report-notification-modal) .text-link:hover,
+:where(.notification-stream-base, .report-notification-modal) .text-link:visited,
+:where(.notification-stream-base, .report-notification-modal) .text-link:active {
+    color: var(--color-extended-blue-500)
+}
+
+:where(.notification-stream-base, .report-notification-modal) .text-link:hover,
+:where(.notification-stream-base, .report-notification-modal) .text-link:focus {
+    text-decoration: underline
+}
+
+:where(.notification-stream-base, .report-notification-modal) .text-label {
+    color: var(--color-extended-gray-500);
+    font-weight: var(--font-weight-400)
+}
+
+:where(.notification-stream-base, .report-notification-modal),
+:where(.notification-stream-base, .report-notification-modal) *,
+:where(.notification-stream-base, .report-notification-modal) :before,
+:where(.notification-stream-base, .report-notification-modal) :after,
+:where(.notification-stream-base, .report-notification-modal):before,
+:where(.notification-stream-base, .report-notification-modal):after {
+    box-sizing: inherit;
+    box-sizing: border-box;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased
+}
+
+:where(.notification-stream-base, .report-notification-modal) p {
+    margin: 0;
+    line-height: 1.5em
+}
+
+:where(.notification-stream-base, .report-notification-modal) a {
+    color: inherit;
+    cursor: pointer;
+    text-decoration: none
+}
+
+:where(.notification-stream-base, .report-notification-modal) ul,
+:where(.notification-stream-base, .report-notification-modal) li {
+    margin: 0;
+    padding: 0;
+    list-style: none
+}
+
+:where(.notification-stream-base, .report-notification-modal) select,
+:where(.notification-stream-base, .report-notification-modal) option {
+    -webkit-appearance: none;
+    appearance: none
+}
+
+:where(.notification-stream-base, .report-notification-modal) button[class^=btn] {
+    font-weight: var(--font-weight-500)
+}
+
+:where(.notification-stream-base, .report-notification-modal) .btn-primary-lg {
+    -webkit-user-select: none;
+    user-select: none;
+    background-color: var(--color-extended-green-800);
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--color-extended-green-800);
+    color: var(--color-extended-white-100);
+    cursor: pointer;
+    font-weight: var(--font-weight-500);
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border-image: ;
+    border-radius: 5px;
+    height: auto;
+    padding: 15px;
+    font-size: 20px;
+    line-height: 100%;
+    display: inline-block
+}
+
+:where(.notification-stream-base, .report-notification-modal) .btn-primary-lg:link {
+    color: var(--color-extended-white-100)
+}
+
+:where(.notification-stream-base, .report-notification-modal) .btn-primary-lg:hover,
+:where(.notification-stream-base, .report-notification-modal) .btn-primary-lg:focus {
+    background-color: var(--color-extended-green-500);
+    border-color: var(--color-extended-green-500);
+    color: var(--color-extended-white-100);
+    cursor: pointer
+}
+
+:where(.notification-stream-base, .report-notification-modal) .btn-primary-lg:active {
+    background-color: var(--color-extended-green-500);
+    color: var(--color-extended-white-100)
+}
+
+:where(.notification-stream-base, .report-notification-modal) .btn-primary-lg:active:focus {
+    outline: 0
+}
+
+:where(.notification-stream-base, .report-notification-modal) .btn-primary-lg:visited {
+    color: var(--color-extended-white-100)
+}
+
+:where(.notification-stream-base, .report-notification-modal) .btn-primary-lg:visited:focus {
+    outline: 0
+}
+
+:where(.notification-stream-base, .report-notification-modal) .btn-primary-lg[disabled],
+:where(.notification-stream-base, .report-notification-modal) .btn-primary-lg[disabled]:hover,
+:where(.notification-stream-base, .report-notification-modal) .btn-primary-lg[disabled]:focus,
+:where(.notification-stream-base, .report-notification-modal) .btn-primary-lg[disabled]:active {
+    opacity: .5;
+    background-color: var(--color-extended-green-200);
+    border-color: var(--color-extended-green-200);
+    color: var(--color-extended-white-100);
+    cursor: not-allowed;
+    pointer-events: none
+}
+
+@media (max-width:767px) {
+    :where(.notification-stream-base, .report-notification-modal) .btn-primary-lg {
+        border-radius: 3px;
+        padding: 9px;
+        font-size: 16px;
+        line-height: 100%
+    }
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .btn-primary-lg {
+    background-color: var(--color-extended-gray-900);
+    border-color: var(--color-extended-gray-900);
+    color: var(--color-extended-white-100);
+    border-radius: 8px
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .btn-primary-lg:link {
+    color: var(--color-extended-white-100)
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .btn-primary-lg:hover,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .btn-primary-lg:focus {
+    background-color: var(--color-extended-gray-900);
+    border-color: var(--color-extended-gray-900);
+    color: var(--color-extended-white-100)
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .btn-primary-lg:active {
+    background-color: var(--color-extended-gray-900);
+    color: var(--color-extended-white-100)
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .btn-primary-lg:visited {
+    color: var(--color-extended-white-100)
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .btn-primary-lg[disabled],
+.light-theme :where(.notification-stream-base, .report-notification-modal) .btn-primary-lg[disabled]:hover,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .btn-primary-lg[disabled]:focus,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .btn-primary-lg[disabled]:active {
+    background-color: var(--color-extended-gray-900);
+    border-color: var(--color-extended-gray-900);
+    color: var(--color-extended-white-100);
+    opacity: .5
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .btn-primary-lg {
+    background-color: var(--color-extended-white-100);
+    border-color: var(--color-extended-white-100);
+    color: var(--color-extended-gray-900);
+    border-radius: 8px
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .btn-primary-lg:link {
+    color: var(--color-extended-gray-900)
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .btn-primary-lg:hover,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .btn-primary-lg:focus {
+    background-color: var(--color-extended-white-100);
+    border-color: var(--color-extended-white-100);
+    color: var(--color-extended-gray-900)
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .btn-primary-lg:active {
+    background-color: var(--color-extended-white-100);
+    color: var(--color-extended-gray-900)
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .btn-primary-lg:visited {
+    color: var(--color-extended-gray-900)
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .btn-primary-lg[disabled],
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .btn-primary-lg[disabled]:hover,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .btn-primary-lg[disabled]:focus,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .btn-primary-lg[disabled]:active {
+    background-color: var(--color-extended-white-100);
+    border-color: var(--color-extended-white-100);
+    color: var(--color-extended-gray-900);
+    opacity: .5
+}
+
+:where(.notification-stream-base, .report-notification-modal) .btn-secondary-lg {
+    -webkit-user-select: none;
+    user-select: none;
+    background-color: var(--color-extended-blue-500);
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--color-extended-blue-500);
+    color: var(--color-extended-white-100);
+    cursor: pointer;
+    font-weight: var(--font-weight-500);
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border-image: ;
+    border-radius: 5px;
+    height: auto;
+    padding: 15px;
+    font-size: 20px;
+    line-height: 100%;
+    display: inline-block
+}
+
+:where(.notification-stream-base, .report-notification-modal) .btn-secondary-lg:link {
+    color: var(--color-extended-white-100)
+}
+
+:where(.notification-stream-base, .report-notification-modal) .btn-secondary-lg:hover,
+:where(.notification-stream-base, .report-notification-modal) .btn-secondary-lg:focus {
+    background-color: var(--color-extended-blue-400);
+    border-color: var(--color-extended-blue-400);
+    color: var(--color-extended-white-100);
+    cursor: pointer
+}
+
+:where(.notification-stream-base, .report-notification-modal) .btn-secondary-lg:active {
+    background-color: var(--color-extended-blue-400);
+    color: var(--color-extended-white-100)
+}
+
+:where(.notification-stream-base, .report-notification-modal) .btn-secondary-lg:active:focus {
+    outline: 0
+}
+
+:where(.notification-stream-base, .report-notification-modal) .btn-secondary-lg:visited {
+    color: var(--color-extended-white-100)
+}
+
+:where(.notification-stream-base, .report-notification-modal) .btn-secondary-lg:visited:focus {
+    outline: 0
+}
+
+@media (max-width:767px) {
+    :where(.notification-stream-base, .report-notification-modal) .btn-secondary-lg {
+        border-radius: 3px;
+        padding: 9px;
+        font-size: 16px;
+        line-height: 100%
+    }
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .btn-secondary-lg {
+    border-color: var(--color-content-default);
+    color: var(--color-content-muted);
+    background-color: #0000;
+    border-radius: 8px
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .btn-secondary-lg:link {
+    color: var(--color-content-muted)
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .btn-secondary-lg:hover,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .btn-secondary-lg:focus {
+    border-color: var(--color-content-emphasis);
+    color: var(--color-content-emphasis);
+    background-color: #0000
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .btn-secondary-lg:active {
+    color: var(--color-content-emphasis);
+    background-color: #0000
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .btn-secondary-lg:visited {
+    color: var(--color-content-muted)
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .btn-secondary-lg {
+    border-color: var(--color-content-default);
+    color: var(--color-content-muted);
+    background-color: #0000;
+    border-radius: 8px
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .btn-secondary-lg:link {
+    color: var(--color-content-muted)
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .btn-secondary-lg:hover,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .btn-secondary-lg:focus {
+    border-color: var(--color-content-emphasis);
+    color: var(--color-content-emphasis);
+    background-color: #0000
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .btn-secondary-lg:active {
+    color: var(--color-content-emphasis);
+    background-color: #0000
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .btn-secondary-lg:visited {
+    color: var(--color-content-muted)
+}
+
+:where(.notification-stream-base, .report-notification-modal) textarea::-moz-placeholder {
+    color: var(--color-extended-gray-500);
+    opacity: 1;
+    font-weight: 400
+}
+
+:where(.notification-stream-base, .report-notification-modal) textarea::placeholder {
+    color: var(--color-extended-gray-500);
+    opacity: 1;
+    font-weight: 400
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .input-field {
+    background-color: var(--color-shift-200);
+    border-color: var(--color-stroke-default);
+    color: var(--color-content-default);
+    border-radius: 8px
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .input-field::-moz-placeholder {
+    color: var(--color-content-default);
+    opacity: 1;
+    font-weight: 400
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .input-field::placeholder {
+    color: var(--color-content-default);
+    opacity: 1;
+    font-weight: 400
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .input-field:focus {
+    background-color: var(--color-shift-200);
+    border-color: var(--color-extended-black-30)
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .input-field {
+    background-color: var(--color-shift-200);
+    border-color: var(--color-stroke-default);
+    color: var(--color-content-default);
+    border-radius: 8px
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .input-field::-moz-placeholder {
+    color: var(--color-content-default);
+    opacity: 1;
+    font-weight: 400
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .input-field::placeholder {
+    color: var(--color-content-default);
+    opacity: 1;
+    font-weight: 400
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .input-field:focus {
+    background-color: var(--color-shift-200);
+    border-color: var(--color-extended-white-30)
+}
+
+:where(.notification-stream-base, .report-notification-modal) .input-field {
+    font-weight: var(--font-weight-400);
+    -webkit-appearance: none;
+    appearance: none;
+    height: 38px;
+    padding: 5px 12px;
+    font-size: 16px;
+    line-height: 100%
+}
+
+:where(.notification-stream-base, .report-notification-modal) .input-field:focus {
+    box-shadow: none
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group {
+    color: var(--color-content-default)
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group:hover,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group:focus {
+    background-color: var(--color-extended-black-10);
+    box-shadow: none;
+    color: var(--color-content-emphasis)
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group:active {
+    box-shadow: none;
+    background-color: var(--color-extended-black-10)
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group {
+    color: var(--color-content-default)
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group:hover,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group:focus {
+    background-color: var(--color-extended-white-10);
+    box-shadow: none;
+    color: var(--color-content-emphasis)
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group:active {
+    box-shadow: none;
+    background-color: var(--color-extended-white-10)
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .rbx-select {
+    color: var(--color-content-default)
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .rbx-select:hover,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .rbx-select:focus {
+    background-color: var(--color-extended-black-10);
+    box-shadow: none;
+    color: var(--color-content-emphasis)
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .rbx-select:active {
+    box-shadow: none;
+    background-color: var(--color-extended-black-10)
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .rbx-select {
+    color: var(--color-content-default)
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .rbx-select:hover,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .rbx-select:focus {
+    background-color: var(--color-extended-white-10);
+    box-shadow: none;
+    color: var(--color-content-emphasis)
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .rbx-select:active {
+    box-shadow: none;
+    background-color: var(--color-extended-white-10)
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .rbx-select option {
+    color: var(--color-content-default)
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .rbx-select option:hover,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .rbx-select option:focus {
+    background-color: var(--color-extended-black-10);
+    box-shadow: none;
+    color: var(--color-content-emphasis)
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .rbx-select option:active {
+    box-shadow: none;
+    background-color: var(--color-extended-black-10)
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .rbx-select option {
+    color: var(--color-content-default)
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .rbx-select option:hover,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .rbx-select option:focus {
+    background-color: var(--color-extended-white-10);
+    box-shadow: none;
+    color: var(--color-content-emphasis)
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .rbx-select option:active {
+    box-shadow: none;
+    background-color: var(--color-extended-white-10)
+}
+
+:where(.notification-stream-base, .report-notification-modal) .rbx-select-group {
+    position: relative
+}
+
+:where(.notification-stream-base, .report-notification-modal) .rbx-select-group:hover {
+    cursor: pointer
+}
+
+:where(.notification-stream-base, .report-notification-modal) .rbx-select-group:hover .rbx-select {
+    background-color: var(--color-extended-blue-500);
+    color: var(--color-extended-white-100);
+    cursor: pointer
+}
+
+:where(.notification-stream-base, .report-notification-modal) .rbx-select-group .rbx-select {
+    -webkit-appearance: none;
+    appearance: none;
+    background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSIyOCIgaGVpZ2h0PSIyOCIgdmlld0JveD0iMCAwIDI4IDI4Ij48cGF0aCBmaWxsPSIjMTkxOTE5IiBkPSJNMTQgMTljLS4zIDAtLjUtLjEtLjctLjNsLTgtOGMtLjQtLjQtLjQtMSAwLTEuNHMxLS40IDEuNCAwbDcuMyA3LjMgNy4zLTcuM2MuNC0uNCAxLS40IDEuNCAwcy40IDEgMCAxLjRsLTggOGMtLjIuMi0uNC4zLS43LjMiLz48L3N2Zz4=) no-repeat scroll 98% 3px var(--color-extended-white-100);
+    border-radius: 3px;
+    width: 100%;
+    min-width: 105px;
+    height: 38px;
+    margin: 0;
+    padding: 0 32px 0 8px;
+    line-height: 18px
+}
+
+:where(.notification-stream-base, .report-notification-modal) .rbx-select-group .rbx-select:hover {
+    -webkit-appearance: none;
+    appearance: none;
+    color: var(--color-extended-white-100);
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSIyOCIgaGVpZ2h0PSIyOCIgdmlld0JveD0iMCAwIDI4IDI4Ij48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTQgMTljLS4zIDAtLjUtLjEtLjctLjNsLTgtOGMtLjQtLjQtLjQtMSAwLTEuNHMxLS40IDEuNCAwbDcuMyA3LjMgNy4zLTcuM2MuNC0uNCAxLS40IDEuNCAwcy40IDEgMCAxLjRsLTggOGMtLjIuMi0uNC4zLS43LjMiLz48L3N2Zz4=);
+    outline: none
+}
+
+:where(.notification-stream-base, .report-notification-modal) .rbx-select-group .rbx-select option {
+    background-color: var(--color-extended-white-100);
+    color: var(--color-extended-gray-1200);
+    white-space: nowrap;
+    outline: none;
+    padding: 10px 12px
+}
+
+:where(.notification-stream-base, .report-notification-modal) .rbx-select-group span[class^=icon] {
+    position: absolute;
+    top: 6px;
+    right: 12px
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .select-group .select-option {
+    color: var(--color-content-default)
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .select-group .select-option:hover,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .select-group .select-option:focus {
+    background-color: var(--color-extended-black-10);
+    box-shadow: none;
+    color: var(--color-content-emphasis)
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .select-group .select-option:active {
+    box-shadow: none;
+    background-color: var(--color-extended-black-10)
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .select-group .select-option {
+    color: var(--color-content-default)
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .select-group .select-option:hover,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .select-group .select-option:focus {
+    background-color: var(--color-extended-white-10);
+    box-shadow: none;
+    color: var(--color-content-emphasis)
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .select-group .select-option:active {
+    box-shadow: none;
+    background-color: var(--color-extended-white-10)
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .select-group .select-option option {
+    color: var(--color-content-default)
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .select-group .select-option option:hover,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .select-group .select-option option:focus {
+    background-color: var(--color-extended-black-10);
+    box-shadow: none;
+    color: var(--color-content-emphasis)
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .select-group .select-option option:active {
+    box-shadow: none;
+    background-color: var(--color-extended-black-10)
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .select-group .select-option option {
+    color: var(--color-content-default)
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .select-group .select-option option:hover,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .select-group .select-option option:focus {
+    background-color: var(--color-extended-white-10);
+    box-shadow: none;
+    color: var(--color-content-emphasis)
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .select-group .select-option option:active {
+    box-shadow: none;
+    background-color: var(--color-extended-white-10)
+}
+
+:where(.notification-stream-base, .report-notification-modal) .select-group {
+    position: relative
+}
+
+:where(.notification-stream-base, .report-notification-modal) .select-group:hover {
+    cursor: pointer;
+    background-image: none
+}
+
+:where(.notification-stream-base, .report-notification-modal) .select-group:hover .rbx-select {
+    cursor: pointer
+}
+
+:where(.notification-stream-base, .report-notification-modal) .select-group .select-option {
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: none;
+    border-radius: 8px;
+    width: 100%;
+    min-width: 105px;
+    height: 38px;
+    margin: 0;
+    padding: 0 32px 0 8px;
+    line-height: 18px
+}
+
+:where(.notification-stream-base, .report-notification-modal) .select-group .select-option:hover {
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: none;
+    outline: none
+}
+
+:where(.notification-stream-base, .report-notification-modal) .select-group .select-option option {
+    white-space: nowrap;
+    outline: none;
+    padding: 10px 12px
+}
+
+:where(.notification-stream-base, .report-notification-modal) .select-group span[class^=icon],
+:where(.notification-stream-base, .report-notification-modal) .select-group .icon-arrow {
+    position: absolute;
+    top: 9px;
+    right: 12px
+}
+
+:where(.notification-stream-base, .report-notification-modal) .select-group .icon-arrow.icon-down-16x16 {
+    pointer-events: none
+}
+
+:where(.notification-stream-base, .report-notification-modal) .icon-default-premium {
+    vertical-align: middle;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NCA0NCI+PHRpdGxlPnByZW1pdW1fbGlnaHR0aGVtZTwvdGl0bGU+PHBhdGggZD0iTTQwIDRINHY0MGE0IDQgMCAwIDEtNC00VjRhNCA0IDAgMCAxIDQtNGgzNmE0IDQgMCAwIDEgNCA0djM2YTQgNCAwIDAgMS00IDRIMjF2LTRoMTlabS03IDdIMTF2MzNIN1Y3aDMwdjMwSDIxdi00aDEyWm0tNyA3aC04djI2aC00VjE0aDE2djE2aC05di00aDVaIiBzdHlsZT0iZmlsbDojMzkzYjNkO2ZpbGwtcnVsZTpldmVub2RkIi8+PC9zdmc+);
+    background-repeat: no-repeat;
+    background-size: auto;
+    width: 44px;
+    height: 44px;
+    display: inline-block
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .icon-default-premium {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NCA0NCI+PGRlZnM+PGNsaXBQYXRoIGlkPSJhIj48cGF0aCBkPSJNNDAgNEg0djQwYTQgNCAwIDAgMS00LTRWNGE0IDQgMCAwIDEgNC00aDM2YTQgNCAwIDAgMSA0IDR2MzZhNCA0IDAgMCAxLTQgNEgyMXYtNGgxOVptLTcgN0gxMXYzM0g3VjdoMzB2MzBIMjF2LTRoMTJabS03IDdoLTh2MjZoLTRWMTRoMTZ2MTZoLTl2LTRoNVoiIHN0eWxlPSJmaWxsOm5vbmU7Y2xpcC1ydWxlOmV2ZW5vZGQiLz48L2NsaXBQYXRoPjwvZGVmcz48dGl0bGU+cHJlbWl1bTwvdGl0bGU+PGcgc3R5bGU9ImNsaXAtcGF0aDp1cmwoI2EpIj48cGF0aCBkPSJNLTUtNWg1NHY1NEgtNXoiIHN0eWxlPSJmaWxsOiNmZmYiLz48L2c+PC9zdmc+)
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .icon-default-premium {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NCA0NCI+PHRpdGxlPnByZW1pdW1fbGlnaHR0aGVtZTwvdGl0bGU+PHBhdGggZD0iTTQwIDRINHY0MGE0IDQgMCAwIDEtNC00VjRhNCA0IDAgMCAxIDQtNGgzNmE0IDQgMCAwIDEgNCA0djM2YTQgNCAwIDAgMS00IDRIMjF2LTRoMTlabS03IDdIMTF2MzNIN1Y3aDMwdjMwSDIxdi00aDEyWm0tNyA3aC04djI2aC00VjE0aDE2djE2aC05di00aDVaIiBzdHlsZT0iZmlsbDojMzkzYjNkO2ZpbGwtcnVsZTpldmVub2RkIi8+PC9zdmc+)
+}
+
+:where(.notification-stream-base, .report-notification-modal) .icon-default-safety {
+    vertical-align: middle;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDQ4IDQ4Ij48bWFzayBpZD0iYSIgd2lkdGg9IjI4IiBoZWlnaHQ9IjMyIiB4PSIxMCIgeT0iOCIgbWFza1VuaXRzPSJ1c2VyU3BhY2VPblVzZSIgc3R5bGU9Im1hc2stdHlwZTphbHBoYSI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTMwLjQyIDE4LjcwNGMuNDQuNDQuNDQgMS4xNTIgMCAxLjU5MWwtNy44NzUgNy44NzVjLS40MzkuNDQtMS4xNTEuNDQtMS41OSAwbC0zLjM3NS0zLjM3NWExLjEyNSAxLjEyNSAwIDAgMSAxLjU5LTEuNTlsMi41OCAyLjU3OSA3LjA4LTcuMDhjLjQzOS0uNDM5IDEuMTUxLS40MzkgMS41OSAwIi8+PHBhdGggZmlsbD0iI2ZmZiIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMjMuMTMyIDM5LjM3OEMxMC45ODggMzQuMDQgMTAuNTE5IDI3LjU3NiAxMC41IDE0LjM3NWEyLjI1IDIuMjUgMCAwIDEgMS41MzgtMi4xMzhsMTEuMjQ5LTMuNzVhMi4yNSAyLjI1IDAgMCAxIDEuNDIzIDBsMTEuMjUgMy43NWEyLjI1IDIuMjUgMCAwIDEgMS41MzggMi4xMzhjLS4wMTggMTMuMi0uNDg3IDE5LjY2NS0xMi42MyAyNS4wMDNhMi4xNyAyLjE3IDAgMCAxLTEuNzM3IDBNMTQuMzQ2IDI4Ljk2YzEuMzM3IDMuMjEgMy45MjQgNS44MTcgOS42NTQgOC4zNDIgNS43My0yLjUyNSA4LjMxNy01LjEzMiA5LjY1NC04LjM0MiAxLjQzMi0zLjQ0MiAxLjU4Ni03Ljg3NiAxLjU5NS0xNC41ODhMMjQgMTAuNjIybC0xMS4yNDkgMy43NWMuMDEgNi43MTEuMTY0IDExLjE0NiAxLjU5NiAxNC41ODgiIGNsaXAtcnVsZT0iZXZlbm9kZCIvPjwvbWFzaz48ZyBtYXNrPSJ1cmwoI2EpIj48cGF0aCBmaWxsPSIjMzkzYjNkIiBkPSJNNiA2aDM2djM2SDZ6Ii8+PC9nPjwvc3ZnPg==);
+    background-repeat: no-repeat;
+    background-size: auto;
+    width: 48px;
+    height: 48px;
+    display: inline-block
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .icon-default-safety {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDQ4IDQ4Ij48bWFzayBpZD0iYSIgd2lkdGg9IjI4IiBoZWlnaHQ9IjMyIiB4PSIxMCIgeT0iOCIgbWFza1VuaXRzPSJ1c2VyU3BhY2VPblVzZSIgc3R5bGU9Im1hc2stdHlwZTphbHBoYSI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTMwLjQyIDE4LjcwNGMuNDQuNDQuNDQgMS4xNTIgMCAxLjU5MWwtNy44NzUgNy44NzVjLS40MzkuNDQtMS4xNTEuNDQtMS41OSAwbC0zLjM3NS0zLjM3NWExLjEyNSAxLjEyNSAwIDAgMSAxLjU5LTEuNTlsMi41OCAyLjU3OSA3LjA4LTcuMDhjLjQzOS0uNDM5IDEuMTUxLS40MzkgMS41OSAwIi8+PHBhdGggZmlsbD0iI2ZmZiIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMjMuMTMyIDM5LjM3OEMxMC45ODggMzQuMDQgMTAuNTE5IDI3LjU3NiAxMC41IDE0LjM3NWEyLjI1IDIuMjUgMCAwIDEgMS41MzgtMi4xMzhsMTEuMjQ5LTMuNzVhMi4yNSAyLjI1IDAgMCAxIDEuNDIzIDBsMTEuMjUgMy43NWEyLjI1IDIuMjUgMCAwIDEgMS41MzggMi4xMzhjLS4wMTggMTMuMi0uNDg3IDE5LjY2NS0xMi42MyAyNS4wMDNhMi4xNyAyLjE3IDAgMCAxLTEuNzM3IDBNMTQuMzQ2IDI4Ljk2YzEuMzM3IDMuMjEgMy45MjQgNS44MTcgOS42NTQgOC4zNDIgNS43My0yLjUyNSA4LjMxNy01LjEzMiA5LjY1NC04LjM0MiAxLjQzMi0zLjQ0MiAxLjU4Ni03Ljg3NiAxLjU5NS0xNC41ODhMMjQgMTAuNjIybC0xMS4yNDkgMy43NWMuMDEgNi43MTEuMTY0IDExLjE0NiAxLjU5NiAxNC41ODgiIGNsaXAtcnVsZT0iZXZlbm9kZCIvPjwvbWFzaz48ZyBtYXNrPSJ1cmwoI2EpIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNNiA2aDM2djM2SDZ6Ii8+PC9nPjwvc3ZnPg==)
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .icon-default-safety {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDQ4IDQ4Ij48bWFzayBpZD0iYSIgd2lkdGg9IjI4IiBoZWlnaHQ9IjMyIiB4PSIxMCIgeT0iOCIgbWFza1VuaXRzPSJ1c2VyU3BhY2VPblVzZSIgc3R5bGU9Im1hc2stdHlwZTphbHBoYSI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTMwLjQyIDE4LjcwNGMuNDQuNDQuNDQgMS4xNTIgMCAxLjU5MWwtNy44NzUgNy44NzVjLS40MzkuNDQtMS4xNTEuNDQtMS41OSAwbC0zLjM3NS0zLjM3NWExLjEyNSAxLjEyNSAwIDAgMSAxLjU5LTEuNTlsMi41OCAyLjU3OSA3LjA4LTcuMDhjLjQzOS0uNDM5IDEuMTUxLS40MzkgMS41OSAwIi8+PHBhdGggZmlsbD0iI2ZmZiIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMjMuMTMyIDM5LjM3OEMxMC45ODggMzQuMDQgMTAuNTE5IDI3LjU3NiAxMC41IDE0LjM3NWEyLjI1IDIuMjUgMCAwIDEgMS41MzgtMi4xMzhsMTEuMjQ5LTMuNzVhMi4yNSAyLjI1IDAgMCAxIDEuNDIzIDBsMTEuMjUgMy43NWEyLjI1IDIuMjUgMCAwIDEgMS41MzggMi4xMzhjLS4wMTggMTMuMi0uNDg3IDE5LjY2NS0xMi42MyAyNS4wMDNhMi4xNyAyLjE3IDAgMCAxLTEuNzM3IDBNMTQuMzQ2IDI4Ljk2YzEuMzM3IDMuMjEgMy45MjQgNS44MTcgOS42NTQgOC4zNDIgNS43My0yLjUyNSA4LjMxNy01LjEzMiA5LjY1NC04LjM0MiAxLjQzMi0zLjQ0MiAxLjU4Ni03Ljg3NiAxLjU5NS0xNC41ODhMMjQgMTAuNjIybC0xMS4yNDkgMy43NWMuMDEgNi43MTEuMTY0IDExLjE0NiAxLjU5NiAxNC41ODgiIGNsaXAtcnVsZT0iZXZlbm9kZCIvPjwvbWFzaz48ZyBtYXNrPSJ1cmwoI2EpIj48cGF0aCBmaWxsPSIjMzkzYjNkIiBkPSJNNiA2aDM2djM2SDZ6Ii8+PC9nPjwvc3ZnPg==)
+}
+
+:where(.notification-stream-base, .report-notification-modal) .icon-down-16x16,
+:where(.notification-stream-base, .report-notification-modal) .icon-up-16x16 {
+    vertical-align: middle;
+    background-image: url(https://images.rbxcdn.com/424995aeeb54e41f.svg);
+    background-repeat: no-repeat;
+    background-size: 32px;
+    width: 16px;
+    height: 16px;
+    display: inline-block
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .icon-down-16x16,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .icon-up-16x16 {
+    background-image: url(https://images.rbxcdn.com/3ebc87949bc669c2.svg)
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .icon-down-16x16,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .icon-up-16x16 {
+    background-image: url(https://images.rbxcdn.com/f6278bdb80b2f24c.svg)
+}
+
+:where(.notification-stream-base, .report-notification-modal) .icon-up-16x16 {
+    background-position: 0 -256px
+}
+
+:where(.notification-stream-base, .report-notification-modal) .icon-down-16x16 {
+    background-position: 0 -272px
+}
+
+:where(.notification-stream-base, .report-notification-modal) .icon-broken {
+    background-size: contain;
+    width: 100%;
+    height: 100%
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .icon-broken {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbDpzcGFjZT0icHJlc2VydmUiIGlkPSJMYXllcl8xIiB3aWR0aD0iOTAiIGhlaWdodD0iOTAiIHg9IjAiIHk9IjAiIHZpZXdCb3g9IjAgMCA5MCA5MCI+PHN0eWxlPi5zdDJ7ZmlsbDpub25lO3N0cm9rZTojMDAwO3N0cm9rZS13aWR0aDoyO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMH08L3N0eWxlPjxnIGlkPSJib3JrZW4iPjxwYXRoIGlkPSJiZyIgZD0iTTAgMGg5MHY5MEgweiIgc3R5bGU9ImZpbGw6IzY1NjY2OCIvPjxnIGlkPSJicm9rZW4iIHN0eWxlPSJvcGFjaXR5Oi4zIj48cGF0aCBkPSJNNTEuMiAyMy41djEwLjNoMTAuM00yOC41IDQ4Ljl2MTcuNmgzM1Y1My44bC0xMS01LTExIDUtMTEtNXoiIGNsYXNzPSJzdDIiLz48cGF0aCBkPSJNNjEuNSAzMy44IDUxLjIgMjMuNUgyOC41VjQxbDExIDUgMTEtNSAxMSA1eiIgY2xhc3M9InN0MiIvPjwvZz48L2c+PC9zdmc+)
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .icon-broken {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbDpzcGFjZT0icHJlc2VydmUiIGlkPSJMYXllcl8xIiB3aWR0aD0iOTAiIGhlaWdodD0iOTAiIHg9IjAiIHk9IjAiIHZpZXdCb3g9IjAgMCA5MCA5MCI+PHN0eWxlPi5zdDJ7ZmlsbDpub25lO3N0cm9rZTojMDAwO3N0cm9rZS13aWR0aDoyO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMH08L3N0eWxlPjxnIGlkPSJib3JrZW4iPjxwYXRoIGlkPSJiZyIgZD0iTTAgMGg5MHY5MEgweiIgc3R5bGU9ImZpbGw6I2ZmZiIvPjxnIGlkPSJicm9rZW4iIHN0eWxlPSJvcGFjaXR5Oi4xIj48cGF0aCBkPSJNNTEuMiAyMy41djEwLjNoMTAuM00yOC41IDQ4Ljl2MTcuNmgzM1Y1My44bC0xMS01LTExIDUtMTEtNXoiIGNsYXNzPSJzdDIiLz48cGF0aCBkPSJNNjEuNSAzMy44IDUxLjIgMjMuNUgyOC41VjQxbDExIDUgMTEtNSAxMSA1eiIgY2xhc3M9InN0MiIvPjwvZz48L2c+PC9zdmc+)
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) p,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .text,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .text-label,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) p,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .text,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .text-label {
+    color: var(--color-content-default)
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .text-link,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .text-link:link,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .text-link:hover,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .text-link:visited,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .text-link:active,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .text-link,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .text-link:link,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .text-link:hover,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .text-link:visited,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .text-link:active {
+    color: var(--color-content-emphasis)
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .select-group:hover,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group:hover {
+    background-color: #0000
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .select-group .select-option,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .select-group .rbx-select,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .select-option,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .rbx-select {
+    border-color: var(--color-extended-gray-500);
+    background-color: #0000
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .select-group .select-option:hover,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .select-group .select-option:focus,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .select-group .rbx-select:hover,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .select-group .rbx-select:focus,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .select-option:hover,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .select-option:focus,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .rbx-select:hover,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .rbx-select:focus {
+    box-shadow: none;
+    background-color: #0000
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .select-group .select-option option,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .select-group .rbx-select option,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .select-option option,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .rbx-select option {
+    color: var(--color-content-default);
+    background-color: var(--color-surface-0)
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .select-group .select-option option:hover,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .select-group .select-option option:checked,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .select-group .rbx-select option:hover,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .select-group .rbx-select option:checked,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .select-option option:hover,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .select-option option:checked,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .rbx-select option:hover,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .rbx-select option:checked {
+    color: var(--color-content-emphasis);
+    background-color: var(--color-surface-300)
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .select-group:hover,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group:hover {
+    background-color: #0000
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .select-group .select-option,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .select-group .rbx-select,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .select-option,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .rbx-select {
+    border-color: var(--color-extended-gray-700);
+    background-color: #0000
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .select-group .select-option:hover,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .select-group .select-option:focus,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .select-group .rbx-select:hover,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .select-group .rbx-select:focus,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .select-option:hover,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .select-option:focus,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .rbx-select:hover,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .rbx-select:focus {
+    box-shadow: none;
+    background-color: #0000
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .select-group .select-option option,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .select-group .rbx-select option,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .select-option option,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .rbx-select option {
+    color: var(--color-content-default);
+    background-color: var(--color-surface-0)
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .select-group .select-option option:hover,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .select-group .select-option option:checked,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .select-group .rbx-select option:hover,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .select-group .rbx-select option:checked,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .select-option option:hover,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .select-option option:checked,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .rbx-select option:hover,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .rbx-select-group .rbx-select option:checked {
+    color: var(--color-content-emphasis);
+    background-color: var(--color-surface-300)
+}
+
+:where(.notification-stream-base, .report-notification-modal) textarea {
+    background-color: var(--color-none);
+    border-color: var(--color-stroke-contrast-alpha);
+    color: var(--color-content-emphasis)
+}
+
+:where(.notification-stream-base, .report-notification-modal) textarea::-moz-placeholder {
+    color: var(--color-content-muted);
+    font-weight: 400
+}
+
+:where(.notification-stream-base, .report-notification-modal) textarea::placeholder {
+    color: var(--color-content-muted);
+    font-weight: 400
+}
+
+:is(.notification-stream-base, .report-notification-modal) textarea,
+:is(.notification-stream-base, .report-notification-modal) select,
+:is(.notification-stream-base, .report-notification-modal) button,
+:is(.notification-stream-base, .report-notification-modal) .text {
+    font-family: var(--config-text-font), "Builder Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased
+}
+
+:is(.notification-stream-base, .report-notification-modal) .text-link {
+    font-weight: var(--font-weight-500)
+}
+
+:is(.notification-stream-base, .report-notification-modal) .text-label {
+    font-family: var(--config-text-font), "Builder Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 16px;
+    font-weight: var(--font-weight-500)
+}
+
+@media (max-width:767px) {
+    :is(.notification-stream-base, .report-notification-modal) .text-label {
+        font-size: 14px
+    }
+}
+
+:is(.notification-stream-base, .report-notification-modal) .font-caption-header,
+:is(.notification-stream-base, .report-notification-modal) .font-caption-header:link,
+:is(.notification-stream-base, .report-notification-modal) .font-caption-header:visited,
+:is(.notification-stream-base, .report-notification-modal) .font-caption-header:active,
+:is(.notification-stream-base, .report-notification-modal) .font-caption-header:hover,
+:is(.notification-stream-base, .report-notification-modal) .font-caption-header:focus {
+    font-family: var(--config-text-font), "Builder Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 12px;
+    font-weight: var(--font-weight-500)
+}
+
+:is(.notification-stream-base, .report-notification-modal) .input-field {
+    line-height: 1.4em
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .thumbnail-2d-container,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .thumbnail-2d-container {
+    background-color: var(--color-common-shimmer);
+    border-style: none;
+    border-width: 0;
+    border-color: var(--color-surface-300);
+    border-image:
+}
+
+:where(.notification-stream-base, .report-notification-modal) .thumbnail-2d-container {
+    float: left;
+    background-size: 100%;
+    margin: 0;
+    overflow: hidden
+}
+
+:where(.notification-stream-base, .report-notification-modal) .thumbnail-2d-container[class*=icon-] {
+    padding-top: 100%
+}
+
+:where(.notification-stream-base, .report-notification-modal) .thumbnail-2d-container:has(>[data-variant]) {
+    width: 100%;
+    height: 100%;
+    display: block
+}
+
+:where(.notification-stream-base, .report-notification-modal) .spinner {
+    background-color: #0000;
+    background-image: url(../media/loading.0eecf3.9f87_1.gif);
+    background-position: 50%;
+    background-repeat: no-repeat;
+    width: 100%;
+    margin: 6px auto;
+    display: inline-block
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .spinner {
+    background-image: url(../media/loading_dark.17~bhuv5_ekwm.gif)
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .spinner {
+    background-image: url(../media/loading_light.0xr60_-7a8~-5.gif)
+}
+
+:where(.notification-stream-base, .report-notification-modal) .spinner-sm {
+    background-size: auto 16px;
+    height: 16px
+}
+
+:where(.notification-stream-base, .report-notification-modal) .text-error {
+    font-family: var(--config-text-font), "Builder Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 12px;
+    font-weight: var(--font-weight-500);
+    color: var(--color-extended-red-700)
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .text-error,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .text-error {
+    color: var(--color-system-alert)
+}
+
+:where(.notification-stream-base, .report-notification-modal) .text-name {
+    font-family: var(--config-text-font), "Builder Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 16px;
+    font-weight: var(--font-weight-500)
+}
+
+@media (max-width:767px) {
+    :where(.notification-stream-base, .report-notification-modal) .text-name {
+        font-size: 14px
+    }
+}
+
+:where(.notification-stream-base, .report-notification-modal) .text-name,
+:where(.notification-stream-base, .report-notification-modal) .text-name:link,
+:where(.notification-stream-base, .report-notification-modal) .text-name:hover,
+:where(.notification-stream-base, .report-notification-modal) .text-name:visited,
+:where(.notification-stream-base, .report-notification-modal) .text-name:active {
+    color: var(--color-extended-blue-500)
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .text-name,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .text-name:link,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .text-name:hover,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .text-name:visited,
+.light-theme :where(.notification-stream-base, .report-notification-modal) .text-name:active,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .text-name,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .text-name:link,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .text-name:hover,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .text-name:visited,
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .text-name:active {
+    color: var(--color-content-emphasis)
+}
+
+:where(.notification-stream-base, .report-notification-modal) .text-name:hover,
+:where(.notification-stream-base, .report-notification-modal) .text-name:focus {
+    text-decoration: underline
+}
+
+:where(.notification-stream-base, .report-notification-modal) .icon-status-alert-xl {
+    vertical-align: middle;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0yNiAyMS44MDVDMjYgMTkuNDAxMyAyMiAxOS4zOTU0IDIyIDIxLjgwNUMyMiAyNC4yMTM1IDIyLjkxMTkgMjguNjkxMiAyMi45NzkzIDI5LjAwMDhDMjMuMDQ1NyAyOS4zMTEzIDIzLjA5ODggMjkuNDk4MSAyMy4yOTM4IDI5LjY5ODhDMjMuNjg1IDMwLjEwMTIgMjQuMzE4MSAzMC4xMDAyIDI0LjcwODIgMjkuNjk2OEMyNC45MjQ3IDI5LjQ3MzEgMjQuOTYzNSAyOS4zMTIzIDI1LjAyMTcgMjkuMDAwOEMyNS4wNzg5IDI4LjY5MDIgMjYgMjQuMjA3NiAyNiAyMS44MDVaIiBmaWxsPSIjMTIxMjEyIi8+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMjQgMzJDMjIuODk2IDMyIDIyIDMyLjg5NiAyMiAzNEMyMiAzNS4xMDQgMjIuODk2IDM2IDI0IDM2QzI1LjEwNCAzNiAyNiAzNS4xMDQgMjYgMzRDMjYgMzIuODk2IDI1LjEwNCAzMiAyNCAzMloiIGZpbGw9IiMxMjEyMTIiLz4KPHBhdGggb3BhY2l0eT0iMC43IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTI0IDVMNC4zMzA4NiAzOS4zMTdDMy4zOTQxIDQwLjk1MiA0LjU1NzkgNDMgNi40MjM1NCA0M0g0MS41NzY1QzQzLjQ0MjEgNDMgNDQuNjA1OSA0MC45NTIgNDMuNjY5MSAzOS4zMTdMMjQgNVpNMjQgMTAuOTc1TDQwLjYzNjcgNDBINy4zNjMyNkwyNCAxMC45NzVaIiBmaWxsPSIjMTIxMjEyIi8+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMjAgNThDMjAgNTUuNzkxIDIxLjc5MSA1NCAyNCA1NEMyNi4yMDkgNTQgMjggNTUuNzkxIDI4IDU4Vjc0QzI4IDc2LjIwOSAyNi4yMDkgNzggMjQgNzhDMjEuNzkxIDc4IDIwIDc2LjIwOSAyMCA3NFY1OFpNMjAgODZDMjAgODMuNzkxIDIxLjc5MSA4MiAyNCA4MkMyNi4yMDkgODIgMjggODMuNzkxIDI4IDg2QzI4IDg4LjIwOSAyNi4yMDkgOTAgMjQgOTBDMjEuNzkxIDkwIDIwIDg4LjIwOSAyMCA4NloiIGZpbGw9IiMxMjEyMTIiLz4KPHBhdGggb3BhY2l0eT0iMC43IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTE3LjAwMDEgNjBDMTIuNDMyMiA2MS4yMTc0IDguMjU2MjggNjMuNjIzNiA0Ljg1MzM0IDY3LjA3NDlDMy42OTUzNiA2OC4yNDk4IDMuNzE5MzYgNzAuMTI5NCA0LjkwNDMzIDcxLjI3NTVDNi4wOTEzMSA3Mi40MjA3IDcuOTkwMjggNzIuMzk2OSA5LjE0NzI2IDcxLjIyNDFDMTEuMzkxMiA2OC45NDg2IDE0LjA3MzIgNjcuMjc4OCAxNy4wMDAxIDY2LjI0MTVWNjBaTTEzLjIzMDIgNzQuOTgyOEMxNC4zNDgyIDczLjgyMTggMTUuNjIxMSA3Mi44NzM2IDE3LjAwMDEgNzIuMTQxMlY3NC4wMTQ4QzE3LjAwMDEgNzUuNjIwMiAxNy41NTcxIDc3LjA5MyAxOC40ODIxIDc4LjI2NzlDMTguMTY3MSA3OC41MTgzIDE3Ljg2MDEgNzguNzgzNiAxNy41NzYxIDc5LjA3OTVDMTYuNDMyMSA4MC4yNjYzIDE0LjUzMjIgODAuMzEwOCAxMy4zMzQyIDc5LjE4MTVDMTIuMTM1MiA3OC4wNTExIDEyLjA4ODIgNzYuMTcwNiAxMy4yMzAyIDc0Ljk4MjhaTTMwLjk5OTkgNzQuMDE0OFY3Mi4xNDEyQzMyLjM3ODkgNzIuODczNiAzMy42NTE4IDczLjgyMTggMzQuNzY5OCA3NC45ODI4QzM1LjkxMTggNzYuMTcwNiAzNS44NjQ4IDc4LjA1MTEgMzQuNjY1OCA3OS4xODE1QzM0LjA4NDggNzkuNzI4OCAzMy4zMzk4IDgwIDMyLjU5NjkgODBDMzEuODA0OSA4MCAzMS4wMTM5IDc5LjY5MjIgMzAuNDIzOSA3OS4wNzk1QzMwLjEzOTkgNzguNzgzNiAyOS44MzI5IDc4LjUxODMgMjkuNTE3OSA3OC4yNjc5QzMwLjQ0MjkgNzcuMDkzIDMwLjk5OTkgNzUuNjIwMiAzMC45OTk5IDc0LjAxNDhaTTMxLjAwMDQgNjAuMDAwNUMzNS41NjgzIDYxLjIxNzkgMzkuNzQ0MiA2My42MjQxIDQzLjE0NzIgNjcuMDc1NEM0NC4zMDQxIDY4LjI1MDMgNDQuMjgxMSA3MC4xMjk5IDQzLjA5NTIgNzEuMjc1QzQyLjUxMTIgNzEuODM4MiA0MS43NTUyIDcyLjExOTMgNDEuMDAwMiA3Mi4xMTkzQzQwLjIxOTIgNzIuMTE5MyAzOS40NDAyIDcxLjgxOTQgMzguODUyMiA3MS4yMjM2QzM2LjYwOTMgNjguOTQ5MSAzMy45MjYzIDY3LjI3ODMgMzEuMDAwNCA2Ni4yNDFWNjAuMDAwNVoiIGZpbGw9IiMxMjEyMTIiLz4KPC9zdmc+Cg==);
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: 96px;
+    width: 48px;
+    height: 48px;
+    display: inline-block
+}
+
+.dark-theme :where(.notification-stream-base, .report-notification-modal) .icon-status-alert-xl {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0yNiAyMS44MDVDMjYgMTkuNDAxMyAyMiAxOS4zOTU0IDIyIDIxLjgwNUMyMiAyNC4yMTM1IDIyLjkxMTkgMjguNjkxMiAyMi45NzkzIDI5LjAwMDhDMjMuMDQ1NyAyOS4zMTEzIDIzLjA5ODggMjkuNDk4MSAyMy4yOTM4IDI5LjY5ODhDMjMuNjg1IDMwLjEwMTIgMjQuMzE4MSAzMC4xMDAyIDI0LjcwODIgMjkuNjk2OEMyNC45MjQ3IDI5LjQ3MzEgMjQuOTYzNSAyOS4zMTIzIDI1LjAyMTcgMjkuMDAwOEMyNS4wNzg5IDI4LjY5MDIgMjYgMjQuMjA3NiAyNiAyMS44MDVaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTI0IDMyQzIyLjg5NiAzMiAyMiAzMi44OTYgMjIgMzRDMjIgMzUuMTA0IDIyLjg5NiAzNiAyNCAzNkMyNS4xMDQgMzYgMjYgMzUuMTA0IDI2IDM0QzI2IDMyLjg5NiAyNS4xMDQgMzIgMjQgMzJaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBvcGFjaXR5PSIwLjciIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMjQgNUw0LjMzMDg2IDM5LjMxN0MzLjM5NDEgNDAuOTUyIDQuNTU3OSA0MyA2LjQyMzU0IDQzSDQxLjU3NjVDNDMuNDQyMSA0MyA0NC42MDU5IDQwLjk1MiA0My42NjkxIDM5LjMxN0wyNCA1Wk0yNCAxMC45NzVMNDAuNjM2NyA0MEg3LjM2MzI2TDI0IDEwLjk3NVoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMjAgNThDMjAgNTUuNzkxIDIxLjc5MSA1NCAyNCA1NEMyNi4yMDkgNTQgMjggNTUuNzkxIDI4IDU4Vjc0QzI4IDc2LjIwOSAyNi4yMDkgNzggMjQgNzhDMjEuNzkxIDc4IDIwIDc2LjIwOSAyMCA3NFY1OFpNMjAgODZDMjAgODMuNzkxIDIxLjc5MSA4MiAyNCA4MkMyNi4yMDkgODIgMjggODMuNzkxIDI4IDg2QzI4IDg4LjIwOSAyNi4yMDkgOTAgMjQgOTBDMjEuNzkxIDkwIDIwIDg4LjIwOSAyMCA4NloiIGZpbGw9IndoaXRlIi8+CjxwYXRoIG9wYWNpdHk9IjAuNyIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xNy4wMDAxIDYwQzEyLjQzMjIgNjEuMjE3NCA4LjI1NjI4IDYzLjYyMzYgNC44NTMzNCA2Ny4wNzQ5QzMuNjk1MzYgNjguMjQ5OCAzLjcxOTM2IDcwLjEyOTQgNC45MDQzMyA3MS4yNzU1QzYuMDkxMzEgNzIuNDIwNyA3Ljk5MDI4IDcyLjM5NjkgOS4xNDcyNiA3MS4yMjQxQzExLjM5MTIgNjguOTQ4NiAxNC4wNzMyIDY3LjI3ODggMTcuMDAwMSA2Ni4yNDE1VjYwWk0xMy4yMzAyIDc0Ljk4MjhDMTQuMzQ4MiA3My44MjE4IDE1LjYyMTEgNzIuODczNiAxNy4wMDAxIDcyLjE0MTJWNzQuMDE0OEMxNy4wMDAxIDc1LjYyMDIgMTcuNTU3MSA3Ny4wOTMgMTguNDgyMSA3OC4yNjc5QzE4LjE2NzEgNzguNTE4MyAxNy44NjAxIDc4Ljc4MzYgMTcuNTc2MSA3OS4wNzk1QzE2LjQzMjEgODAuMjY2MyAxNC41MzIyIDgwLjMxMDggMTMuMzM0MiA3OS4xODE1QzEyLjEzNTIgNzguMDUxMSAxMi4wODgyIDc2LjE3MDYgMTMuMjMwMiA3NC45ODI4Wk0zMC45OTk5IDc0LjAxNDhWNzIuMTQxMkMzMi4zNzg5IDcyLjg3MzYgMzMuNjUxOCA3My44MjE4IDM0Ljc2OTggNzQuOTgyOEMzNS45MTE4IDc2LjE3MDYgMzUuODY0OCA3OC4wNTExIDM0LjY2NTggNzkuMTgxNUMzNC4wODQ4IDc5LjcyODggMzMuMzM5OCA4MCAzMi41OTY5IDgwQzMxLjgwNDkgODAgMzEuMDEzOSA3OS42OTIyIDMwLjQyMzkgNzkuMDc5NUMzMC4xMzk5IDc4Ljc4MzYgMjkuODMyOSA3OC41MTgzIDI5LjUxNzkgNzguMjY3OUMzMC40NDI5IDc3LjA5MyAzMC45OTk5IDc1LjYyMDIgMzAuOTk5OSA3NC4wMTQ4Wk0zMS4wMDA0IDYwLjAwMDVDMzUuNTY4MyA2MS4yMTc5IDM5Ljc0NDIgNjMuNjI0MSA0My4xNDcyIDY3LjA3NTRDNDQuMzA0MSA2OC4yNTAzIDQ0LjI4MTEgNzAuMTI5OSA0My4wOTUyIDcxLjI3NUM0Mi41MTEyIDcxLjgzODIgNDEuNzU1MiA3Mi4xMTkzIDQxLjAwMDIgNzIuMTE5M0M0MC4yMTkyIDcyLjExOTMgMzkuNDQwMiA3MS44MTk0IDM4Ljg1MjIgNzEuMjIzNkMzNi42MDkzIDY4Ljk0OTEgMzMuOTI2MyA2Ny4yNzgzIDMxLjAwMDQgNjYuMjQxVjYwLjAwMDVaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K)
+}
+
+.light-theme :where(.notification-stream-base, .report-notification-modal) .icon-status-alert-xl {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0yNiAyMS44MDVDMjYgMTkuNDAxMyAyMiAxOS4zOTU0IDIyIDIxLjgwNUMyMiAyNC4yMTM1IDIyLjkxMTkgMjguNjkxMiAyMi45NzkzIDI5LjAwMDhDMjMuMDQ1NyAyOS4zMTEzIDIzLjA5ODggMjkuNDk4MSAyMy4yOTM4IDI5LjY5ODhDMjMuNjg1IDMwLjEwMTIgMjQuMzE4MSAzMC4xMDAyIDI0LjcwODIgMjkuNjk2OEMyNC45MjQ3IDI5LjQ3MzEgMjQuOTYzNSAyOS4zMTIzIDI1LjAyMTcgMjkuMDAwOEMyNS4wNzg5IDI4LjY5MDIgMjYgMjQuMjA3NiAyNiAyMS44MDVaIiBmaWxsPSIjMTIxMjEyIi8+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMjQgMzJDMjIuODk2IDMyIDIyIDMyLjg5NiAyMiAzNEMyMiAzNS4xMDQgMjIuODk2IDM2IDI0IDM2QzI1LjEwNCAzNiAyNiAzNS4xMDQgMjYgMzRDMjYgMzIuODk2IDI1LjEwNCAzMiAyNCAzMloiIGZpbGw9IiMxMjEyMTIiLz4KPHBhdGggb3BhY2l0eT0iMC43IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTI0IDVMNC4zMzA4NiAzOS4zMTdDMy4zOTQxIDQwLjk1MiA0LjU1NzkgNDMgNi40MjM1NCA0M0g0MS41NzY1QzQzLjQ0MjEgNDMgNDQuNjA1OSA0MC45NTIgNDMuNjY5MSAzOS4zMTdMMjQgNVpNMjQgMTAuOTc1TDQwLjYzNjcgNDBINy4zNjMyNkwyNCAxMC45NzVaIiBmaWxsPSIjMTIxMjEyIi8+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMjAgNThDMjAgNTUuNzkxIDIxLjc5MSA1NCAyNCA1NEMyNi4yMDkgNTQgMjggNTUuNzkxIDI4IDU4Vjc0QzI4IDc2LjIwOSAyNi4yMDkgNzggMjQgNzhDMjEuNzkxIDc4IDIwIDc2LjIwOSAyMCA3NFY1OFpNMjAgODZDMjAgODMuNzkxIDIxLjc5MSA4MiAyNCA4MkMyNi4yMDkgODIgMjggODMuNzkxIDI4IDg2QzI4IDg4LjIwOSAyNi4yMDkgOTAgMjQgOTBDMjEuNzkxIDkwIDIwIDg4LjIwOSAyMCA4NloiIGZpbGw9IiMxMjEyMTIiLz4KPHBhdGggb3BhY2l0eT0iMC43IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTE3LjAwMDEgNjBDMTIuNDMyMiA2MS4yMTc0IDguMjU2MjggNjMuNjIzNiA0Ljg1MzM0IDY3LjA3NDlDMy42OTUzNiA2OC4yNDk4IDMuNzE5MzYgNzAuMTI5NCA0LjkwNDMzIDcxLjI3NTVDNi4wOTEzMSA3Mi40MjA3IDcuOTkwMjggNzIuMzk2OSA5LjE0NzI2IDcxLjIyNDFDMTEuMzkxMiA2OC45NDg2IDE0LjA3MzIgNjcuMjc4OCAxNy4wMDAxIDY2LjI0MTVWNjBaTTEzLjIzMDIgNzQuOTgyOEMxNC4zNDgyIDczLjgyMTggMTUuNjIxMSA3Mi44NzM2IDE3LjAwMDEgNzIuMTQxMlY3NC4wMTQ4QzE3LjAwMDEgNzUuNjIwMiAxNy41NTcxIDc3LjA5MyAxOC40ODIxIDc4LjI2NzlDMTguMTY3MSA3OC41MTgzIDE3Ljg2MDEgNzguNzgzNiAxNy41NzYxIDc5LjA3OTVDMTYuNDMyMSA4MC4yNjYzIDE0LjUzMjIgODAuMzEwOCAxMy4zMzQyIDc5LjE4MTVDMTIuMTM1MiA3OC4wNTExIDEyLjA4ODIgNzYuMTcwNiAxMy4yMzAyIDc0Ljk4MjhaTTMwLjk5OTkgNzQuMDE0OFY3Mi4xNDEyQzMyLjM3ODkgNzIuODczNiAzMy42NTE4IDczLjgyMTggMzQuNzY5OCA3NC45ODI4QzM1LjkxMTggNzYuMTcwNiAzNS44NjQ4IDc4LjA1MTEgMzQuNjY1OCA3OS4xODE1QzM0LjA4NDggNzkuNzI4OCAzMy4zMzk4IDgwIDMyLjU5NjkgODBDMzEuODA0OSA4MCAzMS4wMTM5IDc5LjY5MjIgMzAuNDIzOSA3OS4wNzk1QzMwLjEzOTkgNzguNzgzNiAyOS44MzI5IDc4LjUxODMgMjkuNTE3OSA3OC4yNjc5QzMwLjQ0MjkgNzcuMDkzIDMwLjk5OTkgNzUuNjIwMiAzMC45OTk5IDc0LjAxNDhaTTMxLjAwMDQgNjAuMDAwNUMzNS41NjgzIDYxLjIxNzkgMzkuNzQ0MiA2My42MjQxIDQzLjE0NzIgNjcuMDc1NEM0NC4zMDQxIDY4LjI1MDMgNDQuMjgxMSA3MC4xMjk5IDQzLjA5NTIgNzEuMjc1QzQyLjUxMTIgNzEuODM4MiA0MS43NTUyIDcyLjExOTMgNDEuMDAwMiA3Mi4xMTkzQzQwLjIxOTIgNzIuMTE5MyAzOS40NDAyIDcxLjgxOTQgMzguODUyMiA3MS4yMjM2QzM2LjYwOTMgNjguOTQ5MSAzMy45MjYzIDY3LjI3ODMgMzEuMDAwNCA2Ni4yNDFWNjAuMDAwNVoiIGZpbGw9IiMxMjEyMTIiLz4KPC9zdmc+Cg==)
+}
+
+/*# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/0-.i1gjd.7txi.css.map*/
