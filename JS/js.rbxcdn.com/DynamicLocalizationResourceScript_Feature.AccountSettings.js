@@ -1997,7 +1997,7 @@ Roblox.LangDynamic["Feature.AccountSettings"] = {
     "Description.ProfileVisibilityPreviousUsernames": "Who can see your previous usernames",
     "Description.ProfileVisibilityAbout": "Who can see your bio",
     "Heading.ProfileVisibility": "Profile visibility",
-    "Heading.PrivacyRequestAndAccountDeletion": "Account data, deactivation, & deletion",
+    "Heading.PrivacyRequestAndAccountDeletion": "Account data & deletion",
     "Feature.AccountSettings.Heading.ContentPersonalization": "Content Personalization",
     "Label.AlwaysAsk": "Always ask",
     "Heading.Approvals": "Approvals",
