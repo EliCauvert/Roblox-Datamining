@@ -3,6 +3,7 @@ Roblox.LangDynamic = Roblox.LangDynamic || {};
 Roblox.LangDynamic["CommonUI.Messages"] = {
     "Label.Error": "Error",
     "Label.Loading": "Loading",
+    "Label.LoadingMessageRetryWhenConnected": "Please retry when connected to internet",
     "Response.TooManyAttemptsText": "Too Many Attempts",
     "Action.Close": "Close",
     "Response.BadRequest": "Bad Request",

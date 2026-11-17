@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "6a48f2a3-ab82-2f2b-ddf0-72fa7b44e37a")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "7f9bb8bc-1201-2ec4-0b38-9bab4b55130a")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 749490, (e, t, n) => {
@@ -12986,10 +12986,10 @@
         li = e.i(950492);
     let la = ["creatorTransparency", "creatorAcknowledgments"];
     var lo = e.i(945451),
-        ls = e.i(549856),
-        lu = e.i(661736),
-        ll = e.i(270921),
-        lc = e.i(298176),
+        ls = e.i(823457),
+        lu = e.i(606092),
+        ll = e.i(471518),
+        lc = e.i(950064),
         ld = e.i(663624),
         lf = e.i(401263),
         lh = e.i(889311),
@@ -13019,7 +13019,7 @@
         lT = e.i(132437),
         lE = e.i(315353),
         lk = e.i(899196),
-        lA = e.i(435431);
+        lA = e.i(37148);
     let lq = new Set(["VIOLATION_TYPE_NONE", "VIOLATION_TYPE_INVALID"]),
         lj = lP.z.union([lS.z.object({
             type: lR.z.literal("text"),
@@ -13495,7 +13495,7 @@
     };
     var ce = e.i(37819),
         ct = e.i(673386);
-    let cn = "".concat("".concat("https://assets.create.roblox.com/a9649016bf1216e360c764a9aa40ecdf068cbc5a/assets", "/opengraph"), "/global_og_image.png"),
+    let cn = "".concat("".concat("https://assets.create.roblox.com/ace27a0d313c4715310d5cc96f50b62b1e8ada81/assets", "/opengraph"), "/global_og_image.png"),
         cr = (0, oE.K)(e => {
             let {
                 openGraphMetadata: {
@@ -13685,14 +13685,14 @@
     }
     cu.describe, cu.meta;
     var cE = e.i(620331),
-        ck = e.i(154570),
+        ck = e.i(574487),
         cA = e.i(60584),
-        cq = e.i(651235),
-        cj = e.i(722027),
-        c_ = e.i(331420),
-        cI = e.i(221849),
-        cC = e.i(882057),
-        cO = e.i(147325),
+        cq = e.i(625141),
+        cj = e.i(797117),
+        c_ = e.i(162710),
+        cI = e.i(182590),
+        cC = e.i(466537),
+        cO = e.i(330052),
         cL = (0, oh.createContext)(void 0),
         cD = e => {
             let {
@@ -15748,7 +15748,7 @@
             } = (0, u5.f)();
             return "moderated" === e ? (0, b.jsx)(fa, {}) : null
         };
-    var fs = e.i(42155);
+    var fs = e.i(376537);
     let fu = (0, lB.default)(() => e.A(14667), {
             loadableGenerated: {
                 modules: [573249]
@@ -15808,7 +15808,7 @@
             children: u
         })
     }
-    var fh = e.i(630232),
+    var fh = e.i(76550),
         fp = e.i(209534);
 
     function fv() {
@@ -15841,18 +15841,17 @@
             children: t
         })
     };
-    var fw = e.i(729904),
-        fx = e.i(623127),
-        fP = e.i(47277),
-        fS = e.i(148792),
-        fR = e.i(373488),
-        fT = e.i(446475),
-        fE = e.i(196990),
-        fk = e.i(533968),
-        fA = e.i(210205),
-        fq = e.i(616931),
-        fj = e.i(407881);
-    let f_ = (0, oE.K)(e => {
+    var fw = e.i(623127),
+        fx = e.i(47277),
+        fP = e.i(148792),
+        fS = e.i(373488),
+        fR = e.i(446475),
+        fT = e.i(196990),
+        fE = e.i(533968),
+        fk = e.i(210205),
+        fA = e.i(616931),
+        fq = e.i(407881);
+    let fj = (0, oE.K)(e => {
             var t, n;
             let {
                 onDialogCompletion: r
@@ -15863,23 +15862,23 @@
                 logout: s
             } = (0, u5.f)(), u = (0, oh.useRef)(!1), [l, c] = (0, oh.useState)(!1), {
                 completeCheck: d
-            } = (0, fj.c)(), {
+            } = (0, fq.c)(), {
                 captureError: f,
                 error: h,
                 info: p
-            } = (0, fA.f)(), [v, y] = (0, oh.useState)(!1), [m, g] = (0, oh.useState)(!1), [w, x] = (0, oh.useState)([]), P = (0, oh.useCallback)(async e => {
+            } = (0, fk.f)(), [v, y] = (0, oh.useState)(!1), [m, g] = (0, oh.useState)(!1), [w, x] = (0, oh.useState)([]), P = (0, oh.useCallback)(async e => {
                 async function t(e, n) {
-                    if (n <= 0) return void h("User Agreement accept failed after retried ".concat(fq.N, " times"));
+                    if (n <= 0) return void h("User Agreement accept failed after retried ".concat(fA.N, " times"));
                     try {
                         var r;
-                        let i = null == (r = (await fE.f.acceptUserAgreements(e)).results) ? void 0 : r.filter(e => 0 !== e.errorCode).map(e => e.agreementId);
+                        let i = null == (r = (await fT.f.acceptUserAgreements(e)).results) ? void 0 : r.filter(e => 0 !== e.errorCode).map(e => e.agreementId);
                         i && i.length > 0 && await t(i, n - 1)
                     } catch (i) {
-                        let r = (0, fk.f)(i);
+                        let r = (0, fE.f)(i);
                         (null == r ? void 0 : r.status) === l8.R.UNAUTHORIZED ? (p("User Agreement accept failed with 401 from backend"), await op.default.push("/login")) : (h("User Agreement accept failed with status code ".concat(null == r ? void 0 : r.status)), await t(e, n - 1))
                     }
                 }
-                await t(e, fq.N)
+                await t(e, fA.N)
             }, [h, p]), S = (0, oh.useCallback)(async () => {
                 try {
                     await s()
@@ -15893,8 +15892,8 @@
                 g(!0), await P(e), c(!0), g(!1), y(!1), null == r || r()
             }, [P, w, r]), T = (0, oh.useCallback)(async () => {
                 try {
-                    let e = fE.f.getUserAgreements({
-                            clientType: fx.m.Studio
+                    let e = fT.f.getUserAgreements({
+                            clientType: fw.m.Studio
                         }),
                         t = await e;
                     t.length > 0 ? (x([...t]), y(!0)) : (d(), null == r || r())
@@ -15907,16 +15906,16 @@
                 }
             }), [d, l]);
             return (0, oh.useEffect)(() => {
-                (null == o ? void 0 : o.id) === void 0 || u.current || !i.isReady || fq.y.some(e => i.pathname.startsWith(e)) || (T(), u.current = !0)
-            }, [o, T, i.isReady, i.pathname]), (0, b.jsx)(fS.f, {
+                (null == o ? void 0 : o.id) === void 0 || u.current || !i.isReady || fA.y.some(e => i.pathname.startsWith(e)) || (T(), u.current = !0)
+            }, [o, T, i.isReady, i.pathname]), (0, b.jsx)(fP.f, {
                 open: v,
                 TransitionProps: E,
-                children: (0, b.jsx)(fR.f, {
+                children: (0, b.jsx)(fS.f, {
                     onConfirm: R,
                     onCancel: S,
                     title: a("Heading.AgreementsUpdate"),
                     content: (0, b.jsxs)(b.Fragment, {
-                        children: [(0, b.jsx)(fP.f, {
+                        children: [(0, b.jsx)(fx.f, {
                             component: "p",
                             variant: "body1",
                             children: null != (t = null == (n = w.find(e => null != e.agreementBodyText)) ? void 0 : n.agreementBodyText) ? t : a("Description.AgreementsUpdate")
@@ -15925,10 +15924,10 @@
                                 var t;
                                 let n;
                                 return (0, b.jsx)("li", {
-                                    children: (0, b.jsx)(fT.f, {
+                                    children: (0, b.jsx)(fR.f, {
                                         href: e.displayUrl,
                                         target: "__blank",
-                                        children: (t = e.agreementType, void 0 === (n = fq.M[t]) ? a(n) : t)
+                                        children: (t = e.agreementType, void 0 === (n = fA.M[t]) ? a(n) : t)
                                     })
                                 }, e.id)
                             })
@@ -15941,17 +15940,17 @@
             })
         }, [ly.f.AgreementsUpdate]),
         {
-            authenticationApi: fI
+            authenticationApi: f_
         } = {
             authenticationApi: uZ
         },
         {
-            discoveryApi: fC
+            discoveryApi: fI
         } = ug.Z,
         {
-            usersApi: fO
+            usersApi: fC
         } = u1.V,
-        fL = (r = lM.f, e => {
+        fO = (r = lM.f, e => {
             var t, n, i, a, o, s, u, l, c;
             let d, f;
             return r.logWebVitalsEvent({
@@ -15978,7 +15977,7 @@
     (0, oS.c)({
         unifiedLogger: lM.f
     }), lW();
-    let fD = (uu && (y = null != (p = document.querySelector('meta[name="'.concat("emotion-insertion-point-mui", '"]'))) ? p : void 0, m = null != (v = document.querySelector('meta[name="'.concat("emotion-insertion-point-tss", '"]'))) ? v : void 0), {
+    let fL = (uu && (y = null != (p = document.querySelector('meta[name="'.concat("emotion-insertion-point-mui", '"]'))) ? p : void 0, m = null != (v = document.querySelector('meta[name="'.concat("emotion-insertion-point-tss", '"]'))) ? v : void 0), {
         muiCache: (0, oq.c)({
             key: uo,
             prepend: !0,
@@ -15990,12 +15989,12 @@
         })
     });
     (0, ok.g)((0, u2.V)("thumbnails"));
-    let fM = {
+    let fD = {
             locale: l6.J,
             nativeName: l6.n
         },
-        fN = new l3.f(fM, l6.E),
-        fU = e => {
+        fM = new l3.f(fD, l6.E),
+        fN = e => {
             let t, n, {
                 children: r
             } = e;
@@ -16027,13 +16026,13 @@
                 children: r
             })
         },
-        fB = {
+        fU = {
             defaultLocale: l6.J,
             title: l6.y["OpenGraph.Title"],
             description: l6.y["OpenGraph.Description"]
         },
-        fF = e => e,
-        fH = () => ((() => {
+        fB = e => e,
+        fF = () => ((() => {
             let {
                 trackerClient: e
             } = (0, lD.l)(), t = (0, oh.useCallback)(() => {
@@ -16050,12 +16049,12 @@
                     op.default.events.off("routeChangeStart", e.start), op.default.events.off("routeChangeComplete", e.complete), op.default.events.off("routeChangeError", e.cancel)
                 }
             }, [])
-        })(), (0, ov.useReportWebVitals)(fL), null),
-        fV = {
+        })(), (0, ov.useReportWebVitals)(fO), null),
+        fH = {
             enabled: !0,
             isFetched: !0
         },
-        fG = e => {
+        fV = e => {
             let {
                 children: t
             } = e, {
@@ -16071,17 +16070,17 @@
             })();
             return (0, b.jsx)(oP.b, {
                 currentProduct: "CreatorDashboard",
-                environment: (0, fw.f)(),
+                environment: "production",
                 robloxEnvironment: "production",
                 target: "global",
                 drawerVariant: "belowAppBar",
-                signalRCrossTab: fV,
+                signalRCrossTab: fH,
                 creatorWalletsNavigation: r,
                 enableGroupModeration: null != n && n,
                 children: t
             })
         },
-        fW = new om.f({
+        fG = new om.f({
             defaultOptions: {
                 queries: {
                     refetchOnWindowFocus: !1,
@@ -16089,8 +16088,8 @@
                 }
             }
         }),
-        fK = (0, ob.x)(),
-        fz = e => {
+        fW = (0, ob.x)(),
+        fK = e => {
             var t;
             let {
                 Component: n,
@@ -16098,44 +16097,44 @@
                 cache: i
             } = e, {
                 query: a
-            } = (0, op.useRouter)(), o = null != (t = n.getPageLayout) ? t : fF, s = (0, oh.useMemo)(() => ({
-                ...fB,
+            } = (0, op.useRouter)(), o = null != (t = n.getPageLayout) ? t : fB, s = (0, oh.useMemo)(() => ({
+                ...fU,
                 ...n.pageMetadata
             }), [n.pageMetadata]), [u, l] = (0, oh.useState)(!1), c = (0, oh.useCallback)(() => l(!0), []);
             return (0, ox.A)("https://create.roblox.com"), (0, oh.useEffect)(() => {
                 ul()
             }, []), lp.U.setUnifiedLoggerClient(lM.f), (0, b.jsx)(oy.f, {
                 children: (0, b.jsx)(uc, {
-                    cache: null != i ? i : fD,
+                    cache: null != i ? i : fL,
                     children: (0, b.jsxs)(lY, {
                         providers: [(0, b.jsx)(fm.U, {}), (0, b.jsx)(og.P, {
-                            client: fW
+                            client: fG
                         }), (0, b.jsx)(oR.C, {
                             client: u0.f
-                        }), (0, b.jsx)(lN.H, {}), (0, b.jsx)(lN.N, {}), (0, b.jsx)(fU, {}), (0, b.jsx)(l4, {
+                        }), (0, b.jsx)(lN.H, {}), (0, b.jsx)(lN.N, {}), (0, b.jsx)(fN, {}), (0, b.jsx)(l4, {
                             pageLoggerConfig: n.loggerConfig
                         }), (0, b.jsx)(lD.e, {
                             trackerClient: lp.U
                         }), (0, b.jsx)(ob.R, {
                             clientId: "4273917941353191905",
-                            authenticationClient: fI,
-                            discoveryClient: fC,
-                            usersClient: fO,
-                            store: fK
+                            authenticationClient: f_,
+                            discoveryClient: fI,
+                            usersClient: fC,
+                            store: fW
                         }), (0, b.jsx)(lK.e, {}), (0, b.jsx)(u7, {}), (0, b.jsx)(lt, {
                             themeElement: "u" > typeof document ? document.documentElement : void 0
                         }), (0, b.jsx)(oE.N, {
-                            provider: fN
+                            provider: fM
                         }), (0, b.jsx)(ud.f, {}), (0, b.jsx)(uf.f, {}), (0, b.jsx)(u9.U, {}), (0, b.jsx)(ok.z, {
                             baseUrl: lp.u
-                        }), (0, b.jsx)(fG, {}), (0, b.jsx)(lJ.L, {}), (0, b.jsx)(l9, {}), (0, b.jsx)(lQ.f, {}), (0, b.jsx)(fb, {}), (0, b.jsx)(ow.b, {
+                        }), (0, b.jsx)(fV, {}), (0, b.jsx)(lJ.L, {}), (0, b.jsx)(l9, {}), (0, b.jsx)(lQ.f, {}), (0, b.jsx)(fb, {}), (0, b.jsx)(ow.b, {
                             robloxSiteDomain: "roblox.com"
-                        }), (0, b.jsx)(uv.G, {}), (0, b.jsx)(fl, {}), (0, b.jsx)(fj.U, {}), (0, b.jsx)(um, {})],
-                        children: [(0, b.jsx)(fH, {}), (0, b.jsx)(u6, {
-                            provider: fN
+                        }), (0, b.jsx)(uv.G, {}), (0, b.jsx)(fl, {}), (0, b.jsx)(fq.U, {}), (0, b.jsx)(um, {})],
+                        children: [(0, b.jsx)(fF, {}), (0, b.jsx)(u6, {
+                            provider: fM
                         }), (0, b.jsx)(fv, {}), (0, b.jsx)(ff, {}), (0, b.jsx)(fo, {}), (0, b.jsx)(lL, {
                             isSuppressed: !u
-                        }), (0, b.jsx)(f_, {
+                        }), (0, b.jsx)(fj, {
                             onDialogCompletion: c
                         }), (0, b.jsx)(l$, {}), (0, b.jsx)(cr, {
                             openGraphMetadata: s
@@ -16148,8 +16147,8 @@
                 })
             })
         };
-    e.s(["CustomApp", 0, fz, "default", 0, fz, "reportWebVitals", 0, fL], 656350)
+    e.s(["CustomApp", 0, fK, "default", 0, fK, "reportWebVitals", 0, fO], 656350)
 }]);
 
-//# debugId=6a48f2a3-ab82-2f2b-ddf0-72fa7b44e37a
-//# sourceMappingURL=3fvei7b6x_r4w.js.map
+//# debugId=7f9bb8bc-1201-2ec4-0b38-9bab4b55130a
+//# sourceMappingURL=3i-3cqzu2fqae.js.map

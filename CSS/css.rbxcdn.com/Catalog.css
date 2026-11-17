@@ -9,6 +9,10 @@
     display: inline
 }
 
+.gap-\[var\(--size-150\)\] {
+    gap: var(--size-150)
+}
+
 .scroll {
     overflow: auto
 }
@@ -57,8 +61,38 @@
     max-width: calc(var(--size-100)*50)
 }
 
+.width-\[fit-content\] {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content
+}
+
+.content-\[var\(--dark-mode-content-emphasis\)\] {
+    color: var(--dark-mode-content-emphasis)
+}
+
 .content-\[var\(--inverse-surface-0\)\] {
     color: var(--inverse-surface-0)
+}
+
+.content-\[var\(--light-mode-content-emphasis\)\] {
+    color: var(--light-mode-content-emphasis)
+}
+
+.bg-\[rgb\(from_var\(--color-system-alert\)_r_g_b_\/_0\.2\)\] {
+    background-color: rgb(from var(--color-system-alert)r g b/.2)
+}
+
+.bg-\[rgb\(from_var\(--color-system-success\)_r_g_b_\/_0\.2\)\] {
+    background-color: rgb(from var(--color-system-success)r g b/.2)
+}
+
+.bg-\[rgb\(from_var\(--color-system-warning\)_r_g_b_\/_0\.2\)\] {
+    background-color: rgb(from var(--color-system-warning)r g b/.2)
+}
+
+.bg-\[var\(--light-mode-over-media-0\)\] {
+    background-color: var(--light-mode-over-media-0)
 }
 
 .opacity-\[0\.5\] {
@@ -71,6 +105,10 @@
 
 .icon-regular-circle-i {
     --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M17 21H19.5V23H12.5V21H15V14H13V12H17V21Z' fill='black'/%3E %3Cpath d='M17 10H15V8H17V10Z' fill='black'/%3E %3Cpath d='M16 2C23.732 2 30 8.26801 30 16C30 23.732 23.732 30 16 30C8.26801 30 2 23.732 2 16C2 8.26801 8.26801 2 16 2ZM16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4Z' fill='black'/%3E%3C/svg%3E")
+}
+
+.icon-regular-clock {
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M17 9C17 8.44772 16.5523 8 16 8C15.4477 8 15 8.44772 15 9V16C15 16.2652 15.1054 16.5196 15.2929 16.7071L18.2929 19.7071C18.6834 20.0976 19.3166 20.0976 19.7071 19.7071C20.0976 19.3166 20.0976 18.6834 19.7071 18.2929L17 15.5858V9Z' fill='black'/%3E %3Cpath d='M16 2C8.26801 2 2 8.26801 2 16C2 23.732 8.26801 30 16 30C23.732 30 30 23.732 30 16C30 8.26801 23.732 2 16 2ZM4 16C4 9.37258 9.37258 4 16 4C22.6274 4 28 9.37258 28 16C28 22.6274 22.6274 28 16 28C9.37258 28 4 22.6274 4 16Z' fill='black'/%3E%3C/svg%3E")
 }
 
 .icon-filled-roblox-plus {
@@ -418,10 +456,6 @@
     .no-gutter-ads .content {
         margin: 0
     }
-}
-
-.no-gutter-ads.logged-in:not(.left-nav-new-width) .content {
-    margin: 0 12px 0 calc(12px + var(--left-nav-reserved-width))
 }
 
 @media (min-width:767px) {
@@ -5566,6 +5600,22 @@ a.btn-generic-menu-black-md .btn-text {
     .shopping-cart-modal-container .marketplace-offer-selection label {
         min-height: 24px
     }
+}
+
+.shopping-cart-modal-container .marketplace-offer-selection .marketplace-offer-selection-content {
+    vertical-align: top;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 6px;
+    display: -ms-inline-flexbox;
+    display: inline-flex
+}
+
+.shopping-cart-modal-container .marketplace-offer-selection .marketplace-offer-selection-content>* {
+    -ms-flex-negative: 0;
+    flex-shrink: 0
 }
 
 .light-theme .shopping-cart-modal-container .subscribe-upsell-container {

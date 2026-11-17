@@ -13617,7 +13617,7 @@
                 "use strict";
                 var n = r(87577),
                     o = r(10127),
-                    i = r.n(o)().module("group", ["robloxApp", "groupDetailsHtmlTemplateApp", "groups", "ui.bootstrap", "cursorPagination", "ui.router", "modal", "socialLinksJumbotron", "thumbnails", "captchaV2", "groupPayouts", "groupList", "systemFeedback", "infiniteScroll", "presence", "searchDropdown"]).config(["$stateProvider", "$urlRouterProvider", "$locationProvider", "languageResourceProvider", function(e, t, r, o) {
+                    i = r.n(o)().module("group", ["robloxApp", "groupDetailsHtmlTemplateApp", "groups", "ui.bootstrap", "cursorPagination", "ui.router", "modal", "socialLinksJumbotron", "thumbnails", "captchaV2", "groupPayouts", "groupList", "systemFeedback", "infiniteScroll", "searchDropdown"]).config(["$stateProvider", "$urlRouterProvider", "$locationProvider", "languageResourceProvider", function(e, t, r, o) {
                         var i = window.location.href; - 1 !== i.indexOf("#") && -1 === i.indexOf("#!") && (window.location.href = i.replace("#", "#!")), r.html5Mode(!1), r.hashPrefix("!"), t.otherwise("/about"), e.state("about", {
                             url: "/about",
                             label: "About",
@@ -18329,7 +18329,7 @@
             }))
         }()
 }();
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/62968dde62ebb7408cdb51f8a65784a0-groupDetails.bundle.min.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/b087cde4ecb4c8e83664600f73d5189c-groupDetails.bundle.min.js.map
 
 /*! For license information please see groupProfileHeader.bundle.min.js.LICENSE.txt */
 ! function() {

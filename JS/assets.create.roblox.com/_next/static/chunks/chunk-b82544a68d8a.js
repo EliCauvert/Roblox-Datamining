@@ -3,14 +3,14 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "3814ba33-1f2a-65d2-8e0b-44c5a9bd840a")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "8281d234-3da9-1024-1c85-cd397ec2e4a1")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 678863, 434925, e => {
     "use strict";
     var a = e.i(225226),
-        r = e.i(643766),
-        t = e.i(231543),
+        t = e.i(643766),
+        r = e.i(231543),
         i = e.i(130933),
         n = e.i(179183),
         s = e.i(433659);
@@ -19,8 +19,8 @@
         l = e.i(266062),
         o = e.i(785517),
         c = e.i(927828),
-        m = e.i(677484),
-        u = e.i(422166),
+        u = e.i(677484),
+        m = e.i(422166),
         p = e.i(268953),
         y = e.i(908257);
     e.i(59129);
@@ -68,17 +68,17 @@
     function k(e) {
         let {
             slots: a = {},
-            slotProps: r = {}
-        } = e, t = (0, s._)(e, g);
+            slotProps: t = {}
+        } = e, r = (0, s._)(e, g);
         return (0, o.jsx)("li", {
             children: (0, o.jsx)(f, (0, n._)({
                 focusRipple: !0
-            }, t, {
+            }, r, {
                 ownerState: e,
                 children: (0, o.jsx)(h, (0, n._)({
                     as: a.CollapsedIcon,
                     ownerState: e
-                }, r.collapsedIcon))
+                }, t.collapsedIcon))
             }))
         })
     }
@@ -86,16 +86,16 @@
     function N(e) {
         return (0, s.g)("MuiBreadcrumbs", e)
     }
-    var T = (0, m.g)("MuiBreadcrumbs", ["root", "ol", "li", "separator"]);
+    var T = (0, u.g)("MuiBreadcrumbs", ["root", "ol", "li", "separator"]);
     let v = ["children", "className", "component", "slots", "slotProps", "expandText", "itemsAfterCollapse", "itemsBeforeCollapse", "maxItems", "separator"],
-        x = (0, d.s)(u.T, {
+        I = (0, d.s)(m.T, {
             name: "MuiBreadcrumbs",
             slot: "Root",
             overridesResolver: (e, a) => [{
                 ["& .".concat(T.li)]: a.li
             }, a.root]
         })({}),
-        I = (0, d.s)("ol", {
+        C = (0, d.s)("ol", {
             name: "MuiBreadcrumbs",
             slot: "Ol",
             overridesResolver: (e, a) => a.ol
@@ -107,7 +107,7 @@
             margin: 0,
             listStyle: "none"
         }),
-        P = (0, d.s)("li", {
+        x = (0, d.s)("li", {
             name: "MuiBreadcrumbs",
             slot: "Separator",
             overridesResolver: (e, a) => a.separator
@@ -117,33 +117,33 @@
             marginLeft: 8,
             marginRight: 8
         }),
-        C = r.forwardRef(function(e, a) {
-            var t, i;
+        P = t.forwardRef(function(e, a) {
+            var r, i;
             let l = (0, p.u)({
                     props: e,
                     name: "MuiBreadcrumbs"
                 }),
                 {
                     children: c,
-                    className: m,
-                    component: u = "nav",
+                    className: u,
+                    component: m = "nav",
                     slots: b = {},
                     slotProps: g = {},
                     expandText: f = "Show path",
                     itemsAfterCollapse: h = 1,
                     itemsBeforeCollapse: T = 1,
-                    maxItems: C = 8,
+                    maxItems: P = 8,
                     separator: H = "/"
                 } = l,
                 A = (0, s._)(l, v),
-                [S, L] = r.useState(!1),
+                [S, L] = t.useState(!1),
                 w = (0, n._)({}, l, {
-                    component: u,
+                    component: m,
                     expanded: S,
                     expandText: f,
                     itemsAfterCollapse: h,
                     itemsBeforeCollapse: T,
-                    maxItems: C,
+                    maxItems: P,
                     separator: H
                 }),
                 j = (e => {
@@ -162,23 +162,23 @@
                     externalSlotProps: g.collapsedIcon,
                     ownerState: w
                 }),
-                E = r.useRef(null),
-                D = r.Children.toArray(c).filter(e => r.isValidElement(e)).map((e, a) => (0, o.jsx)("li", {
+                E = t.useRef(null),
+                D = t.Children.toArray(c).filter(e => t.isValidElement(e)).map((e, a) => (0, o.jsx)("li", {
                     className: j.li,
                     children: e
                 }, "child-".concat(a)));
-            return (0, o.jsx)(x, (0, n._)({
+            return (0, o.jsx)(I, (0, n._)({
                 ref: a,
-                component: u,
+                component: m,
                 color: "text.secondary",
-                className: (0, d.c)(j.root, m),
+                className: (0, d.c)(j.root, u),
                 ownerState: w
             }, A, {
-                children: (0, o.jsx)(I, {
+                children: (0, o.jsx)(C, {
                     className: j.ol,
                     ref: E,
                     ownerState: w,
-                    children: (t = S || C && D.length <= C || T + h >= D.length ? D : [...D.slice(0, T), (0, o.jsx)(k, {
+                    children: (r = S || P && D.length <= P || T + h >= D.length ? D : [...D.slice(0, T), (0, o.jsx)(k, {
                         "aria-label": f,
                         slots: {
                             CollapsedIcon: b.CollapsedIcon
@@ -191,16 +191,16 @@
                             let e = E.current.querySelector("a[href],button,[tabindex]");
                             e && e.focus()
                         }
-                    }, "ellipsis"), ...D.slice(D.length - h, D.length)], i = j.separator, t.reduce((e, a, r) => (r < t.length - 1 ? e = e.concat(a, (0, o.jsx)(P, {
+                    }, "ellipsis"), ...D.slice(D.length - h, D.length)], i = j.separator, r.reduce((e, a, t) => (t < r.length - 1 ? e = e.concat(a, (0, o.jsx)(x, {
                         "aria-hidden": !0,
                         className: i,
                         ownerState: w,
                         children: H
-                    }, "separator-".concat(r))) : e.push(a), e), []))
+                    }, "separator-".concat(t))) : e.push(a), e), []))
                 })
             }))
         });
-    var H = (0, t.f)({
+    var H = (0, r.f)({
             name: "Breadcrumbs"
         })(function(e) {
             return {
@@ -209,7 +209,7 @@
                 })
             }
         }),
-        A = (0, r.forwardRef)(function(e, t) {
+        A = (0, t.forwardRef)(function(e, r) {
             var n = e.classes,
                 s = e.className,
                 d = (0, a.a)(e, ["classes", "className"]),
@@ -218,10 +218,10 @@
                         classes: (0, i.f)(n, s)
                     }
                 });
-            return r.default.createElement(C, (0, a._)({
+            return t.default.createElement(P, (0, a._)({
                 classes: l.classes
             }, d, {
-                ref: t
+                ref: r
             }))
         });
     e.s(["f", 0, A], 678863);
@@ -237,8 +237,8 @@
         }) : a(e.key),
         B = e => {
             var a;
-            let r = parseInt(null != (a = e.developerItemId) ? a : "", 10);
-            return Number.isNaN(r) ? M.dashboard.configureCreatorStoreItemBasePath : M.dashboard.getConfigureCreatorStoreItemUrl(r)
+            let t = parseInt(null != (a = e.developerItemId) ? a : "", 10);
+            return Number.isNaN(t) ? M.dashboard.configureCreatorStoreItemBasePath : M.dashboard.getConfigureCreatorStoreItemUrl(t)
         },
         z = {
             analytics: {
@@ -358,10 +358,10 @@
                 displayName: e => {
                     let {
                         translate: a,
-                        itemType: r
+                        itemType: t
                     } = e;
-                    return r ? R({
-                        key: w.w[r]
+                    return t ? R({
+                        key: w.w[t]
                     }, a) : R({
                         key: "Heading.AssociatedItems"
                     }, a)
@@ -1162,15 +1162,15 @@
                 displayName: e => {
                     let {
                         translate: a,
-                        itemType: r
+                        itemType: t
                     } = e;
-                    return r === L.f.CatalogAsset || r === L.f.LibraryAsset || r === L.f.Bundle || r === L.f.Event || r === L.f.AvatarCreationToken || r === L.f.Environment || r === L.f.Look ? R({
+                    return t === L.f.CatalogAsset || t === L.f.LibraryAsset || t === L.f.Bundle || t === L.f.Event || t === L.f.AvatarCreationToken || t === L.f.Environment || t === L.f.Look ? R({
                         key: "Heading.Configure"
-                    }, a) : r === L.f.Game ? R({
+                    }, a) : t === L.f.Game ? R({
                         key: "Heading.ContentSettings"
-                    }, a) : r === L.f.ExperienceSubscription ? R({
+                    }, a) : t === L.f.ExperienceSubscription ? R({
                         key: "Heading.UpdateSubscription"
-                    }, a) : r === L.f.Alert ? R({
+                    }, a) : t === L.f.Alert ? R({
                         key: "Heading.ConfigureAlert"
                     }, a) : R({
                         key: "Heading.BasicSettings"
@@ -1216,13 +1216,13 @@
                 displayName: e => {
                     let {
                         translate: a,
-                        itemType: r
+                        itemType: t
                     } = e;
-                    return r ? R({
+                    return t ? R({
                         key: "Heading.Create",
                         args: {
                             param: "itemType",
-                            value: w.x[r]
+                            value: w.x[t]
                         }
                     }, a) : R({
                         key: "Heading.Create"
@@ -1403,6 +1403,55 @@
             "[sessionId]": {
                 displayName: () => "",
                 breadcrumbType: D.f.ClientSession,
+                withId: !0
+            },
+            "compute-functions": {
+                displayName: e => {
+                    let {
+                        translate: a
+                    } = e;
+                    return R({
+                        key: "Heading.ComputeFunctions"
+                    }, a) || "Compute Functions"
+                },
+                breadcrumbType: D.f.ComputeFunctions,
+                getLinkPath: e => M.dashboard.getComputeFunctionsUrl(Number(e.baseId))
+            },
+            "create-compute-function": {
+                displayName: e => {
+                    let {
+                        translate: a
+                    } = e;
+                    return R({
+                        key: "Heading.CreateComputeFunction"
+                    }, a) || "Create Compute Function"
+                },
+                breadcrumbType: D.f.CreateComputeFunction
+            },
+            "[assetId]": {
+                displayName: () => "",
+                breadcrumbType: D.f.ComputeFunction,
+                withId: !0,
+                getLinkPath: e => {
+                    let a = Number(e.computeFunctionAssetId);
+                    return M.dashboard.getComputeFunctionsUrl(Number(e.baseId), Number.isInteger(a) ? a : void 0)
+                }
+            },
+            invocations: {
+                displayName: e => {
+                    let {
+                        translate: a
+                    } = e;
+                    return R({
+                        key: "Heading.ComputeFunctionInvocations"
+                    }, a) || "Invocations"
+                },
+                breadcrumbType: D.f.ComputeFunctionInvocations,
+                getLinkPath: e => M.dashboard.getComputeFunctionInvocationsUrl(Number(e.baseId), Number(e.computeFunctionAssetId))
+            },
+            "[jobId]": {
+                displayName: () => "",
+                breadcrumbType: D.f.ComputeFunctionInvocation,
                 withId: !0
             },
             "data-captures": {
@@ -1845,34 +1894,31 @@
 }, 177608, 966501, e => {
     "use strict";
     var a = e.i(785517),
-        r = e.i(643766),
-        t = e.i(37819),
+        t = e.i(643766),
+        r = e.i(37819),
         i = e.i(602635),
-        n = e.i(500758),
-        s = e.i(79187),
-        d = e.i(649499),
-        l = e.i(665869),
-        o = e.i(729904),
-        c = e.i(458263),
-        m = e.i(260241),
-        u = e.i(887545),
-        p = e.i(47277),
-        y = e.i(870999),
-        b = e.i(581577),
-        g = e.i(894854),
-        f = e.i(881670),
-        h = e.i(174528),
-        k = e.i(918720),
-        N = e.i(341260),
-        T = e.i(678863),
-        v = e.i(446475),
-        x = e.i(350898),
-        I = e.i(114209),
-        P = e.i(434925),
-        C = e.i(128106),
-        H = e.i(509049),
-        A = e.i(634877);
-    let S = (0, e.i(67243).f)()(e => ({
+        n = e.i(79187),
+        s = e.i(649499),
+        d = e.i(458263),
+        l = e.i(260241),
+        o = e.i(887545),
+        c = e.i(47277),
+        u = e.i(870999),
+        m = e.i(581577),
+        p = e.i(894854),
+        y = e.i(881670),
+        b = e.i(174528),
+        g = e.i(918720),
+        f = e.i(341260),
+        h = e.i(678863),
+        k = e.i(446475),
+        N = e.i(350898),
+        T = e.i(114209),
+        v = e.i(434925),
+        I = e.i(128106),
+        C = e.i(509049),
+        x = e.i(634877);
+    let P = (0, e.i(67243).f)()(e => ({
             linkStyle: {
                 fontWeight: e.typography.fontWeightRegular,
                 color: e.palette.content.muted
@@ -1895,99 +1941,99 @@
                 paddingTop: 12
             }
         })),
-        L = (e, a) => a && e.replaceAll(/\[[^\]]*?\]/g, "") === (null == a ? void 0 : a.replaceAll(/\d+/g, "")) ? void 0 : a,
-        w = (0, s.K)(e => {
+        H = (e, a) => a && e.replaceAll(/\[[^\]]*?\]/g, "") === (null == a ? void 0 : a.replaceAll(/\d+/g, "")) ? void 0 : a,
+        A = (0, n.K)(e => {
             let {
                 inLayoutHeader: n = !1
             } = e, {
                 pathname: s,
                 query: d
-            } = (0, N.useRouter)(), {
+            } = (0, f.useRouter)(), {
                 classes: {
                     linkStyle: l,
                     compactBreadCrumbLinkStyle: o,
-                    breadcrumb: c,
-                    breadcrumbBottomSpace: m,
-                    compactBreadCrumb: u
+                    breadcrumb: m,
+                    breadcrumbBottomSpace: p,
+                    compactBreadCrumb: y
                 }
-            } = S(), {
+            } = P(), {
                 insideTopNavigationDrawer: b
-            } = (0, A.f)(), g = (0, x.f)(e => e.breakpoints.down("Medium")), {
-                gameDetails: f
-            } = (0, I.i)(), h = (0, r.useMemo)(() => {
+            } = (0, x.f)(), A = (0, N.f)(e => e.breakpoints.down("Medium")), {
+                gameDetails: S
+            } = (0, T.i)(), L = (0, t.useMemo)(() => {
                 let e = s.includes("/analytics/dashboards/");
                 return s.split("/").filter(e => !!e).filter(a => "analytics" !== a || !e)
             }, [s]), {
                 itemNameMapping: w,
                 pathLinkParams: j,
                 displayNameParam: M
-            } = (0, H.f)(), E = "string" == typeof d.dashboardId ? d.dashboardId : void 0, D = "string" == typeof d.id ? d.id : void 0, R = s.endsWith("/analytics/dashboards/[dashboardId]/edit") && D && E ? "/dashboard/creations/experiences/".concat(D, "/analytics/dashboards/").concat(E) : void 0, B = (0, r.useCallback)((e, r) => b ? r ? (0, a.jsx)(k.default, {
-                href: r,
+            } = (0, C.f)(), E = "string" == typeof d.dashboardId ? d.dashboardId : void 0, D = "string" == typeof d.id ? d.id : void 0, R = s.endsWith("/analytics/dashboards/[dashboardId]/edit") && D && E ? "/dashboard/creations/experiences/".concat(D, "/analytics/dashboards/").concat(E) : void 0, B = (0, t.useCallback)((e, t) => b ? t ? (0, a.jsx)(g.default, {
+                href: t,
                 passHref: !0,
                 legacyBehavior: !0,
-                children: (0, a.jsx)(v.f, {
+                children: (0, a.jsx)(k.f, {
                     underline: "always",
                     color: "inherit",
-                    children: (0, a.jsx)(p.f, {
+                    children: (0, a.jsx)(c.f, {
                         color: "primary",
                         variant: "largeLabel1",
                         children: e
                     })
                 })
-            }, e) : (0, a.jsx)(p.f, {
+            }, e) : (0, a.jsx)(c.f, {
                 color: "primary",
                 variant: "largeLabel1",
                 children: e
-            }, e) : r ? (0, a.jsx)(k.default, {
-                href: r,
+            }, e) : t ? (0, a.jsx)(g.default, {
+                href: t,
                 passHref: !0,
                 legacyBehavior: !0,
-                children: (0, a.jsx)(v.f, {
+                children: (0, a.jsx)(k.f, {
                     classes: {
                         root: l
                     },
                     children: e
                 })
-            }, e) : (0, a.jsx)(p.f, {
+            }, e) : (0, a.jsx)(c.f, {
                 color: "secondary",
                 children: e
-            }, e), [b, l]), z = (0, r.useCallback)(e => {
-                var a, r;
-                let t = e.parentItemTypeName ? P.f[e.parentItemTypeName] : null,
+            }, e), [b, l]), z = (0, t.useCallback)(e => {
+                var a, t;
+                let r = e.parentItemTypeName ? v.f[e.parentItemTypeName] : null,
                     i = w[e.breadcrumbType],
-                    n = e.breadcrumbType === C.f.AnalyticsCustomDashboards && R ? R : void 0,
+                    n = e.breadcrumbType === I.f.AnalyticsCustomDashboards && R ? R : void 0,
                     d = null != n ? n : null == (a = e.getLinkPath) ? void 0 : a.call(e, j),
-                    l = void 0 !== n || null === t || e.breadcrumbType !== t.breadcrumbType;
-                return [t ? B(t.displayName(M), L(s, null == (r = t.getLinkPath) ? void 0 : r.call(t, j))) : null, i ? B(i, l ? L(s, d) : void 0) : null]
-            }, [w, j, B, M, s, R]), U = (0, r.useMemo)(() => {
+                    l = void 0 !== n || null === r || e.breadcrumbType !== r.breadcrumbType;
+                return [r ? B(r.displayName(M), H(s, null == (t = r.getLinkPath) ? void 0 : t.call(r, j))) : null, i ? B(i, l ? H(s, d) : void 0) : null]
+            }, [w, j, B, M, s, R]), U = (0, t.useMemo)(() => {
                 var e;
                 let a;
-                return e = P.f, a = [], h.filter(a => e[a]).forEach(r => {
-                    let t = e[r],
-                        i = t.displayName(M);
-                    if (i && a.push(i), t.withId) {
-                        let e = w[t.breadcrumbType];
+                return e = v.f, a = [], L.filter(a => e[a]).forEach(t => {
+                    let r = e[t],
+                        i = r.displayName(M);
+                    if (i && a.push(i), r.withId) {
+                        let e = w[r.breadcrumbType];
                         e && a.push(e)
                     }
                 }), a
-            }, [h, M, w]), O = (0, r.useMemo)(() => (function(e) {
+            }, [L, M, w]), F = (0, t.useMemo)(() => (function(e) {
                 if (e.length < 2) return;
                 let a = e[e.length - 1],
-                    r = e[e.length - 2];
-                if (a && r) return "".concat(r, " / ").concat(a)
-            })(U), [U]), _ = (0, r.useMemo)(() => {
+                    t = e[e.length - 2];
+                if (a && t) return "".concat(t, " / ").concat(a)
+            })(U), [U]), O = (0, t.useMemo)(() => {
                 var e, a;
                 return s.includes("/experiences/") ? {
-                    description: null == f ? void 0 : f.name,
-                    author: null == f || null == (e = f.creator) ? void 0 : e.name,
-                    entityName: null == f ? void 0 : f.name,
-                    entityId: null == f || null == (a = f.id) ? void 0 : a.toString(),
+                    description: null == S ? void 0 : S.name,
+                    author: null == S || null == (e = S.creator) ? void 0 : e.name,
+                    entityName: null == S ? void 0 : S.name,
+                    entityId: null == S || null == (a = S.id) ? void 0 : a.toString(),
                     type: "experience"
                 } : {}
-            }, [s, f]), {
-                breadcrumbsContents: G,
-                breadcrumbNames: V
-            } = (0, r.useMemo)(() => {
+            }, [s, S]), {
+                breadcrumbsContents: _,
+                breadcrumbNames: G
+            } = (0, t.useMemo)(() => {
                 let e = e => {
                         if (e.withId) {
                             var a;
@@ -1995,87 +2041,87 @@
                         }
                         return e.displayName(M)
                     },
-                    r = h.map(e => ({
+                    t = L.map(e => ({
                         key: e,
-                        breadcrumbDetails: P.f[e]
+                        breadcrumbDetails: v.f[e]
                     })).filter(e => e.breadcrumbDetails);
-                if (n && g) {
-                    var t;
-                    if (0 === r.length) return {
+                if (n && A) {
+                    var r;
+                    if (0 === t.length) return {
                         breadcrumbsContents: [],
                         breadcrumbNames: []
                     };
                     let {
                         key: i,
                         breadcrumbDetails: s
-                    } = r[0], d = r.map(a => {
+                    } = t[0], d = t.map(a => {
                         let {
-                            breadcrumbDetails: r
+                            breadcrumbDetails: t
                         } = a;
-                        return e(r)
-                    }), l = null == (t = s.getLinkPath) ? void 0 : t.call(s, j), c = (0, a.jsx)(p.f, {
+                        return e(t)
+                    }), l = null == (r = s.getLinkPath) ? void 0 : r.call(s, j), u = (0, a.jsx)(c.f, {
                         color: "primary",
                         "aria-current": "page",
-                        variant: g && n ? "h3" : void 0,
+                        variant: A && n ? "h3" : void 0,
                         children: e(s)
                     }, i);
                     return l ? {
-                        breadcrumbsContents: [(0, a.jsx)(k.default, {
+                        breadcrumbsContents: [(0, a.jsx)(g.default, {
                             href: l,
                             className: o,
-                            children: c
+                            children: u
                         }, i)],
                         breadcrumbNames: d
                     } : {
-                        breadcrumbsContents: [c],
+                        breadcrumbsContents: [u],
                         breadcrumbNames: d
                     }
                 }
                 let {
                     contents: i,
                     names: d
-                } = r.reduce((t, i, d) => {
+                } = t.reduce((r, i, d) => {
                     var l, o;
                     let {
-                        key: c,
+                        key: u,
                         breadcrumbDetails: m
                     } = i;
-                    if (!m) return t;
-                    if (d === r.length - 1) {
-                        let r = e(m);
-                        if (!r) return t;
-                        let i = m.parentItemTypeName ? P.f[m.parentItemTypeName] : null,
+                    if (!m) return r;
+                    if (d === t.length - 1) {
+                        let t = e(m);
+                        if (!t) return r;
+                        let i = m.parentItemTypeName ? v.f[m.parentItemTypeName] : null,
                             d = w[m.breadcrumbType];
-                        if (m.withId && m.breadcrumbType === C.f.AnalyticsCustomDashboards && null !== i && void 0 !== d) {
+                        if (m.withId && m.breadcrumbType === I.f.AnalyticsCustomDashboards && null !== i && void 0 !== d) {
                             let e = i.displayName(M);
                             return {
-                                contents: [...t.contents, B(e, L(s, null == (o = i.getLinkPath) ? void 0 : o.call(i, j))), B(d, R)],
-                                names: [...t.names, e, d]
+                                contents: [...r.contents, B(e, H(s, null == (o = i.getLinkPath) ? void 0 : o.call(i, j))), B(d, R)],
+                                names: [...r.names, e, d]
                             }
                         }
                         return {
-                            contents: [...t.contents, (0, a.jsx)(p.f, {
+                            contents: [...r.contents, (0, a.jsx)(c.f, {
                                 color: "primary",
                                 "aria-current": "page",
-                                variant: g && n ? "h3" : void 0,
-                                children: r
-                            }, c)],
-                            names: [...t.names, r]
+                                variant: A && n ? "h3" : void 0,
+                                children: t
+                            }, u)],
+                            names: [...r.names, t]
                         }
                     }
                     if (m.withId) {
-                        let e = m.parentItemTypeName ? P.f[m.parentItemTypeName] : null,
+                        let e = m.parentItemTypeName ? v.f[m.parentItemTypeName] : null,
                             a = w[m.breadcrumbType];
                         return {
-                            contents: t.contents.concat(z(m)),
-                            names: [...t.names, ...e ? [e.displayName(M)] : [], ...a ? [a] : []]
+                            contents: r.contents.concat(z(m)),
+                            names: [...r.names, ...e ? [e.displayName(M)] : [], ...a ? [a] : []]
                         }
                     }
-                    let u = m.displayName(M);
-                    return u ? {
-                        contents: [...t.contents, B(u, null == (l = m.getLinkPath) ? void 0 : l.call(m, j))],
-                        names: [...t.names, u]
-                    } : t
+                    let p = m.displayName(M);
+                    return p ? {
+                        contents: [...r.contents, B(p, null == (l = m.getLinkPath) ? void 0 : l.call(m, j))],
+                        names: [...r.names, p]
+                    } : r
                 }, {
                     contents: [],
                     names: []
@@ -2084,171 +2130,159 @@
                     breadcrumbsContents: i,
                     breadcrumbNames: d
                 }
-            }, [h, n, g, M, w, j, o, B, R, z, s]), F = (0, r.useMemo)(() => V[V.length - 1], [V]), q = (0, r.useMemo)(() => (0, t.A)(...V), [V]), W = O && (0, a.jsx)(t.i, {
-                title: F,
+            }, [L, n, A, M, w, j, o, B, R, z, s]), V = (0, t.useMemo)(() => G[G.length - 1], [G]), q = (0, t.useMemo)(() => (0, r.A)(...G), [G]), W = F && (0, a.jsx)(r.i, {
+                title: V,
                 breadcrumb: q,
-                seoTitle: O,
-                ..._
+                seoTitle: F,
+                ...O
             });
-            return g ? (0, a.jsxs)(y.f, {
-                className: n ? void 0 : u,
-                children: [W, (0, a.jsx)(T.f, {
+            return A ? (0, a.jsxs)(u.f, {
+                className: n ? void 0 : y,
+                children: [W, (0, a.jsx)(h.f, {
                     id: "navigation-breadcrumbs",
                     maxItems: 3,
                     "aria-label": "breadcrumb",
-                    children: (n || G.length > 1) && G
+                    children: (n || _.length > 1) && _
                 })]
-            }) : b ? (0, a.jsxs)(y.f, {
-                children: [W, (0, a.jsxs)(T.f, {
+            }) : b ? (0, a.jsxs)(u.f, {
+                children: [W, (0, a.jsxs)(h.f, {
                     maxItems: 3,
                     "aria-label": "breadcrumb",
-                    children: [(0, a.jsx)(p.f, {
+                    children: [(0, a.jsx)(c.f, {
                         color: "primary",
                         variant: "largeLabel1",
                         children: (0, a.jsx)(i.$, {})
-                    }, "product-name"), G.slice(0, -1)]
+                    }, "product-name"), _.slice(0, -1)]
                 })]
-            }) : (0, a.jsxs)(y.f, {
-                className: "".concat(c, " ").concat(G.length > 1 && !n ? m : ""),
-                children: [W, (0, a.jsx)(T.f, {
+            }) : (0, a.jsxs)(u.f, {
+                className: "".concat(m, " ").concat(_.length > 1 && !n ? p : ""),
+                children: [W, (0, a.jsx)(h.f, {
                     id: "navigation-breadcrumbs",
                     maxItems: 8,
                     "aria-label": "breadcrumb",
-                    children: G.length > 1 && G
+                    children: _.length > 1 && _
                 }), " "]
             })
-        }, [f.f.Creations, f.f.AudienceReach, f.f.Features, f.f.AssetTypes, f.f.SendrNotificationPreferences, f.f.Advanced, f.f.OpenCloud, f.f.Error, f.f.DataCollectionSettings, f.f.UnifiedNavigation, f.f.Payouts, f.f.Matchmaking, f.f.Environments, f.f.Navigation, f.f.MarketplaceOnboarding, f.f.PublicPublish, f.f.ExperienceAlerts, f.f.PlayerFeedback, f.f.DevEx, f.f.Publishing]),
-        j = () => {
+        }, [y.f.Creations, y.f.AudienceReach, y.f.Features, y.f.AssetTypes, y.f.SendrNotificationPreferences, y.f.Advanced, y.f.OpenCloud, y.f.Error, y.f.DataCollectionSettings, y.f.UnifiedNavigation, y.f.Payouts, y.f.Matchmaking, y.f.Environments, y.f.Navigation, y.f.MarketplaceOnboarding, y.f.PublicPublish, y.f.ExperienceAlerts, y.f.PlayerFeedback, y.f.DevEx, y.f.Publishing]),
+        S = () => {
             let {
                 currentItemType: e,
                 isCurrentItemLoading: a,
-                currentItemGroupId: t,
+                currentItemGroupId: r,
                 hasCurrentItemLoadError: n
-            } = (0, H.f)(), {
+            } = (0, C.f)(), {
                 isLoading: s,
                 setWorkspaceByGroupId: d
             } = (0, i.y)();
-            return (0, r.useEffect)(() => {
-                !e || a || n || s || d(null != t ? t : null)
-            }, [t, e, n, a, s, d]), null
+            return (0, t.useEffect)(() => {
+                !e || a || n || s || d(null != r ? r : null)
+            }, [r, e, n, a, s, d]), null
         },
-        M = "applayout-scroll-container",
-        E = (0, c.default)(() => Promise.resolve(h.default), {
+        L = "applayout-scroll-container",
+        w = (0, d.default)(() => Promise.resolve(b.default), {
             ssr: !1
         }),
-        D = (0, s.K)(e => {
-            var t;
+        j = (0, n.K)(e => {
+            var r;
             let {
-                title: n,
+                title: s,
                 beta: d = !1,
-                secondaryRail: l,
-                pageBanner: o,
-                useBreadcrumbs: c = !1,
+                secondaryRail: y,
+                pageBanner: b,
+                useBreadcrumbs: g = !1,
                 secondarySize: f = "small",
                 omitPageTitle: h = !1,
                 children: k
             } = e, {
                 open: N,
                 dialog: T
-            } = (0, g.f)(), {
+            } = (0, p.f)(), {
                 translate: v
-            } = (0, s.A)(), x = (0, r.useCallback)(() => {
+            } = (0, n.A)(), I = (0, t.useCallback)(() => {
                 N({
-                    task: b.e.Default
+                    task: m.e.Default
                 })
-            }, [N]), I = r.default.isValidElement(n) && n.type === s.c, P = "string" == typeof n ? (0, a.jsx)("h1", {
+            }, [N]), C = t.default.isValidElement(s) && s.type === n.c, x = "string" == typeof s ? (0, a.jsx)("h1", {
                 className: "text-heading-large margin-none",
-                children: v(n)
-            }) : I ? (0, a.jsx)("h1", {
+                children: v(s)
+            }) : C ? (0, a.jsx)("h1", {
                 className: "text-heading-large margin-none",
-                children: n
-            }) : null != n ? n : null;
+                children: s
+            }) : null != s ? s : null;
             return (0, a.jsxs)(i.p, {
-                children: [(0, a.jsx)(j, {}), T, (0, a.jsx)(i.p.Rail, {
-                    openStudio: x,
+                children: [(0, a.jsx)(S, {}), T, (0, a.jsx)(i.p.Rail, {
+                    openStudio: I,
                     secondarySize: f,
-                    children: l
+                    children: y
                 }), (0, a.jsx)(i.p.Header, {
-                    children: c ? (0, a.jsx)(w, {
+                    children: g ? (0, a.jsx)(A, {
                         inLayoutHeader: !0
-                    }) : (0, a.jsxs)(y.f, {
+                    }) : (0, a.jsxs)(u.f, {
                         container: !0,
                         alignItems: "center",
                         gap: "8px",
-                        children: [P, d && (0, a.jsx)(p.f, {
-                            children: (0, a.jsx)(u.f, {
+                        children: [x, d && (0, a.jsx)(c.f, {
+                            children: (0, a.jsx)(o.f, {
                                 labelText: v("Label.Beta")
                             })
                         })]
                     })
                 }), (0, a.jsx)(i.p.PageContent, {
-                    id: M,
-                    banner: o,
-                    additionalLinks: (0, a.jsx)(E, {
+                    id: L,
+                    banner: b,
+                    additionalLinks: (0, a.jsx)(w, {
                         inline: !0
                     }),
                     children: (0, a.jsxs)("div", {
                         className: "width-full height-full",
-                        children: [c && (null != (t = !h && P) ? t : d) && (0, a.jsxs)("div", {
+                        children: [g && (null != (r = !h && x) ? r : d) && (0, a.jsxs)("div", {
                             className: "flex items-center gap-small padding-bottom-large",
-                            children: [!h && P, d && (0, a.jsx)(p.f, {
-                                children: (0, a.jsx)(u.f, {
+                            children: [!h && x, d && (0, a.jsx)(c.f, {
+                                children: (0, a.jsx)(o.f, {
                                     labelText: v("Label.Beta")
                                 })
                             })]
-                        }), k, (0, a.jsx)(m.n, {})]
+                        }), k, (0, a.jsx)(l.n, {})]
                     })
                 })]
             })
-        }, [...i.d, f.f.RightsPortal, f.f.DeveloperProducts, f.f.Passes, f.f.Creations, f.f.PageTitles, f.f.Features, f.f.Privacy, f.f.Error, f.f.Analytics, f.f.TalentHubV2, f.f.Licenses, f.f.PlayerFeedback, f.f.RevenueShareAgreements, f.f.TaxDocumentation]);
-    e.s(["X", 0, M, "U", 0, D], 966501);
-    let R = {
-        enabled: !0,
-        isFetched: !0
-    };
-    e.s(["f", 0, e => {
+        }, [...i.d, y.f.RightsPortal, y.f.DeveloperProducts, y.f.Passes, y.f.Creations, y.f.PageTitles, y.f.Features, y.f.Privacy, y.f.Error, y.f.Analytics, y.f.TalentHubV2, y.f.Licenses, y.f.PlayerFeedback, y.f.RevenueShareAgreements, y.f.TaxDocumentation]);
+    e.s(["X", 0, L, "U", 0, j], 966501), e.s(["f", 0, e => {
         let {
-            product: c,
-            children: m,
-            beta: u,
-            title: p,
-            secondarySize: y = "large",
-            secondaryRail: b,
-            pageBanner: g,
-            omitPageTitle: f,
-            analyticsAssistantChatHref: h,
-            analyticsAssistantChatUniverseId: k,
-            ...N
+            product: d,
+            children: l,
+            beta: o,
+            title: c,
+            secondarySize: u = "large",
+            secondaryRail: m,
+            pageBanner: p,
+            omitPageTitle: y,
+            analyticsAssistantChatHref: b,
+            analyticsAssistantChatUniverseId: g,
+            ...f
         } = e, {
-            noBreadCrumbs: T,
-            leftNavigationContents: v
-        } = N, {
-            value: x
-        } = (0, n.f)(l.Y), {
-            translate: I
-        } = (0, s.A)(), P = "string" == typeof p ? I(p) : r.default.isValidElement(p) && p.type === s.c ? I(p.props.translationKey, p.props.args) : void 0;
-        return (0, a.jsxs)(d.f, {
-            children: [T && P && (0, a.jsx)(t.i, {
-                title: P
-            }), (0, a.jsx)(i.b, {
-                currentProduct: null != c ? c : "CreatorDashboard",
-                environment: (0, o.f)(),
-                robloxEnvironment: "production",
-                target: "global",
+            noBreadCrumbs: h,
+            leftNavigationContents: k
+        } = f, {
+            translate: N
+        } = (0, n.A)(), T = "string" == typeof c ? N(c) : t.default.isValidElement(c) && c.type === n.c ? N(c.props.translationKey, c.props.args) : void 0;
+        return (0, a.jsxs)(s.f, {
+            children: [h && T && (0, a.jsx)(r.i, {
+                title: T
+            }), (0, a.jsx)(i.G, {
+                currentProduct: null != d ? d : "CreatorDashboard",
                 drawerVariant: "belowAppBar",
-                signalRCrossTab: R,
-                enableGroupModeration: null != x && x,
-                analyticsAssistantChatHref: h,
-                analyticsAssistantChatUniverseId: k,
-                children: (0, a.jsx)(D, {
-                    beta: u,
-                    title: p,
-                    secondaryRail: null != b ? b : v,
-                    pageBanner: g,
-                    useBreadcrumbs: !T,
-                    secondarySize: y,
-                    omitPageTitle: f,
-                    children: m
+                analyticsAssistantChatHref: b,
+                analyticsAssistantChatUniverseId: g,
+                children: (0, a.jsx)(j, {
+                    beta: o,
+                    title: c,
+                    secondaryRail: null != m ? m : k,
+                    pageBanner: p,
+                    useBreadcrumbs: !h,
+                    secondarySize: u,
+                    omitPageTitle: y,
+                    children: l
                 })
             })]
         })
@@ -2256,13 +2290,13 @@
 }, 634877, e => {
     "use strict";
     var a = e.i(643766);
-    let r = (0, a.createContext)({
+    let t = (0, a.createContext)({
         insideTopNavigationDrawer: !1
     });
-    r.displayName = "TopNavigationSidebarDrawerContext", e.s(["f", 0, function() {
-        return (0, a.useContext)(r)
+    t.displayName = "TopNavigationSidebarDrawerContext", e.s(["f", 0, function() {
+        return (0, a.useContext)(t)
     }], 634877)
 }]);
 
-//# debugId=3814ba33-1f2a-65d2-8e0b-44c5a9bd840a
-//# sourceMappingURL=17vh9wd3gnn-i.js.map
+//# debugId=8281d234-3da9-1024-1c85-cd397ec2e4a1
+//# sourceMappingURL=33d3gkvist01_.js.map

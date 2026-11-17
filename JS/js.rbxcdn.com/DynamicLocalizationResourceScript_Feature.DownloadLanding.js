@@ -48,6 +48,7 @@ Roblox.LangDynamic["Feature.DownloadLanding"] = {
     "Label.ExperienceAnimalHospital": "Animal Hospital",
     "Label.ExperienceDragonAdventures": "Dragon Adventures",
     "Label.ExperienceDuelingGrounds": "Dueling Grounds",
-    "Label.ExperienceEcosLaBrea": "Ecos La Brea"
+    "Label.ExperienceEcosLaBrea": "Ecos La Brea",
+    "Heading.DownloadPageCarousel": "Explore millions of worlds and games on Roblox"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.DownloadLanding");

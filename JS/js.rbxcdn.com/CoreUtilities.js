@@ -2,10 +2,10 @@
     try {
         var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "1a50765bbd54078d1bfc2e333b221548ba2b82c6"
+            id: "d77384b129af5fe8b7c661660170e82d3c366561"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "4609ea80-cc45-4287-aaa6-ce9759e1e107", e._sentryDebugIdIdentifier = "sentry-dbid-4609ea80-cc45-4287-aaa6-ce9759e1e107")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "2e792ab7-d1dd-4eb8-abfd-d47717023792", e._sentryDebugIdIdentifier = "sentry-dbid-2e792ab7-d1dd-4eb8-abfd-d47717023792")
     } catch (e) {}
 }(),
 function() {
@@ -27739,7 +27739,7 @@ function() {
                             l = e.privateServerLinkCode,
                             d = e.referredByPlayerId,
                             f = e.isEarlyTesting;
-                        return null == o ? void 0 : o === i && u ? (t.properties.gameInstanceId = u, m1(t), m2(t.gamePlayIntentEventCtx, i, a, n), r.joinGameInstance(o, u, !0, !0, a, t.gamePlayIntentEventCtx, d)) : i && s ? (t.properties.playerId = s, m1(t), m2(t.gamePlayIntentEventCtx, i, a, n), r.followPlayerIntoGame(s, a, t.gamePlayIntentEventCtx)) : l ? (m1(t), m2(t.gamePlayIntentEventCtx, o, a, n), r.joinPrivateGame(o, null, l, a, t.gamePlayIntentEventCtx)) : (m1(t), m2(t.gamePlayIntentEventCtx, o, a, n), r.joinMultiplayerGame(o, !0, !1, a, t.gamePlayIntentEventCtx, c, d, f))
+                        return null == o ? void 0 : o === i && u ? (t.properties.gameInstanceId = u, m1(t), m2(t.gamePlayIntentEventCtx, i, a, n), r.joinGameInstance(o, u, !0, !0, a, t.gamePlayIntentEventCtx, d, null == c ? void 0 : c.getPlayOnWeb)) : i && s ? (t.properties.playerId = s, m1(t), m2(t.gamePlayIntentEventCtx, i, a, n), r.followPlayerIntoGame(s, a, t.gamePlayIntentEventCtx)) : l ? (m1(t), m2(t.gamePlayIntentEventCtx, o, a, n), r.joinPrivateGame(o, null, l, a, t.gamePlayIntentEventCtx, null == c ? void 0 : c.getPlayOnWeb)) : (m1(t), m2(t.gamePlayIntentEventCtx, o, a, n), r.joinMultiplayerGame(o, !0, !1, a, t.gamePlayIntentEventCtx, c, d, f))
                     }
                 },
                 m6 = function(e, t, n) {
@@ -39092,4 +39092,4 @@ function() {
             } catch (e) {}
         }()
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected(document.currentScript && document.currentScript.getAttribute("data-bundlename") || "CoreUtilities");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/coreUtilities-0a3adb37fb0f9195.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/coreUtilities-fb7f3841329e7131.js.map
