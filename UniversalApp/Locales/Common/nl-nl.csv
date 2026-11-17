@@ -2548,6 +2548,7 @@ Feature.Build.Description.ActivateSubscription,Abonnement {PRODUCT_ID} beschikba
 Feature.Build.Description.AdCampaignModerationReview,We beoordelen elke advertentie voordat deze wordt weergegeven. Dit kan tot 24 uur duren.
 Feature.Build.Description.AdCampaignSheetRunDates,Loopt van {startDate} tot {endDate}
 Feature.Build.Description.AdComplete,Je advertentie is gestopt. Bekijk hoe die heeft gepresteerd.
+Feature.Build.Description.AdCreditsSavedForRetry,We hebben je Robux opgeslagen als advertentietegoed. Probeer het opnieuw en we gebruiken ze voor deze advertentie.
 Feature.Build.Description.AdModerationReview,
 Feature.Build.Description.AdvancedModel,Meest geschikt voor complexe games. Het gebruikstegoed raakt sneller op.
 Feature.Build.Description.AdvertisingAgreement,"Door Aanmaken te selecteren, ga je akkoord met de Roblox-{advertisingTermsStart}advertentievoorwaarden{advertisingTermsEnd} en -{advertisingStandardsStart}reclamerichtlijnen{advertisingStandardsEnd}."
@@ -2948,6 +2949,7 @@ Feature.Build.Title.AdCampaignDuration,Advertentie van {durationDays} dagen
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} dagen
 Feature.Build.Title.AdComplete,Advertentie voltooid
 Feature.Build.Title.AdCreatedPeriod,Advertentie gemaakt.
+Feature.Build.Title.AdNotCreated,We konden je advertentie niet aanmaken
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,Afbeeldingen toevoegen
 Feature.Build.Title.AdsStatsEmpty,
@@ -3004,6 +3006,7 @@ Feature.Build.Title.VersionInfo,Versie-informatie
 Feature.Build.Title.VersionNumber,Versie {VERSION}
 Feature.Build.Title.Versions,Versies
 Feature.Build.Title.WhatsIncluded,Wat is er inbegrepen?
+Feature.BuyRobux.Action.ContentPersonalization,Contentpersonalisatie
 Feature.BuyRobux.Heading.Banner,
 Feature.BuyRobux.Heading.PendingTransfers,Robux in behandeling
 Feature.BuyRobux.Label.MyFriendsWithCount,Mijn vrienden ({count})

@@ -2566,6 +2566,7 @@ Feature.Build.Description.ActivateSubscription,定期購入（{PRODUCT_ID}）を
 Feature.Build.Description.AdCampaignModerationReview,当社は、すべての広告を実施前に審査します。これには最大24時間かかる場合があります。
 Feature.Build.Description.AdCampaignSheetRunDates,実施期間：{startDate}～{endDate}
 Feature.Build.Description.AdComplete,広告が終了しました。結果を確認しましょう。
+Feature.Build.Description.AdCreditsSavedForRetry,お支払いいただいたRobuxは広告クレジットとして保存されています。もう一度お試しいただくと、そのクレジットを使ってこの広告を作成します。
 Feature.Build.Description.AdModerationReview,
 Feature.Build.Description.AdvancedModel,複雑なゲームに最適です。使用量がより早く消費されます。
 Feature.Build.Description.AdvertisingAgreement,[作成]を選択すると、{advertisingTermsStart}Roblox広告基準{advertisingTermsEnd}および{advertisingStandardsStart}広告基準{advertisingStandardsEnd}に同意したものとみなされます。
@@ -2966,6 +2967,7 @@ Feature.Build.Title.AdCampaignDuration,{durationDays}日間の広告
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays}日
 Feature.Build.Title.AdComplete,広告が完了しました
 Feature.Build.Title.AdCreatedPeriod,広告が作成されました。
+Feature.Build.Title.AdNotCreated,広告を作成できませんでした
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,画像を追加
 Feature.Build.Title.AdsStatsEmpty,
@@ -3022,6 +3024,7 @@ Feature.Build.Title.VersionInfo,バージョン情報
 Feature.Build.Title.VersionNumber,バージョン{VERSION}
 Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,含まれるもの
+Feature.BuyRobux.Action.ContentPersonalization,コンテンツのパーソナライズ機能
 Feature.BuyRobux.Heading.Banner,
 Feature.BuyRobux.Heading.PendingTransfers,保留中のRobux
 Feature.BuyRobux.Label.MyFriendsWithCount,自分の友達（{count}人）

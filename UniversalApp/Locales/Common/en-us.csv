@@ -2573,6 +2573,7 @@ Feature.Build.Description.ActivateSubscription,Make subscription {PRODUCT_ID} av
 Feature.Build.Description.AdCampaignModerationReview,We review every ad before it runs. This can take up to 24 hours.
 Feature.Build.Description.AdCampaignSheetRunDates,Runs {startDate}-{endDate}
 Feature.Build.Description.AdComplete,Your ad has ended. See how it did.
+Feature.Build.Description.AdCreditsSavedForRetry,We saved your Robux as ad credits. Try again and we'll use them for this ad.
 Feature.Build.Description.AdModerationReview,
 Feature.Build.Description.AdvancedModel,Best for complex games. Usage runs out faster.
 Feature.Build.Description.AdvertisingAgreement,"By selecting Create, you agree to the {advertisingTermsStart}Roblox Advertising Terms{advertisingTermsEnd} and {advertisingStandardsStart}Advertising Standards{advertisingStandardsEnd}."
@@ -2973,6 +2974,7 @@ Feature.Build.Title.AdCampaignDuration,{durationDays}-day ad
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} days
 Feature.Build.Title.AdComplete,Ad complete
 Feature.Build.Title.AdCreatedPeriod,Ad created.
+Feature.Build.Title.AdNotCreated,We couldn't create your ad
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,Add images
 Feature.Build.Title.AdsStatsEmpty,
@@ -3029,6 +3031,7 @@ Feature.Build.Title.VersionInfo,Version information
 Feature.Build.Title.VersionNumber,Version {VERSION}
 Feature.Build.Title.Versions,Versions
 Feature.Build.Title.WhatsIncluded,What's included?
+Feature.BuyRobux.Action.ContentPersonalization,Content personalization
 Feature.BuyRobux.Heading.Banner,
 Feature.BuyRobux.Heading.PendingTransfers,Pending Robux
 Feature.BuyRobux.Label.MyFriendsWithCount,My friends ({count})

@@ -1,5 +1,6 @@
 ﻿local ProtoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
 local TypeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
+local t = {}
 local ClientCapabilitiesModule = require(script.Parent.Parent.Parent.shared.v1beta1.client_capabilities)
 local HydrationContentModule = require(script.Parent.Parent.Parent.shared.v1beta1.hydration_content)
 local PageEntryContentModule = require(script.Parent.Parent.Parent.shared.v1beta1.page_entry_content)
@@ -12,7 +13,8 @@ function Module.new(p1)
 	return (setmetatable({
 		spotlight_collection_id = if p1 == nil or p1.spotlight_collection_id == nil then "" else p1.spotlight_collection_id,
 		session_id = if p1 == nil or p1.session_id == nil then "" else p1.session_id,
-		client_capabilities = if p1 == nil or p1.client_capabilities == nil then nil else p1.client_capabilities
+		client_capabilities = if p1 == nil or p1.client_capabilities == nil then nil else p1.client_capabilities,
+		page_parameters = if p1 == nil or p1.page_parameters == nil then {} else p1.page_parameters
 	}, Module))
 end
 
@@ -34,6 +36,16 @@ function Module:encode()
 		local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
 		Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
 	end
+	if self.page_parameters ~= nil and next(self.page_parameters) ~= nil then
+		for i, pageParameter in self.page_parameters do
+			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult, WriteStringResult2 = ProtoModule.writeString(WriteTagResult4, WriteTagResult2_3, i)
+			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(WriteStringResult, WriteStringResult2, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult1, WriteStringResult2_1 = ProtoModule.writeString(WriteTagResult5, WriteTagResult2_4, pageParameter)
+			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult6, WriteTagResult2_5, WriteStringResult1, WriteStringResult2_1)
+		end
+	end
 	local Buf1 = buffer.create(Count)
 	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
@@ -41,39 +53,44 @@ function Module:encode()
 end
 
 function Module.decode(Buf)
-	-- upvalues: Module (copy), ProtoModule (copy), ClientCapabilitiesModule (copy)
+	-- upvalues: Module (copy), ProtoModule (copy), ClientCapabilitiesModule (copy), t (copy)
 	local NewModule = Module.new()
 	local v1 = 0
 	while v1 < buffer.len(Buf) do
 		local Tag, Tag2
-		Tag, Tag2, v21 = ProtoModule.readTag(Buf, v1)
+		Tag, Tag2, v32 = ProtoModule.readTag(Buf, v1)
 		
 		if Tag2 == ProtoModule.wireTypes.varint then
 			local _
-			_, v21 = ProtoModule.readVarInt(Buf, v1)
+			_, v32 = ProtoModule.readVarInt(Buf, v1)
 		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 			if Tag == 1 then
 				local Buffer1
-				Buffer1, v21 = ProtoModule.readBuffer(Buf, v1)
+				Buffer1, v32 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.spotlight_collection_id = buffer.tostring(Buffer1)
 			elseif Tag == 2 then
 				local Buffer2
-				Buffer2, v21 = ProtoModule.readBuffer(Buf, v1)
+				Buffer2, v32 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.session_id = buffer.tostring(Buffer2)
 			elseif Tag == 3 then
 				local Buffer3
-				Buffer3, v21 = ProtoModule.readBuffer(Buf, v1)
+				Buffer3, v32 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.client_capabilities = ClientCapabilitiesModule.ClientCapabilities.decode(Buffer3)
+			elseif Tag == 4 then
+				local Buffer4
+				Buffer4, v32 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.SpotlightCollectionPageRequest_PageParametersEntry.decode(Buffer4)
+				NewModule.page_parameters[DecodeResult.key or ""] = DecodeResult.value or ""
 			else
 				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v1)
 				v1 = VarInt2 + VarInt
 			end
 		elseif Tag2 == ProtoModule.wireTypes.i32 then
 			local _
-			_, v21 = ProtoModule.readFixed32(Buf, v1)
+			_, v32 = ProtoModule.readFixed32(Buf, v1)
 		elseif Tag2 == ProtoModule.wireTypes.i64 then
 			local _
-			_, v21 = ProtoModule.readFixed64(Buf, v1)
+			_, v32 = ProtoModule.readFixed64(Buf, v1)
 		else
 			error("Unsupported wire type: " .. Tag2)
 		end
@@ -92,6 +109,14 @@ function Module:jsonEncode()
 	end
 	if self.client_capabilities ~= nil then
 		t.clientCapabilities = self.client_capabilities:jsonEncode()
+	end
+	if self.page_parameters ~= nil and next(self.page_parameters) ~= nil then
+		local PageParameters = {}
+		
+		for i, pageParameter in self.page_parameters do
+			PageParameters[i] = pageParameter
+		end
+		t.pageParameters = PageParameters
 	end
 	return t
 end
@@ -118,6 +143,22 @@ function Module:jsonDecode()
 	if self.clientCapabilities ~= nil then
 		NewModule.client_capabilities = ClientCapabilitiesModule.ClientCapabilities.jsonDecode(self.clientCapabilities)
 	end
+	if self.page_parameters ~= nil then
+		local Page_parameters = {}
+		
+		for i, pageParameter in self.page_parameters do
+			Page_parameters[i] = pageParameter
+		end
+		NewModule.page_parameters = Page_parameters
+	end
+	if self.pageParameters ~= nil then
+		local Page_parameters = {}
+		
+		for i1, pageParameter1 in self.pageParameters do
+			Page_parameters[i1] = pageParameter1
+		end
+		NewModule.page_parameters = Page_parameters
+	end
 	return NewModule
 end
 
@@ -125,22 +166,120 @@ Module.descriptor = {
 	name = "SpotlightCollectionPageRequest",
 	fullName = "roblox.apppageplatform.spotlightcollection.v1beta1.SpotlightCollectionPageRequest"
 }
-local config = { SpotlightCollectionPageRequest = Module }
-TypeRegistryModule.default:register(config.SpotlightCollectionPageRequest)
+t.SpotlightCollectionPageRequest = Module
+TypeRegistryModule.default:register(t.SpotlightCollectionPageRequest)
 local Module1 = {}
 Module1.__index = Module1
 
 function Module1.new(p1)
 	-- upvalues: Module1 (copy)
 	return (setmetatable({
-		page_entries = if p1 == nil or p1.page_entries == nil then {} else p1.page_entries,
-		hydration_data = if p1 == nil or p1.hydration_data == nil then nil else p1.hydration_data,
-		templates = if p1 == nil or p1.templates == nil then {} else p1.templates,
-		localized_literals = if p1 == nil or p1.localized_literals == nil then {} else p1.localized_literals
+		key = if p1 == nil or p1.key == nil then "" else p1.key,
+		value = if p1 == nil or p1.value == nil then "" else p1.value
 	}, Module1))
 end
 
 function Module1:encode()
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
+	
+	if self.key ~= nil and self.key ~= "" then
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.key)
+	end
+	if self.value ~= nil and self.value ~= "" then
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult1, WriteTagResult2_1, self.value)
+	end
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
+	
+	return Buf1
+end
+
+function Module1.decode(Buf)
+	-- upvalues: Module1 (copy), ProtoModule (copy)
+	local NewModule = Module1.new()
+	local v2 = 0
+	while v2 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v57 = ProtoModule.readTag(Buf, v2)
+		
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v57 = ProtoModule.readVarInt(Buf, v2)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v57 = ProtoModule.readBuffer(Buf, v2)
+				NewModule.key = buffer.tostring(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v57 = ProtoModule.readBuffer(Buf, v2)
+				NewModule.value = buffer.tostring(Buffer2)
+			else
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v2)
+				v2 = VarInt2 + VarInt
+			end
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v57 = ProtoModule.readFixed32(Buf, v2)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v57 = ProtoModule.readFixed64(Buf, v2)
+		else
+			error("Unsupported wire type: " .. Tag2)
+		end
+	end
+	return NewModule
+end
+
+function Module1:jsonEncode()
+	local t = {}
+	
+	if self.key ~= nil and self.key ~= "" then
+		t.key = self.key
+	end
+	if self.value ~= nil and self.value ~= "" then
+		t.value = self.value
+	end
+	return t
+end
+
+function Module1:jsonDecode()
+	-- upvalues: Module1 (copy)
+	local NewModule = Module1.new()
+	
+	if self.key ~= nil then
+		NewModule.key = self.key
+	end
+	if self.value ~= nil then
+		NewModule.value = self.value
+	end
+	return NewModule
+end
+
+Module1.descriptor = {
+	name = "SpotlightCollectionPageRequest_PageParametersEntry",
+	fullName = "roblox.apppageplatform.spotlightcollection.v1beta1.PageParametersEntry"
+}
+t.SpotlightCollectionPageRequest_PageParametersEntry = Module1
+TypeRegistryModule.default:register(t.SpotlightCollectionPageRequest_PageParametersEntry)
+local Module2 = {}
+Module2.__index = Module2
+
+function Module2.new(p1)
+	-- upvalues: Module2 (copy)
+	return (setmetatable({
+		page_entries = if p1 == nil or p1.page_entries == nil then {} else p1.page_entries,
+		hydration_data = if p1 == nil or p1.hydration_data == nil then nil else p1.hydration_data,
+		templates = if p1 == nil or p1.templates == nil then {} else p1.templates,
+		localized_literals = if p1 == nil or p1.localized_literals == nil then {} else p1.localized_literals
+	}, Module2))
+end
+
+function Module2:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -184,47 +323,47 @@ function Module1:encode()
 	return Buf1
 end
 
-function Module1.decode(Buf)
-	-- upvalues: Module1 (copy), ProtoModule (copy), PageEntryContentModule (copy), HydrationContentModule (copy), config (copy), TemplateEntryModule (copy)
-	local NewModule = Module1.new()
-	local v2 = 0
-	while v2 < buffer.len(Buf) do
+function Module2.decode(Buf)
+	-- upvalues: Module2 (copy), ProtoModule (copy), PageEntryContentModule (copy), HydrationContentModule (copy), t (copy), TemplateEntryModule (copy)
+	local NewModule = Module2.new()
+	local v3 = 0
+	while v3 < buffer.len(Buf) do
 		local Tag, Tag2
-		Tag, Tag2, v64 = ProtoModule.readTag(Buf, v2)
+		Tag, Tag2, v99 = ProtoModule.readTag(Buf, v3)
 		
 		if Tag2 == ProtoModule.wireTypes.varint then
 			local _
-			_, v64 = ProtoModule.readVarInt(Buf, v2)
+			_, v99 = ProtoModule.readVarInt(Buf, v3)
 		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 			if Tag == 1 then
 				local Buffer1
-				Buffer1, v64 = ProtoModule.readBuffer(Buf, v2)
+				Buffer1, v99 = ProtoModule.readBuffer(Buf, v3)
 				table.insert(NewModule.page_entries, PageEntryContentModule.UniversalPageEntry.decode(Buffer1))
 			elseif Tag == 2 then
 				local Buffer2
-				Buffer2, v64 = ProtoModule.readBuffer(Buf, v2)
+				Buffer2, v99 = ProtoModule.readBuffer(Buf, v3)
 				NewModule.hydration_data = HydrationContentModule.HydrationContent.decode(Buffer2)
 			elseif Tag == 3 then
 				local Buffer3
-				Buffer3, v64 = ProtoModule.readBuffer(Buf, v2)
-				local DecodeResult = config.SpotlightCollectionPageResponse_TemplatesEntry.decode(Buffer3)
+				Buffer3, v99 = ProtoModule.readBuffer(Buf, v3)
+				local DecodeResult = t.SpotlightCollectionPageResponse_TemplatesEntry.decode(Buffer3)
 				local NewResult = TemplateEntryModule.TemplateEntry.new()
 				NewModule.templates[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 4 then
 				local Buffer4
-				Buffer4, v64 = ProtoModule.readBuffer(Buf, v2)
-				local DecodeResult = config.SpotlightCollectionPageResponse_LocalizedLiteralsEntry.decode(Buffer4)
+				Buffer4, v99 = ProtoModule.readBuffer(Buf, v3)
+				local DecodeResult = t.SpotlightCollectionPageResponse_LocalizedLiteralsEntry.decode(Buffer4)
 				NewModule.localized_literals[DecodeResult.key or ""] = DecodeResult.value or ""
 			else
-				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v2)
-				v2 = VarInt2 + VarInt
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v3)
+				v3 = VarInt2 + VarInt
 			end
 		elseif Tag2 == ProtoModule.wireTypes.i32 then
 			local _
-			_, v64 = ProtoModule.readFixed32(Buf, v2)
+			_, v99 = ProtoModule.readFixed32(Buf, v3)
 		elseif Tag2 == ProtoModule.wireTypes.i64 then
 			local _
-			_, v64 = ProtoModule.readFixed64(Buf, v2)
+			_, v99 = ProtoModule.readFixed64(Buf, v3)
 		else
 			error("Unsupported wire type: " .. Tag2)
 		end
@@ -232,7 +371,7 @@ function Module1.decode(Buf)
 	return NewModule
 end
 
-function Module1:jsonEncode()
+function Module2:jsonEncode()
 	local t = {}
 	
 	if self.page_entries ~= nil and #self.page_entries > 0 then
@@ -265,9 +404,9 @@ function Module1:jsonEncode()
 	return t
 end
 
-function Module1:jsonDecode()
-	-- upvalues: Module1 (copy), PageEntryContentModule (copy), HydrationContentModule (copy), TemplateEntryModule (copy)
-	local NewModule = Module1.new()
+function Module2:jsonDecode()
+	-- upvalues: Module2 (copy), PageEntryContentModule (copy), HydrationContentModule (copy), TemplateEntryModule (copy)
+	local NewModule = Module2.new()
 	
 	if self.page_entries ~= nil then
 		local Page_entries = {}
@@ -318,24 +457,24 @@ function Module1:jsonDecode()
 	return NewModule
 end
 
-Module1.descriptor = {
+Module2.descriptor = {
 	name = "SpotlightCollectionPageResponse",
 	fullName = "roblox.apppageplatform.spotlightcollection.v1beta1.SpotlightCollectionPageResponse"
 }
-config.SpotlightCollectionPageResponse = Module1
-TypeRegistryModule.default:register(config.SpotlightCollectionPageResponse)
-local Module2 = {}
-Module2.__index = Module2
+t.SpotlightCollectionPageResponse = Module2
+TypeRegistryModule.default:register(t.SpotlightCollectionPageResponse)
+local Module3 = {}
+Module3.__index = Module3
 
-function Module2.new(p1)
-	-- upvalues: Module2 (copy)
+function Module3.new(p1)
+	-- upvalues: Module3 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
 		value = if p1 == nil or p1.value == nil then nil else p1.value
-	}, Module2))
+	}, Module3))
 end
 
-function Module2:encode()
+function Module3:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -355,36 +494,36 @@ function Module2:encode()
 	return Buf1
 end
 
-function Module2.decode(Buf)
-	-- upvalues: Module2 (copy), ProtoModule (copy), TemplateEntryModule (copy)
-	local NewModule = Module2.new()
-	local v3 = 0
-	while v3 < buffer.len(Buf) do
+function Module3.decode(Buf)
+	-- upvalues: Module3 (copy), ProtoModule (copy), TemplateEntryModule (copy)
+	local NewModule = Module3.new()
+	local v4 = 0
+	while v4 < buffer.len(Buf) do
 		local Tag, Tag2
-		Tag, Tag2, v97 = ProtoModule.readTag(Buf, v3)
+		Tag, Tag2, v132 = ProtoModule.readTag(Buf, v4)
 		
 		if Tag2 == ProtoModule.wireTypes.varint then
 			local _
-			_, v97 = ProtoModule.readVarInt(Buf, v3)
+			_, v132 = ProtoModule.readVarInt(Buf, v4)
 		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 			if Tag == 1 then
 				local Buffer1
-				Buffer1, v97 = ProtoModule.readBuffer(Buf, v3)
+				Buffer1, v132 = ProtoModule.readBuffer(Buf, v4)
 				NewModule.key = buffer.tostring(Buffer1)
 			elseif Tag == 2 then
 				local Buffer2
-				Buffer2, v97 = ProtoModule.readBuffer(Buf, v3)
+				Buffer2, v132 = ProtoModule.readBuffer(Buf, v4)
 				NewModule.value = TemplateEntryModule.TemplateEntry.decode(Buffer2)
 			else
-				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v3)
-				v3 = VarInt2 + VarInt
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v4)
+				v4 = VarInt2 + VarInt
 			end
 		elseif Tag2 == ProtoModule.wireTypes.i32 then
 			local _
-			_, v97 = ProtoModule.readFixed32(Buf, v3)
+			_, v132 = ProtoModule.readFixed32(Buf, v4)
 		elseif Tag2 == ProtoModule.wireTypes.i64 then
 			local _
-			_, v97 = ProtoModule.readFixed64(Buf, v3)
+			_, v132 = ProtoModule.readFixed64(Buf, v4)
 		else
 			error("Unsupported wire type: " .. Tag2)
 		end
@@ -392,7 +531,7 @@ function Module2.decode(Buf)
 	return NewModule
 end
 
-function Module2:jsonEncode()
+function Module3:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -404,9 +543,9 @@ function Module2:jsonEncode()
 	return t
 end
 
-function Module2:jsonDecode()
-	-- upvalues: Module2 (copy), TemplateEntryModule (copy)
-	local NewModule = Module2.new()
+function Module3:jsonDecode()
+	-- upvalues: Module3 (copy), TemplateEntryModule (copy)
+	local NewModule = Module3.new()
 	
 	if self.key ~= nil then
 		NewModule.key = self.key
@@ -417,24 +556,24 @@ function Module2:jsonDecode()
 	return NewModule
 end
 
-Module2.descriptor = {
+Module3.descriptor = {
 	name = "SpotlightCollectionPageResponse_TemplatesEntry",
 	fullName = "roblox.apppageplatform.spotlightcollection.v1beta1.TemplatesEntry"
 }
-config.SpotlightCollectionPageResponse_TemplatesEntry = Module2
-TypeRegistryModule.default:register(config.SpotlightCollectionPageResponse_TemplatesEntry)
-local Module3 = {}
-Module3.__index = Module3
+t.SpotlightCollectionPageResponse_TemplatesEntry = Module3
+TypeRegistryModule.default:register(t.SpotlightCollectionPageResponse_TemplatesEntry)
+local Module4 = {}
+Module4.__index = Module4
 
-function Module3.new(p1)
-	-- upvalues: Module3 (copy)
+function Module4.new(p1)
+	-- upvalues: Module4 (copy)
 	return (setmetatable({
 		key = if p1 == nil or p1.key == nil then "" else p1.key,
 		value = if p1 == nil or p1.value == nil then "" else p1.value
-	}, Module3))
+	}, Module4))
 end
 
-function Module3:encode()
+function Module4:encode()
 	-- upvalues: ProtoModule (copy)
 	local Buf = buffer.create(0)
 	local Count = 0
@@ -453,36 +592,36 @@ function Module3:encode()
 	return Buf1
 end
 
-function Module3.decode(Buf)
-	-- upvalues: Module3 (copy), ProtoModule (copy)
-	local NewModule = Module3.new()
-	local v4 = 0
-	while v4 < buffer.len(Buf) do
+function Module4.decode(Buf)
+	-- upvalues: Module4 (copy), ProtoModule (copy)
+	local NewModule = Module4.new()
+	local v5 = 0
+	while v5 < buffer.len(Buf) do
 		local Tag, Tag2
-		Tag, Tag2, v116 = ProtoModule.readTag(Buf, v4)
+		Tag, Tag2, v151 = ProtoModule.readTag(Buf, v5)
 		
 		if Tag2 == ProtoModule.wireTypes.varint then
 			local _
-			_, v116 = ProtoModule.readVarInt(Buf, v4)
+			_, v151 = ProtoModule.readVarInt(Buf, v5)
 		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 			if Tag == 1 then
 				local Buffer1
-				Buffer1, v116 = ProtoModule.readBuffer(Buf, v4)
+				Buffer1, v151 = ProtoModule.readBuffer(Buf, v5)
 				NewModule.key = buffer.tostring(Buffer1)
 			elseif Tag == 2 then
 				local Buffer2
-				Buffer2, v116 = ProtoModule.readBuffer(Buf, v4)
+				Buffer2, v151 = ProtoModule.readBuffer(Buf, v5)
 				NewModule.value = buffer.tostring(Buffer2)
 			else
-				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v4)
-				v4 = VarInt2 + VarInt
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v5)
+				v5 = VarInt2 + VarInt
 			end
 		elseif Tag2 == ProtoModule.wireTypes.i32 then
 			local _
-			_, v116 = ProtoModule.readFixed32(Buf, v4)
+			_, v151 = ProtoModule.readFixed32(Buf, v5)
 		elseif Tag2 == ProtoModule.wireTypes.i64 then
 			local _
-			_, v116 = ProtoModule.readFixed64(Buf, v4)
+			_, v151 = ProtoModule.readFixed64(Buf, v5)
 		else
 			error("Unsupported wire type: " .. Tag2)
 		end
@@ -490,7 +629,7 @@ function Module3.decode(Buf)
 	return NewModule
 end
 
-function Module3:jsonEncode()
+function Module4:jsonEncode()
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -502,9 +641,9 @@ function Module3:jsonEncode()
 	return t
 end
 
-function Module3:jsonDecode()
-	-- upvalues: Module3 (copy)
-	local NewModule = Module3.new()
+function Module4:jsonDecode()
+	-- upvalues: Module4 (copy)
+	local NewModule = Module4.new()
 	
 	if self.key ~= nil then
 		NewModule.key = self.key
@@ -515,14 +654,14 @@ function Module3:jsonDecode()
 	return NewModule
 end
 
-Module3.descriptor = {
+Module4.descriptor = {
 	name = "SpotlightCollectionPageResponse_LocalizedLiteralsEntry",
 	fullName = "roblox.apppageplatform.spotlightcollection.v1beta1.LocalizedLiteralsEntry"
 }
-config.SpotlightCollectionPageResponse_LocalizedLiteralsEntry = Module3
-TypeRegistryModule.default:register(config.SpotlightCollectionPageResponse_LocalizedLiteralsEntry)
+t.SpotlightCollectionPageResponse_LocalizedLiteralsEntry = Module4
+TypeRegistryModule.default:register(t.SpotlightCollectionPageResponse_LocalizedLiteralsEntry)
 
 return {
-	SpotlightCollectionPageRequest = config.SpotlightCollectionPageRequest,
-	SpotlightCollectionPageResponse = config.SpotlightCollectionPageResponse
+	SpotlightCollectionPageRequest = t.SpotlightCollectionPageRequest,
+	SpotlightCollectionPageResponse = t.SpotlightCollectionPageResponse
 }

@@ -2546,6 +2546,7 @@ Feature.Build.Description.ActivateSubscription,सब्सक्रिप्श
 Feature.Build.Description.AdCampaignModerationReview,हम हर ऐड को चलाए जाने से पहले उसे रिव्यू करते हैं. इसमें 24 घंटे तक लग सकते हैं.
 Feature.Build.Description.AdCampaignSheetRunDates,{startDate} से {endDate} तक चलता है
 Feature.Build.Description.AdComplete,आपका ऐड खत्म हो गया है. इसकी परफ़ॉर्मेंस देखें.
+Feature.Build.Description.AdCreditsSavedForRetry,"हमने आपके Robux को ऐड क्रेडिट के रूप में सेव कर लिया है. फिर से कोशिश करने पर, हम इनका इस्तेमाल इस ऐड के लिए करेंगे."
 Feature.Build.Description.AdModerationReview,
 Feature.Build.Description.AdvancedModel,मुश्किल गेम्स के लिए सबसे अच्छा. इस्तेमाल की लिमिट जल्दी खत्म हो जाती है.
 Feature.Build.Description.AdvertisingAgreement,'क्रिएट करें' चुनने का मतलब है कि आप {advertisingTermsStart}Roblox विज्ञापन की शर्तों{advertisingTermsEnd} और {advertisingStandardsStart}ऐडवरटाइज़िंग स्टैंडर्ड{advertisingStandardsEnd} से सहमत हैं.
@@ -2946,6 +2947,7 @@ Feature.Build.Title.AdCampaignDuration,{durationDays} दिन का ऐड
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} दिन
 Feature.Build.Title.AdComplete,ऐड पूरा हुआ
 Feature.Build.Title.AdCreatedPeriod,ऐड क्रिएट हो गया.
+Feature.Build.Title.AdNotCreated,हम आपका ऐड क्रिएट नहीं कर सके
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,इमेज जोड़ें
 Feature.Build.Title.AdsStatsEmpty,
@@ -3002,6 +3004,7 @@ Feature.Build.Title.VersionInfo,वर्ज़न की जानकारी
 Feature.Build.Title.VersionNumber,वर्ज़न {VERSION}
 Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,क्या-क्या शामिल है?
+Feature.BuyRobux.Action.ContentPersonalization,कॉन्टेंट को पर्सनलाइज़ करना
 Feature.BuyRobux.Heading.Banner,
 Feature.BuyRobux.Heading.PendingTransfers,पेंडिंग Robux
 Feature.BuyRobux.Label.MyFriendsWithCount,मेरे फ़्रेंड्स ({count})

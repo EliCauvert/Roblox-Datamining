@@ -2,6 +2,7 @@
 
 return {
 	badges = require(script.badges.v1beta1),
+	build = require(script.build.v1beta1),
 	buyrobux = require(script.buyrobux.v1beta1),
 	campaign = require(script.campaign.v1beta1),
 	charts = require(script.charts.v1beta1),

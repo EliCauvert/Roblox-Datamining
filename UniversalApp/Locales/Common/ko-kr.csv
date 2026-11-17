@@ -2567,6 +2567,7 @@ Feature.Build.Description.ActivateSubscription,{PRODUCT_ID} 구독을 구매할 
 Feature.Build.Description.AdCampaignModerationReview,Roblox는 모든 광고를 게재하기 전에 검토합니다. 이 절차에는 최대 24시간이 소요될 수 있습니다.
 Feature.Build.Description.AdCampaignSheetRunDates,{startDate}~{endDate} 실행
 Feature.Build.Description.AdComplete,광고가 종료되었습니다. 광고 성과를 확인해 보세요.
+Feature.Build.Description.AdCreditsSavedForRetry,Robux를 광고 크레딧으로 저장했습니다. 다시 시도하면 이 광고에 해당 크레딧을 사용합니다.
 Feature.Build.Description.AdModerationReview,
 Feature.Build.Description.AdvancedModel,복잡한 게임에 가장 적합합니다. 사용량이 더 빨리 소진됩니다.
 Feature.Build.Description.AdvertisingAgreement,'만들기'를 선택하면 {advertisingTermsStart}Roblox 광고 약관{advertisingTermsEnd}과 {advertisingStandardsStart}광고 규정{advertisingStandardsEnd}에 동의하는 것으로 간주됩니다.
@@ -2967,6 +2968,7 @@ Feature.Build.Title.AdCampaignDuration,{durationDays}일 광고
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays}일
 Feature.Build.Title.AdComplete,광고 종료
 Feature.Build.Title.AdCreatedPeriod,광고가 생성되었습니다.
+Feature.Build.Title.AdNotCreated,광고를 생성하지 못했습니다
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,이미지 추가
 Feature.Build.Title.AdsStatsEmpty,
@@ -3023,6 +3025,7 @@ Feature.Build.Title.VersionInfo,버전 정보
 Feature.Build.Title.VersionNumber,{VERSION} 버전
 Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,포함 사항
+Feature.BuyRobux.Action.ContentPersonalization,콘텐츠 개인 맞춤화
 Feature.BuyRobux.Heading.Banner,Robux 구매
 Feature.BuyRobux.Heading.PendingTransfers,보류 중인 Robux
 Feature.BuyRobux.Label.MyFriendsWithCount,내 친구({count}명)
