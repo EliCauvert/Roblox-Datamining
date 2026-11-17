@@ -27,6 +27,7 @@ local VerticalListModule = require(InExperienceSideSheet.Components.VerticalList
 local View = FoundationModule.View
 local FocusRoot = FocusNavigationUtilsModule.FocusRoot
 local UseLastInputModeFunction = FocusNavigationUtilsModule.useLastInputMode
+local AnalyticsConstantsModule = require(InExperienceSideSheet.Analytics.AnalyticsConstants)
 local SidesheetAnalyticsModule = require(InExperienceSideSheet.Analytics.SidesheetAnalytics)
 local UseDrawerShouldMountFunction = DrawerModule.Hooks.useDrawerShouldMount
 local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
@@ -34,18 +35,22 @@ local UseStyleSheetFunction = FoundationModule.Hooks.useStyleSheet
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UseBackgroundStyleModule = require(InExperienceSideSheet.Hooks.useBackgroundStyle)
 local UseSideSheetFocusNavScrollViewAnimationModule = require(InExperienceSideSheet.Hooks.useSideSheetFocusNavScrollViewAnimation)
+local ConstantsModule = require(InExperienceSideSheet.Common.Constants)
 local GetIntegrationsStoreModule = require(InExperienceSideSheet.Stores.GetIntegrationsStore)
 local GetSideSheetConfigStoreModule = require(InExperienceSideSheet.Stores.GetSideSheetConfigStore)
 local GetSwitchServerStoreFunction = SwitchServerModule.GetSwitchServerStore
 local WrapWithProvidersModule = require(InExperienceSideSheet.Utils.wrapWithProviders)
 local ClosePeoplePageOpenedWithSideSheetModule = require(InExperienceSideSheet.Utils.closePeoplePageOpenedWithSideSheet)
+local RegisterInGameMenuPeoplePageActionsModule = require(InExperienceSideSheet.Utils.registerInGameMenuPeoplePageActions)
 local GetDidSideSheetOpenWithPeoplePageModule = require(InExperienceSideSheet.Utils.getDidSideSheetOpenWithPeoplePage)
+local GetHasRoomForPeoplePageModule = require(InExperienceSideSheet.Utils.getHasRoomForPeoplePage)
 local GetIsPeoplePageOpenModule = require(InExperienceSideSheet.Utils.getIsPeoplePageOpen)
 local GetSideSheetVisibilityModule = require(InExperienceSideSheet.Utils.getSideSheetVisibility)
 local NextWrappedIntegerFunction = require(Parent.AppCommonLib).nextWrappedInteger
 local ToggleSideSheetModule = require(InExperienceSideSheet.Utils.toggleSideSheet)
 local FlagsModule = require(InExperienceSideSheet.Flags)
 local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagKeepSideSheetOpenBesideMenu = FlagsModule.FFlagKeepSideSheetOpenBesideMenu
 local FFlagMountUnmountSideSheet = FlagsModule.FFlagMountUnmountSideSheet
 local FFlagSideSheetOpenPeoplePage = FlagsModule.FFlagSideSheetOpenPeoplePage
 local FFlagSideSheetOpenPeoplePageRestoreChat = FlagsModule.FFlagSideSheetOpenPeoplePageRestoreChat
@@ -80,6 +85,16 @@ local function getDeviceSafePadding(p1)
 	return DisplayModule.GetDisplayStore(p1).getDeviceSafePadding(p1)
 end
 
+local function getIsMenuShownBesideSideSheet(p1)
+	-- upvalues: GetSideSheetConfigStoreModule (copy)
+	return GetSideSheetConfigStoreModule(false).getIsMenuShownBesideSideSheet(p1)
+end
+
+local function getIsWindowShownBesideSideSheet(p1): boolean
+	-- upvalues: GetSideSheetConfigStoreModule (copy)
+	return GetSideSheetConfigStoreModule(false).getWindowShownBesideSideSheet(p1) ~= nil
+end
+
 local function getAboveFoldIntegrations(p1)
 	-- upvalues: GetIntegrationsStoreModule (copy)
 	return GetIntegrationsStoreModule(p1).getAboveFoldIntegrations(p1)
@@ -104,18 +119,27 @@ local UseFocusGuiObject = if FFlagSideSheetFocusNav then require(Parent.ReactFoc
 local Root = nil
 
 local function SideSheetContent(p1)
-	-- upvalues: UseScaledValueFunction (copy), UseStyleSheetFunction (copy), FFlagSideSheetFullWidthScrollView (copy), UseTokensFunction (copy), UseBackgroundStyleModule (copy), SignalsReactModule (copy), getDeviceSafePadding (copy), FFlagMountUnmountSideSheet (copy), UseDrawerShouldMountFunction (copy), FFlagSideSheetOpenPeoplePage (copy), GetSideSheetVisibilityModule (copy), GetIsPeoplePageOpenModule (copy), GetDidSideSheetOpenWithPeoplePageModule (copy), getScrollableContentTopWidgetIntegrations (copy), FFlagEnableSideSheetWidgets (copy), ReactModule (copy), SidesheetAnalyticsModule (copy), FFlagSideSheetFocusNav (copy), UseFocusGuiObject (ref), UseLastInputModeFunction (copy), FFlagSideSheetOpenPeoplePageRestoreChat (copy), UsePreferredInputFunction (copy), SignalsModule (copy), GuiService (copy), NextWrappedIntegerFunction (copy), ResponsiveModule (copy), MouseIconOverrideService (copy), FFlagShowSwitchServerButton (copy), IsPioneerLaunchFunction (copy), GetSwitchServerStoreFunction (copy), SwitchServerTelemetry (copy), ContextActionService (copy), list (copy), ToggleSideSheetModule (copy), FFlagUseAnimateScrollViewToSelectionHelper (copy), UseSideSheetFocusNavScrollViewAnimationModule (copy), GetSideSheetConfigStoreModule (copy), ClosePeoplePageOpenedWithSideSheetModule (copy), UserProfileRowModule (copy), config (copy), ExperienceDetailsRowModule (copy), FFlagSideSheetUnifiedMenuOrder (copy), View (copy), Divider (copy), SideSheetWidgetListModule (copy), ChromeModule (copy), VerticalListModule (copy), getAboveFoldIntegrations (copy), getBelowFoldIntegrations (copy), getScrollableContentBottomWidgetIntegrations (copy), ScrollView (copy), FooterModule (copy), FFlagEnableWhatsNew (copy), WhatsNewAnchor (copy), DrawerContainer (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
+	-- upvalues: UseScaledValueFunction (copy), UseStyleSheetFunction (copy), FFlagSideSheetFullWidthScrollView (copy), UseTokensFunction (copy), UseBackgroundStyleModule (copy), SignalsReactModule (copy), getDeviceSafePadding (copy), FFlagMountUnmountSideSheet (copy), UseDrawerShouldMountFunction (copy), FFlagSideSheetOpenPeoplePage (copy), FFlagKeepSideSheetOpenBesideMenu (copy), GetSideSheetVisibilityModule (copy), GetIsPeoplePageOpenModule (copy), GetDidSideSheetOpenWithPeoplePageModule (copy), GetHasRoomForPeoplePageModule (copy), getIsMenuShownBesideSideSheet (copy), getIsWindowShownBesideSideSheet (copy), getScrollableContentTopWidgetIntegrations (copy), FFlagEnableSideSheetWidgets (copy), ReactModule (copy), SidesheetAnalyticsModule (copy), FFlagSideSheetFocusNav (copy), UseFocusGuiObject (ref), UseLastInputModeFunction (copy), FFlagSideSheetOpenPeoplePageRestoreChat (copy), UsePreferredInputFunction (copy), SignalsModule (copy), GuiService (copy), NextWrappedIntegerFunction (copy), ResponsiveModule (copy), MouseIconOverrideService (copy), FFlagShowSwitchServerButton (copy), IsPioneerLaunchFunction (copy), GetSwitchServerStoreFunction (copy), SwitchServerTelemetry (copy), ContextActionService (copy), list (copy), ToggleSideSheetModule (copy), FFlagUseAnimateScrollViewToSelectionHelper (copy), UseSideSheetFocusNavScrollViewAnimationModule (copy), ConstantsModule (copy), GetSideSheetConfigStoreModule (copy), ClosePeoplePageOpenedWithSideSheetModule (copy), RegisterInGameMenuPeoplePageActionsModule (copy), AnalyticsConstantsModule (copy), UserProfileRowModule (copy), config (copy), ExperienceDetailsRowModule (copy), FFlagSideSheetUnifiedMenuOrder (copy), View (copy), Divider (copy), SideSheetWidgetListModule (copy), ChromeModule (copy), VerticalListModule (copy), getAboveFoldIntegrations (copy), getBelowFoldIntegrations (copy), getScrollableContentBottomWidgetIntegrations (copy), ScrollView (copy), FooterModule (copy), FFlagEnableWhatsNew (copy), WhatsNewAnchor (copy), DrawerContainer (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
 	local UseScaledValueResult = UseScaledValueFunction(320)
 	local UseStyleSheetResult = UseStyleSheetFunction()
 	local UseTokensResult = if FFlagSideSheetFullWidthScrollView then UseTokensFunction() else nil
 	local UseBackgroundStyleModuleResult = UseBackgroundStyleModule()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(getDeviceSafePadding)
 	local NoFFlagMountUnmountSideSheet = not FFlagMountUnmountSideSheet or UseDrawerShouldMountFunction()
-	local UseSignalStateResult1 = if FFlagSideSheetOpenPeoplePage then SignalsReactModule.useSignalState(GetSideSheetVisibilityModule) else false
+	local UseSignalStateResult1 = if FFlagSideSheetOpenPeoplePage or FFlagKeepSideSheetOpenBesideMenu then SignalsReactModule.useSignalState(GetSideSheetVisibilityModule) else false
 	local UseSignalStateResult2 = if FFlagSideSheetOpenPeoplePage then SignalsReactModule.useSignalState(GetIsPeoplePageOpenModule) else false
 	local UseSignalStateResult2_1 = (if FFlagSideSheetOpenPeoplePage then SignalsReactModule.useSignalState(GetDidSideSheetOpenWithPeoplePageModule) else false) and (UseSignalStateResult1 and UseSignalStateResult2)
-	local UseSignalStateResult3 = SignalsReactModule.useSignalState(getScrollableContentTopWidgetIntegrations)
-	local v1: boolean = FFlagEnableSideSheetWidgets and #UseSignalStateResult3 > 0
+	local AllowRightFocusEscape = UseSignalStateResult2_1
+	local UseSignalStateResult3 = if FFlagKeepSideSheetOpenBesideMenu then SignalsReactModule.useSignalState(GetHasRoomForPeoplePageModule) else false
+	local UseSignalStateResult4 = if FFlagKeepSideSheetOpenBesideMenu then SignalsReactModule.useSignalState(getIsMenuShownBesideSideSheet) else false
+	local UseSignalStateResult5 = if FFlagKeepSideSheetOpenBesideMenu then SignalsReactModule.useSignalState(getIsWindowShownBesideSideSheet) else false
+	
+	if FFlagKeepSideSheetOpenBesideMenu then
+		AllowRightFocusEscape = AllowRightFocusEscape or UseSignalStateResult1 and (UseSignalStateResult4 or UseSignalStateResult5)
+		UseSignalStateResult2_1 = AllowRightFocusEscape or UseSignalStateResult1 and UseSignalStateResult3
+	end
+	local UseSignalStateResult6 = SignalsReactModule.useSignalState(getScrollableContentTopWidgetIntegrations)
+	local v1: boolean = FFlagEnableSideSheetWidgets and #UseSignalStateResult6 > 0
 	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: SidesheetAnalyticsModule (upval)
 		SidesheetAnalyticsModule.logSidesheetClosed(p2.source)
@@ -301,7 +325,7 @@ local function SideSheetContent(p1)
 	
 	if FFlagSideSheetFocusNav then
 		ReactModule.useEffect(function()
-			-- upvalues: ContextActionService (upval), UseRefResult (ref), list (upval), GetSideSheetVisibilityModule (upval), FFlagSideSheetOpenPeoplePage (upval), ToggleSideSheetModule (upval)
+			-- upvalues: ContextActionService (upval), UseRefResult (ref), list (upval), GetSideSheetVisibilityModule (upval), FFlagSideSheetOpenPeoplePage (upval), FFlagKeepSideSheetOpenBesideMenu (upval), ToggleSideSheetModule (upval)
 			ContextActionService:BindCoreAction("SideSheetBlockInputAction", function(_, UserInputState, _)
 				-- upvalues: UseRefResult (upval)
 				return if UserInputState == Enum.UserInputState.Begin then if UseRefResult.current == nil then Enum.ContextActionResult.Pass else Enum.ContextActionResult.Sink else Enum.ContextActionResult.Pass
@@ -311,8 +335,8 @@ local function SideSheetContent(p1)
 				return if GetSideSheetVisibilityModule() then Enum.ContextActionResult.Sink else Enum.ContextActionResult.Pass
 			end, false, Enum.KeyCode.ButtonR2)
 			ContextActionService:BindCoreAction("SideSheetCloseAction", function(_, UserInputState, _)
-				-- upvalues: FFlagSideSheetOpenPeoplePage (upval), GetSideSheetVisibilityModule (upval), ToggleSideSheetModule (upval)
-				if FFlagSideSheetOpenPeoplePage and UserInputState ~= Enum.UserInputState.Begin then
+				-- upvalues: FFlagSideSheetOpenPeoplePage (upval), FFlagKeepSideSheetOpenBesideMenu (upval), GetSideSheetVisibilityModule (upval), ToggleSideSheetModule (upval)
+				if (FFlagSideSheetOpenPeoplePage or FFlagKeepSideSheetOpenBesideMenu) and UserInputState ~= Enum.UserInputState.Begin then
 					return Enum.ContextActionResult.Pass
 				elseif GetSideSheetVisibilityModule() then
 					ToggleSideSheetModule(false)
@@ -332,13 +356,17 @@ local function SideSheetContent(p1)
 		end, {})
 	end
 	local UseSideSheetFocusNavScrollViewAnimationModuleResult = if FFlagSideSheetFocusNav and FFlagUseAnimateScrollViewToSelectionHelper then UseSideSheetFocusNavScrollViewAnimationModule() else nil
-	local Left = UseSignalStateResult.left
+	local Largest = if FFlagKeepSideSheetOpenBesideMenu then math.max(0, UseSignalStateResult.left - ConstantsModule.MenuScreenMargin) else UseSignalStateResult.left
+	local Top = UseSignalStateResult.top
+	local Bottom = UseSignalStateResult.bottom
 	
-	if FFlagSideSheetOpenPeoplePage then
+	if FFlagSideSheetOpenPeoplePage or FFlagKeepSideSheetOpenBesideMenu then
 		ReactModule.useEffect(function()
 			-- upvalues: GetSideSheetConfigStoreModule (upval), UseScaledValueResult (copy)
 			GetSideSheetConfigStoreModule(false).setSideSheetDrawerWidth(UseScaledValueResult)
 		end, { UseScaledValueResult })
+	end
+	if FFlagSideSheetOpenPeoplePage then
 		ReactModule.useEffect(function()
 			-- upvalues: UseSignalStateResult1 (copy), ClosePeoplePageOpenedWithSideSheetModule (upval)
 			return if UseSignalStateResult1 then function()
@@ -346,6 +374,28 @@ local function SideSheetContent(p1)
 				ClosePeoplePageOpenedWithSideSheetModule()
 			end else nil
 		end, { UseSignalStateResult1 })
+	end
+	if FFlagKeepSideSheetOpenBesideMenu then
+		ReactModule.useEffect(function()
+			-- upvalues: UseSignalStateResult1 (copy), RegisterInGameMenuPeoplePageActionsModule (upval)
+			return if UseSignalStateResult1 then function()
+				-- upvalues: RegisterInGameMenuPeoplePageActionsModule (upval)
+				RegisterInGameMenuPeoplePageActionsModule.closeMenuShownBesideSideSheet()
+				RegisterInGameMenuPeoplePageActionsModule.closeWindowShownBesideSideSheet()
+			end else nil
+		end, { UseSignalStateResult1 })
+		ReactModule.useEffect(function()
+			-- upvalues: UseSignalStateResult1 (copy), UseSignalStateResult5 (copy), UseSignalStateResult3 (copy), GetSideSheetConfigStoreModule (upval), ToggleSideSheetModule (upval), SidesheetAnalyticsModule (upval), AnalyticsConstantsModule (upval)
+			if UseSignalStateResult1 and UseSignalStateResult5 and not UseSignalStateResult3 then
+				GetSideSheetConfigStoreModule(false).setWindowShownBesideSideSheet(nil)
+				ToggleSideSheetModule(false)
+				SidesheetAnalyticsModule.logSidesheetClosed(AnalyticsConstantsModule.Source.NoRoom)
+			end
+		end, {
+			UseSignalStateResult3,
+			UseSignalStateResult1,
+			UseSignalStateResult5
+		})
 	end
 	if not NoFFlagMountUnmountSideSheet then
 		return nil
@@ -388,7 +438,7 @@ local function SideSheetContent(p1)
 				layoutOrder = config.PrimaryList,
 				integrationsGetter = getAboveFoldIntegrations,
 				firstIntegrationToFocusCallback = if FFlagSideSheetFocusNav and not v1 and not FFlagSideSheetUnifiedMenuOrder then UseResult1 else nil,
-				allowRightFocusEscape = UseSignalStateResult2_1
+				allowRightFocusEscape = AllowRightFocusEscape
 			}),
 			FoldDivider = if FFlagSideSheetUnifiedMenuOrder then nil else ReactModule.createElement(View, {
 				tag = "size-full-0 auto-y padding-y-xxlarge",
@@ -398,7 +448,7 @@ local function SideSheetContent(p1)
 				layoutOrder = config.SecondaryList,
 				integrationsGetter = getBelowFoldIntegrations,
 				firstIntegrationToFocusCallback = if FFlagSideSheetUnifiedMenuOrder and FFlagSideSheetFocusNav and not v1 then UseResult1 else nil,
-				allowRightFocusEscape = UseSignalStateResult2_1
+				allowRightFocusEscape = AllowRightFocusEscape
 			}),
 			BottomWidgets = if FFlagEnableSideSheetWidgets then ReactModule.createElement(SideSheetWidgetListModule, {
 				integrationsGetter = getScrollableContentBottomWidgetIntegrations,
@@ -413,21 +463,21 @@ local function SideSheetContent(p1)
 		Element = ReactModule.createElement(WhatsNewAnchor, { anchorId = "sideSheet", tag = "size-full" }, { SideSheetPanel = Element })
 	end
 	return ReactModule.createElement(DrawerContainer, {
-		displayOrder = 12,
+		displayOrder = ConstantsModule.SideSheetDisplayOrder,
 		menuWidth = UseScaledValueResult,
-		leftOffset = Left,
-		topOffset = UseSignalStateResult.top,
-		bottomOffset = UseSignalStateResult.bottom,
+		leftOffset = Largest,
+		topOffset = Top,
+		bottomOffset = Bottom,
 		backgroundStyle = UseBackgroundStyleModuleResult,
 		onDrawerClosedAnalytics = UseResult,
-		allowOutsideInteraction = if FFlagSideSheetOpenPeoplePage then UseSignalStateResult2_1 else nil,
-		scrimIsModal = not FFlagSideSheetOpenPeoplePage or not UseSignalStateResult2_1
+		allowOutsideInteraction = if FFlagSideSheetOpenPeoplePage or FFlagKeepSideSheetOpenBesideMenu then UseSignalStateResult2_1 else nil,
+		scrimIsModal = not FFlagSideSheetOpenPeoplePage and not FFlagKeepSideSheetOpenBesideMenu or not UseSignalStateResult2_1
 	}, {
 		FoundationStyleLink = ReactModule.createElement("StyleLink", { StyleSheet = UseStyleSheetResult }),
 		if FFlagSideSheetFocusNav then ReactModule.createElement(FocusRoot, {
 			isIsolated = true,
 			surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
-			frameProps = if UseSignalStateResult2_1 then { SelectionBehaviorRight = Enum.SelectionBehavior.Escape } else nil
+			frameProps = if AllowRightFocusEscape then { SelectionBehaviorRight = Enum.SelectionBehavior.Escape } else nil
 		}, { Content = Element }) else Element
 	})
 end

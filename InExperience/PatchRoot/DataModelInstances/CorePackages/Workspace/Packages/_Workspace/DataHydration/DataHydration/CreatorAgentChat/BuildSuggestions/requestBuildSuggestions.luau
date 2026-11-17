@@ -2,6 +2,7 @@
 local Parent = DataHydration.Parent
 local HttpClientModule = require(Parent.HttpClient)
 local UrlBase = require(Parent.UrlBuilder).UrlBase
+local FFlagBuildFTUXChipInfiniteScroll = require(Parent.SharedFlags).FFlagBuildFTUXChipInfiniteScroll
 local DecodeBuildSuggestionsResponseModule = require(script.Parent.decodeBuildSuggestionsResponse)
 local GetDefaultAuthHeadersModule = require(script.Parent.Parent.Acp.getDefaultAuthHeaders)
 local ResolveAcpUrlModule = require(script.Parent.Parent.Env.resolveAcpUrl)
@@ -15,7 +16,7 @@ local function _(): string
 end
 
 return function(p1)
-	-- upvalues: GetDefaultAuthHeadersModule (copy), ResolveAcpUrlModule (copy), UrlBase (copy), WithCsrfRetryModule (copy), HttpClientModule (copy), DecodeBuildSuggestionsResponseModule (copy)
+	-- upvalues: GetDefaultAuthHeadersModule (copy), ResolveAcpUrlModule (copy), UrlBase (copy), FFlagBuildFTUXChipInfiniteScroll (copy), WithCsrfRetryModule (copy), HttpClientModule (copy), DecodeBuildSuggestionsResponseModule (copy)
 	local GetAuthHeaders = p1.getAuthHeaders or GetDefaultAuthHeadersModule
 	local Config = if p1.selectedChip == nil then nil else { value = p1.selectedChip }
 	local config = { method = "POST", analyticsKey = "cas.build-suggestions" }
@@ -27,7 +28,12 @@ return function(p1)
 	end
 	config.url = Url
 	config.headers = GetAuthHeaders()
-	config.body = { prompt = p1.prompt, selected_chip = Config }
+	config.body = {
+		prompt = p1.prompt,
+		selected_chip = Config,
+		seed = if FFlagBuildFTUXChipInfiniteScroll then p1.seed else nil,
+		cursor = if FFlagBuildFTUXChipInfiniteScroll then p1.cursor else nil
+	}
 	config.network = p1.network or WithCsrfRetryModule(HttpClientModule.createRequestInternalNetwork())
 	config.decode = DecodeBuildSuggestionsResponseModule
 	

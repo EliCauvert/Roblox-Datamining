@@ -2206,6 +2206,7 @@ Feature.Build.Description.ActivateSubscription,Stelle das Abonnement {PRODUCT_I
 Feature.Build.Description.AdCampaignModerationReview,"Wir überprüfen jede Werbung, bevor sie geschaltet wird. Dies kann bis zu 24 Stunden dauern."
 Feature.Build.Description.AdCampaignSheetRunDates,Läuft vom {startDate}–{endDate}
 Feature.Build.Description.AdComplete,"Deine Werbung ist beendet. Sieh dir an, wie sie abgeschnitten hat."
+Feature.Build.Description.AdCreditsSavedForRetry,Wir haben deine Robux als Werbe-Credits gespeichert. Versuche es erneut. Wir werden sie für diese Werbung verwenden.
 Feature.Build.Description.AdModerationReview,
 Feature.Build.Description.AdvancedModel,Am besten geeignet für komplexe Spiele. Das Kontingent wird schneller aufgebraucht.
 Feature.Build.Description.AdvertisingAgreement,"Indem du ""Erstellen"" auswählst, stimmst du den {advertisingTermsStart}Werbebedingungen{advertisingTermsEnd} und {advertisingStandardsStart}Werberichtlinien{advertisingStandardsEnd} von Roblox zu."
@@ -2606,6 +2607,7 @@ Feature.Build.Title.AdCampaignDuration,{durationDays}-tägige Werbung
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} Tage
 Feature.Build.Title.AdComplete,Werbeanzeige abgeschlossen
 Feature.Build.Title.AdCreatedPeriod,Werbeanzeige erstellt.
+Feature.Build.Title.AdNotCreated,Wir konnten deine Werbung nicht erstellen
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,Bilder hinzufügen
 Feature.Build.Title.AdsStatsEmpty,
@@ -2662,6 +2664,7 @@ Feature.Build.Title.VersionInfo,Versionsinformationen
 Feature.Build.Title.VersionNumber,Version {VERSION}
 Feature.Build.Title.Versions,Versionen
 Feature.Build.Title.WhatsIncluded,Was ist enthalten?
+Feature.BuyRobux.Action.ContentPersonalization,Inhaltsanpassung
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.Allow,Erlauben
 Feature.Captures.Action.AllowPhotoAccessAccepted,

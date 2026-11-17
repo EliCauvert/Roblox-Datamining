@@ -6,11 +6,13 @@ local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
 local DisplayModule = require(Parent.Display)
+local DataHydrationModule = require(Parent.DataHydration)
 local FFlagEnableGroupOverviewPane = require(Parent.SharedFlags).FFlagEnableGroupOverviewPane
 local FFlagDataHydrationStaleTime = require(Parent.SharedFlags).FFlagDataHydrationStaleTime
 local ConstantsModule = require(Groups.Common.constants)
 local UseGroupsWrapperContextModule = require(Groups.Contexts.useGroupsWrapperContext)
 local UseIsCompactTouchModule = require(Groups.Hooks.useIsCompactTouch)
+local UseOnChangeModule = require(Groups.Hooks.useOnChange)
 local GroupSidebarContextModule = require(Groups.Contexts.GroupSidebarContext)
 local GroupSidebarActionsModule = require(Groups.Navigation.groupSidebarActions)
 local GroupDestinationsModule = require(Groups.Navigation.groupDestinations)
@@ -19,6 +21,7 @@ local GetGroupSduiPageConfigModule = require(Groups.Common.getGroupSduiPageConfi
 local GetGroupSduiPageConfigFunction = GetGroupSduiPageConfigModule.getGroupSduiPageConfig
 local FetchGroupSduiPageModule = require(Groups.Common.fetchGroupSduiPage)
 local GetSidebarEntryIdentifierModule = require(Groups.Common.getSidebarEntryIdentifier)
+local SidebarChangeCountsModule = require(Groups.Common.sidebarChangeCounts)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local TextKeysModule = require(Groups.Common.TextKeys)
 local GetGroupPostsUrlModule = require(Groups.Common.getGroupPostsUrl)
@@ -55,18 +58,35 @@ local Computed = SignalsModule.createComputed(function(p1)
 	-- upvalues: GetSidebarWidthModule (copy), DisplayModule (copy)
 	return GetSidebarWidthModule(DisplayModule.GetDisplayStore(p1).getViewportSize(p1).X)
 end)
+local Computed1 = SignalsModule.createComputed(function(p1)
+	-- upvalues: DataHydrationModule (copy)
+	return DataHydrationModule.Group.getGroupInfoStore(p1).membershipChangeCount(p1)
+end)
+local Signal = SignalsModule.createSignal(0)
 local _ = require(script.Parent.GroupSidebarPageView)
 
-local function _(p1)
+local function fetchRefresh(p1)
 	-- upvalues: SduiSharedUtilitiesModule (copy), FetchGroupSduiPageModule (copy)
 	local LoadTimer = SduiSharedUtilitiesModule.SduiLoadTimer.createLoadTimer(p1.surfaceKey)
 	LoadTimer.start("refresh")
+	local GroupSduiPageModule = FetchGroupSduiPageModule(p1, LoadTimer, true)
+	GroupSduiPageModule:finally(LoadTimer.logRefreshComplete)
 	
-	return FetchGroupSduiPageModule(p1, LoadTimer, true):finally(LoadTimer.logRefreshComplete)
+	return GroupSduiPageModule
+end
+
+local function sendCounted(ConfigKey, Callback, p1)
+	-- upvalues: SidebarChangeCountsModule (copy)
+	local CountForRequestResult = SidebarChangeCountsModule.countForRequest(ConfigKey)
+	
+	return Callback(p1):andThen(function()
+		-- upvalues: SidebarChangeCountsModule (upval), ConfigKey (copy), CountForRequestResult (copy)
+		SidebarChangeCountsModule.markFetched(ConfigKey, CountForRequestResult)
+	end, function() end), CountForRequestResult == nil
 end
 
 return function()
-	-- upvalues: UseGroupsWrapperContextModule (copy), NavigationModule (copy), ReactModule (copy), GroupSidebarContextModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UseIsCompactTouchModule (copy), SignalsReactModule (copy), Computed (copy), FFlagEnableGroupOverviewPane (copy), GetGroupSduiPageConfigFunction (copy), SduiSharedUtilitiesModule (copy), SignalsModule (copy), GetSidebarEntryIdentifierModule (copy), requestFor (copy), FetchGroupSduiPageModule (copy), FFlagDataHydrationStaleTime (copy), ConstantsModule (copy), GetGroupPostsUrlModule (copy), GroupDestinationsModule (copy), GetGroupTabUrlModule (copy), GroupsRoutesModule (copy), GroupSidebarActionsModule (copy)
+	-- upvalues: UseGroupsWrapperContextModule (copy), NavigationModule (copy), ReactModule (copy), GroupSidebarContextModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UseIsCompactTouchModule (copy), SignalsReactModule (copy), Computed (copy), FFlagEnableGroupOverviewPane (copy), GetGroupSduiPageConfigFunction (copy), SduiSharedUtilitiesModule (copy), SignalsModule (copy), GetSidebarEntryIdentifierModule (copy), requestFor (copy), SidebarChangeCountsModule (copy), sendCounted (copy), FetchGroupSduiPageModule (copy), FFlagDataHydrationStaleTime (copy), ConstantsModule (copy), GetGroupPostsUrlModule (copy), GroupDestinationsModule (copy), GetGroupTabUrlModule (copy), GroupsRoutesModule (copy), GroupSidebarActionsModule (copy), fetchRefresh (copy), Signal (copy), UseOnChangeModule (copy), Computed1 (copy)
 	local UseGroupsWrapperContextModuleResult = UseGroupsWrapperContextModule()
 	local UseNavigationResult = NavigationModule.useNavigation()
 	local UseRouteNameResult = NavigationModule.useRouteName()
@@ -143,31 +163,46 @@ return function()
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	ReactModule.useEffect(function()
-		-- upvalues: SduiSharedUtilitiesModule (upval), UseMemoResult (copy), GetSidebarEntryIdentifierModule (upval), UseContextResult (copy), requestFor (upval), UseRefResult (copy), FetchGroupSduiPageModule (upval), UseMemoResult1 (copy), FFlagDataHydrationStaleTime (upval), ConstantsModule (upval), UseRefResult1 (copy)
+		-- upvalues: SduiSharedUtilitiesModule (upval), UseMemoResult (copy), GetSidebarEntryIdentifierModule (upval), UseContextResult (copy), UseGroupsWrapperContextModuleResult (copy), requestFor (upval), UseRefResult (copy), SidebarChangeCountsModule (upval), sendCounted (upval), FetchGroupSduiPageModule (upval), UseMemoResult1 (copy), FFlagDataHydrationStaleTime (upval), ConstantsModule (upval), UseRefResult1 (copy)
 		local InputData = SduiSharedUtilitiesModule.getSduiApiStore().getInputData(UseMemoResult.configKey, GetSidebarEntryIdentifierModule(UseMemoResult.configKey, false), false)
-		local RequestForResult = requestFor(UseMemoResult, UseContextResult, UseRefResult, UseContextResult.selectedGroupId(false) or InputData and InputData.selected_group_id)
+		local RequestForResult = requestFor(UseMemoResult, UseContextResult, UseRefResult, UseContextResult.selectedGroupId(false) or (if UseGroupsWrapperContextModuleResult.expandedBranch then UseGroupsWrapperContextModuleResult.groupId else InputData and InputData.selected_group_id))
+		local IsOutdated = SidebarChangeCountsModule.isOutdated(UseMemoResult.configKey)
 		local Flag = false
-		FetchGroupSduiPageModule(RequestForResult, UseMemoResult1, not FFlagDataHydrationStaleTime, if FFlagDataHydrationStaleTime then ConstantsModule.SIDEBAR_STALE_TIME_SEC else nil):finally(function()
-			-- upvalues: Flag (ref)
+		sendCounted(UseMemoResult.configKey, function(p1)
+			-- upvalues: FetchGroupSduiPageModule (upval), UseMemoResult1 (upval), IsOutdated (copy), FFlagDataHydrationStaleTime (upval), ConstantsModule (upval)
+			return FetchGroupSduiPageModule(p1, UseMemoResult1, IsOutdated or not FFlagDataHydrationStaleTime, if FFlagDataHydrationStaleTime then ConstantsModule.SIDEBAR_STALE_TIME_SEC else nil)
+		end, RequestForResult):finally(function()
+			-- upvalues: Flag (ref), IsOutdated (copy), UseContextResult (upval)
 			Flag = true
+			
+			if IsOutdated then
+				UseContextResult.refreshSections()
+			end
 		end)
 		UseRefResult1.current = if Flag then nil else InputData
-	end, { UseMemoResult, UseMemoResult1, UseContextResult })
+	end, {
+		UseMemoResult,
+		UseMemoResult1,
+		UseContextResult,
+		UseGroupsWrapperContextModuleResult.expandedBranch,
+		UseGroupsWrapperContextModuleResult.groupId
+	})
+	local GroupId = if UseGroupsWrapperContextModuleResult.expandedBranch then UseGroupsWrapperContextModuleResult.groupId else SelectedGroupId
 	ReactModule.useEffect(function()
-		-- upvalues: UseSignalStateResult2 (copy), UseSignalStateResult1 (copy), isListed (copy), UseRefResult1 (copy), UseContextResult (copy), NoUseIsCompactTouchModuleResult (copy), SelectedGroupId (copy)
+		-- upvalues: UseSignalStateResult2 (copy), UseSignalStateResult1 (copy), isListed (copy), UseRefResult1 (copy), UseContextResult (copy), NoUseIsCompactTouchModuleResult (copy), GroupId (copy)
 		if UseSignalStateResult2 and UseSignalStateResult1 and not isListed(UseSignalStateResult1) then
 			if UseSignalStateResult2 ~= UseRefResult1.current then
 				UseContextResult.selectGroup(nil)
 				
 				return
 			end
-		elseif NoUseIsCompactTouchModuleResult and not UseSignalStateResult1 and isListed(SelectedGroupId) then
-			UseContextResult.selectGroup(SelectedGroupId)
+		elseif NoUseIsCompactTouchModuleResult and not UseSignalStateResult1 and isListed(GroupId) then
+			UseContextResult.selectGroup(GroupId)
 		end
 	end, {
 		UseSignalStateResult2,
 		UseSignalStateResult1,
-		SelectedGroupId,
+		GroupId,
 		NoUseIsCompactTouchModuleResult,
 		UseContextResult
 	})
@@ -231,6 +266,37 @@ return function()
 			UseRefResult2.current(p1, p2, p3, p4)
 		end)
 	end, { UseMemoResult.configKey })
+	local UseRefResult3 = ReactModule.useRef(nil)
+	local UseResult2 = ReactModule.useCallback(function()
+		-- upvalues: requestFor (upval), UseMemoResult (copy), UseContextResult (copy), UseRefResult (copy), sendCounted (upval), fetchRefresh (upval), UseRefResult3 (copy), SidebarChangeCountsModule (upval)
+		local SendCountedResult, SendCountedResult2 = sendCounted(UseMemoResult.configKey, fetchRefresh, (requestFor(UseMemoResult, UseContextResult, UseRefResult, UseContextResult.selectedGroupId(false))))
+		SendCountedResult:finally(function()
+			-- upvalues: UseContextResult (upval), SendCountedResult2 (copy), UseRefResult3 (upval), SidebarChangeCountsModule (upval), UseMemoResult (upval)
+			UseContextResult.refreshSections()
+			
+			if SendCountedResult2 then
+				task.defer(function()
+					-- upvalues: UseRefResult3 (upval), SidebarChangeCountsModule (upval), UseMemoResult (upval)
+					local CurrentFunction: () -> () = UseRefResult3.current
+					
+					if CurrentFunction and SidebarChangeCountsModule.isOutdated(UseMemoResult.configKey) then
+						CurrentFunction()
+					end
+				end)
+			end
+		end)
+	end, { UseMemoResult, UseContextResult })
+	ReactModule.useEffect(function()
+		-- upvalues: UseRefResult3 (copy), UseResult2 (copy)
+		UseRefResult3.current = UseResult2
+		
+		return function()
+			-- upvalues: UseRefResult3 (upval)
+			UseRefResult3.current = nil
+		end
+	end, { UseResult2 })
+	UseOnChangeModule(SignalsReactModule.useSignalState(UseGroupsWrapperContextModuleResult.getReturnCount or Signal), UseResult2)
+	UseOnChangeModule(SignalsReactModule.useSignalState(Computed1), UseResult2)
 	local SelectedGroupId1 = if UseRefResult.current == nil or UseRefResult.current ~= UseSignalStateResult1 then SelectedGroupId else nil
 	local UseSignalStateResult3 = if isListed(UseSignalStateResult1) then UseSignalStateResult1 else SelectedGroupId
 	
@@ -242,13 +308,7 @@ return function()
 		sidebarWidth = UseSignalStateResult,
 		selectedId = UseSignalStateResult3,
 		isOverviewEmbedded = UseSignalStateResult3 ~= nil and UseSignalStateResult3 == SelectedGroupId1,
-		refresh = ReactModule.useCallback(function()
-			-- upvalues: requestFor (upval), UseMemoResult (copy), UseContextResult (copy), UseRefResult (copy), SduiSharedUtilitiesModule (upval), FetchGroupSduiPageModule (upval)
-			local RequestForResult = requestFor(UseMemoResult, UseContextResult, UseRefResult, UseContextResult.selectedGroupId(false))
-			local LoadTimer = SduiSharedUtilitiesModule.SduiLoadTimer.createLoadTimer(RequestForResult.surfaceKey)
-			LoadTimer.start("refresh")
-			FetchGroupSduiPageModule(RequestForResult, LoadTimer, true):finally(LoadTimer.logRefreshComplete):finally(UseContextResult.refreshSections)
-		end, { UseMemoResult, UseContextResult }),
+		refresh = UseResult2,
 		onClose = UseResult,
 		title = UseLocalizationResult.title,
 		createLabel = UseLocalizationResult.create,

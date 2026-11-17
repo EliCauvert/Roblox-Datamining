@@ -13,6 +13,7 @@ local MediaPlayer = CapturesCommonModule.Components.MediaPlayer
 local _ = require(Parent.Types)
 local FFlagUseMediaPlayerInCarousel = require(Parent1.SharedFlags).FFlagUseMediaPlayerInCarousel
 local FFlagUseRbxstorageInGalleryModule = require(Parent.Flags.FFlagUseRbxstorageInGallery)
+local FFlagCapturesCarouselMomentsButtonModule = require(Parent.Flags.FFlagCapturesCarouselMomentsButton)
 local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 local MemoizeResult = MemoizeFunction(function(Vector, Vector1): Vector2
 	local XRatio = Vector.X / Vector.Y
@@ -48,7 +49,7 @@ local _ = function(Vector, Vector1): UDim2
 end
 
 return function(p1)
-	-- upvalues: UseStyleFunction (copy), ReactModule (copy), UseScreenSizeFunction (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy), GetCaptureSizeModule (copy), MemoizeResult (copy), UserGameSettings (copy), GetContentFromObjectFunction (copy), getCapturesItemSize (copy), FFlagUseMediaPlayerInCarousel (copy), MediaPlayer (copy), FFlagUseRbxstorageInGalleryModule (copy), getDeleteTransitionTransparency (copy)
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), UseScreenSizeFunction (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy), GetCaptureSizeModule (copy), MemoizeResult (copy), UserGameSettings (copy), FFlagCapturesCarouselMomentsButtonModule (copy), FFlagUseMediaPlayerInCarousel (copy), GetContentFromObjectFunction (copy), getCapturesItemSize (copy), MediaPlayer (copy), FFlagUseRbxstorageInGalleryModule (copy), getDeleteTransitionTransparency (copy)
 	local UseStyleResult = UseStyleFunction()
 	local ItemSize = p1.itemSize
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
@@ -171,6 +172,57 @@ return function(p1)
 	end, {})
 	local IsCaptureTypeMatch: boolean = if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then p1.capture.CaptureType == Enum.CaptureType.Screenshot else p1.capture.type == CaptureTypeModule.Screenshot
 	local IsCaptureTypeMatch1: boolean = if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then p1.capture.CaptureType == Enum.CaptureType.Video else p1.capture.type == CaptureTypeModule.Video
+	local IsIsPlaybackPaused: boolean = FFlagCapturesCarouselMomentsButtonModule and p1.isPlaybackPaused == true
+	local UseMemoResult = nil
+	
+	if FFlagCapturesCarouselMomentsButtonModule and FFlagUseMediaPlayerInCarousel then
+		local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(false)
+		local UseRefResult2 = ReactModule.useRef(false)
+		UseMemoResult = ReactModule.useMemo(function()
+			-- upvalues: ReactModule (upval), UseBindingResult1 (copy), UseBindingResult (copy), UseResult2 (copy)
+			return ReactModule.joinBindings({ isHeld = UseBindingResult1, xPos = UseBindingResult }):map(function(p2): boolean
+				-- upvalues: UseResult2 (upval)
+				if p2.isHeld then
+					return false
+				else
+					local _, UseResultResult2 = UseResult2(p2.xPos)
+					
+					return UseResultResult2 < 0.5
+				end
+			end)
+		end, { UseBindingResult, UseResult2, UseBindingResult1 })
+		ReactModule.useEffect(function()
+			-- upvalues: IsIsPlaybackPaused (copy), UseRefResult (copy), UseRefResult2 (copy), UseBindingResult2_1 (copy), p1 (copy)
+			if IsIsPlaybackPaused then
+				local Current = UseRefResult.current
+				UseRefResult2.current = Current ~= nil and Current.Playing
+				UseBindingResult2_1(true)
+				
+				return
+			end
+			if UseRefResult2.current or not p1.isSelected then
+				UseRefResult2.current = false
+				UseBindingResult2_1(false)
+			end
+		end, { IsIsPlaybackPaused, p1.isSelected })
+		ReactModule.useEffect(function()
+			-- upvalues: UseRefResult (copy), IsIsPlaybackPaused (copy), UseBindingResult2_1 (copy)
+			local Current = UseRefResult.current
+			
+			if IsIsPlaybackPaused or Current == nil then return end
+			local Connection = Current:GetPropertyChangedSignal("Playing"):Connect(function()
+				-- upvalues: Current (copy), UseBindingResult2_1 (upval)
+				if Current.Playing then
+					UseBindingResult2_1(false)
+				end
+			end)
+			
+			return function()
+				-- upvalues: Connection (copy)
+				Connection:Disconnect()
+			end
+		end, { IsIsPlaybackPaused })
+	end
 	local ContentFromObject = if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then GetContentFromObjectFunction(p1.capture) else p1.capture.contentId
 	local Capture = if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then p1.capture else p1.capture.videoCapture
 	local CreateElementFunction = ReactModule.createElement
@@ -229,12 +281,12 @@ return function(p1)
 			onExpandCallback = UseResult7,
 			onMuteCallback = UseResult8,
 			onLoaded = UseResult1,
-			Playing = p1.isSelected and UseBindingResult:map(function(p2): boolean
+			Playing = p1.isSelected and (UseMemoResult or UseBindingResult:map(function(p2): boolean
 				-- upvalues: UseResult2 (copy)
 				local _, UseResultResult2 = UseResult2(p2)
 				
 				return UseResultResult2 < 0.5
-			end),
+			end)),
 			Position = UDim2.fromScale(0.5, 0.5),
 			renderOnFailed = UseResult9,
 			Size = if p1.fadeOutBinding then p1.fadeOutBinding:map(getCapturesItemSize) else UDim2.fromScale(1, 1),
@@ -244,7 +296,7 @@ return function(p1)
 		}) else ReactModule.createElement("VideoFrame", {
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			BackgroundTransparency = 1,
-			Playing = UseBindingResult:map(function(p2): boolean
+			Playing = (not FFlagCapturesCarouselMomentsButtonModule or not IsIsPlaybackPaused) and UseBindingResult:map(function(p2): boolean
 				-- upvalues: UseResult2 (copy)
 				local _, UseResultResult2 = UseResult2(p2)
 				

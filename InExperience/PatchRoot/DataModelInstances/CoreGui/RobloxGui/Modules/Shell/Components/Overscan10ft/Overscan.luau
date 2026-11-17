@@ -3,7 +3,6 @@ local Modules = game:GetService("CoreGui").RobloxGui.Modules
 local ReactModule = require(CorePackages.Packages.React)
 local UIBloxModule = require(CorePackages.Packages.UIBlox)
 local NormalizeFontFaceFunction = require(CorePackages.Packages.Foundation).Utility.normalizeFontFace
-local FontFaceConsoleOverscan = game:DefineFastFlag("FontFaceConsoleOverscan", false)
 local ButtonStack = UIBloxModule.App.Button.ButtonStack
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 local UseDesignTokensFunction = require(CorePackages.Workspace.Packages.Style).useDesignTokens
@@ -16,7 +15,7 @@ local ControllerHintModule = require(Modules.Shell.Components.Overscan.Controlle
 local EdgesModule = require(script.Parent.Edges)
 
 return function(Frame)
-	-- upvalues: UseNavigationFunction (copy), UseLocalizationFunction (copy), UseDesignTokensFunction (copy), UseStyleFunction (copy), ReactModule (copy), FontFaceConsoleOverscan (copy), GlobalSettingsModule (copy), NormalizeFontFaceFunction (copy), LocalizedStringsModule (copy), ControllerHintModule (copy), ButtonStack (copy), ButtonType (copy), EdgesModule (copy)
+	-- upvalues: UseNavigationFunction (copy), UseLocalizationFunction (copy), UseDesignTokensFunction (copy), UseStyleFunction (copy), ReactModule (copy), NormalizeFontFaceFunction (copy), GlobalSettingsModule (copy), LocalizedStringsModule (copy), ControllerHintModule (copy), ButtonStack (copy), ButtonType (copy), EdgesModule (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local OnUnmount = Frame.onUnmount or UseNavigationResult.goBack
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -49,8 +48,7 @@ return function(Frame)
 		Title = ReactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			Position = UDim2.new(0, 230, 0, 205),
-			Font = if FontFaceConsoleOverscan then nil else GlobalSettingsModule.LightFont,
-			FontFace = if FontFaceConsoleOverscan then NormalizeFontFaceFunction(GlobalSettingsModule.LightFont) else nil,
+			FontFace = NormalizeFontFaceFunction(GlobalSettingsModule.LightFont),
 			FontSize = GlobalSettingsModule.HeaderSize,
 			TextColor3 = GlobalSettingsModule.WhiteTextColor,
 			TextXAlignment = Enum.TextXAlignment.Left,
@@ -59,8 +57,7 @@ return function(Frame)
 		Prompt = ReactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			Position = UDim2.new(0, 230, 0, 243),
-			Font = if FontFaceConsoleOverscan then nil else GlobalSettingsModule.RegularFont,
-			FontFace = if FontFaceConsoleOverscan then NormalizeFontFaceFunction(GlobalSettingsModule.RegularFont) else nil,
+			FontFace = NormalizeFontFaceFunction(GlobalSettingsModule.RegularFont),
 			FontSize = GlobalSettingsModule.ButtonSize,
 			TextColor3 = GlobalSettingsModule.WhiteTextColor,
 			TextXAlignment = Enum.TextXAlignment.Left,

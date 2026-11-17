@@ -1,6 +1,3 @@
-﻿local FFlagBlockRobuxTileClickInShopModule = require(script.Parent.FFlagBlockRobuxTileClickInShop)
-
-return function()
-	-- upvalues: FFlagBlockRobuxTileClickInShopModule (copy)
-	return FFlagBlockRobuxTileClickInShopModule
+﻿return function(): boolean
+	return true
 end

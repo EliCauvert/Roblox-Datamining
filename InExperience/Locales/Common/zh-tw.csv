@@ -2283,6 +2283,7 @@ Feature.Build.Description.ActivateSubscription,釋出訂閱 {PRODUCT_ID} 以供�
 Feature.Build.Description.AdCampaignModerationReview,每則廣告都須審核才會投放，這最多可能需要 24 小時。
 Feature.Build.Description.AdCampaignSheetRunDates,{startDate}至 {endDate}間投放
 Feature.Build.Description.AdComplete,廣告已結束，來看看成效如何。
+Feature.Build.Description.AdCreditsSavedForRetry,我們已將你的 Robux 儲存為廣告點數。請再試一次，我們會將點數用於此廣告。
 Feature.Build.Description.AdModerationReview,
 Feature.Build.Description.AdvancedModel,最適合複雜的遊戲。使用量會消耗得更快。
 Feature.Build.Description.AdvertisingAgreement,選擇「建立」，即表示您同意 {advertisingTermsStart}Roblox 廣告條款{advertisingTermsEnd}和{advertisingStandardsStart}廣告標準{advertisingStandardsEnd}。
@@ -2683,6 +2684,7 @@ Feature.Build.Title.AdCampaignDuration,為期 {durationDays} 天的廣告
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} 天
 Feature.Build.Title.AdComplete,廣告已完成
 Feature.Build.Title.AdCreatedPeriod,已建立廣告。
+Feature.Build.Title.AdNotCreated,我們無法建立你的廣告
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,新增圖片
 Feature.Build.Title.AdsStatsEmpty,
@@ -2739,6 +2741,7 @@ Feature.Build.Title.VersionInfo,版本資訊
 Feature.Build.Title.VersionNumber,版本 {VERSION}
 Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,包含哪些內容？
+Feature.BuyRobux.Action.ContentPersonalization,內容個人化
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.Allow,允許
 Feature.Captures.Action.AllowPhotoAccessAccepted,

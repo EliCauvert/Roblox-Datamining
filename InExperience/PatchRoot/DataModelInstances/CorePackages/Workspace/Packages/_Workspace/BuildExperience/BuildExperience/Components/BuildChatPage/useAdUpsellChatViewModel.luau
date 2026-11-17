@@ -16,12 +16,13 @@ local FFlagEnablePaidAdsModule = require(BuildExperience.Flags.FFlagEnablePaidAd
 local FFlagBuildAdUpsellModule = require(BuildExperience.Flags.FFlagBuildAdUpsell)
 local FFlagBuildAdUpsellPinnedModule = require(BuildExperience.Flags.FFlagBuildAdUpsellPinned)
 local FFlagBuildAdsNotificationRouting = require(Parent.SharedFlags).FFlagBuildAdsNotificationRouting
+local FFlagBuildAdsFundedNotCreatedError = require(Parent.SharedFlags).FFlagBuildAdsFundedNotCreatedError
 local UseAdsCampaignDeepLinkModule = require(BuildExperience.Components.Ads.useAdsCampaignDeepLink)
 local BuildAppStorageKeyEngineFeature = game:GetEngineFeature("BuildAppStorageKey")
 local BuildAppStorageModule = if BuildAppStorageKeyEngineFeature then require(BuildExperience.Storage.BuildAppStorage) else nil
 
 return function(p1)
-	-- upvalues: GetAdUpsellEventStoreModule (copy), SignalsReactModule (copy), ReactModule (copy), UseGetAdCampaignEligibilityModule (copy), AdCampaignEligibilityUtilsModule (copy), UseCreateAdCampaignModule (copy), FFlagEnablePaidAdsModule (copy), UseGetAdCampaignsModule (copy), AdCampaignScheduleUtilsModule (copy), FFlagBuildAdUpsellModule (copy), UseAdsCampaignDeepLinkModule (copy), FFlagBuildAdsNotificationRouting (copy), AdUpsellPublishUtilsModule (copy), BuildAppStorageKeyEngineFeature (copy), BuildAppStorageModule (copy), FFlagBuildAdUpsellPinnedModule (copy), SendBuildExperienceEventModule (copy)
+	-- upvalues: GetAdUpsellEventStoreModule (copy), SignalsReactModule (copy), ReactModule (copy), UseGetAdCampaignEligibilityModule (copy), AdCampaignEligibilityUtilsModule (copy), UseCreateAdCampaignModule (copy), FFlagEnablePaidAdsModule (copy), UseGetAdCampaignsModule (copy), AdCampaignScheduleUtilsModule (copy), FFlagBuildAdUpsellModule (copy), UseAdsCampaignDeepLinkModule (copy), FFlagBuildAdsNotificationRouting (copy), AdUpsellPublishUtilsModule (copy), BuildAppStorageKeyEngineFeature (copy), BuildAppStorageModule (copy), FFlagBuildAdUpsellPinnedModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildAdsFundedNotCreatedError (copy)
 	local AdUpsellEventStoreModule = GetAdUpsellEventStoreModule(false)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(AdUpsellEventStoreModule.getRevision)
 	local UseRefResult = ReactModule.useRef(nil)
@@ -259,6 +260,7 @@ return function(p1)
 		isAdCampaignSheetOpen = UseStateResult,
 		hasAdCampaignCreateError = UseCreateAdCampaignModuleResult.hasCreateError,
 		adCampaignCreateErrorKind = UseCreateAdCampaignModuleResult.createErrorKind,
+		adCampaignAttemptedOption = if FFlagBuildAdsFundedNotCreatedError then UseCreateAdCampaignModuleResult.attemptedOption else nil,
 		adCampaignDurationDays = if UseStateResult1 == nil then nil else UseStateResult1.durationDays,
 		adCampaignEstimatedPriceRobux = if UseStateResult1 == nil then nil else UseStateResult1.estimatedPriceRobux,
 		adCampaignOffers = if UseStateResult1 == nil then nil else UseStateResult1.campaignOffers,
@@ -317,17 +319,23 @@ return function(p1)
 			p1.sessionId or ""
 		}),
 		onAdCampaignSheetClose = ReactModule.useCallback(function()
-			-- upvalues: UseStateResult2 (copy), FFlagBuildAdUpsellModule (upval), UseAdsCampaignDeepLinkModuleResult (ref), FFlagEnablePaidAdsModule (upval), UseCreateAdCampaignModuleResult (copy)
+			-- upvalues: UseStateResult2 (copy), FFlagBuildAdUpsellModule (upval), UseAdsCampaignDeepLinkModuleResult (ref), FFlagEnablePaidAdsModule (upval), FFlagBuildAdsFundedNotCreatedError (upval), UseCreateAdCampaignModuleResult (copy)
 			UseStateResult2(false)
 			
 			if FFlagBuildAdUpsellModule then
 				UseAdsCampaignDeepLinkModuleResult.clearPresentedRequest()
 			end
 			if FFlagEnablePaidAdsModule then
+				if FFlagBuildAdsFundedNotCreatedError then
+					UseCreateAdCampaignModuleResult.dismissCreateError()
+					
+					return
+				end
 				UseCreateAdCampaignModuleResult.clearCreateError()
 			end
 		end, {
 			UseCreateAdCampaignModuleResult.clearCreateError,
+			UseCreateAdCampaignModuleResult.dismissCreateError,
 			UseAdsCampaignDeepLinkModuleResult
 		}),
 		onAdCampaignSheetCreate = ReactModule.useCallback(function(p2)

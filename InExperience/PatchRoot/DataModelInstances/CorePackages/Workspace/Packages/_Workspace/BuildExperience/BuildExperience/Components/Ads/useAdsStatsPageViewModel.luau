@@ -21,6 +21,7 @@ local StatsCardValueFormatModule = require(BuildExperience.Components.Analytics.
 local FoundationModule = require(Parent.Foundation)
 local _ = require(Parent.DataHydration.CreatorAgentChat)
 local FFlagEnablePaidAdsModule = require(BuildExperience.Flags.FFlagEnablePaidAds)
+local FFlagBuildAdsFundedNotCreatedError = require(Parent.SharedFlags).FFlagBuildAdsFundedNotCreatedError
 local FFlagBuildAdsManagerUniverseUrlModule = require(BuildExperience.Flags.FFlagBuildAdsManagerUniverseUrl)
 local FFlagBuildExperienceAdsAndRobuxTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceAdsAndRobuxTelemetry)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
@@ -75,7 +76,7 @@ local _ = function(Title, StatValue, StatIcon, HasData)
 end
 
 return function(UniverseId, p1, p2, p3, p4, p5)
-	-- upvalues: UseGetAdCampaignsModule (copy), UseGetCampaignStatsModule (copy), UseGetAdCampaignEligibilityModule (copy), UseCreateAdCampaignModule (copy), ReactModule (copy), FFlagEnablePaidAdsModule (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), LocalizationModule (copy), WINDOWDAYS (copy), MSPERDAY (copy), config (copy), ToStartMsFunction (copy), CampaignEndMsFunction (copy), CampaignEndExclusiveMsFunction (copy), IconName (copy), AnalyticsUnitModule (copy), StatsCardValueFormatModule (copy), IconPosition (copy), formatDateRange (copy), AdCampaignEligibilityUtilsModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), GetAdsManagerUrlModule (copy), UseOpenWebViewWithResumeRefreshModule (copy), SendBuildExperienceEventModule (copy)
+	-- upvalues: UseGetAdCampaignsModule (copy), UseGetCampaignStatsModule (copy), UseGetAdCampaignEligibilityModule (copy), UseCreateAdCampaignModule (copy), ReactModule (copy), FFlagEnablePaidAdsModule (copy), FFlagBuildAdsFundedNotCreatedError (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), LocalizationModule (copy), WINDOWDAYS (copy), MSPERDAY (copy), config (copy), ToStartMsFunction (copy), CampaignEndMsFunction (copy), CampaignEndExclusiveMsFunction (copy), IconName (copy), AnalyticsUnitModule (copy), StatsCardValueFormatModule (copy), IconPosition (copy), formatDateRange (copy), AdCampaignEligibilityUtilsModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), GetAdsManagerUrlModule (copy), UseOpenWebViewWithResumeRefreshModule (copy), SendBuildExperienceEventModule (copy)
 	local UseGetAdCampaignsModuleResult, UseGetAdCampaignsModuleResult2 = UseGetAdCampaignsModule(p1)
 	local Flag = false
 	
@@ -103,13 +104,21 @@ return function(UniverseId, p1, p2, p3, p4, p5)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: UseStateResult2 (copy), FFlagEnablePaidAdsModule (upval), UseCreateAdCampaignModuleResult (copy)
+		-- upvalues: UseStateResult2 (copy), FFlagEnablePaidAdsModule (upval), FFlagBuildAdsFundedNotCreatedError (upval), UseCreateAdCampaignModuleResult (copy)
 		UseStateResult2(false)
 		
 		if FFlagEnablePaidAdsModule then
+			if FFlagBuildAdsFundedNotCreatedError then
+				UseCreateAdCampaignModuleResult.dismissCreateError()
+				
+				return
+			end
 			UseCreateAdCampaignModuleResult.clearCreateError()
 		end
-	end, { UseCreateAdCampaignModuleResult.clearCreateError })
+	end, {
+		UseCreateAdCampaignModuleResult.clearCreateError,
+		UseCreateAdCampaignModuleResult.dismissCreateError
+	})
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(false)
 	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_3 (copy)

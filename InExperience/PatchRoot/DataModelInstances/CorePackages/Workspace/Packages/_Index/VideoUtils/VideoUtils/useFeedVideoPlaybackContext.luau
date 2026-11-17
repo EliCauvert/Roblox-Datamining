@@ -8,15 +8,14 @@ local UseNavigationFocusFunction = require(Parent.Navigation).useNavigationFocus
 local VideoEndReason = require(VideoUtils.Analytics.Enums).VideoEndReason
 local FeedVideoPlaybackContextModule = require(script.Parent.FeedVideoPlaybackContext)
 local _ = require(script.Parent.VideoPlaybackDetectionMethod)
-local FFlagLuaAppSearchResultsPageGameTileVideo = require(Parent.SharedFlags).FFlagLuaAppSearchResultsPageGameTileVideo
 local FFlagLuaAppSuppressVideoDetectorDuringScroll = require(Parent.SharedFlags).FFlagLuaAppSuppressVideoDetectorDuringScroll
 local FFlagLuaAppVideoAutoplayFeedElection = require(Parent.SharedFlags).FFlagLuaAppVideoAutoplayFeedElection
 local FFlagLuaAppOneByTwoHoverIdleAutoplay = require(Parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
 local FFlagEnableOnScreenAPIIntegration = require(Parent.SharedFlags).FFlagEnableOnScreenAPIIntegration
 local UseIsRouteOnScreen = if FFlagEnableOnScreenAPIIntegration then require(Parent.RobloxAppNavigation).useIsRouteOnScreen else nil
 
-return function(p1, Enabled1, p2, p3, p4)
-	-- upvalues: FFlagEnableOnScreenAPIIntegration (copy), UseIsRouteOnScreen (copy), UseNavigationFocusFunction (copy), FFlagLuaAppSuppressVideoDetectorDuringScroll (copy), ResponsiveModule (copy), ReactModule (copy), FFlagLuaAppSearchResultsPageGameTileVideo (copy), FeedVideoPlaybackContextModule (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), FFlagLuaAppVideoAutoplayFeedElection (copy), AppLifecycleObserverService (copy), VideoEndReason (copy), ExperienceService (copy)
+return function(p1, p2, p3, p4)
+	-- upvalues: FFlagEnableOnScreenAPIIntegration (copy), UseIsRouteOnScreen (copy), UseNavigationFocusFunction (copy), FFlagLuaAppSuppressVideoDetectorDuringScroll (copy), ResponsiveModule (copy), ReactModule (copy), FeedVideoPlaybackContextModule (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), FFlagLuaAppVideoAutoplayFeedElection (copy), AppLifecycleObserverService (copy), VideoEndReason (copy), ExperienceService (copy)
 	local UseIsRouteOnScreenResult = if FFlagEnableOnScreenAPIIntegration then UseIsRouteOnScreen() else UseNavigationFocusFunction()
 	local IsUsePreferredInputResultMatch = if FFlagLuaAppSuppressVideoDetectorDuringScroll then ResponsiveModule.usePreferredInput() == ResponsiveModule.Input.Touch else nil
 	local Enabled = nil
@@ -25,8 +24,8 @@ return function(p1, Enabled1, p2, p3, p4)
 	if FFlagLuaAppSuppressVideoDetectorDuringScroll then
 		Enabled, Callback = ReactModule.useState(false)
 	end
-	local IsEnabled: boolean = FFlagLuaAppSearchResultsPageGameTileVideo and Enabled1 == true or not UseIsRouteOnScreenResult
-	local IsEnabled1: boolean = FFlagLuaAppSuppressVideoDetectorDuringScroll and Enabled == true
+	local NoUseIsRouteOnScreenResult = not UseIsRouteOnScreenResult
+	local IsEnabled: boolean = FFlagLuaAppSuppressVideoDetectorDuringScroll and Enabled == true
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FeedVideoPlaybackContextModule (upval), FFlagLuaAppOneByTwoHoverIdleAutoplay (upval), p1 (copy), FFlagLuaAppVideoAutoplayFeedElection (upval), p2 (copy), p3 (copy), p4 (copy)
 		return FeedVideoPlaybackContextModule.new(if FFlagLuaAppOneByTwoHoverIdleAutoplay then nil else p1, if FFlagLuaAppVideoAutoplayFeedElection then p2 else nil, if FFlagLuaAppVideoAutoplayFeedElection then p3 else nil, if FFlagLuaAppOneByTwoHoverIdleAutoplay then p4 else nil)
@@ -36,17 +35,17 @@ return function(p1, Enabled1, p2, p3, p4)
 		if FFlagLuaAppVideoAutoplayFeedElection then p3 else nil
 	})
 	local UseMemoResult1 = ReactModule.useMemo(function()
-		-- upvalues: IsEnabled (copy), FFlagLuaAppSuppressVideoDetectorDuringScroll (upval), IsEnabled1 (copy), UseMemoResult (copy), FeedVideoPlaybackContextModule (upval)
-		return if IsEnabled or FFlagLuaAppSuppressVideoDetectorDuringScroll and IsEnabled1 then setmetatable({
+		-- upvalues: NoUseIsRouteOnScreenResult (copy), FFlagLuaAppSuppressVideoDetectorDuringScroll (upval), IsEnabled (copy), UseMemoResult (copy), FeedVideoPlaybackContextModule (upval)
+		return if NoUseIsRouteOnScreenResult or FFlagLuaAppSuppressVideoDetectorDuringScroll and IsEnabled then setmetatable({
 			videoPlaybackCoordinator = UseMemoResult.videoPlaybackCoordinator,
 			viewportVideoAutoplayController = UseMemoResult.viewportVideoAutoplayController,
-			disablePlayback = not FFlagLuaAppSuppressVideoDetectorDuringScroll or IsEnabled or nil,
-			disableDetectors = if FFlagLuaAppSuppressVideoDetectorDuringScroll and IsEnabled1 then true else nil
+			disablePlayback = not FFlagLuaAppSuppressVideoDetectorDuringScroll or NoUseIsRouteOnScreenResult or nil,
+			disableDetectors = if FFlagLuaAppSuppressVideoDetectorDuringScroll and IsEnabled then true else nil
 		}, FeedVideoPlaybackContextModule) else UseMemoResult
 	end, {
 		UseMemoResult,
-		IsEnabled,
-		if FFlagLuaAppSuppressVideoDetectorDuringScroll then IsEnabled1 else nil
+		NoUseIsRouteOnScreenResult,
+		if FFlagLuaAppSuppressVideoDetectorDuringScroll then IsEnabled else nil
 	})
 	
 	if FFlagLuaAppOneByTwoHoverIdleAutoplay then

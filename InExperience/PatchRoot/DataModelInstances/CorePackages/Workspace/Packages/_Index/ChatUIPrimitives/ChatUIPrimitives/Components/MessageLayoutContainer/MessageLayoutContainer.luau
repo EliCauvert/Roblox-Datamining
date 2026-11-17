@@ -11,6 +11,7 @@ local TextLineEntryModule = require(script.Parent.TextLineEntry)
 local BubbleEntryModule = require(script.Parent.BubbleEntry)
 local _ = require(ChatUIPrimitives.Types)
 local FFlagExpChatLatestUsernameWithoutRenderModule = require(ChatUIPrimitives.Flags.FFlagExpChatLatestUsernameWithoutRender)
+local FFlagExpChatTCWMessageRowsSubscriptionModule = require(ChatUIPrimitives.Flags.FFlagExpChatTCWMessageRowsSubscription)
 
 local function _(p1, p2, FontFace, SelectableRows, SelectionCursor, IsTranslationSettingEnabled, p3, ReportLatestUsername)
 	-- upvalues: ReactModule (copy)
@@ -33,8 +34,24 @@ end
 local Signal = SignalsModule.createSignal({})
 local config = { left = UDim.new(0, 8), right = UDim.new(0, 8) }
 
+local function MessageRows(p1)
+	-- upvalues: SignalsReactModule (copy), ReactModule (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.getChildComponents)
+	
+	return ReactModule.createElement(ReactModule.Fragment, nil, (ReactModule.useMemo(function()
+		-- upvalues: UseSignalStateResult (copy), ReactModule (upval)
+		local Copy = table.clone(UseSignalStateResult)
+		Copy["$layout"] = ReactModule.createElement("UIListLayout", {
+			SortOrder = Enum.SortOrder.LayoutOrder,
+			Padding = UDim.new(0, 2)
+		})
+		
+		return Copy
+	end, { UseSignalStateResult })))
+end
+
 return ReactModule.memo(function(p1)
-	-- upvalues: Signal (copy), ReactModule (copy), SignalsModule (copy), FFlagExpChatLatestUsernameWithoutRenderModule (copy), UseMessagesMapModule (copy), BubbleEntryModule (copy), TextLineEntryModule (copy), UseMessagePoolModule (copy), SignalsReactModule (copy), FoundationModule (copy), BottomLockedScrollViewModule (copy), config (copy)
+	-- upvalues: Signal (copy), ReactModule (copy), SignalsModule (copy), FFlagExpChatLatestUsernameWithoutRenderModule (copy), UseMessagesMapModule (copy), BubbleEntryModule (copy), TextLineEntryModule (copy), UseMessagePoolModule (copy), FFlagExpChatTCWMessageRowsSubscriptionModule (copy), MessageRows (copy), FoundationModule (copy), BottomLockedScrollViewModule (copy), config (copy), SignalsReactModule (copy)
 	local MessagesSignal = p1.messagesSignal or Signal
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), MessagesSignal (copy)
@@ -72,7 +89,7 @@ return ReactModule.memo(function(p1)
 	end
 	local UseMessagesMapModuleResult = UseMessagesMapModule(MessagesSignal)
 	local BubbleEntryModule1 = if p1.layoutStyle == "bubble" then BubbleEntryModule else TextLineEntryModule
-	local UseSignalStateResult = SignalsReactModule.useSignalState((UseMessagePoolModule({
+	local UseMessagePoolModuleResult = UseMessagePoolModule({
 		messageIdsSignal = UseMemoResult,
 		createSlotElement = ReactModule.useMemo(function()
 			-- upvalues: BubbleEntryModule1 (copy), UseMessagesMapModuleResult (copy), p1 (copy), UseMemoResult1 (copy), ReactModule (upval)
@@ -102,27 +119,49 @@ return ReactModule.memo(function(p1)
 			p1.isTranslationSettingEnabled or false, UseMemoResult1,
 			p1.onLatestUsernameChanged or false
 		})
-	})))
-	
-	return ReactModule.createElement(FoundationModule.View, {
-		tag = "fill padding-y-xsmall",
-		Size = p1.Size or UDim2.fromScale(1, 1)
-	}, {
-		scrollView = ReactModule.createElement(BottomLockedScrollViewModule, {
-			Size = UDim2.fromScale(1, 1),
-			contentPadding = p1.contentPadding or config,
-			children = ReactModule.useMemo(function()
-				-- upvalues: UseSignalStateResult (copy), ReactModule (upval)
-				local Copy = table.clone(UseSignalStateResult)
-				Copy["$layout"] = ReactModule.createElement("UIListLayout", {
-					SortOrder = Enum.SortOrder.LayoutOrder,
-					Padding = UDim.new(0, 2)
-				})
-				
-				return Copy
-			end, { UseSignalStateResult }),
-			onScroll = p1.onScroll,
-			selectableRows = p1.selectableRows
-		})
 	})
+	
+	if FFlagExpChatTCWMessageRowsSubscriptionModule then
+		return ReactModule.createElement(FoundationModule.View, {
+			tag = "fill padding-y-xsmall",
+			Size = p1.Size or UDim2.fromScale(1, 1)
+		}, {
+			scrollView = ReactModule.createElement(BottomLockedScrollViewModule, {
+				Size = UDim2.fromScale(1, 1),
+				contentPadding = p1.contentPadding or config,
+				children = ReactModule.useMemo(function()
+					-- upvalues: ReactModule (upval), MessageRows (upval), UseMessagePoolModuleResult (copy)
+					return {
+						rows = ReactModule.createElement(MessageRows, { getChildComponents = UseMessagePoolModuleResult })
+					}
+				end, { UseMessagePoolModuleResult }),
+				onScroll = p1.onScroll,
+				selectableRows = p1.selectableRows
+			})
+		})
+	else
+		local UseSignalStateResult = SignalsReactModule.useSignalState(UseMessagePoolModuleResult)
+		
+		return ReactModule.createElement(FoundationModule.View, {
+			tag = "fill padding-y-xsmall",
+			Size = p1.Size or UDim2.fromScale(1, 1)
+		}, {
+			scrollView = ReactModule.createElement(BottomLockedScrollViewModule, {
+				Size = UDim2.fromScale(1, 1),
+				contentPadding = p1.contentPadding or config,
+				children = ReactModule.useMemo(function()
+					-- upvalues: UseSignalStateResult (copy), ReactModule (upval)
+					local Copy = table.clone(UseSignalStateResult)
+					Copy["$layout"] = ReactModule.createElement("UIListLayout", {
+						SortOrder = Enum.SortOrder.LayoutOrder,
+						Padding = UDim.new(0, 2)
+					})
+					
+					return Copy
+				end, { UseSignalStateResult }),
+				onScroll = p1.onScroll,
+				selectableRows = p1.selectableRows
+			})
+		})
+	end
 end)

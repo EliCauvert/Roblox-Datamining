@@ -21,6 +21,7 @@ local _ = require(Parent.Types)
 local UseAnalyticsModule = require(Parent.Analytics.useAnalytics)
 local UseCarouselControllerModule = require(Parent.Hooks.useCarouselController)
 local FFlagUseRbxstorageInGalleryModule = require(Parent.Flags.FFlagUseRbxstorageInGallery)
+local FFlagCapturesCarouselMomentsButtonModule = require(Parent.Flags.FFlagCapturesCarouselMomentsButton)
 local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 
 local function _(p1, p2)
@@ -48,7 +49,7 @@ local _ = function(): boolean
 end
 
 return function(Frame)
-	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseScreenSizeFunction (copy), ReactModule (copy), UseSelectorFunction (copy), ConstantsModule (copy), EventNamesModule (copy), CarouselScrolledModule (copy), UseCarouselControllerModule (copy), UseSignalFunction (copy), GetClosestItemToCenterModule (copy), CarouselItemModule (copy), FFlagUseRbxstorageInGalleryModule (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy), UserInputService (copy), UserGameSettings (copy), CarouselNavArrowModule (copy)
+	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseScreenSizeFunction (copy), ReactModule (copy), UseSelectorFunction (copy), ConstantsModule (copy), EventNamesModule (copy), CarouselScrolledModule (copy), UseCarouselControllerModule (copy), UseSignalFunction (copy), GetClosestItemToCenterModule (copy), FFlagCapturesCarouselMomentsButtonModule (copy), CarouselItemModule (copy), FFlagUseRbxstorageInGalleryModule (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy), UserInputService (copy), UserGameSettings (copy), CarouselNavArrowModule (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseScreenSizeResult = UseScreenSizeFunction()
@@ -136,8 +137,9 @@ return function(Frame)
 			UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesCarouselVideoExpanded)
 		end
 	end, { UseStateResult })
+	local IsIsPlaybackPaused = if FFlagCapturesCarouselMomentsButtonModule then Frame.isPlaybackPaused == true else nil
 	local UseResult3 = ReactModule.useCallback(function(Capture, ItemIndex)
-		-- upvalues: UseStateResult3 (copy), ReactModule (upval), CarouselItemModule (upval), UseSelectorResult1 (copy), SelectedItemFadeOutBinding (copy), PostDeletionItemBinding (copy), Floored (copy), FFlagUseRbxstorageInGalleryModule (upval), Frame (copy), _Vector2 (copy), UseResult2 (copy), UseResult1 (copy)
+		-- upvalues: UseStateResult3 (copy), ReactModule (upval), CarouselItemModule (upval), UseSelectorResult1 (copy), SelectedItemFadeOutBinding (copy), PostDeletionItemBinding (copy), Floored (copy), FFlagUseRbxstorageInGalleryModule (upval), Frame (copy), IsIsPlaybackPaused (copy), _Vector2 (copy), UseResult2 (copy), UseResult1 (copy)
 		if UseStateResult3 + 3 < ItemIndex or ItemIndex < UseStateResult3 - 3 then
 			return nil
 		else
@@ -150,6 +152,7 @@ return function(Frame)
 				transitionBinding = if ItemIndex == UseSelectorResult1 then SelectedItemFadeOutBinding elseif IsItemIndexMatch then PostDeletionItemBinding else nil,
 				imagePadding = Floored,
 				isDisabled = if FFlagUseRbxstorageInGalleryModule then Frame.isDisabled and UseSelectorResult1 == ItemIndex else nil,
+				isPlaybackPaused = IsIsPlaybackPaused,
 				isSelected = UseSelectorResult1 == ItemIndex,
 				itemIndex = ItemIndex,
 				itemSize = _Vector2,
@@ -159,7 +162,8 @@ return function(Frame)
 		end
 	end, {
 		_Vector2, UseStateResult3, Floored, Frame.isDisabled, UseResult2, UseResult1,
-		PostDeletionItemBinding, UseSelectorResult1, SelectedItemFadeOutBinding
+		PostDeletionItemBinding, UseSelectorResult1, SelectedItemFadeOutBinding,
+		IsIsPlaybackPaused
 	})
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: ReactModule (upval), UseSelectorResult (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (upval), FFlagUseRbxstorageInGalleryModule (upval), CaptureTypeModule (upval), _Vector2 (copy), UseSelectorResult1 (copy), SelectedItemRef (copy), UseStateResult (copy), UseStateResult1 (copy), UseResult3 (copy)

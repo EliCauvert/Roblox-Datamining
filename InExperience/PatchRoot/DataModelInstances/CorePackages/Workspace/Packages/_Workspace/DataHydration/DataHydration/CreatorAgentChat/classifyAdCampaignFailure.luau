@@ -6,6 +6,9 @@ local config = {
 	[ErrorCodes.MissingThumbnail] = "missing_thumbnail"
 }
 
+if require(script:FindFirstAncestor("DataHydration").Parent.SharedFlags).FFlagBuildAdsFundedNotCreatedError then
+	config[ErrorCodes.AdCreditFundedNotCreated] = "funded_not_created"
+end
 return function(p1)
 	-- upvalues: config (copy)
 	local ResponseCode = if type(p1) == "table" and type(p1.responseCode) == "number" then p1.responseCode else nil

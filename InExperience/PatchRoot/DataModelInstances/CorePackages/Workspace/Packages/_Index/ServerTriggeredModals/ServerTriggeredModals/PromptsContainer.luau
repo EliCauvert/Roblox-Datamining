@@ -5,13 +5,10 @@ local SduiFeatureEntryPoint = require(Parent.SduiSharedUtilities).SduiFeatureEnt
 local LoggerModule = require(ServerTriggeredModals.Logger)
 local ReportPromptImpressionModule = require(ServerTriggeredModals.reportPromptImpression)
 local SendModalImpressionEventFunction = require(Parent.ServerTriggeredModalImpressions).sendModalImpressionEvent
-local SharedFlagsModule = require(Parent.SharedFlags)
-local FFlagEnableHomepagePromptsForModalsAndBanners = SharedFlagsModule.FFlagEnableHomepagePromptsForModalsAndBanners
-local FFlagPromptsHandlerEnabled = SharedFlagsModule.FFlagPromptsHandlerEnabled
 local FFlagPromptsActionEventLoggingModule = require(ServerTriggeredModals.Flags.FFlagPromptsActionEventLogging)
 
 return ReactModule.memo(function(p1)
-	-- upvalues: ReactModule (copy), ReportPromptImpressionModule (copy), LoggerModule (copy), SendModalImpressionEventFunction (copy), SduiFeatureEntryPoint (copy), FFlagEnableHomepagePromptsForModalsAndBanners (copy), FFlagPromptsHandlerEnabled (copy), FFlagPromptsActionEventLoggingModule (copy)
+	-- upvalues: ReactModule (copy), ReportPromptImpressionModule (copy), LoggerModule (copy), SendModalImpressionEventFunction (copy), SduiFeatureEntryPoint (copy), FFlagPromptsActionEventLoggingModule (copy)
 	local ModalId = p1.modalId
 	local ModalType = p1.modalType
 	ReactModule.useEffect(function()
@@ -29,7 +26,7 @@ return ReactModule.memo(function(p1)
 		shouldDisplayLoading = false,
 		shouldDisplayError = false,
 		configKey = p1.configKey,
-		identifier = if FFlagEnableHomepagePromptsForModalsAndBanners or FFlagPromptsHandlerEnabled then p1.modalId else nil,
+		identifier = p1.modalId,
 		appPage = p1.appPage,
 		additionalAnalyticsData = if FFlagPromptsActionEventLoggingModule then { promptInstanceId = ModalId or nil } else nil
 	})

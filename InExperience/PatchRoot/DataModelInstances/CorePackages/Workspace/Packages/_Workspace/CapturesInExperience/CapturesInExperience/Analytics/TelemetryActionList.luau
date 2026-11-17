@@ -476,6 +476,9 @@ return {
 				dynamicCustomFields = {
 					creationSessionId = function(p1)
 						return p1
+					end,
+					source = function(p1)
+						return p1
 					end
 				}
 			}
@@ -587,6 +590,21 @@ return {
 				staticCustomFields = {
 					eventContext = Contexts.Captures,
 					btn = EventNamesModule.CapturesCreateMomentToastButtonActivated
+				}
+			}
+		}
+	},
+	[EventNamesModule.CapturesCarouselCreateMomentActivated] = {
+		backendsList = {
+			{
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function()
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
+				end,
+				staticCustomFields = {
+					eventContext = Contexts.Captures,
+					btn = EventNamesModule.CapturesCarouselCreateMomentActivated
 				}
 			}
 		}

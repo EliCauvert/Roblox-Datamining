@@ -13,6 +13,7 @@ local FFlagBuildAdsManagerUniverseUrlModule = require(BuildExperience.Flags.FFla
 local FFlagBuildExperienceAdsAndRobuxTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceAdsAndRobuxTelemetry)
 local FFlagBuildExperienceMonetizationNativeUIModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
 local FFlagEnablePaidAdsModule = require(BuildExperience.Flags.FFlagEnablePaidAds)
+local FFlagBuildAdsFundedNotCreatedError = require(Parent.SharedFlags).FFlagBuildAdsFundedNotCreatedError
 local AdCampaignEligibilityUtilsModule = require(BuildExperience.Components.Ads.adCampaignEligibilityUtils)
 local AdCampaignScheduleUtilsModule = require(BuildExperience.Components.Ads.adCampaignScheduleUtils)
 local AdCampaignCreatedToastModule = require(BuildExperience.Components.Ads.AdCampaignCreatedToast)
@@ -28,7 +29,7 @@ local UseExperienceShareFlowModule = require(BuildExperience.utils.useExperience
 local DeveloperProducts = UrlBuilder.fromString("create:dashboard/creations/experiences/{universeId}/monetization/developer-products")
 
 local function useCreateAdAction(p1)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseOpenWebViewFunction (copy), UseGetAdCampaignEligibilityModule (copy), FFlagEnablePaidAdsModule (copy), UseCreateAdCampaignModule (copy), ReactModule (copy), AdCampaignEligibilityUtilsModule (copy), UseGetAdCampaignsModule (copy), AdCampaignScheduleUtilsModule (copy), GetAdsManagerUrlFunction (copy), CreateAdCampaignSheetContainerModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), AdCampaignCreatedToastModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseOpenWebViewFunction (copy), UseGetAdCampaignEligibilityModule (copy), FFlagEnablePaidAdsModule (copy), UseCreateAdCampaignModule (copy), ReactModule (copy), AdCampaignEligibilityUtilsModule (copy), UseGetAdCampaignsModule (copy), AdCampaignScheduleUtilsModule (copy), GetAdsManagerUrlFunction (copy), FFlagBuildAdsFundedNotCreatedError (copy), CreateAdCampaignSheetContainerModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), AdCampaignCreatedToastModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		adsManager = LocalizationStringsModule.ADS_STATS_ADS_MANAGER,
 		createSuccess = LocalizationStringsModule.ADS_STATS_CREATE_SUCCESS
@@ -38,6 +39,7 @@ local function useCreateAdAction(p1)
 	local UseGetAdCampaignEligibilityModuleResult, UseGetAdCampaignEligibilityModuleResult2 = UseGetAdCampaignEligibilityModule(if FFlagEnablePaidAdsModule then p1 else nil)
 	local UseCreateAdCampaignModuleResult = UseCreateAdCampaignModule(p1)
 	local ClearCreateErrorFunction = UseCreateAdCampaignModuleResult.clearCreateError
+	local DismissCreateErrorFunction = UseCreateAdCampaignModuleResult.dismissCreateError
 	local CreateCampaignFunction = UseCreateAdCampaignModuleResult.createCampaign
 	local IsCreatePending = UseCreateAdCampaignModuleResult.isCreatePending
 	local HasCreateError = UseCreateAdCampaignModuleResult.hasCreateError
@@ -70,10 +72,17 @@ local function useCreateAdAction(p1)
 		UseGetAdCampaignEligibilityModuleResult
 	})
 	local UseResult1 = ReactModule.useCallback(function()
-		-- upvalues: UseStateResult2 (copy), ClearCreateErrorFunction (copy)
+		-- upvalues: UseStateResult2 (copy), FFlagBuildAdsFundedNotCreatedError (upval), DismissCreateErrorFunction (copy), ClearCreateErrorFunction (copy)
 		UseStateResult2(false)
-		ClearCreateErrorFunction()
-	end, { ClearCreateErrorFunction })
+		
+		if FFlagBuildAdsFundedNotCreatedError then
+			DismissCreateErrorFunction()
+			
+			return
+		else
+			ClearCreateErrorFunction()
+		end
+	end, { ClearCreateErrorFunction, DismissCreateErrorFunction })
 	local UseResult2 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseRefResult (copy), UseGetAdCampaignEligibilityModuleResult (copy), CreateCampaignFunction (copy)
 		UseRefResult.current = UseGetAdCampaignEligibilityModuleResult

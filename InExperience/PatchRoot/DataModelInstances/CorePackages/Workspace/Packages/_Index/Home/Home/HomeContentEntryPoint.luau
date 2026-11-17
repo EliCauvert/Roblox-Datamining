@@ -76,7 +76,7 @@ return ReactModule.memo(function(p1)
 	
 	if FFlagLuaAppOneByTwoHoverIdleAutoplay then
 		local UsePreferredInputResult = ResponsiveModule.usePreferredInput()
-		UseFeedVideoPlaybackContextResult = VideoUtilsModule.useFeedVideoPlaybackContext(nil, nil, nil, nil, (VideoUtilsModule.getPlaybackDetectionMethod(UsePreferredInputResult, UsePreferredInputResult == ResponsiveModule.Input.Pointer)))
+		UseFeedVideoPlaybackContextResult = VideoUtilsModule.useFeedVideoPlaybackContext(nil, nil, nil, (VideoUtilsModule.getPlaybackDetectionMethod(UsePreferredInputResult, UsePreferredInputResult == ResponsiveModule.Input.Pointer)))
 	else
 		local IsUsePreferredInputResultMatch = ResponsiveModule.usePreferredInput() == ResponsiveModule.Input.Touch
 		UseFeedVideoPlaybackContextResult = ReactModule.useMemo(function()

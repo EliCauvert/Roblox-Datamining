@@ -2284,6 +2284,7 @@ Feature.Build.Description.ActivateSubscription,Cho phép mua gói đăng ký {PR
 Feature.Build.Description.AdCampaignModerationReview,Chúng tôi xét duyệt mọi quảng cáo trước khi chạy. Quá trình này có thể mất đến 24 giờ.
 Feature.Build.Description.AdCampaignSheetRunDates,Chạy từ {startDate} – {endDate}
 Feature.Build.Description.AdComplete,Quảng cáo của bạn đã kết thúc. Hãy xem quảng cáo đạt được kết quả thế nào.
+Feature.Build.Description.AdCreditsSavedForRetry,Chúng tôi đã lưu Robux của bạn dưới dạng tín dụng quảng cáo. Hãy thử lại để sử dụng số Robux đó cho quảng cáo này.
 Feature.Build.Description.AdModerationReview,
 Feature.Build.Description.AdvancedModel,Phù hợp nhất cho các trò chơi phức tạp. Hạn mức sử dụng hết nhanh hơn.
 Feature.Build.Description.AdvertisingAgreement,"Khi chọn ""Tạo"", bạn đồng ý với {advertisingTermsStart}Điều khoản quảng cáo{advertisingTermsEnd} và {advertisingStandardsStart}Tiêu chuẩn quảng cáo của Roblox{advertisingStandardsEnd}."
@@ -2684,6 +2685,7 @@ Feature.Build.Title.AdCampaignDuration,Quảng cáo dài {durationDays} ngày
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} ngày
 Feature.Build.Title.AdComplete,Đã hoàn tất quảng cáo
 Feature.Build.Title.AdCreatedPeriod,Đã tạo quảng cáo.
+Feature.Build.Title.AdNotCreated,Chúng tôi không tạo được quảng cáo của bạn
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,Thêm hình ảnh
 Feature.Build.Title.AdsStatsEmpty,
@@ -2740,6 +2742,7 @@ Feature.Build.Title.VersionInfo,Thông tin phiên bản
 Feature.Build.Title.VersionNumber,Phiên bản {VERSION}
 Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,Bao gồm những gì?
+Feature.BuyRobux.Action.ContentPersonalization,Cá nhân hóa nội dung
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.Allow,Cho phép
 Feature.Captures.Action.AllowPhotoAccessAccepted,

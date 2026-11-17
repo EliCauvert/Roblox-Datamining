@@ -40,7 +40,7 @@ local function AnimatedChipSlot(p1)
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), AnimatedChipSlot (copy), View (copy), ScrollView (copy), Visibility (copy)
+	-- upvalues: ReactModule (copy), AnimatedChipSlot (copy), Skeleton (copy), Radius (copy), View (copy), ScrollView (copy), Visibility (copy)
 	local Elements = {}
 	
 	for Index, chip in p1.chips do
@@ -51,6 +51,14 @@ return function(p1)
 			tokens = p1.tokens
 		})
 	end
+	for i = #p1.chips + 1, #p1.chips + p1.skeletonCount do
+		Elements[`Skeleton{i}`] = ReactModule.createElement(Skeleton, {
+			LayoutOrder = i,
+			radius = Radius.Circle,
+			Size = UDim2.fromOffset(p1.tokens.Size.Size_2800, p1.tokens.Size.Size_800),
+			testId = `PromptChipGroup.Skeleton{i}`
+		})
+	end
 	return ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y",
 		testId = "PromptChipGroup.Chips",
@@ -58,6 +66,7 @@ return function(p1)
 	}, {
 		Scroll = ReactModule.createElement(ScrollView, {
 			tag = "size-full-0 auto-y",
+			testId = if p1.skeletonCount > 0 then "PromptChipGroup.Skeletons" else nil,
 			layout = {
 				FillDirection = Enum.FillDirection.Horizontal,
 				Padding = UDim.new(0, p1.tokens.Padding.Small)

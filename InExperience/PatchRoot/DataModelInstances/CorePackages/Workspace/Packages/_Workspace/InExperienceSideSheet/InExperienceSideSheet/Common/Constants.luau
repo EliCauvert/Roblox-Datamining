@@ -4,6 +4,11 @@
 	NominalSideSheetWidth = 320,
 	MinMenuWidthBesideSideSheet = 200,
 	SideSheetDisplayOrder = 12,
+	IntegrationIds = {
+		People = "people",
+		InviteFriends = "invite_friends",
+		ConnectDropdown = "connect_dropdown"
+	},
 	LocalizationKeys = {
 		QuitButton = "Feature.SettingsHub.Label.QuitButton",
 		QuitConfirmation = "Feature.SettingsHub.Label.QuitConfirmation",

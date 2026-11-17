@@ -1118,6 +1118,10 @@ return function(p1)
 		getLearnPlaceEnabled = function()
 			-- upvalues: FFlagFlyoutGateLearnPlace (upval), p1 (copy)
 			return not FFlagFlyoutGateLearnPlace or (p1.LearnPlaceEnabled or false)
+		end,
+		getShowInContextPersonalizedRecommendationsInExperienceBuyRobux = function()
+			-- upvalues: p1 (copy)
+			return p1.showInContextPersonalizedRecommendationsInExperienceBuyRobux or false
 		end
 	}
 end

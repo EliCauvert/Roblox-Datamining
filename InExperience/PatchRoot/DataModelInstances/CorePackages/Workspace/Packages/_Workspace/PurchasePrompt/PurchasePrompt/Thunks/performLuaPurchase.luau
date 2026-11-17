@@ -35,6 +35,7 @@ local FFlagEnableSearchGameItemOwnershipUpdate = require(Parent.SharedFlags).FFl
 local FFlagEnableEdpPreviewPurchaseSurface = require(Parent.SharedFlags).FFlagEnableEdpPreviewPurchaseSurface
 local FFlagEnableCampaignGameItemPurchaseLocation = require(Parent.SharedFlags).FFlagEnableCampaignGameItemPurchaseLocation
 local FFlagAppIaHomeCampaignSubTab = require(Parent.SharedFlags).FFlagAppIaHomeCampaignSubTab
+local FFlagEnableGameItemDetailsSdui = require(Parent.SharedFlags).FFlagEnableGameItemDetailsSdui
 local FFlagLuaAppsEnablePromptVIPServerPurchase = require(Parent.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
 local RobloxTranslatorModule = require(Parent.RobloxTranslator)
 local ProductPurchaseSurface = require(Parent.PurchasePromptLite).Enums.ProductPurchaseSurface
@@ -43,7 +44,8 @@ local config = {
 	[ProductPurchaseSurface.EDPPreview] = if FFlagEnableEdpPreviewPurchaseSurface then "ExperienceDetailPagePreview" else nil,
 	[ProductPurchaseSurface.HomePageGameItemShop] = "HomePageGameItemShop",
 	[ProductPurchaseSurface.SearchPageGameItemShop] = if FFlagEnableSearchGameItemOwnershipUpdate then "SearchPageGameItemShop" else nil,
-	[ProductPurchaseSurface.CampaignPageGameItemShop] = if FFlagEnableCampaignGameItemPurchaseLocation then "CampaignPageGameItemShop" elseif FFlagAppIaHomeCampaignSubTab then "HomePageGameItemShop" else nil
+	[ProductPurchaseSurface.CampaignPageGameItemShop] = if FFlagEnableCampaignGameItemPurchaseLocation then "CampaignPageGameItemShop" elseif FFlagAppIaHomeCampaignSubTab then "HomePageGameItemShop" else nil,
+	[ProductPurchaseSurface.GameItemDetailsPage] = if FFlagEnableGameItemDetailsSdui then "GameItemDetailsPage" else nil
 }
 
 local function _(p1)

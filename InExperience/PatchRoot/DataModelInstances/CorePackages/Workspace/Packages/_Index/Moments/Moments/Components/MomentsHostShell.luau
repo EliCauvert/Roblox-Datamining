@@ -24,6 +24,8 @@ local FFlagMomentsPostFeedback = SharedFlagsModule.FFlagMomentsPostFeedback
 local SheetModule = if FFlagMomentsComments then require(Moments.Components.Comments.Sheet) else nil
 local FFlagMomentsCreatorAnalyticsModule = require(Moments.Flags.FFlagMomentsCreatorAnalytics)
 local PostInsightsModule = if FFlagMomentsCreatorAnalyticsModule then require(Moments.Components.PostInsights) else nil
+local FFlagMomentsEngagementToastsModule = require(Moments.Flags.FFlagMomentsEngagementToasts)
+local ActivitySubscriptionModule = if FFlagMomentsEngagementToastsModule then require(Moments.Engagement.activitySubscription) else nil
 
 local function closeSheets(p1)
 	-- upvalues: GetExperienceDetailsSheetStoreModule (copy), SheetModule (copy), PostInsightsModule (copy)
@@ -44,32 +46,39 @@ end
 local function ignoreTopShellChange(_) end
 
 return function(p1)
-	-- upvalues: FFlagMomentsOverlaysInTopShellOnlyModule (copy), FFlagProfileRenderAvatarMoments (copy), UseIsTopMomentsShellModule (copy), closeSheets (copy), ignoreTopShellChange (copy), ReactModule (copy), FFlagMomentsCreateAvatarPosts (copy), FFlagMomentsAvatarLookTryOn (copy), MomentsSessionContextModule (copy), MomentsHostContextModule (copy), ExperienceDetailsSheet (copy), FFlagMomentsComments (copy), SheetModule (copy), FFlagMomentsCreatorAnalyticsModule (copy), PostInsightsModule (copy), FFlagMomentsPostFeedback (copy), getPostStatusCardContainer (copy), ToastOverlayModule (copy)
+	-- upvalues: FFlagMomentsOverlaysInTopShellOnlyModule (copy), FFlagProfileRenderAvatarMoments (copy), UseIsTopMomentsShellModule (copy), closeSheets (copy), ignoreTopShellChange (copy), ReactModule (copy), FFlagMomentsCreateAvatarPosts (copy), FFlagMomentsAvatarLookTryOn (copy), FFlagMomentsEngagementToastsModule (copy), ActivitySubscriptionModule (copy), MomentsSessionContextModule (copy), MomentsHostContextModule (copy), ExperienceDetailsSheet (copy), FFlagMomentsComments (copy), SheetModule (copy), FFlagMomentsCreatorAnalyticsModule (copy), PostInsightsModule (copy), FFlagMomentsPostFeedback (copy), getPostStatusCardContainer (copy), ToastOverlayModule (copy)
 	local NoFFlagProfileRenderAvatarMoments = not FFlagMomentsOverlaysInTopShellOnlyModule and not FFlagProfileRenderAvatarMoments or UseIsTopMomentsShellModule(if FFlagMomentsOverlaysInTopShellOnlyModule then closeSheets else ignoreTopShellChange)
+	local UseMemoResult = ReactModule.useMemo(function()
+		-- upvalues: FFlagProfileRenderAvatarMoments (upval), NoFFlagProfileRenderAvatarMoments (ref), p1 (copy), FFlagMomentsCreateAvatarPosts (upval), FFlagMomentsAvatarLookTryOn (upval)
+		return {
+			isTopShell = if FFlagProfileRenderAvatarMoments then NoFFlagProfileRenderAvatarMoments else nil,
+			openProfile = p1.openProfile,
+			openOwnMoments = p1.openOwnMoments,
+			openAvatarMomentsCreation = if FFlagMomentsCreateAvatarPosts then p1.openAvatarMomentsCreation else nil,
+			openMomentsFeedReport = p1.openMomentsFeedReport,
+			openAvatarLookTryOn = if FFlagMomentsAvatarLookTryOn then p1.openAvatarLookTryOn else nil,
+			openMomentCommentReport = p1.openMomentCommentReport,
+			openBlockUser = p1.openBlockUser
+		}
+	end, {
+		if FFlagProfileRenderAvatarMoments then NoFFlagProfileRenderAvatarMoments else nil,
+		p1.openProfile, p1.openOwnMoments,
+		if FFlagMomentsCreateAvatarPosts then p1.openAvatarMomentsCreation else nil,
+		p1.openMomentsFeedReport, p1.openMomentCommentReport, p1.openBlockUser,
+		if FFlagMomentsAvatarLookTryOn then p1.openAvatarLookTryOn else nil
+	})
+	
+	if FFlagMomentsEngagementToastsModule and ActivitySubscriptionModule ~= nil then
+		local SubscribeFunction = ActivitySubscriptionModule.subscribe
+		ReactModule.useEffect(function()
+			-- upvalues: SubscribeFunction (copy)
+			SubscribeFunction()
+		end, {})
+	end
 	local NoFFlagMomentsOverlaysInTopShellOnlyModule = not FFlagMomentsOverlaysInTopShellOnlyModule or NoFFlagProfileRenderAvatarMoments
 	
 	return ReactModule.createElement(MomentsSessionContextModule.MomentsSessionContext.Provider, { value = p1.sessionStore }, {
-		Host = ReactModule.createElement(MomentsHostContextModule.MomentsHostContext.Provider, {
-			value = ReactModule.useMemo(function()
-				-- upvalues: FFlagProfileRenderAvatarMoments (upval), NoFFlagProfileRenderAvatarMoments (ref), p1 (copy), FFlagMomentsCreateAvatarPosts (upval), FFlagMomentsAvatarLookTryOn (upval)
-				return {
-					isTopShell = if FFlagProfileRenderAvatarMoments then NoFFlagProfileRenderAvatarMoments else nil,
-					openProfile = p1.openProfile,
-					openOwnMoments = p1.openOwnMoments,
-					openAvatarMomentsCreation = if FFlagMomentsCreateAvatarPosts then p1.openAvatarMomentsCreation else nil,
-					openMomentsFeedReport = p1.openMomentsFeedReport,
-					openAvatarLookTryOn = if FFlagMomentsAvatarLookTryOn then p1.openAvatarLookTryOn else nil,
-					openMomentCommentReport = p1.openMomentCommentReport,
-					openBlockUser = p1.openBlockUser
-				}
-			end, {
-				if FFlagProfileRenderAvatarMoments then NoFFlagProfileRenderAvatarMoments else nil,
-				p1.openProfile, p1.openOwnMoments,
-				if FFlagMomentsCreateAvatarPosts then p1.openAvatarMomentsCreation else nil,
-				p1.openMomentsFeedReport, p1.openMomentCommentReport, p1.openBlockUser,
-				if FFlagMomentsAvatarLookTryOn then p1.openAvatarLookTryOn else nil
-			})
-		}, {
+		Host = ReactModule.createElement(MomentsHostContextModule.MomentsHostContext.Provider, { value = UseMemoResult }, {
 			Content = ReactModule.createElement(ReactModule.Fragment, nil, p1.children, if NoFFlagMomentsOverlaysInTopShellOnlyModule then ReactModule.createElement(ExperienceDetailsSheet) else nil, if FFlagMomentsComments and SheetModule ~= nil and NoFFlagMomentsOverlaysInTopShellOnlyModule then ReactModule.createElement(SheetModule.CommentsSheetContainer) else nil, if FFlagMomentsCreatorAnalyticsModule and PostInsightsModule ~= nil and NoFFlagMomentsOverlaysInTopShellOnlyModule then ReactModule.createElement(PostInsightsModule.PostInsightsPageContainer) else nil, if FFlagMomentsPostFeedback and NoFFlagMomentsOverlaysInTopShellOnlyModule then ReactModule.createElement(getPostStatusCardContainer()) else nil, if NoFFlagMomentsOverlaysInTopShellOnlyModule then ReactModule.createElement(ToastOverlayModule) else nil)
 		})
 	})

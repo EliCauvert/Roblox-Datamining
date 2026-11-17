@@ -467,6 +467,8 @@
 	FFlagAXSpawnEffectPlayOnEquip = require(script.FFlagAXSpawnEffectPlayOnEquip),
 	FIntAXSpawnEffectPreviewPauseSeconds = require(script.FIntAXSpawnEffectPreviewPauseSeconds),
 	FIntAXSpawnEffectPlaySeconds = require(script.FIntAXSpawnEffectPlaySeconds),
+	FFlagAXSpawnEffectPlayInMs = require(script.FFlagAXSpawnEffectPlayInMs),
+	FIntAXSpawnEffectPlayMs = require(script.FIntAXSpawnEffectPlayMs),
 	FIntAXSpawnEffectEmitterFadeSeconds = require(script.FIntAXSpawnEffectEmitterFadeSeconds),
 	FFlagAXOutfitDetailsSplitPaneWidth = require(script.FFlagAXOutfitDetailsSplitPaneWidth),
 	FFlagAXCategoryMenuButtonsFromCategoryData = require(script.FFlagAXCategoryMenuButtonsFromCategoryData),

@@ -17,6 +17,7 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local UseOpenWebViewFunction = require(Parent.WebViewUtils).useOpenWebView
 local FFlagEnablePaidAdsModule = require(BuildExperience.Flags.FFlagEnablePaidAds)
 local FFlagBuildAdsManagerUniverseUrlModule = require(BuildExperience.Flags.FFlagBuildAdsManagerUniverseUrl)
+local FFlagBuildAdsFundedNotCreatedError = require(Parent.SharedFlags).FFlagBuildAdsFundedNotCreatedError
 local FFlagBuildExperienceAdsAndRobuxTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceAdsAndRobuxTelemetry)
 local GetAdsManagerUrlModule = require(script.Parent.Parent.getAdsManagerUrl)
 local AdCampaignEligibilityUtilsModule = require(script.Parent.Parent.adCampaignEligibilityUtils)
@@ -34,6 +35,13 @@ local CampaignEndMsFunction = require(script.Parent.Parent.adCampaignScheduleUti
 local UseDefaultFocusBehaviorFunction = ReactFocusNavigationModule.useDefaultFocusBehavior
 local UseFocusRootFunction = FocusNavigationUtilsModule.useFocusRoot
 local Signal = SignalsModule.createSignal({ status = "succeeded" })
+local config = {
+	isDismissed = false,
+	isRetryPending = false,
+	isSheetHiddenAfterRetry = false,
+	markRetrying = function() end,
+	markDismissed = function() end
+}
 local EventMap = {
 	[Enum.KeyCode.ButtonB] = FocusNavigationEventNameEnum.NavigateBack,
 	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
@@ -76,8 +84,8 @@ local function toCampaignOption(Feedback, Title, RunDates, Description, Free)
 	}
 end
 
-local function useTwoOptionsControls(IsFocusable, Callback, Callback2, CampaignOffers, IsIsCreatePending, IsHasCreateError, Callback1, AttemptedOption, AdsManager, UniverseId, UniverseId1)
-	-- upvalues: ResponsiveModule (copy), CreatorAgentChatModule (copy), AdCampaignEligibilityUtilsModule (copy), ReactModule (copy), SignalsReactModule (copy), Signal (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), UseDefaultFocusBehaviorFunction (copy), UseOpenBuyRobuxWebViewModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), GetAdsManagerUrlModule (copy), UseOpenWebViewWithResumeRefreshModule (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), SendBuildExperienceEventModule (copy)
+local function useTwoOptionsControls(IsOpen, Callback1, Callback, CampaignOffers, IsIsCreatePending, IsHasCreateError, Callback2, AttemptedOption, AdsManager, UniverseId, NoIsDismissed, IsRetryPending, IsSheetHiddenAfterRetry, p3, UniverseId1)
+	-- upvalues: ResponsiveModule (copy), CreatorAgentChatModule (copy), AdCampaignEligibilityUtilsModule (copy), ReactModule (copy), SignalsReactModule (copy), Signal (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), FFlagBuildAdsFundedNotCreatedError (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), UseDefaultFocusBehaviorFunction (copy), UseOpenBuyRobuxWebViewModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), GetAdsManagerUrlModule (copy), UseOpenWebViewWithResumeRefreshModule (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), SendBuildExperienceEventModule (copy)
 	local UsePreferredInputResult = ResponsiveModule.usePreferredInput()
 	local AdCampaignCheckFundsFunction = CreatorAgentChatModule.getCreatorAgentChatStore(false).adCampaignCheckFunds
 	local DefaultOffer = AdCampaignEligibilityUtilsModule.getDefaultOffer(CampaignOffers)
@@ -86,14 +94,14 @@ local function useTwoOptionsControls(IsFocusable, Callback, Callback2, CampaignO
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(if UseStateResult1 == nil then Signal else UseStateResult1.state)
-	local UseResult = ReactModule.useCallback(function(p3)
+	local UseResult = ReactModule.useCallback(function(p4)
 		-- upvalues: UseStateResult2_1 (copy), AdCampaignCheckFundsFunction (copy)
-		if p3 == nil or p3.fundingType ~= "paid" then
+		if p4 == nil or p4.fundingType ~= "paid" then
 			UseStateResult2_1(nil)
 			
 			return
 		else
-			UseStateResult2_1(AdCampaignCheckFundsFunction({ campaignOption = p3.campaignOption }))
+			UseStateResult2_1(AdCampaignCheckFundsFunction({ campaignOption = p4.campaignOption }))
 		end
 	end, { AdCampaignCheckFundsFunction })
 	ReactModule.useEffect(function()
@@ -105,12 +113,12 @@ local function useTwoOptionsControls(IsFocusable, Callback, Callback2, CampaignO
 		end
 	end, { UseStateResult1 or false })
 	ReactModule.useEffect(function()
-		-- upvalues: IsFocusable (copy), IsHasCreateError (copy), UseStateResult2 (copy), CampaignOption (copy), UseStateResult2_1 (copy), IsIsCreatePending (copy), CampaignOffers (copy)
-		if IsFocusable then
-			UseStateResult2(function(p3)
+		-- upvalues: IsOpen (copy), IsHasCreateError (copy), UseStateResult2 (copy), CampaignOption (copy), UseStateResult2_1 (copy), IsIsCreatePending (copy), CampaignOffers (copy)
+		if IsOpen then
+			UseStateResult2(function(p4)
 				-- upvalues: IsIsCreatePending (upval), IsHasCreateError (upval), CampaignOffers (upval), CampaignOption (upval)
-				if (IsIsCreatePending or IsHasCreateError) and (if p3 == "feedback" then CampaignOffers.feedback elseif p3 == "plays" then CampaignOffers.plays else nil) ~= nil then
-					return p3
+				if (IsIsCreatePending or IsHasCreateError) and (if p4 == "feedback" then CampaignOffers.feedback elseif p4 == "plays" then CampaignOffers.plays else nil) ~= nil then
+					return p4
 				else
 					return CampaignOption
 				end
@@ -123,7 +131,7 @@ local function useTwoOptionsControls(IsFocusable, Callback, Callback2, CampaignO
 		end
 		UseStateResult2_1(nil)
 	end, {
-		IsFocusable,
+		IsOpen,
 		IsIsCreatePending,
 		IsHasCreateError,
 		CampaignOption,
@@ -132,40 +140,46 @@ local function useTwoOptionsControls(IsFocusable, Callback, Callback2, CampaignO
 	local Feedback = if UseStateResult == "feedback" then CampaignOffers.feedback elseif UseStateResult == "plays" then CampaignOffers.plays else nil
 	local NoCurrent: boolean = IsHasCreateError and (UseRefResult.current == nil or UseRefResult.current == UseStateResult)
 	ReactModule.useEffect(function()
-		-- upvalues: IsFocusable (copy), NoCurrent (copy), IsIsCreatePending (copy), UseResult (copy), Feedback (copy)
-		if IsFocusable and not NoCurrent and not IsIsCreatePending then
+		-- upvalues: IsOpen (copy), NoCurrent (copy), IsIsCreatePending (copy), UseResult (copy), Feedback (copy)
+		if IsOpen and not NoCurrent and not IsIsCreatePending then
 			UseResult(Feedback)
 		end
 	end, {
-		IsFocusable,
+		IsOpen,
 		IsIsCreatePending,
 		NoCurrent,
 		Feedback,
 		UseResult
 	})
+	local NoCurrent1 = FFlagBuildAdsFundedNotCreatedError and (IsOpen and (NoIsDismissed and NoCurrent or IsRetryPending))
+	local NoCurrent1_1 = FFlagBuildAdsFundedNotCreatedError and (NoCurrent1 or IsSheetHiddenAfterRetry)
 	local UseDefaultFocusBehaviorResult, UseDefaultFocusBehaviorResult2 = UseDefaultFocusBehaviorFunction((UseFocusRootFunction({
 		isAutoFocusRoot = true,
 		shouldRestoreFocus = false,
 		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
-		isFocusable = IsFocusable,
+		isFocusable = IsOpen and not NoCurrent1_1,
 		eventMap = EventMap,
 		eventHandlers = ReactModule.useMemo(function()
-			-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), Callback (copy)
+			-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), Callback1 (copy)
 			return {
 				[FocusNavigationEventNameEnum.NavigateBack] = {
-					handler = InputHandlersModule.onRelease(function(p3)
-						-- upvalues: Callback (upval)
-						Callback()
-						p3:cancel()
+					handler = InputHandlersModule.onRelease(function(p4)
+						-- upvalues: Callback1 (upval)
+						Callback1()
+						p4:cancel()
 					end)
 				}
 			}
-		end, { Callback })
+		end, { Callback1 })
 	})))
-	local UseResult1 = ReactModule.useCallback(function(p3)
-		-- upvalues: UseStateResult2 (copy)
-		UseStateResult2(p3)
-	end, {})
+	local UseResult1 = ReactModule.useCallback(function(p4)
+		-- upvalues: FFlagBuildAdsFundedNotCreatedError (upval), p3 (copy), UseStateResult2 (copy)
+		if not FFlagBuildAdsFundedNotCreatedError or not p3 then
+			UseStateResult2(p4)
+			
+			return
+		end
+	end, { p3 })
 	local Result = UseSignalStateResult.result
 	local IsPaid: boolean = Feedback ~= nil and Feedback.fundingType == "paid"
 	local NoUseStateResult: boolean = not IsIsCreatePending and (not NoCurrent and (IsPaid and (UseStateResult1 == nil or UseSignalStateResult.status == "pending")))
@@ -173,30 +187,30 @@ local function useTwoOptionsControls(IsFocusable, Callback, Callback2, CampaignO
 	local CanFund = IsPaid and (UseSignalStateResult.status == "succeeded" and (Result ~= nil and Result.canFund))
 	local NoCanFund: boolean = not IsIsCreatePending and (not NoCurrent and (IsPaid and (UseSignalStateResult.status == "succeeded" and (Result ~= nil and not Result.canFund))))
 	local UseResult2 = ReactModule.useCallback(function()
-		-- upvalues: Callback1 (copy), IsFocusable (copy), IsPaid (copy), UseResult (copy), Feedback (copy)
-		Callback1()
+		-- upvalues: Callback2 (copy), IsOpen (copy), IsPaid (copy), UseResult (copy), Feedback (copy)
+		Callback2()
 		
-		if IsFocusable and IsPaid then
+		if IsOpen and IsPaid then
 			UseResult(Feedback)
 		end
 	end, {
-		IsFocusable,
+		IsOpen,
 		IsPaid,
 		Feedback,
 		UseResult,
-		Callback1
+		Callback2
 	})
 	local UseOpenBuyRobuxWebViewModuleResult = UseOpenBuyRobuxWebViewModule(UseResult2)
 	local UseOpenWebViewWithResumeRefreshModuleResult = nil
 	UseOpenWebViewWithResumeRefreshModuleResult = if FFlagBuildAdsManagerUniverseUrlModule then UseOpenWebViewWithResumeRefreshModule(GetAdsManagerUrlModule.getAdsManagerUrl(UniverseId), AdsManager, UseResult2) else UseOpenWebViewWithResumeRefreshModule(GetAdsManagerUrlModule.getDefaultAdsManagerUrl(), AdsManager, UseResult2)
-	local UseResult3 = if FFlagBuildExperienceAdsAndRobuxTelemetryModule then ReactModule.useCallback(function(p3, Context)
+	local UseResult3 = if FFlagBuildExperienceAdsAndRobuxTelemetryModule then ReactModule.useCallback(function(p4, Context)
 		-- upvalues: UseStateResult (copy), SendBuildExperienceEventModule (upval), UniverseId1 (copy)
 		local config = { context = Context }
 		
 		if UseStateResult ~= nil then
 			config.campaignOption = UseStateResult
 		end
-		SendBuildExperienceEventModule(p3, { universeId = UniverseId1 }, config)
+		SendBuildExperienceEventModule(p4, { universeId = UniverseId1 }, config)
 	end, { UseStateResult, UniverseId1 }) else nil
 	local UseResult4 = if FFlagBuildExperienceAdsAndRobuxTelemetryModule then ReactModule.useCallback(function()
 		-- upvalues: UseResult3 (copy), UseOpenBuyRobuxWebViewModuleResult (copy)
@@ -223,11 +237,13 @@ local function useTwoOptionsControls(IsFocusable, Callback, Callback2, CampaignO
 		shouldBuyRobux = NoCanFund,
 		showAdCreditsCallout = not IsIsCreatePending and (CanFund and Result.fundingSource == "ad_credit"),
 		isErrorForSelectedOption = NoCurrent,
+		isFundedErrorDialogOpen = NoCurrent1,
+		isSheetHidden = NoCurrent1_1,
 		onOptionChanged = UseResult1,
 		onOpenBuyRobux = if FFlagBuildExperienceAdsAndRobuxTelemetryModule and UseResult4 ~= nil then UseResult4 else UseOpenBuyRobuxWebViewModuleResult,
 		onOpenAdsManager = if FFlagBuildExperienceAdsAndRobuxTelemetryModule and UseResult5 ~= nil then UseResult5 else UseOpenWebViewWithResumeRefreshModuleResult,
 		onCreate = ReactModule.useCallback(function()
-			-- upvalues: NoCanFund (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (upval), UseResult3 (copy), UseOpenBuyRobuxWebViewModuleResult (copy), IsFailed (copy), UseResult (copy), Feedback (copy), IsPaid (copy), NoCurrent (copy), CanFund (copy), UseRefResult (copy), Callback2 (copy)
+			-- upvalues: NoCanFund (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (upval), UseResult3 (copy), UseOpenBuyRobuxWebViewModuleResult (copy), IsFailed (copy), UseResult (copy), Feedback (copy), IsPaid (copy), NoCurrent (copy), CanFund (copy), UseRefResult (copy), Callback (copy)
 			if NoCanFund then
 				if FFlagBuildExperienceAdsAndRobuxTelemetryModule and UseResult3 ~= nil then
 					UseResult3("BUY_ROBUX_CLICK", "ad_campaign_primary")
@@ -243,7 +259,7 @@ local function useTwoOptionsControls(IsFocusable, Callback, Callback2, CampaignO
 				if IsPaid and not NoCurrent and not CanFund then return end
 				if Feedback ~= nil then
 					UseRefResult.current = Feedback.campaignOption
-					Callback2({
+					Callback({
 						paymentType = Feedback.fundingType,
 						campaignOption = Feedback.campaignOption
 					})
@@ -252,15 +268,72 @@ local function useTwoOptionsControls(IsFocusable, Callback, Callback2, CampaignO
 				end
 			end
 		end, {
-			Callback2, Feedback, NoCanFund, UseOpenBuyRobuxWebViewModuleResult, IsPaid,
+			Callback, Feedback, NoCanFund, UseOpenBuyRobuxWebViewModuleResult, IsPaid,
 			NoCurrent, CanFund, IsFailed, UseResult,
 			if FFlagBuildExperienceAdsAndRobuxTelemetryModule then UseResult3 else nil
 		})
 	}
 end
 
+local function useFundedErrorDialogFlow(WasOpen, WasCreatePending, IsHasCreateError)
+	-- upvalues: ReactModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState({
+		isDismissed = false,
+		isRetrying = false,
+		isHiddenAfterRetry = false,
+		wasCreatePending = WasCreatePending,
+		wasOpen = WasOpen
+	})
+	local Tbl = UseStateResult
+	
+	if UseStateResult.wasCreatePending ~= WasCreatePending or UseStateResult.wasOpen ~= WasOpen then
+		local NoWasCreatePending: boolean = UseStateResult.wasCreatePending and not WasCreatePending
+		Tbl = {
+			wasCreatePending = WasCreatePending,
+			wasOpen = WasOpen,
+			isDismissed = UseStateResult.isDismissed and not NoWasCreatePending,
+			isRetrying = UseStateResult.isRetrying and not NoWasCreatePending,
+			isHiddenAfterRetry = WasOpen and (UseStateResult.isHiddenAfterRetry or NoWasCreatePending and (UseStateResult.isRetrying and not IsHasCreateError))
+		}
+		UseStateResult2(Tbl)
+	end
+	return {
+		isDismissed = Tbl.isDismissed,
+		isRetryPending = WasCreatePending and Tbl.isRetrying,
+		isSheetHiddenAfterRetry = Tbl.isHiddenAfterRetry and (not WasCreatePending and not IsHasCreateError),
+		markRetrying = function()
+			-- upvalues: Tbl (ref), UseStateResult2 (copy)
+			local Copy = table.clone(Tbl)
+			Copy.isRetrying = true
+			UseStateResult2(Copy)
+		end,
+		markDismissed = function()
+			-- upvalues: Tbl (ref), UseStateResult2 (copy)
+			local Copy = table.clone(Tbl)
+			Copy.isDismissed = true
+			Copy.isRetrying = false
+			UseStateResult2(Copy)
+		end
+	}
+end
+
+local function useCloseWhileSheetShown(Current, Callback)
+	-- upvalues: ReactModule (copy)
+	local UseRefResult = ReactModule.useRef(Current)
+	UseRefResult.current = Current
+	
+	return ReactModule.useCallback(function()
+		-- upvalues: UseRefResult (copy), Callback (copy)
+		if not UseRefResult.current then
+			Callback()
+			
+			return
+		end
+	end, { Callback })
+end
+
 return function(p3)
-	-- upvalues: CreatorCreditModule (copy), ReactModule (copy), SignalsReactModule (copy), UseOpenWebViewFunction (copy), FFlagEnablePaidAdsModule (copy), CreateAdCampaignSheetConfigModule (copy), CampaignEndMsFunction (copy), LocalizationStringsModule (copy), UseLocalizationFunction (copy), useTwoOptionsControls (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), NumberLocalization (copy), LocalizationService (copy), DataStatus (copy), toCampaignOption (copy), IconName (copy)
+	-- upvalues: CreatorCreditModule (copy), ReactModule (copy), SignalsReactModule (copy), UseOpenWebViewFunction (copy), FFlagEnablePaidAdsModule (copy), CreateAdCampaignSheetConfigModule (copy), CampaignEndMsFunction (copy), LocalizationStringsModule (copy), FFlagBuildAdsFundedNotCreatedError (copy), UseLocalizationFunction (copy), config (copy), useFundedErrorDialogFlow (copy), useTwoOptionsControls (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), useCloseWhileSheetShown (copy), NumberLocalization (copy), LocalizationService (copy), DataStatus (copy), toCampaignOption (copy), IconName (copy)
 	local CreatorCreditStore = CreatorCreditModule.getCreatorCreditStore(false)
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: CreatorCreditStore (copy)
@@ -297,7 +370,7 @@ return function(p3)
 	end
 	local FormatAdCampaignSheetLocalDate = if p3.useLocalRunDates == true then LocalizationStringsModule.formatAdCampaignSheetLocalDate else LocalizationStringsModule.formatAdCampaignSheetDate
 	local FormatAdCampaignSheetLocalDateResult = FormatAdCampaignSheetLocalDate(RunStartTimeMs)
-	local config = {
+	local config1 = {
 		title = if FFlagEnablePaidAdsModule then LocalizationStringsModule.TWO_OPTIONS_AD_CAMPAIGN_SHEET_TITLE else LocalizationStringsModule.AD_CAMPAIGN_SHEET_TITLE,
 		description = {
 			LocalizationStringsModule.AD_CAMPAIGN_SHEET_DESCRIPTION,
@@ -331,52 +404,65 @@ return function(p3)
 	}
 	
 	if FFlagEnablePaidAdsModule then
-		config.forbiddenError = LocalizationStringsModule.AD_CAMPAIGN_SHEET_FORBIDDEN_ERROR
-		config.insufficientFundsError = LocalizationStringsModule.AD_CAMPAIGN_SHEET_INSUFFICIENT_FUNDS_ERROR
-		config.internalError = LocalizationStringsModule.AD_CAMPAIGN_SHEET_INTERNAL_ERROR
-		config.missingThumbnailError = LocalizationStringsModule.AD_CAMPAIGN_SHEET_MISSING_THUMBNAIL_ERROR
-		config.introduction = LocalizationStringsModule.TWO_OPTIONS_AD_CAMPAIGN_SHEET_INTRODUCTION
-		config.startCampaignTitle = LocalizationStringsModule.TWO_OPTIONS_AD_CAMPAIGN_SHEET_CAMPAIGN_PICKER_TITLE
+		config1.forbiddenError = LocalizationStringsModule.AD_CAMPAIGN_SHEET_FORBIDDEN_ERROR
+		config1.insufficientFundsError = LocalizationStringsModule.AD_CAMPAIGN_SHEET_INSUFFICIENT_FUNDS_ERROR
+		config1.internalError = LocalizationStringsModule.AD_CAMPAIGN_SHEET_INTERNAL_ERROR
+		config1.missingThumbnailError = LocalizationStringsModule.AD_CAMPAIGN_SHEET_MISSING_THUMBNAIL_ERROR
+		config1.introduction = LocalizationStringsModule.TWO_OPTIONS_AD_CAMPAIGN_SHEET_INTRODUCTION
+		config1.startCampaignTitle = LocalizationStringsModule.TWO_OPTIONS_AD_CAMPAIGN_SHEET_CAMPAIGN_PICKER_TITLE
 		
 		if Feedback ~= nil then
-			config.feedbackOptionTitle = {
+			config1.feedbackOptionTitle = {
 				LocalizationStringsModule.TWO_OPTIONS_AD_CAMPAIGN_SHEET_OPTION_TITLE,
 				durationDays = Feedback.durationDays
 			}
-			config.feedbackRunDates = {
+			config1.feedbackRunDates = {
 				LocalizationStringsModule.AD_CAMPAIGN_SHEET_RUN_DATES,
 				startDate = FormatAdCampaignSheetLocalDateResult,
 				endDate = FormatAdCampaignSheetLocalDate(CampaignEndMsFunction(RunStartTimeMs, Feedback.durationDays))
 			}
-			config.feedbackDescription = LocalizationStringsModule.TWO_OPTIONS_AD_CAMPAIGN_SHEET_SHORT_DESCRIPTION
+			config1.feedbackDescription = LocalizationStringsModule.TWO_OPTIONS_AD_CAMPAIGN_SHEET_SHORT_DESCRIPTION
 		end
 		if Plays ~= nil then
-			config.playsOptionTitle = {
+			config1.playsOptionTitle = {
 				LocalizationStringsModule.TWO_OPTIONS_AD_CAMPAIGN_SHEET_OPTION_TITLE,
 				durationDays = Plays.durationDays
 			}
-			config.playsRunDates = {
+			config1.playsRunDates = {
 				LocalizationStringsModule.AD_CAMPAIGN_SHEET_RUN_DATES,
 				startDate = FormatAdCampaignSheetLocalDateResult,
 				endDate = FormatAdCampaignSheetLocalDate(CampaignEndMsFunction(RunStartTimeMs, Plays.durationDays))
 			}
-			config.playsDescription = LocalizationStringsModule.TWO_OPTIONS_AD_CAMPAIGN_SHEET_LONG_DESCRIPTION
+			config1.playsDescription = LocalizationStringsModule.TWO_OPTIONS_AD_CAMPAIGN_SHEET_LONG_DESCRIPTION
 		end
-		config.buyRobux = LocalizationStringsModule.CREATOR_CREDIT_BUY_ROBUX_BUTTON
-		config.adCreditsTitle = LocalizationStringsModule.TWO_OPTIONS_AD_CAMPAIGN_SHEET_AD_CREDITS_TITLE
-		config.adCreditsAction = LocalizationStringsModule.TWO_OPTIONS_AD_CAMPAIGN_SHEET_AD_CREDITS_ACTION
-		config.adsManager = LocalizationStringsModule.ADS_STATS_ADS_MANAGER
+		config1.buyRobux = LocalizationStringsModule.CREATOR_CREDIT_BUY_ROBUX_BUTTON
+		config1.adCreditsTitle = LocalizationStringsModule.TWO_OPTIONS_AD_CAMPAIGN_SHEET_AD_CREDITS_TITLE
+		config1.adCreditsAction = LocalizationStringsModule.TWO_OPTIONS_AD_CAMPAIGN_SHEET_AD_CREDITS_ACTION
+		config1.adsManager = LocalizationStringsModule.ADS_STATS_ADS_MANAGER
+		
+		if FFlagBuildAdsFundedNotCreatedError then
+			config1.fundedNotCreatedTitle = LocalizationStringsModule.AD_CAMPAIGN_SHEET_FUNDED_NOT_CREATED_TITLE
+			config1.fundedNotCreatedDescription = LocalizationStringsModule.AD_CAMPAIGN_SHEET_FUNDED_NOT_CREATED_DESCRIPTION
+			config1.retry = LocalizationStringsModule.AD_CAMPAIGN_SHEET_RETRY
+		end
 	end
-	local UseLocalizationResult = UseLocalizationFunction(config)
+	local UseLocalizationResult = UseLocalizationFunction(config1)
 	local IsWaitForCreateResult = p3.waitForCreateResult == true
 	local IsIsCreatePending: boolean = IsWaitForCreateResult and p3.isCreatePending == true
 	local IsHasCreateError: boolean = IsWaitForCreateResult and p3.hasCreateError == true
+	local IsFundedNotCreated: boolean = FFlagBuildAdsFundedNotCreatedError and (FFlagEnablePaidAdsModule and p3.createErrorKind == "funded_not_created")
+	local UseFundedErrorDialogFlowResult = if FFlagBuildAdsFundedNotCreatedError then useFundedErrorDialogFlow(p3.isOpen, IsIsCreatePending, IsHasCreateError) else config
 	local CreateError = UseLocalizationResult.createError
 	
 	if FFlagEnablePaidAdsModule and IsHasCreateError then
 		local CreateErrorKind = p3.createErrorKind
 		CreateError = if CreateErrorKind == "payment_required" then UseLocalizationResult.insufficientFundsError elseif CreateErrorKind == "ineligible" then UseLocalizationResult.forbiddenError elseif CreateErrorKind == "missing_thumbnail" then UseLocalizationResult.missingThumbnailError else UseLocalizationResult.internalError
 	end
+	if IsFundedNotCreated then
+		CreateError = UseLocalizationResult.fundedNotCreatedDescription
+	end
+	local NoIsDismissed: boolean = IsFundedNotCreated and not UseFundedErrorDialogFlowResult.isDismissed
+	local IsHasCreateError1: boolean = IsFundedNotCreated and IsHasCreateError
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: IsIsCreatePending (copy), p3 (copy)
 		if not IsIsCreatePending then
@@ -404,25 +490,26 @@ return function(p3)
 	local UseTwoOptionsControlsResult = if FFlagEnablePaidAdsModule then useTwoOptionsControls(p3.isOpen, UseResult, UseResult1, CampaignOffers, IsIsCreatePending, IsHasCreateError, ReactModule.useCallback(function()
 		-- upvalues: CreatorCreditStore (copy)
 		CreatorCreditStore.refreshQuotaSummary():catch(function() end)
-	end, { CreatorCreditStore }), p3.attemptedOption, UseLocalizationResult.adsManager, if FFlagBuildAdsManagerUniverseUrlModule then p3.universeId else nil, if FFlagBuildExperienceAdsAndRobuxTelemetryModule then p3.universeId else nil) else nil
+	end, { CreatorCreditStore }), p3.attemptedOption, UseLocalizationResult.adsManager, if FFlagBuildAdsManagerUniverseUrlModule then p3.universeId else nil, NoIsDismissed, UseFundedErrorDialogFlowResult.isRetryPending, UseFundedErrorDialogFlowResult.isSheetHiddenAfterRetry, IsHasCreateError1, if FFlagBuildExperienceAdsAndRobuxTelemetryModule then p3.universeId else nil) else nil
+	local UseCloseWhileSheetShownResult = if FFlagBuildAdsFundedNotCreatedError then useCloseWhileSheetShown(UseTwoOptionsControlsResult ~= nil and UseTwoOptionsControlsResult.isSheetHidden, UseResult) else UseResult
+	local BALANCELOADING = nil
 	local BalanceState = nil
-	local BALANCEUNAVAILABLE = nil
 	
 	if UseSignalStateResult == nil then
 		if UseSignalStateResult1 == DataStatus.Failed then
 			BalanceState = "failed"
-			BALANCEUNAVAILABLE = CreateAdCampaignSheetConfigModule.BALANCE_UNAVAILABLE
+			BALANCELOADING = CreateAdCampaignSheetConfigModule.BALANCE_UNAVAILABLE
 		else
 			BalanceState = "loading"
-			BALANCEUNAVAILABLE = CreateAdCampaignSheetConfigModule.BALANCE_LOADING
+			BALANCELOADING = CreateAdCampaignSheetConfigModule.BALANCE_LOADING
 		end
 	else
 		BalanceState = "ready"
-		BALANCEUNAVAILABLE = NumberLocalization.localize(string.format("%.0f", (math.floor(UseSignalStateResult.robuxBalance))), LocalizationService.RobloxLocaleId)
+		BALANCELOADING = NumberLocalization.localize(string.format("%.0f", (math.floor(UseSignalStateResult.robuxBalance))), LocalizationService.RobloxLocaleId)
 	end
 	return if FFlagEnablePaidAdsModule then {
 		variant = "twoOptions",
-		isOpen = p3.isOpen,
+		isOpen = p3.isOpen and not UseTwoOptionsControlsResult.isSheetHidden,
 		sheetRootRef = UseTwoOptionsControlsResult.sheetRootRef,
 		title = UseLocalizationResult.title,
 		description = UseLocalizationResult.introduction,
@@ -440,15 +527,36 @@ return function(p3)
 		showAdCreditsCallout = UseTwoOptionsControlsResult.showAdCreditsCallout,
 		adCreditsTitle = UseLocalizationResult.adCreditsTitle,
 		adCreditsAction = UseLocalizationResult.adCreditsAction,
-		hasCreateError = UseTwoOptionsControlsResult.isErrorForSelectedOption,
+		hasCreateError = UseTwoOptionsControlsResult.isErrorForSelectedOption and not NoIsDismissed,
 		createErrorText = CreateError,
+		fundedErrorDialog = if UseTwoOptionsControlsResult.isFundedErrorDialogOpen then {
+			title = UseLocalizationResult.fundedNotCreatedTitle,
+			description = UseLocalizationResult.fundedNotCreatedDescription,
+			retryText = UseLocalizationResult.retry,
+			isRetryPending = IsIsCreatePending,
+			onRetry = function()
+				-- upvalues: UseFundedErrorDialogFlowResult (ref), UseTwoOptionsControlsResult (copy)
+				UseFundedErrorDialogFlowResult.markRetrying()
+				UseTwoOptionsControlsResult.onCreate()
+			end,
+			onDismiss = function()
+				-- upvalues: IsIsCreatePending (copy), UseFundedErrorDialogFlowResult (ref), UseResult (copy)
+				if not IsIsCreatePending then
+					UseFundedErrorDialogFlowResult.markDismissed()
+					UseResult()
+					
+					return
+				end
+			end
+		} else nil,
+		isOptionLocked = if FFlagBuildAdsFundedNotCreatedError then IsHasCreateError1 else nil,
 		balanceState = BalanceState,
-		balanceText = BALANCEUNAVAILABLE,
+		balanceText = BALANCELOADING,
 		showCloseButton = UseTwoOptionsControlsResult.showCloseButton,
 		onOptionChanged = UseTwoOptionsControlsResult.onOptionChanged,
 		onOpenBuyRobux = UseTwoOptionsControlsResult.onOpenBuyRobux,
 		onOpenAdsManager = UseTwoOptionsControlsResult.onOpenAdsManager,
-		onClose = UseResult,
+		onClose = UseCloseWhileSheetShownResult,
 		onCreate = UseTwoOptionsControlsResult.onCreate,
 		onAdvertisingTerms = UseResult2,
 		onAdvertisingStandards = UseResult3
@@ -484,7 +592,7 @@ return function(p3)
 		createText = UseLocalizationResult.create,
 		moderationNotice = UseLocalizationResult.moderationNotice,
 		balanceState = BalanceState,
-		balanceText = BALANCEUNAVAILABLE,
+		balanceText = BALANCELOADING,
 		isCreatePending = IsIsCreatePending,
 		hasCreateError = IsHasCreateError,
 		createErrorText = CreateError,

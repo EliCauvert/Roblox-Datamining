@@ -2220,6 +2220,7 @@ Feature.Build.Description.ActivateSubscription,إتاحة الاشتراك {PROD
 Feature.Build.Description.AdCampaignModerationReview,نراجع كل إعلان قبل عرضه. قد يستغرق ذلك ما يصل إلى 24 ساعة.
 Feature.Build.Description.AdCampaignSheetRunDates,يُعرض من {startDate} إلى {endDate}
 Feature.Build.Description.AdComplete,انتهى إعلانك. اطّلع على أدائه.
+Feature.Build.Description.AdCreditsSavedForRetry,حفظنا عملات Robux الخاصة بك كرصيد إعلاني. حاول مرة أخرى وسنستخدمه لهذا الإعلان.
 Feature.Build.Description.AdModerationReview,
 Feature.Build.Description.AdvancedModel,الأفضل للألعاب المعقدة. يُستهلك الاستخدام بشكل أسرع.
 Feature.Build.Description.AdvertisingAgreement,"من خلال تحديد ""إنشاء""، فإنك توافق على {advertisingTermsStart}شروط الإعلان{advertisingTermsEnd} و{advertisingStandardsStart}معايير الإعلان{advertisingStandardsEnd} لدى منصّة Roblox."
@@ -2620,6 +2621,7 @@ Feature.Build.Title.AdCampaignDuration,إعلان لمدة {durationDays} من �
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} من الأيام
 Feature.Build.Title.AdComplete,اكتمل الإعلان
 Feature.Build.Title.AdCreatedPeriod,تم إنشاء الإعلان.
+Feature.Build.Title.AdNotCreated,لم نتمكن من إنشاء إعلانك
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,إضافة صور
 Feature.Build.Title.AdsStatsEmpty,
@@ -2676,6 +2678,7 @@ Feature.Build.Title.VersionInfo,معلومات الإصدار
 Feature.Build.Title.VersionNumber,الإصدار {VERSION}
 Feature.Build.Title.Versions,الإصدارات
 Feature.Build.Title.WhatsIncluded,ما الذي تشمله الحملة؟
+Feature.BuyRobux.Action.ContentPersonalization,تخصيص المحتوى
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.Allow,السماح
 Feature.Captures.Action.AllowPhotoAccessAccepted,

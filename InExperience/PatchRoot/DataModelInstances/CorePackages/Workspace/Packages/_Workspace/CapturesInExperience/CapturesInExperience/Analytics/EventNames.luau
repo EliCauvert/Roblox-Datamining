@@ -6,6 +6,7 @@
 	CapturesActivatedInGameMenu = "CapturesActivatedInGameMenu",
 	CapturesCarouselClosed = "CapturesCarouselClosed",
 	CapturesCarouselClosedByKeyboard = "CapturesCarouselClosedByKeyboard",
+	CapturesCarouselCreateMomentActivated = "CapturesCarouselCreateMomentActivated",
 	CapturesCarouselNavigated = "CapturesCarouselNavigated",
 	CapturesCarouselNavigatedByKeyboard = "CapturesCarouselNavigatedByKeyboard",
 	CapturesCarouselOpened = "CapturesCarouselOpened",

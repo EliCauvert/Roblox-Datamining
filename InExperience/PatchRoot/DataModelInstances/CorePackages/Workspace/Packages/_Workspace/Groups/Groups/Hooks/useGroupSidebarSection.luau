@@ -7,6 +7,7 @@ local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
 local DataHydrationModule = require(Parent.DataHydration)
 local UseGroupsWrapperContextModule = require(Groups.Contexts.useGroupsWrapperContext)
 local GroupSidebarContextModule = require(Groups.Contexts.GroupSidebarContext)
+local UseOnChangeModule = require(Groups.Hooks.useOnChange)
 local ConstantsModule = require(Groups.Common.constants)
 local GetGroupSduiPageConfigFunction = require(Groups.Common.getGroupSduiPageConfig).getGroupSduiPageConfig
 local FetchGroupSduiPageModule = require(Groups.Common.fetchGroupSduiPage)
@@ -22,7 +23,7 @@ local function noRefreshes(): number
 end
 
 return function(p1, GroupId)
-	-- upvalues: UseGroupsWrapperContextModule (copy), ReactModule (copy), GroupSidebarContextModule (copy), GetGroupSduiPageConfigFunction (copy), SduiSharedUtilitiesModule (copy), SignalsReactModule (copy), FetchGroupSduiPageModule (copy), ConstantsModule (copy), GroupSidebarActionsModule (copy), noRefreshes (copy), DataHydrationModule (copy)
+	-- upvalues: UseGroupsWrapperContextModule (copy), ReactModule (copy), GroupSidebarContextModule (copy), GetGroupSduiPageConfigFunction (copy), SduiSharedUtilitiesModule (copy), SignalsReactModule (copy), FetchGroupSduiPageModule (copy), ConstantsModule (copy), GroupSidebarActionsModule (copy), noRefreshes (copy), UseOnChangeModule (copy), DataHydrationModule (copy)
 	local UseGroupsWrapperContextModuleResult = UseGroupsWrapperContextModule()
 	local UseContextResult = ReactModule.useContext(GroupSidebarContextModule)
 	local ConfigKey = p1.configKey
@@ -65,63 +66,80 @@ return function(p1, GroupId)
 		return SduiSharedUtilitiesModule.getSduiApiStore().getData(ConfigKey1).status(p2)
 	end, { ConfigKey1 })))
 	local UseResult2 = ReactModule.useCallback(function(p2)
-		-- upvalues: UseMemoResult (copy), SduiSharedUtilitiesModule (upval), FetchGroupSduiPageModule (upval), ConstantsModule (upval)
+		-- upvalues: UseMemoResult (copy), SduiSharedUtilitiesModule (upval), UseContextResult (copy), FetchGroupSduiPageModule (upval), ConstantsModule (upval)
 		if UseMemoResult then
 			local LoadTimer = SduiSharedUtilitiesModule.SduiLoadTimer.createLoadTimer(UseMemoResult.surfaceKey)
 			LoadTimer.start(if p2 then "refresh" else "mount")
+			local CountForLoadResult = if UseContextResult then UseContextResult.countForLoad(UseMemoResult.configKey) else nil
 			local GroupSduiPageModule = FetchGroupSduiPageModule(UseMemoResult, LoadTimer, p2, ConstantsModule.SIDEBAR_STALE_TIME_SEC)
 			
 			if p2 then
 				GroupSduiPageModule:finally(LoadTimer.logRefreshComplete)
-				
-				return
+			else
+				GroupSduiPageModule:andThen(LoadTimer.logComponentReady, function() end)
 			end
-			GroupSduiPageModule:andThen(LoadTimer.logComponentReady, function() end)
+			if UseContextResult then
+				GroupSduiPageModule:andThen(function()
+					-- upvalues: UseContextResult (upval), UseMemoResult (upval), CountForLoadResult (copy)
+					UseContextResult.markLoaded(UseMemoResult.configKey, CountForLoadResult)
+				end, function() end)
+			end
 		end
-	end, { UseMemoResult })
+	end, { UseMemoResult, UseContextResult })
 	ReactModule.useEffect(function()
-		-- upvalues: UseMemoResult (copy), UseRefResult (copy), SduiSharedUtilitiesModule (upval), ConfigKey (copy), UseResult (copy), ConstantsModule (upval), UseResult2 (copy)
+		-- upvalues: UseMemoResult (copy), UseRefResult (copy), UseContextResult (copy), SduiSharedUtilitiesModule (upval), ConfigKey (copy), UseResult (copy), ConstantsModule (upval), UseResult2 (copy)
 		if not UseMemoResult then return end
 		UseRefResult.current = os.clock()
+		local MissedRefreshResult = UseContextResult ~= nil and UseContextResult.missedRefresh(UseMemoResult.configKey)
 		local SduiApiStore = SduiSharedUtilitiesModule.getSduiApiStore()
 		local DataUpdatedTimestamp = if ConfigKey then SduiApiStore.getDataUpdatedTimestamp(ConfigKey, false, `{ConfigKey}_groupSidebarSection`) else nil
 		
-		if UseResult(false) == nil or (DataUpdatedTimestamp == nil or os.clock() - DataUpdatedTimestamp >= ConstantsModule.SIDEBAR_STALE_TIME_SEC) then
-			UseResult2(false)
+		if MissedRefreshResult or UseResult(false) == nil or (DataUpdatedTimestamp == nil or os.clock() - DataUpdatedTimestamp >= ConstantsModule.SIDEBAR_STALE_TIME_SEC) then
+			UseResult2(MissedRefreshResult)
 			
 			return
 		end
-	end, { UseMemoResult, UseResult2, UseResult, ConfigKey })
+		if UseContextResult then
+			UseContextResult.markLoaded(UseMemoResult.configKey, UseContextResult.sectionRefreshCount(false))
+		end
+	end, {
+		UseMemoResult,
+		UseResult2,
+		UseResult,
+		ConfigKey,
+		UseContextResult
+	})
 	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult (copy), ConfigKey (copy), GroupSidebarActionsModule (upval)
 		return if UseMemoResult and ConfigKey then GroupSidebarActionsModule.link(UseMemoResult.configKey, ConfigKey) else function() end
 	end, { UseMemoResult, ConfigKey })
 	local UseSignalStateResult4 = SignalsReactModule.useSignalState(if UseContextResult then UseContextResult.sectionRefreshCount else noRefreshes)
-	local UseRefResult1 = ReactModule.useRef(UseSignalStateResult4)
-	ReactModule.useEffect(function()
-		-- upvalues: UseSignalStateResult4 (copy), UseRefResult1 (copy), UseResult1 (copy), UseRefResult (copy), UseResult2 (copy)
-		if UseSignalStateResult4 ~= UseRefResult1.current then
-			UseRefResult1.current = UseSignalStateResult4
-			local UseResultResult = UseResult1(false)
-			local IsCurrentBelow: boolean = UseResultResult ~= nil and UseRefResult.current < UseResultResult
-			UseRefResult.current = os.clock()
+	UseOnChangeModule(UseSignalStateResult4, function()
+		-- upvalues: UseResult1 (copy), UseRefResult (copy), UseResult2 (copy), UseContextResult (copy), UseMemoResult (copy), UseSignalStateResult4 (copy)
+		local UseResultResult = UseResult1(false)
+		local IsCurrentBelow: boolean = UseResultResult ~= nil and UseRefResult.current < UseResultResult
+		UseRefResult.current = os.clock()
+		
+		if not IsCurrentBelow then
+			UseResult2(true)
 			
-			if not IsCurrentBelow then
-				UseResult2(true)
-			end
+			return
 		end
-	end, { UseSignalStateResult4, UseResult2, UseResult1 })
+		if UseContextResult and UseMemoResult then
+			UseContextResult.markLoaded(UseMemoResult.configKey, UseSignalStateResult4)
+		end
+	end)
 	local UseResult3 = ReactModule.useCallback(function()
 		-- upvalues: UseResult2 (copy)
 		UseResult2(true)
 	end, { UseResult2 })
 	local UseSignalStateResult5 = if UseSignalStateResult2 and UseSignalStateResult then UseSignalStateResult else UseSignalStateResult1 or UseSignalStateResult
-	local UseRefResult2 = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
 	
 	if UseSignalStateResult5 then
-		UseRefResult2.current = { groupId = GroupId, root = UseSignalStateResult5 }
-	elseif UseSignalStateResult3 ~= DataHydrationModule.DataHydrationTypes.DataStatus.Ready and (UseRefResult2.current and UseRefResult2.current.groupId == GroupId) then
-		UseSignalStateResult5 = UseRefResult2.current.root
+		UseRefResult1.current = { groupId = GroupId, root = UseSignalStateResult5 }
+	elseif UseSignalStateResult3 ~= DataHydrationModule.DataHydrationTypes.DataStatus.Ready and UseRefResult1.current and UseRefResult1.current.groupId == GroupId then
+		UseSignalStateResult5 = UseRefResult1.current.root
 	end
 	return {
 		root = UseSignalStateResult5,

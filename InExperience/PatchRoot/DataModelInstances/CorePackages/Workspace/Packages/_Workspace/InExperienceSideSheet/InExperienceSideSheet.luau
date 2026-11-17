@@ -17,6 +17,9 @@ return {
 	getDidSideSheetOpenWithPeoplePage = function(p1)
 		return require(script.Utils.getDidSideSheetOpenWithPeoplePage)(p1)
 	end,
+	setDidSideSheetOpenWithPeoplePage = function(p1)
+		require(script.Stores.GetSideSheetConfigStore)(false).setDidSideSheetOpenWithPeoplePage(p1)
+	end,
 	getHasRoomForPeoplePage = function(p1, p2)
 		-- upvalues: FlagsModule (copy)
 		return if FlagsModule.FFlagKeepSideSheetOpenBesideMenu then require(script.Utils.getHasRoomForPeoplePage)(p1, p2) else require(script.Utils.getHasRoomForPeoplePage)()

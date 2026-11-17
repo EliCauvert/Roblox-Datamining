@@ -18,6 +18,7 @@ local BuilderIconsModule = require(CorePackages.Packages.BuilderIcons)
 local BlockingModalScreenModule = require(Modules.Settings.Components.Blocking.BlockingModalScreen)
 local Uiblox = BuilderIconsModule.Migration.uiblox
 local InExperienceSideSheetModule = require(CorePackages.Workspace.Packages.InExperienceSideSheet)
+local FFlagKeepSideSheetOpenBesideMenu = InExperienceSideSheetModule.Flags.FFlagKeepSideSheetOpenBesideMenu
 local FFlagSideSheetOpenPeoplePage = InExperienceSideSheetModule.Flags.FFlagSideSheetOpenPeoplePage
 local FocusNavigationUtilsModule = require(CorePackages.Workspace.Packages.FocusNavigationUtils)
 local FocusRoot = FocusNavigationUtilsModule.FocusRoot
@@ -44,7 +45,7 @@ local function PeopleFocusRoot(p1)
 end
 
 local function createPeoplePage()
-	-- upvalues: CorePackages (copy), SettingsPageFactoryModule (copy), Constants (ref), Uiblox (copy), BuilderIconsModule (copy), NewResult (copy), FFlagRelocateMobileMenuButtonsModule (copy), FIntRelocateMobileMenuButtonsVariantModule (copy), Root (ref), GetFFlagPeoplePageLazyRenderCardsFunction (copy), FFlagEnablePeopleListLazyRender (copy), FFlagPeopleCardsEnableVirtualizedGrid (copy), FFlagPeoplePageDismissVolumePopoverOnScrollOutOfView (copy), FFlagPeoplePageFlipVolumePopoverToFitViewport (copy), FFlagPeoplePageDismissCardMenuOnScrollOutOfView (copy), SignalsReactModule (copy), Signal (copy), FFlagSideSheetOpenPeoplePage (copy), InExperienceSideSheetModule (copy), ReactModule (copy), CoreScriptsRootProvider (copy), LocalizationProvider (copy), PeopleFocusRoot (copy), BlockingModalScreenModule (copy), EnabledResult (copy), GetFFlagAddPeoplePageCardLayoutFunction (copy), LocalStoreModule (copy), ReactRobloxModule (copy), Signal2 (copy), SettingsShowSignal (copy)
+	-- upvalues: CorePackages (copy), SettingsPageFactoryModule (copy), Constants (ref), Uiblox (copy), BuilderIconsModule (copy), NewResult (copy), FFlagRelocateMobileMenuButtonsModule (copy), FIntRelocateMobileMenuButtonsVariantModule (copy), Root (ref), GetFFlagPeoplePageLazyRenderCardsFunction (copy), FFlagEnablePeopleListLazyRender (copy), FFlagPeopleCardsEnableVirtualizedGrid (copy), FFlagPeoplePageDismissVolumePopoverOnScrollOutOfView (copy), FFlagPeoplePageFlipVolumePopoverToFitViewport (copy), FFlagPeoplePageDismissCardMenuOnScrollOutOfView (copy), SignalsReactModule (copy), Signal (copy), FFlagSideSheetOpenPeoplePage (copy), FFlagKeepSideSheetOpenBesideMenu (copy), InExperienceSideSheetModule (copy), ReactModule (copy), CoreScriptsRootProvider (copy), LocalizationProvider (copy), PeopleFocusRoot (copy), BlockingModalScreenModule (copy), EnabledResult (copy), GetFFlagAddPeoplePageCardLayoutFunction (copy), LocalStoreModule (copy), ReactRobloxModule (copy), Signal2 (copy), SettingsShowSignal (copy)
 	local PeopleReactViewModule = require(CorePackages.Workspace.Packages.PeopleReactView)
 	local PeopleReactView = PeopleReactViewModule.PeopleReactView
 	local SideSheetFocusContext = PeopleReactViewModule.SideSheetFocusContext
@@ -71,14 +72,15 @@ local function createPeoplePage()
 		end
 	end
 	local function createReactTree()
-		-- upvalues: Root (upval), GetFFlagPeoplePageLazyRenderCardsFunction (upval), FFlagEnablePeopleListLazyRender (upval), FFlagPeopleCardsEnableVirtualizedGrid (upval), FFlagPeoplePageDismissVolumePopoverOnScrollOutOfView (upval), FFlagPeoplePageFlipVolumePopoverToFitViewport (upval), FFlagPeoplePageDismissCardMenuOnScrollOutOfView (upval), NewPage (copy), SignalsReactModule (upval), Signal (upval), FFlagSideSheetOpenPeoplePage (upval), InExperienceSideSheetModule (upval), ReactModule (upval), CoreScriptsRootProvider (upval), LocalizationProvider (upval), NewResult (upval), PeopleFocusRoot (upval), PeopleReactView (copy), BlockingModalScreenModule (upval), EnabledResult (upval), GetFFlagAddPeoplePageCardLayoutFunction (upval), LocalStoreModule (upval), Constants (upval), SideSheetFocusContext (copy), ReactRobloxModule (upval)
+		-- upvalues: Root (upval), GetFFlagPeoplePageLazyRenderCardsFunction (upval), FFlagEnablePeopleListLazyRender (upval), FFlagPeopleCardsEnableVirtualizedGrid (upval), FFlagPeoplePageDismissVolumePopoverOnScrollOutOfView (upval), FFlagPeoplePageFlipVolumePopoverToFitViewport (upval), FFlagPeoplePageDismissCardMenuOnScrollOutOfView (upval), NewPage (copy), SignalsReactModule (upval), Signal (upval), FFlagSideSheetOpenPeoplePage (upval), FFlagKeepSideSheetOpenBesideMenu (upval), InExperienceSideSheetModule (upval), ReactModule (upval), CoreScriptsRootProvider (upval), LocalizationProvider (upval), NewResult (upval), PeopleFocusRoot (upval), PeopleReactView (copy), BlockingModalScreenModule (upval), EnabledResult (upval), GetFFlagAddPeoplePageCardLayoutFunction (upval), LocalStoreModule (upval), Constants (upval), SideSheetFocusContext (copy), ReactRobloxModule (upval)
 		if Root then return end
 		local ScrollingFrame = if GetFFlagPeoplePageLazyRenderCardsFunction() or FFlagEnablePeopleListLazyRender or FFlagPeopleCardsEnableVirtualizedGrid or FFlagPeoplePageDismissVolumePopoverOnScrollOutOfView or FFlagPeoplePageFlipVolumePopoverToFitViewport or FFlagPeoplePageDismissCardMenuOnScrollOutOfView then NewPage.Page:FindFirstAncestorWhichIsA("ScrollingFrame") else nil
 		
 		local function PeopleConditionalView()
-			-- upvalues: SignalsReactModule (upval), Signal (upval), FFlagSideSheetOpenPeoplePage (upval), InExperienceSideSheetModule (upval), ReactModule (upval), CoreScriptsRootProvider (upval), LocalizationProvider (upval), NewResult (upval), PeopleFocusRoot (upval), PeopleReactView (upval), BlockingModalScreenModule (upval), GetFFlagPeoplePageLazyRenderCardsFunction (upval), FFlagEnablePeopleListLazyRender (upval), FFlagPeopleCardsEnableVirtualizedGrid (upval), FFlagPeoplePageDismissVolumePopoverOnScrollOutOfView (upval), FFlagPeoplePageFlipVolumePopoverToFitViewport (upval), FFlagPeoplePageDismissCardMenuOnScrollOutOfView (upval), ScrollingFrame (copy), EnabledResult (upval), GetFFlagAddPeoplePageCardLayoutFunction (upval), LocalStoreModule (upval), Constants (upval), SideSheetFocusContext (upval)
-			local UseSignalStateResult = if FFlagSideSheetOpenPeoplePage then SignalsReactModule.useSignalState(InExperienceSideSheetModule.getSideSheetVisibility) else false
-			local UseSignalStateResult1 = if FFlagSideSheetOpenPeoplePage then SignalsReactModule.useSignalState(InExperienceSideSheetModule.getDidSideSheetOpenWithPeoplePage) else false
+			-- upvalues: SignalsReactModule (upval), Signal (upval), FFlagSideSheetOpenPeoplePage (upval), FFlagKeepSideSheetOpenBesideMenu (upval), InExperienceSideSheetModule (upval), ReactModule (upval), CoreScriptsRootProvider (upval), LocalizationProvider (upval), NewResult (upval), PeopleFocusRoot (upval), PeopleReactView (upval), BlockingModalScreenModule (upval), GetFFlagPeoplePageLazyRenderCardsFunction (upval), FFlagEnablePeopleListLazyRender (upval), FFlagPeopleCardsEnableVirtualizedGrid (upval), FFlagPeoplePageDismissVolumePopoverOnScrollOutOfView (upval), FFlagPeoplePageFlipVolumePopoverToFitViewport (upval), FFlagPeoplePageDismissCardMenuOnScrollOutOfView (upval), ScrollingFrame (copy), EnabledResult (upval), GetFFlagAddPeoplePageCardLayoutFunction (upval), LocalStoreModule (upval), Constants (upval), SideSheetFocusContext (upval)
+			local UseSignalStateResult = if FFlagSideSheetOpenPeoplePage then SignalsReactModule.useSignalState(InExperienceSideSheetModule.getDidSideSheetOpenWithPeoplePage) else false
+			local UseSignalStateResult1 = if FFlagKeepSideSheetOpenBesideMenu then SignalsReactModule.useSignalState(InExperienceSideSheetModule.getIsMenuShownBesideSideSheet) else false
+			local UseSignalStateResult2 = (if FFlagSideSheetOpenPeoplePage or FFlagKeepSideSheetOpenBesideMenu then SignalsReactModule.useSignalState(InExperienceSideSheetModule.getSideSheetVisibility) else false) and (UseSignalStateResult or UseSignalStateResult1)
 			local Element = if SignalsReactModule.useSignalState(Signal) then ReactModule.createElement(CoreScriptsRootProvider, {}, {
 				LocalizationProvider = ReactModule.createElement(LocalizationProvider, { localization = NewResult }, {
 					FocusRoot = ReactModule.createElement(PeopleFocusRoot, {}, {
@@ -89,14 +91,14 @@ local function createPeoplePage()
 							chromeEnabled = EnabledResult,
 							getUniversesExposedTo = if GetFFlagAddPeoplePageCardLayoutFunction() and LocalStoreModule then LocalStoreModule.getUniversesExposedTo else nil,
 							addUniverseToExposureList = if GetFFlagAddPeoplePageCardLayoutFunction() and LocalStoreModule then LocalStoreModule.addUniverseToExposureList else nil,
-							minimumCardWidth = if FFlagSideSheetOpenPeoplePage and UseSignalStateResult and UseSignalStateResult1 then Constants.PEOPLEPAGE.PEOPLE_CARDS.SIDE_SHEET_MINIMUM_CARD_WIDTH else nil
+							minimumCardWidth = if (FFlagSideSheetOpenPeoplePage or FFlagKeepSideSheetOpenBesideMenu) and UseSignalStateResult2 then Constants.PEOPLEPAGE.PEOPLE_CARDS.SIDE_SHEET_MINIMUM_CARD_WIDTH else nil
 						})
 					})
 				})
 			}) else nil
 			
-			if FFlagSideSheetOpenPeoplePage and Element then
-				Element = ReactModule.createElement(SideSheetFocusContext.Provider, { value = UseSignalStateResult and UseSignalStateResult1 }, { People = Element })
+			if (FFlagSideSheetOpenPeoplePage or FFlagKeepSideSheetOpenBesideMenu) and Element then
+				Element = ReactModule.createElement(SideSheetFocusContext.Provider, { value = UseSignalStateResult2 }, { People = Element })
 			end
 			return Element
 		end

@@ -23,6 +23,7 @@ return {
 	ProductPurchaseRobuxUpsell = require(script.ProductPurchaseRobuxUpsell.ProductPurchaseRobuxUpsell),
 	LeaveRobloxAlert = require(script.Generic.LeaveRobloxPrompt),
 	PreparePaymentCheck = require(script.Generic.PreparePaymentCheck),
+	ManageRecommendationsInputOwner = require(script.Generic.ManageRecommendationsMenu.ManageRecommendationsInputOwner),
 	Api = {
 		PaymentsGateway = {
 			GetUpsellSuggestions = require(script.Api.PaymentsGateway.GetUpsellSuggestions),
@@ -34,7 +35,8 @@ return {
 		FFlagEnableRobuxUpsellPlusButtonExperiment = require(script.Flags.FFlagEnableRobuxUpsellPlusButtonExperiment),
 		GetFStringMobilePopularItemBadgingLayer = require(script.Flags.GetFStringMobilePopularItemBadgingLayer),
 		FFlagPopularFillIconEnabled = require(script.Flags.FFlagPopularFillIconEnabled),
-		GetFStringPopularFillIconLocation = require(script.Flags.GetFStringPopularFillIconLocation)
+		GetFStringPopularFillIconLocation = require(script.Flags.GetFStringPopularFillIconLocation),
+		FFlagPurchasePromptVLOPUpsellSettingsEntryPoint = require(script.Flags.FFlagPurchasePromptVLOPUpsellSettingsEntryPoint)
 	},
 	GetEnableConsolePreparePaymentCheck = require(script.Flags.getEnableConsolePreparePaymentCheck),
 	PurchaseFlow = {

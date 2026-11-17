@@ -106,7 +106,11 @@ return {
 			[DraftRecoverySteps.DraftPublished] = { stepNumber = 2, stepName = "Draft Published" }
 		}
 	},
-	CreationIntentSource = { Captures = "Captures", TopBar = "TopBar" },
+	CreationIntentSource = {
+		Captures = "Captures",
+		CapturesCarousel = "CapturesCarousel",
+		TopBar = "TopBar"
+	},
 	AppNavigationSteps = AppNavigationSteps,
 	CreationFlowSteps = CreationFlowSteps,
 	MusicEnhancementSteps = MusicEnhancementSteps,

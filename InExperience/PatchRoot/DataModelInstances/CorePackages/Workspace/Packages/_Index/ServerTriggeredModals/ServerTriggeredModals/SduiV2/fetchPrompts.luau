@@ -12,7 +12,6 @@ local SduiResponseType = SduiSharedUtilitiesModule.SduiResponseType
 local GetSduiApiStoreFunction = SduiSharedUtilitiesModule.getSduiApiStore
 local ParsePageEntriesFromResponseFunction = SduiSharedUtilitiesModule.SduiProtobufResponseHelpers.parsePageEntriesFromResponse
 local FFlagSduiAllowNoConfigsBuilt = require(Parent.SharedFlags).FFlagSduiAllowNoConfigsBuilt
-local FFlagPromptsHandlerEnabled = require(Parent.SharedFlags).FFlagPromptsHandlerEnabled
 local FFlagSduiExtendedCapabilitiesPrompts = require(Parent.SharedFlags).FFlagSduiExtendedCapabilitiesPrompts
 local FFlagPushNotificationsUpsellHomePromptsExperiment = require(Parent.SharedFlags).FFlagPushNotificationsUpsellHomePromptsExperiment
 local FFlagSplitPaneEducationalTour = require(Parent.SharedFlags).FFlagSplitPaneEducationalTour
@@ -72,7 +71,7 @@ local function getParsePageEntriesFromResponse(p1)
 end
 
 return function(p1, p2)
-	-- upvalues: Parent (copy), FFlagSduiExtendedCapabilitiesPrompts (copy), SduiSharedUtilitiesModule (copy), GetSduiApiStoreFunction (copy), SduiResponseType (copy), UrlBuilder (copy), UrlBase (copy), FFlagPromptsHandlerEnabled (copy), getPromptsUrl (copy), FFlagPromptsEdpOpenReplaceOnFetch (copy), FFlagSduiAllowNoConfigsBuilt (copy), getParsePageEntriesFromResponse (copy)
+	-- upvalues: Parent (copy), FFlagSduiExtendedCapabilitiesPrompts (copy), SduiSharedUtilitiesModule (copy), GetSduiApiStoreFunction (copy), SduiResponseType (copy), UrlBuilder (copy), UrlBase (copy), getPromptsUrl (copy), FFlagPromptsEdpOpenReplaceOnFetch (copy), FFlagSduiAllowNoConfigsBuilt (copy), getParsePageEntriesFromResponse (copy)
 	local ServiceContractsProtoModule = require(Parent.ServiceContractsProto)
 	local GetEligiblePromptsRequest = ServiceContractsProtoModule.apppageplatform.prompts.prompts.GetEligiblePromptsRequest
 	local config = {
@@ -83,7 +82,7 @@ return function(p1, p2)
 	}
 	GetSduiApiStoreFunction().fetchIfNeeded({
 		responseType = SduiResponseType.ProtobufJson,
-		url = if FFlagSduiExtendedCapabilitiesPrompts then UrlBuilder.new({ path = "modals-api/v1/prompts", base = UrlBase.APIS })() elseif FFlagPromptsHandlerEnabled then getPromptsUrl(p1.entryPoint, p1.clientAttributes, p1.promptStyles) else getPromptsUrl(p1.entryPoint, nil, p1.promptStyles),
+		url = if FFlagSduiExtendedCapabilitiesPrompts then UrlBuilder.new({ path = "modals-api/v1/prompts", base = UrlBase.APIS })() else getPromptsUrl(p1.entryPoint, p1.clientAttributes, p1.promptStyles),
 		surfaceKey = p1.surfaceKey,
 		configKey = p1.configKey,
 		clearOnEmptyResponse = p1.clearOnEmptyResponse,

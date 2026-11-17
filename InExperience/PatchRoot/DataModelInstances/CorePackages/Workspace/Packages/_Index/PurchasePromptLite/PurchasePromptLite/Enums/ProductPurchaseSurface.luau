@@ -11,5 +11,6 @@
 	Profile = "Profile",
 	HomePageGameItemShop = "HomePageGameItemShop",
 	SearchPageGameItemShop = "SearchPageGameItemShop",
-	CampaignPageGameItemShop = "CampaignPageGameItemShop"
+	CampaignPageGameItemShop = "CampaignPageGameItemShop",
+	GameItemDetailsPage = "GameItemDetailsPage"
 }

@@ -13,12 +13,12 @@ local ProductPurchaseSurface = PurchasePromptLiteModule.Enums.ProductPurchaseSur
 local ProductKind = PurchasePromptLiteModule.Enums.ProductKind
 local SduiReportGamePlayIntentFunction = require(Parent.SduiSharedContent).sduiReportGamePlayIntent
 local SharedFlagsModule = require(Parent.SharedFlags)
-local FFlagEnableHomeGameItemOwnershipUpdate = SharedFlagsModule.FFlagEnableHomeGameItemOwnershipUpdate
 local FFlagEnableSearchGameItemOwnershipUpdate = SharedFlagsModule.FFlagEnableSearchGameItemOwnershipUpdate
 local FFlagAppIaHomeCampaignSubTab = SharedFlagsModule.FFlagAppIaHomeCampaignSubTab
 local FFlagEnableCampaignGameItemPurchaseLocation = SharedFlagsModule.FFlagEnableCampaignGameItemPurchaseLocation
 local FFlagEnableEdpPreviewPurchaseSurface = SharedFlagsModule.FFlagEnableEdpPreviewPurchaseSurface
 local FFlagEnableLaunchAfterPurchase = SharedFlagsModule.FFlagEnableLaunchAfterPurchase
+local FFlagEnableGameItemDetailsSdui = SharedFlagsModule.FFlagEnableGameItemDetailsSdui
 local ExperienceService = game:GetService("ExperienceService")
 local Players = game:GetService("Players")
 local HttpService = game:GetService("HttpService")
@@ -62,14 +62,14 @@ local function _(p1, p2)
 end
 
 local function buildOnPurchaseSuccess(EDP, Kind, Id, RootPlaceId)
-	-- upvalues: ProductKind (copy), ProductPurchaseSurface (copy), FFlagEnableHomeGameItemOwnershipUpdate (copy), FFlagEnableSearchGameItemOwnershipUpdate (copy), FFlagAppIaHomeCampaignSubTab (copy), FFlagEnableEdpPreviewPurchaseSurface (copy), DataHydrationModule (copy), Players (copy)
-	return if Id then if Kind == ProductKind.Gamepass and (EDP == ProductPurchaseSurface.EDP or FFlagEnableHomeGameItemOwnershipUpdate and EDP == ProductPurchaseSurface.HomePageGameItemShop or FFlagEnableSearchGameItemOwnershipUpdate and EDP == ProductPurchaseSurface.SearchPageGameItemShop or FFlagAppIaHomeCampaignSubTab and EDP == ProductPurchaseSurface.CampaignPageGameItemShop or FFlagEnableEdpPreviewPurchaseSurface and EDP == ProductPurchaseSurface.EDPPreview) then function()
+	-- upvalues: ProductKind (copy), ProductPurchaseSurface (copy), FFlagEnableSearchGameItemOwnershipUpdate (copy), FFlagAppIaHomeCampaignSubTab (copy), FFlagEnableEdpPreviewPurchaseSurface (copy), FFlagEnableGameItemDetailsSdui (copy), DataHydrationModule (copy), Players (copy)
+	return if Id then if Kind == ProductKind.Gamepass and (EDP == ProductPurchaseSurface.EDP or EDP == ProductPurchaseSurface.HomePageGameItemShop or FFlagEnableSearchGameItemOwnershipUpdate and EDP == ProductPurchaseSurface.SearchPageGameItemShop or FFlagAppIaHomeCampaignSubTab and EDP == ProductPurchaseSurface.CampaignPageGameItemShop or FFlagEnableEdpPreviewPurchaseSurface and EDP == ProductPurchaseSurface.EDPPreview or FFlagEnableGameItemDetailsSdui and EDP == ProductPurchaseSurface.GameItemDetailsPage) then function()
 		-- upvalues: DataHydrationModule (upval), Id (copy)
 		DataHydrationModule.Game.getGamePassStore(false).updateGamePassInfo(Id, { isOwned = true })
-	end elseif Kind == ProductKind.DeveloperSubscription and EDP == ProductPurchaseSurface.EDP then function()
+	end elseif Kind == ProductKind.DeveloperSubscription and (EDP == ProductPurchaseSurface.EDP or FFlagEnableGameItemDetailsSdui and EDP == ProductPurchaseSurface.GameItemDetailsPage) then function()
 		-- upvalues: DataHydrationModule (upval), Id (copy)
 		DataHydrationModule.Game.getGameSubscriptionStore(false).updateGameSubscriptionInfo(Id, { isSubscribed = true })
-	end elseif Kind == ProductKind.Product and RootPlaceId and (EDP == ProductPurchaseSurface.EDP or FFlagEnableHomeGameItemOwnershipUpdate and EDP == ProductPurchaseSurface.HomePageGameItemShop or FFlagEnableSearchGameItemOwnershipUpdate and EDP == ProductPurchaseSurface.SearchPageGameItemShop or FFlagAppIaHomeCampaignSubTab and EDP == ProductPurchaseSurface.CampaignPageGameItemShop or FFlagEnableEdpPreviewPurchaseSurface and EDP == ProductPurchaseSurface.EDPPreview) then function()
+	end elseif Kind == ProductKind.Product and RootPlaceId and (EDP == ProductPurchaseSurface.EDP or EDP == ProductPurchaseSurface.HomePageGameItemShop or FFlagEnableSearchGameItemOwnershipUpdate and EDP == ProductPurchaseSurface.SearchPageGameItemShop or FFlagAppIaHomeCampaignSubTab and EDP == ProductPurchaseSurface.CampaignPageGameItemShop or FFlagEnableEdpPreviewPurchaseSurface and EDP == ProductPurchaseSurface.EDPPreview or FFlagEnableGameItemDetailsSdui and EDP == ProductPurchaseSurface.GameItemDetailsPage) then function()
 		-- upvalues: Players (upval), DataHydrationModule (upval), RootPlaceId (copy)
 		local LocalPlayer = Players.LocalPlayer
 		local UserId = LocalPlayer and LocalPlayer.UserId
@@ -161,7 +161,8 @@ local config = {
 	[ProductPurchaseSurface.HomePageGameItemShop] = "homePageGameItemShop",
 	[ProductPurchaseSurface.SearchPageGameItemShop] = if FFlagEnableSearchGameItemOwnershipUpdate then "searchPageGameItemShop" else nil,
 	[ProductPurchaseSurface.EDPPreview] = if FFlagEnableEdpPreviewPurchaseSurface then "experienceDetailPagePreview" else nil,
-	[ProductPurchaseSurface.CampaignPageGameItemShop] = if FFlagEnableCampaignGameItemPurchaseLocation then "campaignPageGameItemShop" else nil
+	[ProductPurchaseSurface.CampaignPageGameItemShop] = if FFlagEnableCampaignGameItemPurchaseLocation then "campaignPageGameItemShop" else nil,
+	[ProductPurchaseSurface.GameItemDetailsPage] = if FFlagEnableGameItemDetailsSdui then "gameItemDetailsPage" else nil
 }
 
 local function buildPurchasePayload(LocationType)

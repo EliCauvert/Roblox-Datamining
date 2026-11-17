@@ -100,6 +100,8 @@
 	JoinCommunity = "JoinCommunity",
 	ClaimEventItem = "ClaimEventItem",
 	OpenGroupPane = "OpenGroupPane",
+	OpenBuildChatWithPrompt = "OpenBuildChatWithPrompt",
+	OpenBuildInspirationSeeMore = "OpenBuildInspirationSeeMore",
 	OpenAccountSettings = "OpenAccountSettings",
 	ActionSequence = "ActionSequence",
 	SubmitCustomFormResponse = "SubmitCustomFormResponse",
