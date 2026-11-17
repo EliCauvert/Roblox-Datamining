@@ -1,4 +1,5 @@
-﻿local Parent = script:FindFirstAncestor("Groups").Parent
+﻿local Groups = script:FindFirstAncestor("Groups")
+local Parent = Groups.Parent
 local DisplayModule = require(Parent.Display)
 local ResponsiveModule = require(Parent.Responsive)
 local _ = require(Parent.Signals)
@@ -25,5 +26,9 @@ return {
 	getShouldUseLuaCommunityList = function()
 		-- upvalues: FFlagEnableLuaCommunityList (copy), ResponsiveModule (copy), FFlagEnableGroupOverviewPane (copy), getIsCompactTouch (copy)
 		return if FFlagEnableLuaCommunityList then ResponsiveModule.GetInputModeStore(false).getPreferredInputType(false) ~= ResponsiveModule.Input.Directional and (if FFlagEnableGroupOverviewPane then true else getIsCompactTouch(false)) else false
+	end,
+	isValidGroupId = function(p1)
+		-- upvalues: Groups (copy)
+		return require(Groups.Common.getGroupSduiPageConfig).isValidGroupId(p1)
 	end
 }

@@ -3,6 +3,7 @@ local Parent = BuildExperience.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local InlineLayoutModule = require(Parent.InlineLayout)
+local Alert = FoundationModule.Alert
 local Button = FoundationModule.Button
 local Chip = FoundationModule.Chip
 local Icon = FoundationModule.Icon
@@ -15,7 +16,11 @@ local InlineLayout = InlineLayoutModule.Components.InlineLayout
 local LinkElement = InlineLayoutModule.Components.InlineLayoutElements.LinkElement
 local TextElement = InlineLayoutModule.Components.InlineLayoutElements.TextElement
 local CreateAdCampaignSheetConfigModule = require(script.Parent.CreateAdCampaignSheetConfig)
+local FundedErrorDialogContainerModule = require(script.Parent.FundedErrorDialog.FundedErrorDialogContainer)
 local FFlagBuildAdsUiPolishModule = require(BuildExperience.Flags.FFlagBuildAdsUiPolish)
+local FFlagBuildAdsFundedNotCreatedError = require(Parent.SharedFlags).FFlagBuildAdsFundedNotCreatedError
+local AlertSeverity = FoundationModule.Enums.AlertSeverity
+local AlertVariant = FoundationModule.Enums.AlertVariant
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local ChipSize = FoundationModule.Enums.ChipSize
 local ChipVariant = FoundationModule.Enums.ChipVariant
@@ -235,13 +240,13 @@ local function CampaignOptionItem(Frame)
 end
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Sheet (copy), SnapPoints (copy), View (copy), IconButton (copy), FoundationModule (copy), InputSize (copy), ButtonVariant (copy), FFlagBuildAdsUiPolishModule (copy), Chip (copy), ChipVariant (copy), ChipSize (copy), Icon (copy), IconSize (copy), Text (copy), OptionSelectorGroup (copy), OptionSelectorGroupSize (copy), CampaignOptionItem (copy), createBenefitRows (copy), AdCampaignLegalText (copy), Button (copy)
+	-- upvalues: UseTokensFunction (copy), FFlagBuildAdsFundedNotCreatedError (copy), ReactModule (copy), Sheet (copy), SnapPoints (copy), View (copy), IconButton (copy), FoundationModule (copy), InputSize (copy), ButtonVariant (copy), FFlagBuildAdsUiPolishModule (copy), Chip (copy), ChipVariant (copy), ChipSize (copy), Icon (copy), IconSize (copy), Text (copy), OptionSelectorGroup (copy), OptionSelectorGroupSize (copy), CampaignOptionItem (copy), createBenefitRows (copy), AdCampaignLegalText (copy), Alert (copy), AlertVariant (copy), AlertSeverity (copy), Button (copy), FundedErrorDialogContainerModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IsTwoOptions = p1.variant == "twoOptions"
+	local SelectedOption = if FFlagBuildAdsFundedNotCreatedError and IsTwoOptions and p1.isOptionLocked then p1.selectedOption else nil
 	local Ceiled = math.ceil(UseTokensResult.Typography.CaptionMedium.FontSize * UseTokensResult.Typography.CaptionMedium.LineHeight * 2)
 	local TwoOptionsAdCampaign: string = if IsTwoOptions then "two-options-ad-campaign" else "create-ad-campaign"
-	
-	return ReactModule.createElement(Sheet.Root, {
+	local Element = ReactModule.createElement(Sheet.Root, {
 		preferCenterSheet = true,
 		isOpen = p1.isOpen,
 		ref = if IsTwoOptions then p1.sheetRootRef else nil,
@@ -348,14 +353,14 @@ return function(p1)
 							testId = "two-options-ad-campaign-feedback-option",
 							option = p1.feedbackOption,
 							optionRef = if p1.selectedOption == p1.feedbackOption.value then p1.defaultOptionRef else nil,
-							isInteractionDisabled = p1.isCreatePending
+							isInteractionDisabled = p1.isCreatePending or SelectedOption ~= nil and SelectedOption ~= p1.feedbackOption.value
 						}),
 						Plays = if p1.playsOption == nil then nil else ReactModule.createElement(CampaignOptionItem, {
 							LayoutOrder = 2,
 							testId = "two-options-ad-campaign-plays-option",
 							option = p1.playsOption,
 							optionRef = if p1.selectedOption == p1.playsOption.value then p1.defaultOptionRef else nil,
-							isInteractionDisabled = p1.isCreatePending
+							isInteractionDisabled = p1.isCreatePending or SelectedOption ~= nil and SelectedOption ~= p1.playsOption.value
 						})
 					})
 				}) else ReactModule.createElement(View, {
@@ -432,7 +437,13 @@ return function(p1)
 		}),
 		Actions = ReactModule.createElement(Sheet.Actions, nil, {
 			Footer = ReactModule.createElement(View, { tag = "col gap-medium size-full-0 auto-y" }, {
-				Error = if p1.hasCreateError then ReactModule.createElement(Text, {
+				Error = if p1.hasCreateError and FFlagBuildAdsFundedNotCreatedError then ReactModule.createElement(Alert, {
+					LayoutOrder = 0,
+					variant = AlertVariant.Feedback,
+					severity = AlertSeverity.Error,
+					text = p1.createErrorText,
+					testId = `{TwoOptionsAdCampaign}-create-error`
+				}) elseif p1.hasCreateError then ReactModule.createElement(Text, {
 					LayoutOrder = 0,
 					Text = p1.createErrorText,
 					Size = if IsTwoOptions then UDim2.new(1, 0, 0, Ceiled) else nil,
@@ -494,4 +505,9 @@ return function(p1)
 			})
 		})
 	})
+	
+	return if FFlagBuildAdsFundedNotCreatedError then ReactModule.createElement(ReactModule.Fragment, nil, {
+		Sheet = Element,
+		FundedErrorDialog = if IsTwoOptions and p1.fundedErrorDialog ~= nil then ReactModule.createElement(FundedErrorDialogContainerModule, p1.fundedErrorDialog) else nil
+	}) else Element
 end

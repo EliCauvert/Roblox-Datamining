@@ -20,6 +20,9 @@ local EnumsModule = require(ProfilePlatform.Common.Enums)
 local _ = require(ProfilePlatform.Components.CTARow.Types)
 local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
 local MakeViewGroupPageModule = require(ProfilePlatform.Utils.makeViewGroupPage)
+local OpenViewGroupPageModule = require(ProfilePlatform.Utils.openViewGroupPage)
+local NotifyCommunityMembershipChangedModule = require(ProfilePlatform.Utils.notifyCommunityMembershipChanged)
+local FFlagEnableGroupSidebarSdui = require(Parent.SharedFlags).FFlagEnableGroupSidebarSdui
 local ProfileTypes = EnumsModule.ProfileTypes
 local ShareName: string = `{Url.BASE_URL}share/g/%s`
 
@@ -42,26 +45,30 @@ return {
 		}
 	end,
 	[EnumsModule.ProfileActions.JoinCommunity] = function(p1)
-		-- upvalues: ButtonVariant (copy), EnumsModule (copy), ProfileTypes (copy), EventNamesModule (copy), GroupsNetworkingModule (copy), GetProfilePlatformModule (copy), GetAvailableCommunityComponentsModule (copy)
+		-- upvalues: ButtonVariant (copy), EnumsModule (copy), ProfileTypes (copy), EventNamesModule (copy), GroupsNetworkingModule (copy), GetProfilePlatformModule (copy), GetAvailableCommunityComponentsModule (copy), FFlagEnableGroupSidebarSdui (copy), NotifyCommunityMembershipChangedModule (copy)
 		return {
 			variant = ButtonVariant.Emphasis,
 			text = p1.localized[EnumsModule.ProfileActions.JoinCommunity],
 			onActivated = {
 				[ProfileTypes.Community] = function()
-					-- upvalues: p1 (copy), EventNamesModule (upval), GroupsNetworkingModule (upval), GetProfilePlatformModule (upval), GetAvailableCommunityComponentsModule (upval)
+					-- upvalues: p1 (copy), EventNamesModule (upval), GroupsNetworkingModule (upval), GetProfilePlatformModule (upval), GetAvailableCommunityComponentsModule (upval), FFlagEnableGroupSidebarSdui (upval), NotifyCommunityMembershipChangedModule (upval)
 					p1.analytics.fireAnalyticsEvent(EventNamesModule.CTAButtonJoinCommunity, {
 						buttonSurface = p1.buttonSurface,
 						btnContext = p1.profileWrapperContext.sourceInfo.source
 					})
 					
 					return p1.dispatch(GroupsNetworkingModule.JoinGroup.API({ groupId = p1.profileId })):andThen(function()
-						-- upvalues: p1 (upval), GetProfilePlatformModule (upval), GetAvailableCommunityComponentsModule (upval)
+						-- upvalues: p1 (upval), GetProfilePlatformModule (upval), GetAvailableCommunityComponentsModule (upval), FFlagEnableGroupSidebarSdui (upval), NotifyCommunityMembershipChangedModule (upval)
 						p1.dispatch(GetProfilePlatformModule.API({
 							includeComponentOrdering = true,
 							profileType = p1.profileType,
 							profileId = p1.profileId,
 							components = GetAvailableCommunityComponentsModule()
 						}))
+						
+						if FFlagEnableGroupSidebarSdui then
+							NotifyCommunityMembershipChangedModule()
+						end
 					end)
 				end
 			}
@@ -93,13 +100,13 @@ return {
 		}
 	end,
 	[EnumsModule.ProfileActions.ViewCommunity] = function(p1)
-		-- upvalues: ButtonVariant (copy), EnumsModule (copy), ProfileTypes (copy), EventNamesModule (copy), MakeViewGroupPageModule (copy), GetProfilePlatformModule (copy), GetAvailableCommunityComponentsModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
+		-- upvalues: ButtonVariant (copy), EnumsModule (copy), ProfileTypes (copy), EventNamesModule (copy), MakeViewGroupPageModule (copy), GetProfilePlatformModule (copy), GetAvailableCommunityComponentsModule (copy), FFlagEnableGroupSidebarSdui (copy), OpenViewGroupPageModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
 		return {
 			variant = ButtonVariant.SubEmphasis,
 			text = p1.localized[EnumsModule.ProfileActions.ViewCommunity],
 			onActivated = {
 				[ProfileTypes.Community] = function()
-					-- upvalues: p1 (copy), EventNamesModule (upval), MakeViewGroupPageModule (upval), GetProfilePlatformModule (upval), GetAvailableCommunityComponentsModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), NavigateDownFunction (upval)
+					-- upvalues: p1 (copy), EventNamesModule (upval), MakeViewGroupPageModule (upval), GetProfilePlatformModule (upval), GetAvailableCommunityComponentsModule (upval), FFlagEnableGroupSidebarSdui (upval), OpenViewGroupPageModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), NavigateDownFunction (upval)
 					p1.analytics.fireAnalyticsEvent(EventNamesModule.CTAButtonViewCommunity, {
 						buttonSurface = p1.buttonSurface,
 						btnContext = p1.profileWrapperContext.sourceInfo.source
@@ -114,6 +121,11 @@ return {
 						}))
 					end)
 					
+					if FFlagEnableGroupSidebarSdui then
+						OpenViewGroupPageModule(ViewGroupPageModule, p1.dispatch)
+						
+						return
+					end
 					if FFlagSignalsNavP3Dispatch then
 						NavigationCommands.down(NavigationCommands.fromLegacyPage(ViewGroupPageModule))
 						
@@ -166,73 +178,85 @@ return {
 		}
 	end,
 	[EnumsModule.ProfileActions.LeaveCommunity] = function(p1)
-		-- upvalues: ProfileTypes (copy), EnumsModule (copy), EventNamesModule (copy), GroupsNetworkingModule (copy), GetProfilePlatformModule (copy), GetAvailableCommunityComponentsModule (copy)
+		-- upvalues: ProfileTypes (copy), EnumsModule (copy), EventNamesModule (copy), GroupsNetworkingModule (copy), GetProfilePlatformModule (copy), GetAvailableCommunityComponentsModule (copy), FFlagEnableGroupSidebarSdui (copy), NotifyCommunityMembershipChangedModule (copy)
 		return if p1.profileType == ProfileTypes.Community and p1.viewerOwnsOpenCommunity then nil else {
 			text = p1.localized[EnumsModule.ProfileActions.LeaveCommunity],
 			onActivated = {
 				[ProfileTypes.Community] = function()
-					-- upvalues: p1 (copy), EventNamesModule (upval), GroupsNetworkingModule (upval), GetProfilePlatformModule (upval), GetAvailableCommunityComponentsModule (upval)
+					-- upvalues: p1 (copy), EventNamesModule (upval), GroupsNetworkingModule (upval), GetProfilePlatformModule (upval), GetAvailableCommunityComponentsModule (upval), FFlagEnableGroupSidebarSdui (upval), NotifyCommunityMembershipChangedModule (upval)
 					p1.analytics.fireAnalyticsEvent(EventNamesModule.ContextualMenuButtonLeaveCommunity, {
 						buttonSurface = p1.buttonSurface,
 						btnContext = p1.profileWrapperContext.sourceInfo.source
 					})
 					
 					return p1.dispatch(GroupsNetworkingModule.LeaveGroup.API({ groupId = p1.profileId, userId = p1.localUserId })):andThen(function()
-						-- upvalues: p1 (upval), GetProfilePlatformModule (upval), GetAvailableCommunityComponentsModule (upval)
+						-- upvalues: p1 (upval), GetProfilePlatformModule (upval), GetAvailableCommunityComponentsModule (upval), FFlagEnableGroupSidebarSdui (upval), NotifyCommunityMembershipChangedModule (upval)
 						p1.dispatch(GetProfilePlatformModule.API({
 							includeComponentOrdering = true,
 							profileType = p1.profileType,
 							profileId = p1.profileId,
 							components = GetAvailableCommunityComponentsModule()
 						}))
+						
+						if FFlagEnableGroupSidebarSdui then
+							NotifyCommunityMembershipChangedModule()
+						end
 					end)
 				end
 			}
 		}
 	end,
 	[EnumsModule.ProfileActions.MakePrimaryCommunity] = function(p1)
-		-- upvalues: EnumsModule (copy), ProfileTypes (copy), EventNamesModule (copy), GroupsNetworkingModule (copy), RefreshProfilePlatformModule (copy)
+		-- upvalues: EnumsModule (copy), ProfileTypes (copy), EventNamesModule (copy), GroupsNetworkingModule (copy), RefreshProfilePlatformModule (copy), FFlagEnableGroupSidebarSdui (copy), NotifyCommunityMembershipChangedModule (copy)
 		return {
 			text = p1.localized[EnumsModule.ProfileActions.MakePrimaryCommunity],
 			onActivated = {
 				[ProfileTypes.Community] = function()
-					-- upvalues: p1 (copy), EventNamesModule (upval), GroupsNetworkingModule (upval), RefreshProfilePlatformModule (upval), EnumsModule (upval)
+					-- upvalues: p1 (copy), EventNamesModule (upval), GroupsNetworkingModule (upval), RefreshProfilePlatformModule (upval), EnumsModule (upval), FFlagEnableGroupSidebarSdui (upval), NotifyCommunityMembershipChangedModule (upval)
 					p1.analytics.fireAnalyticsEvent(EventNamesModule.ContextualMenuButtonMakePrimaryCommunity, {
 						buttonSurface = p1.buttonSurface,
 						btnContext = p1.profileWrapperContext.sourceInfo.source
 					})
 					
 					return p1.dispatch(GroupsNetworkingModule.MakePrimaryGroup.API({ groupId = p1.profileId })):andThen(function()
-						-- upvalues: p1 (upval), RefreshProfilePlatformModule (upval), EnumsModule (upval)
+						-- upvalues: p1 (upval), RefreshProfilePlatformModule (upval), EnumsModule (upval), FFlagEnableGroupSidebarSdui (upval), NotifyCommunityMembershipChangedModule (upval)
 						p1.dispatch(RefreshProfilePlatformModule({
 							profileType = p1.profileType,
 							profileId = p1.profileId,
 							components = { EnumsModule.Components.Actions }
 						}))
+						
+						if FFlagEnableGroupSidebarSdui then
+							NotifyCommunityMembershipChangedModule()
+						end
 					end)
 				end
 			}
 		}
 	end,
 	[EnumsModule.ProfileActions.RemovePrimaryCommunity] = function(p1)
-		-- upvalues: EnumsModule (copy), ProfileTypes (copy), EventNamesModule (copy), GroupsNetworkingModule (copy), RefreshProfilePlatformModule (copy)
+		-- upvalues: EnumsModule (copy), ProfileTypes (copy), EventNamesModule (copy), GroupsNetworkingModule (copy), RefreshProfilePlatformModule (copy), FFlagEnableGroupSidebarSdui (copy), NotifyCommunityMembershipChangedModule (copy)
 		return {
 			text = p1.localized[EnumsModule.ProfileActions.RemovePrimaryCommunity],
 			onActivated = {
 				[ProfileTypes.Community] = function()
-					-- upvalues: p1 (copy), EventNamesModule (upval), GroupsNetworkingModule (upval), RefreshProfilePlatformModule (upval), EnumsModule (upval)
+					-- upvalues: p1 (copy), EventNamesModule (upval), GroupsNetworkingModule (upval), RefreshProfilePlatformModule (upval), EnumsModule (upval), FFlagEnableGroupSidebarSdui (upval), NotifyCommunityMembershipChangedModule (upval)
 					p1.analytics.fireAnalyticsEvent(EventNamesModule.ContextualMenuButtonRemovePrimaryCommunity, {
 						buttonSurface = p1.buttonSurface,
 						btnContext = p1.profileWrapperContext.sourceInfo.source
 					})
 					
 					return p1.dispatch(GroupsNetworkingModule.RemovePrimaryGroup.API()):andThen(function()
-						-- upvalues: p1 (upval), RefreshProfilePlatformModule (upval), EnumsModule (upval)
+						-- upvalues: p1 (upval), RefreshProfilePlatformModule (upval), EnumsModule (upval), FFlagEnableGroupSidebarSdui (upval), NotifyCommunityMembershipChangedModule (upval)
 						p1.dispatch(RefreshProfilePlatformModule({
 							profileType = p1.profileType,
 							profileId = p1.profileId,
 							components = { EnumsModule.Components.Actions }
 						}))
+						
+						if FFlagEnableGroupSidebarSdui then
+							NotifyCommunityMembershipChangedModule()
+						end
 					end)
 				end
 			}

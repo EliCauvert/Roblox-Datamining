@@ -19,6 +19,7 @@ local UserGameSettings = UserSettings():GetService("UserGameSettings")
 local FFlagRefactorMenuConfirmationButtonsModule = require(RobloxGui.Modules.Settings.Flags.FFlagRefactorMenuConfirmationButtons)
 local RepositionDropDownScrim = game:DefineFastFlag("RepositionDropDownScrim", false)
 local FFlagEnablePioneerIGMAccountSectionModule = require(RobloxGui.Modules.Settings.Flags.FFlagEnablePioneerIGMAccountSection)
+local FFlagAddFromUserToIndexChangedModule = require(RobloxGui.Modules.Settings.Flags.FFlagAddFromUserToIndexChanged)
 local FFlagUIScaleEngineOptions = require(CorePackages.Workspace.Packages.SharedFlags).FFlagUIScaleEngineOptions
 local FFlagUIScaleSliderImprovementsModule = require(RobloxGui.Modules.Settings.Flags.FFlagUIScaleSliderImprovements)
 local Chrome = RobloxGui.Modules.Chrome
@@ -1011,7 +1012,7 @@ local function CreateDropDown(p5, CurrentIndex, HubRef)
 end
 
 local function CreateSelector(p7, CurrentIndex)
-	-- upvalues: CreateFunction (copy), SelectionImageObject (copy), ThemeModule (copy), ARROWCOLOR (copy), UserInputService (copy), ARROWCOLORHOVER (copy), addHoverState (copy), VRService (copy), GuiService (copy), EaseOutQuad (copy), ARROWCOLORINACTIVE (copy), NoFFlagResponsiveUnitsDeprecateTenFoot (copy), ShouldSelectorArrowStepModule (copy), Computed (copy), Computed1 (copy), t (copy)
+	-- upvalues: CreateFunction (copy), SelectionImageObject (copy), ThemeModule (copy), ARROWCOLOR (copy), UserInputService (copy), ARROWCOLORHOVER (copy), addHoverState (copy), FFlagAddFromUserToIndexChangedModule (copy), VRService (copy), GuiService (copy), EaseOutQuad (copy), ARROWCOLORINACTIVE (copy), NoFFlagResponsiveUnitsDeprecateTenFoot (copy), ShouldSelectorArrowStepModule (copy), Computed (copy), Computed1 (copy), t (copy)
 	local v2 = 0
 	local config = { HubRef = nil, SetSelectionIndex = nil }
 	
@@ -1085,22 +1086,23 @@ local function CreateSelector(p7, CurrentIndex)
 	})
 	
 	if UserInputService.PreferredInput ~= Enum.PreferredInput.Touch then
-		local function v176(Image)
+		local function v177(Image)
 			-- upvalues: ARROWCOLOR (upval)
 			Image.ImageColor3 = ARROWCOLOR
 		end
 		
-		local function v177(Image)
+		local function v178(Image)
 			-- upvalues: ARROWCOLORHOVER (upval)
 			Image.ImageColor3 = ARROWCOLORHOVER
 		end
 		
-		addHoverState(Parent, Image, v176, v177)
-		addHoverState(Parent1, Image1, v176, v177)
+		addHoverState(Parent, Image, v177, v178)
+		addHoverState(Parent1, Image1, v177, v178)
 	end
 	config.Selections = {}
 	local t1 = {}
 	local t2 = {}
+	local Callback = nil
 	local Button = CreateFunction("ImageButton")({
 		Name = "AutoSelectButton",
 		BackgroundTransparency = 1,
@@ -1112,7 +1114,7 @@ local function CreateSelector(p7, CurrentIndex)
 		SelectionImageObject = SelectionImageObject
 	})
 	Button.MouseButton1Click:Connect(function()
-		-- upvalues: Interactable (ref), config (copy), VRService (upval), UserInputService (upval), GuiService (upval)
+		-- upvalues: Interactable (ref), config (copy), FFlagAddFromUserToIndexChangedModule (upval), Callback (ref), VRService (upval), UserInputService (upval), GuiService (upval)
 		if not Interactable then return end
 		if #config.Selections <= 1 then return end
 		local NewCurrentIndex = config.CurrentIndex + 1
@@ -1120,16 +1122,19 @@ local function CreateSelector(p7, CurrentIndex)
 		if #config.Selections < NewCurrentIndex then
 			NewCurrentIndex = 1
 		end
-		config:SetSelectionIndex(NewCurrentIndex)
-		
+		if FFlagAddFromUserToIndexChangedModule then
+			Callback(NewCurrentIndex, 1, true)
+		else
+			config:SetSelectionIndex(NewCurrentIndex)
+		end
 		if not VRService.VREnabled and (UserInputService.PreferredInput ~= Enum.PreferredInput.Touch or UserInputService.GamepadEnabled) then
 			GuiService.SelectedCoreObject = config.SelectorFrame
 		end
 	end)
 	t2[Button] = true
 	
-	local function setSelection(NewCurrentIndex, p8)
-		-- upvalues: config (copy), Parent (copy), t1 (ref), EaseOutQuad (upval), IndexChanged (copy)
+	Callback = function(NewCurrentIndex, p8, Enabled)
+		-- upvalues: config (copy), Parent (copy), t1 (ref), EaseOutQuad (upval), FFlagAddFromUserToIndexChangedModule (upval), IndexChanged (copy)
 		for CurrentIndex, selection in pairs(config.Selections) do
 			local IsNewCurrentIndexMatch = CurrentIndex == NewCurrentIndex
 			local _UDim2 = UDim2.new(0, Parent.Size.X.Offset, 0, 0)
@@ -1138,34 +1143,43 @@ local function CreateSelector(p7, CurrentIndex)
 			if _UDim2_1.X.Offset < 0 then
 				_UDim2_1 = UDim2.new(0, _UDim2_1.X.Offset + selection.AbsoluteSize.X / 4, 0, 0)
 			end
-			if IsNewCurrentIndexMatch then
-				t1[selection] = true
-				selection.Position = _UDim2_1
-				selection.Visible = true
-				PropertyTweener(selection, "TextTransparency", 1, 0, 0.165, EaseOutQuad)
-				
-				if selection:IsDescendantOf(game) then
-					selection:TweenPositionInternal(_UDim2, Enum.EasingDirection.In, Enum.EasingStyle.Quad, 0.15, true)
-				else
-					selection.Position = _UDim2
+			if not IsNewCurrentIndexMatch then
+				if t1[selection] then
+					t1[selection] = false
+					PropertyTweener(selection, "TextTransparency", 0, 1, 0.165, EaseOutQuad)
+					
+					if not selection:IsDescendantOf(game) then
+						selection.Position = _UDim2_1
+						continue
+					else
+						selection:TweenPositionInternal(_UDim2_1, Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.135, true)
+						continue
+					end
 				end
-				config.CurrentIndex = CurrentIndex
+				continue
+			end
+			t1[selection] = true
+			selection.Position = _UDim2_1
+			selection.Visible = true
+			PropertyTweener(selection, "TextTransparency", 1, 0, 0.165, EaseOutQuad)
+			
+			if selection:IsDescendantOf(game) then
+				selection:TweenPositionInternal(_UDim2, Enum.EasingDirection.In, Enum.EasingStyle.Quad, 0.15, true)
+			else
+				selection.Position = _UDim2
+			end
+			config.CurrentIndex = CurrentIndex
+			
+			if FFlagAddFromUserToIndexChangedModule then
+				IndexChanged:Fire(NewCurrentIndex, Enabled == true)
+			else
 				IndexChanged:Fire(NewCurrentIndex)
-			elseif t1[selection] then
-				t1[selection] = false
-				PropertyTweener(selection, "TextTransparency", 0, 1, 0.165, EaseOutQuad)
-				
-				if selection:IsDescendantOf(game) then
-					selection:TweenPositionInternal(_UDim2_1, Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.135, true)
-				else
-					selection.Position = _UDim2_1
-				end
 			end
 		end
 	end
 	
 	local function stepFunc(Input, p9)
-		-- upvalues: Interactable (ref), VRService (upval), UserInputService (upval), GuiService (upval), config (copy), setSelection (copy)
+		-- upvalues: Interactable (ref), VRService (upval), UserInputService (upval), GuiService (upval), config (copy), FFlagAddFromUserToIndexChangedModule (upval), Callback (ref)
 		if not Interactable then return end
 		if Input ~= nil and Input.UserInputType ~= Enum.UserInputType.MouseButton1 and Input.UserInputType ~= Enum.UserInputType.Gamepad1 and Input.UserInputType ~= Enum.UserInputType.Gamepad2 and Input.UserInputType ~= Enum.UserInputType.Gamepad3 and Input.UserInputType ~= Enum.UserInputType.Gamepad4 and Input.UserInputType ~= Enum.UserInputType.Keyboard then return end
 		if not VRService.VREnabled and (UserInputService.PreferredInput ~= Enum.PreferredInput.Touch or UserInputService.GamepadEnabled) then
@@ -1179,7 +1193,13 @@ local function CreateSelector(p7, CurrentIndex)
 		elseif NewCurrentIndex < 1 then
 			NewCurrentIndex = #config.Selections
 		end
-		setSelection(NewCurrentIndex, v3)
+		if FFlagAddFromUserToIndexChangedModule then
+			Callback(NewCurrentIndex, v3, true)
+			
+			return
+		else
+			Callback(NewCurrentIndex, v3)
+		end
 	end
 	
 	local Connection = nil
@@ -1198,8 +1218,8 @@ local function CreateSelector(p7, CurrentIndex)
 	config.IndexChanged = IndexChanged.Event
 	
 	function config:SetSelectionIndex(NewCurrentIndex)
-		-- upvalues: setSelection (copy)
-		setSelection(NewCurrentIndex, 1)
+		-- upvalues: Callback (ref)
+		Callback(NewCurrentIndex, 1)
 	end
 	
 	function config:GetSelectedIndex()
@@ -1305,7 +1325,7 @@ local function CreateSelector(p7, CurrentIndex)
 	Parent1.Selectable = VREnabled
 	Button.Selectable = VREnabled
 	Parent.InputBegan:Connect(function(Input)
-		-- upvalues: ShouldSelectorArrowStepModule (upval), Computed (upval), Computed1 (upval), Interactable (ref), VRService (upval), UserInputService (upval), GuiService (upval), config (copy), setSelection (copy)
+		-- upvalues: ShouldSelectorArrowStepModule (upval), Computed (upval), Computed1 (upval), Interactable (ref), VRService (upval), UserInputService (upval), GuiService (upval), config (copy), FFlagAddFromUserToIndexChangedModule (upval), Callback (ref)
 		if ShouldSelectorArrowStepModule(Input.UserInputType, Computed(false), Computed1(false)) then
 			if not Interactable then return end
 			if not VRService.VREnabled and (UserInputService.PreferredInput ~= Enum.PreferredInput.Touch or UserInputService.GamepadEnabled) then
@@ -1319,11 +1339,16 @@ local function CreateSelector(p7, CurrentIndex)
 			elseif NewCurrentIndex < 1 then
 				NewCurrentIndex = #config.Selections
 			end
-			setSelection(NewCurrentIndex, v3)
+			if FFlagAddFromUserToIndexChangedModule then
+				Callback(NewCurrentIndex, v3, true)
+				
+				return
+			end
+			Callback(NewCurrentIndex, v3)
 		end
 	end)
 	Parent1.InputBegan:Connect(function(Input)
-		-- upvalues: ShouldSelectorArrowStepModule (upval), Computed (upval), Computed1 (upval), Interactable (ref), VRService (upval), UserInputService (upval), GuiService (upval), config (copy), setSelection (copy)
+		-- upvalues: ShouldSelectorArrowStepModule (upval), Computed (upval), Computed1 (upval), Interactable (ref), VRService (upval), UserInputService (upval), GuiService (upval), config (copy), FFlagAddFromUserToIndexChangedModule (upval), Callback (ref)
 		if ShouldSelectorArrowStepModule(Input.UserInputType, Computed(false), Computed1(false)) then
 			if not Interactable then return end
 			if not VRService.VREnabled and (UserInputService.PreferredInput ~= Enum.PreferredInput.Touch or UserInputService.GamepadEnabled) then
@@ -1337,13 +1362,18 @@ local function CreateSelector(p7, CurrentIndex)
 			elseif NewCurrentIndex < 1 then
 				NewCurrentIndex = #config.Selections
 			end
-			setSelection(NewCurrentIndex, v3)
+			if FFlagAddFromUserToIndexChangedModule then
+				Callback(NewCurrentIndex, v3, true)
+				
+				return
+			end
+			Callback(NewCurrentIndex, v3)
 		end
 	end)
 	local v3 = true
 	config:UpdateOptions(p7)
 	UserInputService.InputBegan:Connect(function(Input)
-		-- upvalues: Interactable (ref), v3 (ref), GuiService (upval), config (copy), VRService (upval), UserInputService (upval), setSelection (copy)
+		-- upvalues: Interactable (ref), v3 (ref), GuiService (upval), config (copy), VRService (upval), UserInputService (upval), FFlagAddFromUserToIndexChangedModule (upval), Callback (ref)
 		if not Interactable then return end
 		if not v3 then return end
 		if Input.UserInputType ~= Enum.UserInputType.Gamepad1 and Input.UserInputType ~= Enum.UserInputType.Keyboard then return end
@@ -1362,9 +1392,15 @@ local function CreateSelector(p7, CurrentIndex)
 			elseif NewCurrentIndex < 1 then
 				NewCurrentIndex = #config.Selections
 			end
-			setSelection(NewCurrentIndex, v4)
-			
-			return
+			if FFlagAddFromUserToIndexChangedModule then
+				Callback(NewCurrentIndex, v4, true)
+				
+				return
+			else
+				Callback(NewCurrentIndex, v4)
+				
+				return
+			end
 		else
 			if Input.KeyCode == Enum.KeyCode.DPadRight or Input.KeyCode == Enum.KeyCode.Right or Input.KeyCode == Enum.KeyCode.D then
 				if not Interactable then return end
@@ -1372,15 +1408,20 @@ local function CreateSelector(p7, CurrentIndex)
 				if not VRService.VREnabled and (UserInputService.PreferredInput ~= Enum.PreferredInput.Touch or UserInputService.GamepadEnabled) then
 					GuiService.SelectedCoreObject = config.SelectorFrame
 				end
-				local NewCurrentIndex = 1 + config.CurrentIndex
-				local v5: number = if NewCurrentIndex > config.CurrentIndex then 1 else -1
+				local CountSelections = 1 + config.CurrentIndex
+				local v5: number = if CountSelections > config.CurrentIndex then 1 else -1
 				
-				if #config.Selections < NewCurrentIndex then
-					NewCurrentIndex = 1
-				elseif NewCurrentIndex < 1 then
-					NewCurrentIndex = #config.Selections
+				if #config.Selections < CountSelections then
+					CountSelections = 1
+				elseif CountSelections < 1 then
+					CountSelections = #config.Selections
 				end
-				setSelection(NewCurrentIndex, v5)
+				if FFlagAddFromUserToIndexChangedModule then
+					Callback(CountSelections, v5, true)
+					
+					return
+				end
+				Callback(CountSelections, v5)
 			end
 		end
 	end)

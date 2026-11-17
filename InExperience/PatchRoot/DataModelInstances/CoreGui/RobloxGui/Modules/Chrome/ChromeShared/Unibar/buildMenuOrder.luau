@@ -2,6 +2,7 @@
 local CorePackages = game:GetService("CorePackages")
 local ConstantsModule = require(script.Parent.Constants)
 local InExperienceSideSheetModule = require(CorePackages.Workspace.Packages.InExperienceSideSheet)
+local IntegrationIds = InExperienceSideSheetModule.Constants.IntegrationIds
 local IsConnectDropdownEnabledModule = require(Chrome.Integrations.Connect.isConnectDropdownEnabled)
 local IsSpatialFunction = require(CorePackages.Workspace.Packages.AppCommonLib).isSpatial
 local IsTenFootInterfaceFunction = require(CorePackages.Workspace.Packages.AppCommonLib).isTenFootInterface
@@ -28,8 +29,8 @@ local function _(p1, Key, p2)
 end
 
 local _ = function(p1)
-	-- upvalues: ConstantsModule (copy)
-	p1.connect_dropdown = nil
+	-- upvalues: IntegrationIds (copy), ConstantsModule (copy)
+	p1[IntegrationIds.ConnectDropdown] = nil
 	p1[ConstantsModule.AVATAR_SWITCHER_ID] = nil
 	p1.emotes = nil
 	p1.traversal_history = nil
@@ -38,18 +39,18 @@ local _ = function(p1)
 end
 
 return function()
-	-- upvalues: IsConnectDropdownEnabledModule (copy), FFlagRemoveFriendsChatUnibarEntrypoints (copy), FFlagExpChatCanShowFriendsTab (copy), IsSpatialFunction (copy), IsTenFootInterfaceFunction (copy), IsInExperienceUIVREnabled (copy), FFlagAddTraversalHistory (copy), FFlagIntegrateTraversalHistoryInSideSheet (copy), FFlagEnableSideSheetRobuxWidgetModule (copy), IsSideSheetEnabledModule (copy), FFlagAddInviteFriendsIntegration (copy), ConstantsModule (copy), FFlagEnableInExperienceAvatarSwitcher (copy), FFlagShowSwitchServerButton (copy), IsPioneerLaunchFunction (copy), FFlagEnableInExperienceShop (copy), InExperienceSideSheetModule (copy), FFlagSideSheetUnifiedMenuOrder (copy)
+	-- upvalues: IsConnectDropdownEnabledModule (copy), FFlagRemoveFriendsChatUnibarEntrypoints (copy), FFlagExpChatCanShowFriendsTab (copy), IsSpatialFunction (copy), IsTenFootInterfaceFunction (copy), IsInExperienceUIVREnabled (copy), FFlagAddTraversalHistory (copy), FFlagIntegrateTraversalHistoryInSideSheet (copy), FFlagEnableSideSheetRobuxWidgetModule (copy), IsSideSheetEnabledModule (copy), IntegrationIds (copy), FFlagAddInviteFriendsIntegration (copy), ConstantsModule (copy), FFlagEnableInExperienceAvatarSwitcher (copy), FFlagShowSwitchServerButton (copy), IsPioneerLaunchFunction (copy), FFlagEnableInExperienceShop (copy), InExperienceSideSheetModule (copy), FFlagSideSheetUnifiedMenuOrder (copy)
 	local Inverted: boolean = IsConnectDropdownEnabledModule() and not (FFlagRemoveFriendsChatUnibarEntrypoints and FFlagExpChatCanShowFriendsTab)
 	local Inverted1: boolean = not IsSpatialFunction() and not IsTenFootInterfaceFunction()
 	local NoIsInExperienceUIVREnabled: boolean = not IsInExperienceUIVREnabled or not IsSpatialFunction()
 	local FFlagIntegrateTraversalHistoryInSideSheet1 = FFlagAddTraversalHistory and FFlagIntegrateTraversalHistoryInSideSheet
 	local config = {
 		RobuxWidget = if FFlagEnableSideSheetRobuxWidgetModule and IsSideSheetEnabledModule then 5 else nil,
-		invite_friends = if FFlagAddInviteFriendsIntegration then 10 else nil,
-		people = 20,
+		[IntegrationIds.InviteFriends] = if FFlagAddInviteFriendsIntegration then 10 else nil,
+		[IntegrationIds.People] = 20,
 		settings = 30,
 		trust_and_safety = 40,
-		connect_dropdown = if Inverted then 50 else nil,
+		[IntegrationIds.ConnectDropdown] = if Inverted then 50 else nil,
 		[ConstantsModule.AVATAR_SWITCHER_ID] = if FFlagEnableInExperienceAvatarSwitcher then 60 else nil,
 		[ConstantsModule.SWITCH_SERVER_ID] = if FFlagShowSwitchServerButton or IsPioneerLaunchFunction() then 65 else nil,
 		[ConstantsModule.IN_EXPERIENCE_SHOP_ID] = if FFlagEnableInExperienceShop then 70 else nil,
@@ -69,7 +70,7 @@ return function()
 	
 	if FFlagSideSheetUnifiedMenuOrder and IsSideSheetEnabledModule then
 		if IsPioneerLaunchFunction() then
-			config.connect_dropdown = nil
+			config[IntegrationIds.ConnectDropdown] = nil
 			config[ConstantsModule.AVATAR_SWITCHER_ID] = nil
 			config.emotes = nil
 			config.traversal_history = nil
@@ -80,14 +81,20 @@ return function()
 				config.AccountUpsell = 185
 			end
 		end
-		if config.people ~= nil then
-			config.people = 20
+		local People = IntegrationIds.People
+		
+		if config[People] ~= nil then
+			config[People] = 20
 		end
-		if config.connect_dropdown ~= nil then
-			config.connect_dropdown = 30
+		local ConnectDropdown = IntegrationIds.ConnectDropdown
+		
+		if config[ConnectDropdown] ~= nil then
+			config[ConnectDropdown] = 30
 		end
-		if config.invite_friends ~= nil then
-			config.invite_friends = 40
+		local InviteFriends = IntegrationIds.InviteFriends
+		
+		if config[InviteFriends] ~= nil then
+			config[InviteFriends] = 40
 		end
 		if config.settings ~= nil then
 			config.settings = 50
@@ -148,7 +155,7 @@ return function()
 			config[Respawn] = 200
 		end
 	elseif IsPioneerLaunchFunction() then
-		config.connect_dropdown = nil
+		config[IntegrationIds.ConnectDropdown] = nil
 		config[ConstantsModule.AVATAR_SWITCHER_ID] = nil
 		config.emotes = nil
 		config.traversal_history = nil
@@ -160,8 +167,10 @@ return function()
 			config[SWITCHSERVERID] = 200
 		end
 	elseif not IsSideSheetEnabledModule then
-		if config.connect_dropdown ~= nil then
-			config.connect_dropdown = 10
+		local ConnectDropdown = IntegrationIds.ConnectDropdown
+		
+		if config[ConnectDropdown] ~= nil then
+			config[ConnectDropdown] = 10
 		end
 		local INEXPERIENCESHOPID = ConstantsModule.IN_EXPERIENCE_SHOP_ID
 		
@@ -186,8 +195,8 @@ return function()
 			config.trust_and_safety = 70
 		end
 		config.respawn = 110
-		config.invite_friends = nil
-		config.people = nil
+		config[IntegrationIds.InviteFriends] = nil
+		config[IntegrationIds.People] = nil
 		config.settings = nil
 		config.traversal_history = nil
 		config.help = nil

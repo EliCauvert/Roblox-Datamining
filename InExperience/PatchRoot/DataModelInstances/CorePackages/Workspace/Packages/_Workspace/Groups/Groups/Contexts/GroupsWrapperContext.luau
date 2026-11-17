@@ -1,4 +1,7 @@
-﻿return require(script:FindFirstAncestor("Groups").Parent.React).createContext({
+﻿local Parent = script:FindFirstAncestor("Groups").Parent
+local _ = require(Parent.Signals)
+
+return require(Parent.React).createContext({
 	userId = "",
 	groupId = nil,
 	groupOverviewPaneSource = nil,

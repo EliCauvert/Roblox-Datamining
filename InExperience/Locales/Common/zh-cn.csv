@@ -2721,6 +2721,7 @@ Feature.Build.Title.VersionInfo,版本信息
 Feature.Build.Title.VersionNumber,版本 {VERSION}
 Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,包含哪些内容？
+Feature.BuyRobux.Action.ContentPersonalization,内容个性化
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.Allow,允许
 Feature.Captures.Action.AllowPhotoAccessAccepted,

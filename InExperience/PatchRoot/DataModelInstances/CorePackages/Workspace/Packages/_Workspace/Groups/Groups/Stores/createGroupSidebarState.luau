@@ -3,7 +3,9 @@ local SignalsModule = require(Groups.Parent.Signals)
 local FoldSearchTextModule = require(Groups.Common.foldSearchText)
 
 return function(GroupId, Tbl, p1)
-	-- upvalues: SignalsModule (copy), FoldSearchTextModule (copy)
+	-- upvalues: Groups (copy), SignalsModule (copy), FoldSearchTextModule (copy)
+	local SidebarChangeCountsModule = require(Groups.Common.sidebarChangeCounts)
+	
 	local function _(GroupId)
 		return if GroupId then { section = "overview", groupId = GroupId } else nil
 	end
@@ -24,7 +26,6 @@ return function(GroupId, Tbl, p1)
 	local Signal6, Signal2_5 = SignalsModule.createSignal(Vector2.zero)
 	local Signal7, Signal2_6 = SignalsModule.createSignal({})
 	local Signal8, Signal2_7 = SignalsModule.createSignal(p1)
-	local Signal9, Signal2_8 = SignalsModule.createSignal(0)
 	local t = {}
 	local DelayedThread = nil
 	
@@ -77,11 +78,11 @@ return function(GroupId, Tbl, p1)
 			end
 			Signal2_6(t)
 		end,
-		sectionRefreshCount = Signal9,
-		refreshSections = function()
-			-- upvalues: Signal2_8 (copy), Signal9 (copy)
-			Signal2_8(Signal9(false) + 1)
-		end,
+		sectionRefreshCount = SidebarChangeCountsModule.getRefreshCount,
+		refreshSections = SidebarChangeCountsModule.markRefreshed,
+		missedRefresh = SidebarChangeCountsModule.missedRefresh,
+		countForLoad = SidebarChangeCountsModule.countForLoad,
+		markLoaded = SidebarChangeCountsModule.markLoaded,
 		setExpanded = function(Key, p2)
 			-- upvalues: Signal5 (copy), Signal2_4 (copy)
 			local Copy = table.clone(Signal5(false))

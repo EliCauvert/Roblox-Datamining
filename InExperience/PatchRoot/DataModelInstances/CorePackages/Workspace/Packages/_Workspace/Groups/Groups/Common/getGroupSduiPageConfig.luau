@@ -43,6 +43,7 @@ local Frozen = table.freeze({
 		requiresGroupId = true,
 		protoModule = "group_sidebar_section_page",
 		protoMessage = "GroupSidebarSectionPage",
+		keepsSavedPage = true,
 		buildUrl = UrlBuilder.new({
 			path = "v1/groups/{groupId}/pages/sidebar-section",
 			base = HttpModule.Url.GROUPS_URL

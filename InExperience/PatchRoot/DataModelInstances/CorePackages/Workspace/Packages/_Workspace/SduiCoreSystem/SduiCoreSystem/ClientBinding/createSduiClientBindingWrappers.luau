@@ -1,6 +1,7 @@
 ﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
 local Parent = SduiCoreSystem.Parent
 local FFlagSduiErrorPaths = require(Parent.SharedFlags).FFlagSduiErrorPaths
+local FFlagSduiSignalStateNoStaleRead = require(Parent.SharedFlags).FFlagSduiSignalStateNoStaleRead
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
@@ -12,6 +13,7 @@ local _ = require(SduiCoreSystem.SduiConfigTypes)
 local _ = require(SduiCoreSystem.SduiComponentType)
 local GetSduiComponentRegistryModule = require(SduiCoreSystem.getSduiComponentRegistry)
 local ValidateInterfaceModule = require(SduiCoreSystem.validateInterface)
+local UseCurrentSignalStateModule = require(SduiCoreSystem.useCurrentSignalState)
 local CreateSduiErrorLoggerModule = require(SduiCoreSystem.createSduiErrorLogger)
 
 local function SduiErrorComponent(_)
@@ -77,10 +79,10 @@ local function buildWrappedComponent(Callback, p1, SduiContext, List)
 			end
 		end
 	end
-	local V25 = v1 or p1.componentConfig.nestedComponentConfigs
+	local V27 = v1 or p1.componentConfig.nestedComponentConfigs
 	
-	if V25 then
-		for i3, ComponentConfig in V25 do
+	if V27 then
+		for i3, ComponentConfig in V27 do
 			Copy[i3] = ReactModule.createElement(Callback(ComponentConfig), {
 				sduiContext = SduiContext,
 				componentConfig = ComponentConfig,
@@ -126,19 +128,19 @@ local function buildWrappedComponent(Callback, p1, SduiContext, List)
 end
 
 return function(p2)
-	-- upvalues: ReactModule (copy), FFlagSduiErrorPaths (copy), useComponentSduiContext (copy), buildWrappedComponent (copy), CompareSduiPropsModule (copy), SignalsModule (copy), TutilsModule (copy), SignalsReactModule (copy)
+	-- upvalues: ReactModule (copy), FFlagSduiErrorPaths (copy), useComponentSduiContext (copy), buildWrappedComponent (copy), CompareSduiPropsModule (copy), SignalsModule (copy), TutilsModule (copy), FFlagSduiSignalStateNoStaleRead (copy), UseCurrentSignalStateModule (copy), SignalsReactModule (copy)
 	return {
 		SduiClientBindingThinWrapper = ReactModule.memo(function(p3)
 			-- upvalues: FFlagSduiErrorPaths (upval), useComponentSduiContext (upval), buildWrappedComponent (upval), p2 (copy)
 			return buildWrappedComponent(p2, p3, if FFlagSduiErrorPaths then useComponentSduiContext(p3) else p3.sduiContext)
 		end, CompareSduiPropsModule),
 		SduiDataBindingWrapper = ReactModule.memo(function(p3)
-			-- upvalues: FFlagSduiErrorPaths (upval), useComponentSduiContext (upval), ReactModule (upval), SignalsModule (upval), TutilsModule (upval), SignalsReactModule (upval), buildWrappedComponent (upval), p2 (copy)
+			-- upvalues: FFlagSduiErrorPaths (upval), useComponentSduiContext (upval), ReactModule (upval), SignalsModule (upval), TutilsModule (upval), FFlagSduiSignalStateNoStaleRead (upval), UseCurrentSignalStateModule (upval), SignalsReactModule (upval), buildWrappedComponent (upval), p2 (copy)
 			local UseComponentSduiContextResult = if FFlagSduiErrorPaths then useComponentSduiContext(p3) else p3.sduiContext
 			local PropSignals = p3.componentConfig.propSignals
 			local IsComponentFilteredSignalFunction = p3.componentConfig.isComponentFilteredSignal
 			local ExtraLocalPropSignals = p3.extraLocalPropSignals
-			local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
+			local UseMemoResult = ReactModule.useMemo(function()
 				-- upvalues: PropSignals (copy), IsComponentFilteredSignalFunction (copy), ExtraLocalPropSignals (copy), SignalsModule (upval), TutilsModule (upval)
 				assert(PropSignals or (IsComponentFilteredSignalFunction or ExtraLocalPropSignals), "propSignals, isComponentFilteredSignal, or extraLocalPropSignals must exist")
 				
@@ -166,9 +168,10 @@ return function(p2)
 				IsComponentFilteredSignalFunction,
 				ExtraLocalPropSignals,
 				p3.componentConfig.componentType
-			})))
+			})
+			local UseCurrentSignalStateModuleResult = if FFlagSduiSignalStateNoStaleRead then UseCurrentSignalStateModule(UseMemoResult) else SignalsReactModule.useSignalState(UseMemoResult)
 			
-			return if UseSignalStateResult.__isComponentFiltered == true then nil else buildWrappedComponent(p2, p3, UseComponentSduiContextResult, UseSignalStateResult)
+			return if UseCurrentSignalStateModuleResult.__isComponentFiltered == true then nil else buildWrappedComponent(p2, p3, UseComponentSduiContextResult, UseCurrentSignalStateModuleResult)
 		end, CompareSduiPropsModule)
 	}
 end

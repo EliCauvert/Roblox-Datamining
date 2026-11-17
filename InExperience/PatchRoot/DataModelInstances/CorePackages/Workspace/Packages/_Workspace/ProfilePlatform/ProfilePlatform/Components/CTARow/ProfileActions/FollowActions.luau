@@ -5,6 +5,8 @@ local FollowAttributionModule = if FFlagSocialFollowAttribution then require(Par
 local ButtonVariant = require(Parent.Foundation).Enums.ButtonVariant
 local SetCurrentToastMessageFunction = require(Parent.ToastRodux).Actions.SetCurrentToastMessage
 local GroupsNetworkingModule = require(ProfilePlatform.Networking.GroupsNetworking)
+local NotifyCommunityMembershipChangedModule = require(ProfilePlatform.Utils.notifyCommunityMembershipChanged)
+local FFlagEnableGroupSidebarSdui = require(Parent.SharedFlags).FFlagEnableGroupSidebarSdui
 local GetProfilePlatformModule = require(ProfilePlatform.Networking.getProfilePlatform)
 local RefreshProfilePlatformActionInfoModule = require(ProfilePlatform.Networking.refreshProfilePlatformActionInfo)
 local GetAvailableCommunityComponentsModule = require(ProfilePlatform.Hooks.getAvailableCommunityComponents)
@@ -39,7 +41,7 @@ end
 
 return {
 	[EnumsModule.ProfileActions.Follow] = function(p1)
-		-- upvalues: ButtonVariant (copy), EnumsModule (copy), ProfileTypes (copy), FFlagProfilePlatformEnableUserFollowModule (copy), EventNamesModule (copy), handleUpdateUserFollowStatus (copy), FollowingStore (copy), FFlagSocialFollowAttribution (copy), FollowAttributionModule (copy), GroupsNetworkingModule (copy), GetProfilePlatformModule (copy), GetAvailableCommunityComponentsModule (copy)
+		-- upvalues: ButtonVariant (copy), EnumsModule (copy), ProfileTypes (copy), FFlagProfilePlatformEnableUserFollowModule (copy), EventNamesModule (copy), handleUpdateUserFollowStatus (copy), FollowingStore (copy), FFlagSocialFollowAttribution (copy), FollowAttributionModule (copy), GroupsNetworkingModule (copy), GetProfilePlatformModule (copy), GetAvailableCommunityComponentsModule (copy), FFlagEnableGroupSidebarSdui (copy), NotifyCommunityMembershipChangedModule (copy)
 		return {
 			variant = ButtonVariant.Standard,
 			text = p1.localized[EnumsModule.ProfileActions.Follow],
@@ -57,24 +59,28 @@ return {
 					end else nil)
 				end else nil,
 				[ProfileTypes.Community] = function()
-					-- upvalues: p1 (copy), EventNamesModule (upval), GroupsNetworkingModule (upval), GetProfilePlatformModule (upval), GetAvailableCommunityComponentsModule (upval)
+					-- upvalues: p1 (copy), EventNamesModule (upval), GroupsNetworkingModule (upval), GetProfilePlatformModule (upval), GetAvailableCommunityComponentsModule (upval), FFlagEnableGroupSidebarSdui (upval), NotifyCommunityMembershipChangedModule (upval)
 					p1.analytics.fireAnalyticsEvent(EventNamesModule.CTAButtonFollow, { buttonSurface = p1.buttonSurface })
 					
 					return p1.dispatch(GroupsNetworkingModule.JoinGroup.API({ groupId = p1.profileId })):andThen(function()
-						-- upvalues: p1 (upval), GetProfilePlatformModule (upval), GetAvailableCommunityComponentsModule (upval)
+						-- upvalues: p1 (upval), GetProfilePlatformModule (upval), GetAvailableCommunityComponentsModule (upval), FFlagEnableGroupSidebarSdui (upval), NotifyCommunityMembershipChangedModule (upval)
 						p1.dispatch(GetProfilePlatformModule.API({
 							includeComponentOrdering = true,
 							profileType = p1.profileType,
 							profileId = p1.profileId,
 							components = GetAvailableCommunityComponentsModule()
 						}))
+						
+						if FFlagEnableGroupSidebarSdui then
+							NotifyCommunityMembershipChangedModule()
+						end
 					end)
 				end
 			}
 		}
 	end,
 	[EnumsModule.ProfileActions.Unfollow] = function(p1)
-		-- upvalues: ProfileTypes (copy), EnumsModule (copy), FFlagProfilePlatformEnableUserFollowModule (copy), EventNamesModule (copy), handleUpdateUserFollowStatus (copy), FollowingStore (copy), GroupsNetworkingModule (copy), GetProfilePlatformModule (copy), GetAvailableCommunityComponentsModule (copy)
+		-- upvalues: ProfileTypes (copy), EnumsModule (copy), FFlagProfilePlatformEnableUserFollowModule (copy), EventNamesModule (copy), handleUpdateUserFollowStatus (copy), FollowingStore (copy), GroupsNetworkingModule (copy), GetProfilePlatformModule (copy), GetAvailableCommunityComponentsModule (copy), FFlagEnableGroupSidebarSdui (copy), NotifyCommunityMembershipChangedModule (copy)
 		return if p1.profileType == ProfileTypes.Community and p1.viewerOwnsOpenCommunity then nil else {
 			text = p1.localized[EnumsModule.ProfileActions.Unfollow],
 			onActivated = {
@@ -85,17 +91,21 @@ return {
 					return handleUpdateUserFollowStatus(p1, FollowingStore.get().Unfollow, p1.localized.unfollowedToast)
 				end else nil,
 				[ProfileTypes.Community] = function()
-					-- upvalues: p1 (copy), EventNamesModule (upval), GroupsNetworkingModule (upval), GetProfilePlatformModule (upval), GetAvailableCommunityComponentsModule (upval)
+					-- upvalues: p1 (copy), EventNamesModule (upval), GroupsNetworkingModule (upval), GetProfilePlatformModule (upval), GetAvailableCommunityComponentsModule (upval), FFlagEnableGroupSidebarSdui (upval), NotifyCommunityMembershipChangedModule (upval)
 					p1.analytics.fireAnalyticsEvent(EventNamesModule.ContextualMenuButtonUnfollow, { buttonSurface = p1.buttonSurface })
 					
 					return p1.dispatch(GroupsNetworkingModule.LeaveGroup.API({ groupId = p1.profileId, userId = p1.localUserId })):andThen(function()
-						-- upvalues: p1 (upval), GetProfilePlatformModule (upval), GetAvailableCommunityComponentsModule (upval)
+						-- upvalues: p1 (upval), GetProfilePlatformModule (upval), GetAvailableCommunityComponentsModule (upval), FFlagEnableGroupSidebarSdui (upval), NotifyCommunityMembershipChangedModule (upval)
 						p1.dispatch(GetProfilePlatformModule.API({
 							includeComponentOrdering = true,
 							profileType = p1.profileType,
 							profileId = p1.profileId,
 							components = GetAvailableCommunityComponentsModule()
 						}))
+						
+						if FFlagEnableGroupSidebarSdui then
+							NotifyCommunityMembershipChangedModule()
+						end
 					end)
 				end
 			}

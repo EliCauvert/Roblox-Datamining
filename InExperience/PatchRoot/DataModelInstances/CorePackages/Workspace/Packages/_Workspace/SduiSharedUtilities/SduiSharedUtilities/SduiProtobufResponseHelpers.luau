@@ -4,8 +4,6 @@ local Parent = SduiSharedUtilities.Parent
 local GetProtoVariableMapperFunction = require(Parent.SduiCoreSystem).getProtoVariableMapper
 local _ = require(SduiSharedUtilities.SduiIntegrationTypes)
 local FFlagSduiHydrationDataCamelCasePropertyKeys = require(Parent.SharedFlags).FFlagSduiHydrationDataCamelCasePropertyKeys
-local FFlagEnableHomepagePromptsForModalsAndBanners = require(Parent.SharedFlags).FFlagEnableHomepagePromptsForModalsAndBanners
-local FFlagPromptsHandlerEnabled = require(Parent.SharedFlags).FFlagPromptsHandlerEnabled
 local FFlagSduiSandboxContentInputData = require(Parent.SharedFlags).FFlagSduiSandboxContentInputData
 
 local function decodeProto(p1, p2)
@@ -92,7 +90,7 @@ return {
 		end
 	end,
 	parsePageEntriesFromResponse = function(p3)
-		-- upvalues: FFlagSduiSandboxContentInputData (copy), Callback (ref), FFlagEnableHomepagePromptsForModalsAndBanners (copy), FFlagPromptsHandlerEnabled (copy), parseSurfacing (copy)
+		-- upvalues: FFlagSduiSandboxContentInputData (copy), Callback (ref), parseSurfacing (copy)
 		local List = {}
 		
 		if p3.page_entries then
@@ -108,7 +106,7 @@ return {
 					end
 				end
 				local Identifier = pageEntry.page_entry.identifier
-				local Category = if FFlagEnableHomepagePromptsForModalsAndBanners or FFlagPromptsHandlerEnabled then pageEntry.page_entry.category else nil
+				local Category = pageEntry.page_entry.category
 				table.insert(List, {
 					robloxComponentType = RobloxComponent,
 					identifier = if Identifier == "" then nil else Identifier,

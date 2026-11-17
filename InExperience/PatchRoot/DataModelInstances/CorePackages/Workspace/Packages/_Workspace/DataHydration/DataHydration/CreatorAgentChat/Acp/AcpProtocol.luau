@@ -45,7 +45,8 @@ return {
 		OutOfCredits = -32006,
 		PayloadTooLarge = -32007,
 		InsufficientFunds = -32008,
-		MissingThumbnail = -32009
+		MissingThumbnail = -32009,
+		AdCreditFundedNotCreated = -32010
 	},
 	AskTool = { Name = "ask_tool" },
 	extractSessionNewProject = function(p1)

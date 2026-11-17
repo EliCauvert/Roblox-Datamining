@@ -3,7 +3,7 @@
 return {
 	displayName = "SduiFoundation",
 	setupFilesAfterEnv = {
-		JestConfigsModule.setupFiles.LogHandler,
+		JestConfigsModule.setupFiles.ErrorLogHandler,
 		JestConfigsModule.setupFiles.UIBloxInitializer,
 		JestConfigsModule.setupFiles.createPromiseRejectionHandler(),
 		JestConfigsModule.setupFiles.RetryTimes

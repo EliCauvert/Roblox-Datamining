@@ -1,8 +1,8 @@
 ﻿local _ = require(script.Types)
 
 return {
-	BehaviorKind = require(script.BehaviorKind),
 	Behaviors = require(script.Behaviors),
+	Corner = require(script.Corner),
 	Window = require(script.Window),
 	["jest.config"] = script["jest.config"]
 }

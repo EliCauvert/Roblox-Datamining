@@ -19,9 +19,6 @@ local GetSduiDataBinderFunction = SduiCoreSystemModule.getSduiDataBinder
 local FFlagSduiErrorPaths = require(Parent.SharedFlags).FFlagSduiErrorPaths
 local FFlagSduiAllowNoConfigsBuilt = require(Parent.SharedFlags).FFlagSduiAllowNoConfigsBuilt
 local FFlagSduiAlwaysCacheWithIdentifier = require(Parent.SharedFlags).FFlagSduiAlwaysCacheWithIdentifier
-local FFlagEnableSduiV2HomepagePrompts = require(Parent.SharedFlags).FFlagEnableSduiV2HomepagePrompts
-local FFlagEnableHomepagePromptsForModalsAndBanners = require(Parent.SharedFlags).FFlagEnableHomepagePromptsForModalsAndBanners
-local FFlagPromptsHandlerEnabled = require(Parent.SharedFlags).FFlagPromptsHandlerEnabled
 local FFlagLuaAppEnableSduiHomePage = require(Parent.SharedFlags).FFlagLuaAppEnableSduiHomePage
 local FFlagSduiStreamingRefreshReplacesInputData = require(Parent.SharedFlags).FFlagSduiStreamingRefreshReplacesInputData
 local FFlagSduiFreshInputDataSignalOnRebuild = require(Parent.SharedFlags).FFlagSduiFreshInputDataSignalOnRebuild
@@ -55,7 +52,7 @@ local function getLocalizedLiteral(p2)
 end
 
 return function(p2)
-	-- upvalues: FFlagSduiAllowNoConfigsBuilt (copy), FFlagLuaAppEnableSduiHomePage (copy), FFlagSduiStreamingRefreshReplacesInputData (copy), SduiRequestStatus (copy), SduiLogger (copy), SduiErrors (copy), GetSduiDataBinderFunction (copy), FFlagSduiErrorPaths (copy), GetSduiTemplateStoreModule (copy), RecordTemplateUsage (copy), SduiUsageRecorder (copy), SduiProtobufResponseHelpersModule (copy), FFlagSduiSharedLocalizedLiterals (copy), AddSduiErrorContextFieldsFunction (copy), FFlagSduiAlwaysCacheWithIdentifier (copy), SduiInputDataMergeModule (copy), FFlagSduiFreshInputDataSignalOnRebuild (copy), SignalsModule (copy), CreateBuilderConfigFunction (copy), getLocalizedLiteral (copy), GetSduiClientBindingBuilderFunction (copy), FFlagLuaAppSduiHomePageSupport (copy), FFlagEnableSduiV2HomepagePrompts (copy), FFlagPromptsHandlerEnabled (copy), FFlagEnableHomepagePromptsForModalsAndBanners (copy), CryoModule (copy), ProcessClientHintsModule (copy)
+	-- upvalues: FFlagSduiAllowNoConfigsBuilt (copy), FFlagLuaAppEnableSduiHomePage (copy), FFlagSduiStreamingRefreshReplacesInputData (copy), SduiRequestStatus (copy), SduiLogger (copy), SduiErrors (copy), GetSduiDataBinderFunction (copy), FFlagSduiErrorPaths (copy), GetSduiTemplateStoreModule (copy), RecordTemplateUsage (copy), SduiUsageRecorder (copy), SduiProtobufResponseHelpersModule (copy), FFlagSduiSharedLocalizedLiterals (copy), AddSduiErrorContextFieldsFunction (copy), FFlagSduiAlwaysCacheWithIdentifier (copy), SduiInputDataMergeModule (copy), FFlagSduiFreshInputDataSignalOnRebuild (copy), SignalsModule (copy), CreateBuilderConfigFunction (copy), getLocalizedLiteral (copy), GetSduiClientBindingBuilderFunction (copy), FFlagLuaAppSduiHomePageSupport (copy), CryoModule (copy), ProcessClientHintsModule (copy)
 	local Response = p2.response
 	local DecodeResponseFunction = p2.decodeResponse
 	local ParsePageEntriesFromResponseFunction = p2.parsePageEntriesFromResponse
@@ -266,9 +263,9 @@ return function(p2)
 					t1[Text] = {
 						config = Result3,
 						dataUpdatedTimestamp = os.clock(),
-						identifier = if FFlagEnableSduiV2HomepagePrompts or FFlagPromptsHandlerEnabled then Identifier else nil,
-						robloxComponentType = if FFlagEnableSduiV2HomepagePrompts or FFlagPromptsHandlerEnabled then RobloxComponentType else nil,
-						category = if FFlagEnableHomepagePromptsForModalsAndBanners or FFlagPromptsHandlerEnabled then value.category else nil,
+						identifier = Identifier,
+						robloxComponentType = RobloxComponentType,
+						category = value.category,
 						surfacing = value.surfacing
 					}
 				else

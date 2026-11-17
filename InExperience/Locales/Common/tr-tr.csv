@@ -2240,6 +2240,7 @@ Feature.Build.Description.ActivateSubscription,{PRODUCT_ID} kimlikli aboneliği 
 Feature.Build.Description.AdCampaignModerationReview,Her reklamı yayınlanmadan önce inceliyoruz. Bu işlemin tamamlanması 24 saati bulabilir.
 Feature.Build.Description.AdCampaignSheetRunDates,{startDate}-{endDate} arasında yayınlanır
 Feature.Build.Description.AdComplete,Reklamın sona erdi. Performansını gör.
+Feature.Build.Description.AdCreditsSavedForRetry,"Robux'unu reklam kredisi olarak kaydettik. Tekrar dene, biz de onları bu reklam için kullanalım."
 Feature.Build.Description.AdModerationReview,
 Feature.Build.Description.AdvancedModel,Karmaşık oyunlar için birebir. Kullanım hakkı daha çabuk tükenir.
 Feature.Build.Description.AdvertisingAgreement,Oluştur'u seçerek {advertisingTermsStart}Roblox Reklam Şartları{advertisingTermsEnd} ve {advertisingStandardsStart}Reklam Standartları{advertisingStandardsEnd}'nı kabul etmiş olursun.
@@ -2640,6 +2641,7 @@ Feature.Build.Title.AdCampaignDuration,{durationDays} günlük reklam
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} gün
 Feature.Build.Title.AdComplete,Reklam tamamlandı
 Feature.Build.Title.AdCreatedPeriod,Reklam oluşturuldu.
+Feature.Build.Title.AdNotCreated,Reklamını oluşturamadık
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,Görsel ekle
 Feature.Build.Title.AdsStatsEmpty,
@@ -2696,6 +2698,7 @@ Feature.Build.Title.VersionInfo,Versiyon bilgileri
 Feature.Build.Title.VersionNumber,Sürüm {VERSION}
 Feature.Build.Title.Versions,Versiyonlar
 Feature.Build.Title.WhatsIncluded,Neler dâhil?
+Feature.BuyRobux.Action.ContentPersonalization,İçerik kişiselleştirme
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.Allow,İzin ver
 Feature.Captures.Action.AllowPhotoAccessAccepted,İzin Ver

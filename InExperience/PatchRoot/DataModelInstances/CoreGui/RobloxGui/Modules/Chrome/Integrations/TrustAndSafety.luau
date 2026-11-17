@@ -9,10 +9,12 @@ local Signal = require(CorePackages.Workspace.Packages.AppCommonLib).Signal
 local ChromeModule = require(CorePackages.Workspace.Packages.Chrome)
 local SideSheetOpenBehavior = ChromeModule.Enums.SideSheetOpenBehavior
 local SideSheetPlacement = ChromeModule.Enums.SideSheetPlacement
+local MappedSignal = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal
+local InGameMenuIntegrationUtilsModule = require(Chrome.Integrations.Pages.InGameMenuIntegrationUtils)
 local FFlagStandardizeSafetyIcon = SharedFlagsModule.FFlagStandardizeSafetyIcon
 local IsNameMatch = false
 local NewSignal = Signal.new()
-local NewResult = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(NewSignal, function()
+local NewMappedSignal = MappedSignal.new(NewSignal, function()
 	-- upvalues: IsNameMatch (ref)
 	return IsNameMatch
 end)
@@ -33,7 +35,12 @@ return ServiceModule:register({
 	sideSheetPlacement = SideSheetPlacement.AboveFold,
 	sideSheetOpenBehavior = if FFlagKeepSideSheetOpenBesideMenu then SideSheetOpenBehavior.MenuBesideSheet else nil,
 	activated = function(_)
-		-- upvalues: RobloxGui (copy), IsNameMatch (ref)
+		-- upvalues: FFlagKeepSideSheetOpenBesideMenu (copy), InGameMenuIntegrationUtilsModule (copy), IsNameMatch (ref), RobloxGui (copy)
+		if FFlagKeepSideSheetOpenBesideMenu then
+			InGameMenuIntegrationUtilsModule.toggleIGMPage("ReportAbusePage", IsNameMatch)
+			
+			return
+		end
 		local SettingsHubModule = require(RobloxGui.Modules.Settings.SettingsHub)
 		
 		if not SettingsHubModule:GetVisibility() then
@@ -49,11 +56,11 @@ return ServiceModule:register({
 			SettingsHubModule:SwitchToPage(SettingsHubModule.Instance.ReportAbusePage, true)
 		end
 	end,
-	isActivated = NewResult,
+	isActivated = NewMappedSignal,
 	components = {
 		Icon = function(_)
-			-- upvalues: FFlagStandardizeSafetyIcon (copy), CommonIconModule (copy), NewResult (copy)
-			return if FFlagStandardizeSafetyIcon then CommonIconModule("Flag", nil, NewResult) else CommonIconModule("icons/menu/safety_off", "icons/menu/safety_on", NewResult)
+			-- upvalues: FFlagStandardizeSafetyIcon (copy), CommonIconModule (copy), NewMappedSignal (copy)
+			return if FFlagStandardizeSafetyIcon then CommonIconModule("Flag", nil, NewMappedSignal) else CommonIconModule("icons/menu/safety_off", "icons/menu/safety_on", NewMappedSignal)
 		end
 	}
 })

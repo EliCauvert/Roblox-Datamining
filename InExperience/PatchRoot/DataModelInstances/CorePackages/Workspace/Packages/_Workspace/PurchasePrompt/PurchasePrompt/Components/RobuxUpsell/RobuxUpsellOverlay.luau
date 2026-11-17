@@ -1,5 +1,6 @@
 ﻿local Players = game:GetService("Players")
 local ContextActionService = game:GetService("ContextActionService")
+local GuiService = game:GetService("GuiService")
 local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
 local Parent = PurchasePrompt.Parent
 local PurchasePromptDepsModule = require(Parent.PurchasePromptDeps)
@@ -8,6 +9,8 @@ local IAPExperience = PurchasePromptDepsModule.IAPExperience
 local RobuxUpsellFlow = IAPExperience.PurchaseFlow.RobuxUpsellFlow
 local RobuxUpsellFlowState = IAPExperience.PurchaseFlow.RobuxUpsellFlowState
 local U13ConfirmType = IAPExperience.PurchaseFlow.U13ConfirmType
+local ManageRecommendationsInputOwner = IAPExperience.ManageRecommendationsInputOwner
+local FFlagPurchasePromptVLOPUpsellSettingsEntryPoint = IAPExperience.Flags.FFlagPurchasePromptVLOPUpsellSettingsEntryPoint
 local PurchaseErrorType = IAPExperience.PurchaseFlow.PurchaseErrorType
 local _ = require(PurchasePrompt.Models.RobuxUpsell)
 local PromptStateModule = require(PurchasePrompt.Enums.PromptState)
@@ -134,18 +137,26 @@ function ExtendResult.init(p1)
 end
 
 function ExtendResult.didMount(p1)
-	-- upvalues: ContextActionService (copy)
+	-- upvalues: ContextActionService (copy), FFlagPurchasePromptVLOPUpsellSettingsEntryPoint (copy), ManageRecommendationsInputOwner (copy), GuiService (copy)
 	ContextActionService:BindCoreAction("ProductPurchaseConfirmButtonBind", function(_, UserInputState, _)
-		-- upvalues: p1 (copy)
+		-- upvalues: FFlagPurchasePromptVLOPUpsellSettingsEntryPoint (upval), ManageRecommendationsInputOwner (upval), GuiService (upval), p1 (copy)
+		if FFlagPurchasePromptVLOPUpsellSettingsEntryPoint and ManageRecommendationsInputOwner.ownsInput(GuiService.SelectedCoreObject) then
+			return Enum.ContextActionResult.Pass
+		end
 		if UserInputState == Enum.UserInputState.Begin then
 			p1.confirmButtonPressed()
 		end
+		return Enum.ContextActionResult.Sink
 	end, false, Enum.KeyCode.ButtonA)
 	ContextActionService:BindCoreAction("ProductPurchaseCancelButtonBind", function(_, UserInputState, _)
-		-- upvalues: p1 (copy)
+		-- upvalues: FFlagPurchasePromptVLOPUpsellSettingsEntryPoint (upval), ManageRecommendationsInputOwner (upval), p1 (copy)
+		if FFlagPurchasePromptVLOPUpsellSettingsEntryPoint and ManageRecommendationsInputOwner.isOpen() then
+			return Enum.ContextActionResult.Pass
+		end
 		if UserInputState == Enum.UserInputState.Begin then
 			p1.cancelButtonPressed()
 		end
+		return Enum.ContextActionResult.Sink
 	end, false, Enum.KeyCode.ButtonB)
 end
 

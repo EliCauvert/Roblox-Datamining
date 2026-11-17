@@ -11,15 +11,17 @@ local CommonIconModule = require(Chrome.Integrations.CommonIcon)
 local SideSheetOpenBehavior = ChromeModule.Enums.SideSheetOpenBehavior
 local SideSheetPlacement = ChromeModule.Enums.SideSheetPlacement
 local FFlagKeepSideSheetOpenBesideMenu = require(CorePackages.Workspace.Packages.SharedFlags).FFlagKeepSideSheetOpenBesideMenu
+local Signal = require(CorePackages.Workspace.Packages.AppCommonLib).Signal
 local InGameMenuIntegrationUtilsModule = require(script.Parent.InGameMenuIntegrationUtils)
-local NewResult = require(CorePackages.Workspace.Packages.AppCommonLib).Signal.new()
-local NewResult1 = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(NewResult, function()
+local IntegrationIds = require(CorePackages.Workspace.Packages.InExperienceSideSheet).Constants.IntegrationIds
+local NewSignal = Signal.new()
+local NewResult = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(NewSignal, function()
 	-- upvalues: GameInviteModalManager (copy)
 	return GameInviteModalManager:isGameModalOpen()
 end)
 GameInviteModalManager.ToggleGameInviteModalEvent.Event:Connect(function()
-	-- upvalues: NewResult (copy)
-	NewResult:fire()
+	-- upvalues: NewSignal (copy)
+	NewSignal:fire()
 end)
 
 local function _(): boolean
@@ -30,17 +32,17 @@ end
 local IsUserIdAbove: boolean = not RunService:IsStudio() and (Players.LocalPlayer ~= nil and Players.LocalPlayer.UserId > 0)
 
 return ServiceModule:register({
-	id = "invite_friends",
 	initialAvailability = if IsUserIdAbove then ServiceModule.AvailabilitySignal.Available else ServiceModule.AvailabilitySignal.Unavailable,
+	id = IntegrationIds.InviteFriends,
 	label = if FFlagGameInviteInExpJoinOrInviteLabelModule and not IsPlatformInviteUIEnabledModule() then "CoreScripts.InGameMenu.PageTitle.JoinOrInvite" else "CoreScripts.InGameMenu.PageTitle.InviteFriends",
 	sideSheetPlacement = SideSheetPlacement.AboveFold,
 	sideSheetOpenBehavior = if FFlagKeepSideSheetOpenBesideMenu then SideSheetOpenBehavior.WindowBesideSheet else nil,
 	activated = InGameMenuIntegrationUtilsModule.toggleInviteFriendsPage,
-	isActivated = NewResult1,
+	isActivated = NewResult,
 	components = {
 		Icon = function()
-			-- upvalues: CommonIconModule (copy), NewResult1 (copy)
-			return CommonIconModule("PersonArrowFromBottomRight", nil, NewResult1)
+			-- upvalues: CommonIconModule (copy), NewResult (copy)
+			return CommonIconModule("PersonArrowFromBottomRight", nil, NewResult)
 		end
 	}
 })

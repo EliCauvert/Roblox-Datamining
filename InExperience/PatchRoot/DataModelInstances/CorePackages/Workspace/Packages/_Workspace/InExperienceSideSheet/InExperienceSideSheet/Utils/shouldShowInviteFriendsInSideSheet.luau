@@ -1,3 +1,6 @@
-﻿return function(p1, p2, p3): boolean
-	return p1 ~= "invite_friends" or (not p2 or not p3)
+﻿local InviteFriends = require(script:FindFirstAncestor("InExperienceSideSheet").Common.Constants).IntegrationIds.InviteFriends
+
+return function(InviteFriends1, p1, p2): boolean
+	-- upvalues: InviteFriends (copy)
+	return InviteFriends1 ~= InviteFriends or (not p1 or not p2)
 end

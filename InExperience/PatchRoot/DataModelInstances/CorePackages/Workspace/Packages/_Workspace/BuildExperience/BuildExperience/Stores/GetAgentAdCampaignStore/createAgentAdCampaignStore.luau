@@ -6,6 +6,7 @@ local SignalsUtilsModule = require(Parent.SignalsUtils)
 local _ = require(Parent.DataHydration.CreatorAgentChat)
 local _ = require(BuildExperience.Storage.createAdCampaignCardStorage)
 local FFlagBuildAgentAdCampaignRefreshEligibilityModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignRefreshEligibility)
+local FFlagBuildAdsFundedNotCreatedError = require(Parent.SharedFlags).FFlagBuildAdsFundedNotCreatedError
 
 local function _(Record): boolean
 	return Record.idempotencyKey == Record.toolCallId
@@ -93,7 +94,7 @@ local function toRecord(Record)
 end
 
 return function()
-	-- upvalues: SignalsUtilsModule (copy), HttpService (copy), FFlagBuildAgentAdCampaignRefreshEligibilityModule (copy), getRetrySelection (copy), toRecord (copy), getRetryOffers (copy), canReplaceRejectedAttempt (copy)
+	-- upvalues: SignalsUtilsModule (copy), HttpService (copy), FFlagBuildAgentAdCampaignRefreshEligibilityModule (copy), getRetrySelection (copy), toRecord (copy), FFlagBuildAdsFundedNotCreatedError (copy), getRetryOffers (copy), canReplaceRejectedAttempt (copy)
 	local SessionScopedSignal, SessionScopedSignal2 = SignalsUtilsModule.createSessionScopedSignal({})
 	local SessionScopedSignal1, SessionScopedSignal2_1 = SignalsUtilsModule.createSessionScopedSignal({})
 	
@@ -304,7 +305,7 @@ return function()
 			end
 		end,
 		finishDurable = function(Tbl, FailureKind, p1): boolean
-			-- upvalues: SessionScopedSignal (copy), toRecord (upval), SessionScopedSignal2 (copy)
+			-- upvalues: SessionScopedSignal (copy), FFlagBuildAdsFundedNotCreatedError (upval), toRecord (upval), SessionScopedSignal2 (copy)
 			if SessionScopedSignal(false)[Tbl.toolCallId] ~= Tbl then
 				return false
 			end
@@ -312,6 +313,10 @@ return function()
 			Copy.isPending = false
 			Copy.failureKind = FailureKind
 			Copy.hasAmbiguousFailure = Tbl.hasAmbiguousFailure == true or (FailureKind == nil or FailureKind == "unknown")
+			
+			if FFlagBuildAdsFundedNotCreatedError and FailureKind == "funded_not_created" then
+				Copy.hasAmbiguousFailure = true
+			end
 			p1.save(toRecord(Copy), Tbl.idempotencyKey)
 			local HasAmbiguousFailure = Copy.hasAmbiguousFailure
 			local SessionScopedSignalResult = SessionScopedSignal(false)

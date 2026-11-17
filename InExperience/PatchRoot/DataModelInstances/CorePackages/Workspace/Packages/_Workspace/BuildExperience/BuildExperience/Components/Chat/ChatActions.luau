@@ -6,6 +6,7 @@ local FFlagBuildExperienceSingleLineComposerModule = require(BuildExperience.Fla
 local FFlagBuildEnableFTUXChipsModule = require(BuildExperience.Flags.FFlagBuildEnableFTUXChips)
 local FFlagBuildExperienceFTUXChipSendGuidanceModule = require(BuildExperience.Flags.FFlagBuildExperienceFTUXChipSendGuidance)
 local FFlagBuildExperienceFTUXChipExhaustedTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceFTUXChipExhaustedTelemetry)
+local FFlagBuildFTUXChipInfiniteScrollModule = require(BuildExperience.Flags.FFlagBuildFTUXChipInfiniteScroll)
 local IsImageAttachmentSupportedModule = require(BuildExperience.utils.isImageAttachmentSupported)
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
@@ -20,7 +21,7 @@ local View = FoundationModule.View
 local Text = FoundationModule.Text
 
 return function(Frame)
-	-- upvalues: FFlagBuildEnableFTUXChipsModule (copy), FFlagBuildExperienceFTUXChipSendGuidanceModule (copy), ReactModule (copy), IsImageAttachmentSupportedModule (copy), CreateGalleryCaptureSourceModule (copy), View (copy), ChatResourceAttachmentListModule (copy), ChatImagePreviewListModule (copy), ChatComposerModule (copy), FFlagBuildExperienceModelPickerModule (copy), FFlagBuildExperienceSingleLineComposerModule (copy), PromptChipGroupModule (copy), FFlagBuildExperienceFTUXChipExhaustedTelemetryModule (copy), Text (copy), ChatCaptureGalleryContainerModule (copy)
+	-- upvalues: FFlagBuildEnableFTUXChipsModule (copy), FFlagBuildExperienceFTUXChipSendGuidanceModule (copy), ReactModule (copy), IsImageAttachmentSupportedModule (copy), CreateGalleryCaptureSourceModule (copy), View (copy), ChatResourceAttachmentListModule (copy), ChatImagePreviewListModule (copy), ChatComposerModule (copy), FFlagBuildExperienceModelPickerModule (copy), FFlagBuildExperienceSingleLineComposerModule (copy), PromptChipGroupModule (copy), FFlagBuildExperienceFTUXChipExhaustedTelemetryModule (copy), FFlagBuildFTUXChipInfiniteScrollModule (copy), Text (copy), ChatCaptureGalleryContainerModule (copy)
 	local Images = Frame.images or {}
 	local ResourceAttachments = Frame.resourceAttachments or {}
 	local PromptChips = Frame.promptChips or {}
@@ -143,7 +144,7 @@ return function(Frame)
 			promptChips = PromptChips,
 			isLoading = Frame.isPromptChipsLoading,
 			onActivated = Frame.onPromptChipActivated,
-			onExhausted = if FFlagBuildExperienceFTUXChipExhaustedTelemetryModule then Frame.onPromptChipExhausted else nil
+			onExhausted = if FFlagBuildExperienceFTUXChipExhaustedTelemetryModule or FFlagBuildFTUXChipInfiniteScrollModule then Frame.onPromptChipExhausted else nil
 		}) else nil,
 		FtuxGuidance = if HasFtuxGuidanceText then ReactModule.createElement(Text, {
 			tag = "size-full-0 auto-y text-caption-medium text-align-x-left content-muted",

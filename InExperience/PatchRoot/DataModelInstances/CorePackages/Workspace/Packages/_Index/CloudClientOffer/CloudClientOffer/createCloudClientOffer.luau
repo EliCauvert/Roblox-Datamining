@@ -4,6 +4,7 @@ local _ = require(CloudClientOffer.CloudClientServiceAdapter)
 local _ = require(CloudClientOffer.CloudClientExperiment)
 local _ = require(CloudClientOffer.Stores.GetCloudClientSessionStore.createCloudClientSessionStore)
 local FFlagLuaAppCloudClientOfferDryRunModule = require(CloudClientOffer.Flags.FFlagLuaAppCloudClientOfferDryRun)
+local FFlagLuaAppCloudClientOfferSurvivesUnmountModule = require(CloudClientOffer.Flags.FFlagLuaAppCloudClientOfferSurvivesUnmount)
 local FFlagLuaAppCloudClientOfferDecisionTelemetryModule = require(CloudClientOffer.Flags.FFlagLuaAppCloudClientOfferDecisionTelemetry)
 
 local function _(p1, p2): string
@@ -11,7 +12,7 @@ local function _(p1, p2): string
 end
 
 return function(p1)
-	-- upvalues: SignalsModule (copy), FFlagLuaAppCloudClientOfferDryRunModule (copy), FFlagLuaAppCloudClientOfferDecisionTelemetryModule (copy)
+	-- upvalues: SignalsModule (copy), FFlagLuaAppCloudClientOfferDryRunModule (copy), FFlagLuaAppCloudClientOfferSurvivesUnmountModule (copy), FFlagLuaAppCloudClientOfferDecisionTelemetryModule (copy)
 	local Service = p1.service
 	local Experiment = p1.experiment
 	local Session = p1.session
@@ -21,6 +22,7 @@ return function(p1)
 	local v2 = nil
 	local v3 = nil
 	local Count = 0
+	local v4 = nil
 	local Flag = false
 	
 	local function _(p2)
@@ -40,10 +42,10 @@ return function(p1)
 	
 	local _ = function()
 		-- upvalues: v1 (ref), Service (copy)
-		local v4 = v1
+		local v5 = v1
 		
-		if v4 ~= nil then
-			Service.releaseReservation(v4.reservationToken)
+		if v5 ~= nil then
+			Service.releaseReservation(v5.reservationToken)
 		end
 	end
 	
@@ -164,9 +166,9 @@ return function(p1)
 	
 	local OnReservationExpiredResult = Service.onReservationExpired(function(ReservationToken)
 		-- upvalues: v1 (ref), Flag (ref), v2 (ref), v3 (ref), Signal2 (copy)
-		local v4 = v1
+		local v5 = v1
 		
-		if Flag or v4 == nil or v4.reservationToken ~= ReservationToken then return end
+		if Flag or v5 == nil or v5.reservationToken ~= ReservationToken then return end
 		local config = { kind = "Stay", expired = true }
 		local Callback: (any) -> () = v2
 		v2 = nil
@@ -184,21 +186,35 @@ return function(p1)
 	return {
 		getHeldOffer = Signal,
 		request = function(p2, p3, p4): number?
-			-- upvalues: Flag (ref), v2 (ref), Count (ref), v3 (ref), tryCandidate (copy)
-			if Flag or v2 ~= nil then
+			-- upvalues: FFlagLuaAppCloudClientOfferSurvivesUnmountModule (upval), Flag (ref), v1 (ref), v2 (ref), v4 (ref), Count (ref), v3 (ref), tryCandidate (copy)
+			if FFlagLuaAppCloudClientOfferSurvivesUnmountModule then
+				if Flag or v1 ~= nil or v2 ~= nil and v4 == p2 then
+					return nil
+				end
+				v4 = p2
+			elseif Flag or v2 ~= nil then
 				return nil
-			else
-				Count += 1
-				v2 = p3
-				v3 = p4
-				tryCandidate(p2, 1, Count)
-				
-				return Count
 			end
+			Count += 1
+			v2 = p3
+			v3 = p4
+			tryCandidate(p2, 1, Count)
+			
+			return Count
 		end,
 		cancel = function(Count1)
 			-- upvalues: Flag (ref), Count (ref), v1 (ref), v2 (ref), v3 (ref)
 			if not Flag and Count1 == Count and v1 == nil and v2 ~= nil then
+				Count += 1
+				v2 = nil
+				v3 = nil
+				
+				return
+			end
+		end,
+		cancelPending = function()
+			-- upvalues: Flag (ref), v1 (ref), v2 (ref), Count (ref), v3 (ref)
+			if not Flag and v1 == nil and v2 ~= nil then
 				Count += 1
 				v2 = nil
 				v3 = nil
@@ -233,10 +249,10 @@ return function(p1)
 			if FFlagLuaAppCloudClientOfferDecisionTelemetryModule then
 				Service.reportDecision(v1.reservationToken, "rejected")
 			end
-			local v4 = v1
+			local v5 = v1
 			
-			if v4 ~= nil then
-				Service.releaseReservation(v4.reservationToken)
+			if v5 ~= nil then
+				Service.releaseReservation(v5.reservationToken)
 			end
 			local config = { kind = "Local" }
 			local Callback: (any) -> () = v2
@@ -257,10 +273,10 @@ return function(p1)
 			if FFlagLuaAppCloudClientOfferDecisionTelemetryModule then
 				Service.reportDecision(v1.reservationToken, "dismissed")
 			end
-			local v4 = v1
+			local v5 = v1
 			
-			if v4 ~= nil then
-				Service.releaseReservation(v4.reservationToken)
+			if v5 ~= nil then
+				Service.releaseReservation(v5.reservationToken)
 			end
 			local config = { kind = "Stay", expired = false }
 			local Callback: (any) -> () = v2
@@ -280,10 +296,10 @@ return function(p1)
 			Flag = true
 			v2 = nil
 			v3 = nil
-			local v4 = v1
+			local v5 = v1
 			
-			if v4 ~= nil then
-				Service.releaseReservation(v4.reservationToken)
+			if v5 ~= nil then
+				Service.releaseReservation(v5.reservationToken)
 			end
 			v1 = nil
 			OnReservationExpiredResult:Disconnect()

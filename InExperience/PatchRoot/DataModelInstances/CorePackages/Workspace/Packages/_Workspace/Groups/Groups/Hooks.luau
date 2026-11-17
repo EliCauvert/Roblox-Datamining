@@ -3,5 +3,6 @@
 return {
 	useGroupsListData = require(v1.useGroupsListData),
 	useMembersFollowersLabel = require(v1.useMembersFollowersLabel),
-	useGroupsAnalytics = require(v1.useGroupsAnalytics)
+	useGroupsAnalytics = require(v1.useGroupsAnalytics),
+	useFocusReturn = require(v1.useFocusReturn)
 }

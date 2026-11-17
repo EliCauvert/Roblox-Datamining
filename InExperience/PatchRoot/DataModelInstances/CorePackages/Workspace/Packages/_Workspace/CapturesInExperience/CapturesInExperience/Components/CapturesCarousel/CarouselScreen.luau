@@ -34,6 +34,7 @@ local ToastTriggeredModule = require(Parent.Actions.ToastTriggered)
 local _ = require(Parent.Types)
 local UseAnalyticsModule = require(Parent.Analytics.useAnalytics)
 local FFlagUseMediaPlayerInCarousel = require(Parent1.SharedFlags).FFlagUseMediaPlayerInCarousel
+local FFlagCapturesCarouselMomentsButtonModule = require(Parent.Flags.FFlagCapturesCarouselMomentsButton)
 local FStringSocialCaptureTakenIXPLayer = require(Parent1.SharedFlags).FStringSocialCaptureTakenIXPLayer
 local _UDim2 = UDim2.fromOffset(32, 32)
 
@@ -53,7 +54,7 @@ local function getTitle(p1): string
 end
 
 return function(_)
-	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseStyleFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseRefFunction (copy), Signal (copy), UseStateFunction (copy), UseScreenSizeFunction (copy), UseEffectOnceFunction (copy), IXPServiceWrapper (copy), FStringSocialCaptureTakenIXPLayer (copy), UseEffectFunction (copy), ToastTriggeredModule (copy), CapturesToastTypeModule (copy), UseCallbackFunction (copy), EventNamesModule (copy), CarouselClosedModule (copy), DeleteCaptureModule (copy), ContextActionService (copy), getTitle (copy), ReactModule (copy), FFlagUseMediaPlayerInCarousel (copy), ImageSetButton (copy), Images (copy), _UDim2 (copy), NormalizeFontFaceFunction (copy), CapturesCarouselModule (copy), CarouselCTAContainerModule (copy), DeleteWarningModalModule (copy), PermissionModalModule (copy), ToastContainerModule (copy)
+	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseStyleFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), FFlagCapturesCarouselMomentsButtonModule (copy), UseRefFunction (copy), Signal (copy), UseStateFunction (copy), UseScreenSizeFunction (copy), UseEffectOnceFunction (copy), IXPServiceWrapper (copy), FStringSocialCaptureTakenIXPLayer (copy), UseEffectFunction (copy), ToastTriggeredModule (copy), CapturesToastTypeModule (copy), UseCallbackFunction (copy), EventNamesModule (copy), CarouselClosedModule (copy), DeleteCaptureModule (copy), ContextActionService (copy), getTitle (copy), ReactModule (copy), FFlagUseMediaPlayerInCarousel (copy), ImageSetButton (copy), Images (copy), _UDim2 (copy), NormalizeFontFaceFunction (copy), CapturesCarouselModule (copy), CarouselCTAContainerModule (copy), DeleteWarningModalModule (copy), PermissionModalModule (copy), ToastContainerModule (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseStyleResult = UseStyleFunction()
@@ -73,6 +74,10 @@ return function(_)
 		-- upvalues: ConstantsModule (upval)
 		return p1[ConstantsModule.RoduxKey].Carousel.IsDeleteWarningModalOpen
 	end)
+	local UseSelectorResult4 = if FFlagCapturesCarouselMomentsButtonModule then UseSelectorFunction(function(p1)
+		-- upvalues: ConstantsModule (upval)
+		return p1[ConstantsModule.RoduxKey].MomentsCreationFlow.IsOpen
+	end) else false
 	local UseRefResult = UseRefFunction(Signal.new())
 	local UseStateResult, UseStateResult2 = UseStateFunction(false)
 	local UseStateResult1, UseStateResult2_1 = UseStateFunction(false)
@@ -115,11 +120,13 @@ return function(_)
 			UseStateResult2(false)
 		end)
 	end, { UseSelectorResult, UseSelectorResult2 })
+	local UseSelectorResult5 = if FFlagCapturesCarouselMomentsButtonModule then UseSelectorResult4 else nil
 	UseEffectFunction(function()
-		-- upvalues: UseSelectorResult1 (copy), UseSelectorResult3 (copy), ContextActionService (upval), UseCallbackResult1 (copy)
+		-- upvalues: UseSelectorResult1 (copy), UseSelectorResult3 (copy), ContextActionService (upval), UseSelectorResult5 (copy), UseCallbackResult1 (copy)
 		if not UseSelectorResult1 or UseSelectorResult3 then return end
 		ContextActionService:BindCoreAction("CapturesCarouselCloseShortcutAction", function(_, UserInputState)
-			-- upvalues: UseCallbackResult1 (upval)
+			-- upvalues: UseSelectorResult5 (upval), UseCallbackResult1 (upval)
+			if UseSelectorResult5 then return end
 			if UserInputState == Enum.UserInputState.End then
 				UseCallbackResult1()
 			end
@@ -132,7 +139,8 @@ return function(_)
 	end, {
 		UseSelectorResult1,
 		UseSelectorResult3,
-		UseCallbackResult1
+		UseCallbackResult1,
+		UseSelectorResult5
 	})
 	
 	if UseSelectorResult1 then
@@ -218,7 +226,8 @@ return function(_)
 				CapturesCarousel = ReactModule.createElement(CapturesCarouselModule, {
 					LayoutOrder = 2,
 					deleteItemSignal = UseRefResult.current,
-					isDisabled = UseStateResult,
+					isDisabled = if FFlagCapturesCarouselMomentsButtonModule then UseStateResult or UseSelectorResult4 else UseStateResult,
+					isPlaybackPaused = if FFlagCapturesCarouselMomentsButtonModule then UseSelectorResult4 else nil,
 					maxHeight = YDelta,
 					ZIndex = if FFlagUseMediaPlayerInCarousel then 2 else 1
 				}),

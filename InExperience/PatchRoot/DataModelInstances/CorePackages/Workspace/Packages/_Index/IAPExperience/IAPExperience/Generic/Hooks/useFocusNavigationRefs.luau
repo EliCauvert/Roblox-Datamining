@@ -1,11 +1,13 @@
-﻿local Parent = script.Parent.Parent.Parent.Parent
-local ReactModule = require(Parent.React)
-local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
-local InputHandlersModule = require(Parent.InputHandlers)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local FocusNavigationUtilsModule = require(Parent1.FocusNavigationUtils)
+local InputHandlersModule = require(Parent1.InputHandlers)
 local UseFocusRootFunction = FocusNavigationUtilsModule.useFocusRoot
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
-local UseDefaultFocusBehaviorFunction = require(Parent.ReactFocusNavigation).useDefaultFocusBehavior
+local UseDefaultFocusBehaviorFunction = require(Parent1.ReactFocusNavigation).useDefaultFocusBehavior
+local FFlagPurchasePromptVLOPUpsellSettingsEntryPointModule = require(Parent.Flags.FFlagPurchasePromptVLOPUpsellSettingsEntryPoint)
 
 local function _(p1, p2)
 	return function(Current)
@@ -26,15 +28,16 @@ local function _(p1, p2)
 	end
 end
 
-return function(p1, Callback)
-	-- upvalues: UseDefaultFocusBehaviorFunction (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), ReactModule (copy)
+return function(p1, Callback, p2)
+	-- upvalues: UseDefaultFocusBehaviorFunction (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), FFlagPurchasePromptVLOPUpsellSettingsEntryPointModule (copy), ReactModule (copy)
 	local UseDefaultFocusBehaviorResult, UseDefaultFocusBehaviorResult2 = UseDefaultFocusBehaviorFunction()
 	local UseFocusRootResult = UseFocusRootFunction({
 		isAutoFocusRoot = true,
 		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.CentralOverlay,
 		customEventHandlers = {
 			[FocusNavigationEventNameEnum.NavigateBack] = { handler = InputHandlersModule.onRelease(p1) }
-		}
+		},
+		isFocusable = if FFlagPurchasePromptVLOPUpsellSettingsEntryPointModule then p2 else nil
 	})
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseFocusRootResult (copy), UseDefaultFocusBehaviorResult2 (copy)

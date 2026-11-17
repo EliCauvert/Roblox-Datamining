@@ -16,59 +16,64 @@ return function(UniverseId, p1, p2, p3, PageName, Callback)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseRefResult = ReactModule.useRef(nil)
 	ReactModule.useEffect(function()
-		-- upvalues: UseRefResult (copy), CloudClientOfferModule (upval)
+		-- upvalues: CloudClientOfferModule (upval), UseRefResult (copy)
 		return function()
-			-- upvalues: UseRefResult (upval), CloudClientOfferModule (upval)
-			local Current = UseRefResult.current
-			
-			if Current ~= nil then
-				CloudClientOfferModule.GetCloudClientOfferStore(false).cancel(Current)
+			-- upvalues: CloudClientOfferModule (upval), UseRefResult (upval)
+			if not CloudClientOfferModule.FFlagLuaAppCloudClientOfferSurvivesUnmount then
+				local Current = UseRefResult.current
+				
+				if Current ~= nil then
+					CloudClientOfferModule.GetCloudClientOfferStore(false).cancel(Current)
+				end
 			end
 		end
 	end, {})
 	
 	return ReactModule.useCallback(function(p4, p5, p6)
-		-- upvalues: GetFFlagLuaAppEnableVirtualEventPlaceIdFunction (upval), p1 (copy), p2 (copy), Callback (copy), CloudClientOfferModule (upval), UseRefResult (copy), UseDispatchResult (copy), UnlockPlayIntentFunction (upval), UseRoactServiceResult (copy), UniverseId (copy), p3 (copy), PageName (copy)
+		-- upvalues: GetFFlagLuaAppEnableVirtualEventPlaceIdFunction (upval), p1 (copy), p2 (copy), CloudClientOfferModule (upval), Callback (copy), UseRefResult (copy), UseDispatchResult (copy), UnlockPlayIntentFunction (upval), UseRoactServiceResult (copy), UniverseId (copy), p3 (copy), PageName (copy)
 		local FFlagLuaAppEnableVirtualEventPlaceId = GetFFlagLuaAppEnableVirtualEventPlaceIdFunction()
 		
-		if not (if FFlagLuaAppEnableVirtualEventPlaceId then p1 ~= nil and p2 ~= nil else p2 ~= nil) or p6 ~= nil and p6.hasShownUpsell == true then
-			Callback(p4, p5, p6)
-			
-			return
-		end
-		local v1 = if FFlagLuaAppEnableVirtualEventPlaceId then p1 else p2
-		local CloudClientOfferStore = CloudClientOfferModule.GetCloudClientOfferStore(false)
-		local RequestResult = CloudClientOfferStore.request(tostring(v1), function(p7)
-			-- upvalues: UseRefResult (upval), Callback (upval), p4 (copy), p5 (copy)
-			UseRefResult.current = nil
-			
-			if p7.kind == "Stream" then
-				Callback(p4, p5, {
-					cloudClientReservation = {
-						reservationToken = p7.offer.reservationToken,
-						offerKind = p7.offer.kind
-					}
-				})
+		if (if FFlagLuaAppEnableVirtualEventPlaceId then p1 ~= nil and p2 ~= nil else p2 ~= nil) and (p6 == nil or p6.hasShownUpsell ~= true) then
+			local v1 = if FFlagLuaAppEnableVirtualEventPlaceId then p1 else p2
+			local CloudClientOfferStore = CloudClientOfferModule.GetCloudClientOfferStore(false)
+			local RequestResult = CloudClientOfferStore.request(tostring(v1), function(p7)
+				-- upvalues: UseRefResult (upval), Callback (upval), p4 (copy), p5 (copy)
+				UseRefResult.current = nil
 				
-				return
+				if p7.kind == "Stream" then
+					Callback(p4, p5, {
+						cloudClientReservation = {
+							reservationToken = p7.offer.reservationToken,
+							offerKind = p7.offer.kind
+						}
+					})
+					
+					return
+				end
+				if p7.kind == "Local" then
+					Callback(p4, p5)
+				end
+			end, function(p7)
+				-- upvalues: UseRefResult (upval), UseDispatchResult (upval), CloudClientOfferModule (upval), CloudClientOfferStore (copy), UnlockPlayIntentFunction (upval), UseRoactServiceResult (upval), UniverseId (upval), p3 (upval), PageName (upval)
+				UseRefResult.current = nil
+				UseDispatchResult(CloudClientOfferModule.OpenCloudClientOfferSheet(CloudClientOfferStore, p7))
+				UnlockPlayIntentFunction(UseRoactServiceResult, {
+					universeId = UniverseId,
+					upsellName = p7.kind,
+					playabilityStatus = p3 and p3.playabilityStatus or nil,
+					pageName = PageName
+				})
+			end)
+			
+			if RequestResult ~= nil then
+				UseRefResult.current = RequestResult
 			end
-			if p7.kind == "Local" then
-				Callback(p4, p5)
+			return
+		else
+			if CloudClientOfferModule.FFlagLuaAppCloudClientOfferSurvivesUnmount then
+				CloudClientOfferModule.GetCloudClientOfferStore(false).cancelPending()
 			end
-		end, function(p7)
-			-- upvalues: UseRefResult (upval), UseDispatchResult (upval), CloudClientOfferModule (upval), CloudClientOfferStore (copy), UnlockPlayIntentFunction (upval), UseRoactServiceResult (upval), UniverseId (upval), p3 (upval), PageName (upval)
-			UseRefResult.current = nil
-			UseDispatchResult(CloudClientOfferModule.OpenCloudClientOfferSheet(CloudClientOfferStore, p7))
-			UnlockPlayIntentFunction(UseRoactServiceResult, {
-				universeId = UniverseId,
-				upsellName = p7.kind,
-				playabilityStatus = p3 and p3.playabilityStatus or nil,
-				pageName = PageName
-			})
-		end)
-		
-		if RequestResult ~= nil then
-			UseRefResult.current = RequestResult
+			Callback(p4, p5, p6)
 		end
 	end, {
 		UniverseId, p1, p2, p3, PageName, Callback, UseDispatchResult,

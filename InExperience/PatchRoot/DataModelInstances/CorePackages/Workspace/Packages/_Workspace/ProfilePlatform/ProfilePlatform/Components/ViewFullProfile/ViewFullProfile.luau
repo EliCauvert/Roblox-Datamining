@@ -21,13 +21,15 @@ local UseProfileAnalyticsContextModule = require(ProfilePlatform.Contexts.usePro
 local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
 local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
 local MakeViewGroupPageModule = require(ProfilePlatform.Utils.makeViewGroupPage)
+local OpenViewGroupPageModule = require(ProfilePlatform.Utils.openViewGroupPage)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagEnableGroupOverviewPane = SharedFlagsModule.FFlagEnableGroupOverviewPane
+local FFlagEnableGroupSidebarSdui = SharedFlagsModule.FFlagEnableGroupSidebarSdui
 local FFlagSignalsNavP3Dispatch = SharedFlagsModule.FFlagSignalsNavP3Dispatch
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
 function ViewFullProfile(p1)
-	-- upvalues: UseProfileJsonComponentModule (copy), EnumsModule (copy), UseProfileWrapperContextModule (copy), UseProfileAnalyticsContextModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), FFlagEnableGroupOverviewPane (copy), EventNamesModule (copy), NavigateDownToViewUserProfileFunction (copy), AppPage (copy), UrlBuilder (copy), UrlBase (copy), MakeViewGroupPageModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), HorizontalPageMargin (copy), ConstantsModule (copy), Button (copy), ButtonType (copy)
+	-- upvalues: UseProfileJsonComponentModule (copy), EnumsModule (copy), UseProfileWrapperContextModule (copy), UseProfileAnalyticsContextModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), FFlagEnableGroupOverviewPane (copy), EventNamesModule (copy), NavigateDownToViewUserProfileFunction (copy), AppPage (copy), UrlBuilder (copy), UrlBase (copy), MakeViewGroupPageModule (copy), FFlagEnableGroupSidebarSdui (copy), OpenViewGroupPageModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), HorizontalPageMargin (copy), ConstantsModule (copy), Button (copy), ButtonType (copy)
 	local UseProfileJsonComponentModuleResult = UseProfileJsonComponentModule(EnumsModule.Components.ViewFullProfile) or {}
 	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
 	local ProfileId = UseProfileWrapperContextModuleResult.profileId
@@ -58,7 +60,7 @@ function ViewFullProfile(p1)
 				buttonType = ButtonType.Secondary,
 				size = UDim2.new(1, 0, 0, ConstantsModule.CTA_BUTTON_HEIGHT),
 				onActivated = ReactModule.useCallback(function()
-					-- upvalues: UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), UseProfileWrapperContextModuleResult (copy), EnumsModule (upval), ProfileType (copy), UseDispatchResult (copy), NavigateDownToViewUserProfileFunction (upval), ProfileId (copy), UseProfileJsonComponentModuleResult (copy), AppPage (upval), UrlBuilder (upval), UrlBase (upval), TextKeysModule (upval), MakeViewGroupPageModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), NavigateDownFunction (upval)
+					-- upvalues: UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), UseProfileWrapperContextModuleResult (copy), EnumsModule (upval), ProfileType (copy), UseDispatchResult (copy), NavigateDownToViewUserProfileFunction (upval), ProfileId (copy), UseProfileJsonComponentModuleResult (copy), AppPage (upval), UrlBuilder (upval), UrlBase (upval), TextKeysModule (upval), MakeViewGroupPageModule (upval), FFlagEnableGroupSidebarSdui (upval), OpenViewGroupPageModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), NavigateDownFunction (upval)
 					UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.ViewPlayerProfileButton, {
 						absolutePosition = UseProfileWrapperContextModuleResult.sourceInfo.homepageCarouselAbsolutePosition,
 						isHomePageCarousel = UseProfileWrapperContextModuleResult.sourceInfo.source == EnumsModule.Sources.HomepageFriendsCarousel,
@@ -81,6 +83,11 @@ function ViewFullProfile(p1)
 							extraProps = { titleKey = TextKeysModule.Profile }
 						} else MakeViewGroupPageModule(ProfileId)
 						
+						if FFlagEnableGroupSidebarSdui then
+							OpenViewGroupPageModule(Config, UseDispatchResult)
+							
+							return
+						end
 						if FFlagSignalsNavP3Dispatch then
 							NavigationCommands.down(NavigationCommands.fromLegacyPage(Config))
 							

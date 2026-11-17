@@ -31,6 +31,7 @@ local function GroupsWithContext(p1)
 				
 				return
 			end
+			if UseGroupsWrapperContextModuleResult.expandedBranch then return end
 			if p1.navigation and UseIsCompactTouchModuleResult and UseRefResult.current ~= UseGroupsWrapperContextModuleResult.groupId then
 				UseRefResult.current = UseGroupsWrapperContextModuleResult.groupId
 				p1.navigation.navigate(GroupsRoutesModule.GroupOverviewPane, {
@@ -41,16 +42,28 @@ local function GroupsWithContext(p1)
 		end, {
 			UseGroupsWrapperContextModuleResult.groupId,
 			UseGroupsWrapperContextModuleResult.groupOverviewPaneSource,
+			UseGroupsWrapperContextModuleResult.expandedBranch,
 			p1.navigation,
 			UseIsCompactTouchModuleResult
 		})
 	end
 	local UseMemoResult = if FFlagEnableGroupSidebarSdui then ReactModule.useMemo(function()
 		-- upvalues: Callback (upval), UseGroupsWrapperContextModuleResult (copy)
-		return if Callback(UseGroupsWrapperContextModuleResult.groupId) then {
+		if not Callback(UseGroupsWrapperContextModuleResult.groupId) then
+			return nil
+		end
+		local config = {
 			[`group:{UseGroupsWrapperContextModuleResult.groupId}`] = true
-		} else nil
-	end, { UseGroupsWrapperContextModuleResult.groupId }) else nil
+		}
+		
+		if UseGroupsWrapperContextModuleResult.expandedBranch == "posts" then
+			config[`forums:{UseGroupsWrapperContextModuleResult.groupId}`] = true
+		end
+		return config
+	end, {
+		UseGroupsWrapperContextModuleResult.expandedBranch,
+		UseGroupsWrapperContextModuleResult.groupId
+	}) else nil
 	local Config = if FFlagEnableGroupOverviewPane then {
 		GroupsContent = ReactModule.createElement(GroupsNavigatorModule, p1)
 	} else {
@@ -66,8 +79,8 @@ local function GroupsWithContext(p1)
 			return InitializeGroupsAnalyticsModuleResult
 		end, { UseGroupsWrapperContextModuleResult.userId })
 	}, if FFlagEnableGroupSidebarSdui then ReactModule.createElement(v1, {
-		resetKey = `{UseGroupsWrapperContextModuleResult.userId}:{UseGroupsWrapperContextModuleResult.groupId or "primary"}`,
-		initialGroupId = UseGroupsWrapperContextModuleResult.groupId,
+		resetKey = `{UseGroupsWrapperContextModuleResult.userId}:{UseGroupsWrapperContextModuleResult.groupId or "primary"}:{UseGroupsWrapperContextModuleResult.expandedBranch or ""}`,
+		initialGroupId = if UseGroupsWrapperContextModuleResult.expandedBranch then nil else UseGroupsWrapperContextModuleResult.groupId,
 		initialExpanded = UseMemoResult,
 		revealGroupId = UseGroupsWrapperContextModuleResult.groupId
 	}, Config) else Config)

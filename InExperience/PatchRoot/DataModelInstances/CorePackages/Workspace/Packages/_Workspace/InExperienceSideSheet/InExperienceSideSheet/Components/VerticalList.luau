@@ -12,10 +12,12 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagAddInviteFriendsIntegration = SharedFlagsModule.FFlagAddInviteFriendsIntegration
 local FFlagHidePeoplePageInviteFriends = SharedFlagsModule.FFlagHidePeoplePageInviteFriends
 local FFlagSideSheetFocusNav = SharedFlagsModule.FFlagSideSheetFocusNav
-local FFlagSideSheetOpenPeoplePage = require(InExperienceSideSheet.Flags).FFlagSideSheetOpenPeoplePage
+local FlagsModule = require(InExperienceSideSheet.Flags)
+local FFlagKeepSideSheetOpenBesideMenu = FlagsModule.FFlagKeepSideSheetOpenBesideMenu
+local FFlagSideSheetOpenPeoplePage = FlagsModule.FFlagSideSheetOpenPeoplePage
 
 return ReactModule.memo(function(p1)
-	-- upvalues: SignalsReactModule (copy), FFlagSideSheetOpenPeoplePage (copy), GetDidSideSheetOpenWithPeoplePageModule (copy), FFlagHidePeoplePageInviteFriends (copy), FFlagAddInviteFriendsIntegration (copy), ShouldShowInviteFriendsInSideSheetModule (copy), ReactModule (copy), VerticalItemModule (copy), FFlagSideSheetFocusNav (copy), View (copy)
+	-- upvalues: SignalsReactModule (copy), FFlagSideSheetOpenPeoplePage (copy), GetDidSideSheetOpenWithPeoplePageModule (copy), FFlagHidePeoplePageInviteFriends (copy), FFlagAddInviteFriendsIntegration (copy), ShouldShowInviteFriendsInSideSheetModule (copy), ReactModule (copy), VerticalItemModule (copy), FFlagKeepSideSheetOpenBesideMenu (copy), FFlagSideSheetFocusNav (copy), View (copy)
 	local UseSignalStateResult = if FFlagSideSheetOpenPeoplePage then SignalsReactModule.useSignalState(GetDidSideSheetOpenWithPeoplePageModule) else false
 	local Inverted = not (FFlagHidePeoplePageInviteFriends and FFlagAddInviteFriendsIntegration)
 	local Elements = {}
@@ -25,6 +27,8 @@ return ReactModule.memo(function(p1)
 		if ShouldShowInviteFriendsInSideSheetModule(value.id, UseSignalStateResult, Inverted) then
 			LayoutOrder += 1
 			Elements[value.id] = ReactModule.createElement(VerticalItemModule, {
+				integrationId = if FFlagKeepSideSheetOpenBesideMenu then value.id else nil,
+				sideSheetOpenBehavior = if FFlagKeepSideSheetOpenBesideMenu then value.integration.sideSheetOpenBehavior else nil,
 				label = value.integration.label,
 				layoutOrder = LayoutOrder,
 				onActivated = value.activated,

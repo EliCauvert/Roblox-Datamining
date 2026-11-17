@@ -37,6 +37,7 @@ return {
 	recordTemplateUsage = require(script.Analytics.recordTemplateUsage),
 	recordV1ComponentUsage = require(script.Analytics.recordV1ComponentUsage),
 	recordV1RegisteredTemplates = require(script.Analytics.recordV1RegisteredTemplates),
+	useCurrentSignalState = require(script.useCurrentSignalState),
 	useUidRefString = require(script.useUidRefString),
 	validateInterface = require(script.validateInterface),
 	validateSduiComponentConfig = require(script.validateSduiComponentConfig),
