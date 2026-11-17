@@ -2,6 +2,8 @@
 local CorePackages = game:GetService("CorePackages")
 local GuiService = game:GetService("GuiService")
 local ChromeModule = require(CorePackages.Workspace.Packages.Chrome)
+local FFlagKeepSideSheetOpenBesideMenu = require(CorePackages.Workspace.Packages.SharedFlags).FFlagKeepSideSheetOpenBesideMenu
+local SideSheetOpenBehavior = ChromeModule.Enums.SideSheetOpenBehavior
 local SideSheetPlacement = ChromeModule.Enums.SideSheetPlacement
 local FoundationModule = require(CorePackages.Packages.Foundation)
 local ReactModule = require(CorePackages.Packages.React)
@@ -39,6 +41,7 @@ return ServiceModule:register({
 	label = "CoreScripts.TopBar.Music",
 	initialAvailability = ServiceModule.AvailabilitySignal.Available,
 	sideSheetPlacement = SideSheetPlacement.BelowFold,
+	sideSheetOpenBehavior = if FFlagKeepSideSheetOpenBesideMenu then SideSheetOpenBehavior.CloseSheet else nil,
 	windowSize = NewResult,
 	activated = function()
 		-- upvalues: ResponsiveModule (copy), ChromeModule (copy), focusMusicWindow (copy), NewResult1 (copy), ServiceModule (copy)

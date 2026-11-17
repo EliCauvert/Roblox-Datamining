@@ -6,9 +6,10 @@ local _ = require(UserList.Common.Enums)
 local BaseRowModule = require(script.Parent.BaseRow)
 local UseContactsDataModule = require(UserList.Hooks.useContactsData)
 local FFlagUserListSurfaceExtensions = require(Parent.SharedFlags).FFlagUserListSurfaceExtensions
+local FFlagProfilePlatformSeededPymk = require(Parent.SharedFlags).FFlagProfilePlatformSeededPymk
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseContactsDataModule (copy), ReactModule (copy), BaseRowModule (copy), FFlagUserListSurfaceExtensions (copy)
+	-- upvalues: UseContactsDataModule (copy), ReactModule (copy), BaseRowModule (copy), FFlagUserListSurfaceExtensions (copy), FFlagProfilePlatformSeededPymk (copy)
 	local UseContactsDataModuleResult = UseContactsDataModule(p1.entityId)
 	
 	return if UseContactsDataModuleResult == nil then nil else ReactModule.createElement(BaseRowModule, {
@@ -23,6 +24,7 @@ return ReactModule.memo(function(p1)
 		secondaryCta = p1.secondaryCta,
 		trailingContent = p1.trailingContent,
 		layoutOrder = p1.layoutOrder,
-		disableRowActivation = if FFlagUserListSurfaceExtensions and p1.configs then p1.configs.disableRowActivation else nil
+		disableRowActivation = if FFlagUserListSurfaceExtensions and p1.configs then p1.configs.disableRowActivation else nil,
+		textTruncation = if FFlagProfilePlatformSeededPymk and p1.configs then p1.configs.textTruncation else nil
 	})
 end)

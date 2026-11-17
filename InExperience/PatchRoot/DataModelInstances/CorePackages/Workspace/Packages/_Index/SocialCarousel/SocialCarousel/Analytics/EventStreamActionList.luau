@@ -12,6 +12,7 @@ local FIntSocialCarouselShowRecsLimit = require(SocialCarousel.Flags).FIntSocial
 local FFlagSocialCarouselShareQREnabled = SharedFlagsModule.FFlagSocialCarouselShareQREnabled
 local FFlagLuaAppUserSeenCollectionUnifiedFields = SharedFlagsModule.FFlagLuaAppUserSeenCollectionUnifiedFields
 local FFlagSocialCarouselLogNewFriendRequestsBadgeModule = require(SocialCarousel.Flags.FFlagSocialCarouselLogNewFriendRequestsBadge)
+local FFlagSocialCarouselInGamePlayIcon = SharedFlagsModule.FFlagSocialCarouselInGamePlayIcon
 
 local function Source(p1)
 	return p1
@@ -37,7 +38,8 @@ return {
 			universeId = Source,
 			presence = Source,
 			source = Source,
-			interactionUuid = Source
+			interactionUuid = Source,
+			tileClickTarget = if FFlagSocialCarouselInGamePlayIcon then Source else nil
 		}
 	},
 	[EventNamesModule.UserSeen] = {

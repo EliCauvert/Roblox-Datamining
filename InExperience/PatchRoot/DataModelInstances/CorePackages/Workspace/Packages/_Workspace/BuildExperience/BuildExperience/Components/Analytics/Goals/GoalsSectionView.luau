@@ -4,18 +4,20 @@ local ReactModule = require(Parent.React)
 local View = require(Parent.Foundation).View
 local _ = require(Parent.DataHydration.CreatorAnalytics)
 local _ = require(BuildExperience.Analytics.AnalyticsWindow)
+local FFlagBuildAnalyticsFunnelTrackingCTAModule = require(BuildExperience.Flags.FFlagBuildAnalyticsFunnelTrackingCTA)
 local GoalCardModule = require(script.Parent.GoalCard)
 local _ = require(BuildExperience.Analytics.Goals.GoalTypes)
 local _ = require(script.Parent.useGoalsSectionViewModel)
 
 return function(p1)
-	-- upvalues: ReactModule (copy), GoalCardModule (copy), View (copy)
+	-- upvalues: ReactModule (copy), GoalCardModule (copy), FFlagBuildAnalyticsFunnelTrackingCTAModule (copy), View (copy)
 	local TestId = p1.testId or "GoalsSection"
 	local Elements = {}
 	
 	for _, entry in p1.entries do
 		local Goal = entry.goal
 		Elements[Goal.id] = ReactModule.createElement(GoalCardModule, {
+			onOpenChat = if FFlagBuildAnalyticsFunnelTrackingCTAModule then p1.onOpenChat else nil,
 			onActivated = entry.onActivated,
 			goal = Goal,
 			universeId = p1.universeId,

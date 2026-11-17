@@ -4,6 +4,7 @@ local ReactModule = require(Parent.React)
 local RoactNavigationModule = require(Parent.RoactNavigation)
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
+local Default = require(Parent.LinkingProtocol).LinkingProtocol.default
 local LocalUserIdStore = require(Parent.LocalUserIdStore).LocalUserIdStore
 local RobloxSubscriptionPurchaseAppModule = require(Parent.RobloxSubscriptionPurchaseApp)
 local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
@@ -14,10 +15,12 @@ local PromptsEntryPointModule = require(script.Parent.PromptsEntryPoint)
 local _ = require(script.Parent.Types.PromptsTypes)
 local _ = require(ServerTriggeredModals.SignalStores.createModalSignalStore)
 local _ = require(ServerTriggeredModals.EntryPoint)
+local FFlagRobloxSubscriptionOnboardingSheet = require(Parent.SharedFlags).FFlagRobloxSubscriptionOnboardingSheet
 local InitiateRobloxSubscriptionPurchaseFunction = RobloxSubscriptionPurchaseAppModule.initiateRobloxSubscriptionPurchase
 local SurfaceName = RobloxSubscriptionPurchaseAppModule.SurfaceName
 local SurfaceContext = RobloxSubscriptionPurchaseAppModule.SurfaceContext
 local RobloxPlusSheetKind = RobloxSubscriptionPurchaseAppModule.RobloxPlusSheetKind
+local RobloxSubscriptionFlowCompleteReason = RobloxSubscriptionPurchaseAppModule.RobloxSubscriptionFlowCompleteReason
 local Tbl = {}
 local Signal, Signal2 = SignalsModule.createSignal(nil)
 
@@ -69,7 +72,7 @@ return {
 		end
 	end,
 	usePlusUpsellSheetPrompt = function(p1)
-		-- upvalues: SignalsReactModule (copy), Signal (copy), useIsScreenFocused (copy), UseSelectorFunction (copy), ReactModule (copy), PromptsEntryPointModule (copy), LocalUserIdStore (copy), Signal2 (copy), InitiateRobloxSubscriptionPurchaseFunction (copy), RobloxPlusSheetKind (copy), SurfaceName (copy), SurfaceContext (copy), ReportPromptImpressionModule (copy), LoggerModule (copy), SendModalImpressionEventFunction (copy)
+		-- upvalues: SignalsReactModule (copy), Signal (copy), useIsScreenFocused (copy), UseSelectorFunction (copy), ReactModule (copy), PromptsEntryPointModule (copy), LocalUserIdStore (copy), Signal2 (copy), FFlagRobloxSubscriptionOnboardingSheet (copy), RobloxSubscriptionFlowCompleteReason (copy), Default (copy), InitiateRobloxSubscriptionPurchaseFunction (copy), RobloxPlusSheetKind (copy), SurfaceName (copy), SurfaceContext (copy), ReportPromptImpressionModule (copy), LoggerModule (copy), SendModalImpressionEventFunction (copy)
 		local EntryPoint = p1.entryPoint
 		local HasShownKey = p1.hasShownKey
 		local ModalSignalStore = p1.modalSignalStore
@@ -79,7 +82,7 @@ return {
 			return p2.CentralOverlay and p2.CentralOverlay.OverlayType
 		end)
 		ReactModule.useEffect(function()
-			-- upvalues: EntryPoint (copy), PromptsEntryPointModule (upval), UseSignalStateResult (copy), UseIsScreenFocusedResult (copy), UseSelectorResult (copy), Signal (upval), ModalSignalStore (copy), HasShownKey (copy), LocalUserIdStore (upval), Signal2 (upval), InitiateRobloxSubscriptionPurchaseFunction (upval), RobloxPlusSheetKind (upval), SurfaceName (upval), SurfaceContext (upval), ReportPromptImpressionModule (upval), LoggerModule (upval), SendModalImpressionEventFunction (upval)
+			-- upvalues: EntryPoint (copy), PromptsEntryPointModule (upval), UseSignalStateResult (copy), UseIsScreenFocusedResult (copy), UseSelectorResult (copy), Signal (upval), ModalSignalStore (copy), HasShownKey (copy), LocalUserIdStore (upval), Signal2 (upval), FFlagRobloxSubscriptionOnboardingSheet (upval), RobloxSubscriptionFlowCompleteReason (upval), Default (upval), InitiateRobloxSubscriptionPurchaseFunction (upval), RobloxPlusSheetKind (upval), SurfaceName (upval), SurfaceContext (upval), ReportPromptImpressionModule (upval), LoggerModule (upval), SendModalImpressionEventFunction (upval)
 			if EntryPoint ~= PromptsEntryPointModule.HomepageLaunch or UseSignalStateResult == nil then return end
 			if not UseIsScreenFocusedResult or UseSelectorResult ~= nil then return end
 			if Signal(false) ~= UseSignalStateResult then return end
@@ -87,7 +90,16 @@ return {
 			if UseSignalStateResult == LocalUserIdStore.getCurrentUserId(false) then
 				Signal2(nil)
 				ModalSignalStore.setHasShown(HasShownKey, true)
-				InitiateRobloxSubscriptionPurchaseFunction({ sheetKind = RobloxPlusSheetKind.TT }, nil, nil, SurfaceName.HomepageLaunchPrompt, SurfaceContext.InApp)
+				InitiateRobloxSubscriptionPurchaseFunction({ sheetKind = RobloxPlusSheetKind.TT }, if FFlagRobloxSubscriptionOnboardingSheet then {
+					onFlowComplete = function(UpsellPurchaseSucceeded)
+						-- upvalues: RobloxSubscriptionFlowCompleteReason (upval), Default (upval)
+						if UpsellPurchaseSucceeded == RobloxSubscriptionFlowCompleteReason.UpsellPurchaseSucceeded then
+							Default:detectURL("roblox://navigation/plus_onboarding")
+							
+							return
+						end
+					end
+				} else nil, nil, SurfaceName.HomepageLaunchPrompt, SurfaceContext.InApp)
 				ReportPromptImpressionModule("PlusUpsellSheetHomeLaunch", "PlusUpsellSheetHomeLaunch"):catch(function()
 					-- upvalues: LoggerModule (upval)
 					LoggerModule:warning("Failed to report Plus upsell sheet prompt impression")

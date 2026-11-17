@@ -16,6 +16,7 @@ local FFlagLuaAppPlayButtonPrivatePT = SharedFlagsModule.FFlagLuaAppPlayButtonPr
 local FFlagAppBloxConfirmationDialogFocusNav = SharedFlagsModule.FFlagAppBloxConfirmationDialogFocusNav
 local FFlagAppBloxConfirmationDialogBackCloses = SharedFlagsModule.FFlagAppBloxConfirmationDialogBackCloses
 local FFlagSplitPaneUnsavedDialogAlertStyle = SharedFlagsModule.FFlagSplitPaneUnsavedDialogAlertStyle
+local FFlagAppBloxConfirmationDialogConfirmVariant = SharedFlagsModule.FFlagAppBloxConfirmationDialogConfirmVariant
 local EventMap = {
 	[Enum.KeyCode.ButtonB] = FocusNavigationEventNameEnum.NavigateBack,
 	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
@@ -23,7 +24,7 @@ local EventMap = {
 local FFlagEnableSplitPane = require(Parent.SharedFlags).FFlagEnableSplitPane
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), FFlagAppBloxConfirmationDialogFocusNav (copy), FFlagAppBloxConfirmationDialogBackCloses (copy), ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), UseDefaultFocusBehaviorFunction (copy), FFlagLuaAppPlayButtonPrivatePT (copy), ButtonVariant (copy), FFlagSplitPaneUnsavedDialogAlertStyle (copy), Dialog (copy), FFlagEnableSplitPane (copy), Orientation (copy)
+	-- upvalues: UseLocalizationFunction (copy), FFlagAppBloxConfirmationDialogFocusNav (copy), FFlagAppBloxConfirmationDialogBackCloses (copy), ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), UseDefaultFocusBehaviorFunction (copy), FFlagLuaAppPlayButtonPrivatePT (copy), FFlagAppBloxConfirmationDialogConfirmVariant (copy), ButtonVariant (copy), FFlagSplitPaneUnsavedDialogAlertStyle (copy), Dialog (copy), FFlagEnableSplitPane (copy), Orientation (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		confirmButtonText = "CommonUI.Controls.Action.Confirm",
 		cancelButtonText = "CommonUI.Controls.Action.Cancel"
@@ -57,7 +58,7 @@ return function(p1)
 	
 	if FFlagLuaAppPlayButtonPrivatePT then
 		local config = {
-			variant = ButtonVariant.Emphasis,
+			variant = if FFlagAppBloxConfirmationDialogConfirmVariant and p1.confirmButtonVariant then p1.confirmButtonVariant else ButtonVariant.Emphasis,
 			text = p1.confirmButtonText or UseLocalizationResult.confirmButtonText,
 			onActivated = p1.onConfirm,
 			ref = Ref1
@@ -85,7 +86,7 @@ return function(p1)
 			orientation = if FFlagLuaAppPlayButtonPrivatePT and p1.orientButtonsVertically then Orientation.Vertical else nil,
 			actions = if FFlagLuaAppPlayButtonPrivatePT then v2 else {
 				{
-					variant = ButtonVariant.Emphasis,
+					variant = if FFlagAppBloxConfirmationDialogConfirmVariant and p1.confirmButtonVariant then p1.confirmButtonVariant else ButtonVariant.Emphasis,
 					text = p1.confirmButtonText or UseLocalizationResult.confirmButtonText,
 					onActivated = p1.onConfirm,
 					ref = Ref1

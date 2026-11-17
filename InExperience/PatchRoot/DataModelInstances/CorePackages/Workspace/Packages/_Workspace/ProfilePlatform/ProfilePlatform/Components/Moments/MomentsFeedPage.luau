@@ -1,16 +1,16 @@
 ﻿local Parent = script:FindFirstAncestor("ProfilePlatform").Parent
 local ReactModule = require(Parent.React)
-local FoundationModule = require(Parent.Foundation)
+local NavigationModule = require(Parent.Navigation)
 local RobloxAppHooksModule = require(Parent.RobloxAppHooks)
 local RoactUtilsModule = require(Parent.RoactUtils)
 local MomentsCommonModule = require(Parent.MomentsCommon)
 local MomentsModule = require(Parent.Moments)
 local GenericAbuseReportingModule = require(Parent.GenericAbuseReporting)
+local CentralOverlayModule = require(Parent.CentralOverlay)
 local OpenGameDetailsFunction = require(Parent.GameDetail).OpenGameDetails
 local UseOpenBlockingModalModule = require(Parent.MomentsCommon.useOpenBlockingModal)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagMomentsOptimisticProfilePending = SharedFlagsModule.FFlagMomentsOptimisticProfilePending
-local FFlagEnableArgusImmersiveNav = SharedFlagsModule.FFlagEnableArgusImmersiveNav
 local FFlagEnableMomentsCommentReporting = SharedFlagsModule.FFlagEnableMomentsCommentReporting
 local FFlagEnableMomentsCommentBlocking = SharedFlagsModule.FFlagEnableMomentsCommentBlocking
 local FFlagAbuseReportSubmissionTargetV4 = SharedFlagsModule.FFlagAbuseReportSubmissionTargetV4
@@ -20,29 +20,21 @@ local FFlagProfileRenderAvatarMoments = SharedFlagsModule.FFlagProfileRenderAvat
 local FFlagProfileMomentsFeedAboveSplitPane = SharedFlagsModule.FFlagProfileMomentsFeedAboveSplitPane
 local SplitPaneStore = if FFlagProfileMomentsFeedAboveSplitPane then require(Parent.SplitPane).SplitPaneStore else nil
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
-local View = FoundationModule.View
-local IconButton = FoundationModule.IconButton
-local ButtonSize = FoundationModule.Enums.ButtonSize
-local FoundationProvider = FoundationModule.FoundationProvider
-local ColorMode = FoundationModule.Enums.ColorMode
+local View = require(Parent.Foundation).View
 local UseScreenSizeFunction = RobloxAppHooksModule.useScreenSize
-local UseStatusBarHeightFunction = RobloxAppHooksModule.useStatusBarHeight
-local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
 local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
 local AbuseVector = GenericAbuseReportingModule.Enums.AbuseVector
 local OpenDynamicAbuseReportFunction = GenericAbuseReportingModule.Thunks.OpenDynamicAbuseReport
-local CloseCentralOverlayFunction = require(Parent.CentralOverlay).Thunks.CloseCentralOverlay
+local CloseCentralOverlayFunction = CentralOverlayModule.Thunks.CloseCentralOverlay
 local FireAnalyticsEventFunction = MomentsCommonModule.Analytics.fireAnalyticsEvent
 local EventNames = MomentsCommonModule.Analytics.EventNames
-local UseNavigationFunction = require(Parent.Navigation).useNavigation
-local Feed = MomentsModule.Feed
+local UseNavigationFunction = NavigationModule.useNavigation
 local ReportEdpVideo = MomentsModule.reportEdpVideo
 local MomentsImmersivePresentation = MomentsModule.MomentsImmersivePresentation
 local ImmersiveFeedKind = MomentsModule.Constants.ImmersiveFeedKind
-local CreateUserMomentsFeedSourceModule = require(Parent.Moments.CreateUserMomentsFeedSource)
 local ReportMomentFunction = MomentsModule.reportMoment
 
-local function MomentsFeedPageImmersive()
+return function()
 	-- upvalues: UseNavigationFunction (copy), FFlagMomentsOptimisticProfilePending (copy), ReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), UseDispatchFunction (copy), FFlagMomentsServeEDPVideos (copy), CloseCentralOverlayFunction (copy), OpenGameDetailsFunction (copy), OpenDynamicAbuseReportFunction (copy), AbuseVector (copy), FFlagAbuseReportAttributes (copy), ReportEdpVideo (copy), ReportMomentFunction (copy), FFlagAbuseReportSubmissionTargetV4 (copy), FFlagEnableMomentsCommentReporting (copy), FFlagEnableMomentsCommentBlocking (copy), UseOpenBlockingModalModule (copy), UseScreenSizeFunction (copy), FFlagProfileMomentsFeedAboveSplitPane (copy), UseSignalStateFunction (copy), SplitPaneStore (copy), View (copy), FFlagProfileRenderAvatarMoments (copy), MomentsImmersivePresentation (copy), ImmersiveFeedKind (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local ExtraPropsParam = UseNavigationResult.getParam("extraProps")
@@ -198,61 +190,3 @@ local function MomentsFeedPageImmersive()
 		})
 	})
 end
-
-local function MomentsFeedPageLegacy()
-	-- upvalues: UseNavigationFunction (copy), FFlagMomentsOptimisticProfilePending (copy), ReactModule (copy), CreateUserMomentsFeedSourceModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), UseScreenSizeFunction (copy), UseSelectorFunction (copy), UseStatusBarHeightFunction (copy), View (copy), FFlagProfileRenderAvatarMoments (copy), FoundationProvider (copy), ColorMode (copy), Feed (copy), IconButton (copy), ButtonSize (copy)
-	local UseNavigationResult = UseNavigationFunction()
-	local ExtraPropsParam = UseNavigationResult.getParam("extraProps")
-	local TargetUserId = if ExtraPropsParam and ExtraPropsParam.targetUserId then ExtraPropsParam.targetUserId else 0
-	local InitialIndex = if ExtraPropsParam and ExtraPropsParam.initialIndex then ExtraPropsParam.initialIndex else 1
-	local InitialMomentId = if FFlagMomentsOptimisticProfilePending and ExtraPropsParam ~= nil then ExtraPropsParam.initialMomentId else nil
-	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: CreateUserMomentsFeedSourceModule (upval), TargetUserId (copy), InitialIndex (copy), InitialMomentId (copy)
-		return CreateUserMomentsFeedSourceModule(TargetUserId, {
-			initialIndex = InitialIndex,
-			initialMomentId = InitialMomentId
-		})
-	end, { TargetUserId, InitialIndex, InitialMomentId })
-	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: FireAnalyticsEventFunction (upval), EventNames (upval), TargetUserId (copy), UseNavigationResult (copy)
-		FireAnalyticsEventFunction(EventNames.ProfileClosePressed, { userId = tostring(TargetUserId) })
-		UseNavigationResult.goBack()
-	end, { UseNavigationResult.goBack, TargetUserId })
-	local UseScreenSizeResult = UseScreenSizeFunction()
-	local UseSelectorResult = UseSelectorFunction(function(p1)
-		return p1.GlobalGuiInset
-	end)
-	
-	return ReactModule.createElement(View, {
-		Size = UDim2.fromOffset(UseScreenSizeResult.X, UseScreenSizeResult.Y),
-		padding = {
-			top = UDim.new(0, UseSelectorResult.top + UseStatusBarHeightFunction()),
-			bottom = UDim.new(0, UseSelectorResult.bottom),
-			left = UDim.new(0, UseSelectorResult.left),
-			right = UDim.new(0, UseSelectorResult.right)
-		},
-		backgroundStyle = if FFlagProfileRenderAvatarMoments then { Transparency = 1 } else nil,
-		tag = { ["bg-surface-0"] = not FFlagProfileRenderAvatarMoments }
-	}, {
-		OnVideoUI = ReactModule.createElement(FoundationProvider, { colorMode = ColorMode.Dark }, {
-			Feed = ReactModule.createElement(Feed, {
-				active = true,
-				playbackActive = true,
-				source = UseMemoResult,
-				initialIndex = InitialIndex
-			}),
-			CloseButtonContainer = ReactModule.createElement(View, {
-				tag = "position-top-left anchor-top-left auto-xy padding-large",
-				ZIndex = 100000
-			}, {
-				CloseButton = ReactModule.createElement(IconButton, {
-					icon = "icons/navigation/close",
-					size = ButtonSize.Medium,
-					onActivated = UseResult
-				})
-			})
-		})
-	})
-end
-
-return if FFlagEnableArgusImmersiveNav then MomentsFeedPageImmersive else MomentsFeedPageLegacy

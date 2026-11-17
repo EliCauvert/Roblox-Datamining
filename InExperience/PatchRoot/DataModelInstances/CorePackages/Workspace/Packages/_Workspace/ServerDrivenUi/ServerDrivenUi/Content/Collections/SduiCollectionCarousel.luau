@@ -42,16 +42,15 @@ local FFlagLuaAppRespectClipAncestorImpressions = SharedFlagsModule.FFlagLuaAppR
 local FFlagLuaAppCompositionAlways = SharedFlagsModule.FFlagLuaAppCompositionAlways
 local FFlagLuaAppUseFrameBoundsImpressions = SharedFlagsModule.FFlagLuaAppUseFrameBoundsImpressions
 local FFlagSduiCarouselUseNestedImpressionsFeedContext = SharedFlagsModule.FFlagSduiCarouselUseNestedImpressionsFeedContext
-local FFlagLuaAppSduiVideoThumbnail = SharedFlagsModule.FFlagLuaAppSduiVideoThumbnail
 local FFlagSduiPreferredTextSizeLineBudgets = SharedFlagsModule.FFlagSduiPreferredTextSizeLineBudgets
 local t = {}
 
 return ReactModule.memo(function(p1)
-	-- upvalues: FFlagLuaAppCompositionAlways (copy), FFlagLuaAppSduiVideoThumbnail (copy), ReactModule (copy), CryoModule (copy), FFlagLuaAppLayoutParamsInContext (copy), SignalsReactModule (copy), UseCollectionLayoutParamsFunction (copy), CollectionItemSize (copy), FindAnalyticsFieldFunction (copy), t (copy), SduiBuilder (copy), UseCollectionAnalyticsContextFunction (copy), UseCollectionImpressionsSignalFunction (copy), FFlagSduiCarouselUseNestedImpressionsFeedContext (copy), GetImpressionsTagModule (copy), SduiParseHelpers (copy), SduiErrors (copy), ReportUnifiedLoggingImpressionsFunction (copy), SendLegacyGameImpressionsForSduiModule (copy), UseTokensFunction (copy), FFlagSduiPreferredTextSizeLineBudgets (copy), UsePreferredTextSizeLineBudgetFunction (copy), ItemHeightModeModule (copy), UseUniformItemHeightModule (copy), FFlagSduiErrorPaths (copy), AddSduiErrorContextFieldsFunction (copy), SduiCollectionAnalyticsBuilder (copy), GetSduiComponentWrapperFunction (copy), SduiCollectionItemModule (copy), HoverTileCoordinator (copy), UseScrollTelemetryCallbackModule (copy), CollectionCarousel (copy), SduiFeedContext (copy), WaitForPropWrapper (copy), FFlagLuaAppUseFrameBoundsImpressions (copy), FrameBoundsImpressionsTracker (copy), FFlagLuaAppRespectClipAncestorImpressions (copy), ScreenSizeImpressionsTracker (copy), ScrollDetector (copy)
+	-- upvalues: FFlagLuaAppCompositionAlways (copy), ReactModule (copy), CryoModule (copy), FFlagLuaAppLayoutParamsInContext (copy), SignalsReactModule (copy), UseCollectionLayoutParamsFunction (copy), CollectionItemSize (copy), FindAnalyticsFieldFunction (copy), t (copy), SduiBuilder (copy), UseCollectionAnalyticsContextFunction (copy), UseCollectionImpressionsSignalFunction (copy), FFlagSduiCarouselUseNestedImpressionsFeedContext (copy), GetImpressionsTagModule (copy), SduiParseHelpers (copy), SduiErrors (copy), ReportUnifiedLoggingImpressionsFunction (copy), SendLegacyGameImpressionsForSduiModule (copy), UseTokensFunction (copy), FFlagSduiPreferredTextSizeLineBudgets (copy), UsePreferredTextSizeLineBudgetFunction (copy), ItemHeightModeModule (copy), UseUniformItemHeightModule (copy), FFlagSduiErrorPaths (copy), AddSduiErrorContextFieldsFunction (copy), SduiCollectionAnalyticsBuilder (copy), GetSduiComponentWrapperFunction (copy), SduiCollectionItemModule (copy), HoverTileCoordinator (copy), UseScrollTelemetryCallbackModule (copy), CollectionCarousel (copy), SduiFeedContext (copy), WaitForPropWrapper (copy), FFlagLuaAppUseFrameBoundsImpressions (copy), FrameBoundsImpressionsTracker (copy), FFlagLuaAppRespectClipAncestorImpressions (copy), ScreenSizeImpressionsTracker (copy), ScrollDetector (copy)
 	local FFlagLuaAppCompositionAlways1 = FFlagLuaAppCompositionAlways or (p1.appCompositionEnabled or p1.sduiContext.appCompositionEnabled)
 	local LayoutOrder = p1.layoutOrder
 	local SduiContext = p1.sduiContext
-	local VideoPlaybackContext = if FFlagLuaAppSduiVideoThumbnail then SduiContext.videoPlaybackContext else nil
+	local VideoPlaybackContext = SduiContext.videoPlaybackContext
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy)
 		if not p1.items then
@@ -88,24 +87,19 @@ return ReactModule.memo(function(p1)
 	})
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseResult = nil
-	local UseResult1 = nil
-	
-	if FFlagLuaAppSduiVideoThumbnail then
-		local ViewportVideoAutoplayController = if VideoPlaybackContext then VideoPlaybackContext.viewportVideoAutoplayController else nil
-		UseResult = ReactModule.useCallback(function()
-			-- upvalues: ViewportVideoAutoplayController (copy)
-			if ViewportVideoAutoplayController then
-				ViewportVideoAutoplayController:onScrollStart()
-			end
-		end, { ViewportVideoAutoplayController })
-		UseResult1 = ReactModule.useCallback(function(p2)
-			-- upvalues: ViewportVideoAutoplayController (copy), UseRefResult (copy)
-			if ViewportVideoAutoplayController then
-				ViewportVideoAutoplayController:onScrollSettled("X", p2, { current = UseRefResult.current })
-			end
-		end, { ViewportVideoAutoplayController, UseRefResult })
-	end
+	local ViewportVideoAutoplayController = if VideoPlaybackContext then VideoPlaybackContext.viewportVideoAutoplayController else nil
+	local UseResult = ReactModule.useCallback(function()
+		-- upvalues: ViewportVideoAutoplayController (copy)
+		if ViewportVideoAutoplayController then
+			ViewportVideoAutoplayController:onScrollStart()
+		end
+	end, { ViewportVideoAutoplayController })
+	local UseResult1 = ReactModule.useCallback(function(p2)
+		-- upvalues: ViewportVideoAutoplayController (copy), UseRefResult (copy)
+		if ViewportVideoAutoplayController then
+			ViewportVideoAutoplayController:onScrollSettled("X", p2, { current = UseRefResult.current })
+		end
+	end, { ViewportVideoAutoplayController, UseRefResult })
 	local JoinResult = if p1.layoutOverrides then CryoModule.Dictionary.join(p1.layoutOverrides, { sideMargin = p1.pageSideMargin }) else { sideMargin = p1.pageSideMargin }
 	local UseSignalStateResult = if FFlagLuaAppCompositionAlways then nil elseif FFlagLuaAppLayoutParamsInContext then SignalsReactModule.useSignalState((ReactModule.useCallback(function(p2)
 		-- upvalues: SduiContext (copy), p1 (copy)
@@ -339,8 +333,8 @@ return ReactModule.memo(function(p1)
 		ScrollDetector = ReactModule.createElement(ScrollDetector, {
 			scrollingFrameRef = UseRefResult,
 			sendScrollEvent = UseScrollTelemetryCallbackModule(UseRefResult, UseCollectionAnalyticsContextResult2, SduiContext),
-			onScrollStart = if FFlagLuaAppSduiVideoThumbnail then UseResult else nil,
-			onScrollSettled = if FFlagLuaAppSduiVideoThumbnail then UseResult1 else nil
+			onScrollStart = UseResult,
+			onScrollSettled = UseResult1
 		}),
 		FocusNavActions = ReactModule.useMemo(function()
 			-- upvalues: p1 (copy), ReactModule (upval), UseCollectionAnalyticsContextResult (copy), UseStateResult (copy)

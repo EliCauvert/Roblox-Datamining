@@ -6,9 +6,10 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local ShouldShowPriceLabelFunction = require(AvatarExperienceInspectAndBuy.Utils.itemDetailsUtils).shouldShowPriceLabel
 local _ = FoundationModule.Enums.ButtonVariant
 local _ = require(AvatarExperienceInspectAndBuy.Enums.PriceStatus)
+local FFlagAXIaBPlusExclusiveUpsell = require(Parent.AvatarExperienceFlags).FFlagAXIaBPlusExclusiveUpsell
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), ShouldShowPriceLabelFunction (copy), FoundationModule (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), ShouldShowPriceLabelFunction (copy), FoundationModule (copy), FFlagAXIaBPlusExclusiveUpsell (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: ShouldShowPriceLabelFunction (upval), p1 (copy)
@@ -54,7 +55,8 @@ return function(p1)
 			text = p1.purchaseButtonProps.purchaseButtonText,
 			variant = p1.purchaseButtonProps.variant,
 			isDisabled = p1.purchaseButtonProps.isDisabled,
-			onActivated = p1.purchaseButtonProps.onPurchase
+			onActivated = p1.purchaseButtonProps.onPurchase,
+			testId = if FFlagAXIaBPlusExclusiveUpsell then p1.purchaseButtonProps.testId else nil
 		})
 	})
 end

@@ -4,6 +4,7 @@ local _ = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local FFlagBuildExperienceFoundationTabsModule = require(BuildExperience.Flags.FFlagBuildExperienceFoundationTabs)
 local FFlagBuildExperienceHomeTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceHomeTelemetry)
+local FFlagBuildUpdatedSearchUXForGAModule = require(BuildExperience.Flags.FFlagBuildUpdatedSearchUXForGA)
 local BuildHomeTabsViewModule = require(script.Parent.BuildHomeTabsView)
 local _ = require(BuildExperience.Stores.GetSearchQueryStore.createSearchQueryStore)
 local GamesFilterModule = require(BuildExperience.Stores.GetMyCreationsFilterStore.GamesFilter)
@@ -14,6 +15,7 @@ local UseBuildHomeTabsFillBehaviorModule = require(script.Parent.useBuildHomeTab
 local UseBuildHomeTabsViewModelModule = require(script.Parent.useBuildHomeTabsViewModel)
 local UsePreviewResultsModule = require(BuildExperience.Components.PreviewsTab.usePreviewResults)
 local UsePreviewsTabViewModelModule = require(BuildExperience.Components.PreviewsTab.usePreviewsTabViewModel)
+local BUILDHOMETAB = require(BuildExperience.Stores.GetBuildHomeTabStore.createBuildHomeTabStore).BUILD_HOME_TAB
 local Options = {
 	GamesFilterModule.All,
 	GamesFilterModule.GroupGames,
@@ -22,25 +24,28 @@ local Options = {
 local DefaultFilter = { games = GamesFilterModule.SharedGames }
 
 return function(Frame)
-	-- upvalues: GetPreviewsFilterStoreModule (copy), UsePreviewResultsModule (copy), UseBuildHomeTabsViewModelModule (copy), FFlagBuildExperienceHomeTelemetryModule (copy), FFlagBuildExperienceFoundationTabsModule (copy), UseBuildHomeTabsFillBehaviorModule (copy), UsePreviewsTabViewModelModule (copy), ReactModule (copy), BuildHomeTabsViewModule (copy), PreviewsTabViewModule (copy), MyCreationsFilterContainerModule (copy), DefaultFilter (copy), Options (copy)
+	-- upvalues: GetPreviewsFilterStoreModule (copy), UseBuildHomeTabsViewModelModule (copy), FFlagBuildUpdatedSearchUXForGAModule (copy), FFlagBuildExperienceHomeTelemetryModule (copy), UsePreviewResultsModule (copy), BUILDHOMETAB (copy), FFlagBuildExperienceFoundationTabsModule (copy), UseBuildHomeTabsFillBehaviorModule (copy), UsePreviewsTabViewModelModule (copy), ReactModule (copy), BuildHomeTabsViewModule (copy), PreviewsTabViewModule (copy), MyCreationsFilterContainerModule (copy), DefaultFilter (copy), Options (copy)
 	local CreatorGroupsStore = Frame.creatorGroupsStore
 	local PreviewsFilterStore = Frame.previewsFilterStore or GetPreviewsFilterStoreModule()
+	local UseFilterResult = PreviewsFilterStore.useFilter()
+	local UseBuildHomeTabsViewModelModuleResult = UseBuildHomeTabsViewModelModule({
+		tabStore = Frame.tabStore,
+		searchQueryStore = if FFlagBuildUpdatedSearchUXForGAModule then nil else Frame.searchQueryStore,
+		isFocused = if FFlagBuildExperienceHomeTelemetryModule then Frame.isFocused else nil
+	})
 	local UsePreviewResultsModuleResult = UsePreviewResultsModule({
 		searchStore = Frame.searchStore,
 		creatorGroupsStore = CreatorGroupsStore,
-		filter = PreviewsFilterStore.useFilter(),
+		filter = UseFilterResult,
+		searchQueryStore = if FFlagBuildUpdatedSearchUXForGAModule then Frame.searchQueryStore else nil,
+		isActiveTab = if FFlagBuildUpdatedSearchUXForGAModule then UseBuildHomeTabsViewModelModuleResult.activeTab == BUILDHOMETAB.Previews else nil,
 		isFocused = Frame.isFocused
-	})
-	local UseBuildHomeTabsViewModelModuleResult = UseBuildHomeTabsViewModelModule({
-		tabStore = Frame.tabStore,
-		searchQueryStore = Frame.searchQueryStore,
-		isFocused = if FFlagBuildExperienceHomeTelemetryModule then Frame.isFocused else nil
 	})
 	local UsePreviewsTabViewModelModuleResult = UsePreviewsTabViewModelModule({ results = UsePreviewResultsModuleResult })
 	
 	return ReactModule.createElement(BuildHomeTabsViewModule, {
 		LayoutOrder = Frame.LayoutOrder,
-		showTabs = UseBuildHomeTabsViewModelModuleResult.showTabs,
+		showTabs = if FFlagBuildUpdatedSearchUXForGAModule then nil else UseBuildHomeTabsViewModelModuleResult.showTabs,
 		activeTab = UseBuildHomeTabsViewModelModuleResult.activeTab,
 		tabs = UseBuildHomeTabsViewModelModuleResult.tabs,
 		onTabActivated = UseBuildHomeTabsViewModelModuleResult.onTabActivated,

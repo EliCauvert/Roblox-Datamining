@@ -30,8 +30,8 @@ return function(p1)
 			}, {
 				Label = ReactModule.createElement(Text, {
 					tag = "auto-xy text-label-small content-emphasis",
-					Text = "Restyle",
-					LayoutOrder = 1
+					LayoutOrder = 1,
+					Text = p1.text.restyle
 				}),
 				TimeLeft = if p1.timeLeft then ReactModule.createElement(View, { tag = "auto-xy", LayoutOrder = 2 }, {
 					Sizer = ReactModule.createElement(Text, {
@@ -67,8 +67,8 @@ return function(p1)
 			}, {
 				Description = ReactModule.createElement(Text, {
 					tag = "size-full-0 auto-y text-caption-small text-wrap text-align-x-left content-muted",
-					Text = "Restyle is an early preview. Things may look different from the original game.",
-					LayoutOrder = 1
+					LayoutOrder = 1,
+					Text = p1.text.description
 				}),
 				TimeLeft = if p1.timeLeft then ReactModule.createElement(View, {
 					tag = "row flex-x-between align-y-center size-full-0 auto-y padding-medium radius-medium bg-shift-100",
@@ -76,8 +76,8 @@ return function(p1)
 				}, {
 					Label = ReactModule.createElement(Text, {
 						tag = "auto-xy text-label-small content-default",
-						Text = "Time left",
-						LayoutOrder = 1
+						LayoutOrder = 1,
+						Text = p1.text.timeLeft
 					}),
 					Value = ReactModule.createElement(Text, {
 						tag = "auto-xy text-label-medium content-default",
@@ -91,8 +91,8 @@ return function(p1)
 				}, {
 					Label = ReactModule.createElement(Text, {
 						tag = "auto-xy text-label-small content-default",
-						Text = "Restyle",
-						LayoutOrder = 1
+						LayoutOrder = 1,
+						Text = p1.text.restyle
 					}),
 					Toggle = ReactModule.createElement(Toggle, {
 						label = "",

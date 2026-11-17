@@ -36,18 +36,18 @@
 		end
 	end
 	
+	local _ = function(p3): boolean
+		-- upvalues: ForceShow (ref), Flag (ref), p1 (copy), Flag2 (ref), Flag1 (ref), NowFunction (copy), NowResult (ref)
+		return not ForceShow and Flag and (p3 >= p1.hideAfterAdvances and ((not Flag2 or Flag1 or p1.hideAwayFromPausedItem) and p1.shownDwellMs <= NowFunction() - NowResult))
+	end
+	
 	local _ = function()
-		-- upvalues: ForceShow (ref), Flag (ref), Count (ref), p1 (copy), Flag2 (ref), Flag1 (ref), NowFunction (copy), NowResult (ref), v2 (ref), p2 (copy)
-		if ForceShow or not Flag then return end
-		if Count < p1.hideAfterAdvances then return end
-		if Flag2 and not Flag1 then return end
-		if NowFunction() - NowResult < p1.shownDwellMs then return end
-		if Flag then
+		-- upvalues: Count (ref), ForceShow (ref), Flag (ref), p1 (copy), Flag2 (ref), Flag1 (ref), NowFunction (copy), NowResult (ref), v2 (ref), p2 (copy)
+		if not ForceShow and Flag and (Count >= p1.hideAfterAdvances and ((not Flag2 or Flag1 or p1.hideAwayFromPausedItem) and NowFunction() - NowResult >= p1.shownDwellMs)) then
+			if not Flag then return end
 			Flag = false
 			v2 = NowFunction()
 			p2.setChromeVisible(false, "advance")
-			
-			return
 		end
 	end
 	
@@ -80,7 +80,7 @@
 				elseif v4 == 1 then
 					Count += 1
 					
-					if not ForceShow and Flag and Count >= p1.hideAfterAdvances and (not Flag2 or Flag1) and (NowFunction() - NowResult >= p1.shownDwellMs and Flag) then
+					if not ForceShow and Flag and (Count >= p1.hideAfterAdvances and ((not Flag2 or Flag1 or p1.hideAwayFromPausedItem) and NowFunction() - NowResult >= p1.shownDwellMs)) and Flag then
 						Flag = false
 						v2 = NowFunction()
 						p2.setChromeVisible(false, "advance")
@@ -184,6 +184,10 @@
 				
 				return
 			end
+		end,
+		willHideOnNextAdvance = function(): boolean
+			-- upvalues: v1 (ref), Count1 (ref), Count (ref), ForceShow (ref), Flag (ref), p1 (copy), Flag2 (ref), Flag1 (ref), NowFunction (copy), NowResult (ref)
+			return (Count1 <= 0 or Count1 > (v1 or 1) + 1) and (not ForceShow and Flag and (Count + 1 >= p1.hideAfterAdvances and ((not Flag2 or Flag1 or p1.hideAwayFromPausedItem) and p1.shownDwellMs <= NowFunction() - NowResult)))
 		end,
 		isVisible = function()
 			-- upvalues: Flag (ref)

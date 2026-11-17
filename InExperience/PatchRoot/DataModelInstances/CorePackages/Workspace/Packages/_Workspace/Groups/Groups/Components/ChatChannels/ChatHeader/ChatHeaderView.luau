@@ -5,13 +5,11 @@ local View = FoundationModule.View
 local Text = FoundationModule.Text
 local Image = FoundationModule.Image
 local Button = FoundationModule.Button
-local IconButton = FoundationModule.IconButton
-local Menu = FoundationModule.Menu
-local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local ChatOverflowMenuContainerModule = require(script.Parent.Parent.ChatOverflowMenuContainer)
 local InputSize = FoundationModule.Enums.InputSize
 
 return function(Frame)
-	-- upvalues: ReactModule (copy), View (copy), Image (copy), Text (copy), Button (copy), InputSize (copy), Menu (copy), FoundationModule (copy), IconButton (copy), ButtonVariant (copy)
+	-- upvalues: ReactModule (copy), View (copy), Image (copy), Text (copy), Button (copy), InputSize (copy), ChatOverflowMenuContainerModule (copy)
 	return ReactModule.createElement(View, {
 		tag = "row align-y-center gap-small size-full-0 auto-y",
 		LayoutOrder = Frame.LayoutOrder,
@@ -59,29 +57,13 @@ return function(Frame)
 			size = InputSize.Small,
 			testId = `{Frame.testId}--cta`
 		}) else nil,
-		Overflow = if #Frame.menuItems > 0 then ReactModule.createElement(Menu, {
+		Overflow = if #Frame.menuItems > 0 then ReactModule.createElement(ChatOverflowMenuContainerModule, {
 			LayoutOrder = 3,
-			items = Frame.menuItems,
-			isOpen = Frame.isMenuOpen,
-			onPressedOutside = Frame.onCloseMenu,
-			side = FoundationModule.Enums.PopoverSide.Bottom,
-			align = FoundationModule.Enums.PopoverAlign.End,
-			selectionGroup = {
-				SelectionBehaviorUp = Enum.SelectionBehavior.Stop,
-				SelectionBehaviorDown = Enum.SelectionBehavior.Stop,
-				SelectionBehaviorLeft = Enum.SelectionBehavior.Stop,
-				SelectionBehaviorRight = Enum.SelectionBehavior.Stop
-			},
-			ref = Frame.menuRef,
-			testId = `{Frame.testId}--menu`
-		}, {
-			Trigger = ReactModule.createElement(IconButton, {
-				icon = FoundationModule.Enums.IconName.ThreeDotsHorizontal,
-				variant = ButtonVariant.Utility,
-				size = InputSize.Small,
-				onActivated = Frame.onToggleMenu,
-				testId = `{Frame.testId}--overflow`
-			})
+			menuItems = Frame.menuItems,
+			isMenuOpen = Frame.isMenuOpen,
+			onToggleMenu = Frame.onToggleMenu,
+			onCloseMenu = Frame.onCloseMenu,
+			testId = Frame.testId
 		}) else nil
 	})
 end

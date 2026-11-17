@@ -11,11 +11,40 @@ local GetHoursUntilResetModule = require(script.Parent.getHoursUntilReset)
 local UseOpenBuyRobuxWebViewModule = require(script.Parent.useOpenBuyRobuxWebView)
 local UseRefreshCreatorCreditOnUnhideModule = require(script.Parent.useRefreshCreatorCreditOnUnhide)
 local FFlagBuildExperienceModelPickerModule = require(BuildExperience.Flags.FFlagBuildExperienceModelPicker)
+local FFlagBuildExperienceAdsAndRobuxTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceAdsAndRobuxTelemetry)
 local GetBuildCreatorCreditRefreshStoreModule = require(BuildExperience.Stores.GetBuildCreatorCreditRefreshStore)
+local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 local DataStatus = DataHydrationModule.DataStatus
 
+local function _(): string
+	return if game.GameId == 0 then "false" else "true"
+end
+
+local function getLimitParameters(p1, p2)
+	local config = {
+		isInExperience = if game.GameId == 0 then "false" else "true",
+		limitType = if p1 == nil then "none" else "custom"
+	}
+	
+	if p1 ~= nil then
+		config.dailyLimit = tostring(p1)
+	end
+	local v1 = if type(p2) == "table" then p2 else nil
+	local Number = if v1 == nil then nil else tonumber(v1.responseCode)
+	local Response = if v1 == nil or type(v1.response) ~= "table" then nil else v1.response
+	local Number1 = if Response == nil then nil else tonumber(Response.statusCode)
+	
+	if Number ~= nil then
+		config.errorCode = tostring(Number)
+	end
+	if Number1 ~= nil then
+		config.httpStatus = tostring(Number1)
+	end
+	return config
+end
+
 return function()
-	-- upvalues: CreatorCreditModule (copy), ReactModule (copy), SignalsReactModule (copy), DataStatus (copy), FFlagBuildExperienceModelPickerModule (copy), GetBuildCreatorCreditRefreshStoreModule (copy), UseOpenBuyRobuxWebViewModule (copy), UseRefreshCreatorCreditOnUnhideModule (copy), GetHoursUntilResetModule (copy), CreatorCreditConfigModule (copy)
+	-- upvalues: CreatorCreditModule (copy), ReactModule (copy), SignalsReactModule (copy), DataStatus (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), SendBuildExperienceEventModule (copy), getLimitParameters (copy), FFlagBuildExperienceModelPickerModule (copy), GetBuildCreatorCreditRefreshStoreModule (copy), UseOpenBuyRobuxWebViewModule (copy), UseRefreshCreatorCreditOnUnhideModule (copy), GetHoursUntilResetModule (copy), CreatorCreditConfigModule (copy)
 	local CreatorCreditStore = CreatorCreditModule.getCreatorCreditStore(false)
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: CreatorCreditStore (copy)
@@ -56,23 +85,26 @@ return function()
 		end
 	end, {})
 	local UseResult2 = ReactModule.useCallback(function(AdditionalUsageEnabled)
-		-- upvalues: HasUseSignalStateResult1 (copy), UseStateResult1 (copy), UseSignalStateResult1_1 (copy), UseResult (copy), CreatorCreditStore (copy), UseResult1 (copy)
-		if HasUseSignalStateResult1 and not UseStateResult1 and UseSignalStateResult1_1 ~= nil then
-			local UseResultResult = UseResult()
-			CreatorCreditStore.setDailyLimit({
-				additionalUsageEnabled = AdditionalUsageEnabled,
-				dailyLimitSet = UseSignalStateResult1_1.dailyLimitSet,
-				dailyLimit = UseSignalStateResult1_1.dailyLimit
-			}):andThen(function()
-				-- upvalues: UseResult1 (upval), UseResultResult (copy)
-				UseResult1(UseResultResult, false)
-			end):catch(function()
-				-- upvalues: UseResult1 (upval), UseResultResult (copy)
-				UseResult1(UseResultResult, true)
-			end)
-			
-			return
+		-- upvalues: HasUseSignalStateResult1 (copy), UseStateResult1 (copy), UseSignalStateResult1_1 (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (upval), SendBuildExperienceEventModule (upval), UseResult (copy), CreatorCreditStore (copy), UseResult1 (copy)
+		if not HasUseSignalStateResult1 or UseStateResult1 or UseSignalStateResult1_1 == nil then return end
+		if FFlagBuildExperienceAdsAndRobuxTelemetryModule then
+			SendBuildExperienceEventModule("CREATOR_CREDIT_ADDITIONAL_USAGE_TOGGLE", {}, {
+				isInExperience = if game.GameId == 0 then "false" else "true",
+				enabled = if AdditionalUsageEnabled then "true" else "false"
+			})
 		end
+		local UseResultResult = UseResult()
+		CreatorCreditStore.setDailyLimit({
+			additionalUsageEnabled = AdditionalUsageEnabled,
+			dailyLimitSet = UseSignalStateResult1_1.dailyLimitSet,
+			dailyLimit = UseSignalStateResult1_1.dailyLimit
+		}):andThen(function()
+			-- upvalues: UseResult1 (upval), UseResultResult (copy)
+			UseResult1(UseResultResult, false)
+		end):catch(function()
+			-- upvalues: UseResult1 (upval), UseResultResult (copy)
+			UseResult1(UseResultResult, true)
+		end)
 	end, {
 		UseResult, CreatorCreditStore, UseResult1, UseStateResult1,
 		UseSignalStateResult1_1, HasUseSignalStateResult1
@@ -85,7 +117,7 @@ return function()
 		end
 	end, { UseStateResult1, HasUseSignalStateResult1 })
 	local UseResult4 = ReactModule.useCallback(function(p1)
-		-- upvalues: HasUseSignalStateResult1 (copy), UseStateResult1 (copy), UseSignalStateResult1_1 (copy), UseResult (copy), CreatorCreditStore (copy), UseRefResult (copy), UseResult1 (copy), UseStateResult2 (copy)
+		-- upvalues: HasUseSignalStateResult1 (copy), UseStateResult1 (copy), UseSignalStateResult1_1 (copy), UseResult (copy), CreatorCreditStore (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (upval), SendBuildExperienceEventModule (upval), UseRefResult (copy), UseResult1 (copy), UseStateResult2 (copy), getLimitParameters (upval)
 		if HasUseSignalStateResult1 and not UseStateResult1 and UseSignalStateResult1_1 ~= nil then
 			local UseResultResult = UseResult()
 			CreatorCreditStore.setDailyLimit({
@@ -93,13 +125,29 @@ return function()
 				dailyLimitSet = p1 ~= nil,
 				dailyLimit = p1 or 0
 			}):andThen(function()
-				-- upvalues: UseRefResult (upval), UseResultResult (copy), UseResult1 (upval), UseStateResult2 (upval)
+				-- upvalues: FFlagBuildExperienceAdsAndRobuxTelemetryModule (upval), SendBuildExperienceEventModule (upval), p1 (copy), UseRefResult (upval), UseResultResult (copy), UseResult1 (upval), UseStateResult2 (upval)
+				if FFlagBuildExperienceAdsAndRobuxTelemetryModule then
+					local v1 = "CREATOR_CREDIT_LIMIT_SAVE_SUCCESS"
+					local t = {}
+					local config = {
+						isInExperience = if game.GameId == 0 then "false" else "true",
+						limitType = if p1 == nil then "none" else "custom"
+					}
+					
+					if p1 ~= nil then
+						config.dailyLimit = tostring(p1)
+					end
+					SendBuildExperienceEventModule(v1, t, config)
+				end
 				if UseRefResult.current == UseResultResult then
 					UseResult1(UseResultResult, false)
 					UseStateResult2(false)
 				end
-			end):catch(function()
-				-- upvalues: UseResult1 (upval), UseResultResult (copy)
+			end):catch(function(Err)
+				-- upvalues: FFlagBuildExperienceAdsAndRobuxTelemetryModule (upval), SendBuildExperienceEventModule (upval), getLimitParameters (upval), p1 (copy), UseResult1 (upval), UseResultResult (copy)
+				if FFlagBuildExperienceAdsAndRobuxTelemetryModule then
+					SendBuildExperienceEventModule("CREATOR_CREDIT_LIMIT_SAVE_FAILURE", {}, (getLimitParameters(p1, Err)))
+				end
 				UseResult1(UseResultResult, true)
 			end)
 			
@@ -124,6 +172,14 @@ return function()
 		end
 	end, { CreatorCreditStore })
 	local UseOpenBuyRobuxWebViewModuleResult = UseOpenBuyRobuxWebViewModule(UseResult6)
+	local UseResult7 = if FFlagBuildExperienceAdsAndRobuxTelemetryModule then ReactModule.useCallback(function()
+		-- upvalues: SendBuildExperienceEventModule (upval), UseOpenBuyRobuxWebViewModuleResult (copy)
+		SendBuildExperienceEventModule("BUY_ROBUX_CLICK", {}, {
+			context = "creator_credit_page",
+			isInExperience = if game.GameId == 0 then "false" else "true"
+		})
+		UseOpenBuyRobuxWebViewModuleResult()
+	end, { UseOpenBuyRobuxWebViewModuleResult }) else nil
 	
 	if FFlagBuildExperienceModelPickerModule then
 		ReactModule.useEffect(function()
@@ -148,7 +204,7 @@ return function()
 			showBuyRobux = UseSignalStateResult ~= nil and (UseSignalStateResult.freeTrialRemaining <= 0 and UseSignalStateResult.robuxBalance < CreatorCreditConfigModule.FIntMinimumUsableRobuxBalance),
 			onToggleAdditional = UseResult2,
 			onOpenLimitSheet = UseResult3,
-			onOpenBuyRobux = UseOpenBuyRobuxWebViewModuleResult
+			onOpenBuyRobux = if FFlagBuildExperienceAdsAndRobuxTelemetryModule and UseResult7 ~= nil then UseResult7 else UseOpenBuyRobuxWebViewModuleResult
 		},
 		limitSheetProps = {
 			isOpen = UseStateResult,

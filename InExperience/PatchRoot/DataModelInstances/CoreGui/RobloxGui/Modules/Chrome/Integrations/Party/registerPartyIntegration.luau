@@ -6,6 +6,7 @@ local ChromeIntegrationUtilsModule = require(Chrome.Integrations.ChromeIntegrati
 local GetFStringConnectTooltipLocalStorageKeyModule = require(Chrome.Flags.GetFStringConnectTooltipLocalStorageKey)
 local LocalStoreModule = require(Chrome.ChromeShared.Service.LocalStore)
 local FocusUtils = require(CorePackages.Workspace.Packages.Chrome).FocusUtils
+local ChromeModule = require(CorePackages.Workspace.Packages.Chrome)
 local InExperienceAppChatModalModule = require(CorePackages.Workspace.Packages.AppChat.InExperienceAppChatModal)
 local MouseIconOverrideService = require(CorePackages.Workspace.Packages.CoreScriptsCommon).MouseIconOverrideService
 local ReactModule = require(CorePackages.Packages.React)
@@ -13,18 +14,22 @@ local ResponsiveModule = require(CorePackages.Workspace.Packages.Responsive)
 local Symbol = require(CorePackages.Workspace.Packages.AppCommonLib).Symbol
 local ChatEntryPointNames = require(CorePackages.Workspace.Packages.SocialCommon).Enums.ChatEntryPointNames
 local FFlagAppChatDistinctUnibarEntryPoint = require(CorePackages.Workspace.Packages.SharedFlags).FFlagAppChatDistinctUnibarEntryPoint
-local SideSheetPlacement = require(CorePackages.Workspace.Packages.Chrome).Enums.SideSheetPlacement
+local FFlagKeepSideSheetOpenBesideMenu = require(CorePackages.Workspace.Packages.SharedFlags).FFlagKeepSideSheetOpenBesideMenu
+local SideSheetOpenBehavior = ChromeModule.Enums.SideSheetOpenBehavior
+local SideSheetPlacement = ChromeModule.Enums.SideSheetPlacement
+local FFlagShowPartyEntrypointInSideSheetModule = require(Chrome.Flags.FFlagShowPartyEntrypointInSideSheet)
 local NewResult = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(InExperienceAppChatModalModule.default.visibilitySignal.Event, function()
 	-- upvalues: InExperienceAppChatModalModule (copy)
 	return InExperienceAppChatModalModule:getVisible()
 end)
 
 return function(Id, InitialAvailability)
-	-- upvalues: ServiceModule (copy), SideSheetPlacement (copy), InExperienceAppChatModalModule (copy), ChromeIntegrationUtilsModule (copy), ResponsiveModule (copy), FocusUtils (copy), FFlagAppChatDistinctUnibarEntryPoint (copy), ChatEntryPointNames (copy), LocalStoreModule (copy), GetFStringConnectTooltipLocalStorageKeyModule (copy), NewResult (copy), ReactModule (copy), PartyIconModule (copy), Symbol (copy), MouseIconOverrideService (copy)
+	-- upvalues: ServiceModule (copy), FFlagShowPartyEntrypointInSideSheetModule (copy), SideSheetPlacement (copy), FFlagKeepSideSheetOpenBesideMenu (copy), SideSheetOpenBehavior (copy), InExperienceAppChatModalModule (copy), ChromeIntegrationUtilsModule (copy), ResponsiveModule (copy), FocusUtils (copy), FFlagAppChatDistinctUnibarEntryPoint (copy), ChatEntryPointNames (copy), LocalStoreModule (copy), GetFStringConnectTooltipLocalStorageKeyModule (copy), NewResult (copy), ReactModule (copy), PartyIconModule (copy), Symbol (copy), MouseIconOverrideService (copy)
 	local RegisterResult = ServiceModule:register({
 		label = "Feature.Squads.Label.Party",
 		id = Id,
-		sideSheetPlacement = SideSheetPlacement.None,
+		sideSheetPlacement = if FFlagShowPartyEntrypointInSideSheetModule then SideSheetPlacement.Unibar else SideSheetPlacement.None,
+		sideSheetOpenBehavior = if FFlagShowPartyEntrypointInSideSheetModule and FFlagKeepSideSheetOpenBesideMenu then SideSheetOpenBehavior.WindowBesideSheet else nil,
 		activated = function()
 			-- upvalues: InExperienceAppChatModalModule (upval), ChromeIntegrationUtilsModule (upval), ResponsiveModule (upval), FocusUtils (upval), FFlagAppChatDistinctUnibarEntryPoint (upval), ChatEntryPointNames (upval), LocalStoreModule (upval), GetFStringConnectTooltipLocalStorageKeyModule (upval)
 			if InExperienceAppChatModalModule:getVisible() then

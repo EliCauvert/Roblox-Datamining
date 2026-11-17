@@ -3,10 +3,11 @@ local _ = require(Parent.PYMKCarousel)
 local FriendsRecommendationsModule = require(Parent.DataHydration.FriendsRecommendations)
 local ContextType = FriendsRecommendationsModule.Enums.ContextType
 local FFlagShowClassmatesOnPYMKModule = require(Parent.SharedFlags.FFlagShowClassmatesOnPYMK)
+local FFlagProfilePlatformSeededPymk = require(Parent.SharedFlags).FFlagProfilePlatformSeededPymk
 local RecommendationType = FriendsRecommendationsModule.FriendRecommendations.RecommendationType
 
 return function(List, p1)
-	-- upvalues: RecommendationType (copy), ContextType (copy), FFlagShowClassmatesOnPYMKModule (copy)
+	-- upvalues: RecommendationType (copy), ContextType (copy), FFlagShowClassmatesOnPYMKModule (copy), FFlagProfilePlatformSeededPymk (copy)
 	local List1 = {}
 	
 	for _, value in List do
@@ -18,7 +19,7 @@ return function(List, p1)
 				table.insert(List1, {
 					id = value.id,
 					rank = value.rank,
-					contextType = if v1.contextType == ContextType.MutualFriends and MutualFriendsCount > 0 then ContextType.MutualFriends elseif v1.contextType == ContextType.Frequents then ContextType.Frequents elseif FFlagShowClassmatesOnPYMKModule and v1.contextType == ContextType.Classmates then ContextType.Classmates else ContextType.None,
+					contextType = if v1.contextType == ContextType.MutualFriends and MutualFriendsCount > 0 then ContextType.MutualFriends elseif v1.contextType == ContextType.Frequents then ContextType.Frequents elseif FFlagShowClassmatesOnPYMKModule and v1.contextType == ContextType.Classmates then ContextType.Classmates elseif FFlagProfilePlatformSeededPymk and v1.contextType == ContextType.FriendOfSeed then ContextType.FriendOfSeed else ContextType.None,
 					mutualFriendsCount = MutualFriendsCount,
 					hasIncomingFriendRequest = value.hasPendingFriendRequest
 				})

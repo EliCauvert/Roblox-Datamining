@@ -19,11 +19,14 @@ local GetFocusNavigationStoreModule = require(ExpChat.Stores.GetFocusNavigationS
 local GetAdjacentTabNameModule = require(ExpChat.TabNavigation.getAdjacentTabName)
 local SelectTabByTypeModule = require(ExpChat.TabNavigation.selectTabByType)
 local ShouldNavigateTabsModule = require(ExpChat.TabNavigation.shouldNavigateTabs)
+local LogStickyTabsExposureModule = require(ExpChat.StickyTabs.logStickyTabsExposure)
 local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
 local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
 local UseStoreFunction = RoactUtilsModule.Hooks.RoactRodux.useStore
 local FFlagExpChatTabShortcutNav = SharedFlagsModule.FFlagExpChatTabShortcutNav
 local FFlagExpChatUseChannelTabsStore = SharedFlagsModule.FFlagExpChatUseChannelTabsStore
+local FFlagExpChatStickyTabs = SharedFlagsModule.FFlagExpChatStickyTabs
+local FFlagExpChatStickyTabsLogExposureModule = require(ExpChat.Flags.FFlagExpChatStickyTabsLogExposure)
 
 local function getActiveTabState(p1)
 	-- upvalues: FFlagExpChatUseChannelTabsStore (copy), GetChannelTabsStoreModule (copy)
@@ -65,7 +68,7 @@ local function selectDevDefinedFocusKeyCode(p2)
 end
 
 return function(p2)
-	-- upvalues: ContextActionService (copy), UseSelectorFunction (copy), selectIsChatHotkeyEnabled (copy), UseSelectedTabTypeModule (copy), selectDevDefinedFocusKeyCode (copy), UseDispatchFunction (copy), UseStoreFunction (copy), FocusNavigationExperimentModule (copy), ReactModule (copy), ConfigModule (copy), GetTabShortcutBehaviorModule (copy), FocusChatHotKeyActivatedModule (copy), FFlagExpChatGenericChatFocusModule (copy), ChatFocusRequestSignalModule (copy), FFlagExpChatTabShortcutNav (copy), getActiveTabState (copy), GetFocusNavigationStoreModule (copy), ShouldNavigateTabsModule (copy), GetAdjacentTabNameModule (copy), SelectTabByTypeModule (copy), Tab (copy), config (copy), Value (copy), ChatTabNavigationSignal (copy), GuiService (copy)
+	-- upvalues: ContextActionService (copy), UseSelectorFunction (copy), selectIsChatHotkeyEnabled (copy), UseSelectedTabTypeModule (copy), selectDevDefinedFocusKeyCode (copy), UseDispatchFunction (copy), UseStoreFunction (copy), FocusNavigationExperimentModule (copy), ReactModule (copy), ConfigModule (copy), GetTabShortcutBehaviorModule (copy), FocusChatHotKeyActivatedModule (copy), FFlagExpChatGenericChatFocusModule (copy), ChatFocusRequestSignalModule (copy), FFlagExpChatTabShortcutNav (copy), getActiveTabState (copy), GetFocusNavigationStoreModule (copy), ShouldNavigateTabsModule (copy), GetAdjacentTabNameModule (copy), FFlagExpChatStickyTabs (copy), FFlagExpChatStickyTabsLogExposureModule (copy), LogStickyTabsExposureModule (copy), SelectTabByTypeModule (copy), Tab (copy), config (copy), Value (copy), ChatTabNavigationSignal (copy), GuiService (copy)
 	local ContextActionService1 = p2.contextActionService or ContextActionService
 	local UseSelectorResult = UseSelectorFunction(selectIsChatHotkeyEnabled)
 	local UseSelectedTabTypeModuleResult = UseSelectedTabTypeModule()
@@ -130,10 +133,10 @@ return function(p2)
 		end
 	end, { UseSelectedTabTypeModuleResult })
 	ReactModule.useEffect(function()
-		-- upvalues: FFlagExpChatTabShortcutNav (upval), getActiveTabState (upval), UseStoreResult (copy), GetFocusNavigationStoreModule (upval), ShouldNavigateTabsModule (upval), GetAdjacentTabNameModule (upval), UseRefResult (ref), FocusNavigationExperimentModule (upval), SelectTabByTypeModule (upval), UseDispatchResult (copy), GetTabShortcutBehaviorModule (upval), Tab (upval), config (upval), ContextActionService1 (copy), Value (upval), ChatTabNavigationSignal (upval)
+		-- upvalues: FFlagExpChatTabShortcutNav (upval), getActiveTabState (upval), UseStoreResult (copy), GetFocusNavigationStoreModule (upval), ShouldNavigateTabsModule (upval), GetAdjacentTabNameModule (upval), UseRefResult (ref), FocusNavigationExperimentModule (upval), FFlagExpChatStickyTabs (upval), FFlagExpChatStickyTabsLogExposureModule (upval), LogStickyTabsExposureModule (upval), SelectTabByTypeModule (upval), UseDispatchResult (copy), GetTabShortcutBehaviorModule (upval), Tab (upval), config (upval), ContextActionService1 (copy), Value (upval), ChatTabNavigationSignal (upval)
 		if not FFlagExpChatTabShortcutNav then return end
 		local function tryNavigateTabs(p3, Enabled): boolean
-			-- upvalues: getActiveTabState (upval), UseStoreResult (upval), GetFocusNavigationStoreModule (upval), ShouldNavigateTabsModule (upval), GetAdjacentTabNameModule (upval), UseRefResult (upval), FocusNavigationExperimentModule (upval), SelectTabByTypeModule (upval), UseDispatchResult (upval), GetTabShortcutBehaviorModule (upval), Tab (upval)
+			-- upvalues: getActiveTabState (upval), UseStoreResult (upval), GetFocusNavigationStoreModule (upval), ShouldNavigateTabsModule (upval), GetAdjacentTabNameModule (upval), UseRefResult (upval), FocusNavigationExperimentModule (upval), FFlagExpChatStickyTabs (upval), FFlagExpChatStickyTabsLogExposureModule (upval), LogStickyTabsExposureModule (upval), SelectTabByTypeModule (upval), UseDispatchResult (upval), GetTabShortcutBehaviorModule (upval), Tab (upval)
 			local ActiveTabState, ActiveTabState2 = getActiveTabState(UseStoreResult)
 			
 			if ActiveTabState == nil then
@@ -166,20 +169,22 @@ return function(p2)
 				UseRefResult.current = true
 				FocusNavigationExperimentModule.logExposure()
 			end
-			if FocusNavigationExperimentModule.isTabNavEnabled then
-				SelectTabByTypeModule(UseDispatchResult, {
-					shouldReorderTabs = false,
-					channelName = AdjacentTabNameModule,
-					tabType = ActiveTabStateEntry.type
-				})
-				FocusNavigationStoreModule.clearChatInputBarFocusRequest()
-				GetTabShortcutBehaviorModule(ActiveTabStateEntry.type).focus({ keyCode = Tab })
-				FocusNavigationStoreModule.requestTabNavFocus(AdjacentTabNameModule)
-				
-				return true
-			else
+			if not FocusNavigationExperimentModule.isTabNavEnabled then
 				return false
 			end
+			if FFlagExpChatStickyTabs and FFlagExpChatStickyTabsLogExposureModule then
+				LogStickyTabsExposureModule(AdjacentTabNameModule, ActiveTabState)
+			end
+			SelectTabByTypeModule(UseDispatchResult, {
+				shouldReorderTabs = false,
+				channelName = AdjacentTabNameModule,
+				tabType = ActiveTabStateEntry.type
+			})
+			FocusNavigationStoreModule.clearChatInputBarFocusRequest()
+			GetTabShortcutBehaviorModule(ActiveTabStateEntry.type).focus({ keyCode = Tab })
+			FocusNavigationStoreModule.requestTabNavFocus(AdjacentTabNameModule)
+			
+			return true
 		end
 		
 		ContextActionService1:BindCoreActionAtPriority("ExpChatTabShortcutNav", function(_, UserInputState, Input)

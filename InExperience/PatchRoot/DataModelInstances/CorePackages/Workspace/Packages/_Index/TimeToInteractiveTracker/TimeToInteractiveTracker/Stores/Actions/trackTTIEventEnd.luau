@@ -1,4 +1,5 @@
 ﻿local TimeToInteractiveTracker = script:FindFirstAncestor("TimeToInteractiveTracker")
+local Parent = TimeToInteractiveTracker.Parent
 local NewResult = require(TimeToInteractiveTracker.Logger):new(script.Name)
 local _ = require(script.Parent.Parent.types)
 local NowModule = require(script.Parent.Parent.Parent.Utils.now)
@@ -6,19 +7,20 @@ local SendTTIStatModule = require(TimeToInteractiveTracker.Utils.sendTTIStat)
 local SendTTIStatAtFirstFrameModule = require(TimeToInteractiveTracker.Utils.sendTTIStatAtFirstFrame)
 local BuildTTIStatArgsModule = require(TimeToInteractiveTracker.Utils.buildTTIStatArgs)
 local UtilModule = require(TimeToInteractiveTracker.Utils.Util)
-local FFlagLuaAppNavTTIMeasurementV2 = require(TimeToInteractiveTracker.Parent.SharedFlags).FFlagLuaAppNavTTIMeasurementV2
+local FFlagLuaAppNavTTIMeasurementV2 = require(Parent.SharedFlags).FFlagLuaAppNavTTIMeasurementV2
+local FFlagTTIEventStreamPlaySessionContext = require(Parent.SharedFlags).FFlagTTIEventStreamPlaySessionContext
 
 return function(Callback, p1)
-	-- upvalues: FFlagLuaAppNavTTIMeasurementV2 (copy), NewResult (copy), NowModule (copy), UtilModule (copy), SendTTIStatAtFirstFrameModule (copy), SendTTIStatModule (copy), BuildTTIStatArgsModule (copy)
+	-- upvalues: FFlagLuaAppNavTTIMeasurementV2 (copy), NewResult (copy), NowModule (copy), FFlagTTIEventStreamPlaySessionContext (copy), UtilModule (copy), SendTTIStatAtFirstFrameModule (copy), SendTTIStatModule (copy), BuildTTIStatArgsModule (copy)
 	local function _(StatName, p2, p3)
-		-- upvalues: Callback (copy), FFlagLuaAppNavTTIMeasurementV2 (upval), p1 (copy), NewResult (upval), NowModule (upval), UtilModule (upval), SendTTIStatAtFirstFrameModule (upval), SendTTIStatModule (upval), BuildTTIStatArgsModule (upval)
+		-- upvalues: Callback (copy), FFlagLuaAppNavTTIMeasurementV2 (upval), p1 (copy), NewResult (upval), NowModule (upval), FFlagTTIEventStreamPlaySessionContext (upval), UtilModule (upval), SendTTIStatAtFirstFrameModule (upval), SendTTIStatModule (upval), BuildTTIStatArgsModule (upval)
 		local v1 = nil
 		local Config = nil
 		local IsNotSent = false
 		local NoP2 = not p2 or p2.cleanupAfterSend == nil or p2.cleanupAfterSend
 		local SamplingRateOverride = if p2 then p2.samplingRateOverride else nil
 		Callback(function(Tbl)
-			-- upvalues: StatName (copy), FFlagLuaAppNavTTIMeasurementV2 (upval), p1 (upval), NewResult (upval), NowModule (upval), IsNotSent (ref), v1 (ref), Config (ref), SamplingRateOverride (copy), NoP2 (copy), UtilModule (upval)
+			-- upvalues: StatName (copy), FFlagLuaAppNavTTIMeasurementV2 (upval), p1 (upval), NewResult (upval), NowModule (upval), IsNotSent (ref), v1 (ref), Config (ref), SamplingRateOverride (copy), FFlagTTIEventStreamPlaySessionContext (upval), p2 (copy), NoP2 (copy), UtilModule (upval)
 			local Entry = Tbl[StatName]
 			
 			if Entry ~= nil then
@@ -38,7 +40,9 @@ return function(Callback, p1)
 						startTime = Entry.startTime,
 						metaData = Entry.metadata,
 						milestones = Entry.milestones,
-						samplingRateOverride = SamplingRateOverride
+						samplingRateOverride = SamplingRateOverride,
+						playSessionId = if FFlagTTIEventStreamPlaySessionContext and p2 then p2.playSessionId else nil,
+						universeId = if FFlagTTIEventStreamPlaySessionContext and p2 then p2.universeId else nil
 					}
 				end
 				local Copy = table.clone(Tbl)
@@ -79,14 +83,14 @@ return function(Callback, p1)
 	end
 	
 	return function(StatName, p4)
-		-- upvalues: Callback (copy), FFlagLuaAppNavTTIMeasurementV2 (upval), p1 (copy), NewResult (upval), NowModule (upval), UtilModule (upval), SendTTIStatModule (upval), BuildTTIStatArgsModule (upval)
+		-- upvalues: Callback (copy), FFlagLuaAppNavTTIMeasurementV2 (upval), p1 (copy), NewResult (upval), NowModule (upval), FFlagTTIEventStreamPlaySessionContext (upval), UtilModule (upval), SendTTIStatModule (upval), BuildTTIStatArgsModule (upval)
 		local v2 = nil
 		local Config = nil
 		local IsNotSent = false
 		local NoP5 = not p4 or p4.cleanupAfterSend == nil or p4.cleanupAfterSend
 		local SamplingRateOverride = if p4 then p4.samplingRateOverride else nil
 		Callback(function(Tbl)
-			-- upvalues: StatName (copy), FFlagLuaAppNavTTIMeasurementV2 (upval), p1 (upval), NewResult (upval), NowModule (upval), IsNotSent (ref), v2 (ref), Config (ref), SamplingRateOverride (copy), NoP5 (copy), UtilModule (upval)
+			-- upvalues: StatName (copy), FFlagLuaAppNavTTIMeasurementV2 (upval), p1 (upval), NewResult (upval), NowModule (upval), IsNotSent (ref), v2 (ref), Config (ref), SamplingRateOverride (copy), FFlagTTIEventStreamPlaySessionContext (upval), p4 (copy), NoP5 (copy), UtilModule (upval)
 			local Entry = Tbl[StatName]
 			
 			if Entry ~= nil then
@@ -106,7 +110,9 @@ return function(Callback, p1)
 						startTime = Entry.startTime,
 						metaData = Entry.metadata,
 						milestones = Entry.milestones,
-						samplingRateOverride = SamplingRateOverride
+						samplingRateOverride = SamplingRateOverride,
+						playSessionId = if FFlagTTIEventStreamPlaySessionContext and p4 then p4.playSessionId else nil,
+						universeId = if FFlagTTIEventStreamPlaySessionContext and p4 then p4.universeId else nil
 					}
 				end
 				local Copy = table.clone(Tbl)
@@ -142,14 +148,14 @@ return function(Callback, p1)
 			return
 		end
 	end, function(StatName, p5)
-		-- upvalues: Callback (copy), FFlagLuaAppNavTTIMeasurementV2 (upval), p1 (copy), NewResult (upval), NowModule (upval), UtilModule (upval), SendTTIStatAtFirstFrameModule (upval)
+		-- upvalues: Callback (copy), FFlagLuaAppNavTTIMeasurementV2 (upval), p1 (copy), NewResult (upval), NowModule (upval), FFlagTTIEventStreamPlaySessionContext (upval), UtilModule (upval), SendTTIStatAtFirstFrameModule (upval)
 		local v3 = nil
 		local Config = nil
 		local IsNotSent = false
 		local NoP7 = not p5 or p5.cleanupAfterSend == nil or p5.cleanupAfterSend
 		local SamplingRateOverride = if p5 then p5.samplingRateOverride else nil
 		Callback(function(Tbl)
-			-- upvalues: StatName (copy), FFlagLuaAppNavTTIMeasurementV2 (upval), p1 (upval), NewResult (upval), NowModule (upval), IsNotSent (ref), v3 (ref), Config (ref), SamplingRateOverride (copy), NoP7 (copy), UtilModule (upval)
+			-- upvalues: StatName (copy), FFlagLuaAppNavTTIMeasurementV2 (upval), p1 (upval), NewResult (upval), NowModule (upval), IsNotSent (ref), v3 (ref), Config (ref), SamplingRateOverride (copy), FFlagTTIEventStreamPlaySessionContext (upval), p5 (copy), NoP7 (copy), UtilModule (upval)
 			local Entry = Tbl[StatName]
 			
 			if Entry ~= nil then
@@ -169,7 +175,9 @@ return function(Callback, p1)
 						startTime = Entry.startTime,
 						metaData = Entry.metadata,
 						milestones = Entry.milestones,
-						samplingRateOverride = SamplingRateOverride
+						samplingRateOverride = SamplingRateOverride,
+						playSessionId = if FFlagTTIEventStreamPlaySessionContext and p5 then p5.playSessionId else nil,
+						universeId = if FFlagTTIEventStreamPlaySessionContext and p5 then p5.universeId else nil
 					}
 				end
 				local Copy = table.clone(Tbl)

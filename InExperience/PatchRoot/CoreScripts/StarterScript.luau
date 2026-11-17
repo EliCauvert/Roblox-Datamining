@@ -508,6 +508,9 @@ require(CorePackages.Workspace.Packages.SoundManager).SoundManager.init()
 if GetFFlagEnableSocialContextToastFunction() then
 	ScriptContext:AddCoreScriptLocal("CoreScripts/SocialContextToast", RobloxGui)
 end
+if require(CorePackages.Workspace.Packages.SharedFlags).FFlagSpawnEffectFirstTimeTooltip and game:GetEngineFeature("SpawnEffectPlayedSignal") then
+	ScriptContext:AddCoreScriptLocal("CoreScripts/SpawnEffectTooltip", RobloxGui)
+end
 ScriptContext:AddCoreScriptLocal("CoreScripts/GameInviteModalGUI", script.Parent)
 
 if EnableExperienceNotificationPrompts2 then
@@ -558,10 +561,10 @@ end
 local ReactPerfTrackerModule = require(Modules.Common.ReactPerfTracker)
 
 if ReactPerfTrackerModule then
-	local NewReactPerfTracker = ReactPerfTrackerModule.new()
+	local NewResult = ReactPerfTrackerModule.new()
 	task.delay(5, function()
-		-- upvalues: NewReactPerfTracker (copy)
-		NewReactPerfTracker:start()
+		-- upvalues: NewResult (copy)
+		NewResult:start()
 	end)
 end
 local ReactSchedulingTrackerModule = require(Modules.Common.ReactSchedulingTracker)

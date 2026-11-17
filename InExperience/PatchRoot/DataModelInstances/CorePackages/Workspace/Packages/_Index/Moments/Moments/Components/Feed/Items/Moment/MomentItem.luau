@@ -30,6 +30,7 @@ local ReactionEffectsContextModule = require(script.Parent.Reactions.ReactionEff
 local MomentGestureLayerModule = require(script.Parent.Reactions.MomentGestureLayer)
 local ReactionExplosionLayerModule = require(script.Parent.Reactions.ReactionExplosionLayer)
 local FFlagMomentsFeedAboveNavBarModule = require(Moments.Flags.FFlagMomentsFeedAboveNavBar)
+local FFlagMomentsHideNavBarOnScrollModule = require(Moments.Flags.FFlagMomentsHideNavBarOnScroll)
 local GetFFlagMomentsRenderPostAssetsModule = require(Parent.MomentsCommon.GetFFlagMomentsRenderPostAssets)
 local FFlagMomentsAvatarLookTryOn = require(Parent.SharedFlags).FFlagMomentsAvatarLookTryOn
 local FFlagMomentsRenderAvatarPostsInFeed = SharedFlagsModule.FFlagMomentsRenderAvatarPostsInFeed
@@ -54,9 +55,10 @@ local function DisplayWakeLockEffect()
 end
 
 local function OverlayInfoFrame(p1)
-	-- upvalues: UseTokensFunction (copy), MomentOverlayInsetContextModule (copy), FFlagMomentsFeedAboveNavBarModule (copy), ReactModule (copy), View (copy)
+	-- upvalues: UseTokensFunction (copy), MomentOverlayInsetContextModule (copy), FFlagMomentsHideNavBarOnScrollModule (copy), FFlagMomentsFeedAboveNavBarModule (copy), ReactModule (copy), View (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseMomentOverlayInsetResult: number = MomentOverlayInsetContextModule.useMomentOverlayInset()
+	local UseMomentOverlayInsetRatioResult = if FFlagMomentsHideNavBarOnScrollModule then MomentOverlayInsetContextModule.useMomentOverlayInsetRatio() else nil
 	local HorizontalPadding: number = p1.horizontalPadding
 	local VerticalPadding: number = p1.verticalPadding
 	local SafeAreaInsets = p1.safeAreaInsets
@@ -64,6 +66,7 @@ local function OverlayInfoFrame(p1)
 	local Right = if SafeAreaInsets == nil then 0 else SafeAreaInsets.right
 	local Bottom = if SafeAreaInsets == nil then 0 else SafeAreaInsets.bottom
 	local UseMomentOverlayInsetResult1 = if FFlagMomentsFeedAboveNavBarModule then 0 else UseMomentOverlayInsetResult
+	local NewMedium = if UseMomentOverlayInsetResult > 0 then UseTokensResult.Padding.Medium + UseMomentOverlayInsetResult1 else math.max(VerticalPadding, Bottom) + UseMomentOverlayInsetResult1
 	
 	return ReactModule.createElement(View, {
 		tag = "col align-x-center align-y-bottom gap-large position-bottom-center anchor-bottom-center size-full-0 auto-y",
@@ -73,7 +76,7 @@ local function OverlayInfoFrame(p1)
 			top = UDim.new(0, VerticalPadding),
 			left = UDim.new(0, (math.max(HorizontalPadding, Left))),
 			right = UDim.new(0, (math.max(HorizontalPadding, Right))),
-			bottom = UDim.new(0, if UseMomentOverlayInsetResult > 0 then UseTokensResult.Padding.Medium + UseMomentOverlayInsetResult1 else math.max(VerticalPadding, Bottom) + UseMomentOverlayInsetResult1)
+			bottom = if UseMomentOverlayInsetRatioResult == nil or UseMomentOverlayInsetResult <= 0 then UDim.new(0, NewMedium) else MomentOverlayInsetContextModule.mapSlidingInsetPadding(UseMomentOverlayInsetRatioResult, UseMomentOverlayInsetResult, UseTokensResult.Padding.Medium)
 		},
 		sizeConstraint = { MaxSize = p1.maxSize },
 		onAbsoluteSizeChanged = p1.onAbsoluteSizeChanged

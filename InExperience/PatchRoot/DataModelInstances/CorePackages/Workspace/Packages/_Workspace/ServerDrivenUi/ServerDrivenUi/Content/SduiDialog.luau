@@ -4,10 +4,9 @@ local FoundationModule = require(Parent.Foundation)
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local Dialog = FoundationModule.Dialog
 local Orientation = FoundationModule.Enums.Orientation
-local SduiDialogHeroMediaProps2 = game:DefineFastFlag("SduiDialogHeroMediaProps2", false)
 
 return ReactModule.memo(function(p1)
-	-- upvalues: ReactModule (copy), ButtonVariant (copy), Dialog (copy), SduiDialogHeroMediaProps2 (copy), Orientation (copy)
+	-- upvalues: ReactModule (copy), ButtonVariant (copy), Dialog (copy), Orientation (copy)
 	local BodyText = p1.bodyText or p1.bodyComponent
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy)
@@ -65,10 +64,10 @@ return ReactModule.memo(function(p1)
 		DialogTitle = p1.titleText and ReactModule.createElement(Dialog.Title, { text = p1.titleText }) or nil,
 		DialogMedia = p1.image and ReactModule.createElement(Dialog.HeroMedia, {
 			media = p1.image,
-			aspectRatio = if SduiDialogHeroMediaProps2 and p1.imageHeight ~= nil then p1.imageAspectRatio else p1.imageAspectRatio or 1.7777777777777777,
-			mediaStyle = if SduiDialogHeroMediaProps2 then p1.imageStyle else nil,
-			height = if SduiDialogHeroMediaProps2 then p1.imageHeight else nil,
-			scaleType = if SduiDialogHeroMediaProps2 then p1.imageScaleType else nil
+			aspectRatio = if p1.imageHeight == nil then p1.imageAspectRatio or 1.7777777777777777 else p1.imageAspectRatio,
+			mediaStyle = p1.imageStyle,
+			height = p1.imageHeight,
+			scaleType = p1.imageScaleType
 		}) or nil,
 		DialogContent = BodyText and ReactModule.createElement(Dialog.Content, { LayoutOrder = 2 }, {
 			BodyContent = if p1.bodyComponent then p1.bodyComponent elseif p1.bodyText then ReactModule.createElement(Dialog.Text, { Text = p1.bodyText }) else nil

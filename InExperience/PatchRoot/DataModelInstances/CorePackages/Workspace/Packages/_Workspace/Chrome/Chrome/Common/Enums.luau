@@ -1,4 +1,9 @@
 ﻿return {
+	SideSheetOpenBehavior = {
+		CloseSheet = "close_sheet",
+		WindowBesideSheet = "window_beside_sheet",
+		MenuBesideSheet = "menu_beside_sheet"
+	},
 	SideSheetPlacement = {
 		Unibar = "unibar",
 		AboveFold = "above_fold",

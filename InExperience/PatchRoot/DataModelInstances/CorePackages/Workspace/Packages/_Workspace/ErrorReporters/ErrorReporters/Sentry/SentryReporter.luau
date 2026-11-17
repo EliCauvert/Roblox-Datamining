@@ -12,6 +12,8 @@ local ErrorReportModule = require(script.Parent.ErrorReport)
 local SentryReporterUtilityModule = require(script.Parent.SentryReporterUtility)
 local ConstantsModule = require(script.Parent.Constants)
 local FFlagLuaAppSentryStampOccurrenceTimeModule = require(script.Parent.Flags.FFlagLuaAppSentryStampOccurrenceTime)
+local FFlagLuaAppSentryReportIxpLayersAsFeatureFlagsModule = require(script.Parent.Flags.FFlagLuaAppSentryReportIxpLayersAsFeatureFlags)
+local BuildIxpFeatureFlagsContextModule = require(script.Parent.buildIxpFeatureFlagsContext)
 local IAttributesFunction = ErrorReportModule.IAttributes
 local IAnnotationsFunction = ErrorReportModule.IAnnotations
 local IsDevelopmentModeModule = require(script.Parent.isDevelopmentMode)
@@ -75,11 +77,15 @@ local StrictInterfaceResult = TModule.strictInterface({
 	sentryClientFailureCallback = TModule.optional(TModule.callback),
 	logAttachmentSuccessCallback = TModule.optional(TModule.callback),
 	logAttachmentFailureCallback = TModule.optional(TModule.callback),
-	disableDevelopmentLogging = TModule.optional(TModule.boolean)
+	disableDevelopmentLogging = TModule.optional(TModule.boolean),
+	ixpService = TModule.optional(TModule.some(TModule.instanceOf("IXPService"), TModule.interface({
+		GetRegisteredUserLayersToStatus = TModule.callback,
+		GetUserLayerVariables = TModule.callback
+	})))
 })
 
 function SentryReporterModule.new(ReportQueuedError)
-	-- upvalues: StrictInterfaceResult (copy), IsDevelopmentModeModule (copy), Client (copy), SentryReporterModule (copy), FFlagSentrySplitQueuesBySeverityModule (copy), CryoModule (copy), FIntSentryDebugLevelQueueTimeLimitSecondsModule (copy), ErrorQueueModule (copy), FIntSentryErrorLevelQueueTimeLimitSecondsModule (copy)
+	-- upvalues: StrictInterfaceResult (copy), IsDevelopmentModeModule (copy), FFlagLuaAppSentryReportIxpLayersAsFeatureFlagsModule (copy), Client (copy), SentryReporterModule (copy), FFlagSentrySplitQueuesBySeverityModule (copy), CryoModule (copy), FIntSentryDebugLevelQueueTimeLimitSecondsModule (copy), ErrorQueueModule (copy), FIntSentryErrorLevelQueueTimeLimitSecondsModule (copy)
 	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(ReportQueuedError)
 	
 	if not StrictInterfaceResultResult then
@@ -94,6 +100,7 @@ function SentryReporterModule.new(ReportQueuedError)
 		_errorLevelQueue = nil,
 		_lastLogTime = 0,
 		_httpService = ReportQueuedError.httpService,
+		_ixpService = if FFlagLuaAppSentryReportIxpLayersAsFeatureFlagsModule then ReportQueuedError.ixpService else nil,
 		_processErrorReportMethod = ReportQueuedError.processErrorReportMethod,
 		_sharedAttributes = {},
 		_sharedAnnotations = {},
@@ -222,7 +229,7 @@ function SentryReporterModule:_handleSentryExceptionCallback(p2, p3, p4, p5)
 end
 
 function SentryReporterModule:sendErrorReport(ErrorReport, Log): boolean
-	-- upvalues: IsDevelopmentModeModule (copy), ConstantsModule (copy), SentryReporterUtilityModule (copy), SentryReportBreadcrumbs (copy), FFlagLuaAppSentryStampOccurrenceTimeModule (copy)
+	-- upvalues: IsDevelopmentModeModule (copy), ConstantsModule (copy), SentryReporterUtilityModule (copy), FFlagLuaAppSentryReportIxpLayersAsFeatureFlagsModule (copy), BuildIxpFeatureFlagsContextModule (copy), SentryReportBreadcrumbs (copy), FFlagLuaAppSentryStampOccurrenceTimeModule (copy)
 	if not self._isEnabled then
 		return false
 	end
@@ -236,6 +243,10 @@ function SentryReporterModule:sendErrorReport(ErrorReport, Log): boolean
 	local Level = ErrorReport.level or ConstantsModule.DEFAULT_ERROR_LEVEL
 	local ParseErrorToContextResult = SentryReporterUtilityModule.parseErrorToContext(ErrorReport)
 	local ParseThreadsToSentryResult = SentryReporterUtilityModule.parseThreadsToSentry(ErrorReport.threads)
+	
+	if FFlagLuaAppSentryReportIxpLayersAsFeatureFlagsModule then
+		ParseErrorToContextResult.flags = BuildIxpFeatureFlagsContextModule(self._ixpService or game:GetService("IXPService"))
+	end
 	local Stacktrace = nil
 	
 	if ParseThreadsToSentryResult and ParseThreadsToSentryResult.values then

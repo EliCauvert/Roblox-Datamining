@@ -1,3 +1,3 @@
 ﻿local FFlagPromptsHandlerEnabledModule = require(script.Parent.FFlagPromptsHandlerEnabled)
 
-return game:DefineFastFlag("NotificationStreamPromptsHandlerEnabled", false) and FFlagPromptsHandlerEnabledModule
+return game:DefineFastFlag("NotificationStreamPromptsHandlerEnabled2", false) and FFlagPromptsHandlerEnabledModule

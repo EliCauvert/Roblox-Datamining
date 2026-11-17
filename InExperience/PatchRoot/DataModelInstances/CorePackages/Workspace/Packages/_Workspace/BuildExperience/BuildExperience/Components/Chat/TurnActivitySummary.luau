@@ -2,17 +2,18 @@
 local Parent = BuildExperience.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
-local SignalsReactModule = require(Parent.SignalsReact)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local LocalizationRoactContext = require(Parent.Localization).LocalizationRoactContext
 local ChatScrollAnchorContextModule = require(BuildExperience.Chat.ChatScrollAnchorContext)
 local _ = require(BuildExperience.Chat.chatTypes)
 local ChatConstantsModule = require(BuildExperience.Chat.chatConstants)
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
-local FFlagBuildExperienceManageMonetizationTool = require(Parent.SharedFlags).FFlagBuildExperienceManageMonetizationTool
+local ActivityLabelHelpersModule = require(script.Parent.activityLabelHelpers)
 local FFlagBuildExperienceChatAccordionScrollAnchorModule = require(BuildExperience.Flags.FFlagBuildExperienceChatAccordionScrollAnchor)
 local FFlagBuildExperiencePromptStallMessageModule = require(BuildExperience.Flags.FFlagBuildExperiencePromptStallMessage)
-local FFlagBuildExperienceToolDisplaySummaryModule = require(BuildExperience.Flags.FFlagBuildExperienceToolDisplaySummary)
+local LocalizeActivityLabelFunction = ActivityLabelHelpersModule.localizeActivityLabel
+local UseReactiveValueFunction = ActivityLabelHelpersModule.useReactiveValue
+local UseStallStateFunction = ActivityLabelHelpersModule.useStallState
 local Icon = FoundationModule.Icon
 local ScrollView = FoundationModule.ScrollView
 local Text = FoundationModule.Text
@@ -21,24 +22,6 @@ local IconName = FoundationModule.Enums.IconName
 local IconSize = FoundationModule.Enums.IconSize
 local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
 local t = {}
-
-local function constantSource(): number
-	return 0
-end
-
-local function useReactiveValue(Callback)
-	-- upvalues: ReactModule (copy), constantSource (copy), SignalsReactModule (copy)
-	return (SignalsReactModule.useSignalState((ReactModule.useCallback(function(Callback1: (any) -> ())
-		-- upvalues: Callback (copy), constantSource (upval)
-		if typeof(Callback) == "function" then
-			return (Callback(Callback1))
-		end
-		if typeof(Callback1) == "function" then
-			Callback1(constantSource)
-		end
-		return Callback
-	end, { Callback }))))
-end
 
 local function createThinkingGradient(p1, Enabled)
 	-- upvalues: ReactModule (copy), ChatConstantsModule (copy)
@@ -104,39 +87,8 @@ local function _(p1, p2, p3, p4, p5, p6, p7, p8, p9)
 	end) else p1
 end
 
-local function localizeActivityLabel(CHATTOOL, SummaryToolActivity, p1, Tool, UseContextResult)
-	-- upvalues: FFlagBuildExperienceToolDisplaySummaryModule (copy), LocalizationStringsModule (copy), FFlagBuildExperienceManageMonetizationTool (copy)
-	local v1 = p1[CHATTOOL]
-	
-	if v1 ~= nil then
-		return v1
-	end
-	if SummaryToolActivity == nil or SummaryToolActivity.kind ~= "tool_call" then
-		return CHATTOOL
-	end
-	if FFlagBuildExperienceToolDisplaySummaryModule and SummaryToolActivity.status ~= "failed" and typeof(SummaryToolActivity.displaySummary) == "string" and SummaryToolActivity.displaySummary ~= "" then
-		return SummaryToolActivity.displaySummary
-	end
-	local Title = if typeof(SummaryToolActivity.title) == "string" and SummaryToolActivity.title ~= "" then SummaryToolActivity.title else LocalizationStringsModule.CHAT_TOOL
-	local ChatToolActivityLocalizationKey = LocalizationStringsModule.getChatToolActivityLocalizationKey(SummaryToolActivity.title, SummaryToolActivity.status)
-	
-	if ChatToolActivityLocalizationKey ~= nil then
-		if not FFlagBuildExperienceManageMonetizationTool then
-			return UseContextResult:Format(ChatToolActivityLocalizationKey)
-		end
-		local Success, Result = pcall(UseContextResult.Format, UseContextResult, ChatToolActivityLocalizationKey)
-		
-		if Success then
-			return Result
-		end
-	end
-	local Tool1 = if Title == LocalizationStringsModule.CHAT_TOOL then Tool else Title
-	
-	return if SummaryToolActivity.status == "completed" then UseContextResult:Format(LocalizationStringsModule.CHAT_TOOL_FINISHED, { TITLE = Tool1 }) elseif SummaryToolActivity.status == "failed" then UseContextResult:Format(LocalizationStringsModule.CHAT_TOOL_FAILED, { TITLE = Tool1 }) else UseContextResult:Format(LocalizationStringsModule.CHAT_TOOL_RUNNING, { title = Tool1 })
-end
-
 return function(Frame)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildExperiencePromptStallMessageModule (copy), ReactModule (copy), LocalizationRoactContext (copy), useReactiveValue (copy), t (copy), localizeActivityLabel (copy), createActivityText (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), FoundationModule (copy), ChatConstantsModule (copy), View (copy), createActivitySummaryActionText (copy), Text (copy), StateLayerAffordance (copy), Icon (copy), IconName (copy), IconSize (copy), ScrollView (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildExperiencePromptStallMessageModule (copy), ReactModule (copy), LocalizationRoactContext (copy), UseReactiveValueFunction (copy), t (copy), LocalizeActivityLabelFunction (copy), createActivityText (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), FoundationModule (copy), ChatConstantsModule (copy), UseStallStateFunction (copy), View (copy), createActivitySummaryActionText (copy), Text (copy), StateLayerAffordance (copy), Icon (copy), IconName (copy), IconSize (copy), ScrollView (copy)
 	local Segment = Frame.segment
 	local ActionCount: number = Segment.actionCount
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -154,8 +106,8 @@ return function(Frame)
 		tool = LocalizationStringsModule.CHAT_TOOL
 	})
 	local UseContextResult = ReactModule.useContext(LocalizationRoactContext)
-	local UseReactiveValueResult = useReactiveValue(Segment.label or "")
-	local UseReactiveValueResult1 = useReactiveValue(Segment.activityItems or t)
+	local UseReactiveValueResult = UseReactiveValueFunction(Segment.label or "")
+	local UseReactiveValueResult1 = UseReactiveValueFunction(Segment.activityItems or t)
 	local AssistantLoading = UseLocalizationResult.assistantLoading
 	local AssistantStillWorking = UseLocalizationResult.assistantStillWorking
 	local config = {
@@ -165,14 +117,14 @@ return function(Frame)
 		[LocalizationStringsModule.CHAT_QUESTION_MULTIPLE] = UseLocalizationResult.questionMultiple,
 		[LocalizationStringsModule.CHAT_QUESTION_SINGLE] = UseLocalizationResult.questionSingle
 	}
-	local LocalizeActivityLabelResult = if ActionCount == nil or ActionCount <= 1 or Segment.summaryToolActivity ~= nil then localizeActivityLabel(UseReactiveValueResult, Segment.summaryToolActivity, config, UseLocalizationResult.tool, UseContextResult) else UseLocalizationResult.taskCount
+	local LocalizeActivityLabelResult = if ActionCount == nil or ActionCount <= 1 or Segment.summaryToolActivity ~= nil then LocalizeActivityLabelFunction(UseReactiveValueResult, Segment.summaryToolActivity, config, UseLocalizationResult.tool, UseContextResult) else UseLocalizationResult.taskCount
 	
-	local function v49(p1, LayoutOrder)
-		-- upvalues: localizeActivityLabel (upval), LocalizationStringsModule (upval), config (copy), UseLocalizationResult (copy), UseContextResult (copy), createActivityText (upval)
-		return if p1.kind == "tool_call" then createActivityText(localizeActivityLabel(LocalizationStringsModule.CHAT_TOOL, p1, config, UseLocalizationResult.tool, UseContextResult), LayoutOrder) else nil
+	local function v38(p1, LayoutOrder)
+		-- upvalues: LocalizeActivityLabelFunction (upval), LocalizationStringsModule (upval), config (copy), UseLocalizationResult (copy), UseContextResult (copy), createActivityText (upval)
+		return if p1.kind == "tool_call" then createActivityText(LocalizeActivityLabelFunction(LocalizationStringsModule.CHAT_TOOL, p1, config, UseLocalizationResult.tool, UseContextResult), LayoutOrder) else nil
 	end
 	
-	local UseReactiveValueResult2 = useReactiveValue(Segment.isLoading or false)
+	local UseReactiveValueResult2 = UseReactiveValueFunction(Segment.isLoading or false)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
 	local UseRefResult = ReactModule.useRef(nil)
@@ -191,25 +143,7 @@ return function(Frame)
 		Current.isThinking = IsUseReactiveValueResultMatch
 		Current.startedAt = nil
 	end
-	local v1 = nil
-	
-	if FFlagBuildExperiencePromptStallMessageModule then
-		local Current1 = ReactModule.useRef({
-			segment = nil,
-			label = "",
-			activityCount = 0,
-			lastProgressAt = nil
-		}).current
-		local CountUseReactiveValueResult1 = #UseReactiveValueResult1
-		
-		if Current1.segment ~= Segment or Current1.label ~= UseReactiveValueResult or Current1.activityCount ~= CountUseReactiveValueResult1 then
-			Current1.segment = Segment
-			Current1.label = UseReactiveValueResult
-			Current1.activityCount = CountUseReactiveValueResult1
-			Current1.lastProgressAt = nil
-		end
-		v1 = Current1
-	end
+	local UseStallStateResult = if FFlagBuildExperiencePromptStallMessageModule then UseStallStateFunction(Segment, UseReactiveValueResult, #UseReactiveValueResult1) else nil
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: FFlagBuildExperienceChatAccordionScrollAnchorModule (upval), Callback (ref), UseRefResult1 (ref), UseStateResult2 (copy)
 		if FFlagBuildExperienceChatAccordionScrollAnchorModule and Callback ~= nil and UseRefResult1 ~= nil then
@@ -261,10 +195,10 @@ return function(Frame)
 	local Count = 0
 	
 	for i, value in UseReactiveValueResult1 do
-		local v2 = v49(value, i)
+		local v1 = v38(value, i)
 		
-		if v2 ~= nil then
-			t1[`Tool{i}`] = v2
+		if v1 ~= nil then
+			t1[`Tool{i}`] = v1
 			Count += 1
 		end
 	end
@@ -276,7 +210,7 @@ return function(Frame)
 		local CreateElementFunction = ReactModule.createElement
 		local config1 = {
 			CurrentAction = createActivitySummaryActionText(if IsUseReactiveValueResultMatch then ClockBinding:map(function(StartedAt)
-				-- upvalues: Current (copy), AssistantLoading (copy), FFlagBuildExperiencePromptStallMessageModule (upval), v1 (copy), AssistantTakingLonger (copy), ChatConstantsModule (upval), UseContextResult (copy), LocalizationStringsModule (upval), AssistantStillWorking (copy)
+				-- upvalues: Current (copy), AssistantLoading (copy), FFlagBuildExperiencePromptStallMessageModule (upval), UseStallStateResult (copy), AssistantTakingLonger (copy), ChatConstantsModule (upval), UseContextResult (copy), LocalizationStringsModule (upval), AssistantStillWorking (copy)
 				if not Current.isThinking then
 					return AssistantLoading
 				end
@@ -285,9 +219,9 @@ return function(Frame)
 				end
 				local Largest = math.max(0, StartedAt - Current.startedAt)
 				
-				if FFlagBuildExperiencePromptStallMessageModule and v1 ~= nil and AssistantTakingLonger ~= nil then
-					local LastProgressAt = v1.lastProgressAt or StartedAt
-					v1.lastProgressAt = LastProgressAt
+				if FFlagBuildExperiencePromptStallMessageModule and UseStallStateResult ~= nil and AssistantTakingLonger ~= nil then
+					local LastProgressAt = UseStallStateResult.lastProgressAt or StartedAt
+					UseStallStateResult.lastProgressAt = LastProgressAt
 					
 					if ChatConstantsModule.PROMPT_STALL_SECONDS <= StartedAt - LastProgressAt then
 						return AssistantTakingLonger

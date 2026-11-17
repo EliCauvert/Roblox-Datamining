@@ -2,7 +2,6 @@
 local Parent = Moments.Parent
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
-local FFlagMomentsReactFeatureGate = require(Parent.SharedFlags).FFlagMomentsReactFeatureGate
 local MomentContextModule = require(script.Parent.Parent.MomentContext)
 local ReactionTruthTableModule = require(script.Parent.reactionTruthTable)
 local SignalActionTypeModule = require(Moments.Enums.SignalActionType)
@@ -34,15 +33,15 @@ local function decideWithSharedRules(SelectedReaction, p1, p2)
 end
 
 return function()
-	-- upvalues: MomentContextModule (copy), UseReactionEffectsFunction (copy), UseFeedOptionalFunction (copy), FFlagMomentsReactFeatureGate (copy), SignalsReactModule (copy), GetMomentsCapabilitiesFunction (copy), ReactModule (copy), FFlagMomentsUseSharedReactionsModule (copy), decideWithSharedRules (copy), ReactionTruthTableModule (copy), SignalActionTypeModule (copy)
+	-- upvalues: MomentContextModule (copy), UseReactionEffectsFunction (copy), UseFeedOptionalFunction (copy), SignalsReactModule (copy), GetMomentsCapabilitiesFunction (copy), ReactModule (copy), FFlagMomentsUseSharedReactionsModule (copy), decideWithSharedRules (copy), ReactionTruthTableModule (copy), SignalActionTypeModule (copy)
 	local Store = MomentContextModule.useMoment().store
 	local UseReactionEffectsResult = UseReactionEffectsFunction()
 	local UseFeedOptionalResult = UseFeedOptionalFunction()
-	local NoFFlagMomentsReactFeatureGate = not FFlagMomentsReactFeatureGate or SignalsReactModule.useSignalState(GetMomentsCapabilitiesFunction(false).getCanReactToMoments)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(GetMomentsCapabilitiesFunction(false).getCanReactToMoments)
 	
 	return ReactModule.useCallback(function(p1, p2, p3)
-		-- upvalues: FFlagMomentsReactFeatureGate (upval), NoFFlagMomentsReactFeatureGate (copy), Store (copy), FFlagMomentsUseSharedReactionsModule (upval), decideWithSharedRules (upval), ReactionTruthTableModule (upval), UseFeedOptionalResult (copy), SignalActionTypeModule (upval), UseReactionEffectsResult (copy)
-		if FFlagMomentsReactFeatureGate and not NoFFlagMomentsReactFeatureGate then return end
+		-- upvalues: UseSignalStateResult (copy), Store (copy), FFlagMomentsUseSharedReactionsModule (upval), decideWithSharedRules (upval), ReactionTruthTableModule (upval), UseFeedOptionalResult (copy), SignalActionTypeModule (upval), UseReactionEffectsResult (copy)
+		if not UseSignalStateResult then return end
 		local SelectedReaction = Store.getSelectedReaction(false)
 		local DecideWithSharedRulesResult = if FFlagMomentsUseSharedReactionsModule then decideWithSharedRules(SelectedReaction, p1, p3) else ReactionTruthTableModule.decide(SelectedReaction, p1, p3)
 		
@@ -85,6 +84,6 @@ return function()
 		Store,
 		UseReactionEffectsResult,
 		UseFeedOptionalResult,
-		NoFFlagMomentsReactFeatureGate
+		UseSignalStateResult
 	})
 end

@@ -18,13 +18,14 @@ local FFlagProfilePlatformEnableTradeItemsModule = require(ProfilePlatform.Flags
 local FFlagEnableProfileCompletion = require(Parent.SharedFlags).FFlagEnableProfileCompletion
 local FFlagProfilePlatformRefreshActionsRespectPoliciesModule = require(ProfilePlatform.Flags.FFlagProfilePlatformRefreshActionsRespectPolicies)
 local FFlagProfilePlatformGracefulVisibilityModule = require(ProfilePlatform.Flags.FFlagProfilePlatformGracefulVisibility)
+local FFlagProfilePlatformSeededPymk = require(Parent.SharedFlags).FFlagProfilePlatformSeededPymk
 local config = {
 	[SocialCommonModule.Enums.ContextualInfoTypes.MutualFriends] = EnumsModule.ContextualTypes.MutualFriends,
 	[SocialCommonModule.Enums.ContextualInfoTypes.Frequents] = EnumsModule.ContextualTypes.PlayedTogether
 }
 
 return function(OffNetworkFriendRequest, p1)
-	-- upvalues: FFlagProfilePlatformEnableVRModule (copy), FFlagProfilePlatformRefreshActionsRespectPoliciesModule (copy), BuildUserActionsComponentModule (copy), GetSupportedActionsForProfileTypeModule (copy), EnumsModule (copy), CryoModule (copy), FFlagProfilePlatformEnableCurrencyTransfer (copy), FFlagProfilePlatformEnableTradeItemsModule (copy), SocialCommonModule (copy), config (copy), FFlagProfilePlatformEnableFavoriteExperiencesModule (copy), FFlagProfilePlatformEnableInventory (copy), FFlagProfilePlatformEnableStore (copy), FFlagExperiencesOnProfile (copy), FFlagEnableProfileCompletion (copy), FFlagProfilePlatformAddCurrentlyPlayingModule (copy), FFlagProfilePlatformGracefulVisibilityModule (copy), FFlagProfilePlatformEnableMomentsModule (copy)
+	-- upvalues: FFlagProfilePlatformEnableVRModule (copy), FFlagProfilePlatformRefreshActionsRespectPoliciesModule (copy), BuildUserActionsComponentModule (copy), GetSupportedActionsForProfileTypeModule (copy), EnumsModule (copy), CryoModule (copy), FFlagProfilePlatformEnableCurrencyTransfer (copy), FFlagProfilePlatformEnableTradeItemsModule (copy), SocialCommonModule (copy), config (copy), FFlagProfilePlatformEnableFavoriteExperiencesModule (copy), FFlagProfilePlatformEnableInventory (copy), FFlagProfilePlatformEnableStore (copy), FFlagExperiencesOnProfile (copy), FFlagEnableProfileCompletion (copy), FFlagProfilePlatformAddCurrentlyPlayingModule (copy), FFlagProfilePlatformGracefulVisibilityModule (copy), FFlagProfilePlatformEnableMomentsModule (copy), FFlagProfilePlatformSeededPymk (copy)
 	local List = nil
 	if FFlagProfilePlatformEnableVRModule then
 		List = {
@@ -94,6 +95,9 @@ return function(OffNetworkFriendRequest, p1)
 	end
 	if FFlagProfilePlatformEnableMomentsModule then
 		table.insert(List, { component = EnumsModule.Components.Moments })
+	end
+	if FFlagProfilePlatformSeededPymk then
+		table.insert(List, { component = EnumsModule.Components.SeededPymk })
 	end
 	return List
 end

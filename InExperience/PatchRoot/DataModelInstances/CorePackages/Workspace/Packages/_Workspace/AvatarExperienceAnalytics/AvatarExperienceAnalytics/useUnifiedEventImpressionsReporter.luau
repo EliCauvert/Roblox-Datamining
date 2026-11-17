@@ -9,6 +9,7 @@ local AvatarScreenProperties = AvatarExperienceNavigationModule.AvatarRoute.Avat
 local UnifiedLoggingSurface = AvatarExperienceNavigationModule.Enums.UnifiedLoggingSurface
 local SendUnifiedEventLogForInstanceModule = require(script.Parent.sendUnifiedEventLogForInstance)
 local AvatarExperienceCommonModule = require(Parent.AvatarExperienceCommon)
+local _ = require(Parent.AvatarExperienceModel)
 local UseSelectorSignalFunction = AvatarExperienceCommonModule.Hooks.useSelectorSignal
 local SelectSearchKeyword = AvatarExperienceCommonModule.State.Selectors.selectSearchKeyword
 local UnifiedEventLoggingUtilsModule = require(AvatarExperienceAnalytics.Utils.UnifiedEventLoggingUtils)

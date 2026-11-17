@@ -10,6 +10,7 @@ local FFlagSurvBloxEventTypeEnabled = SharedFlagsModule.FFlagSurvBloxEventTypeEn
 local RbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId")
 local IsExitModalRemovedModule = require(RobloxGui.Modules.Settings.Flags.isExitModalRemoved)
 local FFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry = require(CorePackages.Workspace.Packages.VoiceChatCore).Flags.GetFFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry()
+local FFlagLeaveGameButtonKeepsFocusWhileLeavingModule = require(RobloxGui.Modules.Settings.Flags.FFlagLeaveGameButtonKeepsFocusWhileLeaving)
 local PerfUtilsModule = require(RobloxGui.Modules.Common.PerfUtils)
 local CryoModule = require(CorePackages.Packages.Cryo)
 local MessageBus = require(CorePackages.Workspace.Packages.MessageBus).MessageBus
@@ -26,7 +27,7 @@ local ReactSchedulingTrackerModule = require(RobloxGui.Modules.Common.ReactSched
 local Default = if FFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry then require(RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default else nil
 
 return function(p1, p2)
-	-- upvalues: FFlagEnableGameLeftMessage (copy), MessageBus (copy), ConstantsModule (copy), GetFFlagEnableInGameMenuDurationLoggerModule (copy), PerfUtilsModule (copy), ReactSchedulingTrackerModule (copy), CorePackages (copy), GuiService (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), RbxAnalyticsService (copy), FFlagLeaveActionChromeShortcutTelemetryModule (copy), CryoModule (copy), FFlagSurvBloxEventTypeEnabled (copy), SurveyEventPublisherModule (copy), WebViewEventTypeModule (copy), Players (copy), NewResult (copy), FFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry (copy), Default (copy), RunService (copy), ExperienceService (copy), GetDefaultQualityLevelFunction (copy), IsExitModalRemovedModule (copy)
+	-- upvalues: FFlagEnableGameLeftMessage (copy), MessageBus (copy), ConstantsModule (copy), GetFFlagEnableInGameMenuDurationLoggerModule (copy), PerfUtilsModule (copy), ReactSchedulingTrackerModule (copy), CorePackages (copy), FFlagLeaveGameButtonKeepsFocusWhileLeavingModule (copy), GuiService (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), RbxAnalyticsService (copy), FFlagLeaveActionChromeShortcutTelemetryModule (copy), CryoModule (copy), FFlagSurvBloxEventTypeEnabled (copy), SurveyEventPublisherModule (copy), WebViewEventTypeModule (copy), Players (copy), NewResult (copy), FFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry (copy), Default (copy), RunService (copy), ExperienceService (copy), GetDefaultQualityLevelFunction (copy), IsExitModalRemovedModule (copy)
 	if FFlagEnableGameLeftMessage and (not p2 or not p2.inhibitAppRating) then
 		MessageBus.publish(ConstantsModule.OnAppRatingPromptEventDescriptor, { gameTime = game:getGameTime() })
 	end
@@ -39,7 +40,9 @@ return function(p1, p2)
 	if MemoryTrackerResult then
 		MemoryTrackerResult:destroy()
 	end
-	GuiService.SelectedCoreObject = nil
+	if not FFlagLeaveGameButtonKeepsFocusWhileLeavingModule or not p2 or not p2.keepSelection then
+		GuiService.SelectedCoreObject = nil
+	end
 	local JoinResult = {
 		confirmed = ConstantsModule.AnalyticsConfirmedName,
 		universeid = tostring(game.GameId),

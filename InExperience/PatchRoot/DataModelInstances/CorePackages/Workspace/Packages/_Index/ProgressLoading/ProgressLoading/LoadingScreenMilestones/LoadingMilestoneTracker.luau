@@ -1,5 +1,5 @@
 ﻿local ProgressLoading = script:FindFirstAncestor("ProgressLoading")
-local _ = ProgressLoading.Parent
+local FFlagTTIEventStreamPlaySessionContext = require(ProgressLoading.Parent.SharedFlags).FFlagTTIEventStreamPlaySessionContext
 local _ = require(script.Parent.Types)
 local ConstantsModule = require(script.Parent.Constants)
 local TryMilestoneOperationModule = require(script.Parent.tryMilestoneOperation)
@@ -65,22 +65,28 @@ return {
 			p3.trackMilestone(ConstantsModule.EVENT_NAME, p4, if Id then { id = Id } else nil)
 		end)
 	end,
-	completeMilestoneTracker = function(p3, p4, DismissSource, p5)
-		-- upvalues: TryMilestoneOperationModule (copy), getAddedWait (copy), getHoldGateHit (copy), ConstantsModule (copy), FIntLoadingScreenMilestonesSampleRateModule (copy)
+	completeMilestoneTracker = function(p3, p4, DismissSource, p5, p6)
+		-- upvalues: TryMilestoneOperationModule (copy), getAddedWait (copy), getHoldGateHit (copy), ConstantsModule (copy), FIntLoadingScreenMilestonesSampleRateModule (copy), FFlagTTIEventStreamPlaySessionContext (copy)
 		local v1 = nil
 		local v2 = nil
 		
 		return TryMilestoneOperationModule(function()
-			-- upvalues: v1 (ref), p4 (copy), getAddedWait (upval), p3 (copy), v2 (ref), p5 (copy), getHoldGateHit (upval), DismissSource (copy), ConstantsModule (upval), FIntLoadingScreenMilestonesSampleRateModule (upval)
+			-- upvalues: v1 (ref), p4 (copy), getAddedWait (upval), p3 (copy), v2 (ref), p5 (copy), getHoldGateHit (upval), DismissSource (copy), ConstantsModule (upval), FIntLoadingScreenMilestonesSampleRateModule (upval), FFlagTTIEventStreamPlaySessionContext (upval), p6 (copy)
 			v1 = if p4 then getAddedWait(p3) else nil
 			v2 = if p5 then getHoldGateHit(p3) else nil
 			
 			if DismissSource then
 				p3.updateMetadata(ConstantsModule.EVENT_NAME, { dismissSource = DismissSource })
 			end
-			p3.trackEnd(ConstantsModule.EVENT_NAME, {
+			local config = {
 				samplingRateOverride = FIntLoadingScreenMilestonesSampleRateModule
-			})
+			}
+			
+			if FFlagTTIEventStreamPlaySessionContext and p6 then
+				config.playSessionId = p6.playSessionId
+				config.universeId = p6.universeId
+			end
+			p3.trackEnd(ConstantsModule.EVENT_NAME, config)
 		end), v1, v2
 	end,
 	discardMilestoneTracker = function(p3)

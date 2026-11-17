@@ -5,7 +5,8 @@ return {
 	Analytics = {
 		AnalyticsConstants = AnalyticsConstantsModule,
 		Constants = AnalyticsConstantsModule,
-		useGameJoinCardAnalytics = require(script.Analytics.useGameJoinCardAnalytics)
+		useGameJoinCardAnalytics = require(script.Analytics.useGameJoinCardAnalytics),
+		useAgeCheckUpsellAnalytics = require(script.Analytics.useAgeCheckUpsellAnalytics)
 	},
 	BuildJoinCardPopover = if FFlagSocialCarouselBuildPresence then require(script.Components.BuildJoinCard.BuildJoinCardPopoverContainer) else nil,
 	BuildJoinCardSheet = if FFlagSocialCarouselBuildPresence then require(script.Components.BuildJoinCard.BuildJoinCardSheetContainer) else nil,

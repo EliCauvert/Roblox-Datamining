@@ -12,7 +12,6 @@ local CreateMarqueeSessionStoreModule = require(SocialCarousel.Stores.MarqueeSes
 local GetMarqueeSessionStoreFunction = require(SocialCarousel.Stores.MarqueeSession.getMarqueeSessionStore).getMarqueeSessionStore
 local _ = require(SocialCarousel.Stores.MarqueeSession.MarqueeScrollContext)
 local Tile = require(SocialCarousel.Common.Enums).Tile
-local FFlagSocialCarouselFixColdStartJitterModule = require(SocialCarousel.Flags.FFlagSocialCarouselFixColdStartJitter)
 local FFlagSocialCarouselInGameTitleMarquee = require(Parent.SharedFlags).FFlagSocialCarouselInGameTitleMarquee
 local t = {}
 
@@ -37,7 +36,7 @@ end
 
 return {
 	useCarouselMarquee = function(p1, p2, JoinPopoverUserId, p3, JoinPopoverUserIdRef, JoinSheetUserIdRef, p4, Enabled)
-		-- upvalues: RobloxAppHooksModule (copy), FoundationModule (copy), UseNavigationFocusFunction (copy), RobloxAppEnumsModule (copy), ReactModule (copy), CreateMarqueeSessionStoreModule (copy), GetMarqueeSessionStoreFunction (copy), FFlagSocialCarouselInGameTitleMarquee (copy), Tile (copy), MarqueeTextMotionModule (copy), FFlagSocialCarouselFixColdStartJitterModule (copy), CollectionViewsModule (copy), UseMarqueeActiveTilesFunction (copy), t (copy)
+		-- upvalues: RobloxAppHooksModule (copy), FoundationModule (copy), UseNavigationFocusFunction (copy), RobloxAppEnumsModule (copy), ReactModule (copy), CreateMarqueeSessionStoreModule (copy), GetMarqueeSessionStoreFunction (copy), FFlagSocialCarouselInGameTitleMarquee (copy), Tile (copy), MarqueeTextMotionModule (copy), CollectionViewsModule (copy), UseMarqueeActiveTilesFunction (copy), t (copy)
 		local UseDeviceTypeResult = RobloxAppHooksModule.useDeviceType()
 		local ReducedMotion = FoundationModule.Hooks.usePreferences().reducedMotion
 		local UseNavigationFocusResult = UseNavigationFocusFunction()
@@ -147,7 +146,7 @@ return {
 		local X = if p3.containerFrame then p3.containerFrame.AbsoluteSize.X else 0
 		local Gutter = if p3.appCompositionEnabled then p3.gutter else p3.columnGap
 		local SideMargin = if p3.appCompositionEnabled then 0 else p3.sideMargin
-		local CountP7: number = if FFlagSocialCarouselFixColdStartJitterModule and not p3.isColdStartLayoutReady then 0 elseif p3.showSkeleton then (p3.itemsPerRow or p3.defaultSkeletonCount) + 1 elseif p2 then #p2 else 0
+		local CountP7: number = if p3.isColdStartLayoutReady then if p3.showSkeleton then (p3.itemsPerRow or p3.defaultSkeletonCount) + 1 elseif p2 then #p2 else 0 else 0
 		local Smallest = math.min(p3.maxTilesToShow or CountP7, CountP7)
 		local FractionalItemAmount = if p3.appCompositionEnabled then 0 else p3.fractionalItemAmount or 0
 		local FractionalItemAmount1 = if (p3.itemsPerRow or 0) < Smallest then FractionalItemAmount else 0

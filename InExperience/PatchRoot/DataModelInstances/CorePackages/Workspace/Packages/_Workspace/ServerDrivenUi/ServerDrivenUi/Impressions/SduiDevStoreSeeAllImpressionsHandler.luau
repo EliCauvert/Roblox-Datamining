@@ -1,27 +1,26 @@
-﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
-local Parent = ServerDrivenUi.Parent
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
 local EdpStoreAnalyticsModule = require(Parent.EdpStoreAnalytics)
 local EdpStoreAnalyticsLogger = EdpStoreAnalyticsModule.EdpStoreAnalyticsLogger
 local StoreEnums = EdpStoreAnalyticsModule.Constants.StoreEnums
-local UnifiedEventLogEnums = require(Parent.AvatarExperienceAnalytics).UnifiedEventLogEnums
+local AvatarExperienceAnalyticsModule = require(Parent.AvatarExperienceAnalytics)
 local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local SduiErrors = SduiCoreSystemModule.SduiErrors
 local SduiLogger = SduiCoreSystemModule.SduiLogger
 local FindAnalyticsFieldInAncestorsFunction = SduiCoreSystemModule.findAnalyticsFieldInAncestors
 local GetSduiClientPageScopeFunction = SduiCoreSystemModule.getSduiClientPageScope
 local FFlagSduiErrorPaths = require(Parent.SharedFlags).FFlagSduiErrorPaths
-local SduiMarketplaceItemImpressionsHandlerModule = require(ServerDrivenUi.Impressions.SduiMarketplaceItemImpressionsHandler)
-local MarketplaceUnifiedItemType = UnifiedEventLogEnums.MarketplaceUnifiedItemType
+local SduiMarketplaceItemImpressionsHandler = AvatarExperienceAnalyticsModule.getSduiMarketplaceItemImpressionsHandler()
+local MarketplaceUnifiedItemType = AvatarExperienceAnalyticsModule.UnifiedEventLogEnums.MarketplaceUnifiedItemType
 local self = setmetatable({}, { __mode = "k" })
 
 return function(Key, p1, p2, AnalyticsData, p3, p4)
-	-- upvalues: FindAnalyticsFieldInAncestorsFunction (copy), MarketplaceUnifiedItemType (copy), SduiMarketplaceItemImpressionsHandlerModule (copy), SduiLogger (copy), SduiErrors (copy), FFlagSduiErrorPaths (copy), GetSduiClientPageScopeFunction (copy), self (copy), EdpStoreAnalyticsLogger (copy), StoreEnums (copy)
+	-- upvalues: FindAnalyticsFieldInAncestorsFunction (copy), MarketplaceUnifiedItemType (copy), SduiMarketplaceItemImpressionsHandler (copy), SduiLogger (copy), SduiErrors (copy), FFlagSduiErrorPaths (copy), GetSduiClientPageScopeFunction (copy), self (copy), EdpStoreAnalyticsLogger (copy), StoreEnums (copy)
 	if #p1 == 0 then return end
 	local config = { analyticsData = AnalyticsData }
 	local ItemType = FindAnalyticsFieldInAncestorsFunction("itemType", config)
 	
 	if if ItemType == nil then nil else MarketplaceUnifiedItemType[ItemType] then
-		SduiMarketplaceItemImpressionsHandlerModule(Key, p1, p2, AnalyticsData, p3, p4)
+		SduiMarketplaceItemImpressionsHandler(Key, p1, p2, AnalyticsData, p3, p4)
 	end
 	local ExperienceStoreProductType = FindAnalyticsFieldInAncestorsFunction("experienceStoreProductType", config)
 	

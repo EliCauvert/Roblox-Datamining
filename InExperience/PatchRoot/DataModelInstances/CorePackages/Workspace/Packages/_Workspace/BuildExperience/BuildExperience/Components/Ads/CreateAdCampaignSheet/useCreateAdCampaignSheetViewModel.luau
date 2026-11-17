@@ -17,6 +17,7 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local UseOpenWebViewFunction = require(Parent.WebViewUtils).useOpenWebView
 local FFlagEnablePaidAdsModule = require(BuildExperience.Flags.FFlagEnablePaidAds)
 local FFlagBuildAdsManagerUniverseUrlModule = require(BuildExperience.Flags.FFlagBuildAdsManagerUniverseUrl)
+local FFlagBuildExperienceAdsAndRobuxTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceAdsAndRobuxTelemetry)
 local GetAdsManagerUrlModule = require(script.Parent.Parent.getAdsManagerUrl)
 local AdCampaignEligibilityUtilsModule = require(script.Parent.Parent.adCampaignEligibilityUtils)
 local CreateAdCampaignSheetConfigModule = require(script.Parent.CreateAdCampaignSheetConfig)
@@ -24,6 +25,7 @@ local _ = require(script.Parent.CreateAdCampaignSheetView)
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local UseOpenBuyRobuxWebViewModule = require(BuildExperience.Components.CreatorCreditSheet.useOpenBuyRobuxWebView)
 local UseOpenWebViewWithResumeRefreshModule = require(BuildExperience.utils.useOpenWebViewWithResumeRefresh)
+local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 local DataStatus = DataHydrationModule.DataStatus
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
@@ -74,8 +76,8 @@ local function toCampaignOption(Feedback, Title, RunDates, Description, Free)
 	}
 end
 
-local function useTwoOptionsControls(IsFocusable, Callback, Callback2, CampaignOffers, IsIsCreatePending, IsHasCreateError, Callback1, AttemptedOption, AdsManager, UniverseId)
-	-- upvalues: ResponsiveModule (copy), CreatorAgentChatModule (copy), AdCampaignEligibilityUtilsModule (copy), ReactModule (copy), SignalsReactModule (copy), Signal (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), UseDefaultFocusBehaviorFunction (copy), UseOpenBuyRobuxWebViewModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), GetAdsManagerUrlModule (copy), UseOpenWebViewWithResumeRefreshModule (copy)
+local function useTwoOptionsControls(IsFocusable, Callback, Callback2, CampaignOffers, IsIsCreatePending, IsHasCreateError, Callback1, AttemptedOption, AdsManager, UniverseId, UniverseId1)
+	-- upvalues: ResponsiveModule (copy), CreatorAgentChatModule (copy), AdCampaignEligibilityUtilsModule (copy), ReactModule (copy), SignalsReactModule (copy), Signal (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), UseDefaultFocusBehaviorFunction (copy), UseOpenBuyRobuxWebViewModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), GetAdsManagerUrlModule (copy), UseOpenWebViewWithResumeRefreshModule (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), SendBuildExperienceEventModule (copy)
 	local UsePreferredInputResult = ResponsiveModule.usePreferredInput()
 	local AdCampaignCheckFundsFunction = CreatorAgentChatModule.getCreatorAgentChatStore(false).adCampaignCheckFunds
 	local DefaultOffer = AdCampaignEligibilityUtilsModule.getDefaultOffer(CampaignOffers)
@@ -185,6 +187,31 @@ local function useTwoOptionsControls(IsFocusable, Callback, Callback2, CampaignO
 		Callback1
 	})
 	local UseOpenBuyRobuxWebViewModuleResult = UseOpenBuyRobuxWebViewModule(UseResult2)
+	local UseOpenWebViewWithResumeRefreshModuleResult = nil
+	UseOpenWebViewWithResumeRefreshModuleResult = if FFlagBuildAdsManagerUniverseUrlModule then UseOpenWebViewWithResumeRefreshModule(GetAdsManagerUrlModule.getAdsManagerUrl(UniverseId), AdsManager, UseResult2) else UseOpenWebViewWithResumeRefreshModule(GetAdsManagerUrlModule.getDefaultAdsManagerUrl(), AdsManager, UseResult2)
+	local UseResult3 = if FFlagBuildExperienceAdsAndRobuxTelemetryModule then ReactModule.useCallback(function(p3, Context)
+		-- upvalues: UseStateResult (copy), SendBuildExperienceEventModule (upval), UniverseId1 (copy)
+		local config = { context = Context }
+		
+		if UseStateResult ~= nil then
+			config.campaignOption = UseStateResult
+		end
+		SendBuildExperienceEventModule(p3, { universeId = UniverseId1 }, config)
+	end, { UseStateResult, UniverseId1 }) else nil
+	local UseResult4 = if FFlagBuildExperienceAdsAndRobuxTelemetryModule then ReactModule.useCallback(function()
+		-- upvalues: UseResult3 (copy), UseOpenBuyRobuxWebViewModuleResult (copy)
+		if UseResult3 ~= nil then
+			UseResult3("BUY_ROBUX_CLICK", "ad_campaign_balance")
+		end
+		UseOpenBuyRobuxWebViewModuleResult()
+	end, { UseResult3, UseOpenBuyRobuxWebViewModuleResult }) else nil
+	local UseResult5 = if FFlagBuildExperienceAdsAndRobuxTelemetryModule then ReactModule.useCallback(function()
+		-- upvalues: UseResult3 (copy), UseOpenWebViewWithResumeRefreshModuleResult (ref)
+		if UseResult3 ~= nil then
+			UseResult3("ADS_MANAGER_OPEN_CLICK", "ad_credits_callout")
+		end
+		UseOpenWebViewWithResumeRefreshModuleResult()
+	end, { UseResult3, UseOpenWebViewWithResumeRefreshModuleResult }) else nil
 	
 	return {
 		sheetRootRef = UseDefaultFocusBehaviorResult2,
@@ -197,39 +224,43 @@ local function useTwoOptionsControls(IsFocusable, Callback, Callback2, CampaignO
 		showAdCreditsCallout = not IsIsCreatePending and (CanFund and Result.fundingSource == "ad_credit"),
 		isErrorForSelectedOption = NoCurrent,
 		onOptionChanged = UseResult1,
-		onOpenBuyRobux = UseOpenBuyRobuxWebViewModuleResult,
-		onOpenAdsManager = if FFlagBuildAdsManagerUniverseUrlModule then UseOpenWebViewWithResumeRefreshModule(GetAdsManagerUrlModule.getAdsManagerUrl(UniverseId), AdsManager, UseResult2) else UseOpenWebViewWithResumeRefreshModule(GetAdsManagerUrlModule.getDefaultAdsManagerUrl(), AdsManager, UseResult2),
+		onOpenBuyRobux = if FFlagBuildExperienceAdsAndRobuxTelemetryModule and UseResult4 ~= nil then UseResult4 else UseOpenBuyRobuxWebViewModuleResult,
+		onOpenAdsManager = if FFlagBuildExperienceAdsAndRobuxTelemetryModule and UseResult5 ~= nil then UseResult5 else UseOpenWebViewWithResumeRefreshModuleResult,
 		onCreate = ReactModule.useCallback(function()
-			-- upvalues: NoCanFund (copy), UseOpenBuyRobuxWebViewModuleResult (copy), IsFailed (copy), UseResult (copy), Feedback (copy), IsPaid (copy), NoCurrent (copy), CanFund (copy), UseRefResult (copy), Callback2 (copy)
+			-- upvalues: NoCanFund (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (upval), UseResult3 (copy), UseOpenBuyRobuxWebViewModuleResult (copy), IsFailed (copy), UseResult (copy), Feedback (copy), IsPaid (copy), NoCurrent (copy), CanFund (copy), UseRefResult (copy), Callback2 (copy)
 			if NoCanFund then
+				if FFlagBuildExperienceAdsAndRobuxTelemetryModule and UseResult3 ~= nil then
+					UseResult3("BUY_ROBUX_CLICK", "ad_campaign_primary")
+				end
 				UseOpenBuyRobuxWebViewModuleResult()
 				
 				return
-			end
-			if IsFailed then
+			elseif IsFailed then
 				UseResult(Feedback)
 				
 				return
-			end
-			if IsPaid and not NoCurrent and not CanFund then return end
-			if Feedback ~= nil then
-				UseRefResult.current = Feedback.campaignOption
-				Callback2({
-					paymentType = Feedback.fundingType,
-					campaignOption = Feedback.campaignOption
-				})
-				
-				return
+			else
+				if IsPaid and not NoCurrent and not CanFund then return end
+				if Feedback ~= nil then
+					UseRefResult.current = Feedback.campaignOption
+					Callback2({
+						paymentType = Feedback.fundingType,
+						campaignOption = Feedback.campaignOption
+					})
+					
+					return
+				end
 			end
 		end, {
 			Callback2, Feedback, NoCanFund, UseOpenBuyRobuxWebViewModuleResult, IsPaid,
-			NoCurrent, CanFund, IsFailed, UseResult
+			NoCurrent, CanFund, IsFailed, UseResult,
+			if FFlagBuildExperienceAdsAndRobuxTelemetryModule then UseResult3 else nil
 		})
 	}
 end
 
 return function(p3)
-	-- upvalues: CreatorCreditModule (copy), ReactModule (copy), SignalsReactModule (copy), UseOpenWebViewFunction (copy), FFlagEnablePaidAdsModule (copy), CreateAdCampaignSheetConfigModule (copy), CampaignEndMsFunction (copy), LocalizationStringsModule (copy), UseLocalizationFunction (copy), useTwoOptionsControls (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), NumberLocalization (copy), LocalizationService (copy), DataStatus (copy), toCampaignOption (copy), IconName (copy)
+	-- upvalues: CreatorCreditModule (copy), ReactModule (copy), SignalsReactModule (copy), UseOpenWebViewFunction (copy), FFlagEnablePaidAdsModule (copy), CreateAdCampaignSheetConfigModule (copy), CampaignEndMsFunction (copy), LocalizationStringsModule (copy), UseLocalizationFunction (copy), useTwoOptionsControls (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), NumberLocalization (copy), LocalizationService (copy), DataStatus (copy), toCampaignOption (copy), IconName (copy)
 	local CreatorCreditStore = CreatorCreditModule.getCreatorCreditStore(false)
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: CreatorCreditStore (copy)
@@ -373,21 +404,21 @@ return function(p3)
 	local UseTwoOptionsControlsResult = if FFlagEnablePaidAdsModule then useTwoOptionsControls(p3.isOpen, UseResult, UseResult1, CampaignOffers, IsIsCreatePending, IsHasCreateError, ReactModule.useCallback(function()
 		-- upvalues: CreatorCreditStore (copy)
 		CreatorCreditStore.refreshQuotaSummary():catch(function() end)
-	end, { CreatorCreditStore }), p3.attemptedOption, UseLocalizationResult.adsManager, if FFlagBuildAdsManagerUniverseUrlModule then p3.universeId else nil) else nil
+	end, { CreatorCreditStore }), p3.attemptedOption, UseLocalizationResult.adsManager, if FFlagBuildAdsManagerUniverseUrlModule then p3.universeId else nil, if FFlagBuildExperienceAdsAndRobuxTelemetryModule then p3.universeId else nil) else nil
 	local BalanceState = nil
-	local BALANCELOADING = nil
+	local BALANCEUNAVAILABLE = nil
 	
 	if UseSignalStateResult == nil then
 		if UseSignalStateResult1 == DataStatus.Failed then
 			BalanceState = "failed"
-			BALANCELOADING = CreateAdCampaignSheetConfigModule.BALANCE_UNAVAILABLE
+			BALANCEUNAVAILABLE = CreateAdCampaignSheetConfigModule.BALANCE_UNAVAILABLE
 		else
 			BalanceState = "loading"
-			BALANCELOADING = CreateAdCampaignSheetConfigModule.BALANCE_LOADING
+			BALANCEUNAVAILABLE = CreateAdCampaignSheetConfigModule.BALANCE_LOADING
 		end
 	else
 		BalanceState = "ready"
-		BALANCELOADING = NumberLocalization.localize(string.format("%.0f", (math.floor(UseSignalStateResult.robuxBalance))), LocalizationService.RobloxLocaleId)
+		BALANCEUNAVAILABLE = NumberLocalization.localize(string.format("%.0f", (math.floor(UseSignalStateResult.robuxBalance))), LocalizationService.RobloxLocaleId)
 	end
 	return if FFlagEnablePaidAdsModule then {
 		variant = "twoOptions",
@@ -412,7 +443,7 @@ return function(p3)
 		hasCreateError = UseTwoOptionsControlsResult.isErrorForSelectedOption,
 		createErrorText = CreateError,
 		balanceState = BalanceState,
-		balanceText = BALANCELOADING,
+		balanceText = BALANCEUNAVAILABLE,
 		showCloseButton = UseTwoOptionsControlsResult.showCloseButton,
 		onOptionChanged = UseTwoOptionsControlsResult.onOptionChanged,
 		onOpenBuyRobux = UseTwoOptionsControlsResult.onOpenBuyRobux,
@@ -453,7 +484,7 @@ return function(p3)
 		createText = UseLocalizationResult.create,
 		moderationNotice = UseLocalizationResult.moderationNotice,
 		balanceState = BalanceState,
-		balanceText = BALANCELOADING,
+		balanceText = BALANCEUNAVAILABLE,
 		isCreatePending = IsIsCreatePending,
 		hasCreateError = IsHasCreateError,
 		createErrorText = CreateError,

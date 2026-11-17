@@ -27,10 +27,12 @@ local GetAccountUpgradeErrorCodeModule = require(AccountUpgrade.Utils.getAccount
 local GetAccountUpgradeErrorTextKeyModule = require(AccountUpgrade.Utils.getAccountUpgradeErrorTextKey)
 local ResolveFieldStatesModule = require(AccountUpgrade.Utils.resolveFieldStates)
 local UseMarketingConsentModule = require(AccountUpgrade.Hooks.useMarketingConsent)
+local UseSignupAgreementIdsModule = require(AccountUpgrade.Hooks.useSignupAgreementIds)
 local UseTextFieldValueModule = require(AccountUpgrade.Hooks.useTextFieldValue)
 local FFlagAccountUpgradeOAuthTelemetryModule = require(AccountUpgrade.Flags.FFlagAccountUpgradeOAuthTelemetry)
 local FFlagAccountUpgradeOAuthDialogFitsContentModule = require(AccountUpgrade.Flags.FFlagAccountUpgradeOAuthDialogFitsContent)
 local FFlagAccountUpgradeMarketingConsentModule = require(AccountUpgrade.Flags.FFlagAccountUpgradeMarketingConsent)
+local FFlagAccountUpgradeSendAgreementIdsModule = require(AccountUpgrade.Flags.FFlagAccountUpgradeSendAgreementIds)
 local _ = require(script.Parent.AccountUpgradeView)
 local _ = require(script.Parent.AccountUpgradeFields)
 local InputValidity = AuthCommonModule.Enums.InputValidity
@@ -97,7 +99,7 @@ end
 local function reportEmail() end
 
 return function(p1)
-	-- upvalues: AccountUpgradeFlowModule (copy), GetFlowSpecFunction (copy), AccountUpgradeSurfaceModule (copy), FFlagAccountUpgradeOAuthTelemetryModule (copy), AccountUpgradeAnalyticsModule (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), FFlagEnableDesktopSsoSignupDialogModule (copy), FFlagAllowCurrentUsernameOnSignup (copy), ReactModule (copy), InputValidity (copy), UserGender (copy), UseTextFieldValueModule (copy), reportEmail (copy), IsStringEmailFunction (copy), DateHelper (copy), GetAccountUpgradeErrorTextKeyModule (copy), FFlagAccountUpgradeOAuthDialogFitsContentModule (copy), GetFFlagEnableAuditForSinglePageSignUpFunction (copy), resolveLegalText (copy), UseLocalizationFunction (copy), AccountUpgradeFieldModule (copy), config (copy), LocalizationService (copy), ResolveFieldStatesModule (copy), UsernameValidationContext (copy), UsernameSuggestor (copy), ComputeIsAccountUpgradeButtonEnabledModule (copy), AuthButtonClickFunction (copy), EventStreamConstants (copy), config1 (copy), FFlagAccountUpgradeMarketingConsentModule (copy), UseMarketingConsentModule (copy), PromiseModule (copy), AccountUpgradeRequestFunction (copy), GetAccountUpgradeErrorCodeModule (copy), AuthClientErrorFunction (copy), config2 (copy)
+	-- upvalues: AccountUpgradeFlowModule (copy), GetFlowSpecFunction (copy), AccountUpgradeSurfaceModule (copy), FFlagAccountUpgradeOAuthTelemetryModule (copy), AccountUpgradeAnalyticsModule (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), FFlagEnableDesktopSsoSignupDialogModule (copy), FFlagAllowCurrentUsernameOnSignup (copy), ReactModule (copy), InputValidity (copy), UserGender (copy), UseTextFieldValueModule (copy), reportEmail (copy), IsStringEmailFunction (copy), DateHelper (copy), GetAccountUpgradeErrorTextKeyModule (copy), FFlagAccountUpgradeOAuthDialogFitsContentModule (copy), GetFFlagEnableAuditForSinglePageSignUpFunction (copy), resolveLegalText (copy), FFlagAccountUpgradeSendAgreementIdsModule (copy), UseSignupAgreementIdsModule (copy), UseLocalizationFunction (copy), AccountUpgradeFieldModule (copy), config (copy), LocalizationService (copy), ResolveFieldStatesModule (copy), UsernameValidationContext (copy), UsernameSuggestor (copy), ComputeIsAccountUpgradeButtonEnabledModule (copy), AuthButtonClickFunction (copy), EventStreamConstants (copy), config1 (copy), FFlagAccountUpgradeMarketingConsentModule (copy), UseMarketingConsentModule (copy), PromiseModule (copy), AccountUpgradeRequestFunction (copy), GetAccountUpgradeErrorCodeModule (copy), AuthClientErrorFunction (copy), config2 (copy)
 	local Flow = p1.flow or AccountUpgradeFlowModule.Pioneer
 	local FlowSpec = GetFlowSpecFunction(Flow)
 	assert(FlowSpec ~= nil, `Unsupported account upgrade flow: {Flow}`)
@@ -188,6 +190,8 @@ return function(p1)
 	local ResolveLegalTextResult = resolveLegalText(FlowSpec, p1)
 	local ActiveKey = ResolveLegalTextResult.activeKey
 	local LinkedPlatformAccountName = ResolveLegalTextResult.linkedPlatformAccountName
+	local HasActiveKey: boolean = FFlagAccountUpgradeSendAgreementIdsModule and (Flow == AccountUpgradeFlowModule.OAuth and Submit == nil and ActiveKey ~= nil)
+	local UseSignupAgreementIdsModuleResult = if FFlagAccountUpgradeSendAgreementIdsModule then UseSignupAgreementIdsModule(HasActiveKey) else nil
 	local UseLocalizationResult = UseLocalizationFunction({
 		birthdayLabel = "Authentication.SignUp.Label.Birthday",
 		birthdayPlaceholder = "Authentication.SignUp.Description.BirthdayHint",
@@ -482,7 +486,7 @@ return function(p1)
 		birthday = UseStateResult
 	}) else config1
 	local UseResult14 = ReactModule.useCallback(function()
-		-- upvalues: UseStateResult7 (copy), IsHostReportsSubmit (copy), AuthButtonClickFunction (upval), EventStreamConstants (upval), FFlagAccountUpgradeOAuthTelemetryModule (upval), Flow (copy), EventOrigin (copy), UseStateResult2_6 (copy), UseStateResult2_10 (copy), Value (copy), Value1 (copy), UseStateResult (copy), Value2 (copy), UseStateResult4 (copy), Submit (copy), PromiseModule (upval), AccountUpgradeRequestFunction (upval), UseRoactServiceResult (copy), FlowSpec (copy), AccountUpgradeAnalyticsModule (upval), Surface (copy), UseMarketingConsentModuleResult (ref), p1 (copy), CurrentUsername (copy), GetAccountUpgradeErrorCodeModule (upval), AuthClientErrorFunction (upval), UseRefResult (copy)
+		-- upvalues: UseStateResult7 (copy), IsHostReportsSubmit (copy), AuthButtonClickFunction (upval), EventStreamConstants (upval), FFlagAccountUpgradeOAuthTelemetryModule (upval), Flow (copy), EventOrigin (copy), UseStateResult2_6 (copy), UseStateResult2_10 (copy), Value (copy), Value1 (copy), UseStateResult (copy), Value2 (copy), UseStateResult4 (copy), Submit (copy), PromiseModule (upval), HasActiveKey (copy), UseSignupAgreementIdsModuleResult (copy), AccountUpgradeAnalyticsModule (upval), Surface (copy), AccountUpgradeRequestFunction (upval), UseRoactServiceResult (copy), FlowSpec (copy), UseMarketingConsentModuleResult (ref), p1 (copy), CurrentUsername (copy), GetAccountUpgradeErrorCodeModule (upval), AuthClientErrorFunction (upval), UseRefResult (copy)
 		if UseStateResult7 then return end
 		if not IsHostReportsSubmit then
 			AuthButtonClickFunction(EventStreamConstants.Context.AccountUpgrade, EventStreamConstants.Button.Save, if FFlagAccountUpgradeOAuthTelemetryModule then Flow else nil, nil, nil, EventOrigin)
@@ -502,6 +506,20 @@ return function(p1)
 			local SubmitResult = Submit(config)
 			
 			return if PromiseModule.is(SubmitResult) then SubmitResult else PromiseModule.reject({})
+		end) elseif HasActiveKey and UseSignupAgreementIdsModuleResult then UseSignupAgreementIdsModuleResult():andThen(function(Result)
+			-- upvalues: AccountUpgradeAnalyticsModule (upval), Flow (upval), Surface (upval), AccountUpgradeRequestFunction (upval), UseRoactServiceResult (upval), FlowSpec (upval), config (copy)
+			if Result == nil then
+				AccountUpgradeAnalyticsModule.reportAgreementIdsMissing(Flow, Surface)
+			end
+			return AccountUpgradeRequestFunction(UseRoactServiceResult, {
+				upgradeType = FlowSpec.upgradeType,
+				username = config.username,
+				password = config.password,
+				birthday = config.birthday,
+				email = config.email,
+				gender = config.gender,
+				agreementIds = Result
+			})
 		end) else AccountUpgradeRequestFunction(UseRoactServiceResult, {
 			upgradeType = FlowSpec.upgradeType,
 			username = config.username,
@@ -541,9 +559,10 @@ return function(p1)
 		end)
 	end, {
 		UseStateResult, CurrentUsername, Value2, EventOrigin, Flow, UseStateResult4,
-		UseStateResult7, UseMarketingConsentModuleResult.submit, UseRoactServiceResult,
-		Value1, p1.onSignUpComplete, p1.onSignUpFailed, Submit, IsHostReportsSubmit,
-		FlowSpec, Surface, Value
+		UseSignupAgreementIdsModuleResult, UseStateResult7,
+		UseMarketingConsentModuleResult.submit, UseRoactServiceResult, Value1,
+		p1.onSignUpComplete, p1.onSignUpFailed, Submit, IsHostReportsSubmit,
+		HasActiveKey, FlowSpec, Surface, Value
 	})
 	local BlockingField = ResolveFieldStatesModuleResultEntry.blockingField
 	local config3 = {

@@ -3,7 +3,10 @@ local CorePackages = game:GetService("CorePackages")
 local Players = game:GetService("Players")
 local CrossExperienceVoiceModule = require(CorePackages.Workspace.Packages.CrossExperienceVoice)
 local GetFFlagEnableCrossExpVoiceFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagEnableCrossExpVoice
-local SideSheetPlacement = require(CorePackages.Workspace.Packages.Chrome).Enums.SideSheetPlacement
+local FFlagKeepSideSheetOpenBesideMenu = require(CorePackages.Workspace.Packages.SharedFlags).FFlagKeepSideSheetOpenBesideMenu
+local ChromeModule = require(CorePackages.Workspace.Packages.Chrome)
+local SideSheetOpenBehavior = ChromeModule.Enums.SideSheetOpenBehavior
+local SideSheetPlacement = ChromeModule.Enums.SideSheetPlacement
 local ServiceModule = require(Chrome.Service)
 local PartyMicIconModule = require(Chrome.Integrations.Party.PartyMicIcon)
 local ConstantsModule = require(Chrome.Integrations.Party.Constants)
@@ -32,6 +35,7 @@ return if GetFFlagEnableCrossExpVoiceFunction() then ServiceModule:register({
 	id = ConstantsModule.TOGGLE_MIC_INTEGRATION_ID,
 	label = if FFlagChangeToggleMicTextModule then "CoreScripts.TopBar.Mic" else "CoreScripts.TopBar.ToggleMic",
 	sideSheetPlacement = SideSheetPlacement.Unibar,
+	sideSheetOpenBehavior = if FFlagKeepSideSheetOpenBesideMenu then SideSheetOpenBehavior.CloseSheet else nil,
 	isActivated = NewMappedSignal,
 	activated = function()
 		-- upvalues: Players (copy), v1 (ref), Enabled (ref), Default (copy)

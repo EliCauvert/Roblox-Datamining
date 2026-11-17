@@ -1,6 +1,6 @@
 ﻿local TrustedContacts = script:FindFirstAncestor("TrustedContacts")
 local Parent = TrustedContacts.Parent
-local FriendRequestOriginSource = require(Parent.ApolloProfileInsights).Enums.FriendRequestOriginSource
+local FriendRequestOriginSource = require(Parent.ProfileInsights).Enums.FriendRequestOriginSource
 local LocalizationService = game:GetService("LocalizationService")
 local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization

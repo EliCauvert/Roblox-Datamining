@@ -2,17 +2,12 @@
 local ReactModule = require(FriendsCalling.Parent.React)
 local CallPipModule = require(FriendsCalling.Components.CallPip.CallPip)
 local Host = {
-	exposesTopSafeArea = false,
+	isInExperience = false,
 	followsAppColorMode = true,
-	displayOrder = require(FriendsCalling.CallPipDisplayOrder).InApp,
-	screenInsets = Enum.ScreenInsets.None
+	displayOrder = require(FriendsCalling.CallPipDisplayOrder).InApp
 }
 
 return function()
 	-- upvalues: ReactModule (copy), CallPipModule (copy), Host (copy)
-	return ReactModule.createElement(CallPipModule, {
-		isMicrophoneMuted = false,
-		initialPresentation = "Expanded",
-		host = Host
-	})
+	return ReactModule.createElement(CallPipModule, { host = Host })
 end

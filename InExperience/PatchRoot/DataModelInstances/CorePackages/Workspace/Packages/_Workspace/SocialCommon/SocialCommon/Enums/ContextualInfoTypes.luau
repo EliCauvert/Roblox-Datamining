@@ -8,5 +8,6 @@
 	MutualFriends = "mutualFriends",
 	Frequents = "frequents",
 	Contacts = "Contacts",
-	OffNetworkFriendRequest = "OffNetworkFriendRequest"
+	OffNetworkFriendRequest = "OffNetworkFriendRequest",
+	FriendRequestOrigin = "friendRequestOrigin"
 }

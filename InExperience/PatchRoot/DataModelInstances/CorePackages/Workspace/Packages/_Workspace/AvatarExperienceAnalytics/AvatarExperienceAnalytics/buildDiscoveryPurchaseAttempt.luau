@@ -5,6 +5,7 @@ local MutedErrorFunction = require(Parent.Loggers).mutedError
 local SendAXCounterV2Module = require(script.Parent.sendAXCounterV2)
 local _ = require(script.Parent.Generated.UnifiedEventTypes)
 local FFlagAXUnifiedEventStrictPayloads = require(Parent.AvatarExperienceFlags).FFlagAXUnifiedEventStrictPayloads
+local _ = require(Parent.UnifiedEventEnums)
 
 return function(p1)
 	-- upvalues: UnifiedLoggingSurface (copy), MutedErrorFunction (copy), SendAXCounterV2Module (copy), UnifiedEventLogEnumsModule (copy), FFlagAXUnifiedEventStrictPayloads (copy)
@@ -34,7 +35,8 @@ return function(p1)
 			organicItemPrice = p1.itemPrice,
 			assetType = p1.assetType,
 			bundleType = p1.bundleType,
-			cartId = p1.cartId
+			cartId = p1.cartId,
+			category = p1.category
 		}
 	end
 end

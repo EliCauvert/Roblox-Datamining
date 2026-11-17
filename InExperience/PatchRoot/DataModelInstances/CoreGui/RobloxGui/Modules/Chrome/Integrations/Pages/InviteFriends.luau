@@ -6,20 +6,20 @@ local ChromeModule = require(CorePackages.Workspace.Packages.Chrome)
 local GameInviteModalManager = require(CorePackages.Workspace.Packages.GameInvite).GameInviteModalManager
 local FFlagGameInviteInExpJoinOrInviteLabelModule = require(CorePackages.Workspace.Packages.GameInvite.FFlagGameInviteInExpJoinOrInviteLabel)
 local IsPlatformInviteUIEnabledModule = require(CorePackages.Workspace.Packages.GameInvite.isPlatformInviteUIEnabled)
-local AppCommonLibModule = require(CorePackages.Workspace.Packages.AppCommonLib)
 local ServiceModule = require(Chrome.Service)
 local CommonIconModule = require(Chrome.Integrations.CommonIcon)
+local SideSheetOpenBehavior = ChromeModule.Enums.SideSheetOpenBehavior
 local SideSheetPlacement = ChromeModule.Enums.SideSheetPlacement
-local Signal = AppCommonLibModule.Signal
+local FFlagKeepSideSheetOpenBesideMenu = require(CorePackages.Workspace.Packages.SharedFlags).FFlagKeepSideSheetOpenBesideMenu
 local InGameMenuIntegrationUtilsModule = require(script.Parent.InGameMenuIntegrationUtils)
-local NewSignal = Signal.new()
-local NewResult = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(NewSignal, function()
+local NewResult = require(CorePackages.Workspace.Packages.AppCommonLib).Signal.new()
+local NewResult1 = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(NewResult, function()
 	-- upvalues: GameInviteModalManager (copy)
 	return GameInviteModalManager:isGameModalOpen()
 end)
 GameInviteModalManager.ToggleGameInviteModalEvent.Event:Connect(function()
-	-- upvalues: NewSignal (copy)
-	NewSignal:fire()
+	-- upvalues: NewResult (copy)
+	NewResult:fire()
 end)
 
 local function _(): boolean
@@ -34,12 +34,13 @@ return ServiceModule:register({
 	initialAvailability = if IsUserIdAbove then ServiceModule.AvailabilitySignal.Available else ServiceModule.AvailabilitySignal.Unavailable,
 	label = if FFlagGameInviteInExpJoinOrInviteLabelModule and not IsPlatformInviteUIEnabledModule() then "CoreScripts.InGameMenu.PageTitle.JoinOrInvite" else "CoreScripts.InGameMenu.PageTitle.InviteFriends",
 	sideSheetPlacement = SideSheetPlacement.AboveFold,
+	sideSheetOpenBehavior = if FFlagKeepSideSheetOpenBesideMenu then SideSheetOpenBehavior.WindowBesideSheet else nil,
 	activated = InGameMenuIntegrationUtilsModule.toggleInviteFriendsPage,
-	isActivated = NewResult,
+	isActivated = NewResult1,
 	components = {
 		Icon = function()
-			-- upvalues: CommonIconModule (copy), NewResult (copy)
-			return CommonIconModule("PersonArrowFromBottomRight", nil, NewResult)
+			-- upvalues: CommonIconModule (copy), NewResult1 (copy)
+			return CommonIconModule("PersonArrowFromBottomRight", nil, NewResult1)
 		end
 	}
 })

@@ -42,6 +42,12 @@ return ReactModule.memo(function(p1)
 		presence = p1.presence,
 		shouldShowNewIndicator = p1.shouldShowNewIndicator,
 		trailingContent = p1.trailingContent,
-		configs = p1.configs
+		configs = p1.configs,
+		primaryCtaEnum = p1.primaryCtaEnum,
+		secondaryCtaEnum = p1.secondaryCtaEnum,
+		onCtaSuccess = p1.onCtaSuccess,
+		contextualInfoSource = p1.contextualInfoSource,
+		onCtaToast = p1.onCtaToast,
+		friendshipOriginSourceType = p1.friendshipOriginSourceType
 	})
 end)

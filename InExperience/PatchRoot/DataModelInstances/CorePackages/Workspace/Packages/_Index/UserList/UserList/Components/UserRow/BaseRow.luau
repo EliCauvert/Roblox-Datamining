@@ -13,6 +13,7 @@ local FFlagEnableBlackbirdCheck = require(Parent.SharedFlags).FFlagEnableBlackbi
 local FFlagUserListCtaIntegrationEnabled = require(Parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
 local FFlagUserListSurfaceExtensions = require(Parent.SharedFlags).FFlagUserListSurfaceExtensions
 local FFlagUserListInviteCta = require(Parent.SharedFlags).FFlagUserListInviteCta
+local FFlagProfilePlatformSeededPymk = require(Parent.SharedFlags).FFlagProfilePlatformSeededPymk
 local View = FoundationModule.View
 local Button = FoundationModule.Button
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
@@ -33,7 +34,7 @@ local config = {
 }
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseTokensFunction (copy), FFlagUserListSurfaceExtensions (copy), UseLocalizationFunction (copy), TextKeysModule (copy), EnumsModule (copy), FFlagUserListInviteCta (copy), FFlagFriendsPageViewBtnEnabled (copy), FFlagUserListCtaIntegrationEnabled (copy), ReactModule (copy), View (copy), ConstantsModule (copy), UserTile (copy), FoundationModule (copy), FFlagEnableBlackbirdCheck (copy), config (copy), StatusIndicator (copy), StatusIndicatorVariant (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), Skeleton (copy), Radius (copy), IconButton (copy), IconSize (copy)
+	-- upvalues: UseTokensFunction (copy), FFlagUserListSurfaceExtensions (copy), UseLocalizationFunction (copy), TextKeysModule (copy), EnumsModule (copy), FFlagUserListInviteCta (copy), FFlagFriendsPageViewBtnEnabled (copy), FFlagUserListCtaIntegrationEnabled (copy), ReactModule (copy), View (copy), ConstantsModule (copy), UserTile (copy), FoundationModule (copy), FFlagEnableBlackbirdCheck (copy), FFlagProfilePlatformSeededPymk (copy), config (copy), StatusIndicator (copy), StatusIndicatorVariant (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), Skeleton (copy), Radius (copy), IconButton (copy), IconSize (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IsDisableRowActivation: boolean = FFlagUserListSurfaceExtensions and p1.disableRowActivation == true
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -78,7 +79,8 @@ return ReactModule.memo(function(p1)
 				isContextualInfoLoading = p1.isContextualInfoLoading,
 				avatarSize = if p1.layoutMode == EnumsModule.RowLayoutMode.Compact then UDim2.new(0, UseTokensResult.Size.Size_1400, 0, UseTokensResult.Size.Size_1400) else nil,
 				trustedConnectionIndicatorEnabled = p1.trustedConnectionIndicatorEnabled,
-				isRobloxSubscriber = if FFlagEnableBlackbirdCheck then p1.isRobloxSubscriber else nil
+				isRobloxSubscriber = if FFlagEnableBlackbirdCheck then p1.isRobloxSubscriber else nil,
+				customTextTruncation = if FFlagProfilePlatformSeededPymk then p1.textTruncation else nil
 			})
 		}),
 		TrailingSection = ReactModule.createElement(View, {

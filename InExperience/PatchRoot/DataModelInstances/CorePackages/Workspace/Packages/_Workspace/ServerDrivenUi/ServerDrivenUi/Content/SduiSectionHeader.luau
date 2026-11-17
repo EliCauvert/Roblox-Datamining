@@ -11,12 +11,13 @@ local IconWithTooltip = require(Parent.AppBlox).IconWithTooltip
 local SduiTextIconRowModule = require(ServerDrivenUi.Content.SduiTextIconRow)
 local Images = require(Parent.FoundationImages).Images
 local GetImageDataFunction = require(Parent.RobloxAppAssets).GetImageData
+local FFlagLuaAppSduiPersonalizedRecommendationsEntryPoint = require(Parent.SharedFlags).FFlagLuaAppSduiPersonalizedRecommendationsEntryPoint
 local FFlagLuaAppEnableSduiHomePage = require(Parent.SharedFlags).FFlagLuaAppEnableSduiHomePage
 local AddLayoutOrderToSduiSectionHeaderIconComponent = game:DefineFastFlag("AddLayoutOrderToSduiSectionHeaderIconComponent", false)
 local LuaAppSduiSeeAllArrowIconMigration2 = game:DefineFastFlag("LuaAppSduiSeeAllArrowIconMigration2", false)
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseTokensFunction (copy), ResponsiveModule (copy), LuaAppSduiSeeAllArrowIconMigration2 (copy), GetImageDataFunction (copy), Images (copy), AddLayoutOrderToSduiSectionHeaderIconComponent (copy), ReactModule (copy), View (copy), FFlagLuaAppEnableSduiHomePage (copy), CombineReactTagsFunction (copy), SduiTextIconRowModule (copy), IconWithTooltip (copy), TooltipOrientation (copy)
+	-- upvalues: UseTokensFunction (copy), ResponsiveModule (copy), LuaAppSduiSeeAllArrowIconMigration2 (copy), GetImageDataFunction (copy), Images (copy), AddLayoutOrderToSduiSectionHeaderIconComponent (copy), ReactModule (copy), View (copy), FFlagLuaAppEnableSduiHomePage (copy), CombineReactTagsFunction (copy), SduiTextIconRowModule (copy), IconWithTooltip (copy), TooltipOrientation (copy), FFlagLuaAppSduiPersonalizedRecommendationsEntryPoint (copy)
 	local LayoutOrder = p1.layoutOrder
 	local AnchorPoint = p1.anchorPoint
 	local AutomaticSize = p1.automaticSize
@@ -132,6 +133,7 @@ return ReactModule.memo(function(p1)
 			size = UDim2.new(0, Size700, 0, Size700),
 			position = if HasSubtitleComponent then UDim2.new(1, 0, 0, 0) else UDim2.new(1, 0, 0.5, 0),
 			anchorPoint = if HasSubtitleComponent then Vector2.new(1, 0) else Vector2.new(1, 0.5)
-		}) or nil)
+		}) or nil),
+		RightComponent = if FFlagLuaAppSduiPersonalizedRecommendationsEntryPoint and p1.rightComponent then ReactModule.createElement(View, { LayoutOrder = 3, tag = "auto-xy" }, { RightComponent = p1.rightComponent }) else nil
 	})
 end)

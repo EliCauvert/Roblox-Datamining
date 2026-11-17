@@ -2,12 +2,14 @@
 local Parent = AvatarExperienceAnalytics.Parent
 local _ = require(Parent.AvatarExperienceCommon)
 local CryoModule = require(Parent.Cryo)
+local _ = require(Parent.UnifiedEventEnums)
 local CartIdServiceModule = require(AvatarExperienceAnalytics.Lib.CartIdService)
 local UnifiedEventLogEnumsModule = require(AvatarExperienceAnalytics.UnifiedEventLogEnums)
 local GetMarketplaceUnifiedAssetTypeModule = require(AvatarExperienceAnalytics.Utils.getMarketplaceUnifiedAssetType)
 local GetMarketplaceUnifiedBundleTypeModule = require(AvatarExperienceAnalytics.Utils.getMarketplaceUnifiedBundleType)
 local GetWidgetAttributionFieldsModule = require(AvatarExperienceAnalytics.Utils.getWidgetAttributionFields)
 local FFlagAXUnifiedEventStrictPayloads = require(Parent.AvatarExperienceFlags).FFlagAXUnifiedEventStrictPayloads
+local _ = require(AvatarExperienceAnalytics.Generated.UnifiedEventTypes)
 
 local function _(Text): string
 	return "MIS_" .. Text

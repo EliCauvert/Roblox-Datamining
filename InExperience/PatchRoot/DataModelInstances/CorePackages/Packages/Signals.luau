@@ -1,1 +1,1 @@
-﻿return (require(script.Parent._Index.SignalsSelect.SignalsSelect))
+﻿return (require(script.Parent._Index.Signals.Signals))

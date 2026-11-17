@@ -4,6 +4,7 @@
 	ExpChatPresetChatEmojiTabExperimentation = require(script.ExpChatPresetChatEmojiTabExperimentation),
 	ExpChatPresetChatEmojiEffectExperimentation = require(script.ExpChatPresetChatEmojiEffectExperimentation),
 	ExpChatOpenExpressionTrayExperimentation = require(script.ExpChatOpenExpressionTrayExperimentation),
+	ExpChatOpenChatWindowHasChatAccessExperimentation = require(script.ExpChatOpenChatWindowHasChatAccessExperimentation),
 	ExpChatNewSystemMessagesExperimentation = require(script.ExpChatNewSystemMessagesExperimentation),
 	ExpChatGlobalTabDefaultExperimentation = require(script.ExpChatGlobalTabDefaultExperimentation),
 	ExpChatMessageHistoryExperimentation = require(script.ExpChatMessageHistoryExperimentation),

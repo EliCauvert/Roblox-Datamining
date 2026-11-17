@@ -5,9 +5,10 @@ local AvatarExperienceModelModule = require(AvatarExperienceInspectAndBuy.Parent
 local TutilsModule = require(Parent.tutils)
 local ItemTypeEnum = AvatarExperienceModelModule.Enums.ItemTypeEnum
 local FFlagAXMarketplaceLicensingItemCards = require(Parent.AvatarExperienceFlags).FFlagAXMarketplaceLicensingItemCards
+local FFlagAXIaBPlusExclusiveUpsell = require(Parent.AvatarExperienceFlags).FFlagAXIaBPlusExclusiveUpsell
 
 return function(p1, p2)
-	-- upvalues: TutilsModule (copy), ItemTypeEnum (copy), FFlagAXMarketplaceLicensingItemCards (copy)
+	-- upvalues: TutilsModule (copy), ItemTypeEnum (copy), FFlagAXMarketplaceLicensingItemCards (copy), FFlagAXIaBPlusExclusiveUpsell (copy)
 	local FieldCountResult = if p2 then TutilsModule.fieldCount(p2) else 0
 	
 	return {
@@ -47,6 +48,7 @@ return function(p1, p2)
 			numFavorites = p1.numFavorites,
 			isFavorited = p1.isFavorited
 		},
-		timedOptions = p1.timedOptions
+		timedOptions = p1.timedOptions,
+		isPlusExclusive = if FFlagAXIaBPlusExclusiveUpsell then p1.isPlusExclusive else nil
 	}
 end

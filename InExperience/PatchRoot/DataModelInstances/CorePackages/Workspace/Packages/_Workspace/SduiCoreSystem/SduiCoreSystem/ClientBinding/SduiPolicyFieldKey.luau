@@ -1,5 +1,10 @@
 ﻿return {
 	SearchBar = "SearchBar",
+	showInContextPersonalizedRecommendationsSearchOmnisearchExperiences = "showInContextPersonalizedRecommendationsSearchOmnisearchExperiences",
+	showInContextPersonalizedRecommendationsSearchPowerSearch = "showInContextPersonalizedRecommendationsSearchPowerSearch",
+	showInContextPersonalizedRecommendationsSearchMarketplace = "showInContextPersonalizedRecommendationsSearchMarketplace",
+	showInContextPersonalizedRecommendationsSearchOmnisearchGameItems = "showInContextPersonalizedRecommendationsSearchOmnisearchGameItems",
+	showInContextPersonalizedRecommendationsSettings = "showInContextPersonalizedRecommendationsSettings",
 	GameDetailsMorePage = "GameDetailsMorePage",
 	GameDetailsSubtitle = "GameDetailsSubtitle",
 	GameDetailsPlayWithFriends = "GameDetailsPlayWithFriends",

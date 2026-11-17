@@ -19,7 +19,6 @@ local UseAddFriendsTileSeenImpressionModule = require(SocialCarousel.Hooks.useAd
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 local UseTilesSeenCollectionModule = require(SocialCarousel.Analytics.useTilesSeenCollection)
 local FFlagSocialCarouselShowLoadingSkeletonModule = require(SocialCarousel.Flags.FFlagSocialCarouselShowLoadingSkeleton)
-local FFlagSocialCarouselFixColdStartJitterModule = require(SocialCarousel.Flags.FFlagSocialCarouselFixColdStartJitter)
 local FixCarouselTileSizeScaling = game:DefineFastFlag("FixCarouselTileSizeScaling", false)
 local FFlagFlyoutHideFriendsHeaderModule = require(SocialCarousel.Flags.FFlagFlyoutHideFriendsHeader)
 local FlyoutSidePanelIXP = require(Parent.SharedExperimentDefinition).FlyoutSidePanelIXP
@@ -69,7 +68,7 @@ local _ = function(List)
 end
 
 return function(p1)
-	-- upvalues: FFlagLuaAppCompositionAlways (copy), FixCarouselTileSizeScaling (copy), UseTokensFunction (copy), UseSocialCarouselContextModule (copy), UseTilesSeenCollectionModule (copy), ReactModule (copy), FFlagSocialCarouselShowLoadingSkeletonModule (copy), ConstantsModule (copy), UseLocalizationFunction (copy), UsePageSideMarginFunction (copy), UseCollectionLayoutParamsFunction (copy), CollectionItemSize (copy), FFlagSocialCarouselXXSmallTilesModule (copy), FFlagSocialCarouselXSmallTileTextModule (copy), RobloxAppHooksModule (copy), RobloxAppEnumsModule (copy), UseCollectionLayoutFunction (copy), FFlagSocialCarouselFixColdStartJitterModule (copy), UseColdStartLayoutReadyModule (copy), FFlagSocialCarouselLogNewFriendRequestsBadgeModule (copy), Tile (copy), UseAddFriendsTileSeenImpressionModule (copy), FFlagSocialCarouselInGameTitleMarquee (copy), UseCarouselMarquee (ref), FFlagSocialCarouselBuildPresence (copy), TileComponentsModule (copy), FFlagShowRequestsInCarouselForAllUsers (copy), config (copy), t (copy), CollectionCarousel (copy), FFlagLuaAppFriendsSortHeaderByPosition (copy), FFlagFlyoutHideFriendsHeaderModule (copy), FFlagEnableFlyoutFriendsHeaderFix (copy), FlyoutSidePanelIXP (copy), MarqueeScrollContext (copy)
+	-- upvalues: FFlagLuaAppCompositionAlways (copy), FixCarouselTileSizeScaling (copy), UseTokensFunction (copy), UseSocialCarouselContextModule (copy), UseTilesSeenCollectionModule (copy), ReactModule (copy), FFlagSocialCarouselShowLoadingSkeletonModule (copy), ConstantsModule (copy), UseLocalizationFunction (copy), UsePageSideMarginFunction (copy), UseCollectionLayoutParamsFunction (copy), CollectionItemSize (copy), FFlagSocialCarouselXXSmallTilesModule (copy), FFlagSocialCarouselXSmallTileTextModule (copy), RobloxAppHooksModule (copy), RobloxAppEnumsModule (copy), UseCollectionLayoutFunction (copy), UseColdStartLayoutReadyModule (copy), FFlagSocialCarouselLogNewFriendRequestsBadgeModule (copy), Tile (copy), UseAddFriendsTileSeenImpressionModule (copy), FFlagSocialCarouselInGameTitleMarquee (copy), UseCarouselMarquee (ref), FFlagSocialCarouselBuildPresence (copy), TileComponentsModule (copy), FFlagShowRequestsInCarouselForAllUsers (copy), config (copy), t (copy), CollectionCarousel (copy), FFlagLuaAppFriendsSortHeaderByPosition (copy), FFlagFlyoutHideFriendsHeaderModule (copy), FFlagEnableFlyoutFriendsHeaderFix (copy), FlyoutSidePanelIXP (copy), MarqueeScrollContext (copy)
 	local FFlagLuaAppCompositionAlways1 = FFlagLuaAppCompositionAlways or p1.appCompositionEnabled
 	local UseTokensResult = if FixCarouselTileSizeScaling then UseTokensFunction() else nil
 	local UseSocialCarouselContextModuleResult = UseSocialCarouselContextModule()
@@ -95,17 +94,12 @@ return function(p1)
 	local UseCollectionLayoutResult = UseCollectionLayoutFunction(CollectionItemSize.XSmall)
 	local NewItemsPerRow = if FFlagSocialCarouselXXSmallTilesModule and IsUseDeviceTypeResultMatch then UseCollectionLayoutResult.itemsPerRow + 1 else UseCollectionLayoutResult.itemsPerRow
 	local NewItemsPerRow1 = if FFlagLuaAppCompositionAlways1 then NewItemsPerRow else UseCollectionLayoutParamsResult.numColumns
-	local IsColdStartLayoutReady = false
-	local UseResult = nil
-	
-	if FFlagSocialCarouselFixColdStartJitterModule then
-		local UseStateResult1, UseStateResult2_1 = ReactModule.useState(Vector2.zero)
-		IsColdStartLayoutReady = UseColdStartLayoutReadyModule(RobloxAppHooksModule.useDeviceOrientation() ~= nil, RobloxAppHooksModule.useScreenSize(), UseStateResult1.X, NewItemsPerRow1)
-		UseResult = ReactModule.useCallback(function(p2)
-			-- upvalues: UseStateResult2_1 (copy)
-			UseStateResult2_1(p2)
-		end, {})
-	end
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(Vector2.zero)
+	local UseColdStartLayoutReadyModuleResult = UseColdStartLayoutReadyModule(RobloxAppHooksModule.useDeviceOrientation() ~= nil, RobloxAppHooksModule.useScreenSize(), UseStateResult1.X, NewItemsPerRow1)
+	local UseResult = ReactModule.useCallback(function(p2)
+		-- upvalues: UseStateResult2_1 (copy)
+		UseStateResult2_1(p2)
+	end, {})
 	local Callback = nil
 	local UseRefResult5 = nil
 	
@@ -182,7 +176,7 @@ return function(p1)
 			appCompositionEnabled = FFlagLuaAppCompositionAlways1,
 			itemsPerRow = NewItemsPerRow1,
 			showSkeleton = IsLoading,
-			isColdStartLayoutReady = IsColdStartLayoutReady,
+			isColdStartLayoutReady = UseColdStartLayoutReadyModuleResult,
 			containerFrame = UseStateResult,
 			gutter = UseCollectionLayoutResult.gutter,
 			carouselPeek = UseCollectionLayoutResult.carouselPeek,
@@ -263,9 +257,9 @@ return function(p1)
 			LayoutOrder = 1,
 			containerRef = UseStateResult2,
 			scrollingFrameRef = UseRefResult,
-			onContainerSizeChanged = if FFlagSocialCarouselFixColdStartJitterModule then UseResult else nil,
+			onContainerSizeChanged = UseResult,
 			title = UseLocalizationResult.friendsLabel,
-			items = if FFlagSocialCarouselFixColdStartJitterModule and not IsColdStartLayoutReady then t else UseMemoResult1,
+			items = if UseColdStartLayoutReadyModuleResult then UseMemoResult1 else t,
 			renderItem = ReactModule.useCallback(function(p2, p3, p4)
 				-- upvalues: SelectionOrderBase (copy), FFlagSocialCarouselInGameTitleMarquee (upval), ActiveByIndex (ref), IsPaused (ref), MarqueeRunId (ref), OnMarqueeFinished (ref), OnManualMarqueeStart (ref), OnManualMarqueeEnd (ref), HandsOff (ref), DesktopEnabled (ref), ConsoleEnabled (ref), IsMarqueeShortTitlesEnabled (ref), Tile (upval), TileComponentsModule (upval), FFlagShowRequestsInCarouselForAllUsers (upval), UseRefResult1 (copy), UseTilesSeenCollectionModuleResult (copy), p1 (copy), IsFFlagLuaAppCompositionAlways (copy), config (upval), UseSocialCarouselContextModuleResult (copy), ReactModule (upval)
 				local NewSelectionOrderBase = if SelectionOrderBase then SelectionOrderBase + p3 else nil
@@ -368,12 +362,12 @@ return function(p1)
 			sideMargin = if FFlagLuaAppCompositionAlways1 then nil else UseCollectionLayoutParamsResult.sideMargin,
 			maxItemsToShow = UseCollectionLayoutParamsResult.maxTilesToShow,
 			thresholdFromEnd = UseCollectionLayoutParamsResult.loadMoreThreshold,
-			onViewableItemsChanged = if IsLoading or FFlagSocialCarouselFixColdStartJitterModule and not IsColdStartLayoutReady then nil else UseResult2,
-			onChangeCanvasPosition = if UseSocialCarouselContextModuleResult.unifiedLogging and not IsLoading and (not FFlagSocialCarouselFixColdStartJitterModule or IsColdStartLayoutReady) then UseSocialCarouselContextModuleResult.unifiedLogging.onCollectionViewabilityChanged else nil,
+			onViewableItemsChanged = if IsLoading or not UseColdStartLayoutReadyModuleResult then nil else UseResult2,
+			onChangeCanvasPosition = if UseSocialCarouselContextModuleResult.unifiedLogging and not IsLoading and UseColdStartLayoutReadyModuleResult then UseSocialCarouselContextModuleResult.unifiedLogging.onCollectionViewabilityChanged else nil,
 			onActivateHeader = p1.onActivateHeader,
 			headerComponent = if FFlagLuaAppFriendsSortHeaderByPosition then if UseSocialCarouselContextModuleResult.hideCarouselHeader then ReactModule.createElement(ReactModule.Fragment, nil, {}) else nil elseif UseSocialCarouselContextModuleResult.hideCarouselHeader then ReactModule.createElement(ReactModule.Fragment, nil, {}) elseif FFlagFlyoutHideFriendsHeaderModule and (if FFlagEnableFlyoutFriendsHeaderFix then FlyoutSidePanelIXP.isFriendsSortHeaderHiddenInFlyoutIxp() else FlyoutSidePanelIXP.isFlyoutSidePanelEnabled()) then ReactModule.createElement(ReactModule.Fragment, nil, {}) else nil
 		}),
-		ScreenSizeImpressionsTracker = if UseSocialCarouselContextModuleResult.unifiedLogging and (not FFlagSocialCarouselFixColdStartJitterModule or IsColdStartLayoutReady) then UseSocialCarouselContextModuleResult.unifiedLogging.renderImpressionsTrackerComponent(UseRefResult) else nil
+		ScreenSizeImpressionsTracker = if UseSocialCarouselContextModuleResult.unifiedLogging and UseColdStartLayoutReadyModuleResult then UseSocialCarouselContextModuleResult.unifiedLogging.renderImpressionsTrackerComponent(UseRefResult) else nil
 	})
 	
 	return if ScrollContext == nil then Frame else ReactModule.createElement(MarqueeScrollContext.Provider, { value = ScrollContext }, { Carousel = Frame })

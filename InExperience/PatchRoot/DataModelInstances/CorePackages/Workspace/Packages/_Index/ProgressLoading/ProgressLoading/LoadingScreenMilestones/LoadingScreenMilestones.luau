@@ -1,4 +1,6 @@
 ﻿local Parent = script:FindFirstAncestor("ProgressLoading").Parent
+local FFlagTTIEventStreamPlaySessionContext = require(Parent.SharedFlags).FFlagTTIEventStreamPlaySessionContext
+local RbxAnalyticsService = if FFlagTTIEventStreamPlaySessionContext and game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId") then game:GetService("RbxAnalyticsService") else nil
 local ConstantsModule = require(script.Parent.Constants)
 local _ = require(script.Parent.Types)
 local LoadingMilestoneTelemetryModule = require(script.Parent.LoadingMilestoneTelemetry)
@@ -14,9 +16,32 @@ local function _(p1): string
 	return (if p1.host == ConstantsModule.Host.DeferredJoin then "DeferredJoin_" else "") .. (if p1.reducedMotion then "ReducedMotion_" else "") .. (if p1.holdEnabled then "HoldOn" else "HoldOff")
 end
 
+local function readPlaySessionContext(p1)
+	-- upvalues: ConstantsModule (copy), RbxAnalyticsService (copy), TryMilestoneOperationModule (copy)
+	if p1.host == ConstantsModule.Host.DeferredJoin then
+		local DestinationUniverseId: number = p1.destinationUniverseId
+		
+		return {
+			universeId = if DestinationUniverseId and DestinationUniverseId > 0 then DestinationUniverseId else nil
+		}
+	end
+	local PlaySessionId = nil
+	
+	if RbxAnalyticsService then
+		TryMilestoneOperationModule(function()
+			-- upvalues: PlaySessionId (ref), RbxAnalyticsService (upval)
+			PlaySessionId = RbxAnalyticsService:GetPlaySessionId()
+		end)
+	end
+	return {
+		playSessionId = if PlaySessionId == "" then nil else PlaySessionId,
+		universeId = if game.GameId > 0 then game.GameId else nil
+	}
+end
+
 return {
 	start = function(p1)
-		-- upvalues: v1 (ref), AbortReason (copy), ConstantsModule (copy), LoadingMilestoneTrackerModule (copy), LoadingMilestoneTelemetryModule (copy), Outcome (copy), Milestone (copy), TryMilestoneOperationModule (copy), Parent (copy)
+		-- upvalues: v1 (ref), AbortReason (copy), ConstantsModule (copy), LoadingMilestoneTrackerModule (copy), LoadingMilestoneTelemetryModule (copy), Outcome (copy), Milestone (copy), FFlagTTIEventStreamPlaySessionContext (copy), readPlaySessionContext (copy), TryMilestoneOperationModule (copy), Parent (copy)
 		if v1 then
 			v1.abort(AbortReason.Replaced)
 		end
@@ -134,14 +159,14 @@ return {
 				end
 			end,
 			complete = function()
-				-- upvalues: v1 (upval), v3 (ref), Outcome (upval), v2 (ref), LoadingMilestoneTrackerModule (upval), NormalReady (ref), t (copy), Milestone (upval), Text (copy), ConstantsModule (upval), LoadingMilestoneTelemetryModule (upval), MilestoneSessionMetadata (ref)
+				-- upvalues: v1 (upval), v3 (ref), Outcome (upval), v2 (ref), FFlagTTIEventStreamPlaySessionContext (upval), readPlaySessionContext (upval), p1 (copy), LoadingMilestoneTrackerModule (upval), NormalReady (ref), t (copy), Milestone (upval), Text (copy), ConstantsModule (upval), LoadingMilestoneTelemetryModule (upval), MilestoneSessionMetadata (ref)
 				if v1 ~= v3 then return end
 				v1 = nil
 				local Completed = Outcome.Completed
 				local v4 = v2
 				
 				if v4 then
-					local CompleteMilestoneTrackerResult, CompleteMilestoneTrackerResult2, CompleteMilestoneTrackerResult3 = LoadingMilestoneTrackerModule.completeMilestoneTracker(v4, NormalReady ~= nil and t[Milestone.DismissStarted] == true, NormalReady, Text == "HoldOn" and NormalReady == ConstantsModule.DismissSource.NormalReady)
+					local CompleteMilestoneTrackerResult, CompleteMilestoneTrackerResult2, CompleteMilestoneTrackerResult3 = LoadingMilestoneTrackerModule.completeMilestoneTracker(v4, NormalReady ~= nil and t[Milestone.DismissStarted] == true, NormalReady, Text == "HoldOn" and NormalReady == ConstantsModule.DismissSource.NormalReady, if FFlagTTIEventStreamPlaySessionContext then readPlaySessionContext(p1) else nil)
 					
 					if CompleteMilestoneTrackerResult and CompleteMilestoneTrackerResult2 ~= nil and NormalReady then
 						CompleteMilestoneTrackerResult = LoadingMilestoneTelemetryModule.reportAddedWait(MilestoneSessionMetadata, CompleteMilestoneTrackerResult2, NormalReady)
@@ -171,8 +196,8 @@ return {
 					v1 = nil
 					local v4 = v2
 					v2 = nil
-					local NoV47 = not v4 or LoadingMilestoneTrackerModule.discardMilestoneTracker(v4)
-					LoadingMilestoneTelemetryModule.countMilestonesOutcome(MilestoneSessionMetadata, if NoV47 then InitializationFailed else Outcome.InstrumentationError)
+					local NoV52 = not v4 or LoadingMilestoneTrackerModule.discardMilestoneTracker(v4)
+					LoadingMilestoneTelemetryModule.countMilestonesOutcome(MilestoneSessionMetadata, if NoV52 then InitializationFailed else Outcome.InstrumentationError)
 					
 					return
 				end

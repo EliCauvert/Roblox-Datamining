@@ -1,5 +1,6 @@
 ﻿local Parent = script.Parent
 local SendPassthroughUnifiedEventLogModule = require(script.sendPassthroughUnifiedEventLog)
+local SendUnifiedEventForDeferredActionModule = require(script.sendUnifiedEventForDeferredAction)
 local _ = require(script.Generated.UnifiedEventTypes)
 
 return {
@@ -14,13 +15,21 @@ return {
 	sendPassthroughUnifiedEventLogForInstance = SendPassthroughUnifiedEventLogModule.sendForInstance,
 	logWidgetLoaded = require(script.logWidgetLoaded),
 	flushDeferredWidgetLoaded = require(script.flushDeferredWidgetLoaded),
-	sendUnifiedEventForDeferredAction = require(script.sendUnifiedEventForDeferredAction),
+	sendUnifiedEventForDeferredAction = SendUnifiedEventForDeferredActionModule,
+	sendPartialUnifiedEventForDeferredAction = SendUnifiedEventForDeferredActionModule,
 	normalizeDiscoveryPurchaseEntity = require(script.normalizeDiscoveryPurchaseEntity),
 	buildDiscoveryPurchaseAttempt = require(script.buildDiscoveryPurchaseAttempt),
 	sendUnifiedClickItemDetailsEvent = require(script.sendUnifiedClickItemDetailsEvent),
 	sendUnifiedEventsForMultiItemShopping = require(script.sendUnifiedEventsForMultiItemShopping),
+	getSduiMarketplaceItemImpressionsHandler = function()
+		return require(script.Sdui.SduiMarketplaceItemImpressionsHandler)
+	end,
+	getSduiOpenMarketplaceTryOnAction = function()
+		return require(script.Sdui.SduiOpenMarketplaceTryOnAction)
+	end,
 	UnifiedEventLogConstants = require(script.UnifiedEventLogConstants),
 	UnifiedEventLogEnums = require(script.UnifiedEventLogEnums),
+	UnifiedEventEnums = require(Parent.UnifiedEventEnums),
 	useUnifiedEventImpressionsReporter = require(script.useUnifiedEventImpressionsReporter),
 	useRequestImpressionsOnTagAdded = require(script.useRequestImpressionsOnTagAdded),
 	useUnifiedEventTagging = require(script.useUnifiedEventTagging),

@@ -6,9 +6,13 @@ local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
 local CreatorGroupsModule = require(Parent.DataHydration.CreatorGroups)
 local UniverseSearchModule = require(Parent.DataHydration.UniverseSearch)
+local FFlagBuildUpdatedSearchUXForGAModule = require(BuildExperience.Flags.FFlagBuildUpdatedSearchUXForGA)
 local GamesFilterModule = require(BuildExperience.Stores.GetMyCreationsFilterStore.GamesFilter)
 local _ = require(BuildExperience.Stores.GetMyCreationsFilterStore)
+local GetSearchQueryStoreModule = require(BuildExperience.Stores.GetSearchQueryStore)
+local _ = require(BuildExperience.Stores.GetSearchQueryStore.createSearchQueryStore)
 local ThumbForUniverseIdModule = require(BuildExperience.utils.thumbForUniverseId)
+local UseActiveTabQueryModule = require(BuildExperience.utils.useActiveTabQuery)
 local UseCursorSearchPagesModule = require(BuildExperience.utils.useCursorSearchPages)
 local DataStatus = DataHydrationModule.DataStatus
 local UseSignalStateFunction = SignalsReactModule.useSignalState
@@ -27,29 +31,33 @@ local function toPreviewItem(p1)
 	}
 end
 
-local function createSource(Creators)
+local function createSource(Creators, p1)
+	-- upvalues: FFlagBuildUpdatedSearchUXForGAModule (copy)
 	local Buffer = table.create(#Creators)
 	
 	for i, creator in Creators do
 		Buffer[i] = `{creator.creatorType}:{creator.creatorTargetId}`
 	end
+	local Joined = table.concat(Buffer, ",")
+	
 	return {
-		key = table.concat(Buffer, ","),
+		key = if FFlagBuildUpdatedSearchUXForGAModule then `{p1}\0{Joined}` else Joined,
 		params = {
 			surface = "BuildPreview",
 			isArchived = false,
 			sortParam = "LastUpdated",
 			sortOrder = "Desc",
 			pageSize = 15,
-			creators = Creators
+			creators = Creators,
+			search = if FFlagBuildUpdatedSearchUXForGAModule and p1 ~= "" then p1 else nil
 		}
 	}
 end
 
 local function ignorePromiseRejection() end
 
-local function usePreviewSources(CreatorGroupsStore, CreatorTargetId, Filter)
-	-- upvalues: ReactModule (copy), UseSignalStateFunction (copy), GamesFilterModule (copy), PreviewGroups (copy), DataStatus (copy), createSource (copy)
+local function usePreviewSources(CreatorGroupsStore, CreatorTargetId, Filter, p2)
+	-- upvalues: ReactModule (copy), UseSignalStateFunction (copy), GamesFilterModule (copy), PreviewGroups (copy), DataStatus (copy), createSource (copy), FFlagBuildUpdatedSearchUXForGAModule (copy)
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: CreatorGroupsStore (copy)
 		return (CreatorGroupsStore.getAndFetchGroups("BuildPreview"))
@@ -60,7 +68,7 @@ local function usePreviewSources(CreatorGroupsStore, CreatorTargetId, Filter)
 	local GroupId = Filter.groupId
 	
 	return (ReactModule.useMemo(function()
-		-- upvalues: UseSignalStateResult (copy), Games (copy), GamesFilterModule (upval), PreviewGroups (upval), UseSignalStateResult1 (copy), DataStatus (upval), GroupId (copy), createSource (upval), CreatorTargetId (copy)
+		-- upvalues: UseSignalStateResult (copy), Games (copy), GamesFilterModule (upval), PreviewGroups (upval), UseSignalStateResult1 (copy), DataStatus (upval), GroupId (copy), createSource (upval), FFlagBuildUpdatedSearchUXForGAModule (upval), p2 (copy), CreatorTargetId (copy)
 		if UseSignalStateResult == nil and Games ~= GamesFilterModule.SharedGames then
 			return {
 				sources = nil,
@@ -85,13 +93,13 @@ local function usePreviewSources(CreatorGroupsStore, CreatorTargetId, Filter)
 				end
 			end
 			if #Creators > 0 then
-				table.insert(List, (createSource(Creators)))
+				table.insert(List, (createSource(Creators, if FFlagBuildUpdatedSearchUXForGAModule then p2 else nil)))
 			end
 		end
 		if Games ~= GamesFilterModule.GroupGames then
 			table.insert(List, (createSource({
 				{ creatorType = "Team", creatorTargetId = CreatorTargetId }
-			})))
+			}, if FFlagBuildUpdatedSearchUXForGAModule then p2 else nil)))
 		end
 		return {
 			sources = List,
@@ -99,21 +107,19 @@ local function usePreviewSources(CreatorGroupsStore, CreatorTargetId, Filter)
 			status = DataStatus.Ready
 		}
 	end, {
-		Games,
-		GroupId,
-		UseSignalStateResult,
-		UseSignalStateResult1,
-		CreatorTargetId
+		Games, GroupId, UseSignalStateResult, UseSignalStateResult1, CreatorTargetId,
+		if FFlagBuildUpdatedSearchUXForGAModule then p2 else nil
 	}))
 end
 
-return function(p1)
-	-- upvalues: UniverseSearchModule (copy), CreatorGroupsModule (copy), Players (copy), config (copy), usePreviewSources (copy), UseCursorSearchPagesModule (copy), ReactModule (copy), GamesFilterModule (copy), ignorePromiseRejection (copy), t (copy), toPreviewItem (copy)
-	local SearchStore = p1.searchStore or UniverseSearchModule.getUniverseSearchStore()
-	local CreatorGroupsStore = p1.creatorGroupsStore or CreatorGroupsModule.getCreatorGroupsStore()
-	local IsIsFocused = p1.isFocused ~= false
-	local Filter = p1.filter or config
-	local UsePreviewSourcesResult = usePreviewSources(CreatorGroupsStore, p1.userId or (if Players.LocalPlayer then Players.LocalPlayer.UserId else 0), Filter)
+return function(p3)
+	-- upvalues: UniverseSearchModule (copy), CreatorGroupsModule (copy), Players (copy), FFlagBuildUpdatedSearchUXForGAModule (copy), UseActiveTabQueryModule (copy), GetSearchQueryStoreModule (copy), config (copy), usePreviewSources (copy), UseCursorSearchPagesModule (copy), ReactModule (copy), GamesFilterModule (copy), ignorePromiseRejection (copy), t (copy), toPreviewItem (copy)
+	local SearchStore = p3.searchStore or UniverseSearchModule.getUniverseSearchStore()
+	local CreatorGroupsStore = p3.creatorGroupsStore or CreatorGroupsModule.getCreatorGroupsStore()
+	local IsIsFocused = p3.isFocused ~= false
+	local UseActiveTabQueryModuleResult = if FFlagBuildUpdatedSearchUXForGAModule then UseActiveTabQueryModule(p3.searchQueryStore or GetSearchQueryStoreModule(), IsIsFocused and p3.isActiveTab ~= false) else nil
+	local Filter = p3.filter or config
+	local UsePreviewSourcesResult = usePreviewSources(CreatorGroupsStore, p3.userId or (if Players.LocalPlayer then Players.LocalPlayer.UserId else 0), Filter, if FFlagBuildUpdatedSearchUXForGAModule then UseActiveTabQueryModuleResult else nil)
 	local UseCursorSearchPagesModuleResult = UseCursorSearchPagesModule({
 		searchStore = SearchStore,
 		sources = UsePreviewSourcesResult.sources
@@ -153,6 +159,7 @@ return function(p1)
 	return {
 		items = UseMemoResult,
 		status = if UsePreviewSourcesResult.sources == nil then UsePreviewSourcesResult.status else UseCursorSearchPagesModuleResult.status,
+		query = if FFlagBuildUpdatedSearchUXForGAModule then UseActiveTabQueryModuleResult else nil,
 		hasPreviews = #UseMemoResult > 0,
 		previewGroups = UsePreviewSourcesResult.previewGroups,
 		isLoadingMore = UseCursorSearchPagesModuleResult.isLoadingMore,

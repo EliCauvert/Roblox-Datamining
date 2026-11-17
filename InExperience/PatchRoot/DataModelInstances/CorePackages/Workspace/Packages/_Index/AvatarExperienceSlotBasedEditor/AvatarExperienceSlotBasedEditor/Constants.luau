@@ -123,7 +123,7 @@ local Character = {
 	Eyebrows = if FFlagAXMigrateBuilderIcons then { name = IconName.Eyebrows, variant = IconVariant.Regular } else IconName.Eyebrows,
 	Backgrounds = { name = IconName.Image, variant = IconVariant.Filled },
 	SpawnEffects = {
-		name = IconName.CursorStars,
+		name = IconName.SquareDashedPersonStanding,
 		variant = IconVariant.Filled
 	}
 }

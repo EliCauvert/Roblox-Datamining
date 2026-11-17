@@ -1,6 +1,7 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
 local ReactModule = require(Parent.React)
+local AppNavBarModule = require(Parent.AppNavBar)
 local AppPage = require(Parent.RobloxAppEnums).AppPage
 local RobloxAppEventsModule = require(Parent.RobloxAppEvents)
 local RoactNavigationModule = require(Parent.RoactNavigation)
@@ -28,6 +29,8 @@ local GetUploadStoreModule = require(Moments.Stores.GetUploadStore)
 local SignalsReactModule = require(Parent.SignalsReact)
 local MomentOverlayInsetContextModule = require(Moments.Components.Feed.Items.Moment.MomentOverlayInsetContext)
 local FFlagMomentsFeedAboveNavBarModule = require(Moments.Flags.FFlagMomentsFeedAboveNavBar)
+local FFlagMomentsHideNavBarOnScrollModule = require(Moments.Flags.FFlagMomentsHideNavBarOnScroll)
+local FIntMomentsNavBarHideAfterSwipesModule = require(Moments.Flags.FIntMomentsNavBarHideAfterSwipes)
 local FFlagMomentsFixFeedForDeviceSafeInsetsModule = require(Moments.Flags.FFlagMomentsFixFeedForDeviceSafeInsets)
 local ShouldUseDeviceSafeInsets = require(Parent.Display).shouldUseDeviceSafeInsets
 local ShouldUseDeviceSafeInsets1 = FFlagMomentsFixFeedForDeviceSafeInsetsModule and ShouldUseDeviceSafeInsets
@@ -45,7 +48,6 @@ local CreateSignalTrackerFunction = require(Moments.SignalTracker).createSignalT
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagMomentsCreateAvatarPosts = SharedFlagsModule.FFlagMomentsCreateAvatarPosts
 local FFlagEnableArgus = SharedFlagsModule.FFlagEnableArgus
-local FFlagMomentsCreationFeatureGate = SharedFlagsModule.FFlagMomentsCreationFeatureGate
 local FFlagMomentsRenderAvatarPostsInFeed = SharedFlagsModule.FFlagMomentsRenderAvatarPostsInFeed
 local FFlagMomentsPostFeedback = SharedFlagsModule.FFlagMomentsPostFeedback
 local FFlagMomentsPostFeedbackIxpEnabledModule = require(Moments.Flags.FFlagMomentsPostFeedbackIxpEnabled)
@@ -76,7 +78,7 @@ local function _()
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), MomentsLocalStorageModule (copy), MomentsLocalStorageKeysModule (copy), UseScreenBottomInsetModule (copy), UseFeedPlaybackActiveModule (copy), FFlagMomentsNavigationEventModule (copy), UseMomentsTabIsVisibleModule (copy), SignalsReactModule (copy), GetMomentsPreferencesStoreModule (copy), UseMomentsSessionFunction (copy), UseMomentsHostFunction (copy), FFlagMomentsCreateAvatarPosts (copy), UseMomentsGatingFunction (copy), FFlagMomentsCreationFeatureGate (copy), UseCreationEntryModule (copy), UseUploadHostModule (copy), FFlagMomentsPostFeedback (copy), FFlagMomentsPostFeedbackIxpEnabledModule (copy), SessionManager (copy), FunnelEventNames (copy), FireFunnelAnalyticsEventFunction (copy), IsStudioModule (copy), GetFFlagArgusStudioMockFeedModule (copy), CreateMockFeedSourceFunction (copy), CreateMomentsFeedSourceModule (copy), SignalTracker (copy), FFlagEnableArgus (copy), CreateRecommendationTelemetryFunction (copy), FFlagMomentsRecommendationFeedTypeModule (copy), MomentsFeedTypeModule (copy), FFlagMomentsFollowingFeedModule (copy), GetImmersiveChromeStoreModule (copy), ReportModalCovering (copy), FFlagMomentsPersonalizedRecommendationsEntryPointModule (copy), AccountSettingsCoveringModule (copy), FFlagMomentsFixRecommendationImpressionLifecycleModule (copy), NavigationDestinationTypeModule (copy), LogCreateIntentModule (copy), UseFeedSelectionModule (copy), FFlagMomentsFlushDwellBeforeNavigationModule (copy), RoactNavigationModule (copy), RobloxAppEventsModule (copy), AppPage (copy), GetUploadStoreModule (copy), MomentsUpload (ref), Parent (copy), FireAnalyticsEventFunction (copy), EventNames (copy), TopBarModule (copy), FFlagMomentsFixFeedForDeviceSafeInsetsModule (copy), MomentsCommonModule (copy), ShouldUseDeviceSafeInsets (copy), MomentOverlayInsetContextModule (copy), FFlagMomentsFeedAboveNavBarModule (copy), View (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), ShouldUseDeviceSafeInsets1 (copy), ConstantsModule (copy), FeedSwitchFadeModule (copy), MomentsFeedSurfaceModule (copy), MomentUnavailableDialogModule (copy), CreationFlowScreen (copy), FTUXEducationScreenModule (copy)
+	-- upvalues: ReactModule (copy), MomentsLocalStorageModule (copy), MomentsLocalStorageKeysModule (copy), UseScreenBottomInsetModule (copy), UseFeedPlaybackActiveModule (copy), FFlagMomentsNavigationEventModule (copy), UseMomentsTabIsVisibleModule (copy), SignalsReactModule (copy), GetMomentsPreferencesStoreModule (copy), UseMomentsSessionFunction (copy), UseMomentsHostFunction (copy), FFlagMomentsCreateAvatarPosts (copy), UseMomentsGatingFunction (copy), UseCreationEntryModule (copy), UseUploadHostModule (copy), FFlagMomentsPostFeedback (copy), FFlagMomentsPostFeedbackIxpEnabledModule (copy), SessionManager (copy), FunnelEventNames (copy), FireFunnelAnalyticsEventFunction (copy), IsStudioModule (copy), GetFFlagArgusStudioMockFeedModule (copy), CreateMockFeedSourceFunction (copy), CreateMomentsFeedSourceModule (copy), SignalTracker (copy), FFlagEnableArgus (copy), CreateRecommendationTelemetryFunction (copy), FFlagMomentsRecommendationFeedTypeModule (copy), MomentsFeedTypeModule (copy), FFlagMomentsFollowingFeedModule (copy), FFlagMomentsHideNavBarOnScrollModule (copy), MomentsCommonModule (copy), AppNavBarModule (copy), FIntMomentsNavBarHideAfterSwipesModule (copy), GetImmersiveChromeStoreModule (copy), ReportModalCovering (copy), FFlagMomentsPersonalizedRecommendationsEntryPointModule (copy), AccountSettingsCoveringModule (copy), FFlagMomentsFixRecommendationImpressionLifecycleModule (copy), NavigationDestinationTypeModule (copy), LogCreateIntentModule (copy), UseFeedSelectionModule (copy), FFlagMomentsFlushDwellBeforeNavigationModule (copy), RoactNavigationModule (copy), RobloxAppEventsModule (copy), AppPage (copy), GetUploadStoreModule (copy), MomentsUpload (ref), Parent (copy), FireAnalyticsEventFunction (copy), EventNames (copy), TopBarModule (copy), FFlagMomentsFixFeedForDeviceSafeInsetsModule (copy), ShouldUseDeviceSafeInsets (copy), MomentOverlayInsetContextModule (copy), FFlagMomentsFeedAboveNavBarModule (copy), View (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), ShouldUseDeviceSafeInsets1 (copy), ConstantsModule (copy), FeedSwitchFadeModule (copy), MomentsFeedSurfaceModule (copy), MomentUnavailableDialogModule (copy), CreationFlowScreen (copy), FTUXEducationScreenModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): boolean
 		-- upvalues: MomentsLocalStorageModule (upval), MomentsLocalStorageKeysModule (upval)
 		return not MomentsLocalStorageModule.getField(MomentsLocalStorageKeysModule.CreateTooltipSeen)
@@ -84,7 +86,7 @@ return function(p1)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
-	local UseScreenBottomInsetModuleResult = UseScreenBottomInsetModule()
+	local UseScreenBottomInsetModuleResult: number = UseScreenBottomInsetModule()
 	local UseFeedPlaybackActiveModuleResult = UseFeedPlaybackActiveModule()
 	local v1 = true
 	local UseSignalStateResult = false
@@ -99,7 +101,7 @@ return function(p1)
 	local OpenAvatarMomentsCreation = if FFlagMomentsCreateAvatarPosts then UseMomentsHostResult.openAvatarMomentsCreation else nil
 	local UseMomentsGatingResult = UseMomentsGatingFunction()
 	local PlatformIntegrationEnabled = UseMomentsGatingResult.isFlyoutEntryEnabled and UseMomentsGatingResult.platformIntegrationEnabled
-	local IsCreationEnabled = if FFlagMomentsCreationFeatureGate then UseMomentsGatingResult ~= nil and UseMomentsGatingResult.isCreationEnabled else nil
+	local IsCreationEnabled = UseMomentsGatingResult ~= nil and UseMomentsGatingResult.isCreationEnabled
 	local UseCreationEntryModuleResult = UseCreationEntryModule()
 	local UseUploadHostModuleResult = UseUploadHostModule({
 		onExit = UseCreationEntryModuleResult.onExitCreation,
@@ -138,6 +140,9 @@ return function(p1)
 			feedType = MomentsFeedTypeModule.Following
 		}) else nil
 	end, { UseMomentsSessionResult }) else nil
+	local IsUseFormFactorResultMatch: boolean = if FFlagMomentsHideNavBarOnScrollModule then MomentsCommonModule.Hooks.useFormFactor() == MomentsCommonModule.Enums.FormFactor.MobilePortrait else false
+	local FIntMomentsNavBarHideAfterSwipesModule1 = if FFlagMomentsHideNavBarOnScrollModule and AppNavBarModule.getScrollAwayEnabled() and UseScreenBottomInsetModuleResult > 0 and IsUseFormFactorResultMatch then FIntMomentsNavBarHideAfterSwipesModule else nil
+	local IsFIntMomentsNavBarHideAfterSwipesModuleAbove: boolean = FIntMomentsNavBarHideAfterSwipesModule1 ~= nil and FIntMomentsNavBarHideAfterSwipesModule1 > 0
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(GetImmersiveChromeStoreModule(false).getOverlayCovering)
 	local UseSignalStateResult2 = SignalsReactModule.useSignalState(ReportModalCovering.getCovering)
 	local UseSignalStateResult3 = if FFlagMomentsPersonalizedRecommendationsEntryPointModule then SignalsReactModule.useSignalState(AccountSettingsCoveringModule.getCovering) else false
@@ -311,14 +316,14 @@ return function(p1)
 		end
 	end, { UseResult7, UseFeedSelectionModuleResult })
 	local UseMemoResult41 = ReactModule.useMemo(function()
-		-- upvalues: ReactModule (upval), TopBarModule (upval), UseStateResult (copy), UseFeedPlaybackActiveModuleResult (copy), FFlagMomentsCreationFeatureGate (upval), IsCreationEnabled (copy), PlatformIntegrationEnabled (copy), UseResult5 (copy), UseResult6 (copy), FFlagMomentsCreateAvatarPosts (upval), UseResult4 (copy), UseResult7 (copy), UseResult8 (copy), UseFeedSelectionModuleResult (copy), UseResult9 (copy)
+		-- upvalues: ReactModule (upval), TopBarModule (upval), UseStateResult (copy), UseFeedPlaybackActiveModuleResult (copy), IsCreationEnabled (copy), PlatformIntegrationEnabled (copy), UseResult5 (copy), UseResult6 (copy), FFlagMomentsCreateAvatarPosts (upval), UseResult4 (copy), UseResult7 (copy), UseResult8 (copy), UseFeedSelectionModuleResult (copy), UseResult9 (copy)
 		return ReactModule.createElement(TopBarModule, {
 			isBaseScreen = true,
 			showTopScrim = true,
-			showFtuxTooltip = UseStateResult and (UseFeedPlaybackActiveModuleResult and (not FFlagMomentsCreationFeatureGate or IsCreationEnabled)),
+			showFtuxTooltip = UseStateResult and (UseFeedPlaybackActiveModuleResult and IsCreationEnabled),
 			showHamburger = PlatformIntegrationEnabled,
 			onFtuxTooltipDismissed = UseResult5,
-			onCreatePressed = if FFlagMomentsCreationFeatureGate and not IsCreationEnabled then nil else UseResult6,
+			onCreatePressed = if IsCreationEnabled then UseResult6 else nil,
 			onCreateAvatarMomentPressed = if FFlagMomentsCreateAvatarPosts then UseResult4 else nil,
 			onNavigateToTrending = UseResult7,
 			onNavigateToMyMoments = UseResult8,
@@ -326,8 +331,7 @@ return function(p1)
 			onFeedTypeSelected = if UseFeedSelectionModuleResult == nil then nil else UseResult9
 		})
 	end, {
-		UseStateResult, UseFeedPlaybackActiveModuleResult,
-		if FFlagMomentsCreationFeatureGate then IsCreationEnabled else false,
+		UseStateResult, UseFeedPlaybackActiveModuleResult, IsCreationEnabled,
 		PlatformIntegrationEnabled, UseResult5, UseResult6,
 		if FFlagMomentsCreateAvatarPosts then UseResult4 else nil, UseResult7,
 		UseResult8, UseResult9, UseFeedSelectionModuleResult
@@ -355,17 +359,25 @@ return function(p1)
 			controllerRef = UseRefResult,
 			header = UseMemoResult41,
 			renderFeedContainer = ReactModule.useCallback(function(Feed)
-				-- upvalues: ReactModule (upval), MomentOverlayInsetContextModule (upval), UseScreenBottomInsetModuleResult (copy), FFlagMomentsFeedAboveNavBarModule (upval), View (upval), FFlagMomentsRenderAvatarPostsInFeed (upval), ShouldUseDeviceSafeInsets1 (upval), YOffset (ref), ConstantsModule (upval), FeedSwitchFadeModule (upval), UseFeedSelectionModuleResult (copy)
+				-- upvalues: ReactModule (upval), MomentOverlayInsetContextModule (upval), UseScreenBottomInsetModuleResult (copy), IsFIntMomentsNavBarHideAfterSwipesModuleAbove (copy), AppNavBarModule (upval), FFlagMomentsFeedAboveNavBarModule (upval), View (upval), FFlagMomentsRenderAvatarPostsInFeed (upval), ShouldUseDeviceSafeInsets1 (upval), YOffset (ref), ConstantsModule (upval), FeedSwitchFadeModule (upval), UseFeedSelectionModuleResult (copy)
+				local Element = ReactModule.createElement(MomentOverlayInsetContextModule.Context.Provider, { value = UseScreenBottomInsetModuleResult }, { Feed = Feed })
+				local RatioContext = MomentOverlayInsetContextModule.RatioContext
+				
+				if IsFIntMomentsNavBarHideAfterSwipesModuleAbove and RatioContext ~= nil then
+					Element = ReactModule.createElement(RatioContext.Provider, {
+						value = AppNavBarModule.VisibilityControl.getFooterBinding()
+					}, { Feed = Element })
+				end
 				return ReactModule.createElement(View, {
 					testId = "--moments-feed-container-full-bleed",
 					backgroundStyle = if FFlagMomentsRenderAvatarPostsInFeed then { Transparency = 1 } else nil,
 					tag = { ["size-full"] = not ShouldUseDeviceSafeInsets1 },
 					Position = if ShouldUseDeviceSafeInsets1 then UDim2.fromOffset(0, -YOffset) else nil,
 					Size = if ShouldUseDeviceSafeInsets1 then UDim2.new(1, 0, 1, YOffset) else nil,
-					padding = if FFlagMomentsFeedAboveNavBarModule then { bottom = UDim.new(0, UseScreenBottomInsetModuleResult) } else nil,
+					padding = if FFlagMomentsFeedAboveNavBarModule and not IsFIntMomentsNavBarHideAfterSwipesModuleAbove then { bottom = UDim.new(0, UseScreenBottomInsetModuleResult) } else nil,
 					ZIndex = ConstantsModule.DisplayOrder.Feed
 				}, {
-					Feed = ReactModule.createElement(MomentOverlayInsetContextModule.Context.Provider, { value = UseScreenBottomInsetModuleResult }, { Feed = Feed }),
+					Feed = Element,
 					SwitchFade = if FeedSwitchFadeModule == nil or UseFeedSelectionModuleResult == nil then nil else ReactModule.createElement(FeedSwitchFadeModule, {
 						ZIndex = 2,
 						feedKey = UseFeedSelectionModuleResult.selected
@@ -374,10 +386,12 @@ return function(p1)
 			end, {
 				UseScreenBottomInsetModuleResult,
 				YOffset,
-				UseFeedSelectionModuleResult
+				UseFeedSelectionModuleResult,
+				IsFIntMomentsNavBarHideAfterSwipesModuleAbove
 			}),
 			emptyState = if UseFeedSelectionModuleResult == nil then nil else UseFeedSelectionModuleResult.emptyState,
-			caughtUpState = if UseFeedSelectionModuleResult == nil then nil else UseFeedSelectionModuleResult.caughtUpState
+			caughtUpState = if UseFeedSelectionModuleResult == nil then nil else UseFeedSelectionModuleResult.caughtUpState,
+			appNavBarHideAfterSwipes = FIntMomentsNavBarHideAfterSwipesModule1
 		}),
 		MomentUnavailableDialog = if UseFeedPlaybackActiveModuleResult and UseStateResult1 then ReactModule.createElement(MomentUnavailableDialogModule, {
 			onDismiss = function()

@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("ExpChatStickyTabs3", false)
+﻿return game:DefineFastFlag("ExpChatStickyTabs5", false)

@@ -13,6 +13,7 @@ local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
 local GetLocalizedPriceModule = require(AvatarExperienceUIKit.ItemCard.Utils.getLocalizedPrice)
 local FFlagAXDurablesFooter = AvatarExperienceFlagsModule.FFlagAXDurablesFooter
 local FFlagAXItemCardComponentsMemo = AvatarExperienceFlagsModule.FFlagAXItemCardComponentsMemo
+local FFlagAXIaBPlusExclusiveUpsell = AvatarExperienceFlagsModule.FFlagAXIaBPlusExclusiveUpsell
 
 local function renderIconTextPair(p1)
 	-- upvalues: ReactModule (copy), Icon (copy), IconSize (copy), Text (copy)
@@ -42,35 +43,36 @@ local function renderIconTextPair(p1)
 end
 
 local function renderContentChildren(p1, PriceLineName, IconLayoutOrder, p2, ResolvedColorStyle, Tokens, DesignTokens)
-	-- upvalues: GetLocalizedPriceModule (copy), renderIconTextPair (copy)
+	-- upvalues: GetLocalizedPriceModule (copy), FFlagAXIaBPlusExclusiveUpsell (copy), renderIconTextPair (copy)
 	local Icon = nil
 	local Text = nil
+	local TextIcon: string? = nil
 	local v1: string? = nil
-	local v2: string? = nil
 	
 	if p1.type == "price" then
 		Icon = "robux"
 		Text = GetLocalizedPriceModule(p1.price)
-		v1 = "RobuxIcon"
-		v2 = "Amount"
+		TextIcon = "RobuxIcon"
+		v1 = "Amount"
 	elseif p1.type == "timedOption" then
 		Icon = p1.icon
 		Text = p1.text
-		v1 = "TimedOptionIcon"
-		v2 = "TimedOptionText"
+		TextIcon = "TimedOptionIcon"
+		v1 = "TimedOptionText"
 	else
 		if p1.type ~= "text" then
 			return {}
 		end
+		Icon = if FFlagAXIaBPlusExclusiveUpsell then p1.icon else nil
 		Text = p1.text
+		TextIcon = if FFlagAXIaBPlusExclusiveUpsell then "TextIcon" else "Text"
 		v1 = "Text"
-		v2 = "Text"
 	end
 	return (renderIconTextPair({
 		iconName = Icon,
 		text = Text,
-		iconKey = `{PriceLineName}{v1}`,
-		textKey = `{PriceLineName}{v2}`,
+		iconKey = `{PriceLineName}{TextIcon}`,
+		textKey = `{PriceLineName}{v1}`,
 		iconLayoutOrder = IconLayoutOrder,
 		textLayoutOrder = if Icon then p2 else IconLayoutOrder,
 		resolvedColorStyle = ResolvedColorStyle,
@@ -80,7 +82,7 @@ local function renderContentChildren(p1, PriceLineName, IconLayoutOrder, p2, Res
 end
 
 local function ItemCardPriceLine(Frame: Frame)
-	-- upvalues: UseTokensFunction (copy), UseDesignTokensFunction (copy), ReactModule (copy), Badge (copy), BadgeVariant (copy), IconSize (copy), FFlagAXDurablesFooter (copy), renderContentChildren (copy), Icon (copy), Text (copy), GetLocalizedPriceModule (copy)
+	-- upvalues: UseTokensFunction (copy), UseDesignTokensFunction (copy), ReactModule (copy), Badge (copy), BadgeVariant (copy), IconSize (copy), FFlagAXDurablesFooter (copy), renderContentChildren (copy), Icon (copy), FFlagAXIaBPlusExclusiveUpsell (copy), Text (copy), GetLocalizedPriceModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	
@@ -124,6 +126,13 @@ local function ItemCardPriceLine(Frame: Frame)
 				name = "robux",
 				LayoutOrder = 1,
 				testId = "priceLineRobuxIcon",
+				style = ColorStyle,
+				size = IconSize1
+			}) else nil,
+			ItemCardPriceLineTextIcon = if FFlagAXIaBPlusExclusiveUpsell and Frame.content.type == "text" and Frame.content.icon then ReactModule.createElement(Icon, {
+				LayoutOrder = 1,
+				testId = "priceLineTextIcon",
+				name = Frame.content.icon,
 				style = ColorStyle,
 				size = IconSize1
 			}) else nil,

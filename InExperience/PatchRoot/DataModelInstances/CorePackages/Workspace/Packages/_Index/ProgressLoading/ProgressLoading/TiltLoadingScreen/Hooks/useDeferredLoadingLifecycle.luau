@@ -7,17 +7,19 @@ local LoadingScreenMilestonesModule = require(ProgressLoading.LoadingScreenMiles
 local ConstantsModule = require(ProgressLoading.LoadingScreenMilestones.Constants)
 local FFlagLoadingScreenMilestones = require(Parent.SharedFlags).FFlagLoadingScreenMilestones
 
-return function(p1, Object, Current)
+return function(p1, Object, Current, Current1)
 	-- upvalues: ReactModule (copy), ConstantsModule (copy), RunService (copy), FFlagLoadingScreenMilestones (copy), LoadingScreenMilestonesModule (copy), UserGameSettings (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(Current)
 	UseRefResult1.current = Current
-	local UseRefResult2 = ReactModule.useRef(false)
+	local UseRefResult2 = ReactModule.useRef(Current1)
+	UseRefResult2.current = Current1
+	local UseRefResult3 = ReactModule.useRef(false)
 	local UseResult = ReactModule.useCallback(function(p2, p3)
-		-- upvalues: UseRefResult2 (copy), UseRefResult (copy), ConstantsModule (upval), UseRefResult1 (copy)
-		if UseRefResult2.current then return end
-		UseRefResult2.current = true
+		-- upvalues: UseRefResult3 (copy), UseRefResult (copy), ConstantsModule (upval), UseRefResult1 (copy)
+		if UseRefResult3.current then return end
+		UseRefResult3.current = true
 		
 		if UseRefResult.current then
 			UseRefResult.current.abort(ConstantsModule.AbortReason.Cancelled)
@@ -27,7 +29,7 @@ return function(p1, Object, Current)
 		end
 	end, {})
 	ReactModule.useEffect(function()
-		-- upvalues: p1 (copy), RunService (upval), FFlagLoadingScreenMilestones (upval), LoadingScreenMilestonesModule (upval), ConstantsModule (upval), UserGameSettings (upval), UseRefResult (copy), UseStateResult2 (copy), Object (copy), UseRefResult2 (copy)
+		-- upvalues: p1 (copy), RunService (upval), FFlagLoadingScreenMilestones (upval), LoadingScreenMilestonesModule (upval), ConstantsModule (upval), UseRefResult2 (copy), UserGameSettings (upval), UseRefResult (copy), UseStateResult2 (copy), Object (copy), UseRefResult3 (copy)
 		if not p1 then return end
 		RunService:SetRobloxGuiFocused(true)
 		local StartResult = nil
@@ -39,6 +41,7 @@ return function(p1, Object, Current)
 				holdEnabled = false,
 				page = ConstantsModule.Page.TiltLoadingScreen,
 				host = ConstantsModule.Host.DeferredJoin,
+				destinationUniverseId = UseRefResult2.current,
 				reducedMotion = UserGameSettings.ReducedMotion
 			})
 			UseRefResult.current = StartResult
@@ -49,8 +52,8 @@ return function(p1, Object, Current)
 			end
 			if StartResult and Object then
 				local function onLoadingStateChanged()
-					-- upvalues: UseRefResult2 (upval), Object (upval), StartResult (ref), ConstantsModule (upval)
-					if UseRefResult2.current then return end
+					-- upvalues: UseRefResult3 (upval), Object (upval), StartResult (ref), ConstantsModule (upval)
+					if UseRefResult3.current then return end
 					local PrefetchDownloadStatus = Object:GetPrefetchDownloadStatus()
 					
 					if PrefetchDownloadStatus == Enum.PrefetchDownloadStatus.InProgress or Object.PregameLoadingScreenOnly then return end

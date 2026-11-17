@@ -14,6 +14,7 @@ local NormalizeDirectRecommendationsModule = require(SocialServerDrivenUi.Common
 local FFlagCreateConnectionsHub = SharedFlagsModule.FFlagCreateConnectionsHub
 local FFlagLuaAppEnableSduiHomePage = SharedFlagsModule.FFlagLuaAppEnableSduiHomePage
 local FFlagPymkCarouselExtendProps = SharedFlagsModule.FFlagPymkCarouselExtendProps
+local FFlagProfilePlatformSeededPymk = SharedFlagsModule.FFlagProfilePlatformSeededPymk
 local t = {}
 
 local function readRecommendationHydration(Items, Store, p1)
@@ -30,7 +31,7 @@ local function readRecommendationHydration(Items, Store, p1)
 end
 
 return function(p2)
-	-- upvalues: t (copy), SduiCoreSystemModule (copy), FFlagPymkCarouselExtendProps (copy), FriendRecommendations (copy), ReactModule (copy), SignalsModule (copy), NormalizeDirectRecommendationsModule (copy), readRecommendationHydration (copy), SignalsReactModule (copy), PymkNavigationBridgeModule (copy), SetCurrentToastMessageFunction (copy), FFlagCreateConnectionsHub (copy), AppPage (copy), PYMKCarouselModule (copy), FFlagLuaAppEnableSduiHomePage (copy)
+	-- upvalues: t (copy), SduiCoreSystemModule (copy), FFlagPymkCarouselExtendProps (copy), FriendRecommendations (copy), ReactModule (copy), SignalsModule (copy), NormalizeDirectRecommendationsModule (copy), readRecommendationHydration (copy), SignalsReactModule (copy), PymkNavigationBridgeModule (copy), SetCurrentToastMessageFunction (copy), FFlagCreateConnectionsHub (copy), AppPage (copy), PYMKCarouselModule (copy), FFlagLuaAppEnableSduiHomePage (copy), FFlagProfilePlatformSeededPymk (copy)
 	local Items = p2.items or t
 	local Dependencies = p2.sduiContext.dependencies
 	local Number: number = tonumber(SduiCoreSystemModule.findAnalyticsField("collectionPosition", p2.analyticsContext.analyticsData or {}, -1)) or -1
@@ -82,6 +83,7 @@ return function(p2)
 		eventIngestService = Dependencies.eventIngest,
 		appCompositionEnabled = p2.sduiContext.appCompositionEnabled,
 		onRecommendationsShown = if FFlagPymkCarouselExtendProps then p2.onRecommendationsShown else nil,
-		analyticsSurface = if FFlagPymkCarouselExtendProps then p2.analyticsSurface else nil
+		analyticsSurface = if FFlagPymkCarouselExtendProps then p2.analyticsSurface else nil,
+		seedUserDisplayName = if FFlagProfilePlatformSeededPymk then p2.seedUserDisplayName else nil
 	})
 end

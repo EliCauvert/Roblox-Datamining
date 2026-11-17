@@ -7,9 +7,21 @@ local GetResult = require(Parent.UserProfiles).Stores.VerifiedBadgeDisplayStore.
 local FFlagEnableVerifiedBadgeStore = require(Parent.SharedFlags).FFlagEnableVerifiedBadgeStore
 local EnableInExpChatRewriteEngineFeature = game:GetEngineFeature("EnableInExpChatRewrite")
 local FFlagExpChatRewriteInlineModule = require(ExpChat.Flags.FFlagExpChatRewriteInline)
+local FFlagExpChatRenderHistoricalMessagesModule = require(ExpChat.Flags.FFlagExpChatRenderHistoricalMessages)
+
+local function _(List): number
+	local Count = 0
+	
+	for _, value in ipairs(List) do
+		if not value.isHistorical then break end
+		Count += 1
+	end
+	return Count
+end
 
 return function(p1)
-	-- upvalues: Dictionary (copy), FFlagEnableVerifiedBadgeStore (copy), GetResult (copy), ReactModule (copy), TranslatedTextMessageModule (copy), EnableInExpChatRewriteEngineFeature (copy), FFlagExpChatRewriteInlineModule (copy)
+	-- upvalues: FFlagExpChatRenderHistoricalMessagesModule (copy), Dictionary (copy), FFlagEnableVerifiedBadgeStore (copy), GetResult (copy), ReactModule (copy), TranslatedTextMessageModule (copy), EnableInExpChatRewriteEngineFeature (copy), FFlagExpChatRewriteInlineModule (copy)
+	local Messages = p1.messages
 	local VerifiedUserIds = p1.verifiedUserIds
 	local TextTransparency = p1.textTransparency
 	local TransparencyValue = p1.transparencyValue
@@ -17,12 +29,24 @@ return function(p1)
 	local ShowTranslationButton = p1.showTranslationButton
 	local IsSpatialUIEnabled = p1.isSpatialUIEnabled
 	local OnTextMessageLabelButtonActivated = p1.onTextMessageLabelButtonActivated
-	local MapResult = Dictionary.map(p1.messages, function(Message, LayoutOrder)
-		-- upvalues: FFlagEnableVerifiedBadgeStore (upval), GetResult (upval), Dictionary (upval), VerifiedUserIds (copy), ReactModule (upval), TranslatedTextMessageModule (upval), TextTransparency (copy), EnableInExpChatRewriteEngineFeature (upval), TransparencyValue (copy), OnTextMessageLabelButtonActivated (copy), ChatWindowSettings (copy), ShowTranslationButton (copy), IsSpatialUIEnabled (copy), FFlagExpChatRewriteInlineModule (upval)
+	local Count = nil
+	
+	if FFlagExpChatRenderHistoricalMessagesModule then
+		Count = 0
+		
+		for _, message in ipairs(Messages) do
+			if not message.isHistorical then break end
+			Count += 1
+		end
+	else
+		Count = 0
+	end
+	local MapResult = Dictionary.map(Messages, function(Message, p2)
+		-- upvalues: FFlagEnableVerifiedBadgeStore (upval), GetResult (upval), Dictionary (upval), VerifiedUserIds (copy), ReactModule (upval), TranslatedTextMessageModule (upval), Count (copy), TextTransparency (copy), EnableInExpChatRewriteEngineFeature (upval), TransparencyValue (copy), OnTextMessageLabelButtonActivated (copy), ChatWindowSettings (copy), ShowTranslationButton (copy), IsSpatialUIEnabled (copy), FFlagExpChatRewriteInlineModule (upval)
 		if Message.isVisibleInChatWindow then
 			return ReactModule.createElement(TranslatedTextMessageModule, {
 				message = Message,
-				LayoutOrder = LayoutOrder,
+				LayoutOrder = p2 - Count,
 				isUserVerified = if FFlagEnableVerifiedBadgeStore then if Message.userId then GetResult.isBadgeVisible((tonumber(Message.userId))) else false elseif Message.userId then Dictionary.has(VerifiedUserIds, Message.userId) else false,
 				textTransparency = TextTransparency,
 				transparencyValue = if EnableInExpChatRewriteEngineFeature then TransparencyValue else nil,

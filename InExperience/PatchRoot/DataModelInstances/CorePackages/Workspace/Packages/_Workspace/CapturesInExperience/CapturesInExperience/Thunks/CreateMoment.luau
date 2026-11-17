@@ -24,30 +24,22 @@ if require(Parent.Flags.FFlagCapturesInExpUseMomentsCreation) then
 else
 	local _ = require(Parent1.MomentsCreationFlow)
 	local MomentsCreationModule = require(Parent1.MomentsCreation)
-	local MomentsCommonModule = require(Parent1.MomentsCommon)
 	local _ = require(Parent1.MomentsTypes)
 	local NormalizeMomentMetadataModule = require(Parent.Utils.normalizeMomentMetadata)
-	local GetFFlagMomentsUseUploadPostAsyncFunction = MomentsCommonModule.Flags.GetFFlagMomentsUseUploadPostAsync
-	local GetFFlagMomentsUseMomentsServiceForUploadFunction = MomentsCommonModule.Flags.GetFFlagMomentsUseMomentsServiceForUpload
+	local GetFFlagMomentsUseUploadPostAsyncFunction = require(Parent1.MomentsCommon).Flags.GetFFlagMomentsUseUploadPostAsync
 	local MakePostMetadataFunction = MomentsCreationModule.makePostMetadata
 	
 	return function(Capture, p1, FeedRegistrationInfo, p2)
-		-- upvalues: NormalizeMomentMetadataModule (copy), GetFFlagMomentsUseUploadPostAsyncFunction (copy), MakePostMetadataFunction (copy), GetFFlagMomentsUseMomentsServiceForUploadFunction (copy), CaptureService (copy), ToastTriggeredModule (copy), CapturesToastTypeModule (copy)
+		-- upvalues: NormalizeMomentMetadataModule (copy), GetFFlagMomentsUseUploadPostAsyncFunction (copy), MakePostMetadataFunction (copy), CaptureService (copy), ToastTriggeredModule (copy), CapturesToastTypeModule (copy)
 		return function(p3)
-			-- upvalues: NormalizeMomentMetadataModule (upval), p1 (copy), GetFFlagMomentsUseUploadPostAsyncFunction (upval), MakePostMetadataFunction (upval), GetFFlagMomentsUseMomentsServiceForUploadFunction (upval), Capture (copy), p2 (copy), CaptureService (upval), FeedRegistrationInfo (copy), ToastTriggeredModule (upval), CapturesToastTypeModule (upval)
+			-- upvalues: NormalizeMomentMetadataModule (upval), p1 (copy), GetFFlagMomentsUseUploadPostAsyncFunction (upval), MakePostMetadataFunction (upval), Capture (copy), p2 (copy), CaptureService (upval), FeedRegistrationInfo (copy), ToastTriggeredModule (upval), CapturesToastTypeModule (upval)
 			local NormalizeMomentMetadataModuleResult = NormalizeMomentMetadataModule(p1)
 			
 			if GetFFlagMomentsUseUploadPostAsyncFunction() then
-				local PostMetadata = MakePostMetadataFunction(p1, if GetFFlagMomentsUseMomentsServiceForUploadFunction() then Capture else nil)
+				local PostMetadata = MakePostMetadataFunction(p1, Capture)
 				pcall(function()
-					-- upvalues: GetFFlagMomentsUseMomentsServiceForUploadFunction (upval), p2 (upval), PostMetadata (copy), CaptureService (upval), Capture (upval)
-					if GetFFlagMomentsUseMomentsServiceForUploadFunction() then
-						(p2 or game:GetService("MomentsService")):CreatePostAsync(PostMetadata)
-						
-						return
-					else
-						CaptureService:UploadPostAsync(Capture, PostMetadata)
-					end
+					-- upvalues: p2 (upval), PostMetadata (copy)
+					(p2 or game:GetService("MomentsService")):CreatePostAsync(PostMetadata)
 				end)
 			else
 				pcall(function()

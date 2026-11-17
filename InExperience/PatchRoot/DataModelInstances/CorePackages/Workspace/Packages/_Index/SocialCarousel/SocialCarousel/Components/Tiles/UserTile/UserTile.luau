@@ -7,6 +7,9 @@ local LayoutMode = require(Parent.UserTile).LayoutMode
 local FoundationModule = require(Parent.Foundation)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local View = FoundationModule.View
+local IconButton = FoundationModule.IconButton
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local InputSize = FoundationModule.Enums.InputSize
 local ConvertToFoundationPresenceEnumFunction = SocialCommonModule.Utils.convertToFoundationPresenceEnum
 local PresenceTypes = SocialCommonModule.Enums.PresenceTypes
 local EnumsModule = require(SocialCarousel.Common.Enums)
@@ -17,32 +20,39 @@ local FFlagSocialCarouselInGameTitleMarquee = require(Parent.SharedFlags).FFlagS
 local FFlagShowRequestsInCarouselForAllUsers = require(Parent.SharedFlags).FFlagShowRequestsInCarouselForAllUsers
 local FFlagSocialCarouselBuildPresence = require(Parent.SharedFlags).FFlagSocialCarouselBuildPresence
 local FFlagSocialCarouselXSmallTileTextModule = require(SocialCarousel.Flags.FFlagSocialCarouselXSmallTileText)
+local FFlagSocialCarouselInGamePlayIcon = require(Parent.SharedFlags).FFlagSocialCarouselInGamePlayIcon
 local UseXSmallTileTypographyModule = require(SocialCarousel.Hooks.useXSmallTileTypography)
 local MarqueeScrollContext = require(SocialCarousel.Stores.MarqueeSession.MarqueeScrollContext).MarqueeScrollContext
 local MarqueeTextModule = if FFlagSocialCarouselInGameTitleMarquee then require(SocialCarousel.Components.MarqueeText.MarqueeText) else nil
 
 local function UserTileMarqueeListener(p1)
-	-- upvalues: ReactModule (copy), EnumsModule (copy)
+	-- upvalues: ReactModule (copy), EnumsModule (copy), FFlagSocialCarouselInGamePlayIcon (copy)
 	local TileRef = p1.tileRef
+	local ButtonRef = p1.buttonRef
 	local OnManualMarqueeStartFunction = p1.onManualMarqueeStart
 	local OnManualMarqueeEndFunction = p1.onManualMarqueeEnd
 	local FriendId = p1.friendId
 	local MarqueeOnFocusEnabled = p1.marqueeOnFocusEnabled
 	ReactModule.useEffect(function()
-		-- upvalues: TileRef (copy), EnumsModule (upval), FriendId (copy), OnManualMarqueeStartFunction (copy), OnManualMarqueeEndFunction (copy), MarqueeOnFocusEnabled (copy)
+		-- upvalues: TileRef (copy), EnumsModule (upval), FriendId (copy), FFlagSocialCarouselInGamePlayIcon (upval), ButtonRef (copy), OnManualMarqueeStartFunction (copy), OnManualMarqueeEndFunction (copy), MarqueeOnFocusEnabled (copy)
 		local Current = if TileRef == nil then nil else TileRef.current
 		
 		if Current == nil or not Current:IsA("GuiObject") then return end
 		local Frame = Current
 		Current:SetAttribute(EnumsModule.MarqueeFriendIdAttribute, FriendId)
+		local Current1 = if FFlagSocialCarouselInGamePlayIcon and ButtonRef ~= nil then ButtonRef.current else nil
 		
-		if not Current:IsA("GuiButton") then
-			for _, Button in Current:GetDescendants() do
-				if Button:IsA("GuiButton") then
-					Frame = Button
-					break
+		if Current1 == nil then
+			if not Current:IsA("GuiButton") then
+				for _, Button in Current:GetDescendants() do
+					if Button:IsA("GuiButton") then
+						Frame = Button
+						break
+					end
 				end
 			end
+		else
+			Frame = Current1
 		end
 		local MouseEnterConnection = Frame.MouseEnter:Connect(function()
 			-- upvalues: OnManualMarqueeStartFunction (upval), FriendId (upval)
@@ -89,20 +99,18 @@ local function UserTileMarqueeListener(p1)
 			end
 		end
 	end, {
-		TileRef,
-		OnManualMarqueeStartFunction,
-		OnManualMarqueeEndFunction,
-		FriendId,
-		MarqueeOnFocusEnabled
+		TileRef, ButtonRef, OnManualMarqueeStartFunction, OnManualMarqueeEndFunction,
+		FriendId, MarqueeOnFocusEnabled
 	})
 	
 	return nil
 end
 
 return function(p2)
-	-- upvalues: UseTokensFunction (copy), FFlagSocialCarouselXSmallTileTextModule (copy), UseXSmallTileTypographyModule (copy), FoundationModule (copy), ConvertToFoundationPresenceEnumFunction (copy), FFlagSocialCarouselInGameTitleMarquee (copy), ReactModule (copy), MarqueeScrollContext (copy), MarqueePlayStatus (copy), PresenceTypes (copy), MarqueeTextModule (ref), View (copy), UserTileMarqueeListener (copy), UserTile (copy), LayoutMode (copy), FFlagSocialCarouselBuildPresence (copy), FFlagShowRequestsInCarouselForAllUsers (copy), FFlagFriendsCarouselProfileFrameEnabledModule (copy), FFlagSocialCarouselShowPlusBadgeModule (copy)
+	-- upvalues: UseTokensFunction (copy), FFlagSocialCarouselXSmallTileTextModule (copy), UseXSmallTileTypographyModule (copy), FFlagSocialCarouselInGamePlayIcon (copy), ReactModule (copy), FoundationModule (copy), ConvertToFoundationPresenceEnumFunction (copy), FFlagSocialCarouselInGameTitleMarquee (copy), MarqueeScrollContext (copy), MarqueePlayStatus (copy), PresenceTypes (copy), MarqueeTextModule (ref), View (copy), UserTileMarqueeListener (copy), UserTile (copy), LayoutMode (copy), FFlagSocialCarouselBuildPresence (copy), FFlagShowRequestsInCarouselForAllUsers (copy), FFlagFriendsCarouselProfileFrameEnabledModule (copy), FFlagSocialCarouselShowPlusBadgeModule (copy), IconButton (copy), ButtonVariant (copy), InputSize (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseXSmallTileTypographyModuleResult = if FFlagSocialCarouselXSmallTileTextModule then UseXSmallTileTypographyModule() else nil
+	local UseRefResult = if FFlagSocialCarouselInGamePlayIcon then ReactModule.useRef(nil) else nil
 	local None = if p2.item.presence == nil then FoundationModule.Enums.UserPresence.None else FoundationModule.Enums.UserPresence[ConvertToFoundationPresenceEnumFunction(p2.item.presence.userPresenceType)]
 	local ContextualText = p2.contextualText
 	
@@ -157,6 +165,7 @@ return function(p2)
 	}, {
 		MarqueeListener = if FFlagSocialCarouselInGameTitleMarquee and p2.onManualMarqueeStart ~= nil then ReactModule.createElement(UserTileMarqueeListener, {
 			tileRef = p2.tileRef,
+			buttonRef = UseRefResult,
 			friendId = p2.item.id,
 			onManualMarqueeStart = p2.onManualMarqueeStart,
 			onManualMarqueeEnd = p2.onManualMarqueeEnd,
@@ -177,7 +186,46 @@ return function(p2)
 			titleIcon = p2.titleIcon,
 			overlayIcon = if FFlagShowRequestsInCarouselForAllUsers then p2.overlayIcon else nil,
 			includeProfileFrame = FFlagFriendsCarouselProfileFrameEnabledModule,
-			isRobloxSubscriber = if FFlagSocialCarouselShowPlusBadgeModule then p2.isRobloxSubscriber else nil
-		})
+			isRobloxSubscriber = if FFlagSocialCarouselShowPlusBadgeModule then p2.isRobloxSubscriber else nil,
+			buttonRef = UseRefResult
+		}),
+		TextTapTarget = if FFlagSocialCarouselInGamePlayIcon and p2.onTextActivated then ReactModule.createElement(View, {
+			tag = "size-full-full",
+			ZIndex = 2,
+			onActivated = p2.onTextActivated,
+			testId = `--social-social-carousel-view-tile-text-{p1.item.id}`,
+			stateLayer = {
+				affordance = FoundationModule.Enums.StateLayerAffordance.None
+			},
+			selection = { Selectable = false }
+		}) else nil,
+		AvatarTapTarget = if FFlagSocialCarouselInGamePlayIcon and p2.onTextActivated then ReactModule.createElement(View, {
+			tag = "size-full-full aspect-1-1",
+			ZIndex = 3,
+			onActivated = p2.onActivated,
+			testId = `--social-social-carousel-view-tile-avatar-{p1.item.id}`,
+			stateLayer = {
+				affordance = FoundationModule.Enums.StateLayerAffordance.None
+			},
+			selection = { Selectable = false }
+		}) else nil,
+		PlayIconOverlay = if FFlagSocialCarouselInGamePlayIcon and p2.showPlayIcon then ReactModule.createElement(View, { tag = "size-full-full aspect-1-1", ZIndex = 4 }, {
+			PlayIconBackplate = ReactModule.createElement(View, {
+				tag = "anchor-center-center size-800-800 radius-circle bg-surface-0",
+				Position = UDim2.new(0.5, 0, 1, -UseTokensResult.Gap.Small)
+			}, {
+				PlayIcon = ReactModule.createElement(IconButton, {
+					icon = "play-large",
+					isCircular = true,
+					Selectable = false,
+					variant = ButtonVariant.Standard,
+					size = InputSize.XSmall,
+					onActivated = p2.onPlayIconActivated or p2.onActivated,
+					testId = `--social-social-carousel-iconbutton-play-{p1.item.id}`,
+					AnchorPoint = Vector2.new(0.5, 0.5),
+					Position = UDim2.fromScale(0.5, 0.5)
+				})
+			})
+		}) else nil
 	})
 end

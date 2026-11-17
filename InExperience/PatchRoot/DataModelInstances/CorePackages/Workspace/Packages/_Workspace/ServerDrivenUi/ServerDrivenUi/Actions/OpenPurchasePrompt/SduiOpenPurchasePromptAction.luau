@@ -13,16 +13,16 @@ local ProductPurchaseSurface = PurchasePromptLiteModule.Enums.ProductPurchaseSur
 local ProductKind = PurchasePromptLiteModule.Enums.ProductKind
 local SduiReportGamePlayIntentFunction = require(Parent.SduiSharedContent).sduiReportGamePlayIntent
 local SharedFlagsModule = require(Parent.SharedFlags)
-local FFlagSduiDevStoreSeeAllSupport = SharedFlagsModule.FFlagSduiDevStoreSeeAllSupport
 local FFlagEnableHomeGameItemOwnershipUpdate = SharedFlagsModule.FFlagEnableHomeGameItemOwnershipUpdate
 local FFlagEnableSearchGameItemOwnershipUpdate = SharedFlagsModule.FFlagEnableSearchGameItemOwnershipUpdate
+local FFlagAppIaHomeCampaignSubTab = SharedFlagsModule.FFlagAppIaHomeCampaignSubTab
+local FFlagEnableCampaignGameItemPurchaseLocation = SharedFlagsModule.FFlagEnableCampaignGameItemPurchaseLocation
 local FFlagEnableEdpPreviewPurchaseSurface = SharedFlagsModule.FFlagEnableEdpPreviewPurchaseSurface
 local FFlagEnableLaunchAfterPurchase = SharedFlagsModule.FFlagEnableLaunchAfterPurchase
 local ExperienceService = game:GetService("ExperienceService")
 local Players = game:GetService("Players")
 local HttpService = game:GetService("HttpService")
 local EnableJoinAfterBuyFromEDP = game:DefineFastFlag("EnableJoinAfterBuyFromEDP", false)
-local EnablePurchasePayloadForSduiPurchase = game:DefineFastFlag("EnablePurchasePayloadForSduiPurchase", false)
 
 local function mapPriceDiscountDetails(PriceDiscountDetails)
 	if PriceDiscountDetails == nil or #PriceDiscountDetails == 0 then
@@ -62,14 +62,14 @@ local function _(p1, p2)
 end
 
 local function buildOnPurchaseSuccess(EDP, Kind, Id, RootPlaceId)
-	-- upvalues: ProductKind (copy), ProductPurchaseSurface (copy), FFlagEnableHomeGameItemOwnershipUpdate (copy), FFlagEnableSearchGameItemOwnershipUpdate (copy), FFlagEnableEdpPreviewPurchaseSurface (copy), DataHydrationModule (copy), FFlagSduiDevStoreSeeAllSupport (copy), Players (copy)
-	return if Id then if Kind == ProductKind.Gamepass and (EDP == ProductPurchaseSurface.EDP or FFlagEnableHomeGameItemOwnershipUpdate and EDP == ProductPurchaseSurface.HomePageGameItemShop or FFlagEnableSearchGameItemOwnershipUpdate and EDP == ProductPurchaseSurface.SearchPageGameItemShop or FFlagEnableEdpPreviewPurchaseSurface and EDP == ProductPurchaseSurface.EDPPreview) then function()
+	-- upvalues: ProductKind (copy), ProductPurchaseSurface (copy), FFlagEnableHomeGameItemOwnershipUpdate (copy), FFlagEnableSearchGameItemOwnershipUpdate (copy), FFlagAppIaHomeCampaignSubTab (copy), FFlagEnableEdpPreviewPurchaseSurface (copy), DataHydrationModule (copy), Players (copy)
+	return if Id then if Kind == ProductKind.Gamepass and (EDP == ProductPurchaseSurface.EDP or FFlagEnableHomeGameItemOwnershipUpdate and EDP == ProductPurchaseSurface.HomePageGameItemShop or FFlagEnableSearchGameItemOwnershipUpdate and EDP == ProductPurchaseSurface.SearchPageGameItemShop or FFlagAppIaHomeCampaignSubTab and EDP == ProductPurchaseSurface.CampaignPageGameItemShop or FFlagEnableEdpPreviewPurchaseSurface and EDP == ProductPurchaseSurface.EDPPreview) then function()
 		-- upvalues: DataHydrationModule (upval), Id (copy)
 		DataHydrationModule.Game.getGamePassStore(false).updateGamePassInfo(Id, { isOwned = true })
-	end elseif FFlagSduiDevStoreSeeAllSupport and Kind == ProductKind.DeveloperSubscription and EDP == ProductPurchaseSurface.EDP then function()
+	end elseif Kind == ProductKind.DeveloperSubscription and EDP == ProductPurchaseSurface.EDP then function()
 		-- upvalues: DataHydrationModule (upval), Id (copy)
 		DataHydrationModule.Game.getGameSubscriptionStore(false).updateGameSubscriptionInfo(Id, { isSubscribed = true })
-	end elseif Kind == ProductKind.Product and RootPlaceId and (FFlagSduiDevStoreSeeAllSupport and EDP == ProductPurchaseSurface.EDP or FFlagEnableHomeGameItemOwnershipUpdate and EDP == ProductPurchaseSurface.HomePageGameItemShop or FFlagEnableSearchGameItemOwnershipUpdate and EDP == ProductPurchaseSurface.SearchPageGameItemShop or FFlagSduiDevStoreSeeAllSupport and FFlagEnableEdpPreviewPurchaseSurface and EDP == ProductPurchaseSurface.EDPPreview) then function()
+	end elseif Kind == ProductKind.Product and RootPlaceId and (EDP == ProductPurchaseSurface.EDP or FFlagEnableHomeGameItemOwnershipUpdate and EDP == ProductPurchaseSurface.HomePageGameItemShop or FFlagEnableSearchGameItemOwnershipUpdate and EDP == ProductPurchaseSurface.SearchPageGameItemShop or FFlagAppIaHomeCampaignSubTab and EDP == ProductPurchaseSurface.CampaignPageGameItemShop or FFlagEnableEdpPreviewPurchaseSurface and EDP == ProductPurchaseSurface.EDPPreview) then function()
 		-- upvalues: Players (upval), DataHydrationModule (upval), RootPlaceId (copy)
 		local LocalPlayer = Players.LocalPlayer
 		local UserId = LocalPlayer and LocalPlayer.UserId
@@ -160,7 +160,8 @@ end
 local config = {
 	[ProductPurchaseSurface.HomePageGameItemShop] = "homePageGameItemShop",
 	[ProductPurchaseSurface.SearchPageGameItemShop] = if FFlagEnableSearchGameItemOwnershipUpdate then "searchPageGameItemShop" else nil,
-	[ProductPurchaseSurface.EDPPreview] = if FFlagEnableEdpPreviewPurchaseSurface then "experienceDetailPagePreview" else nil
+	[ProductPurchaseSurface.EDPPreview] = if FFlagEnableEdpPreviewPurchaseSurface then "experienceDetailPagePreview" else nil,
+	[ProductPurchaseSurface.CampaignPageGameItemShop] = if FFlagEnableCampaignGameItemPurchaseLocation then "campaignPageGameItemShop" else nil
 }
 
 local function buildPurchasePayload(LocationType)
@@ -174,7 +175,7 @@ local function buildPurchasePayload(LocationType)
 end
 
 return function(p1, AnalyticsContext, SduiContext)
-	-- upvalues: SduiErrorType (copy), SduiActionType (copy), normalizeProductPayload (copy), EnablePurchasePayloadForSduiPurchase (copy), config (copy), buildPurchasePayload (copy), PurchasePromptLiteModule (copy), TimeToInteractiveTracker (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), buildOnPurchaseSuccess (copy), PromiseModule (copy), mapPriceDiscountDetails (copy), CloseCentralOverlayFunction (copy), EnableJoinAfterBuyFromEDP (copy), ProductPurchaseSurface (copy), ExperienceService (copy), FFlagEnableLaunchAfterPurchase (copy), SduiCoreSystemModule (copy), SduiReportGamePlayIntentFunction (copy)
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), normalizeProductPayload (copy), config (copy), buildPurchasePayload (copy), PurchasePromptLiteModule (copy), TimeToInteractiveTracker (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), buildOnPurchaseSuccess (copy), PromiseModule (copy), mapPriceDiscountDetails (copy), CloseCentralOverlayFunction (copy), EnableJoinAfterBuyFromEDP (copy), ProductPurchaseSurface (copy), ExperienceService (copy), FFlagEnableLaunchAfterPurchase (copy), SduiCoreSystemModule (copy), SduiReportGamePlayIntentFunction (copy)
 	local Logger = SduiContext.dependencies.logger
 	local AppPage = SduiContext.appPage
 	local DispatchFunction: (any) -> () = SduiContext.dependencies.dispatch
@@ -207,7 +208,7 @@ return function(p1, AnalyticsContext, SduiContext)
 	normalizeProductPayload(ProductPayload, Kind)
 	local Surface = PurchaseAnalyticsMetadata and PurchaseAnalyticsMetadata.surface
 	
-	if EnablePurchasePayloadForSduiPurchase and Surface ~= nil then
+	if Surface ~= nil then
 		local Entry = config[Surface]
 		
 		if Entry ~= nil then

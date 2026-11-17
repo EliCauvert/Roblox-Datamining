@@ -1,8 +1,11 @@
-﻿local TModule = require(script:FindFirstAncestor("SduiCoreSystem").Parent.t)
+﻿local Parent = script:FindFirstAncestor("SduiCoreSystem").Parent
+local TModule = require(Parent.t)
+local FFlagSduiConditionalPropsAppPolicyCondition = require(Parent.SharedFlags).FFlagSduiConditionalPropsAppPolicyCondition
 local UnionResult = TModule.union(TModule.literal("Touch"), TModule.literal("Pointer"), TModule.literal("Directional"))
 
 return {
 	SduiConditionKey = {
+		appPolicy = "appPolicy",
 		friendInGame = "friendInGame",
 		imageQualityLevel = "imageQualityLevel",
 		isPortrait = "isPortrait",
@@ -26,6 +29,7 @@ return {
 	ConditionalPropsInterface = {
 		propOverrides = TModule.table,
 		conditions = TModule.optional((TModule.interface({
+			appPolicy = if FFlagSduiConditionalPropsAppPolicyCondition then TModule.optional(TModule.array(TModule.string)) else nil,
 			imageQualityLevel = TModule.optional(TModule.string),
 			isPortrait = TModule.optional(TModule.boolean),
 			isSpatial = TModule.optional(TModule.boolean),

@@ -212,5 +212,13 @@ return {
 			
 			return
 		end
+	end,
+	reportAgreementIdsMissing = function(Flow, Surface)
+		-- upvalues: AccountUpgradeFlowModule (copy), TelemetryConfigs (copy), Default (copy)
+		if Flow == AccountUpgradeFlowModule.OAuth then
+			Default:logRobloxTelemetryCounter(TelemetryConfigs.AccountUpgradeAgreementIdsMissingConfig, 1, { errorCode = nil, flow = Flow, surface = Surface })
+			
+			return
+		end
 	end
 }

@@ -607,6 +607,17 @@ CommonUI.Messages.SystemMessage.IosDeprecationBodyPhase3,لم تعد منصّة 
 CommonUI.Messages.SystemMessage.PS4onPS5DeprecationBody,يُرجى تثبيت الإصدار الجديد من منصّة Roblox وتشغيله على PlayStation®5. لن يكون إصدار منصّة Roblox على PlayStation®4 متاحًا للاعبين على PlayStation®5 اعتبارًا من {date}.
 CommonUI.Messages.SystemMessage.PS4onPS5DeprecationTitle,منصّة Roblox متاحة الآن على PlayStation®5
 CommonUI.Messages.SystemMessage.PS4onPS5HardDeprecationBody,لم يعد إصدار PlayStation®4 من Roblox مدعومًا على جهاز PlayStation®5. لمواصلة اللعب، يرجى تنزيل تطبيق Roblox الجديد المخصص لجهاز PlayStation®5.
+CommonUI.UserAgreements.Popup.Agreement.Optional,اختياري
+CommonUI.UserAgreements.Popup.Agreement.OptionalPersonalInformationPolicy,جمع ومعالجة المعلومات الشخصية الاختيارية
+CommonUI.UserAgreements.Popup.Agreement.PersonalInformationPolicy,جمع ومعالجة المعلومات الشخصية المطلوبة
+CommonUI.UserAgreements.Popup.Agreement.PrivacyPolicy,
+CommonUI.UserAgreements.Popup.Agreement.Required,مطلوب
+CommonUI.UserAgreements.Popup.Agreement.StudioTermsForVNGSKU,شروط Studio. الشروط التي بينك وبين شركة Roblox ستطبق عند إنشاء أو تحميل المحتوى باستخدام Roblox Studio، وهي خدمة منفصلة مقدمة لك عبر شركة Roblox
+CommonUI.UserAgreements.Popup.Agreement.TermsOfService,
+CommonUI.UserAgreements.Popup.Agreement.ThirdPartyPersonalInformationPolicy,توفير الطرف الثالث للمعلومات الشخصية
+CommonUI.UserAgreements.Popup.Agreement.TransferPersonalInformationPolicy,نقل المعلومات الشخصية إلى الخارج
+CommonUI.UserAgreements.Popup.DefaultAgreementTitle,الاتفاقية المحدثة
+CommonUI.UserAgreements.Popup.TitleOnWebview,
 CoreScripts.Ads.Action.Close,
 CoreScripts.Ads.ImmersiveBrandedAds.WhyThisAd,هذا الإعلان غير المخصص يظهر للمستخدمين في هذه التجربة. المُعلِن هو {AdvertiserName} وقد دفع مقابل هذا الإعلان.
 CoreScripts.Ads.Label.IllegalContentReportingLink,الإبلاغ عن محتوى غير قانوني أو محتوى ضار بالأطفال
@@ -964,6 +975,9 @@ CoreScripts.InGameMenu.ExitModal.Subtitle,اكتشف تجارب جديدة دو�
 CoreScripts.InGameMenu.ExitModal.Title,جديد على تطبيق Roblox
 CoreScripts.InGameMenu.GameSettings.AIRephraseMessages,إعادة صياغة الرسائل
 CoreScripts.InGameMenu.GameSettings.AIRephraseMessagesDescription,قد تُعيد منصّة Roblox صياغة الرسائل التي تنتهك قواعد السلامة.
+CoreScripts.InGameMenu.GameSettings.AccountHeader,الحساب
+CoreScripts.InGameMenu.GameSettings.AccountManagement,إدارة الحساب
+CoreScripts.InGameMenu.GameSettings.AccountManagementDescription,راجع حسابك أو أدِره أو احذفه.
 CoreScripts.InGameMenu.GameSettings.AdvancedSettingsTitle,الإعدادات المفضلة
 CoreScripts.InGameMenu.GameSettings.AudioHeader,الصوت
 CoreScripts.InGameMenu.GameSettings.AutoGraphicsQuality,وضع الجودة التلقائية
@@ -1048,7 +1062,7 @@ CoreScripts.InGameMenu.InviteFriends.Loading,تحميل
 CoreScripts.InGameMenu.InviteFriends.MakeFriendsNow,إنشاء صداقات
 CoreScripts.InGameMenu.InviteFriends.NoFriends,ليس لديك أصدقاء بعد. انتقل إلى قائمة الأشخاص لمعاينة طلبات الصداقة.
 CoreScripts.InGameMenu.InviteFriends.Search,
-CoreScripts.InGameMenu.Label.TouchpadButton,زر لوحة اللمس
+CoreScripts.InGameMenu.Label.TouchpadButton,زر لوحة لمس
 CoreScripts.InGameMenu.Label.ViewButton,عرض الزر
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.LeaveGame,
@@ -1257,6 +1271,7 @@ CoreScripts.TextChat.Description.RobloxSummarizesMessagesFromAllPlayers,تلخّ
 CoreScripts.TextChat.Description.TurnOnChatInSettings,يمكنك تشغيل الدردشة من خلال الخصوصية>إعدادات التواصل.
 CoreScripts.TextChat.Description.UnlockChatPrivacyCommunications,يمكنك إلغاء قفل الدردشة من خلال إجراء تقدير للعمر في الخصوصية>إعدادات التواصل.
 CoreScripts.TextChat.Description.UnlockChatWithAnAgeCheck,إلغاء قفل خاصية الدردشة من خلال إجراء تقدير للعمر.
+CoreScripts.TextChat.Description.UseQuickWordsChatIsntAvailableInYourRegion,استخدم العبارات السريعة لتنسيق اللعب. الدردشة غير متاحة في منطقتك.
 CoreScripts.TextChat.Emote.Error.DoesNotExist,Emote غير موجود.
 CoreScripts.TextChat.Emote.Error.NotEnabled,لا يمكنك استخدام Emote هنا.
 CoreScripts.TextChat.Emote.Error.NotEquipped,لست مجهزًا بتلك Emote.
@@ -1967,6 +1982,7 @@ Feature.Avatar.Title.ClearAnimationsConfirmation,هل تريد مسح كل ال�
 Feature.Avatar.Title.ClearBodyConfirmation,هل تريد مسح الجسد؟
 Feature.Avatar.Title.ClearClothesConfirmation,هل تريد مسح كل الثياب؟
 Feature.Avatar.Title.ClearMakeupConfirmation,هل تريد مسح كل المكياج؟
+Feature.Avatar.Title.CreateMoment,إنشاء لحظة
 Feature.Avatar.Title.CreateSet,
 Feature.Avatar.Title.DeleteSet,
 Feature.Avatar.Title.DuplicateMakeupLook,تكرار الإطلالة
@@ -2123,6 +2139,7 @@ Feature.Build.Action.UpdateRating,تحديث التصنيف
 Feature.Build.Action.UpdateWithChanges,التحديث بالتغييرات
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,عرض الاستخدام
+Feature.Build.Analytics.Action.AddFunnelTracking,إضافة تتبّع مسارات التحويل
 Feature.Build.Analytics.AnalyzeChatPrompt,تحليل {analyzeName} خلال {days} من الأيام الماضية. ما سبب أهمية هذا المقياس وكيف يمكنني تحسينه؟
 Feature.Build.Analytics.AnalyzeName.Arppu,متوسط العائد لكل مستخدم يقوم بالدفع
 Feature.Build.Analytics.AnalyzeName.D1Retention,الاحتفاظ في اليوم الأول
@@ -2138,6 +2155,7 @@ Feature.Build.Analytics.Description.PlaythroughRate,"""معدل إكمال جل�
 Feature.Build.Analytics.Description.TotalPlaytime,"""إجمالي مدة اللعب"" هو مجموع الوقت الذي قضاه جميع اللاعبين في تجربتك خلال الفترة. وعادةً ما يشير ارتفاع مدة اللعب إلى جلسات أكثر تفاعلًا."
 Feature.Build.Analytics.DurationHours,{number} من الساعات
 Feature.Build.Analytics.DurationMinutes,{number} من الدقائق
+Feature.Build.Analytics.FunnelTrackingPrompt,راجِع مسارات التحويل في تحليلاتي وأضِف إليها أدوات التتبّع
 Feature.Build.Analytics.Goal.Action.CreateAd,
 Feature.Build.Analytics.Goal.Action.SellItems,بيع العناصر
 Feature.Build.Analytics.Goal.Action.ShareWithFriends,مشاركة مع الأصدقاء
@@ -2533,6 +2551,7 @@ Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,يمكنك توسيع نطاق أهلية جمهورك في مركز المصمم
 Feature.Build.Message.ExperiencesLoadFailed,تعذَّر تحميل التجارب
 Feature.Build.Message.FailedTitle,تعذَّرت عملية {TITLE}
+Feature.Build.Message.FailedWithTitle,تعذّر: {TITLE}
 Feature.Build.Message.FinishedTitle,انتهت عملية {TITLE}
 Feature.Build.Message.FriendsLoadFailed,تعذَّر تحميل الأصدقاء. حاول مرة أخرى.
 Feature.Build.Message.GameNotCreated,لم يتم إنشاء لعبتك. حاوِل مرة أخرى.
@@ -2575,6 +2594,8 @@ Feature.Build.Message.SaveChangesFailed,تعذَّر حفظ التغييرات. 
 Feature.Build.Message.ShareExperience,مشاركة {EXPERIENCE_NAME}
 Feature.Build.Message.ShareLinkFailed,تعذَّر إنشاء رابط المشاركة. حاول مرة أخرى.
 Feature.Build.Message.SignedOut,لقد تم تسجيل خروجك. سجّل الدخول وحاول مرة أخرى.
+Feature.Build.Message.StepForMinutesSeconds,{TITLE} لمدة {MINUTES} من الدقائق و{REM_SECONDS} من الثواني
+Feature.Build.Message.StepForSeconds,{TITLE} لمدة {SECONDS} من الثواني
 Feature.Build.Message.TasksCompleted,تم إكمال {NUM_COMPLETED_TASKS} من المهام
 Feature.Build.Message.ThinkingSeconds,استغرق التفكير {SECONDS} من الثواني
 Feature.Build.Message.TrustedFriendsRequiredForPlaytest,كن صديقًا موثوقًا به لهذا المصمم لتتمكن من تشغيل لعبته.
@@ -3495,6 +3516,7 @@ Feature.Friends.Label.FollowsYou,يتابعك
 Feature.Friends.Label.Frequent,لعبتما معًا
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,دعاك لتكون صديقهم على Roblox
+Feature.Friends.Label.FriendOfUser,صديق {displayName}
 Feature.Friends.Label.FriendOwns,يملكها صديق واحد
 Feature.Friends.Label.FriendRecentlyPlayed,<b>صديق واحد</b> لعبها مؤخرًا
 Feature.Friends.Label.FriendRequest,
@@ -3559,6 +3581,7 @@ Feature.Friends.TFEducation.Modal.TextOutro.EighteenPlus,عند إضافة مس�
 Feature.Friends.Text.IsPlaying,يلعب الآن
 Feature.Friends.Text.NoConnections,لم تضف أي جهات اتصال حتى الآن. للبدء، ابحث عن جهات الاتصال ثم أضفها.
 Feature.Friends.Text.NoFriends,لم تضف أي أصدقاء بعد. للبدء، ابحث عن أصدقائك على Roblox ثم أضفهم.
+Feature.Friends.Title.AddMoreTrustedFriends,إضافة المزيد من الأصدقاء الموثوق بهم
 Feature.Friends.Title.TrustedFriendsExpiredLink,انتهت صلاحية الرابط
 Feature.Friends.Title.TrustedFriendsInvalidLink,الرابط غير صالح
 Feature.Friends.TrustedConnection.Label.Trusted,
@@ -3661,11 +3684,12 @@ Feature.Groups.Description.RequiresAccountTenureTooltipOneMonth,يجب أن يك
 Feature.Groups.Description.RequiresAccountTenureTooltipOneWeek,يجب أن يكون حسابك نشطًا لمدة 7 أيام قبل أن تتمكن من الانضمام إلى هذا المجتمع.
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeDays,يجب أن يكون حسابك نشطًا لمدة 3 أيام قبل أن تتمكن من الانضمام إلى هذا المجتمع.
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeMonths,يجب أن يكون حسابك نشطًا لمدة 90 يومًا قبل أن تتمكن من الانضمام إلى هذا المجتمع.
+Feature.Groups.Header.UppercaseMyGroups,مجتمعاتي
 Feature.Groups.Heading.Community,المجتمع
 Feature.Groups.Heading.Followers,
 Feature.Groups.Heading.Groups,
 Feature.Groups.Heading.Members,
-Feature.Groups.Heading.MyGroups,مجتمعاتي
+Feature.Groups.Heading.MyGroups,
 Feature.Groups.Heading.Primary,اساسي
 Feature.Groups.Heading.SocialLinksNew,روابط التواصل الاجتماعي
 Feature.Groups.Heading.SocialMedia,وسائل التواصل الاجتماعي
@@ -3853,7 +3877,6 @@ Feature.Moments.Action.GenerateTextFeedbackNotHelpful,غير مفيد
 Feature.Moments.Action.GenerateTextFeedbackPolicy,غير لائق أو مخالف
 Feature.Moments.Action.Hide,إخفاء التفاصيل
 Feature.Moments.Action.HowToCapture,عرض كيفية الالتقاط
-Feature.Moments.Action.Join,انضمام
 Feature.Moments.Action.KeepEditing,متابعة التحرير
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,تصغير
@@ -4315,7 +4338,7 @@ Feature.ReportAbuse.Label.FinishChatReport,إكمال تقرير الإبلاغ 
 Feature.ReportAbuse.Label.GenericReportIllegalContentMessage,
 Feature.ReportAbuse.Label.HighlightProblem,حدد المشكلة برسم دوائر
 Feature.ReportAbuse.Label.HighlightProblemPrecise,حدِّد المشكلة
-Feature.ReportAbuse.Label.Optional,اختياري
+Feature.ReportAbuse.Label.Optional,
 Feature.ReportAbuse.Label.Person,شخص
 Feature.ReportAbuse.Label.PleaseSelectOne,الرجاء اختيار واحد.
 Feature.ReportAbuse.Label.Report,
@@ -4431,6 +4454,7 @@ Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,{boldStart}{trialDuration}
 Feature.RobloxSubscription.Label.month,
 Feature.RobloxSubscription.Label.months,أشهر
 Feature.RobloxSubscription.Message.AlreadySubscribed,أنت مشترك بالفعل في Plus. هذا الرابط مخصص للأعضاء الجدد. شارك رابطك الخاص لدعوة أصدقائك والحصول على المكافآت.
+Feature.RobloxSubscription.Notification.SpawnEffectFTUX,لقد ظهرتَ للتو لأول مرة باستخدام تأثير نقطة العودة لديك.
 Feature.RobloxSubscription.Title.AgeCheckTrial,احصل على أسبوع مجاني من Plus
 Feature.RobloxSubscription.Title.AlreadySubscribed,خبر سار
 Feature.RobloxSubscription.Title.GenericError,
@@ -4644,7 +4668,7 @@ Feature.SettingsHub.Video.SystemDefault,النظام الافتراضي
 Feature.SettingsHub.Video.VideoCamera,كاميرا الفيديو
 Feature.SettingsHub.VoiceUserAgency.JoinUnmuted.Description,
 Feature.SocialContextToast.Action.InviteBack,دعوته مجددًا
-Feature.SocialContextToast.Action.JoinFriend,
+Feature.SocialContextToast.Action.JoinFriend,انضمام
 Feature.SocialContextToast.Message.FollowedFriendInOtherUniverse,{FRIEND_NAME} غادر وانضم إلى {EXPERIENCE_NAME}
 Feature.SocialContextToast.Message.FollowedFriendNotInGame,{FRIEND_NAME} غادر هذه التجربة
 Feature.SocialContextToast.Message.FriendInNonRootPlace,انتقل صديقك {FRIEND_NAME} إلى موقع مقيد ضمن هذه التجربة
@@ -5033,17 +5057,6 @@ IAPExperience.Loading.Text.PurchasingItem,جاري شراء العنصر...
 IAPExperience.Loading.Text.PurchasingRobux,شراء Robux...
 IAPExperience.Loading.Text.WaitingForPurchase,في انتظار الشراء...
 IAPExperience.Loading.Text.WaitingForRobux,في انتظار إضافة Robux...
-IAPExperience.PremiumUpsell.Action.Subscribe,
-IAPExperience.PremiumUpsell.Body.RobuxDiscount,10% إضافية عند شراء Robux
-IAPExperience.PremiumUpsell.Label.AvatarShopBenefits,الوصول إلى عناصر حصرية مع حسومات في متجر الأفاتار
-IAPExperience.PremiumUpsell.Label.Disclosure,اشترك في <b>{currencySymbol}{price}/الشهر. إلغاء في أي وقت.</b> تنطبق شروط الاستخدام وسياسة الخصوصية.
-IAPExperience.PremiumUpsell.Label.PremiumBenefitListDesc,سيمنحك Roblox Premium:
-IAPExperience.PremiumUpsell.Label.PremiumOnlyBenefits,الحصول على منافع خاصة بمشتركي Premium
-IAPExperience.PremiumUpsell.Label.PremiumPolicy,يتجدد شهريًا. يمكنك إلغاؤه في أي وقت.
-IAPExperience.PremiumUpsell.Label.PremiumPrice,<b>{currencySymbol}{price}</b>/الشهر
-IAPExperience.PremiumUpsell.Label.RobloxPremium,Roblox Premium
-IAPExperience.PremiumUpsell.Label.RobuxPerMonth,{robux} شهريًا
-IAPExperience.PremiumUpsell.Label.ShortDisclosure,تنطبق شروط استخدام Roblox وسياسة الخصوصية.
 IAPExperience.PurchaseError.AlreadyPremium,يبدو أن المطور يحاول أن يعرض عليك شراء Roblox Premium إلا أنك حاليًا مشترك في Premium!
 IAPExperience.PurchaseError.Text.AlreadyOwn,أنت بالفعل تملك هذا العنصر. لم يتم فرض رسوم على حسابك.
 IAPExperience.PurchaseError.Text.AlreadySubscribed,يمكنك إدارة اشتراكك من الإعدادات > الاشتراكات.

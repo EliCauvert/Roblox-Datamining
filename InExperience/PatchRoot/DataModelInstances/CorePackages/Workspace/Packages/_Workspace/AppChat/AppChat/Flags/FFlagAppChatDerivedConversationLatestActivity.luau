@@ -1,3 +1,1 @@
-﻿local FFlagAppChatSignalsMessageStoreModule = require(script:FindFirstAncestor("AppChat").Flags.FFlagAppChatSignalsMessageStore)
-
-return game:DefineFastFlag("AppChatDerivedConversationLatestActivity", false) and FFlagAppChatSignalsMessageStoreModule
+﻿return game:DefineFastFlag("AppChatDerivedConversationLatestActivity", false)

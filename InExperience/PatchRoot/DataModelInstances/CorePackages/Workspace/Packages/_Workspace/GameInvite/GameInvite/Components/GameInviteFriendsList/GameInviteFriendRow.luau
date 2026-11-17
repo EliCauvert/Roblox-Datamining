@@ -8,6 +8,7 @@ local UserModel = require(Parent.UserLib).Models.UserModel
 local GameInviteInviteButtonModule = require(script.Parent.GameInviteInviteButton)
 local FriendMetadataLineModule = require(script.Parent.friendMetadataLine)
 local FFlagGameInviteInExpLivePresenceModule = require(GameInvite.Flags.FFlagGameInviteInExpLivePresence)
+local IsGameInviteJoinForPioneerEnabledFunction = require(Parent.NotificationsCommon).isGameInviteJoinForPioneerEnabled
 local config = { skipFetch = true }
 local config1 = {
 	[UserModel.PresenceType.ONLINE] = "Online",
@@ -17,18 +18,18 @@ local config1 = {
 }
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), FFlagGameInviteInExpLivePresenceModule (copy), FriendMetadataLineModule (copy), config1 (copy), UseGetPresenceByUserIdFunction (copy), config (copy), ReactModule (copy), GameInviteInviteButtonModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), FFlagGameInviteInExpLivePresenceModule (copy), IsGameInviteJoinForPioneerEnabledFunction (copy), FriendMetadataLineModule (copy), config1 (copy), UseGetPresenceByUserIdFunction (copy), config (copy), ReactModule (copy), GameInviteInviteButtonModule (copy)
 	local Friend = p1.friend
 	local Id = Friend.id
 	local RowNumber = p1.rowNumber
 	local UseLocalizationResult = UseLocalizationFunction({
 		inStudio = "Common.Presence.Label.RobloxStudio",
-		online = if FFlagGameInviteInExpLivePresenceModule then "Common.Presence.Label.Online" else nil
+		online = if FFlagGameInviteInExpLivePresenceModule or IsGameInviteJoinForPioneerEnabledFunction() then "Common.Presence.Label.Online" else nil
 	})
 	local ContextText = FriendMetadataLineModule.getContextText(Friend, UseLocalizationResult)
 	local LivePresenceType = nil
 	
-	if FFlagGameInviteInExpLivePresenceModule then
+	if FFlagGameInviteInExpLivePresenceModule or IsGameInviteJoinForPioneerEnabledFunction() then
 		LivePresenceType = config1[Friend.presence]
 		local LastLocation = Friend.lastLocation
 		local UseGetPresenceByUserIdResult = UseGetPresenceByUserIdFunction(Id, config)
@@ -44,7 +45,7 @@ return function(p1)
 			-- upvalues: ContextText (ref)
 			return if ContextText == nil then nil else { text = ContextText }
 		end, { ContextText }),
-		presence = if FFlagGameInviteInExpLivePresenceModule then LivePresenceType else config1[Friend.presence],
+		presence = if FFlagGameInviteInExpLivePresenceModule or IsGameInviteJoinForPioneerEnabledFunction() then LivePresenceType else config1[Friend.presence],
 		trailingContent = ReactModule.useMemo(function()
 			-- upvalues: ReactModule (upval), GameInviteInviteButtonModule (upval), Id (copy), RowNumber (copy)
 			return ReactModule.createElement(GameInviteInviteButtonModule, { userId = Id, rowNumber = RowNumber })

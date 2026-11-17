@@ -1,4 +1,5 @@
-﻿local Parent = script:FindFirstAncestor("Moments").Parent
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
 local FoundationModule = require(Parent.Foundation)
@@ -9,10 +10,12 @@ local ConstantsModule = require(script.Parent.Constants)
 local _ = require(script.Parent.Types)
 local SnapMathModule = require(script.Parent.snapMath)
 local PagerNavigationModule = require(script.Parent.pagerNavigation)
+local CreateDragTravelTrackerModule = require(script.Parent.createDragTravelTracker)
+local FFlagMomentsHideNavBarOnScrollModule = require(Moments.Flags.FFlagMomentsHideNavBarOnScroll)
 local UsePreferencesFunction = FoundationModule.Hooks.usePreferences
 
 return function(p1)
-	-- upvalues: ReactModule (copy), UsePreferencesFunction (copy), SignalsModule (copy), RunService (copy), ConstantsModule (copy), SnapMathModule (copy), PagerNavigationModule (copy), UserInputService (copy), SignalsReactModule (copy)
+	-- upvalues: ReactModule (copy), UsePreferencesFunction (copy), SignalsModule (copy), FFlagMomentsHideNavBarOnScrollModule (copy), CreateDragTravelTrackerModule (copy), RunService (copy), ConstantsModule (copy), SnapMathModule (copy), PagerNavigationModule (copy), UserInputService (copy), SignalsReactModule (copy)
 	local ScrollingFrame = p1.scrollingFrame
 	local Store = p1.store
 	local ItemHeight = p1.itemHeight
@@ -62,6 +65,7 @@ return function(p1)
 		
 		return { get = Idle, set = Idle2 }
 	end, {})
+	local UseMemoResult2 = if FFlagMomentsHideNavBarOnScrollModule then ReactModule.useMemo(CreateDragTravelTrackerModule, {}) else nil
 	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseMemoResult1 (copy), UseRefResult5 (copy)
 		if UseMemoResult1.get(false) == p2 then return end
@@ -321,7 +325,7 @@ return function(p1)
 		end
 	end, { ScrollingFrame, Active, UseResult1, UseResult5 })
 	ReactModule.useEffect(function()
-		-- upvalues: ScrollingFrame (copy), Active (copy), PagerNavigationModule (upval), NativeScrollEnabled (copy), UseRefResult13 (copy), UserInputService (upval), UseRefResult12 (copy), UseRefResult14 (copy), UseResult3 (copy), UseResult (copy), ConstantsModule (upval), UseResult6 (copy), UseRefResult15 (copy), UseResult5 (copy), UseRefResult (copy)
+		-- upvalues: ScrollingFrame (copy), Active (copy), PagerNavigationModule (upval), NativeScrollEnabled (copy), UseRefResult13 (copy), UserInputService (upval), UseRefResult12 (copy), UseRefResult14 (copy), UseResult3 (copy), UseResult (copy), UseMemoResult2 (ref), ConstantsModule (upval), UseResult6 (copy), UseRefResult15 (copy), UseResult5 (copy), UseRefResult (copy)
 		if not ScrollingFrame or not Active then return end
 		local function _(Input): boolean
 			return Input.UserInputType == Enum.UserInputType.Touch or Input.UserInputType == Enum.UserInputType.MouseButton1
@@ -340,7 +344,7 @@ return function(p1)
 		end
 		
 		local InputBeganConnection = UserInputService.InputBegan:Connect(function(Input)
-			-- upvalues: ShouldTrackDrag (copy), UseRefResult13 (upval), ScrollingFrame (copy), UseRefResult12 (upval), UseRefResult14 (upval), UseResult3 (upval), UseResult (upval)
+			-- upvalues: ShouldTrackDrag (copy), UseRefResult13 (upval), ScrollingFrame (copy), UseRefResult12 (upval), UseRefResult14 (upval), UseResult3 (upval), UseResult (upval), UseMemoResult2 (upval)
 			if ShouldTrackDrag and ((Input.UserInputType == Enum.UserInputType.Touch or Input.UserInputType == Enum.UserInputType.MouseButton1) and not UseRefResult13.current[Input]) then
 				local Position = Input.Position
 				local AbsolutePosition = ScrollingFrame.AbsolutePosition
@@ -354,16 +358,24 @@ return function(p1)
 						UseRefResult14.current = ScrollingFrame.CanvasPosition.Y
 						UseResult3()
 						UseResult("Dragging")
+						
+						if UseMemoResult2 ~= nil then
+							UseMemoResult2.began(Input)
+						end
 					end
 					return
 				end
 			end
 		end)
+		local TouchMovedConnection = if UseMemoResult2 == nil then nil else UserInputService.TouchMoved:Connect(UseMemoResult2.moved)
 		local InputEndedConnection = UserInputService.InputEnded:Connect(function(Input)
-			-- upvalues: UseRefResult13 (upval), UseRefResult12 (upval), ScrollingFrame (copy), UseRefResult14 (upval), ConstantsModule (upval), UseResult (upval), UseResult6 (upval)
+			-- upvalues: UseRefResult13 (upval), UseMemoResult2 (upval), UseRefResult12 (upval), ScrollingFrame (copy), UseRefResult14 (upval), ConstantsModule (upval), UseResult (upval), UseResult6 (upval)
 			if not UseRefResult13.current[Input] then return end
 			UseRefResult13.current[Input] = nil
 			
+			if UseMemoResult2 ~= nil then
+				UseMemoResult2.ended(Input)
+			end
 			if next(UseRefResult13.current) ~= nil then return end
 			UseRefResult12.current = false
 			local Y: number = ScrollingFrame:GetScrollVelocity().Y
@@ -422,17 +434,23 @@ return function(p1)
 			end)
 		end
 		return function()
-			-- upvalues: InputBeganConnection (copy), InputEndedConnection (copy), Connection (ref)
+			-- upvalues: InputBeganConnection (copy), InputEndedConnection (copy), TouchMovedConnection (ref), UseMemoResult2 (upval), Connection (ref)
 			InputBeganConnection:Disconnect()
 			InputEndedConnection:Disconnect()
 			
+			if TouchMovedConnection then
+				TouchMovedConnection:Disconnect()
+			end
+			if UseMemoResult2 ~= nil then
+				UseMemoResult2.reset()
+			end
 			if Connection then
 				Connection:Disconnect()
 			end
 		end
 	end, {
 		ScrollingFrame, Active, NativeScrollEnabled, UseResult3, UseResult, UseResult6,
-		UseResult5, UseResult8, UseResult9
+		UseResult5, UseResult8, UseResult9, UseMemoResult2
 	})
 	local UseSignalStateResult = SignalsReactModule.useSignalState(Store.getCount)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(Store.getCurrentIndex)
@@ -478,16 +496,18 @@ return function(p1)
 	end, { UseResult3 })
 	
 	return ReactModule.useMemo(function()
-		-- upvalues: UseMemoResult (copy), UseMemoResult1 (copy), UseResult7 (copy), UseResult8 (copy), UseResult9 (copy), UseResult10 (copy)
+		-- upvalues: UseMemoResult (copy), UseMemoResult1 (copy), UseMemoResult2 (ref), UseResult7 (copy), UseResult8 (copy), UseResult9 (copy), UseResult10 (copy)
 		return {
 			getActiveIndex = UseMemoResult.get,
 			getScrollState = UseMemoResult1.get,
+			getDragTravel = if UseMemoResult2 == nil then nil else UseMemoResult2.getTravel,
 			scrollToIndex = UseResult7,
 			next = UseResult8,
 			previous = UseResult9,
 			removeItem = UseResult10
 		}
 	end, {
-		UseMemoResult, UseMemoResult1, UseResult7, UseResult8, UseResult9, UseResult10
+		UseMemoResult, UseMemoResult1, UseMemoResult2, UseResult7, UseResult8,
+		UseResult9, UseResult10
 	})
 end

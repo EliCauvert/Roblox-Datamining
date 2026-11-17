@@ -623,6 +623,17 @@ CommonUI.Messages.SystemMessage.IosDeprecationBodyPhase3,Roblox 已停止支援 
 CommonUI.Messages.SystemMessage.PS4onPS5DeprecationBody,請安裝並遊玩新推出的 PlayStation®5 版 Roblox。自 {date}起，PlayStation®5 將不再支援 PlayStation®4 版 Roblox。
 CommonUI.Messages.SystemMessage.PS4onPS5DeprecationTitle,Roblox 現已在 PlayStation®5 上推出
 CommonUI.Messages.SystemMessage.PS4onPS5HardDeprecationBody,PlayStation®5 不再支援 PlayStation®4 版 Roblox。若要繼續遊玩，請下載 PlayStation®5 版的全新 Roblox App。
+CommonUI.UserAgreements.Popup.Agreement.Optional,選填
+CommonUI.UserAgreements.Popup.Agreement.OptionalPersonalInformationPolicy,收集和處理選填個人資訊
+CommonUI.UserAgreements.Popup.Agreement.PersonalInformationPolicy,收集和處理必要個人資訊
+CommonUI.UserAgreements.Popup.Agreement.PrivacyPolicy,
+CommonUI.UserAgreements.Popup.Agreement.Required,必要
+CommonUI.UserAgreements.Popup.Agreement.StudioTermsForVNGSKU,Studio 條款：Roblox Studio 是 Roblox Corporation 提供給您的獨立服務，當您使用 Roblox Studio 建立或上傳內容時，您與 Roblox Corporation 間便適用這些條款
+CommonUI.UserAgreements.Popup.Agreement.TermsOfService,
+CommonUI.UserAgreements.Popup.Agreement.ThirdPartyPersonalInformationPolicy,個人資訊的第三方條款
+CommonUI.UserAgreements.Popup.Agreement.TransferPersonalInformationPolicy,海外個人資訊轉移
+CommonUI.UserAgreements.Popup.DefaultAgreementTitle,更新協議
+CommonUI.UserAgreements.Popup.TitleOnWebview,
 CoreScripts.Ads.Action.Close,
 CoreScripts.Ads.ImmersiveBrandedAds.WhyThisAd,此體驗中的使用者會看到這項非個人化廣告。{AdvertiserName} 是支付此廣告費用的廣告商。
 CoreScripts.Ads.Label.IllegalContentReportingLink,檢舉非法內容或對兒童有害的內容
@@ -980,6 +991,9 @@ CoreScripts.InGameMenu.ExitModal.Subtitle,留在 App 中繼續探索新體驗
 CoreScripts.InGameMenu.ExitModal.Title,初次使用 Roblox App
 CoreScripts.InGameMenu.GameSettings.AIRephraseMessages,經過重新改寫的訊息
 CoreScripts.InGameMenu.GameSettings.AIRephraseMessagesDescription,Roblox 可能會重新改寫違反安全規則的訊息。
+CoreScripts.InGameMenu.GameSettings.AccountHeader,帳號
+CoreScripts.InGameMenu.GameSettings.AccountManagement,帳號管理
+CoreScripts.InGameMenu.GameSettings.AccountManagementDescription,查看、管理或刪除你的帳號。
 CoreScripts.InGameMenu.GameSettings.AdvancedSettingsTitle,進階設定
 CoreScripts.InGameMenu.GameSettings.AudioHeader,音訊
 CoreScripts.InGameMenu.GameSettings.AutoGraphicsQuality,自動品質模式
@@ -1064,7 +1078,7 @@ CoreScripts.InGameMenu.InviteFriends.Loading,正在載入！
 CoreScripts.InGameMenu.InviteFriends.MakeFriendsNow,開始結交好友
 CoreScripts.InGameMenu.InviteFriends.NoFriends,您沒有好友，請前往帳號清單傳送好友邀請。
 CoreScripts.InGameMenu.InviteFriends.Search,
-CoreScripts.InGameMenu.Label.TouchpadButton,觸控板按鈕
+CoreScripts.InGameMenu.Label.TouchpadButton,觸碰板按鈕
 CoreScripts.InGameMenu.Label.ViewButton,檢視按鈕
 CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.LeaveGame,
@@ -1075,7 +1089,7 @@ CoreScripts.InGameMenu.PageTitle.GameSettings,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,邀請好友
 CoreScripts.InGameMenu.PageTitle.JoinOrInvite,加入或邀請
 CoreScripts.InGameMenu.PageTitle.JoinOrInviteFriends,加入或邀請好友
-CoreScripts.InGameMenu.PageTitle.Players,帳號
+CoreScripts.InGameMenu.PageTitle.Players,
 CoreScripts.InGameMenu.PageTitle.Report,檢舉
 CoreScripts.InGameMenu.PageTitle.VRComfortSettings,舒適度設定
 CoreScripts.InGameMenu.PeoplePage.SwitchServer,切換伺服器
@@ -1275,6 +1289,7 @@ CoreScripts.TextChat.Description.RobloxSummarizesMessagesFromAllPlayers,Roblox �
 CoreScripts.TextChat.Description.TurnOnChatInSettings,在「隱私權」>「通訊交流」設定中開啟聊天功能。
 CoreScripts.TextChat.Description.UnlockChatPrivacyCommunications,在「隱私權」>「通訊交流」設定中完成年齡驗證，即可解鎖聊天功能。
 CoreScripts.TextChat.Description.UnlockChatWithAnAgeCheck,完成年齡驗證，即可解鎖聊天功能。
+CoreScripts.TextChat.Description.UseQuickWordsChatIsntAvailableInYourRegion,使用快捷字詞在遊戲遊玩中合作。你所在的地區無法使用聊天功能。
 CoreScripts.TextChat.Emote.Error.DoesNotExist,動作不存在。
 CoreScripts.TextChat.Emote.Error.NotEnabled,無法在此使用該動作。
 CoreScripts.TextChat.Emote.Error.NotEquipped,您沒有裝備該動作。
@@ -1755,7 +1770,7 @@ Feature.Avatar.Label.FaceMakeup,
 Feature.Avatar.Label.FacialAnimation,臉部動畫
 Feature.Avatar.Label.Fall,跌落
 Feature.Avatar.Label.FallAnimations,跌落動畫
-Feature.Avatar.Label.FromMarketplace,來自市集
+Feature.Avatar.Label.FromMarketplace,市集結果
 Feature.Avatar.Label.Front,正面
 Feature.Avatar.Label.FullBody,全身
 Feature.Avatar.Label.FullMasks,全臉面具
@@ -2030,6 +2045,7 @@ Feature.Avatar.Title.ClearAnimationsConfirmation,要清除所有動畫嗎？
 Feature.Avatar.Title.ClearBodyConfirmation,要清除身體嗎？
 Feature.Avatar.Title.ClearClothesConfirmation,要清除所有服裝嗎？
 Feature.Avatar.Title.ClearMakeupConfirmation,要清除所有妝容嗎？
+Feature.Avatar.Title.CreateMoment,建立「美好時光」
 Feature.Avatar.Title.CreateSet,
 Feature.Avatar.Title.DeleteSet,
 Feature.Avatar.Title.DuplicateMakeupLook,複製造型
@@ -2125,12 +2141,12 @@ Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,要封鎖 {DisplayName} 嗎？
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,若封鎖此使用者，系統會一併將其從「好友」或「追蹤者」名單移除，對方將無法向你傳送訊息、請求或邀請。<br /><br />對方不會收到遭你封鎖的通知。
 Feature.Build.Action.Add,
-Feature.Build.Action.AddCustomOption,新增自訂選項...
+Feature.Build.Action.AddCustomOption,新增自己的答案
 Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,邀請搶先遊玩的測試員
 Feature.Build.Action.AddPlaytesters,
 Feature.Build.Action.AddToPlaytest,
-Feature.Build.Action.AgreeAndEnable,同意並開啟
+Feature.Build.Action.AgreeAndEnable,
 Feature.Build.Action.Approve,核准
 Feature.Build.Action.Archive,封存
 Feature.Build.Action.ArchiveGame,封存遊戲
@@ -2139,12 +2155,12 @@ Feature.Build.Action.Buy,購買
 Feature.Build.Action.BuyRobux,
 Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,複製文字
-Feature.Build.Action.Create,
+Feature.Build.Action.Create,建立廣告
 Feature.Build.Action.CreateDeveloperProduct,
 Feature.Build.Action.CreateMonetizationDeveloperProduct,建立開發者產品
 Feature.Build.Action.CreateMonetizationPass,建立特權證
 Feature.Build.Action.CreateMonetizationSubscription,建立訂閱方案
-Feature.Build.Action.CreateNewGame,建立新遊戲
+Feature.Build.Action.CreateNewGame,創作遊戲
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,不要再詢問
@@ -2152,7 +2168,7 @@ Feature.Build.Action.DontShowAgain,
 Feature.Build.Action.EarnRobux,賺取 Robux
 Feature.Build.Action.Edit,編輯
 Feature.Build.Action.HideAutosaved,隱藏自動儲存
-Feature.Build.Action.KeepBuilding,繼續建立
+Feature.Build.Action.KeepBuilding,繼續運作
 Feature.Build.Action.ManageLimit,管理上限
 Feature.Build.Action.ManageUsage,管理使用量
 Feature.Build.Action.Next,
@@ -2172,6 +2188,7 @@ Feature.Build.Action.Resume,恢復
 Feature.Build.Action.Retry,
 Feature.Build.Action.Revert,
 Feature.Build.Action.Save,
+Feature.Build.Action.SaveFilters,
 Feature.Build.Action.SetDailyLimit,設定每日上限
 Feature.Build.Action.SetLimit,設定上限
 Feature.Build.Action.Settings,
@@ -2185,6 +2202,7 @@ Feature.Build.Action.UpdateRating,更新分級
 Feature.Build.Action.UpdateWithChanges,更新變更
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,查看使用量
+Feature.Build.Analytics.Action.AddFunnelTracking,新增漏斗追蹤
 Feature.Build.Analytics.AnalyzeChatPrompt,分析我過去 {days} 天的{analyzeName}。為何這項指標很重要，以及我該如何改善？
 Feature.Build.Analytics.AnalyzeName.Arppu,每位付費使用者平均收益
 Feature.Build.Analytics.AnalyzeName.D1Retention,
@@ -2200,7 +2218,8 @@ Feature.Build.Analytics.Description.PlaythroughRate,遊玩完成率是指完成�
 Feature.Build.Analytics.Description.TotalPlaytime,總遊玩時間計算某段時間內，所有玩家在體驗中花費的總時數。遊玩時間增加通常表示作業更具吸引力。
 Feature.Build.Analytics.DurationHours,{number} 小時
 Feature.Build.Analytics.DurationMinutes,{number} 分鐘
-Feature.Build.Analytics.Goal.Action.CreateAd,建立廣告
+Feature.Build.Analytics.FunnelTrackingPrompt,審核並利用我的分析漏斗
+Feature.Build.Analytics.Goal.Action.CreateAd,
 Feature.Build.Analytics.Goal.Action.SellItems,販賣物品
 Feature.Build.Analytics.Goal.Action.ShareWithFriends,與好友分享
 Feature.Build.Analytics.Goal.EarnRobux,
@@ -2258,14 +2277,14 @@ Feature.Build.Content.NewGame,新遊戲
 Feature.Build.CreateDeveloperProductDraft,協助我為我的遊戲建立開發者產品。
 Feature.Build.CreatePassDraft,協助我為遊戲建立特權證。
 Feature.Build.CreateSubscriptionDraft,協助我為遊戲建立訂閱方案。
-Feature.Build.Description.ActivateDeveloperProduct,販售開發者產品 {PRODUCT_ID}。
-Feature.Build.Description.ActivateGamePass,販售遊戲通行證 {PRODUCT_ID}。
-Feature.Build.Description.ActivateSubscription,啟用訂閱 {PRODUCT_ID}。
-Feature.Build.Description.AdCampaignModerationReview,所有廣告活動都會由 Roblox 審核。此流程最多可能需要 24 小時。
-Feature.Build.Description.AdCampaignSheetRunDates,投放時間 {startDate} – {endDate}
-Feature.Build.Description.AdComplete,廣告已結束。請查看結果。
-Feature.Build.Description.AdModerationReview,所有廣告都會經由 Roblox 審核，最多可能需要 24 小時。
-Feature.Build.Description.AdvancedModel,最適合追求最高品質。使用量會以 3 倍的速度用完。
+Feature.Build.Description.ActivateDeveloperProduct,釋出開發者產品 {PRODUCT_ID} 以供購買。
+Feature.Build.Description.ActivateGamePass,釋出遊戲通行證 {PRODUCT_ID} 以供購買。
+Feature.Build.Description.ActivateSubscription,釋出訂閱 {PRODUCT_ID} 以供購買。
+Feature.Build.Description.AdCampaignModerationReview,每則廣告都須審核才會投放，這最多可能需要 24 小時。
+Feature.Build.Description.AdCampaignSheetRunDates,{startDate}至 {endDate}間投放
+Feature.Build.Description.AdComplete,廣告已結束，來看看成效如何。
+Feature.Build.Description.AdModerationReview,
+Feature.Build.Description.AdvancedModel,最適合複雜的遊戲。使用量會消耗得更快。
 Feature.Build.Description.AdvertisingAgreement,選擇「建立」，即表示您同意 {advertisingTermsStart}Roblox 廣告條款{advertisingTermsEnd}和{advertisingStandardsStart}廣告標準{advertisingStandardsEnd}。
 Feature.Build.Description.ArchiveRemoval,若封存此遊戲，遊戲會從「組建」中移除。你仍可在創作者中心或 Roblox Studio 中，存取並還原遊戲。
 Feature.Build.Description.AutoBuyUsage,使用你的 Robux，在你建立時自動購買額外的組建使用量。你可以隨時設定每日消費上限。
@@ -2274,20 +2293,20 @@ Feature.Build.Description.BuildIdeaGame,將想法化為遊戲
 Feature.Build.Description.BuildReplyNotif,在組建回覆你時收到通知。
 Feature.Build.Description.BuyRobuxToCreate,購買更多 Robux 以繼續創作，或等待明天重置的免費組建使用量。
 Feature.Build.Description.BuyUsageOrWait,使用 Robux 購買更多組建使用量，或等待每日上限重置。
-Feature.Build.Description.CampaignRunDates,你的活動將在 {startDate} – {endDate}期間投放
+Feature.Build.Description.CampaignRunDates,你的廣告在 {startDate}至 {endDate}期間投放。
 Feature.Build.Description.CaptureWhilePlaytesting,在試玩時截圖，然後將截圖新增至提示中。
 Feature.Build.Description.ChooseAdCampaignLength,選擇廣告投放的時間長度。
 Feature.Build.Description.ChoosePlaytesters,選擇好友預覽你的遊戲。
-Feature.Build.Description.CreateDeveloperProduct,以 {PRICE} Robux 建立「{NAME}」，已下架。
+Feature.Build.Description.CreateDeveloperProduct,以 {PRICE} Robux 建立 {NAME}。目前還無法購買。
 Feature.Build.Description.CreateGamePass,
-Feature.Build.Description.CreateSubscription,以 {PRICE} Robux 建立「{NAME}」，未啟用。
-Feature.Build.Description.DeactivateDeveloperProduct,將開發者產品 {PRODUCT_ID} 下架。
-Feature.Build.Description.DeactivateGamePass,將遊戲通行證 {PRODUCT_ID} 下架。
-Feature.Build.Description.DeactivateSubscription,將訂閱 {PRODUCT_ID} 下架。現有訂閱者會繼續續訂。
-Feature.Build.Description.DeactivateSubscriptionCancelRenewals,將訂閱 {PRODUCT_ID} 下架，並停止現有訂閱者的未來續訂。
-Feature.Build.Description.DefaultModel,最適合快速編輯和一般改善。
+Feature.Build.Description.CreateSubscription,
+Feature.Build.Description.DeactivateDeveloperProduct,停止銷售開發者產品 {PRODUCT_ID}。
+Feature.Build.Description.DeactivateGamePass,停止銷售遊戲通行證 {PRODUCT_ID}。
+Feature.Build.Description.DeactivateSubscription,將訂閱 {PRODUCT_ID} 下架。現有訂閱者會續訂。
+Feature.Build.Description.DeactivateSubscriptionCancelRenewals,將訂閱 {PRODUCT_ID} 下架，並停止現有訂閱者未來續訂。
+Feature.Build.Description.DefaultModel,最適合日常生活中的快速變更。
 Feature.Build.Description.DeleteSubscription,刪除訂閱 {PRODUCT_ID}。
-Feature.Build.Description.EarnedRobuxAppliedFirst,若已賺取 Robux，這些 Robux 將會優先用於支付廣告活動費用。
+Feature.Build.Description.EarnedRobuxAppliedFirst,如果你從遊戲中賺取了 Robux，我們會先使用這些 Robux 來支付此廣告的費用。
 Feature.Build.Description.EnableBuildNotifs,在裝置設定中啟用通知，以接收來自組建的最新消息。
 Feature.Build.Description.EnableUsageOrWait,開啟額外使用量以繼續創作，或等待每週上限重置。
 Feature.Build.Description.FriendsLinkOnly,只有你的好友能存取此連結。若希望有更多人玩，請變更遊戲的受眾設定。
@@ -2298,40 +2317,40 @@ Feature.Build.Description.HubSettings,在創作者中心管理所有設定
 Feature.Build.Description.InternalSpec,若要使用最新規格，請保持空白
 Feature.Build.Description.InternalTesting,試用全新模型規格
 Feature.Build.Description.InviteFriendLimit,在你創作時，邀請最多 {MAX_INVITES} 位好友一起遊玩。
-Feature.Build.Description.LongAdCampaign,有更多時間觸及新玩家，並讓他們持續回流。
+Feature.Build.Description.LongAdCampaign,有更多時間觸及新顧客，並吸引他們持續回流。
 Feature.Build.Description.MakeAudienceAvail,發佈體驗，讓此受眾可以存取。
 Feature.Build.Description.ManageAppearance,管理遊戲向其他人顯示的方式。
 Feature.Build.Description.ManageDeveloperProduct,管理開發者產品。
-Feature.Build.Description.ManagedPricingAcknowledgement,管理定價功能會自動按地區調整價格。
+Feature.Build.Description.ManagedPricingAcknowledgement,管理定價功能會自動為每個地區設定不同的價格。
 Feature.Build.Description.ManagedPricingCurrentProducts,為所有現有產品啟用管理定價功能
-Feature.Build.Description.ManagedPricingUnavailable,此體驗無法使用管理定價功能。
-Feature.Build.Description.NoEligibleManagedPricingProducts,沒有符合條件的產品
+Feature.Build.Description.ManagedPricingUnavailable,此遊戲無法使用管理定價功能。
+Feature.Build.Description.NoEligibleManagedPricingProducts,目前尚無產品可以使用此功能
 Feature.Build.Description.NoMonetizationDeveloperProducts,開發者產品是遊戲中的物品，玩家可以購買的次數不限
 Feature.Build.Description.NoMonetizationPasses,玩家只要購買通行證一次，就能解鎖特定遊戲功能
-Feature.Build.Description.NoMonetizationProducts,描述你想要建立的物品，以便在遊戲中開始賺取 Robux
+Feature.Build.Description.NoMonetizationProducts,描述你想要銷售的物品，以便開始賺取 Robux。
 Feature.Build.Description.NoMonetizationSubscriptions,使用者可以支付月費獲得遊戲內訂閱，享受定期福利
 Feature.Build.Description.PlayAfterPublish,選擇發佈此體驗後可遊玩的對象。
-Feature.Build.Description.PlaytestLatest,你正在試玩最新版本。準備好分享後即可發佈。
+Feature.Build.Description.PlaytestLatest,你正在試玩最新版本。要開放給大家玩的時候即可發佈。
 Feature.Build.Description.PlaytestLocked,建立第一個遊戲後，即可開始進行遊戲測試。
 Feature.Build.Description.PlaytesterAccess,邀請好友成為搶先遊玩的測試員，或變更遊戲的受眾設定，讓更多人遊玩。
 Feature.Build.Description.PricingRules,設定定價規則
 Feature.Build.Description.PromoteGameFree,輕觸一下，即可讓你的遊戲觸及更多玩家。
 Feature.Build.Description.PromoteGamePaid,建立廣告，讓你的遊戲觸及數百萬玩家。
-Feature.Build.Description.PromoteGameWithAdCampaign,透過為期 {durationDays} 天的廣告活動增加受眾，讓遊戲能被他人發現。
+Feature.Build.Description.PromoteGameWithAdCampaign,投放為期 {durationDays} 天的廣告，提高遊戲曝光度。
 Feature.Build.Description.RaiseLimitOrWait,提高每日 Robux 上限以繼續創作，或等待使用量於明天重置。
 Feature.Build.Description.RatingAgreement,發佈即表示您同意此內容分級準確無誤。
 Feature.Build.Description.RequiredRobuxForAdvanced,你至少需要 {ROBUX} Robux 才能使用進階模型繼續創作。你也可以切換回「預設」模式，或等待免費使用量重置。
 Feature.Build.Description.RequiredRobuxForDefault,你至少需要 {ROBUX} Robux 才能繼續創作，或等待免費使用量重置。
 Feature.Build.Description.RestoreLatest,此版本將成為你的最新發佈版本。
-Feature.Build.Description.RevertToVersion,確認以還原最新變更並回到 {VERSION}。
+Feature.Build.Description.RevertToVersion,如果你復原此變更，你的遊戲將回到 {VERSION}。
 Feature.Build.Description.ShareLatest,分享最新版本的變更內容。
-Feature.Build.Description.ShopButton,新增購物入口
-Feature.Build.Description.ShortAdCampaign,快速瞭解玩家對你遊戲的看法。
-Feature.Build.Description.StopBuild,這項請求仍在處理中。若現在停止，將無法完成請求，你必須再次傳送。
+Feature.Build.Description.ShopButton,在遊戲中顯示購物按鈕
+Feature.Build.Description.ShortAdCampaign,快速瞭解大家對這款遊戲的看法。
+Feature.Build.Description.StopBuild,組建仍在運作中。如果現在停止，你必須再次傳送請求。
 Feature.Build.Description.UpdateDeveloperProduct,更新開發者產品 {PRODUCT_ID}。
 Feature.Build.Description.UpdateGamePass,更新遊戲通行證 {PRODUCT_ID}。
 Feature.Build.Description.UpdateSubscription,更新訂閱 {PRODUCT_ID}。
-Feature.Build.Description.UseAdCreditsInAdsManager,你必須前往廣告管理工具才能使用。
+Feature.Build.Description.UseAdCreditsInAdsManager,前往廣告管理工具才能使用。
 Feature.Build.Error.AdForbidden,你的帳號或遊戲目前無法投放廣告。若認為其中有誤，請聯絡客服團隊。
 Feature.Build.Error.AdInsufficientFunds,你的 Robux 不足，無法建立此廣告。請增加 Robux，然後再試一次。
 Feature.Build.Error.AdInternalError,
@@ -2339,10 +2358,10 @@ Feature.Build.Error.AdMissingThumbnail,遊戲需要有縮圖才能投放廣告�
 Feature.Build.Error.DeveloperProductDescriptionTooLong,"說明長度不得超過 1,000 個字元。"
 Feature.Build.Error.DeveloperProductNameRequired,輸入產品名稱。
 Feature.Build.Error.DeveloperProductNameTooLong,名稱長度不得超過 50 個字元。
-Feature.Build.Error.DeveloperProductPriceInvalid,"價格須為 1 到 1,000,000,000 Robux 之間的整數。"
-Feature.Build.Error.DeveloperProductPriceRequiredForSale,將產品上架販售前，請先選擇「編輯」並新增價格。
-Feature.Build.Error.DeveloperProductTextModerated,Roblox 審核人員已變更此產品的文字。請嘗試使用其他文字。
-Feature.Build.Error.ManagedPricingPartialUpdate,無法更新部分產品。
+Feature.Build.Error.DeveloperProductPriceInvalid,"請輸入 1 到 1,000,000,000 Robux 之間的整數。"
+Feature.Build.Error.DeveloperProductPriceRequiredForSale,此產品需要先設定價格。請選擇「編輯」以新增價格。
+Feature.Build.Error.DeveloperProductTextModerated,我們已變更此產品的部分文字，以符合我們的規定。請檢查內容是否仍然正確。
+Feature.Build.Error.ManagedPricingPartialUpdate,部分產品未更新，請再試一次。
 Feature.Build.Error.MonetizationImageFailed,無法載入圖片，請再試一次。
 Feature.Build.Error.MonetizationImageInReview,圖片仍在審核中。請稍後再試。
 Feature.Build.Error.MonetizationImagePreparing,圖片仍在準備中。請稍後再試。
@@ -2351,7 +2370,7 @@ Feature.Build.Error.MonetizationImageTooLarge,圖片大小超過 5 MB。
 Feature.Build.Error.MonetizationNoUniverse,此聊天未連接到遊戲。
 Feature.Build.Error.MonetizationOptionUpdate,無法更新選項，請再試一次。
 Feature.Build.Error.MonetizationOptionsLoad,無法載入選項，請再試一次。
-Feature.Build.Error.MonetizationPermissionDenied,你沒有變更變現方法選項的權限。
+Feature.Build.Error.MonetizationPermissionDenied,你沒有變更這些選項的權限。
 Feature.Build.Error.MonetizationPriceRequiredForRegionalPricing,新增價格以開啟區域定價。
 Feature.Build.Error.MonetizationPriceRequiredForSale,將此產品上架前，請先新增價格。
 Feature.Build.Error.MonetizationRateLimited,請求次數過多，請稍後再試。
@@ -2360,10 +2379,10 @@ Feature.Build.Header.AllVersions,所有版本
 Feature.Build.Header.Answers,答案
 Feature.Build.Header.ContentMaturity,成年適宜內容
 Feature.Build.Header.CustomAnswer,自訂答案
-Feature.Build.Header.GameConfiguration,遊戲設定
+Feature.Build.Header.GameConfiguration,銷售額和廣告
 Feature.Build.Header.GameDetails,遊戲詳情
 Feature.Build.Header.Overview,
-Feature.Build.Header.PastCampaigns,過往的廣告活動
+Feature.Build.Header.PastCampaigns,過往的廣告
 Feature.Build.Header.UpdateDetails,更新詳細資訊
 Feature.Build.Label.Access,存取權
 Feature.Build.Label.AdClicks,廣告點擊次數
@@ -2377,9 +2396,9 @@ Feature.Build.Label.AllGames,所有遊戲
 Feature.Build.Label.AmountAvailable,尚有 {AMOUNT} 次可使用
 Feature.Build.Label.Autosaved,已自動儲存
 Feature.Build.Label.Available,可供使用
-Feature.Build.Label.AvailableForPurchase,可供購買
+Feature.Build.Label.AvailableForPurchase,開放購買
 Feature.Build.Label.BackToBuild,返回建立
-Feature.Build.Label.Building,建立中...
+Feature.Build.Label.Building,正在運作...
 Feature.Build.Label.CaptureLibrary,截圖資料庫
 Feature.Build.Label.CaptureSelectionCount,已選擇 {SELECTED_COUNT} 個，共 {MAX_SELECTIONS} 個
 Feature.Build.Label.CaptureStepAddImages,選擇「新增圖片」即可附加截圖
@@ -2388,7 +2407,7 @@ Feature.Build.Label.CaptureStepTapCamera,在「組建」工具列中選擇攝影
 Feature.Build.Label.ContentRating,內容分級
 Feature.Build.Label.CreatedDate,{MONTH} {DAY}，{YEAR}
 Feature.Build.Label.CreatorHub,創作者中心
-Feature.Build.Label.DateRange,{startDate} – {endDate}
+Feature.Build.Label.DateRange,{startDate}至 {endDate}
 Feature.Build.Label.DefaultDeveloperProduct,產品 {PRODUCT_ID}
 Feature.Build.Label.DefaultDeveloperProductName,開發者產品
 Feature.Build.Label.DefaultModel,
@@ -2396,12 +2415,12 @@ Feature.Build.Label.Deleted,已刪除
 Feature.Build.Label.DescribeIdea,描述想法
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,說明：{DESCRIPTION}
-Feature.Build.Label.DeveloperProductName,名稱：「{NAME}」
+Feature.Build.Label.DeveloperProductName,名稱：{NAME}
 Feature.Build.Label.DeveloperProductPrice,價格：{PRICE} Robux
 Feature.Build.Label.DeveloperProductPriceUnavailable,?
 Feature.Build.Label.DeveloperProducts,
 Feature.Build.Label.Done,
-Feature.Build.Label.EasyPerformanceReport,簡單的成效報告
+Feature.Build.Label.EasyPerformanceReport,易於閱讀的結果
 Feature.Build.Label.Error,
 Feature.Build.Label.Filters,
 Feature.Build.Label.Free,免費
@@ -2425,19 +2444,19 @@ Feature.Build.Label.Limited,受限
 Feature.Build.Label.Live,已發佈
 Feature.Build.Label.Loading,
 Feature.Build.Label.ManagedPricing,管理定價
-Feature.Build.Label.ManagedPricingMixed,混合套用於現有產品
-Feature.Build.Label.MaximizeForGamePlays,最大化遊戲遊玩次數
-Feature.Build.Label.ModelUnavailable,模型無法使用
+Feature.Build.Label.ManagedPricingMixed,已為部分產品開啟
+Feature.Build.Label.MaximizeForGamePlays,旨在吸引更多人遊玩你的遊戲
+Feature.Build.Label.ModelUnavailable,
 Feature.Build.Label.Models3D,3D 模型
 Feature.Build.Label.MonetizationCreateTitle,{NAME} - {PRICE} Robux
-Feature.Build.Label.MyGames,我的遊戲
+Feature.Build.Label.MyGames,你的遊戲
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,無上限
 Feature.Build.Label.NotStarted,尚未開始
 Feature.Build.Label.Object,物件
 Feature.Build.Label.Objects3D,3D 物件
-Feature.Build.Label.OffSale,下架
-Feature.Build.Label.OnSale,販售中
+Feature.Build.Label.OffSale,
+Feature.Build.Label.OnSale,待售
 Feature.Build.Label.Pending,擱置
 Feature.Build.Label.PercentUsed,已使用 {PERCENT}%
 Feature.Build.Label.PlayTime,遊玩時間
@@ -2465,13 +2484,13 @@ Feature.Build.Label.SearchTasks,搜尋任務
 Feature.Build.Label.SelectOption,選擇一個選項
 Feature.Build.Label.SharedWithMe,與我分享
 Feature.Build.Label.ShopButton,商店按鈕
-Feature.Build.Label.ShopUi,商店使用者介面
+Feature.Build.Label.ShopUi,購物
 Feature.Build.Label.Sounds,音效
 Feature.Build.Label.SubscriptionProductType,產品類型：{PRODUCT_TYPE}
 Feature.Build.Label.SubscriptionProductTypeConsumable,消耗品
 Feature.Build.Label.SubscriptionProductTypeCurrency,貨幣
 Feature.Build.Label.SubscriptionProductTypeDurable,耐用品
-Feature.Build.Label.TargetAllRobloxPlayers,鎖定所有 Roblox 玩家
+Feature.Build.Label.TargetAllRobloxPlayers,向 Roblox 全體人員顯示
 Feature.Build.Label.Thinking,思考中
 Feature.Build.Label.Title,標題
 Feature.Build.Label.TitleDescription,標題和說明
@@ -2554,7 +2573,7 @@ Feature.Build.Label.ToolThumbnailRunning,正在設定遊戲縮圖
 Feature.Build.Label.ToolVerifyDone,已檢查錯誤
 Feature.Build.Label.ToolVerifyFailed,無法檢查錯誤
 Feature.Build.Label.ToolVerifyRunning,正在檢查錯誤
-Feature.Build.Label.UniverseNumber,宇宙 {UNIVERSE_ID}
+Feature.Build.Label.UniverseNumber,遊戲 {UNIVERSE_ID}
 Feature.Build.Label.Unknown,未知
 Feature.Build.Label.UnlimitedUsed,已使用 {USED} • 無上限
 Feature.Build.Label.UpdateTitleDesc,更新標題和說明
@@ -2569,32 +2588,33 @@ Feature.Build.Label.Video,影片
 Feature.Build.Label.World,世界
 Feature.Build.Message.AccountRequirements,你的帳號不符合使用組建的要求。
 Feature.Build.Message.AccountTooNew,你的帳號太新，無法發佈。請在 2 天後再試一次。
-Feature.Build.Message.AdCampaignCreateFailed,無法建立你的廣告活動，請再試一次。
-Feature.Build.Message.AdPerformanceLoadFailed,無法載入廣告成效
-Feature.Build.Message.AdsStatsEmpty,透過廣告活動拓展受眾，讓更多人發現你的遊戲
-Feature.Build.Message.AdsStatsEmptyFree,透過免費廣告活動拓展受眾，讓更多人發現你的遊戲
+Feature.Build.Message.AdCampaignCreateFailed,我們無法建立你的廣告活動，請再試一次。
+Feature.Build.Message.AdPerformanceLoadFailed,無法載入你的廣告成效。請稍後再回來查看。
+Feature.Build.Message.AdsStatsEmpty,投放廣告，提高遊戲曝光度。
+Feature.Build.Message.AdsStatsEmptyFree,投放免費廣告，提高遊戲曝光度。
 Feature.Build.Message.AllFriendsAdded,你已邀請所有好友成為搶先遊玩的測試員。
 Feature.Build.Message.AnswerBuildQuestion,在下方回答組建的問題。
-Feature.Build.Message.AssetDetailsUnavailable,無法取得素材詳細資訊。
+Feature.Build.Message.AssetDetailsUnavailable,無法載入詳細資訊
 Feature.Build.Message.AudienceIneligible,不符合向此受眾發佈的資格
 Feature.Build.Message.BuildAccountBlocked,你的帳號目前無法使用組建。
 Feature.Build.Message.BuildBusy,組建忙碌中。請稍候片刻再試。
 Feature.Build.Message.BuildConnectFailed,組建系統無法連線，請再試一次。
 Feature.Build.Message.BuildInternalError,組建系統發生問題，請再試一次。
 Feature.Build.Message.BuildResponseFailed,組建系統無法回應，請再試一次。
-Feature.Build.Message.BuildSendUnconfirmed,組建無法確認你的訊息已傳送。
+Feature.Build.Message.BuildSendUnconfirmed,我們不確定你的訊息是否送出。再次傳送之前，請檢查聊天內容。
 Feature.Build.Message.BuildStillWorking,正在處理。在等待期間，你可以離開 App、玩 Roblox 或開始另一項專案。
 Feature.Build.Message.BuildStopped,你已停止組建。
 Feature.Build.Message.BuildTakingLonger,處理時間比預期來得長。你可以繼續等待，或開始進行其他操作。
-Feature.Build.Message.BuildTemporarilyDown,暫時無法使用組建，請 1 分鐘後再試。
+Feature.Build.Message.BuildTemporarilyDown,組建目前無法使用。請 1 分鐘後再試。
 Feature.Build.Message.CompletedTasks,已完成 {COUNT} 項任務
-Feature.Build.Message.ConversationGone,此對話已無法使用。請開始新的對話。
-Feature.Build.Message.ConversationNotFound,找不到此對話。請開始新的對話。
+Feature.Build.Message.ConversationGone,無法再存取此聊天內容。請開始新的聊天。
+Feature.Build.Message.ConversationNotFound,我們找不到此聊天內容。請開始新的聊天。
 Feature.Build.Message.CreateGameToUseBuild,建立新遊戲以開始使用組建。
 Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,在創作者中心擴大你的受眾資格
 Feature.Build.Message.ExperiencesLoadFailed,無法載入體驗
 Feature.Build.Message.FailedTitle,{TITLE}失敗
+Feature.Build.Message.FailedWithTitle,失敗：{TITLE}
 Feature.Build.Message.FinishedTitle,{TITLE}完成
 Feature.Build.Message.FriendsLoadFailed,無法載入好友，請再試一次。
 Feature.Build.Message.GameNotCreated,無法建立遊戲，請再試一次。
@@ -2605,26 +2625,26 @@ Feature.Build.Message.HiDisplayName,{DISPLAY_NAME}，你好：
 Feature.Build.Message.ImageUploadFailed,無法上傳圖片，請再試一次。
 Feature.Build.Message.InvalidMessage,你的訊息發生錯誤。請編輯後再試一次。
 Feature.Build.Message.InvitesLoadFailed,無法載入邀請
-Feature.Build.Message.LimitBelowSpend,上限不能低於今天已消費的 {ALREADY_SPENT} Robux。
+Feature.Build.Message.LimitBelowSpend,你今日已花費 {ALREADY_SPENT} Robux。請設定一個至少達到該金額的上限。
 Feature.Build.Message.LinkCopied,連結已複製到剪貼簿。
 Feature.Build.Message.LoadingVersions,正在載入版本紀錄...
-Feature.Build.Message.NoAssetsFound,找不到素材。
-Feature.Build.Message.NoCapturesAvailable,沒有可用的截圖
+Feature.Build.Message.NoAssetsFound,這裡尚無素材。
+Feature.Build.Message.NoCapturesAvailable,尚無截圖
 Feature.Build.Message.NoDescriptionProvided,未提供說明。
 Feature.Build.Message.NoFriendsToAdd,你沒有可邀請的好友。請先在 Roblox 上尋找可交流的對象。
 Feature.Build.Message.NoGamesYet,尚無遊戲。
 Feature.Build.Message.NoResults,
-Feature.Build.Message.NoSearchResultsFound,找不到搜尋結果
+Feature.Build.Message.NoSearchResultsFound,
 Feature.Build.Message.NoVersionHistory,尚無版本紀錄。
 Feature.Build.Message.OneTaskCompleted,已完成 1 項任務
-Feature.Build.Message.OutOfBuildUsage,你的組建使用量已用完。查看你的選項，使用 Robux 以繼續創作。
-Feature.Build.Message.PlaytesterRequestFailed,我們無法完成你的請求，請再試一次。
+Feature.Build.Message.OutOfBuildUsage,你的組建已用完。使用 Robux 繼續創作。
+Feature.Build.Message.PlaytesterRequestFailed,我們無法新增你的搶先測試員，請再試一次。
 Feature.Build.Message.PlaytestersAdded,已邀請 {INVITED_COUNT} 位早鳥測試員，共 {MAX_INVITES} 位
 Feature.Build.Message.PublicPublishFailed,你的遊戲已發佈，但無法設為公開，請再試一次。
 Feature.Build.Message.PublishExpandAudience,發佈以擴大受眾
 Feature.Build.Message.PublishNotReverted,無法還原發佈的內容，請再試一次。
-Feature.Build.Message.PublishPromotionUpsell,恭喜你發佈遊戲！你有 {promotionCount} 次免費促銷機會，可以在 Roblox 上吸引更多玩家。
-Feature.Build.Message.PublishPromotionUpsellSingular,恭喜你發佈遊戲！你有 1 次免費促銷機會，可以在 Roblox 上吸引更多玩家。
+Feature.Build.Message.PublishPromotionUpsell,恭喜你發佈遊戲！你有 {promotionCount} 次免費廣告機會，有助於提高遊戲曝光度。
+Feature.Build.Message.PublishPromotionUpsellSingular,恭喜你發佈遊戲！你有 1 次免費廣告機會，有助於提高遊戲曝光度。
 Feature.Build.Message.QuestionnaireNeeded,此遊戲是在組建之外編輯的。請完成內容問卷以發佈。
 Feature.Build.Message.ReadyToPlay,你的遊戲已可在 Roblox 上遊玩！
 Feature.Build.Message.ResetHours,{HOURS} 小時後重置
@@ -2632,11 +2652,13 @@ Feature.Build.Message.ResetOneHour,1 小時後重置
 Feature.Build.Message.RestoreVersionFailed,無法還原此版本，請再試一次。
 Feature.Build.Message.RevertVersionFail,無法建立還原的版本，請再試一次。
 Feature.Build.Message.RunningTitle,執行{title}
-Feature.Build.Message.SafetyPolicy,此訊息違反我們的安全政策。請編輯後再試一次。
+Feature.Build.Message.SafetyPolicy,此訊息違反我們的規定。請編輯後再試一次。
 Feature.Build.Message.SaveChangesFailed,無法儲存變更，請再試一次。
 Feature.Build.Message.ShareExperience,分享 {EXPERIENCE_NAME}
 Feature.Build.Message.ShareLinkFailed,無法建立分享連結，請再試一次。
 Feature.Build.Message.SignedOut,已登出，請登入後再試一次。
+Feature.Build.Message.StepForMinutesSeconds,{TITLE} {MINUTES} 分 {REM_SECONDS} 秒
+Feature.Build.Message.StepForSeconds,{TITLE} {SECONDS} 秒
 Feature.Build.Message.TasksCompleted,已完成 {NUM_COMPLETED_TASKS} 項任務
 Feature.Build.Message.ThinkingSeconds,思考了 {SECONDS} 秒
 Feature.Build.Message.TrustedFriendsRequiredForPlaytest,成為此創作者信任的好友，即可玩對方的遊戲。
@@ -2657,14 +2679,14 @@ Feature.Build.Placeholder.DescribeProductUpdate,描述一項更新
 Feature.Build.Placeholder.InternalSpec,internal_code
 Feature.Build.Prompt.CreateDeveloperProduct,請審核我的遊戲，並建議我最適合販售哪種物品來賺取 Robux。一次性購買的物品，還是玩家可再次購買的物品（例如加成道具），哪一種更適合我的遊戲？請說明原因。
 Feature.Build.Title.AdActive,廣告活動已生效
-Feature.Build.Title.AdCampaignDuration,為期 {durationDays} 天的廣告活動
+Feature.Build.Title.AdCampaignDuration,為期 {durationDays} 天的廣告
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} 天
 Feature.Build.Title.AdComplete,廣告已完成
 Feature.Build.Title.AdCreatedPeriod,已建立廣告。
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,新增圖片
-Feature.Build.Title.AdsStatsEmpty,啟動廣告活動
-Feature.Build.Title.AdsStatsEmptyFree,啟動你的第一個廣告活動
+Feature.Build.Title.AdsStatsEmpty,
+Feature.Build.Title.AdsStatsEmptyFree,建立你的第一個廣告
 Feature.Build.Title.ArchiveThisGame,要封存此遊戲嗎？
 Feature.Build.Title.AssetLibrary,素材庫
 Feature.Build.Title.Audience,受眾
@@ -2674,7 +2696,7 @@ Feature.Build.Title.BuildUnavailable,無法使用組建
 Feature.Build.Title.BuildUsage,組建使用量
 Feature.Build.Title.ChangesNotLive,變更的內容尚未發佈
 Feature.Build.Title.ChatBuildUnavailable,無法使用組建。
-Feature.Build.Title.ChooseModel,選擇你的組建代理程式
+Feature.Build.Title.ChooseModel,選擇組建的運作方式
 Feature.Build.Title.Content,內容
 Feature.Build.Title.CreateYourAd,
 Feature.Build.Title.DailyRobuxReached,已達每日 Robux 上限
@@ -2687,10 +2709,10 @@ Feature.Build.Title.FriendsOnlyPlay,只有好友可以遊玩
 Feature.Build.Title.GameCreationDone,已完成遊戲創作
 Feature.Build.Title.GamePass,遊戲通行證
 Feature.Build.Title.GenericError,
-Feature.Build.Title.GetUsers,取得使用者
+Feature.Build.Title.GetUsers,廣告
 Feature.Build.Title.InsufficientRobuxForModel,你的 Robux 不足
 Feature.Build.Title.ManagedPricingAcknowledgement,是否開啟管理定價功能？
-Feature.Build.Title.Monetization,營利化
+Feature.Build.Title.Monetization,
 Feature.Build.Title.NoMonetizationDeveloperProducts,尚未建立任何開發者產品
 Feature.Build.Title.NoMonetizationPasses,尚未建立任何通行證
 Feature.Build.Title.NoMonetizationProducts,開始在遊戲中賺取收入
@@ -2698,7 +2720,7 @@ Feature.Build.Title.NoMonetizationSubscriptions,尚未建立任何訂閱
 Feature.Build.Title.NoRobuxForUsage,沒有剩餘的 Robux 可用於購買組建使用量
 Feature.Build.Title.PickCampaign,選擇長度
 Feature.Build.Title.Playtesters,
-Feature.Build.Title.PlaytestersAddRejected,無法新增以下使用者：
+Feature.Build.Title.PlaytestersAddRejected,我們無法將部分好友新增為搶先測試員：
 Feature.Build.Title.PlaytestersOnlyPlay,只有遊戲測試員可以遊玩
 Feature.Build.Title.PromoteGame,宣傳你的遊戲
 Feature.Build.Title.PromoteGameFree,免費宣傳你的遊戲
@@ -2706,11 +2728,11 @@ Feature.Build.Title.PromoteGameFreePlural,你獲得了 {promotionCount} 則免�
 Feature.Build.Title.PromoteGameFreeSingular,你獲得了一則免費廣告
 Feature.Build.Title.PromoteGamePaid,更多玩家正在等著你
 Feature.Build.Title.PushNotifications,推播通知
-Feature.Build.Title.RevertLastChange,是否要還原上次的變更？
-Feature.Build.Title.StopBuild,要停止建立嗎？
+Feature.Build.Title.RevertLastChange,是否要復原上次的變更？
+Feature.Build.Title.StopBuild,要停止這項請求嗎？
 Feature.Build.Title.Subscription,
 Feature.Build.Title.Tasks,任務
-Feature.Build.Title.TurnActivity,回合活動
+Feature.Build.Title.TurnActivity,活動
 Feature.Build.Title.UseYourAdCredits,使用廣告點數
 Feature.Build.Title.VersionHistory,版本歷史紀錄
 Feature.Build.Title.VersionInfo,版本資訊
@@ -2858,7 +2880,7 @@ Feature.Catalog.Heading.SetPrice,設定價格
 Feature.Catalog.Heading.ShowBodyParts,顯示身體部位
 Feature.Catalog.Heading.ShowHeadType,顯示頭部類型
 Feature.Catalog.Heading.ShowShoes,顯示鞋子
-Feature.Catalog.Heading.TakeOffSale,
+Feature.Catalog.Heading.TakeOffSale,下架
 Feature.Catalog.HeroWidget.BundleTitle,Korblox Pactbreaker 登場
 Feature.Catalog.HeroWidget.CapsuleDescription,
 Feature.Catalog.HeroWidget.CapsulePoolDescription,
@@ -3389,7 +3411,7 @@ Feature.Durables.PartiallyExpiredItems.TitleText,道具已過期
 Feature.Durables.UnifiedBuyModal.Subtitle.TimedOptionText,{days} 天（購買後開始計算）
 Feature.DynamicUI.Translation.Reporting.IllegalContentEUBody,若要依據歐盟《數位服務法》 檢舉違法內容，請前往：https://www.roblox.com/illegal-content-reporting
 Feature.EmptyStatePage.Message.NoInternet,沒有網路連線
-Feature.EnhancedVideo.Label.Ad,廣告
+Feature.EnhancedVideo.Label.Ad,
 Feature.ExperienceDetails.Action.ExitFullScreen,退出全螢幕
 Feature.ExperienceDetails.Action.FullScreen,
 Feature.ExperienceDetails.Action.Mute,
@@ -3621,6 +3643,7 @@ Feature.Friends.TFEducation.Modal.TextOutro.EighteenPlus,當你透過 QR 碼或�
 Feature.Friends.Text.IsPlaying,正在玩
 Feature.Friends.Text.NoConnections,您尚未新增任何聯繫對象。若要開始，請尋找並新增聯繫對象。
 Feature.Friends.Text.NoFriends,您尚未新增任何朋友。若要開始，請在 Roblox 上尋找並新增您的朋友。
+Feature.Friends.Title.AddMoreTrustedFriends,新增更多信任的好友
 Feature.Friends.Title.TrustedFriendsExpiredLink,連結已過期
 Feature.Friends.Title.TrustedFriendsInvalidLink,連結無效
 Feature.Friends.TrustedConnection.Label.Trusted,
@@ -3723,11 +3746,12 @@ Feature.Groups.Description.RequiresAccountTenureTooltipOneMonth,必須擁有帳�
 Feature.Groups.Description.RequiresAccountTenureTooltipOneWeek,必須擁有帳號達 7 天，才能加入此社群。
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeDays,必須擁有帳號達 3 天，才能加入此社群。
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeMonths,必須擁有帳號達 90 天，才能加入此社群。
+Feature.Groups.Header.UppercaseMyGroups,我的社群
 Feature.Groups.Heading.Community,
 Feature.Groups.Heading.Followers,
 Feature.Groups.Heading.Groups,
 Feature.Groups.Heading.Members,
-Feature.Groups.Heading.MyGroups,我的社群
+Feature.Groups.Heading.MyGroups,
 Feature.Groups.Heading.Primary,主要
 Feature.Groups.Heading.SocialLinksNew,社交連結
 Feature.Groups.Heading.SocialMedia,社交媒體
@@ -3895,7 +3919,7 @@ Feature.Moments.Action.AddMusic,新增音樂
 Feature.Moments.Action.AddSticker,新增貼紙
 Feature.Moments.Action.AddText,新增文字
 Feature.Moments.Action.AddVoice,新增語音
-Feature.Moments.Action.Analytics,
+Feature.Moments.Action.Analytics,檢視統計資料
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
@@ -3915,7 +3939,6 @@ Feature.Moments.Action.GenerateTextFeedbackNotHelpful,沒有幫助
 Feature.Moments.Action.GenerateTextFeedbackPolicy,不當或違規
 Feature.Moments.Action.Hide,隱藏詳細資訊
 Feature.Moments.Action.HowToCapture,檢視擷取方式
-Feature.Moments.Action.Join,
 Feature.Moments.Action.KeepEditing,繼續編輯
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,最小化
@@ -3946,6 +3969,7 @@ Feature.Moments.Description.GenerateTextFeedbackDisclosure,AI 生成內容。你
 Feature.Moments.Description.HowToCaptureStep1,加入已啟用截圖功能的體驗，並選擇漢堡選單
 Feature.Moments.Description.HowToCaptureStep2,啟用截圖控制項
 Feature.Moments.Description.HowToCaptureStep3,擷取遊戲遊玩的照片和影片
+Feature.Moments.Description.LeaveAvatarMomentsCreation,你即將失去所有變更，但你的穿搭將維持不變。
 Feature.Moments.Description.LeaveMomentsCreation,你即將失去所有變更，但仍可在<b>截圖</b>圖庫中找到此截圖。
 Feature.Moments.Description.MomentsOffBody,請家長在家長監護中開啟「美好時光」。
 Feature.Moments.Description.NoMusicResults,找不到音樂
@@ -4031,6 +4055,11 @@ Feature.Moments.Label.NonInfiniteScrollEndTitle,還有更多美好時光可供�
 Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,相片
 Feature.Moments.Label.PostDeleted,美好時光已刪除
+Feature.Moments.Label.PostFeedbackModeratedBadge,已受到審核
+Feature.Moments.Label.PostFeedbackPostingBadge,張貼中…
+Feature.Moments.Label.PostFeedbackPostingBody,這可能需要一點時間
+Feature.Moments.Label.PostFeedbackPostingSnackbar,正在張貼你的「美好時光」，請將 App 保持開啟，我們會通知你
+Feature.Moments.Label.PostFeedbackPostingTitle,正在張貼「美好時光」
 Feature.Moments.Label.PostRemovedBody,你張貼的「美好時光」違反了我們的《社群標準》。
 Feature.Moments.Label.PostedOnDate,張貼日期：{date}
 Feature.Moments.Label.PublishingRodeoBody,這不會花太久時間。
@@ -4459,6 +4488,7 @@ Feature.RobloxSubscription.Body.GenericError,目前無法完成此操作，請�
 Feature.RobloxSubscription.Body.UnsupportedPlatform,此訂閱無法在該裝置上購買。
 Feature.RobloxSubscription.Description.AgeCheckTrial,完成年齡驗證，即可免費使用 Roblox Plus 一週，以表我們的謝意。無需提供付款方式，就能免費試用。
 Feature.RobloxSubscription.Description.Benefit.Customize,透過個人檔案外框和 App 主題自訂
+Feature.RobloxSubscription.Description.Benefit.CustomizeWithAppIcon,自訂 App 圖示、主題和個人檔案外框
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,前 60 天享道具和虛擬人偶 10% 優惠，之後享 20% 優惠
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,前 {trialUnlockDays} 天享道具和虛擬人偶 10% 優惠，之後可享 20% 優惠
 Feature.RobloxSubscription.Description.ExclusiveBenefits,用更少的 Robux 享受更多樂趣。訂閱 Roblox Plus。
@@ -4486,6 +4516,7 @@ Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,{boldStart}免費試用 {t
 Feature.RobloxSubscription.Label.month,個月
 Feature.RobloxSubscription.Label.months,
 Feature.RobloxSubscription.Message.AlreadySubscribed,你已訂閱 Plus。此連結適用於新會員。分享個人連結，以邀請好友並獲得獎勵。
+Feature.RobloxSubscription.Notification.SpawnEffectFTUX,你剛剛生成時首次套用了生成效果。
 Feature.RobloxSubscription.Title.AgeCheckTrial,取得 Plus 一週免費使用權
 Feature.RobloxSubscription.Title.AlreadySubscribed,好消息
 Feature.RobloxSubscription.Title.GenericError,
@@ -4573,6 +4604,8 @@ Feature.SettingsHub.Label.InviteSearchNoResults,
 Feature.SettingsHub.Label.Invited,已邀請
 Feature.SettingsHub.Label.LeaveButton,
 Feature.SettingsHub.Label.LoadingFriendsListFailed,
+Feature.SettingsHub.Label.LogoutButton,登出
+Feature.SettingsHub.Label.LogoutConfirmation,確定要登出嗎？
 Feature.SettingsHub.Label.MethodOfAbuse,濫用類型？
 Feature.SettingsHub.Label.Moderated,已遭過濾
 Feature.SettingsHub.Label.ModeratedInviteError,體驗邀請遭到過濾，無法傳送。
@@ -4977,7 +5010,7 @@ Feature.VirtualEvents.EnableNotificationsModalBody,獲得活動的消息，即�
 Feature.VirtualEvents.EnableNotificationsModalTitle,活動推播通知
 Feature.VirtualEvents.EventCancelledText,活動已取消。
 Feature.VirtualEvents.EventNotFound,找不到事件
-Feature.VirtualEvents.EventsListTitle,活動
+Feature.VirtualEvents.EventsListTitle,
 Feature.VirtualEvents.GetNotifiedButton,啟用
 Feature.VirtualEvents.GoHome,
 Feature.VirtualEvents.HostedByLabel,主辦者：
@@ -5087,17 +5120,6 @@ IAPExperience.Loading.Text.PurchasingItem,正在購買道具……
 IAPExperience.Loading.Text.PurchasingRobux,正在購買 Robux ……
 IAPExperience.Loading.Text.WaitingForPurchase,正在等待購買……
 IAPExperience.Loading.Text.WaitingForRobux,正在等待發放 Robux……
-IAPExperience.PremiumUpsell.Action.Subscribe,
-IAPExperience.PremiumUpsell.Body.RobuxDiscount,購買 Robux 時獲得 10% 紅利
-IAPExperience.PremiumUpsell.Label.AvatarShopBenefits,在虛擬人偶商店享有獨家和折扣道具
-IAPExperience.PremiumUpsell.Label.Disclosure,訂閱價格為每月 <b>{currencySymbol}{price}。您可以隨時取消。</b>適用 Roblox 使用條款和隱私權政策。
-IAPExperience.PremiumUpsell.Label.PremiumBenefitListDesc,Roblox Premium 將會給您：
-IAPExperience.PremiumUpsell.Label.PremiumOnlyBenefits,享有 Premium 限定福利
-IAPExperience.PremiumUpsell.Label.PremiumPolicy,每月續訂，可隨時取消。
-IAPExperience.PremiumUpsell.Label.PremiumPrice,<b>{currencySymbol}{price}</b>/月
-IAPExperience.PremiumUpsell.Label.RobloxPremium,Roblox Premium
-IAPExperience.PremiumUpsell.Label.RobuxPerMonth,每月 {robux}
-IAPExperience.PremiumUpsell.Label.ShortDisclosure,須遵守 Roblox 使用條款和隱私權政策。
 IAPExperience.PurchaseError.AlreadyPremium,開發者想要您購買 Roblox Premium，不過您已經是 Premium 會員了！
 IAPExperience.PurchaseError.Text.AlreadyOwn,
 IAPExperience.PurchaseError.Text.AlreadySubscribed,你可以在「設定」>「訂閱」管理你的訂閱。
@@ -5473,6 +5495,12 @@ InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop,已成功新增「{
 InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen,已成功新增 {experience_name} 到首頁畫面
 InstantApps.Shortcuts.Label.TryAgain,
 InstantApps.Shortcuts.Label.ViewShortcut,檢視捷徑
+Notifications.Moments.Body.MomentPostFailed,發生錯誤，請稍後再試
+Notifications.Moments.Body.MomentPostModerated,
+Notifications.Moments.Body.MomentPostSuccess,其他人現在可以觀看並對其做出回應
+Notifications.Moments.Title.MomentPostFailed,「美好時光」未張貼
+Notifications.Moments.Title.MomentPostModerated,
+Notifications.Moments.Title.MomentPostSuccess,你的「美好時光」已發佈
 Notifications.NotificationStream.Bundle.ShowLess,顯示更少
 Notifications.NotificationStream.Bundle.ShowMoreV2,其他 {notificationCount} 個
 Notifications.NotificationStream.Label.AllCaughtUp,都看完了！

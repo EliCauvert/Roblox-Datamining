@@ -3,21 +3,24 @@ local Parent = SponsoredTiles.Parent
 local GameCollectionItemTypes = require(Parent.DiscoveryTypes).GameCollectionItemTypes
 local ReactModule = require(Parent.React)
 local GameTileModule = require(Parent.GameTile)
-local TwoByOneGameTileModule = require(SponsoredTiles.TwoByOneGameTile)
+local TwoByOneTileModule = require(SponsoredTiles.TwoByOneTile)
 local GetTileBadgeByPositionConfigFromEntryFunction = GameTileModule.getTileBadgeByPositionConfigFromEntry
 local ResolveWideAssetIdFunction = GameTileModule.resolveWideAssetId
 local _ = require(Parent.VideoUtils)
 local FFlagLuaAppEnableReportExperience = require(Parent.SharedFlags).FFlagLuaAppEnableReportExperience
+local FFlagLuaAppEnableFlexibleFeatureTileVariants = require(Parent.SharedFlags).FFlagLuaAppEnableFlexibleFeatureTileVariants
 local MemoResult = ReactModule.memo(function(p1)
-	-- upvalues: ReactModule (copy), GetTileBadgeByPositionConfigFromEntryFunction (copy), TwoByOneGameTileModule (copy), FFlagLuaAppEnableReportExperience (copy), ResolveWideAssetIdFunction (copy)
+	-- upvalues: ReactModule (copy), GetTileBadgeByPositionConfigFromEntryFunction (copy), TwoByOneTileModule (copy), FFlagLuaAppEnableFlexibleFeatureTileVariants (copy), FFlagLuaAppEnableReportExperience (copy), ResolveWideAssetIdFunction (copy)
 	local Negated = -((p1.maxItemIndex or 0) + 1)
 	
-	return ReactModule.createElement(TwoByOneGameTileModule, {
+	return ReactModule.createElement(TwoByOneTileModule, {
 		size = p1.item.sizeOverride,
 		layoutOrder = p1.index,
 		zIndex = if p1.zIndex then p1.zIndex + Negated else Negated,
 		universeId = p1.item.universeId,
 		placeId = p1.item.placeId,
+		contentType = if FFlagLuaAppEnableFlexibleFeatureTileVariants then p1.item.contentType else nil,
+		clickoutUrl = if FFlagLuaAppEnableFlexibleFeatureTileVariants then p1.item.clickoutUrl else nil,
 		topicId = p1.topicId,
 		logoImageAssetId = p1.item.logoAssetId,
 		logoAspectRatio = p1.item.logoAspectRatio,

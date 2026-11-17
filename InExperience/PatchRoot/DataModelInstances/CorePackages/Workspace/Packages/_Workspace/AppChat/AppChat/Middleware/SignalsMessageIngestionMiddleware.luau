@@ -24,7 +24,6 @@ local GetConversationMessageViewModelStoreModule = require(AppChat.Stores.GetCon
 local GetMessageReactionsStoreModule = require(AppChat.Stores.GetMessageReactionsStore)
 local GetMessageReactionsViewModelStoreModule = require(AppChat.Stores.GetMessageReactionsViewModelStore)
 local FFlagAppChatIncrementalPaginationProjectionModule = require(AppChat.Flags.FFlagAppChatIncrementalPaginationProjection)
-local FFlagAppChatSignalsMessageStoreModule = require(AppChat.Flags.FFlagAppChatSignalsMessageStore)
 local FFlagAppChatEnableReactions = SharedFlagsModule.FFlagAppChatEnableReactions
 
 local function _(p1, p2, p3, Hidden)
@@ -233,14 +232,10 @@ local config = {
 }
 
 return function(Callback, _)
-	-- upvalues: FFlagAppChatSignalsMessageStoreModule (copy), config (copy), GetConversationMessageViewModelStoreModule (copy)
+	-- upvalues: config (copy), GetConversationMessageViewModelStoreModule (copy)
 	return function(p4)
-		-- upvalues: Callback (copy), FFlagAppChatSignalsMessageStoreModule (upval), config (upval), GetConversationMessageViewModelStoreModule (upval)
+		-- upvalues: Callback (copy), config (upval), GetConversationMessageViewModelStoreModule (upval)
 		local CallbackResult = Callback(p4)
-		
-		if not FFlagAppChatSignalsMessageStoreModule then
-			return CallbackResult
-		end
 		local Entry: (any, any) -> () = config[p4.type]
 		
 		if Entry then

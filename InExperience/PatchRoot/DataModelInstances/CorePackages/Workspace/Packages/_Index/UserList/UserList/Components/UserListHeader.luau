@@ -1,4 +1,5 @@
-﻿local Parent = script:FindFirstAncestor("UserList").Parent
+﻿local UserList = script:FindFirstAncestor("UserList")
+local Parent = UserList.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local Enums = FoundationModule.Enums
@@ -9,6 +10,7 @@ local IconButton = FoundationModule.IconButton
 local IconName = Enums.IconName
 local IconSize = Enums.IconSize
 local IconVariant = Enums.IconVariant
+local _ = require(UserList.Common.Types)
 
 return function(p1)
 	-- upvalues: ReactModule (copy), View (copy), Text (copy), Enums (copy), Icon (copy), IconName (copy), IconSize (copy), IconVariant (copy), IconButton (copy)

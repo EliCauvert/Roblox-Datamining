@@ -21,10 +21,13 @@ local FFlagExpChatUseChannelTabsStore = require(Parent.SharedFlags).FFlagExpChat
 local FFlagExpChatTabShortcutNav = require(Parent.SharedFlags).FFlagExpChatTabShortcutNav
 local ExpChatPerfTracker = require(Parent.ChatUIPrimitives).Telemetry.ExpChatPerfTracker
 local FFlagExpChatPerfTrackerTabName = require(Parent.ChatUIPrimitives).Flags.FFlagExpChatPerfTrackerTabName
-local FFlagGlobalTextChatAddPlaySessionFieldModule = require(ExpChat.Flags.FFlagGlobalTextChatAddPlaySessionField)
+local FFlagExpChatStickyTabs = require(Parent.SharedFlags).FFlagExpChatStickyTabs
+local FFlagExpChatStickyTabsLogExposureModule = require(ExpChat.Flags.FFlagExpChatStickyTabsLogExposure)
 local GetChatLayoutStoreModule = require(ExpChat.Stores.GetChatLayoutStore)
+local FFlagExpChatMemoizeChannelBarModule = require(ExpChat.Flags.FFlagExpChatMemoizeChannelBar)
 local ChannelTabModule = require(script.Parent.Parent.ChannelTab)
-local JoinResult = CryoModule.List.join(Analytics.DefaultStandardizedFields, { "addPlaceInstanceId" }, if FFlagGlobalTextChatAddPlaySessionFieldModule then { "addPlaySessionId" } else {})
+local LogStickyTabsExposureModule = require(ExpChat.StickyTabs.logStickyTabsExposure)
+local JoinResult = CryoModule.List.join(Analytics.DefaultStandardizedFields, { "addPlaceInstanceId" }, if require(ExpChat.Flags.FFlagGlobalTextChatAddPlaySessionField) then { "addPlaySessionId" } else {})
 local IconsNavigationCycleDown = Images["icons/navigation/cycleDown"]
 local _Color3 = Color3.fromRGB(255, 255, 255)
 local _Color3_1 = Color3.fromRGB(100, 100, 100)
@@ -48,7 +51,7 @@ local function setTransparency(p1, TransparencyValue)
 end
 
 return function(p1)
-	-- upvalues: ConfigModule (copy), ReactModule (copy), SignalsReactModule (copy), GetChatLayoutStoreModule (copy), v1 (copy), ReactFocusNavigationModule (copy), UseSelectionCursorFunction (copy), CursorKind (copy), FFlagExpChatTabShortcutNav (copy), UserInputService (copy), CreateEffectFunction (copy), FFlagExpChatUseChannelTabsStore (copy), ExpChatTabNavFocusPollDelayFrames (copy), RunService (copy), ExpChatTabNavFocusPollFrames (copy), ChannelTabModule (copy), ExpChatPerfTracker (copy), FFlagExpChatPerfTrackerTabName (copy), Analytics (copy), JoinResult (copy), setTransparency (copy), TextChatService (copy), UseInterpolatedClientSettingsModule (copy), _Color3_1 (copy), ImageSetLabel (copy), IconsNavigationCycleDown (copy), _Color3 (copy)
+	-- upvalues: ConfigModule (copy), ReactModule (copy), SignalsReactModule (copy), GetChatLayoutStoreModule (copy), v1 (copy), ReactFocusNavigationModule (copy), UseSelectionCursorFunction (copy), CursorKind (copy), FFlagExpChatTabShortcutNav (copy), FFlagExpChatMemoizeChannelBarModule (copy), setTransparency (copy), UserInputService (copy), CreateEffectFunction (copy), FFlagExpChatUseChannelTabsStore (copy), ExpChatTabNavFocusPollDelayFrames (copy), RunService (copy), ExpChatTabNavFocusPollFrames (copy), ExpChatPerfTracker (copy), FFlagExpChatPerfTrackerTabName (copy), Analytics (copy), JoinResult (copy), FFlagExpChatStickyTabs (copy), FFlagExpChatStickyTabsLogExposureModule (copy), LogStickyTabsExposureModule (copy), ChannelTabModule (copy), TextChatService (copy), UseInterpolatedClientSettingsModule (copy), _Color3_1 (copy), ImageSetLabel (copy), IconsNavigationCycleDown (copy), _Color3 (copy)
 	local Count = 0
 	
 	for _ in pairs(p1.allChannelTabs) do
@@ -71,7 +74,7 @@ return function(p1)
 	local v3 = nil
 	
 	if FFlagExpChatTabShortcutNav then
-		v2, v51 = ReactModule.useState(nil)
+		v2, v54 = ReactModule.useState(nil)
 	end
 	local UseRefResult1 = if FFlagExpChatTabShortcutNav then ReactModule.useRef({}) else nil
 	local v4 = nil
@@ -85,6 +88,10 @@ return function(p1)
 	local Floored: number = if IsUseSignalStateResultBelow then math.floor((UseSignalStateResult2 - ConfigModule.ChannelTabsSettings.DropdownIconContainerWidth) / ConfigModule.ChannelTabsSettings.MinTabWidth) else Count or math.floor((UseSignalStateResult2 - ConfigModule.ChannelTabsSettings.DropdownIconContainerWidth) / ConfigModule.ChannelTabsSettings.MinTabWidth)
 	local XOffset = (UseSignalStateResult2 - (IsUseSignalStateResultBelow and ConfigModule.ChannelTabsSettings.DropdownIconContainerWidth or 0)) / Floored
 	local YOffset = (Count - Floored) * 40
+	local UseResult = if FFlagExpChatMemoizeChannelBarModule then ReactModule.useCallback(function(p2)
+		-- upvalues: setTransparency (upval), p1 (copy)
+		return setTransparency(p2, p1.transparencyValue)
+	end, { p1.transparencyValue }) else nil
 	ReactModule.useEffect(function()
 		-- upvalues: FFlagExpChatTabShortcutNav (upval), v1 (upval), p1 (copy)
 		if not FFlagExpChatTabShortcutNav then return end
@@ -201,6 +208,51 @@ return function(p1)
 		end
 		return false
 	end, { Floored, p1.allChannelTabs })
+	
+	local function handleTabSelected(Name)
+		-- upvalues: p1 (copy), FFlagExpChatUseChannelTabsStore (upval), Floored (copy), ExpChatPerfTracker (upval), FFlagExpChatPerfTrackerTabName (upval), UseSignalStateResult1 (copy), UseRefResult (copy), UseFocusGuiObjectResult (copy), Analytics (upval), JoinResult (upval), FFlagExpChatStickyTabs (upval), FFlagExpChatStickyTabsLogExposureModule (upval), LogStickyTabsExposureModule (upval), UseStateResult2_1 (copy)
+		local AllChannelTab = p1.allChannelTabs[Name]
+		
+		if AllChannelTab == nil then return end
+		local TabIndex = if FFlagExpChatUseChannelTabsStore then AllChannelTab.tabIndex else AllChannelTab.TabIndex
+		local IsTabIndexBelow = TabIndex <= Floored
+		local Type = if FFlagExpChatUseChannelTabsStore then AllChannelTab.type else AllChannelTab.Type
+		ExpChatPerfTracker.cancelAll()
+		ExpChatPerfTracker.start(ExpChatPerfTracker.Events.ChatWindowTabSwitchTTI, { tabId = Name }, if FFlagExpChatPerfTrackerTabName then { tabName = Name } else nil)
+		
+		if not IsTabIndexBelow and UseSignalStateResult1 and UseRefResult.current then
+			UseFocusGuiObjectResult(UseRefResult.current)
+		end
+		Analytics:TelemetryLogEvent(Analytics.ExpChatTabClickedConfig, {
+			name = Name,
+			type = Type or "Unknown",
+			index = TabIndex,
+			in_overflow = not IsTabIndexBelow,
+			badge_count = if AllChannelTab.HasUnreadMessages then 1 else 0,
+			previous_tab_name = p1.selectedTabName
+		}, JoinResult)
+		
+		if FFlagExpChatStickyTabs and FFlagExpChatStickyTabsLogExposureModule then
+			LogStickyTabsExposureModule(Name, p1.selectedTabName)
+		end
+		p1.onTabSelected(p1.allTextChannels[Name], not IsTabIndexBelow, Name, Type)
+		UseStateResult2_1(false)
+	end
+	
+	local UseRefResult2 = if FFlagExpChatMemoizeChannelBarModule then ReactModule.useRef(handleTabSelected) else nil
+	
+	if UseRefResult2 then
+		UseRefResult2.current = handleTabSelected
+	end
+	local UseResult1 = if FFlagExpChatMemoizeChannelBarModule then ReactModule.useCallback(function(p3)
+		-- upvalues: UseRefResult2 (copy)
+		assert(UseRefResult2, "handleTabSelectedRef is set when channel bar memoization is on")
+		UseRefResult2.current(p3)
+	end, {}) else nil
+	local UseResult2 = if FFlagExpChatMemoizeChannelBarModule and FFlagExpChatTabShortcutNav then ReactModule.useCallback(function(p3, p4)
+		-- upvalues: UseRefResult1 (copy)
+		UseRefResult1.current[p4] = p3
+	end, {}) else nil
 	local config = {
 		["$layout"] = ReactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
@@ -217,13 +269,11 @@ return function(p1)
 	for ChannelName, allChannelTab in pairs(p1.allChannelTabs) do
 		local TabIndex = if FFlagExpChatUseChannelTabsStore then allChannelTab.tabIndex else allChannelTab.TabIndex
 		local IsTabIndexBelow = TabIndex <= Floored
-		local AllTextChannel = p1.allTextChannels[ChannelName]
-		local Type = if FFlagExpChatUseChannelTabsStore then allChannelTab.type else allChannelTab.Type
 		local Element = ReactModule.createElement(ChannelTabModule, {
 			channelTabsSettings = p1.channelTabsSettings,
 			channelName = ChannelName,
-			textChannel = AllTextChannel,
-			tabType = Type,
+			textChannel = p1.allTextChannels[ChannelName],
+			tabType = if FFlagExpChatUseChannelTabsStore then allChannelTab.type else allChannelTab.Type,
 			hasUnreadMessages = allChannelTab.HasUnreadMessages,
 			isDividerVisible = if TabIndex < Floored then TabIndex < Count else IsUseSignalStateResultBelow and TabIndex < Count,
 			isTabCollapsed = not IsTabIndexBelow,
@@ -231,30 +281,15 @@ return function(p1)
 			tabIndex = TabIndex,
 			isTabVisibleToUser = IsTabIndexBelow or UseStateResult1,
 			isLayoutReady = UseStateResult4,
-			tabRef = if FFlagExpChatTabShortcutNav then function(p3)
+			tabRef = if FFlagExpChatTabShortcutNav then if FFlagExpChatMemoizeChannelBarModule then UseResult2 else function(p3)
 				-- upvalues: UseRefResult1 (copy), ChannelName (copy)
 				UseRefResult1.current[ChannelName] = p3
 			end else nil,
-			onTabSelected = function()
-				-- upvalues: ExpChatPerfTracker (upval), ChannelName (copy), FFlagExpChatPerfTrackerTabName (upval), IsTabIndexBelow (copy), UseSignalStateResult1 (copy), UseRefResult (copy), UseFocusGuiObjectResult (copy), Analytics (upval), Type (copy), TabIndex (copy), allChannelTab (copy), p1 (copy), JoinResult (upval), AllTextChannel (copy), UseStateResult2_1 (copy)
-				ExpChatPerfTracker.cancelAll()
-				ExpChatPerfTracker.start(ExpChatPerfTracker.Events.ChatWindowTabSwitchTTI, { tabId = ChannelName }, if FFlagExpChatPerfTrackerTabName then { tabName = ChannelName } else nil)
-				
-				if not IsTabIndexBelow and UseSignalStateResult1 and UseRefResult.current then
-					UseFocusGuiObjectResult(UseRefResult.current)
-				end
-				Analytics:TelemetryLogEvent(Analytics.ExpChatTabClickedConfig, {
-					name = ChannelName,
-					type = Type or "Unknown",
-					index = TabIndex,
-					in_overflow = not IsTabIndexBelow,
-					badge_count = if allChannelTab.HasUnreadMessages then 1 else 0,
-					previous_tab_name = p1.selectedTabName
-				}, JoinResult)
-				p1.onTabSelected(AllTextChannel, not IsTabIndexBelow, ChannelName, Type)
-				UseStateResult2_1(false)
+			onTabSelected = if FFlagExpChatMemoizeChannelBarModule then UseResult1 else function()
+				-- upvalues: handleTabSelected (copy), ChannelName (copy)
+				handleTabSelected(ChannelName)
 			end,
-			setTransparency = function(p3)
+			setTransparency = if FFlagExpChatMemoizeChannelBarModule then UseResult else function(p3)
 				-- upvalues: setTransparency (upval), p1 (copy)
 				return setTransparency(p3, p1.transparencyValue)
 			end
@@ -277,8 +312,9 @@ return function(p1)
 	end
 	local ChannelTabsConfiguration = TextChatService:FindFirstChildOfClass("ChannelTabsConfiguration")
 	local ChannelTabsSettings = p1.channelTabsSettings
-	local BackgroundTransparency = UseInterpolatedClientSettingsModule(ChannelTabsSettings).BackgroundTransparency
-	local BackgroundColor3 = UseInterpolatedClientSettingsModule(ChannelTabsSettings).BackgroundColor3
+	local UseInterpolatedClientSettingsModuleResult = UseInterpolatedClientSettingsModule(ChannelTabsSettings)
+	local BackgroundTransparency = UseInterpolatedClientSettingsModuleResult.BackgroundTransparency
+	local BackgroundColor3 = (if FFlagExpChatMemoizeChannelBarModule then UseInterpolatedClientSettingsModuleResult else UseInterpolatedClientSettingsModule(ChannelTabsSettings)).BackgroundColor3
 	local CreateElementFunction1 = ReactModule.createElement
 	local v5 = "Frame"
 	local config2 = {
@@ -417,11 +453,11 @@ return function(p1)
 				})
 			})
 		}
-		local Frame1 = UseMemoResult
+		local Frame = UseMemoResult
 		
-		if Frame1 then
+		if Frame then
 			local v9 = 0
-			Frame1 = ReactModule.createElement("Frame", {
+			Frame = ReactModule.createElement("Frame", {
 				BorderSizePixel = 0,
 				Size = UDim2.new(0, 8, 0, 8),
 				Position = UDim2.new(0, 18, 0.5, -4),
@@ -435,13 +471,13 @@ return function(p1)
 				UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) })
 			})
 		end
-		config41.UnreadDot = Frame1
+		config41.UnreadDot = Frame
 		DropdownButton = CreateElementFunction(v6, config4, config41)
 	end
 	config3.DropdownButton = DropdownButton
-	local Frame = IsUseSignalStateResultBelow
+	local Frame1 = IsUseSignalStateResultBelow
 	
-	if Frame then
+	if Frame1 then
 		local BorderTransparency1 = ConfigModule.ChannelTabsSettings.BorderTransparency
 		local v10 = 0
 		local MapResult = p1.transparencyValue:map(function(p3): number
@@ -449,7 +485,7 @@ return function(p1)
 			return if v10 == nil then 1 else v10 + p3 * (1 - v10)
 		end)
 		local v11 = 0
-		Frame = ReactModule.createElement("Frame", {
+		Frame1 = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			AnchorPoint = Vector2.new(1, 0),
 			Position = UDim2.new(1, -1, 0, ConfigModule.ChannelTabsSettings.HorizontalBarHeight + 1),
@@ -482,7 +518,7 @@ return function(p1)
 			}, config1)
 		})
 	end
-	config3.DropdownMenu = Frame
+	config3.DropdownMenu = Frame1
 	
 	return CreateElementFunction1(v5, config2, config3)
 end

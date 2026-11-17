@@ -102,6 +102,8 @@ return {
 	ExpChatPresetChatEmojiEffectLayer = "UniverseChat.PresetChat.Emojis.Experiment1",
 	ExpChatPresetChatBadgePresetFTUXLayer = "UniverseChat.PresetChat.BadgePresetFTUX",
 	ExpChatOpenExpressionTrayLayer = "UniverseChat.OpenExpressionTray",
+	ExpChatStickyTabsLayer = "User.Communication.SwitchChatTab.HasChatAccess.UserId",
+	ExpChatOpenChatWindowHasChatAccessLayer = "User.Communication.OpenChatWindow.HasChatAccess.UserId",
 	ExperienceDetailsPageLayer = "PlayerApp.GameDetailsPage",
 	ExperienceDetailsPageExposureLayer = "PlayerApp.GameDetailsPage.Exposure",
 	ExperienceMenuLayer = "Experience.Menu",

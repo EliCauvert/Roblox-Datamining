@@ -16,5 +16,6 @@
 	OmniSearchBar = "omniSearchBar",
 	ConnectionsHub = "connectionsHub",
 	ChatDetails = "chatDetails",
-	PartyChatConversationUpsell = "partyChatConversationUpsell"
+	PartyChatConversationUpsell = "partyChatConversationUpsell",
+	FriendsLandingTrustedCandidates = "friendsLandingTrustedCandidates"
 }

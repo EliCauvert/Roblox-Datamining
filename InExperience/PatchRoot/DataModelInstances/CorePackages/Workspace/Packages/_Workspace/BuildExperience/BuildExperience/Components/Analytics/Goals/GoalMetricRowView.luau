@@ -1,8 +1,11 @@
-﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
+local FFlagBuildAnalyticsFunnelTrackingCTAModule = require(BuildExperience.Flags.FFlagBuildAnalyticsFunnelTrackingCTA)
 local GoalMetricDeltaPillModule = require(script.Parent.GoalMetricDeltaPill)
 local Icon = FoundationModule.Icon
+local Button = FoundationModule.Button
 local Skeleton = FoundationModule.Skeleton
 local Text = FoundationModule.Text
 local View = FoundationModule.View
@@ -11,7 +14,7 @@ local Radius = FoundationModule.Enums.Radius
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Text (copy), Skeleton (copy), Radius (copy), Icon (copy), IconSize (copy), GoalMetricDeltaPillModule (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Text (copy), Skeleton (copy), Radius (copy), FFlagBuildAnalyticsFunnelTrackingCTAModule (copy), Button (copy), FoundationModule (copy), Icon (copy), IconSize (copy), GoalMetricDeltaPillModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local TestId = p1.testId or "GoalMetricRowView"
 	
@@ -31,6 +34,15 @@ return function(p1)
 			Size = UDim2.new(1, 0, 0, UseTokensResult.Size.Size_500),
 			radius = Radius.Small,
 			testId = `{TestId}-loading`
+		}) elseif FFlagBuildAnalyticsFunnelTrackingCTAModule and p1.emptyStateAction ~= nil then ReactModule.createElement(Button, {
+			LayoutOrder = 2,
+			text = p1.emptyStateAction.text,
+			onActivated = p1.emptyStateAction.onActivated,
+			size = FoundationModule.Enums.InputSize.Small,
+			variant = FoundationModule.Enums.ButtonVariant.SoftEmphasis,
+			fillBehavior = FoundationModule.Enums.FillBehavior.Fill,
+			width = UDim.new(1, 0),
+			testId = `{TestId}-empty-action`
 		}) else ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = "row align-y-center gap-small size-full-0 auto-y"

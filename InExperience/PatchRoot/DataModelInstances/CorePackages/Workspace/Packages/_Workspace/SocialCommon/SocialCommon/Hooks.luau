@@ -4,5 +4,6 @@
 	useIsWideMode = require(script.useIsWideMode),
 	useApolloAutoRetry = require(script.useApolloAutoRetry),
 	useMutualFriendsText = require(script.useMutualFriendsText),
-	useRecommendationContextualInfoDisplay = require(script.useRecommendationContextualInfoDisplay)
+	useRecommendationContextualInfoDisplay = require(script.useRecommendationContextualInfoDisplay),
+	useGetPersonalizationSettingItem = require(script.useGetPersonalizationSettingItem)
 }

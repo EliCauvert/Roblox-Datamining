@@ -205,7 +205,6 @@ return function(p1)
 				username = p1.username,
 				isPremium = p1.isPremium,
 				isVerified = p1.isVerified,
-				isRobloxAdmin = p1.isRobloxAdmin,
 				isEdited = p1.isEdited,
 				openEditName = p1.openEditName,
 				platformName = if FFlagAddPlatformNameToProfileHeader then p1.platformName else nil

@@ -7,10 +7,8 @@ local GetInputModeStoreFunction = ResponsiveModule.GetInputModeStore
 local FoundationModule = require(Parent.Foundation)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local UIBloxModule = require(Parent.UIBlox)
 local CryoModule = require(Parent.Cryo)
-local LoadableImage = UIBloxModule.App.Loading.LoadableImage
-local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local ImageSetLabel = require(Parent.UIBlox).Core.ImageSet.ImageSetLabel
 local TextSizeModule = require(Parent.TextSize)
 local _ = require(Parent.SduiCoreSystem)
 local HoldDetector = require(Parent.HoldToPlay).HoldDetector
@@ -20,7 +18,6 @@ local FFlagSduiTileDisableLegacyHover = require(ServerDrivenUi.Flags).FFlagSduiT
 local FFlagSduiGameTileEnableHoverInVR = require(Parent.SharedFlags).FFlagSduiGameTileEnableHoverInVR
 local FFlagLuaAppHomePageFirstImageLoadObserver = require(Parent.SharedFlags).FFlagLuaAppHomePageFirstImageLoadObserver
 local FFlagSduiTileThumbnailPadding = require(Parent.SharedFlags).FFlagSduiTileThumbnailPadding
-local FFlagLuaAppSduiVideoThumbnail = require(Parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
 local FFlagLuaAppSduiGameTileFeedback = require(Parent.SharedFlags).FFlagLuaAppSduiGameTileFeedback
 local SduiTileInsetImageModule = require(script.Parent.SduiTileInsetImage)
 local t = {}
@@ -65,7 +62,7 @@ local function maybeLayoutForButton(p1, RightContent, Small, Offset: number, p2)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: ReactModule (copy), ContentProvider (copy), TextSizeModule (copy), UseTokensFunction (copy), FFlagSduiGameTileEnableHoverInVR (copy), GetInputModeStoreFunction (copy), ResponsiveModule (copy), UseTileHoldActionModule (copy), FFlagLuaAppSduiGameTileFeedback (copy), FFlagSduiTileDisableLegacyHover (copy), SduiTileInsetImageModule (copy), FFlagSduiTileThumbnailPadding (copy), FFlagLuaAppHomePageFirstImageLoadObserver (copy), ImageSetLabel (copy), FFlagLuaAppSduiVideoThumbnail (copy), SduiDefaultTileImageModule (copy), LoadableImage (copy), maybeLayoutForButton (copy), NormalizeFontFaceFunction (copy), CryoModule (copy), t (copy), HoldDetector (copy)
+	-- upvalues: ReactModule (copy), ContentProvider (copy), TextSizeModule (copy), UseTokensFunction (copy), FFlagSduiGameTileEnableHoverInVR (copy), GetInputModeStoreFunction (copy), ResponsiveModule (copy), UseTileHoldActionModule (copy), FFlagLuaAppSduiGameTileFeedback (copy), FFlagSduiTileDisableLegacyHover (copy), SduiTileInsetImageModule (copy), FFlagSduiTileThumbnailPadding (copy), FFlagLuaAppHomePageFirstImageLoadObserver (copy), ImageSetLabel (copy), SduiDefaultTileImageModule (copy), maybeLayoutForButton (copy), NormalizeFontFaceFunction (copy), CryoModule (copy), t (copy), HoldDetector (copy)
 	local LayoutOrder = p1.layoutOrder
 	local AnchorPoint = p1.anchorPoint
 	local AutomaticSize = p1.automaticSize
@@ -281,22 +278,11 @@ return ReactModule.memo(function(p1)
 			}, {
 				UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, CornerRadius) })
 			}) else nil,
-			Thumbnail = if Element then Element elseif p1.imageComponent then p1.imageComponent elseif p1.image then if FFlagLuaAppSduiVideoThumbnail then ReactModule.createElement(SduiDefaultTileImageModule, {
+			Thumbnail = if Element then Element elseif p1.imageComponent then p1.imageComponent elseif p1.image then ReactModule.createElement(SduiDefaultTileImageModule, {
 				image = p1.image,
 				thumbnailBackgroundStyle = p1.thumbnailBackgroundStyle,
 				isContained = IsContained,
 				cardCornerRadius = CornerRadius
-			}) else ReactModule.createElement(LoadableImage, {
-				showFailedStateWhenLoadingFailed = true,
-				useShimmerAnimationWhileLoading = true,
-				ZIndex = -2,
-				BackgroundColor3 = p1.thumbnailBackgroundStyle and p1.thumbnailBackgroundStyle.Color3 or nil,
-				BackgroundTransparency = p1.thumbnailBackgroundStyle and p1.thumbnailBackgroundStyle.Transparency or 1,
-				Image = p1.image,
-				Size = UDim2.new(1, 0, 1, if IsContained then CornerRadius else 0),
-				cornerRadius = UDim.new(0, CornerRadius),
-				ScaleType = if IsContained then Enum.ScaleType.Tile else nil,
-				TileSize = if IsContained then UDim2.new(1, 0, 1, -CornerRadius) else nil
 			}) else nil,
 			UIAspectRatioConstraint = ReactModule.createElement("UIAspectRatioConstraint", { AspectRatio = ImageAspectRatio or 1 }),
 			ThumbnailOverlay = p1.thumbnailOverlayComponent,

@@ -8,7 +8,6 @@ local FireAnalyticsEventModule = require(MomentsCreation.Analytics.fireAnalytics
 local MakeCreationEventFieldsModule = require(MomentsCreation.Analytics.makeCreationEventFields)
 local NormalizeMomentMetadataModule = require(MomentsCreation.Utils.normalizeMomentMetadata)
 local GetFFlagMomentsUseUploadPostAsyncFunction = MomentsCommonModule.Flags.GetFFlagMomentsUseUploadPostAsync
-local GetFFlagMomentsUseMomentsServiceForUploadFunction = MomentsCommonModule.Flags.GetFFlagMomentsUseMomentsServiceForUpload
 local MakePostMetadataModule = require(MomentsCreation.Utils.makePostMetadata)
 local FFlagMomentsCreationSessionIdModule = require(MomentsCreation.Flags.FFlagMomentsCreationSessionId)
 local v1 = game
@@ -30,7 +29,7 @@ local function _(Tbl)
 end
 
 return function(Capture, Tbl, FeedRegistrationInfo, p1, p2): boolean
-	-- upvalues: CaptureServiceUploadUniverseIdOverrideEngineFeature (copy), v1 (copy), NormalizeMomentMetadataModule (copy), GetFFlagMomentsUseUploadPostAsyncFunction (copy), MakePostMetadataModule (copy), GetFFlagMomentsUseMomentsServiceForUploadFunction (copy), FFlagMomentsCreationSessionIdModule (copy), CaptureService (copy), MakeCreationEventFieldsModule (copy), FireAnalyticsEventModule (copy), EventNames (copy)
+	-- upvalues: CaptureServiceUploadUniverseIdOverrideEngineFeature (copy), v1 (copy), NormalizeMomentMetadataModule (copy), GetFFlagMomentsUseUploadPostAsyncFunction (copy), MakePostMetadataModule (copy), FFlagMomentsCreationSessionIdModule (copy), CaptureService (copy), MakeCreationEventFieldsModule (copy), FireAnalyticsEventModule (copy), EventNames (copy)
 	local Tbl1 = nil
 	if CaptureServiceUploadUniverseIdOverrideEngineFeature then
 		local GameId: number = v1.GameId
@@ -46,20 +45,14 @@ return function(Capture, Tbl, FeedRegistrationInfo, p1, p2): boolean
 		Tbl1 = Tbl
 	end
 	local NormalizeMomentMetadataModuleResult = NormalizeMomentMetadataModule(Tbl1)
-	local Result = nil
 	local Success = nil
+	local Result = nil
 	
 	if GetFFlagMomentsUseUploadPostAsyncFunction() then
-		local PostMetadataModule = MakePostMetadataModule(Tbl, if GetFFlagMomentsUseMomentsServiceForUploadFunction() then Capture else nil, if FFlagMomentsCreationSessionIdModule then p1 else nil)
+		local PostMetadataModule = MakePostMetadataModule(Tbl, Capture, if FFlagMomentsCreationSessionIdModule then p1 else nil)
 		Success, Result = pcall(function()
-			-- upvalues: GetFFlagMomentsUseMomentsServiceForUploadFunction (upval), p2 (copy), PostMetadataModule (copy), CaptureService (upval), Capture (copy)
-			if GetFFlagMomentsUseMomentsServiceForUploadFunction() then
-				(p2 or game:GetService("MomentsService")):CreatePostAsync(PostMetadataModule)
-				
-				return
-			else
-				CaptureService:UploadPostAsync(Capture, PostMetadataModule)
-			end
+			-- upvalues: p2 (copy), PostMetadataModule (copy)
+			(p2 or game:GetService("MomentsService")):CreatePostAsync(PostMetadataModule)
 		end)
 	else
 		Success, Result = pcall(function()

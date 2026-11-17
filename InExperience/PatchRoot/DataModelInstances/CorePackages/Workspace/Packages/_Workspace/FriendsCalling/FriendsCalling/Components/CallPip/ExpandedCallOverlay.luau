@@ -3,6 +3,8 @@ local Parent = FriendsCalling.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local CallParticipantCardModule = require(FriendsCalling.Components.CallParticipant.CallParticipantCard)
+local _ = require(FriendsCalling.Stores.GetFriendsCallingStore)
+local FriendsCallingParticipantStatus = Enum.FriendsCallingParticipantStatus
 local HeaderBar = FoundationModule.HeaderBar
 local Icon = FoundationModule.Icon
 local IconButton = FoundationModule.IconButton
@@ -48,8 +50,12 @@ local function useElapsedText(ConnectedAt)
 end
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), useElapsedText (copy), ReactModule (copy), View (copy), HeaderBar (copy), IconName (copy), Text (copy), CallParticipantCardModule (copy), IconButton (copy), InputSize (copy), Icon (copy), IconSize (copy)
+	-- upvalues: UseTokensFunction (copy), FriendsCallingParticipantStatus (copy), useElapsedText (copy), ReactModule (copy), View (copy), HeaderBar (copy), IconName (copy), Text (copy), CallParticipantCardModule (copy), IconButton (copy), InputSize (copy), Icon (copy), IconSize (copy)
+	local Participant = p1.participants[1]
 	local UseTokensResult = UseTokensFunction()
+	local SelfParticipant = p1.selfParticipant
+	local IsStatusMatch: boolean = SelfParticipant ~= nil and SelfParticipant.status == FriendsCallingParticipantStatus.Muted
+	local IsCallVolumeMatch = p1.callVolume == 0
 	local UseElapsedTextResult = useElapsedText(p1.connectedAt)
 	
 	return ReactModule.createElement(View, {
@@ -65,7 +71,10 @@ return function(p1)
 			testId = "friends-calling-pip-drag-target",
 			ref = p1.onDragInputTarget
 		}, {
-			Bar = ReactModule.createElement(HeaderBar.Root, { hasBackground = false }, {
+			Bar = ReactModule.createElement(HeaderBar.Root, {
+				hasBackground = false,
+				testId = "friends-calling-pip-header"
+			}, {
 				Leading = ReactModule.createElement(HeaderBar.Leading, nil, {
 					Actions = ReactModule.createElement(HeaderBar.Actions, {
 						actions = {
@@ -83,7 +92,7 @@ return function(p1)
 							LayoutOrder = 1,
 							tag = "auto-xy text-title-large content-emphasis",
 							testId = "friends-calling-pip-title",
-							Text = p1.participant.name
+							Text = if Participant == nil then if p1.isRinging then "Ringing" else "" else Participant.name
 						}),
 						Timer = if UseElapsedTextResult == nil then nil else ReactModule.createElement(Text, {
 							LayoutOrder = 2,
@@ -102,15 +111,15 @@ return function(p1)
 			LayoutOrder = 2,
 			tag = "fill size-full-0 padding-x-xlarge padding-bottom-xxlarge"
 		}, {
-			PlayerCard = ReactModule.createElement(CallParticipantCardModule, {
+			PlayerCard = if Participant == nil then nil else ReactModule.createElement(CallParticipantCardModule, {
 				testId = "friends-calling-pip-player-card",
-				userId = p1.participant.userId,
-				name = p1.participant.name,
-				statusText = p1.participant.statusText,
-				isMuted = p1.participant.isMuted,
-				isSpeaking = p1.participant.isSpeaking,
-				isDimmed = p1.participant.isDimmed,
-				showStatusAnimation = p1.participant.showStatusAnimation
+				userId = Participant.userId,
+				name = Participant.name,
+				statusText = Participant.statusText,
+				isMuted = Participant.isMuted,
+				isSpeaking = Participant.isSpeaking,
+				isDimmed = Participant.isDimmed,
+				showStatusAnimation = Participant.showStatusAnimation
 			})
 		}),
 		Actions = ReactModule.createElement(View, {
@@ -128,20 +137,26 @@ return function(p1)
 					onActivated = p1.onOpenChat,
 					size = InputSize.Large
 				}),
-				Headphones = ReactModule.createElement(IconButton, {
+				Speaker = ReactModule.createElement(IconButton, {
 					LayoutOrder = 2,
 					isCircular = true,
-					testId = "friends-calling-pip-headphones",
-					icon = IconName.Headphones,
-					onActivated = p1.onToggleConversationAudio,
+					testId = "friends-calling-pip-speaker",
+					icon = if IsCallVolumeMatch then IconName.SpeakerSlash else IconName.Speaker,
+					onActivated = function()
+						-- upvalues: p1 (copy), IsCallVolumeMatch (copy)
+						p1.onToggleConversationAudio(not IsCallVolumeMatch)
+					end,
 					size = InputSize.Large
 				}),
 				Microphone = ReactModule.createElement(IconButton, {
 					LayoutOrder = 3,
 					isCircular = true,
 					testId = "friends-calling-pip-microphone",
-					icon = if p1.isMicrophoneMuted then IconName.MicrophoneSlash else IconName.Microphone,
-					onActivated = p1.onToggleMicrophone,
+					icon = if IsStatusMatch then IconName.MicrophoneSlash else IconName.Microphone,
+					onActivated = function()
+						-- upvalues: p1 (copy), IsStatusMatch (copy)
+						p1.onToggleMicrophone(not IsStatusMatch)
+					end,
 					size = InputSize.Large
 				}),
 				EndCall = ReactModule.createElement(View, {

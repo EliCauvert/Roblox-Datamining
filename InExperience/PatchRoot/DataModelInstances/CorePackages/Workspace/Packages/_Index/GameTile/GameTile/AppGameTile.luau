@@ -88,7 +88,6 @@ local FIntLuaAppGameTileVideoDwellTimeInSec = require(Parent.SharedFlags).FIntLu
 local FIntLuaAppGameTileVideoVisiblePercent = require(Parent.SharedFlags).FIntLuaAppGameTileVideoVisiblePercent
 local FFlagLuaAppTileVideoCandidateOnly = require(Parent.SharedFlags).FFlagLuaAppTileVideoCandidateOnly
 local FFlagLuaAppOneByTwoHoverIdleAutoplay = require(Parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
-local LuaAppKeepTileBadgesDuringVideo = game:DefineFastFlag("LuaAppKeepTileBadgesDuringVideo", false)
 local FFlagLuaAppVideoTileDisableActivation = require(Parent.SharedFlags).FFlagLuaAppVideoTileDisableActivation
 local FFlagLuaAppFixHiddenTileVideoCleanup = require(Parent.SharedFlags).FFlagLuaAppFixHiddenTileVideoCleanup
 local FFlagLuaAppUsePrevalidatedVideoGamePlayability = require(Parent.SharedFlags).FFlagLuaAppUsePrevalidatedVideoGamePlayability
@@ -700,7 +699,7 @@ function AppGameTile.renderGridTilesFooter(p2)
 end
 
 function AppGameTile.renderContent(p2, ReducedMotion, p3, FoundationTokens)
-	-- upvalues: FFlagLuaAppContinueSortInstantPlay (copy), Callback (copy), GameTileConstantsModule (copy), GameTileViewConfigModule (copy), ReactModule (copy), GameStatsModule (copy), HiddenTileContentModule (copy), GameTileVideoThumbnailModule (copy), FFlagLuaAppHomeMomentVideoFallback (copy), FFlagLuaAppVideoTileDisableActivation (copy), FFlagLuaAppEdpMediaGalleryFullScreen (copy), FFlagLuaAppGameTileExtractGameDetailsCallback (copy), FFlagLuaAppGameDetailsAttributionFix (copy), LuaAppKeepTileBadgesDuringVideo (copy), RoactModule (copy), GameTileThumbnailBadgesModule (copy), FoundationModule (copy), FFlagLuaAppGameTileSelectionVideoPlayback (copy), FFlagLuaAppGameTileNotInterestedDirectAction (copy), GameTileContextualActionsModule (copy), GameTileOverflowMenuModule (copy), GameTileViewModule (copy), FFlagLuaAppMigrateGameTileHoverFixes (copy), AppExperienceActionRowModule (copy), FFlagLuaAppUnifyPlayButtonTile (copy), InstantPlayLauncherModule (copy), DiscoveryAnalyticsModule (copy)
+	-- upvalues: FFlagLuaAppContinueSortInstantPlay (copy), Callback (copy), GameTileConstantsModule (copy), GameTileViewConfigModule (copy), ReactModule (copy), GameStatsModule (copy), HiddenTileContentModule (copy), GameTileVideoThumbnailModule (copy), FFlagLuaAppHomeMomentVideoFallback (copy), FFlagLuaAppVideoTileDisableActivation (copy), FFlagLuaAppEdpMediaGalleryFullScreen (copy), FFlagLuaAppGameTileExtractGameDetailsCallback (copy), FFlagLuaAppGameDetailsAttributionFix (copy), RoactModule (copy), GameTileThumbnailBadgesModule (copy), FoundationModule (copy), FFlagLuaAppGameTileSelectionVideoPlayback (copy), FFlagLuaAppGameTileNotInterestedDirectAction (copy), GameTileContextualActionsModule (copy), GameTileOverflowMenuModule (copy), GameTileViewModule (copy), FFlagLuaAppMigrateGameTileHoverFixes (copy), AppExperienceActionRowModule (copy), FFlagLuaAppUnifyPlayButtonTile (copy), InstantPlayLauncherModule (copy), DiscoveryAnalyticsModule (copy)
 	local Size = p2.props.Size or UDim2.fromScale(1, 1)
 	local ImageThumbnail = p2.props.imageThumbnail
 	local OnGameTileActivatedFunction = p2.props.onGameTileActivated
@@ -742,10 +741,10 @@ function AppGameTile.renderContent(p2, ReducedMotion, p3, FoundationTokens)
 		universeId = p2.props.universeId,
 		videoPlaybackCoordinator = if p2.props.videoPlaybackContext then p2.props.videoPlaybackContext.videoPlaybackCoordinator else nil
 	}) else nil
-	local Fragment = if LuaAppKeepTileBadgesDuringVideo or not p2.props.isVideoPlaying then if p2.props.tileBadges then RoactModule.createFragment({
+	local Fragment = if p2.props.tileBadges then RoactModule.createFragment({
 		SocialFeaturePill = Element,
 		Badge = ReactModule.createElement(GameTileThumbnailBadgesModule, { tileBadgesByPosition = p2.props.tileBadges })
-	}) else Element else nil
+	}) else Element
 	
 	if FFlagLuaAppContinueSortInstantPlay and CallbackResult.isTreatment1 and not p2.props.isHidden then
 		local Element2 = ReactModule.createElement(FoundationModule.View, {
@@ -1019,7 +1018,7 @@ end)(AppGameTile)
 if not FFlagLuaAppGameDetailsAttributionFix then
 	v1 = RoactServices.connect({ networking = RoactNetworking })(v1)
 end
-local function v103(p2)
+local function v102(p2)
 	-- upvalues: ReactModule (copy), UseTokensFunction (copy), GameHydrationReactModule (copy), UseIsHoveredTileModule (copy), UseUiModeInfoFunction (copy), UiMode (copy), UseValidTileBadgesModule (copy), UseSelectorFunction (copy), FFlagLuaAppMigrateGameTileActiveFriendsHydrationFix (copy), UseHasInGameFriendsModule (copy), FFlagGameTileMigrateOffLegacyPresence (copy), UseGetOnlineFriendsByUniverseId (copy), CryoModule (copy), UseInGameUserIdsModule (copy), FFlagLuaAppGameTileSelectionVideoPlayback (copy), FFlagLuaAppSuppressVideoDetectorDuringScroll (copy), FFlagLuaAppFixHiddenTileVideoCleanup (copy), FFlagLuaAppGameDetailsAttributionFix (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), SponsoredGamesRecordClickFunction (copy), HoverTileCoordinatorModule (copy), VideoEndReasonModule (copy), VideoPlaybackCoordinator (copy), GameCollectionItemTypes (copy), GetFFlagEnableNavigationPerformanceIntervalsFunction (copy), IntervalPerformanceTracker (copy), UseOverflowMenuOpenFunction (copy), UseTriggerFeedbackFunction (copy), FFlagLuaAppContinueSortInstantPlay (copy), Callback (copy), GetAvailableGameTileOverflowMenuItemsModule (copy), FFlagLuaAppEnableReportExperience (copy), UseHasVideoThumbnailSelectorModule (copy), UseTagAsViewportAutoplayCandidateFunction (copy), FFlagLuaAppTileVideoCandidateOnly (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), FFlagLuaAppEdpMediaGalleryVideoPreview (copy), UsePreferredInputFunction (copy), GameVideoPlaybackDetectorModule (copy), ResponsiveModule (copy), FIntLuaAppGameTileVideoDwellTimeInSec (copy), FIntLuaAppGameTileVideoVisiblePercent (copy), FFlagLuaAppUsePrevalidatedVideoGamePlayability (copy), v1 (ref)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseTokensResult = UseTokensFunction()
@@ -1217,4 +1216,4 @@ local function v103(p2)
 	})))
 end
 
-return if FFlagSignalsNavP3fGameDetails then ReactModule.memo(v103) else v103
+return if FFlagSignalsNavP3fGameDetails then ReactModule.memo(v102) else v102

@@ -14,6 +14,7 @@ local CryoModule = require(Parent.Cryo)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local RobloxEventReceiver = require(Parent.RealtimeDelivery).RobloxEventReceiver
 local _ = require(AvatarExperienceCatalog.Components.Checkout.CheckoutPage)
+local GetDeselectedItemPositionModule = require(AvatarExperienceCatalog.Components.Checkout.getDeselectedItemPosition)
 local PurchaseItemsSuccessThunkModule = require(AvatarExperienceCatalog.State.Thunks.PurchaseItemsSuccessThunk)
 local SaveAsAvatarThunkModule = require(AvatarExperienceCatalog.State.Thunks.SaveAsAvatarThunk)
 local SaveAsMakeupLookThunkModule = require(AvatarExperienceCatalog.State.Thunks.SaveAsMakeupLookThunk)
@@ -48,14 +49,13 @@ local UseSaveOptionsStoredValuesModule = require(AvatarExperienceCatalog.Hooks.u
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local LocalizationRoactContext = require(Parent.Localization).LocalizationRoactContext
 local AvatarExperienceAnalyticsModule = require(Parent.AvatarExperienceAnalytics)
-local SendUnifiedEventForDeferredActionFunction = AvatarExperienceAnalyticsModule.sendUnifiedEventForDeferredAction
+local SendPartialUnifiedEventForDeferredActionFunction = AvatarExperienceAnalyticsModule.sendPartialUnifiedEventForDeferredAction
 local GetUnifiedLoggingSurfaceFunction = AvatarExperienceAnalyticsModule.Utils.getUnifiedLoggingSurface
 local GetMarketplaceUnifiedAssetTypeFunction = AvatarExperienceAnalyticsModule.Utils.getMarketplaceUnifiedAssetType
 local GetMarketplaceUnifiedBundleTypeFunction = AvatarExperienceAnalyticsModule.Utils.getMarketplaceUnifiedBundleType
 local SendUnifiedEventsForMultiItemShoppingFunction = AvatarExperienceAnalyticsModule.sendUnifiedEventsForMultiItemShopping
 local GetUnifiedEventsForMISFunction = AvatarExperienceAnalyticsModule.Utils.getUnifiedEventsForMIS
 local UnifiedEventLogEnums = AvatarExperienceAnalyticsModule.UnifiedEventLogEnums
-local UnifiedEventLogConstants = AvatarExperienceAnalyticsModule.UnifiedEventLogConstants
 local UnifiedSelectionListStore = AvatarExperienceAnalyticsModule.Store.UnifiedSelectionListStore
 local CartIdService = AvatarExperienceAnalyticsModule.Lib.CartIdService
 local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
@@ -207,7 +207,7 @@ local function v73(JoinResults, DiscountedItemsFromOffers)
 end
 
 return function(p2)
-	-- upvalues: Parent (copy), UseAXCatalogStoreContextModule (copy), UseNavigationFunction (copy), UseAvatarRouteFunction (copy), UseNetworkingFunction (copy), UseDispatchFunction (copy), FFlagAXMISWithOffers (copy), UseSaveOptionsStoredValuesModule (copy), UseSignalStateFunction (copy), FFlagAXUnifiedEventStrictPayloads (copy), UseSelectorFunction (copy), selectScreenSize (copy), FFlagAXMISWithBlackbird (copy), ReactModule (copy), selectTryOnItems (copy), TutilsModule (copy), selectTryOnBodyColor3s (copy), selectTryOnBodyScales (copy), selectTryOnBodyPartColorRangeIds (copy), selectTryOnLookId (copy), FFlagAXCatalogMakeupSupport (copy), v1 (ref), FFlagAXMISEnableMultiShoppingUnifiedEvents (copy), v2 (ref), v3 (ref), selectAvatarSceneLooks (copy), selectItemInfoForTryOnItems (copy), selectShouldTryOnWithoutEquippedItems (copy), selectLocalUserId (copy), selectUserRobux (copy), v71 (copy), UseLocalizationFunction (copy), LocalizationRoactContext (copy), UseAppPolicyFunction (copy), UseNavigationFocusFunction (copy), FFlagAXEnableExpiredUserLookCheckout (copy), RobloxEventReceiver (copy), NotificationService (copy), AvatarScreen (copy), GetRobloxSubscriptionProductsFunction (copy), MutedErrorFunction (copy), UseOffersCartPricingCalculationsForCartItemsModule (copy), CryoModule (copy), Constants (copy), FFlagAXBackgroundsEquipTryOnCounters (copy), ReportBackgroundUserActionCounter (copy), UnifiedEventLogEnums (copy), UnifiedEventLogConstants (copy), UnifiedSelectionListStore (copy), CartIdService (copy), GetMarketplaceUnifiedAssetTypeFunction (copy), GetMarketplaceUnifiedBundleTypeFunction (copy), SendUnifiedEventForDeferredActionFunction (copy), GetUnifiedLoggingSurfaceFunction (copy), FFlagAXDurablesForMIS (copy), SetSelectedTimedOptionModule (copy), v73 (copy), FIntBlackbirdUpsellMinPriceForDiscountInclusive (copy), FIntBlackbirdUpsellMaxPriceForDiscountInclusive (copy), ToastType (copy), SetCurrentToastMessageFunction (copy), GetTryOnItemsContainsOnlyMakeupTypesModule (copy), FFlagAXMISSaveWearFix (copy), SaveAsMakeupLookThunkModule (copy), SaveAsAvatarThunkModule (copy), GetTryOnItemReducerKeyFunction (copy), FFlagAXRevertEquippedAssetsAfterLayeringTryOnMakeup (copy), AvatarLastEquippedStateStore (copy), GetEquippableAssetsFromTryOnItemsModule (copy), PurchaseItemsSuccessThunkModule (copy), DiscountTypeEnum (copy), CloseCentralOverlayFunction (copy), PromiseModule (copy), AvatarScreenProperties (copy), GetUnifiedEventsForMISFunction (copy), SendUnifiedEventsForMultiItemShoppingFunction (copy), PurchaseItemsModule (copy), MapPurchaseItemsResponseModule (copy), GetIsInsufficientRobuxErrorFunction (copy)
+	-- upvalues: Parent (copy), UseAXCatalogStoreContextModule (copy), UseNavigationFunction (copy), UseAvatarRouteFunction (copy), UseNetworkingFunction (copy), UseDispatchFunction (copy), FFlagAXMISWithOffers (copy), UseSaveOptionsStoredValuesModule (copy), UseSignalStateFunction (copy), FFlagAXUnifiedEventStrictPayloads (copy), UseSelectorFunction (copy), selectScreenSize (copy), FFlagAXMISWithBlackbird (copy), ReactModule (copy), selectTryOnItems (copy), TutilsModule (copy), selectTryOnBodyColor3s (copy), selectTryOnBodyScales (copy), selectTryOnBodyPartColorRangeIds (copy), selectTryOnLookId (copy), FFlagAXCatalogMakeupSupport (copy), v1 (ref), FFlagAXMISEnableMultiShoppingUnifiedEvents (copy), v2 (ref), v3 (ref), selectAvatarSceneLooks (copy), selectItemInfoForTryOnItems (copy), selectShouldTryOnWithoutEquippedItems (copy), selectLocalUserId (copy), selectUserRobux (copy), v71 (copy), UseLocalizationFunction (copy), LocalizationRoactContext (copy), UseAppPolicyFunction (copy), UseNavigationFocusFunction (copy), FFlagAXEnableExpiredUserLookCheckout (copy), RobloxEventReceiver (copy), NotificationService (copy), AvatarScreen (copy), GetRobloxSubscriptionProductsFunction (copy), MutedErrorFunction (copy), UseOffersCartPricingCalculationsForCartItemsModule (copy), CryoModule (copy), Constants (copy), FFlagAXBackgroundsEquipTryOnCounters (copy), ReportBackgroundUserActionCounter (copy), UnifiedEventLogEnums (copy), GetDeselectedItemPositionModule (copy), UnifiedSelectionListStore (copy), CartIdService (copy), GetMarketplaceUnifiedAssetTypeFunction (copy), GetMarketplaceUnifiedBundleTypeFunction (copy), SendPartialUnifiedEventForDeferredActionFunction (copy), GetUnifiedLoggingSurfaceFunction (copy), FFlagAXDurablesForMIS (copy), SetSelectedTimedOptionModule (copy), v73 (copy), FIntBlackbirdUpsellMinPriceForDiscountInclusive (copy), FIntBlackbirdUpsellMaxPriceForDiscountInclusive (copy), ToastType (copy), SetCurrentToastMessageFunction (copy), GetTryOnItemsContainsOnlyMakeupTypesModule (copy), FFlagAXMISSaveWearFix (copy), SaveAsMakeupLookThunkModule (copy), SaveAsAvatarThunkModule (copy), GetTryOnItemReducerKeyFunction (copy), FFlagAXRevertEquippedAssetsAfterLayeringTryOnMakeup (copy), AvatarLastEquippedStateStore (copy), GetEquippableAssetsFromTryOnItemsModule (copy), PurchaseItemsSuccessThunkModule (copy), DiscountTypeEnum (copy), CloseCentralOverlayFunction (copy), PromiseModule (copy), AvatarScreenProperties (copy), GetUnifiedEventsForMISFunction (copy), SendUnifiedEventsForMultiItemShoppingFunction (copy), PurchaseItemsModule (copy), MapPurchaseItemsResponseModule (copy), GetIsInsufficientRobuxErrorFunction (copy)
 	local PurchasePromptLiteModule = require(Parent.PurchasePromptLite)
 	local ShoppingCartStore = UseAXCatalogStoreContextModule().shoppingCartStore
 	local UseNavigationResult = UseNavigationFunction()
@@ -715,7 +715,7 @@ return function(p2)
 	return {
 		canPurchase = UseSignalStateResult2,
 		cartItems = ReactModule.useMemo(function()
-			-- upvalues: UseSignalStateResult (copy), CryoModule (upval), Constants (upval), p2 (copy), FFlagAXBackgroundsEquipTryOnCounters (upval), ReportBackgroundUserActionCounter (upval), FFlagAXMISEnableMultiShoppingUnifiedEvents (upval), UnifiedEventLogEnums (upval), FFlagAXUnifiedEventStrictPayloads (upval), UnifiedEventLogConstants (upval), UnifiedSelectionListStore (upval), CartIdService (upval), GetMarketplaceUnifiedAssetTypeFunction (upval), GetMarketplaceUnifiedBundleTypeFunction (upval), UseSelectorResult (copy), SendUnifiedEventForDeferredActionFunction (upval), GetUnifiedLoggingSurfaceFunction (upval), UseAvatarRouteResult (copy), FFlagAXDurablesForMIS (upval), ShoppingCartStore (copy), UseDispatchResult (copy), SetSelectedTimedOptionModule (upval), FFlagAXMISWithOffers (upval), UseOffersCartPricingCalculationsForCartItemsModuleResult (ref), v73 (upval)
+			-- upvalues: UseSignalStateResult (copy), CryoModule (upval), Constants (upval), p2 (copy), FFlagAXBackgroundsEquipTryOnCounters (upval), ReportBackgroundUserActionCounter (upval), FFlagAXMISEnableMultiShoppingUnifiedEvents (upval), UnifiedEventLogEnums (upval), FFlagAXUnifiedEventStrictPayloads (upval), GetDeselectedItemPositionModule (upval), UnifiedSelectionListStore (upval), CartIdService (upval), GetMarketplaceUnifiedAssetTypeFunction (upval), GetMarketplaceUnifiedBundleTypeFunction (upval), UseSelectorResult (copy), SendPartialUnifiedEventForDeferredActionFunction (upval), GetUnifiedLoggingSurfaceFunction (upval), UseAvatarRouteResult (copy), FFlagAXDurablesForMIS (upval), ShoppingCartStore (copy), UseDispatchResult (copy), SetSelectedTimedOptionModule (upval), FFlagAXMISWithOffers (upval), UseOffersCartPricingCalculationsForCartItemsModuleResult (ref), v73 (upval)
 			local JoinResults = {}
 			
 			for i, value in UseSignalStateResult do
@@ -728,7 +728,7 @@ return function(p2)
 						end
 					end,
 					onRemove = function()
-						-- upvalues: p2 (upval), FFlagAXBackgroundsEquipTryOnCounters (upval), ReportBackgroundUserActionCounter (upval), value (copy), FFlagAXMISEnableMultiShoppingUnifiedEvents (upval), UnifiedEventLogEnums (upval), FFlagAXUnifiedEventStrictPayloads (upval), UnifiedEventLogConstants (upval), UnifiedSelectionListStore (upval), CartIdService (upval), GetMarketplaceUnifiedAssetTypeFunction (upval), GetMarketplaceUnifiedBundleTypeFunction (upval), i (copy), UseSelectorResult (upval), SendUnifiedEventForDeferredActionFunction (upval), GetUnifiedLoggingSurfaceFunction (upval), UseAvatarRouteResult (upval)
+						-- upvalues: p2 (upval), FFlagAXBackgroundsEquipTryOnCounters (upval), ReportBackgroundUserActionCounter (upval), value (copy), FFlagAXMISEnableMultiShoppingUnifiedEvents (upval), UnifiedEventLogEnums (upval), FFlagAXUnifiedEventStrictPayloads (upval), GetDeselectedItemPositionModule (upval), UnifiedSelectionListStore (upval), CartIdService (upval), GetMarketplaceUnifiedAssetTypeFunction (upval), GetMarketplaceUnifiedBundleTypeFunction (upval), i (copy), UseSelectorResult (upval), SendPartialUnifiedEventForDeferredActionFunction (upval), GetUnifiedLoggingSurfaceFunction (upval), UseAvatarRouteResult (upval)
 						if p2.onRemoveItem then
 							if FFlagAXBackgroundsEquipTryOnCounters then
 								ReportBackgroundUserActionCounter.reportIfAvatarBackgroundAsset("RemoveTryOn", value.itemType, value.itemSubType)
@@ -737,43 +737,35 @@ return function(p2)
 							
 							if FFlagAXMISEnableMultiShoppingUnifiedEvents then
 								local ASSET = if value.itemType == "Asset" then UnifiedEventLogEnums.MarketplaceUnifiedItemType.ASSET elseif value.itemType == "Bundle" then UnifiedEventLogEnums.MarketplaceUnifiedItemType.BUNDLE else nil
-								local v9 = nil
-								local v10 = nil
-								local v11 = nil
-								local v12 = nil
-								local v13 = nil
-								local v14 = nil
+								local GridPositionRow = nil
+								local GridPositionColumn = nil
+								local ElementSizeHeight = nil
+								local ElementSizeWidth = nil
+								local ScreenSizeHeight = nil
+								local ScreenSizeWidth = nil
 								
 								if FFlagAXUnifiedEventStrictPayloads then
-									local ATTRIBUTEPREFIX = UnifiedEventLogConstants.ATTRIBUTE_PREFIX
-									local Text = ATTRIBUTEPREFIX .. UnifiedEventLogConstants.FIELD_ITEM_ID
-									local Text1 = ATTRIBUTEPREFIX .. UnifiedEventLogConstants.FIELD_ITEM_TYPE
-									
-									for _, value1 in UnifiedSelectionListStore.getSelectionList() do
-										if tostring(value1[Text]) == tostring(value.itemId) and tostring(value1[Text1]) == tostring(ASSET) then
-											v9 = value1[ATTRIBUTEPREFIX .. UnifiedEventLogConstants.FIELD_GRID_POSITION_ROW]
-											v10 = value1[ATTRIBUTEPREFIX .. UnifiedEventLogConstants.FIELD_GRID_POSITION_COLUMN]
-											v11 = value1[ATTRIBUTEPREFIX .. UnifiedEventLogConstants.FIELD_ELEMENT_SIZE_HEIGHT]
-											v12 = value1[ATTRIBUTEPREFIX .. UnifiedEventLogConstants.FIELD_ELEMENT_SIZE_WIDTH]
-											v13 = value1[ATTRIBUTEPREFIX .. UnifiedEventLogConstants.FIELD_SCREEN_SIZE_HEIGHT]
-											v14 = value1[ATTRIBUTEPREFIX .. UnifiedEventLogConstants.FIELD_SCREEN_SIZE_WIDTH]
-											break
-										end
-									end
+									local DeselectedItemPositionModule = GetDeselectedItemPositionModule(UnifiedSelectionListStore.getSelectionList(), value.itemId, ASSET)
+									GridPositionRow = DeselectedItemPositionModule.gridPositionRow
+									GridPositionColumn = DeselectedItemPositionModule.gridPositionColumn
+									ElementSizeHeight = DeselectedItemPositionModule.elementSizeHeight
+									ElementSizeWidth = DeselectedItemPositionModule.elementSizeWidth
+									ScreenSizeHeight = DeselectedItemPositionModule.screenSizeHeight
+									ScreenSizeWidth = DeselectedItemPositionModule.screenSizeWidth
 								end
-								SendUnifiedEventForDeferredActionFunction({
+								SendPartialUnifiedEventForDeferredActionFunction({
 									action = UnifiedEventLogEnums.MarketplaceUnifiedAction.ITEM_DESELECTED,
 									cartId = CartIdService.getCartId(),
 									itemId = value.itemId,
 									itemType = if FFlagAXUnifiedEventStrictPayloads then if value.itemType == "Asset" then UnifiedEventLogEnums.MarketplaceUnifiedItemType.ASSET else UnifiedEventLogEnums.MarketplaceUnifiedItemType.BUNDLE else ASSET,
 									assetType = if value.itemType == "Asset" then if FFlagAXUnifiedEventStrictPayloads then GetMarketplaceUnifiedAssetTypeFunction(value.itemSubType) else value.itemSubType else nil,
 									bundleType = if value.itemType == "Asset" then nil elseif FFlagAXUnifiedEventStrictPayloads then GetMarketplaceUnifiedBundleTypeFunction(value.itemSubType) else value.itemSubType,
-									gridPositionRow = if FFlagAXUnifiedEventStrictPayloads then v9 or i else nil,
-									gridPositionColumn = if FFlagAXUnifiedEventStrictPayloads then v10 or 1 else nil,
-									elementSizeHeight = if FFlagAXUnifiedEventStrictPayloads then v11 else nil,
-									elementSizeWidth = if FFlagAXUnifiedEventStrictPayloads then v12 else nil,
-									screenSizeHeight = if FFlagAXUnifiedEventStrictPayloads then v13 or (if UseSelectorResult then math.round(UseSelectorResult.Y) else nil) else nil,
-									screenSizeWidth = if FFlagAXUnifiedEventStrictPayloads then v14 or (if UseSelectorResult then math.round(UseSelectorResult.X) else nil) else nil
+									gridPositionRow = if FFlagAXUnifiedEventStrictPayloads then GridPositionRow or i else nil,
+									gridPositionColumn = if FFlagAXUnifiedEventStrictPayloads then GridPositionColumn or 1 else nil,
+									elementSizeHeight = if FFlagAXUnifiedEventStrictPayloads then ElementSizeHeight else nil,
+									elementSizeWidth = if FFlagAXUnifiedEventStrictPayloads then ElementSizeWidth else nil,
+									screenSizeHeight = if FFlagAXUnifiedEventStrictPayloads then ScreenSizeHeight or (if UseSelectorResult then math.round(UseSelectorResult.Y) else nil) else nil,
+									screenSizeWidth = if FFlagAXUnifiedEventStrictPayloads then ScreenSizeWidth or (if UseSelectorResult then math.round(UseSelectorResult.X) else nil) else nil
 								}, if FFlagAXUnifiedEventStrictPayloads then {
 									surface = GetUnifiedLoggingSurfaceFunction(UseAvatarRouteResult)
 								} else nil)

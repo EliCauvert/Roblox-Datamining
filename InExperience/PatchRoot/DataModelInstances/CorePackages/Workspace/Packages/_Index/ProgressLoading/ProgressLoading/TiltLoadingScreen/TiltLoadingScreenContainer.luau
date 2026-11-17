@@ -27,7 +27,7 @@ return function(p1)
 	if FFlagEnableTiltLoadingScreen then
 		local HasDeferredJoin = p1.deferredJoin ~= nil
 		local UseExperienceLoadingLifecycleModuleResult = UseExperienceLoadingLifecycleModule(not HasDeferredJoin, p1.milestones, p1.onDismissComplete)
-		local UseDeferredLoadingLifecycleModuleResult, UseDeferredLoadingLifecycleModuleResult2 = UseDeferredLoadingLifecycleModule(HasDeferredJoin, if p1.deferredJoin then p1.deferredJoin.assetService else nil, p1.onCancel)
+		local UseDeferredLoadingLifecycleModuleResult, UseDeferredLoadingLifecycleModuleResult2 = UseDeferredLoadingLifecycleModule(HasDeferredJoin, if p1.deferredJoin then p1.deferredJoin.assetService else nil, p1.onCancel, if p1.deferredJoin then p1.deferredJoin.universeId else nil)
 		local ReducedMotion = UserGameSettings.ReducedMotion
 		local UseRefResult = ReactModule.useRef(p1.onCancel)
 		UseRefResult.current = if HasDeferredJoin then UseDeferredLoadingLifecycleModuleResult2 else p1.onCancel

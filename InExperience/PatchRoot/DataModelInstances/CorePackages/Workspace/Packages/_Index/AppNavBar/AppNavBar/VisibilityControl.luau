@@ -8,6 +8,7 @@ local AppIaScrollAwayThreshold = game:DefineFastInt("AppIaScrollAwayThreshold", 
 local FFlagAppIaScrollAwayPinHeader = SharedFlagsModule.FFlagAppIaScrollAwayPinHeader
 local FFlagAppIaScopedScrollAway = SharedFlagsModule.FFlagAppIaScopedScrollAway
 local FFlagEnableScrollAwayContentScrollableFix = SharedFlagsModule.FFlagEnableScrollAwayContentScrollableFix
+local FFlagPauseScrollAwayForNotificationsDropdown = SharedFlagsModule.FFlagPauseScrollAwayForNotificationsDropdown
 local config = {
 	dampingRatio = 1,
 	frequency = 3,
@@ -74,6 +75,7 @@ local Module1 = {
 	horizontalLocked = false,
 	scrollDistance = 50,
 	contentScrollable = true,
+	pauseCount = 0,
 	headerScrollAwayDisabled = not FFlagAppIaScrollAwayPinHeader and nil,
 	globalTouchDisabled = not FFlagAppIaScopedScrollAway and nil
 }
@@ -81,7 +83,8 @@ Module1.__index = Module1
 local T = nil
 
 function Module1.onTouchMoved(p1, p2)
-	-- upvalues: FFlagEnableScrollAwayContentScrollableFix (copy), FFlagAppIaScrollAwayPinHeader (copy)
+	-- upvalues: FFlagPauseScrollAwayForNotificationsDropdown (copy), FFlagEnableScrollAwayContentScrollableFix (copy), FFlagAppIaScrollAwayPinHeader (copy)
+	if FFlagPauseScrollAwayForNotificationsDropdown and p1.pauseCount > 0 then return end
 	if FFlagEnableScrollAwayContentScrollableFix and not p1.contentScrollable then return end
 	local v1 = p2 / p1.scrollDistance
 	
@@ -98,7 +101,8 @@ function Module1.onTouchMoved(p1, p2)
 end
 
 function Module1.onTouchEnded(p1)
-	-- upvalues: FFlagAppIaScrollAwayPinHeader (copy)
+	-- upvalues: FFlagPauseScrollAwayForNotificationsDropdown (copy), FFlagAppIaScrollAwayPinHeader (copy)
+	if FFlagPauseScrollAwayForNotificationsDropdown and p1.pauseCount > 0 then return end
 	if p1.footerVisible then
 		p1.footer:finishUp()
 	end
@@ -287,6 +291,29 @@ function Module1.hide(p2)
 	end
 end
 
+function Module1.pause(p2)
+	p2.pauseCount += 1
+	
+	if p2.pauseCount == 1 then
+		p2.header:show()
+		
+		if p2.footerVisible then
+			p2.footer:show()
+		end
+	end
+	local Flag = false
+	
+	return function()
+		-- upvalues: Flag (ref), p2 (copy)
+		if not Flag then
+			Flag = true
+			p2.pauseCount -= 1
+			
+			return
+		end
+	end
+end
+
 function Module1.getInstance()
 	-- upvalues: T (ref), Module1 (copy)
 	if not T then
@@ -383,5 +410,9 @@ return {
 	setContentScrollable = function(p2)
 		-- upvalues: Module1 (copy)
 		Module1.getInstance():setContentScrollable(p2)
+	end,
+	pause = function()
+		-- upvalues: Module1 (copy)
+		return Module1.getInstance():pause()
 	end
 }

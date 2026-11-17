@@ -4,6 +4,7 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local ResponsiveModule = require(Parent.Responsive)
 local FFlagExpChatMessageListScrollParityModule = require(ChatUIPrimitives.Flags.FFlagExpChatMessageListScrollParity)
+local ContentDefault: string = if require(ChatUIPrimitives.Flags.FFlagExpChatIdentityDisplayColor) then "" else " content-default"
 local Keys = ResponsiveModule.Keys
 local GetMinWidthForFunction = ResponsiveModule.BreakpointConfig.getMinWidthFor
 local list = {
@@ -39,7 +40,7 @@ local _ = function(FontStyle): number
 end
 
 local function resolve(Density, p1, UseTokensResult)
-	-- upvalues: FFlagExpChatMessageListScrollParityModule (copy)
+	-- upvalues: ContentDefault (copy), FFlagExpChatMessageListScrollParityModule (copy)
 	local IsCompact = Density == "compact"
 	local Small = if IsCompact then UseTokensResult.Padding.Small else UseTokensResult.Padding.Medium
 	local ScaledSize = UseTokensResult.Size.Size_3000 * (if IsCompact then 2 else p1)
@@ -132,7 +133,7 @@ local function resolve(Density, p1, UseTokensResult)
 			continuationRowTag = if IsCompact then "row align-x-left align-y-top size-full-0 auto-y gap-small padding-top-xxsmall" else "row align-x-left align-y-top size-full-0 auto-y gap-medium padding-top-xxsmall",
 			gutterTag = if IsCompact then "size-600-0" else "size-800-0",
 			avatarTag = if IsCompact then "size-600-600" else "size-800-800",
-			nameTag = if IsCompact then "auto-xy text-align-x-left text-caption-small content-default" else "auto-xy text-align-x-left text-caption-large content-default",
+			nameTag = if IsCompact then "auto-xy text-align-x-left text-caption-small" .. ContentDefault else "auto-xy text-align-x-left text-caption-large" .. ContentDefault,
 			timestampTag = if IsCompact then "auto-xy padding-x-xsmall text-caption-small content-muted" else "auto-xy padding-x-xsmall text-body-small content-muted",
 			estimatedRowHeight = (if IsCompact then UseTokensResult.Padding.Medium else UseTokensResult.Padding.Large) + math.round(config.FontSize * config.LineHeight) + UseTokensResult.Gap.XSmall + math.round(config1.FontSize * config1.LineHeight)
 		},

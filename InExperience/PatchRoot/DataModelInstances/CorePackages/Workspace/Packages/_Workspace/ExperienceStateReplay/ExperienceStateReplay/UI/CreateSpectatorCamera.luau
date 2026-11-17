@@ -1,7 +1,10 @@
 ﻿local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 local Workspace = game:GetService("Workspace")
-local CreateTemporaryOverlayModule = require(script.Parent.CreateTemporaryOverlay)
+game:DefineFastString("ExperienceStateReplayCameraMode", "RECORDED_POV_VIEWMODEL")
+local Parent = script.Parent
+local CreateTemporaryOverlayModule = require(Parent.CreateTemporaryOverlay)
+local FFlagDmctVideoCapturePlaybackClientEnabledModule = require(Parent.Parent.Flags.FFlagDmctVideoCapturePlaybackClientEnabled)
 local DisplayName = nil
 local CF = nil
 local v1 = 0
@@ -11,10 +14,46 @@ local CameraSubject = nil
 local Value = 50
 local Interpolated: vector = vector.create(0, 0, 0)
 local Vector = nil
+local Freecams = {}
+local Clears = {}
 
 return {
 	createSpectatorCamera = function(p1)
-		-- upvalues: Value (ref), Players (ref), v2 (ref), UserInputService (copy), CF (ref), Interpolated (ref), Vector (ref), Workspace (copy), RunService (copy), DisplayName (ref), CreateTemporaryOverlayModule (copy), CameraSubject (ref), v1 (ref)
+		-- upvalues: Freecams (copy), RunService (copy), Clears (copy), Value (ref), Players (ref), v2 (ref), UserInputService (copy), CF (ref), Interpolated (ref), Vector (ref), Workspace (copy), FFlagDmctVideoCapturePlaybackClientEnabledModule (copy), Parent (copy), DisplayName (ref), CreateTemporaryOverlayModule (copy), CameraSubject (ref), v1 (ref)
+		local Freecam = {}
+		
+		local function _(Key)
+			-- upvalues: Freecams (upval), RunService (upval), Clears (upval), Freecam (copy)
+			local Freecam1 = Freecams[Key]
+			RunService:UnbindFromRenderStep(Key)
+			Freecams[Key] = nil
+			local Clear: () -> () = Clears[Freecam1]
+			
+			if Freecam1 ~= nil and Freecam1 ~= Freecam and Clear ~= nil then
+				Clear()
+			end
+		end
+		
+		local function bindRenderStep(ActionName, Priority, p2)
+			-- upvalues: RunService (upval), Freecams (upval), Freecam (copy)
+			RunService:BindToRenderStep(ActionName, Priority, p2)
+			Freecams[ActionName] = Freecam
+		end
+		
+		local _ = function(Key)
+			-- upvalues: Freecams (upval), Freecam (copy), RunService (upval), Clears (upval)
+			if Freecams[Key] == Freecam then
+				local Freecam1 = Freecams[Key]
+				RunService:UnbindFromRenderStep(Key)
+				Freecams[Key] = nil
+				local Clear: () -> () = Clears[Freecam1]
+				
+				if Freecam1 ~= nil and Freecam1 ~= Freecam and Clear ~= nil then
+					Clear()
+				end
+			end
+		end
+		
 		local InputFrame = Instance.new("Frame")
 		InputFrame.Name = "InputFrame"
 		InputFrame.Size = UDim2.new(0.4, 0, 0.15, 0)
@@ -88,7 +127,7 @@ return {
 			end
 		end
 		
-		local function _()
+		local _ = function()
 			-- upvalues: updateHumanoidList (copy), Players (upval), v2 (upval)
 			updateHumanoidList()
 			
@@ -173,9 +212,35 @@ return {
 			Workspace.CurrentCamera.CFrame = CF
 		end
 		
+		local CreateResult = nil
+		
+		if FFlagDmctVideoCapturePlaybackClientEnabledModule then
+			CreateResult = require(Parent.RecordedPlaybackCamera).create()
+			Clears[Freecam] = CreateResult.clear
+		end
 		local function setCameraMode(p2: number)
-			-- upvalues: RunService (upval), UserInputService (upval), InputFrame (copy), DisplayName (upval), Workspace (upval), updateHumanoidList (copy), Players (upval), setCameraMode (copy), CreateTemporaryOverlayModule (upval), p1 (copy), CF (upval), StepFreecam (copy), Inverted (ref), SpeedTextBox (copy), Value (upval), SpeedLabel (copy), CameraSubject (upval), v2 (upval), v1 (upval)
-			RunService:UnbindFromRenderStep("Freecam")
+			-- upvalues: FFlagDmctVideoCapturePlaybackClientEnabledModule (upval), Freecams (upval), RunService (upval), Clears (upval), Freecam (copy), CreateResult (ref), UserInputService (upval), InputFrame (copy), DisplayName (upval), Workspace (upval), updateHumanoidList (copy), Players (upval), setCameraMode (copy), CreateTemporaryOverlayModule (upval), p1 (copy), CF (upval), StepFreecam (copy), Inverted (ref), SpeedTextBox (copy), Value (upval), SpeedLabel (copy), CameraSubject (upval), v2 (upval), v1 (upval)
+			if FFlagDmctVideoCapturePlaybackClientEnabledModule then
+				local Freecam1 = Freecams.Freecam
+				RunService:UnbindFromRenderStep("Freecam")
+				Freecams.Freecam = nil
+				local Clear: () -> () = Clears[Freecam1]
+				
+				if Freecam1 ~= nil and Freecam1 ~= Freecam and Clear ~= nil then
+					Clear()
+				end
+				local ReplayCam = Freecams.ReplayCam
+				RunService:UnbindFromRenderStep("ReplayCam")
+				Freecams.ReplayCam = nil
+				local Clear1: () -> () = Clears[ReplayCam]
+				
+				if ReplayCam ~= nil and ReplayCam ~= Freecam and Clear1 ~= nil then
+					Clear1()
+				end
+				CreateResult.clear()
+			else
+				RunService:UnbindFromRenderStep("Freecam")
+			end
 			UserInputService.MouseBehavior = Enum.MouseBehavior.Default
 			InputFrame.Visible = false
 			
@@ -215,19 +280,25 @@ return {
 					
 					return
 				end
-			elseif p2 == 1 then
-				Workspace.CurrentCamera.CameraType = Enum.CameraType.Scriptable
-				Workspace.CurrentCamera.CameraSubject = nil
-				CF = Workspace.CurrentCamera.CFrame
-				RunService:BindToRenderStep("Freecam", Enum.RenderPriority.Camera.Value, StepFreecam)
-				InputFrame.Visible = Inverted
-				SpeedTextBox.Text = tostring((math.floor(Value)))
-				SpeedLabel.Text = "Free Cam Speed (Current: " .. math.floor(Value) .. ") Between 10 And 20000"
-				CreateTemporaryOverlayModule.showOverlay("Free Camera", 2, p1.screenGui)
-				
-				return
 			else
-				if p2 == 2 then
+				if p2 == 1 then
+					Workspace.CurrentCamera.CameraType = Enum.CameraType.Scriptable
+					Workspace.CurrentCamera.CameraSubject = nil
+					CF = Workspace.CurrentCamera.CFrame
+					
+					if FFlagDmctVideoCapturePlaybackClientEnabledModule then
+						RunService:BindToRenderStep("Freecam", Enum.RenderPriority.Camera.Value, StepFreecam)
+						Freecams.Freecam = Freecam
+					else
+						RunService:BindToRenderStep("Freecam", Enum.RenderPriority.Camera.Value, StepFreecam)
+					end
+					InputFrame.Visible = Inverted
+					SpeedTextBox.Text = tostring((math.floor(Value)))
+					SpeedLabel.Text = "Free Cam Speed (Current: " .. math.floor(Value) .. ") Between 10 And 20000"
+					CreateTemporaryOverlayModule.showOverlay("Free Camera", 2, p1.screenGui)
+					
+					return
+				elseif p2 == 2 then
 					updateHumanoidList()
 					CameraSubject = if #Players == 0 then nil else Players[v2]
 					
@@ -281,6 +352,71 @@ return {
 		end
 		
 		updateHumanoidList()
-		UserInputService.InputBegan:Connect(onInputBegan)
+		
+		if FFlagDmctVideoCapturePlaybackClientEnabledModule then
+			local InputBeganConnection = UserInputService.InputBegan:Connect(onInputBegan)
+			
+			function p1.activateFollowRecordedCamera(p3)
+				-- upvalues: Freecams (upval), RunService (upval), Clears (upval), Freecam (copy), UserInputService (upval), InputFrame (copy), CreateResult (ref), bindRenderStep (copy)
+				local Freecam1 = Freecams.Freecam
+				RunService:UnbindFromRenderStep("Freecam")
+				Freecams.Freecam = nil
+				local Clear: () -> () = Clears[Freecam1]
+				
+				if Freecam1 ~= nil and Freecam1 ~= Freecam and Clear ~= nil then
+					Clear()
+				end
+				local ReplayCam = Freecams.ReplayCam
+				RunService:UnbindFromRenderStep("ReplayCam")
+				Freecams.ReplayCam = nil
+				local Clear1: () -> () = Clears[ReplayCam]
+				
+				if ReplayCam ~= nil and ReplayCam ~= Freecam and Clear1 ~= nil then
+					Clear1()
+				end
+				UserInputService.MouseBehavior = Enum.MouseBehavior.Default
+				InputFrame.Visible = false
+				CreateResult.activate(game:GetFastString("ExperienceStateReplayCameraMode"), bindRenderStep, p3)
+			end
+			
+			p1.hasSyncedRecordedCamera = CreateResult.hasSyncedRecordedCamera
+			p1.noteSourceClockFrameApplied = CreateResult.noteAppliedProjection
+			p1.screenGui.Destroying:Connect(function()
+				-- upvalues: InputBeganConnection (copy), p1 (copy), Freecams (upval), Freecam (copy), Clears (upval), RunService (upval)
+				InputBeganConnection:Disconnect()
+				p1.activateFollowRecordedCamera = nil
+				p1.hasSyncedRecordedCamera = nil
+				p1.noteSourceClockFrameApplied = nil
+				local IsFreecamMatch: boolean = Freecams.Freecam == Freecam or Freecams.ReplayCam == Freecam
+				local Clear: () -> () = Clears[Freecam]
+				
+				if Freecams.Freecam == Freecam then
+					local Freecam1 = Freecams.Freecam
+					RunService:UnbindFromRenderStep("Freecam")
+					Freecams.Freecam = nil
+					local Clear1: () -> () = Clears[Freecam1]
+					
+					if Freecam1 ~= nil and Freecam1 ~= Freecam and Clear1 ~= nil then
+						Clear1()
+					end
+				end
+				if Freecams.ReplayCam == Freecam then
+					local ReplayCam = Freecams.ReplayCam
+					RunService:UnbindFromRenderStep("ReplayCam")
+					Freecams.ReplayCam = nil
+					local Clear2: () -> () = Clears[ReplayCam]
+					
+					if ReplayCam ~= nil and ReplayCam ~= Freecam and Clear2 ~= nil then
+						Clear2()
+					end
+				end
+				if IsFreecamMatch and Clear ~= nil then
+					Clear()
+				end
+				Clears[Freecam] = nil
+			end)
+		else
+			UserInputService.InputBegan:Connect(onInputBegan)
+		end
 	end
 }

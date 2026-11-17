@@ -2,8 +2,11 @@
 local CorePackages = game:GetService("CorePackages")
 local ServiceModule = require(Chrome.Service)
 local CommonIconModule = require(Chrome.Integrations.CommonIcon)
-local SideSheetPlacement = require(CorePackages.Workspace.Packages.Chrome).Enums.SideSheetPlacement
+local ChromeModule = require(CorePackages.Workspace.Packages.Chrome)
+local SideSheetOpenBehavior = ChromeModule.Enums.SideSheetOpenBehavior
+local SideSheetPlacement = ChromeModule.Enums.SideSheetPlacement
 local IsPioneerLaunchFunction = require(CorePackages.Workspace.Packages.PioneerUtils).isPioneerLaunch
+local FFlagKeepSideSheetOpenBesideMenu = require(CorePackages.Workspace.Packages.SharedFlags).FFlagKeepSideSheetOpenBesideMenu
 local FFlagRenameHelpToControls = require(CorePackages.Workspace.Packages.SharedFlags).FFlagRenameHelpToControls
 local InGameMenuIntegrationUtilsModule = require(script.Parent.InGameMenuIntegrationUtils)
 local HelpPage = InGameMenuIntegrationUtilsModule.createPageOpenSignal("HelpPage")
@@ -13,6 +16,7 @@ return ServiceModule:register({
 	initialAvailability = ServiceModule.AvailabilitySignal.Available,
 	label = if FFlagRenameHelpToControls then "CoreScripts.InGameMenu.Controls.ControlsPage" else "CoreScripts.Feedback.Help.MainHeader",
 	sideSheetPlacement = if IsPioneerLaunchFunction() then SideSheetPlacement.AboveFold else SideSheetPlacement.BelowFold,
+	sideSheetOpenBehavior = if FFlagKeepSideSheetOpenBesideMenu then SideSheetOpenBehavior.MenuBesideSheet else nil,
 	activated = function(_)
 		-- upvalues: InGameMenuIntegrationUtilsModule (copy), HelpPage (copy)
 		InGameMenuIntegrationUtilsModule.toggleIGMPage("HelpPage", HelpPage:get())

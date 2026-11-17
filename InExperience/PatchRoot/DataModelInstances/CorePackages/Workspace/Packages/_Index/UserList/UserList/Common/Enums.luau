@@ -27,6 +27,21 @@
 		SocialTabsPage = "SocialTabsPage",
 		FriendsLandingPage = "FriendsLandingPage"
 	},
-	ClientCtaActions = { ViewProfile = "ViewProfile" },
+	ClientCtaActions = {
+		ViewProfile = "ViewProfile",
+		RequestFriendship = "RequestFriendship",
+		AcceptFriendRequest = "AcceptFriendRequest",
+		DeclineFriendRequest = "DeclineFriendRequest",
+		PendingFriendRequest = "PendingFriendRequest"
+	},
+	ContextInfoTypes = {
+		MutualFriends = "MutualFriends",
+		HaveContact = "HaveContact",
+		FromCI = "FromCI",
+		FromQR = "FromQR",
+		FromExperience = "FromExperience",
+		OffNetworkFriendRequest = "OffNetworkFriendRequest",
+		Loading = "Loading"
+	},
 	Joinability = { Joinable = "Joinable", NotJoinable = "NotJoinable" }
 }

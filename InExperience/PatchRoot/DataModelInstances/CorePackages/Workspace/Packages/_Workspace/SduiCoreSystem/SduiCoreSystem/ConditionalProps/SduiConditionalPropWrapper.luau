@@ -9,6 +9,9 @@ local _ = require(SduiCoreSystem.SduiConfigTypes)
 local SduiResponsiveDetectorModule = require(SduiCoreSystem.ConditionalProps.SduiResponsiveDetector)
 local SduiPresenceDetectorModule = require(SduiCoreSystem.ConditionalProps.SduiPresenceDetector)
 local GetDisplayStoreFunction = require(Parent.Display).GetDisplayStore
+local UniversalAppPolicyModule = require(Parent.UniversalAppPolicy)
+local FFlagSduiConditionalPropsAppPolicyCondition = require(Parent.SharedFlags).FFlagSduiConditionalPropsAppPolicyCondition
+local CheckAppPolicyConditionModule = require(SduiCoreSystem.ConditionalProps.checkAppPolicyCondition)
 local CheckPresenceConditionsModule = require(SduiCoreSystem.ConditionalProps.checkPresenceConditions)
 local CheckResponsiveConditionsFunction = require(SduiCoreSystem.SduiResponsiveHelpers).checkResponsiveConditions
 local SduiConditionalPropTypesModule = require(SduiCoreSystem.ConditionalProps.SduiConditionalPropTypes)
@@ -17,7 +20,7 @@ local SduiResponsiveKey = SduiConditionalPropTypesModule.SduiResponsiveKey
 local t = {}
 
 return ReactModule.memo(function(p1)
-	-- upvalues: ReactModule (copy), SduiConditionKey (copy), SduiResponsiveKey (copy), GetDisplayStoreFunction (copy), GetInputModeStoreFunction (copy), CheckResponsiveConditionsFunction (copy), t (copy), CheckPresenceConditionsModule (copy), CryoModule (copy), SduiPresenceDetectorModule (copy), SduiResponsiveDetectorModule (copy)
+	-- upvalues: ReactModule (copy), SduiConditionKey (copy), SduiResponsiveKey (copy), GetDisplayStoreFunction (copy), GetInputModeStoreFunction (copy), CheckResponsiveConditionsFunction (copy), t (copy), CheckPresenceConditionsModule (copy), FFlagSduiConditionalPropsAppPolicyCondition (copy), CheckAppPolicyConditionModule (copy), UniversalAppPolicyModule (copy), CryoModule (copy), SduiPresenceDetectorModule (copy), SduiResponsiveDetectorModule (copy)
 	local SduiContext = p1.sduiContext
 	SduiContext.dependencies.instrumentation:startTimerFlow("SduiConditionalPropWrapper")
 	local ConditionalProps = p1.componentConfig.conditionalProps
@@ -76,14 +79,24 @@ return ReactModule.memo(function(p1)
 		return if UseMemoResult.hasPresenceProp then CheckPresenceConditionsModule(ConditionalProps, DataStore.social.getInGameFriendsByGame(false)) else t
 	end)
 	local UseResult1 = ReactModule.useCallback(function(p2, p3): boolean
-		-- upvalues: UseStateResult1 (copy), UseStateResult3 (copy), SduiResponsiveKey (upval), SduiConditionKey (upval), UseStateResult (copy)
+		-- upvalues: UseStateResult1 (copy), UseStateResult3 (copy), FFlagSduiConditionalPropsAppPolicyCondition (upval), SduiConditionKey (upval), CheckAppPolicyConditionModule (upval), UniversalAppPolicyModule (upval), SduiResponsiveKey (upval), UseStateResult (copy)
 		if UseStateResult1[p2] or UseStateResult3[p2] then
 			return false
 		end
 		if p3.conditions then
+			local Condition = if FFlagSduiConditionalPropsAppPolicyCondition then p3.conditions[SduiConditionKey.appPolicy] else nil
+			
+			if Condition ~= nil and not CheckAppPolicyConditionModule(UniversalAppPolicyModule.getAppFeaturePolicies(), Condition) then
+				return false
+			end
 			for i, condition in p3.conditions do
 				if SduiResponsiveKey[i] == nil and i ~= SduiConditionKey.friendInGame then
-					return if UseStateResult then UseStateResult[i] == condition else false
+					if not FFlagSduiConditionalPropsAppPolicyCondition or Condition == nil then
+						return if UseStateResult then UseStateResult[i] == condition else false
+					elseif i ~= SduiConditionKey.appPolicy and (not UseStateResult or UseStateResult[i] ~= condition) then
+						return false
+					end
+					continue
 				end
 			end
 		end

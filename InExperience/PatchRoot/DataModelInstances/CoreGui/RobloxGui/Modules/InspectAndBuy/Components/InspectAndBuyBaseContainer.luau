@@ -22,6 +22,7 @@ local CreateFavoriteForBundleModule = require(Parent.Thunks.CreateFavoriteForBun
 local DeleteFavoriteForBundleModule = require(Parent.Thunks.DeleteFavoriteForBundle)
 local PromptPurchaseModule = require(Parent.Thunks.PromptPurchase)
 local GetItemDetailsModule = require(Parent.Thunks.GetItemDetails)
+local GetPlusExclusiveItemDetailsModule = require(Parent.Thunks.GetPlusExclusiveItemDetails)
 local RoactUtilsModule = require(CorePackages.Workspace.Packages.RoactUtils)
 local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
 local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
@@ -44,19 +45,21 @@ local AXViewportCameraFieldOfView = game:DefineFastInt("AXViewportCameraFieldOfV
 local FFlagAXEnableBatchItemDetailsFetchV2 = AvatarExperienceFlagsModule.FFlagAXEnableBatchItemDetailsFetchV2
 local FFlagAXEnableInspectAndBuyFocusNavigation = AvatarExperienceFlagsModule.FFlagAXEnableInspectAndBuyFocusNavigation
 local FFlagAXInspectAndBuyAvatarBackground = AvatarExperienceFlagsModule.FFlagAXInspectAndBuyAvatarBackground
+local FFlagAXIaBPlusExclusiveUpsell = AvatarExperienceFlagsModule.FFlagAXIaBPlusExclusiveUpsell
+local RobloxSubscriptionPurchaseAppModule = require(CorePackages.Workspace.Packages.RobloxSubscriptionPurchaseApp)
 local ItemSelectionStoreContext = AvatarExperienceInspectAndBuyModule.Contexts.ItemSelectionStoreContext
 local Provider = ItemSelectionStoreContext.Provider
 local UseItemSelectionStoreFunction = ItemSelectionStoreContext.useItemSelectionStore
 
-local function v38(p1)
+local function v41(p1)
 	return p1.assets
 end
 
-local function v39(p1)
+local function v42(p1)
 	return p1.collectibleResellableInstances
 end
 
-local function v40(p1)
+local function v43(p1)
 	return p1.bundles
 end
 
@@ -76,15 +79,42 @@ local function useAvatarBackgroundImageUrl(PlayerId)
 	end, { PlayerId })))
 end
 
+local function useRefetchPlusExclusiveItemsOnSubscriptionChange(AssetsMap, Callback)
+	-- upvalues: UseSignalStateFunction (copy), RobloxSubscriptionPurchaseAppModule (copy), ReactModule (copy), GetPlusExclusiveItemDetailsModule (copy)
+	local UseSignalStateResult = UseSignalStateFunction(RobloxSubscriptionPurchaseAppModule.RobloxSubscriptionSignals.get().getHasRobloxSubscription)
+	local UseRefResult = ReactModule.useRef(UseSignalStateResult)
+	ReactModule.useEffect(function()
+		-- upvalues: UseRefResult (copy), UseSignalStateResult (copy), AssetsMap (copy), Callback (copy), GetPlusExclusiveItemDetailsModule (upval)
+		if UseRefResult.current == UseSignalStateResult or AssetsMap == nil then return end
+		local List = {}
+		
+		for i, value in AssetsMap do
+			if value.isPlusExclusive then
+				table.insert(List, i)
+			end
+		end
+		UseRefResult.current = UseSignalStateResult
+		
+		if #List > 0 then
+			Callback(GetPlusExclusiveItemDetailsModule(List))
+		end
+	end, { UseSignalStateResult, AssetsMap, Callback })
+end
+
 local function InspectAndBuyBaseContainer(p1)
-	-- upvalues: UseViewBreakpointsFunction (copy), ConstantsModule (copy), UseTokensFunction (copy), UseDispatchFunction (copy), UseItemSelectionStoreFunction (copy), UseSignalStateFunction (copy), UseSelectorFunction (copy), v38 (copy), TutilsModule (copy), v39 (copy), v40 (copy), FFlagAXInspectAndBuyAvatarBackground (copy), useAvatarBackgroundImageUrl (copy), ReactModule (copy), GuiService (copy), UpdateBulkPuchaseResultsModule (copy), ItemTypeEnum (copy), BuildBulkPurchaseAnalyticsPayloadFunction (copy), GetItemDetailsModule (copy), GetFavoriteForAssetModule (copy), GetProductInfoModule (copy), FFlagAXEnableBatchItemDetailsFetchV2 (copy), GetFavoriteForBundleModule (copy), DeleteFavoriteForAssetModule (copy), CreateFavoriteForAssetModule (copy), DeleteFavoriteForBundleModule (copy), CreateFavoriteForBundleModule (copy), OpenOverlayModule (copy), OverlayModule (copy), PromptPurchaseModule (copy), ApplyTryOnItemToHumanoidDescriptionFunction (copy), AvatarViewportModule (copy), EnableAvatarViewportAutoRotation (copy), AXViewportCameraFieldOfView (copy), UseResponsivePanelLayoutPropsFunction (copy), UseUnifiedEventListenerInExperienceFunction (copy), FFlagAXEnableInspectAndBuyFocusNavigation (copy), UseInspectAndBuyFocusNavigationFunction (copy), FoundationModule (copy), ThemeModule (copy), ResponsivePanelLayout (copy), OverlayModule1 (copy), PopoverFocusRestorationContext (copy)
+	-- upvalues: UseViewBreakpointsFunction (copy), ConstantsModule (copy), UseTokensFunction (copy), UseDispatchFunction (copy), UseItemSelectionStoreFunction (copy), UseSignalStateFunction (copy), UseSelectorFunction (copy), v41 (copy), TutilsModule (copy), v42 (copy), v43 (copy), FFlagAXInspectAndBuyAvatarBackground (copy), useAvatarBackgroundImageUrl (copy), FFlagAXIaBPlusExclusiveUpsell (copy), useRefetchPlusExclusiveItemsOnSubscriptionChange (copy), ReactModule (copy), GuiService (copy), UpdateBulkPuchaseResultsModule (copy), ItemTypeEnum (copy), BuildBulkPurchaseAnalyticsPayloadFunction (copy), GetItemDetailsModule (copy), GetFavoriteForAssetModule (copy), GetProductInfoModule (copy), FFlagAXEnableBatchItemDetailsFetchV2 (copy), GetFavoriteForBundleModule (copy), DeleteFavoriteForAssetModule (copy), CreateFavoriteForAssetModule (copy), DeleteFavoriteForBundleModule (copy), CreateFavoriteForBundleModule (copy), OpenOverlayModule (copy), OverlayModule (copy), PromptPurchaseModule (copy), ApplyTryOnItemToHumanoidDescriptionFunction (copy), AvatarViewportModule (copy), EnableAvatarViewportAutoRotation (copy), AXViewportCameraFieldOfView (copy), UseResponsivePanelLayoutPropsFunction (copy), UseUnifiedEventListenerInExperienceFunction (copy), FFlagAXEnableInspectAndBuyFocusNavigation (copy), UseInspectAndBuyFocusNavigationFunction (copy), FoundationModule (copy), ThemeModule (copy), ResponsivePanelLayout (copy), OverlayModule1 (copy), PopoverFocusRestorationContext (copy)
 	local UseViewBreakpointsResult = UseViewBreakpointsFunction(ConstantsModule.TopBarHeight)
 	local UseTokensResult = UseTokensFunction()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseSignalStateResult = UseSignalStateFunction(UseItemSelectionStoreFunction().getItemDataMap)
-	local UseSelectorResult = UseSelectorFunction(v38, TutilsModule.deepEqual)
-	local UseSelectorResult1 = UseSelectorFunction(v39, TutilsModule.deepEqual)
-	local UseSelectorResult2 = UseSelectorFunction(v40, TutilsModule.deepEqual)
+	local UseSelectorResult = UseSelectorFunction(v41, TutilsModule.deepEqual)
+	local UseSelectorResult1 = UseSelectorFunction(v42, TutilsModule.deepEqual)
+	local UseSelectorResult2 = UseSelectorFunction(v43, TutilsModule.deepEqual)
+	local UseAvatarBackgroundImageUrlResult = if FFlagAXInspectAndBuyAvatarBackground then useAvatarBackgroundImageUrl(p1.playerId) else nil
+	
+	if FFlagAXIaBPlusExclusiveUpsell then
+		useRefetchPlusExclusiveItemsOnSubscriptionChange(UseSelectorResult, UseDispatchResult)
+	end
 	local UseResponsivePanelLayoutPropsResult = UseResponsivePanelLayoutPropsFunction({
 		onInspectMenuClosed = ReactModule.useCallback(function()
 			-- upvalues: GuiService (upval)
@@ -190,7 +220,7 @@ local function InspectAndBuyBaseContainer(p1)
 		end, { p1.localPlayerModel }),
 		localPlayerModel = p1.localPlayerModel,
 		analytics = p1.analytics,
-		avatarBackgroundImageUrl = if FFlagAXInspectAndBuyAvatarBackground then useAvatarBackgroundImageUrl(p1.playerId) else nil
+		avatarBackgroundImageUrl = UseAvatarBackgroundImageUrlResult
 	})
 	UseUnifiedEventListenerInExperienceFunction()
 	

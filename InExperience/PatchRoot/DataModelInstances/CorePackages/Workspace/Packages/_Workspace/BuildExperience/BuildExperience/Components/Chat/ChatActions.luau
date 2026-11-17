@@ -2,6 +2,7 @@
 local Parent = BuildExperience.Parent
 local _ = require(BuildExperience.Components.ModelPicker.ModelPickerTypes)
 local FFlagBuildExperienceModelPickerModule = require(BuildExperience.Flags.FFlagBuildExperienceModelPicker)
+local FFlagBuildExperienceSingleLineComposerModule = require(BuildExperience.Flags.FFlagBuildExperienceSingleLineComposer)
 local FFlagBuildEnableFTUXChipsModule = require(BuildExperience.Flags.FFlagBuildEnableFTUXChips)
 local FFlagBuildExperienceFTUXChipSendGuidanceModule = require(BuildExperience.Flags.FFlagBuildExperienceFTUXChipSendGuidance)
 local FFlagBuildExperienceFTUXChipExhaustedTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceFTUXChipExhaustedTelemetry)
@@ -19,7 +20,7 @@ local View = FoundationModule.View
 local Text = FoundationModule.Text
 
 return function(Frame)
-	-- upvalues: FFlagBuildEnableFTUXChipsModule (copy), FFlagBuildExperienceFTUXChipSendGuidanceModule (copy), ReactModule (copy), IsImageAttachmentSupportedModule (copy), CreateGalleryCaptureSourceModule (copy), View (copy), ChatResourceAttachmentListModule (copy), ChatImagePreviewListModule (copy), ChatComposerModule (copy), FFlagBuildExperienceModelPickerModule (copy), PromptChipGroupModule (copy), FFlagBuildExperienceFTUXChipExhaustedTelemetryModule (copy), Text (copy), ChatCaptureGalleryContainerModule (copy)
+	-- upvalues: FFlagBuildEnableFTUXChipsModule (copy), FFlagBuildExperienceFTUXChipSendGuidanceModule (copy), ReactModule (copy), IsImageAttachmentSupportedModule (copy), CreateGalleryCaptureSourceModule (copy), View (copy), ChatResourceAttachmentListModule (copy), ChatImagePreviewListModule (copy), ChatComposerModule (copy), FFlagBuildExperienceModelPickerModule (copy), FFlagBuildExperienceSingleLineComposerModule (copy), PromptChipGroupModule (copy), FFlagBuildExperienceFTUXChipExhaustedTelemetryModule (copy), Text (copy), ChatCaptureGalleryContainerModule (copy)
 	local Images = Frame.images or {}
 	local ResourceAttachments = Frame.resourceAttachments or {}
 	local PromptChips = Frame.promptChips or {}
@@ -134,6 +135,7 @@ return function(Frame)
 			onSend = Frame.onSend,
 			onStop = Frame.onStop,
 			maxLines = Frame.maxLines,
+			isSingleLine = if FFlagBuildExperienceSingleLineComposerModule then Frame.isSingleLine else nil,
 			composerDebug = Frame.composerDebug
 		}),
 		PromptChips = if v3 then ReactModule.createElement(PromptChipGroupModule, {

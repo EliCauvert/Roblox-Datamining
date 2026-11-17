@@ -2,6 +2,7 @@
 local Parent = BuildExperience.Parent
 local _ = require(BuildExperience.Components.ModelPicker.ModelPickerTypes)
 local FFlagBuildExperienceModelPickerModule = require(BuildExperience.Flags.FFlagBuildExperienceModelPicker)
+local FFlagBuildExperienceSingleLineComposerModule = require(BuildExperience.Flags.FFlagBuildExperienceSingleLineComposer)
 local FFlagBuildExperienceLibrary = require(Parent.SharedFlags).FFlagBuildExperienceLibrary
 local FFlagBuildExperienceFTUXChipSendGuidanceModule = require(BuildExperience.Flags.FFlagBuildExperienceFTUXChipSendGuidance)
 local FoundationModule = require(Parent.Foundation)
@@ -25,7 +26,7 @@ local function _(Text: string): string
 end
 
 return function(Frame)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), SignalsModule (copy), FFlagBuildExperienceLibrary (copy), FFlagBuildExperienceModelPickerModule (copy), FFlagBuildExperienceFTUXChipSendGuidanceModule (copy), UseReleaseFocusOnDownSwipeModule (copy), View (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), ModelPickerContainerModule (copy), ChatActionsRowModule (copy), EducationalTooltip (copy), FoundationModule (copy), Composer (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), SignalsModule (copy), FFlagBuildExperienceLibrary (copy), FFlagBuildExperienceModelPickerModule (copy), FFlagBuildExperienceFTUXChipSendGuidanceModule (copy), UseReleaseFocusOnDownSwipeModule (copy), FFlagBuildExperienceSingleLineComposerModule (copy), View (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), ModelPickerContainerModule (copy), ChatActionsRowModule (copy), EducationalTooltip (copy), FoundationModule (copy), Composer (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseMemoResult = ReactModule.useMemo(function()
@@ -55,14 +56,14 @@ return function(Frame)
 	local HasOnOpenCaptureGallery: boolean = Frame.isAttachmentSupported and Frame.onOpenCaptureGallery ~= nil
 	local IsOpen = false
 	
-	local function v32(_) end
+	local function v33(_) end
 	
 	if FFlagBuildExperienceFTUXChipSendGuidanceModule then
-		IsOpen, v32 = ReactModule.useState(false)
+		IsOpen, v33 = ReactModule.useState(false)
 		ReactModule.useEffect(function()
-			-- upvalues: Frame (copy), v32 (ref)
+			-- upvalues: Frame (copy), v33 (ref)
 			if Frame.isFtuxSendGated ~= true then
-				v32(false)
+				v33(false)
 			end
 		end, { Frame.isFtuxSendGated })
 	end
@@ -72,18 +73,18 @@ return function(Frame)
 		Frame.onChanged(Text)
 	end, { Frame.onChanged, UseMemoResult })
 	local UseResult1 = ReactModule.useCallback(function()
-		-- upvalues: v1 (ref), FFlagBuildExperienceFTUXChipSendGuidanceModule (upval), Frame (copy), IsIsReadOnly (copy), FFlagBuildExperienceModelPickerModule (upval), HasComposerErrorText (copy), HasAttachments (copy), v32 (ref), UseMemoResult (copy)
+		-- upvalues: v1 (ref), FFlagBuildExperienceFTUXChipSendGuidanceModule (upval), Frame (copy), IsIsReadOnly (copy), FFlagBuildExperienceModelPickerModule (upval), HasComposerErrorText (copy), HasAttachments (copy), v33 (ref), UseMemoResult (copy)
 		if v1 then return end
 		if not FFlagBuildExperienceFTUXChipSendGuidanceModule or Frame.isFtuxSendGated ~= true then
 			if FFlagBuildExperienceFTUXChipSendGuidanceModule then
-				v32(false)
+				v33(false)
 			end
 			if Frame.onSend() then
 				UseMemoResult.setIsComposerEmpty(not FFlagBuildExperienceModelPickerModule or string.gsub(Frame.text:getValue(), "^%s*(.-)%s*$", "%1") == "")
 			end
 			return
 		elseif not IsIsReadOnly and (FFlagBuildExperienceModelPickerModule or not HasComposerErrorText) and (Frame.isSendBlocked ~= true and (string.gsub(Frame.text:getValue(), "^%s*(.-)%s*$", "%1") ~= "" or HasAttachments)) then
-			v32(true)
+			v33(true)
 		end
 	end, if FFlagBuildExperienceFTUXChipSendGuidanceModule then {
 		Frame.onSend, UseMemoResult, v1, IsIsReadOnly, HasComposerErrorText,
@@ -132,12 +133,13 @@ return function(Frame)
 		end, { Frame.tracksExternalText, Frame.text, UseMemoResult })
 	end
 	UseReleaseFocusOnDownSwipeModule(UseRefResult, Frame.textBoxRef)
+	local IsNotIsSingleLine = if FFlagBuildExperienceSingleLineComposerModule then FFlagBuildExperienceModelPickerModule and Frame.isSingleLine ~= true else FFlagBuildExperienceModelPickerModule
 	local Size100 = UseTokensResult.Size.Size_100
 	local Tag = "auto-xy"
 	local LayoutOrder: number? = nil
 	local LayoutOrder1: number? = nil
 	
-	if FFlagBuildExperienceModelPickerModule then
+	if IsNotIsSingleLine then
 		Size100 = UseTokensResult.Padding.Small - UseTokensResult.Stroke.Standard
 		Tag = "row align-y-center gap-small auto-xy"
 		LayoutOrder = 1
@@ -205,8 +207,8 @@ return function(Frame)
 			align = FoundationModule.Enums.PopoverAlign.End,
 			isOpen = IsOpen,
 			onPressedOutside = function()
-				-- upvalues: v32 (ref)
-				v32(false)
+				-- upvalues: v33 (ref)
+				v33(false)
 			end,
 			side = FoundationModule.Enums.PopoverSide.Top
 		}, { Anchor = Element1 })
@@ -227,9 +229,9 @@ return function(Frame)
 		ref = UseRefResult,
 		composerDebug = Frame.composerDebug,
 		LayoutOrder = Frame.LayoutOrder,
-		leadingElement = if FFlagBuildExperienceModelPickerModule then nil else Element,
-		trailingElement = if FFlagBuildExperienceModelPickerModule then nil else Element1,
-		footerElement = if FFlagBuildExperienceModelPickerModule then ReactModule.createElement(View, { tag = "row align-y-center size-full-0 auto-y" }, {
+		leadingElement = if IsNotIsSingleLine then nil else Element,
+		trailingElement = if IsNotIsSingleLine then nil else Element1,
+		footerElement = if IsNotIsSingleLine then ReactModule.createElement(View, { tag = "row align-y-center size-full-0 auto-y" }, {
 			Leading = Element,
 			Spacer = ReactModule.createElement(View, { LayoutOrder = 2, tag = "fill" }),
 			Trailing = Element1

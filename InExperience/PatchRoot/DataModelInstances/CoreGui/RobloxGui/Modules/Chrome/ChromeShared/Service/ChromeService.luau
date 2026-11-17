@@ -6,6 +6,7 @@ local GamepadService = game:GetService("GamepadService")
 local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
 local Localization = require(CorePackages.Workspace.Packages.InExperienceLocales).Localization
 local ChromeModule = require(CorePackages.Workspace.Packages.Chrome)
+local SideSheetOpenBehavior = ChromeModule.Enums.SideSheetOpenBehavior
 local SideSheetPlacement = ChromeModule.Enums.SideSheetPlacement
 local Signal = require(CorePackages.Workspace.Packages.AppCommonLib).Signal
 local FocusUtils = ChromeModule.FocusUtils
@@ -27,6 +28,8 @@ local FFlagIntegrationsChromeShortcutTelemetryModule = require(ChromeShared.Pare
 local ChromeDeprecateMRUs = game:DefineFastFlag("ChromeDeprecateMRUs", false)
 local IsSideSheetEnabledModule = require(CorePackages.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
 local FFlagEnableSideSheetWidgets = SharedFlagsModule.FFlagEnableSideSheetWidgets
+local FFlagAllowGrayUnsupportedFeatures = SharedFlagsModule.FFlagAllowGrayUnsupportedFeatures
+local FFlagKeepSideSheetOpenBesideMenu = SharedFlagsModule.FFlagKeepSideSheetOpenBesideMenu
 local FFlagSideSheetUnifiedMenuOrder = SharedFlagsModule.FFlagSideSheetUnifiedMenuOrder
 local FFlagEnableChromeWindowsNotInMenu = require(ChromeShared.Flags).FFlagEnableChromeWindowsNotInMenu
 local FFlagChromeNineDotActivityIndicator = require(ChromeShared.Flags).FFlagChromeNineDotActivityIndicator
@@ -304,7 +307,7 @@ function ChromeService:updateLocalization(Integration)
 end
 
 function ChromeService:register(Integration)
-	-- upvalues: IsSideSheetEnabledModule (copy), SideSheetPlacement (copy), ChromeService (copy), AvailabilitySignal (copy), NotifySignal (copy), WindowSizeSignalModule (copy), ConstantsModule (copy), FFlagEnableConsoleExpControls (copy), GamepadService (copy)
+	-- upvalues: IsSideSheetEnabledModule (copy), SideSheetPlacement (copy), FFlagKeepSideSheetOpenBesideMenu (copy), SideSheetOpenBehavior (copy), ChromeService (copy), AvailabilitySignal (copy), NotifySignal (copy), WindowSizeSignalModule (copy), ConstantsModule (copy), FFlagEnableConsoleExpControls (copy), GamepadService (copy)
 	if self._integrations[Integration.id] then
 		warn(string.format(Integration.id .. "already registered", debug.traceback()))
 		
@@ -315,8 +318,13 @@ function ChromeService:register(Integration)
 	self._integrationsConnections[Integration.id] = {}
 	local IntegrationsConnection = self._integrationsConnections[Integration.id]
 	
-	if IsSideSheetEnabledModule and Integration.sideSheetPlacement == nil then
-		Integration.sideSheetPlacement = SideSheetPlacement.BelowFold
+	if IsSideSheetEnabledModule then
+		if Integration.sideSheetPlacement == nil then
+			Integration.sideSheetPlacement = SideSheetPlacement.BelowFold
+		end
+		if FFlagKeepSideSheetOpenBesideMenu and Integration.sideSheetOpenBehavior == nil then
+			Integration.sideSheetOpenBehavior = SideSheetOpenBehavior.CloseSheet
+		end
 	end
 	if Integration.initialAvailability == nil then
 		Integration.initialAvailability = ChromeService.AvailabilitySignal.Unavailable
@@ -904,41 +912,50 @@ function ChromeService:getWindowPositionFromStore(Id)
 end
 
 function ChromeService:activate(Integration, p4)
-	-- upvalues: FFlagIntegrationsChromeShortcutTelemetryModule (copy), FFlagEnableConsoleExpControls (copy)
+	-- upvalues: FFlagAllowGrayUnsupportedFeatures (copy), FFlagIntegrationsChromeShortcutTelemetryModule (copy), FFlagEnableConsoleExpControls (copy)
 	local v1 = nil
 	
 	if self._integrations[Integration] then
-		local ActivatedFunction = self._integrations[Integration].activated
+		local Integration1 = self._integrations[Integration]
 		
-		if FFlagIntegrationsChromeShortcutTelemetryModule then
-			self._onIntegrationActivated:fire(Integration, p4)
-		else
-			self._onIntegrationActivated:fire(Integration)
-		end
-		self:storeChromeInteracted()
-		
-		if ActivatedFunction then
-			local Success, Result = pcall(function()
-				-- upvalues: ActivatedFunction (copy), self (copy), Integration (copy), FFlagEnableConsoleExpControls (upval)
-				ActivatedFunction(self._integrations[Integration])
-				
-				if not FFlagEnableConsoleExpControls then
-					self:disableFocusNav()
-				end
-			end)
+		if not FFlagAllowGrayUnsupportedFeatures or not Integration1.isDisabled then
+			local ActivatedFunction = self._integrations[Integration].activated
 			
-			if not Success then
-				warn("ChromeService: activate error thrown for " .. Integration)
-				v1 = Result
+			if FFlagIntegrationsChromeShortcutTelemetryModule then
+				self._onIntegrationActivated:fire(Integration, p4)
+			else
+				self._onIntegrationActivated:fire(Integration)
+			end
+			self:storeChromeInteracted()
+			
+			if ActivatedFunction then
+				local Success, Result = pcall(function()
+					-- upvalues: ActivatedFunction (copy), self (copy), Integration (copy), FFlagEnableConsoleExpControls (upval)
+					ActivatedFunction(self._integrations[Integration])
+					
+					if not FFlagEnableConsoleExpControls then
+						self:disableFocusNav()
+					end
+				end)
+				
+				if not Success then
+					warn("ChromeService: activate error thrown for " .. Integration)
+					v1 = Result
+				end
+			else
+				if self._subMenuConfig[Integration] then
+					self:toggleSubMenu(Integration)
+				end
+				self:toggleWindow(Integration)
+			end
+			if self._currentSubMenu:get() ~= Integration then
+				self._currentSubMenu:set(nil)
 			end
 		else
-			if self._subMenuConfig[Integration] then
-				self:toggleSubMenu(Integration)
+			if Integration1.disabledActivated then
+				Integration1.disabledActivated(Integration1)
 			end
-			self:toggleWindow(Integration)
-		end
-		if self._currentSubMenu:get() ~= Integration then
-			self._currentSubMenu:set(nil)
+			return
 		end
 	end
 	if v1 then

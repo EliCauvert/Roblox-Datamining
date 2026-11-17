@@ -2,6 +2,7 @@
 local CryoModule = require(CorePackages.Packages.Cryo)
 local DashModule = require(CorePackages.Packages.Dash)
 local FFlagAXMarketplaceLicensing = require(CorePackages.Workspace.Packages.AvatarExperienceFlags).FFlagAXMarketplaceLicensing
+local FFlagAXIaBPlusExclusiveUpsell = require(CorePackages.Workspace.Packages.AvatarExperienceFlags).FFlagAXIaBPlusExclusiveUpsell
 local Parent = script.Parent.Parent
 local MockIdModule = require(Parent.MockId)
 local ConstantsModule = require(Parent.Constants)
@@ -72,7 +73,7 @@ function AssetInfoModule.fromBulkPurchaseResult(p1, p2)
 end
 
 function AssetInfoModule.fromAvatarPreviewItem(p1)
-	-- upvalues: AssetInfoModule (copy), FFlagAXMarketplaceLicensing (copy), ParseItemLicensingFunction (copy), GetRawItemLicensingInfoFunction (copy)
+	-- upvalues: AssetInfoModule (copy), FFlagAXMarketplaceLicensing (copy), ParseItemLicensingFunction (copy), GetRawItemLicensingInfoFunction (copy), FFlagAXIaBPlusExclusiveUpsell (copy)
 	local NewAssetInfo = AssetInfoModule.new()
 	NewAssetInfo.name = p1.name
 	NewAssetInfo.description = p1.description
@@ -93,6 +94,9 @@ function AssetInfoModule.fromAvatarPreviewItem(p1)
 	
 	if FFlagAXMarketplaceLicensing then
 		NewAssetInfo.itemLicensingInfo = ParseItemLicensingFunction(GetRawItemLicensingInfoFunction(p1))
+	end
+	if FFlagAXIaBPlusExclusiveUpsell then
+		NewAssetInfo.isPlusExclusive = p1.isPlusExclusive
 	end
 	if p1.itemRestrictions then
 		local ItemRestrictions = {}

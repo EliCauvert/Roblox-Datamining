@@ -65,7 +65,6 @@ return {
 	PremiumSellOnlyPrompt = "PremiumSellOnlyPrompt",
 	AvatarExperienceQuickMenu = "AvatarExperienceQuickMenu",
 	EquipOutfitConfirmation = "EquipOutfitConfirmation",
-	PremiumUpsellPrompt = "PremiumUpsellPrompt",
 	SaveOutfitPrompt = "SaveOutfitPrompt",
 	RenameOutfitPrompt = "RenameOutfitPrompt",
 	DeleteOutfitPrompt = "DeleteOutfitPrompt",

@@ -11,6 +11,7 @@ local UseGameSortImpressionsParamsModule = require(GameCollections.Impressions.u
 local UseGameSortTooltipParamsModule = require(GameCollections.useGameSortTooltipParams)
 local WaitForPropWrapperModule = require(GameCollections.Impressions.WaitForPropWrapper)
 local UseSizeAdjustedEntriesModule = require(GameCollections.useSizeAdjustedEntries)
+local UsePersonalizedRecommendationsMenuItemsModule = require(GameCollections.usePersonalizedRecommendationsMenuItems)
 local Parent = GameCollections.Parent
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
@@ -28,6 +29,7 @@ local ResponsiveModule = require(Parent.Responsive)
 local UsePreferredInputFunction = ResponsiveModule.usePreferredInput
 local UseBreakpointXOrSmallerFunction = ResponsiveModule.useBreakpointXOrSmaller
 local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
+local _ = require(Parent.Foundation)
 local CollectionGrid = require(Parent.CollectionViews).CollectionGrid
 local UseCollectionLayoutFunction = require(Parent.CollectionViews).useCollectionLayout
 local AppPage = require(Parent.RobloxAppEnums).AppPage
@@ -45,6 +47,7 @@ local FFlagLuaAppNarrowTileHideRating = require(Parent.SharedFlags).FFlagLuaAppN
 local FFlagLuaAppNarrowTileHidePlayerCount = require(Parent.SharedFlags).FFlagLuaAppNarrowTileHidePlayerCount
 local FFlagLuaAppRfyRevealRows = require(Parent.SharedFlags).FFlagLuaAppRfyRevealRows
 local FFlagLuaAppSortHeaderAnchorTag = require(Parent.SharedFlags).FFlagLuaAppSortHeaderAnchorTag
+local FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint = require(Parent.SharedFlags).FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint
 local LuaAppGameGridBufferRowsBelowScreen = game:DefineFastInt("LuaAppGameGridBufferRowsBelowScreen", 2)
 local LuaAppGameGridBufferRowsAboveScreen = game:DefineFastInt("LuaAppGameGridBufferRowsAboveScreen", 1)
 local StrictInterfaceResult = TModule.strictInterface({
@@ -52,6 +55,7 @@ local StrictInterfaceResult = TModule.strictInterface({
 	title = TModule.optional(TModule.string),
 	headerComponent = TModule.optional(TModule.table),
 	headerTag = if FFlagLuaAppSortHeaderAnchorTag then TModule.optional(TModule.string) else nil,
+	personalizedRecommendationsSurfaceKey = if FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint then TModule.optional(TModule.string) else nil,
 	verticalScrollingFrameRef = TModule.table,
 	gridContainerRef = TModule.optional(TModule.union(TModule.table, TModule.callback)),
 	LayoutOrder = if FFlagLuaAppRfyRevealRows then TModule.optional(TModule.number) else nil,
@@ -94,7 +98,7 @@ local StrictInterfaceResult = TModule.strictInterface({
 })
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: ValidatePropsFunction (copy), StrictInterfaceResult (copy), UseAppPolicyFunction (copy), UsePreferredInputFunction (copy), LuaAppGameGridBufferRowsBelowScreen (copy), LuaAppGameGridBufferRowsAboveScreen (copy), ResponsiveModule (copy), FFlagLuaAppCompositionAlways (copy), UseBreakpointXOrSmallerFunction (copy), FFlagLuaAppNarrowTileHideRating (copy), FFlagLuaAppNarrowTileHidePlayerCount (copy), GetGameTileCollectionItemSizeFunction (copy), ReactModule (copy), ComposeRefsFunction (copy), UseGameSortDataModule (copy), CryoModule (copy), UseGameCollectionLayoutParamsModule (copy), UseCollectionLayoutFunction (copy), UseSizeAdjustedEntriesModule (copy), UseGameSortAnalyticsModule (copy), GameTileModule (copy), UseGameSortTooltipParamsModule (copy), UseGameSortImpressionsParamsModule (copy), UseIsHoldToPlayEnabledForGamesModule (copy), UseHoldToPlayStateAndCallbacksFunction (copy), UseControllerBarFocusNavigationBindingsFunction (copy), UseTextSizeOffsetFunction (copy), GameTileConstants (copy), UseGetGameTileHeightModule (copy), GetGameTileHiddenStoreFunction (copy), SignalsReactModule (copy), UseRenderGameCollectionItemModule (copy), AppPage (copy), DiscoveryAnalyticsModule (copy), FFlagLuaAppEnableReportExperience (copy), GameSortImpressionsDetectorModule (copy), CollectionGrid (copy), FFlagLuaAppRfyRevealRows (copy), FFlagLuaAppSortHeaderAnchorTag (copy), WaitForPropWrapperModule (copy), HoldToPlayLauncher (copy)
+	-- upvalues: ValidatePropsFunction (copy), StrictInterfaceResult (copy), UseAppPolicyFunction (copy), UsePreferredInputFunction (copy), LuaAppGameGridBufferRowsBelowScreen (copy), LuaAppGameGridBufferRowsAboveScreen (copy), ResponsiveModule (copy), FFlagLuaAppCompositionAlways (copy), UseBreakpointXOrSmallerFunction (copy), FFlagLuaAppNarrowTileHideRating (copy), FFlagLuaAppNarrowTileHidePlayerCount (copy), GetGameTileCollectionItemSizeFunction (copy), ReactModule (copy), ComposeRefsFunction (copy), UseGameSortDataModule (copy), CryoModule (copy), UseGameCollectionLayoutParamsModule (copy), UseCollectionLayoutFunction (copy), UseSizeAdjustedEntriesModule (copy), UseGameSortAnalyticsModule (copy), GameTileModule (copy), FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint (copy), UsePersonalizedRecommendationsMenuItemsModule (copy), UseGameSortTooltipParamsModule (copy), UseGameSortImpressionsParamsModule (copy), UseIsHoldToPlayEnabledForGamesModule (copy), UseHoldToPlayStateAndCallbacksFunction (copy), UseControllerBarFocusNavigationBindingsFunction (copy), UseTextSizeOffsetFunction (copy), GameTileConstants (copy), UseGetGameTileHeightModule (copy), GetGameTileHiddenStoreFunction (copy), SignalsReactModule (copy), UseRenderGameCollectionItemModule (copy), AppPage (copy), DiscoveryAnalyticsModule (copy), FFlagLuaAppEnableReportExperience (copy), GameSortImpressionsDetectorModule (copy), CollectionGrid (copy), FFlagLuaAppRfyRevealRows (copy), FFlagLuaAppSortHeaderAnchorTag (copy), WaitForPropWrapperModule (copy), HoldToPlayLauncher (copy)
 	ValidatePropsFunction(StrictInterfaceResult, Frame)
 	local UseAppPolicyResult = UseAppPolicyFunction(function(p1)
 		return p1.useGridPageLayout()
@@ -134,6 +138,13 @@ return ReactModule.memo(function(Frame)
 	local ItemsPerRow1 = (if FFlagLuaAppCompositionAlways1 then ItemsPerRow else UseGameCollectionLayoutParamsModuleResult.numColumns) or 0
 	local UseGameSortAnalyticsModuleResult, UseGameSortAnalyticsModuleResult2 = UseGameSortAnalyticsModule(UseGameSortDataModuleResult.sort, UseGameSortDataModuleResult.isOmni, Frame.sortIndex, Frame.pageContext, nil, UseSizeAdjustedEntriesModuleResult, ItemsPerRow1, Frame.startRow)
 	local UseVideoAnalyticsResult = GameTileModule.useVideoAnalytics(UseGameSortDataModuleResult.sort, UseGameSortDataModuleResult.isOmni, Frame.pageContext, Frame.sortIndex, UseSizeAdjustedEntriesModuleResult)
+	local v1 = nil
+	local IsNotTitleMatch: boolean? = nil
+	
+	if FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint then
+		v1 = UsePersonalizedRecommendationsMenuItemsModule(Frame.personalizedRecommendationsSurfaceKey)
+		IsNotTitleMatch = Frame.title ~= nil and Frame.title ~= ""
+	end
 	local UseGameSortTooltipParamsModuleResult, UseGameSortTooltipParamsModuleResult2 = UseGameSortTooltipParamsModule(UseGameSortDataModuleResult.sort, UseGameSortDataModuleResult.isOmni, Frame.infoText)
 	local UseGameSortImpressionsParamsModuleResult, UseGameSortImpressionsParamsModuleResult2, UseGameSortImpressionsParamsModuleResult3 = UseGameSortImpressionsParamsModule(UseGameSortDataModuleResult.sort, UseGameSortDataModuleResult.isOmni, Frame.sortIndex, Frame.pageContext, Frame.useGridTiles, Frame.componentType, UseGameSortDataModuleResult.gamesApiSortPageId, Frame.gameSortId, Frame.scrollViewPositionChangedSignal, ItemsPerRow1, Frame.startRow, UseSizeAdjustedEntriesModuleResult, Frame.searchParams)
 	local SearchUuid = if Frame.searchParams then Frame.searchParams.searchUuid else nil
@@ -197,6 +208,7 @@ return ReactModule.memo(function(Frame)
 			LayoutOrder = if FFlagLuaAppRfyRevealRows then Frame.LayoutOrder else nil,
 			ZIndex = if FFlagLuaAppRfyRevealRows then Frame.ZIndex else nil,
 			title = Frame.title,
+			headerMenuItems = if FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint and IsNotTitleMatch then v1 else nil,
 			subtitle = UseGameSortDataModuleResult.sort and UseGameSortDataModuleResult.sort.subtitle or nil,
 			onViewableItemsChanged = UseGameSortImpressionsParamsModuleResult3,
 			containerRef = UseMemoResult,

@@ -4,5 +4,6 @@
 	Frequents = "frequents",
 	None = "none",
 	Contacts = "Contacts",
-	Classmates = "Classmates"
+	Classmates = "Classmates",
+	FriendOfSeed = "FriendOfSeed"
 })

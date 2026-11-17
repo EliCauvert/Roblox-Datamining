@@ -1,0 +1,3 @@
+﻿local FFlagPymkCarouselExtendPropsModule = require(script.Parent.FFlagPymkCarouselExtendProps)
+
+return game:DefineFastFlag("ProfilePlatformSeededPymk_v3", false) and FFlagPymkCarouselExtendPropsModule

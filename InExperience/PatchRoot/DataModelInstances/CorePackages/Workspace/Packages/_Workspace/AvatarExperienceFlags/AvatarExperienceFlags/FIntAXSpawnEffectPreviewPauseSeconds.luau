@@ -1,1 +1,1 @@
-﻿return game:DefineFastInt("AXSpawnEffectPreviewPauseSeconds", 0)
+﻿return game:DefineFastInt("AXSpawnEffectPreviewPauseSeconds", 3)

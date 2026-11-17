@@ -4,7 +4,7 @@ local _ = require(script.Parent.Parent.Generated.UnifiedEventTypes)
 local MarketplaceUnifiedAction = UnifiedEventLogEnumsModule.MarketplaceUnifiedAction
 local MarketplaceUnifiedActionNumbers = UnifiedEventLogEnumsModule.MarketplaceUnifiedActionNumbers
 local SendAXCounterV2Module = require(script.Parent.Parent.sendAXCounterV2)
-local UnifiedLoggingSurface = require(Parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
+local UnifiedEventEnumsModule = require(Parent.UnifiedEventEnums)
 local IsRunningInStudioFunction = require(Parent.AppCommonLib).isRunningInStudio
 local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local FIntAXUnifiedEventCounterFlushSeconds = AvatarExperienceFlagsModule.FIntAXUnifiedEventCounterFlushSeconds
@@ -43,17 +43,17 @@ local Long = newWindow("long", FIntAXUnifiedEventCounterImpressionFlushSeconds, 
 local NavigationOpaquePage = nil
 local t = {}
 
-local function invertEnum(UnifiedLoggingSurface)
+local function invertEnum(MarketplaceUnifiedSurfaceNumbers)
 	local t = {}
 	
-	for i, value in UnifiedLoggingSurface do
-		t[tostring(value)] = tostring(i)
+	for i, marketplaceUnifiedSurfaceNumber in MarketplaceUnifiedSurfaceNumbers do
+		t[tostring(marketplaceUnifiedSurfaceNumber)] = tostring(i)
 	end
 	return t
 end
 
 local InvertEnumResult = invertEnum(if FFlagAXUnifiedEventStrictPayloads then MarketplaceUnifiedActionNumbers else MarketplaceUnifiedAction)
-local InvertEnumResult1 = invertEnum(UnifiedLoggingSurface)
+local InvertEnumResult1 = invertEnum(UnifiedEventEnumsModule.MarketplaceUnifiedSurfaceNumbers)
 
 local function _(p1): string
 	return if p1 == nil or p1 == "" then "Unknown" else tostring(p1)
@@ -92,16 +92,14 @@ local _ = function()
 end
 
 local function describe(Dimensions): string
-	return string.format("action=%s surface=%s page=%s element=%s filterPass=%s", Dimensions.action, Dimensions.surface, Dimensions.navigationPage, Dimensions.elementName or "-", Dimensions.filterPass or "-")
+	return string.format("action=%s surface=%s page=%s element=%s filterPass=%s conforms=%s", Dimensions.action, Dimensions.surface, Dimensions.navigationPage, Dimensions.elementName or "-", Dimensions.filterPass or "-", Dimensions.conforms or "-")
 end
 
 local function bucketKey(Dimensions): string
 	return table.concat({
-		Dimensions.action,
-		Dimensions.surface,
-		Dimensions.navigationPage,
-		Dimensions.elementName or "",
-		Dimensions.filterPass or ""
+		Dimensions.action, Dimensions.surface, Dimensions.navigationPage,
+		Dimensions.elementName or "", Dimensions.filterPass or "",
+		Dimensions.conforms or ""
 	}, "|")
 end
 
@@ -130,6 +128,9 @@ local function emit(Dimensions, Count, Phase)
 	end
 	if Dimensions.filterPass ~= nil then
 		config.filterPass = Dimensions.filterPass
+	end
+	if Dimensions.conforms ~= nil then
+		config.conforms = Dimensions.conforms
 	end
 	if Phase ~= nil then
 		config.phase = Phase
@@ -203,7 +204,7 @@ return {
 		flushWindow(Short)
 		flushWindow(Long)
 	end,
-	record = function(Dimensions, p1)
+	record = function(Dimensions, p1, Enabled)
 		-- upvalues: NavigationOpaquePage (ref), t (ref), InvertEnumResult (copy), FFlagAXUnifiedEventStrictPayloads (copy), InvertEnumResult1 (copy), MarketplaceUnifiedAction (copy), toElementNameDimension (copy), config (copy), emit (copy), config1 (copy), Long (copy), Short (copy), bucketKey (copy), FFlagAXUnifiedEventCounterDebugLogs (copy), IsRunningInStudioFunction (copy), describe (copy), FIntAXUnifiedEventCounterMaxKeys (copy), flushWindow (copy), scheduleFlush (copy)
 		local Action = Dimensions.action
 		
@@ -244,6 +245,7 @@ return {
 		Dimensions1.navigationPage = if NavigationPage == nil or NavigationPage == "" then "Unknown" else tostring(NavigationPage)
 		Dimensions1.elementName = if Action == MarketplaceUnifiedAction.UI_ELEMENT_CLICK then toElementNameDimension(Dimensions.elementName) else nil
 		Dimensions1.filterPass = if p1 == nil then nil else tostring(p1)
+		Dimensions1.conforms = if FFlagAXUnifiedEventStrictPayloads and Enabled == false then "false" else nil
 		
 		if config[Action] then
 			emit(Dimensions1, 1)

@@ -11,9 +11,12 @@ local _ = require(BuildExperience.Stores.GetBuildOverflowMenuStore.createBuildOv
 local PublishStatusModule = require(BuildExperience.Chat.PublishStatus)
 local LeaveExperienceModule = require(BuildExperience.utils.leaveExperience)
 local FFlagBuildExperienceMenuImprovementsModule = require(BuildExperience.Flags.FFlagBuildExperienceMenuImprovements)
+local FFlagBuildExperienceInExperienceEntryTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceInExperienceEntryTelemetry)
+local GetInExperienceEventIdsModule = require(BuildExperience.Telemetry.getInExperienceEventIds)
+local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 
 return function(p1)
-	-- upvalues: GetBuildOverflowMenuStoreModule (copy), PublishStatusModule (copy), ReactModule (copy), View (copy), FFlagBuildExperienceMenuImprovementsModule (copy), StopPlaytestButtonModule (copy), LeaveExperienceModule (copy), BuildOverflowMenuButtonModule (copy), IconName (copy)
+	-- upvalues: GetBuildOverflowMenuStoreModule (copy), PublishStatusModule (copy), ReactModule (copy), View (copy), FFlagBuildExperienceMenuImprovementsModule (copy), StopPlaytestButtonModule (copy), FFlagBuildExperienceInExperienceEntryTelemetryModule (copy), SendBuildExperienceEventModule (copy), GetInExperienceEventIdsModule (copy), LeaveExperienceModule (copy), BuildOverflowMenuButtonModule (copy), IconName (copy)
 	local UsePublishStatusResult = PublishStatusModule.usePublishStatus(p1.target)
 	
 	return ReactModule.createElement(ReactModule.Fragment, nil, {
@@ -27,7 +30,14 @@ return function(p1)
 			StopPlaytest = if FFlagBuildExperienceMenuImprovementsModule then ReactModule.createElement(StopPlaytestButtonModule, {
 				layoutOrder = 0,
 				onActivated = function()
-					-- upvalues: LeaveExperienceModule (upval)
+					-- upvalues: FFlagBuildExperienceInExperienceEntryTelemetryModule (upval), SendBuildExperienceEventModule (upval), p1 (copy), GetInExperienceEventIdsModule (upval), LeaveExperienceModule (upval)
+					if FFlagBuildExperienceInExperienceEntryTelemetryModule then
+						SendBuildExperienceEventModule("PLAYTEST_STOP_CLICK", {
+							universeId = p1.target.universeId,
+							placeId = p1.target.placeId,
+							conversationId = p1.target.sessionId or GetInExperienceEventIdsModule().conversationId
+						}, { context = "in_experience_pill" })
+					end
 					LeaveExperienceModule()
 				end
 			}) else nil,

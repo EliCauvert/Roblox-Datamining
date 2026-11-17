@@ -89,6 +89,7 @@
 			PassesPage = "PassesPage",
 			MomentsFeed = "MomentsFeed",
 			MomentsImmersive = "MomentsFeed",
+			TimespentAuditPage = "TimespentAuditPage",
 			BuildHome = "BuildGameList",
 			BuildChat = "BuildChat",
 			BuildPublish = "BuildGamePublish",

@@ -7,6 +7,8 @@ local _ = require(BuildExperience.Analytics.AnalyticsWindow)
 local _ = require(BuildExperience.Analytics.Goals.GoalTypes)
 local UseGoalMetricSummaryModule = require(BuildExperience.Analytics.Goals.useGoalMetricSummary)
 local AnalyticsUnitModule = require(BuildExperience.Analytics.AnalyticsUnit)
+local AnalyticsKeysModule = require(BuildExperience.Analytics.AnalyticsKeys)
+local FFlagBuildAnalyticsFunnelTrackingCTAModule = require(BuildExperience.Flags.FFlagBuildAnalyticsFunnelTrackingCTA)
 local FormatStatNumberModule = require(BuildExperience.Analytics.formatStatNumber)
 local FFlagBuildAnalyticsTwoDecimalPlacesModule = require(BuildExperience.Flags.FFlagBuildAnalyticsTwoDecimalPlaces)
 local MetricValueRoundsToZeroModule = require(BuildExperience.Analytics.metricValueRoundsToZero)
@@ -97,7 +99,7 @@ local function buildLocalizationRequest(List)
 end
 
 return function(p1)
-	-- upvalues: UseGoalMetricSummaryModule (copy), DataStatus (copy), getNumberValueText (copy), getBreakdownValueText (copy), getNumberDelta (copy), getDeltaValueText (copy), UseLocalizationFunction (copy), buildLocalizationRequest (copy), NoDataPlaceholderModule (copy)
+	-- upvalues: UseGoalMetricSummaryModule (copy), DataStatus (copy), getNumberValueText (copy), getBreakdownValueText (copy), getNumberDelta (copy), getDeltaValueText (copy), buildLocalizationRequest (copy), FFlagBuildAnalyticsFunnelTrackingCTAModule (copy), AnalyticsKeysModule (copy), UseLocalizationFunction (copy), NoDataPlaceholderModule (copy)
 	local Summary = p1.summary
 	local UseGoalMetricSummaryModuleResult = UseGoalMetricSummaryModule(p1.universeId, Summary.source, p1.window, p1.latestAvailableTime)
 	local Value = UseGoalMetricSummaryModuleResult.value
@@ -106,13 +108,37 @@ return function(p1)
 	local Config = if Value == nil then { type = "empty" } elseif Summary.kind == "number" then getNumberValueText(Summary, Value) elseif Summary.kind == "breakdown" then getBreakdownValueText(Summary, Value) else nil
 	local NumberDelta = if Value == nil or Summary.kind ~= "number" then nil else getNumberDelta(Summary, Value)
 	local Config1 = if NumberDelta == nil then { type = "empty" } else getDeltaValueText(NumberDelta)
-	local UseLocalizationResult = UseLocalizationFunction((buildLocalizationRequest({ valueText = Config, deltaText = Config1 })))
+	local LocalizationRequest = buildLocalizationRequest({ valueText = Config, deltaText = Config1 })
 	
+	if FFlagBuildAnalyticsFunnelTrackingCTAModule then
+		LocalizationRequest.addFunnelTracking = AnalyticsKeysModule.ANALYTICS_ADD_FUNNEL_TRACKING
+		LocalizationRequest.funnelTrackingPrompt = AnalyticsKeysModule.ANALYTICS_FUNNEL_TRACKING_PROMPT
+	end
+	local UseLocalizationResult = UseLocalizationFunction(LocalizationRequest)
+	local NoDataPlaceholderModule1 = if Config.type == "empty" then NoDataPlaceholderModule elseif Config.type == "raw" then Config.value else UseLocalizationResult.valueText
+	local Value1 = if Config1.type == "raw" then Config1.value elseif Config1.type == "empty" then nil else UseLocalizationResult.deltaText
+	local EmptyStateAction = nil
+	
+	if FFlagBuildAnalyticsFunnelTrackingCTAModule and Summary.id == "TopDropOffStep" then
+		local OnOpenChatFunction = p1.onOpenChat
+		
+		if p1.metadataStatus == DataStatus.Ready and (if HasLatestAvailableTime then UseGoalMetricSummaryModuleResult.status == DataStatus.Ready and Value == nil else Value == nil) and OnOpenChatFunction ~= nil then
+			local FunnelTrackingPrompt = UseLocalizationResult.funnelTrackingPrompt
+			EmptyStateAction = {
+				text = UseLocalizationResult.addFunnelTracking,
+				onActivated = function()
+					-- upvalues: OnOpenChatFunction (copy), FunnelTrackingPrompt (copy)
+					OnOpenChatFunction(FunnelTrackingPrompt)
+				end
+			}
+		end
+	end
 	return {
+		emptyStateAction = EmptyStateAction,
 		title = p1.title,
-		valueText = if Config.type == "empty" then NoDataPlaceholderModule elseif Config.type == "raw" then Config.value else UseLocalizationResult.valueText,
+		valueText = NoDataPlaceholderModule1,
 		icon = if Summary.kind == "number" then Summary.icon else nil,
-		deltaText = if Config1.type == "raw" then Config1.value elseif Config1.type == "empty" then nil else UseLocalizationResult.deltaText,
+		deltaText = Value1,
 		isDeltaPositive = NumberDelta ~= nil and NumberDelta.isPositive,
 		isLoading = IsMetadataStatusMatch,
 		layoutOrder = p1.layoutOrder,

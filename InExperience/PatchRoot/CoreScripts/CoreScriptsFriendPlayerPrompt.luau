@@ -1,7 +1,6 @@
 ﻿local StarterGui = game:GetService("StarterGui")
 local Players = game:GetService("Players")
 local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local IXPService = game:GetService("IXPService")
 local CorePackages = game:GetService("CorePackages")
 local RobloxGui = game:GetService("CoreGui").RobloxGui
 local LocalPlayer = Players.LocalPlayer
@@ -17,8 +16,6 @@ local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTra
 local UserRelationshipModalsModule = require(CorePackages.Workspace.Packages.UserRelationshipModals)
 local LegacyThumbnailUrlsModule = require(Modules.Common.LegacyThumbnailUrls)
 local FFlagRemoveHardCodedFriendLimitPromptModule = require(Modules.Flags.FFlagRemoveHardCodedFriendLimitPrompt)
-local FriendRequestModalIxpEnabled = game:DefineFastFlag("FriendRequestModalIxpEnabled", false)
-local FriendRequestModalIxpLayer = game:DefineFastString("FriendRequestModalIxpLayer", "")
 local _ = LegacyThumbnailUrlsModule.Thumbnail
 local _ = LegacyThumbnailUrlsModule.Bust
 local Size150x150 = Enum.ThumbnailSize.Size150x150
@@ -73,12 +70,12 @@ function AtFriendLimit(Player): boolean
 end
 
 function DoPromptRequestFriendPlayer(Player: Player)
-	-- upvalues: LocalPlayer (ref), FriendRequestModalIxpEnabled (copy), IXPService (copy), FriendRequestModalIxpLayer (copy), UserRelationshipModalsModule (copy)
-	if LocalPlayer:IsFriendsWithAsync(Player.UserId) then return end
-	if FriendRequestModalIxpEnabled then
-		IXPService:LogFlagLinkedUserLayerExposure(FriendRequestModalIxpLayer)
+	-- upvalues: LocalPlayer (ref), UserRelationshipModalsModule (copy)
+	if not LocalPlayer:IsFriendsWithAsync(Player.UserId) then
+		UserRelationshipModalsModule.launchPromptFriendRequestModal(Player.UserId)
+		
+		return
 	end
-	UserRelationshipModalsModule.launchPromptFriendRequestModal(Player.UserId)
 end
 
 function PromptRequestFriendPlayer(Player: Player)

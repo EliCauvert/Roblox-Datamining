@@ -28,7 +28,8 @@ return function(p1)
 		initialIndex = p1.initialIndex,
 		trackSurfaceLoad = p1.trackSurfaceLoad,
 		emptyState = p1.emptyState,
-		caughtUpState = p1.caughtUpState
+		caughtUpState = p1.caughtUpState,
+		appNavBarHideAfterSwipes = p1.appNavBarHideAfterSwipes
 	})
 	local RenderFeedContainerFunction = p1.renderFeedContainer
 	

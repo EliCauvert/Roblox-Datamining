@@ -2,10 +2,13 @@
 local CorePackages = game:GetService("CorePackages")
 local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
+local FFlagKeepSideSheetOpenBesideMenu = SharedFlagsModule.FFlagKeepSideSheetOpenBesideMenu
 local ServiceModule = require(Chrome.Service)
 local CommonIconModule = require(Chrome.Integrations.CommonIcon)
 local Signal = require(CorePackages.Workspace.Packages.AppCommonLib).Signal
-local SideSheetPlacement = require(CorePackages.Workspace.Packages.Chrome).Enums.SideSheetPlacement
+local ChromeModule = require(CorePackages.Workspace.Packages.Chrome)
+local SideSheetOpenBehavior = ChromeModule.Enums.SideSheetOpenBehavior
+local SideSheetPlacement = ChromeModule.Enums.SideSheetPlacement
 local FFlagStandardizeSafetyIcon = SharedFlagsModule.FFlagStandardizeSafetyIcon
 local IsNameMatch = false
 local NewSignal = Signal.new()
@@ -28,6 +31,7 @@ return ServiceModule:register({
 	label = "CoreScripts.InGameMenu.QuickActions.Report",
 	initialAvailability = ServiceModule.AvailabilitySignal.Available,
 	sideSheetPlacement = SideSheetPlacement.AboveFold,
+	sideSheetOpenBehavior = if FFlagKeepSideSheetOpenBesideMenu then SideSheetOpenBehavior.MenuBesideSheet else nil,
 	activated = function(_)
 		-- upvalues: RobloxGui (copy), IsNameMatch (ref)
 		local SettingsHubModule = require(RobloxGui.Modules.Settings.SettingsHub)

@@ -73,6 +73,7 @@ return function(p1)
 			Goals = if FFlagBuildAnalyticsGoalsModule then ReactModule.createElement(GoalsSectionModule, {
 				layoutOrder = 4,
 				onOpenChat = p1.onOpenChat,
+				onOpenFunnelChat = p1.onOpenFunnelChat,
 				universeId = p1.universeId,
 				window = p1.window,
 				testId = `{TestId}.Goals`

@@ -5,6 +5,7 @@ local ReactModule = require(Parent.React)
 local Uiblox = BuilderIconsModule.Migration.uiblox
 local FillBehaviorModule = require(Foundation.Enums.FillBehavior)
 local _ = require(Foundation.Enums.IconSize)
+local ControlStateModule = require(Foundation.Enums.ControlState)
 local _ = require(Foundation.Enums.Radius)
 local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local UsePresentationContextFunction = require(Foundation.Providers.Style.PresentationContext).usePresentationContext
@@ -17,7 +18,9 @@ local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
 local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 local IsMigratedFunction = IconMigrationUtilsModule.isMigrated
 local IsBuilderOrMigratedIconFunction = IconMigrationUtilsModule.isBuilderOrMigratedIcon
+local DevAssertModule = require(Foundation.Utility.devAssert)
 local ConstantsModule = require(Foundation.Constants)
+local IconButtonIndicatorModule = require(script.Parent.IconButtonIndicator)
 local ImageModule = require(Foundation.Components.Image)
 local TextModule = require(Foundation.Components.Text)
 local _ = require(Foundation.Components.Types)
@@ -32,7 +35,7 @@ local config = {
 }
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
-	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UsePresentationContextFunction (copy), IsBuilderOrMigratedIconFunction (copy), GetIconScaleModule (copy), UseIconButtonVariantsModule (copy), UseIconSizeModule (copy), IsBuilderIconModule (copy), ReactModule (copy), FillBehaviorModule (copy), ViewModule (copy), WithCommonPropsModule (copy), ConstantsModule (copy), TextModule (copy), IsMigratedFunction (copy), Uiblox (copy), BuilderIconsModule (copy), ImageModule (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UsePresentationContextFunction (copy), IsBuilderOrMigratedIconFunction (copy), GetIconScaleModule (copy), UseIconButtonVariantsModule (copy), UseIconSizeModule (copy), IsBuilderIconModule (copy), ReactModule (copy), FillBehaviorModule (copy), DevAssertModule (copy), ControlStateModule (copy), ViewModule (copy), WithCommonPropsModule (copy), ConstantsModule (copy), TextModule (copy), IsMigratedFunction (copy), Uiblox (copy), BuilderIconsModule (copy), ImageModule (copy), IconButtonIndicatorModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()
 	local UsePresentationContextResult = UsePresentationContextFunction()
@@ -51,12 +54,24 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	local Size = UseIconButtonVariantsModuleResult.container.size
 	local _UDim: UDim = if WithDefaultsModuleResult.isCircular then UDim.new(0, UseTokensModuleResult.Radius.Circle) else UDim.new(0, UseIconButtonVariantsModuleResult.container.radius or UseTokensModuleResult.Radius.Large)
 	local UseIconSizeModuleResult = UseIconSizeModule(WithDefaultsModuleResult.size, IsBuilderIconModule(Name), true)
+	local UseMemoResult = ReactModule.useMemo(function()
+		-- upvalues: _UDim (copy), UseTokensModuleResult (copy)
+		return {
+			radius = _UDim,
+			offset = UseTokensModuleResult.Size.Size_150,
+			borderWidth = UseTokensModuleResult.Stroke.Thicker
+		}
+	end, { UseTokensModuleResult, _UDim })
 	local IsFillBehaviorMatch = WithDefaultsModuleResult.fillBehavior == FillBehaviorModule.Fill
 	local IsNotScaleMatch: boolean = WithDefaultsModuleResult.width.Scale ~= 0 or WithDefaultsModuleResult.width.Offset ~= 0
+	local _UDim1 = if IsFillBehaviorMatch then UDim.new(1, 0) elseif IsNotScaleMatch then WithDefaultsModuleResult.width else Size.X
+	DevAssertModule(WithDefaultsModuleResult.indicator == nil or not (IsFillBehaviorMatch or IsNotScaleMatch), "IconButton: indicator is only supported on square buttons; remove width and fillBehavior = Fill.")
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(ControlStateModule.Initialize)
 	
 	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
 		onActivated = WithDefaultsModuleResult.onActivated,
-		Size = UDim2.new(if IsFillBehaviorMatch then UDim.new(1, 0) elseif IsNotScaleMatch then WithDefaultsModuleResult.width else Size.X, UDim.new(0, Size.Y.Offset)),
+		onStateChanged = if WithDefaultsModuleResult.indicator then UseBindingResult2 else nil,
+		Size = UDim2.new(_UDim1, UDim.new(0, Size.Y.Offset)),
 		flexItem = if WithDefaultsModuleResult.fillBehavior then {
 			FlexMode = if WithDefaultsModuleResult.fillBehavior == FillBehaviorModule.Fill then Enum.UIFlexMode.Fill else Enum.UIFlexMode.Shrink
 		} else nil,
@@ -73,14 +88,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 		cornerRadius = _UDim,
 		backgroundStyle = UseIconButtonVariantsModuleResult.container.style,
 		stroke = UseIconButtonVariantsModuleResult.container.stroke,
-		cursor = ReactModule.useMemo(function()
-			-- upvalues: _UDim (copy), UseTokensModuleResult (copy)
-			return {
-				radius = _UDim,
-				offset = UseTokensModuleResult.Size.Size_150,
-				borderWidth = UseTokensModuleResult.Stroke.Thicker
-			}
-		end, { UseTokensModuleResult, _UDim }),
+		cursor = UseMemoResult,
 		GroupTransparency = if WithDefaultsModuleResult.isDisabled then ConstantsModule.DISABLED_TRANSPARENCY else nil,
 		ref = Ref
 	}), {
@@ -101,6 +109,17 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 			imageStyle = UseIconButtonVariantsModuleResult.content.style,
 			scale = Scale,
 			testId = `{WithDefaultsModuleResult.testId}--image`
-		})
+		}),
+		Indicator = if WithDefaultsModuleResult.indicator and not WithDefaultsModuleResult.isDisabled then ReactModule.createElement(IconButtonIndicatorModule, {
+			indicator = WithDefaultsModuleResult.indicator,
+			buttonSize = WithDefaultsModuleResult.size,
+			buttonVariant = WithDefaultsModuleResult.variant,
+			isCircular = WithDefaultsModuleResult.isCircular,
+			buttonHalfSize = Size.Y.Offset / 2,
+			buttonRadius = _UDim.Offset,
+			controlState = UseBindingResult,
+			stateLayerMode = UseIconButtonVariantsModuleResult.container.stateLayer.mode,
+			testId = WithDefaultsModuleResult.testId
+		}) else nil
 	})
 end))

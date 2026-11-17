@@ -15,10 +15,11 @@ local FFlagSocialCarouselEnableUserSeenEvents = require(SocialCarousel.Flags).FF
 local FFlagSocialCarouselLogNewFriendRequestsBadgeModule = require(SocialCarousel.Flags.FFlagSocialCarouselLogNewFriendRequestsBadge)
 local FFlagSocialCarouselShareQREnabled = SharedFlagsModule.FFlagSocialCarouselShareQREnabled
 local FFlagLuaAppUserSeenCollectionUnifiedFields = SharedFlagsModule.FFlagLuaAppUserSeenCollectionUnifiedFields
+local FFlagSocialCarouselInGamePlayIcon = SharedFlagsModule.FFlagSocialCarouselInGamePlayIcon
 local RepeatValueFunction = SocialLuaAnalyticsModule.Analytics.Formatters.repeatValue
 
 return function()
-	-- upvalues: UseSocialCarouselContextModule (copy), ReactModule (copy), InitializeSocialCarouselAnalyticsModule (copy), EventNamesModule (copy), GetFriendStatusFromTileTypeModule (copy), HttpService (copy), FFlagSocialCarouselEnableUserSeenEvents (copy), FFlagLuaAppUserSeenCollectionUnifiedFields (copy), RepeatValueFunction (copy), FFlagSocialCarouselShareQREnabled (copy), FFlagSocialCarouselLogNewFriendRequestsBadgeModule (copy), RetrievalStatus (copy)
+	-- upvalues: UseSocialCarouselContextModule (copy), ReactModule (copy), InitializeSocialCarouselAnalyticsModule (copy), EventNamesModule (copy), GetFriendStatusFromTileTypeModule (copy), HttpService (copy), FFlagSocialCarouselInGamePlayIcon (copy), FFlagSocialCarouselEnableUserSeenEvents (copy), FFlagLuaAppUserSeenCollectionUnifiedFields (copy), RepeatValueFunction (copy), FFlagSocialCarouselShareQREnabled (copy), FFlagSocialCarouselLogNewFriendRequestsBadgeModule (copy), RetrievalStatus (copy)
 	local UseSocialCarouselContextModuleResult = UseSocialCarouselContextModule()
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseSocialCarouselContextModuleResult (copy), InitializeSocialCarouselAnalyticsModule (upval)
@@ -69,7 +70,7 @@ return function()
 	
 	return {
 		userPressed = ReactModule.useCallback(function(p1, p2)
-			-- upvalues: UseMemoResult (copy), EventNamesModule (upval), GetFriendStatusFromTileTypeModule (upval), Source (copy), HttpService (upval)
+			-- upvalues: UseMemoResult (copy), EventNamesModule (upval), GetFriendStatusFromTileTypeModule (upval), Source (copy), HttpService (upval), FFlagSocialCarouselInGamePlayIcon (upval)
 			UseMemoResult.fireAnalyticsEvent(EventNamesModule.UserPressed, {
 				presence = if p1.presence then p1.presence.userPresenceType else "Offline",
 				absolutePosition = p2.absolutePosition,
@@ -81,7 +82,8 @@ return function()
 				isRecommendation = if p1.contextType then true else false,
 				universeId = if p1.presence then p1.presence.universeId else nil,
 				source = Source,
-				interactionUuid = HttpService:GenerateGUID(false)
+				interactionUuid = HttpService:GenerateGUID(false),
+				tileClickTarget = if FFlagSocialCarouselInGamePlayIcon then p2.tileClickTarget else nil
 			})
 		end, { Source, UseMemoResult }),
 		userSeen = if FFlagSocialCarouselEnableUserSeenEvents then UseResult else nil,

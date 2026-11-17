@@ -11,6 +11,9 @@ local PublishSheetControllerModule = require(BuildExperience.Components.PublishS
 local GetCurrentExperienceProjectModule = require(BuildExperience.utils.getCurrentExperienceProject)
 local UseHardwareInsetsModule = require(script.Parent.useHardwareInsets)
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
+local FFlagBuildExperienceInExperienceEntryTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceInExperienceEntryTelemetry)
+local GetInExperienceEventIdsModule = require(BuildExperience.Telemetry.getInExperienceEventIds)
+local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 local UseGamePermissionsModule = require(BuildExperience.useGamePermissions)
 local Image = FoundationModule.Image
 local IconButton = FoundationModule.IconButton
@@ -26,7 +29,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local function noop() end
 
 local function createToolbarButtons(p1, UseResult, p2, p3)
-	-- upvalues: FFlagBuildCheckGamePermissionsModule (copy), ReactModule (copy), IconButton (copy), IconName (copy), noop (copy), InputSize (copy), ButtonVariant (copy)
+	-- upvalues: FFlagBuildCheckGamePermissionsModule (copy), ReactModule (copy), IconButton (copy), IconName (copy), noop (copy), InputSize (copy), ButtonVariant (copy), FFlagBuildExperienceInExperienceEntryTelemetryModule (copy), SendBuildExperienceEventModule (copy), GetInExperienceEventIdsModule (copy)
 	local NoCanEditOnBuild: boolean = FFlagBuildCheckGamePermissionsModule and not p3.canEditOnBuild
 	
 	if p1.isSelecting then
@@ -54,7 +57,11 @@ local function createToolbarButtons(p1, UseResult, p2, p3)
 		Chat = ReactModule.createElement(IconButton, {
 			LayoutOrder = 1,
 			icon = IconName.Nebula,
-			onActivated = p1.onActivated,
+			onActivated = if FFlagBuildExperienceInExperienceEntryTelemetryModule then function()
+				-- upvalues: SendBuildExperienceEventModule (upval), GetInExperienceEventIdsModule (upval), p1 (copy)
+				SendBuildExperienceEventModule("CHAT_OPEN", GetInExperienceEventIdsModule(), { context = "in_game_toolbar", isInExperience = "true" })
+				p1.onActivated()
+			end else p1.onActivated,
 			size = InputSize.Medium,
 			testId = `{p2}-chat`,
 			variant = ButtonVariant.Utility
@@ -96,7 +103,7 @@ local function createToolbarButtons(p1, UseResult, p2, p3)
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), GetCurrentExperienceProjectModule (copy), UseTokensFunction (copy), UsePreferencesFunction (copy), UseOverlayFunction (copy), UseHardwareInsetsModule (copy), DisplayModule (copy), CoreGuiCommonModule (copy), SignalsReactModule (copy), MotionModule (copy), View (copy), noop (copy), StateLayerAffordance (copy), createToolbarButtons (copy), Image (copy), FoundationModule (copy), PublishSheetControllerModule (copy), BuildPillMenuPageHostModule (copy)
+	-- upvalues: ReactModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), GetCurrentExperienceProjectModule (copy), FFlagBuildExperienceInExperienceEntryTelemetryModule (copy), SendBuildExperienceEventModule (copy), GetInExperienceEventIdsModule (copy), UseTokensFunction (copy), UsePreferencesFunction (copy), UseOverlayFunction (copy), UseHardwareInsetsModule (copy), DisplayModule (copy), CoreGuiCommonModule (copy), SignalsReactModule (copy), MotionModule (copy), View (copy), noop (copy), StateLayerAffordance (copy), createToolbarButtons (copy), Image (copy), FoundationModule (copy), PublishSheetControllerModule (copy), BuildPillMenuPageHostModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(nil)
@@ -104,20 +111,20 @@ return function(p1)
 		universeId = GetCurrentExperienceProjectModule().universeId
 	}) else nil
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: GetCurrentExperienceProjectModule (upval), UseStateResult2_2 (copy), UseStateResult2 (copy)
+		-- upvalues: GetCurrentExperienceProjectModule (upval), FFlagBuildExperienceInExperienceEntryTelemetryModule (upval), SendBuildExperienceEventModule (upval), GetInExperienceEventIdsModule (upval), UseStateResult2_2 (copy), UseStateResult2 (copy)
 		local CurrentExperienceProjectModule = GetCurrentExperienceProjectModule()
 		
-		if CurrentExperienceProjectModule.universeId ~= nil then
-			UseStateResult2_2({
-				sessionId = nil,
-				isNewGameTarget = false,
-				universeId = CurrentExperienceProjectModule.universeId,
-				placeId = CurrentExperienceProjectModule.placeId
-			})
-			UseStateResult2(true)
-			
-			return
+		if CurrentExperienceProjectModule.universeId == nil then return end
+		if FFlagBuildExperienceInExperienceEntryTelemetryModule then
+			SendBuildExperienceEventModule("PUBLISH_CLICK", GetInExperienceEventIdsModule(), { context = "in_game_toolbar", isInExperience = "true" })
 		end
+		UseStateResult2_2({
+			sessionId = nil,
+			isNewGameTarget = false,
+			universeId = CurrentExperienceProjectModule.universeId,
+			placeId = CurrentExperienceProjectModule.placeId
+		})
+		UseStateResult2(true)
 	end, {})
 	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)

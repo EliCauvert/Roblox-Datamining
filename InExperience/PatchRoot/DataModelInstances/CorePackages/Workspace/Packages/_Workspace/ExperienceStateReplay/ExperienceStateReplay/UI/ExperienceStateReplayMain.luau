@@ -1,10 +1,27 @@
 ﻿local ExperienceStateReplayMainModule = {}
+local DmctPlaybackClientAppEngineFeature = game:GetEngineFeature("DmctPlaybackClientApp")
+local FFlagDmctVideoCapturePlaybackClientEnabledModule = require(script.Parent.Parent.Flags.FFlagDmctVideoCapturePlaybackClientEnabled)
+local FFlagAnonymizeExperienceStatePlaybackModule = require(script.Parent.Parent.Flags.FFlagAnonymizeExperienceStatePlayback)
+local FFlagDmctVideoCapturePlaybackClientEnabledModule1 = DmctPlaybackClientAppEngineFeature and FFlagDmctVideoCapturePlaybackClientEnabledModule
 
 if not game:GetEngineFeature("RecordingServicePlaybackApiLua") then
 	return ExperienceStateReplayMainModule
 end
-if not game:GetEngineFeature("DmctPlaybackClientApp") and game.PlaceId ~= 123012592984338 then
+if not DmctPlaybackClientAppEngineFeature and game.PlaceId ~= 123012592984338 then
 	return ExperienceStateReplayMainModule
+end
+local FailureReason = nil
+
+if FFlagDmctVideoCapturePlaybackClientEnabledModule1 and FFlagAnonymizeExperienceStatePlaybackModule then
+	local PlaybackAnonymizerModule = require(script.Parent.PlaybackAnonymizer)
+	local Success, Result = pcall(PlaybackAnonymizerModule.start)
+	
+	if not Success then
+		warn("[VIDEOCAPTURE] failed reason=playback anonymizer failed to start: " .. tostring(Result))
+		
+		return ExperienceStateReplayMainModule
+	end
+	FailureReason = PlaybackAnonymizerModule.failureReason
 end
 local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 local Parent = script.Parent
@@ -20,14 +37,19 @@ require(Parent.ControlButtonsTime).setupControl(ExperienceStateReplayMainModule)
 require(Parent.ControlVisibility).setupControl(ExperienceStateReplayMainModule)
 local LoadSlicesModule = require(Parent.LoadSlices)
 
-if not game:GetEngineFeature("DmctPlaybackClientApp") then
+if not DmctPlaybackClientAppEngineFeature then
 	LoadSlicesModule.experienceCallback(ExperienceStateReplayMainModule)
 end
 require(Parent.ControlScrubber).setupControl(ExperienceStateReplayMainModule)
 require(Parent.ListenPlaybackStatusUpdated).setupListener(ExperienceStateReplayMainModule)
 require(Parent.CreateSpectatorCamera).createSpectatorCamera(ExperienceStateReplayMainModule)
 
-if game:GetEngineFeature("DmctPlaybackClientApp") then
+if FFlagDmctVideoCapturePlaybackClientEnabledModule1 then
+	require(Parent.VideoCapturePlaybackController).start(ExperienceStateReplayMainModule, require(Parent.Parent.Flags.GetFStringPlaybackGuid)(), { anonymizationFailure = FailureReason })
+	
+	return ExperienceStateReplayMainModule
+end
+if DmctPlaybackClientAppEngineFeature then
 	require(Parent.ReplaySelector).create(ExperienceStateReplayMainModule, function(p1)
 		-- upvalues: LoadSlicesModule (copy), ExperienceStateReplayMainModule (copy)
 		LoadSlicesModule.loadGUID(ExperienceStateReplayMainModule, p1)

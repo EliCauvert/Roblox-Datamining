@@ -1,6 +1,7 @@
 ﻿local Parent = script:FindFirstAncestor("AvatarExperienceAnalytics").Parent
 local UnifiedEventLogEnumsModule = require(script.Parent.UnifiedEventLogEnums)
 local _ = require(script.Parent.Generated.UnifiedEventTypes)
+local _ = require(Parent.UnifiedEventEnums)
 local MarketplaceUnifiedAction = UnifiedEventLogEnumsModule.MarketplaceUnifiedAction
 local MarketplaceUnifiedItemType = UnifiedEventLogEnumsModule.MarketplaceUnifiedItemType
 local WidgetUiTreatment = UnifiedEventLogEnumsModule.WidgetUiTreatment

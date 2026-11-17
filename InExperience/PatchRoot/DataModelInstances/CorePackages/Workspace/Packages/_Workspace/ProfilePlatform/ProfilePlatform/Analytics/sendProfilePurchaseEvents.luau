@@ -8,11 +8,12 @@ local SendUnifiedEventLogFunction = AvatarExperienceAnalyticsModule.sendUnifiedE
 local SendPassthroughUnifiedEventLogFunction = AvatarExperienceAnalyticsModule.sendPassthroughUnifiedEventLog
 local FFlagAXUnifiedEventStrictPayloads = AvatarExperienceAnalyticsModule.Flags.FFlagAXUnifiedEventStrictPayloads
 local UnifiedEventLogEnums = AvatarExperienceAnalyticsModule.UnifiedEventLogEnums
+local UnifiedEventEnums = AvatarExperienceAnalyticsModule.UnifiedEventEnums
 local _ = UnifiedEventLogEnums.MarketplaceUnifiedAction
 local UnifiedLoggingSurface = AvatarExperienceNavigationModule.Enums.UnifiedLoggingSurface
 
 return function(Action, List, Community)
-	-- upvalues: EnumsModule (copy), UnifiedLoggingSurface (copy), FFlagAXUnifiedEventStrictPayloads (copy), SendPassthroughUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), SendUnifiedEventLogFunction (copy)
+	-- upvalues: EnumsModule (copy), UnifiedLoggingSurface (copy), FFlagAXUnifiedEventStrictPayloads (copy), SendPassthroughUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), UnifiedEventEnums (copy), SendUnifiedEventLogFunction (copy)
 	local COMMUNITYPROFILE = if Community == EnumsModule.ProfileTypes.Community then UnifiedLoggingSurface.COMMUNITY_PROFILE else UnifiedLoggingSurface.USER_PROFILE
 	for _, value in List do
 		local IsItemTypeMatch = value.itemType == EnumsModule.ItemTypes.Bundle
@@ -23,8 +24,8 @@ return function(Action, List, Community)
 				surface = COMMUNITYPROFILE,
 				itemId = value.itemId,
 				itemType = if IsItemTypeMatch then UnifiedEventLogEnums.MarketplaceUnifiedItemType.BUNDLE else UnifiedEventLogEnums.MarketplaceUnifiedItemType.ASSET,
-				assetType = if IsItemTypeMatch then nil else value.itemSubType,
-				bundleType = if IsItemTypeMatch then value.itemSubType else nil,
+				assetType = if IsItemTypeMatch then nil else UnifiedEventEnums.toAssetType(value.itemSubType),
+				bundleType = if IsItemTypeMatch then UnifiedEventEnums.toMarketplaceBundleType(value.itemSubType) else nil,
 				organicItemPrice = value.priceInRobux
 			})
 		else

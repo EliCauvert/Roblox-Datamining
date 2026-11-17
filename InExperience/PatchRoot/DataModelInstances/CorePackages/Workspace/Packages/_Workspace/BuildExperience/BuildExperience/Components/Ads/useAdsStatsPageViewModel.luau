@@ -22,6 +22,8 @@ local FoundationModule = require(Parent.Foundation)
 local _ = require(Parent.DataHydration.CreatorAgentChat)
 local FFlagEnablePaidAdsModule = require(BuildExperience.Flags.FFlagEnablePaidAds)
 local FFlagBuildAdsManagerUniverseUrlModule = require(BuildExperience.Flags.FFlagBuildAdsManagerUniverseUrl)
+local FFlagBuildExperienceAdsAndRobuxTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceAdsAndRobuxTelemetry)
+local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 local IconName = FoundationModule.Enums.IconName
 local IconPosition = FoundationModule.Enums.IconPosition
 local MSPERDAY = AdCampaignScheduleUtilsModule.MS_PER_DAY
@@ -72,13 +74,13 @@ local _ = function(Title, StatValue, StatIcon, HasData)
 	}
 end
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: UseGetAdCampaignsModule (copy), UseGetCampaignStatsModule (copy), UseGetAdCampaignEligibilityModule (copy), UseCreateAdCampaignModule (copy), ReactModule (copy), FFlagEnablePaidAdsModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), LocalizationModule (copy), WINDOWDAYS (copy), MSPERDAY (copy), config (copy), ToStartMsFunction (copy), CampaignEndMsFunction (copy), CampaignEndExclusiveMsFunction (copy), IconName (copy), AnalyticsUnitModule (copy), StatsCardValueFormatModule (copy), IconPosition (copy), formatDateRange (copy), AdCampaignEligibilityUtilsModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), GetAdsManagerUrlModule (copy), UseOpenWebViewWithResumeRefreshModule (copy)
-	local UseGetAdCampaignsModuleResult, UseGetAdCampaignsModuleResult2 = UseGetAdCampaignsModule(p2)
+return function(UniverseId, p1, p2, p3, p4, p5)
+	-- upvalues: UseGetAdCampaignsModule (copy), UseGetCampaignStatsModule (copy), UseGetAdCampaignEligibilityModule (copy), UseCreateAdCampaignModule (copy), ReactModule (copy), FFlagEnablePaidAdsModule (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), LocalizationModule (copy), WINDOWDAYS (copy), MSPERDAY (copy), config (copy), ToStartMsFunction (copy), CampaignEndMsFunction (copy), CampaignEndExclusiveMsFunction (copy), IconName (copy), AnalyticsUnitModule (copy), StatsCardValueFormatModule (copy), IconPosition (copy), formatDateRange (copy), AdCampaignEligibilityUtilsModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), GetAdsManagerUrlModule (copy), UseOpenWebViewWithResumeRefreshModule (copy), SendBuildExperienceEventModule (copy)
+	local UseGetAdCampaignsModuleResult, UseGetAdCampaignsModuleResult2 = UseGetAdCampaignsModule(p1)
 	local Flag = false
 	
-	if UseGetAdCampaignsModuleResult ~= nil and p1 ~= nil then
-		local Text = tostring(p1)
+	if UseGetAdCampaignsModuleResult ~= nil and UniverseId ~= nil then
+		local Text = tostring(UniverseId)
 		
 		for _, value in UseGetAdCampaignsModuleResult do
 			if value.targetUniverseId == Text then
@@ -87,9 +89,9 @@ return function(p1, p2, p3, p4, p5, p6)
 			end
 		end
 	end
-	local UseGetCampaignStatsModuleResult, UseGetCampaignStatsModuleResult2, UseGetCampaignStatsModuleResult3 = UseGetCampaignStatsModule(if Flag then p1 else nil, p3)
-	local UseGetAdCampaignEligibilityModuleResult, UseGetAdCampaignEligibilityModuleResult2 = UseGetAdCampaignEligibilityModule(p1, p5)
-	local UseCreateAdCampaignModuleResult = UseCreateAdCampaignModule(p1, nil, p6)
+	local UseGetCampaignStatsModuleResult, UseGetCampaignStatsModuleResult2, UseGetCampaignStatsModuleResult3 = UseGetCampaignStatsModule(if Flag then UniverseId else nil, p2)
+	local UseGetAdCampaignEligibilityModuleResult, UseGetAdCampaignEligibilityModuleResult2 = UseGetAdCampaignEligibilityModule(UniverseId, p4)
+	local UseCreateAdCampaignModuleResult = UseCreateAdCampaignModule(UniverseId, nil, p5)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
 	local AdCampaignOffers = nil
@@ -114,11 +116,15 @@ return function(p1, p2, p3, p4, p5, p6)
 		UseStateResult2_3(false)
 	end, {})
 	local UseRefResult1 = ReactModule.useRef(false)
+	local UseRefResult2 = if FFlagBuildExperienceAdsAndRobuxTelemetryModule then ReactModule.useRef(false) else nil
 	ReactModule.useEffect(function()
-		-- upvalues: UseRefResult1 (copy), UseCreateAdCampaignModuleResult (copy), UseStateResult2 (copy), UseStateResult2_3 (copy), UseStateResult2_2 (copy), UseRefResult (copy)
+		-- upvalues: UseRefResult1 (copy), UseCreateAdCampaignModuleResult (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (upval), UseRefResult2 (copy), UseStateResult2 (copy), UseStateResult2_3 (copy), UseStateResult2_2 (copy), UseRefResult (copy)
 		local Current = UseRefResult1.current
 		UseRefResult1.current = UseCreateAdCampaignModuleResult.isCreatePending
 		
+		if FFlagBuildExperienceAdsAndRobuxTelemetryModule and UseRefResult2 ~= nil and Current and not UseCreateAdCampaignModuleResult.isCreatePending then
+			UseRefResult2.current = UseCreateAdCampaignModuleResult.hasCreateError
+		end
 		if Current and not UseCreateAdCampaignModuleResult.isCreatePending and not UseCreateAdCampaignModuleResult.hasCreateError then
 			UseStateResult2(false)
 			UseStateResult2_3(true)
@@ -142,18 +148,21 @@ return function(p1, p2, p3, p4, p5, p6)
 		UseGetAdCampaignEligibilityModuleResult
 	})
 	ReactModule.useEffect(function()
-		-- upvalues: UseRefResult (copy), UseStateResult2_2 (copy), FFlagEnablePaidAdsModule (upval), Callback (ref)
+		-- upvalues: UseRefResult (copy), UseStateResult2_2 (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (upval), UseRefResult2 (copy), FFlagEnablePaidAdsModule (upval), Callback (ref)
 		UseRefResult.current = nil
 		UseStateResult2_2(false)
 		
+		if FFlagBuildExperienceAdsAndRobuxTelemetryModule and UseRefResult2 ~= nil then
+			UseRefResult2.current = false
+		end
 		if FFlagEnablePaidAdsModule then
 			Callback(nil)
 		end
-	end, { p1 })
+	end, { UniverseId })
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: p4 (copy)
-		return if p4 == nil then DateTime.now().UnixTimestampMillis else p4
-	end, { p4 })
+		-- upvalues: p3 (copy)
+		return if p3 == nil then DateTime.now().UnixTimestampMillis else p3
+	end, { p3 })
 	local UseLocalizationResult = UseLocalizationFunction({
 		gamePlays = LocalizationStringsModule.ADS_STATS_GAME_PLAYS,
 		adClicks = LocalizationStringsModule.ADS_STATS_AD_CLICKS,
@@ -176,10 +185,10 @@ return function(p1, p2, p3, p4, p5, p6)
 	local PlayTime = UseLocalizationResult.playTime
 	local DateRange = UseLocalizationResult.dateRange
 	local UseMemoResult1 = ReactModule.useMemo(function()
-		-- upvalues: UseGetAdCampaignsModuleResult (copy), UseGetCampaignStatsModuleResult (copy), UseMemoResult (copy), WINDOWDAYS (upval), MSPERDAY (upval), p1 (copy), config (upval), ToStartMsFunction (upval), CampaignEndMsFunction (upval), CampaignEndExclusiveMsFunction (upval), GamePlays (copy), IconName (upval), UseGetCampaignStatsModuleResult3 (copy), AnalyticsUnitModule (upval), StatsCardValueFormatModule (upval), IconPosition (upval), AdClicks (copy), AdViews (copy), PlayTime (copy), formatDateRange (upval), DateRange (copy)
+		-- upvalues: UseGetAdCampaignsModuleResult (copy), UseGetCampaignStatsModuleResult (copy), UseMemoResult (copy), WINDOWDAYS (upval), MSPERDAY (upval), UniverseId (copy), config (upval), ToStartMsFunction (upval), CampaignEndMsFunction (upval), CampaignEndExclusiveMsFunction (upval), GamePlays (copy), IconName (upval), UseGetCampaignStatsModuleResult3 (copy), AnalyticsUnitModule (upval), StatsCardValueFormatModule (upval), IconPosition (upval), AdClicks (copy), AdViews (copy), PlayTime (copy), formatDateRange (upval), DateRange (copy)
 		local UseGetCampaignStatsModuleResult1 = UseGetCampaignStatsModuleResult or {}
 		local UseMemoResultDelta = UseMemoResult - WINDOWDAYS * MSPERDAY
-		local Text = if p1 == nil then nil else tostring(p1)
+		local Text = if UniverseId == nil then nil else tostring(UniverseId)
 		local List = {}
 		local List1 = {}
 		
@@ -292,14 +301,14 @@ return function(p1, p2, p3, p4, p5, p6)
 			pastCampaigns = PastCampaigns
 		}
 	end, {
-		p1, UseGetAdCampaignsModuleResult, UseGetCampaignStatsModuleResult,
+		UniverseId, UseGetAdCampaignsModuleResult, UseGetCampaignStatsModuleResult,
 		UseGetCampaignStatsModuleResult3, UseMemoResult, GamePlays, AdClicks, AdViews,
 		PlayTime, DateRange,
 		UseLocalizationResult[LocalizationModule.RobloxLocaleIdKey]
 	})
 	local HasCampaigns: boolean = #UseMemoResult1.activeCampaigns > 0 or #UseMemoResult1.pastCampaigns > 0
 	local IsFailed: boolean = UseGetAdCampaignsModuleResult2 == "Failed" or Flag and UseGetCampaignStatsModuleResult2 == "Failed"
-	local IsNotReady: boolean = not IsFailed and (UseGetAdCampaignsModuleResult2 == "NotReady" or (Flag and UseGetCampaignStatsModuleResult2 == "NotReady" or not HasCampaigns and (p1 ~= nil and UseGetAdCampaignEligibilityModuleResult2 == "NotReady")))
+	local IsNotReady: boolean = not IsFailed and (UseGetAdCampaignsModuleResult2 == "NotReady" or (Flag and UseGetCampaignStatsModuleResult2 == "NotReady" or not HasCampaigns and (UniverseId ~= nil and UseGetAdCampaignEligibilityModuleResult2 == "NotReady")))
 	local NoIsFailed: boolean = UseStateResult4 and (not IsNotReady and not IsFailed)
 	local Offer = if UseGetAdCampaignEligibilityModuleResult == nil then nil else UseGetAdCampaignEligibilityModuleResult.offer
 	local SelectableOffers = if FFlagEnablePaidAdsModule then AdCampaignEligibilityUtilsModule.getSelectableOffers(UseGetAdCampaignEligibilityModuleResult) else nil
@@ -311,11 +320,11 @@ return function(p1, p2, p3, p4, p5, p6)
 	local EmptySubtitleFree = if HasFreeCredit1 then UseLocalizationResult.emptySubtitleFree else UseLocalizationResult.emptySubtitle
 	local AdsManager = UseLocalizationResult.adsManager
 	local UseOpenWebViewWithResumeRefreshModuleResult = nil
-	UseOpenWebViewWithResumeRefreshModuleResult = if FFlagBuildAdsManagerUniverseUrlModule then UseOpenWebViewWithResumeRefreshModule(GetAdsManagerUrlModule.getAdsManagerUrl(p1), AdsManager, UseCreateAdCampaignModuleResult.refresh) else UseOpenWebViewWithResumeRefreshModule(GetAdsManagerUrlModule.getDefaultAdsManagerUrl(), AdsManager, UseCreateAdCampaignModuleResult.refresh)
+	UseOpenWebViewWithResumeRefreshModuleResult = if FFlagBuildAdsManagerUniverseUrlModule then UseOpenWebViewWithResumeRefreshModule(GetAdsManagerUrlModule.getAdsManagerUrl(UniverseId), AdsManager, UseCreateAdCampaignModuleResult.refresh) else UseOpenWebViewWithResumeRefreshModule(GetAdsManagerUrlModule.getDefaultAdsManagerUrl(), AdsManager, UseCreateAdCampaignModuleResult.refresh)
 	
 	return {
 		activeCampaigns = UseMemoResult1.activeCampaigns,
-		universeId = if FFlagBuildAdsManagerUniverseUrlModule then p1 else nil,
+		universeId = if FFlagBuildAdsManagerUniverseUrlModule then UniverseId else nil,
 		pastCampaignsTitle = UseLocalizationResult.pastCampaigns,
 		pastCampaigns = UseMemoResult1.pastCampaigns,
 		errorText = UseLocalizationResult.error,
@@ -339,8 +348,14 @@ return function(p1, p2, p3, p4, p5, p6)
 		adCampaignRunStartTimeMs = UseStateResult1,
 		adCampaignRunEndTimeMs = if UseStateResult1 == nil or DurationDays == nil then nil else UseStateResult1 + math.max(0, DurationDays - 1) * MSPERDAY,
 		onCreatePrimary = ReactModule.useCallback(function()
-			-- upvalues: UseStateResult3 (copy), CanCreateCampaign (copy), UseStateResult2_3 (copy), FFlagEnablePaidAdsModule (upval), UseCreateAdCampaignModuleResult (copy), UseStateResult2_1 (copy), Callback (ref), SelectableOffers (copy), UseStateResult2 (copy), UseOpenWebViewWithResumeRefreshModuleResult (ref)
+			-- upvalues: UseStateResult3 (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (upval), SendBuildExperienceEventModule (upval), UniverseId (copy), CanCreateCampaign (copy), UseStateResult2_3 (copy), FFlagEnablePaidAdsModule (upval), UseCreateAdCampaignModuleResult (copy), UseStateResult2_1 (copy), Callback (ref), SelectableOffers (copy), UseStateResult2 (copy), UseOpenWebViewWithResumeRefreshModuleResult (ref)
 			if UseStateResult3 then return end
+			if FFlagBuildExperienceAdsAndRobuxTelemetryModule then
+				SendBuildExperienceEventModule("AD_CAMPAIGN_CREATE_ENTRY_CLICK", { universeId = UniverseId }, {
+					context = "get_users",
+					destination = if CanCreateCampaign then "sheet" else "ads_manager"
+				})
+			end
 			if not CanCreateCampaign then
 				UseOpenWebViewWithResumeRefreshModuleResult()
 				
@@ -354,9 +369,9 @@ return function(p1, p2, p3, p4, p5, p6)
 			UseStateResult2_1(DateTime.now().UnixTimestampMillis)
 			
 			if FFlagEnablePaidAdsModule then
-				Callback(function(p7)
+				Callback(function(p6)
 					-- upvalues: UseCreateAdCampaignModuleResult (upval), SelectableOffers (upval)
-					return if UseCreateAdCampaignModuleResult.hasCreateError and p7 ~= nil then p7 else SelectableOffers
+					return if UseCreateAdCampaignModuleResult.hasCreateError and p6 ~= nil then p6 else SelectableOffers
 				end)
 			end
 			UseStateResult2(true)
@@ -364,16 +379,30 @@ return function(p1, p2, p3, p4, p5, p6)
 			UseStateResult3, CanCreateCampaign,
 			UseOpenWebViewWithResumeRefreshModuleResult,
 			UseCreateAdCampaignModuleResult.clearCreateError,
-			UseCreateAdCampaignModuleResult.hasCreateError, SelectableOffers
+			UseCreateAdCampaignModuleResult.hasCreateError, SelectableOffers,
+			if FFlagBuildExperienceAdsAndRobuxTelemetryModule then UniverseId else nil
 		}),
 		onClosePromotionSheet = UseResult,
-		onCreateCampaign = ReactModule.useCallback(function(p7)
-			-- upvalues: UseRefResult (copy), UseGetAdCampaignEligibilityModuleResult (copy), UseCreateAdCampaignModuleResult (copy), FFlagEnablePaidAdsModule (upval)
+		onCreateCampaign = ReactModule.useCallback(function(p6)
+			-- upvalues: FFlagBuildExperienceAdsAndRobuxTelemetryModule (upval), UseRefResult2 (copy), FFlagEnablePaidAdsModule (upval), SendBuildExperienceEventModule (upval), UniverseId (copy), UseRefResult (copy), UseGetAdCampaignEligibilityModuleResult (copy), UseCreateAdCampaignModuleResult (copy)
+			if FFlagBuildExperienceAdsAndRobuxTelemetryModule then
+				local config = {
+					context = "get_users",
+					isRetry = if UseRefResult2 == nil or not UseRefResult2.current then "false" else "true"
+				}
+				
+				if FFlagEnablePaidAdsModule and p6 ~= nil then
+					config.campaignOption = p6.campaignOption
+					config.fundingType = p6.paymentType
+				end
+				SendBuildExperienceEventModule("AD_CAMPAIGN_CREATE_CLICK", { universeId = UniverseId }, config)
+			end
 			UseRefResult.current = UseGetAdCampaignEligibilityModuleResult
-			UseCreateAdCampaignModuleResult.createCampaign(if FFlagEnablePaidAdsModule then p7 else nil)
+			UseCreateAdCampaignModuleResult.createCampaign(if FFlagEnablePaidAdsModule then p6 else nil)
 		end, {
 			UseGetAdCampaignEligibilityModuleResult,
-			UseCreateAdCampaignModuleResult.createCampaign
+			UseCreateAdCampaignModuleResult.createCampaign,
+			if FFlagBuildExperienceAdsAndRobuxTelemetryModule then UniverseId else nil
 		})
 	}
 end

@@ -12,34 +12,40 @@ local ConstantsModule = require(Groups.Common.constants)
 local UseGroupsWrapperContextModule = require(Groups.Contexts.useGroupsWrapperContext)
 local UseIsCompactTouchModule = require(Groups.Hooks.useIsCompactTouch)
 local GroupSidebarContextModule = require(Groups.Contexts.GroupSidebarContext)
+local GroupSidebarActionsModule = require(Groups.Navigation.groupSidebarActions)
+local GroupDestinationsModule = require(Groups.Navigation.groupDestinations)
+local GetGroupTabUrlModule = require(Groups.Common.getGroupTabUrl)
 local GetGroupSduiPageConfigModule = require(Groups.Common.getGroupSduiPageConfig)
 local GetGroupSduiPageConfigFunction = GetGroupSduiPageConfigModule.getGroupSduiPageConfig
 local FetchGroupSduiPageModule = require(Groups.Common.fetchGroupSduiPage)
 local GetSidebarEntryIdentifierModule = require(Groups.Common.getSidebarEntryIdentifier)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local TextKeysModule = require(Groups.Common.TextKeys)
+local GetGroupPostsUrlModule = require(Groups.Common.getGroupPostsUrl)
+local GroupsRoutesModule = require(Groups.Navigation.GroupsRoutes)
 local GetSidebarWidthModule = require(script.Parent.getSidebarWidth)
 local _ = require(Groups.Stores.createGroupSidebarState)
 
 local function requestFor(Tbl, UseContextResult, UseRefResult, SelectedGroupIdResult)
 	-- upvalues: GetGroupSduiPageConfigModule (copy), SduiSharedUtilitiesModule (copy), GetSidebarEntryIdentifierModule (copy)
 	local SelectedGroupIdResult1 = if GetGroupSduiPageConfigModule.isValidGroupId(SelectedGroupIdResult) then SelectedGroupIdResult else nil
+	local GroupId = if Tbl.groupId and UseContextResult.isVisiting(Tbl.groupId, false) then Tbl.groupId else SelectedGroupIdResult1
 	local InputData = SduiSharedUtilitiesModule.getSduiApiStore().getInputData(Tbl.configKey, GetSidebarEntryIdentifierModule(Tbl.configKey, false), false)
 	
-	if InputData and SelectedGroupIdResult1 then
+	if InputData and GroupId then
 		local InitiallyExpandedGroupId = InputData.initially_expanded_group_id
 		
-		if InitiallyExpandedGroupId and InitiallyExpandedGroupId ~= SelectedGroupIdResult1 and not UseContextResult.hasEntryExpansion and UseContextResult.expanded(false)[`group:{InitiallyExpandedGroupId}`] == nil then
+		if InitiallyExpandedGroupId and InitiallyExpandedGroupId ~= GroupId and not UseContextResult.hasEntryExpansion and UseContextResult.expanded(false)[`group:{InitiallyExpandedGroupId}`] == nil then
 			UseContextResult.setExpanded(`group:{InitiallyExpandedGroupId}`, true)
 		end
 	end
 	UseRefResult.current = if InputData and SelectedGroupIdResult1 and (InputData.selected_group_id ~= SelectedGroupIdResult1 or UseRefResult.current == SelectedGroupIdResult1) then SelectedGroupIdResult1 else nil
 	
-	if SelectedGroupIdResult1 == nil or SelectedGroupIdResult1 == Tbl.groupId then
+	if GroupId == nil or GroupId == Tbl.groupId then
 		return Tbl
 	else
 		local Copy = table.clone(Tbl)
-		Copy.groupId = SelectedGroupIdResult1
+		Copy.groupId = GroupId
 		
 		return Copy
 	end
@@ -60,8 +66,9 @@ local function _(p1)
 end
 
 return function()
-	-- upvalues: UseGroupsWrapperContextModule (copy), NavigationModule (copy), ReactModule (copy), GroupSidebarContextModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UseIsCompactTouchModule (copy), SignalsReactModule (copy), Computed (copy), FFlagEnableGroupOverviewPane (copy), GetGroupSduiPageConfigFunction (copy), SduiSharedUtilitiesModule (copy), SignalsModule (copy), GetSidebarEntryIdentifierModule (copy), requestFor (copy), FetchGroupSduiPageModule (copy), FFlagDataHydrationStaleTime (copy), ConstantsModule (copy)
+	-- upvalues: UseGroupsWrapperContextModule (copy), NavigationModule (copy), ReactModule (copy), GroupSidebarContextModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UseIsCompactTouchModule (copy), SignalsReactModule (copy), Computed (copy), FFlagEnableGroupOverviewPane (copy), GetGroupSduiPageConfigFunction (copy), SduiSharedUtilitiesModule (copy), SignalsModule (copy), GetSidebarEntryIdentifierModule (copy), requestFor (copy), FetchGroupSduiPageModule (copy), FFlagDataHydrationStaleTime (copy), ConstantsModule (copy), GetGroupPostsUrlModule (copy), GroupDestinationsModule (copy), GetGroupTabUrlModule (copy), GroupsRoutesModule (copy), GroupSidebarActionsModule (copy)
 	local UseGroupsWrapperContextModuleResult = UseGroupsWrapperContextModule()
+	local UseNavigationResult = NavigationModule.useNavigation()
 	local UseRouteNameResult = NavigationModule.useRouteName()
 	local UseContextResult = ReactModule.useContext(GroupSidebarContextModule)
 	assert(UseContextResult, "Community sidebar requires its page provider")
@@ -164,6 +171,66 @@ return function()
 		NoUseIsCompactTouchModuleResult,
 		UseContextResult
 	})
+	local UseResult = ReactModule.useCallback(function()
+		-- upvalues: UseGroupsWrapperContextModuleResult (copy), UseNavigationResult (copy)
+		if UseGroupsWrapperContextModuleResult.navigateTo.previousView then
+			UseGroupsWrapperContextModuleResult.navigateTo.previousView()
+			
+			return
+		else
+			UseNavigationResult.goBack()
+		end
+	end, {
+		UseGroupsWrapperContextModuleResult.navigateTo.previousView,
+		UseNavigationResult
+	})
+	local UseResult1 = ReactModule.useCallback(function(GroupId, Source, p1, p2)
+		-- upvalues: isListed (copy), UseGroupsWrapperContextModuleResult (copy), GetGroupPostsUrlModule (upval), UseContextResult (copy), GroupDestinationsModule (upval), GetGroupTabUrlModule (upval), UseIsCompactTouchModuleResult (copy), FFlagEnableGroupOverviewPane (upval), UseNavigationResult (copy), GroupsRoutesModule (upval)
+		if not GroupId or not isListed(GroupId) then return end
+		if p2 then
+			UseGroupsWrapperContextModuleResult.navigateTo.webView(GetGroupPostsUrlModule(GroupId, p2))
+			
+			return
+		end
+		local GroupName: string = `group:{GroupId}`
+		
+		if not p1 and UseContextResult.expanded(false)[GroupName] ~= true then
+			UseContextResult.setExpanded(GroupName, true)
+		end
+		local GroupDestinationsModuleEntry = if p1 then GroupDestinationsModule[p1] else nil
+		
+		if GroupDestinationsModuleEntry then
+			UseGroupsWrapperContextModuleResult.navigateTo.webView(GetGroupTabUrlModule(GroupId, GroupDestinationsModuleEntry.webTab))
+			
+			return
+		end
+		UseContextResult.selectGroup(GroupId)
+		
+		if UseIsCompactTouchModuleResult and FFlagEnableGroupOverviewPane then
+			UseNavigationResult.navigate(GroupsRoutesModule.GroupOverviewPane, { groupId = GroupId, source = Source })
+			
+			return
+		end
+		if not FFlagEnableGroupOverviewPane then
+			UseGroupsWrapperContextModuleResult.navigateTo.groupDetails(GroupId)
+		end
+	end, {
+		UseContextResult, UseIsCompactTouchModuleResult, UseNavigationResult,
+		UseGroupsWrapperContextModuleResult.navigateTo.groupDetails,
+		UseGroupsWrapperContextModuleResult.navigateTo.webView, UseSignalStateResult2
+	})
+	local UseRefResult2 = ReactModule.useRef(UseResult1)
+	ReactModule.useEffect(function()
+		-- upvalues: UseRefResult2 (copy), UseResult1 (copy)
+		UseRefResult2.current = UseResult1
+	end, { UseResult1 })
+	ReactModule.useEffect(function()
+		-- upvalues: GroupSidebarActionsModule (upval), UseMemoResult (copy), UseRefResult2 (copy)
+		return GroupSidebarActionsModule.register(UseMemoResult.configKey, function(p1, p2, p3, p4)
+			-- upvalues: UseRefResult2 (upval)
+			UseRefResult2.current(p1, p2, p3, p4)
+		end)
+	end, { UseMemoResult.configKey })
 	local SelectedGroupId1 = if UseRefResult.current == nil or UseRefResult.current ~= UseSignalStateResult1 then SelectedGroupId else nil
 	local UseSignalStateResult3 = if isListed(UseSignalStateResult1) then UseSignalStateResult1 else SelectedGroupId
 	
@@ -182,14 +249,7 @@ return function()
 			LoadTimer.start("refresh")
 			FetchGroupSduiPageModule(RequestForResult, LoadTimer, true):finally(LoadTimer.logRefreshComplete):finally(UseContextResult.refreshSections)
 		end, { UseMemoResult, UseContextResult }),
-		onClose = ReactModule.useCallback(function()
-			-- upvalues: UseGroupsWrapperContextModuleResult (copy)
-			if UseGroupsWrapperContextModuleResult.navigateTo.previousView then
-				UseGroupsWrapperContextModuleResult.navigateTo.previousView()
-			end
-		end, {
-			UseGroupsWrapperContextModuleResult.navigateTo.previousView
-		}),
+		onClose = UseResult,
 		title = UseLocalizationResult.title,
 		createLabel = UseLocalizationResult.create,
 		canCreate = not UseSignalStateResult2 or UseSignalStateResult2.can_create_group == nil or UseSignalStateResult2.can_create_group,

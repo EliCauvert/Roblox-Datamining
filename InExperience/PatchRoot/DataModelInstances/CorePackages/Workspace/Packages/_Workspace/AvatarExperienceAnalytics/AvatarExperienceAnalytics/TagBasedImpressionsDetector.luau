@@ -12,6 +12,7 @@ local SendUnifiedEventLogForInstanceModule = require(script.Parent.sendUnifiedEv
 local SeenImpressionsStoreModule = require(script.Parent.Store.SeenImpressionsStore)
 local UnifiedImpressions = SeenImpressionsStoreModule.Category.UnifiedImpressions
 local AvatarExperienceCommonModule = require(Parent.AvatarExperienceCommon)
+local _ = require(Parent.AvatarExperienceModel)
 local UseSelectorSignalFunction = AvatarExperienceCommonModule.Hooks.useSelectorSignal
 local SelectSearchKeyword = AvatarExperienceCommonModule.State.Selectors.selectSearchKeyword
 local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
@@ -34,13 +35,13 @@ end
 return function(p1)
 	-- upvalues: FFlagAXItemDetailsIxpExposure (copy), UseAvatarRouteFunction (copy), UseSelectorSignalFunction (copy), SelectSearchKeyword (copy), AnalyticsMetadataSelector (copy), ReactModule (copy), FFlagAXUnifiedImpressionsOnThumbnail (copy), UnifiedEventLogConstantsModule (copy), SeenImpressionsStoreModule (copy), UnifiedImpressions (copy), getImpressionDedupKey (copy), AvatarScreenProperties (copy), SendUnifiedEventLogForInstanceModule (copy), CryoModule (copy), UnifiedEventLogEnumsModule (copy), CollectionService (copy), AvatarExperienceScreenSizeImpressionsDetectorModule (copy)
 	local v1 = nil
-	local Callback1 = nil
 	local Callback = nil
+	local Callback1 = nil
 	
 	if not FFlagAXItemDetailsIxpExposure then
 		v1 = UseAvatarRouteFunction()
-		Callback1 = UseSelectorSignalFunction(SelectSearchKeyword)
-		Callback = UseSelectorSignalFunction(AnalyticsMetadataSelector)
+		Callback = UseSelectorSignalFunction(SelectSearchKeyword)
+		Callback1 = UseSelectorSignalFunction(AnalyticsMetadataSelector)
 	end
 	local UseRefResult = ReactModule.useRef({})
 	local UseRefResult1 = if FFlagAXItemDetailsIxpExposure then ReactModule.useRef({}) else nil
@@ -49,7 +50,7 @@ return function(p1)
 		return if FFlagAXUnifiedImpressionsOnThumbnail then not Object:GetAttribute(UnifiedEventLogConstantsModule.SKIP_IMPRESSION_DETECTION) and not SeenImpressionsStoreModule.hasSeen(UnifiedImpressions, getImpressionDedupKey(Object)) else not UseRefResult.current[Object:GetFullName()]
 	end, {})
 	local UseResult1 = ReactModule.useCallback(function(List)
-		-- upvalues: FFlagAXUnifiedImpressionsOnThumbnail (upval), SeenImpressionsStoreModule (upval), UnifiedImpressions (upval), getImpressionDedupKey (upval), UseRefResult (copy), FFlagAXItemDetailsIxpExposure (upval), UseRefResult1 (ref), AvatarScreenProperties (upval), v1 (ref), SendUnifiedEventLogForInstanceModule (upval), CryoModule (upval), Callback (ref), UnifiedEventLogEnumsModule (upval), Callback1 (ref), p1 (copy)
+		-- upvalues: FFlagAXUnifiedImpressionsOnThumbnail (upval), SeenImpressionsStoreModule (upval), UnifiedImpressions (upval), getImpressionDedupKey (upval), UseRefResult (copy), FFlagAXItemDetailsIxpExposure (upval), UseRefResult1 (ref), AvatarScreenProperties (upval), v1 (ref), SendUnifiedEventLogForInstanceModule (upval), CryoModule (upval), Callback1 (ref), UnifiedEventLogEnumsModule (upval), Callback (ref), p1 (copy)
 		local VisibleInstances = {}
 		
 		for _, value in List do
@@ -74,10 +75,10 @@ return function(p1)
 					end
 				else
 					local AvatarScreenProperty = AvatarScreenProperties[v1.current.name]
-					SendUnifiedEventLogForInstanceModule(value, CryoModule.Dictionary.join(Callback(false), {
+					SendUnifiedEventLogForInstanceModule(value, CryoModule.Dictionary.join(Callback1(false), {
 						action = UnifiedEventLogEnumsModule.MarketplaceUnifiedAction.ITEM_IMPRESSION,
 						surface = if AvatarScreenProperty and AvatarScreenProperty.analyticsData then AvatarScreenProperty.analyticsData.unifiedLoggingSurface else nil,
-						keyword = Callback1(false)
+						keyword = Callback(false)
 					}), {
 						includeScreenSize = true,
 						includeElementSizeAndPosition = true
@@ -97,7 +98,7 @@ return function(p1)
 				end
 			end
 		end
-	end, if FFlagAXItemDetailsIxpExposure then { p1.extensions } else { v1, Callback1, Callback })
+	end, if FFlagAXItemDetailsIxpExposure then { p1.extensions } else { v1, Callback, Callback1 })
 	
 	if FFlagAXItemDetailsIxpExposure then
 		ReactModule.useEffect(function()

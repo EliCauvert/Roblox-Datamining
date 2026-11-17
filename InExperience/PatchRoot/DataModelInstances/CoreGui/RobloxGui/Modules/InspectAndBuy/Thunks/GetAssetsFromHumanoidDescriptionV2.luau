@@ -11,10 +11,11 @@ local AvatarExperienceFlagsModule = require(CorePackages.Workspace.Packages.Avat
 local AvatarBackgroundModule = require(CorePackages.Workspace.Packages.DataHydration.AvatarBackground)
 local FFlagAXInspectAndBuyMakeupSupport = AvatarExperienceFlagsModule.FFlagAXInspectAndBuyMakeupSupport
 local FFlagAXInspectAndBuyAvatarBackground = AvatarExperienceFlagsModule.FFlagAXInspectAndBuyAvatarBackground
+local FFlagAXInspectAndBuySpawnEffects = AvatarExperienceFlagsModule.FFlagAXInspectAndBuySpawnEffects
 local t = {}
 
 local function getAssetIds(Humanoid: Humanoid)
-	-- upvalues: ConstantsModule (copy), AssetInfoModule (copy), FFlagAXInspectAndBuyMakeupSupport (copy)
+	-- upvalues: ConstantsModule (copy), AssetInfoModule (copy), FFlagAXInspectAndBuyMakeupSupport (copy), FFlagAXInspectAndBuySpawnEffects (copy)
 	local FromHumanoidDescriptionResults = {}
 	local Flag = false
 	
@@ -47,6 +48,13 @@ local function getAssetIds(Humanoid: Humanoid)
 		for _, MakeupDescription in Humanoid:GetChildren() do
 			if MakeupDescription:IsA("MakeupDescription") and MakeupDescription.AssetId > 0 then
 				FromHumanoidDescriptionResults[#FromHumanoidDescriptionResults + 1] = AssetInfoModule.fromHumanoidDescription(MakeupDescription.AssetId)
+			end
+		end
+	end
+	if FFlagAXInspectAndBuySpawnEffects then
+		for _, AvatarEffectDescription in Humanoid:GetChildren() do
+			if AvatarEffectDescription:IsA("AvatarEffectDescription") and AvatarEffectDescription.AssetId > 0 then
+				FromHumanoidDescriptionResults[#FromHumanoidDescriptionResults + 1] = AssetInfoModule.fromHumanoidDescription(AvatarEffectDescription.AssetId)
 			end
 		end
 	end

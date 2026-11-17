@@ -6,6 +6,7 @@ local ReactModule = require(CorePackages.Packages.React)
 local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
 local FFlagEnableConsoleExpControls = SharedFlagsModule.FFlagEnableConsoleExpControls
 local FFlagEnableWhatsNew = SharedFlagsModule.FFlagEnableWhatsNew
+local FFlagAllowGrayUnsupportedFeatures = SharedFlagsModule.FFlagAllowGrayUnsupportedFeatures
 local WhatsNewAnchor = if FFlagEnableWhatsNew then require(CorePackages.Workspace.Packages.WhatsNew).WhatsNewAnchor else nil
 local FlagsModule = require(script.Parent.Parent.Parent.Parent.Flags)
 local FFlagUnibarMenuOpenHamburger = FlagsModule.FFlagUnibarMenuOpenHamburger
@@ -356,7 +357,7 @@ function TooltipButton(p1)
 		local MouseLeaveConnection = nil
 		local DestroyingConnection = nil
 		
-		local function v100()
+		local function v101()
 			-- upvalues: MouseEnterConnection (ref), MouseLeaveConnection (ref), DestroyingConnection (ref)
 			if MouseEnterConnection then
 				MouseEnterConnection:disconnect()
@@ -373,7 +374,7 @@ function TooltipButton(p1)
 		end
 		
 		if Frame ~= UseRefResult2.current then
-			pcall(v100)
+			pcall(v101)
 			
 			if Frame then
 				MouseEnterConnection = Frame.MouseEnter:Connect(function()
@@ -458,7 +459,7 @@ function TooltipButton(p1)
 end
 
 function IconHost(IconHostProps)
-	-- upvalues: ReactModule (copy), UseStyleFunction (copy), FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule (copy), UseMappedObservableValueBindingModule (copy), ServiceModule (copy), ChatNotificationBadgeModule (copy), FFlagChromeNineDotActivityIndicator (copy), NineDotNotificationBadgeModule (copy), FFlagEnableConsoleExpControls (copy), FFlagEnableWhatsNew (copy), WhatsNewAnchor (copy)
+	-- upvalues: ReactModule (copy), UseStyleFunction (copy), FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule (copy), UseMappedObservableValueBindingModule (copy), ServiceModule (copy), FFlagAllowGrayUnsupportedFeatures (copy), ChatNotificationBadgeModule (copy), FFlagChromeNineDotActivityIndicator (copy), NineDotNotificationBadgeModule (copy), FFlagEnableConsoleExpControls (copy), FFlagEnableWhatsNew (copy), WhatsNewAnchor (copy)
 	if not IconHostProps.integration or not IconHostProps.integration.component then
 		warn("IconHost has no component to render")
 	end
@@ -470,13 +471,15 @@ function IconHost(IconHostProps)
 		-- upvalues: IconHostProps (copy)
 		return Id == IconHostProps.integration.id
 	end)
+	local IsIsDisabled: boolean = FFlagAllowGrayUnsupportedFeatures and IconHostProps.integration.integration.isDisabled == true
 	local list = {
-		ReactModule.createElement("Frame", {
+		ReactModule.createElement(if FFlagAllowGrayUnsupportedFeatures and IsIsDisabled then "CanvasGroup" else "Frame", {
 			Name = "IntegrationIconFrame",
 			BorderSizePixel = 0,
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 1, 0),
-			Visible = UseBindingResult1
+			Visible = UseBindingResult1,
+			GroupTransparency = if FFlagAllowGrayUnsupportedFeatures and IsIsDisabled then 0.5 else nil
 		}, {
 			IntegrationIcon = IconHostProps.integration and IconHostProps.integration.component and IconHostProps.integration.component(IconHostProps) or nil,
 			UIListLayout = ReactModule.createElement("UIListLayout", {

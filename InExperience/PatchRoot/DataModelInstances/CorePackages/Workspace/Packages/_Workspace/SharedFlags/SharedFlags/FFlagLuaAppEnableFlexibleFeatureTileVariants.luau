@@ -1,0 +1,4 @@
+﻿local FFlagLuaAppEnableNxMRoduxApportioningModule = require(script.Parent.FFlagLuaAppEnableNxMRoduxApportioning)
+local FFlagLuaAppDropUnsupportedTwoByOneAdLinksModule = require(script.Parent.FFlagLuaAppDropUnsupportedTwoByOneAdLinks)
+
+return game:DefineFastFlag("LuaAppEnableFlexibleFeatureTileVariantsDev", false) and (FFlagLuaAppEnableNxMRoduxApportioningModule and FFlagLuaAppDropUnsupportedTwoByOneAdLinksModule)

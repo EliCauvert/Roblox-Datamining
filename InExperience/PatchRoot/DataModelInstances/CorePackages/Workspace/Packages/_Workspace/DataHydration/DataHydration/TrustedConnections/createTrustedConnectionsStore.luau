@@ -287,23 +287,23 @@ return function()
 		end
 	}) else nil
 	
-	local function fetchTrustedFriendCandidatesPage(NextPageCursor, p1)
+	local function fetchTrustedFriendCandidatesPage(NextCursor, p1)
 		-- upvalues: RequestsModule (upval), TrustedFriendCandidatesPageSize (upval), config (upval), fetchTrustedFriendCandidatesPage (copy)
-		return RequestsModule.GetTrustedFriendCandidates(NextPageCursor, TrustedFriendCandidatesPageSize):andThen(function(Result)
+		return RequestsModule.GetTrustedFriendCandidates(NextCursor, TrustedFriendCandidatesPageSize):andThen(function(Result)
 			-- upvalues: config (upval), p1 (copy), fetchTrustedFriendCandidatesPage (upval)
-			local NextPageCursor = if Result then Result.nextPageCursor else nil
+			local NextCursor = if Result then Result.NextCursor else nil
 			local Candidates = {}
 			local Statuses = {}
 			
-			for _, value in if Result and Result.data then Result.data else {} do
+			for _, value in if Result and Result.PageItems then Result.PageItems else {} do
 				local Text = tostring(value.userId)
 				table.insert(Candidates, { id = Text })
 				Statuses[Text] = config[value.state]
 			end
-			return if #Candidates == 0 and NextPageCursor ~= nil and p1 > 1 then fetchTrustedFriendCandidatesPage(NextPageCursor, p1 - 1) else {
+			return if #Candidates == 0 and NextCursor ~= nil and p1 > 1 then fetchTrustedFriendCandidatesPage(NextCursor, p1 - 1) else {
 				candidates = Candidates,
 				statuses = Statuses,
-				nextPageCursor = NextPageCursor
+				nextPageCursor = NextCursor
 			}
 		end)
 	end
@@ -331,19 +331,19 @@ return function()
 			
 			return RequestsModule.GetTrustedFriendCandidates(if DataResult then DataResult.nextPageCursor else nil, TrustedFriendCandidatesPageSize):andThen(function(Result)
 				-- upvalues: config (upval), TrustedFriendCandidatesMaxReadsPerFetch (copy), fetchTrustedFriendCandidatesPage (upval)
-				local NextPageCursor = if Result then Result.nextPageCursor else nil
+				local NextCursor = if Result then Result.NextCursor else nil
 				local Candidates = {}
 				local Statuses = {}
 				
-				for _, value in if Result and Result.data then Result.data else {} do
+				for _, value in if Result and Result.PageItems then Result.PageItems else {} do
 					local Text = tostring(value.userId)
 					table.insert(Candidates, { id = Text })
 					Statuses[Text] = config[value.state]
 				end
-				return if #Candidates == 0 and NextPageCursor ~= nil and TrustedFriendCandidatesMaxReadsPerFetch > 1 then fetchTrustedFriendCandidatesPage(NextPageCursor, TrustedFriendCandidatesMaxReadsPerFetch - 1) else {
+				return if #Candidates == 0 and NextCursor ~= nil and TrustedFriendCandidatesMaxReadsPerFetch > 1 then fetchTrustedFriendCandidatesPage(NextCursor, TrustedFriendCandidatesMaxReadsPerFetch - 1) else {
 					candidates = Candidates,
 					statuses = Statuses,
-					nextPageCursor = NextPageCursor
+					nextPageCursor = NextCursor
 				}
 			end):andThen(function(Result)
 				-- upvalues: Flag (copy), p2 (copy), applyTrustedFriendCandidatesPage (upval)

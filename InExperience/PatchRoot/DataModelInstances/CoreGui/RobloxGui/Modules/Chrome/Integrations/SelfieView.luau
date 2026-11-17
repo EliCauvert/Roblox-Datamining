@@ -7,14 +7,22 @@ local FaceAnimatorService = game:GetService("FaceAnimatorService")
 local SocialService = game:GetService("SocialService")
 local StarterGui = game:GetService("StarterGui")
 local CommonIconModule = require(Chrome.Integrations.CommonIcon)
+local MappedSignal = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal
 local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 local ConstantsModule = require(RobloxGui.Modules.TopBar.Constants)
 local ApplyDisplayScaleResult = ConstantsModule.ApplyDisplayScale(ConstantsModule.TopBarHeight)
 local SelfieView = Chrome.Parent.SelfieView
 local GetFFlagChromeSelfViewIgnoreCoreGuiModule = require(Chrome.Flags.GetFFlagChromeSelfViewIgnoreCoreGui)
-local SideSheetPlacement = require(CorePackages.Workspace.Packages.Chrome).Enums.SideSheetPlacement
+local ChromeModule = require(CorePackages.Workspace.Packages.Chrome)
+local SideSheetOpenBehavior = ChromeModule.Enums.SideSheetOpenBehavior
+local SideSheetPlacement = ChromeModule.Enums.SideSheetPlacement
 local FFlagTokenizeUnibarConstantsWithStyleProvider = require(Chrome.ChromeShared.Flags).FFlagTokenizeUnibarConstantsWithStyleProvider
-local FFlagEnableConsoleExpControls = require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnableConsoleExpControls
+local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
+local FFlagEnableConsoleExpControls = SharedFlagsModule.FFlagEnableConsoleExpControls
+local FFlagUseUIOverlayForCloudPlay = SharedFlagsModule.FFlagUseUIOverlayForCloudPlay
+local FFlagAllowGrayUnsupportedFeatures = SharedFlagsModule.FFlagAllowGrayUnsupportedFeatures
+local InExperienceCloudPlayModule = require(CorePackages.Workspace.Packages.InExperienceCloudPlay)
+local FFlagKeepSideSheetOpenBesideMenu = SharedFlagsModule.FFlagKeepSideSheetOpenBesideMenu
 local Module = require(SelfieView)
 local FaceChatUtilsModule = require(SelfieView.Utils.FaceChatUtils)
 local SizingUtilsModule = require(SelfieView.Utils.SizingUtils)
@@ -27,7 +35,15 @@ local NewResult = require(Chrome.ChromeShared.Service.WindowSizeSignal).new(Size
 local ConstantsModule1 = require(Chrome.ChromeShared.Unibar.Constants)
 local NewResult1 = require(RobloxGui.Modules.SelfView.Analytics).new()
 local SELFIEVIEWID = ConstantsModule1.SELFIE_VIEW_ID
-local NewResult2 = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(ServiceModule:onIntegrationStatusChanged(), function()
+local CloudClientService = if FFlagUseUIOverlayForCloudPlay and FFlagAllowGrayUnsupportedFeatures then InExperienceCloudPlayModule.getCloudClientService() else nil
+local IsCloudClient = CloudClientService ~= nil and CloudClientService.IsCloudClient
+
+local function showUnsupportedSnackbar()
+	-- upvalues: InExperienceCloudPlayModule (copy)
+	InExperienceCloudPlayModule.showUnsupportedFeatureSnackbar("SelfView")
+end
+
+local NewMappedSignal = MappedSignal.new(ServiceModule:onIntegrationStatusChanged(), function()
 	-- upvalues: ServiceModule (copy), SELFIEVIEWID (copy)
 	return ServiceModule:isWindowOpen(SELFIEVIEWID)
 end)
@@ -36,28 +52,31 @@ local Connection1 = nil
 local RegisterResult = ServiceModule:register({
 	label = "CoreScripts.TopBar.SelfViewLabel",
 	windowDefaultOpen = false,
-	persistWindowState = true,
 	draggable = true,
 	cachePosition = true,
 	id = SELFIEVIEWID,
 	sideSheetPlacement = SideSheetPlacement.BelowFold,
+	sideSheetOpenBehavior = if FFlagKeepSideSheetOpenBesideMenu then SideSheetOpenBehavior.CloseSheet else nil,
 	windowSize = NewResult,
 	initialAvailability = AvailabilitySignalState.Unavailable,
+	persistWindowState = not IsCloudClient,
 	activated = function()
 		-- upvalues: ServiceModule (copy), SELFIEVIEWID (copy)
 		ServiceModule:toggleWindow(SELFIEVIEWID)
 	end,
-	isActivated = NewResult2,
+	disabledActivated = if IsCloudClient then showUnsupportedSnackbar else nil,
+	isActivated = NewMappedSignal,
+	isDisabled = if IsCloudClient then true else nil,
 	components = {
 		Icon = function(_)
-			-- upvalues: FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule1 (copy), ReactModule (copy), CommonIconModule (copy), NewResult2 (copy), Module (copy), ServiceModule (copy), SELFIEVIEWID (copy)
+			-- upvalues: FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule1 (copy), ReactModule (copy), CommonIconModule (copy), NewMappedSignal (copy), Module (copy), ServiceModule (copy), SELFIEVIEWID (copy)
 			local ICONSIZE = if FFlagTokenizeUnibarConstantsWithStyleProvider then UnibarStyle.use().ICON_SIZE else ConstantsModule1.ICON_SIZE
 			
 			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(0, ICONSIZE, 0, ICONSIZE)
 			}, {
-				CommonIconModule("icons/controls/selfieOff", "icons/controls/selfie", NewResult2),
+				CommonIconModule("icons/controls/selfieOff", "icons/controls/selfie", NewMappedSignal),
 				CameraStatusDot = if Module.useCameraOn() and not ServiceModule:isWindowOpen(SELFIEVIEWID) then ReactModule.createElement(Module.CameraStatusDot, { ZIndex = 2, Position = UDim2.fromScale(0.8, 0.7) }) else nil
 			}, {})
 		end,
@@ -82,10 +101,21 @@ ViewportUtilModule.screenSize:connect(function(p1)
 end, true)
 
 local function Callback()
-	-- upvalues: StarterGui (copy), GetFFlagChromeSelfViewIgnoreCoreGuiModule (copy), FaceChatUtilsModule (copy), RegisterResult (copy)
+	-- upvalues: StarterGui (copy), GetFFlagChromeSelfViewIgnoreCoreGuiModule (copy), FaceChatUtilsModule (copy), RegisterResult (copy), IsCloudClient (copy)
 	local CoreGuiEnabled = StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.SelfView)
 	
-	if GetFFlagChromeSelfViewIgnoreCoreGuiModule() or CoreGuiEnabled then
+	if not GetFFlagChromeSelfViewIgnoreCoreGuiModule() and not CoreGuiEnabled then
+		if FaceChatUtilsModule.isCameraOn() then
+			FaceChatUtilsModule.toggleVideoAnimation()
+		end
+		RegisterResult.availability:unavailable()
+		
+		return
+	elseif IsCloudClient then
+		RegisterResult.availability:available()
+		
+		return
+	else
 		local Permissions = FaceChatUtilsModule.getPermissions()
 		local UserCamEligible = Permissions.userCamEligible or Permissions.userMicEligible
 		
@@ -95,14 +125,7 @@ local function Callback()
 			return
 		else
 			RegisterResult.availability:unavailable()
-			
-			return
 		end
-	else
-		if FaceChatUtilsModule.isCameraOn() then
-			FaceChatUtilsModule.toggleVideoAnimation()
-		end
-		RegisterResult.availability:unavailable()
 	end
 end
 
@@ -113,7 +136,7 @@ local function _()
 	NewResult1:reportUserAccountSettings(Permissions.userCamEnabled, Permissions.userMicEnabled)
 end
 
-if FFlagEnableConsoleExpControls then
+if FFlagEnableConsoleExpControls and not IsCloudClient then
 	local ReadResult = SelfieViewPolicyModule.PolicyImplementation.read()
 	
 	if not (if ReadResult then SelfieViewPolicyModule.Mapper(ReadResult).eligibleForSelfieViewFeature() else false) then
@@ -141,7 +164,8 @@ if game:GetEngineFeature("EnableSelfViewToggleApi") then
 		Connection1:Disconnect()
 	end
 	local _ = SocialService.SelfViewVisible:Connect(function(SelfViewPosition)
-		-- upvalues: ConstantsModule (copy), ServiceModule (copy), SELFIEVIEWID (copy), NewResult (copy), ViewportUtilModule (copy), ConstantsModule1 (copy), ApplyDisplayScaleResult (copy)
+		-- upvalues: IsCloudClient (copy), ConstantsModule (copy), ServiceModule (copy), SELFIEVIEWID (copy), NewResult (copy), ViewportUtilModule (copy), ConstantsModule1 (copy), ApplyDisplayScaleResult (copy)
+		if IsCloudClient then return end
 		local ApplyDisplayScaleResult1 = ConstantsModule.ApplyDisplayScale(ConstantsModule.ScreenSideOffset)
 		
 		if not ServiceModule:isWindowOpen(SELFIEVIEWID) then

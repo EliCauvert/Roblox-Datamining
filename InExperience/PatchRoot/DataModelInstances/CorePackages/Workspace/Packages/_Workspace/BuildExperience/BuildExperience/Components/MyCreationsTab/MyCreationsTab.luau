@@ -6,6 +6,7 @@ local FFlagBuildExperienceMyCreationsCreateGameButtonModule = require(BuildExper
 local FFlagBuildExperienceMyCreationsLongPressMenuModule = require(BuildExperience.Flags.FFlagBuildExperienceMyCreationsLongPressMenu)
 local FFlagBuildWithGroupsModule = require(BuildExperience.Flags.FFlagBuildWithGroups)
 local FFlagBuildExperienceEventContextTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceEventContextTelemetry)
+local FFlagBuildUpdatedSearchUXForGAModule = require(BuildExperience.Flags.FFlagBuildUpdatedSearchUXForGA)
 local FoundationModule = require(Parent.Foundation)
 local LuaSocialLibrariesDepsModule = require(Parent.LuaSocialLibrariesDeps)
 local ReactModule = require(Parent.React)
@@ -37,7 +38,7 @@ local MyCreationsFilterContainerModule = require(BuildExperience.Components.MyCr
 local UseMyCreationsResultsModule = require(script.Parent.useMyCreationsResults)
 
 return function(Frame: Frame)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildExperienceMyCreationsCreateGameButtonModule (copy), GetSearchQueryStoreModule (copy), ReactModule (copy), UseScrollPerformanceTrackerModule (copy), FFlagBuildWithGroupsModule (copy), GetMyCreationsFilterStoreModule (copy), UseMyCreationsResultsModule (copy), ChatConstantsModule (copy), Players (copy), FFlagBuildExperienceEventContextTelemetryModule (copy), FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), ListItemInputType (copy), ExperienceResultsLoadingSkeletonModule (copy), List (copy), IconName (copy), MyCreationsTabNewGameRow (copy), SearchEmptyStateModule (copy), View (copy), InputSize (copy), BuildEmptyStateModule (copy), ExperienceResultsListModule (copy), RefreshScrollingFrame (copy), MyCreationsFilterContainerModule (copy), Button (copy), ButtonVariant (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildExperienceMyCreationsCreateGameButtonModule (copy), FFlagBuildUpdatedSearchUXForGAModule (copy), GetSearchQueryStoreModule (copy), ReactModule (copy), UseScrollPerformanceTrackerModule (copy), FFlagBuildWithGroupsModule (copy), GetMyCreationsFilterStoreModule (copy), UseMyCreationsResultsModule (copy), ChatConstantsModule (copy), Players (copy), FFlagBuildExperienceEventContextTelemetryModule (copy), FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), ListItemInputType (copy), ExperienceResultsLoadingSkeletonModule (copy), List (copy), IconName (copy), MyCreationsTabNewGameRow (copy), SearchEmptyStateModule (copy), View (copy), InputSize (copy), BuildEmptyStateModule (copy), ExperienceResultsListModule (copy), RefreshScrollingFrame (copy), MyCreationsFilterContainerModule (copy), Button (copy), ButtonVariant (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		building = LocalizationStringsModule.MY_CREATIONS_BUILDING,
 		buildWithAI = LocalizationStringsModule.MY_CREATIONS_BUILD_WITH_AI,
@@ -46,6 +47,7 @@ return function(Frame: Frame)
 		loadError = LocalizationStringsModule.MY_CREATIONS_LOAD_ERROR,
 		newGame = LocalizationStringsModule.MY_CREATIONS_NEW_GAME,
 		noGames = LocalizationStringsModule.MY_CREATIONS_NO_GAMES,
+		noSearchResults = if FFlagBuildUpdatedSearchUXForGAModule then LocalizationStringsModule.LIBRARY_SEARCH_EMPTY else nil,
 		private = LocalizationStringsModule.MY_CREATIONS_PRIVATE,
 		public = LocalizationStringsModule.MY_CREATIONS_PUBLIC,
 		publiclyUnavailable = LocalizationStringsModule.MY_CREATIONS_PUBLICLY_UNAVAILABLE,
@@ -62,8 +64,8 @@ return function(Frame: Frame)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(false)
 	UseScrollPerformanceTrackerModule("LuaApp_Build_Home_Scroll", UseRefResult)
-	local UseShowEmptyStateResult = SearchQueryStore.useShowEmptyState()
-	local UseIsSearchActiveResult = if FFlagBuildWithGroupsModule or FFlagBuildExperienceMyCreationsCreateGameButtonModule then SearchQueryStore.useIsSearchActive() else false
+	local UseShowEmptyStateResult = if FFlagBuildUpdatedSearchUXForGAModule then nil else SearchQueryStore.useShowEmptyState()
+	local UseIsSearchActiveResult = if FFlagBuildUpdatedSearchUXForGAModule or FFlagBuildWithGroupsModule or FFlagBuildExperienceMyCreationsCreateGameButtonModule then SearchQueryStore.useIsSearchActive() else false
 	local UseDraftQueryResult = SearchQueryStore.useDraftQuery()
 	local FilterStore = if FFlagBuildWithGroupsModule then Frame.filterStore or GetMyCreationsFilterStoreModule() else nil
 	local UseFilterResult = if FFlagBuildWithGroupsModule then FilterStore.useFilter() else nil
@@ -74,10 +76,11 @@ return function(Frame: Frame)
 		searchStore = Frame.searchStore,
 		searchQueryStore = SearchQueryStore,
 		appLifecycleObserverService = Frame.appLifecycleObserverService,
+		isActiveTab = if FFlagBuildUpdatedSearchUXForGAModule then Frame.isActiveTab else nil,
 		isFocused = IsIsFocused,
 		pollingIntervalSeconds = Frame.pollingIntervalSeconds,
 		userId = Frame.userId,
-		filter = if UseIsSearchActiveResult then nil else UseFilterResult
+		filter = if FFlagBuildUpdatedSearchUXForGAModule or not UseIsSearchActiveResult then UseFilterResult else nil
 	})
 	local DisplayedItems = UseMyCreationsResultsModuleResult.displayedItems
 	local Items = UseMyCreationsResultsModuleResult.items
@@ -97,6 +100,13 @@ return function(Frame: Frame)
 			creatorName = if Players.LocalPlayer then Players.LocalPlayer.Name else nil
 		}, if FFlagBuildExperienceEventContextTelemetryModule then if p1 == "auto_new_game" then "auto_new_game" else "new_game" else nil)
 	end, { Frame.onOpenChat })
+	local UseResult1 = if FFlagBuildUpdatedSearchUXForGAModule and FFlagBuildExperienceEventContextTelemetryModule then ReactModule.useCallback(function(p1)
+		-- upvalues: Frame (copy), UseMyCreationsResultsModuleResult (copy)
+		Frame.onOpenChat(p1, if UseMyCreationsResultsModuleResult.query == "" then nil else "search_results")
+	end, {
+		Frame.onOpenChat,
+		UseMyCreationsResultsModuleResult.query
+	}) else nil
 	local IsUseDraftQueryResultMatch: boolean = UseMyCreationsResultsModuleResult.hasCompletedFocusedRefresh and (UseMyCreationsResultsModuleResult.sessionListStatus == "Ready" and UseMyCreationsResultsModuleResult.sessionCount == 0 and UseDraftQueryResult == "")
 	ReactModule.useEffect(function()
 		-- upvalues: Frame (copy), IsIsFocused (copy), IsUseDraftQueryResultMatch (copy), UseRefResult1 (copy), UseResult (copy), FFlagBuildExperienceEventContextTelemetryModule (upval)
@@ -160,11 +170,9 @@ return function(Frame: Frame)
 			ContentBody = ReactModule.createElement(View, {
 				tag = "composition-content-body col size-full-0 auto-y",
 				testId = "MyCreationsTab.ContentBody"
-			}, if UseShowEmptyStateResult then {
-				SearchEmptyState = ReactModule.createElement(SearchEmptyStateModule, { testId = "MyCreationsTab.SearchEmptyState" })
-			} elseif HasDisplayedResult and not HasPendingSummary and #DisplayedItems == 0 then {
+			}, if FFlagBuildUpdatedSearchUXForGAModule or not UseShowEmptyStateResult then if HasDisplayedResult and not HasPendingSummary and #DisplayedItems == 0 then {
 				EmptyContent = ReactModule.createElement(View, { tag = "col size-full" }, {
-					CreateList = if FFlagBuildExperienceMyCreationsCreateGameButtonModule then nil else ReactModule.createElement(List.Root, {
+					CreateList = if FFlagBuildExperienceMyCreationsCreateGameButtonModule or FFlagBuildUpdatedSearchUXForGAModule and UseIsSearchActiveResult then nil else ReactModule.createElement(List.Root, {
 						LayoutOrder = 1,
 						hasDivider = false,
 						isContained = { isContained = false, hasMargin = false },
@@ -186,7 +194,7 @@ return function(Frame: Frame)
 						testId = "MyCreationsTab.Empty"
 					}, {
 						Content = ReactModule.createElement(BuildEmptyStateModule, {
-							message = if FFlagBuildWithGroupsModule then NoGames else nil
+							message = if FFlagBuildUpdatedSearchUXForGAModule and UseMyCreationsResultsModuleResult.query ~= "" then UseLocalizationResult.noSearchResults elseif FFlagBuildWithGroupsModule then NoGames else nil
 						})
 					})
 				})
@@ -202,10 +210,12 @@ return function(Frame: Frame)
 					failedLoadMore = FailedLoadMore,
 					retryLoadMore = RetryLoadMore,
 					loadError = LoadError,
-					onOpenChat = Frame.onOpenChat,
+					onOpenChat = if FFlagBuildUpdatedSearchUXForGAModule and FFlagBuildExperienceEventContextTelemetryModule then UseResult1 else Frame.onOpenChat,
 					onOpenConfigurationPage = Frame.onOpenConfigurationPage,
 					leadingItems = UseMemoResult
 				})
+			} else {
+				SearchEmptyState = ReactModule.createElement(SearchEmptyStateModule, { testId = "MyCreationsTab.SearchEmptyState" })
 			})
 		})
 	})
@@ -233,7 +243,7 @@ return function(Frame: Frame)
 			tag = "col fill size-full",
 			LayoutOrder = Frame.LayoutOrder
 		}, {
-			Filter = if UseIsSearchActiveResult then nil else Element1,
+			Filter = if FFlagBuildUpdatedSearchUXForGAModule or not UseIsSearchActiveResult then Element1 else nil,
 			Results = Element,
 			CreateGameFooter = if UseIsSearchActiveResult then nil else ReactModule.createElement(View, {
 				LayoutOrder = 2,
@@ -249,7 +259,7 @@ return function(Frame: Frame)
 			tag = "col fill size-full",
 			LayoutOrder = Frame.LayoutOrder
 		}, {
-			Filter = if UseIsSearchActiveResult then nil else Element1,
+			Filter = if FFlagBuildUpdatedSearchUXForGAModule or not UseIsSearchActiveResult then Element1 else nil,
 			Results = Element
 		})
 	end

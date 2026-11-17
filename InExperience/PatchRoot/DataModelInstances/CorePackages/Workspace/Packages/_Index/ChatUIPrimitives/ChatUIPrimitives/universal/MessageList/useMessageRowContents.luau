@@ -1,7 +1,9 @@
-﻿local Parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
+﻿local ChatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
+local Parent = ChatUIPrimitives.Parent
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
+local FFlagExpChatIdentityDisplayColorModule = require(ChatUIPrimitives.Flags.FFlagExpChatIdentityDisplayColor)
 local _ = require(script.Parent.Parent.Types)
 local GetReplyPreviewModule = require(script.Parent.Reply.getReplyPreview)
 local _ = require(script.Parent.groupMessages)
@@ -22,7 +24,7 @@ local function contentKindsKey(p1): string
 end
 
 return function(Callback)
-	-- upvalues: ReactModule (copy), SignalsModule (copy), contentKindsKey (copy), SignalsReactModule (copy), UnpackContentModule (copy), GetReplyPreviewModule (copy)
+	-- upvalues: ReactModule (copy), FFlagExpChatIdentityDisplayColorModule (copy), SignalsModule (copy), contentKindsKey (copy), SignalsReactModule (copy), UnpackContentModule (copy), GetReplyPreviewModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), contentKindsKey (upval), Callback (copy)
 		return SignalsModule.createComputed(function(p2)
@@ -33,15 +35,16 @@ return function(Callback)
 	
 	return {
 		getIdentity = ReactModule.useMemo(function()
-			-- upvalues: Callback (copy)
+			-- upvalues: Callback (copy), FFlagExpChatIdentityDisplayColorModule (upval)
 			return function(p2)
-				-- upvalues: Callback (upval)
+				-- upvalues: Callback (upval), FFlagExpChatIdentityDisplayColorModule (upval)
 				local Author = Callback(p2).message.author
 				
 				return if Author == nil then nil else {
 					isRobloxVerified = false,
 					userId = Author.userId,
 					displayName = Author.displayName,
+					displayColor = if FFlagExpChatIdentityDisplayColorModule then Author.displayColor else nil,
 					avatarContent = `rbxthumb://type=AvatarHeadShot&id={Author.userId}&w=150&h=150`
 				}
 			end

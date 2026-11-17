@@ -16,6 +16,7 @@ local ObserveCurrentContextIdFunction: (any) -> () = require(CorePackages.Worksp
 local GetIconFunction = require(CorePackages.Workspace.Packages.VoiceChat).Utils.GetIcon
 local CONTEXTID = require(CorePackages.Workspace.Packages.CrossExperience).Constants.AUDIO_FOCUS_MANAGEMENT.CEV.CONTEXT_ID
 local GetFFlagIntegratePhoneUpsellJoinVoiceFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagIntegratePhoneUpsellJoinVoice
+local FFlagKeepSideSheetOpenBesideMenu = require(CorePackages.Workspace.Packages.SharedFlags).FFlagKeepSideSheetOpenBesideMenu
 local GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoice
 local FFlagProactiveVoiceRestrictionsUFR = require(CorePackages.Workspace.Packages.SharedFlags).FFlagProactiveVoiceRestrictionsUFR
 local FFlagTokenizeUnibarConstantsWithStyleProvider = require(Chrome.ChromeShared.Flags).FFlagTokenizeUnibarConstantsWithStyleProvider
@@ -27,7 +28,9 @@ local UnibarJoinVoiceTooltipPriority = game:DefineFastInt("UnibarJoinVoiceToolti
 local EnableChromeJoinVoiceTooltip = game:DefineFastFlag("EnableChromeJoinVoiceTooltip", false)
 local ServiceModule = require(Chrome.Service)
 local UnibarStyle = require(CorePackages.Workspace.Packages.Chrome).UnibarStyle
-local SideSheetPlacement = require(CorePackages.Workspace.Packages.Chrome).Enums.SideSheetPlacement
+local ChromeModule = require(CorePackages.Workspace.Packages.Chrome)
+local SideSheetOpenBehavior = ChromeModule.Enums.SideSheetOpenBehavior
+local SideSheetPlacement = ChromeModule.Enums.SideSheetPlacement
 local v1 = false
 local Flag = false
 local Unavailable = ServiceModule.AvailabilitySignal.Unavailable
@@ -47,6 +50,7 @@ RegisterResult = ServiceModule:register({
 	label = "CoreScripts.TopBar.JoinVoice",
 	initialAvailability = ServiceModule.AvailabilitySignal.Unavailable,
 	sideSheetPlacement = SideSheetPlacement.Unibar,
+	sideSheetOpenBehavior = if FFlagKeepSideSheetOpenBesideMenu then SideSheetOpenBehavior.CloseSheet else nil,
 	activated = function()
 		-- upvalues: FFlagProactiveVoiceRestrictionsUFR (copy), Default (copy), GetFFlagIntegratePhoneUpsellJoinVoiceFunction (copy), RobloxGui (copy), ConstantsModule (copy)
 		if not FFlagProactiveVoiceRestrictionsUFR or Default:GetVoiceRestrictionState(false) == "normal" then

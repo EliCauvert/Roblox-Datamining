@@ -241,6 +241,17 @@ CommonUI.Messages.SystemMessage.DeprecationTitle,
 CommonUI.Messages.SystemMessage.IosDeprecationBodyPhase1,"В ближайшее время Roblox не будет поддерживаться на iOS 12. Обнови своё устройство до версии iOS 13 или выше, чтобы продолжить играть."
 CommonUI.Messages.SystemMessage.IosDeprecationBodyPhase2Fallback,"Начиная с 9 июня, Roblox не будет поддерживаться на iOS 12. Обнови своё устройство до версии iOS 13 или выше, чтобы продолжить играть."
 CommonUI.Messages.SystemMessage.IosDeprecationBodyPhase3,"Roblox больше не поддерживает iOS 12. Обнови своё устройство до версии iOS 13 или выше, чтобы продолжить играть."
+CommonUI.UserAgreements.Popup.Agreement.Optional,Необязательно
+CommonUI.UserAgreements.Popup.Agreement.OptionalPersonalInformationPolicy,Сбор и обработка необязательной личной информации
+CommonUI.UserAgreements.Popup.Agreement.PersonalInformationPolicy,Сбор и обработка обязательной личной информации
+CommonUI.UserAgreements.Popup.Agreement.PrivacyPolicy,
+CommonUI.UserAgreements.Popup.Agreement.Required,Обязательно
+CommonUI.UserAgreements.Popup.Agreement.StudioTermsForVNGSKU,"Условия Studio. Эти условия между вами и компанией Roblox будут применяться при создании или загрузке контента с помощью Roblox Studio, отдельного сервиса, предоставляемого компанией Roblox Corporation"
+CommonUI.UserAgreements.Popup.Agreement.TermsOfService,
+CommonUI.UserAgreements.Popup.Agreement.ThirdPartyPersonalInformationPolicy,Предоставлением личной информации третьей стороне
+CommonUI.UserAgreements.Popup.Agreement.TransferPersonalInformationPolicy,Передачей личной информации за границу
+CommonUI.UserAgreements.Popup.DefaultAgreementTitle,Обновлённое соглашение
+CommonUI.UserAgreements.Popup.TitleOnWebview,
 CoreScripts.Ads.Action.Close,
 CoreScripts.Ads.Label.IllegalContentReportingLink,Сообщить о незаконном контенте в соответствии с определением Закона о цифровых услугах (ЕС)
 CoreScripts.Ads.Label.InExperienceDisclosureDynamic,"Roblox не использует поведенческую информацию для подбора рекламы. Ты видишь это объявление на основе такой информации, как тип устройства, местоположение устройства и возраст. Рекламодатель: {AdvertiserName}."
@@ -2229,7 +2240,7 @@ Feature.ReportAbuse.Label.Content,
 Feature.ReportAbuse.Label.Experience,
 Feature.ReportAbuse.Label.FinishChatReport,Закончить отчёт
 Feature.ReportAbuse.Label.HighlightProblem,Выдели проблему с кругами
-Feature.ReportAbuse.Label.Optional,Необязательно
+Feature.ReportAbuse.Label.Optional,
 Feature.ReportAbuse.Label.Person,
 Feature.ReportAbuse.Label.PleaseSelectOne,Выбери причину
 Feature.ReportAbuse.Label.Report,
@@ -2703,17 +2714,6 @@ IAPExperience.Loading.Text.PurchasingItem,Покупка предмета...
 IAPExperience.Loading.Text.PurchasingRobux,Покупка Robux...
 IAPExperience.Loading.Text.WaitingForPurchase,Ожидание покупки...
 IAPExperience.Loading.Text.WaitingForRobux,Ожидание получения Robux...
-IAPExperience.PremiumUpsell.Action.Subscribe,
-IAPExperience.PremiumUpsell.Body.RobuxDiscount,10% бонус при покупке Robux
-IAPExperience.PremiumUpsell.Label.AvatarShopBenefits,Доступ к эксклюзивным товарам и товарам со скидкой в Магазине аватаров
-IAPExperience.PremiumUpsell.Label.Disclosure,Подпишись за <b>{currencySymbol}{price}/мес. Отмена в любой момент.</b> Применяются Условия использования и Политика конфиденциальности Roblox.
-IAPExperience.PremiumUpsell.Label.PremiumBenefitListDesc,Преимущества подписки Roblox Premium:
-IAPExperience.PremiumUpsell.Label.PremiumOnlyBenefits,Доступ к привилегиям только для подписчиков Premium
-IAPExperience.PremiumUpsell.Label.PremiumPolicy,Обновляется ежемесячно. Можно отменить в любое время.
-IAPExperience.PremiumUpsell.Label.PremiumPrice,<b>{currencySymbol}{price}</b>/в месяц
-IAPExperience.PremiumUpsell.Label.RobloxPremium,Roblox Premium
-IAPExperience.PremiumUpsell.Label.RobuxPerMonth,{robux} в месяц
-IAPExperience.PremiumUpsell.Label.ShortDisclosure,Применяются Условия использования Roblox и Политика конфиденциальности.
 IAPExperience.PurchaseError.AlreadyPremium,"Похоже, разработчик пытается предложить тебе приобрести Roblox Premium, но ты уже являешься подписчиком Premium!"
 IAPExperience.PurchaseError.Text.AlreadyOwn,
 IAPExperience.PurchaseError.Text.AlreadySubscribed,Ты можешь управлять подпиской в: Настройках > Подписки.

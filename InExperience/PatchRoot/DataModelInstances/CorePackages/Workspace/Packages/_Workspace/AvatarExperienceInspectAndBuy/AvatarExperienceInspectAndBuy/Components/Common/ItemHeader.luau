@@ -6,9 +6,10 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local BackButtonModule = require(AvatarExperienceInspectAndBuy.Components.Common.BackButton)
 local _ = require(AvatarExperienceInspectAndBuy.Components.Common.BuyActionBar)
 local _ = require(AvatarExperienceInspectAndBuy.Types)
+local FFlagAXIaBPlusExclusiveUpsell = require(Parent.AvatarExperienceFlags).FFlagAXIaBPlusExclusiveUpsell
 
 return function(Frame)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FoundationModule (copy), BackButtonModule (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FoundationModule (copy), BackButtonModule (copy), FFlagAXIaBPlusExclusiveUpsell (copy)
 	local UseTokensResult = UseTokensFunction()
 	
 	return ReactModule.createElement(FoundationModule.View, {
@@ -44,11 +45,12 @@ return function(Frame)
 		BuyButton = if Frame.purchaseButtonProps then ReactModule.createElement(FoundationModule.Button, {
 			LayoutOrder = 2,
 			size = FoundationModule.Enums.InputSize.Medium,
-			width = UDim.new(0, UseTokensResult.Size.Size_3000),
+			width = if FFlagAXIaBPlusExclusiveUpsell and Frame.purchaseButtonProps.fitText then nil else UDim.new(0, UseTokensResult.Size.Size_3000),
 			text = Frame.purchaseButtonProps.purchaseButtonText,
 			variant = Frame.purchaseButtonProps.variant,
 			isDisabled = Frame.purchaseButtonProps.isDisabled,
-			onActivated = Frame.purchaseButtonProps.onPurchase
+			onActivated = Frame.purchaseButtonProps.onPurchase,
+			testId = if FFlagAXIaBPlusExclusiveUpsell then Frame.purchaseButtonProps.testId else nil
 		}) else nil
 	})
 end

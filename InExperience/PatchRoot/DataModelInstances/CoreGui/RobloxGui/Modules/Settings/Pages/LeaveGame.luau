@@ -35,6 +35,7 @@ local PioneerLeaveReason = require(CorePackages.Workspace.Packages.PioneerUtils)
 local FFlagPioneerLeaveLogsOut = SharedFlagsModule.FFlagPioneerLeaveLogsOut
 local FFlagRefactorMenuConfirmationButtonsModule = require(RobloxGui.Modules.Settings.Flags.FFlagRefactorMenuConfirmationButtons)
 local FFlagConfirmationButtonsUseGreyButtonsModule = require(RobloxGui.Modules.Settings.Flags.FFlagConfirmationButtonsUseGreyButtons)
+local FFlagLeaveGameButtonKeepsFocusWhileLeavingModule = require(RobloxGui.Modules.Settings.Flags.FFlagLeaveGameButtonKeepsFocusWhileLeaving)
 local ConstantsModule1 = require(RobloxGui.Modules:WaitForChild("InGameMenu"):WaitForChild("Resources"):WaitForChild("Constants"))
 local InExperienceSideSheetModule = require(CorePackages.Workspace.Packages.InExperienceSideSheet)
 local LocalizationKeys = InExperienceSideSheetModule.Constants.LocalizationKeys
@@ -50,8 +51,14 @@ local View = FoundationModule.View
 local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
 
 local function LeaveButtonsContainer(p1)
-	-- upvalues: ReactModule (copy), UseLastInputFunction (copy), UseFocusGuiObjectFunction (copy), UseLocalizationFunction (copy), IsPioneerLaunchFunction (copy), FFlagPioneerLeaveLogsOut (copy), LocalizationKeys (copy), FFlagPioneerLogoutButtonLabel (copy), ConstantsModule1 (copy), Input (copy), LeaveGameModule (copy), PioneerLeaveReason (copy), UtilityModule (copy), View (copy), NoFFlagResponsiveUnitsDeprecateTenFoot (copy), Text (copy), Button (copy), InputSize (copy), FFlagConfirmationButtonsUseGreyButtonsModule (copy), ButtonVariant (copy)
+	-- upvalues: ReactModule (copy), FFlagLeaveGameButtonKeepsFocusWhileLeavingModule (copy), UseLastInputFunction (copy), UseFocusGuiObjectFunction (copy), UseLocalizationFunction (copy), IsPioneerLaunchFunction (copy), FFlagPioneerLeaveLogsOut (copy), LocalizationKeys (copy), FFlagPioneerLogoutButtonLabel (copy), ConstantsModule1 (copy), Input (copy), LeaveGameModule (copy), PioneerLeaveReason (copy), UtilityModule (copy), View (copy), NoFFlagResponsiveUnitsDeprecateTenFoot (copy), Text (copy), Button (copy), InputSize (copy), FFlagConfirmationButtonsUseGreyButtonsModule (copy), ButtonVariant (copy)
 	local UseRefResult = ReactModule.useRef(nil)
+	local v2 = nil
+	local Callback = nil
+	
+	if FFlagLeaveGameButtonKeepsFocusWhileLeavingModule then
+		v2, Callback = ReactModule.useState(false)
+	end
 	local UseLastInputResult = UseLastInputFunction()
 	local UseFocusGuiObjectResult = UseFocusGuiObjectFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -72,6 +79,29 @@ local function LeaveButtonsContainer(p1)
 		end
 	end, { UseLastInputResult, UseFocusGuiObjectResult })
 	
+	if FFlagLeaveGameButtonKeepsFocusWhileLeavingModule then
+		local SetShowLeavingFunction = p1.setShowLeaving
+		ReactModule.useEffect(function()
+			-- upvalues: SetShowLeavingFunction (copy), Callback (ref), UseFocusGuiObjectResult (copy), UseRefResult (copy)
+			if SetShowLeavingFunction then
+				SetShowLeavingFunction(function(p2)
+					-- upvalues: Callback (upval), UseFocusGuiObjectResult (upval), UseRefResult (upval)
+					Callback(p2)
+					
+					if p2 then
+						UseFocusGuiObjectResult(UseRefResult.current)
+					end
+				end)
+				
+				return function()
+					-- upvalues: SetShowLeavingFunction (upval)
+					SetShowLeavingFunction(nil)
+				end
+			else
+				return nil
+			end
+		end, { SetShowLeavingFunction, UseFocusGuiObjectResult })
+	end
 	return ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y col",
 		Position = UDim2.new(0, 0, 0, if NoFFlagResponsiveUnitsDeprecateTenFoot then 100 else 0)
@@ -99,23 +129,29 @@ local function LeaveButtonsContainer(p1)
 				width = UDim.new(0, if NoFFlagResponsiveUnitsDeprecateTenFoot then 300 else 200),
 				ref = UseRefResult,
 				onActivated = ReactModule.useCallback(function()
-					-- upvalues: FFlagPioneerLeaveLogsOut (upval), IsPioneerLaunchFunction (upval), LeaveGameModule (upval), PioneerLeaveReason (upval)
+					-- upvalues: FFlagLeaveGameButtonKeepsFocusWhileLeavingModule (upval), Callback (ref), FFlagPioneerLeaveLogsOut (upval), IsPioneerLaunchFunction (upval), LeaveGameModule (upval), PioneerLeaveReason (upval)
+					if FFlagLeaveGameButtonKeepsFocusWhileLeavingModule then
+						Callback(true)
+					end
 					if FFlagPioneerLeaveLogsOut and IsPioneerLaunchFunction() then
 						LeaveGameModule(false, {
 							inhibitAppRating = true,
-							leaveReason = PioneerLeaveReason.Logout
+							leaveReason = PioneerLeaveReason.Logout,
+							keepSelection = if FFlagLeaveGameButtonKeepsFocusWhileLeavingModule then true else nil
 						})
-						
-						return
-					end
-					if IsPioneerLaunchFunction() then
-						LeaveGameModule(false, { shouldNativeExit = true })
-						
-						return
+					elseif IsPioneerLaunchFunction() then
+						LeaveGameModule(false, {
+							shouldNativeExit = true,
+							keepSelection = if FFlagLeaveGameButtonKeepsFocusWhileLeavingModule then true else nil
+						})
 					else
-						LeaveGameModule(true)
+						LeaveGameModule(true, if FFlagLeaveGameButtonKeepsFocusWhileLeavingModule then { keepSelection = true } else nil)
+					end
+					if FFlagLeaveGameButtonKeepsFocusWhileLeavingModule and IsPioneerLaunchFunction() then
+						Callback(false)
 					end
 				end, { LeaveGameModule }),
+				isLoading = if FFlagLeaveGameButtonKeepsFocusWhileLeavingModule then v2 else nil,
 				testId = if FFlagPioneerLogoutButtonLabel then "--leave-game-page-button-leave" else nil
 			}),
 			DontLeaveGameButton = ReactModule.createElement(Button, {
@@ -148,7 +184,7 @@ local function LeaveGameContainer(p1)
 end
 
 v1 = (function()
-	-- upvalues: RobloxGui (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), RbxAnalyticsService (copy), ConstantsModule1 (copy), FFlagRefactorMenuConfirmationButtonsModule (copy), ReactRobloxModule (copy), ReactModule (copy), LeaveGameContainer (copy), IsPioneerLaunchFunction (copy), FFlagPioneerLeaveLogsOut (copy), RobloxTranslatorModule (copy), LocalizationKeys (copy), FFlagPioneerLogoutButtonLabel (copy), CreateFunction (copy), ThemeModule (copy), NoFFlagResponsiveUnitsDeprecateTenFoot (copy), UtilityModule (copy), LeaveGameModule (copy), PioneerLeaveReason (copy)
+	-- upvalues: RobloxGui (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), RbxAnalyticsService (copy), ConstantsModule1 (copy), FFlagRefactorMenuConfirmationButtonsModule (copy), ReactRobloxModule (copy), ReactModule (copy), LeaveGameContainer (copy), FFlagLeaveGameButtonKeepsFocusWhileLeavingModule (copy), IsPioneerLaunchFunction (copy), FFlagPioneerLeaveLogsOut (copy), RobloxTranslatorModule (copy), LocalizationKeys (copy), FFlagPioneerLogoutButtonLabel (copy), CreateFunction (copy), ThemeModule (copy), NoFFlagResponsiveUnitsDeprecateTenFoot (copy), UtilityModule (copy), LeaveGameModule (copy), PioneerLeaveReason (copy)
 	local NewPage = require(RobloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
 	NewPage.playsessionid = ""
 	
@@ -180,6 +216,13 @@ v1 = (function()
 		NewPage.DontLeaveFunc(p1)
 	end
 	
+	NewPage.ShowLeaving = nil
+	
+	function NewPage.SetShowLeaving(ShowLeaving)
+		-- upvalues: NewPage (copy)
+		NewPage.ShowLeaving = ShowLeaving
+	end
+	
 	NewPage.TabHeader = nil
 	NewPage.Page.Name = "LeaveGamePage"
 	NewPage.ShouldShowBottomBar = false
@@ -187,9 +230,12 @@ v1 = (function()
 	
 	if FFlagRefactorMenuConfirmationButtonsModule then
 		function NewPage.RenderPage()
-			-- upvalues: NewPage (copy), ReactRobloxModule (upval), ReactModule (upval), LeaveGameContainer (upval)
+			-- upvalues: NewPage (copy), ReactRobloxModule (upval), ReactModule (upval), LeaveGameContainer (upval), FFlagLeaveGameButtonKeepsFocusWhileLeavingModule (upval)
 			NewPage.PageRoot = ReactRobloxModule.createRoot(NewPage.Page)
-			NewPage.PageRoot:render(ReactModule.createElement(LeaveGameContainer, { dontLeaveFromButton = NewPage.DontLeaveFromButton }))
+			NewPage.PageRoot:render(ReactModule.createElement(LeaveGameContainer, {
+				dontLeaveFromButton = NewPage.DontLeaveFromButton,
+				setShowLeaving = if FFlagLeaveGameButtonKeepsFocusWhileLeavingModule then NewPage.SetShowLeaving else nil
+			}))
 		end
 		
 		function NewPage.UnmountPage()

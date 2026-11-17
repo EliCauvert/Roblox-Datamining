@@ -7,6 +7,9 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local ChatActionsRowModule = require(BuildExperience.Components.Chat.ChatActionsRow)
 local TextAreaModule = require(BuildExperience.FoundationFork.TextArea)
+local FFlagBuildExperienceInExperienceEntryTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceInExperienceEntryTelemetry)
+local GetInExperienceEventIdsModule = require(BuildExperience.Telemetry.getInExperienceEventIds)
+local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 local UseHardwareInsetsModule = require(script.Parent.useHardwareInsets)
 local View = FoundationModule.View
 local InputSize = FoundationModule.Enums.InputSize
@@ -17,7 +20,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local function noop() end
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseTokensFunction (copy), UseOverlayFunction (copy), UseHardwareInsetsModule (copy), ReactModule (copy), View (copy), TextAreaModule (copy), noop (copy), InputSize (copy), ChatActionsRowModule (copy), StateLayerAffordance (copy), ReactRobloxModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseTokensFunction (copy), UseOverlayFunction (copy), UseHardwareInsetsModule (copy), FFlagBuildExperienceInExperienceEntryTelemetryModule (copy), ReactModule (copy), SendBuildExperienceEventModule (copy), GetInExperienceEventIdsModule (copy), View (copy), TextAreaModule (copy), noop (copy), InputSize (copy), ChatActionsRowModule (copy), StateLayerAffordance (copy), ReactRobloxModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		composerPlaceholder = LocalizationStringsModule.CHAT_COMPOSER_PLACEHOLDER
 	})
@@ -75,7 +78,11 @@ return function(p1)
 			ZIndex = 2,
 			Position = UDim2.fromScale(0, 0),
 			Size = UDim2.fromScale(1, 1),
-			onActivated = p1.onActivated,
+			onActivated = (if FFlagBuildExperienceInExperienceEntryTelemetryModule then ReactModule.useCallback(function()
+				-- upvalues: SendBuildExperienceEventModule (upval), GetInExperienceEventIdsModule (upval), p1 (copy)
+				SendBuildExperienceEventModule("CHAT_OPEN", GetInExperienceEventIdsModule(), { context = "chat_sheet_launcher", isInExperience = "true" })
+				p1.onActivated()
+			end, { p1.onActivated }) else nil) or p1.onActivated,
 			testId = p1.testId or "chat-sheet-launcher",
 			selection = { Selectable = false },
 			stateLayer = { affordance = StateLayerAffordance.None }

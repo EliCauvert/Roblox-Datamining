@@ -29,14 +29,11 @@ local FFlagMomentsServeEDPVideos = require(Parent.SharedFlags).FFlagMomentsServe
 local FFlagMomentsPostFeedback = require(Parent.SharedFlags).FFlagMomentsPostFeedback
 local MomentsFixExperienceHandleVerifiedSpacing = game:DefineFastFlag("MomentsFixExperienceHandleVerifiedSpacing", false)
 local FFlagMomentsFixRecommendationImpressionLifecycleModule = require(Moments.Flags.FFlagMomentsFixRecommendationImpressionLifecycle)
-local FFlagMomentsUpdateExperienceActionLabelTextModule = require(Moments.Flags.FFlagMomentsUpdateExperienceActionLabelText)
 local FFlagMomentsJoinImpressionModule = require(Moments.Flags.FFlagMomentsJoinImpression)
 local FFlagMomentsFollowingFeedModule = require(Moments.Flags.FFlagMomentsFollowingFeed)
 local FFlagMomentsRecommendationFeedTypeModule = require(Moments.Flags.FFlagMomentsRecommendationFeedType)
 local VerifiedBadgeModule = if MomentsFixExperienceHandleVerifiedSpacing then require(Parent.VerifiedBadges.VerifiedBadge) else nil
-local config = {
-	join = if FFlagMomentsUpdateExperienceActionLabelTextModule then "Feature.Moments.Action.Play" else "Feature.Moments.Action.Join"
-}
+local config = { join = "Feature.Moments.Action.Play" }
 local Character = utf8.char(57344)
 
 return ReactModule.memo(function(Frame: Frame)

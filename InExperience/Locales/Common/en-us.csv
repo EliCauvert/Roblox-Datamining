@@ -625,6 +625,17 @@ CommonUI.Messages.SystemMessage.IosDeprecationBodyPhase3,Roblox no longer suppor
 CommonUI.Messages.SystemMessage.PS4onPS5DeprecationBody,Please install and play the newly released Roblox for PlayStation®5. Roblox for PlayStation®4 will be unavailable for players on PlayStation®5 beginning {date}.
 CommonUI.Messages.SystemMessage.PS4onPS5DeprecationTitle,Roblox is now available for PlayStation®5
 CommonUI.Messages.SystemMessage.PS4onPS5HardDeprecationBody,"The PlayStation®4 version of Roblox is no longer supported on PlayStation®5. To keep playing, please download the new Roblox app for PlayStation®5."
+CommonUI.UserAgreements.Popup.Agreement.Optional,Optional
+CommonUI.UserAgreements.Popup.Agreement.OptionalPersonalInformationPolicy,Collection and Processing of Optional Personal Information
+CommonUI.UserAgreements.Popup.Agreement.PersonalInformationPolicy,Collection and Processing of Required Personal Information
+CommonUI.UserAgreements.Popup.Agreement.PrivacyPolicy,
+CommonUI.UserAgreements.Popup.Agreement.Required,Required
+CommonUI.UserAgreements.Popup.Agreement.StudioTermsForVNGSKU,"Studio Terms. These terms between you and Roblox Corporation will apply when you create or upload content using Roblox Studio, a separate service provided to you by Roblox Corporation"
+CommonUI.UserAgreements.Popup.Agreement.TermsOfService,Terms Of Use
+CommonUI.UserAgreements.Popup.Agreement.ThirdPartyPersonalInformationPolicy,Third Party Provision of Personal Information
+CommonUI.UserAgreements.Popup.Agreement.TransferPersonalInformationPolicy,Transfer of Personal Information Overseas
+CommonUI.UserAgreements.Popup.DefaultAgreementTitle,Updated Agreement
+CommonUI.UserAgreements.Popup.TitleOnWebview,
 CoreScripts.Ads.Action.Close,
 CoreScripts.Ads.ImmersiveBrandedAds.WhyThisAd,This non-personalized ad is visible to users in this experience. {AdvertiserName} is the Advertiser and paid for this ad.
 CoreScripts.Ads.Label.IllegalContentReportingLink,Report illegal content or content harmful to children
@@ -1278,6 +1289,7 @@ CoreScripts.TextChat.Description.RobloxSummarizesMessagesFromAllPlayers,Roblox s
 CoreScripts.TextChat.Description.TurnOnChatInSettings,Turn on chat in your Privacy>Communication settings.
 CoreScripts.TextChat.Description.UnlockChatPrivacyCommunications,Unlock chat with an age check in Privacy>Communication settings.
 CoreScripts.TextChat.Description.UnlockChatWithAnAgeCheck,Unlock chat with an age check.
+CoreScripts.TextChat.Description.UseQuickWordsChatIsntAvailableInYourRegion,Use Quick Words to coordinate gameplay. Chat isn’t available in your region.
 CoreScripts.TextChat.Emote.Error.DoesNotExist,Emote does not exist.
 CoreScripts.TextChat.Emote.Error.NotEnabled,You can't use that Emote here.
 CoreScripts.TextChat.Emote.Error.NotEquipped,You don't have that Emote equipped.
@@ -2034,6 +2046,7 @@ Feature.Avatar.Title.ClearAnimationsConfirmation,Clear all animations?
 Feature.Avatar.Title.ClearBodyConfirmation,Clear body?
 Feature.Avatar.Title.ClearClothesConfirmation,Clear all clothes?
 Feature.Avatar.Title.ClearMakeupConfirmation,Clear all makeup?
+Feature.Avatar.Title.CreateMoment,Create a Moment
 Feature.Avatar.Title.CreateSet,
 Feature.Avatar.Title.DeleteSet,
 Feature.Avatar.Title.DuplicateMakeupLook,Duplicate Look
@@ -2190,6 +2203,7 @@ Feature.Build.Action.UpdateRating,Update rating
 Feature.Build.Action.UpdateWithChanges,Update with changes
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,View usage
+Feature.Build.Analytics.Action.AddFunnelTracking,Add funnel tracking
 Feature.Build.Analytics.AnalyzeChatPrompt,Analyze my {analyzeName} for the past {days} days. Why does this metric matter and how can I improve it?
 Feature.Build.Analytics.AnalyzeName.Arppu,average revenue per paying user
 Feature.Build.Analytics.AnalyzeName.D1Retention,day-1 retention
@@ -2205,6 +2219,7 @@ Feature.Build.Analytics.Description.PlaythroughRate,Playthrough rate is the perc
 Feature.Build.Analytics.Description.TotalPlaytime,Total playtime sums the time all players spent in your experience over the period. Rising playtime usually signals more engaging sessions.
 Feature.Build.Analytics.DurationHours,{number} hrs
 Feature.Build.Analytics.DurationMinutes,{number} mins
+Feature.Build.Analytics.FunnelTrackingPrompt,Audit and instrument my analytics funnels
 Feature.Build.Analytics.Goal.Action.CreateAd,Create an ad
 Feature.Build.Analytics.Goal.Action.SellItems,Sell items
 Feature.Build.Analytics.Goal.Action.ShareWithFriends,Share with friends
@@ -2539,7 +2554,7 @@ Feature.Build.Label.ToolReqUpdateDone,Updated requirements
 Feature.Build.Label.ToolReqUpdateFailed,Couldn't update requirements
 Feature.Build.Label.ToolReqUpdateRunning,Updating requirements
 Feature.Build.Label.ToolRestoreVersionDone,Restored version
-Feature.Build.Label.ToolRestoreVersionFailed,Couldn't restore   version
+Feature.Build.Label.ToolRestoreVersionFailed,Couldn't restore version
 Feature.Build.Label.ToolRestoreVersionRunning,Restoring version
 Feature.Build.Label.ToolScriptDone,Ran script
 Feature.Build.Label.ToolScriptFailed,Couldn't run script
@@ -2600,6 +2615,7 @@ Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,Expand your audience eligibility on Creator Hub
 Feature.Build.Message.ExperiencesLoadFailed,Couldn't load experiences
 Feature.Build.Message.FailedTitle,Failed {TITLE}
+Feature.Build.Message.FailedWithTitle,Failed: {TITLE}
 Feature.Build.Message.FinishedTitle,Finished {TITLE}
 Feature.Build.Message.FriendsLoadFailed,Couldn't load friends. Try again.
 Feature.Build.Message.GameNotCreated,Your game wasn't created. Try again.
@@ -2642,6 +2658,8 @@ Feature.Build.Message.SaveChangesFailed,Couldn't save changes. Try again.
 Feature.Build.Message.ShareExperience,Share {EXPERIENCE_NAME}
 Feature.Build.Message.ShareLinkFailed,Couldn't create the share link. Try again.
 Feature.Build.Message.SignedOut,You're signed out. Sign in and try again.
+Feature.Build.Message.StepForMinutesSeconds,{TITLE} for {MINUTES}m{REM_SECONDS}s
+Feature.Build.Message.StepForSeconds,{TITLE} for {SECONDS}s
 Feature.Build.Message.TasksCompleted,{NUM_COMPLETED_TASKS} tasks completed
 Feature.Build.Message.ThinkingSeconds,Thinking for {SECONDS}s
 Feature.Build.Message.TrustedFriendsRequiredForPlaytest,Become trusted friends with this creator to play their game.
@@ -3329,6 +3347,19 @@ Feature.Chat.Text.NoFriends,"You haven't added any friends yet. To get started, 
 Feature.Chat.Title.FriendsChat,Friends chat
 Feature.Chat.Title.NewChat,New chat
 Feature.Chat.Toast.Error.InvalidUserSelected,One or more people in this list can’t be added
+Feature.CloudClient.Description.GalleryUnavailableCloudPlay,Rejoin without Cloud Play to use your gallery.
+Feature.CloudClient.Description.GalleryUnavailableRobloxReality,Rejoin without Restyle to use your gallery.
+Feature.CloudClient.Description.RobloxRealityPreview,Restyle is an early preview. Things may look different from the original game.
+Feature.CloudClient.Heading.GalleryUnavailableCloudPlay,Gallery isn’t available in Cloud Play yet.
+Feature.CloudClient.Heading.GalleryUnavailableRobloxReality,Gallery isn’t available with Restyle yet.
+Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Capture isn't available in Cloud Play yet.
+Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Capture isn't available with Restyle yet.
+Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Play isn't working. You're playing normally.
+Feature.CloudClient.Label.RobloxReality,Restyle
+Feature.CloudClient.Label.RobloxRealityEndingSoon,"Restyle ends in 1 minute, and you’ll leave the game."
+Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,Self View isn't available in Cloud Play yet.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,Self View isn't available with Restyle yet.
+Feature.CloudClient.Label.TimeLeft,Time left
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,Let Your Friends Find You
 Feature.Contacts.Action.Invite,Invite
@@ -3562,6 +3593,7 @@ Feature.Friends.Label.FollowsYou,Follows You
 Feature.Friends.Label.Frequent,Played together
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,Invited you to be friends on Roblox
+Feature.Friends.Label.FriendOfUser,Friend of {displayName}
 Feature.Friends.Label.FriendOwns,1 Friend owns
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 Friend</b> recently played
 Feature.Friends.Label.FriendRequest,
@@ -3626,6 +3658,7 @@ Feature.Friends.TFEducation.Modal.TextOutro.EighteenPlus,"When you add another a
 Feature.Friends.Text.IsPlaying,is playing
 Feature.Friends.Text.NoConnections,"You haven't added any Connections yet. To get started, find and add Connections."
 Feature.Friends.Text.NoFriends,
+Feature.Friends.Title.AddMoreTrustedFriends,Add more trusted friends
 Feature.Friends.Title.TrustedFriendsExpiredLink,Link expired
 Feature.Friends.Title.TrustedFriendsInvalidLink,Link isn't valid
 Feature.Friends.TrustedConnection.Label.Trusted,
@@ -3706,7 +3739,7 @@ Feature.GamepadDisconnect.Label.Message,"Controller for user ""%s"" has been dis
 Feature.GamepadDisconnect.Label.MessageGeneric,"Controller for user ""%s"" has been disconnected. Please reconnect your controller."
 Feature.GamepadDisconnect.Label.Title,Missing Controller
 Feature.Groups.Action.Cancel,
-Feature.Groups.Action.CancelRequest,Cancel request
+Feature.Groups.Action.CancelRequest,Cancel Request
 Feature.Groups.Action.Close,
 Feature.Groups.Action.Continue,
 Feature.Groups.Action.CreateGroup,Create Community
@@ -3921,7 +3954,6 @@ Feature.Moments.Action.GenerateTextFeedbackNotHelpful,Not helpful
 Feature.Moments.Action.GenerateTextFeedbackPolicy,Inappropriate or Violative
 Feature.Moments.Action.Hide,Hide details
 Feature.Moments.Action.HowToCapture,View how to capture
-Feature.Moments.Action.Join,
 Feature.Moments.Action.KeepEditing,Continue editing
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,Minimize
@@ -4387,7 +4419,7 @@ Feature.ReportAbuse.Label.FinishChatReport,Finish your chat report
 Feature.ReportAbuse.Label.GenericReportIllegalContentMessage,
 Feature.ReportAbuse.Label.HighlightProblem,Highlight the problem with circles
 Feature.ReportAbuse.Label.HighlightProblemPrecise,Highlight the problem
-Feature.ReportAbuse.Label.Optional,Optional
+Feature.ReportAbuse.Label.Optional,
 Feature.ReportAbuse.Label.Person,Person
 Feature.ReportAbuse.Label.PleaseSelectOne,Please select one.
 Feature.ReportAbuse.Label.Report,
@@ -4503,6 +4535,7 @@ Feature.RobloxSubscription.Label.RobloxPlusPriceRowV3,"{boldStart}{trialDuration
 Feature.RobloxSubscription.Label.month,month
 Feature.RobloxSubscription.Label.months,months
 Feature.RobloxSubscription.Message.AlreadySubscribed,You already have Plus. This link is for new members. Share your own to invite friends and get rewards.
+Feature.RobloxSubscription.Notification.SpawnEffectFTUX,You just spawned for the first time with your spawn effect.
 Feature.RobloxSubscription.Title.AgeCheckTrial,Get 1 free week of Plus
 Feature.RobloxSubscription.Title.AlreadySubscribed,Good news
 Feature.RobloxSubscription.Title.GenericError,
@@ -4590,8 +4623,8 @@ Feature.SettingsHub.Label.InviteSearchNoResults,
 Feature.SettingsHub.Label.Invited,Invited
 Feature.SettingsHub.Label.LeaveButton,
 Feature.SettingsHub.Label.LoadingFriendsListFailed,"An error occurred, please try again later."
-Feature.SettingsHub.Label.LogoutButton,Log Out
-Feature.SettingsHub.Label.LogoutConfirmation,Are you sure you want to log out?
+Feature.SettingsHub.Label.LogoutButton,Sign out
+Feature.SettingsHub.Label.LogoutConfirmation,Are you sure you want to sign out?
 Feature.SettingsHub.Label.MethodOfAbuse,Type Of Abuse?
 Feature.SettingsHub.Label.Moderated,
 Feature.SettingsHub.Label.ModeratedInviteError,Experience invite was moderated and not sent.
@@ -5107,17 +5140,6 @@ IAPExperience.Loading.Text.PurchasingItem,Purchasing item...
 IAPExperience.Loading.Text.PurchasingRobux,Purchasing Robux...
 IAPExperience.Loading.Text.WaitingForPurchase,Waiting for purchase...
 IAPExperience.Loading.Text.WaitingForRobux,Waiting for Robux to be granted...
-IAPExperience.PremiumUpsell.Action.Subscribe,
-IAPExperience.PremiumUpsell.Body.RobuxDiscount,10% bonus when buying Robux
-IAPExperience.PremiumUpsell.Label.AvatarShopBenefits,Access to exclusive and discounted items in avatar shop
-IAPExperience.PremiumUpsell.Label.Disclosure,Subscribe for <b>{currencySymbol}{price}/month. Cancel anytime.</b> Roblox Terms of Use and Privacy Policy apply.
-IAPExperience.PremiumUpsell.Label.PremiumBenefitListDesc,Roblox Premium will get you:
-IAPExperience.PremiumUpsell.Label.PremiumOnlyBenefits,Access to Premium-only benefits
-IAPExperience.PremiumUpsell.Label.PremiumPolicy,Renews monthly. Cancel anytime.
-IAPExperience.PremiumUpsell.Label.PremiumPrice,<b>{currencySymbol}{price}</b>/month
-IAPExperience.PremiumUpsell.Label.RobloxPremium,Roblox Premium
-IAPExperience.PremiumUpsell.Label.RobuxPerMonth,{robux} per month
-IAPExperience.PremiumUpsell.Label.ShortDisclosure,Roblox Terms of Use and Privacy Policy apply.
 IAPExperience.PurchaseError.AlreadyPremium,"Looks like the developer is trying to prompt you to purchase Roblox Premium, but you are already a Premium member!"
 IAPExperience.PurchaseError.Text.AlreadyOwn,
 IAPExperience.PurchaseError.Text.AlreadySubscribed,You can manage your subscription from Settings > Subscriptions.
@@ -5455,7 +5477,7 @@ InGame.NotificationScript2.onPointsAwarded.single,You received {RBX_NUMBER} poin
 InGame.PlayerDropDown.Accept,
 InGame.PlayerDropDown.Action.ConnectionRequest,Friend Request
 InGame.PlayerDropDown.Block,
-InGame.PlayerDropDown.CancelRequest,Cancel Request
+InGame.PlayerDropDown.CancelRequest,
 InGame.PlayerDropDown.ConfirmUnfriend,Tap to confirm unfriend
 InGame.PlayerDropDown.Decline,Decline
 InGame.PlayerDropDown.Examine,

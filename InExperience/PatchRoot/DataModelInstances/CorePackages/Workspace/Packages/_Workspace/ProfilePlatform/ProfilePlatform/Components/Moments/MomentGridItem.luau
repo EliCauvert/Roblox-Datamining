@@ -10,7 +10,6 @@ local ToMediaItemModule = require(Parent.Moments.ToMediaItem)
 local UseSceneOutfitMediaItemModule = require(script.Parent.useSceneOutfitMediaItem)
 local SceneOutfitPosterModule = require(script.Parent.SceneOutfitPoster)
 local MomentEngagementCountModule = require(script.Parent.MomentEngagementCount)
-local FFlagMomentsEngagementMetricsFeature = MomentsCommonModule.Flags.FFlagMomentsEngagementMetricsFeature
 local FFlagProfileMomentSceneOutfitPoster = require(Parent.SharedFlags).FFlagProfileMomentSceneOutfitPoster
 local FFlagMomentsPostFeedback = require(Parent.SharedFlags).FFlagMomentsPostFeedback
 local PostStatusBadgeModule = require(Parent.Moments.PostStatusBadge)
@@ -29,11 +28,11 @@ local GradientBackdrop = MomentsCommonModule.Components.GradientBackdrop
 local ThumbUp = BuilderIconsModule.Icon.ThumbUp
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), FFlagMomentsEngagementMetricsFeature (copy), UseSignalStateFunction (copy), GetMomentsCapabilitiesFunction (copy), ReactModule (copy), MakeProfileTileFieldsModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), ToMediaItemModule (copy), FFlagProfileMomentSceneOutfitPoster (copy), UseSceneOutfitMediaItemModule (copy), ControlState (copy), View (copy), StateLayerAffordance (copy), MomentMediaTile (copy), SceneOutfitPosterModule (copy), GradientBackdrop (copy), MomentEngagementCountModule (copy), ThumbUp (copy), FFlagMomentsPostFeedback (copy), PostStatusBadgeModule (copy)
+	-- upvalues: UseTokensFunction (copy), UseSignalStateFunction (copy), GetMomentsCapabilitiesFunction (copy), ReactModule (copy), MakeProfileTileFieldsModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), ToMediaItemModule (copy), FFlagProfileMomentSceneOutfitPoster (copy), UseSceneOutfitMediaItemModule (copy), ControlState (copy), View (copy), StateLayerAffordance (copy), MomentMediaTile (copy), SceneOutfitPosterModule (copy), GradientBackdrop (copy), MomentEngagementCountModule (copy), ThumbUp (copy), FFlagMomentsPostFeedback (copy), PostStatusBadgeModule (copy)
 	local Moment = p1.moment
 	local OnHoverChangedFunction = p1.onHoverChanged
 	local UseTokensResult = UseTokensFunction()
-	local UseSignalStateResult = if FFlagMomentsEngagementMetricsFeature then UseSignalStateFunction(GetMomentsCapabilitiesFunction(false).getIsEngagementMetricsEnabled) else nil
+	local UseSignalStateResult = UseSignalStateFunction(GetMomentsCapabilitiesFunction(false).getIsEngagementMetricsEnabled)
 	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), Moment (copy), MakeProfileTileFieldsModule (upval), FireAnalyticsEventFunction (upval), EventNames (upval)
 		if p1.userId and Moment.recommendationMetadata then
@@ -49,7 +48,7 @@ return function(p1)
 		return (ToMediaItemModule({ kind = "moment", moment = Moment }))
 	end, { Moment.momentId })
 	local UseSceneOutfitMediaItemModuleResult = if FFlagProfileMomentSceneOutfitPoster then UseSceneOutfitMediaItemModule(Moment, UseMemoResult) else nil
-	local IsLikeCountAbove: boolean = if FFlagMomentsEngagementMetricsFeature then UseSignalStateResult and (Moment.metadata.likeCount ~= nil and Moment.metadata.likeCount > 0) else Moment.metadata.likeCount ~= nil and Moment.metadata.likeCount > 0
+	local IsLikeCountAbove: boolean = UseSignalStateResult and (Moment.metadata.likeCount ~= nil and Moment.metadata.likeCount > 0)
 	
 	return ReactModule.createElement(View, {
 		tag = "clip",
