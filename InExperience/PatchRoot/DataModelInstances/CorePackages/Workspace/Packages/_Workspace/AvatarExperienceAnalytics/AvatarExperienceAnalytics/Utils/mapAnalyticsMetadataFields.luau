@@ -1,4 +1,6 @@
-﻿local FFlagAXUnifiedEventStrictPayloads = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.AvatarExperienceFlags).FFlagAXUnifiedEventStrictPayloads
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceAnalytics").Parent
+local FFlagAXUnifiedEventStrictPayloads = require(Parent.AvatarExperienceFlags).FFlagAXUnifiedEventStrictPayloads
+local _ = require(Parent.UnifiedEventEnums)
 local list = {
 	{ protoKey = "sort", aliases = { "sortEnumValue" } },
 	{

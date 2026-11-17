@@ -14,12 +14,13 @@ local FFlagUserTileShowShimmerWhenLoadingModule = require(UserTile.Flags.FFlagUs
 local FFlagEnableBlackbirdCheck = require(Parent.SharedFlags).FFlagEnableBlackbirdCheck
 local FFlagUserTileShowBadges = require(Parent.SharedFlags).FFlagUserTileShowBadges
 local FFlagEnableMobileGameJoinCard = require(Parent.SharedFlags).FFlagEnableMobileGameJoinCard
+local FFlagSocialCarouselInGamePlayIcon = require(Parent.SharedFlags).FFlagSocialCarouselInGamePlayIcon
 local FFlagUserTileAddContextualInfoIcon = require(Parent.SharedFlags).FFlagUserTileAddContextualInfoIcon
 local FFlagUserTileTitleStackAddExtraInfo = require(Parent.SharedFlags).FFlagUserTileTitleStackAddExtraInfo
 local FFlagUserTileUnfilteredChatIndicator = require(Parent.SharedFlags).FFlagUserTileUnfilteredChatIndicator
 
 return function(p1)
-	-- upvalues: ReactModule (copy), ControlState (copy), View (copy), LayoutModeModule (copy), Enums (copy), AvatarPileModule (copy), AvatarModule (copy), FFlagUserTileShowShimmerWhenLoadingModule (copy), TitleStackModule (copy), FFlagUserTileShowBadges (copy), FFlagUserTileAddContextualInfoIcon (copy), FFlagProfilePlatformNewProfileHeader (copy), FFlagEnableMobileGameJoinCard (copy), FFlagUserTileUnfilteredChatIndicator (copy), FFlagEnableBlackbirdCheck (copy), FFlagUserTileTitleStackAddExtraInfo (copy)
+	-- upvalues: ReactModule (copy), ControlState (copy), View (copy), LayoutModeModule (copy), Enums (copy), FFlagSocialCarouselInGamePlayIcon (copy), AvatarPileModule (copy), AvatarModule (copy), FFlagUserTileShowShimmerWhenLoadingModule (copy), TitleStackModule (copy), FFlagUserTileShowBadges (copy), FFlagUserTileAddContextualInfoIcon (copy), FFlagProfilePlatformNewProfileHeader (copy), FFlagEnableMobileGameJoinCard (copy), FFlagUserTileUnfilteredChatIndicator (copy), FFlagEnableBlackbirdCheck (copy), FFlagUserTileTitleStackAddExtraInfo (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local HasOnActivated = p1.onActivated ~= nil
 	
@@ -39,7 +40,8 @@ return function(p1)
 			end
 		end, { p1.onActivated, p1.onStateChanged }),
 		onActivated = p1.onActivated,
-		stateLayer = { affordance = Enums.StateLayerAffordance.None }
+		stateLayer = { affordance = Enums.StateLayerAffordance.None },
+		ref = if FFlagSocialCarouselInGamePlayIcon then p1.buttonRef else nil
 	}, {
 		AvatarThumbnail = ReactModule.createElement(View, {
 			tag = "size-full aspect-1-1",

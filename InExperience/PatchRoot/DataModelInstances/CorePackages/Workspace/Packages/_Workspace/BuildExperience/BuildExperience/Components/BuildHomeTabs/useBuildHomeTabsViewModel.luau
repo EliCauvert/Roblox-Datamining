@@ -9,14 +9,15 @@ local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local UseBuildHomeTabsPageLayoutModule = require(script.Parent.useBuildHomeTabsPageLayout)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 local FFlagBuildExperienceHomeTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceHomeTelemetry)
+local FFlagBuildUpdatedSearchUXForGAModule = require(BuildExperience.Flags.FFlagBuildUpdatedSearchUXForGA)
 local BUILDHOMETAB = require(BuildExperience.Stores.GetBuildHomeTabStore.createBuildHomeTabStore).BUILD_HOME_TAB
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
 return function(p1)
-	-- upvalues: GetBuildHomeTabStoreModule (copy), GetSearchQueryStoreModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), BUILDHOMETAB (copy), FFlagBuildExperienceHomeTelemetryModule (copy), SendBuildExperienceEventModule (copy), UseBuildHomeTabsPageLayoutModule (copy)
+	-- upvalues: GetBuildHomeTabStoreModule (copy), FFlagBuildUpdatedSearchUXForGAModule (copy), GetSearchQueryStoreModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), BUILDHOMETAB (copy), FFlagBuildExperienceHomeTelemetryModule (copy), SendBuildExperienceEventModule (copy), UseBuildHomeTabsPageLayoutModule (copy)
 	local TabStore = p1.tabStore or GetBuildHomeTabStoreModule()
 	local UseTabResult = TabStore.useTab()
-	local UseIsSearchActiveResult = (p1.searchQueryStore or GetSearchQueryStoreModule()).useIsSearchActive()
+	local UseIsSearchActiveResult = if FFlagBuildUpdatedSearchUXForGAModule then nil else (p1.searchQueryStore or GetSearchQueryStoreModule()).useIsSearchActive()
 	local UseLocalizationResult = UseLocalizationFunction({
 		games = LocalizationStringsModule.BUILD_HOME_TAB_GAMES,
 		previews = LocalizationStringsModule.BUILD_HOME_TAB_PREVIEWS
@@ -45,16 +46,16 @@ return function(p1)
 		end
 		TabStore.setTab(Games)
 	end, { TabStore })
-	local NoUseIsSearchActiveResult = not UseIsSearchActiveResult
-	local UseTabResult1 = if NoUseIsSearchActiveResult then UseTabResult else BUILDHOMETAB.Games
+	local NoUseIsSearchActiveResult = if FFlagBuildUpdatedSearchUXForGAModule then nil else not UseIsSearchActiveResult
+	local UseTabResult1 = if FFlagBuildUpdatedSearchUXForGAModule or NoUseIsSearchActiveResult then UseTabResult else BUILDHOMETAB.Games
 	local UseBuildHomeTabsPageLayoutModuleResult = UseBuildHomeTabsPageLayoutModule({
 		tabs = UseMemoResult,
 		activeTab = UseTabResult1,
-		showTabs = NoUseIsSearchActiveResult
+		showTabs = if FFlagBuildUpdatedSearchUXForGAModule then nil else NoUseIsSearchActiveResult
 	})
 	
 	if FFlagBuildExperienceHomeTelemetryModule then
-		local IsIsFocused: boolean = NoUseIsSearchActiveResult and p1.isFocused ~= false
+		local IsIsFocused: boolean = if FFlagBuildUpdatedSearchUXForGAModule then p1.isFocused ~= false else NoUseIsSearchActiveResult and p1.isFocused ~= false
 		ReactModule.useEffect(function()
 			-- upvalues: IsIsFocused (copy), UseTabResult1 (copy), SendBuildExperienceEventModule (upval)
 			if IsIsFocused then
@@ -65,7 +66,7 @@ return function(p1)
 		end, { UseTabResult1, IsIsFocused })
 	end
 	return {
-		showTabs = NoUseIsSearchActiveResult,
+		showTabs = if FFlagBuildUpdatedSearchUXForGAModule then nil else NoUseIsSearchActiveResult,
 		activeTab = UseTabResult1,
 		tabs = UseMemoResult,
 		onTabActivated = UseResult,

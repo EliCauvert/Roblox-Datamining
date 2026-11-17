@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXUnifiedEventStrictPayloads", false)
+﻿return game:DefineFastFlag("AXUnifiedEventStrictPayloads2", false)

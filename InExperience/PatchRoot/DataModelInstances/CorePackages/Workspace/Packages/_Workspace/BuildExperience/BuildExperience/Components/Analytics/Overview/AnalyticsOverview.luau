@@ -6,12 +6,13 @@ local _ = require(BuildExperience.Analytics.AnalyticsPageEvents)
 local AnalyticsWindowModule = require(BuildExperience.Analytics.AnalyticsWindow)
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local FFlagBuildExperienceEventContextTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceEventContextTelemetry)
+local FFlagBuildAnalyticsFunnelTrackingCTAModule = require(BuildExperience.Flags.FFlagBuildAnalyticsFunnelTrackingCTA)
 local AnalyticsOverviewViewModule = require(script.Parent.AnalyticsOverviewView)
 local UseAnalyticsOverviewViewModelModule = require(script.Parent.useAnalyticsOverviewViewModel)
 local UseGamePermissionsModule = require(BuildExperience.useGamePermissions)
 
 return function(p1)
-	-- upvalues: ReactModule (copy), AnalyticsWindowModule (copy), UseAnalyticsOverviewViewModelModule (copy), FFlagBuildExperienceEventContextTelemetryModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), AnalyticsOverviewViewModule (copy), AnalyticsEventContextModule (copy)
+	-- upvalues: ReactModule (copy), AnalyticsWindowModule (copy), UseAnalyticsOverviewViewModelModule (copy), FFlagBuildExperienceEventContextTelemetryModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), AnalyticsOverviewViewModule (copy), FFlagBuildAnalyticsFunnelTrackingCTAModule (copy), AnalyticsEventContextModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(p1.initialWindowId or AnalyticsWindowModule.DEFAULT_WINDOW_ID)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
 	local WindowByIdEntry = AnalyticsWindowModule.WindowById[UseStateResult] or AnalyticsWindowModule.LastWeek
@@ -20,6 +21,7 @@ return function(p1)
 		-- upvalues: p1 (copy)
 		return { placeId = p1.placeId, conversationId = p1.conversationId }
 	end, { p1.placeId, p1.conversationId }) else nil
+	local OnOpenChat = if FFlagBuildCheckGamePermissionsModule and not UseGamePermissionsModule({ universeId = p1.universeId }).canEditOnBuild then nil else p1.onOpenChat
 	local Element = ReactModule.createElement(AnalyticsOverviewViewModule, {
 		overviewTitle = UseAnalyticsOverviewViewModelModuleResult.overviewTitle,
 		keyStatsTitle = UseAnalyticsOverviewViewModelModuleResult.keyStatsTitle,
@@ -35,7 +37,8 @@ return function(p1)
 			-- upvalues: UseStateResult2_1 (copy)
 			UseStateResult2_1(nil)
 		end, {}),
-		onOpenChat = if FFlagBuildCheckGamePermissionsModule and not UseGamePermissionsModule({ universeId = p1.universeId }).canEditOnBuild then nil else p1.onOpenChat,
+		onOpenChat = OnOpenChat,
+		onOpenFunnelChat = if FFlagBuildAnalyticsFunnelTrackingCTAModule then OnOpenChat else nil,
 		layoutOrder = p1.layoutOrder,
 		testId = p1.testId
 	})

@@ -20,19 +20,18 @@ local FFlagLuaAppVideoTileHideCenterPlayButton = require(Parent.SharedFlags).FFl
 local FFlagLuaAppEdpConsoleMediaGalleryVideo = require(Parent.SharedFlags).FFlagLuaAppEdpConsoleMediaGalleryVideo
 local FFlagLuaAppMediaGalleryGamepadSupport = require(Parent.SharedFlags).FFlagLuaAppMediaGalleryGamepadSupport
 local FFlagLuaAppEnableNxMRoduxApportioning = require(Parent.SharedFlags).FFlagLuaAppEnableNxMRoduxApportioning
-local FFlagLuaAppSduiVideoThumbnail = require(Parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
 local FFlagLuaAppHomeMomentVideoFallback = require(Parent.SharedFlags).FFlagLuaAppHomeMomentVideoFallback
 local FFlagLuaAppVideoLoadFailureFallback = require(Parent.SharedFlags).FFlagLuaAppVideoLoadFailureFallback
 local FFlagLuaAppVideoPlayerTrimAndMusic = require(Parent.SharedFlags).FFlagLuaAppVideoPlayerTrimAndMusic
 local VideoPlayerPlaybackEndThresholdInMsRatio = game:DefineFastInt("VideoPlayerPlaybackEndThresholdInMs", 100) / 1000
 
 return function(Image)
-	-- upvalues: FFlagLuaAppVideoPlayerTrimAndMusic (copy), ReactModule (copy), GetVideoEditsModule (copy), FFlagLuaAppEdpMediaGalleryFullScreen (copy), FFlagLuaAppVideoLoadFailureFallback (copy), DiscoveryEventErrorLogger (copy), FFlagLuaAppEdpMediaGalleryAutoAdvance (copy), FFlagLuaAppEdpConsoleMediaGalleryVideo (copy), FFlagLuaAppEnableNxMRoduxApportioning (copy), RunService (copy), ReportWarningFunction (copy), LoggingProtocolModule (copy), VideoLoggerModule (copy), VideoPlayerPlaybackEndThresholdInMsRatio (copy), ResponsiveModule (copy), VideoActions (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), FFlagLuaAppVideoTileDisableActivation (copy), LoadableVideoFrameModule (copy), FFlagLuaAppHomeMomentVideoFallback (copy), FFlagLuaAppSduiVideoThumbnail (copy), FFlagLuaAppVideoTileHideCenterPlayButton (copy), RoundIconButtonModule (copy), VideoPlayerBottomOverlayModule (copy)
+	-- upvalues: FFlagLuaAppVideoPlayerTrimAndMusic (copy), ReactModule (copy), GetVideoEditsModule (copy), FFlagLuaAppEdpMediaGalleryFullScreen (copy), FFlagLuaAppVideoLoadFailureFallback (copy), DiscoveryEventErrorLogger (copy), FFlagLuaAppEdpMediaGalleryAutoAdvance (copy), FFlagLuaAppEdpConsoleMediaGalleryVideo (copy), FFlagLuaAppEnableNxMRoduxApportioning (copy), RunService (copy), ReportWarningFunction (copy), LoggingProtocolModule (copy), VideoLoggerModule (copy), VideoPlayerPlaybackEndThresholdInMsRatio (copy), ResponsiveModule (copy), VideoActions (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), FFlagLuaAppVideoTileDisableActivation (copy), LoadableVideoFrameModule (copy), FFlagLuaAppHomeMomentVideoFallback (copy), FFlagLuaAppVideoTileHideCenterPlayButton (copy), RoundIconButtonModule (copy), VideoPlayerBottomOverlayModule (copy)
 	local v1 = nil
 	local v2 = nil
 	
 	if FFlagLuaAppVideoPlayerTrimAndMusic then
-		v1, v27 = ReactModule.useMemo(function()
+		v1, v26 = ReactModule.useMemo(function()
 			-- upvalues: GetVideoEditsModule (upval), Image (copy)
 			return GetVideoEditsModule.getVideoEdits({
 				trimStartTime = Image.trimStartTime,
@@ -387,7 +386,7 @@ return function(Image)
 			accessContext = if FFlagLuaAppHomeMomentVideoFallback then Image.accessContext else nil,
 			edits = if FFlagLuaAppVideoPlayerTrimAndMusic then v1 else nil,
 			thumbnail = Image.thumbnail,
-			thumbnailComponentOverride = if FFlagLuaAppSduiVideoThumbnail then Image.thumbnailComponentOverride else nil,
+			thumbnailComponentOverride = Image.thumbnailComponentOverride,
 			shouldStartPlayback = Image.shouldStartPlayback and (not FFlagLuaAppVideoPlayerTrimAndMusic or v2),
 			muted = UseStateResult1,
 			looped = Image.looped,
@@ -397,7 +396,7 @@ return function(Image)
 			onVideoLooped = Image.onVideoLooped,
 			onVideoEnded = if FFlagLuaAppEdpMediaGalleryAutoAdvance then Image.onVideoEnded else nil,
 			onVideoLoadFailed = if FFlagLuaAppVideoLoadFailureFallback then UseResult1 else nil,
-			ref = if FFlagLuaAppEdpMediaGalleryAutoAdvance or (FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo or FFlagLuaAppEnableNxMRoduxApportioning) then UseRefResult1 else nil
+			ref = if FFlagLuaAppEdpMediaGalleryAutoAdvance or FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppEdpConsoleMediaGalleryVideo or FFlagLuaAppEnableNxMRoduxApportioning then UseRefResult1 else nil
 		}),
 		PlayButton = if (FFlagLuaAppVideoTileHideCenterPlayButton or FFlagLuaAppEnableNxMRoduxApportioning) and Image.hideCenterPlayButton then nil elseif (FFlagLuaAppEdpMediaGalleryFullScreen or FFlagLuaAppMediaGalleryGamepadSupport) and (UseStateResult and not IsVideoPlaying and (not FFlagLuaAppMediaGalleryGamepadSupport or Callback1 ~= nil)) then ReactModule.createElement(RoundIconButtonModule, {
 			icon = "play-large",

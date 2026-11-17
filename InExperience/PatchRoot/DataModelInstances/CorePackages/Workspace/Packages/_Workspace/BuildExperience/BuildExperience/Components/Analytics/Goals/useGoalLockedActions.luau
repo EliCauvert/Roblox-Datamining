@@ -10,6 +10,7 @@ local GoalLockedActionIdModule = require(BuildExperience.Analytics.Goals.GoalLoc
 local _ = require(BuildExperience.Analytics.Goals.GoalTypes)
 local _ = require(BuildExperience.Chat.chatTypes)
 local FFlagBuildAdsManagerUniverseUrlModule = require(BuildExperience.Flags.FFlagBuildAdsManagerUniverseUrl)
+local FFlagBuildExperienceAdsAndRobuxTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceAdsAndRobuxTelemetry)
 local FFlagBuildExperienceMonetizationNativeUIModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
 local FFlagEnablePaidAdsModule = require(BuildExperience.Flags.FFlagEnablePaidAds)
 local AdCampaignEligibilityUtilsModule = require(BuildExperience.Components.Ads.adCampaignEligibilityUtils)
@@ -27,7 +28,7 @@ local UseExperienceShareFlowModule = require(BuildExperience.utils.useExperience
 local DeveloperProducts = UrlBuilder.fromString("create:dashboard/creations/experiences/{universeId}/monetization/developer-products")
 
 local function useCreateAdAction(p1)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseOpenWebViewFunction (copy), UseGetAdCampaignEligibilityModule (copy), FFlagEnablePaidAdsModule (copy), UseCreateAdCampaignModule (copy), ReactModule (copy), AdCampaignEligibilityUtilsModule (copy), UseGetAdCampaignsModule (copy), AdCampaignScheduleUtilsModule (copy), GetAdsManagerUrlFunction (copy), CreateAdCampaignSheetContainerModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), AdCampaignCreatedToastModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseOpenWebViewFunction (copy), UseGetAdCampaignEligibilityModule (copy), FFlagEnablePaidAdsModule (copy), UseCreateAdCampaignModule (copy), ReactModule (copy), AdCampaignEligibilityUtilsModule (copy), UseGetAdCampaignsModule (copy), AdCampaignScheduleUtilsModule (copy), GetAdsManagerUrlFunction (copy), CreateAdCampaignSheetContainerModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), AdCampaignCreatedToastModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		adsManager = LocalizationStringsModule.ADS_STATS_ADS_MANAGER,
 		createSuccess = LocalizationStringsModule.ADS_STATS_CREATE_SUCCESS
@@ -121,7 +122,7 @@ local function useCreateAdAction(p1)
 		Sheet = ReactModule.createElement(CreateAdCampaignSheetContainerModule, {
 			waitForCreateResult = true,
 			useLocalRunDates = true,
-			universeId = if FFlagBuildAdsManagerUniverseUrlModule then p1 else nil,
+			universeId = if FFlagBuildAdsManagerUniverseUrlModule or FFlagBuildExperienceAdsAndRobuxTelemetryModule then p1 else nil,
 			isOpen = UseStateResult,
 			onClose = UseResult1,
 			onCreate = UseResult2,

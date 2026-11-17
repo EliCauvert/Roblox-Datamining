@@ -26,6 +26,14 @@ return function(p1)
 				
 				return
 			end
+		end,
+		followDrag = function(p2)
+			-- upvalues: VisibilityControl (copy), IsEnabled (copy)
+			local OnTouchMovedFunction: (any) -> () = VisibilityControl.onTouchMoved
+			
+			if IsEnabled and OnTouchMovedFunction ~= nil then
+				OnTouchMovedFunction(p2)
+			end
 		end
 	}
 end

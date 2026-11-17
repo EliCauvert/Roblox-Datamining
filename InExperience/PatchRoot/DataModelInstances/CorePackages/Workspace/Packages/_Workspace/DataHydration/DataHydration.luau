@@ -35,6 +35,7 @@ return {
 	UserSettings = require(script.UserSettings),
 	UserProfile = require(script.UserProfile),
 	Community = require(script.Community),
+	Group = require(script.Group),
 	CommunityUserMembership = require(script.CommunityUserMembership),
 	NotificationBadge = if SharedFlagsModule.FFlagSduiNotificationBadgeHydration then NotificationBadgeModule else nil,
 	LeaderboardStats = if FFlagSduiLeaderboardComponent then LeaderboardStatsModule else nil,

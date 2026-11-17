@@ -24,10 +24,7 @@ if ServerUtilModule.getFFlagServerCoreScriptSourceCode() then
 end
 require(RobloxGui.Modules.Server.RemoteAllowList)()
 ScriptContext:AddCoreScriptLocal("ServerCoreScripts/OpenCloud/OpenCloudV2", script.Parent)
-
-if game:DefineFastFlag("OpenCloudClientLibraryCoreScriptEnabled", false) then
-	ScriptContext:AddCoreScriptLocal("ServerCoreScripts/OpenCloud/OpenCloudClientLibraryCoreScript", script.Parent)
-end
+ScriptContext:AddCoreScriptLocal("ServerCoreScripts/OpenCloud/OpenCloudClientLibraryCoreScript", script.Parent)
 ScriptContext:AddCoreScriptLocal("ServerCoreScripts/ServerInGameMenu", script.Parent)
 ScriptContext:AddCoreScriptLocal("ServerCoreScripts/ServerSocialScript", script.Parent)
 

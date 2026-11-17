@@ -1,13 +1,22 @@
 ﻿local CorePackages = game:GetService("CorePackages")
+local LocalizationService = game:GetService("LocalizationService")
+local Modules = game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules
 local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local Localization = require(CorePackages.Workspace.Packages.InExperienceLocales).Localization
+local LocalizationProvider = require(CorePackages.Workspace.Packages.Localization).LocalizationProvider
+local SettingsPageFactoryModule = require(Modules.Settings.SettingsPageFactory)
 local EnabledResult = require(CorePackages.Workspace.Packages.Chrome).Enabled()
 local BuilderIconsModule = require(CorePackages.Packages.BuilderIcons)
 local Uiblox = BuilderIconsModule.Migration.uiblox
 local FoundationModule = require(CorePackages.Packages.Foundation)
+local ReactModule = require(CorePackages.Packages.React)
+local ReactRobloxModule = require(CorePackages.Packages.ReactRoblox)
+local UtilsModule = require(Modules.Settings.Integrations.Utils)
+local GalleryUnavailableModule = require(Modules.Settings.Components.GalleryUnavailable)
 local GetFFlagFixIGMTabTransitionsModule = require(script.Parent.Parent.Flags.GetFFlagFixIGMTabTransitions)
 local FFlagIGMChangeCapturesToGalleryModule = require(script.Parent.Parent.Flags.FFlagIGMChangeCapturesToGallery)
 local IsSideSheetEnabledModule = require(CorePackages.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
-local NewPage = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Settings.SettingsPageFactory):CreateNewPage()
+local NewPage = SettingsPageFactoryModule:CreateNewPage()
 NewPage.TabHeader.Name = "CapturesTab"
 local Config = if require(script.Parent.Parent.Flags.FFlagIGMChangeGalleryHeaderIcon) then {
 	name = "image",
@@ -32,6 +41,28 @@ local UIPadding = NewPage.Page:FindFirstChildWhichIsA("UIPadding")
 if UIPadding then
 	UIPadding:Destroy()
 end
+function NewPage:ShowUnavailable(p1, Frame: Frame)
+	-- upvalues: NewPage (copy), ReactRobloxModule (copy), ReactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), FoundationModule (copy), UtilsModule (copy), GalleryUnavailableModule (copy)
+	NewPage:SetHub(p1)
+	local YDelta = Frame.AbsoluteSize.Y - 20
+	NewPage.Page.Size = UDim2.new(1, 0, 0, YDelta)
+	Frame:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
+		-- upvalues: YDelta (ref), Frame (copy), NewPage (upval)
+		YDelta = Frame.AbsoluteSize.Y - 20
+		NewPage.Page.Size = UDim2.new(1, 0, 0, YDelta)
+	end)
+	ReactRobloxModule.createRoot(NewPage.Page):render(ReactModule.createElement(LocalizationProvider, {
+		localization = Localization.new(LocalizationService.RobloxLocaleId)
+	}, {
+		Foundation = ReactModule.createElement(FoundationModule.FoundationProvider, {
+			colorMode = FoundationModule.Enums.ColorMode.Dark,
+			device = UtilsModule.getDeviceType()
+		}, {
+			GalleryUnavailable = ReactModule.createElement(GalleryUnavailableModule)
+		})
+	}))
+end
+
 function NewPage:ConnectHubToApp(p1, Frame: Frame, p2)
 	-- upvalues: NewPage (copy), GetFFlagFixIGMTabTransitionsModule (copy)
 	NewPage:SetHub(p1)

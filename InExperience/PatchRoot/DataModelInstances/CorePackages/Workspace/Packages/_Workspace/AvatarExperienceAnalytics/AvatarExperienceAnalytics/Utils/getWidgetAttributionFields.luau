@@ -1,4 +1,6 @@
-﻿local _ = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.AvatarExperienceCommon)
+﻿local AvatarExperienceAnalytics = script:FindFirstAncestor("AvatarExperienceAnalytics")
+local _ = require(AvatarExperienceAnalytics.Parent.AvatarExperienceCommon)
+local _ = require(AvatarExperienceAnalytics.Generated.UnifiedEventTypes)
 
 return function(p1)
 	return if p1 == nil or p1.widgetType == nil then nil else {

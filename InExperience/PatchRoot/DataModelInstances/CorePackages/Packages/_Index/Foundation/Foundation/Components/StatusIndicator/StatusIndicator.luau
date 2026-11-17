@@ -3,7 +3,6 @@ local Parent = Foundation.Parent
 local DashModule = require(Parent.Dash)
 local ReactModule = require(Parent.React)
 local ReactIsModule = require(Parent.ReactIs)
-local FlagsModule = require(Foundation.Utility.Flags)
 local TextModule = require(Foundation.Components.Text)
 local _ = require(Foundation.Components.Types)
 local ViewModule = require(Foundation.Components.View)
@@ -25,7 +24,7 @@ local config = {
 }
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
-	-- upvalues: WithDefaultsModule (copy), config (copy), StatusIndicatorShapeModule (copy), DevAssertModule (copy), ValidNumericVariantsModule (copy), DashModule (copy), UseTokensModule (copy), UseStatusIndicatorVariantsModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), TextModule (copy), ReactIsModule (copy), FlagsModule (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), StatusIndicatorShapeModule (copy), DevAssertModule (copy), ValidNumericVariantsModule (copy), DashModule (copy), UseTokensModule (copy), UseStatusIndicatorVariantsModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), TextModule (copy), ReactIsModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local Circle = if WithDefaultsModuleResult.value then StatusIndicatorShapeModule.Circle else WithDefaultsModuleResult.shape
 	
@@ -35,9 +34,8 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 			return ValidNumericVariantsModule[p2] == true
 		end), ",")}`)
 	end
-	local UseTokensModuleResult = UseTokensModule()
 	local HasValue = WithDefaultsModuleResult.value ~= nil
-	local UseStatusIndicatorVariantsModuleResult = UseStatusIndicatorVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.variant, HasValue, Circle, WithDefaultsModuleResult.size, WithDefaultsModuleResult.mask)
+	local UseStatusIndicatorVariantsModuleResult = UseStatusIndicatorVariantsModule(UseTokensModule(), WithDefaultsModuleResult.variant, HasValue, Circle, WithDefaultsModuleResult.size, WithDefaultsModuleResult.mask)
 	local UseResult = ReactModule.useCallback(function(p2): string
 		-- upvalues: WithDefaultsModuleResult (copy)
 		return if WithDefaultsModuleResult.max and WithDefaultsModuleResult.max < p2 then `{WithDefaultsModuleResult.max}+` else tostring(p2)
@@ -53,14 +51,10 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 		Text = if HasValue and UseStatusIndicatorVariantsModuleResult.content.style then ReactModule.createElement(TextModule, {
 			Text = if ReactIsModule.isBinding(WithDefaultsModuleResult.value) then WithDefaultsModuleResult.value:map(UseResult) else UseResult(WithDefaultsModuleResult.value),
 			textStyle = UseStatusIndicatorVariantsModuleResult.content.style,
-			fontStyle = if FlagsModule.FoundationStatusIndicatorDesignUpdate then {
+			fontStyle = {
 				Font = UseStatusIndicatorVariantsModuleResult.content.font,
 				FontSize = UseStatusIndicatorVariantsModuleResult.content.typography.FontSize,
 				LineHeight = UseStatusIndicatorVariantsModuleResult.content.typography.LineHeight
-			} else {
-				Font = UseStatusIndicatorVariantsModuleResult.content.font,
-				FontSize = UseTokensModuleResult.Typography.LabelSmall.FontSize,
-				LineHeight = UseTokensModuleResult.Typography.LabelSmall.LineHeight
 			},
 			tag = UseStatusIndicatorVariantsModuleResult.content.tag,
 			testId = `{WithDefaultsModuleResult.testId}--text`

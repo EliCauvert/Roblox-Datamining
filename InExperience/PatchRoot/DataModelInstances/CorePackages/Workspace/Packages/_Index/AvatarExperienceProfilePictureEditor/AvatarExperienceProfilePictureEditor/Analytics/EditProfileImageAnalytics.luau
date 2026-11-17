@@ -8,9 +8,7 @@ local UnifiedEventLogEnums = AvatarExperienceAnalyticsModule.UnifiedEventLogEnum
 local UnifiedLoggingElementNameEnums = AvatarExperienceAnalyticsModule.Enums.UnifiedLoggingElementNameEnums
 local UnifiedLoggingSurface = require(Parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
 local Constants = AvatarExperienceAnalyticsModule.Constants
-local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
-local FFlagEditProfileImageV2Telemetry = require(Parent.SharedFlags).FFlagEditProfileImageV2Telemetry
-local FFlagAXUnifiedEventStrictPayloads = AvatarExperienceFlagsModule.FFlagAXUnifiedEventStrictPayloads
+local FFlagAXUnifiedEventStrictPayloads = require(Parent.AvatarExperienceFlags).FFlagAXUnifiedEventStrictPayloads
 local config = {
 	confirm = "R15_UPGRADE_CONFIRM",
 	cancel = "R15_UPGRADE_CANCEL"
@@ -48,22 +46,17 @@ end
 
 return {
 	logPageView = function(p1)
-		-- upvalues: FFlagEditProfileImageV2Telemetry (copy), SendUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), FFlagAXUnifiedEventStrictPayloads (copy), UnifiedLoggingElementNameEnums (copy), HttpService (copy), SendAXCounterV2Function (copy)
-		if FFlagEditProfileImageV2Telemetry then
-			SendUnifiedEventLogFunction({
-				action = UnifiedEventLogEnums.MarketplaceUnifiedAction.PAGE_VIEW,
-				surface = UnifiedLoggingSurface.EDIT_PROFILE_IMAGE,
-				elementName = if FFlagAXUnifiedEventStrictPayloads then UnifiedLoggingElementNameEnums.EDIT_PROFILE_IMAGE else nil,
-				elementMetadata = HttpService:JSONEncode({ mode = p1.mode })
-			})
-			SendAXCounterV2Function("EditProfileImagePageView", { mode = p1.mode })
-			
-			return
-		end
+		-- upvalues: SendUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), FFlagAXUnifiedEventStrictPayloads (copy), UnifiedLoggingElementNameEnums (copy), HttpService (copy), SendAXCounterV2Function (copy)
+		SendUnifiedEventLogFunction({
+			action = UnifiedEventLogEnums.MarketplaceUnifiedAction.PAGE_VIEW,
+			surface = UnifiedLoggingSurface.EDIT_PROFILE_IMAGE,
+			elementName = if FFlagAXUnifiedEventStrictPayloads then UnifiedLoggingElementNameEnums.EDIT_PROFILE_IMAGE else nil,
+			elementMetadata = HttpService:JSONEncode({ mode = p1.mode })
+		})
+		SendAXCounterV2Function("EditProfileImagePageView", { mode = p1.mode })
 	end,
 	logSave = function(p1)
-		-- upvalues: FFlagEditProfileImageV2Telemetry (copy), SendAXCounterV2Function (copy), SendUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), buildSaveElementMetadata (copy), ReportAvatarEventCounterV1Function (copy), Constants (copy)
-		if not FFlagEditProfileImageV2Telemetry then return end
+		-- upvalues: SendAXCounterV2Function (copy), SendUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), buildSaveElementMetadata (copy), ReportAvatarEventCounterV1Function (copy), Constants (copy)
 		SendAXCounterV2Function("EditProfileImageSave", {
 			mode = p1.mode,
 			is_plus_subscriber = if p1.isPlusSubscriber then "true" else "false",
@@ -83,66 +76,46 @@ return {
 		end
 	end,
 	logSubscribe = function(Input)
-		-- upvalues: FFlagEditProfileImageV2Telemetry (copy), SendUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), buildSubscribeElementMetadata (copy), SendAXCounterV2Function (copy)
-		if FFlagEditProfileImageV2Telemetry then
-			SendUnifiedEventLogFunction({
-				elementName = "SUBSCRIBE",
-				action = UnifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
-				surface = UnifiedLoggingSurface.EDIT_PROFILE_IMAGE,
-				elementMetadata = buildSubscribeElementMetadata(Input)
-			})
-			SendAXCounterV2Function("EditProfileImageSubscribe", { mode = Input.mode, source = tostring(Input.source) })
-			
-			return
-		end
+		-- upvalues: SendUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), buildSubscribeElementMetadata (copy), SendAXCounterV2Function (copy)
+		SendUnifiedEventLogFunction({
+			elementName = "SUBSCRIBE",
+			action = UnifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
+			surface = UnifiedLoggingSurface.EDIT_PROFILE_IMAGE,
+			elementMetadata = buildSubscribeElementMetadata(Input)
+		})
+		SendAXCounterV2Function("EditProfileImageSubscribe", { mode = Input.mode, source = tostring(Input.source) })
 	end,
 	logClose = function(p1)
-		-- upvalues: FFlagEditProfileImageV2Telemetry (copy), SendUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), HttpService (copy), SendAXCounterV2Function (copy)
-		if FFlagEditProfileImageV2Telemetry then
-			SendUnifiedEventLogFunction({
-				elementName = "CLOSE",
-				action = UnifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
-				surface = UnifiedLoggingSurface.EDIT_PROFILE_IMAGE,
-				elementMetadata = HttpService:JSONEncode({ mode = p1.mode, active_view = p1.activeView })
-			})
-			SendAXCounterV2Function("EditProfileImageClose", { mode = p1.mode })
-			
-			return
-		end
+		-- upvalues: SendUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), HttpService (copy), SendAXCounterV2Function (copy)
+		SendUnifiedEventLogFunction({
+			elementName = "CLOSE",
+			action = UnifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
+			surface = UnifiedLoggingSurface.EDIT_PROFILE_IMAGE,
+			elementMetadata = HttpService:JSONEncode({ mode = p1.mode, active_view = p1.activeView })
+		})
+		SendAXCounterV2Function("EditProfileImageClose", { mode = p1.mode })
 	end,
 	logBack = function(p1)
-		-- upvalues: FFlagEditProfileImageV2Telemetry (copy), SendUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), HttpService (copy), SendAXCounterV2Function (copy)
-		if FFlagEditProfileImageV2Telemetry then
-			SendUnifiedEventLogFunction({
-				elementName = "BACK",
-				action = UnifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
-				surface = UnifiedLoggingSurface.EDIT_PROFILE_IMAGE,
-				elementMetadata = HttpService:JSONEncode({
-					mode = p1.mode,
-					active_view = p1.activeView,
-					outcome = p1.outcome
-				})
+		-- upvalues: SendUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), HttpService (copy), SendAXCounterV2Function (copy)
+		SendUnifiedEventLogFunction({
+			elementName = "BACK",
+			action = UnifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
+			surface = UnifiedLoggingSurface.EDIT_PROFILE_IMAGE,
+			elementMetadata = HttpService:JSONEncode({
+				mode = p1.mode,
+				active_view = p1.activeView,
+				outcome = p1.outcome
 			})
-			SendAXCounterV2Function("EditProfileImageBack", { mode = p1.mode, outcome = tostring(p1.outcome) })
-			
-			return
-		end
+		})
+		SendAXCounterV2Function("EditProfileImageBack", { mode = p1.mode, outcome = tostring(p1.outcome) })
 	end,
 	logFetchFailure = function(p1)
-		-- upvalues: FFlagEditProfileImageV2Telemetry (copy), SendAXCounterV2Function (copy)
-		if FFlagEditProfileImageV2Telemetry then
-			SendAXCounterV2Function("EditProfileImageFetchFailure", { asset_type = tostring(p1.assetType) })
-			
-			return
-		end
+		-- upvalues: SendAXCounterV2Function (copy)
+		SendAXCounterV2Function("EditProfileImageFetchFailure", { asset_type = tostring(p1.assetType) })
 	end,
 	logRetry = function(p1)
-		-- upvalues: FFlagEditProfileImageV2Telemetry (copy), SendAXCounterV2Function (copy)
-		if FFlagEditProfileImageV2Telemetry then
-			SendAXCounterV2Function("EditProfileImageRetry", { mode = p1.mode, asset_type = tostring(p1.assetType) })
-			
-			return
-		end
+		-- upvalues: SendAXCounterV2Function (copy)
+		SendAXCounterV2Function("EditProfileImageRetry", { mode = p1.mode, asset_type = tostring(p1.assetType) })
 	end,
 	logR15UpgradePromptShown = function()
 		-- upvalues: SendUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), SendAXCounterV2Function (copy)

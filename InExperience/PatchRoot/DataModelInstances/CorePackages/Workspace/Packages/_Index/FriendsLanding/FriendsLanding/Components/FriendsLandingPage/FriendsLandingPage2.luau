@@ -2,6 +2,7 @@
 local DependenciesModule = require(FriendsLanding.dependencies)
 local Parent = FriendsLanding.Parent
 local ReactModule = require(Parent.React)
+local AppCommonLibModule = require(Parent.AppCommonLib)
 local RoactModule = require(Parent.Roact)
 local UIBlox = DependenciesModule.UIBlox
 local UseNavigationFunction = require(Parent.Navigation).useNavigation
@@ -39,6 +40,7 @@ local FriendTileModule = require(FriendsLanding.Components.FriendTile)
 local EmptyResultsViewModule = require(FriendsLanding.Components.EmptyResultsView)
 local NoFriendsViewModule = require(FriendsLanding.Components.NoFriendsView)
 local IsFromConnectionsHubModule = require(FriendsLanding.Navigator.isFromConnectionsHub)
+local TrustedFriendCandidatesHostModule = require(FriendsLanding.Components.TrustedFriendCandidatesHost)
 local AmpApiProvider = require(Parent.AmpUpsell).AmpApiProvider
 local AccessResponseEnum = require(Parent.AmpUpsell).AmpEnums.AccessResponseEnum
 local Button = UIBlox.App.Button.Button
@@ -55,6 +57,7 @@ local FFlagFixScalingOnFriendsLandingModule = require(FriendsLanding.Flags.FFlag
 local FFlagFriendsPageUserListCtaEnabledModule = require(FriendsLanding.Flags.FFlagFriendsPageUserListCtaEnabled)
 local FriendsLandingCtaConfigModule = if FFlagFriendsPageUserListCtaEnabledModule then require(FriendsLanding.Common.FriendsLandingCtaConfig) else nil
 local FFlagConnectionManagementChips = require(Parent.SharedFlags).FFlagConnectionManagementChips
+local FFlagLogFriendsFilterPillTypeModule = require(FriendsLanding.Flags.FFlagLogFriendsFilterPillType)
 local FFlagCreateConnectionsHub = require(Parent.SharedFlags).FFlagCreateConnectionsHub
 local FFlagAppThemeHalloween2026FriendsBackground = require(Parent.SharedFlags).FFlagAppThemeHalloween2026FriendsBackground
 local UseThemeBackgroundFunction = require(Parent.ThemeBackground).useThemeBackground
@@ -64,10 +67,12 @@ local FFlagFriendsPageUserListEnabled = require(Parent.SharedFlags).FFlagFriends
 local FFlagExtendScrollingFramesBySafeInsets = require(Parent.SharedFlags).FFlagExtendScrollingFramesBySafeInsets
 local FStringIsUserInTcEligibleCountryAmpFeature = require(Parent.SharedFlags).FStringIsUserInTcEligibleCountryAmpFeature
 local FStringCanAccessTrustedContactsAmpNameSpace = require(Parent.SharedFlags).FStringCanAccessTrustedContactsAmpNameSpace
-local FixFriendsLandingRightMargin = game:DefineFastFlag("FixFriendsLandingRightMargin", false)
+local FFlagTrustedFriendCandidatesSection = require(Parent.SharedFlags).FFlagTrustedFriendCandidatesSection
+local FFlagTrustedFriendCandidatesSectionIxpEnabledModule = require(FriendsLanding.Flags.FFlagTrustedFriendCandidatesSectionIxpEnabled)
+local FFlagFriendsLandingRefreshKeepsFilter = require(Parent.SharedFlags).FFlagFriendsLandingRefreshKeepsFilter
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), FriendsLandingContextModule (copy), FriendsLandingAnalyticsModule (copy), UseNavigationFunction (copy), UseDesignTokensFunction (copy), UseUiModeInfoFunction (copy), FFlagFixScalingOnFriendsLandingModule (copy), UseTokensFunction (copy), UseFocusGuiObjectFunction (copy), GetPageMarginFunction (copy), UseScreenSizeFunction (copy), UiMode (copy), FocusNavigationUtilsModule (copy), InputHandlersModule (copy), AppPage (copy), ReactFocusNavigationModule (copy), FocusNavigationEventNameEnum (copy), UseTextSizeOffsetFunction (copy), FFlagConnectionManagementChips (copy), AmpApiProvider (copy), FStringIsUserInTcEligibleCountryAmpFeature (copy), FStringCanAccessTrustedContactsAmpNameSpace (copy), AccessResponseEnum (copy), FFlagFriendsPageAlwaysOpenPPV (copy), ConvertUserPresenceTypeToStringFunction (copy), EnumScreensModule (copy), ButtonClickEventsModule (copy), ConstantsModule (copy), FriendTileModule (copy), DependencyArrayFunction (copy), OnFewestInteractionsSelection (copy), FilterStatesModule (copy), FFlagCreateConnectionsHub (copy), GridMetrics (copy), UseAnimatedScrollToSelectionFunction (copy), FFlagExtendScrollingFramesBySafeInsets (copy), UseSignalStateFunction (copy), DisplayModule (copy), IsFromConnectionsHubModule (copy), FFlagAppThemeHalloween2026FriendsBackground (copy), UseThemeBackgroundFunction (copy), FFlagFixFriendsListGapInConnectionsHubModule (copy), UseFocusOnMountFunction (copy), FFlagFriendsPageUserListEnabled (copy), RoactModule (copy), HorizontalPageMargin (copy), FixFriendsLandingRightMargin (copy), RefreshScrollingFrame (copy), FilterByButtonModule (copy), EmptyResultsViewModule (copy), NoFriendsViewModule (copy), UserListLayoutAdaptor (copy), LayoutMode (copy), FFlagFriendsPageUserListCtaEnabledModule (copy), FriendsLandingCtaConfigModule (ref), CollectionGrid (copy), Button (copy), ButtonType (copy)
+	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), FriendsLandingContextModule (copy), FriendsLandingAnalyticsModule (copy), UseNavigationFunction (copy), UseDesignTokensFunction (copy), UseUiModeInfoFunction (copy), FFlagFixScalingOnFriendsLandingModule (copy), UseTokensFunction (copy), UseFocusGuiObjectFunction (copy), GetPageMarginFunction (copy), UseScreenSizeFunction (copy), UiMode (copy), FocusNavigationUtilsModule (copy), InputHandlersModule (copy), AppPage (copy), ReactFocusNavigationModule (copy), FocusNavigationEventNameEnum (copy), UseTextSizeOffsetFunction (copy), FFlagConnectionManagementChips (copy), AmpApiProvider (copy), FStringIsUserInTcEligibleCountryAmpFeature (copy), FStringCanAccessTrustedContactsAmpNameSpace (copy), AccessResponseEnum (copy), FFlagFriendsPageAlwaysOpenPPV (copy), ConvertUserPresenceTypeToStringFunction (copy), EnumScreensModule (copy), ButtonClickEventsModule (copy), ConstantsModule (copy), FriendTileModule (copy), DependencyArrayFunction (copy), OnFewestInteractionsSelection (copy), FFlagLogFriendsFilterPillTypeModule (copy), FFlagTrustedFriendCandidatesSection (copy), FFlagTrustedFriendCandidatesSectionIxpEnabledModule (copy), FilterStatesModule (copy), TrustedFriendCandidatesHostModule (copy), FFlagFriendsLandingRefreshKeepsFilter (copy), AppCommonLibModule (copy), FFlagCreateConnectionsHub (copy), GridMetrics (copy), UseAnimatedScrollToSelectionFunction (copy), FFlagExtendScrollingFramesBySafeInsets (copy), UseSignalStateFunction (copy), DisplayModule (copy), IsFromConnectionsHubModule (copy), FFlagAppThemeHalloween2026FriendsBackground (copy), UseThemeBackgroundFunction (copy), FFlagFixFriendsListGapInConnectionsHubModule (copy), UseFocusOnMountFunction (copy), FFlagFriendsPageUserListEnabled (copy), RoactModule (copy), HorizontalPageMargin (copy), RefreshScrollingFrame (copy), FilterByButtonModule (copy), EmptyResultsViewModule (copy), NoFriendsViewModule (copy), UserListLayoutAdaptor (copy), LayoutMode (copy), FFlagFriendsPageUserListCtaEnabledModule (copy), FriendsLandingCtaConfigModule (ref), CollectionGrid (copy), Button (copy), ButtonType (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		pageError = "CommonUI.Messages.Response.PageError",
 		successText = "Feature.Friends.Action.FriendRemoved",
@@ -92,11 +97,11 @@ return function(p1)
 	end)))
 	local UseTextSizeOffsetResult: number = UseTextSizeOffsetFunction()
 	local NewUseTextSizeOffsetResult = (if IsUiModeMatch then UseDesignTokensResult.Size.Size_1600 else UseDesignTokensResult.Size.Size_2000) + UseTextSizeOffsetResult * 3
-	local v1 = nil
+	local Enabled = nil
 	local Callback = nil
 	
 	if FFlagConnectionManagementChips then
-		v1, Callback = ReactModule.useState(false)
+		Enabled, Callback = ReactModule.useState(false)
 	end
 	ReactModule.useEffect(function()
 		-- upvalues: UseContextResult1 (copy), FFlagConnectionManagementChips (upval), AmpApiProvider (upval), FStringIsUserInTcEligibleCountryAmpFeature (upval), FStringCanAccessTrustedContactsAmpNameSpace (upval), AccessResponseEnum (upval), Callback (ref)
@@ -176,16 +181,38 @@ return function(p1)
 			friendCount = p1.totalFriendCount
 		})
 	end, DependencyArrayFunction(UseNavigationResult, UseContextResult1))
-	local UseResult5 = if FFlagConnectionManagementChips then ReactModule.useCallback(function(p2)
-		-- upvalues: UseContextResult1 (copy), ButtonClickEventsModule (upval), UseContextResult (copy)
-		UseContextResult1:buttonClick(ButtonClickEventsModule.FriendFilterPill)
-		UseContextResult.setFilterKeys(p2)
+	local UseResult5 = if FFlagConnectionManagementChips then ReactModule.useCallback(function(Filter)
+		-- upvalues: FFlagLogFriendsFilterPillTypeModule (upval), UseContextResult1 (copy), ButtonClickEventsModule (upval), UseContextResult (copy)
+		if FFlagLogFriendsFilterPillTypeModule then
+			UseContextResult1:buttonClick(ButtonClickEventsModule.FriendFilterPill, { filter = Filter })
+		else
+			UseContextResult1:buttonClick(ButtonClickEventsModule.FriendFilterPill)
+		end
+		UseContextResult.setFilterKeys(Filter)
 	end, DependencyArrayFunction(UseContextResult1, UseContextResult.setFilterKeys)) else nil
+	local UseMemoResult = if FFlagTrustedFriendCandidatesSection or FFlagTrustedFriendCandidatesSectionIxpEnabledModule then ReactModule.useMemo(function(): boolean
+		-- upvalues: UseContextResult (copy), FilterStatesModule (upval), p1 (copy), Enabled (ref)
+		return UseContextResult.filter == FilterStatesModule.Trusted and (p1.totalFriendCount or 0) > 0 and Enabled == true
+	end, { UseContextResult.filter, p1.totalFriendCount, Enabled }) else nil
+	
+	if FFlagTrustedFriendCandidatesSectionIxpEnabledModule then
+		TrustedFriendCandidatesHostModule.useTrustedFriendCandidatesExposureLogging(UseMemoResult)
+	end
+	local UseMemoResult1 = if FFlagFriendsLandingRefreshKeepsFilter and FFlagTrustedFriendCandidatesSection then ReactModule.useMemo(function()
+		-- upvalues: AppCommonLibModule (upval)
+		return AppCommonLibModule.Signal.new()
+	end, {}) else nil
 	local UseResult6 = ReactModule.useCallback(function()
-		-- upvalues: UseContextResult1 (copy), UseContextResult (copy), FilterStatesModule (upval), UseLocalizationResult (copy)
+		-- upvalues: UseContextResult1 (copy), FFlagFriendsLandingRefreshKeepsFilter (upval), UseMemoResult1 (copy), UseContextResult (copy), FilterStatesModule (upval), UseLocalizationResult (copy)
 		UseContextResult1:pageLoaded()
-		UseContextResult.setFilterKeys(FilterStatesModule.All)
 		
+		if FFlagFriendsLandingRefreshKeepsFilter then
+			if UseMemoResult1 then
+				UseMemoResult1:fire()
+			end
+		else
+			UseContextResult.setFilterKeys(FilterStatesModule.All)
+		end
 		return UseContextResult.refreshPage({
 			errorMessage = UseLocalizationResult.pageError,
 			onResolve = function()
@@ -193,7 +220,7 @@ return function(p1)
 				UseContextResult1:pageLoadedWithArgs()
 			end
 		})
-	end, DependencyArrayFunction(UseContextResult.refreshPage, UseLocalizationResult, UseContextResult1, UseContextResult.setFilterKeys))
+	end, DependencyArrayFunction(UseContextResult.refreshPage, UseLocalizationResult, UseContextResult1, UseContextResult.setFilterKeys, UseMemoResult1))
 	local UseResult7 = ReactModule.useCallback(function()
 		-- upvalues: UseContextResult1 (copy), ButtonClickEventsModule (upval), EnumScreensModule (upval), FFlagCreateConnectionsHub (upval), UseNavigationResult (copy), AppPage (upval)
 		UseContextResult1:buttonClick(ButtonClickEventsModule.AddFriendsNoFriendsEmptyView)
@@ -233,14 +260,14 @@ return function(p1)
 		}
 		GridHorizontalSpacing = 12
 	end
-	local UseMemoResult = ReactModule.useMemo(function()
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: GridMetrics (upval), GridViewItemMetrics (ref)
 		return GridMetrics.makeCustomMetricsGetter(GridViewItemMetrics)
 	end, { GridViewItemMetrics })
-	local UseMemoResult1 = ReactModule.useMemo(function()
-		-- upvalues: UseMemoResult (copy), UseStateResult (copy), GridHorizontalSpacing (ref)
-		return UseMemoResult(UseStateResult, GridHorizontalSpacing)
-	end, { UseMemoResult })
+	local UseMemoResult3 = ReactModule.useMemo(function()
+		-- upvalues: UseMemoResult2 (copy), UseStateResult (copy), GridHorizontalSpacing (ref)
+		return UseMemoResult2(UseStateResult, GridHorizontalSpacing)
+	end, { UseMemoResult2 })
 	local UseResult9 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(p2.X)
@@ -248,10 +275,10 @@ return function(p1)
 	local UseRefResult = ReactModule.useRef({})
 	local UseAnimatedScrollToSelectionResult, UseAnimatedScrollToSelectionResult2 = UseAnimatedScrollToSelectionFunction(Enum.ScrollingDirection.Y, 0, UseDesignTokensResult.Size.Size_2000, UseDesignTokensResult.LuaApps.App.Page.ScrollAnimationConfig)
 	local UseSignalStateResult = if FFlagExtendScrollingFramesBySafeInsets then UseSignalStateFunction(DisplayModule.GetDisplayStore().getDeviceSafePadding) else nil
-	local YOffset1 = (if IsUiModeMatch then if IsTotalFriendCountMatch or IsTotalFriendCountAbove or IsCursor then 8 else 1000 else 8) + (if FFlagExtendScrollingFramesBySafeInsets then UseSignalStateResult.bottom else 0)
+	local YOffset = (if IsUiModeMatch then if IsTotalFriendCountMatch or IsTotalFriendCountAbove or IsCursor then 8 else 1000 else 8) + (if FFlagExtendScrollingFramesBySafeInsets then UseSignalStateResult.bottom else 0)
 	local IsFromConnectionsHubModule1 = FFlagCreateConnectionsHub and IsFromConnectionsHubModule(UseNavigationResult)
 	local HasUseThemeBackgroundResult: boolean = if FFlagAppThemeHalloween2026FriendsBackground then UseThemeBackgroundFunction() ~= nil else false
-	local YOffset = -(if FFlagFixFriendsListGapInConnectionsHubModule then 0 else ConstantsModule.TOP_BAR_HEIGHT) + (if FFlagExtendScrollingFramesBySafeInsets then UseSignalStateResult.bottom else 0)
+	local YOffset1 = -(if FFlagFixFriendsListGapInConnectionsHubModule then 0 else ConstantsModule.TOP_BAR_HEIGHT) + (if FFlagExtendScrollingFramesBySafeInsets then UseSignalStateResult.bottom else 0)
 	local UseFocusOnMountResult = UseFocusOnMountFunction()
 	local UseResult10 = if FFlagFriendsPageUserListEnabled then ReactModule.useCallback(function(CreateRow, User, Index)
 		-- upvalues: ReactModule (upval), FriendTileModule (upval), UseResult1 (copy), PageLoadingTimeReport (copy)
@@ -273,11 +300,11 @@ return function(p1)
 		HorizontalPageMargin = ReactModule.createElement(HorizontalPageMargin, { backgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
 			Padding = ReactModule.createElement("UIPadding", {
 				PaddingLeft = UDim.new(0, PageMargin),
-				PaddingRight = if FixFriendsLandingRightMargin then UDim.new(0, PageMargin) else nil
+				PaddingRight = UDim.new(0, PageMargin)
 			}),
 			scrollView = ReactModule.createElement(RefreshScrollingFrame, {
 				scrollingElementProps = {
-					Size = UDim2.new(1, 0, 1, YOffset),
+					Size = UDim2.new(1, 0, 1, YOffset1),
 					BackgroundTransparency = 1,
 					ScrollingDirection = Enum.ScrollingDirection.Y,
 					ScrollBarThickness = 0,
@@ -309,7 +336,7 @@ return function(p1)
 					isDisabled = TotalFriendCount == 0,
 					onActivated = if FFlagConnectionManagementChips then UseResult5 else UseResult4,
 					maxWidth = if FFlagConnectionManagementChips then 640 else nil,
-					canAccessTrustedContacts = if FFlagConnectionManagementChips then v1 else nil
+					canAccessTrustedContacts = if FFlagConnectionManagementChips then Enabled else nil
 				}),
 				NoResultsView = if IsTotalFriendCountAbove then ReactModule.createElement(EmptyResultsViewModule, { layoutOrder = 6 }) else nil,
 				NoFriendsView = if IsTotalFriendCountMatch then ReactModule.createElement(NoFriendsViewModule, {
@@ -335,11 +362,12 @@ return function(p1)
 					verticalScrollingFrameRef = UseRefResult,
 					renderItem = UseResult2,
 					getItemHeight = UseResult3,
-					numColumns = UseMemoResult1.itemsPerRow,
+					numColumns = UseMemoResult3.itemsPerRow,
 					columnGap = GridHorizontalSpacing,
 					verticalPadding = VerticalPadding,
 					onContainerSizeChanged = UseResult9
 				}),
+				TrustedFriendCandidatesSection = if FFlagTrustedFriendCandidatesSection and UseMemoResult then ReactModule.createElement(TrustedFriendCandidatesHostModule.TrustedFriendCandidatesHost, { layoutOrder = 7, refreshSignal = UseMemoResult1 }) else nil,
 				showMoreFrame = if FFlagFriendsPageUserListEnabled then nil elseif NoFilter then ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 7,
@@ -360,7 +388,7 @@ return function(p1)
 				additionalPadding = ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 8,
-					Size = UDim2.new(1, 0, 0, YOffset1)
+					Size = UDim2.new(1, 0, 0, YOffset)
 				})
 			})
 		})

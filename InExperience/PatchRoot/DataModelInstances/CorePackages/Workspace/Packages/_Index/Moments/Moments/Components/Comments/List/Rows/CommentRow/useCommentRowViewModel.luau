@@ -23,7 +23,6 @@ local UseCommentBodyToggleModule = require(script.Parent.useCommentBodyToggle)
 local UseCommentBodyTranslationFadeModule = require(script.Parent.useCommentBodyTranslationFade)
 local UseCommentTimestampModule = require(script.Parent.useCommentTimestamp)
 local _ = require(script.Parent.Parent.CommentRowTypes)
-local FFlagMomentsEngagementMetricsFeature = MomentsCommonModule.Flags.FFlagMomentsEngagementMetricsFeature
 local GetMomentsCapabilitiesFunction = MomentsCommonModule.Stores.GetMomentsCapabilities
 local FeedbackManagerInjectionContext = UIBloxModule.Core.Control.FeedbackManagerInjectionContext
 local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
@@ -60,7 +59,7 @@ local _ = function(p1, EmoteId)
 end
 
 return function(p2)
-	-- upvalues: ReactModule (copy), MomentsGetMomentsCommentsStoreModule (copy), SignalsReactModule (copy), UserProfileModule (copy), config (copy), UseLocalizationFunction (copy), UseCommentTimestampModule (copy), GetCommentReactionsStoreModule (copy), SignalsModule (copy), LocalizationModule (copy), LocalizationService (copy), FFlagMomentsEngagementMetricsFeature (copy), GetMomentsCapabilitiesFunction (copy), UsePreferredInputModule (copy), FeedbackManagerInjectionContext (copy), UseCommentActionsMenuModule (copy), UseCommentBodyClampModule (copy), UseCommentBodyToggleModule (copy), UseCommentBodyPressFeedbackModule (copy), UseCommentBodyTranslationFadeModule (copy), UseMomentGesturesModule (copy), CommentLongPressTimingModule (copy)
+	-- upvalues: ReactModule (copy), MomentsGetMomentsCommentsStoreModule (copy), SignalsReactModule (copy), UserProfileModule (copy), config (copy), UseLocalizationFunction (copy), UseCommentTimestampModule (copy), GetCommentReactionsStoreModule (copy), SignalsModule (copy), LocalizationModule (copy), LocalizationService (copy), GetMomentsCapabilitiesFunction (copy), UsePreferredInputModule (copy), FeedbackManagerInjectionContext (copy), UseCommentActionsMenuModule (copy), UseCommentBodyClampModule (copy), UseCommentBodyToggleModule (copy), UseCommentBodyPressFeedbackModule (copy), UseCommentBodyTranslationFadeModule (copy), UseMomentGesturesModule (copy), CommentLongPressTimingModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactModule.useMemo(function()
 		-- upvalues: MomentsGetMomentsCommentsStoreModule (upval), p2 (copy)
 		return MomentsGetMomentsCommentsStoreModule(false).getCachedComment(p2.commentId)
@@ -115,7 +114,7 @@ return function(p2)
 	local ViewerUsername = p2.viewerUsername
 	local ViewerUsername1 = if ViewerUsername == nil or ViewerUsername == "" then nil else ViewerUsername
 	local ViewerUsername2 = if UseSignalStateResult == nil or not UseSignalStateResult.isAuthoredByViewer then nil else ViewerUsername1
-	local V37 = v1 or (ViewerUsername2 or v2)
+	local V36 = v1 or (ViewerUsername2 or v2)
 	local UseCommentTimestampModuleResult = UseCommentTimestampModule(if p2.createdAt == "" then if UseSignalStateResult == nil then "" else UseSignalStateResult.createdAt else p2.createdAt)
 	local Reactions = if UseSignalStateResult == nil then nil else UseSignalStateResult.reactions
 	local CommentReactionsStoreModule = GetCommentReactionsStoreModule(false)
@@ -153,7 +152,7 @@ return function(p2)
 		end
 	end
 	local AbbreviateCountResult = LocalizationModule.abbreviateCount(Count, LocalizationService.RobloxLocaleId) or tostring(Count)
-	local Inverted = if FFlagMomentsEngagementMetricsFeature then not SignalsReactModule.useSignalState(GetMomentsCapabilitiesFunction(false).getIsEngagementMetricsEnabled) else nil
+	local Inverted = not SignalsReactModule.useSignalState(GetMomentsCapabilitiesFunction(false).getIsEngagementMetricsEnabled)
 	local NoIsEmoteIdMatch: boolean = HasThumbsUpEmoteId and (not NoCreatorEnabled and not IsEmoteIdMatch)
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: HasThumbsUpEmoteId (copy), NoCreatorEnabled (copy), Reactions (copy), ThumbsUpEmoteId (copy), p2 (copy), IsEmoteIdMatch (copy)
@@ -188,13 +187,13 @@ return function(p2)
 		onDeleteComment = p2.onDeleteComment
 	})
 	local v3 = #UseCommentActionsMenuModuleResult.items > 0
-	local V70: boolean = IsUsePreferredInputModuleResultMatch and v3
+	local V69: boolean = IsUsePreferredInputModuleResultMatch and v3
 	local IsIsExpanded = p2.isExpanded == true
 	local UseCommentBodyClampModuleResult = UseCommentBodyClampModule(p2.text, IsIsExpanded)
 	local UseCommentBodyToggleModuleResult = UseCommentBodyToggleModule(UseCommentBodyClampModuleResult, p2.onToggleExpanded, p2.commentId, IsIsExpanded, NoIsEmoteIdMatch)
 	local UseCommentBodyPressFeedbackModuleResult = UseCommentBodyPressFeedbackModule(p2.commentId, UseCommentBodyToggleModuleResult.canToggle)
 	local UseCommentBodyTranslationFadeModuleResult = UseCommentBodyTranslationFadeModule(p2.commentId, p2.translationState, UseCommentBodyPressFeedbackModuleResult.textStyle)
-	local NoIsEmoteIdMatch1 = NoIsEmoteIdMatch or (V70 or UseCommentBodyToggleModuleResult.isActive)
+	local NoIsEmoteIdMatch1 = NoIsEmoteIdMatch or (V69 or UseCommentBodyToggleModuleResult.isActive)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	ReactModule.useLayoutEffect(function()
 		-- upvalues: UseStateResult2 (copy)
@@ -219,9 +218,9 @@ return function(p2)
 		onTap = UseCommentBodyToggleModuleResult.onTap,
 		onSingleTapConfirmed = UseCommentBodyToggleModuleResult.onSingleTapConfirmed,
 		onDoubleTap = UseResult1,
-		onLongPress = if V70 then UseResult4 else nil,
-		onLongPressStart = if V70 then UseResult2 else nil,
-		onLongPressCancel = if V70 then UseResult3 else nil
+		onLongPress = if V69 then UseResult4 else nil,
+		onLongPressStart = if V69 then UseResult2 else nil,
+		onLongPressCancel = if V69 then UseResult3 else nil
 	}, nil, {
 		cancelWhenInactive = true,
 		cancelOnUserScroll = true,
@@ -235,7 +234,7 @@ return function(p2)
 		commentId = p2.commentId,
 		avatarUserId = Number,
 		authorLabel = v1 or (ViewerUsername2 or (Username1 or (v2 or (DisplayName1 or Label)))),
-		isAuthorLoading = V37 == nil and UseSignalStateResult1 == nil and UseSignalStateResult2 == "NotReady",
+		isAuthorLoading = V36 == nil and UseSignalStateResult1 == nil and UseSignalStateResult2 == "NotReady",
 		text = p2.text,
 		bodyText = UseCommentBodyClampModuleResult.bodyText,
 		bodyRef = UseCommentBodyClampModuleResult.bodyRef,
@@ -263,7 +262,7 @@ return function(p2)
 			isShowingTranslation = TranslationState == "Translated",
 			onToggle = OnToggleTranslation
 		},
-		isLongPressCharging = UseStateResult == p2.commentId and V70,
+		isLongPressCharging = UseStateResult == p2.commentId and V69,
 		isGestureSurfaceActive = NoIsEmoteIdMatch1,
 		onContentStateChanged = UseCommentBodyPressFeedbackModuleResult.onStateChanged
 	}

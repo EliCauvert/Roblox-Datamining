@@ -2,8 +2,9 @@
 local AvatarExperienceFlagsModule = require(AvatarExperienceInspectAndBuy.Parent.AvatarExperienceFlags)
 local FFlagAXInspectAndBuyMakeupSupport = AvatarExperienceFlagsModule.FFlagAXInspectAndBuyMakeupSupport
 local FFlagAXCatalogBackgroundsSupport = AvatarExperienceFlagsModule.FFlagAXCatalogBackgroundsSupport
+local FFlagAXInspectAndBuySpawnEffects = AvatarExperienceFlagsModule.FFlagAXInspectAndBuySpawnEffects
 local PriceStatusModule = require(AvatarExperienceInspectAndBuy.Enums.PriceStatus)
-local config = {
+local ConstantsModule = {
 	AssetLocalizationKeys = {
 		[tostring(Enum.AssetType.Hat.Value)] = "Feature.Avatar.Label.Hat",
 		[tostring(Enum.AssetType.HairAccessory.Value)] = "Feature.Avatar.Label.Hair",
@@ -30,20 +31,23 @@ local config = {
 }
 
 if FFlagAXInspectAndBuyMakeupSupport then
-	config.AssetLocalizationKeys[tostring(Enum.AssetType.EyeMakeup.Value)] = "Feature.Catalog.Label.EyeMakeup"
-	config.AssetLocalizationKeys[tostring(Enum.AssetType.FaceMakeup.Value)] = "Feature.Catalog.Label.FaceMakeup"
-	config.AssetLocalizationKeys[tostring(Enum.AssetType.LipMakeup.Value)] = "Feature.Catalog.Label.LipMakeup"
+	ConstantsModule.AssetLocalizationKeys[tostring(Enum.AssetType.EyeMakeup.Value)] = "Feature.Catalog.Label.EyeMakeup"
+	ConstantsModule.AssetLocalizationKeys[tostring(Enum.AssetType.FaceMakeup.Value)] = "Feature.Catalog.Label.FaceMakeup"
+	ConstantsModule.AssetLocalizationKeys[tostring(Enum.AssetType.LipMakeup.Value)] = "Feature.Catalog.Label.LipMakeup"
 end
 if FFlagAXCatalogBackgroundsSupport then
-	config.AssetLocalizationKeys[tostring(Enum.AssetType.AvatarBackground.Value)] = "Feature.Avatar.Label.Backgrounds"
+	ConstantsModule.AssetLocalizationKeys[tostring(Enum.AssetType.AvatarBackground.Value)] = "Feature.Avatar.Label.Backgrounds"
 end
-config.BundleLocalizationKeys = {
+if FFlagAXInspectAndBuySpawnEffects then
+	ConstantsModule.AssetLocalizationKeys[tostring(Enum.AssetType.SpawnEffect.Value)] = "Feature.Avatar.Label.SpawnEffects"
+end
+ConstantsModule.BundleLocalizationKeys = {
 	[tostring(Enum.BundleType.BodyParts.Value)] = "Feature.Catalog.Label.Body",
 	[tostring(Enum.BundleType.Animations.Value)] = "Feature.Catalog.Label.Animation",
 	[tostring(Enum.BundleType.Shoes.Value)] = "Feature.Avatar.Label.Shoes",
 	[tostring(Enum.BundleType.DynamicHead.Value)] = "Feature.Avatar.Label.DynamicHead"
 }
-config.PriceStatusLocalizationKeys = {
+ConstantsModule.PriceStatusLocalizationKeys = {
 	[PriceStatusModule.Owned] = "Feature.Catalog.Label.Owned",
 	[PriceStatusModule.Free] = "Feature.Catalog.LabelFree",
 	[PriceStatusModule.QuantityLimitReached] = "InGame.InspectMenu.Action.LimitReached",
@@ -54,7 +58,7 @@ config.PriceStatusLocalizationKeys = {
 	[PriceStatusModule.PurchaseFromRoblox] = "Feature.Catalog.Heading.BuyItem",
 	[PriceStatusModule.PurchaseFromResale] = "Feature.Catalog.Heading.BuyItem"
 }
-config.ItemDetailsLocalizationKeys = {
+ConstantsModule.ItemDetailsLocalizationKeys = {
 	category = "Feature.Catalog.Label.Category",
 	quantitySold = "Feature.Catalog.Label.QuantitySold",
 	originalPrice = "Feature.Catalog.Label.OriginalPrice",
@@ -67,8 +71,8 @@ config.ItemDetailsLocalizationKeys = {
 	includedParts = "Feature.Catalog.Label.IncludedParts",
 	madein = "Feature.Catalog.Label.Attribution"
 }
-config.BatchItemDetailsPerformFetchKey = "BatchItemDetailsV2"
-config.ShowPlayableAttributionMapper = {
+ConstantsModule.BatchItemDetailsPerformFetchKey = "BatchItemDetailsV2"
+ConstantsModule.ShowPlayableAttributionMapper = {
 	UnplayableOtherReason = true,
 	Playable = true,
 	GuestProhibited = true,
@@ -89,4 +93,4 @@ config.ShowPlayableAttributionMapper = {
 	ContextualPlayabilityUnverifiedSeventeenPlusUser = true
 }
 
-return config
+return ConstantsModule

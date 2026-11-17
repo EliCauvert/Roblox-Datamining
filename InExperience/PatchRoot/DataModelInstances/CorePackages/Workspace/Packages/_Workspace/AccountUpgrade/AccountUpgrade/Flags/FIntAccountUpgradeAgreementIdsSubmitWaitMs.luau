@@ -1,0 +1,1 @@
+﻿return game:DefineFastInt("AccountUpgradeAgreementIdsSubmitWaitMs", 3000)

@@ -5,12 +5,11 @@ local GameDetailsSubpageFunction = require(Parent.DiscoveryAnalytics).Events.gam
 local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 local GetActionTelemetryFieldValueFunction = SduiCoreSystemModule.getActionTelemetryFieldValue
-local FFlagLuaAppAddUniverseIdToGameDetailsEvents = require(Parent.SharedFlags).FFlagLuaAppAddUniverseIdToGameDetailsEvents
 local OpenSearchResultsWithQueryParamsModule = require(ServerDrivenUi.Actions.openSearchResultsWithQueryParams)
 local SduiOpenSearchResultsWithQueryTelemetryHandlerModule = require(ServerDrivenUi.Actions.TelemetryHandlers.SduiOpenSearchResultsWithQueryTelemetryHandler)
 
 return function(p1, p2, p3)
-	-- upvalues: OpenSearchResultsWithQueryParamsModule (copy), GetActionTelemetryFieldValueFunction (copy), SduiErrorType (copy), FFlagLuaAppAddUniverseIdToGameDetailsEvents (copy), SduiOpenSearchResultsWithQueryTelemetryHandlerModule (copy), GameDetailsSubpageFunction (copy), Players (copy)
+	-- upvalues: OpenSearchResultsWithQueryParamsModule (copy), GetActionTelemetryFieldValueFunction (copy), SduiErrorType (copy), SduiOpenSearchResultsWithQueryTelemetryHandlerModule (copy), GameDetailsSubpageFunction (copy), Players (copy)
 	local ResolveSearchQueryResult = OpenSearchResultsWithQueryParamsModule.resolveSearchQuery(p1)
 	local ResolveSearchTypeResult = OpenSearchResultsWithQueryParamsModule.resolveSearchType(p1)
 	
@@ -48,7 +47,7 @@ return function(p1, p2, p3)
 		}, p3.appPage)
 		PlaceId = ""
 	end
-	if FFlagLuaAppAddUniverseIdToGameDetailsEvents and (typeof(UniverseId) ~= "string" and typeof(UniverseId) ~= "number" or UniverseId == "") then
+	if typeof(UniverseId) ~= "string" and typeof(UniverseId) ~= "number" or UniverseId == "" then
 		p3.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			name = "SduiOpenSearchResultsWithQueryEdpTelemetryHandler",
 			propName = "universeId",
@@ -62,7 +61,7 @@ return function(p1, p2, p3)
 		uid = tostring(if Players.LocalPlayer then Players.LocalPlayer.UserId else ""),
 		placeId = tostring(PlaceId),
 		subpage = Subpage,
-		universeId = if FFlagLuaAppAddUniverseIdToGameDetailsEvents then tostring(UniverseId) else "",
+		universeId = tostring(UniverseId),
 		action = ResolveSearchQueryResult
 	}, v1)
 end

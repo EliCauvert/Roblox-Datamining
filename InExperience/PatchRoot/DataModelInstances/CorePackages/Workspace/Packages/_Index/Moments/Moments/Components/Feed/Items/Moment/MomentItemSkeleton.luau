@@ -17,9 +17,10 @@ local MomentLayoutModule = require(script.Parent.momentLayout)
 local MomentOverlayInsetContextModule = require(script.Parent.MomentOverlayInsetContext)
 local MomentPushedFeedSafeAreaContextModule = require(script.Parent.MomentPushedFeedSafeAreaContext)
 local FFlagMomentsFeedAboveNavBarModule = require(Moments.Flags.FFlagMomentsFeedAboveNavBar)
+local FFlagMomentsHideNavBarOnScrollModule = require(Moments.Flags.FFlagMomentsHideNavBarOnScroll)
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), UseFormFactorFunction (copy), UseCompositionLayoutFunction (copy), UseDeviceInsetsFunction (copy), FormFactor (copy), ReactModule (copy), MomentPushedFeedSafeAreaContextModule (copy), MomentOverlayInsetContextModule (copy), FFlagMomentsFeedAboveNavBarModule (copy), View (copy), Skeleton (copy), Radius (copy), MomentLayoutModule (copy), GradientBackdrop (copy)
+	-- upvalues: UseTokensFunction (copy), UseFormFactorFunction (copy), UseCompositionLayoutFunction (copy), UseDeviceInsetsFunction (copy), FormFactor (copy), ReactModule (copy), MomentPushedFeedSafeAreaContextModule (copy), MomentOverlayInsetContextModule (copy), FFlagMomentsHideNavBarOnScrollModule (copy), FFlagMomentsFeedAboveNavBarModule (copy), View (copy), Skeleton (copy), Radius (copy), MomentLayoutModule (copy), GradientBackdrop (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseFormFactorResult = UseFormFactorFunction()
 	local UseCompositionLayoutResult = UseCompositionLayoutFunction()
@@ -35,6 +36,7 @@ return function(p1)
 	local UseMomentPushedFeedSafeAreaResult = MomentPushedFeedSafeAreaContextModule.useMomentPushedFeedSafeArea()
 	local UseDeviceInsetsResult1 = if UseMomentPushedFeedSafeAreaResult == nil then UseDeviceInsetsResult else UseMomentPushedFeedSafeAreaResult
 	local UseMomentOverlayInsetResult: number = MomentOverlayInsetContextModule.useMomentOverlayInset()
+	local UseMomentOverlayInsetRatioResult = if FFlagMomentsHideNavBarOnScrollModule then MomentOverlayInsetContextModule.useMomentOverlayInsetRatio() else nil
 	local UseMomentOverlayInsetResult1: number = UseMomentOverlayInsetResult
 	local IsUseMomentOverlayInsetResultAbove = UseMomentOverlayInsetResult1 > 0
 	
@@ -43,7 +45,7 @@ return function(p1)
 		IsUseMomentOverlayInsetResultAbove = UseMomentOverlayInsetResult > 0
 	end
 	local Largest = math.max(UseTokensResult.Padding.XLarge, if UseDeviceInsetsResult1 == nil then 0 else UseDeviceInsetsResult1.bottom)
-	local NewMedium: number = if IsUseMomentOverlayInsetResultAbove then UseTokensResult.Padding.Medium + UseMomentOverlayInsetResult1 else Largest + UseMomentOverlayInsetResult1
+	local _UDim = if UseMomentOverlayInsetRatioResult == nil or UseMomentOverlayInsetResult <= 0 then UDim.new(0, if IsUseMomentOverlayInsetResultAbove then UseTokensResult.Padding.Medium + UseMomentOverlayInsetResult1 else Largest + UseMomentOverlayInsetResult1) else MomentOverlayInsetContextModule.mapSlidingInsetPadding(UseMomentOverlayInsetRatioResult, UseMomentOverlayInsetResult, UseTokensResult.Padding.Medium)
 	local config = {
 		CreatorRow = ReactModule.createElement(View, {
 			LayoutOrder = 1,
@@ -97,7 +99,7 @@ return function(p1)
 					top = UDim.new(0, UseTokensResult.Padding.XLarge),
 					left = UDim.new(0, Margin),
 					right = UDim.new(0, Margin),
-					bottom = UDim.new(0, NewMedium)
+					bottom = _UDim
 				},
 				sizeConstraint = { MaxSize = BOTTOMUIMAXSIZE },
 				onAbsoluteSizeChanged = UseResult
@@ -109,7 +111,7 @@ return function(p1)
 					top = UDim.new(0, UseTokensResult.Padding.XLarge),
 					left = UDim.new(0, (math.max(Margin, UseDeviceInsetsResult1.left))),
 					right = UDim.new(0, (math.max(Margin, UseDeviceInsetsResult1.right))),
-					bottom = UDim.new(0, NewMedium)
+					bottom = _UDim
 				},
 				sizeConstraint = { MaxSize = BOTTOMUIMAXSIZE },
 				onAbsoluteSizeChanged = UseResult

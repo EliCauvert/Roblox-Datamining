@@ -3,6 +3,9 @@ local Parent = Groups.Parent
 local ReactModule = require(Parent.React)
 local GroupsPageModule = require(Groups.Components.GroupsPage)
 local FFlagEnableGroupOverviewPane = require(Parent.SharedFlags).FFlagEnableGroupOverviewPane
+local FFlagEnableGroupSidebarSdui = require(Parent.SharedFlags).FFlagEnableGroupSidebarSdui
+local v1 = nil
+local Callback = nil
 local GroupsNavigatorModule = if FFlagEnableGroupOverviewPane then require(script.Parent.GroupsNavigator) else nil
 local GroupsRoutesModule = if FFlagEnableGroupOverviewPane then require(script.Parent.GroupsRoutes) else nil
 local UseIsCompactTouchModule = if FFlagEnableGroupOverviewPane then require(Groups.Hooks.useIsCompactTouch) else nil
@@ -11,9 +14,13 @@ local InitializeGroupsAnalyticsModule = require(Groups.Analytics.initializeGroup
 local GroupsAnalyticsContextModule = require(Groups.Analytics.GroupsAnalyticsContext)
 
 local function GroupsWithContext(p1)
-	-- upvalues: UseGroupsWrapperContextModule (copy), FFlagEnableGroupOverviewPane (copy), UseIsCompactTouchModule (copy), ReactModule (copy), GroupsRoutesModule (copy), InitializeGroupsAnalyticsModule (copy), GroupsNavigatorModule (copy), GroupsPageModule (copy), GroupsAnalyticsContextModule (copy)
+	-- upvalues: UseGroupsWrapperContextModule (copy), FFlagEnableGroupSidebarSdui (copy), v1 (ref), Groups (copy), Callback (ref), FFlagEnableGroupOverviewPane (copy), UseIsCompactTouchModule (copy), ReactModule (copy), GroupsRoutesModule (copy), InitializeGroupsAnalyticsModule (copy), GroupsNavigatorModule (copy), GroupsPageModule (copy), GroupsAnalyticsContextModule (copy)
 	local UseGroupsWrapperContextModuleResult = UseGroupsWrapperContextModule()
 	
+	if FFlagEnableGroupSidebarSdui then
+		v1 = v1 or require(Groups.Contexts.GroupSidebarProvider)
+		Callback = Callback or require(Groups.Common.getGroupSduiPageConfig).isValidGroupId
+	end
 	if FFlagEnableGroupOverviewPane then
 		local UseIsCompactTouchModuleResult = UseIsCompactTouchModule()
 		local UseRefResult = ReactModule.useRef(nil)
@@ -38,6 +45,18 @@ local function GroupsWithContext(p1)
 			UseIsCompactTouchModuleResult
 		})
 	end
+	local UseMemoResult = if FFlagEnableGroupSidebarSdui then ReactModule.useMemo(function()
+		-- upvalues: Callback (upval), UseGroupsWrapperContextModuleResult (copy)
+		return if Callback(UseGroupsWrapperContextModuleResult.groupId) then {
+			[`group:{UseGroupsWrapperContextModuleResult.groupId}`] = true
+		} else nil
+	end, { UseGroupsWrapperContextModuleResult.groupId }) else nil
+	local Config = if FFlagEnableGroupOverviewPane then {
+		GroupsContent = ReactModule.createElement(GroupsNavigatorModule, p1)
+	} else {
+		GroupsPage = ReactModule.createElement(GroupsPageModule, p1)
+	}
+	
 	return ReactModule.createElement(GroupsAnalyticsContextModule.Provider, {
 		value = ReactModule.useMemo(function()
 			-- upvalues: InitializeGroupsAnalyticsModule (upval), UseGroupsWrapperContextModuleResult (copy)
@@ -46,11 +65,12 @@ local function GroupsWithContext(p1)
 			
 			return InitializeGroupsAnalyticsModuleResult
 		end, { UseGroupsWrapperContextModuleResult.userId })
-	}, if FFlagEnableGroupOverviewPane then {
-		GroupsContent = ReactModule.createElement(GroupsNavigatorModule, p1)
-	} else {
-		GroupsPage = ReactModule.createElement(GroupsPageModule, p1)
-	})
+	}, if FFlagEnableGroupSidebarSdui then ReactModule.createElement(v1, {
+		resetKey = `{UseGroupsWrapperContextModuleResult.userId}:{UseGroupsWrapperContextModuleResult.groupId or "primary"}`,
+		initialGroupId = UseGroupsWrapperContextModuleResult.groupId,
+		initialExpanded = UseMemoResult,
+		revealGroupId = UseGroupsWrapperContextModuleResult.groupId
+	}, Config) else Config)
 end
 
 if FFlagEnableGroupOverviewPane then

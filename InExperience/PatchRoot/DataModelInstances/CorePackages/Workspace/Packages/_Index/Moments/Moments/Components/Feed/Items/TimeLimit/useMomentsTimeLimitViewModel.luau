@@ -1,9 +1,11 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
 local LocalizationModule = require(Parent.Localization)
+local ReactModule = require(Parent.React)
 local RealtimeDeliveryModule = require(Parent.RealtimeDelivery)
 local SignalsReactModule = require(Parent.SignalsReact)
 local GetMomentsUsageStoreModule = require(Moments.Stores.GetMomentsUsageStore)
+local LogMomentsTimeLimitShownModule = require(Moments.Analytics.logMomentsTimeLimitShown)
 local _ = require(script.Parent.MomentsTimeLimitView)
 local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local config = {
@@ -22,9 +24,15 @@ local function _(p1): boolean
 end
 
 return function()
-	-- upvalues: GetMomentsUsageStoreModule (copy), SignalsReactModule (copy), UseLocalizationFunction (copy), config1 (copy), config (copy), RealtimeDeliveryModule (copy)
+	-- upvalues: GetMomentsUsageStoreModule (copy), SignalsReactModule (copy), UseLocalizationFunction (copy), config1 (copy), config (copy), ReactModule (copy), LogMomentsTimeLimitShownModule (copy), RealtimeDeliveryModule (copy)
 	local MomentsUsageStoreModule = GetMomentsUsageStoreModule(false)
-	local UseLocalizationResult = UseLocalizationFunction(if SignalsReactModule.useSignalState(MomentsUsageStoreModule.getLimitSeconds) == 0 then config1 else config)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(MomentsUsageStoreModule.getLimitSeconds)
+	local IsUseSignalStateResultMatch = UseSignalStateResult == 0
+	local UseLocalizationResult = UseLocalizationFunction(if IsUseSignalStateResultMatch then config1 else config)
+	ReactModule.useEffect(function()
+		-- upvalues: LogMomentsTimeLimitShownModule (upval), UseSignalStateResult (copy)
+		LogMomentsTimeLimitShownModule(UseSignalStateResult)
+	end, { IsUseSignalStateResultMatch })
 	RealtimeDeliveryModule.useRealtimeNamespace("UserSettingsChanged", function(p1)
 		-- upvalues: MomentsUsageStoreModule (copy)
 		local SettingsChanged = if type(p1) == "table" then p1.SettingsChanged else nil

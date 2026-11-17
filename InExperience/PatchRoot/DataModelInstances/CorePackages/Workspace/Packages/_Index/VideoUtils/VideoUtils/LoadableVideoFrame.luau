@@ -16,13 +16,12 @@ local FFlagLuaAppEdpMediaGalleryFullScreen = require(Parent.SharedFlags).FFlagLu
 local FFlagLuaAppEdpConsoleMediaGalleryVideo = require(Parent.SharedFlags).FFlagLuaAppEdpConsoleMediaGalleryVideo
 local FFlagLuaAppEnableNxMRoduxApportioning = require(Parent.SharedFlags).FFlagLuaAppEnableNxMRoduxApportioning
 local FFlagLuaAppHomePageFirstImageLoadObserver = require(Parent.SharedFlags).FFlagLuaAppHomePageFirstImageLoadObserver
-local FFlagLuaAppSduiVideoThumbnail = require(Parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
 local FFlagLuaAppHomeMomentVideoFallback = require(Parent.SharedFlags).FFlagLuaAppHomeMomentVideoFallback
 local FFlagLuaAppVideoLoadFailureFallback = require(Parent.SharedFlags).FFlagLuaAppVideoLoadFailureFallback
 local FFlagLuaAppVideoPlayerTrimAndMusic = require(Parent.SharedFlags).FFlagLuaAppVideoPlayerTrimAndMusic
 
 local function LoadableVideoFrame(Image, p1)
-	-- upvalues: ReactModule (copy), FFlagLuaAppVideoLoadFailureFallback (copy), FFlagLuaAppEdpMediaGalleryAutoAdvance (copy), FFlagLuaAppEdpMediaGalleryFullScreen (copy), FFlagLuaAppEdpConsoleMediaGalleryVideo (copy), FFlagLuaAppEnableNxMRoduxApportioning (copy), FFlagLuaAppHomeMomentVideoFallback (copy), GetAuthorizedVideoUriModule (copy), ContentProvider (copy), ArgCheckModule (copy), FFlagLuaAppVideoPlayerTrimAndMusic (copy), GetVideoEditsModule (copy), FFlagLuaAppHomePageFirstImageLoadObserver (copy), EditedVideoFrameModule (copy), VideoFrameWrapperModule (copy), FFlagLuaAppSduiVideoThumbnail (copy), LoadableImage (copy), Skeleton (copy), Radius (copy)
+	-- upvalues: ReactModule (copy), FFlagLuaAppVideoLoadFailureFallback (copy), FFlagLuaAppEdpMediaGalleryAutoAdvance (copy), FFlagLuaAppEdpMediaGalleryFullScreen (copy), FFlagLuaAppEdpConsoleMediaGalleryVideo (copy), FFlagLuaAppEnableNxMRoduxApportioning (copy), FFlagLuaAppHomeMomentVideoFallback (copy), GetAuthorizedVideoUriModule (copy), ContentProvider (copy), ArgCheckModule (copy), FFlagLuaAppVideoPlayerTrimAndMusic (copy), GetVideoEditsModule (copy), FFlagLuaAppHomePageFirstImageLoadObserver (copy), EditedVideoFrameModule (copy), VideoFrameWrapperModule (copy), LoadableImage (copy), Skeleton (copy), Radius (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local v1 = nil
 	local Callback = nil
@@ -173,7 +172,7 @@ local function LoadableVideoFrame(Image, p1)
 			onEnded = if FFlagLuaAppEdpMediaGalleryAutoAdvance then UseResult else nil,
 			cornerRadius = Image.cornerRadius
 		}),
-		VideoThumbnail = if FFlagLuaAppSduiVideoThumbnail and Image.thumbnailComponentOverride then ReactModule.createElement("Frame", {
+		VideoThumbnail = if Image.thumbnailComponentOverride then ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			ZIndex = 2,

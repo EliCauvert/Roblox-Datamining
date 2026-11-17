@@ -6,6 +6,7 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local ConstantsModule = require(SocialCarousel.Common.Constants)
 local UseXSmallTileTypographyModule = require(SocialCarousel.Hooks.useXSmallTileTypography)
 local FFlagSocialCarouselXSmallTileTextModule = require(SocialCarousel.Flags.FFlagSocialCarouselXSmallTileText)
+local FFlagSocialCarouselFixFriendsHintClippingModule = require(SocialCarousel.Flags.FFlagSocialCarouselFixFriendsHintClipping)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UseSocialCarouselContextModule = require(SocialCarousel.Contexts.useSocialCarouselContext)
 local Text = FoundationModule.Text
@@ -13,7 +14,7 @@ local View = FoundationModule.View
 local FFlagSocialCarouselShareQREnabled = require(Parent.SharedFlags).FFlagSocialCarouselShareQREnabled
 
 return function(p1)
-	-- upvalues: UseSocialCarouselContextModule (copy), FFlagSocialCarouselXSmallTileTextModule (copy), UseTokensFunction (copy), UseXSmallTileTypographyModule (copy), FFlagSocialCarouselShareQREnabled (copy), ConstantsModule (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), Text (copy)
+	-- upvalues: UseSocialCarouselContextModule (copy), FFlagSocialCarouselXSmallTileTextModule (copy), UseTokensFunction (copy), UseXSmallTileTypographyModule (copy), FFlagSocialCarouselShareQREnabled (copy), ConstantsModule (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), FFlagSocialCarouselFixFriendsHintClippingModule (copy), Text (copy)
 	local UseSocialCarouselContextModuleResult = UseSocialCarouselContextModule()
 	local UseTokensResult = if FFlagSocialCarouselXSmallTileTextModule then UseTokensFunction() else nil
 	local UseXSmallTileTypographyModuleResult = if FFlagSocialCarouselXSmallTileTextModule then UseXSmallTileTypographyModule() else nil
@@ -47,21 +48,22 @@ return function(p1)
 	return ReactModule.createElement(View, {
 		BackgroundTransparency = 1,
 		tag = "col auto-none align-y-center",
-		Size = UDim2.new(p1.itemSize.X.Scale, p1.itemSize.X.Offset + ConstantsModule.TILE_TEXT_WIDTH, p1.itemSize.Y.Scale, if FFlagSocialCarouselXSmallTileTextModule and UseXSmallTileTypographyModuleResult then p1.itemSize.X.Offset else p1.itemSize.Y.Offset - ConstantsModule.TILE_TEXT_HEIGHT),
+		Size = UDim2.new(p1.itemSize.X.Scale, if FFlagSocialCarouselShareQREnabled and FFlagSocialCarouselFixFriendsHintClippingModule then p1.itemSize.X.Offset else p1.itemSize.X.Offset + ConstantsModule.TILE_TEXT_WIDTH, p1.itemSize.Y.Scale, if FFlagSocialCarouselXSmallTileTextModule and UseXSmallTileTypographyModuleResult then p1.itemSize.X.Offset else p1.itemSize.Y.Offset - ConstantsModule.TILE_TEXT_HEIGHT),
 		LayoutOrder = p1.index
 	}, {
 		Content = ReactModule.createElement(View, {
 			BackgroundTransparency = 1,
 			tag = {
-				["auto-xy"] = FFlagSocialCarouselShareQREnabled,
+				["size-full-0 auto-y"] = FFlagSocialCarouselShareQREnabled and FFlagSocialCarouselFixFriendsHintClippingModule,
+				["auto-xy"] = FFlagSocialCarouselShareQREnabled and not FFlagSocialCarouselFixFriendsHintClippingModule,
 				["col gap-xxsmall auto-xy"] = not FFlagSocialCarouselShareQREnabled
 			}
 		}, if FFlagSocialCarouselShareQREnabled then {
 			HintText = ReactModule.createElement(Text, {
 				RichText = true,
-				tag = "text-body-small text-align-x-left auto-xy text-wrap",
 				Text = `<b>{UseLocalizationResult.friendsHintBold}</b> {UseLocalizationResult.friendsHintPlain}`,
-				fontStyle = FontStyle
+				fontStyle = FontStyle,
+				tag = if FFlagSocialCarouselFixFriendsHintClippingModule then "size-full-0 auto-y text-body-small text-wrap text-align-x-left" else "text-body-small text-align-x-left auto-xy text-wrap"
 			})
 		} else {
 			Title = ReactModule.createElement(Text, {

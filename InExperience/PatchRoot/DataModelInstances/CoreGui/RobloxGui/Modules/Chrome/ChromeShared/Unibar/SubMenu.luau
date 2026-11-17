@@ -1,10 +1,12 @@
 ﻿local ChromeShared = script:FindFirstAncestor("ChromeShared")
+local CoreGui = game:GetService("CoreGui")
 local CorePackages = game:GetService("CorePackages")
 local GuiService = game:GetService("GuiService")
 local UserGameSettings = UserSettings():GetService("UserGameSettings")
 local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
 local FFlagEnableConsoleExpControls = SharedFlagsModule.FFlagEnableConsoleExpControls
 local FFlagEnableMenuTrailingBadge = SharedFlagsModule.FFlagEnableMenuTrailingBadge
+local FFlagAllowGrayUnsupportedFeatures = SharedFlagsModule.FFlagAllowGrayUnsupportedFeatures
 local AvatarSwitcherHamburgerExposure = game:DefineFastFlag("AvatarSwitcherHamburgerExposure", false)
 local AvatarSwitcherIXPLayer = game:DefineFastString("AvatarSwitcherIXPLayer", "UIEcosystem.User.Migration")
 local FFlagUnibarMenuOpenSubmenu = require(script.Parent.Parent.Parent.Flags).FFlagUnibarMenuOpenSubmenu
@@ -42,20 +44,34 @@ local UIManager = if IsInExperienceUIVREnabled then require(CorePackages.Workspa
 local IconHostModule = require(ChromeShared.Unibar.ComponentHosts.IconHost)
 local RoundedSlot = FoundationModule.Enums.CursorType.RoundedSlot
 local _Vector2 = Vector2.new(0, 0)
+local Ancestors = {}
+
+local function isOverDisabledRow(Vector): boolean
+	-- upvalues: CoreGui (copy), Ancestors (copy)
+	for _, value in CoreGui:GetGuiObjectsAtPosition(Vector.X, Vector.Y) do
+		for ancestor in Ancestors do
+			if value == ancestor or value:IsDescendantOf(ancestor) then
+				return true
+			end
+		end
+	end
+	return false
+end
+
 local Items = {}
 local v1 = nil
 
 function MenuRow(Integration)
-	-- upvalues: UseStyleFunction (copy), FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule (copy), ReactModule (copy), SubMenuContextModule (copy), FFlagEnableConsoleExpControls (copy), MenuIconContextModule (copy), ControlState (copy), FFlagEnableMenuTrailingBadge (copy), ServiceModule (copy), GuiService (copy), StyledTextLabel (copy), IconHostModule (copy), MenuTrailingBadgeModule (copy), IsInExperienceUIVREnabled (copy), InExperienceUIVRIXP (copy), UIManager (ref), Interactable (copy), UseCursorFunction (copy), RoundedSlot (copy), FixChromeIntegrationLayoutBug (copy)
+	-- upvalues: UseStyleFunction (copy), FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule (copy), ReactModule (copy), SubMenuContextModule (copy), FFlagEnableConsoleExpControls (copy), MenuIconContextModule (copy), ControlState (copy), FFlagEnableMenuTrailingBadge (copy), FFlagAllowGrayUnsupportedFeatures (copy), Ancestors (copy), ServiceModule (copy), GuiService (copy), StyledTextLabel (copy), IconHostModule (copy), MenuTrailingBadgeModule (copy), IsInExperienceUIVREnabled (copy), InExperienceUIVRIXP (copy), UIManager (ref), Interactable (copy), UseCursorFunction (copy), RoundedSlot (copy), FixChromeIntegrationLayoutBug (copy)
 	local Theme = UseStyleFunction().Theme
 	local config = { Transparency = 1, Color = Color3.new(0, 0, 0) }
-	local SUBMENUROWLABELFONT = nil
-	local SUBMENUPADDINGRIGHT = nil
-	local SUBMENUROWHEIGHT = nil
-	local SUBMENUPADDINGLEFT = nil
-	local SUBMENUROWPADDING = nil
 	local ICONSIZE = nil
+	local SUBMENUROWHEIGHT = nil
+	local SUBMENUROWLABELFONT = nil
+	local SUBMENUPADDINGLEFT = nil
 	local SUBMENUROWCORNERRADIUS = nil
+	local SUBMENUPADDINGRIGHT = nil
+	local SUBMENUROWPADDING = nil
 	
 	if FFlagTokenizeUnibarConstantsWithStyleProvider then
 		local UseResult = UnibarStyle.use()
@@ -78,7 +94,42 @@ function MenuRow(Integration)
 	local UseContextResult = ReactModule.useContext(SubMenuContextModule)
 	local UseContextResult1 = if FFlagEnableConsoleExpControls then ReactModule.useContext(MenuIconContextModule) else nil
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(config)
+	local UseResult = ReactModule.useCallback(function(_, Hover)
+		-- upvalues: ControlState (upval), UseBindingResult2 (copy), Theme (copy), config (copy)
+		if Hover == ControlState.Pressed then
+			UseBindingResult2(Theme.BackgroundOnPress)
+			
+			return
+		end
+		if Hover == ControlState.Hover then
+			UseBindingResult2(Theme.BackgroundOnHover)
+			
+			return
+		else
+			UseBindingResult2(config)
+		end
+	end)
 	local MenuTrailingBadgeConfig = if FFlagEnableMenuTrailingBadge then Integration.integration.menuTrailingBadgeConfig else nil
+	local IsIsDisabled: boolean = FFlagAllowGrayUnsupportedFeatures and Integration.integration.isDisabled == true
+	local UseRefResult = if FFlagAllowGrayUnsupportedFeatures then ReactModule.useRef(nil) else nil
+	
+	if FFlagAllowGrayUnsupportedFeatures then
+		ReactModule.useEffect(function()
+			-- upvalues: UseRefResult (copy), IsIsDisabled (copy), Ancestors (upval)
+			local Current = if UseRefResult then UseRefResult.current else nil
+			
+			if IsIsDisabled and Current then
+				Ancestors[Current] = true
+				
+				return function()
+					-- upvalues: Ancestors (upval), Current (copy)
+					Ancestors[Current] = nil
+				end
+			else
+				return nil
+			end
+		end, { IsIsDisabled })
+	end
 	local Element = ReactModule.createElement(StyledTextLabel, {
 		lineHeight = 1,
 		fluidSizing = true,
@@ -88,8 +139,12 @@ function MenuRow(Integration)
 		colorStyle = if UseContextResult then {
 			Color = Theme.TextEmphasis.Color,
 			Transparency = UseContextResult:map(function(p1: number): number
-				return 1 - p1
+				-- upvalues: FFlagAllowGrayUnsupportedFeatures (upval), IsIsDisabled (copy)
+				return if FFlagAllowGrayUnsupportedFeatures and IsIsDisabled then 1 - p1 * 0.5 else 1 - p1
 			end)
+		} elseif FFlagAllowGrayUnsupportedFeatures and IsIsDisabled then {
+			Color = Theme.TextEmphasis.Color,
+			Transparency = 1 - (1 - Theme.TextEmphasis.Transparency) * 0.5
 		} else Theme.TextEmphasis,
 		text = Integration.integration.label,
 		textTruncate = Enum.TextTruncate.AtEnd,
@@ -132,8 +187,13 @@ function MenuRow(Integration)
 		end),
 		SelectionImageObject = UseCursorFunction(RoundedSlot),
 		[ReactModule.Event.Activated] = ReactModule.useCallback(function()
-			-- upvalues: FFlagEnableConsoleExpControls (upval), ServiceModule (upval), GuiService (upval), Integration (copy)
-			if FFlagEnableConsoleExpControls then
+			-- upvalues: FFlagAllowGrayUnsupportedFeatures (upval), IsIsDisabled (copy), Integration (copy), FFlagEnableConsoleExpControls (upval), ServiceModule (upval), GuiService (upval)
+			if FFlagAllowGrayUnsupportedFeatures and IsIsDisabled then
+				if Integration.integration.disabledActivated then
+					Integration.integration.disabledActivated(Integration.integration)
+				end
+				return
+			elseif FFlagEnableConsoleExpControls then
 				ServiceModule:disableFocusNav()
 				GuiService.SelectedCoreObject = nil
 				ServiceModule:setShortcutBar(nil)
@@ -144,23 +204,15 @@ function MenuRow(Integration)
 			else
 				Integration.activated()
 			end
-		end, { Integration.id }),
+		end, if FFlagAllowGrayUnsupportedFeatures then {
+			Integration.id,
+			Integration.activated,
+			Integration.integration,
+			IsIsDisabled
+		} else { Integration.id }),
+		ref = if FFlagAllowGrayUnsupportedFeatures then UseRefResult else nil,
 		LayoutOrder = Integration.order,
-		onStateChanged = ReactModule.useCallback(function(_, Hover)
-			-- upvalues: ControlState (upval), UseBindingResult2 (copy), Theme (copy), config (copy)
-			if Hover == ControlState.Pressed then
-				UseBindingResult2(Theme.BackgroundOnPress)
-				
-				return
-			end
-			if Hover == ControlState.Hover then
-				UseBindingResult2(Theme.BackgroundOnHover)
-				
-				return
-			else
-				UseBindingResult2(config)
-			end
-		end),
+		onStateChanged = UseResult,
 		NextSelectionLeft = if FFlagEnableConsoleExpControls then UseContextResult1.menuIconRef else nil
 	}, {
 		UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, SUBMENUROWCORNERRADIUS) }),
@@ -169,7 +221,7 @@ function MenuRow(Integration)
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 1, 0),
 			LayoutOrder = Integration.order
-		}, { Element1 }) else Element1
+		}, { RowContent = Element1 }) else Element1
 	})
 end
 
@@ -184,12 +236,12 @@ function SubMenu(p1)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseObservableValueModuleResult = UseObservableValueModule(ViewportUtilModule.screenSize)
 	local UseTopbarInsetHeightModuleResult: number = UseTopbarInsetHeightModule()
-	local SUBMENUROWHEIGHT = nil
 	local UNIBARLEFTMARGIN = nil
-	local ICONCELLWIDTH = nil
 	local UNIBARENDPADDING = nil
-	local SUBMENUCORNERRADIUS = nil
+	local ICONCELLWIDTH = nil
 	local SUBMENUBOTTOMPADDING = nil
+	local SUBMENUROWHEIGHT = nil
+	local SUBMENUCORNERRADIUS = nil
 	
 	if FFlagTokenizeUnibarConstantsWithStyleProvider then
 		local UseResult = UnibarStyle.use()
@@ -332,7 +384,7 @@ function SubMenu(p1)
 end
 
 return function(p2)
-	-- upvalues: ReactModule (copy), UseObservableValueModule (copy), ServiceModule (copy), UseChromeMenuItemsModule (copy), ReactOtterModule (copy), Items (ref), v1 (ref), ConstantsModule (copy), UserInputService (copy), _Vector2 (ref), IsInExperienceUIVREnabled (copy), IsSpatialFunction (copy), InExperienceUIVRIXP (copy), FFlagUnibarMenuOpenSubmenu (copy), SubMenuContextModule (copy)
+	-- upvalues: ReactModule (copy), UseObservableValueModule (copy), ServiceModule (copy), UseChromeMenuItemsModule (copy), ReactOtterModule (copy), Items (ref), v1 (ref), ConstantsModule (copy), UserInputService (copy), _Vector2 (ref), FFlagAllowGrayUnsupportedFeatures (copy), isOverDisabledRow (copy), IsInExperienceUIVREnabled (copy), IsSpatialFunction (copy), InExperienceUIVRIXP (copy), FFlagUnibarMenuOpenSubmenu (copy), SubMenuContextModule (copy)
 	local Elements = {}
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
@@ -346,7 +398,7 @@ return function(p2)
 		UseStateResult2(p3)
 	end)
 	ReactModule.useEffect(function()
-		-- upvalues: Items (upval), Children (ref), v1 (upval), UseObservableValueModuleResult (copy), UseStateResult2 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), ConstantsModule (upval), UseRefResult2 (copy), UserInputService (upval), _Vector2 (upval), UseRefResult1 (copy), ServiceModule (upval), UseRefResult (copy), IsInExperienceUIVREnabled (upval), IsSpatialFunction (upval), InExperienceUIVRIXP (upval)
+		-- upvalues: Items (upval), Children (ref), v1 (upval), UseObservableValueModuleResult (copy), UseStateResult2 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), ConstantsModule (upval), UseRefResult2 (copy), UserInputService (upval), _Vector2 (upval), UseRefResult1 (copy), FFlagAllowGrayUnsupportedFeatures (upval), isOverDisabledRow (upval), ServiceModule (upval), UseRefResult (copy), IsInExperienceUIVREnabled (upval), IsSpatialFunction (upval), InExperienceUIVRIXP (upval)
 		Items = Children
 		v1 = UseObservableValueModuleResult
 		
@@ -358,8 +410,9 @@ return function(p2)
 				_Vector2 = Vector2.new(Touch.Position.X, Touch.Position.Y)
 			end)
 			UseRefResult1.current = UserInputService.TouchTap:Connect(function(Entry)
-				-- upvalues: _Vector2 (upval), ServiceModule (upval)
+				-- upvalues: _Vector2 (upval), FFlagAllowGrayUnsupportedFeatures (upval), isOverDisabledRow (upval), ServiceModule (upval)
 				if Entry[1] - _Vector2 ~= Vector2.zero then return end
+				if FFlagAllowGrayUnsupportedFeatures and isOverDisabledRow(Entry[1]) then return end
 				local GetResult = ServiceModule:currentSubMenu():get()
 				
 				if GetResult then
@@ -367,9 +420,11 @@ return function(p2)
 				end
 			end)
 			UseRefResult.current = UserInputService.InputEnded:Connect(function(Input, _)
-				-- upvalues: IsInExperienceUIVREnabled (upval), IsSpatialFunction (upval), InExperienceUIVRIXP (upval), ServiceModule (upval)
+				-- upvalues: IsInExperienceUIVREnabled (upval), IsSpatialFunction (upval), InExperienceUIVRIXP (upval), FFlagAllowGrayUnsupportedFeatures (upval), isOverDisabledRow (upval), ServiceModule (upval)
 				if IsInExperienceUIVREnabled and IsSpatialFunction() and not InExperienceUIVRIXP:isMovePanelToCenter() then return end
 				local IsUserInputTypeMatch = Input.UserInputType == Enum.UserInputType.MouseButton1
+				
+				if FFlagAllowGrayUnsupportedFeatures and IsUserInputTypeMatch and isOverDisabledRow(Vector2.new(Input.Position.X, Input.Position.Y)) then return end
 				local GetResult = ServiceModule:currentSubMenu():get()
 				
 				if GetResult and IsUserInputTypeMatch then

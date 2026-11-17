@@ -5,7 +5,7 @@ return {
 	SponsoredUserCohort = require(script.Enums.SponsoredUserCohort),
 	OneByTwoTile = require(script.OneByTwoTile),
 	openAdClickoutUrl = require(script.openAdClickoutUrl),
-	TwoByOneGameTile = require(script.TwoByOneGameTile),
+	TwoByOneTile = require(script.TwoByOneTile),
 	renderOneByTwoTile = require(script.renderOneByTwoTile),
 	renderTwoByOneTile = require(script.renderTwoByOneTile),
 	["jest.config"] = script["jest.config"]

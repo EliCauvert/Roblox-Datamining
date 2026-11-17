@@ -15,6 +15,7 @@ local LuaAppGameImpressionsEventThrottlingHundredthsPercent = game:DefineFastInt
 local LuaAppGameImpressionsShadowThrottlingHundredthsPercent = game:DefineFastInt("LuaAppGameImpressionsShadowThrottlingHundredthsPercent", 10000)
 local FFlagLuaAppGameImpressionsAddUnifiedFields = require(Parent.SharedFlags).FFlagLuaAppGameImpressionsAddUnifiedFields
 local FFlagLuaAppSduiLandingPageEnabled = require(Parent.SharedFlags).FFlagLuaAppSduiLandingPageEnabled
+local FFlagAppIaHomeCampaignSubTab = require(Parent.SharedFlags).FFlagAppIaHomeCampaignSubTab
 local FFlagLuaAppAddAnalyticsDataToSeeAllImpressions = require(Parent.SharedFlags).FFlagLuaAppAddAnalyticsDataToSeeAllImpressions
 local FFlagSduiSearchResultsPageEnabled = require(Parent.SharedFlags).FFlagSduiSearchResultsPageEnabled
 local FFlagLuaAppSearchResultsPageGameTileVideo = require(Parent.SharedFlags).FFlagLuaAppSearchResultsPageGameTileVideo
@@ -96,6 +97,7 @@ local StrictInterfaceResult1 = TModule.strictInterface({
 local config = {
 	[AppPage.Home] = StrictInterfaceResult,
 	[AppPage.Games] = StrictInterfaceResult,
+	[AppPage.Campaign] = if FFlagAppIaHomeCampaignSubTab then StrictInterfaceResult else nil,
 	[AppPage.SduiLandingPage] = if FFlagLuaAppSduiLandingPageEnabled then StrictInterfaceResult else nil,
 	[AppPage.SearchPage] = TModule.strictInterface({
 		absPositions = TModule.string,
@@ -187,8 +189,8 @@ local config = {
 }
 
 return function(p1, EventContext, CustomFields)
-	-- upvalues: AppPage (copy), StrictInterfaceResult1 (copy), config (copy), DiscoveryEventErrorLogger (copy), FFlagLuaAppGameImpressionsAddUnifiedFields (copy), CryoModule (copy), HttpService (copy), ContentType (copy), FFlagLuaAppMigrateGameEventsTelemetryService (copy), TelemetryService (copy), Config (ref), GetPlatformTargetFunction (copy), FFlagLuaAppGameEventsTelemetryServiceShadowTraffic (copy), Config1 (ref)
-	local StrictInterfaceResult = if CustomFields.seeAllFlag and (EventContext == AppPage.Home or EventContext == AppPage.Games) then StrictInterfaceResult1 else config[EventContext]
+	-- upvalues: AppPage (copy), StrictInterfaceResult1 (copy), FFlagAppIaHomeCampaignSubTab (copy), config (copy), DiscoveryEventErrorLogger (copy), FFlagLuaAppGameImpressionsAddUnifiedFields (copy), CryoModule (copy), HttpService (copy), ContentType (copy), FFlagLuaAppMigrateGameEventsTelemetryService (copy), TelemetryService (copy), Config (ref), GetPlatformTargetFunction (copy), FFlagLuaAppGameEventsTelemetryServiceShadowTraffic (copy), Config1 (ref)
+	local StrictInterfaceResult = if CustomFields.seeAllFlag and (EventContext == AppPage.Home or EventContext == AppPage.Games) then StrictInterfaceResult1 elseif FFlagAppIaHomeCampaignSubTab and CustomFields.seeAllFlag and EventContext == AppPage.Campaign then StrictInterfaceResult1 else config[EventContext]
 	
 	if StrictInterfaceResult then
 		local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)

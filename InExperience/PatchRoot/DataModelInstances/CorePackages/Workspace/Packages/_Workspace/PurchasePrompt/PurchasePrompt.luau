@@ -23,7 +23,6 @@ local SetProductPayloadModule = require(v1.Actions.SetProductPayload)
 local SetPurchaseAnalyticsMetadataModule = require(v1.Actions.SetPurchaseAnalyticsMetadata)
 local FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow = require(v1.Parent.SharedFlags).FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow
 local FFlagEnablePurchasePayloadInExperienceShop = SharedFlagsModule.FFlagEnablePurchasePayloadInExperienceShop
-local FFlagPassShopPurchaseSurfaceToBuyModal = SharedFlagsModule.FFlagPassShopPurchaseSurfaceToBuyModal
 local FFlagSkipBuyDelayForExperienceShopModule = require(v1.Flags.FFlagSkipBuyDelayForExperienceShop)
 local _ = require(v1.types)
 local FFlagPurchasePromptSubtitleForTimedOptions = require(v1.Parent.SharedFlags).FFlagPurchasePromptSubtitleForTimedOptions
@@ -94,7 +93,7 @@ return {
 		NewResult:dispatch(InitiateAvatarCreationFeePurchaseModule(p1, p2, p3, p4))
 	end,
 	initiatePurchaseForProductPayload = function(p1, p2)
-		-- upvalues: NewResult (ref), FFlagEnablePurchasePayloadInExperienceShop (copy), FFlagSkipBuyDelayForExperienceShopModule (copy), SetProductPayloadModule (copy), FFlagPassShopPurchaseSurfaceToBuyModal (copy), SetPurchaseAnalyticsMetadataModule (copy), DispatchPurchaseForProductPayloadModule (copy)
+		-- upvalues: NewResult (ref), FFlagEnablePurchasePayloadInExperienceShop (copy), FFlagSkipBuyDelayForExperienceShopModule (copy), SetProductPayloadModule (copy), SetPurchaseAnalyticsMetadataModule (copy), DispatchPurchaseForProductPayloadModule (copy)
 		if not NewResult then
 			warn("initiatePurchaseForProductPayload called before mountPurchasePrompt; ignoring.")
 			
@@ -103,7 +102,7 @@ return {
 		if FFlagEnablePurchasePayloadInExperienceShop or FFlagSkipBuyDelayForExperienceShopModule then
 			NewResult:dispatch(SetProductPayloadModule(p1))
 		end
-		if FFlagPassShopPurchaseSurfaceToBuyModal and p2 then
+		if p2 then
 			NewResult:dispatch(SetPurchaseAnalyticsMetadataModule({
 				surface = p2.surface,
 				productUniverseId = p2.productUniverseId

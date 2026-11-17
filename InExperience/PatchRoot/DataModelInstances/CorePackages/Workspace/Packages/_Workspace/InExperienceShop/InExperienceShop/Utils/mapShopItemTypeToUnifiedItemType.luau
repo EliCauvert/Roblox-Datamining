@@ -1,6 +1,7 @@
 ﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
 local Parent = InExperienceShop.Parent
 local _ = require(InExperienceShop.Types)
+local _ = require(Parent.UnifiedEventEnums)
 
 return function(p1)
 	-- upvalues: Parent (copy)

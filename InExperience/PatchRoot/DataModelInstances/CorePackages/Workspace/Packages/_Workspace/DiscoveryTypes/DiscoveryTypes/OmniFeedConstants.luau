@@ -7,6 +7,7 @@ local FFlagLuaAppRfyRevealRows = require(Parent.SharedFlags).FFlagLuaAppRfyRevea
 local FFlagLuaAppSortHeaderAnchorTag = require(Parent.SharedFlags).FFlagLuaAppSortHeaderAnchorTag
 local FFlagLuaAppContinueSortInstantPlay = require(Parent.SharedFlags).FFlagLuaAppContinueSortInstantPlay
 local FFlagLuaAppSupportHomeBackToTop = require(Parent.SharedFlags).FFlagLuaAppSupportHomeBackToTop
+local FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint = require(Parent.SharedFlags).FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint
 local _ = require(script.Parent.RoduxTypes)
 
 return {
@@ -17,6 +18,7 @@ return {
 		ShowBackToTop = if FFlagLuaAppSupportHomeBackToTop then "showBackToTop" else nil
 	},
 	TopicLayoutDataKeys = {
+		PersonalizedRecommendationsSurfaceKey = if FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint then "personalizedRecommendationsSurfaceKey" else nil,
 		PYMKFindFriendsEnabled = "PYMKFindFriendsEnabled",
 		PYMKSeeAllEnabled = "PYMKSeeAllEnabled",
 		JYFFindFriendsEnabled = "JYFFindFriendsEnabled",

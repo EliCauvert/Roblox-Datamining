@@ -1,6 +1,8 @@
 ﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
 local Parent = ProfilePlatform.Parent
 local HttpService = game:GetService("HttpService")
+local PromiseModule = require(Parent.Promise)
+local AppPage = require(Parent.RobloxAppEnums).AppPage
 local Images = require(Parent.UIBlox).App.ImageSet.Images
 local ButtonVariant = require(Parent.Foundation).Enums.ButtonVariant
 local ContextualInfoTypes = require(Parent.SocialCommon).Enums.ContextualInfoTypes
@@ -8,6 +10,7 @@ local SetCurrentToastMessageFunction = require(Parent.ToastRodux).Actions.SetCur
 local NetworkingFriendsModule = require(ProfilePlatform.Networking.NetworkingFriends)
 local RefreshProfilePlatformActionInfoModule = require(ProfilePlatform.Networking.refreshProfilePlatformActionInfo)
 local RefreshProfilePlatformModule = require(ProfilePlatform.Networking.refreshProfilePlatform)
+local SeededPymkModule = require(ProfilePlatform.Networking.SeededPymk)
 local ConstantsModule = require(ProfilePlatform.Common.Constants)
 local EnumsModule = require(ProfilePlatform.Common.Enums)
 local _ = require(ProfilePlatform.Components.CTARow.Types)
@@ -16,9 +19,21 @@ local ProfileTypes = EnumsModule.ProfileTypes
 local FFlagMigrateFriendshipStatusesRemainingActions = require(Parent.SharedFlags).FFlagMigrateFriendshipStatusesRemainingActions
 local FriendsStoreChallengeNetworkModule = require(ProfilePlatform.Networking.friendsStoreChallengeNetwork)
 local FFlagEnableFriendsStoreChallengeInterceptor = require(Parent.SharedFlags).FFlagEnableFriendsStoreChallengeInterceptor
+local FFlagProfilePlatformSeededPymk = require(Parent.SharedFlags).FFlagProfilePlatformSeededPymk
 local GetResult = require(Parent.DataHydration).Friends.FriendsStore.get()
 local USERFRIENDINGERRORS = ConstantsModule.USER_FRIENDING_ERRORS
 local STATUSCODES = ConstantsModule.STATUS_CODES
+
+local function loadSeededPymkRow(p1)
+	-- upvalues: EnumsModule (copy), PromiseModule (copy), SeededPymkModule (copy), AppPage (copy)
+	local ProfileSessionId = p1.profileWrapperContext.profileSessionId
+	
+	if p1.buttonSurface == EnumsModule.ButtonSurface.Actions and ProfileSessionId ~= nil then
+		PromiseModule.try(SeededPymkModule.fetchSeededPymkPage, ProfileSessionId, p1.profileId, AppPage.ProfilePlatform):catch(function() end)
+		
+		return
+	end
+end
 
 local function setErrorToast(p1, AddFriend, p2)
 	-- upvalues: EnumsModule (copy), STATUSCODES (copy), USERFRIENDINGERRORS (copy), HttpService (copy), SetCurrentToastMessageFunction (copy)
@@ -69,13 +84,13 @@ end
 
 return {
 	[EnumsModule.ProfileActions.AddFriend] = function(p1)
-		-- upvalues: EnumsModule (copy), ButtonVariant (copy), ProfileTypes (copy), EventNamesModule (copy), SetCurrentToastMessageFunction (copy), Images (copy), FFlagMigrateFriendshipStatusesRemainingActions (copy), GetResult (copy), FFlagEnableFriendsStoreChallengeInterceptor (copy), FriendsStoreChallengeNetworkModule (copy), NetworkingFriendsModule (copy), RefreshProfilePlatformActionInfoModule (copy), setErrorToast (copy)
+		-- upvalues: EnumsModule (copy), ButtonVariant (copy), ProfileTypes (copy), EventNamesModule (copy), SetCurrentToastMessageFunction (copy), Images (copy), FFlagMigrateFriendshipStatusesRemainingActions (copy), GetResult (copy), FFlagEnableFriendsStoreChallengeInterceptor (copy), FriendsStoreChallengeNetworkModule (copy), NetworkingFriendsModule (copy), FFlagProfilePlatformSeededPymk (copy), loadSeededPymkRow (copy), RefreshProfilePlatformActionInfoModule (copy), setErrorToast (copy)
 		return {
 			text = p1.localized[EnumsModule.ProfileActions.AddFriend],
 			variant = ButtonVariant.Emphasis,
 			onActivated = {
 				[ProfileTypes.User] = function()
-					-- upvalues: p1 (copy), EventNamesModule (upval), EnumsModule (upval), SetCurrentToastMessageFunction (upval), Images (upval), FFlagMigrateFriendshipStatusesRemainingActions (upval), GetResult (upval), FFlagEnableFriendsStoreChallengeInterceptor (upval), FriendsStoreChallengeNetworkModule (upval), NetworkingFriendsModule (upval), RefreshProfilePlatformActionInfoModule (upval), setErrorToast (upval)
+					-- upvalues: p1 (copy), EventNamesModule (upval), EnumsModule (upval), SetCurrentToastMessageFunction (upval), Images (upval), FFlagMigrateFriendshipStatusesRemainingActions (upval), GetResult (upval), FFlagEnableFriendsStoreChallengeInterceptor (upval), FriendsStoreChallengeNetworkModule (upval), NetworkingFriendsModule (upval), FFlagProfilePlatformSeededPymk (upval), loadSeededPymkRow (upval), RefreshProfilePlatformActionInfoModule (upval), setErrorToast (upval)
 					p1.analytics.fireAnalyticsEvent(EventNamesModule.CTAButtonAddFriend, {
 						buttonSurface = p1.buttonSurface,
 						absolutePosition = p1.profileWrapperContext.sourceInfo.homepageCarouselAbsolutePosition,
@@ -98,7 +113,10 @@ return {
 						currentUserId = p1.localUserId,
 						friendshipOriginSourceType = p1.profileWrapperContext.sourceInfo.friendshipOriginSourceType
 					}))):andThen(function()
-						-- upvalues: p1 (upval), RefreshProfilePlatformActionInfoModule (upval)
+						-- upvalues: FFlagProfilePlatformSeededPymk (upval), loadSeededPymkRow (upval), p1 (upval), RefreshProfilePlatformActionInfoModule (upval)
+						if FFlagProfilePlatformSeededPymk then
+							loadSeededPymkRow(p1)
+						end
 						return p1.dispatch(RefreshProfilePlatformActionInfoModule(p1.profileId, p1.actionsComponentRequest))
 					end):catch(function(Err)
 						-- upvalues: setErrorToast (upval), p1 (upval), EnumsModule (upval)

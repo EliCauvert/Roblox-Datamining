@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AppIaHomeCampaignSubTab", false)
+﻿return game:DefineFastFlag("AppIaHomeCampaignSubTab2", false)

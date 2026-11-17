@@ -1,6 +1,6 @@
-﻿local FFlagExpChatStickyTabs = require(script:FindFirstAncestor("ExpChat").Parent.SharedFlags).FFlagExpChatStickyTabs
+﻿local IsStickyTabRestoreEnabledModule = require(script:FindFirstAncestor("ExpChat").isStickyTabRestoreEnabled)
 
 return function(p1): boolean
-	-- upvalues: FFlagExpChatStickyTabs (copy)
-	return not (FFlagExpChatStickyTabs and p1)
+	-- upvalues: IsStickyTabRestoreEnabledModule (copy)
+	return not (IsStickyTabRestoreEnabledModule() and p1)
 end

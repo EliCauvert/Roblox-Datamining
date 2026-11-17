@@ -6,6 +6,7 @@ local NavigationModule = require(Parent.Navigation)
 local ReactModule = require(Parent.React)
 local UseStoreFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useStore
 local DescriptionWithGroupIconModule = require(BuildExperience.utils.descriptionWithGroupIcon)
+local FFlagBuildUpdatedSearchUXForGAModule = require(BuildExperience.Flags.FFlagBuildUpdatedSearchUXForGA)
 local GetGameDetailsNavigationModule = require(BuildExperience.utils.getGameDetailsNavigation)
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local _ = require(script.Parent.PreviewsTabView)
@@ -17,12 +18,13 @@ local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local UseNavigationFunction = NavigationModule.useNavigation
 
 return function(p1)
-	-- upvalues: UseNavigationFunction (copy), UseStoreFunction (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), SendBuildExperienceEventModule (copy), OpenGameDetailsFunction (copy), GetGameDetailsNavigationModule (copy), GetRootNavigationFunction (copy), DescriptionWithGroupIconModule (copy)
+	-- upvalues: UseNavigationFunction (copy), UseStoreFunction (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildUpdatedSearchUXForGAModule (copy), ReactModule (copy), SendBuildExperienceEventModule (copy), OpenGameDetailsFunction (copy), GetGameDetailsNavigationModule (copy), GetRootNavigationFunction (copy), DescriptionWithGroupIconModule (copy)
 	local UseNavigationResult = UseNavigationFunction()
 	local UseStoreResult = UseStoreFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
 		loadError = LocalizationStringsModule.MY_CREATIONS_LOAD_ERROR,
-		noGames = LocalizationStringsModule.MY_CREATIONS_NO_GAMES
+		noGames = LocalizationStringsModule.MY_CREATIONS_NO_GAMES,
+		noSearchResults = if FFlagBuildUpdatedSearchUXForGAModule then LocalizationStringsModule.LIBRARY_SEARCH_EMPTY else nil
 	})
 	local Results = p1.results
 	local LoadMoreFunction = Results.loadMore
@@ -66,6 +68,6 @@ return function(p1)
 			end
 		end, { LoadMoreFunction }),
 		retryLoadMore = LoadMoreFunction,
-		emptyText = UseLocalizationResult.noGames
+		emptyText = if FFlagBuildUpdatedSearchUXForGAModule and Results.query ~= "" then UseLocalizationResult.noSearchResults else UseLocalizationResult.noGames
 	}
 end

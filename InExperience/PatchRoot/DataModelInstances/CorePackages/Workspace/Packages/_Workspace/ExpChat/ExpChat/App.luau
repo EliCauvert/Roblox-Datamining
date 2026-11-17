@@ -17,6 +17,8 @@ local FriendsChatEventReceiverConnectorModule = require(script.Parent.FriendsCha
 local ShortcutNavReceiverModule = require(script.Parent.ShortcutNav.ShortcutNavReceiver)
 local ExpChatPresetChatEmojiTabExperimentation = require(Parent.SocialExperiments).ExpChatPresetChatEmojiTabExperimentation
 local PresetChatEmojiTabExposureLoggerModule = if ExpChatPresetChatEmojiTabExperimentation.isExperimentEnabled then require(script.Parent.PresetChat.PresetChatEmojiTabExposureLogger) else nil
+local FFlagExpChatOpenChatWindowHasChatAccessExposureModule = require(ExpChat.Flags.FFlagExpChatOpenChatWindowHasChatAccessExposure)
+local OpenChatWindowHasChatAccessExposureLoggerModule = require(script.Parent.OpenChatWindowHasChatAccessExposureLogger)
 local GetFFlagExpChatTelemetryEventTriggerModule = require(ExpChat.Flags.getFFlagExpChatTelemetryEventTrigger)
 
 local function computePresetBitmap(AllTextChannels): number
@@ -64,7 +66,7 @@ App.defaultProps = {
 }
 
 function App.render(p1)
-	-- upvalues: RoactModule (copy), RoactRoduxModule (copy), LocalizationModule (copy), GameLocalizationModule (copy), ExpChatReconcileOnAgeVerifiedChange (copy), ExpChatEventReceiverModule (copy), FriendsChatEventReceiverConnectorModule (copy), ShortcutNavReceiverModule (copy), ExpChatPresetChatEmojiTabExperimentation (copy), PresetChatEmojiTabExposureLoggerModule (copy), AppContainerModule (copy)
+	-- upvalues: RoactModule (copy), RoactRoduxModule (copy), LocalizationModule (copy), GameLocalizationModule (copy), ExpChatReconcileOnAgeVerifiedChange (copy), ExpChatEventReceiverModule (copy), FriendsChatEventReceiverConnectorModule (copy), ShortcutNavReceiverModule (copy), ExpChatPresetChatEmojiTabExperimentation (copy), PresetChatEmojiTabExposureLoggerModule (copy), FFlagExpChatOpenChatWindowHasChatAccessExposureModule (copy), OpenChatWindowHasChatAccessExposureLoggerModule (copy), AppContainerModule (copy)
 	return p1.props.isDefaultChatEnabled and RoactModule.createElement(RoactRoduxModule.StoreProvider, { store = p1.props.store }, {
 		localization = RoactModule.createElement(LocalizationModule.Provider, { value = p1.props.translator }, {
 			gameLocalization = RoactModule.createElement(GameLocalizationModule.Provider, { value = p1.props.gameTranslator }, {
@@ -72,6 +74,7 @@ function App.render(p1)
 				friendsChatEventReceiver = RoactModule.createElement(FriendsChatEventReceiverConnectorModule),
 				shortcutNavReceiver = RoactModule.createElement(ShortcutNavReceiverModule),
 				presetChatEmojiTabExposureLogger = if ExpChatPresetChatEmojiTabExperimentation.isExperimentEnabled then RoactModule.createElement(PresetChatEmojiTabExposureLoggerModule) else nil,
+				openChatWindowHasChatAccessExposureLogger = if FFlagExpChatOpenChatWindowHasChatAccessExposureModule then RoactModule.createElement(OpenChatWindowHasChatAccessExposureLoggerModule) else nil,
 				container = RoactModule.createElement(AppContainerModule, {
 					isChatInputBarVisible = p1.props.isChatInputBarVisible,
 					isChatWindowVisible = p1.props.isChatWindowVisible,

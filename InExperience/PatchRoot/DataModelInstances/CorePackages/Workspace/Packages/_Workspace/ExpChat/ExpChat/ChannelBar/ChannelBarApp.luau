@@ -15,6 +15,7 @@ local FFlagExpChatUseChatConfigStore = SharedFlagsModule.FFlagExpChatUseChatConf
 local FFlagExpChatLogGlobalChatTabClickedModule = require(ExpChat.Flags.FFlagExpChatLogGlobalChatTabClicked)
 local FFlagGlobalTextChatAddPlaySessionFieldModule = require(ExpChat.Flags.FFlagGlobalTextChatAddPlaySessionField)
 local GetChatConfigurationStoreModule = require(ExpChat.Stores.GetChatConfigurationStore)
+local FFlagExpChatMemoizeChannelBarModule = require(ExpChat.Flags.FFlagExpChatMemoizeChannelBar)
 local SelectTabByTypeModule = require(ExpChat.TabNavigation.selectTabByType)
 local FFlagDebugFriendsChatModule = require(Parent.FriendsChat.FFlagDebugFriendsChat)
 local LocalTextChannelParticipantAddedModule = require(ExpChat.Actions.LocalTextChannelParticipantAdded)
@@ -25,15 +26,37 @@ local CreateEffectFunction = SignalsModule.createEffect
 local ChannelBarModule = require(script.Parent.UI.ChannelBar)
 local ChannelBarApp = RoactModule.Component:extend("ChannelBarApp")
 
-if FFlagExpChatUseChatConfigStore then
+if FFlagExpChatUseChatConfigStore or FFlagExpChatMemoizeChannelBarModule then
 	function ChannelBarApp.init(p1)
-		-- upvalues: GetChatConfigurationStoreModule (copy)
-		p1.chatConfigStore = GetChatConfigurationStoreModule(false)
-		p1.state = {
-			channelTabsSettings = p1.chatConfigStore.getChannelTabsSettings(false)
-		}
+		-- upvalues: FFlagExpChatUseChatConfigStore (copy), GetChatConfigurationStoreModule (copy), FFlagExpChatMemoizeChannelBarModule (copy)
+		if FFlagExpChatUseChatConfigStore then
+			p1.chatConfigStore = GetChatConfigurationStoreModule(false)
+			p1.state = {
+				channelTabsSettings = p1.chatConfigStore.getChannelTabsSettings(false)
+			}
+		end
+		if FFlagExpChatMemoizeChannelBarModule then
+			function p1.onTabSelected(p2, p3, ChannelName, p4)
+				-- upvalues: p1 (copy)
+				p1:handleTabSelected(p2, p3, ChannelName, p4)
+			end
+		end
 	end
 end
+function ChannelBarApp.handleTabSelected(p1, p2, p3, ChannelName, p4)
+	-- upvalues: FFlagExpChatLogGlobalChatTabClickedModule (copy), Analytics (copy), FFlagGlobalTextChatAddPlaySessionFieldModule (copy)
+	if p4 == "UniverseChat" and FFlagExpChatLogGlobalChatTabClickedModule and ChannelName ~= p1.props.selectedTabName then
+		local Copy = table.clone(Analytics.DefaultStandardizedFields)
+		table.insert(Copy, "addPlaceInstanceId")
+		
+		if FFlagGlobalTextChatAddPlaySessionFieldModule then
+			table.insert(Copy, "addPlaySessionId")
+		end
+		Analytics:TelemetryLogEvent(Analytics.ExpChatGlobalChatTabClickedConfig, { channelName = ChannelName }, Copy)
+	end
+	p1.props.onTabSelected(p2, p3, ChannelName, p4)
+end
+
 function ChannelBarApp.didMount(p1)
 	-- upvalues: FFlagExpChatUseChatConfigStore (copy), CreateEffectFunction (copy), FFlagDebugFriendsChatModule (copy), UserInputService (copy)
 	if FFlagExpChatUseChatConfigStore then
@@ -67,25 +90,16 @@ function ChannelBarApp.willUnmount(p1)
 end
 
 function ChannelBarApp.render(p1)
-	-- upvalues: FFlagExpChatUseChatConfigStore (copy), ReactModule (copy), ChannelBarModule (copy), FFlagExpChatLogGlobalChatTabClickedModule (copy), Analytics (copy), FFlagGlobalTextChatAddPlaySessionFieldModule (copy)
+	-- upvalues: FFlagExpChatUseChatConfigStore (copy), ReactModule (copy), ChannelBarModule (copy), FFlagExpChatMemoizeChannelBarModule (copy)
 	return ReactModule.createElement(ChannelBarModule, {
 		channelTabsSettings = if FFlagExpChatUseChatConfigStore then p1.state.channelTabsSettings else p1.props.channelTabsSettings,
 		chatWindowSettings = p1.props.chatWindowSettings,
 		allChannelTabs = p1.props.allChannelTabs,
 		allTextChannels = p1.props.allTextChannels,
 		selectedTabName = p1.props.selectedTabName,
-		onTabSelected = function(p2, p3, ChannelName, p4)
-			-- upvalues: FFlagExpChatLogGlobalChatTabClickedModule (upval), p1 (copy), Analytics (upval), FFlagGlobalTextChatAddPlaySessionFieldModule (upval)
-			if p4 == "UniverseChat" and FFlagExpChatLogGlobalChatTabClickedModule and ChannelName ~= p1.props.selectedTabName then
-				local Copy = table.clone(Analytics.DefaultStandardizedFields)
-				table.insert(Copy, "addPlaceInstanceId")
-				
-				if FFlagGlobalTextChatAddPlaySessionFieldModule then
-					table.insert(Copy, "addPlaySessionId")
-				end
-				Analytics:TelemetryLogEvent(Analytics.ExpChatGlobalChatTabClickedConfig, { channelName = ChannelName }, Copy)
-			end
-			p1.props.onTabSelected(p2, p3, ChannelName, p4)
+		onTabSelected = if FFlagExpChatMemoizeChannelBarModule then p1.onTabSelected else function(p2, p3, ChannelName, p4)
+			-- upvalues: p1 (copy)
+			p1:handleTabSelected(p2, p3, ChannelName, p4)
 		end,
 		onHovered = p1.props.onHovered,
 		onUnhovered = p1.props.onUnhovered,

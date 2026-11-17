@@ -2,7 +2,10 @@
 local CorePackages = game:GetService("CorePackages")
 local ServiceModule = require(Chrome.Service)
 local CommonIconModule = require(Chrome.Integrations.CommonIcon)
-local SideSheetPlacement = require(CorePackages.Workspace.Packages.Chrome).Enums.SideSheetPlacement
+local ChromeModule = require(CorePackages.Workspace.Packages.Chrome)
+local SideSheetOpenBehavior = ChromeModule.Enums.SideSheetOpenBehavior
+local SideSheetPlacement = ChromeModule.Enums.SideSheetPlacement
+local FFlagKeepSideSheetOpenBesideMenu = require(CorePackages.Workspace.Packages.SharedFlags).FFlagKeepSideSheetOpenBesideMenu
 local ConstantsModule = require(Chrome.ChromeShared.Unibar.Constants)
 local SwitchServerModule = require(CorePackages.Workspace.Packages.SwitchServer)
 local Constants = SwitchServerModule.Constants
@@ -29,6 +32,7 @@ local RegisterResult = ServiceModule:register({
 	id = ConstantsModule.SWITCH_SERVER_ID,
 	label = Constants.BUTTON.LABEL,
 	sideSheetPlacement = if IsPioneerLaunchFunction() then SideSheetPlacement.SessionAction else SideSheetPlacement.BelowFold,
+	sideSheetOpenBehavior = if FFlagKeepSideSheetOpenBesideMenu then SideSheetOpenBehavior.CloseSheet else nil,
 	activated = function()
 		-- upvalues: SwitchServerStore (copy)
 		SwitchServerStore.setConfirmationOpen(true)

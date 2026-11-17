@@ -15,10 +15,11 @@ local _ = require(Parent.Analytics.AnalyticsTypes)
 local FFlagPymkCarouselPresenceStoreMigrationModule = require(Parent.Flags.FFlagPymkCarouselPresenceStoreMigration)
 local FFlagLuaAppEnableSduiHomePage = require(Parent1.SharedFlags).FFlagLuaAppEnableSduiHomePage
 local FFlagPymkCarouselExtendProps = require(Parent1.SharedFlags).FFlagPymkCarouselExtendProps
+local FFlagProfilePlatformSeededPymk = require(Parent1.SharedFlags).FFlagProfilePlatformSeededPymk
 local _ = require(Parent1.UserList)
 
 return function(p1)
-	-- upvalues: ReactModule (copy), ImpressionsTagUtility (copy), FFlagLuaAppEnableSduiHomePage (copy), UseSelectorFunction (copy), FFlagPymkCarouselExtendProps (copy), GetDeepValueFunction (copy), RoduxFriends (copy), UsePrimaryCtaModule (copy), UseContextualInfoModule (copy), UseUserPresenceModule (copy), FFlagPymkCarouselPresenceStoreMigrationModule (copy), UseOnActivatedTileModule (copy)
+	-- upvalues: ReactModule (copy), ImpressionsTagUtility (copy), FFlagLuaAppEnableSduiHomePage (copy), UseSelectorFunction (copy), FFlagPymkCarouselExtendProps (copy), GetDeepValueFunction (copy), RoduxFriends (copy), UsePrimaryCtaModule (copy), UseContextualInfoModule (copy), FFlagProfilePlatformSeededPymk (copy), UseUserPresenceModule (copy), FFlagPymkCarouselPresenceStoreMigrationModule (copy), UseOnActivatedTileModule (copy)
 	local Text = tostring(p1.entity.id)
 	local UseRefResult = ReactModule.useRef(nil)
 	ReactModule.useEffect(function()
@@ -77,7 +78,8 @@ return function(p1)
 	})
 	local UseContextualInfoModuleResult = UseContextualInfoModule({
 		recommendation = Recommendation,
-		hasIncomingFriendRequest = HasIncomingFriendRequest
+		hasIncomingFriendRequest = HasIncomingFriendRequest,
+		seedUserDisplayName = if FFlagProfilePlatformSeededPymk then p1.seedUserDisplayName else nil
 	})
 	local LoadingState = {
 		subtitle = false,

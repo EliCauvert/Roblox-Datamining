@@ -19,6 +19,7 @@ local GetOtherDisplayNameInWhisperChannelModule = require(ExpChat.getOtherDispla
 local GetUnreadIndicatorLayoutModule = require(script.Parent.getUnreadIndicatorLayout)
 local UseTabImpressionModule = require(script.Parent.useTabImpression)
 local FFlagExpChatGlobalTabDefaultModule = require(ExpChat.Flags.FFlagExpChatGlobalTabDefault)
+local FFlagExpChatMemoizeChannelBarModule = require(ExpChat.Flags.FFlagExpChatMemoizeChannelBar)
 local UnreachableFunction = ExpChatSharedModule.TabTypes.unreachable
 local Offset: number = if FFlagExpChatChannelTabSizingUpdateModule then 12 else 20
 local _Color3 = Color3.fromRGB(255, 255, 255)
@@ -49,8 +50,8 @@ local function createUnreadDot(Position, SetTransparencyResult)
 	})
 end
 
-return function(p1)
-	-- upvalues: Dictionary (copy), config (copy), UseTabImpressionModule (copy), FFlagExpChatGlobalTabDefaultModule (copy), LocalizationModule (copy), FFlagExpChatUseSharedChannelTabDisplayLabel (copy), ChannelTabDisplayLabel (copy), Players (copy), GetOtherDisplayNameInWhisperChannelModule (copy), UnreachableFunction (copy), ReactModule (copy), UseSelectionCursorFunction (copy), CursorKind (copy), FFlagExpChatChannelTabSizingUpdateModule (copy), TextService (copy), GetUnreadIndicatorLayoutModule (copy), Offset (copy), Interactable (copy), createUnreadDot (copy), _Color3 (copy), ConfigModule (copy)
+local function ChannelTab(p1)
+	-- upvalues: Dictionary (copy), config (copy), UseTabImpressionModule (copy), FFlagExpChatGlobalTabDefaultModule (copy), LocalizationModule (copy), FFlagExpChatUseSharedChannelTabDisplayLabel (copy), ChannelTabDisplayLabel (copy), Players (copy), GetOtherDisplayNameInWhisperChannelModule (copy), UnreachableFunction (copy), ReactModule (copy), UseSelectionCursorFunction (copy), CursorKind (copy), FFlagExpChatChannelTabSizingUpdateModule (copy), TextService (copy), GetUnreadIndicatorLayoutModule (copy), Offset (copy), FFlagExpChatMemoizeChannelBarModule (copy), Interactable (copy), createUnreadDot (copy), _Color3 (copy), ConfigModule (copy)
 	local JoinResult = Dictionary.join(config, p1)
 	UseTabImpressionModule({
 		enabled = JoinResult.isLayoutReady,
@@ -174,11 +175,21 @@ return function(p1)
 		BackgroundTransparency = JoinResult.isTabCollapsed and JoinResult.setTransparency(JoinResult.channelTabsSettings.BackgroundTransparency) or 1,
 		BackgroundColor3 = JoinResult.isTabCollapsed and UseStateResult or JoinResult.channelTabsSettings.BackgroundColor3,
 		BorderSizePixel = 0,
-		ref = JoinResult.tabRef,
+		ref = if FFlagExpChatMemoizeChannelBarModule then ReactModule.useCallback(function(p2)
+			-- upvalues: JoinResult (copy)
+			if JoinResult.tabRef then
+				JoinResult.tabRef(p2, JoinResult.channelName)
+			end
+		end, { JoinResult.tabRef, JoinResult.channelName }) else JoinResult.tabRef,
 		SelectionImageObject = UseSelectionCursorResult,
-		onStateChanged = function() end,
+		onStateChanged = if FFlagExpChatMemoizeChannelBarModule then nil else function() end,
 		[ReactModule.Change.AbsoluteSize] = v1,
-		[ReactModule.Event.Activated] = JoinResult.onTabSelected,
+		[ReactModule.Event.Activated] = if FFlagExpChatMemoizeChannelBarModule then ReactModule.useCallback(function()
+			-- upvalues: JoinResult (copy)
+			if JoinResult.onTabSelected then
+				JoinResult.onTabSelected(JoinResult.channelName)
+			end
+		end, { JoinResult.onTabSelected, JoinResult.channelName }) else JoinResult.onTabSelected,
 		[ReactModule.Event.MouseEnter] = function()
 			-- upvalues: JoinResult (copy), UseStateResult2 (copy)
 			if JoinResult.isTabCollapsed then
@@ -232,3 +243,5 @@ return function(p1)
 		})
 	})
 end
+
+return if FFlagExpChatMemoizeChannelBarModule then ReactModule.memo(ChannelTab) else ChannelTab

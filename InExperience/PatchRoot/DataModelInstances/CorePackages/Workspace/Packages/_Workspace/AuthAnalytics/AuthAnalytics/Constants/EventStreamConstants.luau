@@ -223,7 +223,8 @@
 		AddAuthMethodPage = "addAuthMethodPage",
 		PlatformRestrictedPage = "platformRestrictedPage",
 		KISAU14Signup = "kisaU14Signup",
-		BirthdayComplianceUnblockWait = "birthdayComplianceUnblockWait"
+		BirthdayComplianceUnblockWait = "birthdayComplianceUnblockWait",
+		SsoAccessCheckBeforeRoute = "ssoAccessCheckBeforeRoute"
 	},
 	ActionType = {
 		Submit = "submit",
@@ -309,7 +310,10 @@
 		GatewayUnblocked = "gatewayUnblocked",
 		GatewayRetriesExhausted = "gatewayRetriesExhausted",
 		GatewayProbeFailed = "gatewayProbeFailed",
-		FetchAccessStatusError = "fetchAccessStatusError"
+		FetchAccessStatusError = "fetchAccessStatusError",
+		BirthdayComplianceFound = "birthdayComplianceFound",
+		BirthdayComplianceNotFound = "birthdayComplianceNotFound",
+		AccessCheckTimeout = "accessCheckTimeout"
 	},
 	EventTimingKeys = { OsClock = "os_clock", OsTime = "os_time" }
 }

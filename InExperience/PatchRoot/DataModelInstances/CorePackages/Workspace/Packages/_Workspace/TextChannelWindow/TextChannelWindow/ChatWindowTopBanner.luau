@@ -78,8 +78,10 @@ local function TopBannerView(p1)
 	})
 end
 
+local MemoResult = if require(script.Parent.Flags.FFlagExpChatTCWMemoizeTopBannerView) then ReactModule.memo(TopBannerView) else TopBannerView
+
 local function TopBannerFocusNav(p1)
-	-- upvalues: ReactModule (copy), TopBannerView (copy), ReportMenuFocusRootModule (copy)
+	-- upvalues: ReactModule (copy), MemoResult (copy), ReportMenuFocusRootModule (copy)
 	local IsOpen = p1.isOpen
 	local OnOpenChangedFunction = p1.onOpenChanged
 	ReactModule.useEffect(function()
@@ -92,8 +94,8 @@ local function TopBannerFocusNav(p1)
 	return ReactModule.createElement(ReportMenuFocusRootModule, {
 		isOpen = p1.isOpen,
 		render = ReactModule.useCallback(function(p2)
-			-- upvalues: ReactModule (upval), TopBannerView (upval), p1 (copy)
-			return ReactModule.createElement(TopBannerView, {
+			-- upvalues: ReactModule (upval), MemoResult (upval), p1 (copy)
+			return ReactModule.createElement(MemoResult, {
 				ZIndex = p1.ZIndex,
 				isOpen = p1.isOpen,
 				items = p1.items,

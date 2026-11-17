@@ -21,6 +21,7 @@ local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local FFlagAXDurablesForMIS = AvatarExperienceFlagsModule.FFlagAXDurablesForMIS
 local FFlagAXDurables2Option = AvatarExperienceFlagsModule.FFlagAXDurables2Option
 local FFlagAXMISOffersChip = AvatarExperienceFlagsModule.FFlagAXMISOffersChip
+local FFlagAXIaBPlusExclusiveUpsell = AvatarExperienceFlagsModule.FFlagAXIaBPlusExclusiveUpsell
 local FFlagAXMarketplaceItemCardIndicatorStack = AvatarExperienceFlagsModule.FFlagAXMarketplaceItemCardIndicatorStack
 local FFlagAXMarketplaceLicensingItemCards = AvatarExperienceFlagsModule.FFlagAXMarketplaceLicensingItemCards
 local FFlagAXGifting = AvatarExperienceFlagsModule.FFlagAXGifting
@@ -43,7 +44,7 @@ local function buildItemStatusContent(ItemStatus, Icon)
 end
 
 return (ReactModule.forwardRef(function(Frame: Frame, Ref)
-	-- upvalues: UseTokensFunction (copy), ItemInfoIconMap (copy), ItemTypeToContentMap (copy), FFlagAXMarketplaceItemCardIndicatorStack (copy), ItemStatusIconTypeToIconMap (copy), FFlagAXMarketplaceLicensingItemCards (copy), ReactModule (copy), LicensingBadgeModule (copy), FoundationModule (copy), buildItemStatusContent (copy), ShouldRenderIndicatorStackModule (copy), IndicatorStackModule (copy), ItemCardHeader (copy), ItemCardHeaderCornersOverlay (copy), ItemCardBadge (copy), ItemCardStatus (copy), ItemCardIcon (copy), FFlagAXRemoveDynamicHeadBadge (copy), CatalogRowItemCardFooterModule (copy), FFlagAXDurables2Option (copy), FFlagAXDurablesForMIS (copy), FFlagAXEnableTimedOptionsForCatalogRowCard (copy), FFlagAXGifting (copy), FFlagAXMISOffersChip (copy)
+	-- upvalues: UseTokensFunction (copy), ItemInfoIconMap (copy), ItemTypeToContentMap (copy), FFlagAXMarketplaceItemCardIndicatorStack (copy), ItemStatusIconTypeToIconMap (copy), FFlagAXMarketplaceLicensingItemCards (copy), ReactModule (copy), LicensingBadgeModule (copy), FoundationModule (copy), buildItemStatusContent (copy), ShouldRenderIndicatorStackModule (copy), IndicatorStackModule (copy), ItemCardHeader (copy), ItemCardHeaderCornersOverlay (copy), ItemCardBadge (copy), ItemCardStatus (copy), ItemCardIcon (copy), FFlagAXRemoveDynamicHeadBadge (copy), CatalogRowItemCardFooterModule (copy), FFlagAXDurables2Option (copy), FFlagAXDurablesForMIS (copy), FFlagAXEnableTimedOptionsForCatalogRowCard (copy), FFlagAXGifting (copy), FFlagAXIaBPlusExclusiveUpsell (copy), FFlagAXMISOffersChip (copy)
 	local UseTokensResult = UseTokensFunction()
 	local ItemInfoIcon = if Frame.itemInfo then ItemInfoIconMap[Frame.itemInfo] else nil
 	local ItemTypeToContent = if Frame.itemType then ItemTypeToContentMap[Frame.itemType] else nil
@@ -123,6 +124,7 @@ return (ReactModule.forwardRef(function(Frame: Frame, Ref)
 			wearTimeSelectedOptionInList = if FFlagAXDurablesForMIS or FFlagAXEnableTimedOptionsForCatalogRowCard then Frame.wearTimeSelectedOptionInList else nil,
 			onRemove = if FFlagAXDurables2Option then Frame.onRemove else nil,
 			giftButton = if FFlagAXGifting then Frame.giftButton else nil,
+			actionButton = if FFlagAXIaBPlusExclusiveUpsell then Frame.actionButton else nil,
 			hideTimedOptionSelections = if FFlagAXDurables2Option then Frame.hideTimedOptionSelections else nil,
 			Size = Frame.footerSize,
 			AutomaticSize = if Frame.footerAutomaticSize then Frame.footerAutomaticSize else Enum.AutomaticSize.Y,

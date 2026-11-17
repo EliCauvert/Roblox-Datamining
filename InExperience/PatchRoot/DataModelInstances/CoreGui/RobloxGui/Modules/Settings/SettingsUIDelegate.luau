@@ -6,6 +6,7 @@ local PanelType = VrSpatialUiModule.Constants.PanelType
 local UIManager = VrSpatialUiModule.UIManager
 local ThemeModule = require(script.Parent.Theme)
 local CreateFunction = require(CorePackages.Workspace.Packages.AppCommonLib).Create
+local InGameMenu = require(CorePackages.Workspace.Packages.CoreScriptsCommon).Constants.InGameMenu
 local _ = require(CorePackages.Packages.UIBlox)
 local GetStyleTokensModule = require(RobloxGui.Modules.Chrome.ChromeShared.Utility.GetStyleTokens)
 local ChatSelectorModule = require(RobloxGui.Modules.ChatSelector)
@@ -15,6 +16,10 @@ local SpatialUIVersionTextSizeScaled = game:DefineFastInt("SpatialUIVersionTextS
 local InExperienceUIVRIXP = require(CorePackages.Workspace.Packages.SharedExperimentDefinition).InExperienceUIVRIXP
 local FFlagSpatialUIFixMenuPanelChatExclusiveModule = require(RobloxGui.Modules.Settings.Flags.FFlagSpatialUIFixMenuPanelChatExclusive)
 local SpatialUIFixGameInviteChatExclusive = game:DefineFastFlag("SpatialUIFixGameInviteChatExclusive", false)
+local config = {
+	HUB_BAR_WIDTH = InGameMenu.HubBarWidth,
+	ASPECT_RATIO = InGameMenu.HubBarWidth / InGameMenu.PageMaxHeight
+}
 local v1 = nil
 
 local function _()
@@ -190,20 +195,20 @@ function SettingsUIDelegateModule:disableVR()
 end
 
 function SettingsUIDelegateModule:getAspectRatio()
-	-- upvalues: UIManager (copy), PanelType (copy)
+	-- upvalues: UIManager (copy), PanelType (copy), config (copy)
 	if self._vrEnabled then
 		local PanelSizeInPixel = UIManager.getInstance():getPanelSizeInPixel(PanelType.MoreMenu)
 		
 		return PanelSizeInPixel.X / PanelSizeInPixel.Y
 	else
-		return 1.3333333333333333
+		return config.ASPECT_RATIO
 	end
 end
 
-function SettingsUIDelegateModule:getHubBarSize(): number
-	-- upvalues: ThemeModule (copy), UIManager (copy), PanelType (copy)
+function SettingsUIDelegateModule:getHubBarSize()
+	-- upvalues: ThemeModule (copy), UIManager (copy), PanelType (copy), config (copy)
 	if not self._vrEnabled then
-		return 800
+		return config.HUB_BAR_WIDTH
 	end
 	local HubPaddingResult = ThemeModule.HubPadding()
 	local NewOffset = 0
@@ -270,7 +275,7 @@ function SettingsUIDelegateModule.updatePanelVisibility(p1, p2)
 	p2:set(false)
 end
 
-local function v20(Callback)
+local function v22(Callback)
 	-- upvalues: CorePackages (copy), InExperienceUIVRIXP (copy), SpatialUIFixGameInviteChatExclusive (copy), ChatSelectorModule (copy)
 	local EventConnection = require(CorePackages.Workspace.Packages.GameInvite).GameInviteModalManager.ToggleGameInviteModalEvent.Event:Connect(function(p3)
 		-- upvalues: Callback (copy), InExperienceUIVRIXP (upval), SpatialUIFixGameInviteChatExclusive (upval), ChatSelectorModule (upval)
@@ -295,7 +300,7 @@ local function v20(Callback)
 	end
 end
 
-local function v21(Callback)
+local function v23(Callback)
 	local GuiService = game:GetService("GuiService")
 	local InspectPlayerFromUserIdWithCtxRequestConnection = GuiService.InspectPlayerFromUserIdWithCtxRequest:Connect(function()
 		-- upvalues: Callback (copy)
@@ -330,8 +335,8 @@ local function v21(Callback)
 end
 
 function SettingsUIDelegateModule:connectWindowsVisibility(NewResult)
-	-- upvalues: v20 (copy), v21 (copy)
-	local function v52(p3, p4)
+	-- upvalues: v22 (copy), v23 (copy)
+	local function v54(p3, p4)
 		-- upvalues: self (copy), NewResult (copy)
 		self._windowsVisibilityValues[p3] = p4
 		self:updatePanelVisibility(NewResult)
@@ -353,10 +358,10 @@ function SettingsUIDelegateModule:connectWindowsVisibility(NewResult)
 				end
 			end
 		end,
-		v20,
-		v21
+		v22,
+		v23
 	} do
-		table.insert(self._windowsDisconnectCallbacks, (value(v52)))
+		table.insert(self._windowsDisconnectCallbacks, (value(v54)))
 	end
 end
 

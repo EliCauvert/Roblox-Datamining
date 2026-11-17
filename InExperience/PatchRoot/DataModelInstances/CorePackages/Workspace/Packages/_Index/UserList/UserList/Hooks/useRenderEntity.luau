@@ -43,7 +43,13 @@ return function(p1)
 					shouldShowNewIndicator = p3.shouldShowNewIndicator,
 					trailingContent = p3.trailingContent,
 					configs = Configs,
-					layoutMode = LayoutMode
+					layoutMode = LayoutMode,
+					primaryCtaEnum = p3.primaryCtaEnum,
+					secondaryCtaEnum = p3.secondaryCtaEnum,
+					onCtaSuccess = p3.onCtaSuccess,
+					contextualInfoSource = p3.contextualInfoSource,
+					onCtaToast = p3.onCtaToast,
+					friendshipOriginSourceType = p3.friendshipOriginSourceType
 				})
 			})
 		end, Entities, LayoutOrder) else ReactModule.createElement(View, {

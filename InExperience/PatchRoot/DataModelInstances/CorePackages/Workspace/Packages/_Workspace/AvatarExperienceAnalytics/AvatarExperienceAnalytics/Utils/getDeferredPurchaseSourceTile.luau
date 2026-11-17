@@ -1,4 +1,6 @@
-﻿local UnifiedEventLogConstantsModule = require(script:FindFirstAncestor("AvatarExperienceAnalytics").UnifiedEventLogConstants)
+﻿local AvatarExperienceAnalytics = script:FindFirstAncestor("AvatarExperienceAnalytics")
+local _ = require(AvatarExperienceAnalytics.Parent.UnifiedEventEnums)
+local UnifiedEventLogConstantsModule = require(AvatarExperienceAnalytics.UnifiedEventLogConstants)
 
 return function(Frames, Frame, p1, p2)
 	-- upvalues: UnifiedEventLogConstantsModule (copy)

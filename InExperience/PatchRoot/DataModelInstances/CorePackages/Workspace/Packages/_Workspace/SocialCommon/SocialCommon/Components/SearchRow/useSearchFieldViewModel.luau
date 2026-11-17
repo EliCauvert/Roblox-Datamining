@@ -1,15 +1,18 @@
 ﻿local UserInputService = game:GetService("UserInputService")
-local Parent = script:FindFirstAncestor("SocialCommon").Parent
+local SocialCommon = script:FindFirstAncestor("SocialCommon")
+local Parent = SocialCommon.Parent
 local ReactModule = require(Parent.React)
 local _ = require(Parent.Foundation)
+local IsTenFootInterfaceFunction = require(Parent.AppCommonLib).isTenFootInterface
 local FFlagLuaAppAllowNilHookDepsCleanup = require(Parent.SharedFlags).FFlagLuaAppAllowNilHookDepsCleanup
+local FFlagAppChatSearchFieldReleaseFocusOnConsoleKeyboardModule = require(SocialCommon.Flags.FFlagAppChatSearchFieldReleaseFocusOnConsoleKeyboard)
 local InputHandlersModule = require(Parent.InputHandlers)
 local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
 local FocusNavigationEventNameEnum = require(Parent.FocusNavigationUtils).FocusNavigationEventNameEnum
 local _ = require(script.Parent.SearchFieldView)
 
 return function(Frame)
-	-- upvalues: ReactModule (copy), InputHandlersModule (copy), ReactFocusNavigationModule (copy), FocusNavigationEventNameEnum (copy), UserInputService (copy), FFlagLuaAppAllowNilHookDepsCleanup (copy)
+	-- upvalues: ReactModule (copy), InputHandlersModule (copy), ReactFocusNavigationModule (copy), FocusNavigationEventNameEnum (copy), UserInputService (copy), FFlagLuaAppAllowNilHookDepsCleanup (copy), FFlagAppChatSearchFieldReleaseFocusOnConsoleKeyboardModule (copy), IsTenFootInterfaceFunction (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local OnExitFunction = Frame.onExit
 	local OnChangedFunction = Frame.onChanged
@@ -88,13 +91,16 @@ return function(Frame)
 		if FFlagLuaAppAllowNilHookDepsCleanup then UseContextResult else UseContextResult or false
 	})
 	local UseResult3 = ReactModule.useCallback(function(p1)
-		-- upvalues: UseRefResult2 (copy), UseResult2 (copy), UseRefResult (copy), OnChangedFunction (copy)
+		-- upvalues: UseResult2 (copy), FFlagAppChatSearchFieldReleaseFocusOnConsoleKeyboardModule (upval), IsTenFootInterfaceFunction (upval), UseRefResult2 (copy), UseRefResult (copy), OnChangedFunction (copy)
 		if p1 == "" then
-			UseRefResult2.current = true
 			UseResult2()
 			
-			if UseRefResult.current then
-				UseRefResult.current.focus()
+			if not (FFlagAppChatSearchFieldReleaseFocusOnConsoleKeyboardModule and IsTenFootInterfaceFunction()) then
+				UseRefResult2.current = true
+				
+				if UseRefResult.current then
+					UseRefResult.current.focus()
+				end
 			end
 		end
 		OnChangedFunction(p1)
@@ -111,6 +117,27 @@ return function(Frame)
 			OnFocusGainedFunction()
 		end
 	end, { OnFocusGainedFunction })
+	
+	if FFlagAppChatSearchFieldReleaseFocusOnConsoleKeyboardModule and IsTenFootInterfaceFunction() then
+		ReactModule.useEffect(function()
+			-- upvalues: UseRefResult3 (copy)
+			local Current = UseRefResult3.current
+			
+			if Current == nil then return end
+			local TextBox = Current:FindFirstChildWhichIsA("TextBox", true)
+			
+			if TextBox == nil then return end
+			local ReturnPressedFromOnScreenKeyboardConnection = TextBox.ReturnPressedFromOnScreenKeyboard:Connect(function()
+				-- upvalues: TextBox (copy)
+				TextBox:ReleaseFocus()
+			end)
+			
+			return function()
+				-- upvalues: ReturnPressedFromOnScreenKeyboardConnection (copy)
+				ReturnPressedFromOnScreenKeyboardConnection:Disconnect()
+			end
+		end, {})
+	end
 	local ShouldAutoFocus = Frame.shouldAutoFocus or false
 	ReactModule.useEffect(function()
 		-- upvalues: ShouldAutoFocus (copy), UseResult2 (copy), UseResult1 (copy), UseRefResult (copy)

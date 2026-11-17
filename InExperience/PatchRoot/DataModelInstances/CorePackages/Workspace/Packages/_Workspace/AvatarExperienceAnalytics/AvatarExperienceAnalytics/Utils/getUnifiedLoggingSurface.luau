@@ -1,6 +1,7 @@
 ﻿local Parent = script:FindFirstAncestor("AvatarExperienceAnalytics").Parent
 local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local AvatarExperienceNavigationModule = require(Parent.AvatarExperienceNavigation)
+local _ = require(Parent.UnifiedEventEnums)
 local AvatarScreenProperties = AvatarExperienceNavigationModule.AvatarRoute.AvatarScreenProperties
 local UnifiedLoggingSurface = AvatarExperienceNavigationModule.Enums.UnifiedLoggingSurface
 local FFlagAXUnifiedEventStrictPayloads = AvatarExperienceFlagsModule.FFlagAXUnifiedEventStrictPayloads

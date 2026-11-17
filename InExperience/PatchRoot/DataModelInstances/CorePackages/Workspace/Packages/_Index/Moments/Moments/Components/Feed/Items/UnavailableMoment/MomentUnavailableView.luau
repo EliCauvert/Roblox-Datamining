@@ -1,4 +1,5 @@
-﻿local Parent = script:FindFirstAncestor("Moments").Parent
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
 local BuilderIconsModule = require(Parent.BuilderIcons)
 local FoundationModule = require(Parent.Foundation)
 local LocalizationModule = require(Parent.Localization)
@@ -11,6 +12,8 @@ local IconSize = FoundationModule.Enums.IconSize
 local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
 local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local UseTokensFunction = FoundationModule.Hooks.useTokens
+local MomentOverlayInsetContextModule = require(Moments.Components.Feed.Items.Moment.MomentOverlayInsetContext)
+local FFlagMomentsHideNavBarOnScrollModule = require(Moments.Flags.FFlagMomentsHideNavBarOnScroll)
 local config = {
 	title = "Feature.Moments.Label.MomentRemovedTitle",
 	body = "Feature.Moments.Label.MomentRemovedBody"
@@ -22,7 +25,7 @@ local config1 = {
 local config2 = { duration = 0.75, easingStyle = { 0.37, 0, 0.63, 1 } }
 
 return function(Frame)
-	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), config (copy), config1 (copy), ReactModule (copy), ReactOtterModule (copy), config2 (copy), View (copy), Text (copy), StateLayerAffordance (copy), Icon (copy), BuilderIconsModule (copy), IconSize (copy)
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), config (copy), config1 (copy), ReactModule (copy), ReactOtterModule (copy), config2 (copy), View (copy), Text (copy), FFlagMomentsHideNavBarOnScrollModule (copy), MomentOverlayInsetContextModule (copy), StateLayerAffordance (copy), Icon (copy), BuilderIconsModule (copy), IconSize (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction(if Frame.isModerated then config else config1)
 	local Animate = Frame.animate
@@ -80,7 +83,7 @@ return function(Frame)
 			tag = "position-bottom-center anchor-bottom-center auto-xy",
 			ZIndex = 2,
 			padding = {
-				bottom = UDim.new(0, (Frame.bottomInset or 0) + UseTokensResult.Padding.Small)
+				bottom = if FFlagMomentsHideNavBarOnScrollModule and Frame.bottomInsetRatio ~= nil then MomentOverlayInsetContextModule.mapSlidingInsetPadding(Frame.bottomInsetRatio, Frame.bottomInset or 0, UseTokensResult.Padding.Small) else UDim.new(0, (Frame.bottomInset or 0) + UseTokensResult.Padding.Small)
 			}
 		}, {
 			NextButton = ReactModule.createElement(View, {

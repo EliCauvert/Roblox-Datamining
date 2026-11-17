@@ -1,5 +1,7 @@
 ﻿local InExperienceCloudPlay = script:FindFirstAncestor("InExperienceCloudPlay")
-local ReactModule = require(InExperienceCloudPlay.Parent.React)
+local Parent = InExperienceCloudPlay.Parent
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local _ = require(script.Parent.RestyleTimerView)
 local GetCloudClientServiceModule = require(InExperienceCloudPlay.getCloudClientService)
 local UseSecondsLeftModule = require(InExperienceCloudPlay.Hooks.useSecondsLeft)
@@ -10,7 +12,7 @@ local function _(p1: number): string
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), GetCloudClientServiceModule (copy), UseServicePropertyModule (copy), UseSecondsLeftModule (copy)
+	-- upvalues: ReactModule (copy), GetCloudClientServiceModule (copy), UseServicePropertyModule (copy), UseSecondsLeftModule (copy), UseLocalizationFunction (copy)
 	local UseMemoResult = ReactModule.useMemo(GetCloudClientServiceModule, {})
 	local IsRobloxRealityEnvironment = UseServicePropertyModule(UseMemoResult, "IsRobloxRealityEnvironment")
 	local RobloxRealityFilterEnabled = UseServicePropertyModule(UseMemoResult, "RobloxRealityFilterEnabled")
@@ -18,6 +20,11 @@ return function(p1)
 	local NoIsHidden: boolean = IsRobloxRealityEnvironment == true and not p1.isHidden
 	local UseSecondsLeftModuleResult: number = UseSecondsLeftModule(if NoIsHidden then UseMemoResult else nil, if typeof(SessionTimeLimit) == "number" then SessionTimeLimit else nil)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseLocalizationResult = UseLocalizationFunction(if NoIsHidden then {
+		restyle = "Feature.CloudClient.Label.RobloxReality",
+		timeLeft = "Feature.CloudClient.Label.TimeLeft",
+		description = "Feature.CloudClient.Description.RobloxRealityPreview"
+	} else {})
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(function(p2): boolean
@@ -62,6 +69,11 @@ return function(p1)
 	end, { NoIsHidden })
 	
 	return if NoIsHidden then {
+		text = {
+			restyle = UseLocalizationResult.restyle,
+			timeLeft = UseLocalizationResult.timeLeft,
+			description = UseLocalizationResult.description
+		},
 		timeLeft = if UseSecondsLeftModuleResult then string.format("%02d:%02d", UseSecondsLeftModuleResult // 60, UseSecondsLeftModuleResult % 60) else nil,
 		isPopoverOpen = UseStateResult,
 		isRestyleEnabled = RobloxRealityFilterEnabled == true,

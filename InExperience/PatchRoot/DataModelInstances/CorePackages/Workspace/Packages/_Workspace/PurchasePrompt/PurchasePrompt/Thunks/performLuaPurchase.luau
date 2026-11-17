@@ -30,8 +30,11 @@ local FFlagEnableUnifiedPurchaseFlowForDevSubs = require(Parent.SharedFlags).FFl
 local FFlagPurchasePromptFetchCartPricingForLooks = require(Parent.SharedFlags).FFlagPurchasePromptFetchCartPricingForLooks
 local FFlagEnablePriceChangedErrorHandlingModule = require(PurchasePrompt.Flags.FFlagEnablePriceChangedErrorHandling)
 local FFlagEnableRequestLocationTypeForSduiPurchaseModule = require(PurchasePrompt.Flags.FFlagEnableRequestLocationTypeForSduiPurchase)
+local FFlagSendIdempotencyKeyForEdpDevProductPurchaseModule = require(PurchasePrompt.Flags.FFlagSendIdempotencyKeyForEdpDevProductPurchase)
 local FFlagEnableSearchGameItemOwnershipUpdate = require(Parent.SharedFlags).FFlagEnableSearchGameItemOwnershipUpdate
 local FFlagEnableEdpPreviewPurchaseSurface = require(Parent.SharedFlags).FFlagEnableEdpPreviewPurchaseSurface
+local FFlagEnableCampaignGameItemPurchaseLocation = require(Parent.SharedFlags).FFlagEnableCampaignGameItemPurchaseLocation
+local FFlagAppIaHomeCampaignSubTab = require(Parent.SharedFlags).FFlagAppIaHomeCampaignSubTab
 local FFlagLuaAppsEnablePromptVIPServerPurchase = require(Parent.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
 local RobloxTranslatorModule = require(Parent.RobloxTranslator)
 local ProductPurchaseSurface = require(Parent.PurchasePromptLite).Enums.ProductPurchaseSurface
@@ -39,7 +42,8 @@ local config = {
 	[ProductPurchaseSurface.EDP] = "ExperienceDetailPage",
 	[ProductPurchaseSurface.EDPPreview] = if FFlagEnableEdpPreviewPurchaseSurface then "ExperienceDetailPagePreview" else nil,
 	[ProductPurchaseSurface.HomePageGameItemShop] = "HomePageGameItemShop",
-	[ProductPurchaseSurface.SearchPageGameItemShop] = if FFlagEnableSearchGameItemOwnershipUpdate then "SearchPageGameItemShop" else nil
+	[ProductPurchaseSurface.SearchPageGameItemShop] = if FFlagEnableSearchGameItemOwnershipUpdate then "SearchPageGameItemShop" else nil,
+	[ProductPurchaseSurface.CampaignPageGameItemShop] = if FFlagEnableCampaignGameItemPurchaseLocation then "CampaignPageGameItemShop" elseif FFlagAppIaHomeCampaignSubTab then "HomePageGameItemShop" else nil
 }
 
 local function _(p1)
@@ -76,9 +80,9 @@ local function handleGenericPurchaseError(p1, p2, Kind)
 end
 
 return function()
-	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), AnalyticsModule (copy), ConstantsModule (copy), FFlagEnableRequestLocationTypeForSduiPurchaseModule (copy), config (copy), HttpService (copy), PerformDevProductEdpPurchaseModule (copy), CompletePurchaseModule (copy), PromiseModule (copy), handleGenericPurchaseError (copy), FFlagEnablePriceChangedErrorHandlingModule (copy), ProductTypeEnum (copy), PerformExperiencePurchaseModule (copy), FFlagPurchasePromptFetchCartPricingForLooks (copy), SelectProductPriceModule (copy), DeriveSelectedOfferIdsFromCartPricingModule (copy), ApplyCartPricingOffersToLineItemsModule (copy), PerformLookPurchaseModule (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), PerformDeveloperSubscriptionRobuxPurchaseModule (copy), PerformDeveloperSubscriptionFiatPurchaseModule (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), RobloxTranslatorModule (copy), Players (copy), PerformVIPServerPurchaseModule (copy), VIPServerCreatedModule (copy)
+	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), AnalyticsModule (copy), ConstantsModule (copy), FFlagSendIdempotencyKeyForEdpDevProductPurchaseModule (copy), FFlagEnableRequestLocationTypeForSduiPurchaseModule (copy), config (copy), HttpService (copy), PerformDevProductEdpPurchaseModule (copy), CompletePurchaseModule (copy), PromiseModule (copy), handleGenericPurchaseError (copy), FFlagEnablePriceChangedErrorHandlingModule (copy), ProductTypeEnum (copy), PerformExperiencePurchaseModule (copy), FFlagPurchasePromptFetchCartPricingForLooks (copy), SelectProductPriceModule (copy), DeriveSelectedOfferIdsFromCartPricingModule (copy), ApplyCartPricingOffersToLineItemsModule (copy), PerformLookPurchaseModule (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), PerformDeveloperSubscriptionRobuxPurchaseModule (copy), PerformDeveloperSubscriptionFiatPurchaseModule (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), RobloxTranslatorModule (copy), Players (copy), PerformVIPServerPurchaseModule (copy), VIPServerCreatedModule (copy)
 	return ThunkModule.new(script.Name, list, function(p1, p2)
-		-- upvalues: NetworkModule (upval), AnalyticsModule (upval), ConstantsModule (upval), FFlagEnableRequestLocationTypeForSduiPurchaseModule (upval), config (upval), HttpService (upval), PerformDevProductEdpPurchaseModule (upval), CompletePurchaseModule (upval), PromiseModule (upval), handleGenericPurchaseError (upval), FFlagEnablePriceChangedErrorHandlingModule (upval), ProductTypeEnum (upval), PerformExperiencePurchaseModule (upval), FFlagPurchasePromptFetchCartPricingForLooks (upval), SelectProductPriceModule (upval), DeriveSelectedOfferIdsFromCartPricingModule (upval), ApplyCartPricingOffersToLineItemsModule (upval), PerformLookPurchaseModule (upval), FFlagEnableUnifiedPurchaseFlowForDevSubs (upval), PerformDeveloperSubscriptionRobuxPurchaseModule (upval), PerformDeveloperSubscriptionFiatPurchaseModule (upval), FFlagLuaAppsEnablePromptVIPServerPurchase (upval), RobloxTranslatorModule (upval), Players (upval), PerformVIPServerPurchaseModule (upval), VIPServerCreatedModule (upval)
+		-- upvalues: NetworkModule (upval), AnalyticsModule (upval), ConstantsModule (upval), FFlagSendIdempotencyKeyForEdpDevProductPurchaseModule (upval), FFlagEnableRequestLocationTypeForSduiPurchaseModule (upval), config (upval), HttpService (upval), PerformDevProductEdpPurchaseModule (upval), CompletePurchaseModule (upval), PromiseModule (upval), handleGenericPurchaseError (upval), FFlagEnablePriceChangedErrorHandlingModule (upval), ProductTypeEnum (upval), PerformExperiencePurchaseModule (upval), FFlagPurchasePromptFetchCartPricingForLooks (upval), SelectProductPriceModule (upval), DeriveSelectedOfferIdsFromCartPricingModule (upval), ApplyCartPricingOffersToLineItemsModule (upval), PerformLookPurchaseModule (upval), FFlagEnableUnifiedPurchaseFlowForDevSubs (upval), PerformDeveloperSubscriptionRobuxPurchaseModule (upval), PerformDeveloperSubscriptionFiatPurchaseModule (upval), FFlagLuaAppsEnablePromptVIPServerPurchase (upval), RobloxTranslatorModule (upval), Players (upval), PerformVIPServerPurchaseModule (upval), VIPServerCreatedModule (upval)
 		local v1 = p2[NetworkModule]
 		local v2 = p2[AnalyticsModule]
 		local State = p1:getState()
@@ -96,6 +100,9 @@ return function()
 				saleLocationId = ProductPayload.universeId
 			}
 			
+			if FFlagSendIdempotencyKeyForEdpDevProductPurchaseModule then
+				config1.idempotencyKey = PromptRequest.idempotencyKey
+			end
 			if FFlagEnableRequestLocationTypeForSduiPurchaseModule then
 				local Surface = State.purchaseAnalyticsMetadata and State.purchaseAnalyticsMetadata.surface
 				config1.requestLocationType = if Surface == nil then "" else config[Surface] or ""

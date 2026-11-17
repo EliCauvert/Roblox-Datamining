@@ -17,10 +17,9 @@ local EventTileModule = require(script.Parent.EventTile)
 local UseCallbackFunction = ReactModule.useCallback
 local UseEffectFunction = ReactModule.useEffect
 local FFlagLuaAppSduiEventDetailsEnabled = require(VirtualEvents.Parent.SharedFlags).FFlagLuaAppSduiEventDetailsEnabled
-local FFlagLuaAppGameViewTileBackgroundColorOverride = require(VirtualEvents.Parent.SharedFlags).FFlagLuaAppGameViewTileBackgroundColorOverride
 
 return function(p1)
-	-- upvalues: UseTextSizeOffsetFunction (copy), UseDesignTokensFunction (copy), ResponsiveModule (copy), ReactModule (copy), HttpService (copy), FFlagLuaAppGameViewTileBackgroundColorOverride (copy), UseCallbackFunction (copy), EventTileModule (copy), FFlagLuaAppSduiEventDetailsEnabled (copy), UseGetGameTileHeightFunction (copy), UseLocalizationFunction (copy), SortEventsByStartDateModule (copy), DiscoveryEventErrorLogger (copy), UseCollectionImpressionsSignalFunction (copy), UseEffectFunction (copy), CollectionCarousel (copy), FrameBoundsImpressionsTracker (copy)
+	-- upvalues: UseTextSizeOffsetFunction (copy), UseDesignTokensFunction (copy), ResponsiveModule (copy), ReactModule (copy), HttpService (copy), UseCallbackFunction (copy), EventTileModule (copy), FFlagLuaAppSduiEventDetailsEnabled (copy), UseGetGameTileHeightFunction (copy), UseLocalizationFunction (copy), SortEventsByStartDateModule (copy), DiscoveryEventErrorLogger (copy), UseCollectionImpressionsSignalFunction (copy), UseEffectFunction (copy), CollectionCarousel (copy), FrameBoundsImpressionsTracker (copy)
 	local UseTextSizeOffsetResult = UseTextSizeOffsetFunction()
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local IsUsePreferredInputResultMatch = ResponsiveModule.usePreferredInput() == ResponsiveModule.Input.Directional
@@ -28,7 +27,7 @@ return function(p1)
 		-- upvalues: p1 (copy), HttpService (upval)
 		return `EventsListCarousel_{p1.universeId}{HttpService:GenerateGUID()}`
 	end, { p1.universeId })
-	local Surface200 = if FFlagLuaAppGameViewTileBackgroundColorOverride and p1.peekViewFormat then UseDesignTokensResult.Color.Surface.Surface_200 else nil
+	local Surface200 = if p1.peekViewFormat then UseDesignTokensResult.Color.Surface.Surface_200 else nil
 	local UseCallbackResult = UseCallbackFunction(function(Event, LayoutOrder, Size, _)
 		-- upvalues: ReactModule (upval), EventTileModule (upval), p1 (copy), Surface200 (copy), UseMemoResult (copy), IsUsePreferredInputResultMatch (copy), FFlagLuaAppSduiEventDetailsEnabled (upval)
 		return ReactModule.createElement(EventTileModule, {
@@ -47,8 +46,7 @@ return function(p1)
 	end, {
 		p1.defaultThumbnail, p1.onJoinEvent, p1.onRsvpChanged, p1.onTileActivated,
 		if FFlagLuaAppSduiEventDetailsEnabled then p1.suppressRsvpReminderToastBecauseEventDetailsFocused else nil,
-		UseMemoResult, IsUsePreferredInputResultMatch,
-		if FFlagLuaAppGameViewTileBackgroundColorOverride then Surface200 else nil
+		UseMemoResult, IsUsePreferredInputResultMatch, Surface200
 	})
 	local Event = UseGetGameTileHeightFunction(false, "Event", true, false, false, UseTextSizeOffsetResult, if IsUsePreferredInputResultMatch then 0 else UseDesignTokensResult.Size.Size_700 + UseDesignTokensResult.Size.Size_200)
 	local UseLocalizationResult = UseLocalizationFunction({ title = "Feature.VirtualEvents.EventsListTitle" })

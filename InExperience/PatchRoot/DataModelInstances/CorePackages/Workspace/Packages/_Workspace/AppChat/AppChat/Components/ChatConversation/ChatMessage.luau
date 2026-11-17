@@ -12,6 +12,7 @@ if require(AppChat.Flags.FFlagAppChatRefactorChatMessage) then
 	local PruneConsecutiveNewLinesFunction = require(AppChat.SocialLibraries).Utils.pruneConsecutiveNewLines
 	local GetModeratedMaskTextModule = require(AppChat.Utils.getModeratedMaskText)
 	local FFlagAppChatEnableAutotranslationModule = require(AppChat.Flags.FFlagAppChatEnableAutotranslation)
+	local FFlagAppChatSkipUnsupportedReplyQuoteModule = require(AppChat.Flags.FFlagAppChatSkipUnsupportedReplyQuote)
 	local MessageModelModule = require(AppChat.Models.MessageModel)
 	local FoundationModule = require(Parent.Foundation)
 	local View = FoundationModule.View
@@ -89,7 +90,7 @@ if require(AppChat.Flags.FFlagAppChatRefactorChatMessage) then
 	}
 	
 	return function(p1)
-		-- upvalues: CryoModule (copy), config2 (copy), GetModeratedMaskTextModule (copy), TEXTBUBBLEXPADDING (copy), BUBBLEPADDING (copy), TEXTBUBBLEXWIDEADDITIONALPADDING (copy), UseTokensFunction (copy), FFlagAppChatEnableAutotranslationModule (copy), ReactModule (copy), GetTextSizeFunction (copy), MessageModelModule (copy), config1 (copy), config (copy), PruneConsecutiveNewLinesFunction (copy), LoggerModule (copy), View (copy), ChatMessageContainerModule (copy), Image (copy)
+		-- upvalues: CryoModule (copy), config2 (copy), GetModeratedMaskTextModule (copy), TEXTBUBBLEXPADDING (copy), BUBBLEPADDING (copy), TEXTBUBBLEXWIDEADDITIONALPADDING (copy), UseTokensFunction (copy), FFlagAppChatEnableAutotranslationModule (copy), ReactModule (copy), GetTextSizeFunction (copy), MessageModelModule (copy), config1 (copy), config (copy), PruneConsecutiveNewLinesFunction (copy), FFlagAppChatSkipUnsupportedReplyQuoteModule (copy), LoggerModule (copy), View (copy), ChatMessageContainerModule (copy), Image (copy)
 		local UnionResult = CryoModule.Dictionary.union(config2, p1)
 		
 		local function _(p2)
@@ -134,6 +135,14 @@ if require(AppChat.Flags.FFlagAppChatRefactorChatMessage) then
 		local PruneConsecutiveNewLinesResult = PruneConsecutiveNewLinesFunction(UnionResult.content)
 		local ModeratedMaskTextModule = UnionResult.moderated and GetModeratedMaskTextModule(UnionResult.messageId or PruneConsecutiveNewLinesResult) or PruneConsecutiveNewLinesResult
 		local Content = UnionResult.repliesTo and (UnionResult.repliesTo.messageType and UnionResult.repliesTo.content)
+		
+		if FFlagAppChatSkipUnsupportedReplyQuoteModule and Content then
+			local RepliesTo = UnionResult.repliesTo
+			
+			if not (if RepliesTo and RepliesTo.visibility == MessageModelModule.VisibilityTypes.Hidden then config1 else config[RepliesTo.messageType]) then
+				Content = false
+			end
+		end
 		local BodyLarge = UseTokensResult.Typography.BodyLarge
 		local FontSize = BodyLarge.FontSize
 		local FontSize1 = UseTokensResult.Typography.BodySmall.FontSize
@@ -146,7 +155,7 @@ if require(AppChat.Flags.FFlagAppChatRefactorChatMessage) then
 				isPending = UnionResult.isSending or (UnionResult.moderated or UnionResult.failed),
 				visibility = UnionResult.visibility,
 				renderMessage = function(p2, p3)
-					-- upvalues: ReactModule (upval), Image (upval), CryoModule (upval), UnionResult (copy), Content (copy), MessageModelModule (upval), config1 (upval), config (upval), BodyLarge (copy), BUBBLEPADDING (upval), UseMemoResult (copy), FontSize1 (copy), View (upval), Config (copy), FFlagAppChatEnableAutotranslationModule (upval), UseResult (ref), ModeratedMaskTextModule (copy), FontSize (copy)
+					-- upvalues: ReactModule (upval), Image (upval), CryoModule (upval), UnionResult (copy), Content (ref), MessageModelModule (upval), config1 (upval), config (upval), BodyLarge (copy), BUBBLEPADDING (upval), UseMemoResult (copy), FontSize1 (copy), View (upval), Config (copy), FFlagAppChatEnableAutotranslationModule (upval), UseResult (ref), ModeratedMaskTextModule (copy), FontSize (copy)
 					local CreateElementFunction = ReactModule.createElement
 					local UnionResult1 = CryoModule.Dictionary.union({
 						tag = {

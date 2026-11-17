@@ -9,12 +9,11 @@ local FriendsCalling = Instance.new("Folder")
 FriendsCalling.Name = "FriendsCalling"
 FriendsCalling.Parent = game:GetService("CoreGui")
 local Host = {
-	exposesTopSafeArea = true,
+	isInExperience = true,
 	followsAppColorMode = false,
-	displayOrder = CallPipDisplayOrderModule.InExperience,
-	screenInsets = Enum.ScreenInsets.None
+	displayOrder = CallPipDisplayOrderModule.InExperience
 }
 ReactRobloxModule.createRoot(FriendsCalling):render(ReactModule.createElement(ReactModule.Fragment, nil, {
-	CallPip = if FFlagFriendsCallingCallPipModule then ReactModule.createElement(CallPipModule, { isMicrophoneMuted = false, host = Host }) else nil,
+	CallPip = if FFlagFriendsCallingCallPipModule then ReactModule.createElement(CallPipModule, { host = Host }) else nil,
 	VoiceCallReceivedEventReceiver = ReactModule.createElement(VoiceCallReceivedEventReceiverModule)
 }))

@@ -19,6 +19,8 @@ return function(p1, EndTime)
 		}),
 		samplingRateOverride = p1.samplingRateOverride,
 		milestones = p1.milestones,
+		playSessionId = p1.playSessionId,
+		universeId = p1.universeId,
 		totalMemoryMB = if MemoryMbModule then MemoryMbModule.totalMemoryMB else nil,
 		luaHeapMB = if MemoryMbModule then MemoryMbModule.luaHeapMB else nil
 	}

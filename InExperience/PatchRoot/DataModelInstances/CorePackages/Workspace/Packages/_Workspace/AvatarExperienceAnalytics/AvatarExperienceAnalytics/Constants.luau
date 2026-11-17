@@ -1,4 +1,5 @@
-﻿local UnifiedEventLogEnumsModule = require(script.Parent.UnifiedEventLogEnums)
+﻿local _ = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.UnifiedEventEnums)
+local UnifiedEventLogEnumsModule = require(script.Parent.UnifiedEventLogEnums)
 
 return {
 	AVATAR_EVENT_COUNTER_NAME = {

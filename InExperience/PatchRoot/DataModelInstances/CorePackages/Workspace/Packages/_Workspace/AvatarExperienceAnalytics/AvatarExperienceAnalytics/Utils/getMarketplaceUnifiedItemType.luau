@@ -1,5 +1,7 @@
 ﻿local AvatarExperienceAnalytics = script:FindFirstAncestor("AvatarExperienceAnalytics")
-local _ = require(AvatarExperienceAnalytics.Parent.AvatarExperienceModel)
+local Parent = AvatarExperienceAnalytics.Parent
+local _ = require(Parent.AvatarExperienceModel)
+local _ = require(Parent.UnifiedEventEnums)
 local UnifiedEventLogEnumsModule = require(AvatarExperienceAnalytics.UnifiedEventLogEnums)
 
 return function(p1)

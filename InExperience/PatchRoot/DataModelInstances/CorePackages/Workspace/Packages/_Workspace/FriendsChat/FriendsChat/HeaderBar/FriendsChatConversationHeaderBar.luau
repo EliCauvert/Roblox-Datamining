@@ -7,17 +7,21 @@ local UseChatWindowSettingsModule = require(Parent.ExpChatIntegration.useChatWin
 local FFlagFriendsChatAddTopBarDividerModule = require(script.Parent.Parent.Flags.FFlagFriendsChatAddTopBarDivider)
 local FriendsChatFacePileModule = require(script.Parent.FriendsChatFacePile)
 local ResolveFadeModule = require(script.Parent.Parent.Utils.resolveFade)
+local FFlagFriendsCallingClientGateDEV = require(Parent.SharedFlags).FFlagFriendsCallingClientGate_DEV
+local UseIsCallButtonEligibleModule = if FFlagFriendsCallingClientGateDEV then require(Parent.AppChat.useIsCallButtonEligible) else nil
+local StartConversationCallModule = if FFlagFriendsCallingClientGateDEV then require(Parent.AppChat.startConversationCall) else nil
 local View = FoundationModule.View
 local Divider = FoundationModule.Divider
 local IconButton = FoundationModule.IconButton
 local IconName = FoundationModule.Enums.IconName
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local ButtonSize = FoundationModule.Enums.ButtonSize
+local InputSize = FoundationModule.Enums.InputSize
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NewResult = ExpChatSharedModule.Logger:new(script.Name)
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), UseChatWindowSettingsModule (copy), ReactModule (copy), UseInterpolatedClientSettingsModule (copy), NewResult (copy), ResolveFadeModule (copy), View (copy), IconButton (copy), IconName (copy), ButtonVariant (copy), ButtonSize (copy), FriendsChatFacePileModule (copy), FFlagFriendsChatAddTopBarDividerModule (copy), Divider (copy)
+	-- upvalues: UseTokensFunction (copy), UseChatWindowSettingsModule (copy), ReactModule (copy), UseInterpolatedClientSettingsModule (copy), NewResult (copy), FFlagFriendsCallingClientGateDEV (copy), UseIsCallButtonEligibleModule (copy), StartConversationCallModule (copy), ResolveFadeModule (copy), View (copy), IconButton (copy), IconName (copy), ButtonVariant (copy), ButtonSize (copy), FriendsChatFacePileModule (copy), InputSize (copy), FFlagFriendsChatAddTopBarDividerModule (copy), Divider (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseChatWindowSettingsModuleResult = UseChatWindowSettingsModule()
 	local UseMemoResult = ReactModule.useMemo(function()
@@ -59,6 +63,16 @@ return function(p1)
 			p1.onAbsoluteSizeChanged(Current)
 		end
 	end, { p1.onAbsoluteSizeChanged })
+	local ConversationId = p1.conversationId
+	local UseIsCallButtonEligibleModuleResult = if FFlagFriendsCallingClientGateDEV and UseIsCallButtonEligibleModule then UseIsCallButtonEligibleModule(ConversationId) else false
+	local UseResult1 = if StartConversationCallModule == nil then nil else ReactModule.useCallback(function()
+		-- upvalues: ConversationId (copy), StartConversationCallModule (upval)
+		if ConversationId ~= nil then
+			StartConversationCallModule(ConversationId)
+			
+			return
+		end
+	end, { ConversationId })
 	
 	return ReactModule.createElement("Frame", {
 		Name = "FriendsChatConversationHeaderBar",
@@ -106,7 +120,15 @@ return function(p1)
 						onActivated = p1.onActivated,
 						selectable = p1.onActivated ~= nil or nil
 					})
-				})
+				}),
+				CallButton = if FFlagFriendsCallingClientGateDEV and ConversationId and UseIsCallButtonEligibleModuleResult and UseResult1 then ReactModule.createElement(IconButton, {
+					isCircular = true,
+					testId = "friends-chat-call-button",
+					LayoutOrder = 3,
+					icon = IconName.Phone,
+					size = InputSize.Small,
+					onActivated = UseResult1
+				}) else nil
 			}),
 			BottomDivider = if FFlagFriendsChatAddTopBarDividerModule then ReactModule.createElement(Divider, {
 				Position = UDim2.new(0, 0, 1, -1),

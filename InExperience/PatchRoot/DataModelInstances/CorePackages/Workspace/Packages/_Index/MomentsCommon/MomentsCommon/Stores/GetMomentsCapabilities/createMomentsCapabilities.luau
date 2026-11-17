@@ -4,20 +4,15 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagMomentsAutoplayAmpPolicy = SharedFlagsModule.FFlagMomentsAutoplayAmpPolicy
 local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
 local FFlagMomentsCommentsIxpEnabled = SharedFlagsModule.FFlagMomentsCommentsIxpEnabled
-local FFlagMomentsReactFeatureGate = SharedFlagsModule.FFlagMomentsReactFeatureGate
-local FFlagMomentsCreationFeatureGate = SharedFlagsModule.FFlagMomentsCreationFeatureGate
 local FFlagAXAvatarMomentsCreation = SharedFlagsModule.FFlagAXAvatarMomentsCreation
-local FFlagMomentsEngagementMetricsFeatureModule = require(MomentsCommon.Flags.FFlagMomentsEngagementMetricsFeature)
 local FFlagDebugForceEnableMomentsModule = require(MomentsCommon.Flags.FFlagDebugForceEnableMoments)
 local FFlagMomentsParentTimeLimitModule = require(MomentsCommon.Flags.FFlagMomentsParentTimeLimit)
-local GetFFlagMomentsNonInfiniteScrollModule = require(MomentsCommon.Flags.GetFFlagMomentsNonInfiniteScroll)
 local GetFIntMomentsNonInfiniteScrollLimitModule = require(MomentsCommon.Flags.GetFIntMomentsNonInfiniteScrollLimit)
 local CreateComputedFunction = require(Parent.Signals).createComputed
 local GetAppPolicyStoreFunction = require(Parent.UniversalAppPolicy).GetAppPolicyStore
 
 return function()
-	-- upvalues: GetFFlagMomentsNonInfiniteScrollModule (copy), GetFIntMomentsNonInfiniteScrollLimitModule (copy), CreateComputedFunction (copy), FFlagDebugForceEnableMomentsModule (copy), GetAppPolicyStoreFunction (copy), FFlagMomentsCreationFeatureGate (copy), FFlagAXAvatarMomentsCreation (copy), FFlagMomentsAutoplayAmpPolicy (copy), FFlagMomentsEngagementMetricsFeatureModule (copy), FFlagMomentsReactFeatureGate (copy), FFlagMomentsComments (copy), FFlagMomentsCommentsIxpEnabled (copy), FFlagMomentsParentTimeLimitModule (copy), MomentsCommon (copy)
-	local FFlagMomentsNonInfiniteScrollModule = GetFFlagMomentsNonInfiniteScrollModule()
+	-- upvalues: GetFIntMomentsNonInfiniteScrollLimitModule (copy), CreateComputedFunction (copy), FFlagDebugForceEnableMomentsModule (copy), GetAppPolicyStoreFunction (copy), FFlagAXAvatarMomentsCreation (copy), FFlagMomentsAutoplayAmpPolicy (copy), FFlagMomentsComments (copy), FFlagMomentsCommentsIxpEnabled (copy), FFlagMomentsParentTimeLimitModule (copy), MomentsCommon (copy)
 	local Largest = math.max(1, GetFIntMomentsNonInfiniteScrollLimitModule())
 	
 	local function _(Value)
@@ -38,18 +33,13 @@ return function()
 		-- upvalues: FFlagDebugForceEnableMomentsModule (upval), GetAppPolicyStoreFunction (upval), Value1 (copy)
 		return if FFlagDebugForceEnableMomentsModule then true else table.find(GetAppPolicyStoreFunction(false).getAppPolicy(p1).getMomentsFeatureList(), Value1) ~= nil
 	end)
-	local Computed2 = nil
-	
-	if FFlagMomentsCreationFeatureGate then
-		local Value2 = "moments_creation"
-		Computed2 = CreateComputedFunction(function(p1): boolean
-			-- upvalues: FFlagDebugForceEnableMomentsModule (upval), GetAppPolicyStoreFunction (upval), Value2 (copy)
-			return if FFlagDebugForceEnableMomentsModule then true else table.find(GetAppPolicyStoreFunction(false).getAppPolicy(p1).getMomentsFeatureList(), Value2) ~= nil
-		end)
-	else
-		Computed2 = nil
-	end
+	local Value2 = "moments_creation"
+	local Computed2 = CreateComputedFunction(function(p1): boolean
+		-- upvalues: FFlagDebugForceEnableMomentsModule (upval), GetAppPolicyStoreFunction (upval), Value2 (copy)
+		return if FFlagDebugForceEnableMomentsModule then true else table.find(GetAppPolicyStoreFunction(false).getAppPolicy(p1).getMomentsFeatureList(), Value2) ~= nil
+	end)
 	local Computed3 = nil
+	
 	if FFlagAXAvatarMomentsCreation then
 		local Value3 = "avatar_creation"
 		Computed3 = CreateComputedFunction(function(p1): boolean
@@ -69,26 +59,16 @@ return function()
 	else
 		Computed4 = nil
 	end
-	local Computed5 = nil
-	if FFlagMomentsEngagementMetricsFeatureModule then
-		local Value5 = "engagement_metrics"
-		Computed5 = CreateComputedFunction(function(p1): boolean
-			-- upvalues: FFlagDebugForceEnableMomentsModule (upval), GetAppPolicyStoreFunction (upval), Value5 (copy)
-			return if FFlagDebugForceEnableMomentsModule then true else table.find(GetAppPolicyStoreFunction(false).getAppPolicy(p1).getMomentsFeatureList(), Value5) ~= nil
-		end)
-	else
-		Computed5 = nil
-	end
-	local Computed6 = nil
-	if FFlagMomentsReactFeatureGate then
-		local Value6 = "moments_react"
-		Computed6 = CreateComputedFunction(function(p1): boolean
-			-- upvalues: FFlagDebugForceEnableMomentsModule (upval), GetAppPolicyStoreFunction (upval), Value6 (copy)
-			return if FFlagDebugForceEnableMomentsModule then true else table.find(GetAppPolicyStoreFunction(false).getAppPolicy(p1).getMomentsFeatureList(), Value6) ~= nil
-		end)
-	else
-		Computed6 = nil
-	end
+	local Value5 = "engagement_metrics"
+	local Computed5 = CreateComputedFunction(function(p1): boolean
+		-- upvalues: FFlagDebugForceEnableMomentsModule (upval), GetAppPolicyStoreFunction (upval), Value5 (copy)
+		return if FFlagDebugForceEnableMomentsModule then true else table.find(GetAppPolicyStoreFunction(false).getAppPolicy(p1).getMomentsFeatureList(), Value5) ~= nil
+	end)
+	local Value6 = "moments_react"
+	local Computed6 = CreateComputedFunction(function(p1): boolean
+		-- upvalues: FFlagDebugForceEnableMomentsModule (upval), GetAppPolicyStoreFunction (upval), Value6 (copy)
+		return if FFlagDebugForceEnableMomentsModule then true else table.find(GetAppPolicyStoreFunction(false).getAppPolicy(p1).getMomentsFeatureList(), Value6) ~= nil
+	end)
 	local FFlagMomentsComments1 = FFlagMomentsComments or FFlagMomentsCommentsIxpEnabled
 	local Computed7 = nil
 	
@@ -137,10 +117,8 @@ return function()
 			return GetAppPolicyStoreFunction(false).getAppPolicy(p1).getShowInContextPersonalizedRecommendationsMomentsFeed()
 		end),
 		getIsInfiniteScrollEnabled = CreateComputedFunction(function(p1): boolean
-			-- upvalues: FFlagMomentsNonInfiniteScrollModule (copy), FFlagDebugForceEnableMomentsModule (upval), GetAppPolicyStoreFunction (upval)
-			if not FFlagMomentsNonInfiniteScrollModule then
-				return true
-			elseif FFlagDebugForceEnableMomentsModule then
+			-- upvalues: FFlagDebugForceEnableMomentsModule (upval), GetAppPolicyStoreFunction (upval)
+			if FFlagDebugForceEnableMomentsModule then
 				return true
 			else
 				local MomentsFeatureList = GetAppPolicyStoreFunction(false).getAppPolicy(p1).getMomentsFeatureList()

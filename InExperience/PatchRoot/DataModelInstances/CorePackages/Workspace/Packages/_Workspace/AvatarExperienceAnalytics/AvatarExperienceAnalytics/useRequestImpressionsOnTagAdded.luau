@@ -1,5 +1,6 @@
 ﻿local CollectionService = game:GetService("CollectionService")
 local Parent = script:FindFirstAncestor("AvatarExperienceAnalytics").Parent
+local _ = require(Parent.AppCommonLib)
 local ReactModule = require(Parent.React)
 local RobloxAppEnumsModule = require(Parent.RobloxAppEnums)
 local AvatarScreen = require(Parent.AvatarExperienceNavigation).Enums.AvatarScreen

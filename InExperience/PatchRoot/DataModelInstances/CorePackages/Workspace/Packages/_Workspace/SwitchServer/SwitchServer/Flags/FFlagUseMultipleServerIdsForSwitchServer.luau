@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("UseMultipleServerIdsForSwitchServer_DEV", false)
+﻿return game:DefineFastFlag("UseMultipleServerIdsForSwitchServer2", false)

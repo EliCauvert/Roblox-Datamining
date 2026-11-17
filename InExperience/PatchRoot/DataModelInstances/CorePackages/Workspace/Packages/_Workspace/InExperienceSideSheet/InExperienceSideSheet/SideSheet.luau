@@ -31,6 +31,7 @@ local SidesheetAnalyticsModule = require(InExperienceSideSheet.Analytics.Sideshe
 local UseDrawerShouldMountFunction = DrawerModule.Hooks.useDrawerShouldMount
 local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
 local UseStyleSheetFunction = FoundationModule.Hooks.useStyleSheet
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UseBackgroundStyleModule = require(InExperienceSideSheet.Hooks.useBackgroundStyle)
 local UseSideSheetFocusNavScrollViewAnimationModule = require(InExperienceSideSheet.Hooks.useSideSheetFocusNavScrollViewAnimation)
 local GetIntegrationsStoreModule = require(InExperienceSideSheet.Stores.GetIntegrationsStore)
@@ -48,6 +49,7 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagMountUnmountSideSheet = FlagsModule.FFlagMountUnmountSideSheet
 local FFlagSideSheetOpenPeoplePage = FlagsModule.FFlagSideSheetOpenPeoplePage
 local FFlagSideSheetOpenPeoplePageRestoreChat = FlagsModule.FFlagSideSheetOpenPeoplePageRestoreChat
+local FFlagSideSheetFullWidthScrollView = FlagsModule.FFlagSideSheetFullWidthScrollView
 local FFlagSideSheetUnifiedMenuOrder = SharedFlagsModule.FFlagSideSheetUnifiedMenuOrder
 local FFlagSideSheetFocusNav = SharedFlagsModule.FFlagSideSheetFocusNav
 local FFlagEnableWhatsNew = SharedFlagsModule.FFlagEnableWhatsNew
@@ -102,9 +104,10 @@ local UseFocusGuiObject = if FFlagSideSheetFocusNav then require(Parent.ReactFoc
 local Root = nil
 
 local function SideSheetContent(p1)
-	-- upvalues: UseScaledValueFunction (copy), UseStyleSheetFunction (copy), UseBackgroundStyleModule (copy), SignalsReactModule (copy), getDeviceSafePadding (copy), FFlagMountUnmountSideSheet (copy), UseDrawerShouldMountFunction (copy), FFlagSideSheetOpenPeoplePage (copy), GetSideSheetVisibilityModule (copy), GetIsPeoplePageOpenModule (copy), GetDidSideSheetOpenWithPeoplePageModule (copy), getScrollableContentTopWidgetIntegrations (copy), FFlagEnableSideSheetWidgets (copy), ReactModule (copy), SidesheetAnalyticsModule (copy), FFlagSideSheetFocusNav (copy), UseFocusGuiObject (ref), UseLastInputModeFunction (copy), FFlagSideSheetOpenPeoplePageRestoreChat (copy), UsePreferredInputFunction (copy), SignalsModule (copy), GuiService (copy), NextWrappedIntegerFunction (copy), ResponsiveModule (copy), MouseIconOverrideService (copy), FFlagShowSwitchServerButton (copy), IsPioneerLaunchFunction (copy), GetSwitchServerStoreFunction (copy), SwitchServerTelemetry (copy), ContextActionService (copy), list (copy), ToggleSideSheetModule (copy), FFlagUseAnimateScrollViewToSelectionHelper (copy), UseSideSheetFocusNavScrollViewAnimationModule (copy), GetSideSheetConfigStoreModule (copy), ClosePeoplePageOpenedWithSideSheetModule (copy), UserProfileRowModule (copy), config (copy), ExperienceDetailsRowModule (copy), FFlagSideSheetUnifiedMenuOrder (copy), View (copy), Divider (copy), SideSheetWidgetListModule (copy), ChromeModule (copy), VerticalListModule (copy), getAboveFoldIntegrations (copy), getBelowFoldIntegrations (copy), getScrollableContentBottomWidgetIntegrations (copy), ScrollView (copy), FooterModule (copy), FFlagEnableWhatsNew (copy), WhatsNewAnchor (copy), DrawerContainer (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
+	-- upvalues: UseScaledValueFunction (copy), UseStyleSheetFunction (copy), FFlagSideSheetFullWidthScrollView (copy), UseTokensFunction (copy), UseBackgroundStyleModule (copy), SignalsReactModule (copy), getDeviceSafePadding (copy), FFlagMountUnmountSideSheet (copy), UseDrawerShouldMountFunction (copy), FFlagSideSheetOpenPeoplePage (copy), GetSideSheetVisibilityModule (copy), GetIsPeoplePageOpenModule (copy), GetDidSideSheetOpenWithPeoplePageModule (copy), getScrollableContentTopWidgetIntegrations (copy), FFlagEnableSideSheetWidgets (copy), ReactModule (copy), SidesheetAnalyticsModule (copy), FFlagSideSheetFocusNav (copy), UseFocusGuiObject (ref), UseLastInputModeFunction (copy), FFlagSideSheetOpenPeoplePageRestoreChat (copy), UsePreferredInputFunction (copy), SignalsModule (copy), GuiService (copy), NextWrappedIntegerFunction (copy), ResponsiveModule (copy), MouseIconOverrideService (copy), FFlagShowSwitchServerButton (copy), IsPioneerLaunchFunction (copy), GetSwitchServerStoreFunction (copy), SwitchServerTelemetry (copy), ContextActionService (copy), list (copy), ToggleSideSheetModule (copy), FFlagUseAnimateScrollViewToSelectionHelper (copy), UseSideSheetFocusNavScrollViewAnimationModule (copy), GetSideSheetConfigStoreModule (copy), ClosePeoplePageOpenedWithSideSheetModule (copy), UserProfileRowModule (copy), config (copy), ExperienceDetailsRowModule (copy), FFlagSideSheetUnifiedMenuOrder (copy), View (copy), Divider (copy), SideSheetWidgetListModule (copy), ChromeModule (copy), VerticalListModule (copy), getAboveFoldIntegrations (copy), getBelowFoldIntegrations (copy), getScrollableContentBottomWidgetIntegrations (copy), ScrollView (copy), FooterModule (copy), FFlagEnableWhatsNew (copy), WhatsNewAnchor (copy), DrawerContainer (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
 	local UseScaledValueResult = UseScaledValueFunction(320)
 	local UseStyleSheetResult = UseStyleSheetFunction()
+	local UseTokensResult = if FFlagSideSheetFullWidthScrollView then UseTokensFunction() else nil
 	local UseBackgroundStyleModuleResult = UseBackgroundStyleModule()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(getDeviceSafePadding)
 	local NoFFlagMountUnmountSideSheet = not FFlagMountUnmountSideSheet or UseDrawerShouldMountFunction()
@@ -349,8 +352,11 @@ local function SideSheetContent(p1)
 	end
 	local Element = ReactModule.createElement(View, { tag = "col size-full" }, {
 		ScrollableContent = ReactModule.createElement(ScrollView, {
-			tag = "fill size-full-0 padding-x-xlarge",
 			LayoutOrder = 1,
+			tag = {
+				["fill size-full-0"] = true,
+				["padding-x-xlarge"] = not FFlagSideSheetFullWidthScrollView
+			},
 			scroll = {
 				ScrollingDirection = Enum.ScrollingDirection.Y,
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
@@ -363,6 +369,10 @@ local function SideSheetContent(p1)
 			selection = if FFlagSideSheetFocusNav then { Selectable = false } else nil,
 			scrollingFrameRef = if FFlagSideSheetFocusNav and FFlagUseAnimateScrollViewToSelectionHelper then UseSideSheetFocusNavScrollViewAnimationModuleResult else nil
 		}, {
+			Padding = if FFlagSideSheetFullWidthScrollView then ReactModule.createElement("UIPadding", {
+				PaddingLeft = UDim.new(0, UseTokensResult.Padding.XLarge),
+				PaddingRight = UDim.new(0, UseTokensResult.Padding.XLarge)
+			}) else nil,
 			HeaderRow = if IsPioneerLaunchFunction() then ReactModule.createElement(UserProfileRowModule, { layoutOrder = config.ExperienceDetails }) else ReactModule.createElement(ExperienceDetailsRowModule, { layoutOrder = config.ExperienceDetails }),
 			HeaderDivider = if v1 then nil else ReactModule.createElement(View, {
 				tag = "size-full-0 auto-y",

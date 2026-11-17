@@ -20,6 +20,7 @@ local _ = require(GameInvite.gameInviteModalType)
 local GameInviteConstantsModule = require(GameInvite.GameInviteConstants)
 local ShouldShowJoinCtaModule = require(Utils.shouldShowJoinCta)
 local FFlagGameInviteInExpJoinCtaModule = require(GameInvite.Flags.FFlagGameInviteInExpJoinCta)
+local IsGameInviteJoinForPioneerEnabledFunction = require(Parent.NotificationsCommon).isGameInviteJoinForPioneerEnabled
 local GameInviteModalLayoutContextModule = require(Context.GameInviteModalLayoutContext)
 local GameDetailsContextModule = require(Context.GameDetailsContext)
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
@@ -36,7 +37,7 @@ local config = {
 	cancelText = "Feature.SettingsHub.Action.CancelSearch",
 	inviteFriends = "CoreScripts.InGameMenu.PageTitle.InviteFriends",
 	copyLink = "Feature.SocialShare.Action.CopyLink",
-	joinOrInviteFriends = if FFlagGameInviteInExpJoinCtaModule then "CoreScripts.InGameMenu.PageTitle.JoinOrInviteFriends" else nil
+	joinOrInviteFriends = if FFlagGameInviteInExpJoinCtaModule or IsGameInviteJoinForPioneerEnabledFunction() then "CoreScripts.InGameMenu.PageTitle.JoinOrInviteFriends" else nil
 }
 
 local function v28(UseContextResult, IsConsole, p1)
@@ -45,7 +46,7 @@ local function v28(UseContextResult, IsConsole, p1)
 end
 
 return function(p1)
-	-- upvalues: UseStyleFunction (copy), ReactModule (copy), GameInviteModalLayoutContextModule (copy), GameDetailsContextModule (copy), FriendsListContext (copy), InviteFriendContext (copy), GetLocalizedStringsFunction (copy), config (copy), FFlagGameInviteInExpJoinCtaModule (copy), ShouldShowJoinCtaModule (copy), UseAppPolicyFunction (copy), DeviceInfo (copy), v28 (copy), GetTextSizeFunction (copy), TitleIconSize (copy), GameInviteModalManagerModule (copy), SidePadding (copy), ImageSetButton (copy), IconsNavigationClose (copy), NormalizeFontFaceFunction (copy), IconsMenuSearch (copy), ShareGameInviteLinkModule (copy), FriendsMenuSearch (copy), GameInviteAnalyticsManagerModule (copy)
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), GameInviteModalLayoutContextModule (copy), GameDetailsContextModule (copy), FriendsListContext (copy), InviteFriendContext (copy), GetLocalizedStringsFunction (copy), config (copy), FFlagGameInviteInExpJoinCtaModule (copy), IsGameInviteJoinForPioneerEnabledFunction (copy), ShouldShowJoinCtaModule (copy), UseAppPolicyFunction (copy), DeviceInfo (copy), v28 (copy), GetTextSizeFunction (copy), TitleIconSize (copy), GameInviteModalManagerModule (copy), SidePadding (copy), ImageSetButton (copy), IconsNavigationClose (copy), NormalizeFontFaceFunction (copy), IconsMenuSearch (copy), ShareGameInviteLinkModule (copy), FriendsMenuSearch (copy), GameInviteAnalyticsManagerModule (copy)
 	local UseStyleResult = UseStyleFunction()
 	local UseContextResult = ReactModule.useContext(GameInviteModalLayoutContextModule)
 	local UseContextResult1 = ReactModule.useContext(GameDetailsContextModule)
@@ -53,7 +54,7 @@ return function(p1)
 	local UseContextResult3 = ReactModule.useContext(InviteFriendContext)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local LocalizedStrings = GetLocalizedStringsFunction(config)
-	local JoinOrInviteFriends = if FFlagGameInviteInExpJoinCtaModule and ShouldShowJoinCtaModule(UseContextResult1) then LocalizedStrings.joinOrInviteFriends else LocalizedStrings.inviteFriends
+	local JoinOrInviteFriends = if (FFlagGameInviteInExpJoinCtaModule or IsGameInviteJoinForPioneerEnabledFunction()) and ShouldShowJoinCtaModule(UseContextResult1) then LocalizedStrings.joinOrInviteFriends else LocalizedStrings.inviteFriends
 	local SearchFriendsFunction: (any) -> () = UseContextResult2.searchFriends
 	local IsCompact = UseContextResult.modalMode == "compact"
 	local IsFullWidth = UseContextResult.isFullWidth

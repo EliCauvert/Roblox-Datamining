@@ -11,8 +11,11 @@ local ConstantsModule = require(Chrome.ChromeShared.Unibar.Constants)
 local AvatarSwitcherChromeWrapperModule = require(Chrome.Integrations.AvatarSwitcher.AvatarSwitcherChromeWrapper)
 local AvatarSwitcherIconModule = require(Chrome.Integrations.AvatarSwitcher.AvatarSwitcherIcon)
 local Url = require(CorePackages.Workspace.Packages.Http).Url
-local SideSheetPlacement = require(CorePackages.Workspace.Packages.Chrome).Enums.SideSheetPlacement
+local ChromeModule = require(CorePackages.Workspace.Packages.Chrome)
+local SideSheetOpenBehavior = ChromeModule.Enums.SideSheetOpenBehavior
+local SideSheetPlacement = ChromeModule.Enums.SideSheetPlacement
 local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
+local FFlagKeepSideSheetOpenBesideMenu = SharedFlagsModule.FFlagKeepSideSheetOpenBesideMenu
 local FFlagChromeWindowSignalConstraintsToggle = SharedFlagsModule.FFlagChromeWindowSignalConstraintsToggle
 local FFlagRemoveAvatarSwitcherIfUnsupported = SharedFlagsModule.FFlagRemoveAvatarSwitcherIfUnsupported
 local FFlagAvatarWorkshopReplacesAvatarSwitcher = SharedFlagsModule.FFlagAvatarWorkshopReplacesAvatarSwitcher
@@ -36,6 +39,7 @@ local RegisterResult = ServiceModule:register({
 	id = ConstantsModule.AVATAR_SWITCHER_ID,
 	label = if FFlagAvatarWorkshopReplacesAvatarSwitcher then "CommonUI.Features.Label.Avatar" else "Feature.AvatarSwitcher.Heading.SwitchAvatar",
 	sideSheetPlacement = SideSheetPlacement.AboveFold,
+	sideSheetOpenBehavior = if FFlagKeepSideSheetOpenBesideMenu then SideSheetOpenBehavior.WindowBesideSheet else nil,
 	activated = function(_)
 		-- upvalues: ServiceModule (copy), ConstantsModule (copy)
 		ServiceModule:toggleWindow(ConstantsModule.AVATAR_SWITCHER_ID)

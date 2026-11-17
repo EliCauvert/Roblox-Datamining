@@ -1,13 +1,15 @@
 ﻿local GuiService = game:GetService("GuiService")
 local Workspace = game:GetService("Workspace")
-local Parent = script.Parent.Parent.Parent
-local AppNavBarModule = require(Parent.AppNavBar)
-local FoundationModule = require(Parent.Foundation)
-local ReactModule = require(Parent.React)
-local ResponsiveModule = require(Parent.Responsive)
-local SignalsReactModule = require(Parent.SignalsReact)
-local FFlagSplitPaneFixClassicThemeHeader = require(Parent.SharedFlags).FFlagSplitPaneFixClassicThemeHeader
-local SplitPaneModule = if FFlagSplitPaneFixClassicThemeHeader then require(Parent.SplitPane) else nil
+local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local AppNavBarModule = require(Parent1.AppNavBar)
+local FoundationModule = require(Parent1.Foundation)
+local ReactModule = require(Parent1.React)
+local ResponsiveModule = require(Parent1.Responsive)
+local SignalsReactModule = require(Parent1.SignalsReact)
+local FFlagSplitPaneFixClassicThemeHeader = require(Parent1.SharedFlags).FFlagSplitPaneFixClassicThemeHeader
+local FFlagClassicThemeHeaderGradientFromTokensModule = require(Parent.Flags.FFlagClassicThemeHeaderGradientFromTokens)
+local SplitPaneModule = if FFlagSplitPaneFixClassicThemeHeader then require(Parent1.SplitPane) else nil
 local SplitPaneStore = if FFlagSplitPaneFixClassicThemeHeader then SplitPaneModule.SplitPaneStore else nil
 local UseNavBarPlacementFunction = AppNavBarModule.useNavBarPlacement
 local UseNavBarSizeFunction = AppNavBarModule.useNavBarSize
@@ -24,7 +26,7 @@ local function _()
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseTokensFunction (copy), ResponsiveModule (copy), UseNavBarPlacementFunction (copy), UseNavBarSizeFunction (copy), Placement (copy), FFlagSplitPaneFixClassicThemeHeader (copy), SplitPaneStore (copy), SignalsReactModule (copy), SplitPaneModule (copy), ReactModule (copy), Workspace (copy), GuiService (copy), View (copy), Image (copy)
+	-- upvalues: UseTokensFunction (copy), ResponsiveModule (copy), UseNavBarPlacementFunction (copy), UseNavBarSizeFunction (copy), Placement (copy), FFlagSplitPaneFixClassicThemeHeader (copy), SplitPaneStore (copy), SignalsReactModule (copy), SplitPaneModule (copy), ReactModule (copy), Workspace (copy), GuiService (copy), View (copy), FFlagClassicThemeHeaderGradientFromTokensModule (copy), Image (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseDeviceInsetsResult = ResponsiveModule.useDeviceInsets()
 	local UseNavBarPlacementResult = UseNavBarPlacementFunction()
@@ -101,6 +103,7 @@ return ReactModule.memo(function(p1)
 	return ReactModule.createElement(View, { tag = "size-0", ZIndex = -1 }, {
 		Background = ReactModule.createElement(View, {
 			tag = "clip",
+			testId = "--app-header-bar-classic-theme-background",
 			Position = UseBindingResult,
 			Size = UseBindingResult1,
 			backgroundStyle = UseTokensResult.Color.Extended.White.White_100,
@@ -109,8 +112,8 @@ return ReactModule.memo(function(p1)
 			Gradient = ReactModule.createElement("UIGradient", {
 				Rotation = 90,
 				Color = ColorSequence.new({
-					ColorSequenceKeypoint.new(0, p1.config.gradientColor),
-					ColorSequenceKeypoint.new(0.33, p1.config.gradientColor),
+					ColorSequenceKeypoint.new(0, if FFlagClassicThemeHeaderGradientFromTokensModule then UseTokensResult.Color.Common.NavigationBar.Color3 else p1.config.gradientColor),
+					ColorSequenceKeypoint.new(0.33, if FFlagClassicThemeHeaderGradientFromTokensModule then UseTokensResult.Color.Common.NavigationBar.Color3 else p1.config.gradientColor),
 					ColorSequenceKeypoint.new(1, UseTokensResult.Color.Surface.Surface_0.Color3)
 				})
 			}),

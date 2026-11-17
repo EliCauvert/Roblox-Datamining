@@ -15,11 +15,10 @@ local ZoomAnimatedFrameModule = require(GameTile.ZoomAnimatedFrame)
 local GameTileViewConfigModule = require(GameTile.GameTileViewConfig)
 local FFlagLuaAppContinueSortInstantPlay = require(Parent.SharedFlags).FFlagLuaAppContinueSortInstantPlay
 local FFlagLuaAppMigrateGameTileHoverFixes = require(Parent.SharedFlags).FFlagLuaAppMigrateGameTileHoverFixes
-local FFlagLuaAppGameViewTileBackgroundColorOverride = require(Parent.SharedFlags).FFlagLuaAppGameViewTileBackgroundColorOverride
 local FFlagLuaAppHomePageFirstImageLoadObserver = require(Parent.SharedFlags).FFlagLuaAppHomePageFirstImageLoadObserver
 
 return function(Gui)
-	-- upvalues: UseDesignTokensFunction (copy), UseTokensFunction (copy), GameTileViewConfigModule (copy), UseCursorFunction (copy), FFlagLuaAppMigrateGameTileHoverFixes (copy), FFlagLuaAppGameViewTileBackgroundColorOverride (copy), ReactModule (copy), FFlagLuaAppContinueSortInstantPlay (copy), ZoomAnimatedFrameModule (copy), ImageSetLabel (copy), Images (copy), FFlagLuaAppHomePageFirstImageLoadObserver (copy), LoadableImage (copy), RightAlignedButtonWrapperModule (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: UseDesignTokensFunction (copy), UseTokensFunction (copy), GameTileViewConfigModule (copy), UseCursorFunction (copy), FFlagLuaAppMigrateGameTileHoverFixes (copy), ReactModule (copy), FFlagLuaAppContinueSortInstantPlay (copy), ZoomAnimatedFrameModule (copy), ImageSetLabel (copy), Images (copy), FFlagLuaAppHomePageFirstImageLoadObserver (copy), LoadableImage (copy), RightAlignedButtonWrapperModule (copy), NormalizeFontFaceFunction (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local NumLinesForTitle = if Gui.isUnifiedGameTile then Gui.numLinesForTitle or 1 else nil
 	local NumLinesForMetadata = Gui.numLinesForMetadata or 1
@@ -52,7 +51,7 @@ return function(Gui)
 	local Transparency = (if UseTokensResult and Gui.isUnifiedGameTile then IsHovered and UseTokensResult.Color.Surface.Surface_100.Transparency else IsHovered and UseDesignTokensResult.Color.Surface.Surface_300.Transparency) or 1
 	local SurfaceColor3 = if UseTokensResult and Gui.isUnifiedGameTile then UseTokensResult.Color.Surface.Surface_100.Color3 else UseDesignTokensResult.Color.Surface.Surface_300.Color3
 	
-	if FFlagLuaAppGameViewTileBackgroundColorOverride and Gui.backgroundStyle then
+	if Gui.backgroundStyle then
 		Transparency = IsHovered and Gui.backgroundStyle.Transparency or 1
 		SurfaceColor3 = Gui.backgroundStyle.Color3
 	end

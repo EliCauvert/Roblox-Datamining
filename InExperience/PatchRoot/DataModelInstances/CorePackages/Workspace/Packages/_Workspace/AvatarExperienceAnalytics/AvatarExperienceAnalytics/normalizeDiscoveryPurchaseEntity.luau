@@ -1,5 +1,7 @@
-﻿local MarketplaceUnifiedAction = require(script.Parent.UnifiedEventLogEnums).MarketplaceUnifiedAction
-local UnifiedLoggingSurface = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceAnalytics").Parent
+local MarketplaceUnifiedAction = require(script.Parent.UnifiedEventLogEnums).MarketplaceUnifiedAction
+local UnifiedLoggingSurface = require(Parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
+local _ = require(Parent.UnifiedEventEnums)
 local list = {
 	"widgetId", "widgetType", "assetIds", "bundleIds", "widgetItemIds",
 	"organicResultIds", "widgetItemPrice", "uiTreatmentType", "themeId",

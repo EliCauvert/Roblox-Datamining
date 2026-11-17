@@ -41,9 +41,7 @@ local SduiVerticalFeedScrollPreloadDistancePx = game:DefineFastInt("SduiVertical
 local SduiVerticalFeedScrollUnderfillDebounceMs = game:DefineFastInt("SduiVerticalFeedScrollUnderfillDebounceMs", 50)
 local SduiEnableBackToTop = game:DefineFastFlag("SduiEnableBackToTop", false)
 local FFlagSduiPageCanvasCollectionLayout = SharedFlagsModule.FFlagSduiPageCanvasCollectionLayout
-local FFlagLuaAppSduiVideoThumbnail = SharedFlagsModule.FFlagLuaAppSduiVideoThumbnail
 local FFlagLuaAppMediaGalleryGamepadSupport = SharedFlagsModule.FFlagLuaAppMediaGalleryGamepadSupport
-local FFlagLuaAppOneByTwoHoverIdleAutoplay = SharedFlagsModule.FFlagLuaAppOneByTwoHoverIdleAutoplay
 local FFlagLuaAppSduiSuppressVideoDetectorDuringScroll = SharedFlagsModule.FFlagLuaAppSduiSuppressVideoDetectorDuringScroll
 local FFlagAppPageShellScrollToTopFocus = SharedFlagsModule.FFlagAppPageShellScrollToTopFocus
 local FFlagSduiVerticalFeedScrollTelemetry = SharedFlagsModule.FFlagSduiVerticalFeedScrollTelemetry
@@ -126,10 +124,10 @@ local function useProgressiveRowCapWithScroll(FeedItems, InitialNumToRender, Pro
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: FFlagLuaAppSduiVideoThumbnail (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), UseTokensFunction (copy), UseNavBarPlacementFunction (copy), AppNavBarModule (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), ReactModule (copy), AppCommonLibModule (copy), FFlagLuaAppSduiHomeFriendCarousel (copy), ScrollMovementDirection (copy), FFlagSduiSamePoolFeedItemSpacing (copy), SduiEnableBackToTop (copy), FFlagSduiVerticalFeedScrollTelemetry (copy), CreateScrollIntervalPerformanceTrackerFunction (copy), UseAnimateScrollViewToSelectionFunction (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), UseLastInputModeFunction (copy), FFlagLuaAppSduiSuppressVideoDetectorDuringScroll (copy), useProgressiveRowCapWithScroll (copy), SduiVerticalFeedScrollUnderfillDebounceMs (copy), UseVerticalScrolledToEndThresholdModule (copy), BackToTopButtonModule (copy), FFlagSduiIndividualFeedItemSpacing (copy), PoolStoreLayoutStoreWiring (copy), SduiFeedImpressionsDetectorModule (copy), BuildSduiFeedChildrenModule (copy), FFlagAppPageShellScrollToTopFocus (copy), DiscoveryTypesModule (copy), SduiFeedContextModule (copy), FFlagSduiPageCanvasCollectionLayout (copy), CollectionLayoutStoreProvider (copy), View (copy), ViewportVideoAutoplaySync (copy), ScrollDetector (copy), SduiStickyHeaderModule (copy), PullToRefreshSpinner (copy)
+	-- upvalues: UseTokensFunction (copy), UseNavBarPlacementFunction (copy), AppNavBarModule (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), ReactModule (copy), AppCommonLibModule (copy), FFlagLuaAppSduiHomeFriendCarousel (copy), ScrollMovementDirection (copy), FFlagSduiSamePoolFeedItemSpacing (copy), SduiEnableBackToTop (copy), FFlagSduiVerticalFeedScrollTelemetry (copy), CreateScrollIntervalPerformanceTrackerFunction (copy), UseAnimateScrollViewToSelectionFunction (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), UseLastInputModeFunction (copy), FFlagLuaAppSduiSuppressVideoDetectorDuringScroll (copy), useProgressiveRowCapWithScroll (copy), SduiVerticalFeedScrollUnderfillDebounceMs (copy), UseVerticalScrolledToEndThresholdModule (copy), BackToTopButtonModule (copy), FFlagSduiIndividualFeedItemSpacing (copy), PoolStoreLayoutStoreWiring (copy), SduiFeedImpressionsDetectorModule (copy), BuildSduiFeedChildrenModule (copy), FFlagAppPageShellScrollToTopFocus (copy), DiscoveryTypesModule (copy), SduiFeedContextModule (copy), FFlagSduiPageCanvasCollectionLayout (copy), CollectionLayoutStoreProvider (copy), View (copy), ViewportVideoAutoplaySync (copy), ScrollDetector (copy), SduiStickyHeaderModule (copy), PullToRefreshSpinner (copy)
 	local AnalyticsContext = p1.analyticsContext
 	local SduiContext = p1.sduiContext
-	local VideoPlaybackContext = if FFlagLuaAppSduiVideoThumbnail or FFlagLuaAppOneByTwoHoverIdleAutoplay then SduiContext.videoPlaybackContext else nil
+	local VideoPlaybackContext = SduiContext.videoPlaybackContext
 	local FeedItems = p1.feedItems
 	local DebugName = p1.debugName
 	local ContentTag = p1.contentTag or p1.defaultContentTag
@@ -301,35 +299,29 @@ return ReactModule.memo(function(p1)
 	UseAnimateScrollViewToSelectionFunction(if p1.scrollToSelectionAnimationManagedByParent then nil else ScrollingFrameRef, 0.4, if FFlagLuaAppMediaGalleryGamepadSupport then p1.scrollToSelectionRevealOnly else nil)
 	local IsNotCursor = UseLastInputModeFunction() ~= "Cursor"
 	local ThresholdFromEnd = p1.thresholdFromEnd or 600
-	local ViewportVideoAutoplayController = nil
-	local UseResult3 = nil
-	local UseResult4 = nil
-	
-	if FFlagLuaAppSduiVideoThumbnail or FFlagLuaAppOneByTwoHoverIdleAutoplay then
-		ViewportVideoAutoplayController = if VideoPlaybackContext then VideoPlaybackContext.viewportVideoAutoplayController else nil
-		UseResult3 = ReactModule.useCallback(function()
-			-- upvalues: ViewportVideoAutoplayController (ref), FFlagLuaAppSduiSuppressVideoDetectorDuringScroll (upval)
-			if ViewportVideoAutoplayController then
-				ViewportVideoAutoplayController:onScrollStart()
-				
-				if FFlagLuaAppSduiSuppressVideoDetectorDuringScroll and ViewportVideoAutoplayController.suppressDetectorsDuringScroll then
-					ViewportVideoAutoplayController.setDetectorsUnmounted(true)
-				end
+	local ViewportVideoAutoplayController = if VideoPlaybackContext then VideoPlaybackContext.viewportVideoAutoplayController else nil
+	local UseResult3 = ReactModule.useCallback(function()
+		-- upvalues: ViewportVideoAutoplayController (copy), FFlagLuaAppSduiSuppressVideoDetectorDuringScroll (upval)
+		if ViewportVideoAutoplayController then
+			ViewportVideoAutoplayController:onScrollStart()
+			
+			if FFlagLuaAppSduiSuppressVideoDetectorDuringScroll and ViewportVideoAutoplayController.suppressDetectorsDuringScroll then
+				ViewportVideoAutoplayController.setDetectorsUnmounted(true)
 			end
-		end, { ViewportVideoAutoplayController })
-		UseResult4 = ReactModule.useCallback(function(p2)
-			-- upvalues: ViewportVideoAutoplayController (ref), FFlagLuaAppSduiSuppressVideoDetectorDuringScroll (upval)
-			if ViewportVideoAutoplayController then
-				if FFlagLuaAppSduiSuppressVideoDetectorDuringScroll and ViewportVideoAutoplayController.suppressDetectorsDuringScroll then
-					ViewportVideoAutoplayController.setDetectorsUnmounted(false)
-				end
-				ViewportVideoAutoplayController:onScrollSettled("Y", p2)
+		end
+	end, { ViewportVideoAutoplayController })
+	local UseResult4 = ReactModule.useCallback(function(p2)
+		-- upvalues: ViewportVideoAutoplayController (copy), FFlagLuaAppSduiSuppressVideoDetectorDuringScroll (upval)
+		if ViewportVideoAutoplayController then
+			if FFlagLuaAppSduiSuppressVideoDetectorDuringScroll and ViewportVideoAutoplayController.suppressDetectorsDuringScroll then
+				ViewportVideoAutoplayController.setDetectorsUnmounted(false)
 			end
-		end, { ViewportVideoAutoplayController })
-	end
+			ViewportVideoAutoplayController:onScrollSettled("Y", p2)
+		end
+	end, { ViewportVideoAutoplayController })
 	local UseProgressiveRowCapWithScrollResult, UseProgressiveRowCapWithScrollResult2 = useProgressiveRowCapWithScroll(FeedItems, p1.initialNumToRender, p1.progressiveFillRate, p1.progressiveFillIntervalMs, p1.progressiveFillOnScroll, ScrollingFrameRef, UseRefResult1, SduiVerticalFeedScrollUnderfillDebounceMs)
 	UseVerticalScrolledToEndThresholdModule(ScrollingFrameRef, ThresholdFromEnd, if UseProgressiveRowCapWithScrollResult2 then nil else p1.onScrollToEnd)
-	local UseMemoResult2 = ReactModule.useMemo(function()
+	local Element = ReactModule.useMemo(function()
 		-- upvalues: FeedItems (copy), p1 (copy), SduiEnableBackToTop (upval), v2 (ref), ReactModule (upval), BackToTopButtonModule (upval), ScrollingFrameRef (copy), SduiContext (copy), FFlagSduiIndividualFeedItemSpacing (upval), GapBetweenFeedItems (copy), UseRefResult1 (copy), v1 (copy), GapAfterStickyItems (copy), PoolStoreLayoutStoreWiring (upval), ImpressionsTag (copy), SduiFeedImpressionsDetectorModule (upval), UseRefResult2 (copy), BuildSduiFeedChildrenModule (upval), DebugName (copy), SelectionBehaviorLeft (copy), SelectionBehaviorRight (copy), UseMemoResult1 (copy), FFlagAppPageShellScrollToTopFocus (upval), DiscoveryTypesModule (upval), UseProgressiveRowCapWithScrollResult (copy), FFlagSduiSamePoolFeedItemSpacing (upval), SamePoolFeedItemGap (copy)
 		if FeedItems == nil then
 			return nil
@@ -422,36 +414,33 @@ return ReactModule.memo(function(p1)
 	})
 	
 	if UseMemoResult then
-		UseMemoResult2 = ReactModule.createElement(SduiFeedContextModule.Provider, { value = UseMemoResult }, UseMemoResult2)
+		Element = ReactModule.createElement(SduiFeedContextModule.Provider, { value = UseMemoResult }, Element)
 	end
 	if not FFlagSduiPageCanvasCollectionLayout or not p1.disableCollectionLayoutStoreProvider then
-		UseMemoResult2 = ReactModule.createElement(CollectionLayoutStoreProvider, { container = UseStateResult }, UseMemoResult2)
+		Element = ReactModule.createElement(CollectionLayoutStoreProvider, { container = UseStateResult }, Element)
 	end
 	local Tag = { ["size-full-0 auto-y"] = true }
 	
 	if IsNotContentTagMatch then
 		Tag[ContentTag] = true
 	end
-	local Element = ReactModule.createElement(View, {
-		tag = Tag,
-		LayoutOrder = p1.layoutOrder,
-		ref = UseStateResult2
-	}, UseMemoResult2)
+	local Element1 = ReactModule.createElement(ReactModule.Fragment, nil, {
+		Content = ReactModule.createElement(View, {
+			tag = Tag,
+			LayoutOrder = p1.layoutOrder,
+			ref = UseStateResult2
+		}, Element),
+		ViewportVideoAutoplaySync = if ViewportVideoAutoplayController then ReactModule.createElement(ViewportVideoAutoplaySync, {
+			viewportAutoplayController = ViewportVideoAutoplayController,
+			scrollingFrameRef = ScrollingFrameRef
+		}) else nil,
+		ScrollDetector = if ViewportVideoAutoplayController then ReactModule.createElement(ScrollDetector, {
+			scrollingFrameRef = ScrollingFrameRef,
+			onScrollStart = UseResult3,
+			onScrollSettled = UseResult4
+		}) else nil
+	})
 	
-	if FFlagLuaAppSduiVideoThumbnail or FFlagLuaAppOneByTwoHoverIdleAutoplay then
-		Element = ReactModule.createElement(ReactModule.Fragment, nil, {
-			Content = Element,
-			ViewportVideoAutoplaySync = if ViewportVideoAutoplayController then ReactModule.createElement(ViewportVideoAutoplaySync, {
-				viewportAutoplayController = ViewportVideoAutoplayController,
-				scrollingFrameRef = ScrollingFrameRef
-			}) else nil,
-			ScrollDetector = if ViewportVideoAutoplayController then ReactModule.createElement(ScrollDetector, {
-				scrollingFrameRef = ScrollingFrameRef,
-				onScrollStart = UseResult3,
-				onScrollSettled = UseResult4
-			}) else nil
-		})
-	end
 	return if p1.scrollingFrameRef == nil then ReactModule.createElement(View, {
 		tag = "size-full",
 		LayoutOrder = p1.layoutOrder,
@@ -500,7 +489,7 @@ return ReactModule.memo(function(p1)
 			ClipsDescendants = false
 		}, {
 			FlexFill = ReactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }),
-			Content = Element
+			Content = Element1
 		})
-	}) else Element
+	}) else Element1
 end)

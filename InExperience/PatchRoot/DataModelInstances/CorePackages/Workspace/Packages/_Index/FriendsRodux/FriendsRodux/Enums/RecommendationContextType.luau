@@ -3,5 +3,6 @@
 	MutualFriends = "MutualFriends",
 	Frequents = "Frequents",
 	Contacts = "Contacts",
-	Classmates = "Classmates"
+	Classmates = "Classmates",
+	FriendOfSeed = "FriendOfSeed"
 })

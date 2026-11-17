@@ -3,9 +3,10 @@ local UserGameSettings = UserSettings():GetService("UserGameSettings")
 local Parent = script:FindFirstAncestor("CollectionViews").Parent
 local ReactModule = require(Parent.React)
 local ArgCheckModule = require(Parent.ArgCheck)
+local FFlagFixCarouselScrollButtonPosition = require(Parent.SharedFlags).FFlagFixCarouselScrollButtonPosition
 
 return function(p1, p2: number, p3, p4: number, p5, p6, p7)
-	-- upvalues: ArgCheckModule (copy), ReactModule (copy), UserGameSettings (copy), TweenService (copy)
+	-- upvalues: ArgCheckModule (copy), ReactModule (copy), FFlagFixCarouselScrollButtonPosition (copy), UserGameSettings (copy), TweenService (copy)
 	ArgCheckModule.assert(p4 >= 1)
 	ArgCheckModule.assert(p2 >= 0)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
@@ -20,19 +21,29 @@ return function(p1, p2: number, p3, p4: number, p5, p6, p7)
 		return UseRefResult.current
 	end, { Largest, UseRefResult })
 	local UseResult1 = ReactModule.useCallback(function()
-		-- upvalues: p3 (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), UseRefResult (copy), Largest (copy)
-		if p3 then
-			UseStateResult2(UseRefResult.current > 0)
-			UseStateResult2_1(UseRefResult.current < Largest)
-			
-			return
-		else
+		-- upvalues: p3 (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), FFlagFixCarouselScrollButtonPosition (upval), p1 (copy), UseRefResult (copy), Largest (copy)
+		if not p3 then
 			UseStateResult2(false)
 			UseStateResult2_1(false)
+			
+			return
 		end
+		local IsXAbove: boolean? = nil
+		
+		if FFlagFixCarouselScrollButtonPosition then
+			IsXAbove = false
+			local Current = p1.current
+			
+			if Current ~= nil and Current.AbsoluteWindowSize.X > 0 then
+				local Largest1 = math.max(0, Current.AbsoluteCanvasSize.X - Current.AbsoluteWindowSize.X)
+				IsXAbove = Largest1 > 0 and Largest1 <= Current.CanvasPosition.X
+			end
+		end
+		UseStateResult2(UseRefResult.current > 0)
+		UseStateResult2_1(if FFlagFixCarouselScrollButtonPosition then UseRefResult.current < Largest and not IsXAbove else UseRefResult.current < Largest)
 	end, { p3, Largest, UseRefResult })
 	local UseResult2 = ReactModule.useCallback(function(p8, p9)
-		-- upvalues: p1 (copy), p5 (copy), p6 (copy), UserGameSettings (upval), UseRefResult1 (copy), TweenService (upval), p7 (copy), UseResult1 (copy)
+		-- upvalues: p1 (copy), p5 (copy), p6 (copy), UserGameSettings (upval), UseRefResult1 (copy), TweenService (upval), p7 (copy), FFlagFixCarouselScrollButtonPosition (upval), UseResult1 (copy)
 		local Current = p1.current
 		
 		if Current ~= nil then
@@ -42,12 +53,35 @@ return function(p1, p2: number, p3, p4: number, p5, p6, p7)
 				if UseRefResult1.current then
 					UseRefResult1.current:Cancel()
 				end
-				UseRefResult1.current = TweenService:Create(Current, TweenInfo.new(p7 or 0.75, Enum.EasingStyle.Cubic, Enum.EasingDirection.InOut), { CanvasPosition = _Vector2 }):Play()
+				local Tween = TweenService:Create(Current, TweenInfo.new(p7 or 0.75, Enum.EasingStyle.Cubic, Enum.EasingDirection.InOut), { CanvasPosition = _Vector2 })
 				
-				return
+				if FFlagFixCarouselScrollButtonPosition then
+					UseRefResult1.current = Tween
+					local Connection = nil
+					Connection = Tween.Completed:Connect(function()
+						-- upvalues: Connection (ref), UseRefResult1 (upval), Tween (copy), UseResult1 (upval)
+						Connection:Disconnect()
+						
+						if UseRefResult1.current == Tween then
+							UseRefResult1.current = nil
+							UseResult1()
+							
+							return
+						end
+					end)
+					Tween:Play()
+					
+					return
+				else
+					local Connection = UseRefResult1
+					Connection.current = Tween:Play()
+					
+					return
+				end
 			else
 				Current.CanvasPosition = _Vector2
-				UseResult1()
+				local Connection: () -> () = UseResult1
+				Connection()
 			end
 		end
 	end, {
@@ -69,9 +103,14 @@ return function(p1, p2: number, p3, p4: number, p5, p6, p7)
 			UseResult2(UseRefResult.current)
 		end
 		UseResult1()
-	end, { UseResult, UseResult2, p3 })
+	end, {
+		UseResult,
+		UseResult2,
+		p3,
+		if FFlagFixCarouselScrollButtonPosition then UseResult1 else nil
+	})
 	ReactModule.useEffect(function()
-		-- upvalues: p3 (copy), p1 (copy), UseResult (copy), UseRefResult (copy), UseResult2 (copy), UseResult1 (copy)
+		-- upvalues: p3 (copy), p1 (copy), UseResult (copy), UseRefResult (copy), UseResult2 (copy), UseResult1 (copy), FFlagFixCarouselScrollButtonPosition (upval), UseRefResult1 (copy), p5 (copy), p6 (copy)
 		if not p3 then
 			return nil
 		end
@@ -86,8 +125,15 @@ return function(p1, p2: number, p3, p4: number, p5, p6, p7)
 				UseResult1()
 			end))
 			table.insert(List, Current:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
-				-- upvalues: UseResult (upval), UseRefResult (upval), UseResult1 (upval)
-				UseResult(UseRefResult.current)
+				-- upvalues: FFlagFixCarouselScrollButtonPosition (upval), UseRefResult1 (upval), p5 (upval), p6 (upval), UseResult (upval), Current (copy), UseRefResult (upval), UseResult1 (upval)
+				if FFlagFixCarouselScrollButtonPosition then
+					if UseRefResult1.current == nil then
+						local NewX = p5:getValue().X + p6
+						UseResult(if NewX > 0 then Current.CanvasPosition.X / NewX else 0)
+					end
+				else
+					UseResult(UseRefResult.current)
+				end
 				UseResult1()
 			end))
 		end
@@ -98,11 +144,11 @@ return function(p1, p2: number, p3, p4: number, p5, p6, p7)
 			end
 		end
 	end, {
-		UseResult2,
-		UseRefResult,
-		p1,
-		p3,
-		UseResult
+		UseResult2, UseRefResult, p1, p3, UseResult,
+		if FFlagFixCarouselScrollButtonPosition then UseResult1 else nil,
+		if FFlagFixCarouselScrollButtonPosition then p5 else nil,
+		if FFlagFixCarouselScrollButtonPosition then p6 else nil,
+		if FFlagFixCarouselScrollButtonPosition then UseRefResult1 else nil
 	})
 	
 	return UseResult3, UseResult4, UseStateResult, UseStateResult1

@@ -6,5 +6,6 @@
 	TOP_BAR_HEIGHT = 48,
 	CTA_BUTTON_HEIGHT = 50,
 	FriendsLandingPageSourceName = "FriendsLanding",
-	AddFriendsPYMKSourceName = "addFriendsPYMK"
+	AddFriendsPYMKSourceName = "addFriendsPYMK",
+	FriendsLandingTrustedCandidatesSourceName = "FriendsLandingTrustedCandidates"
 }

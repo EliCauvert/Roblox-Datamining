@@ -10,5 +10,6 @@
 	InExperienceShopSearch = "InExperienceShopSearch",
 	Profile = "Profile",
 	HomePageGameItemShop = "HomePageGameItemShop",
-	SearchPageGameItemShop = "SearchPageGameItemShop"
+	SearchPageGameItemShop = "SearchPageGameItemShop",
+	CampaignPageGameItemShop = "CampaignPageGameItemShop"
 }

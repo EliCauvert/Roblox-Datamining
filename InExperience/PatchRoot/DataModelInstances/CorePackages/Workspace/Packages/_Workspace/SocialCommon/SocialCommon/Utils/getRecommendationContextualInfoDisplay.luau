@@ -3,10 +3,11 @@ local Parent = SocialCommon.Parent
 local GetMutualFriendsTextModule = require(SocialCommon.Utils.getMutualFriendsText)
 local RecommendationContextTypeModule = require(SocialCommon.Enums.RecommendationContextType)
 local FFlagShowClassmatesOnPYMKModule = require(Parent.SharedFlags.FFlagShowClassmatesOnPYMK)
+local FFlagProfilePlatformSeededPymk = require(Parent.SharedFlags).FFlagProfilePlatformSeededPymk
 local Images = require(Parent.UIBlox).App.ImageSet.Images
 
 return function(p1)
-	-- upvalues: RecommendationContextTypeModule (copy), GetMutualFriendsTextModule (copy), Images (copy), FFlagShowClassmatesOnPYMKModule (copy)
+	-- upvalues: FFlagProfilePlatformSeededPymk (copy), RecommendationContextTypeModule (copy), Images (copy), GetMutualFriendsTextModule (copy), FFlagShowClassmatesOnPYMKModule (copy)
 	local Classmates = nil
 	local IconsStatusPlayerFriend = nil
 	local RawValueResult = p1.recommendation.contextType and p1.recommendation.contextType.rawValue()
@@ -16,7 +17,10 @@ return function(p1)
 		Classmates = p1.localized.connectionRequests
 		IconsStatusPlayerFriend = nil
 	end
-	if RawValueResult == RecommendationContextTypeModule.Contacts.rawValue() then
+	if FFlagProfilePlatformSeededPymk and RawValueResult == RecommendationContextTypeModule.FriendOfSeed.rawValue() then
+		Classmates = p1.localized.friendOfSeed
+		IconsStatusPlayerFriend = Images["icons/status/player/friend"]
+	elseif RawValueResult == RecommendationContextTypeModule.Contacts.rawValue() then
 		Classmates = p1.localized.contacts
 	elseif RawValueResult == RecommendationContextTypeModule.MutualFriends.rawValue() and MutualFriendsCount > 0 then
 		Classmates = GetMutualFriendsTextModule({

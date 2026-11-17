@@ -23,6 +23,7 @@ local CarouselScrollButtonsModule = require(CollectionViews.Carousel.CarouselScr
 local _ = require(CollectionViews.CollectionViewTypes)
 local UseCollectionLayoutModule = require(CollectionViews.CollectionLayoutStore.useCollectionLayout)
 local CompositionTags = require(Parent.AppComposition).CompositionTags
+local FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint = require(Parent.SharedFlags).FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint
 local StrictInterfaceResult = TModule.strictInterface({
 	testId = TModule.optional(TModule.string),
 	Position = TModule.optional(TModule.UDim2),
@@ -61,6 +62,7 @@ local StrictInterfaceResult = TModule.strictInterface({
 	onScrollButtonLeave = TModule.optional(TModule.callback),
 	AutomaticSize = TModule.optional(TModule.enum(Enum.AutomaticSize)),
 	headerComponent = TModule.optional(TModule.table),
+	headerMenuItems = if FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint then TModule.optional(TModule.table) else nil,
 	collectionItemSize = TModule.optional(TModule.string),
 	enableHoverOverflow = TModule.optional(TModule.boolean),
 	hideSubtitleChevron = TModule.optional(TModule.boolean)
@@ -82,7 +84,7 @@ local _ = function(Pointer, _, p1, p2, p3)
 end
 
 return (ReactModule.memo(function(p1)
-	-- upvalues: ValidatePropsFunction (copy), StrictInterfaceResult (copy), CryoModule (copy), config (copy), UseCollectionLayoutModule (copy), ArgCheckModule (copy), ReactModule (copy), UseLastInputFunction (copy), UsePreferredInputFunction (copy), UseIsSpatialFunction (copy), ResponsiveModule (copy), UseCollectionSizeBindingsModule (copy), UseScrollButtonHandlersModule (copy), UseCarouselScrollingBindingModule (copy), FFlagSduiComponentsUseFoundationTokens (copy), UseTokensFunction (copy), UseDesignTokensFunction (copy), ScrollingRowOfCollectionItemsModule (copy), CollectionBackgroundMuralModule (copy), MaybeForceDarkThemeModule (copy), CollectionHeaderModule (copy), CompositionTags (copy), CarouselScrollButtonsModule (copy)
+	-- upvalues: ValidatePropsFunction (copy), StrictInterfaceResult (copy), CryoModule (copy), config (copy), UseCollectionLayoutModule (copy), ArgCheckModule (copy), ReactModule (copy), UseLastInputFunction (copy), UsePreferredInputFunction (copy), UseIsSpatialFunction (copy), ResponsiveModule (copy), UseCollectionSizeBindingsModule (copy), UseScrollButtonHandlersModule (copy), UseCarouselScrollingBindingModule (copy), FFlagSduiComponentsUseFoundationTokens (copy), UseTokensFunction (copy), UseDesignTokensFunction (copy), ScrollingRowOfCollectionItemsModule (copy), CollectionBackgroundMuralModule (copy), MaybeForceDarkThemeModule (copy), CollectionHeaderModule (copy), FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint (copy), CompositionTags (copy), CarouselScrollButtonsModule (copy)
 	ValidatePropsFunction(StrictInterfaceResult, p1)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local SideMargin: number = JoinResult.sideMargin
@@ -225,7 +227,8 @@ return (ReactModule.memo(function(p1)
 				buttonText = JoinResult.headerButtonText,
 				titleColor = if HasBackgroundMuralUrl then White100 else nil,
 				subtitleColor = if HasBackgroundMuralUrl then White100 else nil,
-				hideSubtitleChevron = JoinResult.hideSubtitleChevron
+				hideSubtitleChevron = JoinResult.hideSubtitleChevron,
+				menuItems = if FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint then JoinResult.headerMenuItems else nil
 			}), HasBackgroundMuralUrl),
 			Items = ReactModule.createElement("Frame", {
 				Size = if JoinResult.enableHoverOverflow then UseCollectionSizeBindingsModuleResult:map(function(p2): UDim2

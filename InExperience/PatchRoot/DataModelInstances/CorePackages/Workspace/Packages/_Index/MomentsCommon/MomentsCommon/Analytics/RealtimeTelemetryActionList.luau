@@ -213,6 +213,10 @@ local _ = function(p1)
 	return if p1 == "translated" or p1 == "original" then p1 else "unknown"
 end
 
+local _ = function(p1)
+	return if p1 == "time_up" or p1 == "moments_off" then p1 else "unknown"
+end
+
 local _ = function(p1, Callback)
 	local config = { status = p1.status, feedType = p1.feedType }
 	
@@ -771,6 +775,25 @@ return {
 					return {
 						status = Status1,
 						surface = if Surface == "watch_tab" or Surface == "profile" then Surface else "unknown"
+					}
+				end
+			}
+		}
+	}),
+	[RealtimeEventNamesModule.MomentsTimeLimitShown] = Telemetry.new({
+		description = "Counts the parent-managed daily limit's screens in real time by state: time_up (today's limit is used up) or moments_off (the limit is 0). Counted at the same point as the product time-limit-shown event.",
+		throttlingThousandths = 10000,
+		name = RealtimeEventNamesModule.MomentsTimeLimitShown,
+		lastUpdated = { 2026, 11, 12 },
+		backendsList = {
+			{
+				incrementValue = 1,
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1)
+					local State = p1.state
+					
+					return {
+						state = if State == "time_up" or State == "moments_off" then State else "unknown"
 					}
 				end
 			}

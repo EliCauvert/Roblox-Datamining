@@ -25,9 +25,7 @@ local FFlagMomentsRecommendationContentTypeModule = require(Moments.Flags.FFlagM
 local FFlagMomentsOptimisticProfilePending = SharedFlagsModule.FFlagMomentsOptimisticProfilePending
 local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
 local FFlagMomentsCommentsIxpEnabled = SharedFlagsModule.FFlagMomentsCommentsIxpEnabled
-local FFlagMomentsReactFeatureGate = SharedFlagsModule.FFlagMomentsReactFeatureGate
 local FFlagMomentsServeEDPVideos = SharedFlagsModule.FFlagMomentsServeEDPVideos
-local FFlagMomentsEngagementMetricsFeature = MomentsCommonModule.Flags.FFlagMomentsEngagementMetricsFeature
 local UseConfigurationModule = require(Moments.Hooks.useConfiguration)
 local UseShareMomentModule = require(Moments.Share.useShareMoment)
 local UseCommentActionImpressionModule = require(script.Parent.useCommentActionImpression)
@@ -35,52 +33,52 @@ local ArrowThickToRight = BuilderIconsModule.Icon.ArrowThickToRight
 local SpeechBubbleAlignLeft = BuilderIconsModule.Icon.SpeechBubbleAlignLeft
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: ReactUtilsModule (copy), MomentContextModule (copy), FFlagMomentsEngagementMetricsFeature (copy), UseSignalStateFunction (copy), GetMomentsCapabilitiesFunction (copy), FFlagMomentsReactFeatureGate (copy), UseShareMomentModule (copy), UseSignalBindingFunction (copy), FFlagMomentsComments (copy), FFlagMomentsOptimisticProfilePending (copy), UseConfigurationModule (copy), UseMomentsSessionFunction (copy), GetMomentsPreferencesStoreModule (copy), UseCommentCapabilitiesModule (copy), FFlagMomentsServeEDPVideos (copy), FFlagMomentsCommentsIxpEnabled (copy), UseCommentActionImpressionModule (copy), ReactModule (copy), ReactionButtonModule (copy), RailItemModule (copy), SpeechBubbleAlignLeft (copy), ArrowThickToRight (copy), ContextualMenuModule (copy), FFlagMomentsRecommendationContentTypeModule (copy), FFlagMomentsCreatorAnalyticsModule (copy), FFlagMomentsActionRailSpacingModule (copy), FFlagMomentsActionRailNarrowWidthModule (copy), View (copy)
+	-- upvalues: ReactUtilsModule (copy), MomentContextModule (copy), UseSignalStateFunction (copy), GetMomentsCapabilitiesFunction (copy), UseShareMomentModule (copy), UseSignalBindingFunction (copy), FFlagMomentsComments (copy), FFlagMomentsOptimisticProfilePending (copy), UseConfigurationModule (copy), UseMomentsSessionFunction (copy), GetMomentsPreferencesStoreModule (copy), UseCommentCapabilitiesModule (copy), FFlagMomentsServeEDPVideos (copy), FFlagMomentsCommentsIxpEnabled (copy), UseCommentActionImpressionModule (copy), ReactModule (copy), ReactionButtonModule (copy), RailItemModule (copy), SpeechBubbleAlignLeft (copy), ArrowThickToRight (copy), ContextualMenuModule (copy), FFlagMomentsRecommendationContentTypeModule (copy), FFlagMomentsCreatorAnalyticsModule (copy), FFlagMomentsActionRailSpacingModule (copy), FFlagMomentsActionRailNarrowWidthModule (copy), View (copy)
 	local NextOrder = ReactUtilsModule.createNextOrder()
 	local UseMomentResult = MomentContextModule.useMoment()
 	local Store = UseMomentResult.store
 	local Data = Store.getData(false)
 	local IsAd = Data.kind == "ad"
-	local UseSignalStateResult = if FFlagMomentsEngagementMetricsFeature then UseSignalStateFunction(GetMomentsCapabilitiesFunction(false).getIsEngagementMetricsEnabled) else nil
-	local NoFFlagMomentsReactFeatureGate = not FFlagMomentsReactFeatureGate or UseSignalStateFunction(GetMomentsCapabilitiesFunction(false).getCanReactToMoments)
+	local UseSignalStateResult = UseSignalStateFunction(GetMomentsCapabilitiesFunction(false).getIsEngagementMetricsEnabled)
+	local UseSignalStateResult1 = UseSignalStateFunction(GetMomentsCapabilitiesFunction(false).getCanReactToMoments)
 	local UseShareMomentModuleResult = UseShareMomentModule(Frame.moment)
 	local AnimationRatio = UseMomentResult.animationRatio
 	local UseSignalBindingResult = UseSignalBindingFunction(Store.getShareCount)
 	local UseSignalBindingResult1 = if FFlagMomentsComments then UseSignalBindingFunction(Store.getCommentCount) else nil
-	local UseSignalStateResult1 = UseSignalStateFunction(Store.getIsModerated)
+	local UseSignalStateResult2 = UseSignalStateFunction(Store.getIsModerated)
 	local IsIsPending: boolean = FFlagMomentsOptimisticProfilePending and Data.isPending == true
-	local UseSignalStateResult1_1 = UseSignalStateResult1 or IsIsPending
+	local UseSignalStateResult2_1 = UseSignalStateResult2 or IsIsPending
 	local FeedItemId = if Frame.moment == nil or Frame.moment.recommendationMetadata == nil then nil else Frame.moment.recommendationMetadata.feedItemId
-	local UseSignalStateResult1_1_1 = UseSignalStateResult1_1 or (FeedItemId == nil or FeedItemId == "")
+	local UseSignalStateResult2_1_1 = UseSignalStateResult2_1 or (FeedItemId == nil or FeedItemId == "")
 	local FeedMuteEnabled = UseConfigurationModule("feed_mute_enabled", false)
 	local FeedMuteButtonAnalyticsEnabled = UseConfigurationModule("feed_mute_button_analytics_enabled", false)
 	local UseMomentsSessionResult = UseMomentsSessionFunction()
 	local MomentsPreferencesStoreModule = GetMomentsPreferencesStoreModule(false)
-	local UseSignalStateResult2 = UseSignalStateFunction(UseMomentsSessionResult.getHideDetails)
+	local UseSignalStateResult3 = UseSignalStateFunction(UseMomentsSessionResult.getHideDetails)
 	local Comments = if Frame.moment == nil then nil else Frame.moment.comments
 	local IsEdpVideo: boolean = FFlagMomentsServeEDPVideos and (Frame.moment ~= nil and Frame.moment.entityType == "edpVideo")
-	local NoComments = UseCommentCapabilitiesModule().canRead and (not UseSignalStateResult2 and (not IsAd and (not IsEdpVideo and (Comments == nil or Comments.viewerCanRead))))
+	local NoComments = UseCommentCapabilitiesModule().canRead and (not UseSignalStateResult3 and (not IsAd and (not IsEdpVideo and (Comments == nil or Comments.viewerCanRead))))
 	
 	if FFlagMomentsComments or FFlagMomentsCommentsIxpEnabled then
 		UseCommentActionImpressionModule(NoComments and Frame.moment ~= nil)
 	end
-	local UseSignalStateResult3 = UseSignalStateFunction(MomentsPreferencesStoreModule.getFeedGlobalMute)
+	local UseSignalStateResult4 = UseSignalStateFunction(MomentsPreferencesStoreModule.getFeedGlobalMute)
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: UseSignalStateResult3 (copy), MomentsPreferencesStoreModule (copy)
+		-- upvalues: UseSignalStateResult4 (copy), MomentsPreferencesStoreModule (copy)
 		return {
-			isMuted = UseSignalStateResult3,
+			isMuted = UseSignalStateResult4,
 			toggle = MomentsPreferencesStoreModule.toggleFeedGlobalMute
 		}
 	end, {
-		UseSignalStateResult3,
+		UseSignalStateResult4,
 		MomentsPreferencesStoreModule.toggleFeedGlobalMute
 	})
 	local t = {}
 	
-	if NoFFlagMomentsReactFeatureGate and not UseSignalStateResult2 and not IsAd then
+	if UseSignalStateResult1 and not UseSignalStateResult3 and not IsAd then
 		t.React = ReactModule.createElement(ReactionButtonModule, {
 			animationRatio = AnimationRatio,
-			isDisabled = UseSignalStateResult1_1,
+			isDisabled = UseSignalStateResult2_1,
 			LayoutOrder = NextOrder()
 		})
 	end
@@ -89,39 +87,39 @@ return ReactModule.memo(function(Frame)
 			testId = "moments-comment-button",
 			LayoutOrder = NextOrder(),
 			slot = SpeechBubbleAlignLeft,
-			count = if FFlagMomentsEngagementMetricsFeature and not UseSignalStateResult then nil else UseSignalBindingResult1,
+			count = if UseSignalStateResult then UseSignalBindingResult1 else nil,
 			countIsCapped = Comments ~= nil and Comments.countIsCapped == true,
 			animationRatio = AnimationRatio,
-			isDisabled = UseSignalStateResult1_1,
+			isDisabled = UseSignalStateResult2_1,
 			onActivated = function()
-				-- upvalues: UseSignalStateResult1_1 (copy), FeedItemId (copy), Frame (copy)
-				if not UseSignalStateResult1_1 and FeedItemId ~= nil and FeedItemId ~= "" and Frame.onOpenComments ~= nil then
+				-- upvalues: UseSignalStateResult2_1 (copy), FeedItemId (copy), Frame (copy)
+				if not UseSignalStateResult2_1 and FeedItemId ~= nil and FeedItemId ~= "" and Frame.onOpenComments ~= nil then
 					Frame.onOpenComments()
 				end
 			end
 		})
 	end
-	if not UseSignalStateResult2 then
+	if not UseSignalStateResult3 then
 		t.Share = ReactModule.createElement(RailItemModule, {
 			LayoutOrder = NextOrder(),
 			slot = ArrowThickToRight,
-			count = if FFlagMomentsEngagementMetricsFeature and not UseSignalStateResult then nil else UseSignalBindingResult,
+			count = if UseSignalStateResult then UseSignalBindingResult else nil,
 			animationRatio = AnimationRatio,
-			isDisabled = UseSignalStateResult1_1_1,
+			isDisabled = UseSignalStateResult2_1_1,
 			onActivated = UseShareMomentModuleResult.onShareActivated
 		})
 		t.Music = ReactModule.createElement(require(script.Parent.MusicButton), {
 			LayoutOrder = NextOrder(),
 			moment = Frame.moment,
 			animationRatio = AnimationRatio,
-			isDisabled = UseSignalStateResult1
+			isDisabled = UseSignalStateResult2
 		})
 	end
 	if Frame.moment ~= nil then
 		t.ContextualMenu = ReactModule.createElement(ContextualMenuModule, {
 			isFeedMuteEnabled = FeedMuteEnabled,
 			isFeedMuteButtonAnalyticsEnabled = FeedMuteButtonAnalyticsEnabled,
-			isDisabled = UseSignalStateResult1,
+			isDisabled = UseSignalStateResult2,
 			layoutOrder = NextOrder(),
 			moment = Frame.moment,
 			contentType = if FFlagMomentsRecommendationContentTypeModule then Data.contentType else nil,

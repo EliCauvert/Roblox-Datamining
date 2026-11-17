@@ -1,13 +1,13 @@
 ﻿local Players = game:GetService("Players")
 local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
 local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local DiscoveryAnalyticsModule = require(Parent.DiscoveryAnalytics)
 local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 local GetActionTelemetryFieldValueFunction = SduiCoreSystemModule.getActionTelemetryFieldValue
-local GameDetailsSubpageFunction = require(Parent.DiscoveryAnalytics).Events.gameDetailsSubpage
-local FFlagLuaAppAddUniverseIdToGameDetailsEvents = require(Parent.SharedFlags).FFlagLuaAppAddUniverseIdToGameDetailsEvents
+local GameDetailsSubpageFunction = DiscoveryAnalyticsModule.Events.gameDetailsSubpage
 
 return function(p1, p2, p3)
-	-- upvalues: GetActionTelemetryFieldValueFunction (copy), SduiErrorType (copy), FFlagLuaAppAddUniverseIdToGameDetailsEvents (copy), GameDetailsSubpageFunction (copy), Players (copy)
+	-- upvalues: GetActionTelemetryFieldValueFunction (copy), SduiErrorType (copy), GameDetailsSubpageFunction (copy), Players (copy)
 	local Subpage = GetActionTelemetryFieldValueFunction(p1, p2, "subpage")
 	local UniverseId = GetActionTelemetryFieldValueFunction(p1, p2, "universeId")
 	local PlaceId = GetActionTelemetryFieldValueFunction(p1, p2, "placeId")
@@ -35,25 +35,24 @@ return function(p1, p2, p3)
 		
 		return
 	end
-	if FFlagLuaAppAddUniverseIdToGameDetailsEvents then
-		local ValueType1 = typeof(UniverseId)
+	local ValueType1 = typeof(UniverseId)
+	
+	if (ValueType1 == "string" or ValueType1 == "number") and UniverseId ~= "" then
+		GameDetailsSubpageFunction({
+			uid = tostring(if Players.LocalPlayer then Players.LocalPlayer.UserId else ""),
+			placeId = tostring(PlaceId),
+			subpage = Subpage,
+			universeId = tostring(UniverseId),
+			action = Action,
+			ctx = Ctx
+		}, EventContext)
 		
-		if ValueType1 ~= "string" and ValueType1 ~= "number" or UniverseId == "" then
-			p3.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
-				name = "SduiGameDetailsSubpageTelemetryHandler",
-				propName = "universeId",
-				message = `Invalid universeId (expected string or number, got {ValueType1})`
-			}, p3.appPage)
-			
-			return
-		end
+		return
+	else
+		p3.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
+			name = "SduiGameDetailsSubpageTelemetryHandler",
+			propName = "universeId",
+			message = `Invalid universeId (expected string or number, got {ValueType1})`
+		}, p3.appPage)
 	end
-	GameDetailsSubpageFunction({
-		uid = tostring(if Players.LocalPlayer then Players.LocalPlayer.UserId else ""),
-		placeId = tostring(PlaceId),
-		subpage = Subpage,
-		universeId = if FFlagLuaAppAddUniverseIdToGameDetailsEvents then tostring(UniverseId) else "",
-		action = Action,
-		ctx = Ctx
-	}, EventContext)
 end

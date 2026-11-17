@@ -468,6 +468,7 @@
 	FIntAXSpawnEffectPreviewPauseSeconds = require(script.FIntAXSpawnEffectPreviewPauseSeconds),
 	FIntAXSpawnEffectPlaySeconds = require(script.FIntAXSpawnEffectPlaySeconds),
 	FIntAXSpawnEffectEmitterFadeSeconds = require(script.FIntAXSpawnEffectEmitterFadeSeconds),
+	FFlagAXOutfitDetailsSplitPaneWidth = require(script.FFlagAXOutfitDetailsSplitPaneWidth),
 	FFlagAXCategoryMenuButtonsFromCategoryData = require(script.FFlagAXCategoryMenuButtonsFromCategoryData),
 	FFlagAXMomentsLookTryOnOpaqueCloseButton = require(script.FFlagAXMomentsLookTryOnOpaqueCloseButton),
 	FFlagAXMomentsLookTryOnCloseAfterPurchase = require(script.FFlagAXMomentsLookTryOnCloseAfterPurchase),
@@ -476,5 +477,8 @@
 	FFlagAXPhotoboothMomentsStableCamera = require(script.FFlagAXPhotoboothMomentsStableCamera),
 	FFlagAXSpawnEffects = require(script.FFlagAXSpawnEffects),
 	FFlagAXSduiCatalogLegacyCategoryMenu = require(script.FFlagAXSduiCatalogLegacyCategoryMenu),
-	FFlagAXPrefetchSduiWidgetThumbnails = require(script.FFlagAXPrefetchSduiWidgetThumbnails)
+	FFlagAXPrefetchSduiWidgetThumbnails = require(script.FFlagAXPrefetchSduiWidgetThumbnails),
+	FFlagAXSduiClaimEventItemAction = require(script.FFlagAXSduiClaimEventItemAction),
+	FFlagAXIaBPlusExclusiveUpsell = require(script.FFlagAXIaBPlusExclusiveUpsell),
+	FFlagAXInspectAndBuySpawnEffects = require(script.FFlagAXInspectAndBuySpawnEffects)
 }

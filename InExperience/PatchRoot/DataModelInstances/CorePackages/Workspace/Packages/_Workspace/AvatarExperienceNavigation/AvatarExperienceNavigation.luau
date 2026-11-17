@@ -19,6 +19,7 @@ return {
 		AvatarEditorNavigation = require(script.Enums.AvatarEditorNavigation),
 		AvatarRootNavigationAction = require(script.Enums.AvatarRootNavigationAction),
 		UnifiedLoggingSurface = require(script.Enums.UnifiedLoggingSurface),
+		DiscoveryTabCategory = require(script.Enums.DiscoveryTabCategory),
 		CustomGetStateForAction = require(script.Enums.CustomGetStateForAction)
 	},
 	Actions = {

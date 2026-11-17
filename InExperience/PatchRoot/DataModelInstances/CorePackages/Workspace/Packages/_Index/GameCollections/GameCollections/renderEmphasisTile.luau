@@ -1,11 +1,10 @@
 ﻿local Parent = script:FindFirstAncestor("GameCollections").Parent
 local GameCollectionItemTypes = require(Parent.DiscoveryTypes).GameCollectionItemTypes
-local FFlagLuaAppEmphasisGameTileVideo = require(Parent.SharedFlags).FFlagLuaAppEmphasisGameTileVideo
 local ReactModule = require(Parent.React)
 local EmphasisGameTile = require(Parent.GameTile).EmphasisGameTile
 local _ = require(Parent.VideoUtils)
 local MemoResult = ReactModule.memo(function(p1)
-	-- upvalues: ReactModule (copy), EmphasisGameTile (copy), FFlagLuaAppEmphasisGameTileVideo (copy)
+	-- upvalues: ReactModule (copy), EmphasisGameTile (copy)
 	return ReactModule.createElement(EmphasisGameTile, {
 		size = p1.item.sizeOverride,
 		index = p1.index,
@@ -32,9 +31,7 @@ local MemoResult = ReactModule.memo(function(p1)
 		textSizeOffset = p1.textSizeOffset,
 		showDescription = p1.item.showDescription,
 		zIndex = p1.zIndex,
-		videoPlaybackContext = p1.videoPlaybackContext,
-		appPage = if FFlagLuaAppEmphasisGameTileVideo then p1.appPage else nil,
-		videoAnalytics = if FFlagLuaAppEmphasisGameTileVideo then p1.videoAnalytics else nil
+		videoPlaybackContext = p1.videoPlaybackContext
 	})
 end)
 

@@ -21,5 +21,6 @@ return {
 	FFlagNotificationDeeplinkTapListenersEnabled = require(script.Flags.FFlagNotificationDeeplinkTapListenersEnabled),
 	ixpHelper = require(script.utils.ixpHelper),
 	sendEventDeferred = require(script.analytics.sendEventDeferred),
-	GetGameInvitesStatusStore = require(script.Stores.GetGameInvitesStatusStore)
+	GetGameInvitesStatusStore = require(script.Stores.GetGameInvitesStatusStore),
+	isGameInviteJoinForPioneerEnabled = require(script.utils.isGameInviteJoinForPioneerEnabled)
 }

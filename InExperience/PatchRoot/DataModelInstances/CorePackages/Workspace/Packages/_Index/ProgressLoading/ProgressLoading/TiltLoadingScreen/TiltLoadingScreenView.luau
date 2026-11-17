@@ -16,24 +16,33 @@ local IsPioneerLaunchFunction = require(Parent.PioneerUtils).isPioneerLaunch
 local TiltLockupModule = require(script.Parent.Components.TiltLockup)
 local TiltLoadingScreenStatusPanelModule = require(script.Parent.Components.TiltLoadingScreenStatusPanel)
 local FFlagTiltLoadingScreenConsoleHints = require(Parent.SharedFlags).FFlagTiltLoadingScreenConsoleHints
+local FFlagTiltLoadingScreenNoRootCanvasGroup = require(Parent.SharedFlags).FFlagTiltLoadingScreenNoRootCanvasGroup
 local _ = require(script.Parent.Types)
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), FFlagTiltLoadingScreenConsoleHints (copy), ReactModule (copy), View (copy), IsPioneerLaunchFunction (copy), IconButton (copy), Enums (copy), Icon (copy), IconSize (copy), Text (copy), TiltLockupModule (copy), Badge (copy), TiltLoadingScreenStatusPanelModule (copy), Progress (copy), ProgressShape (copy)
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), FFlagTiltLoadingScreenConsoleHints (copy), FFlagTiltLoadingScreenNoRootCanvasGroup (copy), ReactModule (copy), View (copy), IsPioneerLaunchFunction (copy), IconButton (copy), Enums (copy), Icon (copy), IconSize (copy), Text (copy), TiltLockupModule (copy), Badge (copy), TiltLoadingScreenStatusPanelModule (copy), Progress (copy), ProgressShape (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
 		autoTranslate = "CoreScripts.TopBar.LoadingScreen.AutoTranslate",
 		back = if FFlagTiltLoadingScreenConsoleHints then "CoreScripts.TopBar.Back" else nil
 	})
+	local Interpolated = if FFlagTiltLoadingScreenNoRootCanvasGroup then UseTokensResult.Color.Surface.Surface_0.Color3:Lerp(UseTokensResult.Color.Extended.Black.Black_50.Color3, 1 - UseTokensResult.Color.Extended.Black.Black_50.Transparency) else nil
 	
 	return ReactModule.createElement(View, {
-		tag = "size-full bg-surface-0",
 		testId = "tilt-loading-screen-root",
-		GroupTransparency = p1.chromeReveal:map(function(p2: number): number
+		tag = {
+			["size-full"] = true,
+			["bg-surface-0"] = not FFlagTiltLoadingScreenNoRootCanvasGroup
+		},
+		backgroundStyle = if FFlagTiltLoadingScreenNoRootCanvasGroup then p1.chromeReveal:map(function(p2: number)
+			-- upvalues: Interpolated (copy)
+			return { Color3 = Interpolated, Transparency = 1 - p2 }
+		end) else nil,
+		GroupTransparency = if FFlagTiltLoadingScreenNoRootCanvasGroup then nil else p1.chromeReveal:map(function(p2: number): number
 			return 1 - p2
 		end)
 	}, {
-		Overlay = ReactModule.createElement(View, {
+		Overlay = if FFlagTiltLoadingScreenNoRootCanvasGroup then nil else ReactModule.createElement(View, {
 			tag = "size-full",
 			ZIndex = 0,
 			backgroundStyle = UseTokensResult.Color.Extended.Black.Black_50
@@ -47,7 +56,10 @@ return ReactModule.memo(function(p1)
 				top = UDim.new(0, p1.safeAreaInsets.top),
 				right = UDim.new(0, p1.safeAreaInsets.right),
 				bottom = UDim.new(0, p1.safeAreaInsets.bottom)
-			}
+			},
+			Visible = if FFlagTiltLoadingScreenNoRootCanvasGroup then p1.chromeReveal:map(function(p2: number): boolean
+				return p2 >= 1
+			end) else nil
 		}, {
 			CancelButton = if IsPioneerLaunchFunction() or p1.isDirectionalInput then nil else ReactModule.createElement(View, {
 				tag = "col align-x-left align-y-top size-full padding-xlarge",

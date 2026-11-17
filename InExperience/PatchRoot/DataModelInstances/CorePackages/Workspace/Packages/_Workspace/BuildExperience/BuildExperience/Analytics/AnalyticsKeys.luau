@@ -13,6 +13,8 @@
 	ANALYTICS_ACQUISITION_SOURCE_SEARCH_ADS = "CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SearchAds",
 	ANALYTICS_ACQUISITION_SOURCE_SPONSORED_ADS = "CreatorDashboard.Analytics.Label.Dimension.AcquisitionSource.SponsoredAds",
 	ANALYTICS_ANALYZE_CHAT_PROMPT = "Feature.Build.Analytics.AnalyzeChatPrompt",
+	ANALYTICS_ADD_FUNNEL_TRACKING = "Feature.Build.Analytics.Action.AddFunnelTracking",
+	ANALYTICS_FUNNEL_TRACKING_PROMPT = "Feature.Build.Analytics.FunnelTrackingPrompt",
 	ANALYTICS_DURATION_MINUTES_TEMPLATE = "Feature.Build.Analytics.DurationMinutes",
 	ANALYTICS_DURATION_TEMPLATE = "Feature.Build.Analytics.DurationHours",
 	ANALYTICS_GOAL_ACTION_CREATE_AD = "Feature.Build.Analytics.Goal.Action.CreateAd",

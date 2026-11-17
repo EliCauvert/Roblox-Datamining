@@ -8,7 +8,7 @@ local FFlagSduiQueryImpressionsLogging = require(Parent.SharedFlags).FFlagSduiQu
 local FFlagSafetyResourceBannerTelemetry = require(Parent.SharedFlags).FFlagSafetyResourceBannerTelemetry
 
 return function()
-	-- upvalues: SduiImpressionEventType (copy), ServerDrivenUi (copy), FFlagSduiDevStoreSeeAllImpressionsLogging (copy), FFlagSduiQueryImpressionsLogging (copy), FFlagSafetyResourceBannerTelemetry (copy), GetSduiImpressionHandlerRegistryFunction (copy)
+	-- upvalues: SduiImpressionEventType (copy), ServerDrivenUi (copy), Parent (copy), FFlagSduiDevStoreSeeAllImpressionsLogging (copy), FFlagSduiQueryImpressionsLogging (copy), FFlagSafetyResourceBannerTelemetry (copy), GetSduiImpressionHandlerRegistryFunction (copy)
 	GetSduiImpressionHandlerRegistryFunction().registerImpressionHandlerConfigs({
 		[SduiImpressionEventType.filterImpressions] = {
 			skipItemImpressionsLog = true,
@@ -48,8 +48,8 @@ return function()
 		[SduiImpressionEventType.marketplaceItemImpressions] = {
 			skipItemImpressionsLog = false,
 			lazyHandler = function()
-				-- upvalues: ServerDrivenUi (upval)
-				return require(ServerDrivenUi.Impressions.SduiMarketplaceItemImpressionsHandler)
+				-- upvalues: Parent (upval)
+				return require(Parent.AvatarExperienceAnalytics).getSduiMarketplaceItemImpressionsHandler()
 			end
 		},
 		[SduiImpressionEventType.devStoreSeeAllImpressions] = if FFlagSduiDevStoreSeeAllImpressionsLogging then {

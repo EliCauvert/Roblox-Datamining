@@ -1,0 +1,3 @@
+﻿local FFlagSubscriptionSheetCampaignLocalizations = require(script:FindFirstAncestor("RobloxSubscriptionPurchaseApp").Parent.SharedFlags).FFlagSubscriptionSheetCampaignLocalizations
+
+return game:DefineFastFlag("TTOnboardingSheet2", false) and FFlagSubscriptionSheetCampaignLocalizations

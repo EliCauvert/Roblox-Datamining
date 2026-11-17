@@ -8,7 +8,10 @@ local InExperienceShopModule = require(CorePackages.Workspace.Packages.InExperie
 local InExperienceSideSheetModule = require(CorePackages.Workspace.Packages.InExperienceSideSheet)
 local IsSideSheetEnabledModule = require(CorePackages.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
 local FFlagEnableSideSheetRobuxWidgetModule = require(Chrome.Flags.FFlagEnableSideSheetRobuxWidget)
-local FFlagHideHeaderForBuyRobuxInExperienceShop = require(CorePackages.Workspace.Packages.SharedFlags).FFlagHideHeaderForBuyRobuxInExperienceShop
+local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
+local FFlagHideHeaderForBuyRobuxInExperienceShop = SharedFlagsModule.FFlagHideHeaderForBuyRobuxInExperienceShop
+local FFlagKeepSideSheetOpenBesideMenu = SharedFlagsModule.FFlagKeepSideSheetOpenBesideMenu
+local SideSheetOpenBehavior = ChromeModule.Enums.SideSheetOpenBehavior
 
 local function openShop()
 	-- upvalues: ServiceModule (copy), ConstantsModule (copy), FFlagHideHeaderForBuyRobuxInExperienceShop (copy), InExperienceShopModule (copy)
@@ -39,5 +42,6 @@ return (if FFlagEnableSideSheetRobuxWidgetModule and IsSideSheetEnabledModule th
 	activated = function() end,
 	initialAvailability = ServiceModule.AvailabilitySignal.Available,
 	sideSheetPlacement = ChromeModule.Enums.SideSheetPlacement.ScrollableContentTop,
+	sideSheetOpenBehavior = if FFlagKeepSideSheetOpenBesideMenu then SideSheetOpenBehavior.WindowBesideSheet else nil,
 	components = { Widget = RobuxWidgetIntegration }
 }) else nil) or {}

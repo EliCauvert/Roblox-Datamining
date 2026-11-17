@@ -1,3 +1,6 @@
-﻿return function(p1)
-	return if p1 == nil then nil else tonumber(p1)
+﻿local UnifiedEventEnumsModule = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.UnifiedEventEnums)
+
+return function(p1)
+	-- upvalues: UnifiedEventEnumsModule (copy)
+	return if p1 == nil then nil else UnifiedEventEnumsModule.toAssetType((tonumber(p1)))
 end

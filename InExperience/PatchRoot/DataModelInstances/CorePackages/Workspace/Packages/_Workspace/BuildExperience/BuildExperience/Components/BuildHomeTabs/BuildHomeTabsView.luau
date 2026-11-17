@@ -4,6 +4,7 @@ local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local ReactUtilsModule = require(Parent.ReactUtils)
 local FFlagBuildExperienceFoundationTabsModule = require(BuildExperience.Flags.FFlagBuildExperienceFoundationTabs)
+local FFlagBuildUpdatedSearchUXForGAModule = require(BuildExperience.Flags.FFlagBuildUpdatedSearchUXForGA)
 local FFlagSubTabSizeSmall = require(Parent.SharedFlags).FFlagSubTabSizeSmall
 local BuildTabStripModule = require(BuildExperience.Components.BuildTabStrip.BuildTabStrip)
 local CreateBuildHomeTabStoreModule = require(BuildExperience.Stores.GetBuildHomeTabStore.createBuildHomeTabStore)
@@ -17,7 +18,7 @@ local function _(p1, p2, p3)
 end
 
 return function(Frame)
-	-- upvalues: CreateNextOrderFunction (copy), ReactModule (copy), View (copy), FFlagBuildExperienceFoundationTabsModule (copy), FoundationModule (copy), FFlagSubTabSizeSmall (copy), BuildTabStripModule (copy), BUILDHOMETAB (copy)
+	-- upvalues: CreateNextOrderFunction (copy), ReactModule (copy), View (copy), FFlagBuildUpdatedSearchUXForGAModule (copy), FFlagBuildExperienceFoundationTabsModule (copy), FoundationModule (copy), FFlagSubTabSizeSmall (copy), BuildTabStripModule (copy), BUILDHOMETAB (copy)
 	local TabOrder = Frame.tabOrder
 	local PageOffset = Frame.pageOffset
 	local NextOrder = CreateNextOrderFunction()
@@ -27,7 +28,7 @@ return function(Frame)
 		testId = "BuildHomeTabs",
 		LayoutOrder = Frame.LayoutOrder
 	}, {
-		TabsLayout = if Frame.showTabs then ReactModule.createElement(View, {
+		TabsLayout = if FFlagBuildUpdatedSearchUXForGAModule or Frame.showTabs then ReactModule.createElement(View, {
 			tag = "composition-layout-detail size-full-0 auto-y",
 			LayoutOrder = NextOrder()
 		}, {

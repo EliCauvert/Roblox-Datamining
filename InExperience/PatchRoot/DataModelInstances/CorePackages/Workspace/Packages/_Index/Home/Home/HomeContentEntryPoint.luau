@@ -20,7 +20,6 @@ local UseHomeStartupSnapshotModule = require(Home.useHomeStartupSnapshot)
 local HomeConstantsModule = require(Home.HomeConstants)
 local HomePageSessionModule = require(Home.HomePageSession)
 local FFlagLuaAppAddHomeExtraTopPadding = require(Parent.SharedFlags).FFlagLuaAppAddHomeExtraTopPadding
-local FFlagLuaAppSduiVideoThumbnail = require(Parent.SharedFlags).FFlagLuaAppSduiVideoThumbnail
 local FFlagLuaAppOneByTwoHoverIdleAutoplay = require(Parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
 local FFlagLuaAppSduiSuppressVideoDetectorDuringScroll = require(Parent.SharedFlags).FFlagLuaAppSduiSuppressVideoDetectorDuringScroll
 local FFlagSduiDismissPromptPageScope = require(Parent.SharedFlags).FFlagSduiDismissPromptPageScope
@@ -43,7 +42,7 @@ local function getCommittedHomeSessionId(p1)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: HomeConstantsModule (copy), FFlagLuaAppAddHomeExtraTopPadding (copy), UseEntrySurfacingFunction (copy), FFlagSduiDismissPromptPageScope (copy), UsePageScopeRefFunction (copy), ReactModule (copy), SduiSharedUtilitiesModule (copy), AppPage (copy), FFlagHomePageRefetchOnDataHydrationAccountReset (copy), FetchHomePageModule (copy), Home (copy), UseHomeCollectionLayoutSyncModule (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), ResponsiveModule (copy), VideoUtilsModule (copy), FFlagLuaAppSduiVideoThumbnail (copy), FFlagLuaAppSduiHomeSponsoredAdViewabilityModule (copy), SignalsReactModule (copy), getCommittedHomeSessionId (copy), UseSponsoredAdViewabilityDetectorFunction (copy), AppLifecycleObserverService (copy), FFlagSduiHomeStartupSnapshot (copy), UseHomeStartupSnapshotModule (copy), FFlagLuaAppSduiSuppressVideoDetectorDuringScroll (copy), ExperienceService (copy), SduiPageWrapperEntryPoint (copy), RefreshHomePageModule (copy), FFlagAppPageShellScrollTelemetry (copy), FFlagAppPageShellScrollToTopFocus (copy), FFlagAppThemeHalloween2026HomeBackground (copy)
+	-- upvalues: HomeConstantsModule (copy), FFlagLuaAppAddHomeExtraTopPadding (copy), UseEntrySurfacingFunction (copy), FFlagSduiDismissPromptPageScope (copy), UsePageScopeRefFunction (copy), ReactModule (copy), SduiSharedUtilitiesModule (copy), AppPage (copy), FFlagHomePageRefetchOnDataHydrationAccountReset (copy), FetchHomePageModule (copy), Home (copy), UseHomeCollectionLayoutSyncModule (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), ResponsiveModule (copy), VideoUtilsModule (copy), FFlagLuaAppSduiHomeSponsoredAdViewabilityModule (copy), SignalsReactModule (copy), getCommittedHomeSessionId (copy), UseSponsoredAdViewabilityDetectorFunction (copy), AppLifecycleObserverService (copy), FFlagSduiHomeStartupSnapshot (copy), UseHomeStartupSnapshotModule (copy), FFlagLuaAppSduiSuppressVideoDetectorDuringScroll (copy), ExperienceService (copy), SduiPageWrapperEntryPoint (copy), RefreshHomePageModule (copy), FFlagAppPageShellScrollTelemetry (copy), FFlagAppPageShellScrollToTopFocus (copy), FFlagAppThemeHalloween2026HomeBackground (copy)
 	local ConfigKey = HomeConstantsModule.ConfigKey
 	local v1 = nil
 	
@@ -78,7 +77,7 @@ return ReactModule.memo(function(p1)
 	if FFlagLuaAppOneByTwoHoverIdleAutoplay then
 		local UsePreferredInputResult = ResponsiveModule.usePreferredInput()
 		UseFeedVideoPlaybackContextResult = VideoUtilsModule.useFeedVideoPlaybackContext(nil, nil, nil, nil, (VideoUtilsModule.getPlaybackDetectionMethod(UsePreferredInputResult, UsePreferredInputResult == ResponsiveModule.Input.Pointer)))
-	elseif FFlagLuaAppSduiVideoThumbnail then
+	else
 		local IsUsePreferredInputResultMatch = ResponsiveModule.usePreferredInput() == ResponsiveModule.Input.Touch
 		UseFeedVideoPlaybackContextResult = ReactModule.useMemo(function()
 			-- upvalues: VideoUtilsModule (upval), IsUsePreferredInputResultMatch (copy)
@@ -151,7 +150,7 @@ return ReactModule.memo(function(p1)
 		feedTopMargin = if FFlagLuaAppAddHomeExtraTopPadding then v1 else p1.feedTopMargin,
 		stickyTopPadding = p1.feedTopMargin,
 		scrollAway = p1.scrollAway,
-		videoPlaybackContext = if FFlagLuaAppSduiVideoThumbnail or FFlagLuaAppOneByTwoHoverIdleAutoplay then UseFeedVideoPlaybackContextResult else nil,
+		videoPlaybackContext = UseFeedVideoPlaybackContextResult,
 		handleBackButton = not FFlagAppPageShellScrollToTopFocus and nil,
 		defaultFocusRef = if FFlagAppPageShellScrollToTopFocus then p1.defaultFocusRef else nil,
 		backgroundStyle = if FFlagAppThemeHalloween2026HomeBackground then p1.backgroundStyle else nil,

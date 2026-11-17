@@ -10,6 +10,7 @@ local GroupSidebarContextModule = require(Groups.Contexts.GroupSidebarContext)
 local ConstantsModule = require(Groups.Common.constants)
 local GetGroupSduiPageConfigFunction = require(Groups.Common.getGroupSduiPageConfig).getGroupSduiPageConfig
 local FetchGroupSduiPageModule = require(Groups.Common.fetchGroupSduiPage)
+local GroupSidebarActionsModule = require(Groups.Navigation.groupSidebarActions)
 
 local function _(p1): boolean
 	-- upvalues: ConstantsModule (copy)
@@ -21,7 +22,7 @@ local function noRefreshes(): number
 end
 
 return function(p1, GroupId)
-	-- upvalues: UseGroupsWrapperContextModule (copy), ReactModule (copy), GroupSidebarContextModule (copy), GetGroupSduiPageConfigFunction (copy), SduiSharedUtilitiesModule (copy), SignalsReactModule (copy), FetchGroupSduiPageModule (copy), ConstantsModule (copy), noRefreshes (copy), DataHydrationModule (copy)
+	-- upvalues: UseGroupsWrapperContextModule (copy), ReactModule (copy), GroupSidebarContextModule (copy), GetGroupSduiPageConfigFunction (copy), SduiSharedUtilitiesModule (copy), SignalsReactModule (copy), FetchGroupSduiPageModule (copy), ConstantsModule (copy), GroupSidebarActionsModule (copy), noRefreshes (copy), DataHydrationModule (copy)
 	local UseGroupsWrapperContextModuleResult = UseGroupsWrapperContextModule()
 	local UseContextResult = ReactModule.useContext(GroupSidebarContextModule)
 	local ConfigKey = p1.configKey
@@ -91,6 +92,10 @@ return function(p1, GroupId)
 			return
 		end
 	end, { UseMemoResult, UseResult2, UseResult, ConfigKey })
+	ReactModule.useEffect(function()
+		-- upvalues: UseMemoResult (copy), ConfigKey (copy), GroupSidebarActionsModule (upval)
+		return if UseMemoResult and ConfigKey then GroupSidebarActionsModule.link(UseMemoResult.configKey, ConfigKey) else function() end
+	end, { UseMemoResult, ConfigKey })
 	local UseSignalStateResult4 = SignalsReactModule.useSignalState(if UseContextResult then UseContextResult.sectionRefreshCount else noRefreshes)
 	local UseRefResult1 = ReactModule.useRef(UseSignalStateResult4)
 	ReactModule.useEffect(function()
@@ -115,7 +120,7 @@ return function(p1, GroupId)
 	
 	if UseSignalStateResult5 then
 		UseRefResult2.current = { groupId = GroupId, root = UseSignalStateResult5 }
-	elseif UseSignalStateResult3 ~= DataHydrationModule.DataHydrationTypes.DataStatus.Ready and UseRefResult2.current and UseRefResult2.current.groupId == GroupId then
+	elseif UseSignalStateResult3 ~= DataHydrationModule.DataHydrationTypes.DataStatus.Ready and (UseRefResult2.current and UseRefResult2.current.groupId == GroupId) then
 		UseSignalStateResult5 = UseRefResult2.current.root
 	end
 	return {

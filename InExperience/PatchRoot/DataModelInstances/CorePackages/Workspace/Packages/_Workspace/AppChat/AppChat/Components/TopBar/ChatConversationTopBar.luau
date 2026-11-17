@@ -5,11 +5,9 @@ local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebu
 local DomLocatorsModule = require(AppChat.Utils.DomLocators)
 local ChatTopBarBaseModule = require(script.Parent.ChatTopBarBase)
 local CreateBackFuncModule = require(script.Parent.createBackFunc)
-local UseCallButtonEligibilityModule = require(AppChat.Hooks.useCallButtonEligibility)
 local GetTopBarStoreModule = require(AppChat.Stores.GetTopBarStore)
 local HeaderBarTitleLeftAlignedModule = require(AppChat.Components.ChatConversation.HeaderBarTitleLeftAligned)
 local UseChatPlacementContextFunction = require(AppChat.Contexts.ChatPlacementContext).useChatPlacementContext
-local ConversationChannelsModule = require(AppChat.Models.ConversationChannels)
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
@@ -20,9 +18,9 @@ local SquadButtonSourceEnum = require(Parent.Squads.Enums).SquadButtonSourceEnum
 local SquadComponentAccessWrapperModule = require(Parent.Squads.SquadComponentAccessWrapper)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagFriendsCallingClientGateDEV = SharedFlagsModule.FFlagFriendsCallingClientGate_DEV
-local FFlagFriendsCallingServiceLuaMigration = SharedFlagsModule.FFlagFriendsCallingServiceLuaMigration
+local UseIsCallButtonEligibleModule = if FFlagFriendsCallingClientGateDEV then require(AppChat.Hooks.useIsCallButtonEligible) else nil
 local GetFFlagIsSquadEnabledFunction = SharedFlagsModule.GetFFlagIsSquadEnabled
-local NewResult = require(AppChat.Logger):new(script.Name)
+local StartConversationCallModule = if FFlagFriendsCallingClientGateDEV then require(AppChat.Utils.startConversationCall) else nil
 local UseSignalStateFunction = SignalsReactModule.useSignalState
 
 local function noOp()
@@ -30,7 +28,7 @@ local function noOp()
 end
 
 return function(p1)
-	-- upvalues: GetTopBarStoreModule (copy), UseSignalStateFunction (copy), FFlagFriendsCallingClientGateDEV (copy), UseCallButtonEligibilityModule (copy), UseChatPlacementContextFunction (copy), UseLocalizationFunction (copy), AppHeaderBarModule (copy), CreateBackFuncModule (copy), ReactModule (copy), ConversationChannelsModule (copy), FFlagFriendsCallingServiceLuaMigration (copy), NewResult (copy), GetFFlagIsSquadEnabledFunction (copy), FoundationModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), SquadComponentAccessWrapperModule (copy), SquadJoinButtonModule (copy), EnumScreensModule (copy), SquadButtonSourceEnum (copy), HeaderBarTitleLeftAlignedModule (copy), ChatTopBarBaseModule (copy), noOp (copy)
+	-- upvalues: GetTopBarStoreModule (copy), UseSignalStateFunction (copy), FFlagFriendsCallingClientGateDEV (copy), UseIsCallButtonEligibleModule (copy), UseChatPlacementContextFunction (copy), UseLocalizationFunction (copy), AppHeaderBarModule (copy), CreateBackFuncModule (copy), StartConversationCallModule (copy), ReactModule (copy), GetFFlagIsSquadEnabledFunction (copy), FoundationModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), SquadComponentAccessWrapperModule (copy), SquadJoinButtonModule (copy), EnumScreensModule (copy), SquadButtonSourceEnum (copy), HeaderBarTitleLeftAlignedModule (copy), ChatTopBarBaseModule (copy), noOp (copy)
 	local ScreenName = p1.screenName
 	local Navigation = p1.navigation
 	local UseSignalStateResult = UseSignalStateFunction((GetTopBarStoreModule(false).getScreenTopBar(ScreenName)))
@@ -38,7 +36,7 @@ return function(p1)
 	local BackButtonEnabled = UseSignalStateResult.backButtonEnabled
 	local IsRoot = UseSignalStateResult.isRoot
 	local ConversationId = UseSignalStateResult.conversationId
-	local UseCallButtonEligibilityModuleResult = if FFlagFriendsCallingClientGateDEV then UseCallButtonEligibilityModule(ConversationId) else nil
+	local UseIsCallButtonEligibleModuleResult = if FFlagFriendsCallingClientGateDEV and UseIsCallButtonEligibleModule then UseIsCallButtonEligibleModule(ConversationId) else false
 	local NavigateToChatDetails = UseSignalStateResult.navigateToChatDetails
 	local RightPaddingOverride = UseSignalStateResult.rightPaddingOverride
 	local UseChatPlacementContextResult = UseChatPlacementContextFunction()
@@ -52,40 +50,17 @@ return function(p1)
 		isRoot = IsRoot
 	})
 	local BackButton = if BackButtonEnabled then MakeBackButtonFunction(BackFuncModule) else nil
-	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: FFlagFriendsCallingClientGateDEV (upval), UseCallButtonEligibilityModuleResult (copy), ConversationChannelsModule (upval), ConversationId (copy), FFlagFriendsCallingServiceLuaMigration (upval), NewResult (upval)
-		if not FFlagFriendsCallingClientGateDEV or UseCallButtonEligibilityModuleResult ~= ConversationChannelsModule.CallButtonEligibility.Eligible then return end
-		if ConversationId then
-			if FFlagFriendsCallingServiceLuaMigration then
-				local FriendsCallingService = game:GetService("FriendsCallingService")
-				local Success, Result = pcall(function()
-					-- upvalues: FriendsCallingService (copy), ConversationId (upval)
-					FriendsCallingService:StartCall({ conversationId = ConversationId })
-				end)
-				
-				if not Success then
-					NewResult:debug("FriendsCallingService:StartCall failed: {}", Result)
-					
-					return
-				end
-			else
-				local CallingService = game:GetService("CallingService")
-				task.spawn(function()
-					-- upvalues: CallingService (copy), ConversationId (upval)
-					pcall(function()
-						-- upvalues: CallingService (upval), ConversationId (upval)
-						CallingService:CreateCallAsync({}, ConversationId)
-					end)
-				end)
-			end
+	local UseResult = if StartConversationCallModule == nil then nil else ReactModule.useCallback(function()
+		-- upvalues: ConversationId (copy), StartConversationCallModule (upval)
+		if ConversationId ~= nil then
+			StartConversationCallModule(ConversationId)
+			
+			return
 		end
-	end, {
-		ConversationId or false,
-		UseCallButtonEligibilityModuleResult or false
-	})
-	local IsUseCallButtonEligibilityModuleResultMatch: boolean = FFlagFriendsCallingClientGateDEV and (ConversationId ~= nil and UseCallButtonEligibilityModuleResult == ConversationChannelsModule.CallButtonEligibility.Eligible)
+	end, { ConversationId })
+	local UseIsCallButtonEligibleModuleResult1 = FFlagFriendsCallingClientGateDEV and (ConversationId ~= nil and UseIsCallButtonEligibleModuleResult)
 	local HasConversationId: boolean = not FFlagFriendsCallingClientGateDEV and (GetFFlagIsSquadEnabledFunction() and ConversationId ~= nil)
-	local RenderRight = if IsUseCallButtonEligibilityModuleResultMatch then function()
+	local RenderRight = if UseIsCallButtonEligibleModuleResult1 and UseResult then function()
 		-- upvalues: ReactModule (upval), FoundationModule (upval), UseResult (copy), FFlagDebugAppChatEnableDomLocatorsModule (upval), DomLocatorsModule (upval)
 		return ReactModule.createElement(FoundationModule.View, { tag = "row align-x-right align-y-center auto-xy" }, {
 			CallButton = ReactModule.createElement(FoundationModule.IconButton, {

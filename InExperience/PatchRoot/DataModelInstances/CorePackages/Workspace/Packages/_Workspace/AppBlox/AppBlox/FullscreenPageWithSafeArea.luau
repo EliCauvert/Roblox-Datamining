@@ -9,9 +9,10 @@ local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local DisplayModule = require(Parent.Display)
 local CryoModule = require(Parent.Cryo)
 local FFlagExtendScrollingFramesBySafeInsets = require(Parent.SharedFlags).FFlagExtendScrollingFramesBySafeInsets
+local FixFullscreenPageDeviceSafePadding = game:DefineFastFlag("FixFullscreenPageDeviceSafePadding", false)
 
 function FullscreenPageWithSafeArea.render(p1)
-	-- upvalues: RoactModule (copy), FFlagExtendScrollingFramesBySafeInsets (copy), GetSafeAreaSizeFunction (copy), IsVRAppBuildFunction (copy), Constants (copy)
+	-- upvalues: FixFullscreenPageDeviceSafePadding (copy), RoactModule (copy), FFlagExtendScrollingFramesBySafeInsets (copy), GetSafeAreaSizeFunction (copy), DisplayModule (copy), IsVRAppBuildFunction (copy), Constants (copy)
 	local StatusBarHeight = p1.props.statusBarHeight
 	local ScreenSize = p1.props.screenSize
 	local GlobalGuiInset = p1.props.globalGuiInset
@@ -19,6 +20,7 @@ function FullscreenPageWithSafeArea.render(p1)
 	local BackgroundTransparency = p1.props.BackgroundTransparency
 	local IncludeStatusBar = p1.props.includeStatusBar
 	local IncludeBottomBar = p1.props.includeBottomBar
+	local CountSystemBarsOnce = if FixFullscreenPageDeviceSafePadding then p1.props.countSystemBarsOnce else nil
 	local RenderFullscreenBackgroundFunction = p1.props.renderFullscreenBackground
 	local Prop = p1.props[RoactModule.Children]
 	local ButtonRef = p1.props.buttonRef
@@ -27,16 +29,16 @@ function FullscreenPageWithSafeArea.render(p1)
 	if ScreenSize.X == 0 or ScreenSize.Y == 0 then
 		return nil
 	end
-	local SafeAreaSize = GetSafeAreaSizeFunction(ScreenSize, GlobalGuiInset)
+	local _UDim2 = if FFlagExtendScrollingFramesBySafeInsets and FixFullscreenPageDeviceSafePadding and CountSystemBarsOnce and DisplayModule.shouldUseDeviceSafeInsets then UDim2.fromOffset(ScreenSize.X - GlobalGuiInset.left - DeviceSafePadding.left - DeviceSafePadding.right, ScreenSize.Y - GlobalGuiInset.top - DeviceSafePadding.top - DeviceSafePadding.bottom) else GetSafeAreaSizeFunction(ScreenSize, GlobalGuiInset)
 	local NewTop = GlobalGuiInset.top + (FFlagExtendScrollingFramesBySafeInsets and DeviceSafePadding.top or 0)
 	local UseFullScalePage = p1.props.useFullScalePage or IsVRAppBuildFunction()
 	
 	if IncludeStatusBar then
-		SafeAreaSize = UDim2.new(0, SafeAreaSize.X.Offset, 0, SafeAreaSize.Y.Offset - StatusBarHeight)
+		_UDim2 = UDim2.new(0, _UDim2.X.Offset, 0, _UDim2.Y.Offset - StatusBarHeight)
 		NewTop += StatusBarHeight
 	end
 	if IncludeBottomBar then
-		SafeAreaSize = UDim2.new(0, SafeAreaSize.X.Offset, 0, SafeAreaSize.Y.Offset - Constants.BOTTOM_BAR_SIZE)
+		_UDim2 = UDim2.new(0, _UDim2.X.Offset, 0, _UDim2.Y.Offset - Constants.BOTTOM_BAR_SIZE)
 	end
 	return RoactModule.createElement("Frame", {
 		Position = if UseFullScalePage then UDim2.new(0, 0, 0, 0) else UDim2.new(0, -GlobalGuiInset.left - (FFlagExtendScrollingFramesBySafeInsets and DeviceSafePadding.left or 0), 0, -GlobalGuiInset.top - (FFlagExtendScrollingFramesBySafeInsets and DeviceSafePadding.top or 0)),
@@ -52,7 +54,7 @@ function FullscreenPageWithSafeArea.render(p1)
 		SafeAreaFrame = RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Position = if UseFullScalePage then UDim2.new(0, 0, 0, 0) else UDim2.new(0, GlobalGuiInset.left + (FFlagExtendScrollingFramesBySafeInsets and DeviceSafePadding.left or 0), 0, NewTop),
-			Size = if UseFullScalePage then UDim2.new(1, 0, 1, 0) else SafeAreaSize,
+			Size = if UseFullScalePage then UDim2.new(1, 0, 1, 0) else _UDim2,
 			ZIndex = if RenderFullscreenBackgroundFunction then 2 else 1
 		}, Prop)
 	})

@@ -65,6 +65,8 @@ local FFlagBuildExperiencePrivateInvitesModule = require(script.Parent.Flags.FFl
 local FFlagBuildExperienceEventContextTelemetryModule = require(script.Parent.Flags.FFlagBuildExperienceEventContextTelemetry)
 local FFlagBuildExperienceMyCreationsLongPressMenuModule = require(script.Parent.Flags.FFlagBuildExperienceMyCreationsLongPressMenu)
 local FFlagBuildExperiencePreviewsTabModule = require(script.Parent.Flags.FFlagBuildExperiencePreviewsTab)
+local FFlagBuildUpdatedSearchUXForGAModule = require(script.Parent.Flags.FFlagBuildUpdatedSearchUXForGA)
+local GetBuildHomeTabStoreModule = if FFlagBuildExperiencePreviewsTabModule then require(script.Parent.Stores.GetBuildHomeTabStore) else nil
 local FFlagAppThemeHalloween2026BuildBackgroundModule = require(script.Parent.Flags.FFlagAppThemeHalloween2026BuildBackground)
 local UseThemeBackgroundFunction = require(Parent.ThemeBackground).useThemeBackground
 local FFlagBuildWithGroupsModule = require(script.Parent.Flags.FFlagBuildWithGroups)
@@ -426,7 +428,7 @@ local List = {
 	{
 		[config.BuildHome] = {
 			screen = function(p2)
-				-- upvalues: UseBuildPageLayoutModule (copy), UseNavigationFocusFunction (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), useOpenBuildChat (copy), FFlagBuildExperienceEventContextTelemetryModule (copy), FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), useHomeConfigurationPages (copy), FFlagAppThemeHalloween2026BuildBackgroundModule (copy), UseThemeBackgroundFunction (copy), ReactModule (copy), FFlagBuildAdUpsellModule (copy), GetAdsCampaignDeepLinkStoreModule (copy), SendBuildExperienceEventModule (copy), ResumeBuildChatModule (copy), GetSearchQueryStoreModule (copy), FFlagBuildExperienceHomeTelemetryModule (copy), config (copy), MyCreationsTabModule (copy), FullscreenPageWithSafeArea (copy), View (copy), BuildPageHeaderModule (copy), FFlagBuildExperiencePreviewsTabModule (copy), BuildHomeTabsContainerModule (copy), FFlagBuildPublishNavigationSheetModule (copy), PublishSheetControllerModule (copy)
+				-- upvalues: UseBuildPageLayoutModule (copy), UseNavigationFocusFunction (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), useOpenBuildChat (copy), FFlagBuildExperienceEventContextTelemetryModule (copy), FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), useHomeConfigurationPages (copy), FFlagAppThemeHalloween2026BuildBackgroundModule (copy), UseThemeBackgroundFunction (copy), ReactModule (copy), FFlagBuildAdUpsellModule (copy), GetAdsCampaignDeepLinkStoreModule (copy), SendBuildExperienceEventModule (copy), ResumeBuildChatModule (copy), GetSearchQueryStoreModule (copy), FFlagBuildUpdatedSearchUXForGAModule (copy), FFlagBuildExperiencePreviewsTabModule (copy), GetBuildHomeTabStoreModule (copy), FFlagBuildExperienceHomeTelemetryModule (copy), config (copy), MyCreationsTabModule (copy), FullscreenPageWithSafeArea (copy), View (copy), BuildPageHeaderModule (copy), BuildHomeTabsContainerModule (copy), FFlagBuildPublishNavigationSheetModule (copy), PublishSheetControllerModule (copy)
 				local ScreenProps = p2.screenProps or {}
 				local Navigation = p2.navigation
 				local UseBuildPageLayoutModuleResult = UseBuildPageLayoutModule()
@@ -477,12 +479,14 @@ local List = {
 					FallbackExperienceName
 				})
 				local SearchQueryStore = ScreenProps.searchQueryStore or GetSearchQueryStoreModule()
+				local IsGames = if FFlagBuildUpdatedSearchUXForGAModule and FFlagBuildExperiencePreviewsTabModule then GetBuildHomeTabStoreModule().useTab() == "Games" else nil
 				local Element = ReactModule.createElement(MyCreationsTabModule, {
 					LayoutOrder = 3,
 					creatorAgentChatStore = ScreenProps.creatorAgentChatStore,
 					configurationStore = ScreenProps.configurationStore,
 					searchStore = ScreenProps.searchStore,
 					searchQueryStore = ScreenProps.searchQueryStore,
+					isActiveTab = if FFlagBuildUpdatedSearchUXForGAModule and FFlagBuildExperiencePreviewsTabModule then IsGames else nil,
 					isFocused = UseNavigationFocusResult,
 					autoOpenNewGame = ScreenProps.universeId == nil and ScreenProps.sessionId == nil,
 					onOpenChat = UseOpenBuildChatResult,
@@ -504,14 +508,18 @@ local List = {
 						Header = ReactModule.createElement(BuildPageHeaderModule, {
 							LayoutOrder = 1,
 							height = UseBuildPageLayoutModuleResult.topBarHeight,
+							isFocused = if FFlagBuildUpdatedSearchUXForGAModule then UseNavigationFocusResult else nil,
 							searchQueryStore = SearchQueryStore,
 							onOpenSearch = ReactModule.useCallback(function()
-								-- upvalues: SearchQueryStore (copy), FFlagBuildExperienceHomeTelemetryModule (upval), SendBuildExperienceEventModule (upval), Navigation (copy), config (upval)
+								-- upvalues: SearchQueryStore (copy), FFlagBuildExperienceHomeTelemetryModule (upval), SendBuildExperienceEventModule (upval), FFlagBuildUpdatedSearchUXForGAModule (upval), Navigation (copy), config (upval)
 								if FFlagBuildExperienceHomeTelemetryModule then
 									SendBuildExperienceEventModule("SEARCH_OPEN", {}, { context = "home_header" })
 								end
 								SearchQueryStore.beginSearch()
-								Navigation.navigate(config.BuildSearch, { searchQueryStore = SearchQueryStore })
+								
+								if not FFlagBuildUpdatedSearchUXForGAModule then
+									Navigation.navigate(config.BuildSearch, { searchQueryStore = SearchQueryStore })
+								end
 							end, { Navigation, SearchQueryStore })
 						}),
 						Content = ReactModule.createElement(View, {
@@ -542,7 +550,7 @@ local List = {
 	{
 		[config.BuildChat] = {
 			screen = function(p2)
-				-- upvalues: BuildNavigationParamsModule (copy), FFlagBuildExperienceAnalytics (copy), GetBuildExperienceRefreshStoreModule (copy), UseBuildPageLayoutModule (copy), FFlagBuildAdUpsellModule1 (copy), UseNavigationFocusFunction (copy), UseOnScreenKeyboardVisibleModule (copy), ReactModule (copy), FFlagBuildExperienceModelPickerModule (copy), SignalsReactModule (copy), LocalUserIdStore (copy), PrepareBuildModelSelectionTargetModule (copy), GetBuildModelSelectionStoreModule (copy), FFlagBuildWithGroupsModule (copy), FFlagBuildExperiencePreviewsTabModule (copy), FFlagBuildPublishNavigationSheetModule (copy), BuildOverflowMenuScreensModule (copy), FFlagBuildExperienceLibrary (copy), OpenLibraryModule (copy), FFlagBuildExperiencePrivateInvitesModule (copy), config (copy), FFlagEnableBuildAdPromotionModule (copy), BuildChatPageModule (copy), FullscreenPageWithSafeArea (copy), PrivateInvitesPickerHostModule (copy), PublishSheetControllerModule (copy)
+				-- upvalues: BuildNavigationParamsModule (copy), FFlagBuildExperienceAnalytics (copy), GetBuildExperienceRefreshStoreModule (copy), UseBuildPageLayoutModule (copy), FFlagBuildAdUpsellModule1 (copy), UseNavigationFocusFunction (copy), UseOnScreenKeyboardVisibleModule (copy), ReactModule (copy), FFlagBuildExperienceModelPickerModule (copy), SignalsReactModule (copy), LocalUserIdStore (copy), PrepareBuildModelSelectionTargetModule (copy), GetBuildModelSelectionStoreModule (copy), FFlagBuildWithGroupsModule (copy), FFlagBuildExperiencePreviewsTabModule (copy), GetBuildHomeTabStoreModule (copy), FFlagBuildPublishNavigationSheetModule (copy), BuildOverflowMenuScreensModule (copy), FFlagBuildExperienceLibrary (copy), OpenLibraryModule (copy), FFlagBuildExperiencePrivateInvitesModule (copy), config (copy), FFlagEnableBuildAdPromotionModule (copy), BuildChatPageModule (copy), FullscreenPageWithSafeArea (copy), PrivateInvitesPickerHostModule (copy), PublishSheetControllerModule (copy)
 				local Navigation = p2.navigation
 				local Target = BuildNavigationParamsModule.getTarget(Navigation)
 				local InitialPrompt = if FFlagBuildExperienceAnalytics then BuildNavigationParamsModule.getInitialPrompt(Navigation) else nil
@@ -577,12 +585,12 @@ local List = {
 					end, { ModelSelectionDraftId })
 				end
 				local UseResult = ReactModule.useCallback(function()
-					-- upvalues: FFlagBuildWithGroupsModule (upval), Target (copy), FFlagBuildExperiencePreviewsTabModule (upval), Navigation (copy)
+					-- upvalues: FFlagBuildWithGroupsModule (upval), Target (copy), FFlagBuildExperiencePreviewsTabModule (upval), GetBuildHomeTabStoreModule (upval), Navigation (copy)
 					if FFlagBuildWithGroupsModule and Target ~= nil and Target.isNewGameTarget == true and Target.universeId ~= nil then
 						require(script.Parent.Stores.GetMyCreationsFilterStore)().setFilter({ games = "MyGames" })
 						
 						if FFlagBuildExperiencePreviewsTabModule then
-							require(script.Parent.Stores.GetBuildHomeTabStore)().setTab("Games")
+							GetBuildHomeTabStoreModule().setTab("Games")
 						end
 					end
 					Navigation.goBack()
@@ -683,7 +691,7 @@ local List = {
 						onClose = UseResult4,
 						onInvitesSent = UseResult7
 					}) else nil,
-					PublishSheet = if FFlagBuildPublishNavigationSheetModule and Target ~= nil and Target.universeId ~= nil then ReactModule.createElement(PublishSheetControllerModule, {
+					PublishSheet = if FFlagBuildPublishNavigationSheetModule and (Target ~= nil and Target.universeId ~= nil) then ReactModule.createElement(PublishSheetControllerModule, {
 						isOpen = UseStateResult1,
 						target = Target,
 						onClose = UseResult1,

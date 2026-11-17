@@ -11,6 +11,7 @@ local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
 local EnumsModule = require(ProfilePlatform.Common.Enums)
 local FFlagProfilePlatformNewProfileHeader = require(Parent.SharedFlags).FFlagProfilePlatformNewProfileHeader
 local FFlagProfilePlatformPeekDraggerContrast = require(Parent.SharedFlags).FFlagProfilePlatformPeekDraggerContrast
+local FFlagProfilePlatformSeededPymk = require(Parent.SharedFlags).FFlagProfilePlatformSeededPymk
 local FFlagSduiMarkdownTextComponentEnabled = require(Parent.SharedFlags).FFlagSduiMarkdownTextComponentEnabled
 local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 local v1: number = if FFlagProfilePlatformNewProfileHeader then 0 else 25
@@ -31,7 +32,7 @@ local function SheetBackground(p1)
 end
 
 return function(p1)
-	-- upvalues: UseSelectorFunction (copy), FFlagProfilePlatformNewProfileHeader (copy), UseStyleFunction (copy), ReactModule (copy), PeekViewState (copy), v1 (copy), FFlagProfilePlatformPeekDraggerContrast (copy), EnumsModule (copy), View (copy), PeekView (copy), FFlagSduiMarkdownTextComponentEnabled (copy), SheetBackground (copy)
+	-- upvalues: UseSelectorFunction (copy), FFlagProfilePlatformNewProfileHeader (copy), UseStyleFunction (copy), ReactModule (copy), PeekViewState (copy), v1 (copy), FFlagProfilePlatformPeekDraggerContrast (copy), EnumsModule (copy), View (copy), PeekView (copy), FFlagProfilePlatformSeededPymk (copy), FFlagSduiMarkdownTextComponentEnabled (copy), SheetBackground (copy)
 	local StatusBarHeight = p1.statusBarHeight or UseSelectorFunction(function(p2)
 		return p2.TopBar.statusBarHeight
 	end)
@@ -71,6 +72,7 @@ return function(p1)
 				mountAsFullView = p1.mountAsFullView,
 				mountAnimation = p1.mountAnimation,
 				viewStateChanged = UseResult,
+				peekViewState = if FFlagProfilePlatformSeededPymk then p1.peekViewState else nil,
 				briefToFullTransitionPercent = function(p2)
 					-- upvalues: UseBindingResult2 (copy), p1 (copy)
 					UseBindingResult2(p2)

@@ -35,6 +35,8 @@ local FFlagSignalsNavP3bTopBar = SharedFlagsModule.FFlagSignalsNavP3bTopBar
 local FFlagEnableHeaderBarButtonsUpdate = SharedFlagsModule.FFlagEnableHeaderBarButtonsUpdate
 local FFlagStreamNotificationDropdownSingleOwner = SharedFlagsModule.FFlagStreamNotificationDropdownSingleOwner
 local FFlagStreamNotificationDropdownFocusedOwner = SharedFlagsModule.FFlagStreamNotificationDropdownFocusedOwner
+local FFlagPauseScrollAwayForNotificationsDropdown = SharedFlagsModule.FFlagPauseScrollAwayForNotificationsDropdown
+local VisibilityControl = require(Parent.AppNavBar).VisibilityControl
 local IconsCommonNotificationOff = Images["icons/common/notificationOff"]
 
 local function _(): boolean
@@ -42,8 +44,8 @@ local function _(): boolean
 	return ThirdPartyUserService and (ThirdPartyUserService:IsChatRestrictionSupported() and ThirdPartyUserService.FriendCommunicationRestrictionStatus ~= Enum.ChatRestrictionStatus.NotRestricted)
 end
 
-local function v34(p1)
-	-- upvalues: ReactModule (copy), FFlagStreamNotificationDropdownSingleOwner (copy), FFlagStreamNotificationDropdownFocusedOwner (copy), HttpService (copy), StreamNotificationStoreModule (copy), FFlagEnableNotificationsDeeplink (copy), UseSignalStateFunction (copy), StreamNotificationDropdownExperimentationModule (copy), UseTokensFunction (copy), FFlagStreamNotificationBellEntryPoint (copy), FFlagSignalsNavP3bTopBar (copy), NotificationHelper (copy), EventStream (copy), AnalyticsConstantsModule (copy), ConstantsModule (copy), StreamNotificationsModule (copy), GetFFlagNotificationsComplianceShouldRestrictStreamFunction (copy), ThirdPartyUserService (copy), IxpHelper (copy), GetFStringNotificationsStreamNotificationUXLayerFunction (copy), FFlagEnableHeaderBarButtonsUpdate (copy), FoundationModule (copy), IsAppNavEnabledFunction (copy), Popover (copy), PopoverSide (copy), PopoverAlign (copy), IconsCommonNotificationOff (copy), UtilityActionIcon (copy), IconButton (copy), IconSize (copy), Badge (copy), BadgeVariant (copy)
+local function v36(p1)
+	-- upvalues: ReactModule (copy), FFlagStreamNotificationDropdownSingleOwner (copy), FFlagStreamNotificationDropdownFocusedOwner (copy), HttpService (copy), StreamNotificationStoreModule (copy), FFlagEnableNotificationsDeeplink (copy), UseSignalStateFunction (copy), StreamNotificationDropdownExperimentationModule (copy), UseTokensFunction (copy), FFlagStreamNotificationBellEntryPoint (copy), FFlagSignalsNavP3bTopBar (copy), NotificationHelper (copy), EventStream (copy), AnalyticsConstantsModule (copy), ConstantsModule (copy), StreamNotificationsModule (copy), FFlagPauseScrollAwayForNotificationsDropdown (copy), GetFFlagNotificationsComplianceShouldRestrictStreamFunction (copy), IsAppNavEnabledFunction (copy), VisibilityControl (copy), ThirdPartyUserService (copy), IxpHelper (copy), GetFStringNotificationsStreamNotificationUXLayerFunction (copy), FFlagEnableHeaderBarButtonsUpdate (copy), FoundationModule (copy), Popover (copy), PopoverSide (copy), PopoverAlign (copy), IconsCommonNotificationOff (copy), UtilityActionIcon (copy), IconButton (copy), IconSize (copy), Badge (copy), BadgeVariant (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local Current = nil
 	
@@ -127,6 +129,14 @@ local function v34(p1)
 		}) else nil
 	end, { IsOpen })
 	
+	if FFlagPauseScrollAwayForNotificationsDropdown then
+		local ShouldRestrictStream = GetFFlagNotificationsComplianceShouldRestrictStreamFunction() and p1.shouldRestrictStream
+		local NoShouldRestrictStream: boolean = IsOpen and (DropdownEnabled and (IsAppNavEnabledFunction() and not ShouldRestrictStream))
+		ReactModule.useEffect(function()
+			-- upvalues: NoShouldRestrictStream (copy), VisibilityControl (upval)
+			return if NoShouldRestrictStream then VisibilityControl.pause() else nil
+		end, { NoShouldRestrictStream })
+	end
 	if GetFFlagNotificationsComplianceShouldRestrictStreamFunction() and p1.shouldRestrictStream then
 		return nil
 	end
@@ -277,10 +287,10 @@ local function v34(p1)
 end
 
 if GetFFlagNotificationsComplianceShouldRestrictStreamFunction() then
-	v34 = RoactAppPolicy.connect(function(p1, _)
+	v36 = RoactAppPolicy.connect(function(p1, _)
 		return {
 			shouldRestrictStream = p1.getNotificationsCanReceiveStream() or false
 		}
-	end)(v34)
+	end)(v36)
 end
-return v34
+return v36

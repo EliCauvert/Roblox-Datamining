@@ -1,17 +1,19 @@
-﻿local Parent = script.Parent.Parent.Parent
-local ReactModule = require(Parent.React)
-local StyleModule = require(Parent.Style)
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local StyleModule = require(Parent1.Style)
 local UiModeBrandThemeContext = StyleModule.UiModeBrandThemeContext
 local _ = require(script.Parent.Parent.Components.AppHeaderBarClassicThemeBackground)
-local FFlagAppNavBarPerItemThemeOverride = require(Parent.SharedFlags).FFlagAppNavBarPerItemThemeOverride
+local FFlagAppNavBarPerItemThemeOverride = require(Parent1.SharedFlags).FFlagAppNavBarPerItemThemeOverride
+local FFlagClassicThemeHeaderGradientFromTokensModule = require(Parent.Flags.FFlagClassicThemeHeaderGradientFromTokens)
 local config = {
 	Classic_light = {
 		centerImage = "rbxasset://textures/ui/LuaApp/graphic/starburst_center_classic_light.png",
-		gradientColor = Color3.fromHex("#CDECFF")
+		gradientColor = if FFlagClassicThemeHeaderGradientFromTokensModule then nil else Color3.fromHex("#CDECFF")
 	},
 	Classic_dark = {
 		centerImage = "rbxasset://textures/ui/LuaApp/graphic/starburst_center_classic_dark.png",
-		gradientColor = Color3.fromHex("#042349")
+		gradientColor = if FFlagClassicThemeHeaderGradientFromTokensModule then nil else Color3.fromHex("#042349")
 	}
 }
 

@@ -143,5 +143,13 @@ AnalyticsModule.ExpChatPresetActionConfig = {
 	throttlingPercentage = game:DefineFastInt("ExpChatPresetActionThrottlePerMyriad", 10000),
 	lastUpdated = { 26, 6, 1 }
 }
+AnalyticsModule.ExpChatTabStabilizedConfig = {
+	eventName = "ExpChatTabStabilized",
+	description = "Once per play session, when the selected chat tab stabilizes after join or the sticky tab time limit runs out. Logs the intended tab and the stabilized tab.",
+	links = "https://docs.google.com/document/d/1cme2Fmmf7CM1A8MuOnsnsErn_MSlWCuGy8-1RgZYmds/edit?tab=t.ctakky1uch8n#heading=h.lkwbj74uj15v",
+	backends = { "EventIngest" },
+	throttlingPercentage = game:DefineFastInt("ExpChatTabStabilizedThrottlePerMyriad", 10000),
+	lastUpdated = { 26, 11, 13 }
+}
 
 return AnalyticsModule

@@ -40,6 +40,7 @@ local FFlagBuildExperienceChatAccordionScrollAnchorModule = require(BuildExperie
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local _ = require(BuildExperience.useGamePermissions)
 local UseScrollPerformanceTrackerModule = require(BuildExperience.Telemetry.useScrollPerformanceTracker)
+local FFlagBuildExperienceAdsAndRobuxTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceAdsAndRobuxTelemetry)
 local Divider = FoundationModule.Divider
 local IconButton = FoundationModule.IconButton
 local ScrollView = FoundationModule.ScrollView
@@ -134,7 +135,7 @@ local function renderAdUpsells(p1, Tbl, ScrollingFrameRef, CongratsText)
 end
 
 return function(p2)
-	-- upvalues: FFlagBuildExperienceAnswerFormModule (copy), IsEnabled (copy), ReactModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildAdUpsellModule (copy), UseTokensFunction (copy), UseScrollPerformanceTrackerModule (copy), ChatMessageListModule (copy), BuildEmptyStateModule (copy), FFlagBuildAgentAdCampaignCardModule (copy), ChatConstantsModule (copy), PushNotificationsUpsellCardModule (copy), renderAdUpsells (copy), AnswerFormContainerModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), FFlagBuildCheckGamePermissionsModule (copy), ChatPermissionsContextModule (copy), View (copy), FFlagBuildAdUpsellPinnedModule (copy), BuyMoreRobuxCardModule (copy), ChatActionsModule (copy), FFlagBuildExperienceModelPickerModule (copy), FFlagBuildExperienceFTUXChipSendGuidanceModule (copy), FFlagBuildExperienceLibrary (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), Text (copy), PlayButtonModule (copy), IconVariant (copy), BuildOverflowMenuButtonModule (copy), FFlagEnableBuildAdPromotionModule (copy), Divider (copy), ScrollView (copy), AgentSpecDebugSheetModule (copy), CreateAdCampaignSheetContainerModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), AdCampaignCreatedToastModule (copy)
+	-- upvalues: FFlagBuildExperienceAnswerFormModule (copy), IsEnabled (copy), ReactModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildAdUpsellModule (copy), UseTokensFunction (copy), UseScrollPerformanceTrackerModule (copy), ChatMessageListModule (copy), BuildEmptyStateModule (copy), FFlagBuildAgentAdCampaignCardModule (copy), ChatConstantsModule (copy), PushNotificationsUpsellCardModule (copy), renderAdUpsells (copy), AnswerFormContainerModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), FFlagBuildCheckGamePermissionsModule (copy), ChatPermissionsContextModule (copy), View (copy), FFlagBuildAdUpsellPinnedModule (copy), BuyMoreRobuxCardModule (copy), ChatActionsModule (copy), FFlagBuildExperienceModelPickerModule (copy), FFlagBuildExperienceFTUXChipSendGuidanceModule (copy), FFlagBuildExperienceLibrary (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), Text (copy), PlayButtonModule (copy), IconVariant (copy), BuildOverflowMenuButtonModule (copy), FFlagEnableBuildAdPromotionModule (copy), Divider (copy), ScrollView (copy), AgentSpecDebugSheetModule (copy), CreateAdCampaignSheetContainerModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), AdCampaignCreatedToastModule (copy)
 	local HasAnswerForm: boolean = FFlagBuildExperienceAnswerFormModule and p2.answerForm ~= nil
 	local v1 = false
 	local Callback = nil
@@ -403,7 +404,7 @@ return function(p2)
 		AdCampaignSheet = if FFlagBuildAdUpsellModule and p2.isAdUpsellVisible then ReactModule.createElement(CreateAdCampaignSheetContainerModule, {
 			waitForCreateResult = true,
 			useLocalRunDates = true,
-			universeId = if FFlagBuildAdsManagerUniverseUrlModule then p2.target.universeId else nil,
+			universeId = if FFlagBuildAdsManagerUniverseUrlModule or FFlagBuildExperienceAdsAndRobuxTelemetryModule then p2.target.universeId else nil,
 			isOpen = p2.isAdCampaignSheetOpen,
 			onClose = p2.onAdCampaignSheetClose,
 			onCreate = p2.onAdCampaignSheetCreate,
@@ -419,7 +420,7 @@ return function(p2)
 		AgentAdCampaignSheet = if FFlagBuildAgentAdCampaignCardModule then ReactModule.createElement(CreateAdCampaignSheetContainerModule, {
 			waitForCreateResult = true,
 			useLocalRunDates = true,
-			universeId = if FFlagBuildAdsManagerUniverseUrlModule then p2.target.universeId else nil,
+			universeId = if FFlagBuildAdsManagerUniverseUrlModule or FFlagBuildExperienceAdsAndRobuxTelemetryModule then p2.target.universeId else nil,
 			isOpen = p2.isAgentAdCampaignSheetOpen,
 			onClose = p2.onAgentAdCampaignSheetClose,
 			onCreate = p2.onAgentAdCampaignSheetCreate,
@@ -430,10 +431,10 @@ return function(p2)
 			attemptedOption = p2.agentAdCampaignAttemptedOption,
 			runStartTimeMs = p2.agentAdCampaignRunStartTimeMs
 		}) else nil,
-		AdCampaignCreatedToast = if FFlagBuildAdUpsellModule and p2.isAdCampaignCreatedToastVisible and p2.isAdUpsellVisible then ReactModule.createElement(AdCampaignCreatedToastModule, {
+		AdCampaignCreatedToast = if FFlagBuildAdUpsellModule and (p2.isAdCampaignCreatedToastVisible and p2.isAdUpsellVisible) then ReactModule.createElement(AdCampaignCreatedToastModule, {
 			testId = "AdCampaignCreatedToast",
 			actionText = if p2.onOpenGetUsersPage == nil then nil else UseLocalizationResult.adCampaignCreatedView,
-			onActionActivated = p2.onOpenGetUsersPage,
+			onActionActivated = if FFlagBuildExperienceAdsAndRobuxTelemetryModule then p2.onAdCampaignCreatedToastView else p2.onOpenGetUsersPage,
 			onClose = p2.onAdCampaignCreatedToastDismiss,
 			title = UseLocalizationResult.adCampaignCreated
 		}) else nil

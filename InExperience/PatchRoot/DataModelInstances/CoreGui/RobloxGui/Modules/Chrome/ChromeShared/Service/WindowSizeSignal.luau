@@ -4,22 +4,24 @@ local Signal = require(CorePackages.Workspace.Packages.AppCommonLib).Signal
 local _ = require(CorePackages.Workspace.Packages.Chrome)
 local ViewportUtilModule = require(ChromeShared.Service.ViewportUtil)
 local ConstantsModule = require(ChromeShared.Unibar.Constants)
-local FFlagChromeWindowSignalConstraintsToggle = require(CorePackages.Workspace.Packages.SharedFlags).FFlagChromeWindowSignalConstraintsToggle
+local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
+local FFlagChromeWindowSignalConstraintsToggle = SharedFlagsModule.FFlagChromeWindowSignalConstraintsToggle
+local FFlagKeepSideSheetOpenBesideMenu = SharedFlagsModule.FFlagKeepSideSheetOpenBesideMenu
 
-local function getConstrainedWindowSize(Smallest: number, Smallest1: number, IgnoreConstraints): UDim2
+local function getConstrainedWindowSize(XOffset1: number, YOffset1: number, IgnoreConstraints): UDim2
 	-- upvalues: ViewportUtilModule (copy), FFlagChromeWindowSignalConstraintsToggle (copy), ConstantsModule (copy)
 	local GetResult = ViewportUtilModule.screenSize:get()
 	local IsXBelow = GetResult.X < GetResult.Y
-	local XOffset: number = Smallest
-	local YOffset: number = Smallest1
+	local XOffset: number = XOffset1
+	local YOffset: number = YOffset1
 	
 	if ViewportUtilModule.mobileDevice:get() and (not FFlagChromeWindowSignalConstraintsToggle or not IgnoreConstraints) then
 		if IsXBelow then
-			YOffset = math.min(Smallest1, ConstantsModule.MAX_HEIGHT_PORTRAIT)
-			XOffset = math.min(Smallest, ConstantsModule.MAX_WIDTH_PORTRAIT)
+			YOffset = math.min(YOffset1, ConstantsModule.MAX_HEIGHT_PORTRAIT)
+			XOffset = math.min(XOffset1, ConstantsModule.MAX_WIDTH_PORTRAIT)
 		elseif not IsXBelow then
-			YOffset = math.min(Smallest1, ConstantsModule.MAX_HEIGHT_LANDSCAPE)
-			XOffset = math.min(Smallest, ConstantsModule.MAX_WIDTH_LANDSCAPE)
+			YOffset = math.min(YOffset1, ConstantsModule.MAX_HEIGHT_LANDSCAPE)
+			XOffset = math.min(XOffset1, ConstantsModule.MAX_WIDTH_LANDSCAPE)
 		end
 	end
 	return UDim2.new(0, XOffset, 0, YOffset)
@@ -42,13 +44,16 @@ function WindowSizeSignalModule:connect(p1)
 	return self._changeSignal:connect(p1)
 end
 
-function WindowSizeSignalModule:requestSize(Offset, Offset1)
-	-- upvalues: FFlagChromeWindowSignalConstraintsToggle (copy), getConstrainedWindowSize (copy)
-	local ConstrainedWindowSize = if FFlagChromeWindowSignalConstraintsToggle then getConstrainedWindowSize(Offset, Offset1, self._ignoreConstraints) else getConstrainedWindowSize(Offset, Offset1)
+function WindowSizeSignalModule:requestSize(XOffset, YOffset, Enabled)
+	-- upvalues: FFlagKeepSideSheetOpenBesideMenu (copy), FFlagChromeWindowSignalConstraintsToggle (copy), getConstrainedWindowSize (copy)
+	if FFlagKeepSideSheetOpenBesideMenu then
+		self._requestIgnoreConstraints = Enabled == true
+	end
+	local _UDim2 = if FFlagKeepSideSheetOpenBesideMenu and Enabled == true then UDim2.new(0, XOffset, 0, YOffset) elseif FFlagChromeWindowSignalConstraintsToggle then getConstrainedWindowSize(XOffset, YOffset, self._ignoreConstraints) else getConstrainedWindowSize(XOffset, YOffset)
 	
-	if self._state ~= ConstrainedWindowSize then
-		self._state = ConstrainedWindowSize
-		self._changeSignal:fire(ConstrainedWindowSize)
+	if self._state ~= _UDim2 then
+		self._state = _UDim2
+		self._changeSignal:fire(_UDim2)
 	end
 end
 
@@ -67,7 +72,8 @@ function WindowSizeSignalModule:getIsLarge()
 end
 
 function WindowSizeSignalModule:updateConstraints()
-	self:requestSize(self._state.Width.Offset, self._state.Height.Offset)
+	-- upvalues: FFlagKeepSideSheetOpenBesideMenu (copy)
+	self:requestSize(self._state.Width.Offset, self._state.Height.Offset, if FFlagKeepSideSheetOpenBesideMenu then self._requestIgnoreConstraints else nil)
 end
 
 return WindowSizeSignalModule

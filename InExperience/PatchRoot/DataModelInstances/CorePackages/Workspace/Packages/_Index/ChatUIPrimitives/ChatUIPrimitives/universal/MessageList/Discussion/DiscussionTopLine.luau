@@ -5,13 +5,14 @@ local _ = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local _ = require(script.Parent.Parent.Parent.Types)
 local MessageTimestampModule = require(script.Parent.Parent.Parent.Adornments.MessageTimestamp)
+local UseIdentityNameStyleModule = require(script.Parent.Parent.Parent.Identity.useIdentityNameStyle)
 
 local function toDisplayName(p1)
 	return if p1 then p1.displayName else ""
 end
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: SignalsReactModule (copy), ReactModule (copy), toDisplayName (copy), FoundationModule (copy), MessageTimestampModule (copy)
+	-- upvalues: SignalsReactModule (copy), ReactModule (copy), toDisplayName (copy), UseIdentityNameStyleModule (copy), FoundationModule (copy), MessageTimestampModule (copy)
 	local UseSignalBindingResult = SignalsReactModule.useSignalBinding(Frame.getIdentity)
 	
 	return ReactModule.createElement(FoundationModule.View, {
@@ -26,7 +27,8 @@ return ReactModule.memo(function(Frame)
 			Text = ReactModule.useMemo(function()
 				-- upvalues: UseSignalBindingResult (copy), toDisplayName (upval)
 				return UseSignalBindingResult:map(toDisplayName)
-			end, { UseSignalBindingResult })
+			end, { UseSignalBindingResult }),
+			textStyle = UseIdentityNameStyleModule(UseSignalBindingResult)
 		}),
 		Timestamp = ReactModule.createElement(MessageTimestampModule, {
 			LayoutOrder = 2,

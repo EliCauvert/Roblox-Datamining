@@ -11,10 +11,9 @@ local ConstantsModule = require(InExperienceShop.Constants)
 local ComputeRobuxPackageMediaHeightScaleFunction = require(InExperienceShop.Components.computeShopRowTileWidths).computeRobuxPackageMediaHeightScale
 local FFlagEnableInExperienceShopUnifiedLoggingModule = require(InExperienceShop.Flags.FFlagEnableInExperienceShopUnifiedLogging)
 local FFlagEnableCategoryLoggingInShopModule = require(InExperienceShop.Flags.FFlagEnableCategoryLoggingInShop)
-local FFlagPassShopPurchaseSurfaceToBuyModal = require(Parent.SharedFlags).FFlagPassShopPurchaseSurfaceToBuyModal
 local AnalyticsModule = if FFlagEnableInExperienceShopUnifiedLoggingModule then require(InExperienceShop.Analytics) else nil
 local ShopPageType = if AnalyticsModule then AnalyticsModule.Constants.ShopPageType else nil
-local ShopPageType1 = if FFlagPassShopPurchaseSurfaceToBuyModal then require(InExperienceShop.Analytics.Constants).ShopPageType else nil
+local ShopPageType1 = require(InExperienceShop.Analytics.Constants).ShopPageType
 local UseShopImpressionsDetectorModule = require(InExperienceShop.Hooks.useShopImpressionsDetector)
 local _ = require(InExperienceShop.Types)
 
@@ -157,8 +156,8 @@ return ReactModule.memo(function(Frame)
 				})
 			})
 		else
-			local V25 = v1 or HasFeaturedRobuxPackage and LayoutOrder == 1
-			local TileWrapperPropsResult = tileWrapperProps(if p2 == nil or p2.rowWidth <= 0 then nil elseif p2.isFeaturedDoubleWidthRobux(p1, LayoutOrder) and p2.featuredRobuxWidth ~= nil then p2.featuredRobuxWidth else p2.shopWidth, if V25 then 2 else 1)
+			local V24 = v1 or HasFeaturedRobuxPackage and LayoutOrder == 1
+			local TileWrapperPropsResult = tileWrapperProps(if p2 == nil or p2.rowWidth <= 0 then nil elseif p2.isFeaturedDoubleWidthRobux(p1, LayoutOrder) and p2.featuredRobuxWidth ~= nil then p2.featuredRobuxWidth else p2.shopWidth, if V24 then 2 else 1)
 			
 			return ReactModule.createElement(View, {
 				tag = TileWrapperPropsResult.tag,

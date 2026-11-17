@@ -4,10 +4,11 @@ local React = require(Parent.dependencies).React
 local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
 local GetRecommendationContextualInfoDisplayFunction = require(Parent1.SocialCommon).Utils.getRecommendationContextualInfoDisplay
 local FFlagShowClassmatesOnPYMKModule = require(Parent1.SharedFlags.FFlagShowClassmatesOnPYMK)
+local FFlagProfilePlatformSeededPymk = require(Parent1.SharedFlags).FFlagProfilePlatformSeededPymk
 local _ = require(Parent1.UserList)
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), FFlagShowClassmatesOnPYMKModule (copy), React (copy), GetRecommendationContextualInfoDisplayFunction (copy)
+	-- upvalues: UseLocalizationFunction (copy), FFlagShowClassmatesOnPYMKModule (copy), FFlagProfilePlatformSeededPymk (copy), React (copy), GetRecommendationContextualInfoDisplayFunction (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		singularMutualConnection = "Feature.Friends.Label.OneMutual",
 		frequents = "Feature.Friends.Label.Frequent",
@@ -17,7 +18,11 @@ return function(p1)
 			"Feature.Friends.Label.MultipleMutuals",
 			numConnections = p1.recommendation.mutualFriendsCount
 		},
-		classmates = if FFlagShowClassmatesOnPYMKModule then "Feature.Schools.Label.Classmates" else nil
+		classmates = if FFlagShowClassmatesOnPYMKModule then "Feature.Schools.Label.Classmates" else nil,
+		friendOfSeed = if FFlagProfilePlatformSeededPymk and p1.seedUserDisplayName then {
+			"Feature.Friends.Label.FriendOfUser",
+			displayName = p1.seedUserDisplayName
+		} else nil
 	})
 	
 	return React.useMemo(function()

@@ -43,7 +43,6 @@ local UseNavigationFocusFunction = NavigationModule.useNavigationFocus
 local UseNavigationFunction = NavigationModule.useNavigation
 local UseSignalStateFunction = SignalsReactModule.useSignalState
 local FFlagEnableArgus = SharedFlagsModule.FFlagEnableArgus
-local FFlagMomentsCreationFeatureGate = SharedFlagsModule.FFlagMomentsCreationFeatureGate
 local FFlagMomentsOptimisticProfilePending = SharedFlagsModule.FFlagMomentsOptimisticProfilePending
 local FFlagMomentsAvatarLookTryOn = SharedFlagsModule.FFlagMomentsAvatarLookTryOn
 local Analytics = MomentsCommonModule.Analytics
@@ -64,7 +63,7 @@ local function PushedFeedSafeAreaProvider(p1)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: ReactModule (copy), CreateMomentsStoreModule (copy), FFlagEnableArgus (copy), CreateSignalTrackerFunction (copy), FFlagMomentsOptimisticProfilePending (copy), UseCreationEntryModule (copy), UseUploadHostModule (copy), LogCreateIntentModule (copy), FunnelEventNames (copy), FFlagMomentsCreationFeatureGate (copy), UseMomentsGatingFunction (copy), ImmersiveFeedKind (copy), GetDeepLinkStoreModule (copy), CreateUserMomentsFeedSourceModule (copy), IsStudioModule (copy), GetFFlagArgusStudioMockFeedModule (copy), CreateMockFeedSourceFunction (copy), CreateMomentsFeedSourceModule (copy), CreateRecommendationTelemetryFunction (copy), MomentsFeedTypeModule (copy), LogMomentsLayerExposureFunction (copy), FStringMomentsExperienceJoinActionTextIxpLayerModule (copy), Moments (copy), FireAnalyticsEventFunction (copy), EventNames (copy), Analytics (copy), UseNavigationFocusFunction (copy), UseSignalStateFunction (copy), FeedPlaybackSuspension (copy), GetMomentsPreferencesStoreModule (copy), ReportModalCovering (copy), FFlagMomentsPersonalizedRecommendationsEntryPointModule (copy), AccountSettingsCoveringModule (copy), FFlagMomentsCreateAvatarPosts (copy), FFlagMomentsNavigationEventModule (copy), NavigationDestinationTypeModule (copy), FFlagMomentsFlushDwellBeforeNavigationModule (copy), UseNavigationFunction (copy), RoactNavigationModule (copy), MomentsImmersiveNavigationMenu (copy), MomentsBackHeaderModule (copy), MomentsFeedSurfaceModule (copy), PushedFeedSafeAreaProvider (copy), View (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), ConstantsModule (copy), CreationFlowScreen (copy), FTUXEducationScreenModule (copy), MomentsHostShellModule (copy), FFlagMomentsAvatarLookTryOn (copy)
+	-- upvalues: ReactModule (copy), CreateMomentsStoreModule (copy), FFlagEnableArgus (copy), CreateSignalTrackerFunction (copy), FFlagMomentsOptimisticProfilePending (copy), UseCreationEntryModule (copy), UseUploadHostModule (copy), LogCreateIntentModule (copy), FunnelEventNames (copy), UseMomentsGatingFunction (copy), ImmersiveFeedKind (copy), GetDeepLinkStoreModule (copy), CreateUserMomentsFeedSourceModule (copy), IsStudioModule (copy), GetFFlagArgusStudioMockFeedModule (copy), CreateMockFeedSourceFunction (copy), CreateMomentsFeedSourceModule (copy), CreateRecommendationTelemetryFunction (copy), MomentsFeedTypeModule (copy), LogMomentsLayerExposureFunction (copy), FStringMomentsExperienceJoinActionTextIxpLayerModule (copy), Moments (copy), FireAnalyticsEventFunction (copy), EventNames (copy), Analytics (copy), UseNavigationFocusFunction (copy), UseSignalStateFunction (copy), FeedPlaybackSuspension (copy), GetMomentsPreferencesStoreModule (copy), ReportModalCovering (copy), FFlagMomentsPersonalizedRecommendationsEntryPointModule (copy), AccountSettingsCoveringModule (copy), FFlagMomentsCreateAvatarPosts (copy), FFlagMomentsNavigationEventModule (copy), NavigationDestinationTypeModule (copy), FFlagMomentsFlushDwellBeforeNavigationModule (copy), UseNavigationFunction (copy), RoactNavigationModule (copy), MomentsImmersiveNavigationMenu (copy), MomentsBackHeaderModule (copy), MomentsFeedSurfaceModule (copy), PushedFeedSafeAreaProvider (copy), View (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), ConstantsModule (copy), CreationFlowScreen (copy), FTUXEducationScreenModule (copy), MomentsHostShellModule (copy), FFlagMomentsAvatarLookTryOn (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	
@@ -95,10 +94,10 @@ return ReactModule.memo(function(p1)
 			OnCreatePressed()
 		end
 	end, { OnCreatePressed })
-	local IsCreationEnabled = if FFlagMomentsCreationFeatureGate then UseMomentsGatingFunction().isCreationEnabled else nil
-	local NoFFlagMomentsCreationFeatureGate = FeedKind == ImmersiveFeedKind.Trending and (not FFlagMomentsCreationFeatureGate or IsCreationEnabled)
-	local IsCreating = NoFFlagMomentsCreationFeatureGate and (UseCreationEntryModuleResult ~= nil and UseCreationEntryModuleResult.isCreating)
-	local ShowFtux = NoFFlagMomentsCreationFeatureGate and (UseCreationEntryModuleResult ~= nil and UseCreationEntryModuleResult.showFtux)
+	local IsCreationEnabled = UseMomentsGatingFunction().isCreationEnabled
+	local IsCreationEnabled1 = FeedKind == ImmersiveFeedKind.Trending and IsCreationEnabled
+	local IsCreating = IsCreationEnabled1 and (UseCreationEntryModuleResult ~= nil and UseCreationEntryModuleResult.isCreating)
+	local ShowFtux = IsCreationEnabled1 and (UseCreationEntryModuleResult ~= nil and UseCreationEntryModuleResult.showFtux)
 	local DeepLinkedMomentId = p1.deepLinkedMomentId
 	local DeepLinkedMomentTargetIdType = p1.deepLinkedMomentTargetIdType
 	local UseRefResult3 = ReactModule.useRef(nil)
@@ -248,16 +247,16 @@ return ReactModule.memo(function(p1)
 		playbackActive = NoUseSignalStateResult3,
 		initialIndex = InitialIndex,
 		header = ReactModule.useMemo(function()
-			-- upvalues: ReactModule (upval), MomentsBackHeaderModule (upval), UseResult5 (copy), NoFFlagMomentsCreationFeatureGate (copy), UseResult (copy), FFlagMomentsCreateAvatarPosts (upval), UseResult3 (copy), IsFeedKindMatch (copy), UseResult6 (copy), UseResult7 (copy)
+			-- upvalues: ReactModule (upval), MomentsBackHeaderModule (upval), UseResult5 (copy), IsCreationEnabled1 (copy), UseResult (copy), FFlagMomentsCreateAvatarPosts (upval), UseResult3 (copy), IsFeedKindMatch (copy), UseResult6 (copy), UseResult7 (copy)
 			return ReactModule.createElement(MomentsBackHeaderModule, {
 				onBack = UseResult5,
-				onCreatePressed = if NoFFlagMomentsCreationFeatureGate then UseResult else nil,
+				onCreatePressed = if IsCreationEnabled1 then UseResult else nil,
 				onCreateAvatarMomentPressed = if FFlagMomentsCreateAvatarPosts then UseResult3 else nil,
 				onNavigateToTrending = if IsFeedKindMatch then UseResult6 else nil,
 				onNavigateToMyMoments = if IsFeedKindMatch then UseResult7 else nil
 			})
 		end, {
-			UseResult5, NoFFlagMomentsCreationFeatureGate, UseResult,
+			UseResult5, IsCreationEnabled1, UseResult,
 			if FFlagMomentsCreateAvatarPosts then UseResult3 else nil, IsFeedKindMatch,
 			UseResult6, UseResult7
 		}),
@@ -272,7 +271,7 @@ return ReactModule.memo(function(p1)
 		openAvatarLookTryOn = if FFlagMomentsAvatarLookTryOn then p1.openAvatarLookTryOn else nil,
 		openMomentCommentReport = p1.openMomentCommentReport,
 		openBlockUser = p1.openBlockUser
-	}, if NoFFlagMomentsCreationFeatureGate then ReactModule.createElement(View, {
+	}, if IsCreationEnabled1 then ReactModule.createElement(View, {
 		backgroundStyle = if FFlagMomentsRenderAvatarPostsInFeed then { Transparency = 1 } else nil,
 		tag = {
 			["size-full"] = FFlagMomentsRenderAvatarPostsInFeed,

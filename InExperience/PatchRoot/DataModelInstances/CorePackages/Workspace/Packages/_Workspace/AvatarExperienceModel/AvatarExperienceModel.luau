@@ -1,4 +1,5 @@
-﻿local _ = require(script.Types.CommonTypes)
+﻿local _ = require(script.Types.AnalyticsMetadataType)
+local _ = require(script.Types.CommonTypes)
 local _ = require(script.Types.DiscountType)
 local _ = require(script.Types.TimedOptionType)
 local _ = require(script.Types.IncludedItem)

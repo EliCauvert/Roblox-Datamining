@@ -26,7 +26,6 @@ local FFlagMomentsCreateAvatarPosts = require(Parent.SharedFlags).FFlagMomentsCr
 local FFlagMomentsFtuxTooltipCreateCopyModule = require(Moments.Flags.FFlagMomentsFtuxTooltipCreateCopy)
 local FFlagMomentsFixFeedForDeviceSafeInsetsModule = require(Moments.Flags.FFlagMomentsFixFeedForDeviceSafeInsets)
 local ShouldUseDeviceSafeInsets = require(Parent.Display).shouldUseDeviceSafeInsets
-local FFlagMomentsCreationFeatureGate = require(Parent.SharedFlags).FFlagMomentsCreationFeatureGate
 
 local function renderFeedTypeChips(FeedTypeChips)
 	-- upvalues: ReactModule (copy), Chip (copy), ChipSize (copy), ChipVariant (copy), View (copy)
@@ -78,7 +77,7 @@ local function renderCreateAction(p1, LayoutOrder)
 end
 
 return function(p1)
-	-- upvalues: renderAction (copy), ChevronLargeLeft (copy), FFlagMomentsCreateAvatarPosts (copy), renderCreateAction (copy), PlusLarge (copy), ReactModule (copy), IconButton (copy), ButtonVariant (copy), InputSize (copy), NavigationMenuModule (copy), View (copy), renderFeedTypeChips (copy), FlyoutSidePanelIXP (copy), FlyoutLeftHeader (copy), Text (copy), FFlagMomentsCreationFeatureGate (copy), FoundationModule (copy), FFlagMomentsFtuxTooltipCreateCopyModule (copy), Coachmark (copy), CirclePerson (copy), HeaderBar (copy), GradientBackdrop (copy), FFlagMomentsFixFeedForDeviceSafeInsetsModule (copy), ShouldUseDeviceSafeInsets (copy), ConstantsModule (copy)
+	-- upvalues: renderAction (copy), ChevronLargeLeft (copy), FFlagMomentsCreateAvatarPosts (copy), renderCreateAction (copy), PlusLarge (copy), ReactModule (copy), IconButton (copy), ButtonVariant (copy), InputSize (copy), NavigationMenuModule (copy), View (copy), renderFeedTypeChips (copy), FlyoutSidePanelIXP (copy), FlyoutLeftHeader (copy), Text (copy), FoundationModule (copy), FFlagMomentsFtuxTooltipCreateCopyModule (copy), Coachmark (copy), CirclePerson (copy), HeaderBar (copy), GradientBackdrop (copy), FFlagMomentsFixFeedForDeviceSafeInsetsModule (copy), ShouldUseDeviceSafeInsets (copy), ConstantsModule (copy)
 	local RenderLeft: (() -> any)? = nil
 	local RenderRight: (() -> any)? = nil
 	local FeedTypeChips = nil
@@ -157,7 +156,7 @@ return function(p1)
 		if p1.showInteractiveButtons then
 			local Element = nil
 			
-			if p1.showCreateButton or not FFlagMomentsCreationFeatureGate then
+			if p1.showCreateButton then
 				local RenderCreateActionResult = if FFlagMomentsCreateAvatarPosts then renderCreateAction(p1, 1) else ReactModule.createElement(IconButton, {
 					LayoutOrder = 1,
 					isCircular = true,

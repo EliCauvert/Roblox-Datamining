@@ -105,5 +105,9 @@ return {
 	reportMomentsPostInsightsRequestLatency = function(Query, Status, StatValue, p1)
 		-- upvalues: RealtimeTelemetryActionListModule (copy), RealtimeEventNamesModule (copy), RealtimeTelemetryEmitterModule (copy)
 		(p1 or RealtimeTelemetryEmitterModule.emit)(RealtimeTelemetryActionListModule[RealtimeEventNamesModule.MomentsPostInsightsRequestLatency], { query = Query, status = Status, statValue = StatValue })
+	end,
+	reportMomentsTimeLimitShown = function(State, p1)
+		-- upvalues: RealtimeTelemetryActionListModule (copy), RealtimeEventNamesModule (copy), RealtimeTelemetryEmitterModule (copy)
+		(p1 or RealtimeTelemetryEmitterModule.emit)(RealtimeTelemetryActionListModule[RealtimeEventNamesModule.MomentsTimeLimitShown], { state = State })
 	end
 }

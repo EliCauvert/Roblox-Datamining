@@ -5,9 +5,10 @@ local _ = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local CreateNextOrderFunction = require(Parent.ReactUtils).createNextOrder
 local _ = require(script.Parent.Parent.Types)
+local UseIdentityNameStyleModule = require(script.Parent.useIdentityNameStyle)
 
 return function(Frame)
-	-- upvalues: CreateNextOrderFunction (copy), SignalsReactModule (copy), ReactModule (copy), FoundationModule (copy)
+	-- upvalues: CreateNextOrderFunction (copy), SignalsReactModule (copy), UseIdentityNameStyleModule (copy), ReactModule (copy), FoundationModule (copy)
 	local NextOrder = CreateNextOrderFunction()
 	local UseSignalBindingResult = SignalsReactModule.useSignalBinding(Frame.getIdentity)
 	
@@ -27,6 +28,7 @@ return function(Frame)
 			Text = UseSignalBindingResult:map(function(p1): string
 				return if p1 then `{p1.displayName}:` else ""
 			end),
+			textStyle = UseIdentityNameStyleModule(UseSignalBindingResult),
 			LayoutOrder = NextOrder()
 		})
 	})

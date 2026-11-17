@@ -3,10 +3,12 @@ local ReactModule = require(Parent.React)
 local _ = require(Parent.Signals)
 local ConversationRowViewModule = require(script.Parent.ConversationRowView)
 local UseConversationRowBindingPresentationModule = require(script.Parent.useConversationRowBindingPresentation)
+local UseMarkedRowRefModule = require(script.Parent.useMarkedRowRef)
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseConversationRowBindingPresentationModule (copy), ReactModule (copy), ConversationRowViewModule (copy)
+	-- upvalues: UseConversationRowBindingPresentationModule (copy), UseMarkedRowRefModule (copy), ReactModule (copy), ConversationRowViewModule (copy)
 	local UseConversationRowBindingPresentationModuleResult = UseConversationRowBindingPresentationModule({ itemSignal = p1.itemSignal })
+	local UseMarkedRowRefModuleResult = UseMarkedRowRefModule(p1.itemSignal, UseConversationRowBindingPresentationModuleResult.rowRef)
 	
 	return if UseConversationRowBindingPresentationModuleResult.hasConversation then ReactModule.createElement(ConversationRowViewModule, {
 		itemSignal = p1.itemSignal,
@@ -23,7 +25,7 @@ return ReactModule.memo(function(p1)
 		showSquadButton = UseConversationRowBindingPresentationModuleResult.showSquadButton,
 		showTimestamp = UseConversationRowBindingPresentationModuleResult.showTimestamp,
 		squadLocation = UseConversationRowBindingPresentationModuleResult.squadLocation,
-		rowRef = UseConversationRowBindingPresentationModuleResult.rowRef,
+		rowRef = UseMarkedRowRefModuleResult or UseConversationRowBindingPresentationModuleResult.rowRef,
 		onRowActivated = UseConversationRowBindingPresentationModuleResult.onRowActivated,
 		onSquadActivated = UseConversationRowBindingPresentationModuleResult.onSquadActivated,
 		showBackground = UseConversationRowBindingPresentationModuleResult.showBackground,

@@ -2,17 +2,22 @@
 local Parent = AppChat.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
+local _ = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local SocialCarouselModule = require(Parent.SocialCarousel)
 local ViewRecyclerModule = require(Parent.ViewRecycler)
 local ChatLandingModalContainerModule = require(script.Parent.ChatLandingModal.ChatLandingModalContainer)
 local ConversationGroupsEntryContainerModule = require(script.Parent.ConversationGroupsEntryContainer)
 local ConversationListItemKindModule = require(script.Parent.ConversationListItemKind)
+local _ = require(script.Parent.ConversationListTrailingItems)
 local ConversationRowModule = require(script.Parent.ConversationRow.ConversationRow)
 local ConversationRowBindingHostModule = require(script.Parent.ConversationRow.ConversationRowBindingHost)
+local UseMarkedRowRefModule = require(script.Parent.ConversationRow.useMarkedRowRef)
 local PartyQuickStartContainerModule = require(script.Parent.PartyQuickStartContainer)
+local UseChatPagePaddingModule = require(AppChat.Contexts.ChatPagePadding.useChatPagePadding)
 local FFlagAppChatUseBindingViewRecyclerConversationRowModule = require(AppChat.Flags.FFlagAppChatUseBindingViewRecyclerConversationRow)
 local Constants = SocialCarouselModule.Constants
+local Text = FoundationModule.Text
 local View = FoundationModule.View
 local config = {
 	readiness = ViewRecyclerModule.RecyclableViewReadiness.ReadyOnCommit
@@ -27,11 +32,12 @@ local function _(p1)
 end
 
 local RecyclableView = ViewRecyclerModule.createRecyclableView(function(p1)
-	-- upvalues: SignalsReactModule (copy), ReactModule (copy), ConversationRowModule (copy)
+	-- upvalues: SignalsReactModule (copy), UseMarkedRowRefModule (copy), ReactModule (copy), ConversationRowModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.itemSignal)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(UseSignalStateResult.presentationSignal)
 	
 	return ReactModule.createElement(ConversationRowModule, {
+		ref = UseMarkedRowRefModule(p1.itemSignal),
 		conversationId = UseSignalStateResult.id,
 		entryHeight = UseSignalStateResult1.entryHeight,
 		isSquadEnabled = UseSignalStateResult1.isSquadEnabled,
@@ -63,6 +69,29 @@ local RecyclableView2 = ViewRecyclerModule.createRecyclableView(function(p1)
 		end)
 	})
 end)
+local RecyclableView3 = ViewRecyclerModule.createRecyclableView(function(p1)
+	-- upvalues: SignalsReactModule (copy), ConversationListItemKindModule (copy), UseChatPagePaddingModule (copy), ReactModule (copy), View (copy), Text (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.itemSignal)
+	local IsKindMatch = UseSignalStateResult.kind == ConversationListItemKindModule.SectionHeader
+	local UseChatPagePaddingModuleResult = UseChatPagePaddingModule()
+	
+	return ReactModule.createElement(View, {
+		tag = "size-full-0 auto-y padding-y-small",
+		padding = {
+			left = UDim.new(0, UseChatPagePaddingModuleResult.left),
+			right = UDim.new(0, UseChatPagePaddingModuleResult.right)
+		}
+	}, {
+		Text = ReactModule.createElement(Text, {
+			tag = {
+				["size-full-0 auto-y text-wrap text-align-x-left"] = true,
+				["text-title-medium content-emphasis"] = IsKindMatch,
+				["text-body-small content-default"] = not IsKindMatch
+			},
+			Text = UseSignalStateResult.text
+		})
+	})
+end, config)
 local Frozen = table.freeze({
 	[ConversationListItemKindModule.CanvasBottomPadding] = RecyclableView2,
 	[ConversationListItemKindModule.CanvasTopPadding] = RecyclableView2,
@@ -89,6 +118,7 @@ local Frozen = table.freeze({
 			entryHeight = SignalsReactModule.useSignalState(p1.itemSignal).entryHeight
 		})
 	end, config),
+	[ConversationListItemKindModule.SectionHeader] = RecyclableView3,
 	[ConversationListItemKindModule.SocialCarousel] = ViewRecyclerModule.createRecyclableView(function(p1)
 		-- upvalues: SignalsReactModule (copy), ReactModule (copy), SocialCarouselModule (copy), Constants (copy)
 		local UseSignalStateResult = SignalsReactModule.useSignalState(p1.itemSignal)
@@ -99,6 +129,23 @@ local Frozen = table.freeze({
 			customTileList = UseSignalStateResult.customTileList,
 			source = if UseSignalStateResult.isInExperience then Constants.ANALYTICS.SRC.PARTY_PAGE_IN_EXP else Constants.ANALYTICS.SRC.PARTY_PAGE_UA,
 			unifiedLogging = UseSignalStateResult.unifiedLogging
+		})
+	end, config),
+	[ConversationListItemKindModule.StatusText] = RecyclableView3,
+	[ConversationListItemKindModule.SuggestedUser] = ViewRecyclerModule.createRecyclableView(function(p1)
+		-- upvalues: SignalsReactModule (copy), UseChatPagePaddingModule (copy), ReactModule (copy), View (copy)
+		local UseSignalStateResult = SignalsReactModule.useSignalState(p1.itemSignal)
+		local RenderSuggestedUserFunction = SignalsReactModule.useSignalState(UseSignalStateResult.presentationSignal).renderSuggestedUser
+		local UseChatPagePaddingModuleResult = UseChatPagePaddingModule()
+		
+		return ReactModule.createElement(View, {
+			tag = "size-full-0 auto-y",
+			padding = {
+				left = UDim.new(0, UseChatPagePaddingModuleResult.left),
+				right = UDim.new(0, UseChatPagePaddingModuleResult.right)
+			}
+		}, {
+			[UseSignalStateResult.id] = if RenderSuggestedUserFunction == nil then nil else RenderSuggestedUserFunction(UseSignalStateResult.suggestedUser)
 		})
 	end, config)
 })
@@ -143,7 +190,7 @@ return table.freeze({
 	getItemType = function(p1)
 		-- upvalues: Frozen (copy)
 		local FrozenEntry = Frozen[p1.kind]
-		assert(FrozenEntry ~= nil, `ConversationListViewRecycler: unknown item kind "{tostring(p11.kind)}"`)
+		assert(FrozenEntry ~= nil, `ConversationListViewRecycler: unknown item kind "{tostring(p13.kind)}"`)
 		
 		return FrozenEntry
 	end,
@@ -171,6 +218,15 @@ return table.freeze({
 			customTileList = CustomTileList,
 			isInExperience = IsInExperience,
 			unifiedLogging = UnifiedLogging
+		}
+	end,
+	suggestedUser = function(SuggestedUser, PresentationSignal)
+		-- upvalues: ConversationListItemKindModule (copy)
+		return {
+			id = SuggestedUser.id,
+			kind = ConversationListItemKindModule.SuggestedUser,
+			suggestedUser = SuggestedUser,
+			presentationSignal = PresentationSignal
 		}
 	end
 })

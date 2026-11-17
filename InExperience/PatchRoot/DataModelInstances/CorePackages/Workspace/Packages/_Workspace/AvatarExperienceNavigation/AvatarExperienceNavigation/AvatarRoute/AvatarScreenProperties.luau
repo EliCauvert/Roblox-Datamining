@@ -4,6 +4,7 @@ local AvatarScreenModule = require(AvatarExperienceNavigation.Enums.AvatarScreen
 local UnifiedLoggingSurfaceModule = require(AvatarExperienceNavigation.Enums.UnifiedLoggingSurface)
 local CryoModule = require(Parent.Cryo)
 local _ = require(Parent.Dash)
+local _ = require(Parent.UnifiedEventEnums)
 local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local FFlagAXEditorSubcategoryFilters = AvatarExperienceFlagsModule.FFlagAXEditorSubcategoryFilters
 local FFlagAXEnableExpiredUserLookCheckout = AvatarExperienceFlagsModule.FFlagAXEnableExpiredUserLookCheckout

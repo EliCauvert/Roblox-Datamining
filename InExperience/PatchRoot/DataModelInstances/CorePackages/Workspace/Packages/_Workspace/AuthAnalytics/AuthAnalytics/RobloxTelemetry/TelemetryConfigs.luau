@@ -9,6 +9,7 @@ local IosAuthServiceHealthCounterThrottlingHundredthsPercent = game:DefineFastIn
 local KeystoreTelemetryThrottlingHundredthsPercent = game:DefineFastInt("KeystoreTelemetryThrottlingHundredthsPercent", 0)
 local TimeToLoginThrottlingHundredthsPercent = game:DefineFastInt("TimeToLoginThrottlingHundredthsPercent", 0)
 local AccountUpgradeTelemetryThrottlingHundredthsPercent = game:DefineFastInt("AccountUpgradeTelemetryThrottlingHundredthsPercent", 0)
+local AuthEntryIxpTelemetryThrottlingHundredthsPercent = game:DefineFastInt("AuthEntryIxpTelemetryThrottlingHundredthsPercent", 0)
 local List = if game:DefineFastFlag("FixIosAuthServiceCredentialSheetBackends", false) then { LoggingProtocolModule.TelemetryBackends.Counter } else {
 	LoggingProtocolModule.TelemetryBackends.Counter,
 	LoggingProtocolModule.TelemetryBackends.EventIngest
@@ -527,5 +528,29 @@ return {
 		backends = { LoggingProtocolModule.TelemetryBackends.Counter },
 		throttlingPercentage = AccountUpgradeTelemetryThrottlingHundredthsPercent,
 		lastUpdated = { 26, 10, 16 }
+	},
+	AccountUpgradeAgreementIdsMissingConfig = {
+		eventName = "luaAccountUpgradeAgreementIdsMissing",
+		description = "Report each Save on the OAuth account upgrade form that sends no agreement IDs while the form shows the agreement text. A Save after a failed upgrade reports again.",
+		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
+		backends = { LoggingProtocolModule.TelemetryBackends.Counter },
+		throttlingPercentage = AccountUpgradeTelemetryThrottlingHundredthsPercent,
+		lastUpdated = { 26, 11, 12 }
+	},
+	AuthEntryIxpStatusConfig = {
+		eventName = "luaAuthEntryIxpStatus",
+		description = "Report the browser-tracker IXP loading status at the moment a pre-login auth surface (landing, login) is navigated to. A status other than Initialized means that surface mounted before its experiments were known and rendered the default.",
+		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
+		backends = { LoggingProtocolModule.TelemetryBackends.Counter },
+		throttlingPercentage = AuthEntryIxpTelemetryThrottlingHundredthsPercent,
+		lastUpdated = { 26, 11, 5 }
+	},
+	AuthEntryIxpWaitStatConfig = {
+		eventName = "luaAuthEntryIxpWait",
+		description = "Time in milliseconds for browser-tracker IXP layers to settle at a pre-login auth surface, tagged with the outcome (alreadyInitialized, initialized, error, timeout, or waitFailed when the wait itself failed) and mode. mode=held: how long navigation was held by the wait beyond the concurrent locale fetch. mode=heldElapsed: the wait's total time, including the part that overlapped the locale fetch; reported alongside every mode=held sample. mode=unheld: the wait is off, and this is the delay the wait would have added, measured from navigation over a longer window than the wait's cap.",
+		links = "https://roblox.atlassian.net/wiki/spaces/AUTH/pages/3475702046/Lua+Client-Side+Telemetry+Planning",
+		backends = { LoggingProtocolModule.TelemetryBackends.Stats },
+		throttlingPercentage = AuthEntryIxpTelemetryThrottlingHundredthsPercent,
+		lastUpdated = { 26, 11, 12 }
 	}
 }

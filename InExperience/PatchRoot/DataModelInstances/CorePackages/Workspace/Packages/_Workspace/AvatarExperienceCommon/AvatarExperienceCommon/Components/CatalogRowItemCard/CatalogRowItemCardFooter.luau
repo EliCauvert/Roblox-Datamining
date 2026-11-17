@@ -18,11 +18,12 @@ local FFlagAXMISWithOffers = AvatarExperienceFlagsModule.FFlagAXMISWithOffers
 local FFlagAXDurables2Option = AvatarExperienceFlagsModule.FFlagAXDurables2Option
 local FFlagAXGifting = AvatarExperienceFlagsModule.FFlagAXGifting
 local FFlagAXMISOffersChip = AvatarExperienceFlagsModule.FFlagAXMISOffersChip
+local FFlagAXIaBPlusExclusiveUpsell = AvatarExperienceFlagsModule.FFlagAXIaBPlusExclusiveUpsell
 local Icon = FoundationModule.Icon
 local IconSize = FoundationModule.Enums.IconSize
 
 return function(Frame: Frame)
-	-- upvalues: UseTokensFunction (copy), FFlagAXDurablesForMIS (copy), FFlagAXEnableTimedOptionsForCatalogRowCard (copy), ReactModule (copy), CryoModule (copy), FFlagAXMISWithOffers (copy), IconSize (copy), FoundationModule (copy), ItemCardPriceLine (copy), FFlagAXMISSmallUIChanges (copy), FFlagAXGifting (copy), FFlagAXDurables2Option (copy), ItemCardTitle (copy), Text (copy), Icon (copy), VerifiedBadgesModule (copy), FFlagAXMISOffersChip (copy)
+	-- upvalues: UseTokensFunction (copy), FFlagAXDurablesForMIS (copy), FFlagAXEnableTimedOptionsForCatalogRowCard (copy), ReactModule (copy), CryoModule (copy), FFlagAXMISWithOffers (copy), IconSize (copy), FoundationModule (copy), ItemCardPriceLine (copy), FFlagAXMISSmallUIChanges (copy), FFlagAXIaBPlusExclusiveUpsell (copy), FFlagAXGifting (copy), FFlagAXDurables2Option (copy), ItemCardTitle (copy), Text (copy), Icon (copy), VerifiedBadgesModule (copy), FFlagAXMISOffersChip (copy)
 	local UseTokensResult = UseTokensFunction()
 	local Price = nil
 	local SetSelectedTimedOptionPriceFunction = nil
@@ -86,6 +87,7 @@ return function(Frame: Frame)
 		if FFlagAXDurablesForMIS or FFlagAXEnableTimedOptionsForCatalogRowCard then UseTokensResult else nil
 	})
 	local v1 = if FFlagAXDurablesForMIS or FFlagAXEnableTimedOptionsForCatalogRowCard then Frame.priceLineContent and #Frame.priceLineContent > 0 or Frame.timedOptions else nil
+	local ActionButton = if FFlagAXIaBPlusExclusiveUpsell then Frame.actionButton else nil
 	
 	return ReactModule.createElement(FoundationModule.View, {
 		tag = "fill self-stretch",
@@ -93,7 +95,9 @@ return function(Frame: Frame)
 		AutomaticSize = Frame.AutomaticSize,
 		LayoutOrder = Frame.LayoutOrder
 	}, {
-		TopSection = if if FFlagAXGifting then Frame.onRemove or Frame.giftButton else FFlagAXDurables2Option and Frame.onRemove then ReactModule.createElement(FoundationModule.View, { tag = "row size-full-0 auto-y" }, {
+		TopSection = if (if FFlagAXGifting then Frame.onRemove or Frame.giftButton else FFlagAXDurables2Option and Frame.onRemove) or ActionButton then ReactModule.createElement(FoundationModule.View, {
+			tag = if ActionButton then "row size-full-0 auto-y gap-small" else "row size-full-0 auto-y"
+		}, {
 			Left = ReactModule.createElement(FoundationModule.View, {
 				tag = "col align-x-left fill gap-xsmall size-full-0 auto-y",
 				LayoutOrder = 1
@@ -147,6 +151,11 @@ return function(Frame: Frame)
 					})
 				}) else nil
 			}),
+			ActionButton = if ActionButton then ReactModule.createElement(FoundationModule.View, {
+				tag = "auto-xy",
+				LayoutOrder = 3,
+				testId = "catalogRowItemCardActionButton"
+			}, ActionButton) else nil,
 			Right = if Frame.onRemove or FFlagAXGifting and Frame.giftButton then ReactModule.createElement(FoundationModule.View, {
 				LayoutOrder = 2,
 				tag = if FFlagAXGifting then {
@@ -252,7 +261,7 @@ return function(Frame: Frame)
 				})
 			}) else nil
 		}),
-		BottomPrice = if FFlagAXDurablesForMIS or FFlagAXEnableTimedOptionsForCatalogRowCard or not Frame.priceLineContent or #Frame.priceLineContent <= 0 then nil else ReactModule.createElement(FoundationModule.View, {
+		BottomPrice = if FFlagAXDurablesForMIS or (FFlagAXEnableTimedOptionsForCatalogRowCard or not Frame.priceLineContent or #Frame.priceLineContent <= 0) then nil else ReactModule.createElement(FoundationModule.View, {
 			tag = "auto-xy row gap-xsmall position-bottom-left anchor-bottom-left"
 		}, UseMemoResult),
 		BottomContent = if (FFlagAXDurablesForMIS or FFlagAXEnableTimedOptionsForCatalogRowCard) and v1 then ReactModule.createElement(FoundationModule.View, {

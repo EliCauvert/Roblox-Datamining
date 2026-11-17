@@ -30,6 +30,7 @@ local FFlagLuaAppPlayButtonLoadingDurationTelemetry = require(Parent.SharedFlags
 local FFlagLuaAppPlayButtonPrivatePTEnableSingleButton = require(Parent.SharedFlags).FFlagLuaAppPlayButtonPrivatePTEnableSingleButton
 local FFlagLuaAppPlayButtonPrivatePTEnableDualButton = require(Parent.SharedFlags).FFlagLuaAppPlayButtonPrivatePTEnableDualButton
 local LuaAppPlaytestSingleBlocksPlayable = game:DefineFastFlag("LuaAppPlaytestSingleBlocksPlayable", false)
+local FFlagLuaAppEnableFlexibleFeatureTileVariants = require(Parent.SharedFlags).FFlagLuaAppEnableFlexibleFeatureTileVariants
 
 local function selectPlayButtonState(FetchingStatus, Current, p1, p2, p3, GameDetail, p4, p5)
 	-- upvalues: RetrievalStatus (copy), FFlagLuaAppPlayButtonPrivatePTEnableSingleButton (copy), PlaytestUnlockUpsellModule (copy), LuaAppPlaytestSingleBlocksPlayable (copy), PlayButtonStatesModule (copy), PlayabilityStatusEnum (copy), FFlagLuaAppPlayButtonAmpAgeCheckFlow (copy), FFlagLuaAppParentUpsellPolicy (copy), FFlagLuaAppParentApprovedExperiences (copy), FFlagEnableGameJoinEarlyAccess (copy), GetFFlagIsSquadEnabledFunction (copy)
@@ -89,10 +90,11 @@ local function selectSecondaryPlayButtonState(UnplayableOther, Current)
 end
 
 return function(p1, Current, Delay, p2, p3, Current1, p4)
-	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), FetchGamePlayButtonDataModule (copy), FFlagLuaAppParentUpsellPolicy (copy), UseAppPolicyFunction (copy), FFlagLuaAppSupportDisablePlayableWhenLoading (copy), FFlagLuaAppDisablePlayableWhenLoadingForce (copy), GetFFlagIsSquadEnabledFunction (copy), UseCurrentSquadSelectorFunction (copy), UseIsExperienceInvitePendingModule (copy), UseSelectorFunction (copy), FFlagEnableGameJoinEarlyAccess (copy), GamePlayButton (copy), FFlagLuaAppEnablePlayableStateWhenLoading (copy), PlayButtonStatesModule (copy), ApiPostPreparePurchaseModule (copy), RetrievalStatus (copy), FetchGamePlayabilityAndProductInfo (copy), GamesProductInfoReducer (copy), selectPlayButtonState (copy), FFlagLuaAppPlayButtonLoadingDurationTelemetry (copy), UseRouteNameFunction (copy), SendPlayButtonLoadingDurationFunction (copy), selectSecondaryPlayButtonState (copy)
+	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), FFlagLuaAppEnableFlexibleFeatureTileVariants (copy), FetchGamePlayButtonDataModule (copy), FFlagLuaAppParentUpsellPolicy (copy), UseAppPolicyFunction (copy), FFlagLuaAppSupportDisablePlayableWhenLoading (copy), FFlagLuaAppDisablePlayableWhenLoadingForce (copy), GetFFlagIsSquadEnabledFunction (copy), UseCurrentSquadSelectorFunction (copy), UseIsExperienceInvitePendingModule (copy), UseSelectorFunction (copy), FFlagEnableGameJoinEarlyAccess (copy), GamePlayButton (copy), FFlagLuaAppEnablePlayableStateWhenLoading (copy), PlayButtonStatesModule (copy), ApiPostPreparePurchaseModule (copy), RetrievalStatus (copy), FetchGamePlayabilityAndProductInfo (copy), GamesProductInfoReducer (copy), selectPlayButtonState (copy), FFlagLuaAppPlayButtonLoadingDurationTelemetry (copy), UseRouteNameFunction (copy), SendPlayButtonLoadingDurationFunction (copy), selectSecondaryPlayButtonState (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	ReactModule.useEffect(function()
-		-- upvalues: Delay (copy), UseDispatchResult (copy), FetchGamePlayButtonDataModule (upval), p1 (copy), Current (copy)
+		-- upvalues: FFlagLuaAppEnableFlexibleFeatureTileVariants (upval), Current (copy), Delay (copy), UseDispatchResult (copy), FetchGamePlayButtonDataModule (upval), p1 (copy)
+		if FFlagLuaAppEnableFlexibleFeatureTileVariants and Current == "" then return end
 		local DelayedThread = nil
 		
 		if Delay == nil or Delay <= 0 then

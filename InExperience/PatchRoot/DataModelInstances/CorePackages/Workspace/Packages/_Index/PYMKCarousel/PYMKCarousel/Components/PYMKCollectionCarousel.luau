@@ -40,6 +40,7 @@ local FFlagLuaAppPYMKSendUserSeenCollection = require(Parent.SharedFlags).FFlagL
 local FFlagLuaAppUserSeenCollectionUnifiedFields = require(Parent.SharedFlags).FFlagLuaAppUserSeenCollectionUnifiedFields
 local FFlagLuaAppEnableSduiHomePage = require(Parent.SharedFlags).FFlagLuaAppEnableSduiHomePage
 local FFlagPymkCarouselExtendProps = require(Parent.SharedFlags).FFlagPymkCarouselExtendProps
+local FFlagProfilePlatformSeededPymk = require(Parent.SharedFlags).FFlagProfilePlatformSeededPymk
 local HttpService = if FFlagPymkCarouselExtendProps then game:GetService("HttpService") else nil
 local RefreshCount = 0
 local config = {
@@ -76,7 +77,7 @@ local function buildDirectRecommendationOverrides(Recommendations)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: ReactModule (copy), FFlagPymkCarouselExtendProps (copy), HttpService (copy), UseCollectionImpressionsSignalFunction (copy), FFlagLuaAppEnableSduiHomePage (copy), buildDirectRecommendationOverrides (copy), UseSelectorFunction (copy), GetPYMKSortedRecommendationIdsModule (copy), FFlagPYMKCarouselStableSelectorsModule (copy), TutilsModule (copy), UsePYMKCarouselItemListModule (copy), FFlagLuaAppPYMKSendUserSeenCollection (copy), DashModule (copy), SocialStopwatchModule (copy), FFlagPymkCarouselPresenceStoreMigrationModule (copy), UseDispatchFunction (copy), RecommendationContextType (copy), NetworkingPresence (copy), EventNames (copy), UseThrottledCallbackFunction (copy), HomePagePYMKPresenceFetchThrottleInterval (copy), UseCallbackWhenVisibleModule (copy), RefreshCount (ref), BtnValues (copy), UseUserSeenEventFunction (copy), FFlagLuaAppUserSeenCollectionUnifiedFields (copy), UseUserSeenCollectionEventFunction (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), ReactFocusNavigationModule (copy), config (copy), UsePYMKCarouselUserEntitiesListModule (copy), UseContactsContextModule (copy), PYMKUserModule (copy), ContactsContext (copy), HorizontalUserList (copy), FFlagLuaAppUseFrameBoundsImpressions (copy), FrameBoundsImpressionsTracker (copy), ScreenSizeImpressionsTracker (copy)
+	-- upvalues: ReactModule (copy), FFlagPymkCarouselExtendProps (copy), HttpService (copy), UseCollectionImpressionsSignalFunction (copy), FFlagLuaAppEnableSduiHomePage (copy), buildDirectRecommendationOverrides (copy), UseSelectorFunction (copy), GetPYMKSortedRecommendationIdsModule (copy), FFlagPYMKCarouselStableSelectorsModule (copy), TutilsModule (copy), UsePYMKCarouselItemListModule (copy), FFlagLuaAppPYMKSendUserSeenCollection (copy), DashModule (copy), SocialStopwatchModule (copy), FFlagPymkCarouselPresenceStoreMigrationModule (copy), UseDispatchFunction (copy), RecommendationContextType (copy), NetworkingPresence (copy), EventNames (copy), UseThrottledCallbackFunction (copy), HomePagePYMKPresenceFetchThrottleInterval (copy), UseCallbackWhenVisibleModule (copy), RefreshCount (ref), BtnValues (copy), UseUserSeenEventFunction (copy), FFlagLuaAppUserSeenCollectionUnifiedFields (copy), UseUserSeenCollectionEventFunction (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), ReactFocusNavigationModule (copy), config (copy), UsePYMKCarouselUserEntitiesListModule (copy), UseContactsContextModule (copy), PYMKUserModule (copy), FFlagProfilePlatformSeededPymk (copy), ContactsContext (copy), HorizontalUserList (copy), FFlagLuaAppUseFrameBoundsImpressions (copy), FrameBoundsImpressionsTracker (copy), ScreenSizeImpressionsTracker (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseMemoResult = if FFlagPymkCarouselExtendProps then ReactModule.useMemo(function(): string
 		-- upvalues: HttpService (upval)
@@ -257,7 +258,7 @@ return ReactModule.memo(function(p1)
 	local UsePYMKCarouselUserEntitiesListModuleResult = UsePYMKCarouselUserEntitiesListModule(UsePYMKCarouselItemListModuleResult)
 	local UseContactsContextModuleResult = UseContactsContextModule(UsePYMKCarouselItemListModuleResult, if FFlagPymkCarouselExtendProps or FFlagLuaAppEnableSduiHomePage then RecommendationsById else nil)
 	local UseResult2 = ReactModule.useCallback(function(CreateRow, Entity, AbsolutePosition)
-		-- upvalues: ReactModule (upval), PYMKUserModule (upval), p1 (copy), FireAnalyticsEventFunction (copy), UseMemoResult (ref), FFlagPymkCarouselPresenceStoreMigrationModule (upval), v1 (ref), FFlagPymkCarouselExtendProps (upval), FFlagLuaAppEnableSduiHomePage (upval), RecommendationsById (ref)
+		-- upvalues: ReactModule (upval), PYMKUserModule (upval), p1 (copy), FireAnalyticsEventFunction (copy), UseMemoResult (ref), FFlagPymkCarouselPresenceStoreMigrationModule (upval), v1 (ref), FFlagPymkCarouselExtendProps (upval), FFlagLuaAppEnableSduiHomePage (upval), RecommendationsById (ref), FFlagProfilePlatformSeededPymk (upval)
 		return ReactModule.createElement(PYMKUserModule, {
 			createRow = CreateRow,
 			entity = Entity,
@@ -269,7 +270,8 @@ return ReactModule.memo(function(p1)
 			impressionsTag = UseMemoResult,
 			forceFetchUserPresence = if FFlagPymkCarouselPresenceStoreMigrationModule then v1 else nil,
 			recommendation = if (FFlagPymkCarouselExtendProps or FFlagLuaAppEnableSduiHomePage) and RecommendationsById then RecommendationsById[tostring(Entity.id)] else nil,
-			analyticsSurface = if FFlagPymkCarouselExtendProps then p1.analyticsSurface else nil
+			analyticsSurface = if FFlagPymkCarouselExtendProps then p1.analyticsSurface else nil,
+			seedUserDisplayName = if FFlagProfilePlatformSeededPymk then p1.seedUserDisplayName else nil
 		})
 	end, {
 		p1.showToast, FireAnalyticsEventFunction, p1.recommendationSessionId,
@@ -277,6 +279,7 @@ return ReactModule.memo(function(p1)
 		if FFlagPymkCarouselPresenceStoreMigrationModule then v1 else nil,
 		if FFlagPymkCarouselExtendProps or FFlagLuaAppEnableSduiHomePage then RecommendationsById else nil,
 		if FFlagPymkCarouselExtendProps then p1.analyticsSurface else nil,
+		if FFlagProfilePlatformSeededPymk then p1.seedUserDisplayName else nil,
 		if FFlagPymkCarouselExtendProps then UseMemoResult else nil
 	})
 	
@@ -290,7 +293,10 @@ return ReactModule.memo(function(p1)
 					onViewableItemsChanged = UseCollectionImpressionsSignalResult2,
 					onChangeCanvasPosition = UseCollectionImpressionsSignalResult2
 				},
-				listConfigs = { showSubtitle = false },
+				listConfigs = {
+					showSubtitle = false,
+					textTruncation = if FFlagProfilePlatformSeededPymk then Enum.TextTruncate.SplitWord else nil
+				},
 				scrollingFrameRef = UseRefResult,
 				appCompositionEnabled = p1.appCompositionEnabled
 			})

@@ -212,6 +212,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Callback)
 				}, p1.children) else ReactModule.createElement(ScrollViewModule, {
 					LayoutOrder = 2,
 					tag = "fill size-full-0",
+					selection = { Selectable = false },
 					scroll = {
 						AutomaticCanvasSize = Enum.AutomaticSize.Y,
 						CanvasSize = UDim2.fromScale(1, 0),

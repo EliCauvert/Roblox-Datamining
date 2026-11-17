@@ -26,6 +26,29 @@ return function()
 			end
 			DataCache.replaceItems(t1)
 		end,
+		setPendingReaction = function(p1, Pending)
+			-- upvalues: DataCache (copy), t (upval)
+			local DataResult = DataCache.getItem(p1).data(false)
+			
+			if DataResult ~= nil or Pending ~= nil then
+				DataCache.replaceItem(p1, {
+					reactions = if DataResult then DataResult.reactions else t,
+					pending = Pending
+				})
+				
+				return
+			end
+		end,
+		setConfirmedReactions = function(p1, Reactions)
+			-- upvalues: DataCache (copy)
+			local DataResult = DataCache.getItem(p1).data(false)
+			
+			if DataResult ~= nil then
+				DataCache.replaceItem(p1, { reactions = Reactions, pending = DataResult.pending })
+				
+				return
+			end
+		end,
 		evictMessageReactions = function(List)
 			-- upvalues: DataCache (copy)
 			for _, value in List do

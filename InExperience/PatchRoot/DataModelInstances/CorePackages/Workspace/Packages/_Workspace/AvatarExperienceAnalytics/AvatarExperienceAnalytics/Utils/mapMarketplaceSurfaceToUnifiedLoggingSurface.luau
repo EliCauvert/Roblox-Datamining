@@ -1,5 +1,7 @@
 ﻿local AvatarExperienceAnalytics = script:FindFirstAncestor("AvatarExperienceAnalytics")
-local UnifiedLoggingSurface = require(AvatarExperienceAnalytics.Parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
+local Parent = AvatarExperienceAnalytics.Parent
+local UnifiedEventEnumsModule = require(Parent.UnifiedEventEnums)
+local UnifiedLoggingSurface = require(Parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
 local MarketplaceSurfaceType = require(AvatarExperienceAnalytics.Enums.ImpressionEnums).MarketplaceSurfaceType
 local config = {
 	[MarketplaceSurfaceType.HOMEPAGE] = UnifiedLoggingSurface.CATALOG,
@@ -17,18 +19,18 @@ for _, value in MarketplaceSurfaceType do
 end
 local t1 = {}
 
-for _, value1 in UnifiedLoggingSurface do
-	if not t[value1] then
-		t1[value1] = true
+for _, marketplaceUnifiedSurfaceNumber in UnifiedEventEnumsModule.MarketplaceUnifiedSurfaceNumbers do
+	if not t[marketplaceUnifiedSurfaceNumber] then
+		t1[marketplaceUnifiedSurfaceNumber] = true
 	end
 end
 return function(p1)
-	-- upvalues: config (copy), t1 (copy)
+	-- upvalues: config (copy), t1 (copy), UnifiedEventEnumsModule (copy)
 	if p1 == nil then
 		return nil
 	else
 		local Entry = config[p1]
 		
-		return if Entry == nil then if t1[p1] then p1 else nil else Entry
+		return if Entry == nil then if t1[p1] then UnifiedEventEnumsModule.toMarketplaceUnifiedSurface(p1) else nil else Entry
 	end
 end

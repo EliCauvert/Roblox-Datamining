@@ -3,10 +3,14 @@ local CorePackages = game:GetService("CorePackages")
 local ServiceModule = require(Chrome.Service)
 local CommonIconModule = require(Chrome.Integrations.CommonIcon)
 local CapturesPolicy = require(CorePackages.Workspace.Packages.CapturesInExperience).CapturesPolicy
-local SideSheetPlacement = require(CorePackages.Workspace.Packages.Chrome).Enums.SideSheetPlacement
+local ChromeModule = require(CorePackages.Workspace.Packages.Chrome)
+local SideSheetOpenBehavior = ChromeModule.Enums.SideSheetOpenBehavior
+local SideSheetPlacement = ChromeModule.Enums.SideSheetPlacement
 local IsSpatialFunction = require(CorePackages.Workspace.Packages.AppCommonLib).isSpatial
 local IsInExperienceUIVREnabled = require(CorePackages.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
-local FFlagFixSpatialUICaptures = require(CorePackages.Workspace.Packages.SharedFlags).FFlagFixSpatialUICaptures
+local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
+local FFlagFixSpatialUICaptures = SharedFlagsModule.FFlagFixSpatialUICaptures
+local FFlagKeepSideSheetOpenBesideMenu = SharedFlagsModule.FFlagKeepSideSheetOpenBesideMenu
 local UpdateGalleryIcon = game:DefineFastFlag("UpdateGalleryIcon", false)
 local InGameMenuIntegrationUtilsModule = require(script.Parent.InGameMenuIntegrationUtils)
 local ReadResult = CapturesPolicy.PolicyImplementation.read()
@@ -20,6 +24,7 @@ if Inverted then
 		label = "Feature.Captures.Title.Gallery",
 		initialAvailability = if Inverted then ServiceModule.AvailabilitySignal.Available else ServiceModule.AvailabilitySignal.Unavailable,
 		sideSheetPlacement = SideSheetPlacement.BelowFold,
+		sideSheetOpenBehavior = if FFlagKeepSideSheetOpenBesideMenu then SideSheetOpenBehavior.MenuBesideSheet else nil,
 		activated = function(_)
 			-- upvalues: InGameMenuIntegrationUtilsModule (copy), CapturesPage (copy)
 			InGameMenuIntegrationUtilsModule.toggleIGMPage("CapturesPage", CapturesPage:get())

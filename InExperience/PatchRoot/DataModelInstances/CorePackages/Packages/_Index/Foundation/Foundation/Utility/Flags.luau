@@ -35,7 +35,6 @@ return {
 	FoundationAlertStackTrailingOnOverflow = v1 and SafeFlagsModule.createGetFFlag("FoundationAlertStackTrailingOnOverflow")(),
 	FoundationEducationalTooltipMinMediaWidth = FoundationEducationalTooltipMinMediaWidth,
 	FoundationStudioFontFaceMigration = SafeFlagsModule.createGetFFlag("FoundationStudioFontFaceMigration")(),
-	FoundationStatusIndicatorDesignUpdate = SafeFlagsModule.createGetFFlag("FoundationStatusIndicatorDesignUpdate")(),
 	FoundationUnifiedScrimScrolling = SafeFlagsModule.createGetFFlag("FoundationUnifiedScrimScrolling2")(),
 	FoundationFixChipAccessoryLayout = SafeFlagsModule.createGetFFlag("FoundationFixChipAccessoryLayout")(),
 	FoundationRemoveDeprecatedSemanticTokens = SafeFlagsModule.createGetFFlag("FoundationRemoveDeprecatedSemanticTokens")(),
@@ -72,7 +71,7 @@ return {
 	FoundationSharedViewportBreakpoint = SafeFlagsModule.createGetFFlag("FoundationSharedViewportBreakpoint")(),
 	FoundationColorPickerSliderRebuild = SafeFlagsModule.createGetFFlag("FoundationColorPickerSliderRebuild")(),
 	FoundationPopoverClampOffscreenAnchor = SafeFlagsModule.createGetFFlag("FoundationPopoverClampOffscreenAnchor")(),
+	FoundationSliderSharedPieces = V5 and SafeFlagsModule.createGetFFlag("FoundationSliderSharedPieces")(),
 	FoundationSliderAutoSizeFix = FoundationSliderAutoSizeFix,
-	FoundationSliderCapture = FoundationSliderCapture,
-	FoundationSliderSharedPieces = V5 and SafeFlagsModule.createGetFFlag("FoundationSliderSharedPieces")()
+	FoundationSliderCapture = FoundationSliderCapture
 }

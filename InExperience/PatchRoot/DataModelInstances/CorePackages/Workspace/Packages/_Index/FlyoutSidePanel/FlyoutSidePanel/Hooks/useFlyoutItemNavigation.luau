@@ -11,7 +11,6 @@ local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagSignalsNavP3Dispatch = SharedFlagsModule.FFlagSignalsNavP3Dispatch
 local FFlagEnableArgus = SharedFlagsModule.FFlagEnableArgus
-local FFlagEnableArgusImmersiveNav = SharedFlagsModule.FFlagEnableArgusImmersiveNav
 local FFlagFlyoutFilterWebViewsAndBrowserLinks = SharedFlagsModule.FFlagFlyoutFilterWebViewsAndBrowserLinks
 local FFlagFlyoutResolveItemContextOnActivationModule = require(FlyoutSidePanel.Flags.FFlagFlyoutResolveItemContextOnActivation)
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
@@ -26,7 +25,7 @@ local FlyoutAnalyticsModule = require(script.Parent.Parent.Analytics.FlyoutAnaly
 local FlyoutGiftCardSourceParam = game:DefineFastString("FlyoutGiftCardSourceParam", "flyout-side-panel")
 
 return function(p1, Callback, p2)
-	-- upvalues: UseDispatchFunction (copy), FFlagCreateConnectionsHub (copy), FFlagEnableArgus (copy), UseNavigationFunction (copy), UseSelectorFunction (copy), UseAppPolicyFunction (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), ReactModule (copy), FFlagFlyoutResolveItemContextOnActivationModule (copy), AppPage (copy), FFlagEnableArgusImmersiveNav (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), Default (copy), DeepLinkSource (copy), FlyoutContentSettingsModule (copy), FlyoutGiftCardSourceParam (copy), FFlagFlyoutFilterWebViewsAndBrowserLinks (copy), FlyoutAnalyticsModule (copy)
+	-- upvalues: UseDispatchFunction (copy), FFlagCreateConnectionsHub (copy), FFlagEnableArgus (copy), UseNavigationFunction (copy), UseSelectorFunction (copy), UseAppPolicyFunction (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), ReactModule (copy), FFlagFlyoutResolveItemContextOnActivationModule (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), Default (copy), DeepLinkSource (copy), FlyoutContentSettingsModule (copy), FlyoutGiftCardSourceParam (copy), FFlagFlyoutFilterWebViewsAndBrowserLinks (copy), FlyoutAnalyticsModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseNavigationResult = if FFlagCreateConnectionsHub or FFlagEnableArgus then UseNavigationFunction() else nil
 	local UseSelectorResult = UseSelectorFunction(function(p3)
@@ -41,7 +40,7 @@ return function(p1, Callback, p2)
 	local UseRoactServiceResult = UseRoactServiceFunction(AppEventIngestService)
 	
 	return ReactModule.useCallback(function()
-		-- upvalues: Callback (copy), FFlagFlyoutResolveItemContextOnActivationModule (upval), p1 (copy), FFlagCreateConnectionsHub (upval), AppPage (upval), UseNavigationResult (copy), FFlagEnableArgus (upval), FFlagEnableArgusImmersiveNav (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval), Default (upval), DeepLinkSource (upval), FlyoutContentSettingsModule (upval), UseSelectorResult (copy), UseAppPolicyResult (copy), FlyoutGiftCardSourceParam (upval), p2 (copy), UseAppPolicyResult1 (copy), FFlagFlyoutFilterWebViewsAndBrowserLinks (upval), FlyoutAnalyticsModule (upval), UseRoactServiceResult (copy)
+		-- upvalues: Callback (copy), FFlagFlyoutResolveItemContextOnActivationModule (upval), p1 (copy), FFlagCreateConnectionsHub (upval), AppPage (upval), UseNavigationResult (copy), FFlagEnableArgus (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval), Default (upval), DeepLinkSource (upval), FlyoutContentSettingsModule (upval), UseSelectorResult (copy), UseAppPolicyResult (copy), FlyoutGiftCardSourceParam (upval), p2 (copy), UseAppPolicyResult1 (copy), FFlagFlyoutFilterWebViewsAndBrowserLinks (upval), FlyoutAnalyticsModule (upval), UseRoactServiceResult (copy)
 		Callback()
 		local Url = nil
 		local Context = if FFlagFlyoutResolveItemContextOnActivationModule and p1.getContext then p1.getContext() else p1.context
@@ -54,7 +53,7 @@ return function(p1, Callback, p2)
 				
 				if FFlagCreateConnectionsHub and AppPage1 == AppPage.CoHubMyConnections then
 					UseNavigationResult.navigate(AppPage1)
-				elseif FFlagEnableArgus and FFlagEnableArgusImmersiveNav and AppPage1 == AppPage.Moments then
+				elseif FFlagEnableArgus and AppPage1 == AppPage.Moments then
 					local config = { source = "flyout_menu", name = AppPage.MomentsImmersive }
 					
 					if FFlagSignalsNavP3Dispatch then

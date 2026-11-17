@@ -100,6 +100,7 @@
 	MomentCommentDeleted = "MomentCommentDeleted",
 	MomentCommentReportClicked = "MomentCommentReportClicked",
 	MomentCommentTranslationToggled = "MomentCommentTranslationToggled",
+	MomentsTimeLimitShown = "MomentsTimeLimitShown",
 	MomentCommentsSettingToggled = "MomentCommentsSettingToggled",
 	MomentViewBegan = "MomentViewBegan",
 	MomentsNavigationEvent = "MomentsNavigationEvent",

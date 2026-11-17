@@ -2,6 +2,7 @@
 local Parent = script:FindFirstAncestor("GameCollections").Parent
 local IsVRAppBuildFunction = require(Parent.AppCommonLib).IsVRAppBuild
 local AppPage = require(Parent.RobloxAppEnums).AppPage
+local FFlagAppIaHomeCampaignSubTab = require(Parent.SharedFlags).FFlagAppIaHomeCampaignSubTab
 local v1 = "Other"
 pcall(function()
 	-- upvalues: UserInputService (copy), v1 (ref)
@@ -43,24 +44,26 @@ pcall(function()
 end)
 
 return function(p1, Games, p2, p3)
-	-- upvalues: AppPage (copy), v1 (ref), IsVRAppBuildFunction (copy)
+	-- upvalues: AppPage (copy), FFlagAppIaHomeCampaignSubTab (copy), v1 (ref), IsVRAppBuildFunction (copy)
 	if not p1 or not p1.Diag then return end
 	if not Games then return end
-	local v2 = "Other"
+	local GamesList = "Other"
 	
 	if Games == AppPage.Home or Games == AppPage.Games then
 		if p3 == 1 then
-			v2 = "GamesList"
+			GamesList = "GamesList"
 		elseif Games == AppPage.Home then
-			v2 = "Home"
+			GamesList = "Home"
 		else
 			assert(Games == AppPage.Games, `{Games} should always be Games here`)
-			v2 = "Games"
+			GamesList = "Games"
 		end
 	elseif Games == "recommended" then
-		v2 = "GameDetail"
+		GamesList = "GameDetail"
 	elseif Games == AppPage.SearchPage then
-		v2 = "SearchPage"
+		GamesList = "SearchPage"
+	elseif FFlagAppIaHomeCampaignSubTab and Games == AppPage.Campaign then
+		GamesList = if p3 == 1 then "GamesList" else "Campaign"
 	end
-	p1.Diag:reportCounterSimple((if IsVRAppBuildFunction() then "VR" else v1) .. "-GameImps-" .. v2, p2)
+	p1.Diag:reportCounterSimple((if IsVRAppBuildFunction() then "VR" else v1) .. "-GameImps-" .. GamesList, p2)
 end

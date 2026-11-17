@@ -26,9 +26,7 @@ local StartMomentsCreationFlowModule = require(Parent.Thunks.StartMomentsCreatio
 local ToastVanishedModule = require(Parent.Actions.ToastVanished)
 local _ = require(Parent.Types)
 local ToastControllerModule = require(script.Parent.ToastController)
-local SharedFlagsModule = require(Parent1.SharedFlags)
-local FFlagBuildExperienceInGameCaptureToChat = SharedFlagsModule.FFlagBuildExperienceInGameCaptureToChat
-local FFlagMomentsCreationFeatureGate = SharedFlagsModule.FFlagMomentsCreationFeatureGate
+local FFlagBuildExperienceInGameCaptureToChat = require(Parent1.SharedFlags).FFlagBuildExperienceInGameCaptureToChat
 local GetMomentsCapabilitiesFunction = require(Parent1.MomentsCommon).Stores.GetMomentsCapabilities
 local FFlagCreateMomentsToastModule = require(Parent.Flags.FFlagCreateMomentsToast)
 local FFlagCapturesInExpMomentsToastDownloadButtonModule = require(Parent.Flags.FFlagCapturesInExpMomentsToastDownloadButton)
@@ -157,7 +155,7 @@ local config = {
 }
 
 return function(_)
-	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), ReactModule (copy), CapturesToastTypeModule (copy), config (copy), ToastVanishedModule (copy), FFlagBuildExperienceInGameCaptureToChat (copy), DashModule (copy), FFlagMomentsCreationFeatureGate (copy), GetMomentsCapabilitiesFunction (copy), FFlagCreateMomentsToastModule (copy), ToastControllerModule (copy), HttpService (copy), StartMomentsCreationFlowModule (copy), EventNamesModule (copy), FFlagCapturesInExpMomentsToastDownloadButtonModule (copy), IconName (copy), GetSaveToStoragePermissionModule (copy), Toast (copy)
+	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), ReactModule (copy), CapturesToastTypeModule (copy), config (copy), ToastVanishedModule (copy), FFlagBuildExperienceInGameCaptureToChat (copy), DashModule (copy), GetMomentsCapabilitiesFunction (copy), FFlagCreateMomentsToastModule (copy), ToastControllerModule (copy), HttpService (copy), StartMomentsCreationFlowModule (copy), EventNamesModule (copy), FFlagCapturesInExpMomentsToastDownloadButtonModule (copy), IconName (copy), GetSaveToStoragePermissionModule (copy), Toast (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -231,7 +229,7 @@ return function(_)
 		end
 	end, { UseSelectorResult, UseSelectorResult1 })
 	
-	return if UseMemoResult then if FFlagMomentsCreationFeatureGate and UseSelectorResult == CapturesToastTypeModule.CaptureTakenWithMomentsCTA and not GetMomentsCapabilitiesFunction(false).getCanCreateMoments(false) then nil elseif FFlagCreateMomentsToastModule then if UseSelectorResult == CapturesToastTypeModule.CaptureTakenWithMomentsCTA then ReactModule.createElement(ToastControllerModule, {
+	return if UseMemoResult then if UseSelectorResult == CapturesToastTypeModule.CaptureTakenWithMomentsCTA and not GetMomentsCapabilitiesFunction(false).getCanCreateMoments(false) then nil elseif FFlagCreateMomentsToastModule then if UseSelectorResult == CapturesToastTypeModule.CaptureTakenWithMomentsCTA then ReactModule.createElement(ToastControllerModule, {
 		icon = "icons/brands/moments_large",
 		title = UseResult("momentsTitle"),
 		text = UseResult("discoverPostWatch"),

@@ -33,6 +33,7 @@ return {
 	reportMomentsGenerateText = ReportMomentsRealtimeEventModule.reportMomentsGenerateText,
 	reportMomentsPostInsightsRequest = ReportMomentsRealtimeEventModule.reportMomentsPostInsightsRequest,
 	reportMomentsPostInsightsRequestLatency = ReportMomentsRealtimeEventModule.reportMomentsPostInsightsRequestLatency,
+	reportMomentsTimeLimitShown = ReportMomentsRealtimeEventModule.reportMomentsTimeLimitShown,
 	reportMomentsComments = ReportMomentsCommentsRealtimeModule.reportMomentsComments,
 	reportMomentsCommentAction = ReportMomentsCommentsRealtimeModule.reportMomentsCommentAction
 }

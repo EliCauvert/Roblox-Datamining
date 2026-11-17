@@ -1,13 +1,16 @@
 ﻿local AvatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
 local Parent = AvatarExperienceInspectAndBuy.Parent
 local SessionService = game:GetService("SessionService")
-local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 local ItemTypeEnum = require(Parent.AvatarExperienceModel).Enums.ItemTypeEnum
 local ItemCardThumbnail = require(Parent.AvatarExperienceUIKit).ItemCardComponents.ItemCardThumbnail
 local WearTimeSelectedOptionInList = require(Parent.AvatarExperienceTimedOptions).WearTimeSelectedOptionInList
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local ReactModule = require(Parent.React)
 local UseConvertedItemDataModule = require(AvatarExperienceInspectAndBuy.Hooks.useConvertedItemData)
+local UseRobloxPlusUpsellModule = require(AvatarExperienceInspectAndBuy.Hooks.useRobloxPlusUpsell)
+local GetAppFeaturePoliciesFunction = require(Parent.UniversalAppPolicy).getAppFeaturePolicies
 local _ = require(AvatarExperienceInspectAndBuy.Types)
 local ConstantsModule = require(AvatarExperienceInspectAndBuy.Constants)
 local AssetLocalizationKeys = ConstantsModule.AssetLocalizationKeys
@@ -29,13 +32,17 @@ local CryoModule = require(Parent.Cryo)
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local UseItemSelectionStoreFunction = require(AvatarExperienceInspectAndBuy.Contexts.ItemSelectionStoreContext).useItemSelectionStore
 local FFlagAXMarketplaceLicensingItemCards = require(Parent.AvatarExperienceFlags).FFlagAXMarketplaceLicensingItemCards
+local FFlagAXIaBPlusExclusiveUpsell = require(Parent.AvatarExperienceFlags).FFlagAXIaBPlusExclusiveUpsell
 local CatalogItemCardStatusIconTypeEnum = require(Parent.AXCommon).Components.CatalogItemCard.CatalogItemCardStatusIconTypeEnum
 
-return function(p1, LayoutOrder, _, Callback, XOffset)
-	-- upvalues: UseTokensFunction (copy), UseConvertedItemDataModule (copy), ItemTypeEnum (copy), BundleLocalizationKeys (copy), AssetLocalizationKeys (copy), CryoModule (copy), PriceStatusLocalizationKeys (copy), UseLocalizationFunction (copy), UseItemSelectionStoreFunction (copy), UseSignalStateFunction (copy), ReactModule (copy), GetPriceStatusModule (copy), PriceStatusModule (copy), GetPriceInRobuxFunction (copy), GetItemThumbnailUrlModule (copy), GetCatalogCardItemTypeModule (copy), CatalogItemCardStatusIconTypeEnum (copy), RetrievalStatus (copy), GetPriceLineContentModule (copy), AddUnifiedEventLoggingFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), SessionService (copy), ItemCardThumbnail (copy), FFlagAXMarketplaceLicensingItemCards (copy), WearTimeSelectedOptionInList (copy)
+return function(p1, LayoutOrder, p2, Callback, XOffset)
+	-- upvalues: UseTokensFunction (copy), UseConvertedItemDataModule (copy), ItemTypeEnum (copy), BundleLocalizationKeys (copy), AssetLocalizationKeys (copy), CryoModule (copy), PriceStatusLocalizationKeys (copy), FFlagAXIaBPlusExclusiveUpsell (copy), UseLocalizationFunction (copy), UseRobloxPlusUpsellModule (copy), UseItemSelectionStoreFunction (copy), UseSignalStateFunction (copy), ReactModule (copy), GetPriceStatusModule (copy), PriceStatusModule (copy), GetPriceInRobuxFunction (copy), GetItemThumbnailUrlModule (copy), GetCatalogCardItemTypeModule (copy), CatalogItemCardStatusIconTypeEnum (copy), RetrievalStatus (copy), GetAppFeaturePoliciesFunction (copy), FoundationModule (copy), GetPriceLineContentModule (copy), AddUnifiedEventLoggingFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), SessionService (copy), ItemCardThumbnail (copy), FFlagAXMarketplaceLicensingItemCards (copy), WearTimeSelectedOptionInList (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseConvertedItemDataModuleResult, UseConvertedItemDataModuleResult2 = UseConvertedItemDataModule(p1)
-	local UseLocalizationResult = UseLocalizationFunction((CryoModule.Dictionary.join(if p1.itemType == ItemTypeEnum.Bundle then BundleLocalizationKeys else AssetLocalizationKeys, PriceStatusLocalizationKeys)))
+	local UseLocalizationResult = UseLocalizationFunction((CryoModule.Dictionary.join(if p1.itemType == ItemTypeEnum.Bundle then BundleLocalizationKeys else AssetLocalizationKeys, PriceStatusLocalizationKeys, if FFlagAXIaBPlusExclusiveUpsell then {
+		exclusiveWithPlus = "Feature.Avatar.BackgroundGeneration.Label.ExclusiveWithPlus"
+	} else {})))
+	local UseRobloxPlusUpsellModuleResult = if FFlagAXIaBPlusExclusiveUpsell then UseRobloxPlusUpsellModule(UseConvertedItemDataModuleResult) else nil
 	local UseItemSelectionStoreResult = UseItemSelectionStoreFunction()
 	local UseSignalStateResult = UseSignalStateFunction(UseItemSelectionStoreResult.getItemData(p1.id))
 	local UseMemoResult = ReactModule.useMemo(function(): boolean
@@ -96,7 +103,20 @@ return function(p1, LayoutOrder, _, Callback, XOffset)
 			type = "icon",
 			iconType = CatalogItemCardStatusIconTypeEnum.Durable
 		} else nil
-		local PriceLineContentModule = if UseConvertedItemDataModuleResult2 == RetrievalStatus.Done then GetPriceLineContentModule(UseConvertedItemDataModuleResult, UseTokensResult, UseLocalizationResult) else nil
+		local List = if FFlagAXIaBPlusExclusiveUpsell and UseConvertedItemDataModuleResult2 == RetrievalStatus.Done and UseConvertedItemDataModuleResult.isPlusExclusive and not UseMemoResult and not GetAppFeaturePoliciesFunction().getDisableBlackbirdEntrypoints() then {
+			{
+				type = "text",
+				text = UseLocalizationResult.exclusiveWithPlus,
+				icon = FoundationModule.Enums.IconName.RobloxPlus
+			}
+		} elseif UseConvertedItemDataModuleResult2 == RetrievalStatus.Done then GetPriceLineContentModule(UseConvertedItemDataModuleResult, UseTokensResult, UseLocalizationResult) else nil
+		local Element = if UseRobloxPlusUpsellModuleResult then ReactModule.createElement(FoundationModule.Button, {
+			testId = `--economy-avatar-experience-button-item-row-get-roblox-plus-{p2}-{p0.itemType}-{p0.id}`,
+			text = UseRobloxPlusUpsellModuleResult.text,
+			size = FoundationModule.Enums.InputSize.Small,
+			variant = FoundationModule.Enums.ButtonVariant.Standard,
+			onActivated = UseRobloxPlusUpsellModuleResult.onActivated
+		}) else nil
 		local Config1 = if UseConvertedItemDataModuleResult.creator then {
 			name = UseConvertedItemDataModuleResult.creator.creatorName or "",
 			verified = UseConvertedItemDataModuleResult.creator.creatorHasVerifiedBadge
@@ -118,7 +138,7 @@ return function(p1, LayoutOrder, _, Callback, XOffset)
 			itemType = CatalogCardItemTypeModule,
 			creator = Config1,
 			itemLicensingInfo = if FFlagAXMarketplaceLicensingItemCards then UseConvertedItemDataModuleResult.itemLicensingInfo else nil,
-			priceLineContent = PriceLineContentModule,
+			priceLineContent = List,
 			LayoutOrder = LayoutOrder,
 			Size = UDim2.fromOffset(XOffset, 0),
 			headerSize = UDim2.fromOffset(XOffset, XOffset),
@@ -134,7 +154,8 @@ return function(p1, LayoutOrder, _, Callback, XOffset)
 			timedOptions = TimedOptions,
 			onTimedOptionPriceChanged = UseResult,
 			selectedTimedOptionPrice = UseMemoResult1,
-			wearTimeSelectedOptionInList = WearTimeSelectedOptionInList
+			wearTimeSelectedOptionInList = WearTimeSelectedOptionInList,
+			actionButton = Element
 		}
 	else
 		return {}

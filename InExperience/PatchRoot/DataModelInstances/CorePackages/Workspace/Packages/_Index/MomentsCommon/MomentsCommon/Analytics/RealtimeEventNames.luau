@@ -26,5 +26,6 @@
 	MomentsCommentAuthorBlock = "MomentsCommentAuthorBlock",
 	MomentsPostInsightsRequest = "MomentsPostInsightsRequest",
 	MomentsPostInsightsRequestLatency = "MomentsPostInsightsRequestLatency",
-	MomentsCommentTranslationToggle = "MomentsCommentTranslationToggle"
+	MomentsCommentTranslationToggle = "MomentsCommentTranslationToggle",
+	MomentsTimeLimitShown = "MomentsTimeLimitShown"
 }

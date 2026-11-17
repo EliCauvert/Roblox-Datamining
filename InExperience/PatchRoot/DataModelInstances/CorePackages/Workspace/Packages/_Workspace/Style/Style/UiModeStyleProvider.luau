@@ -16,7 +16,7 @@ local DebugLuaAppEnableTokenScale = game:DefineFastFlag("DebugLuaAppEnableTokenS
 local EnableDisplaySizeEngineFeature = game:DefineFastFlag("LuaAppEnableWindowsHandheldTokenScale", false) and game:GetEngineFeature("EnableDisplaySize") or DebugLuaAppEnableTokenScale
 local FFlagAppNavBarPerItemThemeOverride = require(Parent.SharedFlags).FFlagAppNavBarPerItemThemeOverride
 local UiModeBrandThemeContextModule = if FFlagAppNavBarPerItemThemeOverride then require(script.Parent.UiModeBrandThemeContext) else nil
-local AppClassicThemeGreenButtonColors = game:DefineFastFlag("AppClassicThemeGreenButtonColors", false)
+local FFlagAppClassicThemeGreenButtonColorsModule = require(script.Parent.FFlagAppClassicThemeGreenButtonColors)
 local config = {
 	["Color.ActionEmphasis.Background.Color3"] = Color3.fromHex("#137F1F"),
 	["Color.ActionSoftEmphasis.Background.Color3"] = Color3.fromHex("#137F1F"),
@@ -36,7 +36,7 @@ local function _()
 end
 
 local function UiModeStyleProvider(p1)
-	-- upvalues: UseDeviceTypeFunction (copy), EnableDisplaySizeEngineFeature (copy), SignalsReactModule (copy), GetUIScale (copy), ReactModule (copy), UserGameSettings (copy), CryoModule (copy), AppClassicThemeGreenButtonColors (copy), ThemeName (copy), config2 (copy), ColorMode (copy), config1 (copy), config (copy), FoundationProvider (copy), SceneOverridesRegistryModule (copy), AppStyleProvider (copy)
+	-- upvalues: UseDeviceTypeFunction (copy), EnableDisplaySizeEngineFeature (copy), SignalsReactModule (copy), GetUIScale (copy), ReactModule (copy), UserGameSettings (copy), CryoModule (copy), FFlagAppClassicThemeGreenButtonColorsModule (copy), ThemeName (copy), config2 (copy), ColorMode (copy), config1 (copy), config (copy), FoundationProvider (copy), SceneOverridesRegistryModule (copy), AppStyleProvider (copy)
 	local UseDeviceTypeResult = UseDeviceTypeFunction()
 	local UseSignalStateResult = if EnableDisplaySizeEngineFeature then SignalsReactModule.useSignalState(GetUIScale) else nil
 	local UseStateResult, UseStateResult2 = ReactModule.useState({
@@ -81,7 +81,7 @@ local function UiModeStyleProvider(p1)
 	local HasFoundationThemeName = UseMemoResult.foundationThemeName ~= nil
 	local TokenOverrides = nil
 	
-	if AppClassicThemeGreenButtonColors and UseMemoResult.foundationThemeName == ThemeName.Classic then
+	if FFlagAppClassicThemeGreenButtonColorsModule and UseMemoResult.foundationThemeName == ThemeName.Classic then
 		local IsEntryMatch = config2[UseMemoResult.themeName:lower()] == ColorMode.Light
 		TokenOverrides = if IsEntryMatch then config1 else config
 	end

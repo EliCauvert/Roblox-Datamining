@@ -1,5 +1,4 @@
-﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
-local Parent = ServerDrivenUi.Parent
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
 local EdpStoreAnalyticsModule = require(Parent.EdpStoreAnalytics)
 local EdpStoreAnalyticsLogger = EdpStoreAnalyticsModule.EdpStoreAnalyticsLogger
 local StoreEnums = EdpStoreAnalyticsModule.Constants.StoreEnums
@@ -7,11 +6,11 @@ local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local SduiErrors = SduiCoreSystemModule.SduiErrors
 local SduiLogger = SduiCoreSystemModule.SduiLogger
 local FindAnalyticsFieldInAncestorsFunction = SduiCoreSystemModule.findAnalyticsFieldInAncestors
-local SduiMarketplaceItemImpressionsHandlerModule = require(ServerDrivenUi.Impressions.SduiMarketplaceItemImpressionsHandler)
+local SduiMarketplaceItemImpressionsHandler = require(Parent.AvatarExperienceAnalytics).getSduiMarketplaceItemImpressionsHandler()
 
 return function(p1, List, p2, AnalyticsData, p3, p4)
-	-- upvalues: SduiMarketplaceItemImpressionsHandlerModule (copy), FindAnalyticsFieldInAncestorsFunction (copy), SduiLogger (copy), SduiErrors (copy), EdpStoreAnalyticsLogger (copy), StoreEnums (copy)
-	if SduiMarketplaceItemImpressionsHandlerModule(p1, List, p2, AnalyticsData, p3, p4) == 0 then return end
+	-- upvalues: SduiMarketplaceItemImpressionsHandler (copy), FindAnalyticsFieldInAncestorsFunction (copy), SduiLogger (copy), SduiErrors (copy), EdpStoreAnalyticsLogger (copy), StoreEnums (copy)
+	if SduiMarketplaceItemImpressionsHandler(p1, List, p2, AnalyticsData, p3, p4) == 0 then return end
 	local config = { analyticsData = AnalyticsData }
 	local ItemType = FindAnalyticsFieldInAncestorsFunction("itemType", config)
 	local EdpLocationType = FindAnalyticsFieldInAncestorsFunction("edpLocationType", config)

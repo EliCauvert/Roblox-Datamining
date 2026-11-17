@@ -1,9 +1,24 @@
 ﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local Parent = SduiCoreSystem.Parent
 local SduiPolicyFieldKeyModule = require(SduiCoreSystem.ClientBinding.SduiPolicyFieldKey)
-local _ = require(SduiCoreSystem.Parent.UniversalAppPolicy)
+local _ = require(Parent.UniversalAppPolicy)
+local FFlagSduiConditionalPropsAppPolicyCondition = require(Parent.SharedFlags).FFlagSduiConditionalPropsAppPolicyCondition
 
 return function(p1, CatalogPremiumCategory)
-	-- upvalues: SduiPolicyFieldKeyModule (copy)
+	-- upvalues: FFlagSduiConditionalPropsAppPolicyCondition (copy), SduiPolicyFieldKeyModule (copy)
+	if FFlagSduiConditionalPropsAppPolicyCondition then
+		if CatalogPremiumCategory == SduiPolicyFieldKeyModule.showInContextPersonalizedRecommendationsSearchOmnisearchExperiences then
+			return true, p1.getShowInContextPersonalizedRecommendationsSearchOmnisearchExperiences()
+		elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.showInContextPersonalizedRecommendationsSearchPowerSearch then
+			return true, p1.getShowInContextPersonalizedRecommendationsSearchPowerSearch()
+		elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.showInContextPersonalizedRecommendationsSearchMarketplace then
+			return true, p1.getShowInContextPersonalizedRecommendationsSearchMarketplace()
+		elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.showInContextPersonalizedRecommendationsSearchOmnisearchGameItems then
+			return true, p1.getShowInContextPersonalizedRecommendationsSearchOmnisearchGameItems()
+		elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.showInContextPersonalizedRecommendationsSettings then
+			return true, p1.getShowInContextPersonalizedRecommendationsSettings()
+		end
+	end
 	if CatalogPremiumCategory == SduiPolicyFieldKeyModule.SearchBar then
 		return true, p1.getSearchBar()
 	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.GameDetailsMorePage then

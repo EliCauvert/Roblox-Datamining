@@ -25,6 +25,7 @@ local ProfileCompletionModule = require(ProfilePlatform.Components.ProfileComple
 local CurrentlyPlayingModule = require(ProfilePlatform.Components.CurrentlyPlaying)
 local CTARowModule = require(ProfilePlatform.Components.CTARow)
 local MomentsModule = require(ProfilePlatform.Components.Moments)
+local SeededPymkCarouselContainerModule = require(ProfilePlatform.Components.SeededPymkCarousel.SeededPymkCarouselContainer)
 local ConstantsModule = require(Parent.ProfilePlatform.Common.Constants)
 local EnumsModule = require(Parent.ProfilePlatform.Common.Enums)
 local GetPeekViewOpenHeightByProfileTypeModule = require(ProfilePlatform.Utils.getPeekViewOpenHeightByProfileType)
@@ -43,6 +44,7 @@ local FFlagGroupForumsDiscoverySdui = require(Parent.SharedFlags).FFlagGroupForu
 local FFlagProfilePlatformAddCurrentlyPlayingModule = require(ProfilePlatform.Flags.FFlagProfilePlatformAddCurrentlyPlaying)
 local FFlagAboutBeforeActionClientModule = require(ProfilePlatform.Flags.FFlagAboutBeforeActionClient)
 local FFlagProfilePlatformEnableMomentsModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnableMoments)
+local FFlagProfilePlatformSeededPymk = require(Parent.SharedFlags).FFlagProfilePlatformSeededPymk
 
 local function orderWithAboutBeforeActions(Abouts)
 	-- upvalues: FFlagAboutBeforeActionClientModule (copy), EnumsModule (copy), FFlagProfilePlatformAddCurrentlyPlayingModule (copy), CryoModule (copy)
@@ -124,7 +126,8 @@ local config = {
 	[EnumsModule.Components.Store] = if FFlagProfilePlatformEnableStore then StoreModule else nil,
 	[EnumsModule.Components.ProfileCompletion] = if FFlagEnableProfileCompletion then ProfileCompletionModule else nil,
 	[EnumsModule.Components.CurrentlyPlaying] = if FFlagProfilePlatformAddCurrentlyPlayingModule then CurrentlyPlayingModule else nil,
-	[EnumsModule.Components.Moments] = if FFlagProfilePlatformEnableMomentsModule then MomentsModule else nil
+	[EnumsModule.Components.Moments] = if FFlagProfilePlatformEnableMomentsModule then MomentsModule else nil,
+	[EnumsModule.Components.SeededPymk] = if FFlagProfilePlatformSeededPymk then SeededPymkCarouselContainerModule else nil
 }
 local config1 = {
 	[EnumsModule.Components.CoverPhoto] = CoverPhotoModule,

@@ -1,4 +1,7 @@
-﻿local UnifiedEventLogEnumsModule = require(script.Parent.Parent.UnifiedEventLogEnums)
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceAnalytics").Parent
+local _ = require(Parent.AvatarExperienceModel)
+local _ = require(Parent.UnifiedEventEnums)
+local UnifiedEventLogEnumsModule = require(script.Parent.Parent.UnifiedEventLogEnums)
 local config = {
 	[0] = UnifiedEventLogEnumsModule.MarketplaceTimedOption.PERMANENT,
 	[3] = UnifiedEventLogEnumsModule.MarketplaceTimedOption.DAYS_3,

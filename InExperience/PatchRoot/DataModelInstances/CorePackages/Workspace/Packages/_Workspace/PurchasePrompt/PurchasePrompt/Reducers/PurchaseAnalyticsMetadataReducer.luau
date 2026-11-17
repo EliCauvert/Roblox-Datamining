@@ -1,9 +1,7 @@
 ﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local Parent = PurchasePrompt.Parent
-local Rodux = require(Parent.PurchasePromptDeps).Rodux
+local Rodux = require(PurchasePrompt.Parent.PurchasePromptDeps).Rodux
 local SetPurchaseAnalyticsMetadataModule = require(PurchasePrompt.Actions.SetPurchaseAnalyticsMetadata)
 local CompleteRequestModule = require(PurchasePrompt.Actions.CompleteRequest)
-local FFlagPassShopPurchaseSurfaceToBuyModal = require(Parent.SharedFlags).FFlagPassShopPurchaseSurfaceToBuyModal
 local t = {}
 
 return (Rodux.createReducer(t, {
@@ -21,8 +19,8 @@ return (Rodux.createReducer(t, {
 			eventMetadata = p1.purchaseAnalyticsMetadata.eventMetadata
 		}
 	end,
-	[CompleteRequestModule.name] = function(p1, _)
-		-- upvalues: FFlagPassShopPurchaseSurfaceToBuyModal (copy), t (copy)
-		return if FFlagPassShopPurchaseSurfaceToBuyModal then t else p1
+	[CompleteRequestModule.name] = function(_, _)
+		-- upvalues: t (copy)
+		return t
 	end
 }))

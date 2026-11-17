@@ -7,6 +7,8 @@ local GameCollectionItemType = DiscoveryTypesModule.GameCollectionItemTypes.Game
 local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
 local FFlagLuaAppEnableNxMRoduxApportioning = require(Parent.SharedFlags).FFlagLuaAppEnableNxMRoduxApportioning
 local FFlagLuaAppEnableOneByTwoTileFunnelTelemetry = require(Parent.SharedFlags).FFlagLuaAppEnableOneByTwoTileFunnelTelemetry
+local FFlagLuaAppEnableFlexibleFeatureTileVariants = require(Parent.SharedFlags).FFlagLuaAppEnableFlexibleFeatureTileVariants
+local FFlagLuaAppDropUnsupportedTwoByOneAdLinks = require(Parent.SharedFlags).FFlagLuaAppDropUnsupportedTwoByOneAdLinks
 local TopicContentsModelModule = {
 	new = function()
 		return {
@@ -45,7 +47,7 @@ function TopicContentsModelModule.fromData(p1)
 end
 
 function TopicContentsModelModule.fromContentList(List, Callback, Callback1, UpdatedTimestamp, p1)
-	-- upvalues: TopicContentsModelModule (copy), TopicContentsEntryModelModule (copy), FFlagLuaAppEnableOneByTwoTileFunnelTelemetry (copy), FFlagLuaAppEnableNxMRoduxApportioning (copy), GameCollectionItemType (copy), DiscoveryEventErrorLogger (copy), OmniRecommendationsContentType (copy)
+	-- upvalues: TopicContentsModelModule (copy), TopicContentsEntryModelModule (copy), FFlagLuaAppEnableOneByTwoTileFunnelTelemetry (copy), FFlagLuaAppEnableNxMRoduxApportioning (copy), GameCollectionItemType (copy), DiscoveryEventErrorLogger (copy), OmniRecommendationsContentType (copy), FFlagLuaAppDropUnsupportedTwoByOneAdLinks (copy), FFlagLuaAppEnableFlexibleFeatureTileVariants (copy)
 	local NewTopicContentsModel = TopicContentsModelModule.new()
 	NewTopicContentsModel.updatedTimestamp = UpdatedTimestamp
 	NewTopicContentsModel.entries = {}
@@ -57,7 +59,7 @@ function TopicContentsModelModule.fromContentList(List, Callback, Callback1, Upd
 				return NewTopicContentsModel
 			end
 			TopicContentsEntryModelModule.fromOmniRecommendations(value, if FFlagLuaAppEnableOneByTwoTileFunnelTelemetry then p1 else nil):match(function(p2)
-				-- upvalues: FFlagLuaAppEnableNxMRoduxApportioning (upval), GameCollectionItemType (upval), DiscoveryEventErrorLogger (upval), OmniRecommendationsContentType (upval), NewTopicContentsModel (copy), value (copy), Callback (copy), Callback1 (copy)
+				-- upvalues: FFlagLuaAppEnableNxMRoduxApportioning (upval), GameCollectionItemType (upval), DiscoveryEventErrorLogger (upval), OmniRecommendationsContentType (upval), FFlagLuaAppDropUnsupportedTwoByOneAdLinks (upval), FFlagLuaAppEnableFlexibleFeatureTileVariants (upval), NewTopicContentsModel (copy), value (copy), Callback (copy), Callback1 (copy)
 				if FFlagLuaAppEnableNxMRoduxApportioning and p2.componentType == GameCollectionItemType.OneByTwoTile and (not p2.primaryVideoAssetId or not p2.primaryImageAssetId) then
 					DiscoveryEventErrorLogger.reportError("TopicContentsModel_OneByTwoTileMissingAssets", "OneByTwoTile entry dropped: missing primaryVideoAssetId or primaryImageAssetId", {
 						contentType = tostring(p2.contentType),
@@ -70,6 +72,11 @@ function TopicContentsModelModule.fromContentList(List, Callback, Callback1, Upd
 				if FFlagLuaAppEnableNxMRoduxApportioning and p2.contentType == OmniRecommendationsContentType.AdLink then
 					if not p2.clickoutUrl or p2.clickoutUrl == "" then
 						DiscoveryEventErrorLogger.reportError("TopicContentsModel_AdLinkMissingClickoutUrl", "AdLink entry dropped: missing clickoutUrl")
+						
+						return
+					end
+					if FFlagLuaAppDropUnsupportedTwoByOneAdLinks and not FFlagLuaAppEnableFlexibleFeatureTileVariants and p2.componentType == GameCollectionItemType.TwoByOneTile then
+						DiscoveryEventErrorLogger.reportError("TopicContentsModel_TwoByOneAdLinkUnsupported", "AdLink entry dropped: this client can't render 2x1 AdLinks")
 						
 						return
 					end

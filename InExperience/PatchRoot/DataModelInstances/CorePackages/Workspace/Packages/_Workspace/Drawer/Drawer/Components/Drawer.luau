@@ -21,7 +21,8 @@ local InputHandlersModule = nil
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagEnableDrawerFocusNav = SharedFlagsModule.FFlagEnableDrawerFocusNav
 local FFlagEnableDrawerAnimatingHook = SharedFlagsModule.FFlagEnableDrawerAnimatingHook
-local FFlagSideSheetOpenPeoplePage = SharedFlagsModule.FFlagSideSheetOpenPeoplePage
+local FFlagKeepSideSheetOpenBesideMenu = SharedFlagsModule.FFlagKeepSideSheetOpenBesideMenu
+local FFlagSideSheetOpenPeoplePage = SharedFlagsModule.FFlagSideSheetOpenPeoplePage or FFlagKeepSideSheetOpenBesideMenu
 local FFlagFixOverlayTopInsetForDeviceSafeInsets = SharedFlagsModule.FFlagFixOverlayTopInsetForDeviceSafeInsets
 local FFlagFixDrawerNavigateBackWhileClosing = require(Drawer.Flags).FFlagFixDrawerNavigateBackWhileClosing
 
@@ -97,7 +98,8 @@ return ReactModule.memo(function(p1)
 	UseRefResult3.current = NewMenuWidth
 	local UseRefResult4 = ReactModule.useRef(nil)
 	local UseAnimatedBindingResult1, UseAnimatedBindingResult2_1 = ReactOtterModule.useAnimatedBinding(1)
-	local UseResult = if FFlagSideSheetOpenPeoplePage then ReactModule.useCallback(function(p2): boolean
+	local UseResult = nil
+	UseResult = if FFlagSideSheetOpenPeoplePage then ReactModule.useCallback(function(p2): boolean
 		-- upvalues: UseRefResult4 (copy)
 		local Current = UseRefResult4.current
 		
@@ -124,7 +126,7 @@ return ReactModule.memo(function(p1)
 		UseSetDrawerVisibleModuleResult
 	} else { p1.onDrawerClosedAnalytics })
 	local UseResult2 = ReactModule.useCallback(function(p2)
-		-- upvalues: UseRefResult2 (copy), UseBindingResult (copy), DrawerPanelStatus (upval), IsAllowOutsideInteraction (copy), UseResult (copy), UseRefResult (copy), UseRefResult1 (copy), UseBindingResult2 (copy)
+		-- upvalues: UseRefResult2 (copy), UseBindingResult (copy), DrawerPanelStatus (upval), IsAllowOutsideInteraction (copy), UseResult (ref), UseRefResult (copy), UseRefResult1 (copy), UseBindingResult2 (copy)
 		if not UseRefResult2.current then return end
 		if UseBindingResult:getValue() == DrawerPanelStatus.Closing then return end
 		if not IsAllowOutsideInteraction or UseResult(p2) then

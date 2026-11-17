@@ -1,5 +1,6 @@
 ﻿return {
 	GameCollectionGrid = require(script.GameCollectionGrid),
+	usePersonalizedRecommendationsMenuItems = require(script.usePersonalizedRecommendationsMenuItems),
 	isSeeAllTileEnabled = require(script.isSeeAllTileEnabled),
 	useCountdownSubtitleTextBinding = require(script.useCountdownSubtitleTextBinding),
 	useGameCollectionLayoutParams = require(script.useGameCollectionLayoutParams),

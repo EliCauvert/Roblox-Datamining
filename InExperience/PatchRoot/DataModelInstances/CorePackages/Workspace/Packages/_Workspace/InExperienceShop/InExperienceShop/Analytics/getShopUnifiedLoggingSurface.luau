@@ -1,5 +1,7 @@
-﻿local UnifiedLoggingSurface = require(script:FindFirstAncestor("InExperienceShop").Parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
+﻿local Parent = script:FindFirstAncestor("InExperienceShop").Parent
+local UnifiedLoggingSurface = require(Parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
 local ConstantsModule = require(script.Parent.Constants)
+local _ = require(Parent.UnifiedEventEnums)
 
 return function(Home)
 	-- upvalues: ConstantsModule (copy), UnifiedLoggingSurface (copy)

@@ -1,14 +1,20 @@
-﻿local TModule = require(script:FindFirstAncestor("ChatUIPrimitives").Parent.t)
+﻿local ChatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
+local TModule = require(ChatUIPrimitives.Parent.t)
+local FFlagExpChatIdentityDisplayColorModule = require(ChatUIPrimitives.Flags.FFlagExpChatIdentityDisplayColor)
 local PlainTextTypesModule = require(script.Parent.ContentKinds.PlainText.PlainTextTypes)
 local PresetTypesModule = require(script.Parent.ContentKinds.Preset.PresetTypes)
 local EmojiTypesModule = require(script.Parent.ContentKinds.Emoji.EmojiTypes)
 local ArrayResult = TModule.array(TModule.union(TModule.strictInterface({ plainText = PlainTextTypesModule.isValid }), TModule.strictInterface({ preset = PresetTypesModule.isValid }), TModule.strictInterface({ emoji = EmojiTypesModule.isValid }), TModule.strictInterface({
 	system = require(script.Parent.ContentKinds.System.SystemTypes).isValid
 })))
-local config = { emoji = EmojiTypesModule.isValidDraft }
-local InterfaceResult = TModule.interface({ userId = TModule.string, displayName = TModule.string })
+local ArrayResult1 = TModule.array(TModule.union(TModule.strictInterface({ plainText = PlainTextTypesModule.isValidDraft }), TModule.strictInterface({ preset = PresetTypesModule.isValidDraft }), TModule.strictInterface({ emoji = EmojiTypesModule.isValidDraft })))
+local InterfaceResult = TModule.interface({
+	userId = TModule.string,
+	displayName = TModule.string,
+	displayColor = if FFlagExpChatIdentityDisplayColorModule then TModule.optional(TModule.Color3) else nil
+})
 local InterfaceResult1 = TModule.interface({
-	contents = TModule.array(TModule.union(TModule.strictInterface({ plainText = PlainTextTypesModule.isValidDraft }), TModule.strictInterface({ preset = PresetTypesModule.isValidDraft }), TModule.strictInterface(config))),
+	contents = ArrayResult1,
 	repliesToIds = TModule.optional(TModule.array(TModule.string))
 })
 local InterfaceResult2 = TModule.interface({

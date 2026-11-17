@@ -182,5 +182,6 @@
 	SocialTabsFriends = "SocialTabsFriends",
 	FriendsActivityFeed = "FriendsActivityFeed",
 	Schools = "Schools",
-	PlusReferralDashboard = "PlusReferralDashboard"
+	PlusReferralDashboard = "PlusReferralDashboard",
+	TimespentAuditPage = "TimespentAuditPage"
 }

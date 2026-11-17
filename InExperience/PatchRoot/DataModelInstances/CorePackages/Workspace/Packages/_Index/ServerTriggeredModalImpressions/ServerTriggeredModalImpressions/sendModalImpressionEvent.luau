@@ -1,5 +1,4 @@
 ﻿local TelemetryService = game:GetService("TelemetryService")
-local ModalImpressionEventAddSessionInfo = game:DefineFastFlag("ModalImpressionEventAddSessionInfo", false)
 local config = {
 	eventName = "ModalImpression",
 	description = "Sent when a modal is shown",
@@ -12,9 +11,9 @@ local config = {
 }
 
 return function(ModalId, ModalType)
-	-- upvalues: TelemetryService (copy), config (copy), ModalImpressionEventAddSessionInfo (copy)
+	-- upvalues: TelemetryService (copy), config (copy)
 	TelemetryService:LogEvent(config, {
-		standardizedFields = if ModalImpressionEventAddSessionInfo then { "addSessionInfo" } else nil,
+		standardizedFields = { "addSessionInfo" },
 		customFields = { modalId = ModalId, modalType = ModalType }
 	})
 end

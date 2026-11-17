@@ -17,6 +17,7 @@ local FFlagLuaAppRfyRevealRows = SharedFlagsModule.FFlagLuaAppRfyRevealRows
 local FFlagLuaAppSortHeaderAnchorTag = SharedFlagsModule.FFlagLuaAppSortHeaderAnchorTag
 local FFlagSduiCollectionGridRevealRows = SharedFlagsModule.FFlagSduiCollectionGridRevealRows
 local FFlagSduiComponentsUseFoundationTokens = SharedFlagsModule.FFlagSduiComponentsUseFoundationTokens
+local FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint = SharedFlagsModule.FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint
 local StrictInterfaceResult = TModule.strictInterface({
 	testId = TModule.optional(TModule.string),
 	Position = TModule.optional(TModule.UDim2),
@@ -49,6 +50,7 @@ local StrictInterfaceResult = TModule.strictInterface({
 	bufferRowsAboveScreen = TModule.optional(TModule.number),
 	disableRelativeGap = TModule.optional(TModule.boolean),
 	headerComponent = TModule.optional(TModule.table),
+	headerMenuItems = if FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint then TModule.optional(TModule.table) else nil,
 	thresholdRowsFromBottom = TModule.optional(TModule.number),
 	onReachedThresholdFromEnd = TModule.optional(TModule.union(TModule.table, TModule.callback))
 })
@@ -60,7 +62,7 @@ local config = {
 }
 
 return (ReactModule.memo(function(p1)
-	-- upvalues: ValidatePropsFunction (copy), StrictInterfaceResult (copy), CryoModule (copy), config (copy), UseCollectionLayoutModule (copy), ArgCheckModule (copy), FFlagSduiComponentsUseFoundationTokens (copy), UseTokensFunction (copy), UseDesignTokensFunction (copy), UseCollectionSizeBindingsModule (copy), ReactModule (copy), FFlagLuaAppRfyRevealRows (copy), FFlagSduiCollectionGridRevealRows (copy), CollectionHeaderModule (copy), FFlagLuaAppSortHeaderAnchorTag (copy), GridOfCollectionItemsModule (copy)
+	-- upvalues: ValidatePropsFunction (copy), StrictInterfaceResult (copy), CryoModule (copy), config (copy), UseCollectionLayoutModule (copy), ArgCheckModule (copy), FFlagSduiComponentsUseFoundationTokens (copy), UseTokensFunction (copy), UseDesignTokensFunction (copy), UseCollectionSizeBindingsModule (copy), ReactModule (copy), FFlagLuaAppRfyRevealRows (copy), FFlagSduiCollectionGridRevealRows (copy), CollectionHeaderModule (copy), FFlagLuaAppSortHeaderAnchorTag (copy), FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint (copy), GridOfCollectionItemsModule (copy)
 	ValidatePropsFunction(StrictInterfaceResult, p1)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local SideMargin: number = JoinResult.sideMargin
@@ -116,7 +118,8 @@ return (ReactModule.memo(function(p1)
 				hideButton = #JoinResult.items < 1 or (JoinResult.hideHeaderButton or not IsNotTitleMatch),
 				onActivate = JoinResult.onActivateHeader,
 				buttonText = JoinResult.headerButtonText,
-				headerTag = if FFlagLuaAppSortHeaderAnchorTag then JoinResult.headerTag else nil
+				headerTag = if FFlagLuaAppSortHeaderAnchorTag then JoinResult.headerTag else nil,
+				menuItems = if FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint then JoinResult.headerMenuItems else nil
 			}),
 			GridOfItems = ReactModule.createElement(GridOfCollectionItemsModule, {
 				LayoutOrder = 2,

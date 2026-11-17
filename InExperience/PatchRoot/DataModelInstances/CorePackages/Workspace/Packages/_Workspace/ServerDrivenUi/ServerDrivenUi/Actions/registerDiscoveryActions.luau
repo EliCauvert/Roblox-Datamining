@@ -9,15 +9,15 @@ local SduiActionType = SduiCoreSystemModule.SduiActionType
 local GetSduiActionHandlerRegistryFunction = SduiCoreSystemModule.getSduiActionHandlerRegistry
 local FFlagSduiActionsUpdateFiresOwnTelemetry = require(Parent.SharedFlags).FFlagSduiActionsUpdateFiresOwnTelemetry
 local FFlagSduiCommunitySectionSupport = require(Parent.SharedFlags).FFlagSduiCommunitySectionSupport
-local FFlagSduiDevStoreSeeAllSupport = require(Parent.SharedFlags).FFlagSduiDevStoreSeeAllSupport
 local FFlagSduiChartsSortDetailGenreFilter = require(Parent.SharedFlags).FFlagSduiChartsSortDetailGenreFilter
 local FFlagSduiAiOverviewEnabled = require(Parent.SharedFlags).FFlagSduiAiOverviewEnabled
 local FFlagSduiPinShortcutAction = require(Parent.SharedFlags).FFlagSduiPinShortcutAction
 local FFlagLuaAppSduiHomePageSupport = require(Parent.SharedFlags).FFlagLuaAppSduiHomePageSupport
 local FFlagLuaAppSduiGameTileFeedback = require(Parent.SharedFlags).FFlagLuaAppSduiGameTileFeedback
+local FFlagAXOwnMarketplaceTryOnAction = require(Parent.SharedFlags).FFlagAXOwnMarketplaceTryOnAction
 
 return function()
-	-- upvalues: SduiActionType (copy), ServerDrivenUi (copy), FFlagSduiActionsUpdateFiresOwnTelemetry (copy), FFlagSduiOpenSearchResultsTabAction (copy), FFlagLuaAppSduiOpenExternalLinkAction (copy), FFlagSduiAiOverviewEnabled (copy), FFlagLuaAppSduiGameTileFeedback (copy), FFlagLuaAppSduiUpdateUserSettingsAction (copy), FFlagMoveSduiUpdateUserSettingsToAccountManagement (copy), Parent (copy), FFlagSduiDevStoreSeeAllSupport (copy), FFlagLuaAppSduiHomePageSupport (copy), FFlagSduiChartsSortDetailGenreFilter (copy), FFlagSduiPinShortcutAction (copy), FFlagSduiCommunitySectionSupport (copy), GetSduiActionHandlerRegistryFunction (copy)
+	-- upvalues: SduiActionType (copy), ServerDrivenUi (copy), FFlagSduiActionsUpdateFiresOwnTelemetry (copy), FFlagSduiOpenSearchResultsTabAction (copy), FFlagLuaAppSduiOpenExternalLinkAction (copy), FFlagSduiAiOverviewEnabled (copy), FFlagLuaAppSduiGameTileFeedback (copy), FFlagAXOwnMarketplaceTryOnAction (copy), Parent (copy), FFlagLuaAppSduiUpdateUserSettingsAction (copy), FFlagMoveSduiUpdateUserSettingsToAccountManagement (copy), FFlagLuaAppSduiHomePageSupport (copy), FFlagSduiChartsSortDetailGenreFilter (copy), FFlagSduiPinShortcutAction (copy), FFlagSduiCommunitySectionSupport (copy), GetSduiActionHandlerRegistryFunction (copy)
 	GetSduiActionHandlerRegistryFunction().registerActionHandlerConfigs({
 		[SduiActionType.DismissDialog] = {
 			skipUnifiedLogging = false,
@@ -210,11 +210,11 @@ return function()
 				return require(ServerDrivenUi.Actions.SduiUndoGameTileNotInterestedAction)
 			end
 		} else nil,
-		[SduiActionType.OpenMarketplaceTryOn] = {
+		[SduiActionType.OpenMarketplaceTryOn] = if FFlagAXOwnMarketplaceTryOnAction then nil else {
 			skipUnifiedLogging = false,
 			lazyHandler = function()
-				-- upvalues: ServerDrivenUi (upval)
-				return require(ServerDrivenUi.Actions.SduiOpenMarketplaceTryOnAction)
+				-- upvalues: Parent (upval)
+				return require(Parent.AvatarExperienceAnalytics).getSduiOpenMarketplaceTryOnAction()
 			end
 		},
 		[SduiActionType.UpdateUserSettings] = if FFlagLuaAppSduiUpdateUserSettingsAction and not FFlagMoveSduiUpdateUserSettingsToAccountManagement then {
@@ -285,12 +285,12 @@ return function()
 				return require(ServerDrivenUi.Actions.OpenPurchasePrompt.SduiOpenPurchasePromptAction)
 			end
 		},
-		[SduiActionType.OpenSubscriptionPurchasePage] = if FFlagSduiDevStoreSeeAllSupport then {
+		[SduiActionType.OpenSubscriptionPurchasePage] = {
 			lazyHandler = function()
 				-- upvalues: ServerDrivenUi (upval)
 				return require(ServerDrivenUi.Actions.SduiOpenSubscriptionPurchasePageAction)
 			end
-		} else nil,
+		},
 		[SduiActionType.OpenSduiOverlay] = {
 			firesOwnTelemetry = false,
 			lazyHandler = function()

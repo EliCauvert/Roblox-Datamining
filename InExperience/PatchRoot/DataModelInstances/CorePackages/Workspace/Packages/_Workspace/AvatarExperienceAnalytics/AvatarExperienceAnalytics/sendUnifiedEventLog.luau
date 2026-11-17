@@ -10,6 +10,7 @@ local UnifiedEventPageStoreModule = require(script.Parent.Store.UnifiedEventPage
 local UnifiedEventCounterAggregatorModule = require(script.Parent.Lib.UnifiedEventCounterAggregator)
 local AXUnifiedEventFilterModule = require(script.Parent.AXUnifiedEventFilter)
 local _ = require(script.Parent.Generated.UnifiedEventTypes)
+local CheckUnifiedEventFieldsModule = require(script.Parent.checkUnifiedEventFields)
 local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local FFlagAXSendUnifiedEventLogWithInstance = AvatarExperienceFlagsModule.FFlagAXSendUnifiedEventLogWithInstance
 local FFlagAXDebugPanelImpressed = AvatarExperienceFlagsModule.FFlagAXDebugPanelImpressed
@@ -22,7 +23,7 @@ local AXSendUnifiedEventsInStudio = game:DefineFastFlag("AXSendUnifiedEventsInSt
 local DeviceMemoryTier = if FFlagAXUnifiedEventDeviceTier then DeviceTier.GetDeviceMemoryTier() else nil
 
 return function(JoinResult, p1, p2)
-	-- upvalues: FFlagAXUnifiedEventPageContext (copy), SessionService (copy), UnifiedEventPageStoreModule (copy), CryoModule (copy), FFlagAXUnifiedEventDeviceTier (copy), DeviceMemoryTier (copy), FFlagAXUnifiedEventStrictPayloads (copy), UnifiedLoggingSurface (copy), FFlagAXDebugPanelImpressed (copy), DebugPanelModule (copy), FFlagAXSendUnifiedEventLogWithInstance (copy), UnifiedEventLogConstantsModule (copy), IsRunningInStudioFunction (copy), AXSendUnifiedEventsInStudio (copy), FFlagAXUnifiedEventCounters (copy), AXUnifiedEventFilterModule (copy), UnifiedEventCounterAggregatorModule (copy), AnalyticsServiceModule (copy)
+	-- upvalues: FFlagAXUnifiedEventPageContext (copy), SessionService (copy), UnifiedEventPageStoreModule (copy), CryoModule (copy), FFlagAXUnifiedEventDeviceTier (copy), DeviceMemoryTier (copy), FFlagAXUnifiedEventStrictPayloads (copy), UnifiedLoggingSurface (copy), FFlagAXDebugPanelImpressed (copy), DebugPanelModule (copy), FFlagAXSendUnifiedEventLogWithInstance (copy), UnifiedEventLogConstantsModule (copy), IsRunningInStudioFunction (copy), AXSendUnifiedEventsInStudio (copy), FFlagAXUnifiedEventCounters (copy), AXUnifiedEventFilterModule (copy), CheckUnifiedEventFieldsModule (copy), UnifiedEventCounterAggregatorModule (copy), AnalyticsServiceModule (copy)
 	if FFlagAXUnifiedEventPageContext then
 		local Level2aSessionTag = SessionService:GetSessionTag("level2a")
 		local PageFields = UnifiedEventPageStoreModule.getPageFields()
@@ -49,7 +50,7 @@ return function(JoinResult, p1, p2)
 	end
 	if IsRunningInStudioFunction() and not AXSendUnifiedEventsInStudio then return end
 	if FFlagAXUnifiedEventCounters then
-		UnifiedEventCounterAggregatorModule.record(JoinResult, if p2 == nil or p2.filterPassed == nil then AXUnifiedEventFilterModule.filter(JoinResult, { skipReporting = true }) else p2.filterPassed)
+		UnifiedEventCounterAggregatorModule.record(JoinResult, if p2 == nil or p2.filterPassed == nil then AXUnifiedEventFilterModule.filter(JoinResult, { skipReporting = true }) else p2.filterPassed, if FFlagAXUnifiedEventStrictPayloads and (p2 == nil or not p2.skipConformanceCheck) then CheckUnifiedEventFieldsModule(JoinResult) else nil)
 	end
 	AnalyticsServiceModule.EventStream:sendTelemetryEvent(UnifiedEventLogConstantsModule.EVENT_NAME, UnifiedEventLogConstantsModule.EVENT_NAME, JoinResult)
 end

@@ -14,6 +14,7 @@ local IsTriggerGameMenuFunction = require(Utils.gameInviteModalHelper).isTrigger
 local IXPServiceWrapper = require(Parent.IxpServiceWrapper).IXPServiceWrapper
 local FFlagGameInviteInExpUserListExposureModule = require(GameInvite.Flags.FFlagGameInviteInExpUserListExposure)
 local FStringGameInviteInExpIxpLayerModule = require(GameInvite.Flags.FStringGameInviteInExpIxpLayer)
+local IsGameInviteJoinForPioneerEnabledFunction = require(Parent.NotificationsCommon).isGameInviteJoinForPioneerEnabled
 game:DefineFastFlag("GameInviteModalAnalyticsEmptyEventContextFix", false)
 local FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt = require(Parent.SharedFlags).FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt
 local Module = {}
@@ -72,7 +73,7 @@ local function openDeveloperInviteModalNonBlocking(p1, p2, p3)
 end
 
 function Module:openModal(p1, p2)
-	-- upvalues: FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt (copy), IsTriggerDDIFunction (copy), openDeveloperInviteModalNonBlocking (copy), GetCustomizedInvitePromptParamsModule (copy), GetCanSendAndCanCustomizeInvitesModule (copy), CryoModule (copy), GameInviteAnalyticsManagerModule (copy), FFlagGameInviteInExpUserListExposureModule (copy), IsTriggerGameMenuFunction (copy), IXPServiceWrapper (copy), FStringGameInviteInExpIxpLayerModule (copy), ContextActionService (copy)
+	-- upvalues: FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt (copy), IsTriggerDDIFunction (copy), openDeveloperInviteModalNonBlocking (copy), GetCustomizedInvitePromptParamsModule (copy), GetCanSendAndCanCustomizeInvitesModule (copy), CryoModule (copy), GameInviteAnalyticsManagerModule (copy), FFlagGameInviteInExpUserListExposureModule (copy), IsTriggerGameMenuFunction (copy), IsGameInviteJoinForPioneerEnabledFunction (copy), IXPServiceWrapper (copy), FStringGameInviteInExpIxpLayerModule (copy), ContextActionService (copy)
 	if not self.isModalOpen then
 		self.isModalOpen = true
 		
@@ -118,7 +119,7 @@ function Module:openModal(p1, p2)
 		else
 			self.ToggleGameInviteModalEvent:Fire(true, false, p1)
 			
-			if FFlagGameInviteInExpUserListExposureModule and IsTriggerGameMenuFunction(p1.trigger) then
+			if FFlagGameInviteInExpUserListExposureModule and IsTriggerGameMenuFunction(p1.trigger) and not IsGameInviteJoinForPioneerEnabledFunction() then
 				IXPServiceWrapper:LogFlagLinkedUserLayerExposure(FStringGameInviteInExpIxpLayerModule)
 			end
 			if game:GetFastFlag("GameInviteModalAnalyticsEmptyEventContextFix") then

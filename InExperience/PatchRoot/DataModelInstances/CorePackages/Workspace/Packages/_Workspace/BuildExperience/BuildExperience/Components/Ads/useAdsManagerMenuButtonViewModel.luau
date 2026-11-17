@@ -10,14 +10,16 @@ local _ = require(script.Parent.AdsManagerMenuButtonView)
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local UseOpenWebViewWithResumeRefreshModule = require(BuildExperience.utils.useOpenWebViewWithResumeRefresh)
 local UseRefreshAdsDataModule = require(script.Parent.useRefreshAdsData)
+local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 local FFlagBuildAdsManagerUniverseUrlModule = require(BuildExperience.Flags.FFlagBuildAdsManagerUniverseUrl)
+local FFlagBuildExperienceAdsAndRobuxTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceAdsAndRobuxTelemetry)
 local IconName = FoundationModule.Enums.IconName
 local InputSize = FoundationModule.Enums.InputSize
 local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
 local BuildAdsManagerMenuWidth = game:DefineFastInt("BuildAdsManagerMenuWidth", 162)
 
 return function(p1)
-	-- upvalues: ReactModule (copy), UseScaledValueFunction (copy), BuildAdsManagerMenuWidth (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseRefreshAdsDataModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), GetAdsManagerUrlModule (copy), UseOpenWebViewWithResumeRefreshModule (copy), IconName (copy), InputSize (copy)
+	-- upvalues: ReactModule (copy), UseScaledValueFunction (copy), BuildAdsManagerMenuWidth (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseRefreshAdsDataModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), GetAdsManagerUrlModule (copy), UseOpenWebViewWithResumeRefreshModule (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), SendBuildExperienceEventModule (copy), IconName (copy), InputSize (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseScaledValueResult = UseScaledValueFunction(BuildAdsManagerMenuWidth)
 	local AdsManager = UseLocalizationFunction({
@@ -31,10 +33,17 @@ return function(p1)
 	local UseOpenWebViewWithResumeRefreshModuleResult = nil
 	UseOpenWebViewWithResumeRefreshModuleResult = if FFlagBuildAdsManagerUniverseUrlModule then UseOpenWebViewWithResumeRefreshModule(GetAdsManagerUrlModule.getAdsManagerUrl(UniverseId), AdsManager, UseRefreshAdsDataModuleResult, p1.appLifecycleObserverService) else UseOpenWebViewWithResumeRefreshModule(GetAdsManagerUrlModule.getDefaultAdsManagerUrl(), AdsManager, UseRefreshAdsDataModuleResult, p1.appLifecycleObserverService)
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: UseStateResult2 (copy), UseOpenWebViewWithResumeRefreshModuleResult (ref)
+		-- upvalues: UseStateResult2 (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (upval), SendBuildExperienceEventModule (upval), UniverseId (copy), UseOpenWebViewWithResumeRefreshModuleResult (ref)
 		UseStateResult2(false)
+		
+		if FFlagBuildExperienceAdsAndRobuxTelemetryModule then
+			SendBuildExperienceEventModule("ADS_MANAGER_OPEN_CLICK", { universeId = UniverseId }, { context = "get_users_menu" })
+		end
 		UseOpenWebViewWithResumeRefreshModuleResult()
-	end, { UseOpenWebViewWithResumeRefreshModuleResult })
+	end, {
+		UseOpenWebViewWithResumeRefreshModuleResult,
+		if FFlagBuildExperienceAdsAndRobuxTelemetryModule then UniverseId else nil
+	})
 	
 	return {
 		layoutOrder = p1.layoutOrder,

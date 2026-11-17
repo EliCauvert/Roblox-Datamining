@@ -29,7 +29,6 @@ local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
 local FFlagProfilePlatformEnableClickToCopyUsernameModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnableClickToCopyUsername)
 local FFlagEnableFontStylisticAlternativesOnSocialScreens = require(Parent.SharedFlags).FFlagEnableFontStylisticAlternativesOnSocialScreens
 local GetFFlagLuaAppEnableOpenTypeSupportFunction = require(Parent.SharedFlags).GetFFlagLuaAppEnableOpenTypeSupport
-local FFlagProfilePlatformEnableRobloxAdminBadgeModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnableRobloxAdminBadge)
 local FFlagEnableBlackbirdCheck = require(Parent.SharedFlags).FFlagEnableBlackbirdCheck
 local FFlagHidePremiumIconography = require(Parent.SharedFlags).FFlagHidePremiumIconography
 local FFlagAddPlatformNameToProfileHeader = require(Parent.SharedFlags).FFlagAddPlatformNameToProfileHeader
@@ -40,7 +39,7 @@ local FFlagProfilePlatformTruncateLongCustomFriendNamesModule = require(ProfileP
 local IconsActionsEditCopy = if FFlagProfilePlatformEnableClickToCopyUsernameModule then Images["icons/actions/edit/copy"] else nil
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FFlagAddPlatformNameToProfileHeader (copy), GetBuilderIconForCurrentPlatformFunction (copy), Images (copy), FFlagProfilePlatformEnableClickToCopyUsernameModule (copy), UseDispatchFunction (copy), UseProfileAnalyticsContextModule (copy), FFlagDisableCopyUsernameOnConsole (copy), ResponsiveModule (copy), FFlagHidePremiumIconography (copy), FFlagEnableBlackbirdCheck (copy), VerifiedBadgesModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), Default (copy), Contexts (copy), EventNamesModule (copy), SetCurrentToastMessageFunction (copy), IconsActionsEditCopy (copy), HorizontalPageMargin (copy), FFlagProfilePlatformTruncateLongCustomFriendNamesModule (copy), View (copy), IconButton (copy), IconSize (copy), Tooltip (copy), TooltipOrientation (copy), Text (copy), FFlagProfilePlatformEnableRobloxAdminBadgeModule (copy), FoundationModule (copy), FFlagEnableFontStylisticAlternativesOnSocialScreens (copy), GetFFlagLuaAppEnableOpenTypeSupportFunction (copy), OpenTypeSupport (copy), StateLayerAffordance (copy), Icon (copy), IconSize1 (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FFlagAddPlatformNameToProfileHeader (copy), GetBuilderIconForCurrentPlatformFunction (copy), Images (copy), FFlagProfilePlatformEnableClickToCopyUsernameModule (copy), UseDispatchFunction (copy), UseProfileAnalyticsContextModule (copy), FFlagDisableCopyUsernameOnConsole (copy), ResponsiveModule (copy), FFlagHidePremiumIconography (copy), FFlagEnableBlackbirdCheck (copy), VerifiedBadgesModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), Default (copy), Contexts (copy), EventNamesModule (copy), SetCurrentToastMessageFunction (copy), IconsActionsEditCopy (copy), HorizontalPageMargin (copy), FFlagProfilePlatformTruncateLongCustomFriendNamesModule (copy), View (copy), IconButton (copy), IconSize (copy), Tooltip (copy), TooltipOrientation (copy), Text (copy), FoundationModule (copy), FFlagEnableFontStylisticAlternativesOnSocialScreens (copy), GetFFlagLuaAppEnableOpenTypeSupportFunction (copy), OpenTypeSupport (copy), StateLayerAffordance (copy), Icon (copy), IconSize1 (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FFlagAddPlatformNameToProfileHeader (upval), GetBuilderIconForCurrentPlatformFunction (upval)
@@ -125,11 +124,6 @@ return function(p1)
 					Text = Text1,
 					fontStyle = UseTokensResult.Typography.HeadingSmall
 				}),
-				AdminTiltIcon = if FFlagProfilePlatformEnableRobloxAdminBadgeModule and p1.isRobloxAdmin then ReactModule.createElement(FoundationModule.Icon, {
-					LayoutOrder = 3,
-					name = FoundationModule.Enums.IconName.Tilt,
-					size = FoundationModule.Enums.IconSize.Large
-				}) else nil,
 				SubscriptionBadge = if FFlagEnableBlackbirdCheck and p1.isRobloxSubscriber == true then ReactModule.createElement(View, { tag = "auto-xy padding-top-xxsmall", LayoutOrder = 4 }, {
 					Icon = ReactModule.createElement(FoundationModule.Icon, {
 						name = FoundationModule.Enums.IconName.RobloxPlus,
@@ -154,7 +148,7 @@ return function(p1)
 				UIListLayout = ReactModule.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Horizontal,
 					HorizontalAlignment = Enum.HorizontalAlignment.Left,
-					VerticalAlignment = if FFlagProfilePlatformEnableRobloxAdminBadgeModule and p1.isRobloxAdmin then Enum.VerticalAlignment.Center else Enum.VerticalAlignment.Bottom,
+					VerticalAlignment = Enum.VerticalAlignment.Bottom,
 					SortOrder = Enum.SortOrder.LayoutOrder
 				}),
 				EditNameButton = if p1.openEditName then ReactModule.createElement(IconButton, {
@@ -180,20 +174,6 @@ return function(p1)
 					Text = Text1,
 					fontStyle = UseTokensResult.Typography.HeadingSmall
 				}),
-				AdminTiltIcon = if FFlagProfilePlatformEnableRobloxAdminBadgeModule and p1.isRobloxAdmin then ReactModule.createElement("Frame", {
-					BackgroundTransparency = 1,
-					LayoutOrder = 3,
-					AutomaticSize = Enum.AutomaticSize.XY
-				}, {
-					UIPadding = ReactModule.createElement("UIPadding", {
-						PaddingLeft = UDim.new(0, UseTokensResult.Gap.XXSmall),
-						PaddingBottom = UDim.new(0, UseTokensResult.Gap.XXSmall)
-					}),
-					Icon = ReactModule.createElement(FoundationModule.Icon, {
-						name = FoundationModule.Enums.IconName.Tilt,
-						size = FoundationModule.Enums.IconSize.Large
-					})
-				}) else nil,
 				SubscriptionBadge = if FFlagEnableBlackbirdCheck and p1.isRobloxSubscriber == true then ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 4,

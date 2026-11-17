@@ -8,6 +8,7 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local FFlagEnableHomeRobloxLogo = require(Parent.SharedFlags).FFlagEnableHomeRobloxLogo
 local FFlagAppThemeHalloween2026BuildBackgroundModule = require(BuildExperience.Flags.FFlagAppThemeHalloween2026BuildBackground)
+local FFlagBuildUpdatedSearchUXForGAModule = require(BuildExperience.Flags.FFlagBuildUpdatedSearchUXForGA)
 local UseThemeBackgroundFunction = require(Parent.ThemeBackground).useThemeBackground
 local HeaderBar = require(Parent.UIBlox).App.Bar.HeaderBar
 local Button = FoundationModule.Button
@@ -21,6 +22,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local FlyoutSidePanelIXP = require(Parent.SharedExperimentDefinition).FlyoutSidePanelIXP
 local FlyoutLeftHeader = require(Parent.FlyoutSidePanel).Components.FlyoutLeftHeader
 local SearchBarContainerModule = require(BuildExperience.Components.SearchBar.SearchBarContainer)
+local UseBuildPageHeaderSearchModule = require(script.Parent.useBuildPageHeaderSearch)
 local GetSearchQueryStoreModule = require(BuildExperience.Stores.GetSearchQueryStore)
 local _ = require(BuildExperience.Stores.GetSearchQueryStore.createSearchQueryStore)
 local BuildSearchBarWidth = game:DefineFastInt("BuildSearchBarWidth", 400)
@@ -40,7 +42,7 @@ local function renderEmptyRight()
 end
 
 local function HeaderSearch(p1)
-	-- upvalues: UseScaledValueFunction (copy), BuildSearchBarWidth (copy), UseTokensFunction (copy), SignalsReactModule (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), SearchBarContainerModule (copy), Button (copy), ButtonVariant (copy), InputSize (copy)
+	-- upvalues: UseScaledValueFunction (copy), BuildSearchBarWidth (copy), UseTokensFunction (copy), SignalsReactModule (copy), UseLocalizationFunction (copy), FFlagBuildUpdatedSearchUXForGAModule (copy), ReactModule (copy), View (copy), SearchBarContainerModule (copy), Button (copy), ButtonVariant (copy), InputSize (copy)
 	local UseScaledValueResult = UseScaledValueFunction(BuildSearchBarWidth)
 	local Size2200 = UseTokensFunction().Size.Size_2200
 	local SearchQueryStore = p1.searchQueryStore
@@ -50,14 +52,16 @@ local function HeaderSearch(p1)
 		searchbarPlaceholder = "Feature.Build.Label.SearchGames",
 		cancelText = "Feature.Build.Action.Cancel"
 	})
-	ReactModule.useEffect(function()
-		-- upvalues: SearchQueryStore (copy)
-		return function()
-			-- upvalues: SearchQueryStore (upval)
-			SearchQueryStore.setIsSearchActive(false)
-		end
-	end, { SearchQueryStore })
 	
+	if not FFlagBuildUpdatedSearchUXForGAModule then
+		ReactModule.useEffect(function()
+			-- upvalues: SearchQueryStore (copy)
+			return function()
+				-- upvalues: SearchQueryStore (upval)
+				SearchQueryStore.setIsSearchActive(false)
+			end
+		end, { SearchQueryStore })
+	end
 	return ReactModule.createElement(View, {
 		tag = "row align-y-center gap-small size-full",
 		testId = "BuildPageHeader.CenterSearchContainer"
@@ -101,57 +105,117 @@ local function HeaderCenter(p1)
 	})
 end
 
+local function CompactHeaderSearch(p1)
+	-- upvalues: SignalsReactModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), View (copy), SearchBarContainerModule (copy)
+	local SearchQueryStore = p1.searchQueryStore
+	
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		Back = ReactModule.createElement(IconButton, {
+			LayoutOrder = 1,
+			isCircular = true,
+			testId = "BuildPageHeader.SearchBackButton",
+			icon = IconName.ChevronLargeLeft,
+			onActivated = SearchQueryStore.endSearch,
+			size = InputSize.Medium,
+			variant = ButtonVariant.Utility
+		}),
+		SearchBarContainer = ReactModule.createElement(View, { LayoutOrder = 2, tag = "fill auto-y" }, {
+			SearchBar = ReactModule.createElement(SearchBarContainerModule, {
+				clear = SearchQueryStore.clear,
+				onFocusGained = SearchQueryStore.beginSearch,
+				placeholder = UseLocalizationFunction({
+					searchbarPlaceholder = LocalizationStringsModule.BUILD_SEARCH_PLACEHOLDER
+				}).searchbarPlaceholder,
+				query = SignalsReactModule.useSignalBinding(SearchQueryStore.getDraftQuery),
+				setQuery = SearchQueryStore.setQuery,
+				shouldFocus = p1.shouldFocus
+			})
+		})
+	})
+end
+
 return function(Frame)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagAppThemeHalloween2026BuildBackgroundModule (copy), UseThemeBackgroundFunction (copy), FlyoutSidePanelIXP (copy), DisplayModule (copy), SignalsReactModule (copy), GetSearchQueryStoreModule (copy), ReactModule (copy), HeaderCenter (copy), View (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), renderEmptyRight (copy), HeaderBar (copy), renderFlyoutLeftHeader (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagAppThemeHalloween2026BuildBackgroundModule (copy), UseThemeBackgroundFunction (copy), FlyoutSidePanelIXP (copy), GetSearchQueryStoreModule (copy), DisplayModule (copy), SignalsReactModule (copy), FFlagBuildUpdatedSearchUXForGAModule (copy), UseBuildPageHeaderSearchModule (copy), ReactModule (copy), HeaderCenter (copy), View (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), renderEmptyRight (copy), HeaderBar (copy), renderFlyoutLeftHeader (copy), CompactHeaderSearch (copy)
 	local Title = UseLocalizationFunction({ title = LocalizationStringsModule.BUILD_HEADER_TITLE }).title
 	local HasUseThemeBackgroundResult: boolean = if FFlagAppThemeHalloween2026BuildBackgroundModule then UseThemeBackgroundFunction() ~= nil else false
 	local IsFlyoutSidePanelEnabled = FlyoutSidePanelIXP.isFlyoutSidePanelEnabled()
-	local HasOnOpenSearch = false
-	local SearchQueryStore = nil
-	local UseSignalStateResult = SignalsReactModule.useSignalState(DisplayModule.GetDisplayStore(false).getDisplaySize)
-	SearchQueryStore = Frame.searchQueryStore or GetSearchQueryStoreModule()
-	local IsNotUseSignalStateResultMatch = UseSignalStateResult ~= Enum.DisplaySize.Small
-	HasOnOpenSearch = UseSignalStateResult == Enum.DisplaySize.Small and Frame.onOpenSearch ~= nil
+	local SearchQueryStore = Frame.searchQueryStore or GetSearchQueryStoreModule()
+	local IsUseSignalStateResultMatch = SignalsReactModule.useSignalState(DisplayModule.GetDisplayStore(false).getDisplaySize) == Enum.DisplaySize.Small
+	local NoIsUseSignalStateResultMatch = not IsUseSignalStateResultMatch
+	local HasOnOpenSearch: boolean = IsUseSignalStateResultMatch and Frame.onOpenSearch ~= nil
+	local IsUseSignalStateResultMatch1: boolean = FFlagBuildUpdatedSearchUXForGAModule and IsUseSignalStateResultMatch
+	local UseBuildPageHeaderSearchModuleResult = if FFlagBuildUpdatedSearchUXForGAModule then UseBuildPageHeaderSearchModule({
+		searchQueryStore = SearchQueryStore,
+		isCompact = IsUseSignalStateResultMatch
+	}) else nil
+	local Element = ReactModule.createElement(HeaderBar, {
+		isTitleCentered = false,
+		barHeight = Frame.height,
+		paddingLeft = UDim.new(0, 0),
+		paddingRight = UDim.new(0, 0),
+		renderLeft = if IsFlyoutSidePanelEnabled then function()
+			-- upvalues: renderFlyoutLeftHeader (upval), Title (copy)
+			return renderFlyoutLeftHeader(Title)
+		end else nil,
+		title = if IsFlyoutSidePanelEnabled then nil else Title,
+		renderCenter = if NoIsUseSignalStateResultMatch then function()
+			-- upvalues: ReactModule (upval), HeaderCenter (upval), SearchQueryStore (copy)
+			return ReactModule.createElement(HeaderCenter, { searchQueryStore = SearchQueryStore })
+		end else nil,
+		renderRight = if HasOnOpenSearch then function()
+			-- upvalues: ReactModule (upval), View (upval), HasOnOpenSearch (copy), IconButton (upval), IconName (upval), Frame (copy), InputSize (upval), ButtonVariant (upval)
+			return ReactModule.createElement(View, {
+				tag = "row align-y-center gap-medium auto-xy",
+				testId = "BuildPageHeader.RightActions"
+			}, {
+				Search = if HasOnOpenSearch then ReactModule.createElement(IconButton, {
+					LayoutOrder = 1,
+					isCircular = true,
+					testId = "BuildPageHeader.SearchButton",
+					icon = IconName.MagnifyingGlass,
+					onActivated = Frame.onOpenSearch,
+					size = InputSize.Medium,
+					variant = ButtonVariant.Utility
+				}) else nil
+			})
+		end else renderEmptyRight,
+		backgroundTransparency = if IsUseSignalStateResultMatch1 or HasUseThemeBackgroundResult then 1 else nil
+	})
 	
 	return ReactModule.createElement(View, {
 		ZIndex = 3,
-		tag = "composition-content-header size-full-0 auto-y",
 		testId = "BuildPageHeader",
 		LayoutOrder = Frame.LayoutOrder,
+		ref = if FFlagBuildUpdatedSearchUXForGAModule then UseBuildPageHeaderSearchModuleResult.headerRef else nil,
+		tag = if FFlagBuildUpdatedSearchUXForGAModule then {
+			["composition-content-header size-full-0 auto-y"] = true,
+			["bg-surface-0"] = IsUseSignalStateResultMatch1 and not HasUseThemeBackgroundResult
+		} else "composition-content-header size-full-0 auto-y",
 		Size = UDim2.new(1, 0, 0, Frame.height)
-	}, {
-		HeaderBar = ReactModule.createElement(HeaderBar, {
-			isTitleCentered = false,
-			barHeight = Frame.height,
-			paddingLeft = UDim.new(0, 0),
-			paddingRight = UDim.new(0, 0),
-			renderLeft = if IsFlyoutSidePanelEnabled then function()
-				-- upvalues: renderFlyoutLeftHeader (upval), Title (copy)
-				return renderFlyoutLeftHeader(Title)
-			end else nil,
-			title = if IsFlyoutSidePanelEnabled then nil else Title,
-			renderCenter = if IsNotUseSignalStateResultMatch then function()
-				-- upvalues: ReactModule (upval), HeaderCenter (upval), SearchQueryStore (ref)
-				return ReactModule.createElement(HeaderCenter, { searchQueryStore = SearchQueryStore })
-			end else nil,
-			renderRight = if HasOnOpenSearch then function()
-				-- upvalues: ReactModule (upval), View (upval), HasOnOpenSearch (ref), IconButton (upval), IconName (upval), Frame (copy), InputSize (upval), ButtonVariant (upval)
-				return ReactModule.createElement(View, {
-					tag = "row align-y-center gap-medium auto-xy",
-					testId = "BuildPageHeader.RightActions"
-				}, {
-					Search = if HasOnOpenSearch then ReactModule.createElement(IconButton, {
-						LayoutOrder = 1,
-						isCircular = true,
-						testId = "BuildPageHeader.SearchButton",
-						icon = IconName.MagnifyingGlass,
-						onActivated = Frame.onOpenSearch,
-						size = InputSize.Medium,
-						variant = ButtonVariant.Utility
-					}) else nil
-				})
-			end else renderEmptyRight,
-			backgroundTransparency = if HasUseThemeBackgroundResult then 1 else nil
+	}, if IsUseSignalStateResultMatch1 then {
+		DefaultBar = ReactModule.createElement(View, {
+			tag = "size-full",
+			testId = "BuildPageHeader.DefaultBar",
+			GroupTransparency = UseBuildPageHeaderSearchModuleResult.fadeProgress,
+			Visible = UseBuildPageHeaderSearchModuleResult.fadeProgress:map(function(p1: number): boolean
+				return p1 < 1
+			end)
+		}, { HeaderBar = Element }),
+		CompactSearch = ReactModule.createElement(View, {
+			ZIndex = 2,
+			tag = "row align-y-center gap-small size-full",
+			testId = "BuildPageHeader.CompactSearchContainer",
+			GroupTransparency = UseBuildPageHeaderSearchModuleResult.fadeProgress:map(function(p1: number): number
+				return 1 - p1
+			end),
+			Visible = if UseBuildPageHeaderSearchModuleResult.isCompactSearchOpen then true else UseBuildPageHeaderSearchModuleResult.fadeProgress:map(function(p1: number): boolean
+				return p1 > 0
+			end)
+		}, {
+			Content = ReactModule.createElement(CompactHeaderSearch, {
+				searchQueryStore = SearchQueryStore,
+				shouldFocus = UseBuildPageHeaderSearchModuleResult.isCompactSearchOpen and Frame.isFocused
+			})
 		})
-	})
+	} else { HeaderBar = Element })
 end

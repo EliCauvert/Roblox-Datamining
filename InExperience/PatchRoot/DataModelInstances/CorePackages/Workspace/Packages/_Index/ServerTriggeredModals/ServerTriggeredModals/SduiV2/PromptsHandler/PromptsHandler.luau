@@ -43,7 +43,7 @@ local FFlagSduiSurfaceBannerAlwaysMounted = SharedFlagsModule.FFlagSduiSurfaceBa
 local FFlagAppIaScrollAway = SharedFlagsModule.FFlagAppIaScrollAway
 local FFlagSduiDismissPromptAction = SharedFlagsModule.FFlagSduiDismissPromptAction
 local FFlagHomepagePromptsPaddingFix = SharedFlagsModule.FFlagHomepagePromptsPaddingFix
-local FFlagHomepagePromptsHandlerPassClientAttributes = SharedFlagsModule.FFlagHomepagePromptsHandlerPassClientAttributes
+local FFlagPromptsHandlerEnabled = SharedFlagsModule.FFlagPromptsHandlerEnabled
 local FFlagPromptsEdpOpenReplaceOnFetch = SharedFlagsModule.FFlagPromptsEdpOpenReplaceOnFetch
 local FFlagPromptsHandlerFetchOncePerSession = SharedFlagsModule.FFlagPromptsHandlerFetchOncePerSession
 local FIntPromptsHandlerSessionTimeoutMs = SharedFlagsModule.FIntPromptsHandlerSessionTimeoutMs
@@ -87,7 +87,7 @@ local _ = function(HomepageLaunch)
 end
 
 local MemoResult = ReactModule.memo(function(p1)
-	-- upvalues: FFlagNotificationStreamPromptsHandlerEnabled (copy), PromptsEntryPointModule (copy), SharedFlagsModule (copy), UseDispatchFunction (copy), FFlagSduiDismissPromptAction (copy), UseStoreFunction (copy), UseModalSignalStoreModule (copy), FFlagEdpGameLeavePromptsHandlerEnabled (copy), FFlagEdpOpenPromptsHandlerEnabled (copy), FFlagPromptsEdpOpenReplaceOnFetch (copy), FFlagPushNotificationsUpsellPassClientAttributesToPrompts (copy), GetHomepagePromptsClientAttributesModule (copy), ReactModule (copy), GetEntryPointSurfaceConfigModule (copy), SignalsReactModule (copy), FFlagHomepagePromptsHandlerPassClientAttributes (copy), FFlagChatPushUpsellPromptsEnabled (copy), FFlagSduiAllowNoConfigsBuilt (copy), SduiLoadTimer (copy), parsePromptStyles (copy), FIntPromptsHandlerSessionTimeoutMs (copy), FFlagPromptsHandlerFetchOncePerSession (copy), Tbl (copy), FetchPromptsModule (copy), LocalUserIdStore (copy), CurrentUserIds (copy), UsePromptEntriesModule (copy), PromptStyleModule (copy), FFlagPromptsModalSkipTelemetryModule (copy), LogPromptModalSkippedModule (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), FFlagPromptsImpressionUsesTitle (copy), FFlagPlusUpsellSheetHomePromptModule (copy), PlusUpsellSheetPromptModule (copy), ReportPromptImpressionModule (copy), LoggerModule (copy), SendModalImpressionEventFunction (copy), FFlagPromptsHandlerCoachmarkEnabled (copy), FFlagSduiSurfaceBannerScrollAwaySticky (copy), FFlagAppIaScrollAway (copy), AppNavBarModule (copy), FFlagSduiSurfaceBannerAlwaysMounted (copy), FFlagSduiSystemBannerComponent (copy), SurfaceBannerModule (copy), SduiFeatureEntryPoint (copy), FFlagPromptsActionEventLoggingModule (copy), FFlagHomepagePromptsPaddingFix (copy), View (copy), CoachmarkRendererModule (copy)
+	-- upvalues: FFlagNotificationStreamPromptsHandlerEnabled (copy), PromptsEntryPointModule (copy), SharedFlagsModule (copy), UseDispatchFunction (copy), FFlagSduiDismissPromptAction (copy), UseStoreFunction (copy), UseModalSignalStoreModule (copy), FFlagEdpGameLeavePromptsHandlerEnabled (copy), FFlagEdpOpenPromptsHandlerEnabled (copy), FFlagPromptsEdpOpenReplaceOnFetch (copy), FFlagPushNotificationsUpsellPassClientAttributesToPrompts (copy), GetHomepagePromptsClientAttributesModule (copy), ReactModule (copy), GetEntryPointSurfaceConfigModule (copy), SignalsReactModule (copy), FFlagPromptsHandlerEnabled (copy), FFlagChatPushUpsellPromptsEnabled (copy), FFlagSduiAllowNoConfigsBuilt (copy), SduiLoadTimer (copy), parsePromptStyles (copy), FIntPromptsHandlerSessionTimeoutMs (copy), FFlagPromptsHandlerFetchOncePerSession (copy), Tbl (copy), FetchPromptsModule (copy), LocalUserIdStore (copy), CurrentUserIds (copy), UsePromptEntriesModule (copy), PromptStyleModule (copy), FFlagPromptsModalSkipTelemetryModule (copy), LogPromptModalSkippedModule (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), FFlagPromptsImpressionUsesTitle (copy), FFlagPlusUpsellSheetHomePromptModule (copy), PlusUpsellSheetPromptModule (copy), ReportPromptImpressionModule (copy), LoggerModule (copy), SendModalImpressionEventFunction (copy), FFlagPromptsHandlerCoachmarkEnabled (copy), FFlagSduiSurfaceBannerScrollAwaySticky (copy), FFlagAppIaScrollAway (copy), AppNavBarModule (copy), FFlagSduiSurfaceBannerAlwaysMounted (copy), FFlagSduiSystemBannerComponent (copy), SurfaceBannerModule (copy), SduiFeatureEntryPoint (copy), FFlagPromptsActionEventLoggingModule (copy), FFlagHomepagePromptsPaddingFix (copy), View (copy), CoachmarkRendererModule (copy)
 	local EntryPoint = p1.entryPoint
 	local IsEntryPointMatch: boolean = FFlagNotificationStreamPromptsHandlerEnabled and EntryPoint == PromptsEntryPointModule.NotificationStreamOpen
 	local PromptStyle = p1.promptStyle
@@ -107,7 +107,7 @@ local MemoResult = ReactModule.memo(function(p1)
 	local UseMemoResult2 = nil
 	local UseMemoResult1 = nil
 	
-	if FFlagHomepagePromptsHandlerPassClientAttributes then
+	if FFlagPromptsHandlerEnabled then
 		UseMemoResult1 = ReactModule.useMemo(function()
 			-- upvalues: IsEntryPointMatch (copy), p1 (copy), FFlagPushNotificationsUpsellPassClientAttributesToPrompts (upval), EntryPoint (copy), PromptsEntryPointModule (upval), FFlagEdpGameLeavePromptsHandlerEnabled (upval), FFlagEdpOpenPromptsHandlerEnabled (upval), UseResult (copy), FFlagChatPushUpsellPromptsEnabled (upval), GetHomepagePromptsClientAttributesModule (upval)
 			if IsEntryPointMatch then

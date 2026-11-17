@@ -72,50 +72,58 @@ return function(p1, p2)
 	end, { P1 }) else false
 	local UseGetFriendRequestsModuleResult = if FFlagShowRequestsInCarouselForAllUsers then UseGetFriendRequestsModule(UseMemoResult and UseGetFriendsCountByUserIdResult < FIntFriendsCarouselInitialFetchSize) else nil
 	local IsUseGetFriendsCountByUserIdResultBelow: boolean = IsUsePreferredInputResultMatch and UseGetFriendsCountByUserIdResult <= FIntSocialCarouselShowRecsLimit
-	local UseMemoResult1 = if FFlagShowRequestsInCarouselForAllUsers then ReactModule.useMemo(function()
-		-- upvalues: UseGetFriendRequestsModuleResult (copy), UseFriendsListOrderedByPresenceResult (copy), IsUseGetFriendsCountByUserIdResultBelow (copy), UseGetRecommendationsModuleResult (copy)
-		if #UseGetFriendRequestsModuleResult == 0 then
-			return UseGetFriendRequestsModuleResult
-		end
-		local t = {}
-		
-		for _, onlineFriend in UseFriendsListOrderedByPresenceResult.onlineFriends do
-			t[tostring(onlineFriend.id)] = true
-		end
-		for _, offlineFriend in UseFriendsListOrderedByPresenceResult.offlineFriends do
-			t[tostring(offlineFriend.id)] = true
-		end
-		if IsUseGetFriendsCountByUserIdResultBelow then
-			for _, value in UseGetRecommendationsModuleResult do
-				t[tostring(value.id)] = true
-			end
-		end
-		local List = {}
-		
-		for _, value1 in UseGetFriendRequestsModuleResult do
-			if not t[tostring(value1.id)] then
-				table.insert(List, value1)
-			end
-		end
-		return List
-	end, {
-		UseFriendsListOrderedByPresenceResult.onlineFriends,
-		UseFriendsListOrderedByPresenceResult.offlineFriends,
-		UseGetRecommendationsModuleResult,
-		UseGetFriendRequestsModuleResult,
-		IsUseGetFriendsCountByUserIdResultBelow
-	}) else UseGetFriendRequestsModuleResult
-	local NoIsUsePreferredInputResultMatch: boolean = UseGetFriendsCountByUserIdResult == 0 and not IsUsePreferredInputResultMatch
-	local NoUseIsSpatialResult: boolean = FFlagSocialCarouselShareQREnabled and (UseGetFriendsCountByUserIdResult == 0 and (not IsUsePreferredInputResultMatch and not UseIsSpatialResult))
-	local v1 = false
+	local UseMemoResult1 = UseGetFriendRequestsModuleResult
+	local UseGetFriendsCountByUserIdResult1 = if FFlagShowRequestsInCarouselForAllUsers then UseGetFriendsCountByUserIdResult else nil
 	
 	if FFlagShowRequestsInCarouselForAllUsers then
-		v1 = UseGetFriendsCountByUserIdResult < FIntFriendsCarouselInitialFetchSize and #UseMemoResult1 > 0
-		NoIsUsePreferredInputResultMatch = NoIsUsePreferredInputResultMatch and not v1
-		NoUseIsSpatialResult = NoUseIsSpatialResult and not v1
+		local Largest = math.max(UseGetFriendsCountByUserIdResult, #UseFriendsListOrderedByPresenceResult.onlineFriends + #UseFriendsListOrderedByPresenceResult.offlineFriends)
+		UseGetFriendsCountByUserIdResult1 = Largest
+		local Largest1 = math.max(FIntFriendsCarouselInitialFetchSize - Largest - (if IsUseGetFriendsCountByUserIdResultBelow then #UseGetRecommendationsModuleResult else 0), 0)
+		UseMemoResult1 = ReactModule.useMemo(function()
+			-- upvalues: UseGetFriendRequestsModuleResult (copy), UseFriendsListOrderedByPresenceResult (copy), IsUseGetFriendsCountByUserIdResultBelow (copy), UseGetRecommendationsModuleResult (copy), Largest1 (copy)
+			if #UseGetFriendRequestsModuleResult == 0 then
+				return UseGetFriendRequestsModuleResult
+			end
+			local t = {}
+			
+			for _, onlineFriend in UseFriendsListOrderedByPresenceResult.onlineFriends do
+				t[tostring(onlineFriend.id)] = true
+			end
+			for _, offlineFriend in UseFriendsListOrderedByPresenceResult.offlineFriends do
+				t[tostring(offlineFriend.id)] = true
+			end
+			if IsUseGetFriendsCountByUserIdResultBelow then
+				for _, value in UseGetRecommendationsModuleResult do
+					t[tostring(value.id)] = true
+				end
+			end
+			local List = {}
+			
+			for _, value1 in UseGetFriendRequestsModuleResult do
+				if Largest1 <= #List then break end
+				if not t[tostring(value1.id)] then
+					table.insert(List, value1)
+				end
+			end
+			return List
+		end, {
+			UseFriendsListOrderedByPresenceResult.onlineFriends,
+			UseFriendsListOrderedByPresenceResult.offlineFriends,
+			UseGetRecommendationsModuleResult, UseGetFriendRequestsModuleResult,
+			IsUseGetFriendsCountByUserIdResultBelow, Largest1
+		})
+	end
+	local NoIsUsePreferredInputResultMatch: boolean = UseGetFriendsCountByUserIdResult == 0 and not IsUsePreferredInputResultMatch
+	local NoUseIsSpatialResult: boolean = FFlagSocialCarouselShareQREnabled and (UseGetFriendsCountByUserIdResult == 0 and (not IsUsePreferredInputResultMatch and not UseIsSpatialResult))
+	
+	if FFlagShowRequestsInCarouselForAllUsers then
+		local IsUseGetFriendsCountByUserIdResultMatch = UseGetFriendsCountByUserIdResult1 == 0
+		local v1 = #UseMemoResult1 > 0
+		NoIsUsePreferredInputResultMatch = NoIsUsePreferredInputResultMatch and (IsUseGetFriendsCountByUserIdResultMatch and not v1)
+		NoUseIsSpatialResult = NoUseIsSpatialResult and (IsUseGetFriendsCountByUserIdResultMatch and not v1)
 	end
 	local UseMemoResult11 = ReactModule.useMemo(function()
-		-- upvalues: TileGroup (upval), UseFriendsListOrderedByPresenceResult (copy), Tile (upval), IsUseGetFriendsCountByUserIdResultBelow (copy), UseGetRecommendationsModuleResult (copy), NoUseIsSpatialResult (ref), NoIsUsePreferredInputResultMatch (ref), FFlagShowRequestsInCarouselForAllUsers (upval), v1 (ref), UseMemoResult1 (ref)
+		-- upvalues: TileGroup (upval), UseFriendsListOrderedByPresenceResult (copy), Tile (upval), IsUseGetFriendsCountByUserIdResultBelow (copy), UseGetRecommendationsModuleResult (copy), NoUseIsSpatialResult (ref), NoIsUsePreferredInputResultMatch (ref), FFlagShowRequestsInCarouselForAllUsers (upval), UseMemoResult1 (ref)
 		local config = {
 			[TileGroup.FriendsList] = {
 				{
@@ -151,7 +159,7 @@ return function(p1, p2)
 		
 		if FFlagShowRequestsInCarouselForAllUsers then
 			config[TileGroup.FriendRequests] = {
-				if v1 then { tiles = UseMemoResult1, tileType = Tile.FriendRequest } else nil
+				{ tiles = UseMemoResult1, tileType = Tile.FriendRequest }
 			}
 		end
 		return config
@@ -160,7 +168,6 @@ return function(p1, p2)
 		UseFriendsListOrderedByPresenceResult.offlineFriends,
 		UseGetRecommendationsModuleResult,
 		if FFlagShowRequestsInCarouselForAllUsers then UseMemoResult1 else nil,
-		if FFlagShowRequestsInCarouselForAllUsers then v1 else nil,
 		IsUseGetFriendsCountByUserIdResultBelow, NoIsUsePreferredInputResultMatch,
 		if FFlagSocialCarouselShareQREnabled then NoUseIsSpatialResult else nil
 	})

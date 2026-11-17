@@ -56,6 +56,7 @@ return {
 		Friends = "Friends",
 		Announcements = "Announcements",
 		GroupForumsDiscovery = "ForumsDiscovery",
+		SeededPymk = "DynamicPymk",
 		ProfileCompletion = if FFlagEnableProfileCompletion then "ProfileCompletion" else "",
 		Moments = if FFlagProfilePlatformEnableMomentsModule then "UserMoments" else ""
 	},

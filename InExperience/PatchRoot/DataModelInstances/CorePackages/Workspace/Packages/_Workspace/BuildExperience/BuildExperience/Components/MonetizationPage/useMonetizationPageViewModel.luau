@@ -15,6 +15,7 @@ local FormatErrorModule = require(BuildExperience.utils.formatError)
 local FFlagBuildExperienceMonetizationNativeUIModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
 local FFlagBuildExperienceMonetizationMultiKindModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationMultiKind)
 local FFlagBuildExperienceDeveloperProductContextModule = require(BuildExperience.Flags.FFlagBuildExperienceDeveloperProductContext)
+local FFlagBuildExperienceSingleLineComposerModule = require(BuildExperience.Flags.FFlagBuildExperienceSingleLineComposer)
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local FFlagBuildExperienceMonetizationProductEditingModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationProductEditing)
 local FFlagBuildExperienceMonetizationManageKindsModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationManageKinds)
@@ -880,7 +881,7 @@ local function useMonetizationLocalization()
 end
 
 return function(p3)
-	-- upvalues: useMonetizationLocalization (copy), t (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), FFlagBuildExperienceMonetizationProductEditingModule (copy), ReactModule (copy), config1 (copy), useOptionsState (copy), FFlagBuildExperienceMonetizationMultiKindModule (copy), noop (copy), applyProductOverrides (copy), config (copy), useManageProductState (copy), SendBuildExperienceEventModule (copy), clearReadBackOverrides (copy), FFlagBuildExperienceMonetizationManageKindsModule (copy), GetProductKindCapabilitiesModule (copy), FFlagBuildExperienceMonetizationKindRegionalPricingModule (copy), FormatErrorModule (copy), resolveProductEditSubmit (copy), validateProductEdit (copy), applyProductEditResult (copy), FFlagBuildCheckGamePermissionsModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), UseOnScreenKeyboardHeightModule (copy), GetBuildPromptDraftStoreModule (copy), productResourceUrl (copy), FFlagBuildExperienceDeveloperProductContextModule1 (copy), getRegionalPricingViewState (copy), getKindEditState (copy)
+	-- upvalues: useMonetizationLocalization (copy), t (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), FFlagBuildExperienceMonetizationProductEditingModule (copy), ReactModule (copy), config1 (copy), useOptionsState (copy), FFlagBuildExperienceMonetizationMultiKindModule (copy), noop (copy), applyProductOverrides (copy), config (copy), useManageProductState (copy), SendBuildExperienceEventModule (copy), clearReadBackOverrides (copy), FFlagBuildExperienceMonetizationManageKindsModule (copy), GetProductKindCapabilitiesModule (copy), FFlagBuildExperienceMonetizationKindRegionalPricingModule (copy), FormatErrorModule (copy), resolveProductEditSubmit (copy), validateProductEdit (copy), applyProductEditResult (copy), FFlagBuildCheckGamePermissionsModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), UseOnScreenKeyboardHeightModule (copy), GetBuildPromptDraftStoreModule (copy), productResourceUrl (copy), FFlagBuildExperienceDeveloperProductContextModule1 (copy), FFlagBuildExperienceSingleLineComposerModule (copy), getRegionalPricingViewState (copy), getKindEditState (copy)
 	local UseMonetizationLocalizationResult = useMonetizationLocalization()
 	local Products = p3.products or t
 	local InitialMode = if FFlagBuildExperienceMonetizationNativeUIModule or p3.initialMode ~= "options" then p3.initialMode else nil
@@ -1587,6 +1588,7 @@ return function(p3)
 			onComposerChanged = UseBindingResult2,
 			placeholder = UseMonetizationLocalizationResult.composerPlaceholder,
 			textBoxRef = UseRefResult2,
+			isSingleLine = if FFlagBuildExperienceSingleLineComposerModule then true else nil,
 			onSend = UseResult11,
 			onStop = function() end,
 			isReadOnly = not IsCanEditOnBuild
@@ -1614,7 +1616,7 @@ return function(p3)
 		IsPermissionCanMonetize, p3.onCreateProduct, p3.sessionId, p3.universeId,
 		UseMemoResult
 	})
-	local UseResult11 = ReactModule.useCallback(function()
+	local UseResult13 = ReactModule.useCallback(function()
 		-- upvalues: UseMemoResult (copy), SendBuildExperienceEventModule (upval), p3 (copy)
 		SendBuildExperienceEventModule("MONETIZATION_RETRY_CLICK", UseMemoResult)
 		
@@ -1622,7 +1624,7 @@ return function(p3)
 			p3.onRetryCatalog()
 		end
 	end, { p3.onRetryCatalog, UseMemoResult })
-	local UseResult121 = if FFlagBuildExperienceMonetizationMultiKindModule then ReactModule.useCallback(function(p4)
+	local UseResult14 = if FFlagBuildExperienceMonetizationMultiKindModule then ReactModule.useCallback(function(p4)
 		-- upvalues: UseMemoResult (copy), SendBuildExperienceEventModule (upval), p3 (copy)
 		local config = { catalogKind = tostring(p4) }
 		
@@ -1706,8 +1708,8 @@ return function(p3)
 	config2.onEditPriceChanged = UseResult8
 	config2.onCancelProductEdit = UseResult9
 	config2.onSaveProductEdit = UseResult10
-	config2.onRetryCatalog = UseResult11
-	config2.onRetryCatalogSource = UseResult121
+	config2.onRetryCatalog = UseResult13
+	config2.onRetryCatalogSource = UseResult14
 	config2.labels = {
 		title = UseMonetizationLocalizationResult.title,
 		options = UseOptionsStateResult.labels.options,

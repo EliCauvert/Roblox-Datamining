@@ -1,0 +1,1 @@
+﻿require(game:GetService("CoreGui").RobloxGui.Modules.SpawnEffectTooltip)()

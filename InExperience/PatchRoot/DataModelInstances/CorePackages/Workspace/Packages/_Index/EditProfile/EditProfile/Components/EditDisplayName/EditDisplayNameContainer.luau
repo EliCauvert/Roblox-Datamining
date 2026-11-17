@@ -1,6 +1,7 @@
 ﻿local EditProfile = script:FindFirstAncestor("EditProfile")
 local Parent = EditProfile.Parent
 local ReactModule = require(Parent.React)
+local PromiseModule = require(Parent.Promise)
 local EditDisplayNameModule = require(script.Parent.EditDisplayName)
 local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
 local GetResult = require(Parent.UserProfiles).Stores.UserProfileStore.get()
@@ -8,9 +9,10 @@ local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local UpdateUserDisplayNameModule = require(EditProfile.Stores.Requests.updateUserDisplayName)
 local ValidateUserDisplayNameModule = require(EditProfile.Stores.Requests.validateUserDisplayName)
 local AnalyticsServiceV2Module = require(EditProfile.Analytics.AnalyticsServiceV2)
+local FFlagEditProfileSkipUnchangedDisplayNameSaveModule = require(EditProfile.Flags.FFlagEditProfileSkipUnchangedDisplayNameSave)
 
 return function(p1)
-	-- upvalues: UseLocalUserIdFunction (copy), ReactModule (copy), GetResult (copy), UseSignalStateFunction (copy), AnalyticsServiceV2Module (copy), UpdateUserDisplayNameModule (copy), ValidateUserDisplayNameModule (copy), EditDisplayNameModule (copy)
+	-- upvalues: UseLocalUserIdFunction (copy), ReactModule (copy), GetResult (copy), UseSignalStateFunction (copy), AnalyticsServiceV2Module (copy), FFlagEditProfileSkipUnchangedDisplayNameSaveModule (copy), PromiseModule (copy), UpdateUserDisplayNameModule (copy), ValidateUserDisplayNameModule (copy), EditDisplayNameModule (copy)
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local UseSignalStateResult = UseSignalStateFunction((ReactModule.useMemo(function()
 		-- upvalues: GetResult (upval), UseLocalUserIdResult (copy)
@@ -30,10 +32,10 @@ return function(p1)
 		AnalyticsServiceV2Module.sendDisplayNameModalLoaded()
 	end, {})
 	ReactModule.useEffect(function()
-		-- upvalues: p1 (copy), UpdateUserDisplayNameModule (upval), UseLocalUserIdResult (copy), UseStateResult (copy), AnalyticsServiceV2Module (upval), UseSignalStateResult (copy)
+		-- upvalues: p1 (copy), FFlagEditProfileSkipUnchangedDisplayNameSaveModule (upval), UseStateResult (copy), UseMemoResult (copy), PromiseModule (upval), UpdateUserDisplayNameModule (upval), UseLocalUserIdResult (copy), AnalyticsServiceV2Module (upval), UseSignalStateResult (copy)
 		p1.registerSaveHandler(function()
-			-- upvalues: UpdateUserDisplayNameModule (upval), UseLocalUserIdResult (upval), UseStateResult (upval), AnalyticsServiceV2Module (upval), UseSignalStateResult (upval)
-			return UpdateUserDisplayNameModule(tostring(UseLocalUserIdResult), UseStateResult):andThen(function(Result)
+			-- upvalues: FFlagEditProfileSkipUnchangedDisplayNameSaveModule (upval), UseStateResult (upval), UseMemoResult (upval), PromiseModule (upval), UpdateUserDisplayNameModule (upval), UseLocalUserIdResult (upval), AnalyticsServiceV2Module (upval), UseSignalStateResult (upval)
+			return if FFlagEditProfileSkipUnchangedDisplayNameSaveModule and UseStateResult == UseMemoResult then PromiseModule.resolve() else UpdateUserDisplayNameModule(tostring(UseLocalUserIdResult), UseStateResult):andThen(function(Result)
 				-- upvalues: AnalyticsServiceV2Module (upval), UseStateResult (upval), UseSignalStateResult (upval)
 				AnalyticsServiceV2Module.sendDisplayNameSaved(UseStateResult)
 				
@@ -50,7 +52,8 @@ return function(p1)
 		p1.registerSaveHandler,
 		UseLocalUserIdResult,
 		UseStateResult,
-		UseSignalStateResult
+		UseSignalStateResult,
+		if FFlagEditProfileSkipUnchangedDisplayNameSaveModule then UseMemoResult else nil
 	})
 	
 	return ReactModule.createElement(EditDisplayNameModule, {

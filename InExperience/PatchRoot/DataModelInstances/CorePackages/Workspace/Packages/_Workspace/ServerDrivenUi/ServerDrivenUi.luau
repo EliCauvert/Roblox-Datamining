@@ -29,7 +29,5 @@ return {
 	registerDiscoveryUiComponents = require(script.Content.registerDiscoveryUiComponents),
 	SearchPageTabSwitchBridge = require(script.System.SearchPageTabSwitchBridge),
 	OpenSearchResultsWithQueryBridge = require(script.System.OpenSearchResultsWithQueryBridge),
-	ItemHeightMode = require(script.Content.Collections.ItemHeightMode),
-	sendLegacyGameImpressionsForSdui = require(script.Analytics.sendLegacyGameImpressionsForSdui),
-	getImpressionsTag = require(script.Analytics.getImpressionsTag)
+	ItemHeightMode = require(script.Content.Collections.ItemHeightMode)
 }

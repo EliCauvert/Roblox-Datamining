@@ -30,6 +30,11 @@ return {
 			OPEN_ADD_FRIENDS = "OpenAddFriends",
 			OPEN_SHARE_QR = "OpenShareQR"
 		},
+		TILE_CLICK_TARGETS = {
+			AVATAR = "avatar",
+			PLAY_ICON = "playIcon",
+			TILE_TEXT = "tileText"
+		},
 		BTN_VALUES = {
 			OPEN_PEOPLE_LIST = "openPeopleList",
 			ADD_FRIENDS = "AddFriendsButton",

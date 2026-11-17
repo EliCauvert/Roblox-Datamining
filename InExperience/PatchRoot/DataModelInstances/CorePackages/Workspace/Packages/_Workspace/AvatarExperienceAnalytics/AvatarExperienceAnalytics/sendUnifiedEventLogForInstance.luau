@@ -13,11 +13,12 @@ local FFlagAXMISEnableMultiShoppingUnifiedEvents = AvatarExperienceFlagsModule.F
 local FFlagAXSendUnifiedEventLogWithInstance = AvatarExperienceFlagsModule.FFlagAXSendUnifiedEventLogWithInstance
 local FFlagAXUnifiedEventPageContext = AvatarExperienceFlagsModule.FFlagAXUnifiedEventPageContext
 local FFlagAXUnifiedEventCounters = AvatarExperienceFlagsModule.FFlagAXUnifiedEventCounters
+local FFlagAXUnifiedEventStrictPayloads = AvatarExperienceFlagsModule.FFlagAXUnifiedEventStrictPayloads
 local FFlagAllowCustomUnifiedEventFilterModule = require(script.Parent.FFlagAllowCustomUnifiedEventFilter)
 local AXUnifiedEventFilterModule = require(script.Parent.AXUnifiedEventFilter)
 
 return function(Object, p1, p2)
-	-- upvalues: SessionService (copy), UnifiedEventLogConstantsModule (copy), FFlagAXUnifiedEventPageContext (copy), IsRunningInStudioFunction (copy), FFlagAXMISEnableMultiShoppingUnifiedEvents (copy), UnifiedEventLoggingUtilsModule (copy), CryoModule (copy), UnifiedEventPageStoreModule (copy), FFlagAllowCustomUnifiedEventFilterModule (copy), AXUnifiedEventFilterModule (copy), SendUnifiedEventLogModule (copy), FFlagAXSendUnifiedEventLogWithInstance (copy), FFlagAXUnifiedEventCounters (copy)
+	-- upvalues: SessionService (copy), UnifiedEventLogConstantsModule (copy), FFlagAXUnifiedEventPageContext (copy), IsRunningInStudioFunction (copy), FFlagAXMISEnableMultiShoppingUnifiedEvents (copy), UnifiedEventLoggingUtilsModule (copy), CryoModule (copy), UnifiedEventPageStoreModule (copy), FFlagAllowCustomUnifiedEventFilterModule (copy), AXUnifiedEventFilterModule (copy), SendUnifiedEventLogModule (copy), FFlagAXSendUnifiedEventLogWithInstance (copy), FFlagAXUnifiedEventCounters (copy), FFlagAXUnifiedEventStrictPayloads (copy)
 	local Level2aSessionTag = SessionService:GetSessionTag("level2a")
 	local Attribute = Object:GetAttribute(UnifiedEventLogConstantsModule.SESSION_TAG_NAME)
 	
@@ -49,5 +50,8 @@ return function(Object, p1, p2)
 		})
 	end
 	local FilterPassed = (if FFlagAllowCustomUnifiedEventFilterModule and P2.filter then P2.filter else AXUnifiedEventFilterModule.filter)(JoinResult1)
-	SendUnifiedEventLogModule(JoinResult1, if FFlagAXSendUnifiedEventLogWithInstance then Object else nil, if FFlagAXUnifiedEventCounters then { filterPassed = FilterPassed } else nil)
+	SendUnifiedEventLogModule(JoinResult1, if FFlagAXSendUnifiedEventLogWithInstance then Object else nil, if FFlagAXUnifiedEventCounters then {
+		filterPassed = FilterPassed,
+		skipConformanceCheck = if FFlagAXUnifiedEventStrictPayloads then P2.skipConformanceCheck else nil
+	} else nil)
 end

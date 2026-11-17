@@ -3,12 +3,19 @@ local Parent = AvatarWorkshop.Parent
 local ReactModule = require(Parent.React)
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 local RoactNavigationModule = require(Parent.RoactNavigation)
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local WorkshopWindowContextModule = require(AvatarWorkshop.Contexts.WorkshopWindowContext)
+local GetAvatarStateStoreModule = require(AvatarWorkshop.Stores.Getters.getAvatarStateStore)
 local AppContainer = RoactNavigationModule.createAppContainer((require(AvatarWorkshop.Navigation.Navigators.WorkshopNavigator)))
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), WorkshopWindowContextModule (copy), AppContainer (copy)
+	-- upvalues: UseTokensFunction (copy), UseSignalStateFunction (copy), GetAvatarStateStoreModule (copy), ReactModule (copy), WorkshopWindowContextModule (copy), AppContainer (copy)
 	local UseTokensResult = UseTokensFunction()
+	local UseSignalStateResult = UseSignalStateFunction(GetAvatarStateStoreModule)
+	ReactModule.useEffect(function()
+		-- upvalues: UseSignalStateResult (copy)
+		UseSignalStateResult.loadCurrentAvatar()
+	end, { UseSignalStateResult })
 	
 	return ReactModule.createElement("Frame", {
 		Active = true,

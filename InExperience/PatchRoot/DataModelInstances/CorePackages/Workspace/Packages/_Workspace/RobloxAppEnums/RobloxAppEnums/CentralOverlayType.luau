@@ -55,6 +55,7 @@
 	ConfirmationDialog = "ConfirmationDialog",
 	PlayButtonUpsellDialog = "PlayButtonUpsellDialog",
 	CloudClientOfferSheet = "CloudClientOfferSheet",
+	RobloxRealitySurveySheet = "RobloxRealitySurveySheet",
 	SquadPrompt = "SquadPrompt",
 	VngComplianceLoadingPopup = "VngComplianceLoadingPopup",
 	KISAPopUpAgreements = "KISAPopUpAgreements",

@@ -13,12 +13,15 @@ local IsCollectibleFunction = ItemDetailsUtilsModule.isCollectible
 local CalculatePurchaseStatusForItemFunction = ItemDetailsUtilsModule.calculatePurchaseStatusForItem
 local GetPriceInRobuxFunction = ItemDetailsUtilsModule.getPriceInRobux
 local FormatNumberModule = require(AvatarExperienceInspectAndBuy.Utils.formatNumber)
+local UseRobloxPlusUpsellModule = require(AvatarExperienceInspectAndBuy.Hooks.useRobloxPlusUpsell)
+local FFlagAXIaBPlusExclusiveUpsell = require(Parent.AvatarExperienceFlags).FFlagAXIaBPlusExclusiveUpsell
 
 return function(p1)
-	-- upvalues: UseConvertedItemDataModule (copy), GetPriceStatusModule (copy), UseItemStatusLocalizationModule (copy), ReactModule (copy), FoundationModule (copy), PriceStatusModule (copy), IsCollectibleFunction (copy), CalculatePurchaseStatusForItemFunction (copy), FormatNumberModule (copy), GetPriceInRobuxFunction (copy)
+	-- upvalues: UseConvertedItemDataModule (copy), GetPriceStatusModule (copy), UseItemStatusLocalizationModule (copy), FFlagAXIaBPlusExclusiveUpsell (copy), UseRobloxPlusUpsellModule (copy), ReactModule (copy), FoundationModule (copy), PriceStatusModule (copy), IsCollectibleFunction (copy), CalculatePurchaseStatusForItemFunction (copy), FormatNumberModule (copy), GetPriceInRobuxFunction (copy)
 	local UseConvertedItemDataModuleResult = UseConvertedItemDataModule(p1.selectedItem)
 	local PriceStatusModule1 = GetPriceStatusModule(UseConvertedItemDataModuleResult)
 	local UseItemStatusLocalizationModuleResult = UseItemStatusLocalizationModule(UseConvertedItemDataModuleResult)
+	local UseRobloxPlusUpsellModuleResult = if FFlagAXIaBPlusExclusiveUpsell then UseRobloxPlusUpsellModule(UseConvertedItemDataModuleResult) else nil
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), FoundationModule (upval)
 		return {
@@ -30,23 +33,39 @@ return function(p1)
 		}
 	end, { p1 })
 	local UseMemoResult1 = ReactModule.useMemo(function()
-		-- upvalues: PriceStatusModule1 (copy), PriceStatusModule (upval), UseItemStatusLocalizationModuleResult (copy), FoundationModule (upval), UseConvertedItemDataModuleResult (copy), IsCollectibleFunction (upval), CalculatePurchaseStatusForItemFunction (upval), p1 (copy)
-		local IsPriceStatusModuleMatch: boolean = PriceStatusModule1 == PriceStatusModule.Free or (PriceStatusModule1 == PriceStatusModule.PurchaseFromRoblox or PriceStatusModule1 == PriceStatusModule.PurchaseFromResale)
-		
-		return {
-			purchaseButtonText = UseItemStatusLocalizationModuleResult[PriceStatusModule1],
-			isDisabled = not IsPriceStatusModuleMatch,
-			variant = if IsPriceStatusModuleMatch then FoundationModule.Enums.ButtonVariant.Emphasis else FoundationModule.Enums.ButtonVariant.Standard,
-			onPurchase = function()
-				-- upvalues: UseConvertedItemDataModuleResult (upval), IsCollectibleFunction (upval), CalculatePurchaseStatusForItemFunction (upval), PriceStatusModule1 (upval), p1 (upval)
-				if UseConvertedItemDataModuleResult then
-					local IsCollectible = IsCollectibleFunction(UseConvertedItemDataModuleResult)
-					local PurchaseStatusForItem = CalculatePurchaseStatusForItemFunction(UseConvertedItemDataModuleResult, PriceStatusModule1)
-					p1.onPromptPurchase(UseConvertedItemDataModuleResult.id, UseConvertedItemDataModuleResult.itemType, PurchaseStatusForItem.collectibleItemId, PurchaseStatusForItem.collectibleLowestAvailableResaleProductId, PurchaseStatusForItem.collectibleLowestAvailableResaleItemInstanceId, PurchaseStatusForItem.collectibleLowestResalePrice, IsCollectible)
+		-- upvalues: UseRobloxPlusUpsellModuleResult (copy), FoundationModule (upval), PriceStatusModule1 (copy), PriceStatusModule (upval), UseItemStatusLocalizationModuleResult (copy), UseConvertedItemDataModuleResult (copy), IsCollectibleFunction (upval), CalculatePurchaseStatusForItemFunction (upval), p1 (copy)
+		if UseRobloxPlusUpsellModuleResult then
+			return {
+				isDisabled = false,
+				fitText = true,
+				testId = "--economy-avatar-experience-button-item-details-get-roblox-plus",
+				purchaseButtonText = UseRobloxPlusUpsellModuleResult.text,
+				variant = FoundationModule.Enums.ButtonVariant.Emphasis,
+				onPurchase = UseRobloxPlusUpsellModuleResult.onActivated
+			}
+		else
+			local IsPriceStatusModuleMatch: boolean = PriceStatusModule1 == PriceStatusModule.Free or (PriceStatusModule1 == PriceStatusModule.PurchaseFromRoblox or PriceStatusModule1 == PriceStatusModule.PurchaseFromResale)
+			
+			return {
+				purchaseButtonText = UseItemStatusLocalizationModuleResult[PriceStatusModule1],
+				isDisabled = not IsPriceStatusModuleMatch,
+				variant = if IsPriceStatusModuleMatch then FoundationModule.Enums.ButtonVariant.Emphasis else FoundationModule.Enums.ButtonVariant.Standard,
+				onPurchase = function()
+					-- upvalues: UseConvertedItemDataModuleResult (upval), IsCollectibleFunction (upval), CalculatePurchaseStatusForItemFunction (upval), PriceStatusModule1 (upval), p1 (upval)
+					if UseConvertedItemDataModuleResult then
+						local IsCollectible = IsCollectibleFunction(UseConvertedItemDataModuleResult)
+						local PurchaseStatusForItem = CalculatePurchaseStatusForItemFunction(UseConvertedItemDataModuleResult, PriceStatusModule1)
+						p1.onPromptPurchase(UseConvertedItemDataModuleResult.id, UseConvertedItemDataModuleResult.itemType, PurchaseStatusForItem.collectibleItemId, PurchaseStatusForItem.collectibleLowestAvailableResaleProductId, PurchaseStatusForItem.collectibleLowestAvailableResaleItemInstanceId, PurchaseStatusForItem.collectibleLowestResalePrice, IsCollectible)
+					end
 				end
-			end
-		}
-	end, { p1, PriceStatusModule1, UseConvertedItemDataModuleResult })
+			}
+		end
+	end, {
+		p1,
+		PriceStatusModule1,
+		UseConvertedItemDataModuleResult,
+		UseRobloxPlusUpsellModuleResult
+	})
 	
 	return if p1.selectedItem then {
 		purchaseButtonProps = UseMemoResult1,

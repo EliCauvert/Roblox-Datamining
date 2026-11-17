@@ -12,6 +12,7 @@ local UseGoalClickTelemetryModule = require(script.Parent.useGoalClickTelemetry)
 local UseGoalsSectionTelemetryModule = require(script.Parent.useGoalsSectionTelemetry)
 local UseGoalsSectionViewModelModule = require(script.Parent.useGoalsSectionViewModel)
 local _ = require(BuildExperience.Analytics.Goals.GoalTypes)
+local FFlagBuildAnalyticsFunnelTrackingCTAModule = require(BuildExperience.Flags.FFlagBuildAnalyticsFunnelTrackingCTA)
 local MetricDetailSheetModule = require(BuildExperience.Components.Analytics.MetricDetailSheet.MetricDetailSheet)
 local t = {}
 local List = {}
@@ -33,7 +34,7 @@ for _, goal in GoalsModule.Goals do
 	end
 end
 return function(p1)
-	-- upvalues: UseMetricMetadataModule (copy), List (copy), UseGoalMilestonesModule (copy), ReactModule (copy), UseGoalClickTelemetryModule (copy), UseGoalsSectionViewModelModule (copy), GoalsModule (copy), UseGoalLockedActionsModule (copy), UseGoalsSectionTelemetryModule (copy), GoalsSectionViewModule (copy), MetricDetailSheetModule (copy)
+	-- upvalues: UseMetricMetadataModule (copy), List (copy), UseGoalMilestonesModule (copy), ReactModule (copy), UseGoalClickTelemetryModule (copy), UseGoalsSectionViewModelModule (copy), GoalsModule (copy), UseGoalLockedActionsModule (copy), UseGoalsSectionTelemetryModule (copy), GoalsSectionViewModule (copy), FFlagBuildAnalyticsFunnelTrackingCTAModule (copy), MetricDetailSheetModule (copy)
 	local TestId = p1.testId or "GoalsSection"
 	local UseMetricMetadataModuleResult = UseMetricMetadataModule(List)
 	local UseGoalMilestonesModuleResult, UseGoalMilestonesModuleResult2 = UseGoalMilestonesModule(p1.universeId)
@@ -62,12 +63,13 @@ return function(p1)
 		Overlays[i] = action.overlay
 		v1 = v1 or action.isLoading == true
 	end
-	local NoV30: boolean = UseGoalMilestonesModuleResult2 and not v1
-	UseGoalsSectionTelemetryModule(UniverseId, Id, NoV30, UseGoalsSectionViewModelModuleResult)
+	local NoV31: boolean = UseGoalMilestonesModuleResult2 and not v1
+	UseGoalsSectionTelemetryModule(UniverseId, Id, NoV31, UseGoalsSectionViewModelModuleResult)
 	
 	return ReactModule.createElement(ReactModule.Fragment, nil, {
 		Goals = ReactModule.createElement(GoalsSectionViewModule, {
-			entries = if NoV30 then UseGoalsSectionViewModelModuleResult else {},
+			onOpenChat = if FFlagBuildAnalyticsFunnelTrackingCTAModule then p1.onOpenFunnelChat else nil,
+			entries = if NoV31 then UseGoalsSectionViewModelModuleResult else {},
 			universeId = p1.universeId,
 			window = p1.window,
 			latestByMetric = UseMetricMetadataModuleResult.latestByMetric,

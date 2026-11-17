@@ -1,10 +1,12 @@
 ﻿local Parent = script:FindFirstAncestor("AvatarExperienceAnalytics").Parent
+local CryoModule = require(Parent.Cryo)
 local MutedErrorFunction = require(Parent.Loggers).mutedError
 local UnifiedLoggingSurface = require(Parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
 local FFlagAXInExperienceNotificationsPassthroughModule = require(script.Parent.FFlagAXInExperienceNotificationsPassthrough)
 local UnifiedEventTypesModule = require(script.Parent.Generated.UnifiedEventTypes)
 local SendUnifiedEventLogModule = require(script.Parent.sendUnifiedEventLog)
 local SendUnifiedEventLogForInstanceModule = require(script.Parent.sendUnifiedEventLogForInstance)
+local FFlagAXUnifiedEventStrictPayloads = require(Parent.AvatarExperienceFlags).FFlagAXUnifiedEventStrictPayloads
 
 local function _(p1)
 	return p1
@@ -19,13 +21,13 @@ end
 
 return {
 	send = function(p1, p2, p3)
-		-- upvalues: SendUnifiedEventLogModule (copy), reportIfNotPassthrough (copy)
-		SendUnifiedEventLogModule(p1, p2, p3)
+		-- upvalues: FFlagAXUnifiedEventStrictPayloads (copy), CryoModule (copy), SendUnifiedEventLogModule (copy), reportIfNotPassthrough (copy)
+		SendUnifiedEventLogModule(p1, p2, if FFlagAXUnifiedEventStrictPayloads then CryoModule.Dictionary.join(p3 or {}, { skipConformanceCheck = true }) else p3)
 		reportIfNotPassthrough("sendPassthroughUnifiedEventLog", p1)
 	end,
 	sendForInstance = function(p1, p2, p3)
-		-- upvalues: SendUnifiedEventLogForInstanceModule (copy), reportIfNotPassthrough (copy)
-		SendUnifiedEventLogForInstanceModule(p1, p2, p3)
+		-- upvalues: FFlagAXUnifiedEventStrictPayloads (copy), CryoModule (copy), SendUnifiedEventLogForInstanceModule (copy), reportIfNotPassthrough (copy)
+		SendUnifiedEventLogForInstanceModule(p1, p2, if FFlagAXUnifiedEventStrictPayloads then CryoModule.Dictionary.join(p3 or {}, { skipConformanceCheck = true }) else p3)
 		reportIfNotPassthrough("sendPassthroughUnifiedEventLogForInstance", p2)
 	end
 }

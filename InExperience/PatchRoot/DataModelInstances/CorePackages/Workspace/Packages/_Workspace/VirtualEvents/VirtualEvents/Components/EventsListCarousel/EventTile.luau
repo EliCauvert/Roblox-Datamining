@@ -30,12 +30,11 @@ local UseMemoFunction = ReactModule.useMemo
 local UseCallbackFunction = ReactModule.useCallback
 local GetFFlagIsSquadEnabledFunction = require(Parent.SharedFlags).GetFFlagIsSquadEnabled
 local FFlagLuaAppSduiEventDetailsEnabled = require(Parent.SharedFlags).FFlagLuaAppSduiEventDetailsEnabled
-local FFlagLuaAppGameViewTileBackgroundColorOverride = require(Parent.SharedFlags).FFlagLuaAppGameViewTileBackgroundColorOverride
 
-local function v23() end
+local function v22() end
 
 return function(p1)
-	-- upvalues: UseDesignTokensFunction (copy), UseTextSizeOffsetFunction (copy), GetVirtualEventDatesModule (copy), UseMemoFunction (copy), FooterCornerButtonStyle (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), UsePlayButtonStateFunction (copy), PlayButtonStates (copy), GetFFlagIsSquadEnabledFunction (copy), UseLocalizationFunction (copy), UseCallbackFunction (copy), ReactModule (copy), UseEffectFunction (copy), FFlagLuaAppSduiEventDetailsEnabled (copy), FormatDateLocalizedModule (copy), NotificationModalsManagerModule (copy), UseStateFunction (copy), FetchEventThumbnailModule (copy), ImpressionsTagUtility (copy), GetEventCtaButtonStateModule (copy), FocusNavigationEventNameEnum (copy), v23 (copy), GameTileView (copy), FFlagLuaAppGameViewTileBackgroundColorOverride (copy), GridTileTextFooter (copy), GameTileThumbnailBadges (copy), EventWideFooterButtonModule (copy), HoldDetector (copy)
+	-- upvalues: UseDesignTokensFunction (copy), UseTextSizeOffsetFunction (copy), GetVirtualEventDatesModule (copy), UseMemoFunction (copy), FooterCornerButtonStyle (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), UsePlayButtonStateFunction (copy), PlayButtonStates (copy), GetFFlagIsSquadEnabledFunction (copy), UseLocalizationFunction (copy), UseCallbackFunction (copy), ReactModule (copy), UseEffectFunction (copy), FFlagLuaAppSduiEventDetailsEnabled (copy), FormatDateLocalizedModule (copy), NotificationModalsManagerModule (copy), UseStateFunction (copy), FetchEventThumbnailModule (copy), ImpressionsTagUtility (copy), GetEventCtaButtonStateModule (copy), FocusNavigationEventNameEnum (copy), v22 (copy), GameTileView (copy), GridTileTextFooter (copy), GameTileThumbnailBadges (copy), EventWideFooterButtonModule (copy), HoldDetector (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local UseTextSizeOffsetResult = UseTextSizeOffsetFunction()
 	local Event = p1.Event
@@ -137,7 +136,7 @@ return function(p1)
 		HoldToNotifyMe = FocusNavigationEventNameEnum.HoldToJoinEvent
 		Disabled = IsJoinEventDisabled
 	end
-	local UseCallbackResult1 = if Disabled then v23 else UseCallbackResult
+	local UseCallbackResult1 = if Disabled then v22 else UseCallbackResult
 	
 	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -152,7 +151,7 @@ return function(p1)
 			isHovered = false,
 			forwardRef = UseRefResult2,
 			image = UseStateResult,
-			backgroundStyle = if FFlagLuaAppGameViewTileBackgroundColorOverride then p1.backgroundStyle else nil,
+			backgroundStyle = p1.backgroundStyle,
 			Size = UDim2.fromScale(1, 1),
 			title = Event.displayTitle or "",
 			onActivated = UseCallbackFunction(function()

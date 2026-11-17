@@ -11,9 +11,10 @@ local UseIsRobloxSubscriberFunction = require(Parent.UserProfiles).Hooks.useIsRo
 local FFlagEnableBlackbirdCheck = require(Parent.SharedFlags).FFlagEnableBlackbirdCheck
 local FFlagUserListCtaIntegrationEnabled = require(Parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
 local FFlagUserListSurfaceExtensions = require(Parent.SharedFlags).FFlagUserListSurfaceExtensions
+local FFlagProfilePlatformSeededPymk = require(Parent.SharedFlags).FFlagProfilePlatformSeededPymk
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseUserDataValuesModule (copy), FFlagEnableBlackbirdCheck (copy), UseIsRobloxSubscriberFunction (copy), FoundationModule (copy), ConvertToFoundationPresenceEnumFunction (copy), ReactModule (copy), BaseRowModule (copy), FFlagUserListCtaIntegrationEnabled (copy), FFlagUserListSurfaceExtensions (copy), EnumsModule (copy)
+	-- upvalues: UseUserDataValuesModule (copy), FFlagEnableBlackbirdCheck (copy), UseIsRobloxSubscriberFunction (copy), FoundationModule (copy), ConvertToFoundationPresenceEnumFunction (copy), ReactModule (copy), BaseRowModule (copy), FFlagUserListCtaIntegrationEnabled (copy), FFlagUserListSurfaceExtensions (copy), EnumsModule (copy), FFlagProfilePlatformSeededPymk (copy)
 	local UseUserDataValuesModuleResult = UseUserDataValuesModule(p1.entityId)
 	local UseIsRobloxSubscriberResult = if FFlagEnableBlackbirdCheck then UseIsRobloxSubscriberFunction(if p1.entityId then p1.entityId else nil) else nil
 	local NoConfigs = not p1.configs or p1.configs.showSubtitle == nil or p1.configs.showSubtitle
@@ -40,6 +41,7 @@ return ReactModule.memo(function(p1)
 		layoutOrder = p1.layoutOrder,
 		trustedConnectionIndicatorEnabled = (not FFlagUserListSurfaceExtensions or not p1.configs or p1.configs.showTrustedFriendIndicator ~= false) and p1.layoutMode == EnumsModule.RowLayoutMode.Wide,
 		isRobloxSubscriber = if FFlagEnableBlackbirdCheck then UseIsRobloxSubscriberResult else nil,
-		disableRowActivation = if FFlagUserListSurfaceExtensions and p1.configs then p1.configs.disableRowActivation else nil
+		disableRowActivation = if FFlagUserListSurfaceExtensions and p1.configs then p1.configs.disableRowActivation else nil,
+		textTruncation = if FFlagProfilePlatformSeededPymk and p1.configs then p1.configs.textTruncation else nil
 	})
 end)

@@ -1,5 +1,7 @@
-﻿local UnifiedEventLogConstantsModule = require(script.Parent.UnifiedEventLogConstants)
-local AvatarScreenProperties = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.AvatarExperienceNavigation).AvatarRoute.AvatarScreenProperties
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceAnalytics").Parent
+local UnifiedEventLogConstantsModule = require(script.Parent.UnifiedEventLogConstants)
+local _ = require(Parent.UnifiedEventEnums)
+local AvatarScreenProperties = require(Parent.AvatarExperienceNavigation).AvatarRoute.AvatarScreenProperties
 
 return function(Object, p1)
 	-- upvalues: UnifiedEventLogConstantsModule (copy), AvatarScreenProperties (copy)

@@ -6,6 +6,7 @@ local FIntMyCreationsSessionListPollingIntervalSecondsModule = require(BuildExpe
 local FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule = require(BuildExperience.Flags.FFlagBuildExperienceMyCreationsFindSessionsByUniverse)
 local FFlagBuildWithGroupsModule = require(BuildExperience.Flags.FFlagBuildWithGroups)
 local FFlagBuildExperienceCursorSearchPagesModule = require(BuildExperience.Flags.FFlagBuildExperienceCursorSearchPages)
+local FFlagBuildUpdatedSearchUXForGAModule = require(BuildExperience.Flags.FFlagBuildUpdatedSearchUXForGA)
 local LocalizationModule = require(Parent.Localization)
 local PromiseModule = require(Parent.Promise)
 local ReactModule = require(Parent.React)
@@ -20,6 +21,7 @@ local UniverseConfigurationModule = require(Parent.DataHydration.UniverseConfigu
 local UniverseSearchModule = require(Parent.DataHydration.UniverseSearch)
 local PrivacyType = UniverseConfigurationModule.PrivacyType
 local ThumbForUniverseIdModule = require(BuildExperience.utils.thumbForUniverseId)
+local UseActiveTabQueryModule = require(BuildExperience.utils.useActiveTabQuery)
 local UseCursorSearchPagesModule = require(BuildExperience.utils.useCursorSearchPages)
 local GetBuildExperienceRefreshStoreModule = require(BuildExperience.Stores.GetBuildExperienceRefreshStore)
 local _ = require(BuildExperience.Stores.GetMyCreationsFilterStore)
@@ -763,7 +765,7 @@ local function useBuildCreators(CreatorGroupsStore, CreatorTargetId, Filter)
 end
 
 return function(p10)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), LocalizationRoactContext (copy), LocalizationModule (copy), CreatorAgentChatModule (copy), UniverseSearchModule (copy), GetSearchQueryStoreModule (copy), GetBuildExperienceRefreshStoreModule (copy), AppLifecycleObserverService (copy), UseSignalStateFunction (copy), FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule (copy), Players (copy), FFlagBuildWithGroupsModule (copy), CreatorGroupsModule (copy), useBuildCreators (copy), config (copy), FFlagBuildExperienceCursorSearchPagesModule (copy), useCreatorSearchList (copy), useUniverseSearchList (copy), PromiseModule (copy), ignorePromiseRejection (copy), SignalsModule (copy), FIntMyCreationsSessionListPollingIntervalSecondsModule (copy), requestHandleToPromise (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), LocalizationRoactContext (copy), LocalizationModule (copy), CreatorAgentChatModule (copy), UniverseSearchModule (copy), GetSearchQueryStoreModule (copy), GetBuildExperienceRefreshStoreModule (copy), AppLifecycleObserverService (copy), FFlagBuildUpdatedSearchUXForGAModule (copy), UseActiveTabQueryModule (copy), UseSignalStateFunction (copy), FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule (copy), Players (copy), FFlagBuildWithGroupsModule (copy), CreatorGroupsModule (copy), useBuildCreators (copy), config (copy), FFlagBuildExperienceCursorSearchPagesModule (copy), useCreatorSearchList (copy), useUniverseSearchList (copy), PromiseModule (copy), ignorePromiseRejection (copy), SignalsModule (copy), FIntMyCreationsSessionListPollingIntervalSecondsModule (copy), requestHandleToPromise (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		building = LocalizationStringsModule.MY_CREATIONS_BUILDING,
 		inputNeeded = LocalizationStringsModule.MY_CREATIONS_INPUT_NEEDED,
@@ -823,7 +825,7 @@ return function(p10)
 	local AppLifecycleObserverService1 = p10.appLifecycleObserverService or AppLifecycleObserverService
 	local IsIsFocused = p10.isFocused ~= false
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	local UseDebouncedQueryResult = SearchQueryStore.useDebouncedQuery()
+	local UseActiveTabQueryModuleResult = if FFlagBuildUpdatedSearchUXForGAModule then UseActiveTabQueryModule(SearchQueryStore, p10.isActiveTab ~= false) else SearchQueryStore.useDebouncedQuery()
 	local UseSignalStateResult = UseSignalStateFunction(BuildExperienceRefreshStoreModule.getRefreshTick)
 	local UseRefResult = if FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule then ReactModule.useRef(UseSignalStateResult) else nil
 	local UseRefResult1 = if FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule then ReactModule.useRef(IsIsFocused) else nil
@@ -836,7 +838,7 @@ return function(p10)
 	local UserId = p10.userId or (if Players.LocalPlayer then Players.LocalPlayer.UserId else 0)
 	local CreatorGroupsStore = if FFlagBuildWithGroupsModule then p10.creatorGroupsStore or CreatorGroupsModule.getCreatorGroupsStore() else nil
 	local UseBuildCreatorsResult = if FFlagBuildWithGroupsModule then useBuildCreators(CreatorGroupsStore, UserId, p10.filter or config) else nil
-	local UseCreatorSearchListResult = if FFlagBuildExperienceCursorSearchPagesModule then useCreatorSearchList(SearchStore, UseDebouncedQueryResult, IsIsFocused, UseSignalStateResult1, UseMemoResult, UseMemoResult1, UseResult, if FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule then CreatorAgentChatStore else nil, UseBuildCreatorsResult) else useUniverseSearchList(SearchStore, UserId, UseDebouncedQueryResult, IsIsFocused, UseSignalStateResult1, UseMemoResult, UseMemoResult1, UseResult, if FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule then CreatorAgentChatStore else nil, UseBuildCreatorsResult)
+	local UseCreatorSearchListResult = if FFlagBuildExperienceCursorSearchPagesModule then useCreatorSearchList(SearchStore, UseActiveTabQueryModuleResult, IsIsFocused, UseSignalStateResult1, UseMemoResult, UseMemoResult1, UseResult, if FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule then CreatorAgentChatStore else nil, UseBuildCreatorsResult) else useUniverseSearchList(SearchStore, UserId, UseActiveTabQueryModuleResult, IsIsFocused, UseSignalStateResult1, UseMemoResult, UseMemoResult1, UseResult, if FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule then CreatorAgentChatStore else nil, UseBuildCreatorsResult)
 	local RefreshFunction = UseCreatorSearchListResult.refresh
 	local RefreshSessions = if FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule then UseCreatorSearchListResult.refreshSessions else nil
 	local UseRefResult2 = if FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule then ReactModule.useRef(RefreshSessions) else nil
@@ -992,7 +994,7 @@ return function(p10)
 		items = Items,
 		listStatus = Status,
 		hasDisplayedResult = IsReady,
-		isSettledNoResults = Query == UseDebouncedQueryResult and (IsReady and #Items == 0),
+		isSettledNoResults = Query == UseActiveTabQueryModuleResult and (IsReady and #Items == 0),
 		query = Query,
 		sourceItemCount = SourceItemCount,
 		sessionCount = #UseSignalStateResult1,

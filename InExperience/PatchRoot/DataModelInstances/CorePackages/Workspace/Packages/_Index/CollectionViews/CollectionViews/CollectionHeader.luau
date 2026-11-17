@@ -14,9 +14,11 @@ local ResponsiveModule = require(Parent.Responsive)
 local UsePreferredInputFunction = ResponsiveModule.usePreferredInput
 local CheckAndFormatPossibleLinkModule = require(CollectionViews.checkAndFormatPossibleLink)
 local _ = require(CollectionViews.SeeAllButtonType_Legacy)
+local CollectionHeaderMenuModule = require(CollectionViews.CollectionHeaderMenu)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagLuaAppSortHeaderAnchorTag = SharedFlagsModule.FFlagLuaAppSortHeaderAnchorTag
 local FFlagSduiComponentsUseFoundationTokens = SharedFlagsModule.FFlagSduiComponentsUseFoundationTokens
+local FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint = SharedFlagsModule.FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint
 local IconsActionsTruncationCollapseSmall = Images["icons/actions/truncationCollapse_small"]
 local IconsActionsCycleRight = Images["icons/actions/cycleRight"]
 local config = {
@@ -46,7 +48,7 @@ local function HeaderButton(Frame: Frame)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), UsePreferredInputFunction (copy), FFlagSduiComponentsUseFoundationTokens (copy), UseTokensFunction (copy), UseDesignTokensFunction (copy), ResponsiveModule (copy), CheckAndFormatPossibleLinkModule (copy), FFlagLuaAppSortHeaderAnchorTag (copy), NormalizeFontFaceFunction (copy), HeaderButton (copy), IconsActionsCycleRight (copy), IconsActionsTruncationCollapseSmall (copy), IconWithTooltip (copy), TooltipOrientation (copy)
+	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), UsePreferredInputFunction (copy), FFlagSduiComponentsUseFoundationTokens (copy), UseTokensFunction (copy), UseDesignTokensFunction (copy), ResponsiveModule (copy), CheckAndFormatPossibleLinkModule (copy), FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint (copy), FFlagLuaAppSortHeaderAnchorTag (copy), NormalizeFontFaceFunction (copy), HeaderButton (copy), IconsActionsCycleRight (copy), IconsActionsTruncationCollapseSmall (copy), IconWithTooltip (copy), TooltipOrientation (copy), CollectionHeaderMenuModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
 	local UseResult = ReactModule.useCallback(function(Frame)
@@ -80,9 +82,17 @@ return ReactModule.memo(function(p1)
 	end
 	local NoActive: boolean = CheckAndFormatPossibleLinkModuleResult and (not JoinResult.hideSubtitleChevron and not Active)
 	local Size250 = UseTokensResult.Size.Size_250
-	local XOffset = if NoActive then Size250 else 0
+	local XOffset1 = if NoActive then Size250 else 0
 	local HasOnActivateSubtitle: boolean = CheckAndFormatPossibleLinkModuleResult and OnActivateSubtitle ~= nil
+	local MenuItems = nil
+	local XOffset = nil
+	local v1 = nil
 	
+	if FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint then
+		MenuItems = if JoinResult.menuItems and #JoinResult.menuItems > 0 then JoinResult.menuItems else nil
+		XOffset = UseTokensResult.Size.Size_1000
+		v1 = if MenuItems then XOffset + Size300 else 0
+	end
 	return ReactModule.createElement("Frame", {
 		Position = JoinResult.Position,
 		AutomaticSize = JoinResult.AutomaticSize,
@@ -96,7 +106,7 @@ return ReactModule.memo(function(p1)
 	}, {
 		LeftContentFrame = ReactModule.createElement(if Active then "TextButton" else "Frame", {
 			Text = if Active then "" else nil,
-			Size = UDim2.new(1, -NewSize1, 0, 0),
+			Size = UDim2.new(1, if FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint then -NewSize1 - v1 else -NewSize1, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			BackgroundTransparency = 1,
 			AnchorPoint = JoinResult.AnchorPoint,
@@ -143,8 +153,8 @@ return ReactModule.memo(function(p1)
 				}, {
 					UISizeConstraint = ReactModule.createElement("UISizeConstraint", {
 						MaxSize = UseBindingResult:map(function(p2)
-							-- upvalues: Size (copy), NewSize (copy)
-							local SizeDelta = p2 - Size - NewSize
+							-- upvalues: FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint (upval), Size (copy), NewSize (copy), v1 (ref)
+							local SizeDelta = if FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint then p2 - Size - NewSize - v1 else p2 - Size - NewSize
 							
 							return if SizeDelta > 0 then Vector2.new(SizeDelta, 1e999) else nil
 						end)
@@ -192,10 +202,10 @@ return ReactModule.memo(function(p1)
 				}, {
 					UISizeConstraint = ReactModule.createElement("UISizeConstraint", {
 						MaxSize = UseBindingResult:map(function(p2)
-							-- upvalues: XOffset (copy)
-							local X = p2 - XOffset
+							-- upvalues: FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint (upval), XOffset1 (copy), v1 (ref)
+							local XOffsetDelta = if FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint then p2 - XOffset1 - v1 else p2 - XOffset1
 							
-							return if X > 0 then Vector2.new(X, 1e999) else nil
+							return if XOffsetDelta > 0 then Vector2.new(XOffsetDelta, 1e999) else nil
 						end)
 					})
 				}),
@@ -203,7 +213,7 @@ return ReactModule.memo(function(p1)
 					LayoutOrder = 2,
 					BackgroundTransparency = 1,
 					ClipsDescendants = true,
-					Size = UDim2.fromOffset(XOffset, XOffset)
+					Size = UDim2.fromOffset(XOffset1, XOffset1)
 				}, {
 					Icon = ReactModule.createElement(HeaderButton, {
 						Rotation = 90,
@@ -223,8 +233,19 @@ return ReactModule.memo(function(p1)
 			supportVR = JoinResult.tooltipSupportsVR,
 			supportTenFootUi = JoinResult.tooltipSupportsTenFootUi,
 			size = UDim2.new(0, Size700, 0, Size700),
-			position = if IsNotSubtitleMatch then UDim2.new(1, 0, 0, 0) else UDim2.new(1, 0, 0.5, 0),
+			position = if IsNotSubtitleMatch then UDim2.new(1, if FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint then -v1 else 0, 0, 0) else UDim2.new(1, if FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint then -v1 else 0, 0.5, 0),
 			anchorPoint = if IsNotSubtitleMatch then Vector2.new(1, 0) else Vector2.new(1, 0.5)
-		}) or nil
+		}) or nil,
+		HeaderMenu = if FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint and MenuItems then ReactModule.createElement("Frame", {
+			BackgroundTransparency = 1,
+			Size = UDim2.fromOffset(XOffset, 0),
+			Position = if IsNotSubtitleMatch then UDim2.fromScale(1, 0) else UDim2.fromScale(1, 0.5),
+			AnchorPoint = if IsNotSubtitleMatch then Vector2.new(1, 0) else Vector2.new(1, 0.5)
+		}, {
+			Menu = ReactModule.createElement(CollectionHeaderMenuModule, {
+				menuItems = MenuItems,
+				anchorPoint = if IsNotSubtitleMatch then Vector2.zero else Vector2.new(0, 0.5)
+			})
+		}) else nil
 	})
 end)

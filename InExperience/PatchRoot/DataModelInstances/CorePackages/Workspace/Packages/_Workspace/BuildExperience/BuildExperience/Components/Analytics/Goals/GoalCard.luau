@@ -7,12 +7,13 @@ local View = FoundationModule.View
 local Text = FoundationModule.Text
 local _ = require(Parent.DataHydration.CreatorAnalytics)
 local _ = require(BuildExperience.Analytics.AnalyticsWindow)
+local FFlagBuildAnalyticsFunnelTrackingCTAModule = require(BuildExperience.Flags.FFlagBuildAnalyticsFunnelTrackingCTA)
 local _ = require(BuildExperience.Analytics.Goals.GoalTypes)
 local GoalLockedContentModule = require(script.Parent.GoalLockedContent)
 local GoalMetricRowModule = require(script.Parent.GoalMetricRow)
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), GoalMetricRowModule (copy), View (copy), Text (copy), GoalLockedContentModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), GoalMetricRowModule (copy), FFlagBuildAnalyticsFunnelTrackingCTAModule (copy), View (copy), Text (copy), GoalLockedContentModule (copy)
 	local TestId = p1.testId or "GoalCard"
 	local Goal = p1.goal
 	local config = { title = Goal.titleKey }
@@ -25,6 +26,7 @@ return function(p1)
 	
 	for LayoutOrder, metricSummary1 in Goal.metricSummaries do
 		Elements[metricSummary1.id] = ReactModule.createElement(GoalMetricRowModule, {
+			onOpenChat = if FFlagBuildAnalyticsFunnelTrackingCTAModule then p1.onOpenChat else nil,
 			title = UseLocalizationResult[metricSummary1.id],
 			universeId = p1.universeId,
 			summary = metricSummary1,

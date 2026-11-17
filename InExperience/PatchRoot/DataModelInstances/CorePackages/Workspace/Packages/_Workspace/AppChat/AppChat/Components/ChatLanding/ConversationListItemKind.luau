@@ -5,5 +5,8 @@
 	Conversation = "conversation",
 	GroupLink = "groupLink",
 	QuickStartLink = "quickStartLink",
-	SocialCarousel = "socialCarousel"
+	SectionHeader = "sectionHeader",
+	SocialCarousel = "socialCarousel",
+	StatusText = "statusText",
+	SuggestedUser = "suggestedUser"
 }))

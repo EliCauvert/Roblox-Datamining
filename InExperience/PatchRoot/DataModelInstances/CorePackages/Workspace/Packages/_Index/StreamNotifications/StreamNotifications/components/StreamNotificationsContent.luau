@@ -48,7 +48,7 @@ local CloseCentralOverlayFunction = require(Parent.CentralOverlay).Thunks.CloseC
 local AbuseVectorModule = require(Parent.GenericAbuseReporting.AbuseVector)
 local OpenDynamicAbuseReportModule = require(Parent.GenericAbuseReporting.OpenDynamicAbuseReport)
 local LuaAppNewStreamNotificationsLogFix = game:DefineFastFlag("LuaAppNewStreamNotificationsLogFix", false)
-local StreamNotificationFixInitialPageFill = game:DefineFastFlag("StreamNotificationFixInitialPageFill", false)
+local FFlagStreamNotificationFixInitialPageFillModule = require(StreamNotifications.Flags.FFlagStreamNotificationFixInitialPageFill)
 local FFlagStreamNotificationsSduiContentPageModule = require(StreamNotifications.Flags.FFlagStreamNotificationsSduiContentPage)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local GetFStringPCGDKFilteredNotificationTypesFunction = SharedFlagsModule.GetFStringPCGDKFilteredNotificationTypes
@@ -84,7 +84,7 @@ local function createImpressionSignal()
 end
 
 return function(p1)
-	-- upvalues: UseStyleFunction (copy), StreamNotificationDropdownExperimentationModule (copy), UseDispatchFunction (copy), UseClientTriggerEventHandlerModule (copy), ReactModule (copy), EnumStreamNotificationsDisplayStateModule (copy), EnumStreamNotificationsLoadingMoreStateModule (copy), FFlagStreamNotificationImpressionLogging (copy), createImpressionSignal (copy), UserInputService (copy), ConstantsModule (copy), FFlagStreamNotificationsSduiContentPageModule (copy), FFlagNotificationStreamPromptsHandlerEnabled (copy), UsePushPermissionClientAttributesModule (copy), FetchStreamNotificationsContentPageModule (copy), GetStreamNotificationsModule (copy), ConfigResult (copy), SortNotificationsModule (copy), GetFStringPCGDKFilteredNotificationTypesFunction (copy), ThirdPartyUserService (copy), StreamNotificationFixInitialPageFill (copy), CryoModule (copy), NotificationHelper (copy), EventStream (copy), AnalyticsConstantsModule (copy), FFlagStreamNotificationsStandardizeClickEvents (copy), ClearUnreadNotificationsModule (copy), PostReportNotificationModule (copy), OpenDynamicAbuseReportModule (copy), AbuseVectorModule (copy), CloseCentralOverlayFunction (copy), LuaAppNewStreamNotificationsLogFix (copy), Type (copy), FFlagNotificationDeeplinkTapListenersEnabled (copy), DeeplinkTapListeners (copy), JoinExperienceFunction (copy), SessionService (copy), ReportEventModule (copy), NewResult (copy), PostNotificationsApiModule (copy), NotificationsCommonModule (copy), MetaActionsMenuModule (copy), Loading (copy), IconSize (copy), StreamNotificationsContentPageModule (copy), StreamNotificationBundleWrapperModule (copy), StreamNotificationAnimationWrapperModule (copy), EmptyNotificationsModule (copy), StreamPromptsBannerSlotModule (copy), GuiService (copy), FrameBoundsImpressionsTracker (copy)
+	-- upvalues: UseStyleFunction (copy), StreamNotificationDropdownExperimentationModule (copy), UseDispatchFunction (copy), UseClientTriggerEventHandlerModule (copy), ReactModule (copy), EnumStreamNotificationsDisplayStateModule (copy), EnumStreamNotificationsLoadingMoreStateModule (copy), FFlagStreamNotificationImpressionLogging (copy), createImpressionSignal (copy), UserInputService (copy), ConstantsModule (copy), FFlagStreamNotificationsSduiContentPageModule (copy), FFlagNotificationStreamPromptsHandlerEnabled (copy), UsePushPermissionClientAttributesModule (copy), FetchStreamNotificationsContentPageModule (copy), GetStreamNotificationsModule (copy), ConfigResult (copy), SortNotificationsModule (copy), GetFStringPCGDKFilteredNotificationTypesFunction (copy), ThirdPartyUserService (copy), FFlagStreamNotificationFixInitialPageFillModule (copy), CryoModule (copy), NotificationHelper (copy), EventStream (copy), AnalyticsConstantsModule (copy), FFlagStreamNotificationsStandardizeClickEvents (copy), ClearUnreadNotificationsModule (copy), PostReportNotificationModule (copy), OpenDynamicAbuseReportModule (copy), AbuseVectorModule (copy), CloseCentralOverlayFunction (copy), LuaAppNewStreamNotificationsLogFix (copy), Type (copy), FFlagNotificationDeeplinkTapListenersEnabled (copy), DeeplinkTapListeners (copy), JoinExperienceFunction (copy), SessionService (copy), ReportEventModule (copy), NewResult (copy), PostNotificationsApiModule (copy), NotificationsCommonModule (copy), MetaActionsMenuModule (copy), Loading (copy), IconSize (copy), StreamNotificationsContentPageModule (copy), StreamNotificationBundleWrapperModule (copy), StreamNotificationAnimationWrapperModule (copy), EmptyNotificationsModule (copy), StreamPromptsBannerSlotModule (copy), GuiService (copy), FrameBoundsImpressionsTracker (copy)
 	local UseStyleResult = UseStyleFunction()
 	local DropdownEnabled = StreamNotificationDropdownExperimentationModule.getDropdownEnabled()
 	local UseDispatchResult = UseDispatchFunction()
@@ -167,13 +167,13 @@ return function(p1)
 	end
 	
 	Callback = function()
-		-- upvalues: UseRefResult (copy), EnumStreamNotificationsLoadingMoreStateModule (upval), UseStateResult2_3 (copy), GetStreamNotificationsModule (upval), ConfigResult (upval), ConstantsModule (upval), UseRefResult1 (copy), SortNotificationsModule (upval), GetFStringPCGDKFilteredNotificationTypesFunction (upval), ThirdPartyUserService (upval), StreamNotificationFixInitialPageFill (upval), UseRefResult2 (copy), UseRefResult3 (copy), UseStateResult2 (copy), CryoModule (upval), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval), FFlagStreamNotificationsStandardizeClickEvents (upval), UseStateResult2_2 (copy), EnumStreamNotificationsDisplayStateModule (upval), ClearUnreadNotificationsModule (upval), Callback (ref), UseStateResult (copy)
+		-- upvalues: UseRefResult (copy), EnumStreamNotificationsLoadingMoreStateModule (upval), UseStateResult2_3 (copy), GetStreamNotificationsModule (upval), ConfigResult (upval), ConstantsModule (upval), UseRefResult1 (copy), SortNotificationsModule (upval), GetFStringPCGDKFilteredNotificationTypesFunction (upval), ThirdPartyUserService (upval), FFlagStreamNotificationFixInitialPageFillModule (upval), UseRefResult2 (copy), UseRefResult3 (copy), UseStateResult2 (copy), CryoModule (upval), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval), FFlagStreamNotificationsStandardizeClickEvents (upval), UseStateResult2_2 (copy), EnumStreamNotificationsDisplayStateModule (upval), ClearUnreadNotificationsModule (upval), Callback (ref), UseStateResult (copy)
 		if UseRefResult.current ~= EnumStreamNotificationsLoadingMoreStateModule.NoMoreNotifications then
 			local Loading = EnumStreamNotificationsLoadingMoreStateModule.Loading
 			UseRefResult.current = Loading
 			UseStateResult2_3(Loading)
 			GetStreamNotificationsModule(ConfigResult, ConstantsModule.DefaultMaxRows, UseRefResult1.current):andThen(function(Result)
-				-- upvalues: SortNotificationsModule (upval), GetFStringPCGDKFilteredNotificationTypesFunction (upval), ThirdPartyUserService (upval), StreamNotificationFixInitialPageFill (upval), UseRefResult2 (upval), UseRefResult3 (upval), UseStateResult2 (upval), CryoModule (upval), EnumStreamNotificationsLoadingMoreStateModule (upval), UseRefResult (upval), UseStateResult2_3 (upval), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval), ConstantsModule (upval), FFlagStreamNotificationsStandardizeClickEvents (upval), UseStateResult2_2 (upval), EnumStreamNotificationsDisplayStateModule (upval), ClearUnreadNotificationsModule (upval), ConfigResult (upval), UseRefResult1 (upval), Callback (upval), UseStateResult (upval)
+				-- upvalues: SortNotificationsModule (upval), GetFStringPCGDKFilteredNotificationTypesFunction (upval), ThirdPartyUserService (upval), FFlagStreamNotificationFixInitialPageFillModule (upval), UseRefResult2 (upval), UseRefResult3 (upval), UseStateResult2 (upval), CryoModule (upval), EnumStreamNotificationsLoadingMoreStateModule (upval), UseRefResult (upval), UseStateResult2_3 (upval), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval), ConstantsModule (upval), FFlagStreamNotificationsStandardizeClickEvents (upval), UseStateResult2_2 (upval), EnumStreamNotificationsDisplayStateModule (upval), ClearUnreadNotificationsModule (upval), ConfigResult (upval), UseRefResult1 (upval), Callback (upval), UseStateResult (upval)
 				local SortNotificationsModuleResult = SortNotificationsModule(Result)
 				local FStringPCGDKFilteredNotificationTypes = GetFStringPCGDKFilteredNotificationTypesFunction()
 				local List = {}
@@ -186,7 +186,7 @@ return function(p1)
 				local List1 = List
 				
 				if List1 and #List1 > 0 then
-					if StreamNotificationFixInitialPageFill then
+					if FFlagStreamNotificationFixInitialPageFillModule then
 						for _, value1 in ipairs(List1) do
 							if value1.notificationSourceType == "Sendr" then
 								local BundleKey = value1.content.bundleKey
@@ -224,7 +224,7 @@ return function(p1)
 				ClearUnreadNotificationsModule(ConfigResult)
 				UseRefResult1.current = (tonumber(UseRefResult1.current) or 0) + ConstantsModule.DefaultMaxRows
 				
-				if StreamNotificationFixInitialPageFill then
+				if FFlagStreamNotificationFixInitialPageFillModule then
 					if UseRefResult3.current < ConstantsModule.DefaultMaxRows then
 						Callback()
 					end
@@ -615,7 +615,7 @@ return function(p1)
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
 		}, {
-			UIFlexItem = ReactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }),
+			UIFlexItem = ReactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Grow }),
 			Notifications = UseMemoResult2
 		})
 	}) else UseMemoResult2

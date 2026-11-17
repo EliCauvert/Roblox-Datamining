@@ -35,5 +35,12 @@
 	ERROR_PROMPT_MIN_HEIGHT = { Default = 250 },
 	ERROR_PROMPT_MIN_WIDTH = { Default = 320, XBox = 400 },
 	ERROR_PROMPT_MAX_WIDTH = { Default = 400, XBox = 400 },
-	ERROR_TITLE_FRAME_HEIGHT = { Default = 50 }
+	ERROR_TITLE_FRAME_HEIGHT = { Default = 50 },
+	InGameMenu = {
+		HubBarWidth = 800,
+		HubBarHeight = 60,
+		PageMaxHeight = 600,
+		HubPaddingX = 20,
+		HubPaddingBottom = 14
+	}
 }

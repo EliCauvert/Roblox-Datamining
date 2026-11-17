@@ -6,7 +6,6 @@ local MomentsCommonModule = require(Parent.MomentsCommon)
 local _ = require(Parent.MomentsTypes)
 local SignalsReactModule = require(Parent.SignalsReact)
 local MomentContextModule = require(script.Parent.Parent.Parent.MomentContext)
-local FFlagMomentsEngagementMetricsFeature = MomentsCommonModule.Flags.FFlagMomentsEngagementMetricsFeature
 local FFlagMomentsServeEDPVideos = require(Parent.SharedFlags).FFlagMomentsServeEDPVideos
 local FFlagMomentsRenderAvatarPostsInFeed = require(Parent.SharedFlags).FFlagMomentsRenderAvatarPostsInFeed
 local CreatorAttributionModule = require(script.Parent.CreatorAttribution)
@@ -20,18 +19,18 @@ local GetMomentsCapabilitiesFunction = MomentsCommonModule.Stores.GetMomentsCapa
 local UseSignalStateFunction = SignalsReactModule.useSignalState
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: MomentContextModule (copy), UseSignalStateFunction (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), FFlagMomentsServeEDPVideos (copy), FFlagMomentsEngagementMetricsFeature (copy), GetMomentsCapabilitiesFunction (copy), UseMomentsSessionFunction (copy), ReactModule (copy), DebugInfoModule (copy), CreatorAttributionModule (copy), DescriptionModule (copy), ReactionsModule (copy), StatusChipModule (copy), View (copy)
+	-- upvalues: MomentContextModule (copy), UseSignalStateFunction (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), FFlagMomentsServeEDPVideos (copy), GetMomentsCapabilitiesFunction (copy), UseMomentsSessionFunction (copy), ReactModule (copy), DebugInfoModule (copy), CreatorAttributionModule (copy), DescriptionModule (copy), ReactionsModule (copy), StatusChipModule (copy), View (copy)
 	local Kind = UseSignalStateFunction(MomentContextModule.useMoment().store.getData).kind
 	local IsExperience: boolean = Kind == "experience" or FFlagMomentsRenderAvatarPostsInFeed and Kind == "avatar"
 	local IsEdpVideo = if FFlagMomentsServeEDPVideos then Frame.moment ~= nil and Frame.moment.entityType == "edpVideo" else nil
-	local UseSignalStateResult = if FFlagMomentsEngagementMetricsFeature then UseSignalStateFunction(GetMomentsCapabilitiesFunction(false).getIsEngagementMetricsEnabled) else nil
+	local UseSignalStateResult = UseSignalStateFunction(GetMomentsCapabilitiesFunction(false).getIsEngagementMetricsEnabled)
 	local t = {}
 	
 	if not UseSignalStateFunction(UseMomentsSessionFunction().getHideDetails) then
 		t.DebugInfo = ReactModule.createElement(DebugInfoModule, { LayoutOrder = 0 })
 		t.CreatorAttribution = if IsExperience and (not FFlagMomentsServeEDPVideos or not IsEdpVideo) then ReactModule.createElement(CreatorAttributionModule, { LayoutOrder = 1 }) else nil
 		t.Description = ReactModule.createElement(DescriptionModule, { LayoutOrder = 2 })
-		t.Reactions = if IsExperience and (not FFlagMomentsEngagementMetricsFeature or UseSignalStateResult) then ReactModule.createElement(ReactionsModule, { LayoutOrder = 3 }) else nil
+		t.Reactions = if IsExperience and UseSignalStateResult then ReactModule.createElement(ReactionsModule, { LayoutOrder = 3 }) else nil
 		t.StatusChip = ReactModule.createElement(StatusChipModule, { LayoutOrder = 4 })
 	end
 	return ReactModule.createElement(View, {
