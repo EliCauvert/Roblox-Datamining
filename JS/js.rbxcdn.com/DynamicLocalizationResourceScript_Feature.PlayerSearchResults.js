@@ -23,6 +23,7 @@ Roblox.LangDynamic["Feature.PlayerSearchResults"] = {
     "Label.Previously": "Previously",
     "Label.You": "You",
     "Label.NewUsername": "New username",
-    "Label.YouAreConnections": "You are Connections"
+    "Label.YouAreConnections": "You are Connections",
+    "Heading.SearchResults": "Search results"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.PlayerSearchResults");

@@ -119,6 +119,7 @@ Roblox.LangDynamic["Feature.Item"] = {
     "Label.By2": "By",
     "Label.DeleteItemUndercase": "Delete item",
     "Label.DeleteThisItem": "Delete this item?",
-    "Label.DeleteFromInventoryPermanently": "We'll remove it from your inventory permanently."
+    "Label.DeleteFromInventoryPermanently": "We'll remove it from your inventory permanently.",
+    "Message.ItemNotDeleted": "Item wasn't deleted"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Item");

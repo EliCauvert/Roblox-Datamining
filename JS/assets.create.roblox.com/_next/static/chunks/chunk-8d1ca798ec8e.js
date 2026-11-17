@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "f1a79e46-eb47-a01c-77fc-49b3bd2d9d01")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "7d5a074b-42b8-4d98-aee4-db15ebcc1dfd")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 11682, (e, t, r) => {
@@ -23,15 +23,15 @@
             h = "0123456789abcdef".split(""),
             p = [128, 32768, 8388608, -0x80000000],
             A = [0, 8, 16, 24],
-            T = ["hex", "array", "digest", "buffer", "arrayBuffer", "base64"],
-            f = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".split(""),
+            f = ["hex", "array", "digest", "buffer", "arrayBuffer", "base64"],
+            T = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".split(""),
             S = [];
         if (c) {
-            var E = new ArrayBuffer(68);
-            l = new Uint8Array(E), S = new Uint32Array(E)
+            var _ = new ArrayBuffer(68);
+            l = new Uint8Array(_), S = new Uint32Array(_)
         }
-        var _ = Array.isArray;
-        (n.JS_MD5_NO_NODE_JS || !_) && (_ = function(e) {
+        var E = Array.isArray;
+        (n.JS_MD5_NO_NODE_JS || !E) && (E = function(e) {
             return "[object Array]" === Object.prototype.toString.call(e)
         });
         var v = ArrayBuffer.isView;
@@ -43,7 +43,7 @@
                 if ("string" === t) return [e, !0];
                 if ("object" !== t || null === e) throw Error(r);
                 if (c && e.constructor === ArrayBuffer) return [new Uint8Array(e), !1];
-                if (!_(e) && !v(e)) throw Error(r);
+                if (!E(e) && !v(e)) throw Error(r);
                 return [e, !1]
             },
             m = function(e) {
@@ -60,7 +60,7 @@
                     function(n) {
                         if ("string" == typeof n) return a.createHash("md5").update(n, "utf8").digest("hex");
                         if (null == n) throw Error(r);
-                        return n.constructor === ArrayBuffer && (n = new Uint8Array(n)), _(n) || v(n) || n.constructor === i ? a.createHash("md5").update(t(n)).digest("hex") : e(n)
+                        return n.constructor === ArrayBuffer && (n = new Uint8Array(n)), E(n) || v(n) || n.constructor === i ? a.createHash("md5").update(t(n)).digest("hex") : e(n)
                     }
             },
             C = function(e) {
@@ -143,8 +143,8 @@
                 t = new Uint32Array(e);
             return t[0] = this.h0, t[1] = this.h1, t[2] = this.h2, t[3] = this.h3, e
         }, P.prototype.buffer = P.prototype.arrayBuffer, P.prototype.base64 = function() {
-            for (var e, t, r, a = "", i = this.array(), n = 0; n < 15;) e = i[n++], t = i[n++], r = i[n++], a += f[e >>> 2] + f[(e << 4 | t >>> 4) & 63] + f[(t << 2 | r >>> 6) & 63] + f[63 & r];
-            return a + (f[(e = i[n]) >>> 2] + f[e << 4 & 63] + "==")
+            for (var e, t, r, a = "", i = this.array(), n = 0; n < 15;) e = i[n++], t = i[n++], r = i[n++], a += T[e >>> 2] + T[(e << 4 | t >>> 4) & 63] + T[(t << 2 | r >>> 6) & 63] + T[63 & r];
+            return a + (T[(e = i[n]) >>> 2] + T[e << 4 & 63] + "==")
         }, O.prototype = new P, O.prototype.finalize = function() {
             if (P.prototype.finalize.call(this), this.inner) {
                 this.inner = !1;
@@ -159,8 +159,8 @@
             }, e.update = function(t) {
                 return e.create().update(t)
             };
-            for (var t = 0; t < T.length; ++t) {
-                var r = T[t];
+            for (var t = 0; t < f.length; ++t) {
+                var r = f[t];
                 e[r] = m(r)
             }
             return e
@@ -172,8 +172,8 @@
                 }, e.update = function(t, r) {
                     return e.create(t).update(r)
                 };
-                for (var t = 0; t < T.length; ++t) {
-                    var r = T[t];
+                for (var t = 0; t < f.length; ++t) {
+                    var r = f[t];
                     e[r] = C(r)
                 }
                 return e
@@ -201,7 +201,7 @@
         A = JSON.stringify({
             AssetPrivacy: "OpenUse"
         }),
-        T = {
+        f = {
             ".bmp": "image/bmp",
             ".flac": "audio/flac",
             ".jpeg": "image/jpeg",
@@ -214,7 +214,7 @@
             ".tga": "image/x-tga",
             ".wav": "audio/wav"
         };
-    async function f(e, t) {
+    async function T(e, t) {
         null == t || t.throwIfAborted(), await new Promise((r, a) => {
             let i = setTimeout(() => {
                     null == t || t.removeEventListener("abort", n), r()
@@ -237,12 +237,12 @@
             let n = o instanceof Error ? o : Error(String(o));
             if (i < t) {
                 let n = r(i);
-                return await f(n, a), S(e, t, r, a, i + 1)
+                return await T(n, a), S(e, t, r, a, i + 1)
             }
             throw n
         }
     }
-    let E = async e => {
+    let _ = async e => {
         try {
             return (await fetch("".concat(h, "/v1/assets"), {
                 method: "PATCH",
@@ -253,13 +253,13 @@
             if (null == e ? void 0 : e.aborted) throw t;
             return null
         }
-    }, _ = new class e {
+    }, E = new class e {
         async createAssetAndGetOperationId(t, r) {
             let a = arguments.length > 2 && void 0 !== arguments[2] && arguments[2],
                 i = arguments.length > 3 ? arguments[3] : void 0,
                 n = a ? e.generateRequestInitForCreatingOpenUseAsset(t, r) : {};
             n.signal = i;
-            let o = await E(i);
+            let o = await _(i);
             o && (n.headers = {
                 [p]: o
             });
@@ -271,7 +271,7 @@
         }
         async abortMultipartUpload(e) {
             let t = {},
-                r = await E();
+                r = await _();
             r && (t.headers = {
                 [p]: r
             }), await this.multipartUploadApi.assetsMultipartUploadAbort({
@@ -288,10 +288,10 @@
         }
         async createAssetAndGetOperationIdWithMultipart(t, r, a, i, n, l, u, d) {
             var c;
-            let h, A, T, f, _ = null != a && a ? e.generateRequestInitForCreatingOpenUseAsset(t, r) : {};
-            _.signal = n;
-            let v = await E(n);
-            v && (_.headers = {
+            let h, A, f, T, E = null != a && a ? e.generateRequestInitForCreatingOpenUseAsset(t, r) : {};
+            E.signal = n;
+            let v = await _(n);
+            v && (E.headers = {
                 [p]: v,
                 "Content-Type": "application/json; charset=utf-8"
             }), i && i(1);
@@ -315,23 +315,23 @@
                 },
                 I = [];
             try {
-                T = await this.multipartUploadApi.assetsCreateAssetWithMultipartUpload({
+                f = await this.multipartUploadApi.assetsCreateAssetWithMultipartUpload({
                     multipartUploadStartRequest: m
-                }, _)
+                }, E)
             } catch (e) {
                 throw new s("Failed to start multipart upload: ".concat(e instanceof Error ? e.message : String(e)), o.MULTIPART_START, void 0, void 0, e instanceof Error && "status" in e ? e.status : void 0, "MULTIPART_START_FAILED")
             }
-            if (i && i(15), 0 === (I = null != (c = T.uploadUrls) ? c : []).length) throw new s("Upload URLs are empty from multipart start response", o.MULTIPART_START, void 0, void 0, void 0, "EMPTY_UPLOAD_URLS");
-            let C = e.parseOperationId(T.operationPath);
+            if (i && i(15), 0 === (I = null != (c = f.uploadUrls) ? c : []).length) throw new s("Upload URLs are empty from multipart start response", o.MULTIPART_START, void 0, void 0, void 0, "EMPTY_UPLOAD_URLS");
+            let C = e.parseOperationId(f.operationPath);
             if ("" === C) throw new s("Operation ID is empty from multipart start response", o.MULTIPART_START, void 0, void 0, void 0, "EMPTY_OPERATION_ID");
             null == l || l(C);
             try {
-                f = await e.uploadChunks(I, A, C, i ? e => {
+                T = await e.uploadChunks(I, A, C, i ? e => {
                     i(Math.min(15 + .65 * e, 80))
                 } : void 0, n)
             } catch (e) {
                 try {
-                    await this.abortMultipartUploadAfterFailure(C, _, n), (null == n ? void 0 : n.aborted) || null == d || d(C)
+                    await this.abortMultipartUploadAfterFailure(C, E, n), (null == n ? void 0 : n.aborted) || null == d || d(C)
                 } catch (t) {
                     throw new s("Chunk upload failed and abort also failed. Original error: ".concat(e instanceof Error ? e.message : String(e), ". Abort error: ").concat(t instanceof Error ? t.message : String(t)), o.CHUNK_UPLOAD_ABORT, C, void 0, void 0, "ABORT_FAILED")
                 }
@@ -340,7 +340,7 @@
             }
             i && i(80);
             try {
-                await Promise.all(f.map((e, t) => {
+                await Promise.all(T.map((e, t) => {
                     let r = t + 1;
                     return S(async () => {
                         try {
@@ -350,7 +350,7 @@
                                     chunkNum: r,
                                     eTag: e
                                 }
-                            }, _)
+                            }, E)
                         } catch (e) {
                             throw new s("Failed to complete chunk ".concat(r, ": ").concat(e instanceof Error ? e.message : String(e)), o.CHUNK_COMPLETE, C, r, e instanceof Error && "status" in e ? e.status : void 0, "CHUNK_COMPLETE_FAILED")
                         }
@@ -358,7 +358,7 @@
                 }))
             } catch (e) {
                 try {
-                    await this.abortMultipartUploadAfterFailure(C, _, n), (null == n ? void 0 : n.aborted) || null == d || d(C)
+                    await this.abortMultipartUploadAfterFailure(C, E, n), (null == n ? void 0 : n.aborted) || null == d || d(C)
                 } catch (t) {
                     throw new s("Chunk complete failed and abort also failed. Original error: ".concat(e instanceof Error ? e.message : String(e), ". Abort error: ").concat(t instanceof Error ? t.message : String(t)), o.CHUNK_COMPLETE_ABORT, C, void 0, void 0, "ABORT_FAILED")
                 }
@@ -369,7 +369,7 @@
             try {
                 await this.multipartUploadApi.assetsMultipartUploadComplete({
                     operationId: C
-                }, _)
+                }, E)
             } catch (e) {
                 throw new s("Failed to complete multipart upload: ".concat(e instanceof Error ? e.message : String(e)), o.MULTIPART_COMPLETE, C, void 0, e instanceof Error && "status" in e ? e.status : void 0, "MULTIPART_COMPLETE_FAILED")
             }
@@ -409,7 +409,7 @@
             let i = {
                     signal: a
                 },
-                o = await E(a);
+                o = await _(a);
             i.headers = {
                 "Content-Type": "application/json",
                 ...o ? {
@@ -484,7 +484,7 @@
             let r = e.type.trim();
             if ("" !== r) return r;
             let a = e.name.lastIndexOf(".");
-            return null != (t = T[a < 0 ? "" : e.name.slice(a).toLowerCase()]) ? t : "application/octet-stream"
+            return null != (t = f[a < 0 ? "" : e.name.slice(a).toLowerCase()]) ? t : "application/octet-stream"
         }
         static makeUploadPlan(e) {
             let t = [],
@@ -539,7 +539,7 @@
             this.assetsUploadApi = new n.k(e), this.assetVersionApi = new n.l(e), this.uploadStatusApi = new n.y(e), this.multipartUploadApi = new n.a(e)
         }
     };
-    e.s(["b", () => d, "U", 0, _], 968284)
+    e.s(["b", () => d, "U", 0, E], 968284)
 }, 970494, 391643, 557638, e => {
     "use strict";
     var t = e.i(415858),
@@ -863,21 +863,17 @@
             })
         }, n
     }(t._);
-    e.s(["s", 0, n, "a", 0, p, "S", 0, l, "A", 0, {
-        Invalid: "STATE_INVALID",
-        Active: "STATE_ACTIVE",
-        Archived: "STATE_ARCHIVED"
-    }], 391643), e.s(["f", 0, l], 557638);
+    e.s(["s", 0, n, "a", 0, p, "S", 0, l], 391643), e.s(["f", 0, l], 557638);
     let A = ["development-items-inventory"],
-        T = ["development-item-metadata-overrides"],
-        f = ["development-item-upload-overrides"],
+        f = ["development-item-metadata-overrides"],
+        T = ["development-item-upload-overrides"],
         S = e => null != e ? e : "",
-        E = e => {
+        _ = e => {
             var t;
             return null != (t = null == e ? void 0 : e.trim()) ? t : ""
         },
-        _ = (e, t) => {
-            e.setQueryData(T, e => {
+        E = (e, t) => {
+            e.setQueryData(f, e => {
                 if ((null == e ? void 0 : e.has(t)) !== !0) return e;
                 let r = new Map(e);
                 return r.delete(t), r
@@ -885,11 +881,11 @@
         },
         v = (e, t) => {
             var r;
-            let a = null == (r = e.getQueryData(T)) ? void 0 : r.get(t);
-            return null != a && a.expiresAt <= Date.now() ? void _(e, t) : a
+            let a = null == (r = e.getQueryData(f)) ? void 0 : r.get(t);
+            return null != a && a.expiresAt <= Date.now() ? void E(e, t) : a
         },
         y = (e, t) => {
-            e.setQueryData(f, e => {
+            e.setQueryData(T, e => {
                 if ((null == e ? void 0 : e.has(t)) !== !0) return e;
                 let r = new Map(e);
                 return r.delete(t), r
@@ -899,7 +895,7 @@
         I = e => null == e || "updateTime desc" === e,
         C = e => I(e[9]),
         P = (e, t, r) => {
-            e.setQueryData(T, e => {
+            e.setQueryData(f, e => {
                 let a = null == e ? void 0 : e.get(t);
                 if (null == a) return e;
                 let i = {
@@ -911,7 +907,7 @@
                 return i.developConfirmed && i.inventoryConfirmed ? n.delete(t) : n.set(t, i), n
             })
         },
-        O = (e, t) => E(null == t ? void 0 : t.name) === E(e.name) && S(null == t ? void 0 : t.description) === S(e.description);
+        O = (e, t) => _(null == t ? void 0 : t.name) === _(e.name) && S(null == t ? void 0 : t.description) === S(e.description);
     e.s(["E", 0, A, "J", 0, (e, t) => {
         let {
             assetId: r,
@@ -943,7 +939,7 @@
             name: i,
             updated: n
         };
-        e.setQueryData(T, e => {
+        e.setQueryData(f, e => {
             let t = new Map(e);
             return t.set(r, o), t
         });
@@ -979,7 +975,7 @@
             refetchType: "active"
         }), window.setTimeout(() => {
             let t = v(e, r);
-            (null == t ? void 0 : t.expiresAt) === o.expiresAt && (_(e, r), e.invalidateQueries({
+            (null == t ? void 0 : t.expiresAt) === o.expiresAt && (E(e, r), e.invalidateQueries({
                 queryKey: A,
                 refetchType: "active"
             }))
@@ -1005,7 +1001,7 @@
             },
             scope: n
         };
-        e.setQueryData(f, e => {
+        e.setQueryData(T, e => {
             let t = new Map(e);
             return t.set(r, s), t
         }), e.setQueriesData({
@@ -1026,7 +1022,7 @@
             refetchType: "none"
         }), window.setTimeout(() => {
             var t;
-            let a = null == (t = e.getQueryData(f)) ? void 0 : t.get(r);
+            let a = null == (t = e.getQueryData(T)) ? void 0 : t.get(r);
             (null == a ? void 0 : a.expiresAt) === s.expiresAt && (y(e, r), e.invalidateQueries({
                 queryKey: A,
                 refetchType: "active"
@@ -1074,7 +1070,7 @@
             query: n,
             scope: o,
             source: s
-        } = r, u = e.getQueryData(f);
+        } = r, u = e.getQueryData(T);
         if (null == u || 0 === u.size) return [...t];
         let d = new Set(t.map(e => e.assetId)),
             c = [];
@@ -1106,5 +1102,5 @@
     }], 970494)
 }]);
 
-//# debugId=f1a79e46-eb47-a01c-77fc-49b3bd2d9d01
-//# sourceMappingURL=2wviyb4swwzs1.js.map
+//# debugId=7d5a074b-42b8-4d98-aee4-db15ebcc1dfd
+//# sourceMappingURL=2ztdpowb9n2bz.js.map

@@ -31,7 +31,7 @@ Roblox.LangDynamic["Feature.Groups"] = {
     "Action.Upgrade": "Upgrade",
     "Action.UpgradeToJoin": "Upgrade to Join",
     "Action.JoinGroup": "Join Community",
-    "Action.CancelRequest": "Cancel request",
+    "Action.CancelRequest": "Cancel Request",
     "Action.Post": "Post",
     "Action.ExileUser": "Exile User",
     "Action.Delete": "Delete",
