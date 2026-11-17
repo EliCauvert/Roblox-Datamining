@@ -127,7 +127,7 @@ Authentication.AccountRecovery.Description.EmailCodeSentForUser,لقد أرسل�
 Authentication.AccountRecovery.Description.EmailUnavailableInfo,قد لا تتوفر بعض عناوين البريد الإلكتروني نظرًا لتغييرها نتيجة لتعديل العمر. ومع ذلك، سيظل بإمكانك استخدامها لاستعادة الحساب.
 Authentication.AccountRecovery.Description.EnhancedProtectionAddPasskey,أنت مسجّل في برنامج الحماية المعزَّز. للحفاظ على أمان حسابك، ستحتاج إلى مفتاح مرور أو مفتاح أمان لتسجيل الدخول.{lineBreak}{lineBreak}إذا كنت تستخدم جهازك الشخصي، نقترح عليك إعداد مفتاح مرور جديد الآن. سيجعل ذلك تسجيل الدخول على هذا الجهاز أسهل في المستقبل. إذا كنت تستخدم جهازًا مشتركًا أو عامًا، يمكنك تخطي هذه الخطوة.
 Authentication.AccountRecovery.Description.EnterABackupCode,الآن، أدخل كودًا احتياطيًا قمت بحفظه.
-Authentication.AccountRecovery.Description.EnterContactMethodAssociatedWithYourAccount,أدخِل بريدًا إلكترونيًا أو رقم هاتف قد يكون مرتبطًا بحسابك. إذا أجريت عملية شراء مُسبقًا، يمكنك تجربة استخدام البريد الإلكتروني للفوترة.
+Authentication.AccountRecovery.Description.EnterContactMethodAssociatedWithYourAccount,أدخل أي بريد إلكتروني أو رقم هاتف مرتبط بحسابك. جرّب البريد الإلكتروني الخاص بالفوترة إذا كنت قد أجريت عملية شراء.
 Authentication.AccountRecovery.Description.EnterEmailAddress,الآن، أدخِل عنوان بريد إلكتروني. يمكن أن يكون بريدًا إلكترونيًا قد سبق لك استخدامه لإجراء عملية شراء على منصّة Roblox
 Authentication.AccountRecovery.Description.EnterPhoneBackupCodeOrAnotherEmail,الآن، أدخِل رقم هاتف أو كود احتياطي أو عنوان بريد إلكتروني آخر. يمكن أن يكون هذا البريد الإلكتروني قد سبق لك استخدامه لإجراء عملية شراء على منصّة Roblox
 Authentication.AccountRecovery.Description.EnterPhoneNumberSecondMethod,الآن، أدخِل رقم هاتف مرتبط بحسابك.
@@ -377,6 +377,7 @@ Authentication.Login.Label.SelectAnAccount,حدّد حسابًا
 Authentication.Login.Label.TroubleSigningIn,هل تواجه مشكلة في تسجيل الدخول؟
 Authentication.Login.Label.UnverifiedEmailInstructions,لتسجيل الدخول ببريدك الإلكتروني، يتعيّن عليك التحقق منه. يمكنك أيضًا تسجيل الدخول باسم المستخدم الخاص بك.
 Authentication.Login.Label.Username,اسم المستخدم
+Authentication.Login.Label.UsernameEmailOrPhone,اسم المستخدم أو البريد الإلكتروني أو الهاتف
 Authentication.Login.Label.UsernameEmailOrPhoneNumber,اسم المستخدم أو البريد الإلكتروني أو رقم الهاتف
 Authentication.Login.Label.UsernameEmailPhone,اسم المستخدم/البريد/الهاتف
 Authentication.Login.Label.UsernameOrEmail,اسم المستخدم أو البريد الإلكتروني
@@ -1273,6 +1274,7 @@ CoreScripts.TextChat.Description.RobloxSummarizesMessagesFromAllPlayers,تلخّ
 CoreScripts.TextChat.Description.TurnOnChatInSettings,يمكنك تشغيل الدردشة من خلال الخصوصية>إعدادات التواصل.
 CoreScripts.TextChat.Description.UnlockChatPrivacyCommunications,يمكنك إلغاء قفل الدردشة من خلال إجراء تقدير للعمر في الخصوصية>إعدادات التواصل.
 CoreScripts.TextChat.Description.UnlockChatWithAnAgeCheck,إلغاء قفل خاصية الدردشة من خلال إجراء تقدير للعمر.
+CoreScripts.TextChat.Description.UseQuickWordsChatIsntAvailableInYourRegion,استخدم العبارات السريعة لتنسيق اللعب. الدردشة غير متاحة في منطقتك.
 CoreScripts.TextChat.Emote.Error.DoesNotExist,Emote غير موجود.
 CoreScripts.TextChat.Emote.Error.NotEnabled,لا يمكنك استخدام Emote هنا.
 CoreScripts.TextChat.Emote.Error.NotEquipped,لست مجهزًا بتلك Emote.
@@ -2278,6 +2280,7 @@ Feature.Avatar.Title.ClearAnimationsConfirmation,هل تريد مسح كل ال�
 Feature.Avatar.Title.ClearBodyConfirmation,هل تريد مسح الجسد؟
 Feature.Avatar.Title.ClearClothesConfirmation,هل تريد مسح كل الثياب؟
 Feature.Avatar.Title.ClearMakeupConfirmation,هل تريد مسح كل المكياج؟
+Feature.Avatar.Title.CreateMoment,إنشاء لحظة
 Feature.Avatar.Title.CreateSet,
 Feature.Avatar.Title.DeleteSet,
 Feature.Avatar.Title.DuplicateMakeupLook,تكرار الإطلالة
@@ -2418,6 +2421,7 @@ Feature.Build.Action.UpdateRating,تحديث التصنيف
 Feature.Build.Action.UpdateWithChanges,التحديث بالتغييرات
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,عرض الاستخدام
+Feature.Build.Analytics.Action.AddFunnelTracking,إضافة تتبّع مسارات التحويل
 Feature.Build.Analytics.AnalyzeChatPrompt,تحليل {analyzeName} خلال {days} من الأيام الماضية. ما سبب أهمية هذا المقياس وكيف يمكنني تحسينه؟
 Feature.Build.Analytics.AnalyzeName.Arppu,متوسط العائد لكل مستخدم يقوم بالدفع
 Feature.Build.Analytics.AnalyzeName.D1Retention,الاحتفاظ في اليوم الأول
@@ -2433,6 +2437,7 @@ Feature.Build.Analytics.Description.PlaythroughRate,"""معدل إكمال جل�
 Feature.Build.Analytics.Description.TotalPlaytime,"""إجمالي مدة اللعب"" هو مجموع الوقت الذي قضاه جميع اللاعبين في تجربتك خلال الفترة. وعادةً ما يشير ارتفاع مدة اللعب إلى جلسات أكثر تفاعلًا."
 Feature.Build.Analytics.DurationHours,{number} من الساعات
 Feature.Build.Analytics.DurationMinutes,{number} من الدقائق
+Feature.Build.Analytics.FunnelTrackingPrompt,راجِع مسارات التحويل في تحليلاتي وأضِف إليها أدوات التتبّع
 Feature.Build.Analytics.Goal.Action.CreateAd,
 Feature.Build.Analytics.Goal.Action.SellItems,بيع العناصر
 Feature.Build.Analytics.Goal.Action.ShareWithFriends,مشاركة مع الأصدقاء
@@ -2828,6 +2833,7 @@ Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,يمكنك توسيع نطاق أهلية جمهورك في مركز المصمم
 Feature.Build.Message.ExperiencesLoadFailed,تعذَّر تحميل التجارب
 Feature.Build.Message.FailedTitle,تعذَّرت عملية {TITLE}
+Feature.Build.Message.FailedWithTitle,تعذّر: {TITLE}
 Feature.Build.Message.FinishedTitle,انتهت عملية {TITLE}
 Feature.Build.Message.FriendsLoadFailed,تعذَّر تحميل الأصدقاء. حاول مرة أخرى.
 Feature.Build.Message.GameNotCreated,لم يتم إنشاء لعبتك. حاوِل مرة أخرى.
@@ -2870,6 +2876,8 @@ Feature.Build.Message.SaveChangesFailed,تعذَّر حفظ التغييرات. 
 Feature.Build.Message.ShareExperience,مشاركة {EXPERIENCE_NAME}
 Feature.Build.Message.ShareLinkFailed,تعذَّر إنشاء رابط المشاركة. حاول مرة أخرى.
 Feature.Build.Message.SignedOut,لقد تم تسجيل خروجك. سجّل الدخول وحاول مرة أخرى.
+Feature.Build.Message.StepForMinutesSeconds,{TITLE} لمدة {MINUTES} من الدقائق و{REM_SECONDS} من الثواني
+Feature.Build.Message.StepForSeconds,{TITLE} لمدة {SECONDS} من الثواني
 Feature.Build.Message.TasksCompleted,تم إكمال {NUM_COMPLETED_TASKS} من المهام
 Feature.Build.Message.ThinkingSeconds,استغرق التفكير {SECONDS} من الثواني
 Feature.Build.Message.TrustedFriendsRequiredForPlaytest,كن صديقًا موثوقًا به لهذا المصمم لتتمكن من تشغيل لعبته.
@@ -3794,6 +3802,7 @@ Feature.Friends.Label.FollowsYou,يتابعك
 Feature.Friends.Label.Frequent,لعبتما معًا
 Feature.Friends.Label.Friend,صديق
 Feature.Friends.Label.FriendInvite,دعاك لتكون صديقهم على Roblox
+Feature.Friends.Label.FriendOfUser,صديق {displayName}
 Feature.Friends.Label.FriendOwns,يملكها صديق واحد
 Feature.Friends.Label.FriendRecentlyPlayed,<b>صديق واحد</b> لعبها مؤخرًا
 Feature.Friends.Label.FriendRequest,
@@ -3865,6 +3874,7 @@ Feature.Friends.TFEducation.Modal.TextOutro.EighteenPlus,عند إضافة مس�
 Feature.Friends.Text.IsPlaying,يلعب الآن
 Feature.Friends.Text.NoConnections,لم تضف أي جهات اتصال حتى الآن. للبدء، ابحث عن جهات الاتصال ثم أضفها.
 Feature.Friends.Text.NoFriends,لم تضف أي أصدقاء بعد. للبدء، ابحث عن أصدقائك على Roblox ثم أضفهم.
+Feature.Friends.Title.AddMoreTrustedFriends,إضافة المزيد من الأصدقاء الموثوق بهم
 Feature.Friends.Title.TrustedFriendsExpiredLink,انتهت صلاحية الرابط
 Feature.Friends.Title.TrustedFriendsInvalidLink,الرابط غير صالح
 Feature.Friends.TrustedConnection.Label.Trusted,
@@ -4043,11 +4053,12 @@ Feature.Groups.Description.RequiresAccountTenureTooltipOneMonth,يجب أن يك
 Feature.Groups.Description.RequiresAccountTenureTooltipOneWeek,يجب أن يكون حسابك نشطًا لمدة 7 أيام قبل أن تتمكن من الانضمام إلى هذا المجتمع.
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeDays,يجب أن يكون حسابك نشطًا لمدة 3 أيام قبل أن تتمكن من الانضمام إلى هذا المجتمع.
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeMonths,يجب أن يكون حسابك نشطًا لمدة 90 يومًا قبل أن تتمكن من الانضمام إلى هذا المجتمع.
+Feature.Groups.Header.UppercaseMyGroups,مجتمعاتي
 Feature.Groups.Heading.Community,
 Feature.Groups.Heading.Followers,
 Feature.Groups.Heading.Groups,
 Feature.Groups.Heading.Members,
-Feature.Groups.Heading.MyGroups,مجتمعاتي
+Feature.Groups.Heading.MyGroups,
 Feature.Groups.Heading.Primary,اساسي
 Feature.Groups.Heading.SocialLinksNew,روابط التواصل الاجتماعي
 Feature.Groups.Heading.SocialMedia,وسائل التواصل الاجتماعي
@@ -4292,7 +4303,6 @@ Feature.Moments.Action.GenerateTextFeedbackNotHelpful,غير مفيد
 Feature.Moments.Action.GenerateTextFeedbackPolicy,غير لائق أو مخالف
 Feature.Moments.Action.Hide,إخفاء التفاصيل
 Feature.Moments.Action.HowToCapture,عرض كيفية الالتقاط
-Feature.Moments.Action.Join,انضمام
 Feature.Moments.Action.KeepEditing,متابعة التحرير
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,تصغير
@@ -5224,6 +5234,7 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,العرض صالح لمشتركي Plus الجدد فقط.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,عندما يشتري أي شخص اشتراك Plus باستخدام رابطك.
 Feature.RobloxSubscription.Description.ReferralShare,ادعُ شخصًا إلى اشتراك Plus وسيحصل كلاكما على {amount} من عملات Robux عند شرائه اشتراك Plus.
+Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,افتح تأثيرات نقطة العودة المجانية مع Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"بالضغط على \u{201C}{ctaText}\u{201D}، فإنك توافق على <a href=""{termsUrl}"">شروط الاشتراك في منصّة Roblox</a>. سيتم تحصيل الرسوم منك تلقائيًا كل شهر حتى تقوم بالإلغاء."
 Feature.RobloxSubscription.Heading.ReferralEntry,شارك Plus للحصول على {amount} من عملات Robux
 Feature.RobloxSubscription.Heading.ReferralHistory,سجل الإحالات
@@ -5257,6 +5268,7 @@ Feature.RobloxSubscription.Title.AgeCheckTrial,احصل على أسبوع مجا
 Feature.RobloxSubscription.Title.AlreadySubscribed,خبر سار
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,اشترِك في Roblox Plus
+Feature.RobloxSubscription.Title.SubscribeToPlus,اشترِك في Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,اشتراك Roblox Plus غير متاح هنا
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,يمكنك الانضمام إلى الحدث قبل أي شخص آخر.
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,الوصول المبكر مع اشتراك Plus
@@ -5850,17 +5862,6 @@ IAPExperience.Loading.Text.PurchasingItem,جاري شراء العنصر...
 IAPExperience.Loading.Text.PurchasingRobux,شراء Robux...
 IAPExperience.Loading.Text.WaitingForPurchase,في انتظار الشراء...
 IAPExperience.Loading.Text.WaitingForRobux,في انتظار إضافة Robux...
-IAPExperience.PremiumUpsell.Action.Subscribe,
-IAPExperience.PremiumUpsell.Body.RobuxDiscount,10% إضافية عند شراء Robux
-IAPExperience.PremiumUpsell.Label.AvatarShopBenefits,الوصول إلى عناصر حصرية مع حسومات في متجر الأفاتار
-IAPExperience.PremiumUpsell.Label.Disclosure,اشترك في <b>{currencySymbol}{price}/الشهر. إلغاء في أي وقت.</b> تنطبق شروط الاستخدام وسياسة الخصوصية.
-IAPExperience.PremiumUpsell.Label.PremiumBenefitListDesc,سيمنحك Roblox Premium:
-IAPExperience.PremiumUpsell.Label.PremiumOnlyBenefits,الحصول على منافع خاصة بمشتركي Premium
-IAPExperience.PremiumUpsell.Label.PremiumPolicy,يتجدد شهريًا. يمكنك إلغاؤه في أي وقت.
-IAPExperience.PremiumUpsell.Label.PremiumPrice,<b>{currencySymbol}{price}</b>/الشهر
-IAPExperience.PremiumUpsell.Label.RobloxPremium,Roblox Premium
-IAPExperience.PremiumUpsell.Label.RobuxPerMonth,{robux} شهريًا
-IAPExperience.PremiumUpsell.Label.ShortDisclosure,تنطبق شروط استخدام Roblox وسياسة الخصوصية.
 IAPExperience.PurchaseError.AlreadyPremium,يبدو أن المطور يحاول أن يعرض عليك شراء Roblox Premium إلا أنك حاليًا مشترك في Premium!
 IAPExperience.PurchaseError.Text.AlreadyOwn,أنت بالفعل تملك هذا العنصر. لم يتم فرض رسوم على حسابك.
 IAPExperience.PurchaseError.Text.AlreadySubscribed,يمكنك إدارة اشتراكك من الإعدادات > الاشتراكات.

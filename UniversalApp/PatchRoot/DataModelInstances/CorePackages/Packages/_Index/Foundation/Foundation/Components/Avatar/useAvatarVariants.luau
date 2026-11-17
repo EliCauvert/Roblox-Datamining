@@ -1,6 +1,5 @@
 ﻿local Foundation = script:FindFirstAncestor("Foundation")
 local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
-local FlagsModule = require(Foundation.Utility.Flags)
 local _ = require(Foundation.Providers.Style.Tokens)
 local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 local AvatarSizeModule = require(Foundation.Enums.AvatarSize)
@@ -12,7 +11,7 @@ local _ = require(Foundation.Components.Types)
 local IndexBindableModule = require(Foundation.Utility.indexBindable)
 
 local function variantsFactory(p1)
-	-- upvalues: AvatarSizeModule (copy), StatusIndicatorSizeModule (copy), FlagsModule (copy), UserPresenceModule (copy), StatusIndicatorShapeModule (copy), StatusIndicatorVariantModule (copy)
+	-- upvalues: AvatarSizeModule (copy), StatusIndicatorSizeModule (copy), UserPresenceModule (copy), StatusIndicatorShapeModule (copy), StatusIndicatorVariantModule (copy)
 	return {
 		common = {
 			container = { tag = "radius-circle" },
@@ -41,9 +40,7 @@ local function variantsFactory(p1)
 				statusIndicator = { size = StatusIndicatorSizeModule.Medium }
 			},
 			[AvatarSizeModule.Pictogram] = {
-				statusIndicator = {
-					size = if FlagsModule.FoundationStatusIndicatorDesignUpdate then StatusIndicatorSizeModule.Large else StatusIndicatorSizeModule.Pictogram
-				}
+				statusIndicator = { size = StatusIndicatorSizeModule.Large }
 			}
 		},
 		presence = {

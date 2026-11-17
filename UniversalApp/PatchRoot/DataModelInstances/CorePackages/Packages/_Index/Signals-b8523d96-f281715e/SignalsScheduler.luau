@@ -1,1 +1,0 @@
-﻿return (require(script.Parent.Parent.Parent._Index["SignalsScheduler-b8523d96-f281715e"].SignalsScheduler))
