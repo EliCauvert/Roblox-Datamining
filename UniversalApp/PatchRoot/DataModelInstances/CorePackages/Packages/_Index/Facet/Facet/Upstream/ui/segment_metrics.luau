@@ -1,1 +1,0 @@
-﻿return table.freeze({ inset = 3 })

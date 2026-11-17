@@ -395,7 +395,8 @@ Authentication.Login.Label.SelectAnAccount,Wybierz konto
 Authentication.Login.Label.TroubleSigningIn,Kłopoty z logowaniem?
 Authentication.Login.Label.UnverifiedEmailInstructions,"Aby zalogować się za pomocą adresu e-mail, należy go zweryfikować. Możesz też zalogować się za pomocą nazwy użytkownika."
 Authentication.Login.Label.Username,Nazwa użytkownika
-Authentication.Login.Label.UsernameEmailOrPhoneNumber,"Nazwa użytkownika, adres e-mail lub numer telefonu"
+Authentication.Login.Label.UsernameEmailOrPhone,"Nazwa użytkownika, adres e-mail lub numer telefonu"
+Authentication.Login.Label.UsernameEmailOrPhoneNumber,
 Authentication.Login.Label.UsernameEmailPhone,Nazwa użytkownika / adres e-mail / numer telefonu
 Authentication.Login.Label.UsernameOrEmail,Nazwa użytkownika lub adres e-mail
 Authentication.Login.Label.UsernameOrPhone,Nazwa użytkownika lub numer telefonu
@@ -1293,6 +1294,7 @@ CoreScripts.TextChat.Description.RobloxSummarizesMessagesFromAllPlayers,Roblox p
 CoreScripts.TextChat.Description.TurnOnChatInSettings,Włącz czat w sekcji Prywatność > Ustawienia komunikacji.
 CoreScripts.TextChat.Description.UnlockChatPrivacyCommunications,Odblokuj czat dzięki weryfikacji wieku w sekcji Prywatność > Ustawienia komunikacji.
 CoreScripts.TextChat.Description.UnlockChatWithAnAgeCheck,Odblokuj czat dzięki weryfikacji wieku.
+CoreScripts.TextChat.Description.UseQuickWordsChatIsntAvailableInYourRegion,"Używaj krótkich wiadomości, aby koordynować rozgrywkę. Czat nie jest dostępny w Twoim regionie."
 CoreScripts.TextChat.Emote.Error.DoesNotExist,Emotka nie istnieje.
 CoreScripts.TextChat.Emote.Error.NotEnabled,Nie możesz użyć tej emotki tutaj.
 CoreScripts.TextChat.Emote.Error.NotEquipped,Nie założono tej emotki.
@@ -1413,6 +1415,7 @@ Feature.Accessibility.AppTheme.PolarFreeze,Polarne mrozy
 Feature.Accessibility.AppTheme.QuantumPulse,Impuls kwantowy
 Feature.Accessibility.AppTheme.StarBurst,Gwiezdna eksplozja
 Feature.Accessibility.AppTheme.SuperCharge,Superładunek
+Feature.Accessibility.Description.AppIcon,Dostosuj ikonę aplikacji za pomocą wyjątkowych stylów dostępnych tylko w ramach subskrypcji Plus. Zmiany dotyczą tylko tego urządzenia.
 Feature.Accessibility.Description.AppThemeMode,Wybierz tryb aplikacji. Nie wpłynie to na Twoje pozostałe urządzenia.
 Feature.Accessibility.Description.DeviceAppTheme,Wybierz motyw aplikacji. Zostanie on zastosowany na wszystkich typach urządzeń.
 Feature.Accessibility.Description.DeviceAppThemeExclusive,"Odkryj specjalne motywy Plus, aby dostosować projekt do swoich potrzeb. Wypróbuj je teraz i subskrybuj, aby zapisać swój wybór."
@@ -1432,6 +1435,7 @@ Feature.Accessibility.DeviceLevelTheme.Light,Jasny
 Feature.Accessibility.DeviceLevelTheme.System,Systemowy
 Feature.Accessibility.Header.Haptics,Haptyka
 Feature.Accessibility.Header.ShowInMenuBar,Pokaż na pasku menu
+Feature.Accessibility.Heading.AppIcon,Ikona aplikacji
 Feature.Accessibility.Heading.AppThemeMode,Tryb
 Feature.Accessibility.Heading.DeviceAppTheme,Motyw aplikacji
 Feature.Accessibility.Heading.DevicePreferences,Preferencje urządzenia
@@ -2065,7 +2069,7 @@ Feature.Avatar.Label.FaceMakeup,
 Feature.Avatar.Label.FacialAnimation,Animacja twarzy
 Feature.Avatar.Label.Fall,Upadek
 Feature.Avatar.Label.FallAnimations,Animacje – upadek
-Feature.Avatar.Label.FromMarketplace,Z Rynku
+Feature.Avatar.Label.FromMarketplace,Wyniki wyszukiwania na rynku
 Feature.Avatar.Label.Front,Przód
 Feature.Avatar.Label.FullBody,Całe ciało
 Feature.Avatar.Label.FullMasks,Maski zakrywające całą twarz
@@ -2340,6 +2344,7 @@ Feature.Avatar.Title.ClearAnimationsConfirmation,Wyczyścić wszystkie animacje?
 Feature.Avatar.Title.ClearBodyConfirmation,Wyczyścić ciało?
 Feature.Avatar.Title.ClearClothesConfirmation,Wyczyścić wszystkie ubrania?
 Feature.Avatar.Title.ClearMakeupConfirmation,Wyczyścić cały makijaż?
+Feature.Avatar.Title.CreateMoment,Utwórz moment
 Feature.Avatar.Title.CreateSet,
 Feature.Avatar.Title.DeleteSet,
 Feature.Avatar.Title.DuplicateMakeupLook,Duplikuj wygląd
@@ -2419,12 +2424,12 @@ Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,Zablokować użytkownika {DisplayName}?
 Feature.BlockingModal.Message.BlockConfirmation.FriendsRename,"Zablokowanie tego użytkownika spowoduje usunięcie go jako znajomego lub obserwującego. Nie będzie mógł wysyłać do Ciebie wiadomości, próśb ani zaproszeń.<br /><br />Nie powiadomimy go, że został przez Ciebie zablokowany."
 Feature.Build.Action.Add,
-Feature.Build.Action.AddCustomOption,Dodaj opcję niestandardową...
+Feature.Build.Action.AddCustomOption,Dodaj własną odpowiedź
 Feature.Build.Action.AddFriends,
 Feature.Build.Action.AddPlaytester,Zaproś testera wczesnej wersji
 Feature.Build.Action.AddPlaytesters,Zaproś testerów wczesnej wersji
 Feature.Build.Action.AddToPlaytest,
-Feature.Build.Action.AgreeAndEnable,Zgadzam się i włączam
+Feature.Build.Action.AgreeAndEnable,Włącz
 Feature.Build.Action.Approve,
 Feature.Build.Action.Archive,Archiwizuj
 Feature.Build.Action.ArchiveGame,Zarchiwizuj grę
@@ -2433,12 +2438,12 @@ Feature.Build.Action.Buy,
 Feature.Build.Action.BuyRobux,Kup Robuxy
 Feature.Build.Action.Cancel,
 Feature.Build.Action.CopyText,Kopiuj tekst
-Feature.Build.Action.Create,
+Feature.Build.Action.Create,Utwórz reklamę
 Feature.Build.Action.CreateDeveloperProduct,
 Feature.Build.Action.CreateMonetizationDeveloperProduct,Utwórz produkt deweloperski
 Feature.Build.Action.CreateMonetizationPass,Utwórz przepustkę
 Feature.Build.Action.CreateMonetizationSubscription,Utwórz subskrypcję
-Feature.Build.Action.CreateNewGame,Utwórz nową grę
+Feature.Build.Action.CreateNewGame,Utwórz grę
 Feature.Build.Action.Delete,
 Feature.Build.Action.Dismiss,
 Feature.Build.Action.DontAskAgain,Nie pytaj ponownie
@@ -2446,7 +2451,7 @@ Feature.Build.Action.DontShowAgain,Nie pokazuj ponownie
 Feature.Build.Action.EarnRobux,Zarabiaj Robuxy
 Feature.Build.Action.Edit,Edytuj
 Feature.Build.Action.HideAutosaved,Ukryj automatycznie zapisane
-Feature.Build.Action.KeepBuilding,Kontynuuj budowanie
+Feature.Build.Action.KeepBuilding,Tak trzymaj
 Feature.Build.Action.ManageLimit,Zarządzaj limitem
 Feature.Build.Action.ManageUsage,Zarządzaj wykorzystaniem
 Feature.Build.Action.Next,
@@ -2466,12 +2471,13 @@ Feature.Build.Action.Resume,Wznów
 Feature.Build.Action.Retry,
 Feature.Build.Action.Revert,Cofnij
 Feature.Build.Action.Save,
+Feature.Build.Action.SaveFilters,
 Feature.Build.Action.SetDailyLimit,Ustaw dzienny limit
 Feature.Build.Action.SetLimit,Ustaw limit
 Feature.Build.Action.Settings,
 Feature.Build.Action.Share,
 Feature.Build.Action.ShareLink,Udostępnij link
-Feature.Build.Action.ShowMore,
+Feature.Build.Action.ShowMore,Wyświetl więcej
 Feature.Build.Action.Stats,Statystyki
 Feature.Build.Action.Stop,Zatrzymaj
 Feature.Build.Action.Submit,
@@ -2479,6 +2485,7 @@ Feature.Build.Action.UpdateRating,Zaktualizuj ocenę
 Feature.Build.Action.UpdateWithChanges,Zaktualizuj ze zmianami
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,Wyświetl wykorzystanie
+Feature.Build.Analytics.Action.AddFunnelTracking,Dodaj śledzenie lejka
 Feature.Build.Analytics.AnalyzeChatPrompt,Przeanalizuj mój wynik wskaźnika {analyzeName} za ostatnie {days} dni. Dlaczego ten wskaźnik jest ważny i jak mogę go poprawić?
 Feature.Build.Analytics.AnalyzeName.Arppu,średni przychód na płacącego użytkownika
 Feature.Build.Analytics.AnalyzeName.D1Retention,retencja w 1. dniu
@@ -2494,7 +2501,8 @@ Feature.Build.Analytics.Description.PlaythroughRate,"Współczynnik rozgrywek to
 Feature.Build.Analytics.Description.TotalPlaytime,Łączny czas gry to suma czasu spędzonego przez wszystkich graczy w Twoim projekcie w danym okresie. Wzrost czasu gry zwykle sygnalizuje bardziej wciągające sesje.
 Feature.Build.Analytics.DurationHours,{number} godz.
 Feature.Build.Analytics.DurationMinutes,{number} min
-Feature.Build.Analytics.Goal.Action.CreateAd,Utwórz reklamę
+Feature.Build.Analytics.FunnelTrackingPrompt,Przeprowadź audyt i wykorzystaj moje lejki analityczne
+Feature.Build.Analytics.Goal.Action.CreateAd,
 Feature.Build.Analytics.Goal.Action.SellItems,Sprzedaj przedmioty
 Feature.Build.Analytics.Goal.Action.ShareWithFriends,Udostępnij znajomym
 Feature.Build.Analytics.Goal.EarnRobux,
@@ -2537,7 +2545,7 @@ Feature.Build.Analytics.Summary.PlaythroughRate,"Udział sesji, które zakończy
 Feature.Build.Analytics.Summary.TotalPlaytime,Łączna liczba godzin spędzonych przez graczy w Twoim projekcie.
 Feature.Build.Analytics.Title.Arppu,ARPPU
 Feature.Build.Analytics.Title.ConcurrentUsers,Łączna liczba graczy
-Feature.Build.Analytics.Title.D1Retention,Retencja w pierwszym dniu
+Feature.Build.Analytics.Title.D1Retention,
 Feature.Build.Analytics.Title.D7Retention,Retencja w siódmym dniu
 Feature.Build.Analytics.Title.DailyActiveUsers,
 Feature.Build.Analytics.Title.NewUserSessionTime,
@@ -2552,14 +2560,14 @@ Feature.Build.Content.NewGame,Nowa gra
 Feature.Build.CreateDeveloperProductDraft,Pomóż mi stworzyć produkt deweloperski do mojej gry.
 Feature.Build.CreatePassDraft,Pomóż mi utworzyć przepustkę do mojej gry.
 Feature.Build.CreateSubscriptionDraft,Pomóż mi utworzyć subskrypcję do mojej gry.
-Feature.Build.Description.ActivateDeveloperProduct,Wystaw produkt deweloperski {PRODUCT_ID} na sprzedaż.
-Feature.Build.Description.ActivateGamePass,Wystaw przepustkę {PRODUCT_ID} na sprzedaż.
-Feature.Build.Description.ActivateSubscription,Aktywuj subskrypcję {PRODUCT_ID}.
-Feature.Build.Description.AdCampaignModerationReview,Wszystkie kampanie reklamowe są sprawdzane przez zespół moderatorów Robloxa. Proces ten może potrwać do 24 godzin.
-Feature.Build.Description.AdCampaignSheetRunDates,Czas trwania: {startDate} – {endDate}
-Feature.Build.Description.AdComplete,Twoja reklama dobiegła końca. Sprawdź wyniki.
-Feature.Build.Description.AdModerationReview,Wszystkie reklamy są sprawdzane przez zespół moderatorów Robloxa. Proces ten może potrwać do 24 godzin.
-Feature.Build.Description.AdvancedModel,"Najlepsze rozwiązanie, jeśli zależy Ci na najwyższej jakości. Limit użyć wyczerpuje się 3 razy szybciej."
+Feature.Build.Description.ActivateDeveloperProduct,Udostępnij produkt deweloperski {PRODUCT_ID} do zakupu.
+Feature.Build.Description.ActivateGamePass,Udostępnij przepustkę do gry {PRODUCT_ID} do zakupu.
+Feature.Build.Description.ActivateSubscription,Udostępnij subskrypcję produktu {PRODUCT_ID} do zakupu.
+Feature.Build.Description.AdCampaignModerationReview,Sprawdzamy każdą reklamę przed jej wyświetleniem. Może to potrwać do 24 godzin.
+Feature.Build.Description.AdCampaignSheetRunDates,Czas trwania: {startDate}–{endDate} 
+Feature.Build.Description.AdComplete,"Twoja reklama dobiegła końca. Zobacz, jak sobie poradziła."
+Feature.Build.Description.AdModerationReview,
+Feature.Build.Description.AdvancedModel,Najbardziej odpowiednie do złożonych gier. Limit użyć wyczerpuje się szybciej.
 Feature.Build.Description.AdvertisingAgreement,"Wybierając opcję Utwórz, akceptujesz {advertisingTermsStart}Warunki dotyczące reklam na platformie Roblox{advertisingTermsEnd} oraz {advertisingStandardsStart}Standardy reklamowe{advertisingStandardsEnd}."
 Feature.Build.Description.ArchiveRemoval,"Jeśli zarchiwizujesz tę grę, zostanie ona usunięta z funkcji Buduj. Nadal możesz uzyskać do niej dostęp i przywrócić ją w Centrum dla twórców lub Roblox Studio."
 Feature.Build.Description.AutoBuyUsage,"Użyj Robuxów, aby automatycznie kupować dodatkowe użycia funkcji Buduj podczas tworzenia. W dowolnym momencie możesz ustawić dzienny limit wydatków."
@@ -2568,20 +2576,20 @@ Feature.Build.Description.BuildIdeaGame,Zamień swoje pomysły w grę
 Feature.Build.Description.BuildReplyNotif,"Otrzymuj powiadomienia, gdy funkcja Buduj ma dla Ciebie odpowiedź."
 Feature.Build.Description.BuyRobuxToCreate,"Kup więcej Robuxów, aby kontynuować tworzenie, lub poczekaj, aż jutro zresetują się bezpłatne użycia funkcji Buduj."
 Feature.Build.Description.BuyUsageOrWait,"Kup więcej użyć funkcji Buduj za pomocą Robuxów lub poczekaj, aż zresetuje się Twój dzienny limit."
-Feature.Build.Description.CampaignRunDates,Twoja kampania będzie trwać od {startDate} do {endDate}
+Feature.Build.Description.CampaignRunDates,Twoja reklama jest wyświetlana w okresie {startDate} – {endDate}.
 Feature.Build.Description.CaptureWhilePlaytesting,"Zrób zrzut podczas testowania rozgrywki, a następnie dodaj go do prompta."
 Feature.Build.Description.ChooseAdCampaignLength,"Wybierz, jak długo ma wyświetlać się Twoja reklama."
 Feature.Build.Description.ChoosePlaytesters,"Wybierz znajomych, którzy będą mogli wcześniej zapoznać się z Twoją grą."
-Feature.Build.Description.CreateDeveloperProduct,"Utwórz „{NAME}” za Robuxy ({PRICE}), nie na sprzedaż."
-Feature.Build.Description.CreateGamePass,"Utwórz „{NAME}” za Robuxy ({PRICE}), poza sprzedażą."
-Feature.Build.Description.CreateSubscription,"Utwórz „{NAME}” za Robuxy ({PRICE}), nieaktywną."
-Feature.Build.Description.DeactivateDeveloperProduct,Wycofaj produkt deweloperski {PRODUCT_ID} ze sprzedaży.
-Feature.Build.Description.DeactivateGamePass,Wycofaj przepustkę {PRODUCT_ID} ze sprzedaży.
-Feature.Build.Description.DeactivateSubscription,Wycofaj subskrypcję {PRODUCT_ID} ze sprzedaży. Subskrypcje obecnych subskrybentów będą nadal odnawiane.
-Feature.Build.Description.DeactivateSubscriptionCancelRenewals,Wycofaj subskrypcję {PRODUCT_ID} ze sprzedaży i zaprzestań odnawiania subskrypcji obecnych subskrybentów w przyszłości.
-Feature.Build.Description.DefaultModel,Najlepsze do szybkich zmian i standardowych ulepszeń.
+Feature.Build.Description.CreateDeveloperProduct,Utwórz produkt {NAME} za Robuxy: {PRICE}. Nie będzie go jeszcze można kupić.
+Feature.Build.Description.CreateGamePass,
+Feature.Build.Description.CreateSubscription,
+Feature.Build.Description.DeactivateDeveloperProduct,Zaniechaj sprzedaży produktu deweloperskiego {PRODUCT_ID}.
+Feature.Build.Description.DeactivateGamePass,Zaniechaj sprzedaży przepustki {PRODUCT_ID}.
+Feature.Build.Description.DeactivateSubscription,Zakończ sprzedaż subskrypcji produktu {PRODUCT_ID}. Subskrypcje obecnych subskrybentów będą nadal odnawiane.
+Feature.Build.Description.DeactivateSubscriptionCancelRenewals,Zakończ sprzedaż subskrypcji produktu {PRODUCT_ID} i odnawianie subskrypcji obecnych subskrybentów w przyszłości.
+Feature.Build.Description.DefaultModel,"Najlepsze do szybkich, codziennych zmian."
 Feature.Build.Description.DeleteSubscription,Usuń subskrypcję {PRODUCT_ID}.
-Feature.Build.Description.EarnedRobuxAppliedFirst,"Jeśli masz zarobione Robuxy, zostaną one wykorzystane w pierwszej kolejności na pokrycie kosztów kampanii reklamowej."
+Feature.Build.Description.EarnedRobuxAppliedFirst,"Jeśli zarobiłeś(-aś) Robuxy ze swoich gier, najpierw wykorzystamy je do opłacenia tej reklamy."
 Feature.Build.Description.EnableBuildNotifs,"Włącz powiadomienia w ustawieniach urządzenia, aby otrzymywać aktualności od funkcji Buduj."
 Feature.Build.Description.EnableUsageOrWait,"Włącz dodatkowe użycia, aby kontynuować tworzenie, lub poczekaj, aż zresetuje się Twój tygodniowy limit."
 Feature.Build.Description.FriendsLinkOnly,"Tylko Twoje kontakty mają dostęp do tego linku. Zmień ustawienie Odbiorcy swojej gry, jeśli chcesz, aby więcej osób mogło grać."
@@ -2592,51 +2600,51 @@ Feature.Build.Description.HubSettings,Zarządzaj wszystkimi ustawieniami w Centr
 Feature.Build.Description.InternalSpec,"Pozostaw puste, aby użyć najnowszej specyfikacji"
 Feature.Build.Description.InternalTesting,Wypróbuj specyfikacje nowego modelu
 Feature.Build.Description.InviteFriendLimit,"Możesz zaprosić maksymalnie {MAX_INVITES} znajomych do gry, podczas gdy Ty będziesz tworzyć."
-Feature.Build.Description.LongAdCampaign,"Więcej czasu na dotarcie do nowych graczy i sprawienie, by do Ciebie wracali."
+Feature.Build.Description.LongAdCampaign,"Więcej czasu na dotarcie do nowych osób i sprawienie, by do Ciebie wracały."
 Feature.Build.Description.MakeAudienceAvail,"Opublikuj swój projekt, aby udostępnić go tym odbiorcom."
 Feature.Build.Description.ManageAppearance,"Zarządzaj tym, jak Twoja gra wygląda dla innych."
 Feature.Build.Description.ManageDeveloperProduct,Zarządzaj produktem deweloperskim.
-Feature.Build.Description.ManagedPricingAcknowledgement,Zarządzane ceny automatycznie dostosowują ceny w zależności od regionu.
+Feature.Build.Description.ManagedPricingAcknowledgement,Zarządzane ceny automatycznie ustalają inną cenę dla każdego regionu.
 Feature.Build.Description.ManagedPricingCurrentProducts,Użyj zarządzanych cen dla wszystkich aktualnych produktów
-Feature.Build.Description.ManagedPricingUnavailable,Zarządzane ceny nie są dostępne dla tego projektu.
-Feature.Build.Description.NoEligibleManagedPricingProducts,Brak kwalifikujących się produktów
+Feature.Build.Description.ManagedPricingUnavailable,Zarządzane ceny nie są dostępne dla tej gry.
+Feature.Build.Description.NoEligibleManagedPricingProducts,Żaden produkt nie może jeszcze z tego korzystać
 Feature.Build.Description.NoMonetizationDeveloperProducts,"Produkty deweloperskie to przedmioty, które gracze mogą wielokrotnie kupować w Twojej grze"
 Feature.Build.Description.NoMonetizationPasses,"Korzystając z przepustek, możesz zaoferować graczom jednorazowe odblokowanie w Twojej grze"
-Feature.Build.Description.NoMonetizationProducts,"Opisz przedmiot, który chcesz stworzyć, aby zacząć zarabiać Robuxy w swojej grze"
+Feature.Build.Description.NoMonetizationProducts,"Opisz przedmiot, który chcesz sprzedać, aby zacząć zarabiać Robuxy."
 Feature.Build.Description.NoMonetizationSubscriptions,"Korzystając z subskrypcji w grach, możesz zaoferować użytkownikom cykliczne korzyści za miesięczną opłatę"
 Feature.Build.Description.PlayAfterPublish,"Wybierz, kto może grać po opublikowaniu tego projektu."
-Feature.Build.Description.PlaytestLatest,"Testujesz swoją najnowszą wersję. Opublikuj ją, gdy zechcesz ją udostępnić."
+Feature.Build.Description.PlaytestLatest,"Testujesz swoją najnowszą wersję. Opublikuj ją, gdy zechcesz, aby inni mogli w nią grać."
 Feature.Build.Description.PlaytestLocked,Możesz rozpocząć testowanie rozgrywki po utworzeniu swojej pierwszej gry.
 Feature.Build.Description.PlaytesterAccess,"Zaproś znajomych jako testerów wczesnej wersji lub zmień w swojej grze ustawienie Odbiorcy, aby umożliwić grę większej liczbie osób."
 Feature.Build.Description.PricingRules,Ustaw zasady dotyczące cen
 Feature.Build.Description.PromoteGameFree,Zaprezentuj swoją grę większej liczbie graczy jednym kliknięciem.
 Feature.Build.Description.PromoteGamePaid,"Stwórz reklamę, aby zaprezentować swoją grę milionom graczy."
-Feature.Build.Description.PromoteGameWithAdCampaign,"Zwiększ liczbę odbiorców dzięki {durationDays}-dniowej kampanii reklamowej i spraw, aby Twoja gra została zauważona."
+Feature.Build.Description.PromoteGameWithAdCampaign,"Wyświetlaj {durationDays}-dniową reklamę, aby więcej osób mogło znaleźć Twoją grę."
 Feature.Build.Description.RaiseLimitOrWait,"Zwiększ swój dzienny limit Robuxów, aby kontynuować tworzenie, lub poczekaj, aż jutro się zresetuje."
 Feature.Build.Description.RatingAgreement,"Publikując, potwierdzasz, że ta ocena treści jest prawidłowa."
 Feature.Build.Description.RequiredRobuxForAdvanced,"Potrzebujesz co najmniej {ROBUX} Robuxów, aby dalej tworzyć przy użyciu modelu zaawansowanego. Możesz też wrócić do ustawienia domyślnego lub poczekać, aż zresetują się bezpłatne użycia."
 Feature.Build.Description.RequiredRobuxForDefault,"Potrzebujesz co najmniej {ROBUX} Robuxów, aby kontynuować tworzenie, lub możesz zaczekać, aż zresetują się bezpłatne użycia."
 Feature.Build.Description.RestoreLatest,Ta wersja stanie się Twoją najnowszą opublikowaną wersją.
-Feature.Build.Description.RevertToVersion,"Potwierdź, aby cofnąć ostatnią zmianę i wrócić do wersji {VERSION}."
+Feature.Build.Description.RevertToVersion,"Jeśli cofniesz tę zmianę, Twoja gra powróci do wersji {VERSION}."
 Feature.Build.Description.ShareLatest,Udostępnij informacje dotyczące zmian w najnowszej wersji.
-Feature.Build.Description.ShopButton,Dodaj punkt wejścia do robienia zakupów
-Feature.Build.Description.ShortAdCampaign,"Szybki sposób, aby dowiedzieć się, co gracze myślą o Twojej grze."
-Feature.Build.Description.StopBuild,"Ta prośba jest nadal przetwarzana. Jeśli przerwiesz teraz, nie zostanie ona zrealizowana i będziesz musiał(a) wysłać ją ponownie."
+Feature.Build.Description.ShopButton,Pokaż w grze przycisk sklepu
+Feature.Build.Description.ShortAdCampaign,"Szybki sposób, aby dowiedzieć się, co ludzie myślą o Twojej grze."
+Feature.Build.Description.StopBuild,"Funkcja Buduj nadal działa. Jeśli przerwiesz teraz, będziesz musiał(a) wysłać prośbę ponownie."
 Feature.Build.Description.UpdateDeveloperProduct,Zaktualizuj produkt deweloperski {PRODUCT_ID}.
 Feature.Build.Description.UpdateGamePass,Zaktualizuj przepustkę {PRODUCT_ID}.
 Feature.Build.Description.UpdateSubscription,Zaktualizuj subskrypcję {PRODUCT_ID}.
-Feature.Build.Description.UseAdCreditsInAdsManager,"Aby je wykorzystać, musisz przejść do Menedżera reklam."
+Feature.Build.Description.UseAdCreditsInAdsManager,"Aby je wykorzystać, przejdź do Menedżera reklam."
 Feature.Build.Error.AdForbidden,"W tej chwili na Twoim koncie lub w Twojej grze nie można wyświetlać reklam. Jeśli uważasz, że to pomyłka, skontaktuj się z działem wsparcia."
 Feature.Build.Error.AdInsufficientFunds,"Masz za mało Robuxów, aby utworzyć tę reklamę. Dodaj więcej i spróbuj ponownie."
 Feature.Build.Error.AdInternalError,
 Feature.Build.Error.AdMissingThumbnail,"Aby móc wyświetlać reklamę, Twoja gra musi mieć miniaturę. Dodaj ją i spróbuj ponownie."
-Feature.Build.Error.DeveloperProductDescriptionTooLong,Liczba znaków w opisie nie może przekroczyć 1000.
+Feature.Build.Error.DeveloperProductDescriptionTooLong,Liczba znaków w opisie nie może przekroczyć 1000.
 Feature.Build.Error.DeveloperProductNameRequired,Wprowadź nazwę produktu.
-Feature.Build.Error.DeveloperProductNameTooLong,Liczba znaków w nazwie nie może przekroczyć 50.
-Feature.Build.Error.DeveloperProductPriceInvalid,Cena musi być liczbą całkowitą od 1 do 1 000 000 000 Robuxów.
-Feature.Build.Error.DeveloperProductPriceRequiredForSale,Wybierz Edytuj i dodaj cenę przed wystawieniem produktu na sprzedaż.
-Feature.Build.Error.DeveloperProductTextModerated,Zespół moderatorów Robloxa zmienił tekst dotyczący tego produktu. Spróbuj użyć innego sformułowania.
-Feature.Build.Error.ManagedPricingPartialUpdate,Nie udało się zaktualizować niektórych produktów.
+Feature.Build.Error.DeveloperProductNameTooLong,Liczba znaków w nazwie nie może przekroczyć 50.
+Feature.Build.Error.DeveloperProductPriceInvalid,Wpisz liczbę całkowitą od 1 do 1 000 000 000 Robuxów.
+Feature.Build.Error.DeveloperProductPriceRequiredForSale,"Najpierw należy podać cenę tego produktu. Wybierz Edytuj, aby ją dodać."
+Feature.Build.Error.DeveloperProductTextModerated,"Zmieniliśmy część tekstu dotyczącego tego produktu, aby był zgodny z naszymi zasadami. Sprawdź, czy nadal wygląda dobrze."
+Feature.Build.Error.ManagedPricingPartialUpdate,Niektóre produkty nie zostały zaktualizowane. Spróbuj ponownie.
 Feature.Build.Error.MonetizationImageFailed,Nie udało się wczytać obrazu. Spróbuj ponownie.
 Feature.Build.Error.MonetizationImageInReview,Obraz jest nadal sprawdzany. Spróbuj ponownie za chwilę.
 Feature.Build.Error.MonetizationImagePreparing,Obraz jest nadal przygotowywany. Spróbuj ponownie za chwilę.
@@ -2645,7 +2653,7 @@ Feature.Build.Error.MonetizationImageTooLarge,Rozmiar obrazu przekracza 5 MB.
 Feature.Build.Error.MonetizationNoUniverse,Ten czat nie jest połączony z grą.
 Feature.Build.Error.MonetizationOptionUpdate,Nie udało się zaktualizować tej opcji. Spróbuj ponownie.
 Feature.Build.Error.MonetizationOptionsLoad,Nie udało się wczytać opcji. Spróbuj ponownie.
-Feature.Build.Error.MonetizationPermissionDenied,Nie masz uprawnień do zmiany opcji monetyzacji.
+Feature.Build.Error.MonetizationPermissionDenied,Nie masz uprawnień do zmiany tych opcji.
 Feature.Build.Error.MonetizationPriceRequiredForRegionalPricing,"Dodaj cenę, aby włączyć ceny regionalne."
 Feature.Build.Error.MonetizationPriceRequiredForSale,Dodaj cenę przed wystawieniem tego przedmiotu na sprzedaż.
 Feature.Build.Error.MonetizationRateLimited,Zbyt wiele próśb. Spróbuj ponownie za chwilę.
@@ -2654,10 +2662,10 @@ Feature.Build.Header.AllVersions,Wszystkie wersje
 Feature.Build.Header.Answers,Odpowiedzi
 Feature.Build.Header.ContentMaturity,Poziom treści dla dorosłych
 Feature.Build.Header.CustomAnswer,Odpowiedź niestandardowa
-Feature.Build.Header.GameConfiguration,Konfiguracja gry
+Feature.Build.Header.GameConfiguration,Sprzedaż i reklamy
 Feature.Build.Header.GameDetails,Szczegóły gry
 Feature.Build.Header.Overview,
-Feature.Build.Header.PastCampaigns,Poprzednie kampanie
+Feature.Build.Header.PastCampaigns,Wcześniejsze reklamy
 Feature.Build.Header.UpdateDetails,Zaktualizuj szczegóły
 Feature.Build.Label.Access,Dostęp
 Feature.Build.Label.AdClicks,Kliknięcia reklam
@@ -2671,9 +2679,9 @@ Feature.Build.Label.AllGames,Wszystkie gry
 Feature.Build.Label.AmountAvailable,Dostępne {AMOUNT}
 Feature.Build.Label.Autosaved,Zapisano automatycznie
 Feature.Build.Label.Available,dostępne
-Feature.Build.Label.AvailableForPurchase,Dostępny do kupienia
+Feature.Build.Label.AvailableForPurchase,Dostępny do zakupu
 Feature.Build.Label.BackToBuild,Powrót do budowania
-Feature.Build.Label.Building,Buduję...
+Feature.Build.Label.Building,Działam...
 Feature.Build.Label.CaptureLibrary,Biblioteka przechwyconych elementów
 Feature.Build.Label.CaptureSelectionCount,Wybrano {SELECTED_COUNT} z {MAX_SELECTIONS}
 Feature.Build.Label.CaptureStepAddImages,"Wybierz „Dodaj obrazy”, aby dołączyć przechwycony element"
@@ -2690,12 +2698,12 @@ Feature.Build.Label.Deleted,Usunięty
 Feature.Build.Label.DescribeIdea,Opisz pomysł
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,Opis: {DESCRIPTION}
-Feature.Build.Label.DeveloperProductName,Nazwa: „{NAME}”
+Feature.Build.Label.DeveloperProductName,Nazwa: {NAME}
 Feature.Build.Label.DeveloperProductPrice,Cena w Robuxach: {PRICE}
 Feature.Build.Label.DeveloperProductPriceUnavailable,?
 Feature.Build.Label.DeveloperProducts,Produkty deweloperskie
 Feature.Build.Label.Done,
-Feature.Build.Label.EasyPerformanceReport,Prosty i zrozumiały raport dotyczący skuteczności
+Feature.Build.Label.EasyPerformanceReport,Łatwe do odczytania wyniki
 Feature.Build.Label.Error,
 Feature.Build.Label.Filters,
 Feature.Build.Label.Free,Darmowe
@@ -2719,19 +2727,19 @@ Feature.Build.Label.Limited,Z ograniczeniami
 Feature.Build.Label.Live,
 Feature.Build.Label.Loading,Wczytuję...
 Feature.Build.Label.ManagedPricing,Zarządzane ceny
-Feature.Build.Label.ManagedPricingMixed,Mieszane dla aktualnych produktów
-Feature.Build.Label.MaximizeForGamePlays,Maksymalizuj pod kątem liczby rozegranych gier
-Feature.Build.Label.ModelUnavailable,Model niedostępny
+Feature.Build.Label.ManagedPricingMixed,Włączone dla niektórych produktów
+Feature.Build.Label.MaximizeForGamePlays,"Stworzona, aby zachęcić większą liczbę osób do grania w Twoją grę"
+Feature.Build.Label.ModelUnavailable,Niedostępne
 Feature.Build.Label.Models3D,Modele 3D
 Feature.Build.Label.MonetizationCreateTitle,{NAME} – liczba Robuxów: {PRICE}
-Feature.Build.Label.MyGames,Moje gry
+Feature.Build.Label.MyGames,Twoje gry
 Feature.Build.Label.Name,
 Feature.Build.Label.NoLimit,Brak limitu
 Feature.Build.Label.NotStarted,Nie rozpoczęto
 Feature.Build.Label.Object,Obiekt
 Feature.Build.Label.Objects3D,Obiekty 3D
-Feature.Build.Label.OffSale,Wycofany ze sprzedaży
-Feature.Build.Label.OnSale,W sprzedaży
+Feature.Build.Label.OffSale,Nie na sprzedaż
+Feature.Build.Label.OnSale,Na sprzedaż
 Feature.Build.Label.Pending,Oczekujące
 Feature.Build.Label.PercentUsed,Wykorzystano {PERCENT}%
 Feature.Build.Label.PlayTime,Czas gry
@@ -2759,13 +2767,13 @@ Feature.Build.Label.SearchTasks,Wyszukaj zadania
 Feature.Build.Label.SelectOption,Wybierz opcję
 Feature.Build.Label.SharedWithMe,Udostępnione mnie
 Feature.Build.Label.ShopButton,Przycisk Sklepu
-Feature.Build.Label.ShopUi,Interfejs użytkownika sklepu
+Feature.Build.Label.ShopUi,Kupuj
 Feature.Build.Label.Sounds,Dźwięki
 Feature.Build.Label.SubscriptionProductType,Typ produktu: {PRODUCT_TYPE}
 Feature.Build.Label.SubscriptionProductTypeConsumable,Zużywalny
 Feature.Build.Label.SubscriptionProductTypeCurrency,Waluta
 Feature.Build.Label.SubscriptionProductTypeDurable,Trwały
-Feature.Build.Label.TargetAllRobloxPlayers,Kieruj na wszystkich graczy na Robloxie
+Feature.Build.Label.TargetAllRobloxPlayers,Wyświetlana użytkownikom na całym Robloxie
 Feature.Build.Label.Thinking,Myślę
 Feature.Build.Label.Title,Tytuł
 Feature.Build.Label.TitleDescription,Tytuł i opis
@@ -2848,7 +2856,7 @@ Feature.Build.Label.ToolThumbnailRunning,Ustawiam miniaturę gry
 Feature.Build.Label.ToolVerifyDone,Sprawdzono pod kątem błędów
 Feature.Build.Label.ToolVerifyFailed,Nie udało się sprawdzić pod kątem błędów
 Feature.Build.Label.ToolVerifyRunning,Sprawdzam pod kątem błędów
-Feature.Build.Label.UniverseNumber,Uniwersum {UNIVERSE_ID}
+Feature.Build.Label.UniverseNumber,Gra {UNIVERSE_ID}
 Feature.Build.Label.Unknown,Brak informacji
 Feature.Build.Label.UnlimitedUsed,Wykorzystano {USED} • Brak limitu
 Feature.Build.Label.UpdateTitleDesc,Zaktualizuj tytuł i opis
@@ -2864,31 +2872,32 @@ Feature.Build.Label.World,Świat
 Feature.Build.Message.AccountRequirements,Twoje konto nie spełnia wymagań dotyczących korzystania z funkcji Buduj.
 Feature.Build.Message.AccountTooNew,"Twoje konto jest zbyt nowe, aby publikować. Spróbuj ponownie za 2 dni."
 Feature.Build.Message.AdCampaignCreateFailed,Nie udało się utworzyć kampanii. Spróbuj ponownie.
-Feature.Build.Message.AdPerformanceLoadFailed,Nie udało się wczytać danych dotyczących skuteczności reklam
-Feature.Build.Message.AdsStatsEmpty,"Zwiększ liczbę odbiorców dzięki kampanii reklamowej i spraw, aby Twoja gra została zauważona"
-Feature.Build.Message.AdsStatsEmptyFree,"Zwiększ liczbę odbiorców dzięki bezpłatnej kampanii reklamowej i spraw, aby Twoja gra została zauważona"
+Feature.Build.Message.AdPerformanceLoadFailed,Nie udało się wczytać wyników Twojej reklamy. Zajrzyj tu ponownie później.
+Feature.Build.Message.AdsStatsEmpty,"Wyświetlaj reklamę, aby więcej osób mogło znaleźć Twoją grę."
+Feature.Build.Message.AdsStatsEmptyFree,"Wyświetlaj bezpłatną reklamę, aby więcej osób mogło znaleźć Twoją grę."
 Feature.Build.Message.AllFriendsAdded,Zaproszono wszystkich znajomych jako testerów wczesnej wersji.
 Feature.Build.Message.AnswerBuildQuestion,Odpowiedz na poniższe pytanie od funkcji Buduj.
-Feature.Build.Message.AssetDetailsUnavailable,Szczegóły zasobu są niedostępne.
+Feature.Build.Message.AssetDetailsUnavailable,Nie udało się wczytać szczegółów
 Feature.Build.Message.AudienceIneligible,Nie kwalifikuje się do tej grupy odbiorców
 Feature.Build.Message.BuildAccountBlocked,Funkcja Buduj nie jest teraz dostępna na Twoim koncie.
 Feature.Build.Message.BuildBusy,Funkcja Buduj jest zajęta. Odczekaj chwilę i spróbuj ponownie.
 Feature.Build.Message.BuildConnectFailed,Nie udało się połączyć z funkcją Buduj. Spróbuj ponownie.
 Feature.Build.Message.BuildInternalError,Wystąpił problem z funkcją Buduj. Spróbuj ponownie.
 Feature.Build.Message.BuildResponseFailed,Funkcja Buduj nie odpowiada. Spróbuj ponownie.
-Feature.Build.Message.BuildSendUnconfirmed,Funkcji Buduj nie udało się potwierdzić wysłania Twojej wiadomości.
+Feature.Build.Message.BuildSendUnconfirmed,"Nie mamy pewności, czy Twoja wiadomość została wysłana. Sprawdź czat, zanim wyślesz wiadomość ponownie."
 Feature.Build.Message.BuildStillWorking,"Pracujemy nad tym. W międzyczasie możesz opuścić aplikację, grać na platformie Roblox lub rozpocząć inny projekt."
 Feature.Build.Message.BuildStopped,Zatrzymano funkcję Buduj.
 Feature.Build.Message.BuildTakingLonger,To trwa dłużej niż zwykle. Możesz poczekać lub zacząć robić coś innego.
-Feature.Build.Message.BuildTemporarilyDown,Funcja Buduj jest tymczasowo niedostępna. Spróbuj ponownie za chwilę.
-Feature.Build.Message.CompletedTasks,Liczba ukończonych zadań: {COUNT}
-Feature.Build.Message.ConversationGone,Ta rozmowa nie jest już dostępna. Rozpocznij nową.
-Feature.Build.Message.ConversationNotFound,Nie udało się znaleźć tej rozmowy. Rozpocznij nową.
+Feature.Build.Message.BuildTemporarilyDown,Funkcja Buduj nie działa w tej chwili. Spróbuj ponownie za chwilę.
+Feature.Build.Message.CompletedTasks,Ukończone zadania – {COUNT}
+Feature.Build.Message.ConversationGone,Ten czat nie jest już dostępny. Rozpocznij nowy.
+Feature.Build.Message.ConversationNotFound,Nie udało się znaleźć tego czatu. Rozpocznij nowy.
 Feature.Build.Message.CreateGameToUseBuild,"Utwórz nową grę, aby zacząć korzystać z funkcji Buduj."
 Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,Zwiększ liczbę kwalifikujących się odbiorców w Centrum dla twórców
 Feature.Build.Message.ExperiencesLoadFailed,Nie udało się wczytać projektów
 Feature.Build.Message.FailedTitle,{TITLE} – niepowodzenie
+Feature.Build.Message.FailedWithTitle,Niepowodzenie: {TITLE}
 Feature.Build.Message.FinishedTitle,{TITLE} – ukończono
 Feature.Build.Message.FriendsLoadFailed,Nie udało się wczytać znajomych. Spróbuj ponownie.
 Feature.Build.Message.GameNotCreated,Twoja gra nie została utworzona. Spróbuj ponownie.
@@ -2899,26 +2908,26 @@ Feature.Build.Message.HiDisplayName,"Cześć, {DISPLAY_NAME}"
 Feature.Build.Message.ImageUploadFailed,Nie udało się przesłać Twoich obrazów. Spróbuj ponownie.
 Feature.Build.Message.InvalidMessage,Coś poszło nie tak z Twoją wiadomością. Edytuj ją i spróbuj ponownie.
 Feature.Build.Message.InvitesLoadFailed,Nie udało się wczytać zaproszeń
-Feature.Build.Message.LimitBelowSpend,Limit nie może być niższy niż liczba Robuxów wydanych dzisiaj ({ALREADY_SPENT}).
+Feature.Build.Message.LimitBelowSpend,Dzisiaj wydano już tyle Robuxów: {ALREADY_SPENT}. Ustaw limit wynoszący co najmniej tyle.
 Feature.Build.Message.LinkCopied,Skopiowano link do schowka.
 Feature.Build.Message.LoadingVersions,Wczytuję historię wersji…
-Feature.Build.Message.NoAssetsFound,Nie znaleziono zasobów.
+Feature.Build.Message.NoAssetsFound,Nie ma tu jeszcze zasobów.
 Feature.Build.Message.NoCapturesAvailable,Brak przechwyconych elementów
 Feature.Build.Message.NoDescriptionProvided,Brak opisu.
 Feature.Build.Message.NoFriendsToAdd,"Nie masz jeszcze żadnych znajomych, których możesz zaprosić. Najpierw znajdź osoby, z którymi możesz się połączyć na Robloxie."
 Feature.Build.Message.NoGamesYet,Nie ma jeszcze gier.
 Feature.Build.Message.NoResults,
-Feature.Build.Message.NoSearchResultsFound,Nie znaleziono wyników wyszukiwania
+Feature.Build.Message.NoSearchResultsFound,
 Feature.Build.Message.NoVersionHistory,Nie ma jeszcze historii wersji.
 Feature.Build.Message.OneTaskCompleted,1 zadanie ukończone
-Feature.Build.Message.OutOfBuildUsage,"Skończyły Ci się użycia funkcji Buduj. Zobacz opcje użycia Robuxów, aby kontynuować tworzenie."
-Feature.Build.Message.PlaytesterRequestFailed,Nie udało się zrealizować Twojej prośby. Spróbuj ponownie.
+Feature.Build.Message.OutOfBuildUsage,"Skończyły Ci się użycia funkcji Buduj. Użyj Robuxów, aby dalej tworzyć."
+Feature.Build.Message.PlaytesterRequestFailed,Nie udało się dodać Twoich testerów wczesnej wersji. Spróbuj ponownie.
 Feature.Build.Message.PlaytestersAdded,Zaproszono {INVITED_COUNT} z {MAX_INVITES} testerów wczesnej wersji
 Feature.Build.Message.PublicPublishFailed,"Twoja gra została opublikowana, ale nie udało się jej udostępnić publicznie. Spróbuj ponownie."
 Feature.Build.Message.PublishExpandAudience,"Opublikuj, aby zwiększyć liczbę odbiorców"
 Feature.Build.Message.PublishNotReverted,Twoja publikacja nie została cofnięta. Spróbuj ponownie.
-Feature.Build.Message.PublishPromotionUpsell,"Gratulujemy opublikowania gry! Masz bezpłatne promocje ({promotionCount}), dzięki którym możesz zdobyć więcej graczy na Robloxie."
-Feature.Build.Message.PublishPromotionUpsellSingular,"Gratulujemy opublikowania gry! Masz 1 bezpłatną promocję, dzięki której możesz zdobyć więcej graczy na Robloxie."
+Feature.Build.Message.PublishPromotionUpsell,"Gratulujemy opublikowania gry! Masz następującą liczbę bezpłatnych reklam, dzięki którym więcej osób będzie mogło ją znaleźć: {promotionCount}."
+Feature.Build.Message.PublishPromotionUpsellSingular,"Gratulujemy opublikowania gry! Masz 1 bezpłatną reklamę, dzięki której więcej osób będzie mogło ją znaleźć."
 Feature.Build.Message.QuestionnaireNeeded,"Ta gra została edytowana poza funkcją Buduj. Wypełnij kwestionariusz dotyczący treści, aby ją opublikować."
 Feature.Build.Message.ReadyToPlay,Twoja gra jest gotowa do uruchomienia na Robloxie
 Feature.Build.Message.ResetHours,Reset za {HOURS} godz.
@@ -2926,11 +2935,13 @@ Feature.Build.Message.ResetOneHour,Reset się za 1 godz.
 Feature.Build.Message.RestoreVersionFailed,Nie udało się przywrócić tej wersji. Spróbuj ponownie.
 Feature.Build.Message.RevertVersionFail,Nie utworzono cofniętej wersji. Spróbuj ponownie.
 Feature.Build.Message.RunningTitle,{title} – uruchomiono
-Feature.Build.Message.SafetyPolicy,Ta wiadomość jest niezgodna z naszą polityką bezpieczeństwa. Edytuj ją i spróbuj ponownie.
+Feature.Build.Message.SafetyPolicy,Ta wiadomość jest niezgodna z naszymi zasadami. Edytuj ją i spróbuj ponownie.
 Feature.Build.Message.SaveChangesFailed,Nie udało się zapisać zmian. Spróbuj ponownie.
 Feature.Build.Message.ShareExperience,Udostępnij {EXPERIENCE_NAME}
 Feature.Build.Message.ShareLinkFailed,Nie udało się utworzyć linku do udostępniania. Spróbuj ponownie.
 Feature.Build.Message.SignedOut,Wylogowano Cię. Zaloguj się i spróbuj ponownie.
+Feature.Build.Message.StepForMinutesSeconds,{TITLE} przez {MINUTES} min {REM_SECONDS} s
+Feature.Build.Message.StepForSeconds,{TITLE} przez {SECONDS} s
 Feature.Build.Message.TasksCompleted,Ukończone zadania – {NUM_COMPLETED_TASKS}
 Feature.Build.Message.ThinkingSeconds,Myślenie trwało {SECONDS} s
 Feature.Build.Message.TrustedFriendsRequiredForPlaytest,"Zostań zaufanym znajomym tego twórcy, aby zagrać w jego grę."
@@ -2951,14 +2962,14 @@ Feature.Build.Placeholder.DescribeProductUpdate,Opisz aktualizację
 Feature.Build.Placeholder.InternalSpec,internal_code
 Feature.Build.Prompt.CreateDeveloperProduct,"Zapoznaj się z moją grą i zasugeruj najlepszy przedmiot, który mogę sprzedawać, aby zarabiać Robuxy. Czy do mojej gry lepiej pasowałby jednorazowy zakup, czy może przedmiot, który gracze mogliby kupować wielokrotnie, na przykład wzmocnienie? Wyjaśnij dlaczego."
 Feature.Build.Title.AdActive,Kampania reklamowa jest aktywna
-Feature.Build.Title.AdCampaignDuration,{durationDays}-dniowa kampania reklamowa
+Feature.Build.Title.AdCampaignDuration,{durationDays}-dniowa reklama
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} dni
 Feature.Build.Title.AdComplete,Reklama jest gotowa
 Feature.Build.Title.AdCreatedPeriod,Utworzono reklamę.
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,Dodaj obrazy
-Feature.Build.Title.AdsStatsEmpty,Rozpocznij kampanię
-Feature.Build.Title.AdsStatsEmptyFree,Rozpocznij swoją pierwszą kampanię
+Feature.Build.Title.AdsStatsEmpty,
+Feature.Build.Title.AdsStatsEmptyFree,Utwórz swoją pierwszą reklamę
 Feature.Build.Title.ArchiveThisGame,Zarchiwizować tę grę?
 Feature.Build.Title.AssetLibrary,Biblioteka
 Feature.Build.Title.Audience,Odbiorcy
@@ -2966,11 +2977,11 @@ Feature.Build.Title.BuildQuestion,Funkcja Buduj ma pytanie
 Feature.Build.Title.BuildQuestions,Funkcja Buduj ma kilka pytań
 Feature.Build.Title.BuildUnavailable,Funkcja Buduj nie jest dostępna
 Feature.Build.Title.BuildUsage,Użycia funkcji Buduj
-Feature.Build.Title.ChangesNotLive,Twoje zmiany nie są jeszcze dostępne
+Feature.Build.Title.ChangesNotLive,Twoje zmiany nie zostały jeszcze opublikowane
 Feature.Build.Title.ChatBuildUnavailable,Funkcja Buduj jest niedostępna.
-Feature.Build.Title.ChooseModel,Wybierz swojego agenta funkcji Buduj
+Feature.Build.Title.ChooseModel,Wybierz sposób działania funkcji Buduj
 Feature.Build.Title.Content,Treść
-Feature.Build.Title.CreateYourAd,Utwórz swoją reklamę
+Feature.Build.Title.CreateYourAd,
 Feature.Build.Title.DailyRobuxReached,Osiągnięto dzienny limit Robuxów
 Feature.Build.Title.DeveloperProduct,Produkt deweloperski
 Feature.Build.Title.EditDeveloperProduct,Edytuj produkt
@@ -2981,10 +2992,10 @@ Feature.Build.Title.FriendsOnlyPlay,Tylko znajomi mogą grać
 Feature.Build.Title.GameCreationDone,Ukończono tworzenie gry
 Feature.Build.Title.GamePass,Przepustka
 Feature.Build.Title.GenericError,
-Feature.Build.Title.GetUsers,Pozyskaj użytkowników
+Feature.Build.Title.GetUsers,Reklamy
 Feature.Build.Title.InsufficientRobuxForModel,Masz za mało Robuxów
 Feature.Build.Title.ManagedPricingAcknowledgement,Włączyć zarządzane ceny?
-Feature.Build.Title.Monetization,Monetyzacja
+Feature.Build.Title.Monetization,
 Feature.Build.Title.NoMonetizationDeveloperProducts,Nie masz jeszcze utworzonych żadnych produktów deweloperskich
 Feature.Build.Title.NoMonetizationPasses,Nie masz jeszcze utworzonych żadnych przepustek
 Feature.Build.Title.NoMonetizationProducts,Zacznij zarabiać w swojej grze
@@ -2992,7 +3003,7 @@ Feature.Build.Title.NoMonetizationSubscriptions,Nie masz jeszcze utworzonych ża
 Feature.Build.Title.NoRobuxForUsage,Nie masz już Robuxów na użycia funkcji Buduj
 Feature.Build.Title.PickCampaign,Wybierz czas trwania
 Feature.Build.Title.Playtesters,
-Feature.Build.Title.PlaytestersAddRejected,Nie udało się dodać następujących użytkowników:
+Feature.Build.Title.PlaytestersAddRejected,Nie udało się dodać niektórych znajomych jako testerów wczesnej wersji:
 Feature.Build.Title.PlaytestersOnlyPlay,Tylko testerzy mogą grać
 Feature.Build.Title.PromoteGame,Promuj swoją grę
 Feature.Build.Title.PromoteGameFree,Promuj swoją grę za darmo
@@ -3001,10 +3012,10 @@ Feature.Build.Title.PromoteGameFreeSingular,Masz bezpłatną reklamę
 Feature.Build.Title.PromoteGamePaid,Czeka na Ciebie więcej graczy
 Feature.Build.Title.PushNotifications,Powiadomienia push
 Feature.Build.Title.RevertLastChange,Cofnąć ostatnią zmianę?
-Feature.Build.Title.StopBuild,Zatrzymać budowanie?
+Feature.Build.Title.StopBuild,Zatrzymać tę prośbę?
 Feature.Build.Title.Subscription,Subskrypcja
 Feature.Build.Title.Tasks,Zadania
-Feature.Build.Title.TurnActivity,Obróć aktywność
+Feature.Build.Title.TurnActivity,Aktywność
 Feature.Build.Title.UseYourAdCredits,Wykorzystaj swoje środki na reklamę
 Feature.Build.Title.VersionHistory,Historia wersji
 Feature.Build.Title.VersionInfo,Informacje o wersji
@@ -3080,7 +3091,7 @@ Feature.Catalog.Heading.InsufficientFunds,Za mało Robuxów
 Feature.Catalog.Heading.ItemInfo,Informacje o przedmiocie
 Feature.Catalog.Heading.ItemRemoved,Usunięto przedmiot
 Feature.Catalog.Heading.ItemsOnSale,Przedmioty w sprzedaży
-Feature.Catalog.Heading.NotForSale,Nie na sprzedaż
+Feature.Catalog.Heading.NotForSale,
 Feature.Catalog.Heading.Overview,Zestawienie
 Feature.Catalog.Heading.PremiumOnly,Tylko Roblox Plus
 Feature.Catalog.Heading.QuantityLimitReached,Osiągnięto limit ustalony przez twórcę
@@ -3138,7 +3149,7 @@ Feature.Catalog.Label.Checkout.OffSale,
 Feature.Catalog.Label.Checkout.OutOfStock,Nakład wyczerpany
 Feature.Catalog.Label.Checkout.PriceChanged,Cena się zmieniła
 Feature.Catalog.Label.Checkout.SoldOut,Wyprzedano
-Feature.Catalog.Label.Checkout.Unavailable,Niedostępne
+Feature.Catalog.Label.Checkout.Unavailable,
 Feature.Catalog.Label.Checkout.WearAvatarReplaceAllItemsBody,"Założenie tego awatara zastąpi wszystkie przedmioty, które obecnie nosisz."
 Feature.Catalog.Label.ClassicShirt,
 Feature.Catalog.Label.ClassicTShirt,
@@ -3238,7 +3249,7 @@ Feature.Catalog.Label.NoSellersWarning,Nikt nie sprzedaje tego przedmiotu
 Feature.Catalog.Label.None,Brak
 Feature.Catalog.Label.NotAvailable,Ten przedmiot nie jest w tej chwili dostępny
 Feature.Catalog.Label.OfferApplied,Zastosowano ofertę
-Feature.Catalog.Label.OnSale,
+Feature.Catalog.Label.OnSale,W sprzedaży
 Feature.Catalog.Label.OriginalPrice,Pierwotna cena
 Feature.Catalog.Label.OutOfStock,
 Feature.Catalog.Label.Owned,Posiadane
@@ -3790,7 +3801,7 @@ Feature.Friends.Action.ShareQR,Udostępnij kod QR
 Feature.Friends.Action.ShowMore,
 Feature.Friends.Action.Unblock,
 Feature.Friends.Action.Unfriend,Usuń z listy znajomych
-Feature.Friends.Action.ViewMore,Wyświetl więcej
+Feature.Friends.Action.ViewMore,
 Feature.Friends.Action.ViewPlatformProfile,Wyświetl kartę gracza
 Feature.Friends.Button.AddViaLink,Dodaj przez link
 Feature.Friends.Button.GotIt,
@@ -3926,6 +3937,7 @@ Feature.Friends.TFEducation.Modal.TextOutro.EighteenPlus,"Gdy dodasz innego uży
 Feature.Friends.Text.IsPlaying,obecnie gra
 Feature.Friends.Text.NoConnections,"Nie masz jeszcze dodanych żadnych znajomych. Aby rozpocząć, wyszukaj osoby i dodaj je jako znajomych."
 Feature.Friends.Text.NoFriends,Nie masz jeszcze dodanych żadnych znajomych. Na początek wyszukaj i dodaj znajomych na platformie Roblox.
+Feature.Friends.Title.AddMoreTrustedFriends,Dodaj więcej zaufanych znajomych
 Feature.Friends.Title.TrustedFriendsExpiredLink,Link wygasł
 Feature.Friends.Title.TrustedFriendsInvalidLink,Link jest nieprawidłowy
 Feature.Friends.TrustedConnection.Label.Trusted,
@@ -4104,6 +4116,7 @@ Feature.Groups.Description.RequiresAccountTenureTooltipOneMonth,"Aby dołączyć
 Feature.Groups.Description.RequiresAccountTenureTooltipOneWeek,"Aby dołączyć do tej społeczności, musisz mieć konto od co najmniej 7 dni."
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeDays,"Aby dołączyć do tej społeczności, musisz mieć konto od co najmniej 3 dni."
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeMonths,"Aby dołączyć do tej społeczności, musisz mieć konto od co najmniej 90 dni."
+Feature.Groups.Header.UppercaseMyGroups,MOJE SPOŁECZNOŚCI
 Feature.Groups.Heading.Community,
 Feature.Groups.Heading.Followers,
 Feature.Groups.Heading.Groups,
@@ -4318,7 +4331,7 @@ Feature.Landing.Label.InvitedBy,Osoba zapraszająca: {name}
 Feature.Landing.Label.PoweredBy,Obsługiwane przez
 Feature.Leaderboards.Heading.Leaderboard,Ranking
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
-Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,Włącz
+Feature.LegallySensitiveContent.Action.FriendDiscovery.TurnOn,
 Feature.LegallySensitiveContent.Description.PhoneNumberDiscoverabilityUpsellConsent.FRnm,"Ułatw osobom, które mają Twój numer telefonu, dodanie Cię do znajomych na Robloxie"
 Feature.LegallySensitiveContent.Heading.TurnOnFriendDiscovery,Włącz wyszukiwanie znajomych
 Feature.LocaleRestriction.Description.RobloxUnavailable,
@@ -4333,7 +4346,7 @@ Feature.Moments.Action.AddMusic,Dodaj muzykę
 Feature.Moments.Action.AddSticker,Dodaj naklejkę
 Feature.Moments.Action.AddText,Dodaj tekst
 Feature.Moments.Action.AddVoice,Dodaj głos
-Feature.Moments.Action.Analytics,
+Feature.Moments.Action.Analytics,Wyświetl statystyki
 Feature.Moments.Action.Back,
 Feature.Moments.Action.Block,
 Feature.Moments.Action.Cancel,
@@ -4353,7 +4366,6 @@ Feature.Moments.Action.GenerateTextFeedbackNotHelpful,Nieprzydatny
 Feature.Moments.Action.GenerateTextFeedbackPolicy,Niewłaściwy lub naruszający zasady
 Feature.Moments.Action.Hide,Ukryj szczegóły
 Feature.Moments.Action.HowToCapture,"Zobacz, jak przechwytywać"
-Feature.Moments.Action.Join,
 Feature.Moments.Action.KeepEditing,Kontynuuj edycję
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,Minimalizuj
@@ -4375,6 +4387,7 @@ Feature.Moments.Action.ViewOtherFeed,Wyświetl inny kanał
 Feature.Moments.Action.ViewRecommended,Wyświetl polecane
 Feature.Moments.Action.ViewTrending,Wyświetl popularne
 Feature.Moments.Body.EDPMomentIPReportInstructions,"Aby zgłosić naruszenie praw własności intelektualnej w tym momencie, przejdź do strony szczegółów gry."
+Feature.Moments.Body.MomentPosting,Trwa przetwarzanie Twojego momentu.
 Feature.Moments.Description.CommunityStandards,"Zapoznaj się ze Standardami społeczności, aby uzyskać więcej informacji na temat tego, co można, a czego nie można mówić."
 Feature.Moments.Description.EmptyCapturesLibrary,Tutaj będą pojawiać się Twoje przechwycone elementy.
 Feature.Moments.Description.FollowingCaughtUpBody,"To już wszystkie nowe momenty na tym kanale. Zmień kanał, aby obejrzeć więcej momentów."
@@ -4384,6 +4397,7 @@ Feature.Moments.Description.GenerateTextFeedbackDisclosure,Wygenerowane przez sz
 Feature.Moments.Description.HowToCaptureStep1,Dołącz do projektu z włączoną funkcją przechwytywania i wybierz menu z 3 kreskami
 Feature.Moments.Description.HowToCaptureStep2,Włącz elementy sterujące przechwytywaniem
 Feature.Moments.Description.HowToCaptureStep3,Przechwytuj zdjęcia i filmy z rozgrywki
+Feature.Moments.Description.LeaveAvatarMomentsCreation,"Utracisz wszystkie wprowadzone zmiany, ale Twój strój pozostanie bez zmian."
 Feature.Moments.Description.LeaveMomentsCreation,"Utracisz wszystkie wprowadzone zmiany, ale ten przechwycony element będzie nadal dostępny w galerii <b>przechwyconych elementów</b>."
 Feature.Moments.Description.MomentsOffBody,Poproś rodzica o włączenie Momentów w sekcji Kontrola rodzicielska.
 Feature.Moments.Description.NoMusicResults,Nie znaleziono muzyki
@@ -4468,6 +4482,11 @@ Feature.Moments.Label.NonInfiniteScrollEndTitle,Jest więcej momentów do obejrz
 Feature.Moments.Label.Overview,
 Feature.Moments.Label.Photos,Zdjęcia
 Feature.Moments.Label.PostDeleted,Moment usunięty
+Feature.Moments.Label.PostFeedbackModeratedBadge,Poddano moderacji
+Feature.Moments.Label.PostFeedbackPostingBadge,Publikuję...
+Feature.Moments.Label.PostFeedbackPostingBody,Może to chwilę potrwać
+Feature.Moments.Label.PostFeedbackPostingSnackbar,"Publikujemy Twój moment – nie zamykaj aplikacji, a my Cię powiadomimy"
+Feature.Moments.Label.PostFeedbackPostingTitle,Publikuję moment
 Feature.Moments.Label.PostRemovedBody,Opublikowany przez Ciebie moment jest niezgodny z naszymi Standardami społeczności.
 Feature.Moments.Label.PostedOnDate,Opublikowano {date}
 Feature.Moments.Label.PublishingRodeoBody,Nie powinno to zająć zbyt długo.
@@ -4519,6 +4538,7 @@ Feature.Moments.Title.EDPMomentIPReportInstructions,Zgłoś na stronie szczegó�
 Feature.Moments.Title.GenerateTextFeedbackReason,Co poszło nie tak?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Wyjść z tworzenia momentu?
+Feature.Moments.Title.MomentPosting,
 Feature.Moments.Title.MomentRemoved,
 Feature.Moments.Title.ReportPost,Zgłoś posta
 Feature.Moments.Title.UnfollowConfirmationDialog,Przestać obserwować @{username}?
@@ -4635,6 +4655,7 @@ Feature.NotApproved.Description.SecondChance.Details,Możesz teraz wrócić do g
 Feature.NotApproved.Description.SecondChance.Second,"Tym razem możesz uniknąć zawieszenia, ponieważ Twoje dotychczasowe zachowanie było odpowiedzialne."
 Feature.NotApproved.Description.SuspendedUntil,Zawieszono Cię do {date} do godz. {time}.
 Feature.NotApproved.Description.Violation,"Nasz monitoring zawartości wykrył, że twoje zachowanie na platformie Roblox stanowiło naruszenie {startLink}Warunków użytkowania{endLink}."
+Feature.NotApproved.Description.WalletInformation,Dostęp do portfela możesz uzyskać z menu w prawym górnym rogu.
 Feature.NotApproved.Description.WarningDescription.Kids,"Złamałeś(-aś) zasadę. Jeśli będzie się to powtarzać, Twoje konto może zostać zawieszone."
 Feature.NotApproved.Heading.AccountBanned,Konto zbanowane
 Feature.NotApproved.Heading.AccountDeleted,
@@ -4685,7 +4706,7 @@ Feature.NotApproved.Heading.Why,Dlaczego?
 Feature.NotApproved.Label.AbuseType.AccountTheft,Kradzież konta
 Feature.NotApproved.Label.AbuseType.AdultContent,Treści dla dorosłych
 Feature.NotApproved.Label.AbuseType.Advertisement,
-Feature.NotApproved.Label.AbuseType.Advertising,Reklamy
+Feature.NotApproved.Label.AbuseType.Advertising,
 Feature.NotApproved.Label.AbuseType.AgeInappropriateMetadata,Metadane niewłaściwe dla określonej grupy wiekowej
 Feature.NotApproved.Label.AbuseType.AssetOwnership,Własność konta
 Feature.NotApproved.Label.AbuseType.Billing,
@@ -4815,6 +4836,7 @@ Jeśli te dwa konta nie powinny być ze sobą połączone, wyślij odwołanie za
 Feature.NotApproved.Label.Mistake,Popełniliśmy błąd?
 Feature.NotApproved.Label.ModeratorMessage, Uwagi moderatora
 Feature.NotApproved.Label.ModeratorNote,Uwaga od moderatora
+Feature.NotApproved.Label.MyWallet,Mój portfel
 Feature.NotApproved.Label.OffensiveItem,Obraźliwy przedmiot
 Feature.NotApproved.Label.OffensiveItem.V2,
 Feature.NotApproved.Label.OpenMenu,Otwórz menu
@@ -5264,6 +5286,7 @@ Feature.RobloxSubscription.Body.GenericError,Nie udało się teraz tego zrealizo
 Feature.RobloxSubscription.Body.UnsupportedPlatform,Tej subskrypcji nie można kupić na tym urządzeniu.
 Feature.RobloxSubscription.Description.AgeCheckTrial,"Przeprowadź weryfikację wieku i odbierz bezpłatny tydzień subskrypcji Roblox Plus w ramach podziękowania. Nie musisz podawać formy płatności, aby skorzystać z bezpłatnego okresu próbnego."
 Feature.RobloxSubscription.Description.Benefit.Customize,Dostosuj za pomocą ramek profilu i motywów aplikacji
+Feature.RobloxSubscription.Description.Benefit.CustomizeWithAppIcon,"Dostosuj ikonę aplikacji, motyw i ramkę profilu"
 Feature.RobloxSubscription.Description.Benefit.DiscountV2,"10% zniżki przez pierwsze 60 dni, a następnie 20% zniżki na przedmioty i awatary"
 Feature.RobloxSubscription.Description.Benefit.DiscountV3,"10% zniżki przez pierwsze {trialUnlockDays} dni, a następnie 20% zniżki na przedmioty i awatary"
 Feature.RobloxSubscription.Description.ExclusiveBenefits,Więcej zabawy za mniej Robuxów. Wykup subskrypcję Roblox Plus.
@@ -5307,6 +5330,7 @@ Feature.RobloxSubscription.Title.AgeCheckTrial,Odbierz bezpłatny tydzień subsk
 Feature.RobloxSubscription.Title.AlreadySubscribed,Dobra wiadomość
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Kup Roblox Plus
+Feature.RobloxSubscription.Title.SubscribeToPlus,Subskrybuj Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus jest niedostępny
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,Możesz dołączyć do wydarzenia przed innymi osobami.
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,Wcześniejszy dostęp dzięki subskrypcji Plus
@@ -5414,10 +5438,10 @@ Feature.Settings.Description.AccountSettingsWebsite,"Aby uzyskać dostęp do ust
 odwiedź witrynę internetową lub użyj urządzenia towarzyszącego."
 Feature.Settings.Description.CrossPlatform,"Zyskasz możliwość dołączania do projektów użytkowników wszystkich platform
 i będziesz widzieć więcej użytkowników w większej liczbie projektów."
-Feature.Settings.Description.PlatformAccountSettingsSuccess,Ustawienia konta na platformie {platform} zostały skonfigurowane. Wszystko jest gotowe.
+Feature.Settings.Description.PlatformAccountSettingsSuccess,Ustawienia na platformie {platform} zostały skonfigurowane. Wszystko jest gotowe.
 Feature.Settings.Description.SwitchProfile,Tutaj możesz przełączyć profil {platform}.
 Feature.Settings.Heading.AccountSettings,
-Feature.Settings.Heading.PlatformAccountSettings,Ustawienia konta {platform}
+Feature.Settings.Heading.PlatformAccountSettings,Ustawienia na platformie {platform}
 Feature.Settings.Heading.SwitchProfile,Przełączenie profilu
 Feature.Settings.Label.Allowed,Dozwolone
 Feature.Settings.Label.CrossPlatform,Rozgrywka międzyplatformowa
@@ -5457,7 +5481,7 @@ Feature.SettingsHub.Description.QRCodeCameraPermissionIOS,"Aby zeskanować kod Q
 Feature.SettingsHub.Label.FriendsListLoadErrorMessage,Nie można wczytać. Spróbuj ponownie później.
 Feature.SettingsHub.Label.InviteSearchNoResults,
 Feature.SettingsHub.Label.Invited,Zaproszono
-Feature.SettingsHub.Label.Moderated,Poddano moderacji
+Feature.SettingsHub.Label.Moderated,
 Feature.SettingsHub.Label.NoFriendsPageMessage,"Dodaj znajomych, aby wspólnie odkrywać świat."
 Feature.SettingsHub.Label.NoFriendsScreen,"Poznaj znajomych, aby móc zaprosić ich do dołączenia do ciebie!"
 Feature.SettingsHub.Label.ReportComment,"Opisz własnymi słowami, co poszło nie tak."
@@ -5704,7 +5728,7 @@ Feature.UniversalShareSheet.Response.SharedMessage,Wiadomość została wysłana
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Wiadomości zostały wysłane
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} i jeszcze {N} osobom
 Feature.UserLibrary.Label.MyLibrary,Moja biblioteka
-Feature.VIPServer.Message.TooManyFreeServersOnGame,Osiągnięto limit darmowych serwerów prywatnych dotyczący tego projektu.
+Feature.VIPServer.Message.TooManyFreeServersOnGame,Osiągnięto limit darmowych serwerów prywatnych dotyczący tej gry.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,Osiągnięto limit aktywnych darmowych serwerów prywatnych. Najpierw dezaktywuj niektóre z innych serwerów.
 Feature.VerificationUpsell.Action.AddPhone,
 Feature.VerificationUpsell.Action.AddPhoneVoice,Dodaj telefon do czatu głosowego
@@ -5901,17 +5925,6 @@ IAPExperience.Loading.Text.PurchasingItem,Kupowanie przedmiotu...
 IAPExperience.Loading.Text.PurchasingRobux,Kupowanie Robuxów...
 IAPExperience.Loading.Text.WaitingForPurchase,Oczekiwanie na zakup...
 IAPExperience.Loading.Text.WaitingForRobux,Oczekiwanie na przyznanie Robuxów...
-IAPExperience.PremiumUpsell.Action.Subscribe,
-IAPExperience.PremiumUpsell.Body.RobuxDiscount,10% premii przy zakupie Robuxów
-IAPExperience.PremiumUpsell.Label.AvatarShopBenefits,Dostęp do wyjątkowych przedmiotów i rabatów w sklepie dla awatarów
-IAPExperience.PremiumUpsell.Label.Disclosure,Koszt subskrypcji wynosi <b>{price} {currencySymbol}/miesiąc. Możesz anulować subskrypcję w dowolnym momencie.</b> Obowiązują Warunki użytkowania i Polityka prywatności platformy Roblox.
-IAPExperience.PremiumUpsell.Label.PremiumBenefitListDesc,Korzyści z usługi Roblox Premium:
-IAPExperience.PremiumUpsell.Label.PremiumOnlyBenefits,Dostęp do funkcji premium
-IAPExperience.PremiumUpsell.Label.PremiumPolicy,
-IAPExperience.PremiumUpsell.Label.PremiumPrice,<b>{currencySymbol}{price}</b>/mies.
-IAPExperience.PremiumUpsell.Label.RobloxPremium,Roblox Premium
-IAPExperience.PremiumUpsell.Label.RobuxPerMonth,Comiesięczna wypłata (kwota: {robux})
-IAPExperience.PremiumUpsell.Label.ShortDisclosure,Obowiązują Warunki użytkowania i Polityka prywatności platformy Roblox.
 IAPExperience.PurchaseError.AlreadyPremium,"Wygląda na to, że deweloper próbuje zachęcić cię do zakupu subskrypcji Roblox Premium, ale ty już z niej korzystasz."
 IAPExperience.PurchaseError.Text.AlreadyOwn,
 IAPExperience.PurchaseError.Text.AlreadySubscribed,Subskrypcją możesz zarządzać w menu Ustawienia > Subskrypcje.
@@ -6097,6 +6110,12 @@ Notifications.DesktopPushNotificationPrompts.Description.SystemTrayPrompt,"Aplik
 Notifications.DesktopPushNotificationPrompts.Heading.EnablePrompt,Utrzymuj kontakt w tle
 Notifications.DesktopPushNotificationPrompts.Heading.SystemTrayPrompt,Roblox jest zawsze na wyciągnięcie ręki
 Notifications.DesktopPushNotificationPrompts.Label.GetNotifications,Otrzymuj powiadomienia
+Notifications.Moments.Body.MomentPostFailed,
+Notifications.Moments.Body.MomentPostModerated,
+Notifications.Moments.Body.MomentPostSuccess,Inne osoby mogą go teraz oglądać i na niego reagować
+Notifications.Moments.Title.MomentPostFailed,Moment nie został opublikowany
+Notifications.Moments.Title.MomentPostModerated,
+Notifications.Moments.Title.MomentPostSuccess,Twój moment jest już dostępny
 Notifications.NotificationStream.Bundle.ShowLess,
 Notifications.NotificationStream.Bundle.ShowMoreV2,Jeszcze {notificationCount}
 Notifications.NotificationStream.Label.AllCaughtUp,Jesteś na bieżąco.

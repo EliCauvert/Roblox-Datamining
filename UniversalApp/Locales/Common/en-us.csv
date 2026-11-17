@@ -145,7 +145,7 @@ Authentication.AccountRecovery.Description.EmailCodeSentForUser,"We just sent a 
 Authentication.AccountRecovery.Description.EmailUnavailableInfo,"Some emails may be unavailable because they were altered due to an age change. However, they are still usable for account recovery."
 Authentication.AccountRecovery.Description.EnhancedProtectionAddPasskey,"You're enrolled in the Enhanced Protection Program. To keep your account secure, you'll need a passkey or security key to sign in.{lineBreak}{lineBreak}If you're on your personal device, we recommend setting up a new passkey now. This makes it easier to sign in on this device in the future. If you're on a shared or public device, skip this step."
 Authentication.AccountRecovery.Description.EnterABackupCode,"Now, enter a backup code you have saved."
-Authentication.AccountRecovery.Description.EnterContactMethodAssociatedWithYourAccount,"Enter an email or phone number that may be associated with your account. If you made a purchase before, you can try your billing email."
+Authentication.AccountRecovery.Description.EnterContactMethodAssociatedWithYourAccount,Enter any email or phone number associated with your account. Try your billing email if you've made a purchase.
 Authentication.AccountRecovery.Description.EnterEmailAddress,"Now, enter an email address. This could be an email that you've used to buy something on Roblox."
 Authentication.AccountRecovery.Description.EnterPhoneBackupCodeOrAnotherEmail,"Now, enter a phone number, backup code, or another email address. This could be an email that you've used to buy something on Roblox"
 Authentication.AccountRecovery.Description.EnterPhoneNumberSecondMethod,"Now, enter a phone number that is associated with your account."
@@ -182,7 +182,7 @@ Authentication.AccountRecovery.Heading.NoChangesMade,No changes were made
 Authentication.AccountRecovery.Heading.PasskeyAdded,Passkey added
 Authentication.AccountRecovery.Heading.PhoneNumberAdded,Phone number added
 Authentication.AccountRecovery.Heading.ResetPassword,Reset Password
-Authentication.AccountRecovery.Heading.RobloxAccountRecovery,Roblox Account Recovery
+Authentication.AccountRecovery.Heading.RobloxAccountRecovery,Roblox account recovery
 Authentication.AccountRecovery.Heading.SaveTwoStepMethod,Should we keep the existing two-step verification method?
 Authentication.AccountRecovery.Heading.TwoStepMethodAdded,{value} added
 Authentication.AccountRecovery.Heading.UpdateEmail,Update Your Email
@@ -396,6 +396,7 @@ Authentication.Login.Label.SelectAnAccount,Select an account
 Authentication.Login.Label.TroubleSigningIn,Trouble signing in?
 Authentication.Login.Label.UnverifiedEmailInstructions,"To log in with your email, it must be verified. You can also log in with your username."
 Authentication.Login.Label.Username,Username
+Authentication.Login.Label.UsernameEmailOrPhone,"Username, email, or phone"
 Authentication.Login.Label.UsernameEmailOrPhoneNumber,"Username, email, or phone number"
 Authentication.Login.Label.UsernameEmailPhone,Username/Email/Phone
 Authentication.Login.Label.UsernameOrEmail,Username or email
@@ -1295,6 +1296,7 @@ CoreScripts.TextChat.Description.RobloxSummarizesMessagesFromAllPlayers,Roblox s
 CoreScripts.TextChat.Description.TurnOnChatInSettings,Turn on chat in your Privacy>Communication settings.
 CoreScripts.TextChat.Description.UnlockChatPrivacyCommunications,Unlock chat with an age check in Privacy>Communication settings.
 CoreScripts.TextChat.Description.UnlockChatWithAnAgeCheck,Unlock chat with an age check.
+CoreScripts.TextChat.Description.UseQuickWordsChatIsntAvailableInYourRegion,Use Quick Words to coordinate gameplay. Chat isn’t available in your region.
 CoreScripts.TextChat.Emote.Error.DoesNotExist,Emote does not exist.
 CoreScripts.TextChat.Emote.Error.NotEnabled,You can't use that Emote here.
 CoreScripts.TextChat.Emote.Error.NotEquipped,You don't have that Emote equipped.
@@ -2349,6 +2351,7 @@ Feature.Avatar.Title.ClearAnimationsConfirmation,Clear all animations?
 Feature.Avatar.Title.ClearBodyConfirmation,Clear body?
 Feature.Avatar.Title.ClearClothesConfirmation,Clear all clothes?
 Feature.Avatar.Title.ClearMakeupConfirmation,Clear all makeup?
+Feature.Avatar.Title.CreateMoment,Create a Moment
 Feature.Avatar.Title.CreateSet,
 Feature.Avatar.Title.DeleteSet,
 Feature.Avatar.Title.DuplicateMakeupLook,Duplicate Look
@@ -2489,6 +2492,7 @@ Feature.Build.Action.UpdateRating,Update rating
 Feature.Build.Action.UpdateWithChanges,Update with changes
 Feature.Build.Action.View,
 Feature.Build.Action.ViewUsage,View usage
+Feature.Build.Analytics.Action.AddFunnelTracking,Add funnel tracking
 Feature.Build.Analytics.AnalyzeChatPrompt,Analyze my {analyzeName} for the past {days} days. Why does this metric matter and how can I improve it?
 Feature.Build.Analytics.AnalyzeName.Arppu,average revenue per paying user
 Feature.Build.Analytics.AnalyzeName.D1Retention,day-1 retention
@@ -2504,6 +2508,7 @@ Feature.Build.Analytics.Description.PlaythroughRate,Playthrough rate is the perc
 Feature.Build.Analytics.Description.TotalPlaytime,Total playtime sums the time all players spent in your experience over the period. Rising playtime usually signals more engaging sessions.
 Feature.Build.Analytics.DurationHours,{number} hrs
 Feature.Build.Analytics.DurationMinutes,{number} mins
+Feature.Build.Analytics.FunnelTrackingPrompt,Audit and instrument my analytics funnels
 Feature.Build.Analytics.Goal.Action.CreateAd,Create an ad
 Feature.Build.Analytics.Goal.Action.SellItems,Sell items
 Feature.Build.Analytics.Goal.Action.ShareWithFriends,Share with friends
@@ -2838,7 +2843,7 @@ Feature.Build.Label.ToolReqUpdateDone,Updated requirements
 Feature.Build.Label.ToolReqUpdateFailed,Couldn't update requirements
 Feature.Build.Label.ToolReqUpdateRunning,Updating requirements
 Feature.Build.Label.ToolRestoreVersionDone,Restored version
-Feature.Build.Label.ToolRestoreVersionFailed,Couldn't restore   version
+Feature.Build.Label.ToolRestoreVersionFailed,Couldn't restore version
 Feature.Build.Label.ToolRestoreVersionRunning,Restoring version
 Feature.Build.Label.ToolScriptDone,Ran script
 Feature.Build.Label.ToolScriptFailed,Couldn't run script
@@ -2899,6 +2904,7 @@ Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,Expand your audience eligibility on Creator Hub
 Feature.Build.Message.ExperiencesLoadFailed,Couldn't load experiences
 Feature.Build.Message.FailedTitle,Failed {TITLE}
+Feature.Build.Message.FailedWithTitle,Failed: {TITLE}
 Feature.Build.Message.FinishedTitle,Finished {TITLE}
 Feature.Build.Message.FriendsLoadFailed,Couldn't load friends. Try again.
 Feature.Build.Message.GameNotCreated,Your game wasn't created. Try again.
@@ -2941,6 +2947,8 @@ Feature.Build.Message.SaveChangesFailed,Couldn't save changes. Try again.
 Feature.Build.Message.ShareExperience,Share {EXPERIENCE_NAME}
 Feature.Build.Message.ShareLinkFailed,Couldn't create the share link. Try again.
 Feature.Build.Message.SignedOut,You're signed out. Sign in and try again.
+Feature.Build.Message.StepForMinutesSeconds,{TITLE} for {MINUTES}m{REM_SECONDS}s
+Feature.Build.Message.StepForSeconds,{TITLE} for {SECONDS}s
 Feature.Build.Message.TasksCompleted,{NUM_COMPLETED_TASKS} tasks completed
 Feature.Build.Message.ThinkingSeconds,Thinking for {SECONDS}s
 Feature.Build.Message.TrustedFriendsRequiredForPlaytest,Become trusted friends with this creator to play their game.
@@ -3576,6 +3584,23 @@ Feature.Chat.RobloxConnectUnavailableWithUser,"At this time, Roblox Connect is n
 Feature.Chat.Text.NoFriends,"You haven't added any friends yet. To get started, find and add your friends on Roblox."
 Feature.Chat.Title.NewChat,New chat
 Feature.Chat.Toast.Error.InvalidUserSelected,One or more people in this list can’t be added
+Feature.CloudClient.Action.JoinWithoutCloudPlay,Join without Cloud Play
+Feature.CloudClient.Description.CloudPlayStopped,Rejoin the game to keep playing without Cloud Play.
+Feature.CloudClient.Description.RobloxRealityPreview,Restyle is an early preview. Things may look different from the original game.
+Feature.CloudClient.Description.RobloxRealityThanks,Thanks for being one of the first to try it.
+Feature.CloudClient.Heading.CloudPlayStopped,Cloud Play stopped working
+Feature.CloudClient.Heading.RobloxRealityFailed,Something went wrong with Restyle
+Feature.CloudClient.Heading.RobloxRealityTimeEnded,Your time in Restyle has ended
+Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Capture isn't available in Cloud Play yet.
+Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Capture isn't available with Restyle yet.
+Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Play isn't working. You're playing normally.
+Feature.CloudClient.Label.RobloxReality,Restyle
+Feature.CloudClient.Label.RobloxRealityEndingSoon,"Restyle ends in 1 minute, and you’ll leave the game."
+Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,Self View isn't available in Cloud Play yet.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,Self View isn't available with Restyle yet.
+Feature.CloudClient.Label.StillWeakConnection,Your connection is still weak.
+Feature.CloudClient.Label.TimeLeft,Time left
+Feature.CloudClient.Label.WeakConnection,Weak connection.
 Feature.CommunityLinks.Description.CommunityDefault,Join the official Guilded community for {experienceName} to view announcements and more!
 Feature.CommunityLinks.Heading.CommunityTitle,Join the community
 Feature.CommunityLinks.Label.ViewButton,
@@ -3865,6 +3890,7 @@ Feature.Friends.Label.FollowsYou,Follows You
 Feature.Friends.Label.Frequent,Played together
 Feature.Friends.Label.Friend,Friend
 Feature.Friends.Label.FriendInvite,Invited you to be friends on Roblox
+Feature.Friends.Label.FriendOfUser,Friend of {displayName}
 Feature.Friends.Label.FriendOwns,1 Friend owns
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 Friend</b> recently played
 Feature.Friends.Label.FriendRequest,
@@ -3936,6 +3962,7 @@ Feature.Friends.TFEducation.Modal.TextOutro.EighteenPlus,"When you add another a
 Feature.Friends.Text.IsPlaying,is playing
 Feature.Friends.Text.NoConnections,"You haven't added any Connections yet. To get started, find and add Connections."
 Feature.Friends.Text.NoFriends,
+Feature.Friends.Title.AddMoreTrustedFriends,Add more trusted friends
 Feature.Friends.Title.TrustedFriendsExpiredLink,Link expired
 Feature.Friends.Title.TrustedFriendsInvalidLink,Link isn't valid
 Feature.Friends.TrustedConnection.Label.Trusted,
@@ -4092,7 +4119,7 @@ Feature.GamepadDisconnect.Label.Message,"Controller for user ""%s"" has been dis
 Feature.GamepadDisconnect.Label.MessageGeneric,"Controller for user ""%s"" has been disconnected. Please reconnect your controller."
 Feature.GamepadDisconnect.Label.Title,Missing Controller
 Feature.Groups.Action.Cancel,
-Feature.Groups.Action.CancelRequest,Cancel request
+Feature.Groups.Action.CancelRequest,Cancel Request
 Feature.Groups.Action.Close,
 Feature.Groups.Action.Continue,
 Feature.Groups.Action.CreateGroup,Create Community
@@ -4364,7 +4391,6 @@ Feature.Moments.Action.GenerateTextFeedbackNotHelpful,Not helpful
 Feature.Moments.Action.GenerateTextFeedbackPolicy,Inappropriate or Violative
 Feature.Moments.Action.Hide,Hide details
 Feature.Moments.Action.HowToCapture,View how to capture
-Feature.Moments.Action.Join,
 Feature.Moments.Action.KeepEditing,Continue editing
 Feature.Moments.Action.Leave,
 Feature.Moments.Action.Minimize,Minimize
@@ -5302,6 +5328,7 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,Offer valid for new Plus subscribers only.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,When anyone buys Plus with your link.
 Feature.RobloxSubscription.Description.ReferralShare,Invite someone to Plus and you both get {amount} Robux when they buy Plus.
+Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,Get spawn effects with Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"By clicking \u{201C}{ctaText}\u{201D}, you agree to the <a href=""{termsUrl}"">Roblox Subscription Terms</a>. You will be automatically charged each month until you cancel."
 Feature.RobloxSubscription.Heading.ReferralEntry,Share Plus to get {amount} Robux
 Feature.RobloxSubscription.Heading.ReferralHistory,Referral history
@@ -5335,6 +5362,7 @@ Feature.RobloxSubscription.Title.AgeCheckTrial,Get 1 free week of Plus
 Feature.RobloxSubscription.Title.AlreadySubscribed,Good news
 Feature.RobloxSubscription.Title.GenericError,
 Feature.RobloxSubscription.Title.GetBlackbird,Get Roblox Plus
+Feature.RobloxSubscription.Title.SubscribeToPlus,Subscribe to Plus
 Feature.RobloxSubscription.Title.UnsupportedPlatform,Roblox Plus unavailable here
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Body,You can join the event before everybody else.
 Feature.RobloxSubscription.ToolTip.EarlyAccess.Title,Early access with Plus
@@ -5930,17 +5958,6 @@ IAPExperience.Loading.Text.PurchasingItem,Purchasing item...
 IAPExperience.Loading.Text.PurchasingRobux,Purchasing Robux...
 IAPExperience.Loading.Text.WaitingForPurchase,Waiting for purchase...
 IAPExperience.Loading.Text.WaitingForRobux,Waiting for Robux to be granted...
-IAPExperience.PremiumUpsell.Action.Subscribe,
-IAPExperience.PremiumUpsell.Body.RobuxDiscount,10% bonus when buying Robux
-IAPExperience.PremiumUpsell.Label.AvatarShopBenefits,Access to exclusive and discounted items in avatar shop
-IAPExperience.PremiumUpsell.Label.Disclosure,Subscribe for <b>{currencySymbol}{price}/month. Cancel anytime.</b> Roblox Terms of Use and Privacy Policy apply.
-IAPExperience.PremiumUpsell.Label.PremiumBenefitListDesc,Roblox Premium will get you:
-IAPExperience.PremiumUpsell.Label.PremiumOnlyBenefits,Access to Premium-only benefits
-IAPExperience.PremiumUpsell.Label.PremiumPolicy,
-IAPExperience.PremiumUpsell.Label.PremiumPrice,<b>{currencySymbol}{price}</b>/month
-IAPExperience.PremiumUpsell.Label.RobloxPremium,Roblox Premium
-IAPExperience.PremiumUpsell.Label.RobuxPerMonth,{robux} per month
-IAPExperience.PremiumUpsell.Label.ShortDisclosure,Roblox Terms of Use and Privacy Policy apply.
 IAPExperience.PurchaseError.AlreadyPremium,"Looks like the developer is trying to prompt you to purchase Roblox Premium, but you are already a Premium member!"
 IAPExperience.PurchaseError.Text.AlreadyOwn,
 IAPExperience.PurchaseError.Text.AlreadySubscribed,You can manage your subscription from Settings > Subscriptions.
