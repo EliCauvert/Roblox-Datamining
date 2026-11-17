@@ -2566,6 +2566,7 @@ Feature.Build.Description.ActivateSubscription,Rends l'abonnement {PRODUCT_ID} d
 Feature.Build.Description.AdCampaignModerationReview,Nous examinons chaque annonce avant sa diffusion. Ce processus peut prendre jusqu'à 24 heures.
 Feature.Build.Description.AdCampaignSheetRunDates,Diffusion du {startDate} au {endDate}
 Feature.Build.Description.AdComplete,Ton annonce a pris fin. Découvre ses résultats.
+Feature.Build.Description.AdCreditsSavedForRetry,Nous avons converti tes Robux en crédits d'annonce. Réessaie et nous les utiliserons pour cette annonce.
 Feature.Build.Description.AdModerationReview,
 Feature.Build.Description.AdvancedModel,Idéal pour les jeux complexes. Ton quota d'utilisation s'épuise plus vite.
 Feature.Build.Description.AdvertisingAgreement,"En sélectionnant Créer, tu acceptes les {advertisingTermsStart}Conditions d'utilisation de la publicité{advertisingTermsEnd} et les {advertisingStandardsStart}Normes de la publicité{advertisingStandardsEnd} sur Roblox."
@@ -2966,6 +2967,7 @@ Feature.Build.Title.AdCampaignDuration,Annonce de {durationDays} jour(s)
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} jours
 Feature.Build.Title.AdComplete,Annonce terminée
 Feature.Build.Title.AdCreatedPeriod,Annonce créée.
+Feature.Build.Title.AdNotCreated,Impossible de créer ton annonce
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,Ajouter des images
 Feature.Build.Title.AdsStatsEmpty,
@@ -3022,6 +3024,7 @@ Feature.Build.Title.VersionInfo,Détails de la version
 Feature.Build.Title.VersionNumber,Version {VERSION}
 Feature.Build.Title.Versions,Versions
 Feature.Build.Title.WhatsIncluded,Qu'est-ce qui est inclus ?
+Feature.BuyRobux.Action.ContentPersonalization,Personnalisation du contenu
 Feature.BuyRobux.Heading.Banner,
 Feature.BuyRobux.Heading.PendingTransfers,Robux en attente
 Feature.BuyRobux.Label.MyFriendsWithCount,Mes amis ({count})

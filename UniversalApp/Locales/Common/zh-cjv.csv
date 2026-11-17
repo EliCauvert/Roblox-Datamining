@@ -2565,6 +2565,7 @@ Feature.Build.Description.ActivateSubscription,使订阅 {PRODUCT_ID} 可供购�
 Feature.Build.Description.AdCampaignModerationReview,在投放之前，我们会审核每条广告。此过程最多可能需要 24 小时。
 Feature.Build.Description.AdCampaignSheetRunDates,投放时间 {startDate}-{endDate}
 Feature.Build.Description.AdComplete,你的广告已投放完毕。查看其效果。
+Feature.Build.Description.AdCreditsSavedForRetry,
 Feature.Build.Description.AdModerationReview,
 Feature.Build.Description.AdvancedModel,最适合复杂的游戏。使用额度消耗速度较快。
 Feature.Build.Description.AdvertisingAgreement,选择“创建”，即表示你同意 {advertisingTermsStart}Roblox 广告条款{advertisingTermsEnd}和{advertisingStandardsStart}广告准则{advertisingStandardsEnd}。
@@ -2965,6 +2966,7 @@ Feature.Build.Title.AdCampaignDuration,{durationDays} 天广告
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} 天
 Feature.Build.Title.AdComplete,广告已完成
 Feature.Build.Title.AdCreatedPeriod,广告已创建。
+Feature.Build.Title.AdNotCreated,
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,添加图片
 Feature.Build.Title.AdsStatsEmpty,
@@ -3021,6 +3023,7 @@ Feature.Build.Title.VersionInfo,版本信息
 Feature.Build.Title.VersionNumber,版本 {VERSION}
 Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,包含哪些内容？
+Feature.BuyRobux.Action.ContentPersonalization,内容个性化
 Feature.BuyRobux.Heading.Banner,购买罗宝
 Feature.BuyRobux.Heading.PendingTransfers,Robux（待处理）
 Feature.BuyRobux.Label.MyFriendsWithCount,我的好友（{count} 位）

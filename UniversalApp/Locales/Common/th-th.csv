@@ -2549,6 +2549,7 @@ Feature.Build.Description.ActivateSubscription,เปิดขายการส
 Feature.Build.Description.AdCampaignModerationReview,เราตรวจสอบโฆษณาทุกชิ้นก่อนแสดง อาจใช้เวลาถึง 24 ชั่วโมง
 Feature.Build.Description.AdCampaignSheetRunDates,แสดงตั้งแต่ {startDate}-{endDate}
 Feature.Build.Description.AdComplete,โฆษณาของคุณสิ้นสุดแล้ว ไปดูผลกัน
+Feature.Build.Description.AdCreditsSavedForRetry,เราเก็บ Robux ของคุณเป็นเครดิตโฆษณา ลองอีกครั้ง แล้วเราจะใช้เครดิตกับโฆษณานี้
 Feature.Build.Description.AdModerationReview,
 Feature.Build.Description.AdvancedModel,เหมาะสำหรับเกมที่ซับซ้อน โควต้าการใช้งานจะหมดเร็วขึ้น
 Feature.Build.Description.AdvertisingAgreement,"การเลือก ""สร้าง"" ถือว่าคุณยอมรับ{advertisingTermsStart}ข้อกำหนดการโฆษณา{advertisingTermsEnd}และ{advertisingStandardsStart}มาตรฐานการโฆษณา{advertisingStandardsEnd}ของ Roblox"
@@ -2949,6 +2950,7 @@ Feature.Build.Title.AdCampaignDuration,โฆษณา {durationDays} วัน
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} วัน
 Feature.Build.Title.AdComplete,โฆษณาเสร็จแล้ว
 Feature.Build.Title.AdCreatedPeriod,สร้างโฆษณาแล้ว
+Feature.Build.Title.AdNotCreated,เราสร้างแคมเปญโฆษณาของคุณไม่ได้
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,เพิ่มภาพ
 Feature.Build.Title.AdsStatsEmpty,
@@ -3005,6 +3007,7 @@ Feature.Build.Title.VersionInfo,ข้อมูลเวอร์ชัน
 Feature.Build.Title.VersionNumber,เวอร์ชัน {VERSION}
 Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,มีอะไรให้บ้าง?
+Feature.BuyRobux.Action.ContentPersonalization,การปรับแต่งเนื้อหา
 Feature.BuyRobux.Heading.Banner,
 Feature.BuyRobux.Heading.PendingTransfers,Robux ที่รอดำเนินการ
 Feature.BuyRobux.Label.MyFriendsWithCount,เพื่อนของฉัน ({count})

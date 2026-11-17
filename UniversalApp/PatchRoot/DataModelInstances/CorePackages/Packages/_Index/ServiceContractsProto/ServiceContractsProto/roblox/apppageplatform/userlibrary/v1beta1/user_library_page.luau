@@ -17,7 +17,9 @@ function Module.new(p1)
 		config_key = if p1 == nil or p1.config_key == nil then "" else p1.config_key,
 		surface_key = if p1 == nil or p1.surface_key == nil then "" else p1.surface_key,
 		cached_roblox_component_to_template_id = if p1 == nil or p1.cached_roblox_component_to_template_id == nil then {} else p1.cached_roblox_component_to_template_id,
-		client_capabilities = if p1 == nil or p1.client_capabilities == nil then nil else p1.client_capabilities
+		client_capabilities = if p1 == nil or p1.client_capabilities == nil then nil else p1.client_capabilities,
+		subcategory = if p1 == nil or p1.subcategory == nil then nil else p1.subcategory,
+		owner_user_id = if p1 == nil or p1.owner_user_id == nil then nil else p1.owner_user_id
 	}, Module))
 end
 
@@ -61,6 +63,14 @@ function Module:encode()
 		local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
 		Buf, Count = ProtoModule.writeBuffer(WriteTagResult6, WriteTagResult2_5, EncodeResult, buffer.len(EncodeResult))
 	end
+	if self.subcategory ~= nil then
+		local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult10, WriteTagResult2_9, self.subcategory)
+	end
+	if self.owner_user_id ~= nil then
+		local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult11, WriteTagResult2_10, self.owner_user_id)
+	end
 	local Buf1 = buffer.create(Count)
 	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
@@ -73,51 +83,57 @@ function Module.decode(Buf)
 	local v1 = 0
 	while v1 < buffer.len(Buf) do
 		local Tag, Tag2
-		Tag, Tag2, v40 = ProtoModule.readTag(Buf, v1)
+		Tag, Tag2, v44 = ProtoModule.readTag(Buf, v1)
 		
 		if Tag2 == ProtoModule.wireTypes.varint then
 			if Tag == 1 then
 				local VarIntI32
-				VarIntI32, v40 = ProtoModule.readVarIntI32(Buf, v1)
+				VarIntI32, v44 = ProtoModule.readVarIntI32(Buf, v1)
 				NewModule.view = t.View.fromNumber(VarIntI32) or VarIntI32
 			elseif Tag == 3 then
-				NewModule.page_size, v40 = ProtoModule.readVarIntI32(Buf, v1)
+				NewModule.page_size, v44 = ProtoModule.readVarIntI32(Buf, v1)
+			elseif Tag == 9 then
+				NewModule.owner_user_id, v44 = ProtoModule.readVarIntI64(Buf, v1)
 			else
 				local _
-				_, v40 = ProtoModule.readVarInt(Buf, v1)
+				_, v44 = ProtoModule.readVarInt(Buf, v1)
 			end
 		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 			if Tag == 2 then
 				local Buffer1
-				Buffer1, v40 = ProtoModule.readBuffer(Buf, v1)
+				Buffer1, v44 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.cursor = buffer.tostring(Buffer1)
 			elseif Tag == 4 then
 				local Buffer2
-				Buffer2, v40 = ProtoModule.readBuffer(Buf, v1)
+				Buffer2, v44 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.config_key = buffer.tostring(Buffer2)
 			elseif Tag == 5 then
 				local Buffer3
-				Buffer3, v40 = ProtoModule.readBuffer(Buf, v1)
+				Buffer3, v44 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.surface_key = buffer.tostring(Buffer3)
 			elseif Tag == 6 then
 				local Buffer4
-				Buffer4, v40 = ProtoModule.readBuffer(Buf, v1)
+				Buffer4, v44 = ProtoModule.readBuffer(Buf, v1)
 				local DecodeResult = t.LibraryPageRequest_CachedRobloxComponentToTemplateIdEntry.decode(Buffer4)
 				NewModule.cached_roblox_component_to_template_id[DecodeResult.key or ""] = DecodeResult.value or ""
 			elseif Tag == 7 then
 				local Buffer5
-				Buffer5, v40 = ProtoModule.readBuffer(Buf, v1)
+				Buffer5, v44 = ProtoModule.readBuffer(Buf, v1)
 				NewModule.client_capabilities = ClientCapabilitiesModule.ClientCapabilities.decode(Buffer5)
+			elseif Tag == 8 then
+				local Buffer6
+				Buffer6, v44 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.subcategory = buffer.tostring(Buffer6)
 			else
 				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v1)
 				v1 = VarInt2 + VarInt
 			end
 		elseif Tag2 == ProtoModule.wireTypes.i32 then
 			local _
-			_, v40 = ProtoModule.readFixed32(Buf, v1)
+			_, v44 = ProtoModule.readFixed32(Buf, v1)
 		elseif Tag2 == ProtoModule.wireTypes.i64 then
 			local _
-			_, v40 = ProtoModule.readFixed64(Buf, v1)
+			_, v44 = ProtoModule.readFixed64(Buf, v1)
 		else
 			error("Unsupported wire type: " .. Tag2)
 		end
@@ -154,6 +170,12 @@ function Module:jsonEncode()
 	end
 	if self.client_capabilities ~= nil then
 		t1.clientCapabilities = self.client_capabilities:jsonEncode()
+	end
+	if self.subcategory ~= nil then
+		t1.subcategory = self.subcategory
+	end
+	if self.owner_user_id ~= nil then
+		t1.ownerUserId = self.owner_user_id
 	end
 	return t1
 end
@@ -208,6 +230,15 @@ function Module:jsonDecode()
 	if self.clientCapabilities ~= nil then
 		NewModule.client_capabilities = ClientCapabilitiesModule.ClientCapabilities.jsonDecode(self.clientCapabilities)
 	end
+	if self.subcategory ~= nil then
+		NewModule.subcategory = self.subcategory
+	end
+	if self.owner_user_id ~= nil then
+		NewModule.owner_user_id = self.owner_user_id
+	end
+	if self.ownerUserId ~= nil then
+		NewModule.owner_user_id = self.ownerUserId
+	end
 	return NewModule
 end
 
@@ -253,19 +284,19 @@ function Module1.decode(Buf)
 	local v2 = 0
 	while v2 < buffer.len(Buf) do
 		local Tag, Tag2
-		Tag, Tag2, v67 = ProtoModule.readTag(Buf, v2)
+		Tag, Tag2, v72 = ProtoModule.readTag(Buf, v2)
 		
 		if Tag2 == ProtoModule.wireTypes.varint then
 			local _
-			_, v67 = ProtoModule.readVarInt(Buf, v2)
+			_, v72 = ProtoModule.readVarInt(Buf, v2)
 		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 			if Tag == 1 then
 				local Buffer1
-				Buffer1, v67 = ProtoModule.readBuffer(Buf, v2)
+				Buffer1, v72 = ProtoModule.readBuffer(Buf, v2)
 				NewModule.key = buffer.tostring(Buffer1)
 			elseif Tag == 2 then
 				local Buffer2
-				Buffer2, v67 = ProtoModule.readBuffer(Buf, v2)
+				Buffer2, v72 = ProtoModule.readBuffer(Buf, v2)
 				NewModule.value = buffer.tostring(Buffer2)
 			else
 				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v2)
@@ -273,10 +304,10 @@ function Module1.decode(Buf)
 			end
 		elseif Tag2 == ProtoModule.wireTypes.i32 then
 			local _
-			_, v67 = ProtoModule.readFixed32(Buf, v2)
+			_, v72 = ProtoModule.readFixed32(Buf, v2)
 		elseif Tag2 == ProtoModule.wireTypes.i64 then
 			local _
-			_, v67 = ProtoModule.readFixed64(Buf, v2)
+			_, v72 = ProtoModule.readFixed64(Buf, v2)
 		else
 			error("Unsupported wire type: " .. Tag2)
 		end
@@ -388,44 +419,44 @@ function Module2.decode(Buf)
 	local v3 = 0
 	while v3 < buffer.len(Buf) do
 		local Tag, Tag2
-		Tag, Tag2, v107 = ProtoModule.readTag(Buf, v3)
+		Tag, Tag2, v112 = ProtoModule.readTag(Buf, v3)
 		
 		if Tag2 == ProtoModule.wireTypes.varint then
 			if Tag == 2 then
 				local VarIntI32
-				VarIntI32, v107 = ProtoModule.readVarIntI32(Buf, v3)
+				VarIntI32, v112 = ProtoModule.readVarIntI32(Buf, v3)
 				NewModule.view = t.View.fromNumber(VarIntI32) or VarIntI32
 			elseif Tag == 4 then
-				NewModule.page_size, v107 = ProtoModule.readVarIntI32(Buf, v3)
+				NewModule.page_size, v112 = ProtoModule.readVarIntI32(Buf, v3)
 			else
 				local _
-				_, v107 = ProtoModule.readVarInt(Buf, v3)
+				_, v112 = ProtoModule.readVarInt(Buf, v3)
 			end
 		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 			if Tag == 1 then
 				local Buffer1
-				Buffer1, v107 = ProtoModule.readBuffer(Buf, v3)
+				Buffer1, v112 = ProtoModule.readBuffer(Buf, v3)
 				NewModule.collection_id = buffer.tostring(Buffer1)
 			elseif Tag == 3 then
 				local Buffer2
-				Buffer2, v107 = ProtoModule.readBuffer(Buf, v3)
+				Buffer2, v112 = ProtoModule.readBuffer(Buf, v3)
 				NewModule.cursor = buffer.tostring(Buffer2)
 			elseif Tag == 5 then
 				local Buffer3
-				Buffer3, v107 = ProtoModule.readBuffer(Buf, v3)
+				Buffer3, v112 = ProtoModule.readBuffer(Buf, v3)
 				NewModule.config_key = buffer.tostring(Buffer3)
 			elseif Tag == 6 then
 				local Buffer4
-				Buffer4, v107 = ProtoModule.readBuffer(Buf, v3)
+				Buffer4, v112 = ProtoModule.readBuffer(Buf, v3)
 				NewModule.surface_key = buffer.tostring(Buffer4)
 			elseif Tag == 7 then
 				local Buffer5
-				Buffer5, v107 = ProtoModule.readBuffer(Buf, v3)
+				Buffer5, v112 = ProtoModule.readBuffer(Buf, v3)
 				local DecodeResult = t.CollectionPageRequest_CachedRobloxComponentToTemplateIdEntry.decode(Buffer5)
 				NewModule.cached_roblox_component_to_template_id[DecodeResult.key or ""] = DecodeResult.value or ""
 			elseif Tag == 8 then
 				local Buffer6
-				Buffer6, v107 = ProtoModule.readBuffer(Buf, v3)
+				Buffer6, v112 = ProtoModule.readBuffer(Buf, v3)
 				NewModule.client_capabilities = ClientCapabilitiesModule.ClientCapabilities.decode(Buffer6)
 			else
 				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v3)
@@ -433,10 +464,10 @@ function Module2.decode(Buf)
 			end
 		elseif Tag2 == ProtoModule.wireTypes.i32 then
 			local _
-			_, v107 = ProtoModule.readFixed32(Buf, v3)
+			_, v112 = ProtoModule.readFixed32(Buf, v3)
 		elseif Tag2 == ProtoModule.wireTypes.i64 then
 			local _
-			_, v107 = ProtoModule.readFixed64(Buf, v3)
+			_, v112 = ProtoModule.readFixed64(Buf, v3)
 		else
 			error("Unsupported wire type: " .. Tag2)
 		end
@@ -581,19 +612,19 @@ function Module3.decode(Buf)
 	local v4 = 0
 	while v4 < buffer.len(Buf) do
 		local Tag, Tag2
-		Tag, Tag2, v135 = ProtoModule.readTag(Buf, v4)
+		Tag, Tag2, v140 = ProtoModule.readTag(Buf, v4)
 		
 		if Tag2 == ProtoModule.wireTypes.varint then
 			local _
-			_, v135 = ProtoModule.readVarInt(Buf, v4)
+			_, v140 = ProtoModule.readVarInt(Buf, v4)
 		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 			if Tag == 1 then
 				local Buffer1
-				Buffer1, v135 = ProtoModule.readBuffer(Buf, v4)
+				Buffer1, v140 = ProtoModule.readBuffer(Buf, v4)
 				NewModule.key = buffer.tostring(Buffer1)
 			elseif Tag == 2 then
 				local Buffer2
-				Buffer2, v135 = ProtoModule.readBuffer(Buf, v4)
+				Buffer2, v140 = ProtoModule.readBuffer(Buf, v4)
 				NewModule.value = buffer.tostring(Buffer2)
 			else
 				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v4)
@@ -601,10 +632,10 @@ function Module3.decode(Buf)
 			end
 		elseif Tag2 == ProtoModule.wireTypes.i32 then
 			local _
-			_, v135 = ProtoModule.readFixed32(Buf, v4)
+			_, v140 = ProtoModule.readFixed32(Buf, v4)
 		elseif Tag2 == ProtoModule.wireTypes.i64 then
 			local _
-			_, v135 = ProtoModule.readFixed64(Buf, v4)
+			_, v140 = ProtoModule.readFixed64(Buf, v4)
 		else
 			error("Unsupported wire type: " .. Tag2)
 		end
@@ -706,29 +737,29 @@ function Module4.decode(Buf)
 	local v5 = 0
 	while v5 < buffer.len(Buf) do
 		local Tag, Tag2
-		Tag, Tag2, v177 = ProtoModule.readTag(Buf, v5)
+		Tag, Tag2, v182 = ProtoModule.readTag(Buf, v5)
 		
 		if Tag2 == ProtoModule.wireTypes.varint then
 			local _
-			_, v177 = ProtoModule.readVarInt(Buf, v5)
+			_, v182 = ProtoModule.readVarInt(Buf, v5)
 		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 			if Tag == 1 then
 				local Buffer1
-				Buffer1, v177 = ProtoModule.readBuffer(Buf, v5)
+				Buffer1, v182 = ProtoModule.readBuffer(Buf, v5)
 				table.insert(NewModule.page_entries, PageEntryContentModule.UniversalPageEntry.decode(Buffer1))
 			elseif Tag == 2 then
 				local Buffer2
-				Buffer2, v177 = ProtoModule.readBuffer(Buf, v5)
+				Buffer2, v182 = ProtoModule.readBuffer(Buf, v5)
 				NewModule.hydration_data = HydrationContentModule.HydrationContent.decode(Buffer2)
 			elseif Tag == 3 then
 				local Buffer3
-				Buffer3, v177 = ProtoModule.readBuffer(Buf, v5)
+				Buffer3, v182 = ProtoModule.readBuffer(Buf, v5)
 				local DecodeResult = t.PageResponse_TemplatesEntry.decode(Buffer3)
 				local NewResult = TemplateEntryModule.TemplateEntry.new()
 				NewModule.templates[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			elseif Tag == 4 then
 				local Buffer4
-				Buffer4, v177 = ProtoModule.readBuffer(Buf, v5)
+				Buffer4, v182 = ProtoModule.readBuffer(Buf, v5)
 				local DecodeResult = t.PageResponse_LocalizedLiteralsEntry.decode(Buffer4)
 				NewModule.localized_literals[DecodeResult.key or ""] = DecodeResult.value or ""
 			else
@@ -737,10 +768,10 @@ function Module4.decode(Buf)
 			end
 		elseif Tag2 == ProtoModule.wireTypes.i32 then
 			local _
-			_, v177 = ProtoModule.readFixed32(Buf, v5)
+			_, v182 = ProtoModule.readFixed32(Buf, v5)
 		elseif Tag2 == ProtoModule.wireTypes.i64 then
 			local _
-			_, v177 = ProtoModule.readFixed64(Buf, v5)
+			_, v182 = ProtoModule.readFixed64(Buf, v5)
 		else
 			error("Unsupported wire type: " .. Tag2)
 		end
@@ -877,19 +908,19 @@ function Module5.decode(Buf)
 	local v6 = 0
 	while v6 < buffer.len(Buf) do
 		local Tag, Tag2
-		Tag, Tag2, v210 = ProtoModule.readTag(Buf, v6)
+		Tag, Tag2, v215 = ProtoModule.readTag(Buf, v6)
 		
 		if Tag2 == ProtoModule.wireTypes.varint then
 			local _
-			_, v210 = ProtoModule.readVarInt(Buf, v6)
+			_, v215 = ProtoModule.readVarInt(Buf, v6)
 		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 			if Tag == 1 then
 				local Buffer1
-				Buffer1, v210 = ProtoModule.readBuffer(Buf, v6)
+				Buffer1, v215 = ProtoModule.readBuffer(Buf, v6)
 				NewModule.key = buffer.tostring(Buffer1)
 			elseif Tag == 2 then
 				local Buffer2
-				Buffer2, v210 = ProtoModule.readBuffer(Buf, v6)
+				Buffer2, v215 = ProtoModule.readBuffer(Buf, v6)
 				NewModule.value = TemplateEntryModule.TemplateEntry.decode(Buffer2)
 			else
 				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v6)
@@ -897,10 +928,10 @@ function Module5.decode(Buf)
 			end
 		elseif Tag2 == ProtoModule.wireTypes.i32 then
 			local _
-			_, v210 = ProtoModule.readFixed32(Buf, v6)
+			_, v215 = ProtoModule.readFixed32(Buf, v6)
 		elseif Tag2 == ProtoModule.wireTypes.i64 then
 			local _
-			_, v210 = ProtoModule.readFixed64(Buf, v6)
+			_, v215 = ProtoModule.readFixed64(Buf, v6)
 		else
 			error("Unsupported wire type: " .. Tag2)
 		end
@@ -975,19 +1006,19 @@ function Module6.decode(Buf)
 	local v7 = 0
 	while v7 < buffer.len(Buf) do
 		local Tag, Tag2
-		Tag, Tag2, v229 = ProtoModule.readTag(Buf, v7)
+		Tag, Tag2, v234 = ProtoModule.readTag(Buf, v7)
 		
 		if Tag2 == ProtoModule.wireTypes.varint then
 			local _
-			_, v229 = ProtoModule.readVarInt(Buf, v7)
+			_, v234 = ProtoModule.readVarInt(Buf, v7)
 		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
 			if Tag == 1 then
 				local Buffer1
-				Buffer1, v229 = ProtoModule.readBuffer(Buf, v7)
+				Buffer1, v234 = ProtoModule.readBuffer(Buf, v7)
 				NewModule.key = buffer.tostring(Buffer1)
 			elseif Tag == 2 then
 				local Buffer2
-				Buffer2, v229 = ProtoModule.readBuffer(Buf, v7)
+				Buffer2, v234 = ProtoModule.readBuffer(Buf, v7)
 				NewModule.value = buffer.tostring(Buffer2)
 			else
 				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v7)
@@ -995,10 +1026,10 @@ function Module6.decode(Buf)
 			end
 		elseif Tag2 == ProtoModule.wireTypes.i32 then
 			local _
-			_, v229 = ProtoModule.readFixed32(Buf, v7)
+			_, v234 = ProtoModule.readFixed32(Buf, v7)
 		elseif Tag2 == ProtoModule.wireTypes.i64 then
 			local _
-			_, v229 = ProtoModule.readFixed64(Buf, v7)
+			_, v234 = ProtoModule.readFixed64(Buf, v7)
 		else
 			error("Unsupported wire type: " .. Tag2)
 		end

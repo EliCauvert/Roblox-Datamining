@@ -2566,6 +2566,7 @@ Feature.Build.Description.ActivateSubscription,Buat subscription {PRODUCT_ID} te
 Feature.Build.Description.AdCampaignModerationReview,Kami me-review setiap iklan sebelum ditayangkan. Proses ini bisa membutuhkan waktu hingga 24 jam.
 Feature.Build.Description.AdCampaignSheetRunDates,Berlangsung {startDate}—{endDate}
 Feature.Build.Description.AdComplete,Iklanmu sudah berakhir. Lihat kinerjanya.
+Feature.Build.Description.AdCreditsSavedForRetry,Kami menyimpan Robux-mu sebagai kredit iklan. Coba lagi dan kami akan menggunakannya untuk iklan ini.
 Feature.Build.Description.AdModerationReview,
 Feature.Build.Description.AdvancedModel,Paling cocok untuk game yang kompleks. Kuota penggunaan lebih cepat habis.
 Feature.Build.Description.AdvertisingAgreement,"Dengan memilih Buat, kamu menyetujui {advertisingTermsStart}Ketentuan Periklanan Roblox{advertisingTermsEnd} dan {advertisingStandardsStart}Standar Periklanan{advertisingStandardsEnd}."
@@ -2966,6 +2967,7 @@ Feature.Build.Title.AdCampaignDuration,Iklan {durationDays} hari
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} hari
 Feature.Build.Title.AdComplete,Iklan selesai
 Feature.Build.Title.AdCreatedPeriod,Iklan dibuat.
+Feature.Build.Title.AdNotCreated,Kami tidak dapat membuat iklanmu
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,Tambahkan gambar
 Feature.Build.Title.AdsStatsEmpty,
@@ -3022,6 +3024,7 @@ Feature.Build.Title.VersionInfo,Informasi versi
 Feature.Build.Title.VersionNumber,Versi {VERSION}
 Feature.Build.Title.Versions,
 Feature.Build.Title.WhatsIncluded,Dapat apa saja?
+Feature.BuyRobux.Action.ContentPersonalization,Personalisasi konten
 Feature.BuyRobux.Heading.Banner,
 Feature.BuyRobux.Heading.PendingTransfers,Robux Pending
 Feature.BuyRobux.Label.MyFriendsWithCount,Teman saya ({count})
