@@ -279,6 +279,10 @@ Roblox.LangDynamic["Authentication.SignUp"] = {
     "Header.OpeningRoblox": "Opening Roblox...",
     "Description.OpeningRoblox": "You can close this tab after Roblox opens.",
     "Response.GenericError": "An unexpected error occurred. Go back to {landingPage}",
-    "Description.OptInMarketingEmailConsent": "I’d like to receive emails from Roblox about news and offers."
+    "Description.OptInMarketingEmailConsent": "I’d like to receive emails from Roblox about news and offers.",
+    "Label.EnterDate": "Enter date",
+    "Heading.CreateAccountToPlay": "Create account to play",
+    "Heading.SelectBirthday": "Select birthday",
+    "Description.ChooseHowToSecureAccount": "Choose how to secure your account."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Authentication.SignUp");

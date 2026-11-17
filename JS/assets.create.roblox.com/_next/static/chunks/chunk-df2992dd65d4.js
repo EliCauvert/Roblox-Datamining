@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "0e7f17f5-7321-5f37-8b06-34899622ee38")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "6dd433fc-27b6-53e7-f14e-5342fe8f0e0f")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 748348, (e, t, n) => {
@@ -3581,7 +3581,7 @@
                         width: n,
                         height: i
                     } = e;
-                    return t > 300.1 ? "DurationExceeded" : n > 4096 || i > 2160 ? "ResolutionExceeded" : null
+                    return t > 180.1 ? "DurationExceeded" : n > 4096 || i > 2160 ? "ResolutionExceeded" : null
                 })(t)
             } catch (e) {
                 return "MetadataUnavailable"
@@ -3662,7 +3662,7 @@
                                             });
                                         case n4.DurationExceeded:
                                             return e("CreateMomentModal.Error.DurationExceeded", {
-                                                maxDurationMinutes: String(5)
+                                                maxDurationMinutes: String(3)
                                             });
                                         case n4.ResolutionExceeded:
                                             return e("CreateMomentModal.Error.ResolutionExceeded", {
@@ -7130,5 +7130,5 @@
     }, e.s(["default", 0, rp], 962059)
 }]);
 
-//# debugId=0e7f17f5-7321-5f37-8b06-34899622ee38
-//# sourceMappingURL=3io5p5agu2rzt.js.map
+//# debugId=6dd433fc-27b6-53e7-f14e-5342fe8f0e0f
+//# sourceMappingURL=1ma54j5d_viuu.js.map
