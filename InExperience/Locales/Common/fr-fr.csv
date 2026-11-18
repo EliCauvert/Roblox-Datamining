@@ -3287,14 +3287,17 @@ Feature.Chat.Label.OneToOne.ThemRepliedToYou,T'a répondu
 Feature.Chat.Label.OneToOne.YouRepliedToThem,Tu as répondu
 Feature.Chat.Label.Pending,
 Feature.Chat.Label.PrivacySettings,Paramètres de confidentialité
+Feature.Chat.Label.Reactions,Réactions
 Feature.Chat.Label.ReplyChatInputPlaceholder,Répondre à {DISPLAY_NAME}
 Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,Répondre à votre propre message
 Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} a dit...
 Feature.Chat.Label.ReplyingToYourself,Vous avez dit...
 Feature.Chat.Label.SearchFriends,Chercher des amis
 Feature.Chat.Label.SearchWord,
+Feature.Chat.Label.SelectToRemove,Sélectionner pour retirer
 Feature.Chat.Label.SnoozePartyNotifications,Mets en sourdine les notifications de la Party en cours dans l'expérience pour :
 Feature.Chat.Label.SwipeToReplyTooltip,Balaie l'écran pour répondre
+Feature.Chat.Label.TapToRemove,Appuyer pour retirer
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} j
 Feature.Chat.Label.TimestampHoursAbbreviatedPlural,{num_hours} h
 Feature.Chat.Label.TimestampMinutesAbbreviatedPlural,{num_minutes} min
@@ -4076,7 +4079,7 @@ Feature.Moments.Label.PostFeedbackPostingTitle,Publication du Moment
 Feature.Moments.Label.PostRemovedBody,Le Moment que tu as publié va à l'encontre des normes de la communauté.
 Feature.Moments.Label.PostedOnDate,Publié le {date}
 Feature.Moments.Label.PublishingRodeoBody,Cela ne devrait prendre qu'un instant.
-Feature.Moments.Label.Reactions,Réactions
+Feature.Moments.Label.Reactions,
 Feature.Moments.Label.ReportReason.BreaksRules,Ce post enfreint les règles
 Feature.Moments.Label.ReportReason.IntellectualProperty,Ce post porte atteinte à mes droits de propriété intellectuelle.
 Feature.Moments.Label.ReportSubmittedBody,Merci pour tes commentaires.
@@ -4235,6 +4238,7 @@ Feature.Parents.Message.TooManyAttempts,Trop de tentatives. Réessayer plus tard
 Feature.Parents.Title.EnterParentEmailV2,Entrer l'adresse e-mail du parent
 Feature.Parents.Title.SomethingWentWrong,
 Feature.PlayerSearchResults.Action.AddFriend,
+Feature.PlayerSearchResults.Heading.SearchResults,Résultats de recherche
 Feature.PlayerSearchResults.Label.FromSearch,À partir de la recherche
 Feature.PlayerSearchResults.Label.NewUsername,Nouveau nom d'utilisateur
 Feature.PlayerSearchResults.Label.Previously,Précédemment

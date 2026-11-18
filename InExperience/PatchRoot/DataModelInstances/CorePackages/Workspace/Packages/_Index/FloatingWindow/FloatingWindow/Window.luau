@@ -10,9 +10,10 @@ return function(p1)
 	-- upvalues: config (copy), UseWindowControllerModule (copy), ReactModule (copy), ReactRobloxModule (copy)
 	local BoundsInsets = p1.boundsInsets or config
 	local UseWindowControllerModuleResult = UseWindowControllerModule(p1)
+	local UseRefResult = ReactModule.useRef(nil)
 	local UIDragDetector = if p1.draggable == false then nil else ReactModule.createElement("UIDragDetector", {
 		[ReactModule.Tag] = if p1.testId == nil then nil else `data-testid={p1.testId}-drag-detector`,
-		BoundingUI = UseWindowControllerModuleResult.boundsRef,
+		BoundingUI = UseRefResult,
 		DragStyle = Enum.UIDragDetectorDragStyle.Scriptable,
 		ResponseStyle = Enum.UIDragDetectorResponseStyle.CustomOffset,
 		[ReactModule.Event.DragContinue] = UseWindowControllerModuleResult.onDragContinue,
@@ -24,6 +25,7 @@ return function(p1)
 		[ReactModule.Tag] = if p1.testId == nil then nil else `data-testid={p1.testId}-screen`,
 		DisplayOrder = p1.displayOrder or 0,
 		Name = "FloatingWindow",
+		ref = UseRefResult,
 		ResetOnSpawn = false,
 		ScreenInsets = p1.screenInsets or Enum.ScreenInsets.CoreUISafeInsets,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling

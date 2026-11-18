@@ -4,6 +4,7 @@ local ServiceModule = require(Chrome.Service)
 local ViewportUtilModule = require(Chrome.ChromeShared.Service.ViewportUtil)
 local ConstantsModule = require(Chrome.ChromeShared.Unibar.Constants)
 local FFlagCenterInExperienceShopWindowModule = require(game:GetService("CorePackages").Workspace.Packages.InExperienceShop.FFlagCenterInExperienceShopWindow)
+local FFlagLogFreeTrialDotAndMenuItemClickModule = require(Chrome.Flags.FFlagLogFreeTrialDotAndMenuItemClick)
 local Flag = false
 
 local function getCenteredShopWindowPosition(): UDim2
@@ -43,19 +44,26 @@ return {
 		ServiceModule:toggleWindow(ConstantsModule.IN_EXPERIENCE_SHOP_ID)
 	end,
 	openInExperienceShopWindow = function()
-		-- upvalues: ConstantsModule (copy), ServiceModule (copy), FFlagCenterInExperienceShopWindowModule (copy), Flag (ref), getCenteredShopWindowPosition (copy)
+		-- upvalues: ConstantsModule (copy), ServiceModule (copy), FFlagLogFreeTrialDotAndMenuItemClickModule (copy), FFlagCenterInExperienceShopWindowModule (copy), Flag (ref), getCenteredShopWindowPosition (copy)
 		local INEXPERIENCESHOPID = ConstantsModule.IN_EXPERIENCE_SHOP_ID
 		
 		if ServiceModule:isWindowOpen(INEXPERIENCESHOPID) then return end
 		if ServiceModule:isIntegrationValid(INEXPERIENCESHOPID) then
+			if FFlagLogFreeTrialDotAndMenuItemClickModule then
+				require(script.Parent.trialIndicatorShopOpen).beginOutsideTrialIndicator()
+			end
 			ServiceModule:activate(INEXPERIENCESHOPID)
 			
+			if FFlagLogFreeTrialDotAndMenuItemClickModule then
+				require(script.Parent.trialIndicatorShopOpen).finishOutsideTrialIndicator()
+			end
 			return
+		else
+			if not ServiceModule:isWindowOpen(ConstantsModule.IN_EXPERIENCE_SHOP_ID) and FFlagCenterInExperienceShopWindowModule and not Flag then
+				ServiceModule:updateWindowPosition(ConstantsModule.IN_EXPERIENCE_SHOP_ID, getCenteredShopWindowPosition())
+				Flag = true
+			end
+			ServiceModule:toggleWindow(ConstantsModule.IN_EXPERIENCE_SHOP_ID)
 		end
-		if not ServiceModule:isWindowOpen(ConstantsModule.IN_EXPERIENCE_SHOP_ID) and FFlagCenterInExperienceShopWindowModule and not Flag then
-			ServiceModule:updateWindowPosition(ConstantsModule.IN_EXPERIENCE_SHOP_ID, getCenteredShopWindowPosition())
-			Flag = true
-		end
-		ServiceModule:toggleWindow(ConstantsModule.IN_EXPERIENCE_SHOP_ID)
 	end
 }

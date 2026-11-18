@@ -475,11 +475,14 @@
 	FFlagAXMomentsLookTryOnCloseAfterPurchase = require(script.FFlagAXMomentsLookTryOnCloseAfterPurchase),
 	FFlagAXMomentsLookTryOnDelayAutoSave = require(script.FFlagAXMomentsLookTryOnDelayAutoSave),
 	FFlagAXSpawnEffectSaveRoundTrip = require(script.FFlagAXSpawnEffectSaveRoundTrip),
+	FFlagAXSpawnEffectReplacedByOutfit = require(script.FFlagAXSpawnEffectReplacedByOutfit),
 	FFlagAXPhotoboothMomentsStableCamera = require(script.FFlagAXPhotoboothMomentsStableCamera),
 	FFlagAXSpawnEffects = require(script.FFlagAXSpawnEffects),
+	FStringAXPlusSpawnEffectIds = require(script.FStringAXPlusSpawnEffectIds),
 	FFlagAXSduiCatalogLegacyCategoryMenu = require(script.FFlagAXSduiCatalogLegacyCategoryMenu),
 	FFlagAXPrefetchSduiWidgetThumbnails = require(script.FFlagAXPrefetchSduiWidgetThumbnails),
 	FFlagAXSduiClaimEventItemAction = require(script.FFlagAXSduiClaimEventItemAction),
 	FFlagAXIaBPlusExclusiveUpsell = require(script.FFlagAXIaBPlusExclusiveUpsell),
-	FFlagAXInspectAndBuySpawnEffects = require(script.FFlagAXInspectAndBuySpawnEffects)
+	FFlagAXInspectAndBuySpawnEffects = require(script.FFlagAXInspectAndBuySpawnEffects),
+	FFlagAXRobuxBalanceAndPhotoboothButtonOverMedia = require(script.FFlagAXRobuxBalanceAndPhotoboothButtonOverMedia)
 }

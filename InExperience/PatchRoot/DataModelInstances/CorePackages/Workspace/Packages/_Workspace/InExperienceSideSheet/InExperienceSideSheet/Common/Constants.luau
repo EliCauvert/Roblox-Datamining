@@ -1,14 +1,12 @@
-﻿return {
+﻿local ConstantsModule = require(script:FindFirstAncestor("InExperienceSideSheet").Parent.InExperienceSideSheetStore.Constants)
+
+return {
 	TweenDuration = 0.35,
 	MenuScreenMargin = 20,
 	NominalSideSheetWidth = 320,
 	MinMenuWidthBesideSideSheet = 200,
-	SideSheetDisplayOrder = 12,
-	IntegrationIds = {
-		People = "people",
-		InviteFriends = "invite_friends",
-		ConnectDropdown = "connect_dropdown"
-	},
+	SideSheetDisplayOrder = ConstantsModule.SideSheetDisplayOrder,
+	IntegrationIds = ConstantsModule.IntegrationIds,
 	LocalizationKeys = {
 		QuitButton = "Feature.SettingsHub.Label.QuitButton",
 		QuitConfirmation = "Feature.SettingsHub.Label.QuitConfirmation",

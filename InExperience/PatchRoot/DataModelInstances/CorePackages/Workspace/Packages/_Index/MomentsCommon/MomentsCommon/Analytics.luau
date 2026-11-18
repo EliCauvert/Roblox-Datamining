@@ -34,6 +34,7 @@ return {
 	reportMomentsPostInsightsRequest = ReportMomentsRealtimeEventModule.reportMomentsPostInsightsRequest,
 	reportMomentsPostInsightsRequestLatency = ReportMomentsRealtimeEventModule.reportMomentsPostInsightsRequestLatency,
 	reportMomentsTimeLimitShown = ReportMomentsRealtimeEventModule.reportMomentsTimeLimitShown,
+	reportMomentsEngagementToastShown = ReportMomentsRealtimeEventModule.reportMomentsEngagementToastShown,
 	reportMomentsComments = ReportMomentsCommentsRealtimeModule.reportMomentsComments,
 	reportMomentsCommentAction = ReportMomentsCommentsRealtimeModule.reportMomentsCommentAction
 }

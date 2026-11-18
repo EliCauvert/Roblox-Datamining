@@ -49,6 +49,7 @@ local GetFFlagIAPExperienceEnableMultiDisplayUpsellModule = require(Parent.Flags
 local GetFFlagIAPExperienceUseUpsellBadgeHelperModule = require(Parent.Flags.GetFFlagIAPExperienceUseUpsellBadgeHelper)
 local FFlagFixUpsellModalUnevenLayoutModule = require(Parent.Flags.FFlagFixUpsellModalUnevenLayout)
 local FFlagPurchasePromptVLOPUpsellSettingsEntryPointModule = require(Parent.Flags.FFlagPurchasePromptVLOPUpsellSettingsEntryPoint)
+local FFlagPurchasePromptVLOPAppUpsellSettingsEntryPointModule = require(Parent.Flags.FFlagPurchasePromptVLOPAppUpsellSettingsEntryPoint)
 local FFlagLuaAppsEnablePromptVIPServerPurchase = require(Parent.Parent.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
 local _ = require(Parent.Api.PaymentsGateway.GetUpsellSuggestionsTypes)
 local BadgeTypeModule = require(Parent.Enums.BadgeType)
@@ -248,7 +249,7 @@ local _ = function(p1)
 end
 
 local function UnifiedRobuxUpsellModal(p1)
-	-- upvalues: FFlagEnableRobuxUpsellPlusButtonExperimentModule (copy), UseCartPricingModule (copy), ReactModule (copy), UseLocalizationFunction (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), FFlagAXMISWithBlackbird (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), UnifiedPurchaseModalTypeEnumModule (copy), CompactUpsellModalBreakpoint (copy), UseInitialButtonDisableDelayModule (copy), UNIFIEDROBUXUPSELLMODALMINHEIGHTPIXELSDEFAULT (copy), GetFFlagIAPExperienceEnableMultiDisplayUpsellModule (copy), FFlagFixUpsellModalUnevenLayoutModule (copy), UNIFIEDROBUXUPSELLMODALMINHEIGHTPIXELSWITHMULTIPLEPACKAGES (copy), UNIFIEDROBUXUPSELLMODALMINHEIGHTPIXELSSINGLEPACKAGE (copy), UseScaledValueFunction (copy), FFlagShouldFixDevSubsFlashingTitleModule (copy), FFlagPurchasePromptVLOPUpsellSettingsEntryPointModule (copy), UseManageRecommendationsMenuViewModelModule (copy), UseFocusNavigationRefsModule (copy), BuildCartPricingOfferCheckboxesModule (copy), View (copy), ProductDetailsContainerModule (copy), FillBehavior (copy), ButtonVariant (copy), Sheet (copy), UnifiedPurchaseModalHeaderModule (copy), PriceSummaryModule (copy), UnifiedProductDetailsModule (copy), CartPricingLoadingModule (copy), UpsellProductDetails (copy), ButtonGroup (copy), Orientation (copy), Enums (copy), FoundationModule (copy), Text (copy)
+	-- upvalues: FFlagEnableRobuxUpsellPlusButtonExperimentModule (copy), UseCartPricingModule (copy), ReactModule (copy), UseLocalizationFunction (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), FFlagAXMISWithBlackbird (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), UnifiedPurchaseModalTypeEnumModule (copy), CompactUpsellModalBreakpoint (copy), UseInitialButtonDisableDelayModule (copy), UNIFIEDROBUXUPSELLMODALMINHEIGHTPIXELSDEFAULT (copy), GetFFlagIAPExperienceEnableMultiDisplayUpsellModule (copy), FFlagFixUpsellModalUnevenLayoutModule (copy), UNIFIEDROBUXUPSELLMODALMINHEIGHTPIXELSWITHMULTIPLEPACKAGES (copy), UNIFIEDROBUXUPSELLMODALMINHEIGHTPIXELSSINGLEPACKAGE (copy), UseScaledValueFunction (copy), FFlagShouldFixDevSubsFlashingTitleModule (copy), FFlagPurchasePromptVLOPUpsellSettingsEntryPointModule (copy), FFlagPurchasePromptVLOPAppUpsellSettingsEntryPointModule (copy), UseManageRecommendationsMenuViewModelModule (copy), UseFocusNavigationRefsModule (copy), BuildCartPricingOfferCheckboxesModule (copy), View (copy), ProductDetailsContainerModule (copy), FillBehavior (copy), ButtonVariant (copy), Sheet (copy), UnifiedPurchaseModalHeaderModule (copy), PriceSummaryModule (copy), UnifiedProductDetailsModule (copy), CartPricingLoadingModule (copy), UpsellProductDetails (copy), ButtonGroup (copy), Orientation (copy), Enums (copy), FoundationModule (copy), Text (copy)
 	local DiscountPercentage = nil
 	local OnActivated = nil
 	
@@ -379,8 +380,8 @@ local function UnifiedRobuxUpsellModal(p1)
 		if FFlagAXMISWithBlackbird then p1.product.itemName else nil,
 		if FFlagAXMISWithBlackbird then UseLocalizationResult.BuyRobuxOnly else nil
 	})
-	local UseManageRecommendationsMenuViewModelModuleResult = if FFlagPurchasePromptVLOPUpsellSettingsEntryPointModule then UseManageRecommendationsMenuViewModelModule() else nil
-	local UseFocusNavigationRefsModuleResult, UseFocusNavigationRefsModuleResult2 = UseFocusNavigationRefsModule(p1.buttons.cancelPurchaseActivated, p1.onBuyItemButtonMounted, if FFlagPurchasePromptVLOPUpsellSettingsEntryPointModule and UseManageRecommendationsMenuViewModelModuleResult then not UseManageRecommendationsMenuViewModelModuleResult.isActive else nil)
+	local UseManageRecommendationsMenuViewModelModuleResult = if FFlagPurchasePromptVLOPUpsellSettingsEntryPointModule or FFlagPurchasePromptVLOPAppUpsellSettingsEntryPointModule then UseManageRecommendationsMenuViewModelModule(if FFlagPurchasePromptVLOPAppUpsellSettingsEntryPointModule then p1.isMarketplacePurchase else nil) else nil
+	local UseFocusNavigationRefsModuleResult, UseFocusNavigationRefsModuleResult2 = UseFocusNavigationRefsModule(p1.buttons.cancelPurchaseActivated, p1.onBuyItemButtonMounted, if (FFlagPurchasePromptVLOPUpsellSettingsEntryPointModule or FFlagPurchasePromptVLOPAppUpsellSettingsEntryPointModule) and UseManageRecommendationsMenuViewModelModuleResult then not UseManageRecommendationsMenuViewModelModuleResult.isActive else nil)
 	ReactModule.useEffect(function() end, { p1.upsellSuggestions })
 	
 	local function _(p2)
@@ -414,7 +415,7 @@ local function UnifiedRobuxUpsellModal(p1)
 		includePriceSuffixOnOriginal = if FFlagLuaAppsEnablePromptVIPServerPurchase then p1.isMonthlyPrice else nil,
 		hideDiscountSummary = p1.isCartPricingLoading,
 		savingsSummary = UseCartPricingModuleResult.cartPricingSavingsSummary,
-		manageRecommendationsMenu = if FFlagPurchasePromptVLOPUpsellSettingsEntryPointModule and UseManageRecommendationsMenuViewModelModuleResult then UseManageRecommendationsMenuViewModelModuleResult.viewProps else nil
+		manageRecommendationsMenu = if (FFlagPurchasePromptVLOPUpsellSettingsEntryPointModule or FFlagPurchasePromptVLOPAppUpsellSettingsEntryPointModule) and UseManageRecommendationsMenuViewModelModuleResult then UseManageRecommendationsMenuViewModelModuleResult.viewProps else nil
 	})
 	local FFlagIAPExperienceEnableMultiDisplayUpsellModule = GetFFlagIAPExperienceEnableMultiDisplayUpsellModule()
 	local RowWrapAlignXCenterAlignYCenterGapMediumSizeFull0AutoY: string = if FFlagIAPExperienceEnableMultiDisplayUpsellModule then "row wrap align-x-center align-y-center gap-medium size-full-0 auto-y" else "row wrap auto-xy align-y-center align-x-center size-full-0 gap-medium"

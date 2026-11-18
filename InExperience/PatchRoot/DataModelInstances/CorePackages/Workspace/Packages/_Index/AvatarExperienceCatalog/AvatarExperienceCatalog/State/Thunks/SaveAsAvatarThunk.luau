@@ -11,10 +11,12 @@ local SetCurrentToastMessageFunction = ToastRoduxModule.Actions.SetCurrentToastM
 local Constants = AvatarExperienceAnalyticsModule.Constants
 local AVATAREDITORSERVICECOUNTERSTATUS = Constants.AVATAR_EDITOR_SERVICE_COUNTER_STATUS
 local GetGearAssetIdFromStateFunction = AvatarExperienceCommonModule.Utils.getGearAssetIdFromState
+local SetAvatarEffectDescriptionsFunction = AvatarExperienceCommonModule.Utils.setAvatarEffectDescriptions
 local ReportAvatarEventCounterNoAnalyticsArgumentFunction = AvatarExperienceAnalyticsModule.reportAvatarEventCounterNoAnalyticsArgument
 local ReportAvatarEditorServiceCounterFunction = AvatarExperienceAnalyticsModule.reportAvatarEditorServiceCounter
 local ReportAvatarEventCounterV1Function = AvatarExperienceAnalyticsModule.reportAvatarEventCounterV1
 local FIntAXLookOutfitCreationDelayMs = AvatarExperienceFlagsModule.FIntAXLookOutfitCreationDelayMs
+local FFlagAXSpawnEffectReplacedByOutfit = AvatarExperienceFlagsModule.FFlagAXSpawnEffectReplacedByOutfit
 local FFlagAXAvatarEditorServiceTelemetryV2 = AvatarExperienceFlagsModule.FFlagAXAvatarEditorServiceTelemetryV2
 local FFlagAXDeprecateAvatarEditorServiceTelemetryV1 = AvatarExperienceFlagsModule.FFlagAXDeprecateAvatarEditorServiceTelemetryV1
 local config = {
@@ -34,17 +36,21 @@ local config2 = {
 }
 
 return function(Name, Callback, p1, Callback1)
-	-- upvalues: PerformFetch (copy), AVATAREDITORCONSTANTS (copy), GetGearAssetIdFromStateFunction (copy), FIntAXLookOutfitCreationDelayMs (copy), PromiseModule (copy), FFlagAXAvatarEditorServiceTelemetryV2 (copy), ReportAvatarEditorServiceCounterFunction (copy), Constants (copy), AVATAREDITORSERVICECOUNTERSTATUS (copy), FFlagAXDeprecateAvatarEditorServiceTelemetryV1 (copy), ReportAvatarEventCounterNoAnalyticsArgumentFunction (copy), ReportAvatarEventCounterV1Function (copy), SetCurrentToastMessageFunction (copy), config (copy), config1 (copy), config2 (copy)
+	-- upvalues: PerformFetch (copy), AVATAREDITORCONSTANTS (copy), GetGearAssetIdFromStateFunction (copy), FFlagAXSpawnEffectReplacedByOutfit (copy), SetAvatarEffectDescriptionsFunction (copy), FIntAXLookOutfitCreationDelayMs (copy), PromiseModule (copy), FFlagAXAvatarEditorServiceTelemetryV2 (copy), ReportAvatarEditorServiceCounterFunction (copy), Constants (copy), AVATAREDITORSERVICECOUNTERSTATUS (copy), FFlagAXDeprecateAvatarEditorServiceTelemetryV1 (copy), ReportAvatarEventCounterNoAnalyticsArgumentFunction (copy), ReportAvatarEventCounterV1Function (copy), SetCurrentToastMessageFunction (copy), config (copy), config1 (copy), config2 (copy)
 	return function(p2, p3)
-		-- upvalues: PerformFetch (upval), AVATAREDITORCONSTANTS (upval), GetGearAssetIdFromStateFunction (upval), Callback (copy), p1 (copy), FIntAXLookOutfitCreationDelayMs (upval), PromiseModule (upval), FFlagAXAvatarEditorServiceTelemetryV2 (upval), ReportAvatarEditorServiceCounterFunction (upval), Constants (upval), AVATAREDITORSERVICECOUNTERSTATUS (upval), Name (copy), FFlagAXDeprecateAvatarEditorServiceTelemetryV1 (upval), ReportAvatarEventCounterNoAnalyticsArgumentFunction (upval), ReportAvatarEventCounterV1Function (upval), Callback1 (copy), SetCurrentToastMessageFunction (upval), config (upval), config1 (upval), config2 (upval)
+		-- upvalues: PerformFetch (upval), AVATAREDITORCONSTANTS (upval), GetGearAssetIdFromStateFunction (upval), Callback (copy), p1 (copy), FFlagAXSpawnEffectReplacedByOutfit (upval), SetAvatarEffectDescriptionsFunction (upval), FIntAXLookOutfitCreationDelayMs (upval), PromiseModule (upval), FFlagAXAvatarEditorServiceTelemetryV2 (upval), ReportAvatarEditorServiceCounterFunction (upval), Constants (upval), AVATAREDITORSERVICECOUNTERSTATUS (upval), Name (copy), FFlagAXDeprecateAvatarEditorServiceTelemetryV1 (upval), ReportAvatarEventCounterNoAnalyticsArgumentFunction (upval), ReportAvatarEventCounterV1Function (upval), Callback1 (copy), SetCurrentToastMessageFunction (upval), config (upval), config1 (upval), config2 (upval)
 		local AvatarEditorService = p3.avatarEditorService
 		
 		return PerformFetch.Single(AVATAREDITORCONSTANTS.CreateOutfitKey, function(p4)
-			-- upvalues: GetGearAssetIdFromStateFunction (upval), Callback (upval), p1 (upval), FIntAXLookOutfitCreationDelayMs (upval), PromiseModule (upval), FFlagAXAvatarEditorServiceTelemetryV2 (upval), ReportAvatarEditorServiceCounterFunction (upval), Constants (upval), AVATAREDITORSERVICECOUNTERSTATUS (upval), AvatarEditorService (copy), Name (upval), FFlagAXDeprecateAvatarEditorServiceTelemetryV1 (upval), ReportAvatarEventCounterNoAnalyticsArgumentFunction (upval), ReportAvatarEventCounterV1Function (upval), Callback1 (upval), SetCurrentToastMessageFunction (upval), config (upval), config1 (upval), config2 (upval)
+			-- upvalues: GetGearAssetIdFromStateFunction (upval), Callback (upval), p1 (upval), FFlagAXSpawnEffectReplacedByOutfit (upval), SetAvatarEffectDescriptionsFunction (upval), FIntAXLookOutfitCreationDelayMs (upval), PromiseModule (upval), FFlagAXAvatarEditorServiceTelemetryV2 (upval), ReportAvatarEditorServiceCounterFunction (upval), Constants (upval), AVATAREDITORSERVICECOUNTERSTATUS (upval), AvatarEditorService (copy), Name (upval), FFlagAXDeprecateAvatarEditorServiceTelemetryV1 (upval), ReportAvatarEventCounterNoAnalyticsArgumentFunction (upval), ReportAvatarEventCounterV1Function (upval), Callback1 (upval), SetCurrentToastMessageFunction (upval), config (upval), config1 (upval), config2 (upval)
 			local State = p4:getState()
 			local HumanoidRigTypeEntry = Enum.HumanoidRigType[State.AvatarExperience.AvatarEditor.Character.AvatarType]
 			local GearAssetIdFromState = GetGearAssetIdFromStateFunction(State.AvatarExperience)
 			local CallbackResult = Callback(State, p1)
+			
+			if FFlagAXSpawnEffectReplacedByOutfit and typeof(CallbackResult) == "Instance" then
+				SetAvatarEffectDescriptionsFunction(CallbackResult, State.AvatarExperience.AvatarEditor.Character.EquippedAssets)
+			end
 			task.spawn(function()
 				-- upvalues: FIntAXLookOutfitCreationDelayMs (upval), PromiseModule (upval), FFlagAXAvatarEditorServiceTelemetryV2 (upval), ReportAvatarEditorServiceCounterFunction (upval), Constants (upval), AVATAREDITORSERVICECOUNTERSTATUS (upval), AvatarEditorService (upval), CallbackResult (copy), HumanoidRigTypeEntry (copy), Name (upval), GearAssetIdFromState (copy), FFlagAXDeprecateAvatarEditorServiceTelemetryV1 (upval), ReportAvatarEventCounterNoAnalyticsArgumentFunction (upval), ReportAvatarEventCounterV1Function (upval), Callback1 (upval), p4 (copy), SetCurrentToastMessageFunction (upval), config (upval), config1 (upval), config2 (upval)
 				task.wait(FIntAXLookOutfitCreationDelayMs / 1000)

@@ -8,12 +8,12 @@ local ReactModule = require(CorePackages.Packages.React)
 local SignalsModule = require(CorePackages.Packages.Signals)
 local ServiceModule = require(Chrome.Service)
 local ChromeModule = require(CorePackages.Workspace.Packages.Chrome)
-local WindowSizeSignalModule = require(Chrome.ChromeShared.Service.WindowSizeSignal)
 local ConstantsModule = require(Chrome.ChromeShared.Unibar.Constants)
 local CommonIconModule = require(Chrome.Integrations.CommonIcon)
 local InitializeShopMenuControllerModule: (any, any) -> () = require(Chrome.Integrations.InExperienceShop.initializeShopMenuController)
 local ShopChromeWrapperModule = require(Chrome.Integrations.InExperienceShop.ShopChromeWrapper)
 local ShopWindowLayoutModule = require(Chrome.Integrations.InExperienceShop.ShopWindowLayout)
+local FFlagLogFreeTrialDotAndMenuItemClickModule = require(Chrome.Flags.FFlagLogFreeTrialDotAndMenuItemClick)
 local ChromeUtilsModule = require(Chrome.ChromeShared.Service.ChromeUtils)
 local SideSheetOpenBehavior = ChromeModule.Enums.SideSheetOpenBehavior
 local SideSheetPlacement = ChromeModule.Enums.SideSheetPlacement
@@ -39,13 +39,16 @@ local NewResult = ChromeUtilsModule.MappedSignal.new(ServiceModule:onIntegration
 end)
 local MAXWINDOWWIDTH = ShopWindowLayoutModule.MAX_WINDOW_WIDTH
 local MAXWINDOWHEIGHT = ShopWindowLayoutModule.MAX_WINDOW_HEIGHT
-local NewWindowSizeSignal = WindowSizeSignalModule.new(MAXWINDOWWIDTH, MAXWINDOWHEIGHT, false, true)
+local NewResult1 = require(Chrome.ChromeShared.Service.WindowSizeSignal).new(MAXWINDOWWIDTH, MAXWINDOWHEIGHT, false, true)
 local InExperienceShopNewBadgeStorageKey = game:DefineFastString("InExperienceShopNewBadgeStorageKey", "InExperienceShopNewBadgeStorageKey")
 local NewBadgeDismissalMaxCountInExperienceShop = game:DefineFastInt("NewBadgeDismissalMaxCountInExperienceShop", 5)
 local FFlagEnableMenuTrailingBadge1 = game:DefineFastFlag("EnableNewBadgeInExperienceShop", false) and FFlagEnableMenuTrailingBadge
 local CustomText = nil
 local OfferBadgeTextSignal = nil
 local DismissFunction = nil
+local v1 = nil
+local v2 = nil
+local ReportActivated = nil
 
 if FFlagShowOfferBadge then
 	local InExperienceOffersModule = require(CorePackages.Workspace.Packages.InExperienceOffers)
@@ -56,6 +59,9 @@ if FFlagEnableFreeTrialShopMenuBadge then
 	local SubmitFreeTrialMenuBadgeModule = require(CorePackages.Workspace.Packages.InExperienceShop.submitFreeTrialMenuBadge)
 	local Callback = SubmitFreeTrialMenuBadgeModule()
 	local Callback1 = OfferBadgeTextSignal
+	v1 = Callback
+	v2 = Callback1
+	ReportActivated = SubmitFreeTrialMenuBadgeModule.reportActivated
 	CustomText = if FFlagMenuBadgePreferFreeTrialOverOffer and Callback1 ~= nil then function(p1)
 		-- upvalues: Callback (copy), Callback1 (copy)
 		local CallbackResult = Callback(p1)
@@ -133,6 +139,57 @@ local _ = function()
 	end
 end
 
+local _ = function(): boolean
+	-- upvalues: v1 (ref), FFlagMenuBadgePreferFreeTrialOverOffer (copy), v2 (ref)
+	local Callback = v1
+	
+	if Callback == nil or Callback(false) == nil then
+		return false
+	end
+	if not FFlagMenuBadgePreferFreeTrialOverOffer then
+		local Callback1 = v2
+		
+		if Callback1 ~= nil and Callback1(false) ~= nil then
+			return false
+		end
+	end
+	return true
+end
+
+local function reportShopOpenedFromMenuRow()
+	-- upvalues: v1 (ref), FFlagMenuBadgePreferFreeTrialOverOffer (copy), v2 (ref), ReportActivated (ref), FFlagEnableFreeTrialBlueDot (copy), CorePackages (copy)
+	local Callback2 = v1
+	local Flag = nil
+	repeat
+		if Callback2 == nil or Callback2(false) == nil then
+			Flag = false
+			break
+		end
+		if not FFlagMenuBadgePreferFreeTrialOverOffer then
+			local Callback1 = v2
+			
+			if Callback1 ~= nil and Callback1(false) ~= nil then
+				Flag = false
+				break
+			end
+		end
+		Flag = true
+	until true
+	if Flag then
+		local Callback: () -> () = ReportActivated
+		
+		if Callback ~= nil then
+			Callback()
+		end
+		return
+	elseif not FFlagEnableFreeTrialBlueDot then return end
+	local SubmitFreeTrialBlueDotModule = require(CorePackages.Workspace.Packages.InExperienceShop.submitFreeTrialBlueDot)
+	
+	if SubmitFreeTrialBlueDotModule.isHamburgerBlueDotShowing(false) then
+		SubmitFreeTrialBlueDotModule.reportActivated()
+	end
+end
+
 local _ = function()
 	-- upvalues: DismissFunction (ref), ServiceModule (copy), ConstantsModule (copy)
 	if DismissFunction ~= nil and not ServiceModule:isWindowOpen(ConstantsModule.IN_EXPERIENCE_SHOP_ID) then
@@ -157,11 +214,18 @@ config.initialAvailability = Unavailable
 config.id = ConstantsModule.IN_EXPERIENCE_SHOP_ID
 config.sideSheetPlacement = SideSheetPlacement.AboveFold
 config.sideSheetOpenBehavior = if FFlagKeepSideSheetOpenBesideMenu then SideSheetOpenBehavior.WindowBesideSheet else nil
-config.windowSize = NewWindowSizeSignal
+config.windowSize = NewResult1
 config.startingWindowPosition = ShopWindowLayoutModule.getStartingWindowPosition()
 
 function config:activated()
-	-- upvalues: DismissFunction (ref), ServiceModule (copy), ConstantsModule (copy), FFlagCenterInExperienceShopWindow (copy), ShopWindowLayoutModule (copy)
+	-- upvalues: FFlagLogFreeTrialDotAndMenuItemClickModule (copy), Chrome (copy), ServiceModule (copy), ConstantsModule (copy), reportShopOpenedFromMenuRow (copy), DismissFunction (ref), FFlagCenterInExperienceShopWindow (copy), ShopWindowLayoutModule (copy)
+	if FFlagLogFreeTrialDotAndMenuItemClickModule then
+		local TrialIndicatorShopOpenModule = require(Chrome.Integrations.InExperienceShop.trialIndicatorShopOpen)
+		
+		if not ServiceModule:isWindowOpen(ConstantsModule.IN_EXPERIENCE_SHOP_ID) and not TrialIndicatorShopOpenModule.isOutsideTrialIndicator() and ServiceModule:withinCurrentSubmenu(ConstantsModule.IN_EXPERIENCE_SHOP_ID) then
+			reportShopOpenedFromMenuRow()
+		end
+	end
 	if DismissFunction ~= nil and not ServiceModule:isWindowOpen(ConstantsModule.IN_EXPERIENCE_SHOP_ID) then
 		DismissFunction()
 	end
@@ -182,9 +246,9 @@ config.components = {
 		return CommonIconModule(if FFlagExperienceShopNewIconography then "ShoppingBasket" else "BuildingStore", nil, NewResult)
 	end,
 	Window = function()
-		-- upvalues: ReactModule (copy), ShopChromeWrapperModule (copy), NewWindowSizeSignal (copy), MAXWINDOWWIDTH (copy), MAXWINDOWHEIGHT (copy)
+		-- upvalues: ReactModule (copy), ShopChromeWrapperModule (copy), NewResult1 (copy), MAXWINDOWWIDTH (copy), MAXWINDOWHEIGHT (copy)
 		return ReactModule.createElement(ShopChromeWrapperModule, {
-			windowSize = NewWindowSizeSignal,
+			windowSize = NewResult1,
 			maxWindowWidth = MAXWINDOWWIDTH,
 			maxWindowHeight = MAXWINDOWHEIGHT
 		})

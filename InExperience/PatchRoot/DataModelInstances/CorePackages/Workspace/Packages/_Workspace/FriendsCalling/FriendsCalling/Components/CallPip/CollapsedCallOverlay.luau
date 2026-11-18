@@ -5,6 +5,7 @@ local ReactModule = require(Parent.React)
 local _ = require(FriendsCalling.Components.CallParticipant.CallParticipantCard)
 local ParticipantAvatarModule = require(FriendsCalling.Components.CallParticipant.ParticipantAvatar)
 local _ = require(FriendsCalling.Stores.GetFriendsCallingStore)
+local PassInputThroughModule = require(FriendsCalling.Utils.passInputThrough)
 local FriendsCallingParticipantStatus = Enum.FriendsCallingParticipantStatus
 local AvatarSize = FoundationModule.Enums.AvatarSize
 local IconName = FoundationModule.Enums.IconName
@@ -14,7 +15,7 @@ local Text = FoundationModule.Text
 local View = FoundationModule.View
 
 return function(p1)
-	-- upvalues: FriendsCallingParticipantStatus (copy), ReactModule (copy), View (copy), Text (copy), ParticipantAvatarModule (copy), AvatarSize (copy), IconButton (copy), IconName (copy), InputSize (copy)
+	-- upvalues: FriendsCallingParticipantStatus (copy), ReactModule (copy), View (copy), PassInputThroughModule (copy), Text (copy), ParticipantAvatarModule (copy), AvatarSize (copy), IconButton (copy), IconName (copy), InputSize (copy)
 	local Participant = p1.participant
 	local IsRinging = if Participant == nil then p1.isRinging else Participant.showStatusAnimation
 	local SelfParticipant = p1.selfParticipant
@@ -22,12 +23,13 @@ return function(p1)
 	local IsCallVolumeMatch = p1.callVolume == 0
 	
 	return ReactModule.createElement(View, {
-		tag = "col align-x-center align-y-center gap-small size-full padding-medium stroke-standard stroke-default radius-large clip bg-surface-200"
+		tag = "col align-x-center align-y-center gap-small size-full padding-medium stroke-standard stroke-default radius-large clip bg-surface-200",
+		testId = "friends-calling-pip-drag-target",
+		ref = p1.onDragInputTarget
 	}, {
 		Avatar = ReactModule.createElement(View, {
 			LayoutOrder = 1,
-			testId = "friends-calling-pip-drag-target",
-			ref = p1.onDragInputTarget,
+			ref = PassInputThroughModule,
 			Size = UDim2.fromOffset(70, 70)
 		}, {
 			Content = if IsRinging then ReactModule.createElement(Text, {

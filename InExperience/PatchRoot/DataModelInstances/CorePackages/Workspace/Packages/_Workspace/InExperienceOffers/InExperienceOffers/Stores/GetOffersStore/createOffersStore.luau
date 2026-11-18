@@ -14,7 +14,6 @@ local IsNotificationEligibleModule = require(InExperienceOffers.Utils.isNotifica
 local FeatureKeyModule = require(InExperienceOffers.Enums.FeatureKey)
 local NotificationLocationModule = require(InExperienceOffers.Enums.NotificationLocation)
 local FFlagHideOfferNotificationsWhenShopEmpty = SharedFlagsModule.FFlagHideOfferNotificationsWhenShopEmpty
-local FFlagOffersRespectExpirationModule = require(InExperienceOffers.Flags.FFlagOffersRespectExpiration)
 local FFlagOffersMergeStoreResultsModule = require(InExperienceOffers.Flags.FFlagOffersMergeStoreResults)
 local FFlagUseMockUserOffersModule = require(InExperienceOffers.Flags.FFlagUseMockUserOffers)
 local FIntOfferExpirationRefetchBufferSecondsModule = require(InExperienceOffers.Flags.FIntOfferExpirationRefetchBufferSeconds)
@@ -98,7 +97,7 @@ local _ = function(List)
 end
 
 return function()
-	-- upvalues: CreateSessionScopedSignalFunction (copy), SignalsModule (copy), FFlagHideOfferNotificationsWhenShopEmpty (copy), FFlagOffersShopScopedNotificationModule (copy), FeatureKeyModule (copy), IsNotificationEligibleModule (copy), NotificationLocationModule (copy), FFlagUseMockUserOffersModule (copy), MockGetAllUserOffersModule (copy), GetAllUserOffersModule (copy), normalizePresentationData (copy), FFlagOffersRespectExpirationModule (copy), bucketResponse (copy), mergeRequestedKeys (copy), FFlagOffersMergeStoreResultsModule (copy), OffersDebugLoggerModule (copy), FIntOfferExpirationRefetchMaxCountModule (copy), FIntOfferExpirationRefetchBufferSecondsModule (copy), FIntOfferExpirationRefetchJitterSecondsModule (copy), GetSecondsUntilAnyKeyEmptiesModule (copy), FFlagOffersPerKeyExpiryRefetchModule (copy), GetSecondsUntilNextExpirationModule (copy)
+	-- upvalues: CreateSessionScopedSignalFunction (copy), SignalsModule (copy), FFlagHideOfferNotificationsWhenShopEmpty (copy), FFlagOffersShopScopedNotificationModule (copy), FeatureKeyModule (copy), IsNotificationEligibleModule (copy), NotificationLocationModule (copy), FFlagUseMockUserOffersModule (copy), MockGetAllUserOffersModule (copy), GetAllUserOffersModule (copy), normalizePresentationData (copy), bucketResponse (copy), mergeRequestedKeys (copy), FFlagOffersMergeStoreResultsModule (copy), OffersDebugLoggerModule (copy), FIntOfferExpirationRefetchMaxCountModule (copy), FIntOfferExpirationRefetchBufferSecondsModule (copy), FIntOfferExpirationRefetchJitterSecondsModule (copy), GetSecondsUntilAnyKeyEmptiesModule (copy), FFlagOffersPerKeyExpiryRefetchModule (copy), GetSecondsUntilNextExpirationModule (copy)
 	local SessionScopedSignal, SessionScopedSignal2 = CreateSessionScopedSignalFunction(nil)
 	local SessionScopedSignal1, SessionScopedSignal2_1 = CreateSessionScopedSignalFunction(nil)
 	local SessionScopedSignal3, SessionScopedSignal2_2 = CreateSessionScopedSignalFunction(false)
@@ -121,7 +120,7 @@ return function()
 	end
 	
 	local function commitOffers(p3)
-		-- upvalues: normalizePresentationData (upval), SessionScopedSignal2 (copy), FFlagOffersRespectExpirationModule (upval), Callback (ref)
+		-- upvalues: normalizePresentationData (upval), SessionScopedSignal2 (copy), Callback (ref)
 		local t = {}
 		
 		for _, offer in p3.offers do
@@ -144,20 +143,14 @@ return function()
 			end
 		end
 		SessionScopedSignal2(t)
-		
-		if FFlagOffersRespectExpirationModule then
-			Callback(t)
-		end
+		Callback(t)
 	end
 	
 	local _ = function(p4, p5)
-		-- upvalues: bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (copy), SessionScopedSignal2 (copy), FFlagOffersRespectExpirationModule (upval), Callback (ref)
+		-- upvalues: bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (copy), SessionScopedSignal2 (copy), Callback (ref)
 		local MergeRequestedKeysResult = mergeRequestedKeys(SessionScopedSignal(false), bucketResponse(p5), p4)
 		SessionScopedSignal2(MergeRequestedKeysResult)
-		
-		if FFlagOffersRespectExpirationModule then
-			Callback(MergeRequestedKeysResult)
-		end
+		Callback(MergeRequestedKeysResult)
 	end
 	
 	local function expireShopOffers()
@@ -185,40 +178,18 @@ return function()
 	end
 	
 	local _ = function(Count, p4, p5)
-		-- upvalues: Count1 (ref), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (copy), SessionScopedSignal2 (copy), FFlagOffersRespectExpirationModule (upval), Callback (ref)
-		if Count ~= Count1 then return end
-		local MergeRequestedKeysResult = mergeRequestedKeys(SessionScopedSignal(false), bucketResponse(p5), p4)
-		SessionScopedSignal2(MergeRequestedKeysResult)
-		
-		if FFlagOffersRespectExpirationModule then
+		-- upvalues: Count1 (ref), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (copy), SessionScopedSignal2 (copy), Callback (ref)
+		if Count == Count1 then
+			local MergeRequestedKeysResult = mergeRequestedKeys(SessionScopedSignal(false), bucketResponse(p5), p4)
+			SessionScopedSignal2(MergeRequestedKeysResult)
 			Callback(MergeRequestedKeysResult)
+			
+			return
 		end
 	end
 	
 	local function fetchOffers(p4)
-		-- upvalues: FFlagOffersRespectExpirationModule (upval), v1 (ref), DelayedThread (ref), Count1 (ref), MockGetAllUserOffersModule1 (copy), FFlagOffersMergeStoreResultsModule (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (copy), SessionScopedSignal2 (copy), Callback (ref), commitOffers (copy), OffersDebugLoggerModule (upval)
-		if not FFlagOffersRespectExpirationModule then
-			MockGetAllUserOffersModule1(p4):andThen(function(Result)
-				-- upvalues: FFlagOffersMergeStoreResultsModule (upval), p4 (copy), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (upval), SessionScopedSignal2 (upval), FFlagOffersRespectExpirationModule (upval), Callback (upval), commitOffers (upval)
-				if FFlagOffersMergeStoreResultsModule then
-					local MergeRequestedKeysResult = mergeRequestedKeys(SessionScopedSignal(false), bucketResponse(Result), p4)
-					SessionScopedSignal2(MergeRequestedKeysResult)
-					
-					if FFlagOffersRespectExpirationModule then
-						Callback(MergeRequestedKeysResult)
-						
-						return
-					end
-				else
-					commitOffers(Result)
-				end
-			end):catch(function(Err)
-				-- upvalues: OffersDebugLoggerModule (upval)
-				OffersDebugLoggerModule.log("fetchOffers failed: " .. tostring(Err))
-			end)
-			
-			return
-		end
+		-- upvalues: v1 (ref), DelayedThread (ref), Count1 (ref), MockGetAllUserOffersModule1 (copy), FFlagOffersMergeStoreResultsModule (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (copy), SessionScopedSignal2 (copy), Callback (ref), commitOffers (copy), OffersDebugLoggerModule (upval)
 		v1 = p4
 		
 		if DelayedThread ~= nil then
@@ -228,19 +199,22 @@ return function()
 		Count1 += 1
 		local Count: number = Count1
 		MockGetAllUserOffersModule1(p4):andThen(function(Result)
-			-- upvalues: FFlagOffersMergeStoreResultsModule (upval), Count (copy), p4 (copy), Count1 (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (upval), SessionScopedSignal2 (upval), FFlagOffersRespectExpirationModule (upval), Callback (upval), commitOffers (upval)
+			-- upvalues: FFlagOffersMergeStoreResultsModule (upval), Count (copy), p4 (copy), Count1 (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (upval), SessionScopedSignal2 (upval), Callback (upval), commitOffers (upval)
 			if FFlagOffersMergeStoreResultsModule then
-				if Count ~= Count1 then return end
-				local MergeRequestedKeysResult = mergeRequestedKeys(SessionScopedSignal(false), bucketResponse(Result), p4)
-				SessionScopedSignal2(MergeRequestedKeysResult)
-				
-				if FFlagOffersRespectExpirationModule then
+				if Count == Count1 then
+					local MergeRequestedKeysResult = mergeRequestedKeys(SessionScopedSignal(false), bucketResponse(Result), p4)
+					SessionScopedSignal2(MergeRequestedKeysResult)
 					Callback(MergeRequestedKeysResult)
 					
 					return
 				end
-			elseif Count ~= Count1 then return end
-			commitOffers(Result)
+				return
+			elseif Count == Count1 then
+				commitOffers(Result)
+				
+				return
+			else
+			end
 		end):catch(function(Err)
 			-- upvalues: OffersDebugLoggerModule (upval), Count (copy), Count1 (upval), SessionScopedSignal (upval), Callback (upval)
 			OffersDebugLoggerModule.log("fetchOffers failed: " .. tostring(Err))
@@ -256,7 +230,7 @@ return function()
 	end
 	
 	local function armExpirationRefetch(p4, p5)
-		-- upvalues: Count (ref), FIntOfferExpirationRefetchMaxCountModule (upval), FIntOfferExpirationRefetchBufferSecondsModule (upval), FIntOfferExpirationRefetchJitterSecondsModule (upval), DelayedThread (ref), Count1 (ref), MockGetAllUserOffersModule1 (copy), FFlagOffersMergeStoreResultsModule (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (copy), SessionScopedSignal2 (copy), FFlagOffersRespectExpirationModule (upval), Callback (ref), commitOffers (copy), OffersDebugLoggerModule (upval)
+		-- upvalues: Count (ref), FIntOfferExpirationRefetchMaxCountModule (upval), FIntOfferExpirationRefetchBufferSecondsModule (upval), FIntOfferExpirationRefetchJitterSecondsModule (upval), DelayedThread (ref), Count1 (ref), MockGetAllUserOffersModule1 (copy), FFlagOffersMergeStoreResultsModule (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (copy), SessionScopedSignal2 (copy), Callback (ref), commitOffers (copy), OffersDebugLoggerModule (upval)
 		if FIntOfferExpirationRefetchMaxCountModule <= Count then return end
 		local NewFIntOfferExpirationRefetchBufferSecondsModule = p5 + FIntOfferExpirationRefetchBufferSecondsModule
 		
@@ -264,24 +238,27 @@ return function()
 			NewFIntOfferExpirationRefetchBufferSecondsModule += math.random() * FIntOfferExpirationRefetchJitterSecondsModule
 		end
 		DelayedThread = task.delay(NewFIntOfferExpirationRefetchBufferSecondsModule, function()
-			-- upvalues: DelayedThread (upval), Count (upval), Count1 (upval), MockGetAllUserOffersModule1 (upval), p4 (copy), FFlagOffersMergeStoreResultsModule (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (upval), SessionScopedSignal2 (upval), FFlagOffersRespectExpirationModule (upval), Callback (upval), commitOffers (upval), OffersDebugLoggerModule (upval)
+			-- upvalues: DelayedThread (upval), Count (upval), Count1 (upval), MockGetAllUserOffersModule1 (upval), p4 (copy), FFlagOffersMergeStoreResultsModule (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (upval), SessionScopedSignal2 (upval), Callback (upval), commitOffers (upval), OffersDebugLoggerModule (upval)
 			DelayedThread = nil
 			Count += 1
 			local Count2 = Count1
 			MockGetAllUserOffersModule1(p4):andThen(function(Result)
-				-- upvalues: FFlagOffersMergeStoreResultsModule (upval), Count2 (copy), p4 (upval), Count1 (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (upval), SessionScopedSignal2 (upval), FFlagOffersRespectExpirationModule (upval), Callback (upval), commitOffers (upval)
+				-- upvalues: FFlagOffersMergeStoreResultsModule (upval), Count2 (copy), p4 (upval), Count1 (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (upval), SessionScopedSignal2 (upval), Callback (upval), commitOffers (upval)
 				if FFlagOffersMergeStoreResultsModule then
-					if Count2 ~= Count1 then return end
-					local MergeRequestedKeysResult = mergeRequestedKeys(SessionScopedSignal(false), bucketResponse(Result), p4)
-					SessionScopedSignal2(MergeRequestedKeysResult)
-					
-					if FFlagOffersRespectExpirationModule then
+					if Count2 == Count1 then
+						local MergeRequestedKeysResult = mergeRequestedKeys(SessionScopedSignal(false), bucketResponse(Result), p4)
+						SessionScopedSignal2(MergeRequestedKeysResult)
 						Callback(MergeRequestedKeysResult)
 						
 						return
 					end
-				elseif Count2 ~= Count1 then return end
-				commitOffers(Result)
+					return
+				elseif Count2 == Count1 then
+					commitOffers(Result)
+					
+					return
+				else
+				end
 			end):catch(function(Err)
 				-- upvalues: Count2 (copy), Count1 (upval), OffersDebugLoggerModule (upval), SessionScopedSignal (upval), Callback (upval)
 				if Count2 ~= Count1 then return end
@@ -313,7 +290,7 @@ return function()
 	end
 	
 	Callback = function(List)
-		-- upvalues: FFlagOffersPerKeyExpiryRefetchModule (upval), DelayedThread (ref), GetSecondsUntilAnyKeyEmptiesModule (upval), armExpirationRefetch (copy), v1 (ref), GetSecondsUntilNextExpirationModule (upval), Count (ref), FIntOfferExpirationRefetchMaxCountModule (upval), FIntOfferExpirationRefetchBufferSecondsModule (upval), FIntOfferExpirationRefetchJitterSecondsModule (upval), Count1 (ref), MockGetAllUserOffersModule1 (copy), FFlagOffersMergeStoreResultsModule (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (copy), SessionScopedSignal2 (copy), FFlagOffersRespectExpirationModule (upval), Callback (ref), commitOffers (copy), OffersDebugLoggerModule (upval), expireShopOffers (copy)
+		-- upvalues: FFlagOffersPerKeyExpiryRefetchModule (upval), DelayedThread (ref), GetSecondsUntilAnyKeyEmptiesModule (upval), armExpirationRefetch (copy), v1 (ref), GetSecondsUntilNextExpirationModule (upval), Count (ref), FIntOfferExpirationRefetchMaxCountModule (upval), FIntOfferExpirationRefetchBufferSecondsModule (upval), FIntOfferExpirationRefetchJitterSecondsModule (upval), Count1 (ref), MockGetAllUserOffersModule1 (copy), FFlagOffersMergeStoreResultsModule (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (copy), SessionScopedSignal2 (copy), Callback (ref), commitOffers (copy), OffersDebugLoggerModule (upval), expireShopOffers (copy)
 		if FFlagOffersPerKeyExpiryRefetchModule then
 			if DelayedThread ~= nil then
 				pcall(task.cancel, DelayedThread)
@@ -346,24 +323,27 @@ return function()
 				NewSecondsUntilNextExpirationModule += math.random() * FIntOfferExpirationRefetchJitterSecondsModule
 			end
 			DelayedThread = task.delay(NewSecondsUntilNextExpirationModule, function()
-				-- upvalues: DelayedThread (upval), Count (upval), Count1 (upval), MockGetAllUserOffersModule1 (upval), v2 (copy), FFlagOffersMergeStoreResultsModule (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (upval), SessionScopedSignal2 (upval), FFlagOffersRespectExpirationModule (upval), Callback (upval), commitOffers (upval), OffersDebugLoggerModule (upval), expireShopOffers (upval)
+				-- upvalues: DelayedThread (upval), Count (upval), Count1 (upval), MockGetAllUserOffersModule1 (upval), v2 (copy), FFlagOffersMergeStoreResultsModule (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (upval), SessionScopedSignal2 (upval), Callback (upval), commitOffers (upval), OffersDebugLoggerModule (upval), expireShopOffers (upval)
 				DelayedThread = nil
 				Count += 1
 				local Count2 = Count1
 				MockGetAllUserOffersModule1(v2):andThen(function(Result)
-					-- upvalues: FFlagOffersMergeStoreResultsModule (upval), Count2 (copy), v2 (upval), Count1 (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (upval), SessionScopedSignal2 (upval), FFlagOffersRespectExpirationModule (upval), Callback (upval), commitOffers (upval)
+					-- upvalues: FFlagOffersMergeStoreResultsModule (upval), Count2 (copy), v2 (upval), Count1 (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (upval), SessionScopedSignal2 (upval), Callback (upval), commitOffers (upval)
 					if FFlagOffersMergeStoreResultsModule then
-						if Count2 ~= Count1 then return end
-						local MergeRequestedKeysResult = mergeRequestedKeys(SessionScopedSignal(false), bucketResponse(Result), v2)
-						SessionScopedSignal2(MergeRequestedKeysResult)
-						
-						if FFlagOffersRespectExpirationModule then
+						if Count2 == Count1 then
+							local MergeRequestedKeysResult = mergeRequestedKeys(SessionScopedSignal(false), bucketResponse(Result), v2)
+							SessionScopedSignal2(MergeRequestedKeysResult)
 							Callback(MergeRequestedKeysResult)
 							
 							return
 						end
-					elseif Count2 ~= Count1 then return end
-					commitOffers(Result)
+						return
+					elseif Count2 == Count1 then
+						commitOffers(Result)
+						
+						return
+					else
+					end
 				end):catch(function(Err)
 					-- upvalues: Count2 (copy), Count1 (upval), OffersDebugLoggerModule (upval), expireShopOffers (upval)
 					if Count2 == Count1 then

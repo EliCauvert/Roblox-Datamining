@@ -109,5 +109,9 @@ return {
 	reportMomentsTimeLimitShown = function(State, p1)
 		-- upvalues: RealtimeTelemetryActionListModule (copy), RealtimeEventNamesModule (copy), RealtimeTelemetryEmitterModule (copy)
 		(p1 or RealtimeTelemetryEmitterModule.emit)(RealtimeTelemetryActionListModule[RealtimeEventNamesModule.MomentsTimeLimitShown], { state = State })
+	end,
+	reportMomentsEngagementToastShown = function(Kind, p1)
+		-- upvalues: RealtimeTelemetryActionListModule (copy), RealtimeEventNamesModule (copy), RealtimeTelemetryEmitterModule (copy)
+		(p1 or RealtimeTelemetryEmitterModule.emit)(RealtimeTelemetryActionListModule[RealtimeEventNamesModule.MomentsEngagementToastShown], { kind = Kind })
 	end
 }

@@ -45,6 +45,7 @@ local FFlagSduiCollectionGridRevealRows = require(Parent.SharedFlags).FFlagSduiC
 local FFlagSduiIndividualFeedItemSpacing = require(Parent.SharedFlags).FFlagSduiIndividualFeedItemSpacing
 local FFlagLuaAppSduiSearchAutocompleteSuggestionComponent = require(Parent.SharedFlags).FFlagLuaAppSduiSearchAutocompleteSuggestionComponent
 local FFlagLuaAppHeroUnitSecondaryLabelTextModule = require(ServerDrivenUi.FFlagLuaAppHeroUnitSecondaryLabelText)
+local FFlagLuaAppSduiFullBleedHero = require(Parent.SharedFlags).FFlagLuaAppSduiFullBleedHero
 local FFlagLuaAppSduiPersonalizedRecommendationsEntryPoint = require(Parent.SharedFlags).FFlagLuaAppSduiPersonalizedRecommendationsEntryPoint
 local t = {}
 local Config = if FFlagLuaAppSduiPersonalizedRecommendationsEntryPoint then { onActivated = ParseCallbackProp } else nil
@@ -52,7 +53,7 @@ local SduiComponentDefinitionsModule = {}
 SduiComponentDefinitionsModule.__index = SduiComponentDefinitionsModule
 
 function SduiComponentDefinitionsModule.new()
-	-- upvalues: ParseVector2Prop (copy), GetEngineEnumParserFunction (copy), ParseColor3Prop (copy), ParseNumberProp (copy), ParseIntegerProp (copy), ParseUDim2Prop (copy), CryoModule (copy), ParseBooleanProp (copy), ParseStringProp (copy), SduiComponentType (copy), Parent (copy), ParseCallbackProp (copy), ParseUiComponentProp (copy), ParseTypographyTokenProp (copy), ParseColorTokenProp (copy), GetLuaTableEnumParserFunction (copy), FoundationModule (copy), ParseImageStringProp (copy), TModule (copy), ParseIconProp (copy), ParseUDimProp (copy), ServerDrivenUi (copy), CollectionItemSize (copy), ItemHeightModeModule (copy), FFlagLuaAppRespectClipAncestorImpressions (copy), GetArrayMetatableParserFunction (copy), ParseLazyUiComponentProp (copy), FFlagSduiCollectionCarouselPlaceholderItem (copy), FFlagSduiOptionSelectorCollection (copy), FFlagSduiCollectionGridRevealRows (copy), ParseFocusNavActionsProp (copy), ReactModule (copy), ParseGradientProp (copy), FFlagLuaAppSduiPersonalizedRecommendationsEntryPoint (copy), FFlagLuaAppSduiSearchAutocompleteSuggestionComponent (copy), ParseImageSetOrImageProp (copy), FFlagSduiTileDisableLegacyHover (copy), FFlagLuaAppSduiGameTileFeedback (copy), FFlagSduiGameTileDirectAction (copy), FFlagSduiEnableHeroUnitBottomRow (copy), FFlagLuaAppHeroUnitSecondaryLabelTextModule (copy), FFlagSduiChipAccessoryProps (copy), FFlagSduiExperienceDetailsSocialProof (copy), FFlagSduiIndividualFeedItemSpacing (copy), Config (copy), FFlagLuaAppDismissUnlockUpsell (copy), SduiComponentDefinitionsModule (copy)
+	-- upvalues: ParseVector2Prop (copy), GetEngineEnumParserFunction (copy), ParseColor3Prop (copy), ParseNumberProp (copy), ParseIntegerProp (copy), ParseUDim2Prop (copy), CryoModule (copy), ParseBooleanProp (copy), ParseStringProp (copy), SduiComponentType (copy), Parent (copy), ParseCallbackProp (copy), ParseUiComponentProp (copy), ParseTypographyTokenProp (copy), ParseColorTokenProp (copy), GetLuaTableEnumParserFunction (copy), FoundationModule (copy), ParseImageStringProp (copy), TModule (copy), ParseIconProp (copy), ParseUDimProp (copy), ServerDrivenUi (copy), CollectionItemSize (copy), ItemHeightModeModule (copy), FFlagLuaAppRespectClipAncestorImpressions (copy), GetArrayMetatableParserFunction (copy), ParseLazyUiComponentProp (copy), FFlagSduiCollectionCarouselPlaceholderItem (copy), FFlagSduiOptionSelectorCollection (copy), FFlagSduiCollectionGridRevealRows (copy), ParseFocusNavActionsProp (copy), ReactModule (copy), FFlagLuaAppSduiFullBleedHero (copy), ParseGradientProp (copy), FFlagLuaAppSduiPersonalizedRecommendationsEntryPoint (copy), FFlagLuaAppSduiSearchAutocompleteSuggestionComponent (copy), ParseImageSetOrImageProp (copy), FFlagSduiTileDisableLegacyHover (copy), FFlagLuaAppSduiGameTileFeedback (copy), FFlagSduiGameTileDirectAction (copy), FFlagSduiEnableHeroUnitBottomRow (copy), FFlagLuaAppHeroUnitSecondaryLabelTextModule (copy), FFlagSduiChipAccessoryProps (copy), FFlagSduiExperienceDetailsSocialProof (copy), FFlagSduiIndividualFeedItemSpacing (copy), Config (copy), FFlagLuaAppDismissUnlockUpsell (copy), SduiComponentDefinitionsModule (copy)
 	local IconOverrides = {
 		anchorPoint = ParseVector2Prop,
 		automaticSize = GetEngineEnumParserFunction(Enum.AutomaticSize),
@@ -238,6 +239,9 @@ function SduiComponentDefinitionsModule.new()
 				propInterface = { focusNavActions = TModule.table }
 			},
 			[SduiComponentType.Fragment] = { component = ReactModule.Fragment },
+			[SduiComponentType.FullBleedHero] = if FFlagLuaAppSduiFullBleedHero then {
+				component = require(ServerDrivenUi.Content.SduiFullBleedHero)
+			} else nil,
 			[SduiComponentType.GameTileActiveFriendsFooter] = {
 				component = require(ServerDrivenUi.Content.SduiGameTileActiveFriendsFooter),
 				propParsers = {

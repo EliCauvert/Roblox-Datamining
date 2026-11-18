@@ -1,13 +1,15 @@
 ﻿local HttpService = game:GetService("HttpService")
 local TelemetryService = game:GetService("TelemetryService")
-local FFlagBuildExperienceChatOpenIdModule = require(script:FindFirstAncestor("BuildExperience").Flags.FFlagBuildExperienceChatOpenId)
+local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local FFlagBuildExperienceChatOpenIdModule = require(BuildExperience.Flags.FFlagBuildExperienceChatOpenId)
+local FFlagBuildExperienceTurnWorkTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceTurnWorkTelemetry)
 local GetBuildExperienceEventFieldsModule = require(script.Parent.getBuildExperienceEventFields)
 local config = {
 	eventName = "buildExperienceEvent",
-	description = "Client events for Build tab interactions, chat opens, prompt chips, Library browsing and contextual prompt submissions, prompt send lifecycle (start, stall, stop, failure), playtesting, private invites, private playtest preview taps, monetization, ad-upsell impressions and clicks, and Analytics page goal card and locked-action impressions and clicks.",
 	backends = { "Points", "EventIngest" },
 	throttlingPercentage = game:DefineFastInt("BuildExperienceEventThrottleHundredthsPercent", 0),
-	lastUpdated = if FFlagBuildExperienceChatOpenIdModule then { 2026, 11, 11 } else { 2026, 11, 2 }
+	lastUpdated = if FFlagBuildExperienceTurnWorkTelemetryModule then { 2026, 11, 16 } elseif FFlagBuildExperienceChatOpenIdModule then { 2026, 11, 11 } else { 2026, 11, 2 },
+	description = if FFlagBuildExperienceTurnWorkTelemetryModule then "Client events for Build tab interactions, chat opens, prompt chips, Library browsing and contextual prompt submissions, prompt send lifecycle (start, stall, stop, failure), taps on a chat turn's step list and how long the turn ran in view and in the background, playtesting, private invites, private playtest preview taps, monetization, ad-upsell impressions and clicks, and Analytics page goal card and locked-action impressions and clicks." else "Client events for Build tab interactions, chat opens, prompt chips, Library browsing and contextual prompt submissions, prompt send lifecycle (start, stall, stop, failure), playtesting, private invites, private playtest preview taps, monetization, ad-upsell impressions and clicks, and Analytics page goal card and locked-action impressions and clicks."
 }
 
 return function(EventType, p1, Input)

@@ -7,14 +7,14 @@ local ChromeModule = require(CorePackages.Workspace.Packages.Chrome)
 local InExperienceShopModule = require(CorePackages.Workspace.Packages.InExperienceShop)
 local InExperienceSideSheetModule = require(CorePackages.Workspace.Packages.InExperienceSideSheet)
 local IsSideSheetEnabledModule = require(CorePackages.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
-local FFlagEnableSideSheetRobuxWidgetModule = require(Chrome.Flags.FFlagEnableSideSheetRobuxWidget)
+local FFlagLogFreeTrialDotAndMenuItemClickModule = require(Chrome.Flags.FFlagLogFreeTrialDotAndMenuItemClick)
 local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
 local FFlagHideHeaderForBuyRobuxInExperienceShop = SharedFlagsModule.FFlagHideHeaderForBuyRobuxInExperienceShop
 local FFlagKeepSideSheetOpenBesideMenu = SharedFlagsModule.FFlagKeepSideSheetOpenBesideMenu
 local SideSheetOpenBehavior = ChromeModule.Enums.SideSheetOpenBehavior
 
 local function openShop()
-	-- upvalues: ServiceModule (copy), ConstantsModule (copy), FFlagHideHeaderForBuyRobuxInExperienceShop (copy), InExperienceShopModule (copy)
+	-- upvalues: ServiceModule (copy), ConstantsModule (copy), FFlagHideHeaderForBuyRobuxInExperienceShop (copy), InExperienceShopModule (copy), FFlagLogFreeTrialDotAndMenuItemClickModule (copy), Chrome (copy)
 	if ServiceModule:isIntegrationValid(ConstantsModule.IN_EXPERIENCE_SHOP_ID) or FFlagHideHeaderForBuyRobuxInExperienceShop then
 		if FFlagHideHeaderForBuyRobuxInExperienceShop then
 			InExperienceShopModule.setOpenedFromBuyRobux(true)
@@ -22,7 +22,14 @@ local function openShop()
 		if not ServiceModule:isWindowOpen(ConstantsModule.IN_EXPERIENCE_SHOP_ID) then
 			InExperienceShopModule.requestOpenToRobuxTab()
 		end
+		if FFlagLogFreeTrialDotAndMenuItemClickModule then
+			require(Chrome.Integrations.InExperienceShop.trialIndicatorShopOpen).beginOutsideTrialIndicator()
+		end
 		ServiceModule:activate(ConstantsModule.IN_EXPERIENCE_SHOP_ID)
+		
+		if FFlagLogFreeTrialDotAndMenuItemClickModule then
+			require(Chrome.Integrations.InExperienceShop.trialIndicatorShopOpen).finishOutsideTrialIndicator()
+		end
 	end
 end
 
@@ -36,7 +43,7 @@ local function RobuxWidgetIntegration(p1)
 	})
 end
 
-return (if FFlagEnableSideSheetRobuxWidgetModule and IsSideSheetEnabledModule then ServiceModule:register({
+return (if require(Chrome.Flags.FFlagEnableSideSheetRobuxWidget) and IsSideSheetEnabledModule then ServiceModule:register({
 	id = "RobuxWidget",
 	label = "Feature.Catalog.Label.BuyRobux",
 	activated = function() end,

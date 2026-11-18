@@ -3269,14 +3269,17 @@ Feature.Chat.Label.OneToOne.ThemRepliedToYou,Heeft op je gereageerd
 Feature.Chat.Label.OneToOne.YouRepliedToThem,Je hebt gereageerd
 Feature.Chat.Label.Pending,
 Feature.Chat.Label.PrivacySettings,Privacy-instellingen
+Feature.Chat.Label.Reactions,Reacties
 Feature.Chat.Label.ReplyChatInputPlaceholder,Reageren op {DISPLAY_NAME}
 Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,Reageer op jezelf
 Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} zei...
 Feature.Chat.Label.ReplyingToYourself,Je zei...
 Feature.Chat.Label.SearchFriends,Vrienden zoeken
 Feature.Chat.Label.SearchWord,
+Feature.Chat.Label.SelectToRemove,Selecteren om te verwijderen
 Feature.Chat.Label.SnoozePartyNotifications,Groepsmeldingen in de ervaring dempen voor:
 Feature.Chat.Label.SwipeToReplyTooltip,Veeg om te antwoorden
+Feature.Chat.Label.TapToRemove,Tik om te verwijderen
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} d
 Feature.Chat.Label.TimestampHoursAbbreviatedPlural,{num_hours} u
 Feature.Chat.Label.TimestampMinutesAbbreviatedPlural,{num_minutes} m
@@ -4058,7 +4061,7 @@ Feature.Moments.Label.PostFeedbackPostingTitle,Bezig met moment posten...
 Feature.Moments.Label.PostRemovedBody,"Het moment dat je hebt gepost, is in strijd met onze Communityrichtlijnen."
 Feature.Moments.Label.PostedOnDate,Gepost op {date}
 Feature.Moments.Label.PublishingRodeoBody,Dit zou niet lang moeten duren.
-Feature.Moments.Label.Reactions,Reacties
+Feature.Moments.Label.Reactions,
 Feature.Moments.Label.ReportReason.BreaksRules,Deze post overtreedt de regels
 Feature.Moments.Label.ReportReason.IntellectualProperty,Deze post maakt inbreuk op mijn intellectuele-eigendomsrechten
 Feature.Moments.Label.ReportSubmittedBody,Bedankt voor je feedback.
@@ -4217,6 +4220,7 @@ Feature.Parents.Message.TooManyAttempts,
 Feature.Parents.Title.EnterParentEmailV2,Voer het e-mailadres van je ouder in
 Feature.Parents.Title.SomethingWentWrong,
 Feature.PlayerSearchResults.Action.AddFriend,
+Feature.PlayerSearchResults.Heading.SearchResults,Zoekresultaten
 Feature.PlayerSearchResults.Label.FromSearch,Van zoekopdrachten
 Feature.PlayerSearchResults.Label.NewUsername,Nieuwe gebruikersnaam
 Feature.PlayerSearchResults.Label.Previously,Eerder
@@ -4607,8 +4611,8 @@ Feature.SettingsHub.Label.InviteSearchNoResults,
 Feature.SettingsHub.Label.Invited,Uitgenodigd
 Feature.SettingsHub.Label.LeaveButton,
 Feature.SettingsHub.Label.LoadingFriendsListFailed,
-Feature.SettingsHub.Label.LogoutButton,Uitloggen
-Feature.SettingsHub.Label.LogoutConfirmation,Weet je zeker dat je wilt uitloggen?
+Feature.SettingsHub.Label.LogoutButton,Afmelden
+Feature.SettingsHub.Label.LogoutConfirmation,Weet je zeker dat je je wilt afmelden?
 Feature.SettingsHub.Label.MethodOfAbuse,Type misbruik?
 Feature.SettingsHub.Label.Moderated,
 Feature.SettingsHub.Label.ModeratedInviteError,De uitnodiging voor de ervaring is gemodereerd en niet verzonden.

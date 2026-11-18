@@ -21,6 +21,7 @@ local FFlagShowRequestsInCarouselForAllUsers = require(Parent.SharedFlags).FFlag
 local FFlagSocialCarouselBuildPresence = require(Parent.SharedFlags).FFlagSocialCarouselBuildPresence
 local FFlagSocialCarouselXSmallTileTextModule = require(SocialCarousel.Flags.FFlagSocialCarouselXSmallTileText)
 local FFlagSocialCarouselInGamePlayIcon = require(Parent.SharedFlags).FFlagSocialCarouselInGamePlayIcon
+local SocialCarouselPlayIconSmallGlyph = game:DefineFastFlag("SocialCarouselPlayIconSmallGlyph", false)
 local UseXSmallTileTypographyModule = require(SocialCarousel.Hooks.useXSmallTileTypography)
 local MarqueeScrollContext = require(SocialCarousel.Stores.MarqueeSession.MarqueeScrollContext).MarqueeScrollContext
 local MarqueeTextModule = if FFlagSocialCarouselInGameTitleMarquee then require(SocialCarousel.Components.MarqueeText.MarqueeText) else nil
@@ -107,7 +108,7 @@ local function UserTileMarqueeListener(p1)
 end
 
 return function(p2)
-	-- upvalues: UseTokensFunction (copy), FFlagSocialCarouselXSmallTileTextModule (copy), UseXSmallTileTypographyModule (copy), FFlagSocialCarouselInGamePlayIcon (copy), ReactModule (copy), FoundationModule (copy), ConvertToFoundationPresenceEnumFunction (copy), FFlagSocialCarouselInGameTitleMarquee (copy), MarqueeScrollContext (copy), MarqueePlayStatus (copy), PresenceTypes (copy), MarqueeTextModule (ref), View (copy), UserTileMarqueeListener (copy), UserTile (copy), LayoutMode (copy), FFlagSocialCarouselBuildPresence (copy), FFlagShowRequestsInCarouselForAllUsers (copy), FFlagFriendsCarouselProfileFrameEnabledModule (copy), FFlagSocialCarouselShowPlusBadgeModule (copy), IconButton (copy), ButtonVariant (copy), InputSize (copy)
+	-- upvalues: UseTokensFunction (copy), FFlagSocialCarouselXSmallTileTextModule (copy), UseXSmallTileTypographyModule (copy), FFlagSocialCarouselInGamePlayIcon (copy), ReactModule (copy), FoundationModule (copy), ConvertToFoundationPresenceEnumFunction (copy), FFlagSocialCarouselInGameTitleMarquee (copy), MarqueeScrollContext (copy), MarqueePlayStatus (copy), PresenceTypes (copy), MarqueeTextModule (ref), View (copy), UserTileMarqueeListener (copy), UserTile (copy), LayoutMode (copy), FFlagSocialCarouselBuildPresence (copy), FFlagShowRequestsInCarouselForAllUsers (copy), FFlagFriendsCarouselProfileFrameEnabledModule (copy), FFlagSocialCarouselShowPlusBadgeModule (copy), IconButton (copy), SocialCarouselPlayIconSmallGlyph (copy), ButtonVariant (copy), InputSize (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseXSmallTileTypographyModuleResult = if FFlagSocialCarouselXSmallTileTextModule then UseXSmallTileTypographyModule() else nil
 	local UseRefResult = if FFlagSocialCarouselInGamePlayIcon then ReactModule.useRef(nil) else nil
@@ -215,9 +216,9 @@ return function(p2)
 				Position = UDim2.new(0.5, 0, 1, -UseTokensResult.Gap.Small)
 			}, {
 				PlayIcon = ReactModule.createElement(IconButton, {
-					icon = "play-large",
 					isCircular = true,
 					Selectable = false,
+					icon = if SocialCarouselPlayIconSmallGlyph then "play-small" else "play-large",
 					variant = ButtonVariant.Standard,
 					size = InputSize.XSmall,
 					onActivated = p2.onPlayIconActivated or p2.onActivated,

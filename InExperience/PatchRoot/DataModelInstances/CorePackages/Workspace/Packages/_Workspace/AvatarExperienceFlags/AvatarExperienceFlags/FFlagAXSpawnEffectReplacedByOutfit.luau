@@ -1,0 +1,3 @@
+﻿local FFlagAXSpawnEffectSaveRoundTripModule = require(script.Parent.FFlagAXSpawnEffectSaveRoundTrip)
+
+return game:DefineFastFlag("AXSpawnEffectReplacedByOutfit", false) and FFlagAXSpawnEffectSaveRoundTripModule

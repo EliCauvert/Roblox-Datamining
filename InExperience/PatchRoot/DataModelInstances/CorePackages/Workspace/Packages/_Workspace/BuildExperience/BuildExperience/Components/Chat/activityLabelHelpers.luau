@@ -6,6 +6,7 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local _ = require(BuildExperience.Chat.chatTypes)
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local FFlagBuildExperienceManageMonetizationTool = require(Parent.SharedFlags).FFlagBuildExperienceManageMonetizationTool
+local FFlagBuildExperienceStepListModule = require(BuildExperience.Flags.FFlagBuildExperienceStepList)
 local FFlagBuildExperienceToolDisplaySummaryModule = require(BuildExperience.Flags.FFlagBuildExperienceToolDisplaySummary)
 
 local function constantSource(): number
@@ -26,13 +27,15 @@ return {
 			return Callback
 		end, { Callback }))))
 	end,
-	localizeActivityLabel = function(p1, p2, p3, p4, p5)
-		-- upvalues: FFlagBuildExperienceToolDisplaySummaryModule (copy), LocalizationStringsModule (copy), FFlagBuildExperienceManageMonetizationTool (copy)
+	localizeActivityLabel = function(p1, p2, p3, p4, p5, Callback)
+		-- upvalues: FFlagBuildExperienceStepListModule (copy), FFlagBuildExperienceToolDisplaySummaryModule (copy), LocalizationStringsModule (copy), FFlagBuildExperienceManageMonetizationTool (copy)
 		local v1 = p3[p1]
 		
 		if v1 ~= nil then
 			return v1
 		end
+		local HasCallback: boolean = FFlagBuildExperienceStepListModule and Callback ~= nil
+		
 		if p2 == nil or p2.kind ~= "tool_call" then
 			return p1
 		end
@@ -40,13 +43,14 @@ return {
 			return p2.displaySummary
 		end
 		local Title = if typeof(p2.title) == "string" and p2.title ~= "" then p2.title else LocalizationStringsModule.CHAT_TOOL
-		local ChatToolActivityLocalizationKey = LocalizationStringsModule.getChatToolActivityLocalizationKey(p2.title, p2.status)
+		local GetChatToolActivityLocalizationKeyFunction = LocalizationStringsModule.getChatToolActivityLocalizationKey
+		local CallbackResult = if HasCallback and Callback ~= nil and p2.status ~= "failed" then Callback(p2.title) else GetChatToolActivityLocalizationKeyFunction(p2.title, p2.status)
 		
-		if ChatToolActivityLocalizationKey ~= nil then
+		if CallbackResult ~= nil then
 			if not FFlagBuildExperienceManageMonetizationTool then
-				return p5:Format(ChatToolActivityLocalizationKey)
+				return p5:Format(CallbackResult)
 			end
-			local Success, Result = pcall(p5.Format, p5, ChatToolActivityLocalizationKey)
+			local Success, Result = pcall(p5.Format, p5, CallbackResult)
 			
 			if Success then
 				return Result
@@ -54,7 +58,7 @@ return {
 		end
 		local Title1 = if Title == LocalizationStringsModule.CHAT_TOOL then p4 else Title
 		
-		return if p2.status == "completed" then p5:Format(LocalizationStringsModule.CHAT_TOOL_FINISHED, { TITLE = Title1 }) elseif p2.status == "failed" then p5:Format(LocalizationStringsModule.CHAT_TOOL_FAILED, { TITLE = Title1 }) else p5:Format(LocalizationStringsModule.CHAT_TOOL_RUNNING, { title = Title1 })
+		return if p2.status == "completed" and not HasCallback then p5:Format(LocalizationStringsModule.CHAT_TOOL_FINISHED, { TITLE = Title1 }) elseif p2.status == "failed" then p5:Format(LocalizationStringsModule.CHAT_TOOL_FAILED, { TITLE = Title1 }) else p5:Format(LocalizationStringsModule.CHAT_TOOL_RUNNING, { title = Title1 })
 	end,
 	useStallState = function(Segment, Label, ActivityCount)
 		-- upvalues: ReactModule (copy)

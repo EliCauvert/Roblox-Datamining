@@ -2451,12 +2451,15 @@ Feature.Build.Label.ToolAssetSearchRunning,جارٍ البحث في مكتبة �
 Feature.Build.Label.ToolClientDMDone,تم البحث في DataModel للعميل
 Feature.Build.Label.ToolClientDMFailed,تعذَّر البحث في DataModel للعميل
 Feature.Build.Label.ToolClientDMRunning,جارٍ البحث في DataModel للعميل
+Feature.Build.Label.ToolCodeRunning,جارٍ تشغيل التعليمات البرمجية
 Feature.Build.Label.ToolCompileDone,تم تجميع الكود
 Feature.Build.Label.ToolCompileFailed,تعذَّر تجميع الكود
 Feature.Build.Label.ToolCompileRunning,جارٍ تجميع الكود
+Feature.Build.Label.ToolDeveloperProductRunning,جارٍ العمل على منتج المطوّر
 Feature.Build.Label.ToolGameInfoDone,تم تحديث معلومات اللعبة
 Feature.Build.Label.ToolGameInfoFailed,تعذَّر تحديث معلومات اللعبة
 Feature.Build.Label.ToolGameInfoRunning,جارٍ تحديث معلومات اللعبة
+Feature.Build.Label.ToolGamePassRunning,جارٍ العمل على تذكرة اللعبة
 Feature.Build.Label.ToolGameSaveDone,تم حفظ اللعبة
 Feature.Build.Label.ToolGameSaveFailed,تعذَّر حفظ اللعبة
 Feature.Build.Label.ToolGameSaveRunning,جارٍ حفظ اللعبة
@@ -2475,6 +2478,7 @@ Feature.Build.Label.ToolLuauRunning,جارٍ تنفيذ Luau
 Feature.Build.Label.ToolModelDone,تم إنشاء النموذج ثلاثي الأبعاد
 Feature.Build.Label.ToolModelFailed,تعذَّر إنشاء النموذج ثلاثي الأبعاد
 Feature.Build.Label.ToolModelRunning,جارٍ إنشاء النموذج ثلاثي الأبعاد
+Feature.Build.Label.ToolMonetizationRunning,جارٍ العمل على تحقيق الربح من لعبتك
 Feature.Build.Label.ToolPlanPresentDone,تم تقديم الخطة
 Feature.Build.Label.ToolPlanPresentFailed,تعذَّر تقديم الخطة
 Feature.Build.Label.ToolPlanPresentRunning,جارٍ تقديم الخطة
@@ -2502,6 +2506,7 @@ Feature.Build.Label.ToolSkillLoadRunning,جارٍ تحميل المهارة
 Feature.Build.Label.ToolSkillsDone,تم إدراج المهارات المتاحة
 Feature.Build.Label.ToolSkillsFailed,تعذَّر إدراج المهارات المتاحة
 Feature.Build.Label.ToolSkillsRunning,جارٍ إدراج المهارات المتاحة
+Feature.Build.Label.ToolSubscriptionRunning,جارٍ العمل على اشتراكك
 Feature.Build.Label.ToolTasksPlanDone,تم التخطيط للمهام
 Feature.Build.Label.ToolTasksPlanFailed,تعذَّر التخطيط للمهام
 Feature.Build.Label.ToolTasksPlanRunning,جارٍ التخطيط لمهامك
@@ -3289,6 +3294,19 @@ Feature.Chat.Text.NoFriends,لم تضف أي أصدقاء بعد. للبدء، �
 Feature.Chat.Title.FriendsChat,دردشة الأصدقاء
 Feature.Chat.Title.NewChat,دردشة جديدة
 Feature.Chat.Toast.Error.InvalidUserSelected,لا يمكن إضافة شخص واحد أو أكثر من الأشخاص المُدرجين ضمن هذه القائمة
+Feature.CloudClient.Description.GalleryUnavailableCloudPlay,انضم مجددًا بدون Cloud Play لاستخدام معرضك.
+Feature.CloudClient.Description.GalleryUnavailableRobloxReality,انضم مجددًا بدون Restyle لاستخدام معرضك.
+Feature.CloudClient.Description.RobloxRealityPreview,Restyle نسخة تجريبية مبكرة، وقد يختلف شكل اللعبة عن الأصل.
+Feature.CloudClient.Heading.GalleryUnavailableCloudPlay,المعرض غير متاح في Cloud Play حتى الآن.
+Feature.CloudClient.Heading.GalleryUnavailableRobloxReality,المعرض غير متاح مع Restyle حتى الآن.
+Feature.CloudClient.Label.CaptureUnavailableCloudPlay,الالتقاط غير متاح في Cloud Play حتى الآن.
+Feature.CloudClient.Label.CaptureUnavailableRobloxReality,الالتقاط غير متاح مع Restyle حتى الآن.
+Feature.CloudClient.Label.CloudPlayJoinFailed,ميزة Cloud Play لا تعمل. أنت تلعب الآن بالطريقة المعتادة.
+Feature.CloudClient.Label.RobloxReality,Restyle
+Feature.CloudClient.Label.RobloxRealityEndingSoon,ستنتهي Restyle خلال 1 دقيقة، وستغادر اللعبة.
+Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,المنظور الذاتي غير متاح في Cloud Play حتى الآن.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,المنظور الذاتي غير متاح مع Restyle حتى الآن.
+Feature.CloudClient.Label.TimeLeft,الوقت المتبقي
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,السماح لأصدقائك بالبحث عنك
 Feature.Contacts.Action.Invite,دعوة

@@ -8,9 +8,12 @@ local ResponsiveModule = require(Parent.Responsive)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseIsTvRemoteDeviceFunction = require(Parent.RoactUtils).Hooks.useIsTvRemoteDevice
+local FFlagSplitPaneMicroGamepadPointerControls = require(Parent.SharedFlags).FFlagSplitPaneMicroGamepadPointerControls
 local LocalUserIdStore = require(Parent.LocalUserIdStore).LocalUserIdStore
 local SplitPaneEducationalTourStepsModule = require(script.Parent.SplitPaneEducationalTourSteps)
 local GetSplitPaneEducationalTourPresentationModule = require(script.Parent.getSplitPaneEducationalTourPresentation)
+local GetSplitPaneEducationalTourInputLayoutModule = require(script.Parent.getSplitPaneEducationalTourInputLayout)
 local UseTrackedRectModule = require(script.Parent.useTrackedRect)
 local GetSplitPaneEducationalTourTooltipModelModule = require(script.Parent.getSplitPaneEducationalTourTooltipModel)
 local UseSplitPaneEducationalTourLifecycleModule = require(script.Parent.useSplitPaneEducationalTourLifecycle)
@@ -57,7 +60,7 @@ local function _(Current)
 end
 
 local function SplitPaneEducationalTourBody(p1)
-	-- upvalues: SupportPaneMode (copy), SplitPaneStoreModule (copy), UseSignalStateFunction (copy), ReactModule (copy), UseSelectorFunction (copy), selectStatusBarHeight (copy), UseTrackedRectModule (copy), UseOverlayFunction (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), UseScaledValueFunction (copy), Flags (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), UseDefaultFocusBehaviorFunction (copy), ReactFocusNavigationModule (copy), UsePreferredInputFunction (copy), Input (copy), UseFocusOnMountFunction (copy), IsSplitPaneEducationalTourGuiObjectVisibleModule (copy), GetSplitPaneEducationalTourPresentationModule (copy), UseSplitPaneEducationalTourLifecycleModule (copy), CountSplitPaneEducationalTourStepsModule (copy), IsSmallestAbove (copy), Smallest (copy), FFlagSplitPaneEducationalTourTelemetryModule (copy), SplitPaneEducationalTourTelemetryModule (copy), GuiService (copy), SplitPaneEducationalTourStepsModule (copy), GetSplitPaneEducationalTourTooltipModelModule (copy), SplitPaneEducationalTourViewModule (copy)
+	-- upvalues: SupportPaneMode (copy), SplitPaneStoreModule (copy), UseSignalStateFunction (copy), ReactModule (copy), UseSelectorFunction (copy), selectStatusBarHeight (copy), UseTrackedRectModule (copy), UseOverlayFunction (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), UseScaledValueFunction (copy), Flags (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), UseDefaultFocusBehaviorFunction (copy), ReactFocusNavigationModule (copy), UsePreferredInputFunction (copy), Input (copy), FFlagSplitPaneMicroGamepadPointerControls (copy), UseIsTvRemoteDeviceFunction (copy), GetSplitPaneEducationalTourInputLayoutModule (copy), UseFocusOnMountFunction (copy), IsSplitPaneEducationalTourGuiObjectVisibleModule (copy), GetSplitPaneEducationalTourPresentationModule (copy), UseSplitPaneEducationalTourLifecycleModule (copy), CountSplitPaneEducationalTourStepsModule (copy), IsSmallestAbove (copy), Smallest (copy), FFlagSplitPaneEducationalTourTelemetryModule (copy), SplitPaneEducationalTourTelemetryModule (copy), GuiService (copy), SplitPaneEducationalTourStepsModule (copy), GetSplitPaneEducationalTourTooltipModelModule (copy), SplitPaneEducationalTourViewModule (copy)
 	local SupportPaneRef = p1.supportPaneRef
 	local SupportPaneMode1 = p1.supportPaneMode
 	local IsSupportPaneModeMatch = SupportPaneMode1 == SupportPaneMode.Collapsed
@@ -139,7 +142,7 @@ local function SplitPaneEducationalTourBody(p1)
 	end, { UseDefaultFocusBehaviorResult2 })
 	local UseFocusGuiObjectResult = ReactFocusNavigationModule.useFocusGuiObject()
 	local UsePreferredInputResult = UsePreferredInputFunction()
-	local IsUsePreferredInputResultMatch = UsePreferredInputResult == Input.Directional
+	local SplitPaneEducationalTourInputLayoutModule = GetSplitPaneEducationalTourInputLayoutModule(UsePreferredInputResult == Input.Directional, if FFlagSplitPaneMicroGamepadPointerControls then UseIsTvRemoteDeviceFunction() else false, StepIndex)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseStateResult7, UseStateResult2_6 = ReactModule.useState(nil)
 	local UseStateResult8, UseStateResult2_7 = ReactModule.useState(false)
@@ -202,7 +205,7 @@ local function SplitPaneEducationalTourBody(p1)
 		collapsedSpotlightPadding = 4,
 		stepIndex = StepIndex,
 		isSupportPaneCollapsed = IsSupportPaneModeMatch,
-		isDirectionalInput = IsUsePreferredInputResultMatch,
+		isDirectionalInput = SplitPaneEducationalTourInputLayoutModule.isGamepadPlacement,
 		collapsedExpandButtonRect = UseSignalStateResult1,
 		supportPaneRect = UseTrackedRectModuleResult,
 		anchors = {
@@ -284,7 +287,8 @@ local function SplitPaneEducationalTourBody(p1)
 		totalSteps = CountSplitPaneEducationalTourStepsModule,
 		step = SplitPaneEducationalTourStepsModuleEntry,
 		isCollapsedStepOne = SplitPaneEducationalTourPresentationModule.isCollapsedStepOne,
-		isDirectionalInput = IsUsePreferredInputResultMatch,
+		isDirectionalInput = SplitPaneEducationalTourInputLayoutModule.isGamepadPlacement,
+		isGamepadVideo = SplitPaneEducationalTourInputLayoutModule.isGamepadVideo,
 		localized = UseLocalizationResult
 	}) else nil
 	local UseStateResult10, UseStateResult2_9 = ReactModule.useState(false)

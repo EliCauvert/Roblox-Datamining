@@ -12,6 +12,7 @@ local _ = require(IAPExperience.ProductPurchase.PricingTypes)
 local _ = require(IAPExperience.Enums.VirtualItemBadgeType)
 local FFlagLuaAppsEnablePromptVIPServerPurchase = require(Parent.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
 local FFlagPurchasePromptVLOPUpsellSettingsEntryPointModule = require(IAPExperience.Flags.FFlagPurchasePromptVLOPUpsellSettingsEntryPoint)
+local FFlagPurchasePromptVLOPAppUpsellSettingsEntryPointModule = require(IAPExperience.Flags.FFlagPurchasePromptVLOPAppUpsellSettingsEntryPoint)
 
 local function _(p1): boolean
 	if p1 then
@@ -38,7 +39,7 @@ local function withManageRecommendationsMenu(Element, ManageRecommendationsMenu,
 end
 
 return function(p1)
-	-- upvalues: MultiItemPriceShowsDiscountAccordionModule (copy), UnifiedPurchaseModalTypeEnumModule (copy), ReactModule (copy), View (copy), UnifiedProductDetailsModule (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), DiscountSummaryModule (copy), FFlagPurchasePromptVLOPUpsellSettingsEntryPointModule (copy), withManageRecommendationsMenu (copy), PriceSummaryV2Module (copy)
+	-- upvalues: MultiItemPriceShowsDiscountAccordionModule (copy), UnifiedPurchaseModalTypeEnumModule (copy), ReactModule (copy), View (copy), UnifiedProductDetailsModule (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), DiscountSummaryModule (copy), FFlagPurchasePromptVLOPUpsellSettingsEntryPointModule (copy), FFlagPurchasePromptVLOPAppUpsellSettingsEntryPointModule (copy), withManageRecommendationsMenu (copy), PriceSummaryV2Module (copy)
 	local ItemPrice = p1.product and p1.product.itemPrice
 	local v1 = nil
 	
@@ -84,7 +85,7 @@ return function(p1)
 			tag = "col align-x-center align-y-top gap-medium size-full-0 auto-y",
 			Size = if MultiItemPriceShowsDiscountAccordionModuleResult then _UDim2 else nil
 		}, {
-			Details = if FFlagPurchasePromptVLOPUpsellSettingsEntryPointModule then withManageRecommendationsMenu(Element1, p1.manageRecommendationsMenu, 1) else Element1,
+			Details = if FFlagPurchasePromptVLOPUpsellSettingsEntryPointModule or FFlagPurchasePromptVLOPAppUpsellSettingsEntryPointModule then withManageRecommendationsMenu(Element1, p1.manageRecommendationsMenu, 1) else Element1,
 			DiscountSummary = Element
 		})
 	elseif MultiItemPriceShowsDiscountAccordionModule(ItemPrice) then
@@ -119,7 +120,7 @@ return function(p1)
 			})
 		})
 		
-		return if FFlagPurchasePromptVLOPUpsellSettingsEntryPointModule then withManageRecommendationsMenu(Element, p1.manageRecommendationsMenu) else Element
+		return if FFlagPurchasePromptVLOPUpsellSettingsEntryPointModule or FFlagPurchasePromptVLOPAppUpsellSettingsEntryPointModule then withManageRecommendationsMenu(Element, p1.manageRecommendationsMenu) else Element
 	elseif v1 then
 		local Element = ReactModule.createElement(View, {
 			tag = "col align-x-center align-y-top size-full-0",
@@ -132,7 +133,7 @@ return function(p1)
 			})
 		})
 		
-		return if FFlagPurchasePromptVLOPUpsellSettingsEntryPointModule then withManageRecommendationsMenu(Element, p1.manageRecommendationsMenu) else Element
+		return if FFlagPurchasePromptVLOPUpsellSettingsEntryPointModule or FFlagPurchasePromptVLOPAppUpsellSettingsEntryPointModule then withManageRecommendationsMenu(Element, p1.manageRecommendationsMenu) else Element
 	else
 		local Element = ReactModule.createElement(PriceSummaryV2Module, {
 			amount = p1.product.itemRobuxCost,
@@ -140,6 +141,6 @@ return function(p1)
 			subtotalItemCount = p1.subtotalItemCount
 		})
 		
-		return if FFlagPurchasePromptVLOPUpsellSettingsEntryPointModule then withManageRecommendationsMenu(Element, p1.manageRecommendationsMenu) else Element
+		return if FFlagPurchasePromptVLOPUpsellSettingsEntryPointModule or FFlagPurchasePromptVLOPAppUpsellSettingsEntryPointModule then withManageRecommendationsMenu(Element, p1.manageRecommendationsMenu) else Element
 	end
 end

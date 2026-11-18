@@ -2515,12 +2515,15 @@ Feature.Build.Label.ToolAssetSearchRunning,Searching asset library
 Feature.Build.Label.ToolClientDMDone,Searched client DataModel
 Feature.Build.Label.ToolClientDMFailed,Couldn't search client DataModel
 Feature.Build.Label.ToolClientDMRunning,Searching client DataModel
+Feature.Build.Label.ToolCodeRunning,Running code
 Feature.Build.Label.ToolCompileDone,Compiled the code
 Feature.Build.Label.ToolCompileFailed,Couldn't compile the code
 Feature.Build.Label.ToolCompileRunning,Compiling the code
+Feature.Build.Label.ToolDeveloperProductRunning,Working on your developer product
 Feature.Build.Label.ToolGameInfoDone,Updated game info
 Feature.Build.Label.ToolGameInfoFailed,Couldn't update game info
 Feature.Build.Label.ToolGameInfoRunning,Updating game info
+Feature.Build.Label.ToolGamePassRunning,Working on your game pass
 Feature.Build.Label.ToolGameSaveDone,Saved game
 Feature.Build.Label.ToolGameSaveFailed,Couldn't save game
 Feature.Build.Label.ToolGameSaveRunning,Saving game
@@ -2539,6 +2542,7 @@ Feature.Build.Label.ToolLuauRunning,Executing Luau
 Feature.Build.Label.ToolModelDone,Generated 3D model
 Feature.Build.Label.ToolModelFailed,Couldn't generate 3D model
 Feature.Build.Label.ToolModelRunning,Generating 3D model
+Feature.Build.Label.ToolMonetizationRunning,Working on your game's monetization
 Feature.Build.Label.ToolPlanPresentDone,Presented plan
 Feature.Build.Label.ToolPlanPresentFailed,Couldn't present plan
 Feature.Build.Label.ToolPlanPresentRunning,Presenting plan
@@ -2566,6 +2570,7 @@ Feature.Build.Label.ToolSkillLoadRunning,Loading skill
 Feature.Build.Label.ToolSkillsDone,Listed available skills
 Feature.Build.Label.ToolSkillsFailed,Couldn't list available skills
 Feature.Build.Label.ToolSkillsRunning,Listing available skills
+Feature.Build.Label.ToolSubscriptionRunning,Working on your subscription
 Feature.Build.Label.ToolTasksPlanDone,Tasks planned
 Feature.Build.Label.ToolTasksPlanFailed,Couldn't plan tasks
 Feature.Build.Label.ToolTasksPlanRunning,Planning your tasks
@@ -3987,9 +3992,15 @@ Feature.Moments.Description.EngagementFirstLike,View it now
 Feature.Moments.Description.EngagementFirstReaction,Your Moment just got its first reaction!
 Feature.Moments.Description.EngagementLikedCommentsDigest,{likedComments} of your comments got likes
 Feature.Moments.Description.EngagementMomentDigest,{comments} new comments and {milestone} reactions
+Feature.Moments.Description.EngagementMomentFirstReactionDigest,{comments} new comments and its first reaction
+Feature.Moments.Description.EngagementMomentsCommentsDigest,{comments} new comments on your Moments
 Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementMomentsReactionsDigest,Your Moments are getting reactions
 Feature.Moments.Description.EngagementNewComment,just commented on your Moment
 Feature.Moments.Description.EngagementNewComments,and {count} others commented on your Moment
+Feature.Moments.Description.EngagementNewCommentsOneOther,and 1 other commented on your Moment
+Feature.Moments.Description.EngagementOneCommentDigest,1 new comment and {milestone} reactions
+Feature.Moments.Description.EngagementOneCommentFirstReactionDigest,1 new comment and its first reaction
 Feature.Moments.Description.EngagementReactionMilestone,{count} new reactions
 Feature.Moments.Description.FollowingCaughtUpBody,You've watched all the new Moments in this feed. Switch feeds to view more.
 Feature.Moments.Description.FollowingEmptyBodyRecommended,You'll see Moments by creators you follow here.

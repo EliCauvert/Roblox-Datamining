@@ -10,21 +10,20 @@ local MusicNote = BuilderIconsModule.Icon.MusicNote
 local IconName = FoundationModule.Enums.IconName
 local IconSize = FoundationModule.Enums.IconSize
 local UseTokensFunction = FoundationModule.Hooks.useTokens
-local FFlagMomentsCreationMusicChipRemoveButtonModule = require(MomentsCreation.Flags.FFlagMomentsCreationMusicChipRemoveButton)
 local UseMusicInfoModule = require(MomentsCreation.Hooks.useMusicInfo)
 
 return function(p1)
-	-- upvalues: UseMusicInfoModule (copy), FFlagMomentsCreationMusicChipRemoveButtonModule (copy), UseTokensFunction (copy), ReactModule (copy), View (copy), Icon (copy), MusicNote (copy), FoundationModule (copy), Text (copy), IconName (copy), IconSize (copy)
+	-- upvalues: UseMusicInfoModule (copy), UseTokensFunction (copy), ReactModule (copy), View (copy), Icon (copy), MusicNote (copy), FoundationModule (copy), Text (copy), IconName (copy), IconSize (copy)
 	local UseMusicInfoModuleResult = UseMusicInfoModule(p1.musicAssetId)
-	local UseTokensResult = if FFlagMomentsCreationMusicChipRemoveButtonModule then UseTokensFunction() else nil
+	local UseTokensResult = UseTokensFunction()
 	
 	return ReactModule.createElement(View, {
 		LayoutOrder = 1,
-		tag = if FFlagMomentsCreationMusicChipRemoveButtonModule then {
+		tag = {
 			["row align-x-center align-y-center gap-medium size-0-800 auto-x padding-y-xsmall radius-circle bg-over-media-0"] = true,
 			["padding-x-medium"] = p1.onRemove == nil,
 			["padding-left-medium padding-right-small"] = p1.onRemove ~= nil
-		} else "row align-x-center align-y-center gap-medium size-0-800 auto-x padding-x-medium padding-y-xsmall radius-circle bg-over-media-0",
+		},
 		onActivated = p1.onActivated
 	}, {
 		Icon = ReactModule.createElement(Icon, {
@@ -38,7 +37,7 @@ return function(p1)
 			sizeConstraint = { MaxSize = Vector2.new(100, 1e999) },
 			Text = UseMusicInfoModuleResult and UseMusicInfoModuleResult.Title or ""
 		}),
-		RemoveButton = if FFlagMomentsCreationMusicChipRemoveButtonModule and p1.onRemove then ReactModule.createElement(View, {
+		RemoveButton = if p1.onRemove then ReactModule.createElement(View, {
 			LayoutOrder = 3,
 			tag = "align-x-center align-y-center size-500-500 radius-circle",
 			testId = "music-chip-remove-button",

@@ -2507,12 +2507,15 @@ Feature.Build.Label.ToolAssetSearchRunning,正在搜索素材库
 Feature.Build.Label.ToolClientDMDone,已搜索客户端 DataModel
 Feature.Build.Label.ToolClientDMFailed,无法搜索客户端 DataModel
 Feature.Build.Label.ToolClientDMRunning,正在搜索客户端 DataModel
+Feature.Build.Label.ToolCodeRunning,
 Feature.Build.Label.ToolCompileDone,已编译代码
 Feature.Build.Label.ToolCompileFailed,无法编译代码
 Feature.Build.Label.ToolCompileRunning,正在编译代码
+Feature.Build.Label.ToolDeveloperProductRunning,
 Feature.Build.Label.ToolGameInfoDone,已更新游戏信息
 Feature.Build.Label.ToolGameInfoFailed,无法更新游戏信息
 Feature.Build.Label.ToolGameInfoRunning,正在更新游戏信息
+Feature.Build.Label.ToolGamePassRunning,
 Feature.Build.Label.ToolGameSaveDone,已保存游戏
 Feature.Build.Label.ToolGameSaveFailed,无法保存游戏
 Feature.Build.Label.ToolGameSaveRunning,正在保存游戏
@@ -2531,6 +2534,7 @@ Feature.Build.Label.ToolLuauRunning,正在执行 Luau
 Feature.Build.Label.ToolModelDone,已生成 3D 模型
 Feature.Build.Label.ToolModelFailed,无法生成 3D 模型
 Feature.Build.Label.ToolModelRunning,正在生成 3D 模型
+Feature.Build.Label.ToolMonetizationRunning,
 Feature.Build.Label.ToolPlanPresentDone,已展示计划
 Feature.Build.Label.ToolPlanPresentFailed,无法展示计划
 Feature.Build.Label.ToolPlanPresentRunning,正在展示计划
@@ -2558,6 +2562,7 @@ Feature.Build.Label.ToolSkillLoadRunning,正在加载技能
 Feature.Build.Label.ToolSkillsDone,已列出可用技能
 Feature.Build.Label.ToolSkillsFailed,无法列出可用技能
 Feature.Build.Label.ToolSkillsRunning,正在列出可用技能
+Feature.Build.Label.ToolSubscriptionRunning,
 Feature.Build.Label.ToolTasksPlanDone,已规划任务
 Feature.Build.Label.ToolTasksPlanFailed,无法规划任务
 Feature.Build.Label.ToolTasksPlanRunning,正在规划任务
@@ -3976,9 +3981,15 @@ Feature.Moments.Description.EngagementFirstLike,立即查看
 Feature.Moments.Description.EngagementFirstReaction,你的精彩瞬间刚刚获得了第一个回应！
 Feature.Moments.Description.EngagementLikedCommentsDigest,你的 {likedComments} 条评论获得了点赞
 Feature.Moments.Description.EngagementMomentDigest,{comments} 条新评论和 {milestone} 个回应
+Feature.Moments.Description.EngagementMomentFirstReactionDigest,
+Feature.Moments.Description.EngagementMomentsCommentsDigest,
 Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementMomentsReactionsDigest,
 Feature.Moments.Description.EngagementNewComment,刚刚评论了你的精彩瞬间
 Feature.Moments.Description.EngagementNewComments,和另外 {count} 人评论了你的精彩瞬间
+Feature.Moments.Description.EngagementNewCommentsOneOther,
+Feature.Moments.Description.EngagementOneCommentDigest,
+Feature.Moments.Description.EngagementOneCommentFirstReactionDigest,
 Feature.Moments.Description.EngagementReactionMilestone,{count} 个新回应
 Feature.Moments.Description.FollowingCaughtUpBody,你已看完此推送中的所有新“精彩瞬间”。切换推送以查看更多内容。
 Feature.Moments.Description.FollowingEmptyBodyRecommended,你将在这里看到你关注的创作者发布的“精彩瞬间”。

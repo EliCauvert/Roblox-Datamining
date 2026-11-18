@@ -49,14 +49,14 @@ end
 return {
 	findItemById = findItemById,
 	findBonusItemById = findBonusItemById,
-	resolveItemForSelection = function(p1, Id, ItemType, p2)
+	resolveItemForSelection = function(p1, Id, ItemType)
 		-- upvalues: findItemById (copy), findBonusItemById (copy)
 		local ItemById = findItemById(p1, Id, ItemType)
 		
-		return if ItemById == nil then if p2 then findBonusItemById(p1, Id, ItemType) else nil else ItemById
+		return if ItemById == nil then findBonusItemById(p1, Id, ItemType) else ItemById
 	end,
-	isRobuxBonusOnlySelection = function(p1, Id, ItemType, p2): boolean
+	isRobuxBonusOnlySelection = function(p1, Id, ItemType): boolean
 		-- upvalues: findItemById (copy), findBonusItemById (copy)
-		return if p2 and Id ~= nil and ItemType ~= nil and findItemById(p1, Id, ItemType) == nil then findBonusItemById(p1, Id, ItemType) ~= nil else false
+		return Id ~= nil and ItemType ~= nil and (findItemById(p1, Id, ItemType) == nil and findBonusItemById(p1, Id, ItemType) ~= nil)
 	end
 }

@@ -21,9 +21,10 @@ local DebounceModule = require(AuthSignup.Util.debounce)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local GetFFlagEnableMultiPageSignupV2UpdatesFunction = SharedFlagsModule.GetFFlagEnableMultiPageSignupV2Updates
 local GetFFlagEnableLuafiedRecoveryFlowFunction = SharedFlagsModule.GetFFlagEnableLuafiedRecoveryFlow
+local FFlagAuthStrictNilGuards = SharedFlagsModule.FFlagAuthStrictNilGuards
 
 return function(p1)
-	-- upvalues: UseDesignTokensFunction (copy), UseTokensFunction (copy), UseDispatchFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), UseStyleFunction (copy), ReactModule (copy), InputValidity (copy), DebounceModule (copy), GetFFlagEnableLuafiedRecoveryFlowFunction (copy), IssueCondition (copy), GetFFlagEnableMultiPageSignupV2UpdatesFunction (copy), UIConstants (copy), UseLocalizationFunction (copy), Text (copy), StyledTextLabel (copy), TextInput (copy)
+	-- upvalues: UseDesignTokensFunction (copy), UseTokensFunction (copy), UseDispatchFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), UseStyleFunction (copy), ReactModule (copy), InputValidity (copy), DebounceModule (copy), GetFFlagEnableLuafiedRecoveryFlowFunction (copy), IssueCondition (copy), GetFFlagEnableMultiPageSignupV2UpdatesFunction (copy), FFlagAuthStrictNilGuards (copy), UIConstants (copy), UseLocalizationFunction (copy), Text (copy), StyledTextLabel (copy), TextInput (copy)
 	local UseDesignTokensResult = UseDesignTokensFunction()
 	local UseTokensResult = UseTokensFunction()
 	local UseDispatchResult = UseDispatchFunction()
@@ -122,11 +123,15 @@ return function(p1)
 		end
 	end, { UseStateResult5 })
 	ReactModule.useEffect(function()
-		-- upvalues: GetFFlagEnableMultiPageSignupV2UpdatesFunction (upval), UseStateResult7 (copy), p1 (copy), UseStateResult2_6 (copy)
+		-- upvalues: GetFFlagEnableMultiPageSignupV2UpdatesFunction (upval), UseStateResult7 (copy), p1 (copy), FFlagAuthStrictNilGuards (upval), UseStateResult2_6 (copy)
 		if GetFFlagEnableMultiPageSignupV2UpdatesFunction() and UseStateResult7 then
 			local TextBoxRef = p1.textBoxRef
 			
-			if TextBoxRef.current and TextBoxRef.current.focus then
+			if FFlagAuthStrictNilGuards then
+				if TextBoxRef and typeof(TextBoxRef) == "table" and TextBoxRef.current then
+					TextBoxRef.current.focus()
+				end
+			elseif TextBoxRef.current and TextBoxRef.current.focus then
 				TextBoxRef.current.focus()
 			end
 			UseStateResult2_6(false)
@@ -193,7 +198,7 @@ return function(p1)
 			text = p1.initialText or "",
 			placeholder = p1.placeholder,
 			onChanged = OnChanged,
-			iconTrailing = if GetFFlagEnableLuafiedRecoveryFlowFunction() and p1.hideIconButton then nil elseif ShowPasswordIconButton then {
+			iconTrailing = if GetFFlagEnableLuafiedRecoveryFlowFunction() and p1.hideIconButton then nil elseif ShowPasswordIconButton and ShowPasswordIconButton2 then {
 				name = ShowPasswordIconButton,
 				onActivated = ShowPasswordIconButton2
 			} else nil,

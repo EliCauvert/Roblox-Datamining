@@ -3,6 +3,7 @@ local Parent = InExperienceSideSheet.Parent
 local ChromeModule = require(Parent.Chrome)
 local DisplayModule = require(Parent.Display)
 local InGameMenu = require(Parent.CoreScriptsCommon).Constants.InGameMenu
+local _ = require(Parent.InExperienceSideSheetStore.Types)
 local ConstantsModule = require(InExperienceSideSheet.Common.Constants)
 local DoesMenuPageCloseSideSheetModule = require(InExperienceSideSheet.Utils.doesMenuPageCloseSideSheet)
 local GetHasRoomForPeoplePageModule = require(InExperienceSideSheet.Utils.getHasRoomForPeoplePage)

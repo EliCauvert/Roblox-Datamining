@@ -10,18 +10,21 @@ local function selectDigestCopy(p1, Callback)
 			args = { likedComments = Callback(Counts.likedComments or 0) }
 		}
 	elseif p1.category == "creator" then
+		local Comments = Counts.comments or 0
+		local Milestone = Counts.milestone or 0
+		local IsMilestoneAbove = Milestone > 1
 		local Args = {
-			comments = Callback(Counts.comments or 0),
-			milestone = Callback(Counts.milestone or 0)
+			comments = Callback(Comments),
+			milestone = Callback(Milestone)
 		}
 		
 		return if (Counts.moments or 1) <= 1 then {
 			titleKey = "Feature.Moments.Title.EngagementMomentDigest",
-			textKey = "Feature.Moments.Description.EngagementMomentDigest",
+			textKey = if Comments == 1 then if IsMilestoneAbove then "Feature.Moments.Description.EngagementOneCommentDigest" else "Feature.Moments.Description.EngagementOneCommentFirstReactionDigest" elseif IsMilestoneAbove then "Feature.Moments.Description.EngagementMomentDigest" else "Feature.Moments.Description.EngagementMomentFirstReactionDigest",
 			args = Args
 		} else {
 			titleKey = "Feature.Moments.Title.EngagementMomentsDigest",
-			textKey = "Feature.Moments.Description.EngagementMomentsDigest",
+			textKey = if Comments == 0 or Comments == 1 and not IsMilestoneAbove then "Feature.Moments.Description.EngagementMomentsReactionsDigest" elseif Comments == 1 then "Feature.Moments.Description.EngagementOneCommentDigest" elseif IsMilestoneAbove then "Feature.Moments.Description.EngagementMomentsDigest" else "Feature.Moments.Description.EngagementMomentsCommentsDigest",
 			args = Args
 		}
 	else
@@ -40,6 +43,10 @@ return function(p1, Name, Callback)
 			return if Commenters <= 1 then {
 				titleKey = "Feature.Moments.Title.EngagementNewComment",
 				textKey = "Feature.Moments.Description.EngagementNewComment",
+				args = { name = Name }
+			} elseif Commenters == 2 then {
+				titleKey = "Feature.Moments.Title.EngagementNewComments",
+				textKey = "Feature.Moments.Description.EngagementNewCommentsOneOther",
 				args = { name = Name }
 			} else {
 				titleKey = "Feature.Moments.Title.EngagementNewComments",

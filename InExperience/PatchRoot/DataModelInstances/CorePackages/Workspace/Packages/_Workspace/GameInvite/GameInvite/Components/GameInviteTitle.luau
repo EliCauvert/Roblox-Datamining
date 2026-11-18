@@ -28,7 +28,10 @@ local ImageSetButton = UIBloxModule.Core.ImageSet.ImageSetButton
 local Images = UIBloxModule.App.ImageSet.Images
 local GetLocalizedStringsFunction = require(Parent.NotificationsCommon).LocalizationHelper.getLocalizedStrings
 local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
-local GetFFlagEnableGameInviteModalVRSupportFunction = require(Parent.SharedFlags).GetFFlagEnableGameInviteModalVRSupport
+local SharedFlagsModule = require(Parent.SharedFlags)
+local GetFFlagEnableGameInviteModalVRSupportFunction = SharedFlagsModule.GetFFlagEnableGameInviteModalVRSupport
+local FFlagAlignSideSheetWindowCloseRight = SharedFlagsModule.FFlagAlignSideSheetWindowCloseRight
+local IsSideSheetEnabledModule = if FFlagAlignSideSheetWindowCloseRight then require(Parent.InExperienceSideSheetUtils.isSideSheetEnabled) else false
 local TitleIconSize = GameInviteConstantsModule.Layout.TitleIconSize
 local SidePadding = GameInviteConstantsModule.Layout.SidePadding
 local IconsNavigationClose = Images["icons/navigation/close"]
@@ -40,13 +43,13 @@ local config = {
 	joinOrInviteFriends = if FFlagGameInviteInExpJoinCtaModule or IsGameInviteJoinForPioneerEnabledFunction() then "CoreScripts.InGameMenu.PageTitle.JoinOrInviteFriends" else nil
 }
 
-local function v28(UseContextResult, IsConsole, p1)
+local function v31(UseContextResult, IsConsole, p1)
 	-- upvalues: GetFFlagEnableGameInviteModalVRSupportFunction (copy), IsVRAppBuildFunction (copy), IsExperienceOlderThanOneWeekModule (copy)
 	return if GetFFlagEnableGameInviteModalVRSupportFunction() then not IsVRAppBuildFunction() and (p1 and (not IsConsole and (UseContextResult and (UseContextResult.isCoreScript and (UseContextResult.serverType == "StandardServer" and IsExperienceOlderThanOneWeekModule(UseContextResult.gameDetails)))))) else not IsConsole and (p1 and (UseContextResult and (UseContextResult.isCoreScript and (UseContextResult.serverType == "StandardServer" and IsExperienceOlderThanOneWeekModule(UseContextResult.gameDetails)))))
 end
 
 return function(p1)
-	-- upvalues: UseStyleFunction (copy), ReactModule (copy), GameInviteModalLayoutContextModule (copy), GameDetailsContextModule (copy), FriendsListContext (copy), InviteFriendContext (copy), GetLocalizedStringsFunction (copy), config (copy), FFlagGameInviteInExpJoinCtaModule (copy), IsGameInviteJoinForPioneerEnabledFunction (copy), ShouldShowJoinCtaModule (copy), UseAppPolicyFunction (copy), DeviceInfo (copy), v28 (copy), GetTextSizeFunction (copy), TitleIconSize (copy), GameInviteModalManagerModule (copy), SidePadding (copy), ImageSetButton (copy), IconsNavigationClose (copy), NormalizeFontFaceFunction (copy), IconsMenuSearch (copy), ShareGameInviteLinkModule (copy), FriendsMenuSearch (copy), GameInviteAnalyticsManagerModule (copy)
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), GameInviteModalLayoutContextModule (copy), GameDetailsContextModule (copy), FriendsListContext (copy), InviteFriendContext (copy), GetLocalizedStringsFunction (copy), config (copy), FFlagGameInviteInExpJoinCtaModule (copy), IsGameInviteJoinForPioneerEnabledFunction (copy), ShouldShowJoinCtaModule (copy), UseAppPolicyFunction (copy), DeviceInfo (copy), v31 (copy), GetTextSizeFunction (copy), TitleIconSize (copy), FFlagAlignSideSheetWindowCloseRight (copy), IsSideSheetEnabledModule (copy), GameInviteConstantsModule (copy), GameInviteModalManagerModule (copy), SidePadding (copy), ImageSetButton (copy), IconsNavigationClose (copy), NormalizeFontFaceFunction (copy), IconsMenuSearch (copy), ShareGameInviteLinkModule (copy), FriendsMenuSearch (copy), GameInviteAnalyticsManagerModule (copy)
 	local UseStyleResult = UseStyleFunction()
 	local UseContextResult = ReactModule.useContext(GameInviteModalLayoutContextModule)
 	local UseContextResult1 = ReactModule.useContext(GameDetailsContextModule)
@@ -59,7 +62,7 @@ return function(p1)
 	local IsCompact = UseContextResult.modalMode == "compact"
 	local IsFullWidth = UseContextResult.isFullWidth
 	local IsDesktopDevice = DeviceInfo.isDesktopDevice()
-	local v1 = v28(UseContextResult1, DeviceInfo.isConsole(), (UseAppPolicyFunction(function(p2)
+	local v1 = v31(UseContextResult1, DeviceInfo.isConsole(), (UseAppPolicyFunction(function(p2)
 		return p2.getExperienceInviteShareLinkEnabled()
 	end)))
 	local NoIsFullWidth: boolean = IsDesktopDevice and not IsFullWidth
@@ -85,17 +88,25 @@ return function(p1)
 	if IsCompact and v1 then
 		XOffset += 4
 	end
-	local function v48()
+	local NoHideCloseButton: boolean = FFlagAlignSideSheetWindowCloseRight and (IsSideSheetEnabledModule and (UseContextResult1.isCoreScript and (UseContextResult1.trigger == GameInviteConstantsModule.Triggers.GameMenu and not p1.hideCloseButton)))
+	
+	if NoHideCloseButton then
+		if XOffset > 0 then
+			XOffset += 4
+		end
+		XOffset += TitleIconSize
+	end
+	local function v52()
 		-- upvalues: GameInviteModalManagerModule (upval), UseContextResult3 (copy)
 		GameInviteModalManagerModule:closeModal(UseContextResult3.getMaxRecipientRowNum())
 	end
 	
-	local function v49()
+	local function v53()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(true)
 	end
 	
-	local function v50()
+	local function v54()
 		-- upvalues: UseStateResult2 (copy), SearchFriendsFunction (copy)
 		UseStateResult2(false)
 		SearchFriendsFunction("")
@@ -106,7 +117,7 @@ return function(p1)
 		SearchFriendsFunction("")
 	end
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: ReactModule (upval), SidePadding (upval), XOffset (ref), p1 (copy), ImageSetButton (upval), TitleIconSize (upval), v48 (copy), IconsNavigationClose (upval), UseStyleResult (copy), JoinOrInviteFriends (copy), ScaledBaseSize (copy), NormalizeFontFaceFunction (upval), IsCompact (copy), v49 (copy), IconsMenuSearch (upval), v1 (copy), ShareGameInviteLinkModule (upval), IsDesktopDevice (copy), NoIsFullWidth (copy), Size (ref)
+		-- upvalues: ReactModule (upval), SidePadding (upval), XOffset (ref), p1 (copy), NoHideCloseButton (copy), ImageSetButton (upval), TitleIconSize (upval), v52 (copy), IconsNavigationClose (upval), UseStyleResult (copy), JoinOrInviteFriends (copy), ScaledBaseSize (copy), NormalizeFontFaceFunction (upval), IsCompact (copy), v53 (copy), IconsMenuSearch (upval), v1 (copy), ShareGameInviteLinkModule (upval), IsDesktopDevice (copy), NoIsFullWidth (copy), Size (ref)
 		return {
 			UIPadding = ReactModule.createElement("UIPadding", {
 				PaddingLeft = UDim.new(0, SidePadding),
@@ -129,10 +140,10 @@ return function(p1)
 					HorizontalAlignment = Enum.HorizontalAlignment.Left,
 					Padding = UDim.new(0, 4)
 				}),
-				CloseButton = if p1.hideCloseButton then nil else ReactModule.createElement(ImageSetButton, {
+				CloseButton = if p1.hideCloseButton or NoHideCloseButton then nil else ReactModule.createElement(ImageSetButton, {
 					BackgroundTransparency = 1,
 					Size = UDim2.new(0, TitleIconSize, 0, TitleIconSize),
-					[ReactModule.Event.Activated] = v48,
+					[ReactModule.Event.Activated] = v52,
 					Image = IconsNavigationClose,
 					ImageColor3 = UseStyleResult.Theme.IconEmphasis.Color,
 					ImageTransparency = UseStyleResult.Theme.IconEmphasis.Transparency,
@@ -167,7 +178,7 @@ return function(p1)
 					BackgroundTransparency = 1,
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Size = UDim2.new(0, TitleIconSize, 0, TitleIconSize),
-					[ReactModule.Event.Activated] = v49,
+					[ReactModule.Event.Activated] = v53,
 					Image = IconsMenuSearch,
 					ImageColor3 = UseStyleResult.Theme.IconEmphasis.Color,
 					ImageTransparency = UseStyleResult.Theme.IconEmphasis.Transparency,
@@ -178,15 +189,25 @@ return function(p1)
 					isDesktop = IsDesktopDevice,
 					isFullSize = NoIsFullWidth,
 					size = Size
-				}) or nil
+				}) or nil,
+				CloseButton = if NoHideCloseButton then ReactModule.createElement(ImageSetButton, {
+					LayoutOrder = 2,
+					BackgroundTransparency = 1,
+					Size = UDim2.new(0, TitleIconSize, 0, TitleIconSize),
+					[ReactModule.Event.Activated] = v52,
+					Image = IconsNavigationClose,
+					ImageColor3 = UseStyleResult.Theme.IconEmphasis.Color,
+					ImageTransparency = UseStyleResult.Theme.IconEmphasis.Transparency,
+					BorderSizePixel = 0
+				}) else nil
 			})
 		}
 	end, {
 		UseStateResult, NoIsFullWidth, IsCompact, v1, IsDesktopDevice,
-		JoinOrInviteFriends
+		JoinOrInviteFriends, NoHideCloseButton
 	})
 	local UseMemoResult1 = ReactModule.useMemo(function()
-		-- upvalues: ReactModule (upval), FriendsMenuSearch (upval), GameInviteAnalyticsManagerModule (upval), ScaledBaseSize1 (copy), UseStyleResult (copy), LocalizedStrings (copy), NormalizeFontFaceFunction (upval), v50 (copy)
+		-- upvalues: ReactModule (upval), FriendsMenuSearch (upval), GameInviteAnalyticsManagerModule (upval), ScaledBaseSize1 (copy), UseStyleResult (copy), LocalizedStrings (copy), NormalizeFontFaceFunction (upval), v54 (copy)
 		return {
 			UIListLayout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,
@@ -214,7 +235,7 @@ return function(p1)
 				TextColor3 = UseStyleResult.Theme.UIDefault.Color,
 				Text = LocalizedStrings.cancelText,
 				FontFace = NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font),
-				[ReactModule.Event.Activated] = v50
+				[ReactModule.Event.Activated] = v54
 			})
 		}
 	end, { UseStateResult })
