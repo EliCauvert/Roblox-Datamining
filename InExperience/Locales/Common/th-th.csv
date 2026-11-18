@@ -765,10 +765,10 @@ CoreScripts.FTUX.Heading.JoinVoice,เข้าร่วมแชทด้วย
 CoreScripts.FTUX.Heading.LeaveRespawn,ออกและเกิดใหม่
 CoreScripts.FTUX.Heading.NewAvatarSwitcher,ใหม่: เครื่องมือสลับอวาตาร์
 CoreScripts.FTUX.Heading.NewTiltOnboarding,เมนูอยู่ตรงนี้
-CoreScripts.FTUX.Heading.NewTiltUpdate,เมนูใหม่
 CoreScripts.FTUX.Heading.ReadyToPlaytest,พร้อมทดลองเล่นแล้วหรือยัง?
 CoreScripts.FTUX.Heading.SideSheetUpdate,การดำเนินการทั้งหมดของคุณในที่เดียว
 CoreScripts.FTUX.Heading.SocialOnboarding,คุณสมบัติทางโซเชียล
+CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,เมนูใหม่ของคุณ
 CoreScripts.FTUX.Heading.YouAreAnEarlyTester,คุณเป็นผู้ทดลองเล่นระยะแรก
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,สลับไปใช้อวาตาร์ที่คุณบันทึกไว้ได้ทุกเมื่อ
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,แชทกับเพื่อนได้ทุกเมื่อ
@@ -776,11 +776,10 @@ CoreScripts.FTUX.Label.InExperienceShopDescription,แพ็คเกจที�
 CoreScripts.FTUX.Label.JoinVoiceDescription,เพื่อฟังและพูดคุยกับคนอื่น
 CoreScripts.FTUX.Label.LeaveRespawn,คุณสามารถออกจากเกมหรือให้อวาตาร์ของคุณเกิดใหม่ได้อย่างง่ายดายจากที่นี่
 CoreScripts.FTUX.Label.NewTiltOnboarding,เมนูเกมประกอบด้วยการดำเนินการในเกมและการตั้งค่าเกมของคุณ
-CoreScripts.FTUX.Label.NewTiltUpdate,รายการในเมนูสามขีดย้ายมาที่นี่แล้ว
 CoreScripts.FTUX.Label.PartyWithYourFriendsAnytime,ปาร์ตี้กับเพื่อนได้ทุกเมื่อ
 CoreScripts.FTUX.Label.SideSheetOnboarding,เมนูมีคุณสมบัติที่จำเป็นทั้งหมดของคุณ ทั้งเชิญเพื่อน ลองใช้ท่าทาง ควบคุมเพลง และอื่นๆ อีกมากมาย
-CoreScripts.FTUX.Label.SideSheetUpdate,เมนูยังคงมีคุณสมบัติที่จำเป็นทั้งหมดของคุณ
 CoreScripts.FTUX.Label.SocialOnboarding,เข้าถึงคุณสมบัติทางโซเชียลของคุณได้อย่างง่ายดายจากแถบด้านบน รวมถึงแชท
+CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,รวมสองเมนูเป็นเมนูเดียวแล้ว แตะที่นี่เพื่อเปิด
 CoreScripts.Feedback.EntryPoint.ButtonText,ให้ข้อเสนอแนะ
 CoreScripts.Feedback.EntryPoint.OptionText,ให้ข้อเสนอแนะเกี่ยวกับคำแปล
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,
@@ -3877,6 +3876,7 @@ Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,ไอเท็มโบนัส
 Feature.InExperienceShop.Label.BuyGamePass,ซื้อบัตรผ่านเกม
 Feature.InExperienceShop.Label.BuyNow,ซื้อตอนนี้เลย
+Feature.InExperienceShop.Label.ContentPersonalization,
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,สิ้นสุดใน {timeRemaining}
 Feature.InExperienceShop.Label.FreeTrial,ทดลองใช้ฟรี

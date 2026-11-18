@@ -782,10 +782,10 @@ CoreScripts.FTUX.Heading.JoinVoice,Sesli Sohbete Katıl
 CoreScripts.FTUX.Heading.LeaveRespawn,Ayrıl ve yeniden doğ
 CoreScripts.FTUX.Heading.NewAvatarSwitcher,Yeni: Avatar değiştirici
 CoreScripts.FTUX.Heading.NewTiltOnboarding,Menü burada bulunur
-CoreScripts.FTUX.Heading.NewTiltUpdate,Yeni menü
 CoreScripts.FTUX.Heading.ReadyToPlaytest,Oynanış testine hazır mısın?
 CoreScripts.FTUX.Heading.SideSheetUpdate,Tüm eylemlerin tek bir yerde
 CoreScripts.FTUX.Heading.SocialOnboarding,Sosyal özellikler
+CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,Yeni menün
 CoreScripts.FTUX.Heading.YouAreAnEarlyTester,Sen bir erken test kullanıcısısın
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,İstediğin zaman kayıtlı avatarlarına geç.
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,Arkadaşlarınla istediğin zaman sohbet et.
@@ -793,11 +793,10 @@ CoreScripts.FTUX.Label.InExperienceShopDescription,Seçili paketler bonus bir ö
 CoreScripts.FTUX.Label.JoinVoiceDescription,Başkalarını duymak ve onlarla konuşmak
 CoreScripts.FTUX.Label.LeaveRespawn,Oyundan çıkmaya veya avatarının yeniden doğmasını sağlamaya buradan kolayca erişebilirsin.
 CoreScripts.FTUX.Label.NewTiltOnboarding,"Oyun menüsü, oyun ayarlarının yanı sıra oyun içi eylemleri de içerir."
-CoreScripts.FTUX.Label.NewTiltUpdate,Hamburger menüsü öğeleri buraya taşındı.
 CoreScripts.FTUX.Label.PartyWithYourFriendsAnytime,Arkadaşlarınla istediğin zaman Parti yap.
 CoreScripts.FTUX.Label.SideSheetOnboarding,"Menü, kullanabileceğin temel özelliklerin tümünü içerir. Arkadaşlarını davet et, İfadeleri dene, Müziği kontrol et ve daha fazlasını yap."
-CoreScripts.FTUX.Label.SideSheetUpdate,Menü hâlâ kullanabileceğin temel özelliklerin tümünü içeriyor.
 CoreScripts.FTUX.Label.SocialOnboarding,Sohbet dâhil olmak üzere sosyal özelliklerine üst çubuktan kolayca eriş.
+CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,İki menü şimdi tek menüde birleşti. Açmak için buraya dokun.
 CoreScripts.Feedback.EntryPoint.ButtonText,Geri Bildirimde Bulun
 CoreScripts.Feedback.EntryPoint.OptionText,Çeviri Geri Bildiriminde Bulun
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,Çık
@@ -3847,6 +3846,7 @@ Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,Bonus öğe
 Feature.InExperienceShop.Label.BuyGamePass,Oyun bileti satın al
 Feature.InExperienceShop.Label.BuyNow,Şimdi Satın Al
+Feature.InExperienceShop.Label.ContentPersonalization,
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,{timeRemaining} sonra sona erecek
 Feature.InExperienceShop.Label.FreeTrial,Ücretsiz deneme

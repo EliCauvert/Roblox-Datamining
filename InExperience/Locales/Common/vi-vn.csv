@@ -782,10 +782,10 @@ CoreScripts.FTUX.Heading.JoinVoice,Tham gia cuộc nói chuyện
 CoreScripts.FTUX.Heading.LeaveRespawn,Rời khỏi và hồi sinh
 CoreScripts.FTUX.Heading.NewAvatarSwitcher,Mới: Công cụ chuyển đổi avatar
 CoreScripts.FTUX.Heading.NewTiltOnboarding,Menu nằm ở đây
-CoreScripts.FTUX.Heading.NewTiltUpdate,Menu mới
 CoreScripts.FTUX.Heading.ReadyToPlaytest,Bạn đã sẵn sàng chơi thử chưa?
 CoreScripts.FTUX.Heading.SideSheetUpdate,Tất cả thao tác ở một nơi
 CoreScripts.FTUX.Heading.SocialOnboarding,Tính năng xã hội
+CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,Menu mới
 CoreScripts.FTUX.Heading.YouAreAnEarlyTester,Bạn là người chơi thử sớm
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,Chuyển sang avatar bạn đã lưu bất cứ lúc nào.
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,Trò chuyện với bạn bè bất cứ lúc nào.
@@ -793,11 +793,10 @@ CoreScripts.FTUX.Label.InExperienceShopDescription,Một số gói có kèm vậ
 CoreScripts.FTUX.Label.JoinVoiceDescription,Để nghe và nói chuyện với người khác
 CoreScripts.FTUX.Label.LeaveRespawn,Bạn có thể dễ dàng rời khỏi trò chơi hoặc hồi sinh avatar của mình ngay tại đây.
 CoreScripts.FTUX.Label.NewTiltOnboarding,Menu trò chơi chứa thao tác trong trò chơi cùng với các tùy chọn cài đặt trò chơi của bạn.
-CoreScripts.FTUX.Label.NewTiltUpdate,Các mục trong menu có hình 3 dấu gạch ngang đã được chuyển đến đây.
 CoreScripts.FTUX.Label.PartyWithYourFriendsAnytime,Lập Party với bạn bè bất cứ lúc nào.
 CoreScripts.FTUX.Label.SideSheetOnboarding,"Menu này chứa mọi tính năng thiết yếu bạn cần. Mời bạn bè, dùng thử Biểu cảm, điều khiển Nhạc và nhiều tính năng khác."
-CoreScripts.FTUX.Label.SideSheetUpdate,Menu này vẫn chứa mọi tính năng thiết yếu bạn cần.
 CoreScripts.FTUX.Label.SocialOnboarding,"Dễ dàng truy cập các tính năng xã hội của bạn từ thanh trên cùng, kể cả tính năng Trò chuyện."
+CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,Hai menu giờ đã được gộp thành một. Nhấn vào đây để mở.
 CoreScripts.Feedback.EntryPoint.ButtonText,Đưa Ra Phản Hồi
 CoreScripts.Feedback.EntryPoint.OptionText,Đưa Ra Phản Hồi Về Bản Dịch
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,
@@ -3891,6 +3890,7 @@ Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,Vật phẩm thưởng
 Feature.InExperienceShop.Label.BuyGamePass,Mua vé trò chơi
 Feature.InExperienceShop.Label.BuyNow,Mua ngay
+Feature.InExperienceShop.Label.ContentPersonalization,
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Kết thúc sau {timeRemaining}
 Feature.InExperienceShop.Label.FreeTrial,Dùng thử miễn phí

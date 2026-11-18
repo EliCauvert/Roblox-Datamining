@@ -766,10 +766,10 @@ CoreScripts.FTUX.Heading.JoinVoice,Meedoen aan spraakchat
 CoreScripts.FTUX.Heading.LeaveRespawn,Verlaten en respawnen
 CoreScripts.FTUX.Heading.NewAvatarSwitcher,Nieuw: Avatar-wisselaar
 CoreScripts.FTUX.Heading.NewTiltOnboarding,Hier vind je het menu
-CoreScripts.FTUX.Heading.NewTiltUpdate,Nieuw menu
 CoreScripts.FTUX.Heading.ReadyToPlaytest,Klaar voor een playtest?
 CoreScripts.FTUX.Heading.SideSheetUpdate,Al je acties op één plek
 CoreScripts.FTUX.Heading.SocialOnboarding,Sociale functies
+CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,Je nieuwe menu
 CoreScripts.FTUX.Heading.YouAreAnEarlyTester,Je bent een vroege tester
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,Schakel op elk gewenst moment tussen je opgeslagen avatars.
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,Chat op elk gewenst moment met je vrienden.
@@ -777,11 +777,10 @@ CoreScripts.FTUX.Label.InExperienceShopDescription,Sommige pakketten bevatten ee
 CoreScripts.FTUX.Label.JoinVoiceDescription,Om anderen te horen en met ze te praten
 CoreScripts.FTUX.Label.LeaveRespawn,Het verlaten van het spel of het respawnen van je avatar is vanaf hier gemakkelijk toegankelijk.
 CoreScripts.FTUX.Label.NewTiltOnboarding,Het spelmenu bevat acties in het spel en je spelinstellingen.
-CoreScripts.FTUX.Label.NewTiltUpdate,De items uit het hamburgermenu zijn hierheen verplaatst.
 CoreScripts.FTUX.Label.PartyWithYourFriendsAnytime,Party op elk gewenst moment met je vrienden.
 CoreScripts.FTUX.Label.SideSheetOnboarding,"Het menu bevat al je essentiële functies. Nodig vrienden uit, probeer emotes uit, bedien de muziek en meer."
-CoreScripts.FTUX.Label.SideSheetUpdate,Het menu bevat nog steeds al je essentiële functies.
 CoreScripts.FTUX.Label.SocialOnboarding,"Krijg eenvoudig toegang tot je sociale functies vanuit de bovenste balk, inclusief Chat."
+CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,Twee menu's zijn nu één. Tik hier om het te openen.
 CoreScripts.Feedback.EntryPoint.ButtonText,Feedback geven
 CoreScripts.Feedback.EntryPoint.OptionText,Feedback geven over de vertaling
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,
@@ -3876,6 +3875,7 @@ Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,Bonusitem
 Feature.InExperienceShop.Label.BuyGamePass,Game Pass kopen
 Feature.InExperienceShop.Label.BuyNow,Nu kopen
+Feature.InExperienceShop.Label.ContentPersonalization,
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Eindigt over {timeRemaining}
 Feature.InExperienceShop.Label.FreeTrial,Gratis proefperiode

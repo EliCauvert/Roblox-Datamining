@@ -2,6 +2,7 @@
 local WhatsNew = script:FindFirstAncestor("WhatsNew")
 local EnumsModule = require(WhatsNew.Enums)
 local EntryStorageModule = require(WhatsNew.storage.EntryStorage)
+local FFlagWhatsNewCompleteOnOpenActionModule = require(WhatsNew.Flags.FFlagWhatsNewCompleteOnOpenAction)
 local SignalsModule = require(WhatsNew.Parent.Signals)
 local _ = require(WhatsNew.Types)
 local WhatsNewTelemetryModule = require(WhatsNew.telemetry.WhatsNewTelemetry)
@@ -204,7 +205,7 @@ local function markTipsSeenFromCurrent(CurrentScopeTour, Id, Tbl)
 end
 
 return function()
-	-- upvalues: SignalsModule (copy), createIdleState (copy), EnumsModule (copy), WhatsNewTelemetryModule (copy), markTipsSeenFromCurrent (copy), LoadWhatsNewRegistryModule (copy), findCloseActionKeyForScope (copy), EntryStorageModule (copy), findGatewayTipByOpenActionKey (copy), v1 (copy)
+	-- upvalues: SignalsModule (copy), createIdleState (copy), EnumsModule (copy), WhatsNewTelemetryModule (copy), markTipsSeenFromCurrent (copy), LoadWhatsNewRegistryModule (copy), findCloseActionKeyForScope (copy), EntryStorageModule (copy), findGatewayTipByOpenActionKey (copy), FFlagWhatsNewCompleteOnOpenActionModule (copy), v1 (copy)
 	local RootTourMap = nil
 	local ScopeActions = nil
 	local Flag = false
@@ -654,7 +655,7 @@ return function()
 	end
 	
 	local function notifyScopeOpened(OpenActionKey)
-		-- upvalues: Signal (copy), EnumsModule (upval), tryStartNestedFromIdle (copy), EntryStorageModule (upval), v1 (upval), tryEnterNestedScope (copy)
+		-- upvalues: Signal (copy), EnumsModule (upval), tryStartNestedFromIdle (copy), FFlagWhatsNewCompleteOnOpenActionModule (upval), EntryStorageModule (upval), v1 (upval), showTipAt (copy), completeTour (copy), tryEnterNestedScope (copy)
 		local SignalResult = Signal(false)
 		
 		if SignalResult.surface == EnumsModule.WhatsNewSurface.Idle then
@@ -664,29 +665,56 @@ return function()
 		end
 		if SignalResult.currentEntry == nil then return end
 		local CurrentEntry = SignalResult.currentEntry
-		local Gateway = CurrentEntry.gateway
 		
-		if Gateway == nil or Gateway.openActionKey ~= OpenActionKey then return end
-		if SignalResult.currentScopeTour ~= nil and SignalResult.currentScopeTour.id == Gateway.scope.id then return end
-		local v4 = nil
-		
-		for i, tourTip in Gateway.scope.tourTips do
-			local ToShow = tourTip.toShow
-			
-			if ToShow then
-				local Entry = EntryStorageModule.getEntries()[tourTip.id]
-				ToShow = not (Entry ~= nil and Entry.seen ~= nil)
-			end
-			if ToShow then
-				v4 = i
-				break
-			end
-		end
-		if v4 ~= nil then
+		if FFlagWhatsNewCompleteOnOpenActionModule and CurrentEntry.completeOnOpenActionKey == OpenActionKey then
 			EntryStorageModule.markSeen(CurrentEntry.id, v1.now():ToIsoDate())
-			tryEnterNestedScope({ openActionKey = OpenActionKey })
+			local CurrentScopeTour = SignalResult.currentScopeTour
+			local NewGlobalStepIndex = if SignalResult.globalStepIndex == nil then nil else SignalResult.globalStepIndex + 1
+			
+			if CurrentScopeTour ~= nil and NewGlobalStepIndex ~= nil and NewGlobalStepIndex < SignalResult.globalTotalSteps then
+				local CurrentTipIndex: number? = nil
+				
+				for i = SignalResult.currentTipIndex + 1, #CurrentScopeTour.tourTips do
+					if not CurrentScopeTour.tourTips[i].toShow then
+						continue
+					end
+					CurrentTipIndex = i
+					break
+				end
+				if CurrentTipIndex ~= nil then
+					showTipAt(CurrentScopeTour, CurrentTipIndex, CurrentScopeTour.tourTips[CurrentTipIndex], { globalStepIndex = NewGlobalStepIndex })
+					
+					return
+				end
+			end
+			completeTour()
 			
 			return
+		else
+			local Gateway = CurrentEntry.gateway
+			
+			if Gateway == nil or Gateway.openActionKey ~= OpenActionKey then return end
+			if SignalResult.currentScopeTour ~= nil and SignalResult.currentScopeTour.id == Gateway.scope.id then return end
+			local v4 = nil
+			
+			for i1, tourTip in Gateway.scope.tourTips do
+				local ToShow = tourTip.toShow
+				
+				if ToShow then
+					local Entry = EntryStorageModule.getEntries()[tourTip.id]
+					ToShow = not (Entry ~= nil and Entry.seen ~= nil)
+				end
+				if ToShow then
+					v4 = i1
+					break
+				end
+			end
+			if v4 ~= nil then
+				EntryStorageModule.markSeen(CurrentEntry.id, v1.now():ToIsoDate())
+				tryEnterNestedScope({ openActionKey = OpenActionKey })
+				
+				return
+			end
 		end
 	end
 	

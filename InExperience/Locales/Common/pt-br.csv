@@ -782,10 +782,10 @@ CoreScripts.FTUX.Heading.JoinVoice,Entrar no Bate-papo de voz
 CoreScripts.FTUX.Heading.LeaveRespawn,Sair e reaparecer
 CoreScripts.FTUX.Heading.NewAvatarSwitcher,Novo: alternador de avatar
 CoreScripts.FTUX.Heading.NewTiltOnboarding,O menu fica aqui
-CoreScripts.FTUX.Heading.NewTiltUpdate,Novo menu
 CoreScripts.FTUX.Heading.ReadyToPlaytest,Tudo pronto para o teste de jogo?
 CoreScripts.FTUX.Heading.SideSheetUpdate,Todas as suas ações em um só lugar
 CoreScripts.FTUX.Heading.SocialOnboarding,Recursos sociais
+CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,Seu novo menu
 CoreScripts.FTUX.Heading.YouAreAnEarlyTester,Você é um testador antecipado
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,Mude para seus avatares salvos a qualquer momento.
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,Converse com suas amizades a qualquer hora.
@@ -793,11 +793,10 @@ CoreScripts.FTUX.Label.InExperienceShopDescription,Alguns pacotes incluem um ite
 CoreScripts.FTUX.Label.JoinVoiceDescription,Para ouvir e conversar com outros
 CoreScripts.FTUX.Label.LeaveRespawn,Sair do jogo ou fazer seu avatar reaparecer é fácil: basta usar as opções disponíveis aqui.
 CoreScripts.FTUX.Label.NewTiltOnboarding,O menu do jogo reúne ações disponíveis durante a partida e as configurações do jogo.
-CoreScripts.FTUX.Label.NewTiltUpdate,Os itens do menu foram movidos para cá.
 CoreScripts.FTUX.Label.PartyWithYourFriendsAnytime,Crie uma Turma com seus amigos a qualquer hora.
 CoreScripts.FTUX.Label.SideSheetOnboarding,"O menu contém todos os seus recursos essenciais. Convide amizades, experimente emotes, controle a música e muito mais."
-CoreScripts.FTUX.Label.SideSheetUpdate,O menu ainda contém todos os seus recursos essenciais.
 CoreScripts.FTUX.Label.SocialOnboarding,"Acesse facilmente seus recursos sociais na barra superior, incluindo o bate-papo."
+CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,Dois menus agora são um só. Toque aqui para abri-lo.
 CoreScripts.Feedback.EntryPoint.ButtonText,Dar feedback
 CoreScripts.Feedback.EntryPoint.OptionText,Dar feedback de tradução
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,
@@ -3891,6 +3890,7 @@ Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,Item bônus
 Feature.InExperienceShop.Label.BuyGamePass,Comprar passe de jogo
 Feature.InExperienceShop.Label.BuyNow,Comprar agora
+Feature.InExperienceShop.Label.ContentPersonalization,
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Termina em {timeRemaining}
 Feature.InExperienceShop.Label.FreeTrial,Teste grátis

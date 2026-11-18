@@ -1,4 +1,5 @@
 ﻿local WhatsNew = script:FindFirstAncestor("WhatsNew")
+local FFlagWhatsNewCompleteOnOpenActionModule = require(WhatsNew.Flags.FFlagWhatsNewCompleteOnOpenAction)
 local SignalsModule = require(WhatsNew.Parent.Signals)
 local _ = require(WhatsNew.Types)
 
@@ -100,6 +101,7 @@ return {
 		return config1
 	end,
 	collectRegistryActionKeys = function(p2)
+		-- upvalues: FFlagWhatsNewCompleteOnOpenActionModule (copy)
 		local t = {}
 		local List = {}
 		
@@ -125,6 +127,24 @@ return {
 			if CloseActionKey ~= nil and CloseActionKey ~= "" and not t[CloseActionKey] then
 				t[CloseActionKey] = true
 				table.insert(List, CloseActionKey)
+			end
+		end
+		if FFlagWhatsNewCompleteOnOpenActionModule then
+			for _, value in p2.whatsNew do
+				local CompleteOnOpenActionKey = value.completeOnOpenActionKey
+				
+				if CompleteOnOpenActionKey ~= nil and CompleteOnOpenActionKey ~= "" and not t[CompleteOnOpenActionKey] then
+					t[CompleteOnOpenActionKey] = true
+					table.insert(List, CompleteOnOpenActionKey)
+				end
+			end
+			for _, value1 in p2.onboarding do
+				local CompleteOnOpenActionKey = value1.completeOnOpenActionKey
+				
+				if CompleteOnOpenActionKey ~= nil and CompleteOnOpenActionKey ~= "" and not t[CompleteOnOpenActionKey] then
+					t[CompleteOnOpenActionKey] = true
+					table.insert(List, CompleteOnOpenActionKey)
+				end
 			end
 		end
 		table.sort(List)

@@ -13,6 +13,7 @@ local ReactModule = require(CorePackages.Packages.React)
 local ReactRobloxModule = require(CorePackages.Packages.ReactRoblox)
 local UtilsModule = require(Modules.Settings.Integrations.Utils)
 local GalleryUnavailableModule = require(Modules.Settings.Components.GalleryUnavailable)
+local CloudPlayTelemetry = require(CorePackages.Workspace.Packages.InExperienceCloudPlay).CloudPlayTelemetry
 local GetFFlagFixIGMTabTransitionsModule = require(script.Parent.Parent.Flags.GetFFlagFixIGMTabTransitions)
 local FFlagIGMChangeCapturesToGalleryModule = require(script.Parent.Parent.Flags.FFlagIGMChangeCapturesToGallery)
 local IsSideSheetEnabledModule = require(CorePackages.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
@@ -42,7 +43,7 @@ if UIPadding then
 	UIPadding:Destroy()
 end
 function NewPage:ShowUnavailable(p1, Frame: Frame)
-	-- upvalues: NewPage (copy), ReactRobloxModule (copy), ReactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), FoundationModule (copy), UtilsModule (copy), GalleryUnavailableModule (copy)
+	-- upvalues: NewPage (copy), ReactRobloxModule (copy), ReactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), FoundationModule (copy), UtilsModule (copy), GalleryUnavailableModule (copy), CloudPlayTelemetry (copy)
 	NewPage:SetHub(p1)
 	local YDelta = Frame.AbsoluteSize.Y - 20
 	NewPage.Page.Size = UDim2.new(1, 0, 0, YDelta)
@@ -61,6 +62,13 @@ function NewPage:ShowUnavailable(p1, Frame: Frame)
 			GalleryUnavailable = ReactModule.createElement(GalleryUnavailableModule)
 		})
 	}))
+	local DisplayFunction = NewPage.Display
+	
+	function NewPage:Display(...)
+		-- upvalues: CloudPlayTelemetry (upval), DisplayFunction (copy), NewPage (upval)
+		CloudPlayTelemetry.logUnsupportedFeatureShown("gallery")
+		DisplayFunction(NewPage, ...)
+	end
 end
 
 function NewPage:ConnectHubToApp(p1, Frame: Frame, p2)

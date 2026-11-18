@@ -774,10 +774,10 @@ CoreScripts.FTUX.Heading.JoinVoice,加入语音聊天
 CoreScripts.FTUX.Heading.LeaveRespawn,离开并重生
 CoreScripts.FTUX.Heading.NewAvatarSwitcher,新功能：虚拟形象切换器
 CoreScripts.FTUX.Heading.NewTiltOnboarding,菜单位于此处
-CoreScripts.FTUX.Heading.NewTiltUpdate,新菜单
 CoreScripts.FTUX.Heading.ReadyToPlaytest,准备好进行游戏测试了吗？
 CoreScripts.FTUX.Heading.SideSheetUpdate,一站式完成所有操作
 CoreScripts.FTUX.Heading.SocialOnboarding,社交功能
+CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,你的新菜单
 CoreScripts.FTUX.Heading.YouAreAnEarlyTester,你是初期测试玩家
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,随时切换成到保存的虚拟形象。
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,随时与你的好友聊天。
@@ -785,11 +785,10 @@ CoreScripts.FTUX.Label.InExperienceShopDescription,指定套装包含额外奖�
 CoreScripts.FTUX.Label.JoinVoiceDescription,听到他人的声音并与之交谈
 CoreScripts.FTUX.Label.LeaveRespawn,从这里即可轻松离开游戏或让你的虚拟形象重生。
 CoreScripts.FTUX.Label.NewTiltOnboarding,游戏菜单包含游戏内操作以及你的游戏设置。
-CoreScripts.FTUX.Label.NewTiltUpdate,汉堡菜单项目已移至此处。
 CoreScripts.FTUX.Label.PartyWithYourFriendsAnytime,随时与你的好友使用 Party 相聚。
 CoreScripts.FTUX.Label.SideSheetOnboarding,菜单包含所有基本功能。你可以邀请好友、尝试动作、控制音乐等。
-CoreScripts.FTUX.Label.SideSheetUpdate,菜单仍然包含所有基本功能。
 CoreScripts.FTUX.Label.SocialOnboarding,从顶部栏轻松访问你的社交功能，包括聊天。
+CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,两个菜单现已合二为一。轻点此处打开新菜单。
 CoreScripts.Feedback.EntryPoint.ButtonText,给予反馈
 CoreScripts.Feedback.EntryPoint.OptionText,给予翻译反馈
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,退出
@@ -2431,6 +2430,7 @@ Feature.Build.Label.IconThumbnails,标志和缩略图
 Feature.Build.Label.Images2D,2D 图片
 Feature.Build.Label.InProgress,进行中
 Feature.Build.Label.InputNeeded,需要输入内容
+Feature.Build.Label.InspirationTab,
 Feature.Build.Label.InternalSpec,内部规格
 Feature.Build.Label.InternalTesting,内部测试
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -3901,6 +3901,7 @@ Feature.InExperienceShop.Label.Active,生效中
 Feature.InExperienceShop.Label.BonusItem,奖励道具
 Feature.InExperienceShop.Label.BuyGamePass,购买游戏通行证
 Feature.InExperienceShop.Label.BuyNow,立即购买
+Feature.InExperienceShop.Label.ContentPersonalization,
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,{timeRemaining}后结束
 Feature.InExperienceShop.Label.FreeTrial,免费试用

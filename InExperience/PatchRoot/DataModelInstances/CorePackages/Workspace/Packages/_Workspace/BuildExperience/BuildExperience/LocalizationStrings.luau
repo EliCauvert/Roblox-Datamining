@@ -288,6 +288,7 @@ return {
 	BUILD_HEADER_TITLE = "Feature.Build.Action.Build",
 	BUILD_HOME_TAB_GAMES = "Feature.Build.Label.GamesTab",
 	BUILD_HOME_TAB_PREVIEWS = "Feature.Build.Label.PreviewsTab",
+	BUILD_HOME_TAB_INSPIRATION = "Feature.Build.Label.InspirationTab",
 	BUILD_SEARCH_PLACEHOLDER = "Feature.Build.Label.SearchGames",
 	BUILD_SUBLINE = "Feature.Build.Message.WhatToCreate",
 	BUILD_MENU_AUDIENCE = "Feature.Build.Title.Audience",

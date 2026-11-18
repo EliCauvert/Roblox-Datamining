@@ -764,10 +764,10 @@ CoreScripts.FTUX.Heading.JoinVoice,वॉइस चैट में शामि
 CoreScripts.FTUX.Heading.LeaveRespawn,छोड़ें और रीस्पॉन करें
 CoreScripts.FTUX.Heading.NewAvatarSwitcher,नया: अवतार स्विचर
 CoreScripts.FTUX.Heading.NewTiltOnboarding,मेन्यू यहाँ मौजूद है
-CoreScripts.FTUX.Heading.NewTiltUpdate,नया मेन्यू
 CoreScripts.FTUX.Heading.ReadyToPlaytest,प्ले-टेस्ट करने के लिए तैयार हैं?
 CoreScripts.FTUX.Heading.SideSheetUpdate,आपके सभी ऐक्शन एक ही जगह पर
 CoreScripts.FTUX.Heading.SocialOnboarding,सोशल फ़ीचर्स
+CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,आपका नया मेन्यू
 CoreScripts.FTUX.Heading.YouAreAnEarlyTester,आप एक अर्ली टेस्टर हैं
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,किसी भी समय अपने सेव किए गए अवतार पर स्विच करें.
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,किसी भी समय अपने दोस्तों से चैट करें.
@@ -775,11 +775,10 @@ CoreScripts.FTUX.Label.InExperienceShopDescription,चुनिंदा पै�
 CoreScripts.FTUX.Label.JoinVoiceDescription,दूसरों को सुनना और उनसे बातें करना
 CoreScripts.FTUX.Label.LeaveRespawn,गेम छोड़ने या अपने अवतार को रीस्पॉन करने की सुविधा यहाँ आसानी से उपलब्ध है.
 CoreScripts.FTUX.Label.NewTiltOnboarding,गेम मेन्यू में आपकी गेम सेटिंग्स के साथ-साथ इन-गेम ऐक्शन शामिल हैं.
-CoreScripts.FTUX.Label.NewTiltUpdate,हैमबर्गर मेन्यू आइटम यहाँ लाए गए हैं.
 CoreScripts.FTUX.Label.PartyWithYourFriendsAnytime,किसी भी समय अपने दोस्तों के साथ पार्टी करें.
 CoreScripts.FTUX.Label.SideSheetOnboarding,"मेन्यू में आपके सभी ज़रूरी फ़ीचर्स मौजूद हैं. दोस्तों को इनवाइट करने, Emotes आज़माने, म्यूज़िक कंट्रोल करने के साथ-साथ और भी बहुत कुछ."
-CoreScripts.FTUX.Label.SideSheetUpdate,मेन्यू में अभी भी आपके सभी ज़रूरी फ़ीचर्स मौजूद हैं.
 CoreScripts.FTUX.Label.SocialOnboarding,"टॉप बार से अपने सोशल फ़ीचर्स आसानी से ऐक्सेस करें, जिसमें चैट भी शामिल है."
+CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,अब दो मेन्यू की जगह एक ही मेन्यू है. इसे खोलने के लिए यहाँ टैप करें.
 CoreScripts.Feedback.EntryPoint.ButtonText,फ़ीडबैक दें
 CoreScripts.Feedback.EntryPoint.OptionText,अनुवाद का फ़ीडबैक दें
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,बाहर निकलें
@@ -3872,6 +3871,7 @@ Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,बोनस आइटम
 Feature.InExperienceShop.Label.BuyGamePass,गेम पास खरीदें
 Feature.InExperienceShop.Label.BuyNow,अभी खरीदें
+Feature.InExperienceShop.Label.ContentPersonalization,
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,{timeRemaining} में खत्म हो जाएगा
 Feature.InExperienceShop.Label.FreeTrial,फ़्री ट्रायल

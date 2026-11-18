@@ -65,6 +65,10 @@ return function(p2, p3)
 			else
 				warn("createInventoryPageStore: pageData must specify assetTypes or outfitInventoryType")
 			end
+		end,
+		getItem = function(p4)
+			-- upvalues: P2 (copy)
+			return if p4.itemType == "Outfit" then P2.getOutfit(p4.itemId).data(false) else P2.getAsset(p4.itemId).data(false)
 		end
 	}
 end

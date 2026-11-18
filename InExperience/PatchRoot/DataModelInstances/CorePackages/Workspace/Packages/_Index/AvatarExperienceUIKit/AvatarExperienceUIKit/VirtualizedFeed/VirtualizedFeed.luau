@@ -16,7 +16,6 @@ local VirtualizedListModule = require(Parent.VirtualizedList)
 local FlatList = VirtualizedListModule.FlatList
 local ScrollView = VirtualizedListModule.ScrollView
 local IsFeedContentScrollableModule = require(script.Parent.isFeedContentScrollable)
-local FFlagVirtualizedFeedFooterWrapperProp = require(Parent.SharedFlags).FFlagVirtualizedFeedFooterWrapperProp
 local FFlagAXScrollTelemetryIntegration2 = require(Parent.SharedFlags).FFlagAXScrollTelemetryIntegration2
 local UseFlatListScrollPerformanceTrackerModule = require(script.Parent.useFlatListScrollPerformanceTracker)
 local ContentContainerStyle = { BackgroundTransparency = 1, BorderSizePixel = 0 }
@@ -83,10 +82,10 @@ local _ = function(p1)
 end
 
 return ReactModule.forwardRef(function(Frame, Ref)
-	-- upvalues: FFlagAXVirtualizedFeedVerticalPadding (copy), FFlagVirtualizedFeedFooterWrapperProp (copy), ReactModule (copy), FFlagAXScrollTelemetryIntegration2 (copy), UseFlatListScrollPerformanceTrackerModule (copy), FFlagAXSduiFeedBackToTopAndNavClearance (copy), FFlagAXFixVirtualizedFeedUpdateDepthModule (copy), IsFeedContentScrollableModule (copy), UserGameSettings (copy), VirtualizedFeedBackToTopButton (copy), Loading (copy), IconSize (copy), View (copy), VirtualizedFeedFooterLayout (copy), FlatList (copy), ContentContainerStyle (copy), Style (copy), FFlagAXSduiFeedSkipScrollWithoutContent (copy), renderScrollViewSkippingScrollsWithoutContent (copy)
+	-- upvalues: FFlagAXVirtualizedFeedVerticalPadding (copy), ReactModule (copy), FFlagAXScrollTelemetryIntegration2 (copy), UseFlatListScrollPerformanceTrackerModule (copy), FFlagAXSduiFeedBackToTopAndNavClearance (copy), FFlagAXFixVirtualizedFeedUpdateDepthModule (copy), IsFeedContentScrollableModule (copy), UserGameSettings (copy), VirtualizedFeedBackToTopButton (copy), Loading (copy), IconSize (copy), View (copy), VirtualizedFeedFooterLayout (copy), FlatList (copy), ContentContainerStyle (copy), Style (copy), FFlagAXSduiFeedSkipScrollWithoutContent (copy), renderScrollViewSkippingScrollsWithoutContent (copy)
 	local HorizontalPadding = Frame.horizontalPadding or 0
 	local VerticalPadding = FFlagAXVirtualizedFeedVerticalPadding and Frame.verticalPadding or 0
-	local NoFFlagVirtualizedFeedFooterWrapperProp: boolean = not FFlagVirtualizedFeedFooterWrapperProp or Frame.shouldWrapFooter ~= false
+	local IsShouldWrapFooter = Frame.shouldWrapFooter ~= false
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseResult = ReactModule.useCallback(function(Current)
 		-- upvalues: UseRefResult (copy), Frame (copy)
@@ -214,44 +213,32 @@ return ReactModule.forwardRef(function(Frame, Ref)
 			local Element1 = nil
 			
 			if ListFooterComponent then
-				if FFlagVirtualizedFeedFooterWrapperProp then
-					local config1 = {
-						footerContent = ListFooterComponent,
-						shouldWrap = NoFFlagVirtualizedFeedFooterWrapperProp
-					}
-					Element1 = if config1.shouldWrap then ReactModule.createElement(VirtualizedFeedFooterLayout, {}, config1.footerContent) else config1.footerContent
-				else
-					Element1 = ReactModule.createElement(VirtualizedFeedFooterLayout, {}, ListFooterComponent)
-				end
+				local config1 = {
+					footerContent = ListFooterComponent,
+					shouldWrap = IsShouldWrapFooter
+				}
+				Element1 = if config1.shouldWrap then ReactModule.createElement(VirtualizedFeedFooterLayout, {}, config1.footerContent) else config1.footerContent
 			else
 				Element1 = nil
 			end
 			t.FooterContent = Element1
 			Element = CreateElementFunction(View, config, t)
 		elseif ListFooterComponent then
-			if FFlagVirtualizedFeedFooterWrapperProp then
-				local config = {
-					footerContent = ListFooterComponent,
-					shouldWrap = NoFFlagVirtualizedFeedFooterWrapperProp
-				}
-				Element = if config.shouldWrap then ReactModule.createElement(VirtualizedFeedFooterLayout, {}, config.footerContent) else config.footerContent
-			else
-				Element = ReactModule.createElement(VirtualizedFeedFooterLayout, {}, ListFooterComponent)
-			end
+			local config = {
+				footerContent = ListFooterComponent,
+				shouldWrap = IsShouldWrapFooter
+			}
+			Element = if config.shouldWrap then ReactModule.createElement(VirtualizedFeedFooterLayout, {}, config.footerContent) else config.footerContent
 		end
 	else
 		local ListFooterComponent1 = if Frame.ListFooterComponent then Frame.ListFooterComponent elseif Frame.isEndOfList and UseStateResult then ReactModule.createElement(VirtualizedFeedBackToTopButton, { text = Frame.scrollToTopLabel, onActivated = UseResult2 }) elseif Frame.isLoading then ReactModule.createElement(Loading, { size = IconSize.Medium }) else nil
 		
 		if ListFooterComponent1 then
-			if FFlagVirtualizedFeedFooterWrapperProp then
-				local config = {
-					footerContent = ListFooterComponent1,
-					shouldWrap = NoFFlagVirtualizedFeedFooterWrapperProp
-				}
-				Element = if config.shouldWrap then ReactModule.createElement(VirtualizedFeedFooterLayout, {}, config.footerContent) else config.footerContent
-			else
-				Element = ReactModule.createElement(VirtualizedFeedFooterLayout, {}, ListFooterComponent1)
-			end
+			local config = {
+				footerContent = ListFooterComponent1,
+				shouldWrap = IsShouldWrapFooter
+			}
+			Element = if config.shouldWrap then ReactModule.createElement(VirtualizedFeedFooterLayout, {}, config.footerContent) else config.footerContent
 		else
 			Element = nil
 		end

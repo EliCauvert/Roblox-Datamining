@@ -266,7 +266,11 @@ return function(_)
 			isActive = IsActive,
 			icon = if FFlagExperienceShopNewIconography or not CommonIconModule or not NewResult then nil else CommonIconModule("BuildingStore", nil, NewResult)
 		}),
-		RestyleTimer = if FFlagEnableRestyleTopBarModule and FFlagUseUIOverlayForCloudPlay then ReactModule.createElement(RestyleTimerModule, { layoutOrder = 4, buttonSize = ScaledTopBarButtonHeight }) else nil
+		RestyleTimer = if FFlagEnableRestyleTopBarModule and FFlagUseUIOverlayForCloudPlay then ReactModule.createElement(RestyleTimerModule, {
+			layoutOrder = 4,
+			buttonSize = ScaledTopBarButtonHeight,
+			showTopBar = ShowTopBar
+		}) else nil
 	})
 	
 	return ReactModule.createElement("ScreenGui", {

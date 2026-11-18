@@ -20,5 +20,6 @@
 	TTGrantSheet = "TTGrantSheet",
 	HomepageLaunchPrompt = "HomepageLaunchPrompt",
 	MarketplaceHeroUnit = "MarketplaceHeroUnit",
-	AvatarSpawnEffects = "AvatarSpawnEffects"
+	AvatarSpawnEffects = "AvatarSpawnEffects",
+	Notification = "notification"
 }

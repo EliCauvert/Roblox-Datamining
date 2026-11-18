@@ -4,6 +4,9 @@ local ReactUtilsModule = require(Parent1.ReactUtils)
 local CaptureService = game:GetService("CaptureService")
 local ReactModule = require(Parent1.React)
 local RoactUtilsModule = require(Parent1.RoactUtils)
+local SignalsModule = require(Parent1.Signals)
+local FFlagKeepSideSheetOpenBesideMenu = require(Parent1.SharedFlags).FFlagKeepSideSheetOpenBesideMenu
+local GetSideSheetVisibilityModule = require(Parent1.InExperienceSideSheetStore.getSideSheetVisibility)
 local CaptureControlsViewModule = require(Parent.Components.CoreUI.CaptureControlsView)
 local ConstantsModule = require(Parent.Constants)
 local MakeVideoCaptureFailedHandlerModule = require(Parent.Utils.makeVideoCaptureFailedHandler)
@@ -14,9 +17,25 @@ local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
 local UseEventConnectionFunction = ReactUtilsModule.useEventConnection
 local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
 
-return function(_)
-	-- upvalues: UseDispatchFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseCallbackFunction (copy), MakeVideoCaptureStartFailedHandlerModule (copy), UseEventConnectionFunction (copy), CaptureService (copy), MakeVideoCaptureFailedHandlerModule (copy), ReactModule (copy), CaptureControlsViewModule (copy), ToastContainerModule (copy)
+return function()
+	-- upvalues: UseDispatchFunction (copy), FFlagKeepSideSheetOpenBesideMenu (copy), ReactModule (copy), GetSideSheetVisibilityModule (copy), SignalsModule (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseCallbackFunction (copy), MakeVideoCaptureStartFailedHandlerModule (copy), UseEventConnectionFunction (copy), CaptureService (copy), MakeVideoCaptureFailedHandlerModule (copy), CaptureControlsViewModule (copy), ToastContainerModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
+	local IsHidden = false
+	
+	if FFlagKeepSideSheetOpenBesideMenu then
+		local UseStateResult2 = nil
+		IsHidden, UseStateResult2 = ReactModule.useState(function()
+			-- upvalues: GetSideSheetVisibilityModule (upval)
+			return GetSideSheetVisibilityModule(false)
+		end)
+		ReactModule.useEffect(function()
+			-- upvalues: SignalsModule (upval), UseStateResult2 (ref), GetSideSheetVisibilityModule (upval)
+			return SignalsModule.createEffect(function(p1)
+				-- upvalues: UseStateResult2 (upval), GetSideSheetVisibilityModule (upval)
+				UseStateResult2(GetSideSheetVisibilityModule(p1))
+			end)
+		end, {})
+	end
 	local UseSelectorResult = UseSelectorFunction(function(p1)
 		-- upvalues: ConstantsModule (upval)
 		return p1[ConstantsModule.RoduxKey].Carousel.IsOpen
@@ -29,7 +48,7 @@ return function(_)
 	UseEventConnectionFunction(CaptureService.UserVideoCaptureFailed, (UseCallbackFunction(MakeVideoCaptureFailedHandlerModule(UseDispatchResult), {})))
 	
 	return ReactModule.createElement(ReactModule.Fragment, {}, {
-		CaptureControlsView = if UseSelectorResult1 then ReactModule.createElement(CaptureControlsViewModule) else nil,
+		CaptureControlsView = if UseSelectorResult1 then ReactModule.createElement(CaptureControlsViewModule, if FFlagKeepSideSheetOpenBesideMenu then { isHidden = IsHidden } else nil) else nil,
 		ToastsFrame = if UseSelectorResult then nil else ReactModule.createElement("Frame", {
 			Active = false,
 			BackgroundTransparency = 1,

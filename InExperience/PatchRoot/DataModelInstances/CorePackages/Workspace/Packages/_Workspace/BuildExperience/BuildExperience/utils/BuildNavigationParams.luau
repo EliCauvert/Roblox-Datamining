@@ -3,6 +3,7 @@ local _ = require(BuildExperience.Parent.DataHydration.CreatorAgentChat)
 local _ = require(BuildExperience.Chat.chatTypes)
 
 return {
+	BUILD_HOME_SCREEN = "BuildHome",
 	BUILD_CHAT_SCREEN = "BuildChat",
 	getTarget = function(p1)
 		return (p1.getParam("target"))

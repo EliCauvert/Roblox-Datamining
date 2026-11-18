@@ -782,10 +782,10 @@ CoreScripts.FTUX.Heading.JoinVoice,ボイスチャットを開始
 CoreScripts.FTUX.Heading.LeaveRespawn,退出とリスポーン
 CoreScripts.FTUX.Heading.NewAvatarSwitcher,新機能: アバター切り替え
 CoreScripts.FTUX.Heading.NewTiltOnboarding,メニューはこちらです
-CoreScripts.FTUX.Heading.NewTiltUpdate,新しいメニュー
 CoreScripts.FTUX.Heading.ReadyToPlaytest,プレイテストの準備はできましたか？
 CoreScripts.FTUX.Heading.SideSheetUpdate,すべてのアクションを一元管理
 CoreScripts.FTUX.Heading.SocialOnboarding,SNS機能
+CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,新しいメニュー
 CoreScripts.FTUX.Heading.YouAreAnEarlyTester,あなたは早期テスターです
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,保存済みのアバターにいつでも切り替えられます。
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,いつでも友達とチャットできます。
@@ -793,11 +793,10 @@ CoreScripts.FTUX.Label.InExperienceShopDescription,一部のパッケージに�
 CoreScripts.FTUX.Label.JoinVoiceDescription,ボイスチャットで音声通話
 CoreScripts.FTUX.Label.LeaveRespawn,ゲームからの退出やアバターのリスポーンは、ここから簡単に行えます。
 CoreScripts.FTUX.Label.NewTiltOnboarding,ゲームメニューには、ゲーム内のアクションとゲーム設定が含まれています。
-CoreScripts.FTUX.Label.NewTiltUpdate,ハンバーガーメニューのアイテムはこちらに移動しました。
 CoreScripts.FTUX.Label.PartyWithYourFriendsAnytime,いつでも友達とパーティ機能が使えます。
 CoreScripts.FTUX.Label.SideSheetOnboarding,メニューには、すべての基本機能が含まれています。友達を招待したり、リアクションを試したり、音楽をコントロールしたりしましょう。
-CoreScripts.FTUX.Label.SideSheetUpdate,メニューには、これまでと同様に、すべての必須機能が含まれています。
 CoreScripts.FTUX.Label.SocialOnboarding,上部のバーから、チャットなどのSNS機能に簡単にアクセスできます。
+CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,2つのメニューが1つになりました。ここをタップすると開きます。
 CoreScripts.Feedback.EntryPoint.ButtonText,フィードバックを送信
 CoreScripts.Feedback.EntryPoint.OptionText,翻訳の向上に協力する
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,終了
@@ -3891,6 +3890,7 @@ Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,ボーナスアイテム
 Feature.InExperienceShop.Label.BuyGamePass,ゲームパスを買う
 Feature.InExperienceShop.Label.BuyNow,今すぐ買う
+Feature.InExperienceShop.Label.ContentPersonalization,
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,あと{timeRemaining}で終了
 Feature.InExperienceShop.Label.FreeTrial,無料トライアル

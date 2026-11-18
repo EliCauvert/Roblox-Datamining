@@ -61,6 +61,7 @@ return function(p1)
 			onClose = p1.onClose,
 			onSearchOpen = p1.onSearchOpen,
 			isReportingEnabled = p1.isReportingEnabled,
+			isContentPersonalizationEnabled = p1.isContentPersonalizationEnabled,
 			isOverflowMenuOpen = p1.isOverflowMenuOpen,
 			onOverflowActivated = p1.onOverflowActivated,
 			onOverflowMenuClosed = p1.onOverflowMenuClosed,

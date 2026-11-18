@@ -765,10 +765,10 @@ CoreScripts.FTUX.Heading.JoinVoice,الانضمام إلى المحادثة ال
 CoreScripts.FTUX.Heading.LeaveRespawn,الخروج وإعادة الظهور
 CoreScripts.FTUX.Heading.NewAvatarSwitcher,جديد: مُبدّل الأفاتار
 CoreScripts.FTUX.Heading.NewTiltOnboarding,القائمة موجودة هنا
-CoreScripts.FTUX.Heading.NewTiltUpdate,قائمة جديدة
 CoreScripts.FTUX.Heading.ReadyToPlaytest,هل أنت جاهز لاختبار اللعب؟
 CoreScripts.FTUX.Heading.SideSheetUpdate,جميع إجراءاتك في مكان واحد
 CoreScripts.FTUX.Heading.SocialOnboarding,ميزات التواصل الاجتماعي
+CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,قائمتك الجديدة
 CoreScripts.FTUX.Heading.YouAreAnEarlyTester,أنت مختبر لعب مبكر
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,انتقل إلى الأفاتارات المحفوظة بسهولة وفي أي وقت.
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,دردش مع أصدقائك في أي وقت.
@@ -776,11 +776,10 @@ CoreScripts.FTUX.Label.InExperienceShopDescription,تتضمن بعض الحزم 
 CoreScripts.FTUX.Label.JoinVoiceDescription,للاستماع والتحدث مع الآخرين
 CoreScripts.FTUX.Label.LeaveRespawn,يمكنك الوصول بسهولة إلى خيار الخروج من اللعبة أو إعادة الظهور لأفاتارك من هنا.
 CoreScripts.FTUX.Label.NewTiltOnboarding,تحتوي قائمة اللعبة على إجراءات داخل اللعبة بالإضافة إلى إعدادات لعبتك.
-CoreScripts.FTUX.Label.NewTiltUpdate,تم نقل عناصر القائمة الجانبية إلى هنا.
 CoreScripts.FTUX.Label.PartyWithYourFriendsAnytime,شارك في فرقة مع أصدقائك في أي وقت.
 CoreScripts.FTUX.Label.SideSheetOnboarding,تحتوي القائمة على جميع الميزات الأساسية لديك. ادعُ الأصدقاء، وجرّب الحركات التعبيرية (Emotes)، وتحكَّم في الموسيقى، وغير ذلك الكثير.
-CoreScripts.FTUX.Label.SideSheetUpdate,لا تزال القائمة تحتوي على جميع ميزاتك الأساسية.
 CoreScripts.FTUX.Label.SocialOnboarding,يمكنك الوصول بسهولة إلى ميزات التواصل الاجتماعي لديك من الشريط العلوي، بما في ذلك خاصية الدردشة.
+CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,أصبحت القائمتان قائمة واحدة. اضغط هنا لفتحها.
 CoreScripts.Feedback.EntryPoint.ButtonText,تقديم ملاحظات
 CoreScripts.Feedback.EntryPoint.OptionText,ملاحظات حول الترجمة
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,
@@ -2375,6 +2374,7 @@ Feature.Build.Label.IconThumbnails,الأيقونة والصور المصغرة
 Feature.Build.Label.Images2D,صور 2D
 Feature.Build.Label.InProgress,قيد التقدم
 Feature.Build.Label.InputNeeded,الإدخال مطلوب
+Feature.Build.Label.InspirationTab,الإلهام
 Feature.Build.Label.InternalSpec,مواصفات داخلية
 Feature.Build.Label.InternalTesting,اختبار داخلي
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -3848,6 +3848,7 @@ Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,عنصر مكافأة
 Feature.InExperienceShop.Label.BuyGamePass,اشترِ تذكرة اللعبة
 Feature.InExperienceShop.Label.BuyNow,اشترِ الآن
+Feature.InExperienceShop.Label.ContentPersonalization,
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,ينتهي خلال {timeRemaining}
 Feature.InExperienceShop.Label.FreeTrial,فترة تجريبية مجانية

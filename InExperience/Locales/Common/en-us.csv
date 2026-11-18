@@ -783,10 +783,10 @@ CoreScripts.FTUX.Heading.JoinVoice,Join Voice Chat
 CoreScripts.FTUX.Heading.LeaveRespawn,Leave and respawn
 CoreScripts.FTUX.Heading.NewAvatarSwitcher,New: Avatar switcher
 CoreScripts.FTUX.Heading.NewTiltOnboarding,The menu lives here
-CoreScripts.FTUX.Heading.NewTiltUpdate,New menu
 CoreScripts.FTUX.Heading.ReadyToPlaytest,Ready to playtest?
 CoreScripts.FTUX.Heading.SideSheetUpdate,All your actions in one place
 CoreScripts.FTUX.Heading.SocialOnboarding,Social features
+CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,Your new menu
 CoreScripts.FTUX.Heading.YouAreAnEarlyTester,You're an early tester
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,Switch to your saved avatars anytime.
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,Chat with your friends anytime.
@@ -794,11 +794,10 @@ CoreScripts.FTUX.Label.InExperienceShopDescription,Select packages include a bon
 CoreScripts.FTUX.Label.JoinVoiceDescription,To hear and talk with others
 CoreScripts.FTUX.Label.LeaveRespawn,Leaving the game or respawning your avatar is easily accessible from here.
 CoreScripts.FTUX.Label.NewTiltOnboarding,The game menu contains in-game actions along with your game settings.
-CoreScripts.FTUX.Label.NewTiltUpdate,The hamburger menu items have been moved here.
 CoreScripts.FTUX.Label.PartyWithYourFriendsAnytime,Party with your friends anytime.
 CoreScripts.FTUX.Label.SideSheetOnboarding,"The menu contains all your essential features. Invite friends, try out Emotes, control Music, and more."
-CoreScripts.FTUX.Label.SideSheetUpdate,The menu still contains all your essential features.
 CoreScripts.FTUX.Label.SocialOnboarding,"Easily access your social features from the top bar, including Chat."
+CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,Two menus are now one. Tap here to open it.
 CoreScripts.Feedback.EntryPoint.ButtonText,Give Feedback
 CoreScripts.Feedback.EntryPoint.OptionText,Give Translation Feedback
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,Exit
@@ -2439,6 +2438,7 @@ Feature.Build.Label.IconThumbnails,Icon & thumbnails
 Feature.Build.Label.Images2D,2D images
 Feature.Build.Label.InProgress,In progress
 Feature.Build.Label.InputNeeded,Input needed
+Feature.Build.Label.InspirationTab,Inspiration
 Feature.Build.Label.InternalSpec,Internal spec
 Feature.Build.Label.InternalTesting,Internal testing
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -3912,6 +3912,7 @@ Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,Bonus item
 Feature.InExperienceShop.Label.BuyGamePass,Buy game pass
 Feature.InExperienceShop.Label.BuyNow,Buy Now
+Feature.InExperienceShop.Label.ContentPersonalization,
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Ends in {timeRemaining}
 Feature.InExperienceShop.Label.FreeTrial,Free trial

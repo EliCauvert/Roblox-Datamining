@@ -28,6 +28,7 @@ return function(p1)
 		layoutOrder = p1.layoutOrder,
 		onAreaChanged = p1.onAreaChanged,
 		onAreaRemoved = p1.onAreaRemoved,
-		isHidden = if FFlagTopBarRefactor then nil else UseObservableValueModuleResult == false or p1.followsUILessMode == true and UseSignalStateResult
+		isHidden = if FFlagTopBarRefactor then nil else UseObservableValueModuleResult == false or p1.followsUILessMode == true and UseSignalStateResult,
+		isTopBarVisible = if FFlagTopBarRefactor then UseObservableValueModuleResult ~= false else nil
 	})
 end

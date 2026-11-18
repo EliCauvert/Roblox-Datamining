@@ -1,7 +1,11 @@
 ﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
-local config = { Games = "Games", Previews = "Previews" }
+local config = {
+	Games = "Games",
+	Previews = "Previews",
+	Inspiration = "Inspiration"
+}
 
 return {
 	BUILD_HOME_TAB = config,
