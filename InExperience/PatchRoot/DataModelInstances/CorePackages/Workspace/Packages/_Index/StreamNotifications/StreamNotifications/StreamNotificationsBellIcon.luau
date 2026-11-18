@@ -35,6 +35,7 @@ local FFlagSignalsNavP3bTopBar = SharedFlagsModule.FFlagSignalsNavP3bTopBar
 local FFlagEnableHeaderBarButtonsUpdate = SharedFlagsModule.FFlagEnableHeaderBarButtonsUpdate
 local FFlagStreamNotificationDropdownSingleOwner = SharedFlagsModule.FFlagStreamNotificationDropdownSingleOwner
 local FFlagStreamNotificationDropdownFocusedOwner = SharedFlagsModule.FFlagStreamNotificationDropdownFocusedOwner
+local FFlagKeepSideSheetOpenBesideMenu = SharedFlagsModule.FFlagKeepSideSheetOpenBesideMenu
 local FFlagPauseScrollAwayForNotificationsDropdown = SharedFlagsModule.FFlagPauseScrollAwayForNotificationsDropdown
 local VisibilityControl = require(Parent.AppNavBar).VisibilityControl
 local IconsCommonNotificationOff = Images["icons/common/notificationOff"]
@@ -44,8 +45,8 @@ local function _(): boolean
 	return ThirdPartyUserService and (ThirdPartyUserService:IsChatRestrictionSupported() and ThirdPartyUserService.FriendCommunicationRestrictionStatus ~= Enum.ChatRestrictionStatus.NotRestricted)
 end
 
-local function v36(p1)
-	-- upvalues: ReactModule (copy), FFlagStreamNotificationDropdownSingleOwner (copy), FFlagStreamNotificationDropdownFocusedOwner (copy), HttpService (copy), StreamNotificationStoreModule (copy), FFlagEnableNotificationsDeeplink (copy), UseSignalStateFunction (copy), StreamNotificationDropdownExperimentationModule (copy), UseTokensFunction (copy), FFlagStreamNotificationBellEntryPoint (copy), FFlagSignalsNavP3bTopBar (copy), NotificationHelper (copy), EventStream (copy), AnalyticsConstantsModule (copy), ConstantsModule (copy), StreamNotificationsModule (copy), FFlagPauseScrollAwayForNotificationsDropdown (copy), GetFFlagNotificationsComplianceShouldRestrictStreamFunction (copy), IsAppNavEnabledFunction (copy), VisibilityControl (copy), ThirdPartyUserService (copy), IxpHelper (copy), GetFStringNotificationsStreamNotificationUXLayerFunction (copy), FFlagEnableHeaderBarButtonsUpdate (copy), FoundationModule (copy), Popover (copy), PopoverSide (copy), PopoverAlign (copy), IconsCommonNotificationOff (copy), UtilityActionIcon (copy), IconButton (copy), IconSize (copy), Badge (copy), BadgeVariant (copy)
+local function v37(p1)
+	-- upvalues: ReactModule (copy), FFlagStreamNotificationDropdownSingleOwner (copy), FFlagStreamNotificationDropdownFocusedOwner (copy), HttpService (copy), StreamNotificationStoreModule (copy), FFlagEnableNotificationsDeeplink (copy), UseSignalStateFunction (copy), StreamNotificationDropdownExperimentationModule (copy), UseTokensFunction (copy), FFlagStreamNotificationBellEntryPoint (copy), FFlagSignalsNavP3bTopBar (copy), NotificationHelper (copy), EventStream (copy), AnalyticsConstantsModule (copy), ConstantsModule (copy), StreamNotificationsModule (copy), FFlagKeepSideSheetOpenBesideMenu (copy), FFlagPauseScrollAwayForNotificationsDropdown (copy), GetFFlagNotificationsComplianceShouldRestrictStreamFunction (copy), IsAppNavEnabledFunction (copy), VisibilityControl (copy), ThirdPartyUserService (copy), IxpHelper (copy), GetFStringNotificationsStreamNotificationUXLayerFunction (copy), FFlagEnableHeaderBarButtonsUpdate (copy), FoundationModule (copy), Popover (copy), PopoverSide (copy), PopoverAlign (copy), IconsCommonNotificationOff (copy), UtilityActionIcon (copy), IconButton (copy), IconSize (copy), Badge (copy), BadgeVariant (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local Current = nil
 	
@@ -123,11 +124,15 @@ local function v36(p1)
 		end
 	end, { Number })
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: IsOpen (ref), ReactModule (upval), StreamNotificationsModule (upval), FFlagEnableNotificationsDeeplink (upval), StreamNotificationStoreModule (upval), UseStateResult2 (copy)
+		-- upvalues: IsOpen (ref), ReactModule (upval), StreamNotificationsModule (upval), FFlagEnableNotificationsDeeplink (upval), StreamNotificationStoreModule (upval), UseStateResult2 (copy), FFlagKeepSideSheetOpenBesideMenu (upval), p1 (copy)
 		return if IsOpen then ReactModule.createElement(StreamNotificationsModule, {
-			displayStream = if FFlagEnableNotificationsDeeplink then StreamNotificationStoreModule.setStreamPresented else UseStateResult2
+			displayStream = if FFlagEnableNotificationsDeeplink then StreamNotificationStoreModule.setStreamPresented else UseStateResult2,
+			displayOrder = if FFlagKeepSideSheetOpenBesideMenu then p1.displayOrder else nil
 		}) else nil
-	end, { IsOpen })
+	end, {
+		IsOpen,
+		if FFlagKeepSideSheetOpenBesideMenu then p1.displayOrder else nil
+	})
 	
 	if FFlagPauseScrollAwayForNotificationsDropdown then
 		local ShouldRestrictStream = GetFFlagNotificationsComplianceShouldRestrictStreamFunction() and p1.shouldRestrictStream
@@ -287,10 +292,10 @@ local function v36(p1)
 end
 
 if GetFFlagNotificationsComplianceShouldRestrictStreamFunction() then
-	v36 = RoactAppPolicy.connect(function(p1, _)
+	v37 = RoactAppPolicy.connect(function(p1, _)
 		return {
 			shouldRestrictStream = p1.getNotificationsCanReceiveStream() or false
 		}
-	end)(v36)
+	end)(v37)
 end
-return v36
+return v37

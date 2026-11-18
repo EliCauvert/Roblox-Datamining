@@ -29,6 +29,7 @@ local FFlagJoinabilityCTAContextCopy = SharedFlagsModule.FFlagJoinabilityCTACont
 local FFlagDesktopGameJoinCardGamepadSupport = SharedFlagsModule.FFlagDesktopGameJoinCardGamepadSupport
 local FFlagConsoleOpenGameJoinCard = SharedFlagsModule.FFlagConsoleOpenGameJoinCard
 local FFlagGameJoinCardContent = SharedFlagsModule.FFlagGameJoinCardContent
+local FFlagLuaAppAddTestIdsForArrow = SharedFlagsModule.FFlagLuaAppAddTestIdsForArrow
 local UseGameJoinCardGamepadNavigationFunction = nil
 local AssignPrimaryFocusRefFunction = nil
 
@@ -42,7 +43,7 @@ local _ = require(GameJoinCard.Components.Actions.Types)
 local BuildJoinCardActionsComponentModule = require(GameJoinCard.Components.Actions.buildJoinCardActionsComponent)
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), UseScaledValueFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), GetBuilderIconForCurrentPlatformFunction (copy), ViewEDPsourceValues (copy), ViewProfileSourceValues (copy), ControlState (copy), FFlagConsoleOpenGameJoinCard (copy), FFlagDesktopGameJoinCardGamepadSupport (copy), UseGameJoinCardGamepadNavigationFunction (ref), UseComposedRefFunction (copy), FFlagJoinabilityCTARefactor (copy), FFlagGameJoinCardContent (copy), Skeleton (copy), Radius (copy), AssignPrimaryFocusRefFunction (ref), BuildJoinCardActionsComponentModule (copy), Button (copy), FFlagJoinabilityCTAContextCopy (copy), View (copy), Image (copy), FFlagBlockEDPClickthrough (copy), StateLayerAffordance (copy), Text (copy), Icon (copy), IconSize (copy), AgeCheckUpsellCTAModule (copy), ButtonVariant (copy), InputSize (copy), FoundationModule (copy)
+	-- upvalues: UseTokensFunction (copy), UseScaledValueFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), GetBuilderIconForCurrentPlatformFunction (copy), ViewEDPsourceValues (copy), ViewProfileSourceValues (copy), ControlState (copy), FFlagConsoleOpenGameJoinCard (copy), FFlagDesktopGameJoinCardGamepadSupport (copy), UseGameJoinCardGamepadNavigationFunction (ref), UseComposedRefFunction (copy), FFlagJoinabilityCTARefactor (copy), FFlagGameJoinCardContent (copy), Skeleton (copy), Radius (copy), AssignPrimaryFocusRefFunction (ref), BuildJoinCardActionsComponentModule (copy), Button (copy), FFlagLuaAppAddTestIdsForArrow (copy), FFlagJoinabilityCTAContextCopy (copy), View (copy), Image (copy), FFlagBlockEDPClickthrough (copy), StateLayerAffordance (copy), Text (copy), Icon (copy), IconSize (copy), AgeCheckUpsellCTAModule (copy), ButtonVariant (copy), InputSize (copy), FoundationModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseScaledValueResult = UseScaledValueFunction(260)
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -101,12 +102,12 @@ return function(p1)
 				radius = Radius.Medium
 			})
 		else
-			t, v54 = BuildJoinCardActionsComponentModule(PrimaryButtonFocusRef and AssignPrimaryFocusRefFunction(p1.actions, PrimaryButtonFocusRef) or p1.actions, {
+			t, v55 = BuildJoinCardActionsComponentModule(PrimaryButtonFocusRef and AssignPrimaryFocusRefFunction(p1.actions, PrimaryButtonFocusRef) or p1.actions, {
 				playTogether = UseLocalizationResult.playTogether,
 				playTogetherSoon = UseLocalizationResult.playTogetherSoon,
 				differentServer = UseLocalizationResult.differentServer
 			}, p1.onClose, function(p2, LayoutOrder)
-				-- upvalues: ReactModule (upval), Button (upval)
+				-- upvalues: ReactModule (upval), Button (upval), FFlagLuaAppAddTestIdsForArrow (upval)
 				return ReactModule.createElement(Button, {
 					tag = "align-x-center fill size-full-0",
 					ref = p2.focusRef,
@@ -120,7 +121,8 @@ return function(p1)
 					variant = p2.variant,
 					size = p2.inputSize,
 					width = p2.width,
-					LayoutOrder = LayoutOrder
+					LayoutOrder = LayoutOrder,
+					testId = if FFlagLuaAppAddTestIdsForArrow then `--game-join-card-action-{p2.id}` else nil
 				})
 			end)
 		end
@@ -276,7 +278,8 @@ return function(p1)
 						isLoading = IsLoading,
 						variant = ButtonVariant.Emphasis,
 						size = InputSize.Medium,
-						width = UDim.new(1, 0)
+						width = UDim.new(1, 0),
+						testId = if FFlagLuaAppAddTestIdsForArrow then "--game-join-card-action-JoinExperience" else nil
 					}),
 					ChatButton = if p1.onChat == nil then nil else ReactModule.createElement(Button, {
 						tag = "align-x-center fill size-full-0",
@@ -293,7 +296,8 @@ return function(p1)
 						Size = UDim2.new(1, 0, 0, UseTokensResult.Size.Size_600),
 						onActivated = UseResult2,
 						onStateChanged = UseResult3,
-						stateLayer = { affordance = StateLayerAffordance.None }
+						stateLayer = { affordance = StateLayerAffordance.None },
+						testId = if FFlagLuaAppAddTestIdsForArrow then "--game-join-card-action-ViewProfile" else nil
 					}, {
 						Label = ReactModule.createElement(Text, {
 							RichText = true,

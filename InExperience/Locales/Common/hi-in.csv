@@ -3564,6 +3564,7 @@ Feature.Friends.Label.FollowsYou,आपको फ़ॉलो करता ह�
 Feature.Friends.Label.Frequent,एक साथ खेले
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,Roblox पर फ़्रेंड्स बनने के लिए इनवाइट किया है
+Feature.Friends.Label.FriendOfUser,{displayName} का फ़्रेंड
 Feature.Friends.Label.FriendOwns,1 फ़्रेंड के पास है
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 फ़्रेंड ने</b> हाल ही में खेला
 Feature.Friends.Label.FriendRequest,
@@ -3731,12 +3732,11 @@ Feature.Groups.Description.RequiresAccountTenureTooltipOneMonth,"इस कम�
 Feature.Groups.Description.RequiresAccountTenureTooltipOneWeek,"इस कम्यूनिटी को जॉइन करने के लिए, आपके पास 7 दिन पुराना अकाउंट होना चाहिए."
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeDays,"इस कम्यूनिटी को जॉइन करने के लिए, आपके पास 3 दिन पुराना अकाउंट होना चाहिए."
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeMonths,"इस कम्यूनिटी को जॉइन करने के लिए, आपके पास 90 दिन पुराना अकाउंट होना चाहिए."
-Feature.Groups.Header.UppercaseMyGroups,मेरी कम्यूनिटी
 Feature.Groups.Heading.Community,
 Feature.Groups.Heading.Followers,
 Feature.Groups.Heading.Groups,
 Feature.Groups.Heading.Members,
-Feature.Groups.Heading.MyGroups,
+Feature.Groups.Heading.MyGroups,मेरी कम्यूनिटी
 Feature.Groups.Heading.Primary,प्राइमरी
 Feature.Groups.Heading.SocialLinksNew,सोशल लिंक्स
 Feature.Groups.Heading.SocialMedia,सोशल मीडिया
@@ -3941,12 +3941,21 @@ Feature.Moments.Action.ShowDetails,जानकारी दिखाएँ
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,वीडियो ट्रिम करें
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Action.View,
 Feature.Moments.Action.ViewOtherFeed,अन्य फ़ीड देखें
 Feature.Moments.Action.ViewRecommended,'सुझाया गया' देखें
 Feature.Moments.Action.ViewTrending,'ट्रेंडिंग' देखें
 Feature.Moments.Body.EDPMomentIPReportInstructions,"इस Moment में IP (बौद्धिक संपदा) उल्लंघन की रिपोर्ट करने के लिए, गेम की जानकारी वाले पेज पर जाएँ."
 Feature.Moments.Description.CommunityStandards,"क्या कहें और क्या न कहें, इस बारे में ज़्यादा जानकारी के लिए कम्यूनिटी स्टैंडर्ड देखें."
 Feature.Moments.Description.EmptyCapturesLibrary,आपके कैप्चर यहाँ दिखेंगे.
+Feature.Moments.Description.EngagementFirstLike,इसे अभी देखें
+Feature.Moments.Description.EngagementFirstReaction,आपके Moment पर अभी-अभी पहला रिऐक्शन आया है!
+Feature.Moments.Description.EngagementLikedCommentsDigest,आपके {likedComments} कमेंट को लाइक मिले हैं
+Feature.Moments.Description.EngagementMomentDigest,{comments} नए कमेंट और {milestone} रिऐक्शन
+Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementNewComment,ने अभी-अभी आपके Moment पर कमेंट किया है
+Feature.Moments.Description.EngagementNewComments,और {count} अन्य लोगों ने आपके Moment पर कमेंट किया है
+Feature.Moments.Description.EngagementReactionMilestone,{count} नए रिऐक्शन
 Feature.Moments.Description.FollowingCaughtUpBody,आपने इस फ़ीड में सभी नए Moments देख लिए हैं. और देखने के लिए फ़ीड बदलें.
 Feature.Moments.Description.FollowingEmptyBodyRecommended,"आपको यहाँ उन क्रिएटर्स के Moments दिखेंगे, जिन्हें आपने फ़ॉलो किया है."
 Feature.Moments.Description.FollowingEmptyBodyTrending,
@@ -4093,6 +4102,14 @@ Feature.Moments.Title.Comments,कमेंट्स
 Feature.Moments.Title.CommentsWithCappedCount,{count}+ कमेंट्स
 Feature.Moments.Title.CommentsWithCount,{count} कमेंट्स
 Feature.Moments.Title.EDPMomentIPReportInstructions,गेम की जानकारी वाले पेज पर रिपोर्ट करें
+Feature.Moments.Title.EngagementFirstLike,आपको एक लाइक मिला है
+Feature.Moments.Title.EngagementFirstReaction,नई ऐक्टिविटी
+Feature.Moments.Title.EngagementLikedCommentsDigest,नए लाइक
+Feature.Moments.Title.EngagementMomentDigest,आपका Moment चर्चा में है
+Feature.Moments.Title.EngagementMomentsDigest,आपके Moments चर्चा में हैं
+Feature.Moments.Title.EngagementNewComment,{name}
+Feature.Moments.Title.EngagementNewComments,
+Feature.Moments.Title.EngagementReactionMilestone,आपके Moment पर लोगों का ध्यान जा रहा है
 Feature.Moments.Title.GenerateTextFeedbackReason,क्या गड़बड़ी हुई?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,क्या आपको ‘Moment’ क्रिएशन छोड़ना है?

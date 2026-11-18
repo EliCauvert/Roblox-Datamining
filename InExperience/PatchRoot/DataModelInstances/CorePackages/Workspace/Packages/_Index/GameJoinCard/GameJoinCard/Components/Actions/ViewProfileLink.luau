@@ -22,7 +22,8 @@ return function(Frame)
 			UseStateResult2(Hover == ControlState.Hover)
 		end, {}),
 		stateLayer = { affordance = StateLayerAffordance.None },
-		LayoutOrder = Frame.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder,
+		testId = Frame.testId
 	}, {
 		Label = ReactModule.createElement(Text, {
 			RichText = true,

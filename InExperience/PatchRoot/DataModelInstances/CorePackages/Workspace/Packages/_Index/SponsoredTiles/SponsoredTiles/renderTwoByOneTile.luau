@@ -8,9 +8,10 @@ local GetTileBadgeByPositionConfigFromEntryFunction = GameTileModule.getTileBadg
 local ResolveWideAssetIdFunction = GameTileModule.resolveWideAssetId
 local _ = require(Parent.VideoUtils)
 local FFlagLuaAppEnableReportExperience = require(Parent.SharedFlags).FFlagLuaAppEnableReportExperience
+local FFlagLuaAppSponsoredTileFootnoteText = require(Parent.SharedFlags).FFlagLuaAppSponsoredTileFootnoteText
 local FFlagLuaAppEnableFlexibleFeatureTileVariants = require(Parent.SharedFlags).FFlagLuaAppEnableFlexibleFeatureTileVariants
 local MemoResult = ReactModule.memo(function(p1)
-	-- upvalues: ReactModule (copy), GetTileBadgeByPositionConfigFromEntryFunction (copy), TwoByOneTileModule (copy), FFlagLuaAppEnableFlexibleFeatureTileVariants (copy), FFlagLuaAppEnableReportExperience (copy), ResolveWideAssetIdFunction (copy)
+	-- upvalues: ReactModule (copy), GetTileBadgeByPositionConfigFromEntryFunction (copy), TwoByOneTileModule (copy), FFlagLuaAppEnableFlexibleFeatureTileVariants (copy), FFlagLuaAppSponsoredTileFootnoteText (copy), FFlagLuaAppEnableReportExperience (copy), ResolveWideAssetIdFunction (copy)
 	local Negated = -((p1.maxItemIndex or 0) + 1)
 	
 	return ReactModule.createElement(TwoByOneTileModule, {
@@ -28,6 +29,7 @@ local MemoResult = ReactModule.memo(function(p1)
 		subtitle = p1.item.subtitle,
 		ctaText = p1.item.ctaText,
 		tileVariant = p1.item.tileVariant,
+		footnoteText = if FFlagLuaAppSponsoredTileFootnoteText then p1.item.footnoteText else nil,
 		badgeOverride = GetTileBadgeByPositionConfigFromEntryFunction(p1.item),
 		payerName = p1.item.payerName,
 		adId = p1.item.adId,

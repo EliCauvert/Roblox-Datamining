@@ -34,6 +34,8 @@ local Chrome = script.Parent.Parent.Parent.Chrome
 local ServiceModule = if require(CorePackages.Workspace.Packages.Chrome).Enabled() then require(Chrome.Service) else nil
 local UnibarStyle = require(CorePackages.Workspace.Packages.Chrome).UnibarStyle
 local FFlagTokenizeUnibarConstantsWithStyleProvider = require(Chrome.ChromeShared.Flags).FFlagTokenizeUnibarConstantsWithStyleProvider
+local FFlagAlignSideSheetWindowCloseRight = require(CorePackages.Workspace.Packages.SharedFlags).FFlagAlignSideSheetWindowCloseRight
+local GetWindowCloseButtonLayoutModule = require(script.Parent.Parent.getWindowCloseButtonLayout)
 local FFlagTopBarSignalizeScreenSize = require(CorePackages.Workspace.Packages.CoreGuiCommon).Flags.FFlagTopBarSignalizeScreenSize
 local ReactDevtoolsFixTopbar = game:DefineFastFlag("ReactDevtoolsFixTopbar", true)
 local NewResult = require(CoreGui:WaitForChild("RobloxGui").Modules.SelfView.Analytics).new()
@@ -42,11 +44,12 @@ local IconsActionsPreviewExpand = Images["icons/actions/previewExpand"]
 local FaceCloneModule = require(script.Parent.FaceClone)
 
 return function(p1)
-	-- upvalues: UseStyleFunction (copy), FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule (copy), UseAppPolicyFunction (copy), UseLocalizationFunction (copy), UseCameraOnModule (copy), UseTrackerMessageModule (copy), UseWindowSizeIsLargeModule (copy), UseScreenSizeModule (copy), FFlagTopBarSignalizeScreenSize (copy), SizingUtilsModule (copy), UseSelectorFunction (copy), ReactModule (copy), UseLocalPlayerModule (copy), FaceChatUtilsModule (copy), UseTooltipDismissalModule (copy), ClearTimeoutFunction (copy), SetTimeoutFunction (copy), ModelUtilsModule (copy), NewResult (copy), FaceCloneModule (copy), ControlState (copy), Interactable (copy), CameraStatusIconModule (copy), ServiceModule (copy), ImageSetLabel (copy), IconsActionsPreviewShrink (copy), IconsActionsPreviewExpand (copy), StyledTextLabel (copy), ReactDevtoolsFixTopbar (copy), WithTooltipFunction (copy), CoreGui (copy), TooltipOrientation (copy), CameraStatusDotModule (copy)
+	-- upvalues: UseStyleFunction (copy), FFlagAlignSideSheetWindowCloseRight (copy), GetWindowCloseButtonLayoutModule (copy), FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule (copy), UseAppPolicyFunction (copy), UseLocalizationFunction (copy), UseCameraOnModule (copy), UseTrackerMessageModule (copy), UseWindowSizeIsLargeModule (copy), UseScreenSizeModule (copy), FFlagTopBarSignalizeScreenSize (copy), SizingUtilsModule (copy), UseSelectorFunction (copy), ReactModule (copy), UseLocalPlayerModule (copy), FaceChatUtilsModule (copy), UseTooltipDismissalModule (copy), ClearTimeoutFunction (copy), SetTimeoutFunction (copy), ModelUtilsModule (copy), NewResult (copy), FaceCloneModule (copy), ControlState (copy), Interactable (copy), CameraStatusIconModule (copy), ServiceModule (copy), ImageSetLabel (copy), IconsActionsPreviewShrink (copy), IconsActionsPreviewExpand (copy), StyledTextLabel (copy), ReactDevtoolsFixTopbar (copy), WithTooltipFunction (copy), CoreGui (copy), TooltipOrientation (copy), CameraStatusDotModule (copy)
 	local Id = p1.id
 	local UseStyleResult = UseStyleFunction()
 	local Theme = UseStyleResult.Theme
 	local UseStyleResultFont = UseStyleResult.Font
+	local WindowCloseButtonLayoutModule = if FFlagAlignSideSheetWindowCloseRight then GetWindowCloseButtonLayoutModule() else nil
 	local CLOSEBUTTONFRAME = if FFlagTokenizeUnibarConstantsWithStyleProvider then UnibarStyle.use().CLOSE_BUTTON_FRAME else ConstantsModule.CLOSE_BUTTON_FRAME
 	local UseLocalizationResult = UseLocalizationFunction({
 		robloxPermissionErrorHeader = "CoreScripts.TopBar.RobloxPermissionErrorHeader",
@@ -80,7 +83,7 @@ return function(p1)
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(false)
 	local UseRefResult = ReactModule.useRef(nil)
 	
-	local function v61()
+	local function v64()
 		-- upvalues: UseRefResult (copy), ClearTimeoutFunction (upval), UseStateResult2 (copy), SetTimeoutFunction (upval)
 		if UseRefResult.current then
 			ClearTimeoutFunction(UseRefResult.current)
@@ -111,7 +114,7 @@ return function(p1)
 		end
 	end, { UseRefResult })
 	
-	local function v62(p2)
+	local function v65(p2)
 		-- upvalues: UseRefResult (copy), ClearTimeoutFunction (upval), UseStateResult2 (copy), SetTimeoutFunction (upval), FaceChatUtilsModule (upval), UseTooltipDismissalModuleResult4 (copy), UseLocalizationResult (copy), UseLocalPlayerModuleResult (copy), ModelUtilsModule (upval), NewResult (upval)
 		if UseRefResult.current then
 			ClearTimeoutFunction(UseRefResult.current)
@@ -135,8 +138,8 @@ return function(p1)
 	end
 	
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: v62 (copy)
-		v62(false)
+		-- upvalues: v65 (copy)
+		v65(false)
 	end, {
 		FaceChatUtilsModule,
 		ModelUtilsModule,
@@ -153,7 +156,7 @@ return function(p1)
 			-- upvalues: UseStateResult2 (upval)
 			UseStateResult2(false)
 		end, 2000)
-	end, { v61, UseStateResult, p1.windowSize })
+	end, { v64, UseStateResult, p1.windowSize })
 	local UseRefResult1 = ReactModule.useRef(nil)
 	ReactModule.useEffect(function()
 		-- upvalues: FaceCloneModule (upval), UseLocalPlayerModuleResult (copy), UseRefResult1 (copy)
@@ -206,14 +209,16 @@ return function(p1)
 		Size = UDim2.fromScale(1, 1),
 		BackgroundColor3 = UseStyleResult.Theme.BackgroundUIDefault.Color,
 		BackgroundTransparency = 0,
-		[ReactModule.Event.MouseEnter] = v61,
-		[ReactModule.Event.MouseMoved] = v61,
+		[ReactModule.Event.MouseEnter] = v64,
+		[ReactModule.Event.MouseMoved] = v64,
 		ref = UseRefResult1
 	}, {}, {
 		CloseButtonWrapper = UseStateResult and ReactModule.createElement("Frame", {
 			ZIndex = 2,
 			BackgroundTransparency = 1,
-			Size = CLOSEBUTTONFRAME
+			Size = CLOSEBUTTONFRAME,
+			AnchorPoint = if WindowCloseButtonLayoutModule then WindowCloseButtonLayoutModule.close.anchorPoint else nil,
+			Position = if WindowCloseButtonLayoutModule then WindowCloseButtonLayoutModule.close.position else nil
 		}, {
 			CloseButtonLayout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,
@@ -264,8 +269,8 @@ return function(p1)
 			ZIndex = 2,
 			BackgroundTransparency = 1,
 			Size = CLOSEBUTTONFRAME,
-			AnchorPoint = Vector2.new(1, 0),
-			Position = UDim2.new(1, 0, 0, 0)
+			AnchorPoint = if WindowCloseButtonLayoutModule then WindowCloseButtonLayoutModule.expand.anchorPoint else Vector2.new(1, 0),
+			Position = if WindowCloseButtonLayoutModule then WindowCloseButtonLayoutModule.expand.position else UDim2.new(1, 0, 0, 0)
 		}, {
 			ExpandButtonLayout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,

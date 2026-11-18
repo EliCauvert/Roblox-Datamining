@@ -20,6 +20,10 @@ local FFlagUnifiedPurchaseAddSkeleton = require(Parent.Parent.SharedFlags).FFlag
 local FFlagEnableUnifiedPurchaseFlowForDevSubs = require(Parent.Parent.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
 local GetFFlagDiscountInfoForSubscriptionPurchaseModalLuaFunction = require(Parent.Parent.SharedFlags).GetFFlagDiscountInfoForSubscriptionPurchaseModalLua
 local FFlagLuaAppsEnablePromptVIPServerPurchase = require(Parent.Parent.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
+local FFlagLuaAppAddTestIdsForArrow = require(Parent.Parent.SharedFlags).FFlagLuaAppAddTestIdsForArrow
+local IapProductDetailsName = if FFlagLuaAppAddTestIdsForArrow then "--iap-product-details-name" else nil
+local IapProductDetailsPrice = if FFlagLuaAppAddTestIdsForArrow then "--iap-product-details-price" else nil
+local IapProductDetailsIcon = if FFlagLuaAppAddTestIdsForArrow then "--iap-product-details-icon" else nil
 local Default = require(Parent1.LoggingProtocol).default
 local VirtualItemBadgeShownCounter = require(Parent.Generic.Events.VirtualItemBadgeCounter).VirtualItemBadgeShownCounter
 
@@ -30,7 +34,7 @@ end
 local _ = require(Parent.ProductPurchase.PricingTypes)
 
 return function(p1)
-	-- upvalues: GetFFlagDiscountInfoForSubscriptionPurchaseModalLuaFunction (copy), UseLocalizationFunction (copy), UseTokensFunction (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), UseRobuxTextModule (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), ReactModule (copy), ModelViewportModule (copy), FFlagUnifiedPurchaseAddSkeleton (copy), Skeleton (copy), Radius (copy), Image (copy), VirtualItemBadgeTypeModule (copy), YellowBadgeModule (copy), Default (copy), VirtualItemBadgeShownCounter (copy), View (copy), Text (copy), FormatNumberModule (copy), LocalizationService (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy)
+	-- upvalues: GetFFlagDiscountInfoForSubscriptionPurchaseModalLuaFunction (copy), UseLocalizationFunction (copy), UseTokensFunction (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), UseRobuxTextModule (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), ReactModule (copy), ModelViewportModule (copy), FFlagUnifiedPurchaseAddSkeleton (copy), Skeleton (copy), Radius (copy), Image (copy), IapProductDetailsIcon (copy), VirtualItemBadgeTypeModule (copy), YellowBadgeModule (copy), Default (copy), VirtualItemBadgeShownCounter (copy), View (copy), Text (copy), IapProductDetailsName (copy), IapProductDetailsPrice (copy), FormatNumberModule (copy), LocalizationService (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy)
 	local FFlagDiscountInfoForSubscriptionPurchaseModalLua = GetFFlagDiscountInfoForSubscriptionPurchaseModalLuaFunction()
 	local ItemPrice = p1.itemPrice
 	local PriceInRobux = if ItemPrice then ItemPrice.priceInRobux else p1.itemRobuxCost
@@ -56,6 +60,7 @@ return function(p1)
 		Size = UDim2.new(0, XOffset, 0, XOffset),
 		ScaleType = Enum.ScaleType.Stretch,
 		Image = if p1.itemIcon then p1.itemIcon else "icons/status/imageunavailable",
+		testId = IapProductDetailsIcon,
 		imageStyle = {
 			Transparency = if p1.itemIcon then nil else UseTokensResult.Color.Content.Default.Transparency
 		}
@@ -108,7 +113,8 @@ return function(p1)
 			LayoutOrder = 1,
 			Size = UDim2.new(1, 0, 0, 0),
 			Text = if #ItemName > 50 then ItemName:sub(1, 50) .. "..." else ItemName,
-			tag = AutoXyTextAlignXLeftTextWrapTextTitleSmallContentEmphasis
+			tag = AutoXyTextAlignXLeftTextWrapTextTitleSmallContentEmphasis,
+			testId = IapProductDetailsName
 		})
 	end
 	t.ItemName = Element2
@@ -125,20 +131,24 @@ return function(p1)
 			LayoutOrder = 1,
 			RichText = true,
 			Text = p1.priceText,
-			tag = AutoXyTextAlignXLeftTextWrapTextTitleSmallContentEmphasis1
+			tag = AutoXyTextAlignXLeftTextWrapTextTitleSmallContentEmphasis1,
+			testId = IapProductDetailsPrice
 		}) elseif PriceInRobux then if FFlagUnifiedPurchaseFlowMarketplaceUIImprovements then ReactModule.createElement(Text, {
 			LayoutOrder = 1,
 			RichText = true,
 			Text = UseRobuxTextModuleResult .. (if PriceSuffix and PriceSuffix ~= "" then "" .. PriceSuffix else ""),
-			tag = AutoXyTextAlignXLeftTextWrapTextTitleSmallContentEmphasis1
+			tag = AutoXyTextAlignXLeftTextWrapTextTitleSmallContentEmphasis1,
+			testId = IapProductDetailsPrice
 		}) else ReactModule.createElement(Text, {
 			LayoutOrder = 1,
 			tag = "auto-xy text-align-x-left text-wrap text-title-medium content-emphasis",
-			Text = utf8.char(57346) .. " " .. FormatNumberModule(LocalizationService.RobloxLocaleId, PriceInRobux) .. (if PriceSuffix and PriceSuffix ~= "" then "" .. PriceSuffix else "")
+			Text = utf8.char(57346) .. " " .. FormatNumberModule(LocalizationService.RobloxLocaleId, PriceInRobux) .. (if PriceSuffix and PriceSuffix ~= "" then "" .. PriceSuffix else ""),
+			testId = IapProductDetailsPrice
 		}) elseif FFlagEnableUnifiedPurchaseFlowForDevSubs and p1.itemDisplayPrice then ReactModule.createElement(Text, {
 			LayoutOrder = 1,
 			Text = p1.itemDisplayPrice .. (if PriceSuffix and PriceSuffix ~= "" then "" .. PriceSuffix else ""),
-			tag = AutoXyTextAlignXLeftTextWrapTextTitleSmallContentEmphasis1
+			tag = AutoXyTextAlignXLeftTextWrapTextTitleSmallContentEmphasis1,
+			testId = IapProductDetailsPrice
 		}) else nil,
 		OriginalPrice = if IsBasePriceInRobuxAbove and UseRobuxTextModuleResult1 then ReactModule.createElement(Text, {
 			LayoutOrder = 2,

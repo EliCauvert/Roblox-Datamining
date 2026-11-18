@@ -305,6 +305,7 @@ return function()
 		pageTimer = UseMemoResult1,
 		routeName = UseRouteNameResult,
 		showOverview = NoUseIsCompactTouchModuleResult,
+		isCompactTouch = UseIsCompactTouchModuleResult,
 		sidebarWidth = UseSignalStateResult,
 		selectedId = UseSignalStateResult3,
 		isOverviewEmbedded = UseSignalStateResult3 ~= nil and UseSignalStateResult3 == SelectedGroupId1,

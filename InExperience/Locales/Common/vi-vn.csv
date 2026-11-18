@@ -3583,6 +3583,7 @@ Feature.Friends.Label.FollowsYou,Theo Dõi Bạn
 Feature.Friends.Label.Frequent,Đã chơi cùng
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,Đã mời bạn trở thành bạn bè trên Roblox
+Feature.Friends.Label.FriendOfUser,Bạn bè của {displayName}
 Feature.Friends.Label.FriendOwns,1 Người bạn sở hữu
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 Người bạn</b> vừa mới chơi
 Feature.Friends.Label.FriendRequest,
@@ -3750,7 +3751,6 @@ Feature.Groups.Description.RequiresAccountTenureTooltipOneMonth,Bạn phải có
 Feature.Groups.Description.RequiresAccountTenureTooltipOneWeek,Bạn phải có tài khoản hoạt động đủ 7 ngày mới có thể tham gia cộng đồng này.
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeDays,Bạn phải có tài khoản hoạt động đủ 3 ngày mới có thể tham gia cộng đồng này.
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeMonths,Bạn phải có tài khoản hoạt động đủ 90 ngày mới có thể tham gia cộng đồng này.
-Feature.Groups.Header.UppercaseMyGroups,CỘNG ĐỒNG CỦA TÔI
 Feature.Groups.Heading.Community,Cộng đồng
 Feature.Groups.Heading.Followers,Người theo dõi
 Feature.Groups.Heading.Groups,
@@ -3960,12 +3960,21 @@ Feature.Moments.Action.ShowDetails,Hiển thị chi tiết
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Cắt video
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Action.View,
 Feature.Moments.Action.ViewOtherFeed,Xem bảng tin khác
 Feature.Moments.Action.ViewRecommended,Xem khoảnh khắc được đề xuất
 Feature.Moments.Action.ViewTrending,Xem khoảnh khắc thịnh hành
 Feature.Moments.Body.EDPMomentIPReportInstructions,"Để báo cáo trường hợp vi phạm về tài sản trí tuệ trong Khoảnh khắc này, hãy chuyển đến trang chi tiết của trò chơi."
 Feature.Moments.Description.CommunityStandards,Xem Tiêu chuẩn cộng đồng để biết thêm thông tin về những điều bạn được phép và không được phép nói.
 Feature.Moments.Description.EmptyCapturesLibrary,Ảnh chụp/video quay màn hình của bạn sẽ xuất hiện ở đây.
+Feature.Moments.Description.EngagementFirstLike,Xem ngay
+Feature.Moments.Description.EngagementFirstReaction,Đã có người đầu tiên bày tỏ cảm xúc với Khoảnh khắc của bạn!
+Feature.Moments.Description.EngagementLikedCommentsDigest,{likedComments} bình luận của bạn đã nhận được lượt thích
+Feature.Moments.Description.EngagementMomentDigest,{comments} bình luận mới và {milestone} lượt bày tỏ cảm xúc
+Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementNewComment,vừa bình luận về Khoảnh khắc của bạn
+Feature.Moments.Description.EngagementNewComments,và {count} người khác đã bình luận về Khoảnh khắc của bạn
+Feature.Moments.Description.EngagementReactionMilestone,{count} lượt bày tỏ cảm xúc mới
 Feature.Moments.Description.FollowingCaughtUpBody,Bạn đã xem hết Khoảnh khắc mới trong bảng tin này. Hãy chuyển sang bảng tin khác để xem thêm.
 Feature.Moments.Description.FollowingEmptyBodyRecommended,"Tại đây, bạn sẽ xem được Khoảnh khắc của các nhà sáng tạo mà bạn đang theo dõi."
 Feature.Moments.Description.FollowingEmptyBodyTrending,
@@ -4112,6 +4121,14 @@ Feature.Moments.Title.Comments,Bình luận
 Feature.Moments.Title.CommentsWithCappedCount,{count}+ bình luận
 Feature.Moments.Title.CommentsWithCount,{count} bình luận
 Feature.Moments.Title.EDPMomentIPReportInstructions,Báo cáo trên trang chi tiết của trò chơi
+Feature.Moments.Title.EngagementFirstLike,Đã có người thích bình luận của bạn
+Feature.Moments.Title.EngagementFirstReaction,Hoạt động mới
+Feature.Moments.Title.EngagementLikedCommentsDigest,Lượt thích mới
+Feature.Moments.Title.EngagementMomentDigest,Khoảnh khắc của bạn đang gây sốt
+Feature.Moments.Title.EngagementMomentsDigest,Các Khoảnh khắc của bạn đang gây sốt
+Feature.Moments.Title.EngagementNewComment,{name}
+Feature.Moments.Title.EngagementNewComments,
+Feature.Moments.Title.EngagementReactionMilestone,Khoảnh khắc của bạn đang thu hút sự chú ý
 Feature.Moments.Title.GenerateTextFeedbackReason,Đã xảy ra vấn đề gì?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Rời khỏi quá trình tạo Khoảnh khắc?

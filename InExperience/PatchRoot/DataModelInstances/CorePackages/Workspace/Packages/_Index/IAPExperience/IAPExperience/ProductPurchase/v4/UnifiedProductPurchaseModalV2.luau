@@ -26,10 +26,11 @@ local FFlagUnifiedPurchaseFlowMarketplaceUIImprovements = require(Parent.Parent.
 local FFlagUnifiedPurchaseAddSkeleton = require(Parent.Parent.SharedFlags).FFlagUnifiedPurchaseAddSkeleton
 local FFlagEnableUnifiedPurchaseFlowForDevSubs = require(Parent.Parent.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
 local FFlagOffersOnlyAffordableLock = require(Parent.Parent.SharedFlags).FFlagOffersOnlyAffordableLock
+local FFlagLuaAppAddTestIdsForArrow = require(Parent.Parent.SharedFlags).FFlagLuaAppAddTestIdsForArrow
 local _ = require(script.Parent.cartPricingResponseLineItem)
 
 local function UnifiedProductPurchaseModalV2(p1)
-	-- upvalues: UseLocalizationFunction (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), UrlBuilder (copy), UnifiedPurchaseModalTypeEnumModule (copy), UseCartPricingModule (copy), ReactModule (copy), UseFocusNavigationRefsModule (copy), FFlagUnifiedPurchaseAddSkeleton (copy), FFlagOffersOnlyAffordableLock (copy), Checkbox (copy), SubtitleComponentMapModule (copy), CartPricingProductDetailsModule (copy), BuildCartPricingOfferCheckboxesModule (copy), View (copy), ButtonVariant (copy), FoundationModule (copy), Dialog (copy), DialogSize (copy), BlackbirdUpsellBanner (copy)
+	-- upvalues: UseLocalizationFunction (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), UrlBuilder (copy), UnifiedPurchaseModalTypeEnumModule (copy), UseCartPricingModule (copy), ReactModule (copy), UseFocusNavigationRefsModule (copy), FFlagUnifiedPurchaseAddSkeleton (copy), FFlagOffersOnlyAffordableLock (copy), Checkbox (copy), SubtitleComponentMapModule (copy), CartPricingProductDetailsModule (copy), BuildCartPricingOfferCheckboxesModule (copy), View (copy), ButtonVariant (copy), FoundationModule (copy), Dialog (copy), DialogSize (copy), FFlagLuaAppAddTestIdsForArrow (copy), BlackbirdUpsellBanner (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		Buy = "IAPExperience.PurchasePrompt.Action.Buy",
 		Subscribe = "Feature.Subscription.Action.Subscribe",
@@ -135,7 +136,8 @@ local function UnifiedProductPurchaseModalV2(p1)
 		disablePortal = false,
 		size = DialogSize.Medium,
 		onClose = p1.buttons.cancelActivated,
-		ref = UseFocusNavigationRefsModuleResult
+		ref = UseFocusNavigationRefsModuleResult,
+		testId = if FFlagLuaAppAddTestIdsForArrow then "--iap-product-purchase" else nil
 	}, {
 		DialogTitle = ReactModule.createElement(Dialog.Title, { text = GetSubscription }),
 		DialogContent = ReactModule.createElement(View, {

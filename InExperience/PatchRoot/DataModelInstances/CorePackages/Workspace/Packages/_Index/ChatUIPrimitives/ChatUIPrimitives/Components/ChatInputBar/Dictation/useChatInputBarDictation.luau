@@ -45,6 +45,22 @@ return function(p1, p2, OnSubmit, p3, p4)
 		end
 	end, { p4, v1, GetDictationStateFunction, CancelFunction })
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetDictationStateFunction)
+	local IsUseSignalStateResultMatch: boolean = v1 and (UseSignalStateResult == DictationState.Recording or UseSignalStateResult == DictationState.Transcribing)
+	local IsNotUseSignalStateResultMatch: boolean = v1 and UseSignalStateResult ~= DictationState.Idle
+	local OnActiveChanged = if p1 then p1.onActiveChanged else nil
+	ReactModule.useEffect(function()
+		-- upvalues: OnActiveChanged (copy), IsNotUseSignalStateResultMatch (copy)
+		if OnActiveChanged == nil or not IsNotUseSignalStateResultMatch then
+			return nil
+		else
+			OnActiveChanged(true)
+			
+			return function()
+				-- upvalues: OnActiveChanged (upval)
+				OnActiveChanged(false)
+			end
+		end
+	end, { IsNotUseSignalStateResultMatch, OnActiveChanged })
 	
-	return v1, UseDictationInputBarModuleResult, v1 and (UseSignalStateResult == DictationState.Recording or UseSignalStateResult == DictationState.Transcribing)
+	return v1, UseDictationInputBarModuleResult, IsUseSignalStateResultMatch
 end

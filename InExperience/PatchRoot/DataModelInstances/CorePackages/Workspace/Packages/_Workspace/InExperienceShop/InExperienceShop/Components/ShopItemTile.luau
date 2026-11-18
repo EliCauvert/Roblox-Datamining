@@ -18,7 +18,6 @@ local UseGamePassTrialRedemptionModule = require(InExperienceShop.Hooks.useGameP
 local GetInExperienceShopStoreModule = require(InExperienceShop.Stores.getInExperienceShopStore)
 local ToUnifiedCategoryIdModule = require(InExperienceShop.Analytics.toUnifiedCategoryId)
 local SHOPITEMMEDIAHEIGHTSCALE = require(InExperienceShop.Components.computeShopRowTileWidths).SHOP_ITEM_MEDIA_HEIGHT_SCALE
-local FFlagEnableInExperienceShopUnifiedLoggingModule = require(InExperienceShop.Flags.FFlagEnableInExperienceShopUnifiedLogging)
 local FFlagEnableCategoryLoggingInShopModule = require(InExperienceShop.Flags.FFlagEnableCategoryLoggingInShop)
 local FFlagCategoryLoggingInShopPurchaseModule = require(InExperienceShop.Flags.FFlagCategoryLoggingInShopPurchase)
 local FFlagFixThumbnailBackgroundInExperienceShopModule = require(InExperienceShop.Flags.FFlagFixThumbnailBackgroundInExperienceShop)
@@ -63,7 +62,7 @@ local function FreeTrialLabel(Frame)
 end
 
 return ReactModule.memo(function(Frame: Frame)
-	-- upvalues: SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), ReactModule (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy), FFlagEnableGamePassTrialUnifiedLoggingModule (copy), FFlagEnableInExperienceShopUnifiedLoggingModule (copy), Parent (copy), InExperienceShop (copy), ToUnifiedCategoryIdModule (copy), FFlagEnableCategoryLoggingInShopModule (copy), SessionService (copy), FFlagCategoryLoggingInShopPurchaseModule (copy), UseGamePassTrialRedemptionModule (copy), FFlagEnableFreeTrialTopBarChipModule (copy), FFlagEnableDiscountOnInShopTileModule (copy), FormatPriceModule (copy), View (copy), SHOPITEMMEDIAHEIGHTSCALE (copy), Image (copy), FFlagFixThumbnailBackgroundInExperienceShopModule (copy), TrialBadge (copy), Text (copy), FreeTrialLabel (copy), Icon (copy), ConstantsModule (copy), IconSize (copy), GetIconRichTextFunction (copy), Enums (copy), ShopItemFooterModule (copy)
+	-- upvalues: SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), ReactModule (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy), FFlagEnableGamePassTrialUnifiedLoggingModule (copy), Parent (copy), InExperienceShop (copy), ToUnifiedCategoryIdModule (copy), FFlagEnableCategoryLoggingInShopModule (copy), SessionService (copy), FFlagCategoryLoggingInShopPurchaseModule (copy), UseGamePassTrialRedemptionModule (copy), FFlagEnableFreeTrialTopBarChipModule (copy), FFlagEnableDiscountOnInShopTileModule (copy), FormatPriceModule (copy), View (copy), SHOPITEMMEDIAHEIGHTSCALE (copy), Image (copy), FFlagFixThumbnailBackgroundInExperienceShopModule (copy), TrialBadge (copy), Text (copy), FreeTrialLabel (copy), Icon (copy), ConstantsModule (copy), IconSize (copy), GetIconRichTextFunction (copy), Enums (copy), ShopItemFooterModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetInExperienceShopStoreModule)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(function(p1)
@@ -113,8 +112,7 @@ return ReactModule.memo(function(Frame: Frame)
 		trialStatus = Available1
 	}
 	ReactModule.useEffect(function()
-		-- upvalues: FFlagEnableInExperienceShopUnifiedLoggingModule (upval), FFlagEnableGamePassTrialUnifiedLoggingModule (upval), Frame (copy), UseSignalStateResult5 (copy), Parent (upval), InExperienceShop (upval), ToUnifiedCategoryIdModule (upval), FFlagEnableCategoryLoggingInShopModule (upval), Available1 (copy), UseRefResult (copy), SessionService (upval)
-		if not FFlagEnableInExperienceShopUnifiedLoggingModule then return end
+		-- upvalues: FFlagEnableGamePassTrialUnifiedLoggingModule (upval), Frame (copy), UseSignalStateResult5 (copy), Parent (upval), InExperienceShop (upval), ToUnifiedCategoryIdModule (upval), FFlagEnableCategoryLoggingInShopModule (upval), Available1 (copy), UseRefResult (copy), SessionService (upval)
 		if not FFlagEnableGamePassTrialUnifiedLoggingModule or Frame.itemType ~= "GamePass" or UseSignalStateResult5 == "settled" then
 			task.defer(function()
 				-- upvalues: Parent (upval), InExperienceShop (upval), Frame (upval), ToUnifiedCategoryIdModule (upval), FFlagEnableCategoryLoggingInShopModule (upval), FFlagEnableGamePassTrialUnifiedLoggingModule (upval), Available1 (upval), UseRefResult (upval), SessionService (upval)
@@ -234,7 +232,7 @@ return ReactModule.memo(function(Frame: Frame)
 		tag = "col fill size-full-0 auto-y radius-medium clip bg-shift-200",
 		LayoutOrder = Frame.LayoutOrder,
 		onActivated = if OnItemActivatedFunction then UseResult else nil,
-		ref = if FFlagEnableInExperienceShopUnifiedLoggingModule then UseRefResult else nil
+		ref = UseRefResult
 	}, {
 		Media = ReactModule.createElement(Image, {
 			LayoutOrder = 1,

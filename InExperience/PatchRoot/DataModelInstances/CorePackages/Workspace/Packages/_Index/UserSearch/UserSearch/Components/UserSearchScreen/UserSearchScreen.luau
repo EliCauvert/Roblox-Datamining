@@ -6,13 +6,17 @@ local AppPage = require(Parent.RobloxAppEnums).AppPage
 local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
 local FullscreenPageWithSafeArea = require(Parent.AppBlox).FullscreenPageWithSafeArea
 local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local SocialPersonalizationSurfaceKeys = require(Parent.SocialCommon).Enums.SocialPersonalizationSurfaceKeys
 local UserSearchHeaderBarModule = require(UserSearch.Components.UserSearchHeaderBar)
 local AnalyticsModule = require(UserSearch.Analytics)
+local FFlagUserSearchResultsHeaderEnabled = require(Parent.SharedFlags).FFlagUserSearchResultsHeaderEnabled
 local EventNames = AnalyticsModule.EventNames
 local UseUserSearchAnalyticsFunction = AnalyticsModule.useUserSearchAnalytics
+local FriendsAddFriendsSearch = SocialPersonalizationSurfaceKeys.Friends_AddFriends_Search
 
 return function(p1)
-	-- upvalues: UseNavigationFunction (copy), UseStyleFunction (copy), ReactModule (copy), HttpService (copy), UseUserSearchAnalyticsFunction (copy), EventNames (copy), AppPage (copy), FullscreenPageWithSafeArea (copy), UserSearchHeaderBarModule (copy)
+	-- upvalues: UseNavigationFunction (copy), UseStyleFunction (copy), FFlagUserSearchResultsHeaderEnabled (copy), UseLocalizationFunction (copy), FriendsAddFriendsSearch (copy), ReactModule (copy), HttpService (copy), UseUserSearchAnalyticsFunction (copy), EventNames (copy), AppPage (copy), FullscreenPageWithSafeArea (copy), UserSearchHeaderBarModule (copy)
 	local RenderUserSearchResultsFunction = p1.renderUserSearchResults
 	local UseNavigationResult = UseNavigationFunction()
 	local UseStyleResult = UseStyleFunction()
@@ -20,6 +24,11 @@ return function(p1)
 	local SearchKeywordParam = UseNavigationResult.getParam("searchKeyword")
 	local ShouldShowUserSearchLandingPageParam = UseNavigationResult.getParam("shouldShowUserSearchLandingPage")
 	local EntryPointParam = UseNavigationResult.getParam("entryPoint")
+	local UseLocalizationResult = if FFlagUserSearchResultsHeaderEnabled then UseLocalizationFunction({
+		resultsHeaderTitle = "Feature.PlayerSearchResults.Heading.SearchResults"
+	}) else nil
+	local ResultsHeaderTitle = if FFlagUserSearchResultsHeaderEnabled then UseLocalizationResult.resultsHeaderTitle else nil
+	local PersonalizationSettingsSurfaceKeyParam = if FFlagUserSearchResultsHeaderEnabled then UseNavigationResult.getParam("personalizationSettingsSurfaceKey") or FriendsAddFriendsSearch else nil
 	local UseRefResult = ReactModule.useRef(HttpService:GenerateGUID(false))
 	local UseUserSearchAnalyticsResult = UseUserSearchAnalyticsFunction({
 		currentPage = EntryPointParam,
@@ -42,10 +51,17 @@ return function(p1)
 			searchKeyword = SearchKeywordParam,
 			focusOnSearchInput = ShouldShowUserSearchLandingPageParam,
 			onSubmitSearch = ReactModule.useCallback(function(Kwd)
-				-- upvalues: UseNavigationResult (copy), AppPage (upval), EntryPointParam (copy), UseUserSearchAnalyticsResult (copy), EventNames (upval)
-				UseNavigationResult.replace(AppPage.UserSearch, { searchKeyword = Kwd, entryPoint = EntryPointParam })
+				-- upvalues: UseNavigationResult (copy), AppPage (upval), EntryPointParam (copy), FFlagUserSearchResultsHeaderEnabled (upval), PersonalizationSettingsSurfaceKeyParam (copy), UseUserSearchAnalyticsResult (copy), EventNames (upval)
+				UseNavigationResult.replace(AppPage.UserSearch, {
+					searchKeyword = Kwd,
+					entryPoint = EntryPointParam,
+					personalizationSettingsSurfaceKey = if FFlagUserSearchResultsHeaderEnabled then PersonalizationSettingsSurfaceKeyParam else nil
+				})
 				UseUserSearchAnalyticsResult.fireAnalyticsEvent(EventNames.UserSearchBarSubmit, { kwd = Kwd })
-			end, { EntryPointParam }),
+			end, {
+				EntryPointParam,
+				if FFlagUserSearchResultsHeaderEnabled then PersonalizationSettingsSurfaceKeyParam else nil
+			}),
 			onBackClick = ReactModule.useCallback(function()
 				-- upvalues: UseNavigationResult (copy), UseUserSearchAnalyticsResult (copy), EventNames (upval)
 				UseNavigationResult.pop()
@@ -59,16 +75,20 @@ return function(p1)
 			Size = UDim2.new(1, 0, 1, -Tokens.Size.Size_1200)
 		}, {
 			UserSearchPage = ReactModule.useMemo(function()
-				-- upvalues: RenderUserSearchResultsFunction (copy), SearchKeywordParam (copy), ShouldShowUserSearchLandingPageParam (copy), UseRefResult (copy)
+				-- upvalues: RenderUserSearchResultsFunction (copy), SearchKeywordParam (copy), ShouldShowUserSearchLandingPageParam (copy), UseRefResult (copy), FFlagUserSearchResultsHeaderEnabled (upval), ResultsHeaderTitle (copy), PersonalizationSettingsSurfaceKeyParam (copy)
 				return RenderUserSearchResultsFunction({
 					searchKeyword = SearchKeywordParam,
 					shouldShowUserSearchLandingPage = ShouldShowUserSearchLandingPageParam,
-					searchUuid = UseRefResult.current
+					searchUuid = UseRefResult.current,
+					resultsHeaderTitle = if FFlagUserSearchResultsHeaderEnabled then ResultsHeaderTitle else nil,
+					personalizationSettingsSurfaceKey = if FFlagUserSearchResultsHeaderEnabled then PersonalizationSettingsSurfaceKeyParam else nil
 				})
 			end, {
 				SearchKeywordParam,
 				ShouldShowUserSearchLandingPageParam,
-				UseRefResult
+				UseRefResult,
+				if FFlagUserSearchResultsHeaderEnabled then ResultsHeaderTitle else nil,
+				if FFlagUserSearchResultsHeaderEnabled then PersonalizationSettingsSurfaceKeyParam else nil
 			})
 		})
 	})

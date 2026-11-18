@@ -3,5 +3,6 @@
 	ContextualInfoTypes = require(script.ContextualInfoTypes),
 	ChatEntryPointNames = require(script.ChatEntryPointNames),
 	RecommendationContextType = require(script.RecommendationContextType),
-	PresenceTypes = require(script.PresenceTypes)
+	PresenceTypes = require(script.PresenceTypes),
+	SocialPersonalizationSurfaceKeys = require(script.SocialPersonalizationSurfaceKeys)
 }

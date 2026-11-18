@@ -1,6 +1,5 @@
 ﻿local FriendsCalling = script:FindFirstAncestor("FriendsCalling")
 local Parent = FriendsCalling.Parent
-local CallingService = game:GetService("CallingService")
 local FriendsCallingService = game:GetService("FriendsCallingService")
 local FloatingWindowModule = require(Parent.FloatingWindow)
 local FoundationModule = require(Parent.Foundation)
@@ -8,7 +7,6 @@ local ReactModule = require(Parent.React)
 local ResponsiveModule = require(Parent.Responsive)
 local RobloxAppEnumsModule = require(Parent.RobloxAppEnums)
 local RobloxAppHooksModule = require(Parent.RobloxAppHooks)
-local FFlagFriendsCallingServiceLuaMigrationModule = require(Parent.SharedFlags.FFlagFriendsCallingServiceLuaMigration)
 local _ = require(FriendsCalling.Stores.GetFriendsCallingStore)
 local CollapsedCallOverlayModule = require(script.Parent.CollapsedCallOverlay)
 local ExpandedCallOverlayModule = require(script.Parent.ExpandedCallOverlay)
@@ -33,7 +31,7 @@ local function toggleConversationAudio(p1)
 end
 
 return function(p1)
-	-- upvalues: UseCallPipViewModelModule (copy), UseTokensFunction (copy), UseDeviceInsetsFunction (copy), UseDeviceOrientationFunction (copy), DeviceOrientationMode (copy), ReactModule (copy), FFlagFriendsCallingServiceLuaMigrationModule (copy), FriendsCallingService (copy), CallingService (copy), ResolveCardLayoutModule (copy), ExpandedCallOverlayModule (copy), noop (copy), toggleConversationAudio (copy), toggleMicrophone (copy), CollapsedCallOverlayModule (copy), FloatingWindowModule (copy), _UDim2 (copy)
+	-- upvalues: UseCallPipViewModelModule (copy), UseTokensFunction (copy), UseDeviceInsetsFunction (copy), UseDeviceOrientationFunction (copy), DeviceOrientationMode (copy), ReactModule (copy), FriendsCallingService (copy), ResolveCardLayoutModule (copy), ExpandedCallOverlayModule (copy), noop (copy), toggleConversationAudio (copy), toggleMicrophone (copy), CollapsedCallOverlayModule (copy), FloatingWindowModule (copy), _UDim2 (copy)
 	local Host = p1.host
 	local UseCallPipViewModelModuleResult = UseCallPipViewModelModule(p1.call)
 	local IsExpanded = UseCallPipViewModelModuleResult.isExpanded
@@ -49,14 +47,8 @@ return function(p1)
 	end, {})
 	local CallId = p1.call.callId
 	local UseResult1 = ReactModule.useCallback(function()
-		-- upvalues: FFlagFriendsCallingServiceLuaMigrationModule (upval), FriendsCallingService (upval), CallId (copy), CallingService (upval)
-		if FFlagFriendsCallingServiceLuaMigrationModule then
-			FriendsCallingService:EndCall(CallId, "LuaEndAction")
-			
-			return
-		else
-			CallingService:EndCall(CallId, "LuaEndAction")
-		end
+		-- upvalues: FriendsCallingService (upval), CallId (copy)
+		FriendsCallingService:EndCall(CallId, "LuaEndAction")
 	end, { CallId })
 	local Volume = p1.call.volume
 	local ResolveCardLayoutModuleResult = ResolveCardLayoutModule({

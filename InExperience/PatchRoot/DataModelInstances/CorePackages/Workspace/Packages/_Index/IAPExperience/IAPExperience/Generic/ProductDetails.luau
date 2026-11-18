@@ -13,6 +13,8 @@ local View = FoundationModule.View
 local VirtualItemBadgeTypeModule = require(Parent.Enums.VirtualItemBadgeType)
 local ModelViewportModule = require(Parent.Generic.ModelViewport)
 local YellowBadgeModule = require(Parent.Generic.YellowBadge)
+local FFlagLuaAppAddTestIdsForArrow = require(Parent1.SharedFlags).FFlagLuaAppAddTestIdsForArrow
+local GetTestIdFunction = require(Parent1.RoactUtils).getTestId
 local LocalizationService = game:GetService("LocalizationService")
 local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
 local Default = require(Parent1.LoggingProtocol).default
@@ -24,7 +26,7 @@ local function _(Text: string): string
 end
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), UseTokensFunction (copy), ReactModule (copy), ModelViewportModule (copy), ImageSetLabel (copy), IconsStatusImageunavailable (copy), VirtualItemBadgeTypeModule (copy), YellowBadgeModule (copy), LoggerModule (copy), Default (copy), VirtualItemBadgeShownCounter (copy), View (copy), Text (copy), FormatNumberModule (copy), LocalizationService (copy)
+	-- upvalues: UseLocalizationFunction (copy), UseTokensFunction (copy), ReactModule (copy), ModelViewportModule (copy), ImageSetLabel (copy), GetTestIdFunction (copy), IconsStatusImageunavailable (copy), VirtualItemBadgeTypeModule (copy), YellowBadgeModule (copy), LoggerModule (copy), Default (copy), VirtualItemBadgeShownCounter (copy), View (copy), Text (copy), FFlagLuaAppAddTestIdsForArrow (copy), FormatNumberModule (copy), LocalizationService (copy)
 	local UseLocalizationResult = UseLocalizationFunction({ Popular = "IAPExperience.RobuxUpsell.Text.PopularItem" })
 	local UseTokensResult = UseTokensFunction()
 	local XOffset: number = if p1.isPortrait then 128 else 80
@@ -45,6 +47,7 @@ return function(p1)
 		Position = UDim2.new(0, 5, 0, 5),
 		Size = UDim2.new(0, XOffset, 0, XOffset),
 		ScaleType = Enum.ScaleType.Stretch,
+		[ReactModule.Tag] = GetTestIdFunction("iap-product-details-icon"),
 		Image = if p1.itemIcon then p1.itemIcon else IconsStatusImageunavailable,
 		ImageColor3 = if p1.itemIcon then nil else UseTokensResult.Color.Content.Default.Color3,
 		ImageTransparency = if p1.itemIcon then nil else UseTokensResult.Color.Content.Default.Transparency
@@ -88,7 +91,8 @@ return function(p1)
 				LayoutOrder = 1,
 				tag = "auto-y text-align-x-left text-wrap text-title-medium content-emphasis",
 				Size = UDim2.new(0, UseStateResult, 0, 0),
-				Text = if #ItemName > 50 then ItemName:sub(1, 50) .. "..." else ItemName
+				Text = if #ItemName > 50 then ItemName:sub(1, 50) .. "..." else ItemName,
+				testId = if FFlagLuaAppAddTestIdsForArrow then "--iap-product-details-name" else nil
 			}),
 			ItemDetails = ReactModule.createElement(View, {
 				LayoutOrder = 2,
@@ -97,7 +101,8 @@ return function(p1)
 				ItemCost = if p1.itemRobuxCost then ReactModule.createElement(Text, {
 					LayoutOrder = 1,
 					tag = "auto-xy text-align-x-left text-wrap text-title-medium content-emphasis",
-					Text = utf8.char(57346) .. " " .. FormatNumberModule(LocalizationService.RobloxLocaleId, p1.itemRobuxCost)
+					Text = utf8.char(57346) .. " " .. FormatNumberModule(LocalizationService.RobloxLocaleId, p1.itemRobuxCost),
+					testId = if FFlagLuaAppAddTestIdsForArrow then "--iap-product-details-price" else nil
 				}) else nil,
 				ItemBadge = Element1
 			})

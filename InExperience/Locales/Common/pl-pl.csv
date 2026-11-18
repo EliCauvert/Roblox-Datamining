@@ -3583,6 +3583,7 @@ Feature.Friends.Label.FollowsYou,Obserwuje cię
 Feature.Friends.Label.Frequent,Graliście razem
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,Użytkownik zaprosił cię do znajomych na platformie Roblox
+Feature.Friends.Label.FriendOfUser,Znajomy użytkownika {displayName}
 Feature.Friends.Label.FriendOwns,Posiadane przez 1 znajomego
 Feature.Friends.Label.FriendRecentlyPlayed,Ostatnio grane przez <b>1 znajomego</b>
 Feature.Friends.Label.FriendRequest,
@@ -3750,7 +3751,6 @@ Feature.Groups.Description.RequiresAccountTenureTooltipOneMonth,"Aby dołączyć
 Feature.Groups.Description.RequiresAccountTenureTooltipOneWeek,"Aby dołączyć do tej społeczności, musisz mieć konto od co najmniej 7 dni."
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeDays,"Aby dołączyć do tej społeczności, musisz mieć konto od co najmniej 3 dni."
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeMonths,"Aby dołączyć do tej społeczności, musisz mieć konto od co najmniej 90 dni."
-Feature.Groups.Header.UppercaseMyGroups,MOJE SPOŁECZNOŚCI
 Feature.Groups.Heading.Community,Społeczność
 Feature.Groups.Heading.Followers,
 Feature.Groups.Heading.Groups,
@@ -3960,12 +3960,21 @@ Feature.Moments.Action.ShowDetails,Pokaż szczegóły
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Przytnij film
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Action.View,
 Feature.Moments.Action.ViewOtherFeed,Wyświetl inny kanał
 Feature.Moments.Action.ViewRecommended,Wyświetl polecane
 Feature.Moments.Action.ViewTrending,Wyświetl popularne
 Feature.Moments.Body.EDPMomentIPReportInstructions,"Aby zgłosić naruszenie praw własności intelektualnej w tym momencie, przejdź do strony szczegółów gry."
 Feature.Moments.Description.CommunityStandards,"Zapoznaj się ze Standardami społeczności, aby uzyskać więcej informacji na temat tego, co można, a czego nie można mówić."
 Feature.Moments.Description.EmptyCapturesLibrary,Tutaj będą pojawiać się Twoje przechwycone elementy.
+Feature.Moments.Description.EngagementFirstLike,Wyświetl teraz
+Feature.Moments.Description.EngagementFirstReaction,Pojawiła się pierwsza reakcja na Twój moment!
+Feature.Moments.Description.EngagementLikedCommentsDigest,Twoje komentarze ({likedComments}) mają polubienia
+Feature.Moments.Description.EngagementMomentDigest,nowe komentarze ({comments}) i reakcje ({milestone})
+Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementNewComment,właśnie skomentował(a) Twój moment
+Feature.Moments.Description.EngagementNewComments,oraz inni użytkownicy ({count}) skomentowali Twój moment
+Feature.Moments.Description.EngagementReactionMilestone,{count} nowych reakcji
 Feature.Moments.Description.FollowingCaughtUpBody,"To już wszystkie nowe momenty na tym kanale. Zmień kanał, aby obejrzeć więcej momentów."
 Feature.Moments.Description.FollowingEmptyBodyRecommended,"Tutaj zobaczysz momenty twórców, których obserwujesz."
 Feature.Moments.Description.FollowingEmptyBodyTrending,
@@ -4112,6 +4121,14 @@ Feature.Moments.Title.Comments,Komentarze
 Feature.Moments.Title.CommentsWithCappedCount,Liczba komentarzy: ponad {count}
 Feature.Moments.Title.CommentsWithCount,Liczba komentarzy: {count}
 Feature.Moments.Title.EDPMomentIPReportInstructions,Zgłoś na stronie szczegółów gry
+Feature.Moments.Title.EngagementFirstLike,Masz polubienie
+Feature.Moments.Title.EngagementFirstReaction,Nowa aktywność
+Feature.Moments.Title.EngagementLikedCommentsDigest,Nowe polubienia
+Feature.Moments.Title.EngagementMomentDigest,Twój moment cieszy się popularnością
+Feature.Moments.Title.EngagementMomentsDigest,Twoje momenty cieszą się popularnością
+Feature.Moments.Title.EngagementNewComment,{name}
+Feature.Moments.Title.EngagementNewComments,
+Feature.Moments.Title.EngagementReactionMilestone,Twój moment zyskuje popularność
 Feature.Moments.Title.GenerateTextFeedbackReason,Co poszło nie tak?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Wyjść z tworzenia momentu?

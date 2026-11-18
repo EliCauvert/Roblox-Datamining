@@ -3505,12 +3505,13 @@ Feature.Friends.Label.FollowsYou,Folgt dir
 Feature.Friends.Label.Frequent,Zusammen gespielt
 Feature.Friends.Label.Friend,Freund
 Feature.Friends.Label.FriendInvite,"Hat dich eingeladen, auf Roblox befreundet zu sein"
+Feature.Friends.Label.FriendOfUser,Freund von {displayName}
 Feature.Friends.Label.FriendOwns,1 Freund besitzt
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 Freund</b> hat kürzlich gespielt
 Feature.Friends.Label.FriendRequest,
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,Freunde sind jetzt Connections!
-Feature.Friends.Label.FriendsHintBold,Lasst und spielen!
+Feature.Friends.Label.FriendsHintBold,Lasst uns spielen!
 Feature.Friends.Label.FriendsHintPlain,Füge zunächst einen Freund hinzu.
 Feature.Friends.Label.FriendsOwn,{numberOfConnections} Freunde besitzen
 Feature.Friends.Label.FriendsPlayed,{numberOfConnections} haben gespielt
@@ -3672,7 +3673,6 @@ Feature.Groups.Description.RequiresAccountTenureTooltipOneMonth,"Du musst seit 3
 Feature.Groups.Description.RequiresAccountTenureTooltipOneWeek,"Du musst seit 7 Tagen ein Konto haben, bevor du dieser Community beitreten kannst."
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeDays,"Du musst seit 3 Tagen ein Konto haben, bevor du dieser Community beitreten kannst."
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeMonths,"Du musst seit 90 Tagen ein Konto haben, bevor du dieser Community beitreten kannst."
-Feature.Groups.Header.UppercaseMyGroups,MEINE COMMUNITYS
 Feature.Groups.Heading.Community,Community
 Feature.Groups.Heading.Followers,
 Feature.Groups.Heading.Groups,
@@ -3882,12 +3882,21 @@ Feature.Moments.Action.ShowDetails,
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Video zuschneiden
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Action.View,
 Feature.Moments.Action.ViewOtherFeed,Anderen Feed anzeigen
 Feature.Moments.Action.ViewRecommended,Empfehlungen anzeigen
 Feature.Moments.Action.ViewTrending,Trends anzeigen
 Feature.Moments.Body.EDPMomentIPReportInstructions,"Um einen Verstoß gegen das geistige Eigentum in diesem Moment zu melden, gehe weiter zur Detailseite des Spiels."
 Feature.Moments.Description.CommunityStandards,"In den Community-Regeln findest du weitere Informationen darüber, was du schreiben darfst und was nicht."
 Feature.Moments.Description.EmptyCapturesLibrary,Hier werden deine Aufnahmen angezeigt.
+Feature.Moments.Description.EngagementFirstLike,Jetzt anzeigen
+Feature.Moments.Description.EngagementFirstReaction,Dein Moment hat gerade seine erste Reaktion erhalten!
+Feature.Moments.Description.EngagementLikedCommentsDigest,{likedComments} deiner Kommentare haben Likes erhalten.
+Feature.Moments.Description.EngagementMomentDigest,{comments} neue Kommentare und {milestone} Reaktionen
+Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementNewComment,hat gerade deinen Moment kommentiert.
+Feature.Moments.Description.EngagementNewComments,und {count} weitere Personen haben deinen Moment kommentiert.
+Feature.Moments.Description.EngagementReactionMilestone,{count} neue Reaktionen
 Feature.Moments.Description.FollowingCaughtUpBody,"Du hast dir alle neuen Moments in diesem Feed angesehen. Wechsle die Feeds, um mehr anzuzeigen."
 Feature.Moments.Description.FollowingEmptyBodyRecommended,"Hier siehst du Moments von Creatorn, denen du folgst."
 Feature.Moments.Description.FollowingEmptyBodyTrending,
@@ -4034,6 +4043,14 @@ Feature.Moments.Title.Comments,Kommentare
 Feature.Moments.Title.CommentsWithCappedCount,Über {count} Kommentare
 Feature.Moments.Title.CommentsWithCount,{count} Kommentare
 Feature.Moments.Title.EDPMomentIPReportInstructions,Auf der Detailseite des Spiels melden
+Feature.Moments.Title.EngagementFirstLike,Du hast ein Like erhalten
+Feature.Moments.Title.EngagementFirstReaction,Neue Aktivität
+Feature.Moments.Title.EngagementLikedCommentsDigest,Neue Likes
+Feature.Moments.Title.EngagementMomentDigest,Dein Moment ist angesagt
+Feature.Moments.Title.EngagementMomentsDigest,Deine Moments sind beliebt
+Feature.Moments.Title.EngagementNewComment,{name}
+Feature.Moments.Title.EngagementNewComments,
+Feature.Moments.Title.EngagementReactionMilestone,Dein Moment wird bemerkt
 Feature.Moments.Title.GenerateTextFeedbackReason,Was ist schiefgelaufen?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Moment-Kreation verlassen?

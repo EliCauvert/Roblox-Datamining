@@ -14,6 +14,7 @@ local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
 local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
 local FFlagEnableSplitPane = require(Parent.SharedFlags).FFlagEnableSplitPane
 local FFlagSocialCarouselBuildPresence = require(Parent.SharedFlags).FFlagSocialCarouselBuildPresence
+local FFlagLuaAppAddTestIdsForArrow = require(Parent.SharedFlags).FFlagLuaAppAddTestIdsForArrow
 local AnalyticsConstantsModule = require(GameJoinCard.Analytics.AnalyticsConstants)
 local UseGameJoinCardAnalyticsModule = require(GameJoinCard.Analytics.useGameJoinCardAnalytics)
 local _ = require(GameJoinCard.Components.Actions.Types)
@@ -38,11 +39,12 @@ local function _(p1, FriendId)
 end
 
 local function renderViewProfileLink(p1, LayoutOrder)
-	-- upvalues: ReactModule (copy), ViewProfileLinkModule (copy)
+	-- upvalues: ReactModule (copy), ViewProfileLinkModule (copy), FFlagLuaAppAddTestIdsForArrow (copy)
 	return ReactModule.createElement(ViewProfileLinkModule, {
 		text = p1.text,
 		onActivated = p1.onActivated,
-		LayoutOrder = LayoutOrder
+		LayoutOrder = LayoutOrder,
+		testId = if FFlagLuaAppAddTestIdsForArrow then "--build-join-card-action-ViewProfile" else nil
 	})
 end
 

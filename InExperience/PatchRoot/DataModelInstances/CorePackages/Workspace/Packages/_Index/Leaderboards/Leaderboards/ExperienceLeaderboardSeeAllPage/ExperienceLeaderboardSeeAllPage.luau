@@ -8,6 +8,8 @@ local SduiLoadTimer = SduiSharedUtilitiesModule.SduiLoadTimer
 local SduiPageEntryPoint = SduiSharedUtilitiesModule.SduiPageEntryPoint
 local UsePageScopeRefFunction = SduiSharedUtilitiesModule.usePageScopeRef
 local CompositionTags = require(Parent.AppComposition).CompositionTags
+local FFlagSplitPaneLeaderboardSeeAllSupportRegion = require(Parent.SharedFlags).FFlagSplitPaneLeaderboardSeeAllSupportRegion
+local PaneHostContext = if FFlagSplitPaneLeaderboardSeeAllSupportRegion then require(Parent.SplitPane).PaneHostContext else nil
 local FetchExperienceLeaderboardSeeAllPageIfNeededModule = require(Leaderboards.ExperienceLeaderboardSeeAllPage.fetchExperienceLeaderboardSeeAllPageIfNeeded)
 local GetExperienceLeaderboardSeeAllPageKeyModule = require(Leaderboards.ExperienceLeaderboardSeeAllPage.getExperienceLeaderboardSeeAllPageKey)
 
@@ -16,12 +18,13 @@ local function _(p1, p2)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: GetExperienceLeaderboardSeeAllPageKeyModule (copy), UsePageScopeRefFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), SduiLoadTimer (copy), FetchExperienceLeaderboardSeeAllPageIfNeededModule (copy), SduiPageEntryPoint (copy), CompositionTags (copy)
+	-- upvalues: GetExperienceLeaderboardSeeAllPageKeyModule (copy), UsePageScopeRefFunction (copy), UseLocalizationFunction (copy), FFlagSplitPaneLeaderboardSeeAllSupportRegion (copy), ReactModule (copy), PaneHostContext (copy), SduiLoadTimer (copy), FetchExperienceLeaderboardSeeAllPageIfNeededModule (copy), SduiPageEntryPoint (copy), CompositionTags (copy)
 	local UniverseId = p1.universeId or p1.navigation and p1.navigation.getParam("universeId")
 	local InitialTab = p1.initialTab or p1.navigation and p1.navigation.getParam("initialTab")
 	local ExperienceLeaderboardSeeAllPageKeyModule = GetExperienceLeaderboardSeeAllPageKeyModule(UniverseId)
 	UsePageScopeRefFunction(ExperienceLeaderboardSeeAllPageKeyModule)
 	local UseLocalizationResult = UseLocalizationFunction({ pageTitle = "Feature.Leaderboards.Heading.Leaderboard" })
+	local UseContextResult = if FFlagSplitPaneLeaderboardSeeAllSupportRegion then ReactModule.useContext(PaneHostContext) else nil
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy), SduiLoadTimer (upval)
 		return (if p1.pageTimer then p1.pageTimer else p1.navigation and p1.navigation.getParam("pageTimer")) or SduiLoadTimer.createLoadTimer("ExperienceLeaderboardSeeAll")
@@ -46,6 +49,7 @@ return ReactModule.memo(function(p1)
 		includeNavigationHeaderBar = true,
 		configKey = ExperienceLeaderboardSeeAllPageKeyModule,
 		pageTimer = UseMemoResult,
+		navButtonType = if FFlagSplitPaneLeaderboardSeeAllSupportRegion and UseContextResult ~= nil and UseContextResult.isHostCloseVisible then "none" else nil,
 		pageTitle = UseLocalizationResult.pageTitle,
 		refresh = UseResult,
 		layoutTag = CompositionTags.Layout.Detail,

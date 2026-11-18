@@ -349,7 +349,6 @@
 	FFlagAXFavoritesPillExposureLogging = require(script.FFlagAXFavoritesPillExposureLogging),
 	FFlagAXLookDetailsBottomBarFavoriteLogging = require(script.FFlagAXLookDetailsBottomBarFavoriteLogging),
 	FFlagAXFixItemDetailsDescriptionSpacing = require(script.FFlagAXFixItemDetailsDescriptionSpacing),
-	FFlagAXItemDetailsPartialAssetInfoFix = require(script.FFlagAXItemDetailsPartialAssetInfoFix),
 	FFlagAXCatalogItemCardDarkerBackgroundLogExposure = require(script.FFlagAXCatalogItemCardDarkerBackgroundLogExposure),
 	FFlagAXCategoryMenuVisualFixes = require(script.FFlagAXCategoryMenuVisualFixes),
 	FFlagAXCategoryTabFullRowTapArea = require(script.FFlagAXCategoryTabFullRowTapArea),

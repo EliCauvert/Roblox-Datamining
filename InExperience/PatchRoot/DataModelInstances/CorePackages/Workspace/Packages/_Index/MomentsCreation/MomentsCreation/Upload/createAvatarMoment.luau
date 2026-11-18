@@ -8,6 +8,7 @@ local MakeCreationEventFieldsModule = require(MomentsCreation.Analytics.makeCrea
 local CreateAvatarMomentLookModule = require(MomentsCreation.Requests.createAvatarMomentLook)
 local MakePostMetadataModule = require(MomentsCreation.Utils.makePostMetadata)
 local _ = require(MomentsCreation.Types.CreationFlowTypes)
+local FFlagMomentsAvatarPostEmoteNameModule = require(MomentsCreation.Flags.FFlagMomentsAvatarPostEmoteName)
 
 local function fireAvatarMomentFailure(p1, Url, p2)
 	-- upvalues: MakeCreationEventFieldsModule (copy), FireAnalyticsEventModule (copy), EventNames (copy)
@@ -20,7 +21,7 @@ local function fireAvatarMomentFailure(p1, Url, p2)
 end
 
 local function postAvatarMoment(p3, OutfitId, Edits, Description, p4, CommentsEnabled, p5): boolean
-	-- upvalues: MakePostMetadataModule (copy), fireAvatarMomentFailure (copy), MakeCreationEventFieldsModule (copy), FireAnalyticsEventModule (copy), EventNames (copy)
+	-- upvalues: MakePostMetadataModule (copy), FFlagMomentsAvatarPostEmoteNameModule (copy), fireAvatarMomentFailure (copy), MakeCreationEventFieldsModule (copy), FireAnalyticsEventModule (copy), EventNames (copy)
 	local PostMetadataModule = MakePostMetadataModule({
 		description = Description,
 		edits = Edits,
@@ -30,7 +31,8 @@ local function postAvatarMoment(p3, OutfitId, Edits, Description, p4, CommentsEn
 		{
 			avatar = {
 				outfitId = OutfitId,
-				cameraData = p3.AvatarPost.cameraData
+				cameraData = p3.AvatarPost.cameraData,
+				emoteName = if FFlagMomentsAvatarPostEmoteNameModule then p3.SceneSpec.args.emote else nil
 			}
 		}
 	}

@@ -18,7 +18,9 @@ local StreamNotificationsContentModule = require(Components.StreamNotificationsC
 local EventStream = require(StreamNotifications.analytics.analyticsService).EventStream
 local NotificationHelper = require(Parent.NotificationsCommon).NotificationHelper
 local AnalyticsConstantsModule = require(StreamNotifications.analytics.analyticsConstants)
-local FFlagLuaAppSupportDeviceSafeInsets = require(Parent.SharedFlags).FFlagLuaAppSupportDeviceSafeInsets
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagLuaAppSupportDeviceSafeInsets = SharedFlagsModule.FFlagLuaAppSupportDeviceSafeInsets
+local FFlagKeepSideSheetOpenBesideMenu = SharedFlagsModule.FFlagKeepSideSheetOpenBesideMenu
 local StreamNotificationDropdownExperimentationModule = require(StreamNotifications.StreamNotificationDropdownExperimentation)
 
 local function _(p1): number
@@ -27,7 +29,7 @@ local function _(p1): number
 end
 
 return function(p1)
-	-- upvalues: UseStyleFunction (copy), StreamNotificationDropdownExperimentationModule (copy), ReactModule (copy), CurrentCamera (copy), ConstantsModule (copy), InputHandlersModule (copy), NotificationHelper (copy), EventStream (copy), AnalyticsConstantsModule (copy), StreamNotificationsHeaderModule (copy), StreamNotificationsContentModule (copy), ReactRobloxModule (copy), FFlagLuaAppSupportDeviceSafeInsets (copy), FocusNavigableSurfaceWrapper (copy), FocusNavigableSurfaceIdentifierEnum (copy), FocusNavigationEventNameEnum (copy), CoreGui (copy)
+	-- upvalues: UseStyleFunction (copy), StreamNotificationDropdownExperimentationModule (copy), ReactModule (copy), CurrentCamera (copy), ConstantsModule (copy), InputHandlersModule (copy), NotificationHelper (copy), EventStream (copy), AnalyticsConstantsModule (copy), StreamNotificationsHeaderModule (copy), StreamNotificationsContentModule (copy), FocusNavigableSurfaceWrapper (copy), FocusNavigableSurfaceIdentifierEnum (copy), FocusNavigationEventNameEnum (copy), FFlagKeepSideSheetOpenBesideMenu (copy), FFlagLuaAppSupportDeviceSafeInsets (copy), ReactRobloxModule (copy), CoreGui (copy)
 	local UseStyleResult = UseStyleFunction()
 	local DropdownEnabled = StreamNotificationDropdownExperimentationModule.getDropdownEnabled()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(if DropdownEnabled then math.min(ConstantsModule.Dropdown.MaxHeight, (math.max(CurrentCamera.ViewportSize.Y - ConstantsModule.Dropdown.VerticalMargin, ConstantsModule.Dropdown.MinHeight))) else 0)
@@ -75,93 +77,107 @@ return function(p1)
 		end)
 	end, { p1.displayStream })
 	
-	return if DropdownEnabled then ReactModule.createElement("Frame", {
-		BackgroundTransparency = 1,
-		BorderSizePixel = 0,
-		ClipsDescendants = true,
-		Size = UDim2.new(0, ConstantsModule.Dropdown.Width, 0, UseStateResult)
-	}, {
-		UIPadding = ReactModule.createElement("UIPadding", {
-			PaddingTop = UDim.new(0, ConstantsModule.Dropdown.PaddingTop),
-			PaddingBottom = UDim.new(0, ConstantsModule.Dropdown.PaddingBottom),
-			PaddingLeft = UDim.new(0, ConstantsModule.Dropdown.HorizontalPadding),
-			PaddingRight = UDim.new(0, ConstantsModule.Dropdown.HorizontalPadding - ConstantsModule.Dropdown.ScrollBarThickness)
-		}),
-		UIListLayout = ReactModule.createElement("UIListLayout", {
-			SortOrder = Enum.SortOrder.LayoutOrder,
-			FillDirection = Enum.FillDirection.Vertical,
-			Padding = UDim.new(0, ConstantsModule.Dropdown.HeaderBodyGap)
-		}),
-		Header = ReactModule.createElement(StreamNotificationsHeaderModule, { isSmallScreen = false, displayStream = p1.displayStream }),
-		StreamNotificationsContent = ReactModule.createElement(StreamNotificationsContentModule, {
-			isSmallScreen = false,
-			showOverlay = function() end,
-			displayStream = p1.displayStream,
-			setDisplayScreenGuiEnabled = function() end,
-			dropdownHeight = UseStateResult
-		})
-	}) else ReactRobloxModule.createPortal({
-		ScreenGui = ReactModule.createElement("ScreenGui", {
-			DisplayOrder = 10,
-			IgnoreGuiInset = true,
-			Enabled = UseStateResult4,
-			ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
-			ScreenInsets = if FFlagLuaAppSupportDeviceSafeInsets then Enum.ScreenInsets.None else nil
+	if DropdownEnabled then
+		return ReactModule.createElement("Frame", {
+			BackgroundTransparency = 1,
+			BorderSizePixel = 0,
+			ClipsDescendants = true,
+			Size = UDim2.new(0, ConstantsModule.Dropdown.Width, 0, UseStateResult)
 		}, {
-			ReactModule.createElement(FocusNavigableSurfaceWrapper, {
-				isIsolated = true,
-				surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
-				frameProps = { ref = UseRefResult },
-				customEventHandlers = {
-					[FocusNavigationEventNameEnum.NavigateBack] = { handler = UseMemoResult }
-				}
+			UIPadding = ReactModule.createElement("UIPadding", {
+				PaddingTop = UDim.new(0, ConstantsModule.Dropdown.PaddingTop),
+				PaddingBottom = UDim.new(0, ConstantsModule.Dropdown.PaddingBottom),
+				PaddingLeft = UDim.new(0, ConstantsModule.Dropdown.HorizontalPadding),
+				PaddingRight = UDim.new(0, ConstantsModule.Dropdown.HorizontalPadding - ConstantsModule.Dropdown.ScrollBarThickness)
+			}),
+			UIListLayout = ReactModule.createElement("UIListLayout", {
+				SortOrder = Enum.SortOrder.LayoutOrder,
+				FillDirection = Enum.FillDirection.Vertical,
+				Padding = UDim.new(0, ConstantsModule.Dropdown.HeaderBodyGap)
+			}),
+			Header = ReactModule.createElement(StreamNotificationsHeaderModule, { isSmallScreen = false, displayStream = p1.displayStream }),
+			StreamNotificationsContent = ReactModule.createElement(StreamNotificationsContentModule, {
+				isSmallScreen = false,
+				showOverlay = function() end,
+				displayStream = p1.displayStream,
+				setDisplayScreenGuiEnabled = function() end,
+				dropdownHeight = UseStateResult
+			})
+		})
+	else
+		local Element = ReactModule.createElement(FocusNavigableSurfaceWrapper, {
+			isIsolated = true,
+			surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
+			frameProps = { ref = UseRefResult },
+			customEventHandlers = {
+				[FocusNavigationEventNameEnum.NavigateBack] = { handler = UseMemoResult }
+			}
+		}, {
+			TextButtonOverlayBackground = ReactModule.createElement("TextButton", {
+				ref = UseRefResult,
+				Selectable = false,
+				Size = UDim2.new(1, 0, 1, 0),
+				Position = UDim2.new(0.5, 0, 0.5, 0),
+				AnchorPoint = Vector2.new(0.5, 0.5),
+				BackgroundTransparency = if UseStateResult3 then UseStyleResult.Theme.Overlay.Transparency else 1,
+				BackgroundColor3 = UseStyleResult.Theme.Overlay.Color,
+				AutoButtonColor = false,
+				BorderSizePixel = 0,
+				Text = "",
+				[ReactModule.Event.Activated] = function()
+					-- upvalues: p1 (copy), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval)
+					p1.displayStream(false)
+					NotificationHelper.fireEvent(EventStream, AnalyticsConstantsModule.Context.click, AnalyticsConstantsModule.EventNames.closeContent, {
+						closeMethod = AnalyticsConstantsModule.CloseMethod.backgroundOverlay
+					})
+				end
 			}, {
-				TextButtonOverlayBackground = ReactModule.createElement("TextButton", {
-					ref = UseRefResult,
-					Selectable = false,
-					Size = UDim2.new(1, 0, 1, 0),
-					Position = UDim2.new(0.5, 0, 0.5, 0),
-					AnchorPoint = Vector2.new(0.5, 0.5),
-					BackgroundTransparency = if UseStateResult3 then UseStyleResult.Theme.Overlay.Transparency else 1,
-					BackgroundColor3 = UseStyleResult.Theme.Overlay.Color,
+				StreamNotificationsFrame = ReactModule.createElement("TextButton", {
 					AutoButtonColor = false,
 					BorderSizePixel = 0,
 					Text = "",
-					[ReactModule.Event.Activated] = function()
-						-- upvalues: p1 (copy), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval)
-						p1.displayStream(false)
-						NotificationHelper.fireEvent(EventStream, AnalyticsConstantsModule.Context.click, AnalyticsConstantsModule.EventNames.closeContent, {
-							closeMethod = AnalyticsConstantsModule.CloseMethod.backgroundOverlay
-						})
-					end
+					Selectable = false,
+					Size = if UseStateResult1 then UDim2.new(1, 0, 1, 0) else UDim2.new(0, ConstantsModule.Modal.Width, 0, ConstantsModule.Modal.Height),
+					Position = UDim2.new(0.5, 0, 0.5, 0),
+					AnchorPoint = Vector2.new(0.5, 0.5),
+					BackgroundColor3 = UseStyleResult.Theme.BackgroundDefault.Color,
+					BackgroundTransparency = UseStyleResult.Theme.BackgroundDefault.Transparency
 				}, {
-					StreamNotificationsFrame = ReactModule.createElement("TextButton", {
-						AutoButtonColor = false,
-						BorderSizePixel = 0,
-						Text = "",
-						Selectable = false,
-						Size = if UseStateResult1 then UDim2.new(1, 0, 1, 0) else UDim2.new(0, ConstantsModule.Modal.Width, 0, ConstantsModule.Modal.Height),
-						Position = UDim2.new(0.5, 0, 0.5, 0),
-						AnchorPoint = Vector2.new(0.5, 0.5),
-						BackgroundColor3 = UseStyleResult.Theme.BackgroundDefault.Color,
-						BackgroundTransparency = UseStyleResult.Theme.BackgroundDefault.Transparency
-					}, {
-						UICorner = ReactModule.createElement("UICorner", {
-							CornerRadius = if UseStateResult1 then UDim.new(0, 0) else UDim.new(0, ConstantsModule.Modal.CornerRadius)
-						}),
-						Header = ReactModule.createElement(StreamNotificationsHeaderModule, {
-							isSmallScreen = UseStateResult1,
-							displayStream = p1.displayStream
-						}),
-						StreamNotificationsContent = ReactModule.createElement(StreamNotificationsContentModule, {
-							showOverlay = UseResult,
-							isSmallScreen = UseStateResult1,
-							displayStream = p1.displayStream,
-							setDisplayScreenGuiEnabled = UseStateResult2_3
-						})
+					UICorner = ReactModule.createElement("UICorner", {
+						CornerRadius = if UseStateResult1 then UDim.new(0, 0) else UDim.new(0, ConstantsModule.Modal.CornerRadius)
+					}),
+					Header = ReactModule.createElement(StreamNotificationsHeaderModule, {
+						isSmallScreen = UseStateResult1,
+						displayStream = p1.displayStream
+					}),
+					StreamNotificationsContent = ReactModule.createElement(StreamNotificationsContentModule, {
+						showOverlay = UseResult,
+						isSmallScreen = UseStateResult1,
+						displayStream = p1.displayStream,
+						setDisplayScreenGuiEnabled = UseStateResult2_3
 					})
 				})
 			})
 		})
-	}, CoreGui)
+		local DisplayOrder = if FFlagKeepSideSheetOpenBesideMenu and p1.displayOrder ~= nil then p1.displayOrder else 10
+		local None = if FFlagLuaAppSupportDeviceSafeInsets then Enum.ScreenInsets.None else nil
+		
+		return if FFlagKeepSideSheetOpenBesideMenu then ReactRobloxModule.createPortal({
+			ScreenGui = ReactModule.createElement("ScreenGui", {
+				IgnoreGuiInset = true,
+				Enabled = UseStateResult4,
+				ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
+				DisplayOrder = DisplayOrder,
+				ScreenInsets = None
+			}, { Surface = Element })
+		}, CoreGui) else ReactRobloxModule.createPortal({
+			ScreenGui = ReactModule.createElement("ScreenGui", {
+				IgnoreGuiInset = true,
+				Enabled = UseStateResult4,
+				ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
+				DisplayOrder = DisplayOrder,
+				ScreenInsets = None
+			}, { Element })
+		}, CoreGui)
+	end
 end

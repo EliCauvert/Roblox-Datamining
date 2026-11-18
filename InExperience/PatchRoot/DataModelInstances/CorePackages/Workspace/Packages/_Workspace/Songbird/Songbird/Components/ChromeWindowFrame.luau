@@ -11,6 +11,7 @@ local CollapsibleFrameModule = require(Songbird.Components.CollapsibleFrame)
 local ConstantsModule = require(Songbird.constants)
 local GetFFlagSongbirdPopoverSubmenuModule = require(Songbird.Flags.getFFlagSongbirdPopoverSubmenu)
 local GetFFlagChromeMusicWindowTopbarReappearsOnGamepadFunction = require(Songbird.Parent.SharedFlags).GetFFlagChromeMusicWindowTopbarReappearsOnGamepad
+local FFlagAlignSideSheetWindowCloseRight = require(Songbird.Parent.SharedFlags).FFlagAlignSideSheetWindowCloseRight
 local CreateNextOrderFunction = ReactUtilsModule.createNextOrder
 local UsePreviousFunction = ReactUtilsModule.usePrevious
 local UseCallbackFunction = ReactModule.useCallback
@@ -52,7 +53,7 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: CryoModule (copy), config (copy), FoundationModule (copy), UseRefFunction (copy), ResponsiveModule (copy), GetFFlagChromeMusicWindowTopbarReappearsOnGamepadFunction (copy), UsePreviousFunction (copy), GetFFlagSongbirdPopoverSubmenuModule (copy), ConstantsModule (copy), CreateNextOrderFunction (copy), UseStateFunction (copy), UseCallbackFunction (copy), UseEffectFunction (copy), RunService (copy), GuiService (copy), ContextActionService (copy), ReactModule (copy), CollapsibleFrameModule (copy)
+	-- upvalues: CryoModule (copy), config (copy), FoundationModule (copy), UseRefFunction (copy), ResponsiveModule (copy), GetFFlagChromeMusicWindowTopbarReappearsOnGamepadFunction (copy), UsePreviousFunction (copy), GetFFlagSongbirdPopoverSubmenuModule (copy), ConstantsModule (copy), CreateNextOrderFunction (copy), UseStateFunction (copy), UseCallbackFunction (copy), UseEffectFunction (copy), RunService (copy), GuiService (copy), ContextActionService (copy), ReactModule (copy), CollapsibleFrameModule (copy), FFlagAlignSideSheetWindowCloseRight (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseRefResult = UseRefFunction(nil)
@@ -183,7 +184,34 @@ return function(p1)
 			CollapsibleTitleBar = ReactModule.createElement(CollapsibleFrameModule, {
 				isCollapsed = not UseStateResult,
 				LayoutOrder = NextOrder()
-			}, {
+			}, if FFlagAlignSideSheetWindowCloseRight then {
+				TitleBar = ReactModule.createElement(FoundationModule.View, { tag = "size-full-0 auto-y row flex-between items-center" }, {
+					Actions = ReactModule.createElement(FoundationModule.View, {
+						tag = "auto-xy row",
+						LayoutOrder = NextOrder(),
+						onAbsoluteSizeChanged = UseCallbackResult2
+					}, {
+						CloseButton = ReactModule.createElement(FoundationModule.IconButton, {
+							icon = FoundationModule.Enums.IconName.X,
+							layoutOrder = NextOrder(),
+							size = FoundationModule.Enums.IconSize.Medium,
+							onActivated = UseCallbackResult,
+							ref = UseRefResult
+						})
+					}),
+					CenterAlignedTitle = ReactModule.createElement(FoundationModule.View, {
+						tag = "size-full-0 shrink auto-y",
+						LayoutOrder = NextOrder()
+					}, {
+						Title = ReactModule.createElement(FoundationModule.Text, {
+							tag = "size-full-0 text-title-medium content-emphasis",
+							Text = JoinResult.title,
+							fontStyle = UseTokensResult.Typography.TitleMedium,
+							Position = UDim2.new(0, UseStateResult1.X / 2, 0, 0)
+						})
+					})
+				})
+			} else {
 				TitleBar = ReactModule.createElement(FoundationModule.View, { tag = "size-full-0 auto-y row flex-between items-center" }, {
 					Actions = ReactModule.createElement(FoundationModule.View, {
 						tag = "auto-xy row",

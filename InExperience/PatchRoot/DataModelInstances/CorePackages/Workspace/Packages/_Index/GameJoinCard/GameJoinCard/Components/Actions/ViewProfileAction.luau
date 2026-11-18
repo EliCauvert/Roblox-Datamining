@@ -14,6 +14,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local AppPage = RobloxAppEnumsModule.AppPage
 local FFlagEnableSplitPane = SharedFlagsModule.FFlagEnableSplitPane
 local FFlagSocialCarouselBuildPresence = SharedFlagsModule.FFlagSocialCarouselBuildPresence
+local FFlagLuaAppAddTestIdsForArrow = SharedFlagsModule.FFlagLuaAppAddTestIdsForArrow
 local AnalyticsConstantsModule = require(GameJoinCard.Analytics.AnalyticsConstants)
 local GameJoinCardButtonAction = AnalyticsConstantsModule.GameJoinCardButtonAction
 local ViewProfileSourceValues = AnalyticsConstantsModule.viewProfileSourceValues
@@ -37,7 +38,8 @@ local function ViewProfileLink(Frame)
 			UseStateResult2(Hover == ControlState.Hover)
 		end, {}),
 		stateLayer = { affordance = StateLayerAffordance.None },
-		LayoutOrder = Frame.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder,
+		testId = Frame.testId
 	}, {
 		Label = ReactModule.createElement(Text, {
 			RichText = true,
@@ -49,21 +51,22 @@ end
 
 return {
 	[UserCtaAction.ViewProfile] = function(p1)
-		-- upvalues: UserCtaAction (copy), InputSize (copy), ReactModule (copy), FFlagSocialCarouselBuildPresence (copy), ViewProfileLinkModule (copy), ViewProfileLink (copy), ViewProfileSourceValues (copy), GetTelemetryFieldsModule (copy), UseGameJoinCardAnalyticsModule (copy), GameJoinCardButtonAction (copy), FFlagEnableSplitPane (copy), AppPage (copy)
+		-- upvalues: UserCtaAction (copy), InputSize (copy), ReactModule (copy), FFlagSocialCarouselBuildPresence (copy), ViewProfileLinkModule (copy), ViewProfileLink (copy), ViewProfileSourceValues (copy), FFlagLuaAppAddTestIdsForArrow (copy), GetTelemetryFieldsModule (copy), UseGameJoinCardAnalyticsModule (copy), GameJoinCardButtonAction (copy), FFlagEnableSplitPane (copy), AppPage (copy)
 		return {
 			id = UserCtaAction.ViewProfile,
 			inputSize = InputSize.Medium,
 			width = UDim.new(1, 0),
 			text = p1.localized[UserCtaAction.ViewProfile],
 			render = function(p2, LayoutOrder)
-				-- upvalues: ReactModule (upval), FFlagSocialCarouselBuildPresence (upval), ViewProfileLinkModule (upval), ViewProfileLink (upval), ViewProfileSourceValues (upval)
+				-- upvalues: ReactModule (upval), FFlagSocialCarouselBuildPresence (upval), ViewProfileLinkModule (upval), ViewProfileLink (upval), ViewProfileSourceValues (upval), FFlagLuaAppAddTestIdsForArrow (upval)
 				return ReactModule.createElement(if FFlagSocialCarouselBuildPresence then ViewProfileLinkModule else ViewProfileLink, {
 					text = p2.text,
 					onActivated = function()
 						-- upvalues: p2 (copy), ViewProfileSourceValues (upval)
 						p2.onActivated(ViewProfileSourceValues.ViewProfileButton)
 					end,
-					LayoutOrder = LayoutOrder
+					LayoutOrder = LayoutOrder,
+					testId = if FFlagLuaAppAddTestIdsForArrow then "--game-join-card-action-ViewProfile" else nil
 				})
 			end,
 			onActivated = function(p2)

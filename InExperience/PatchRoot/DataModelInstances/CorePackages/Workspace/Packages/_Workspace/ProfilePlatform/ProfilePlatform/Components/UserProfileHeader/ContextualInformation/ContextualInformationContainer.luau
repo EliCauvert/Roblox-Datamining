@@ -15,9 +15,10 @@ local ContextualGenericModule = require(script.Parent.ContextualGeneric)
 local ContextualPresenceModule = require(script.Parent.ContextualPresence)
 local ContextualMutualFriendsModule = require(script.Parent.ContextualMutualFriends)
 local ContextualPlayedTogetherModule = require(script.Parent.ContextualPlayedTogether)
+local FFlagRemoveMutualFriendsContextualInfoModule = require(ProfilePlatform.Flags.FFlagRemoveMutualFriendsContextualInfo)
 
 return function(p1)
-	-- upvalues: UseProfileWrapperContextModule (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), UseDispatchFunction (copy), UseEffectOnMountFunction (copy), NetworkingGamesModule (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), ReactModule (copy), ContextualPresenceModule (copy), ContextualMutualFriendsModule (copy), ContextualPlayedTogetherModule (copy), ContextualGenericModule (copy), HorizontalPageMargin (copy)
+	-- upvalues: UseProfileWrapperContextModule (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), UseDispatchFunction (copy), UseEffectOnMountFunction (copy), NetworkingGamesModule (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), ReactModule (copy), ContextualPresenceModule (copy), FFlagRemoveMutualFriendsContextualInfoModule (copy), ContextualMutualFriendsModule (copy), ContextualPlayedTogetherModule (copy), ContextualGenericModule (copy), HorizontalPageMargin (copy)
 	local SourceInfo = UseProfileWrapperContextModule().sourceInfo
 	local ContextualInformation = (UseProfileJsonComponentModule(EnumsModule.Components.UserProfileHeader) or {}).contextualInformation
 	local Context = ContextualInformation.context
@@ -40,18 +41,18 @@ return function(p1)
 	
 	if Context == EnumsModule.ContextualTypes.Presence then
 		Element = ReactModule.createElement(ContextualPresenceModule)
-	elseif Context == EnumsModule.ContextualTypes.MutualFriends then
-		local ContextDetail = ContextDetails[Context]
-		Element = ReactModule.createElement(ContextualMutualFriendsModule, {
-			mutualFriends = ContextDetail.mutualFriends,
-			mutualFriendsCount = ContextDetail.mutualFriendsCount
-		})
-	else
+	elseif FFlagRemoveMutualFriendsContextualInfoModule or Context ~= EnumsModule.ContextualTypes.MutualFriends then
 		Element = if Context == EnumsModule.ContextualTypes.PlayedTogether then ReactModule.createElement(ContextualPlayedTogetherModule, { experienceName = UseSelectorResult }) else ReactModule.createElement(ContextualGenericModule, {
 			contextualType = Context,
 			experienceName = UseSelectorResult,
 			iconOverride = ContextualOverrideIcon,
 			textOverride = ContextualOverrideText
+		})
+	else
+		local ContextDetail = ContextDetails[Context]
+		Element = ReactModule.createElement(ContextualMutualFriendsModule, {
+			mutualFriends = ContextDetail.mutualFriends,
+			mutualFriendsCount = ContextDetail.mutualFriendsCount
 		})
 	end
 	return ReactModule.createElement(HorizontalPageMargin, {

@@ -1,50 +1,30 @@
-﻿local UserInputService = game:GetService("UserInputService")
-local Parent = script.Parent.Parent
+﻿local Parent = script.Parent.Parent
 local Parent1 = Parent.Parent
 local DependenciesModule = require(Parent.dependencies)
-local ThirdPartyUserService = game:GetService("ThirdPartyUserService")
 local NetworkingFriends = DependenciesModule.NetworkingFriends
 local NetworkingAliases = DependenciesModule.NetworkingAliases
-local RoduxFriends = DependenciesModule.RoduxFriends
-local RoduxAnalytics = DependenciesModule.RoduxAnalytics
 local Promise = DependenciesModule.Promise
 local Dash = DependenciesModule.Dash
-local ShowRecommendationsModule = require(Parent.Utils.showRecommendations)
 local EventNames = require(Parent.Analytics).EventNames
 local AnalyticsFunction = require(Parent.Analytics).Analytics
 local FetchNamesModule = require(Parent.Analytics.FetchNames)
 local RetrievalStatus = require(Parent1.UIBlox).App.Loading.Enum.RetrievalStatus
 local UserSortsModule = require(Parent.Common.UserSorts)
-local RECOMMENDATIONSESSIONIDKEY = require(Parent.Common.Constants).RECOMMENDATION_SESSION_ID_KEY
-local SocialCommon = DependenciesModule.SocialCommon
-local RecommendationSourceEnum = SocialCommon.Enums.RecommendationSourceEnum
-local ContextualInfoTypes = SocialCommon.Enums.ContextualInfoTypes
 local TimersFunction = require(Parent1.SocialLuaAnalytics).Analytics.Timing.Timers
 local NewResult = DependenciesModule.logger:new("FriendsCarousel/" .. script.Name)
-local IsSubjectToDesktopPoliciesFunction = DependenciesModule.isSubjectToDesktopPolicies
-local FFlagEnableRecommendationsForPCGDK = require(Parent1.SharedFlags).FFlagEnableRecommendationsForPCGDK
-local FFlagFixIsConsoleCheckForSocialCarousel = require(Parent1.SharedFlags).FFlagFixIsConsoleCheckForSocialCarousel
-local FFlagSocialCarouselMigrateRecommendations = require(Parent1.SharedFlags).FFlagSocialCarouselMigrateRecommendations
-local FFlagLuaSupportMicroGamepadPreferredInput = require(Parent1.SharedFlags).FFlagLuaSupportMicroGamepadPreferredInput
-
-local function v25(Count)
-	-- upvalues: ShowRecommendationsModule (copy), IsSubjectToDesktopPoliciesFunction (copy), FFlagEnableRecommendationsForPCGDK (copy), ThirdPartyUserService (copy), FFlagFixIsConsoleCheckForSocialCarousel (copy), UserInputService (copy), FFlagLuaSupportMicroGamepadPreferredInput (copy)
-	return ShowRecommendationsModule(Count) and not IsSubjectToDesktopPoliciesFunction() or (ShowRecommendationsModule(Count) and FFlagEnableRecommendationsForPCGDK and ThirdPartyUserService and ThirdPartyUserService:HaveActiveUser() or ShowRecommendationsModule(Count) and (FFlagFixIsConsoleCheckForSocialCarousel and (UserInputService.PreferredInput == Enum.PreferredInput.Gamepad or FFlagLuaSupportMicroGamepadPreferredInput and UserInputService.PreferredInput == Enum.PreferredInput.MicroGamepad)))
-end
-
 local RefreshCount = 0
 
 return function(p1)
-	-- upvalues: AnalyticsFunction (copy), TimersFunction (copy), NetworkingFriends (copy), UserSortsModule (copy), RefreshCount (ref), Dash (copy), EventNames (copy), RetrievalStatus (copy), FetchNamesModule (copy), NetworkingAliases (copy), Promise (copy), NewResult (copy), v25 (copy), FFlagSocialCarouselMigrateRecommendations (copy), ContextualInfoTypes (copy), RoduxFriends (copy), RecommendationSourceEnum (copy), RoduxAnalytics (copy), RECOMMENDATIONSESSIONIDKEY (copy)
+	-- upvalues: AnalyticsFunction (copy), TimersFunction (copy), NetworkingFriends (copy), UserSortsModule (copy), RefreshCount (ref), Dash (copy), EventNames (copy), RetrievalStatus (copy), FetchNamesModule (copy), NetworkingAliases (copy), Promise (copy), NewResult (copy)
 	return function(p2)
-		-- upvalues: AnalyticsFunction (upval), TimersFunction (upval), NetworkingFriends (upval), UserSortsModule (upval), RefreshCount (upval), p1 (copy), Dash (upval), EventNames (upval), RetrievalStatus (upval), FetchNamesModule (upval), NetworkingAliases (upval), Promise (upval), NewResult (upval), v25 (upval), FFlagSocialCarouselMigrateRecommendations (upval), ContextualInfoTypes (upval), RoduxFriends (upval), RecommendationSourceEnum (upval), RoduxAnalytics (upval), RECOMMENDATIONSESSIONIDKEY (upval)
+		-- upvalues: AnalyticsFunction (upval), TimersFunction (upval), NetworkingFriends (upval), UserSortsModule (upval), RefreshCount (upval), p1 (copy), Dash (upval), EventNames (upval), RetrievalStatus (upval), FetchNamesModule (upval), NetworkingAliases (upval), Promise (upval), NewResult (upval)
 		local Text = tostring(p2:getState().LocalUserId)
 		local FireAnalyticsEventFunction = AnalyticsFunction({ infoForAllEvents = { uid = Text } }).fireAnalyticsEvent
 		local TimersResult = TimersFunction()
 		local StartResult = TimersResult.start()
 		
 		return p2:dispatch(NetworkingFriends.GetFriendsFromUserId.API(Text, { userSort = UserSortsModule.StatusFrequents })):andThen(function(Result)
-			-- upvalues: RefreshCount (upval), p1 (upval), Dash (upval), TimersResult (copy), StartResult (copy), FireAnalyticsEventFunction (copy), EventNames (upval), RetrievalStatus (upval), FetchNamesModule (upval), p2 (copy), NetworkingAliases (upval), Promise (upval), NewResult (upval), v25 (upval), FFlagSocialCarouselMigrateRecommendations (upval), NetworkingFriends (upval), Text (copy), ContextualInfoTypes (upval), RoduxFriends (upval), RecommendationSourceEnum (upval), RoduxAnalytics (upval), RECOMMENDATIONSESSIONIDKEY (upval)
+			-- upvalues: RefreshCount (upval), p1 (upval), Dash (upval), TimersResult (copy), StartResult (copy), FireAnalyticsEventFunction (copy), EventNames (upval), RetrievalStatus (upval), FetchNamesModule (upval), p2 (copy), NetworkingAliases (upval), Promise (upval), NewResult (upval)
 			local Data = Result.responseBody.data
 			local CountData: number = Data and #Data or 0
 			RefreshCount = if p1 and p1.refresh then RefreshCount + 1 else RefreshCount
@@ -64,40 +44,7 @@ return function(p1)
 				NewResult:info(`GetTagsFromUserIds failed: {Err}`)
 			end)
 			
-			if v25(CountData) and not FFlagSocialCarouselMigrateRecommendations then
-				p2:dispatch(NetworkingFriends.GetFriendRecommendationsFromUserId.API({ targetUserId = Text })):andThen(function(Result)
-					-- upvalues: Dash (upval), ContextualInfoTypes (upval), p2 (upval), RoduxFriends (upval), RecommendationSourceEnum (upval), RoduxAnalytics (upval), RECOMMENDATIONSESSIONIDKEY (upval), Promise (upval), FireAnalyticsEventFunction (upval), EventNames (upval), CountData (copy), RefreshCount (upval)
-					p2:dispatch(RoduxFriends.Actions.RecommendationSourceCreated({
-						source = RecommendationSourceEnum.HomepageFriendsCarousel,
-						recommendationIds = Dash.map(Result.responseBody.data, function(p3)
-							-- upvalues: ContextualInfoTypes (upval)
-							return if p3.contextType == ContextualInfoTypes.Contacts then p3.contactId else p3.id
-						end)
-					}))
-					p2:dispatch(RoduxAnalytics.Actions.SessionIdUpdated({
-						sessionKey = RECOMMENDATIONSESSIONIDKEY,
-						sessionId = Result.responseBody.recommendationRequestId
-					}))
-					
-					return Promise.resolve(Result):andThen(function(Result)
-						-- upvalues: FireAnalyticsEventFunction (upval), EventNames (upval), CountData (upval), RefreshCount (upval)
-						if FireAnalyticsEventFunction then
-							local Data = Result.responseBody.data
-							FireAnalyticsEventFunction(EventNames.CarouselLoadedWithUsers, {
-								recommendationLimit = true,
-								fetchedRecommendations = true,
-								friendCount = CountData,
-								recommendationCount = Data and #Data or 0,
-								refreshCount = RefreshCount,
-								recommendationSessionId = Result.responseBody.recommendationRequestId
-							})
-						end
-					end)
-				end):catch(function(Err)
-					-- upvalues: NewResult (upval)
-					NewResult:info(`GetFriendRecommendationsFromUserId failed: {Err}`)
-				end)
-			elseif FireAnalyticsEventFunction then
+			if FireAnalyticsEventFunction then
 				FireAnalyticsEventFunction(EventNames.CarouselLoadedWithUsers, {
 					recommendationCount = 0,
 					recommendationLimit = true,

@@ -7,6 +7,7 @@ local FFlagEnableTopSongsSort = require(Parent.SharedFlags).FFlagEnableTopSongsS
 local FFlagLuaAppEnableNxMRoduxApportioning = require(Parent.SharedFlags).FFlagLuaAppEnableNxMRoduxApportioning
 local FFlagLuaAppEnableOneByTwoTileFunnelTelemetry = require(Parent.SharedFlags).FFlagLuaAppEnableOneByTwoTileFunnelTelemetry
 local FFlagLuaAppSponsoredGamePreviewVideo = require(Parent.SharedFlags).FFlagLuaAppSponsoredGamePreviewVideo
+local FFlagLuaAppSponsoredTileFootnoteText = require(Parent.SharedFlags).FFlagLuaAppSponsoredTileFootnoteText
 local T = if FFlagLuaAppEnableOneByTwoTileFunnelTelemetry then {} else nil
 local TopicContentsEntryModelModule = {
 	new = function()
@@ -28,6 +29,7 @@ local TopicContentsEntryModelModule = {
 		config.subtitle = nil
 		config.ctaText = nil
 		config.tileVariant = nil
+		config.footnoteText = nil
 		config.badgePosition = nil
 		config.badgeAnalyticsId = nil
 		config.badgeType = nil
@@ -148,7 +150,7 @@ if FFlagEnableTopSongsSort then
 	end
 end
 function TopicContentsEntryModelModule.fromOmniRecommendations(p1, RecommendationsRequestId)
-	-- upvalues: TopicContentsEntryModelModule (copy), FFlagLuaAppSponsoredGamePreviewVideo (copy), ParseBooleanStringFunction (copy), FFlagLuaAppEnableNxMRoduxApportioning (copy), FFlagLuaAppEnableOneByTwoTileFunnelTelemetry (copy), T (copy), HttpService (copy), ResultModule (copy)
+	-- upvalues: TopicContentsEntryModelModule (copy), FFlagLuaAppSponsoredTileFootnoteText (copy), FFlagLuaAppSponsoredGamePreviewVideo (copy), ParseBooleanStringFunction (copy), FFlagLuaAppEnableNxMRoduxApportioning (copy), FFlagLuaAppEnableOneByTwoTileFunnelTelemetry (copy), T (copy), HttpService (copy), ResultModule (copy)
 	local NewTopicContentsEntryModel = TopicContentsEntryModelModule.new()
 	NewTopicContentsEntryModel.contentType = p1.contentType
 	NewTopicContentsEntryModel.contentId = tostring(p1.contentId)
@@ -164,6 +166,10 @@ function TopicContentsEntryModelModule.fromOmniRecommendations(p1, Recommendatio
 		NewTopicContentsEntryModel.subtitle = p1.contentMetadata.Subtitle
 		NewTopicContentsEntryModel.ctaText = p1.contentMetadata.CtaText
 		NewTopicContentsEntryModel.tileVariant = p1.contentMetadata.TileVariant
+		
+		if FFlagLuaAppSponsoredTileFootnoteText then
+			NewTopicContentsEntryModel.footnoteText = p1.contentMetadata.FootnoteText
+		end
 		NewTopicContentsEntryModel.badgePosition = p1.contentMetadata.badgePosition
 		NewTopicContentsEntryModel.badgeAnalyticsId = p1.contentMetadata.badgeAnalyticsId
 		NewTopicContentsEntryModel.badgeType = p1.contentMetadata.badgeType

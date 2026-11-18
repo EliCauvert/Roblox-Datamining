@@ -2,7 +2,6 @@
 	HeadingGroups = "Feature.Groups.Heading.Groups",
 	HeadingPrimary = "Feature.Groups.Heading.Primary",
 	HeadingMyGroups = "Feature.Groups.Heading.MyGroups",
-	HeaderUppercaseMyGroups = "Feature.Groups.Header.UppercaseMyGroups",
 	ActionSeeAll = "Feature.Groups.Action.SeeAll",
 	ActionCreateGroup = "Feature.Groups.Action.CreateGroup",
 	LabelSearchMyGroups = "Feature.Groups.Label.SearchMyGroups",

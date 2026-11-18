@@ -10,8 +10,10 @@ local GetTextSizeFunction = require(CorePackages.Workspace.Packages.Style).GetTe
 local WithStyleFunction = UIBloxModule.Style.withStyle
 local WithSelectionCursorProviderFunction = UIBloxModule.App.SelectionImage.withSelectionCursorProvider
 local CursorKind = UIBloxModule.App.SelectionImage.CursorKind
+local Images = UIBloxModule.App.ImageSet.Images
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local ComponentAssetsCircle17Stroke1 = UIBloxModule.App.ImageSet.Images["component_assets/circle_17_stroke_1"]
+local FFlagPublishAssetPromptHandleInvalidUtf8Module = require(script.Parent.Parent.Flags.FFlagPublishAssetPromptHandleInvalidUtf8)
+local ComponentAssetsCircle17Stroke1 = Images["component_assets/circle_17_stroke_1"]
 local _Rect = Rect.new(8, 8, 8, 8)
 local AssetDescriptionTextBox = RoactModule.PureComponent:extend("AssetDescriptionTextBox")
 AssetDescriptionTextBox.validateProps = TModule.strictInterface({
@@ -37,14 +39,15 @@ local _ = function(p1, p2): boolean
 end
 
 function AssetDescriptionTextBox.init(p1)
+	-- upvalues: FFlagPublishAssetPromptHandleInvalidUtf8Module (copy)
 	p1:setState({
-		lastValidDescription = "",
 		descriptionLength = 0,
 		scrollingFrameHeight = 100,
 		canvasHeight = 100,
 		canvasPosition = 0,
 		cursorPosition = 0,
 		textBoxWidth = 100,
+		lastValidDescription = FFlagPublishAssetPromptHandleInvalidUtf8Module and p1.props.defaultDescription or "",
 		assetDescription = p1.props.defaultDescription or ""
 	})
 	p1.wasInitiallyFocused = false
@@ -80,22 +83,27 @@ function AssetDescriptionTextBox.calculateNeedsRescroll(p1, p2, CaptionBody)
 end
 
 function AssetDescriptionTextBox.onTextChanged(p1, p2, p3, CaptionBody)
-	-- upvalues: GetTextSizeFunction (copy)
+	-- upvalues: FFlagPublishAssetPromptHandleInvalidUtf8Module (copy), GetTextSizeFunction (copy)
 	local Text = p2.Text
 	local LastValidDescription = p1.state.lastValidDescription
-	local Length = utf8.len(utf8.nfcnormalize(Text))
-	
-	if (if Length == nil then 0 else Length) > 1000 then
+	repeat
+		if not FFlagPublishAssetPromptHandleInvalidUtf8Module or utf8.len(Text) ~= nil then
+			local Length = utf8.len(utf8.nfcnormalize(Text))
+			
+			if (if Length == nil then 0 else Length) <= 1000 then
+				LastValidDescription = p2.Text
+				continue
+			end
+		end
 		Text = LastValidDescription
 		p2.Text = Text
-	else
-		LastValidDescription = p2.Text
-	end
-	local Length1 = utf8.len(utf8.nfcnormalize(Text))
+		break
+	until true
+	local Length = utf8.len(utf8.nfcnormalize(Text))
 	p1:setState({
 		lastValidDescription = LastValidDescription,
 		assetDescription = Text,
-		descriptionLength = if Length1 == nil then 0 else Length1,
+		descriptionLength = if Length == nil then 0 else Length,
 		canvasHeight = math.max(100, GetTextSizeFunction(Text, CaptionBody.RelativeSize * p3.Font.BaseSize, p3.Tokens.Typography.BodySmall.Font, Vector2.new(p1.state.textBoxWidth, 10000), { addTemporaryPadding = false }).Y)
 	})
 	p1.props.onAssetDescriptionUpdated(Text)

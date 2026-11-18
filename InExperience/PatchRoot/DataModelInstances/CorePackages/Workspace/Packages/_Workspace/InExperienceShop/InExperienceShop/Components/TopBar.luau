@@ -4,6 +4,7 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local ShopOverflowConstantsModule = require(InExperienceShop.Components.Shared.shopOverflowConstants)
+local FFlagAlignSideSheetWindowCloseRight = require(Parent.SharedFlags).FFlagAlignSideSheetWindowCloseRight
 local View = FoundationModule.View
 local Text = FoundationModule.Text
 local IconButton = FoundationModule.IconButton
@@ -26,7 +27,7 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), config (copy), REPORTMENUITEMID (copy), REPORTICON (copy), ReactModule (copy), Menu (copy), InputSize (copy), PopoverSide (copy), PopoverAlign (copy), IconButton (copy), OVERFLOWICON (copy), ButtonVariant (copy), View (copy), IconName (copy), Text (copy), Chip (copy), IconName (copy), IconVariant (copy), ChipSize (copy), ChipVariant (copy)
+	-- upvalues: UseLocalizationFunction (copy), config (copy), REPORTMENUITEMID (copy), REPORTICON (copy), ReactModule (copy), View (copy), FFlagAlignSideSheetWindowCloseRight (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), Menu (copy), PopoverSide (copy), PopoverAlign (copy), OVERFLOWICON (copy), Text (copy), Chip (copy), IconName (copy), IconVariant (copy), ChipSize (copy), ChipVariant (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local Items = {}
 	
@@ -37,6 +38,19 @@ return function(p1)
 			text = UseLocalizationResult.report
 		})
 	end
+	local Element = ReactModule.createElement(View, {
+		tag = "auto-xy padding-top-xxsmall",
+		LayoutOrder = if FFlagAlignSideSheetWindowCloseRight then 4 else 1
+	}, {
+		CloseButton = ReactModule.createElement(IconButton, {
+			isCircular = false,
+			icon = IconName.X,
+			size = InputSize.Medium,
+			variant = ButtonVariant.Utility,
+			onActivated = p1.onClose
+		})
+	})
+	
 	return ReactModule.createElement(View, {
 		tag = "row flex-between align-y-center size-full-1200 padding-x-xlarge radius-medium bg-surface-0"
 	}, {
@@ -44,15 +58,7 @@ return function(p1)
 			tag = "row align-y-center gap-small auto-xy",
 			LayoutOrder = 1
 		}, {
-			CloseButtonContainer = ReactModule.createElement(View, { tag = "auto-xy padding-top-xxsmall", LayoutOrder = 1 }, {
-				CloseButton = ReactModule.createElement(IconButton, {
-					isCircular = false,
-					icon = IconName.X,
-					size = InputSize.Medium,
-					variant = ButtonVariant.Utility,
-					onActivated = p1.onClose
-				})
-			}),
+			CloseButtonContainer = if FFlagAlignSideSheetWindowCloseRight then nil else Element,
 			Title = ReactModule.createElement(Text, {
 				tag = "size-0-1000 auto-x text-heading-small text-align-y-center content-emphasis",
 				LayoutOrder = 2,
@@ -103,7 +109,8 @@ return function(p1)
 				size = InputSize.Medium,
 				variant = ButtonVariant.Utility,
 				onActivated = p1.onSearchOpen
-			})
+			}),
+			CloseButtonContainer = if FFlagAlignSideSheetWindowCloseRight then Element else nil
 		})
 	})
 end

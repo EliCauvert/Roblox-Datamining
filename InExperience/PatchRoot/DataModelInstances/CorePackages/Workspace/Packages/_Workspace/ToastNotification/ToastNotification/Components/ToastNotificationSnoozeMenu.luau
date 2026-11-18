@@ -1,5 +1,6 @@
 ﻿local Parent = script.Parent.Parent
 local Parent1 = Parent.Parent
+local ReactRobloxModule = require(Parent1.ReactRoblox)
 local DependenciesModule = require(Parent.dependencies)
 local NotificationTypeEnum = require(Parent.type).NotificationTypeEnum
 local ShowNotificationSnoozeMenuSignal = require(Parent.Signals).ShowNotificationSnoozeMenuSignal
@@ -27,6 +28,7 @@ local _ = require(Parent1.ReactFocusNavigation)
 local FFlagEnableAppChatSnoozeMenuFocus = require(Parent1.SharedFlags).FFlagEnableAppChatSnoozeMenuFocus
 local GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction = require(Parent1.SharedFlags).GetFFlagAppChatInExpToastSnoozeMenuDismissFix
 local SnoozeMenuTextXAlignment = game:DefineFastFlag("SnoozeMenuTextXAlignment", false)
+local FFlagKeepSideSheetOpenBesideMenu = require(Parent1.SharedFlags).FFlagKeepSideSheetOpenBesideMenu
 local EventMap = {
 	[Enum.KeyCode.ButtonB] = FocusNavigationEventNameEnum.NavigateBack,
 	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
@@ -44,7 +46,7 @@ config1 = {
 }
 
 return function()
-	-- upvalues: UseStyleFunction (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), Cryo (copy), config (copy), React (copy), ShowNotificationSnoozeMenuSignal (copy), GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction (copy), DismissNotificationSnoozeMenuSignal (copy), FFlagEnableAppChatSnoozeMenuFocus (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), NotificationSnoozeMenuVisibleSignal (copy), UseCursorFunction (copy), config1 (ref), NormalizeFontFaceFunction (copy), Colors (copy), Default (copy), Interactable (copy), FocusRoot (copy), EventMap (copy), FocusNavigableSurfaceIdentifierEnum (copy), SnoozeMenuTextXAlignment (copy), Roact (copy)
+	-- upvalues: UseStyleFunction (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), Cryo (copy), config (copy), React (copy), ShowNotificationSnoozeMenuSignal (copy), GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction (copy), DismissNotificationSnoozeMenuSignal (copy), FFlagEnableAppChatSnoozeMenuFocus (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), NotificationSnoozeMenuVisibleSignal (copy), UseCursorFunction (copy), config1 (ref), FFlagKeepSideSheetOpenBesideMenu (copy), NormalizeFontFaceFunction (copy), Colors (copy), Default (copy), Interactable (copy), FocusRoot (copy), EventMap (copy), FocusNavigableSurfaceIdentifierEnum (copy), SnoozeMenuTextXAlignment (copy), Roact (copy), ReactRobloxModule (copy)
 	local UseStyleResult = UseStyleFunction()
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction((Cryo.Dictionary.union(config, {
@@ -105,11 +107,12 @@ return function()
 	end
 	local UseCursorResult = if FFlagEnableAppChatSnoozeMenuFocus then UseCursorFunction() else nil
 	local UseMemoResult1 = React.useMemo(function()
-		-- upvalues: config1 (upval), React (upval), FFlagEnableAppChatSnoozeMenuFocus (upval), UseTokensResult (copy), NormalizeFontFaceFunction (upval), UseCursorResult (copy), UseLocalizationResult (copy), UseStyleResult (copy), Colors (upval), UseStateResult1 (copy), Default (upval), UseStateResult2 (copy)
+		-- upvalues: config1 (upval), React (upval), FFlagKeepSideSheetOpenBesideMenu (upval), FFlagEnableAppChatSnoozeMenuFocus (upval), UseTokensResult (copy), NormalizeFontFaceFunction (upval), UseCursorResult (copy), UseLocalizationResult (copy), UseStyleResult (copy), Colors (upval), UseStateResult1 (copy), Default (upval), UseStateResult2 (copy)
 		local List = {}
 		
 		for LayoutOrder, value in ipairs(config1) do
 			table.insert(List, React.createElement("TextButton", {
+				key = if FFlagKeepSideSheetOpenBesideMenu then tostring(LayoutOrder) else nil,
 				Size = UDim2.new(1, 0, 0, if FFlagEnableAppChatSnoozeMenuFocus then UseTokensResult.Size.Size_1400 else 56),
 				BackgroundTransparency = 1,
 				FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.TitleLarge.Font),
@@ -151,8 +154,7 @@ return function()
 		UseStateResult1,
 		UseTokensResult.Typography.TitleLarge.Font
 	})
-	
-	return if UseStateResult then React.createElement(Interactable, {
+	local Element = if UseStateResult then React.createElement(Interactable, {
 		Size = UDim2.fromScale(1, 1),
 		AutoButtonColor = false,
 		BackgroundColor3 = Colors.Black,
@@ -224,7 +226,7 @@ return function()
 					TextColor3 = Colors.White,
 					TextXAlignment = if SnoozeMenuTextXAlignment then Enum.TextXAlignment.Left else nil
 				}),
-				Description = if UseStateResult1 and UseStateResult1.description and UseStateResult1.description ~= "" then React.createElement("TextLabel", {
+				Description = if UseStateResult1 and (UseStateResult1.description and UseStateResult1.description ~= "") then React.createElement("TextLabel", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
 					AutomaticSize = Enum.AutomaticSize.XY,
@@ -248,4 +250,12 @@ return function()
 			})
 		})
 	}) else nil
+	
+	return if FFlagKeepSideSheetOpenBesideMenu and Element and UseStateResult1.displayOrder ~= nil then ReactRobloxModule.createPortal({
+		SnoozeMenuLayer = React.createElement("ScreenGui", {
+			IgnoreGuiInset = true,
+			DisplayOrder = UseStateResult1.displayOrder,
+			ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+		}, { SnoozeMenuOverlay = Element })
+	}, game:GetService("CoreGui")) else Element
 end

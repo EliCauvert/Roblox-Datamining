@@ -1,0 +1,1 @@
+﻿return game:DefineFastInt("BuildCompactSearchFadeMilliseconds", 100)

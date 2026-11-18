@@ -31,6 +31,8 @@ local GetMomentsCapabilitiesFunction = require(Parent1.MomentsCommon).Stores.Get
 local FFlagCreateMomentsToastModule = require(Parent.Flags.FFlagCreateMomentsToast)
 local FFlagCapturesInExpMomentsToastDownloadButtonModule = require(Parent.Flags.FFlagCapturesInExpMomentsToastDownloadButton)
 local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
+local FFlagCapturesCarouselMomentsButtonModule = require(Parent.Flags.FFlagCapturesCarouselMomentsButton)
+local Captures = require(Parent1.MomentsCommon).Analytics.FunnelEventNames.CreationIntentSource.Captures
 local IsPlatformMatch: boolean = UserInputService:GetPlatform() == Enum.Platform.Windows or UserInputService:GetPlatform() == Enum.Platform.OSX
 
 local function _(p1): boolean
@@ -155,7 +157,7 @@ local config = {
 }
 
 return function(_)
-	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), ReactModule (copy), CapturesToastTypeModule (copy), config (copy), ToastVanishedModule (copy), FFlagBuildExperienceInGameCaptureToChat (copy), DashModule (copy), GetMomentsCapabilitiesFunction (copy), FFlagCreateMomentsToastModule (copy), ToastControllerModule (copy), HttpService (copy), StartMomentsCreationFlowModule (copy), EventNamesModule (copy), FFlagCapturesInExpMomentsToastDownloadButtonModule (copy), IconName (copy), GetSaveToStoragePermissionModule (copy), Toast (copy)
+	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), ReactModule (copy), CapturesToastTypeModule (copy), config (copy), ToastVanishedModule (copy), FFlagBuildExperienceInGameCaptureToChat (copy), DashModule (copy), GetMomentsCapabilitiesFunction (copy), FFlagCreateMomentsToastModule (copy), ToastControllerModule (copy), HttpService (copy), StartMomentsCreationFlowModule (copy), EventNamesModule (copy), FFlagCapturesCarouselMomentsButtonModule (copy), Captures (copy), FFlagCapturesInExpMomentsToastDownloadButtonModule (copy), IconName (copy), GetSaveToStoragePermissionModule (copy), Toast (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -235,11 +237,14 @@ return function(_)
 		text = UseResult("discoverPostWatch"),
 		actionText = UseResult("createAction"),
 		onAction = function()
-			-- upvalues: UseSelectorResult1 (copy), HttpService (upval), UseDispatchResult (copy), StartMomentsCreationFlowModule (upval), UseAnalyticsModuleResult (copy), EventNamesModule (upval)
+			-- upvalues: UseSelectorResult1 (copy), HttpService (upval), UseDispatchResult (copy), StartMomentsCreationFlowModule (upval), UseAnalyticsModuleResult (copy), EventNamesModule (upval), FFlagCapturesCarouselMomentsButtonModule (upval), Captures (upval)
 			if UseSelectorResult1 and UseSelectorResult1.captureInfo then
 				local Guid = HttpService:GenerateGUID(false)
 				UseDispatchResult(StartMomentsCreationFlowModule(UseSelectorResult1.captureInfo, Guid))
-				UseAnalyticsModuleResult.fireEvent(EventNamesModule.XExpMomentCreationStarted, { creationSessionId = Guid })
+				UseAnalyticsModuleResult.fireEvent(EventNamesModule.XExpMomentCreationStarted, {
+					creationSessionId = Guid,
+					source = if FFlagCapturesCarouselMomentsButtonModule then Captures else nil
+				})
 			end
 			UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesCreateMomentToastButtonActivated)
 		end,

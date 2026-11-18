@@ -3751,12 +3751,11 @@ Feature.Groups.Description.RequiresAccountTenureTooltipOneMonth,이 커뮤니티
 Feature.Groups.Description.RequiresAccountTenureTooltipOneWeek,이 커뮤니티에 가입하려면 7일 동안 계정을 보유해야 해요.
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeDays,이 커뮤니티에 가입하려면 3일 동안 계정을 보유해야 해요.
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeMonths,이 커뮤니티에 가입하려면 90일 동안 계정을 보유해야 해요.
-Feature.Groups.Header.UppercaseMyGroups,내 커뮤니티
 Feature.Groups.Heading.Community,
 Feature.Groups.Heading.Followers,
 Feature.Groups.Heading.Groups,
 Feature.Groups.Heading.Members,
-Feature.Groups.Heading.MyGroups,
+Feature.Groups.Heading.MyGroups,내 커뮤니티
 Feature.Groups.Heading.Primary,
 Feature.Groups.Heading.SocialLinksNew,소셜 링크
 Feature.Groups.Heading.SocialMedia,소셜 미디어
@@ -3962,12 +3961,21 @@ Feature.Moments.Action.ShowDetails,세부 정보 표시
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,동영상 잘라내기
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Action.View,
 Feature.Moments.Action.ViewOtherFeed,다른 피드 보기
 Feature.Moments.Action.ViewRecommended,추천 보기
 Feature.Moments.Action.ViewTrending,인기 게시물 보기
 Feature.Moments.Body.EDPMomentIPReportInstructions,이 모멘트에서 지식재산권 위반을 신고하려면 게임 세부 정보 페이지로 이동하세요.
 Feature.Moments.Description.CommunityStandards,허용되는 표현과 금지되는 표현에 대한 자세한 내용은 커뮤니티 규정을 확인하세요.
 Feature.Moments.Description.EmptyCapturesLibrary,내 캡처가 표시되는 곳입니다.
+Feature.Moments.Description.EngagementFirstLike,지금 보기
+Feature.Moments.Description.EngagementFirstReaction,방금 내 모멘트에 첫 번째 반응이 있었습니다!
+Feature.Moments.Description.EngagementLikedCommentsDigest,내 코멘트 중 {likedComments}개에 '좋아요'를 받았습니다
+Feature.Moments.Description.EngagementMomentDigest,새로운 코멘트 {comments}개 및 반응 {milestone}개
+Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementNewComment,방금 회원님의 모멘트에 코멘트를 남김
+Feature.Moments.Description.EngagementNewComments,{count}명이 회원님의 모멘트에 코멘트를 남김
+Feature.Moments.Description.EngagementReactionMilestone,새로운 반응 {count}개
 Feature.Moments.Description.FollowingCaughtUpBody,이 피드의 새로운 모멘트를 모두 시청하셨습니다. 더 많은 내용을 보려면 피드를 전환하세요.
 Feature.Moments.Description.FollowingEmptyBodyRecommended,여기에서 팔로우하는 크리에이터의 모멘트를 확인할 수 있습니다.
 Feature.Moments.Description.FollowingEmptyBodyTrending,
@@ -4114,6 +4122,14 @@ Feature.Moments.Title.Comments,코멘트
 Feature.Moments.Title.CommentsWithCappedCount,코멘트 {count}개 이상
 Feature.Moments.Title.CommentsWithCount,코멘트 {count}개
 Feature.Moments.Title.EDPMomentIPReportInstructions,게임 세부 정보 페이지에서 신고하기
+Feature.Moments.Title.EngagementFirstLike,'좋아요'를 받았습니다
+Feature.Moments.Title.EngagementFirstReaction,새로운 활동
+Feature.Moments.Title.EngagementLikedCommentsDigest,새로운 '좋아요'
+Feature.Moments.Title.EngagementMomentDigest,내 모멘트가 인기를 끌고 있습니다
+Feature.Moments.Title.EngagementMomentsDigest,
+Feature.Moments.Title.EngagementNewComment,{name} 님이
+Feature.Moments.Title.EngagementNewComments,{name}님 외
+Feature.Moments.Title.EngagementReactionMilestone,내 모멘트가 주목받고 있습니다
 Feature.Moments.Title.GenerateTextFeedbackReason,어떤 문제가 생겼나요?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,모멘트 만들기를 종료할까요?

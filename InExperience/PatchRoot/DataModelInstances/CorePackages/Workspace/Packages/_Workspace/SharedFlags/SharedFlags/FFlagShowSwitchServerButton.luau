@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("ShowSwitchServerButton3", false)
+﻿return game:DefineFastFlag("ShowSwitchServerButton4", false)

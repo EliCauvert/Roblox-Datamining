@@ -1,9 +1,11 @@
 ﻿local CorePackages = game:GetService("CorePackages")
 local AppStorageService = game:GetService("AppStorageService")
 local HttpService = game:GetService("HttpService")
+local VRService = require(CorePackages.Workspace.Packages.MockableProxyServices).VRService
 local ReactModule = require(CorePackages.Packages.React)
 local _ = require(CorePackages.Packages.UIBlox)
 local GamepadNavigationDialogModule = require(script.Parent.GamepadNavigationDialog)
+local FFlagGamepadNavigationDialogHideInVRModule = require(script:FindFirstAncestor("TopBar").Flags.FFlagGamepadNavigationDialogHideInVR)
 local _ = ReactModule.PureComponent:extend("GamepadNavigationDialogShowCounter")
 
 local function shouldShowBasedOnCountInAppStorage(AppStorageKey, MaxShownCount)
@@ -50,8 +52,12 @@ local function GamepadNavigationDialogTextButton(p1)
 end
 
 return function(p1)
-	-- upvalues: shouldShowBasedOnCountInAppStorage (copy), ReactModule (copy), GamepadNavigationDialogTextButton (copy), AppStorageService (copy)
-	if p1.isGamepadNavigationDialogEnabled and p1.isGamepadNavigationDialogOpen then
+	-- upvalues: FFlagGamepadNavigationDialogHideInVRModule (copy), VRService (copy), shouldShowBasedOnCountInAppStorage (copy), ReactModule (copy), GamepadNavigationDialogTextButton (copy), AppStorageService (copy)
+	if not p1.isGamepadNavigationDialogEnabled or not p1.isGamepadNavigationDialogOpen then
+		return nil
+	elseif FFlagGamepadNavigationDialogHideInVRModule and VRService ~= nil and VRService.VREnabled then
+		return nil
+	else
 		local ShouldShowBasedOnCountInAppStorage, ShouldShowBasedOnCountInAppStorage2 = shouldShowBasedOnCountInAppStorage(p1.appStorageKey, p1.maxShownCount)
 		
 		return if ShouldShowBasedOnCountInAppStorage then ReactModule.createElement(GamepadNavigationDialogTextButton, {
@@ -66,7 +72,5 @@ return function(p1)
 				AppStorageService:Flush()
 			end
 		}) else nil
-	else
-		return nil
 	end
 end

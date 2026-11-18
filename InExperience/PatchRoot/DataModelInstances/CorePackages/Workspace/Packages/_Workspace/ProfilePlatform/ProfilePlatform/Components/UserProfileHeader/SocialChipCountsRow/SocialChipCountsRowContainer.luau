@@ -21,9 +21,10 @@ local FFlagEnableSocialTabsPage = SharedFlagsModule.FFlagEnableSocialTabsPage
 local FFlagProfilePlatformEnableSchoolChip = SharedFlagsModule.FFlagProfilePlatformEnableSchoolChip
 local FFlagProfilePlatformGracefulVisibilityModule = require(ProfilePlatform.Flags.FFlagProfilePlatformGracefulVisibility)
 local FFlagSocialTabsPageIxpEnabledModule = require(ProfilePlatform.Flags.FFlagSocialTabsPageIxpEnabled)
+local FFlagLuaAppAddTestIdsForArrow = SharedFlagsModule.FFlagLuaAppAddTestIdsForArrow
 
 return function(p1)
-	-- upvalues: UseProfileWrapperContextModule (copy), UseProfileAnalyticsContextModule (copy), UseAreWebViewsSupportedModule (copy), UseLocalUserIdFunction (copy), UseDynamicSizeMarginModule (copy), FFlagAddIEMProfilePage (copy), UseSignalProfileInsightsByUserIdFunction (copy), UseSocialCountsDataModule (copy), UseSocialCountsActionsModule (copy), FFlagEnableSocialTabsPage (copy), FFlagSocialTabsPageIxpEnabledModule (copy), FFlagProfilePlatformEnableSchoolChip (copy), UseSchoolChipModule (copy), ReactModule (copy), EnumsModule (copy), FFlagProfilePlatformGracefulVisibilityModule (copy), ChipSize (copy), ChipGroup (copy)
+	-- upvalues: UseProfileWrapperContextModule (copy), UseProfileAnalyticsContextModule (copy), UseAreWebViewsSupportedModule (copy), UseLocalUserIdFunction (copy), UseDynamicSizeMarginModule (copy), FFlagAddIEMProfilePage (copy), UseSignalProfileInsightsByUserIdFunction (copy), UseSocialCountsDataModule (copy), UseSocialCountsActionsModule (copy), FFlagEnableSocialTabsPage (copy), FFlagSocialTabsPageIxpEnabledModule (copy), FFlagProfilePlatformEnableSchoolChip (copy), UseSchoolChipModule (copy), ReactModule (copy), EnumsModule (copy), FFlagProfilePlatformGracefulVisibilityModule (copy), ChipSize (copy), FFlagLuaAppAddTestIdsForArrow (copy), ChipGroup (copy)
 	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
 	local UseProfileAnalyticsContextModuleResult = UseProfileAnalyticsContextModule()
 	local UseAreWebViewsSupportedModuleResult = UseAreWebViewsSupportedModule()
@@ -57,7 +58,7 @@ return function(p1)
 		ChipGroup = ReactModule.createElement(ChipGroup, {
 			scrollingEnabledOverride = true,
 			chips = ReactModule.useMemo(function()
-				-- upvalues: FFlagAddIEMProfilePage (upval), Source (copy), EnumsModule (upval), FFlagProfilePlatformEnableSchoolChip (upval), UseSchoolChipModuleResult (ref), UseSocialCountsDataModuleResult (copy), FFlagProfilePlatformGracefulVisibilityModule (upval), UseSocialCountsActionsModuleResult (copy), ChipSize (upval)
+				-- upvalues: FFlagAddIEMProfilePage (upval), Source (copy), EnumsModule (upval), FFlagProfilePlatformEnableSchoolChip (upval), UseSchoolChipModuleResult (ref), UseSocialCountsDataModuleResult (copy), FFlagProfilePlatformGracefulVisibilityModule (upval), UseSocialCountsActionsModuleResult (copy), ChipSize (upval), FFlagLuaAppAddTestIdsForArrow (upval)
 				local List = {}
 				local IsSourceMatch: boolean = FFlagAddIEMProfilePage and Source == EnumsModule.Sources.InExperienceProfile
 				
@@ -74,7 +75,8 @@ return function(p1)
 							onActivated = if IsDisabled or FFlagAddIEMProfilePage and Source == EnumsModule.Sources.InExperienceProfile then nil else UseSocialCountsActionsModuleResult[value.fieldName],
 							isDisabled = value.isDisabled,
 							size = ChipSize.Medium,
-							leading = value.leading
+							leading = value.leading,
+							testId = if FFlagLuaAppAddTestIdsForArrow then `--profile-social-count-{value.fieldName}` else nil
 						})
 					end
 				end

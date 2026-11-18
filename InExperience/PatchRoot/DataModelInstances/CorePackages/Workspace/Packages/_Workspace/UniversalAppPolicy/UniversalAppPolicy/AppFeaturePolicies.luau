@@ -875,6 +875,10 @@ return function(p1)
 			-- upvalues: p1 (copy)
 			return p1.ShowAppIconSetting or false
 		end,
+		getAppThemesAccess = function()
+			-- upvalues: p1 (copy)
+			return p1.AppThemesAccess
+		end,
 		getCanAccessTrustedContacts = function()
 			-- upvalues: p1 (copy)
 			return p1.canAccessTrustedContacts or false
@@ -1042,6 +1046,14 @@ return function(p1)
 		getShowInContextPersonalizedRecommendationsFriendsAddFriendsPeopleYouMayKnow = function()
 			-- upvalues: p1 (copy)
 			return p1.showInContextPersonalizedRecommendationsFriendsAddFriendsPeopleYouMayKnow or false
+		end,
+		getShowInContextPersonalizedRecommendationsFriendsAddFriendsSearch = function()
+			-- upvalues: p1 (copy)
+			return p1.showInContextPersonalizedRecommendationsFriendsAddFriendsSearch or false
+		end,
+		getShowInContextPersonalizedRecommendationsSearchOmnisearchPeople = function()
+			-- upvalues: p1 (copy)
+			return p1.showInContextPersonalizedRecommendationsSearchOmnisearchPeople or false
 		end,
 		getSupportCenterEnabled = if GetFFlagEnableSupportCenterFunction() then function()
 			-- upvalues: p1 (copy)

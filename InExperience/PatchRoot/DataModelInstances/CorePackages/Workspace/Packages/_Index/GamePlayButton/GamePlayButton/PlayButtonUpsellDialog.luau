@@ -8,7 +8,8 @@ local DialogSize = FoundationModule.Enums.DialogSize
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local RoactUtilsModule = require(Parent.RoactUtils)
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
 local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
 local AppLinking = require(Parent.RoactServiceTags).AppLinking
 local CentralOverlayModule = require(Parent.CentralOverlay)
@@ -17,9 +18,11 @@ local CloseCentralOverlayFunction = CentralOverlayModule.Thunks.CloseCentralOver
 local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
 local ExtractAndStyleRichTextLinksFunction = require(Parent.DiscoveryUtils).extractAndStyleRichTextLinks
 local FFlagEnablePlayButtonWizardVPCPrologueModule = require(GamePlayButton.Flags.FFlagEnablePlayButtonWizardVPCPrologue)
+local FFlagLuaAppAddTestIdsForArrow = require(Parent.SharedFlags).FFlagLuaAppAddTestIdsForArrow
+local GetTestIdFunction = RoactUtilsModule.getTestId
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), UseRoactServiceFunction (copy), AppLinking (copy), ReactModule (copy), ExtractAndStyleRichTextLinksFunction (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), CloseCentralOverlayFunction (copy), Dialog (copy), DialogSize (copy), FFlagEnablePlayButtonWizardVPCPrologueModule (copy), PlayButtonUpsellBodyModule (copy), NormalizeFontFaceFunction (copy), ButtonVariant (copy)
+	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), UseRoactServiceFunction (copy), AppLinking (copy), ReactModule (copy), ExtractAndStyleRichTextLinksFunction (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), CloseCentralOverlayFunction (copy), Dialog (copy), DialogSize (copy), FFlagLuaAppAddTestIdsForArrow (copy), FFlagEnablePlayButtonWizardVPCPrologueModule (copy), PlayButtonUpsellBodyModule (copy), NormalizeFontFaceFunction (copy), GetTestIdFunction (copy), ButtonVariant (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseRoactServiceResult = UseRoactServiceFunction(AppLinking)
@@ -58,7 +61,11 @@ return function(p1)
 		size = DialogSize.Medium,
 		onClose = p1.onCloseModal
 	}, {
-		Title = ReactModule.createElement(Dialog.Title, { LayoutOrder = 1, text = p1.titleText }),
+		Title = ReactModule.createElement(Dialog.Title, {
+			LayoutOrder = 1,
+			text = p1.titleText,
+			testId = if FFlagLuaAppAddTestIdsForArrow then "--play-button-upsell-dialog-title" else nil
+		}),
 		Content = ReactModule.createElement(Dialog.Content, { LayoutOrder = 2 }, {
 			BodyText = if FFlagEnablePlayButtonWizardVPCPrologueModule then ReactModule.createElement(PlayButtonUpsellBodyModule, { bodyText = p1.bodyText, onCloseModal = p1.onCloseModal }) else ReactModule.createElement("TextButton", {
 				AutomaticSize = Enum.AutomaticSize.Y,
@@ -74,7 +81,8 @@ return function(p1)
 				TextColor3 = UseTokensResult.Color.Content.Emphasis.Color3,
 				Active = UseMemoResult.link ~= nil,
 				Selectable = UseMemoResult.link ~= nil,
-				[ReactModule.Event.Activated] = if UseMemoResult.link then UseResult else nil
+				[ReactModule.Event.Activated] = if UseMemoResult.link then UseResult else nil,
+				[ReactModule.Tag] = if FFlagLuaAppAddTestIdsForArrow then GetTestIdFunction("play-button-upsell-dialog-body") else nil
 			})
 		}),
 		Actions = ReactModule.createElement(Dialog.Actions, {

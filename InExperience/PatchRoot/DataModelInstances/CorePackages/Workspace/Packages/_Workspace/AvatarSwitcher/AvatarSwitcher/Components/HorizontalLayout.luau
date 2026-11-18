@@ -2,9 +2,10 @@
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local DividerOrientation = FoundationModule.Enums.DividerOrientation
+local FFlagAlignSideSheetWindowCloseRight = require(Parent.SharedFlags).FFlagAlignSideSheetWindowCloseRight
 
 return function(p1)
-	-- upvalues: ReactModule (copy), FoundationModule (copy), DividerOrientation (copy)
+	-- upvalues: ReactModule (copy), FoundationModule (copy), DividerOrientation (copy), FFlagAlignSideSheetWindowCloseRight (copy)
 	return (ReactModule.createElement(FoundationModule.View, { tag = "size-full-full" }, {
 		LeftPanel = ReactModule.createElement(FoundationModule.View, { tag = "col", Size = UDim2.fromScale(0.67, 1) }, {
 			Header = ReactModule.createElement(FoundationModule.View, {
@@ -21,6 +22,16 @@ return function(p1)
 			ZIndex = 2,
 			Position = UDim2.fromScale(0.67, 0),
 			orientation = DividerOrientation.Vertical
-		})
+		}),
+		CloseButtonContainer = if FFlagAlignSideSheetWindowCloseRight and p1.onClose then ReactModule.createElement(FoundationModule.View, {
+			tag = "row align-y-center position-top-right anchor-top-right size-0-1200 auto-x padding-x-medium",
+			ZIndex = 3
+		}, {
+			CloseButton = ReactModule.createElement(FoundationModule.Image, {
+				tag = "size-600 radius-small",
+				Image = "icons/navigation/close",
+				onActivated = p1.onClose
+			})
+		}) else nil
 	}))
 end

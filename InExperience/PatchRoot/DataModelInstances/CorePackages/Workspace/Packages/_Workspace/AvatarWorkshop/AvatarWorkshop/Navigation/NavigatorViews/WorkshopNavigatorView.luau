@@ -11,21 +11,24 @@ local TopBarModule = require(AvatarWorkshop.Components.TopBar)
 local AvatarPreviewModule = require(AvatarWorkshop.Components.AvatarPreview.AvatarPreview)
 local ScreenTitlesModule = require(AvatarWorkshop.Constants.ScreenTitles)
 local GetActiveRouteModule = require(AvatarWorkshop.Navigation.getActiveRoute)
+local FFlagAlignSideSheetWindowCloseRight = require(Parent.SharedFlags).FFlagAlignSideSheetWindowCloseRight
 
 return function(p1)
-	-- upvalues: ReactModule (copy), WorkshopWindowContextModule (copy), GetActiveRouteModule (copy), TopBarModule (copy), ScreenTitlesModule (copy), RoactNavigationModule (copy), VerticalLayoutModule (copy), AvatarPreviewModule (copy), FoundationModule (copy), HorizontalLayoutModule (copy)
+	-- upvalues: ReactModule (copy), WorkshopWindowContextModule (copy), GetActiveRouteModule (copy), FFlagAlignSideSheetWindowCloseRight (copy), TopBarModule (copy), ScreenTitlesModule (copy), RoactNavigationModule (copy), VerticalLayoutModule (copy), AvatarPreviewModule (copy), FoundationModule (copy), HorizontalLayoutModule (copy)
 	local UseContextResult = ReactModule.useContext(WorkshopWindowContextModule)
 	local Navigation = p1.navigation
 	local ActiveRouteModule = GetActiveRouteModule(Navigation)
 	local RouteName = ActiveRouteModule.routeName
 	local RouteName1 = Navigation.state.routes[1].routeName
+	local IsRouteNameMatch: boolean = FFlagAlignSideSheetWindowCloseRight and (not UseContextResult.verticalLayout and RouteName == RouteName1)
 	local Element = ReactModule.createElement(TopBarModule, {
 		titleKey = ScreenTitlesModule[RouteName],
 		onClose = UseContextResult.onClose,
 		onBack = if RouteName == RouteName1 then nil else function()
 			-- upvalues: Navigation (copy), RouteName1 (copy)
 			Navigation.navigate(RouteName1)
-		end
+		end,
+		hideClose = if FFlagAlignSideSheetWindowCloseRight then IsRouteNameMatch else nil
 	})
 	local Element1 = ReactModule.createElement(RoactNavigationModule.RobloxSwitchView, p1)
 	local Descriptor = p1.descriptors[ActiveRouteModule.key]
@@ -42,6 +45,7 @@ return function(p1)
 		}, { ActionBar = Element2 }) else nil
 	}) else ReactModule.createElement(HorizontalLayoutModule, {
 		headerSlot = Element,
+		onClose = if IsRouteNameMatch then UseContextResult.onClose else nil,
 		leftItemSlot = ReactModule.createElement(FoundationModule.View, { tag = "size-full-full" }, { Content = Element1 }),
 		rightItemSlot = ReactModule.createElement(FoundationModule.View, { tag = "col size-full-full" }, {
 			Preview = ReactModule.createElement(FoundationModule.View, { tag = "fill size-full-0", LayoutOrder = 1 }, {

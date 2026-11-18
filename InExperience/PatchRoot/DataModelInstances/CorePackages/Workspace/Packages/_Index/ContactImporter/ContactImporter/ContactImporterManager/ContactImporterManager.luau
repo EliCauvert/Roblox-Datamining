@@ -27,7 +27,6 @@ local PrefetchProfileNamesOnStartupV2 = game:DefineFastFlag("PrefetchProfileName
 local FIntFriendsCarouselInitialFetchSize = require(Parent1.SharedFlags).FIntFriendsCarouselInitialFetchSize
 local FFlagRegisterQRCodeKeyInEngine = require(Parent1.SharedFlags).FFlagRegisterQRCodeKeyInEngine
 local FFlagAddFriendsPageHighlightUnseenTrustedRequests = require(Parent1.SharedFlags).FFlagAddFriendsPageHighlightUnseenTrustedRequests
-local FFlagSocialCarouselMigrateRecommendations = require(Parent1.SharedFlags).FFlagSocialCarouselMigrateRecommendations
 local FFlagFriendSortedByPresenceSignalsImplementation = require(Parent1.SharedFlags).FFlagFriendSortedByPresenceSignalsImplementation
 local UseSignalStateFunction = require(Parent1.SignalsReact).useSignalState
 local GetResult = require(Parent1.DataHydration).Friends.FriendsStore.get()
@@ -53,7 +52,7 @@ return UniversalAppPolicy.connect(function(p1)
 		isContactImporterPolicyEnabled = p1.getContactImporterEnabled()
 	}
 end)(function(p1)
-	-- upvalues: UseLocalUserIdFunction (copy), GetAppFeaturePoliciesFunction (copy), UseFetchContactImporterInfoOnceFunction (copy), EarlierFetchTimeForFriendsCarouselV1 (copy), PaginatedFriendsCarouselIXPModule (copy), ApolloFriendsModule (copy), FFlagFriendSortedByPresenceSignalsImplementation (copy), ReactModule (copy), GetResult (copy), UseSignalStateFunction (copy), UseQueryFunction (copy), Queries (copy), UserIdExistsFunction (copy), CryoModule (copy), FIntFriendsCarouselInitialFetchSize (copy), PrefetchProfileNamesOnStartupV2 (copy), GetResult1 (copy), FFlagSocialCarouselMigrateRecommendations (copy), FriendsRecommendationsStore (copy), DataSource (copy), UseAutoSyncContactsFunction (copy), FFlagAddFriendsPageHighlightUnseenTrustedRequests (copy), UnseenRequestsStore (copy), FriendsRequestsStore (copy), MessageBusService (copy), RealtimeMessageId (copy), AnalyticsFactory (copy), EventStream (copy), DefaultAnalyticsService (copy), AppStorageService (copy), ProfileQrCodeCameraSettingsModalSeen (copy), PermissionsProtocol (copy)
+	-- upvalues: UseLocalUserIdFunction (copy), GetAppFeaturePoliciesFunction (copy), UseFetchContactImporterInfoOnceFunction (copy), EarlierFetchTimeForFriendsCarouselV1 (copy), PaginatedFriendsCarouselIXPModule (copy), ApolloFriendsModule (copy), FFlagFriendSortedByPresenceSignalsImplementation (copy), ReactModule (copy), GetResult (copy), UseSignalStateFunction (copy), UseQueryFunction (copy), Queries (copy), UserIdExistsFunction (copy), CryoModule (copy), FIntFriendsCarouselInitialFetchSize (copy), PrefetchProfileNamesOnStartupV2 (copy), GetResult1 (copy), FriendsRecommendationsStore (copy), DataSource (copy), UseAutoSyncContactsFunction (copy), FFlagAddFriendsPageHighlightUnseenTrustedRequests (copy), UnseenRequestsStore (copy), FriendsRequestsStore (copy), MessageBusService (copy), RealtimeMessageId (copy), AnalyticsFactory (copy), EventStream (copy), DefaultAnalyticsService (copy), AppStorageService (copy), ProfileQrCodeCameraSettingsModalSeen (copy), PermissionsProtocol (copy)
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local IsContactImporterPolicyEnabled = p1.isContactImporterPolicyEnabled or GetAppFeaturePoliciesFunction().getContactImporterEnabled()
 	UseFetchContactImporterInfoOnceFunction({ policyIsEnabled = IsContactImporterPolicyEnabled })
@@ -112,14 +111,12 @@ end)(function(p1)
 			end
 		end, { UseLocalUserIdResult, Friends1 })
 	end
-	if FFlagSocialCarouselMigrateRecommendations then
-		ReactModule.useEffect(function()
-			-- upvalues: GetAppFeaturePoliciesFunction (upval), FriendsRecommendationsStore (upval), DataSource (upval)
-			if GetAppFeaturePoliciesFunction().getSocialGraphSyncEnabled() then
-				FriendsRecommendationsStore.get().getFriendsRecommendations(DataSource.HomepageFriendsCarousel)
-			end
-		end, { UseLocalUserIdResult })
-	end
+	ReactModule.useEffect(function()
+		-- upvalues: GetAppFeaturePoliciesFunction (upval), FriendsRecommendationsStore (upval), DataSource (upval)
+		if GetAppFeaturePoliciesFunction().getSocialGraphSyncEnabled() then
+			FriendsRecommendationsStore.get().getFriendsRecommendations(DataSource.HomepageFriendsCarousel)
+		end
+	end, { UseLocalUserIdResult })
 	UseAutoSyncContactsFunction(IsContactImporterPolicyEnabled)
 	ReactModule.useEffect(function()
 		-- upvalues: UserIdExistsFunction (upval), UseLocalUserIdResult (copy), GetResult (upval)

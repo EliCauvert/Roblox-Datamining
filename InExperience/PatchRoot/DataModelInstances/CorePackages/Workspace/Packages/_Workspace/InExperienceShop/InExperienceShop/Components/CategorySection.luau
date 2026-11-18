@@ -9,9 +9,8 @@ local RobuxPackageTileContainerModule = require(InExperienceShop.Components.Robu
 local _ = require(InExperienceShop.Components.ItemRow)
 local ConstantsModule = require(InExperienceShop.Constants)
 local ComputeRobuxPackageMediaHeightScaleFunction = require(InExperienceShop.Components.computeShopRowTileWidths).computeRobuxPackageMediaHeightScale
-local FFlagEnableInExperienceShopUnifiedLoggingModule = require(InExperienceShop.Flags.FFlagEnableInExperienceShopUnifiedLogging)
 local FFlagEnableCategoryLoggingInShopModule = require(InExperienceShop.Flags.FFlagEnableCategoryLoggingInShop)
-local AnalyticsModule = if FFlagEnableInExperienceShopUnifiedLoggingModule then require(InExperienceShop.Analytics) else nil
+local AnalyticsModule = require(InExperienceShop.Analytics)
 local ShopPageType = if AnalyticsModule then AnalyticsModule.Constants.ShopPageType else nil
 local ShopPageType1 = require(InExperienceShop.Analytics.Constants).ShopPageType
 local UseShopImpressionsDetectorModule = require(InExperienceShop.Hooks.useShopImpressionsDetector)
@@ -87,7 +86,7 @@ local _ = function(GridPositionColumn, p1, CategoryId, CategoryType, StableCateg
 end
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: UseShopImpressionsDetectorModule (copy), ShopPageType (copy), ReactModule (copy), ConstantsModule (copy), FFlagEnableCategoryLoggingInShopModule (copy), tileWrapperProps (copy), View (copy), RobuxPackageTileContainerModule (copy), ComputeRobuxPackageMediaHeightScaleFunction (copy), ShopItemTileModule (copy), ShopPageType1 (copy), SectionTitleModule (copy), ItemGridModule (copy), FFlagEnableInExperienceShopUnifiedLoggingModule (copy)
+	-- upvalues: UseShopImpressionsDetectorModule (copy), ShopPageType (copy), ReactModule (copy), ConstantsModule (copy), FFlagEnableCategoryLoggingInShopModule (copy), tileWrapperProps (copy), View (copy), RobuxPackageTileContainerModule (copy), ComputeRobuxPackageMediaHeightScaleFunction (copy), ShopItemTileModule (copy), ShopPageType1 (copy), SectionTitleModule (copy), ItemGridModule (copy)
 	local v1: boolean = Frame.robuxPackages ~= nil and #Frame.robuxPackages > 0
 	local FeaturedRobuxPackage = Frame.featuredRobuxPackage
 	local HasFeaturedRobuxPackage = FeaturedRobuxPackage ~= nil
@@ -114,80 +113,7 @@ return ReactModule.memo(function(Frame)
 			return { [FeaturedRobuxPackage.id] = FeaturedRobuxPackage }
 		end
 	end, { Frame.robuxPackages, Frame.featuredRobuxPackage, v1 })
-	local UseResult = ReactModule.useCallback(function(p1, LayoutOrder, p2)
-		-- upvalues: Frame (copy), FFlagEnableCategoryLoggingInShopModule (upval), UseMemoResult (copy), v1 (copy), HasFeaturedRobuxPackage (copy), tileWrapperProps (upval), ReactModule (upval), View (upval), RobuxPackageTileContainerModule (upval), OnItemActivated (copy), ComputeRobuxPackageMediaHeightScaleFunction (upval), ShopPageType (upval), ShopItemTileModule (upval), OnItemActivated (copy), ShopPageType1 (upval)
-		local config = {
-			categoryId = Frame.sectionId,
-			categoryType = if FFlagEnableCategoryLoggingInShopModule then Frame.categoryType else nil,
-			stableCategoryId = if FFlagEnableCategoryLoggingInShopModule then Frame.stableCategoryId else nil,
-			categoryGroup = if FFlagEnableCategoryLoggingInShopModule then Frame.categoryGroup else nil,
-			categoryName = if FFlagEnableCategoryLoggingInShopModule then Frame.categoryName else nil,
-			gridPositionRow = if p2 then p2.gridPositionRow else nil,
-			gridPositionColumn = LayoutOrder
-		}
-		local UseMemoResultEntry = if UseMemoResult == nil then nil else UseMemoResult[p1.id]
-		
-		if UseMemoResultEntry == nil then
-			local TileWrapperPropsResult = tileWrapperProps(if p2 == nil or p2.rowWidth <= 0 then nil elseif p2.isFeaturedDoubleWidthRobux(p1, LayoutOrder) and p2.featuredRobuxWidth ~= nil then p2.featuredRobuxWidth else p2.shopWidth, 1)
-			
-			return ReactModule.createElement(View, {
-				tag = TileWrapperPropsResult.tag,
-				Size = TileWrapperPropsResult.Size,
-				flexItem = TileWrapperPropsResult.flexItem,
-				LayoutOrder = LayoutOrder
-			}, {
-				Tile = ReactModule.createElement(ShopItemTileModule, {
-					itemId = p1.id,
-					itemType = p1.itemType,
-					name = p1.name,
-					thumbnail = p1.thumbnail,
-					price = p1.price,
-					userBasePriceInRobux = p1.userBasePriceInRobux,
-					universeId = p1.universeId,
-					categoryId = config.categoryId,
-					categoryType = config.categoryType,
-					stableCategoryId = config.stableCategoryId,
-					categoryGroup = config.categoryGroup,
-					categoryName = config.categoryName,
-					gridPositionRow = config.gridPositionRow,
-					gridPositionColumn = config.gridPositionColumn,
-					onItemActivated = OnItemActivated,
-					shopPageType = if ShopPageType1 then ShopPageType1.Home else nil
-				})
-			})
-		else
-			local V24 = v1 or HasFeaturedRobuxPackage and LayoutOrder == 1
-			local TileWrapperPropsResult = tileWrapperProps(if p2 == nil or p2.rowWidth <= 0 then nil elseif p2.isFeaturedDoubleWidthRobux(p1, LayoutOrder) and p2.featuredRobuxWidth ~= nil then p2.featuredRobuxWidth else p2.shopWidth, if V24 then 2 else 1)
-			
-			return ReactModule.createElement(View, {
-				tag = TileWrapperPropsResult.tag,
-				Size = TileWrapperPropsResult.Size,
-				flexItem = TileWrapperPropsResult.flexItem,
-				LayoutOrder = LayoutOrder
-			}, {
-				Tile = ReactModule.createElement(RobuxPackageTileContainerModule, {
-					pkg = UseMemoResultEntry,
-					paymentSessionId = Frame.paymentSessionId,
-					bonusJwt = Frame.bonusJwt,
-					onBonusItemActivated = OnItemActivated,
-					mediaHeightScale = if p2 == nil or p2.shopWidth <= 0 then nil else ComputeRobuxPackageMediaHeightScaleFunction(p2.shopWidth, p2.gap),
-					categoryId = config.categoryId,
-					categoryType = Frame.categoryType,
-					stableCategoryId = config.stableCategoryId,
-					categoryGroup = config.categoryGroup,
-					categoryName = config.categoryName,
-					gridPositionRow = config.gridPositionRow,
-					gridPositionColumn = config.gridPositionColumn,
-					shopPageType = if ShopPageType then ShopPageType.Home else nil
-				})
-			})
-		end
-	end, {
-		UseMemoResult, OnItemActivated, OnItemActivated, v1, HasFeaturedRobuxPackage,
-		Frame.paymentSessionId, Frame.bonusJwt, Frame.sectionId, Frame.categoryType,
-		Frame.stableCategoryId, Frame.categoryGroup, Frame.categoryName
-	})
-	local UseResult1 = ReactModule.useCallback(function()
+	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: Frame (copy)
 		if Frame.onCategoryActivated then
 			Frame.onCategoryActivated(Frame.sectionId)
@@ -201,7 +127,7 @@ return ReactModule.memo(function(Frame)
 		Title = ReactModule.createElement(SectionTitleModule, {
 			LayoutOrder = 1,
 			title = Frame.title,
-			onActivated = if Frame.onCategoryActivated then UseResult1 else nil
+			onActivated = if Frame.onCategoryActivated then UseResult else nil
 		}),
 		Grid = ReactModule.createElement(ItemGridModule, {
 			LayoutOrder = 2,
@@ -246,7 +172,79 @@ return ReactModule.memo(function(Frame)
 			itemsPerRow = Frame.itemsPerRow,
 			sectionId = Frame.sectionId,
 			onItemActivated = OnItemActivated,
-			renderTile = if FFlagEnableInExperienceShopUnifiedLoggingModule then UseResult elseif UseMemoResult == nil then nil else UseResult,
+			renderTile = ReactModule.useCallback(function(p1, LayoutOrder, p2)
+				-- upvalues: Frame (copy), FFlagEnableCategoryLoggingInShopModule (upval), UseMemoResult (copy), v1 (copy), HasFeaturedRobuxPackage (copy), tileWrapperProps (upval), ReactModule (upval), View (upval), RobuxPackageTileContainerModule (upval), OnItemActivated (copy), ComputeRobuxPackageMediaHeightScaleFunction (upval), ShopPageType (upval), ShopItemTileModule (upval), OnItemActivated (copy), ShopPageType1 (upval)
+				local config = {
+					categoryId = Frame.sectionId,
+					categoryType = if FFlagEnableCategoryLoggingInShopModule then Frame.categoryType else nil,
+					stableCategoryId = if FFlagEnableCategoryLoggingInShopModule then Frame.stableCategoryId else nil,
+					categoryGroup = if FFlagEnableCategoryLoggingInShopModule then Frame.categoryGroup else nil,
+					categoryName = if FFlagEnableCategoryLoggingInShopModule then Frame.categoryName else nil,
+					gridPositionRow = if p2 then p2.gridPositionRow else nil,
+					gridPositionColumn = LayoutOrder
+				}
+				local UseMemoResultEntry = if UseMemoResult == nil then nil else UseMemoResult[p1.id]
+				
+				if UseMemoResultEntry == nil then
+					local TileWrapperPropsResult = tileWrapperProps(if p2 == nil or p2.rowWidth <= 0 then nil elseif p2.isFeaturedDoubleWidthRobux(p1, LayoutOrder) and p2.featuredRobuxWidth ~= nil then p2.featuredRobuxWidth else p2.shopWidth, 1)
+					
+					return ReactModule.createElement(View, {
+						tag = TileWrapperPropsResult.tag,
+						Size = TileWrapperPropsResult.Size,
+						flexItem = TileWrapperPropsResult.flexItem,
+						LayoutOrder = LayoutOrder
+					}, {
+						Tile = ReactModule.createElement(ShopItemTileModule, {
+							itemId = p1.id,
+							itemType = p1.itemType,
+							name = p1.name,
+							thumbnail = p1.thumbnail,
+							price = p1.price,
+							userBasePriceInRobux = p1.userBasePriceInRobux,
+							universeId = p1.universeId,
+							categoryId = config.categoryId,
+							categoryType = config.categoryType,
+							stableCategoryId = config.stableCategoryId,
+							categoryGroup = config.categoryGroup,
+							categoryName = config.categoryName,
+							gridPositionRow = config.gridPositionRow,
+							gridPositionColumn = config.gridPositionColumn,
+							onItemActivated = OnItemActivated,
+							shopPageType = if ShopPageType1 then ShopPageType1.Home else nil
+						})
+					})
+				else
+					local V23 = v1 or HasFeaturedRobuxPackage and LayoutOrder == 1
+					local TileWrapperPropsResult = tileWrapperProps(if p2 == nil or p2.rowWidth <= 0 then nil elseif p2.isFeaturedDoubleWidthRobux(p1, LayoutOrder) and p2.featuredRobuxWidth ~= nil then p2.featuredRobuxWidth else p2.shopWidth, if V23 then 2 else 1)
+					
+					return ReactModule.createElement(View, {
+						tag = TileWrapperPropsResult.tag,
+						Size = TileWrapperPropsResult.Size,
+						flexItem = TileWrapperPropsResult.flexItem,
+						LayoutOrder = LayoutOrder
+					}, {
+						Tile = ReactModule.createElement(RobuxPackageTileContainerModule, {
+							pkg = UseMemoResultEntry,
+							paymentSessionId = Frame.paymentSessionId,
+							bonusJwt = Frame.bonusJwt,
+							onBonusItemActivated = OnItemActivated,
+							mediaHeightScale = if p2 == nil or p2.shopWidth <= 0 then nil else ComputeRobuxPackageMediaHeightScaleFunction(p2.shopWidth, p2.gap),
+							categoryId = config.categoryId,
+							categoryType = Frame.categoryType,
+							stableCategoryId = config.stableCategoryId,
+							categoryGroup = config.categoryGroup,
+							categoryName = config.categoryName,
+							gridPositionRow = config.gridPositionRow,
+							gridPositionColumn = config.gridPositionColumn,
+							shopPageType = if ShopPageType then ShopPageType.Home else nil
+						})
+					})
+				end
+			end, {
+				UseMemoResult, OnItemActivated, OnItemActivated, v1, HasFeaturedRobuxPackage,
+				Frame.paymentSessionId, Frame.bonusJwt, Frame.sectionId, Frame.categoryType,
+				Frame.stableCategoryId, Frame.categoryGroup, Frame.categoryName
+			}),
 			isFeaturedDoubleWidthRobux = ReactModule.useMemo(function()
 				-- upvalues: v1 (copy), HasFeaturedRobuxPackage (copy), FeaturedRobuxPackage (copy)
 				if v1 then
@@ -264,9 +262,9 @@ return ReactModule.memo(function(Frame)
 					return nil
 				end
 			end, { v1, HasFeaturedRobuxPackage, FeaturedRobuxPackage }),
-			gridRef = if FFlagEnableInExperienceShopUnifiedLoggingModule then UseShopImpressionsDetectorModuleResult.gridRef else nil,
-			onGridLayoutChange = if FFlagEnableInExperienceShopUnifiedLoggingModule then UseShopImpressionsDetectorModuleResult.onLayoutChange else nil
+			gridRef = UseShopImpressionsDetectorModuleResult.gridRef,
+			onGridLayoutChange = UseShopImpressionsDetectorModuleResult.onLayoutChange
 		}),
-		ImpressionsDetector = if FFlagEnableInExperienceShopUnifiedLoggingModule then UseShopImpressionsDetectorModuleResult.impressionsDetector else nil
+		ImpressionsDetector = UseShopImpressionsDetectorModuleResult.impressionsDetector
 	})
 end)

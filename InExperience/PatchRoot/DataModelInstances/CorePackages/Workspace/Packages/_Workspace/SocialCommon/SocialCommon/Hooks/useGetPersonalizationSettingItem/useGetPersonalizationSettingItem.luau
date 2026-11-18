@@ -1,11 +1,19 @@
-﻿local Parent = script:FindFirstAncestor("SocialCommon").Parent
+﻿local SocialCommon = script:FindFirstAncestor("SocialCommon")
+local Parent = SocialCommon.Parent
 local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
+local SocialPersonalizationSurfaceKeysModule = require(SocialCommon.Enums.SocialPersonalizationSurfaceKeys)
 local Gear = require(Parent.Foundation).Enums.IconName.Gear
 local config = {
-	Client_Friends_AddFriends_PeopleYouMayKnow = function(p1)
+	[SocialPersonalizationSurfaceKeysModule.Friends_AddFriends_PeopleYouMayKnow] = function(p1)
 		return p1.getShowInContextPersonalizedRecommendationsFriendsAddFriendsPeopleYouMayKnow()
+	end,
+	[SocialPersonalizationSurfaceKeysModule.Friends_AddFriends_Search] = function(p1)
+		return p1.getShowInContextPersonalizedRecommendationsFriendsAddFriendsSearch()
+	end,
+	[SocialPersonalizationSurfaceKeysModule.Search_Omnisearch_People] = function(p1)
+		return p1.getShowInContextPersonalizedRecommendationsSearchOmnisearchPeople()
 	end
 }
 
