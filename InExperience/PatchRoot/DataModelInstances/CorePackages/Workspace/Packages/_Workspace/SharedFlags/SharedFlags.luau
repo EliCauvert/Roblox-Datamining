@@ -858,6 +858,7 @@ return {
 	FFlagLuaAppSduiEventDetailsLogExposure = game:DefineFastFlag("LuaAppSduiEventDetailsLogExposure", false),
 	FFlagLuaAppSduiEventDetailsCenterSheet = game:DefineFastFlag("LuaAppSduiEventDetailsCenterSheet2", false),
 	FFlagLuaAppSduiEventDetailsActionBarInFeed = game:DefineFastFlag("LuaAppSduiEventDetailsActionBarInFeed", false),
+	FFlagLuaAppSduiEventDetailsSheetFocusNavigation = game:DefineFastFlag("LuaAppSduiEventDetailsSheetFocusNavigation", false),
 	FStringLuaAppSduiEventDetailsIxpLayer = game:DefineFastString("LuaAppSduiEventDetailsIxpLayer", "PlayerApp.EventDetails.Exposure"),
 	FFlagLuaAppLogChartsAppPageExposure = game:DefineFastFlag("LuaAppLogChartsAppPageExposure", false),
 	FFlagLuaAppLogSearchTopPageExposure = game:DefineFastFlag("LuaAppLogSearchTopPageExposure", false),
@@ -911,7 +912,6 @@ return {
 	FFlagSduiCardComponent = require(script.FFlagSduiCardComponent),
 	FFlagLuaAppConfigureSduiCardImageScaleType = game:DefineFastFlag("LuaAppConfigureSduiCardImageScaleType", false),
 	FFlagAXVirtualizedFeedVerticalPadding = require(script.FFlagAXVirtualizedFeedVerticalPadding),
-	FFlagVirtualizedFeedFooterWrapperProp = require(script.FFlagVirtualizedFeedFooterWrapperProp),
 	FFlagSduiCatalogVirtualizedFeed = require(script.FFlagSduiCatalogVirtualizedFeed),
 	FFlagSduiCatalogCategoryMenu = game:DefineFastFlag("SduiCatalogCategoryMenu", false),
 	FFlagFixSduiCardFocusNavScroll = game:DefineFastFlag("FixSduiCardFocusNavScroll", false),
@@ -1149,6 +1149,7 @@ return {
 	FFlagLuaAppSduiUpdateUserSettingsAction = game:DefineFastFlag("LuaAppSduiUpdateUserSettingsAction", false),
 	FFlagMoveSduiUpdateUserSettingsToAccountManagement = game:DefineFastFlag("MoveSduiUpdateUserSettingsToAccountManagement", false),
 	FFlagSduiOpenAccountSettingsAction = require(script.FFlagSduiOpenAccountSettingsAction),
+	FFlagBuildInspirationTab = require(script.FFlagBuildInspirationTab),
 	FFlagLuaAppSduiPersonalizedRecommendationsEntryPoint = require(script.FFlagLuaAppSduiPersonalizedRecommendationsEntryPoint),
 	FFlagLuaAppEnableHeroUnitV2 = require(script.FFlagLuaAppEnableHeroUnitV2),
 	FFlagLuaAppFixSmallScreenFooterStatsOverlap = game:DefineFastFlag("LuaAppFixSmallScreenFooterStatsOverlap", false),
@@ -1662,7 +1663,7 @@ return {
 	GetFStringPioneerLaunchPlaceId = require(script.GetFStringPioneerLaunchPlaceId),
 	FFlagIntegrateTraversalHistoryInSideSheet = game:DefineFastFlag("IntegrateTraversalHistoryInSideSheet2", false),
 	FFlagUseAnimateScrollViewToSelectionHelper = game:DefineFastFlag("UseAnimateScrollViewToSelectionHelper", false),
-	FFlagEnableWhatsNew = game:DefineFastFlag("EnableWhatsNew2", false),
+	FFlagEnableWhatsNew = game:DefineFastFlag("EnableWhatsNew3", false),
 	FFlagEnableInExperienceShop = require(script.FFlagEnableInExperienceShop),
 	FFlagEnableMenuTrailingBadge = require(script.FFlagEnableMenuTrailingBadge),
 	FFlagEnableCustomTextInMenuTrailingBadge = require(script.FFlagEnableCustomTextInMenuTrailingBadge),
@@ -1968,5 +1969,6 @@ return {
 	FFlagFriendsDeepLinkInitialFilter = require(script.FFlagFriendsDeepLinkInitialFilter),
 	FFlagAppCompositionContainerWidth = game:DefineFastFlag("AppCompositionContainerWidth", false),
 	FFlagFriendsLandingRefreshKeepsFilter = game:DefineFastFlag("FriendsLandingRefreshKeepsFilter", false),
-	FFlagAlignSideSheetWindowCloseRight = game:DefineFastFlag("AlignSideSheetWindowCloseRight", false)
+	FFlagAlignSideSheetWindowCloseRight = game:DefineFastFlag("AlignSideSheetWindowCloseRight", false),
+	FFlagRecycledInlineLayoutLinkedText = game:DefineFastFlag("RecycledInlineLayoutLinkedText", false)
 }

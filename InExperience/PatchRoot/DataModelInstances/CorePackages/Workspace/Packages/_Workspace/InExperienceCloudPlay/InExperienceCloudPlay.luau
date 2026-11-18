@@ -6,5 +6,6 @@ return {
 	mountCloudPlayUIOverlay = require(script.mountCloudPlayUIOverlay),
 	getCloudClientService = require(script.getCloudClientService),
 	showUnsupportedFeatureSnackbar = require(script.showUnsupportedFeatureSnackbar),
+	CloudPlayTelemetry = require(script.CloudPlayTelemetry),
 	["jest.config"] = script["jest.config"]
 }

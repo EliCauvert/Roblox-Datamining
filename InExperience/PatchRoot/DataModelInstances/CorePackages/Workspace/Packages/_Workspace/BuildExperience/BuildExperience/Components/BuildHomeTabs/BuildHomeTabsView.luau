@@ -4,6 +4,7 @@ local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local ReactUtilsModule = require(Parent.ReactUtils)
 local FFlagBuildExperienceFoundationTabsModule = require(BuildExperience.Flags.FFlagBuildExperienceFoundationTabs)
+local FFlagBuildInspirationTabModule = require(BuildExperience.Flags.FFlagBuildInspirationTab)
 local FFlagBuildUpdatedSearchUXForGAModule = require(BuildExperience.Flags.FFlagBuildUpdatedSearchUXForGA)
 local FFlagSubTabSizeSmall = require(Parent.SharedFlags).FFlagSubTabSizeSmall
 local BuildTabStripModule = require(BuildExperience.Components.BuildTabStrip.BuildTabStrip)
@@ -17,8 +18,32 @@ local function _(p1, p2, p3)
 	return p3 or math.abs(p1 - p2) < 1
 end
 
+local function renderInspirationPage(Frame, Content)
+	-- upvalues: BUILDHOMETAB (copy), ReactModule (copy), View (copy)
+	local Inspiration = BUILDHOMETAB.Inspiration
+	local TabOrderEntry = Frame.tabOrder[Inspiration]
+	
+	return ReactModule.createElement(View, {
+		tag = "size-full",
+		Position = Frame.pageOffset:map(function(p1): UDim2
+			-- upvalues: TabOrderEntry (copy)
+			return UDim2.fromScale(TabOrderEntry - p1, 0)
+		end),
+		testId = `BuildHomeTabs.{Inspiration}Page`
+	}, {
+		Content = ReactModule.createElement(View, {
+			tag = "size-full",
+			Visible = Frame.pageOffset:map(function(p1): boolean
+				-- upvalues: TabOrderEntry (copy), Frame (copy), Inspiration (copy)
+				return Frame.activeTab == Inspiration or math.abs(TabOrderEntry - p1) < 1
+			end),
+			testId = `BuildHomeTabs.{Inspiration}Content`
+		}, { Content = Content })
+	})
+end
+
 return function(Frame)
-	-- upvalues: CreateNextOrderFunction (copy), ReactModule (copy), View (copy), FFlagBuildUpdatedSearchUXForGAModule (copy), FFlagBuildExperienceFoundationTabsModule (copy), FoundationModule (copy), FFlagSubTabSizeSmall (copy), BuildTabStripModule (copy), BUILDHOMETAB (copy)
+	-- upvalues: CreateNextOrderFunction (copy), ReactModule (copy), View (copy), FFlagBuildUpdatedSearchUXForGAModule (copy), FFlagBuildExperienceFoundationTabsModule (copy), FoundationModule (copy), FFlagSubTabSizeSmall (copy), BuildTabStripModule (copy), BUILDHOMETAB (copy), FFlagBuildInspirationTabModule (copy), renderInspirationPage (copy)
 	local TabOrder = Frame.tabOrder
 	local PageOffset = Frame.pageOffset
 	local NextOrder = CreateNextOrderFunction()
@@ -91,7 +116,8 @@ return function(Frame)
 						return Frame.activeTab == BUILDHOMETAB.Previews or math.abs(TabOrderEntry - p1) < 1
 					end)
 				}, { Content = Frame.previewsContent })
-			})
+			}),
+			InspirationPage = if FFlagBuildInspirationTabModule and Frame.inspirationContent and TabOrder[BUILDHOMETAB.Inspiration] ~= nil then renderInspirationPage(Frame, Frame.inspirationContent) else nil
 		})
 	})
 end

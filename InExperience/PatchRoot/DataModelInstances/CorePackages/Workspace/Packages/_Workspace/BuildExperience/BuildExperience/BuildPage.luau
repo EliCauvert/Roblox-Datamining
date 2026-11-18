@@ -50,6 +50,7 @@ local UseSessionSummaryModule = require(script.Parent.Chat.useSessionSummary)
 local UseScrollPerformanceTrackerModule = require(script.Parent.Telemetry.useScrollPerformanceTracker)
 local SnapPoints = { 0.5, 1 }
 local FFlagBuildAdUpsellModule = require(script.Parent.Flags.FFlagBuildAdUpsell)
+local FFlagBuildInspirationTabModule = require(script.Parent.Flags.FFlagBuildInspirationTab)
 local FFlagEnableBuildAdPromotionModule = require(script.Parent.Flags.FFlagEnableBuildAdPromotion)
 local _ = require(script.Parent.Stores.GetBuildOverflowMenuStore.createBuildOverflowMenuStore)
 local GetBuildExperienceRefreshStoreModule = require(script.Parent.Stores.GetBuildExperienceRefreshStore)
@@ -71,6 +72,10 @@ local FFlagAppThemeHalloween2026BuildBackgroundModule = require(script.Parent.Fl
 local UseThemeBackgroundFunction = require(Parent.ThemeBackground).useThemeBackground
 local FFlagBuildWithGroupsModule = require(script.Parent.Flags.FFlagBuildWithGroups)
 local BuildHomeTabsContainerModule = if FFlagBuildExperiencePreviewsTabModule then require(script.Parent.Components.BuildHomeTabs.BuildHomeTabsContainer) else nil
+local BUILDHOMETAB = if FFlagBuildInspirationTabModule then require(script.Parent.Stores.GetBuildHomeTabStore.createBuildHomeTabStore).BUILD_HOME_TAB else nil
+local BuildInspirationConstantsModule = if FFlagBuildInspirationTabModule then require(script.Parent.Inspiration.BuildInspirationConstants) else nil
+local BuildInspirationSeeMorePageModule = if FFlagBuildInspirationTabModule then require(script.Parent.Inspiration.BuildInspirationSeeMorePage) else nil
+local RegisterBuildSduiActionsModule = if FFlagBuildInspirationTabModule then require(script.Parent.registerBuildSduiActions) else nil
 local FFlagEnableBuildTabOverride = SharedFlagsModule.FFlagEnableBuildTabOverride
 local FFlagBuildExperienceHomeTelemetryModule = require(script.Parent.Flags.FFlagBuildExperienceHomeTelemetry)
 local FFlagBuildExperienceAnalytics = SharedFlagsModule.FFlagBuildExperienceAnalytics
@@ -88,13 +93,14 @@ local UseBuildPageEligibilityModule = require(script.Parent.useBuildPageEligibil
 local PublishSheetControllerModule = if FFlagBuildPublishNavigationSheetModule then require(script.Parent.Components.PublishSheet.PublishSheetController) else nil
 local UseTTINavigationTrackingFunction = require(Parent.TTINavigationTracking).useTTINavigationTracking
 local config = {
-	BuildHome = "BuildHome",
 	BuildSearch = "BuildSearch",
 	BuildAgents = "BuildAgents",
 	BuildAgentDetails = "BuildAgentDetails",
 	BuildCreatorCredit = "BuildCreatorCredit",
 	BuildGetUsers = "BuildGetUsers",
-	BuildChat = BuildNavigationParamsModule.BUILD_CHAT_SCREEN
+	BuildHome = BuildNavigationParamsModule.BUILD_HOME_SCREEN,
+	BuildChat = BuildNavigationParamsModule.BUILD_CHAT_SCREEN,
+	BuildInspirationSeeMore = if FFlagBuildInspirationTabModule then BuildInspirationConstantsModule.SeeMoreScreen else nil
 }
 
 local function _(Query, p1)
@@ -347,6 +353,28 @@ local function BuildSearchScreen(p2)
 	})
 end
 
+local function BuildInspirationSeeMoreScreen(p2)
+	-- upvalues: UseBuildPageLayoutModule (copy), useOpenBuildChat (copy), ReactModule (copy), FullscreenPageWithSafeArea (copy), BuildInspirationSeeMorePageModule (copy)
+	local Navigation = p2.navigation
+	local UseBuildPageLayoutModuleResult = UseBuildPageLayoutModule()
+	
+	return ReactModule.createElement(FullscreenPageWithSafeArea, {
+		includeStatusBar = true,
+		BackgroundColor3 = UseBuildPageLayoutModuleResult.tokens.Color.Surface.Surface_0.Color3,
+		BackgroundTransparency = UseBuildPageLayoutModuleResult.tokens.Color.Surface.Surface_0.Transparency,
+		includeBottomBar = UseBuildPageLayoutModuleResult.shouldIncludeBottomBar
+	}, {
+		Page = ReactModule.createElement(BuildInspirationSeeMorePageModule, {
+			sort = Navigation.getParam("sort"),
+			onClose = ReactModule.useCallback(function()
+				-- upvalues: Navigation (copy)
+				Navigation.goBack()
+			end, { Navigation }),
+			onOpenChat = useOpenBuildChat(Navigation)
+		})
+	})
+end
+
 local function BuildGetUsersScreen(p2)
 	-- upvalues: UseBuildPageLayoutModule (copy), BuildNavigationParamsModule (copy), FFlagBuildExperiencePageImpressionsModule (copy), UseBuildPageImpressionModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), UseAdsStatsPageViewModelModule (copy), AdsStatsViewModule (copy), View (copy), Button (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), FullscreenPageWithSafeArea (copy), OverflowMenuPageShellModule (copy), AdsManagerMenuButtonModule (copy), OverlayProvider (copy), AdCampaignCreatedToastModule (copy)
 	local Navigation = p2.navigation
@@ -428,7 +456,7 @@ local List = {
 	{
 		[config.BuildHome] = {
 			screen = function(p2)
-				-- upvalues: UseBuildPageLayoutModule (copy), UseNavigationFocusFunction (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), useOpenBuildChat (copy), FFlagBuildExperienceEventContextTelemetryModule (copy), FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), useHomeConfigurationPages (copy), FFlagAppThemeHalloween2026BuildBackgroundModule (copy), UseThemeBackgroundFunction (copy), ReactModule (copy), FFlagBuildAdUpsellModule (copy), GetAdsCampaignDeepLinkStoreModule (copy), SendBuildExperienceEventModule (copy), ResumeBuildChatModule (copy), GetSearchQueryStoreModule (copy), FFlagBuildUpdatedSearchUXForGAModule (copy), FFlagBuildExperiencePreviewsTabModule (copy), GetBuildHomeTabStoreModule (copy), FFlagBuildExperienceHomeTelemetryModule (copy), config (copy), MyCreationsTabModule (copy), FullscreenPageWithSafeArea (copy), View (copy), BuildPageHeaderModule (copy), BuildHomeTabsContainerModule (copy), FFlagBuildPublishNavigationSheetModule (copy), PublishSheetControllerModule (copy)
+				-- upvalues: UseBuildPageLayoutModule (copy), UseNavigationFocusFunction (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), useOpenBuildChat (copy), FFlagBuildExperienceEventContextTelemetryModule (copy), FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), useHomeConfigurationPages (copy), FFlagAppThemeHalloween2026BuildBackgroundModule (copy), UseThemeBackgroundFunction (copy), ReactModule (copy), FFlagBuildAdUpsellModule (copy), GetAdsCampaignDeepLinkStoreModule (copy), SendBuildExperienceEventModule (copy), ResumeBuildChatModule (copy), GetSearchQueryStoreModule (copy), FFlagBuildUpdatedSearchUXForGAModule (copy), FFlagBuildExperiencePreviewsTabModule (copy), GetBuildHomeTabStoreModule (copy), FFlagBuildExperienceHomeTelemetryModule (copy), config (copy), FFlagBuildInspirationTabModule (copy), BUILDHOMETAB (copy), MyCreationsTabModule (copy), FullscreenPageWithSafeArea (copy), View (copy), BuildPageHeaderModule (copy), BuildHomeTabsContainerModule (copy), FFlagBuildPublishNavigationSheetModule (copy), PublishSheetControllerModule (copy)
 				local ScreenProps = p2.screenProps or {}
 				local Navigation = p2.navigation
 				local UseBuildPageLayoutModuleResult = UseBuildPageLayoutModule()
@@ -480,6 +508,27 @@ local List = {
 				})
 				local SearchQueryStore = ScreenProps.searchQueryStore or GetSearchQueryStoreModule()
 				local IsGames = if FFlagBuildUpdatedSearchUXForGAModule and FFlagBuildExperiencePreviewsTabModule then GetBuildHomeTabStoreModule().useTab() == "Games" else nil
+				local UseResult = ReactModule.useCallback(function()
+					-- upvalues: SearchQueryStore (copy), FFlagBuildExperienceHomeTelemetryModule (upval), SendBuildExperienceEventModule (upval), FFlagBuildUpdatedSearchUXForGAModule (upval), Navigation (copy), config (upval)
+					if FFlagBuildExperienceHomeTelemetryModule then
+						SendBuildExperienceEventModule("SEARCH_OPEN", {}, { context = "home_header" })
+					end
+					SearchQueryStore.beginSearch()
+					
+					if not FFlagBuildUpdatedSearchUXForGAModule then
+						Navigation.navigate(config.BuildSearch, { searchQueryStore = SearchQueryStore })
+					end
+				end, { Navigation, SearchQueryStore })
+				local IsUseTabResultMatch = true
+				local UseResult1 = nil
+				
+				if FFlagBuildInspirationTabModule then
+					IsUseTabResultMatch = GetBuildHomeTabStoreModule().useTab() == BUILDHOMETAB.Games
+					UseResult1 = ReactModule.useCallback(function(Sort)
+						-- upvalues: Navigation (copy), config (upval)
+						Navigation.navigate(config.BuildInspirationSeeMore, { sort = Sort })
+					end, { Navigation })
+				end
 				local Element = ReactModule.createElement(MyCreationsTabModule, {
 					LayoutOrder = 3,
 					creatorAgentChatStore = ScreenProps.creatorAgentChatStore,
@@ -488,7 +537,7 @@ local List = {
 					searchQueryStore = ScreenProps.searchQueryStore,
 					isActiveTab = if FFlagBuildUpdatedSearchUXForGAModule and FFlagBuildExperiencePreviewsTabModule then IsGames else nil,
 					isFocused = UseNavigationFocusResult,
-					autoOpenNewGame = ScreenProps.universeId == nil and ScreenProps.sessionId == nil,
+					autoOpenNewGame = ScreenProps.universeId == nil and ScreenProps.sessionId == nil and IsUseTabResultMatch,
 					onOpenChat = UseOpenBuildChatResult,
 					onOpenConfigurationPage = if UseHomeConfigurationPagesResult == nil then nil else UseHomeConfigurationPagesResult.onOpenConfigurationPage
 				})
@@ -510,17 +559,7 @@ local List = {
 							height = UseBuildPageLayoutModuleResult.topBarHeight,
 							isFocused = if FFlagBuildUpdatedSearchUXForGAModule then UseNavigationFocusResult else nil,
 							searchQueryStore = SearchQueryStore,
-							onOpenSearch = ReactModule.useCallback(function()
-								-- upvalues: SearchQueryStore (copy), FFlagBuildExperienceHomeTelemetryModule (upval), SendBuildExperienceEventModule (upval), FFlagBuildUpdatedSearchUXForGAModule (upval), Navigation (copy), config (upval)
-								if FFlagBuildExperienceHomeTelemetryModule then
-									SendBuildExperienceEventModule("SEARCH_OPEN", {}, { context = "home_header" })
-								end
-								SearchQueryStore.beginSearch()
-								
-								if not FFlagBuildUpdatedSearchUXForGAModule then
-									Navigation.navigate(config.BuildSearch, { searchQueryStore = SearchQueryStore })
-								end
-							end, { Navigation, SearchQueryStore })
+							onOpenSearch = UseResult
 						}),
 						Content = ReactModule.createElement(View, {
 							LayoutOrder = 2,
@@ -533,11 +572,13 @@ local List = {
 								gamesContent = Element,
 								isFocused = UseNavigationFocusResult,
 								searchStore = ScreenProps.searchStore,
-								searchQueryStore = SearchQueryStore
+								searchQueryStore = SearchQueryStore,
+								onOpenChat = if FFlagBuildInspirationTabModule then UseOpenBuildChatResult else nil,
+								onOpenInspirationSeeMore = UseResult1
 							}) else Element
 						})
 					}),
-					PublishSheet = if FFlagBuildPublishNavigationSheetModule and UseHomeConfigurationPagesResult ~= nil and (PublishSheetTarget ~= nil and PublishSheetTarget.universeId ~= nil) then ReactModule.createElement(PublishSheetControllerModule, {
+					PublishSheet = if FFlagBuildPublishNavigationSheetModule and UseHomeConfigurationPagesResult ~= nil and PublishSheetTarget ~= nil and PublishSheetTarget.universeId ~= nil then ReactModule.createElement(PublishSheetControllerModule, {
 						isOpen = UseHomeConfigurationPagesResult.isPublishSheetOpen,
 						target = PublishSheetTarget,
 						onClose = UseHomeConfigurationPagesResult.onClosePublishSheet,
@@ -873,12 +914,24 @@ if FFlagEnableBuildAdPromotionModule then
 		[config.BuildGetUsers] = { screen = BuildGetUsersScreen }
 	})
 end
+if FFlagBuildInspirationTabModule then
+	table.insert(List, {
+		[config.BuildInspirationSeeMore] = { screen = BuildInspirationSeeMoreScreen }
+	})
+end
 table.insert(List, { [config.BuildSearch] = { screen = BuildSearchScreen } })
 local RobloxStackNavigator = RoactNavigationModule.createRobloxStackNavigator(List, { initialRouteName = config.BuildHome })
 
 local function BuildPage(p3)
-	-- upvalues: UseTTINavigationTrackingFunction (copy), UseBuildPageEligibilityModule (copy), NoFFlagEnableBuildTabOverride (copy), FFlagBuildExperienceHideNavBarOnSubPages (copy), UseManageBuildNavBarVisibilityModule (copy), config (copy), ReactModule (copy), RobloxStackNavigator (copy), BuildEligibilityDialogModule (copy), View (copy), Loading (copy), IconSize (copy)
+	-- upvalues: UseTTINavigationTrackingFunction (copy), FFlagBuildInspirationTabModule (copy), ReactModule (copy), RegisterBuildSduiActionsModule (copy), UseBuildPageEligibilityModule (copy), NoFFlagEnableBuildTabOverride (copy), FFlagBuildExperienceHideNavBarOnSubPages (copy), UseManageBuildNavBarVisibilityModule (copy), config (copy), RobloxStackNavigator (copy), BuildEligibilityDialogModule (copy), View (copy), Loading (copy), IconSize (copy)
 	UseTTINavigationTrackingFunction("NavigateTo_" .. p3.navigation.state.routeName)
+	
+	if FFlagBuildInspirationTabModule then
+		ReactModule.useEffect(function()
+			-- upvalues: RegisterBuildSduiActionsModule (upval)
+			RegisterBuildSduiActionsModule()
+		end, {})
+	end
 	local ExtraPropsParam = p3.navigation.getParam("extraProps", {})
 	local UseBuildPageEligibilityResult = UseBuildPageEligibilityModule.useBuildPageEligibility(NoFFlagEnableBuildTabOverride)
 	

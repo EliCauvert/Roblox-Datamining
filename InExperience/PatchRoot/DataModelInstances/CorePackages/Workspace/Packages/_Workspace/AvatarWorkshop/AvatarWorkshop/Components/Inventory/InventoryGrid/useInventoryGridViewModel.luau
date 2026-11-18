@@ -3,86 +3,121 @@ local Parent = AvatarWorkshop.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local SignalsReactModule = require(Parent.SignalsReact)
+local AvatarAssetTypeMappingsModule = require(AvatarWorkshop.Constants.AvatarAssetTypeMappings)
 local _ = require(AvatarWorkshop.Constants.InventoryPagesData)
+local GetAvatarStateStoreModule = require(AvatarWorkshop.Stores.Getters.getAvatarStateStore)
 local GetInventoryPageStoreModule = require(AvatarWorkshop.Stores.Getters.getInventoryPageStore)
 local GetUiStateStoreModule = require(AvatarWorkshop.Stores.Getters.getUiStateStore)
+local GetOutfitKindModule = require(AvatarWorkshop.Utils.getOutfitKind)
+local GetOutfitAvatarStateModule = require(AvatarWorkshop.Utils.getOutfitAvatarState)
+local IsWearingOutfitModule = require(AvatarWorkshop.Utils.isWearingOutfit)
 local _ = require(script.Parent.InventoryGridTypes)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UseSignalStateFunction = SignalsReactModule.useSignalState
 local GetRbxThumbFunction = FoundationModule.Utility.getRbxThumb
 local ThumbnailSize = FoundationModule.Enums.ThumbnailSize
 local ThumbnailType = FoundationModule.Enums.ThumbnailType
+local AssetTypeFromId = AvatarAssetTypeMappingsModule.assetTypeFromId
+
+local function doNothing() end
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), GetInventoryPageStoreModule (copy), UseSignalStateFunction (copy), GetUiStateStoreModule (copy), ReactModule (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy)
+	-- upvalues: UseTokensFunction (copy), GetInventoryPageStoreModule (copy), UseSignalStateFunction (copy), GetUiStateStoreModule (copy), GetAvatarStateStoreModule (copy), ReactModule (copy), doNothing (copy), GetOutfitKindModule (copy), IsWearingOutfitModule (copy), GetOutfitAvatarStateModule (copy), AssetTypeFromId (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy)
 	local PageData = p1.pageData
 	local UseTokensResult = UseTokensFunction()
 	local InventoryPageStoreModule = GetInventoryPageStoreModule(PageData)
 	local UseSignalStateResult = UseSignalStateFunction(GetUiStateStoreModule)
-	local UseSignalStateResult1 = UseSignalStateFunction(InventoryPageStoreModule.getEntries)
-	local UseSignalStateResult2 = UseSignalStateFunction(InventoryPageStoreModule.getIsFetching)
-	local UseSignalStateResult3 = UseSignalStateFunction(InventoryPageStoreModule.getDidInitialFetch)
-	local UseSignalStateResult4 = UseSignalStateFunction(InventoryPageStoreModule.getHasFetchError)
-	local UseSignalStateResult5 = UseSignalStateFunction(InventoryPageStoreModule.getLastPageReached)
-	local UseSignalStateResult6 = UseSignalStateFunction(UseSignalStateResult.getLastMeasuredGridWidth)
+	local UseSignalStateResult1 = UseSignalStateFunction(GetAvatarStateStoreModule)
+	local UseSignalStateResult2 = UseSignalStateFunction(InventoryPageStoreModule.getEntries)
+	local UseSignalStateResult3 = UseSignalStateFunction(InventoryPageStoreModule.getIsFetching)
+	local UseSignalStateResult4 = UseSignalStateFunction(InventoryPageStoreModule.getDidInitialFetch)
+	local UseSignalStateResult5 = UseSignalStateFunction(InventoryPageStoreModule.getHasFetchError)
+	local UseSignalStateResult6 = UseSignalStateFunction(InventoryPageStoreModule.getLastPageReached)
+	local UseSignalStateResult7 = UseSignalStateFunction(UseSignalStateResult.getLastMeasuredGridWidth)
+	local UseSignalStateResult8 = UseSignalStateFunction(UseSignalStateResult1.getEquippedAssetIds)
+	local UseSignalStateResult9 = UseSignalStateFunction(UseSignalStateResult1.getAvatarState)
 	local FetchNextPageFunction = InventoryPageStoreModule.fetchNextPage
-	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
-	local UseResult = ReactModule.useCallback(function(p2)
-		-- upvalues: UseStateResult2 (copy)
-		UseStateResult2(function(p3)
-			-- upvalues: p2 (copy)
-			return if p3 == p2 then nil else p2
-		end)
-	end, {})
-	local v1 = #UseSignalStateResult1 > 0
+	local v1 = #UseSignalStateResult2 > 0
 	ReactModule.useEffect(function()
-		-- upvalues: v1 (copy), UseSignalStateResult2 (copy), UseSignalStateResult4 (copy), UseSignalStateResult5 (copy), FetchNextPageFunction (copy)
-		if not v1 and not UseSignalStateResult2 and not UseSignalStateResult4 and not UseSignalStateResult5 then
+		-- upvalues: v1 (copy), UseSignalStateResult3 (copy), UseSignalStateResult5 (copy), UseSignalStateResult6 (copy), FetchNextPageFunction (copy)
+		if not v1 and not UseSignalStateResult3 and not UseSignalStateResult5 and not UseSignalStateResult6 then
 			FetchNextPageFunction()
 		end
 	end, {
 		v1,
-		UseSignalStateResult2,
-		UseSignalStateResult4,
+		UseSignalStateResult3,
 		UseSignalStateResult5,
+		UseSignalStateResult6,
 		FetchNextPageFunction
 	})
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: UseSignalStateResult1 (copy), GetRbxThumbFunction (upval), ThumbnailType (upval), ThumbnailSize (upval), UseStateResult (copy), UseResult (copy)
-		local Buffer = table.create(#UseSignalStateResult1)
+		-- upvalues: UseSignalStateResult2 (copy), InventoryPageStoreModule (copy), doNothing (upval), GetOutfitKindModule (upval), UseSignalStateResult9 (copy), IsWearingOutfitModule (upval), GetOutfitAvatarStateModule (upval), UseSignalStateResult1 (copy), AssetTypeFromId (upval), UseSignalStateResult8 (copy), GetRbxThumbFunction (upval), ThumbnailType (upval), ThumbnailSize (upval)
+		local Buffer = table.create(#UseSignalStateResult2)
 		
-		for _, value in UseSignalStateResult1 do
+		for _, value in UseSignalStateResult2 do
 			local ItemId = value.itemId
+			local Item = InventoryPageStoreModule.getItem(value)
+			local IsSelected = false
+			local OnActivated: () -> () = doNothing
+			
+			if value.itemType == "Outfit" then
+				local OutfitDetail = if Item then Item.outfitDetail else nil
+				
+				if Item and OutfitDetail then
+					local OutfitKindModule = GetOutfitKindModule(Item.itemCategory.itemSubType, OutfitDetail)
+					IsSelected = UseSignalStateResult9 ~= nil and IsWearingOutfitModule(GetOutfitAvatarStateModule(ItemId, OutfitDetail), OutfitKindModule, UseSignalStateResult9)
+					
+					OnActivated = function()
+						-- upvalues: UseSignalStateResult1 (upval), OutfitDetail (copy), OutfitKindModule (copy)
+						UseSignalStateResult1.toggleOutfit(OutfitDetail, OutfitKindModule)
+					end
+				end
+			else
+				local Number: number? = tonumber(ItemId)
+				local AssetTypeFromIdEntry = if Item then AssetTypeFromId[Item.itemCategory.itemSubType] else nil
+				
+				if Number and AssetTypeFromIdEntry then
+					IsSelected = UseSignalStateResult8[Number] == true
+					
+					OnActivated = function()
+						-- upvalues: UseSignalStateResult1 (upval), Number (copy), AssetTypeFromIdEntry (copy)
+						UseSignalStateResult1.toggleAsset(Number, AssetTypeFromIdEntry)
+					end
+				end
+			end
 			table.insert(Buffer, {
 				id = ItemId,
 				image = if value.itemType == "Outfit" then GetRbxThumbFunction(ThumbnailType.Outfit, ItemId, ThumbnailSize.Medium) else GetRbxThumbFunction(ThumbnailType.Asset, ItemId, ThumbnailSize.Medium),
-				isSelected = UseStateResult == ItemId,
-				onActivated = function()
-					-- upvalues: UseResult (upval), ItemId (copy)
-					UseResult(ItemId)
-				end
+				isSelected = IsSelected,
+				onActivated = OnActivated
 			})
 		end
 		return Buffer
-	end, { UseSignalStateResult1, UseStateResult, UseResult })
+	end, {
+		UseSignalStateResult2,
+		InventoryPageStoreModule,
+		UseSignalStateResult1,
+		UseSignalStateResult8,
+		UseSignalStateResult9
+	})
 	local v2 = #UseMemoResult > 0
 	
 	return {
 		fallbackNumColumns = 5,
 		minColumns = 3,
 		items = UseMemoResult,
-		isLoadingInitialPage = UseSignalStateResult2 and not v2,
-		isLoadingNextPage = UseSignalStateResult2 and v2,
-		isEmpty = UseSignalStateResult3 and (UseSignalStateResult5 and (not UseSignalStateResult2 and (not UseSignalStateResult4 and not v2))),
-		hasFetchError = UseSignalStateResult4 and not v2,
-		hasNextPageError = UseSignalStateResult4 and v2,
+		isLoadingInitialPage = UseSignalStateResult3 and not v2,
+		isLoadingNextPage = UseSignalStateResult3 and v2,
+		isEmpty = UseSignalStateResult4 and (UseSignalStateResult6 and (not UseSignalStateResult3 and (not UseSignalStateResult5 and not v2))),
+		hasFetchError = UseSignalStateResult5 and not v2,
+		hasNextPageError = UseSignalStateResult5 and v2,
 		minItemWidth = UseTokensResult.Size.Size_2000,
-		lastMeasuredGridWidth = UseSignalStateResult6,
+		lastMeasuredGridWidth = UseSignalStateResult7,
 		onGridWidthChanged = UseSignalStateResult.setLastMeasuredGridWidth,
 		rowGap = UseTokensResult.Gap.Medium,
 		columnGap = UseTokensResult.Gap.Medium,
 		contentPaddingY = UseTokensResult.Padding.Large,
-		onEndReached = if UseSignalStateResult4 then nil else FetchNextPageFunction,
+		onEndReached = if UseSignalStateResult5 then nil else FetchNextPageFunction,
 		onRetry = FetchNextPageFunction
 	}
 end

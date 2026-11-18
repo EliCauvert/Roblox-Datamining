@@ -13,6 +13,7 @@ local _ = require(InExperienceShop.Types)
 local GetInExperienceShopStoreModule = require(InExperienceShop.Stores.getInExperienceShopStore)
 local FFlagCloseShopOnTrialRedemptionModule = require(InExperienceShop.Flags.FFlagCloseShopOnTrialRedemption)
 local FFlagShopRobuxPurchaseCompletionModalModule = require(InExperienceShop.Flags.FFlagShopRobuxPurchaseCompletionModal)
+local FFlagEnableContentPersonalizationForExperienceShopModule = require(InExperienceShop.Flags.FFlagEnableContentPersonalizationForExperienceShop)
 local FormatPriceModule = require(InExperienceShop.Utils.formatPrice)
 local ShopItemSelectionModule = require(InExperienceShop.Utils.shopItemSelection)
 local ResolveItemForSelectionFunction = ShopItemSelectionModule.resolveItemForSelection
@@ -32,7 +33,7 @@ end
 local Callback = nil
 
 local function useShopViewModel(p1)
-	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), config (copy), SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), FFlagShopRobuxPurchaseCompletionModalModule (copy), ReactModule (copy), FormatPriceModule (copy), FFlagCloseShopOnTrialRedemptionModule (copy), Callback (ref), IsSideSheetEnabledModule (copy), FFlagHideHeaderForBuyRobuxInExperienceShop (copy), ResolveItemForSelectionFunction (copy), ShopItemSelectionModule (copy), ConstantsModule (copy), SharedFlagsModule (copy), AbuseVectorModule (copy), UseShopReportOverflowModule (copy), UseShopOfferChipModule (copy), InExperienceOffersModule (copy)
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), config (copy), SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), FFlagShopRobuxPurchaseCompletionModalModule (copy), ReactModule (copy), FormatPriceModule (copy), FFlagCloseShopOnTrialRedemptionModule (copy), Callback (ref), IsSideSheetEnabledModule (copy), FFlagHideHeaderForBuyRobuxInExperienceShop (copy), ResolveItemForSelectionFunction (copy), ShopItemSelectionModule (copy), ConstantsModule (copy), SharedFlagsModule (copy), FFlagEnableContentPersonalizationForExperienceShopModule (copy), Parent (copy), AbuseVectorModule (copy), UseShopReportOverflowModule (copy), UseShopOfferChipModule (copy), InExperienceOffersModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetInExperienceShopStoreModule)
@@ -285,8 +286,10 @@ local function useShopViewModel(p1)
 	end, {})
 	local SetItemsPerRowFunction = UseSignalStateResult.setItemsPerRow
 	local UseStateResult7, UseStateResult2_6 = ReactModule.useState(false)
+	local ShowInContextPersonalizedRecommendationsInExperienceShop = if FFlagEnableContentPersonalizationForExperienceShopModule then require(Parent.UniversalAppPolicy).getAppFeaturePolicies().getShowInContextPersonalizedRecommendationsInExperienceShop() else false
 	local UseShopReportOverflowResult = UseShopReportOverflowModule.useShopReportOverflow({
 		isReportingEnabled = SharedFlagsModule.FFlagEnableReportingFlowForExperienceShop,
+		isContentPersonalizationEnabled = if FFlagEnableContentPersonalizationForExperienceShopModule then ShowInContextPersonalizedRecommendationsInExperienceShop else nil,
 		buildReportSession = ReactModule.useCallback(function()
 			-- upvalues: AbuseVectorModule (upval)
 			return {
@@ -331,6 +334,7 @@ local function useShopViewModel(p1)
 			end
 		end, { SetItemsPerRowFunction, UseStateResult2_6 }),
 		isReportingEnabled = UseShopReportOverflowResult.isReportingEnabled,
+		isContentPersonalizationEnabled = UseShopReportOverflowResult.isContentPersonalizationEnabled,
 		isOverflowMenuOpen = UseShopReportOverflowResult.isOverflowMenuOpen,
 		topBarReportSession = UseShopReportOverflowResult.reportSession,
 		onOverflowActivated = UseShopReportOverflowResult.onOverflowActivated,

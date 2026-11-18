@@ -782,10 +782,10 @@ CoreScripts.FTUX.Heading.JoinVoice,Bergabung dengan Chat Suara
 CoreScripts.FTUX.Heading.LeaveRespawn,Keluar dan Respawn
 CoreScripts.FTUX.Heading.NewAvatarSwitcher,Baru: Pengalih avatar
 CoreScripts.FTUX.Heading.NewTiltOnboarding,Menu ada di sini
-CoreScripts.FTUX.Heading.NewTiltUpdate,Menu baru
 CoreScripts.FTUX.Heading.ReadyToPlaytest,Siap melakukan playtest?
 CoreScripts.FTUX.Heading.SideSheetUpdate,Semua tindakan di 1 tempat
 CoreScripts.FTUX.Heading.SocialOnboarding,Fitur sosial
+CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,Menu barumu
 CoreScripts.FTUX.Heading.YouAreAnEarlyTester,Kamu adalah penguji tahap awal
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,Beralih ke avatar tersimpan kapan saja.
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,Chat dengan temanmu kapan saja.
@@ -793,11 +793,10 @@ CoreScripts.FTUX.Label.InExperienceShopDescription,Paket tertentu menyertakan it
 CoreScripts.FTUX.Label.JoinVoiceDescription,Mendengar dan berbicara dengan pengguna lain
 CoreScripts.FTUX.Label.LeaveRespawn,Keluar dari game atau respawn avatar dapat diakses dengan mudah dari sini.
 CoreScripts.FTUX.Label.NewTiltOnboarding,Menu game berisi tindakan dalam game beserta pengaturan game-mu.
-CoreScripts.FTUX.Label.NewTiltUpdate,Item menu hamburger telah dipindahkan ke sini.
 CoreScripts.FTUX.Label.PartyWithYourFriendsAnytime,Party dengan temanmu kapan saja.
 CoreScripts.FTUX.Label.SideSheetOnboarding,"Menu berisi semua fitur pentingmu. Undang teman, coba Emote, atur Musik, dan lainnya."
-CoreScripts.FTUX.Label.SideSheetUpdate,Menu masih berisi semua fitur pentingmu.
 CoreScripts.FTUX.Label.SocialOnboarding,"Akses fitur sosialmu dengan mudah dari bilah atas, termasuk Chat."
+CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,Dua menu sekarang menjadi satu. Ketuk di sini untuk membukanya.
 CoreScripts.Feedback.EntryPoint.ButtonText,Beri Masukan
 CoreScripts.Feedback.EntryPoint.OptionText,Beri Masukan Terjemahan
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,
@@ -3892,6 +3891,7 @@ Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,Item bonus
 Feature.InExperienceShop.Label.BuyGamePass,Beli pas game
 Feature.InExperienceShop.Label.BuyNow,Beli Sekarang
+Feature.InExperienceShop.Label.ContentPersonalization,
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Berakhir dalam {timeRemaining}
 Feature.InExperienceShop.Label.FreeTrial,Uji coba gratis

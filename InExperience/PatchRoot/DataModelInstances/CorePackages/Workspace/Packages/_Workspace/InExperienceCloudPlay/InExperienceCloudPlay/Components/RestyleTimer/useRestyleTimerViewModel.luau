@@ -1,6 +1,8 @@
 ﻿local InExperienceCloudPlay = script:FindFirstAncestor("InExperienceCloudPlay")
 local Parent = InExperienceCloudPlay.Parent
 local ReactModule = require(Parent.React)
+local _ = require(InExperienceCloudPlay.CloudPlayTelemetry)
+local RestyleSessionTelemetryModule = require(script.Parent.RestyleSessionTelemetry)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local _ = require(script.Parent.RestyleTimerView)
 local GetCloudClientServiceModule = require(InExperienceCloudPlay.getCloudClientService)
@@ -12,7 +14,7 @@ local function _(p1: number): string
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), GetCloudClientServiceModule (copy), UseServicePropertyModule (copy), UseSecondsLeftModule (copy), UseLocalizationFunction (copy)
+	-- upvalues: ReactModule (copy), GetCloudClientServiceModule (copy), UseServicePropertyModule (copy), UseSecondsLeftModule (copy), UseLocalizationFunction (copy), RestyleSessionTelemetryModule (copy)
 	local UseMemoResult = ReactModule.useMemo(GetCloudClientServiceModule, {})
 	local IsRobloxRealityEnvironment = UseServicePropertyModule(UseMemoResult, "IsRobloxRealityEnvironment")
 	local RobloxRealityFilterEnabled = UseServicePropertyModule(UseMemoResult, "RobloxRealityFilterEnabled")
@@ -20,26 +22,30 @@ return function(p1)
 	local NoIsHidden: boolean = IsRobloxRealityEnvironment == true and not p1.isHidden
 	local UseSecondsLeftModuleResult: number = UseSecondsLeftModule(if NoIsHidden then UseMemoResult else nil, if typeof(SessionTimeLimit) == "number" then SessionTimeLimit else nil)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseRefResult = ReactModule.useRef(nil)
 	local UseLocalizationResult = UseLocalizationFunction(if NoIsHidden then {
 		restyle = "Feature.CloudClient.Label.RobloxReality",
 		timeLeft = "Feature.CloudClient.Label.TimeLeft",
 		description = "Feature.CloudClient.Description.RobloxRealityPreview"
 	} else {})
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: UseStateResult2 (copy)
+		-- upvalues: UseRefResult (copy), UseStateResult2 (copy)
+		UseRefResult.current = "chip"
 		UseStateResult2(function(p2): boolean
 			return not p2
 		end)
 	end, {})
 	local UseResult1 = ReactModule.useCallback(function()
-		-- upvalues: UseStateResult2 (copy)
+		-- upvalues: UseRefResult (copy), UseStateResult2 (copy)
+		UseRefResult.current = "outside"
 		UseStateResult2(false)
 	end, {})
 	local UseResult2 = ReactModule.useCallback(function(RobloxRealityFilterEnabled)
-		-- upvalues: UseMemoResult (copy)
+		-- upvalues: UseMemoResult (copy), RestyleSessionTelemetryModule (upval)
 		if UseMemoResult then
 			UseMemoResult.RobloxRealityFilterEnabled = RobloxRealityFilterEnabled
 		end
+		RestyleSessionTelemetryModule.toggled(RobloxRealityFilterEnabled)
 	end, { UseMemoResult })
 	local OnAreaChangedFunction = p1.onAreaChanged
 	local UseResult3 = ReactModule.useCallback(function(Frame: Frame)
@@ -48,25 +54,58 @@ return function(p1)
 			OnAreaChangedFunction("restyle-timer", Frame.AbsolutePosition, Frame.AbsoluteSize)
 		end
 	end, { OnAreaChangedFunction })
-	local UseRefResult = ReactModule.useRef(p1.onAreaRemoved)
-	UseRefResult.current = p1.onAreaRemoved
+	local UseRefResult1 = ReactModule.useRef(p1.onAreaRemoved)
+	UseRefResult1.current = p1.onAreaRemoved
 	ReactModule.useEffect(function()
-		-- upvalues: NoIsHidden (copy), UseStateResult2 (copy), UseRefResult (copy)
+		-- upvalues: NoIsHidden (copy), UseRefResult (copy), UseStateResult2 (copy), UseRefResult1 (copy)
 		if NoIsHidden then
 			return function()
-				-- upvalues: UseRefResult (upval)
-				local CurrentFunction: (any) -> () = UseRefResult.current
+				-- upvalues: UseRefResult1 (upval)
+				local CurrentFunction: (any) -> () = UseRefResult1.current
 				
 				if CurrentFunction then
 					CurrentFunction("restyle-timer")
 				end
 			end
 		else
+			UseRefResult.current = "hidden"
 			UseStateResult2(false)
 			
 			return nil
 		end
 	end, { NoIsHidden })
+	ReactModule.useEffect(function()
+		-- upvalues: RestyleSessionTelemetryModule (upval)
+		return RestyleSessionTelemetryModule.mount()
+	end, {})
+	ReactModule.useEffect(function()
+		-- upvalues: NoIsHidden (copy), p1 (copy), RestyleSessionTelemetryModule (upval)
+		if NoIsHidden and p1.isTopBarVisible ~= false then
+			RestyleSessionTelemetryModule.chipShown()
+		end
+	end, { NoIsHidden, p1.isTopBarVisible })
+	ReactModule.useEffect(function()
+		-- upvalues: IsRobloxRealityEnvironment (copy), RestyleSessionTelemetryModule (upval), RobloxRealityFilterEnabled (copy)
+		if IsRobloxRealityEnvironment == true then
+			RestyleSessionTelemetryModule.filterChanged(RobloxRealityFilterEnabled == true)
+		end
+	end, { IsRobloxRealityEnvironment, RobloxRealityFilterEnabled })
+	ReactModule.useEffect(function()
+		-- upvalues: UseStateResult (copy), RestyleSessionTelemetryModule (upval), UseRefResult (copy)
+		if UseStateResult then
+			RestyleSessionTelemetryModule.popoverOpened()
+			
+			return
+		else
+			RestyleSessionTelemetryModule.popoverClosed(UseRefResult.current or "outside")
+		end
+	end, { UseStateResult })
+	ReactModule.useEffect(function()
+		-- upvalues: UseSecondsLeftModuleResult (copy), RestyleSessionTelemetryModule (upval)
+		if UseSecondsLeftModuleResult == 0 then
+			RestyleSessionTelemetryModule.timerExpired()
+		end
+	end, { UseSecondsLeftModuleResult })
 	
 	return if NoIsHidden then {
 		text = {

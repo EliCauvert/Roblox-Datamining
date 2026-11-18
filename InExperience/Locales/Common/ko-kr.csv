@@ -781,10 +781,10 @@ CoreScripts.FTUX.Heading.JoinVoice,음성 채팅 참가
 CoreScripts.FTUX.Heading.LeaveRespawn,종료 및 리스폰
 CoreScripts.FTUX.Heading.NewAvatarSwitcher,신규: 아바타 전환기
 CoreScripts.FTUX.Heading.NewTiltOnboarding,메뉴는 여기에 있습니다
-CoreScripts.FTUX.Heading.NewTiltUpdate,새로운 메뉴
 CoreScripts.FTUX.Heading.ReadyToPlaytest,플레이테스트할 준비가 되셨나요?
 CoreScripts.FTUX.Heading.SideSheetUpdate,모든 작업을 한곳에서
 CoreScripts.FTUX.Heading.SocialOnboarding,소셜 기능
+CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,새로운 메뉴
 CoreScripts.FTUX.Heading.YouAreAnEarlyTester,얼리 테스터입니다
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,언제든지 저장한 아바타로 전환하세요.
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,친구들과 언제든지 채팅할 수 있습니다.
@@ -792,11 +792,10 @@ CoreScripts.FTUX.Label.InExperienceShopDescription,일부 패키지에는 보너
 CoreScripts.FTUX.Label.JoinVoiceDescription,다른 사람들과 대화
 CoreScripts.FTUX.Label.LeaveRespawn,여기에서 손쉽게 게임을 종료하거나 아바타를 리스폰할 수 있습니다.
 CoreScripts.FTUX.Label.NewTiltOnboarding,게임 메뉴에는 게임 설정과 게임 내 작업이 포함되어 있습니다.
-CoreScripts.FTUX.Label.NewTiltUpdate,햄버거 메뉴 항목이 여기로 이동했습니다.
 CoreScripts.FTUX.Label.PartyWithYourFriendsAnytime,친구들과 파티를 만들어 함께 즐기세요.
 CoreScripts.FTUX.Label.SideSheetOnboarding,"메뉴에는 필수 기능이 전부 포함되어 있습니다. 친구를 초대하고, 감정 표현을 사용하고, 음악을 제어하는 등 다양한 기능을 이용해 보세요."
-CoreScripts.FTUX.Label.SideSheetUpdate,메뉴에는 여전히 필수 기능이 전부 포함되어 있습니다.
 CoreScripts.FTUX.Label.SocialOnboarding,상단 바에서 채팅을 비롯한 소셜 기능에 쉽게 접근할 수 있습니다.
+CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,이제 두 메뉴가 하나로 통합되었습니다. 여기를 클릭하여 메뉴를 여세요.
 CoreScripts.Feedback.EntryPoint.ButtonText,피드백 제공
 CoreScripts.Feedback.EntryPoint.OptionText,번역 피드백 제공
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,
@@ -3895,6 +3894,7 @@ Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,보너스 아이템
 Feature.InExperienceShop.Label.BuyGamePass,게임 패스 구매하기
 Feature.InExperienceShop.Label.BuyNow,지금 구매
+Feature.InExperienceShop.Label.ContentPersonalization,
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,{timeRemaining} 후 종료
 Feature.InExperienceShop.Label.FreeTrial,무료 체험

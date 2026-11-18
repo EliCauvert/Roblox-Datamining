@@ -1,5 +1,6 @@
 ﻿local WhatsNew = script:FindFirstAncestor("WhatsNew")
 local ConstantsModule = require(WhatsNew.Constants)
+local FFlagWhatsNewCompleteOnOpenActionModule = require(WhatsNew.Flags.FFlagWhatsNewCompleteOnOpenAction)
 local _ = require(WhatsNew.Types)
 local DeriveResolvedFieldsModule = require(script.Parent.DeriveResolvedFields)
 
@@ -127,6 +128,7 @@ local function getScopePathFromScreen(ParentScopeId, ScreenScopeId, ScopeTours)
 end
 
 local function entryToTourTip(NestedGatewayTip, NestedGatewayTip1)
+	-- upvalues: FFlagWhatsNewCompleteOnOpenActionModule (copy)
 	return {
 		stepCount = 1,
 		id = NestedGatewayTip.id,
@@ -143,6 +145,7 @@ local function entryToTourTip(NestedGatewayTip, NestedGatewayTip1)
 		adopted = NestedGatewayTip.adopted,
 		toShow = NestedGatewayTip.toShow,
 		anchorId = NestedGatewayTip1.anchorId,
+		completeOnOpenActionKey = if FFlagWhatsNewCompleteOnOpenActionModule then NestedGatewayTip1.completeOnOpenActionKey else nil,
 		side = NestedGatewayTip1.side,
 		align = NestedGatewayTip1.align
 	}

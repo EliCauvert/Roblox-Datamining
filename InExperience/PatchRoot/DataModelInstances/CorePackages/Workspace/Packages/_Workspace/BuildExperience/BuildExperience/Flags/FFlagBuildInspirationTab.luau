@@ -1,0 +1,4 @@
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local FFlagBuildExperiencePreviewsTabModule = require(BuildExperience.Flags.FFlagBuildExperiencePreviewsTab)
+
+return require(BuildExperience.Parent.SharedFlags).FFlagBuildInspirationTab and FFlagBuildExperiencePreviewsTabModule

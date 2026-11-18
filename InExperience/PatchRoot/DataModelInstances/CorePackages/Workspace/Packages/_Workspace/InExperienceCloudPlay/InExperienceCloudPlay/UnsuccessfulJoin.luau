@@ -1,18 +1,21 @@
 ﻿local MemStorageService = game:GetService("MemStorageService")
+local _ = require(script:FindFirstAncestor("InExperienceCloudPlay").CloudPlayTelemetry)
 
 return {
-	markUnsuccessfulJoin = function()
+	markUnsuccessfulJoin = function(p1)
 		-- upvalues: MemStorageService (copy)
-		MemStorageService:SetItem("CloudPlayUnsuccessfulJoin", "true")
+		MemStorageService:SetItem("CloudPlayUnsuccessfulJoin", p1 or "true")
 	end,
-	consumeUnsuccessfulJoin = function(): boolean
+	consumeUnsuccessfulJoin = function()
 		-- upvalues: MemStorageService (copy)
-		if MemStorageService:GetItem("CloudPlayUnsuccessfulJoin") == "" then
-			return false
+		local CloudPlayUnsuccessfulJoinItem = MemStorageService:GetItem("CloudPlayUnsuccessfulJoin")
+		
+		if CloudPlayUnsuccessfulJoinItem == "" then
+			return false, nil
 		else
 			MemStorageService:RemoveItem("CloudPlayUnsuccessfulJoin")
 			
-			return true
+			return true, if CloudPlayUnsuccessfulJoinItem == "cloud" then "cloud" elseif CloudPlayUnsuccessfulJoinItem == "restyle" then "restyle" else nil
 		end
 	end
 }

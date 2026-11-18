@@ -10,6 +10,8 @@ local InlineLayoutModule = require(Parent.InlineLayout)
 local InlineLayout = InlineLayoutModule.Components.InlineLayout
 local LinkElement = InlineLayoutModule.Components.InlineLayoutElements.LinkElement
 local TextElement = InlineLayoutModule.Components.InlineLayoutElements.TextElement
+local RecycledInlineLayoutModule = require(Parent.RecycledInlineLayout)
+local IsSupported = require(Parent.SharedFlags).FFlagRecycledInlineLayoutLinkedText and RecycledInlineLayoutModule.isSupported
 local config = {
 	disclosure = {
 		"Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure",
@@ -19,7 +21,7 @@ local config = {
 }
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: UseTokensFunction (copy), UseOpenWebViewFunction (copy), UseLocalizationFunction (copy), config (copy), ReactModule (copy), UrlBuilder (copy), TextElement (copy), LinkElement (copy), View (copy), InlineLayout (copy)
+	-- upvalues: UseTokensFunction (copy), UseOpenWebViewFunction (copy), UseLocalizationFunction (copy), config (copy), ReactModule (copy), UrlBuilder (copy), IsSupported (copy), RecycledInlineLayoutModule (copy), TextElement (copy), LinkElement (copy), View (copy), InlineLayout (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseOpenWebViewResult = UseOpenWebViewFunction()
 	local Disclosure = UseLocalizationFunction(config).disclosure
@@ -32,50 +34,93 @@ return ReactModule.memo(function(Frame)
 	local CaptionSmall1 = if IsIsMobile then UseTokensResult.Typography.CaptionSmall else UseTokensResult.Typography.CaptionMedium
 	local Neutral = if IsIsMobile then UseTokensResult.Color.System.Neutral else UseTokensResult.Color.Content.Default
 	local Emphasis = if IsIsMobile then UseTokensResult.Color.Content.Emphasis else Neutral
+	local UseMemoResult = ReactModule.useMemo(function()
+		-- upvalues: IsSupported (upval), Disclosure (copy), RecycledInlineLayoutModule (upval), CaptionSmall (copy), Neutral (copy), UseResult (copy), CaptionSmall1 (copy), Emphasis (copy)
+		if IsSupported then
+			local Match, Match2, Match3 = string.match(Disclosure, "^(.*)<a>(.*)</a>(.*)$")
+			
+			return if Match2 == nil then {
+				RecycledInlineLayoutModule.Text({
+					Text = Disclosure,
+					fontStyle = CaptionSmall,
+					textStyle = Neutral
+				})
+			} else {
+				RecycledInlineLayoutModule.Text({
+					key = "leading",
+					testId = "RobuxTermsDisclosure-LeadingText",
+					Text = Match,
+					fontStyle = CaptionSmall,
+					textStyle = Neutral
+				}),
+				RecycledInlineLayoutModule.Link({
+					key = "RobuxTermsDisclosure-TermsLink",
+					testId = "RobuxTermsDisclosure-TermsLink",
+					onActivated = UseResult
+				}, {
+					RecycledInlineLayoutModule.Text({
+						testId = "RobuxTermsDisclosure-TermsLinkText",
+						Text = Match2,
+						fontStyle = CaptionSmall1,
+						textStyle = Emphasis
+					})
+				}),
+				RecycledInlineLayoutModule.Text({
+					key = "trailing",
+					Text = Match3,
+					fontStyle = CaptionSmall,
+					textStyle = Neutral
+				})
+			}
+		else
+			return nil
+		end
+	end, {
+		Disclosure, CaptionSmall, CaptionSmall1, Neutral, Emphasis, UseResult
+	})
+	local UseMemoResult1 = ReactModule.useMemo(function()
+		-- upvalues: Disclosure (copy), TextElement (upval), CaptionSmall (copy), Neutral (copy), LinkElement (upval), CaptionSmall1 (copy), Emphasis (copy), UseResult (copy)
+		local Match, Match2, Match3 = string.match(Disclosure, "^(.*)<a>(.*)</a>(.*)$")
+		
+		return if Match2 == nil then {
+			TextElement.new({
+				Text = Disclosure,
+				fontStyle = CaptionSmall,
+				textStyle = Neutral
+			})
+		} else {
+			TextElement.new({
+				testId = "RobuxTermsDisclosure-LeadingText",
+				Text = Match,
+				fontStyle = CaptionSmall,
+				textStyle = Neutral
+			}),
+			LinkElement.new({
+				TextElement.new({
+					testId = "RobuxTermsDisclosure-TermsLinkText",
+					Text = Match2,
+					fontStyle = CaptionSmall1,
+					textStyle = Emphasis
+				})
+			}, {
+				key = "RobuxTermsDisclosure-TermsLink",
+				onActivated = UseResult
+			}),
+			TextElement.new({
+				Text = Match3,
+				fontStyle = CaptionSmall,
+				textStyle = Neutral
+			})
+		}
+	end, {
+		Disclosure, CaptionSmall, CaptionSmall1, Neutral, Emphasis, UseResult
+	})
 	
 	return ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y",
 		testId = "RobuxTermsDisclosure",
 		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Layout = ReactModule.createElement(InlineLayout, {
-			Elements = ReactModule.useMemo(function()
-				-- upvalues: Disclosure (copy), TextElement (upval), CaptionSmall (copy), Neutral (copy), LinkElement (upval), CaptionSmall1 (copy), Emphasis (copy), UseResult (copy)
-				local Match, Match2, Match3 = string.match(Disclosure, "^(.*)<a>(.*)</a>(.*)$")
-				
-				return if Match2 == nil then {
-					TextElement.new({
-						Text = Disclosure,
-						fontStyle = CaptionSmall,
-						textStyle = Neutral
-					})
-				} else {
-					TextElement.new({
-						testId = "RobuxTermsDisclosure-LeadingText",
-						Text = Match,
-						fontStyle = CaptionSmall,
-						textStyle = Neutral
-					}),
-					LinkElement.new({
-						TextElement.new({
-							testId = "RobuxTermsDisclosure-TermsLinkText",
-							Text = Match2,
-							fontStyle = CaptionSmall1,
-							textStyle = Emphasis
-						})
-					}, {
-						key = "RobuxTermsDisclosure-TermsLink",
-						onActivated = UseResult
-					}),
-					TextElement.new({
-						Text = Match3,
-						fontStyle = CaptionSmall,
-						textStyle = Neutral
-					})
-				}
-			end, {
-				Disclosure, CaptionSmall, CaptionSmall1, Neutral, Emphasis, UseResult
-			})
-		})
+		Layout = if UseMemoResult then ReactModule.createElement(RecycledInlineLayoutModule.InlineLayout, { elements = UseMemoResult }) else ReactModule.createElement(InlineLayout, { Elements = UseMemoResult1 })
 	})
 end)

@@ -40,6 +40,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UseTopbarInsetModule = require(Parent.Hooks.useTopbarInset)
 local DebugOverrideCaptureControlsVideoGuacPolicy = game:DefineFastFlag("DebugOverrideCaptureControlsVideoGuacPolicy", false)
 local FStringSocialCaptureIXPLayer = require(Parent1.SharedFlags).FStringSocialCaptureIXPLayer
+local FFlagKeepSideSheetOpenBesideMenu = require(Parent1.SharedFlags).FFlagKeepSideSheetOpenBesideMenu
 local FFlagCapturesControlsUseBuilderIconsModule = require(Parent.Flags.FFlagCapturesControlsUseBuilderIcons)
 local FFlagCapturesControlsGalleryButtonModule = require(Parent.Flags.FFlagCapturesControlsGalleryButton)
 local FrameCameraCenter = if FFlagCapturesControlsUseBuilderIconsModule then IconName.FrameCameraCenter else "icons/controls/screenCapture"
@@ -57,7 +58,7 @@ return (CapturesPolicyModule.connect(function(p1)
 		hasVideoCaptureCapability = p1.hasVideoCaptureCapability() and CaptureService:CanCaptureVideo() or DebugOverrideCaptureControlsVideoGuacPolicy
 	}
 end)(function(p1)
-	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), FFlagCapturesControlsGalleryButtonModule (copy), UseTokensFunction (copy), ReactModule (copy), CapturesContextModule (copy), UseSystemMenuDetectionModule (copy), UseLatestCaptureModule (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseTopbarInsetModule (copy), UseEffectFunction (copy), IXPServiceWrapper (copy), FStringSocialCaptureIXPLayer (copy), UsePlayShutterSoundModule (copy), UseCaptureControlsControllerModule (copy), EventNamesModule (copy), UseCallbackFunction (copy), SocialStopwatchModule (copy), TakeCaptureModule (copy), GetLatestCaptureStoreModule (copy), FindCaptureIndexModule (copy), CarouselOpenedModule (copy), GalleryButtonContentModule (copy), View (copy), FoundationModule (copy), VideoCaptureControlModule (copy), config (copy), Tooltip (copy), PopoverAlign (copy), Icon (copy), FrameCameraCenter (copy), Large (copy), VoiceChatIndicatorModule (copy), FFlagCapturesControlsUseBuilderIconsModule (copy), IconName (copy), Image (copy)
+	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), FFlagCapturesControlsGalleryButtonModule (copy), UseTokensFunction (copy), ReactModule (copy), CapturesContextModule (copy), UseSystemMenuDetectionModule (copy), UseLatestCaptureModule (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseTopbarInsetModule (copy), UseEffectFunction (copy), IXPServiceWrapper (copy), FStringSocialCaptureIXPLayer (copy), UsePlayShutterSoundModule (copy), UseCaptureControlsControllerModule (copy), EventNamesModule (copy), UseCallbackFunction (copy), SocialStopwatchModule (copy), TakeCaptureModule (copy), GetLatestCaptureStoreModule (copy), FindCaptureIndexModule (copy), CarouselOpenedModule (copy), GalleryButtonContentModule (copy), View (copy), FFlagKeepSideSheetOpenBesideMenu (copy), FoundationModule (copy), VideoCaptureControlModule (copy), config (copy), Tooltip (copy), PopoverAlign (copy), Icon (copy), FrameCameraCenter (copy), Large (copy), VoiceChatIndicatorModule (copy), FFlagCapturesControlsUseBuilderIconsModule (copy), IconName (copy), Image (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -139,6 +140,7 @@ end)(function(p1)
 		tag = "padding-x-large padding-y-medium",
 		Position = UDim2.fromOffset(0, -UseTopbarInsetModuleResult.Height),
 		Size = UDim2.new(1, 0, 1, UseTopbarInsetModuleResult.Height),
+		Visible = (not FFlagKeepSideSheetOpenBesideMenu or not p1.isHidden or UseSelectorResult2) and nil,
 		ZIndex = ConstantsModule.ZIndex.Entrypoint
 	}, {
 		PaddedContainer = ReactModule.createElement(View, {

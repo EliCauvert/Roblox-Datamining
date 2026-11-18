@@ -27,6 +27,7 @@ local FFlagLuaAppSduiEventDetailsCenterSheet = require(Parent.SharedFlags).FFlag
 local FFlagLuaAppSduiEventDetailsActionBarInFeed = require(Parent.SharedFlags).FFlagLuaAppSduiEventDetailsActionBarInFeed
 local FStringLuaAppSduiEventDetailsIxpLayer = require(Parent.SharedFlags).FStringLuaAppSduiEventDetailsIxpLayer
 local FFlagSduiPageEntryUseSharedHooks = require(Parent.SharedFlags).FFlagSduiPageEntryUseSharedHooks
+local FFlagLuaAppSduiEventDetailsSheetFocusNavigation = require(Parent.SharedFlags).FFlagLuaAppSduiEventDetailsSheetFocusNavigation
 
 local function _(p1, p2)
 	local ExtraPropsParam = p1.navigation and p1.navigation.getParam("extraProps")
@@ -39,7 +40,7 @@ local _ = function(Text, Text1): string
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseTokensFunction (copy), GetEventDetailsPageKeyModule (copy), ReactModule (copy), SduiLoadTimer (copy), AppPage (copy), UseNavigationFunction (copy), UseRouteNameFunction (copy), UseNavigationFocusFunction (copy), FFlagLuaAppSduiEventDetailsCenterSheet (copy), UseDeviceTypeFunction (copy), DeviceType (copy), FetchEventDetailsPageModule (copy), FFlagLuaAppSduiEventDetailsLogExposure (copy), IXPService (copy), FStringLuaAppSduiEventDetailsIxpLayer (copy), FireEventDetailsPageVisitModule (copy), FoundationModule (copy), SduiFeatureEntryPoint (copy), EventDetailsFullBleedSkeletonModule (copy), SduiPageEntryPoint (copy), FFlagSduiPageEntryUseSharedHooks (copy), EventDetailsFeedSkeletonModule (copy), FFlagLuaAppSduiEventDetailsActionBarInFeed (copy), EventDetailsActionBarSkeletonModule (copy)
+	-- upvalues: UseTokensFunction (copy), GetEventDetailsPageKeyModule (copy), ReactModule (copy), SduiLoadTimer (copy), AppPage (copy), UseNavigationFunction (copy), UseRouteNameFunction (copy), UseNavigationFocusFunction (copy), FFlagLuaAppSduiEventDetailsCenterSheet (copy), UseDeviceTypeFunction (copy), DeviceType (copy), FFlagLuaAppSduiEventDetailsSheetFocusNavigation (copy), Parent (copy), FetchEventDetailsPageModule (copy), FFlagLuaAppSduiEventDetailsLogExposure (copy), IXPService (copy), FStringLuaAppSduiEventDetailsIxpLayer (copy), FireEventDetailsPageVisitModule (copy), FoundationModule (copy), SduiFeatureEntryPoint (copy), EventDetailsFullBleedSkeletonModule (copy), SduiPageEntryPoint (copy), FFlagSduiPageEntryUseSharedHooks (copy), EventDetailsFeedSkeletonModule (copy), FFlagLuaAppSduiEventDetailsActionBarInFeed (copy), EventDetailsActionBarSkeletonModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local ExtraPropsParam = p1.navigation and p1.navigation.getParam("extraProps")
 	local EventId = (if p1.eventId then p1.eventId else ExtraPropsParam and ExtraPropsParam.eventId) or p1.navigation and p1.navigation.getParam("detail")
@@ -73,6 +74,41 @@ return ReactModule.memo(function(p1)
 		UseRouteNameResult,
 		UseNavigationFocusResult
 	})
+	local v1 = false
+	local UseResult1 = UseResult
+	local v2 = nil
+	local UseComposedRefResult = nil
+	
+	if FFlagLuaAppSduiEventDetailsSheetFocusNavigation then
+		local UseStateResult2
+		v1, UseStateResult2 = ReactModule.useState(false)
+		local UseResult2 = ReactModule.useCallback(function()
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(true)
+		end, {})
+		v2 = UseResult2
+		ReactModule.useEffect(function()
+			-- upvalues: UseNavigationFocusResult (copy), UseStateResult2 (copy)
+			if not UseNavigationFocusResult then
+				UseStateResult2(false)
+			end
+		end, { UseNavigationFocusResult })
+		UseResult1 = ReactModule.useCallback(function()
+			-- upvalues: UseStateResult2 (copy), UseResult (copy)
+			UseStateResult2(false)
+			UseResult()
+		end, { UseResult })
+		local UseRefResult = ReactModule.useRef(nil)
+		UseComposedRefResult = require(Parent.ReactUtils).useComposedRef(require(script.Parent.useEventDetailsSheetFocusNavigation)(UseResult2, UseNavigationFocusResult), (ReactModule.useCallback(function(Current)
+			-- upvalues: UseRefResult (copy), UseStateResult2 (copy)
+			if Current and UseRefResult.current and Current ~= UseRefResult.current then
+				UseStateResult2(false)
+			end
+			if Current then
+				UseRefResult.current = Current
+			end
+		end, {})))
+	end
 	ReactModule.useEffect(function()
 		-- upvalues: EventId (copy), FetchEventDetailsPageModule (upval), UseMemoResult (copy)
 		if EventId then
@@ -95,15 +131,16 @@ return ReactModule.memo(function(p1)
 			})
 		end
 	end, { EventId })
-	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
 	
 	return if EventId == nil then nil else ReactModule.createElement(FoundationModule.Sheet.Root, {
-		isOpen = UseNavigationFocusResult,
+		isOpen = if FFlagLuaAppSduiEventDetailsSheetFocusNavigation then UseNavigationFocusResult and not v1 else UseNavigationFocusResult,
 		snapPoints = { 1 },
 		displaySize = FoundationModule.Enums.DialogSize.Large,
 		preferCenterSheet = IsDesktopMatch,
 		centerSheetHeight = if FFlagLuaAppSduiEventDetailsCenterSheet then 1 else nil,
-		onClose = UseResult
+		onClose = UseResult1,
+		ref = UseComposedRefResult
 	}, {
 		FullBleed = ReactModule.createElement(FoundationModule.Sheet.FullBleed, { aspectRatio = 1.7777777777777777 }, {
 			FullBleedContent = ReactModule.createElement(SduiFeatureEntryPoint, {
@@ -116,16 +153,17 @@ return ReactModule.memo(function(p1)
 				AutomaticSize = Enum.AutomaticSize.None
 			})
 		}),
-		Content = ReactModule.createElement(FoundationModule.Sheet.Content, { scrollingFrameRef = UseRefResult }, ReactModule.createElement(SduiPageEntryPoint, {
+		Content = ReactModule.createElement(FoundationModule.Sheet.Content, { scrollingFrameRef = UseRefResult1 }, ReactModule.createElement(SduiPageEntryPoint, {
 			includeNavigationHeaderBar = false,
 			disableRootPadding = true,
 			snackbarPortalLayoutOrder = 2147483647,
 			appPage = AppPage.EventDetails,
 			configKey = EventDetailsPageKeyModule,
 			identifier = if FFlagSduiPageEntryUseSharedHooks then "event_details_feed" else EventDetailsPageKeyModule .. "_" .. "event_details_feed",
+			onCloseActivated = if FFlagLuaAppSduiEventDetailsSheetFocusNavigation then v2 else nil,
 			pageTimer = UseMemoResult,
 			backgroundStyle = UseTokensResult.Color.None,
-			scrollingFrameRef = UseRefResult,
+			scrollingFrameRef = UseRefResult1,
 			loadingSlot = ReactModule.createElement(EventDetailsFeedSkeletonModule)
 		})),
 		Actions = if FFlagLuaAppSduiEventDetailsActionBarInFeed then nil else ReactModule.createElement(FoundationModule.Sheet.Actions, nil, ReactModule.createElement(SduiFeatureEntryPoint, {

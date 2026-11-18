@@ -10,21 +10,23 @@ local UseBuildHomeTabsPageLayoutModule = require(script.Parent.useBuildHomeTabsP
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 local FFlagBuildExperienceHomeTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceHomeTelemetry)
 local FFlagBuildUpdatedSearchUXForGAModule = require(BuildExperience.Flags.FFlagBuildUpdatedSearchUXForGA)
+local FFlagBuildInspirationTabModule = require(BuildExperience.Flags.FFlagBuildInspirationTab)
 local BUILDHOMETAB = require(BuildExperience.Stores.GetBuildHomeTabStore.createBuildHomeTabStore).BUILD_HOME_TAB
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
 return function(p1)
-	-- upvalues: GetBuildHomeTabStoreModule (copy), FFlagBuildUpdatedSearchUXForGAModule (copy), GetSearchQueryStoreModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), BUILDHOMETAB (copy), FFlagBuildExperienceHomeTelemetryModule (copy), SendBuildExperienceEventModule (copy), UseBuildHomeTabsPageLayoutModule (copy)
+	-- upvalues: GetBuildHomeTabStoreModule (copy), FFlagBuildUpdatedSearchUXForGAModule (copy), GetSearchQueryStoreModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildInspirationTabModule (copy), ReactModule (copy), BUILDHOMETAB (copy), FFlagBuildExperienceHomeTelemetryModule (copy), SendBuildExperienceEventModule (copy), UseBuildHomeTabsPageLayoutModule (copy)
 	local TabStore = p1.tabStore or GetBuildHomeTabStoreModule()
 	local UseTabResult = TabStore.useTab()
 	local UseIsSearchActiveResult = if FFlagBuildUpdatedSearchUXForGAModule then nil else (p1.searchQueryStore or GetSearchQueryStoreModule()).useIsSearchActive()
 	local UseLocalizationResult = UseLocalizationFunction({
 		games = LocalizationStringsModule.BUILD_HOME_TAB_GAMES,
-		previews = LocalizationStringsModule.BUILD_HOME_TAB_PREVIEWS
+		previews = LocalizationStringsModule.BUILD_HOME_TAB_PREVIEWS,
+		inspiration = if FFlagBuildInspirationTabModule then LocalizationStringsModule.BUILD_HOME_TAB_INSPIRATION else nil
 	})
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: BUILDHOMETAB (upval), UseLocalizationResult (copy)
-		return {
+		-- upvalues: BUILDHOMETAB (upval), UseLocalizationResult (copy), FFlagBuildInspirationTabModule (upval)
+		local List = {
 			{
 				id = BUILDHOMETAB.Games,
 				text = UseLocalizationResult.games
@@ -34,17 +36,27 @@ return function(p1)
 				text = UseLocalizationResult.previews
 			}
 		}
+		
+		if FFlagBuildInspirationTabModule then
+			table.insert(List, {
+				id = BUILDHOMETAB.Inspiration,
+				text = UseLocalizationResult.inspiration
+			})
+		end
+		return List
 	end, {
 		UseLocalizationResult.games,
-		UseLocalizationResult.previews
+		UseLocalizationResult.previews,
+		UseLocalizationResult.inspiration
 	})
-	local UseResult = ReactModule.useCallback(function(Games)
-		-- upvalues: BUILDHOMETAB (upval), FFlagBuildExperienceHomeTelemetryModule (upval), SendBuildExperienceEventModule (upval), TabStore (copy)
-		if Games ~= BUILDHOMETAB.Games and Games ~= BUILDHOMETAB.Previews then return end
+	local UseResult = ReactModule.useCallback(function(Inspiration)
+		-- upvalues: BUILDHOMETAB (upval), FFlagBuildInspirationTabModule (upval), FFlagBuildExperienceHomeTelemetryModule (upval), SendBuildExperienceEventModule (upval), TabStore (copy)
+		if Inspiration ~= BUILDHOMETAB.Games and Inspiration ~= BUILDHOMETAB.Previews and Inspiration ~= BUILDHOMETAB.Inspiration then return end
+		if Inspiration == BUILDHOMETAB.Inspiration and not FFlagBuildInspirationTabModule then return end
 		if FFlagBuildExperienceHomeTelemetryModule then
-			SendBuildExperienceEventModule("TAB_CLICK", {}, { context = "build_home", tab = tostring(Games) })
+			SendBuildExperienceEventModule("TAB_CLICK", {}, { context = "build_home", tab = tostring(Inspiration) })
 		end
-		TabStore.setTab(Games)
+		TabStore.setTab(Inspiration)
 	end, { TabStore })
 	local NoUseIsSearchActiveResult = if FFlagBuildUpdatedSearchUXForGAModule then nil else not UseIsSearchActiveResult
 	local UseTabResult1 = if FFlagBuildUpdatedSearchUXForGAModule or NoUseIsSearchActiveResult then UseTabResult else BUILDHOMETAB.Games

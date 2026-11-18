@@ -4,6 +4,7 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local ShopOverflowConstantsModule = require(InExperienceShop.Components.Shared.shopOverflowConstants)
+local FFlagEnableContentPersonalizationForExperienceShopModule = require(InExperienceShop.Flags.FFlagEnableContentPersonalizationForExperienceShop)
 local FFlagAlignSideSheetWindowCloseRight = require(Parent.SharedFlags).FFlagAlignSideSheetWindowCloseRight
 local View = FoundationModule.View
 local Text = FoundationModule.Text
@@ -21,23 +22,34 @@ local ChipVariant = FoundationModule.Enums.ChipVariant
 local OVERFLOWICON = ShopOverflowConstantsModule.OVERFLOW_ICON
 local REPORTICON = ShopOverflowConstantsModule.REPORT_ICON
 local REPORTMENUITEMID = ShopOverflowConstantsModule.REPORT_MENU_ITEM_ID
+local CONTENTPERSONALIZATIONMENUITEMID = ShopOverflowConstantsModule.CONTENT_PERSONALIZATION_MENU_ITEM_ID
+local CONTENTPERSONALIZATIONICON = ShopOverflowConstantsModule.CONTENT_PERSONALIZATION_ICON
 local config = {
 	title = "Feature.Avatar.Action.Shop",
-	report = "Feature.Catalog.Action.Report"
+	report = "Feature.Catalog.Action.Report",
+	contentPersonalization = "Feature.InExperienceShop.Label.ContentPersonalization"
 }
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), config (copy), REPORTMENUITEMID (copy), REPORTICON (copy), ReactModule (copy), View (copy), FFlagAlignSideSheetWindowCloseRight (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), Menu (copy), PopoverSide (copy), PopoverAlign (copy), OVERFLOWICON (copy), Text (copy), Chip (copy), IconName (copy), IconVariant (copy), ChipSize (copy), ChipVariant (copy)
+	-- upvalues: UseLocalizationFunction (copy), config (copy), REPORTMENUITEMID (copy), REPORTICON (copy), FFlagEnableContentPersonalizationForExperienceShopModule (copy), CONTENTPERSONALIZATIONMENUITEMID (copy), CONTENTPERSONALIZATIONICON (copy), ReactModule (copy), View (copy), FFlagAlignSideSheetWindowCloseRight (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), Menu (copy), PopoverSide (copy), PopoverAlign (copy), OVERFLOWICON (copy), Text (copy), Chip (copy), IconName (copy), IconVariant (copy), ChipSize (copy), ChipVariant (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
-	local Items = {}
+	local List = {}
 	
 	if p1.isReportingEnabled then
-		table.insert(Items, {
+		table.insert(List, {
 			id = REPORTMENUITEMID,
 			icon = REPORTICON,
 			text = UseLocalizationResult.report
 		})
 	end
+	if FFlagEnableContentPersonalizationForExperienceShopModule and p1.isContentPersonalizationEnabled then
+		table.insert(List, {
+			id = CONTENTPERSONALIZATIONMENUITEMID,
+			icon = CONTENTPERSONALIZATIONICON,
+			text = UseLocalizationResult.contentPersonalization
+		})
+	end
+	local IsReportingEnabled = if FFlagEnableContentPersonalizationForExperienceShopModule and p1.isContentPersonalizationEnabled then true else p1.isReportingEnabled
 	local Element = ReactModule.createElement(View, {
 		tag = "auto-xy padding-top-xxsmall",
 		LayoutOrder = if FFlagAlignSideSheetWindowCloseRight then 4 else 1
@@ -81,11 +93,11 @@ return function(p1)
 				variant = ChipVariant.Standard,
 				onActivated = p1.onOfferChipActivated
 			}) else nil,
-			Overflow = if p1.isReportingEnabled then ReactModule.createElement(Menu, {
+			Overflow = if IsReportingEnabled then ReactModule.createElement(Menu, {
 				LayoutOrder = 2,
 				testId = "TopBar_OverflowMenu",
 				isOpen = p1.isOverflowMenuOpen,
-				items = Items,
+				items = List,
 				size = InputSize.Medium,
 				side = PopoverSide.Top,
 				align = PopoverAlign.End,

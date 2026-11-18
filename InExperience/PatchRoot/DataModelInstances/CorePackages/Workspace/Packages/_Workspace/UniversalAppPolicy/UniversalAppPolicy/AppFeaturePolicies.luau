@@ -1131,6 +1131,10 @@ return function(p1)
 			-- upvalues: FFlagFlyoutGateLearnPlace (upval), p1 (copy)
 			return not FFlagFlyoutGateLearnPlace or (p1.LearnPlaceEnabled or false)
 		end,
+		getShowInContextPersonalizedRecommendationsInExperienceShop = function()
+			-- upvalues: p1 (copy)
+			return p1.showInContextPersonalizedRecommendationsInExperienceShopRecommendedItems or false
+		end,
 		getShowInContextPersonalizedRecommendationsInExperienceBuyRobux = function()
 			-- upvalues: p1 (copy)
 			return p1.showInContextPersonalizedRecommendationsInExperienceBuyRobux or false

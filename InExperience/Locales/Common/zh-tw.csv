@@ -781,10 +781,10 @@ CoreScripts.FTUX.Heading.JoinVoice,加入語音聊天
 CoreScripts.FTUX.Heading.LeaveRespawn,離開並重生
 CoreScripts.FTUX.Heading.NewAvatarSwitcher,新功能：虛擬人偶切換器
 CoreScripts.FTUX.Heading.NewTiltOnboarding,選單在此處
-CoreScripts.FTUX.Heading.NewTiltUpdate,全新選單
 CoreScripts.FTUX.Heading.ReadyToPlaytest,準備好試玩了嗎？
 CoreScripts.FTUX.Heading.SideSheetUpdate,集中一處管理所有操作
 CoreScripts.FTUX.Heading.SocialOnboarding,社交功能
+CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,你的全新選單
 CoreScripts.FTUX.Heading.YouAreAnEarlyTester,你是搶先遊玩的測試員
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,隨時切換至已儲存的虛擬人偶。
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,隨時與好友聊天。
@@ -792,11 +792,10 @@ CoreScripts.FTUX.Label.InExperienceShopDescription,部分方案包含額外獎�
 CoreScripts.FTUX.Label.JoinVoiceDescription,聆聽並與他人交談
 CoreScripts.FTUX.Label.LeaveRespawn,你可以在此輕鬆離開遊戲或重新生成虛擬人偶。
 CoreScripts.FTUX.Label.NewTiltOnboarding,遊戲選單包含遊戲內動作以及你的遊戲設定。
-CoreScripts.FTUX.Label.NewTiltUpdate,漢堡選單的物品已移到此處。
 CoreScripts.FTUX.Label.PartyWithYourFriendsAnytime,隨時與好友一起利用 Party 同樂。
 CoreScripts.FTUX.Label.SideSheetOnboarding,選單包含所有基本功能，邀請好友、試用動作、控制音樂等。
-CoreScripts.FTUX.Label.SideSheetUpdate,選單仍舊包含所有基本功能。
 CoreScripts.FTUX.Label.SocialOnboarding,從頂端列輕鬆存取聊天等社交功能。
+CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,兩個選單現已合而為一。輕觸此處即可開啟。
 CoreScripts.Feedback.EntryPoint.ButtonText,給予回饋
 CoreScripts.Feedback.EntryPoint.OptionText,給予翻譯回饋
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,
@@ -3890,6 +3889,7 @@ Feature.InExperienceShop.Label.Active,啟用中
 Feature.InExperienceShop.Label.BonusItem,額外獎勵物品
 Feature.InExperienceShop.Label.BuyGamePass,購買遊戲通行證
 Feature.InExperienceShop.Label.BuyNow,立即購買
+Feature.InExperienceShop.Label.ContentPersonalization,
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,{timeRemaining}後結束
 Feature.InExperienceShop.Label.FreeTrial,免費試用

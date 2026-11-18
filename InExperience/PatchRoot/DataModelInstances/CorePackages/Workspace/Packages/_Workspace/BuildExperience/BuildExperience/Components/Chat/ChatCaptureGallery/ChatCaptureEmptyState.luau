@@ -1,12 +1,14 @@
-﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local ChatCaptureToolbarIllustrationModule = require(script.Parent.ChatCaptureToolbarIllustration)
+local FFlagBuildExperienceChatCaptureStepRichTextModule = require(BuildExperience.Flags.FFlagBuildExperienceChatCaptureStepRichText)
 local Text = FoundationModule.Text
 local View = FoundationModule.View
 
 local function renderStep(LayoutOrder, Text1)
-	-- upvalues: ReactModule (copy), View (copy), Text (copy)
+	-- upvalues: ReactModule (copy), View (copy), Text (copy), FFlagBuildExperienceChatCaptureStepRichTextModule (copy)
 	return ReactModule.createElement(View, {
 		tag = "row align-y-center gap-small size-full-0 auto-y",
 		LayoutOrder = LayoutOrder,
@@ -24,6 +26,7 @@ local function renderStep(LayoutOrder, Text1)
 		Text = ReactModule.createElement(Text, {
 			LayoutOrder = 2,
 			tag = "fill auto-y text-body-medium text-wrap text-align-x-left content-default",
+			RichText = if FFlagBuildExperienceChatCaptureStepRichTextModule then true else nil,
 			Text = Text1
 		})
 	})

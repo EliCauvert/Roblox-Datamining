@@ -4,8 +4,10 @@ local _ = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local FFlagBuildExperienceFoundationTabsModule = require(BuildExperience.Flags.FFlagBuildExperienceFoundationTabs)
 local FFlagBuildExperienceHomeTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceHomeTelemetry)
+local FFlagBuildInspirationTabModule = require(BuildExperience.Flags.FFlagBuildInspirationTab)
 local FFlagBuildUpdatedSearchUXForGAModule = require(BuildExperience.Flags.FFlagBuildUpdatedSearchUXForGA)
 local BuildHomeTabsViewModule = require(script.Parent.BuildHomeTabsView)
+local _ = require(BuildExperience.Chat.chatTypes)
 local _ = require(BuildExperience.Stores.GetSearchQueryStore.createSearchQueryStore)
 local GamesFilterModule = require(BuildExperience.Stores.GetMyCreationsFilterStore.GamesFilter)
 local GetPreviewsFilterStoreModule = require(BuildExperience.Stores.GetPreviewsFilterStore)
@@ -15,6 +17,7 @@ local UseBuildHomeTabsFillBehaviorModule = require(script.Parent.useBuildHomeTab
 local UseBuildHomeTabsViewModelModule = require(script.Parent.useBuildHomeTabsViewModel)
 local UsePreviewResultsModule = require(BuildExperience.Components.PreviewsTab.usePreviewResults)
 local UsePreviewsTabViewModelModule = require(BuildExperience.Components.PreviewsTab.usePreviewsTabViewModel)
+local BuildInspirationTabModule = if FFlagBuildInspirationTabModule then require(BuildExperience.Inspiration.BuildInspirationTab) else nil
 local BUILDHOMETAB = require(BuildExperience.Stores.GetBuildHomeTabStore.createBuildHomeTabStore).BUILD_HOME_TAB
 local Options = {
 	GamesFilterModule.All,
@@ -24,7 +27,7 @@ local Options = {
 local DefaultFilter = { games = GamesFilterModule.SharedGames }
 
 return function(Frame)
-	-- upvalues: GetPreviewsFilterStoreModule (copy), UseBuildHomeTabsViewModelModule (copy), FFlagBuildUpdatedSearchUXForGAModule (copy), FFlagBuildExperienceHomeTelemetryModule (copy), UsePreviewResultsModule (copy), BUILDHOMETAB (copy), FFlagBuildExperienceFoundationTabsModule (copy), UseBuildHomeTabsFillBehaviorModule (copy), UsePreviewsTabViewModelModule (copy), ReactModule (copy), BuildHomeTabsViewModule (copy), PreviewsTabViewModule (copy), MyCreationsFilterContainerModule (copy), DefaultFilter (copy), Options (copy)
+	-- upvalues: GetPreviewsFilterStoreModule (copy), UseBuildHomeTabsViewModelModule (copy), FFlagBuildUpdatedSearchUXForGAModule (copy), FFlagBuildExperienceHomeTelemetryModule (copy), UsePreviewResultsModule (copy), BUILDHOMETAB (copy), FFlagBuildExperienceFoundationTabsModule (copy), UseBuildHomeTabsFillBehaviorModule (copy), UsePreviewsTabViewModelModule (copy), FFlagBuildInspirationTabModule (copy), ReactModule (copy), BuildInspirationTabModule (copy), BuildHomeTabsViewModule (copy), PreviewsTabViewModule (copy), MyCreationsFilterContainerModule (copy), DefaultFilter (copy), Options (copy)
 	local CreatorGroupsStore = Frame.creatorGroupsStore
 	local PreviewsFilterStore = Frame.previewsFilterStore or GetPreviewsFilterStoreModule()
 	local UseFilterResult = PreviewsFilterStore.useFilter()
@@ -53,6 +56,11 @@ return function(Frame)
 		tabOrder = UseBuildHomeTabsViewModelModuleResult.tabOrder,
 		tabsFillBehavior = if FFlagBuildExperienceFoundationTabsModule then UseBuildHomeTabsFillBehaviorModule() else nil,
 		gamesContent = Frame.gamesContent,
+		inspirationContent = if FFlagBuildInspirationTabModule then ReactModule.createElement(BuildInspirationTabModule, {
+			isActive = UseBuildHomeTabsViewModelModuleResult.activeTab == BUILDHOMETAB.Inspiration,
+			onOpenChat = Frame.onOpenChat,
+			onOpenSeeMore = Frame.onOpenInspirationSeeMore
+		}) else nil,
 		previewsContent = ReactModule.createElement(PreviewsTabViewModule, {
 			rows = UsePreviewsTabViewModelModuleResult.rows,
 			listStatus = UsePreviewsTabViewModelModuleResult.listStatus,
