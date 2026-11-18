@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "c73893f2-61b4-2f8f-b4d7-622a3daeb665")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "531e7a0c-4eb0-1cce-1acd-1bca59d21224")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 163021, (e, t, n) => {
@@ -519,8 +519,9 @@
             if (Object.hasOwn(this.translationResourceRequestCache, r)) return this.translationResourceRequestCache[r];
             let i = {};
             try {
+                var o;
                 let n = this.fetchTranslationResourceWithFallback(e, t);
-                this.translationResourceRequestCache[r] = n, i = await n, null == this.translationResourceCache[t] && (this.translationResourceCache[t] = {}), this.translationResourceCache[t][e] = i
+                this.translationResourceRequestCache[r] = n, i = await n, null != (o = this.translationResourceCache)[t] || (o[t] = {}), this.translationResourceCache[t][e] = i
             } catch (n) {
                 console.warn("Failed to retrieve translation resources of ".concat(e, " for ").concat(t))
             } finally {
@@ -4980,5 +4981,5 @@
     }])
 }]);
 
-//# debugId=c73893f2-61b4-2f8f-b4d7-622a3daeb665
-//# sourceMappingURL=31zdzdbw40yc1.js.map
+//# debugId=531e7a0c-4eb0-1cce-1acd-1bca59d21224
+//# sourceMappingURL=08jaibbqz-lta.js.map

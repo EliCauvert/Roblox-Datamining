@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "26cfe889-98f5-1e0a-0129-11e4923e35e6")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "4e25e854-baaf-bdd5-4408-16a5f87b1119")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 550934, e => {
@@ -15,8 +15,8 @@
         r = e.i(209647),
         s = e.i(785517),
         o = e.i(535545),
-        c = e.i(611785),
-        l = e.i(839592);
+        l = e.i(611785),
+        c = e.i(839592);
     e.i(648335);
     let d = ["addEndListener", "appear", "children", "easing", "in", "onEnter", "onEntered", "onEntering", "onExit", "onExited", "onExiting", "style", "timeout", "TransitionComponent"];
 
@@ -50,7 +50,7 @@
                 style: k,
                 timeout: x = "auto",
                 TransitionComponent: P = r.T
-            } = e, N = (0, a._)(e, d), L = (0, o.u)(), U = i.useRef(), A = (0, n.u)(), V = i.useRef(null), R = (0, c.u)(V, (0, l.g)(y), h), _ = e => t => {
+            } = e, N = (0, a._)(e, d), L = (0, o.u)(), U = i.useRef(), A = (0, n.u)(), V = i.useRef(null), R = (0, l.u)(V, (0, c.g)(y), h), _ = e => t => {
                 if (e) {
                     let a = V.current;
                     void 0 === t ? e(a) : e(a, t)
@@ -133,9 +133,9 @@
         r = e.i(677484),
         s = e.i(785517),
         o = e.i(927828),
-        c = e.i(268953);
+        l = e.i(268953);
 
-    function l(e) {
+    function c(e) {
         return (0, t.g)("MuiIconButton", e)
     }
     e.i(386856);
@@ -210,7 +210,7 @@
             })
         }),
         p = i.forwardRef(function(e, i) {
-            let r = (0, c.u)({
+            let r = (0, l.u)({
                     props: e,
                     name: "MuiIconButton"
                 }),
@@ -238,10 +238,10 @@
                         color: r,
                         edge: s,
                         size: o
-                    } = e, c = {
+                    } = e, l = {
                         root: ["root", i && "disabled", "default" !== r && "color".concat((0, t.a)(r)), s && "edge".concat((0, t.a)(s)), "size".concat((0, t.a)(o))]
                     };
-                    return (0, n.a)(c, l, a)
+                    return (0, n.a)(l, c, a)
                 })(b);
             return (0, s.jsx)(u, (0, a._)({
                 className: (0, n.c)(f.root, p),
@@ -268,27 +268,28 @@
         r = e.i(889311);
     let s = "https://ecsv2.".concat("roblox.com"),
         o = "".concat(s, "/CreatorDashboard"),
-        c = ["loadPage", r.f.AssetPrivacyOptOutSurveySubmitted],
-        l = new class {
+        l = ["loadPage", r.f.AssetPrivacyOptOutSurveySubmitted],
+        c = new class {
             setUnifiedLoggerClient(e) {
                 this.unifiedLoggerClient = e
             }
             shouldDoubleWriteToUnifiedLogger(e) {
-                return !(!this.unifiedLoggerClient || c.includes(e.eventType))
+                return !(!this.unifiedLoggerClient || l.includes(e.eventType))
             }
             sendEventToUnifiedLogger(e) {
+                var t;
                 if (!this.unifiedLoggerClient) return;
-                let t = {},
-                    a = e.additionalProperties || {};
-                Object.keys(a).forEach(e => {
-                    let i = a[e];
-                    null != i && (t[e] = i.toString())
+                let a = {},
+                    i = null != (t = e.additionalProperties) ? t : {};
+                Object.keys(i).forEach(e => {
+                    let t = i[e];
+                    null != t && (a[e] = t.toString())
                 });
-                let i = {
+                let n = {
                     eventName: e.eventType,
-                    parameters: t
+                    parameters: a
                 };
-                "load" === e.context ? this.unifiedLoggerClient.logImpressionEvent(i) : "hover" === e.context ? this.unifiedLoggerClient.logHoverEvent(i) : "click" === e.context && this.unifiedLoggerClient.logClickEvent(i)
+                "load" === e.context ? this.unifiedLoggerClient.logImpressionEvent(n) : "hover" === e.context ? this.unifiedLoggerClient.logHoverEvent(n) : "click" === e.context && this.unifiedLoggerClient.logClickEvent(n)
             }
             sendEvent(e) {
                 let t = (0, i.M)("GuestData"),
@@ -311,7 +312,7 @@
                 this.tracker = new n.P(e)
             }
         };
-    e.s(["U", 0, l, "u", 0, s], 512229);
+    e.s(["U", 0, c, "u", 0, s], 512229);
     let d = /experiences\/.+\/(?:access|advanced-settings)\/*$/,
         g = /experiences\/.+\/(associated-items\?activeTab=Pass|passes)\/?/,
         u = /experiences\/.+\/permissions\/*$/,
@@ -462,9 +463,9 @@
                 additionalProperties: r,
                 currentUrl: s,
                 guestId: o,
-                sessionId: c
-            } = e, l = t.toISOString(), d = new URL("".concat(this.baseUrl, "/pe"));
-            return d.searchParams.append("t", a), d.searchParams.append("evt", i), d.searchParams.append("ctx", n), d.searchParams.append("lt", l), d.searchParams.append("url", s || window.location.href), void 0 !== o && d.searchParams.append("gid", o), void 0 !== c && d.searchParams.append("sid", c), void 0 !== r && Object.keys(r).forEach(e => {
+                sessionId: l
+            } = e, c = t.toISOString(), d = new URL("".concat(this.baseUrl, "/pe"));
+            return d.searchParams.append("t", a), d.searchParams.append("evt", i), d.searchParams.append("ctx", n), d.searchParams.append("lt", c), d.searchParams.append("url", s || window.location.href), void 0 !== o && d.searchParams.append("gid", o), void 0 !== l && d.searchParams.append("sid", l), void 0 !== r && Object.keys(r).forEach(e => {
                 var t;
                 d.searchParams.append(e, (null != (t = r[e]) ? t : "").toString())
             }), fetch(d.href, {
@@ -498,9 +499,9 @@
                 additionalProperties: r,
                 currentUrl: s,
                 guestId: o,
-                sessionId: c
-            } = e, l = t.toISOString(), d = new URL("".concat(this.baseUrl, "/e.png"));
-            return d.searchParams.append("t", a), d.searchParams.append("evt", i), d.searchParams.append("ctx", n), d.searchParams.append("lt", l), d.searchParams.append("url", s || window.location.href), void 0 !== o && d.searchParams.append("gid", o), void 0 !== c && d.searchParams.append("sid", c), void 0 !== r && Object.keys(r).forEach(e => {
+                sessionId: l
+            } = e, c = t.toISOString(), d = new URL("".concat(this.baseUrl, "/e.png"));
+            return d.searchParams.append("t", a), d.searchParams.append("evt", i), d.searchParams.append("ctx", n), d.searchParams.append("lt", c), d.searchParams.append("url", s || window.location.href), void 0 !== o && d.searchParams.append("gid", o), void 0 !== l && d.searchParams.append("sid", l), void 0 !== r && Object.keys(r).forEach(e => {
                 var t;
                 d.searchParams.append(e, (null != (t = r[e]) ? t : "").toString())
             }), d
@@ -612,7 +613,7 @@
             source: r,
             tags: s,
             sessionId: o,
-            referralUrl: c
+            referralUrl: l
         }) {
             super({
                 product: e,
@@ -622,7 +623,7 @@
                 source: r,
                 tags: s,
                 sessionId: o
-            }), (0, t._)(this, "referralUrl", void 0), (0, t._)(this, "eventType", "pageload"), this.referralUrl = c
+            }), (0, t._)(this, "referralUrl", void 0), (0, t._)(this, "eventType", "pageload"), this.referralUrl = l
         }
     }
     class r extends a.T {
@@ -640,12 +641,12 @@
             super(...e), (0, t._)(this, "eventType", "imp")
         }
     }
-    class c extends a.T {
+    class l extends a.T {
         constructor(...e) {
             super(...e), (0, t._)(this, "eventType", "apivitals")
         }
     }
-    class l extends a.T {
+    class c extends a.T {
         constructor(...e) {
             super(...e), (0, t._)(this, "eventType", "error")
         }
@@ -691,9 +692,9 @@
                 additionalProperties: r,
                 currentUrl: s,
                 guestId: o,
-                sessionId: c
-            } = e, l = t.toISOString(), d = new URL("".concat(this.baseUrl, "/pe"));
-            return d.searchParams.append("t", a), d.searchParams.append("evt", i), d.searchParams.append("ctx", n), d.searchParams.append("lt", l), d.searchParams.append("url", s || window.location.href), void 0 !== o && d.searchParams.append("gid", o), void 0 !== c && d.searchParams.append("sid", c), void 0 !== r && Object.keys(r).forEach(e => {
+                sessionId: l
+            } = e, c = t.toISOString(), d = new URL("".concat(this.baseUrl, "/pe"));
+            return d.searchParams.append("t", a), d.searchParams.append("evt", i), d.searchParams.append("ctx", n), d.searchParams.append("lt", c), d.searchParams.append("url", s || window.location.href), void 0 !== o && d.searchParams.append("gid", o), void 0 !== l && d.searchParams.append("sid", l), void 0 !== r && Object.keys(r).forEach(e => {
                 var t;
                 d.searchParams.append(e, (null != (t = r[e]) ? t : "").toString())
             }), fetch(d.href, {
@@ -727,9 +728,9 @@
                 additionalProperties: r,
                 currentUrl: s,
                 guestId: o,
-                sessionId: c
-            } = e, l = t.toISOString(), d = new URL("".concat(this.baseUrl, "/e.png"));
-            return d.searchParams.append("t", a), d.searchParams.append("evt", i), d.searchParams.append("ctx", n), d.searchParams.append("lt", l), d.searchParams.append("url", s || window.location.href), void 0 !== o && d.searchParams.append("gid", o), void 0 !== c && d.searchParams.append("sid", c), void 0 !== r && Object.keys(r).forEach(e => {
+                sessionId: l
+            } = e, c = t.toISOString(), d = new URL("".concat(this.baseUrl, "/e.png"));
+            return d.searchParams.append("t", a), d.searchParams.append("evt", i), d.searchParams.append("ctx", n), d.searchParams.append("lt", c), d.searchParams.append("url", s || window.location.href), void 0 !== o && d.searchParams.append("gid", o), void 0 !== l && d.searchParams.append("sid", l), void 0 !== r && Object.keys(r).forEach(e => {
                 var t;
                 d.searchParams.append(e, (null != (t = r[e]) ? t : "").toString())
             }), d
@@ -785,11 +786,11 @@
                 properties: n,
                 sessionId: r,
                 currentUrl: s
-            } = e, o, c = function(e) {
+            } = e, o, l = function(e) {
                 let t = {};
                 for (let [a, i] of Object.entries(e)) void 0 !== i && (t[a] = i);
                 return t
-            }(n), l = null == (o = (0, i.M)("GuestData")) ? void 0 : o.split("=")[1], d = {
+            }(n), c = null == (o = (0, i.M)("GuestData")) ? void 0 : o.split("=")[1], d = {
                 target: m,
                 eventType: t,
                 context: a,
@@ -798,10 +799,10 @@
                 ...void 0 !== r ? {
                     sessionId: r
                 } : {},
-                ...void 0 !== l ? {
-                    guestId: l
+                ...void 0 !== c ? {
+                    guestId: c
                 } : {},
-                additionalProperties: c
+                additionalProperties: l
             };
             this.eventStreamTracker.sendEventViaImg(d)
         }
@@ -1118,7 +1119,7 @@
                 parameters: i,
                 tags: n,
                 pageContext: r
-            } = e, s = f(), o = this.sessionService.getOrCreateSessionId(), c = new a.W({
+            } = e, s = f(), o = this.sessionService.getOrCreateSessionId(), l = new a.W({
                 product: this.product,
                 url: s,
                 sessionId: o,
@@ -1127,14 +1128,14 @@
                 tags: n,
                 pageContext: r
             });
-            this.events.emit("webvitals", c), this.logEventToLogger(c)
+            this.events.emit("webvitals", l), this.logEventToLogger(l)
         }
         logApiVitalsEvent(e) {
             let {
                 eventName: t,
                 parameters: a,
                 tags: i
-            } = e, n = f(), r = this.sessionService.getOrCreateSessionId(), s = new c({
+            } = e, n = f(), r = this.sessionService.getOrCreateSessionId(), s = new l({
                 product: this.product,
                 url: n,
                 sessionId: r,
@@ -1164,7 +1165,7 @@
                 eventName: t,
                 parameters: a,
                 tags: i
-            } = e, n = f(), r = this.sessionService.getOrCreateSessionId(), s = new l({
+            } = e, n = f(), r = this.sessionService.getOrCreateSessionId(), s = new c({
                 product: this.product,
                 url: n,
                 sessionId: r,
@@ -1221,17 +1222,17 @@
             sessionProductGroup: s,
             disableSession: o = !1
         }) {
-            let c;
-            (0, t._)(this, "eventLoggers", []), (0, t._)(this, "debugMode", !1), (0, t._)(this, "product", void 0), (0, t._)(this, "commonEventParameters", void 0), (0, t._)(this, "sessionProductGroup", void 0), (0, t._)(this, "sessionService", void 0), (0, t._)(this, "hostRoutedEventStreamLogger", void 0), (0, t._)(this, "disableSession", void 0), (0, t._)(this, "lastPageLoadUrl", void 0), (0, t._)(this, "referrer", void 0), (0, t._)(this, "isAutoCollectEnabled", !1), (0, t._)(this, "events", (c = new Map, {
+            let l;
+            (0, t._)(this, "eventLoggers", []), (0, t._)(this, "debugMode", !1), (0, t._)(this, "product", void 0), (0, t._)(this, "commonEventParameters", void 0), (0, t._)(this, "sessionProductGroup", void 0), (0, t._)(this, "sessionService", void 0), (0, t._)(this, "hostRoutedEventStreamLogger", void 0), (0, t._)(this, "disableSession", void 0), (0, t._)(this, "lastPageLoadUrl", void 0), (0, t._)(this, "referrer", void 0), (0, t._)(this, "isAutoCollectEnabled", !1), (0, t._)(this, "events", (l = new Map, {
                 on(e, t) {
-                    c.has(e) ? c.get(e).push(t) : c.set(e, [t])
+                    l.has(e) ? l.get(e).push(t) : l.set(e, [t])
                 },
                 off(e, t) {
-                    c.has(e) && c.set(e, (c.get(e) || []).filter(e => e !== t))
+                    l.has(e) && l.set(e, (l.get(e) || []).filter(e => e !== t))
                 },
                 emit(e, t) {
                     for (var a = arguments.length, i = Array(a > 2 ? a - 2 : 0), n = 2; n < a; n++) i[n - 2] = arguments[n];
-                    (c.get(e) || []).forEach(e => {
+                    (l.get(e) || []).forEach(e => {
                         e(t, ...i)
                     })
                 }
@@ -1254,5 +1255,5 @@
     }])
 }]);
 
-//# debugId=26cfe889-98f5-1e0a-0129-11e4923e35e6
-//# sourceMappingURL=2scv540q38-ka.js.map
+//# debugId=4e25e854-baaf-bdd5-4408-16a5f87b1119
+//# sourceMappingURL=0ygomnaq8bti4.js.map

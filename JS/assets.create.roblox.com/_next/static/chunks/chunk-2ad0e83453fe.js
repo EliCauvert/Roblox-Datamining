@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "85dff9c3-7661-ba92-8be9-f62b57680adf")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "f038cef3-be34-c5ec-4d3e-fe6f781c3bd5")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 69181, e => {
@@ -2943,16 +2943,17 @@
             c = (0, t.useRef)(!1),
             d = (0, t.useRef)(!1),
             u = (0, t.useMemo)(() => {
+                let t;
                 if (!e.isReady) return null;
-                let t = n(e.query.groupId),
-                    i = n(e.query.userId);
-                return null !== t && null !== i ? null : null !== i ? {
+                let i = n(e.query.groupId),
+                    a = (Array.isArray(t = e.query.context) ? t[0] : t) === "personal" || null !== n(e.query.userId);
+                return null !== i && a ? null : a ? {
                     kind: "user"
-                } : null !== t ? {
+                } : null !== i ? {
                     kind: "group",
-                    id: t
+                    id: i
                 } : null
-            }, [e.isReady, e.query.groupId, e.query.userId]),
+            }, [e.isReady, e.query.groupId, e.query.userId, e.query.context]),
             m = (null == u ? void 0 : u.kind) === "group" && (null != r ? r : []).some(e => {
                 let {
                     id: t
@@ -2960,11 +2961,15 @@
                 return t === u.id
             });
         (0, t.useEffect)(() => {
-            !c.current && null !== u && l && (c.current = !0, "user" === u.kind ? null !== s && o(null) : m && (null == s ? void 0 : s.id) !== u.id && o(u.id))
+            !c.current && null !== u && l && (c.current = !0, "user" === u.kind ? o(null) : m && (null == s ? void 0 : s.id) !== u.id && o(u.id))
         }, [u, l, m, s, o]);
         let f = !e.isReady;
-        return f || null === u || (f = "group" === u.kind ? !l || m && (null == s ? void 0 : s.id) !== u.id : !l || null !== s), (0, t.useEffect)(() => {
-            if (d.current || !e.isReady || f || void 0 === e.query.groupId && void 0 === e.query.userId) return;
+        f || null === u || (f = "group" === u.kind ? !l || m && (null == s ? void 0 : s.id) !== u.id : !l || null !== s);
+        let [p, h] = (0, t.useState)(!1);
+        f || null === u || p || h(!0);
+        let v = f && !p;
+        return (0, t.useEffect)(() => {
+            if (d.current || !e.isReady || v || void 0 === e.query.groupId && void 0 === e.query.userId) return;
             d.current = !0;
             let t = {
                 ...e.query
@@ -2974,11 +2979,11 @@
             }, void 0, {
                 shallow: !0
             })
-        }, [e, f]), {
-            isResolving: f
+        }, [e, v]), {
+            isResolving: v
         }
     }])
 }]);
 
-//# debugId=85dff9c3-7661-ba92-8be9-f62b57680adf
-//# sourceMappingURL=0dj_u-g0wkr5i.js.map
+//# debugId=f038cef3-be34-c5ec-4d3e-fe6f781c3bd5
+//# sourceMappingURL=0okg0oy8rh97-.js.map
