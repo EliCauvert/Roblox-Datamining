@@ -144,7 +144,7 @@ Authentication.AccountRecovery.Description.EmailCodeSentForUser,"Chúng tôi v�
 Authentication.AccountRecovery.Description.EmailUnavailableInfo,"Một số email có thể không hiển thị vì đã bị thay đổi do điều chỉnh độ tuổi. Tuy nhiên, bạn vẫn có thể sử dụng các email đó để khôi phục tài khoản."
 Authentication.AccountRecovery.Description.EnhancedProtectionAddPasskey,"Bạn đã đăng ký tham gia Chương trình bảo vệ nâng cao. Để giữ an toàn cho tài khoản, bạn sẽ cần dùng mã xác nhận hoặc khóa bảo mật để đăng nhập.{lineBreak}{lineBreak}Nếu bạn đang sử dụng thiết bị cá nhân, chúng tôi khuyến nghị nên thiết lập mã xác nhận mới ngay bây giờ. Điều này giúp bạn đăng nhập trên thiết bị này dễ dàng hơn trong tương lai. Nếu bạn đang sử dụng thiết bị dùng chung hoặc công cộng, hãy bỏ qua bước này."
 Authentication.AccountRecovery.Description.EnterABackupCode,"Bây giờ, hãy nhập mã dự phòng mà bạn đã lưu."
-Authentication.AccountRecovery.Description.EnterContactMethodAssociatedWithYourAccount,"Nhập địa chỉ email hoặc số điện thoại được liên kết với tài khoản của bạn. Nếu đã từng mua hàng, bạn có thể thử dùng email thanh toán của mình."
+Authentication.AccountRecovery.Description.EnterContactMethodAssociatedWithYourAccount,Nhập email hoặc số điện thoại được liên kết với tài khoản của bạn. Hãy thử dùng email thanh toán nếu bạn đã từng mua hàng.
 Authentication.AccountRecovery.Description.EnterEmailAddress,"Bây giờ, hãy nhập địa chỉ email. Đây có thể là email bạn đã từng sử dụng để mua hàng trên Roblox."
 Authentication.AccountRecovery.Description.EnterPhoneBackupCodeOrAnotherEmail,"Bây giờ, hãy nhập số điện thoại, mã dự phòng hoặc địa chỉ email khác. Đây có thể là email bạn đã từng sử dụng để mua hàng trên Roblox"
 Authentication.AccountRecovery.Description.EnterPhoneNumberSecondMethod,"Bây giờ, hãy nhập số điện thoại được liên kết với tài khoản của bạn."
@@ -3869,6 +3869,7 @@ Feature.Friends.Label.FollowsYou,Theo Dõi Bạn
 Feature.Friends.Label.Frequent,Đã chơi cùng
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,Đã mời bạn trở thành bạn bè trên Roblox
+Feature.Friends.Label.FriendOfUser,Bạn bè của {displayName}
 Feature.Friends.Label.FriendOwns,1 Người bạn sở hữu
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 Người bạn</b> vừa mới chơi
 Feature.Friends.Label.FriendRequest,
@@ -4119,7 +4120,6 @@ Feature.Groups.Description.RequiresAccountTenureTooltipOneMonth,Bạn phải có
 Feature.Groups.Description.RequiresAccountTenureTooltipOneWeek,Bạn phải có tài khoản hoạt động đủ 7 ngày mới có thể tham gia cộng đồng này.
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeDays,Bạn phải có tài khoản hoạt động đủ 3 ngày mới có thể tham gia cộng đồng này.
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeMonths,Bạn phải có tài khoản hoạt động đủ 90 ngày mới có thể tham gia cộng đồng này.
-Feature.Groups.Header.UppercaseMyGroups,CỘNG ĐỒNG CỦA TÔI
 Feature.Groups.Heading.Community,Cộng đồng
 Feature.Groups.Heading.Followers,Người theo dõi
 Feature.Groups.Heading.Groups,
@@ -4386,6 +4386,7 @@ Feature.Moments.Action.ShowDetails,Hiển thị chi tiết
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Cắt video
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Action.View,
 Feature.Moments.Action.ViewOtherFeed,Xem bảng tin khác
 Feature.Moments.Action.ViewRecommended,Xem khoảnh khắc được đề xuất
 Feature.Moments.Action.ViewTrending,Xem khoảnh khắc thịnh hành
@@ -4393,6 +4394,14 @@ Feature.Moments.Body.EDPMomentIPReportInstructions,"Để báo cáo trường h�
 Feature.Moments.Body.MomentPosting,Khoảnh khắc của bạn đang được xử lý.
 Feature.Moments.Description.CommunityStandards,Xem Tiêu chuẩn cộng đồng để biết thêm thông tin về những điều bạn được phép và không được phép nói.
 Feature.Moments.Description.EmptyCapturesLibrary,Ảnh chụp/video quay màn hình của bạn sẽ xuất hiện ở đây.
+Feature.Moments.Description.EngagementFirstLike,Xem ngay
+Feature.Moments.Description.EngagementFirstReaction,Đã có người đầu tiên bày tỏ cảm xúc với Khoảnh khắc của bạn!
+Feature.Moments.Description.EngagementLikedCommentsDigest,{likedComments} bình luận của bạn đã nhận được lượt thích
+Feature.Moments.Description.EngagementMomentDigest,{comments} bình luận mới và {milestone} lượt bày tỏ cảm xúc
+Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementNewComment,vừa bình luận về Khoảnh khắc của bạn
+Feature.Moments.Description.EngagementNewComments,và {count} người khác đã bình luận về Khoảnh khắc của bạn
+Feature.Moments.Description.EngagementReactionMilestone,{count} lượt bày tỏ cảm xúc mới
 Feature.Moments.Description.FollowingCaughtUpBody,Bạn đã xem hết Khoảnh khắc mới trong bảng tin này. Hãy chuyển sang bảng tin khác để xem thêm.
 Feature.Moments.Description.FollowingEmptyBodyRecommended,"Tại đây, bạn sẽ xem được Khoảnh khắc của các nhà sáng tạo mà bạn đang theo dõi."
 Feature.Moments.Description.FollowingEmptyBodyTrending,
@@ -4538,6 +4547,14 @@ Feature.Moments.Title.Comments,Bình luận
 Feature.Moments.Title.CommentsWithCappedCount,{count}+ bình luận
 Feature.Moments.Title.CommentsWithCount,{count} bình luận
 Feature.Moments.Title.EDPMomentIPReportInstructions,Báo cáo trên trang chi tiết của trò chơi
+Feature.Moments.Title.EngagementFirstLike,Đã có người thích bình luận của bạn
+Feature.Moments.Title.EngagementFirstReaction,Hoạt động mới
+Feature.Moments.Title.EngagementLikedCommentsDigest,Lượt thích mới
+Feature.Moments.Title.EngagementMomentDigest,Khoảnh khắc của bạn đang gây sốt
+Feature.Moments.Title.EngagementMomentsDigest,Các Khoảnh khắc của bạn đang gây sốt
+Feature.Moments.Title.EngagementNewComment,{name}
+Feature.Moments.Title.EngagementNewComments,
+Feature.Moments.Title.EngagementReactionMilestone,Khoảnh khắc của bạn đang thu hút sự chú ý
 Feature.Moments.Title.GenerateTextFeedbackReason,Đã xảy ra vấn đề gì?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Rời khỏi quá trình tạo Khoảnh khắc?
@@ -5300,6 +5317,7 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,Ưu đãi chỉ áp dụng cho người mới đăng ký Plus.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,Khi có người mua gói Plus bằng đường liên kết của bạn.
 Feature.RobloxSubscription.Description.ReferralShare,Mời bạn bè đăng ký gói Plus để cả hai cùng nhận được {amount} Robux khi họ mua gói Plus.
+Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,Nhận hiệu ứng hồi sinh với gói Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Khi nhấp chuột vào \u{201C}{ctaText}\u{201D}, bạn đồng ý với <a href=""{termsUrl}"">Điều khoản gói đăng ký của Roblox</a>. Hệ thống sẽ tự động thu phí hằng tháng cho đến khi bạn hủy."
 Feature.RobloxSubscription.Heading.ReferralEntry,Chia sẻ Plus để nhận {amount} Robux
 Feature.RobloxSubscription.Heading.ReferralHistory,Lịch sử giới thiệu

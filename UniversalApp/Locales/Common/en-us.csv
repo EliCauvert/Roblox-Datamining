@@ -3521,6 +3521,7 @@ Feature.Chat.Label.OneToOne.ThemRepliedToYou,Replied to you
 Feature.Chat.Label.OneToOne.YouRepliedToThem,You replied
 Feature.Chat.Label.Pending,
 Feature.Chat.Label.PrivacySettings,Privacy Settings
+Feature.Chat.Label.Reactions,Reactions
 Feature.Chat.Label.ReplyChatInputPlaceholder,Reply to {DISPLAY_NAME}
 Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,Reply to yourself
 Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} said...
@@ -3528,9 +3529,11 @@ Feature.Chat.Label.ReplyingToYourself,You said...
 Feature.Chat.Label.SearchForFriendsAndChat,Search for conversations
 Feature.Chat.Label.SearchFriends,Search for friends
 Feature.Chat.Label.SearchWord,
+Feature.Chat.Label.SelectToRemove,Select to remove
 Feature.Chat.Label.Sent,Sent
 Feature.Chat.Label.SnoozePartyNotifications,Mute in-experience party notifications for:
 Feature.Chat.Label.SwipeToReplyTooltip,Swipe to reply
+Feature.Chat.Label.TapToRemove,Tap to remove
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}d
 Feature.Chat.Label.TimestampHoursAbbreviatedPlural,{num_hours}h
 Feature.Chat.Label.TimestampMinutesAbbreviatedPlural,{num_minutes}m
@@ -4144,7 +4147,6 @@ Feature.Groups.Description.RequiresAccountTenureTooltipOneMonth,You must have an
 Feature.Groups.Description.RequiresAccountTenureTooltipOneWeek,You must have an account for 7 days before joining this community.
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeDays,You must have an account for 3 days before joining this community.
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeMonths,You must have an account for 90 days before joining this community.
-Feature.Groups.Header.UppercaseMyGroups,MY COMMUNITIES
 Feature.Groups.Heading.Community,
 Feature.Groups.Heading.Followers,
 Feature.Groups.Heading.Groups,
@@ -4411,6 +4413,7 @@ Feature.Moments.Action.ShowDetails,Show details
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Trim Video
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Action.View,
 Feature.Moments.Action.ViewOtherFeed,View other feed
 Feature.Moments.Action.ViewRecommended,View Recommended
 Feature.Moments.Action.ViewTrending,View Trending
@@ -4418,6 +4421,14 @@ Feature.Moments.Body.EDPMomentIPReportInstructions,"To report an IP violation in
 Feature.Moments.Body.MomentPosting,Your Moment is being processed.
 Feature.Moments.Description.CommunityStandards,Check the Community Standards for more info on what you can and can't say.
 Feature.Moments.Description.EmptyCapturesLibrary,This is where your Captures will appear.
+Feature.Moments.Description.EngagementFirstLike,View it now
+Feature.Moments.Description.EngagementFirstReaction,Your Moment just got its first reaction!
+Feature.Moments.Description.EngagementLikedCommentsDigest,{likedComments} of your comments got likes
+Feature.Moments.Description.EngagementMomentDigest,{comments} new comments and {milestone} reactions
+Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementNewComment,just commented on your Moment
+Feature.Moments.Description.EngagementNewComments,and {count} others commented on your Moment
+Feature.Moments.Description.EngagementReactionMilestone,{count} new reactions
 Feature.Moments.Description.FollowingCaughtUpBody,You've watched all the new Moments in this feed. Switch feeds to view more.
 Feature.Moments.Description.FollowingEmptyBodyRecommended,You'll see Moments by creators you follow here.
 Feature.Moments.Description.FollowingEmptyBodyTrending,
@@ -4518,7 +4529,7 @@ Feature.Moments.Label.PostFeedbackPostingTitle,Posting Moment
 Feature.Moments.Label.PostRemovedBody,The Moment you posted goes against our Community Standards.
 Feature.Moments.Label.PostedOnDate,Posted on {date}
 Feature.Moments.Label.PublishingRodeoBody,This shouldn't take too long.
-Feature.Moments.Label.Reactions,Reactions
+Feature.Moments.Label.Reactions,
 Feature.Moments.Label.ReportReason.BreaksRules,This post breaks the rules
 Feature.Moments.Label.ReportReason.IntellectualProperty,This post infringes on my intellectual property
 Feature.Moments.Label.ReportSubmittedBody,Thanks for your feedback.
@@ -4563,6 +4574,14 @@ Feature.Moments.Title.Comments,Comments
 Feature.Moments.Title.CommentsWithCappedCount,{count}+ comments
 Feature.Moments.Title.CommentsWithCount,{count} comments
 Feature.Moments.Title.EDPMomentIPReportInstructions,Report on the game details page
+Feature.Moments.Title.EngagementFirstLike,You got a like
+Feature.Moments.Title.EngagementFirstReaction,New activity
+Feature.Moments.Title.EngagementLikedCommentsDigest,New likes
+Feature.Moments.Title.EngagementMomentDigest,Your Moment is hot
+Feature.Moments.Title.EngagementMomentsDigest,Your Moments are hot
+Feature.Moments.Title.EngagementNewComment,{name}
+Feature.Moments.Title.EngagementNewComments,
+Feature.Moments.Title.EngagementReactionMilestone,Your Moment’s getting noticed
 Feature.Moments.Title.GenerateTextFeedbackReason,What went wrong?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Leave Moment creation?
@@ -5067,6 +5086,7 @@ Feature.PlatformRestriction.Action.Signout,
 Feature.PlatformRestriction.Content.NeedPermission,"To use Roblox, you need parent permission. Once your parent has approved, sign out and then sign in again to access Roblox."
 Feature.PlatformRestriction.Title.AskParent,
 Feature.PlayerSearchResults.Action.AddFriend,Add friend
+Feature.PlayerSearchResults.Heading.SearchResults,Search results
 Feature.PlayerSearchResults.Label.FromSearch,From Search
 Feature.PlayerSearchResults.Label.KeywordTooShort,Please enter at least 3 characters
 Feature.PlayerSearchResults.Label.NewUsername,New username

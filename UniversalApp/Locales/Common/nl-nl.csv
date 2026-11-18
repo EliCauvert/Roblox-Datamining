@@ -127,7 +127,7 @@ Authentication.AccountRecovery.Description.EmailCodeSentForUser,"We hebben zojui
 Authentication.AccountRecovery.Description.EmailUnavailableInfo,Sommige e-mailadressen zijn mogelijk niet beschikbaar omdat ze zijn gewijzigd vanwege een leeftijdsverandering. Ze zijn wel nog steeds bruikbaar voor accountherstel.
 Authentication.AccountRecovery.Description.EnhancedProtectionAddPasskey,"Je bent ingeschreven voor het Enhanced Protection Program. Om je account veilig te houden, heb je een toegangssleutel of beveiligingssleutel nodig om je aan te melden.{lineBreak}{lineBreak}Als je je persoonlijke apparaat gebruikt, raden we je aan om nu een nieuwe toegangssleutel in te stellen. Dit maakt het in de toekomst gemakkelijker om je op dit apparaat aan te melden. Als je een gedeeld of openbaar apparaat gebruikt, sla je deze stap over."
 Authentication.AccountRecovery.Description.EnterABackupCode,Voer nu een back-upcode in die je hebt opgeslagen.
-Authentication.AccountRecovery.Description.EnterContactMethodAssociatedWithYourAccount,"Voer een e-mailadres of telefoonnummer in dat mogelijk aan je account is gekoppeld. Als je eerder een aankoop hebt gedaan, kun je je facturerings-e-mailadres proberen."
+Authentication.AccountRecovery.Description.EnterContactMethodAssociatedWithYourAccount,Voer een e-mailadres of telefoonnummer in dat aan je account is gekoppeld. Probeer je facturatie-e-mailadres als je een aankoop hebt gedaan.
 Authentication.AccountRecovery.Description.EnterEmailAddress,Voer nu een e-mailadres in. Dit kan een e-mailadres zijn dat je hebt gebruikt om iets op Roblox te kopen.
 Authentication.AccountRecovery.Description.EnterPhoneBackupCodeOrAnotherEmail,"Voer nu een telefoonnummer, back-upcode of een ander e-mailadres in. Dit kan een e-mailadres zijn dat je hebt gebruikt om iets op Roblox te kopen"
 Authentication.AccountRecovery.Description.EnterPhoneNumberSecondMethod,Voer nu een telefoonnummer in dat aan je account is gekoppeld.
@@ -3851,6 +3851,7 @@ Feature.Friends.Label.FollowsYou,Volgt jou
 Feature.Friends.Label.Frequent,Samen gespeeld
 Feature.Friends.Label.Friend,Vriend
 Feature.Friends.Label.FriendInvite,Heeft je uitgenodigd om vrienden te zijn op Roblox
+Feature.Friends.Label.FriendOfUser,Vriend van {displayName}
 Feature.Friends.Label.FriendOwns,1 vriend bezit
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 vriend</b> speelde onlangs
 Feature.Friends.Label.FriendRequest,
@@ -4101,7 +4102,6 @@ Feature.Groups.Description.RequiresAccountTenureTooltipOneMonth,Je moet al 3 dag
 Feature.Groups.Description.RequiresAccountTenureTooltipOneWeek,
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeDays,
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeMonths,
-Feature.Groups.Header.UppercaseMyGroups,MIJN COMMUNITY'S
 Feature.Groups.Heading.Community,
 Feature.Groups.Heading.Followers,
 Feature.Groups.Heading.Groups,
@@ -4368,6 +4368,7 @@ Feature.Moments.Action.ShowDetails,Details weergeven
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Video inkorten
 Feature.Moments.Action.TryAgain,Nog een keer proberen
+Feature.Moments.Action.View,
 Feature.Moments.Action.ViewOtherFeed,Andere feed bekijken
 Feature.Moments.Action.ViewRecommended,Aanbevolen momenten bekijken
 Feature.Moments.Action.ViewTrending,Populaire momenten bekijken
@@ -4375,6 +4376,14 @@ Feature.Moments.Body.EDPMomentIPReportInstructions,Ga naar de detailpagina van d
 Feature.Moments.Body.MomentPosting,Je moment wordt verwerkt.
 Feature.Moments.Description.CommunityStandards,Lees de Communityrichtlijnen voor meer informatie over wat je wel en niet mag zeggen.
 Feature.Moments.Description.EmptyCapturesLibrary,Hier komen je opnames te staan.
+Feature.Moments.Description.EngagementFirstLike,Nu bekijken
+Feature.Moments.Description.EngagementFirstReaction,Je moment heeft zojuist zijn eerste reactie gekregen!
+Feature.Moments.Description.EngagementLikedCommentsDigest,{likedComments} van je reacties hebben likes gekregen
+Feature.Moments.Description.EngagementMomentDigest,{comments} nieuwe opmerkingen en {milestone} reacties
+Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementNewComment,heeft zojuist op je moment gereageerd
+Feature.Moments.Description.EngagementNewComments,en {count} anderen reageerden op je moment
+Feature.Moments.Description.EngagementReactionMilestone,{count} nieuwe reacties
 Feature.Moments.Description.FollowingCaughtUpBody,Je hebt alle nieuwe momenten in deze feed bekeken. Wissel van feed om er meer te bekijken.
 Feature.Moments.Description.FollowingEmptyBodyRecommended,Je ziet hier momenten van creators die je volgt.
 Feature.Moments.Description.FollowingEmptyBodyTrending,
@@ -4520,6 +4529,14 @@ Feature.Moments.Title.Comments,
 Feature.Moments.Title.CommentsWithCappedCount,{count}+ reacties
 Feature.Moments.Title.CommentsWithCount,{count} reacties
 Feature.Moments.Title.EDPMomentIPReportInstructions,Melden op de detailpagina van de game
+Feature.Moments.Title.EngagementFirstLike,Je hebt een like gekregen
+Feature.Moments.Title.EngagementFirstReaction,Nieuwe activiteit
+Feature.Moments.Title.EngagementLikedCommentsDigest,Nieuwe likes
+Feature.Moments.Title.EngagementMomentDigest,Je moment is populair
+Feature.Moments.Title.EngagementMomentsDigest,Je momenten zijn populair
+Feature.Moments.Title.EngagementNewComment,{name}
+Feature.Moments.Title.EngagementNewComments,
+Feature.Moments.Title.EngagementReactionMilestone,Je moment valt op
 Feature.Moments.Title.GenerateTextFeedbackReason,Wat is er misgegaan?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Moment maken afsluiten?
@@ -5282,6 +5299,7 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,Aanbieding alleen geldig voor nieuwe Plus-abonnees.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,Wanneer iemand Plus afsluit via jouw link.
 Feature.RobloxSubscription.Description.ReferralShare,Nodig iemand uit voor Plus en jullie krijgen allebei {amount} Robux wanneer die persoon Plus afsluit.
+Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,Krijg spawneffecten met Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Door op {201C}{ctaText} te klikken{201D}, ga je akkoord met de <a href=""{termsUrl}"">Abonnementsvoorwaarden van Roblox</a>. Er worden elke maand automatisch kosten in rekening gebracht totdat je opzegt."
 Feature.RobloxSubscription.Heading.ReferralEntry,Deel Plus om {amount} Robux te krijgen
 Feature.RobloxSubscription.Heading.ReferralHistory,Doorverwijzingsgeschiedenis

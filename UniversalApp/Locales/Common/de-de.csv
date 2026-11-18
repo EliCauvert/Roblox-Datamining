@@ -144,7 +144,7 @@ Authentication.AccountRecovery.Description.EmailCodeSentForUser,"Wir haben gerad
 Authentication.AccountRecovery.Description.EmailUnavailableInfo,"Einige E-Mail-Adressen sind möglicherweise nicht verfügbar, da sie aufgrund einer Altersänderung geändert wurden. Sie können jedoch weiterhin zur Kontowiederherstellung verwendet werden."
 Authentication.AccountRecovery.Description.EnhancedProtectionAddPasskey,"Du bist für das erweiterte Schutzprogramm angemeldet. Um dein Konto zu schützen, benötigst du einen Passkey oder Sicherheitsschlüssel, um dich anzumelden.{lineBreak}{lineBreak}Wenn du gerade dein persönliches Gerät verwendest, solltest du jetzt einen neuen Passkey einrichten. So kannst du dich in Zukunft leichter auf diesem Gerät anmelden. Wenn du gerade ein gemeinsam genutztes oder öffentliches Gerät verwendest, überspringe bitte diesen Schritt."
 Authentication.AccountRecovery.Description.EnterABackupCode,Gib jetzt einen von dir gespeicherten Backup-Code ein.
-Authentication.AccountRecovery.Description.EnterContactMethodAssociatedWithYourAccount,"Gib eine E-Mail-Adresse oder Telefonnummer ein, von der du denkst, dass sie mit deinem Konto verknüpft sein könnte. Wenn du schon einmal einen Kauf getätigt hast, versuche es mit der E-Mail-Adresse, die du für die Zahlung verwendet hast."
+Authentication.AccountRecovery.Description.EnterContactMethodAssociatedWithYourAccount,"Gib eine E-Mail-Adresse oder Telefonnummer ein, die mit deinem Konto verknüpft ist. Versuche es mit deiner Rechnungs-E-Mail-Adresse, wenn du einen Kauf getätigt hast."
 Authentication.AccountRecovery.Description.EnterEmailAddress,"Gib jetzt eine E-Mail-Adresse ein. Dies kann eine E-Mail-Adresse sein, die du verwendet hast, um etwas auf Roblox zu kaufen."
 Authentication.AccountRecovery.Description.EnterPhoneBackupCodeOrAnotherEmail,"Gib jetzt eine Telefonnummer, deinen Backup-Code oder eine andere E-Mail-Adresse ein. Dies kann eine E-Mail-Adresse sein, die du verwendet hast, um etwas auf Roblox zu kaufen."
 Authentication.AccountRecovery.Description.EnterPhoneNumberSecondMethod,"Gib jetzt eine Telefonnummer ein, die mit deinem Konto verknüpft ist."
@@ -3859,13 +3859,14 @@ Feature.Friends.Label.FollowsYou,Folgt dir
 Feature.Friends.Label.Frequent,Zusammen gespielt
 Feature.Friends.Label.Friend,Freund
 Feature.Friends.Label.FriendInvite,"Hat dich eingeladen, auf Roblox befreundet zu sein"
+Feature.Friends.Label.FriendOfUser,Freund von {displayName}
 Feature.Friends.Label.FriendOwns,1 Freund besitzt
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 Freund</b> hat kürzlich gespielt
 Feature.Friends.Label.FriendRequest,
 Feature.Friends.Label.FriendingTooltip,Hinweis zu Freundschaftsanfragen
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,Freunde sind jetzt Connections!
-Feature.Friends.Label.FriendsHintBold,Lasst und spielen!
+Feature.Friends.Label.FriendsHintBold,Lasst uns spielen!
 Feature.Friends.Label.FriendsHintPlain,Füge zunächst einen Freund hinzu.
 Feature.Friends.Label.FriendsOwn,{numberOfConnections} Freunde besitzen
 Feature.Friends.Label.FriendsPlayed,{numberOfConnections} haben gespielt
@@ -4109,7 +4110,6 @@ Feature.Groups.Description.RequiresAccountTenureTooltipOneMonth,"Du musst seit 3
 Feature.Groups.Description.RequiresAccountTenureTooltipOneWeek,"Du musst seit 7 Tagen ein Konto haben, bevor du dieser Community beitreten kannst."
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeDays,"Du musst seit 3 Tagen ein Konto haben, bevor du dieser Community beitreten kannst."
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeMonths,"Du musst seit 90 Tagen ein Konto haben, bevor du dieser Community beitreten kannst."
-Feature.Groups.Header.UppercaseMyGroups,MEINE COMMUNITYS
 Feature.Groups.Heading.Community,
 Feature.Groups.Heading.Followers,
 Feature.Groups.Heading.Groups,
@@ -4376,6 +4376,7 @@ Feature.Moments.Action.ShowDetails,Details anzeigen
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Video zuschneiden
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Action.View,
 Feature.Moments.Action.ViewOtherFeed,Anderen Feed anzeigen
 Feature.Moments.Action.ViewRecommended,Empfehlungen anzeigen
 Feature.Moments.Action.ViewTrending,Trends anzeigen
@@ -4383,6 +4384,14 @@ Feature.Moments.Body.EDPMomentIPReportInstructions,"Um einen Verstoß gegen das 
 Feature.Moments.Body.MomentPosting,Dein Moment wird verarbeitet.
 Feature.Moments.Description.CommunityStandards,"In den Community-Regeln findest du weitere Informationen darüber, was du schreiben darfst und was nicht."
 Feature.Moments.Description.EmptyCapturesLibrary,Hier werden deine Aufnahmen angezeigt.
+Feature.Moments.Description.EngagementFirstLike,Jetzt anzeigen
+Feature.Moments.Description.EngagementFirstReaction,Dein Moment hat gerade seine erste Reaktion erhalten!
+Feature.Moments.Description.EngagementLikedCommentsDigest,{likedComments} deiner Kommentare haben Likes erhalten.
+Feature.Moments.Description.EngagementMomentDigest,{comments} neue Kommentare und {milestone} Reaktionen
+Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementNewComment,hat gerade deinen Moment kommentiert.
+Feature.Moments.Description.EngagementNewComments,und {count} weitere Personen haben deinen Moment kommentiert.
+Feature.Moments.Description.EngagementReactionMilestone,{count} neue Reaktionen
 Feature.Moments.Description.FollowingCaughtUpBody,"Du hast dir alle neuen Moments in diesem Feed angesehen. Wechsle die Feeds, um mehr anzuzeigen."
 Feature.Moments.Description.FollowingEmptyBodyRecommended,"Hier siehst du Moments von Creatorn, denen du folgst."
 Feature.Moments.Description.FollowingEmptyBodyTrending,
@@ -4528,6 +4537,14 @@ Feature.Moments.Title.Comments,Kommentare
 Feature.Moments.Title.CommentsWithCappedCount,Über {count} Kommentare
 Feature.Moments.Title.CommentsWithCount,{count} Kommentare
 Feature.Moments.Title.EDPMomentIPReportInstructions,Auf der Detailseite des Spiels melden
+Feature.Moments.Title.EngagementFirstLike,Du hast ein Like erhalten
+Feature.Moments.Title.EngagementFirstReaction,Neue Aktivität
+Feature.Moments.Title.EngagementLikedCommentsDigest,Neue Likes
+Feature.Moments.Title.EngagementMomentDigest,Dein Moment ist angesagt
+Feature.Moments.Title.EngagementMomentsDigest,Deine Moments sind beliebt
+Feature.Moments.Title.EngagementNewComment,{name}
+Feature.Moments.Title.EngagementNewComments,
+Feature.Moments.Title.EngagementReactionMilestone,Dein Moment wird bemerkt
 Feature.Moments.Title.GenerateTextFeedbackReason,Was ist schiefgelaufen?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Moment-Kreation verlassen?
@@ -5287,6 +5304,7 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,Das Angebot gilt nur für neue Plus-Abonnenten.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,Wenn jemand über deinen Link Plus kauft.
 Feature.RobloxSubscription.Description.ReferralShare,"Lade jemanden zu Plus ein. Wenn die Person Plus kauft, erhaltet ihr beide {amount} Robux."
+Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,Hol dir Spawn-Effekte mit dem Plus-Abo
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Indem du auf \u{201C}{ctaText}\u{201D} klickst, stimmst du den <a href=""{termsUrl}"">Abonnementbedingungen von Roblox</a> zu. Dir wird jeden Monat automatisch eine Gebühr berechnet, bis du das Abo kündigst."
 Feature.RobloxSubscription.Heading.ReferralEntry,"Lade jemanden zu Plus ein, um {amount} Robux zu erhalten"
 Feature.RobloxSubscription.Heading.ReferralHistory,Empfehlungsverlauf

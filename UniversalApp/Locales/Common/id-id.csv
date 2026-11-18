@@ -144,7 +144,7 @@ Authentication.AccountRecovery.Description.EmailCodeSentForUser,"Kami baru saja 
 Authentication.AccountRecovery.Description.EmailUnavailableInfo,"Beberapa email mungkin tidak tersedia karena telah diubah akibat perubahan usia. Namun, email tersebut tetap dapat digunakan untuk pemulihan akun."
 Authentication.AccountRecovery.Description.EnhancedProtectionAddPasskey,"Kamu terdaftar dalam Program Perlindungan yang Ditingkatkan. Untuk menjaga keamanan akunmu, kamu memerlukan passkey atau kunci keamanan untuk log in.{lineBreak}{lineBreak}Jika kamu menggunakan perangkat pribadi, kami merekomendasikan untuk mengatur passkey baru sekarang. Ini akan memudahkanmu untuk log in di perangkat ini di masa mendatang. Jika kamu menggunakan perangkat bersama atau publik, lewati langkah ini."
 Authentication.AccountRecovery.Description.EnterABackupCode,"Sekarang, masukkan kode pemulihan yang telah kamu simpan."
-Authentication.AccountRecovery.Description.EnterContactMethodAssociatedWithYourAccount,"Masukkan alamat email atau nomor ponsel yang mungkin terhubung dengan akunmu. Jika kamu pernah melakukan pembelian sebelumnya, coba gunakan alamat email penagihanmu."
+Authentication.AccountRecovery.Description.EnterContactMethodAssociatedWithYourAccount,Masukkan alamat email atau nomor ponsel apa pun yang terhubung dengan akunmu. Coba email penagihan kalau kamu pernah melakukan pembelian.
 Authentication.AccountRecovery.Description.EnterEmailAddress,"Sekarang, masukkan alamat email. Ini bisa berupa email yang pernah kamu gunakan untuk membeli sesuatu di Roblox."
 Authentication.AccountRecovery.Description.EnterPhoneBackupCodeOrAnotherEmail,"Sekarang, masukkan nomor ponsel, kode pemulihan, atau alamat email lain. Ini bisa berupa email yang pernah kamu gunakan untuk membeli sesuatu di Roblox"
 Authentication.AccountRecovery.Description.EnterPhoneNumberSecondMethod,"Sekarang, masukkan nomor ponsel yang terhubung dengan akunmu."
@@ -181,7 +181,7 @@ Authentication.AccountRecovery.Heading.NoChangesMade,Tidak ada perubahan yang di
 Authentication.AccountRecovery.Heading.PasskeyAdded,Passkey ditambahkan
 Authentication.AccountRecovery.Heading.PhoneNumberAdded,Nomor ponsel ditambahkan
 Authentication.AccountRecovery.Heading.ResetPassword,Reset Password
-Authentication.AccountRecovery.Heading.RobloxAccountRecovery,Pemulihan Akun Roblox
+Authentication.AccountRecovery.Heading.RobloxAccountRecovery,Pemulihan akun Roblox
 Authentication.AccountRecovery.Heading.SaveTwoStepMethod,Apakah kami perlu mempertahankan metode verifikasi 2 langkah yang sudah ada?
 Authentication.AccountRecovery.Heading.TwoStepMethodAdded,{value} ditambahkan
 Authentication.AccountRecovery.Heading.UpdateEmail,Update Email-mu
@@ -3867,6 +3867,7 @@ Feature.Friends.Label.FollowsYou,Mengikuti Kamu
 Feature.Friends.Label.Frequent,Dimainkan bersama
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,Mengundang kamu untuk berteman di Roblox
+Feature.Friends.Label.FriendOfUser,Teman dari {displayName}
 Feature.Friends.Label.FriendOwns,1 Teman memiliki
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 Teman</b> telah bermain baru-baru ini
 Feature.Friends.Label.FriendRequest,
@@ -4117,7 +4118,6 @@ Feature.Groups.Description.RequiresAccountTenureTooltipOneMonth,Kamu harus memil
 Feature.Groups.Description.RequiresAccountTenureTooltipOneWeek,Kamu harus memiliki akun selama 7 hari sebelum dapat bergabung ke komunitas ini.
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeDays,Kamu harus memiliki akun selama 3 hari sebelum dapat bergabung ke komunitas ini.
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeMonths,Kamu harus memiliki akun selama 90 hari sebelum dapat bergabung ke komunitas ini.
-Feature.Groups.Header.UppercaseMyGroups,KOMUNITAS SAYA
 Feature.Groups.Heading.Community,
 Feature.Groups.Heading.Followers,
 Feature.Groups.Heading.Groups,
@@ -4384,6 +4384,7 @@ Feature.Moments.Action.ShowDetails,Tampilkan detail
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Potong Video
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Action.View,
 Feature.Moments.Action.ViewOtherFeed,Lihat feed lainnya
 Feature.Moments.Action.ViewRecommended,Lihat yang Direkomendasikan
 Feature.Moments.Action.ViewTrending,Lihat yang Sedang Tren
@@ -4391,6 +4392,14 @@ Feature.Moments.Body.EDPMomentIPReportInstructions,"Untuk melaporkan pelanggaran
 Feature.Moments.Body.MomentPosting,Moment-mu sedang diproses.
 Feature.Moments.Description.CommunityStandards,Periksa Standar Komunitas untuk melihat informasi selengkapnya tentang hal yang boleh dan tidak boleh kamu katakan.
 Feature.Moments.Description.EmptyCapturesLibrary,Mediamu akan muncul di sini.
+Feature.Moments.Description.EngagementFirstLike,Lihat sekarang
+Feature.Moments.Description.EngagementFirstReaction,Moment-mu baru saja mendapat reaksi pertama.
+Feature.Moments.Description.EngagementLikedCommentsDigest,{likedComments} komentarmu mendapat suka
+Feature.Moments.Description.EngagementMomentDigest,{comments} komentar baru dan {milestone} reaksi
+Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementNewComment,baru saja mengomentari Moment-mu
+Feature.Moments.Description.EngagementNewComments,dan {count} orang lainnya mengomentari Moment-mu
+Feature.Moments.Description.EngagementReactionMilestone,{count} reaksi baru
 Feature.Moments.Description.FollowingCaughtUpBody,Kamu sudah menonton semua Moment baru di feed ini. Beralih feed untuk melihat lebih banyak.
 Feature.Moments.Description.FollowingEmptyBodyRecommended,Kamu akan melihat Moment dari kreator yang kamu ikuti di sini.
 Feature.Moments.Description.FollowingEmptyBodyTrending,
@@ -4536,6 +4545,14 @@ Feature.Moments.Title.Comments,Komentar
 Feature.Moments.Title.CommentsWithCappedCount,{count}+ komentar
 Feature.Moments.Title.CommentsWithCount,{count} komentar
 Feature.Moments.Title.EDPMomentIPReportInstructions,Laporkan di halaman detail game
+Feature.Moments.Title.EngagementFirstLike,Kamu mendapat suka
+Feature.Moments.Title.EngagementFirstReaction,Aktivitas baru
+Feature.Moments.Title.EngagementLikedCommentsDigest,Suka baru
+Feature.Moments.Title.EngagementMomentDigest,Moment-mu sedang populer
+Feature.Moments.Title.EngagementMomentsDigest,
+Feature.Moments.Title.EngagementNewComment,{name}
+Feature.Moments.Title.EngagementNewComments,
+Feature.Moments.Title.EngagementReactionMilestone,Moment-mu mulai menarik perhatian
 Feature.Moments.Title.GenerateTextFeedbackReason,Apa masalahnya?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Keluar dari kreasi Moment?
@@ -5298,6 +5315,7 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,Penawaran hanya berlaku untuk subscriber Plus baru.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,Ketika ada yang membeli Plus menggunakan link-mu.
 Feature.RobloxSubscription.Description.ReferralShare,Undang seseorang ke Plus dan kalian akan mendapatkan {amount} Robux saat dia membeli Plus.
+Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,Dapatkan efek spawn dengan Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Dengan mengklik \u{201C}{ctaText}\u{201D}, kamu menyetujui <a href=""{termsUrl}"">Ketentuan Subscription Roblox</a>. Biaya akan otomatis dibebankan setiap bulan hingga kamu membatalkan."
 Feature.RobloxSubscription.Heading.ReferralEntry,Bagikan Plus untuk mendapatkan {amount} Robux
 Feature.RobloxSubscription.Heading.ReferralHistory,Riwayat referral
