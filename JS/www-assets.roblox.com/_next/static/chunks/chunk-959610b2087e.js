@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "8a64e17a-a8db-e13d-18ac-c6687cc52e61")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "7a3ee6f5-23a6-4ac9-03c6-1ec9988b1cf0")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 579149, (e, t, r) => {
@@ -587,7 +587,7 @@
             }, e.useStripe = function() {
                 return F("calls useStripe()").stripe
             }
-        }(r, e.r(420482))
+        }(r, e.r(371847))
 }, 921743, e => {
     e.q("https://www-assets.roblox.com/_next/static/media/blue_check_12x12.svg.01ey6hbizodff.svg")
 }, 354624, (e, t, r) => {
@@ -681,16 +681,16 @@
 }, 518623, e => {
     "use strict";
     let t, r, n, a, i, s;
-    var l, o, c, u, d, m, p, h, f, g, x, b, y, v, S, P, C, E, w, N, k, T, j, A, M, R, I, U, _, F, L = e.i(19836),
+    var l, o, c, u, d, m, p, h, f, g, x, b, y, v, S, P, C, E, w, N, k, T, j, A, M, R, I, U, _, F, L = e.i(809804),
         D = e.i(910030),
         B = e.i(391855),
-        O = e.i(420482),
+        O = e.i(371847),
         G = e.i(144674),
-        z = e.i(778935),
-        V = e.i(55001),
-        W = e.i(520250),
-        K = e.i(326404),
-        H = e.i(378944),
+        z = e.i(491965),
+        V = e.i(982249),
+        W = e.i(511336),
+        K = e.i(312319),
+        H = e.i(964433),
         Q = e.i(7284);
     let $ = {
             Info: "icon-filled-circle-i",
@@ -1411,11 +1411,11 @@
         },
         ENUM_VIEW_MESSAGE: {
             ROBLOX_PLUS_FREE_TRIAL: e5,
-            ROBLOX_PLUS_SUBSCRIBE: e4,
-            ROBLOX_PLUS_LEARN_MORE: e8
+            ROBLOX_PLUS_SUBSCRIBE: e6,
+            ROBLOX_PLUS_LEARN_MORE: e4
         }
     } = G.paymentFlowAnalyticsService;
-    var e6 = e.i(951605);
+    var e8 = e.i(951605);
     let {
         ENUM_VIEW_NAME: {
             ROBUX_SEND_TRANSFERS: e9,
@@ -1578,7 +1578,7 @@
                 sectionNames: i.toString(),
                 subscriptionProductIds: s.toString()
             }), [c, l, e, r, t, a, n, i, s]), y = (0, O.useCallback)((e, t, r, n) => {
-                G.paymentFlowAnalyticsService.sendUserPurchaseFlowEvent({
+                G.paymentFlowAnalyticsService.sendUserPurchaseFlowEventViaFetch({
                     triggerContext: eQ(o, e === p),
                     isMidPurchaseStep: !0,
                     viewName: e,
@@ -1590,7 +1590,7 @@
                     }
                 })
             }, [b, p, o]), v = (0, O.useCallback)((e, t, r) => {
-                G.paymentFlowAnalyticsService.sendUserPurchaseStatusEvent({
+                G.paymentFlowAnalyticsService.sendUserPurchaseStatusEventViaFetch({
                     triggerContext: eQ(o, e === p),
                     status: t,
                     viewMessage: r,
@@ -1598,8 +1598,14 @@
                 })
             }, [p, o]);
             return (0, O.useEffect)(() => {
-                void 0 !== a && void 0 !== c && y(h, g)
-            }, [a, c, y, h, g]), (0, O.useEffect)(() => {
+                G.paymentFlowAnalyticsService.sendUserPurchaseFlowEventViaFetch({
+                    triggerContext: eQ(o, !1),
+                    isMidPurchaseStep: !0,
+                    viewName: h,
+                    purchaseEventType: g,
+                    eventMetadata: b
+                })
+            }, [b, o, h, g]), (0, O.useEffect)(() => {
                 (u.length > 0 || d.length > 0 || m.length > 0) && y(f, x, void 0, {
                     seenProducts: u.toString(),
                     seenSections: d.toString(),
@@ -1741,7 +1747,7 @@
                     t(e ? s : l, o, e ? n : r)
                 }, [t, s, l, o, n, r]),
                 trackPurchaseDisabledShown: (0, O.useCallback)(e => {
-                    t(e ? s : l, c, e6.UserPurchaseSettingFailureReason.PurchaseNotEnabled)
+                    t(e ? s : l, c, e8.UserPurchaseSettingFailureReason.PurchaseNotEnabled)
                 }, [t, s, l, c])
             }
         }(r), o = function(e) {
@@ -1855,14 +1861,14 @@
                         isFreeTrial: String(r),
                         productId: n,
                         isRedirect: String(a)
-                    }), t(e1, e2, r ? e5 : e4, {
+                    }), t(e1, e2, r ? e5 : e6, {
                         isFreeTrial: String(r),
                         productId: n,
                         isRedirect: String(a)
                     })
                 }, [t]),
                 trackSubscriptionV2LearnMoreClick: (0, O.useCallback)(() => {
-                    eE("SubscriptionV2LearnMoreClick"), t(e1, e2, e8)
+                    eE("SubscriptionV2LearnMoreClick"), t(e1, e2, e4)
                 }, [t])
             }
         }(r), m = function(e) {
@@ -2026,8 +2032,8 @@
             }))
         }
     }
-    var tP = e.i(698178),
-        tC = e.i(251734);
+    var tP = e.i(727516),
+        tC = e.i(332210);
 
     function tE(e) {
         let {
@@ -2333,9 +2339,9 @@
             })
         })
     }
-    var tR = e.i(424935),
-        tI = e.i(677810),
-        tU = e.i(263730),
+    var tR = e.i(939747),
+        tI = e.i(242637),
+        tU = e.i(459089),
         t_ = e.i(698870);
 
     function tF() {
@@ -2518,9 +2524,9 @@
         })
     }
     var tL = e.i(155581),
-        tD = e.i(967715),
-        tB = e.i(495039),
-        tO = e.i(908740),
+        tD = e.i(659209),
+        tB = e.i(644165),
+        tO = e.i(641614),
         tG = e.i(453893);
     let tz = O.createContext({
             hasCloseAffordance: !1,
@@ -2620,8 +2626,8 @@
                 className: (0, Q.default)("text-body-medium content-default padding-top-xsmall", r)
             }, t)
         };
-    var tq = e.i(433424),
-        tY = e.i(417902);
+    var tq = e.i(411425),
+        tY = e.i(638516);
     let tX = e => {
         let {
             ariaLabel: t
@@ -2656,10 +2662,10 @@
         } = e;
         return parseFloat((r + t / 1e9).toFixed(2))
     };
-    var t5 = e.i(255447),
-        t4 = e.i(559170);
-    let t8 = e => e?.paymentProfileType === "paypal",
-        t6 = "****";
+    var t5 = e.i(713633),
+        t6 = e.i(726799);
+    let t4 = e => e?.paymentProfileType === "paypal",
+        t8 = "****";
 
     function t9(e, t) {
         return new Intl.DateTimeFormat("default", {
@@ -2673,7 +2679,7 @@
             expirationLabel: t,
             payload: r
         } = e, n = "payment-method-container text-body-small medium:text-body-large";
-        return t8(r) ? (0, L.jsxs)("span", {
+        return t4(r) ? (0, L.jsxs)("span", {
             className: n,
             children: [(0, L.jsx)("span", {
                 className: "payment-method-image card-icon icon-paypal"
@@ -2689,7 +2695,7 @@
                 className: "card-number",
                 children: [(0, L.jsx)("span", {
                     className: "card-asterisk-mask",
-                    children: t6
+                    children: t8
                 }), (0, L.jsx)("span", {
                     className: "payment-profile-label",
                     children: r.Last4Digits
@@ -2717,7 +2723,7 @@
         return s?.providerPayload ? (0, L.jsx)(t5.Dropdown, {
             size: "Large",
             value: s.id,
-            placeholder: (t = s.providerPayload, r = o("QuickPay.Expiration"), t8(t) ? t.Email ?? "" : `${t6}${t.Last4Digits} ${r} ${t9(t.ExpMonth,t.ExpYear)}`),
+            placeholder: (t = s.providerPayload, r = o("QuickPay.Expiration"), t4(t) ? t.Email ?? "" : `${t8}${t.Last4Digits} ${r} ${t9(t.ExpMonth,t.ExpYear)}`),
             hasError: !!n,
             hint: n && o.has(n) ? o(n) : void 0,
             onOpenChange: e => {
@@ -2728,9 +2734,9 @@
                 let t = i.find(t => t.id === e);
                 t && a(t)
             },
-            children: (0, L.jsx)(t4.Menu, {
-                children: (0, L.jsx)(t4.MenuSection, {
-                    children: i.map(e => (0, L.jsx)(t4.MenuItem, {
+            children: (0, L.jsx)(t6.Menu, {
+                children: (0, L.jsx)(t6.MenuSection, {
+                    children: i.map(e => (0, L.jsx)(t6.MenuItem, {
                         value: e.id,
                         title: (0, L.jsx)(t7, {
                             expirationLabel: o("QuickPay.Expiration"),
@@ -3795,7 +3801,7 @@
                     }), i?.label ?? "4+"),
                     appMinorVersion: a.appMinorVersion,
                     isSub: a.isSub
-                }), G.paymentFlowAnalyticsService.sendUserPurchaseFlowEvent({
+                }), G.paymentFlowAnalyticsService.sendUserPurchaseFlowEventViaFetch({
                     triggerContext: a.triggerContext,
                     isMidPurchaseStep: !0,
                     viewName: G.paymentFlowAnalyticsService.ENUM_VIEW_NAME.NATIVE_PURCHASE_UI_SHOWN_TIME,
@@ -4114,9 +4120,9 @@
             children: t
         })
     }
-    var r4 = e.i(562528),
-        r8 = e.i(248951),
-        r6 = e.i(871623),
+    var r6 = e.i(562528),
+        r4 = e.i(248951),
+        r8 = e.i(871623),
         r9 = ((_ = {}).CardDeclined = "Message.QuickPay.CardDeclinedError", _.CardExpired = "Message.QuickPay.ExpiredCardError", _.GenericError = "Message.QuickPay.GenericError", _.InsufficientFunds = "Message.QuickPay.InsufficientFundsError", _);
     let r7 = (e, t) => {
         ew("QuickPay3DSFlow", {
@@ -4247,7 +4253,7 @@
                 let t;
                 if (!e) return;
                 let r = "unknown";
-                (t = e.providerPayload, t?.paymentProfileType === "card") ? r = "card": t8(e.providerPayload) && (r = "paypal"), eE("QuickPayPaymentMethodSelected", {
+                (t = e.providerPayload, t?.paymentProfileType === "card") ? r = "card": t4(e.providerPayload) && (r = "paypal"), eE("QuickPayPaymentMethodSelected", {
                     method: r
                 })
             }, []), H = (0, O.useCallback)(async () => {
@@ -4279,7 +4285,7 @@
                             if (void 0 === et.window) throw Error("Stripe public API key selection requires a browser environment");
                             return et.window.location.href.includes("sitetest1") ? "pk_test_51LNM0XG5RADBkfjhYJlpADA2ArzWIh7gTWTodYNbpEzSiT55dul3VJhaBIVHL0CNyO0gECOz1vPnWArAkjwQ8NBO00Cdf2PxED" : et.window.location.href.includes("sitetest3") ? "pk_test_51LNOeQHDRNiW7vlLcKH8TGCpJ7zhaidLdSegE22GCuvQbVUX2xDiGJY6WYaldYyo6qgVxmy1SnSVpSdaqyjfqclU00NQwWntIe" : "pk_live_51LKpO9C8tJWGhK4HEHtny9Dg7xXiQJ1i349cq6KBDusbl8bRHO7QmCKKhX18LPjSirMNTvj3tesq6mhIQuPioeAd0062ZCgoF3"
                         }(),
-                        t = await (0, r4.loadStripe)(e);
+                        t = await (0, r6.loadStripe)(e);
                     F(t)
                 } catch (e) {
                     ew("QuickPayStripeException", null, e)
@@ -4295,7 +4301,7 @@
                 if (!o || !s) return;
                 W.current += 1;
                 let c = W.current,
-                    u = t8(l.providerPayload);
+                    u = t4(l.providerPayload);
                 eE("QuickPayPreparePaymentFlow", {
                     step: "start"
                 });
@@ -4351,7 +4357,7 @@
                     isLoading: !1
                 };
                 m();
-                let t = t8(M?.providerPayload);
+                let t = t4(M?.providerPayload);
                 if (!s) return {
                     isLoading: !1
                 };
@@ -4433,7 +4439,7 @@
                 if (0 === r.Units && 0 === r.Nanos || !t) return h("Message.QuickPay.Tax");
                 let i = "";
                 try {
-                    let e = new r6.default,
+                    let e = new r8.default,
                         t = parseFloat(a);
                     t > 0 && (i = e.n(t))
                 } catch (e) {
@@ -4495,7 +4501,7 @@
                                     let t = new URL(e);
                                     return "http:" === t.protocol || "https:" === t.protocol
                                 } catch (e) {
-                                    return (0, r8.captureException)(e), !1
+                                    return (0, r4.captureException)(e), !1
                                 }
                             })(a)) return r7("urlNotSet"), r9.GenericError;
                         let e = new URL(a).searchParams.get("payment_intent_client_secret");
@@ -4517,7 +4523,7 @@
                     }
                 }
             }, [_, a, r, f]), J = (0, O.useCallback)(e => {
-                R(e), K(e), I && $(I, x, S, e).catch(r8.captureException)
+                R(e), K(e), I && $(I, x, S, e).catch(r4.captureException)
             }, [K, I, $, x, S]), Z = (0, O.useCallback)(() => {
                 V(e => !e)
             }, []), ee = (0, O.useCallback)(() => {
@@ -4526,9 +4532,9 @@
                 A(!1)
             }, []);
             return (0, O.useEffect)(() => {
-                d || H().catch(r8.captureException)
+                d || H().catch(r4.captureException)
             }, [H, d]), (0, O.useEffect)(() => {
-                !d && y && Q().catch(r8.captureException)
+                !d && y && Q().catch(r4.captureException)
             }, [d, y, Q]), (0, O.useMemo)(() => ({
                 checkoutSessionId: f,
                 isBonusItem: x,
@@ -4823,17 +4829,57 @@
             target: "_blank"
         }
     });
+    var np = e.i(256368);
 
-    function np(e) {
+    function nh(e) {
         let {
-            metadata: t
-        } = e, r = (0, ei.useTranslations)("Feature.PersonalizedBonus"), {
-            bonusItemBannerImageUrl: n,
-            bonusItemImageUrl: a,
-            deviceMeta: i
-        } = (0, O.useContext)(em), s = eO(i), l = eB(i), o = (0, O.useCallback)(() => {
-            void 0 !== et.window && (s || l ? et.window.location.href = "/support" : et.window.open("/support", "_blank"))
-        }, [s, l]);
+            surfaceKey: t,
+            className: r
+        } = e, [n, a] = (0, O.useState)(!1), i = (0, ei.useTranslations)("Feature.BuyRobux")("Action.ContentPersonalization", void 0, "Content personalization");
+        return (0, L.jsxs)(np.Popover, {
+            open: n,
+            onOpenChange: a,
+            children: [(0, L.jsx)(np.PopoverTrigger, {
+                asChild: !0,
+                children: (0, L.jsx)(tR.IconButton, {
+                    className: (0, nn.default)("bg-none shrink-0", r),
+                    icon: "icon-regular-three-dots-horizontal",
+                    ariaLabel: i,
+                    variant: "Utility",
+                    size: "Small"
+                })
+            }), (0, L.jsx)(np.PopoverContent, {
+                side: "bottom",
+                align: "end",
+                ariaLabel: i,
+                children: (0, L.jsx)(t6.Menu, {
+                    size: "Medium",
+                    children: (0, L.jsx)(t6.MenuItem, {
+                        value: "personalized-recommendations",
+                        title: i,
+                        leading: (0, L.jsx)(z.Icon, {
+                            name: "icon-regular-gear"
+                        }),
+                        onSelect: () => {
+                            a(!1), et.window?.location.assign("/my/account#!/personalized-recommendations")
+                        }
+                    })
+                })
+            })]
+        })
+    }
+
+    function nf(e) {
+        let {
+            metadata: t,
+            showPersonalizedRecommendationsMenu: r
+        } = e, n = (0, ei.useTranslations)("Feature.PersonalizedBonus"), {
+            bonusItemBannerImageUrl: a,
+            bonusItemImageUrl: i,
+            deviceMeta: s
+        } = (0, O.useContext)(em), l = eO(s), o = eB(s), c = (0, O.useCallback)(() => {
+            void 0 !== et.window && (l || o ? et.window.location.href = "/support" : et.window.open("/support", "_blank"))
+        }, [l, o]);
         return (0, L.jsxs)("div", {
             className: "color-mode-dark dark-theme self-stretch flex flex-row justify-start items-center gap-large clip relative buy-robux-page min-height-[112px]",
             style: {
@@ -4847,10 +4893,10 @@
                     flexShrink: 0,
                     backgroundColor: "var(--color-extended-gray-1200)"
                 }
-            }), n && (0, L.jsx)("div", {
+            }), a && (0, L.jsx)("div", {
                 className: "absolute height-full width-full",
                 style: {
-                    backgroundImage: `url("${n}")`,
+                    backgroundImage: `url("${a}")`,
                     backgroundPositionY: "44%",
                     backgroundPositionX: "center",
                     backgroundSize: "852px",
@@ -4867,8 +4913,8 @@
                 style: {
                     zIndex: 1
                 },
-                children: a && (0, L.jsx)("img", {
-                    src: a,
+                children: i && (0, L.jsx)("img", {
+                    src: i,
                     alt: "bonus item",
                     className: "width-full height-full"
                 })
@@ -4886,7 +4932,7 @@
                             children: t.experienceDisplayName
                         }), (0, L.jsx)(tU.Tooltip, {
                             position: "bottom-center",
-                            title: r("Action.ReportItem"),
+                            title: n("Action.ReportItem"),
                             children: (0, L.jsx)(tU.TooltipTrigger, {
                                 asChild: !0,
                                 children: (0, L.jsx)(tR.IconButton, {
@@ -4894,7 +4940,7 @@
                                     size: "XSmall",
                                     icon: "icon-regular-circle-i",
                                     ariaLabel: "More information",
-                                    onClick: o
+                                    onClick: c
                                 })
                             })
                         })]
@@ -4903,25 +4949,29 @@
                         children: t.gamePassDisplayName
                     })]
                 })
+            }), r && (0, L.jsx)(nh, {
+                surfaceKey: "Web_BuyRobux_BonusItem",
+                className: "shrink-0 relative z-10 margin-x-large"
             })]
         })
     }
-    let nh = new Intl.DateTimeFormat("en-US", {
+    let ng = new Intl.DateTimeFormat("en-US", {
             timeZone: "America/Los_Angeles",
             year: "numeric",
             month: "numeric",
             day: "numeric"
         }),
-        nf = Date.UTC(2026, 3, 1);
+        nx = Date.UTC(2026, 3, 1);
 
-    function ng(e) {
+    function nb(e) {
         let {
-            metadata: t
+            metadata: t,
+            showPersonalizedRecommendationsMenu: r
         } = e, {
-            translateFullKey: r
-        } = (0, ei.useFullKeyTranslations)(), n = (0, ei.useTranslations)("Feature.PersonalizedBonus"), a = (0, O.useMemo)(() => {
+            translateFullKey: n
+        } = (0, ei.useFullKeyTranslations)(), a = (0, ei.useTranslations)("Feature.PersonalizedBonus"), i = (0, O.useMemo)(() => {
             let e, t;
-            return e = nh.formatToParts(new Date), t = Number(e.find(e => "year" === e.type)?.value), Math.max(Math.ceil((nf - Date.UTC(t, Number(e.find(e => "month" === e.type)?.value) - 1, Number(e.find(e => "day" === e.type)?.value))) / 864e5), 0)
+            return e = ng.formatToParts(new Date), t = Number(e.find(e => "year" === e.type)?.value), Math.max(Math.ceil((nx - Date.UTC(t, Number(e.find(e => "month" === e.type)?.value) - 1, Number(e.find(e => "day" === e.type)?.value))) / 864e5), 0)
         }, []);
         return (0, L.jsxs)("div", {
             className: "collectible-item-bonus-item-banner flex flex-row gap-large self-stretch items-center justify-start overflow-hidden padding-x-medium padding-bottom-medium padding-top-large medium:padding-x-xlarge buy-robux-page",
@@ -4934,56 +4984,62 @@
                 alt: "bonus item",
                 className: "min-width-2000 max-width-2000 min-height-2000 max-height-2000 medium:min-width-3000 medium:max-width-3000 medium:min-height-3000 medium:max-height-3000"
             }), (0, L.jsxs)("div", {
-                className: "flex flex-col gap-small medium:gap-medium self-stretch items-start justify-center",
+                className: "flex flex-col grow-1 gap-small medium:gap-medium self-stretch items-start justify-center",
                 children: [(0, L.jsx)("div", {
                     className: "text-title-large medium:text-heading-small content-emphasis text-wrap",
-                    children: r(t.translationKey)
+                    children: n(t.translationKey)
                 }), (0, L.jsxs)("div", {
                     className: "flex flex-col small:flex-row gap-medium self-stretch items-start justify-start",
                     children: [(0, L.jsxs)("div", {
                         className: "flex flex-row gap-xsmall self-stretch items-center justify-start",
                         children: [(0, L.jsx)("div", {
                             className: "text-label-small medium:text-label-medium content-default",
-                            children: n("Label.ByRoblox")
+                            children: a("Label.ByRoblox")
                         }), (0, L.jsx)(rp, {
                             size: 12
                         })]
                     }), (0, L.jsx)(tD.Badge, {
                         variant: "Contrast",
                         icon: "icon-regular-clock",
-                        label: n(1 === a ? "Label.LastDay" : "Label.DaysLeft", {
-                            daysLeft: a
+                        label: a(1 === i ? "Label.LastDay" : "Label.DaysLeft", {
+                            daysLeft: i
                         }),
                         className: "text-overflow"
                     })]
                 })]
+            }), r && (0, L.jsx)(nh, {
+                surfaceKey: "Web_BuyRobux_BonusItem",
+                className: "shrink-0"
             })]
         })
     }
-    let nx = e => {
+    let ny = e => {
         let {
-            personalizedBonus: t
-        } = e, [r] = t.bonuses;
-        if (!r) return null;
+            personalizedBonus: t,
+            showPersonalizedRecommendationsMenu: r
+        } = e, [n] = t.bonuses;
+        if (!n) return null;
         let {
-            collectibleItemMetadata: n,
-            gamePassMetadata: a,
-            virtualPurchasingProductType: i
-        } = r, s = i.toString();
-        return "PRODUCT_TYPE_COLLECTIBLE_ITEM" === s ? n ? (0, L.jsx)(ng, {
-            metadata: n
+            collectibleItemMetadata: a,
+            gamePassMetadata: i,
+            virtualPurchasingProductType: s
+        } = n, l = s.toString();
+        return "PRODUCT_TYPE_COLLECTIBLE_ITEM" === l ? a ? (0, L.jsx)(nb, {
+            metadata: a,
+            showPersonalizedRecommendationsMenu: r
         }) : (eE("BonusItemMissingMetadata", {
-            productType: s
-        }), null) : "PRODUCT_TYPE_GAME_PASS_PRODUCT" === s ? a ? (0, L.jsx)(np, {
-            metadata: a
+            productType: l
+        }), null) : "PRODUCT_TYPE_GAME_PASS_PRODUCT" === l ? i ? (0, L.jsx)(nf, {
+            metadata: i,
+            showPersonalizedRecommendationsMenu: r
         }) : (eE("BonusItemMissingMetadata", {
-            productType: s
+            productType: l
         }), null) : (eE("BonusItemUnsupportedType", {
-            productType: s
+            productType: l
         }), null)
     };
 
-    function nb(e) {
+    function nv(e) {
         let {
             isPrimary: t,
             sectionBase: r,
@@ -5014,8 +5070,9 @@
                 })]
             }), (0, L.jsx)(nl, {
                 isPrimary: t,
-                banner: (0, L.jsx)(nx, {
-                    personalizedBonus: n
+                banner: (0, L.jsx)(ny, {
+                    personalizedBonus: n,
+                    showPersonalizedRecommendationsMenu: r.showPersonalizedRecommendationsMenu
                 }),
                 children: (0, L.jsx)(nd, {
                     onProductClick: l,
@@ -5026,7 +5083,7 @@
         })
     }
 
-    function ny(e) {
+    function nS(e) {
         let {
             daysLeft: t
         } = e, r = (0, ei.useTranslations)("Feature.PersonalizedBonus");
@@ -5041,7 +5098,7 @@
         })
     }
 
-    function nv(e) {
+    function nP(e) {
         if (void 0 === e) return {
             success: !1,
             error: "ABSENT"
@@ -5061,7 +5118,7 @@
         }
     }
 
-    function nS(e) {
+    function nC(e) {
         let {
             isPrimary: t,
             sectionBase: r
@@ -5072,7 +5129,7 @@
             deviceMeta: i
         } = (0, O.useContext)(em), {
             translateFullKey: s
-        } = (0, ei.useFullKeyTranslations)(), l = r.productsList?.bodyTranslationKey, o = nv(r.productsList?.promotionExpirationTimestampMs), c = l ? s.html(l, [{
+        } = (0, ei.useFullKeyTranslations)(), l = r.productsList?.bodyTranslationKey, o = nP(r.productsList?.promotionExpirationTimestampMs), c = l ? s.html(l, [{
             opening: "termsLinkStart",
             closing: "termsLinkEnd",
             render: e => (0, L.jsx)("a", {
@@ -5091,8 +5148,13 @@
                     className: "flex flex-row justify-between items-center self-stretch",
                     children: [(0, L.jsx)(ni, {
                         children: s(r.sectionHeaderTranslationKey)
-                    }), o.success && (0, L.jsx)(ny, {
-                        daysLeft: o.value
+                    }), (0, L.jsxs)("div", {
+                        className: "flex flex-row items-center gap-small",
+                        children: [o.success && (0, L.jsx)(nS, {
+                            daysLeft: o.value
+                        }), r.showPersonalizedRecommendationsMenu && (0, L.jsx)(nh, {
+                            surfaceKey: "Web_BuyRobux_Packages"
+                        })]
                     })]
                 }), l && (0, L.jsx)(ns, {
                     className: (0, nn.default)({
@@ -5112,7 +5174,7 @@
         })
     }
 
-    function nP(e) {
+    function nE(e) {
         let {
             isPrimary: t,
             sectionBase: r
@@ -5125,8 +5187,13 @@
         }, [n]), [s] = r.products ?? [];
         return s ? (0, L.jsxs)(na, {
             ...e0(r),
-            children: [(0, L.jsx)(ni, {
-                children: a(r.sectionHeaderTranslationKey)
+            children: [(0, L.jsxs)("div", {
+                className: "flex flex-row justify-between items-center self-stretch",
+                children: [(0, L.jsx)(ni, {
+                    children: a(r.sectionHeaderTranslationKey)
+                }), r.showPersonalizedRecommendationsMenu && (0, L.jsx)(nh, {
+                    surfaceKey: "Web_BuyRobux_Packages"
+                })]
             }), (0, L.jsx)(nl, {
                 isPrimary: t,
                 children: (0, L.jsxs)("div", {
@@ -5158,7 +5225,7 @@
         }) : null
     }
 
-    function nC(e) {
+    function nw(e) {
         let {
             isPrimary: t,
             title: r,
@@ -5187,7 +5254,7 @@
         })
     }
 
-    function nE(e) {
+    function nN(e) {
         let {
             isPrimary: t,
             sectionBase: r,
@@ -5207,7 +5274,7 @@
                 children: s(r.sectionHeaderTranslationKey)
             }), (0, L.jsx)(nl, {
                 isPrimary: t,
-                children: (0, L.jsx)(nC, {
+                children: (0, L.jsx)(nw, {
                     title: s(n.titleTranslationKey, void 0, l("Description.GiftCard")),
                     body: s(n.bodyTranslationKey),
                     buttonText: s(n.buttonTextTranslationKey),
@@ -5217,7 +5284,7 @@
         })
     }
 
-    function nw(e) {
+    function nk(e) {
         let {
             isPrimary: t,
             robuxGift: r,
@@ -5239,7 +5306,7 @@
                 children: s(n.sectionHeaderTranslationKey)
             }), (0, L.jsx)(nl, {
                 isPrimary: t,
-                children: (0, L.jsx)(nC, {
+                children: (0, L.jsx)(nw, {
                     title: s(r.titleTranslationKey),
                     body: s(r.bodyTranslationKey),
                     buttonText: s(r.buttonTextTranslationKey),
@@ -5248,56 +5315,56 @@
             })]
         })
     }
-    var nN = e.i(309380),
-        nk = e.i(431545),
-        nT = e.i(660053),
-        nj = e.i(349030),
-        nA = e.i(380688),
-        nM = e.i(190187),
-        nR = e.i(176489),
-        nI = e.i(231756),
-        nU = e.i(306627);
-    let n_ = {
+    var nT = e.i(309380),
+        nj = e.i(431545),
+        nA = e.i(465385),
+        nM = e.i(349030),
+        nR = e.i(380688),
+        nI = e.i(35039),
+        nU = e.i(118085),
+        n_ = e.i(773228),
+        nF = e.i(687328);
+    let nL = {
             XSmall: "size-400",
             Small: "size-500",
             Medium: "size-600"
         },
-        nF = {
+        nD = {
             XSmall: "size-150",
             Small: "size-200",
             Medium: "size-250"
         },
-        nL = {
+        nB = {
             XSmall: "size-1200",
             Small: "size-1400",
             Medium: "size-1600"
         },
-        nD = {
+        nO = {
             XSmall: "text-title-small",
             Small: "text-title-small",
             Medium: "text-title-medium"
         },
-        nB = {
+        nG = {
             XSmall: void 0,
             Small: "padding-top-xxsmall",
             Medium: "padding-y-xxsmall"
         },
-        nO = {
+        nz = {
             XSmall: "text-body-small",
             Small: "text-body-small",
             Medium: "text-body-medium"
         },
-        nG = {
+        nV = {
             XSmall: "padding-medium",
             Small: "padding-large",
             Medium: "padding-xlarge"
         },
-        nz = {
+        nW = {
             XSmall: "Small",
             Small: "Medium",
             Medium: "Large"
         },
-        nV = (0, O.forwardRef)((e, t) => {
+        nK = (0, O.forwardRef)((e, t) => {
             let {
                 layout: r,
                 size: n,
@@ -5312,41 +5379,41 @@
                 onSelect: m,
                 hideSelectedIndicator: p = !1
             } = e, h = (0, O.useMemo)(() => s && O.default.createElement("div", {
-                className: (0, Q.default)(nD[n], nB[n], "content-emphasis text-align-x-start", "clip [display:-webkit-box] [-webkit-line-clamp:3] [-webkit-box-orient:vertical]")
+                className: (0, Q.default)(nO[n], nG[n], "content-emphasis text-align-x-start", "clip [display:-webkit-box] [-webkit-line-clamp:3] [-webkit-box-orient:vertical]")
             }, s), [s, n]), f = (0, O.useMemo)(() => u && O.default.createElement("div", {
                 className: (0, Q.default)("text-caption-small content-default text-align-x-start", "text-truncate-split text-no-wrap width-full")
             }, u), [u]), g = (0, O.useMemo)(() => l && O.default.createElement("div", {
-                className: (0, Q.default)(nO[n], "content-default text-align-x-start")
-            }, l), [l, n]), x = (0, O.useMemo)(() => c && O.default.createElement(nU.Icon, {
+                className: (0, Q.default)(nz[n], "content-default text-align-x-start")
+            }, l), [l, n]), x = (0, O.useMemo)(() => c && O.default.createElement(nF.Icon, {
                 name: c,
-                size: nz[n]
+                size: nW[n]
             }), [c, n]), b = (0, O.useMemo)(() => {
                 switch (a) {
                     case "Checkmark":
-                        return d && O.default.createElement(nU.Icon, {
+                        return d && O.default.createElement(nF.Icon, {
                             name: "icon-filled-check",
-                            size: nz[n]
+                            size: nW[n]
                         });
                     case "Checkbox":
                         return O.default.createElement("div", {
-                            className: (0, Q.default)(n_[n], "flex items-center justify-center radius-small padding-none content-default", d ? "stroke-none" : "stroke-standard stroke-emphasis", d ? "bg-system-contrast" : "bg-none")
+                            className: (0, Q.default)(nL[n], "flex items-center justify-center radius-small padding-none content-default", d ? "stroke-none" : "stroke-standard stroke-emphasis", d ? "bg-system-contrast" : "bg-none")
                         }, d && O.default.createElement("div", {
-                            className: (0, Q.default)(n_[n], "content-inverse-emphasis icon icon-filled-check")
+                            className: (0, Q.default)(nL[n], "content-inverse-emphasis icon icon-filled-check")
                         }));
                     case "Radio":
                         return O.default.createElement("div", {
-                            className: (0, Q.default)(n_[n], "radius-circle flex items-center justify-center stroke-emphasis stroke-standard", d ? "bg-system-contrast" : "bg-none")
+                            className: (0, Q.default)(nL[n], "radius-circle flex items-center justify-center stroke-emphasis stroke-standard", d ? "bg-system-contrast" : "bg-none")
                         }, d && O.default.createElement("div", {
-                            className: (0, Q.default)("radius-circle bg-inverse-action-sub-emphasis", nF[n])
+                            className: (0, Q.default)("radius-circle bg-inverse-action-sub-emphasis", nD[n])
                         }));
                     default:
                         return console.error(`Invalid OptionSelector type ${a}`), null
                 }
             }, [a, n, d]), y = (0, O.useMemo)(() => o && O.default.createElement("div", {
-                className: (0, Q.default)(nL[n], "flex items-center justify-center clip shrink-0")
+                className: (0, Q.default)(nB[n], "flex items-center justify-center clip shrink-0")
             }, o), [o, n]), v = (0, O.useMemo)(() => {
                 let e = !p && O.default.createElement("div", {
-                    className: n_[n]
+                    className: nL[n]
                 }, b);
                 switch (r) {
                     case "Horizontal":
@@ -5377,16 +5444,16 @@
             }, [r, y, x, h, g, b, n, f, p]);
             return O.default.createElement("button", {
                 type: "button",
-                className: (0, Q.default)("bg-none width-full radius-medium stroke-standard", nR.interactable, d ? "stroke-system-contrast" : "stroke-emphasis", nG[n], i ? nI.disabledOpacity : "cursor-pointer"),
+                className: (0, Q.default)("bg-none width-full radius-medium stroke-standard", nU.interactable, d ? "stroke-system-contrast" : "stroke-emphasis", nV[n], i ? n_.disabledOpacity : "cursor-pointer"),
                 disabled: i,
                 ref: t,
                 onClick: () => m()
-            }, O.default.createElement(nR.StateLayer, null), v)
+            }, O.default.createElement(nU.StateLayer, null), v)
         });
-    nV.displayName = "OptionSelector";
-    var nW = e.i(782009);
+    nK.displayName = "OptionSelector";
+    var nH = e.i(782009);
 
-    function nK(e) {
+    function nQ(e) {
         let {
             price: t,
             strikethroughPrice: r
@@ -5395,7 +5462,7 @@
         let n = Math.round((1 - t.amount / r.amount) * 100);
         return n > 0 ? n : void 0
     }
-    let nH = e => {
+    let n$ = e => {
         let t, {
                 option: r,
                 isSelected: n,
@@ -5404,8 +5471,8 @@
             } = e,
             {
                 translate: s
-            } = (0, nk.useTranslation)(),
-            l = (0, nW.useFormatter)(),
+            } = (0, nj.useTranslation)(),
+            l = (0, nH.useFormatter)(),
             o = e => {
                 let {
                     amount: t,
@@ -5416,14 +5483,14 @@
                     currency: r
                 })
             },
-            c = nK(r),
+            c = nQ(r),
             u = o({
                 amount: r.price.amount / r.months,
                 currencyCode: r.price.currencyCode
             });
         r.months > 1 && (t = void 0 === c ? s("Action.PricePerMonth", {
             price: u,
-            periodType: nN.PeriodType.Month
+            periodType: nT.PeriodType.Month
         }) : s("Label.BillingPeriodSavings", {
             pricePerMonth: u,
             savingsPercent: l.number(c / 100, {
@@ -5449,12 +5516,12 @@
                                 case 12:
                                     return t("Label.BillingPeriodYearly");
                                 default:
-                                    return t((0, nj.getSubscriptionPeriodTranslationKey)(nN.PeriodType.Month, e), {
+                                    return t((0, nM.getSubscriptionPeriodTranslationKey)(nT.PeriodType.Month, e), {
                                         periodCount: e
                                     })
                             }
                         })(r.months, s)
-                    }), a && (0, L.jsx)(nM.Badge, {
+                    }), a && (0, L.jsx)(nI.Badge, {
                         label: s("Label.BestValue"),
                         size: "XSmall",
                         variant: "Neutral"
@@ -5476,7 +5543,7 @@
         });
         return (0, L.jsx)("div", {
             "data-testid": `billing-period-option-${r.productId}`,
-            children: (0, L.jsx)(nV, {
+            children: (0, L.jsx)(nK, {
                 hideSelectedIndicator: !0,
                 isSelected: n,
                 label: void 0,
@@ -5488,8 +5555,8 @@
             })
         })
     };
-    var nQ = e.i(559659);
-    let n$ = {
+    var nq = e.i(559659);
+    let nY = {
             featureName: "SubscriptionsCommon",
             team: "Economy > Payments & Fraud > Subscriptions",
             features: {
@@ -5513,18 +5580,18 @@
                 }
             }
         },
-        nq = (0, eS.createFireTelemetryCounter)(n$.featureName),
-        nY = (0, nQ.createFireTelemetryHistogram)(n$.featureName, {}),
+        nX = (0, eS.createFireTelemetryCounter)(nY.featureName),
+        nJ = (0, nq.createFireTelemetryHistogram)(nY.featureName, {}),
         {
-            trackCounter: nX
-        } = (0, ef.createTrackers)(n$, {
-            publish: nq
+            trackCounter: nZ
+        } = (0, ef.createTrackers)(nY, {
+            publish: nX
         }),
         {
-            ENUM_PURCHASE_EVENT_TYPE: nJ,
-            ENUM_VIEW_MESSAGE: nZ
+            ENUM_PURCHASE_EVENT_TYPE: n0,
+            ENUM_VIEW_MESSAGE: n1
         } = G.paymentFlowAnalyticsService,
-        n0 = (e, t, r, n) => {
+        n2 = (e, t, r, n) => {
             let {
                 analyticsContext: a,
                 paymentSessionId: i
@@ -5541,24 +5608,24 @@
                 } : n
             })
         },
-        n1 = e => ({
+        n3 = e => ({
             productId: e.productId,
             months: String(e.months)
         });
-    var n2 = e.i(910866),
-        n3 = e.i(482131);
-    let n5 = [{
+    var n5 = e.i(910866),
+        n6 = e.i(482131);
+    let n4 = [{
             opening: "linkStart",
             closing: "linkEnd",
             render: e => (0, L.jsx)("a", {
                 className: "underline",
-                href: n2.SUBSCRIPTION_TERMS_URL,
+                href: n5.SUBSCRIPTION_TERMS_URL,
                 rel: "noopener noreferrer",
                 target: "_blank",
                 children: e
             })
         }],
-        n4 = e => {
+        n8 = e => {
             let {
                 isOpen: t,
                 onOpenChange: r,
@@ -5573,10 +5640,10 @@
                 onMobilePurchaseInitiated: d
             } = e, {
                 translate: m
-            } = (0, nk.useTranslation)(), [p, h] = (0, O.useState)(), f = (0, O.useRef)(!1), g = (0, O.useMemo)(() => {
+            } = (0, nj.useTranslation)(), [p, h] = (0, O.useState)(), f = (0, O.useRef)(!1), g = (0, O.useMemo)(() => {
                 let e;
                 return n.forEach(t => {
-                    let r = nK(t);
+                    let r = nQ(t);
                     void 0 !== r && (!e || r > e.savings || r === e.savings && t.months > e.months) && (e = {
                         productId: t.productId,
                         savings: r,
@@ -5595,9 +5662,9 @@
                     f.current = !0, e = {
                         analyticsContext: a,
                         paymentSessionId: s
-                    }, t = n.map(e => e.months).sort((e, t) => e - t).join(","), n0(e, nJ.VIEW_SHOWN, nZ.ROBLOX_PLUS_BILLING_PERIOD_SHEET_OPENED, {
+                    }, t = n.map(e => e.months).sort((e, t) => e - t).join(","), n2(e, n0.VIEW_SHOWN, n1.ROBLOX_PLUS_BILLING_PERIOD_SHEET_OPENED, {
                         termMonths: t
-                    }), nX("BillingPeriodSheetShown", {
+                    }), nZ("BillingPeriodSheetShown", {
                         viewName: e.analyticsContext.viewName,
                         termMonths: t
                     })
@@ -5614,13 +5681,13 @@
                     freeTrialDuration: v,
                     freeTrialPeriodType: S
                 } = x,
-                P = void 0 !== v && void 0 !== S ? (0, nj.getFreeTrialDisplay)({
+                P = void 0 !== v && void 0 !== S ? (0, nM.getFreeTrialDisplay)({
                     freeTrialOffer: {
                         duration: v,
                         periodType: S
                     }
-                }, nN.PeriodType.Month) : null,
-                C = void 0 === y ? (0, nA.translateHtml)(m, "Description.SubscriptionLegalBillingCycle", n5) : P ? (0, nA.translateHtml)(m, "Description.SubscriptionFreeTrialLegalV2", n5, {
+                }, nT.PeriodType.Month) : null,
+                C = void 0 === y ? (0, nR.translateHtml)(m, "Description.SubscriptionLegalBillingCycle", n4) : P ? (0, nR.translateHtml)(m, "Description.SubscriptionFreeTrialLegalV2", n4, {
                     date: y.toLocaleDateString(void 0, {
                         year: "numeric",
                         month: "long",
@@ -5629,28 +5696,28 @@
                     trialDuration: String(P.trialDuration),
                     trialPeriodLabel: m(P.trialPeriodKey),
                     billingPeriodLabel: m(P.billingPeriodKey)
-                }) : (0, nA.translateHtml)(m, "Description.SubscriptionFreeTrialLegal", n5, {
+                }) : (0, nR.translateHtml)(m, "Description.SubscriptionFreeTrialLegal", n4, {
                     date: y.toLocaleDateString(void 0, {
                         year: "numeric",
                         month: "long",
                         day: "numeric"
                     })
                 });
-            return (0, L.jsx)(nT.SheetRoot, {
+            return (0, L.jsx)(nA.SheetRoot, {
                 open: t,
                 onOpenChange: e => {
-                    e || (n0(b, nJ.USER_INPUT, nZ.ROBLOX_PLUS_BILLING_PERIOD_SHEET_DISMISSED, n1(x)), nX("BillingPeriodSheetDismissed", {
+                    e || (n2(b, n0.USER_INPUT, n1.ROBLOX_PLUS_BILLING_PERIOD_SHEET_DISMISSED, n3(x)), nZ("BillingPeriodSheetDismissed", {
                         viewName: b.analyticsContext.viewName,
                         months: String(x.months)
                     })), r(e)
                 },
-                children: (0, L.jsxs)(nT.SheetContent, {
+                children: (0, L.jsxs)(nA.SheetContent, {
                     centerSheetSize: "Medium",
                     closeLabel: m("Action.Close"),
                     largeScreenVariant: "center",
-                    children: [(0, L.jsx)(nT.SheetTitle, {
+                    children: [(0, L.jsx)(nA.SheetTitle, {
                         children: m("Heading.ChooseBillingPeriod")
-                    }), (0, L.jsxs)(nT.SheetBody, {
+                    }), (0, L.jsxs)(nA.SheetBody, {
                         className: "gap-y-xxlarge padding-bottom-medium flex flex-col",
                         "data-testid": "billing-period-sheet-body",
                         children: [(0, L.jsx)("p", {
@@ -5658,22 +5725,22 @@
                             children: m("Description.ChooseBillingPeriod")
                         }), (0, L.jsx)("div", {
                             className: "gap-y-medium flex flex-col",
-                            children: n.map(e => (0, L.jsx)(nH, {
+                            children: n.map(e => (0, L.jsx)(n$, {
                                 isBestValue: e.productId === g,
                                 isSelected: e.productId === x.productId,
                                 option: e,
                                 onSelect: () => {
-                                    e.productId !== x.productId && (n0(b, nJ.USER_INPUT, nZ.ROBLOX_PLUS_BILLING_PERIOD_SELECTED, n1(e)), nX("BillingPeriodOptionSelected", {
+                                    e.productId !== x.productId && (n2(b, n0.USER_INPUT, n1.ROBLOX_PLUS_BILLING_PERIOD_SELECTED, n3(e)), nZ("BillingPeriodOptionSelected", {
                                         viewName: b.analyticsContext.viewName,
                                         months: String(e.months)
                                     })), h(e.productId), c?.(e)
                                 }
                             }, e.productId))
                         })]
-                    }), (0, L.jsx)(nT.SheetActions, {
+                    }), (0, L.jsx)(nA.SheetActions, {
                         children: (0, L.jsxs)("div", {
                             className: "gap-y-medium flex flex-col",
-                            children: [(0, L.jsx)(n3.default, {
+                            children: [(0, L.jsx)(n6.default, {
                                 className: "width-full",
                                 deviceMeta: i,
                                 isDisabled: o,
@@ -5684,10 +5751,10 @@
                                 size: "Medium",
                                 trackSubscriptionButtonClick: () => {
                                     let e;
-                                    e = void 0 !== x.freeTrialEndDate, n0(b, nJ.USER_INPUT, e ? nZ.ROBLOX_PLUS_FREE_TRIAL : nZ.ROBLOX_PLUS_SUBSCRIBE, {
-                                        ...n1(x),
+                                    e = void 0 !== x.freeTrialEndDate, n2(b, n0.USER_INPUT, e ? n1.ROBLOX_PLUS_FREE_TRIAL : n1.ROBLOX_PLUS_SUBSCRIBE, {
+                                        ...n3(x),
                                         isFreeTrial: String(e)
-                                    }), nX("BillingPeriodSubscribeClick", {
+                                    }), nZ("BillingPeriodSubscribeClick", {
                                         viewName: b.analyticsContext.viewName,
                                         months: String(x.months),
                                         isFreeTrial: String(e)
@@ -5705,19 +5772,19 @@
                 })
             })
         },
-        n8 = () => {
+        n9 = () => {
             let {
                 translate: e
-            } = (0, nk.useTranslation)(), t = e("Label.Learnmore");
-            return (0, L.jsxs)(nT.SheetContent, {
+            } = (0, nj.useTranslation)(), t = e("Label.Learnmore");
+            return (0, L.jsxs)(nA.SheetContent, {
                 centerSheetSize: "Large",
                 closeLabel: e("Action.Close"),
                 largeScreenVariant: "center",
                 mobilePortraitClassName: "![height:97vh] ![max-height:97vh]",
-                children: [(0, L.jsx)(nT.SheetTitle, {
+                children: [(0, L.jsx)(nA.SheetTitle, {
                     visuallyHideTitleText: !0,
                     children: t
-                }), (0, L.jsx)(nT.SheetBody, {
+                }), (0, L.jsx)(nA.SheetBody, {
                     hasPaddingX: !1,
                     children: (0, L.jsx)("iframe", {
                         className: "width-full medium:[height:88vh] [height:95vh]",
@@ -5733,40 +5800,40 @@
                 })]
             })
         };
-    var n6 = e.i(801354),
-        n9 = e.i(51267);
-    let n7 = ["icon-regular-tag", "icon-regular-controller", "icon-regular-robux"],
-        ae = ["icon-regular-tag", "icon-regular-tag-arrow-up", "icon-regular-controller", "icon-regular-robux", "icon-regular-hand-two-arrows-horizontal", "icon-regular-arrow-up-from-landscape-rectangle"];
+    var n7 = e.i(300350),
+        ae = e.i(51267);
+    let at = ["icon-regular-tag", "icon-regular-controller", "icon-regular-robux"],
+        ar = ["icon-regular-tag", "icon-regular-tag-arrow-up", "icon-regular-controller", "icon-regular-robux", "icon-regular-hand-two-arrows-horizontal", "icon-regular-arrow-up-from-landscape-rectangle"];
 
-    function at(e) {
-        let t = ae.indexOf(e);
+    function an(e) {
+        let t = ar.indexOf(e);
         return -1 === t ? Number.MAX_SAFE_INTEGER : t
     }
 
-    function ar(e) {
-        let t = n7.indexOf(e);
+    function aa(e) {
+        let t = at.indexOf(e);
         return -1 === t ? Number.MAX_SAFE_INTEGER : t
     }
-    let an = {
+    let ai = {
             PERIOD_TYPE_WEEK: "weeks",
             PERIOD_TYPE_MONTH: "months",
             PERIOD_TYPE_YEAR: "years"
         },
-        aa = {
+        as = {
             discountPercentage: {
                 rename: "discountPercent"
             },
             periodType: {
-                mapValue: e => an[String(e)] ?? String(e)
+                mapValue: e => ai[String(e)] ?? String(e)
             }
         };
 
-    function ai(e) {
+    function al(e) {
         let t = {};
         for (let [r, n] of Object.entries(e))
             if ("iconName" !== r && "benefitTranslationKey" !== r && "object" == typeof n)
                 for (let [e, r] of Object.entries(n)) {
-                    let n = aa[e],
+                    let n = as[e],
                         a = n?.rename ?? e,
                         i = n?.mapValue ? n.mapValue(r) : r;
                     t[a] = i
@@ -5774,29 +5841,29 @@
         return Object.keys(t).length > 0 ? t : void 0
     }
 
-    function as(e) {
+    function ao(e) {
         let {
             benefits: t,
             translate: r
         } = e, n = t.filter(e => {
             var t;
-            return t = e.iconName, n7.includes(t)
-        }).sort((e, t) => ar(e.iconName) - ar(t.iconName));
+            return t = e.iconName, at.includes(t)
+        }).sort((e, t) => aa(e.iconName) - aa(t.iconName));
         return (0, L.jsx)(O.Fragment, {
-            children: n.map((e, t) => (0, L.jsx)(n9.BenefitItem, {
+            children: n.map((e, t) => (0, L.jsx)(ae.BenefitItem, {
                 iconName: e.iconName,
-                label: r(e.benefitTranslationKey, ai(e))
+                label: r(e.benefitTranslationKey, al(e))
             }, `compact-${e.benefitTranslationKey}-${String(t)}`))
         })
     }
 
-    function al(e) {
+    function ac(e) {
         let {
             benefits: t,
             translate: r
         } = e;
         if (0 === t.length) return null;
-        let n = t.toSorted((e, t) => at(e.iconName) - at(t.iconName)),
+        let n = t.toSorted((e, t) => an(e.iconName) - an(t.iconName)),
             a = Math.ceil(n.length / 2),
             i = n.slice(0, a),
             s = n.slice(a);
@@ -5804,30 +5871,30 @@
             className: "gap-x-large gap-y-large width-full grid [grid-template-columns:repeat(2,minmax(0,1fr))]",
             children: [(0, L.jsx)("div", {
                 className: "gap-y-large min-width-0 flex flex-col",
-                children: i.map((e, t) => (0, L.jsx)(n9.BenefitItem, {
+                children: i.map((e, t) => (0, L.jsx)(ae.BenefitItem, {
                     iconName: e.iconName,
-                    label: r(e.benefitTranslationKey, ai(e))
+                    label: r(e.benefitTranslationKey, al(e))
                 }, `lg-left-${e.benefitTranslationKey}-${String(t)}`))
             }), (0, L.jsx)("div", {
                 className: "gap-y-large min-width-0 flex flex-col",
-                children: s.map((e, t) => (0, L.jsx)(n9.BenefitItem, {
+                children: s.map((e, t) => (0, L.jsx)(ae.BenefitItem, {
                     iconName: e.iconName,
-                    label: r(e.benefitTranslationKey, ai(e))
+                    label: r(e.benefitTranslationKey, al(e))
                 }, `lg-right-${e.benefitTranslationKey}-${String(t)}`))
             })]
         })
     }
-    var ao = e.i(836260),
-        ac = e.i(882792);
-    let au = {
-            PRODUCT_TYPE_ROBLOX_PLUS: nN.ProductType.Blackbird
+    var au = e.i(836260),
+        ad = e.i(882792);
+    let am = {
+            PRODUCT_TYPE_ROBLOX_PLUS: nT.ProductType.Blackbird
         },
-        ad = {
-            PERIOD_TYPE_MONTH: nN.PeriodType.Month,
-            PERIOD_TYPE_YEAR: nN.PeriodType.Year,
-            PERIOD_TYPE_WEEK: nN.PeriodType.Week
+        ap = {
+            PERIOD_TYPE_MONTH: nT.PeriodType.Month,
+            PERIOD_TYPE_YEAR: nT.PeriodType.Year,
+            PERIOD_TYPE_WEEK: nT.PeriodType.Week
         },
-        am = e => {
+        ah = e => {
             let {
                 subscriptionV2: t,
                 deviceMeta: r,
@@ -5840,11 +5907,11 @@
                 onSubscribeOverride: c
             } = e, {
                 translate: u
-            } = (0, nk.useTranslation)(), d = t.products[0], m = d ? au[d.subscriptionProductType] : void 0, p = d ? ad[d.periodType] : void 0, h = null != d && void 0 !== m;
+            } = (0, nj.useTranslation)(), d = t.products[0], m = d ? am[d.subscriptionProductType] : void 0, p = d ? ap[d.periodType] : void 0, h = null != d && void 0 !== m;
             (0, O.useEffect)(() => {
                 h && a()
             }, [h, a]), (0, O.useEffect)(() => {
-                d ? m || (0, ac.trackCounter)("Error_RobloxSubscriptionWidget_InvalidSubscriptionProductType") : (0, ac.trackCounter)("Error_RobloxSubscriptionWidget_NoPrimaryProduct")
+                d ? m || (0, ad.trackCounter)("Error_RobloxSubscriptionWidget_InvalidSubscriptionProductType") : (0, ad.trackCounter)("Error_RobloxSubscriptionWidget_NoPrimaryProduct")
             }, [d, m]);
             let f = null != d ? {
                     currencyCode: d.price.currencyCode,
@@ -5860,13 +5927,13 @@
                     units: 0,
                     nanos: 0
                 },
-                g = (0, ao.default)(f);
+                g = (0, au.default)(f);
             if (!d || !m) return null;
             let x = (Array.isArray(d.offers) ? d.offers : []).some(e => null != e.freeTrial),
                 b = Array.isArray(d.benefits) ? d.benefits : [],
                 y = x ? u("Action.TryItForFree") : u("Action.PricePerMonth", {
                     price: g,
-                    periodType: p ?? nN.PeriodType.Month
+                    periodType: p ?? nT.PeriodType.Month
                 }),
                 v = u("Label.Learnmore"),
                 S = "width-full text-label-medium height-1000 [display:none] medium:[display:flex]";
@@ -5876,7 +5943,7 @@
                     className: "gap-x-small min-width-0 flex flex-row flex-wrap justify-between",
                     children: [(0, L.jsxs)("div", {
                         className: "gap-x-medium flex items-center",
-                        children: [(0, L.jsx)(nU.Icon, {
+                        children: [(0, L.jsx)(nF.Icon, {
                             name: "icon-regular-roblox-plus",
                             size: "Large"
                         }), (0, L.jsx)("span", {
@@ -5899,25 +5966,25 @@
                 }), (0, L.jsx)("div", {
                     className: "gap-x-large gap-y-small medium:hidden flex flex-col",
                     "data-testid": "subscription-compact-benefits",
-                    children: (0, L.jsx)(as, {
+                    children: (0, L.jsx)(ao, {
                         benefits: b,
                         translate: u
                     })
                 }), (0, L.jsx)("div", {
                     className: "medium:block hidden",
-                    children: (0, L.jsx)(al, {
+                    children: (0, L.jsx)(ac, {
                         benefits: b,
                         translate: u
                     })
                 }), (0, L.jsxs)("div", {
                     className: "gap-x-small medium:gap-x-xlarge width-full flex flex-row",
-                    children: [c ? (0, L.jsx)(n6.Button, {
+                    children: [c ? (0, L.jsx)(n7.Button, {
                         className: "width-full text-label-medium",
                         size: "Medium",
                         variant: n ? "Emphasis" : "Standard",
                         onClick: c,
                         children: y
-                    }) : (0, L.jsx)(n3.default, {
+                    }) : (0, L.jsx)(n6.default, {
                         className: "width-full text-label-medium",
                         deviceMeta: r,
                         loadingStateDisabled: !0,
@@ -5928,7 +5995,7 @@
                         trackSubscriptionButtonClick: i,
                         variant: n ? "Emphasis" : "Standard",
                         children: y
-                    }), null != l ? (0, L.jsx)(n6.Button, {
+                    }), null != l ? (0, L.jsx)(n7.Button, {
                         as: "a",
                         className: S,
                         href: l,
@@ -5936,7 +6003,7 @@
                         variant: "Standard",
                         onClick: s,
                         children: v
-                    }) : (0, L.jsx)(n6.Button, {
+                    }) : (0, L.jsx)(n7.Button, {
                         className: S,
                         size: "Medium",
                         variant: "Standard",
@@ -5946,9 +6013,9 @@
                 })]
             })
         };
-    var ap = e.i(418945);
-    let ah = "Payments.BuyRobux.PlusBillingPeriodSelection",
-        af = new class {
+    var af = e.i(207626);
+    let ag = "Payments.BuyRobux.PlusBillingPeriodSelection",
+        ax = new class {
             isTreatment() {
                 return this.assignment ??= this.fetchIsTreatment().finally(() => {
                     this.isResolved = !0
@@ -5957,7 +6024,7 @@
             async fetchIsTreatment() {
                 if (!(0, el.getCurrentUser)()?.id) return !1;
                 try {
-                    let e = (await r$.default.getAllValuesForLayer(ah)).plusBillingPeriodSelectionVariant;
+                    let e = (await r$.default.getAllValuesForLayer(ag)).plusBillingPeriodSelectionVariant;
                     if (0 !== e && 1 !== e) return eE("PlusBillingPeriodSelectionExperimentEvaluated", {
                         variant: "unknown"
                     }), !1;
@@ -5973,7 +6040,7 @@
                 if (this.isEnrolled && !this.hasLoggedExposure) {
                     this.hasLoggedExposure = !0;
                     try {
-                        r$.default.logLayerExposure(ah), eE("PlusBillingPeriodSelectionExperimentExposed")
+                        r$.default.logLayerExposure(ag), eE("PlusBillingPeriodSelectionExperimentExposed")
                     } catch (e) {
                         throw this.hasLoggedExposure = !1, e
                     }
@@ -5983,37 +6050,37 @@
                 (0, rQ._)(this, "isEnrolled", !1), (0, rQ._)(this, "isResolved", !1), (0, rQ._)(this, "hasLoggedExposure", !1), (0, rQ._)(this, "assignment", void 0)
             }
         };
-    var ag = e.i(31081);
+    var ab = e.i(91122);
 
-    function ax() {}
-    let ab = (0, O.createContext)({
+    function ay() {}
+    let av = (0, O.createContext)({
             itemCount: 0,
             currentPage: -1,
             canNext: !1,
             canPrev: !1,
             allVisible: !0,
-            goTo: ax,
-            next: ax,
-            prev: ax,
-            registerItem: () => ax
+            goTo: ay,
+            next: ay,
+            prev: ay,
+            registerItem: () => ay
         }),
-        ay = (0, O.createContext)(null),
-        av = 0,
-        aS = {
+        aS = (0, O.createContext)(null),
+        aP = 0,
+        aC = {
             position: "absolute",
             top: "50%",
             left: 0,
             transform: "translateY(-50%)",
             zIndex: 10
         },
-        aP = {
+        aE = {
             position: "absolute",
             top: "50%",
             right: 0,
             transform: "translateY(-50%)",
             zIndex: 10
         },
-        aC = {
+        aw = {
             borderRadius: "9999px",
             border: "none",
             padding: 0,
@@ -6021,10 +6088,10 @@
             transition: "opacity var(--time-100) var(--ease-linear)"
         };
 
-    function aE(e, t) {
+    function aN(e, t) {
         return `Page ${String(e+1)} of ${String(t)}`
     }
-    let aw = Object.assign(function(e) {
+    let ak = Object.assign(function(e) {
         let {
             children: t,
             className: r,
@@ -6102,9 +6169,9 @@
             prev: v,
             registerItem: S
         }), [x, g, f, p, b, d, y, v, S]);
-        return (0, L.jsx)(ab.Provider, {
+        return (0, L.jsx)(av.Provider, {
             value: P,
-            children: (0, L.jsx)(ay.Provider, {
+            children: (0, L.jsx)(aS.Provider, {
                 value: a,
                 children: (0, L.jsx)("div", {
                     "aria-label": n,
@@ -6122,7 +6189,7 @@
                 children: r,
                 gap: n = "medium",
                 ...a
-            } = e, i = (0, O.useContext)(ay), s = (0, O.useCallback)(e => {
+            } = e, i = (0, O.useContext)(aS), s = (0, O.useCallback)(e => {
                 null != i && (i.current = e)
             }, [i]);
             return (0, L.jsx)("div", {
@@ -6145,8 +6212,8 @@
                 ...n
             } = e, {
                 registerItem: a
-            } = (0, O.useContext)(ab), i = (0, O.useRef)(null), s = (0, O.useRef)("");
-            return "" === s.current && (av += 1, s.current = `carousel-item-${String(av)}`), (0, O.useEffect)(() => {
+            } = (0, O.useContext)(av), i = (0, O.useRef)(null), s = (0, O.useRef)("");
+            return "" === s.current && (aP += 1, s.current = `carousel-item-${String(aP)}`), (0, O.useEffect)(() => {
                 let e = i.current;
                 if (null != e) return a(s.current, e)
             }, [a]), (0, L.jsx)("div", {
@@ -6166,7 +6233,7 @@
             } = e, {
                 canPrev: n,
                 prev: a
-            } = (0, O.useContext)(ab);
+            } = (0, O.useContext)(av);
             return n ? (0, L.jsx)(tR.IconButton, {
                 ariaLabel: t,
                 className: (0, nn.default)(r),
@@ -6175,7 +6242,7 @@
                 isCircular: !0,
                 onClick: a,
                 size: "Medium",
-                style: aS,
+                style: aC,
                 variant: "OverMedia"
             }) : null
         },
@@ -6186,7 +6253,7 @@
             } = e, {
                 canNext: n,
                 next: a
-            } = (0, O.useContext)(ab);
+            } = (0, O.useContext)(av);
             return n ? (0, L.jsx)(tR.IconButton, {
                 ariaLabel: t,
                 className: (0, nn.default)(r),
@@ -6195,20 +6262,20 @@
                 isCircular: !0,
                 onClick: a,
                 size: "Medium",
-                style: aP,
+                style: aE,
                 variant: "OverMedia"
             }) : null
         },
         Indicator: function(e) {
             let {
                 className: t,
-                formatDotLabel: r = aE
+                formatDotLabel: r = aN
             } = e, {
                 itemCount: n,
                 currentPage: a,
                 allVisible: i,
                 goTo: s
-            } = (0, O.useContext)(ab);
+            } = (0, O.useContext)(av);
             return n <= 1 || i ? null : (0, L.jsx)("div", {
                 className: (0, nn.default)("flex flex-row items-center justify-center gap-small", t),
                 "data-testid": "carousel-indicator",
@@ -6227,7 +6294,7 @@
                         },
                         role: "tab",
                         style: {
-                            ...aC,
+                            ...aw,
                             opacity: i ? 1 : .22
                         },
                         type: "button"
@@ -6236,8 +6303,8 @@
             })
         }
     });
-    var aN = e.i(745911);
-    let ak = [{
+    var aT = e.i(745911);
+    let aj = [{
             iconName: "icon-regular-tag",
             translationKey: "Description.Benefit.DiscountBuyRobux",
             getParams: e => {
@@ -6258,7 +6325,7 @@
             iconName: "icon-regular-paint-brush",
             translationKey: "Description.Benefit.ProfileFrameAppTheme"
         }],
-        aT = [{
+        aA = [{
             iconName: "icon-regular-roblox-plus",
             translationKey: "Description.Benefit.AllPlus.V2"
         }, {
@@ -6290,7 +6357,7 @@
                 }
             }
         }],
-        aj = e => {
+        aM = e => {
             let {
                 iconName: t,
                 benefit: r
@@ -6308,26 +6375,26 @@
             })
         };
 
-    function aA(e) {
+    function aR(e) {
         if (null == e) return 0;
         if ("number" == typeof e) return Number.isFinite(e) ? e : 0;
         let t = Number(e);
         return Number.isFinite(t) ? t : 0
     }
-    let aM = e => {
+    let aI = e => {
             let {
                 product: t,
                 robuxAllowance: r
-            } = e, n = (0, ei.useTranslations)("Feature.RobloxSubscription"), a = (0, aN.useFormatter)(), i = (t.benefits ?? []).reduce((e, t) => Math.max(e, t.plusDiscountSubscriptionBenefits?.discountPercentage ?? 0), 0), s = a.number(i / 100, {
+            } = e, n = (0, ei.useTranslations)("Feature.RobloxSubscription"), a = (0, aT.useFormatter)(), i = (t.benefits ?? []).reduce((e, t) => Math.max(e, t.plusDiscountSubscriptionBenefits?.discountPercentage ?? 0), 0), s = a.number(i / 100, {
                 style: "percent",
                 maximumFractionDigits: 0
-            }), l = a.number(aA(t.price.units) + (t.price.nanos ?? 0) * 1e-9, {
+            }), l = a.number(aR(t.price.units) + (t.price.nanos ?? 0) * 1e-9, {
                 style: "currency",
                 currency: t.price.currencyCode
-            }), o = t.strikethroughPrice ? a.number(aA(t.strikethroughPrice.units) + (t.strikethroughPrice.nanos ?? 0) * 1e-9, {
+            }), o = t.strikethroughPrice ? a.number(aR(t.strikethroughPrice.units) + (t.strikethroughPrice.nanos ?? 0) * 1e-9, {
                 style: "currency",
                 currency: t.strikethroughPrice.currencyCode
-            }) : null, c = a.number(r), u = r > 0 ? aT : ak, d = {
+            }) : null, c = a.number(r), u = r > 0 ? aA : aj, d = {
                 discountPercent: s,
                 robuxAmount: c,
                 oldAmount: o,
@@ -6346,24 +6413,24 @@
                         translationKey: a,
                         getParams: i
                     } = e;
-                    return (0, L.jsx)(aj, {
+                    return (0, L.jsx)(aM, {
                         benefit: n(a, i?.(d)),
                         iconName: r
                     }, `${r}-${String(t)}`)
                 })
             })
         },
-        aR = {
+        aU = {
             PRODUCT_TYPE_ROBLOX_PLUS: "Blackbird"
         };
 
-    function aI(e) {
+    function a_(e) {
         if (null == e) return 0;
         let t = Number.parseInt(e, 10);
         return Number.isFinite(t) && t > 0 ? t : 0
     }
 
-    function aU(e) {
+    function aF(e) {
         return function(e) {
             if (null == e) return 0;
             if ("number" == typeof e) return Number.isFinite(e) ? e : 0;
@@ -6372,7 +6439,7 @@
         }(e.units) + (e.nanos ?? 0) * 1e-9
     }
 
-    function a_(e) {
+    function aL(e) {
         switch (e) {
             case "PERIOD_TYPE_WEEK":
                 return "Week";
@@ -6382,7 +6449,7 @@
                 return "Year"
         }
     }
-    let aF = e => {
+    let aD = e => {
             let {
                 href: t,
                 onClick: r,
@@ -6403,7 +6470,7 @@
                 children: a
             })
         },
-        aL = e => {
+        aB = e => {
             let {
                 product: t,
                 deviceMeta: r,
@@ -6413,27 +6480,27 @@
                 onSubscribeOverride: s,
                 paymentSessionId: l,
                 redirect: o
-            } = e, c = (0, ei.useTranslations)("Feature.RobloxSubscription"), u = (0, aN.useFormatter)(), d = (0, O.useMemo)(() => {
+            } = e, c = (0, ei.useTranslations)("Feature.RobloxSubscription"), u = (0, aT.useFormatter)(), d = (0, O.useMemo)(() => {
                 if (void 0 === et.window || !o?.url) return "";
                 let e = new URL(o.url, et.window.location.origin);
                 return e.searchParams.set("ctx", "subscription"), e.searchParams.set("type", "RobloxPlus"), e.searchParams.set("id", t.subscriptionProductId), `${e.pathname}${e.search}`
-            }, [o?.url, t.subscriptionProductId]), m = aR[t.subscriptionProductType];
+            }, [o?.url, t.subscriptionProductId]), m = aU[t.subscriptionProductType];
             if (null == m) return null;
-            let p = aI(t.robuxAmount),
+            let p = a_(t.robuxAmount),
                 h = p > 0 ? `Plus ${String(p)}` : "Roblox Plus",
                 f = (Array.isArray(t.offers) ? t.offers : []).some(e => e.freeTrial),
                 g = !!t.isRedirect,
-                x = u.number(aU(t.price), {
+                x = u.number(aF(t.price), {
                     style: "currency",
                     currency: t.price.currencyCode
                 }),
-                b = t.strikethroughPrice ? u.number(aU(t.strikethroughPrice), {
+                b = t.strikethroughPrice ? u.number(aF(t.strikethroughPrice), {
                     style: "currency",
                     currency: t.strikethroughPrice.currencyCode
                 }) : null,
                 y = f ? c("Action.TryItForFree") : c("Action.PricePerMonth", {
                     price: x,
-                    periodType: a_(t.periodType)
+                    periodType: aL(t.periodType)
                 });
             return (0, L.jsxs)("div", {
                 className: (0, nn.default)("radius-large padding-medium flex flex-col items-stretch justify-between gap-small height-full", {
@@ -6461,10 +6528,10 @@
                             children: x
                         })]
                     })]
-                }), (0, L.jsx)(aM, {
+                }), (0, L.jsx)(aI, {
                     product: t,
                     robuxAllowance: p
-                }), g ? (0, L.jsx)(aF, {
+                }), g ? (0, L.jsx)(aD, {
                     href: d,
                     onClick: e => {
                         rZ(e), i?.({
@@ -6481,7 +6548,7 @@
                     size: "Medium",
                     variant: n ? "Emphasis" : "Standard",
                     children: y
-                }) : (0, L.jsx)(n3.default, {
+                }) : (0, L.jsx)(n6.default, {
                     className: "width-full",
                     deviceMeta: r,
                     paymentSessionId: l,
@@ -6501,7 +6568,7 @@
             })
         };
 
-    function aD(e) {
+    function aO(e) {
         let {
             subscriptionV2: t,
             deviceMeta: r,
@@ -6514,23 +6581,23 @@
             redirect: c
         } = e, {
             products: u
-        } = t, d = "dark" === (0, ag.useResolvedColorMode)() ? "color-mode-light light-theme" : "color-mode-dark dark-theme";
+        } = t, d = "dark" === (0, ab.useResolvedColorMode)() ? "color-mode-light light-theme" : "color-mode-dark dark-theme";
         return ((0, O.useEffect)(() => {
             u.length > 0 && a()
-        }, []), 0 === u.length) ? null : (0, L.jsxs)(aw, {
+        }, []), 0 === u.length) ? null : (0, L.jsxs)(ak, {
             ariaLabel: "Roblox Plus subscription tiers",
             className: "self-stretch bleed-section-padding",
             children: [(0, L.jsx)("div", {
                 className: d,
-                children: (0, L.jsx)(aw.PrevButton, {
+                children: (0, L.jsx)(ak.PrevButton, {
                     ariaLabel: "Previous tier",
                     className: "hidden medium:flex"
                 })
-            }), (0, L.jsx)(aw.Track, {
+            }), (0, L.jsx)(ak.Track, {
                 className: "bleed-section-padding-track bundle-carousel-track-cap",
-                children: u.map((e, t) => (0, L.jsx)(aw.Item, {
+                children: u.map((e, t) => (0, L.jsx)(ak.Item, {
                     className: "flex flex-col width-[313px] medium:width-[242px]",
-                    children: (0, L.jsx)(aL, {
+                    children: (0, L.jsx)(aB, {
                         deviceMeta: r,
                         isEmphasized: n && 0 === t,
                         isPrimary: n,
@@ -6543,57 +6610,57 @@
                 }, e.subscriptionProductId))
             }), (0, L.jsx)("div", {
                 className: d,
-                children: (0, L.jsx)(aw.NextButton, {
+                children: (0, L.jsx)(ak.NextButton, {
                     ariaLabel: "Next tier",
                     className: "hidden medium:flex"
                 })
-            }), (0, L.jsx)(aw.Indicator, {
+            }), (0, L.jsx)(ak.Indicator, {
                 className: "padding-top-medium medium:hidden"
             })]
         })
     }
-    let aB = e => (function(e, t) {
+    let aG = e => (function(e, t) {
             let r = null != t && t > 0 ? t : 1;
             switch (e) {
-                case nN.PeriodType.Month:
+                case nT.PeriodType.Month:
                     return r;
-                case nN.PeriodType.Year:
+                case nT.PeriodType.Year:
                     return 12 * r;
-                case nN.PeriodType.Week:
+                case nT.PeriodType.Week:
                     return
             }
-        })(a_(e.periodType), e.periodCount),
-        aO = e => void 0 !== aR[e.subscriptionProductType] && 0 === aI(e.robuxAmount) && void 0 !== aB(e),
-        aG = e => {
+        })(aL(e.periodType), e.periodCount),
+        az = e => void 0 !== aU[e.subscriptionProductType] && 0 === a_(e.robuxAmount) && void 0 !== aG(e),
+        aV = e => {
             let t = (e => {
                 var t;
                 let r = e.offers?.find(e => e.freeTrial)?.freeTrial;
                 if (r && ("PERIOD_TYPE_WEEK" === (t = r.periodType) || "PERIOD_TYPE_MONTH" === t || "PERIOD_TYPE_YEAR" === t)) return {
                     duration: r.duration,
-                    periodType: a_(r.periodType)
+                    periodType: aL(r.periodType)
                 }
             })(e);
             return {
                 productId: e.subscriptionProductId,
-                productType: aR[e.subscriptionProductType] ?? "",
-                months: aB(e) ?? 1,
+                productType: aU[e.subscriptionProductType] ?? "",
+                months: aG(e) ?? 1,
                 price: {
-                    amount: aU(e.price),
+                    amount: aF(e.price),
                     currencyCode: e.price.currencyCode
                 },
                 strikethroughPrice: e.strikethroughPrice && {
-                    amount: aU(e.strikethroughPrice),
+                    amount: aF(e.strikethroughPrice),
                     currencyCode: e.strikethroughPrice.currencyCode
                 },
-                freeTrialEndDate: t ? (0, nj.addBillingPeriod)(Date.now(), t.duration, t.periodType) : void 0,
+                freeTrialEndDate: t ? (0, nM.addBillingPeriod)(Date.now(), t.duration, t.periodType) : void 0,
                 freeTrialDuration: t?.duration,
                 freeTrialPeriodType: t?.periodType
             }
         },
-        az = "/plus",
-        aV = "text-label-medium text-default [text-decoration:underline] [text-underline-position:from-font]";
+        aW = "/plus",
+        aK = "text-label-medium text-default [text-decoration:underline] [text-underline-position:from-font]";
 
-    function aW(e) {
+    function aH(e) {
         let t, {
                 isPrimary: r,
                 sectionBase: n,
@@ -6636,9 +6703,9 @@
             } = (0, O.useMemo)(() => {
                 var e;
                 let t, r, n;
-                return r = (t = (e = a.products).filter(aO)).some(e => 1 === aB(e)), n = t.some(e => (aB(e) ?? 0) > 1), r && n ? {
-                    tileProducts: e.filter(e => !aO(e) || 1 === aB(e)),
-                    billingPeriodOptions: t.map(aG)
+                return r = (t = (e = a.products).filter(az)).some(e => 1 === aG(e)), n = t.some(e => (aG(e) ?? 0) > 1), r && n ? {
+                    tileProducts: e.filter(e => !az(e) || 1 === aG(e)),
+                    billingPeriodOptions: t.map(aV)
                 } : {
                     tileProducts: e,
                     billingPeriodOptions: []
@@ -6657,12 +6724,12 @@
                 let [t, r] = (0, O.useState)(!1);
                 (0, O.useEffect)(() => {
                     e && (async () => {
-                        r(await af.isTreatment())
+                        r(await ax.isTreatment())
                     })()
                 }, [e]);
                 let n = (0, O.useCallback)(() => {
                     if (e) try {
-                        af.logLayerExposure()
+                        ax.logLayerExposure()
                     } catch (e) {
                         ew("PlusBillingPeriodSelectionLayerExposureError", null, e)
                     }
@@ -6729,7 +6796,7 @@
                             className: "medium:size-[var(--icon-size-xlarge)]"
                         }), s(n.sectionHeaderTranslationKey)]
                     }), f ? (0, L.jsx)("span", {
-                        className: (0, nn.default)(aV, "cursor-pointer", {
+                        className: (0, nn.default)(aK, "cursor-pointer", {
                             "medium:[display:none]": !B
                         }),
                         "data-testid": "header-learn-more-trigger",
@@ -6739,16 +6806,16 @@
                         tabIndex: 0,
                         children: D
                     }) : (0, L.jsx)("a", {
-                        className: (0, nn.default)(aV, {
+                        className: (0, nn.default)(aK, {
                             "medium:[display:none]": !B
                         }),
                         "data-testid": "header-learn-more-link",
-                        href: az,
+                        href: aW,
                         onClick: m,
                         children: D
                     })]
                 })
-            }), B ? (0, L.jsx)(aD, {
+            }), B ? (0, L.jsx)(aO, {
                 baseProductId: C,
                 deviceMeta: c,
                 isPrimary: !!r,
@@ -6762,23 +6829,23 @@
                 isPrimary: r,
                 children: (0, L.jsx)("div", {
                     className: "self-stretch medium:flex-row medium:justify-between",
-                    children: (0, L.jsx)(am, {
+                    children: (0, L.jsx)(ah, {
                         deviceMeta: c,
                         isPrimary: !!r,
                         onSubscriptionSectionViewShown: _,
                         onSubscriptionSubscribeClick: F,
                         subscriptionV2: S,
                         onLearnMoreClick: g,
-                        learnMoreHref: f ? void 0 : az,
+                        learnMoreHref: f ? void 0 : aW,
                         paymentSessionId: l?.id,
                         onSubscribeOverride: E ? j : void 0
                     })
                 })
-            }), f && (0, L.jsx)(ap.SheetRoot, {
+            }), f && (0, L.jsx)(af.SheetRoot, {
                 open: p,
                 onOpenChange: x,
-                children: (0, L.jsx)(n8, {})
-            }), E && (0, L.jsx)(n4, {
+                children: (0, L.jsx)(n9, {})
+            }), E && (0, L.jsx)(n8, {
                 analyticsContext: T,
                 deviceMeta: c,
                 isOpen: N,
@@ -6790,7 +6857,7 @@
             })]
         })
     }
-    let aK = () => {
+    let aQ = () => {
         let {
             robuxBalance: e
         } = (0, O.useContext)(em);
@@ -6804,7 +6871,7 @@
         })
     };
 
-    function aH(e) {
+    function a$(e) {
         let {
             transfers: t
         } = e, {
@@ -6825,7 +6892,7 @@
             },
             children: (0, L.jsx)("div", {
                 className: "flex flex-row justify-center items-center gap-small height-1000 padding-left-medium padding-right-large radius-circle bg-surface-0 margin-left-auto",
-                children: (0, L.jsx)(aK, {})
+                children: (0, L.jsx)(aQ, {})
             })
         }) : null;
         if (!r) return o;
@@ -6862,12 +6929,12 @@
                 className: "self-stretch flex flex-row justify-end items-center large:hidden",
                 children: (0, L.jsx)("div", {
                     className: "flex flex-row justify-center items-center gap-small height-1000 padding-left-medium padding-right-large radius-circle bg-surface-0",
-                    children: (0, L.jsx)(aK, {})
+                    children: (0, L.jsx)(aQ, {})
                 })
             }), g]
         })
     }
-    let aQ = [{
+    let aq = [{
             questionKey: "Action.WhatAreRobuxQuestion",
             answerKey: "Action.WhatAreRobuxAnswer"
         }, {
@@ -6877,18 +6944,18 @@
             questionKey: "Action.DoRobuxExpireQuestion",
             answerKey: "Action.DoRobuxExpireAnswer"
         }],
-        a$ = {
+        aY = {
             questionKey: "Action.HowToRedeemGiftCardQuestion",
             answerKey: "Action.HowToRedeemGiftCardAnswer"
         };
 
-    function aq() {
+    function aX() {
         let e = (0, ei.useTranslations)("Feature.BuyRobux"),
             {
                 deviceMeta: t
             } = (0, O.useContext)(em),
             [r, n] = (0, O.useState)(() => new Set),
-            a = eB(t) ? [...aQ, a$] : aQ,
+            a = eB(t) ? [...aq, aY] : aq,
             i = (0, O.useCallback)(e => {
                 n(t => {
                     let r = new Set(t);
@@ -6915,7 +6982,7 @@
                             className: "text-link",
                             children: e
                         })
-                    }] : a === a$.answerKey && (o = [{
+                    }] : a === aY.answerKey && (o = [{
                         opening: "redeemLinkStart",
                         closing: "redeemLinkEnd",
                         render: e => (0, L.jsx)("a", {
@@ -6963,23 +7030,23 @@
             })]
         })
     }
-    var aY = e.i(708923),
-        aX = e.i(739472),
-        aJ = e.i(309937),
-        aZ = e.i(641928);
-    let a0 = async (e, t) => {
+    var aJ = e.i(708923),
+        aZ = e.i(739472),
+        a0 = e.i(309937),
+        a1 = e.i(641928);
+    let a2 = async (e, t) => {
         let r = `${e}_API`,
             n = performance.now();
-        nq(r, {
+        nX(r, {
             statusCode: "Throughput"
         });
         try {
             let e = await t();
-            return nq(r, {
+            return nX(r, {
                 statusCode: "200"
             }), e
         } catch (e) {
-            throw nq(r, {
+            throw nX(r, {
                 statusCode: (e => {
                     if (null == e) return "NetworkError";
                     if ("object" == typeof e) {
@@ -6998,14 +7065,14 @@
                 })(e)
             }), e
         } finally {
-            nY(`${r}_LatencyMs`, void 0, performance.now() - n)
+            nJ(`${r}_LatencyMs`, void 0, performance.now() - n)
         }
-    }, a1 = [];
-    var a2 = e.i(938759),
-        a2 = a2,
-        a3 = e.i(283023);
+    }, a3 = [];
+    var a5 = e.i(938759),
+        a5 = a5,
+        a6 = e.i(283023);
 
-    function a5(e) {
+    function a4(e) {
         let {
             surface: t,
             entrypoint: r,
@@ -7016,10 +7083,10 @@
         };
         return void 0 !== n && (i.referrer_id = String(n)), a.search = new URLSearchParams(i).toString(), a.toString()
     }
-    var a4 = e.i(907119),
-        a4 = a4,
-        a8 = e.i(41621);
-    let a6 = {
+    var a8 = e.i(907119),
+        a8 = a8,
+        a9 = e.i(41621);
+    let a7 = {
         XSmall: {
             containerSize: "height-600 width-600",
             iconSize: "Small"
@@ -7030,7 +7097,7 @@
         }
     };
 
-    function a9(e) {
+    function ie(e) {
         let {
             thumbnailUrl: t,
             displayName: r,
@@ -7039,7 +7106,7 @@
         } = e, {
             containerSize: i,
             iconSize: s
-        } = a6[n];
+        } = a7[n];
         return (0, L.jsx)("div", {
             className: `${i} radius-circle clip flex items-center justify-center shrink-0 ${a}`,
             children: t ? (0, L.jsx)("img", {
@@ -7052,9 +7119,9 @@
             })
         })
     }
-    let a7 = "radial-gradient(circle at -10px 12px, transparent 14px, black 14px)";
+    let it = "radial-gradient(circle at -10px 12px, transparent 14px, black 14px)";
 
-    function ie(e) {
+    function ir(e) {
         let {
             pendingTransfers: t
         } = e;
@@ -7067,15 +7134,15 @@
                 marginLeft: 0 === e ? 0 : -2,
                 zIndex: a - e,
                 ...e > 0 && {
-                    maskImage: a7,
-                    WebkitMaskImage: a7
+                    maskImage: it,
+                    WebkitMaskImage: it
                 }
             });
         return (0, L.jsxs)("div", {
             className: "flex flex-row items-center shrink-0",
             children: [n.map((e, t) => (0, L.jsx)("div", {
                 style: i(t),
-                children: (0, L.jsx)(a9, {
+                children: (0, L.jsx)(ie, {
                     thumbnailUrl: e.sender.thumbnailUrl,
                     displayName: e.sender.displayName,
                     size: "XSmall",
@@ -7094,19 +7161,19 @@
             })]
         })
     }
-    var a2 = a2,
-        a4 = a4,
-        it = e.i(941127),
-        ir = e.i(459475);
+    var a5 = a5,
+        a8 = a8,
+        ia = e.i(195567),
+        ii = e.i(175055);
 
-    function ia(e) {
+    function is(e) {
         let {
             iconName: t,
             title: r,
             metadata: n,
             onSelect: a
         } = e;
-        return (0, L.jsx)(it.ListItem, {
+        return (0, L.jsx)(ia.ListItem, {
             className: "padding-x-none [&>div]:padding-y-small",
             divider: "None",
             isContained: !0,
@@ -7120,17 +7187,17 @@
             metadata: n,
             size: "Medium",
             title: r,
-            trailing: (0, L.jsx)(ir.ListItemChevronTrailingAccessory, {}),
+            trailing: (0, L.jsx)(ii.ListItemChevronTrailingAccessory, {}),
             onSelect: a
         })
     }
-    var ii = e.i(358239),
-        is = e.i(175067);
+    var il = e.i(358239),
+        io = e.i(175067);
 
-    function il(e, t) {
+    function ic(e, t) {
         if (void 0 !== et.window)
             if (eO(t)) et.window.location.href = e;
-            else if (t.isIosDevice || t.isAndroidDevice || (0, ii.isIos13Ipad)() || t.isChromeOs) {
+            else if (t.isIosDevice || t.isAndroidDevice || (0, il.isIos13Ipad)() || t.isChromeOs) {
             let t;
             et.window.location.href = ((t = new URL("https://ro.blox.com/Ebh5")).search = new URLSearchParams({
                 pid: "buy-robux-currency-transfer",
@@ -7138,17 +7205,17 @@
                 deep_link_value: e
             }).toString(), t.toString())
         } else if (t.isDesktop && !t.isUniversalApp) {
-            let t = (0, is.getGameLauncher)();
+            let t = (0, io.getGameLauncher)();
             t ? t.startDeepLinkFlow(e) : et.window.Roblox.ProtocolHandlerClientInterface?.startDeepLinkFlow ? et.window.Roblox.ProtocolHandlerClientInterface.startDeepLinkFlow(e) : et.window.location.href = e
         } else et.window.location.href = e
     }
 
-    function io(e) {
+    function iu(e) {
         let t = new URL("roblox://navigation/currency_transfer");
         return t.search = new URLSearchParams(e).toString(), t.toString()
     }
 
-    function ic(e) {
+    function id(e) {
         let {
             transfer: t,
             acceptTranslationKey: r
@@ -7163,7 +7230,7 @@
             className: "flex flex-row items-center justify-between gap-small padding-medium radius-medium stroke-standard stroke-default",
             children: [(0, L.jsxs)("div", {
                 className: "flex flex-row items-center gap-small",
-                children: [(0, L.jsx)(a9, {
+                children: [(0, L.jsx)(ie, {
                     thumbnailUrl: t.sender.thumbnailUrl,
                     displayName: t.sender.displayName,
                     size: "Small",
@@ -7198,7 +7265,7 @@
                     variant: "Standard",
                     onClick: () => {
                         var e;
-                        a(), e = t.transferRequestId, eE("PendingTransferDeepLink"), il(io({
+                        a(), e = t.transferRequestId, eE("PendingTransferDeepLink"), ic(iu({
                             direction: "receive",
                             transferrequestid: `RXT-${e}`
                         }), i)
@@ -7209,24 +7276,24 @@
         })
     }
 
-    function iu(e) {
+    function im(e) {
         let {
             pendingTransfers: t,
             acceptTransfersTranslationKey: r
         } = e, n = (0, ei.useTranslations)("Feature.BuyRobux");
-        return (0, L.jsxs)(ap.SheetContent, {
+        return (0, L.jsxs)(af.SheetContent, {
             centerSheetSize: "Medium",
             closeLabel: "Close",
             largeScreenVariant: "center",
-            children: [(0, L.jsx)(ap.SheetTitle, {
+            children: [(0, L.jsx)(af.SheetTitle, {
                 children: n("Heading.PendingTransfers")
-            }), (0, L.jsx)(ap.SheetBody, {
+            }), (0, L.jsx)(af.SheetBody, {
                 children: (0, L.jsx)("div", {
                     className: "flex flex-col gap-medium padding-bottom-xlarge overflow-y-auto",
                     style: {
                         maxHeight: "60vh"
                     },
-                    children: t.map(e => (0, L.jsx)(ic, {
+                    children: t.map(e => (0, L.jsx)(id, {
                         transfer: e,
                         acceptTranslationKey: r
                     }, e.transferRequestId))
@@ -7235,13 +7302,13 @@
         })
     }
 
-    function id(e) {
+    function ip(e) {
         let {
             pendingTransfers: t,
             acceptTransfersTranslationKey: r
         } = e, n = (0, ei.useTranslations)("Feature.BuyRobux"), [a, i] = (0, O.useState)(!1), s = (0, O.useMemo)(() => t.reduce((e, t) => e + Number(t.netTransferRobuxAmount), 0), [t]), l = (0, tL.formatNumber)(t.length), o = (0, tL.formatNumber)(s), c = 1 === t.length;
         return (0, L.jsxs)(O.Fragment, {
-            children: [(0, L.jsx)(ia, {
+            children: [(0, L.jsx)(is, {
                 iconName: "icon-regular-robux",
                 metadata: n("Label.AcceptTheseRobux", void 0, "Accept these Robux"),
                 title: n(c ? "Label.PendingTransfersSummary.Singular" : "Label.PendingTransfersSummary.Plural", {
@@ -7251,10 +7318,10 @@
                 onSelect: () => {
                     i(!0)
                 }
-            }), (0, L.jsx)(ap.SheetRoot, {
+            }), (0, L.jsx)(af.SheetRoot, {
                 open: a,
                 onOpenChange: i,
-                children: (0, L.jsx)(iu, {
+                children: (0, L.jsx)(im, {
                     acceptTransfersTranslationKey: r,
                     pendingTransfers: t
                 })
@@ -7262,20 +7329,20 @@
         })
     }
 
-    function im(e) {
+    function ih(e) {
         let {
             referral: t,
             shouldDeeplinkToReferral: r
-        } = e, n = (0, ei.useTranslations)("Feature.RobloxSubscription"), a = (0, aN.useFormatter)(), {
+        } = e, n = (0, ei.useTranslations)("Feature.RobloxSubscription"), a = (0, aT.useFormatter)(), {
             handle: i,
             isLoading: s
-        } = (0, a8.useReferrerHandle)(String(t.senderUserId)), {
+        } = (0, a9.useReferrerHandle)(String(t.senderUserId)), {
             deviceMeta: l
         } = (0, O.useContext)(em), [o, c] = (0, O.useState)(!1), u = n("Heading.ReferralRecipientEntry", {
-            amount: a.number(n2.REFERRAL_REWARD_ROBUX)
-        }, `Join Plus to get ${a.number(n2.REFERRAL_REWARD_ROBUX)} Robux`);
+            amount: a.number(n5.REFERRAL_REWARD_ROBUX)
+        }, `Join Plus to get ${a.number(n5.REFERRAL_REWARD_ROBUX)} Robux`);
         return s ? null : (0, L.jsxs)(O.Fragment, {
-            children: [(0, L.jsx)(ia, {
+            children: [(0, L.jsx)(is, {
                 iconName: "icon-regular-roblox-plus",
                 metadata: i ? u : void 0,
                 title: i ? n("Description.ReferralPendingRequest", {
@@ -7283,7 +7350,7 @@
                 }, `${i} referred you to Plus`) : u,
                 onSelect: () => {
                     if (r) {
-                        a4.default.buyRobuxReferralReviewClick(String(t.senderUserId), t.referralId), il(a5({
+                        a8.default.buyRobuxReferralReviewClick(String(t.senderUserId), t.referralId), ic(a4({
                             surface: "PlusReferralLandingSheet",
                             entrypoint: "BuyRobuxPage",
                             referrerId: t.senderUserId
@@ -7292,40 +7359,40 @@
                     }
                     c(!0)
                 }
-            }), (0, L.jsx)(a2.default, {
+            }), (0, L.jsx)(a5.default, {
                 invite: {
                     referrerId: String(t.senderUserId)
                 },
                 open: o,
-                surface: a3.PlusReferralSurface.BuyRobuxPage,
+                surface: a6.PlusReferralSurface.BuyRobuxPage,
                 onOpenChange: c
             })]
         })
     }
 
-    function ip(e) {
+    function ig(e) {
         let {
             pendingTransfers: t,
             acceptTransfersTranslationKey: r,
             pendingReferrals: n,
             shouldDeeplinkToReferral: a
         } = e, i = (0, ei.useTranslations)("Feature.BuyRobux");
-        return (0, L.jsxs)(ap.SheetContent, {
+        return (0, L.jsxs)(af.SheetContent, {
             centerSheetSize: "Medium",
             closeLabel: "Close",
             largeScreenVariant: "center",
-            children: [(0, L.jsx)(ap.SheetTitle, {
+            children: [(0, L.jsx)(af.SheetTitle, {
                 children: i("Heading.ReviewPendingRequests", void 0, "Review pending requests")
-            }), (0, L.jsx)(ap.SheetBody, {
+            }), (0, L.jsx)(af.SheetBody, {
                 children: (0, L.jsxs)("div", {
                     className: "flex flex-col gap-xsmall padding-bottom-xlarge overflow-y-auto",
                     style: {
                         maxHeight: "60vh"
                     },
-                    children: [r && t.length > 0 ? (0, L.jsx)(id, {
+                    children: [r && t.length > 0 ? (0, L.jsx)(ip, {
                         acceptTransfersTranslationKey: r,
                         pendingTransfers: t
-                    }) : null, n.map(e => (0, L.jsx)(im, {
+                    }) : null, n.map(e => (0, L.jsx)(ih, {
                         referral: e,
                         shouldDeeplinkToReferral: a
                     }, e.referralId))]
@@ -7334,7 +7401,7 @@
         })
     }
 
-    function ih(e) {
+    function ix(e) {
         let [t, r] = (0, O.useState)({}), n = (0, O.useRef)(t);
         return n.current = t, (0, O.useEffect)(() => {
             let t = e.map(e => "contentId" in e ? e.contentId : e.id).filter(e => !(e in n.current));
@@ -7360,7 +7427,7 @@
         }, [e]), t
     }
 
-    function ig(e) {
+    function ib(e) {
         let {
             countLabel: t
         } = e;
@@ -7382,15 +7449,15 @@
         })
     }
 
-    function ix(e) {
+    function iy(e) {
         let {
             referral: t,
             handle: r
-        } = e, n = (0, ei.useTranslations)("Feature.RobloxSubscription"), a = ih((0, O.useMemo)(() => [{
+        } = e, n = (0, ei.useTranslations)("Feature.RobloxSubscription"), a = ix((0, O.useMemo)(() => [{
             id: t.senderUserId
         }], [t.senderUserId]));
         return (0, L.jsxs)(O.Fragment, {
-            children: [(0, L.jsx)(a9, {
+            children: [(0, L.jsx)(ie, {
                 className: "bg-shift-200",
                 displayName: r,
                 size: "XSmall",
@@ -7404,13 +7471,13 @@
         })
     }
 
-    function ib(e) {
+    function iv(e) {
         let {
             pendingTransfers: t,
             totalRobux: r
         } = e, n = (0, ei.useTranslations)("Feature.BuyRobux"), a = 1 === t.length ? "Label.PendingTransfersSummary.Singular" : "Label.PendingTransfersSummary.Plural";
         return (0, L.jsxs)(O.Fragment, {
-            children: [(0, L.jsx)(ie, {
+            children: [(0, L.jsx)(ir, {
                 pendingTransfers: t
             }), (0, L.jsx)("span", {
                 className: "text-label-medium content-emphasis",
@@ -7422,7 +7489,7 @@
         })
     }
 
-    function iy(e) {
+    function iS(e) {
         let {
             transfers: t,
             pendingReferrals: r,
@@ -7437,12 +7504,12 @@
         } = (0, O.useContext)(em), [u, d] = (0, O.useState)(!1), [m, p] = (0, O.useState)(!1), h = (0, O.useMemo)(() => t?.pendingTransfers ?? [], [t]), f = 0 === h.length ? r.at(0) : void 0, {
             handle: g,
             isLoading: x
-        } = (0, a8.useReferrerHandle)(f ? String(f.senderUserId) : void 0);
+        } = (0, a9.useReferrerHandle)(f ? String(f.senderUserId) : void 0);
         (0, O.useEffect)(() => {
             h.length > 0 && l()
         }, [h, l]), (0, O.useEffect)(() => {
             let e = r.at(0);
-            void 0 !== e && a4.default.buyRobuxReferralImpression(String(e.senderUserId), e.referralId)
+            void 0 !== e && a8.default.buyRobuxReferralImpression(String(e.senderUserId), e.referralId)
         }, [r]);
         let b = e => {
                 e && h.length > 0 && o(), d(e)
@@ -7460,7 +7527,7 @@
                 if (n && 0 === h.length) {
                     let e = r.at(0);
                     if (void 0 !== e) {
-                        a4.default.buyRobuxReferralReviewClick(String(e.senderUserId), e.referralId), il(a5({
+                        a8.default.buyRobuxReferralReviewClick(String(e.senderUserId), e.referralId), ic(a4({
                             surface: "PlusReferralLandingSheet",
                             entrypoint: "BuyRobuxPage",
                             referrerId: e.senderUserId
@@ -7469,23 +7536,23 @@
                     }
                 }
                 if (void 0 !== S) {
-                    a4.default.buyRobuxReferralReviewClick(String(S.senderUserId), S.referralId), p(!0);
+                    a8.default.buyRobuxReferralReviewClick(String(S.senderUserId), S.referralId), p(!0);
                     return
                 }
                 let e = r.at(0);
-                void 0 !== e && a4.default.buyRobuxReferralReviewClick(String(e.senderUserId), e.referralId), b(!0)
+                void 0 !== e && a8.default.buyRobuxReferralReviewClick(String(e.senderUserId), e.referralId), b(!0)
             };
         return (0, L.jsxs)(O.Fragment, {
             children: [(0, L.jsxs)("div", {
                 className: `flex flex-row items-center justify-between gap-small width-full${P?" medium:justify-end":""}`,
                 children: [(0, L.jsx)("div", {
                     className: "flex flex-row items-center gap-small min-width-0",
-                    children: P ? (0, L.jsx)(ib, {
+                    children: P ? (0, L.jsx)(iv, {
                         pendingTransfers: h,
                         totalRobux: y
-                    }) : void 0 === S ? (0, L.jsx)(ig, {
+                    }) : void 0 === S ? (0, L.jsx)(ib, {
                         countLabel: E
-                    }) : (0, L.jsx)(ix, {
+                    }) : (0, L.jsx)(iy, {
                         handle: g ?? "",
                         referral: S
                     })
@@ -7502,34 +7569,34 @@
                     tabIndex: 0,
                     children: P && t ? s(t.acceptTransfersTranslationKey) : i("Action.Review", void 0, "Review")
                 })]
-            }), P && t ? (0, L.jsx)(ap.SheetRoot, {
+            }), P && t ? (0, L.jsx)(af.SheetRoot, {
                 open: u,
                 onOpenChange: b,
-                children: (0, L.jsx)(iu, {
+                children: (0, L.jsx)(im, {
                     pendingTransfers: h,
                     acceptTransfersTranslationKey: t.acceptTransfersTranslationKey
                 })
-            }) : void 0 === S ? (0, L.jsx)(ap.SheetRoot, {
+            }) : void 0 === S ? (0, L.jsx)(af.SheetRoot, {
                 open: u,
                 onOpenChange: b,
-                children: (0, L.jsx)(ip, {
+                children: (0, L.jsx)(ig, {
                     pendingTransfers: h,
                     acceptTransfersTranslationKey: t?.acceptTransfersTranslationKey,
                     pendingReferrals: r,
                     shouldDeeplinkToReferral: n
                 })
-            }) : (0, L.jsx)(a2.default, {
+            }) : (0, L.jsx)(a5.default, {
                 invite: {
                     referrerId: String(S.senderUserId)
                 },
                 open: m,
-                surface: a3.PlusReferralSurface.BuyRobuxPage,
+                surface: a6.PlusReferralSurface.BuyRobuxPage,
                 onOpenChange: p
             })]
         })
     }
 
-    function iv(e) {
+    function iP(e) {
         let {
             iconSize: t,
             textClassName: r
@@ -7546,8 +7613,8 @@
             })]
         })
     }
-    var iS = e.i(932598);
-    let iP = async (e, t) => eU(eR.GET, eI.USER_SEARCH, {
+    var iC = e.i(932598);
+    let iE = async (e, t) => eU(eR.GET, eI.USER_SEARCH, {
         url: `${eo.EnvironmentUrls.apiGatewayUrl}/search-api/omni-search`,
         withCredentials: !0
     }, {
@@ -7555,29 +7622,29 @@
         searchQuery: e,
         sessionId: t,
         globalSessionId: t
-    }), iC = [];
-    var iE = e.i(941918),
-        iw = e.i(986592),
-        iN = e.i(556010);
-    let ik = {
+    }), iw = [];
+    var iN = e.i(885065),
+        ik = e.i(826550),
+        iT = e.i(227801);
+    let ij = {
             XSmall: "padding-x-small",
             Small: "padding-x-medium",
             Medium: "padding-x-medium",
             Large: "padding-x-medium"
         },
-        iT = {
+        iA = {
             XSmall: "gap-x-xsmall",
             Small: "gap-x-small",
             Medium: "gap-x-small",
             Large: "gap-x-small"
         },
-        ij = {
+        iM = {
             XSmall: "height-600",
             Small: "height-800",
             Medium: "height-1000",
             Large: "height-1200"
         },
-        iA = {
+        iR = {
             Rounded: {
                 XSmall: "radius-small",
                 Small: "radius-medium",
@@ -7597,14 +7664,14 @@
                 Large: "radius-none"
             }
         },
-        iM = {
+        iI = {
             XSmall: ["text-body-small", "placeholder:text-body-small"],
             Small: ["text-body-small", "placeholder:text-body-small"],
             Medium: ["text-body-medium", "placeholder:text-body-medium"],
             Large: ["text-body-large", "placeholder:text-body-large"]
         },
-        iR = "Large",
-        iI = (0, O.forwardRef)((e, t) => {
+        iU = "Large",
+        i_ = (0, O.forwardRef)((e, t) => {
             let {
                 label: r,
                 leadingIconName: n,
@@ -7614,7 +7681,7 @@
                 hasError: l,
                 error: o,
                 helperText: c,
-                size: u = iR,
+                size: u = iU,
                 variant: d = "Standard",
                 shape: m = "Rounded",
                 isRequired: p,
@@ -7626,7 +7693,7 @@
                 id: y,
                 placeholder: v = "Search",
                 ...S
-            } = e, P = (0, W.default)(), C = y || P, E = `${C}-description`, w = u ?? iR, N = l || !!o, k = o || c, T = n ?? (void 0 === i ? "icon-regular-magnifying-glass" : void 0), j = (0, O.useMemo)(() => T ? O.default.createElement(z.Icon, {
+            } = e, P = (0, W.default)(), C = y || P, E = `${C}-description`, w = u ?? iU, N = l || !!o, k = o || c, T = n ?? (void 0 === i ? "icon-regular-magnifying-glass" : void 0), j = (0, O.useMemo)(() => T ? O.default.createElement(z.Icon, {
                 name: T,
                 size: w,
                 className: "content-emphasis",
@@ -7640,7 +7707,7 @@
             return O.default.createElement("div", {
                 "data-testid": "search-input-wrapper",
                 className: (0, Q.default)("flex width-full flex-col gap-small", f, {
-                    [iw.disabledOpacity]: h
+                    [ik.disabledOpacity]: h
                 }),
                 style: g
             }, r && O.default.createElement("label", {
@@ -7650,9 +7717,9 @@
                 className: "content-default"
             }, "*"))), O.default.createElement("div", {
                 "data-testid": "search-input-container",
-                className: (0, Q.default)("foundation-web-input flex items-center width-full", !h && "relative clip group/interactable focus-visible:outline-focus disabled:outline-none", iN.INPUT_STROKE_BY_VARIANT[d], iN.INPUT_BACKGROUND_BY_VARIANT[d], x, ij[w], iA[m][w], ik[w], iT[w], N ? "stroke-system-alert focus-within:stroke-system-alert" : "stroke-contrast-alpha focus-within:stroke-system-emphasis"),
+                className: (0, Q.default)("foundation-web-input flex items-center width-full", !h && "relative clip group/interactable focus-visible:outline-focus disabled:outline-none", iT.INPUT_STROKE_BY_VARIANT[d], iT.INPUT_BACKGROUND_BY_VARIANT[d], x, iM[w], iR[m][w], ij[w], iA[w], N ? "stroke-system-alert focus-within:stroke-system-alert" : "stroke-contrast-alpha focus-within:stroke-system-emphasis"),
                 style: b
-            }, O.default.createElement(iE.StateLayer, {
+            }, O.default.createElement(iN.StateLayer, {
                 className: "pointer-events-none"
             }), j && O.default.createElement("div", {
                 className: "flex shrink-0 items-center"
@@ -7661,7 +7728,7 @@
                 id: C,
                 ref: t,
                 placeholder: v,
-                className: (0, Q.default)("width-full min-width-0 padding-none bg-none stroke-none outline-none content-emphasis placeholder:content-muted [appearance:none]", iM[w], "[&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-webkit-search-results-button]:hidden [&::-webkit-search-results-decoration]:hidden"),
+                className: (0, Q.default)("width-full min-width-0 padding-none bg-none stroke-none outline-none content-emphasis placeholder:content-muted [appearance:none]", iI[w], "[&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-webkit-search-results-button]:hidden [&::-webkit-search-results-decoration]:hidden"),
                 "aria-invalid": N,
                 "aria-describedby": k ? E : void 0,
                 required: p,
@@ -7679,13 +7746,13 @@
             }, k))
         });
 
-    function iU(e) {
+    function iF(e) {
         let {
             searchText: t,
             setSearchText: r,
             clearSearch: n
         } = e, a = (0, ei.useTranslations)("Feature.BuyRobux")("Label.Search");
-        return (0, L.jsx)(iI, {
+        return (0, L.jsx)(i_, {
             size: "Medium",
             shape: "Pill",
             className: "send-robux-search-input",
@@ -7710,12 +7777,12 @@
             "aria-label": a
         })
     }
-    iI.displayName = "SearchInput";
-    var i_ = e.i(361261),
-        iF = e.i(177326),
-        iL = e.i(809510);
+    i_.displayName = "SearchInput";
+    var iL = e.i(361261),
+        iD = e.i(177326),
+        iB = e.i(809510);
 
-    function iD(e) {
+    function iO(e) {
         let {
             friend: t,
             thumbnailUrl: r,
@@ -7725,7 +7792,7 @@
             n({
                 id: t.id
             })
-        }, l = (0, iF.useIsPlusBadgeEnabled)() && !0 === t.isRobloxPlus;
+        }, l = (0, iD.useIsPlusBadgeEnabled)() && !0 === t.isRobloxPlus;
         return (0, L.jsxs)("div", {
             className: (0, nn.default)("flex flex-row items-center gap-small padding-small width-full cursor-pointer shrink-0", a ? "bg-surface-300" : "bg-none"),
             style: {
@@ -7756,17 +7823,17 @@
                     children: t.combinedName
                 }), t.hasVerifiedBadge && (0, L.jsx)(rp, {
                     size: 12
-                }), l && (0, L.jsx)(i_.DisplayNameBadges, {
+                }), l && (0, L.jsx)(iL.DisplayNameBadges, {
                     isRobloxPlus: !0,
                     size: "Small",
-                    plusBadgeAriaLabel: i(iL.PLUS_BADGE_ARIA_LABEL_KEY, void 0, iL.PLUS_BADGE_ARIA_LABEL)
+                    plusBadgeAriaLabel: i(iB.PLUS_BADGE_ARIA_LABEL_KEY, void 0, iB.PLUS_BADGE_ARIA_LABEL)
                 })]
             })]
         })
     }
-    var iB = e.i(992228);
+    var iG = e.i(998315);
 
-    function iO(e) {
+    function iz(e) {
         let {
             displayName: t,
             username: r,
@@ -7785,7 +7852,7 @@
             tabIndex: 0,
             "aria-selected": i,
             "aria-label": l ? `${t} ${l}` : t,
-            children: [(0, L.jsx)(iB.Avatar, {
+            children: [(0, L.jsx)(iG.Avatar, {
                 src: n,
                 alt: t,
                 size: "Large",
@@ -7808,19 +7875,19 @@
         })
     }
 
-    function iG(e) {
+    function iV(e) {
         let {
             friend: t,
             thumbnailUrl: r,
             onSelectUser: n
-        } = e, a = (0, ei.useTranslations)("Feature.RobloxSubscription"), i = (0, iF.useIsPlusBadgeEnabled)() && !0 === t.isRobloxPlus, s = [t.hasVerifiedBadge ? (0, L.jsx)(rp, {
+        } = e, a = (0, ei.useTranslations)("Feature.RobloxSubscription"), i = (0, iD.useIsPlusBadgeEnabled)() && !0 === t.isRobloxPlus, s = [t.hasVerifiedBadge ? (0, L.jsx)(rp, {
             size: 12
-        }, "verified") : null, i ? (0, L.jsx)(i_.DisplayNameBadges, {
+        }, "verified") : null, i ? (0, L.jsx)(iL.DisplayNameBadges, {
             isRobloxPlus: !0,
             size: "Small",
-            plusBadgeAriaLabel: a(iL.PLUS_BADGE_ARIA_LABEL_KEY, void 0, iL.PLUS_BADGE_ARIA_LABEL)
+            plusBadgeAriaLabel: a(iB.PLUS_BADGE_ARIA_LABEL_KEY, void 0, iB.PLUS_BADGE_ARIA_LABEL)
         }, "roblox-plus") : null];
-        return (0, L.jsx)(iO, {
+        return (0, L.jsx)(iz, {
             displayName: t.combinedName ?? "",
             thumbnailUrl: r,
             badges: s,
@@ -7832,7 +7899,7 @@
         })
     }
 
-    function iz(e) {
+    function iW(e) {
         let {
             friends: t,
             isLoading: r,
@@ -7842,7 +7909,7 @@
             showEmptyState: s = !0,
             rowVariant: l = "Dropdown",
             useInternalScroll: o = !0
-        } = e, c = (0, ei.useTranslations)("Feature.BuyRobux"), u = ih(t), d = (0, nn.default)("flex flex-col", o && "overflow-y-auto hide-scrollbar friends-listbox-cap");
+        } = e, c = (0, ei.useTranslations)("Feature.BuyRobux"), u = ix(t), d = (0, nn.default)("flex flex-col", o && "overflow-y-auto hide-scrollbar friends-listbox-cap");
         return s && (n || !r && 0 === t.length) ? (0, L.jsx)("div", {
             className: "flex items-center justify-center padding-medium",
             children: (0, L.jsx)("span", {
@@ -7866,51 +7933,51 @@
             className: d,
             role: "listbox",
             "aria-label": a,
-            children: t.map(e => "InlineFilter" === l ? (0, L.jsx)(iG, {
+            children: t.map(e => "InlineFilter" === l ? (0, L.jsx)(iV, {
                 friend: e,
                 thumbnailUrl: u[e.id],
                 onSelectUser: i
-            }, e.id) : (0, L.jsx)(iD, {
+            }, e.id) : (0, L.jsx)(iO, {
                 friend: e,
                 thumbnailUrl: u[e.id],
                 onSelectUser: i
             }, e.id))
         }) : null
     }
-    var iV = e.i(888104);
+    var iK = e.i(888104);
     e.i(350223);
-    var iW = e.i(874296),
-        iK = e.i(646424),
-        iH = e.i(587541);
-    let iQ = iW.object({
-            profileDetails: iW.nullish(iW.array(iW.looseObject({
-                userId: iW.number(),
-                hasRobloxSubscription: iW.nullish(iW.boolean())
+    var iH = e.i(874296),
+        iQ = e.i(646424),
+        i$ = e.i(587541);
+    let iq = iH.object({
+            profileDetails: iH.nullish(iH.array(iH.looseObject({
+                userId: iH.number(),
+                hasRobloxSubscription: iH.nullish(iH.boolean())
             })))
         }),
-        i$ = async e => {
+        iY = async e => {
             let t = [...new Set(e)];
             if (0 === t.length) return {};
-            let r = iH.Url.parse(eo.default.apiGatewayUrl).getOrThrow().withPath("/user-profile-api/v1/user/profiles/get-profiles"),
-                n = await iK.post(r, {
+            let r = i$.Url.parse(eo.default.apiGatewayUrl).getOrThrow().withPath("/user-profile-api/v1/user/profiles/get-profiles"),
+                n = await iQ.post(r, {
                     userIds: t,
-                    fields: [iL.PLUS_PROFILE_FIELD]
-                }, iQ, {
+                    fields: [iB.PLUS_PROFILE_FIELD]
+                }, iq, {
                     credentials: "include",
                     headers: {
                         Accept: "application/json"
                     },
-                    retry: iK.defaultBrowserRetryDelay
+                    retry: iQ.defaultBrowserRetryDelay
                 }),
                 a = {};
             for (let e of n.getOrThrow().profileDetails ?? []) a[e.userId] = !0 === e.hasRobloxSubscription;
             return a
-        }, iq = new Map, iY = !1, iX = async () => {
-            let e = iq;
-            if (iq = new Map, iY = !1, 0 === e.size) return;
+        }, iX = new Map, iJ = !1, iZ = async () => {
+            let e = iX;
+            if (iX = new Map, iJ = !1, 0 === e.size) return;
             let t = [...e.keys()];
             try {
-                let r = await i$(t);
+                let r = await iY(t);
                 for (let n of t)
                     for (let {
                             resolve: t
@@ -7925,7 +7992,7 @@
             }
         };
 
-    function iJ(e) {
+    function i0(e) {
         var t;
         let r, n, a, i, s, {
                 users: l,
@@ -7934,20 +8001,20 @@
             } = e,
             u = (0, ei.useTranslations)("Feature.RobloxSubscription"),
             d = (0, ei.useTranslations)("Feature.BuyRobux"),
-            m = u(iL.PLUS_BADGE_ARIA_LABEL_KEY),
-            p = ih(l),
+            m = u(iB.PLUS_BADGE_ARIA_LABEL_KEY),
+            p = ix(l),
             {
                 data: h
-            } = (t = (0, O.useMemo)(() => l.map(e => e.contentId), [l]), r = (0, iF.useIsPlusBadgeEnabled)(), n = (0, O.useMemo)(() => [...new Set(t)].sort((e, t) => e - t), [t]), a = (0, iV.useQueries)({
+            } = (t = (0, O.useMemo)(() => l.map(e => e.contentId), [l]), r = (0, iD.useIsPlusBadgeEnabled)(), n = (0, O.useMemo)(() => [...new Set(t)].sort((e, t) => e - t), [t]), a = (0, iK.useQueries)({
                 queries: n.map(e => ({
                     queryKey: ["identity-badges/plusStatus/byUser", e],
                     queryFn: () => new Promise((t, r) => {
-                        let n = iq.get(e) ?? [];
+                        let n = iX.get(e) ?? [];
                         n.push({
                             resolve: t,
                             reject: r
-                        }), iq.set(e, n), iY || (iY = !0, queueMicrotask(() => {
-                            iX().catch(() => void 0)
+                        }), iX.set(e, n), iJ || (iJ = !0, queueMicrotask(() => {
+                            iZ().catch(() => void 0)
                         }))
                     }),
                     enabled: r,
@@ -7983,12 +8050,12 @@
                 children: l.map(e => {
                     let t = [e.hasVerifiedBadge ? (0, L.jsx)(rp, {
                         size: 12
-                    }, "verified") : null, !0 === h[e.contentId] ? (0, L.jsx)(i_.DisplayNameBadges, {
+                    }, "verified") : null, !0 === h[e.contentId] ? (0, L.jsx)(iL.DisplayNameBadges, {
                         isRobloxPlus: !0,
                         size: "Small",
                         plusBadgeAriaLabel: m
                     }, "roblox-plus") : null];
-                    return (0, L.jsx)(iO, {
+                    return (0, L.jsx)(iz, {
                         displayName: e.displayName,
                         username: e.username,
                         thumbnailUrl: p[e.contentId],
@@ -8001,9 +8068,9 @@
             })]
         })
     }
-    let iZ = e => e.trim().toLowerCase().replace(/\s+/g, "");
+    let i1 = e => e.trim().toLowerCase().replace(/\s+/g, "");
 
-    function i0(e) {
+    function i2(e) {
         let {
             friends: t,
             isLoading: r,
@@ -8019,9 +8086,9 @@
         } = function() {
             let {
                 maxResults: e = 3,
-                excludedUserIds: t = iC,
+                excludedUserIds: t = iw,
                 invalidateRequestOnClear: r = !1
-            } = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}, [n, a] = (0, O.useState)(""), i = (0, nk.useDebounce)(n, 500), [s, l] = (0, O.useState)([]), [o, c] = (0, O.useState)(!1), u = (0, O.useRef)(""), d = (0, O.useMemo)(() => (0, iS.generateRandomUuid)(), []);
+            } = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}, [n, a] = (0, O.useState)(""), i = (0, nj.useDebounce)(n, 500), [s, l] = (0, O.useState)([]), [o, c] = (0, O.useState)(!1), u = (0, O.useRef)(""), d = (0, O.useMemo)(() => (0, iC.generateRandomUuid)(), []);
             (0, O.useEffect)(() => {
                 n !== i && c(!0)
             }, [n, i]);
@@ -8034,11 +8101,11 @@
                         r && (u.current = ""), l([]), c(!1);
                         return
                     }
-                    let i = (0, iS.generateRandomUuid)();
+                    let i = (0, iC.generateRandomUuid)();
                     u.current = i;
                     try {
                         c(!0), eE("UserSearchStarted");
-                        let r = await iP(a, d);
+                        let r = await iE(a, d);
                         if (u.current !== i) return;
                         let n = r?.searchResults[0]?.contents.filter(e => !t.includes(e.contentId)).slice(0, e) ?? [];
                         l(n), void 0 !== r && 0 === n.length && eE("UserSearchNoResults")
@@ -8059,7 +8126,7 @@
             maxResults: 25,
             excludedUserIds: (0, O.useMemo)(() => void 0 !== o && o > 0 ? [o] : [], [o]),
             invalidateRequestOnClear: !0
-        }), h = iZ(c), f = h.length > 0, g = (0, O.useMemo)(() => new Set(m ? [] : d.map(e => e.contentId)), [m, d]), x = (0, O.useMemo)(() => f ? t.filter(e => iZ(e.combinedName ?? "").includes(h) || g.has(e.id)) : t, [t, f, h, g]), b = (0, O.useMemo)(() => new Set(t.map(e => e.id)), [t]), y = (0, O.useMemo)(() => d.filter(e => !b.has(e.contentId)), [b, d]), v = (0, O.useCallback)(e => {
+        }), h = i1(c), f = h.length > 0, g = (0, O.useMemo)(() => new Set(m ? [] : d.map(e => e.contentId)), [m, d]), x = (0, O.useMemo)(() => f ? t.filter(e => i1(e.combinedName ?? "").includes(h) || g.has(e.id)) : t, [t, f, h, g]), b = (0, O.useMemo)(() => new Set(t.map(e => e.id)), [t]), y = (0, O.useMemo)(() => d.filter(e => !b.has(e.contentId)), [b, d]), v = (0, O.useCallback)(e => {
             i({
                 userId: e.contentId,
                 context: "search"
@@ -8071,12 +8138,12 @@
             children: [(0, L.jsx)("div", {
                 className: "send-robux-search-row shrink-0 bg-surface-100 padding-x-xlarge padding-top-xsmall padding-bottom-large",
                 "data-testid": "send-robux-search-row",
-                children: (0, L.jsx)(iU, {
+                children: (0, L.jsx)(iF, {
                     searchText: c,
                     setSearchText: u,
                     clearSearch: p
                 })
-            }), (0, L.jsx)(ap.SheetBody, {
+            }), (0, L.jsx)(af.SheetBody, {
                 className: "hide-scrollbar clip-x send-robux-sheet-body-inset",
                 children: (0, L.jsxs)("div", {
                     className: "flex flex-col padding-bottom-large",
@@ -8091,7 +8158,7 @@
                                 zIndex: 1
                             },
                             children: P
-                        }), (0, L.jsx)(iz, {
+                        }), (0, L.jsx)(iW, {
                             friends: x,
                             isLoading: r,
                             error: n,
@@ -8106,7 +8173,7 @@
                                 })
                             }
                         })]
-                    }), !m && f && (0, L.jsx)(iJ, {
+                    }), !m && f && (0, L.jsx)(i0, {
                         users: y,
                         onSelectUser: v,
                         hasSectionAbove: C
@@ -8123,8 +8190,8 @@
             })]
         })
     }
-    var i1 = e.i(10224);
-    let i2 = async e => {
+    var i3 = e.i(10224);
+    let i5 = async e => {
         let t = {
                 url: `${eo.default.friendsApi}/v1/users/${e}/friends/online`,
                 retryable: !0,
@@ -8132,9 +8199,9 @@
             },
             {
                 data: r
-            } = await i1.get(t);
+            } = await i3.get(t);
         return r
-    }, i3 = async (e, t) => {
+    }, i6 = async (e, t) => {
         let r = `${eo.default.friendsApi}/v1/users/${e}/friends/find`,
             n = {
                 url: t ? `${r}?userSort=1` : r,
@@ -8143,9 +8210,9 @@
             },
             {
                 data: a
-            } = await i1.get(n);
+            } = await i3.get(n);
         return a
-    }, i5 = async e => {
+    }, i4 = async e => {
         let t = {
                 url: `${eo.default.apiGatewayUrl}/user-profile-api/v1/user/profiles/get-profiles`,
                 retryable: !0,
@@ -8153,32 +8220,32 @@
             },
             {
                 data: r
-            } = await i1.post(t, {
+            } = await i3.post(t, {
                 userIds: e,
                 fields: ["names.combinedName", "isVerified", "hasRobloxSubscription"]
             });
         return r
-    }, i4 = async (e, t) => {
+    }, i8 = async (e, t) => {
         if (!t) return [];
         try {
             let {
                 data: t
-            } = await i2(e);
+            } = await i5(e);
             return t
         } catch (e) {
             return console.error("Error fetching online friends:", e), []
         }
-    }, i8 = async (e, t) => {
+    }, i9 = async (e, t) => {
         try {
             let {
                 PageItems: r
-            } = await i3(e, t);
+            } = await i6(e, t);
             return r
         } catch (e) {
             return console.error("Error fetching friends:", e), []
         }
-    }, i6 = async (e, t) => {
-        let [r, n] = await Promise.all([i4(e, t), i8(e, t)]);
+    }, i7 = async (e, t) => {
+        let [r, n] = await Promise.all([i8(e, t), i9(e, t)]);
         r.sort((e, t) => t.sortScore - e.sortScore);
         let a = new Map;
         for (let e of r) a.set(e.id, e.userPresence);
@@ -8186,7 +8253,7 @@
             s = n.filter(e => !i.includes(e.id)).map(e => e.id),
             l = [...i, ...s];
         if (0 === l.length) return [];
-        let o = new Map((await i5(l)).profileDetails.map(e => [e.userId, e])),
+        let o = new Map((await i4(l)).profileDetails.map(e => [e.userId, e])),
             c = [];
         return l.forEach(e => {
             let t = a.has(e),
@@ -8209,7 +8276,7 @@
         }), c
     };
 
-    function i9() {
+    function se() {
         let {
             robuxBalance: e
         } = (0, O.useContext)(em);
@@ -8225,7 +8292,7 @@
         })
     }
 
-    function i7() {
+    function st() {
         let e = (0, ei.useTranslations)("Feature.BuyRobux"),
             {
                 trackTransferSendUserSelected: t
@@ -8250,13 +8317,13 @@
                             status: "Throughput"
                         });
                         try {
-                            let r = await i6((0, el.userIdToNumber)(s), !0);
+                            let r = await i7((0, el.userIdToNumber)(s), !0);
                             eE("GetMyFriends_API", {
                                 status: "200"
                             }), e.cancelled || t(r)
                         } catch (r) {
                             let t = r instanceof Error ? r : Error(String(r));
-                            ((0, r8.captureException)(t), "object" == typeof r && null !== r && ("response" in r || "status" in r)) ? eE("GetMyFriends_API", {
+                            ((0, r4.captureException)(t), "object" == typeof r && null !== r && ("response" in r || "status" in r)) ? eE("GetMyFriends_API", {
                                 status: (r.response?.status ?? r.status)?.toString() ?? "UnknownError"
                             }): eE("GetMyFriends_API", {
                                 status: "UnknownError"
@@ -8279,20 +8346,20 @@
                     userId: n,
                     context: a
                 } = e;
-                t(a), eE("SendTransferDeepLink"), il(io({
+                t(a), eE("SendTransferDeepLink"), ic(iu({
                     direction: "send",
                     userid: String(n),
                     transferorigination: "buyRobux"
                 }), r)
             }, [r, t]);
-        return (0, L.jsxs)(ap.SheetContent, {
+        return (0, L.jsxs)(af.SheetContent, {
             centerSheetSize: "Medium",
             closeLabel: "Close",
             largeScreenVariant: "center",
             mobilePortraitClassName: "![height:92vh] ![max-height:92vh] ![padding-bottom:env(safe-area-inset-bottom)]",
-            children: [(0, L.jsx)(ap.SheetTitle, {
+            children: [(0, L.jsx)(af.SheetTitle, {
                 className: "relative bg-surface-100 shrink-0 [z-index:6] ![padding-top:11px]",
-                utilities: (0, L.jsx)(i9, {}),
+                utilities: (0, L.jsx)(se, {}),
                 children: (0, L.jsxs)("div", {
                     className: "flex flex-row items-center gap-xsmall",
                     children: [(0, L.jsx)(z.Icon, {
@@ -8300,7 +8367,7 @@
                         size: "Large"
                     }), e("Heading.SendRobux")]
                 })
-            }), (0, L.jsx)(i0, {
+            }), (0, L.jsx)(i2, {
                 friends: n,
                 isLoading: a,
                 error: i,
@@ -8310,7 +8377,7 @@
         })
     }
 
-    function se(e) {
+    function sr(e) {
         let {
             translationKey: t,
             className: r,
@@ -8347,17 +8414,17 @@
                 variant: "Standard",
                 onClick: m,
                 children: a(t)
-            }), (0, L.jsx)(ap.SheetRoot, {
+            }), (0, L.jsx)(af.SheetRoot, {
                 open: i,
                 onOpenChange: u,
-                children: (0, L.jsx)(i7, {})
+                children: (0, L.jsx)(st, {})
             })]
         })
     }
-    let st = "sticky medium:static top-[env(safe-area-inset-top)] medium:top-[auto] margin-top-[env(safe-area-inset-top)] [z-index:10] flex flex-col self-stretch medium:self-end medium:margin-top-[16px] medium:margin-right-[16px]",
-        sr = "flex flex-col gap-large bg-surface-100 padding-y-medium padding-x-large small:padding-x-xlarge self-stretch";
+    let sn = "sticky medium:static top-[env(safe-area-inset-top)] medium:top-[auto] margin-top-[env(safe-area-inset-top)] [z-index:10] flex flex-col self-stretch medium:self-end medium:margin-top-[16px] medium:margin-right-[16px]",
+        sa = "flex flex-col gap-large bg-surface-100 padding-y-medium padding-x-large small:padding-x-xlarge self-stretch";
 
-    function sn(e) {
+    function si(e) {
         let {
             transfersSection: t,
             robuxGiftSection: r
@@ -8374,37 +8441,37 @@
         } = (0, ei.useFullKeyTranslations)(), {
             pendingReferrals: o
         } = (() => {
-            let e = (0, aX.isReferralEnabled)() && null !== (0, aJ.userId)() && !(0, aJ.isBlackbirdUser)(),
+            let e = (0, aZ.isReferralEnabled)() && null !== (0, a0.userId)() && !(0, a0.isBlackbirdUser)(),
                 {
                     data: t,
                     isLoading: r
-                } = (0, aY.useQuery)({
+                } = (0, aJ.useQuery)({
                     queryKey: ["plus-referrals", "pending"],
                     enabled: e,
                     queryFn: async () => {
                         let {
                             referrals: e
-                        } = await a0("PendingPlusReferrals", () => aZ.subscriptionsV2Api.subscriptionsV2ListSubscriptionReferrals({
-                            status: nN.SubscriptionReferralStatus.NUMBER_1,
+                        } = await a2("PendingPlusReferrals", () => a1.subscriptionsV2Api.subscriptionsV2ListSubscriptionReferrals({
+                            status: nT.SubscriptionReferralStatus.NUMBER_1,
                             pageSize: 5
                         }));
                         return e
                     }
                 }),
-                n = t ?? a1;
+                n = t ?? a3;
             return {
                 pendingReferrals: n,
                 latestPendingReferral: n.at(0),
                 isLoading: e && r
             }
-        })(), c = (0, aY.useQuery)({
+        })(), c = (0, aJ.useQuery)({
             queryKey: ["guac/app-policy"],
             queryFn: rH,
             staleTime: 1 / 0,
             enabled: s
         }), u = s && c.data?.ShouldDeeplinkToReferral === !0, d = s && !u ? [] : o, m = t?.transfers, p = r?.robuxGift, h = !!m?.pendingTransfers?.length || d.length > 0, f = h ? (0, L.jsx)("div", {
             className: "flex padding-y-medium padding-x-medium medium:padding-x-large self-stretch radius-medium justify-center bg-shift-100 stroke-standard stroke-default",
-            children: (0, L.jsx)(iy, {
+            children: (0, L.jsx)(iS, {
                 transfers: m,
                 pendingReferrals: d,
                 shouldDeeplinkToReferral: u
@@ -8412,9 +8479,9 @@
         }) : null;
         return m ? (0, L.jsx)("div", {
             ...e0(t),
-            className: st,
+            className: sn,
             children: (0, L.jsxs)("div", {
-                className: (0, nn.default)(sr, {
+                className: (0, nn.default)(sa, {
                     "medium:radius-medium": h,
                     "medium:radius-circle": !h
                 }),
@@ -8424,13 +8491,13 @@
                     }),
                     children: [(0, L.jsx)("div", {
                         className: "flex flex-row justify-center items-center gap-xsmall medium:padding-left-none",
-                        children: (0, L.jsx)(iv, {
+                        children: (0, L.jsx)(iP, {
                             iconSize: "Large",
                             textClassName: "text-title-large [font-size:var(--font-size-500)] medium:[font-size:var(--font-size-600)]"
                         })
                     }), (0, L.jsxs)("div", {
                         className: "flex flex-row gap-small",
-                        children: [(0, L.jsx)(se, {
+                        children: [(0, L.jsx)(sr, {
                             translationKey: m.sendButtonTextTranslationKey,
                             className: "text-label-medium content-action-standard shrink-0 [padding-right:12px]",
                             size: "Small"
@@ -8449,15 +8516,15 @@
                 }), f]
             })
         }) : f ? (0, L.jsx)("div", {
-            className: st,
+            className: sn,
             children: (0, L.jsx)("div", {
-                className: (0, nn.default)(sr, "medium:radius-medium"),
+                className: (0, nn.default)(sa, "medium:radius-medium"),
                 children: f
             })
         }) : null
     }
 
-    function sa(e) {
+    function ss(e) {
         let {
             isPrimary: t,
             sectionBase: r,
@@ -8469,7 +8536,7 @@
         } = (0, O.useContext)(rj), {
             atLeastOneProductHasBonusAmount: s,
             redirect: l
-        } = (0, O.useContext)(em), o = nv(n.promotionExpirationTimestampMs), c = (0, O.useMemo)(() => nm(l?.url ?? ""), [l?.url]);
+        } = (0, O.useContext)(em), o = nP(n.promotionExpirationTimestampMs), c = (0, O.useMemo)(() => nm(l?.url ?? ""), [l?.url]);
         return (0, L.jsxs)(na, {
             ...e0(r),
             children: [(0, L.jsxs)("div", {
@@ -8478,8 +8545,13 @@
                     className: "flex flex-row justify-between items-center self-stretch",
                     children: [(0, L.jsx)(ni, {
                         children: a(s ? r.sectionHeaderTranslationKey : n.titleTranslationKey)
-                    }), o.success && (0, L.jsx)(ny, {
-                        daysLeft: o.value
+                    }), (0, L.jsxs)("div", {
+                        className: "flex flex-row items-center gap-small",
+                        children: [o.success && (0, L.jsx)(nS, {
+                            daysLeft: o.value
+                        }), r.showPersonalizedRecommendationsMenu && (0, L.jsx)(nh, {
+                            surfaceKey: "Web_BuyRobux_Packages"
+                        })]
                     })]
                 }), n.bodyTranslationKey && (0, L.jsx)(ns, {
                     children: a(n.bodyTranslationKey)
@@ -8503,7 +8575,7 @@
             })]
         })
     }
-    let si = {
+    let sl = {
             "1:1": "aspect-1-1",
             "5:4": "aspect-5-4",
             "4:5": "aspect-4-5",
@@ -8511,7 +8583,7 @@
             "16:9": "aspect-16-9",
             "2:1": "aspect-2-1"
         },
-        ss = (0, O.forwardRef)((e, t) => {
+        so = (0, O.forwardRef)((e, t) => {
             let {
                 className: r,
                 aspectRatio: n = "1:1",
@@ -8520,7 +8592,7 @@
                 ...s
             } = e;
             return O.default.createElement("div", {
-                className: (0, Q.default)("foundation-web-media clip", si[n], i)
+                className: (0, Q.default)("foundation-web-media clip", sl[n], i)
             }, O.default.createElement("img", {
                 ref: t,
                 className: (0, Q.default)("foundation-web-media-image", r),
@@ -8529,7 +8601,7 @@
             }))
         });
 
-    function sl(e) {
+    function sc(e) {
         let {
             product: t,
             redirectUrl: r,
@@ -8575,16 +8647,17 @@
         })
     }
 
-    function so(e) {
+    function su(e) {
         let {
             item: t,
             products: r,
             totalCards: n,
             redirectUrl: a,
-            onPurchaseClick: i
+            showPersonalizedRecommendationsMenu: i,
+            onPurchaseClick: s
         } = e, {
-            translateFullKey: s
-        } = (0, ei.useFullKeyTranslations)(), l = t.displayableBonus.collectibleItemMetadata, o = l ? s(l.translationKey, void 0, "Bonus Item") : t.displayableBonus.gamePassMetadata?.gamePassDisplayName ?? "";
+            translateFullKey: l
+        } = (0, ei.useFullKeyTranslations)(), o = t.displayableBonus.collectibleItemMetadata, c = o ? l(o.translationKey, void 0, "Bonus Item") : t.displayableBonus.gamePassMetadata?.gamePassDisplayName ?? "";
         return (0, L.jsxs)("div", {
             className: "self-stretch radius-large flex flex-col",
             style: {
@@ -8592,9 +8665,9 @@
             },
             children: [(0, L.jsxs)("div", {
                 className: `relative bg-shift-200 ${n>1?"min-height-[120px]":"min-height-[186px] medium:min-height-[204px]"}`,
-                children: [l?.backgroundImage2dUrl && (0, L.jsx)(ss, {
+                children: [o?.backgroundImage2dUrl && (0, L.jsx)(so, {
                     aspectRatio: "16:9",
-                    src: l.backgroundImage2dUrl,
+                    src: o.backgroundImage2dUrl,
                     alt: "",
                     containerClassName: "absolute inset-0 width-full height-full",
                     className: "width-full height-full object-cover"
@@ -8605,9 +8678,9 @@
                         "gap-medium": 1 === n,
                         "gap-xlarge": 1 !== n
                     }),
-                    children: [l?.image2dUrl && (0, L.jsx)("img", {
-                        src: l.image2dUrl,
-                        alt: o,
+                    children: [o?.image2dUrl && (0, L.jsx)("img", {
+                        src: o.image2dUrl,
+                        alt: c,
                         className: (0, nn.default)("radius-medium object-contain shrink-0", {
                             "height-[150px] width-auto max-width-full": 1 === n,
                             "height-[75px] width-auto max-width-full": 1 !== n
@@ -8616,28 +8689,37 @@
                         className: `flex flex-col gap-xsmall medium:gap-small ${1===n?"self-start":""}`,
                         children: [(0, L.jsx)("span", {
                             className: "text-title-large medium:text-heading-medium content-emphasis",
-                            children: o
-                        }), l?.creatorDisplayName && (0, L.jsxs)("span", {
+                            children: c
+                        }), o?.creatorDisplayName && (0, L.jsxs)("span", {
                             className: "text-body-medium content-emphasis flex items-center gap-xsmall",
-                            children: [l.creatorDisplayName, l.creatorIsVerified && (0, L.jsx)(rp, {
+                            children: [o.creatorDisplayName, o.creatorIsVerified && (0, L.jsx)(rp, {
                                 size: 16
                             })]
                         })]
                     })]
+                }), i && (0, L.jsx)("div", {
+                    className: "absolute z-20",
+                    style: {
+                        top: "16px",
+                        insetInlineEnd: "16px"
+                    },
+                    children: (0, L.jsx)(nh, {
+                        surfaceKey: "Web_BuyRobux_BonusItem"
+                    })
                 })]
             }), (0, L.jsx)("div", {
                 className: "self-stretch flex flex-col gap-xlarge padding-medium medium:padding-xlarge bg-shift-400",
                 "data-testid": "ltb-robux-packages",
-                children: r.map(e => (0, L.jsx)(sl, {
+                children: r.map(e => (0, L.jsx)(sc, {
                     product: e,
                     redirectUrl: a,
-                    onPurchaseClick: i
+                    onPurchaseClick: s
                 }, e.productId))
             })]
         })
     }
 
-    function sc(e) {
+    function sd(e) {
         let {
             isPrimary: t,
             sectionBase: r,
@@ -8675,7 +8757,7 @@
             })
         }, [a, n.isRedirect, i]);
         if (0 === l.length) return null;
-        let c = nv(n.expirationTimestampMs);
+        let c = nP(n.expirationTimestampMs);
         return (0, L.jsxs)(na, {
             ...e0(r),
             children: [(0, L.jsxs)("div", {
@@ -8684,7 +8766,7 @@
                 children: [(0, L.jsx)(ni, {
                     className: "self-auto min-width-0 flex-1 medium:self-stretch medium:flex-none",
                     children: s(r.sectionHeaderTranslationKey, void 0, "Limited-time avatar items")
-                }), c.success && (0, L.jsx)(ny, {
+                }), c.success && (0, L.jsx)(nS, {
                     daysLeft: c.value
                 })]
             }), n.bodyTranslationKey && (0, L.jsx)(ns, {
@@ -8694,13 +8776,14 @@
                 children: l.map(e => {
                     let {
                         item: t,
-                        products: r
+                        products: a
                     } = e;
-                    return (0, L.jsx)(so, {
+                    return (0, L.jsx)(su, {
                         item: t,
-                        products: r,
+                        products: a,
                         totalCards: l.length,
                         redirectUrl: n.isRedirect && i?.url ? i.url : void 0,
+                        showPersonalizedRecommendationsMenu: r.showPersonalizedRecommendationsMenu,
                         onPurchaseClick: o
                     }, t.robuxProductIds.join("-"))
                 })
@@ -8708,7 +8791,7 @@
         })
     }
 
-    function su() {
+    function sm() {
         let {
             buyRobuxPageData: e,
             deviceMeta: t
@@ -8732,22 +8815,22 @@
                     subscriptionV2: p,
                     redirect: h
                 } = t;
-            if (h) r = (0, L.jsx)(sa, {
+            if (h) r = (0, L.jsx)(ss, {
                 ...n,
                 redirectOptions: h
             });
-            else if (c) r = (0, L.jsx)(nS, {
+            else if (c) r = (0, L.jsx)(nC, {
                 ...n
             });
-            else if (u) r = (0, L.jsx)(nP, {
+            else if (u) r = (0, L.jsx)(nE, {
                 ...n,
                 recommended: u
             });
-            else if (o) r = (0, L.jsx)(nb, {
+            else if (o) r = (0, L.jsx)(nv, {
                 ...n,
                 personalizedBonus: o
             });
-            else if (d) r = (0, L.jsx)(nw, {
+            else if (d) r = (0, L.jsx)(nk, {
                 ...n,
                 robuxGift: d
             });
@@ -8755,17 +8838,17 @@
                 e.benefits?.forEach(t => {
                     t.plusDiscountSubscriptionBenefits && (t.plusDiscountSubscriptionBenefits.periodType = e.periodType)
                 })
-            }), r = (0, L.jsx)(aW, {
+            }), r = (0, L.jsx)(aH, {
                 ...n,
                 subscriptionV2: p
             });
-            else if (i) r = (0, L.jsx)(nE, {
+            else if (i) r = (0, L.jsx)(nN, {
                 ...n,
                 giftCard: i
             });
             else {
                 if (!l) return console.error(`Unknown section type: ${m}`), e;
-                r = (0, L.jsx)(sc, {
+                r = (0, L.jsx)(sd, {
                     ...n,
                     limitedTimeBonus: l
                 })
@@ -8779,32 +8862,32 @@
             className: "flex flex-col items-center",
             children: [(0, L.jsx)("div", {
                 className: "buy-robux-background"
-            }), (0, L.jsx)(sn, {
+            }), (0, L.jsx)(si, {
                 transfersSection: n,
                 robuxGiftSection: i
             }), (0, L.jsxs)("div", {
                 className: (0, nn.default)("buy-robux-content padding-x-large small:padding-x-xlarge", {
                     "is-in-app": r
                 }),
-                children: [(0, L.jsx)(aH, {
+                children: [(0, L.jsx)(a$, {
                     transfers: a
-                }), o, (0, L.jsx)(aq, {})]
+                }), o, (0, L.jsx)(aX, {})]
             })]
         })
     }
-    ss.displayName = "Media";
-    let sd = async () => eU(eR.GET, eI.GET_CLIENT_ASSERTION_V2, {
+    so.displayName = "Media";
+    let sp = async () => eU(eR.GET, eI.GET_CLIENT_ASSERTION_V2, {
         url: `${eo.EnvironmentUrls.authApi}/v1/client-assertion/`,
         withCredentials: !0
-    }), sm = async e => eU(eR.POST, eI.GET_AUTH_TICKET_V2, {
+    }), sh = async e => eU(eR.POST, eI.GET_AUTH_TICKET_V2, {
         url: `${eo.EnvironmentUrls.authApi}/v1/authentication-ticket/`,
         withCredentials: !0
     }, {
         clientAssertion: e
-    }, (e, t) => t["rbx-authentication-ticket"]), sp = async () => {
-        let e = await sd();
-        return sm(e?.clientAssertion)
-    }, sh = async () => await sp() ?? "", sf = `paymentSession-${(0,el.getCurrentUser)()?.id??"loggedout"}`, sg = e => {
+    }, (e, t) => t["rbx-authentication-ticket"]), sf = async () => {
+        let e = await sp();
+        return sh(e?.clientAssertion)
+    }, sg = async () => await sf() ?? "", sx = `paymentSession-${(0,el.getCurrentUser)()?.id??"loggedout"}`, sb = e => {
         let t, {
             enhancedBuyRobuxPageData: r,
             urlParams: n,
@@ -8824,7 +8907,7 @@
             s = (0, O.useRef)(!1),
             l = r.buyRobuxPageData.legalDisclosureTermsUrlPath;
         (0, O.useEffect)(() => {
-            a.isIosApp && l && !s.current && (s.current = !0, eE("IosPurchaseRestartAlertShown"), G.paymentFlowAnalyticsService.sendUserPurchaseFlowEvent({
+            a.isIosApp && l && !s.current && (s.current = !0, eE("IosPurchaseRestartAlertShown"), G.paymentFlowAnalyticsService.sendUserPurchaseFlowEventViaFetch({
                 triggerContext: eQ(a),
                 isMidPurchaseStep: !0,
                 viewName: G.paymentFlowAnalyticsService.ENUM_VIEW_NAME.IOS_PURCHASE_RESTART_ALERT,
@@ -8851,7 +8934,7 @@
             purchaseFlowId: C
         } = r.buyRobuxPageData;
         (0, O.useEffect)(() => {
-            P && (0, es.setItem)(sf, P)
+            P && (0, es.setItem)(sx, P)
         }, [P]);
         let E = (t = P?.id, (0, O.useCallback)((e, r) => {
                 let {
@@ -8897,7 +8980,7 @@
                     paymentSession: r,
                     isEnabled: n
                 } = e, [a, i] = (0, O.useState)(), [s, l] = (0, O.useState)(rq), [o, c] = (0, O.useState)(!1), u = r?.id, d = (0, O.useCallback)(() => {
-                    eE("MobileRedirectUrlGenerationStarted"), sh().then(i).catch(e => {
+                    eE("MobileRedirectUrlGenerationStarted"), sg().then(i).catch(e => {
                         ew("MobileRedirectUrlGenerationFailed", null, e)
                     })
                 }, []);
@@ -9043,11 +9126,11 @@
                 "data-testid": "generic-challenge-container"
             }), (0, L.jsx)(to, {
                 children: (0, L.jsx)(nt, {
-                    children: (0, L.jsx)(su, {})
+                    children: (0, L.jsx)(sm, {})
                 })
             })]
         })
-    }, sx = new D.QueryClient({
+    }, sy = new D.QueryClient({
         defaultOptions: {
             queries: {
                 retry: !1,
@@ -9056,7 +9139,7 @@
                 refetchOnReconnect: !1
             }
         }
-    }), sb = e => {
+    }), sv = e => {
         let {
             children: t
         } = e, r = (0, ei.useTranslations)("CommonUI.Controls");
@@ -9075,16 +9158,16 @@
         return t && G.paymentFlowAnalyticsService.setPaymentFlowUuid(t), (0, L.jsx)(eM, {
             name: "BuyRobuxPageReactCrash",
             children: (0, L.jsx)(B.QueryClientProvider, {
-                client: sx,
-                children: (0, L.jsx)(sb, {
-                    children: (0, L.jsx)(sg, {
+                client: sy,
+                children: (0, L.jsx)(sv, {
+                    children: (0, L.jsx)(sb, {
                         ...e
                     })
                 })
             })
         })
-    }, "queryClient", 0, sx], 518623)
+    }, "queryClient", 0, sy], 518623)
 }]);
 
-//# debugId=8a64e17a-a8db-e13d-18ac-c6687cc52e61
-//# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/0wbnn_rpmr92w.js.map
+//# debugId=7a3ee6f5-23a6-4ac9-03c6-1ec9988b1cf0
+//# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/0br~b6ot2ruvx.js.map
