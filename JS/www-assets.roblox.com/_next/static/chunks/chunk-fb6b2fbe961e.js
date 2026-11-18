@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "c8fe8180-1458-36ac-32b3-39fa020e61d1")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "d9905390-be60-6652-2ff2-bf521e4f1213")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 357355, r => {
@@ -180,7 +180,7 @@
                         case "hex":
                             return e >>> 1;
                         case "base64":
-                            return B(r).length;
+                            return S(r).length;
                         default:
                             if (o) return n ? -1 : P(r).length;
                             t = ("" + t).toLowerCase(), o = !0
@@ -444,21 +444,21 @@
                             }(this, r, t, e);
                         case "utf8":
                         case "utf-8":
-                            return o = t, i = e, S(P(r, this.length - o), this, o, i);
+                            return o = t, i = e, x(P(r, this.length - o), this, o, i);
                         case "ascii":
-                            return s = t, a = e, S(x(r), this, s, a);
+                            return s = t, a = e, x(B(r), this, s, a);
                         case "latin1":
                         case "binary":
                             return function(r, t, e, n) {
-                                return S(x(t), r, e, n)
+                                return x(B(t), r, e, n)
                             }(this, r, t, e);
                         case "base64":
-                            return u = t, f = e, S(B(r), this, u, f);
+                            return u = t, f = e, x(S(r), this, u, f);
                         case "ucs2":
                         case "ucs-2":
                         case "utf16le":
                         case "utf-16le":
-                            return h = t, l = e, S(function(r, t) {
+                            return h = t, l = e, x(function(r, t) {
                                 for (var e, n, o = [], i = 0; i < r.length && !((t -= 2) < 0); ++i) n = (e = r.charCodeAt(i)) >> 8, o.push(e % 256), o.push(n);
                                 return o
                             }(r, this.length - h), this, h, l);
@@ -661,12 +661,12 @@
                     return i
                 }
 
-                function x(r) {
+                function B(r) {
                     for (var t = [], e = 0; e < r.length; ++e) t.push(255 & r.charCodeAt(e));
                     return t
                 }
 
-                function B(r) {
+                function S(r) {
                     return n.toByteArray(function(r) {
                         if ((r = (r = r.split("=")[0]).trim().replace(O, "")).length < 2) return "";
                         for (; r.length % 4 != 0;) r += "=";
@@ -674,7 +674,7 @@
                     }(r))
                 }
 
-                function S(r, t, e, n) {
+                function x(r, t, e, n) {
                     for (var o = 0; o < n && !(o + e >= t.length) && !(o >= r.length); ++o) t[o + e] = r[o];
                     return o
                 }
@@ -1448,19 +1448,9 @@
                 }, a.set(r, t)
             }
             return t
-        },
-        {
-            rootDomain: f,
-            wwwRoblox: h,
-            apiGateway: l,
-            apiGatewayCdn: c,
-            metricsApi: p,
-            authApi: y,
-            localeApi: g,
-            eventStreamApi: d
-        } = u(e.defaultRootDomain);
-    i("create", e.defaultRootDomain), n.Url.parse("https://corp.roblox.com").getOrThrow(), r.s(["baseUrlsForDomain", 0, u, "wwwRoblox", 0, h], 815079), r.s(["getPageBaseUrls", 0, () => u((0, e.resolveDomain)(t.document?.documentElement.dataset.domain))], 519003)
+        };
+    u(e.defaultRootDomain), i("create", e.defaultRootDomain), n.Url.parse("https://corp.roblox.com").getOrThrow(), r.s(["baseUrlsForDomain", 0, u], 815079), r.s(["getPageBaseUrls", 0, () => u((0, e.resolveDomain)(t.document?.documentElement.dataset.domain))], 519003)
 }]);
 
-//# debugId=c8fe8180-1458-36ac-32b3-39fa020e61d1
-//# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/0esqmkyyxbc3c.js.map
+//# debugId=d9905390-be60-6652-2ff2-bf521e4f1213
+//# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/0hiwnum9wq.to.js.map
