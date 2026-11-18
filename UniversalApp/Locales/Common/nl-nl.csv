@@ -3496,6 +3496,7 @@ Feature.Chat.Label.OneToOne.ThemRepliedToYou,Heeft op je gereageerd
 Feature.Chat.Label.OneToOne.YouRepliedToThem,Je hebt gereageerd
 Feature.Chat.Label.Pending,
 Feature.Chat.Label.PrivacySettings,Privacy-instellingen
+Feature.Chat.Label.Reactions,Reacties
 Feature.Chat.Label.ReplyChatInputPlaceholder,Reageren op {DISPLAY_NAME}
 Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,Reageer op jezelf
 Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} zei...
@@ -3503,9 +3504,11 @@ Feature.Chat.Label.ReplyingToYourself,Je zei...
 Feature.Chat.Label.SearchForFriendsAndChat,Gesprekken zoeken
 Feature.Chat.Label.SearchFriends,Vrienden zoeken
 Feature.Chat.Label.SearchWord,
+Feature.Chat.Label.SelectToRemove,Selecteren om te verwijderen
 Feature.Chat.Label.Sent,Verzonden
 Feature.Chat.Label.SnoozePartyNotifications,Groepsmeldingen in de ervaring dempen voor:
 Feature.Chat.Label.SwipeToReplyTooltip,Veeg om te antwoorden
+Feature.Chat.Label.TapToRemove,Tik om te verwijderen
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} d
 Feature.Chat.Label.TimestampHoursAbbreviatedPlural,{num_hours} u
 Feature.Chat.Label.TimestampMinutesAbbreviatedPlural,{num_minutes} m
@@ -4484,7 +4487,7 @@ Feature.Moments.Label.PostFeedbackPostingTitle,Bezig met moment posten...
 Feature.Moments.Label.PostRemovedBody,"Het moment dat je hebt gepost, is in strijd met onze Communityrichtlijnen."
 Feature.Moments.Label.PostedOnDate,Gepost op {date}
 Feature.Moments.Label.PublishingRodeoBody,Dit zou niet lang moeten duren.
-Feature.Moments.Label.Reactions,Reacties
+Feature.Moments.Label.Reactions,
 Feature.Moments.Label.ReportReason.BreaksRules,Deze post overtreedt de regels
 Feature.Moments.Label.ReportReason.IntellectualProperty,Deze post maakt inbreuk op mijn intellectuele-eigendomsrechten
 Feature.Moments.Label.ReportSubmittedBody,Bedankt voor je feedback.
@@ -5035,6 +5038,7 @@ Feature.PlatformRestriction.Action.Signout,
 Feature.PlatformRestriction.Content.NeedPermission,"Om Roblox te gebruiken, heb je ouderlijke toestemming nodig. Zodra je ouder toestemming heeft gegeven, log je uit en vervolgens weer in om toegang te krijgen tot Roblox."
 Feature.PlatformRestriction.Title.AskParent,
 Feature.PlayerSearchResults.Action.AddFriend,Vriend toevoegen
+Feature.PlayerSearchResults.Heading.SearchResults,Zoekresultaten
 Feature.PlayerSearchResults.Label.FromSearch,Van zoekopdrachten
 Feature.PlayerSearchResults.Label.KeywordTooShort,Voer ten minste 3 tekens in
 Feature.PlayerSearchResults.Label.NewUsername,Nieuwe gebruikersnaam

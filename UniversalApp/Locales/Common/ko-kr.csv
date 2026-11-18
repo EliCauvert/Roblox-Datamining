@@ -3516,6 +3516,7 @@ Feature.Chat.Label.OneToOne.ThemRepliedToYou,내게 답장 보냄
 Feature.Chat.Label.OneToOne.YouRepliedToThem,답장 보냄
 Feature.Chat.Label.Pending,
 Feature.Chat.Label.PrivacySettings,개인정보 설정
+Feature.Chat.Label.Reactions,반응
 Feature.Chat.Label.ReplyChatInputPlaceholder,{DISPLAY_NAME} 님에게 답장 보내기
 Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,자신에게 답장
 Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} 님의 말...
@@ -3523,9 +3524,11 @@ Feature.Chat.Label.ReplyingToYourself,회원님의 말...
 Feature.Chat.Label.SearchForFriendsAndChat,대화 검색
 Feature.Chat.Label.SearchFriends,친구 검색
 Feature.Chat.Label.SearchWord,
+Feature.Chat.Label.SelectToRemove,선택하여 제거
 Feature.Chat.Label.Sent,전송됨
 Feature.Chat.Label.SnoozePartyNotifications,체험 내 파티 알림 음소거 대상:
 Feature.Chat.Label.SwipeToReplyTooltip,밀어서 답장하기
+Feature.Chat.Label.TapToRemove,눌러서 제거
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}일
 Feature.Chat.Label.TimestampHoursAbbreviatedPlural,{num_hours}시간
 Feature.Chat.Label.TimestampMinutesAbbreviatedPlural,{num_minutes}분
@@ -4505,7 +4508,7 @@ Feature.Moments.Label.PostFeedbackPostingTitle,모멘트 게시 중
 Feature.Moments.Label.PostRemovedBody,게시하신 모멘트는 당사 커뮤니티 규정에 위배됩니다.
 Feature.Moments.Label.PostedOnDate,{date}에 게시됨
 Feature.Moments.Label.PublishingRodeoBody,오래 걸리지 않을 겁니다.
-Feature.Moments.Label.Reactions,반응
+Feature.Moments.Label.Reactions,
 Feature.Moments.Label.ReportReason.BreaksRules,이 게시물이 규칙을 위반하였습니다
 Feature.Moments.Label.ReportReason.IntellectualProperty,이 게시물은 나의 지식 재산권을 침해합니다
 Feature.Moments.Label.ReportSubmittedBody,피드백을 제공해 주셔서 감사합니다!
@@ -5056,6 +5059,7 @@ Feature.PlatformRestriction.Action.Signout,
 Feature.PlatformRestriction.Content.NeedPermission,Roblox를 사용하려면 보호자의 허락이 필요합니다. 보호자의 승인이 완료되면 로그아웃한 다음 다시 로그인하여 Roblox에 액세스하세요.
 Feature.PlatformRestriction.Title.AskParent,보호자에게 허락 요청
 Feature.PlayerSearchResults.Action.AddFriend,
+Feature.PlayerSearchResults.Heading.SearchResults,검색 결과
 Feature.PlayerSearchResults.Label.FromSearch,검색에서
 Feature.PlayerSearchResults.Label.KeywordTooShort,최소 3자 이상 입력하세요.
 Feature.PlayerSearchResults.Label.NewUsername,새로운 사용자 이름

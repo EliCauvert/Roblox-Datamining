@@ -2733,12 +2733,15 @@ Feature.Build.Label.ToolAssetSearchRunning,جارٍ البحث في مكتبة �
 Feature.Build.Label.ToolClientDMDone,تم البحث في DataModel للعميل
 Feature.Build.Label.ToolClientDMFailed,تعذَّر البحث في DataModel للعميل
 Feature.Build.Label.ToolClientDMRunning,جارٍ البحث في DataModel للعميل
+Feature.Build.Label.ToolCodeRunning,جارٍ تشغيل التعليمات البرمجية
 Feature.Build.Label.ToolCompileDone,تم تجميع الكود
 Feature.Build.Label.ToolCompileFailed,تعذَّر تجميع الكود
 Feature.Build.Label.ToolCompileRunning,جارٍ تجميع الكود
+Feature.Build.Label.ToolDeveloperProductRunning,جارٍ العمل على منتج المطوّر
 Feature.Build.Label.ToolGameInfoDone,تم تحديث معلومات اللعبة
 Feature.Build.Label.ToolGameInfoFailed,تعذَّر تحديث معلومات اللعبة
 Feature.Build.Label.ToolGameInfoRunning,جارٍ تحديث معلومات اللعبة
+Feature.Build.Label.ToolGamePassRunning,جارٍ العمل على تذكرة اللعبة
 Feature.Build.Label.ToolGameSaveDone,تم حفظ اللعبة
 Feature.Build.Label.ToolGameSaveFailed,تعذَّر حفظ اللعبة
 Feature.Build.Label.ToolGameSaveRunning,جارٍ حفظ اللعبة
@@ -2757,6 +2760,7 @@ Feature.Build.Label.ToolLuauRunning,جارٍ تنفيذ Luau
 Feature.Build.Label.ToolModelDone,تم إنشاء النموذج ثلاثي الأبعاد
 Feature.Build.Label.ToolModelFailed,تعذَّر إنشاء النموذج ثلاثي الأبعاد
 Feature.Build.Label.ToolModelRunning,جارٍ إنشاء النموذج ثلاثي الأبعاد
+Feature.Build.Label.ToolMonetizationRunning,جارٍ العمل على تحقيق الربح من لعبتك
 Feature.Build.Label.ToolPlanPresentDone,تم تقديم الخطة
 Feature.Build.Label.ToolPlanPresentFailed,تعذَّر تقديم الخطة
 Feature.Build.Label.ToolPlanPresentRunning,جارٍ تقديم الخطة
@@ -2784,6 +2788,7 @@ Feature.Build.Label.ToolSkillLoadRunning,جارٍ تحميل المهارة
 Feature.Build.Label.ToolSkillsDone,تم إدراج المهارات المتاحة
 Feature.Build.Label.ToolSkillsFailed,تعذَّر إدراج المهارات المتاحة
 Feature.Build.Label.ToolSkillsRunning,جارٍ إدراج المهارات المتاحة
+Feature.Build.Label.ToolSubscriptionRunning,جارٍ العمل على اشتراكك
 Feature.Build.Label.ToolTasksPlanDone,تم التخطيط للمهام
 Feature.Build.Label.ToolTasksPlanFailed,تعذَّر التخطيط للمهام
 Feature.Build.Label.ToolTasksPlanRunning,جارٍ التخطيط لمهامك
@@ -3519,6 +3524,23 @@ Feature.Chat.RobloxConnectUnavailableWithUser,لا تتوفر ميزة Roblox Co
 Feature.Chat.Text.NoFriends,لم تضف أي أصدقاء بعد. للبدء، ابحث عن أصدقائك على منصّة Roblox ثم أضفهم.
 Feature.Chat.Title.NewChat,دردشة جديدة
 Feature.Chat.Toast.Error.InvalidUserSelected,لا يمكن إضافة شخص واحد أو أكثر من الأشخاص المُدرجين ضمن هذه القائمة
+Feature.CloudClient.Action.JoinWithoutCloudPlay,الانضمام بدون Cloud Play
+Feature.CloudClient.Description.CloudPlayStopped,انضم إلى اللعبة مجددًا لمواصلة اللعب بدون Cloud Play.
+Feature.CloudClient.Description.RobloxRealityPreview,Restyle نسخة تجريبية مبكرة، وقد يختلف شكل اللعبة عن الأصل.
+Feature.CloudClient.Description.RobloxRealityThanks,شكرًا لأنك من أوائل من جرّبوها.
+Feature.CloudClient.Heading.CloudPlayStopped,توقفت Cloud Play عن العمل
+Feature.CloudClient.Heading.RobloxRealityFailed,حدث خطأ في Restyle
+Feature.CloudClient.Heading.RobloxRealityTimeEnded,انتهى وقتك في Restyle
+Feature.CloudClient.Label.CaptureUnavailableCloudPlay,الالتقاط غير متاح في Cloud Play حتى الآن.
+Feature.CloudClient.Label.CaptureUnavailableRobloxReality,الالتقاط غير متاح مع Restyle حتى الآن.
+Feature.CloudClient.Label.CloudPlayJoinFailed,ميزة Cloud Play لا تعمل. أنت تلعب الآن بالطريقة المعتادة.
+Feature.CloudClient.Label.RobloxReality,Restyle
+Feature.CloudClient.Label.RobloxRealityEndingSoon,ستنتهي Restyle خلال 1 دقيقة، وستغادر اللعبة.
+Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,المنظور الذاتي غير متاح في Cloud Play حتى الآن.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,المنظور الذاتي غير متاح مع Restyle حتى الآن.
+Feature.CloudClient.Label.StillWeakConnection,لا يزال اتصالك ضعيفًا.
+Feature.CloudClient.Label.TimeLeft,
+Feature.CloudClient.Label.WeakConnection,الاتصال ضعيف.
 Feature.CommunityLinks.Description.CommunityDefault,انضم إلى مجتمع Guilded الرسمي {experienceName} لقراءة الإعلامات والمزيد!
 Feature.CommunityLinks.Heading.CommunityTitle,الانضمام إلى المجتمع
 Feature.CommunityLinks.Label.ViewButton,

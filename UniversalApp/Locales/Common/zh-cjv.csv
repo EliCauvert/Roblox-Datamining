@@ -2796,12 +2796,15 @@ Feature.Build.Label.ToolAssetSearchRunning,正在搜索素材库
 Feature.Build.Label.ToolClientDMDone,已搜索客户端 DataModel
 Feature.Build.Label.ToolClientDMFailed,无法搜索客户端 DataModel
 Feature.Build.Label.ToolClientDMRunning,正在搜索客户端 DataModel
+Feature.Build.Label.ToolCodeRunning,
 Feature.Build.Label.ToolCompileDone,已编译代码
 Feature.Build.Label.ToolCompileFailed,无法编译代码
 Feature.Build.Label.ToolCompileRunning,正在编译代码
+Feature.Build.Label.ToolDeveloperProductRunning,
 Feature.Build.Label.ToolGameInfoDone,已更新游戏信息
 Feature.Build.Label.ToolGameInfoFailed,无法更新游戏信息
 Feature.Build.Label.ToolGameInfoRunning,正在更新游戏信息
+Feature.Build.Label.ToolGamePassRunning,
 Feature.Build.Label.ToolGameSaveDone,已保存游戏
 Feature.Build.Label.ToolGameSaveFailed,无法保存游戏
 Feature.Build.Label.ToolGameSaveRunning,正在保存游戏
@@ -2820,6 +2823,7 @@ Feature.Build.Label.ToolLuauRunning,正在执行 Luau
 Feature.Build.Label.ToolModelDone,已生成 3D 模型
 Feature.Build.Label.ToolModelFailed,无法生成 3D 模型
 Feature.Build.Label.ToolModelRunning,正在生成 3D 模型
+Feature.Build.Label.ToolMonetizationRunning,
 Feature.Build.Label.ToolPlanPresentDone,已展示计划
 Feature.Build.Label.ToolPlanPresentFailed,无法展示计划
 Feature.Build.Label.ToolPlanPresentRunning,正在展示计划
@@ -2847,6 +2851,7 @@ Feature.Build.Label.ToolSkillLoadRunning,正在加载技能
 Feature.Build.Label.ToolSkillsDone,已列出可用技能
 Feature.Build.Label.ToolSkillsFailed,无法列出可用技能
 Feature.Build.Label.ToolSkillsRunning,正在列出可用技能
+Feature.Build.Label.ToolSubscriptionRunning,
 Feature.Build.Label.ToolTasksPlanDone,已规划任务
 Feature.Build.Label.ToolTasksPlanFailed,无法规划任务
 Feature.Build.Label.ToolTasksPlanRunning,正在规划任务
@@ -4414,9 +4419,15 @@ Feature.Moments.Description.EngagementFirstLike,立即查看
 Feature.Moments.Description.EngagementFirstReaction,你的精彩瞬间刚刚获得了第一个回应！
 Feature.Moments.Description.EngagementLikedCommentsDigest,你的 {likedComments} 条评论获得了点赞
 Feature.Moments.Description.EngagementMomentDigest,{comments} 条新评论和 {milestone} 个回应
+Feature.Moments.Description.EngagementMomentFirstReactionDigest,
+Feature.Moments.Description.EngagementMomentsCommentsDigest,
 Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementMomentsReactionsDigest,
 Feature.Moments.Description.EngagementNewComment,刚刚评论了你的精彩瞬间
 Feature.Moments.Description.EngagementNewComments,和另外 {count} 人评论了你的精彩瞬间
+Feature.Moments.Description.EngagementNewCommentsOneOther,
+Feature.Moments.Description.EngagementOneCommentDigest,
+Feature.Moments.Description.EngagementOneCommentFirstReactionDigest,
 Feature.Moments.Description.EngagementReactionMilestone,{count} 个新回应
 Feature.Moments.Description.FollowingCaughtUpBody,你已看完此推送中的所有新“精彩瞬间”。切换推送以查看更多内容。
 Feature.Moments.Description.FollowingEmptyBodyRecommended,你将在这里看到你关注的创作者发布的“精彩瞬间”。
@@ -5398,12 +5409,14 @@ Feature.Schools.Action.UnidaysTermsOfService,UNiDAYS 服务条款
 Feature.Schools.Body.EnterCode,UNiDAYS 已将一封包含一次性验证码的电子邮件发送至 {user_email}。请在下方输入验证码，以确认你的学校。
 Feature.Schools.Body.UnidaysShare,其他人不会看到你的电子邮件地址。
 Feature.Schools.Body.UnidaysTerms,我们与 UNiDAYS 合作，以验证你的学校电子邮件地址。点按“继续”即表示你同意 UNiDAYS 的服务条款和隐私政策。
+Feature.Schools.Body.UnidaysTermsCollege,
 Feature.Schools.Caption.AlumniGroupOnGraduate,毕业后，你将加入{school}的校友群组。
 Feature.Schools.Caption.RemovedOnGraduate,毕业后，系统会将你从{school}移除。
 Feature.Schools.Description.CantFindSchoolNotify,你的学校加入 Roblox 时，我们会通知你。
 Feature.Schools.Description.CantVerifySchool,根据你提供的信息，我们无法验证你的学校。
 Feature.Schools.Description.ConnectWithFellowAlumni,与其他校友建立联系
 Feature.Schools.Description.FeatureAvailableBody,寻找同校的好友。
+Feature.Schools.Description.FeatureAvailableBodyCollege,
 Feature.Schools.Description.InviteFriendsExclusiveItem,邀请其他人进行验证。在你的学校上线时获得免费道具。
 Feature.Schools.Description.InviteFriendsUnlockSooner,让你们学校的校友群组尽快上线。
 Feature.Schools.Description.InviteOthersToVerify,邀请其他人进行验证
@@ -5414,7 +5427,9 @@ Feature.Schools.Description.RemoveSchoolBody,你必须重新验证学校电子�
 Feature.Schools.Description.SchoolIsLiveBody,
 Feature.Schools.Description.SchoolUnavailableBody,此学校目前在 Roblox 上不可用。
 Feature.Schools.Description.UpsellDisclaimer,你的学校信息只对同校的人可见。你可以随时更新或移除你的学校。
+Feature.Schools.Description.UpsellDisclaimerCollege,
 Feature.Schools.Description.UpsellTagline,找到已通过验证的同校学生，与他们交流并一起游玩。
+Feature.Schools.Description.UpsellTaglineCollege,
 Feature.Schools.Description.WaitlistAlumniBody,你已完成验证。你的学校校友群组上线后，我们会立即通知你。
 Feature.Schools.Description.WaitlistBody,你是创始成员。不妨邀请同学一起让你们的学校上线。
 Feature.Schools.Error.AlreadyLinked,此电子邮件地址已经与另一个帐户关联。
@@ -5431,11 +5446,13 @@ Feature.Schools.Filter.AllYears,所有年份
 Feature.Schools.Filter.Apply,
 Feature.Schools.Filter.GradYear,毕业年份
 Feature.Schools.GiftForYou,为你准备的礼物
+Feature.Schools.Heading.AddCollege,
 Feature.Schools.Heading.AddSchool,添加学校
 Feature.Schools.Heading.AddSchoolNow,加入同学们的行列
 Feature.Schools.Heading.CantFindSchool,我们找不到你的学校
 Feature.Schools.Heading.CantVerifySchool,我们无法验证你的学校
 Feature.Schools.Heading.CheckYourEmail,检查你的电子邮箱
+Feature.Schools.Heading.EnterCollegeEmail,
 Feature.Schools.Heading.EnterSchoolEmail,输入你学校的电子邮件地址
 Feature.Schools.Heading.InviteYourClassmates,邀请你的同学
 Feature.Schools.Heading.InviteYourFriends,邀请你的好友
@@ -5462,8 +5479,10 @@ Feature.Schools.Label.Search,
 Feature.Schools.Label.SuggestedEmail,你是否想输入“{email}”？
 Feature.Schools.Label.UnlockAlumniGroup,校友群组待上线
 Feature.Schools.Label.UpsellPerkFindFriends,寻找同校的好友
+Feature.Schools.Label.UpsellPerkFindFriendsCollege,
 Feature.Schools.Label.UpsellPerkPlayAndChat,查看在线好友，轻松一起游玩
 Feature.Schools.Label.UpsellPerkTrends,探索你学校的热门内容
+Feature.Schools.Label.UpsellPerkTrendsCollege,
 Feature.Schools.Placeholder.Email,学生电子邮件
 Feature.Schools.Placeholder.SchoolName,学校名称
 Feature.Schools.Placeholder.SixDigitCode,

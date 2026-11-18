@@ -2804,12 +2804,15 @@ Feature.Build.Label.ToolAssetSearchRunning,Searching asset library
 Feature.Build.Label.ToolClientDMDone,Searched client DataModel
 Feature.Build.Label.ToolClientDMFailed,Couldn't search client DataModel
 Feature.Build.Label.ToolClientDMRunning,Searching client DataModel
+Feature.Build.Label.ToolCodeRunning,Running code
 Feature.Build.Label.ToolCompileDone,Compiled the code
 Feature.Build.Label.ToolCompileFailed,Couldn't compile the code
 Feature.Build.Label.ToolCompileRunning,Compiling the code
+Feature.Build.Label.ToolDeveloperProductRunning,Working on your developer product
 Feature.Build.Label.ToolGameInfoDone,Updated game info
 Feature.Build.Label.ToolGameInfoFailed,Couldn't update game info
 Feature.Build.Label.ToolGameInfoRunning,Updating game info
+Feature.Build.Label.ToolGamePassRunning,Working on your game pass
 Feature.Build.Label.ToolGameSaveDone,Saved game
 Feature.Build.Label.ToolGameSaveFailed,Couldn't save game
 Feature.Build.Label.ToolGameSaveRunning,Saving game
@@ -2828,6 +2831,7 @@ Feature.Build.Label.ToolLuauRunning,Executing Luau
 Feature.Build.Label.ToolModelDone,Generated 3D model
 Feature.Build.Label.ToolModelFailed,Couldn't generate 3D model
 Feature.Build.Label.ToolModelRunning,Generating 3D model
+Feature.Build.Label.ToolMonetizationRunning,Working on your game's monetization
 Feature.Build.Label.ToolPlanPresentDone,Presented plan
 Feature.Build.Label.ToolPlanPresentFailed,Couldn't present plan
 Feature.Build.Label.ToolPlanPresentRunning,Presenting plan
@@ -2855,6 +2859,7 @@ Feature.Build.Label.ToolSkillLoadRunning,Loading skill
 Feature.Build.Label.ToolSkillsDone,Listed available skills
 Feature.Build.Label.ToolSkillsFailed,Couldn't list available skills
 Feature.Build.Label.ToolSkillsRunning,Listing available skills
+Feature.Build.Label.ToolSubscriptionRunning,Working on your subscription
 Feature.Build.Label.ToolTasksPlanDone,Tasks planned
 Feature.Build.Label.ToolTasksPlanFailed,Couldn't plan tasks
 Feature.Build.Label.ToolTasksPlanRunning,Planning your tasks
@@ -4425,9 +4430,15 @@ Feature.Moments.Description.EngagementFirstLike,View it now
 Feature.Moments.Description.EngagementFirstReaction,Your Moment just got its first reaction!
 Feature.Moments.Description.EngagementLikedCommentsDigest,{likedComments} of your comments got likes
 Feature.Moments.Description.EngagementMomentDigest,{comments} new comments and {milestone} reactions
+Feature.Moments.Description.EngagementMomentFirstReactionDigest,{comments} new comments and its first reaction
+Feature.Moments.Description.EngagementMomentsCommentsDigest,{comments} new comments on your Moments
 Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementMomentsReactionsDigest,Your Moments are getting reactions
 Feature.Moments.Description.EngagementNewComment,just commented on your Moment
 Feature.Moments.Description.EngagementNewComments,and {count} others commented on your Moment
+Feature.Moments.Description.EngagementNewCommentsOneOther,and 1 other commented on your Moment
+Feature.Moments.Description.EngagementOneCommentDigest,1 new comment and {milestone} reactions
+Feature.Moments.Description.EngagementOneCommentFirstReactionDigest,1 new comment and its first reaction
 Feature.Moments.Description.EngagementReactionMilestone,{count} new reactions
 Feature.Moments.Description.FollowingCaughtUpBody,You've watched all the new Moments in this feed. Switch feeds to view more.
 Feature.Moments.Description.FollowingEmptyBodyRecommended,You'll see Moments by creators you follow here.
@@ -5409,12 +5420,14 @@ Feature.Schools.Action.UnidaysTermsOfService,UNiDAYS Terms of Service
 Feature.Schools.Body.EnterCode,UNiDAYS sent an email with your one-time code to {user_email}. Enter the code below to confirm your school.
 Feature.Schools.Body.UnidaysShare,Your email address won't be visible to others.
 Feature.Schools.Body.UnidaysTerms,"We partner with UNiDAYS to verify your school email address. By clicking ""Continue,"" you agree to UNiDAYS' Terms of Service and Privacy Policy."
+Feature.Schools.Body.UnidaysTermsCollege,"By selecting Continue, you agree to UNiDAYS Terms of Service and acknowledge that UNiDAYS may use your college email address according to their Privacy Policy."
 Feature.Schools.Caption.AlumniGroupOnGraduate,"Once you graduate, you'll be in the {school} alumni group."
 Feature.Schools.Caption.RemovedOnGraduate,"Once you graduate, you'll be removed from {school}."
 Feature.Schools.Description.CantFindSchoolNotify,We'll notify you when your school is on Roblox.
 Feature.Schools.Description.CantVerifySchool,"Based on the information you’ve provided, we couldn’t verify your school."
 Feature.Schools.Description.ConnectWithFellowAlumni,Connect with fellow alumni
 Feature.Schools.Description.FeatureAvailableBody,Find friends from your school.
+Feature.Schools.Description.FeatureAvailableBodyCollege,Find friends from your college.
 Feature.Schools.Description.InviteFriendsExclusiveItem,Invite others to verify. Get a free item when your school launches.
 Feature.Schools.Description.InviteFriendsUnlockSooner,Help launch your school's alumni group sooner.
 Feature.Schools.Description.InviteOthersToVerify,Invite others to verify
@@ -5425,7 +5438,9 @@ Feature.Schools.Description.RemoveSchoolBody,You’ll have to re-verify your sch
 Feature.Schools.Description.SchoolIsLiveBody,
 Feature.Schools.Description.SchoolUnavailableBody,This school isn't currently available on Roblox.
 Feature.Schools.Description.UpsellDisclaimer,Your school will only be visible to people from the same school. You can update or remove your school anytime.
+Feature.Schools.Description.UpsellDisclaimerCollege,Your college will only be visible to people from the same college. You can update or remove your college anytime.
 Feature.Schools.Description.UpsellTagline,"Discover, connect, and play with verified students from your school."
+Feature.Schools.Description.UpsellTaglineCollege,"Discover, connect, and play with verified students from your college."
 Feature.Schools.Description.WaitlistAlumniBody,You're all set. We'll notify you as soon as your school's alumni group is launched.
 Feature.Schools.Description.WaitlistBody,You're a founding member. Invite your classmates to launch your school together.
 Feature.Schools.Error.AlreadyLinked,This email address is already linked to another account.
@@ -5442,11 +5457,13 @@ Feature.Schools.Filter.AllYears,All years
 Feature.Schools.Filter.Apply,
 Feature.Schools.Filter.GradYear,Grad year
 Feature.Schools.GiftForYou,A gift for you
+Feature.Schools.Heading.AddCollege,Add college
 Feature.Schools.Heading.AddSchool,Add school
 Feature.Schools.Heading.AddSchoolNow,Join your classmates
 Feature.Schools.Heading.CantFindSchool,We can’t find your school
 Feature.Schools.Heading.CantVerifySchool,We can’t verify your school
 Feature.Schools.Heading.CheckYourEmail,Check your email
+Feature.Schools.Heading.EnterCollegeEmail,Enter your college email
 Feature.Schools.Heading.EnterSchoolEmail,Enter your school email
 Feature.Schools.Heading.InviteYourClassmates,Invite your classmates
 Feature.Schools.Heading.InviteYourFriends,Invite your friends
@@ -5473,8 +5490,10 @@ Feature.Schools.Label.Search,
 Feature.Schools.Label.SuggestedEmail,Did you mean {email}?
 Feature.Schools.Label.UnlockAlumniGroup,Alumni group pending
 Feature.Schools.Label.UpsellPerkFindFriends,Find friends from your school
+Feature.Schools.Label.UpsellPerkFindFriendsCollege,Find friends from your college
 Feature.Schools.Label.UpsellPerkPlayAndChat,See who's online and play together easily
 Feature.Schools.Label.UpsellPerkTrends,Discover what's trending at your school
+Feature.Schools.Label.UpsellPerkTrendsCollege,Discover what's trending at your college
 Feature.Schools.Placeholder.Email,Student email
 Feature.Schools.Placeholder.SchoolName,School name
 Feature.Schools.Placeholder.SixDigitCode,6-digit code
