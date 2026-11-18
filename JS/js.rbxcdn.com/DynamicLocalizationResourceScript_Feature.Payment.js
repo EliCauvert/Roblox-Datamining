@@ -245,7 +245,7 @@ Roblox.LangDynamic["Feature.Payment"] = {
     "Label.RobloxWallet": "Roblox Wallet",
     "Label.WalletBalance": "Wallet balance",
     "Label.BalanceWithAmount": "Balance {amount}",
-    "Label.InsufficientBalance": "Not enough balance",
+    "Label.InsufficientBalance": "Insufficient balance",
     "Label.AdditionalBalanceNeeded": "Additional balance needed",
     "Action.ChangeBillingAddress": "Change billing address",
     "Response.AddressValidationFailed": "Check your billing address and try again.",

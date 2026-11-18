@@ -90,10 +90,34 @@
 }
 
 button.btn-common-play-game-lg,
+button.game-play-button-lg,
 button.btn-economy-robux-white-lg,
+button.game-play-button-purchase-lg,
 button.btn-common-play-game-action-needed-lg,
-button.btn-common-play-game-unplayable-lg {
+button.game-play-button-action-needed-lg,
+button.btn-common-play-game-unplayable-lg,
+button.game-play-button-unplayable-lg {
     height: auto
+}
+
+button.game-play-button-unplayable {
+    border: 1px solid var(--color-content-default);
+    color: var(--color-content-muted)
+}
+
+.play-on-web-button-container {
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    display: -ms-flexbox;
+    display: flex
+}
+
+.play-on-web-beta-notice {
+    text-align: center
 }
 
 .inset-\[0\] {

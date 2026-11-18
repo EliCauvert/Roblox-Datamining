@@ -2,10 +2,10 @@
     try {
         var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "bf3cb5b23e3f5ca44e48c929e572a99e61b72ab1"
+            id: "4714915e0bdce0384a99615087df78cde4d2b364"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "cb2927d8-8490-434d-9829-94f231dc99cd", e._sentryDebugIdIdentifier = "sentry-dbid-cb2927d8-8490-434d-9829-94f231dc99cd")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "481feb4c-900f-4bea-9556-a727d6ca169d", e._sentryDebugIdIdentifier = "sentry-dbid-481feb4c-900f-4bea-9556-a727d6ca169d")
     } catch (e) {}
 }(),
 function() {
@@ -7787,7 +7787,7 @@ function() {
                     }
                 })
             },
-            4627: function(e, t, n) {
+            6420: function(e, t, n) {
                 "use strict";
                 n.d(t, {
                     C: function() {
@@ -7857,7 +7857,7 @@ function() {
                         }), r.createElement(s, h))
                     })
             },
-            4252: function(e, t, n) {
+            8309: function(e, t, n) {
                 "use strict";
                 n.d(t, {
                     AH: function() {
@@ -7870,7 +7870,7 @@ function() {
                         return d
                     }
                 });
-                var r, i, o = n(4627),
+                var r, i, o = n(6420),
                     a = n(1609),
                     s = n(3307),
                     u = n(1971),
@@ -8158,14 +8158,14 @@ function() {
                         }
                     }
             },
-            336: function(e, t, n) {
+            4188: function(e, t, n) {
                 "use strict";
                 n.d(t, {
                     A: function() {
                         return o
                     }
                 }), n(1609), n(6120);
-                var r = n(4252),
+                var r = n(8309),
                     i = n(8002);
 
                 function o(e) {
@@ -8180,7 +8180,7 @@ function() {
                     })
                 }
             },
-            2458: function(e, t, n) {
+            4214: function(e, t, n) {
                 "use strict";
                 n.d(t, {
                     A: function() {
@@ -8191,7 +8191,7 @@ function() {
                     i = n(5844),
                     o = n(1609);
                 n(6120);
-                var a = n(4627),
+                var a = n(6420),
                     s = n(7758),
                     u = n(8002),
                     l = new Map;
@@ -8225,7 +8225,7 @@ function() {
                     }) : c
                 }
             },
-            9740: function(e, t, n) {
+            2897: function(e, t, n) {
                 "use strict";
                 n.r(t), n.d(t, {
                     StyledEngineProvider: function() {
@@ -8254,7 +8254,7 @@ function() {
                     }
                 });
                 var r = n(5199),
-                    i = n(4627),
+                    i = n(6420),
                     o = n(4031),
                     a = n(1971),
                     s = n(3307),
@@ -8339,9 +8339,9 @@ function() {
                 ["a", "abbr", "address", "area", "article", "aside", "audio", "b", "base", "bdi", "bdo", "big", "blockquote", "body", "br", "button", "canvas", "caption", "cite", "code", "col", "colgroup", "data", "datalist", "dd", "del", "details", "dfn", "dialog", "div", "dl", "dt", "em", "embed", "fieldset", "figcaption", "figure", "footer", "form", "h1", "h2", "h3", "h4", "h5", "h6", "head", "header", "hgroup", "hr", "html", "i", "iframe", "img", "input", "ins", "kbd", "keygen", "label", "legend", "li", "link", "main", "map", "mark", "marquee", "menu", "menuitem", "meta", "meter", "nav", "noscript", "object", "ol", "optgroup", "option", "output", "p", "param", "picture", "pre", "progress", "q", "rp", "rt", "ruby", "s", "samp", "script", "section", "select", "small", "source", "span", "strong", "style", "sub", "summary", "sup", "table", "tbody", "td", "textarea", "tfoot", "th", "thead", "time", "title", "tr", "track", "u", "ul", "var", "video", "wbr", "circle", "clipPath", "defs", "ellipse", "foreignObject", "g", "image", "line", "linearGradient", "mask", "path", "pattern", "polygon", "polyline", "radialGradient", "rect", "stop", "svg", "text", "tspan"].forEach(function(e) {
                     v[e] = v(e)
                 });
-                var g = n(4252),
-                    y = n(2458),
-                    b = n(336);
+                var g = n(8309),
+                    y = n(4214),
+                    b = n(4188);
 
                 function E(e, t) {
                     return v(e, t)
@@ -8355,7 +8355,7 @@ function() {
                     return x[0] = e, (0, o.J)(x)
                 }
             },
-            9723: function(e, t, n) {
+            7509: function(e, t, n) {
                 "use strict";
                 var r = n(4823);
                 t.alpha = function(e, t) {
@@ -8438,7 +8438,7 @@ function() {
                     return u(e)
                 }
             },
-            1061: function(e, t, n) {
+            607: function(e, t, n) {
                 "use strict";
                 var r = n(4438),
                     i = n(8369),
@@ -8559,11 +8559,11 @@ function() {
                                 var a = r ? Object.getOwnPropertyDescriptor(e, i) : null;
                                 a && (a.get || a.set) ? Object.defineProperty(n, i, a) : n[i] = e[i]
                             } return n.default = e, t && t.set(e, n), n
-                    }(n(9740)),
+                    }(n(2897)),
                     c = n(9144);
                 a(n(6488)), a(n(6071));
-                var d = a(n(3054)),
-                    f = a(n(3273)),
+                var d = a(n(4832)),
+                    f = a(n(263)),
                     p = ["ownerState"],
                     h = ["variants"],
                     m = ["name", "slot", "skipVariantsResolver", "skipSx", "overridesResolver"];
@@ -8625,7 +8625,7 @@ function() {
                     return n ? y((0, l.internal_serializeStyles)(a), n) : a
                 }
             },
-            2052: function(e, t, n) {
+            1822: function(e, t, n) {
                 "use strict";
                 n.d(t, {
                     EU: function() {
@@ -8709,7 +8709,7 @@ function() {
                     }, {})
                 }
             },
-            6104: function(e, t, n) {
+            1590: function(e, t, n) {
                 "use strict";
                 n.d(t, {
                     A: function() {
@@ -8726,7 +8726,7 @@ function() {
                     return this.palette.mode === e ? t : {}
                 }
             },
-            8102: function(e, t, n) {
+            7548: function(e, t, n) {
                 "use strict";
                 n.d(t, {
                     A: function() {
@@ -8799,7 +8799,7 @@ function() {
                     }, d)
                 }
             },
-            7940: function(e, t, n) {
+            5688: function(e, t, n) {
                 "use strict";
                 n.d(t, {
                     A: function() {
@@ -8809,14 +8809,14 @@ function() {
                 var r = n(5199),
                     i = n(4118),
                     o = n(7694),
-                    a = n(8102),
+                    a = n(7548),
                     s = {
                         borderRadius: 4
                     },
-                    u = n(7219),
-                    l = n(5688),
-                    c = n(3500),
-                    d = n(6104),
+                    u = n(1051),
+                    l = n(4358),
+                    c = n(8601),
+                    d = n(1590),
                     f = ["breakpoints", "palette", "spacing", "shape"],
                     p = function() {
                         for (var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {}, t = arguments.length, n = Array(t > 1 ? t - 1 : 0), p = 1; p < t; p++) n[p - 1] = arguments[p];
@@ -8861,7 +8861,7 @@ function() {
                         }, w
                     }
             },
-            3054: function(e, t, n) {
+            4832: function(e, t, n) {
                 "use strict";
                 n.r(t), n.d(t, {
                     default: function() {
@@ -8874,11 +8874,11 @@ function() {
                         return o.A
                     }
                 });
-                var r = n(7940),
-                    i = n(8102),
-                    o = n(6104)
+                var r = n(5688),
+                    i = n(7548),
+                    o = n(1590)
             },
-            4148: function(e, t, n) {
+            9550: function(e, t, n) {
                 "use strict";
                 var r = n(7694);
                 t.A = function(e, t) {
@@ -8887,7 +8887,7 @@ function() {
                     }) : e
                 }
             },
-            7219: function(e, t, n) {
+            1051: function(e, t, n) {
                 "use strict";
                 n.d(t, {
                     Lc: function() {
@@ -8908,9 +8908,9 @@ function() {
                 });
                 var r, i, o = n(4438),
                     a = n(8369),
-                    s = n(2052),
-                    u = n(6729),
-                    l = n(4148),
+                    s = n(1822),
+                    u = n(7743),
+                    l = n(9550),
                     c = {
                         m: "margin",
                         p: "padding"
@@ -8994,7 +8994,7 @@ function() {
                 }
                 w.propTypes = {}, w.filterProps = h, x.propTypes = {}, x.filterProps = m, S.propTypes = {}, S.filterProps = v
             },
-            6729: function(e, t, n) {
+            7743: function(e, t, n) {
                 "use strict";
                 n.d(t, {
                     BO: function() {
@@ -9006,7 +9006,7 @@ function() {
                 });
                 var r = n(4433),
                     i = n(3560),
-                    o = n(2052);
+                    o = n(1822);
 
                 function a(e, t) {
                     var n = !(arguments.length > 2) || void 0 === arguments[2] || arguments[2];
@@ -9044,16 +9044,16 @@ function() {
                     return d.propTypes = {}, d.filterProps = [t], d
                 }
             },
-            3500: function(e, t, n) {
+            8601: function(e, t, n) {
                 "use strict";
                 n.d(t, {
                     A: function() {
                         return L
                     }
                 });
-                var r = n(7219),
-                    i = n(6729),
-                    o = n(4148),
+                var r = n(1051),
+                    i = n(7743),
+                    o = n(9550),
                     a = function() {
                         for (var e = arguments.length, t = Array(e), n = 0; n < e; n++) t[n] = arguments[n];
                         var r = t.reduce(function(e, t) {
@@ -9070,7 +9070,7 @@ function() {
                             return e.concat(t.filterProps)
                         }, []), i
                     },
-                    s = n(2052);
+                    s = n(1822);
 
                 function u(e) {
                     return "number" != typeof e ? e : "".concat(e, "px solid")
@@ -9504,7 +9504,7 @@ function() {
                     }
                 }
             },
-            455: function(e, t, n) {
+            3021: function(e, t, n) {
                 "use strict";
                 n.d(t, {
                     A: function() {
@@ -9515,7 +9515,7 @@ function() {
                     i = n(5199),
                     o = n(4118),
                     a = n(7694),
-                    s = n(3500),
+                    s = n(8601),
                     u = ["sx"],
                     l = function(e) {
                         var t, n, r = {
@@ -9542,7 +9542,7 @@ function() {
                     })
                 }
             },
-            3273: function(e, t, n) {
+            263: function(e, t, n) {
                 "use strict";
                 n.r(t), n.d(t, {
                     default: function() {
@@ -9558,11 +9558,11 @@ function() {
                         return o.A
                     }
                 });
-                var r = n(5688),
-                    i = n(455),
-                    o = n(3500)
+                var r = n(4358),
+                    i = n(3021),
+                    o = n(8601)
             },
-            5688: function(e, t, n) {
+            4358: function(e, t, n) {
                 "use strict";
                 n.d(t, {
                     k: function() {
@@ -9572,10 +9572,10 @@ function() {
                 var r = n(4433),
                     i = n(5844),
                     o = n(3560),
-                    a = n(4148),
-                    s = n(6729),
-                    u = n(2052),
-                    l = n(3500);
+                    a = n(9550),
+                    s = n(7743),
+                    u = n(1822),
+                    l = n(8601);
 
                 function c() {
                     function e(e, t, n, i) {
@@ -17304,16 +17304,28 @@ function() {
             var e, t, r, i, o, a, s, u, l, c, d, f, p, h, m, v, g, y, b, E, w, x, S, _, A, N, I, T, C, M, k, R, O, L, D, P, j, F, U, B, V, z, W, G, Y, H, X, Z, Q, K, q, J, $ = {};
             n.r($), n.d($, {
                 getIsVNGLandingRedirectEnabled: function() {
-                    return D$
+                    return D2
+                },
+                getLoginLinkUrl: function() {
+                    return DJ
+                },
+                getReturnUrl: function() {
+                    return DK
                 },
                 getSignupUrl: function() {
-                    return DQ
+                    return Dq
                 },
-                logoutAndRedirect: function() {
+                isLoginLinkAvailable: function() {
                     return D0
                 },
+                logoutAndRedirect: function() {
+                    return D4
+                },
                 navigateToLoginWithRedirect: function() {
-                    return Dq
+                    return D$
+                },
+                tryGetIsVNGLandingRedirectEnabled: function() {
+                    return D1
                 }
             });
             var ee = n(8002),
@@ -32099,7 +32111,7 @@ function() {
             }
             var dQ = dZ("Ch9ldmVudC9ldmVudF9maWVsZF9vcHRpb25zLnByb3RvEgVldmVudCIlCgtKc29uT3B0aW9ucxIWCg5wYXJhbWV0ZXJfbmFtZRgBIAEoCSI6CgxGcm9zdE9wdGlvbnMSFAoMaXNfdHRsX2ZpZWxkGAEgASgIEhQKDGlzX3RpbWVzdGFtcBgCIAEoCCIjCgtTaW5rT3B0aW9ucxIUCgxpc19rZXlfZmllbGQYASABKAgiKQoQRXZlbnRNZXRhT3B0aW9ucxIVCg1pc19ldmVudF90aW1lGAEgASgIIskFCg5BdWdtZW50T3B0aW9ucxIcChRkZXJpdmVfdXNlcl9rZXlfZnJvbRgBIAEoCRIhChhhZGRfYWNjb3VudF9jb3VudHJ5X2NvZGUY7wcgASgIEhgKD2FkZF9hZ2VfYnJhY2tldBjrByABKAgSIAoXYWRkX2FwcGxpY2FibGVfcG9saWNpZXMY8QcgASgIEh0KFGFkZF9hcHBsaWNhdGlvbl9uYW1lGPcHIAEoCBIcChNhZGRfYXV0aF9zZXNzaW9uX2lkGPgHIAEoCBIiChlhZGRfYXV0aGVudGljYXRlZF91c2VyX2lkGOwHIAEoCBIjChphZGRfYXV0aGVudGljYXRlZF91c2VyX2tleRj1ByABKAgSHwoWYWRkX2Jyb3dzZXJfdHJhY2tlcl9pZBjqByABKAgSJQocYWRkX2Vudmlyb25tZW50X2FiYnJldmlhdGlvbhjwByABKAgSGQoQYWRkX2V2ZW50X3RhcmdldBjRDyABKAgSFwoOYWRkX2V2ZW50X3R5cGUY0g8gASgIEh0KFGFkZF9odHRwX2ZpbmdlcnByaW50GPkHIAEoCBIaChFhZGRfcGxhdGZvcm1fdHlwZRjpByABKAgSHQoUYWRkX3BsYXRmb3JtX3R5cGVfaWQY/AcgASgIEhAKB2FkZF9yY2MY9gcgASgIEiEKGGFkZF9yZXF1ZXN0X2NvdW50cnlfY29kZRjuByABKAgSFwoOYWRkX3JlcXVlc3RfaXAY7QcgASgIEiEKGGFkZF90ZW5jZW50X2FjY2Vzc190b2tlbhjzByABKAgSHAoTYWRkX3RlbmNlbnRfb3Blbl9pZBjyByABKAgSHAoTYWRkX3Rsc19maW5nZXJwcmludBj6ByABKAgSFwoOYWRkX3VzZXJfYWdlbnQY9AcgASgIEhgKD2FkZF91c2VyX29yaWdpbhj7ByABKAgiSgoKUElJT3B0aW9ucxISCgppc191c2VyX2lkGAEgASgIEhMKC2lzX3VzZXJfa2V5GAMgASgIEhMKC3BvbGljeV90YWdzGAIgAygJIkYKFENvbXBhdGliaWxpdHlPcHRpb25zEhcKD2lzX2V2ZW50X3RhcmdldBgBIAEoCBIVCg1pc19ldmVudF90eXBlGAIgASgIIk4KGkZyb3N0RmVhdHVyZUxvZ2dpbmdPcHRpb25zEhcKD3JlZ2lzdGVyZWRfbmFtZRgBIAEoCRIXCg9mZWF0dXJlX3NlcnZpY2UYAiABKAkiSAoaRnJvc3RGZWF0dXJlU2VydmljZU9wdGlvbnMSFAoMZmVhdHVyZV92aWV3GAEgASgJEhQKDGZlYXR1cmVfbmFtZRgCIAEoCTpMCgRtZXRhEh0uZ29vZ2xlLnByb3RvYnVmLkZpZWxkT3B0aW9ucxjhpxIgASgLMhcuZXZlbnQuRXZlbnRNZXRhT3B0aW9uc1IEbWV0YTpQCgdhdWdtZW50Eh0uZ29vZ2xlLnByb3RvYnVmLkZpZWxkT3B0aW9ucxjipxIgASgLMhUuZXZlbnQuQXVnbWVudE9wdGlvbnNSB2F1Z21lbnQ6RAoDcGlpEh0uZ29vZ2xlLnByb3RvYnVmLkZpZWxkT3B0aW9ucxjjpxIgASgLMhEuZXZlbnQuUElJT3B0aW9uc1IDcGlpOkcKBGpzb24SHS5nb29nbGUucHJvdG9idWYuRmllbGRPcHRpb25zGOSnEiABKAsyEi5ldmVudC5Kc29uT3B0aW9uc1IEanNvbjpHCgRzaW5rEh0uZ29vZ2xlLnByb3RvYnVmLkZpZWxkT3B0aW9ucxjlpxIgASgLMhIuZXZlbnQuU2lua09wdGlvbnNSBHNpbms6SgoFZnJvc3QSHS5nb29nbGUucHJvdG9idWYuRmllbGRPcHRpb25zGOanEiABKAsyEy5ldmVudC5Gcm9zdE9wdGlvbnNSBWZyb3N0OmIKDWNvbXBhdGliaWxpdHkSHS5nb29nbGUucHJvdG9idWYuRmllbGRPcHRpb25zGOenEiABKAsyGy5ldmVudC5Db21wYXRpYmlsaXR5T3B0aW9uc1INY29tcGF0aWJpbGl0eTp2ChVmcm9zdF9mZWF0dXJlX2xvZ2dpbmcSHS5nb29nbGUucHJvdG9idWYuRmllbGRPcHRpb25zGOinEiABKAsyIS5ldmVudC5Gcm9zdEZlYXR1cmVMb2dnaW5nT3B0aW9uc1ITZnJvc3RGZWF0dXJlTG9nZ2luZzp2ChVmcm9zdF9mZWF0dXJlX3NlcnZpY2USHS5nb29nbGUucHJvdG9idWYuRmllbGRPcHRpb25zGOmnEiABKAsyIS5ldmVudC5Gcm9zdEZlYXR1cmVTZXJ2aWNlT3B0aW9uc1ITZnJvc3RGZWF0dXJlU2VydmljZUI9Wi5naXRodWIucmJ4LmNvbS9yb2Jsb3gvc2NoZW1hLXByb3RvZ2VuL2dvL2V2ZW50ogIKTk9UX0lOX1VTRWIGcHJvdG8z", [dp]),
                 dK = dZ("ChtldmVudC91c2VyX2V2ZW50X2Jhc2UucHJvdG8SBWV2ZW50It4HCg1Vc2VyRXZlbnRCYXNlEiUKB3VzZXJfaWQYASABKANCD5K+kgED4D4Bmr6SAQIIAUgAiAEBEiYKCHVzZXJfa2V5GAIgASgJQg+SvpIBA6g/AZq+kgECGAFIAYgBARIgCgljbGllbnRfaXAYAyABKAlCCJK+kgED6D4BSAKIAQESIQoKdXNlcl9hZ2VudBgEIAEoCUIIkr6SAQOgPwFIA4gBARInChBwbGF0Zm9ybV90eXBlX2lkGAUgASgDQgiSvpIBA+A/AUgEiAEBEikKEmJyb3dzZXJfdHJhY2tlcl9pZBgGIAEoA0IIkr6SAQPQPgFIBYgBARIoChFpc190cnVzdGVkX3NvdXJjZRgHIAEoCEIIkr6SAQOwPwFIBogBARIiCgt1c2VyX29yaWdpbhgIIAEoCUIIkr6SAQPYPwFIB4gBARIdCgZ0YXJnZXQYCSABKAlCCJK+kgEDiH0BSAiIAQESIQoKZXZlbnRfdHlwZRgKIAEoCUIIkr6SAQOQfQFICYgBARIfCghhcHBfbmFtZRgLIAEoCUIIkr6SAQO4PwFICogBARIxChtpbmdlc3Rpb25fdGltZV9taWxsaXNlY29uZHMYDCABKANCB4q+kgECCAFIC4gBARJEChFldmVudF9zdHJlYW1fdGFncxgNIAMoCzIpLmV2ZW50LlVzZXJFdmVudEJhc2UuRXZlbnRTdHJlYW1UYWdzRW50cnkSJgoPYXV0aF9zZXNzaW9uX2lkGA4gASgJQgiSvpIBA8A/AUgMiAEBEicKEGh0dHBfZmluZ2VycHJpbnQYDyABKAlCCJK+kgEDyD8BSA2IAQESJgoPdGxzX2ZpbmdlcnByaW50GBAgASgJQgiSvpIBA9A/AUgOiAEBGjYKFEV2ZW50U3RyZWFtVGFnc0VudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAFCCgoIX3VzZXJfaWRCCwoJX3VzZXJfa2V5QgwKCl9jbGllbnRfaXBCDQoLX3VzZXJfYWdlbnRCEwoRX3BsYXRmb3JtX3R5cGVfaWRCFQoTX2Jyb3dzZXJfdHJhY2tlcl9pZEIUChJfaXNfdHJ1c3RlZF9zb3VyY2VCDgoMX3VzZXJfb3JpZ2luQgkKB190YXJnZXRCDQoLX2V2ZW50X3R5cGVCCwoJX2FwcF9uYW1lQh4KHF9pbmdlc3Rpb25fdGltZV9taWxsaXNlY29uZHNCEgoQX2F1dGhfc2Vzc2lvbl9pZEITChFfaHR0cF9maW5nZXJwcmludEISChBfdGxzX2ZpbmdlcnByaW50QjBaLmdpdGh1Yi5yYnguY29tL3JvYmxveC9zY2hlbWEtcHJvdG9nZW4vZ28vZXZlbnRiBnByb3RvMw", [dQ]),
-                dq = dZ("CjFldmVudHN0cmVhbS9jb3JlL2hpdmVfdGFibGVfbWVzc2FnZV9vcHRpb25zLnByb3RvEhBldmVudHN0cmVhbS5jb3JlIuoBChBIaXZlVGFibGVPcHRpb25zEg4KBnNjaGVtYRgBIAEoCRIMCgRuYW1lGAIgASgJEjEKBHR5cGUYAyABKA4yHy5ldmVudHN0cmVhbS5jb3JlLkhpdmVUYWJsZVR5cGVCAhgBEhcKD3BhcnRpdGlvbl9vcmRlchgEIAEoCRIpCiFyZXRlbnRpb25fb2Zfd2FybV9zdG9yYWdlX2luX2RheXMYBSABKAMSKQohcmV0ZW50aW9uX29mX2NvbGRfc3RvcmFnZV9pbl9kYXlzGAYgASgDEhYKDmRhdGFfbGFrZV9uYW1lGAcgASgJIo4CCgxLYWZrYU9wdGlvbnMSFgoObnVtX3BhcnRpdGlvbnMYASABKAUSHgoWbnVtX3BhcnRpdGlvbnNfc3RhZ2luZxgCIAEoBRIcChRwYXJ0aXRpb25fa2V5X2ZpZWxkcxgDIAMoCRIfChdvbWl0X3NjaGVtYV9yZWdpc3RyeV9pZBgEIAEoCBIyCgtjb21wcmVzc2lvbhgFIAEoDjIdLmV2ZW50c3RyZWFtLmNvcmUuQ29tcHJlc3Npb24SFgoOcWFhc19uYW1lc3BhY2UYBiABKAkSHQoVYWxsb3dfdW5zYWZlX2RlbGl2ZXJ5GAcgASgIEhwKFGFsbG93ZWRfaW5fdHJheV9tb2RlGAggASgIInsKEURhdGFWb2x1bWVPcHRpb25zEiQKHGV4cGVjdGVkX3BlYWtfZXZlbnRzX3Blcl9zZWMYASABKAMSKwojZXhwZWN0ZWRfbWF4X3NpemVfb2ZfZXZlbnRfaW5fYnl0ZXMYAiABKAMSEwoLc2FtcGxlX3JhdGUYAyABKAIizAIKEERhdGFNb2RlbE9wdGlvbnMSLQoJZGF0YV90aWVyGAEgASgOMhouZXZlbnRzdHJlYW0uY29yZS5EYXRhVGllchISCgZvd25lcnMYAiADKAlCAhgBEhgKDG9uY2FsbF90ZWFtcxgDIAMoCUICGAESGgoScHJvZHVjZXJfYXBwX25hbWVzGAQgAygJEhoKEmNvbnN1bWVyX2FwcF9uYW1lcxgFIAMoCRIcChRhZ2dyZWdhdGVfZGltZW5zaW9ucxgGIAMoCRImCgVvd25lchgHIAEoCzIXLmV2ZW50c3RyZWFtLmNvcmUuT3duZXISFgoOc2xhY2tfY2hhbm5lbHMYCCADKAkSGgoScGFnZXJkdXR5X3NlcnZpY2VzGAkgAygJEg4KBmVtYWlscxgKIAMoCRIZChFwb2ludHNfb2ZfY29udGFjdBgLIAMoCSKvBAoLRXZlbnRTY2hlbWESEwoLc2NoZW1hX25hbWUYASABKAkSMAoLZXZlbnRfdHlwZXMYAiADKAsyGy5ldmVudHN0cmVhbS5jb3JlLkV2ZW50VHlwZRIzCg1lYWFzX2VudGl0aWVzGAcgAygLMhwuZXZlbnRzdHJlYW0uY29yZS5FYWFzRW50aXR5EjgKD2RhdGFiYXNlX3RhYmxlcxgIIAMoCzIfLmV2ZW50c3RyZWFtLmNvcmUuRGF0YWJhc2VUYWJsZRJHChBzaW5rX2Rlc3RpbmF0aW9uGAMgASgOMi0uZXZlbnRzdHJlYW0uY29yZS5FdmVudFNjaGVtYS5TaW5rRGVzdGluYXRpb24SMQoJZGF0YV90aWVyGAQgASgOMhouZXZlbnRzdHJlYW0uY29yZS5EYXRhVGllckICGAESEQoFb3duZXIYBSABKAlCAhgBEhMKC2thZmthX3RvcGljGAYgASgJIsUBCg9TaW5rRGVzdGluYXRpb24SCAoETk9ORRAAEhUKDUZJUkVIT1NFX09OTFkQARoCCAESEgoKS0FGS0FfT05MWRACGgIIARIaChJGSVJFSE9TRV9BTkRfS0FGS0EQAxoCCAESIwobRklSRUhPU0VfQU5EX0tBRktBX0FORF9RQUFTEAQaAggBEhYKDktBRktBX0FORF9RQUFTEAUaAggBEg0KCVFBQVNfT05MWRAGEhUKEUZJUkVIT1NFX0FORF9RQUFTEAcisQIKCUV2ZW50VHlwZRIOCgZ0YXJnZXQYASABKAkSDAoEbmFtZRgCIAEoCRJLChBmaWVsZFJlZ2V4RmlsdGVyGAMgAygLMjEuZXZlbnRzdHJlYW0uY29yZS5FdmVudFR5cGUuRmllbGRSZWdleEZpbHRlckVudHJ5EkAKDWNvbXBhdGliaWxpdHkYBCABKA4yKS5ldmVudHN0cmVhbS5jb3JlLkV2ZW50VHlwZS5Db21wYXRpYmlsaXR5GjcKFUZpZWxkUmVnZXhGaWx0ZXJFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBIj4KDUNvbXBhdGliaWxpdHkSCwoHREVGQVVMVBAAEiAKHERVQUxfV1JJVEVfVE9fRVZFTlRTX1BBUlFVRVQQASI8CgpFYWFzRW50aXR5EhgKEGZ1bGxfZW50aXR5X25hbWUYASABKAkSFAoMZW50aXR5X2dyb3VwGAIgASgJIlEKDURhdGFiYXNlVGFibGUSFQoNZGF0YWJhc2VfbmFtZRgBIAEoCRISCgp0YWJsZV9uYW1lGAIgASgJEhUKDWRhdGFiYXNlX3R5cGUYAyABKAkiXAoFT3duZXISCwoDb3JnGAEgASgJEgwKBHRlYW0YAiABKAkSEAoDcG9kGAMgASgJSACIAQESEwoGcm9zX2lkGAQgASgDSAGIAQFCBgoEX3BvZEIJCgdfcm9zX2lkIqQBCgtBdXRoT3B0aW9ucxI+CgxhdXRoX21ldGhvZHMYASADKA4yKC5ldmVudHN0cmVhbS5jb3JlLkF1dGhPcHRpb25zLkF1dGhNZXRob2QiVQoKQXV0aE1ldGhvZBILCgdOT19BVVRIEAASDAoISU5URVJOQUwQARIHCgNSQ0MQAhIWChJBVVRIRU5USUNBVEVEX1VTRVIQAxILCgdBUElfS0VZEAQinAIKC0dkcHJPcHRpb25zEjkKA3BpaRgBIAEoDjInLmV2ZW50c3RyZWFtLmNvcmUuR2Rwck9wdGlvbnMuUGlpTWV0aG9kSACIAQESIQoUY2RjX2FyY2hpdmVyX2VuYWJsZWQYAiABKAhIAYgBASKNAQoJUGlpTWV0aG9kEhEKDVNFVF9VU0VSX0tFWVMQABIQCgxTRVRfVVNFUl9JRFMQARI4CjRCUkVBS19HRFBSX0NPTVBMSUFOQ0VfQU5EX1NFVF9CT1RIX1VTRVJfSURTX0FORF9LRVlTEAISIQodU0VUX05FSVRIRVJfVVNFUl9LRVlTX05PUl9JRFMQA0IGCgRfcGlpQhcKFV9jZGNfYXJjaGl2ZXJfZW5hYmxlZCpACg1IaXZlVGFibGVUeXBlEgsKB1VOS05PV04QABIOCgpXV1dfTEVHQUNZEAESEgoORVZFTlRTVFJFQU1fVjEQAiojCgtDb21wcmVzc2lvbhIICgROT05FEAASCgoGU05BUFBZEAEqVwoIRGF0YVRpZXISEAoMVElFUl9ERUZBVUxUEAASDQoJVElFUl9aRVJPEAESDAoIVElFUl9PTkUQAhIMCghUSUVSX1RXTxADEg4KClRJRVJfVEhSRUUQBDpbCgV0YWJsZRIfLmdvb2dsZS5wcm90b2J1Zi5NZXNzYWdlT3B0aW9ucxjJrxIgASgLMiIuZXZlbnRzdHJlYW0uY29yZS5IaXZlVGFibGVPcHRpb25zUgV0YWJsZTpXCgVrYWZrYRIfLmdvb2dsZS5wcm90b2J1Zi5NZXNzYWdlT3B0aW9ucxjKrxIgASgLMh4uZXZlbnRzdHJlYW0uY29yZS5LYWZrYU9wdGlvbnNSBWthZmthOmcKC2RhdGFfdm9sdW1lEh8uZ29vZ2xlLnByb3RvYnVmLk1lc3NhZ2VPcHRpb25zGMuvEiABKAsyIy5ldmVudHN0cmVhbS5jb3JlLkRhdGFWb2x1bWVPcHRpb25zUgpkYXRhVm9sdW1lOmQKCmRhdGFfbW9kZWwSHy5nb29nbGUucHJvdG9idWYuTWVzc2FnZU9wdGlvbnMYzK8SIAEoCzIiLmV2ZW50c3RyZWFtLmNvcmUuRGF0YU1vZGVsT3B0aW9uc1IJZGF0YU1vZGVsOmcKDnNjaGVtYV9tYXBwaW5nEh8uZ29vZ2xlLnByb3RvYnVmLk1lc3NhZ2VPcHRpb25zGM2vEiABKAsyHS5ldmVudHN0cmVhbS5jb3JlLkV2ZW50U2NoZW1hUg1zY2hlbWFNYXBwaW5nOlQKBGF1dGgSHy5nb29nbGUucHJvdG9idWYuTWVzc2FnZU9wdGlvbnMYzq8SIAEoCzIdLmV2ZW50c3RyZWFtLmNvcmUuQXV0aE9wdGlvbnNSBGF1dGg6VAoEZ2RwchIfLmdvb2dsZS5wcm90b2J1Zi5NZXNzYWdlT3B0aW9ucxjPrxIgASgLMh0uZXZlbnRzdHJlYW0uY29yZS5HZHByT3B0aW9uc1IEZ2RwckI7WjlnaXRodWIucmJ4LmNvbS9yb2Jsb3gvc2NoZW1hLXByb3RvZ2VuL2dvL2V2ZW50c3RyZWFtL2NvcmViBnByb3RvMw", [dp]),
+                dq = dZ("CjFldmVudHN0cmVhbS9jb3JlL2hpdmVfdGFibGVfbWVzc2FnZV9vcHRpb25zLnByb3RvEhBldmVudHN0cmVhbS5jb3JlIuoBChBIaXZlVGFibGVPcHRpb25zEg4KBnNjaGVtYRgBIAEoCRIMCgRuYW1lGAIgASgJEjEKBHR5cGUYAyABKA4yHy5ldmVudHN0cmVhbS5jb3JlLkhpdmVUYWJsZVR5cGVCAhgBEhcKD3BhcnRpdGlvbl9vcmRlchgEIAEoCRIpCiFyZXRlbnRpb25fb2Zfd2FybV9zdG9yYWdlX2luX2RheXMYBSABKAMSKQohcmV0ZW50aW9uX29mX2NvbGRfc3RvcmFnZV9pbl9kYXlzGAYgASgDEhYKDmRhdGFfbGFrZV9uYW1lGAcgASgJIo4CCgxLYWZrYU9wdGlvbnMSFgoObnVtX3BhcnRpdGlvbnMYASABKAUSHgoWbnVtX3BhcnRpdGlvbnNfc3RhZ2luZxgCIAEoBRIcChRwYXJ0aXRpb25fa2V5X2ZpZWxkcxgDIAMoCRIfChdvbWl0X3NjaGVtYV9yZWdpc3RyeV9pZBgEIAEoCBIyCgtjb21wcmVzc2lvbhgFIAEoDjIdLmV2ZW50c3RyZWFtLmNvcmUuQ29tcHJlc3Npb24SFgoOcWFhc19uYW1lc3BhY2UYBiABKAkSHQoVYWxsb3dfdW5zYWZlX2RlbGl2ZXJ5GAcgASgIEhwKFGFsbG93ZWRfaW5fdHJheV9tb2RlGAggASgIInsKEURhdGFWb2x1bWVPcHRpb25zEiQKHGV4cGVjdGVkX3BlYWtfZXZlbnRzX3Blcl9zZWMYASABKAMSKwojZXhwZWN0ZWRfbWF4X3NpemVfb2ZfZXZlbnRfaW5fYnl0ZXMYAiABKAMSEwoLc2FtcGxlX3JhdGUYAyABKAIizAIKEERhdGFNb2RlbE9wdGlvbnMSLQoJZGF0YV90aWVyGAEgASgOMhouZXZlbnRzdHJlYW0uY29yZS5EYXRhVGllchISCgZvd25lcnMYAiADKAlCAhgBEhgKDG9uY2FsbF90ZWFtcxgDIAMoCUICGAESGgoScHJvZHVjZXJfYXBwX25hbWVzGAQgAygJEhoKEmNvbnN1bWVyX2FwcF9uYW1lcxgFIAMoCRIcChRhZ2dyZWdhdGVfZGltZW5zaW9ucxgGIAMoCRImCgVvd25lchgHIAEoCzIXLmV2ZW50c3RyZWFtLmNvcmUuT3duZXISFgoOc2xhY2tfY2hhbm5lbHMYCCADKAkSGgoScGFnZXJkdXR5X3NlcnZpY2VzGAkgAygJEg4KBmVtYWlscxgKIAMoCRIZChFwb2ludHNfb2ZfY29udGFjdBgLIAMoCSKvBAoLRXZlbnRTY2hlbWESEwoLc2NoZW1hX25hbWUYASABKAkSMAoLZXZlbnRfdHlwZXMYAiADKAsyGy5ldmVudHN0cmVhbS5jb3JlLkV2ZW50VHlwZRIzCg1lYWFzX2VudGl0aWVzGAcgAygLMhwuZXZlbnRzdHJlYW0uY29yZS5FYWFzRW50aXR5EjgKD2RhdGFiYXNlX3RhYmxlcxgIIAMoCzIfLmV2ZW50c3RyZWFtLmNvcmUuRGF0YWJhc2VUYWJsZRJHChBzaW5rX2Rlc3RpbmF0aW9uGAMgASgOMi0uZXZlbnRzdHJlYW0uY29yZS5FdmVudFNjaGVtYS5TaW5rRGVzdGluYXRpb24SMQoJZGF0YV90aWVyGAQgASgOMhouZXZlbnRzdHJlYW0uY29yZS5EYXRhVGllckICGAESEQoFb3duZXIYBSABKAlCAhgBEhMKC2thZmthX3RvcGljGAYgASgJIsUBCg9TaW5rRGVzdGluYXRpb24SCAoETk9ORRAAEhUKDUZJUkVIT1NFX09OTFkQARoCCAESEgoKS0FGS0FfT05MWRACGgIIARIaChJGSVJFSE9TRV9BTkRfS0FGS0EQAxoCCAESIwobRklSRUhPU0VfQU5EX0tBRktBX0FORF9RQUFTEAQaAggBEhYKDktBRktBX0FORF9RQUFTEAUaAggBEg0KCVFBQVNfT05MWRAGEhUKEUZJUkVIT1NFX0FORF9RQUFTEAcisQIKCUV2ZW50VHlwZRIOCgZ0YXJnZXQYASABKAkSDAoEbmFtZRgCIAEoCRJLChBmaWVsZFJlZ2V4RmlsdGVyGAMgAygLMjEuZXZlbnRzdHJlYW0uY29yZS5FdmVudFR5cGUuRmllbGRSZWdleEZpbHRlckVudHJ5EkAKDWNvbXBhdGliaWxpdHkYBCABKA4yKS5ldmVudHN0cmVhbS5jb3JlLkV2ZW50VHlwZS5Db21wYXRpYmlsaXR5GjcKFUZpZWxkUmVnZXhGaWx0ZXJFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBIj4KDUNvbXBhdGliaWxpdHkSCwoHREVGQVVMVBAAEiAKHERVQUxfV1JJVEVfVE9fRVZFTlRTX1BBUlFVRVQQASI8CgpFYWFzRW50aXR5EhgKEGZ1bGxfZW50aXR5X25hbWUYASABKAkSFAoMZW50aXR5X2dyb3VwGAIgASgJIlEKDURhdGFiYXNlVGFibGUSFQoNZGF0YWJhc2VfbmFtZRgBIAEoCRISCgp0YWJsZV9uYW1lGAIgASgJEhUKDWRhdGFiYXNlX3R5cGUYAyABKAkijAEKBU93bmVyEgsKA29yZxgBIAEoCRIMCgR0ZWFtGAIgASgJEhAKA3BvZBgDIAEoCUgAiAEBEhMKBnJvc19pZBgEIAEoA0gBiAEBEhsKDmJ1c2luZXNzX2dyb3VwGAUgASgJSAKIAQFCBgoEX3BvZEIJCgdfcm9zX2lkQhEKD19idXNpbmVzc19ncm91cCKkAQoLQXV0aE9wdGlvbnMSPgoMYXV0aF9tZXRob2RzGAEgAygOMiguZXZlbnRzdHJlYW0uY29yZS5BdXRoT3B0aW9ucy5BdXRoTWV0aG9kIlUKCkF1dGhNZXRob2QSCwoHTk9fQVVUSBAAEgwKCElOVEVSTkFMEAESBwoDUkNDEAISFgoSQVVUSEVOVElDQVRFRF9VU0VSEAMSCwoHQVBJX0tFWRAEIpwCCgtHZHByT3B0aW9ucxI5CgNwaWkYASABKA4yJy5ldmVudHN0cmVhbS5jb3JlLkdkcHJPcHRpb25zLlBpaU1ldGhvZEgAiAEBEiEKFGNkY19hcmNoaXZlcl9lbmFibGVkGAIgASgISAGIAQEijQEKCVBpaU1ldGhvZBIRCg1TRVRfVVNFUl9LRVlTEAASEAoMU0VUX1VTRVJfSURTEAESOAo0QlJFQUtfR0RQUl9DT01QTElBTkNFX0FORF9TRVRfQk9USF9VU0VSX0lEU19BTkRfS0VZUxACEiEKHVNFVF9ORUlUSEVSX1VTRVJfS0VZU19OT1JfSURTEANCBgoEX3BpaUIXChVfY2RjX2FyY2hpdmVyX2VuYWJsZWQqQAoNSGl2ZVRhYmxlVHlwZRILCgdVTktOT1dOEAASDgoKV1dXX0xFR0FDWRABEhIKDkVWRU5UU1RSRUFNX1YxEAIqIwoLQ29tcHJlc3Npb24SCAoETk9ORRAAEgoKBlNOQVBQWRABKlcKCERhdGFUaWVyEhAKDFRJRVJfREVGQVVMVBAAEg0KCVRJRVJfWkVSTxABEgwKCFRJRVJfT05FEAISDAoIVElFUl9UV08QAxIOCgpUSUVSX1RIUkVFEAQ6WwoFdGFibGUSHy5nb29nbGUucHJvdG9idWYuTWVzc2FnZU9wdGlvbnMYya8SIAEoCzIiLmV2ZW50c3RyZWFtLmNvcmUuSGl2ZVRhYmxlT3B0aW9uc1IFdGFibGU6VwoFa2Fma2ESHy5nb29nbGUucHJvdG9idWYuTWVzc2FnZU9wdGlvbnMYyq8SIAEoCzIeLmV2ZW50c3RyZWFtLmNvcmUuS2Fma2FPcHRpb25zUgVrYWZrYTpnCgtkYXRhX3ZvbHVtZRIfLmdvb2dsZS5wcm90b2J1Zi5NZXNzYWdlT3B0aW9ucxjLrxIgASgLMiMuZXZlbnRzdHJlYW0uY29yZS5EYXRhVm9sdW1lT3B0aW9uc1IKZGF0YVZvbHVtZTpkCgpkYXRhX21vZGVsEh8uZ29vZ2xlLnByb3RvYnVmLk1lc3NhZ2VPcHRpb25zGMyvEiABKAsyIi5ldmVudHN0cmVhbS5jb3JlLkRhdGFNb2RlbE9wdGlvbnNSCWRhdGFNb2RlbDpnCg5zY2hlbWFfbWFwcGluZxIfLmdvb2dsZS5wcm90b2J1Zi5NZXNzYWdlT3B0aW9ucxjNrxIgASgLMh0uZXZlbnRzdHJlYW0uY29yZS5FdmVudFNjaGVtYVINc2NoZW1hTWFwcGluZzpUCgRhdXRoEh8uZ29vZ2xlLnByb3RvYnVmLk1lc3NhZ2VPcHRpb25zGM6vEiABKAsyHS5ldmVudHN0cmVhbS5jb3JlLkF1dGhPcHRpb25zUgRhdXRoOlQKBGdkcHISHy5nb29nbGUucHJvdG9idWYuTWVzc2FnZU9wdGlvbnMYz68SIAEoCzIdLmV2ZW50c3RyZWFtLmNvcmUuR2Rwck9wdGlvbnNSBGdkcHJCO1o5Z2l0aHViLnJieC5jb20vcm9ibG94L3NjaGVtYS1wcm90b2dlbi9nby9ldmVudHN0cmVhbS9jb3JlYgZwcm90bzM", [dp]),
                 dJ = df(dZ("CkFldmVudHN0cmVhbS91c2VyY29tbXVuaXRpZXMvY21udHlfZW50cnlwb2ludF9leHBvc3VyZV9ldmVudC5wcm90bxIbZXZlbnRzdHJlYW0udXNlcmNvbW11bml0aWVzIu8HChxDbW50eUVudHJ5cG9pbnRFeHBvc3VyZUV2ZW50EhsKB2NvbnRleHQYASABKAlCCqK+kgEFCgNjdHgSJgoLZW50cnlfcG9pbnQYAiABKAlCEaK+kgEMCgplbnRyeVBvaW50EiUKCGdyb3VwX2lkGAMgASgDQg6ivpIBCQoHZ3JvdXBJZEgAiAEBEiQKCnBhZ2Vfcm91dGUYBCABKAlCEKK+kgELCglwYWdlUm91dGUSLQoMbG9jYXRpb25fdGFiGAUgASgJQhKivpIBDQoLbG9jYXRpb25UYWJIAYgBARIpCgpzZXNzaW9uX2lkGAYgASgJQhCivpIBCwoJc2Vzc2lvbklkSAKIAQESPwoYZW50cnlwb2ludF9pbXByZXNzaW9uX2lkGAcgASgJQh2ivpIBGAoWZW50cnlwb2ludEltcHJlc3Npb25JZBItCg91c2VyX2V2ZW50X2Jhc2UYCCABKAsyFC5ldmVudC5Vc2VyRXZlbnRCYXNlEjgKEmVudHJ5X3BvaW50X2RldGFpbBgJIAEoCUIXor6SARIKEGVudHJ5UG9pbnREZXRhaWxIA4gBARInCglzZWFyY2hfaWQYCiABKAlCD6K+kgEKCghzZWFyY2hJZEgEiAEBEi0KDHJlc3VsdF9pbmRleBgLIAEoA0ISor6SAQ0KC3Jlc3VsdEluZGV4SAWIAQESHgoEcGFnZRgMIAEoBUILor6SAQYKBHBhZ2VIBogBATrUAsr8kgFICgxpbmdlc3RfcHJvdG8SL3VzZXJjb21tdW5pdGllc19jbW50eV9lbnRyeXBvaW50X2V4cG9zdXJlX2V2ZW50Igdkcyxob3Vy2vySAQoIZBC8BR0AAIA/4vySATs6FAoEVXNlchIJQ29tbXVuaXR5ILMJQhojdXNlci1jb21tdW5pdGllcy1lbmctY2hhdEoHUFE4TFA3Mur8kgGrAQpBZXZlbnRzdHJlYW0vdXNlcmNvbW11bml0aWVzL2NtbnR5X2VudHJ5cG9pbnRfZXhwb3N1cmVfZXZlbnQucHJvdG8SIQoGbW9iaWxlEhdjbW50eUVudHJ5cG9pbnRFeHBvc3VyZRIhCgZjbGllbnQSF2NtbnR5RW50cnlwb2ludEV4cG9zdXJlEh4KA3d3dxIXY21udHlFbnRyeXBvaW50RXhwb3N1cmUYB/r8kgECCABCCwoJX2dyb3VwX2lkQg8KDV9sb2NhdGlvbl90YWJCDQoLX3Nlc3Npb25faWRCFQoTX2VudHJ5X3BvaW50X2RldGFpbEIMCgpfc2VhcmNoX2lkQg8KDV9yZXN1bHRfaW5kZXhCBwoFX3BhZ2VCRlpEZ2l0aHViLnJieC5jb20vcm9ibG94L3NjaGVtYS1wcm90b2dlbi9nby9ldmVudHN0cmVhbS91c2VyY29tbXVuaXRpZXNiBnByb3RvMw", [dQ, dK, dq]), 0),
                 d$ = df(dZ("Cj5ldmVudHN0cmVhbS91c2VyY29tbXVuaXRpZXMvY21udHlfZW50cnlwb2ludF9jbGlja19ldmVudC5wcm90bxIbZXZlbnRzdHJlYW0udXNlcmNvbW11bml0aWVzIrkIChlDbW50eUVudHJ5cG9pbnRDbGlja0V2ZW50EhsKB2NvbnRleHQYASABKAlCCqK+kgEFCgNjdHgSJgoLZW50cnlfcG9pbnQYAiABKAlCEaK+kgEMCgplbnRyeVBvaW50EiUKCGdyb3VwX2lkGAMgASgDQg6ivpIBCQoHZ3JvdXBJZEgAiAEBEiQKCnBhZ2Vfcm91dGUYBCABKAlCEKK+kgELCglwYWdlUm91dGUSLQoMbG9jYXRpb25fdGFiGAUgASgJQhKivpIBDQoLbG9jYXRpb25UYWJIAYgBARIpCgpzZXNzaW9uX2lkGAYgASgJQhCivpIBCwoJc2Vzc2lvbklkSAKIAQESRAoYZW50cnlwb2ludF9pbXByZXNzaW9uX2lkGAcgASgJQh2ivpIBGAoWZW50cnlwb2ludEltcHJlc3Npb25JZEgDiAEBEi0KD3VzZXJfZXZlbnRfYmFzZRgIIAEoCzIULmV2ZW50LlVzZXJFdmVudEJhc2USOAoSZW50cnlfcG9pbnRfZGV0YWlsGAkgASgJQheivpIBEgoQZW50cnlQb2ludERldGFpbEgEiAEBEi0KDHJlc3VsdF9pbmRleBgKIAEoA0ISor6SAQ0KC3Jlc3VsdEluZGV4SAWIAQESJwoJc2VhcmNoX2lkGAsgASgJQg+ivpIBCgoIc2VhcmNoSWRIBogBARIeCgRwYWdlGAwgASgFQguivpIBBgoEcGFnZUgHiAEBEikKCmdyb3VwX3NpemUYDSABKANCEKK+kgELCglncm91cFNpemVICIgBATrFAsr8kgFFCgxpbmdlc3RfcHJvdG8SLHVzZXJjb21tdW5pdGllc19jbW50eV9lbnRyeXBvaW50X2NsaWNrX2V2ZW50Igdkcyxob3Vy2vySAQoIZBC8BR0AAIA/4vySATs6FAoEVXNlchIJQ29tbXVuaXR5ILMJQhojdXNlci1jb21tdW5pdGllcy1lbmctY2hhdEoHUFE4TFA3Mur8kgGfAQo+ZXZlbnRzdHJlYW0vdXNlcmNvbW11bml0aWVzL2NtbnR5X2VudHJ5cG9pbnRfY2xpY2tfZXZlbnQucHJvdG8SHgoGbW9iaWxlEhRjbW50eUVudHJ5cG9pbnRDbGljaxIeCgZjbGllbnQSFGNtbnR5RW50cnlwb2ludENsaWNrEhsKA3d3dxIUY21udHlFbnRyeXBvaW50Q2xpY2sYB/r8kgECCABCCwoJX2dyb3VwX2lkQg8KDV9sb2NhdGlvbl90YWJCDQoLX3Nlc3Npb25faWRCGwoZX2VudHJ5cG9pbnRfaW1wcmVzc2lvbl9pZEIVChNfZW50cnlfcG9pbnRfZGV0YWlsQg8KDV9yZXN1bHRfaW5kZXhCDAoKX3NlYXJjaF9pZEIHCgVfcGFnZUINCgtfZ3JvdXBfc2l6ZUJGWkRnaXRodWIucmJ4LmNvbS9yb2Jsb3gvc2NoZW1hLXByb3RvZ2VuL2dvL2V2ZW50c3RyZWFtL3VzZXJjb21tdW5pdGllc2IGcHJvdG8z", [dQ, dK, dq]), 0),
                 d0 = {
@@ -36359,13 +36371,13 @@ function() {
                         children: s ? et.createPortal(n, s) : s
                     })
                 }),
-                vR = n(1061),
+                vR = n(607),
                 vO = n(7414),
                 vL = n(7694),
-                vD = n(3500),
-                vP = n(5688),
-                vj = n(7940),
-                vF = n(9723),
+                vD = n(8601),
+                vP = n(4358),
+                vj = n(5688),
+                vF = n(7509),
                 vU = {
                     black: "#000",
                     white: "#fff"
@@ -37019,7 +37031,7 @@ function() {
                 onExiting: gv,
                 onExited: gv
             }, gm.UNMOUNTED = gc, gm.EXITED = gd, gm.ENTERING = gf, gm.ENTERED = gp, gm.EXITING = gh;
-            var gg = n(4627),
+            var gg = n(6420),
                 gy = function() {
                     var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : null,
                         t = tf.useContext(gg.T);
@@ -37967,7 +37979,7 @@ function() {
                         }))
                     }))
                 }),
-                yo = n(455);
+                yo = n(3021);
 
             function ya(e) {
                 return gM("MuiTypography", e)
@@ -38468,7 +38480,7 @@ function() {
                     return e
                 }
             };
-            var yQ = n(4252),
+            var yQ = n(8309),
                 yK = gk("MuiTouchRipple", ["root", "ripple", "rippleVisible", "ripplePulsate", "child", "childLeaving", "childPulsate"]);
 
             function yq() {
@@ -39144,7 +39156,7 @@ function() {
                         children: [A, o, N]
                     }))
                 }),
-                EX = n(2052),
+                EX = n(1822),
                 EZ = tf.createContext();
 
             function EQ(e) {
@@ -39602,7 +39614,7 @@ function() {
                         })
                     }))
                 }),
-                wp = n(2458),
+                wp = n(4214),
                 wh = function(e) {
                     var t = e.isPhone,
                         n = (0, tC._)(e, ["isPhone"]);
@@ -39955,8 +39967,8 @@ function() {
             function wR() {
                 return tf.useContext(wk)
             }
-            var wO = n(9740),
-                wL = n(336);
+            var wO = n(2897),
+                wL = n(4188);
 
             function wD(e) {
                 var t = (0, wO.internal_serializeStyles)(e);
@@ -53713,42 +53725,47 @@ function() {
             var Rz = window.Roblox["core-scripts"].intl.intl,
                 RW = n.n(Rz),
                 RG = window.Roblox["core-scripts"].util.pageName,
-                RY = {
+                RY = ["robloxapp.vnggames.com"],
+                RH = function() {
+                    var e = el().domain;
+                    return "https://create.".concat(RY.includes(e) ? "roblox.com" : e, "/")
+                },
+                RX = {
                     url: (0, im.getAbsoluteUrl)("/discover/?keyword="),
                     label: "Label.Games",
                     pageSort: ["home", "games", "discover"],
                     foundationIcon: "icon-regular-circle-play"
                 },
-                RH = {
+                RZ = {
                     url: (0, im.getAbsoluteUrl)("/discover/?searchType=top&keyword="),
-                    pageSort: RY.pageSort,
+                    pageSort: RX.pageSort,
                     foundationIcon: "icon-regular-magnifying-glass",
                     isTopSearchResult: !0
                 },
-                RX = {
+                RQ = {
                     url: (0, im.getAbsoluteUrl)("/catalog?CatalogContext=1&keyword="),
                     label: "Heading.Marketplace",
                     pageSort: ["catalog", "inventory", "bundles", "my/avatar", "trades"],
                     foundationIcon: "icon-regular-shopping-basket"
                 },
-                RZ = {
+                RK = {
                     url: (0, im.getAbsoluteUrl)("/search/users?keyword="),
                     label: "Label.Players",
                     pageSort: ["users"],
                     foundationIcon: "icon-regular-person"
                 },
-                RQ = [RZ, RX, {
+                Rq = [RK, RQ, {
                     url: (0, im.getAbsoluteUrl)("/search/communities?keyword="),
                     label: "Label.sGroups",
                     pageSort: ["groups"],
                     foundationIcon: "icon-regular-three-people"
                 }, {
-                    url: "https://create.".concat(el().domain, "/store/models?keyword="),
+                    url: "".concat(RH(), "store/models?keyword="),
                     label: "Label.CreatorStore",
                     pageSort: ["develop"],
                     foundationIcon: "icon-regular-building-store"
                 }],
-                RK = {
+                RJ = {
                     scrollListItems: {
                         home: {
                             url: (0, im.getAbsoluteUrl)("/home"),
@@ -53832,12 +53849,12 @@ function() {
                             labelTranslationKey: "Label.GiftCards"
                         }
                     },
-                    gameSearchLink: RY,
-                    topSearchLink: RH,
-                    avatarSearchLink: RX,
-                    playersSearchLink: RZ,
-                    miscSearchLink: RQ,
-                    newUniversalSearchUrls: [RY].concat((0, eA._)(RQ)),
+                    gameSearchLink: RX,
+                    topSearchLink: RZ,
+                    avatarSearchLink: RQ,
+                    playersSearchLink: RK,
+                    miscSearchLink: Rq,
+                    newUniversalSearchUrls: [RX].concat((0, eA._)(Rq)),
                     settingsUrl: {
                         settings: {
                             url: (0, im.getAbsoluteUrl)("/my/account"),
@@ -53888,29 +53905,29 @@ function() {
                         label: "Heading.RedeemRobloxCodes"
                     }
                 },
-                Rq = RK.newUniversalSearchUrls,
-                RJ = RK.avatarSearchLink,
-                R$ = RK.topSearchLink,
-                R0 = RK.playersSearchLink,
-                R1 = function() {
+                R$ = RJ.newUniversalSearchUrls,
+                R0 = RJ.avatarSearchLink,
+                R1 = RJ.topSearchLink,
+                R2 = RJ.playersSearchLink,
+                R4 = function() {
                     var e;
                     return null != (e = null == rB ? void 0 : rB.location.pathname) ? e : ""
                 },
-                R2 = function() {
+                R3 = function() {
                     var e;
                     return (null != (e = null == rB ? void 0 : rB.innerWidth) ? e : 0) < 601
                 },
-                R4 = function(e) {
+                R5 = function(e) {
                     var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : null != (0, tl.authenticatedUser)();
                     return t ? e : e.filter(function(e) {
-                        return e !== R0
+                        return e !== R2
                     })
                 },
-                R3 = function() {
-                    var e, t, n = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : R1(),
+                R6 = function() {
+                    var e, t, n = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : R4(),
                         r = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : null != (0, tl.authenticatedUser)(),
                         i = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : null != (e = null == (t = iN("isTopSearchResultsEnabled")) ? void 0 : t()) && e,
-                        o = R4(i ? [R$].concat((0, eA._)(Rq)) : (0, eA._)(Rq), r),
+                        o = R5(i ? [R1].concat((0, eA._)(R$)) : (0, eA._)(R$), r),
                         a = o.filter(function(e) {
                             return e.pageSort.some(function(e) {
                                 return n.includes(e)
@@ -53923,13 +53940,13 @@ function() {
                         });
                     return (0, eA._)(a).concat((0, eA._)(s))
                 },
-                R5 = function() {
-                    var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : R1();
-                    return RJ.pageSort.some(function(t) {
+                R9 = function() {
+                    var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : R4();
+                    return R0.pageSort.some(function(t) {
                         return e.includes(t)
                     })
                 },
-                R6 = {
+                R8 = {
                     debounceTimeout: 100,
                     debouncedSearchInputMaxLength: 35,
                     expiryTimeout: 5e3,
@@ -53956,30 +53973,30 @@ function() {
                     avatarAutocompleteUrlLocations: ["Catalog", "Trades", "Inventory", "Avatar", "CatalogItem"],
                     avatarAutocompleteSuggestionLimit: 5,
                     isSpecialTreatmentAutocompleteRestricted: function(e, t) {
-                        return R4(RK.miscSearchLink, t).flatMap(function(e) {
+                        return R5(RJ.miscSearchLink, t).flatMap(function(e) {
                             return e.pageSort
                         }).some(function(t) {
                             return e.includes(t)
                         })
                     }
                 },
-                R9 = rD.createCancelToken(),
-                R8 = "Website.TopSearchResultsPage.Exposure",
-                R7 = function() {
+                R7 = rD.createCancelToken(),
+                Oe = "Website.TopSearchResultsPage.Exposure",
+                Ot = function() {
                     var e;
                     return null == (e = document.querySelector('meta[name="'.concat("top-search-results-data", '"]'))) ? void 0 : e.dataset
                 },
-                Oe = !1;
+                On = !1;
             iA({
                 getGamesAutocompleteSuggestions: function(e) {
                     return eE(function() {
                         return eS(this, function(t) {
                             switch (t.label) {
                                 case 0:
-                                    return R9.cancel(), R9 = rD.createCancelToken(), [4, ih("GamesAutocomplete", function() {
-                                        return rD.get(ex((0, ew._)({}, R6.getSuggestionUrl), {
-                                            url: R6.getSuggestionUrl.url + encodeURIComponent(e.toLowerCase()),
-                                            cancelToken: R9.token
+                                    return R7.cancel(), R7 = rD.createCancelToken(), [4, ih("GamesAutocomplete", function() {
+                                        return rD.get(ex((0, ew._)({}, R8.getSuggestionUrl), {
+                                            url: R8.getSuggestionUrl.url + encodeURIComponent(e.toLowerCase()),
+                                            cancelToken: R7.token
                                         }))
                                     })];
                                 case 1:
@@ -53995,16 +54012,16 @@ function() {
                         return eS(this, function(s) {
                             switch (s.label) {
                                 case 0:
-                                    if (null === (o = t) && (o = R6.englishLanguageCode), a = {
+                                    if (null === (o = t) && (o = R8.englishLanguageCode), a = {
                                             prefix: e.toLowerCase(),
                                             limit: n,
                                             lang: o,
                                             q: r
-                                        }, R9.cancel(), R9 = rD.createCancelToken(), !i) return [3, 2];
+                                        }, R7.cancel(), R7 = rD.createCancelToken(), !i) return [3, 2];
                                     return [4, ih("AvatarAutocomplete", function() {
-                                        return rD.get(ex((0, ew._)({}, R6.avatarRequestSuggestionUrl), {
-                                            timeout: R6.expiryTimeout,
-                                            cancelToken: R9.token,
+                                        return rD.get(ex((0, ew._)({}, R8.avatarRequestSuggestionUrl), {
+                                            timeout: R8.expiryTimeout,
+                                            cancelToken: R7.token,
                                             fullError: !0
                                         }), a)
                                     })];
@@ -54013,9 +54030,9 @@ function() {
                                     return [2, s.sent().data];
                                 case 2:
                                     return [4, ih("AvatarAutocomplete", function() {
-                                        return rD.get(ex((0, ew._)({}, R6.avatarRequestSuggestionCdnUrl), {
-                                            timeout: R6.expiryTimeout,
-                                            cancelToken: R9.token,
+                                        return rD.get(ex((0, ew._)({}, R8.avatarRequestSuggestionCdnUrl), {
+                                            timeout: R8.expiryTimeout,
+                                            cancelToken: R7.token,
                                             fullError: !0
                                         }), a)
                                     })]
@@ -54055,26 +54072,26 @@ function() {
                 },
                 isTopSearchResultsEnabled: function() {
                     var e;
-                    return (null == (e = R7()) ? void 0 : e.enabled) === "True"
+                    return (null == (e = Ot()) ? void 0 : e.enabled) === "True"
                 },
                 logTopSearchResultsExposureOnce: function() {
-                    Oe || (Oe = !0, rS().getAllValuesForLayer(R8).then(function(e) {
-                        "shouldShowTopResults" in e && rS().logLayerExposure(R8)
+                    On || (On = !0, rS().getAllValuesForLayer(Oe).then(function(e) {
+                        "shouldShowTopResults" in e && rS().logLayerExposure(Oe)
                     }).catch(function() {
-                        Oe = !1
+                        On = !1
                     }))
                 }
             });
-            var Ot = "".concat(el().modalsApi, "/v1/prompts"),
-                On = "".concat(el().modalsApi, "/v1/prompts/impression"),
-                Or = function(e) {
+            var Or = "".concat(el().modalsApi, "/v1/prompts"),
+                Oi = "".concat(el().modalsApi, "/v1/prompts/impression"),
+                Oo = function(e) {
                     return eE(function() {
                         var t, n, r, i, o, a;
                         return eS(this, function(s) {
                             switch (s.label) {
                                 case 0:
                                     return s.trys.push([0, 2, , 3]), [4, (0, rD.get)({
-                                        url: Ot,
+                                        url: Or,
                                         withCredentials: !0
                                     }, {
                                         entryPoint: "LogoutInitiated",
@@ -54096,17 +54113,17 @@ function() {
                         })
                     })()
                 },
-                Oi = function(e) {
+                Oa = function(e) {
                     var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : "";
                     (0, rD.post)({
-                        url: On,
+                        url: Oi,
                         withCredentials: !0
                     }, {
                         promptType: e,
                         promptId: t
                     }).catch(function() {})
                 },
-                Oo = function(e, t) {
+                Os = function(e, t) {
                     var n, r, i, o, a, s, u = t.withEmail,
                         l = {
                             title: null != (n = e.title) ? n : "",
@@ -54117,7 +54134,7 @@ function() {
                         };
                     return u && (l.addEmailLabel = null != (s = e.secondaryButton) ? s : ""), l
                 },
-                Oa = function(e) {
+                Ou = function(e) {
                     var t, n, r, i;
                     return {
                         title: null != (t = e.addEmailTitle) ? t : "",
@@ -54126,7 +54143,7 @@ function() {
                         continueLabel: null != (i = e.addEmailPrimaryButton) ? i : ""
                     }
                 },
-                Os = function(e) {
+                Ol = function(e) {
                     var t, n, r, i, o;
                     return {
                         title: null != (t = e.verifyEmailTitle) ? t : "",
@@ -54136,75 +54153,75 @@ function() {
                         changeEmailLabel: null != (o = e.verifyEmailTertiaryButton) ? o : ""
                     }
                 },
-                Ou = function(e, t) {
+                Oc = function(e, t) {
                     var n = t.onLogout,
                         r = t.showPasskeyUpsell,
                         i = !!e.translations.secondaryButton;
-                    Oi(e.promptType), r({
-                        translations: Oo(e.translations, {
+                    Oa(e.promptType), r({
+                        translations: Os(e.translations, {
                             withEmail: i
                         }),
                         showAddEmail: i,
-                        addEmailTranslations: i ? Oa(e.translations) : void 0,
-                        verifyEmailTranslations: i ? Os(e.translations) : void 0,
+                        addEmailTranslations: i ? Ou(e.translations) : void 0,
+                        verifyEmailTranslations: i ? Ol(e.translations) : void 0,
                         onLogout: n
                     })
                 },
-                Ol = function(e, t) {
+                Od = function(e, t) {
                     switch (e.promptType) {
                         case "LogoutEmailUpsellV1":
                             var n;
-                            Oi(e.promptType), t.showEmailUpsell({
+                            Oa(e.promptType), t.showEmailUpsell({
                                 closeLabel: null != (n = e.translations.closeLabel) ? n : "",
-                                addEmailTranslations: Oa(e.translations),
-                                verifyEmailTranslations: Os(e.translations),
+                                addEmailTranslations: Ou(e.translations),
+                                verifyEmailTranslations: Ol(e.translations),
                                 onLogout: t.onLogout
                             });
                             return;
                         case "LogoutPasskeyUpsellV1":
-                            Ou(e, t);
+                            Oc(e, t);
                             return;
                         default:
                             t.onLogout()
                     }
                 },
-                Oc = {
+                Of = {
                     XSmall: "padding-x-small",
                     Small: "padding-x-medium",
                     Medium: "padding-x-medium",
                     Large: "padding-x-medium"
                 },
-                Od = {
+                Op = {
                     XSmall: "gap-x-xsmall",
                     Small: "gap-x-small",
                     Medium: "gap-x-small",
                     Large: "gap-x-small"
                 },
-                Of = {
+                Oh = {
                     XSmall: "height-600",
                     Small: "height-800",
                     Medium: "height-1000",
                     Large: "height-1200"
                 },
-                Op = {
+                Om = {
                     XSmall: "radius-small",
                     Small: "radius-medium",
                     Medium: "radius-medium",
                     Large: "radius-medium"
                 },
-                Oh = {
+                Ov = {
                     XSmall: "text-title-small",
                     Small: "text-title-small",
                     Medium: "text-title-medium",
                     Large: "text-title-large"
                 },
-                Om = {
+                Og = {
                     XSmall: ["text-body-small", "placeholder:text-body-small"],
                     Small: ["text-body-small", "placeholder:text-body-small"],
                     Medium: ["text-body-medium", "placeholder:text-body-medium"],
                     Large: ["text-body-large", "placeholder:text-body-large"]
                 },
-                Ov = (0, tf.forwardRef)(function(e, t) {
+                Oy = (0, tf.forwardRef)(function(e, t) {
                     var n = tD([e, t]),
                         r = n[0],
                         i = n.slice(1),
@@ -54253,7 +54270,7 @@ function() {
                         }, [C, u, c]),
                         L = o ? tp().createElement("label", {
                             htmlFor: I,
-                            className: iO(Oh[C], "content-emphasis")
+                            className: iO(Ov[C], "content-emphasis")
                         }, o, g && tp().createElement(tp().Fragment, null, " ", tp().createElement("span", {
                             className: "content-default"
                         }, "*"))) : null;
@@ -54265,13 +54282,13 @@ function() {
                         className: "flex items-center gap-xsmall"
                     }, L, tp().createElement(Tc, a)) : L), tp().createElement("div", {
                         "data-testid": "text-input-container",
-                        className: iO("foundation-web-input flex items-center width-full", Tf[v], Td[v], w, Of[C], Op[C], Oc[C], Od[C], M ? "stroke-system-alert focus-within:stroke-system-alert" : "stroke-contrast-alpha focus-within:stroke-system-emphasis"),
+                        className: iO("foundation-web-input flex items-center width-full", Tf[v], Td[v], w, Oh[C], Om[C], Of[C], Op[C], M ? "stroke-system-alert focus-within:stroke-system-alert" : "stroke-contrast-alpha focus-within:stroke-system-emphasis"),
                         style: x
                     }, R, tp().createElement("input", ex((0, ew._)({
                         type: "text",
                         id: I,
                         ref: A,
-                        className: iO("width-full padding-none bg-none stroke-none outline-none content-emphasis placeholder:content-muted", Om[C]),
+                        className: iO("width-full padding-none bg-none stroke-none outline-none content-emphasis placeholder:content-muted", Og[C]),
                         style: {
                             appearance: "none"
                         },
@@ -54288,10 +54305,10 @@ function() {
                         })
                     }, k))
                 });
-            Ov.displayName = "TextInput";
-            var Og = "".concat(el().accountSettingsApi, "/v1/email"),
-                Oy = "".concat(el().accountSettingsApi, "/v1/email/verify"),
-                Ob = {
+            Oy.displayName = "TextInput";
+            var Ob = "".concat(el().accountSettingsApi, "/v1/email"),
+                OE = "".concat(el().accountSettingsApi, "/v1/email/verify"),
+                Ow = {
                     0: "Message.Error.Email.Unknown",
                     1: "Message.Error.Email.PinLocked",
                     2: "Message.Error.Email.FeatureDisabled",
@@ -54305,12 +54322,12 @@ function() {
                     10: "Message.Error.Email.NoEmailAssociated",
                     11: "Message.Error.Email.RequiresCorpNetwork"
                 },
-                OE = "Message.Error.Email.Unknown",
-                Ow = function(e) {
+                Ox = "Message.Error.Email.Unknown",
+                OS = function(e) {
                     var t;
-                    return null == e ? OE : null != (t = Ob[e]) ? t : OE
+                    return null == e ? Ox : null != (t = Ow[e]) ? t : Ox
                 },
-                Ox = {
+                O_ = {
                     authFormInteraction: "authFormInteraction",
                     authButtonClick: "authButtonClick",
                     authMsgShown: "authMsgShown",
@@ -54322,143 +54339,143 @@ function() {
                     passkeyRegistrationEvent: "passkeyRegistrationEvent",
                     authButtonShown: "authButtonShown"
                 },
-                OS = "passkeyCreationSource",
-                O_ = "focus",
-                OA = {
+                OA = "passkeyCreationSource",
+                ON = "focus",
+                OI = {
                     finishRegistration: "finishRegistration",
                     accountRecovery: "accountRecovery",
                     accountSettings: "accountSettings",
                     enhancedProtectionProgram: "enhancedProtectionProgram"
                 },
-                ON = "passkeyUpsell",
-                OI = "addEmail",
-                OT = "verifyEmail",
-                OC = "passkey",
-                OM = "signOut",
-                Ok = function(e, t) {
+                OT = "passkeyUpsell",
+                OC = "addEmail",
+                OM = "verifyEmail",
+                Ok = "passkey",
+                OR = "signOut",
+                OO = function(e, t) {
                     var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : "logoutUpsell";
                     try {
                         (0, a5.sendEventWithTarget)(e, n, t)
                     } catch (e) {}
                 },
-                OR = function(e) {
-                    Ok(Ox.authClientError, {
+                OL = function(e) {
+                    OO(O_.authClientError, {
                         state: e
                     })
                 },
-                OO = function(e) {
-                    Ok(Ox.authFormInteraction, {
+                OD = function(e) {
+                    OO(O_.authFormInteraction, {
                         field: "passkeyEligibility",
                         state: e
                     })
                 },
-                OL = function() {
-                    Ok(Ox.authModalShown, {
-                        field: ON
-                    })
-                },
-                OD = function() {
-                    Ok(Ox.authButtonClick, {
-                        btn: "addPasskey",
-                        state: ON
-                    })
-                },
                 OP = function() {
-                    Ok(Ox.authButtonClick, {
-                        btn: "addEmail",
-                        state: ON
+                    OO(O_.authModalShown, {
+                        field: OT
                     })
                 },
                 Oj = function() {
-                    Ok(Ox.authButtonClick, {
-                        btn: OM,
-                        state: ON
+                    OO(O_.authButtonClick, {
+                        btn: "addPasskey",
+                        state: OT
                     })
                 },
-                OF = "dialogResolved",
-                OU = "dialogRejected",
-                OB = function(e) {
-                    Ok(Ox.authFormInteraction, {
+                OF = function() {
+                    OO(O_.authButtonClick, {
+                        btn: "addEmail",
+                        state: OT
+                    })
+                },
+                OU = function() {
+                    OO(O_.authButtonClick, {
+                        btn: OR,
+                        state: OT
+                    })
+                },
+                OB = "dialogResolved",
+                OV = "dialogRejected",
+                Oz = function(e) {
+                    OO(O_.authFormInteraction, {
                         field: "passkeyRegistration",
                         state: e
                     })
                 },
-                OV = function(e, t) {
-                    Ok(Ox.authClientError, {
+                OW = function(e, t) {
+                    OO(O_.authClientError, {
                         origin: e,
                         state: t
                     })
                 },
-                Oz = function(e, t) {
-                    Ok(Ox.authOperationTiming, {
+                OG = function(e, t) {
+                    OO(O_.authOperationTiming, {
                         elapsedTime: t,
                         state: e
                     })
                 },
-                OW = function(e) {
-                    Ok(Ox.authModalShown, {
-                        field: OI,
-                        origin: e
-                    })
-                },
-                OG = function(e) {
-                    Ok(Ox.authFormInteraction, {
-                        field: "email",
-                        state: O_,
-                        origin: e
-                    })
-                },
                 OY = function(e) {
-                    Ok(Ox.authButtonClick, {
-                        btn: "continue",
-                        state: OI,
+                    OO(O_.authModalShown, {
+                        field: OC,
                         origin: e
                     })
                 },
-                OH = function(e, t) {
-                    Ok(Ox.authClientError, {
+                OH = function(e) {
+                    OO(O_.authFormInteraction, {
+                        field: "email",
+                        state: ON,
+                        origin: e
+                    })
+                },
+                OX = function(e) {
+                    OO(O_.authButtonClick, {
+                        btn: "continue",
+                        state: OC,
+                        origin: e
+                    })
+                },
+                OZ = function(e, t) {
+                    OO(O_.authClientError, {
                         origin: e,
                         state: t
                     })
                 },
-                OX = function() {
-                    Ok(Ox.authModalShown, {
-                        field: OT
-                    })
-                },
-                OZ = function() {
-                    Ok(Ox.authButtonClick, {
-                        btn: "resend",
-                        state: OT
-                    })
-                },
                 OQ = function() {
-                    Ok(Ox.authButtonClick, {
-                        btn: OM,
-                        state: OI
+                    OO(O_.authModalShown, {
+                        field: OM
                     })
                 },
                 OK = function() {
-                    Ok(Ox.authButtonClick, {
-                        btn: OM,
-                        state: OT
+                    OO(O_.authButtonClick, {
+                        btn: "resend",
+                        state: OM
                     })
                 },
                 Oq = function() {
-                    Ok(Ox.authButtonClick, {
-                        btn: "changeEmail",
-                        state: OT
+                    OO(O_.authButtonClick, {
+                        btn: OR,
+                        state: OC
                     })
                 },
-                OJ = function(e) {
-                    Ok(Ox.authButtonClick, {
+                OJ = function() {
+                    OO(O_.authButtonClick, {
+                        btn: OR,
+                        state: OM
+                    })
+                },
+                O$ = function() {
+                    OO(O_.authButtonClick, {
+                        btn: "changeEmail",
+                        state: OM
+                    })
+                },
+                O0 = function(e) {
+                    OO(O_.authButtonClick, {
                         btn: "dismiss",
                         state: e
                     })
                 },
-                O$ = "Message.Error.Email.InvalidEmail",
-                O0 = "Something went wrong. Please try again.",
-                O1 = function(e) {
+                O1 = "Message.Error.Email.InvalidEmail",
+                O2 = "Something went wrong. Please try again.",
+                O4 = function(e) {
                     var t = e.translations,
                         n = e.onContinue,
                         r = e.origin,
@@ -54474,7 +54491,7 @@ function() {
                         p = f[0],
                         h = f[1];
                     return (0, tf.useEffect)(function() {
-                        OW(r)
+                        OY(r)
                     }, [r]), (0, ee.jsxs)(tp().Fragment, {
                         children: [(0, ee.jsx)(hZ, {
                             children: (0, ee.jsxs)("div", {
@@ -54485,7 +54502,7 @@ function() {
                                 }), (0, ee.jsx)("p", {
                                     className: "text-body-medium margin-bottom-medium",
                                     children: t.body
-                                }), (0, ee.jsx)(Ov, {
+                                }), (0, ee.jsx)(Oy, {
                                     type: "email",
                                     inputMode: "email",
                                     autoComplete: "email",
@@ -54494,7 +54511,7 @@ function() {
                                     value: s,
                                     isDisabled: p,
                                     onFocus: function() {
-                                        return OG(r)
+                                        return OH(r)
                                     },
                                     onChange: function(e) {
                                         u(e.target.value), c && d(void 0)
@@ -54513,9 +54530,9 @@ function() {
                                     isDisabled: 0 === s.length || p,
                                     isLoading: p,
                                     onClick: function() {
-                                        if (OY(r), !p) {
+                                        if (OX(r), !p) {
                                             if (!/\S+@\S+\.\S+/.test(s)) {
-                                                d(o(O$, void 0, "Please enter a valid email address.")), OH(r, "invalidFormat");
+                                                d(o(O1, void 0, "Please enter a valid email address.")), OZ(r, "invalidFormat");
                                                 return
                                             }
                                             d(void 0), h(!0), eE(function() {
@@ -54524,7 +54541,7 @@ function() {
                                                     switch (t.label) {
                                                         case 0:
                                                             return t.trys.push([0, 2, , 3]), [4, (0, rD.post)({
-                                                                url: Og,
+                                                                url: Ob,
                                                                 withCredentials: !0
                                                             }, {
                                                                 emailAddress: s
@@ -54544,10 +54561,10 @@ function() {
                                                 })
                                             })().then(function(e) {
                                                 if (e.ok) return void n(s);
-                                                var t, i = Ow(e.errorCode);
-                                                d(o.dynamic(i, void 0, O0)), OH(r, null == (t = e.errorCode) ? "codeUnknown" : "code".concat(t)), h(!1)
+                                                var t, i = OS(e.errorCode);
+                                                d(o.dynamic(i, void 0, O2)), OZ(r, null == (t = e.errorCode) ? "codeUnknown" : "code".concat(t)), h(!1)
                                             }).catch(function() {
-                                                d(o(O$, void 0, O0)), OH(r, "threw"), h(!1)
+                                                d(o(O1, void 0, O2)), OZ(r, "threw"), h(!1)
                                             })
                                         }
                                     },
@@ -54558,7 +54575,7 @@ function() {
                                     size: "Medium",
                                     isDisabled: p,
                                     onClick: function() {
-                                        OQ(), i()
+                                        Oq(), i()
                                     },
                                     children: t.signOutLabel
                                 }) : null]
@@ -54566,7 +54583,7 @@ function() {
                         })]
                     })
                 },
-                O2 = function(e) {
+                O3 = function(e) {
                     var t = e.closeLabel,
                         n = e.onClose,
                         r = e.children;
@@ -54585,15 +54602,15 @@ function() {
                         })
                     })
                 },
-                O4 = ["color-mode-dark", "color-mode-light", "color-mode-system"],
-                O3 = window.Roblox["core-scripts"].auth.fido2,
-                O5 = function(e) {
+                O5 = ["color-mode-dark", "color-mode-light", "color-mode-system"],
+                O6 = window.Roblox["core-scripts"].auth.fido2,
+                O9 = function(e) {
                     return {
                         isError: !1,
                         value: e
                     }
                 },
-                O6 = function(e, t) {
+                O8 = function(e, t) {
                     var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : null;
                     return {
                         isError: !0,
@@ -54602,16 +54619,16 @@ function() {
                         errorStatusCode: n
                     }
                 },
-                O9 = function(e) {
+                O7 = function(e) {
                     var t;
                     return (void 0 === e ? "undefined" : (0, eN._)(e)) === "object" && null !== e && "data" in e && null != (t = (0, rD.getApiErrorCodes)(e.data)[0]) ? t : null
                 },
-                O8 = function(e) {
+                Le = function(e) {
                     if ((void 0 === e ? "undefined" : (0, eN._)(e)) !== "object" || null === e || !("status" in e)) return null;
                     var t, n = null != (t = e.status) ? t : null;
                     return "number" != typeof n ? null : n
                 },
-                O7 = function(e, t, n) {
+                Lt = function(e, t, n) {
                     return eE(function() {
                         var r, i, o, a;
                         return eS(this, function(s) {
@@ -54619,36 +54636,36 @@ function() {
                                 case 0:
                                     return s.trys.push([0, 2, , 3]), [4, e];
                                 case 1:
-                                    if (r = s.sent(), void 0 !== n) return [2, O5(n(r.data))];
-                                    return [2, O5(r.data)];
+                                    if (r = s.sent(), void 0 !== n) return [2, O9(n(r.data))];
+                                    return [2, O9(r.data)];
                                 case 2:
-                                    return o = O9(i = s.sent()), a = O8(i), [2, O6(null == t ? null : Object.values(t).includes(o) ? o : null, i, a)];
+                                    return o = O7(i = s.sent()), a = Le(i), [2, O8(null == t ? null : Object.values(t).includes(o) ? o : null, i, a)];
                                 case 3:
                                     return [2]
                             }
                         })
                     })()
                 },
-                Le = el().authApi,
-                Lt = ((R = {})[R.UNKNOWN = 0] = "UNKNOWN", R[R.EXCEEDED_REGISTERED_KEYS_LIMIT = 1] = "EXCEEDED_REGISTERED_KEYS_LIMIT", R[R.FEATURE_DISABLED = 2] = "FEATURE_DISABLED", R[R.INVALID_CREDENTIAL_NICKNAME = 3] = "INVALID_CREDENTIAL_NICKNAME", R),
-                Ln = {
+                Ln = el().authApi,
+                Lr = ((R = {})[R.UNKNOWN = 0] = "UNKNOWN", R[R.EXCEEDED_REGISTERED_KEYS_LIMIT = 1] = "EXCEEDED_REGISTERED_KEYS_LIMIT", R[R.FEATURE_DISABLED = 2] = "FEATURE_DISABLED", R[R.INVALID_CREDENTIAL_NICKNAME = 3] = "INVALID_CREDENTIAL_NICKNAME", R),
+                Li = {
                     withCredentials: !0,
-                    url: "".concat(Le, "/v1/passkey/StartRegistration"),
+                    url: "".concat(Ln, "/v1/passkey/StartRegistration"),
                     timeout: 1e4
                 },
-                Lr = {
+                Lo = {
                     withCredentials: !0,
-                    url: "".concat(Le, "/v1/passkey/FinishRegistration"),
+                    url: "".concat(Ln, "/v1/passkey/FinishRegistration"),
                     timeout: 1e4
-                },
-                Li = function(e) {
-                    return (0, ep._)(e, Error) && e.name ? e.name : "error"
-                },
-                Lo = function(e) {
-                    var t;
-                    return null == e ? "unknown" : null != (t = Lt[e]) ? t : String(e)
                 },
                 La = function(e) {
+                    return (0, ep._)(e, Error) && e.name ? e.name : "error"
+                },
+                Ls = function(e) {
+                    var t;
+                    return null == e ? "unknown" : null != (t = Lr[e]) ? t : String(e)
+                },
+                Lu = function(e) {
                     var t, n, r, i, o, a = e.translations,
                         s = e.showAddEmail,
                         u = e.onSignOut,
@@ -54660,7 +54677,7 @@ function() {
                         }), n = (0, tf.useCallback)(function() {
                             if ("u" > typeof document) {
                                 var e = [document.body, document.documentElement].find(function(e) {
-                                    return O4.some(function(t) {
+                                    return O5.some(function(t) {
                                         return e.classList.contains(t)
                                     })
                                 });
@@ -54687,7 +54704,7 @@ function() {
                         p = f[0],
                         h = f[1];
                     return (0, tf.useEffect)(function() {
-                        OL()
+                        OP()
                     }, []), (0, ee.jsxs)(tp().Fragment, {
                         children: [(0, ee.jsx)(hZ, {
                             children: (0, ee.jsxs)("div", {
@@ -54717,24 +54734,24 @@ function() {
                                     isDisabled: p,
                                     isLoading: p,
                                     onClick: function() {
-                                        OD(), h(!0), eE(function() {
+                                        Oj(), h(!0), eE(function() {
                                             var e, t, n, r, i, o, a, s, u, l, c, d;
                                             return eS(this, function(f) {
                                                 switch (f.label) {
                                                     case 0:
-                                                        if ("u" < typeof PublicKeyCredential) return OV("compatibilityCheck", "publicKeyCredentialUndefined"), [2, !1];
+                                                        if ("u" < typeof PublicKeyCredential) return OW("compatibilityCheck", "publicKeyCredentialUndefined"), [2, !1];
                                                         f.label = 1;
                                                     case 1:
-                                                        return f.trys.push([1, 8, , 9]), OB("startRequested"), [4, O7((0, rD.post)(Ln, {}), Lt, function(e) {
+                                                        return f.trys.push([1, 8, , 9]), Oz("startRequested"), [4, Lt((0, rD.post)(Li, {}), Lr, function(e) {
                                                             return {
                                                                 creationOptions: JSON.parse(e.creationOptions),
                                                                 sessionId: e.sessionId
                                                             }
                                                         })];
                                                     case 2:
-                                                        if ((e = f.sent()).isError) return OV("startRegistration", Lo(e.error)), [2, !1];
-                                                        n = (t = e.value).creationOptions, r = t.sessionId, i = (0, O3.convertPublicKeyParametersToStandardBase64)(JSON.stringify(n)), o = (0, O3.formatCredentialRequestWeb)(JSON.stringify(i)), OB("dialogInvoked"), a = Date.now(), s = function(e, t) {
-                                                            OB(OU), Oz(OU, Date.now() - a), OV(e, t)
+                                                        if ((e = f.sent()).isError) return OW("startRegistration", Ls(e.error)), [2, !1];
+                                                        n = (t = e.value).creationOptions, r = t.sessionId, i = (0, O6.convertPublicKeyParametersToStandardBase64)(JSON.stringify(n)), o = (0, O6.formatCredentialRequestWeb)(JSON.stringify(i)), Oz("dialogInvoked"), a = Date.now(), s = function(e, t) {
+                                                            Oz(OV), OG(OV, Date.now() - a), OW(e, t)
                                                         }, f.label = 3;
                                                     case 3:
                                                         return f.trys.push([3, 5, , 6]), [4, navigator.credentials.create({
@@ -54743,22 +54760,22 @@ function() {
                                                     case 4:
                                                         return u = f.sent(), [3, 6];
                                                     case 5:
-                                                        return l = f.sent(), s("registerCredentialsErrorCode", Li(l)), [2, !1];
+                                                        return l = f.sent(), s("registerCredentialsErrorCode", La(l)), [2, !1];
                                                     case 6:
                                                         var p, h;
                                                         if (!(0, ep._)(u, PublicKeyCredential)) return s("registerCredentialsEmptyResponse", null === u ? "nullCredential" : "nonPublicKeyCredential"), [2, !1];
-                                                        return OB(OF), Oz(OF, Date.now() - a), c = (0, O3.formatCredentialRegistrationResponseWeb)(u), OB("finishRequested"), [4, (p = r, h = "passkeyUpsellPostLogin", O7((0, rD.post)(Lr, (0, ew._)({
+                                                        return Oz(OB), OG(OB, Date.now() - a), c = (0, O6.formatCredentialRegistrationResponseWeb)(u), Oz("finishRequested"), [4, (p = r, h = "passkeyUpsellPostLogin", Lt((0, rD.post)(Lo, (0, ew._)({
                                                             sessionId: p,
                                                             credentialNickname: "Passkey",
                                                             attestationResponse: c
                                                         }, h ? {
                                                             source: h
-                                                        } : {})), Lt))];
+                                                        } : {})), Lr))];
                                                     case 7:
-                                                        if ((d = f.sent()).isError) return OV("finishRegistration", Lo(d.error)), [2, !1];
-                                                        return OB("registered"), [2, !0];
+                                                        if ((d = f.sent()).isError) return OW("finishRegistration", Ls(d.error)), [2, !1];
+                                                        return Oz("registered"), [2, !0];
                                                     case 8:
-                                                        return OV("unexpected", Li(f.sent())), [2, !1];
+                                                        return OW("unexpected", La(f.sent())), [2, !1];
                                                     case 9:
                                                         return [2]
                                                 }
@@ -54775,7 +54792,7 @@ function() {
                                     variant: "Standard",
                                     size: "Medium",
                                     onClick: function() {
-                                        OP(), null == c || c()
+                                        OF(), null == c || c()
                                     },
                                     children: a.addEmailLabel
                                 }), (0, ee.jsx)(h4, {
@@ -54783,7 +54800,7 @@ function() {
                                     variant: "Utility",
                                     size: "Medium",
                                     onClick: function() {
-                                        Oj(), u()
+                                        OU(), u()
                                     },
                                     children: a.signOutLabel
                                 })]
@@ -54791,13 +54808,13 @@ function() {
                         })]
                     })
                 },
-                Ls = function(e) {
+                Ll = function(e) {
                     var t = e.indexOf("@"),
                         n = e.substring(0, 1);
                     return "".concat(n, "*****").concat(e.substring(t))
                 },
-                Lu = "Something went wrong. Please try again.",
-                Ll = function(e) {
+                Lc = "Something went wrong. Please try again.",
+                Ld = function(e) {
                     var t = e.translations,
                         n = e.email,
                         r = e.onContinueToSignOut,
@@ -54812,10 +54829,10 @@ function() {
                         f = (0, e_._)((0, tf.useState)(void 0), 2),
                         p = f[0],
                         h = f[1],
-                        m = Ls(n),
+                        m = Ll(n),
                         v = t.body.split("{email}").join(m);
                     return (0, tf.useEffect)(function() {
-                        OX()
+                        OQ()
                     }, []), (0, ee.jsxs)(tp().Fragment, {
                         children: [(0, ee.jsx)(hZ, {
                             children: (0, ee.jsxs)("div", {
@@ -54841,13 +54858,13 @@ function() {
                                     isDisabled: s || c,
                                     isLoading: c,
                                     onClick: function() {
-                                        OZ(), s || c || (h(void 0), d(!0), eE(function() {
+                                        OK(), s || c || (h(void 0), d(!0), eE(function() {
                                             var e;
                                             return eS(this, function(t) {
                                                 switch (t.label) {
                                                     case 0:
                                                         return t.trys.push([0, 2, , 3]), [4, (0, rD.post)({
-                                                            url: Oy,
+                                                            url: OE,
                                                             withCredentials: !0
                                                         }, {})];
                                                     case 1:
@@ -54865,10 +54882,10 @@ function() {
                                             })
                                         })().then(function(e) {
                                             if (d(!1), e.ok) return void u(!0);
-                                            var t = Ow(e.errorCode);
-                                            h(o.dynamic(t, void 0, Lu))
+                                            var t = OS(e.errorCode);
+                                            h(o.dynamic(t, void 0, Lc))
                                         }).catch(function() {
-                                            d(!1), h(o("Message.Error.Email.Unknown", void 0, Lu))
+                                            d(!1), h(o("Message.Error.Email.Unknown", void 0, Lc))
                                         }))
                                     },
                                     children: t.resendLabel
@@ -54877,7 +54894,7 @@ function() {
                                     variant: "Standard",
                                     size: "Medium",
                                     onClick: function() {
-                                        OK(), r()
+                                        OJ(), r()
                                     },
                                     children: t.continueLabel
                                 }), (0, ee.jsx)(h4, {
@@ -54885,7 +54902,7 @@ function() {
                                     variant: "Utility",
                                     size: "Medium",
                                     onClick: function() {
-                                        Oq(), i()
+                                        O$(), i()
                                     },
                                     children: t.changeEmailLabel
                                 })]
@@ -54893,16 +54910,16 @@ function() {
                         })]
                     })
                 },
-                Lc = function(e) {
+                Lf = function(e) {
                     var t, n = e.options,
                         r = e.onClose,
-                        i = (0, e_._)((0, tf.useState)("email" === n.kind ? OI : ON), 2),
+                        i = (0, e_._)((0, tf.useState)("email" === n.kind ? OC : OT), 2),
                         o = i[0],
                         a = i[1],
                         s = (0, e_._)((0, tf.useState)(""), 2),
                         u = s[0],
                         l = s[1],
-                        c = (0, e_._)((0, tf.useState)("email" === n.kind ? "emailUpsell" : OC), 2),
+                        c = (0, e_._)((0, tf.useState)("email" === n.kind ? "emailUpsell" : Ok), 2),
                         d = c[0],
                         f = c[1],
                         p = n.addEmailTranslations,
@@ -54911,54 +54928,54 @@ function() {
                         v = function() {
                             r(), n.onLogout()
                         };
-                    if (o === OI && p) t = (0, ee.jsx)(O1, {
+                    if (o === OC && p) t = (0, ee.jsx)(O4, {
                         translations: p,
                         origin: d,
                         onSignOut: "email" === n.kind ? v : void 0,
                         onContinue: function(e) {
-                            l(e), a(OT)
+                            l(e), a(OM)
                         }
                     });
-                    else if (o === OT && h) t = (0, ee.jsx)(Ll, {
+                    else if (o === OM && h) t = (0, ee.jsx)(Ld, {
                         translations: h,
                         email: u,
                         onContinueToSignOut: v,
                         onChangeEmail: function() {
-                            f("changeEmail"), a(OI)
+                            f("changeEmail"), a(OC)
                         }
                     });
                     else {
                         if ("passkey" !== n.kind) return null;
-                        t = (0, ee.jsx)(La, {
+                        t = (0, ee.jsx)(Lu, {
                             translations: n.translations,
                             showAddEmail: n.showAddEmail,
                             onSignOut: v,
                             onPasskeyRegistered: r,
                             onAddEmail: n.showAddEmail && p ? function() {
-                                f(OC), a(OI)
+                                f(Ok), a(OC)
                             } : void 0
                         })
                     }
-                    return (0, ee.jsx)(O2, {
+                    return (0, ee.jsx)(O3, {
                         closeLabel: m,
                         onClose: function() {
-                            OJ(o), r()
+                            O0(o), r()
                         },
                         children: t
                     })
                 },
-                Ld = "logout-upsell-container",
-                Lf = ["Feature.AccountSettings"],
-                Lp = function(e) {
+                Lp = "logout-upsell-container",
+                Lh = ["Feature.AccountSettings"],
+                Lm = function(e) {
                     var t = e.translations,
                         n = e.showAddEmail,
                         r = e.addEmailTranslations,
                         i = e.verifyEmailTranslations,
                         o = e.onLogout,
-                        a = document.getElementById(Ld);
-                    a || ((a = document.createElement("div")).id = Ld, document.body.appendChild(a)), (0, tc.renderWithErrorBoundary)((0, ee.jsx)(nI, {
-                        namespaces: Lf,
-                        children: (0, ee.jsx)(Lc, {
+                        a = document.getElementById(Lp);
+                    a || ((a = document.createElement("div")).id = Lp, document.body.appendChild(a)), (0, tc.renderWithErrorBoundary)((0, ee.jsx)(nI, {
+                        namespaces: Lh,
+                        children: (0, ee.jsx)(Lf, {
                             options: {
                                 kind: "passkey",
                                 translations: t,
@@ -54973,10 +54990,10 @@ function() {
                         })
                     }), a)
                 },
-                Lh = window.Roblox["core-scripts"].auth.hybridResponse,
-                Lm = n(9652);
+                Lv = window.Roblox["core-scripts"].auth.hybridResponse,
+                Lg = n(9652);
 
-            function Lv(e) {
+            function Ly(e) {
                 return function(t, n) {
                     return e.chain(t, function(t) {
                         return e.map(n(t), function() {
@@ -54985,17 +55002,17 @@ function() {
                     })
                 }
             }
-            var Lg = function(e, t, n) {
+            var Lb = function(e, t, n) {
                 if (n || 2 == arguments.length)
                     for (var r, i = 0, o = t.length; i < o; i++) !r && i in t || (r || (r = Array.prototype.slice.call(t, 0, i)), r[i] = t[i]);
                 return e.concat(r || Array.prototype.slice.call(t))
             };
 
-            function Ly(e) {
+            function LE(e) {
                 return e
             }
 
-            function Lb(e, t, n, r, i, o, a, s, u) {
+            function Lw(e, t, n, r, i, o, a, s, u) {
                 switch (arguments.length) {
                     case 1:
                         return e;
@@ -55034,7 +55051,7 @@ function() {
                 }
             }
 
-            function LE(e, t, n, r, i, o, a, s, u) {
+            function Lx(e, t, n, r, i, o, a, s, u) {
                 switch (arguments.length) {
                     case 1:
                         return e;
@@ -55059,19 +55076,19 @@ function() {
                         return l
                 }
             }
-            var Lw = function(e, t) {
+            var LS = function(e, t) {
                 var n = "number" == typeof e ? function(t) {
                     return t.length >= e
                 } : e;
                 return function() {
                     var e = Array.from(arguments);
                     return n(arguments) ? t.apply(this, e) : function(n) {
-                        return t.apply(void 0, Lg([n], e, !1))
+                        return t.apply(void 0, Lb([n], e, !1))
                     }
                 }
             };
 
-            function Lx(e) {
+            function L_(e) {
                 return function(t, n) {
                     return e.map(t, function() {
                         return n
@@ -55079,90 +55096,90 @@ function() {
                 }
             }
 
-            function LS(e) {
-                var t = Lx(e);
+            function LA(e) {
+                var t = L_(e);
                 return function(e) {
                     return t(e, void 0)
                 }
             }
-            var L_ = function(e) {
+            var LN = function(e) {
                     return {
                         _tag: "Left",
                         left: e
                     }
                 },
-                LA = function(e) {
+                LI = function(e) {
                     return {
                         _tag: "Right",
                         right: e
                     }
                 };
             Object.prototype.hasOwnProperty;
-            var LN = Lw(2, function(e, t) {
-                    return LO(e) ? e : t(e.right)
+            var LT = LS(2, function(e, t) {
+                    return LD(e) ? e : t(e.right)
                 }),
-                LI = function(e, t) {
-                    return LE(e, LM(t))
+                LC = function(e, t) {
+                    return Lx(e, LR(t))
                 },
-                LT = function(e, t) {
-                    return LE(e, LR(t))
+                LM = function(e, t) {
+                    return Lx(e, LL(t))
                 },
-                LC = "Either",
-                LM = function(e) {
+                Lk = "Either",
+                LR = function(e) {
                     return function(t) {
-                        return LO(t) ? t : LA(e(t.right))
+                        return LD(t) ? t : LI(e(t.right))
                     }
                 },
-                Lk = {
-                    URI: LC,
-                    map: LI
+                LO = {
+                    URI: Lk,
+                    map: LC
                 };
-            Lw(2, Lx(Lk)), LS(Lk);
-            var LR = function(e) {
+            LS(2, L_(LO)), LA(LO);
+            var LL = function(e) {
                     return function(t) {
-                        return LO(t) ? t : LO(e) ? e : LA(t.right(e.right))
+                        return LD(t) ? t : LD(e) ? e : LI(t.right(e.right))
                     }
                 },
-                LO = function(e) {
+                LD = function(e) {
                     return "Left" === e._tag
                 },
-                LL = function(e, t) {
+                LP = function(e, t) {
                     return function(n) {
-                        return LO(n) ? e(n.left) : t(n.right)
+                        return LD(n) ? e(n.left) : t(n.right)
                     }
                 };
-            Lv({
-                URI: LC,
-                map: LI,
-                ap: LT,
-                chain: LN
+            Ly({
+                URI: Lk,
+                map: LC,
+                ap: LM,
+                chain: LT
             });
 
-            function LD(e, t) {
-                var n = Lv(t);
+            function Lj(e, t) {
+                var n = Ly(t);
                 return function(t, r) {
-                    return n(t, Lb(r, e.fromIO))
+                    return n(t, Lw(r, e.fromIO))
                 }
             }
-            var LP = function(e) {
+            var LF = function(e) {
                     return function() {
                         return Promise.resolve().then(e)
                     }
                 },
-                Lj = function(e, t) {
-                    return LE(e, LU(t))
+                LU = function(e, t) {
+                    return Lx(e, LV(t))
                 },
-                LF = function(e, t) {
-                    return LE(e, LB(t))
+                LB = function(e, t) {
+                    return Lx(e, Lz(t))
                 },
-                LU = function(e) {
+                LV = function(e) {
                     return function(t) {
                         return function() {
                             return Promise.resolve().then(t).then(e)
                         }
                     }
                 },
-                LB = function(e) {
+                Lz = function(e) {
                     return function(t) {
                         return function() {
                             return Promise.all([Promise.resolve().then(t), Promise.resolve().then(e)]).then(function(e) {
@@ -55171,43 +55188,43 @@ function() {
                         }
                     }
                 },
-                LV = function(e) {
+                LW = function(e) {
                     return function() {
                         return Promise.resolve(e)
                     }
                 },
-                Lz = Lw(2, function(e, t) {
+                LG = LS(2, function(e, t) {
                     return function() {
                         return Promise.resolve().then(e).then(function(e) {
                             return t(e)()
                         })
                     }
                 }),
-                LW = "Task",
-                LG = {
-                    URI: LW,
-                    map: Lj
-                };
-            Lw(2, Lx(LG)), LS(LG);
-            var LY = {
-                    URI: LW,
-                    map: Lj,
-                    ap: LF,
-                    chain: Lz
-                },
+                LY = "Task",
                 LH = {
-                    URI: LW,
-                    map: Lj,
-                    of: LV,
-                    ap: LF,
-                    chain: Lz
-                },
-                LX = {
-                    URI: LW,
-                    fromIO: LP
+                    URI: LY,
+                    map: LU
                 };
-            LX.fromIO, Lv(LY), LD(LX, LY);
-            var LZ = function(e, t) {
+            LS(2, L_(LH)), LA(LH);
+            var LX = {
+                    URI: LY,
+                    map: LU,
+                    ap: LB,
+                    chain: LG
+                },
+                LZ = {
+                    URI: LY,
+                    map: LU,
+                    of: LW,
+                    ap: LB,
+                    chain: LG
+                },
+                LQ = {
+                    URI: LY,
+                    fromIO: LF
+                };
+            LQ.fromIO, Ly(LX), Lj(LQ, LX);
+            var LK = function(e, t) {
                     var n, r, i, o, a = {
                         label: 0,
                         sent: function() {
@@ -55281,33 +55298,33 @@ function() {
                         }
                     }
                 },
-                LQ = (Lb(LA, LV), function(e) {
-                    return LG.map(e, LA)
+                Lq = (Lw(LI, LW), function(e) {
+                    return LH.map(e, LI)
                 }),
-                LK = Lb(LP, LQ),
-                Lq = function(e) {
-                    return function(t) {
-                        return LH.chain(t, LL(e, LH.of))
-                    }
-                },
-                LJ = function(e, t) {
-                    return LE(e, L$(t))
-                },
+                LJ = Lw(LF, Lq),
                 L$ = function(e) {
                     return function(t) {
-                        return LG.map(t, function(t) {
-                            return Lk.map(t, e)
+                        return LZ.chain(t, LP(e, LZ.of))
+                    }
+                },
+                L0 = function(e, t) {
+                    return Lx(e, L1(t))
+                },
+                L1 = function(e) {
+                    return function(t) {
+                        return LH.map(t, function(t) {
+                            return LO.map(t, e)
                         })
                     }
                 },
-                L0 = (O = {
-                    URI: LW,
-                    map: Lj,
-                    ap: LF
+                L2 = (O = {
+                    URI: LY,
+                    map: LU,
+                    ap: LB
                 }, L = {
-                    URI: LC,
-                    map: LI,
-                    ap: LT
+                    URI: Lk,
+                    map: LC,
+                    ap: LM
                 }, function(e) {
                     return function(t) {
                         return O.ap(O.map(t, function(e) {
@@ -55317,65 +55334,65 @@ function() {
                         }), e)
                     }
                 }),
-                L1 = Lw(2, (e = LH, function(t, n) {
+                L4 = LS(2, (e = LZ, function(t, n) {
                     return e.chain(t, function(t) {
-                        return LO(t) ? e.of(t) : n(t.right)
+                        return LD(t) ? e.of(t) : n(t.right)
                     })
                 })),
-                L2 = "TaskEither",
-                L4 = {
-                    URI: L2,
-                    map: LJ
-                };
-            Lw(2, Lx(L4)), LS(L4);
-            var L3 = {
-                    URI: L2,
-                    map: LJ,
-                    ap: function(e, t) {
-                        return LE(e, L0(t))
-                    },
-                    chain: L1
-                },
+                L3 = "TaskEither",
                 L5 = {
-                    URI: L2,
-                    fromEither: LV
-                },
-                L6 = {
-                    URI: L2,
-                    fromIO: LK
+                    URI: L3,
+                    map: L0
                 };
-            Lv(L3), Lv(L3), LD(L6, L3), Lv(L3), L5.fromEither, L6.fromIO;
-            var L9 = function() {
+            LS(2, L_(L5)), LA(L5);
+            var L6 = {
+                    URI: L3,
+                    map: L0,
+                    ap: function(e, t) {
+                        return Lx(e, L2(t))
+                    },
+                    chain: L4
+                },
+                L9 = {
+                    URI: L3,
+                    fromEither: LW
+                },
+                L8 = {
+                    URI: L3,
+                    fromIO: LJ
+                };
+            Ly(L6), Ly(L6), Lj(L8, L6), Ly(L6), L9.fromEither, L8.fromIO;
+            var L7 = function() {
                     return {
                         isIosApp: !1,
                         isAndroidApp: !1,
                         isInApp: !1
                     }
                 },
-                L8 = function(e) {
+                De = function(e) {
                     var t, n = e.producer,
                         r = e.hybridCallback,
                         i = e.platformAuthenticatorCheck,
-                        o = (void 0 === n ? L9 : n)(),
+                        o = (void 0 === n ? L7 : n)(),
                         a = o.isInApp,
                         s = "u" > typeof PublicKeyCredential;
                     if (!a && s) return i ? i().catch(function() {
                         return !0
                     }) : Promise.resolve(!0);
                     var u = o.isIosApp || o.isAndroidApp;
-                    return a && u ? (0, Lm.pipe)((t = function(e) {
+                    return a && u ? (0, Lg.pipe)((t = function(e) {
                         return e
                     }, function() {
                         var e, n, i, o;
                         return e = void 0, n = void 0, i = void 0, o = function() {
-                            return LZ(this, function(e) {
+                            return LK(this, function(e) {
                                 switch (e.label) {
                                     case 0:
-                                        return e.trys.push([0, 2, , 3]), [4, r().then(LA)];
+                                        return e.trys.push([0, 2, , 3]), [4, r().then(LI)];
                                     case 1:
                                         return [2, e.sent()];
                                     case 2:
-                                        return [2, L_(t(e.sent()))];
+                                        return [2, LN(t(e.sent()))];
                                     case 3:
                                         return [2]
                                 }
@@ -55405,17 +55422,17 @@ function() {
                             }
                             u((o = o.apply(e, n || [])).next())
                         })
-                    }), L$(function(e) {
+                    }), L1(function(e) {
                         return "true" === e
-                    }), Lq(function() {
-                        return LV(!1)
+                    }), L$(function() {
+                        return LW(!1)
                     }))() : Promise.resolve(!1)
                 },
-                L7 = function() {
+                Dt = function() {
                     var e;
                     return null == rB || null == (e = rB.Roblox) ? void 0 : e.EmailVerificationService
                 },
-                De = function() {
+                Dn = function() {
                     return eE(function() {
                         var e;
                         return eS(this, function(t) {
@@ -55432,14 +55449,14 @@ function() {
                         })
                     })()
                 },
-                Dt = function() {
-                    return L8({
+                Dr = function() {
+                    return De({
                         producer: function() {
                             var e;
-                            return null != (e = (0, rC.getDeviceMeta)()) ? e : L9()
+                            return null != (e = (0, rC.getDeviceMeta)()) ? e : L7()
                         },
                         hybridCallback: function() {
-                            return Lh.getNativeResponse(Lh.FeatureTarget.CREDENTIALS_PROTOCOL_AVAILABLE, {}, 2e3)
+                            return Lv.getNativeResponse(Lv.FeatureTarget.CREDENTIALS_PROTOCOL_AVAILABLE, {}, 2e3)
                         },
                         platformAuthenticatorCheck: function() {
                             return eE(function() {
@@ -55514,27 +55531,27 @@ function() {
                                                 })
                                             })()];
                                         case 1:
-                                            return OO((e = t.sent()) ? "capable" : "excludedNoPlatformAuthenticator"), [2, e]
+                                            return OD((e = t.sent()) ? "capable" : "excludedNoPlatformAuthenticator"), [2, e]
                                     }
                                 })
                             })()
                         }
                     })
                 },
-                Dn = function(e) {
-                    var t, n = null == (t = L7()) ? void 0 : t.handleUserEmailUpsellAtLogout;
+                Di = function(e) {
+                    var t, n = null == (t = Dt()) ? void 0 : t.handleUserEmailUpsellAtLogout;
                     "function" != typeof n ? e() : n(e).then(function(t) {
                         (!t || t.emailAddress) && e()
                     })
                 },
-                Dr = function(e) {
-                    var t, n = null == (t = L7()) ? void 0 : t.openLogoutEmailUpsellModal;
+                Do = function(e) {
+                    var t, n = null == (t = Dt()) ? void 0 : t.openLogoutEmailUpsellModal;
                     if ("function" != typeof n) {
-                        OR("legacyModalEntrypointMissing"), Dn(e);
+                        OL("legacyModalEntrypointMissing"), Di(e);
                         return
                     }
                     var r = function() {
-                        OR("legacyModalOpenFailed"), e()
+                        OL("legacyModalOpenFailed"), e()
                     };
                     try {
                         Promise.resolve(n(e)).catch(r)
@@ -55542,101 +55559,101 @@ function() {
                         r()
                     }
                 },
-                Di = "CachedUserId",
-                Do = {
+                Da = "CachedUserId",
+                Ds = {
                     arrowUp: 38,
                     arrowDown: 40,
                     tab: 9,
                     enter: 13
                 },
-                Da = "Roblox.Logout",
-                Ds = "Roblox.Login",
-                Du = "Roblox.Signup",
-                Dl = "Response.InternalServerErrorDescription",
-                Dc = "headerMenuIconClick",
-                Dd = 1e4,
-                Df = 1e4,
-                Dp = "control",
-                Dh = "hideCreditAndRobux",
-                Dm = "showCreditAndRobux",
-                Dv = {
+                Du = "Roblox.Logout",
+                Dl = "Roblox.Login",
+                Dc = "Roblox.Signup",
+                Dd = "Response.InternalServerErrorDescription",
+                Df = "headerMenuIconClick",
+                Dp = 1e4,
+                Dh = 1e4,
+                Dm = "control",
+                Dv = "hideCreditAndRobux",
+                Dg = "showCreditAndRobux",
+                Dy = {
                     accountSwitchedFlag: "RBXASAccountSwitched",
                     accountSwitchedMessage: "Description.AccountSwitchedConfirmationBannerText"
                 },
-                Dg = "Label.PasskeyUpgradeSuccess",
-                Dy = "authButtonClick",
-                Db = "authClientError",
-                DE = "authPageload",
-                Dw = "passkeyRegistrationEvent",
-                Dx = "homepage",
-                DS = "accountSwitcherStatus",
-                D_ = "cachedUserChanged",
-                DA = "signInRedirect",
-                DN = "handleSilentPasskeyUpgradeWeb",
-                DI = "handleSilentPasskeyUpgradeWebLoginImmediate",
-                DT = "handleSilentPasskeyUpgradeWebLoginDelayed",
-                DC = "handleSilentPasskeyUpgradeWebSignupDelayed",
-                DM = "passkeyRegistration",
-                Dk = "NavigationCredentialCreateFailure",
-                DR = "logout",
-                DO = "switchAccount",
-                DL = "signIn",
-                DD = function() {
-                    (0, a5.sendEventWithTarget)(Dy, Dx, {
-                        btn: DR
-                    })
-                },
-                DP = function(e) {
-                    (0, a5.sendEventWithTarget)(Dy, Dx, {
-                        btn: DO,
-                        state: e
-                    })
-                },
+                Db = "Label.PasskeyUpgradeSuccess",
+                DE = "authButtonClick",
+                Dw = "authClientError",
+                Dx = "authPageload",
+                DS = "passkeyRegistrationEvent",
+                D_ = "homepage",
+                DA = "accountSwitcherStatus",
+                DN = "cachedUserChanged",
+                DI = "signInRedirect",
+                DT = "handleSilentPasskeyUpgradeWeb",
+                DC = "handleSilentPasskeyUpgradeWebLoginImmediate",
+                DM = "handleSilentPasskeyUpgradeWebLoginDelayed",
+                Dk = "handleSilentPasskeyUpgradeWebSignupDelayed",
+                DR = "passkeyRegistration",
+                DO = "NavigationCredentialCreateFailure",
+                DL = "logout",
+                DD = "switchAccount",
+                DP = "signIn",
                 Dj = function() {
-                    (0, a5.sendEventWithTarget)(DE, DA, {})
-                },
-                DF = function() {
-                    (0, a5.sendEventWithTarget)(Dy, DA, {
+                    (0, a5.sendEventWithTarget)(DE, D_, {
                         btn: DL
                     })
                 },
-                DU = function(e, t) {
-                    (0, a5.sendEventWithTarget)(DE, e, {
+                DF = function(e) {
+                    (0, a5.sendEventWithTarget)(DE, D_, {
+                        btn: DD,
+                        state: e
+                    })
+                },
+                DU = function() {
+                    (0, a5.sendEventWithTarget)(Dx, DI, {})
+                },
+                DB = function() {
+                    (0, a5.sendEventWithTarget)(DE, DI, {
+                        btn: DP
+                    })
+                },
+                DV = function(e, t) {
+                    (0, a5.sendEventWithTarget)(Dx, e, {
                         state: t
                     })
                 },
-                DB = function(e) {
-                    (0, a5.sendEventWithTarget)(DE, DS, {
+                Dz = function(e) {
+                    (0, a5.sendEventWithTarget)(Dx, DA, {
                         state: e.toString()
                     })
                 },
-                DV = function(e) {
-                    (0, a5.sendEventWithTarget)(Ox.authMsgShown, OS, {
-                        state: OA.finishRegistration,
+                DW = function(e) {
+                    (0, a5.sendEventWithTarget)(O_.authMsgShown, OA, {
+                        state: OI.finishRegistration,
                         field: e
                     })
                 },
-                Dz = function(e, t, n) {
-                    (0, a5.sendEventWithTarget)(Dw, DM, (0, ew._)({
+                DG = function(e, t, n) {
+                    (0, a5.sendEventWithTarget)(DS, DR, (0, ew._)({
                         source: e,
                         state: t
                     }, n ? {
                         passkeyFailureReason: n
                     } : {}))
                 },
-                DW = function(e, t) {
-                    (0, a5.sendEventWithTarget)(Db, D_, {
+                DY = function(e, t) {
+                    (0, a5.sendEventWithTarget)(Dw, DN, {
                         state: e,
                         url: t
                     })
                 },
-                DG = function(e, t) {
+                DH = function(e, t) {
                     (0, a5.sendEventWithTarget)("navigationSidebarToggle", "navigation", {
                         open: e,
                         variant: t
                     })
                 },
-                DY = function() {
+                DX = function() {
                     return null == rB ? {
                         pathname: "",
                         search: "",
@@ -55647,68 +55664,82 @@ function() {
                         href: rB.location.href
                     }
                 },
-                DH = function(e, t) {
+                DZ = function(e, t) {
                     return es.UrlSearchParams.parse(e).get(t)
                 },
-                DX = function(e) {
+                DQ = function(e) {
                     return es.UrlSearchParams.new(e).toSorted().toString()
                 },
-                DZ = function() {
-                    var e, t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : DY(),
-                        n = null != (e = DH(t.search, "returnUrl")) ? e : t.href;
+                DK = function() {
+                    var e, t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : DX(),
+                        n = null != (e = DZ(t.search, "returnUrl")) ? e : t.href;
                     return n === iv() || n === ig() ? "" : n
                 },
-                DQ = function() {
+                Dq = function() {
                     var e = arguments.length > 0 && void 0 !== arguments[0] && arguments[0],
-                        t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : DY();
-                    if (null != (0, tl.authenticatedUser)() && e) i = DZ(t), n = ig();
+                        t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : DX();
+                    if (null != (0, tl.authenticatedUser)() && e) i = DK(t), n = ig();
                     else {
-                        var n, r, i = null != (r = DH(t.search, "returnUrl")) ? r : t.href,
+                        var n, r, i = null != (r = DZ(t.search, "returnUrl")) ? r : t.href,
                             o = i.toLowerCase();
                         i = o.startsWith(iv().toLowerCase()) || o.startsWith((0, im.getAbsoluteUrl)("/newLogin").toLowerCase()) ? "" : i, n = (0, im.getAbsoluteUrl)("/account/signupredir")
                     }
-                    return "".concat(n, "?").concat(DX({
+                    return "".concat(n, "?").concat(DQ({
                         returnUrl: i
                     }))
                 },
-                DK = function() {
-                    var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : DY(),
-                        t = DZ(e),
+                DJ = function() {
+                    var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : DX(),
+                        t = DK(e),
                         n = iv();
-                    return "".concat(n, "?").concat(DX({
+                    return "".concat(n, "?").concat(DQ({
                         returnUrl: t
                     }))
                 },
-                Dq = function() {
-                    null != rB && (rB.location.href = DK())
+                D$ = function() {
+                    null != rB && (rB.location.href = DJ())
                 },
-                DJ = function() {
-                    var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : DY(),
+                D0 = function() {
+                    var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : DX(),
                         t = e.pathname.toLowerCase();
                     return !t.startsWith("/login") && !t.startsWith("/newlogin")
                 },
-                D$ = function() {
+                D1 = function() {
                     return eE(function() {
-                        var e, t, n;
-                        return eS(this, function(r) {
-                            switch (r.label) {
+                        var e, t;
+                        return eS(this, function(n) {
+                            switch (n.label) {
                                 case 0:
-                                    e = iN("getIntAuthCompliancePolicy"), r.label = 1;
+                                    if (null == (e = iN("getIntAuthCompliancePolicy"))) return [2, null];
+                                    n.label = 1;
                                 case 1:
-                                    return r.trys.push([1, 3, , 4]), [4, null == e ? void 0 : e()];
+                                    return n.trys.push([1, 3, , 4]), [4, e()];
                                 case 2:
-                                    return [2, null != (t = null == (n = r.sent()) ? void 0 : n.isVNGComplianceEnabled) && t];
+                                    return [2, null != (t = n.sent().isVNGComplianceEnabled) && t];
                                 case 3:
-                                    return r.sent(), [2, !1];
+                                    return n.sent(), [2, null];
                                 case 4:
                                     return [2]
                             }
                         })
                     })()
                 },
-                D0 = function() {
+                D2 = function() {
+                    return eE(function() {
+                        var e;
+                        return eS(this, function(t) {
+                            switch (t.label) {
+                                case 0:
+                                    return [4, D1()];
+                                case 1:
+                                    return [2, null != (e = t.sent()) && e]
+                            }
+                        })
+                    })()
+                },
+                D4 = function() {
                     return iE().then(function() {
-                        document.dispatchEvent(new CustomEvent(Da)), r5(Di, null), window.location.reload()
+                        document.dispatchEvent(new CustomEvent(Du)), r5(Da, null), window.location.reload()
                     })
                 };
             iA({
@@ -55719,11 +55750,11 @@ function() {
                     return rw.AccountSwitcherService.syncAccountSwitcherBlobIfNeeded()
                 },
                 openAccountSwitcher: function() {
-                    DP(window.location.href), r5(Di, null);
+                    DF(window.location.href), r5(Da, null);
                     var e = {
                         containerId: "navigation-account-switcher-container",
                         onAccountSwitched: function() {
-                            r5(Dv.accountSwitchedFlag, !0), window.location.href = (0, im.getAbsoluteUrl)("/home")
+                            r5(Dy.accountSwitchedFlag, !0), window.location.href = (0, im.getAbsoluteUrl)("/home")
                         },
                         handleAddAccount: function() {
                             window.location.href = iv()
@@ -55746,17 +55777,17 @@ function() {
                             switch (e.label) {
                                 case 0:
                                     var t;
-                                    return DD(), [4, (t = {
+                                    return Dj(), [4, (t = {
                                         onLogout: function() {
-                                            D0()
+                                            D4()
                                         },
-                                        showPasskeyUpsell: Lp,
+                                        showPasskeyUpsell: Lm,
                                         showEmailUpsell: function(e) {
-                                            return Dr(e.onLogout)
+                                            return Do(e.onLogout)
                                         },
-                                        isPromptsServiceEnabled: De,
-                                        browserSupportsPasskey: Dt,
-                                        runLegacyEmailUpsell: Dn
+                                        isPromptsServiceEnabled: Dn,
+                                        browserSupportsPasskey: Dr,
+                                        runLegacyEmailUpsell: Di
                                     }, eE(function() {
                                         var e, n, r, i, o;
                                         return eS(this, function(a) {
@@ -55782,10 +55813,10 @@ function() {
                                                         })
                                                     })())];
                                                 case 4:
-                                                    return [4, Or.apply(void 0, [a.sent()])];
+                                                    return [4, Oo.apply(void 0, [a.sent()])];
                                                 case 5:
                                                     if (!(o = a.sent())) return r(), [2];
-                                                    return Ol(o, t), [2]
+                                                    return Od(o, t), [2]
                                             }
                                         })
                                     })())];
@@ -55796,15 +55827,15 @@ function() {
                     })()
                 }
             });
-            var D1 = function() {
+            var D3 = function() {
                     var e, t = document.querySelector('meta[name="age-badge-control"]');
                     return null != (e = null == t ? void 0 : t.dataset) ? e : null
                 },
-                D2 = function() {
-                    var e, t = null == (e = D1()) ? void 0 : e.ageBadgeControl;
+                D5 = function() {
+                    var e, t = null == (e = D3()) ? void 0 : e.ageBadgeControl;
                     return "Kids" === t || "Select" === t ? t : null
                 },
-                D4 = (0, tf.forwardRef)(function(e, t) {
+                D6 = (0, tf.forwardRef)(function(e, t) {
                     var n = tD([e, t]),
                         r = n[0],
                         i = n.slice(1),
@@ -55854,16 +55885,16 @@ function() {
                         className: iO("stroke-default self-stretch", o)
                     }))
                 });
-            D4.displayName = "Divider";
-            var D3 = function(e) {
+            D6.displayName = "Divider";
+            var D9 = function(e) {
                     var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 10,
                         n = Number.parseInt(e, t);
                     return Number.isNaN(n) ? null : n
                 },
-                D5 = function() {
+                D8 = function() {
                     var e, t, n, r, i, o, a, s = null == rV || null == (a = rV.querySelector('meta[name="event-data"]')) ? void 0 : a.dataset;
                     if (null == s) return null;
-                    var u = null == s.phase ? null : D3(s.phase);
+                    var u = null == s.phase ? null : D9(s.phase);
                     return null == u ? null : {
                         phase: u,
                         red: null != (e = s.red) ? e : "",
@@ -55874,7 +55905,7 @@ function() {
                         purple: null != (o = s.purple) ? o : ""
                     }
                 },
-                D6 = {
+                D7 = {
                     Success: "bg-system-success",
                     Warning: "bg-system-warning",
                     Alert: "bg-system-alert",
@@ -55883,7 +55914,7 @@ function() {
                     Standard: "bg-action-standard",
                     Voice: "bg-[var(--color-extended-orange-600)]"
                 },
-                D9 = {
+                Pe = {
                     Success: "content-system-success",
                     Warning: "content-system-warning",
                     Alert: "content-system-alert",
@@ -55892,26 +55923,26 @@ function() {
                     Standard: "content-[var(--color-action-standard-background)]",
                     Voice: "content-[var(--color-extended-orange-600)]"
                 },
-                D8 = {
+                Pt = {
                     Emphasis: "content-[var(--dark-mode-content-emphasis)]",
                     Standard: "content-emphasis"
                 },
-                D7 = {
+                Pn = {
                     XSmall: "size-100",
                     Small: "size-150",
                     Medium: "size-200",
                     Large: "size-250",
                     XLarge: "size-300"
                 },
-                Pe = {
+                Pr = {
                     Medium: "min-width-400 height-400 text-label-small",
                     Large: "min-width-500 height-500 text-label-medium"
                 },
-                Pt = {
+                Pi = {
                     Circle: "radius-circle",
                     Square: "radius-none"
                 },
-                Pn = tp().forwardRef(function(e, t) {
+                Po = tp().forwardRef(function(e, t) {
                     if ("Numeric" === e.variant) {
                         e.variant;
                         var n = e.color,
@@ -55923,7 +55954,7 @@ function() {
                         return tp().createElement("div", ex((0, ew._)({
                             ref: t
                         }, s), {
-                            className: iO("foundation-web-status-indicator inline-flex justify-center items-center radius-circle", Pe[void 0 === i ? "Medium" : i], D6[r], D8[r], a)
+                            className: iO("foundation-web-status-indicator inline-flex justify-center items-center radius-circle", Pr[void 0 === i ? "Medium" : i], D7[r], Pt[r], a)
                         }), tp().createElement("span", {
                             className: "padding-x-xsmall"
                         }, o))
@@ -55943,7 +55974,7 @@ function() {
                     return "Ring" === p ? tp().createElement("div", ex((0, ew._)({
                         ref: t
                     }, g), {
-                        className: iO("foundation-web-status-indicator flex justify-center items-center radius-circle", D7[d], D9[l], y, m),
+                        className: iO("foundation-web-status-indicator flex justify-center items-center radius-circle", Pn[d], Pe[l], y, m),
                         style: h ? ex((0, ew._)({}, v), {
                             backgroundColor: h,
                             outlineColor: h
@@ -55959,14 +55990,14 @@ function() {
                     }))) : tp().createElement("div", ex((0, ew._)({
                         ref: t
                     }, g), {
-                        className: iO("foundation-web-status-indicator", D7[d], D6[l], Pt[p], y, m),
+                        className: iO("foundation-web-status-indicator", Pn[d], D7[l], Pi[p], y, m),
                         style: h ? ex((0, ew._)({}, v), {
                             outlineColor: h
                         }) : v
                     }))
                 });
-            Pn.displayName = "StatusIndicator";
-            var Pr = {
+            Po.displayName = "StatusIndicator";
+            var Pa = {
                     XSmall: "size-[var(--icon-size-xsmall)]",
                     Small: "size-[var(--icon-size-small)]",
                     Medium: "size-[var(--icon-size-medium)]",
@@ -55974,7 +56005,7 @@ function() {
                     XLarge: "size-[var(--icon-size-xlarge)]",
                     XXLarge: "size-[var(--icon-size-xxlarge)]"
                 },
-                Pi = tp().forwardRef(function(e, t) {
+                Ps = tp().forwardRef(function(e, t) {
                     var n = tD([e, t]),
                         r = n[0],
                         i = n.slice(1),
@@ -55987,11 +56018,11 @@ function() {
                         ref: l,
                         "aria-hidden": !0,
                         "data-testid": "foundation-web-icon",
-                        className: iO("grow-0 shrink-0 basis-auto icon", o, Pr[void 0 === a ? "Medium" : a], s)
+                        className: iO("grow-0 shrink-0 basis-auto icon", o, Pa[void 0 === a ? "Medium" : a], s)
                     }, u))
                 });
-            Pi.displayName = "Icon";
-            var Po = function(e) {
+            Ps.displayName = "Icon";
+            var Pu = function(e) {
                     var t = e.titleText,
                         n = e.size,
                         r = void 0 === n ? "XSmall" : n,
@@ -56001,21 +56032,21 @@ function() {
                         role: "img",
                         "aria-label": t,
                         title: t,
-                        children: [(0, ee.jsx)(Pi, {
+                        children: [(0, ee.jsx)(Ps, {
                             name: "icon-filled-verified-backplate",
                             className: "content-system-emphasis",
                             size: r
-                        }), (0, ee.jsx)(Pi, {
+                        }), (0, ee.jsx)(Ps, {
                             name: "icon-filled-verified-check",
                             className: "absolute content-[white]",
                             size: r
                         })]
                     })
                 },
-                Pa = (0, tf.createContext)(void 0),
-                Ps = function() {
+                Pl = (0, tf.createContext)(void 0),
+                Pc = function() {
                     var e;
-                    return null != (e = (0, tf.useContext)(Pa)) ? e : null == rB ? {
+                    return null != (e = (0, tf.useContext)(Pl)) ? e : null == rB ? {
                         pathname: "",
                         search: "",
                         href: ""
@@ -56025,17 +56056,17 @@ function() {
                         href: rB.location.href
                     }
                 },
-                Pu = {
+                Pd = {
                     isPlusSubscriber: !1,
                     topEntries: null,
                     upsellEntry: null
                 },
-                Pl = function(e) {
+                Pf = function(e) {
                     var t;
                     return null != (t = e.displayName) ? t : ""
                 },
-                Pc = function() {},
-                Pd = function(e, t) {
+                Pp = function() {},
+                Ph = function(e, t) {
                     return (0, er.useQuery)({
                         queryKey: e,
                         queryFn: function() {
@@ -56046,7 +56077,7 @@ function() {
                         staleTime: 1 / 0
                     }).data
                 },
-                Pf = function(e, t) {
+                Pm = function(e, t) {
                     var n = (0, er.useQueryClient)();
                     (0, tf.useEffect)(function() {
                         var r = iN("subscribeRealTime");
@@ -56057,7 +56088,7 @@ function() {
                         })
                     }, [e, t, n])
                 },
-                Pp = function(e) {
+                Pv = function(e) {
                     var t, n, r = e.id,
                         i = e.displayName,
                         o = e.hasVerifiedBadge,
@@ -56086,7 +56117,7 @@ function() {
                                     children: [(0, ee.jsx)("span", {
                                         className: "text-truncate-end text-no-wrap",
                                         children: i
-                                    }), o ? (0, ee.jsx)(Po, {
+                                    }), o ? (0, ee.jsx)(Pu, {
                                         size: "Small",
                                         titleText: a
                                     }) : null, s ? (0, ee.jsx)(aH, {
@@ -56101,7 +56132,7 @@ function() {
                         })
                     })
                 },
-                Ph = function(e) {
+                Pg = function(e) {
                     var t = e.path,
                         n = e.isCurrentPath,
                         r = e.icon,
@@ -56125,7 +56156,7 @@ function() {
                                 children: i
                             }), o && (0, ee.jsx)("span", {
                                 className: "fill basis-auto padding-x-small flex justify-end items-center",
-                                children: (0, ee.jsx)(Pn, {
+                                children: (0, ee.jsx)(Po, {
                                     value: o,
                                     variant: "Numeric"
                                 })
@@ -56138,12 +56169,12 @@ function() {
                         }) : l
                     }, u)
                 },
-                Pm = function(e) {
+                Py = function(e) {
                     var t, n = e.currentPath,
                         r = i3("CommonUI.Features"),
-                        i = (null != (t = iT("useCommunitiesEntrypointTelemetry")) ? t : Pc)(),
+                        i = (null != (t = iT("useCommunitiesEntrypointTelemetry")) ? t : Pp)(),
                         o = /^\/([a-z]{2}\/)?communities(\/|$)/.test(n);
-                    return (0, ee.jsx)(Ph, {
+                    return (0, ee.jsx)(Pg, {
                         path: "/communities",
                         isCurrentPath: o,
                         icon: "icon-regular-three-people",
@@ -56152,7 +56183,7 @@ function() {
                         onActivate: o || null == i ? void 0 : i.onClick
                     })
                 },
-                Pv = function() {
+                Pb = function() {
                     var e = i3("CommonUI.Features"),
                         t = i3("Feature.ShopDialog"),
                         n = (0, e_._)((0, tf.useState)(!1), 2),
@@ -56220,18 +56251,18 @@ function() {
                         })]
                     })
                 },
-                Pg = function(e) {
+                PE = function(e) {
                     var t = e.currentPath,
                         n = i3("Feature.RobloxSubscription");
-                    return (0, ee.jsx)(Ph, {
+                    return (0, ee.jsx)(Pg, {
                         path: "/plus",
                         isCurrentPath: sR.test(t),
                         icon: "icon-regular-roblox-plus",
                         text: n("Label.Blackbird")
                     })
                 },
-                Py = function() {
-                    var e = (void 0 === Z && (Z = D5()), Z);
+                Pw = function() {
+                    var e = (void 0 === Z && (Z = D8()), Z);
                     if (!(null == e ? void 0 : e.purple)) return null;
                     var t = e.purple;
                     return (0, ee.jsx)("li", {
@@ -56246,18 +56277,18 @@ function() {
                         })
                     }, t)
                 },
-                Pb = function(e, t) {
+                Px = function(e, t) {
                     return e > t ? "".concat(t, "+") : e.toString()
                 };
 
-            function PE(e) {
+            function PS(e) {
                 var t, n, r, i = e.user,
                     o = i.id,
-                    a = (null != (t = iT("useLiveUserNameForDisplay")) ? t : Pl)(i),
+                    a = (null != (t = iT("useLiveUserNameForDisplay")) ? t : Pf)(i),
                     s = (null != (n = iT("useHasVerifiedBadge")) ? n : function(e) {
                         return e.hasVerifiedBadge
                     })(i),
-                    u = Ps().pathname,
+                    u = Pc().pathname,
                     l = (0, e_._)((0, tf.useState)(u), 2),
                     c = l[0],
                     d = l[1];
@@ -56280,83 +56311,83 @@ function() {
                 var f = i3("CommonUI.Features"),
                     p = i3("Feature.ProfileBadges"),
                     h = (null != (r = iT("usePlusNavEntries")) ? r : function() {
-                        return Pu
+                        return Pd
                     })(c),
                     m = h.isPlusSubscriber,
                     v = h.topEntries,
                     g = h.upsellEntry,
-                    y = Pd(["friend-request-count"], iT("getFriendRequestCount"));
-                Pf("FriendshipNotifications", "friend-request-count");
-                var b = Pd(["message-unread-count"], iT("getMessageUnreadCount"));
-                Pf("Roblox.Messages.CountChanged", "message-unread-count");
-                var E = Pd(["trade-inbound-count"], iT("getTradeInboundCount"));
+                    y = Ph(["friend-request-count"], iT("getFriendRequestCount"));
+                Pm("FriendshipNotifications", "friend-request-count");
+                var b = Ph(["message-unread-count"], iT("getMessageUnreadCount"));
+                Pm("Roblox.Messages.CountChanged", "message-unread-count");
+                var E = Ph(["trade-inbound-count"], iT("getTradeInboundCount"));
                 return (0, ee.jsx)("nav", {
                     children: (0, ee.jsxs)("ul", {
                         className: "flex flex-col gap-small",
-                        children: [(0, ee.jsx)(Pp, {
+                        children: [(0, ee.jsx)(Pv, {
                             id: o,
                             displayName: a,
                             hasVerifiedBadge: s,
                             verifiedBadgeLabel: p("Creator.VerifiedBadgeIconAccessibilityText"),
                             isPlusSubscriber: m
-                        }), v, (0, ee.jsx)(Ph, {
+                        }), v, (0, ee.jsx)(Pg, {
                             path: "/home",
                             isCurrentPath: /^\/([a-z]{2}\/)?home(\/|$)/.test(c),
                             icon: "icon-regular-house",
                             text: f("Label.sHome")
-                        }), (0, ee.jsx)(Ph, {
+                        }), (0, ee.jsx)(Pg, {
                             path: "/users/profile",
                             isCurrentPath: /^\/([a-z]{2}\/)?users\/(\d+\/)?profile(\/|$)/.test(c),
                             icon: "icon-regular-person",
                             text: f("Label.sProfile")
-                        }), (0, ee.jsx)(Pg, {
+                        }), (0, ee.jsx)(PE, {
                             currentPath: c
-                        }), (0, ee.jsx)(Ph, {
+                        }), (0, ee.jsx)(Pg, {
                             path: "/my/messages/#!/inbox",
                             isCurrentPath: /^\/([a-z]{2}\/)?my\/messages(\/|$)/.test(c),
                             icon: "icon-regular-speech-bubble-align-center",
                             text: f("Label.sMessages"),
-                            notification: b ? Pb(b, 500) : void 0
-                        }), (0, ee.jsx)(Ph, {
+                            notification: b ? Px(b, 500) : void 0
+                        }), (0, ee.jsx)(Pg, {
                             path: y ? "/users/friends#!/friend-requests" : "/users/friends",
                             isCurrentPath: /^\/([a-z]{2}\/)?users\/(\d+\/)?friends(\/|$)/.test(c),
                             icon: "icon-regular-two-people",
                             text: f("Label.Friends"),
-                            notification: y ? Pb(y, 500) : void 0
-                        }), (0, ee.jsx)(Ph, {
+                            notification: y ? Px(y, 500) : void 0
+                        }), (0, ee.jsx)(Pg, {
                             path: "/my/avatar",
                             isCurrentPath: /^\/([a-z]{2}\/)?my\/avatar(\/|$)/.test(c),
                             icon: "icon-regular-person-standing",
                             text: f("Label.sAvatar")
-                        }), (0, ee.jsx)(Ph, {
+                        }), (0, ee.jsx)(Pg, {
                             path: "/users/inventory",
                             isCurrentPath: /^\/([a-z]{2}\/)?users\/(\d+\/)?inventory(\/|$)/.test(c),
                             icon: "icon-regular-backpack",
                             text: f("Label.sInventory")
-                        }), (0, ee.jsx)(Ph, {
+                        }), (0, ee.jsx)(Pg, {
                             path: "/trades",
                             isCurrentPath: /^\/([a-z]{2}\/)?trades(\/|$)/.test(c),
                             icon: "icon-regular-hand-two-arrows-horizontal",
                             text: f("Label.sTrade"),
-                            notification: E ? Pb(E, 999) : void 0
-                        }), (0, ee.jsx)(Pm, {
+                            notification: E ? Px(E, 999) : void 0
+                        }), (0, ee.jsx)(Py, {
                             currentPath: c
-                        }), (0, ee.jsx)(Ph, {
+                        }), (0, ee.jsx)(Pg, {
                             path: new URL("https://blog.roblox.com"),
                             isCurrentPath: !1,
                             icon: "icon-regular-fountain-pen-nib",
                             text: f("Label.Newsroom")
-                        }), (0, ee.jsx)(Pv, {}), (0, ee.jsx)(Ph, {
+                        }), (0, ee.jsx)(Pb, {}), (0, ee.jsx)(Pg, {
                             path: "/giftcards-us",
                             isCurrentPath: /^\/([a-z]{2}\/)?giftcards-us(\/|$)/.test(c),
                             icon: "icon-regular-gift-card",
                             text: f("Label.GiftCards")
-                        }), g, (0, ee.jsx)(Py, {})]
+                        }), g, (0, ee.jsx)(Pw, {})]
                     })
                 })
             }
 
-            function Pw(e) {
+            function P_(e) {
                 var t = e.user;
                 (0, tf.useEffect)(function() {
                     var e, t = null != (e = document.getElementById("wrap")) ? e : document.body;
@@ -56371,7 +56402,7 @@ function() {
                     o = (0, tf.useCallback)(function() {
                         i(function(e) {
                             var t, n, r = !e;
-                            return DG(r, "NEW"), r && (null == (t = iN("logLeftNavExposure")) || t(), null == (n = iN("trackOpenToVisible")) || n("NEW")), r
+                            return DH(r, "NEW"), r && (null == (t = iN("logLeftNavExposure")) || t(), null == (n = iN("trackOpenToVisible")) || n("NEW")), r
                         })
                     }, [i]);
                 return (0, tf.useEffect)(function() {
@@ -56387,18 +56418,18 @@ function() {
                             className: "width-[288px]",
                             children: (0, ee.jsx)("div", {
                                 className: "padding-x-large padding-y-medium flex flex-col gap-large",
-                                children: (0, ee.jsx)(PE, {
+                                children: (0, ee.jsx)(PS, {
                                     user: t
                                 })
                             })
-                        }), (0, ee.jsx)(D4, {
+                        }), (0, ee.jsx)(D6, {
                             orientation: "vertical"
                         })]
                     })
                 })
             }
 
-            function Px(e) {
+            function PA(e) {
                 var t = e.user,
                     n = (0, tf.useRef)(!1);
                 return (0, tf.useEffect)(function() {
@@ -56417,32 +56448,32 @@ function() {
                             };
                         f8("RenderedMs", r, t), ir("LeftNav_RenderedMs", t, r)
                     }
-                }, []), (0, ee.jsx)(Pw, {
+                }, []), (0, ee.jsx)(P_, {
                     user: t
                 })
             }
 
-            function PS(e) {
+            function PN(e) {
                 var t = e.user;
                 return (0, ee.jsx)(pn, {
                     name: "LeftNavReactCrash",
-                    children: (0, ee.jsx)(Px, {
+                    children: (0, ee.jsx)(PA, {
                         user: t
                     })
                 })
             }
-            var P_ = "searchAutocomplete",
-                PA = P_,
-                PN = "searchLandingPage",
-                PI = "open",
-                PT = "submit",
-                PC = "close",
-                PM = "cancel",
-                Pk = function(e, t, n, r, i, o, a) {
+            var PI = "searchAutocomplete",
+                PT = PI,
+                PC = "searchLandingPage",
+                PM = "open",
+                Pk = "submit",
+                PR = "close",
+                PO = "cancel",
+                PL = function(e, t, n, r, i, o, a) {
                     return [{
                         name: "searchSuggestionClicked",
                         type: a5.eventTypes.formInteraction,
-                        context: P_
+                        context: PI
                     }, {
                         kwd: e,
                         searchType: t,
@@ -56453,11 +56484,11 @@ function() {
                         sessionInfo: a
                     }]
                 },
-                PR = function(e, t, n, r, i, o, a, s, u, l) {
+                PD = function(e, t, n, r, i, o, a, s, u, l) {
                     return [{
                         name: "searchAutocomplete",
                         type: a5.eventTypes.formInteraction,
-                        context: P_
+                        context: PI
                     }, {
                         kwd: e,
                         previousKwd: t,
@@ -56471,7 +56502,7 @@ function() {
                         isPersonalizedBasedOnPreviousQuery: l
                     }]
                 },
-                PO = function(e, t, n, r, i) {
+                PP = function(e, t, n, r, i) {
                     return [{
                         name: "search",
                         type: a5.eventTypes.formInteraction,
@@ -56483,29 +56514,29 @@ function() {
                         searchLandingPageSessionInfo: i
                     }]
                 },
-                PL = function(e, t) {
+                Pj = function(e, t) {
                     return [{
                         name: "catalogSearch",
                         type: a5.eventTypes.formInteraction,
-                        context: P_
+                        context: PI
                     }, {
                         autocompleteFlag: e,
                         previousPage: t
                     }]
                 },
-                PD = ((D = {})[D.GameSuggestion = 0] = "GameSuggestion", D[D.QuerySuggestion = 1] = "QuerySuggestion", D[D.TrendingQuerySuggestion = 2] = "TrendingQuerySuggestion", D),
-                PP = function(e) {
+                PF = ((D = {})[D.GameSuggestion = 0] = "GameSuggestion", D[D.QuerySuggestion = 1] = "QuerySuggestion", D[D.TrendingQuerySuggestion = 2] = "TrendingQuerySuggestion", D),
+                PU = function(e) {
                     if ("Query" in e) return "avatar";
                     switch (e.type) {
-                        case PD.QuerySuggestion:
+                        case PF.QuerySuggestion:
                             return "keyword";
-                        case PD.GameSuggestion:
+                        case PF.GameSuggestion:
                             return "game";
-                        case PD.TrendingQuerySuggestion:
+                        case PF.TrendingQuerySuggestion:
                             throw Error("Unrecognized autocomplete suggestion, ".concat(JSON.stringify(e)))
                     }
                 },
-                Pj = function(e) {
+                PB = function(e) {
                     if (e.isTopSearchResult) return "defaultTopSearch";
                     switch (e.label) {
                         case "Label.Players":
@@ -56524,28 +56555,28 @@ function() {
                             throw Error("Unrecognized default suggestion, ".concat(JSON.stringify(e)))
                     }
                 },
-                PF = function() {
-                    var e, t, n = null != (e = null == (t = iN("getLocale")) ? void 0 : t()) ? e : R6.englishLanguageCode,
+                PV = function() {
+                    var e, t, n = null != (e = null == (t = iN("getLocale")) ? void 0 : t()) ? e : R8.englishLanguageCode,
                         r = n.indexOf("-");
-                    return (n = n.substring(0, -1 !== r ? r : n.length)) !== R6.englishLanguageCode && (n += ",".concat(R6.englishLanguageCode)), n
+                    return (n = n.substring(0, -1 !== r ? r : n.length)) !== R8.englishLanguageCode && (n += ",".concat(R8.englishLanguageCode)), n
                 },
-                PU = function(e, t) {
+                Pz = function(e, t) {
                     return e.map(function(e) {
-                        return "Query" in e ? "".concat(PP(e), "|").concat(e.Query) : "searchQuery" in e ? "".concat(PP(e), "|").concat(e.searchQuery) : "".concat(Pj(e), "|").concat(t)
+                        return "Query" in e ? "".concat(PU(e), "|").concat(e.Query) : "searchQuery" in e ? "".concat(PU(e), "|").concat(e.searchQuery) : "".concat(PB(e), "|").concat(t)
                     }).join(",")
                 },
-                PB = new Set(["_self", "_parent", "_top"]),
-                PV = {
+                PW = new Set(["_self", "_parent", "_top"]),
+                PG = {
                     Small: "text-body-small",
                     Medium: "text-body-medium",
                     Large: "text-body-large"
                 },
-                Pz = {
+                PY = {
                     Standard: "content-emphasis",
                     Emphasis: "content-emphasis",
                     Inverse: "content-inverse-default"
                 },
-                PW = (0, tf.forwardRef)(function(e, t) {
+                PH = (0, tf.forwardRef)(function(e, t) {
                     var n, r, i, o = tD([e, t]),
                         a = o[0],
                         s = o.slice(1),
@@ -56560,8 +56591,8 @@ function() {
                         v = a.asChild,
                         g = (0, tC._)(a, ["children", "className", "size", "color", "variant", "underline", "isExternal", "asChild"]),
                         y = (0, e_._)(s, 1)[0],
-                        b = (n = null != (i = g.as) ? i : "a", r = "button" === g.as ? void 0 : g.target, void 0 !== m ? m : "button" !== n && void 0 !== r && !PB.has(r)),
-                        E = iO("foundation-web-link", "button" === g.as && "bg-none stroke-none padding-none appearance-none [text-align:inherit]", ("Standalone" === (void 0 === f ? "Standalone" : f) || b) && "inline-flex items-center gap-xsmall", void 0 !== c && PV[c], Pz[void 0 === d ? "Emphasis" : d], "always" === h ? "underline" : "no-underline", "hover" === h && "hover:underline", "motion-safe:transition-opacity", "hover:cursor-pointer hover:[opacity:0.8]", "radius-xsmall focus-visible:[outline-style:solid] focus-visible:[outline-width:var(--stroke-standard)] focus-visible:[outline-color:var(--color-system-emphasis)]", l),
+                        b = (n = null != (i = g.as) ? i : "a", r = "button" === g.as ? void 0 : g.target, void 0 !== m ? m : "button" !== n && void 0 !== r && !PW.has(r)),
+                        E = iO("foundation-web-link", "button" === g.as && "bg-none stroke-none padding-none appearance-none [text-align:inherit]", ("Standalone" === (void 0 === f ? "Standalone" : f) || b) && "inline-flex items-center gap-xsmall", void 0 !== c && PG[c], PY[void 0 === d ? "Emphasis" : d], "always" === h ? "underline" : "no-underline", "hover" === h && "hover:underline", "motion-safe:transition-opacity", "hover:cursor-pointer hover:[opacity:0.8]", "radius-xsmall focus-visible:[outline-style:solid] focus-visible:[outline-width:var(--stroke-standard)] focus-visible:[outline-color:var(--color-system-emphasis)]", l),
                         w = b ? tp().createElement("span", {
                             "aria-hidden": !0,
                             "data-testid": "foundation-web-icon",
@@ -56597,7 +56628,7 @@ function() {
                     }), u, w)
                 });
 
-            function PG(e) {
+            function PX(e) {
                 var t = e.url,
                     n = e.cssClasses,
                     r = e.className,
@@ -56606,7 +56637,7 @@ function() {
                     a = e.children,
                     s = sO(),
                     u = [r, n].filter(Boolean).join(" ") || void 0;
-                return (0, ee.jsx)(PW, {
+                return (0, ee.jsx)(PH, {
                     href: null == t ? void 0 : s(t),
                     id: i,
                     onClick: o,
@@ -56617,7 +56648,7 @@ function() {
                 })
             }
 
-            function PY(e) {
+            function PZ(e) {
                 var t = e.name,
                     n = e.size,
                     r = e.id,
@@ -56629,11 +56660,11 @@ function() {
                     className: ["[vertical-align:middle]", i].filter(Boolean).join(" ")
                 })
             }
-            PW.displayName = "Link";
-            var PH = RK.gameSearchLink,
-                PX = RK.avatarSearchLink;
+            PH.displayName = "Link";
+            var PQ = RJ.gameSearchLink,
+                PK = RJ.avatarSearchLink;
 
-            function PZ(e) {
+            function Pq(e) {
                 var t = e.selected,
                     n = e.suggestion,
                     r = e.onClick,
@@ -56648,14 +56679,14 @@ function() {
                     c = l[0],
                     d = l[1],
                     f = iT("GameIconThumbnail");
-                return a === PD.GameSuggestion ? (0, ee.jsx)("li", {
+                return a === PF.GameSuggestion ? (0, ee.jsx)("li", {
                     className: o,
-                    children: (0, ee.jsxs)(PG, {
+                    children: (0, ee.jsxs)(PX, {
                         className: "new-navbar-search-anchor",
-                        url: PH.url + encodeURIComponent(u),
+                        url: PQ.url + encodeURIComponent(u),
                         onClick: r,
-                        children: [(0, ee.jsx)(PY, {
-                            name: PH.foundationIcon,
+                        children: [(0, ee.jsx)(PZ, {
+                            name: PQ.foundationIcon,
                             size: "Medium",
                             className: "navbar-list-option-icon"
                         }), (0, ee.jsx)("span", {
@@ -56664,7 +56695,7 @@ function() {
                         }), (0, ee.jsx)("span", {
                             className: "navbar-list-option-suffix",
                             children: i("Label.sSearchPhraseV2", {
-                                location: i.has(PH.label) ? i(PH.label) : ""
+                                location: i.has(PQ.label) ? i(PQ.label) : ""
                             })
                         }), (0, ee.jsxs)("span", {
                             className: aG()("navbar-list-option-thumbnail", {
@@ -56682,12 +56713,12 @@ function() {
                     })
                 }) : (0, ee.jsx)("li", {
                     className: o,
-                    children: (0, ee.jsxs)(PG, {
+                    children: (0, ee.jsxs)(PX, {
                         className: "new-navbar-search-anchor",
-                        url: PH.url + encodeURIComponent(u),
+                        url: PQ.url + encodeURIComponent(u),
                         onClick: r,
-                        children: [(0, ee.jsx)(PY, {
-                            name: PH.foundationIcon,
+                        children: [(0, ee.jsx)(PZ, {
+                            name: PQ.foundationIcon,
                             size: "Medium",
                             className: "navbar-list-option-icon"
                         }), (0, ee.jsx)("span", {
@@ -56696,14 +56727,14 @@ function() {
                         }), (0, ee.jsx)("span", {
                             className: "navbar-list-option-suffix",
                             children: i("Label.sSearchPhraseV2", {
-                                location: i.has(PH.label) ? i(PH.label) : ""
+                                location: i.has(PQ.label) ? i(PQ.label) : ""
                             })
                         })]
                     })
                 })
             }
 
-            function PQ(e) {
+            function PJ(e) {
                 var t = e.selected,
                     n = e.suggestion,
                     r = e.onClick,
@@ -56714,12 +56745,12 @@ function() {
                     a = n.Query;
                 return (0, ee.jsx)("li", {
                     className: o,
-                    children: (0, ee.jsxs)(PG, {
+                    children: (0, ee.jsxs)(PX, {
                         className: "new-navbar-search-anchor",
-                        url: PX.url + encodeURIComponent(a),
+                        url: PK.url + encodeURIComponent(a),
                         onClick: r,
-                        children: [(0, ee.jsx)(PY, {
-                            name: PX.foundationIcon,
+                        children: [(0, ee.jsx)(PZ, {
+                            name: PK.foundationIcon,
                             size: "Medium",
                             className: "navbar-list-option-icon"
                         }), (0, ee.jsx)("span", {
@@ -56728,14 +56759,14 @@ function() {
                         }), (0, ee.jsx)("span", {
                             className: "navbar-list-option-suffix",
                             children: i("Label.sSearchPhraseV2", {
-                                location: i.has(PX.label) ? i(PX.label) : ""
+                                location: i.has(PK.label) ? i(PK.label) : ""
                             })
                         })]
                     })
                 })
             }
 
-            function PK(e) {
+            function P$(e) {
                 var t = e.selected,
                     n = e.searchInput,
                     r = e.suggestion,
@@ -56750,11 +56781,11 @@ function() {
                     });
                 return (0, ee.jsx)("li", {
                     className: c,
-                    children: (0, ee.jsxs)(PG, {
+                    children: (0, ee.jsxs)(PX, {
                         className: "new-navbar-search-anchor",
                         url: a + encodeURIComponent(n),
                         onClick: i,
-                        children: [(0, ee.jsx)(PY, {
+                        children: [(0, ee.jsx)(PZ, {
                             name: u,
                             size: "Medium",
                             className: "navbar-list-option-icon"
@@ -56771,7 +56802,7 @@ function() {
                 })
             }
 
-            function Pq(e) {
+            function P0(e) {
                 var t = e.searchInput,
                     n = e.indexOfSelectedOption,
                     r = e.searchSuggestions,
@@ -56779,33 +56810,33 @@ function() {
                     o = e.resetSessionInfo,
                     a = function(e, n, a) {
                         return function() {
-                            a5.sendEvent.apply(void 0, (0, eA._)(Pk(t, void 0, a, "searchQuery" in n ? n.searchQuery : t, e, PU(r, t), i))), o();
+                            a5.sendEvent.apply(void 0, (0, eA._)(PL(t, void 0, a, "searchQuery" in n ? n.searchQuery : t, e, Pz(r, t), i))), o();
                             var s, u = +!e.includes("default");
-                            a5.sendEvent.apply(void 0, (0, eA._)(PL(u, null == (s = iN("getInternalPageName")) ? void 0 : s())))
+                            a5.sendEvent.apply(void 0, (0, eA._)(Pj(u, null == (s = iN("getInternalPageName")) ? void 0 : s())))
                         }
                     };
                 return (0, ee.jsx)(tp().Fragment, {
                     children: r.map(function(e, r) {
                         var i = r === n;
-                        return "Query" in e ? (0, ee.jsx)(PQ, {
+                        return "Query" in e ? (0, ee.jsx)(PJ, {
                             selected: i,
                             suggestion: e,
-                            onClick: a(PP(e), e, r)
-                        }, e.Query) : "searchQuery" in e ? (0, ee.jsx)(PZ, {
+                            onClick: a(PU(e), e, r)
+                        }, e.Query) : "searchQuery" in e ? (0, ee.jsx)(Pq, {
                             selected: i,
                             suggestion: e,
-                            onClick: a(PP(e), e, r)
-                        }, e.searchQuery) : (0, ee.jsx)(PK, {
+                            onClick: a(PU(e), e, r)
+                        }, e.searchQuery) : (0, ee.jsx)(P$, {
                             selected: i,
                             suggestion: e,
                             searchInput: t,
-                            onClick: a(Pj(e), e, r)
+                            onClick: a(PB(e), e, r)
                         }, e.url)
                     })
                 })
             }
 
-            function PJ(e) {
+            function P1(e) {
                 var t, n = e.searchInput,
                     r = e.isMenuOpen,
                     i = e.handleSearchOpenOrInputChange,
@@ -56844,7 +56875,7 @@ function() {
                         a5.sendEvent.apply(void 0, (0, eA._)((r = n, o = void 0, a = p, s = null == (e = iN("getInternalPageName")) ? void 0 : e(), [{
                             name: "searchClear",
                             type: a5.eventTypes.formInteraction,
-                            context: P_
+                            context: PI
                         }, {
                             kwd: r,
                             searchType: o,
@@ -56933,7 +56964,7 @@ function() {
                                         onClick: N,
                                         onKeyDown: N,
                                         className: "clear-search clear-search-foundation",
-                                        children: (0, ee.jsx)(PY, {
+                                        children: (0, ee.jsx)(PZ, {
                                             name: "icon-filled-circle-x",
                                             size: "Medium"
                                         })
@@ -56946,7 +56977,7 @@ function() {
                                     className: "input-addon-btn",
                                     type: "submit",
                                     "aria-label": m("Label.sSearch"),
-                                    children: (0, ee.jsx)(PY, {
+                                    children: (0, ee.jsx)(PZ, {
                                         name: "icon-regular-magnifying-glass",
                                         size: "Medium",
                                         className: "margin-x-[6px] opacity-[0.7]"
@@ -56965,7 +56996,7 @@ function() {
                             onMouseLeave: function() {
                                 a(!1)
                             },
-                            children: (0, ee.jsx)(Pq, {
+                            children: (0, ee.jsx)(P0, {
                                 searchInput: n,
                                 indexOfSelectedOption: s,
                                 searchSuggestions: f,
@@ -56983,36 +57014,36 @@ function() {
                     })]
                 })
             }
-            var P$ = (0, tf.createContext)(void 0),
-                P0 = function() {
-                    var e = (0, tf.useContext)(P$);
+            var P2 = (0, tf.createContext)(void 0),
+                P4 = function() {
+                    var e = (0, tf.useContext)(P2);
                     return void 0 === e ? (0, tl.authenticatedUser)() : e
                 },
-                P1 = function() {
+                P3 = function() {
                     return Promise.reject(Error("search suggestions are not registered"))
                 },
-                P2 = function(e) {
+                P5 = function(e) {
                     var t, n;
                     return null != (t = null == (n = iN("isSearchRequestCancelled")) ? void 0 : n(e)) && t
                 },
-                P4 = function() {
+                P6 = function() {
                     var e;
                     return null == (e = iN("getInternalPageName")) ? void 0 : e()
                 };
 
-            function P3(e) {
+            function P9(e) {
                 var t, n, r, i = e.isUniverseSearchShown,
-                    o = Ps(),
+                    o = Pc(),
                     a = o.pathname,
                     s = o.search,
-                    u = null != P0(),
+                    u = null != P4(),
                     l = null != (t = null == (r = iT("isTopSearchResultsEnabled")) ? void 0 : r()) && t,
                     c = null != (n = es.UrlSearchParams.parse(s).get("keyword")) ? n : "",
                     d = (0, e_._)((0, tf.useState)(c), 2),
                     f = d[0],
                     p = d[1],
                     h = (0, tf.useRef)("" !== c),
-                    m = (0, tc.useDebounce)(f, R6.debounceTimeout),
+                    m = (0, tc.useDebounce)(f, R8.debounceTimeout),
                     v = (0, tc.usePrevious)(m),
                     g = (0, e_._)((0, tf.useState)(null), 2),
                     y = g[0],
@@ -57039,21 +57070,21 @@ function() {
                     U = F[0],
                     B = F[1],
                     V = (0, e_._)((0, tf.useState)(function() {
-                        return R3(a, u, l)
+                        return R6(a, u, l)
                     }), 2),
                     z = V[0],
                     W = V[1];
                 (0, tf.useEffect)(function() {
-                    W(R3(a, u, l))
+                    W(R6(a, u, l))
                 }, [a, u, l]);
                 var G = z.findIndex(function(e) {
-                        return e.label === RK.gameSearchLink.label
+                        return e.label === RJ.gameSearchLink.label
                     }),
                     Y = z.findIndex(function(e) {
-                        return e.label === RK.avatarSearchLink.label
+                        return e.label === RJ.avatarSearchLink.label
                     }),
-                    H = PF(),
-                    X = R5(a),
+                    H = PV(),
+                    X = R9(a),
                     Z = function(e) {
                         if (null == e) return z;
                         if (X) {
@@ -57062,12 +57093,12 @@ function() {
                             });
                             return (0, eA._)(z.slice(0, Y + 1)).concat((0, eA._)(t), (0, eA._)(z.slice(Y + 1)))
                         }
-                        if (R6.isSpecialTreatmentAutocompleteRestricted(a, u)) return z;
+                        if (R8.isSpecialTreatmentAutocompleteRestricted(a, u)) return z;
                         var n = -1 === e.findIndex(function(e) {
-                                return "searchQuery" in e && e.searchQuery === m.toLowerCase() && e.type === PD.GameSuggestion
+                                return "searchQuery" in e && e.searchQuery === m.toLowerCase() && e.type === PF.GameSuggestion
                             }),
                             r = e.filter(function(e) {
-                                return "searchQuery" in e && e.searchQuery !== m.toLowerCase() || "type" in e && e.type === PD.GameSuggestion
+                                return "searchQuery" in e && e.searchQuery !== m.toLowerCase() || "type" in e && e.type === PF.GameSuggestion
                             }).slice(0, 3);
                         return (0, eA._)(z.slice(0, n ? G + 1 : G)).concat((0, eA._)(r), (0, eA._)(z.slice(G + 1)))
                     },
@@ -57085,34 +57116,34 @@ function() {
                         var n = 0,
                             r = [];
                         return e.forEach(function(e) {
-                            n < R6.avatarAutocompleteSuggestionLimit && e.Query !== t && (r.push(e), n += 1)
+                            n < R8.avatarAutocompleteSuggestionLimit && e.Query !== t && (r.push(e), n += 1)
                         }), r
                     },
                     J = Q.length;
                 (0, tf.useEffect)(function() {
                     var e = h.current && "" !== m;
-                    e && (h.current = !1), M || e || a5.sendEvent.apply(void 0, (0, eA._)(PO(f, PA, PT, w))), k(!1), eE(function() {
+                    e && (h.current = !1), M || e || a5.sendEvent.apply(void 0, (0, eA._)(PP(f, PT, Pk, w))), k(!1), eE(function() {
                         var e, t, n, r, i, o, a, s, u;
                         return eS(this, function(l) {
                             switch (l.label) {
                                 case 0:
-                                    if (!("" !== m && m.length <= R6.debouncedSearchInputMaxLength)) return [3, 8];
+                                    if (!("" !== m && m.length <= R8.debouncedSearchInputMaxLength)) return [3, 8];
                                     if (b(null), e = Date.now(), !X) return [3, 5];
                                     l.label = 1;
                                 case 1:
-                                    return l.trys.push([1, 3, , 4]), n = Date.now(), [4, (null != (t = iN("getAvatarAutocompleteSuggestions")) ? t : P1)(m, H, R6.avatarAutocompleteQueryPaddingAmount, null != v ? v : "", U)];
+                                    return l.trys.push([1, 3, , 4]), n = Date.now(), [4, (null != (t = iN("getAvatarAutocompleteSuggestions")) ? t : P3)(m, H, R8.avatarAutocompleteQueryPaddingAmount, null != v ? v : "", U)];
                                 case 2:
-                                    return i = q((r = l.sent()).Data, m), a5.sendEvent.apply(void 0, (0, eA._)(PR(m, v, !1, PU(i, m), r.Args.Algo, n - e, R6.debounceTimeout, "", P4(), "" !== v))), b(i), [3, 4];
+                                    return i = q((r = l.sent()).Data, m), a5.sendEvent.apply(void 0, (0, eA._)(PD(m, v, !1, Pz(i, m), r.Args.Algo, n - e, R8.debounceTimeout, "", P6(), "" !== v))), b(i), [3, 4];
                                 case 3:
-                                    return P2(l.sent()) || b([]), B(!0), [3, 4];
+                                    return P5(l.sent()) || b([]), B(!0), [3, 4];
                                 case 4:
                                     return [3, 8];
                                 case 5:
-                                    return l.trys.push([5, 7, , 8]), [4, (null != (o = iN("getGamesAutocompleteSuggestions")) ? o : P1)(m)];
+                                    return l.trys.push([5, 7, , 8]), [4, (null != (o = iN("getGamesAutocompleteSuggestions")) ? o : P3)(m)];
                                 case 6:
-                                    return a = l.sent(), s = Date.now(), u = Z(a.entries), a5.sendEvent.apply(void 0, (0, eA._)(PR(m, v, !1, PU(u, m), a.algorithmName, s - e, R6.debounceTimeout, w, P4(), !1))), b(a.entries), [3, 8];
+                                    return a = l.sent(), s = Date.now(), u = Z(a.entries), a5.sendEvent.apply(void 0, (0, eA._)(PD(m, v, !1, Pz(u, m), a.algorithmName, s - e, R8.debounceTimeout, w, P6(), !1))), b(a.entries), [3, 8];
                                 case 7:
-                                    return P2(l.sent()) || b([]), [3, 8];
+                                    return P5(l.sent()) || b([]), [3, 8];
                                 case 8:
                                     return [2]
                             }
@@ -57128,14 +57159,14 @@ function() {
                     },
                     en = (0, tf.useCallback)(function() {
                         var e, t = cE();
-                        null == (e = iN("searchLanding")) || e.show(t), a5.sendEvent.apply(void 0, (0, eA._)(PO(void 0, PN, PI, void 0, t))), A(t)
+                        null == (e = iN("searchLanding")) || e.show(t), a5.sendEvent.apply(void 0, (0, eA._)(PP(void 0, PC, PM, void 0, t))), A(t)
                     }, []),
                     er = (0, tf.useCallback)(function() {
                         var e, t, n, r, i = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : f;
-                        if (p(i), W(R3(void 0, u)), i.length < f.length && a5.sendEvent.apply(void 0, (0, eA._)((e = f, t = i, n = void 0, r = w, [{
+                        if (p(i), W(R6(void 0, u)), i.length < f.length && a5.sendEvent.apply(void 0, (0, eA._)((e = f, t = i, n = void 0, r = w, [{
                                 name: "searchTextTrim",
                                 type: a5.eventTypes.formInteraction,
-                                context: P_
+                                context: PI
                             }, {
                                 kwd: e,
                                 resultingKwd: t,
@@ -57144,7 +57175,7 @@ function() {
                             }]))), 0 === i.length) {
                             en();
                             var o = cE();
-                            a5.sendEvent.apply(void 0, (0, eA._)(PO(i, PA, PI, o))), x(o), j(0)
+                            a5.sendEvent.apply(void 0, (0, eA._)(PP(i, PT, PM, o))), x(o), j(0)
                         }
                         O || T(!0)
                     }, [w, en, O, f, u]),
@@ -57156,11 +57187,11 @@ function() {
                         function() {
                             window.removeEventListener("setSearchMenuClose", ei)
                         }
-                }, [I]), (0, ee.jsx)(PJ, {
+                }, [I]), (0, ee.jsx)(P1, {
                     searchInput: f,
                     handleSearchOpenOrInputChange: er,
                     closeMenu: function() {
-                        I && (0 === f.length ? a5.sendEvent.apply(void 0, (0, eA._)(PO(null, PN, PM, void 0, _))) : a5.sendEvent.apply(void 0, (0, eA._)(PO(f, PA, PC, w))), T(!1))
+                        I && (0 === f.length ? a5.sendEvent.apply(void 0, (0, eA._)(PP(null, PC, PO, void 0, _))) : a5.sendEvent.apply(void 0, (0, eA._)(PP(f, PT, PR, w))), T(!1))
                     },
                     setIsMenuHover: L,
                     isMenuOpen: I,
@@ -57170,14 +57201,14 @@ function() {
                     },
                     onKeyDown: function(e) {
                         var t = P;
-                        I && (e.keyCode === Do.arrowUp || e.keyCode === Do.arrowDown || e.keyCode === Do.tab) && (e.stopPropagation(), e.preventDefault(), e.keyCode === Do.arrowUp ? t -= 1 : t += 1, (t %= J) < 0 && (t = J + t), j(t))
+                        I && (e.keyCode === Ds.arrowUp || e.keyCode === Ds.arrowDown || e.keyCode === Ds.tab) && (e.stopPropagation(), e.preventDefault(), e.keyCode === Ds.arrowUp ? t -= 1 : t += 1, (t %= J) < 0 && (t = J + t), j(t))
                     },
                     onKeyUp: function(e) {
-                        if (e.keyCode === Do.enter && (e.stopPropagation(), e.preventDefault(), 0 !== f.length)) {
+                        if (e.keyCode === Ds.enter && (e.stopPropagation(), e.preventDefault(), 0 !== f.length)) {
                             var t = Q[P];
                             if (null != t) {
-                                "searchQuery" in t ? (a5.sendEvent.apply(void 0, (0, eA._)(Pk(m, void 0, P, t.searchQuery, PP(t), PU(Q, f), w))), a5.sendEvent.apply(void 0, (0, eA._)(PL(1, P4())))) : ("label" in t || "isTopSearchResult" in t) && (a5.sendEvent.apply(void 0, (0, eA._)(Pk(m, void 0, P, m, Pj(t), PU(Q, f), w))), a5.sendEvent.apply(void 0, (0, eA._)(PL(0, P4())))), $();
-                                var n = "Query" in t ? RK.avatarSearchLink.url + encodeURIComponent(t.Query) : "searchQuery" in t ? RK.gameSearchLink.url + encodeURIComponent(t.searchQuery) : e.currentTarget.value ? t.url + encodeURIComponent(e.currentTarget.value) : "";
+                                "searchQuery" in t ? (a5.sendEvent.apply(void 0, (0, eA._)(PL(m, void 0, P, t.searchQuery, PU(t), Pz(Q, f), w))), a5.sendEvent.apply(void 0, (0, eA._)(Pj(1, P6())))) : ("label" in t || "isTopSearchResult" in t) && (a5.sendEvent.apply(void 0, (0, eA._)(PL(m, void 0, P, m, PB(t), Pz(Q, f), w))), a5.sendEvent.apply(void 0, (0, eA._)(Pj(0, P6())))), $();
+                                var n = "Query" in t ? RJ.avatarSearchLink.url + encodeURIComponent(t.Query) : "searchQuery" in t ? RJ.gameSearchLink.url + encodeURIComponent(t.searchQuery) : e.currentTarget.value ? t.url + encodeURIComponent(e.currentTarget.value) : "";
                                 if (n) {
                                     var r = n;
                                     if ("label" in t && "Label.CreatorStore" === t.label && e.currentTarget.value && (r += encodeURIComponent(e.currentTarget.value)), document.getElementById("routing")) {
@@ -57205,23 +57236,23 @@ function() {
                     }
                 })
             }
-            var P5 = Dv.accountSwitchedFlag,
-                P6 = Dv.accountSwitchedMessage;
+            var P8 = Dy.accountSwitchedFlag,
+                P7 = Dy.accountSwitchedMessage;
 
-            function P9() {
+            function je() {
                 var e = i3("Common.AlertsAndOptions"),
                     t = i3("CommonUI.Features"),
-                    n = P0(),
+                    n = P4(),
                     r = (0, e_._)((0, tf.useState)(null), 2),
                     i = r[0],
                     o = r[1];
                 return ((0, tf.useEffect)(function() {
                     if (null != n) try {
-                        if (r3(P5)) {
+                        if (r3(P8)) {
                             var t;
-                            o(e(P6, {
+                            o(e(P7, {
                                 accountName: null != (t = n.name) ? t : ""
-                            })), rJ(P5)
+                            })), rJ(P8)
                         }
                     } catch (e) {}
                 }, [null == n ? void 0 : n.id]), null == i) ? null : (0, ee.jsx)(h3, {
@@ -57235,10 +57266,10 @@ function() {
                     closeIconAriaLabel: t("Action.Close")
                 })
             }
-            var P8 = function(e) {
+            var jt = function(e) {
                     return e
                 },
-                P7 = function(e) {
+                jn = function(e) {
                     if (!e.trim()) return null;
                     try {
                         return BigInt(e)
@@ -57246,90 +57277,90 @@ function() {
                         return null
                     }
                 },
-                je = function(e) {
-                    return e > 0 && e <= Number.MAX_SAFE_INTEGER ? P8(e.toString()) : null
-                },
-                jt = function(e) {
-                    var t = P7(e);
-                    return null == t ? null : je(t)
-                },
-                jn = "blackbird",
                 jr = function(e) {
+                    return e > 0 && e <= Number.MAX_SAFE_INTEGER ? jt(e.toString()) : null
+                },
+                ji = function(e) {
+                    var t = jn(e);
+                    return null == t ? null : jr(t)
+                },
+                jo = "blackbird",
+                ja = function(e) {
                     var t, n, r, i, o = null != (t = e.userid) ? t : e.user,
-                        a = null == o ? void 0 : null != (n = jt(o)) ? n : void 0;
+                        a = null == o ? void 0 : null != (n = ji(o)) ? n : void 0;
                     if ("string" == typeof a) return {
                         isAuthenticated: !0,
                         id: a,
                         userName: null != (r = e.name) ? r : e.userName,
                         displayName: null != (i = e.displayname) ? i : e.userDisplayName,
                         isPremiumUser: "true" === e.ispremiumuser || "true" === e.userIsPremium,
-                        membership: e.membership === jn || e.userMembership === jn ? jn : void 0,
+                        membership: e.membership === jo || e.userMembership === jo ? jo : void 0,
                         isVerified: "true" === e.hasverifiedbadge || "true" === e.userHasVerifiedBadge,
                         isUnder13: "true" === e.isunder13 || "AgeUnder13" === e.userAgeBracket
                     }
                 },
-                ji = function() {
+                js = function() {
                     if ("u" > typeof document) {
                         var e, t;
-                        return jr(null != (e = null == (t = document.querySelector('meta[name="user-data"]')) ? void 0 : t.dataset) ? e : document.documentElement.dataset)
+                        return ja(null != (e = null == (t = document.querySelector('meta[name="user-data"]')) ? void 0 : t.dataset) ? e : document.documentElement.dataset)
                     }
                 },
-                jo = "VIRTUAL_ITEM",
-                ja = "UPDATE",
-                js = "BONUS_ROBUX_2026_10",
-                ju = function(e) {
+                ju = "VIRTUAL_ITEM",
+                jl = "UPDATE",
+                jc = "BONUS_ROBUX_2026_10",
+                jd = function(e) {
                     switch (e) {
-                        case jo:
+                        case ju:
                             var t, n;
                             return "prevLocalVirtualItemStartTimeSeconds".concat(null != (t = null == (n = (0, tl.authenticatedUser)()) ? void 0 : n.id) ? t : "");
-                        case ja:
+                        case jl:
                             return "hasSeenRobuxUpdate";
-                        case js:
+                        case jc:
                             return "hasSeenRobuxBonusRobux2026_10";
                         default:
                             return ""
                     }
                 },
-                jl = function(e) {
+                jf = function(e) {
                     switch (e) {
-                        case jo:
+                        case ju:
                             return "Labels.NewItem";
-                        case ja:
+                        case jl:
                             return "Labels.NewUpdate";
-                        case js:
+                        case jc:
                             return "Labels.LimitedTimeBonus";
                         default:
                             return ""
                     }
                 },
-                jc = function(e) {
+                jp = function(e) {
                     switch (e) {
-                        case jo:
+                        case ju:
                             var t, n;
                             r5("prevLocalVirtualItemStartTimeSeconds".concat(null != (t = null == (n = (0, tl.authenticatedUser)()) ? void 0 : n.id) ? t : ""), Math.floor(Date.now() / 1e3));
                             break;
-                        case ja:
+                        case jl:
                             r5("hasSeenRobuxUpdate", "true");
                             break;
-                        case js:
+                        case jc:
                             r5("hasSeenRobuxBonusRobux2026_10", "true")
                     }
                 },
-                jd = function(e) {
-                    var t = ju(e);
+                jh = function(e) {
+                    var t = jd(e);
                     return "" === t ? null : r3(t)
                 },
-                jf = function() {
-                    return "true" !== jd(js) ? js : null
+                jm = function() {
+                    return "true" !== jh(jc) ? jc : null
                 },
-                jp = function(e) {
+                jv = function(e) {
                     if (null == e || (void 0 === e ? "undefined" : (0, eN._)(e)) !== "object") return !1;
                     var t = e.status,
                         n = e.response;
                     return 403 === t || (null == n ? void 0 : n.status) === 403
                 },
-                jh = ["Feature.DownloadLanding", "Common.VisitGame"],
-                jm = {
+                jg = ["Feature.DownloadLanding", "Common.VisitGame"],
+                jy = {
                     Unknown: 1,
                     WindowsDirectDownload: 2,
                     WindowsStore: 3,
@@ -57338,7 +57369,7 @@ function() {
                     GooglePlayStore: 6,
                     AmazonAppStore: 7
                 },
-                jv = {
+                jb = {
                     downloadPageHeader: "Heading.DownloadPage",
                     appStoreLinksHeader: "Heading.AppStoreLinks",
                     windowsDownloadLabel: "Action.DownloadWindowsApp",
@@ -57357,49 +57388,49 @@ function() {
                     mobileAppDownloadOptionHeading: "Heading.MobileAppDownloadOption",
                     mobileAppQrCodeLabel: "Label.MobileAppQrCode"
                 },
-                jg = ["Response.Dialog.PcChromeFirstInstruction", "Response.Dialog.PcChromeSecondInstruction", "Response.Dialog.PcChromeThirdInstruction"],
-                jy = ["Response.Dialog.PcEdgeFirstInstruction", "Response.Dialog.PcEdgeSecondInstruction", "Blank"],
-                jb = ["Response.Dialog.PcFirefoxFirstInstruction", "Response.Dialog.PcFirefoxSecondInstruction", "Response.Dialog.PcFirefoxThirdInstruction"],
-                jE = ["Response.Dialog.MacChromeFirstInstruction", "Response.Dialog.MacChromeSecondInstruction", "Response.Dialog.MacChromeThirdInstruction"],
-                jw = ["Response.Dialog.MacFirefoxFirstInstruction", "Response.Dialog.MacFirefoxSecondInstruction", "Response.Dialog.MacFirefoxThirdInstruction"],
-                jx = ["Response.Dialog.MacSafariFirstInstruction", "Response.Dialog.MacSafariSecondInstruction", "Response.Dialog.MacSafariThirdInstruction"],
-                jS = (Q = {}, (0, nT._)(Q, jm.WindowsDirectDownload, {
-                    href: jv.windowsDownloadLink,
-                    title: jv.windowsDownloadLabel,
+                jE = ["Response.Dialog.PcChromeFirstInstruction", "Response.Dialog.PcChromeSecondInstruction", "Response.Dialog.PcChromeThirdInstruction"],
+                jw = ["Response.Dialog.PcEdgeFirstInstruction", "Response.Dialog.PcEdgeSecondInstruction", "Blank"],
+                jx = ["Response.Dialog.PcFirefoxFirstInstruction", "Response.Dialog.PcFirefoxSecondInstruction", "Response.Dialog.PcFirefoxThirdInstruction"],
+                jS = ["Response.Dialog.MacChromeFirstInstruction", "Response.Dialog.MacChromeSecondInstruction", "Response.Dialog.MacChromeThirdInstruction"],
+                j_ = ["Response.Dialog.MacFirefoxFirstInstruction", "Response.Dialog.MacFirefoxSecondInstruction", "Response.Dialog.MacFirefoxThirdInstruction"],
+                jA = ["Response.Dialog.MacSafariFirstInstruction", "Response.Dialog.MacSafariSecondInstruction", "Response.Dialog.MacSafariThirdInstruction"],
+                jN = (Q = {}, (0, nT._)(Q, jy.WindowsDirectDownload, {
+                    href: jb.windowsDownloadLink,
+                    title: jb.windowsDownloadLabel,
                     name: "windows",
                     icon: "icon-filled-microsoft",
                     legacyIcon: "icon-logo-win",
                     isDirectDownload: !0
-                }), (0, nT._)(Q, jm.MacDirectDownload, {
-                    href: jv.macDownloadLink,
-                    title: jv.macDownloadLabel,
+                }), (0, nT._)(Q, jy.MacDirectDownload, {
+                    href: jb.macDownloadLink,
+                    title: jb.macDownloadLabel,
                     name: "mac",
                     icon: "icon-filled-apple",
                     legacyIcon: "icon-logo-apple",
                     isDirectDownload: !0
-                }), (0, nT._)(Q, jm.AmazonAppStore, {
-                    href: jv.amazonStoreLink,
-                    title: jv.androidAppDownloadLabel,
+                }), (0, nT._)(Q, jy.AmazonAppStore, {
+                    href: jb.amazonStoreLink,
+                    title: jb.androidAppDownloadLabel,
                     name: "amazonStore",
                     icon: "icon-filled-amazon",
                     legacyIcon: "icon-logo-android",
                     isDirectDownload: !1
-                }), (0, nT._)(Q, jm.GooglePlayStore, {
-                    href: jv.googlePlayStoreLink,
-                    title: jv.androidAppDownloadLabel,
+                }), (0, nT._)(Q, jy.GooglePlayStore, {
+                    href: jb.googlePlayStoreLink,
+                    title: jb.androidAppDownloadLabel,
                     name: "android",
                     icon: "icon-filled-android",
                     legacyIcon: "icon-logo-android",
                     isDirectDownload: !1
-                }), (0, nT._)(Q, jm.AppleAppStore, {
-                    href: jv.appleAppStoreLink,
-                    title: jv.iOSDownloadLabel,
+                }), (0, nT._)(Q, jy.AppleAppStore, {
+                    href: jb.appleAppStoreLink,
+                    title: jb.iOSDownloadLabel,
                     name: "iOS",
                     icon: "icon-filled-apple",
                     legacyIcon: "icon-logo-apple",
                     isDirectDownload: !1
                 }), Q),
-                j_ = function() {
+                jI = function() {
                     function e(t, n) {
                         (0, ed._)(this, e), (0, nT._)(this, "url", void 0), (0, nT._)(this, "searchParams", void 0), this.url = t, this.searchParams = n
                     }
@@ -57460,25 +57491,25 @@ function() {
                         }
                     }]), e
                 }(),
-                jA = function(e) {
-                    return P8(new URLSearchParams(e))
+                jT = function(e) {
+                    return jt(new URLSearchParams(e))
                 },
-                jN = function(e) {
+                jC = function(e) {
                     return Array.isArray(e)
                 },
-                jI = function(e) {
+                jM = function(e) {
                     return String(e)
                 },
-                jT = ["__proto__", "prototype", "constructor"],
-                jC = function(e) {
-                    return jA((0, eA._)(e.entries()).filter(function(e) {
+                jk = ["__proto__", "prototype", "constructor"],
+                jR = function(e) {
+                    return jT((0, eA._)(e.entries()).filter(function(e) {
                         var t = (0, e_._)(e, 2),
                             n = t[0],
                             r = t[1];
-                        return !jT.includes(n) && !jT.includes(r)
+                        return !jk.includes(n) && !jk.includes(r)
                     }))
                 },
-                jM = function() {
+                jO = function() {
                     function e(t) {
                         (0, ed._)(this, e), (0, nT._)(this, "searchParams", void 0), this.searchParams = t
                     }
@@ -57533,18 +57564,18 @@ function() {
                         key: "has",
                         value: function(e, t) {
                             var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : "caseInsensitive";
-                            return this.searchParams.has(this.resolveName(e, n), void 0 === t ? void 0 : jI(t))
+                            return this.searchParams.has(this.resolveName(e, n), void 0 === t ? void 0 : jM(t))
                         }
                     }, {
                         key: "copyAndAppend",
                         value: function(t, n) {
-                            var r = jA(this.searchParams);
-                            return r.append(t, jI(n)), e.fromUnique(r)
+                            var r = jT(this.searchParams);
+                            return r.append(t, jM(n)), e.fromUnique(r)
                         }
                     }, {
                         key: "copyAndAppendAll",
                         value: function(t) {
-                            var n = (0, ep._)(t, URLSearchParams) || (0, ep._)(t, e) || jN(t) ? t : Object.entries(t);
+                            var n = (0, ep._)(t, URLSearchParams) || (0, ep._)(t, e) || jC(t) ? t : Object.entries(t);
                             return e.new((0, eA._)(this.searchParams).concat((0, eA._)(n)))
                         }
                     }, {
@@ -57552,8 +57583,8 @@ function() {
                         value: function(t, n) {
                             var r = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : "caseInsensitive";
                             if ("caseSensitive" === r) {
-                                var i = jA(this.searchParams);
-                                return i.set(t, jI(n)), e.fromUnique(i)
+                                var i = jT(this.searchParams);
+                                return i.set(t, jM(n)), e.fromUnique(i)
                             }
                             var o = t.toLowerCase(),
                                 a = [],
@@ -57566,7 +57597,7 @@ function() {
                                     var p = (0, e_._)(d.value, 2),
                                         h = p[0],
                                         m = p[1];
-                                    h.toLowerCase() !== o ? a.push([h, m]) : s || (a.push([t, jI(n)]), s = !0)
+                                    h.toLowerCase() !== o ? a.push([h, m]) : s || (a.push([t, jM(n)]), s = !0)
                                 }
                             } catch (e) {
                                 l = !0, c = e
@@ -57577,14 +57608,14 @@ function() {
                                     if (l) throw c
                                 }
                             }
-                            return s || a.push([t, jI(n)]), e.fromUnique(jA(a))
+                            return s || a.push([t, jM(n)]), e.fromUnique(jT(a))
                         }
                     }, {
                         key: "copyAndDelete",
                         value: function(t, n) {
                             var r = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : "caseInsensitive",
                                 i = t.toLowerCase(),
-                                o = void 0 === n ? void 0 : jI(n),
+                                o = void 0 === n ? void 0 : jM(n),
                                 a = function(e) {
                                     var n = (0, e_._)(e, 2),
                                         a = n[0],
@@ -57592,14 +57623,14 @@ function() {
                                     return ("caseSensitive" === r ? a === t : a.toLowerCase() === i) && (void 0 === o || s === o)
                                 },
                                 s = (0, eA._)(this.searchParams.entries());
-                            return s.some(a) ? e.fromUnique(jA(s.filter(function(e) {
+                            return s.some(a) ? e.fromUnique(jT(s.filter(function(e) {
                                 return !a(e)
                             }))) : this
                         }
                     }, {
                         key: "toSorted",
                         value: function() {
-                            var t = jA(this.searchParams);
+                            var t = jT(this.searchParams);
                             return t.sort(), e.fromUnique(t)
                         }
                     }, {
@@ -57647,32 +57678,32 @@ function() {
                         value: function(t) {
                             var n = arguments.length > 1 && void 0 !== arguments[1] && arguments[1];
                             if ((0, ep._)(t, e)) return t;
-                            var r = jA((jN(t) ? t : Object.entries(t)).map(function(e) {
+                            var r = jT((jC(t) ? t : Object.entries(t)).map(function(e) {
                                 var t = (0, e_._)(e, 2);
-                                return [t[0], jI(t[1])]
+                                return [t[0], jM(t[1])]
                             }));
-                            return e.fromUnique(n ? jC(r) : r)
+                            return e.fromUnique(n ? jR(r) : r)
                         }
                     }, {
                         key: "fromURLSearchParams",
                         value: function(t) {
                             var n = !(arguments.length > 1) || void 0 === arguments[1] || arguments[1];
-                            return e.fromUnique(n ? jC(t) : jA(t))
+                            return e.fromUnique(n ? jR(t) : jT(t))
                         }
                     }, {
                         key: "parse",
                         value: function(t) {
                             var n = !(arguments.length > 1) || void 0 === arguments[1] || arguments[1],
-                                r = jA(t);
-                            return e.fromUnique(n ? jC(r) : r)
+                                r = jT(t);
+                            return e.fromUnique(n ? jR(r) : r)
                         }
                     }]), e
                 }();
-            (0, nT._)(jM, "empty", jM.fromUnique(jA(""))), (0, eh._)(Error), (0, eh._)(Error);
-            var jk = function(e) {
-                    return P8(new URL(e))
+            (0, nT._)(jO, "empty", jO.fromUnique(jT(""))), (0, eh._)(Error), (0, eh._)(Error);
+            var jL = function(e) {
+                    return jt(new URL(e))
                 },
-                jR = function(e) {
+                jD = function(e) {
                     function t(e, n) {
                         return (0, ed._)(this, t), (0, ec._)(this, t, [e, n])
                     }
@@ -57686,9 +57717,9 @@ function() {
                                 a = e.searchParams,
                                 s = e.fragment;
                             if (null == n && null == r && null == i && null == o && null == a && null == s) return this;
-                            var u = jk(this.url);
+                            var u = jL(this.url);
                             if (null != n && (u.protocol = n), null != r && (u.hostname = r), null != i && (u.port = "number" == typeof i ? i.toString() : i), null != o && (u.pathname = o), null != s && (u.hash = s), null != a) {
-                                var l = jM.new(a);
+                                var l = jO.new(a);
                                 return u.search = l.toString(), new t(u, l)
                             }
                             return new t(u, this.searchParams)
@@ -57696,91 +57727,91 @@ function() {
                     }, {
                         key: "withScheme",
                         value: function(e) {
-                            var n = jk(this.url);
+                            var n = jL(this.url);
                             return n.protocol = e, new t(n, this.searchParams)
                         }
                     }, {
                         key: "withHost",
                         value: function(e) {
-                            var n = jk(this.url);
+                            var n = jL(this.url);
                             return n.hostname = e, new t(n, this.searchParams)
                         }
                     }, {
                         key: "withPort",
                         value: function(e) {
-                            var n = jk(this.url);
+                            var n = jL(this.url);
                             return n.port = "number" == typeof e ? e.toString() : e, new t(n, this.searchParams)
                         }
                     }, {
                         key: "withPath",
                         value: function(e) {
-                            var n = jk(this.url);
+                            var n = jL(this.url);
                             return n.pathname = e, new t(n, this.searchParams)
                         }
                     }, {
                         key: "withSearchParams",
                         value: function(e) {
-                            var n = jM.new(e),
-                                r = jk(this.url);
+                            var n = jO.new(e),
+                                r = jL(this.url);
                             return r.search = n.toString(), new t(r, n)
                         }
                     }, {
                         key: "withSearchParamsAppended",
                         value: function(e) {
                             var n = this.searchParams.copyAndAppendAll(e),
-                                r = jk(this.url);
+                                r = jL(this.url);
                             return r.search = n.toString(), new t(r, n)
                         }
                     }, {
                         key: "withFragment",
                         value: function(e) {
-                            var n = jk(this.url);
+                            var n = jL(this.url);
                             return n.hash = e, new t(n, this.searchParams)
                         }
                     }], [{
                         key: "new",
                         value: function(e) {
                             e.password = "", e.username = "";
-                            var n = jM.internalFromUniqueURLSearchParams(P8(e.searchParams));
+                            var n = jO.internalFromUniqueURLSearchParams(jt(e.searchParams));
                             return new t(e, n)
                         }
                     }, {
                         key: "fromURL",
                         value: function(e) {
-                            return t.new(jk(e))
+                            return t.new(jL(e))
                         }
                     }, {
                         key: "parse",
                         value: function(e) {
                             try {
-                                return rY(t.new(P8(new URL(e))))
+                                return rY(t.new(jt(new URL(e))))
                             } catch (e) {
                                 return rH(e)
                             }
                         }
                     }]), t
-                }(j_),
-                jO = function(e) {
+                }(jI),
+                jP = function(e) {
                     return e.toLowerCase().includes("firefox")
                 },
-                jL = function() {
+                jj = function() {
                     return navigator.userAgent
                 },
-                jD = function(e) {
+                jF = function(e) {
                     var t, n = new URLSearchParams(document.location.search).get("downloadType");
                     if (null != n) {
-                        var r = jm[n];
+                        var r = jy[n];
                         if (null != r) return r
                     }
-                    if (!e) return jm.Unknown;
+                    if (!e) return jy.Unknown;
                     var i = rC.getDeviceMeta();
-                    return (null == i ? void 0 : i.isIosDevice) ? jm.AppleAppStore : (t = e, /Kindle|Silk|KFAPW|KFARWI|KFASWI|KFFOWI|KFJW|KFMEWI|KFOT|KFSAW|KFSOWI|KFTBW|KFTHW|KFTT|WFFOWI|KFAPWI/i.test(t)) ? jm.AmazonAppStore : (null == i ? void 0 : i.isAndroidDevice) ? jm.GooglePlayStore : rC.isMac() ? jm.MacDirectDownload : rC.isWindows() ? jm.WindowsDirectDownload : jm.Unknown
+                    return (null == i ? void 0 : i.isIosDevice) ? jy.AppleAppStore : (t = e, /Kindle|Silk|KFAPW|KFARWI|KFASWI|KFFOWI|KFJW|KFMEWI|KFOT|KFSAW|KFSOWI|KFTBW|KFTHW|KFTT|WFFOWI|KFAPWI/i.test(t)) ? jy.AmazonAppStore : (null == i ? void 0 : i.isAndroidDevice) ? jy.GooglePlayStore : rC.isMac() ? jy.MacDirectDownload : rC.isWindows() ? jy.WindowsDirectDownload : jy.Unknown
                 },
-                jP = function() {
-                    var e = jL();
-                    return rC.isMac() ? jO(e) ? jw : !/apple/i.exec(navigator.vendor) || /crios/i.exec(navigator.userAgent) || /fxios/i.exec(navigator.userAgent) || /Opera|OPT\//.exec(navigator.userAgent) ? jE : jx : jO(e) ? jb : window.navigator.userAgent.includes("Edge/") ? jy : jg
+                jU = function() {
+                    var e = jj();
+                    return rC.isMac() ? jP(e) ? j_ : !/apple/i.exec(navigator.vendor) || /crios/i.exec(navigator.userAgent) || /fxios/i.exec(navigator.userAgent) || /Opera|OPT\//.exec(navigator.userAgent) ? jS : jA : jP(e) ? jx : window.navigator.userAgent.includes("Edge/") ? jw : jE
                 },
-                jj = function(e, t) {
+                jB = function(e, t) {
                     (0, a5.sendEventWithTarget)(a5.eventTypes.formInteraction, "downloadV2", (0, ew._)({
                         field: "".concat(e, "DownloadLink"),
                         aType: "click"
@@ -57788,33 +57819,33 @@ function() {
                         source: t
                     } : {}))
                 },
-                jF = function(e) {
-                    return Object.values(jm).some(function(t) {
+                jV = function(e) {
+                    return Object.values(jy).some(function(t) {
                         return t === e
                     })
                 },
-                jU = function(e) {
+                jz = function(e) {
                     if (null != e) {
-                        if ("number" == typeof e) return jF(e) && jS[e] ? e : void 0;
-                        var t = jm[e];
-                        if (null != t && jS[t]) return t;
+                        if ("number" == typeof e) return jV(e) && jN[e] ? e : void 0;
+                        var t = jy[e];
+                        if (null != t && jN[t]) return t;
                         var n = Number(e);
-                        if (Number.isInteger(n) && jF(n) && jS[n]) return n
+                        if (Number.isInteger(n) && jV(n) && jN[n]) return n
                     }
                 },
-                jB = function(e) {
+                jW = function(e) {
                     var t;
-                    return null != (t = jU(e)) ? t : jD(jL())
+                    return null != (t = jz(e)) ? t : jF(jj())
                 },
-                jV = function() {
+                jG = function() {
                     var e, t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {},
                         n = t.downloadTypeOverride,
                         r = t.translate,
-                        i = jB(n),
-                        o = jS[i];
+                        i = jW(n),
+                        o = jN[i];
                     if (o) {
                         var a = o.isDirectDownload ? o.href : null != (e = null == r ? void 0 : r(o.href)) ? e : o.href,
-                            s = jR.parse(a);
+                            s = jD.parse(a);
                         if (!s.isErr()) return {
                             downloadType: i,
                             link: o,
@@ -57825,11 +57856,11 @@ function() {
                         }
                     }
                 },
-                jz = function(e, t) {
-                    jj(e.link.name)
+                jY = function(e, t) {
+                    jB(e.link.name)
                 },
-                jW = function() {
-                    var e = (0, e_._)(jh, 2),
+                jH = function() {
+                    var e = (0, e_._)(jg, 2),
                         t = e[0],
                         n = e[1],
                         r = i3(t),
@@ -57848,13 +57879,13 @@ function() {
                             }
                     }, [r, i])
                 },
-                jG = {
+                jX = {
                     Large: "XLarge"
                 },
-                jY = {
+                jZ = {
                     Large: "min-width-[240px] medium:min-width-[400px]"
                 },
-                jH = function(e) {
+                jQ = function(e) {
                     var t, n = e.text,
                         r = e.variant,
                         i = e.size,
@@ -57871,14 +57902,14 @@ function() {
                         m = e.download,
                         v = e.downloadTypeOverride,
                         g = e.onClick,
-                        y = jW(),
+                        y = jH(),
                         b = (0, e_._)((0, tf.useState)(!1), 2),
                         E = b[0],
                         w = b[1],
                         x = (0, e_._)((0, tf.useState)(!1), 2),
                         S = x[0],
                         _ = x[1],
-                        A = null != m ? m : jV({
+                        A = null != m ? m : jG({
                             downloadTypeOverride: v,
                             translate: y
                         });
@@ -57886,8 +57917,8 @@ function() {
                     var N = null != p ? p : A.href.toString(),
                         I = null != h ? h : A.isDirectDownload ? "_self" : "_blank",
                         T = null != n ? n : y(A.link.title),
-                        C = null != (t = jG[o]) ? t : o,
-                        M = [void 0 !== d && d ? void 0 : jY[o], f].filter(Boolean).join(" "),
+                        C = null != (t = jX[o]) ? t : o,
+                        M = [void 0 !== d && d ? void 0 : jZ[o], f].filter(Boolean).join(" "),
                         k = null != s,
                         R = l || S;
                     return (0, ee.jsxs)(tp().Fragment, {
@@ -57918,7 +57949,7 @@ function() {
                                             case 4:
                                                 return [3, 6];
                                             case 5:
-                                                jz(A), t.label = 6;
+                                                jY(A), t.label = 6;
                                             case 6:
                                                 return A.isDirectDownload && k && window.setTimeout(function() {
                                                     w(!0)
@@ -57955,20 +57986,20 @@ function() {
                         }) : null]
                     })
                 },
-                jX = "installer",
-                jZ = "deeplink",
-                jQ = function(e, t, n) {
+                jK = "installer",
+                jq = "deeplink",
+                jJ = function(e, t, n) {
                     try {
                         (0, a5.sendEventWithTarget)("tokenAction", "EdpDownloadRobloxInstaller", {
                             link_url: t,
-                            group: jZ,
+                            group: jq,
                             action: "create-token-attempt",
                             status_code: n,
                             token: null != e ? e : ""
                         }, a5.targetTypes.WWW)
                     } catch (e) {}
                 },
-                jK = function(e) {
+                j$ = function(e) {
                     var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
                     return eE(function() {
                         var n, r, i, o, a, s, u;
@@ -57977,7 +58008,7 @@ function() {
                                 case 0:
                                     n = t.authTicket, r = t.btId, i = t.downloadSource, o = {
                                         linkId: e,
-                                        group: jZ
+                                        group: jq
                                     }, n && (o.authTicket = n), r && (o.btId = r), i && (o.downloadSource = i), l.label = 1;
                                 case 1:
                                     return l.trys.push([1, 4, , 5]), [4, ea.fetch(es.Url.parse(el().apiGatewayUrl).getOrThrow().withPath("/deferred-deep-link/token-api/create-token"), {
@@ -57991,7 +58022,7 @@ function() {
                                 case 2:
                                     return [4, (a = l.sent()).json()];
                                 case 3:
-                                    return jQ(u = (void 0 === (s = l.sent()) ? "undefined" : (0, eN._)(s)) === "object" && null !== s && "token" in s && ("string" == typeof s.token || null === s.token) ? s.token : null, e, a.status), [2, u];
+                                    return jJ(u = (void 0 === (s = l.sent()) ? "undefined" : (0, eN._)(s)) === "object" && null !== s && "token" in s && ("string" == typeof s.token || null === s.token) ? s.token : null, e, a.status), [2, u];
                                 case 4:
                                     return l.sent(), [2, null];
                                 case 5:
@@ -58000,7 +58031,7 @@ function() {
                         })
                     })()
                 },
-                jq = function(e) {
+                j0 = function(e) {
                     var t, n = "".concat(e, "="),
                         r = null == (t = document.cookie.split("; ").find(function(e) {
                             return e.startsWith(n)
@@ -58010,7 +58041,7 @@ function() {
                         value: decodeURIComponent(r)
                     }
                 },
-                jJ = function(e, t, n) {
+                j1 = function(e, t, n) {
                     var r, i = null == n.sameSite ? "" : ";samesite=".concat(n.sameSite),
                         o = null == n.domain ? "" : ";domain=".concat(n.domain),
                         a = ";path=".concat(null != (r = n.path) ? r : "/"),
@@ -58018,27 +58049,27 @@ function() {
                         u = null == n.maxAge ? "" : ";max-age=".concat(n.maxAge);
                     document.cookie = "".concat(e, "=").concat(encodeURIComponent(t), ";secure").concat(i).concat(o).concat(a).concat(s).concat(u)
                 },
-                j$ = function(e, t, n) {
-                    jJ(e, t, n)
+                j2 = function(e, t, n) {
+                    j1(e, t, n)
                 },
-                j0 = function(e, t) {
-                    jJ(e, "", {
+                j4 = function(e, t) {
+                    j1(e, "", {
                         domain: t.domain,
                         path: t.path,
                         expires: new Date(0)
                     })
                 },
-                j1 = function() {
+                j3 = function() {
                     var e, t, n;
-                    return null != (e = null == (n = jq("RBXEventTrackerV2")) || null == (t = n.value.match(/browserid=([^&]*)/i)) ? void 0 : t[1]) && e
+                    return null != (e = null == (n = j0("RBXEventTrackerV2")) || null == (t = n.value.match(/browserid=([^&]*)/i)) ? void 0 : t[1]) && e
                 },
-                j2 = function(e, t) {
+                j5 = function(e, t) {
                     return es.Url.parse("".concat(e.replace(/\/+$/, "")).concat(t)).getOrThrow()
                 };
             tn({
                 status: e6()
             });
-            var j4 = function(e) {
+            var j6 = function(e) {
                 var t = e.linkId,
                     n = e.downloadSource;
                 return eE(function() {
@@ -58058,11 +58089,11 @@ function() {
                                                     return eS(this, function(i) {
                                                         switch (i.label) {
                                                             case 0:
-                                                                return [4, ea.getUntyped(j2(el().authApi, "/v1/client-assertion/"), {
+                                                                return [4, ea.getUntyped(j5(el().authApi, "/v1/client-assertion/"), {
                                                                     credentials: "include"
                                                                 })];
                                                             case 1:
-                                                                return t = i.sent(), [4, ea.fetch(j2(el().authApi, "/v1/authentication-ticket/"), {
+                                                                return t = i.sent(), [4, ea.fetch(j5(el().authApi, "/v1/authentication-ticket/"), {
                                                                     method: "POST",
                                                                     credentials: "include",
                                                                     headers: {
@@ -58083,13 +58114,13 @@ function() {
                                             case 3:
                                                 return [2, {
                                                     authTicket: e,
-                                                    btId: j1() || void 0
+                                                    btId: j3() || void 0
                                                 }]
                                         }
                                     })
                                 })()];
                             case 1:
-                                return [4, jK(t, {
+                                return [4, j$(t, {
                                     authTicket: (e = i.sent()).authTicket,
                                     btId: e.btId,
                                     downloadSource: n
@@ -58106,9 +58137,9 @@ function() {
             ["/games/{placeId}/{placeName}", "/share-links?code={linkId}&type=ExperienceInvite"].map(function(e) {
                 return new RegExp(e.replace(/\{.*?\}/g, "([^/]+)"))
             });
-            var j3 = function(e) {
+            var j9 = function(e) {
                     var t = e.translate,
-                        n = jP();
+                        n = jU();
                     return (0, ee.jsxs)(tp().Fragment, {
                         children: [(0, ee.jsx)("h3", {
                             className: "text-title-large content-emphasis padding-none",
@@ -58129,7 +58160,7 @@ function() {
                         })]
                     })
                 },
-                j5 = function(e) {
+                j8 = function(e) {
                     var t = e.translate;
                     return (0, ee.jsxs)(tp().Fragment, {
                         children: [(0, ee.jsxs)("div", {
@@ -58155,7 +58186,7 @@ function() {
                     })
                 };
 
-            function j6(e, t) {
+            function j7(e, t) {
                 var n = (0, e_._)((0, tf.useState)(t), 2),
                     r = n[0],
                     i = n[1];
@@ -58163,20 +58194,20 @@ function() {
                     i(e())
                 }, []), r
             }
-            var j9 = window.Roblox["core-scripts"].meta.environment,
-                j8 = "top-nav-download-button-v2",
-                j7 = function() {
-                    var e = r3(j8);
+            var Fe = window.Roblox["core-scripts"].meta.environment,
+                Ft = "top-nav-download-button-v2",
+                Fn = function() {
+                    var e = r3(Ft);
                     if (null == e || (void 0 === e ? "undefined" : (0, eN._)(e)) !== "object") return null;
                     var t = e.data;
                     return null == t || (void 0 === t ? "undefined" : (0, eN._)(t)) !== "object" ? null : t
                 },
-                Fe = function() {
+                Fr = function() {
                     var e, t, n = arguments.length > 0 && void 0 !== arguments[0] && arguments[0],
-                        r = null == (t = P0()) || null == (e = t.id) ? void 0 : e.toString(),
-                        i = j6(function() {
+                        r = null == (t = P4()) || null == (e = t.id) ? void 0 : e.toString(),
+                        i = j7(function() {
                             var e, t;
-                            return null != r && null != (e = null == (t = j7()) ? void 0 : t[r]) && e
+                            return null != r && null != (e = null == (t = Fn()) ? void 0 : t[r]) && e
                         }, !1);
                     return (0, er.useQuery)({
                         queryKey: ["top-nav-download-button"],
@@ -58186,7 +58217,7 @@ function() {
                                 return eS(this, function(a) {
                                     switch (a.label) {
                                         case 0:
-                                            if ((0, j9.isTestSite)()) return [2, !0];
+                                            if ((0, Fe.isTestSite)()) return [2, !0];
                                             if (null != (t = iN("isTopNavDownloadEnabled"))) return [3, 1];
                                             return i = !1, [3, 3];
                                         case 1:
@@ -58194,7 +58225,7 @@ function() {
                                         case 2:
                                             i = a.sent(), a.label = 3;
                                         case 3:
-                                            return n = i, (o = null != (e = j7()) ? e : {})[r] = n, r5(j8, {
+                                            return n = i, (o = null != (e = Fn()) ? e : {})[r] = n, r5(Ft, {
                                                 data: o
                                             }), [2, n]
                                     }
@@ -58206,29 +58237,29 @@ function() {
                     }).data
                 };
 
-            function Ft(e) {
+            function Fi(e) {
                 var t = e.downloadType,
                     n = void 0 === t ? null : t,
                     r = i3("Feature.DownloadLanding"),
-                    i = jW(),
-                    o = Fe(null != n),
-                    a = j6(function() {
-                        return jV({
+                    i = jH(),
+                    o = Fr(null != n),
+                    a = j7(function() {
+                        return jG({
                             translate: i
                         })
-                    }, null == n ? null : jV({
+                    }, null == n ? null : jG({
                         translate: i,
                         downloadTypeOverride: n
                     })),
-                    s = j6(rC.getDeviceMeta, null),
+                    s = j7(rC.getDeviceMeta, null),
                     u = sO();
                 if ((0, tf.useEffect)(function() {
                         var e, t = (0, rC.getDeviceMeta)();
-                        (null == t ? void 0 : t.isPhone) || (null == t ? void 0 : t.isTablet) || null == jV({
+                        (null == t ? void 0 : t.isPhone) || (null == t ? void 0 : t.isTablet) || null == jG({
                             translate: i
                         }) || null == (e = iN("logTopNavDownloadExposure")) || e()
                     }, []), !o || (null == s ? void 0 : s.isPhone) || (null == s ? void 0 : s.isTablet) || null == a) return null;
-                var l = a.downloadType === jm.MacDirectDownload ? "/download/client?os=mac" : "/download/client?os=win",
+                var l = a.downloadType === jy.MacDirectDownload ? "/download/client?os=mac" : "/download/client?os=win",
                     c = (0, ee.jsxs)("div", {
                         className: "flex flex-col gap-xlarge padding-xlarge",
                         children: [(0, ee.jsxs)("div", {
@@ -58249,14 +58280,14 @@ function() {
                             className: "flex gap-xxlarge",
                             children: [(0, ee.jsx)("section", {
                                 className: "flex flex-col fill basis-0 gap-large",
-                                children: (0, ee.jsx)(j3, {
+                                children: (0, ee.jsx)(j9, {
                                     translate: i
                                 })
                             }), (0, ee.jsx)("div", {
                                 className: "stroke-standard stroke-default"
                             }), (0, ee.jsx)("section", {
                                 className: "flex flex-col fill basis-0 gap-xxlarge",
-                                children: (0, ee.jsx)(j5, {
+                                children: (0, ee.jsx)(j8, {
                                     translate: i
                                 })
                             })]
@@ -58264,7 +58295,7 @@ function() {
                     });
                 return (0, ee.jsx)("li", {
                     className: "download-app-nav-item !padding-y-xsmall !padding-left-medium !padding-right-xsmall",
-                    children: (0, ee.jsx)(jH, {
+                    children: (0, ee.jsx)(jQ, {
                         text: r.has("Action.Download") ? r("Action.Download") : "Download",
                         variant: "Emphasis",
                         size: "Small",
@@ -58279,10 +58310,10 @@ function() {
                                 return eS(this, function(i) {
                                     switch (i.label) {
                                         case 0:
-                                            if (jj(e.link.name, "topNav"), !e.isDirectDownload) return [2];
-                                            return t.preventDefault(), [4, j4({
+                                            if (jB(e.link.name, "topNav"), !e.isDirectDownload) return [2];
+                                            return t.preventDefault(), [4, j6({
                                                 linkId: window.location.href,
-                                                downloadSource: jX
+                                                downloadSource: jK
                                             })];
                                         case 1:
                                             return n = i.sent(), r = e.href.withSearchParamsAppended(n), window.location.assign(r.toString()), [2]
@@ -58293,9 +58324,9 @@ function() {
                     })
                 })
             }
-            var Fn = window.Roblox["core-scripts"].format.number,
-                Fr = ["notification-stream-unread-count"],
-                Fi = function() {
+            var Fo = window.Roblox["core-scripts"].format.number,
+                Fa = ["notification-stream-unread-count"],
+                Fs = function() {
                     var e = (0, er.useQueryClient)(),
                         t = iT("getNotificationUnreadCount"),
                         n = (0, tf.useRef)(!1),
@@ -58303,7 +58334,7 @@ function() {
                         i = (0, tf.useRef)(!1),
                         o = (0, tf.useRef)(0),
                         a = (0, er.useQuery)({
-                            queryKey: Fr,
+                            queryKey: Fa,
                             queryFn: function() {
                                 return eE(function() {
                                     var e, o, a, s;
@@ -58326,13 +58357,13 @@ function() {
                         var t = iN("subscribeRealTime");
                         return null == t ? void 0 : t("NotificationStream", function() {
                             return e.invalidateQueries({
-                                queryKey: Fr
+                                queryKey: Fa
                             })
                         })
                     }, [e]), (0, tf.useEffect)(function() {
                         var t = function() {
                             n.current = !0, e.invalidateQueries({
-                                queryKey: Fr
+                                queryKey: Fa
                             })
                         };
                         return window.addEventListener("Roblox.NotificationStream.StreamClosed", t),
@@ -58344,33 +58375,33 @@ function() {
                         ctaFetchedAt: o.current
                     }
                 },
-                Fo = function(e) {
+                Fu = function(e) {
                     var t = (0, er.useQueryClient)();
                     return (0, tf.useCallback)(function() {
                         var n = iN("clearNotificationUnread");
-                        e <= 0 || null == n || (t.setQueryData(Fr, 0), n().then(function() {
+                        e <= 0 || null == n || (t.setQueryData(Fa, 0), n().then(function() {
                             return t.invalidateQueries({
-                                queryKey: Fr
+                                queryKey: Fa
                             })
                         }).catch(function() {}))
                     }, [t, e])
                 },
-                Fa = "nsCloseContent",
-                Fs = "click",
-                Fu = {},
-                Fl = "nsOpenCTAShown",
-                Fc = "seen",
-                Fd = "nsOpenContent",
-                Ff = "click";
+                Fl = "nsCloseContent",
+                Fc = "click",
+                Fd = {},
+                Ff = "nsOpenCTAShown",
+                Fp = "seen",
+                Fh = "nsOpenContent",
+                Fm = "click";
 
-            function Fp(e) {
+            function Fv(e) {
                 var t = e.unreadCount,
                     n = void 0 === t ? 0 : t,
                     r = e.countFetchedAt,
                     i = void 0 === r ? 0 : r,
                     o = (0, tf.useRef)(n);
                 return o.current = n, (0, tf.useEffect)(function() {
-                    i > 0 && o.current > 0 && (0, a5.sendEventWithTarget)(Fl, Fc, {
+                    i > 0 && o.current > 0 && (0, a5.sendEventWithTarget)(Ff, Fp, {
                         count: o.current,
                         sendrVersion: 0
                     })
@@ -58388,7 +58419,7 @@ function() {
                         children: (0, ee.jsxs)("span", {
                             id: "nav-ns-icon",
                             className: "rbx-menu-item notification-stream-icon",
-                            children: [(0, ee.jsx)(PY, {
+                            children: [(0, ee.jsx)(PZ, {
                                 name: "icon-regular-bell",
                                 size: "XLarge",
                                 id: "common-notification-bell"
@@ -58401,7 +58432,7 @@ function() {
                     })
                 })
             }
-            var Fh = function(e) {
+            var Fg = function(e) {
                 var t = function(t) {
                         var n, r = null == (n = e.current) ? void 0 : n.getRootNode(),
                             i = (0, ep._)(r, ShadowRoot) ? r.host : null;
@@ -58416,14 +58447,14 @@ function() {
                 }
             };
 
-            function Fm(e) {
+            function Fy(e) {
                 var t = e.containerRef,
                     n = i3("CommonUI.Features"),
-                    r = Fi(),
+                    r = Fs(),
                     i = r.unreadCount,
                     o = r.ctaFetchedAt,
                     a = iT("NotificationStreamShell"),
-                    s = Fo(i),
+                    s = Fu(i),
                     u = (0, tf.useRef)(s);
                 u.current = s, (0, tf.useEffect)(function() {
                     var e = function() {
@@ -58436,26 +58467,26 @@ function() {
                 }, []);
                 var l = (0, tf.useCallback)(function() {
                         var e, t, n;
-                        ip("Notifications"), (0, a5.sendEventWithTarget)(Fd, Ff, {
+                        ip("Notifications"), (0, a5.sendEventWithTarget)(Fh, Fm, {
                             userId: null == (t = (0, tl.authenticatedUser)()) ? void 0 : t.id,
                             inApp: null != (e = null == (n = (0, rC.getDeviceMeta)()) ? void 0 : n.isInApp) && e,
                             countOfUnreadNotification: i,
                             sendrVersion: 0
                         }), null != a && s()
                     }, [a, s, i]),
-                    c = (0, Fn.formatNumber)(i),
+                    c = (0, Fo.formatNumber)(i),
                     d = i > 0 ? n.has("Label.sNotificationsCount") ? n("Label.sNotificationsCount", {
                         notificationCount: c
                     }) : "Notifications: ".concat(c) : n.has("Label.sNotifications") ? n("Label.sNotifications") : "Notifications",
                     f = (0, tf.useCallback)(function() {
-                        window.dispatchEvent(new Event("Roblox.NotificationStream.StreamClosed")), (0, a5.sendEventWithTarget)(Fa, Fs, Fu)
+                        window.dispatchEvent(new Event("Roblox.NotificationStream.StreamClosed")), (0, a5.sendEventWithTarget)(Fl, Fc, Fd)
                     }, []),
                     p = (0, ee.jsx)("button", {
                         type: "button",
                         className: "btn-uiblox-common-common-notification-bell-md",
                         "aria-label": d,
                         "aria-haspopup": "true",
-                        children: (0, ee.jsx)(Fp, {
+                        children: (0, ee.jsx)(Fv, {
                             unreadCount: i,
                             countFetchedAt: o
                         })
@@ -58474,13 +58505,13 @@ function() {
                         alignOffset: -108,
                         collisionPadding: 12,
                         ariaLabel: d
-                    }, Fh(t)), {
+                    }, Fg(t)), {
                         children: h
                     }))]
                 })
             }
 
-            function Fv(e) {
+            function Fb(e) {
                 var t = e.accountNotificationCount,
                     n = void 0 === t ? 0 : t,
                     r = aG()("notification-red notification nav-setting-highlight", {
@@ -58490,7 +58521,7 @@ function() {
                     id: "settings-icon",
                     className: "nav-settings-icon rbx-menu-item",
                     "aria-hidden": "true",
-                    children: [(0, ee.jsx)(PY, {
+                    children: [(0, ee.jsx)(PZ, {
                         name: "icon-regular-gear",
                         size: "XLarge",
                         id: "nav-settings"
@@ -58500,19 +58531,19 @@ function() {
                     })]
                 })
             }
-            var Fg = RK.settingsUrl,
-                Fy = RK.quickLoginUrl,
-                Fb = "quickLogin",
-                FE = "logout",
-                Fw = "settings",
-                Fx = "switchAccountKey",
-                FS = Fb,
-                F_ = Fx,
-                FA = function() {
+            var FE = RJ.settingsUrl,
+                Fw = RJ.quickLoginUrl,
+                Fx = "quickLogin",
+                FS = "logout",
+                F_ = "settings",
+                FA = "switchAccountKey",
+                FN = Fx,
+                FI = FA,
+                FT = function() {
                     return [!1, !1]
                 };
 
-            function FN(e) {
+            function FC(e) {
                 var t, n = e.accountNotificationCount,
                     r = void 0 === n ? 0 : n,
                     i = e.isCrossDeviceLoginCodeValidationDisplayed,
@@ -58520,7 +58551,7 @@ function() {
                     a = i3("CommonUI.Features"),
                     s = i3("Common.AlertsAndOptions"),
                     u = sO(),
-                    l = null != (t = iT("useIsAccountSwitcherAvailableForBrowser")) ? t : FA,
+                    l = null != (t = iT("useIsAccountSwitcherAvailableForBrowser")) ? t : FT,
                     c = (0, e_._)(l(), 1)[0],
                     d = (0, er.useMutation)({
                         mutationFn: function() {
@@ -58544,21 +58575,21 @@ function() {
                     size: "Large",
                     className: "nav-foundation-menu",
                     children: (0, ee.jsx)(CK, {
-                        children: Object.entries(Fg).map(function(e) {
+                        children: Object.entries(FE).map(function(e) {
                             var t = (0, e_._)(e, 2),
                                 n = t[0],
                                 i = t[1],
                                 l = i.url,
                                 d = i.label,
                                 p = i.namespace;
-                            if (n === F_ && !c || n === FS && !o) return null;
+                            if (n === FI && !c || n === FN && !o) return null;
                             var h = "CommonUI.Features" === p ? a.has(d) ? a(d) : "" : s.has(d) ? s(d) : "",
-                                m = n === Fw && r > 0 ? String(r) : void 0;
-                            return n === FE ? (0, ee.jsx)(C$, {
+                                m = n === F_ && r > 0 ? String(r) : void 0;
+                            return n === FS ? (0, ee.jsx)(C$, {
                                 value: n,
                                 title: h,
                                 onSelect: f
-                            }, n) : n === F_ ? (0, ee.jsx)(C$, {
+                            }, n) : n === FI ? (0, ee.jsx)(C$, {
                                 value: n,
                                 title: h,
                                 onSelect: function() {
@@ -58568,7 +58599,7 @@ function() {
                             }, n) : (0, ee.jsx)(C$, {
                                 value: n,
                                 as: "a",
-                                href: u(n === FS ? Fy : l),
+                                href: u(n === FN ? Fw : l),
                                 title: h,
                                 trailing: m
                             }, n)
@@ -58577,7 +58608,7 @@ function() {
                 })
             }
 
-            function FI(e) {
+            function FM(e) {
                 var t = e.accountNotificationCount,
                     n = void 0 === t ? 0 : t,
                     r = i3("CommonUI.Features"),
@@ -58588,7 +58619,7 @@ function() {
                 (0, tf.useEffect)(function() {
                     a(!0);
                     var e = iN("getStoredAccountSwitcherBlob");
-                    e && DB(!!e()), eE(function() {
+                    e && Dz(!!e()), eE(function() {
                         var e;
                         return eS(this, function(t) {
                             switch (t.label) {
@@ -58605,9 +58636,9 @@ function() {
                     })()
                 }, []);
                 var u = n > 0 ? r.has("Label.sSettingsNotifications") ? r("Label.sSettingsNotifications", {
-                        notificationCount: (0, Fn.formatNumber)(n)
-                    }) : "Settings: ".concat((0, Fn.formatNumber)(n)) : r("Label.sSettings"),
-                    l = (0, ee.jsx)(FN, {
+                        notificationCount: (0, Fo.formatNumber)(n)
+                    }) : "Settings: ".concat((0, Fo.formatNumber)(n)) : r("Label.sSettings"),
+                    l = (0, ee.jsx)(FC, {
                         isCrossDeviceLoginCodeValidationDisplayed: o,
                         accountNotificationCount: n
                     }),
@@ -58616,7 +58647,7 @@ function() {
                         className: "btn-navigation-nav-settings-md",
                         "aria-label": u,
                         "aria-haspopup": "true",
-                        children: (0, ee.jsx)(Fv, {
+                        children: (0, ee.jsx)(Fb, {
                             accountNotificationCount: n
                         })
                     });
@@ -58635,14 +58666,15 @@ function() {
                             side: "bottom",
                             align: "end",
                             ariaLabel: u
-                        }, Fh(s)), {
+                        }, Fg(s)), {
                             children: l
                         }))]
                     })
                 })
             }
-            var FT = "RBXPaymentsFlowContext",
-                FC = {
+            var Fk = "RBXPaymentsFlowContext",
+                FR = "UserPurchaseFlow",
+                FO = {
                     WEB_ROBUX_PURCHASE: "WebRobuxPurchase",
                     MOBILE_WEB_ROBUX_PURCHASE: "MobileWebRobuxPurchase",
                     MOBILE_WEB_PREMIUM_PURCHASE: "MobileWebPremiumPurchase",
@@ -58676,7 +58708,7 @@ function() {
                     WEB_APP_THEME_PLUS_UPSELL: "WebAppThemePlusUpsell",
                     WEB_PROFILE_FRAME_PLUS_UPSELL: "WebProfileFramePlusUpsell"
                 },
-                FM = {
+                FL = {
                     ROBUX_UPSELL: "RobuxUpsell",
                     ROBUX_UPSELL_EXCEED_LARGEST_PACKAGE: "RobuxUpsellExceedLargestPackage",
                     PURCHASE_WARNING: "PurchaseWarning",
@@ -58761,11 +58793,11 @@ function() {
                     IOS_PURCHASE_RESTART_ALERT: "IosPurchaseRestartAlert",
                     NATIVE_PURCHASE_UI_SHOWN_TIME: "NativePurchaseUiShownTime"
                 },
-                Fk = {
+                FD = {
                     VIEW_SHOWN: "ViewShown",
                     USER_INPUT: "UserInput"
                 },
-                FR = ex((0, ew._)({}, {
+                FP = ex((0, ew._)({}, {
                     U13PaymentModal: "U13PaymentModal",
                     U13MonthlyThreshold1Modal: "U13MonthlyThreshold1Modal",
                     U13MonthlyThreshold2Modal: "U13MonthlyThreshold2Modal",
@@ -58871,7 +58903,7 @@ function() {
                     TIER_SELECTED: "TierSelected",
                     SUBSCRIBE_CLICKED: "SubscribeClicked"
                 }),
-                FO = {
+                Fj = {
                     ABANDONED: "Abandoned",
                     FAILED_PREPARE_PAYMENT_REQUEST: "FailedPreparePaymentRequest",
                     PASSED_PREPARE_PAYMENT_REQUEST: "PassedPreparePaymentRequest",
@@ -58895,120 +58927,120 @@ function() {
                     CANCEL: "Cancel",
                     PAYMENT_FLOW_ENDED: "PaymentFlowEnded"
                 },
-                FL = "Game Pass",
-                FD = "Private Server",
-                FP = "Bundle",
-                Fj = "Package",
-                FF = "Product",
-                FU = {
+                FF = "Game Pass",
+                FU = "Private Server",
+                FB = "Bundle",
+                FV = "Package",
+                Fz = "Product",
+                FW = {
                     FLOW_CONTINUE: "payment-user-journey:continue",
                     FLOW_REFERRER_VALID: "payment-user-journey:referrer-valid"
-                };
-
-            function FB(e, t, n) {
-                return t in e ? Object.defineProperty(e, t, {
-                    value: n,
-                    enumerable: !0,
-                    configurable: !0,
-                    writable: !0
-                }) : e[t] = n, e
-            }
-            var FV = function e() {
-                var t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {
-                    baseUrl: ""
-                };
-                if (!(0, ep._)(this, e)) throw TypeError("Cannot call a class as a function");
-                FB(this, "configuration", void 0), FB(this, "baseUrl", void 0), this.configuration = t, this.baseUrl = this.configuration.baseUrl
-            };
-
-            function Fz(e, t, n) {
-                return t in e ? Object.defineProperty(e, t, {
-                    value: n,
-                    enumerable: !0,
-                    configurable: !0,
-                    writable: !0
-                }) : e[t] = n, e
-            }
-            var FW = function() {
-                    var e;
-
-                    function t() {
-                        var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : new FV;
-                        if (!(0, ep._)(this, t)) throw TypeError("Cannot call a class as a function");
-                        Fz(this, "configuration", void 0), Fz(this, "baseUrl", void 0), this.configuration = e, this.baseUrl = e.baseUrl
-                    }
-                    return e = [{
-                            key: "sendEvent",
-                            value: function(e) {
-                                var t = e.localTime,
-                                    n = e.target,
-                                    r = e.eventType,
-                                    i = e.context,
-                                    o = e.additionalProperties,
-                                    a = e.currentUrl,
-                                    s = e.guestId,
-                                    u = e.sessionId,
-                                    l = t.toISOString(),
-                                    c = new URL("".concat(this.baseUrl, "/pe"));
-                                return c.searchParams.append("t", n), c.searchParams.append("evt", r), c.searchParams.append("ctx", i), c.searchParams.append("lt", l), c.searchParams.append("url", a || window.location.href), void 0 !== s && c.searchParams.append("gid", s), void 0 !== u && c.searchParams.append("sid", u), void 0 !== o && Object.keys(o).forEach(function(e) {
-                                    var t;
-                                    c.searchParams.append(e, (null != (t = o[e]) ? t : "").toString())
-                                }), fetch(c.href, {
-                                    credentials: "same-origin"
-                                })
-                            }
-                        }, {
-                            key: "sendEventViaImg",
-                            value: function(e, t) {
-                                var n = e.localTime,
-                                    r = e.target,
-                                    i = e.eventType,
-                                    o = e.context,
-                                    a = e.additionalProperties,
-                                    s = e.currentUrl,
-                                    u = e.guestId,
-                                    l = e.sessionId,
-                                    c = n.toISOString(),
-                                    d = new URL("".concat(this.baseUrl, "/e.png"));
-                                d.searchParams.append("t", r), d.searchParams.append("evt", i), d.searchParams.append("ctx", o), d.searchParams.append("lt", c), d.searchParams.append("url", s || window.location.href), void 0 !== u && d.searchParams.append("gid", u), void 0 !== l && d.searchParams.append("sid", l), void 0 !== a && Object.keys(a).forEach(function(e) {
-                                    var t;
-                                    d.searchParams.append(e, (null != (t = a[e]) ? t : "").toString())
-                                });
-                                var f = new Image;
-                                return f.src = d.href, f.onload = function() {
-                                    void 0 !== t && t(!0)
-                                }, f.onerror = function(e) {
-                                    void 0 !== t && t(!1), console.error(e)
-                                }, f
-                            }
-                        }],
-                        function(e, t) {
-                            for (var n = 0; n < t.length; n++) {
-                                var r = t[n];
-                                r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r)
-                            }
-                        }(t.prototype, e), t
-                }(),
-                FG = function() {
-                    return null != rB && null != rV
+                },
+                FG = function e() {
+                    var t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {
+                        baseUrl: ""
+                    };
+                    (0, ed._)(this, e), (0, nT._)(this, "configuration", void 0), (0, nT._)(this, "baseUrl", void 0), this.configuration = t, this.baseUrl = t.baseUrl
                 },
                 FY = function() {
+                    function e() {
+                        var t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : new FG;
+                        (0, ed._)(this, e), (0, nT._)(this, "configuration", void 0), (0, nT._)(this, "baseUrl", void 0), this.configuration = t, this.baseUrl = t.baseUrl
+                    }
+                    return (0, tm._)(e, [{
+                        key: "sendEvent",
+                        value: function(e) {
+                            var t = e.localTime,
+                                n = e.target,
+                                r = e.eventType,
+                                i = e.context,
+                                o = e.additionalProperties,
+                                a = e.currentUrl,
+                                s = e.guestId,
+                                u = e.sessionId,
+                                l = t.toISOString(),
+                                c = new URL("".concat(this.baseUrl, "/pe"));
+                            return c.searchParams.append("t", n), c.searchParams.append("evt", r), c.searchParams.append("ctx", i), c.searchParams.append("lt", l), c.searchParams.append("url", a || window.location.href), void 0 !== s && c.searchParams.append("gid", s), void 0 !== u && c.searchParams.append("sid", u), void 0 !== o && Object.keys(o).forEach(function(e) {
+                                var t;
+                                c.searchParams.append(e, (null != (t = o[e]) ? t : "").toString())
+                            }), fetch(c.href, {
+                                credentials: "same-origin"
+                            })
+                        }
+                    }, {
+                        key: "sendEventViaImg",
+                        value: function(e, t) {
+                            var n = this.buildEventUrl(e),
+                                r = new Image;
+                            return r.src = n.href, r.onload = function() {
+                                void 0 !== t && t(!0)
+                            }, r.onerror = function() {
+                                void 0 !== t && t(!1)
+                            }, r
+                        }
+                    }, {
+                        key: "sendEventViaFetch",
+                        value: function(e, t) {
+                            return eE(function() {
+                                var n;
+                                return eS(this, function(r) {
+                                    switch (r.label) {
+                                        case 0:
+                                            return [4, fetch(this.buildEventUrl(e).href, {
+                                                mode: "cors",
+                                                credentials: "include",
+                                                keepalive: !0
+                                            }).then(function(e) {
+                                                return e.ok
+                                            }, function() {
+                                                return !1
+                                            })];
+                                        case 1:
+                                            return n = r.sent(), null == t || t(n), [2]
+                                    }
+                                })
+                            }).call(this)
+                        }
+                    }, {
+                        key: "buildEventUrl",
+                        value: function(e) {
+                            var t = e.localTime,
+                                n = e.target,
+                                r = e.eventType,
+                                i = e.context,
+                                o = e.additionalProperties,
+                                a = e.currentUrl,
+                                s = e.guestId,
+                                u = e.sessionId,
+                                l = t.toISOString(),
+                                c = new URL("".concat(this.baseUrl, "/e.png"));
+                            return c.searchParams.append("t", n), c.searchParams.append("evt", r), c.searchParams.append("ctx", i), c.searchParams.append("lt", l), c.searchParams.append("url", a || window.location.href), void 0 !== s && c.searchParams.append("gid", s), void 0 !== u && c.searchParams.append("sid", u), void 0 !== o && Object.keys(o).forEach(function(e) {
+                                var t;
+                                c.searchParams.append(e, (null != (t = o[e]) ? t : "").toString())
+                            }), c
+                        }
+                    }]), e
+                }(),
+                FH = function() {
+                    return null != rB && null != rV
+                },
+                FX = function() {
                     return {
                         domain: ".".concat(el().domain),
                         maxAge: 600
                     }
                 },
-                FH = function() {
+                FZ = function() {
                     function e(t, n) {
                         (0, ed._)(this, e), (0, nT._)(this, "purchaseFlowUuid", void 0), (0, nT._)(this, "triggeringContext", void 0), this.purchaseFlowUuid = t, this.triggeringContext = n
                     }
                     return (0, tm._)(e, [{
                         key: "save",
                         value: function() {
-                            if (FG()) {
+                            if (FH()) {
                                 var e, t, n = "".concat(null != (e = this.purchaseFlowUuid) ? e : "", ",").concat(null != (t = this.triggeringContext) ? t : ""),
-                                    r = FY();
-                                j$(FT, n, {
+                                    r = FX();
+                                j2(Fk, n, {
                                     domain: r.domain,
                                     maxAge: r.maxAge
                                 })
@@ -59017,85 +59049,88 @@ function() {
                     }], [{
                         key: "stop",
                         value: function() {
-                            FG() && j0(FT, {
-                                domain: FY().domain
+                            FH() && j4(Fk, {
+                                domain: FX().domain
                             })
                         }
                     }, {
                         key: "loadFromCookie",
                         value: function() {
-                            if (!FG()) return null;
-                            var t = jq(FT);
+                            if (!FH()) return null;
+                            var t = j0(Fk);
                             if (null == t || "" === t.value) return null;
                             var n = (0, e_._)(t.value.split(","), 2),
                                 r = n[0],
                                 i = n[1];
-                            return new e("" === r ? void 0 : r, null != i && (0, nv.isStringEnum)(FC, i) ? i : void 0)
+                            return new e("" === r ? void 0 : r, null != i && (0, nv.isStringEnum)(FO, i) ? i : void 0)
                         }
                     }]), e
                 }(),
-                FX = function(e, t) {
+                FQ = function(e, t) {
                     var n;
                     null == rB || null == (n = rB.Sentry) || n.captureException(e, t ? {
                         tags: t
                     } : void 0)
                 },
-                FZ = {
+                FK = {
                     featureName: "PaymentsFlowAnalytics",
                     team: "Economy > Payments & Fraud",
                     features: {
                         PaymentFlow: {
-                            counters: ["UserPaymentFlowMidPurchaseStepTriggeredWithoutCtx", "UserPaymentFlowFlowEnded"],
-                            errors: ["UserPaymentFlowWrongUsageOfMethod", "UserPaymentFlowSendEventWithoutUuidOrCtx", "UserPaymentFlowLoadPreExistingCtxError", "UserPaymentFlowSendStatusEventError", "UserPaymentFlowSendUserEventError", "UserPaymentFlowStartFlowError", "UserPaymentFlowFlowEndedWithoutTriggerContext"]
+                            counters: ["UserPaymentFlowMidPurchaseStepTriggeredWithoutCtx", "UserPaymentFlowFlowEnded", {
+                                name: "UserPaymentFlowEventSent",
+                                dimensions: ["transport", "requestedTransport"]
+                            }],
+                            errors: ["UserPaymentFlowWrongUsageOfMethod", "UserPaymentFlowSendEventWithoutUuidOrCtx", "UserPaymentFlowLoadPreExistingCtxError", "UserPaymentFlowSendStatusEventError", "UserPaymentFlowSendUserEventError", "UserPaymentFlowStartFlowError", "UserPaymentFlowFlowEndedWithoutTriggerContext", "UserPaymentFlowSendEventKeepaliveError"]
                         }
                     }
                 },
-                FQ = rm(FZ.featureName),
-                FK = rN(FZ, {
-                    publish: FQ,
-                    captureException: FX,
-                    featureName: FZ.featureName
+                Fq = rm(FK.featureName),
+                FJ = rN(FK, {
+                    publish: Fq,
+                    captureException: FQ,
+                    featureName: FK.featureName
                 }),
-                Fq = FK.trackCounter,
-                FJ = FK.trackError,
-                F$ = "__rbxPaymentsFlowListenersAttached",
-                F0 = function(e) {
+                F$ = FJ.trackCounter,
+                F0 = FJ.trackError,
+                F1 = "__rbxPaymentsFlowListenersAttached",
+                F2 = function(e) {
                     var t = e.currentTarget;
                     return null != t && "innerText" in t && "string" == typeof t.innerText ? t.innerText : ""
                 },
-                F1 = function(e) {
+                F4 = function(e) {
                     var t;
                     null == rV || null == (t = rV.querySelector("#header li a.robux-menu-btn")) || t.addEventListener("click", function(t) {
                         e.sendUserPurchaseFlowEvent({
-                            triggerContext: FC.WEB_ROBUX_PURCHASE,
+                            triggerContext: FO.WEB_ROBUX_PURCHASE,
                             isMidPurchaseStep: !1,
-                            viewName: FM.NAVIGATION_MENU,
-                            purchaseEventType: Fk.USER_INPUT,
-                            viewMessage: F0(t)
+                            viewName: FL.NAVIGATION_MENU,
+                            purchaseEventType: FD.USER_INPUT,
+                            viewMessage: F2(t)
                         })
                     })
                 },
-                F2 = function(e) {
+                F3 = function(e) {
                     var t, n;
                     null == rV || null == (t = rV.querySelector("#item-details #upgrade-button")) || t.addEventListener("click", function() {
                         e.sendUserPurchaseFlowEvent({
-                            triggerContext: FC.WEB_PREMIUM_PURCHASE,
+                            triggerContext: FO.WEB_PREMIUM_PURCHASE,
                             isMidPurchaseStep: !1,
-                            viewName: FM.PREMIUM_UPSELL,
-                            purchaseEventType: Fk.USER_INPUT,
-                            viewMessage: FR.GET_PREMIUM
+                            viewName: FL.PREMIUM_UPSELL,
+                            purchaseEventType: FD.USER_INPUT,
+                            viewMessage: FP.GET_PREMIUM
                         })
                     }), null == rV || null == (n = rV.querySelector("#item-details .premium-prompt a")) || n.addEventListener("click", function(t) {
                         e.sendUserPurchaseFlowEvent({
-                            triggerContext: FC.WEB_PREMIUM_PURCHASE,
+                            triggerContext: FO.WEB_PREMIUM_PURCHASE,
                             isMidPurchaseStep: !1,
-                            viewName: FM.PREMIUM_UPSELL,
-                            purchaseEventType: Fk.USER_INPUT,
-                            viewMessage: F0(t)
+                            viewName: FL.PREMIUM_UPSELL,
+                            purchaseEventType: FD.USER_INPUT,
+                            viewMessage: F2(t)
                         })
                     })
                 },
-                F4 = function() {
+                F5 = function() {
                     for (var e = arguments.length, t = Array(e), n = 0; n < e; n++) t[n] = arguments[n];
                     var r = !0,
                         i = !1,
@@ -59116,29 +59151,47 @@ function() {
                     }
                     return ""
                 },
-                F3 = "__rbxPaymentsFlowUuid",
-                F5 = function(e) {
+                F6 = "__rbxPaymentsFlowUuid",
+                F9 = function(e) {
                     if (null != e && "type" in e && "string" == typeof e.type) return e.type
                 },
-                F6 = [{
-                    web: FC.WEB_ROBUX_PURCHASE,
-                    webview: FC.WEBVIEW_ROBUX_PURCHASE,
-                    mobileWeb: FC.MOBILE_WEB_ROBUX_PURCHASE
+                F8 = [{
+                    web: FO.WEB_ROBUX_PURCHASE,
+                    webview: FO.WEBVIEW_ROBUX_PURCHASE,
+                    mobileWeb: FO.MOBILE_WEB_ROBUX_PURCHASE
                 }, {
-                    web: FC.WEB_PREMIUM_PURCHASE,
-                    webview: FC.WEBVIEW_PREMIUM_PURCHASE,
-                    mobileWeb: FC.MOBILE_WEB_PREMIUM_PURCHASE
+                    web: FO.WEB_PREMIUM_PURCHASE,
+                    webview: FO.WEBVIEW_PREMIUM_PURCHASE,
+                    mobileWeb: FO.MOBILE_WEB_PREMIUM_PURCHASE
                 }, {
-                    web: FC.WEB_ROBLOX_PLUS_PURCHASE,
-                    webview: FC.WEBVIEW_ROBLOX_PLUS_PURCHASE,
-                    mobileWeb: FC.MOBILE_WEB_ROBLOX_PLUS_PURCHASE
+                    web: FO.WEB_ROBLOX_PLUS_PURCHASE,
+                    webview: FO.WEBVIEW_ROBLOX_PLUS_PURCHASE,
+                    mobileWeb: FO.MOBILE_WEB_ROBLOX_PLUS_PURCHASE
                 }],
-                F9 = new FW(new FV({
+                F7 = new FY(new FG({
                     baseUrl: "https://ecsv2.".concat(el().domain, "/www")
                 })),
-                F8 = new(function() {
+                Ue = function() {
+                    return "function" == typeof(null == rB ? void 0 : rB.fetch)
+                },
+                Ut = function(e) {
+                    if (!Ue()) {
+                        F$("UserPaymentFlowEventSent", {
+                            transport: "img",
+                            requestedTransport: "fetch"
+                        }), F7.sendEventViaImg(e);
+                        return
+                    }
+                    F$("UserPaymentFlowEventSent", {
+                        transport: "fetch",
+                        requestedTransport: "fetch"
+                    }), F7.sendEventViaFetch(e).catch(function(e) {
+                        F0("UserPaymentFlowSendEventKeepaliveError", null, e)
+                    })
+                },
+                Un = new(function() {
                     function e() {
-                        (0, ed._)(this, e), (0, nT._)(this, "purchaseFlowUuid", ""), (0, nT._)(this, "triggerContext", void 0), (0, nT._)(this, "ENUM_TRIGGERING_CONTEXT", FC), (0, nT._)(this, "ENUM_VIEW_NAME", FM), (0, nT._)(this, "ENUM_PURCHASE_EVENT_TYPE", Fk), (0, nT._)(this, "ENUM_VIEW_MESSAGE", FR), (0, nT._)(this, "ENUM_PURCHASE_STATUS", FO), (0, nT._)(this, "ENUM_CUSTOM_EVENT", FU), (0, nT._)(this, "eventMetadata", {}), (0, nT._)(this, "webStack", void 0), FG() && this.loadOrStartPaymentFlow()
+                        (0, ed._)(this, e), (0, nT._)(this, "purchaseFlowUuid", ""), (0, nT._)(this, "triggerContext", void 0), (0, nT._)(this, "ENUM_TRIGGERING_CONTEXT", FO), (0, nT._)(this, "ENUM_VIEW_NAME", FL), (0, nT._)(this, "ENUM_PURCHASE_EVENT_TYPE", FD), (0, nT._)(this, "ENUM_VIEW_MESSAGE", FP), (0, nT._)(this, "ENUM_PURCHASE_STATUS", Fj), (0, nT._)(this, "ENUM_CUSTOM_EVENT", FW), (0, nT._)(this, "eventMetadata", {}), (0, nT._)(this, "webStack", void 0), FH() && this.loadOrStartPaymentFlow()
                     }
                     return (0, tm._)(e, [{
                         key: "loadOrStartPaymentFlow",
@@ -59150,7 +59203,7 @@ function() {
                                 }
                                 this.publishSharedFlowUuid()
                             } catch (e) {
-                                FJ("UserPaymentFlowStartFlowError", null, e)
+                                F0("UserPaymentFlowStartFlowError", null, e)
                             }
                         }
                     }, {
@@ -59166,7 +59219,7 @@ function() {
                     }, {
                         key: "setWebStack",
                         value: function(e) {
-                            FG() && (this.webStack = e)
+                            FH() && (this.webStack = e)
                         }
                     }, {
                         key: "startRobuxUpsellFlow",
@@ -59174,7 +59227,7 @@ function() {
                             var t = e.assetType,
                                 n = e.isReseller,
                                 r = e.itemId;
-                            this.eventMetadata.item_type = t, this.eventMetadata.item_id = void 0 === r ? "" : r, t === FL ? this.triggerContext = FC.WEB_GAME_PASS_ROBUX_UPSELL : t === FF ? this.triggerContext = FC.WEB_DEVELOPER_PRODUCT_ROBUX_UPSELL : "Place" === t ? this.triggerContext = FC.WEB_PAID_GAME_ROBUX_UPSELL : t === FD ? this.triggerContext = FC.WEB_PRIVATE_SERVER_ROBUX_UPSELL : t === FP || t === Fj ? this.triggerContext = FC.WEB_CATALOG_BUNDLE_ITEM_ROBUX_UPSELL : void 0 !== n && n ? this.triggerContext = FC.WEB_CATALOG_COLLECTIVE_ITEM_ROBUX_UPSELL : this.triggerContext = FC.WEB_CATALOG_ROBUX_UPSELL, this.writePaymentFlowContextIntoCookie()
+                            this.eventMetadata.item_type = t, this.eventMetadata.item_id = void 0 === r ? "" : r, t === FF ? this.triggerContext = FO.WEB_GAME_PASS_ROBUX_UPSELL : t === Fz ? this.triggerContext = FO.WEB_DEVELOPER_PRODUCT_ROBUX_UPSELL : "Place" === t ? this.triggerContext = FO.WEB_PAID_GAME_ROBUX_UPSELL : t === FU ? this.triggerContext = FO.WEB_PRIVATE_SERVER_ROBUX_UPSELL : t === FB || t === FV ? this.triggerContext = FO.WEB_CATALOG_BUNDLE_ITEM_ROBUX_UPSELL : void 0 !== n && n ? this.triggerContext = FO.WEB_CATALOG_COLLECTIVE_ITEM_ROBUX_UPSELL : this.triggerContext = FO.WEB_CATALOG_ROBUX_UPSELL, this.writePaymentFlowContextIntoCookie()
                         }
                     }, {
                         key: "startRobloxPlusUpsellFlow",
@@ -59182,26 +59235,26 @@ function() {
                             var t = e.assetType,
                                 n = e.isReseller,
                                 r = e.itemId;
-                            if (this.eventMetadata.item_type = t, this.eventMetadata.item_id = void 0 === r ? "" : r, void 0 !== n && n) this.triggerContext = FC.WEB_CATALOG_RESALE_ITEM_PLUS_UPSELL;
+                            if (this.eventMetadata.item_type = t, this.eventMetadata.item_id = void 0 === r ? "" : r, void 0 !== n && n) this.triggerContext = FO.WEB_CATALOG_RESALE_ITEM_PLUS_UPSELL;
                             else switch (t) {
-                                case FL:
-                                    this.triggerContext = FC.WEB_GAME_PASS_PLUS_UPSELL;
-                                    break;
                                 case FF:
-                                    this.triggerContext = FC.WEB_DEVELOPER_PRODUCT_PLUS_UPSELL;
+                                    this.triggerContext = FO.WEB_GAME_PASS_PLUS_UPSELL;
                                     break;
-                                case FD:
-                                    this.triggerContext = FC.WEB_PRIVATE_SERVER_PLUS_UPSELL;
+                                case Fz:
+                                    this.triggerContext = FO.WEB_DEVELOPER_PRODUCT_PLUS_UPSELL;
                                     break;
-                                case FP:
-                                case Fj:
-                                    this.triggerContext = FC.WEB_CATALOG_BUNDLE_ITEM_PLUS_UPSELL;
+                                case FU:
+                                    this.triggerContext = FO.WEB_PRIVATE_SERVER_PLUS_UPSELL;
+                                    break;
+                                case FB:
+                                case FV:
+                                    this.triggerContext = FO.WEB_CATALOG_BUNDLE_ITEM_PLUS_UPSELL;
                                     break;
                                 case "Subscription":
-                                    this.triggerContext = FC.WEB_DEVELOPER_SUBSCRIPTION_PLUS_UPSELL;
+                                    this.triggerContext = FO.WEB_DEVELOPER_SUBSCRIPTION_PLUS_UPSELL;
                                     break;
                                 default:
-                                    this.triggerContext = FC.WEB_CATALOG_SINGLE_ITEM_PLUS_UPSELL
+                                    this.triggerContext = FO.WEB_CATALOG_SINGLE_ITEM_PLUS_UPSELL
                             }
                             this.writePaymentFlowContextIntoCookie()
                         }
@@ -59215,19 +59268,44 @@ function() {
                                 a = t.viewMessage,
                                 s = t.eventMetadata,
                                 u = t.isTerminalView;
-                            if (FG()) try {
+                            if (FH()) try {
                                 var l = e.reclassifyPlatformTriggeringContext({
                                     triggerContext: n
                                 });
-                                if (this.eventMetadata = (0, ew._)({}, this.eventMetadata, void 0 === s ? {} : s), !i && !o && !a) return void FJ("UserPaymentFlowWrongUsageOfMethod");
-                                this.adoptSharedTriggerContext(), !this.triggerContext && (this.triggerContext = l, this.writePaymentFlowContextIntoCookie(), r && Fq("UserPaymentFlowMidPurchaseStepTriggeredWithoutCtx")), this.sendEvent({
-                                    eventName: "UserPurchaseFlow",
+                                if (this.eventMetadata = (0, ew._)({}, this.eventMetadata, void 0 === s ? {} : s), !i && !o && !a) return void F0("UserPaymentFlowWrongUsageOfMethod");
+                                this.adoptSharedTriggerContext(), !this.triggerContext && (this.triggerContext = l, this.writePaymentFlowContextIntoCookie(), r && F$("UserPaymentFlowMidPurchaseStepTriggeredWithoutCtx")), this.sendEvent({
+                                    eventName: FR,
                                     viewName: i,
                                     purchaseEventType: o,
                                     viewMessage: a
                                 }), void 0 !== u && u && this.handleTerminalPage()
                             } catch (e) {
-                                FJ("UserPaymentFlowSendUserEventError", null, e)
+                                F0("UserPaymentFlowSendUserEventError", null, e)
+                            }
+                        }
+                    }, {
+                        key: "sendUserPurchaseFlowEventViaFetch",
+                        value: function(t) {
+                            var n = t.triggerContext,
+                                r = t.isMidPurchaseStep,
+                                i = t.viewName,
+                                o = t.purchaseEventType,
+                                a = t.viewMessage,
+                                s = t.eventMetadata,
+                                u = t.isTerminalView;
+                            if (FH()) try {
+                                var l = e.reclassifyPlatformTriggeringContext({
+                                    triggerContext: n
+                                });
+                                if (this.eventMetadata = (0, ew._)({}, this.eventMetadata, void 0 === s ? {} : s), !i && !o && !a) return void F0("UserPaymentFlowWrongUsageOfMethod");
+                                this.adoptSharedTriggerContext(), !this.triggerContext && (this.triggerContext = l, this.writePaymentFlowContextIntoCookie(), r && F$("UserPaymentFlowMidPurchaseStepTriggeredWithoutCtx")), this.sendEventViaFetch({
+                                    eventName: FR,
+                                    viewName: i,
+                                    purchaseEventType: o,
+                                    viewMessage: a
+                                }), void 0 !== u && u && this.handleTerminalPage()
+                            } catch (e) {
+                                F0("UserPaymentFlowSendUserEventError", null, e)
                             }
                         }
                     }, {
@@ -59237,11 +59315,11 @@ function() {
                                 r = t.status,
                                 i = t.viewMessage,
                                 o = t.viewName;
-                            if (FG()) try {
+                            if (FH()) try {
                                 var a = e.reclassifyPlatformTriggeringContext({
                                     triggerContext: n
                                 });
-                                if (!r && !i && !o) return void FJ("UserPaymentFlowWrongUsageOfMethod");
+                                if (!r && !i && !o) return void F0("UserPaymentFlowWrongUsageOfMethod");
                                 this.adoptSharedTriggerContext(), this.triggerContext || (this.triggerContext = a, this.writePaymentFlowContextIntoCookie()), this.sendEvent({
                                     eventName: "UserPurchaseStatus",
                                     viewName: o,
@@ -59249,7 +59327,7 @@ function() {
                                     status: r
                                 }), e.isTerminalView(o) && this.handleTerminalPage()
                             } catch (e) {
-                                FJ("UserPaymentFlowSendStatusEventError", null, e)
+                                F0("UserPaymentFlowSendStatusEventError", null, e)
                             }
                         }
                     }, {
@@ -59257,27 +59335,27 @@ function() {
                         value: function() {
                             if (!this.triggerContext) {
                                 this.adoptSharedFlowUuid();
-                                var e = FH.loadFromCookie();
+                                var e = FZ.loadFromCookie();
                                 (null == e ? void 0 : e.triggeringContext) != null && e.purchaseFlowUuid === this.purchaseFlowUuid && (this.triggerContext = e.triggeringContext)
                             }
                         }
                     }, {
                         key: "adoptSharedFlowUuid",
                         value: function() {
-                            if (null != rB && F3 in rB) {
-                                var e = rB[F3];
+                            if (null != rB && F6 in rB) {
+                                var e = rB[F6];
                                 "string" == typeof e && "" !== e && (this.purchaseFlowUuid = e)
                             }
                         }
                     }, {
                         key: "publishSharedFlowUuid",
                         value: function() {
-                            null != rB && this.purchaseFlowUuid && Object.assign(rB, (0, nT._)({}, F3, this.purchaseFlowUuid))
+                            null != rB && this.purchaseFlowUuid && Object.assign(rB, (0, nT._)({}, F6, this.purchaseFlowUuid))
                         }
                     }, {
                         key: "writePaymentFlowContextIntoCookie",
                         value: function() {
-                            this.adoptSharedFlowUuid(), new FH(this.purchaseFlowUuid, this.triggerContext).save()
+                            this.adoptSharedFlowUuid(), new FZ(this.purchaseFlowUuid, this.triggerContext).save()
                         }
                     }, {
                         key: "sendEvent",
@@ -59287,15 +59365,20 @@ function() {
                                 i = t.purchaseEventType,
                                 o = t.viewMessage,
                                 a = t.status;
-                            if (this.adoptSharedFlowUuid(), !this.purchaseFlowUuid || !this.triggerContext) return void FJ("UserPaymentFlowSendEventWithoutUuidOrCtx");
+                            if (this.adoptSharedFlowUuid(), !this.purchaseFlowUuid || !this.triggerContext) return void F0("UserPaymentFlowSendEventWithoutUuidOrCtx");
                             if (null != rB) {
                                 var s = e.getReferralUrl(),
                                     u = e.extractView(s),
                                     l = e.extractView(rB.location.href),
-                                    c = JSON.stringify((0, ew._)({}, this.eventMetadata, void 0 === this.webStack ? {} : {
+                                    c = JSON.stringify(ex((0, ew._)({}, this.eventMetadata, void 0 === this.webStack ? {} : {
                                         webStack: this.webStack
+                                    }), {
+                                        eventTransport: "img"
                                     }));
-                                F9.sendEventViaImg({
+                                F$("UserPaymentFlowEventSent", {
+                                    transport: "img",
+                                    requestedTransport: "img"
+                                }), F7.sendEventViaImg({
                                     target: "www",
                                     localTime: new Date,
                                     eventType: n,
@@ -59315,29 +59398,67 @@ function() {
                             }
                         }
                     }, {
+                        key: "sendEventViaFetch",
+                        value: function(t) {
+                            var n = t.eventName,
+                                r = t.viewName,
+                                i = t.purchaseEventType,
+                                o = t.viewMessage,
+                                a = t.status;
+                            if (this.adoptSharedFlowUuid(), !this.purchaseFlowUuid || !this.triggerContext) return void F0("UserPaymentFlowSendEventWithoutUuidOrCtx");
+                            if (null != rB) {
+                                var s = e.getReferralUrl(),
+                                    u = e.extractView(s),
+                                    l = e.extractView(rB.location.href),
+                                    c = Ue() ? "fetch" : "img",
+                                    d = JSON.stringify(ex((0, ew._)({}, this.eventMetadata, void 0 === this.webStack ? {} : {
+                                        webStack: this.webStack
+                                    }), {
+                                        eventTransport: c
+                                    }));
+                                Ut({
+                                    target: "www",
+                                    localTime: new Date,
+                                    eventType: n,
+                                    context: this.triggerContext,
+                                    additionalProperties: {
+                                        purchase_flow_uuid: this.purchaseFlowUuid,
+                                        view_name: r,
+                                        purchase_event_type: i,
+                                        view_message: o,
+                                        status: a,
+                                        refurl: s.substring(0, 200),
+                                        prev_view_path: u,
+                                        current_view_path: l,
+                                        event_metadata: d
+                                    }
+                                })
+                            }
+                        }
+                    }, {
                         key: "tryLoadPreExistingCtx",
                         value: function() {
                             if (null != rV && null != rB) try {
                                 var e = rV.referrer,
                                     t = e && new URL(e).hostname.endsWith(el().domain),
                                     n = rB.performance.getEntriesByType("navigation")[0],
-                                    r = F5(n);
+                                    r = F9(n);
                                 if (!t && "back_forward" !== r && "reload" !== r) return;
-                                var i = FH.loadFromCookie();
+                                var i = FZ.loadFromCookie();
                                 i && (i.purchaseFlowUuid && (this.purchaseFlowUuid = i.purchaseFlowUuid), i.triggeringContext && (this.triggerContext = i.triggeringContext))
                             } catch (e) {
-                                FJ("UserPaymentFlowLoadPreExistingCtxError", null, e)
+                                F0("UserPaymentFlowLoadPreExistingCtxError", null, e)
                             }
                         }
                     }, {
                         key: "handleTerminalPage",
                         value: function() {
                             if (this.purchaseFlowUuid) {
-                                if (!this.triggerContext) return void FJ("UserPaymentFlowFlowEndedWithoutTriggerContext");
-                                FH.stop(), this.sendUserPurchaseStatusEvent({
+                                if (!this.triggerContext) return void F0("UserPaymentFlowFlowEndedWithoutTriggerContext");
+                                FZ.stop(), this.sendUserPurchaseStatusEvent({
                                     triggerContext: this.triggerContext,
-                                    status: FO.PAYMENT_FLOW_ENDED
-                                }), Fq("UserPaymentFlowFlowEnded")
+                                    status: Fj.PAYMENT_FLOW_ENDED
+                                }), F$("UserPaymentFlowFlowEnded")
                             }
                         }
                     }], [{
@@ -59350,7 +59471,7 @@ function() {
                     }, {
                         key: "isTerminalView",
                         value: function(e) {
-                            return e === FM.CHECKOUT_SUCCESS
+                            return e === FL.CHECKOUT_SUCCESS
                         }
                     }, {
                         key: "getReferralUrl",
@@ -59358,7 +59479,7 @@ function() {
                             var e;
                             if (null == rV) return "";
                             try {
-                                return F4(rV.referrer, null == rB || null == (e = rB.frames.top) ? void 0 : e.document.referrer)
+                                return F5(rV.referrer, null == rB || null == (e = rB.frames.top) ? void 0 : e.document.referrer)
                             } catch (e) {
                                 return rV.referrer
                             }
@@ -59380,7 +59501,7 @@ function() {
                                 o = !1,
                                 a = void 0;
                             try {
-                                for (var s, u = F6[Symbol.iterator](); !(i = (s = u.next()).done); i = !0) {
+                                for (var s, u = F8[Symbol.iterator](); !(i = (s = u.next()).done); i = !0) {
                                     var l = s.value,
                                         c = l.web,
                                         d = l.webview,
@@ -59401,38 +59522,38 @@ function() {
                         }
                     }]), e
                 }());
-            if (null != rV && (null == rB || !0 !== Reflect.get(rB, F$) && (Object.assign(rB, (0, nT._)({}, F$, !0)), 1))) {
-                var F7 = function() {
-                    F1(F8), (null == rV ? void 0 : rV.getElementById("display-price-container")) == null && F2(F8)
+            if (null != rV && (null == rB || !0 !== Reflect.get(rB, F1) && (Object.assign(rB, (0, nT._)({}, F1, !0)), 1))) {
+                var Ur = function() {
+                    F4(Un), (null == rV ? void 0 : rV.getElementById("display-price-container")) == null && F3(Un)
                 };
-                "loading" === rV.readyState ? rV.addEventListener("DOMContentLoaded", F7) : F7()
+                "loading" === rV.readyState ? rV.addEventListener("DOMContentLoaded", Ur) : Ur()
             }
-            var Ue = function(e) {
+            var Ui = function(e) {
                 var t = iN("sendUserPurchaseFlowEvent");
-                null != t ? t(e) : F8.sendUserPurchaseFlowEvent(e)
+                null != t ? t(e) : Un.sendUserPurchaseFlowEvent(e)
             };
 
-            function Ut() {
-                return j6(function() {}, "en-US")
+            function Uo() {
+                return j7(function() {}, "en-US")
             }
 
-            function Un(e) {
+            function Ua(e) {
                 var t = e.robuxAmount,
                     n = e.isGetCurrencyCallDone,
                     r = e.robuxError,
                     i = e.creditDisplayConfig,
                     o = e.robuxBadgeType,
-                    a = Ut(),
-                    s = r ? "?" : t < 1e4 ? (0, Fn.formatNumber)(t, a) : (0, Fn.truncNumber)(t, 1e4),
+                    a = Uo(),
+                    s = r ? "?" : t < 1e4 ? (0, Fo.formatNumber)(t, a) : (0, Fo.truncNumber)(t, 1e4),
                     u = aG()("notification-red robux-badge", {
                         hidden: !o
                     }),
                     l = (0, ee.jsxs)(tf.Fragment, {
-                        children: [(0, ee.jsx)(PY, {
+                        children: [(0, ee.jsx)(PZ, {
                             name: "icon-regular-robux",
                             size: "XLarge",
                             id: "nav-robux"
-                        }), i !== Dh && (0, ee.jsx)("span", {
+                        }), i !== Dv && (0, ee.jsx)("span", {
                             className: "rbx-text-navbar-right text-header",
                             id: "nav-robux-amount",
                             children: n && s
@@ -59455,8 +59576,8 @@ function() {
                     })]
                 })
             }
-            var Ur = ["JPY"],
-                Ui = {
+            var Us = ["JPY"],
+                Uu = {
                     featureName: "PaymentsPackage",
                     team: "Economy > Payments & Fraud",
                     features: {
@@ -59501,15 +59622,15 @@ function() {
                         }
                     }
                 },
-                Uo = rm(Ui.featureName),
-                Ua = rN(Ui, {
-                    publish: Uo,
-                    captureException: FX
+                Ul = rm(Uu.featureName),
+                Uc = rN(Uu, {
+                    publish: Ul,
+                    captureException: FQ
                 }),
-                Us = Ua.trackCounter,
-                Uu = (Ua.trackError, Ua.trackCriticalError);
+                Ud = Uc.trackCounter,
+                Uf = (Uc.trackError, Uc.trackCriticalError);
 
-            function Ul(e) {
+            function Up(e) {
                 var t = function(e) {
                         var t, n = e.amount,
                             r = e.currencyCode,
@@ -59518,15 +59639,15 @@ function() {
                             a = "".concat(o).concat(r),
                             s = aG()("price-tag", i);
                         try {
-                            var u, l = (u = Intl.NumberFormat().resolvedOptions().locale).startsWith("ar-") ? (Us("PriceTag_ArabicLocaleTriggered"), u.replace("ar-", "en-")) : u,
+                            var u, l = (u = Intl.NumberFormat().resolvedOptions().locale).startsWith("ar-") ? (Ud("PriceTag_ArabicLocaleTriggered"), u.replace("ar-", "en-")) : u,
                                 c = {
                                     style: "currency",
                                     currency: r,
                                     notation: "standard"
                                 };
-                            o >= 1e4 && !Ur.includes(r) && (c.minimumFractionDigits = 0, c.maximumFractionDigits = 2, c.maximumSignificantDigits = 21, c.notation = "compact"), s.split(" ").includes("navbar-compact") && (c.maximumSignificantDigits = 4), a = Intl.NumberFormat(l, c).format(o)
+                            o >= 1e4 && !Us.includes(r) && (c.minimumFractionDigits = 0, c.maximumFractionDigits = 2, c.maximumSignificantDigits = 21, c.notation = "compact"), s.split(" ").includes("navbar-compact") && (c.maximumSignificantDigits = 4), a = Intl.NumberFormat(l, c).format(o)
                         } catch (e) {
-                            Uu("PriceTag_NumberFormatLocaleException", {
+                            Uf("PriceTag_NumberFormatLocaleException", {
                                 currencyCode: null === r ? "null" : void 0 === r ? "undefined" : "" === r ? "empty" : "string" == typeof r && /^[a-z]{3}$/i.test(r) ? r.toUpperCase() : "invalid",
                                 internalPageName: null != (t = rv()) ? t : "unknown"
                             })
@@ -59555,18 +59676,18 @@ function() {
                     })]
                 })
             }
-            rI(Ui, {
-                publish: Uo,
-                captureException: FX,
-                featureName: Ui.featureName
-            }), Ul.propTypes = {
+            rI(Uu, {
+                publish: Ul,
+                captureException: FQ,
+                featureName: Uu.featureName
+            }), Up.propTypes = {
                 amount: vl().number.isRequired,
                 currencyCode: vl().string.isRequired
             };
-            var Uc = RK.buyRobuxUrl,
-                Ud = RK.redeemUrl;
+            var Uh = RJ.buyRobuxUrl,
+                Um = RJ.redeemUrl;
 
-            function Uf(e) {
+            function Uv(e) {
                 var t = e.creditAmount,
                     n = e.creditDisplayConfig,
                     r = e.creditError,
@@ -59583,19 +59704,19 @@ function() {
                     h = (0, e_._)((0, tf.useState)(!0), 2),
                     m = h[0],
                     v = h[1],
-                    g = (void 0 === s ? "" : s) ? "?" : (0, Fn.formatNumber)(a),
+                    g = (void 0 === s ? "" : s) ? "?" : (0, Fo.formatNumber)(a),
                     y = function(e) {
-                        Ue({
-                            triggerContext: FC.WEB_ROBUX_PURCHASE,
+                        Ui({
+                            triggerContext: FO.WEB_ROBUX_PURCHASE,
                             isMidPurchaseStep: !1,
-                            viewName: FM.NAVIGATION_DROPDOWN_MENU,
-                            purchaseEventType: Fk.USER_INPUT,
+                            viewName: FL.NAVIGATION_DROPDOWN_MENU,
+                            purchaseEventType: FD.USER_INPUT,
                             viewMessage: e
                         })
                     },
-                    b = null == l ? "" : jl(l);
+                    b = null == l ? "" : jf(l);
                 (0, tf.useEffect)(function() {
-                    a < Dd && t < Df && n !== Dh && v(!1)
+                    a < Dp && t < Dh && n !== Dv && v(!1)
                 }, [a, t, n]);
                 var E = m ? void 0 : "wallet-hidden";
                 return (0, ee.jsxs)(CQ, {
@@ -59609,7 +59730,7 @@ function() {
                                 name: "icon-regular-robux",
                                 id: "nav-robux"
                             })
-                        }), n !== Dp && (0, ee.jsx)(CJ, {
+                        }), n !== Dm && (0, ee.jsx)(CJ, {
                             className: E,
                             title: "",
                             leading: (0, ee.jsxs)(tf.Fragment, {
@@ -59617,7 +59738,7 @@ function() {
                                     name: "icon-regular-wallet"
                                 }), (void 0 === r ? "" : r) ? "?" : (0, ee.jsx)("span", {
                                     className: "dropdown-credit-balance",
-                                    children: (0, ee.jsx)(Ul, {
+                                    children: (0, ee.jsx)(Up, {
                                         amount: t,
                                         currencyCode: i
                                     })
@@ -59629,38 +59750,38 @@ function() {
                     }), (0, ee.jsxs)(CK, {
                         children: [void 0 !== o && o ? (0, ee.jsx)(C$, {
                             value: "buyRobuxExternal",
-                            title: d(Uc.buyRobux.label),
+                            title: d(Uh.buyRobux.label),
                             onSelect: u
                         }) : (0, ee.jsx)(C$, {
                             value: "buyRobux",
                             as: "a",
-                            href: c(Uc.buyRobux.url),
-                            title: d(Uc.buyRobux.label),
+                            href: c(Uh.buyRobux.url),
+                            title: d(Uh.buyRobux.label),
                             trailing: d.has(b) ? d(b) : void 0,
                             onSelect: function() {
-                                y(FR.BUY_ROBUX), null != l && jc(l)
+                                y(FP.BUY_ROBUX), null != l && jp(l)
                             }
                         }), (0, ee.jsx)(C$, {
                             value: "myTransactions",
                             as: "a",
-                            href: c(Uc.myTransactions.url),
-                            title: f(Uc.myTransactions.label)
+                            href: c(Uh.myTransactions.url),
+                            title: f(Uh.myTransactions.label)
                         }), (0, ee.jsx)(C$, {
                             value: "redeem",
                             as: "a",
-                            href: c(Ud.url),
-                            title: p(Ud.label)
+                            href: c(Um.url),
+                            title: p(Um.label)
                         })]
                     })]
                 })
             }
 
-            function Up(e) {
+            function Ug(e) {
                 var t = e.creditAmount,
                     n = e.currencyCode,
                     r = e.creditError,
                     i = (0, ee.jsxs)(tf.Fragment, {
-                        children: [(0, ee.jsx)(PY, {
+                        children: [(0, ee.jsx)(PZ, {
                             name: "icon-regular-wallet",
                             size: "XLarge",
                             id: "nav-credit-icon"
@@ -59672,7 +59793,7 @@ function() {
                                 children: "?"
                             }) : (0, ee.jsx)("div", {
                                 className: "credit-balance",
-                                children: (0, ee.jsx)(Ul, {
+                                children: (0, ee.jsx)(Up, {
                                     amount: void 0 === t ? 0 : t,
                                     currencyCode: void 0 === n ? "USD" : n,
                                     tagClassName: "navbar-compact nav-credit-text"
@@ -59687,7 +59808,7 @@ function() {
                 })
             }
 
-            function Uh(e) {
+            function Uy(e) {
                 var t = e.isOpen,
                     n = e.onClose,
                     r = e.onContinue,
@@ -59734,7 +59855,7 @@ function() {
                 })
             }
 
-            function Um(e) {
+            function Ub(e) {
                 var t = e.creditAmount,
                     n = e.creditDisplayConfig,
                     r = e.creditError,
@@ -59749,42 +59870,42 @@ function() {
                     f = e.robuxError,
                     p = void 0 === f ? "" : f,
                     h = i3("CommonUI.Features"),
-                    m = RK.buyRobuxUrl.buyRobuxOnVng,
+                    m = RJ.buyRobuxUrl.buyRobuxOnVng,
                     v = (0, tf.useRef)(null),
                     g = (0, e_._)((0, tf.useState)(!1), 2),
                     y = g[0],
                     b = g[1],
                     E = function(e) {
-                        Ue({
-                            triggerContext: FC.WEB_ROBUX_PURCHASE,
+                        Ui({
+                            triggerContext: FO.WEB_ROBUX_PURCHASE,
                             isMidPurchaseStep: !1,
-                            viewName: FM.NAVIGATION_DROPDOWN_MENU,
-                            purchaseEventType: Fk.USER_INPUT,
+                            viewName: FL.NAVIGATION_DROPDOWN_MENU,
+                            purchaseEventType: FD.USER_INPUT,
                             viewMessage: e
                         })
                     },
-                    w = Ut(),
+                    w = Uo(),
                     x = d > 0 ? h.has("Label.sRobuxBalance") ? h("Label.sRobuxBalance", {
-                        robuxAmount: (0, Fn.formatNumber)(d, w)
-                    }) : "Robux: ".concat((0, Fn.formatNumber)(d, w)) : h("Label.sRobux"),
+                        robuxAmount: (0, Fo.formatNumber)(d, w)
+                    }) : "Robux: ".concat((0, Fo.formatNumber)(d, w)) : h("Label.sRobux"),
                     S = (0, ee.jsxs)("button", {
                         type: "button",
                         className: "btn-navigation-nav-robux-md",
                         "aria-label": x,
                         "aria-haspopup": "true",
-                        children: [(0, ee.jsx)(Un, {
+                        children: [(0, ee.jsx)(Ua, {
                             robuxAmount: d,
                             isGetCurrencyCallDone: l,
                             robuxError: p,
                             creditDisplayConfig: n,
                             robuxBadgeType: c
-                        }), n === Dm && (0, ee.jsx)(Up, {
+                        }), n === Dg && (0, ee.jsx)(Ug, {
                             creditAmount: t,
                             currencyCode: o,
                             creditError: i
                         })]
                     }),
-                    _ = (0, ee.jsx)(Uf, {
+                    _ = (0, ee.jsx)(Uv, {
                         isEligibleForVng: s,
                         robuxAmount: d,
                         robuxError: p,
@@ -59793,7 +59914,7 @@ function() {
                         creditError: i,
                         creditDisplayConfig: n,
                         onBuyRobuxExternalClick: function() {
-                            E(FR.EXTERNAL_LINK_MODAL), b(!0)
+                            E(FP.EXTERNAL_LINK_MODAL), b(!0)
                         },
                         robuxBadgeType: c
                     });
@@ -59801,16 +59922,16 @@ function() {
                     id: "navbar-robux",
                     ref: v,
                     className: aG()("navbar-icon-item", {
-                        "robux-popover-margins": n === Dh
+                        "robux-popover-margins": n === Dv
                     }),
-                    children: [s && (0, ee.jsx)(Uh, {
+                    children: [s && (0, ee.jsx)(Uy, {
                         isOpen: y,
                         onClose: function() {
                             b(!1)
                         },
                         onContinue: function() {
                             var e;
-                            E(FR.CONTINUE_TO_VNG), (null != (e = iN("getVngShopSignedRedirectionUrl")) ? e : function() {
+                            E(FP.CONTINUE_TO_VNG), (null != (e = iN("getVngShopSignedRedirectionUrl")) ? e : function() {
                                 return Promise.resolve({})
                             })().then(function(e) {
                                 var t, n = e.vngShopRedirectUrl;
@@ -59828,14 +59949,14 @@ function() {
                             side: "bottom",
                             align: "end",
                             ariaLabel: x
-                        }, Fh(v)), {
+                        }, Fg(v)), {
                             children: _
                         }))]
                     })]
                 })
             }
 
-            function Uv(e) {
+            function UE(e) {
                 var t = e.toggleUniverseSearch,
                     n = i3("CommonUI.Features");
                 return (0, ee.jsx)("li", {
@@ -59845,14 +59966,14 @@ function() {
                         className: "rbx-menu-item btn-navigation-nav-search-white-md",
                         "aria-label": n("Label.sSearch"),
                         onClick: t,
-                        children: (0, ee.jsx)(PY, {
+                        children: (0, ee.jsx)(PZ, {
                             name: "icon-regular-magnifying-glass",
                             size: "XLarge"
                         })
                     })
                 })
             }(0, tl.authenticatedUser)();
-            var Ug = function(e) {
+            var Uw = function(e) {
                     var t = e.isVerified,
                         n = e.isRobloxPlus,
                         r = e.isPremium,
@@ -59896,18 +60017,18 @@ function() {
                         })]
                     }) : null
                 },
-                Uy = "Label.RobloxPlusSubscriber",
-                Ub = function(e) {
+                Ux = "Label.RobloxPlusSubscriber",
+                US = function(e) {
                     var t;
                     return null != (t = e.displayName) ? t : ""
                 };
 
-            function UE(e) {
+            function U_(e) {
                 var t, n, r, i, o, a = e.user,
                     s = i3("Feature.ProfileBadges"),
                     u = i3("Feature.RobloxSubscription"),
                     l = iT("AvatarHeadshot"),
-                    c = (null != (t = iT("useLiveUserNameForDisplay")) ? t : Ub)(a),
+                    c = (null != (t = iT("useLiveUserNameForDisplay")) ? t : US)(a),
                     d = (null != (n = iT("useHasVerifiedBadge")) ? n : function(e) {
                         return e.hasVerifiedBadge
                     })(a),
@@ -59915,7 +60036,7 @@ function() {
                         return !1
                     })(),
                     p = d ? (0, ee.jsx)("section", {
-                        children: (0, ee.jsx)(Po, {
+                        children: (0, ee.jsx)(Pu, {
                             className: "verified-badge-icon-header",
                             size: "Small",
                             titleText: s("Creator.VerifiedBadgeIconAccessibilityText")
@@ -59924,7 +60045,7 @@ function() {
                     h = f && (0, tl.isBlackbirdUser)();
                 return (0, ee.jsx)("li", {
                     className: "age-bracket-label text-header",
-                    children: (0, ee.jsxs)(PG, {
+                    children: (0, ee.jsxs)(PX, {
                         className: "text-link dynamic-overflow-container",
                         url: (0, im.getAbsoluteUrl)("/users/".concat(a.id, "/profile")),
                         children: [(0, ee.jsx)("span", {
@@ -59939,24 +60060,24 @@ function() {
                             children: c
                         }), p, h ? (0, ee.jsx)("section", {
                             className: "age-bracket-label-plus-badge",
-                            children: (0, ee.jsx)(Ug, {
+                            children: (0, ee.jsx)(Uw, {
                                 isRobloxPlus: !0,
                                 size: "Small",
-                                plusBadgeAriaLabel: u.has(Uy) ? u(Uy) : "Roblox Plus subscriber"
+                                plusBadgeAriaLabel: u.has(Ux) ? u(Ux) : "Roblox Plus subscriber"
                             })
                         }) : null]
                     })
                 })
             }
 
-            function Uw() {
-                var e = P0();
-                return null == e ? null : (0, ee.jsx)(UE, {
+            function UA() {
+                var e = P4();
+                return null == e ? null : (0, ee.jsx)(U_, {
                     user: e
                 })
             }
 
-            function Ux(e) {
+            function UN(e) {
                 var t, n, r, i, o, a, s, u, l, c, d, f, p, h, m, v, g, y, b, E, w, x, S, _, A, N, I, T, C, M, k, R, O, L, D, P = e.toggleUniverseSearch,
                     j = i3("CommonUI.Messages"),
                     F = (0, tl.authenticatedUser)(),
@@ -59973,36 +60094,36 @@ function() {
                     Q = (0, e_._)((0, tf.useState)(""), 2),
                     K = Q[0],
                     q = Q[1],
-                    J = (t = i3("CommonUI.Messages"), r = null == (n = ji()) ? void 0 : function(e) {
+                    J = (t = i3("CommonUI.Messages"), r = null == (n = js()) ? void 0 : function(e) {
                         if (void 0 !== e) {
-                            var t = D3(e);
+                            var t = D9(e);
                             if (null == t) throw Error("UserId ".concat(e, " was not parsable as an integer."));
                             return t
                         }
-                    }(n.id), i = (0, tf.useContext)(sI).robuxStream, a = (o = (0, e_._)((0, tf.useState)(!1), 2))[0], s = o[1], l = (u = (0, e_._)((0, tf.useState)(0), 2))[0], c = u[1], f = (d = (0, e_._)((0, tf.useState)(null), 2))[0], p = d[1], m = (h = (0, e_._)((0, tf.useState)(""), 2))[0], v = h[1], y = (g = (0, e_._)((0, tf.useState)(Dp), 2))[0], b = g[1], w = (E = (0, e_._)((0, tf.useState)(0), 2))[0], x = E[1], _ = (S = (0, e_._)((0, tf.useState)("USD"), 2))[0], A = S[1], I = (N = (0, e_._)((0, tf.useState)(""), 2))[0], T = N[1], M = (C = (0, e_._)((0, tf.useState)(!1), 2))[0], k = C[1], R = (0, tf.useRef)(!1), O = function() {
+                    }(n.id), i = (0, tf.useContext)(sI).robuxStream, a = (o = (0, e_._)((0, tf.useState)(!1), 2))[0], s = o[1], l = (u = (0, e_._)((0, tf.useState)(0), 2))[0], c = u[1], f = (d = (0, e_._)((0, tf.useState)(null), 2))[0], p = d[1], m = (h = (0, e_._)((0, tf.useState)(""), 2))[0], v = h[1], y = (g = (0, e_._)((0, tf.useState)(Dm), 2))[0], b = g[1], w = (E = (0, e_._)((0, tf.useState)(0), 2))[0], x = E[1], _ = (S = (0, e_._)((0, tf.useState)("USD"), 2))[0], A = S[1], I = (N = (0, e_._)((0, tf.useState)(""), 2))[0], T = N[1], M = (C = (0, e_._)((0, tf.useState)(!1), 2))[0], k = C[1], R = (0, tf.useRef)(!1), O = function() {
                         var e = iN("getUserCurrency");
                         null != r && null != e && (R.current = !0, null == i && s(!1), e(r).then(function(e) {
                             v(""), c(e.robux)
                         }, function() {
-                            v(t.has(Dl) ? t(Dl) : Dl)
+                            v(t.has(Dd) ? t(Dd) : Dd)
                         }).finally(function() {
                             s(!0)
                         }))
                     }, L = function() {
                         var e = iN("getRobuxBadge");
-                        null != n && null != e && null != jf() && e().then(function(e) {
-                            var t = jf();
+                        null != n && null != e && null != jm() && e().then(function(e) {
+                            var t = jm();
                             e.is_virtual_item_available && t && p(t)
                         }).catch(function(e) {
-                            jp(e) && p(null)
+                            jv(e) && p(null)
                         })
                     }, D = function() {
                         var e = iN("getCreditBalanceForNavigation");
                         null != n && null != e && e().then(function(e) {
                             var t, n;
-                            T(""), null === e.creditDisplayConfig || null === e.creditBalance || 0 === e.creditBalance || null === e.currencyCode ? b(Dp) : b(e.creditDisplayConfig), x(null != (t = e.creditBalance) ? t : 0), A(null != (n = e.currencyCode) ? n : "USD")
+                            T(""), null === e.creditDisplayConfig || null === e.creditBalance || 0 === e.creditBalance || null === e.currencyCode ? b(Dm) : b(e.creditDisplayConfig), x(null != (t = e.creditBalance) ? t : 0), A(null != (n = e.currencyCode) ? n : "USD")
                         }, function() {
-                            T(t(Dl))
+                            T(t(Dd))
                         }).finally(function() {
                             k(!0)
                         })
@@ -60035,7 +60156,7 @@ function() {
                         null != F && ib().then(function(e) {
                             q(""), Y(e.shouldShowVng), Z(e.notificationsCanAccessStream)
                         }, function() {
-                            q(j(Dl))
+                            q(j(Dd))
                         })
                     };
                 (0, tf.useEffect)(function() {
@@ -60045,34 +60166,34 @@ function() {
                     id: "navbar-stream",
                     ref: U,
                     className: "navbar-icon-item navbar-stream notification-margins",
-                    children: (0, ee.jsx)(Fm, {
+                    children: (0, ee.jsx)(Fy, {
                         containerRef: U
                     })
                 });
                 return (0, ee.jsxs)("ul", {
                     className: "[&>li]:relative navbar-right rbx-navbar-icon-group",
-                    children: [(0, ee.jsx)(P9, {}), (0, ee.jsx)(Uw, {}), (0, ee.jsx)(Uv, {
+                    children: [(0, ee.jsx)(je, {}), (0, ee.jsx)(UA, {}), (0, ee.jsx)(UE, {
                         toggleUniverseSearch: P
-                    }), X && et, (0, ee.jsx)(Um, ex((0, ew._)({}, J), {
+                    }), X && et, (0, ee.jsx)(Ub, ex((0, ew._)({}, J), {
                         robuxError: J.robuxError || K,
                         isEligibleForVng: G
-                    })), (0, ee.jsx)(FI, {
+                    })), (0, ee.jsx)(FM, {
                         accountNotificationCount: V
-                    }), (0, ee.jsx)(Ft, {})]
+                    }), (0, ee.jsx)(Fi, {})]
                 })
             }
-            var US = function() {
+            var UI = function() {
                     var e, t = null == rV ? void 0 : rV.querySelector('meta[name="account-experience-revamp-data"]');
                     return "true" === (null != (e = null == t ? void 0 : t.dataset) ? e : {}).isAccountExperienceRevampEnabled
                 },
-                U_ = function() {
+                UT = function() {
                     return [!1, !1]
                 };
 
-            function UA() {
+            function UC() {
                 var e, t = i3("CommonUI.Features"),
-                    n = Ps(),
-                    r = null != (e = iT("useIsAccountSwitcherAvailableForBrowser")) ? e : U_,
+                    n = Pc(),
+                    r = null != (e = iT("useIsAccountSwitcherAvailableForBrowser")) ? e : UT,
                     i = (0, e_._)(r(), 1)[0];
                 (0, tf.useEffect)(function() {
                     try {
@@ -60084,26 +60205,26 @@ function() {
                 }, []);
                 var o = (0, er.useQuery)({
                     queryKey: ["getIsVNGLandingRedirectEnabled"],
-                    queryFn: D$
+                    queryFn: D2
                 }).data;
                 return void 0 === o || o ? null : (0, ee.jsx)("li", {
                     className: "signup-button-container",
-                    children: (0, ee.jsx)(PG, {
-                        url: DQ(i, n),
+                    children: (0, ee.jsx)(PX, {
+                        url: Dq(i, n),
                         id: "sign-up-button",
                         className: "rbx-navbar-signup btn-growth-sm nav-menu-title signup-button",
-                        children: t(US() ? "Label.CreateAccount" : "Label.sSignUp")
+                        children: t(UI() ? "Label.CreateAccount" : "Label.sSignUp")
                     })
                 })
             }
 
-            function UN() {
+            function UM() {
                 var e = i3("CommonUI.Features"),
-                    t = Ps(),
-                    n = DJ(t) ? DK(t) : null;
+                    t = Pc(),
+                    n = D0(t) ? DJ(t) : null;
                 return (0, ee.jsx)("li", {
                     className: "login-action",
-                    children: null != n && (0, ee.jsx)(PG, {
+                    children: null != n && (0, ee.jsx)(PX, {
                         url: n,
                         className: "rbx-navbar-login btn-secondary-sm nav-menu-title rbx-menu-item",
                         children: e("Label.sLogin")
@@ -60111,27 +60232,27 @@ function() {
                 })
             }
 
-            function UI(e) {
+            function Uk(e) {
                 var t = e.toggleUniverseSearch;
                 return null != (0, tl.authenticatedUser)() ? (0, ee.jsx)("div", {
                     className: "navbar-right rbx-navbar-right",
-                    children: (0, ee.jsx)(Ux, {
+                    children: (0, ee.jsx)(UN, {
                         toggleUniverseSearch: t
                     })
                 }) : (0, ee.jsx)("div", {
                     className: "navbar-right rbx-navbar-right",
                     children: (0, ee.jsxs)("ul", {
                         className: "nav navbar-right rbx-navbar-right-nav",
-                        children: [(0, ee.jsx)(UA, {}), (0, ee.jsx)(UN, {}), (0, ee.jsx)(Uv, {
+                        children: [(0, ee.jsx)(UC, {}), (0, ee.jsx)(UM, {}), (0, ee.jsx)(UE, {
                             toggleUniverseSearch: t
                         })]
                     })
                 })
             }
 
-            function UT() {
+            function UR() {
                 var e, t, n, r, i, o, a, s = (t = (e = (0, e_._)((0, tf.useState)(!0), 2))[0], n = e[1], i = (r = (0, e_._)((0, tf.useState)(!1), 2))[0], o = r[1], a = (0, tf.useCallback)(function() {
-                        var e = R2();
+                        var e = R3();
                         t !== e && (n(e), o(!e))
                     }, [t]), (0, tf.useEffect)(function() {
                         return a(), window.addEventListener("resize", a),
@@ -60151,20 +60272,20 @@ function() {
                 return (0, tf.useEffect)(function() {
                     id()
                 }, []), (0, ee.jsxs)(tp().Fragment, {
-                    children: [(0, ee.jsx)(P3, {
+                    children: [(0, ee.jsx)(P9, {
                         isUniverseSearchShown: u
-                    }), (0, ee.jsx)(UI, {
+                    }), (0, ee.jsx)(Uk, {
                         toggleUniverseSearch: l
                     })]
                 })
             }
 
-            function UC() {
+            function UO() {
                 var e = i3("CommonUI.Features"),
-                    t = RK.buyRobuxUrl,
+                    t = RJ.buyRobuxUrl,
                     n = t.buyRobux,
                     r = t.buyRobuxOnVng,
-                    i = P0(),
+                    i = P4(),
                     o = (0, e_._)((0, tf.useState)(!1), 2),
                     a = o[0],
                     s = o[1],
@@ -60173,11 +60294,11 @@ function() {
                     c = u[1],
                     d = (0, tf.useRef)(new Map),
                     f = function(e) {
-                        Ue({
-                            triggerContext: FC.WEB_ROBUX_PURCHASE,
+                        Ui({
+                            triggerContext: FO.WEB_ROBUX_PURCHASE,
                             isMidPurchaseStep: !1,
-                            viewName: FM.NAVIGATION_ROBUX_TEXT,
-                            purchaseEventType: Fk.USER_INPUT,
+                            viewName: FL.NAVIGATION_ROBUX_TEXT,
+                            purchaseEventType: FD.USER_INPUT,
                             viewMessage: e
                         })
                     };
@@ -60189,14 +60310,14 @@ function() {
                     }))
                 }, [r, r.cacheKey, null == i ? void 0 : i.id]), (0, ee.jsx)("div", {
                     children: a ? (0, ee.jsxs)(tp().Fragment, {
-                        children: [(0, ee.jsx)(Uh, {
+                        children: [(0, ee.jsx)(Uy, {
                             isOpen: l,
                             onClose: function() {
                                 c(!1)
                             },
                             onContinue: function() {
                                 var e;
-                                f(FR.CONTINUE_TO_VNG), (null != (e = iN("getVngShopSignedRedirectionUrl")) ? e : function() {
+                                f(FP.CONTINUE_TO_VNG), (null != (e = iN("getVngShopSignedRedirectionUrl")) ? e : function() {
                                     return Promise.resolve({})
                                 })().then(function(e) {
                                     var t, n = e.vngShopRedirectUrl;
@@ -60206,38 +60327,38 @@ function() {
                                     null == (e = window.open(r.url, "_blank")) || e.focus()
                                 }), c(!1)
                             }
-                        }), (0, ee.jsx)(PG, {
+                        }), (0, ee.jsx)(PX, {
                             cssClasses: "font-header-2 nav-menu-title text-header robux-menu-btn",
                             onClick: function() {
-                                f(FR.EXTERNAL_LINK_MODAL), c(!0)
+                                f(FP.EXTERNAL_LINK_MODAL), c(!0)
                             },
                             children: e(n.name)
                         })]
-                    }) : (0, ee.jsx)(PG, {
+                    }) : (0, ee.jsx)(PX, {
                         cssClasses: "font-header-2 nav-menu-title text-header robux-menu-btn",
                         url: n.url,
                         onClick: function() {
-                            f(FR.BUY_ROBUX)
+                            f(FP.BUY_ROBUX)
                         },
                         children: e(n.name)
                     })
                 })
             }
 
-            function UM() {
+            function UL() {
                 var e = i3("Authentication.Passkey"),
                     t = (0, e_._)((0, tf.useState)(!0), 2),
                     n = t[0],
                     r = t[1];
                 return n ? (0, ee.jsx)(h3, {
-                    title: e(Dg),
+                    title: e(Db),
                     onClose: function() {
                         r(!1)
                     },
                     shouldAutoDismiss: !0
                 }) : null
             }
-            var Uk = function() {
+            var UD = function() {
                     var e = (0, er.useQuery)({
                             queryKey: ["ixp/".concat(iC)],
                             queryFn: function() {
@@ -60265,27 +60386,27 @@ function() {
                         isLoading: n
                     }
                 },
-                UR = function() {
+                UP = function() {
                     rS().logLayerExposure(iC)
                 },
-                UO = rm("Download"),
-                UL = function(e) {
+                Uj = rm("Download"),
+                UF = function(e) {
                     (0, a5.sendEventWithTarget)("signupDownloadModal", "postSignupDownloadModal", {
                         shownModal: "SHOWN_MODAL_SUCCESS",
                         url: e
-                    }, a5.targetTypes.WWW), UO("PostSignupDownloadModalShown")
+                    }, a5.targetTypes.WWW), Uj("PostSignupDownloadModalShown")
                 };
 
-            function UD(e) {
+            function UU(e) {
                 var t = e.download,
                     n = e.unmount,
                     r = i3("Feature.DownloadLanding"),
                     i = i3("CommonUI.Features"),
-                    o = jW(),
+                    o = jH(),
                     a = (0, e_._)((0, tf.useState)(!1), 2),
                     s = a[0],
                     u = a[1],
-                    l = t.downloadType === jm.MacDirectDownload ? "/download/client?os=mac" : "/download/client?os=win";
+                    l = t.downloadType === jy.MacDirectDownload ? "/download/client?os=mac" : "/download/client?os=win";
                 return (0, ee.jsx)(hH, {
                     open: !0,
                     size: s ? "Large" : "Medium",
@@ -60321,14 +60442,14 @@ function() {
                                     className: "flex gap-xxlarge",
                                     children: [(0, ee.jsx)("section", {
                                         className: "flex flex-col fill basis-0 gap-large",
-                                        children: (0, ee.jsx)(j3, {
+                                        children: (0, ee.jsx)(j9, {
                                             translate: o
                                         })
                                     }), (0, ee.jsx)("div", {
                                         className: "stroke-standard stroke-default"
                                     }), (0, ee.jsx)("section", {
                                         className: "flex flex-col fill basis-0 gap-xxlarge",
-                                        children: (0, ee.jsx)(j5, {
+                                        children: (0, ee.jsx)(j8, {
                                             translate: o
                                         })
                                     })]
@@ -60363,10 +60484,10 @@ function() {
                                             return eS(this, function(r) {
                                                 switch (r.label) {
                                                     case 0:
-                                                        if (jj(t.link.name), !t.isDirectDownload) return [2];
-                                                        return [4, j4({
+                                                        if (jB(t.link.name), !t.isDirectDownload) return [2];
+                                                        return [4, j6({
                                                             linkId: window.location.href,
-                                                            downloadSource: jX
+                                                            downloadSource: jK
                                                         })];
                                                     case 1:
                                                         return e = r.sent(), n = t.href.withSearchParamsAppended(e), window.location.assign(n.toString()), window.setTimeout(function() {
@@ -60384,30 +60505,27 @@ function() {
                 })
             }
 
-            function UP(e) {
+            function UB(e) {
                 var t = e.unmount,
                     n = (0, tf.useRef)(!1),
-                    r = jW(),
-                    i = Uk(),
+                    r = jH(),
+                    i = UD(),
                     o = i.isDownloadModalEnabled,
                     a = i.isLoading,
-                    s = jV({
+                    s = jG({
                         translate: r
                     }),
                     u = (0, rC.getDeviceMeta)(),
                     l = !a && null != s && (null == u ? void 0 : u.isDesktop);
                 return (0, tf.useEffect)(function() {
-                    l && !n.current && (n.current = !0, UR(), o && UL(window.location.href))
-                }, [l, o]), l && o ? (0, ee.jsx)(UD, {
+                    l && !n.current && (n.current = !0, UP(), o && UF(window.location.href))
+                }, [l, o]), l && o ? (0, ee.jsx)(UU, {
                     download: s,
                     unmount: t
                 }) : null
             }
-            var Uj = function() {
-                return "https://create.".concat(el().domain, "/")
-            };
 
-            function UF() {
+            function UV() {
                 var e = i3("Common.AlertsAndOptions"),
                     t = e.has("Action.SkipToMainContent") ? e("Action.SkipToMainContent") : "Skip to main content";
                 return (0, ee.jsx)(h4, {
@@ -60422,17 +60540,17 @@ function() {
                 })
             }
 
-            function UU() {
-                var e = P0();
-                return US() ? null : (0, ee.jsxs)(tf.Fragment, {
-                    children: [(0, ee.jsx)(UF, {}), null != e && (0, ee.jsx)("button", {
+            function Uz() {
+                var e = P4();
+                return UI() ? null : (0, ee.jsxs)(tf.Fragment, {
+                    children: [(0, ee.jsx)(UV, {}), null != e && (0, ee.jsx)("button", {
                         type: "button",
                         className: "menu-button btn-navigation-nav-menu-md",
                         title: "nav menu",
                         onClick: function() {
-                            document.dispatchEvent(new CustomEvent(Dc))
+                            document.dispatchEvent(new CustomEvent(Df))
                         },
-                        children: (0, ee.jsx)(PY, {
+                        children: (0, ee.jsx)(PZ, {
                             name: "icon-regular-three-bars-horizontal",
                             size: "XLarge"
                         })
@@ -60440,7 +60558,7 @@ function() {
                 })
             }
 
-            function UB(e) {
+            function UW(e) {
                 var t = e.variant;
                 return (0, ee.jsx)("span", {
                     className: "rbx-age-badge items-center justify-center select-none height-400 padding-x-xsmall radius-small text-label-small margin-left-[6px] bg-[var(--color-content-emphasis)] content-[var(--color-surface-0)]",
@@ -60456,13 +60574,13 @@ function() {
                     element: P
                 }, eR(void 0))))
             });
-            var UV = JSON.parse('{"P":["CommonUI.Features","CommonUI.Messages","Common.AlertsAndOptions","Common.VisitGame","Feature.DownloadLanding","Feature.ShopDialog","Purchasing.RedeemGameCard","IAPExperience.PurchaseError","Feature.NotApproved","Authentication.LogoutModal","Feature.RobloxSubscription","Authentication.Passkey","Feature.AccountSettings","Feature.ProfileBadges"]}'),
-                Uz = UV.P,
-                UW = "auth-401-modal",
-                UG = "Heading.SignedOut",
-                UY = "Body.SignInCTA",
-                UH = "Action.SignIn",
-                UX = function(e) {
+            var UG = JSON.parse('{"P":["CommonUI.Features","CommonUI.Messages","Common.AlertsAndOptions","Common.VisitGame","Feature.DownloadLanding","Feature.ShopDialog","Purchasing.RedeemGameCard","IAPExperience.PurchaseError","Feature.NotApproved","Authentication.LogoutModal","Feature.RobloxSubscription","Authentication.Passkey","Feature.AccountSettings","Feature.ProfileBadges"]}'),
+                UY = UG.P,
+                UH = "auth-401-modal",
+                UX = "Heading.SignedOut",
+                UZ = "Body.SignInCTA",
+                UQ = "Action.SignIn",
+                UK = function(e) {
                     var t = e.titleKey,
                         n = e.bodyContextKey,
                         r = e.bodyCtaKey,
@@ -60472,20 +60590,20 @@ function() {
                         s = a[0],
                         u = a[1];
                     tp().useEffect(function() {
-                        Dj()
+                        DU()
                     }, []);
                     var l = tp().useCallback(function() {
-                            DF(), u(!1);
-                            var e, t = document.getElementById(UW);
-                            null == t || null == (e = t.parentNode) || e.removeChild(t), window.location.href = DK()
+                            DB(), u(!1);
+                            var e, t = document.getElementById(UH);
+                            null == t || null == (e = t.parentNode) || e.removeChild(t), window.location.href = DJ()
                         }, []),
                         c = function(e) {
                             return o.has(e) ? o(e) : ""
                         },
-                        d = c(null != t ? t : UG),
+                        d = c(null != t ? t : UX),
                         f = n ? c(n) : "",
-                        p = c(null != r ? r : UY),
-                        h = c(null != i ? i : UH);
+                        p = c(null != r ? r : UZ),
+                        h = c(null != i ? i : UQ);
                     return (0, ee.jsx)(hH, {
                         open: s,
                         size: "Small",
@@ -60522,27 +60640,27 @@ function() {
                         })
                     })
                 },
-                UZ = function() {
+                Uq = function() {
                     var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {},
-                        t = document.getElementById(UW);
+                        t = document.getElementById(UH);
                     t && (0, et.render)((0, ee.jsx)(nI, {
-                        namespaces: Uz,
-                        children: (0, ee.jsx)(UX, (0, ew._)({}, e))
+                        namespaces: UY,
+                        children: (0, ee.jsx)(UK, (0, ew._)({}, e))
                     }), t)
                 },
-                UQ = function() {
-                    var e = document.getElementById(UW);
-                    return e || ((e = document.createElement("div")).id = UW, document.body.append(e)), e
+                UJ = function() {
+                    var e = document.getElementById(UH);
+                    return e || ((e = document.createElement("div")).id = UH, document.body.append(e)), e
                 },
-                UK = function() {
-                    UQ(), UZ({
-                        titleKey: UG,
+                U$ = function() {
+                    UJ(), Uq({
+                        titleKey: UX,
                         bodyContextKey: "",
-                        bodyCtaKey: UY,
-                        buttonKey: UH
+                        bodyCtaKey: UZ,
+                        buttonKey: UQ
                     })
                 },
-                Uq = {
+                U0 = {
                     featureName: "SilentPasskeyUpgrade",
                     team: "Safety > Accounts > Authentication",
                     defaultTimeCompare: {
@@ -60628,44 +60746,44 @@ function() {
                         }
                     }
                 },
-                UJ = rm(Uq.featureName),
-                U$ = rN(Uq, {
-                    publish: UJ
+                U1 = rm(U0.featureName),
+                U2 = rN(U0, {
+                    publish: U1
                 }),
-                U0 = U$.trackCounter,
-                U1 = U$.trackError,
-                U2 = function(e) {
+                U4 = U2.trackCounter,
+                U3 = U2.trackError,
+                U5 = function(e) {
                     var t, n = null == e ? void 0 : e[1];
                     return null == n || "" === n ? "Unknown" : null != (t = n.split(".")[0]) ? t : "Unknown"
                 },
-                U4 = function() {
+                U6 = function() {
                     var e, t = "u" > typeof navigator ? navigator.userAgent : "",
                         n = null != (e = /EdgA?\/(\d+(?:\.\d+)?)/.exec(t)) ? e : /Edge\/(\d+(?:\.\d+)?)/.exec(t);
                     if (n) return {
                         browserFamily: "Edge",
-                        browserMajor: U2(n)
+                        browserMajor: U5(n)
                     };
                     var r = /(?!Chrom.*OPR)Chrom(?:e|ium)\/(\d+(?:\.\d+)?)/.exec(t);
                     if (r) return {
                         browserFamily: "Chrome",
-                        browserMajor: U2(r)
+                        browserMajor: U5(r)
                     };
                     var i = /CriOS\/(\d+(?:\.\d+)?)/.exec(t);
                     if (i) return {
                         browserFamily: "Chrome",
-                        browserMajor: U2(i)
+                        browserMajor: U5(i)
                     };
                     var o = /Version\/(\d+(?:[._]\d+)?).*Safari/.exec(t);
                     return o ? {
                         browserFamily: "Safari",
-                        browserMajor: U2(o)
+                        browserMajor: U5(o)
                     } : {
                         browserFamily: "Other",
                         browserMajor: "Unknown"
                     }
                 },
-                U3 = function() {
-                    var e = U4(),
+                U9 = function() {
+                    var e = U6(),
                         t = e.browserFamily,
                         n = e.browserMajor;
                     return {
@@ -60673,91 +60791,91 @@ function() {
                         browserMajor: "Other" === t ? "Unknown" : n
                     }
                 },
-                U5 = "startRegistrationSuccess",
-                U6 = "startRegistrationError",
-                U9 = "createCredentialError",
-                U8 = "invalidStateErrorHasExistingPasskey",
-                U7 = "unknownError",
-                Be = "finishRegistrationSuccess",
-                Bt = "finishRegistrationError",
-                Bn = "httpStatusErrorParsing",
-                Br = "consumePasskeySessionFlagError",
-                Bi = "silentUpgradeNotEligible",
-                Bo = "silentUpgradeCheckError",
-                Ba = "expectedUserIdMissing",
-                Bs = "currentUserIdMissing",
-                Bu = "userIdMismatch",
-                Bl = "filteredByUnsupportedBrowser",
-                Bc = "RBXPasskeyUpgradePending",
-                Bd = "RBXPasskeyUpgradeUserId",
-                Bf = "RBXPasskeyUpgradeDelayUntil",
-                Bp = new Set(["Chrome", "Safari"]),
-                Bh = function() {
+                U8 = "startRegistrationSuccess",
+                U7 = "startRegistrationError",
+                Be = "createCredentialError",
+                Bt = "invalidStateErrorHasExistingPasskey",
+                Bn = "unknownError",
+                Br = "finishRegistrationSuccess",
+                Bi = "finishRegistrationError",
+                Bo = "httpStatusErrorParsing",
+                Ba = "consumePasskeySessionFlagError",
+                Bs = "silentUpgradeNotEligible",
+                Bu = "silentUpgradeCheckError",
+                Bl = "expectedUserIdMissing",
+                Bc = "currentUserIdMissing",
+                Bd = "userIdMismatch",
+                Bf = "filteredByUnsupportedBrowser",
+                Bp = "RBXPasskeyUpgradePending",
+                Bh = "RBXPasskeyUpgradeUserId",
+                Bm = "RBXPasskeyUpgradeDelayUntil",
+                Bv = new Set(["Chrome", "Safari"]),
+                Bg = function() {
                     var e = (0, tl.authenticatedUser)();
                     return (null == e ? void 0 : e.id) == null ? null : String(e.id)
                 },
-                Bm = {
-                    ImmediateLogin: DI,
-                    DelayedLogin: DT,
-                    DelayedSignup: DC
+                By = {
+                    ImmediateLogin: DC,
+                    DelayedLogin: DM,
+                    DelayedSignup: Dk
                 },
-                Bv = (K = {}, (0, nT._)(K, DI, "PasskeySilentUpgradeLoginImmediate"), (0, nT._)(K, DT, "PasskeySilentUpgradeLoginDelayed"), (0, nT._)(K, DC, "PasskeySilentUpgradeSignupDelayed"), K),
-                Bg = (q = {}, (0, nT._)(q, DI, "LoginImmediate"), (0, nT._)(q, DT, "LoginDelayed"), (0, nT._)(q, DC, "SignupDelayed"), q),
-                By = function(e) {
+                Bb = (K = {}, (0, nT._)(K, DC, "PasskeySilentUpgradeLoginImmediate"), (0, nT._)(K, DM, "PasskeySilentUpgradeLoginDelayed"), (0, nT._)(K, Dk, "PasskeySilentUpgradeSignupDelayed"), K),
+                BE = (q = {}, (0, nT._)(q, DC, "LoginImmediate"), (0, nT._)(q, DM, "LoginDelayed"), (0, nT._)(q, Dk, "SignupDelayed"), q),
+                Bw = function(e) {
                     var t;
-                    return null != (t = Bg[e]) ? t : "Unknown"
+                    return null != (t = BE[e]) ? t : "Unknown"
                 },
-                Bb = function(e, t) {
-                    UJ("".concat(e, "_API"), {
+                Bx = function(e, t) {
+                    U1("".concat(e, "_API"), {
                         statusCode: "Throughput"
-                    }), UJ("".concat(e, "_API"), {
+                    }), U1("".concat(e, "_API"), {
                         statusCode: t
                     })
                 },
-                BE = function() {
+                BS = function() {
                     try {
-                        var e, t = sessionStorage.getItem(Bc),
-                            n = t ? Bm[t] : void 0;
-                        if (!n) return t && (sessionStorage.removeItem(Bc), U0("UpgradeFlagInvalid", {
+                        var e, t = sessionStorage.getItem(Bp),
+                            n = t ? By[t] : void 0;
+                        if (!n) return t && (sessionStorage.removeItem(Bp), U4("UpgradeFlagInvalid", {
                             reason: "UnknownFlagValue"
                         })), null;
-                        var r = null != (e = sessionStorage.getItem(Bd)) ? e : null;
-                        if (n !== DT && n !== DC) return sessionStorage.removeItem(Bc), {
+                        var r = null != (e = sessionStorage.getItem(Bh)) ? e : null;
+                        if (n !== DM && n !== Dk) return sessionStorage.removeItem(Bp), {
                             ctx: n,
                             delayMs: 0,
                             expectedUserId: r
                         };
-                        var i = Number(sessionStorage.getItem(Bf));
-                        return i || (i = Date.now() + 8e3, sessionStorage.setItem(Bf, String(i))), {
+                        var i = Number(sessionStorage.getItem(Bm));
+                        return i || (i = Date.now() + 8e3, sessionStorage.setItem(Bm, String(i))), {
                             ctx: n,
                             delayMs: Math.max(0, i - Date.now()),
                             expectedUserId: r
                         }
                     } catch (e) {
-                        DU(DN, Br), U0("UpgradeFlagInvalid", {
+                        DV(DT, Ba), U4("UpgradeFlagInvalid", {
                             reason: "StorageReadError"
                         })
                     }
                     return null
                 },
-                Bw = function() {
-                    sessionStorage.removeItem(Bc), sessionStorage.removeItem(Bd), sessionStorage.removeItem(Bf)
+                B_ = function() {
+                    sessionStorage.removeItem(Bp), sessionStorage.removeItem(Bh), sessionStorage.removeItem(Bm)
                 },
-                Bx = function(e, t, n) {
-                    var r = Bh();
-                    return null === t ? (Bw(), DU(e, Ba), U0("UpgradeAborted", {
+                BA = function(e, t, n) {
+                    var r = Bg();
+                    return null === t ? (B_(), DV(e, Bl), U4("UpgradeAborted", {
                         source: n,
                         reason: "ExpectedUserIdMissing"
-                    }), !1) : null === r ? (Bw(), DU(e, Bs), U0("UpgradeAborted", {
+                    }), !1) : null === r ? (B_(), DV(e, Bc), U4("UpgradeAborted", {
                         source: n,
                         reason: "CurrentUserIdMissing"
-                    }), !1) : r === t || (Bw(), DU(e, Bu), U0("UpgradeAborted", {
+                    }), !1) : r === t || (B_(), DV(e, Bd), U4("UpgradeAborted", {
                         source: n,
                         reason: "UserIdMismatch"
                     }), !1)
                 },
-                BS = new Set(["AbortError", "NotAllowedError", "InvalidStateError", "ConstraintError"]),
-                B_ = function(e, t) {
+                BN = new Set(["AbortError", "NotAllowedError", "InvalidStateError", "ConstraintError"]),
+                BI = function(e, t) {
                     try {
                         if (null != e && (void 0 === e ? "undefined" : (0, eN._)(e)) === "object") {
                             var n = e.status,
@@ -60766,19 +60884,19 @@ function() {
                             if ("number" == typeof i) return String(i)
                         }
                     } catch (e) {
-                        DU(t, Bn)
+                        DV(t, Bo)
                     }
                     return "Unknown"
                 };
             ta = function(e) {
                 return eo().userDataStore.getUser(e)
             };
-            var BA = "right-navigation-header",
-                BN = "left-navigation-container",
-                BI = "header-menu-icon",
-                BT = "navigation-robux-container",
-                BC = "navigation-robux-mobile-container",
-                BM = "age-badge-container";
+            var BT = "right-navigation-header",
+                BC = "left-navigation-container",
+                BM = "header-menu-icon",
+                Bk = "navigation-robux-container",
+                BR = "navigation-robux-mobile-container",
+                BO = "age-badge-container";
             (function(e, t) {
                 var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : window;
                 if ("string" == typeof e) n[e] = t;
@@ -60810,17 +60928,17 @@ function() {
                 var e = null != (n = null == (i = (0, tl.authenticatedUser)()) || null == (r = i.id) ? void 0 : r.toString()) ? n : null,
                     t = null;
                 try {
-                    var n, r, i, o, a = null != (o = r3(Di)) ? o : null;
+                    var n, r, i, o, a = null != (o = r3(Da)) ? o : null;
                     "string" == typeof a && (t = a)
                 } catch (e) {}
-                null != t && null != e && t !== e && DW("".concat(e, ",").concat(t), window.location.href), r5(Di, e), window.addEventListener(Ds, function(e) {
+                null != t && null != e && t !== e && DY("".concat(e, ",").concat(t), window.location.href), r5(Da, e), window.addEventListener(Dl, function(e) {
                     var t = e.detail.userId;
-                    null != t && r5(Di, t)
-                }), window.addEventListener(Du, function(e) {
+                    null != t && r5(Da, t)
+                }), window.addEventListener(Dc, function(e) {
                     var t = e.detail.userId;
-                    null != t && r5(Di, t)
+                    null != t && r5(Da, t)
                 })
-            }(), j = document.getElementById("header-develop-md-link"), F = document.getElementById("header-develop-sm-link"), (0, ep._)(j, HTMLAnchorElement) && (j.href = Uj()), (0, ep._)(F, HTMLAnchorElement) && (F.href = Uj()), U = document.getElementById("nav-logo-link"), (0, ep._)(U, HTMLAnchorElement) && null == (0, tl.authenticatedUser)() && (U.href = (0, im.getAbsoluteUrl)("/")), B = [], [{
+            }(), j = document.getElementById("header-develop-md-link"), F = document.getElementById("header-develop-sm-link"), (0, ep._)(j, HTMLAnchorElement) && (j.href = RH()), (0, ep._)(F, HTMLAnchorElement) && (F.href = RH()), U = document.getElementById("nav-logo-link"), (0, ep._)(U, HTMLAnchorElement) && null == (0, tl.authenticatedUser)() && (U.href = (0, im.getAbsoluteUrl)("/")), B = [], [{
                 ids: ["nav-logo-link"],
                 navItem: "logo"
             }, {
@@ -60853,11 +60971,11 @@ function() {
                     var t, n, r, i, o = e.data,
                         a = null == o || null == (n = o.errors) || null == (t = n[0]) ? void 0 : t.code,
                         s = null == o || null == (i = o.errors) || null == (r = i[0]) ? void 0 : r.subcode;
-                    if (9002 === a && 2 === s) return UK(), new Promise(function() {})
+                    if (9002 === a && 2 === s) return U$(), new Promise(function() {})
                 }
                 return Promise.reject(e)
             }), document.addEventListener("rbx:hba-unauthorized", function(e) {
-                e.preventDefault(), UK()
+                e.preventDefault(), U$()
             }), rE("ShellStart", {
                 auth_state: (null == (J = (0, tl.authenticatedUser)()) ? void 0 : J.isAuthenticated) ? "authenticated" : "unauthenticated"
             }), rE("NavLoad", {
@@ -60869,23 +60987,23 @@ function() {
                         var I, T, C, M;
                         switch (N.label) {
                             case 0:
-                                if (null === (e = BE())) return [2, !1];
-                                if (t = e.ctx, n = e.delayMs, r = e.expectedUserId, U0("UpgradeFlagObserved", {
-                                        source: i = By(t)
-                                    }), o = U4().browserFamily, !Bp.has(o)) return Bw(), DU(t, Bl), U0("UpgradeFilteredByBrowser", {
+                                if (null === (e = BS())) return [2, !1];
+                                if (t = e.ctx, n = e.delayMs, r = e.expectedUserId, U4("UpgradeFlagObserved", {
+                                        source: i = Bw(t)
+                                    }), o = U6().browserFamily, !Bv.has(o)) return B_(), DV(t, Bf), U4("UpgradeFilteredByBrowser", {
                                     source: i,
                                     browserFamily: o
                                 }), [2, !1];
-                                if (!Bx(t, r, i)) return [2, !1];
+                                if (!BA(t, r, i)) return [2, !1];
                                 if (!(n > 0)) return [3, 2];
                                 return [4, new Promise(function(e) {
                                     setTimeout(e, n)
                                 })];
                             case 1:
-                                if (N.sent(), !Bx(t, r, i)) return [2, !1];
+                                if (N.sent(), !BA(t, r, i)) return [2, !1];
                                 N.label = 2;
                             case 2:
-                                return Bw(), [4, (I = t, T = i, eE(function() {
+                                return B_(), [4, (I = t, T = i, eE(function() {
                                     var e, t, n;
                                     return eS(this, function(r) {
                                         switch (r.label) {
@@ -60895,16 +61013,16 @@ function() {
                                                     withCredentials: !0
                                                 })];
                                             case 1:
-                                                if (e = r.sent().data, Bb("SilentUpgradeEligibility", "200"), !e.suEligibility) return U0("UpgradeIneligible", {
+                                                if (e = r.sent().data, Bx("SilentUpgradeEligibility", "200"), !e.suEligibility) return U4("UpgradeIneligible", {
                                                     source: T
                                                 }), [2, !1];
-                                                return U0("EligibilityPassed", {
+                                                return U4("EligibilityPassed", {
                                                     source: T
                                                 }), [2, !0];
                                             case 2:
-                                                return Bb("SilentUpgradeEligibility", n = B_(t = r.sent(), I)), DU(I, "".concat(Bo, "_").concat(n)), U1("UpgradeFailed", {
+                                                return Bx("SilentUpgradeEligibility", n = BI(t = r.sent(), I)), DV(I, "".concat(Bu, "_").concat(n)), U3("UpgradeFailed", {
                                                     source: T,
-                                                    browserFamily: U4().browserFamily,
+                                                    browserFamily: U6().browserFamily,
                                                     stage: "Eligibility",
                                                     reason: n
                                                 }, t), [2, !1];
@@ -60914,7 +61032,7 @@ function() {
                                     })
                                 })())];
                             case 3:
-                                if (!N.sent()) return DU(t, Bi), [2, !1];
+                                if (!N.sent()) return DV(t, Bs), [2, !1];
                                 N.label = 4;
                             case 4:
                                 return N.trys.push([4, 6, , 7]), [4, eE(function() {
@@ -60933,52 +61051,52 @@ function() {
                                     })
                                 })()];
                             case 5:
-                                return a = N.sent(), Bb("StartRegistration", "200"), DU(t, U5), U0("StartRegistrationSucceeded", {
+                                return a = N.sent(), Bx("StartRegistration", "200"), DV(t, U8), U4("StartRegistrationSucceeded", {
                                     source: i
                                 }), [3, 7];
                             case 6:
-                                return Bb("StartRegistration", u = B_(s = N.sent(), t)), DU(t, "".concat(U6, "_").concat(u)), U1("UpgradeFailed", {
+                                return Bx("StartRegistration", u = BI(s = N.sent(), t)), DV(t, "".concat(U7, "_").concat(u)), U3("UpgradeFailed", {
                                     source: i,
-                                    browserFamily: U4().browserFamily,
+                                    browserFamily: U6().browserFamily,
                                     stage: "StartRegistration",
                                     reason: u
                                 }, s), [2, !1];
                             case 7:
-                                l = (0, O3.convertPublicKeyParametersToStandardBase64)(a.creationOptions), c = (0, O3.formatCredentialRequestWeb)(JSON.stringify(l)), U0("CredentialCreateAttempt", (0, ew._)({
+                                l = (0, O6.convertPublicKeyParametersToStandardBase64)(a.creationOptions), c = (0, O6.formatCredentialRequestWeb)(JSON.stringify(l)), U4("CredentialCreateAttempt", (0, ew._)({
                                     source: i
-                                }, U3())), N.label = 8;
+                                }, U9())), N.label = 8;
                             case 8:
                                 return N.trys.push([8, 10, , 11]), f = {
                                     publicKey: c,
                                     mediation: "conditional"
                                 }, [4, navigator.credentials.create(f)];
                             case 9:
-                                if (null === (p = N.sent())) return DU(t, U9), U1("CredentialCreateFailed", ex((0, ew._)({
+                                if (null === (p = N.sent())) return DV(t, Be), U3("CredentialCreateFailed", ex((0, ew._)({
                                     source: i
-                                }, U3()), {
+                                }, U9()), {
                                     reason: "NullCredential"
                                 })), [2, !1];
-                                return d = p, U0("CredentialCreated", (0, ew._)({
+                                return d = p, U4("CredentialCreated", (0, ew._)({
                                     source: i
-                                }, U3())), [3, 11];
+                                }, U9())), [3, 11];
                             case 10:
-                                if (h = N.sent(), "InvalidStateError" === (y = (0, ep._)(h, DOMException) ? h.name : void 0) && (null != (m = null == (g = c.excludeCredentials) ? void 0 : g.length) ? m : 0) > 0) return DU(t, U8), U0("AlreadyHasPasskey", (0, ew._)({
+                                if (h = N.sent(), "InvalidStateError" === (y = (0, ep._)(h, DOMException) ? h.name : void 0) && (null != (m = null == (g = c.excludeCredentials) ? void 0 : g.length) ? m : 0) > 0) return DV(t, Bt), U4("AlreadyHasPasskey", (0, ew._)({
                                     source: i
-                                }, U3())), [2, !1];
-                                if (y && BS.has(y)) return DU(t, y), U0("CredentialCreateExpectedRejection", ex((0, ew._)({
+                                }, U9())), [2, !1];
+                                if (y && BN.has(y)) return DV(t, y), U4("CredentialCreateExpectedRejection", ex((0, ew._)({
                                     source: i
-                                }, U3()), {
+                                }, U9()), {
                                     reason: y
                                 })), [2, !1];
-                                return DU(t, U7), b = (0, ep._)(h, Error) ? h.message : String(h), E = y ? "".concat(y, ": ").concat(b) : b, Dz(null != (v = Bv[t]) ? v : t, Dk, E), U1("CredentialCreateFailed", ex((0, ew._)({
+                                return DV(t, Bn), b = (0, ep._)(h, Error) ? h.message : String(h), E = y ? "".concat(y, ": ").concat(b) : b, DG(null != (v = Bb[t]) ? v : t, DO, E), U3("CredentialCreateFailed", ex((0, ew._)({
                                     source: i
-                                }, U3()), {
+                                }, U9()), {
                                     reason: null != y ? y : "UnknownError"
                                 }), h), [2, !1];
                             case 11:
-                                w = (0, O3.formatCredentialRegistrationResponseWeb)(d), N.label = 12;
+                                w = (0, O6.formatCredentialRegistrationResponseWeb)(d), N.label = 12;
                             case 12:
-                                return N.trys.push([12, 14, , 15]), S = null != (x = Bv[t]) ? x : t, [4, (C = a.sessionId, M = w, eE(function() {
+                                return N.trys.push([12, 14, , 15]), S = null != (x = Bb[t]) ? x : t, [4, (C = a.sessionId, M = w, eE(function() {
                                     return eS(this, function(e) {
                                         switch (e.label) {
                                             case 0:
@@ -60997,14 +61115,14 @@ function() {
                                     })
                                 })())];
                             case 13:
-                                return N.sent(), Bb("FinishRegistration", "200"), DU(t, Be), DV(t), U0("UpgradeSucceeded", {
+                                return N.sent(), Bx("FinishRegistration", "200"), DV(t, Br), DW(t), U4("UpgradeSucceeded", {
                                     source: i,
-                                    browserFamily: U4().browserFamily
+                                    browserFamily: U6().browserFamily
                                 }), [2, !0];
                             case 14:
-                                return Bb("FinishRegistration", A = B_(_ = N.sent(), t)), DU(t, "".concat(Bt, "_").concat(A)), U1("UpgradeFailed", {
+                                return Bx("FinishRegistration", A = BI(_ = N.sent(), t)), DV(t, "".concat(Bi, "_").concat(A)), U3("UpgradeFailed", {
                                     source: i,
-                                    browserFamily: U4().browserFamily,
+                                    browserFamily: U6().browserFamily,
                                     stage: "FinishRegistration",
                                     reason: A
                                 }, _), [2, !1];
@@ -61013,83 +61131,83 @@ function() {
                         }
                     })
                 })();
-                document.getElementById(BI) && (0, tc.renderWithErrorBoundary)((0, ee.jsx)(il, {
+                document.getElementById(BM) && (0, tc.renderWithErrorBoundary)((0, ee.jsx)(il, {
                     name: "MenuIconCrash",
                     children: (0, ee.jsx)(nI, {
-                        namespaces: Uz,
+                        namespaces: UY,
                         children: (0, ee.jsx)(tc.TranslationProvider, {
-                            config: UV.P,
-                            children: (0, ee.jsx)(UU, {})
+                            config: UG.P,
+                            children: (0, ee.jsx)(Uz, {})
                         })
                     })
-                }), document.getElementById(BI));
-                var r = D2();
-                r && document.getElementById(BM) && ((0, tc.renderWithErrorBoundary)((0, ee.jsx)(il, {
+                }), document.getElementById(BM));
+                var r = D5();
+                r && document.getElementById(BO) && ((0, tc.renderWithErrorBoundary)((0, ee.jsx)(il, {
                     name: "AgeBadgeCrash",
                     children: (0, ee.jsx)(nI, {
-                        namespaces: Uz,
+                        namespaces: UY,
                         children: (0, ee.jsx)(tc.TranslationProvider, {
-                            config: UV.P,
-                            children: (0, ee.jsx)(UB, {
+                            config: UG.P,
+                            children: (0, ee.jsx)(UW, {
                                 variant: r
                             })
                         })
                     })
-                }), document.getElementById(BM)), null == (t = document.getElementById(BM)) || null == (e = t.closest(".rbx-navbar-header")) || e.classList.add("has-age-badge")), document.getElementById(BT) && (0, tc.renderWithErrorBoundary)((0, ee.jsx)(il, {
+                }), document.getElementById(BO)), null == (t = document.getElementById(BO)) || null == (e = t.closest(".rbx-navbar-header")) || e.classList.add("has-age-badge")), document.getElementById(Bk) && (0, tc.renderWithErrorBoundary)((0, ee.jsx)(il, {
                     name: "RobuxCrash",
                     children: (0, ee.jsx)(nI, {
-                        namespaces: Uz,
+                        namespaces: UY,
                         children: (0, ee.jsx)(tc.TranslationProvider, {
-                            config: UV.P,
-                            children: (0, ee.jsx)(UC, {})
+                            config: UG.P,
+                            children: (0, ee.jsx)(UO, {})
                         })
                     })
-                }), document.getElementById(BT)), document.getElementById(BC) && (0, tc.renderWithErrorBoundary)((0, ee.jsx)(il, {
+                }), document.getElementById(Bk)), document.getElementById(BR) && (0, tc.renderWithErrorBoundary)((0, ee.jsx)(il, {
                     name: "RobuxCrash",
                     children: (0, ee.jsx)(nI, {
-                        namespaces: Uz,
+                        namespaces: UY,
                         children: (0, ee.jsx)(tc.TranslationProvider, {
-                            config: UV.P,
-                            children: (0, ee.jsx)(UC, {})
+                            config: UG.P,
+                            children: (0, ee.jsx)(UO, {})
                         })
                     })
-                }), document.getElementById(BC)), document.getElementById(BA) && (0, tc.renderWithErrorBoundary)((0, ee.jsx)(il, {
+                }), document.getElementById(BR)), document.getElementById(BT) && (0, tc.renderWithErrorBoundary)((0, ee.jsx)(il, {
                     name: "RightHeaderCrash",
                     children: (0, ee.jsx)(er.QueryClientProvider, {
                         client: tc.queryClient,
                         children: (0, ee.jsx)(nI, {
-                            namespaces: Uz,
+                            namespaces: UY,
                             children: (0, ee.jsx)(tc.TranslationProvider, {
-                                config: UV.P,
-                                children: (0, ee.jsx)(UT, {})
+                                config: UG.P,
+                                children: (0, ee.jsx)(UR, {})
                             })
                         })
                     })
-                }), document.getElementById(BA)), (0, td.currentBrowser)() === td.Browser.Safari && n.then(function(e) {
+                }), document.getElementById(BT)), (0, td.currentBrowser)() === td.Browser.Safari && n.then(function(e) {
                     if (e) {
                         var t = document.createElement("div");
                         document.body.appendChild(t), (0, tc.renderWithErrorBoundary)((0, ee.jsx)(nI, {
-                            namespaces: Uz,
+                            namespaces: UY,
                             children: (0, ee.jsx)(tc.TranslationProvider, {
-                                config: UV.P,
-                                children: (0, ee.jsx)(UM, {})
+                                config: UG.P,
+                                children: (0, ee.jsx)(UL, {})
                             })
                         }), t)
                     }
                 });
                 var i = (0, tl.authenticatedUser)();
-                if (document.getElementById(BN) && (null == i ? void 0 : i.isAuthenticated) && !US() && (0, tc.renderWithErrorBoundary)((0, ee.jsx)(er.QueryClientProvider, {
+                if (document.getElementById(BC) && (null == i ? void 0 : i.isAuthenticated) && !UI() && (0, tc.renderWithErrorBoundary)((0, ee.jsx)(er.QueryClientProvider, {
                         client: tc.queryClient,
                         children: (0, ee.jsx)(nI, {
-                            namespaces: Uz,
+                            namespaces: UY,
                             children: (0, ee.jsx)(tc.TranslationProvider, {
-                                config: UV.P,
-                                children: (0, ee.jsx)(PS, {
+                                config: UG.P,
+                                children: (0, ee.jsx)(PN, {
                                     user: i
                                 })
                             })
                         })
-                    }), document.getElementById(BN)), function() {
+                    }), document.getElementById(BC)), function() {
                         try {
                             var e = window.sessionStorage.getItem("new-user");
                             if (null != e) try {
@@ -61104,10 +61222,10 @@ function() {
                     document.body.appendChild(o), (0, tc.renderWithErrorBoundary)((0, ee.jsx)(er.QueryClientProvider, {
                         client: tc.queryClient,
                         children: (0, ee.jsx)(nI, {
-                            namespaces: Uz,
+                            namespaces: UY,
                             children: (0, ee.jsx)(tc.TranslationProvider, {
-                                config: UV.P,
-                                children: (0, ee.jsx)(UP, {
+                                config: UG.P,
+                                children: (0, ee.jsx)(UB, {
                                     unmount: function() {
                                         return (0, et.unmountComponentAtNode)(o)
                                     }
@@ -61119,4 +61237,4 @@ function() {
             })
         }()
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected(document.currentScript && document.currentScript.getAttribute("data-bundlename") || "Navigation");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/navigation-8569666e08fafbaf.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/navigation-4b21e998296111d2.js.map

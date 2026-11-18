@@ -620,6 +620,19 @@ Roblox.LangDynamic["Feature.Parents"] = {
     "Heading.ParentalControlsSurvey": "Share your feedback with us",
     "Description.ParentalControlsSurvey": "Answer 2 questions about how useful these controls were for you today.",
     "Action.ParentalControlsSurvey.StartSharing": "Start sharing",
-    "Action.Close": "Close"
+    "Action.Close": "Close",
+    "Description.MomentsUsageLimitSettingNameInContext": "Moments time limit",
+    "Heading.ConversationalRequest.MomentsUsageLimit": "How long can your child watch gameplay videos each day?",
+    "Description.MomentsUsageLimit": "Your child will see age-appropriate gameplay videos uploaded by game developers.",
+    "Description.PendingODPUpgradeReminderParent": "To change this setting, continue from the email we sent to {email}.",
+    "Email.MomentsUsageLimit.Control": "To ensure age-appropriate use, we have established a default time limit of 30 minutes per day for viewing Moments. You can adjust or customize this daily limit at any time from your {aTagWithHref}{parentalControlsLink}{hrefEnd}Parental Controls dashboard{htmlCloseAHref}.",
+    "Heading.PendingODPUpgradeReminderChild": "Ask your parent for help",
+    "Email.MomentsUsageLimit.Closing": "Thank you,{lineBreak}The Roblox Team",
+    "Email.MomentsUsageLimit.Subject": "Daily Time Limits for Moments Gameplay Preview Videos",
+    "Action.PendingODPUpgradeReminderEditEmail": "Edit email",
+    "Email.MomentsUsageLimit.Intro": "To help you manage your child's experience, Roblox is introducing new parental controls for Moments, a surface where users can discover new games by watching short gameplay preview videos uploaded by developers in our catalog for kids and young teens.",
+    "Description.VPCRequestMomentsUsageLimit": "Moments time limit",
+    "Heading.PendingODPUpgradeReminderParent": "Finish creating your parent account",
+    "Description.PendingODPUpgradeReminderChild": "Your parent needs to finish creating their account. We sent them an email for that."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Parents");
