@@ -2657,6 +2657,7 @@ Feature.Build.Label.IconThumbnails,الأيقونة والصور المصغرة
 Feature.Build.Label.Images2D,صور 2D
 Feature.Build.Label.InProgress,قيد التقدم
 Feature.Build.Label.InputNeeded,الإدخال مطلوب
+Feature.Build.Label.InspirationTab,الإلهام
 Feature.Build.Label.InternalSpec,مواصفات داخلية
 Feature.Build.Label.InternalTesting,اختبار داخلي
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}

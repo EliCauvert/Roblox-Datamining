@@ -2720,6 +2720,7 @@ Feature.Build.Label.IconThumbnails,标志和缩略图
 Feature.Build.Label.Images2D,2D 图片
 Feature.Build.Label.InProgress,进行中
 Feature.Build.Label.InputNeeded,需要输入内容
+Feature.Build.Label.InspirationTab,
 Feature.Build.Label.InternalSpec,内部规格
 Feature.Build.Label.InternalTesting,内部测试
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
