@@ -51,6 +51,7 @@ Roblox.LangDynamic["CommonUI.Messages"] = {
     "Message.CDRedirectionMessage": "This page has been migrated to the Creator Dashboard. You can use the updated page by clicking {linkText}.",
     "Description.RedirectToPartnerWebsite": "This purchase must be completed on our partner’s website. You will be returned to Roblox after the purchase is completed.\n\nProceed to partner website for payment?",
     "Heading.LeaveRoblox": "Leaving Roblox",
-    "Action.ContinueToPayment": "Continue to Payment"
+    "Action.ContinueToPayment": "Continue to Payment",
+    "Response.PleaseTryAgainLater": "Please try again later."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_CommonUI.Messages");

@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "1ac19663-b522-26d4-da8d-dba0dc6ff44c")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "20a0e132-eda4-6798-d358-4e126584d423")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 749490, (e, t, n) => {
@@ -13496,7 +13496,7 @@
     };
     var ct = e.i(37819),
         cn = e.i(673386);
-    let cr = "".concat("".concat("https://assets.create.roblox.com/5b02bb2d67ee734e04cac911cd13f6bc32ed29ac/assets", "/opengraph"), "/global_og_image.png"),
+    let cr = "".concat("".concat("https://assets.create.roblox.com/def51ef11d00a73204b17d3b16d5e458deb8f293/assets", "/opengraph"), "/global_og_image.png"),
         ci = (0, ok.K)(e => {
             let {
                 openGraphMetadata: {
@@ -16151,5 +16151,5 @@
     e.s(["CustomApp", 0, fz, "default", 0, fz, "reportWebVitals", 0, fL], 656350)
 }]);
 
-//# debugId=1ac19663-b522-26d4-da8d-dba0dc6ff44c
-//# sourceMappingURL=26gxcs1wxmd7z.js.map
+//# debugId=20a0e132-eda4-6798-d358-4e126584d423
+//# sourceMappingURL=1t1t-rfbukbw2.js.map

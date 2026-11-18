@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "a1bb8f08-da3a-4cdf-7e7e-76449477ea5b")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "076fa686-d1a9-788a-cadf-3b6f9f199e8f")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 649499, e => {
@@ -535,6 +535,7 @@
             getMonetizationCommerceCreateProductUrl: e => "/dashboard/creations/experiences/".concat(e, "/monetization/commerce/create-products"),
             getMonetizationImmersiveAdsUrl: e => "/dashboard/creations/experiences/".concat(e, "/monetization/immersive-ads"),
             getMonetizationImmersiveAdsCreatePlacementUrl: e => "/dashboard/creations/experiences/".concat(e, "/monetization/immersive-ads/create-placement"),
+            getMonetizationImmersiveAdsEditPlacementUrl: (e, t) => "/dashboard/creations/experiences/".concat(e, "/monetization/immersive-ads/placements/").concat(t, "/edit"),
             getMonetizationCreatorRewardsUrl: e => "/dashboard/creations/experiences/".concat(e, "/monetization/creator-rewards"),
             getMonetizationBountyPayoutsUrl: e => "/dashboard/creations/experiences/".concat(e, "/monetization/roblox-plus"),
             getMonetizationAvatarCreationTokensUrl: e => "/dashboard/creations/experiences/".concat(e, "/monetization/avatar-creation-tokens"),
@@ -1527,7 +1528,7 @@
                     color: "secondary",
                     component: "span",
                     children: [j, (0, t.jsx)("img", {
-                        src: "".concat("https://assets.create.roblox.com/5b02bb2d67ee734e04cac911cd13f6bc32ed29ac/assets", "/navigation/privacy_icon.png"),
+                        src: "".concat("https://assets.create.roblox.com/def51ef11d00a73204b17d3b16d5e458deb8f293/assets", "/navigation/privacy_icon.png"),
                         alt: "",
                         style: {
                             marginLeft: "8px",
@@ -1598,5 +1599,5 @@
     e.s(["Y", 0, e => e.includes("/observability/server-management"), "E", 0, n])
 }]);
 
-//# debugId=a1bb8f08-da3a-4cdf-7e7e-76449477ea5b
-//# sourceMappingURL=0lq0drlq8w8dx.js.map
+//# debugId=076fa686-d1a9-788a-cadf-3b6f9f199e8f
+//# sourceMappingURL=41912q-iytjly.js.map

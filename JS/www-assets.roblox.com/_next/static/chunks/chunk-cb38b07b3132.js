@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "c765c06d-28a7-5dc5-ae63-dff3bd5ab8ee")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "39117745-2f0f-daa9-89e4-52c6e47a868d")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 603134, e => {
@@ -119,7 +119,7 @@
         o = e.i(865581),
         u = e.i(69134),
         c = e.i(801827),
-        d = e.i(815079),
+        d = e.i(536982),
         m = e.i(690255);
     let p = (0, o.default)(() => e.A(31611), {
             loadableGenerated: {
@@ -132,9 +132,11 @@
         let {
             cookiePolicy: r,
             onClose: a
-        } = e, [i, l] = (0, n.useState)(!1), o = (0, c.useTranslations)("Feature.Tracking"), f = (0, c.useTranslations)("CommonUI.Controls"), h = o("Description.CookieBannerContent", {
+        } = e, [i, l] = (0, n.useState)(!1), {
+            wwwRoblox: o
+        } = (0, d.usePageBaseUrls)(), f = (0, c.useTranslations)("Feature.Tracking"), h = (0, c.useTranslations)("CommonUI.Controls"), v = f("Description.CookieBannerContent", {
             privacyPolicyLink: g
-        }), v = h.indexOf(g), I = e => {
+        }), I = v.indexOf(g), y = e => {
             (0, s.setUserConsent)(e, r.NonEssentialCookieList), a()
         };
         return (0, t.jsxs)("div", {
@@ -143,13 +145,13 @@
                 className: "flex flex-col gap-small padding-large",
                 children: [(0, t.jsxs)("p", {
                     className: "text-body-medium content-default",
-                    children: [h.substring(0, v), (0, t.jsx)(m.Link, {
-                        href: d.wwwRoblox.withPath("/info/privacy"),
+                    children: [v.substring(0, I), (0, t.jsx)(m.Link, {
+                        href: o.withPath("/info/privacy"),
                         target: "_blank",
                         rel: "noreferrer",
                         className: "content-link",
-                        children: o("Description.PrivacyPolicy")
-                    }), h.substring(v + g.length)]
+                        children: f("Description.PrivacyPolicy")
+                    }), v.substring(I + g.length)]
                 }), (0, t.jsxs)("div", {
                     className: "flex justify-between",
                     children: [(0, t.jsx)(u.Button, {
@@ -157,21 +159,21 @@
                         onClick: () => {
                             l(!0)
                         },
-                        children: o("Action.SetCookieOptions")
+                        children: f("Action.SetCookieOptions")
                     }), (0, t.jsxs)("div", {
                         className: "flex gap-large",
                         children: [(0, t.jsx)(u.Button, {
                             variant: "Standard",
                             onClick: () => {
-                                I([])
+                                y([])
                             },
-                            children: f("Action.DeclineAll")
+                            children: h("Action.DeclineAll")
                         }), (0, t.jsx)(u.Button, {
                             variant: "Emphasis",
                             onClick: () => {
-                                I(r.NonEssentialCookieList)
+                                y(r.NonEssentialCookieList)
                             },
-                            children: f("Action.AcceptAll")
+                            children: h("Action.AcceptAll")
                         })]
                     })]
                 })]
@@ -505,7 +507,7 @@
             })]
         })
     }
-    var l = e.i(815079),
+    var l = e.i(536982),
         s = e.i(690255),
         o = e.i(931243),
         u = e.i(801827);
@@ -530,8 +532,11 @@
     }
 
     function m() {
+        let {
+            wwwRoblox: e
+        } = (0, l.usePageBaseUrls)();
         return (0, t.jsx)(s.Link, {
-            href: l.wwwRoblox.withPath("/my/account").withFragment("!/privacy"),
+            href: e.withPath("/my/account").withFragment("!/privacy"),
             target: "_blank",
             rel: "noreferrer",
             className: "flex items-center gap-xsmall hover:content-emphasis",
@@ -3889,5 +3894,5 @@
     }], 180158)
 }]);
 
-//# debugId=c765c06d-28a7-5dc5-ae63-dff3bd5ab8ee
-//# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/0jgzwtxvyux5o.js.map
+//# debugId=39117745-2f0f-daa9-89e4-52c6e47a868d
+//# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/0vn30k-53mgv0.js.map
