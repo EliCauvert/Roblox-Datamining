@@ -27,6 +27,8 @@ local CartPricingLoadingModule = require(Parent.ProductPurchase.v4.CartPricingLo
 local BuildCartPricingOfferCheckboxesModule = require(Parent.ProductPurchase.v4.buildCartPricingOfferCheckboxes)
 local UseCartPricingModule = require(Parent.ProductPurchase.v4.useCartPricing)
 local UseFocusNavigationRefsModule = require(Parent.Generic.Hooks.useFocusNavigationRefs)
+local UseManageRecommendationsMenuViewModelModule = require(Parent.Generic.ManageRecommendationsMenu.useManageRecommendationsMenuViewModel)
+local _ = require(Parent.Generic.ManageRecommendationsMenu.ManageRecommendationsMenuView)
 local UnifiedPurchaseModalTypeEnumModule = require(Parent.Enums.UnifiedPurchaseModalTypeEnum)
 local _ = require(Parent.ProductPurchase.v4.cartPricingResponseLineItem)
 local FormatNumberModule = require(Parent.Utility.formatNumber)
@@ -39,6 +41,7 @@ local FFlagEnableUnifiedPurchaseFlowForDevSubs = require(Parent.Parent.SharedFla
 local FFlagShouldFixDevSubsFlashingTitleModule = require(Parent.Flags.FFlagShouldFixDevSubsFlashingTitle)
 local GetFFlagIAPExperienceEnableMultiDisplayUpsellModule = require(Parent.Flags.GetFFlagIAPExperienceEnableMultiDisplayUpsell)
 local GetFFlagIAPExperienceUseUpsellBadgeHelperModule = require(Parent.Flags.GetFFlagIAPExperienceUseUpsellBadgeHelper)
+local FFlagPurchasePromptVLOPAppUpsellSettingsEntryPointModule = require(Parent.Flags.FFlagPurchasePromptVLOPAppUpsellSettingsEntryPoint)
 local _ = require(Parent.Api.PaymentsGateway.GetUpsellSuggestionsTypes)
 local BadgeTypeModule = require(Parent.Enums.BadgeType)
 local _ = require(Parent.Enums.VirtualItemBadgeType)
@@ -156,8 +159,16 @@ local function UpsellProductDetails(p1)
 	return if GetFFlagIAPExperienceEnableMultiDisplayUpsellModule() then UpsellProductDetailsMultiDisplayImpl(p1, UseLocalizationResult) else UpsellProductDetailsLegacyImpl(p1, UseLocalizationResult)
 end
 
+local function _(p1)
+	return if p1 then not p1.isActive else nil
+end
+
+local _ = function(p1)
+	return if p1 then p1.viewProps else nil
+end
+
 local function UnifiedRobuxUpsellModalV2(p1)
-	-- upvalues: FFlagEnableRobuxUpsellPlusButtonExperimentModule (copy), UseCartPricingModule (copy), ReactModule (copy), UseLocalizationFunction (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), FFlagAXMISWithBlackbird (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), UnifiedPurchaseModalTypeEnumModule (copy), CompactUpsellModalBreakpoint (copy), FFlagShouldFixDevSubsFlashingTitleModule (copy), UseFocusNavigationRefsModule (copy), BuildCartPricingOfferCheckboxesModule (copy), ButtonVariant (copy), Checkbox (copy), View (copy), ProductDetailsContainerModule (copy), Dialog (copy), DialogSize (copy), PriceSummaryModule (copy), UnifiedProductDetailsModule (copy), CartPricingLoadingModule (copy), GetFFlagIAPExperienceEnableMultiDisplayUpsellModule (copy), UpsellProductDetails (copy), ButtonGroup (copy), Orientation (copy), Enums (copy), Text (copy)
+	-- upvalues: FFlagEnableRobuxUpsellPlusButtonExperimentModule (copy), UseCartPricingModule (copy), ReactModule (copy), UseLocalizationFunction (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), FFlagAXMISWithBlackbird (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), UnifiedPurchaseModalTypeEnumModule (copy), CompactUpsellModalBreakpoint (copy), FFlagShouldFixDevSubsFlashingTitleModule (copy), FFlagPurchasePromptVLOPAppUpsellSettingsEntryPointModule (copy), UseManageRecommendationsMenuViewModelModule (copy), UseFocusNavigationRefsModule (copy), BuildCartPricingOfferCheckboxesModule (copy), ButtonVariant (copy), Checkbox (copy), View (copy), ProductDetailsContainerModule (copy), Dialog (copy), DialogSize (copy), PriceSummaryModule (copy), UnifiedProductDetailsModule (copy), CartPricingLoadingModule (copy), GetFFlagIAPExperienceEnableMultiDisplayUpsellModule (copy), UpsellProductDetails (copy), ButtonGroup (copy), Orientation (copy), Enums (copy), Text (copy)
 	local RobloxPlusDiscountPercentage = if FFlagEnableRobuxUpsellPlusButtonExperimentModule and type(p1.robloxPlusDiscountPercentage) == "number" then p1.robloxPlusDiscountPercentage else nil
 	local OnRobloxPlusButtonActivated = if RobloxPlusDiscountPercentage == nil then nil else p1.onRobloxPlusButtonActivated
 	local UseCartPricingModuleResult = UseCartPricingModule({
@@ -250,7 +261,8 @@ local function UnifiedRobuxUpsellModalV2(p1)
 		if FFlagAXMISWithBlackbird then p1.product.itemName else nil,
 		if FFlagAXMISWithBlackbird then UseLocalizationResult.BuyRobuxOnly else nil
 	})
-	local UseFocusNavigationRefsModuleResult, UseFocusNavigationRefsModuleResult2 = UseFocusNavigationRefsModule(p1.buttons.cancelPurchaseActivated, p1.onBuyItemButtonMounted)
+	local UseManageRecommendationsMenuViewModelModuleResult = if FFlagPurchasePromptVLOPAppUpsellSettingsEntryPointModule then UseManageRecommendationsMenuViewModelModule(p1.isMarketplacePurchase) else nil
+	local UseFocusNavigationRefsModuleResult, UseFocusNavigationRefsModuleResult2 = UseFocusNavigationRefsModule(p1.buttons.cancelPurchaseActivated, p1.onBuyItemButtonMounted, if FFlagPurchasePromptVLOPAppUpsellSettingsEntryPointModule and UseManageRecommendationsMenuViewModelModuleResult then not UseManageRecommendationsMenuViewModelModuleResult.isActive else nil)
 	ReactModule.useEffect(function() end, { p1.upsellSuggestions })
 	
 	local function _(p2)
@@ -326,9 +338,10 @@ local function UnifiedRobuxUpsellModalV2(p1)
 		priceSuffix = PerMonth,
 		hideProductDetails = p1.purchaseModalType == UnifiedPurchaseModalTypeEnumModule.MultiItem,
 		hideDiscountSummary = p1.isCartPricingLoading,
-		savingsSummary = if p1.product.itemPrice and p1.product.itemPrice.savingsSummaryOverride then p1.product.itemPrice.savingsSummaryOverride else UseCartPricingModuleResult.cartPricingSavingsSummary
+		savingsSummary = if p1.product.itemPrice and p1.product.itemPrice.savingsSummaryOverride then p1.product.itemPrice.savingsSummaryOverride else UseCartPricingModuleResult.cartPricingSavingsSummary,
+		manageRecommendationsMenu = if FFlagPurchasePromptVLOPAppUpsellSettingsEntryPointModule and UseManageRecommendationsMenuViewModelModuleResult then UseManageRecommendationsMenuViewModelModuleResult.viewProps else nil
 	})
-	local CreateElementFunction2 = ReactModule.createElement
+	local CreateElementFunction = ReactModule.createElement
 	local Root = Dialog.Root
 	local config1 = {
 		disablePortal = false,
@@ -339,11 +352,11 @@ local function UnifiedRobuxUpsellModalV2(p1)
 	local config2 = {
 		DialogTitle = ReactModule.createElement(Dialog.Title, { text = UseStateResult1 })
 	}
-	local CreateElementFunction = ReactModule.createElement
+	local CreateElementFunction3 = ReactModule.createElement
 	local Content = Dialog.Content
 	local v1 = nil
 	local t = {}
-	local CreateElementFunction3 = ReactModule.createElement
+	local CreateElementFunction2 = ReactModule.createElement
 	local config3 = {
 		tag = "col align-x-center align-y-top gap-medium size-full-0 auto-y"
 	}
@@ -377,13 +390,13 @@ local function UnifiedRobuxUpsellModalV2(p1)
 		LayoutOrder = 3,
 		tag = "col align-x-center align-y-center gap-medium size-full-0 auto-y padding-x-xsmall padding-bottom-xxlarge padding-top-small"
 	}
-	local config11 = nil
+	local Elements = nil
 	
 	if GetFFlagIAPExperienceEnableMultiDisplayUpsellModule() then
-		config11 = {}
+		Elements = {}
 		
 		for LayoutOrder, upsellSuggestion in ipairs(p1.upsellSuggestions) do
-			config11["UpsellPackage" .. tostring(LayoutOrder)] = ReactModule.createElement(UpsellProductDetails, {
+			Elements["UpsellPackage" .. tostring(LayoutOrder)] = ReactModule.createElement(UpsellProductDetails, {
 				layoutOrder = LayoutOrder,
 				product = upsellSuggestion,
 				selected = p1.selectedUpsellIndex == LayoutOrder,
@@ -396,7 +409,7 @@ local function UnifiedRobuxUpsellModalV2(p1)
 			})
 		end
 	else
-		config11 = {
+		Elements = {
 			UpsellPackage1 = ReactModule.createElement(UpsellProductDetails, {
 				layoutOrder = 1,
 				product = p1.upsellSuggestions[1],
@@ -420,9 +433,9 @@ local function UnifiedRobuxUpsellModalV2(p1)
 			}) else nil
 		}
 	end
-	config4.UpsellSuggestions = CreateElementFunction1(View, config5, config11)
-	t.ContentView = CreateElementFunction3(View, config3, config4)
-	config2.DialogContent = CreateElementFunction(Content, v1, t)
+	config4.UpsellSuggestions = CreateElementFunction1(View, config5, Elements)
+	t.ContentView = CreateElementFunction2(View, config3, config4)
+	config2.DialogContent = CreateElementFunction3(Content, v1, t)
 	config2.DialogActions = if OnRobloxPlusButtonActivated then ReactModule.createElement(ButtonGroup, {
 		LayoutOrder = 4,
 		orientation = Orientation.Vertical,
@@ -469,7 +482,7 @@ local function UnifiedRobuxUpsellModalV2(p1)
 		})
 	})
 	
-	return CreateElementFunction2(Root, config1, config2)
+	return CreateElementFunction(Root, config1, config2)
 end
 
 return function(p2)

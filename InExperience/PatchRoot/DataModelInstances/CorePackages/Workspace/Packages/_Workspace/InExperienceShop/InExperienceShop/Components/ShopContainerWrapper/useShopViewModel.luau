@@ -14,7 +14,6 @@ local GetInExperienceShopStoreModule = require(InExperienceShop.Stores.getInExpe
 local FFlagCloseShopOnTrialRedemptionModule = require(InExperienceShop.Flags.FFlagCloseShopOnTrialRedemption)
 local FFlagShopRobuxPurchaseCompletionModalModule = require(InExperienceShop.Flags.FFlagShopRobuxPurchaseCompletionModal)
 local FormatPriceModule = require(InExperienceShop.Utils.formatPrice)
-local GetFixRobuxTileClickInShopModule = require(InExperienceShop.Flags.GetFixRobuxTileClickInShop)
 local ShopItemSelectionModule = require(InExperienceShop.Utils.shopItemSelection)
 local ResolveItemForSelectionFunction = ShopItemSelectionModule.resolveItemForSelection
 local UseShopOfferChipModule = require(InExperienceShop.Hooks.useShopOfferChip)
@@ -33,10 +32,9 @@ end
 local Callback = nil
 
 local function useShopViewModel(p1)
-	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), config (copy), GetFixRobuxTileClickInShopModule (copy), SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), FFlagShopRobuxPurchaseCompletionModalModule (copy), ReactModule (copy), FormatPriceModule (copy), FFlagCloseShopOnTrialRedemptionModule (copy), Callback (ref), IsSideSheetEnabledModule (copy), FFlagHideHeaderForBuyRobuxInExperienceShop (copy), ResolveItemForSelectionFunction (copy), ShopItemSelectionModule (copy), ConstantsModule (copy), SharedFlagsModule (copy), AbuseVectorModule (copy), UseShopReportOverflowModule (copy), UseShopOfferChipModule (copy), InExperienceOffersModule (copy)
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), config (copy), SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), FFlagShopRobuxPurchaseCompletionModalModule (copy), ReactModule (copy), FormatPriceModule (copy), FFlagCloseShopOnTrialRedemptionModule (copy), Callback (ref), IsSideSheetEnabledModule (copy), FFlagHideHeaderForBuyRobuxInExperienceShop (copy), ResolveItemForSelectionFunction (copy), ShopItemSelectionModule (copy), ConstantsModule (copy), SharedFlagsModule (copy), AbuseVectorModule (copy), UseShopReportOverflowModule (copy), UseShopOfferChipModule (copy), InExperienceOffersModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction(config)
-	local FixRobuxTileClickInShopModule = GetFixRobuxTileClickInShopModule()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetInExperienceShopStoreModule)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(UseSignalStateResult.getCategories)
 	local UseSignalStateResult2 = SignalsReactModule.useSignalState(UseSignalStateResult.getSections)
@@ -197,36 +195,21 @@ local function useShopViewModel(p1)
 		end, { UseSignalStateResult.setOpenedFromBuyRobux })
 	end
 	ReactModule.useEffect(function()
-		-- upvalues: UseStateResult1 (copy), UseStateResult3 (copy), ResolveItemForSelectionFunction (upval), UseMemoResult (copy), FixRobuxTileClickInShopModule (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy)
+		-- upvalues: UseStateResult1 (copy), UseStateResult3 (copy), ResolveItemForSelectionFunction (upval), UseMemoResult (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy)
 		if UseStateResult1 == nil or UseStateResult3 == nil then return end
-		if ResolveItemForSelectionFunction(UseMemoResult.sections, UseStateResult1, UseStateResult3, FixRobuxTileClickInShopModule) == nil then
+		if ResolveItemForSelectionFunction(UseMemoResult.sections, UseStateResult1, UseStateResult3) == nil then
 			UseStateResult2_1(nil)
 			UseStateResult2_2(nil)
 		end
-	end, {
-		UseMemoResult.sections,
-		UseStateResult1,
-		UseStateResult3,
-		FixRobuxTileClickInShopModule
-	})
+	end, { UseMemoResult.sections, UseStateResult1, UseStateResult3 })
 	local UseMemoResult3 = ReactModule.useMemo(function()
-		-- upvalues: ResolveItemForSelectionFunction (upval), UseMemoResult (copy), UseStateResult1 (copy), UseStateResult3 (copy), FixRobuxTileClickInShopModule (copy)
-		return ResolveItemForSelectionFunction(UseMemoResult.sections, UseStateResult1, UseStateResult3, FixRobuxTileClickInShopModule)
-	end, {
-		UseMemoResult.sections,
-		UseStateResult1,
-		UseStateResult3,
-		FixRobuxTileClickInShopModule
-	})
+		-- upvalues: ResolveItemForSelectionFunction (upval), UseMemoResult (copy), UseStateResult1 (copy), UseStateResult3 (copy)
+		return ResolveItemForSelectionFunction(UseMemoResult.sections, UseStateResult1, UseStateResult3)
+	end, { UseMemoResult.sections, UseStateResult1, UseStateResult3 })
 	local UseMemoResult4 = ReactModule.useMemo(function()
-		-- upvalues: ShopItemSelectionModule (upval), UseMemoResult (copy), UseStateResult1 (copy), UseStateResult3 (copy), FixRobuxTileClickInShopModule (copy)
-		return ShopItemSelectionModule.isRobuxBonusOnlySelection(UseMemoResult.sections, UseStateResult1, UseStateResult3, FixRobuxTileClickInShopModule)
-	end, {
-		UseMemoResult.sections,
-		UseStateResult1,
-		UseStateResult3,
-		FixRobuxTileClickInShopModule
-	})
+		-- upvalues: ShopItemSelectionModule (upval), UseMemoResult (copy), UseStateResult1 (copy), UseStateResult3 (copy)
+		return ShopItemSelectionModule.isRobuxBonusOnlySelection(UseMemoResult.sections, UseStateResult1, UseStateResult3)
+	end, { UseMemoResult.sections, UseStateResult1, UseStateResult3 })
 	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(p2)
@@ -275,15 +258,15 @@ local function useShopViewModel(p1)
 		end
 	end, {})
 	local UseResult4 = ReactModule.useCallback(function(p2, p3)
-		-- upvalues: ResolveItemForSelectionFunction (upval), UseMemoResult (copy), FixRobuxTileClickInShopModule (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy)
+		-- upvalues: ResolveItemForSelectionFunction (upval), UseMemoResult (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy)
 		if p3 == nil then return end
-		if ResolveItemForSelectionFunction(UseMemoResult.sections, p2, p3, FixRobuxTileClickInShopModule) ~= nil then
+		if ResolveItemForSelectionFunction(UseMemoResult.sections, p2, p3) ~= nil then
 			UseStateResult2_1(p2)
 			UseStateResult2_2(p3)
 			
 			return
 		end
-	end, { UseMemoResult.sections, FixRobuxTileClickInShopModule })
+	end, { UseMemoResult.sections })
 	local UseResult5 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_1 (copy), UseStateResult2_2 (copy)
 		UseStateResult2_1(nil)

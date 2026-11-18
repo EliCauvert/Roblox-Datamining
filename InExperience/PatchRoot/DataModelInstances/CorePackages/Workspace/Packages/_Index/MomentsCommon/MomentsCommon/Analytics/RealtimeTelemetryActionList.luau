@@ -217,6 +217,18 @@ local _ = function(p1)
 	return if p1 == "time_up" or p1 == "moments_off" then p1 else "unknown"
 end
 
+local config13 = {
+	comments = "comments",
+	reactionMilestone = "reactionMilestone",
+	likes = "likes",
+	rollup = "rollup"
+}
+
+local _ = function(p1)
+	-- upvalues: config13 (copy)
+	return config13[p1] or "unknown"
+end
+
 local _ = function(p1, Callback)
 	local config = { status = p1.status, feedType = p1.feedType }
 	
@@ -795,6 +807,22 @@ return {
 					return {
 						state = if State == "time_up" or State == "moments_off" then State else "unknown"
 					}
+				end
+			}
+		}
+	}),
+	[RealtimeEventNamesModule.MomentsEngagementToastShown] = Telemetry.new({
+		description = "Counts engagement toasts shown in Moments in real time by kind: comments, reactionMilestone, likes or rollup (a digest). Counted at the same point as the product engagement-toast-shown event.",
+		throttlingThousandths = 10000,
+		name = RealtimeEventNamesModule.MomentsEngagementToastShown,
+		lastUpdated = { 2026, 11, 17 },
+		backendsList = {
+			{
+				incrementValue = 1,
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1)
+					-- upvalues: config13 (copy)
+					return { kind = config13[p1.kind] or "unknown" }
 				end
 			}
 		}

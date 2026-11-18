@@ -14,6 +14,8 @@
 	Logger = require(script.Logger),
 	PasswordBox = require(script.PasswordBox),
 	PhoneNumberTextBox = require(script.PhoneNumberTextBox),
+	ScrollablePartialPageModal = require(script.ScrollablePartialPageModal).ScrollablePartialPageModal,
+	getPartialPageModalMaxMiddleHeight = require(script.ScrollablePartialPageModal).getMaxMiddleHeight,
 	ScrollingPicker = require(script.ScrollingPicker),
 	SearchBar = require(script.SearchBar),
 	TextBoxStateWrapper = require(script.TextBoxStateWrapper),

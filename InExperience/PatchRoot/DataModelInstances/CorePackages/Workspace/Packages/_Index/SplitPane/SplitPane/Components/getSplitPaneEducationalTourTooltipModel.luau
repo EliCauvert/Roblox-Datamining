@@ -23,7 +23,7 @@ return function(p1)
 			text = if p1.stepIndex == 1 then if p1.isCollapsedStepOne then p1.localized.stepOneCollapsedDescription else p1.localized.stepOneExpandedDescription elseif p1.stepIndex == 2 then p1.localized.stepTwoDescription else p1.localized.stepThreeDescription,
 			side = Config.side,
 			align = Config.align,
-			videoAssetId = GetSplitPaneEducationalTourVideoAssetIdModule(Step, p1.isDirectionalInput, p1.isCollapsedStepOne)
+			videoAssetId = GetSplitPaneEducationalTourVideoAssetIdModule(Step, p1.isGamepadVideo, p1.isCollapsedStepOne)
 		}
 	end
 end

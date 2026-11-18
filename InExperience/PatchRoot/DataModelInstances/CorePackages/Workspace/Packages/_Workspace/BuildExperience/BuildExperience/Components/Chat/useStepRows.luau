@@ -7,20 +7,21 @@ local _ = require(BuildExperience.Chat.chatTypes)
 local StepSentencesModule = require(BuildExperience.Chat.stepSentences)
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local ActivityLabelHelpersModule = require(script.Parent.activityLabelHelpers)
+local StepListToolLabelsModule = require(script.Parent.stepListToolLabels)
 local LocalizeActivityLabelFunction = ActivityLabelHelpersModule.localizeActivityLabel
 local UseReactiveValueFunction = ActivityLabelHelpersModule.useReactiveValue
 local t = {}
 local t1 = {}
 
 local function localizeFailedActivityLabel(Title, DisplaySummary, p1, p2)
-	-- upvalues: LocalizationStringsModule (copy)
+	-- upvalues: StepListToolLabelsModule (copy), LocalizationStringsModule (copy)
 	local DisplaySummary1 = if DisplaySummary == nil or DisplaySummary == "" then nil else DisplaySummary
 	
 	if DisplaySummary1 == nil then
-		local InProgressChatToolActivityLocalizationKey = LocalizationStringsModule.getChatToolActivityLocalizationKey(Title, "in_progress")
+		local RunningKey = StepListToolLabelsModule.getRunningKey(Title)
 		
-		if InProgressChatToolActivityLocalizationKey ~= nil then
-			local Success, Result = pcall(p2.Format, p2, InProgressChatToolActivityLocalizationKey)
+		if RunningKey ~= nil then
+			local Success, Result = pcall(p2.Format, p2, RunningKey)
 			
 			if Success then
 				DisplaySummary1 = Result
@@ -33,8 +34,8 @@ local function localizeFailedActivityLabel(Title, DisplaySummary, p1, p2)
 end
 
 local function localizeStepLabel(CHATTOOL, p1, p2, Tool, UseContextResult)
-	-- upvalues: localizeFailedActivityLabel (copy), LocalizeActivityLabelFunction (copy)
-	return if p2[CHATTOOL] == nil and p1 ~= nil and p1.kind == "tool_call" and p1.status == "failed" then localizeFailedActivityLabel(p1.title, p1.displaySummary, Tool, UseContextResult) else LocalizeActivityLabelFunction(CHATTOOL, p1, p2, Tool, UseContextResult)
+	-- upvalues: localizeFailedActivityLabel (copy), LocalizeActivityLabelFunction (copy), StepListToolLabelsModule (copy)
+	return if p2[CHATTOOL] == nil and p1 ~= nil and p1.kind == "tool_call" and p1.status == "failed" then localizeFailedActivityLabel(p1.title, p1.displaySummary, Tool, UseContextResult) else LocalizeActivityLabelFunction(CHATTOOL, p1, p2, Tool, UseContextResult, StepListToolLabelsModule.getRunningKey)
 end
 
 return {

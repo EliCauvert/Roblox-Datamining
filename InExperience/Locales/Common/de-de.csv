@@ -2437,12 +2437,15 @@ Feature.Build.Label.ToolAssetSearchRunning,Objektbibliothek wird durchsucht
 Feature.Build.Label.ToolClientDMDone,Client-DataModel wurde durchsucht
 Feature.Build.Label.ToolClientDMFailed,Client-DataModel konnte nicht durchsucht werden
 Feature.Build.Label.ToolClientDMRunning,Client-DataModel wird durchsucht
+Feature.Build.Label.ToolCodeRunning,Code wird ausgeführt
 Feature.Build.Label.ToolCompileDone,Code wurde kompiliert
 Feature.Build.Label.ToolCompileFailed,Code konnte nicht kompiliert werden
 Feature.Build.Label.ToolCompileRunning,Code wird kompiliert
+Feature.Build.Label.ToolDeveloperProductRunning,Dein Entwicklerprodukt wird bearbeitet
 Feature.Build.Label.ToolGameInfoDone,Spielinformationen wurden aktualisiert
 Feature.Build.Label.ToolGameInfoFailed,Spielinformationen konnten nicht aktualisiert werden
 Feature.Build.Label.ToolGameInfoRunning,Spielinformationen werden aktualisiert
+Feature.Build.Label.ToolGamePassRunning,Dein Spielpass wird bearbeitet
 Feature.Build.Label.ToolGameSaveDone,Spiel wurde gespeichert
 Feature.Build.Label.ToolGameSaveFailed,Spiel konnte nicht gespeichert werden
 Feature.Build.Label.ToolGameSaveRunning,Spiel wird gespeichert
@@ -2461,6 +2464,7 @@ Feature.Build.Label.ToolLuauRunning,Luau wird ausgeführt
 Feature.Build.Label.ToolModelDone,3D-Modell wurde generiert
 Feature.Build.Label.ToolModelFailed,3D-Modell konnte nicht generiert werden
 Feature.Build.Label.ToolModelRunning,3D-Modell wird generiert
+Feature.Build.Label.ToolMonetizationRunning,Die Monetarisierung deines Spiels wird bearbeitet
 Feature.Build.Label.ToolPlanPresentDone,Plan wurde präsentiert
 Feature.Build.Label.ToolPlanPresentFailed,Plan konnte nicht präsentiert werden
 Feature.Build.Label.ToolPlanPresentRunning,Plan wird präsentiert
@@ -2488,6 +2492,7 @@ Feature.Build.Label.ToolSkillLoadRunning,Fähigkeit wird geladen
 Feature.Build.Label.ToolSkillsDone,Verfügbare Fähigkeiten wurden aufgelistet
 Feature.Build.Label.ToolSkillsFailed,Verfügbare Fähigkeiten konnten nicht aufgelistet werden
 Feature.Build.Label.ToolSkillsRunning,Verfügbare Fähigkeiten werden aufgelistet
+Feature.Build.Label.ToolSubscriptionRunning,Dein Abonnement wird bearbeitet
 Feature.Build.Label.ToolTasksPlanDone,Aufgaben wurden geplant
 Feature.Build.Label.ToolTasksPlanFailed,Aufgaben konnten nicht geplant werden
 Feature.Build.Label.ToolTasksPlanRunning,Deine Aufgaben werden geplant
@@ -3209,14 +3214,17 @@ Feature.Chat.Label.OneToOne.ThemRepliedToYou,Hat dir geantwortet
 Feature.Chat.Label.OneToOne.YouRepliedToThem,Du hast geantwortet
 Feature.Chat.Label.Pending,
 Feature.Chat.Label.PrivacySettings,Datenschutzeinstellungen
+Feature.Chat.Label.Reactions,Reaktionen
 Feature.Chat.Label.ReplyChatInputPlaceholder,{DISPLAY_NAME} antworten
 Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,Antworte dir selbst
 Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} hat gesagt …
 Feature.Chat.Label.ReplyingToYourself,Du hast gesagt …
 Feature.Chat.Label.SearchFriends,Suche nach Freunden
 Feature.Chat.Label.SearchWord,
+Feature.Chat.Label.SelectToRemove,Zum Entfernen auswählen
 Feature.Chat.Label.SnoozePartyNotifications,In-Experience Party-Benachrichtigungen stummschalten für:
 Feature.Chat.Label.SwipeToReplyTooltip,Zum Antworten wischen
+Feature.Chat.Label.TapToRemove,Zum Entfernen tippen
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} Tag(e)
 Feature.Chat.Label.TimestampHoursAbbreviatedPlural,{num_hours} Std.
 Feature.Chat.Label.TimestampMinutesAbbreviatedPlural,{num_minutes} Min.
@@ -3998,7 +4006,7 @@ Feature.Moments.Label.PostFeedbackPostingTitle,Moment wird gepostet
 Feature.Moments.Label.PostRemovedBody,"Der Moment, den du gepostet hast, verstößt gegen unsere Community-Regeln."
 Feature.Moments.Label.PostedOnDate,Gepostet am {date}
 Feature.Moments.Label.PublishingRodeoBody,Dies sollte nicht allzu lange dauern.
-Feature.Moments.Label.Reactions,Reaktionen
+Feature.Moments.Label.Reactions,
 Feature.Moments.Label.ReportReason.BreaksRules,Dieser Post verstößt gegen die Regeln
 Feature.Moments.Label.ReportReason.IntellectualProperty,Dieser Post verletzt mein geistiges Eigentum
 Feature.Moments.Label.ReportSubmittedBody,Vielen Dank für dein Feedback.
@@ -4157,6 +4165,7 @@ Feature.Parents.Message.TooManyAttempts,
 Feature.Parents.Title.EnterParentEmailV2,Eltern-E-Mail eingeben
 Feature.Parents.Title.SomethingWentWrong,
 Feature.PlayerSearchResults.Action.AddFriend,
+Feature.PlayerSearchResults.Heading.SearchResults,Suchergebnisse
 Feature.PlayerSearchResults.Label.FromSearch,Aus der Suche
 Feature.PlayerSearchResults.Label.NewUsername,Neuer Benutzername
 Feature.PlayerSearchResults.Label.Previously,Vorher

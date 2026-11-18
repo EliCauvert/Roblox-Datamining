@@ -1,28 +1,31 @@
 ﻿local GuiService = game:GetService("GuiService")
 local InExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
-local SignalsModule = require(InExperienceSideSheet.Parent.Signals)
+local Parent = InExperienceSideSheet.Parent
+local SignalsModule = require(Parent.Signals)
 local FFlagKeepSideSheetOpenBesideMenu = require(InExperienceSideSheet.Flags).FFlagKeepSideSheetOpenBesideMenu
 local MaxIGMBackgroundTransparencyPercent = game:DefineFastInt("MaxIGMBackgroundTransparencyPercent", 30)
 
 return function()
-	-- upvalues: SignalsModule (copy), FFlagKeepSideSheetOpenBesideMenu (copy), GuiService (copy), MaxIGMBackgroundTransparencyPercent (copy)
+	-- upvalues: SignalsModule (copy), FFlagKeepSideSheetOpenBesideMenu (copy), Parent (copy), GuiService (copy), MaxIGMBackgroundTransparencyPercent (copy)
 	local Signal, Signal2 = SignalsModule.createSignal(0)
 	local Signal1, Signal2_1 = SignalsModule.createSignal(0)
 	local Signal3, Signal2_2 = SignalsModule.createSignal(false)
 	local Signal4, Signal2_3 = SignalsModule.createSignal(false)
-	local Signal2_4 = nil
-	local Signal6 = nil
+	local SetWindowShownBesideSideSheet = nil
 	local Signal5 = nil
-	local Signal2_5 = nil
+	local Signal2_4 = nil
+	local GetWindowShownBesideSideSheet = nil
 	
 	if FFlagKeepSideSheetOpenBesideMenu then
 		Signal5, Signal2_4 = SignalsModule.createSignal(false)
-		Signal6, Signal2_5 = SignalsModule.createSignal(nil)
+		local v1 = require(Parent.InExperienceSideSheetStore.GetSideSheetStore)(false)
+		GetWindowShownBesideSideSheet = v1.getWindowShownBesideSideSheet
+		SetWindowShownBesideSideSheet = v1.setWindowShownBesideSideSheet
 	else
 		Signal5 = nil
 		Signal2_4 = nil
-		Signal6 = nil
-		Signal2_5 = nil
+		GetWindowShownBesideSideSheet = nil
+		SetWindowShownBesideSideSheet = nil
 	end
 	local function _()
 		-- upvalues: Signal2 (copy), GuiService (upval), MaxIGMBackgroundTransparencyPercent (upval)
@@ -45,8 +48,8 @@ return function()
 		setDidSideSheetOpenWithPeoplePage = Signal2_3,
 		getIsMenuShownBesideSideSheet = Signal5,
 		setIsMenuShownBesideSideSheet = Signal2_4,
-		getWindowShownBesideSideSheet = Signal6,
-		setWindowShownBesideSideSheet = Signal2_5,
+		getWindowShownBesideSideSheet = GetWindowShownBesideSideSheet,
+		setWindowShownBesideSideSheet = SetWindowShownBesideSideSheet,
 		cleanUp = function()
 			-- upvalues: Connection (copy)
 			Connection:Disconnect()

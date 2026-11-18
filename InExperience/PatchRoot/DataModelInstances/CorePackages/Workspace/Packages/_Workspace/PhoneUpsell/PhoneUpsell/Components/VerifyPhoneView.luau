@@ -6,14 +6,17 @@ local NormalizeFontFaceFunction = require(Parent.Foundation).Utility.normalizeFo
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
-local TextInputBoxWithBorder = require(Parent.AuthCommon).Components.TextInputBoxWithBorder
+local AuthCommonModule = require(Parent.AuthCommon)
+local TextInputBoxWithBorder = AuthCommonModule.Components.TextInputBoxWithBorder
 local PartialPageModal = UIBloxModule.App.Dialog.Modal.PartialPageModal
 local GetPartialPageModalMiddleContentWidthFunction = UIBloxModule.App.Dialog.Modal.getPartialPageModalMiddleContentWidth
+local ScrollablePartialPageModal = AuthCommonModule.Components.ScrollablePartialPageModal
+local ScrollablePartialPageModal1 = if require(Parent.SharedFlags).FFlagScrollVerificationUpsellModalContent then ScrollablePartialPageModal else PartialPageModal
 local LinkButton = UIBloxModule.App.Button.LinkButton
 local GetFFlagDisableVerifyPhoneViewOnSuccessModule = require(PhoneUpsell.Flags.GetFFlagDisableVerifyPhoneViewOnSuccess)
 
 return function(p1)
-	-- upvalues: UseStyleFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), ButtonType (copy), GetFFlagDisableVerifyPhoneViewOnSuccessModule (copy), GetPartialPageModalMiddleContentWidthFunction (copy), PartialPageModal (copy), NormalizeFontFaceFunction (copy), TextInputBoxWithBorder (copy), LinkButton (copy)
+	-- upvalues: UseStyleFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), ButtonType (copy), GetFFlagDisableVerifyPhoneViewOnSuccessModule (copy), GetPartialPageModalMiddleContentWidthFunction (copy), ScrollablePartialPageModal1 (copy), NormalizeFontFaceFunction (copy), TextInputBoxWithBorder (copy), LinkButton (copy)
 	local UseStyleResult = UseStyleFunction()
 	local config = {
 		titleKey = "Feature.VerificationUpsell.Heading.VerifyYourPhone",
@@ -37,7 +40,7 @@ return function(p1)
 		return Text:gsub("{phoneNumber}", "+" .. p1.prefix .. p1.phoneNumber)
 	end
 	
-	return ReactModule.createElement(PartialPageModal, {
+	return ReactModule.createElement(ScrollablePartialPageModal1, {
 		title = UseLocalizationResult.titleKey,
 		screenSize = p1.screenSize,
 		buttonStackProps = (function(p2, Text, p3, Callback, Text1, OnActivated)

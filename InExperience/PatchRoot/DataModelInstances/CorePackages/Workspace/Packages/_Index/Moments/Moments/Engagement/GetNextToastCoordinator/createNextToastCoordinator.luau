@@ -1,8 +1,10 @@
-﻿local Parent = script:FindFirstAncestor("Moments").Parent
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
 local _ = require(Parent.HttpClient)
 local _ = require(Parent.DataHydration.MomentsStoreTypes)
 local _ = require(Parent.MomentsTypes)
 local SignalsModule = require(Parent.Signals)
+local FFlagMomentsEngagementToastAnalyticsModule = require(Moments.Flags.FFlagMomentsEngagementToastAnalytics)
 local list = { "comments", "reactionMilestone", "likes", "rollup" }
 local Signal = SignalsModule.createSignal(false)
 
@@ -92,9 +94,10 @@ local function observeRequest(PostNextToastResult, Callback: (any) -> ())
 end
 
 return function(p1)
-	-- upvalues: defaultSchedule (copy), SignalsModule (copy), list (copy), observeRequest (copy), Signal (copy)
+	-- upvalues: defaultSchedule (copy), SignalsModule (copy), list (copy), FFlagMomentsEngagementToastAnalyticsModule (copy), observeRequest (copy), Signal (copy)
 	local Schedule = p1.schedule or defaultSchedule
 	local Signal1, Signal2 = SignalsModule.createSignal(nil)
+	local Trigger = nil
 	local Signal3, Signal2_1 = SignalsModule.createSignal({})
 	local Count = 0
 	local Signal4, Signal2_2 = SignalsModule.createSignal(true)
@@ -133,46 +136,46 @@ return function(p1)
 	end)
 	local Config = nil
 	local Callback2 = nil
-	local Callback1: (() -> ())? = nil
+	local Callback: (() -> ())? = nil
 	local Flag = false
 	local Flag1 = false
 	
 	local function _()
-		-- upvalues: Callback1 (ref), Flag (ref)
-		if Callback1 ~= nil then
-			Callback1()
-			Callback1 = nil
+		-- upvalues: Callback (ref), Flag (ref)
+		if Callback ~= nil then
+			Callback()
+			Callback = nil
 		end
 		Flag = false
 	end
 	
-	local Callback = nil
+	local Callback1 = nil
 	
 	local _ = function(p4, p5)
-		-- upvalues: Flag1 (ref), Config (ref), Callback (ref)
+		-- upvalues: Flag1 (ref), Config (ref), Callback1 (ref)
 		if not Flag1 then
 			local Config1 = Config
 			Config = {
 				trigger = if p4 == "open" or Config1 ~= nil and Config1.trigger == "open" then "open" else "live",
 				fromPing = p5 or Config1 ~= nil and Config1.fromPing
 			}
-			Callback()
+			Callback1()
 			
 			return
 		end
 	end
 	
 	local _ = function(p4, p5)
-		-- upvalues: Callback1 (ref), Flag (ref), Schedule (copy), Flag1 (ref), Config (ref), Callback (ref)
-		if Callback1 ~= nil then
-			Callback1()
-			Callback1 = nil
+		-- upvalues: Callback (ref), Flag (ref), Schedule (copy), Flag1 (ref), Config (ref), Callback1 (ref)
+		if Callback ~= nil then
+			Callback()
+			Callback = nil
 		end
 		Flag = false
 		Flag = p5
-		Callback1 = Schedule(p4, function()
-			-- upvalues: Callback1 (upval), Flag (upval), Flag1 (upval), Config (upval), Callback (upval)
-			Callback1 = nil
+		Callback = Schedule(p4, function()
+			-- upvalues: Callback (upval), Flag (upval), Flag1 (upval), Config (upval), Callback1 (upval)
+			Callback = nil
 			Flag = false
 			
 			if not Flag1 then
@@ -181,7 +184,7 @@ return function(p1)
 					trigger = if v1 == nil or v1.trigger ~= "open" then "live" else "open",
 					fromPing = v1 ~= nil and v1.fromPing
 				}
-				Callback()
+				Callback1()
 				
 				return
 			end
@@ -189,26 +192,49 @@ return function(p1)
 	end
 	
 	local function settle(p4, p5)
-		-- upvalues: Signal2 (copy), Callback1 (ref), Flag (ref), Schedule (copy), Flag1 (ref), Config (ref), Callback (ref)
+		-- upvalues: FFlagMomentsEngagementToastAnalyticsModule (upval), Trigger (ref), Signal2 (copy), Callback (ref), Flag (ref), Schedule (copy), Flag1 (ref), Config (ref), Callback1 (ref)
 		if p5.status ~= "succeeded" or p5.result == nil then return end
 		local Result = p5.result
 		
-		if Result.toast ~= nil then
-			Signal2(Result.toast)
-			
-			return
-		end
-		if Result.retryAfter == nil then
-			if p4.fromPing then
-				if Callback1 ~= nil then
-					Callback1()
-					Callback1 = nil
+		if Result.toast == nil then
+			if Result.retryAfter == nil then
+				if p4.fromPing then
+					if Callback ~= nil then
+						Callback()
+						Callback = nil
+					end
+					Flag = false
+					Flag = true
+					Callback = Schedule(2000, function()
+						-- upvalues: Callback (upval), Flag (upval), Flag1 (upval), Config (upval), Callback1 (upval)
+						Callback = nil
+						Flag = false
+						
+						if not Flag1 then
+							local v1 = Config
+							Config = {
+								trigger = if v1 == nil or v1.trigger ~= "open" then "live" else "open",
+								fromPing = v1 ~= nil and v1.fromPing
+							}
+							Callback1()
+							
+							return
+						end
+					end)
+				end
+				return
+			else
+				local ScaledClampedValue = math.clamp(Result.retryAfter, 1, 1800) * 1000
+				
+				if Callback ~= nil then
+					Callback()
+					Callback = nil
 				end
 				Flag = false
-				Flag = true
-				Callback1 = Schedule(2000, function()
-					-- upvalues: Callback1 (upval), Flag (upval), Flag1 (upval), Config (upval), Callback (upval)
-					Callback1 = nil
+				Flag = false
+				Callback = Schedule(ScaledClampedValue, function()
+					-- upvalues: Callback (upval), Flag (upval), Flag1 (upval), Config (upval), Callback1 (upval)
+					Callback = nil
 					Flag = false
 					
 					if not Flag1 then
@@ -217,43 +243,24 @@ return function(p1)
 							trigger = if v1 == nil or v1.trigger ~= "open" then "live" else "open",
 							fromPing = v1 ~= nil and v1.fromPing
 						}
-						Callback()
+						Callback1()
 						
 						return
 					end
 				end)
-			end
-			return
-		else
-			local ScaledClampedValue = math.clamp(Result.retryAfter, 1, 1800) * 1000
-			
-			if Callback1 ~= nil then
-				Callback1()
-				Callback1 = nil
-			end
-			Flag = false
-			Flag = false
-			Callback1 = Schedule(ScaledClampedValue, function()
-				-- upvalues: Callback1 (upval), Flag (upval), Flag1 (upval), Config (upval), Callback (upval)
-				Callback1 = nil
-				Flag = false
 				
-				if not Flag1 then
-					local v1 = Config
-					Config = {
-						trigger = if v1 == nil or v1.trigger ~= "open" then "live" else "open",
-						fromPing = v1 ~= nil and v1.fromPing
-					}
-					Callback()
-					
-					return
-				end
-			end)
+				return
+			end
+		else
+			if FFlagMomentsEngagementToastAnalyticsModule then
+				Trigger = p4.trigger
+			end
+			Signal2(Result.toast)
 		end
 	end
 	
-	Callback = function()
-		-- upvalues: Config (ref), Flag1 (ref), Callback2 (ref), Computed2 (copy), Flag (ref), Callback1 (ref), observeRequest (upval), p1 (copy), Computed (copy), settle (copy), Callback (ref)
+	Callback1 = function()
+		-- upvalues: Config (ref), Flag1 (ref), Callback2 (ref), Computed2 (copy), Flag (ref), Callback (ref), observeRequest (upval), p1 (copy), Computed (copy), settle (copy), Callback1 (ref)
 		local Config1 = Config
 		
 		if Flag1 or Callback2 ~= nil or Config1 == nil or not Computed2(false) then return end
@@ -262,9 +269,9 @@ return function(p1)
 		if Flag then
 			Config1 = { fromPing = true, trigger = Config1.trigger }
 		end
-		if Callback1 ~= nil then
-			Callback1()
-			Callback1 = nil
+		if Callback ~= nil then
+			Callback()
+			Callback = nil
 		end
 		Flag = false
 		local Flag2 = false
@@ -273,11 +280,11 @@ return function(p1)
 			kinds = Computed(false),
 			trigger = Config1.trigger
 		}, p1.network), function(p4)
-			-- upvalues: Flag2 (ref), Callback2 (upval), settle (upval), Config1 (ref), Callback (upval)
+			-- upvalues: Flag2 (ref), Callback2 (upval), settle (upval), Config1 (ref), Callback1 (upval)
 			Flag2 = true
 			Callback2 = nil
 			settle(Config1, p4)
-			Callback()
+			Callback1()
 		end)
 		
 		if not Flag2 then
@@ -288,53 +295,53 @@ return function(p1)
 	local v1 = false
 	local Tbl = {
 		SignalsModule.createEffect(function(p4)
-			-- upvalues: Signal3 (copy), Computed2 (copy), v1 (ref), Flag1 (ref), Config (ref), Callback (ref)
+			-- upvalues: Signal3 (copy), Computed2 (copy), v1 (ref), Flag1 (ref), Config (ref), Callback1 (ref)
 			local HasNextEntry = next(Signal3(p4)) ~= nil
 			local ComputedResult = Computed2(p4)
-			local NoV36: boolean = HasNextEntry and not v1
+			local NoV39: boolean = HasNextEntry and not v1
 			v1 = HasNextEntry
 			
-			if NoV36 then
+			if NoV39 then
 				if not Flag1 then
 					local Config1 = Config
 					Config = {
 						trigger = "open",
 						fromPing = Config1 ~= nil and Config1.fromPing
 					}
-					Callback()
+					Callback1()
 					
 					return
 				end
 				return
 			elseif ComputedResult then
-				Callback()
+				Callback1()
 			end
 		end)
 	}
 	
 	local function ping()
-		-- upvalues: Flag1 (ref), Config (ref), Callback (ref)
+		-- upvalues: Flag1 (ref), Config (ref), Callback1 (ref)
 		if not Flag1 then
 			local Config1 = Config
 			Config = {
 				fromPing = true,
 				trigger = if Config1 == nil or Config1.trigger ~= "open" then "live" else "open"
 			}
-			Callback()
+			Callback1()
 			
 			return
 		end
 	end
 	
 	local function request(p4)
-		-- upvalues: Flag1 (ref), Config (ref), Callback (ref)
+		-- upvalues: Flag1 (ref), Config (ref), Callback1 (ref)
 		if not Flag1 then
 			local Config1 = Config
 			Config = {
 				trigger = if p4 == "open" or Config1 ~= nil and Config1.trigger == "open" then "open" else "live",
 				fromPing = Config1 ~= nil and Config1.fromPing
 			}
-			Callback()
+			Callback1()
 			
 			return
 		end
@@ -369,14 +376,14 @@ return function(p1)
 	end
 	
 	local function setForegrounded(p4)
-		-- upvalues: Signal4 (copy), Flag1 (ref), Config (ref), Callback (ref), Signal2_2 (copy)
+		-- upvalues: Signal4 (copy), Flag1 (ref), Config (ref), Callback1 (ref), Signal2_2 (copy)
 		if p4 and not Signal4(false) and not Flag1 then
 			local Config1 = Config
 			Config = {
 				trigger = "open",
 				fromPing = Config1 ~= nil and Config1.fromPing
 			}
-			Callback()
+			Callback1()
 		end
 		Signal2_2(p4)
 	end
@@ -417,27 +424,31 @@ return function(p1)
 			Signal2_2(false)
 		end))
 		table.insert(List, p1.onAppShown:Connect(function()
-			-- upvalues: Signal4 (copy), Flag1 (ref), Config (ref), Callback (ref), Signal2_2 (copy)
+			-- upvalues: Signal4 (copy), Flag1 (ref), Config (ref), Callback1 (ref), Signal2_2 (copy)
 			if not Signal4(false) and not Flag1 then
 				local Config1 = Config
 				Config = {
 					trigger = "open",
 					fromPing = Config1 ~= nil and Config1.fromPing
 				}
-				Callback()
+				Callback1()
 			end
 			Signal2_2(true)
 		end))
 	end
 	return {
 		getCurrentToast = Signal1,
+		getCurrentToastTrigger = function()
+			-- upvalues: Trigger (ref)
+			return Trigger
+		end,
 		ping = ping,
 		request = request,
 		markSurfaceVisible = markSurfaceVisible,
 		setForegrounded = setForegrounded,
 		registerKinds = registerKinds,
 		toastClosed = function()
-			-- upvalues: Signal1 (copy), Flag1 (ref), Config (ref), Callback (ref), Signal2 (copy)
+			-- upvalues: Signal1 (copy), Flag1 (ref), Config (ref), Callback1 (ref), FFlagMomentsEngagementToastAnalyticsModule (upval), Trigger (ref), Signal2 (copy)
 			if Signal1(false) == nil then return end
 			if not Flag1 then
 				local Config1 = Config
@@ -445,18 +456,21 @@ return function(p1)
 					trigger = if Config1 == nil or Config1.trigger ~= "open" then "live" else "open",
 					fromPing = Config1 ~= nil and Config1.fromPing
 				}
-				Callback()
+				Callback1()
+			end
+			if FFlagMomentsEngagementToastAnalyticsModule then
+				Trigger = nil
 			end
 			Signal2(nil)
 		end,
 		dispose = function()
-			-- upvalues: Flag1 (ref), Config (ref), Callback1 (ref), Flag (ref), Callback2 (ref), Tbl (copy), List (copy)
+			-- upvalues: Flag1 (ref), Config (ref), Callback (ref), Flag (ref), Callback2 (ref), Tbl (copy), List (copy)
 			Flag1 = true
 			Config = nil
 			
-			if Callback1 ~= nil then
-				Callback1()
-				Callback1 = nil
+			if Callback ~= nil then
+				Callback()
+				Callback = nil
 			end
 			Flag = false
 			

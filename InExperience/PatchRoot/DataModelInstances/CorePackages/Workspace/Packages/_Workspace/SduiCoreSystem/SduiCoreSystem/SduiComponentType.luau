@@ -52,6 +52,7 @@
 	FriendCarousel = "FriendCarousel",
 	FriendRequestButton = "FriendRequestButton",
 	FriendsOwnedChip = "FriendsOwnedChip",
+	FullBleedHero = "FullBleedHero",
 	PymkCarousel = "PymkCarousel",
 	VirtualGameItemText = "VirtualGameItemText",
 	GameSortDropDown = "GameSortDropDown",

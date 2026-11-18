@@ -14,6 +14,8 @@ local GetPartialPageModalMiddleContentWidthFunction = UIBloxModule.App.Dialog.Mo
 local AuthCommonModule = require(Parent.AuthCommon)
 local TextBoxStateWrapper = AuthCommonModule.Components.TextBoxStateWrapper
 local PhoneNumberTextBox = AuthCommonModule.Components.PhoneNumberTextBox
+local ScrollablePartialPageModal = AuthCommonModule.Components.ScrollablePartialPageModal
+local ScrollablePartialPageModal1 = if require(Parent.SharedFlags).FFlagScrollVerificationUpsellModalContent then ScrollablePartialPageModal else PartialPageModal
 local LinkButton = UIBloxModule.App.Button.LinkButton
 local MergePropsModule = require(PhoneUpsell.Utils.mergeProps)
 local FFlagHomePhoneVerificationUpsellNewCopy = require(Parent.SharedFlags).FFlagHomePhoneVerificationUpsellNewCopy
@@ -63,7 +65,7 @@ local function getButtonStackProps(Text, OnActivated, IsDisabled, Text1, OnActiv
 end
 
 return function(p1)
-	-- upvalues: MergePropsModule (copy), config (copy), ReactModule (copy), GetPartialPageModalMiddleContentWidthFunction (copy), FFlagHomePhoneVerificationUpsellNewCopy (copy), WithStyleFunction (copy), WithLocalizationFunction (copy), PartialPageModal (copy), getButtonStackProps (copy), FFlagPhoneUpsellFocusNavigationModule (copy), NormalizeFontFaceFunction (copy), TextBoxStateWrapper (copy), PhoneNumberTextBox (copy), Text (copy), Checkbox (copy), LinkButton (copy)
+	-- upvalues: MergePropsModule (copy), config (copy), ReactModule (copy), GetPartialPageModalMiddleContentWidthFunction (copy), FFlagHomePhoneVerificationUpsellNewCopy (copy), WithStyleFunction (copy), WithLocalizationFunction (copy), ScrollablePartialPageModal1 (copy), getButtonStackProps (copy), FFlagPhoneUpsellFocusNavigationModule (copy), NormalizeFontFaceFunction (copy), TextBoxStateWrapper (copy), PhoneNumberTextBox (copy), Text (copy), Checkbox (copy), LinkButton (copy)
 	local MergePropsModuleResult = MergePropsModule(config, p1)
 	
 	local function noOp() end
@@ -87,14 +89,14 @@ return function(p1)
 		config1.extraButtonKey = MergePropsModuleResult.extraButtonKey
 	end
 	return WithStyleFunction(function(p2)
-		-- upvalues: WithLocalizationFunction (upval), config1 (copy), MergePropsModuleResult (copy), UseStateResult (copy), ReactModule (upval), PartialPageModal (upval), getButtonStackProps (upval), FFlagPhoneUpsellFocusNavigationModule (upval), UseRefResult (copy), NormalizeFontFaceFunction (upval), PartialPageModalMiddleContentWidth (copy), TextBoxStateWrapper (upval), PhoneNumberTextBox (upval), noOp (copy), FFlagHomePhoneVerificationUpsellNewCopy (upval), Text (upval), Checkbox (upval), UseStateResult2 (copy), LinkButton (upval)
+		-- upvalues: WithLocalizationFunction (upval), config1 (copy), MergePropsModuleResult (copy), UseStateResult (copy), ReactModule (upval), ScrollablePartialPageModal1 (upval), getButtonStackProps (upval), FFlagPhoneUpsellFocusNavigationModule (upval), UseRefResult (copy), NormalizeFontFaceFunction (upval), PartialPageModalMiddleContentWidth (copy), TextBoxStateWrapper (upval), PhoneNumberTextBox (upval), noOp (copy), FFlagHomePhoneVerificationUpsellNewCopy (upval), Text (upval), Checkbox (upval), UseStateResult2 (copy), LinkButton (upval)
 		return WithLocalizationFunction(config1)(function(p3)
-			-- upvalues: p2 (copy), MergePropsModuleResult (upval), UseStateResult (upval), ReactModule (upval), PartialPageModal (upval), getButtonStackProps (upval), FFlagPhoneUpsellFocusNavigationModule (upval), UseRefResult (upval), NormalizeFontFaceFunction (upval), PartialPageModalMiddleContentWidth (upval), TextBoxStateWrapper (upval), PhoneNumberTextBox (upval), noOp (upval), FFlagHomePhoneVerificationUpsellNewCopy (upval), Text (upval), Checkbox (upval), UseStateResult2 (upval), LinkButton (upval)
+			-- upvalues: p2 (copy), MergePropsModuleResult (upval), UseStateResult (upval), ReactModule (upval), ScrollablePartialPageModal1 (upval), getButtonStackProps (upval), FFlagPhoneUpsellFocusNavigationModule (upval), UseRefResult (upval), NormalizeFontFaceFunction (upval), PartialPageModalMiddleContentWidth (upval), TextBoxStateWrapper (upval), PhoneNumberTextBox (upval), noOp (upval), FFlagHomePhoneVerificationUpsellNewCopy (upval), Text (upval), Checkbox (upval), UseStateResult2 (upval), LinkButton (upval)
 			local BaseSize = p2.Font.BaseSize
 			local RelativeSize = p2.Font.CaptionHeader.RelativeSize
 			local NoDisableLegalText: boolean = MergePropsModuleResult.countryCode.prefix == "1" and not MergePropsModuleResult.disableLegalText
 			
-			return ReactModule.createElement(PartialPageModal, {
+			return ReactModule.createElement(ScrollablePartialPageModal1, {
 				title = p3.titleKey,
 				screenSize = MergePropsModuleResult.screenSize,
 				buttonStackProps = getButtonStackProps(p3.buttonKey, MergePropsModuleResult.onSetPhoneNumber, MergePropsModuleResult.isDisabled or MergePropsModuleResult.requireLegalTextCheckbox and not UseStateResult, p3.extraButtonKey, MergePropsModuleResult.onExtraButtonClick, if FFlagPhoneUpsellFocusNavigationModule and NoDisableLegalText then { NextSelectionUp = UseRefResult } else nil),

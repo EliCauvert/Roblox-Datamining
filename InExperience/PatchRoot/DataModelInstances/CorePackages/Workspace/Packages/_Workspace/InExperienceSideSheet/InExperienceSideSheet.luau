@@ -63,14 +63,16 @@ return {
 	getBesideSideSheetWindowArea = function()
 		return require(script.Utils.sideSheetBesideMenuPolicy).getBesideSideSheetWindowArea()
 	end,
-	getClaimedWindowAreaBesideSideSheet = function(p1)
-		return require(script.Utils.getClaimedWindowAreaBesideSideSheet)(p1)
+	getClaimedWindowAreaBesideSideSheet = function(p1, p2)
+		-- upvalues: Parent (copy)
+		return require(Parent.InExperienceSideSheetStore.getClaimedWindowAreaBesideSideSheet)(p1, p2)
 	end,
 	getWindowPositionBesideSideSheet = function(p1, p2, p3, p4)
 		return require(script.Utils.sideSheetBesideMenuPolicy).getWindowPositionBesideSideSheet(p1, p2, p3, p4)
 	end,
 	getWindowShownBesideSideSheet = function(p1)
-		return require(script.Stores.GetSideSheetConfigStore)(false).getWindowShownBesideSideSheet(p1)
+		-- upvalues: Parent (copy)
+		return require(Parent.InExperienceSideSheetStore.windowShownBesideSideSheet).getWindowShownBesideSideSheet(p1)
 	end,
 	isWindowBesideSideSheet = function(p1)
 		return require(script.Utils.sideSheetBesideMenuPolicy).isWindowBesideSideSheet(p1)
@@ -82,7 +84,8 @@ return {
 		require(script.Stores.GetSideSheetConfigStore)(false).setIsMenuShownBesideSideSheet(p1)
 	end,
 	setWindowShownBesideSideSheet = function(p1)
-		require(script.Stores.GetSideSheetConfigStore)(false).setWindowShownBesideSideSheet(p1)
+		-- upvalues: Parent (copy)
+		require(Parent.InExperienceSideSheetStore.windowShownBesideSideSheet).setWindowShownBesideSideSheet(p1)
 	end,
 	setupMenuBesideSideSheet = function(p1)
 		require(script.Utils.setupMenuBesideSideSheet)(p1)

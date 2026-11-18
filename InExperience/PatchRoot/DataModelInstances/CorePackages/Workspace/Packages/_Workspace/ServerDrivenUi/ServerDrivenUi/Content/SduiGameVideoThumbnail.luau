@@ -12,9 +12,10 @@ local SduiVideoThumbnailModule = require(script.Parent.SduiVideoThumbnail)
 local UseSduiVideoAnalyticsFunction = require(Parent.SduiSharedContent).useSduiVideoAnalytics
 local FIntLuaAppGameTileVideoDwellTimeInSec = require(Parent.SharedFlags).FIntLuaAppGameTileVideoDwellTimeInSec
 local FIntLuaAppGameTileVideoVisiblePercent = require(Parent.SharedFlags).FIntLuaAppGameTileVideoVisiblePercent
+local FFlagLuaAppSduiFullBleedHero = require(Parent.SharedFlags).FFlagLuaAppSduiFullBleedHero
 
 return function(p1)
-	-- upvalues: DataHydrationModule (copy), SignalsReactModule (copy), UseSduiVideoAnalyticsFunction (copy), ReactModule (copy), VideoEndReason (copy), UseCanDevicePlayVideoPreviewFunction (copy), TileVideoBlockingConfig (copy), SduiVideoThumbnailModule (copy), IsVideoEligibleForPlayabilityFunction (copy), FIntLuaAppGameTileVideoDwellTimeInSec (copy), FIntLuaAppGameTileVideoVisiblePercent (copy)
+	-- upvalues: DataHydrationModule (copy), SignalsReactModule (copy), UseSduiVideoAnalyticsFunction (copy), ReactModule (copy), VideoEndReason (copy), UseCanDevicePlayVideoPreviewFunction (copy), TileVideoBlockingConfig (copy), SduiVideoThumbnailModule (copy), IsVideoEligibleForPlayabilityFunction (copy), FIntLuaAppGameTileVideoDwellTimeInSec (copy), FIntLuaAppGameTileVideoVisiblePercent (copy), FFlagLuaAppSduiFullBleedHero (copy)
 	local PlayabilityStore = DataHydrationModule.Game.getPlayabilityStore(false)
 	local Playability = PlayabilityStore.getPlayability(p1.universeId)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(Playability.data)
@@ -59,6 +60,7 @@ return function(p1)
 		isHovered = p1.isHovered,
 		isSelected = p1.isSelected,
 		cornerRadius = p1.cornerRadius,
-		playbackCandidateRef = p1.playbackCandidateRef
+		playbackCandidateRef = p1.playbackCandidateRef,
+		isUserIntentModeAutoplayCandidate = if FFlagLuaAppSduiFullBleedHero then p1.isUserIntentModeAutoplayCandidate else nil
 	})
 end

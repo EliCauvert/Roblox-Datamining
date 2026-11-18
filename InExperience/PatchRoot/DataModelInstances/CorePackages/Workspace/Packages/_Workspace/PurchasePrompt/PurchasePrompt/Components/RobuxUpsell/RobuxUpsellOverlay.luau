@@ -11,6 +11,7 @@ local RobuxUpsellFlowState = IAPExperience.PurchaseFlow.RobuxUpsellFlowState
 local U13ConfirmType = IAPExperience.PurchaseFlow.U13ConfirmType
 local ManageRecommendationsInputOwner = IAPExperience.ManageRecommendationsInputOwner
 local FFlagPurchasePromptVLOPUpsellSettingsEntryPoint = IAPExperience.Flags.FFlagPurchasePromptVLOPUpsellSettingsEntryPoint
+local FFlagPurchasePromptVLOPAppUpsellSettingsEntryPoint = IAPExperience.Flags.FFlagPurchasePromptVLOPAppUpsellSettingsEntryPoint
 local PurchaseErrorType = IAPExperience.PurchaseFlow.PurchaseErrorType
 local _ = require(PurchasePrompt.Models.RobuxUpsell)
 local PromptStateModule = require(PurchasePrompt.Enums.PromptState)
@@ -22,6 +23,7 @@ local GetFFlagDisablePurchasePromptFunctionForMaquettesModule = require(Purchase
 local PaymentPlatformModule = require(PurchasePrompt.Enums.PaymentPlatform)
 local GetPaymentPlatformModule = require(PurchasePrompt.Utils.getPaymentPlatform)
 local GetUnifiedPurchaseModalTypeModule = require(PurchasePrompt.Utils.getUnifiedPurchaseModalType)
+local IsAvatarItemPurchaseModule = require(PurchasePrompt.Utils.isAvatarItemPurchase)
 local EmitPerformanceMetricsModule = require(PurchasePrompt.Utils.emitPerformanceMetrics)
 local ExternalSettingsModule = require(PurchasePrompt.Services.ExternalSettings)
 local UnifiedPurchaseTelemetryModule = require(PurchasePrompt.Events.UnifiedPurchaseTelemetry)
@@ -137,10 +139,10 @@ function ExtendResult.init(p1)
 end
 
 function ExtendResult.didMount(p1)
-	-- upvalues: ContextActionService (copy), FFlagPurchasePromptVLOPUpsellSettingsEntryPoint (copy), ManageRecommendationsInputOwner (copy), GuiService (copy)
+	-- upvalues: ContextActionService (copy), FFlagPurchasePromptVLOPUpsellSettingsEntryPoint (copy), FFlagPurchasePromptVLOPAppUpsellSettingsEntryPoint (copy), ManageRecommendationsInputOwner (copy), GuiService (copy)
 	ContextActionService:BindCoreAction("ProductPurchaseConfirmButtonBind", function(_, UserInputState, _)
-		-- upvalues: FFlagPurchasePromptVLOPUpsellSettingsEntryPoint (upval), ManageRecommendationsInputOwner (upval), GuiService (upval), p1 (copy)
-		if FFlagPurchasePromptVLOPUpsellSettingsEntryPoint and ManageRecommendationsInputOwner.ownsInput(GuiService.SelectedCoreObject) then
+		-- upvalues: FFlagPurchasePromptVLOPUpsellSettingsEntryPoint (upval), FFlagPurchasePromptVLOPAppUpsellSettingsEntryPoint (upval), ManageRecommendationsInputOwner (upval), GuiService (upval), p1 (copy)
+		if (FFlagPurchasePromptVLOPUpsellSettingsEntryPoint or FFlagPurchasePromptVLOPAppUpsellSettingsEntryPoint) and ManageRecommendationsInputOwner.ownsInput(GuiService.SelectedCoreObject) then
 			return Enum.ContextActionResult.Pass
 		end
 		if UserInputState == Enum.UserInputState.Begin then
@@ -149,8 +151,8 @@ function ExtendResult.didMount(p1)
 		return Enum.ContextActionResult.Sink
 	end, false, Enum.KeyCode.ButtonA)
 	ContextActionService:BindCoreAction("ProductPurchaseCancelButtonBind", function(_, UserInputState, _)
-		-- upvalues: FFlagPurchasePromptVLOPUpsellSettingsEntryPoint (upval), ManageRecommendationsInputOwner (upval), p1 (copy)
-		if FFlagPurchasePromptVLOPUpsellSettingsEntryPoint and ManageRecommendationsInputOwner.isOpen() then
+		-- upvalues: FFlagPurchasePromptVLOPUpsellSettingsEntryPoint (upval), FFlagPurchasePromptVLOPAppUpsellSettingsEntryPoint (upval), ManageRecommendationsInputOwner (upval), p1 (copy)
+		if (FFlagPurchasePromptVLOPUpsellSettingsEntryPoint or FFlagPurchasePromptVLOPAppUpsellSettingsEntryPoint) and ManageRecommendationsInputOwner.isOpen() then
 			return Enum.ContextActionResult.Pass
 		end
 		if UserInputState == Enum.UserInputState.Begin then
@@ -217,7 +219,7 @@ function ExtendResult.emitUnifiedPurchaseTelemetry(p1, Event_name)
 end
 
 function ExtendResult.render(p1)
-	-- upvalues: ExternalSettingsModule (copy), Roact (copy), RobuxUpsellFlow (copy), GetUnifiedPurchaseModalTypeModule (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), GetFFlagDisablePurchasePromptFunctionForMaquettesModule (copy), GetPaymentPlatformModule (copy), PaymentPlatformModule (copy)
+	-- upvalues: ExternalSettingsModule (copy), Roact (copy), RobuxUpsellFlow (copy), GetUnifiedPurchaseModalTypeModule (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), FFlagPurchasePromptVLOPAppUpsellSettingsEntryPoint (copy), IsAvatarItemPurchaseModule (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), GetFFlagDisablePurchasePromptFunctionForMaquettesModule (copy), GetPaymentPlatformModule (copy), PaymentPlatformModule (copy)
 	local Props = p1.props
 	local NewExternalSettings = ExternalSettingsModule.new()
 	
@@ -244,6 +246,7 @@ function ExtendResult.render(p1)
 		unifiedProductPurchaseModalType = GetUnifiedPurchaseModalTypeModule(Props.requestType),
 		onBuyItemButtonMounted = p1.onBuyItemButtonMounted,
 		hideUserRobuxBalance = if FFlagUnifiedPurchaseFlowMarketplaceUIImprovements then Props.purchaseAnalyticsMetadata and Props.purchaseAnalyticsMetadata.surface == "Catalog" else nil,
+		isMarketplacePurchase = if FFlagPurchasePromptVLOPAppUpsellSettingsEntryPoint then IsAvatarItemPurchaseModule(Props.requestType) else nil,
 		cartPricingResponse = Props.cartPricingResponse,
 		collectibleItemId = Props.collectibleItemId,
 		isCartPricingLoading = Props.isCartPricingLoading,

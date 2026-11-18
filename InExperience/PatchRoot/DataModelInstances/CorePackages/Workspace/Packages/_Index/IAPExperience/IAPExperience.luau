@@ -36,7 +36,8 @@ return {
 		GetFStringMobilePopularItemBadgingLayer = require(script.Flags.GetFStringMobilePopularItemBadgingLayer),
 		FFlagPopularFillIconEnabled = require(script.Flags.FFlagPopularFillIconEnabled),
 		GetFStringPopularFillIconLocation = require(script.Flags.GetFStringPopularFillIconLocation),
-		FFlagPurchasePromptVLOPUpsellSettingsEntryPoint = require(script.Flags.FFlagPurchasePromptVLOPUpsellSettingsEntryPoint)
+		FFlagPurchasePromptVLOPUpsellSettingsEntryPoint = require(script.Flags.FFlagPurchasePromptVLOPUpsellSettingsEntryPoint),
+		FFlagPurchasePromptVLOPAppUpsellSettingsEntryPoint = require(script.Flags.FFlagPurchasePromptVLOPAppUpsellSettingsEntryPoint)
 	},
 	GetEnableConsolePreparePaymentCheck = require(script.Flags.getEnableConsolePreparePaymentCheck),
 	PurchaseFlow = {

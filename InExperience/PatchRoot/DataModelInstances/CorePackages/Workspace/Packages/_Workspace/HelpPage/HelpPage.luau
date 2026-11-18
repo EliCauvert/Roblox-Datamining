@@ -6,6 +6,7 @@
 		FFlagHelpPageMountVR = require(script.Flags.FFlagHelpPageMountVR),
 		FFlagHelpPageIXPExposure = require(script.Flags.FFlagHelpPageIXPExposure),
 		FFlagHelpPageCCL = require(script.Flags.FFlagHelpPageCCL),
+		FFlagHelpPageGamepadScroll = require(script.Flags.FFlagHelpPageGamepadScroll),
 		FStringHelpPageIXPLayer = require(script.Flags.FStringHelpPageIXPLayer)
 	},
 	["jest.config"] = script["jest.config"]

@@ -3270,14 +3270,17 @@ Feature.Chat.Label.OneToOne.ThemRepliedToYou,ตอบกลับคุณ
 Feature.Chat.Label.OneToOne.YouRepliedToThem,คุณตอบกลับ
 Feature.Chat.Label.Pending,
 Feature.Chat.Label.PrivacySettings,การตั้งค่าความเป็นส่วนตัว
+Feature.Chat.Label.Reactions,การแสดงความรู้สึก
 Feature.Chat.Label.ReplyChatInputPlaceholder,ตอบกลับ {DISPLAY_NAME}
 Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,
 Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} พูดว่า...
 Feature.Chat.Label.ReplyingToYourself,คุณพูดว่า...
 Feature.Chat.Label.SearchFriends,ค้นหาเพื่อน
 Feature.Chat.Label.SearchWord,
+Feature.Chat.Label.SelectToRemove,เลือกเพื่อลบออก
 Feature.Chat.Label.SnoozePartyNotifications,ปิดเสียงการแจ้งเตือนเกี่ยวกับ Party ในประสบการณ์สำหรับ:
 Feature.Chat.Label.SwipeToReplyTooltip,ปัดเพื่อตอบกลับ
+Feature.Chat.Label.TapToRemove,แตะเพื่อลบออก
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} วัน
 Feature.Chat.Label.TimestampHoursAbbreviatedPlural,{num_hours} ชม.
 Feature.Chat.Label.TimestampMinutesAbbreviatedPlural,{num_minutes} นาที
@@ -4059,7 +4062,7 @@ Feature.Moments.Label.PostFeedbackPostingTitle,กำลังโพสต์โ
 Feature.Moments.Label.PostRemovedBody,โมเมนต์ที่คุณโพสต์ขัดต่อมาตรฐานชุมชนของเรา
 Feature.Moments.Label.PostedOnDate,โพสต์เมื่อ {date}
 Feature.Moments.Label.PublishingRodeoBody,การดำเนินการนี้น่าจะใช้เวลาไม่นาน
-Feature.Moments.Label.Reactions,การแสดงความรู้สึก
+Feature.Moments.Label.Reactions,
 Feature.Moments.Label.ReportReason.BreaksRules,โพสต์นี้ละเมิดกฎ
 Feature.Moments.Label.ReportReason.IntellectualProperty,โพสต์นี้ละเมิดทรัพย์สินทางปัญญาของฉัน
 Feature.Moments.Label.ReportSubmittedBody,ขอบคุณสำหรับข้อเสนอแนะของคุณ
@@ -4218,6 +4221,7 @@ Feature.Parents.Message.TooManyAttempts,
 Feature.Parents.Title.EnterParentEmailV2,กรอกอีเมลของผู้ปกครอง
 Feature.Parents.Title.SomethingWentWrong,
 Feature.PlayerSearchResults.Action.AddFriend,
+Feature.PlayerSearchResults.Heading.SearchResults,ผลการค้นหา
 Feature.PlayerSearchResults.Label.FromSearch,จากการค้นหา
 Feature.PlayerSearchResults.Label.NewUsername,ชื่อผู้ใช้ใหม่
 Feature.PlayerSearchResults.Label.Previously,
@@ -4609,7 +4613,7 @@ Feature.SettingsHub.Label.Invited,เชิญแล้ว
 Feature.SettingsHub.Label.LeaveButton,
 Feature.SettingsHub.Label.LoadingFriendsListFailed,
 Feature.SettingsHub.Label.LogoutButton,ลงชื่อออก
-Feature.SettingsHub.Label.LogoutConfirmation,คุณแน่ใจหรือว่าคุณต้องการลงชื่อออก?
+Feature.SettingsHub.Label.LogoutConfirmation,แน่ใจหรือไม่ว่าคุณต้องการลงชื่อออก?
 Feature.SettingsHub.Label.MethodOfAbuse,ลักษณะของการกระทำความผิด
 Feature.SettingsHub.Label.Moderated,กลั่นกรองแล้ว
 Feature.SettingsHub.Label.ModeratedInviteError,คำเชิญเข้าร่วมประสบการณ์ไม่ผ่านเกณฑ์การกลั่นกรองจึงไม่ถูกส่ง

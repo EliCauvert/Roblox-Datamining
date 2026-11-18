@@ -3285,14 +3285,17 @@ Feature.Chat.Label.OneToOne.ThemRepliedToYou,Membalas ke kamu
 Feature.Chat.Label.OneToOne.YouRepliedToThem,Kamu membalas
 Feature.Chat.Label.Pending,
 Feature.Chat.Label.PrivacySettings,Pengaturan Privasi
+Feature.Chat.Label.Reactions,Reaksi
 Feature.Chat.Label.ReplyChatInputPlaceholder,Balas ke {DISPLAY_NAME}
 Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,Balas ke diri sendiri
 Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} mengatakan...
 Feature.Chat.Label.ReplyingToYourself,Kamu mengatakan...
 Feature.Chat.Label.SearchFriends,Cari teman
 Feature.Chat.Label.SearchWord,
+Feature.Chat.Label.SelectToRemove,Pilih untuk menghapus
 Feature.Chat.Label.SnoozePartyNotifications,Bisukan notifikasi party dalam pengalaman virtual selama:
 Feature.Chat.Label.SwipeToReplyTooltip,Geser untuk membalas
+Feature.Chat.Label.TapToRemove,Ketuk untuk menghapus
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}hr
 Feature.Chat.Label.TimestampHoursAbbreviatedPlural,{num_hours}j
 Feature.Chat.Label.TimestampMinutesAbbreviatedPlural,{num_minutes}mnt
@@ -3727,7 +3730,7 @@ Feature.GamepadDisconnect.Label.Message,Koneksi controller untuk pengguna %s ter
 Feature.GamepadDisconnect.Label.MessageGeneric,"Controller untuk pengguna ""%s"" telah terputus. Hubungkan kembali controller."
 Feature.GamepadDisconnect.Label.Title,Tidak ada controller
 Feature.Groups.Action.Cancel,
-Feature.Groups.Action.CancelRequest,Batalkan Permintaan
+Feature.Groups.Action.CancelRequest,Batalkan Permintaan Bergabung
 Feature.Groups.Action.Close,
 Feature.Groups.Action.Continue,
 Feature.Groups.Action.CreateGroup,Buat Komunitas
@@ -4074,7 +4077,7 @@ Feature.Moments.Label.PostFeedbackPostingTitle,Moment Sedang Diposting
 Feature.Moments.Label.PostRemovedBody,Moment yang kamu posting bertentangan dengan Standar Komunitas kami.
 Feature.Moments.Label.PostedOnDate,Diposting pada {date}
 Feature.Moments.Label.PublishingRodeoBody,Ini tidak butuh waktu lama.
-Feature.Moments.Label.Reactions,Reaksi
+Feature.Moments.Label.Reactions,
 Feature.Moments.Label.ReportReason.BreaksRules,Postingan ini melanggar aturan
 Feature.Moments.Label.ReportReason.IntellectualProperty,Postingan ini melanggar hak kekayaan intelektual saya
 Feature.Moments.Label.ReportSubmittedBody,
@@ -4233,6 +4236,7 @@ Feature.Parents.Message.TooManyAttempts,
 Feature.Parents.Title.EnterParentEmailV2,Masukkan alamat email orang tua
 Feature.Parents.Title.SomethingWentWrong,
 Feature.PlayerSearchResults.Action.AddFriend,
+Feature.PlayerSearchResults.Heading.SearchResults,Hasil pencarian
 Feature.PlayerSearchResults.Label.FromSearch,Dari Pencarian
 Feature.PlayerSearchResults.Label.NewUsername,Nama pengguna baru
 Feature.PlayerSearchResults.Label.Previously,Sebelumnya
@@ -4623,7 +4627,7 @@ Feature.SettingsHub.Label.InviteSearchNoResults,
 Feature.SettingsHub.Label.Invited,Diundang
 Feature.SettingsHub.Label.LeaveButton,
 Feature.SettingsHub.Label.LoadingFriendsListFailed,
-Feature.SettingsHub.Label.LogoutButton,Log Out
+Feature.SettingsHub.Label.LogoutButton,Log out
 Feature.SettingsHub.Label.LogoutConfirmation,Kamu yakin ingin log out?
 Feature.SettingsHub.Label.MethodOfAbuse,Tipe Penyalahgunaan?
 Feature.SettingsHub.Label.Moderated,

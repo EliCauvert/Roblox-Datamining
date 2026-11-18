@@ -22,6 +22,8 @@ local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
 local LocalUserIdStore = require(Parent.LocalUserIdStore).LocalUserIdStore
 local GetStandardSizeAvatarHeadShotRbxthumbFunction = require(Parent.UserLib).Utils.getStandardSizeAvatarHeadShotRbxthumb
 local UseAssetFetchStatusFunction = require(Parent.RoactUtils).Hooks.useAssetFetchStatus
+local UseIsTvRemoteDeviceFunction = require(Parent.RoactUtils).Hooks.useIsTvRemoteDevice
+local FFlagSplitPaneMicroGamepadPointerControls = require(Parent.SharedFlags).FFlagSplitPaneMicroGamepadPointerControls
 local VerifiedBadgeModule = require(Parent.VerifiedBadges.VerifiedBadge)
 
 local function noOp() end
@@ -149,12 +151,14 @@ local function _(Player: Player)
 end
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), UseDeviceTypeFunction (copy), UsePreferencesFunction (copy), UseDeviceInsetsFunction (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), UseLocalizationFunction (copy), UseSignalStateFunction (copy), LocalUserIdStore (copy), Players (copy), UseAppPolicyFunction (copy), ReactModule (copy), noOp (copy), View (copy), FoundationProvider (copy), ColorMode (copy), TourProfileChip (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), ForwardRefResult (copy), IconName (copy), ForwardRefResult1 (copy)
+	-- upvalues: UseTokensFunction (copy), UseDeviceTypeFunction (copy), UsePreferencesFunction (copy), UseDeviceInsetsFunction (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), FFlagSplitPaneMicroGamepadPointerControls (copy), UseIsTvRemoteDeviceFunction (copy), UseLocalizationFunction (copy), UseSignalStateFunction (copy), LocalUserIdStore (copy), Players (copy), UseAppPolicyFunction (copy), ReactModule (copy), noOp (copy), View (copy), FoundationProvider (copy), ColorMode (copy), TourProfileChip (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), ForwardRefResult (copy), IconName (copy), ForwardRefResult1 (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseDeviceTypeResult = UseDeviceTypeFunction()
 	local UsePreferencesResult = UsePreferencesFunction()
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local IsUsePreferredInputResultMatch = UsePreferredInputFunction() == ResponsiveModule.Input.Directional
+	local UseIsTvRemoteDeviceResult = if FFlagSplitPaneMicroGamepadPointerControls then UseIsTvRemoteDeviceFunction() else false
+	local NoUseIsTvRemoteDeviceResult: boolean = IsUsePreferredInputResultMatch and not UseIsTvRemoteDeviceResult
 	local UseLocalizationResult = UseLocalizationFunction({
 		editAvatarButtonText = "Feature.SplitPane.EditAvatarButtonText"
 	})
@@ -256,7 +260,7 @@ return function(p1)
 				AnchorPoint = Vector2.new(0, 1),
 				Size = UDim2.new(1, 0, 0, 1)
 			}),
-			GamepadStepTwoTooltipAnchor = if IsUsePreferredInputResultMatch then ReactModule.createElement("Frame", {
+			GamepadStepTwoTooltipAnchor = if NoUseIsTvRemoteDeviceResult then ReactModule.createElement("Frame", {
 				Name = "GamepadStepTwoTooltipAnchor",
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
@@ -283,7 +287,7 @@ return function(p1)
 					TopArea = ReactModule.createElement(View, {
 						tag = "row align-y-center anchor-top-center size-full-1200",
 						Position = UDim2.new(0.5, 0, 0, p1.topInset),
-						padding = if IsUsePreferredInputResultMatch then nil else { right = UDim.new(0, -UseTokensResult.Padding.Small) }
+						padding = if NoUseIsTvRemoteDeviceResult then nil else { right = UDim.new(0, -UseTokensResult.Padding.Small) }
 					}, {
 						ProfileChip = ReactModule.createElement(TourProfileChip, {
 							layoutOrder = 1,
@@ -294,7 +298,7 @@ return function(p1)
 							showSubscriberBadge = ShowSubscriberBadge
 						}),
 						Spacer = ReactModule.createElement(View, { tag = "grow auto-y", LayoutOrder = 2 }),
-						CollapseButton = if IsUsePreferredInputResultMatch then nil else ReactModule.createElement(View, { LayoutOrder = 3, AutomaticSize = Enum.AutomaticSize.XY }, {
+						CollapseButton = if NoUseIsTvRemoteDeviceResult then nil else ReactModule.createElement(View, { LayoutOrder = 3, AutomaticSize = Enum.AutomaticSize.XY }, {
 							DarkScope = ReactModule.createElement(FoundationProvider, {
 								colorMode = ColorMode.Dark,
 								device = UseDeviceTypeResult,
@@ -308,7 +312,7 @@ return function(p1)
 								})
 							})
 						}),
-						TopEditAvatarButton = if IsUsePreferredInputResultMatch then ReactModule.createElement(ForwardRefResult1, {
+						TopEditAvatarButton = if NoUseIsTvRemoteDeviceResult then ReactModule.createElement(ForwardRefResult1, {
 							testId = "split-pane-educational-tour--top-edit-avatar",
 							LayoutOrder = 3,
 							ref = p1.onTopRightControlInstanceChanged,
@@ -317,7 +321,7 @@ return function(p1)
 					})
 				})
 			}),
-			MiddleAreaScope = if IsUsePreferredInputResultMatch then nil else ReactModule.createElement(View, { Size = UDim2.fromScale(1, 1) }, {
+			MiddleAreaScope = if NoUseIsTvRemoteDeviceResult then nil else ReactModule.createElement(View, { Size = UDim2.fromScale(1, 1) }, {
 				LightScope = ReactModule.createElement(FoundationProvider, {
 					colorMode = ColorMode.Light,
 					device = UseDeviceTypeResult,
@@ -337,7 +341,7 @@ return function(p1)
 					})
 				})
 			}),
-			BottomAreaScope = if IsUsePreferredInputResultMatch then nil else ReactModule.createElement(View, { Size = UDim2.fromScale(1, 1) }, {
+			BottomAreaScope = if NoUseIsTvRemoteDeviceResult then nil else ReactModule.createElement(View, { Size = UDim2.fromScale(1, 1) }, {
 				LightScope = ReactModule.createElement(FoundationProvider, {
 					colorMode = ColorMode.Light,
 					device = UseDeviceTypeResult,

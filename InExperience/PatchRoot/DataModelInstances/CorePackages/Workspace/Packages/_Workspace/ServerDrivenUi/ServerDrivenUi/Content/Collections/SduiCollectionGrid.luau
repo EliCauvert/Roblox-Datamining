@@ -36,6 +36,7 @@ local FFlagLuaAppCompositionAlways = require(Parent.SharedFlags).FFlagLuaAppComp
 local FFlagSduiFixSearchTelemetry = require(Parent.SharedFlags).FFlagSduiFixSearchTelemetry
 local FFlagSduiPreferredTextSizeLineBudgets = require(Parent.SharedFlags).FFlagSduiPreferredTextSizeLineBudgets
 local FFlagSduiCollectionGridRevealRows = require(Parent.SharedFlags).FFlagSduiCollectionGridRevealRows
+local FFlagLuaAppSduiFullBleedHero = require(Parent.SharedFlags).FFlagLuaAppSduiFullBleedHero
 local FFlagLuaAppSduiGameDwell = require(Parent.SharedFlags).FFlagLuaAppSduiGameDwell
 
 local function _(p1, p2, p3): UDim2
@@ -48,7 +49,7 @@ end
 local t = {}
 
 return ReactModule.memo(function(p1)
-	-- upvalues: FFlagLuaAppCompositionAlways (copy), ReactModule (copy), t (copy), FFlagLuaAppLayoutParamsInContext (copy), SignalsReactModule (copy), UseCollectionLayoutParamsFunction (copy), CollectionItemSize (copy), CryoModule (copy), UseCollectionLayoutFunction (copy), FindAnalyticsFieldFunction (copy), SduiBuilder (copy), UseCollectionAnalyticsContextFunction (copy), UseCollectionImpressionsSignalFunction (copy), GetImpressionsTagModule (copy), FFlagLuaAppSduiGameDwell (copy), CreateGameDwellObserverFunction (copy), SduiParseHelpers (copy), SduiErrors (copy), ReportUnifiedLoggingImpressionsFunction (copy), SendLegacyGameImpressionsForSduiModule (copy), UseTokensFunction (copy), FFlagSduiPreferredTextSizeLineBudgets (copy), UsePreferredTextSizeLineBudgetFunction (copy), FFlagSduiFixSearchTelemetry (copy), SduiCollectionAnalyticsBuilder (copy), FFlagSduiErrorPaths (copy), GetSduiComponentWrapperFunction (copy), SduiCollectionItemModule (copy), FFlagSduiCollectionGridRevealRows (copy), SduiCollectionGridRevealRowsModule (copy), CollectionGrid (copy), WaitForPropWrapper (copy), FrameBoundsImpressionsTracker (copy), ScreenSizeImpressionsTracker (copy)
+	-- upvalues: FFlagLuaAppCompositionAlways (copy), ReactModule (copy), t (copy), FFlagLuaAppLayoutParamsInContext (copy), SignalsReactModule (copy), UseCollectionLayoutParamsFunction (copy), CollectionItemSize (copy), CryoModule (copy), UseCollectionLayoutFunction (copy), FindAnalyticsFieldFunction (copy), SduiBuilder (copy), UseCollectionAnalyticsContextFunction (copy), UseCollectionImpressionsSignalFunction (copy), GetImpressionsTagModule (copy), FFlagLuaAppSduiGameDwell (copy), CreateGameDwellObserverFunction (copy), SduiParseHelpers (copy), SduiErrors (copy), ReportUnifiedLoggingImpressionsFunction (copy), SendLegacyGameImpressionsForSduiModule (copy), UseTokensFunction (copy), FFlagSduiPreferredTextSizeLineBudgets (copy), UsePreferredTextSizeLineBudgetFunction (copy), FFlagLuaAppSduiFullBleedHero (copy), FFlagSduiFixSearchTelemetry (copy), SduiCollectionAnalyticsBuilder (copy), FFlagSduiErrorPaths (copy), GetSduiComponentWrapperFunction (copy), SduiCollectionItemModule (copy), FFlagSduiCollectionGridRevealRows (copy), SduiCollectionGridRevealRowsModule (copy), CollectionGrid (copy), WaitForPropWrapper (copy), FrameBoundsImpressionsTracker (copy), ScreenSizeImpressionsTracker (copy)
 	local FFlagLuaAppCompositionAlways1 = FFlagLuaAppCompositionAlways or (p1.appCompositionEnabled or p1.sduiContext.appCompositionEnabled)
 	local LayoutOrder = p1.layoutOrder
 	local SduiContext = p1.sduiContext
@@ -177,13 +178,16 @@ return ReactModule.memo(function(p1)
 		collectionItemSize = if FFlagLuaAppCompositionAlways1 then p1.collectionItemSize else nil,
 		verticalScrollingFrameRef = p1.verticalScrollingFrameRef,
 		containerRef = UseStateResult2,
-		getItemHeight = ReactModule.useCallback(function(p2)
-			-- upvalues: p1 (copy), Scale (copy), UsePreferredTextSizeLineBudgetResult (ref)
-			return p2 * p1.itemHeightFromWidth.Scale + p1.itemHeightFromWidth.Offset * Scale + (UsePreferredTextSizeLineBudgetResult or 0)
+		getItemHeight = ReactModule.useCallback(function(p2): number
+			-- upvalues: p1 (copy), Scale (copy), UsePreferredTextSizeLineBudgetResult (ref), FFlagLuaAppSduiFullBleedHero (upval)
+			local NewScale = p2 * p1.itemHeightFromWidth.Scale + p1.itemHeightFromWidth.Offset * Scale + (UsePreferredTextSizeLineBudgetResult or 0)
+			
+			return if FFlagLuaAppSduiFullBleedHero and p1.maxItemHeight then math.min(NewScale, p1.maxItemHeight * Scale) else NewScale
 		end, {
 			p1.itemHeightFromWidth,
 			Scale,
-			if FFlagSduiPreferredTextSizeLineBudgets then UsePreferredTextSizeLineBudgetResult else nil
+			if FFlagSduiPreferredTextSizeLineBudgets then UsePreferredTextSizeLineBudgetResult else nil,
+			if FFlagLuaAppSduiFullBleedHero then p1.maxItemHeight else nil
 		}),
 		items = UseMemoResult,
 		renderItem = ReactModule.useCallback(function(ComponentConfig, Index, Size, _)

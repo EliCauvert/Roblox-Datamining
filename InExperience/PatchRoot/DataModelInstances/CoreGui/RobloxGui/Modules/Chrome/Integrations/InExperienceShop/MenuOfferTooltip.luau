@@ -17,6 +17,7 @@ if FFlagOfferNotifyOnGlobalIcon then
 	ToggleInExperienceShopWindowFunction = require(Chrome.Integrations.InExperienceShop.ShopWindowLayout).toggleInExperienceShopWindow
 end
 local ServiceModule = require(Chrome.Service)
+local FFlagLogFreeTrialDotAndMenuItemClickModule = require(Chrome.Flags.FFlagLogFreeTrialDotAndMenuItemClick)
 local ConstantsModule = require(Chrome.ChromeShared.Unibar.Constants)
 local TooltipContextModule = require(Chrome.ChromeShared.Unibar.Tooltips.TooltipContext)
 local UseIsTooltipTurnModule = require(Chrome.ChromeShared.Unibar.Tooltips.useIsTooltipTurn)
@@ -37,7 +38,7 @@ local MenuOfferTooltipShowDelayMs = game:DefineFastInt("MenuOfferTooltipShowDela
 local MenuOfferTooltipDismissDelayMs = game:DefineFastInt("MenuOfferTooltipDismissDelayMs", 7000)
 
 local function MenuOfferTooltipContent(p1)
-	-- upvalues: UseOffersForKeyFunction (copy), FeatureKeys (copy), UseSignalStateFunction (copy), GetOffersStoreFunction (copy), ReactModule (copy), IsNotificationEligibleFunction (copy), SelectActiveOfferFunction (copy), ConstantsModule (copy), ServiceModule (copy), ToggleInExperienceShopWindowFunction (ref), TooltipContextModule (copy), UseIsTooltipTurnModule (copy), UseMappedSignalFunction (copy), FFlagOfferNotifyOnGlobalIcon (copy), FFlagHideOfferNotificationsWhenShopEmpty (copy), UseShopHasItemsFunction (copy), MenuOfferTooltipPriority (copy), MenuOfferTooltipShowDelayMs (copy), MenuOfferTooltipDismissDelayMs (copy), GuiService (copy), ButtonVariant (copy), OverlayProvider (copy), EducationalTooltip (copy), PopoverSide (copy), PopoverAlign (copy)
+	-- upvalues: UseOffersForKeyFunction (copy), FeatureKeys (copy), UseSignalStateFunction (copy), GetOffersStoreFunction (copy), ReactModule (copy), IsNotificationEligibleFunction (copy), SelectActiveOfferFunction (copy), ConstantsModule (copy), ServiceModule (copy), FFlagLogFreeTrialDotAndMenuItemClickModule (copy), Chrome (copy), ToggleInExperienceShopWindowFunction (ref), TooltipContextModule (copy), UseIsTooltipTurnModule (copy), UseMappedSignalFunction (copy), FFlagOfferNotifyOnGlobalIcon (copy), FFlagHideOfferNotificationsWhenShopEmpty (copy), UseShopHasItemsFunction (copy), MenuOfferTooltipPriority (copy), MenuOfferTooltipShowDelayMs (copy), MenuOfferTooltipDismissDelayMs (copy), GuiService (copy), ButtonVariant (copy), OverlayProvider (copy), EducationalTooltip (copy), PopoverSide (copy), PopoverAlign (copy)
 	local UseOffersForKeyResult = UseOffersForKeyFunction(FeatureKeys.RobloxShop)
 	local UseSignalStateResult = UseSignalStateFunction(GetOffersStoreFunction(false).getOfferExposureSnapshot)
 	local UseMemoResult = ReactModule.useMemo(function()
@@ -65,17 +66,22 @@ local function MenuOfferTooltipContent(p1)
 		UseStateResult2_1(true)
 	end, {})
 	local UseResult1 = ReactModule.useCallback(function()
-		-- upvalues: UseResult (copy), ConstantsModule (upval), ServiceModule (upval), ToggleInExperienceShopWindowFunction (upval), GetOffersStoreFunction (upval)
+		-- upvalues: UseResult (copy), ConstantsModule (upval), ServiceModule (upval), FFlagLogFreeTrialDotAndMenuItemClickModule (upval), Chrome (upval), ToggleInExperienceShopWindowFunction (upval), GetOffersStoreFunction (upval)
 		UseResult()
 		local INEXPERIENCESHOPID = ConstantsModule.IN_EXPERIENCE_SHOP_ID
 		
 		if ServiceModule:isWindowOpen(INEXPERIENCESHOPID) then return end
 		if ServiceModule:isIntegrationValid(INEXPERIENCESHOPID) then
+			if FFlagLogFreeTrialDotAndMenuItemClickModule then
+				require(Chrome.Integrations.InExperienceShop.trialIndicatorShopOpen).beginOutsideTrialIndicator()
+			end
 			ServiceModule:activate(INEXPERIENCESHOPID)
 			
+			if FFlagLogFreeTrialDotAndMenuItemClickModule then
+				require(Chrome.Integrations.InExperienceShop.trialIndicatorShopOpen).finishOutsideTrialIndicator()
+			end
 			return
-		end
-		if ToggleInExperienceShopWindowFunction and GetOffersStoreFunction(false).getIsInExperienceShopGlobalIconAvailable(false) then
+		elseif ToggleInExperienceShopWindowFunction and GetOffersStoreFunction(false).getIsInExperienceShopGlobalIconAvailable(false) then
 			ToggleInExperienceShopWindowFunction()
 		end
 	end, { UseResult })

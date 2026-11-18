@@ -4,28 +4,69 @@ local ReactModule = require(Parent1.React)
 local ReactOtterModule = require(Parent1.ReactOtter)
 local BehaviorsModule = require(Parent.Behaviors)
 local _ = require(Parent.Corner)
+local EdgeModule = require(Parent.Edge)
 local GeometryModule = require(Parent.Geometry)
+local PlacementKindModule = require(Parent.PlacementKind)
+local SnapModule = require(Parent.Snap)
+local StashModule = require(Parent.Stash)
 local _ = require(Parent.Types)
 local _UDim2 = UDim2.fromScale(0.5, 0.5)
-local config = { dampingRatio = 1, frequency = 4 }
+local config = {
+	minimumHiddenFraction = 0.25,
+	visiblePixels = 28,
+	edges = { EdgeModule.Left, EdgeModule.Right }
+}
+local config1 = { dampingRatio = 1, frequency = 4 }
 
 local function toVector2(Vector): Vector2
 	return Vector2.new(Vector.x, Vector.y)
 end
 
+local function _(Frame: Frame, Left)
+	-- upvalues: EdgeModule (copy)
+	local Parent = Frame.Parent
+	local XDelta = Frame.AbsolutePosition.X - Parent.AbsolutePosition.X
+	
+	return if Left == EdgeModule.Left then XDelta else Parent.AbsoluteSize.X - Frame.AbsoluteSize.X - XDelta
+end
+
+local function toPlacement(Corner, Edge)
+	-- upvalues: PlacementKindModule (copy)
+	return if Edge == nil then if Corner == nil then { kind = PlacementKindModule.Free } else { kind = PlacementKindModule.CornerDocked, corner = Corner } else { kind = PlacementKindModule.Stashed, edge = Edge }
+end
+
 return function(p1)
-	-- upvalues: BehaviorsModule (copy), ReactModule (copy), toVector2 (copy), ReactOtterModule (copy), config (copy), GeometryModule (copy), _UDim2 (copy)
+	-- upvalues: BehaviorsModule (copy), config (copy), ReactModule (copy), toPlacement (copy), toVector2 (copy), ReactOtterModule (copy), config1 (copy), EdgeModule (copy), GeometryModule (copy), _UDim2 (copy), SnapModule (copy), StashModule (copy)
 	local Behavior = p1.behavior or BehaviorsModule.Contained
+	local StashOptions = if p1.enableStash and p1.draggable ~= false then p1.stashOptions or config else nil
 	local DragThreshold = p1.dragThreshold or 25
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseRefResult2 = ReactModule.useRef({})
 	local Idle = ReactModule.useRef("Idle")
-	local UseRefResult2 = ReactModule.useRef(Vector2.zero)
 	local UseRefResult3 = ReactModule.useRef(Vector2.zero)
-	local UseRefResult4 = ReactModule.useRef(nil)
+	local UseRefResult4 = ReactModule.useRef(Vector2.zero)
 	local UseRefResult5 = ReactModule.useRef(nil)
 	local UseRefResult6 = ReactModule.useRef(false)
+	local UseRefResult7 = ReactModule.useRef(p1.onPlacementChanged)
+	UseRefResult7.current = p1.onPlacementChanged
+	local UseRefResult8 = ReactModule.useRef(false)
+	
+	local function setDock(Corner, Edge)
+		-- upvalues: UseRefResult2 (copy), UseRefResult8 (copy), UseRefResult7 (copy), toPlacement (upval)
+		local Current = UseRefResult2.current
+		
+		if UseRefResult8.current and Current.corner == Corner and Current.edge == Edge then return end
+		UseRefResult8.current = true
+		UseRefResult2.current = { corner = Corner, edge = Edge }
+		local CurrentFunction: (any) -> () = UseRefResult7.current
+		
+		if CurrentFunction ~= nil then
+			CurrentFunction((toPlacement(Corner, Edge)))
+		end
+	end
+	
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult6 (copy)
 		UseRefResult6.current = false
@@ -49,86 +90,100 @@ return function(p1)
 			y = ReactOtterModule.instant(Vector.Y)
 		})
 	end, {})
-	local UseResult11 = ReactModule.useCallback(function(p2)
-		-- upvalues: UseRefResult5 (copy), UseResult1 (copy)
-		UseRefResult5.current = p2.corner
-		UseResult1(p2.center)
-	end, { UseResult1 })
-	local UseResult2 = ReactModule.useCallback(function(p2)
-		-- upvalues: UseRefResult5 (copy), UseRefResult6 (copy), UseMotorResult (copy), ReactOtterModule (upval), config (upval)
-		UseRefResult5.current = p2.corner
-		UseRefResult6.current = true
-		UseMotorResult({
-			x = ReactOtterModule.spring(p2.center.X, config),
-			y = ReactOtterModule.spring(p2.center.Y, config)
-		})
-	end, {})
-	local UseResult3 = ReactModule.useCallback(function(Corner)
-		-- upvalues: GeometryModule (upval), UseRefResult (copy), UseRefResult1 (copy)
+	
+	local function moveTo(RestResult, p2)
+		-- upvalues: setDock (copy), UseRefResult6 (copy), UseMotorResult (copy), ReactOtterModule (upval), config1 (upval), UseResult1 (copy)
+		setDock(RestResult.corner, RestResult.edge)
+		
+		if p2 then
+			UseRefResult6.current = true
+			UseMotorResult({
+				x = ReactOtterModule.spring(RestResult.center.X, config1),
+				y = ReactOtterModule.spring(RestResult.center.Y, config1)
+			})
+			
+			return
+		else
+			UseResult1(RestResult.center)
+		end
+	end
+	
+	local function _(Current)
+		-- upvalues: setDock (copy), UseResult1 (copy)
+		setDock(Current.corner, Current.edge)
+		UseResult1(Current.center)
+	end
+	
+	local _ = function(p2)
+		-- upvalues: moveTo (copy)
+		moveTo(p2, true)
+	end
+	
+	local function placeFor(Center)
+		-- upvalues: UseRefResult (copy), UseRefResult5 (copy), UseRefResult1 (copy), UseRefResult2 (copy), EdgeModule (upval)
+		local Current = UseRefResult.current
+		
 		return {
-			center = GeometryModule.cornerTarget(UseRefResult.current.AbsoluteSize, UseRefResult1.current.AbsoluteSize, Corner),
-			corner = Corner
+			center = Center,
+			desiredCenter = UseRefResult5.current,
+			boundsSize = Current.AbsoluteSize,
+			windowSize = UseRefResult1.current.AbsoluteSize,
+			dock = UseRefResult2.current,
+			screenInset = function(Left)
+				-- upvalues: Current (copy), EdgeModule (upval)
+				local Parent = Current.Parent
+				local XDelta = Current.AbsolutePosition.X - Parent.AbsolutePosition.X
+				
+				return if Left == EdgeModule.Left then XDelta else Parent.AbsoluteSize.X - Current.AbsoluteSize.X - XDelta
+			end
 		}
-	end, {})
-	local UseMemoResult1 = ReactModule.useMemo(function()
-		-- upvalues: BehaviorsModule (upval), GeometryModule (upval), UseRefResult4 (copy), UseRefResult (copy), UseRefResult1 (copy), UseResult3 (copy), UseRefResult5 (copy)
-		return {
-			[BehaviorsModule.Contained] = {
-				rest = function(_)
-					-- upvalues: GeometryModule (upval), UseRefResult4 (upval), UseRefResult (upval), UseRefResult1 (upval)
-					return {
-						center = GeometryModule.clampCenter(UseRefResult4.current, UseRefResult.current.AbsoluteSize, UseRefResult1.current.AbsoluteSize)
-					}
-				end
-			},
-			[BehaviorsModule.CornerDock] = {
-				release = function(p2)
-					-- upvalues: UseResult3 (upval), GeometryModule (upval), UseRefResult (upval), UseRefResult1 (upval), UseRefResult5 (upval)
-					return UseResult3(GeometryModule.fixedAxisCorner(p2, UseRefResult.current.AbsoluteSize, UseRefResult1.current.AbsoluteSize, UseRefResult5.current))
-				end,
-				rest = function(p2)
-					-- upvalues: UseResult3 (upval), UseRefResult5 (upval), GeometryModule (upval), UseRefResult (upval)
-					return UseResult3(UseRefResult5.current or GeometryModule.nearestCorner(p2, UseRefResult.current.AbsoluteSize))
-				end
-			}
-		}
-	end, { UseResult3 })
-	local UseResult4 = ReactModule.useCallback(function(p2)
-		-- upvalues: UseMemoResult1 (copy), Behavior (copy)
-		return UseMemoResult1[Behavior].rest(p2)
-	end, { Behavior, UseMemoResult1 })
-	local UseResult5 = ReactModule.useCallback(function()
-		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), GeometryModule (upval), UseRefResult4 (copy), p1 (copy), _UDim2 (upval), UseResult11 (copy), UseResult4 (copy), UseStateResult2 (copy), Idle (copy), UseBindingResult (copy), UseRefResult6 (copy), UseResult2 (copy)
+	end
+	
+	local UseResult11 = ReactModule.useCallback(function()
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), GeometryModule (upval), UseRefResult5 (copy), p1 (copy), _UDim2 (upval), Idle (copy), UseBindingResult (copy), placeFor (copy), SnapModule (upval), Behavior (copy), StashOptions (copy), StashModule (upval), UseRefResult6 (copy), moveTo (copy), setDock (copy), UseResult1 (copy), UseStateResult2 (copy)
 		local AbsoluteSize = UseRefResult.current.AbsoluteSize
 		local AbsoluteSize1 = UseRefResult1.current.AbsoluteSize
 		
 		if not GeometryModule.hasPositiveSize(AbsoluteSize) or not GeometryModule.hasPositiveSize(AbsoluteSize1) then return end
-		if UseRefResult4.current == nil then
-			local ResolveCenterResult = GeometryModule.resolveCenter(p1.initialCenter or _UDim2, AbsoluteSize)
-			UseRefResult4.current = ResolveCenterResult
-			UseResult11(UseResult4(ResolveCenterResult))
-			UseStateResult2(true)
-			
-			return
-		end
-		if Idle.current ~= "Idle" then return end
-		local UseResultResult = UseResult4(UseBindingResult:getValue())
+		local NoCurrent = UseRefResult5.current == nil
 		
+		if NoCurrent then
+			UseRefResult5.current = GeometryModule.resolveCenter(p1.initialCenter or _UDim2, AbsoluteSize)
+		elseif Idle.current ~= "Idle" then return end
+		local PlaceForResult = placeFor(if NoCurrent then UseRefResult5.current else UseBindingResult:getValue())
+		local RestResult = SnapModule[Behavior].rest(PlaceForResult)
+		
+		if StashOptions ~= nil then
+			RestResult = StashModule.rest(RestResult, PlaceForResult, StashOptions)
+		end
 		if UseRefResult6.current then
-			UseResult2(UseResultResult)
+			moveTo(RestResult, true)
+		else
+			setDock(RestResult.corner, RestResult.edge)
+			UseResult1(RestResult.center)
+		end
+		if NoCurrent then
+			UseStateResult2(true)
+		end
+	end, { Behavior, p1.initialCenter, StashOptions })
+	local UseRefResult9 = ReactModule.useRef(UseResult11)
+	UseRefResult9.current = UseResult11
+	ReactModule.useLayoutEffect(function()
+		-- upvalues: UseResult11 (copy)
+		UseResult11()
+	end, { UseResult11 })
+	ReactModule.useLayoutEffect(function()
+		-- upvalues: Idle (copy), UseRefResult9 (copy)
+		if Idle.current ~= "Idle" then
+			Idle.current = "Idle"
+			UseRefResult9.current()
 			
 			return
-		else
-			UseResult11(UseResultResult)
 		end
-	end, { UseResult2, UseResult11, p1.initialCenter, UseResult4 })
-	ReactModule.useLayoutEffect(function()
-		-- upvalues: UseResult5 (copy)
-		UseResult5()
-	end, { Behavior, UseResult5 })
-	local UseResult6 = ReactModule.useCallback(function(_, p2)
-		-- upvalues: UseRefResult2 (copy), Idle (copy), DragThreshold (copy), UseRefResult3 (copy), UseRefResult4 (copy), GeometryModule (upval), UseRefResult (copy), UseRefResult1 (copy), UseResult1 (copy)
-		local Direction = p2 - UseRefResult2.current
+	end, { p1.draggable, p1.dragInputTarget })
+	local UseResult2 = ReactModule.useCallback(function(_, p2)
+		-- upvalues: UseRefResult3 (copy), Idle (copy), DragThreshold (copy), UseRefResult4 (copy), UseRefResult5 (copy), placeFor (copy), StashOptions (copy), StashModule (upval), GeometryModule (upval), UseResult1 (copy)
+		local Direction = p2 - UseRefResult3.current
 		local Magnitude: number = Direction.Magnitude
 		
 		if Idle.current == "Pressed" and Magnitude <= DragThreshold then
@@ -136,78 +191,62 @@ return function(p1)
 		else
 			Idle.current = "Dragging"
 			local Largest = math.max(Magnitude - DragThreshold, 0)
-			local NewCurrent = UseRefResult3.current + (if Magnitude > 0 then Direction.Unit * Largest else Vector2.zero)
-			UseRefResult4.current = NewCurrent
-			local ClampCenterResult = GeometryModule.clampCenter(NewCurrent, UseRefResult.current.AbsoluteSize, UseRefResult1.current.AbsoluteSize)
+			local NewCurrent = UseRefResult4.current + (if Magnitude > 0 then Direction.Unit * Largest else Vector2.zero)
+			UseRefResult5.current = NewCurrent
+			local PlaceForResult = placeFor(NewCurrent)
+			local ClampCenterResult = if StashOptions == nil then GeometryModule.clampCenter(PlaceForResult.center, PlaceForResult.boundsSize, PlaceForResult.windowSize) else StashModule.follow(PlaceForResult, StashOptions)
 			UseResult1(ClampCenterResult)
 			
 			return ClampCenterResult
 		end
-	end, { DragThreshold, UseResult1 })
-	local UseResult7 = ReactModule.useCallback(function(_, Current)
-		-- upvalues: UseRefResult6 (copy), UseBindingResult (copy), UseResult1 (copy), UseRefResult2 (copy), UseRefResult3 (copy), Idle (copy)
-		UseRefResult6.current = false
-		local Value = UseBindingResult:getValue()
-		UseResult1(Value)
-		UseRefResult2.current = Current
-		UseRefResult3.current = Value
-		Idle.current = "Pressed"
-	end, { UseResult1 })
-	local UseResult8 = ReactModule.useCallback(function(_, p2)
-		-- upvalues: UseResult6 (copy), Idle (copy), UseMemoResult1 (copy), Behavior (copy), UseResult2 (copy), UseRefResult3 (copy), p1 (copy)
-		local UseResultResult = UseResult6(nil, p2)
-		Idle.current = "Idle"
-		local UseMemoResultEntry = UseMemoResult1[Behavior]
-		
-		if UseResultResult == nil then
-			UseResult2(UseMemoResultEntry.rest(UseRefResult3.current))
-			
-			if p1.onActivated ~= nil then
-				p1.onActivated()
-				
-				return
-			end
-		elseif UseMemoResultEntry.release ~= nil then
-			UseResult2(UseMemoResultEntry.release(UseResultResult))
-		end
-	end, {
-		UseResult2,
-		Behavior,
-		UseMemoResult1,
-		UseResult6,
-		p1.onActivated
-	})
-	ReactModule.useLayoutEffect(function()
-		-- upvalues: p1 (copy), Idle (copy), UseResult5 (copy)
-		if p1.draggable == false then
-			Idle.current = "Idle"
-			UseResult5()
-			
-			return
-		end
-	end, { p1.draggable, UseResult5 })
-	local UseRefResult7 = ReactModule.useRef(p1.dragInputTarget)
-	ReactModule.useLayoutEffect(function()
-		-- upvalues: UseRefResult7 (copy), p1 (copy), Idle (copy), UseResult5 (copy)
-		if UseRefResult7.current == p1.dragInputTarget then return end
-		UseRefResult7.current = p1.dragInputTarget
-		
-		if Idle.current ~= "Idle" then
-			Idle.current = "Idle"
-			UseResult5()
-			
-			return
-		end
-	end, { p1.dragInputTarget, UseResult5 })
+	end, { DragThreshold, StashOptions })
 	
 	return {
 		boundsRef = UseRefResult,
 		initialized = UseStateResult,
-		onDragContinue = UseResult6,
-		onDragEnd = UseResult8,
-		onDragStart = UseResult7,
+		onDragContinue = UseResult2,
+		onDragEnd = ReactModule.useCallback(function(_, p2)
+			-- upvalues: UseResult2 (copy), Idle (copy), SnapModule (upval), Behavior (copy), UseRefResult2 (copy), placeFor (copy), UseRefResult4 (copy), moveTo (copy), p1 (copy), StashOptions (copy), StashModule (upval), setDock (copy), UseResult1 (copy)
+			local UseResultResult = UseResult2(nil, p2)
+			Idle.current = "Idle"
+			local SnapModuleEntry = SnapModule[Behavior]
+			
+			if UseResultResult == nil then
+				local HasEdge = UseRefResult2.current.edge ~= nil
+				moveTo(SnapModuleEntry.rest((placeFor(UseRefResult4.current))), true)
+				
+				if not HasEdge and p1.onActivated ~= nil then
+					p1.onActivated()
+				end
+				return
+			else
+				local PlaceForResult = placeFor(UseResultResult)
+				local ReleaseResult = SnapModuleEntry.release(PlaceForResult)
+				
+				if StashOptions ~= nil then
+					ReleaseResult = StashModule.release(ReleaseResult, PlaceForResult, StashOptions)
+				end
+				if ReleaseResult.edge == nil and not SnapModuleEntry.animateRelease then
+					setDock(ReleaseResult.corner, ReleaseResult.edge)
+					UseResult1(ReleaseResult.center)
+					
+					return
+				else
+					moveTo(ReleaseResult, true)
+				end
+			end
+		end, { Behavior, UseResult2, p1.onActivated, StashOptions }),
+		onDragStart = ReactModule.useCallback(function(_, Current)
+			-- upvalues: UseRefResult6 (copy), UseBindingResult (copy), UseResult1 (copy), UseRefResult3 (copy), UseRefResult4 (copy), Idle (copy)
+			UseRefResult6.current = false
+			local Value = UseBindingResult:getValue()
+			UseResult1(Value)
+			UseRefResult3.current = Current
+			UseRefResult4.current = Value
+			Idle.current = "Pressed"
+		end, {}),
 		position = UseMemoResult,
-		refit = UseResult5,
+		refit = UseResult11,
 		windowRef = UseRefResult1
 	}
 end

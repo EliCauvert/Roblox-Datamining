@@ -150,6 +150,7 @@ return {
 	},
 	Utils = {
 		createSelectorSignal = require(script.Utils.createSelectorSignal),
+		createAssetIdListGetter = require(script.Utils.createAssetIdListGetter),
 		buildHumanoidDescription = require(script.Utils.Humanoid.buildHumanoidDescription),
 		getAssetIdToAssetTypeIdFromHumanoidDescription = require(script.Utils.Humanoid.getAssetIdToAssetTypeIdFromHumanoidDescription),
 		getHumanoidDescriptionFromState = require(script.Utils.Humanoid.getHumanoidDescriptionFromState),

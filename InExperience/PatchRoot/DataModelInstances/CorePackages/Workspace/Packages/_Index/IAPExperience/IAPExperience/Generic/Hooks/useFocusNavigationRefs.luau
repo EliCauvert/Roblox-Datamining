@@ -8,6 +8,7 @@ local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavi
 local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
 local UseDefaultFocusBehaviorFunction = require(Parent1.ReactFocusNavigation).useDefaultFocusBehavior
 local FFlagPurchasePromptVLOPUpsellSettingsEntryPointModule = require(Parent.Flags.FFlagPurchasePromptVLOPUpsellSettingsEntryPoint)
+local FFlagPurchasePromptVLOPAppUpsellSettingsEntryPointModule = require(Parent.Flags.FFlagPurchasePromptVLOPAppUpsellSettingsEntryPoint)
 
 local function _(p1, p2)
 	return function(Current)
@@ -29,7 +30,7 @@ local function _(p1, p2)
 end
 
 return function(p1, Callback, p2)
-	-- upvalues: UseDefaultFocusBehaviorFunction (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), FFlagPurchasePromptVLOPUpsellSettingsEntryPointModule (copy), ReactModule (copy)
+	-- upvalues: UseDefaultFocusBehaviorFunction (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), FFlagPurchasePromptVLOPUpsellSettingsEntryPointModule (copy), FFlagPurchasePromptVLOPAppUpsellSettingsEntryPointModule (copy), ReactModule (copy)
 	local UseDefaultFocusBehaviorResult, UseDefaultFocusBehaviorResult2 = UseDefaultFocusBehaviorFunction()
 	local UseFocusRootResult = UseFocusRootFunction({
 		isAutoFocusRoot = true,
@@ -37,7 +38,7 @@ return function(p1, Callback, p2)
 		customEventHandlers = {
 			[FocusNavigationEventNameEnum.NavigateBack] = { handler = InputHandlersModule.onRelease(p1) }
 		},
-		isFocusable = if FFlagPurchasePromptVLOPUpsellSettingsEntryPointModule then p2 else nil
+		isFocusable = if FFlagPurchasePromptVLOPUpsellSettingsEntryPointModule or FFlagPurchasePromptVLOPAppUpsellSettingsEntryPointModule then p2 else nil
 	})
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseFocusRootResult (copy), UseDefaultFocusBehaviorResult2 (copy)

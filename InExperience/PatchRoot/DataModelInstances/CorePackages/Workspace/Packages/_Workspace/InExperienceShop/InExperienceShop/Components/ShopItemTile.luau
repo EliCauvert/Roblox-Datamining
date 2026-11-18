@@ -20,7 +20,6 @@ local ToUnifiedCategoryIdModule = require(InExperienceShop.Analytics.toUnifiedCa
 local SHOPITEMMEDIAHEIGHTSCALE = require(InExperienceShop.Components.computeShopRowTileWidths).SHOP_ITEM_MEDIA_HEIGHT_SCALE
 local FFlagEnableCategoryLoggingInShopModule = require(InExperienceShop.Flags.FFlagEnableCategoryLoggingInShop)
 local FFlagCategoryLoggingInShopPurchaseModule = require(InExperienceShop.Flags.FFlagCategoryLoggingInShopPurchase)
-local FFlagFixThumbnailBackgroundInExperienceShopModule = require(InExperienceShop.Flags.FFlagFixThumbnailBackgroundInExperienceShop)
 local FFlagEnableDiscountOnInShopTileModule = require(InExperienceShop.Flags.FFlagEnableDiscountOnInShopTile)
 local FFlagLuaAppEnableGamePassFreeTrialsModule = require(InExperienceShop.Flags.FFlagLuaAppEnableGamePassFreeTrials)
 local FFlagUseOverMediaOnAllFreeTrialBadgesModule = require(InExperienceShop.Flags.FFlagUseOverMediaOnAllFreeTrialBadges)
@@ -62,7 +61,7 @@ local function FreeTrialLabel(Frame)
 end
 
 return ReactModule.memo(function(Frame: Frame)
-	-- upvalues: SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), ReactModule (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy), FFlagEnableGamePassTrialUnifiedLoggingModule (copy), Parent (copy), InExperienceShop (copy), ToUnifiedCategoryIdModule (copy), FFlagEnableCategoryLoggingInShopModule (copy), SessionService (copy), FFlagCategoryLoggingInShopPurchaseModule (copy), UseGamePassTrialRedemptionModule (copy), FFlagEnableFreeTrialTopBarChipModule (copy), FFlagEnableDiscountOnInShopTileModule (copy), FormatPriceModule (copy), View (copy), SHOPITEMMEDIAHEIGHTSCALE (copy), Image (copy), FFlagFixThumbnailBackgroundInExperienceShopModule (copy), TrialBadge (copy), Text (copy), FreeTrialLabel (copy), Icon (copy), ConstantsModule (copy), IconSize (copy), GetIconRichTextFunction (copy), Enums (copy), ShopItemFooterModule (copy)
+	-- upvalues: SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), ReactModule (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy), FFlagEnableGamePassTrialUnifiedLoggingModule (copy), Parent (copy), InExperienceShop (copy), ToUnifiedCategoryIdModule (copy), FFlagEnableCategoryLoggingInShopModule (copy), SessionService (copy), FFlagCategoryLoggingInShopPurchaseModule (copy), UseGamePassTrialRedemptionModule (copy), FFlagEnableFreeTrialTopBarChipModule (copy), FFlagEnableDiscountOnInShopTileModule (copy), FormatPriceModule (copy), View (copy), SHOPITEMMEDIAHEIGHTSCALE (copy), Image (copy), TrialBadge (copy), Text (copy), FreeTrialLabel (copy), Icon (copy), ConstantsModule (copy), IconSize (copy), GetIconRichTextFunction (copy), Enums (copy), ShopItemFooterModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetInExperienceShopStoreModule)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(function(p1)
@@ -235,11 +234,9 @@ return ReactModule.memo(function(Frame: Frame)
 		ref = UseRefResult
 	}, {
 		Media = ReactModule.createElement(Image, {
+			tag = "radius-medium bg-shift-200",
+			testId = "ShopItemTile-Thumbnail",
 			LayoutOrder = 1,
-			tag = {
-				["radius-medium bg-shift-200"] = FFlagFixThumbnailBackgroundInExperienceShopModule,
-				["radius-medium"] = not FFlagFixThumbnailBackgroundInExperienceShopModule
-			},
 			Size = UDim2.fromScale(1, SHOPITEMMEDIAHEIGHTSCALE),
 			SizeConstraint = Enum.SizeConstraint.RelativeXX,
 			Image = Frame.thumbnail,

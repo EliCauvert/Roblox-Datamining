@@ -5,34 +5,36 @@ local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local CursorType = FoundationModule.Enums.CursorType
 local UseCursorFunction = FoundationModule.Hooks.useCursor
 local FFlagAXResetAvatarButton = AvatarExperienceFlagsModule.FFlagAXResetAvatarButton
+local FFlagAXRobuxBalanceAndPhotoboothButtonOverMedia = AvatarExperienceFlagsModule.FFlagAXRobuxBalanceAndPhotoboothButtonOverMedia
 
 return (ReactModule.forwardRef(function(p1, Ref)
-	-- upvalues: FoundationModule (copy), UseCursorFunction (copy), CursorType (copy), ReactModule (copy), FFlagAXResetAvatarButton (copy)
+	-- upvalues: FoundationModule (copy), UseCursorFunction (copy), CursorType (copy), ReactModule (copy), FFlagAXResetAvatarButton (copy), FFlagAXRobuxBalanceAndPhotoboothButtonOverMedia (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseCursorResult = UseCursorFunction(CursorType.SmallPill)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(false)
+	local UseResult = ReactModule.useCallback(function(Default)
+		-- upvalues: FoundationModule (upval), UseBindingResult2 (copy)
+		if Default == FoundationModule.Enums.ControlState.Default then
+			UseBindingResult2(false)
+			
+			return
+		end
+		if Default == FoundationModule.Enums.ControlState.Hover then
+			UseBindingResult2(true)
+		end
+	end, {})
 	
 	return ReactModule.createElement(FoundationModule.View, {
 		testId = "RobuxBalance",
 		tag = if FFlagAXResetAvatarButton then "row auto-xy align-y-center radius-circle padding-x-large gap-xsmall size-0-1000" else "row auto-xy align-y-center radius-circle padding-x-large gap-xsmall size-0-1100",
 		ref = Ref,
 		onActivated = p1.onActivated,
-		onStateChanged = ReactModule.useCallback(function(Default)
-			-- upvalues: FoundationModule (upval), UseBindingResult2 (copy)
-			if Default == FoundationModule.Enums.ControlState.Default then
-				UseBindingResult2(false)
-				
-				return
-			end
-			if Default == FoundationModule.Enums.ControlState.Hover then
-				UseBindingResult2(true)
-			end
-		end, {}),
-		backgroundStyle = UseBindingResult:map(function(p2)
+		onStateChanged = if FFlagAXRobuxBalanceAndPhotoboothButtonOverMedia then nil else UseResult,
+		backgroundStyle = if FFlagAXRobuxBalanceAndPhotoboothButtonOverMedia then UseTokensResult.Color.OverMedia.OverMedia_0 else UseBindingResult:map(function(p2)
 			-- upvalues: UseTokensResult (copy)
 			return if p2 then UseTokensResult.Color.Shift.Shift_200 else UseTokensResult.Color.Surface.Surface_0
 		end),
-		stateLayer = {
+		stateLayer = if FFlagAXRobuxBalanceAndPhotoboothButtonOverMedia then nil else {
 			affordance = FoundationModule.Enums.StateLayerAffordance.None
 		},
 		selection = {

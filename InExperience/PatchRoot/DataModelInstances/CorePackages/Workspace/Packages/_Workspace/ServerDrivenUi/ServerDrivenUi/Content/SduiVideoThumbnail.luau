@@ -7,6 +7,7 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local VideoUtilsModule = require(Parent.VideoUtils)
 local FFlagLuaAppOneByTwoHoverIdleAutoplay = require(Parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
 local FFlagLuaAppSduiSuppressVideoDetectorDuringScroll = require(Parent.SharedFlags).FFlagLuaAppSduiSuppressVideoDetectorDuringScroll
+local FFlagLuaAppSduiFullBleedHero = require(Parent.SharedFlags).FFlagLuaAppSduiFullBleedHero
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 local GetSduiComponentWrapperFunction = SduiCoreSystemModule.getSduiComponentWrapper
 local GetPlaybackDetectionMethodFunction = VideoUtilsModule.getPlaybackDetectionMethod
@@ -15,7 +16,7 @@ local UseTagAsViewportAutoplayCandidateFunction = VideoUtilsModule.useTagAsViewp
 local Signal = SignalsModule.createSignal(false)
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), UseTagAsViewportAutoplayCandidateFunction (copy), SduiCoreSystemModule (copy), ResponsiveModule (copy), GetPlaybackDetectionMethodFunction (copy), FFlagLuaAppSduiSuppressVideoDetectorDuringScroll (copy), SignalsReactModule (copy), Signal (copy), GetSduiComponentWrapperFunction (copy), VideoUtilsModule (copy), VideoPlaybackDetectionMethod (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), UseTagAsViewportAutoplayCandidateFunction (copy), SduiCoreSystemModule (copy), FFlagLuaAppSduiFullBleedHero (copy), ResponsiveModule (copy), GetPlaybackDetectionMethodFunction (copy), FFlagLuaAppSduiSuppressVideoDetectorDuringScroll (copy), SignalsReactModule (copy), Signal (copy), GetSduiComponentWrapperFunction (copy), VideoUtilsModule (copy), VideoPlaybackDetectionMethod (copy)
 	local UseTokensResult = UseTokensFunction()
 	local CornerRadius = p1.cornerRadius or UseTokensResult.Radius.Medium
 	local UseRefResult = ReactModule.useRef(nil)
@@ -31,8 +32,8 @@ return function(p1)
 	end
 	if FFlagLuaAppOneByTwoHoverIdleAutoplay then
 		UseTagAsViewportAutoplayCandidateFunction(PlaybackCandidateRef, if p1.videoPlayer then p1.videoPlaybackContext else nil, p1.videoPlayer ~= nil, nil, nil, nil, nil, if p1.videoPlayer then {
-			isUserIntentModeAutoplayCandidate = false,
-			videoKey = SduiVideoThumbnailName
+			videoKey = SduiVideoThumbnailName,
+			isUserIntentModeAutoplayCandidate = if FFlagLuaAppSduiFullBleedHero then p1.isUserIntentModeAutoplayCandidate == true else false
 		} else nil)
 	end
 	local UsePreferredInputResult = ResponsiveModule.usePreferredInput()

@@ -16,6 +16,7 @@ local Uiblox = BuilderIconsModule.Migration.uiblox
 local SignalsModule = require(CorePackages.Packages.Signals)
 local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
 local FFlagRefactorHelpPage = HelpPageModule.Flags.FFlagRefactorHelpPage
+local FFlagHelpPageGamepadScroll = HelpPageModule.Flags.FFlagHelpPageGamepadScroll
 local FFlagRenameHelpToControls = require(CorePackages.Workspace.Packages.SharedFlags).FFlagRenameHelpToControls
 local Constants = nil
 local Utils = nil
@@ -27,28 +28,30 @@ end
 local Root = nil
 local Signal, Signal2 = SignalsModule.createSignal(false)
 
-local function v24()
-	-- upvalues: SignalsReactModule (copy), Signal (copy), ReactModule (copy), FoundationProvider (copy), FoundationModule (copy), Utils (ref), LocalizationProvider (copy), NewResult (copy), HelpReactView (copy)
+local function v25(p1)
+	-- upvalues: SignalsReactModule (copy), Signal (copy), ReactModule (copy), FoundationProvider (copy), FoundationModule (copy), Utils (ref), LocalizationProvider (copy), NewResult (copy), HelpReactView (copy), FFlagHelpPageGamepadScroll (copy)
 	return if SignalsReactModule.useSignalState(Signal) then ReactModule.createElement(FoundationProvider, {
 		colorMode = FoundationModule.Enums.ColorMode.Dark,
 		device = Utils.getDeviceType()
 	}, {
-		Child = ReactModule.createElement(LocalizationProvider, { localization = NewResult }, { Root = ReactModule.createElement(HelpReactView) })
+		Child = ReactModule.createElement(LocalizationProvider, { localization = NewResult }, {
+			Root = ReactModule.createElement(HelpReactView, if FFlagHelpPageGamepadScroll then { scrollingFrame = p1.scrollingFrame } else nil)
+		})
 	}) else nil
 end
 
-local function _(p1)
-	-- upvalues: Root (ref), ReactRobloxModule (copy), ReactModule (copy), v24 (copy)
+local function _(p1, ScrollingFrame)
+	-- upvalues: Root (ref), ReactRobloxModule (copy), ReactModule (copy), v25 (copy)
 	if Root then return end
 	Root = ReactRobloxModule.createRoot(p1)
 	
 	if Root then
-		Root:render(ReactModule.createElement(v24))
+		Root:render(ReactModule.createElement(v25, { scrollingFrame = ScrollingFrame }))
 	end
 end
 
 local function createHelpPage()
-	-- upvalues: SettingsPageFactoryModule (copy), Constants (ref), FFlagRenameHelpToControls (copy), IconName (copy), BuilderIconsModule (copy), IconVariant (copy), Uiblox (copy), NewResult (copy), Root (ref), ReactRobloxModule (copy), ReactModule (copy), v24 (copy), Signal2 (copy)
+	-- upvalues: SettingsPageFactoryModule (copy), Constants (ref), FFlagRenameHelpToControls (copy), IconName (copy), BuilderIconsModule (copy), IconVariant (copy), Uiblox (copy), NewResult (copy), FFlagHelpPageGamepadScroll (copy), Root (ref), ReactRobloxModule (copy), ReactModule (copy), v25 (copy), Signal2 (copy)
 	local NewPage = SettingsPageFactoryModule:CreateNewPage()
 	NewPage.TabHeader.Name = Constants.HELP_PAGE.TAB_HEADER.NAME
 	NewPage.Page.Name = "Help"
@@ -64,14 +67,15 @@ local function createHelpPage()
 	NewPage.TabHeader.TabLabel.Title.Text = NewResult:Format(Constants.HELP_PAGE.TAB_HEADER.TEXT)
 	NewPage.Page:ClearAllChildren()
 	NewPage.Displayed.Event:Connect(function()
-		-- upvalues: NewPage (copy), Root (upval), ReactRobloxModule (upval), ReactModule (upval), v24 (upval), Signal2 (upval)
+		-- upvalues: NewPage (copy), FFlagHelpPageGamepadScroll (upval), Root (upval), ReactRobloxModule (upval), ReactModule (upval), v25 (upval), Signal2 (upval)
 		local Page = NewPage.Page
+		local ScrollingFrame = if FFlagHelpPageGamepadScroll then NewPage.Page:FindFirstAncestorWhichIsA("ScrollingFrame") else nil
 		
 		if not Root then
 			Root = ReactRobloxModule.createRoot(Page)
 			
 			if Root then
-				Root:render(ReactModule.createElement(v24))
+				Root:render(ReactModule.createElement(v25, { scrollingFrame = ScrollingFrame }))
 			end
 		end
 		Signal2(true)

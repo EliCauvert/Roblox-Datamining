@@ -1,4 +1,5 @@
 ﻿local ScriptProfilerService = game:GetService("ScriptProfilerService")
+local FFlagCoreScriptsProfilerGuardMissingNodesModule = require(script.Parent.Flags.FFlagCoreScriptsProfilerGuardMissingNodes)
 local ProfilerDataParserModule = {}
 ProfilerDataParserModule.__index = ProfilerDataParserModule
 
@@ -70,7 +71,7 @@ function ProfilerDataParserModule.parsePackageName(Text: string): string
 end
 
 function ProfilerDataParserModule:getPackageStatistics()
-	-- upvalues: ProfilerDataParserModule (copy)
+	-- upvalues: FFlagCoreScriptsProfilerGuardMissingNodesModule (copy), ProfilerDataParserModule (copy)
 	if not self._data then
 		return {}
 	end
@@ -79,27 +80,33 @@ function ProfilerDataParserModule:getPackageStatistics()
 	local Node = nil
 	
 	for _, category in self._data.Categories do
-		for _, child in self._data.Nodes[category.NodeId].Children do
-			Node = self._data.Nodes[child]
-			
-			for i, _ in Node.Children do
-				local Number: number? = tonumber(i)
+		local Node1 = self._data.Nodes[category.NodeId]
+		
+		if not FFlagCoreScriptsProfilerGuardMissingNodesModule or Node1 ~= nil and Node1.Children ~= nil then
+			for _, child in Node1.Children do
+				Node = self._data.Nodes[child]
 				
-				if not Number then break end
-				local Function = self._data.Functions[Number]
-				
-				if not Function then break end
-				ParsePackageNameResult = ProfilerDataParserModule.parsePackageName(Function.Source)
-				
-				if not ParsePackageNameResult then break end
-				if not t[ParsePackageNameResult] then
-					t[ParsePackageNameResult] = { count = 0, totalDuration = 0 }
+				if not FFlagCoreScriptsProfilerGuardMissingNodesModule or Node ~= nil and Node.Children ~= nil then
+					for i, _ in Node.Children do
+						local Number: number? = tonumber(i)
+						
+						if not Number then break end
+						local Function = self._data.Functions[Number]
+						
+						if not Function then break end
+						ParsePackageNameResult = ProfilerDataParserModule.parsePackageName(Function.Source)
+						
+						if not ParsePackageNameResult then break end
+						if not t[ParsePackageNameResult] then
+							t[ParsePackageNameResult] = { count = 0, totalDuration = 0 }
+						end
+						local Entry = t[ParsePackageNameResult]
+						Entry.count += 1
+						local Entry1 = t[ParsePackageNameResult]
+						Entry1.totalDuration += Node.TotalDuration
+						break
+					end
 				end
-				local Entry = t[ParsePackageNameResult]
-				Entry.count += 1
-				local Entry1 = t[ParsePackageNameResult]
-				Entry1.totalDuration += Node.TotalDuration
-				break
 			end
 		end
 	end

@@ -1134,6 +1134,14 @@ return function(p1)
 		getShowInContextPersonalizedRecommendationsInExperienceBuyRobux = function()
 			-- upvalues: p1 (copy)
 			return p1.showInContextPersonalizedRecommendationsInExperienceBuyRobux or false
+		end,
+		getShowInContextPersonalizedRecommendationsExperienceDetailsBuyRobux = function()
+			-- upvalues: p1 (copy)
+			return p1.showInContextPersonalizedRecommendationsExperienceDetailsBuyRobux or false
+		end,
+		getShowInContextPersonalizedRecommendationsMarketplaceBuyRobux = function()
+			-- upvalues: p1 (copy)
+			return p1.showInContextPersonalizedRecommendationsMarketplaceBuyRobux or false
 		end
 	}
 end

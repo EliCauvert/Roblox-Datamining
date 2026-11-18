@@ -3,6 +3,8 @@ local Parent = BuildExperience.Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local ChatScrollAnchorContextModule = require(BuildExperience.Chat.ChatScrollAnchorContext)
+local FFlagBuildExperienceTurnWorkTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceTurnWorkTelemetry)
+local TurnWorkTelemetryContextModule = require(BuildExperience.Chat.TurnWorkTelemetryContext)
 local FFlagBuildExperienceChatAccordionScrollAnchorModule = require(BuildExperience.Flags.FFlagBuildExperienceChatAccordionScrollAnchor)
 local EscapeRichTextModule = require(BuildExperience.utils.escapeRichText)
 local Icon = FoundationModule.Icon
@@ -20,7 +22,7 @@ local function _(p1): string
 end
 
 return function(Frame)
-	-- upvalues: FoundationModule (copy), ReactModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), EscapeRichTextModule (copy), View (copy), StateLayerAffordance (copy), Text (copy), Progress (copy), ProgressShape (copy), ProgressSize (copy), Icon (copy), IconName (copy), IconSize (copy)
+	-- upvalues: FoundationModule (copy), ReactModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), FFlagBuildExperienceTurnWorkTelemetryModule (copy), TurnWorkTelemetryContextModule (copy), EscapeRichTextModule (copy), View (copy), StateLayerAffordance (copy), Text (copy), Progress (copy), ProgressShape (copy), ProgressSize (copy), Icon (copy), IconName (copy), IconSize (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseBindingResult = ReactModule.useBinding(0)
 	local Size500: number = UseTokensResult.Size.Size_500
@@ -30,15 +32,26 @@ return function(Frame)
 	local OnToggleFunction = Frame.onToggle
 	local UseRefResult = if FFlagBuildExperienceChatAccordionScrollAnchorModule then ReactModule.useRef(nil) else nil
 	local UseContextResult = if FFlagBuildExperienceChatAccordionScrollAnchorModule then ReactModule.useContext(ChatScrollAnchorContextModule) else nil
+	local UseContextResult1 = if FFlagBuildExperienceTurnWorkTelemetryModule then ReactModule.useContext(TurnWorkTelemetryContextModule) else nil
+	local Index = Frame.index
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: FFlagBuildExperienceChatAccordionScrollAnchorModule (upval), UseContextResult (copy), UseRefResult (copy), OnToggleFunction (copy)
+		-- upvalues: FFlagBuildExperienceChatAccordionScrollAnchorModule (upval), UseContextResult (copy), UseRefResult (copy), UseContextResult1 (copy), Index (copy), IsIsExpanded (copy), OnToggleFunction (copy)
 		if FFlagBuildExperienceChatAccordionScrollAnchorModule and UseContextResult ~= nil and UseRefResult ~= nil then
 			UseContextResult(UseRefResult.current)
+		end
+		if UseContextResult1 ~= nil then
+			UseContextResult1.recordStepToggle(Index, not IsIsExpanded)
 		end
 		if OnToggleFunction ~= nil then
 			OnToggleFunction()
 		end
-	end, { UseContextResult, OnToggleFunction })
+	end, if FFlagBuildExperienceTurnWorkTelemetryModule then {
+		UseContextResult,
+		OnToggleFunction,
+		UseContextResult1,
+		Index,
+		IsIsExpanded
+	} else { UseContextResult, OnToggleFunction })
 	local Match, Match2 = string.match(Frame.title, "^(%S+)%s+(.*)$")
 	local Text1: string = `<b>{EscapeRichTextModule(Match or Frame.title)}</b>`
 	
