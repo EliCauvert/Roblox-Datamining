@@ -2,36 +2,59 @@
 local NotificationService = game:GetService("NotificationService")
 local RealtimeDeliveryModule = require(Parent.RealtimeDelivery)
 local Signal, Signal2 = require(Parent.Signals).createSignal(false)
-local EngagementActivityV1 = nil
-
-local function v6() end
+local List = nil
+local config = {
+	onActivityPing = function() end,
+	onReconnected = function() end
+}
+local v1 = nil
 
 local function onActivityEvent(p1)
-	-- upvalues: Signal2 (copy), v6 (ref)
+	-- upvalues: Signal2 (copy), config (ref)
 	if type(p1) ~= "table" then return end
 	if p1.type == "ActivityPending" and p1.surface == "moments" then
 		Signal2(true)
-		v6()
+		config.onActivityPing()
 		
 		return
 	end
 end
 
+local function onConnectionChanged(ConnectionState)
+	-- upvalues: v1 (ref), config (ref)
+	local ConnectionState1 = v1
+	v1 = ConnectionState
+	
+	if ConnectionState == Enum.ConnectionState.Connected and ConnectionState1 ~= nil and ConnectionState1 ~= Enum.ConnectionState.Connected then
+		config.onReconnected()
+	end
+end
+
 return {
 	subscribe = function(p1, p2)
-		-- upvalues: EngagementActivityV1 (ref), v6 (ref), RealtimeDeliveryModule (copy), NotificationService (copy), onActivityEvent (copy)
-		if EngagementActivityV1 == nil then
-			v6 = p1 or function() end
-			EngagementActivityV1 = (p2 or RealtimeDeliveryModule.RobloxEventReceiver.new(NotificationService)):observeEvent("EngagementActivityV1", onActivityEvent)
+		-- upvalues: List (ref), config (ref), v1 (ref), RealtimeDeliveryModule (copy), NotificationService (copy), onActivityEvent (copy), onConnectionChanged (copy)
+		if List == nil then
+			config = p1 or {
+				onActivityPing = function() end,
+				onReconnected = function() end
+			}
+			v1 = nil
+			local P3 = p2 or RealtimeDeliveryModule.RobloxEventReceiver.new(NotificationService)
+			List = {
+				P3:observeEvent("EngagementActivityV1", onActivityEvent),
+				P3:observeEvent("signalR", onConnectionChanged)
+			}
 			
 			return
 		end
 	end,
 	unsubscribe = function()
-		-- upvalues: EngagementActivityV1 (ref)
-		if EngagementActivityV1 ~= nil then
-			EngagementActivityV1:disconnect()
-			EngagementActivityV1 = nil
+		-- upvalues: List (ref)
+		if List ~= nil then
+			for _, value in List do
+				value:disconnect()
+			end
+			List = nil
 		end
 	end,
 	getIsActivityPending = Signal,

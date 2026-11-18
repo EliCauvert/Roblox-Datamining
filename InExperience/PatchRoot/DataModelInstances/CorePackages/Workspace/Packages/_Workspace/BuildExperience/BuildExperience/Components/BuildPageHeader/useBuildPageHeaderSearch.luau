@@ -3,17 +3,17 @@ local Parent = BuildExperience.Parent
 local FoundationModule = require(Parent.Foundation)
 local MotionModule = require(Parent.Motion)
 local ReactModule = require(Parent.React)
+local FIntBuildCompactSearchFadeMillisecondsModule = require(BuildExperience.Flags.FIntBuildCompactSearchFadeMilliseconds)
 local _ = require(BuildExperience.Stores.GetSearchQueryStore.createSearchQueryStore)
 local ReleaseFocusWithinModule = require(BuildExperience.utils.releaseFocusWithin)
 
 return function(p1)
-	-- upvalues: ReactModule (copy), FoundationModule (copy), MotionModule (copy), ReleaseFocusWithinModule (copy)
+	-- upvalues: ReactModule (copy), FoundationModule (copy), MotionModule (copy), ReleaseFocusWithinModule (copy), FIntBuildCompactSearchFadeMillisecondsModule (copy)
 	local SearchQueryStore = p1.searchQueryStore
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseIsSearchActiveResult = SearchQueryStore.useIsSearchActive()
 	local UseIsSearchActiveResult1 = p1.isCompact and UseIsSearchActiveResult
 	local ReducedMotion = FoundationModule.Hooks.usePreferences().reducedMotion
-	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseMotionResult, UseMotionResult2 = MotionModule.useMotion({ progress = if UseIsSearchActiveResult1 then 1 else 0 })
 	ReactModule.useEffect(function()
 		-- upvalues: UseIsSearchActiveResult (copy), ReleaseFocusWithinModule (upval), UseRefResult (copy)
@@ -37,18 +37,17 @@ return function(p1)
 		end
 	end, { SearchQueryStore })
 	ReactModule.useEffect(function()
-		-- upvalues: UseMotionResult2 (copy), MotionModule (upval), UseIsSearchActiveResult1 (copy), ReducedMotion (copy), UseTokensResult (copy)
+		-- upvalues: UseMotionResult2 (copy), MotionModule (upval), UseIsSearchActiveResult1 (copy), ReducedMotion (copy), FIntBuildCompactSearchFadeMillisecondsModule (upval)
 		UseMotionResult2(MotionModule.createState({ progress = if UseIsSearchActiveResult1 then 1 else 0 }, {
 			default = MotionModule.transition({
-				duration = if ReducedMotion then 0 else UseTokensResult.Time.Time_200,
+				duration = if ReducedMotion then 0 else FIntBuildCompactSearchFadeMillisecondsModule / 1000,
 				easingStyle = Enum.EasingStyle.Quad
 			})
 		}))
 	end, {
 		UseMotionResult2,
 		UseIsSearchActiveResult1,
-		ReducedMotion,
-		UseTokensResult
+		ReducedMotion
 	})
 	
 	return {

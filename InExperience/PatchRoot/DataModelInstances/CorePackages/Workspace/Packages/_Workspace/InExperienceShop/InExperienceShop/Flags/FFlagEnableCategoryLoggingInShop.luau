@@ -1,3 +1,1 @@
-﻿local FFlagEnableInExperienceShopUnifiedLoggingModule = require(script.Parent.FFlagEnableInExperienceShopUnifiedLogging)
-
-return game:DefineFastFlag("EnableCategoryLoggingInShop", false) and FFlagEnableInExperienceShopUnifiedLoggingModule
+﻿return game:DefineFastFlag("EnableCategoryLoggingInShop", false)

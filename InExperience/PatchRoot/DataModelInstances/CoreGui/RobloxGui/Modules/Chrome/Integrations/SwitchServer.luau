@@ -11,6 +11,7 @@ local SwitchServerModule = require(CorePackages.Workspace.Packages.SwitchServer)
 local Constants = SwitchServerModule.Constants
 local SwitchServerStore = SwitchServerModule.GetSwitchServerStore(false)
 local IsPioneerLaunchFunction = require(CorePackages.Workspace.Packages.PioneerUtils).isPioneerLaunch
+local FFlagShowSwitchServerButton = require(CorePackages.Workspace.Packages.SharedFlags).FFlagShowSwitchServerButton
 local SignalsUtilsModule = require(CorePackages.Workspace.Packages.SignalsUtils)
 local IsConfirmationOpen = false
 local NewResult = require(CorePackages.Workspace.Packages.AppCommonLib).Signal.new()
@@ -31,7 +32,7 @@ local RegisterResult = ServiceModule:register({
 	initialAvailability = ServiceModule.AvailabilitySignal.Unavailable,
 	id = ConstantsModule.SWITCH_SERVER_ID,
 	label = Constants.BUTTON.LABEL,
-	sideSheetPlacement = if IsPioneerLaunchFunction() then SideSheetPlacement.SessionAction else SideSheetPlacement.BelowFold,
+	sideSheetPlacement = if IsPioneerLaunchFunction() or FFlagShowSwitchServerButton then SideSheetPlacement.SessionAction else SideSheetPlacement.BelowFold,
 	sideSheetOpenBehavior = if FFlagKeepSideSheetOpenBesideMenu then SideSheetOpenBehavior.CloseSheet else nil,
 	activated = function()
 		-- upvalues: SwitchServerStore (copy)
@@ -46,8 +47,8 @@ local RegisterResult = ServiceModule:register({
 	}
 })
 SignalsUtilsModule.createDetachedEffect(function(p1)
-	-- upvalues: SwitchServerStore (copy), IsPioneerLaunchFunction (copy), RegisterResult (copy)
-	if SwitchServerStore.shouldEnableSwitchServer(p1) or IsPioneerLaunchFunction() then
+	-- upvalues: SwitchServerStore (copy), IsPioneerLaunchFunction (copy), FFlagShowSwitchServerButton (copy), RegisterResult (copy)
+	if SwitchServerStore.shouldEnableSwitchServer(p1) or IsPioneerLaunchFunction() or FFlagShowSwitchServerButton then
 		RegisterResult.availability:available()
 		
 		return

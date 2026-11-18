@@ -13,10 +13,11 @@ local UseFormFactorFunction = MomentsCommonModule.Hooks.useFormFactor
 local UsePreferredInputModule = require(Moments.Hooks.usePreferredInput)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local FFlagLuaSupportMicroGamepadPreferredInput = require(Parent.SharedFlags).FFlagLuaSupportMicroGamepadPreferredInput
+local FFlagLuaAppAddTestIdsForArrow = require(Parent.SharedFlags).FFlagLuaAppAddTestIdsForArrow
 local FormFactor = MomentsCommonModule.Enums.FormFactor
 
 return function(p1)
-	-- upvalues: UseDeviceInsetsFunction (copy), UseFormFactorFunction (copy), UsePreferredInputModule (copy), UseTokensFunction (copy), Moments (copy), Parent (copy), FormFactor (copy), FFlagLuaSupportMicroGamepadPreferredInput (copy), ReactModule (copy), View (copy), IconButton (copy), ChevronLargeUp (copy), FoundationModule (copy), ChevronLargeDown (copy)
+	-- upvalues: UseDeviceInsetsFunction (copy), UseFormFactorFunction (copy), UsePreferredInputModule (copy), UseTokensFunction (copy), Moments (copy), Parent (copy), FormFactor (copy), FFlagLuaSupportMicroGamepadPreferredInput (copy), ReactModule (copy), View (copy), IconButton (copy), ChevronLargeUp (copy), FoundationModule (copy), FFlagLuaAppAddTestIdsForArrow (copy), ChevronLargeDown (copy)
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseFormFactorResult = UseFormFactorFunction()
 	local UsePreferredInputModuleResult = UsePreferredInputModule()
@@ -45,7 +46,8 @@ return function(p1)
 					icon = ChevronLargeUp,
 					isDisabled = p1.currentIndex == 1,
 					onActivated = p1.onScrollToPrevious,
-					size = FoundationModule.Enums.IconSize.Medium
+					size = FoundationModule.Enums.IconSize.Medium,
+					testId = if FFlagLuaAppAddTestIdsForArrow then "--moments-feed-nav-previous" else nil
 				}),
 				NextButton = ReactModule.createElement(IconButton, {
 					isCircular = true,
@@ -53,7 +55,8 @@ return function(p1)
 					icon = ChevronLargeDown,
 					isDisabled = p1.currentIndex == p1.numItems,
 					onActivated = p1.onScrollToNext,
-					size = FoundationModule.Enums.IconSize.Medium
+					size = FoundationModule.Enums.IconSize.Medium,
+					testId = if FFlagLuaAppAddTestIdsForArrow then "--moments-feed-nav-next" else nil
 				})
 			})
 		}) else nil

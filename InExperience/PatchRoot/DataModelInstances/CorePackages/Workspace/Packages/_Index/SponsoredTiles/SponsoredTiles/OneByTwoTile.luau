@@ -29,6 +29,7 @@ local SponsoredTilesTelemetryModule = require(Parent.SponsoredTilesTelemetry)
 local OneByTwoTileTelemetry = SponsoredTilesTelemetryModule.OneByTwoTileTelemetry
 local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
 local _ = require(SponsoredTiles.types)
+local SponsoredFootnoteLabelModule = require(SponsoredTiles.SponsoredFootnoteLabel)
 local OpenAdClickoutUrlModule = require(SponsoredTiles.openAdClickoutUrl)
 local VideoPlayerModule = require(Parent.VideoPlayer)
 local VideoDisplay = VideoPlayerModule.VideoDisplay
@@ -70,6 +71,8 @@ local FFlagLuaAppOneByTwoHoverIdleAutoplay = SharedFlagsModule.FFlagLuaAppOneByT
 local FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback = SharedFlagsModule.FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback
 local FFlagLuaAppEnableReportExperience = SharedFlagsModule.FFlagLuaAppEnableReportExperience
 local FFlagLuaAppEnableOneByTwoTileFunnelTelemetry = SharedFlagsModule.FFlagLuaAppEnableOneByTwoTileFunnelTelemetry
+local FFlagLuaAppAllowNoCtaGameOneByTwoTiles = SharedFlagsModule.FFlagLuaAppAllowNoCtaGameOneByTwoTiles
+local FFlagLuaAppSponsoredTileFootnoteText = SharedFlagsModule.FFlagLuaAppSponsoredTileFootnoteText
 local FFlagLuaAppSponsoredTileBadgeContentPaddingModule = require(SponsoredTiles.Flags.FFlagLuaAppSponsoredTileBadgeContentPadding)
 local FFlagLuaAppAdClickoutEventModule = require(SponsoredTiles.Flags.FFlagLuaAppAdClickoutEvent)
 local LuaAppOneByTwoTileLogoWidthPercentLandscapeRatio = game:DefineFastInt("LuaAppOneByTwoTileLogoWidthPercentLandscape", 40) / 100
@@ -84,7 +87,7 @@ local function _(p1, p2)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseTokensFunction (copy), ResponsiveModule (copy), ReactModule (copy), UseIsHoveredTileFunction (copy), OmniRecommendationsContentType (copy), GameHydrationReactModule (copy), UseOverflowMenuOpenFunction (copy), UseTriggerFeedbackFunction (copy), DiscoveryEventErrorLogger (copy), GameCollectionItemTypes (copy), FFlagLuaAppEnableOneByTwoTileFunnelTelemetry (copy), OneByTwoTileTelemetry (copy), FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), VideoPlaybackCoordinator (copy), AdsViewportAutoplayCandidateTagModule (copy), UseTagAsAdsViewportAutoplayCandidateModule (copy), UseTagAsViewportAutoplayCandidateFunction (copy), UseTagAsSponsoredAdViewabilityCandidateFunction (copy), GetAvailableGameTileOverflowMenuItemsFunction (copy), FFlagLuaAppEnableReportExperience (copy), FFlagLuaAppSduiSponsoredOneByTwoTile (copy), TileLongPress (copy), GetOverflowMenuSignalStoreFunction (copy), VideoLoadingState (copy), FFlagLuaAppSuppressVideoDetectorDuringScroll (copy), FFlagLuaAppSuppressOneByTwoVideoDetectorDuringScroll (copy), UseCanDevicePlayVideoPreviewFunction (copy), TileVideoBlockingConfig (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), AppSessionService (copy), UseNavigationFunction (copy), UseLocalizationFunction (copy), DiscoveryAnalyticsModule (copy), SponsoredGamesRecordClickFunction (copy), SetGamePlaySessionFunction (copy), SessionType (copy), HoverTileCoordinator (copy), FFlagLuaAppDemoModePlayButtonTelemetry (copy), VideoEndReason (copy), AppPage (copy), FFlagLuaAppAdClickoutEventModule (copy), SponsoredTilesTelemetryModule (copy), FFlagLuaAppAdClickoutDeeplink (copy), OpenAdClickoutUrlModule (copy), ImpressionsTagUtility (copy), UseValidTileBadgesFunction (copy), LuaAppOneByTwoTileLogoWidthPercentLandscapeRatio (copy), LuaAppOneByTwoTileLogoWidthPercentSquareRatio (copy), ButtonSize (copy), VideoDisplay (copy), LuaAppOneByTwoTileGradientTopTransparencyPercentRatio (copy), LuaAppOneByTwoTileGradientBottomHeightPercentRatio (copy), LuaAppOneByTwoTileGradientBottomTransparencyPercentRatio (copy), GameTileThumbnailBadges (copy), FFlagLuaAppSponsoredTileBadgeContentPaddingModule (copy), Image (copy), SpanTileOverflowMenuModule (copy), NormalizeFontFaceFunction (copy), PlayButton (copy), FFlagLuaAppGameTileSelectionVideoPlayback (copy), GetPlaybackDetectionMethodFunction (copy), VideoPlaybackDetector (copy), VideoPlaybackDetectionMethod (copy), FIntLuaAppGameTileVideoDwellTimeInSec (copy), FIntLuaAppGameTileVideoVisiblePercent (copy)
+	-- upvalues: UseTokensFunction (copy), ResponsiveModule (copy), ReactModule (copy), UseIsHoveredTileFunction (copy), OmniRecommendationsContentType (copy), GameHydrationReactModule (copy), UseOverflowMenuOpenFunction (copy), UseTriggerFeedbackFunction (copy), DiscoveryEventErrorLogger (copy), GameCollectionItemTypes (copy), FFlagLuaAppEnableOneByTwoTileFunnelTelemetry (copy), OneByTwoTileTelemetry (copy), FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), VideoPlaybackCoordinator (copy), AdsViewportAutoplayCandidateTagModule (copy), UseTagAsAdsViewportAutoplayCandidateModule (copy), UseTagAsViewportAutoplayCandidateFunction (copy), UseTagAsSponsoredAdViewabilityCandidateFunction (copy), GetAvailableGameTileOverflowMenuItemsFunction (copy), FFlagLuaAppEnableReportExperience (copy), FFlagLuaAppSduiSponsoredOneByTwoTile (copy), TileLongPress (copy), GetOverflowMenuSignalStoreFunction (copy), VideoLoadingState (copy), FFlagLuaAppSuppressVideoDetectorDuringScroll (copy), FFlagLuaAppSuppressOneByTwoVideoDetectorDuringScroll (copy), UseCanDevicePlayVideoPreviewFunction (copy), TileVideoBlockingConfig (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), AppSessionService (copy), UseNavigationFunction (copy), UseLocalizationFunction (copy), FFlagLuaAppAllowNoCtaGameOneByTwoTiles (copy), DiscoveryAnalyticsModule (copy), SponsoredGamesRecordClickFunction (copy), SetGamePlaySessionFunction (copy), SessionType (copy), HoverTileCoordinator (copy), FFlagLuaAppDemoModePlayButtonTelemetry (copy), VideoEndReason (copy), AppPage (copy), FFlagLuaAppAdClickoutEventModule (copy), SponsoredTilesTelemetryModule (copy), FFlagLuaAppAdClickoutDeeplink (copy), OpenAdClickoutUrlModule (copy), ImpressionsTagUtility (copy), UseValidTileBadgesFunction (copy), LuaAppOneByTwoTileLogoWidthPercentLandscapeRatio (copy), LuaAppOneByTwoTileLogoWidthPercentSquareRatio (copy), ButtonSize (copy), FFlagLuaAppSponsoredTileFootnoteText (copy), VideoDisplay (copy), LuaAppOneByTwoTileGradientTopTransparencyPercentRatio (copy), LuaAppOneByTwoTileGradientBottomHeightPercentRatio (copy), LuaAppOneByTwoTileGradientBottomTransparencyPercentRatio (copy), GameTileThumbnailBadges (copy), FFlagLuaAppSponsoredTileBadgeContentPaddingModule (copy), Image (copy), SpanTileOverflowMenuModule (copy), NormalizeFontFaceFunction (copy), PlayButton (copy), SponsoredFootnoteLabelModule (copy), FFlagLuaAppGameTileSelectionVideoPlayback (copy), GetPlaybackDetectionMethodFunction (copy), VideoPlaybackDetector (copy), VideoPlaybackDetectionMethod (copy), FIntLuaAppGameTileVideoDwellTimeInSec (copy), FIntLuaAppGameTileVideoVisiblePercent (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IsUseResponsiveResultMatch = ResponsiveModule.useResponsive({ ResponsiveModule.BreakpointConfig.sizes.Small }) == ResponsiveModule.Keys.Small
 	local UseRefResult = ReactModule.useRef(nil)
@@ -365,7 +368,7 @@ return ReactModule.memo(function(p1)
 	local UseRoactServiceResult1 = UseRoactServiceFunction(AppSessionService)
 	local UseNavigationResult = UseNavigationFunction()
 	local UseLocalizationResult = UseLocalizationFunction({ joinButtonText = "Common.VisitGame.Label.Play" })
-	local CtaText = if IsContentTypeMatch then p1.ctaText elseif p1.ctaText == "" then UseLocalizationResult.joinButtonText else p1.ctaText
+	local CtaText = if FFlagLuaAppAllowNoCtaGameOneByTwoTiles or IsContentTypeMatch then p1.ctaText elseif p1.ctaText == "" then UseLocalizationResult.joinButtonText else p1.ctaText
 	local IsNotCtaTextMatch: boolean = IsContentTypeMatch and (p1.clickoutUrl ~= nil and (p1.clickoutUrl ~= "" and CtaText ~= ""))
 	local LaunchExperienceEventContext = p1.launchExperienceEventContext or DiscoveryAnalyticsModule.Constants.Context.ExperienceTile
 	local UseResult9 = ReactModule.useCallback(function()
@@ -515,14 +518,14 @@ return ReactModule.memo(function(p1)
 	local Number: number? = tonumber(p1.logoAspectRatio)
 	local Number1: number = if Number and Number > 0 then Number else 1
 	local LuaAppOneByTwoTileLogoWidthPercentLandscapeRatio1 = if Number1 == 3 then LuaAppOneByTwoTileLogoWidthPercentLandscapeRatio else LuaAppOneByTwoTileLogoWidthPercentSquareRatio
-	local Size800 = nil
-	local Size500 = nil
-	local Medium = nil
-	local Small = nil
-	local TitleLarge = nil
-	local BodySmall = nil
-	local Size600 = nil
 	local XXSmall = nil
+	local TitleLarge = nil
+	local Size500 = nil
+	local Size800 = nil
+	local BodySmall = nil
+	local Medium = nil
+	local Size600 = nil
+	local Small = nil
 	local TitleSmall = nil
 	
 	if IsUseResponsiveResultMatch then
@@ -546,6 +549,7 @@ return ReactModule.memo(function(p1)
 		Size800 = UseTokensResult.Size.Size_1000
 		TitleSmall = UseTokensResult.Typography.TitleMedium
 	end
+	local IsNotFootnoteTextMatch: boolean = FFlagLuaAppSponsoredTileFootnoteText and (p1.footnoteText ~= nil and p1.footnoteText ~= "")
 	local PlaybackDetectionMethod = if FFlagLuaAppOneByTwoHoverIdleAutoplay or FFlagLuaAppGameTileSelectionVideoPlayback then GetPlaybackDetectionMethodFunction(UsePreferredInputResult, IsNotUseLastInputResultMatch) else nil
 	
 	return ReactModule.createElement(ReactModule.Fragment, nil, {
@@ -668,7 +672,7 @@ return ReactModule.memo(function(p1)
 						FillDirection = Enum.FillDirection.Vertical,
 						SortOrder = Enum.SortOrder.LayoutOrder,
 						HorizontalAlignment = Enum.HorizontalAlignment.Left,
-						Padding = UDim.new(0, Medium)
+						Padding = UDim.new(0, if IsNotFootnoteTextMatch then UseTokensResult.Gap.Medium else Medium)
 					}),
 					TextStack = ReactModule.createElement("Frame", {
 						LayoutOrder = 1,
@@ -677,6 +681,9 @@ return ReactModule.memo(function(p1)
 						Size = UDim2.new(1, 0, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y
 					}, {
+						UIPadding = if IsNotFootnoteTextMatch then ReactModule.createElement("UIPadding", {
+							PaddingBottom = UDim.new(0, Medium - UseTokensResult.Gap.Medium)
+						}) else nil,
 						UIListLayout = ReactModule.createElement("UIListLayout", {
 							FillDirection = Enum.FillDirection.Vertical,
 							SortOrder = Enum.SortOrder.LayoutOrder,
@@ -732,7 +739,7 @@ return ReactModule.memo(function(p1)
 							PaddingLeft = UDim.new(0, UseTokensResult.Padding.Large),
 							PaddingRight = UDim.new(0, UseTokensResult.Padding.Large)
 						})
-					}) else nil elseif p1.universeId then ReactModule.createElement(PlayButton, {
+					}) else nil elseif FFlagLuaAppAllowNoCtaGameOneByTwoTiles and CtaText == "" then nil elseif p1.universeId then ReactModule.createElement(PlayButton, {
 						LayoutOrder = 2,
 						launchSource = "OneByTwoTile",
 						hidePlayableIcon = true,
@@ -750,6 +757,12 @@ return ReactModule.memo(function(p1)
 							tileType = GameCollectionItemTypes.GameCollectionItemType.OneByTwoTile,
 							nativeAdData = p1.adId
 						}
+					}) else nil,
+					FootnoteLabel = if IsNotFootnoteTextMatch then ReactModule.createElement(SponsoredFootnoteLabelModule, {
+						layoutOrder = 3,
+						text = p1.footnoteText,
+						textXAlignment = Enum.TextXAlignment.Left,
+						textColor = UseTokensResult.DarkMode.Content.Default.Color3
 					}) else nil
 				})
 			})

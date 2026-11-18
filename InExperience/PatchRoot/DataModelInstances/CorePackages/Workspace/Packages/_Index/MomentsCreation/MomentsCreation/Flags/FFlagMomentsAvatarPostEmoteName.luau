@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("MomentsAvatarPostEmoteName", false) and game:GetEngineFeature("MomentsServiceAvatarPostEmoteName")

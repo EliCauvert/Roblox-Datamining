@@ -245,5 +245,18 @@ return {
 		end
 		return SplitPaneSlot.Support
 	end,
+	getLeaderboardSeeAllSplitPaneEligibility = function()
+		-- upvalues: FFlagSplitPaneExperimentVariants (copy), Flag (ref), config (copy), FFlagSplitPaneVariantCollapsedAutoOpen (copy), config3 (copy), FFlagSplitPaneVariantAvatarOnHomeOnly (copy), config2 (copy), FFlagSplitPaneVariantDefaultCollapsed (copy), config1 (copy), config4 (ref), SplitPaneSlot (copy)
+		if FFlagSplitPaneExperimentVariants then
+			if not Flag then
+				Flag = true
+				config4 = if FFlagSplitPaneVariantCollapsedAutoOpen then config3 elseif FFlagSplitPaneVariantAvatarOnHomeOnly then config2 elseif FFlagSplitPaneVariantDefaultCollapsed then config1 else config
+			end
+			if not config4.supportSlotEligible then
+				return nil
+			end
+		end
+		return SplitPaneSlot.Support
+	end,
 	variantConfigs = { config, config1, config2, config3 }
 }

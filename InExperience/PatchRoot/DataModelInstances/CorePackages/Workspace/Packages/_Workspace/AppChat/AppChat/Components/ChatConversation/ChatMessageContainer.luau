@@ -657,6 +657,7 @@ function ChatMessageContainer(p1)
 				}),
 				MessageReactionChip = if Inverted then ReactModule.createElement(MessageReactionChipModule, {
 					layoutOrder = 3,
+					conversationId = JoinResult.conversationId,
 					messageId = JoinResult.messageId,
 					isIncoming = JoinResult.isIncoming
 				}) else nil

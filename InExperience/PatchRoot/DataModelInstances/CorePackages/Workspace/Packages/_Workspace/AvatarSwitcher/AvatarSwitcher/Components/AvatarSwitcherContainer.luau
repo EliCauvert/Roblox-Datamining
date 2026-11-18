@@ -21,10 +21,11 @@ local AvatarExperienceCommonModule = require(Parent.AvatarExperienceCommon)
 local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 local FFlagAvatarSwitcherUiFixes = AvatarExperienceFlagsModule.FFlagAvatarSwitcherUiFixes
 local FFlagAXTimeoutAcknowledgementGating = AvatarExperienceFlagsModule.FFlagAXTimeoutAcknowledgementGating
+local FFlagAlignSideSheetWindowCloseRight = require(Parent.SharedFlags).FFlagAlignSideSheetWindowCloseRight
 local TimeoutBanner = AvatarExperienceCommonModule.Components.TimeoutBanner
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), UseSignalStateFunction (copy), GetAvatarSwitcherStoreModule (copy), SignalsReactModule (copy), ExperienceAvatarSupportTypeModule (copy), UseUnifiedEventListenerInExperienceFunction (copy), FFlagAXTimeoutAcknowledgementGating (copy), AvatarExperienceCommonModule (copy), ReactModule (copy), TopBarModule (copy), FoundationModule (copy), TimeoutBanner (copy), OutfitsGridWithMessageModule (copy), PreviewPanelModule (copy), FFlagAvatarSwitcherUiFixes (copy), GuiService (copy), EmptyStateModule (copy), SingleItemLayoutModule (copy), VerticalLayoutModule (copy), HorizontalLayoutModule (copy), RespawnDialogContainerModule (copy)
+	-- upvalues: UseTokensFunction (copy), UseSignalStateFunction (copy), GetAvatarSwitcherStoreModule (copy), SignalsReactModule (copy), ExperienceAvatarSupportTypeModule (copy), UseUnifiedEventListenerInExperienceFunction (copy), FFlagAXTimeoutAcknowledgementGating (copy), AvatarExperienceCommonModule (copy), ReactModule (copy), FFlagAlignSideSheetWindowCloseRight (copy), TopBarModule (copy), FoundationModule (copy), TimeoutBanner (copy), OutfitsGridWithMessageModule (copy), PreviewPanelModule (copy), FFlagAvatarSwitcherUiFixes (copy), GuiService (copy), EmptyStateModule (copy), SingleItemLayoutModule (copy), VerticalLayoutModule (copy), HorizontalLayoutModule (copy), RespawnDialogContainerModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseSignalStateResult = UseSignalStateFunction(GetAvatarSwitcherStoreModule)
 	local UseSignalStateResult1 = UseSignalStateFunction(UseSignalStateResult.getIsEmpty)
@@ -41,8 +42,12 @@ return function(p1)
 			UseSignalStateResult.fetchExperienceAvatarSupportType()
 		end)
 	end, {})
+	local NoIsUseSignalStateResultMatch: boolean = FFlagAlignSideSheetWindowCloseRight and (not p1.verticalLayout and (not UseSignalStateResult1 and not IsUseSignalStateResultMatch))
 	local Element = ReactModule.createElement(FoundationModule.View, { tag = "auto-y size-full-0 col gap-0" }, {
-		TopBar = ReactModule.createElement(TopBarModule, { onClose = p1.toggleWindow }),
+		TopBar = ReactModule.createElement(TopBarModule, {
+			onClose = p1.toggleWindow,
+			hideClose = if FFlagAlignSideSheetWindowCloseRight then NoIsUseSignalStateResultMatch else nil
+		}),
 		TimeoutBanner = ReactModule.createElement(FoundationModule.View, { tag = "auto-y size-full-0 bg-surface-200" }, {
 			Banner = ReactModule.createElement(TimeoutBanner, { shouldFetch = true, shouldNavigateOnClick = false })
 		})
@@ -70,6 +75,7 @@ return function(p1)
 			}, { OutfitsGrid = Element1 })
 		}) else ReactModule.createElement(HorizontalLayoutModule, {
 			headerSlot = Element,
+			onClose = if NoIsUseSignalStateResultMatch then p1.toggleWindow else nil,
 			leftItemSlot = ReactModule.createElement(FoundationModule.View, { tag = "size-full-full padding-x-xlarge" }, { OutfitsGrid = Element1 }),
 			rightItemSlot = Element2
 		}),

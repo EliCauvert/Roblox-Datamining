@@ -7,8 +7,7 @@ local View = FoundationModule.View
 local Text = FoundationModule.Text
 local ScrollView = FoundationModule.ScrollView
 local ItemRowModule = require(InExperienceShop.Components.ItemRow)
-local FFlagEnableInExperienceShopUnifiedLoggingModule = require(InExperienceShop.Flags.FFlagEnableInExperienceShopUnifiedLogging)
-local AnalyticsModule = if FFlagEnableInExperienceShopUnifiedLoggingModule then require(InExperienceShop.Analytics) else nil
+local AnalyticsModule = require(InExperienceShop.Analytics)
 local ShopPageType = if AnalyticsModule then AnalyticsModule.Constants.ShopPageType else nil
 local ShopPageType1 = require(InExperienceShop.Analytics.Constants).ShopPageType
 local UseShopImpressionsDetectorModule = require(InExperienceShop.Hooks.useShopImpressionsDetector)
@@ -17,7 +16,7 @@ local Formatted = string.format("Type at least %d characters to search", require
 local config = { emptyText = "CommonUI.Messages.Response.NoResults" }
 
 return function(Frame)
-	-- upvalues: UseLocalizationFunction (copy), config (copy), UseShopImpressionsDetectorModule (copy), ShopPageType (copy), ReactModule (copy), FFlagEnableInExperienceShopUnifiedLoggingModule (copy), ItemRowModule (copy), ShopPageType1 (copy), Formatted (copy), View (copy), ScrollView (copy), FoundationModule (copy), Text (copy)
+	-- upvalues: UseLocalizationFunction (copy), config (copy), UseShopImpressionsDetectorModule (copy), ShopPageType (copy), ReactModule (copy), ItemRowModule (copy), ShopPageType1 (copy), Formatted (copy), View (copy), ScrollView (copy), FoundationModule (copy), Text (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	local UseShopImpressionsDetectorModuleResult = UseShopImpressionsDetectorModule({
 		isPageActive = true,
@@ -25,10 +24,8 @@ return function(Frame)
 		pageType = if ShopPageType then ShopPageType.Search else ""
 	})
 	local UseResult = ReactModule.useCallback(function(_)
-		-- upvalues: FFlagEnableInExperienceShopUnifiedLoggingModule (upval), UseShopImpressionsDetectorModuleResult (copy)
-		if FFlagEnableInExperienceShopUnifiedLoggingModule then
-			UseShopImpressionsDetectorModuleResult.onLayoutChange()
-		end
+		-- upvalues: UseShopImpressionsDetectorModuleResult (copy)
+		UseShopImpressionsDetectorModuleResult.onLayoutChange()
 	end, { UseShopImpressionsDetectorModuleResult.onLayoutChange })
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: Frame (copy), ReactModule (upval), ItemRowModule (upval), ShopPageType1 (upval)
@@ -63,7 +60,7 @@ return function(Frame)
 	}, {
 		Scroll = if Formatted1 == nil then ReactModule.createElement(ScrollView, {
 			Size = UDim2.fromScale(1, 1),
-			onCanvasPositionChanged = if FFlagEnableInExperienceShopUnifiedLoggingModule then UseResult else nil,
+			onCanvasPositionChanged = UseResult,
 			scroll = {
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
 				CanvasSize = UDim2.fromScale(1, 0),
@@ -73,14 +70,14 @@ return function(Frame)
 		}, {
 			Content = ReactModule.createElement(View, {
 				tag = "col gap-medium size-full-0 auto-y padding-x-xlarge padding-bottom-xlarge padding-top-medium",
-				ref = if FFlagEnableInExperienceShopUnifiedLoggingModule then UseShopImpressionsDetectorModuleResult.gridRef else nil,
-				onAbsoluteSizeChanged = if FFlagEnableInExperienceShopUnifiedLoggingModule then function(_)
+				ref = UseShopImpressionsDetectorModuleResult.gridRef,
+				onAbsoluteSizeChanged = function(_)
 					-- upvalues: UseShopImpressionsDetectorModuleResult (copy)
 					UseShopImpressionsDetectorModuleResult.onLayoutChange()
-				end else nil
+				end
 			}, UseMemoResult)
 		}) else nil,
-		ImpressionsDetector = if FFlagEnableInExperienceShopUnifiedLoggingModule then UseShopImpressionsDetectorModuleResult.impressionsDetector else nil,
+		ImpressionsDetector = UseShopImpressionsDetectorModuleResult.impressionsDetector,
 		Message = if Formatted1 == nil then nil else ReactModule.createElement(View, {
 			tag = "col align-x-center align-y-center size-full padding-x-xlarge padding-y-xlarge",
 			testId = "SearchResultsMessage"

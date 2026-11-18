@@ -23,6 +23,7 @@ local DisclaimerLinksVariantModule = require(AuthCommon.Enums.DisclaimerLinksVar
 local FitChildrenModule = require(AuthCommon.Components.FitChildren)
 local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
 local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local FFlagLuaAppAddTestIdsForArrow = require(Parent.SharedFlags).FFlagLuaAppAddTestIdsForArrow
 local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 local AppPage = require(Parent.RobloxAppEnums).AppPage
 local TransitionAnimationModule = require(AuthCommon.Enums.TransitionAnimation)
@@ -45,13 +46,14 @@ local StateLayer = {
 	affordance = FoundationModule.Enums.StateLayerAffordance.None
 }
 
-local function createFoundationLink(Text, OnActivated, LayoutOrder, UnderlineLinks, UnderlinedLinkTextTag)
+local function createFoundationLink(Text, OnActivated, LayoutOrder, UnderlineLinks, UnderlinedLinkTextTag, TestId)
 	-- upvalues: RoactModule (copy), FoundationModule (copy), StateLayer (copy)
 	return if UnderlineLinks then RoactModule.createElement(FoundationModule.View, {
 		tag = "auto-xy padding-small",
 		onActivated = OnActivated,
 		stateLayer = StateLayer,
-		LayoutOrder = LayoutOrder
+		LayoutOrder = LayoutOrder,
+		testId = TestId
 	}, {
 		Label = RoactModule.createElement(FoundationModule.Text, {
 			RichText = true,
@@ -63,7 +65,8 @@ local function createFoundationLink(Text, OnActivated, LayoutOrder, UnderlineLin
 		variant = FoundationModule.Enums.ButtonVariant.Utility,
 		size = FoundationModule.Enums.ButtonSize.Small,
 		onActivated = OnActivated,
-		LayoutOrder = LayoutOrder
+		LayoutOrder = LayoutOrder,
+		testId = TestId
 	})
 end
 
@@ -111,7 +114,7 @@ function DisclaimerLinks.init(p1)
 end
 
 function DisclaimerLinks.render(p1)
-	-- upvalues: WithLocalizationFunction (copy), WithStyleFunction (copy), UiMode (copy), FFlagFoundationStylingOnSignUp (copy), config (copy), GetTextSizeFunction (copy), FitChildrenModule (copy), RoactModule (copy), ImageSetLabel (copy), GetFFlagEnableAuditForSinglePageSignUpFunction (copy), RegisterAuditContentModule (copy), RegisterAdditionalAuditContentModule (copy), UrlBuilder (copy), ContextualMenu (copy), MenuDirection (copy), LinkButton (copy), NormalizeFontFaceFunction (copy), DisclaimerLinksVariantModule (copy), CryoModule (copy), createFoundationLink (copy), DisclaimerLinkButtonsModule (copy)
+	-- upvalues: WithLocalizationFunction (copy), WithStyleFunction (copy), UiMode (copy), FFlagFoundationStylingOnSignUp (copy), config (copy), GetTextSizeFunction (copy), FitChildrenModule (copy), RoactModule (copy), ImageSetLabel (copy), GetFFlagEnableAuditForSinglePageSignUpFunction (copy), RegisterAuditContentModule (copy), RegisterAdditionalAuditContentModule (copy), UrlBuilder (copy), ContextualMenu (copy), MenuDirection (copy), LinkButton (copy), NormalizeFontFaceFunction (copy), DisclaimerLinksVariantModule (copy), CryoModule (copy), createFoundationLink (copy), FFlagLuaAppAddTestIdsForArrow (copy), DisclaimerLinkButtonsModule (copy)
 	local IsDualLayout = p1.props.isDualLayout
 	local LoginView = p1.props.tokens.LuaApps.LoginView
 	local BoxPadding = if LoginView then LoginView.boxPadding else 4
@@ -122,9 +125,9 @@ function DisclaimerLinks.render(p1)
 		privacyPolicyText = "CommonUI.Features.Label.Privacy",
 		privacyPolicyTextLong = "CommonUI.Features.Label.PrivacyPolicy"
 	})(function(p2)
-		-- upvalues: WithStyleFunction (upval), p1 (copy), UiMode (upval), FFlagFoundationStylingOnSignUp (upval), config (upval), IsDualLayout (copy), GetTextSizeFunction (upval), BoxPadding (copy), FitChildrenModule (upval), RoactModule (upval), ImageSetLabel (upval), LoginView (copy), GetFFlagEnableAuditForSinglePageSignUpFunction (upval), RegisterAuditContentModule (upval), RegisterAdditionalAuditContentModule (upval), UrlBuilder (upval), ContextualMenu (upval), MenuDirection (upval), LinkButton (upval), NormalizeFontFaceFunction (upval), DisclaimerLinksVariantModule (upval), CryoModule (upval), createFoundationLink (upval), DisclaimerLinkButtonsModule (upval)
+		-- upvalues: WithStyleFunction (upval), p1 (copy), UiMode (upval), FFlagFoundationStylingOnSignUp (upval), config (upval), IsDualLayout (copy), GetTextSizeFunction (upval), BoxPadding (copy), FitChildrenModule (upval), RoactModule (upval), ImageSetLabel (upval), LoginView (copy), GetFFlagEnableAuditForSinglePageSignUpFunction (upval), RegisterAuditContentModule (upval), RegisterAdditionalAuditContentModule (upval), UrlBuilder (upval), ContextualMenu (upval), MenuDirection (upval), LinkButton (upval), NormalizeFontFaceFunction (upval), DisclaimerLinksVariantModule (upval), CryoModule (upval), createFoundationLink (upval), FFlagLuaAppAddTestIdsForArrow (upval), DisclaimerLinkButtonsModule (upval)
 		return WithStyleFunction(function(p3)
-			-- upvalues: p1 (upval), UiMode (upval), FFlagFoundationStylingOnSignUp (upval), config (upval), IsDualLayout (upval), p2 (copy), GetTextSizeFunction (upval), BoxPadding (upval), FitChildrenModule (upval), RoactModule (upval), ImageSetLabel (upval), LoginView (upval), GetFFlagEnableAuditForSinglePageSignUpFunction (upval), RegisterAuditContentModule (upval), RegisterAdditionalAuditContentModule (upval), UrlBuilder (upval), ContextualMenu (upval), MenuDirection (upval), LinkButton (upval), NormalizeFontFaceFunction (upval), DisclaimerLinksVariantModule (upval), CryoModule (upval), createFoundationLink (upval), DisclaimerLinkButtonsModule (upval)
+			-- upvalues: p1 (upval), UiMode (upval), FFlagFoundationStylingOnSignUp (upval), config (upval), IsDualLayout (upval), p2 (copy), GetTextSizeFunction (upval), BoxPadding (upval), FitChildrenModule (upval), RoactModule (upval), ImageSetLabel (upval), LoginView (upval), GetFFlagEnableAuditForSinglePageSignUpFunction (upval), RegisterAuditContentModule (upval), RegisterAdditionalAuditContentModule (upval), UrlBuilder (upval), ContextualMenu (upval), MenuDirection (upval), LinkButton (upval), NormalizeFontFaceFunction (upval), DisclaimerLinksVariantModule (upval), CryoModule (upval), createFoundationLink (upval), FFlagLuaAppAddTestIdsForArrow (upval), DisclaimerLinkButtonsModule (upval)
 			local IsUiModeMatch = p1.props.uiModeInfo.uiMode == UiMode.TenFoot
 			local LayoutOrder = p1.props.LayoutOrder
 			local Entry = if FFlagFoundationStylingOnSignUp then config[p1.props.variant] else nil
@@ -155,7 +158,7 @@ function DisclaimerLinks.render(p1)
 				}
 			end
 			
-			local function v56()
+			local function v57()
 				-- upvalues: p1 (upval), GetFFlagEnableAuditForSinglePageSignUpFunction (upval), RegisterAuditContentModule (upval), TermsOfUseTextLong (copy), RoactModule (upval), CommonUIFeaturesLabelTermsOfUse (copy), PrivacyPolicyTextLong (copy), CommonUIFeaturesLabelPrivacyPolicy (copy), IsDualLayout (upval), p2 (upval), RegisterAdditionalAuditContentModule (upval), UrlBuilder (upval)
 				return if p1.props.enableAuditContentCapture and GetFFlagEnableAuditForSinglePageSignUpFunction() then {
 					TermsAuditContent = RegisterAuditContentModule and (TermsOfUseTextLong and RoactModule.createElement(RegisterAuditContentModule, {
@@ -177,7 +180,7 @@ function DisclaimerLinks.render(p1)
 				} else {}
 			end
 			
-			local function v57()
+			local function v58()
 				-- upvalues: RoactModule (upval), XRatio (copy), IsDualLayout (upval), ContextualMenu (upval), TermsOfUseTextLong (copy), p3 (copy), p1 (upval), LoginView (upval), RenderRightSideGadget (copy), PrivacyPolicyTextLong (copy), MenuDirection (upval), LinkButton (upval), Entry (copy), X (copy), NormalizeFontFaceFunction (upval), BaseSize (copy)
 				return {
 					UIListLayout = RoactModule.createElement("UIListLayout", {
@@ -264,9 +267,9 @@ function DisclaimerLinks.render(p1)
 						HorizontalAlignment = Enum.HorizontalAlignment.Center,
 						SortOrder = Enum.SortOrder.LayoutOrder
 					}),
-					TermsOfUse = createFoundationLink(p2.termsOfUseText, p1.openTermsLink, 1, p1.props.underlineLinks, p1.props.underlinedLinkTextTag),
-					PrivacyPolicy = createFoundationLink(p2.privacyPolicyText, p1.openPrivacyLink, 2, p1.props.underlineLinks, p1.props.underlinedLinkTextTag)
-				}, (v56())))
+					TermsOfUse = createFoundationLink(p2.termsOfUseText, p1.openTermsLink, 1, p1.props.underlineLinks, p1.props.underlinedLinkTextTag, if FFlagLuaAppAddTestIdsForArrow then "--auth-disclaimer-link-terms" else nil),
+					PrivacyPolicy = createFoundationLink(p2.privacyPolicyText, p1.openPrivacyLink, 2, p1.props.underlineLinks, p1.props.underlinedLinkTextTag, if FFlagLuaAppAddTestIdsForArrow then "--auth-disclaimer-link-privacy" else nil)
+				}, (v57())))
 			elseif IsUiModeMatch then
 				return if GetFFlagEnableAuditForSinglePageSignUpFunction() then RoactModule.createFragment(CryoModule.Dictionary.join({
 					DisclaimerLinkButtons = RoactModule.createElement(DisclaimerLinkButtonsModule, {
@@ -278,7 +281,7 @@ function DisclaimerLinks.render(p1)
 						layoutOrder = LayoutOrder,
 						tokens = LoginView
 					})
-				}, (v56()))) else RoactModule.createElement(DisclaimerLinkButtonsModule, {
+				}, (v57()))) else RoactModule.createElement(DisclaimerLinkButtonsModule, {
 					textTos = TermsOfUseTextLong,
 					activatedTos = p1.openTermsLink,
 					textPrivacy = PrivacyPolicyTextLong,
@@ -295,7 +298,7 @@ function DisclaimerLinks.render(p1)
 					LayoutOrder = LayoutOrder
 				}
 				
-				return if GetFFlagEnableAuditForSinglePageSignUpFunction() then RoactModule.createElement(Frame, config1, CryoModule.Dictionary.join(v57(), (v56()))) else RoactModule.createElement(Frame, config1, (v57()))
+				return if GetFFlagEnableAuditForSinglePageSignUpFunction() then RoactModule.createElement(Frame, config1, CryoModule.Dictionary.join(v58(), (v57()))) else RoactModule.createElement(Frame, config1, (v58()))
 			end
 		end)
 	end)

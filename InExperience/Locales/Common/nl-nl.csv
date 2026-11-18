@@ -3565,6 +3565,7 @@ Feature.Friends.Label.FollowsYou,Volgt jou
 Feature.Friends.Label.Frequent,Samen gespeeld
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,Heeft je uitgenodigd om vrienden te zijn op Roblox
+Feature.Friends.Label.FriendOfUser,Vriend van {displayName}
 Feature.Friends.Label.FriendOwns,1 vriend bezit
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 vriend</b> speelde onlangs
 Feature.Friends.Label.FriendRequest,
@@ -3732,7 +3733,6 @@ Feature.Groups.Description.RequiresAccountTenureTooltipOneMonth,Je moet al 3 dag
 Feature.Groups.Description.RequiresAccountTenureTooltipOneWeek,
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeDays,
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeMonths,
-Feature.Groups.Header.UppercaseMyGroups,MIJN COMMUNITY'S
 Feature.Groups.Heading.Community,Community
 Feature.Groups.Heading.Followers,
 Feature.Groups.Heading.Groups,
@@ -3942,12 +3942,21 @@ Feature.Moments.Action.ShowDetails,Details weergeven
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Video inkorten
 Feature.Moments.Action.TryAgain,Nog een keer proberen
+Feature.Moments.Action.View,
 Feature.Moments.Action.ViewOtherFeed,Andere feed bekijken
 Feature.Moments.Action.ViewRecommended,Aanbevolen momenten bekijken
 Feature.Moments.Action.ViewTrending,Populaire momenten bekijken
 Feature.Moments.Body.EDPMomentIPReportInstructions,Ga naar de detailpagina van de game om een IP-overtreding in dit Moment te melden.
 Feature.Moments.Description.CommunityStandards,Lees de Communityrichtlijnen voor meer informatie over wat je wel en niet mag zeggen.
 Feature.Moments.Description.EmptyCapturesLibrary,Hier komen je opnames te staan.
+Feature.Moments.Description.EngagementFirstLike,Nu bekijken
+Feature.Moments.Description.EngagementFirstReaction,Je moment heeft zojuist zijn eerste reactie gekregen!
+Feature.Moments.Description.EngagementLikedCommentsDigest,{likedComments} van je reacties hebben likes gekregen
+Feature.Moments.Description.EngagementMomentDigest,{comments} nieuwe opmerkingen en {milestone} reacties
+Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementNewComment,heeft zojuist op je moment gereageerd
+Feature.Moments.Description.EngagementNewComments,en {count} anderen reageerden op je moment
+Feature.Moments.Description.EngagementReactionMilestone,{count} nieuwe reacties
 Feature.Moments.Description.FollowingCaughtUpBody,Je hebt alle nieuwe momenten in deze feed bekeken. Wissel van feed om er meer te bekijken.
 Feature.Moments.Description.FollowingEmptyBodyRecommended,Je ziet hier momenten van creators die je volgt.
 Feature.Moments.Description.FollowingEmptyBodyTrending,
@@ -4094,6 +4103,14 @@ Feature.Moments.Title.Comments,
 Feature.Moments.Title.CommentsWithCappedCount,{count}+ reacties
 Feature.Moments.Title.CommentsWithCount,{count} reacties
 Feature.Moments.Title.EDPMomentIPReportInstructions,Melden op de detailpagina van de game
+Feature.Moments.Title.EngagementFirstLike,Je hebt een like gekregen
+Feature.Moments.Title.EngagementFirstReaction,Nieuwe activiteit
+Feature.Moments.Title.EngagementLikedCommentsDigest,Nieuwe likes
+Feature.Moments.Title.EngagementMomentDigest,Je moment is populair
+Feature.Moments.Title.EngagementMomentsDigest,Je momenten zijn populair
+Feature.Moments.Title.EngagementNewComment,{name}
+Feature.Moments.Title.EngagementNewComments,
+Feature.Moments.Title.EngagementReactionMilestone,Je moment valt op
 Feature.Moments.Title.GenerateTextFeedbackReason,Wat is er misgegaan?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Moment maken afsluiten?

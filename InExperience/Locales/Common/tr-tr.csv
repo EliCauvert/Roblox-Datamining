@@ -3707,7 +3707,6 @@ Feature.Groups.Description.RequiresAccountTenureTooltipOneMonth,Bu topluluğa ka
 Feature.Groups.Description.RequiresAccountTenureTooltipOneWeek,Bu topluluğa katılabilmek için 7 gün önce bir hesabının bulunuyor olması gerekir.
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeDays,Bu topluluğa katılabilmek için 3 gün önce bir hesabının bulunuyor olması gerekir.
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeMonths,Bu topluluğa katılabilmek için 90 gün önce bir hesabının bulunuyor olması gerekir.
-Feature.Groups.Header.UppercaseMyGroups,TOPLULUKLARIM
 Feature.Groups.Heading.Community,Topluluk
 Feature.Groups.Heading.Followers,
 Feature.Groups.Heading.Groups,
@@ -3917,12 +3916,21 @@ Feature.Moments.Action.ShowDetails,Ayrıntıları göster
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Videoyu Kırp
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Action.View,
 Feature.Moments.Action.ViewOtherFeed,Diğer sayfayı görüntüle
 Feature.Moments.Action.ViewRecommended,Tavsiye Edilenleri Görüntüle
 Feature.Moments.Action.ViewTrending,Popüler Olanları Görüntüle
 Feature.Moments.Body.EDPMomentIPReportInstructions,Bu Anda bir fikrî mülkiyet ihlalini raporlamak için oyun detayları sayfasına devam et.
 Feature.Moments.Description.CommunityStandards,Ne söyleyip söyleyemeyeceğin hakkında daha fazla bilgi için Topluluk Standartlarını kontrol et.
 Feature.Moments.Description.EmptyCapturesLibrary,Yakalamaların burada görünecektir.
+Feature.Moments.Description.EngagementFirstLike,Şimdi görüntüle
+Feature.Moments.Description.EngagementFirstReaction,Anın az önce ilk tepkisini aldı!
+Feature.Moments.Description.EngagementLikedCommentsDigest,Yorumlarından {likedComments} tanesi beğenildi
+Feature.Moments.Description.EngagementMomentDigest,{comments} yeni yorum ve {milestone} tepki
+Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementNewComment,az önce Anına yorum yaptı
+Feature.Moments.Description.EngagementNewComments,"ve {count} diğer kişi, paylaştığın An hakkında yorum yaptı"
+Feature.Moments.Description.EngagementReactionMilestone,{count} yeni tepki
 Feature.Moments.Description.FollowingCaughtUpBody,Bu sayfadaki tüm yeni Anları izledin. Daha fazlasını görüntülemek için sayfa değiştir.
 Feature.Moments.Description.FollowingEmptyBodyRecommended,Takip ettiğin yaratıcıların Anlarını burada göreceksin.
 Feature.Moments.Description.FollowingEmptyBodyTrending,
@@ -4069,6 +4077,14 @@ Feature.Moments.Title.Comments,Yorumlar
 Feature.Moments.Title.CommentsWithCappedCount,En az {count} yorum
 Feature.Moments.Title.CommentsWithCount,{count} yorum
 Feature.Moments.Title.EDPMomentIPReportInstructions,Oyun detayları sayfasında raporla
+Feature.Moments.Title.EngagementFirstLike,Bir beğeni aldın
+Feature.Moments.Title.EngagementFirstReaction,Yeni etkinlik
+Feature.Moments.Title.EngagementLikedCommentsDigest,Yeni beğeniler
+Feature.Moments.Title.EngagementMomentDigest,Paylaştığın An popüler oldu
+Feature.Moments.Title.EngagementMomentsDigest,Paylaştığın Anlar popüler oldu
+Feature.Moments.Title.EngagementNewComment,{name}
+Feature.Moments.Title.EngagementNewComments,
+Feature.Moments.Title.EngagementReactionMilestone,Paylaştığın An dikkat çekiyor
 Feature.Moments.Title.GenerateTextFeedbackReason,Ne yanlış gitti?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,An yaratmadan çıkılsın mı?

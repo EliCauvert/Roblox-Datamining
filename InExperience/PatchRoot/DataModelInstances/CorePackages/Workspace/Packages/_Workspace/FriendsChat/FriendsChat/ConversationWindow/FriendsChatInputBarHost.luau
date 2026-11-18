@@ -19,6 +19,7 @@ local InterventionTreatmentShownSignal = InterventionSharedModule.Signals.interv
 local Constants = InterventionSharedModule.Utils.Constants
 local FFlagFriendsChatEnforceInputCharacterLimitModule = require(FriendsChat.Flags.FFlagFriendsChatEnforceInputCharacterLimit)
 local FFlagFriendsChatMessageComposerModule = require(FriendsChat.Flags.FFlagFriendsChatMessageComposer)
+local FFlagFriendsChatDictationFadeHoldModule = require(FriendsChat.Flags.FFlagFriendsChatDictationFadeHold)
 local FFlagAppChatReactiveFeatureRestrictions = require(Parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
 local FFlagExpChatComposerFigmaParity = require(Parent.SharedFlags).FFlagExpChatComposerFigmaParity
 local FFlagAppChatUniversalFeatureRestriction = require(Parent.SharedFlags).FFlagAppChatUniversalFeatureRestriction
@@ -39,12 +40,13 @@ local ChatInputBarView = ChatUIPrimitivesModule.ChatInputBarView
 local MessageComposerModule = require(Parent.ChatUIPrimitives.MessageComposer)
 local UseChatInputBarSettingsModule = require(Parent.ExpChatIntegration.useChatInputBarSettings)
 local UseChatInputBarOnFocusModule = require(Parent.ExpChatIntegration.useChatInputBarOnFocus)
+local UseChatInputBarOnDictationActiveChangedModule = require(Parent.ExpChatIntegration.useChatInputBarOnDictationActiveChanged)
 local UseChatWindowSettingsModule = require(Parent.ExpChatIntegration.useChatWindowSettings)
 local UseInterpolatedClientSettingsModule = require(Parent.ExpChatIntegration.useInterpolatedClientSettings)
 local Autocomplete = { commands = nil, emojis = true }
 
 return function(Frame)
-	-- upvalues: FoundationModule (copy), ExpChatConversationListAdapterModule (copy), UseChatTimeoutDetailsFromHydrationModule (copy), SignalsReactModule (copy), UseChatWindowSettingsModule (copy), ReactModule (copy), UseChatInputBarSettingsModule (copy), UseInExperienceLocalizationFunction (copy), ChatUIPrimitivesModule (copy), InputTypeConstants (copy), GetConversationInputPlaceholderModule (copy), UserInputService (copy), UseLocalizationFunction (copy), UseTelemetryModule (copy), ChatConversationTelemetryLayerModule (copy), UseInterpolatedClientSettingsModule (copy), UseChatInputBarOnFocusModule (copy), GetFriendsChatNavigationStoreModule (copy), FFlagFriendsChatConversationListFocusNav (copy), FFlagFriendsChatMessageComposerModule (copy), UseFocusConversationInputModule (copy), UseConsumeFocusInputBarRequestModule (copy), FFlagExpChatTabShortcutNav (copy), UseFocusBackButtonOnUpModule (copy), InterventionTreatmentShownSignal (copy), Constants (copy), SendFriendsChatMessageModule (copy), FFlagAppChatUniversalFeatureRestriction (copy), Parent (copy), FFlagAppChatReactiveFeatureRestrictions (copy), InterventionSharedModule (copy), ChatInputBoxDisabledPressedSignal (copy), ChatInputBoxDisabledModule (copy), UseFriendsChatComposerViewModelModule (copy), FFlagFriendsChatEnforceInputCharacterLimitModule (copy), MessageCharacterLimitModule (copy), MessageComposerModule (copy), ResolveFadeModule (copy), LayoutConstantsModule (copy), ChatInputBarView (copy), FFlagExpChatComposerFigmaParity (copy), Autocomplete (copy)
+	-- upvalues: FoundationModule (copy), ExpChatConversationListAdapterModule (copy), UseChatTimeoutDetailsFromHydrationModule (copy), SignalsReactModule (copy), UseChatWindowSettingsModule (copy), ReactModule (copy), UseChatInputBarSettingsModule (copy), UseInExperienceLocalizationFunction (copy), ChatUIPrimitivesModule (copy), InputTypeConstants (copy), GetConversationInputPlaceholderModule (copy), UserInputService (copy), UseLocalizationFunction (copy), UseTelemetryModule (copy), ChatConversationTelemetryLayerModule (copy), UseInterpolatedClientSettingsModule (copy), UseChatInputBarOnFocusModule (copy), GetFriendsChatNavigationStoreModule (copy), FFlagFriendsChatConversationListFocusNav (copy), FFlagFriendsChatMessageComposerModule (copy), UseFocusConversationInputModule (copy), UseConsumeFocusInputBarRequestModule (copy), FFlagExpChatTabShortcutNav (copy), UseFocusBackButtonOnUpModule (copy), InterventionTreatmentShownSignal (copy), Constants (copy), SendFriendsChatMessageModule (copy), FFlagAppChatUniversalFeatureRestriction (copy), Parent (copy), FFlagAppChatReactiveFeatureRestrictions (copy), InterventionSharedModule (copy), ChatInputBoxDisabledPressedSignal (copy), ChatInputBoxDisabledModule (copy), FFlagFriendsChatDictationFadeHoldModule (copy), UseChatInputBarOnDictationActiveChangedModule (copy), UseFriendsChatComposerViewModelModule (copy), FFlagFriendsChatEnforceInputCharacterLimitModule (copy), MessageCharacterLimitModule (copy), MessageComposerModule (copy), ResolveFadeModule (copy), LayoutConstantsModule (copy), ChatInputBarView (copy), FFlagExpChatComposerFigmaParity (copy), Autocomplete (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local ConversationId = Frame.conversationId
 	local IsFriendPlaceholder = ExpChatConversationListAdapterModule.isFriendPlaceholder(ConversationId)
@@ -260,7 +262,8 @@ return function(Frame)
 		maximumCharacterLimit = if FFlagFriendsChatEnforceInputCharacterLimitModule then MessageCharacterLimitModule else nil,
 		textBoxRef = Ref,
 		navigationTargetRef = UseRefResult1,
-		transparency = Frame.transparencyValue
+		transparency = Frame.transparencyValue,
+		onDictationActiveChanged = if FFlagFriendsChatDictationFadeHoldModule then UseChatInputBarOnDictationActiveChangedModule() else nil
 	}))) else nil
 	
 	return ReactModule.createElement("Frame", {

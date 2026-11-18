@@ -1,0 +1,1 @@
+﻿return game:DefineFastInt("GameItemDetailsTelemetryThrottleHundredthsPercent", 10000)

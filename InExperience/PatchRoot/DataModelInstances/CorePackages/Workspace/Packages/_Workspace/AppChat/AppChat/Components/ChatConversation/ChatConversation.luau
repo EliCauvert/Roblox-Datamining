@@ -15,6 +15,7 @@ local RoactNavigationModule = require(Parent.RoactNavigation)
 local MessageListModule = require(script.Parent.MessageList)
 local SignalsMigrationConfigModule = require(AppChat.Flags.SignalsMigrationConfig)
 local ReplyComposeBarContainerModule = require(script.Parent.ReplyComposeBarContainer)
+local MessageReactionsSheetModule = require(script.Parent.MessageReactions.MessageReactionsSheet)
 local ChatInputBarModule = if require(AppChat.Flags.FFlagAppChatNewChatInputBar) then require(script.Parent.ChatInputBar) else require(script.Parent.ChatInputBarDeprecated)
 local UserTypingIndicatorModule = require(script.Parent.UserTypingIndicator)
 local NewResult = require(AppChat.Logger):new(script.Name)
@@ -33,6 +34,7 @@ local FFlagAppChatSignalsReplyStoreModule = require(AppChat.Flags.FFlagAppChatSi
 local SmartSuggestionsChipRowContainerModule = require(script.Parent.SmartSuggestions.SmartSuggestionsChipRowContainer)
 local FFlagAppChatSmartSuggestionsModule = require(AppChat.Flags.FFlagAppChatSmartSuggestions)
 local GetEmojiSetsStoreModule = require(AppChat.Stores.GetEmojiSetsStore)
+local GetMessageReactionsSheetStoreModule = require(AppChat.Stores.GetMessageReactionsSheetStore)
 local FFlagAppChatEnableReactions = require(Parent.SharedFlags).FFlagAppChatEnableReactions
 local ConversationExitTypeModule = require(AppChat.Analytics.Enums.ConversationExitType)
 local SendMessageErrorModule = require(AppChat.Analytics.Enums.SendMessageError)
@@ -452,13 +454,18 @@ function ChatConversation.didMount(p1)
 end
 
 function ChatConversation.willUpdate(p1, p2, _)
+	-- upvalues: FFlagAppChatEnableReactions (copy), GetMessageReactionsSheetStoreModule (copy)
 	if p2.chatIsVisible ~= p1.props.chatIsVisible and not p2.chatIsVisible then
 		p1.closeKeyboard()
+		
+		if FFlagAppChatEnableReactions then
+			GetMessageReactionsSheetStoreModule(false).closeSheet()
+		end
 	end
 end
 
 function ChatConversation.didUpdate(p1, DefaultProps, p2)
-	-- upvalues: FFlagAppChatConsoleFocusFixesModule (copy), FFlagAppChatSignalsReplyStoreModule (copy), FFlagAppChatPerfTrackingModule (copy), FFlagAppChatScrollToLatestModule (copy), RoactModule (copy), FFlagAppChatEnableReactions (copy), GetEmojiSetsStoreModule (copy)
+	-- upvalues: FFlagAppChatConsoleFocusFixesModule (copy), FFlagAppChatSignalsReplyStoreModule (copy), FFlagAppChatPerfTrackingModule (copy), FFlagAppChatScrollToLatestModule (copy), RoactModule (copy), FFlagAppChatEnableReactions (copy), GetEmojiSetsStoreModule (copy), GetMessageReactionsSheetStoreModule (copy)
 	if p1.props.wideMode and p1.props.navigation.getParam("navigatedWithFocus") then
 		local Value = p1.inputBarRef:getValue()
 		p1.props.navigation.setParams({ navigatedWithFocus = false })
@@ -497,6 +504,7 @@ function ChatConversation.didUpdate(p1, DefaultProps, p2)
 		
 		if FFlagAppChatEnableReactions then
 			GetEmojiSetsStoreModule(false).getAndFetchEmojiSets()
+			GetMessageReactionsSheetStoreModule(false).closeSheet()
 		end
 	end
 	if FFlagAppChatPerfTrackingModule and DefaultProps.shouldShowChatInputBar ~= p1.props.shouldShowChatInputBar then
@@ -515,15 +523,20 @@ function ChatConversation.didUpdate(p1, DefaultProps, p2)
 end
 
 function ChatConversation.willUnmount(p1)
+	-- upvalues: FFlagAppChatEnableReactions (copy), GetMessageReactionsSheetStoreModule (copy)
 	p1.fireAnalyticsEventOnUnmount()
 	p1.closeReplying()
+	
+	if FFlagAppChatEnableReactions then
+		GetMessageReactionsSheetStoreModule(false).closeSheet()
+	end
 	p1.keyboardConnections = {}
 	p1.isMounted = false
 	p1.focusNavigationService:teardown()
 end
 
 function ChatConversation.render(p1)
-	-- upvalues: FFlagAppChatScrollToLatestModule (copy), SignalsMigrationConfigModule (copy), RoactModule (copy), AppChat (copy), ScrollToLatestButtonModule (copy), WithRoactChatAnalyticsModule (copy), WithStyleFunction (copy), WithChatPagePaddingModule (copy), KeyboardOffsetEventHandlerModule (copy), ConversationTopModalContainerModule (copy), MessageListModule (copy), UserTypingIndicatorModule (copy), ReactModule (copy), FoundationModule (copy), FFlagAppChatSignalsReplyStoreModule (copy), FFlagAppChatSmartSuggestionsModule (copy), SmartSuggestionsChipRowContainerModule (copy), ReplyComposeBarContainerModule (copy), ChatConversationMoreMenuModule (copy), ChatInputBarModule (copy), ConversationBottomModalContainerModule (copy)
+	-- upvalues: FFlagAppChatScrollToLatestModule (copy), SignalsMigrationConfigModule (copy), RoactModule (copy), AppChat (copy), ScrollToLatestButtonModule (copy), WithRoactChatAnalyticsModule (copy), WithStyleFunction (copy), WithChatPagePaddingModule (copy), KeyboardOffsetEventHandlerModule (copy), FFlagAppChatEnableReactions (copy), MessageReactionsSheetModule (copy), ConversationTopModalContainerModule (copy), MessageListModule (copy), UserTypingIndicatorModule (copy), ReactModule (copy), FoundationModule (copy), FFlagAppChatSignalsReplyStoreModule (copy), FFlagAppChatSmartSuggestionsModule (copy), SmartSuggestionsChipRowContainerModule (copy), ReplyComposeBarContainerModule (copy), ChatConversationMoreMenuModule (copy), ChatInputBarModule (copy), ConversationBottomModalContainerModule (copy)
 	local DisplayNamesAvailable = #p1.props.usersTyping > 0 and p1.props.displayNamesAvailable
 	local IsFriends: boolean = if p1.props.conversation then p1.props.conversation.source == "friends" else false
 	local Text = "MessageList" .. tostring(p1.props.conversationId)
@@ -561,11 +574,11 @@ function ChatConversation.render(p1)
 	}) else nil
 	
 	return WithRoactChatAnalyticsModule(function(p2)
-		-- upvalues: WithStyleFunction (upval), WithChatPagePaddingModule (upval), p1 (copy), RoactModule (upval), KeyboardOffsetEventHandlerModule (upval), ConversationTopModalContainerModule (upval), Element (copy), Text (copy), MessageListModule (upval), IsFriends (copy), OnScrolledAwayFromLatestChanged (copy), ScrollToLatestRef (copy), Element1 (copy), DisplayNamesAvailable (copy), UserTypingIndicatorModule (upval), ReactModule (upval), FoundationModule (upval), FFlagAppChatSignalsReplyStoreModule (upval), FFlagAppChatSmartSuggestionsModule (upval), SmartSuggestionsChipRowContainerModule (upval), ReplyComposeBarContainerModule (upval), ChatConversationMoreMenuModule (upval), ChatInputBarModule (upval), ConversationBottomModalContainerModule (upval)
+		-- upvalues: WithStyleFunction (upval), WithChatPagePaddingModule (upval), p1 (copy), RoactModule (upval), KeyboardOffsetEventHandlerModule (upval), FFlagAppChatEnableReactions (upval), MessageReactionsSheetModule (upval), ConversationTopModalContainerModule (upval), Element (copy), Text (copy), MessageListModule (upval), IsFriends (copy), OnScrolledAwayFromLatestChanged (copy), ScrollToLatestRef (copy), Element1 (copy), DisplayNamesAvailable (copy), UserTypingIndicatorModule (upval), ReactModule (upval), FoundationModule (upval), FFlagAppChatSignalsReplyStoreModule (upval), FFlagAppChatSmartSuggestionsModule (upval), SmartSuggestionsChipRowContainerModule (upval), ReplyComposeBarContainerModule (upval), ChatConversationMoreMenuModule (upval), ChatInputBarModule (upval), ConversationBottomModalContainerModule (upval)
 		return WithStyleFunction(function(p3)
-			-- upvalues: WithChatPagePaddingModule (upval), p1 (upval), RoactModule (upval), KeyboardOffsetEventHandlerModule (upval), ConversationTopModalContainerModule (upval), Element (upval), Text (upval), MessageListModule (upval), IsFriends (upval), OnScrolledAwayFromLatestChanged (upval), ScrollToLatestRef (upval), Element1 (upval), DisplayNamesAvailable (upval), UserTypingIndicatorModule (upval), ReactModule (upval), FoundationModule (upval), FFlagAppChatSignalsReplyStoreModule (upval), FFlagAppChatSmartSuggestionsModule (upval), SmartSuggestionsChipRowContainerModule (upval), ReplyComposeBarContainerModule (upval), ChatConversationMoreMenuModule (upval), ChatInputBarModule (upval), p2 (copy), ConversationBottomModalContainerModule (upval)
+			-- upvalues: WithChatPagePaddingModule (upval), p1 (upval), RoactModule (upval), KeyboardOffsetEventHandlerModule (upval), FFlagAppChatEnableReactions (upval), MessageReactionsSheetModule (upval), ConversationTopModalContainerModule (upval), Element (upval), Text (upval), MessageListModule (upval), IsFriends (upval), OnScrolledAwayFromLatestChanged (upval), ScrollToLatestRef (upval), Element1 (upval), DisplayNamesAvailable (upval), UserTypingIndicatorModule (upval), ReactModule (upval), FoundationModule (upval), FFlagAppChatSignalsReplyStoreModule (upval), FFlagAppChatSmartSuggestionsModule (upval), SmartSuggestionsChipRowContainerModule (upval), ReplyComposeBarContainerModule (upval), ChatConversationMoreMenuModule (upval), ChatInputBarModule (upval), p2 (copy), ConversationBottomModalContainerModule (upval)
 			return WithChatPagePaddingModule(function(p4)
-				-- upvalues: p1 (upval), RoactModule (upval), p3 (copy), KeyboardOffsetEventHandlerModule (upval), ConversationTopModalContainerModule (upval), Element (upval), Text (upval), MessageListModule (upval), IsFriends (upval), OnScrolledAwayFromLatestChanged (upval), ScrollToLatestRef (upval), Element1 (upval), DisplayNamesAvailable (upval), UserTypingIndicatorModule (upval), ReactModule (upval), FoundationModule (upval), FFlagAppChatSignalsReplyStoreModule (upval), FFlagAppChatSmartSuggestionsModule (upval), SmartSuggestionsChipRowContainerModule (upval), ReplyComposeBarContainerModule (upval), ChatConversationMoreMenuModule (upval), ChatInputBarModule (upval), p2 (upval), ConversationBottomModalContainerModule (upval)
+				-- upvalues: p1 (upval), RoactModule (upval), p3 (copy), KeyboardOffsetEventHandlerModule (upval), FFlagAppChatEnableReactions (upval), MessageReactionsSheetModule (upval), ConversationTopModalContainerModule (upval), Element (upval), Text (upval), MessageListModule (upval), IsFriends (upval), OnScrolledAwayFromLatestChanged (upval), ScrollToLatestRef (upval), Element1 (upval), DisplayNamesAvailable (upval), UserTypingIndicatorModule (upval), ReactModule (upval), FoundationModule (upval), FFlagAppChatSignalsReplyStoreModule (upval), FFlagAppChatSmartSuggestionsModule (upval), SmartSuggestionsChipRowContainerModule (upval), ReplyComposeBarContainerModule (upval), ChatConversationMoreMenuModule (upval), ChatInputBarModule (upval), p2 (upval), ConversationBottomModalContainerModule (upval)
 				return RoactModule.createElement("TextButton", {
 					AutoButtonColor = false,
 					BackgroundColor3 = p3.Theme.BackgroundDefault.Color,
@@ -582,6 +595,7 @@ function ChatConversation.render(p1)
 						onKeyboardOffsetChanged = p1.onKeyboardOffsetChanged,
 						parentViewRef = p1.conversationViewRef
 					}),
+					MessageReactionsSheet = if FFlagAppChatEnableReactions then RoactModule.createElement(MessageReactionsSheetModule) else nil,
 					Layout = RoactModule.createElement("UIListLayout", {
 						HorizontalAlignment = if p1.isMoreMenuEnabled() then nil else Enum.HorizontalAlignment.Right,
 						SortOrder = Enum.SortOrder.LayoutOrder

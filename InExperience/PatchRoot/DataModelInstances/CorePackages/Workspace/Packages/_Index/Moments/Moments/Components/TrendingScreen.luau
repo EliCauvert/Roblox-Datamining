@@ -5,6 +5,7 @@ local AppNavBarModule = require(Parent.AppNavBar)
 local AppPage = require(Parent.RobloxAppEnums).AppPage
 local RobloxAppEventsModule = require(Parent.RobloxAppEvents)
 local RoactNavigationModule = require(Parent.RoactNavigation)
+local UseNavigationFocusFunction = require(Parent.Navigation).useNavigationFocus
 local View = require(Parent.Foundation).View
 local TopBarModule = require(Moments.Components.TopBar)
 local MomentsFeedSurfaceModule = require(Moments.Components.MomentsFeedSurface)
@@ -19,6 +20,8 @@ local UseMomentsTabIsVisibleModule = require(Moments.Hooks.useMomentsTabIsVisibl
 local GetMomentsPreferencesStoreModule = require(Moments.Stores.GetMomentsPreferencesStore)
 local NavigationDestinationTypeModule = require(Moments.Enums.NavigationDestinationType)
 local FFlagMomentsNavigationEventModule = require(Moments.Flags.FFlagMomentsNavigationEvent)
+local FFlagMomentsEngagementToastsModule = require(Moments.Flags.FFlagMomentsEngagementToasts)
+local UseEngagementToastSurfaceModule = if FFlagMomentsEngagementToastsModule then require(Moments.Engagement.useEngagementToastSurface) else nil
 local FFlagMomentsFixRecommendationImpressionLifecycleModule = require(Moments.Flags.FFlagMomentsFixRecommendationImpressionLifecycle)
 local FFlagMomentsFlushDwellBeforeNavigationModule = require(Moments.Flags.FFlagMomentsFlushDwellBeforeNavigation)
 local FFlagMomentsPersonalizedRecommendationsEntryPointModule = require(Moments.Flags.FFlagMomentsPersonalizedRecommendationsEntryPoint)
@@ -77,8 +80,19 @@ local function _()
 	return MomentsUpload
 end
 
+local _ = function(p1, p2)
+	-- upvalues: UseNavigationFocusFunction (copy), UseMomentsTabIsVisibleModule (copy), UseEngagementToastSurfaceModule (copy)
+	local UseNavigationFocusResult = UseNavigationFocusFunction()
+	local UseMomentsTabIsVisibleModuleResult = UseMomentsTabIsVisibleModule()
+	local UseMomentsTabIsVisibleModuleResult1 = UseNavigationFocusResult and UseMomentsTabIsVisibleModuleResult or p1
+	
+	if UseEngagementToastSurfaceModule ~= nil then
+		UseEngagementToastSurfaceModule(UseMomentsTabIsVisibleModuleResult1, p2)
+	end
+end
+
 return function(p1)
-	-- upvalues: ReactModule (copy), MomentsLocalStorageModule (copy), MomentsLocalStorageKeysModule (copy), UseScreenBottomInsetModule (copy), UseFeedPlaybackActiveModule (copy), FFlagMomentsNavigationEventModule (copy), UseMomentsTabIsVisibleModule (copy), SignalsReactModule (copy), GetMomentsPreferencesStoreModule (copy), UseMomentsSessionFunction (copy), UseMomentsHostFunction (copy), FFlagMomentsCreateAvatarPosts (copy), UseMomentsGatingFunction (copy), UseCreationEntryModule (copy), UseUploadHostModule (copy), FFlagMomentsPostFeedback (copy), FFlagMomentsPostFeedbackIxpEnabledModule (copy), SessionManager (copy), FunnelEventNames (copy), FireFunnelAnalyticsEventFunction (copy), IsStudioModule (copy), GetFFlagArgusStudioMockFeedModule (copy), CreateMockFeedSourceFunction (copy), CreateMomentsFeedSourceModule (copy), SignalTracker (copy), FFlagEnableArgus (copy), CreateRecommendationTelemetryFunction (copy), FFlagMomentsRecommendationFeedTypeModule (copy), MomentsFeedTypeModule (copy), FFlagMomentsFollowingFeedModule (copy), FFlagMomentsHideNavBarOnScrollModule (copy), MomentsCommonModule (copy), AppNavBarModule (copy), FIntMomentsNavBarHideAfterSwipesModule (copy), GetImmersiveChromeStoreModule (copy), ReportModalCovering (copy), FFlagMomentsPersonalizedRecommendationsEntryPointModule (copy), AccountSettingsCoveringModule (copy), FFlagMomentsFixRecommendationImpressionLifecycleModule (copy), NavigationDestinationTypeModule (copy), LogCreateIntentModule (copy), UseFeedSelectionModule (copy), FFlagMomentsFlushDwellBeforeNavigationModule (copy), RoactNavigationModule (copy), RobloxAppEventsModule (copy), AppPage (copy), GetUploadStoreModule (copy), MomentsUpload (ref), Parent (copy), FireAnalyticsEventFunction (copy), EventNames (copy), TopBarModule (copy), FFlagMomentsFixFeedForDeviceSafeInsetsModule (copy), ShouldUseDeviceSafeInsets (copy), MomentOverlayInsetContextModule (copy), FFlagMomentsFeedAboveNavBarModule (copy), View (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), ShouldUseDeviceSafeInsets1 (copy), ConstantsModule (copy), FeedSwitchFadeModule (copy), MomentsFeedSurfaceModule (copy), MomentUnavailableDialogModule (copy), CreationFlowScreen (copy), FTUXEducationScreenModule (copy)
+	-- upvalues: ReactModule (copy), MomentsLocalStorageModule (copy), MomentsLocalStorageKeysModule (copy), UseScreenBottomInsetModule (copy), UseFeedPlaybackActiveModule (copy), FFlagMomentsNavigationEventModule (copy), UseMomentsTabIsVisibleModule (copy), SignalsReactModule (copy), GetMomentsPreferencesStoreModule (copy), UseMomentsSessionFunction (copy), UseMomentsHostFunction (copy), FFlagMomentsCreateAvatarPosts (copy), UseMomentsGatingFunction (copy), UseCreationEntryModule (copy), UseUploadHostModule (copy), FFlagMomentsPostFeedback (copy), FFlagMomentsPostFeedbackIxpEnabledModule (copy), SessionManager (copy), FunnelEventNames (copy), FireFunnelAnalyticsEventFunction (copy), IsStudioModule (copy), GetFFlagArgusStudioMockFeedModule (copy), CreateMockFeedSourceFunction (copy), CreateMomentsFeedSourceModule (copy), SignalTracker (copy), FFlagEnableArgus (copy), CreateRecommendationTelemetryFunction (copy), FFlagMomentsRecommendationFeedTypeModule (copy), MomentsFeedTypeModule (copy), FFlagMomentsFollowingFeedModule (copy), FFlagMomentsHideNavBarOnScrollModule (copy), MomentsCommonModule (copy), AppNavBarModule (copy), FIntMomentsNavBarHideAfterSwipesModule (copy), GetImmersiveChromeStoreModule (copy), ReportModalCovering (copy), FFlagMomentsPersonalizedRecommendationsEntryPointModule (copy), AccountSettingsCoveringModule (copy), FFlagMomentsFixRecommendationImpressionLifecycleModule (copy), FFlagMomentsEngagementToastsModule (copy), UseNavigationFocusFunction (copy), UseEngagementToastSurfaceModule (copy), NavigationDestinationTypeModule (copy), LogCreateIntentModule (copy), UseFeedSelectionModule (copy), FFlagMomentsFlushDwellBeforeNavigationModule (copy), RoactNavigationModule (copy), RobloxAppEventsModule (copy), AppPage (copy), GetUploadStoreModule (copy), MomentsUpload (ref), Parent (copy), FireAnalyticsEventFunction (copy), EventNames (copy), TopBarModule (copy), FFlagMomentsFixFeedForDeviceSafeInsetsModule (copy), ShouldUseDeviceSafeInsets (copy), MomentOverlayInsetContextModule (copy), FFlagMomentsFeedAboveNavBarModule (copy), View (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), ShouldUseDeviceSafeInsets1 (copy), ConstantsModule (copy), FeedSwitchFadeModule (copy), MomentsFeedSurfaceModule (copy), MomentUnavailableDialogModule (copy), CreationFlowScreen (copy), FTUXEducationScreenModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): boolean
 		-- upvalues: MomentsLocalStorageModule (upval), MomentsLocalStorageKeysModule (upval)
 		return not MomentsLocalStorageModule.getField(MomentsLocalStorageKeysModule.CreateTooltipSeen)
@@ -150,6 +164,16 @@ return function(p1)
 	
 	if FFlagMomentsFixRecommendationImpressionLifecycleModule then
 		NoUseSignalStateResult3 = NoUseSignalStateResult3 and UseFeedPlaybackActiveModuleResult
+	end
+	if FFlagMomentsEngagementToastsModule then
+		local Inverted = not (NoUseSignalStateResult3 and UseFeedPlaybackActiveModuleResult) or UseCreationEntryModuleResult.showFtux
+		local UseNavigationFocusResult = UseNavigationFocusFunction()
+		local UseMomentsTabIsVisibleModuleResult = UseMomentsTabIsVisibleModule()
+		local UseMomentsTabIsVisibleModuleResult1 = UseNavigationFocusResult and UseMomentsTabIsVisibleModuleResult or UseSignalStateResult1
+		
+		if UseEngagementToastSurfaceModule ~= nil then
+			UseEngagementToastSurfaceModule(UseMomentsTabIsVisibleModuleResult1, Inverted)
+		end
 	end
 	local NoUseSignalStateResult3_1: boolean = UseFeedPlaybackActiveModuleResult and (not UseCreationEntryModuleResult.isCreating and (not UseStateResult1 and (not UseSignalStateResult2 and not UseSignalStateResult3)))
 	local ExperienceJoin = if FFlagMomentsNavigationEventModule then if UseSignalStateResult then NavigationDestinationTypeModule.ExperienceJoin elseif UseCreationEntryModuleResult.isCreating then NavigationDestinationTypeModule.Create elseif UseSignalStateResult2 then NavigationDestinationTypeModule.Report elseif v1 then nil else NavigationDestinationTypeModule.Exit else nil

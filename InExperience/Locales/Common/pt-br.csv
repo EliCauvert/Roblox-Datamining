@@ -3583,6 +3583,7 @@ Feature.Friends.Label.FollowsYou,Segue você
 Feature.Friends.Label.Frequent,Jogaram juntos(as)
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,Convidou você para ser uma amizade na Roblox
+Feature.Friends.Label.FriendOfUser,Amizade de {displayName}
 Feature.Friends.Label.FriendOwns,1 amizade tem
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 amizade</b> jogou recentemente
 Feature.Friends.Label.FriendRequest,Solicitação de amizade
@@ -3750,7 +3751,6 @@ Feature.Groups.Description.RequiresAccountTenureTooltipOneMonth,Sua conta deve t
 Feature.Groups.Description.RequiresAccountTenureTooltipOneWeek,Sua conta deve ter 7 dias para você poder entrar nesta comunidade.
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeDays,Sua conta deve ter 3 dias para você poder entrar nesta comunidade.
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeMonths,Sua conta deve ter 90 dias para você poder entrar nesta comunidade.
-Feature.Groups.Header.UppercaseMyGroups,MINHAS COMUNIDADES
 Feature.Groups.Heading.Community,Comunidade
 Feature.Groups.Heading.Followers,
 Feature.Groups.Heading.Groups,
@@ -3960,12 +3960,21 @@ Feature.Moments.Action.ShowDetails,Mostrar detalhes
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Cortar vídeo
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Action.View,
 Feature.Moments.Action.ViewOtherFeed,Ver outro feed
 Feature.Moments.Action.ViewRecommended,Ver recomendações
 Feature.Moments.Action.ViewTrending,Ver o que está em alta
 Feature.Moments.Body.EDPMomentIPReportInstructions,"Para denunciar uma violação de PI neste Momento, continue para a página de detalhes do jogo."
 Feature.Moments.Description.CommunityStandards,Consulte as Regras da Comunidade para obter mais informações sobre o que você pode e não pode dizer.
 Feature.Moments.Description.EmptyCapturesLibrary,É aqui que você encontrará suas capturas.
+Feature.Moments.Description.EngagementFirstLike,Veja agora
+Feature.Moments.Description.EngagementFirstReaction,Seu Momento acabou de receber sua primeira reação!
+Feature.Moments.Description.EngagementLikedCommentsDigest,{likedComments} dos seus comentários receberam curtidas
+Feature.Moments.Description.EngagementMomentDigest,{comments} novos comentários e {milestone} reações
+Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementNewComment,acabou de comentar no seu Momento
+Feature.Moments.Description.EngagementNewComments,e mais {count} pessoas comentaram no seu Momento
+Feature.Moments.Description.EngagementReactionMilestone,{count} novas reações
 Feature.Moments.Description.FollowingCaughtUpBody,Você assistiu a todos os novos Momentos neste feed. Mude para outro feed para ver mais.
 Feature.Moments.Description.FollowingEmptyBodyRecommended,Você verá aqui os Momentos dos criadores que segue.
 Feature.Moments.Description.FollowingEmptyBodyTrending,
@@ -4112,6 +4121,14 @@ Feature.Moments.Title.Comments,Comentários
 Feature.Moments.Title.CommentsWithCappedCount,Mais de {count} comentários
 Feature.Moments.Title.CommentsWithCount,{count} comentários
 Feature.Moments.Title.EDPMomentIPReportInstructions,Denunciar na página de detalhes do jogo
+Feature.Moments.Title.EngagementFirstLike,Você recebeu uma curtida
+Feature.Moments.Title.EngagementFirstReaction,Nova atividade
+Feature.Moments.Title.EngagementLikedCommentsDigest,Novas curtidas
+Feature.Moments.Title.EngagementMomentDigest,Seu Momento está bombando
+Feature.Moments.Title.EngagementMomentsDigest,Seus Momentos estão bombando
+Feature.Moments.Title.EngagementNewComment,{name}
+Feature.Moments.Title.EngagementNewComments,
+Feature.Moments.Title.EngagementReactionMilestone,Seu Momento está chamando atenção
 Feature.Moments.Title.GenerateTextFeedbackReason,O que deu errado?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Sair da criação de Momento?

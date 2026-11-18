@@ -8,8 +8,9 @@ local _ = require(Parent.VideoUtils)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagLuaAppEnableReportExperience = SharedFlagsModule.FFlagLuaAppEnableReportExperience
 local FFlagLuaAppEnableOneByTwoTileFunnelTelemetry = SharedFlagsModule.FFlagLuaAppEnableOneByTwoTileFunnelTelemetry
+local FFlagLuaAppSponsoredTileFootnoteText = SharedFlagsModule.FFlagLuaAppSponsoredTileFootnoteText
 local MemoResult = ReactModule.memo(function(p1)
-	-- upvalues: GetTileBadgeByPositionConfigFromEntryFunction (copy), ReactModule (copy), OneByTwoTileModule (copy), FFlagLuaAppEnableReportExperience (copy), FFlagLuaAppEnableOneByTwoTileFunnelTelemetry (copy)
+	-- upvalues: GetTileBadgeByPositionConfigFromEntryFunction (copy), ReactModule (copy), OneByTwoTileModule (copy), FFlagLuaAppSponsoredTileFootnoteText (copy), FFlagLuaAppEnableReportExperience (copy), FFlagLuaAppEnableOneByTwoTileFunnelTelemetry (copy)
 	local Negated = -((p1.maxItemIndex or 0) + 1)
 	
 	return ReactModule.createElement(OneByTwoTileModule, {
@@ -36,6 +37,7 @@ local MemoResult = ReactModule.memo(function(p1)
 		headline = p1.item.headline,
 		subtitle = p1.item.subtitle,
 		ctaText = p1.item.ctaText or "",
+		footnoteText = if FFlagLuaAppSponsoredTileFootnoteText then p1.item.footnoteText else nil,
 		adId = p1.item.adId,
 		impressionsTag = p1.impressionsTag,
 		index = p1.index,

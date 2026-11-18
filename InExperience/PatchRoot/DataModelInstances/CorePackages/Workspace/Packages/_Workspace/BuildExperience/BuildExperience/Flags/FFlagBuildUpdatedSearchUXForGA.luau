@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("BuildUpdatedSearchUXForGA", false)
+﻿return game:DefineFastFlag("BuildUpdatedSearchUXForGA2", false)

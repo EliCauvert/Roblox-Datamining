@@ -3581,6 +3581,7 @@ Feature.Friends.Label.FollowsYou,Mengikuti Kamu
 Feature.Friends.Label.Frequent,Dimainkan bersama
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,Mengundang kamu untuk berteman di Roblox
+Feature.Friends.Label.FriendOfUser,Teman dari {displayName}
 Feature.Friends.Label.FriendOwns,1 Teman memiliki
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 Teman</b> telah bermain baru-baru ini
 Feature.Friends.Label.FriendRequest,
@@ -3748,7 +3749,6 @@ Feature.Groups.Description.RequiresAccountTenureTooltipOneMonth,Kamu harus memil
 Feature.Groups.Description.RequiresAccountTenureTooltipOneWeek,Kamu harus memiliki akun selama 7 hari sebelum dapat bergabung ke komunitas ini.
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeDays,Kamu harus memiliki akun selama 3 hari sebelum dapat bergabung ke komunitas ini.
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeMonths,Kamu harus memiliki akun selama 90 hari sebelum dapat bergabung ke komunitas ini.
-Feature.Groups.Header.UppercaseMyGroups,KOMUNITAS SAYA
 Feature.Groups.Heading.Community,
 Feature.Groups.Heading.Followers,
 Feature.Groups.Heading.Groups,
@@ -3958,12 +3958,21 @@ Feature.Moments.Action.ShowDetails,Tampilkan detail
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,Potong Video
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Action.View,
 Feature.Moments.Action.ViewOtherFeed,Lihat feed lainnya
 Feature.Moments.Action.ViewRecommended,Lihat yang Direkomendasikan
 Feature.Moments.Action.ViewTrending,Lihat yang Sedang Tren
 Feature.Moments.Body.EDPMomentIPReportInstructions,"Untuk melaporkan pelanggaran IP di Momen ini, lanjutkan ke halaman detail game."
 Feature.Moments.Description.CommunityStandards,Periksa Standar Komunitas untuk melihat informasi selengkapnya tentang hal yang boleh dan tidak boleh kamu katakan.
 Feature.Moments.Description.EmptyCapturesLibrary,Mediamu akan muncul di sini.
+Feature.Moments.Description.EngagementFirstLike,Lihat sekarang
+Feature.Moments.Description.EngagementFirstReaction,Moment-mu baru saja mendapat reaksi pertama.
+Feature.Moments.Description.EngagementLikedCommentsDigest,{likedComments} komentarmu mendapat suka
+Feature.Moments.Description.EngagementMomentDigest,{comments} komentar baru dan {milestone} reaksi
+Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementNewComment,baru saja mengomentari Moment-mu
+Feature.Moments.Description.EngagementNewComments,dan {count} orang lainnya mengomentari Moment-mu
+Feature.Moments.Description.EngagementReactionMilestone,{count} reaksi baru
 Feature.Moments.Description.FollowingCaughtUpBody,Kamu sudah menonton semua Moment baru di feed ini. Beralih feed untuk melihat lebih banyak.
 Feature.Moments.Description.FollowingEmptyBodyRecommended,Kamu akan melihat Moment dari kreator yang kamu ikuti di sini.
 Feature.Moments.Description.FollowingEmptyBodyTrending,
@@ -4110,6 +4119,14 @@ Feature.Moments.Title.Comments,Komentar
 Feature.Moments.Title.CommentsWithCappedCount,{count}+ komentar
 Feature.Moments.Title.CommentsWithCount,{count} komentar
 Feature.Moments.Title.EDPMomentIPReportInstructions,Laporkan di halaman detail game
+Feature.Moments.Title.EngagementFirstLike,Kamu mendapat suka
+Feature.Moments.Title.EngagementFirstReaction,Aktivitas baru
+Feature.Moments.Title.EngagementLikedCommentsDigest,Suka baru
+Feature.Moments.Title.EngagementMomentDigest,Moment-mu sedang populer
+Feature.Moments.Title.EngagementMomentsDigest,
+Feature.Moments.Title.EngagementNewComment,{name}
+Feature.Moments.Title.EngagementNewComments,
+Feature.Moments.Title.EngagementReactionMilestone,Moment-mu mulai menarik perhatian
 Feature.Moments.Title.GenerateTextFeedbackReason,Apa masalahnya?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,Keluar dari kreasi Moment?

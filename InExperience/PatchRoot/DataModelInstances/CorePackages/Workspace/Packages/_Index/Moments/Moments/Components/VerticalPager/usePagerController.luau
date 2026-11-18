@@ -11,11 +11,13 @@ local _ = require(script.Parent.Types)
 local SnapMathModule = require(script.Parent.snapMath)
 local PagerNavigationModule = require(script.Parent.pagerNavigation)
 local CreateDragTravelTrackerModule = require(script.Parent.createDragTravelTracker)
+local PagerPressBlockersModule = require(script.Parent.pagerPressBlockers)
+local FFlagMomentsEngagementToastSwipeModule = require(Moments.Flags.FFlagMomentsEngagementToastSwipe)
 local FFlagMomentsHideNavBarOnScrollModule = require(Moments.Flags.FFlagMomentsHideNavBarOnScroll)
 local UsePreferencesFunction = FoundationModule.Hooks.usePreferences
 
 return function(p1)
-	-- upvalues: ReactModule (copy), UsePreferencesFunction (copy), SignalsModule (copy), FFlagMomentsHideNavBarOnScrollModule (copy), CreateDragTravelTrackerModule (copy), RunService (copy), ConstantsModule (copy), SnapMathModule (copy), PagerNavigationModule (copy), UserInputService (copy), SignalsReactModule (copy)
+	-- upvalues: ReactModule (copy), UsePreferencesFunction (copy), SignalsModule (copy), FFlagMomentsHideNavBarOnScrollModule (copy), CreateDragTravelTrackerModule (copy), RunService (copy), ConstantsModule (copy), SnapMathModule (copy), PagerNavigationModule (copy), UserInputService (copy), FFlagMomentsEngagementToastSwipeModule (copy), PagerPressBlockersModule (copy), SignalsReactModule (copy)
 	local ScrollingFrame = p1.scrollingFrame
 	local Store = p1.store
 	local ItemHeight = p1.itemHeight
@@ -325,7 +327,7 @@ return function(p1)
 		end
 	end, { ScrollingFrame, Active, UseResult1, UseResult5 })
 	ReactModule.useEffect(function()
-		-- upvalues: ScrollingFrame (copy), Active (copy), PagerNavigationModule (upval), NativeScrollEnabled (copy), UseRefResult13 (copy), UserInputService (upval), UseRefResult12 (copy), UseRefResult14 (copy), UseResult3 (copy), UseResult (copy), UseMemoResult2 (ref), ConstantsModule (upval), UseResult6 (copy), UseRefResult15 (copy), UseResult5 (copy), UseRefResult (copy)
+		-- upvalues: ScrollingFrame (copy), Active (copy), PagerNavigationModule (upval), NativeScrollEnabled (copy), UseRefResult13 (copy), UserInputService (upval), FFlagMomentsEngagementToastSwipeModule (upval), PagerPressBlockersModule (upval), UseRefResult12 (copy), UseRefResult14 (copy), UseResult3 (copy), UseResult (copy), UseMemoResult2 (ref), ConstantsModule (upval), UseResult6 (copy), UseRefResult15 (copy), UseResult5 (copy), UseRefResult (copy)
 		if not ScrollingFrame or not Active then return end
 		local function _(Input): boolean
 			return Input.UserInputType == Enum.UserInputType.Touch or Input.UserInputType == Enum.UserInputType.MouseButton1
@@ -344,7 +346,8 @@ return function(p1)
 		end
 		
 		local InputBeganConnection = UserInputService.InputBegan:Connect(function(Input)
-			-- upvalues: ShouldTrackDrag (copy), UseRefResult13 (upval), ScrollingFrame (copy), UseRefResult12 (upval), UseRefResult14 (upval), UseResult3 (upval), UseResult (upval), UseMemoResult2 (upval)
+			-- upvalues: FFlagMomentsEngagementToastSwipeModule (upval), PagerPressBlockersModule (upval), ShouldTrackDrag (copy), UseRefResult13 (upval), ScrollingFrame (copy), UseRefResult12 (upval), UseRefResult14 (upval), UseResult3 (upval), UseResult (upval), UseMemoResult2 (upval)
+			if FFlagMomentsEngagementToastSwipeModule and PagerPressBlockersModule.isBlocked(Input.Position) then return end
 			if ShouldTrackDrag and ((Input.UserInputType == Enum.UserInputType.Touch or Input.UserInputType == Enum.UserInputType.MouseButton1) and not UseRefResult13.current[Input]) then
 				local Position = Input.Position
 				local AbsolutePosition = ScrollingFrame.AbsolutePosition

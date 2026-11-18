@@ -169,6 +169,7 @@
 	BadgesSeeAll = "BadgesSeeAll",
 	BadgeDetails = "BadgeDetails",
 	DevStoreSeeAll = "DevStoreSeeAll",
+	GameItemDetails = "GameItemDetails",
 	ExperienceLeaderboardSeeAll = "ExperienceLeaderboardSeeAll",
 	UserLibrary = "UserLibrary",
 	UserLibraryCollection = "UserLibraryCollection",

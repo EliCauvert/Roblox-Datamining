@@ -16,6 +16,7 @@ return function(p1)
 	local OnSendFunction = p1.onSend
 	local OnFocusGainedFunction = p1.onFocusGained
 	local OnFocusLostFunction = p1.onFocusLost
+	local OnDictationActiveChanged = p1.onDictationActiveChanged
 	
 	return {
 		chatAvailability = ReactModule.useMemo(function()
@@ -48,9 +49,13 @@ return function(p1)
 			}
 		end, {}),
 		dictation = if FFlagFriendsChatVoiceTypingModule then ReactModule.useMemo(function()
-			-- upvalues: NewResult (upval)
-			return { surfaceName = "FriendsChat", logger = NewResult }
-		end, {}) else nil,
+			-- upvalues: NewResult (upval), OnDictationActiveChanged (copy)
+			return {
+				surfaceName = "FriendsChat",
+				logger = NewResult,
+				onActiveChanged = OnDictationActiveChanged
+			}
+		end, { OnDictationActiveChanged }) else nil,
 		onFocusChanged = ReactModule.useCallback(function(p2)
 			-- upvalues: OnFocusGainedFunction (copy), OnFocusLostFunction (copy)
 			if p2 then

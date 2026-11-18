@@ -2470,7 +2470,7 @@ Feature.Build.Label.ToolLogsDone,تم طلب السجلات
 Feature.Build.Label.ToolLogsFailed,تعذَّر طلب السجلات
 Feature.Build.Label.ToolLogsRunning,جارٍ طلب السجلات
 Feature.Build.Label.ToolLuauDone,تم تنفيذ Luau
-Feature.Build.Label.ToolLuauFailed,تعذَّر تنفيذ Luau
+Feature.Build.Label.ToolLuauFailed,تعذّر تنفيذ Luau
 Feature.Build.Label.ToolLuauRunning,جارٍ تنفيذ Luau
 Feature.Build.Label.ToolModelDone,تم إنشاء النموذج ثلاثي الأبعاد
 Feature.Build.Label.ToolModelFailed,تعذَّر إنشاء النموذج ثلاثي الأبعاد
@@ -2491,7 +2491,7 @@ Feature.Build.Label.ToolReqUpdateDone,تم تحديث المتطلبات
 Feature.Build.Label.ToolReqUpdateFailed,تعذَّر تحديث المتطلبات
 Feature.Build.Label.ToolReqUpdateRunning,جارٍ تحديث المتطلبات
 Feature.Build.Label.ToolRestoreVersionDone,تمت استعادة الإصدار
-Feature.Build.Label.ToolRestoreVersionFailed,تعذَّرت استعادة الإصدار
+Feature.Build.Label.ToolRestoreVersionFailed,تعذّرت استعادة الإصدار
 Feature.Build.Label.ToolRestoreVersionRunning,جارٍ استعادة الإصدار
 Feature.Build.Label.ToolScriptDone,تم تشغيل النص البرمجي
 Feature.Build.Label.ToolScriptFailed,تعذَّر تشغيل النص البرمجي
@@ -3223,14 +3223,17 @@ Feature.Chat.Label.OneToOne.ThemRepliedToYou,أجابك
 Feature.Chat.Label.OneToOne.YouRepliedToThem,أنت أجبت
 Feature.Chat.Label.Pending,معلق
 Feature.Chat.Label.PrivacySettings,إعدادات الخصوصية
+Feature.Chat.Label.Reactions,التفاعلات
 Feature.Chat.Label.ReplyChatInputPlaceholder,الرد على {DISPLAY_NAME}
 Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,رد على رسالتك
 Feature.Chat.Label.ReplyingToOthers,رسالة {DISPLAY_NAME} مفادها...
 Feature.Chat.Label.ReplyingToYourself,رسالتك مفادها…
 Feature.Chat.Label.SearchFriends,البحث عن أصدقاء
 Feature.Chat.Label.SearchWord,
+Feature.Chat.Label.SelectToRemove,اضغط للإزالة
 Feature.Chat.Label.SnoozePartyNotifications,كتم إشعارات الفرقة داخل التجربة لمدة:
 Feature.Chat.Label.SwipeToReplyTooltip,اسحب للرد
+Feature.Chat.Label.TapToRemove,
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}ي
 Feature.Chat.Label.TimestampHoursAbbreviatedPlural,{num_hours}س
 Feature.Chat.Label.TimestampMinutesAbbreviatedPlural,{num_minutes}د
@@ -3687,12 +3690,11 @@ Feature.Groups.Description.RequiresAccountTenureTooltipOneMonth,يجب أن يك
 Feature.Groups.Description.RequiresAccountTenureTooltipOneWeek,يجب أن يكون حسابك نشطًا لمدة 7 أيام قبل أن تتمكن من الانضمام إلى هذا المجتمع.
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeDays,يجب أن يكون حسابك نشطًا لمدة 3 أيام قبل أن تتمكن من الانضمام إلى هذا المجتمع.
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeMonths,يجب أن يكون حسابك نشطًا لمدة 90 يومًا قبل أن تتمكن من الانضمام إلى هذا المجتمع.
-Feature.Groups.Header.UppercaseMyGroups,مجتمعاتي
 Feature.Groups.Heading.Community,المجتمع
 Feature.Groups.Heading.Followers,
 Feature.Groups.Heading.Groups,
 Feature.Groups.Heading.Members,
-Feature.Groups.Heading.MyGroups,
+Feature.Groups.Heading.MyGroups,مجتمعاتي
 Feature.Groups.Heading.Primary,اساسي
 Feature.Groups.Heading.SocialLinksNew,روابط التواصل الاجتماعي
 Feature.Groups.Heading.SocialMedia,وسائل التواصل الاجتماعي
@@ -3897,12 +3899,21 @@ Feature.Moments.Action.ShowDetails,
 Feature.Moments.Action.ShowMore,اعرض المزيد
 Feature.Moments.Action.TrimVideo,قص الفيديو
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Action.View,
 Feature.Moments.Action.ViewOtherFeed,عرض موجز آخر
 Feature.Moments.Action.ViewRecommended,عرض اللحظات المقترحة
 Feature.Moments.Action.ViewTrending,عرض اللحظات الرائجة
 Feature.Moments.Body.EDPMomentIPReportInstructions,للإبلاغ عن انتهاك للملكية الفكرية في هذه اللحظة، تابع إلى صفحة تفاصيل اللعبة.
 Feature.Moments.Description.CommunityStandards,تحقَّق من معايير المجتمع للحصول على مزيد من المعلومات حول ما يمكنك وما لا يمكنك قوله.
 Feature.Moments.Description.EmptyCapturesLibrary,هذا هو المكان الذي ستظهر فيه لقطاتك.
+Feature.Moments.Description.EngagementFirstLike,اعرضه الآن
+Feature.Moments.Description.EngagementFirstReaction,حصلت لحظتك للتو على أول تفاعل!
+Feature.Moments.Description.EngagementLikedCommentsDigest,حصل {likedComments} من تعليقاتك على إعجابات
+Feature.Moments.Description.EngagementMomentDigest,{comments} من التعليقات الجديدة و{milestone} من التفاعلات
+Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementNewComment,علّق للتو على لحظتك
+Feature.Moments.Description.EngagementNewComments,و{count} آخرون علّقوا على لحظتك
+Feature.Moments.Description.EngagementReactionMilestone,{count} من التفاعلات الجديدة
 Feature.Moments.Description.FollowingCaughtUpBody,لقد شاهدتَ جميع اللحظات الجديدة في هذا الموجز. يمكنك التبديل بين الموجزات لعرض المزيد.
 Feature.Moments.Description.FollowingEmptyBodyRecommended,ستظهر لك لحظات المصمّمين الذين تتابعهم هنا.
 Feature.Moments.Description.FollowingEmptyBodyTrending,
@@ -4004,7 +4015,7 @@ Feature.Moments.Label.PostFeedbackPostingTitle,جارٍ نشر اللحظة
 Feature.Moments.Label.PostRemovedBody,تنتهك اللحظة التي نشرتها معايير مجتمعنا.
 Feature.Moments.Label.PostedOnDate,تم النشر في {date}
 Feature.Moments.Label.PublishingRodeoBody,لن يستغرق الأمر وقتًا طويلاً.
-Feature.Moments.Label.Reactions,التفاعلات
+Feature.Moments.Label.Reactions,
 Feature.Moments.Label.ReportReason.BreaksRules,هذا المنشور يخالف القواعد
 Feature.Moments.Label.ReportReason.IntellectualProperty,هذا المنشور ينتهك ملكيتي الفكرية
 Feature.Moments.Label.ReportSubmittedBody,شكرًا لك على ملاحظاتك.
@@ -4049,6 +4060,14 @@ Feature.Moments.Title.Comments,التعليقات
 Feature.Moments.Title.CommentsWithCappedCount,{count} فأكثر من التعليقات
 Feature.Moments.Title.CommentsWithCount,{count} من التعليقات
 Feature.Moments.Title.EDPMomentIPReportInstructions,الإبلاغ في صفحة تفاصيل اللعبة
+Feature.Moments.Title.EngagementFirstLike,حصلت على إعجاب
+Feature.Moments.Title.EngagementFirstReaction,نشاط جديد
+Feature.Moments.Title.EngagementLikedCommentsDigest,إعجابات جديدة
+Feature.Moments.Title.EngagementMomentDigest,لحظتك تحظى باهتمام كبير
+Feature.Moments.Title.EngagementMomentsDigest,لحظاتك تحظى باهتمام كبير
+Feature.Moments.Title.EngagementNewComment,{name}
+Feature.Moments.Title.EngagementNewComments,
+Feature.Moments.Title.EngagementReactionMilestone,لحظتك تجذب الانتباه
 Feature.Moments.Title.GenerateTextFeedbackReason,ما الخطأ الذي حدث؟
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,هل تريد الخروج من إنشاء اللحظة؟
@@ -4155,6 +4174,7 @@ Feature.Parents.Message.TooManyAttempts,محاولات كثيرة جدًا. ال
 Feature.Parents.Title.EnterParentEmailV2,إدخال البريد الإلكتروني للوالدين
 Feature.Parents.Title.SomethingWentWrong,
 Feature.PlayerSearchResults.Action.AddFriend,
+Feature.PlayerSearchResults.Heading.SearchResults,نتائج البحث
 Feature.PlayerSearchResults.Label.FromSearch,من البحث
 Feature.PlayerSearchResults.Label.NewUsername,اسم مستخدم جديد
 Feature.PlayerSearchResults.Label.Previously,سابقًا
@@ -4545,7 +4565,7 @@ Feature.SettingsHub.Label.Invited,
 Feature.SettingsHub.Label.LeaveButton,
 Feature.SettingsHub.Label.LoadingFriendsListFailed,
 Feature.SettingsHub.Label.LogoutButton,تسجيل الخروج
-Feature.SettingsHub.Label.LogoutConfirmation,هل تريد بالتأكيد تسجيل الخروج؟
+Feature.SettingsHub.Label.LogoutConfirmation,هل أنت متأكد من أنك تريد تسجيل الخروج؟
 Feature.SettingsHub.Label.MethodOfAbuse,نوع سوء المعاملة؟
 Feature.SettingsHub.Label.Moderated,
 Feature.SettingsHub.Label.ModeratedInviteError,تمت الإشراف على الدعوة إلى التجربة ولم نوافق على إرسالها.

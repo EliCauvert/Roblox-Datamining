@@ -8,12 +8,13 @@ local Image = FoundationModule.Image
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local GuiService = game:GetService("GuiService")
 local FFlagTTOnboardingSheetModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagTTOnboardingSheet)
+local FFlagOnboardingSheetLayout = require(Parent.SharedFlags).FFlagOnboardingSheetLayout
 local _UDim2 = UDim2.fromScale(0.344, 0.574)
 local _UDim2_1 = UDim2.fromScale(0.626, 0.405)
 local _Vector2 = Vector2.new(280, 158)
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), GuiService (copy), FFlagTTOnboardingSheetModule (copy), _Vector2 (copy), ReactModule (copy), View (copy), _UDim2_1 (copy), Image (copy), _UDim2 (copy), Text (copy)
+	-- upvalues: UseTokensFunction (copy), GuiService (copy), FFlagTTOnboardingSheetModule (copy), _Vector2 (copy), FFlagOnboardingSheetLayout (copy), ReactModule (copy), View (copy), _UDim2_1 (copy), Image (copy), _UDim2 (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IsNotViewportDisplaySizeMatch = GuiService.ViewportDisplaySize ~= Enum.DisplaySize.Small
 	local _UDim2_2 = UDim2.fromOffset((if IsNotViewportDisplaySizeMatch then 160 else 280) * UseTokensResult.Config.UI.Scale, (if IsNotViewportDisplaySizeMatch then 90 else 158) * UseTokensResult.Config.UI.Scale)
@@ -25,7 +26,7 @@ return function(p1)
 	local XScale = 0
 	
 	if AccentPictogram then
-		ZeroVector = _Vector2 * UseTokensResult.Config.UI.Scale
+		ZeroVector = if FFlagOnboardingSheetLayout and p1.twoCardPictogramSize then p1.twoCardPictogramSize * UseTokensResult.Config.UI.Scale else _Vector2 * UseTokensResult.Config.UI.Scale
 		XOffset = ZeroVector.Y * 0.55
 		_UDim2_3 = UDim2.fromOffset(XOffset, XOffset)
 		_UDim = UDim.new(0, XOffset * 0.044)
@@ -61,7 +62,7 @@ return function(p1)
 						Size = UDim2.fromScale(0.8, 0.8)
 					})
 				}),
-				PrimaryFill = ReactModule.createElement(View, {
+				PrimaryFill = if FFlagOnboardingSheetLayout then nil else ReactModule.createElement(View, {
 					tag = "anchor-center-center bg-surface-100",
 					Rotation = -15,
 					ZIndex = 2,
@@ -69,7 +70,31 @@ return function(p1)
 					Size = _UDim2_3,
 					cornerRadius = _UDim
 				}),
-				Primary = ReactModule.createElement(Image, {
+				Primary = if FFlagOnboardingSheetLayout then ReactModule.createElement(View, {
+					tag = "anchor-center-center bg-surface-100",
+					Rotation = -15,
+					ZIndex = 2,
+					Position = _UDim2,
+					Size = _UDim2_3,
+					cornerRadius = _UDim,
+					stroke = {
+						Transparency = 0.835,
+						Color = UseTokensResult.Color.Content.Emphasis.Color3,
+						Thickness = XOffset * 0.012
+					}
+				}, {
+					Glyph = ReactModule.createElement(Image, {
+						tag = "position-center-center anchor-center-center",
+						Image = p1.pictogram.assetId,
+						imageRect = {
+							offset = Vector2.new(360, 150),
+							size = Vector2.new(240, 240)
+						},
+						imageStyle = UseTokensResult.Color.Content.Emphasis,
+						ScaleType = Enum.ScaleType.Fit,
+						Size = UDim2.fromScale(0.6944444444444444, 0.6944444444444444)
+					})
+				}) else ReactModule.createElement(Image, {
 					tag = "anchor-center-center",
 					ZIndex = 3,
 					Image = p1.pictogram.assetId,
@@ -85,7 +110,7 @@ return function(p1)
 				Size = _UDim2_2
 			})
 		}) else nil,
-		HeroTitle = ReactModule.createElement(Text, {
+		HeroTitle = if p1.title or not FFlagOnboardingSheetLayout then ReactModule.createElement(Text, {
 			LayoutOrder = 2,
 			Text = p1.title,
 			tag = {
@@ -93,7 +118,7 @@ return function(p1)
 				["size-full-0 auto-y text-heading-large text-wrap text-align-x-left content-emphasis"] = not IsNotViewportDisplaySizeMatch
 			},
 			RichText = p1.titleRichText
-		}),
+		}) else nil,
 		HeroSubtitle = if p1.subtitle then ReactModule.createElement(Text, {
 			LayoutOrder = 3,
 			tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",

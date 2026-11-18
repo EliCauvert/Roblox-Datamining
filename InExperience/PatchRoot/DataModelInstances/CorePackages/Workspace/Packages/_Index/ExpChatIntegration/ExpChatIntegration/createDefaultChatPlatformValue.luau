@@ -16,7 +16,9 @@ local config = {
 }
 local config1 = {
 	setTextboxFocus = function() end,
-	clearTextboxFocus = function() end
+	clearTextboxFocus = function() end,
+	setDictationActive = function() end,
+	clearDictationActive = function() end
 }
 
 return function()

@@ -3,7 +3,10 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local RoactUtilsModule = require(Parent.RoactUtils)
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local GetTestIdFunction = RoactUtilsModule.getTestId
+local FFlagLuaAppAddTestIdsForArrow = require(Parent.SharedFlags).FFlagLuaAppAddTestIdsForArrow
 local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
 local AppLinking = require(Parent.RoactServiceTags).AppLinking
 local CentralOverlayModule = require(Parent.CentralOverlay)
@@ -13,7 +16,7 @@ local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
 local ExtractAndStyleRichTextLinksFunction = require(Parent.DiscoveryUtils).extractAndStyleRichTextLinks
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), UseRoactServiceFunction (copy), AppLinking (copy), ReactModule (copy), ExtractAndStyleRichTextLinksFunction (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), CloseCentralOverlayFunction (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), UseRoactServiceFunction (copy), AppLinking (copy), ReactModule (copy), ExtractAndStyleRichTextLinksFunction (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), CloseCentralOverlayFunction (copy), NormalizeFontFaceFunction (copy), FFlagLuaAppAddTestIdsForArrow (copy), GetTestIdFunction (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseRoactServiceResult = UseRoactServiceFunction(AppLinking)
@@ -61,6 +64,7 @@ return function(p1)
 		TextColor3 = UseTokensResult.Color.Content.Emphasis.Color3,
 		Active = UseMemoResult.link ~= nil,
 		Selectable = UseMemoResult.link ~= nil,
-		[ReactModule.Event.Activated] = if UseMemoResult.link then UseResult else nil
+		[ReactModule.Event.Activated] = if UseMemoResult.link then UseResult else nil,
+		[ReactModule.Tag] = if FFlagLuaAppAddTestIdsForArrow then GetTestIdFunction("play-button-upsell-dialog-body") else nil
 	})
 end

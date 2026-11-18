@@ -1,6 +1,5 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
-local UserInputService = game:GetService("UserInputService")
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
@@ -9,6 +8,7 @@ local _ = require(script.Parent.Types)
 local SnapMathModule = require(script.Parent.snapMath)
 local UsePagerControllerModule = require(script.Parent.usePagerController)
 local UsePagerInputNavigationModule = require(script.Parent.usePagerInputNavigation)
+local UseTouchScrollEnabledModule = require(Moments.Hooks.useTouchScrollEnabled)
 local FFlagMomentsFeedSwipeSensitivityConfigModule = require(Moments.Flags.FFlagMomentsFeedSwipeSensitivityConfig)
 local FIntMomentsFeedSnapSensitivityMilliModule = require(Moments.Flags.FIntMomentsFeedSnapSensitivityMilli)
 local FIntMomentsFeedAnimationSpeedModule = require(Moments.Flags.FIntMomentsFeedAnimationSpeed)
@@ -53,43 +53,8 @@ local MemoResult = ReactModule.memo(function(p1)
 	})
 end)
 
-local function useNativeScrollEnabled()
-	-- upvalues: ReactModule (copy), UserInputService (copy)
-	local function _(UserInputType): boolean
-		return UserInputType == Enum.UserInputType.MouseWheel or (UserInputType == Enum.UserInputType.MouseButton1 or (UserInputType == Enum.UserInputType.MouseMovement or UserInputType == Enum.UserInputType.Keyboard))
-	end
-	
-	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): boolean
-		-- upvalues: UserInputService (upval)
-		local LastInputType = UserInputService:GetLastInputType()
-		
-		return not (LastInputType == Enum.UserInputType.MouseWheel or (LastInputType == Enum.UserInputType.MouseButton1 or (LastInputType == Enum.UserInputType.MouseMovement or LastInputType == Enum.UserInputType.Keyboard)))
-	end)
-	ReactModule.useEffect(function()
-		-- upvalues: UserInputService (upval), UseStateResult2 (copy)
-		local LastInputTypeChangedConnection = UserInputService.LastInputTypeChanged:Connect(function(UserInputType)
-			-- upvalues: UseStateResult2 (upval)
-			if UserInputType == Enum.UserInputType.Touch then
-				UseStateResult2(true)
-				
-				return
-			end
-			if UserInputType == Enum.UserInputType.MouseWheel or (UserInputType == Enum.UserInputType.MouseButton1 or (UserInputType == Enum.UserInputType.MouseMovement or UserInputType == Enum.UserInputType.Keyboard)) then
-				UseStateResult2(false)
-			end
-		end)
-		
-		return function()
-			-- upvalues: LastInputTypeChangedConnection (copy)
-			LastInputTypeChangedConnection:Disconnect()
-		end
-	end, {})
-	
-	return UseStateResult
-end
-
 return function(Frame: Frame)
-	-- upvalues: ConstantsModule (copy), FFlagMomentsFeedSwipeSensitivityConfigModule (copy), FIntMomentsFeedSnapSensitivityMilliModule (copy), FIntMomentsFeedAnimationSpeedModule (copy), ReactModule (copy), useNativeScrollEnabled (copy), UsePagerControllerModule (copy), UsePagerInputNavigationModule (copy), SignalsReactModule (copy), SnapMathModule (copy), MemoResult (copy), VerticalPagerContext (copy)
+	-- upvalues: ConstantsModule (copy), FFlagMomentsFeedSwipeSensitivityConfigModule (copy), FIntMomentsFeedSnapSensitivityMilliModule (copy), FIntMomentsFeedAnimationSpeedModule (copy), ReactModule (copy), UseTouchScrollEnabledModule (copy), UsePagerControllerModule (copy), UsePagerInputNavigationModule (copy), SignalsReactModule (copy), SnapMathModule (copy), MemoResult (copy), VerticalPagerContext (copy)
 	local Store = Frame.store
 	local RenderItem = Frame.renderItem
 	local KeyExtractorFunction = Frame.keyExtractor
@@ -133,7 +98,7 @@ return function(Frame: Frame)
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(Frame.AbsoluteSize.Y)
 	end, {})
-	local UseNativeScrollEnabledResult = useNativeScrollEnabled()
+	local UseTouchScrollEnabledModuleResult = UseTouchScrollEnabledModule()
 	local UsePagerControllerModuleResult = UsePagerControllerModule({
 		scrollingFrame = UseStateResult,
 		store = Store,
@@ -142,7 +107,7 @@ return function(Frame: Frame)
 		snapSensitivity = SnapSensitivity,
 		animationSpeed = AnimationSpeed,
 		active = NoActive,
-		nativeScrollEnabled = UseNativeScrollEnabledResult,
+		nativeScrollEnabled = UseTouchScrollEnabledModuleResult,
 		analytics = Analytics
 	})
 	local UsePagerInputNavigationModuleResult = UsePagerInputNavigationModule({
@@ -275,7 +240,7 @@ return function(Frame: Frame)
 				ClipsDescendants = true,
 				ScrollBarThickness = 0,
 				ScrollingDirection = Enum.ScrollingDirection.Y,
-				ScrollingEnabled = NoActive and (UseSignalStateResult > 1 and UseNativeScrollEnabledResult),
+				ScrollingEnabled = NoActive and (UseSignalStateResult > 1 and UseTouchScrollEnabledModuleResult),
 				Selectable = false,
 				Size = UDim2.fromScale(1, 1),
 				ref = UseResult,

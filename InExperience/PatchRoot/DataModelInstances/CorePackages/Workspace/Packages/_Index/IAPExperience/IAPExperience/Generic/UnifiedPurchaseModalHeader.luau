@@ -28,7 +28,8 @@ return function(p1)
 			RobuxAmount = ReactModule.createElement(Text, {
 				LayoutOrder = 1,
 				tag = "auto-xy text-heading-small content-default text-align-x-left",
-				Text = p1.titleText
+				Text = p1.titleText,
+				testId = p1.titleTestId
 			})
 		}),
 		RightSide = if FFlagUnifiedPurchaseFlowMarketplaceUIImprovements and p1.hideUserRobuxBalance then nil else ReactModule.createElement(View, {

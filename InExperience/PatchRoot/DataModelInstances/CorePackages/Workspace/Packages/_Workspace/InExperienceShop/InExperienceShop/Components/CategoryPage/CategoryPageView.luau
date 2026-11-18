@@ -6,16 +6,15 @@ local View = FoundationModule.View
 local ScrollView = FoundationModule.ScrollView
 local ItemGridModule = require(InExperienceShop.Components.ItemGrid)
 local _ = require(InExperienceShop.Components.ItemRow)
-local FFlagEnableInExperienceShopUnifiedLoggingModule = require(InExperienceShop.Flags.FFlagEnableInExperienceShopUnifiedLogging)
 local RobuxTermsDisclosureModule = if require(InExperienceShop.Flags.FFlagShopRobuxTermsDisclosure) then require(InExperienceShop.Components.RobuxTermsDisclosure) else nil
 local IsSubjectToDesktopPoliciesFunction = require(Parent.SharedFlags).isSubjectToDesktopPolicies
-local AnalyticsModule = if FFlagEnableInExperienceShopUnifiedLoggingModule then require(InExperienceShop.Analytics) else nil
+local AnalyticsModule = require(InExperienceShop.Analytics)
 local ShopPageType = if AnalyticsModule then AnalyticsModule.Constants.ShopPageType else nil
 local UseShopImpressionsDetectorModule = require(InExperienceShop.Hooks.useShopImpressionsDetector)
 local _ = require(InExperienceShop.Types)
 
 return function(Frame)
-	-- upvalues: IsSubjectToDesktopPoliciesFunction (copy), UseShopImpressionsDetectorModule (copy), ShopPageType (copy), ReactModule (copy), FFlagEnableInExperienceShopUnifiedLoggingModule (copy), View (copy), ScrollView (copy), FoundationModule (copy), RobuxTermsDisclosureModule (copy), ItemGridModule (copy)
+	-- upvalues: IsSubjectToDesktopPoliciesFunction (copy), UseShopImpressionsDetectorModule (copy), ShopPageType (copy), ReactModule (copy), View (copy), ScrollView (copy), FoundationModule (copy), RobuxTermsDisclosureModule (copy), ItemGridModule (copy)
 	local IsShowRobuxTermsDisclosure = Frame.showRobuxTermsDisclosure == true
 	local Inverted = not IsSubjectToDesktopPoliciesFunction()
 	local UseShopImpressionsDetectorModuleResult = UseShopImpressionsDetectorModule({
@@ -23,12 +22,6 @@ return function(Frame)
 		externalScrollSignal = nil,
 		pageType = if ShopPageType then ShopPageType.Category else ""
 	})
-	local UseResult = ReactModule.useCallback(function(_)
-		-- upvalues: FFlagEnableInExperienceShopUnifiedLoggingModule (upval), UseShopImpressionsDetectorModuleResult (copy)
-		if FFlagEnableInExperienceShopUnifiedLoggingModule then
-			UseShopImpressionsDetectorModuleResult.onLayoutChange()
-		end
-	end, { UseShopImpressionsDetectorModuleResult.onLayoutChange })
 	
 	return ReactModule.createElement(View, {
 		tag = "fill size-full-0",
@@ -37,7 +30,10 @@ return function(Frame)
 	}, {
 		Scroll = ReactModule.createElement(ScrollView, {
 			Size = UDim2.fromScale(1, 1),
-			onCanvasPositionChanged = if FFlagEnableInExperienceShopUnifiedLoggingModule then UseResult else nil,
+			onCanvasPositionChanged = ReactModule.useCallback(function(_)
+				-- upvalues: UseShopImpressionsDetectorModuleResult (copy)
+				UseShopImpressionsDetectorModuleResult.onLayoutChange()
+			end, { UseShopImpressionsDetectorModuleResult.onLayoutChange }),
 			scroll = {
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
 				CanvasSize = UDim2.fromScale(1, 0),
@@ -47,11 +43,11 @@ return function(Frame)
 		}, {
 			Content = ReactModule.createElement(View, {
 				tag = if IsShowRobuxTermsDisclosure then "col gap-medium size-full-0 auto-y padding-x-xlarge padding-bottom-xlarge" else "size-full-0 auto-y padding-x-xlarge padding-bottom-xlarge padding-top-medium",
-				ref = if FFlagEnableInExperienceShopUnifiedLoggingModule then UseShopImpressionsDetectorModuleResult.gridRef else nil,
-				onAbsoluteSizeChanged = if FFlagEnableInExperienceShopUnifiedLoggingModule then function(_)
+				ref = UseShopImpressionsDetectorModuleResult.gridRef,
+				onAbsoluteSizeChanged = function(_)
 					-- upvalues: UseShopImpressionsDetectorModuleResult (copy)
 					UseShopImpressionsDetectorModuleResult.onLayoutChange()
-				end else nil
+				end
 			}, {
 				Disclosure = if IsShowRobuxTermsDisclosure and RobuxTermsDisclosureModule then ReactModule.createElement(RobuxTermsDisclosureModule, { LayoutOrder = 1, isMobile = Inverted }) else nil,
 				Grid = ReactModule.createElement(ItemGridModule, {
@@ -63,10 +59,10 @@ return function(Frame)
 					onItemActivated = Frame.onItemActivated,
 					renderTile = Frame.renderTile,
 					isFeaturedDoubleWidthRobux = Frame.isFeaturedDoubleWidthRobux,
-					onGridLayoutChange = if FFlagEnableInExperienceShopUnifiedLoggingModule then UseShopImpressionsDetectorModuleResult.onLayoutChange else nil
+					onGridLayoutChange = UseShopImpressionsDetectorModuleResult.onLayoutChange
 				})
 			})
 		}),
-		ImpressionsDetector = if FFlagEnableInExperienceShopUnifiedLoggingModule then UseShopImpressionsDetectorModuleResult.impressionsDetector else nil
+		ImpressionsDetector = UseShopImpressionsDetectorModuleResult.impressionsDetector
 	})
 end

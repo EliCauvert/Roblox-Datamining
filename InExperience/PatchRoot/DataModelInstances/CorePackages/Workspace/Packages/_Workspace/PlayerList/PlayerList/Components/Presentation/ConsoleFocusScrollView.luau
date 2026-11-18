@@ -12,6 +12,7 @@ local PlayerListVisibilityStoreModule = require(Parent.Common.PlayerListVisibili
 local PlayerContextualMenuStoreModule = require(Parent.Common.PlayerContextualMenuStore)
 local TeamListViewModule = require(Parent.Components.Presentation.TeamListView)
 local UseGamepadStickScrollFunction = CoreGuiCommonModule.Hooks.useGamepadStickScroll
+local FFlagFixLeaderboardFocusErrorModule = require(Parent.Flags.FFlagFixLeaderboardFocusError)
 
 local function _(): boolean
 	-- upvalues: UserInputService (copy)
@@ -19,51 +20,68 @@ local function _(): boolean
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), SignalsReactModule (copy), PlayerListVisibilityStoreModule (copy), PlayerContextualMenuStoreModule (copy), UserInputService (copy), UseGamepadStickScrollFunction (copy), GuiService (copy), ContextActionService (copy), TeamListViewModule (copy), ScrollView (copy)
+	-- upvalues: ReactModule (copy), SignalsReactModule (copy), PlayerListVisibilityStoreModule (copy), PlayerContextualMenuStoreModule (copy), UserInputService (copy), UseGamepadStickScrollFunction (copy), FFlagFixLeaderboardFocusErrorModule (copy), GuiService (copy), ContextActionService (copy), TeamListViewModule (copy), ScrollView (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = ReactModule.useRef(nil)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(PlayerListVisibilityStoreModule.getEffectiveVisible)
 	local HasUseSignalStateResult = SignalsReactModule.useSignalState(PlayerContextualMenuStoreModule.getMenuData) ~= nil
 	local NoHasUseSignalStateResult: boolean = UseSignalStateResult and not HasUseSignalStateResult
 	local AllTeams = p1.allTeams
 	local HasGamepad = if p1.isGamepadOverride == nil then UserInputService:GetLastInputType().Name:find("Gamepad") ~= nil else p1.isGamepadOverride
+	local ScrollingFrameRefFunction = p1.scrollViewProps.scrollingFrameRef
+	local UseResult = ReactModule.useCallback(function(Current)
+		-- upvalues: UseRefResult2 (copy), ScrollingFrameRefFunction (copy)
+		UseRefResult2.current = Current
+		
+		if typeof(ScrollingFrameRefFunction) == "function" then
+			ScrollingFrameRefFunction(Current)
+			
+			return
+		end
+		if ScrollingFrameRefFunction ~= nil then
+			ScrollingFrameRefFunction.current = Current
+		end
+	end, { UseRefResult2, ScrollingFrameRefFunction })
 	UseGamepadStickScrollFunction({
 		actionName = "RbxPlayerListReskinGamepadStickScroll",
-		scrollingFrameRef = UseRefResult1,
-		enabled = NoHasUseSignalStateResult
+		scrollingFrameRef = if FFlagFixLeaderboardFocusErrorModule then UseRefResult2 else UseRefResult1,
+		enabled = NoHasUseSignalStateResult,
+		contextActionServiceOverride = p1.contextActionServiceOverride,
+		runServiceOverride = p1.runServiceOverride
 	})
-	local UseRefResult2 = ReactModule.useRef(Enum.OverrideMouseIconBehavior.None)
-	local UseRefResult3 = ReactModule.useRef(nil)
-	local UseRefResult4 = ReactModule.useRef(false)
+	local UseRefResult3 = ReactModule.useRef(Enum.OverrideMouseIconBehavior.None)
+	local UseRefResult4 = ReactModule.useRef(nil)
 	local UseRefResult5 = ReactModule.useRef(false)
+	local UseRefResult6 = ReactModule.useRef(false)
 	
 	local function _()
-		-- upvalues: UseRefResult5 (copy), UserInputService (upval), UseRefResult2 (copy), GuiService (upval), UseRefResult1 (copy), UseRefResult3 (copy), UseRefResult4 (copy)
-		if not UseRefResult5.current then return end
-		UserInputService.OverrideMouseIconBehavior = UseRefResult2.current
-		UseRefResult2.current = Enum.OverrideMouseIconBehavior.None
+		-- upvalues: UseRefResult6 (copy), UserInputService (upval), UseRefResult3 (copy), GuiService (upval), UseRefResult1 (copy), UseRefResult4 (copy), UseRefResult5 (copy)
+		if not UseRefResult6.current then return end
+		UserInputService.OverrideMouseIconBehavior = UseRefResult3.current
+		UseRefResult3.current = Enum.OverrideMouseIconBehavior.None
 		local SelectedCoreObject = GuiService.SelectedCoreObject
 		
 		if SelectedCoreObject and UseRefResult1.current and SelectedCoreObject:IsDescendantOf(UseRefResult1.current) then
-			GuiService.SelectedCoreObject = UseRefResult3.current
+			GuiService.SelectedCoreObject = UseRefResult4.current
 		end
-		UseRefResult3.current = nil
+		UseRefResult4.current = nil
+		UseRefResult6.current = false
 		UseRefResult5.current = false
-		UseRefResult4.current = false
 	end
 	
 	local _ = function()
-		-- upvalues: GuiService (upval), UseRefResult1 (copy), UseRefResult4 (copy)
+		-- upvalues: GuiService (upval), UseRefResult1 (copy), UseRefResult5 (copy)
 		local SelectedCoreObject = GuiService.SelectedCoreObject
 		
 		if SelectedCoreObject and UseRefResult1.current and SelectedCoreObject:IsDescendantOf(UseRefResult1.current) then
 			GuiService.SelectedCoreObject = nil
 		end
-		UseRefResult4.current = false
+		UseRefResult5.current = false
 	end
 	
 	ReactModule.useEffect(function()
-		-- upvalues: UseSignalStateResult (copy), UseRefResult5 (copy), UserInputService (upval), UseRefResult2 (copy), GuiService (upval), UseRefResult1 (copy), UseRefResult3 (copy), UseRefResult4 (copy), HasUseSignalStateResult (copy), HasGamepad (copy), UseRefResult (copy), PlayerListVisibilityStoreModule (upval), PlayerContextualMenuStoreModule (upval)
+		-- upvalues: UseSignalStateResult (copy), UseRefResult6 (copy), UserInputService (upval), UseRefResult3 (copy), GuiService (upval), UseRefResult1 (copy), UseRefResult4 (copy), UseRefResult5 (copy), HasUseSignalStateResult (copy), HasGamepad (copy), UseRefResult (copy), PlayerListVisibilityStoreModule (upval), PlayerContextualMenuStoreModule (upval)
 		if UseSignalStateResult then
 			if HasUseSignalStateResult then
 				local SelectedCoreObject = GuiService.SelectedCoreObject
@@ -71,22 +89,22 @@ return function(p1)
 				if SelectedCoreObject and UseRefResult1.current and SelectedCoreObject:IsDescendantOf(UseRefResult1.current) then
 					GuiService.SelectedCoreObject = nil
 				end
-				UseRefResult4.current = false
+				UseRefResult5.current = false
 				
 				return function() end
 			else
-				if not UseRefResult4.current and HasGamepad and UseRefResult.current then
-					if not UseRefResult5.current then
-						UseRefResult3.current = GuiService.SelectedCoreObject
-						UseRefResult2.current = UserInputService.OverrideMouseIconBehavior
-						UseRefResult5.current = true
+				if not UseRefResult5.current and HasGamepad and UseRefResult.current then
+					if not UseRefResult6.current then
+						UseRefResult4.current = GuiService.SelectedCoreObject
+						UseRefResult3.current = UserInputService.OverrideMouseIconBehavior
+						UseRefResult6.current = true
 					end
 					GuiService.SelectedCoreObject = UseRefResult.current
 					UserInputService.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.ForceHide
-					UseRefResult4.current = true
+					UseRefResult5.current = true
 				end
 				return function()
-					-- upvalues: PlayerListVisibilityStoreModule (upval), UseRefResult5 (upval), UserInputService (upval), UseRefResult2 (upval), GuiService (upval), UseRefResult1 (upval), UseRefResult3 (upval), UseRefResult4 (upval), PlayerContextualMenuStoreModule (upval)
+					-- upvalues: PlayerListVisibilityStoreModule (upval), UseRefResult6 (upval), UserInputService (upval), UseRefResult3 (upval), GuiService (upval), UseRefResult1 (upval), UseRefResult4 (upval), UseRefResult5 (upval), PlayerContextualMenuStoreModule (upval)
 					if PlayerListVisibilityStoreModule.getEffectiveVisible(false) then
 						if PlayerContextualMenuStoreModule.getMenuData(false) ~= nil then
 							local SelectedCoreObject = GuiService.SelectedCoreObject
@@ -94,36 +112,36 @@ return function(p1)
 							if SelectedCoreObject and UseRefResult1.current and SelectedCoreObject:IsDescendantOf(UseRefResult1.current) then
 								GuiService.SelectedCoreObject = nil
 							end
-							UseRefResult4.current = false
+							UseRefResult5.current = false
 						end
 						return
 					else
-						if not UseRefResult5.current then return end
-						UserInputService.OverrideMouseIconBehavior = UseRefResult2.current
-						UseRefResult2.current = Enum.OverrideMouseIconBehavior.None
+						if not UseRefResult6.current then return end
+						UserInputService.OverrideMouseIconBehavior = UseRefResult3.current
+						UseRefResult3.current = Enum.OverrideMouseIconBehavior.None
 						local SelectedCoreObject = GuiService.SelectedCoreObject
 						
 						if SelectedCoreObject and UseRefResult1.current and SelectedCoreObject:IsDescendantOf(UseRefResult1.current) then
-							GuiService.SelectedCoreObject = UseRefResult3.current
+							GuiService.SelectedCoreObject = UseRefResult4.current
 						end
-						UseRefResult3.current = nil
+						UseRefResult4.current = nil
+						UseRefResult6.current = false
 						UseRefResult5.current = false
-						UseRefResult4.current = false
 					end
 				end
 			end
 		else
-			if UseRefResult5.current then
-				UserInputService.OverrideMouseIconBehavior = UseRefResult2.current
-				UseRefResult2.current = Enum.OverrideMouseIconBehavior.None
+			if UseRefResult6.current then
+				UserInputService.OverrideMouseIconBehavior = UseRefResult3.current
+				UseRefResult3.current = Enum.OverrideMouseIconBehavior.None
 				local SelectedCoreObject = GuiService.SelectedCoreObject
 				
 				if SelectedCoreObject and UseRefResult1.current and SelectedCoreObject:IsDescendantOf(UseRefResult1.current) then
-					GuiService.SelectedCoreObject = UseRefResult3.current
+					GuiService.SelectedCoreObject = UseRefResult4.current
 				end
-				UseRefResult3.current = nil
+				UseRefResult4.current = nil
+				UseRefResult6.current = false
 				UseRefResult5.current = false
-				UseRefResult4.current = false
 			end
 			return function() end
 		end
@@ -133,21 +151,21 @@ return function(p1)
 		HasGamepad
 	})
 	ReactModule.useEffect(function()
-		-- upvalues: NoHasUseSignalStateResult (copy), HasGamepad (copy), UseRefResult (copy), UseRefResult4 (copy), UseRefResult5 (copy), UseRefResult3 (copy), GuiService (upval), UseRefResult2 (copy), UserInputService (upval)
+		-- upvalues: NoHasUseSignalStateResult (copy), HasGamepad (copy), UseRefResult (copy), UseRefResult5 (copy), UseRefResult6 (copy), UseRefResult4 (copy), GuiService (upval), UseRefResult3 (copy), UserInputService (upval)
 		if not NoHasUseSignalStateResult or not HasGamepad or not UseRefResult.current then return end
-		if UseRefResult4.current then
+		if UseRefResult5.current then
 			GuiService.SelectedCoreObject = UseRefResult.current
 			
 			return
 		end
-		if not UseRefResult5.current then
-			UseRefResult3.current = GuiService.SelectedCoreObject
-			UseRefResult2.current = UserInputService.OverrideMouseIconBehavior
-			UseRefResult5.current = true
+		if not UseRefResult6.current then
+			UseRefResult4.current = GuiService.SelectedCoreObject
+			UseRefResult3.current = UserInputService.OverrideMouseIconBehavior
+			UseRefResult6.current = true
 		end
 		GuiService.SelectedCoreObject = UseRefResult.current
 		UserInputService.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.ForceHide
-		UseRefResult4.current = true
+		UseRefResult5.current = true
 	end, { NoHasUseSignalStateResult, AllTeams, HasGamepad })
 	ReactModule.useEffect(function()
 		-- upvalues: NoHasUseSignalStateResult (copy), ContextActionService (upval), PlayerContextualMenuStoreModule (upval), PlayerListVisibilityStoreModule (upval)
@@ -231,5 +249,8 @@ return function(p1)
 	local Copy = table.clone(p1.scrollViewProps)
 	Copy.ref = UseRefResult1
 	
+	if FFlagFixLeaderboardFocusErrorModule then
+		Copy.scrollingFrameRef = UseResult
+	end
 	return ReactModule.createElement(ScrollView, Copy, Elements)
 end

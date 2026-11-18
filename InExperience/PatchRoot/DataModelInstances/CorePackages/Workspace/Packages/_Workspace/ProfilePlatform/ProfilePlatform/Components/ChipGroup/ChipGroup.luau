@@ -28,6 +28,33 @@ function ChipGroup(p1)
 		UseStateResult1,
 		p1.scrollingEnabledOverride
 	})
+	local UseMemoResult = ReactModule.useMemo(function()
+		-- upvalues: p1 (copy), ReactModule (upval), Chip (upval)
+		local Elements = {}
+		
+		for i, chip in ipairs(p1.chips) do
+			Elements[i] = ReactModule.createElement(Chip, {
+				isChecked = false,
+				text = if chip.count then `{chip.count} {chip.text}` else chip.text,
+				onActivated = chip.onActivated,
+				isDisabled = chip.isDisabled or false,
+				LayoutOrder = chip.layoutOrder or i,
+				size = chip.size or "Medium",
+				leading = chip.leading,
+				trailing = chip.trailing,
+				testId = chip.testId
+			})
+		end
+		return Elements
+	end, { p1.chips })
+	local UseResult = ReactModule.useCallback(function(Frame)
+		-- upvalues: UseStateResult2_1 (copy)
+		UseStateResult2_1(Frame.AbsoluteSize.X)
+	end, {})
+	local UseResult1 = ReactModule.useCallback(function(Frame)
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(Frame.AbsoluteSize.X)
+	end, {})
 	
 	return if #p1.chips == 0 then nil else ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
@@ -47,37 +74,14 @@ function ChipGroup(p1)
 			Selectable = false,
 			Size = p1.size or _UDim2,
 			ZIndex = 1,
-			[ReactModule.Change.AbsoluteSize] = ReactModule.useCallback(function(Frame)
-				-- upvalues: UseStateResult2_1 (copy)
-				UseStateResult2_1(Frame.AbsoluteSize.X)
-			end, {})
+			[ReactModule.Change.AbsoluteSize] = UseResult
 		}, {
 			ChipRow = ReactModule.createElement(View, {
 				tag = "row gap-small auto-y size-full-0",
 				ref = UseRefResult1,
 				AutomaticSize = Enum.AutomaticSize.X,
-				onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame)
-					-- upvalues: UseStateResult2 (copy)
-					UseStateResult2(Frame.AbsoluteSize.X)
-				end, {})
-			}, table.unpack((ReactModule.useMemo(function()
-				-- upvalues: p1 (copy), ReactModule (upval), Chip (upval)
-				local Elements = {}
-				
-				for i, chip in ipairs(p1.chips) do
-					Elements[i] = ReactModule.createElement(Chip, {
-						isChecked = false,
-						text = if chip.count then `{chip.count} {chip.text}` else chip.text,
-						onActivated = chip.onActivated,
-						isDisabled = chip.isDisabled or false,
-						LayoutOrder = chip.layoutOrder or i,
-						size = chip.size or "Medium",
-						leading = chip.leading,
-						trailing = chip.trailing
-					})
-				end
-				return Elements
-			end, { p1.chips }))))
+				onAbsoluteSizeChanged = UseResult1
+			}, table.unpack(UseMemoResult))
 		})
 	})
 end

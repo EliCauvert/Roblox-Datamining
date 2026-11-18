@@ -4,5 +4,6 @@
 	useHandleFriendshipEvent = require(script.useHandleFriendshipEvent),
 	usePresenceImpressionEvents = require(script.usePresenceImpressionEvents),
 	useDecoratedTrustedConnections = require(script.useDecoratedTrustedConnections),
-	useGetPresenceByUserId = require(script.useGetPresenceByUserId)
+	useGetPresenceByUserId = require(script.useGetPresenceByUserId),
+	useGetRatingDisplayByUniverseId = require(script.useGetRatingDisplayByUniverseId)
 }

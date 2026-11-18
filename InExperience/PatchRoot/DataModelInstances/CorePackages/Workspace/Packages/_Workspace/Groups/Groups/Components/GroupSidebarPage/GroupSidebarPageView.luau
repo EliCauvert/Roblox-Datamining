@@ -46,9 +46,16 @@ return ReactModule.memo(function(p1)
 			createLabel = p1.createLabel,
 			canCreate = p1.canCreate,
 			onBack = p1.onClose,
-			onCreate = p1.onCreate
+			onCreate = p1.onCreate,
+			isCompactTouch = p1.isCompactTouch
 		}),
-		Content = ReactModule.createElement(FoundationModule.View, { tag = "fill size-full-0", LayoutOrder = 2 }, {
+		Content = ReactModule.createElement(FoundationModule.View, {
+			LayoutOrder = 2,
+			tag = {
+				["fill size-full-0"] = true,
+				["padding-top-medium"] = not p1.isCompactTouch
+			}
+		}, {
 			Entry = pageEntry(p1, "groupSidebar", SignalsReactModule.useSignalState((ReactModule.useMemo(function()
 				-- upvalues: SignalsModule (upval), GetSidebarEntryIdentifierModule (upval), p1 (copy)
 				return SignalsModule.createComputed(function(p2)

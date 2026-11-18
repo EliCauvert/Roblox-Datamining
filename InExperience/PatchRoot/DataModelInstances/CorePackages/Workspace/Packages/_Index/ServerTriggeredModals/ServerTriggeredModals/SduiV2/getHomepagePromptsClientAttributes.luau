@@ -9,6 +9,7 @@ local FFlagTTOnboardingSheet = require(Parent.RobloxSubscriptionPurchaseApp).Fla
 local FFlagHomepagePromptsHalloween2026ThemeModule = require(ServerTriggeredModals.Flags.FFlagHomepagePromptsHalloween2026Theme)
 local FFlagAppThemeHalloween2026Module = require(Parent.SharedFlags.FFlagAppThemeHalloween2026)
 local FFlagAppThemeHalloween2026ForAllModule = require(Parent.SharedFlags.FFlagAppThemeHalloween2026ForAll)
+local FFlagUIScaleDiscoveryEducation = SharedFlagsModule.FFlagUIScaleDiscoveryEducation
 local PromiseModule = require(Parent.Promise)
 local NotificationsUpsellModule = require(Parent.NotificationsUpsell)
 local ReactModule = require(Parent.React)
@@ -41,8 +42,19 @@ local _ = function(p1)
 	end
 end
 
+local function getUIScaleSavedHundredths()
+	-- upvalues: Parent (copy), SharedFlagsModule (copy)
+	if require(Parent.AppCommonLib).isTenFootInterface() and SharedFlagsModule.FFlagUnifyConsoleSettingsPage and SharedFlagsModule.FFlagUIScaleEngineOptions then
+		local GetResult = require(Parent.Responsive).UIScaleOptions.get(game:GetService("GuiService"))
+		
+		return if GetResult == nil then nil else tostring(GetResult.savedHundredths)
+	else
+		return nil
+	end
+end
+
 local function getExistingHomepageClientAttributes()
-	-- upvalues: FFlagSplitPaneEducationalTour (copy), Parent (copy), FFlagPlusUpsellSheetHomePromptModule (copy), FFlagTTOnboardingSheet (copy), GetAppFeaturePoliciesFunction (copy), AppStorageService (copy), FFlagHomepagePromptsHalloween2026ThemeModule (copy), FFlagAppThemeHalloween2026Module (copy), FFlagAppThemeHalloween2026ForAllModule (copy)
+	-- upvalues: FFlagSplitPaneEducationalTour (copy), Parent (copy), FFlagPlusUpsellSheetHomePromptModule (copy), FFlagTTOnboardingSheet (copy), GetAppFeaturePoliciesFunction (copy), FFlagUIScaleDiscoveryEducation (copy), getUIScaleSavedHundredths (copy), AppStorageService (copy), FFlagHomepagePromptsHalloween2026ThemeModule (copy), FFlagAppThemeHalloween2026Module (copy), FFlagAppThemeHalloween2026ForAllModule (copy)
 	local t = {}
 	
 	if FFlagSplitPaneEducationalTour and require(Parent.SplitPane).isSplitPaneTourSupported() then
@@ -50,6 +62,13 @@ local function getExistingHomepageClientAttributes()
 	end
 	if FFlagPlusUpsellSheetHomePromptModule and FFlagTTOnboardingSheet and not GetAppFeaturePoliciesFunction().getDisableBlackbirdEntrypoints() then
 		t.isPlusUpsellSheetPromptSupported = "true"
+	end
+	if FFlagUIScaleDiscoveryEducation then
+		local UIScaleSavedHundredths = getUIScaleSavedHundredths()
+		
+		if UIScaleSavedHundredths ~= nil then
+			t.uiScaleSavedHundredths = UIScaleSavedHundredths
+		end
 	end
 	local Success, Result = pcall(AppStorageService.GetItem, AppStorageService, "KidsAccountHasResetToDefaultTheme")
 	

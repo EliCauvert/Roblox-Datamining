@@ -10,6 +10,7 @@ local WithSelectionCursorProviderFunction = UIBloxModule.App.SelectionImage.with
 local CursorKind = UIBloxModule.App.SelectionImage.CursorKind
 local NameTextBox = RoactModule.PureComponent:extend("NameTextBox")
 local RemoveNameRegex = game:DefineFastFlag("RemoveNameRegex", false)
+local FFlagPublishAssetPromptHandleInvalidUtf8Module = require(script.Parent.Parent.Parent.Flags.FFlagPublishAssetPromptHandleInvalidUtf8)
 NameTextBox.validateProps = TModule.strictInterface({
 	Size = TModule.optional(TModule.UDim2),
 	Position = TModule.optional(TModule.UDim2),
@@ -35,6 +36,7 @@ local function _(p1, p2): boolean
 end
 
 function NameTextBox.init(p1)
+	-- upvalues: FFlagPublishAssetPromptHandleInvalidUtf8Module (copy)
 	p1:setState({
 		lastValidName = "",
 		isNameValid = true,
@@ -54,16 +56,20 @@ function NameTextBox.init(p1)
 	end
 	
 	function p1.onTextChanged(p2)
-		-- upvalues: p1 (copy)
+		-- upvalues: FFlagPublishAssetPromptHandleInvalidUtf8Module (upval), p1 (copy)
 		local Text = p2.Text
+		local NoFFlagPublishAssetPromptHandleInvalidUtf8Module: boolean = not FFlagPublishAssetPromptHandleInvalidUtf8Module or utf8.len(Text) ~= nil
 		local MaxLength: number = p1.props.maxLength
-		local Length = utf8.len(utf8.nfcnormalize(Text))
 		
-		if Length == nil or MaxLength < Length then
-			Text = string.sub(Text, 1, utf8.offset(Text, MaxLength + 1) - 1)
-			p2.Text = Text
+		if NoFFlagPublishAssetPromptHandleInvalidUtf8Module then
+			local Length = utf8.len(utf8.nfcnormalize(Text))
+			
+			if Length == nil or MaxLength < Length then
+				Text = string.sub(Text, 1, utf8.offset(Text, MaxLength + 1) - 1)
+				p2.Text = Text
+			end
 		end
-		local CheckIsNameValidResult = p1:checkIsNameValid(Text)
+		local CheckIsNameValidResult = NoFFlagPublishAssetPromptHandleInvalidUtf8Module and p1:checkIsNameValid(Text)
 		p1:setState({
 			lastValidName = if CheckIsNameValidResult then p2.Text else p1.state.lastValidName,
 			isNameValid = CheckIsNameValidResult,

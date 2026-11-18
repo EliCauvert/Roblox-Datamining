@@ -3,6 +3,7 @@
 	UserSearchTile = require(script.Parent.Components.UserSearchTile),
 	UserSearchScreen = require(script.Parent.Components.UserSearchScreen),
 	UserSearchHydrationLayer = require(script.Parent.Components.UserSearchHydrationLayer),
+	UserSearchResultsHeader = require(script.Parent.Components.UserSearchResultsHeader),
 	ProfileInsightsContextFetchWrapper = require(script.Parent.Components.ProfileInsightsContextFetchWrapper),
 	Analytics = require(script.Parent.Analytics),
 	installReducer = require(script.Parent.Rodux.installReducer),

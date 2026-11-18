@@ -8,5 +8,6 @@ return {
 	TwoByOneTile = require(script.TwoByOneTile),
 	renderOneByTwoTile = require(script.renderOneByTwoTile),
 	renderTwoByOneTile = require(script.renderTwoByOneTile),
+	SponsoredFootnoteLabel = require(script.SponsoredFootnoteLabel),
 	["jest.config"] = script["jest.config"]
 }

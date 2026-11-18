@@ -30,12 +30,13 @@ local UnifiedPurchaseModalTypeEnumModule = require(Parent.Enums.UnifiedPurchaseM
 local FFlagEnableUnifiedPurchaseFlowForDevSubs = require(Parent.Parent.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
 local FFlagUnifiedPurchaseFlowMarketplaceUIImprovements = require(Parent.Parent.SharedFlags).FFlagUnifiedPurchaseFlowMarketplaceUIImprovements
 local FFlagOffersOnlyAffordableLock = require(Parent.Parent.SharedFlags).FFlagOffersOnlyAffordableLock
+local FFlagLuaAppAddTestIdsForArrow = require(Parent.Parent.SharedFlags).FFlagLuaAppAddTestIdsForArrow
 local FFlagLuaAppsEnablePromptVIPServerPurchase = require(Parent.Parent.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
 local _ = require(Parent.ProductPurchase.PricingTypes)
 local BlackbirdUpsellBanner = require(Parent1.RobloxSubscriptionPurchaseApp).Components.BlackbirdUpsellBanner
 
 local function UnifiedProductPurchaseModal(p1)
-	-- upvalues: UseLocalizationFunction (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), UrlBuilder (copy), UnifiedPurchaseModalTypeEnumModule (copy), ReactModule (copy), UseInitialButtonDisableDelayModule (copy), UseCartPricingModule (copy), FFlagOffersOnlyAffordableLock (copy), UseFocusNavigationRefsModule (copy), Checkbox (copy), BuildCartPricingOfferCheckboxesModule (copy), View (copy), Text (copy), CartPricingProductDetailsModule (copy), Sheet (copy), UnifiedPurchaseModalHeaderModule (copy), PriceSummaryModule (copy), UnifiedProductDetailsModule (copy), Button (copy), FillBehavior (copy), ButtonVariant (copy), BlackbirdUpsellBanner (copy)
+	-- upvalues: UseLocalizationFunction (copy), FFlagUnifiedPurchaseFlowMarketplaceUIImprovements (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), UrlBuilder (copy), UnifiedPurchaseModalTypeEnumModule (copy), ReactModule (copy), UseInitialButtonDisableDelayModule (copy), UseCartPricingModule (copy), FFlagOffersOnlyAffordableLock (copy), UseFocusNavigationRefsModule (copy), Checkbox (copy), BuildCartPricingOfferCheckboxesModule (copy), View (copy), Text (copy), CartPricingProductDetailsModule (copy), Sheet (copy), UnifiedPurchaseModalHeaderModule (copy), FFlagLuaAppAddTestIdsForArrow (copy), PriceSummaryModule (copy), UnifiedProductDetailsModule (copy), Button (copy), FillBehavior (copy), ButtonVariant (copy), BlackbirdUpsellBanner (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		Buy = "IAPExperience.PurchasePrompt.Action.Buy",
 		Subscribe = "Feature.Subscription.Action.Subscribe",
@@ -194,7 +195,8 @@ local function UnifiedProductPurchaseModal(p1)
 			ModalHeader = ReactModule.createElement(UnifiedPurchaseModalHeaderModule, {
 				titleText = UseStateResult1,
 				robuxBalanceAmount = p1.robuxBalanceAmount,
-				hideUserRobuxBalance = if FFlagUnifiedPurchaseFlowMarketplaceUIImprovements then p1.hideUserRobuxBalance else nil
+				hideUserRobuxBalance = if FFlagUnifiedPurchaseFlowMarketplaceUIImprovements then p1.hideUserRobuxBalance else nil,
+				titleTestId = if FFlagLuaAppAddTestIdsForArrow then "--iap-product-purchase--title" else nil
 			})
 		}),
 		Content = ReactModule.createElement(Sheet.Content, { LayoutOrder = 2 }, {

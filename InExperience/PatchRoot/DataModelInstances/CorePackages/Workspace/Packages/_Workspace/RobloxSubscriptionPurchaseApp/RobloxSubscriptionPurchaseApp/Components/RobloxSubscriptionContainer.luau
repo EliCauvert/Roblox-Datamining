@@ -11,6 +11,7 @@ local UseRobloxSubscriptionChangedListenerModule = require(RobloxSubscriptionPur
 local UseSubscriptionPollingTimeoutGuardModule = require(RobloxSubscriptionPurchaseApp.Hooks.useSubscriptionPollingTimeoutGuard)
 local UseMembershipConfigChangePollerModule = require(RobloxSubscriptionPurchaseApp.Hooks.useMembershipConfigChangePoller)
 local FFlagPlusMembershipConfigChangeCheck = require(Parent.SharedFlags).FFlagPlusMembershipConfigChangeCheck
+local FFlagOnboardingSheetLayout = require(Parent.SharedFlags).FFlagOnboardingSheetLayout
 local Sheet = FoundationModule.Sheet
 local DialogSize = FoundationModule.Enums.DialogSize
 local BlackbirdSheetContentModule = require(script.Parent.BlackbirdSheetContent)
@@ -24,7 +25,7 @@ local config1 = {
 }
 
 return function()
-	-- upvalues: RobloxSubscriptionStoreModule (copy), SignalsReactModule (copy), UseNativePurchaseFinishedListenerModule (copy), UseRobloxSubscriptionChangedListenerModule (copy), UseSubscriptionPollingTimeoutGuardModule (copy), FFlagPlusMembershipConfigChangeCheck (copy), UseMembershipConfigChangePollerModule (copy), BlackbirdSheetContentModule (copy), ErrorSheetContentModule (copy), config (copy), config1 (copy), ReactModule (copy), Sheet (copy), CompleteRobloxSubscriptionUpsellFlowModule (copy), DialogSize (copy)
+	-- upvalues: RobloxSubscriptionStoreModule (copy), SignalsReactModule (copy), UseNativePurchaseFinishedListenerModule (copy), UseRobloxSubscriptionChangedListenerModule (copy), UseSubscriptionPollingTimeoutGuardModule (copy), FFlagPlusMembershipConfigChangeCheck (copy), UseMembershipConfigChangePollerModule (copy), BlackbirdSheetContentModule (copy), ErrorSheetContentModule (copy), config (copy), config1 (copy), ReactModule (copy), Sheet (copy), CompleteRobloxSubscriptionUpsellFlowModule (copy), DialogSize (copy), FFlagOnboardingSheetLayout (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(RobloxSubscriptionStoreModule.get().getPromptState)
 	UseNativePurchaseFinishedListenerModule()
 	UseRobloxSubscriptionChangedListenerModule()
@@ -46,6 +47,7 @@ return function()
 		size = DialogSize.Medium
 	}, {
 		Header = ErrorSheetContentModuleResult1.Header,
+		FullBleed = if FFlagOnboardingSheetLayout then ErrorSheetContentModuleResult1.FullBleed else nil,
 		Content = ErrorSheetContentModuleResult1.Content,
 		Actions = ErrorSheetContentModuleResult1.Actions
 	}) or nil

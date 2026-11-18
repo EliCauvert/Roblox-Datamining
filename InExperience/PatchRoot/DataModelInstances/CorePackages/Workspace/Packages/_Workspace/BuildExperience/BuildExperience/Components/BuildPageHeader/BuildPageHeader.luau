@@ -188,13 +188,14 @@ return function(Frame)
 		LayoutOrder = Frame.LayoutOrder,
 		ref = if FFlagBuildUpdatedSearchUXForGAModule then UseBuildPageHeaderSearchModuleResult.headerRef else nil,
 		tag = if FFlagBuildUpdatedSearchUXForGAModule then {
-			["composition-content-header size-full-0 auto-y"] = true,
+			["size-full-0 auto-y"] = true,
+			["composition-content-header"] = not IsUseSignalStateResultMatch1,
 			["bg-surface-0"] = IsUseSignalStateResultMatch1 and not HasUseThemeBackgroundResult
 		} else "composition-content-header size-full-0 auto-y",
 		Size = UDim2.new(1, 0, 0, Frame.height)
 	}, if IsUseSignalStateResultMatch1 then {
 		DefaultBar = ReactModule.createElement(View, {
-			tag = "size-full",
+			tag = "composition-content-header size-full",
 			testId = "BuildPageHeader.DefaultBar",
 			GroupTransparency = UseBuildPageHeaderSearchModuleResult.fadeProgress,
 			Visible = UseBuildPageHeaderSearchModuleResult.fadeProgress:map(function(p1: number): boolean
@@ -203,7 +204,7 @@ return function(Frame)
 		}, { HeaderBar = Element }),
 		CompactSearch = ReactModule.createElement(View, {
 			ZIndex = 2,
-			tag = "row align-y-center gap-small size-full",
+			tag = "composition-content-header row align-y-center gap-small size-full",
 			testId = "BuildPageHeader.CompactSearchContainer",
 			GroupTransparency = UseBuildPageHeaderSearchModuleResult.fadeProgress:map(function(p1: number): number
 				return 1 - p1

@@ -8,5 +8,6 @@ return {
 	FFlagKeepSideSheetOpenBesideMenu = SharedFlagsModule.FFlagKeepSideSheetOpenBesideMenu,
 	FFlagSideSheetOpenPeoplePage = SharedFlagsModule.FFlagSideSheetOpenPeoplePage,
 	FFlagSideSheetOpenPeoplePageRestoreChat = game:DefineFastFlag("SideSheetOpenPeoplePageRestoreChat2", false),
-	FFlagPioneerLogoutButtonLabel = game:DefineFastFlag("PioneerLogoutButtonLabel", false)
+	FFlagPioneerLogoutButtonLabel = game:DefineFastFlag("PioneerLogoutButtonLabel", false),
+	FFlagPioneerSwitchServerNextToRespawn = game:DefineFastFlag("PioneerSwitchServerNextToRespawn", false)
 }

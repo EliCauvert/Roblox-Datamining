@@ -2,6 +2,9 @@
 	DevStoreSeeAllPage = function()
 		return require(script.Components.DevStoreSeeAllPage)
 	end,
+	GameItemDetailsPage = function()
+		return require(script.Components.GameItemDetailsPage)
+	end,
 	SduiExperienceStoreRegister = require(script.System.SduiExperienceStoreRegister),
 	SduiVirtualGameItemText = require(script.Components.SduiVirtualGameItemText),
 	navigateToDevStoreSeeAll = function(...)
