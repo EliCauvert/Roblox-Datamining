@@ -3497,6 +3497,7 @@ Feature.Chat.Label.OneToOne.ThemRepliedToYou,ตอบกลับคุณ
 Feature.Chat.Label.OneToOne.YouRepliedToThem,คุณตอบกลับ
 Feature.Chat.Label.Pending,
 Feature.Chat.Label.PrivacySettings,การตั้งค่าความเป็นส่วนตัว
+Feature.Chat.Label.Reactions,การแสดงความรู้สึก
 Feature.Chat.Label.ReplyChatInputPlaceholder,ตอบกลับ {DISPLAY_NAME}
 Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,
 Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} พูดว่า...
@@ -3504,9 +3505,11 @@ Feature.Chat.Label.ReplyingToYourself,คุณพูดว่า...
 Feature.Chat.Label.SearchForFriendsAndChat,ค้นหาการสนทนา
 Feature.Chat.Label.SearchFriends,ค้นหาเพื่อน
 Feature.Chat.Label.SearchWord,
+Feature.Chat.Label.SelectToRemove,เลือกเพื่อลบออก
 Feature.Chat.Label.Sent,ส่งแล้ว
 Feature.Chat.Label.SnoozePartyNotifications,ปิดเสียงการแจ้งเตือนเกี่ยวกับ Party ในประสบการณ์สำหรับ:
 Feature.Chat.Label.SwipeToReplyTooltip,ปัดเพื่อตอบกลับ
+Feature.Chat.Label.TapToRemove,แตะเพื่อลบออก
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} วัน
 Feature.Chat.Label.TimestampHoursAbbreviatedPlural,{num_hours} ชม.
 Feature.Chat.Label.TimestampMinutesAbbreviatedPlural,{num_minutes} นาที
@@ -4485,7 +4488,7 @@ Feature.Moments.Label.PostFeedbackPostingTitle,กำลังโพสต์โ
 Feature.Moments.Label.PostRemovedBody,โมเมนต์ที่คุณโพสต์ขัดต่อมาตรฐานชุมชนของเรา
 Feature.Moments.Label.PostedOnDate,โพสต์เมื่อ {date}
 Feature.Moments.Label.PublishingRodeoBody,การดำเนินการนี้น่าจะใช้เวลาไม่นาน
-Feature.Moments.Label.Reactions,การแสดงความรู้สึก
+Feature.Moments.Label.Reactions,
 Feature.Moments.Label.ReportReason.BreaksRules,โพสต์นี้ละเมิดกฎ
 Feature.Moments.Label.ReportReason.IntellectualProperty,โพสต์นี้ละเมิดทรัพย์สินทางปัญญาของฉัน
 Feature.Moments.Label.ReportSubmittedBody,ขอบคุณสำหรับข้อเสนอแนะของคุณ
@@ -5036,6 +5039,7 @@ Feature.PlatformRestriction.Action.Signout,
 Feature.PlatformRestriction.Content.NeedPermission,หากต้องการใช้ Roblox คุณต้องได้รับอนุญาตจากผู้ปกครองก่อน เมื่อผู้ปกครองอนุมัติแล้ว ให้ลงชื่อออกแล้วลงชื่อเข้าใช้อีกครั้งเพื่อเข้าถึง Roblox
 Feature.PlatformRestriction.Title.AskParent,
 Feature.PlayerSearchResults.Action.AddFriend,
+Feature.PlayerSearchResults.Heading.SearchResults,ผลการค้นหา
 Feature.PlayerSearchResults.Label.FromSearch,จากการค้นหา
 Feature.PlayerSearchResults.Label.KeywordTooShort,โปรดกรอกอย่างน้อย 3 อักขระ
 Feature.PlayerSearchResults.Label.NewUsername,ชื่อผู้ใช้ใหม่
