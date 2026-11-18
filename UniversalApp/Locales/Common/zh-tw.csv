@@ -143,7 +143,7 @@ Authentication.AccountRecovery.Description.EmailCodeSentForUser,如果提供的�
 Authentication.AccountRecovery.Description.EmailUnavailableInfo,由於年齡變更，某些電子郵件地址可能因為變更而無法使用。不過，這些電子郵件地址仍可用於復原帳號。
 Authentication.AccountRecovery.Description.EnhancedProtectionAddPasskey,你已加入升級版防護計畫。為了維護帳號安全，使用者必須擁有密碼金鑰或安全金鑰才能登入。{lineBreak}{lineBreak}若使用個人裝置，建議立即設定新的密碼金鑰。如此一來，日後你就能更輕鬆地在此裝置上登入。若使用共用或公共的裝置，請略過此步驟。
 Authentication.AccountRecovery.Description.EnterABackupCode,現在，請輸入你之前已儲存的備份碼。
-Authentication.AccountRecovery.Description.EnterContactMethodAssociatedWithYourAccount,請輸入可能已經與帳號綁定的電子郵件地址或手機號碼。若先前曾有購買紀錄，可嘗試使用帳務電子郵件地址。
+Authentication.AccountRecovery.Description.EnterContactMethodAssociatedWithYourAccount,請輸入與你的帳號綁定的任何電子郵件地址或手機號碼。若先前曾有購買紀錄，可嘗試使用帳務電子郵件地址。
 Authentication.AccountRecovery.Description.EnterEmailAddress,現在，請輸入電子郵件地址。這可以是你在 Roblox 上購買商品時使用的電子郵件。
 Authentication.AccountRecovery.Description.EnterPhoneBackupCodeOrAnotherEmail,現在，請輸入手機號碼、備份碼或其他電子郵件地址。這可以是你在 Roblox 上購買商品時使用的電子郵件
 Authentication.AccountRecovery.Description.EnterPhoneNumberSecondMethod,現在，請輸入與你的帳號綁定的手機號碼。
@@ -3868,6 +3868,7 @@ Feature.Friends.Label.FollowsYou,正在追蹤您
 Feature.Friends.Label.Frequent,密切玩伴
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,已邀請您成為 Roblox 好友
+Feature.Friends.Label.FriendOfUser,{displayName} 的好友
 Feature.Friends.Label.FriendOwns,1 位好友擁有
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 位好友</b>最近玩過
 Feature.Friends.Label.FriendRequest,
@@ -4118,12 +4119,11 @@ Feature.Groups.Description.RequiresAccountTenureTooltipOneMonth,必須擁有帳�
 Feature.Groups.Description.RequiresAccountTenureTooltipOneWeek,必須擁有帳號達 7 天，才能加入此社群。
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeDays,必須擁有帳號達 3 天，才能加入此社群。
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeMonths,必須擁有帳號達 90 天，才能加入此社群。
-Feature.Groups.Header.UppercaseMyGroups,我的社群
 Feature.Groups.Heading.Community,
 Feature.Groups.Heading.Followers,
 Feature.Groups.Heading.Groups,
 Feature.Groups.Heading.Members,
-Feature.Groups.Heading.MyGroups,
+Feature.Groups.Heading.MyGroups,我的社群
 Feature.Groups.Heading.Primary,主要
 Feature.Groups.Heading.SocialLinksNew,社交連結
 Feature.Groups.Heading.SocialMedia,社交媒體
@@ -4385,6 +4385,7 @@ Feature.Moments.Action.ShowDetails,顯示詳細資訊
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,裁剪影片
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Action.View,
 Feature.Moments.Action.ViewOtherFeed,檢視其他饋送
 Feature.Moments.Action.ViewRecommended,檢視推薦內容
 Feature.Moments.Action.ViewTrending,檢視熱門內容
@@ -4392,6 +4393,14 @@ Feature.Moments.Body.EDPMomentIPReportInstructions,若要檢舉此「美好時�
 Feature.Moments.Body.MomentPosting,正在處理你的「美好時光」。
 Feature.Moments.Description.CommunityStandards,查看社群標準，瞭解哪些內容可以或不能發佈。
 Feature.Moments.Description.EmptyCapturesLibrary,這裡會顯示你的截圖。
+Feature.Moments.Description.EngagementFirstLike,立即檢視
+Feature.Moments.Description.EngagementFirstReaction,你的「美好時光」剛剛獲得了第一個反應！
+Feature.Moments.Description.EngagementLikedCommentsDigest,你的 {likedComments} 則留言獲得了讚
+Feature.Moments.Description.EngagementMomentDigest,{comments} 則新留言和 {milestone} 個反應
+Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementNewComment,剛剛在你的「美好時光」上留言
+Feature.Moments.Description.EngagementNewComments,和其他 {count} 人在你的「美好時光」上留言
+Feature.Moments.Description.EngagementReactionMilestone,{count} 個新反應
 Feature.Moments.Description.FollowingCaughtUpBody,你已觀看此饋送中所有新的「美好時光」。切換饋送以檢視更多內容。
 Feature.Moments.Description.FollowingEmptyBodyRecommended,你將在此處看到追蹤創作者的「美好時光」。
 Feature.Moments.Description.FollowingEmptyBodyTrending,
@@ -4537,6 +4546,14 @@ Feature.Moments.Title.Comments,留言
 Feature.Moments.Title.CommentsWithCappedCount,超過 {count} 則留言
 Feature.Moments.Title.CommentsWithCount,{count} 則留言
 Feature.Moments.Title.EDPMomentIPReportInstructions,在遊戲詳細資訊頁面上檢舉
+Feature.Moments.Title.EngagementFirstLike,你收到了一個讚
+Feature.Moments.Title.EngagementFirstReaction,新活動
+Feature.Moments.Title.EngagementLikedCommentsDigest,新的按讚數
+Feature.Moments.Title.EngagementMomentDigest,你的「美好時光」很受歡迎
+Feature.Moments.Title.EngagementMomentsDigest,
+Feature.Moments.Title.EngagementNewComment,{name}
+Feature.Moments.Title.EngagementNewComments,
+Feature.Moments.Title.EngagementReactionMilestone,有人正開始關注你的「美好時光」
 Feature.Moments.Title.GenerateTextFeedbackReason,發生什麼問題了嗎？
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,要離開「美好時光」建立程序嗎？
@@ -5299,6 +5316,7 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,優惠僅適用於新的 Plus 訂閱者。
 Feature.RobloxSubscription.Description.ReferralReferrerReward,當有人使用你的連結購買 Plus 時。
 Feature.RobloxSubscription.Description.ReferralShare,邀請他人加入 Plus，對方購買 Plus 時，雙方皆可獲得 {amount} Robux。
+Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,透過 Plus 獲得生成效果
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"按一下\u{201C}{ctaText}\u{201D}，即表示您同意 <a href=""{termsUrl}"">Roblox 訂閱條款</a>。系統將每月自動向您收取費用，直到取消訂閱為止。"
 Feature.RobloxSubscription.Heading.ReferralEntry,分享 Plus 即可獲得 {amount} Robux
 Feature.RobloxSubscription.Heading.ReferralHistory,推薦歷史紀錄

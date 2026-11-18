@@ -2547,6 +2547,7 @@ Feature.Build.Description.ActivateSubscription,使订阅 {PRODUCT_ID} 可供购�
 Feature.Build.Description.AdCampaignModerationReview,在投放之前，我们会审核每条广告。此过程最多可能需要 24 小时。
 Feature.Build.Description.AdCampaignSheetRunDates,投放时间 {startDate}-{endDate}
 Feature.Build.Description.AdComplete,你的广告已投放完毕。查看其效果。
+Feature.Build.Description.AdCreditsSavedForRetry,我们已将你的 Robux 保存为广告点数。请重试，我们将用这些点数为你创建广告。
 Feature.Build.Description.AdModerationReview,
 Feature.Build.Description.AdvancedModel,最适合复杂的游戏。使用额度消耗速度较快。
 Feature.Build.Description.AdvertisingAgreement,选择“创建”，即表示你同意 {advertisingTermsStart}Roblox 广告条款{advertisingTermsEnd}和{advertisingStandardsStart}广告准则{advertisingStandardsEnd}。
@@ -2947,6 +2948,7 @@ Feature.Build.Title.AdCampaignDuration,{durationDays} 天广告
 Feature.Build.Title.AdCampaignOptionDurationShort,{durationDays} 天
 Feature.Build.Title.AdComplete,广告已完成
 Feature.Build.Title.AdCreatedPeriod,广告已创建。
+Feature.Build.Title.AdNotCreated,我们无法为你创建广告
 Feature.Build.Title.AddFriendsToPlaytest,
 Feature.Build.Title.AddImages,添加图片
 Feature.Build.Title.AdsStatsEmpty,
@@ -4097,12 +4099,11 @@ Feature.Groups.Description.RequiresAccountTenureTooltipOneMonth,你的帐户必�
 Feature.Groups.Description.RequiresAccountTenureTooltipOneWeek,你的帐户必须注册满 7 天才能加入此社区。
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeDays,你的帐户必须注册满 3 天才能加入此社区。
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeMonths,你的帐户必须注册满 90 天才能加入此社区。
-Feature.Groups.Header.UppercaseMyGroups,我的社区
 Feature.Groups.Heading.Community,
 Feature.Groups.Heading.Followers,
 Feature.Groups.Heading.Groups,
 Feature.Groups.Heading.Members,
-Feature.Groups.Heading.MyGroups,
+Feature.Groups.Heading.MyGroups,我的社区
 Feature.Groups.Heading.Primary,主要
 Feature.Groups.Heading.SocialLinksNew,社交链接
 Feature.Groups.Heading.SocialMedia,社交媒体
@@ -4363,6 +4364,7 @@ Feature.Moments.Action.ShowDetails,显示详情
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,裁剪视频
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Action.View,
 Feature.Moments.Action.ViewOtherFeed,查看其他推送
 Feature.Moments.Action.ViewRecommended,查看推荐内容
 Feature.Moments.Action.ViewTrending,查看热门内容
@@ -4370,6 +4372,14 @@ Feature.Moments.Body.EDPMomentIPReportInstructions,要举报此“精彩瞬间�
 Feature.Moments.Body.MomentPosting,你的精彩瞬间正在处理。
 Feature.Moments.Description.CommunityStandards,请查看《社区准则》，进一步了解关于言论的规范。
 Feature.Moments.Description.EmptyCapturesLibrary,你的截图将显示在此处。
+Feature.Moments.Description.EngagementFirstLike,立即查看
+Feature.Moments.Description.EngagementFirstReaction,你的精彩瞬间刚刚获得了第一个回应！
+Feature.Moments.Description.EngagementLikedCommentsDigest,你的 {likedComments} 条评论获得了点赞
+Feature.Moments.Description.EngagementMomentDigest,{comments} 条新评论和 {milestone} 个回应
+Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementNewComment,刚刚评论了你的精彩瞬间
+Feature.Moments.Description.EngagementNewComments,和另外 {count} 人评论了你的精彩瞬间
+Feature.Moments.Description.EngagementReactionMilestone,{count} 个新回应
 Feature.Moments.Description.FollowingCaughtUpBody,你已看完此推送中的所有新“精彩瞬间”。切换推送以查看更多内容。
 Feature.Moments.Description.FollowingEmptyBodyRecommended,你将在这里看到你关注的创作者发布的“精彩瞬间”。
 Feature.Moments.Description.FollowingEmptyBodyTrending,
@@ -4515,6 +4525,14 @@ Feature.Moments.Title.Comments,评论
 Feature.Moments.Title.CommentsWithCappedCount,超过 {count} 条评论
 Feature.Moments.Title.CommentsWithCount,{count} 条评论
 Feature.Moments.Title.EDPMomentIPReportInstructions,在游戏详情页面上举报
+Feature.Moments.Title.EngagementFirstLike,你收到了一条点赞
+Feature.Moments.Title.EngagementFirstReaction,新动态
+Feature.Moments.Title.EngagementLikedCommentsDigest,新点赞
+Feature.Moments.Title.EngagementMomentDigest,你的精彩瞬间很受欢迎
+Feature.Moments.Title.EngagementMomentsDigest,
+Feature.Moments.Title.EngagementNewComment,{name}
+Feature.Moments.Title.EngagementNewComments,
+Feature.Moments.Title.EngagementReactionMilestone,你的精彩瞬间正在受到关注
 Feature.Moments.Title.GenerateTextFeedbackReason,内容有什么问题？
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,要离开“精彩瞬间”创建页面吗？

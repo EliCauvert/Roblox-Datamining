@@ -127,7 +127,7 @@ Authentication.AccountRecovery.Description.EmailCodeSentForUser,เราเพ�
 Authentication.AccountRecovery.Description.EmailUnavailableInfo,อีเมลบางรายการอาจไม่พร้อมใช้งานเนื่องจากมีการเปลี่ยนแปลงอายุ อย่างไรก็ตาม อีเมลเหล่านั้นยังคงใช้สำหรับการกู้คืนบัญชีได้
 Authentication.AccountRecovery.Description.EnhancedProtectionAddPasskey,คุณลงทะเบียนในโปรแกรมการป้องกันขั้นสูงแล้ว เพื่อรักษาบัญชีของคุณให้ปลอดภัย คุณจะต้องใช้พาสคีย์หรือคีย์รักษาความปลอดภัยเพื่อลงชื่อเข้าใช้{lineBreak}{lineBreak}หากคุณใช้อุปกรณ์ส่วนตัว ขอแนะนำให้ตั้งค่าพาสคีย์ใหม่ทันที จะได้ลงชื่อเข้าใช้บนอุปกรณ์นี้ง่ายขึ้นในอนาคต หากใช้อุปกรณ์ที่ใช้ร่วมกันหรืออุปกรณ์สาธารณะ ให้ข้ามขั้นตอนนี้ไป
 Authentication.AccountRecovery.Description.EnterABackupCode,ต่อไป ให้กรอกรหัสสำรองที่คุณบันทึกไว้
-Authentication.AccountRecovery.Description.EnterContactMethodAssociatedWithYourAccount,กรอกอีเมลหรือหมายเลขโทรศัพท์ที่อาจเชื่อมโยงกับบัญชีของคุณ หากเคยทำการซื้อมาก่อน ลองใช้อีเมลสำหรับการเรียกเก็บเงินของคุณดู
+Authentication.AccountRecovery.Description.EnterContactMethodAssociatedWithYourAccount,กรอกอีเมลหรือหมายเลขโทรศัพท์ที่เชื่อมโยงกับบัญชีของคุณ ลองใช้อีเมลสำหรับการเรียกเก็บเงินของคุณดู หากเคยทำการซื้อมาก่อน
 Authentication.AccountRecovery.Description.EnterEmailAddress,ต่อไป กรอกอีเมล อาจเป็นอีเมลที่คุณเคยใช้ซื้อของใน Roblox
 Authentication.AccountRecovery.Description.EnterPhoneBackupCodeOrAnotherEmail,ต่อไป กรอกหมายเลขโทรศัพท์ รหัสสำรอง หรืออีเมลอื่น อาจเป็นอีเมลที่คุณเคยใช้ซื้อของใน Roblox
 Authentication.AccountRecovery.Description.EnterPhoneNumberSecondMethod,ต่อไป ให้กรอกหมายเลขโทรศัพท์ที่เชื่อมโยงกับบัญชีของคุณ
@@ -3852,6 +3852,7 @@ Feature.Friends.Label.FollowsYou,ติดตามคุณ
 Feature.Friends.Label.Frequent,เล่นด้วยกัน
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,เชิญคุณให้เป็นเพื่อนบน Roblox
+Feature.Friends.Label.FriendOfUser,เพื่อนของ {displayName}
 Feature.Friends.Label.FriendOwns,เพื่อน 1 คนเป็นเจ้าของ
 Feature.Friends.Label.FriendRecentlyPlayed,<b>เพื่อน 1 คน</b>เพิ่งเล่นเมื่อเร็วๆ นี้
 Feature.Friends.Label.FriendRequest,
@@ -4102,12 +4103,11 @@ Feature.Groups.Description.RequiresAccountTenureTooltipOneMonth,คุณต้�
 Feature.Groups.Description.RequiresAccountTenureTooltipOneWeek,คุณต้องมีบัญชีมาแล้ว 7 วัน จึงจะเข้าร่วมชุมชนนี้ได้
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeDays,คุณต้องมีบัญชีมาแล้ว 3 วัน จึงจะเข้าร่วมชุมชนนี้ได้
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeMonths,คุณต้องมีบัญชีมาแล้ว 90 วัน จึงจะเข้าร่วมชุมชนนี้ได้
-Feature.Groups.Header.UppercaseMyGroups,ชุมชนของฉัน
 Feature.Groups.Heading.Community,
 Feature.Groups.Heading.Followers,
 Feature.Groups.Heading.Groups,
 Feature.Groups.Heading.Members,
-Feature.Groups.Heading.MyGroups,
+Feature.Groups.Heading.MyGroups,ชุมชนของฉัน
 Feature.Groups.Heading.Primary,กลุ่มหลัก
 Feature.Groups.Heading.SocialLinksNew,ลิงก์โซเชียล
 Feature.Groups.Heading.SocialMedia,โซเชียลมีเดีย
@@ -4369,6 +4369,7 @@ Feature.Moments.Action.ShowDetails,แสดงรายละเอียด
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,ตัดวิดีโอ
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Action.View,
 Feature.Moments.Action.ViewOtherFeed,ดูฟีดอื่น
 Feature.Moments.Action.ViewRecommended,ดูฟีดแนะนำ
 Feature.Moments.Action.ViewTrending,ดูฟีดมาแรง
@@ -4376,6 +4377,14 @@ Feature.Moments.Body.EDPMomentIPReportInstructions,หากต้องกา�
 Feature.Moments.Body.MomentPosting,กำลังดำเนินการกับโมเมนต์ของคุณอยู่
 Feature.Moments.Description.CommunityStandards,ดูข้อมูลเพิ่มเติมเกี่ยวกับสิ่งที่คุณพูดได้และพูดไม่ได้ในมาตรฐานชุมชน
 Feature.Moments.Description.EmptyCapturesLibrary,ภาพที่คุณจับไว้จะปรากฏที่นี่
+Feature.Moments.Description.EngagementFirstLike,ดูเลย
+Feature.Moments.Description.EngagementFirstReaction,มีคนแสดงความรู้สึกต่อโมเมนต์ของคุณเป็นครั้งแรก!
+Feature.Moments.Description.EngagementLikedCommentsDigest,มีคนกดถูกใจความคิดเห็นของคุณ {likedComments} รายการ
+Feature.Moments.Description.EngagementMomentDigest,มีความคิดเห็นใหม่ {comments} รายการ และการแสดงความรู้สึก {milestone} ครั้ง
+Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementNewComment,เพิ่งแสดงความคิดเห็นในโมเมนต์ของคุณ
+Feature.Moments.Description.EngagementNewComments,และอีก {count} คนแสดงความคิดเห็นในโมเมนต์ของคุณ
+Feature.Moments.Description.EngagementReactionMilestone,การแสดงความรู้สึกใหม่ {count} ครั้ง
 Feature.Moments.Description.FollowingCaughtUpBody,คุณติดตามโมเมนต์ใหม่ในฟีดนี้หมดแล้ว สลับฟีดเพื่อดูเพิ่มเติม
 Feature.Moments.Description.FollowingEmptyBodyRecommended,คุณจะเห็นโมเมนต์ของครีเอเตอร์ที่คุณติดตามได้ที่นี่
 Feature.Moments.Description.FollowingEmptyBodyTrending,
@@ -4521,6 +4530,14 @@ Feature.Moments.Title.Comments,ความคิดเห็น
 Feature.Moments.Title.CommentsWithCappedCount,{count}+ ความคิดเห็น
 Feature.Moments.Title.CommentsWithCount,{count} ความคิดเห็น
 Feature.Moments.Title.EDPMomentIPReportInstructions,รายงานบนหน้ารายละเอียดเกม
+Feature.Moments.Title.EngagementFirstLike,มีคนกดถูกใจให้คุณ
+Feature.Moments.Title.EngagementFirstReaction,กิจกรรมใหม่
+Feature.Moments.Title.EngagementLikedCommentsDigest,มีการกดถูกใจใหม่
+Feature.Moments.Title.EngagementMomentDigest,โมเมนต์ของคุณกำลังมาแรง
+Feature.Moments.Title.EngagementMomentsDigest,
+Feature.Moments.Title.EngagementNewComment,{name}
+Feature.Moments.Title.EngagementNewComments,
+Feature.Moments.Title.EngagementReactionMilestone,โมเมนต์ของคุณเริ่มเป็นที่สนใจแล้ว
 Feature.Moments.Title.GenerateTextFeedbackReason,มีอะไรผิดพลาด?
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,ต้องการออกจากการสร้างสรรค์โมเมนต์ใช่ไหม?
@@ -5283,6 +5300,7 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,ข้อเสนอใช้ได้กับสมาชิก Plus รายใหม่เท่านั้น
 Feature.RobloxSubscription.Description.ReferralReferrerReward,เมื่อมีคนซื้อ Plus ด้วยลิงก์ของคุณ
 Feature.RobloxSubscription.Description.ReferralShare,ชวนเพื่อนมาใช้ Plus แล้วรับ {amount} Robux ไปเลยทั้งคู่เมื่อเพื่อนซื้อ Plus
+Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,รับเอฟเฟกต์การเกิดใหม่เมื่อสมัคร Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"การคลิก \u{201C}{ctaText}\u{201D} จะถือว่าคุณยอมรับ<a href=""{termsUrl}"">ข้อกำหนดการสมัครสมาชิกของ Roblox</a> โดยจะมีการเรียกเก็บเงินในแต่ละเดือนโดยอัตโนมัติจนกว่าคุณจะยกเลิก"
 Feature.RobloxSubscription.Heading.ReferralEntry,แชร์ Plus แล้วรับ {amount} Robux
 Feature.RobloxSubscription.Heading.ReferralHistory,ประวัติการแนะนำ

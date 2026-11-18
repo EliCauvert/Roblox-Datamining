@@ -3869,6 +3869,7 @@ Feature.Friends.Label.FollowsYou,あなたをフォロー中
 Feature.Friends.Label.Frequent,一緒に遊んだ人
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,Robloxで友達になるように招待しました。
+Feature.Friends.Label.FriendOfUser,{displayName}の友達
 Feature.Friends.Label.FriendOwns,友達1人が持っています
 Feature.Friends.Label.FriendRecentlyPlayed,<b>友達1人が</b>最近プレイしました
 Feature.Friends.Label.FriendRequest,
@@ -4119,12 +4120,11 @@ Feature.Groups.Description.RequiresAccountTenureTooltipOneMonth,このコミュ�
 Feature.Groups.Description.RequiresAccountTenureTooltipOneWeek,このコミュニティに参加するには、7日前にアカウントを作成する必要があります。
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeDays,このコミュニティに参加するには、3日前にアカウントを作成する必要があります。
 Feature.Groups.Description.RequiresAccountTenureTooltipThreeMonths,このコミュニティに参加するには、90日前にアカウントを作成する必要があります。
-Feature.Groups.Header.UppercaseMyGroups,マイコミュニティ
 Feature.Groups.Heading.Community,
 Feature.Groups.Heading.Followers,
 Feature.Groups.Heading.Groups,
 Feature.Groups.Heading.Members,
-Feature.Groups.Heading.MyGroups,
+Feature.Groups.Heading.MyGroups,マイコミュニティ
 Feature.Groups.Heading.Primary,メイン
 Feature.Groups.Heading.SocialLinksNew,SNSリンク
 Feature.Groups.Heading.SocialMedia,ソーシャルメディア
@@ -4386,6 +4386,7 @@ Feature.Moments.Action.ShowDetails,
 Feature.Moments.Action.ShowMore,
 Feature.Moments.Action.TrimVideo,ビデオをトリミング
 Feature.Moments.Action.TryAgain,
+Feature.Moments.Action.View,
 Feature.Moments.Action.ViewOtherFeed,その他のフィードを表示
 Feature.Moments.Action.ViewRecommended,おすすめを表示
 Feature.Moments.Action.ViewTrending,トレンドを表示
@@ -4393,6 +4394,14 @@ Feature.Moments.Body.EDPMomentIPReportInstructions,このモーメントにお�
 Feature.Moments.Body.MomentPosting,モーメントは処理中です。
 Feature.Moments.Description.CommunityStandards,発言できることとできないことの詳細については、コミュニティ基準を確認してください。
 Feature.Moments.Description.EmptyCapturesLibrary,ここに切り抜きが表示されます。
+Feature.Moments.Description.EngagementFirstLike,今すぐ表示
+Feature.Moments.Description.EngagementFirstReaction,あなたのモーメントに最初のリアクションがありました！
+Feature.Moments.Description.EngagementLikedCommentsDigest,あなたのコメントのうち{likedComments}件に「いいね」がつきました
+Feature.Moments.Description.EngagementMomentDigest,{comments}件の新しいコメントと{milestone}件のリアクション
+Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementNewComment,があなたのモーメントにコメントしました
+Feature.Moments.Description.EngagementNewComments,と他{count}人があなたのモーメントにコメントしました
+Feature.Moments.Description.EngagementReactionMilestone,{count}件の新しいリアクション
 Feature.Moments.Description.FollowingCaughtUpBody,このフィードの新しいモーメントをすべて視聴しました。さらに見るには、フィードを切りかえてください。
 Feature.Moments.Description.FollowingEmptyBodyRecommended,ここに、フォローしているクリエーターのモーメントが表示されます。
 Feature.Moments.Description.FollowingEmptyBodyTrending,
@@ -4538,6 +4547,14 @@ Feature.Moments.Title.Comments,コメント
 Feature.Moments.Title.CommentsWithCappedCount,{count}件以上のコメント
 Feature.Moments.Title.CommentsWithCount,{count}件のコメント
 Feature.Moments.Title.EDPMomentIPReportInstructions,ゲームの詳細ページで規約違反を報告する
+Feature.Moments.Title.EngagementFirstLike,「いいね」されました
+Feature.Moments.Title.EngagementFirstReaction,新しいアクティビティ
+Feature.Moments.Title.EngagementLikedCommentsDigest,新しいいいね
+Feature.Moments.Title.EngagementMomentDigest,あなたのモーメントが話題になっています
+Feature.Moments.Title.EngagementMomentsDigest,
+Feature.Moments.Title.EngagementNewComment,{name}さん
+Feature.Moments.Title.EngagementNewComments,
+Feature.Moments.Title.EngagementReactionMilestone,あなたのモーメントが注目を集めています
 Feature.Moments.Title.GenerateTextFeedbackReason,何が問題でしたか？
 Feature.Moments.Title.GenerateTextOptions,
 Feature.Moments.Title.LeaveMomentCreation,モーメント作成を退出しますか？
@@ -5298,6 +5315,7 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,このオファーは、新規のPlus会員のみが対象です。
 Feature.RobloxSubscription.Description.ReferralReferrerReward,相手があなたのリンクからPlusを定期購入した場合。
 Feature.RobloxSubscription.Description.ReferralShare,Plusに招待した相手がPlusを定期購入すると、お互いに{amount} Robuxを獲得できます。
+Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,Plusでスポーンエフェクトを活用
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D}をクリックすると、<a href=""{termsUrl}"">Roblox定期購入規約</a>に同意したとみなされます。キャンセルするまで、毎月自動的に料金が課金されます。"
 Feature.RobloxSubscription.Heading.ReferralEntry,Plusをシェアして、{amount} Robuxを獲得
 Feature.RobloxSubscription.Heading.ReferralHistory,紹介履歴
