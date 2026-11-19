@@ -9,9 +9,9 @@ local _ = require(Components.Types)
 local ViewModule = require(Components.View)
 local GetStateLayerStyleModule = require(Components.Interactable.getStateLayerStyle)
 local UseSliderDirectionalInputModule = require(Components.InternalSlider.useSliderDirectionalInput)
+local FlagsModule = require(Foundation.Utility.Flags)
 local DevAssertModule = require(Foundation.Utility.devAssert)
 local GetBindableValueModule = require(Foundation.Utility.getBindableValue)
-local GetDisabledStyleModule = require(Foundation.Utility.getDisabledStyle)
 local MapBindableModule = require(Foundation.Utility.mapBindable)
 local UseLastInputModeModule = require(Foundation.Utility.Input.useLastInputMode)
 local UsePluginModule = require(Foundation.Providers.Plugin.usePlugin)
@@ -29,6 +29,8 @@ local CalculateInputSliderValueModule = require(script.Parent.calculateInputSlid
 local FormatInputSliderValueModule = require(script.Parent.formatInputSliderValue)
 local SnapInputSliderValueModule = require(script.Parent.snapInputSliderValue)
 local UseInputSliderFillModule = require(script.Parent.useInputSliderFill)
+local UseInputSliderVariantsModule = require(script.Parent.useInputSliderVariants)
+local UseTypedValueStepsModule = require(script.Parent.useTypedValueSteps)
 local config = {
 	SelectionBehaviorLeft = Enum.SelectionBehavior.Stop,
 	SelectionBehaviorRight = Enum.SelectionBehavior.Stop,
@@ -80,11 +82,6 @@ local _ = function(p1, Hover, p2)
 	end
 end
 
-local _ = function(p1, p2, p3)
-	-- upvalues: GetDisabledStyleModule (copy)
-	return GetDisabledStyleModule(if p2 then p1.Color.Content.Emphasis else p1.Color.Content.Default, p3), GetDisabledStyleModule(if p2 then p1.Color.Content.Default else p1.Color.Content.Muted, p3)
-end
-
 local _ = function(p1: number): number
 	-- upvalues: DevAssertModule (copy)
 	local v1 = p1 > 0
@@ -106,21 +103,21 @@ local _ = function(p1: number)
 end
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
-	-- upvalues: WithDefaultsModule (copy), config1 (copy), UseTokensModule (copy), UsePluginModule (copy), UseLastInputModeModule (copy), DevAssertModule (copy), ReactModule (copy), ControlStateModule (copy), GetBindableValueModule (copy), CalculateInputSliderValueModule (copy), OnChangeCallbackReasonModule (copy), FormatInputSliderValueModule (copy), SnapInputSliderValueModule (copy), UseSliderDirectionalInputModule (copy), InputModeModule (copy), UseInputSliderFillModule (copy), MapBindableModule (copy), GetDisabledStyleModule (copy), GetStateLayerStyleModule (copy), UseStyleTagsModule (copy), ViewModule (copy), WithCommonPropsModule (copy), config (copy), StateLayerAffordanceModule (copy), InputLabelModule (copy), InputLabelSizeModule (copy), ScrubDragDetector (copy), DashModule (copy), TextModule (copy)
+	-- upvalues: WithDefaultsModule (copy), config1 (copy), UseTokensModule (copy), UsePluginModule (copy), UseLastInputModeModule (copy), DevAssertModule (copy), ReactModule (copy), ControlStateModule (copy), GetBindableValueModule (copy), CalculateInputSliderValueModule (copy), OnChangeCallbackReasonModule (copy), FormatInputSliderValueModule (copy), SnapInputSliderValueModule (copy), FlagsModule (copy), UseTypedValueStepsModule (copy), UseSliderDirectionalInputModule (copy), InputModeModule (copy), UseInputSliderVariantsModule (copy), UseInputSliderFillModule (copy), MapBindableModule (copy), GetStateLayerStyleModule (copy), UseStyleTagsModule (copy), ViewModule (copy), WithCommonPropsModule (copy), config (copy), StateLayerAffordanceModule (copy), InputLabelModule (copy), InputLabelSizeModule (copy), ScrubDragDetector (copy), DashModule (copy), TextModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config1)
 	local UseTokensModuleResult = UseTokensModule()
 	local UsePluginModuleResult = UsePluginModule()
 	local UseLastInputModeModuleResult = UseLastInputModeModule()
 	local Range = WithDefaultsModuleResult.range
 	local Step: number = WithDefaultsModuleResult.step
-	local v1 = nil
+	local Step1 = nil
 	
 	if Step == nil then
-		v1 = nil
+		Step1 = nil
 	else
 		local IsStepAbove = Step > 0
 		DevAssertModule(IsStepAbove, `InputSlider: step must be positive, got {Step}.`)
-		v1 = if IsStepAbove then Step else nil
+		Step1 = if IsStepAbove then Step else nil
 	end
 	local Sensitivity: number = WithDefaultsModuleResult.sensitivity
 	local IsSensitivityAbove = Sensitivity > 0
@@ -183,7 +180,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 		end
 	end, { IsDisabled, UseResult })
 	local UseResult4 = ReactModule.useCallback(function(_, Vector)
-		-- upvalues: UseRefResult1 (copy), UseRefResult4 (copy), UseStateResult2_1 (copy), WithDefaultsModuleResult (copy), UseResult1 (copy), CalculateInputSliderValueModule (upval), Sensitivity1 (copy), v1 (copy), Range (copy), OnChangeCallbackReasonModule (upval)
+		-- upvalues: UseRefResult1 (copy), UseRefResult4 (copy), UseStateResult2_1 (copy), WithDefaultsModuleResult (copy), UseResult1 (copy), CalculateInputSliderValueModule (upval), Sensitivity1 (copy), Step1 (copy), Range (copy), OnChangeCallbackReasonModule (upval)
 		local Current = UseRefResult1.current
 		
 		if Current == nil then return end
@@ -198,12 +195,12 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 				WithDefaultsModuleResult.onDragStarted()
 			end
 		end
-		UseResult1(CalculateInputSliderValueModule(Current.startValue, Vector.X - Current.originX, Sensitivity1 * 0.25, v1, Range), OnChangeCallbackReasonModule.Drag)
+		UseResult1(CalculateInputSliderValueModule(Current.startValue, Vector.X - Current.originX, Sensitivity1 * 0.25, Step1, Range), OnChangeCallbackReasonModule.Drag)
 	end, {
 		WithDefaultsModuleResult.onDragStarted,
 		UseResult1,
 		Sensitivity1,
-		v1,
+		Step1,
 		Range
 	})
 	local UseResult5 = ReactModule.useCallback(function()
@@ -260,7 +257,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 		UseStateResult2(true)
 	end, { UseResult })
 	local UseResult8 = ReactModule.useCallback(function(p2, p3, Input)
-		-- upvalues: UseStateResult2 (copy), UseRefResult2 (copy), FormatInputSliderValueModule (upval), UseResult (copy), SnapInputSliderValueModule (upval), v1 (copy), Range (copy), UseRefResult4 (copy), UseResult1 (copy), OnChangeCallbackReasonModule (upval)
+		-- upvalues: UseStateResult2 (copy), UseRefResult2 (copy), FormatInputSliderValueModule (upval), UseResult (copy), SnapInputSliderValueModule (upval), Step1 (copy), Range (copy), UseRefResult4 (copy), UseResult1 (copy), OnChangeCallbackReasonModule (upval)
 		UseStateResult2(false)
 		local IsKeyCodeMatch: boolean = Input ~= nil and Input.KeyCode == Enum.KeyCode.Escape
 		
@@ -272,13 +269,13 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 		local Number: number? = tonumber(p2.Text)
 		
 		if Number == nil or Number ~= Number or p2.Text == FormatInputSliderValueModule(UseResult()) then return end
-		local SnapInputSliderValueModuleResult = SnapInputSliderValueModule(Number, v1, Range)
+		local SnapInputSliderValueModuleResult = SnapInputSliderValueModule(Number, Step1, Range)
 		
 		if SnapInputSliderValueModuleResult ~= UseResult() then
 			UseRefResult4.current = true
 		end
 		UseResult1(SnapInputSliderValueModuleResult, if p3 then OnChangeCallbackReasonModule.Keyboard else OnChangeCallbackReasonModule.FocusLost)
-	end, { UseResult, UseResult1, Range, v1 })
+	end, { UseResult, UseResult1, Range, Step1 })
 	local UseResult9 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseBindingResult2 (copy)
 		UseBindingResult2(p2.Text)
@@ -292,6 +289,19 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 			Current:ReleaseFocus()
 		end
 	end, {})
+	
+	if FlagsModule.FoundationInputSliderTypedValueSteps then
+		UseTypedValueStepsModule({
+			defaultStep = 1,
+			isTyping = UseStateResult,
+			isDisabled = IsDisabled,
+			textBoxRef = UseRefResult,
+			step = Step1,
+			range = Range,
+			getValue = UseResult,
+			changeValue = UseResult1
+		})
+	end
 	local UseResult11 = ReactModule.useCallback(function()
 		-- upvalues: UseRefResult3 (copy), UseResult (copy), UseStateResult2_3 (copy)
 		UseRefResult3.current = UseResult()
@@ -306,13 +316,13 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 		UseResult1(UseRefResult3.current, OnChangeCallbackReasonModule.Keyboard)
 		UseStateResult2_3(false)
 	end, { UseResult1 })
-	UseSliderDirectionalInputModule(UseStateResult4 and not IsDisabled, v1 or 1, Range, false, (ReactModule.useMemo(function()
-		-- upvalues: UseResult (copy), v1 (copy), Range (copy), UseResult1 (copy), OnChangeCallbackReasonModule (upval), UseResult13 (copy)
+	UseSliderDirectionalInputModule(UseStateResult4 and not IsDisabled, Step1 or 1, Range, false, (ReactModule.useMemo(function()
+		-- upvalues: UseResult (copy), Step1 (copy), Range (copy), UseResult1 (copy), OnChangeCallbackReasonModule (upval), UseResult13 (copy)
 		return {
 			getValue = UseResult,
 			onStep = function(p2: number)
-				-- upvalues: v1 (upval), UseResult (upval), Range (upval), UseResult1 (upval), OnChangeCallbackReasonModule (upval)
-				if v1 == nil then
+				-- upvalues: Step1 (upval), UseResult (upval), Range (upval), UseResult1 (upval), OnChangeCallbackReasonModule (upval)
+				if Step1 == nil then
 					local UseResultResult: number = UseResult()
 					p2 = math.clamp(UseResultResult + math.sign(p2 - UseResultResult) * 1, Range.Min, Range.Max)
 				end
@@ -324,7 +334,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 		UseResult,
 		UseResult1,
 		UseResult13,
-		v1,
+		Step1,
 		Range
 	})))
 	ReactModule.useEffect(function()
@@ -379,7 +389,8 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 			Mouse.Icon = Icon
 		end
 	end, { UsePluginModuleResult, UseStateResult1_1 })
-	local UseInputSliderFillModuleResult = UseInputSliderFillModule(WithDefaultsModuleResult.value, Range, IsDisabled, UseRefResult4)
+	local UseInputSliderVariantsModuleResult = UseInputSliderVariantsModule(UseTokensModuleResult, UseStateResult7, IsDisabled)
+	local UseInputSliderFillModuleResult = UseInputSliderFillModule(WithDefaultsModuleResult.value, Range, UseInputSliderVariantsModuleResult.fill.filledStyle, UseInputSliderVariantsModuleResult.fill.unfilledStyle, UseRefResult4)
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseStateResult (copy), UseBindingResult (copy), MapBindableModule (upval), WithDefaultsModuleResult (copy), FormatInputSliderValueModule (upval), Range (copy)
 		return if UseStateResult then UseBindingResult else MapBindableModule(WithDefaultsModuleResult.value, function(Value: number)
@@ -392,8 +403,6 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 		WithDefaultsModuleResult.value,
 		Range
 	})
-	local DisabledStyleModule = GetDisabledStyleModule(if UseStateResult7 then UseTokensModuleResult.Color.Content.Emphasis else UseTokensModuleResult.Color.Content.Default, IsDisabled)
-	local DisabledStyleModule1 = GetDisabledStyleModule(if UseStateResult7 then UseTokensModuleResult.Color.Content.Default else UseTokensModuleResult.Color.Content.Muted, IsDisabled)
 	local StateLayerStyleModule = nil
 	
 	if IsDisabled or UseStateResult or UseStateResult4 then
@@ -413,8 +422,8 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	}
 	
 	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
-		tag = "col gap-small auto-y",
 		Size = UDim2.new(WithDefaultsModuleResult.width or UDim.new(1, 0), UDim.new()),
+		tag = UseInputSliderVariantsModuleResult.container.tag,
 		selectionGroup = if UseStateResult4 then config else nil,
 		ref = Ref
 	}), {
@@ -439,17 +448,10 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 		}) else nil,
 		Field = ReactModule.createElement(ViewModule, {
 			LayoutOrder = 2,
-			tag = {
-				["size-full-600 radius-small"] = true,
-				["stroke-standard stroke-position-inner stroke-system-emphasis"] = UseStateResult7
-			},
+			tag = UseInputSliderVariantsModuleResult.field.tag,
 			stateLayer = { affordance = StateLayerAffordanceModule.None },
-			backgroundStyle = { Transparency = 0.001, Color3 = Color3.new(1, 1, 1) },
-			cursor = {
-				radius = UDim.new(0, UseTokensModuleResult.Radius.Small),
-				offset = UseTokensModuleResult.Stroke.Thick,
-				borderWidth = UseTokensModuleResult.Stroke.Thick
-			},
+			backgroundStyle = UseInputSliderVariantsModuleResult.field.backgroundStyle,
+			cursor = UseInputSliderVariantsModuleResult.field.cursor,
 			onStateChanged = UseStateResult2_4,
 			onActivated = UseResult14,
 			isDisabled = IsDisabled,
@@ -482,20 +484,20 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 					Selectable = false,
 					AutomaticSize = Enum.AutomaticSize.X,
 					Size = UDim2.fromScale(0, 1),
-					TextColor3 = DisabledStyleModule.Color3,
-					TextTransparency = DisabledStyleModule.Transparency,
+					TextColor3 = UseInputSliderVariantsModuleResult.textBox.TextColor3,
+					TextTransparency = UseInputSliderVariantsModuleResult.textBox.TextTransparency,
 					LayoutOrder = 1,
 					ref = UseRefResult,
-					[ReactModule.Tag] = `{UseStyleTagsModule("text-body-small text-align-x-left text-align-y-center gui-object-defaults")} data-testid={WithDefaultsModuleResult.testId}--textbox`,
+					[ReactModule.Tag] = `{UseStyleTagsModule(UseInputSliderVariantsModuleResult.textBox.tag)} data-testid={WithDefaultsModuleResult.testId}--textbox`,
 					[ReactModule.Event.Focused] = UseResult7,
 					[ReactModule.Event.FocusLost] = UseResult8,
 					[ReactModule.Change.Text] = UseResult9
 				}),
 				Suffix = if WithDefaultsModuleResult.suffix then ReactModule.createElement(TextModule, {
-					tag = "auto-xy text-body-small",
 					LayoutOrder = 2,
 					Text = WithDefaultsModuleResult.suffix,
-					textStyle = DisabledStyleModule1,
+					tag = UseInputSliderVariantsModuleResult.suffix.tag,
+					textStyle = UseInputSliderVariantsModuleResult.suffix.textStyle,
 					testId = `{WithDefaultsModuleResult.testId}--suffix`
 				}) else nil
 			})

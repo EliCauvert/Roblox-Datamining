@@ -13,7 +13,6 @@ local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
 local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 local UseAnimatedHighlightModule = require(Foundation.Utility.useAnimatedHighlight)
-local OverflowScrollContainerModule1 = require(script.Parent.OverflowScrollContainer)
 local config = {
 	testId = "--foundation-tabs",
 	ZIndex = 1,
@@ -22,7 +21,7 @@ local config = {
 }
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
-	-- upvalues: UseTokensModule (copy), WithDefaultsModule (copy), config (copy), ReactModule (copy), DashModule (copy), FlagsModule (copy), FillBehaviorModule (copy), UseAnimatedHighlightModule (copy), ViewModule (copy), WithCommonPropsModule (copy), OverflowScrollContainerModule (copy), OverflowScrollContainerModule1 (copy), InputSizeModule (copy), TabItemModule (copy)
+	-- upvalues: UseTokensModule (copy), WithDefaultsModule (copy), config (copy), ReactModule (copy), DashModule (copy), FlagsModule (copy), FillBehaviorModule (copy), UseAnimatedHighlightModule (copy), ViewModule (copy), WithCommonPropsModule (copy), OverflowScrollContainerModule (copy), InputSizeModule (copy), TabItemModule (copy)
 	local UseTokensModuleResult = UseTokensModule()
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(WithDefaultsModuleResult.defaultActiveTabId or DashModule.get(WithDefaultsModuleResult, { 1, "id" }))
@@ -40,20 +39,13 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 		return p3.id == ActiveTabId
 	end)
 	local UseRefResult = ReactModule.useRef(nil)
-	local v1 = nil
-	local UseBindingResult2 = nil
-	local UseResult1 = nil
-	
-	if FlagsModule.FoundationUnifiedScrimScrolling then
-		v1, UseBindingResult2 = ReactModule.useBinding(0)
-		UseResult1 = ReactModule.useCallback(function(Frame)
-			-- upvalues: UseBindingResult2 (ref)
-			UseBindingResult2(Frame.AbsoluteSize.X)
-		end, {})
-	end
-	local UseMemoResult = nil
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
+	local UseResult1 = ReactModule.useCallback(function(Frame)
+		-- upvalues: UseBindingResult2 (copy)
+		UseBindingResult2(Frame.AbsoluteSize.X)
+	end, {})
 	local UseRefResult1 = ReactModule.useRef({})
-	UseMemoResult = ReactModule.useMemo(function()
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseRefResult1 (copy), WithDefaultsModuleResult (copy), ReactModule (upval)
 		local Current = UseRefResult1.current
 		
@@ -73,13 +65,13 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 	local Size = WithDefaultsModuleResult.size
 	
 	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
-		tag = if FlagsModule.FoundationUnifiedScrimScrolling then "auto-y no-clip" else "auto-y clip",
+		tag = "auto-y no-clip",
 		Size = UDim2.fromScale(1, 0),
-		sizeConstraint = if FlagsModule.FoundationUnifiedScrimScrolling and not IsFillBehaviorMatch then {
-			MaxSize = v1:map(function(X): Vector2
+		sizeConstraint = if IsFillBehaviorMatch then nil else {
+			MaxSize = UseBindingResult:map(function(X): Vector2
 				return Vector2.new(X, 1e999)
 			end)
-		} else nil
+		}
 	}), {
 		Tabs = ReactModule.createElement(ViewModule, {
 			tag = "col auto-y",
@@ -92,18 +84,14 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 				Size = UDim2.fromScale(1, 0),
 				testId = `{WithDefaultsModuleResult.testId}--wrapper`
 			}, {
-				ScrollContainer = ReactModule.createElement(if FlagsModule.FoundationUnifiedScrimScrolling then OverflowScrollContainerModule else OverflowScrollContainerModule1, if FlagsModule.FoundationUnifiedScrimScrolling then {
+				ScrollContainer = ReactModule.createElement(OverflowScrollContainerModule, {
 					LayoutOrder = 1,
 					size = WithDefaultsModuleResult.size,
 					scrimBottomInset = UseTokensModuleResult.Stroke.Thick,
 					testId = `{WithDefaultsModuleResult.testId}--scroll-container`
-				} else {
-					LayoutOrder = 1,
-					size = WithDefaultsModuleResult.size,
-					testId = `{WithDefaultsModuleResult.testId}--scroll-container`
 				}, {
 					TabList = ReactModule.createElement(ViewModule, {
-						onAbsoluteSizeChanged = if FlagsModule.FoundationUnifiedScrimScrolling then UseResult1 else nil,
+						onAbsoluteSizeChanged = UseResult1,
 						tag = if FlagsModule.FoundationFixTabsFitGap then "row flex-y-fill auto-xy" else {
 							["row flex-y-fill auto-xy"] = true,
 							["gap-large"] = not IsFillBehaviorMatch and (Size == InputSizeModule.Small or Size == InputSizeModule.XSmall)
@@ -111,7 +99,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 						Size = if IsFillBehaviorMatch then UDim2.fromScale(1, 0) else nil,
 						testId = `{WithDefaultsModuleResult.testId}--list`
 					}, DashModule.map(WithDefaultsModuleResult.tabs, function(p3, LayoutOrder)
-						-- upvalues: ReactModule (upval), TabItemModule (upval), ActiveTabId (copy), UseResult (copy), WithDefaultsModuleResult (copy), UseMemoResult (ref)
+						-- upvalues: ReactModule (upval), TabItemModule (upval), ActiveTabId (copy), UseResult (copy), WithDefaultsModuleResult (copy), UseMemoResult (copy)
 						return ReactModule.createElement(TabItemModule, {
 							id = p3.id,
 							text = p3.text,

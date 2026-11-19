@@ -46,7 +46,7 @@ local config1 = {
 }
 
 return ReactModule.forwardRef(function(p1, p2)
-	-- upvalues: WithDefaultsModule (copy), config (copy), UsePanelsContextModule (copy), ReactModule (copy), PluginPopoverParentContextModule (copy), PopoverContextModule (copy), UseStyleSheetFunction (copy), UseTokensModule (copy), UseElevationModule (copy), ElevationLayerModule (copy), ElevationModule (copy), UseOverlayModule (copy), PopoverSideModule (copy), PopoverAlignModule (copy), UsePluginAnchorModule (copy), FlagsModule (copy), GetPanelPositionModule (copy), PLUGINSHADOWSIZE (copy), LoggerModule (copy), PositioningModule (copy), UsePanelModule (copy), IsPointInGuiObjectBoundsModule (copy), UseArrowPositionModule (copy), ReactRobloxModule (copy), ViewModule (copy), PopoverShadowModule (copy), config1 (copy), PopoverArrowModule (copy), ElevationOwnerScope (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), UsePanelsContextModule (copy), ReactModule (copy), PluginPopoverParentContextModule (copy), PopoverContextModule (copy), UseStyleSheetFunction (copy), UseTokensModule (copy), UseElevationModule (copy), ElevationLayerModule (copy), ElevationModule (copy), FlagsModule (copy), UseOverlayModule (copy), PopoverSideModule (copy), PopoverAlignModule (copy), UsePluginAnchorModule (copy), GetPanelPositionModule (copy), PLUGINSHADOWSIZE (copy), LoggerModule (copy), PositioningModule (copy), UsePanelModule (copy), IsPointInGuiObjectBoundsModule (copy), UseArrowPositionModule (copy), ReactRobloxModule (copy), ViewModule (copy), PopoverShadowModule (copy), config1 (copy), PopoverArrowModule (copy), ElevationOwnerScope (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UsePanelsContextModuleResult = UsePanelsContextModule()
 	local UseContextResult = ReactModule.useContext(PluginPopoverParentContextModule)
@@ -57,6 +57,12 @@ return ReactModule.forwardRef(function(p1, p2)
 	local UseElevationModuleResult = UseElevationModule(ElevationLayerModule.Popover, { stackAboveOwner = true })
 	local RelativeIndex = ElevationModule.getRelativeIndex(UseElevationModuleResult)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseRefResult = if FlagsModule.FoundationPopoverPluginSettleRenders then ReactModule.useRef(nil) else nil
+	local UseResult = if FlagsModule.FoundationPopoverPluginSettleRenders then ReactModule.useCallback(function(Current)
+		-- upvalues: UseRefResult (copy), UseStateResult2 (copy)
+		UseRefResult.current = Current
+		UseStateResult2(Current)
+	end, {}) else nil
 	ReactModule.useImperativeHandle(p2, function()
 		-- upvalues: UseStateResult (copy)
 		return UseStateResult
@@ -79,45 +85,51 @@ return ReactModule.forwardRef(function(p1, p2)
 			UseMemoResult:Destroy()
 		end
 	end, { UseMemoResult })
-	local UseBindingResult2 = nil
-	local UseBindingResult2_1 = nil
-	local UseStateResult1 = nil
-	local UseStateResult2_1 = nil
-	local UseBindingResult
-	UseBindingResult, UseBindingResult2 = ReactModule.useBinding(UDim2.new())
-	local UseBindingResult1
-	UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(UDim2.new())
-	UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(UDim2.new())
+	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(UDim2.new())
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
 	local Size200: number = UseTokensModuleResult.Size.Size_200
 	local SizeRatio = Size200 * 1.4142135623730951 / 2
 	local BackgroundStyle = WithDefaultsModuleResult.backgroundStyle or UseTokensModuleResult.Color.Surface.Surface_100
-	local Side = nil
-	local Offset = nil
-	local Offset1 = nil
-	Side = if WithDefaultsModuleResult.side then WithDefaultsModuleResult.side else PopoverSideModule.Bottom
+	local Side = if WithDefaultsModuleResult.side then WithDefaultsModuleResult.side else PopoverSideModule.Bottom
 	local Align = if WithDefaultsModuleResult.align then WithDefaultsModuleResult.align else PopoverAlignModule.Center
-	Offset = if type(Side) == "table" then Side.offset else 0
-	Offset1 = if type(Align) == "table" then Align.offset else 0
-	local Position = nil
-	Position = if type(Side) == "table" then Side.position else Side
+	local Offset = if type(Side) == "table" then Side.offset else 0
+	local Offset1 = if type(Align) == "table" then Align.offset else 0
+	local Position = if type(Side) == "table" then Side.position else Side
 	local Position1 = if type(Align) == "table" then Align.position else Align
 	local v1: number = if Position1 == PopoverAlignModule.Center then 0.5 elseif Position1 == PopoverAlignModule.End then 1 else 0
 	local UsePluginAnchorModuleResult = UsePluginAnchorModule(UseContextResult1.anchor, UseContextResult1.anchorUri)
 	local HasArrow = not UsePluginAnchorModuleResult.isVirtual and WithDefaultsModuleResult.hasArrow
-	local Ready = nil
-	local HasUseOverlayModuleResult = nil
-	local NoUseStateResult = nil
-	Ready = UseContextResult1.isOpen and (UsePluginAnchorModuleResult.isReady and UseContextResult.ready)
-	HasUseOverlayModuleResult = Ready and UseOverlayModuleResult ~= nil
-	NoUseStateResult = HasUseOverlayModuleResult and UseStateResult1 == nil
-	ReactModule.useEffect(function()
-		-- upvalues: Ready (ref), UseStateResult2_1 (ref)
-		if not Ready then
-			UseStateResult2_1(nil)
+	local Ready = UseContextResult1.isOpen and (UsePluginAnchorModuleResult.isReady and UseContextResult.ready)
+	local HasUseOverlayModuleResult: boolean = Ready and UseOverlayModuleResult ~= nil
+	local NoUseStateResult: boolean = HasUseOverlayModuleResult and UseStateResult1 == nil
+	local v2 = false
+	
+	if FlagsModule.FoundationPopoverPluginSettleRenders then
+		local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
+		
+		if WithDefaultsModuleResult.keepMounted and HasUseOverlayModuleResult and not UseStateResult3 then
+			UseStateResult2_2(true)
 		end
-	end, { Ready })
-	local UseResult = ReactModule.useCallback(function(Frame)
-		-- upvalues: FlagsModule (upval), NoUseStateResult (ref), UseStateResult2_1 (ref)
+		v2 = WithDefaultsModuleResult.keepMounted == true and (UseStateResult3 and not HasUseOverlayModuleResult)
+	end
+	if FlagsModule.FoundationPopoverPluginSettleRenders then
+		ReactModule.useLayoutEffect(function()
+			-- upvalues: Ready (copy), UseStateResult2_1 (copy)
+			if not Ready then
+				UseStateResult2_1(nil)
+			end
+		end, { Ready })
+	else
+		ReactModule.useEffect(function()
+			-- upvalues: Ready (copy), UseStateResult2_1 (copy)
+			if not Ready then
+				UseStateResult2_1(nil)
+			end
+		end, { Ready })
+	end
+	local UseResult1 = ReactModule.useCallback(function(Frame)
+		-- upvalues: FlagsModule (upval), NoUseStateResult (copy), UseStateResult2_1 (copy)
 		if not FlagsModule.FoundationPopoverRecomputeContentSize and not NoUseStateResult then return end
 		local AbsoluteSize = Frame.AbsoluteSize
 		
@@ -127,8 +139,13 @@ return ReactModule.forwardRef(function(p1, p2)
 	end, {
 		if FlagsModule.FoundationPopoverRecomputeContentSize then nil else NoUseStateResult
 	})
-	local UseMemoResult1 = ReactModule.useMemo(function()
-		-- upvalues: GetPanelPositionModule (upval), Side (ref), WithDefaultsModuleResult (copy), PopoverAlignModule (upval), PLUGINSHADOWSIZE (upval), HasArrow (copy), SizeRatio (copy)
+	local UseMemoResult1 = if FlagsModule.FoundationPopoverPluginSettleRenders then ReactModule.useMemo(function()
+		-- upvalues: GetPanelPositionModule (upval), Position (copy), Offset (copy), Position1 (copy), Offset1 (copy), PLUGINSHADOWSIZE (upval), HasArrow (copy), SizeRatio (copy)
+		return GetPanelPositionModule({ position = Position, offset = Offset }, { position = Position1, offset = Offset1 }, nil, PLUGINSHADOWSIZE, if HasArrow then SizeRatio else 0)
+	end, {
+		Position, Offset, Position1, Offset1, HasArrow, SizeRatio
+	}) else ReactModule.useMemo(function()
+		-- upvalues: GetPanelPositionModule (upval), Side (copy), WithDefaultsModuleResult (copy), PopoverAlignModule (upval), PLUGINSHADOWSIZE (upval), HasArrow (copy), SizeRatio (copy)
 		return GetPanelPositionModule(Side, WithDefaultsModuleResult.align or PopoverAlignModule.Start, nil, PLUGINSHADOWSIZE, if HasArrow then SizeRatio else 0)
 	end, {
 		Side,
@@ -136,15 +153,15 @@ return ReactModule.forwardRef(function(p1, p2)
 		HasArrow,
 		SizeRatio
 	})
-	local UseResult1 = ReactModule.useCallback(function(p3, p4, p5, p6, p7, p8, p9)
+	local UseResult2 = ReactModule.useCallback(function(p3, p4, p5, p6, p7, p8, p9)
 		-- upvalues: UsePanelsContextModuleResult (copy), FlagsModule (upval)
 		return UsePanelsContextModuleResult.registerPopoverAsync(p3, p4, p5, p6, p7, if FlagsModule.FoundationPopoverPluginFocusable then p8 else nil, if FlagsModule.FoundationPopoverPluginPoolReclaim then p9 else nil)
 	end, { UsePanelsContextModuleResult.registerPopoverAsync })
-	local UseRefResult = ReactModule.useRef(false)
+	local UseRefResult1 = ReactModule.useRef(false)
 	ReactModule.useEffect(function()
-		-- upvalues: WithDefaultsModuleResult (copy), UseRefResult (copy), LoggerModule (upval)
-		if not WithDefaultsModuleResult.onPressedOutside and not UseRefResult.current then
-			UseRefResult.current = true
+		-- upvalues: WithDefaultsModuleResult (copy), UseRefResult1 (copy), LoggerModule (upval)
+		if not WithDefaultsModuleResult.onPressedOutside and not UseRefResult1.current then
+			UseRefResult1.current = true
 			LoggerModule:warning("PopoverContent rendered in a plugin context without onPressedOutside. In Studio, the QWidget popup will close on focus loss, but the parent's isOpen state will not update. Provide onPressedOutside to stay in sync.")
 		end
 	end, { WithDefaultsModuleResult.onPressedOutside })
@@ -162,7 +179,7 @@ return ReactModule.forwardRef(function(p1, p2)
 			UseContextResult1.anchor
 		}),
 		anchorUri = UsePluginAnchorModuleResult.uri,
-		registerPanelAsync = UseResult1,
+		registerPanelAsync = UseResult2,
 		position = UseMemoResult1,
 		depth = if RelativeIndex == nil then 0 else RelativeIndex,
 		parentPopoverId = Id,
@@ -191,23 +208,26 @@ return ReactModule.forwardRef(function(p1, p2)
 		UseStateResult,
 		WithDefaultsModuleResult.onPressedOutside
 	})
-	ReactModule.useLayoutEffect(function()
-		-- upvalues: NoUseStateResult (ref), UseStateResult (copy), UseStateResult2_1 (ref)
-		if not NoUseStateResult or UseStateResult == nil then return end
-		local AbsoluteSize = UseStateResult.AbsoluteSize
-		
-		if AbsoluteSize.X > 0 and AbsoluteSize.Y > 0 then
-			UseStateResult2_1(AbsoluteSize)
-		end
-	end, { NoUseStateResult, UseStateResult })
+	
+	if not FlagsModule.FoundationPopoverPluginSettleRenders then
+		ReactModule.useLayoutEffect(function()
+			-- upvalues: NoUseStateResult (copy), UseStateResult (copy), UseStateResult2_1 (copy)
+			if not NoUseStateResult or UseStateResult == nil then return end
+			local AbsoluteSize = UseStateResult.AbsoluteSize
+			
+			if AbsoluteSize.X > 0 and AbsoluteSize.Y > 0 then
+				UseStateResult2_1(AbsoluteSize)
+			end
+		end, { NoUseStateResult, UseStateResult })
+	end
 	local UseMemoResult2 = if FlagsModule.FoundationPopoverPluginPoolReclaim then nil else ReactModule.useMemo(function()
-		-- upvalues: UseStateResult1 (ref), PositioningModule (upval), Position (ref), Offset (ref), Offset1 (ref), HasArrow (copy), SizeRatio (copy), PLUGINSHADOWSIZE (upval)
+		-- upvalues: UseStateResult1 (copy), PositioningModule (upval), Position (copy), Offset (copy), Offset1 (copy), HasArrow (copy), SizeRatio (copy), PLUGINSHADOWSIZE (upval)
 		return if UseStateResult1 then PositioningModule.calculatePopoverBounds(Position, Offset, Offset1, if HasArrow then SizeRatio else 0, UseStateResult1) + Vector2.new(PLUGINSHADOWSIZE * 2, PLUGINSHADOWSIZE * 2) else nil
 	end, {
 		UseStateResult1, Position, Offset, Offset1, HasArrow, SizeRatio
 	})
 	ReactModule.useLayoutEffect(function()
-		-- upvalues: FlagsModule (upval), NewPopoverBounds (ref), UseMemoResult2 (copy), UseStateResult1 (ref), UseBindingResult2_1 (ref), UseBindingResult2 (ref), UsePanelModuleResult (copy)
+		-- upvalues: FlagsModule (upval), NewPopoverBounds (ref), UseMemoResult2 (copy), UseStateResult1 (copy), UseBindingResult2_1 (copy), UseBindingResult2 (copy), UsePanelModuleResult (copy)
 		local NewPopoverBounds1 = if FlagsModule.FoundationPopoverPluginPoolReclaim then NewPopoverBounds else UseMemoResult2
 		
 		if UseStateResult1 == nil or NewPopoverBounds1 == nil then
@@ -228,11 +248,21 @@ return ReactModule.forwardRef(function(p1, p2)
 		UsePanelModuleResult
 	})
 	ReactModule.useLayoutEffect(function()
-		-- upvalues: HasUseOverlayModuleResult (ref), UseMemoResult (copy), FlagsModule (upval), NewPopoverBounds (ref), UseMemoResult2 (copy), UsePanelModuleResult (copy), UseOverlayModuleResult (copy)
+		-- upvalues: v2 (ref), UseOverlayModuleResult (copy), UseMemoResult (copy), HasUseOverlayModuleResult (copy), FlagsModule (upval), NewPopoverBounds (ref), UseMemoResult2 (copy), UsePanelModuleResult (copy)
+		if v2 and UseOverlayModuleResult then
+			UseMemoResult.Visible = false
+			UseMemoResult.Position = UDim2.fromOffset(-10000, -10000)
+			UseMemoResult.Parent = UseOverlayModuleResult
+			
+			return
+		end
 		if not HasUseOverlayModuleResult then
 			UseMemoResult.Parent = nil
 			
 			return
+		end
+		if FlagsModule.FoundationPopoverPluginSettleRenders then
+			UseMemoResult.Visible = true
 		end
 		local NewPopoverBounds1 = if FlagsModule.FoundationPopoverPluginPoolReclaim then NewPopoverBounds else UseMemoResult2
 		
@@ -250,12 +280,24 @@ return ReactModule.forwardRef(function(p1, p2)
 			UseMemoResult.Parent = UseOverlayModuleResult
 		end
 	end, {
-		HasUseOverlayModuleResult,
-		UseOverlayModuleResult,
-		UsePanelModuleResult,
+		HasUseOverlayModuleResult, UseOverlayModuleResult, UsePanelModuleResult,
 		if FlagsModule.FoundationPopoverPluginPoolReclaim then NewPopoverBounds else UseMemoResult2,
-		UseMemoResult
+		UseMemoResult, v2, WithDefaultsModuleResult.keepMounted
 	})
+	
+	if FlagsModule.FoundationPopoverPluginSettleRenders then
+		ReactModule.useLayoutEffect(function()
+			-- upvalues: UseRefResult (copy), NoUseStateResult (copy), UseStateResult2_1 (copy)
+			local Current = UseRefResult.current
+			
+			if not NoUseStateResult or Current == nil then return end
+			local AbsoluteSize = Current.AbsoluteSize
+			
+			if AbsoluteSize.X > 0 and AbsoluteSize.Y > 0 then
+				UseStateResult2_1(AbsoluteSize)
+			end
+		end, { NoUseStateResult, UseStateResult })
+	end
 	local UseArrowPositionModuleResult = UseArrowPositionModule(UseBindingResult1, Position, WithDefaultsModuleResult.radius, v1, SizeRatio, if UsePluginAnchorModuleResult.isVirtual or typeof(UseContextResult1.anchor) ~= "Instance" then nil else UseContextResult1.anchor)
 	local Ready1: boolean = UsePanelModuleResult ~= nil and (if FlagsModule.FoundationPopoverPluginPoolReclaim then NewPopoverBounds else UseMemoResult2) ~= nil
 	local UseMemoResult3 = ReactModule.useMemo(function()
@@ -267,7 +309,7 @@ return ReactModule.forwardRef(function(p1, p2)
 	end, { UsePanelModuleResult, Ready1 })
 	local Portal = nil
 	
-	if HasUseOverlayModuleResult and UseMemoResult then
+	if (HasUseOverlayModuleResult or v2) and UseMemoResult then
 		local NewPopoverBounds1 = if FlagsModule.FoundationPopoverPluginPoolReclaim then NewPopoverBounds else UseMemoResult2
 		local XY = if NewPopoverBounds1 == nil then Enum.AutomaticSize.XY else nil
 		local NewPopoverBounds2 = if FlagsModule.FoundationPopoverPluginPoolReclaim then NewPopoverBounds else UseMemoResult2
@@ -296,8 +338,8 @@ return ReactModule.forwardRef(function(p1, p2)
 					ZIndex = 3,
 					tag = `auto-xy {config1[WithDefaultsModuleResult.radius]}`,
 					Position = UDim2.fromOffset(PLUGINSHADOWSIZE, PLUGINSHADOWSIZE),
-					ref = UseStateResult2,
-					onAbsoluteSizeChanged = UseResult,
+					ref = if FlagsModule.FoundationPopoverPluginSettleRenders then UseResult else UseStateResult2,
+					onAbsoluteSizeChanged = if v2 then nil else UseResult1,
 					backgroundStyle = BackgroundStyle,
 					testId = `{UseContextResult1.testId}--content`
 				}, ReactModule.createElement(PluginPopoverParentContextModule.Provider, { value = UseMemoResult3 }, {

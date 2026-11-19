@@ -2797,12 +2797,15 @@ Feature.Build.Label.ToolAssetSearchRunning,Przeszukuję bibliotekę zasobów
 Feature.Build.Label.ToolClientDMDone,Przeszukano DataModel klienta
 Feature.Build.Label.ToolClientDMFailed,Nie udało się przeszukać DataModel klienta
 Feature.Build.Label.ToolClientDMRunning,Wyszukiwanie DataModel klienta
+Feature.Build.Label.ToolCodeRunning,Uruchamiam kod
 Feature.Build.Label.ToolCompileDone,Skompilowano kod
 Feature.Build.Label.ToolCompileFailed,Nie udało się skompilować kodu
 Feature.Build.Label.ToolCompileRunning,Kompiluję kod
+Feature.Build.Label.ToolDeveloperProductRunning,Pracuję nad Twoim produktem deweloperskim
 Feature.Build.Label.ToolGameInfoDone,Zaktualizowano informacje o grze
 Feature.Build.Label.ToolGameInfoFailed,Nie udało się zaktualizować informacji o grze
 Feature.Build.Label.ToolGameInfoRunning,Aktualizuję informacje o grze
+Feature.Build.Label.ToolGamePassRunning,Pracuję nad Twoją przepustką do gry
 Feature.Build.Label.ToolGameSaveDone,Zapisano grę
 Feature.Build.Label.ToolGameSaveFailed,Nie udało się zapisać gry
 Feature.Build.Label.ToolGameSaveRunning,Zapisuję grę
@@ -2821,6 +2824,7 @@ Feature.Build.Label.ToolLuauRunning,Wykonuję Luau
 Feature.Build.Label.ToolModelDone,Wygenerowano model 3D
 Feature.Build.Label.ToolModelFailed,Nie udało się wygenerować modelu 3D
 Feature.Build.Label.ToolModelRunning,Generuję model 3D
+Feature.Build.Label.ToolMonetizationRunning,Pracuję nad monetyzacją Twojej gry
 Feature.Build.Label.ToolPlanPresentDone,Przedstawiono plan
 Feature.Build.Label.ToolPlanPresentFailed,Nie udało się przedstawić planu
 Feature.Build.Label.ToolPlanPresentRunning,Przedstawiam plan
@@ -2848,6 +2852,7 @@ Feature.Build.Label.ToolSkillLoadRunning,Wczytuję umiejętność
 Feature.Build.Label.ToolSkillsDone,Wymieniono dostępne umiejętności
 Feature.Build.Label.ToolSkillsFailed,Nie udało się wymienić dostępnych umiejętności
 Feature.Build.Label.ToolSkillsRunning,Wymieniam dostępne umiejętności
+Feature.Build.Label.ToolSubscriptionRunning,Pracuję nad Twoją subskrypcją
 Feature.Build.Label.ToolTasksPlanDone,Zaplanowano zadania
 Feature.Build.Label.ToolTasksPlanFailed,Nie udało się zaplanować zadań
 Feature.Build.Label.ToolTasksPlanRunning,Planuję Twoje zadania
@@ -3514,6 +3519,7 @@ Feature.Chat.Label.OneToOne.ThemRepliedToYou,Przesłano odpowiedź do ciebie
 Feature.Chat.Label.OneToOne.YouRepliedToThem,Przesłano odpowiedź
 Feature.Chat.Label.Pending,Oczekiwanie
 Feature.Chat.Label.PrivacySettings,Ustawienia prywatności
+Feature.Chat.Label.Reactions,Reakcje
 Feature.Chat.Label.ReplyChatInputPlaceholder,Odpowiedz użytkownikowi {DISPLAY_NAME}
 Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,Odpowiedz na własną wiadomość
 Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} pisze…
@@ -3521,9 +3527,11 @@ Feature.Chat.Label.ReplyingToYourself,Twoja wiadomość...
 Feature.Chat.Label.SearchForFriendsAndChat,Wyszukaj rozmowy
 Feature.Chat.Label.SearchFriends,Wyszukaj znajomych
 Feature.Chat.Label.SearchWord,
+Feature.Chat.Label.SelectToRemove,"Wybierz, aby usunąć"
 Feature.Chat.Label.Sent,Wysłano
 Feature.Chat.Label.SnoozePartyNotifications,Wycisz powiadomienia dotyczące Imprezy w projekcie na:
 Feature.Chat.Label.SwipeToReplyTooltip,"Przesuń, aby odpowiedzieć"
+Feature.Chat.Label.TapToRemove,"Dotknij, aby usunąć"
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} dni
 Feature.Chat.Label.TimestampHoursAbbreviatedPlural,{num_hours} godz.
 Feature.Chat.Label.TimestampMinutesAbbreviatedPlural,{num_minutes} min
@@ -3580,6 +3588,11 @@ Feature.Chat.RobloxConnectUnavailableWithUser,Korzystanie z funkcji Roblox Conne
 Feature.Chat.Text.NoFriends,Nie masz jeszcze dodanych żadnych znajomych. Na początek wyszukaj i dodaj znajomych na Robloxie.
 Feature.Chat.Title.NewChat,Nowy czat
 Feature.Chat.Toast.Error.InvalidUserSelected,Nie można dodać co najmniej jednej osoby z tej listy
+Feature.CloudClient.Action.PlayWithoutCloudPlay,Graj bez Cloud Play
+Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play uruchamia grę na komputerach Robloxa, dzięki czemu może ona szybciej się ładować i rzadziej się zawieszać. Działa tylko wtedy, gdy grasz w tę grę."
+Feature.CloudClient.Heading.CloudPlayOffer,Graj z Cloud Play
+Feature.CloudClient.Label.RobloxRealityGraphics,Twoja gra w nowej odsłonie
+Feature.CloudClient.Label.RobloxRealityPlusOnly,Tylko dla subskrybentów Plus
 Feature.CommunityLinks.Description.CommunityDefault,"Dołącz do oficjalnej społeczności Guilded, aby móc wyświetlać w projekcie {experienceName} ogłoszenia i nie tylko!"
 Feature.CommunityLinks.Heading.CommunityTitle,Dołącz do społeczności
 Feature.CommunityLinks.Label.ViewButton,
@@ -4502,7 +4515,7 @@ Feature.Moments.Label.PostFeedbackPostingTitle,Publikuję moment
 Feature.Moments.Label.PostRemovedBody,Opublikowany przez Ciebie moment jest niezgodny z naszymi Standardami społeczności.
 Feature.Moments.Label.PostedOnDate,Opublikowano {date}
 Feature.Moments.Label.PublishingRodeoBody,Nie powinno to zająć zbyt długo.
-Feature.Moments.Label.Reactions,Reakcje
+Feature.Moments.Label.Reactions,
 Feature.Moments.Label.ReportReason.BreaksRules,Ten post narusza zasady
 Feature.Moments.Label.ReportReason.IntellectualProperty,Ten post narusza moją własność intelektualną
 Feature.Moments.Label.ReportSubmittedBody,Dziękujemy za opinię.
@@ -5053,6 +5066,7 @@ Feature.PlatformRestriction.Action.Signout,
 Feature.PlatformRestriction.Content.NeedPermission,"Aby korzystać z Robloxa, potrzebna jest zgoda rodzica. Po uzyskaniu zgody rodzica wyloguj się, a następnie zaloguj ponownie, aby uzyskać dostęp do Robloxa."
 Feature.PlatformRestriction.Title.AskParent,
 Feature.PlayerSearchResults.Action.AddFriend,
+Feature.PlayerSearchResults.Heading.SearchResults,Wyniki wyszukiwania
 Feature.PlayerSearchResults.Label.FromSearch,Z wyszukiwania
 Feature.PlayerSearchResults.Label.KeywordTooShort,Wprowadź co najmniej 3 znaki
 Feature.PlayerSearchResults.Label.NewUsername,Nowa nazwa użytkownika

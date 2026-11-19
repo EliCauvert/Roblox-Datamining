@@ -89,11 +89,8 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(0)
 	local UseBindingResult3, UseBindingResult2_2 = ReactModule.useBinding(false)
 	local UseBindingResult4, UseBindingResult2_3 = ReactModule.useBinding(false)
-	local ChildrenHasFullBleedModuleResult = nil
-	local UseBindingResult5 = nil
-	local UseBindingResult2_4 = nil
-	ChildrenHasFullBleedModuleResult = ChildrenHasFullBleedModule(WithDefaultsModuleResult.children)
-	UseBindingResult5, UseBindingResult2_4 = ReactModule.useBinding(0)
+	local ChildrenHasFullBleedModuleResult = ChildrenHasFullBleedModule(WithDefaultsModuleResult.children)
+	local UseBindingResult5, UseBindingResult2_4 = ReactModule.useBinding(0)
 	local UseRefResult3 = ReactModule.useRef(0)
 	local UseRefResult4 = ReactModule.useRef(nil)
 	local UseBindingResult6, UseBindingResult2_5 = ReactModule.useBinding(0)
@@ -390,7 +387,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 		return { close = UseResult8 }
 	end, {})
 	local UseMemoResult11 = ReactModule.useMemo(function()
-		-- upvalues: UseBindingResult1 (copy), UseBindingResult2_1 (copy), UseBindingResult3 (copy), UseBindingResult2_2 (copy), UseBindingResult (copy), UseBindingResult2 (copy), Bottom (copy), UseBindingResult7 (copy), UseBindingResult6 (copy), UseRefResult5 (copy), UseBindingResult2_5 (copy), UseResult10 (copy), UseBindingResult4 (copy), UseBindingResult2_3 (copy), ChildrenHasFullBleedModuleResult (ref), UseBindingResult5 (ref), UseBindingResult2_4 (ref), UseResult8 (copy), SheetTypeModule (upval), UseStateResult5 (copy), WithDefaultsModuleResult (copy), UseRefResult13 (copy), UseStateResult4 (copy), UseStateResult2_3 (copy), UseStateResult3 (ref), UseMemoResult1 (copy), UseResult1 (copy)
+		-- upvalues: UseBindingResult1 (copy), UseBindingResult2_1 (copy), UseBindingResult3 (copy), UseBindingResult2_2 (copy), UseBindingResult (copy), UseBindingResult2 (copy), Bottom (copy), UseBindingResult7 (copy), UseBindingResult6 (copy), UseRefResult5 (copy), UseBindingResult2_5 (copy), UseResult10 (copy), UseBindingResult4 (copy), UseBindingResult2_3 (copy), ChildrenHasFullBleedModuleResult (copy), UseBindingResult5 (copy), UseBindingResult2_4 (copy), UseResult8 (copy), SheetTypeModule (upval), UseStateResult5 (copy), WithDefaultsModuleResult (copy), UseRefResult13 (copy), UseStateResult4 (copy), UseStateResult2_3 (copy), UseStateResult3 (ref), UseMemoResult1 (copy), UseResult1 (copy)
 		return {
 			bottomPadding = 200,
 			hasRadius = true,

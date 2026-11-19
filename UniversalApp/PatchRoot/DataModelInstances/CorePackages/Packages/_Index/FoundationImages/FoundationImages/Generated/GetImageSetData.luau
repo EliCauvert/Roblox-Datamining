@@ -1998,6 +1998,16 @@ function make_assets_1x()
 			ImageRectOffset = Vector2.new(308, 340),
 			ImageRectSize = Vector2.new(30, 30)
 		},
+		["themes/classic_top_bar_wordmark"] = {
+			ImageSet = "img_set_1x_2",
+			ImageRectOffset = Vector2.new(0, 446),
+			ImageRectSize = Vector2.new(228, 60)
+		},
+		["themes/default_top_bar_wordmark"] = {
+			ImageSet = "img_set_1x_1",
+			ImageRectOffset = Vector2.new(0, 456),
+			ImageRectSize = Vector2.new(188, 36)
+		},
 		["truncate_arrows/actions_truncationCollapse"] = {
 			ImageSet = "img_set_1x_5",
 			ImageRectOffset = Vector2.new(322, 38),
@@ -4011,6 +4021,16 @@ function make_assets_2x()
 			ImageRectOffset = Vector2.new(194, 451),
 			ImageRectSize = Vector2.new(60, 60)
 		},
+		["themes/classic_top_bar_wordmark"] = {
+			ImageSet = "img_set_2x_2",
+			ImageRectOffset = Vector2.new(0, 106),
+			ImageRectSize = Vector2.new(456, 120)
+		},
+		["themes/default_top_bar_wordmark"] = {
+			ImageSet = "img_set_2x_3",
+			ImageRectOffset = Vector2.new(0, 402),
+			ImageRectSize = Vector2.new(376, 72)
+		},
 		["truncate_arrows/actions_truncationCollapse"] = {
 			ImageSet = "img_set_2x_9",
 			ImageRectOffset = Vector2.new(0, 386),
@@ -6023,6 +6043,16 @@ function make_assets_3x()
 			ImageSet = "img_set_3x_3",
 			ImageRectOffset = Vector2.new(686, 786),
 			ImageRectSize = Vector2.new(90, 90)
+		},
+		["themes/classic_top_bar_wordmark"] = {
+			ImageSet = "img_set_3x_3",
+			ImageRectOffset = Vector2.new(0, 700),
+			ImageRectSize = Vector2.new(684, 180)
+		},
+		["themes/default_top_bar_wordmark"] = {
+			ImageSet = "img_set_3x_3",
+			ImageRectOffset = Vector2.new(0, 882),
+			ImageRectSize = Vector2.new(564, 108)
 		},
 		["truncate_arrows/actions_truncationCollapse"] = {
 			ImageSet = "img_set_3x_9",

@@ -36,7 +36,8 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 			radius = RadiusModule.Medium,
 			ref = Ref,
 			selection = WithDefaultsModuleResult.selection,
-			selectionGroup = WithDefaultsModuleResult.selectionGroup
+			selectionGroup = WithDefaultsModuleResult.selectionGroup,
+			keepMounted = WithDefaultsModuleResult.keepMounted
 		}, ReactModule.createElement(ReactModule.Fragment, nil, {
 			Menu = ReactModule.createElement(BaseMenuModule.Root, {
 				items = WithDefaultsModuleResult.items,
@@ -45,7 +46,8 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 				maxHeight = WithDefaultsModuleResult.maxHeight,
 				onActivated = WithDefaultsModuleResult.onActivated,
 				onNestedLeafActivated = WithDefaultsModuleResult.onPressedOutside,
-				radius = RadiusModule.Medium
+				radius = RadiusModule.Medium,
+				isOpen = if WithDefaultsModuleResult.keepMounted then WithDefaultsModuleResult.isOpen else nil
 			})
 		}))
 	})

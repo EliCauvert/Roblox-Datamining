@@ -3578,6 +3578,11 @@ Feature.Chat.RobloxConnectUnavailableWithUser,Derzeit ist Roblox Connect für di
 Feature.Chat.Text.NoFriends,"Du hast noch keine Freunde hinzugefügt. Um loszulegen, finde deine Freunde auf Roblox und füge sie hinzu."
 Feature.Chat.Title.NewChat,Neuer Chat
 Feature.Chat.Toast.Error.InvalidUserSelected,Eine oder mehrere Personen in dieser Liste können nicht hinzugefügt werden
+Feature.CloudClient.Action.PlayWithoutCloudPlay,Ohne Cloud Play spielen
+Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play führt das Spiel auf den Computern von Roblox aus, sodass es möglicherweise schneller lädt und es zu weniger Abstürzen kommt. Es ist nur verfügbar, während du dieses Spiel spielst."
+Feature.CloudClient.Heading.CloudPlayOffer,Mit Cloud Play spielen
+Feature.CloudClient.Label.RobloxRealityGraphics,"Dein Spiel, neu interpretiert"
+Feature.CloudClient.Label.RobloxRealityPlusOnly,Nur für Plus-Abonnenten
 Feature.CommunityLinks.Description.CommunityDefault,"Tritt der offiziellen Guilded-Community für {experienceName} bei, um Ankündigungen und mehr zu sehen!"
 Feature.CommunityLinks.Heading.CommunityTitle,Tritt der Community bei
 Feature.CommunityLinks.Label.ViewButton,Ansehen

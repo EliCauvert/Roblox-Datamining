@@ -164,11 +164,8 @@ local function SideSheet(p1, Ref)
 	local UseAnimatedBindingResult1, UseAnimatedBindingResult2_1 = UseAnimatedBindingFunction(Negated)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(false)
 	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(false)
-	local ChildrenHasFullBleedModuleResult = nil
-	local UseBindingResult3 = nil
-	local UseBindingResult2_2 = nil
-	ChildrenHasFullBleedModuleResult = ChildrenHasFullBleedModule(WithDefaultsModuleResult.children)
-	UseBindingResult3, UseBindingResult2_2 = ReactModule.useBinding(0)
+	local ChildrenHasFullBleedModuleResult = ChildrenHasFullBleedModule(WithDefaultsModuleResult.children)
+	local UseBindingResult3, UseBindingResult2_2 = ReactModule.useBinding(0)
 	local UseBindingResult4, UseBindingResult2_3 = ReactModule.useBinding(0)
 	local UseRefResult1 = ReactModule.useRef(nil)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
@@ -215,7 +212,7 @@ local function SideSheet(p1, Ref)
 		return UDim2.new(1, if IsDisplaySizeMatch then -p2 else -(p2 + Medium), 0, if IsDisplaySizeMatch then 0 else Medium)
 	end)
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: DashModule (upval), UseBindingResult (copy), UseBindingResult2 (copy), UseBindingResult4 (copy), UseBindingResult2_3 (copy), UseBindingResult1 (copy), UseBindingResult2_1 (copy), ChildrenHasFullBleedModuleResult (ref), UseBindingResult3 (ref), UseBindingResult2_2 (ref), UseResult (copy), IsDisplaySizeMatch (copy), SheetTypeModule (upval), WithDefaultsModuleResult (copy), UseRefResult1 (copy), UseStateResult (copy), UseStateResult2 (copy)
+		-- upvalues: DashModule (upval), UseBindingResult (copy), UseBindingResult2 (copy), UseBindingResult4 (copy), UseBindingResult2_3 (copy), UseBindingResult1 (copy), UseBindingResult2_1 (copy), ChildrenHasFullBleedModuleResult (copy), UseBindingResult3 (copy), UseBindingResult2_2 (copy), UseResult (copy), IsDisplaySizeMatch (copy), SheetTypeModule (upval), WithDefaultsModuleResult (copy), UseRefResult1 (copy), UseStateResult (copy), UseStateResult2 (copy)
 		return {
 			actionsHeight = 0,
 			sheetHeightAvailable = 0,

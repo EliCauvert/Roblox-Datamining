@@ -3,12 +3,11 @@ local ReactModule = require(Foundation.Parent.React)
 local KnobModule = require(Foundation.Components.Knob)
 local _ = require(Foundation.Components.Types)
 local BlendTransparenciesModule = require(Foundation.Utility.blendTransparencies)
+local ColorNamespaceModule = require(Foundation.Enums.ColorNamespace)
 local _ = require(Foundation.Enums.InputSize)
 local PresentationContextModule = require(Foundation.Providers.Style.PresentationContext)
-local _ = require(Foundation.Components.Slider.useSliderVariants)
-local config = {
-	colorNamespace = require(Foundation.Enums.ColorNamespace).Inverse
-}
+local _ = require(script.Parent.useSliderVariants)
+local config = { colorNamespace = ColorNamespaceModule.Inverse }
 
 return function(p1)
 	-- upvalues: ReactModule (copy), BlendTransparenciesModule (copy), PresentationContextModule (copy), config (copy), KnobModule (copy)
