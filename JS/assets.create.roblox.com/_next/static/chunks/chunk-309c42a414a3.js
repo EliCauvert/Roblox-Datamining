@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "d70a794e-a5a0-af35-ca3a-b574fc70bdd3")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "8302e569-b300-a0ec-d8ff-e36bb1e9edcd")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 62877, e => {
@@ -5192,9 +5192,17 @@
         getGroupRolesSetsInfo: e => c.v1GroupsGroupIdRolesGet({
             groupId: e
         }),
-        getUsersGroupRoles: e => c.v1UsersUserIdGroupsRolesGet({
-            userId: e
-        }),
+        getUsersGroupRoles(e) {
+            let {
+                includeLocked: r
+            } = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
+            return c.v1UsersUserIdGroupsRolesGet({
+                userId: e,
+                ...r ? {
+                    includeLocked: r
+                } : {}
+            })
+        },
         getGroupUsersWithRoles: e => v.v2GroupsGroupIdUsersGet(e),
         getUsersGroupRolesV2(e) {
             let r = arguments.length > 1 && void 0 !== arguments[1] && arguments[1],
@@ -5258,5 +5266,5 @@
     }])
 }]);
 
-//# debugId=d70a794e-a5a0-af35-ca3a-b574fc70bdd3
-//# sourceMappingURL=35_hj0ymhf9qx.js.map
+//# debugId=8302e569-b300-a0ec-d8ff-e36bb1e9edcd
+//# sourceMappingURL=06w_gmxft4f8t.js.map
