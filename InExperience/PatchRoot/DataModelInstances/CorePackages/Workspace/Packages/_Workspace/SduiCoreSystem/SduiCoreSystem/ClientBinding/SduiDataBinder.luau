@@ -32,6 +32,7 @@ local FFlagSduiSupportRatingNoPercent = SharedFlagsModule.FFlagSduiSupportRating
 local FFlagSduiNotificationBadgeHydration = SharedFlagsModule.FFlagSduiNotificationBadgeHydration
 local FFlagSduiAddMarketplaceItemFavoriteHydrationModule = require(SduiCoreSystem.FFlagSduiAddMarketplaceItemFavoriteHydration)
 local FFlagSduiBuyRobuxHydration = SharedFlagsModule.FFlagSduiBuyRobuxHydration
+local FFlagSduiToggleGamePassVote = SharedFlagsModule.FFlagSduiToggleGamePassVote
 local FFlagEnableGroupSidebarSdui = SharedFlagsModule.FFlagEnableGroupSidebarSdui
 local DataStatus = DataHydrationModule.DataHydrationTypes.DataStatus
 local ProtobufTimestampToLocalTimeStringFunction = SduiDataBinderTransformUtilsModule.protobufTimestampToLocalTimeString
@@ -119,6 +120,20 @@ end
 local _ = function(p1)
 	-- upvalues: DataHydrationModule (copy)
 	DataHydrationModule.Game.getGamePassStore(false).updateGamePassInfos(p1)
+end
+
+local function updateGamePassVoteStore(GamePassVote)
+	-- upvalues: DataHydrationModule (copy)
+	local t = {}
+	
+	for i, value in GamePassVote do
+		t[i] = {
+			totalUpVotes = tonumber(value.totalUpVotes) or 0,
+			totalDownVotes = tonumber(value.totalDownVotes) or 0,
+			userVote = value.userVote
+		}
+	end
+	DataHydrationModule.Game.getGamePassVoteStore(false).updateGamePassVotes(t)
 end
 
 local _ = function(p1)
@@ -281,7 +296,7 @@ local function calculateAgeRecommendationDerivedField(p1, p2, _)
 end
 
 local function getDataObjectSignal(Community, _, p3, p4)
-	-- upvalues: DataHydrationModule (copy), SduiDataBindingContentTypeModule (copy), FFlagEnableGroupSidebarSdui (copy), FFlagSduiCommunitySectionSupport (copy), FFlagSduiMarketplaceCatalogCategorySupport (copy), FFlagSduiMarketplaceCatalogSortSupport (copy), FFlagSduiAddMarketplaceEntityDataHydration (copy), FFlagSduiAddMarketplaceItemFavoriteHydrationModule (copy), FFlagSduiAddCollectibleItemDataHydration (copy), FFlagSduiLeaderboardComponent (copy), FFlagSduiNotificationBadgeHydration (copy), FFlagSduiBuyRobuxHydration (copy)
+	-- upvalues: DataHydrationModule (copy), SduiDataBindingContentTypeModule (copy), FFlagEnableGroupSidebarSdui (copy), FFlagSduiCommunitySectionSupport (copy), FFlagSduiToggleGamePassVote (copy), FFlagSduiMarketplaceCatalogCategorySupport (copy), FFlagSduiMarketplaceCatalogSortSupport (copy), FFlagSduiAddMarketplaceEntityDataHydration (copy), FFlagSduiAddMarketplaceItemFavoriteHydrationModule (copy), FFlagSduiAddCollectibleItemDataHydration (copy), FFlagSduiLeaderboardComponent (copy), FFlagSduiNotificationBadgeHydration (copy), FFlagSduiBuyRobuxHydration (copy)
 	if Community == "badge" then
 		return DataHydrationModule.Badges.getBadgeInfoStore(false).getBadgeInfo((tostring(p3)))
 	elseif Community == "creator" then
@@ -315,6 +330,8 @@ local function getDataObjectSignal(Community, _, p3, p4)
 	end
 	if Community == "gamePass" then
 		return DataHydrationModule.Game.getGamePassStore(false).getGamePassInfo((tostring(p3)))
+	elseif FFlagSduiToggleGamePassVote and Community == SduiDataBindingContentTypeModule.gamePassVote then
+		return DataHydrationModule.Game.getGamePassVoteStore(false).getGamePassVote((tostring(p3)))
 	elseif Community == "event" then
 		return DataHydrationModule.ExperienceEvents.getExperienceEventInfoStore(false).getExperienceEventInfo(p3)
 	elseif FFlagSduiMarketplaceCatalogCategorySupport and Community == "marketplaceCatalogCategory" then
@@ -375,8 +392,8 @@ local config = {
 }
 
 local function calculateDerivedFieldValue(Community, p3, DataResult, p4)
-	-- upvalues: calculateBadgeDerivedField (copy), calculateUniverseDerivedField (copy), calculateAgeRecommendationDerivedField (copy), SduiDataBindingContentTypeModule (copy), DataHydrationModule (copy), GetSduiServiceDependenciesStoreModule (copy)
-	return if Community == "badge" then calculateBadgeDerivedField(p3, DataResult, p4) elseif Community == "universe" then calculateUniverseDerivedField(p3, DataResult, p4) elseif Community == "ageRecommendation" then calculateAgeRecommendationDerivedField(p3, DataResult, p4) elseif Community == SduiDataBindingContentTypeModule.universeUserVoteFeedbackMetadata then DataHydrationModule.Game.getUserVoteFeedbackMetadataStore(false).calculateDerivedField(p3, DataResult, p4) elseif Community == "event" then DataHydrationModule.ExperienceEvents.getExperienceEventInfoStore(false).calculateDerivedField(p3, DataResult, p4, GetSduiServiceDependenciesStoreModule().getDependencies("SduiDataBinder").localization) else nil
+	-- upvalues: calculateBadgeDerivedField (copy), calculateUniverseDerivedField (copy), calculateAgeRecommendationDerivedField (copy), SduiDataBindingContentTypeModule (copy), DataHydrationModule (copy), FFlagSduiToggleGamePassVote (copy), GetSduiServiceDependenciesStoreModule (copy)
+	return if Community == "badge" then calculateBadgeDerivedField(p3, DataResult, p4) elseif Community == "universe" then calculateUniverseDerivedField(p3, DataResult, p4) elseif Community == "ageRecommendation" then calculateAgeRecommendationDerivedField(p3, DataResult, p4) elseif Community == SduiDataBindingContentTypeModule.universeUserVoteFeedbackMetadata then DataHydrationModule.Game.getUserVoteFeedbackMetadataStore(false).calculateDerivedField(p3, DataResult, p4) elseif FFlagSduiToggleGamePassVote and Community == SduiDataBindingContentTypeModule.gamePassVote then DataHydrationModule.Game.getGamePassVoteStore(false).calculateDerivedField(p3, DataResult, p4) elseif Community == "event" then DataHydrationModule.ExperienceEvents.getExperienceEventInfoStore(false).calculateDerivedField(p3, DataResult, p4, GetSduiServiceDependenciesStoreModule().getDependencies("SduiDataBinder").localization) else nil
 end
 
 local function getUniverseIcon(p3, p4, Large)
@@ -524,6 +541,7 @@ local config1 = {
 	leaderboardStats = if FFlagSduiLeaderboardComponent then getDataHydrationField else nil,
 	song = getDataHydrationField,
 	gamePass = getDataHydrationField,
+	gamePassVote = if FFlagSduiToggleGamePassVote then getDataHydrationField else nil,
 	gameDeveloperProduct = getDataHydrationField,
 	gameSubscription = getDataHydrationField,
 	playability = getDataHydrationField,
@@ -543,7 +561,7 @@ local config1 = {
 
 return {
 	updateDataStores = function(p6)
-		-- upvalues: DataHydrationModule (copy), updateVoteCountsFromUniverses (copy), FFlagSduiCommunitySectionSupport (copy), FFlagEnableGroupSidebarSdui (copy), FFlagSduiMarketplaceCatalogCategorySupport (copy), FFlagSduiMarketplaceCatalogSortSupport (copy), FFlagSduiAddMarketplaceEntityDataHydration (copy), FFlagSduiAddMarketplaceItemFavoriteHydrationModule (copy), FFlagSduiAddCollectibleItemDataHydration (copy), FFlagSduiLeaderboardComponent (copy), FFlagSduiNotificationBadgeHydration (copy), FFlagSduiBuyRobuxHydration (copy), updateBuyRobuxStores (copy)
+		-- upvalues: DataHydrationModule (copy), updateVoteCountsFromUniverses (copy), FFlagSduiCommunitySectionSupport (copy), FFlagEnableGroupSidebarSdui (copy), FFlagSduiToggleGamePassVote (copy), updateGamePassVoteStore (copy), FFlagSduiMarketplaceCatalogCategorySupport (copy), FFlagSduiMarketplaceCatalogSortSupport (copy), FFlagSduiAddMarketplaceEntityDataHydration (copy), FFlagSduiAddMarketplaceItemFavoriteHydrationModule (copy), FFlagSduiAddCollectibleItemDataHydration (copy), FFlagSduiLeaderboardComponent (copy), FFlagSduiNotificationBadgeHydration (copy), FFlagSduiBuyRobuxHydration (copy), updateBuyRobuxStores (copy)
 		if p6.badge then
 			DataHydrationModule.Badges.getBadgeInfoStore(false).updateBadges(p6.badge)
 		end
@@ -588,6 +606,9 @@ return {
 		end
 		if p6.gamePass then
 			DataHydrationModule.Game.getGamePassStore(false).updateGamePassInfos(p6.gamePass)
+		end
+		if FFlagSduiToggleGamePassVote and p6.gamePassVote then
+			updateGamePassVoteStore(p6.gamePassVote)
 		end
 		if p6.event then
 			DataHydrationModule.ExperienceEvents.getExperienceEventInfoStore(false).updateExperienceEventInfos(p6.event)

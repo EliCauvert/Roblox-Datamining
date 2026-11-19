@@ -18,6 +18,7 @@
 	collectibleItem = "collectibleItem",
 	song = "song",
 	gamePass = "gamePass",
+	gamePassVote = "gamePassVote",
 	gameDeveloperProduct = "gameDeveloperProduct",
 	gameSubscription = "gameSubscription",
 	playability = "playability",

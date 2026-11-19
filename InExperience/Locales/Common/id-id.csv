@@ -3923,7 +3923,10 @@ Feature.InExperienceShop.Label.TryNow,Dapatkan uji coba gratis
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,Kamu telah berhasil membeli {ROBUX_AMOUNT} Robux
 Feature.InExperienceShop.Tooltip.RecentlyRedeemed,Suka uji cobamu?
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Kamu yakin ingin menghapus item ini dari inventarismu secara permanen? Jika kamu berubah pikiran, kamu harus mendapatkannya lagi di pengalaman virtual."
+Feature.Item.Label.DeleteFromInventoryPermanently,Kami akan menghapusnya dari inventarismu secara permanen.
 Feature.Item.Label.DeleteItemUndercase,Hapus item
+Feature.Item.Label.DeleteThisItem,Hapus item ini?
+Feature.Item.Message.ItemNotDeleted,Item tidak dihapus
 Feature.Landing.Label.PoweredBy,Didukung oleh
 Feature.Leaderboards.Heading.Leaderboard,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,

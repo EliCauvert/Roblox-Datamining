@@ -31,7 +31,7 @@ local function _(People)
 end
 
 local function activateBesideSideSheet(IntegrationId, SideSheetOpenBehavior, Callback: () -> ())
-	-- upvalues: GetSideSheetConfigStoreModule (copy), FFlagSideSheetOpenPeoplePage (copy), ConstantsModule (copy), RegisterInGameMenuPeoplePageActionsModule (copy), SideSheetBesideMenuPolicyModule (copy)
+	-- upvalues: GetSideSheetConfigStoreModule (copy), FFlagSideSheetOpenPeoplePage (copy), ConstantsModule (copy), SideSheetBesideMenuPolicyModule (copy), RegisterInGameMenuPeoplePageActionsModule (copy)
 	local IsWindowShownBesideSideSheetMatch = nil
 	if IntegrationId == nil then
 		IsWindowShownBesideSideSheetMatch = false
@@ -39,21 +39,29 @@ local function activateBesideSideSheet(IntegrationId, SideSheetOpenBehavior, Cal
 		local SideSheetConfigStoreModule = GetSideSheetConfigStoreModule(false)
 		IsWindowShownBesideSideSheetMatch = SideSheetConfigStoreModule.getWindowShownBesideSideSheet(false) == IntegrationId or FFlagSideSheetOpenPeoplePage and (IntegrationId == ConstantsModule.IntegrationIds.People and SideSheetConfigStoreModule.getIsPeoplePageOpen(false))
 	end
-	if IsWindowShownBesideSideSheetMatch then return end
-	local SideSheetConfigStoreModule = GetSideSheetConfigStoreModule(false)
-	
-	if FFlagSideSheetOpenPeoplePage then
-		SideSheetConfigStoreModule.setDidSideSheetOpenWithPeoplePage(false)
-	end
-	RegisterInGameMenuPeoplePageActionsModule.closeWindowShownBesideSideSheet()
-	local IsWindowBesideSideSheet = SideSheetBesideMenuPolicyModule.isWindowBesideSideSheet(SideSheetOpenBehavior)
-	
-	if IsWindowBesideSideSheet then
-		SideSheetConfigStoreModule.setWindowShownBesideSideSheet(IntegrationId)
-	end
-	Callback()
-	
-	if IsWindowBesideSideSheet then
+	if not IsWindowShownBesideSideSheetMatch then
+		local SideSheetConfigStoreModule = GetSideSheetConfigStoreModule(false)
+		
+		if FFlagSideSheetOpenPeoplePage then
+			SideSheetConfigStoreModule.setDidSideSheetOpenWithPeoplePage(false)
+		end
+		RegisterInGameMenuPeoplePageActionsModule.closeWindowShownBesideSideSheet()
+		local IsWindowBesideSideSheet = SideSheetBesideMenuPolicyModule.isWindowBesideSideSheet(SideSheetOpenBehavior)
+		
+		if IsWindowBesideSideSheet then
+			SideSheetConfigStoreModule.setWindowShownBesideSideSheet(IntegrationId)
+		end
+		Callback()
+		
+		if IsWindowBesideSideSheet then
+			RegisterInGameMenuPeoplePageActionsModule.closeMenuShownBesideSideSheet()
+		end
+		return
+	elseif SideSheetBesideMenuPolicyModule.isWindowBesideSideSheet(SideSheetOpenBehavior) then
+		RegisterInGameMenuPeoplePageActionsModule.closeWindowShownBesideSideSheet()
+		
+		return
+	else
 		RegisterInGameMenuPeoplePageActionsModule.closeMenuShownBesideSideSheet()
 	end
 end

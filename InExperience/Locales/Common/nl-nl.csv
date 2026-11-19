@@ -3907,7 +3907,10 @@ Feature.InExperienceShop.Label.TryNow,Gratis proefperiode krijgen
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,Je hebt met {ROBUX_AMOUNT} Robux gekocht
 Feature.InExperienceShop.Tooltip.RecentlyRedeemed,Heb je genoten van je proefperiode?
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Weet je zeker dat je dit item permanent uit je inventaris wilt verwijderen? Als je van gedachten verandert, moet je het opnieuw verdienen in een ervaring."
+Feature.Item.Label.DeleteFromInventoryPermanently,We zullen het permanent uit je inventaris verwijderen.
 Feature.Item.Label.DeleteItemUndercase,Item verwijderen
+Feature.Item.Label.DeleteThisItem,Dit item verwijderen?
+Feature.Item.Message.ItemNotDeleted,Item is niet verwijderd
 Feature.Landing.Label.PoweredBy,Mogelijk gemaakt door
 Feature.Leaderboards.Heading.Leaderboard,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,

@@ -45,7 +45,11 @@ return ReactModule.memo(function(p1)
 				end
 				local SideSheetConfigStoreModule = GetSideSheetConfigStoreModule(false)
 				
-				if SideSheetConfigStoreModule.getWindowShownBesideSideSheet(false) == "in_experience_shop" then return end
+				if SideSheetConfigStoreModule.getWindowShownBesideSideSheet(false) == "in_experience_shop" then
+					RegisterInGameMenuPeoplePageActionsModule.closeWindowShownBesideSideSheet()
+					
+					return
+				end
 				if p1.onBuyActivated() == false then return end
 				if SideSheetConfigStoreModule.getWindowShownBesideSideSheet(false) ~= "in_experience_shop" then
 					RegisterInGameMenuPeoplePageActionsModule.closeWindowShownBesideSideSheet()

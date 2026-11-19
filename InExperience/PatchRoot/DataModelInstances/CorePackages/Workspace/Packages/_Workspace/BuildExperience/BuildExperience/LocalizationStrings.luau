@@ -395,6 +395,7 @@ return {
 	CHAT_COMPLETED_GAME_CREATION_DESCRIPTION = if FFlagEnableTeamTestLua then "Feature.Build.Description.GameSavedPlaytest" else "Feature.Build.Description.GameCreationDone",
 	CHAT_COMPLETED_GAME_CREATION_TITLE = "Feature.Build.Title.GameCreationDone",
 	CHAT_COMPOSER_PLACEHOLDER = "Feature.Build.Label.DescribeIdea",
+	CHAT_COMPOSER_PLACEHOLDER_ALT = "Feature.Build.Label.DescribeIdeaOrPick",
 	CHAT_COPY_TEXT = "Feature.Build.Action.CopyText",
 	CHAT_CAPTURE_GALLERY_ADD = "Feature.Build.Action.Add",
 	CHAT_CAPTURE_GALLERY_EMPTY = "Feature.Build.Message.NoCapturesAvailable",

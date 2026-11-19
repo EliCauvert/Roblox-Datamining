@@ -3925,7 +3925,10 @@ Feature.InExperienceShop.Label.TryNow,Faça um teste grátis
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,Você comprou {ROBUX_AMOUNT} Robux com sucesso
 Feature.InExperienceShop.Tooltip.RecentlyRedeemed,Gostou do seu teste?
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Quer mesmo excluir este item do seu inventário para sempre? Se mudar de ideia, você precisará ganhá-lo novamente em uma experiência."
+Feature.Item.Label.DeleteFromInventoryPermanently,Vamos removê-lo do seu inventário permanentemente.
 Feature.Item.Label.DeleteItemUndercase,Excluir item
+Feature.Item.Label.DeleteThisItem,Apagar este item?
+Feature.Item.Message.ItemNotDeleted,O item não foi excluído
 Feature.Landing.Label.PoweredBy,Fornecido por
 Feature.Leaderboards.Heading.Leaderboard,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,

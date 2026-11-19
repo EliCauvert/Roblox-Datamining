@@ -2,17 +2,19 @@
 local Parent = Moments.Parent
 local ReactModule = require(Parent.React)
 local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local MomentsCommonModule = require(Parent.MomentsCommon)
 local SetTabBarVisibleFunction = require(Parent.AppTabBarRodux).Actions.SetTabBarVisible
-local Analytics = require(Parent.MomentsCommon).Analytics
+local Analytics = MomentsCommonModule.Analytics
 local FunnelEventNames = Analytics.FunnelEventNames
 local CreateGalleryCaptureSourceModule = require(Moments.Capture.createGalleryCaptureSource)
 local IsStudioModule = require(Parent.MomentsCommon.isStudio)
 local HasGalleryApiModule = require(Moments.Capture.hasGalleryApi)
 local LogCreationEntryResolvedModule = require(Moments.Analytics.logCreationEntryResolved)
 local FFlagMomentsCreationEntryOutcomeModule = require(Moments.Flags.FFlagMomentsCreationEntryOutcome)
+local FFlagMomentsCreationGalleryExitAnalytics = MomentsCommonModule.Flags.FFlagMomentsCreationGalleryExitAnalytics
 
 return function(p1)
-	-- upvalues: ReactModule (copy), UseDispatchFunction (copy), IsStudioModule (copy), HasGalleryApiModule (copy), FFlagMomentsCreationEntryOutcomeModule (copy), Analytics (copy), FunnelEventNames (copy), LogCreationEntryResolvedModule (copy), CreateGalleryCaptureSourceModule (copy), SetTabBarVisibleFunction (copy)
+	-- upvalues: ReactModule (copy), UseDispatchFunction (copy), IsStudioModule (copy), HasGalleryApiModule (copy), FFlagMomentsCreationEntryOutcomeModule (copy), Analytics (copy), FunnelEventNames (copy), LogCreationEntryResolvedModule (copy), CreateGalleryCaptureSourceModule (copy), FFlagMomentsCreationGalleryExitAnalytics (copy), SetTabBarVisibleFunction (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	local UseRefResult = ReactModule.useRef(nil)
@@ -23,7 +25,7 @@ return function(p1)
 	local HasGalleryApiModule1 = HasGalleryApiModule()
 	local IsStudioModule1_1 = IsStudioModule1 or not HasGalleryApiModule1
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: FFlagMomentsCreationEntryOutcomeModule (upval), Analytics (upval), FunnelEventNames (upval), IsStudioModule1_1 (copy), UseStateResult2 (copy), LogCreationEntryResolvedModule (upval), UseRefResult1 (copy), UseRefResult (copy), CreateGalleryCaptureSourceModule (upval), UseStateResult2_1 (copy)
+		-- upvalues: FFlagMomentsCreationEntryOutcomeModule (upval), Analytics (upval), FunnelEventNames (upval), IsStudioModule1_1 (copy), UseStateResult2 (copy), LogCreationEntryResolvedModule (upval), UseRefResult1 (copy), UseRefResult (copy), CreateGalleryCaptureSourceModule (upval), UseStateResult2_1 (copy), FFlagMomentsCreationGalleryExitAnalytics (upval)
 		local SessionId = if FFlagMomentsCreationEntryOutcomeModule then Analytics.SessionManager.getSessionId(FunnelEventNames.FunnelTypes.CreationFlow) else nil
 		
 		if IsStudioModule1_1 then
@@ -36,9 +38,9 @@ return function(p1)
 		elseif not UseRefResult1.current then
 			UseRefResult1.current = true
 			task.spawn(function()
-				-- upvalues: UseRefResult (upval), CreateGalleryCaptureSourceModule (upval), UseRefResult1 (upval), UseStateResult2_1 (upval), UseStateResult2 (upval), FFlagMomentsCreationEntryOutcomeModule (upval), LogCreationEntryResolvedModule (upval), SessionId (copy)
-				UseRefResult.current = CreateGalleryCaptureSourceModule(nil, function(p2, p3, p4)
-					-- upvalues: UseRefResult1 (upval), UseStateResult2_1 (upval), UseStateResult2 (upval), FFlagMomentsCreationEntryOutcomeModule (upval), LogCreationEntryResolvedModule (upval), SessionId (upval)
+				-- upvalues: UseRefResult (upval), CreateGalleryCaptureSourceModule (upval), UseRefResult1 (upval), UseStateResult2_1 (upval), UseStateResult2 (upval), FFlagMomentsCreationEntryOutcomeModule (upval), LogCreationEntryResolvedModule (upval), SessionId (copy), FFlagMomentsCreationGalleryExitAnalytics (upval)
+				UseRefResult.current = CreateGalleryCaptureSourceModule(nil, function(p2, p3, p4, Total)
+					-- upvalues: UseRefResult1 (upval), UseStateResult2_1 (upval), UseStateResult2 (upval), FFlagMomentsCreationEntryOutcomeModule (upval), LogCreationEntryResolvedModule (upval), SessionId (upval), FFlagMomentsCreationGalleryExitAnalytics (upval)
 					UseRefResult1.current = false
 					
 					if p3 and #p2 == 0 then
@@ -47,7 +49,7 @@ return function(p1)
 						UseStateResult2(true)
 					end
 					if FFlagMomentsCreationEntryOutcomeModule then
-						LogCreationEntryResolvedModule.log(LogCreationEntryResolvedModule.resolveGalleryOutcome(p3, #p2, p4), SessionId)
+						LogCreationEntryResolvedModule.log(LogCreationEntryResolvedModule.resolveGalleryOutcome(p3, #p2, p4), SessionId, if FFlagMomentsCreationGalleryExitAnalytics and p3 and Total ~= nil then { eligible = #p2, total = Total } else nil)
 					end
 				end)
 			end)

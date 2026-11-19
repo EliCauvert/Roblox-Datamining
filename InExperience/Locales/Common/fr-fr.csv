@@ -3925,7 +3925,10 @@ Feature.InExperienceShop.Label.TryNow,Obtenir un essai gratuit
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,Tu as acheté {ROBUX_AMOUNT} Robux
 Feature.InExperienceShop.Tooltip.RecentlyRedeemed,Tu as aimé cette offre d'essai ?
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Tu confirmes vouloir supprimer définitivement cet item de ton inventaire ? Si tu changes d'avis, tu devras l'obtenir à nouveau dans une expérience."
+Feature.Item.Label.DeleteFromInventoryPermanently,Nous le supprimerons définitivement de ton inventaire.
 Feature.Item.Label.DeleteItemUndercase,Supprimer l'item
+Feature.Item.Label.DeleteThisItem,Supprimer cet item ?
+Feature.Item.Message.ItemNotDeleted,Item non supprimé
 Feature.Landing.Label.PoweredBy,Géré par
 Feature.Leaderboards.Heading.Leaderboard,Classements
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
