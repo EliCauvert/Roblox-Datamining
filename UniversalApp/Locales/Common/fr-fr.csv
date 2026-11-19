@@ -4333,7 +4333,10 @@ Feature.InExperienceShop.Label.Timer.Minute.Singular,1 minute
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} secondes
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 seconde
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Tu confirmes vouloir supprimer définitivement cet item de ton inventaire ? Si tu changes d'avis, tu devras l'obtenir à nouveau dans une expérience."
+Feature.Item.Label.DeleteFromInventoryPermanently,Nous le supprimerons définitivement de ton inventaire.
 Feature.Item.Label.DeleteItemUndercase,Supprimer l'item
+Feature.Item.Label.DeleteThisItem,Supprimer cet item ?
+Feature.Item.Message.ItemNotDeleted,Item non supprimé
 Feature.Landing.Action.PlayNow,Jouer
 Feature.Landing.Action.SignInWithRoblox,
 Feature.Landing.Description.ContinuedTermsDisclaimer,"En continuant, tu acceptes nos {startTermsTag}Conditions{endTermsTag}, y compris la clause d'arbitrage, et reconnais avoir pris connaissance de notre {startPrivacyTag}Politique de confidentialité{endPrivacyTag}. Si tu as moins de 18 ans, ton parent ou tuteur légal doit autoriser ton compte et accepter nos Conditions."

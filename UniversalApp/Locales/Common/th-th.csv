@@ -4316,7 +4316,10 @@ Feature.InExperienceShop.Label.Timer.Minute.Singular,
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} วินาที
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 วินาที
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"คุณแน่ใจหรือไม่ว่าคุณต้องการ ""ลบ"" ไอเท็มนี้ออกจากคลังไอเท็มของคุณอย่างถาวร? หากเปลี่ยนใจ จะต้องทำเพื่อให้ได้รับอีกครั้งในประสบการณ์"
+Feature.Item.Label.DeleteFromInventoryPermanently,เราจะลบไอเท็มนี้ออกจากคลังไอเท็มของคุณอย่างถาวร
 Feature.Item.Label.DeleteItemUndercase,ลบไอเท็ม
+Feature.Item.Label.DeleteThisItem,ลบไอเท็มนี้ใช่ไหม?
+Feature.Item.Message.ItemNotDeleted,ยังไม่ได้ลบไอเท็ม
 Feature.Landing.Action.PlayNow,เล่นเลย
 Feature.Landing.Action.SignInWithRoblox,
 Feature.Landing.Description.ContinuedTermsDisclaimer,การดำเนินการต่อถือว่าคุณยอมรับ{startTermsTag}ข้อกำหนด{endTermsTag}ของเรา รวมถึงอนุญาโตตุลาการ และรับทราบ{startPrivacyTag}นโยบายความเป็นส่วนตัว{endPrivacyTag}ของเรา หากคุณมีอายุต่ำกว่า 18 ปี พ่อแม่หรือผู้ปกครองของคุณต้องอนุญาตให้คุณสร้างบัญชีและยอมรับข้อกำหนดของเรา

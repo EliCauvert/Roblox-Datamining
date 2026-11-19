@@ -4289,7 +4289,10 @@ Feature.InExperienceShop.Label.Timer.Minute.Singular,1 dakika
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} saniye
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 saniye
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,Bu öğeyi envanterinden kalıcı olarak silmek istediğine emin misin? Fikrini değiştirirsen öğeyi bir deneyimde tekrar kazanman gerekecek.
+Feature.Item.Label.DeleteFromInventoryPermanently,Bunu envanterinden kalıcı olarak kaldıracağız.
 Feature.Item.Label.DeleteItemUndercase,Öğeyi sil
+Feature.Item.Label.DeleteThisItem,Bu öğe silinsin mi?
+Feature.Item.Message.ItemNotDeleted,Öğe silinmedi
 Feature.Landing.Action.PlayNow,Hemen oyna
 Feature.Landing.Action.SignInWithRoblox,
 Feature.Landing.Description.ContinuedTermsDisclaimer,Devam ederek tahkim dâhil olmak üzere {startTermsTag}Koşullarımızı{endTermsTag} kabul etmiş ve {startPrivacyTag}Gizlilik Politikamızı{endPrivacyTag} onaylamış olursun. 18 yaşından küçüksen ebeveyninin veya vasinin hesap açmana izin vermesi ve Koşullarımızı kabul etmesi gerekir.

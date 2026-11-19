@@ -4315,7 +4315,10 @@ Feature.InExperienceShop.Label.Timer.Minute.Singular,1 minuut
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} seconden
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 seconde
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Weet je zeker dat je dit item permanent uit je inventaris wilt verwijderen? Als je van gedachten verandert, moet je het opnieuw verdienen in een ervaring."
+Feature.Item.Label.DeleteFromInventoryPermanently,We zullen het permanent uit je inventaris verwijderen.
 Feature.Item.Label.DeleteItemUndercase,Item verwijderen
+Feature.Item.Label.DeleteThisItem,Dit item verwijderen?
+Feature.Item.Message.ItemNotDeleted,Item is niet verwijderd
 Feature.Landing.Action.PlayNow,Speel nu
 Feature.Landing.Action.SignInWithRoblox,
 Feature.Landing.Description.ContinuedTermsDisclaimer,"Door verder te gaan, ga je akkoord met onze {startTermsTag}Gebruiksvoorwaarden{endTermsTag}, inclusief arbitrage, en erken je ons {startPrivacyTag}Privacybeleid{endPrivacyTag}. Als je jonger bent dan 18, moet je ouder of voogd toestemming geven voor je account en akkoord gaan met onze Gebruiksvoorwaarden."

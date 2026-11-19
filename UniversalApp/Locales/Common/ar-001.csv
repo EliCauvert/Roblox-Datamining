@@ -4288,7 +4288,10 @@ Feature.InExperienceShop.Label.Timer.Minute.Singular,دقيقة واحدة
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} من الثواني
 Feature.InExperienceShop.Label.Timer.Second.Singular,ثانية واحدة
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,هل أنت متأكد من أنك تريد حذف هذا العنصر نهائيًا من المقتنيات؟ إذا غيرت رأيك، فستحتاج إلى أن تربحه مرة أخرى في التجارب.
+Feature.Item.Label.DeleteFromInventoryPermanently,سنزيله من مقتنياتك نهائيًا.
 Feature.Item.Label.DeleteItemUndercase,حذف العنصر
+Feature.Item.Label.DeleteThisItem,هل تريد حذف هذا العنصر؟
+Feature.Item.Message.ItemNotDeleted,لم يتم حذف العنصر
 Feature.Landing.Action.PlayNow,العب الآن
 Feature.Landing.Action.SignInWithRoblox,
 Feature.Landing.Description.ContinuedTermsDisclaimer,من خلال المتابعة، فإنك توافق على {startTermsTag}شروطنا{endTermsTag}، بما في ذلك بند التحكيم، وتقر {startPrivacyTag}بسياسة الخصوصية{endPrivacyTag} السارية لدينا. إذا كان عمرك أقل من 18 عامًا، يجب على أحد والديك أو الوصي عليك السماح بحسابك والموافقة على شروطنا.
@@ -5696,6 +5699,7 @@ Feature.Toast.Username.Copied,تم نسخ اسم المستخدم إلى الح�
 Feature.Toast.VoteError.AssetNotVoteable,لا يمكنك التصويت على هذه التجربة.
 Feature.Toast.VoteError.Default,الإجراء غير متوفر.
 Feature.Toast.VoteError.FloodCheckThresholdMet,أنت تصوت بسرعة كبيرة.
+Feature.Toast.VoteError.NotSaved,لم يتم حفظ التصويت
 Feature.Toast.VoteError.PlayGame,يتعين عليك زيارة هذه التجربة قبل تصنيفها.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,لا يمكنك التحقق من عمرك الآن لأنك انتهكت معايير مجتمعنا بشكلٍ متكرر. يمكنك إعادة المحاولة بعد انتهاء فترة التقييد.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,تم تعليق عمليات تقدير العمر

@@ -4313,7 +4313,10 @@ Feature.InExperienceShop.Label.Timer.Minute.Singular,
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} सेकंड
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 सेकंड
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"क्या आपको वाकई अपनी इन्वेंट्री से इस आइटम को हमेशा के लिए डिलीट करना है? अपना फ़ैसला बदलने पर, आपको इसे किसी एक्सपीरिएंस में फिर से हासिल करना होगा."
+Feature.Item.Label.DeleteFromInventoryPermanently,हम इसे हमेशा के लिए आपकी इन्वेंट्री से हटा देंगे.
 Feature.Item.Label.DeleteItemUndercase,आइटम डिलीट करें
+Feature.Item.Label.DeleteThisItem,इस आइटम को डिलीट करना है?
+Feature.Item.Message.ItemNotDeleted,आइटम डिलीट नहीं किया गया
 Feature.Landing.Action.PlayNow,अभी खेलें
 Feature.Landing.Action.SignInWithRoblox,
 Feature.Landing.Description.ContinuedTermsDisclaimer,"जारी रखने का मतलब है कि आप आर्बिट्रेशन सहित हमारी {startTermsTag}शर्तों{endTermsTag} से सहमत हैं और आपको हमारी {startPrivacyTag}प्राइवेसी पॉलिसी{endPrivacyTag} स्वीकार है. अगर आपकी उम्र 18 साल से कम है, तो आपके पेरेंट या गार्जियन को आपके अकाउंट के लिए परमिशन देनी होगी और हमारी शर्तों से सहमत होना होगा."

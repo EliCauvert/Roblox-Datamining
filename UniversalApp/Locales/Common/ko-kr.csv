@@ -4336,7 +4336,10 @@ Feature.InExperienceShop.Label.Timer.Minute.Singular,
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number}초
 Feature.InExperienceShop.Label.Timer.Second.Singular,1초
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,이 아이템을 인벤토리에서 영구적으로 삭제할까요? 마음이 바뀐다면 해당 아이템을 체험에서 다시 획득해야 합니다.
+Feature.Item.Label.DeleteFromInventoryPermanently,인벤토리에서 영구적으로 삭제됩니다.
 Feature.Item.Label.DeleteItemUndercase,아이템 삭제
+Feature.Item.Label.DeleteThisItem,이 아이템을 삭제하시겠어요?
+Feature.Item.Message.ItemNotDeleted,아이템이 삭제되지 않았습니다
 Feature.Landing.Action.PlayNow,지금 플레이
 Feature.Landing.Action.SignInWithRoblox,
 Feature.Landing.Description.ContinuedTermsDisclaimer,"계속하면 중재를 포함한 당사의 {startTermsTag}약관{endTermsTag}에 동의하고 {startPrivacyTag}개인정보 처리방침{endPrivacyTag}의 내용을 인정하는 것으로 간주됩니다. 만 18세 미만인 경우, 부모나 보호자가 계정 생성 및 당사의 약관에 동의해야 합니다."
