@@ -1,4 +1,5 @@
-﻿local GetConnectionsPlayedStoreModule = require(script.ConnectionsPlayed.getConnectionsPlayedStore)
+﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
+local GetConnectionsPlayedStoreModule = require(script.ConnectionsPlayed.getConnectionsPlayedStore)
 local CreateConnectionsPlayedStoreModule = require(script.ConnectionsPlayed.createConnectionsPlayedStore)
 local GamePassModule = require(script.GamePass)
 local CreateGamePassStore = GamePassModule.createGamePassStore
@@ -21,11 +22,15 @@ local _ = require(script.Votes.UserVoteFeedbackMetadataStoreTypes)
 local _ = require(script.GamePass.GamePassStoreTypes)
 local _ = require(script.GameDeveloperProduct.GameDeveloperProductStoreTypes)
 local _ = require(script.GameSubscription.GameSubscriptionStoreTypes)
-local FFlagLuaAppDataHydrationConnectionsPlayedStore = require(script:FindFirstAncestor("DataHydration").Parent.SharedFlags).FFlagLuaAppDataHydrationConnectionsPlayedStore
+local _ = require(script.GamePassVote.GamePassVoteStoreTypes)
+local FFlagLuaAppDataHydrationConnectionsPlayedStore = require(Parent.SharedFlags).FFlagLuaAppDataHydrationConnectionsPlayedStore
+local FFlagSduiToggleGamePassVote = require(Parent.SharedFlags).FFlagSduiToggleGamePassVote
 
 return {
 	createGamePassStore = CreateGamePassStore,
 	getGamePassStore = GetGamePassStore,
+	createGamePassVoteStore = if FFlagSduiToggleGamePassVote then require(script.GamePassVote.createGamePassVoteStore) else nil,
+	getGamePassVoteStore = if FFlagSduiToggleGamePassVote then require(script.GamePassVote.getGamePassVoteStore) else nil,
 	createGameDeveloperProductStore = CreateGameDeveloperProductStore,
 	getGameDeveloperProductStore = GetGameDeveloperProductStore,
 	createGameSubscriptionStore = CreateGameSubscriptionStore,

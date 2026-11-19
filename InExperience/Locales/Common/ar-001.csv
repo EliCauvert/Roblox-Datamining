@@ -3876,7 +3876,10 @@ Feature.InExperienceShop.Label.TryNow,احصل على فترة تجريبية م
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,لقد اشتريتَ {ROBUX_AMOUNT} من عملات Robux بنجاح
 Feature.InExperienceShop.Tooltip.RecentlyRedeemed,هل استمتعت بفترتك التجريبية؟
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,هل أنت متأكد من أنك تريد حذف هذا العنصر نهائيًا من المقتنيات؟ إذا غيرت رأيك، فستحتاج إلى أن تربحه مرة أخرى في التجارب.
+Feature.Item.Label.DeleteFromInventoryPermanently,سنزيله من مقتنياتك نهائيًا.
 Feature.Item.Label.DeleteItemUndercase,حذف العنصر
+Feature.Item.Label.DeleteThisItem,هل تريد حذف هذا العنصر؟
+Feature.Item.Message.ItemNotDeleted,لم يتم حذف العنصر
 Feature.Landing.Label.PoweredBy,بدعم من
 Feature.Leaderboards.Heading.Leaderboard,قائمة المشاركين
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
@@ -4899,6 +4902,7 @@ Feature.Toast.Username.Copied,تم نسخ اسم المستخدم إلى الح�
 Feature.Toast.VoteError.AssetNotVoteable,لا يمكنك التصويت على هذه التجربة.
 Feature.Toast.VoteError.Default,الإجراء غير متوفر.
 Feature.Toast.VoteError.FloodCheckThresholdMet,أنت تصوت بسرعة كبيرة.
+Feature.Toast.VoteError.NotSaved,لم يتم حفظ التصويت
 Feature.Toast.VoteError.PlayGame,يتعين عليك زيارة هذه التجربة قبل تصنيفها.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,لا يمكنك التحقق من عمرك الآن لأنك انتهكت معايير مجتمعنا بشكلٍ متكرر. يمكنك إعادة المحاولة بعد انتهاء فترة التقييد.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,تم تعليق عمليات تقدير العمر

@@ -6,7 +6,9 @@ local ReactModule = require(Parent.React)
 local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
 local CompositionTags = require(Parent.AppComposition).CompositionTags
 local FFlagSduiPageEntryUseSharedHooks = require(Parent.SharedFlags).FFlagSduiPageEntryUseSharedHooks
+local FFlagSduiToggleGamePassVote = require(Parent.SharedFlags).FFlagSduiToggleGamePassVote
 local SduiLoadTimer = SduiSharedUtilitiesModule.SduiLoadTimer
+local GetSduiPageEntrySnackbarStoreFunction = SduiSharedUtilitiesModule.getSduiPageEntrySnackbarStore
 local SduiPageEntryPoint = SduiSharedUtilitiesModule.SduiPageEntryPoint
 local SduiFeatureEntryPoint = SduiSharedUtilitiesModule.SduiFeatureEntryPoint
 local FetchGameItemDetailsPageIfNeededModule = require(ExperienceStoreServerDrivenUi.Api.fetchGameItemDetailsPageIfNeeded)
@@ -19,7 +21,7 @@ local function _(p1, p2)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: GetGameItemDetailsPageKeyModule (copy), ReactModule (copy), SduiLoadTimer (copy), FetchGameItemDetailsPageIfNeededModule (copy), RefreshStoreForGameItemModule (copy), FoundationModule (copy), CompositionTags (copy), SduiPageEntryPoint (copy), FFlagSduiPageEntryUseSharedHooks (copy), SduiFeatureEntryPoint (copy)
+	-- upvalues: GetGameItemDetailsPageKeyModule (copy), ReactModule (copy), SduiLoadTimer (copy), FFlagSduiToggleGamePassVote (copy), GetSduiPageEntrySnackbarStoreFunction (copy), FetchGameItemDetailsPageIfNeededModule (copy), RefreshStoreForGameItemModule (copy), FoundationModule (copy), CompositionTags (copy), SduiPageEntryPoint (copy), FFlagSduiPageEntryUseSharedHooks (copy), SduiFeatureEntryPoint (copy)
 	local ItemType = p1.itemType or p1.navigation and p1.navigation.getParam("itemType")
 	local ItemId = p1.itemId or p1.navigation and p1.navigation.getParam("itemId")
 	local UniverseId = p1.universeId or p1.navigation and p1.navigation.getParam("universeId")
@@ -29,6 +31,15 @@ return ReactModule.memo(function(p1)
 		-- upvalues: PageTimer (copy), SduiLoadTimer (upval)
 		return PageTimer or SduiLoadTimer.createLoadTimer("GameItemDetails")
 	end, { GameItemDetailsPageKeyModule, PageTimer })
+	
+	if FFlagSduiToggleGamePassVote then
+		ReactModule.useLayoutEffect(function()
+			-- upvalues: GameItemDetailsPageKeyModule (copy), GetSduiPageEntrySnackbarStoreFunction (upval)
+			if GameItemDetailsPageKeyModule ~= "" then
+				GetSduiPageEntrySnackbarStoreFunction().hide(GameItemDetailsPageKeyModule)
+			end
+		end, { GameItemDetailsPageKeyModule })
+	end
 	ReactModule.useEffect(function()
 		-- upvalues: ItemType (copy), ItemId (copy), UniverseId (copy), FetchGameItemDetailsPageIfNeededModule (upval), UseMemoResult (copy)
 		if ItemType and ItemId and UniverseId then

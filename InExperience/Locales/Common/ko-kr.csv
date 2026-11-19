@@ -3926,7 +3926,10 @@ Feature.InExperienceShop.Label.TryNow,무료 체험하기
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,{ROBUX_AMOUNT} Robux를 구매하셨습니다.
 Feature.InExperienceShop.Tooltip.RecentlyRedeemed,체험은 즐거우셨나요?
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,이 아이템을 인벤토리에서 영구적으로 삭제할까요? 마음이 바뀐다면 해당 아이템을 체험에서 다시 획득해야 합니다.
+Feature.Item.Label.DeleteFromInventoryPermanently,인벤토리에서 영구적으로 삭제됩니다.
 Feature.Item.Label.DeleteItemUndercase,아이템 삭제
+Feature.Item.Label.DeleteThisItem,이 아이템을 삭제하시겠어요?
+Feature.Item.Message.ItemNotDeleted,아이템이 삭제되지 않았습니다
 Feature.Landing.Label.PoweredBy,제공:
 Feature.Leaderboards.Heading.Leaderboard,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,

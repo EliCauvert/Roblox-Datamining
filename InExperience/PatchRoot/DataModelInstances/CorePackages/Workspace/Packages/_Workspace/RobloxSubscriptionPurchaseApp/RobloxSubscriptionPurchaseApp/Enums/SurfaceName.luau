@@ -21,5 +21,6 @@
 	HomepageLaunchPrompt = "HomepageLaunchPrompt",
 	MarketplaceHeroUnit = "MarketplaceHeroUnit",
 	AvatarSpawnEffects = "AvatarSpawnEffects",
-	Notification = "notification"
+	Notification = "notification",
+	CampaignPage = "CampaignPage"
 }

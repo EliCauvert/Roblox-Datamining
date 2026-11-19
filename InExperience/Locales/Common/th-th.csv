@@ -3908,7 +3908,10 @@ Feature.InExperienceShop.Label.TryNow,
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,คุณซื้อ {ROBUX_AMOUNT} Robux สำเร็จเรียบร้อยแล้ว
 Feature.InExperienceShop.Tooltip.RecentlyRedeemed,ชอบช่วงทดลองใช้ไหม?
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"คุณแน่ใจหรือไม่ว่าคุณต้องการ ""ลบ"" ไอเท็มนี้ออกจากคลังไอเท็มของคุณอย่างถาวร? หากเปลี่ยนใจ จะต้องทำเพื่อให้ได้รับอีกครั้งในประสบการณ์"
+Feature.Item.Label.DeleteFromInventoryPermanently,เราจะลบไอเท็มนี้ออกจากคลังไอเท็มของคุณอย่างถาวร
 Feature.Item.Label.DeleteItemUndercase,ลบไอเท็ม
+Feature.Item.Label.DeleteThisItem,ลบไอเท็มนี้ใช่ไหม?
+Feature.Item.Message.ItemNotDeleted,ยังไม่ได้ลบไอเท็ม
 Feature.Landing.Label.PoweredBy,ดำเนินการโดย
 Feature.Leaderboards.Heading.Leaderboard,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,

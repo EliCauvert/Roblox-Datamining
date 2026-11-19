@@ -4,79 +4,12 @@ local DataHydrationUtilsModule = require(Parent.DataHydration.DataHydrationUtils
 local FriendsModule = require(Parent.DataHydration.Friends)
 local SignalsModule = require(Parent.Signals)
 local ListRecipientsStatusModule = require(ShareSheet.Recipients.ListRecipientsStatus)
-local RecipientModule = require(ShareSheet.Recipients.Recipient)
 local ShareSheetConstantsModule = require(ShareSheet.ShareSheetConstants)
 local _ = require(ShareSheet.Types)
-
-local function _(p1)
-	if (tonumber(p1) or 0) <= 0 then
-		error(`Friends returned an invalid user id: {p1}`)
-	end
-end
-
-local function areSameRecipients(List, p1): boolean
-	if #List ~= #p1 then
-		return false
-	end
-	for i, value in List do
-		if p1[i] ~= value then
-			return false
-		end
-	end
-	return true
-end
-
-local function createFriendRecipientList(FriendRecipientList)
-	-- upvalues: SignalsModule (copy), RecipientModule (copy), areSameRecipients (copy)
-	local t = {}
-	local Computed = SignalsModule.createComputed(function(p2)
-		-- upvalues: FriendRecipientList (copy), t (copy), RecipientModule (upval)
-		local List = {}
-		local t1 = {}
-		
-		for _, userId in FriendRecipientList.getPage(p2).userIds do
-			if (tonumber(userId) or 0) <= 0 then
-				error(`Friends returned an invalid user id: {userId}`)
-			end
-			if t1[userId] then
-				error(`Duplicate user id in the friends page: {userId}`)
-			end
-			t1[userId] = true
-			local Entry = t[userId] or RecipientModule.fromUserId(userId)
-			t[userId] = Entry
-			table.insert(List, Entry)
-		end
-		return List
-	end, areSameRecipients)
-	local Computed1 = SignalsModule.createComputed(function(p3)
-		-- upvalues: FriendRecipientList (copy), Computed (copy)
-		local Page = FriendRecipientList.getPage(p3)
-		
-		return {
-			recipients = Computed(p3),
-			status = Page.status,
-			nextPageToken = Page.nextPageToken,
-			isFetchingNextPage = Page.isFetchingNextPage
-		}
-	end)
-	
-	return {
-		getResult = Computed1,
-		refresh = FriendRecipientList.refresh,
-		search = FriendRecipientList.search,
-		loadMore = function(NextPageToken)
-			-- upvalues: Computed1 (copy), FriendRecipientList (copy)
-			local ComputedResult = Computed1(false)
-			
-			if ComputedResult.nextPageToken == NextPageToken and not ComputedResult.isFetchingNextPage then
-				FriendRecipientList.fetchNextPage()
-			end
-		end
-	}
-end
+local CreateFriendRecipientListModule = require(script.Parent.createFriendRecipientList)
 
 local function createFriendsSearchRecipientList(Query)
-	-- upvalues: DataHydrationUtilsModule (copy), SignalsModule (copy), ListRecipientsStatusModule (copy), FriendsModule (copy), ShareSheetConstantsModule (copy), createFriendRecipientList (copy)
+	-- upvalues: DataHydrationUtilsModule (copy), SignalsModule (copy), ListRecipientsStatusModule (copy), FriendsModule (copy), ShareSheetConstantsModule (copy), CreateFriendRecipientListModule (copy)
 	local LocalPlayerUserId = DataHydrationUtilsModule.getLocalPlayerUserId()
 	local Signal, Signal2 = SignalsModule.createSignal({
 		isFetchingNextPage = false,
@@ -134,7 +67,7 @@ local function createFriendsSearchRecipientList(Query)
 		end)
 	end
 	
-	return (createFriendRecipientList({
+	return CreateFriendRecipientListModule({
 		getPage = Signal,
 		fetchNextPage = function()
 			-- upvalues: fetchPage (copy), Signal (copy)
@@ -144,20 +77,20 @@ local function createFriendsSearchRecipientList(Query)
 			-- upvalues: fetchPage (copy)
 			fetchPage(nil)
 		end
-	}))
+	})
 end
 
 return function()
-	-- upvalues: FriendsModule (copy), SignalsModule (copy), ListRecipientsStatusModule (copy), createFriendRecipientList (copy), createFriendsSearchRecipientList (copy)
+	-- upvalues: FriendsModule (copy), SignalsModule (copy), ListRecipientsStatusModule (copy), CreateFriendRecipientListModule (copy), createFriendsSearchRecipientList (copy)
 	local GetResult = FriendsModule.FriendsStore.get()
 	local AllFriends = GetResult.GetAllFriends()
 	local AllFriendsStatus = GetResult.GetAllFriendsStatus()
 	
-	return (createFriendRecipientList({
-		getPage = SignalsModule.createComputed(function(p2)
+	return CreateFriendRecipientListModule({
+		getPage = SignalsModule.createComputed(function(p1)
 			-- upvalues: AllFriends (copy), AllFriendsStatus (copy), ListRecipientsStatusModule (upval)
-			local AllFriendsResult = AllFriends(p2)
-			local AllFriendsStatusResult = AllFriendsStatus(p2)
+			local AllFriendsResult = AllFriends(p1)
+			local AllFriendsStatusResult = AllFriendsStatus(p1)
 			local IsFailed = AllFriendsStatusResult == "Failed"
 			local UserIds = {}
 			
@@ -178,5 +111,5 @@ return function()
 		fetchNextPage = GetResult.FetchMoreFriends,
 		refresh = function() end,
 		search = createFriendsSearchRecipientList
-	}))
+	})
 end

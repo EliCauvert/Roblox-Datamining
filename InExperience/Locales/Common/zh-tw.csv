@@ -3924,7 +3924,10 @@ Feature.InExperienceShop.Label.TryNow,取得免費試用
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,您已成功購買 {ROBUX_AMOUNT} Robux
 Feature.InExperienceShop.Tooltip.RecentlyRedeemed,喜歡試用方案嗎？
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,確定要從道具欄永久刪除此道具嗎？若日後改變主意，你必須在體驗中重新取得道具。
+Feature.Item.Label.DeleteFromInventoryPermanently,我們會從你的道具欄永久移除此道具。
 Feature.Item.Label.DeleteItemUndercase,刪除道具
+Feature.Item.Label.DeleteThisItem,要刪除此道具嗎？
+Feature.Item.Message.ItemNotDeleted,物品未刪除
 Feature.Landing.Label.PoweredBy,技術支援：
 Feature.Leaderboards.Heading.Leaderboard,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,

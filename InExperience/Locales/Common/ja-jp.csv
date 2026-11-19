@@ -3925,7 +3925,10 @@ Feature.InExperienceShop.Label.TryNow,無料トライアルを利用
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,{ROBUX_AMOUNT} Robuxを購入できました
 Feature.InExperienceShop.Tooltip.RecentlyRedeemed,トライアルをお楽しみいただけましたか？
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,このアイテムを持ち物から永久に削除しますか？もし気が変わった場合は、バーチャル空間で再び獲得する必要があります。
+Feature.Item.Label.DeleteFromInventoryPermanently,持ち物リストから永久に削除されます。
 Feature.Item.Label.DeleteItemUndercase,アイテムを削除
+Feature.Item.Label.DeleteThisItem,このアイテムを削除しますか？
+Feature.Item.Message.ItemNotDeleted,アイテムは削除されませんでした
 Feature.Landing.Label.PoweredBy,運営：
 Feature.Leaderboards.Heading.Leaderboard,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,

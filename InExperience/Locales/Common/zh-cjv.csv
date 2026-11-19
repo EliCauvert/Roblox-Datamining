@@ -2406,6 +2406,7 @@ Feature.Build.Label.DefaultDeveloperProductName,开发者产品
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,已删除
 Feature.Build.Label.DescribeIdea,描述一个创意
+Feature.Build.Label.DescribeIdeaOrPick,
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,描述：{DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,名称：{NAME}
@@ -3939,7 +3940,10 @@ Feature.InExperienceShop.Label.TryNow,获取免费试用
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,你已成功购买 {ROBUX_AMOUNT} Robux
 Feature.InExperienceShop.Tooltip.RecentlyRedeemed,喜欢你的试用体验吗？
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,确定要从你的道具栏中永久删除此道具吗？如果你改变主意，需要通过体验再次获得该道具。
+Feature.Item.Label.DeleteFromInventoryPermanently,我们会将其永久从你的道具栏中移除。
 Feature.Item.Label.DeleteItemUndercase,删除道具
+Feature.Item.Label.DeleteThisItem,要删除此道具吗？
+Feature.Item.Message.ItemNotDeleted,道具未删除
 Feature.Landing.Label.PoweredBy,技术支持：
 Feature.Leaderboards.Heading.Leaderboard,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,
@@ -4974,6 +4978,7 @@ Feature.Toast.Username.Copied,用户名已复制到剪贴板。
 Feature.Toast.VoteError.AssetNotVoteable,可能无法对挑战进行评分。
 Feature.Toast.VoteError.Default,操作不可用。
 Feature.Toast.VoteError.FloodCheckThresholdMet,你评分的次数太过频繁。
+Feature.Toast.VoteError.NotSaved,
 Feature.Toast.VoteError.PlayGame,你必须参加过挑战，才能对其进行评分。
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,由于多次违反我们的社区准则，你目前无法验证年龄。请在限制结束后重试。
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,年龄验证已暂停

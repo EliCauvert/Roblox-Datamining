@@ -1,6 +1,7 @@
 ﻿local RecipientSource = {
 	ChatInbox = "chatInbox",
-	OneToOneFriends = "oneToOneFriends"
+	OneToOneFriends = "oneToOneFriends",
+	SchoolInviteCandidates = "schoolInviteCandidates"
 }
 local t = {}
 

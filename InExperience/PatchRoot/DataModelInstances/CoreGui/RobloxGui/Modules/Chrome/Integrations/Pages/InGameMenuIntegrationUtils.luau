@@ -41,12 +41,15 @@ return {
 			return
 		end
 		if p2 then
-			if not Inverted then
+			if Inverted then
+				InExperienceSideSheetModule.registerInGameMenuPeoplePageActions.closeMenuShownBesideSideSheet()
+				
+				return
+			else
 				SettingsHubModule:SetVisibility(false)
 				
 				return
 			end
-			return
 		elseif Inverted then
 			SettingsHubModule:SwitchToPage(SettingsHubModuleInstanceEntry, true, nil, true)
 			

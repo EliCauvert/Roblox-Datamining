@@ -3925,7 +3925,10 @@ Feature.InExperienceShop.Label.TryNow,Nhận bản dùng thử miễn phí
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,Bạn đã mua thành công {ROBUX_AMOUNT} Robux
 Feature.InExperienceShop.Tooltip.RecentlyRedeemed,Bạn có thích bản dùng thử của mình không?
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Bạn có chắc chắn muốn xóa vĩnh viễn vật phẩm này khỏi kho? Nếu thay đổi ý định, bạn sẽ phải tự kiếm lại vật phẩm này trong một trải nghiệm."
+Feature.Item.Label.DeleteFromInventoryPermanently,Chúng tôi sẽ xóa vĩnh viễn vật phẩm này khỏi kho của bạn.
 Feature.Item.Label.DeleteItemUndercase,Xóa vật phẩm
+Feature.Item.Label.DeleteThisItem,Xóa vật phẩm này?
+Feature.Item.Message.ItemNotDeleted,Vật phẩm chưa bị xóa
 Feature.Landing.Label.PoweredBy,Được cung cấp bởi
 Feature.Leaderboards.Heading.Leaderboard,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,Không phải bây giờ

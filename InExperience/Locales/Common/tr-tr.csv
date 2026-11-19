@@ -3881,7 +3881,10 @@ Feature.InExperienceShop.Label.TryNow,Ücretsiz denemeden yararlan
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,{ROBUX_AMOUNT} Robux satın aldın
 Feature.InExperienceShop.Tooltip.RecentlyRedeemed,Denemeden memnun kaldın mı?
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,Bu öğeyi envanterinden kalıcı olarak silmek istediğine emin misin? Fikrini değiştirirsen öğeyi bir deneyimde tekrar kazanman gerekecek.
+Feature.Item.Label.DeleteFromInventoryPermanently,Bunu envanterinden kalıcı olarak kaldıracağız.
 Feature.Item.Label.DeleteItemUndercase,Öğeyi sil
+Feature.Item.Label.DeleteThisItem,Bu öğe silinsin mi?
+Feature.Item.Message.ItemNotDeleted,Öğe silinmedi
 Feature.Landing.Label.PoweredBy,Destekleyen:
 Feature.Leaderboards.Heading.Leaderboard,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,

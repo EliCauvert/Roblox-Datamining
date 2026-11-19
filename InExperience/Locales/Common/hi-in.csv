@@ -3906,7 +3906,10 @@ Feature.InExperienceShop.Label.TryNow,फ़्री ट्रायल पा�
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,आपने {ROBUX_AMOUNT} Robux खरीद लिए हैं
 Feature.InExperienceShop.Tooltip.RecentlyRedeemed,आपको अपना ट्रायल पसंद आया?
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"क्या आपको वाकई अपनी इन्वेंट्री से इस आइटम को हमेशा के लिए डिलीट करना है? अपना फ़ैसला बदलने पर, आपको इसे किसी एक्सपीरिएंस में फिर से हासिल करना होगा."
+Feature.Item.Label.DeleteFromInventoryPermanently,हम इसे हमेशा के लिए आपकी इन्वेंट्री से हटा देंगे.
 Feature.Item.Label.DeleteItemUndercase,आइटम डिलीट करें
+Feature.Item.Label.DeleteThisItem,इस आइटम को डिलीट करना है?
+Feature.Item.Message.ItemNotDeleted,आइटम डिलीट नहीं किया गया
 Feature.Landing.Label.PoweredBy,इसे बनाया है
 Feature.Leaderboards.Heading.Leaderboard,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,

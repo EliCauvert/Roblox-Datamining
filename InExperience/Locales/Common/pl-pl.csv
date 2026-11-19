@@ -3925,7 +3925,10 @@ Feature.InExperienceShop.Label.TryNow,Skorzystaj z bezpłatnego okresu próbnego
 Feature.InExperienceShop.Message.RobuxPurchaseSuccess,Liczba kupionych Robuxów: {ROBUX_AMOUNT}
 Feature.InExperienceShop.Tooltip.RecentlyRedeemed,Podobał Ci się okres próbny?
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Czy na pewno chcesz trwale usunąć ten przedmiot ze swojego wyposażenia? Jeżeli zmienisz zdanie, trzeba będzie go ponownie zdobyć w projekcie."
+Feature.Item.Label.DeleteFromInventoryPermanently,Usuniemy go z Twojego wyposażenia na stałe.
 Feature.Item.Label.DeleteItemUndercase,Usuń przedmiot
+Feature.Item.Label.DeleteThisItem,Usunąć ten przedmiot?
+Feature.Item.Message.ItemNotDeleted,Przedmiot nie został usunięty
 Feature.Landing.Label.PoweredBy,Obsługiwane przez
 Feature.Leaderboards.Heading.Leaderboard,
 Feature.LegallySensitiveContent.Action.FriendDiscovery.NotNow,

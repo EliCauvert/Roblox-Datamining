@@ -6,6 +6,7 @@ local FFlagSduiMarketplaceCatalogSortSupport = SharedFlagsModule.FFlagSduiMarket
 local FFlagSduiAddCollectibleItemDataHydration = SharedFlagsModule.FFlagSduiAddCollectibleItemDataHydration
 local FFlagSduiLeaderboardComponent = SharedFlagsModule.FFlagSduiLeaderboardComponent
 local FFlagSduiBuyRobuxHydration = SharedFlagsModule.FFlagSduiBuyRobuxHydration
+local FFlagSduiToggleGamePassVote = SharedFlagsModule.FFlagSduiToggleGamePassVote
 
 return {
 	[SduiDataBindingContentTypeModule.badge] = { "badge_id" },
@@ -17,6 +18,7 @@ return {
 	[SduiDataBindingContentTypeModule.song] = { "song_id" },
 	[SduiDataBindingContentTypeModule.marketplaceCatalogSort] = if FFlagSduiMarketplaceCatalogSortSupport then { "catalog_sort_id" } else nil,
 	[SduiDataBindingContentTypeModule.gamePass] = { "game_pass_id" },
+	[SduiDataBindingContentTypeModule.gamePassVote] = if FFlagSduiToggleGamePassVote then { "game_pass_id" } else nil,
 	[SduiDataBindingContentTypeModule.gameDeveloperProduct] = { "developer_product_id" },
 	[SduiDataBindingContentTypeModule.gameSubscription] = { "subscription_id" },
 	[SduiDataBindingContentTypeModule.playability] = { "universe_id" },

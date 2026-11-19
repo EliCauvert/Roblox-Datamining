@@ -1,10 +1,11 @@
 ﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+local FFlagSduiTextEmptyFallback = require(Parent.SharedFlags).FFlagSduiTextEmptyFallback
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local _ = require(Parent.SduiCompat)
 
 return function(p1)
-	-- upvalues: ReactModule (copy), FoundationModule (copy)
+	-- upvalues: ReactModule (copy), FoundationModule (copy), FFlagSduiTextEmptyFallback (copy)
 	return ReactModule.createElement(FoundationModule.Text, {
 		AnchorPoint = p1.anchorPoint,
 		AutomaticSize = p1.automaticSize,
@@ -14,7 +15,7 @@ return function(p1)
 		Rotation = p1.rotation,
 		Size = p1.size,
 		SizeConstraint = p1.sizeConstraint,
-		Text = p1.text,
+		Text = if FFlagSduiTextEmptyFallback then p1.text or "" else p1.text,
 		TextTruncate = p1.textTruncate,
 		TextWrapped = p1.textWrapped,
 		TextXAlignment = p1.textXAlignment,
