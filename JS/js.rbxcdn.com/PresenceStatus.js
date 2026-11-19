@@ -2,75 +2,75 @@
     try {
         var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "34e423b40e47f46f5c7cf2bc603524c06d614fa2"
+            id: "d1874a4ba39db3ec53b67feae6486d7a2d8fc69d"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "a4ada4cc-6dd4-40f9-9178-5844e5a3e105", e._sentryDebugIdIdentifier = "sentry-dbid-a4ada4cc-6dd4-40f9-9178-5844e5a3e105")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "5533c47d-cc35-46b9-97a9-acde6dfcbe5b", e._sentryDebugIdIdentifier = "sentry-dbid-5533c47d-cc35-46b9-97a9-acde6dfcbe5b")
     } catch (e) {}
 }(),
 function() {
     "use strict";
-    var e, t, n, r, o, i, a, u, s, l, c, d = {},
-        p = {};
+    var e, t, n, r, o, i, a, u, s, l, c = {},
+        d = {};
 
-    function f(e) {
-        var t = p[e];
+    function p(e) {
+        var t = d[e];
         if (void 0 !== t) return t.exports;
-        var n = p[e] = {
+        var n = d[e] = {
             exports: {}
         };
-        return d[e](n, n.exports, f), n.exports
+        return c[e](n, n.exports, p), n.exports
     }
 
-    function v(e, t) {
+    function f(e, t) {
         (null == t || t > e.length) && (t = e.length);
         for (var n = 0, r = Array(t); n < t; n++) r[n] = e[n];
         return r
     }
 
-    function h(e, t) {
+    function v(e, t) {
         if (e) {
-            if ("string" == typeof e) return v(e, t);
+            if ("string" == typeof e) return f(e, t);
             var n = Object.prototype.toString.call(e).slice(8, -1);
             if ("Object" === n && e.constructor && (n = e.constructor.name), "Map" === n || "Set" === n) return Array.from(n);
-            if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return v(e, t)
+            if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return f(e, t)
         }
     }
 
-    function y(e) {
+    function h(e) {
         return function(e) {
-            if (Array.isArray(e)) return v(e)
+            if (Array.isArray(e)) return f(e)
         }(e) || function(e) {
             if ("u" > typeof Symbol && null != e[Symbol.iterator] || null != e["@@iterator"]) return Array.from(e)
-        }(e) || h(e) || function() {
+        }(e) || v(e) || function() {
             throw TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
         }()
     }
-    f.n = function(e) {
+    p.n = function(e) {
         var t = e && e.__esModule ? function() {
             return e.default
         } : function() {
             return e
         };
-        return f.d(t, {
+        return p.d(t, {
             a: t
         }), t
-    }, f.d = function(e, t) {
-        for (var n in t) f.o(t, n) && !f.o(e, n) && Object.defineProperty(e, n, {
+    }, p.d = function(e, t) {
+        for (var n in t) p.o(t, n) && !p.o(e, n) && Object.defineProperty(e, n, {
             enumerable: !0,
             get: t[n]
         })
-    }, f.o = function(e, t) {
+    }, p.o = function(e, t) {
         return Object.prototype.hasOwnProperty.call(e, t)
-    }, f.rv = function() {
+    }, p.rv = function() {
         return "1.7.12"
-    }, f.ruid = "bundler=rspack@1.7.12";
-    var m = ["Roblox", "core-scripts", "realtime"],
-        b = function(e, t) {
+    }, p.ruid = "bundler=rspack@1.7.12";
+    var y = ["Roblox", "core-scripts", "realtime"],
+        m = function(e, t) {
             var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : window;
             if ("string" == typeof e) n[e] = t;
             else {
-                var r = y(e),
+                var r = h(e),
                     o = r.pop(),
                     i = n,
                     a = !0,
@@ -93,7 +93,7 @@ function() {
                 i[o] = t
             }
         },
-        T = function(e) {
+        b = function(e) {
             var t = window;
             if ("string" == typeof e) return null != t[e];
             var n = !0,
@@ -117,26 +117,26 @@ function() {
             return !0
         };
 
-    function w(e, t) {
+    function T(e, t) {
         return null != t && "u" > typeof Symbol && t[Symbol.hasInstance] ? !!t[Symbol.hasInstance](e) : e instanceof t
     }
 
-    function g(e, t) {
-        if (!w(e, t)) throw TypeError("Cannot call a class as a function")
+    function w(e, t) {
+        if (!T(e, t)) throw TypeError("Cannot call a class as a function")
     }
 
-    function P(e, t) {
+    function g(e, t) {
         for (var n = 0; n < t.length; n++) {
             var r = t[n];
             r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r)
         }
     }
 
-    function E(e, t, n) {
-        return t && P(e.prototype, t), n && P(e, n), e
+    function P(e, t, n) {
+        return t && g(e.prototype, t), n && g(e, n), e
     }
 
-    function R(e, t, n) {
+    function E(e, t, n) {
         return t in e ? Object.defineProperty(e, t, {
             value: n,
             enumerable: !0,
@@ -145,20 +145,20 @@ function() {
         }) : e[t] = n, e
     }
 
-    function O(e) {
+    function R(e) {
         for (var t = 1; t < arguments.length; t++) {
             var n = null != arguments[t] ? arguments[t] : {},
                 r = Object.keys(n);
             "function" == typeof Object.getOwnPropertySymbols && (r = r.concat(Object.getOwnPropertySymbols(n).filter(function(e) {
                 return Object.getOwnPropertyDescriptor(n, e).enumerable
             }))), r.forEach(function(t) {
-                R(e, t, n[t])
+                E(e, t, n[t])
             })
         }
         return e
     }
 
-    function S(e, t) {
+    function O(e, t) {
         return t = null != t ? t : {}, Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : (function(e) {
             var t = Object.keys(e);
             if (Object.getOwnPropertySymbols) {
@@ -171,27 +171,27 @@ function() {
         }), e
     }
 
-    function I(e) {
+    function S(e) {
         return e && "u" > typeof Symbol && e.constructor === Symbol ? "symbol" : typeof e
     }
-    var A = window.React,
-        N = f.n(A);
-    (_ = M || (M = {}))[_.Offline = 0] = "Offline", _[_.Online = 1] = "Online", _[_.Game = 2] = "Game", _[_.Studio = 3] = "Studio", _[_.Invisible = 4] = "Invisible";
-    var _, M, C = M,
-        L = {
+    var I = window.React,
+        A = p.n(I);
+    (N = _ || (_ = {}))[N.Offline = 0] = "Offline", N[N.Online = 1] = "Online", N[N.Game = 2] = "Game", N[N.Studio = 3] = "Studio", N[N.Invisible = 4] = "Invisible";
+    var N, _, M = _,
+        C = {
             exports: {}
         },
-        x = {}.hasOwnProperty;
+        L = {}.hasOwnProperty;
 
-    function U() {
+    function x() {
         for (var e = [], t = 0; t < arguments.length; t++) {
             var n = arguments[t];
             if (n) {
-                var r = void 0 === n ? "undefined" : I(n);
+                var r = void 0 === n ? "undefined" : S(n);
                 if ("string" === r || "number" === r) e.push(n);
                 else if (Array.isArray(n)) {
                     if (n.length) {
-                        var o = U.apply(null, n);
+                        var o = x.apply(null, n);
                         o && e.push(o)
                     }
                 } else if ("object" === r) {
@@ -199,16 +199,16 @@ function() {
                         e.push(n.toString());
                         continue
                     }
-                    for (var i in n) x.call(n, i) && n[i] && e.push(i)
+                    for (var i in n) L.call(n, i) && n[i] && e.push(i)
                 }
             }
         }
         return e.join(" ")
     }
-    L.exports ? (U.default = U, L.exports = U) : window.classNames = U;
-    var F = (J = L.exports) && J.__esModule && Object.prototype.hasOwnProperty.call(J, "default") ? J.default : J,
-        D = function(e, t) {
-            return (D = Object.setPrototypeOf || w({
+    C.exports ? (x.default = x, C.exports = x) : window.classNames = x;
+    var U = (H = C.exports) && H.__esModule && Object.prototype.hasOwnProperty.call(H, "default") ? H.default : H,
+        F = function(e, t) {
+            return (F = Object.setPrototypeOf || T({
                 __proto__: []
             }, Array) && function(e, t) {
                 e.__proto__ = t
@@ -217,23 +217,23 @@ function() {
             })(e, t)
         };
 
-    function k(e, t) {
+    function D(e, t) {
         if ("function" != typeof t && null !== t) throw TypeError("Class extends value " + String(t) + " is not a constructor or null");
 
         function n() {
             this.constructor = e
         }
-        D(e, t), e.prototype = null === t ? Object.create(t) : (n.prototype = t.prototype, new n)
+        F(e, t), e.prototype = null === t ? Object.create(t) : (n.prototype = t.prototype, new n)
     }
-    var B = function() {
-        return (B = Object.assign || function(e) {
+    var k = function() {
+        return (k = Object.assign || function(e) {
             for (var t, n = 1, r = arguments.length; n < r; n++)
                 for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
             return e
         }).apply(this, arguments)
     };
 
-    function j(e, t, n, r) {
+    function B(e, t, n, r) {
         return new(n || (n = Promise))(function(o, i) {
             function a(e) {
                 try {
@@ -253,7 +253,7 @@ function() {
 
             function s(e) {
                 var t;
-                e.done ? o(e.value) : (w(t = e.value, n) ? t : new n(function(e) {
+                e.done ? o(e.value) : (T(t = e.value, n) ? t : new n(function(e) {
                     e(t)
                 })).then(a, u)
             }
@@ -261,7 +261,7 @@ function() {
         })
     }
 
-    function V(e, t) {
+    function j(e, t) {
         var n, r, o, i, a = {
             label: 0,
             sent: function() {
@@ -337,12 +337,12 @@ function() {
     }
     var q = function() {
             function e(e) {
-                void 0 === e && (e = new G);
+                void 0 === e && (e = new z);
                 var t = this;
                 this.configuration = e, this.fetchApi = function(e, n) {
-                    return j(t, void 0, void 0, function() {
+                    return B(t, void 0, void 0, function() {
                         var t, r, o, i, a, u, s, l, c;
-                        return V(this, function(d) {
+                        return j(this, function(d) {
                             switch (d.label) {
                                 case 0:
                                     t = {
@@ -350,7 +350,7 @@ function() {
                                         init: n
                                     }, r = 0, o = this.middleware, d.label = 1;
                                 case 1:
-                                    return r < o.length ? (c = o[r]).pre ? [4, c.pre(B({
+                                    return r < o.length ? (c = o[r]).pre ? [4, c.pre(k({
                                         fetch: this.fetchApi
                                     }, t))] : [3, 3] : [3, 4];
                                 case 2:
@@ -401,9 +401,9 @@ function() {
                 });
                 return this.withMiddleware.apply(this, n)
             }, e.prototype.request = function(e, t) {
-                return j(this, void 0, void 0, function() {
+                return B(this, void 0, void 0, function() {
                     var n, r, o, i;
-                    return V(this, function(a) {
+                    return j(this, function(a) {
                         switch (a.label) {
                             case 0:
                                 return r = (n = this.createFetchParams(e, t)).url, o = n.init, [4, this.fetchApi(r, o)];
@@ -416,11 +416,11 @@ function() {
             }, e.prototype.createFetchParams = function(e, t) {
                 var n = this.configuration.basePath + e.path;
                 void 0 !== e.query && 0 !== Object.keys(e.query).length && (n += "?" + this.configuration.queryParamsStringify(e.query));
-                var r, o = "u" > typeof FormData && w(e.body, FormData) || w(e.body, URLSearchParams) || (r = e.body, "u" > typeof Blob && w(r, Blob)) ? e.body : JSON.stringify(e.body),
+                var r, o = "u" > typeof FormData && T(e.body, FormData) || T(e.body, URLSearchParams) || (r = e.body, "u" > typeof Blob && T(r, Blob)) ? e.body : JSON.stringify(e.body),
                     i = Object.assign({}, this.configuration.headers, e.headers);
                 return {
                     url: n,
-                    init: B({
+                    init: k({
                         method: e.method,
                         headers: i,
                         body: o,
@@ -433,14 +433,14 @@ function() {
                 return e.middleware = this.middleware.slice(), e
             }, e
         }(),
-        z = function(e) {
+        V = function(e) {
             function t(t, n) {
                 var r = e.call(this, n) || this;
                 return r.field = t, r.name = "RequiredError", r
             }
-            return k(t, e), t
+            return D(t, e), t
         }(Error),
-        G = function() {
+        z = function() {
             function e(e) {
                 void 0 === e && (e = {}), this.configuration = e
             }
@@ -468,13 +468,13 @@ function() {
                         return void 0 === n && (n = ""), Object.keys(t).map(function(r) {
                             var o = n + (n.length ? "[".concat(r, "]") : r),
                                 i = t[r];
-                            if (w(i, Array)) {
+                            if (T(i, Array)) {
                                 var a = i.map(function(e) {
                                     return encodeURIComponent(String(e))
                                 }).join("&".concat(encodeURIComponent(o), "="));
                                 return "".concat(encodeURIComponent(o), "=").concat(a)
                             }
-                            return w(i, Date) ? "".concat(encodeURIComponent(o), "=").concat(encodeURIComponent(i.toISOString())) : w(i, Object) ? e(i, o) : "".concat(encodeURIComponent(o), "=").concat(encodeURIComponent(String(i)))
+                            return T(i, Date) ? "".concat(encodeURIComponent(o), "=").concat(encodeURIComponent(i.toISOString())) : T(i, Object) ? e(i, o) : "".concat(encodeURIComponent(o), "=").concat(encodeURIComponent(String(i)))
                         }).filter(function(e) {
                             return e.length > 0
                         }).join("&")
@@ -533,19 +533,19 @@ function() {
             }), e
         }();
 
-    function H(e, t) {
+    function G(e, t) {
         return null != e[t]
     }
-    var J, W, Q, Y = function() {
+    var H, J, W, Q = function() {
             function e(e, t) {
                 void 0 === t && (t = function(e) {
                     return e
                 }), this.raw = e, this.transformer = t
             }
             return e.prototype.value = function() {
-                return j(this, void 0, void 0, function() {
+                return B(this, void 0, void 0, function() {
                     var e;
-                    return V(this, function(t) {
+                    return j(this, function(t) {
                         switch (t.label) {
                             case 0:
                                 return e = this.transformer, [4, this.raw.json()];
@@ -556,8 +556,8 @@ function() {
                 })
             }, e
         }(),
-        Z = "x-csrf-token",
-        K = function() {
+        Y = "x-csrf-token",
+        Z = function() {
             function e() {
                 this.currentToken = ""
             }
@@ -576,15 +576,15 @@ function() {
                     r = e.url,
                     o = e.init,
                     i = e.response;
-                return 403 === i.status && i.headers.has(Z) ? (this.currentToken = null != (t = i.headers.get(Z)) ? t : "", n(r, this.appendCSRFHeader(o))) : Promise.resolve(i)
+                return 403 === i.status && i.headers.has(Y) ? (this.currentToken = null != (t = i.headers.get(Y)) ? t : "", n(r, this.appendCSRFHeader(o))) : Promise.resolve(i)
             }, e.prototype.appendCSRFHeader = function(e) {
                 var t;
-                return B(B({}, e), {
-                    headers: B(B({}, e.headers), ((t = {})[Z] = this.currentToken, t))
+                return k(k({}, e), {
+                    headers: k(k({}, e.headers), ((t = {})[Y] = this.currentToken, t))
                 })
             }, e
         }(),
-        $ = function() {
+        K = function() {
             function e() {
                 this.observers = []
             }
@@ -606,15 +606,15 @@ function() {
                 }), Promise.resolve(n)
             }, e
         }();
-    (W || (W = {})).LoadApi = "loadApi", (Q || (Q = {})).Time = "time";
-    var X, ee = function(e) {
+    (J || (J = {})).LoadApi = "loadApi", (W || (W = {})).Time = "time";
+    var $, X = function(e) {
             void 0 === e && (e = {
                 baseUrl: ""
             }), this.configuration = e, this.baseUrl = this.configuration.baseUrl
         },
-        et = function() {
+        ee = function() {
             function e(e) {
-                void 0 === e && (e = new ee), this.configuration = e, this.baseUrl = e.baseUrl
+                void 0 === e && (e = new X), this.configuration = e, this.baseUrl = e.baseUrl
             }
             return e.prototype.sendEvent = function(e) {
                 var t = e.localTime,
@@ -654,16 +654,16 @@ function() {
                 }, p
             }, e
         }(),
-        en = "Grasshopper",
-        er = function() {
+        et = "Grasshopper",
+        en = function() {
             function e(e) {
                 var t;
-                this.eventTracker = (t = new et(new ee({
-                    baseUrl: "https://ecsv2.".concat(e, "/").concat(en)
+                this.eventTracker = (t = new ee(new X({
+                    baseUrl: "https://ecsv2.".concat(e, "/").concat(et)
                 })), {
                     sendEvent: function(e) {
                         var n = {
-                            target: en,
+                            target: et,
                             localTime: new Date,
                             eventType: e.eventType,
                             context: e.context,
@@ -677,8 +677,8 @@ function() {
                 return this.sendApiLoadEvent(e), Promise.resolve(e.response)
             }, e.prototype.sendApiLoadEvent = function(e) {
                 this.eventTracker.sendEvent({
-                    eventType: W.LoadApi,
-                    context: Q.Time,
+                    eventType: J.LoadApi,
+                    context: W.Time,
                     additionalProperties: {
                         elapsedTime: e.elapsedTime,
                         apiUrl: e.url,
@@ -687,50 +687,50 @@ function() {
                 })
             }, e
         }(),
+        er = new Z,
         eo = new K,
-        ei = new $,
-        ea = function(e) {
+        ei = function(e) {
             function t(t) {
                 void 0 === t && (t = {});
-                var n = B({}, t);
-                if (Array.isArray(n.middleware) ? n.middleware.unshift(eo, ei) : n.middleware = [eo, ei], t.robloxSiteDomain) {
-                    var r = new er(t.robloxSiteDomain);
+                var n = k({}, t);
+                if (Array.isArray(n.middleware) ? n.middleware.unshift(er, eo) : n.middleware = [er, eo], t.robloxSiteDomain) {
+                    var r = new en(t.robloxSiteDomain);
                     n.middleware.unshift(r)
                 }
                 return e.call(this, n) || this
             }
-            return k(t, e), t
-        }(G);
+            return D(t, e), t
+        }(z);
 
-    function eu(e) {
-        return es(e)
+    function ea(e) {
+        return eu(e)
     }
 
-    function es(e, t) {
+    function eu(e, t) {
         return null == e ? e : {
-            userIds: H(e, "userIds") ? e.userIds : void 0
+            userIds: G(e, "userIds") ? e.userIds : void 0
         }
     }
 
-    function el(e) {
+    function es(e) {
         if (void 0 !== e) return null === e ? null : {
             userIds: e.userIds
         }
     }
 
-    function ec(e) {
-        return ed(e)
+    function el(e) {
+        return ec(e)
     }
 
-    function ed(e, t) {
+    function ec(e, t) {
         return null == e ? e : {
-            location: H(e, "location") ? e.location : void 0,
-            placeId: H(e, "placeId") ? e.placeId : void 0,
-            disconnect: H(e, "disconnect") ? e.disconnect : void 0
+            location: G(e, "location") ? e.location : void 0,
+            placeId: G(e, "placeId") ? e.placeId : void 0,
+            disconnect: G(e, "disconnect") ? e.disconnect : void 0
         }
     }
 
-    function ep(e) {
+    function ed(e) {
         if (void 0 !== e) return null === e ? null : {
             location: e.location,
             placeId: e.placeId,
@@ -738,91 +738,91 @@ function() {
         }
     }
 
-    function ef(e) {
-        return ev(e)
+    function ep(e) {
+        return ef(e)
     }
 
-    function ev(e, t) {
+    function ef(e, t) {
         return null == e ? e : {
-            isInvisible: H(e, "isInvisible") ? e.isInvisible : void 0
+            isInvisible: G(e, "isInvisible") ? e.isInvisible : void 0
         }
     }
 
-    function eh(e) {
+    function ev(e) {
         if (void 0 !== e) return null === e ? null : {
             isInvisible: e.isInvisible
         }
     }
 
-    function ey(e) {
-        return em(e)
+    function eh(e) {
+        return ey(e)
     }
 
-    function em(e, t) {
+    function ey(e, t) {
         return null == e ? e : {
-            userIds: H(e, "userIds") ? e.userIds : void 0
+            userIds: G(e, "userIds") ? e.userIds : void 0
         }
     }
 
-    function eb(e) {
+    function em(e) {
         if (void 0 !== e) return null === e ? null : {
             userIds: e.userIds
         }
     }
 
-    function eT(e) {
-        return ew(e)
+    function eb(e) {
+        return eT(e)
     }
 
-    function ew(e, t) {
+    function eT(e, t) {
         return null == e ? e : {
-            userId: H(e, "userId") ? e.userId : void 0,
-            lastOnline: H(e, "lastOnline") ? new Date(e.lastOnline) : void 0
+            userId: G(e, "userId") ? e.userId : void 0,
+            lastOnline: G(e, "lastOnline") ? new Date(e.lastOnline) : void 0
         }
     }
 
-    function eg(e) {
+    function ew(e) {
         if (void 0 !== e) return null === e ? null : {
             userId: e.userId,
             lastOnline: void 0 === e.lastOnline ? void 0 : e.lastOnline.toISOString()
         }
     }
 
-    function eP(e) {
-        return eE(e)
+    function eg(e) {
+        return eP(e)
     }
 
-    function eE(e, t) {
+    function eP(e, t) {
         return null == e ? e : {
-            lastOnlineTimestamps: H(e, "lastOnlineTimestamps") ? e.lastOnlineTimestamps.map(eT) : void 0
+            lastOnlineTimestamps: G(e, "lastOnlineTimestamps") ? e.lastOnlineTimestamps.map(eb) : void 0
+        }
+    }
+
+    function eE(e) {
+        if (void 0 !== e) return null === e ? null : {
+            lastOnlineTimestamps: void 0 === e.lastOnlineTimestamps ? void 0 : e.lastOnlineTimestamps.map(ew)
         }
     }
 
     function eR(e) {
-        if (void 0 !== e) return null === e ? null : {
-            lastOnlineTimestamps: void 0 === e.lastOnlineTimestamps ? void 0 : e.lastOnlineTimestamps.map(eg)
-        }
+        return eO(e)
     }
 
-    function eO(e) {
-        return eS(e)
-    }
-
-    function eS(e, t) {
+    function eO(e, t) {
         return null == e ? e : {
-            userPresenceType: H(e, "userPresenceType") ? e.userPresenceType : void 0,
-            lastLocation: H(e, "lastLocation") ? e.lastLocation : void 0,
-            placeId: H(e, "placeId") ? e.placeId : void 0,
-            rootPlaceId: H(e, "rootPlaceId") ? e.rootPlaceId : void 0,
-            gameId: H(e, "gameId") ? e.gameId : void 0,
-            universeId: H(e, "universeId") ? e.universeId : void 0,
-            userId: H(e, "userId") ? e.userId : void 0,
-            lastOnline: H(e, "lastOnline") ? new Date(e.lastOnline) : void 0,
-            invisibleModeExpiry: H(e, "invisibleModeExpiry") ? new Date(e.invisibleModeExpiry) : void 0
+            userPresenceType: G(e, "userPresenceType") ? e.userPresenceType : void 0,
+            lastLocation: G(e, "lastLocation") ? e.lastLocation : void 0,
+            placeId: G(e, "placeId") ? e.placeId : void 0,
+            rootPlaceId: G(e, "rootPlaceId") ? e.rootPlaceId : void 0,
+            gameId: G(e, "gameId") ? e.gameId : void 0,
+            universeId: G(e, "universeId") ? e.universeId : void 0,
+            userId: G(e, "userId") ? e.userId : void 0,
+            lastOnline: G(e, "lastOnline") ? new Date(e.lastOnline) : void 0,
+            invisibleModeExpiry: G(e, "invisibleModeExpiry") ? new Date(e.invisibleModeExpiry) : void 0
         }
     }
 
-    function eI(e) {
+    function eS(e) {
         if (void 0 !== e) return null === e ? null : {
             userPresenceType: e.userPresenceType,
             lastLocation: e.lastLocation,
@@ -836,49 +836,49 @@ function() {
         }
     }
 
-    function eA(e) {
-        return eN(e)
+    function eI(e) {
+        return eA(e)
     }
 
-    function eN(e, t) {
+    function eA(e, t) {
         return null == e ? e : {
-            userPresences: H(e, "userPresences") ? e.userPresences.map(eO) : void 0
+            userPresences: G(e, "userPresences") ? e.userPresences.map(eR) : void 0
         }
     }
 
-    function e_(e) {
+    function eN(e) {
         if (void 0 !== e) return null === e ? null : {
-            userPresences: void 0 === e.userPresences ? void 0 : e.userPresences.map(eI)
+            userPresences: void 0 === e.userPresences ? void 0 : e.userPresences.map(eS)
         }
-    }(eM = X || (X = {}))[eM.NUMBER_0 = 0] = "NUMBER_0", eM[eM.NUMBER_1 = 1] = "NUMBER_1", eM[eM.NUMBER_2 = 2] = "NUMBER_2", eM[eM.NUMBER_3 = 3] = "NUMBER_3", eM[eM.NUMBER_4 = 4] = "NUMBER_4";
-    var eM, eC, eL, ex, eU = function(e) {
+    }(e_ = $ || ($ = {}))[e_.NUMBER_0 = 0] = "NUMBER_0", e_[e_.NUMBER_1 = 1] = "NUMBER_1", e_[e_.NUMBER_2 = 2] = "NUMBER_2", e_[e_.NUMBER_3 = 3] = "NUMBER_3", e_[e_.NUMBER_4 = 4] = "NUMBER_4";
+    var e_, eM, eC, eL, ex = function(e) {
             function t() {
                 return null !== e && e.apply(this, arguments) || this
             }
-            return k(t, e), t.prototype.v1PresenceLastOnlinePostRaw = function(e, t) {
-                return j(this, void 0, void 0, function() {
+            return D(t, e), t.prototype.v1PresenceLastOnlinePostRaw = function(e, t) {
+                return B(this, void 0, void 0, function() {
                     var n, r;
-                    return V(this, function(o) {
+                    return j(this, function(o) {
                         switch (o.label) {
                             case 0:
-                                if (null === e.lastOnlineRequest || void 0 === e.lastOnlineRequest) throw new z("lastOnlineRequest", "Required parameter requestParameters.lastOnlineRequest was null or undefined when calling v1PresenceLastOnlinePost.");
+                                if (null === e.lastOnlineRequest || void 0 === e.lastOnlineRequest) throw new V("lastOnlineRequest", "Required parameter requestParameters.lastOnlineRequest was null or undefined when calling v1PresenceLastOnlinePost.");
                                 return n = {}, (r = {})["Content-Type"] = "application/json", [4, this.request({
                                     path: "/v1/presence/last-online",
                                     method: "POST",
                                     headers: r,
                                     query: n,
-                                    body: el(e.lastOnlineRequest)
+                                    body: es(e.lastOnlineRequest)
                                 }, t)];
                             case 1:
-                                return [2, new Y(o.sent(), function(e) {
-                                    return eP(e)
+                                return [2, new Q(o.sent(), function(e) {
+                                    return eg(e)
                                 })]
                         }
                     })
                 })
             }, t.prototype.v1PresenceLastOnlinePost = function(e, t) {
-                return j(this, void 0, void 0, function() {
-                    return V(this, function(n) {
+                return B(this, void 0, void 0, function() {
+                    return j(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.v1PresenceLastOnlinePostRaw(e, t)];
@@ -890,27 +890,27 @@ function() {
                     })
                 })
             }, t.prototype.v1PresenceRegisterAppPresencePostRaw = function(e, t) {
-                return j(this, void 0, void 0, function() {
+                return B(this, void 0, void 0, function() {
                     var n, r;
-                    return V(this, function(o) {
+                    return j(this, function(o) {
                         switch (o.label) {
                             case 0:
-                                if (null === e.registerAppPresenceRequest || void 0 === e.registerAppPresenceRequest) throw new z("registerAppPresenceRequest", "Required parameter requestParameters.registerAppPresenceRequest was null or undefined when calling v1PresenceRegisterAppPresencePost.");
+                                if (null === e.registerAppPresenceRequest || void 0 === e.registerAppPresenceRequest) throw new V("registerAppPresenceRequest", "Required parameter requestParameters.registerAppPresenceRequest was null or undefined when calling v1PresenceRegisterAppPresencePost.");
                                 return n = {}, (r = {})["Content-Type"] = "application/json", [4, this.request({
                                     path: "/v1/presence/register-app-presence",
                                     method: "POST",
                                     headers: r,
                                     query: n,
-                                    body: ep(e.registerAppPresenceRequest)
+                                    body: ed(e.registerAppPresenceRequest)
                                 }, t)];
                             case 1:
-                                return [2, new Y(o.sent())]
+                                return [2, new Q(o.sent())]
                         }
                     })
                 })
             }, t.prototype.v1PresenceRegisterAppPresencePost = function(e, t) {
-                return j(this, void 0, void 0, function() {
-                    return V(this, function(n) {
+                return B(this, void 0, void 0, function() {
+                    return j(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.v1PresenceRegisterAppPresencePostRaw(e, t)];
@@ -922,27 +922,27 @@ function() {
                     })
                 })
             }, t.prototype.v1PresenceSetInvisibilityStatusPostRaw = function(e, t) {
-                return j(this, void 0, void 0, function() {
+                return B(this, void 0, void 0, function() {
                     var n, r;
-                    return V(this, function(o) {
+                    return j(this, function(o) {
                         switch (o.label) {
                             case 0:
-                                if (null === e.setInvisibilityRequest || void 0 === e.setInvisibilityRequest) throw new z("setInvisibilityRequest", "Required parameter requestParameters.setInvisibilityRequest was null or undefined when calling v1PresenceSetInvisibilityStatusPost.");
+                                if (null === e.setInvisibilityRequest || void 0 === e.setInvisibilityRequest) throw new V("setInvisibilityRequest", "Required parameter requestParameters.setInvisibilityRequest was null or undefined when calling v1PresenceSetInvisibilityStatusPost.");
                                 return n = {}, (r = {})["Content-Type"] = "application/json", [4, this.request({
                                     path: "/v1/presence/set-invisibility-status",
                                     method: "POST",
                                     headers: r,
                                     query: n,
-                                    body: eh(e.setInvisibilityRequest)
+                                    body: ev(e.setInvisibilityRequest)
                                 }, t)];
                             case 1:
-                                return [2, new Y(o.sent())]
+                                return [2, new Q(o.sent())]
                         }
                     })
                 })
             }, t.prototype.v1PresenceSetInvisibilityStatusPost = function(e, t) {
-                return j(this, void 0, void 0, function() {
-                    return V(this, function(n) {
+                return B(this, void 0, void 0, function() {
+                    return j(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.v1PresenceSetInvisibilityStatusPostRaw(e, t)];
@@ -954,29 +954,29 @@ function() {
                     })
                 })
             }, t.prototype.v1PresenceUsersPostRaw = function(e, t) {
-                return j(this, void 0, void 0, function() {
+                return B(this, void 0, void 0, function() {
                     var n, r;
-                    return V(this, function(o) {
+                    return j(this, function(o) {
                         switch (o.label) {
                             case 0:
-                                if (null === e.userPresenceRequest || void 0 === e.userPresenceRequest) throw new z("userPresenceRequest", "Required parameter requestParameters.userPresenceRequest was null or undefined when calling v1PresenceUsersPost.");
+                                if (null === e.userPresenceRequest || void 0 === e.userPresenceRequest) throw new V("userPresenceRequest", "Required parameter requestParameters.userPresenceRequest was null or undefined when calling v1PresenceUsersPost.");
                                 return n = {}, (r = {})["Content-Type"] = "application/json", [4, this.request({
                                     path: "/v1/presence/users",
                                     method: "POST",
                                     headers: r,
                                     query: n,
-                                    body: eb(e.userPresenceRequest)
+                                    body: em(e.userPresenceRequest)
                                 }, t)];
                             case 1:
-                                return [2, new Y(o.sent(), function(e) {
-                                    return eA(e)
+                                return [2, new Q(o.sent(), function(e) {
+                                    return eI(e)
                                 })]
                         }
                     })
                 })
             }, t.prototype.v1PresenceUsersPost = function(e, t) {
-                return j(this, void 0, void 0, function() {
-                    return V(this, function(n) {
+                return B(this, void 0, void 0, function() {
+                    return j(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.v1PresenceUsersPostRaw(e, t)];
@@ -989,76 +989,76 @@ function() {
                 })
             }, t
         }(q),
+        eU = Object.freeze({
+            __proto__: null,
+            PresenceApi: ex,
+            RobloxPresenceApiModelsRequestLastOnlineRequestFromJSON: ea,
+            RobloxPresenceApiModelsRequestLastOnlineRequestFromJSONTyped: eu,
+            RobloxPresenceApiModelsRequestLastOnlineRequestToJSON: es,
+            RobloxPresenceApiModelsRequestRegisterAppPresenceRequestFromJSON: el,
+            RobloxPresenceApiModelsRequestRegisterAppPresenceRequestFromJSONTyped: ec,
+            RobloxPresenceApiModelsRequestRegisterAppPresenceRequestToJSON: ed,
+            RobloxPresenceApiModelsRequestSetInvisibilityStatusRequestFromJSON: ep,
+            RobloxPresenceApiModelsRequestSetInvisibilityStatusRequestFromJSONTyped: ef,
+            RobloxPresenceApiModelsRequestSetInvisibilityStatusRequestToJSON: ev,
+            RobloxPresenceApiModelsRequestUserPresenceRequestFromJSON: eh,
+            RobloxPresenceApiModelsRequestUserPresenceRequestFromJSONTyped: ey,
+            RobloxPresenceApiModelsRequestUserPresenceRequestToJSON: em,
+            RobloxPresenceApiModelsResponseLastOnlineFromJSON: eb,
+            RobloxPresenceApiModelsResponseLastOnlineFromJSONTyped: eT,
+            RobloxPresenceApiModelsResponseLastOnlineResponseFromJSON: eg,
+            RobloxPresenceApiModelsResponseLastOnlineResponseFromJSONTyped: eP,
+            RobloxPresenceApiModelsResponseLastOnlineResponseToJSON: eE,
+            RobloxPresenceApiModelsResponseLastOnlineToJSON: ew,
+            RobloxPresenceApiModelsResponseUserPresenceFromJSON: eR,
+            RobloxPresenceApiModelsResponseUserPresenceFromJSONTyped: eO,
+            RobloxPresenceApiModelsResponseUserPresenceToJSON: eS,
+            get RobloxPresenceApiModelsResponseUserPresenceUserPresenceTypeEnum() {
+                return $
+            },
+            RobloxPresenceApiModelsResponseUserPresencesResponseFromJSON: eI,
+            RobloxPresenceApiModelsResponseUserPresencesResponseFromJSONTyped: eA,
+            RobloxPresenceApiModelsResponseUserPresencesResponseToJSON: eN
+        }),
         eF = Object.freeze({
             __proto__: null,
-            PresenceApi: eU,
-            RobloxPresenceApiModelsRequestLastOnlineRequestFromJSON: eu,
-            RobloxPresenceApiModelsRequestLastOnlineRequestFromJSONTyped: es,
-            RobloxPresenceApiModelsRequestLastOnlineRequestToJSON: el,
-            RobloxPresenceApiModelsRequestRegisterAppPresenceRequestFromJSON: ec,
-            RobloxPresenceApiModelsRequestRegisterAppPresenceRequestFromJSONTyped: ed,
-            RobloxPresenceApiModelsRequestRegisterAppPresenceRequestToJSON: ep,
-            RobloxPresenceApiModelsRequestSetInvisibilityStatusRequestFromJSON: ef,
-            RobloxPresenceApiModelsRequestSetInvisibilityStatusRequestFromJSONTyped: ev,
-            RobloxPresenceApiModelsRequestSetInvisibilityStatusRequestToJSON: eh,
-            RobloxPresenceApiModelsRequestUserPresenceRequestFromJSON: ey,
-            RobloxPresenceApiModelsRequestUserPresenceRequestFromJSONTyped: em,
-            RobloxPresenceApiModelsRequestUserPresenceRequestToJSON: eb,
-            RobloxPresenceApiModelsResponseLastOnlineFromJSON: eT,
-            RobloxPresenceApiModelsResponseLastOnlineFromJSONTyped: ew,
-            RobloxPresenceApiModelsResponseLastOnlineResponseFromJSON: eP,
-            RobloxPresenceApiModelsResponseLastOnlineResponseFromJSONTyped: eE,
-            RobloxPresenceApiModelsResponseLastOnlineResponseToJSON: eR,
-            RobloxPresenceApiModelsResponseLastOnlineToJSON: eg,
-            RobloxPresenceApiModelsResponseUserPresenceFromJSON: eO,
-            RobloxPresenceApiModelsResponseUserPresenceFromJSONTyped: eS,
-            RobloxPresenceApiModelsResponseUserPresenceToJSON: eI,
+            PresenceApi: ex,
+            RobloxPresenceApiModelsRequestLastOnlineRequestFromJSON: ea,
+            RobloxPresenceApiModelsRequestLastOnlineRequestFromJSONTyped: eu,
+            RobloxPresenceApiModelsRequestLastOnlineRequestToJSON: es,
+            RobloxPresenceApiModelsRequestRegisterAppPresenceRequestFromJSON: el,
+            RobloxPresenceApiModelsRequestRegisterAppPresenceRequestFromJSONTyped: ec,
+            RobloxPresenceApiModelsRequestRegisterAppPresenceRequestToJSON: ed,
+            RobloxPresenceApiModelsRequestSetInvisibilityStatusRequestFromJSON: ep,
+            RobloxPresenceApiModelsRequestSetInvisibilityStatusRequestFromJSONTyped: ef,
+            RobloxPresenceApiModelsRequestSetInvisibilityStatusRequestToJSON: ev,
+            RobloxPresenceApiModelsRequestUserPresenceRequestFromJSON: eh,
+            RobloxPresenceApiModelsRequestUserPresenceRequestFromJSONTyped: ey,
+            RobloxPresenceApiModelsRequestUserPresenceRequestToJSON: em,
+            RobloxPresenceApiModelsResponseLastOnlineFromJSON: eb,
+            RobloxPresenceApiModelsResponseLastOnlineFromJSONTyped: eT,
+            RobloxPresenceApiModelsResponseLastOnlineResponseFromJSON: eg,
+            RobloxPresenceApiModelsResponseLastOnlineResponseFromJSONTyped: eP,
+            RobloxPresenceApiModelsResponseLastOnlineResponseToJSON: eE,
+            RobloxPresenceApiModelsResponseLastOnlineToJSON: ew,
+            RobloxPresenceApiModelsResponseUserPresenceFromJSON: eR,
+            RobloxPresenceApiModelsResponseUserPresenceFromJSONTyped: eO,
+            RobloxPresenceApiModelsResponseUserPresenceToJSON: eS,
             get RobloxPresenceApiModelsResponseUserPresenceUserPresenceTypeEnum() {
-                return X
+                return $
             },
-            RobloxPresenceApiModelsResponseUserPresencesResponseFromJSON: eA,
-            RobloxPresenceApiModelsResponseUserPresencesResponseFromJSONTyped: eN,
-            RobloxPresenceApiModelsResponseUserPresencesResponseToJSON: e_
+            RobloxPresenceApiModelsResponseUserPresencesResponseFromJSON: eI,
+            RobloxPresenceApiModelsResponseUserPresencesResponseFromJSONTyped: eA,
+            RobloxPresenceApiModelsResponseUserPresencesResponseToJSON: eN,
+            v1: eU
         }),
-        eD = Object.freeze({
-            __proto__: null,
-            PresenceApi: eU,
-            RobloxPresenceApiModelsRequestLastOnlineRequestFromJSON: eu,
-            RobloxPresenceApiModelsRequestLastOnlineRequestFromJSONTyped: es,
-            RobloxPresenceApiModelsRequestLastOnlineRequestToJSON: el,
-            RobloxPresenceApiModelsRequestRegisterAppPresenceRequestFromJSON: ec,
-            RobloxPresenceApiModelsRequestRegisterAppPresenceRequestFromJSONTyped: ed,
-            RobloxPresenceApiModelsRequestRegisterAppPresenceRequestToJSON: ep,
-            RobloxPresenceApiModelsRequestSetInvisibilityStatusRequestFromJSON: ef,
-            RobloxPresenceApiModelsRequestSetInvisibilityStatusRequestFromJSONTyped: ev,
-            RobloxPresenceApiModelsRequestSetInvisibilityStatusRequestToJSON: eh,
-            RobloxPresenceApiModelsRequestUserPresenceRequestFromJSON: ey,
-            RobloxPresenceApiModelsRequestUserPresenceRequestFromJSONTyped: em,
-            RobloxPresenceApiModelsRequestUserPresenceRequestToJSON: eb,
-            RobloxPresenceApiModelsResponseLastOnlineFromJSON: eT,
-            RobloxPresenceApiModelsResponseLastOnlineFromJSONTyped: ew,
-            RobloxPresenceApiModelsResponseLastOnlineResponseFromJSON: eP,
-            RobloxPresenceApiModelsResponseLastOnlineResponseFromJSONTyped: eE,
-            RobloxPresenceApiModelsResponseLastOnlineResponseToJSON: eR,
-            RobloxPresenceApiModelsResponseLastOnlineToJSON: eg,
-            RobloxPresenceApiModelsResponseUserPresenceFromJSON: eO,
-            RobloxPresenceApiModelsResponseUserPresenceFromJSONTyped: eS,
-            RobloxPresenceApiModelsResponseUserPresenceToJSON: eI,
-            get RobloxPresenceApiModelsResponseUserPresenceUserPresenceTypeEnum() {
-                return X
-            },
-            RobloxPresenceApiModelsResponseUserPresencesResponseFromJSON: eA,
-            RobloxPresenceApiModelsResponseUserPresencesResponseFromJSONTyped: eN,
-            RobloxPresenceApiModelsResponseUserPresencesResponseToJSON: e_,
-            v1: eF
-        }),
-        ek = eD.v1.RobloxPresenceApiModelsResponseUserPresenceUserPresenceTypeEnum,
-        eB = {
-            presenceStatusToClassName: ((eC = {})[C.Offline] = "", eC[C.Online] = "online", eC[C.Game] = "game", eC[C.Studio] = "studio", eC[C.Invisible] = "invisible-mode", eC),
-            presenceStatusResponseToPresenceStatus: ((eL = {})[ek.NUMBER_0] = C.Offline, eL[ek.NUMBER_1] = C.Online, eL[ek.NUMBER_2] = C.Game, eL[ek.NUMBER_3] = C.Studio, eL[ek.NUMBER_4] = C.Invisible, eL)
+        eD = eF.v1.RobloxPresenceApiModelsResponseUserPresenceUserPresenceTypeEnum,
+        ek = {
+            presenceStatusToClassName: ((eM = {})[M.Offline] = "", eM[M.Online] = "online", eM[M.Game] = "game", eM[M.Studio] = "studio", eM[M.Invisible] = "invisible-mode", eM),
+            presenceStatusResponseToPresenceStatus: ((eC = {})[eD.NUMBER_0] = M.Offline, eC[eD.NUMBER_1] = M.Online, eC[eD.NUMBER_2] = M.Game, eC[eD.NUMBER_3] = M.Studio, eC[eD.NUMBER_4] = M.Invisible, eC)
         };
 
-    function ej(e, t, n, r) {
+    function eB(e, t, n, r) {
         return new(n || (n = Promise))(function(o, i) {
             function a(e) {
                 try {
@@ -1078,7 +1078,7 @@ function() {
 
             function s(e) {
                 var t;
-                e.done ? o(e.value) : (w(t = e.value, n) ? t : new n(function(e) {
+                e.done ? o(e.value) : (T(t = e.value, n) ? t : new n(function(e) {
                     e(t)
                 })).then(a, u)
             }
@@ -1086,7 +1086,7 @@ function() {
         })
     }
 
-    function eV(e, t) {
+    function ej(e, t) {
         var n, r, o, i = {
                 label: 0,
                 sent: function() {
@@ -1163,15 +1163,15 @@ function() {
             for (var r, o = 0, i = t.length; o < i; o++) !r && o in t || (r || (r = Array.prototype.slice.call(t, 0, o)), r[o] = t[o]);
         return e.concat(r || Array.prototype.slice.call(t))
     }
-    "function" == typeof SuppressedError && SuppressedError, (ez = ex || (ex = {})).Strict = "strict", ez.Lax = "lax", ez.None = "none";
-    var ez, eG, eH, eJ, eW, eQ, eY, eZ, eK, e$, eX, e0, e1 = function() {
-        return (e1 = Object.assign || function(e) {
+    "function" == typeof SuppressedError && SuppressedError, (eV = eL || (eL = {})).Strict = "strict", eV.Lax = "lax", eV.None = "none";
+    var eV, ez, eG, eH, eJ, eW, eQ, eY, eZ, eK, e$, eX, e0 = function() {
+        return (e0 = Object.assign || function(e) {
             for (var t, n = 1, r = arguments.length; n < r; n++)
                 for (var o in t = arguments[n]) Object.prototype.hasOwnProperty.call(t, o) && (e[o] = t[o]);
             return e
         }).apply(this, arguments)
     };
-    "function" == typeof SuppressedError && SuppressedError, (tb = eG || (eG = {})).PagingParametersChanged = "Paging parameters were changed", tb.GetItemsFailure = "Unable to get items", tb.InvalidPageNumber = "Invalid page number", (tT = eH || (eH = {}))[tT.Initialized = 0] = "Initialized", tT[tT.Idle = 1] = "Idle", tT[tT.Loading = 2] = "Loading", (tw = eJ || (eJ = {})).Asc = "Asc", tw.Desc = "Desc", "RelativeTimeFormat" in Intl || function() {
+    "function" == typeof SuppressedError && SuppressedError, (tm = ez || (ez = {})).PagingParametersChanged = "Paging parameters were changed", tm.GetItemsFailure = "Unable to get items", tm.InvalidPageNumber = "Invalid page number", (tb = eG || (eG = {}))[tb.Initialized = 0] = "Initialized", tb[tb.Idle = 1] = "Idle", tb[tb.Loading = 2] = "Loading", (tT = eH || (eH = {})).Asc = "Asc", tT.Desc = "Desc", "RelativeTimeFormat" in Intl || function() {
         var e, t, n, r;
         e = this, t = void 0, n = void 0, r = function() {
             return function(e, t) {
@@ -1248,11 +1248,11 @@ function() {
                 switch (e.label) {
                     case 0:
                         return [4, Promise.resolve().then(function() {
-                            return tm
+                            return ty
                         })];
                     case 1:
                         return e.sent(), [4, Promise.resolve().then(function() {
-                            return tx
+                            return tL
                         })];
                     case 2:
                         return e.sent(), [2]
@@ -1277,18 +1277,18 @@ function() {
 
             function s(e) {
                 var t;
-                e.done ? o(e.value) : (w(t = e.value, n) ? t : new n(function(e) {
+                e.done ? o(e.value) : (T(t = e.value, n) ? t : new n(function(e) {
                     e(t)
                 })).then(a, u)
             }
             s((r = r.apply(e, t || [])).next())
         })
-    }(), (tg = eW || (eW = {})).Edge = "edge", tg.IE = "ie", tg.Chrome = "chrome", tg.Opera = "opera", tg.Safari = "safari", tg.Firefox = "firefox", tg.Unknown = "", (tP = eQ || (eQ = {}))[tP.Windows = 0] = "Windows", tP[tP.macOS = 1] = "macOS", tP[tP.Linux = 2] = "Linux", tP[tP.Unix = 3] = "Unix", tP[tP.iOS = 4] = "iOS", tP[tP.Android = 5] = "Android", tP[tP.Unknown = 6] = "Unknown", (tE = eY || (eY = {})).Unidentified = "Unidentified", tE.Alt = "Alt", tE.AltGraph = "AltGraph", tE.CapsLock = "CapsLock", tE.Control = "Control", tE.Fn = "Fn", tE.FnLock = "FnLock", tE.Hyper = "Hyper", tE.Meta = "Meta", tE.NumLock = "NumLock", tE.ScrollLock = "ScrollLock", tE.Shift = "Shift", tE.Super = "Super", tE.Symbol = "Symbol", tE.SymbolLock = "SymbolLock", tE.Enter = "Enter", tE.Tab = "Tab", tE.ArrowDown = "ArrowDown", tE.ArrowLeft = "ArrowLeft", tE.ArrowRight = "ArrowRight", tE.ArrowUp = "ArrowUp", tE.End = "End", tE.Home = "Home", tE.PageDown = "PageDown", tE.PageUp = "PageUp", tE.Backspace = "Backspace", tE.Clear = "Clear", tE.Copy = "Copy", tE.CrSel = "CrSel", tE.Cut = "Cut", tE.Delete = "Delete", tE.EraseEof = "EraseEof", tE.ExSel = "ExSel", tE.Insert = "Insert", tE.Paste = "Paste", tE.Redo = "Redo", tE.Undo = "Undo", tE.Accept = "Accept", tE.Again = "Again", tE.Attn = "Attn", tE.Cancel = "Cancel", tE.ContextMenu = "ContextMenu", tE.Escape = "Escape", tE.Execute = "Execute", tE.Find = "Find", tE.Finish = "Finish", tE.Help = "Help", tE.Pause = "Pause", tE.Play = "Play", tE.Props = "Props", tE.Select = "Select", tE.ZoomIn = "ZoomIn", tE.ZoomOut = "ZoomOut", tE.BrightnessDown = "BrightnessDown", tE.BrightnessUp = "BrightnessUp", tE.Eject = "Eject", tE.LogOff = "LogOff", tE.Power = "Power", tE.PowerOff = "PowerOff", tE.PrintScreen = "PrintScreen", tE.Hibernate = "Hibernate", tE.Standby = "Standby", tE.WakeUp = "WakeUp", tE.AllCandidates = "AllCandidates", tE.Alphanumeric = "Alphanumeric", tE.CodeInput = "CodeInput", tE.Compose = "Compose", tE.Convert = "Convert", tE.Dead = "Dead", tE.FinalMode = "FinalMode", tE.GroupFirst = "GroupFirst", tE.GroupLast = "GroupLast", tE.GroupNext = "GroupNext", tE.GroupPrevious = "GroupPrevious", tE.ModeChange = "ModeChange", tE.NextCandidate = "NextCandidate", tE.NonConvert = "NonConvert", tE.PreviousCandidate = "PreviousCandidate", tE.Process = "Process", tE.SingleCandidate = "SingleCandidate", tE.HangulMode = "HangulMode", tE.HanjaMode = "HanjaMode", tE.JunjaMode = "JunjaMode", tE.Eisu = "Eisu", tE.Hankaku = "Hankaku", tE.Hiragana = "Hiragana", tE.HiraganaKatakana = "HiraganaKatakana", tE.KanaMode = "KanaMode", tE.KanjiMode = "KanjiMode", tE.Katakana = "Katakana", tE.Romaji = "Romaji", tE.Zenkaku = "Zenkaku", tE.ZenkakuHanaku = "ZenkakuHanaku", tE.F1 = "F1", tE.F2 = "F2", tE.F3 = "F3", tE.F4 = "F4", tE.F5 = "F5", tE.F6 = "F6", tE.F7 = "F7", tE.F8 = "F8", tE.F9 = "F9", tE.F10 = "F10", tE.F11 = "F11", tE.F12 = "F12", tE.F13 = "F13", tE.F14 = "F14", tE.F15 = "F15", tE.F16 = "F16", tE.F17 = "F17", tE.F18 = "F18", tE.F19 = "F19", tE.F20 = "F20", tE.Soft1 = "Soft1", tE.Soft2 = "Soft2", tE.Soft3 = "Soft3", tE.Soft4 = "Soft4", tE.AppSwitch = "AppSwitch", tE.Call = "Call", tE.Camera = "Camera", tE.CameraFocus = "CameraFocus", tE.EndCall = "EndCall", tE.GoBack = "GoBack", tE.GoHome = "GoHome", tE.HeadsetHook = "HeadsetHook", tE.LastNumberRedial = "LastNumberRedial", tE.Notification = "Notification", tE.MannerMode = "MannerMode", tE.VoiceDial = "VoiceDial", tE.ChannelDown = "ChannelDown", tE.ChannelUp = "ChannelUp", tE.MediaFastForward = "MediaFastForward", tE.MediaPause = "MediaPause", tE.MediaPlay = "MediaPlay", tE.MediaPlayPause = "MediaPlayPause", tE.MediaRecord = "MediaRecord", tE.MediaRewind = "MediaRewind", tE.MediaStop = "MediaStop", tE.MediaTrackNext = "MediaTrackNext", tE.MediaTrackPrevious = "MediaTrackPrevious", tE.AudioBalanceLeft = "AudioBalanceLeft", tE.AudioBalanceRight = "AudioBalanceRight", tE.AudioBassDown = "AudioBassDown", tE.AudioBassBoostDown = "AudioBassBoostDown", tE.AudioBassBoostToggle = "AudioBassBoostToggle", tE.AudioBassBoostUp = "AudioBassBoostUp", tE.AudioBassUp = "AudioBassUp", tE.AudioFaderFront = "AudioFaderFront", tE.AudioFaderRear = "AudioFaderRear", tE.AudioSurroundModeNext = "AudioSurroundModeNext", tE.AudioTrebleDown = "AudioTrebleDown", tE.AudioTrebleUp = "AudioTrebleUp", tE.AudioVolumeDown = "AudioVolumeDown", tE.AudioVolumeMute = "AudioVolumeMute", tE.AudioVolumeUp = "AudioVolumeUp", tE.MicrophoneToggle = "MicrophoneToggle", tE.MicrophoneVolumeDown = "MicrophoneVolumeDown", tE.MicrophoneVolumeMute = "MicrophoneVolumeMute", tE.MicrophoneVolumeUp = "MicrophoneVolumeUp", tE.TV = "TV", tE.TV3DMode = "TV3DMode", tE.TVAntennaCable = "TVAntennaCable", tE.TVAudioDescription = "TVAudioDescription", tE.TVAudioDescriptionMixDown = "TVAudioDescriptionMixDown", tE.TVAudioDescriptionMixUp = "TVAudioDescriptionMixUp", tE.TVContentsMenu = "TVContentsMenu", tE.TVDataService = "TVDataService", tE.TVInput = "TVInput", tE.TVInputComponent1 = "TVInputComponent1", tE.TVInputComponent2 = "TVInputComponent2", tE.TVInputComposite1 = "TVInputComposite1", tE.TVInputComposite2 = "TVInputComposite2", tE.TVInputHDMI1 = "TVInputHDMI1", tE.TVInputHDMI2 = "TVInputHDMI2", tE.TVInputHDMI3 = "TVInputHDMI3", tE.TVInputHDMI4 = "TVInputHDMI4", tE.TVInputVGA1 = "TVInputVGA1", tE.TVMediaContext = "TVMediaContext", tE.TVNetwork = "TVNetwork", tE.TVNumberEntry = "TVNumberEntry", tE.TVPower = "TVPower", tE.TVRadioService = "TVRadioService", tE.TVSatellite = "TVSatellite", tE.TVSatelliteBS = "TVSatelliteBS", tE.TVSatelliteCS = "TVSatelliteCS", tE.TVSatelliteToggle = "TVSatelliteToggle", tE.TVTerrestrialAnalog = "TVTerrestrialAnalog", tE.TVTerrestrialDigital = "TVTerrestrialDigital", tE.TVTimer = "TVTimer", tE.AVRInput = "AVRInput", tE.AVRPower = "AVRPower", tE.ColorF0Red = "ColorF0Red", tE.ColorF1Green = "ColorF1Green", tE.ColorF2Yellow = "ColorF2Yellow", tE.ColorF3Blue = "ColorF3Blue", tE.ColorF4Grey = "ColorF4Grey", tE.ColorF5Brown = "ColorF5Brown", tE.ClosedCaptionToggle = "ClosedCaptionToggle", tE.Dimmer = "Dimmer", tE.DisplaySwap = "DisplaySwap", tE.DVR = "DVR", tE.Exit = "Exit", tE.FavoriteClear0 = "FavoriteClear0", tE.FavoriteClear1 = "FavoriteClear1", tE.FavoriteClear2 = "FavoriteClear2", tE.FavoriteClear3 = "FavoriteClear3", tE.FavoriteRecall0 = "FavoriteRecall0", tE.FavoriteRecall1 = "FavoriteRecall1", tE.FavoriteRecall2 = "FavoriteRecall2", tE.FavoriteRecall3 = "FavoriteRecall3", tE.FavoriteStore0 = "FavoriteStore0", tE.FavoriteStore1 = "FavoriteStore1", tE.FavoriteStore2 = "FavoriteStore2", tE.FavoriteStore3 = "FavoriteStore3", tE.Guide = "Guide", tE.GuideNextDay = "GuideNextDay", tE.GuidePreviousDay = "GuidePreviousDay", tE.Info = "Info", tE.InstantReplay = "InstantReplay", tE.Link = "Link", tE.ListProgram = "ListProgram", tE.LiveContent = "LiveContent", tE.Lock = "Lock", tE.MediaApps = "MediaApps", tE.MediaAudioTrack = "MediaAudioTrack", tE.MediaLast = "MediaLast", tE.MediaSkipBackward = "MediaSkipBackward", tE.MediaSkipForward = "MediaSkipForward", tE.MediaStepBackward = "MediaStepBackward", tE.MediaStepForward = "MediaStepForward", tE.MediaTopMenu = "MediaTopMenu", tE.NavigateIn = "NavigateIn", tE.NavigateNext = "NavigateNext", tE.NavigateOut = "NavigateOut", tE.NavigatePrevious = "NavigatePrevious", tE.NextFavoriteChannel = "NextFavoriteChannel", tE.NextUserProfile = "NextUserProfile", tE.OnDemand = "OnDemand", tE.Pairing = "Pairing", tE.PinPDown = "PinPDown", tE.PinPMove = "PinPMove", tE.PinPToggle = "PinPToggle", tE.PinPUp = "PinPUp", tE.PlaySpeedDown = "PlaySpeedDown", tE.PlaySpeedReset = "PlaySpeedReset", tE.PlaySpeedUp = "PlaySpeedUp", tE.RandomToggle = "RandomToggle", tE.RcLowBattery = "RcLowBattery", tE.RecordSpeedNext = "RecordSpeedNext", tE.RfBypass = "RfBypass", tE.ScanChannelsToggle = "ScanChannelsToggle", tE.ScreenModeNext = "ScreenModeNext", tE.Settings = "Settings", tE.SplitScreenToggle = "SplitScreenToggle", tE.STBInput = "STBInput", tE.STBPower = "STBPower", tE.Subtitle = "Subtitle", tE.Teletext = "Teletext", tE.VideoModeNext = "VideoModeNext", tE.Wink = "Wink", tE.ZoomToggle = "ZoomToggle", tE.SpeechCorrectionList = "SpeechCorrectionList", tE.SpeechInputToggle = "SpeechInputToggle", tE.Close = "Close", tE.New = "New", tE.Open = "Open", tE.Print = "Print", tE.Save = "Save", tE.SpellCheck = "SpellCheck", tE.MailForward = "MailForward", tE.MailReply = "MailReply", tE.MailSend = "MailSend", tE.LaunchCalculator = "LaunchCalculator", tE.LaunchCalendar = "LaunchCalendar", tE.LaunchContacts = "LaunchContacts", tE.LaunchMail = "LaunchMail", tE.LaunchMediaPlayer = "LaunchMediaPlayer", tE.LaunchMusicPlayer = "LaunchMusicPlayer", tE.LaunchMyComputer = "LaunchMyComputer", tE.LaunchPhone = "LaunchPhone", tE.LaunchScreenSaver = "LaunchScreenSaver", tE.LaunchSpreadsheet = "LaunchSpreadsheet", tE.LaunchWebBrowser = "LaunchWebBrowser", tE.LaunchWebCam = "LaunchWebCam", tE.LaunchWordProcessor = "LaunchWordProcessor", tE.LaunchApplication1 = "LaunchApplication1", tE.LaunchApplication2 = "LaunchApplication2", tE.LaunchApplication3 = "LaunchApplication3", tE.LaunchApplication4 = "LaunchApplication4", tE.LaunchApplication5 = "LaunchApplication5", tE.LaunchApplication6 = "LaunchApplication6", tE.LaunchApplication7 = "LaunchApplication7", tE.LaunchApplication8 = "LaunchApplication8", tE.LaunchApplication9 = "LaunchApplication9", tE.LaunchApplication10 = "LaunchApplication10", tE.LaunchApplication11 = "LaunchApplication11", tE.LaunchApplication12 = "LaunchApplication12", tE.LaunchApplication13 = "LaunchApplication13", tE.LaunchApplication14 = "LaunchApplication14", tE.LaunchApplication15 = "LaunchApplication15", tE.LaunchApplication16 = "LaunchApplication16", tE.BrowserBack = "BrowserBack", tE.BrowserFavorites = "BrowserFavorites", tE.BrowserForward = "BrowserForward", tE.BrowserHome = "BrowserHome", tE.BrowserRefresh = "BrowserRefresh", tE.BrowserSearch = "BrowserSearch", tE.BrowserStop = "BrowserStop", tE.Decimal = "Decimal", tE.Key11 = "Key11", tE.Key12 = "Key12", tE.Multiply = "Multiply", tE.Add = "Add", tE.Divide = "Divide", tE.Subtract = "Subtract", tE.Separator = "Separator", (tR = eZ || (eZ = {}))[tR.ACCEPTED = 202] = "ACCEPTED", tR[tR.BAD_GATEWAY = 502] = "BAD_GATEWAY", tR[tR.BAD_REQUEST = 400] = "BAD_REQUEST", tR[tR.CONFLICT = 409] = "CONFLICT", tR[tR.CONTINUE = 100] = "CONTINUE", tR[tR.CREATED = 201] = "CREATED", tR[tR.EXPECTATION_FAILED = 417] = "EXPECTATION_FAILED", tR[tR.FAILED_DEPENDENCY = 424] = "FAILED_DEPENDENCY", tR[tR.FORBIDDEN = 403] = "FORBIDDEN", tR[tR.GATEWAY_TIMEOUT = 504] = "GATEWAY_TIMEOUT", tR[tR.GONE = 410] = "GONE", tR[tR.HTTP_VERSION_NOT_SUPPORTED = 505] = "HTTP_VERSION_NOT_SUPPORTED", tR[tR.IM_A_TEAPOT = 418] = "IM_A_TEAPOT", tR[tR.INSUFFICIENT_SPACE_ON_RESOURCE = 419] = "INSUFFICIENT_SPACE_ON_RESOURCE", tR[tR.INSUFFICIENT_STORAGE = 507] = "INSUFFICIENT_STORAGE", tR[tR.INTERNAL_SERVER_ERROR = 500] = "INTERNAL_SERVER_ERROR", tR[tR.LENGTH_REQUIRED = 411] = "LENGTH_REQUIRED", tR[tR.LOCKED = 423] = "LOCKED", tR[tR.METHOD_FAILURE = 420] = "METHOD_FAILURE", tR[tR.METHOD_NOT_ALLOWED = 405] = "METHOD_NOT_ALLOWED", tR[tR.MOVED_PERMANENTLY = 301] = "MOVED_PERMANENTLY", tR[tR.MOVED_TEMPORARILY = 302] = "MOVED_TEMPORARILY", tR[tR.MULTI_STATUS = 207] = "MULTI_STATUS", tR[tR.MULTIPLE_CHOICES = 300] = "MULTIPLE_CHOICES", tR[tR.NETWORK_AUTHENTICATION_REQUIRED = 511] = "NETWORK_AUTHENTICATION_REQUIRED", tR[tR.NO_CONTENT = 204] = "NO_CONTENT", tR[tR.NON_AUTHORITATIVE_INFORMATION = 203] = "NON_AUTHORITATIVE_INFORMATION", tR[tR.NOT_ACCEPTABLE = 406] = "NOT_ACCEPTABLE", tR[tR.NOT_FOUND = 404] = "NOT_FOUND", tR[tR.NOT_IMPLEMENTED = 501] = "NOT_IMPLEMENTED", tR[tR.NOT_MODIFIED = 304] = "NOT_MODIFIED", tR[tR.OK = 200] = "OK", tR[tR.PARTIAL_CONTENT = 206] = "PARTIAL_CONTENT", tR[tR.PAYMENT_REQUIRED = 402] = "PAYMENT_REQUIRED", tR[tR.PERMANENT_REDIRECT = 308] = "PERMANENT_REDIRECT", tR[tR.PRECONDITION_FAILED = 412] = "PRECONDITION_FAILED", tR[tR.PRECONDITION_REQUIRED = 428] = "PRECONDITION_REQUIRED", tR[tR.PROCESSING = 102] = "PROCESSING", tR[tR.PROXY_AUTHENTICATION_REQUIRED = 407] = "PROXY_AUTHENTICATION_REQUIRED", tR[tR.REQUEST_HEADER_FIELDS_TOO_LARGE = 431] = "REQUEST_HEADER_FIELDS_TOO_LARGE", tR[tR.REQUEST_TIMEOUT = 408] = "REQUEST_TIMEOUT", tR[tR.REQUEST_TOO_LONG = 413] = "REQUEST_TOO_LONG", tR[tR.REQUEST_URI_TOO_LONG = 414] = "REQUEST_URI_TOO_LONG", tR[tR.REQUESTED_RANGE_NOT_SATISFIABLE = 416] = "REQUESTED_RANGE_NOT_SATISFIABLE", tR[tR.RESET_CONTENT = 205] = "RESET_CONTENT", tR[tR.SEE_OTHER = 303] = "SEE_OTHER", tR[tR.SERVICE_UNAVAILABLE = 503] = "SERVICE_UNAVAILABLE", tR[tR.SWITCHING_PROTOCOLS = 101] = "SWITCHING_PROTOCOLS", tR[tR.TEMPORARY_REDIRECT = 307] = "TEMPORARY_REDIRECT", tR[tR.TOO_MANY_REQUESTS = 429] = "TOO_MANY_REQUESTS", tR[tR.UNAUTHORIZED = 401] = "UNAUTHORIZED", tR[tR.UNAVAILABLE_FOR_LEGAL_REASONS = 451] = "UNAVAILABLE_FOR_LEGAL_REASONS", tR[tR.UNPROCESSABLE_ENTITY = 422] = "UNPROCESSABLE_ENTITY", tR[tR.UNSUPPORTED_MEDIA_TYPE = 415] = "UNSUPPORTED_MEDIA_TYPE", tR[tR.USE_PROXY = 305] = "USE_PROXY", (tO = eK || (eK = {})).ACCEPTED = "Accepted", tO.BAD_GATEWAY = "Bad Gateway", tO.BAD_REQUEST = "Bad Request", tO.CONFLICT = "Conflict", tO.CONTINUE = "Continue", tO.CREATED = "Created", tO.EXPECTATION_FAILED = "Expectation Failed", tO.FAILED_DEPENDENCY = "Failed Dependency", tO.FORBIDDEN = "Forbidden", tO.GATEWAY_TIMEOUT = "Gateway Timeout", tO.GONE = "Gone", tO.HTTP_VERSION_NOT_SUPPORTED = "HTTP Version Not Supported", tO.IM_A_TEAPOT = "I'm a teapot", tO.INSUFFICIENT_SPACE_ON_RESOURCE = "Insufficient Space on Resource", tO.INSUFFICIENT_STORAGE = "Insufficient Storage", tO.INTERNAL_SERVER_ERROR = "Internal Server Error", tO.LENGTH_REQUIRED = "Length Required", tO.LOCKED = "Locked", tO.METHOD_FAILURE = "Method Failure", tO.METHOD_NOT_ALLOWED = "Method Not Allowed", tO.MOVED_PERMANENTLY = "Moved Permanently", tO.MOVED_TEMPORARILY = "Moved Temporarily", tO.MULTI_STATUS = "Multi-Status", tO.MULTIPLE_CHOICES = "Multiple Choices", tO.NETWORK_AUTHENTICATION_REQUIRED = "Network Authentication Required", tO.NO_CONTENT = "No Content", tO.NON_AUTHORITATIVE_INFORMATION = "Non Authoritative Information", tO.NOT_ACCEPTABLE = "Not Acceptable", tO.NOT_FOUND = "Not Found", tO.NOT_IMPLEMENTED = "Not Implemented", tO.NOT_MODIFIED = "Not Modified", tO.OK = "OK", tO.PARTIAL_CONTENT = "Partial Content", tO.PAYMENT_REQUIRED = "Payment Required", tO.PERMANENT_REDIRECT = "Permanent Redirect", tO.PRECONDITION_FAILED = "Precondition Failed", tO.PRECONDITION_REQUIRED = "Precondition Required", tO.PROCESSING = "Processing", tO.PROXY_AUTHENTICATION_REQUIRED = "Proxy Authentication Required", tO.REQUEST_HEADER_FIELDS_TOO_LARGE = "Request Header Fields Too Large", tO.REQUEST_TIMEOUT = "Request Timeout", tO.REQUEST_TOO_LONG = "Request Entity Too Large", tO.REQUEST_URI_TOO_LONG = "Request-URI Too Long", tO.REQUESTED_RANGE_NOT_SATISFIABLE = "Requested Range Not Satisfiable", tO.RESET_CONTENT = "Reset Content", tO.SEE_OTHER = "See Other", tO.SERVICE_UNAVAILABLE = "Service Unavailable", tO.SWITCHING_PROTOCOLS = "Switching Protocols", tO.TEMPORARY_REDIRECT = "Temporary Redirect", tO.TOO_MANY_REQUESTS = "Too Many Requests", tO.UNAUTHORIZED = "Unauthorized", tO.UNAVAILABLE_FOR_LEGAL_REASONS = "Unavailable For Legal Reasons", tO.UNPROCESSABLE_ENTITY = "Unprocessable Entity", tO.UNSUPPORTED_MEDIA_TYPE = "Unsupported Media Type", tO.USE_PROXY = "Use Proxy", (tS = e$ || (e$ = {})).CONNECT = "CONNECT", tS.DELETE = "DELETE", tS.GET = "GET", tS.HEAD = "HEAD", tS.OPTIONS = "OPTIONS", tS.PATCH = "PATCH", tS.POST = "POST", tS.PUT = "PUT", tS.TRACE = "TRACE", (tI = eX || (eX = {})).withPlus = "withPlus", tI.withoutPlus = "withoutPlus", (tA = e0 || (e0 = {})).processFailure = "processFailure", tA.unretriableFailure = "unretriableFailure", tA.maxAttemptsReached = "maxAttemptsReached";
-    for (var e2 = function(e, t) {
+    }(), (tw = eJ || (eJ = {})).Edge = "edge", tw.IE = "ie", tw.Chrome = "chrome", tw.Opera = "opera", tw.Safari = "safari", tw.Firefox = "firefox", tw.Unknown = "", (tg = eW || (eW = {}))[tg.Windows = 0] = "Windows", tg[tg.macOS = 1] = "macOS", tg[tg.Linux = 2] = "Linux", tg[tg.Unix = 3] = "Unix", tg[tg.iOS = 4] = "iOS", tg[tg.Android = 5] = "Android", tg[tg.Unknown = 6] = "Unknown", (tP = eQ || (eQ = {})).Unidentified = "Unidentified", tP.Alt = "Alt", tP.AltGraph = "AltGraph", tP.CapsLock = "CapsLock", tP.Control = "Control", tP.Fn = "Fn", tP.FnLock = "FnLock", tP.Hyper = "Hyper", tP.Meta = "Meta", tP.NumLock = "NumLock", tP.ScrollLock = "ScrollLock", tP.Shift = "Shift", tP.Super = "Super", tP.Symbol = "Symbol", tP.SymbolLock = "SymbolLock", tP.Enter = "Enter", tP.Tab = "Tab", tP.ArrowDown = "ArrowDown", tP.ArrowLeft = "ArrowLeft", tP.ArrowRight = "ArrowRight", tP.ArrowUp = "ArrowUp", tP.End = "End", tP.Home = "Home", tP.PageDown = "PageDown", tP.PageUp = "PageUp", tP.Backspace = "Backspace", tP.Clear = "Clear", tP.Copy = "Copy", tP.CrSel = "CrSel", tP.Cut = "Cut", tP.Delete = "Delete", tP.EraseEof = "EraseEof", tP.ExSel = "ExSel", tP.Insert = "Insert", tP.Paste = "Paste", tP.Redo = "Redo", tP.Undo = "Undo", tP.Accept = "Accept", tP.Again = "Again", tP.Attn = "Attn", tP.Cancel = "Cancel", tP.ContextMenu = "ContextMenu", tP.Escape = "Escape", tP.Execute = "Execute", tP.Find = "Find", tP.Finish = "Finish", tP.Help = "Help", tP.Pause = "Pause", tP.Play = "Play", tP.Props = "Props", tP.Select = "Select", tP.ZoomIn = "ZoomIn", tP.ZoomOut = "ZoomOut", tP.BrightnessDown = "BrightnessDown", tP.BrightnessUp = "BrightnessUp", tP.Eject = "Eject", tP.LogOff = "LogOff", tP.Power = "Power", tP.PowerOff = "PowerOff", tP.PrintScreen = "PrintScreen", tP.Hibernate = "Hibernate", tP.Standby = "Standby", tP.WakeUp = "WakeUp", tP.AllCandidates = "AllCandidates", tP.Alphanumeric = "Alphanumeric", tP.CodeInput = "CodeInput", tP.Compose = "Compose", tP.Convert = "Convert", tP.Dead = "Dead", tP.FinalMode = "FinalMode", tP.GroupFirst = "GroupFirst", tP.GroupLast = "GroupLast", tP.GroupNext = "GroupNext", tP.GroupPrevious = "GroupPrevious", tP.ModeChange = "ModeChange", tP.NextCandidate = "NextCandidate", tP.NonConvert = "NonConvert", tP.PreviousCandidate = "PreviousCandidate", tP.Process = "Process", tP.SingleCandidate = "SingleCandidate", tP.HangulMode = "HangulMode", tP.HanjaMode = "HanjaMode", tP.JunjaMode = "JunjaMode", tP.Eisu = "Eisu", tP.Hankaku = "Hankaku", tP.Hiragana = "Hiragana", tP.HiraganaKatakana = "HiraganaKatakana", tP.KanaMode = "KanaMode", tP.KanjiMode = "KanjiMode", tP.Katakana = "Katakana", tP.Romaji = "Romaji", tP.Zenkaku = "Zenkaku", tP.ZenkakuHanaku = "ZenkakuHanaku", tP.F1 = "F1", tP.F2 = "F2", tP.F3 = "F3", tP.F4 = "F4", tP.F5 = "F5", tP.F6 = "F6", tP.F7 = "F7", tP.F8 = "F8", tP.F9 = "F9", tP.F10 = "F10", tP.F11 = "F11", tP.F12 = "F12", tP.F13 = "F13", tP.F14 = "F14", tP.F15 = "F15", tP.F16 = "F16", tP.F17 = "F17", tP.F18 = "F18", tP.F19 = "F19", tP.F20 = "F20", tP.Soft1 = "Soft1", tP.Soft2 = "Soft2", tP.Soft3 = "Soft3", tP.Soft4 = "Soft4", tP.AppSwitch = "AppSwitch", tP.Call = "Call", tP.Camera = "Camera", tP.CameraFocus = "CameraFocus", tP.EndCall = "EndCall", tP.GoBack = "GoBack", tP.GoHome = "GoHome", tP.HeadsetHook = "HeadsetHook", tP.LastNumberRedial = "LastNumberRedial", tP.Notification = "Notification", tP.MannerMode = "MannerMode", tP.VoiceDial = "VoiceDial", tP.ChannelDown = "ChannelDown", tP.ChannelUp = "ChannelUp", tP.MediaFastForward = "MediaFastForward", tP.MediaPause = "MediaPause", tP.MediaPlay = "MediaPlay", tP.MediaPlayPause = "MediaPlayPause", tP.MediaRecord = "MediaRecord", tP.MediaRewind = "MediaRewind", tP.MediaStop = "MediaStop", tP.MediaTrackNext = "MediaTrackNext", tP.MediaTrackPrevious = "MediaTrackPrevious", tP.AudioBalanceLeft = "AudioBalanceLeft", tP.AudioBalanceRight = "AudioBalanceRight", tP.AudioBassDown = "AudioBassDown", tP.AudioBassBoostDown = "AudioBassBoostDown", tP.AudioBassBoostToggle = "AudioBassBoostToggle", tP.AudioBassBoostUp = "AudioBassBoostUp", tP.AudioBassUp = "AudioBassUp", tP.AudioFaderFront = "AudioFaderFront", tP.AudioFaderRear = "AudioFaderRear", tP.AudioSurroundModeNext = "AudioSurroundModeNext", tP.AudioTrebleDown = "AudioTrebleDown", tP.AudioTrebleUp = "AudioTrebleUp", tP.AudioVolumeDown = "AudioVolumeDown", tP.AudioVolumeMute = "AudioVolumeMute", tP.AudioVolumeUp = "AudioVolumeUp", tP.MicrophoneToggle = "MicrophoneToggle", tP.MicrophoneVolumeDown = "MicrophoneVolumeDown", tP.MicrophoneVolumeMute = "MicrophoneVolumeMute", tP.MicrophoneVolumeUp = "MicrophoneVolumeUp", tP.TV = "TV", tP.TV3DMode = "TV3DMode", tP.TVAntennaCable = "TVAntennaCable", tP.TVAudioDescription = "TVAudioDescription", tP.TVAudioDescriptionMixDown = "TVAudioDescriptionMixDown", tP.TVAudioDescriptionMixUp = "TVAudioDescriptionMixUp", tP.TVContentsMenu = "TVContentsMenu", tP.TVDataService = "TVDataService", tP.TVInput = "TVInput", tP.TVInputComponent1 = "TVInputComponent1", tP.TVInputComponent2 = "TVInputComponent2", tP.TVInputComposite1 = "TVInputComposite1", tP.TVInputComposite2 = "TVInputComposite2", tP.TVInputHDMI1 = "TVInputHDMI1", tP.TVInputHDMI2 = "TVInputHDMI2", tP.TVInputHDMI3 = "TVInputHDMI3", tP.TVInputHDMI4 = "TVInputHDMI4", tP.TVInputVGA1 = "TVInputVGA1", tP.TVMediaContext = "TVMediaContext", tP.TVNetwork = "TVNetwork", tP.TVNumberEntry = "TVNumberEntry", tP.TVPower = "TVPower", tP.TVRadioService = "TVRadioService", tP.TVSatellite = "TVSatellite", tP.TVSatelliteBS = "TVSatelliteBS", tP.TVSatelliteCS = "TVSatelliteCS", tP.TVSatelliteToggle = "TVSatelliteToggle", tP.TVTerrestrialAnalog = "TVTerrestrialAnalog", tP.TVTerrestrialDigital = "TVTerrestrialDigital", tP.TVTimer = "TVTimer", tP.AVRInput = "AVRInput", tP.AVRPower = "AVRPower", tP.ColorF0Red = "ColorF0Red", tP.ColorF1Green = "ColorF1Green", tP.ColorF2Yellow = "ColorF2Yellow", tP.ColorF3Blue = "ColorF3Blue", tP.ColorF4Grey = "ColorF4Grey", tP.ColorF5Brown = "ColorF5Brown", tP.ClosedCaptionToggle = "ClosedCaptionToggle", tP.Dimmer = "Dimmer", tP.DisplaySwap = "DisplaySwap", tP.DVR = "DVR", tP.Exit = "Exit", tP.FavoriteClear0 = "FavoriteClear0", tP.FavoriteClear1 = "FavoriteClear1", tP.FavoriteClear2 = "FavoriteClear2", tP.FavoriteClear3 = "FavoriteClear3", tP.FavoriteRecall0 = "FavoriteRecall0", tP.FavoriteRecall1 = "FavoriteRecall1", tP.FavoriteRecall2 = "FavoriteRecall2", tP.FavoriteRecall3 = "FavoriteRecall3", tP.FavoriteStore0 = "FavoriteStore0", tP.FavoriteStore1 = "FavoriteStore1", tP.FavoriteStore2 = "FavoriteStore2", tP.FavoriteStore3 = "FavoriteStore3", tP.Guide = "Guide", tP.GuideNextDay = "GuideNextDay", tP.GuidePreviousDay = "GuidePreviousDay", tP.Info = "Info", tP.InstantReplay = "InstantReplay", tP.Link = "Link", tP.ListProgram = "ListProgram", tP.LiveContent = "LiveContent", tP.Lock = "Lock", tP.MediaApps = "MediaApps", tP.MediaAudioTrack = "MediaAudioTrack", tP.MediaLast = "MediaLast", tP.MediaSkipBackward = "MediaSkipBackward", tP.MediaSkipForward = "MediaSkipForward", tP.MediaStepBackward = "MediaStepBackward", tP.MediaStepForward = "MediaStepForward", tP.MediaTopMenu = "MediaTopMenu", tP.NavigateIn = "NavigateIn", tP.NavigateNext = "NavigateNext", tP.NavigateOut = "NavigateOut", tP.NavigatePrevious = "NavigatePrevious", tP.NextFavoriteChannel = "NextFavoriteChannel", tP.NextUserProfile = "NextUserProfile", tP.OnDemand = "OnDemand", tP.Pairing = "Pairing", tP.PinPDown = "PinPDown", tP.PinPMove = "PinPMove", tP.PinPToggle = "PinPToggle", tP.PinPUp = "PinPUp", tP.PlaySpeedDown = "PlaySpeedDown", tP.PlaySpeedReset = "PlaySpeedReset", tP.PlaySpeedUp = "PlaySpeedUp", tP.RandomToggle = "RandomToggle", tP.RcLowBattery = "RcLowBattery", tP.RecordSpeedNext = "RecordSpeedNext", tP.RfBypass = "RfBypass", tP.ScanChannelsToggle = "ScanChannelsToggle", tP.ScreenModeNext = "ScreenModeNext", tP.Settings = "Settings", tP.SplitScreenToggle = "SplitScreenToggle", tP.STBInput = "STBInput", tP.STBPower = "STBPower", tP.Subtitle = "Subtitle", tP.Teletext = "Teletext", tP.VideoModeNext = "VideoModeNext", tP.Wink = "Wink", tP.ZoomToggle = "ZoomToggle", tP.SpeechCorrectionList = "SpeechCorrectionList", tP.SpeechInputToggle = "SpeechInputToggle", tP.Close = "Close", tP.New = "New", tP.Open = "Open", tP.Print = "Print", tP.Save = "Save", tP.SpellCheck = "SpellCheck", tP.MailForward = "MailForward", tP.MailReply = "MailReply", tP.MailSend = "MailSend", tP.LaunchCalculator = "LaunchCalculator", tP.LaunchCalendar = "LaunchCalendar", tP.LaunchContacts = "LaunchContacts", tP.LaunchMail = "LaunchMail", tP.LaunchMediaPlayer = "LaunchMediaPlayer", tP.LaunchMusicPlayer = "LaunchMusicPlayer", tP.LaunchMyComputer = "LaunchMyComputer", tP.LaunchPhone = "LaunchPhone", tP.LaunchScreenSaver = "LaunchScreenSaver", tP.LaunchSpreadsheet = "LaunchSpreadsheet", tP.LaunchWebBrowser = "LaunchWebBrowser", tP.LaunchWebCam = "LaunchWebCam", tP.LaunchWordProcessor = "LaunchWordProcessor", tP.LaunchApplication1 = "LaunchApplication1", tP.LaunchApplication2 = "LaunchApplication2", tP.LaunchApplication3 = "LaunchApplication3", tP.LaunchApplication4 = "LaunchApplication4", tP.LaunchApplication5 = "LaunchApplication5", tP.LaunchApplication6 = "LaunchApplication6", tP.LaunchApplication7 = "LaunchApplication7", tP.LaunchApplication8 = "LaunchApplication8", tP.LaunchApplication9 = "LaunchApplication9", tP.LaunchApplication10 = "LaunchApplication10", tP.LaunchApplication11 = "LaunchApplication11", tP.LaunchApplication12 = "LaunchApplication12", tP.LaunchApplication13 = "LaunchApplication13", tP.LaunchApplication14 = "LaunchApplication14", tP.LaunchApplication15 = "LaunchApplication15", tP.LaunchApplication16 = "LaunchApplication16", tP.BrowserBack = "BrowserBack", tP.BrowserFavorites = "BrowserFavorites", tP.BrowserForward = "BrowserForward", tP.BrowserHome = "BrowserHome", tP.BrowserRefresh = "BrowserRefresh", tP.BrowserSearch = "BrowserSearch", tP.BrowserStop = "BrowserStop", tP.Decimal = "Decimal", tP.Key11 = "Key11", tP.Key12 = "Key12", tP.Multiply = "Multiply", tP.Add = "Add", tP.Divide = "Divide", tP.Subtract = "Subtract", tP.Separator = "Separator", (tE = eY || (eY = {}))[tE.ACCEPTED = 202] = "ACCEPTED", tE[tE.BAD_GATEWAY = 502] = "BAD_GATEWAY", tE[tE.BAD_REQUEST = 400] = "BAD_REQUEST", tE[tE.CONFLICT = 409] = "CONFLICT", tE[tE.CONTINUE = 100] = "CONTINUE", tE[tE.CREATED = 201] = "CREATED", tE[tE.EXPECTATION_FAILED = 417] = "EXPECTATION_FAILED", tE[tE.FAILED_DEPENDENCY = 424] = "FAILED_DEPENDENCY", tE[tE.FORBIDDEN = 403] = "FORBIDDEN", tE[tE.GATEWAY_TIMEOUT = 504] = "GATEWAY_TIMEOUT", tE[tE.GONE = 410] = "GONE", tE[tE.HTTP_VERSION_NOT_SUPPORTED = 505] = "HTTP_VERSION_NOT_SUPPORTED", tE[tE.IM_A_TEAPOT = 418] = "IM_A_TEAPOT", tE[tE.INSUFFICIENT_SPACE_ON_RESOURCE = 419] = "INSUFFICIENT_SPACE_ON_RESOURCE", tE[tE.INSUFFICIENT_STORAGE = 507] = "INSUFFICIENT_STORAGE", tE[tE.INTERNAL_SERVER_ERROR = 500] = "INTERNAL_SERVER_ERROR", tE[tE.LENGTH_REQUIRED = 411] = "LENGTH_REQUIRED", tE[tE.LOCKED = 423] = "LOCKED", tE[tE.METHOD_FAILURE = 420] = "METHOD_FAILURE", tE[tE.METHOD_NOT_ALLOWED = 405] = "METHOD_NOT_ALLOWED", tE[tE.MOVED_PERMANENTLY = 301] = "MOVED_PERMANENTLY", tE[tE.MOVED_TEMPORARILY = 302] = "MOVED_TEMPORARILY", tE[tE.MULTI_STATUS = 207] = "MULTI_STATUS", tE[tE.MULTIPLE_CHOICES = 300] = "MULTIPLE_CHOICES", tE[tE.NETWORK_AUTHENTICATION_REQUIRED = 511] = "NETWORK_AUTHENTICATION_REQUIRED", tE[tE.NO_CONTENT = 204] = "NO_CONTENT", tE[tE.NON_AUTHORITATIVE_INFORMATION = 203] = "NON_AUTHORITATIVE_INFORMATION", tE[tE.NOT_ACCEPTABLE = 406] = "NOT_ACCEPTABLE", tE[tE.NOT_FOUND = 404] = "NOT_FOUND", tE[tE.NOT_IMPLEMENTED = 501] = "NOT_IMPLEMENTED", tE[tE.NOT_MODIFIED = 304] = "NOT_MODIFIED", tE[tE.OK = 200] = "OK", tE[tE.PARTIAL_CONTENT = 206] = "PARTIAL_CONTENT", tE[tE.PAYMENT_REQUIRED = 402] = "PAYMENT_REQUIRED", tE[tE.PERMANENT_REDIRECT = 308] = "PERMANENT_REDIRECT", tE[tE.PRECONDITION_FAILED = 412] = "PRECONDITION_FAILED", tE[tE.PRECONDITION_REQUIRED = 428] = "PRECONDITION_REQUIRED", tE[tE.PROCESSING = 102] = "PROCESSING", tE[tE.PROXY_AUTHENTICATION_REQUIRED = 407] = "PROXY_AUTHENTICATION_REQUIRED", tE[tE.REQUEST_HEADER_FIELDS_TOO_LARGE = 431] = "REQUEST_HEADER_FIELDS_TOO_LARGE", tE[tE.REQUEST_TIMEOUT = 408] = "REQUEST_TIMEOUT", tE[tE.REQUEST_TOO_LONG = 413] = "REQUEST_TOO_LONG", tE[tE.REQUEST_URI_TOO_LONG = 414] = "REQUEST_URI_TOO_LONG", tE[tE.REQUESTED_RANGE_NOT_SATISFIABLE = 416] = "REQUESTED_RANGE_NOT_SATISFIABLE", tE[tE.RESET_CONTENT = 205] = "RESET_CONTENT", tE[tE.SEE_OTHER = 303] = "SEE_OTHER", tE[tE.SERVICE_UNAVAILABLE = 503] = "SERVICE_UNAVAILABLE", tE[tE.SWITCHING_PROTOCOLS = 101] = "SWITCHING_PROTOCOLS", tE[tE.TEMPORARY_REDIRECT = 307] = "TEMPORARY_REDIRECT", tE[tE.TOO_MANY_REQUESTS = 429] = "TOO_MANY_REQUESTS", tE[tE.UNAUTHORIZED = 401] = "UNAUTHORIZED", tE[tE.UNAVAILABLE_FOR_LEGAL_REASONS = 451] = "UNAVAILABLE_FOR_LEGAL_REASONS", tE[tE.UNPROCESSABLE_ENTITY = 422] = "UNPROCESSABLE_ENTITY", tE[tE.UNSUPPORTED_MEDIA_TYPE = 415] = "UNSUPPORTED_MEDIA_TYPE", tE[tE.USE_PROXY = 305] = "USE_PROXY", (tR = eZ || (eZ = {})).ACCEPTED = "Accepted", tR.BAD_GATEWAY = "Bad Gateway", tR.BAD_REQUEST = "Bad Request", tR.CONFLICT = "Conflict", tR.CONTINUE = "Continue", tR.CREATED = "Created", tR.EXPECTATION_FAILED = "Expectation Failed", tR.FAILED_DEPENDENCY = "Failed Dependency", tR.FORBIDDEN = "Forbidden", tR.GATEWAY_TIMEOUT = "Gateway Timeout", tR.GONE = "Gone", tR.HTTP_VERSION_NOT_SUPPORTED = "HTTP Version Not Supported", tR.IM_A_TEAPOT = "I'm a teapot", tR.INSUFFICIENT_SPACE_ON_RESOURCE = "Insufficient Space on Resource", tR.INSUFFICIENT_STORAGE = "Insufficient Storage", tR.INTERNAL_SERVER_ERROR = "Internal Server Error", tR.LENGTH_REQUIRED = "Length Required", tR.LOCKED = "Locked", tR.METHOD_FAILURE = "Method Failure", tR.METHOD_NOT_ALLOWED = "Method Not Allowed", tR.MOVED_PERMANENTLY = "Moved Permanently", tR.MOVED_TEMPORARILY = "Moved Temporarily", tR.MULTI_STATUS = "Multi-Status", tR.MULTIPLE_CHOICES = "Multiple Choices", tR.NETWORK_AUTHENTICATION_REQUIRED = "Network Authentication Required", tR.NO_CONTENT = "No Content", tR.NON_AUTHORITATIVE_INFORMATION = "Non Authoritative Information", tR.NOT_ACCEPTABLE = "Not Acceptable", tR.NOT_FOUND = "Not Found", tR.NOT_IMPLEMENTED = "Not Implemented", tR.NOT_MODIFIED = "Not Modified", tR.OK = "OK", tR.PARTIAL_CONTENT = "Partial Content", tR.PAYMENT_REQUIRED = "Payment Required", tR.PERMANENT_REDIRECT = "Permanent Redirect", tR.PRECONDITION_FAILED = "Precondition Failed", tR.PRECONDITION_REQUIRED = "Precondition Required", tR.PROCESSING = "Processing", tR.PROXY_AUTHENTICATION_REQUIRED = "Proxy Authentication Required", tR.REQUEST_HEADER_FIELDS_TOO_LARGE = "Request Header Fields Too Large", tR.REQUEST_TIMEOUT = "Request Timeout", tR.REQUEST_TOO_LONG = "Request Entity Too Large", tR.REQUEST_URI_TOO_LONG = "Request-URI Too Long", tR.REQUESTED_RANGE_NOT_SATISFIABLE = "Requested Range Not Satisfiable", tR.RESET_CONTENT = "Reset Content", tR.SEE_OTHER = "See Other", tR.SERVICE_UNAVAILABLE = "Service Unavailable", tR.SWITCHING_PROTOCOLS = "Switching Protocols", tR.TEMPORARY_REDIRECT = "Temporary Redirect", tR.TOO_MANY_REQUESTS = "Too Many Requests", tR.UNAUTHORIZED = "Unauthorized", tR.UNAVAILABLE_FOR_LEGAL_REASONS = "Unavailable For Legal Reasons", tR.UNPROCESSABLE_ENTITY = "Unprocessable Entity", tR.UNSUPPORTED_MEDIA_TYPE = "Unsupported Media Type", tR.USE_PROXY = "Use Proxy", (tO = eK || (eK = {})).CONNECT = "CONNECT", tO.DELETE = "DELETE", tO.GET = "GET", tO.HEAD = "HEAD", tO.OPTIONS = "OPTIONS", tO.PATCH = "PATCH", tO.POST = "POST", tO.PUT = "PUT", tO.TRACE = "TRACE", (tS = e$ || (e$ = {})).withPlus = "withPlus", tS.withoutPlus = "withoutPlus", (tI = eX || (eX = {})).processFailure = "processFailure", tI.unretriableFailure = "unretriableFailure", tI.maxAttemptsReached = "maxAttemptsReached";
+    for (var e1 = function(e, t) {
             return function(n) {
                 return Math.min(t, Math.pow(2, n - 1) * e)
             }
-        }, e4 = function() {
+        }, e2 = function() {
             function e() {
                 this.completeItems = new Map, this.requestQueue = [], this.runningBatchCount = 0
             }
@@ -1298,9 +1298,9 @@ function() {
                     a = (new Date).getTime();
                 t.forEach(function(e) {
                     if (o.completeItems.has(e.key)) e.resolve(o.completeItems.get(e.key));
-                    else if (r.maxRetryAttempts && r.maxRetryAttempts > 0 && n !== e0.unretriableFailure) {
+                    else if (r.maxRetryAttempts && r.maxRetryAttempts > 0 && n !== eX.unretriableFailure) {
                         var t, u = (t = e.retryAttempts, r.getFailureCooldown ? r.getFailureCooldown(t) : 1e3);
-                        i = i > 0 ? Math.min(i, u) : u, e.retryAttempts + 1 <= r.maxRetryAttempts ? (e.retryAttempts += 1, e.queueAfter = a + u, o.requestQueue.unshift(e)) : e.reject(e0.maxAttemptsReached)
+                        i = i > 0 ? Math.min(i, u) : u, e.retryAttempts + 1 <= r.maxRetryAttempts ? (e.retryAttempts += 1, e.queueAfter = a + u, o.requestQueue.unshift(e)) : e.reject(eX.maxAttemptsReached)
                     } else e.reject(n)
                 }), this.runningBatchCount -= 1, i > 0 ? setTimeout(function() {
                     return o.processQueue(e, r)
@@ -1314,7 +1314,7 @@ function() {
                     }(n = this.requestQueue).push.apply(n, a), o.length <= 0 || (this.runningBatchCount += 1, e(o).then(function(n) {
                         Object.keys(n).forEach(function(e) {
                             r.saveCompleteItem(e, n[e], t)
-                        }), r.handleBatchResult(e, o, e0.processFailure, t)
+                        }), r.handleBatchResult(e, o, eX.processFailure, t)
                     }, function(n) {
                         r.handleBatchResult(e, o, n, t)
                     }))
@@ -1342,10 +1342,10 @@ function() {
             }, e.prototype.invalidateItem = function(e, t) {
                 this.completeItems.delete(t(e))
             }, e
-        }(), e3 = function() {
+        }(), e4 = function() {
             function e() {
-                this.createExponentialBackoffCooldown = e2, this.createQueueProcessor = function(e, t, n) {
-                    var r = new e4;
+                this.createExponentialBackoffCooldown = e1, this.createQueueProcessor = function(e, t, n) {
+                    var r = new e2;
                     return {
                         queueItem: function(o) {
                             return r.queueItem(o, e, t, n)
@@ -1357,30 +1357,30 @@ function() {
                 }
             }
             return e.prototype.createRequestProcessor = function(e, t, n) {
-                var r = e1({
+                var r = e0({
                     processBatchWaitTime: 250,
                     maxConcurrentBatches: 5
                 }, n);
                 return this.createQueueProcessor(e, t, r)
             }, e
-        }(), e5 = [], e6 = 0; e6 < 256; ++e6) e5.push((e6 + 256).toString(16).substr(1));
-    var e8 = "RelativeTimeFormat" in Intl,
+        }(), e3 = [], e5 = 0; e5 < 256; ++e5) e3.push((e5 + 256).toString(16).substr(1));
+    var e6 = "RelativeTimeFormat" in Intl,
         e7 = ["lookup", "best fit"],
-        e9 = ["long", "short", "narrow"],
-        te = ["always", "auto"],
-        tt = ["second", "minute", "hour", "day", "week", "month", "quarter", "year"];
+        e8 = ["long", "short", "narrow"],
+        e9 = ["always", "auto"],
+        te = ["second", "minute", "hour", "day", "week", "month", "quarter", "year"];
 
-    function tn(e) {
+    function tt(e) {
         if (null == e) throw TypeError("Argument ".concat(e, " cannot be converted to an Object"));
-        return "boolean" == typeof e ? new Boolean(e) : "number" == typeof e ? new Number(e) : "string" == typeof e ? new String(e) : "symbol" == (void 0 === e ? "undefined" : I(e)) ? Object(e) : e
+        return "boolean" == typeof e ? new Boolean(e) : "number" == typeof e ? new Number(e) : "string" == typeof e ? new String(e) : "symbol" == (void 0 === e ? "undefined" : S(e)) ? Object(e) : e
     }
-    var tr = /-u(?:-[0-9a-z]{2,8})+/gi;
+    var tn = /-u(?:-[0-9a-z]{2,8})+/gi;
 
-    function to(e) {
-        return e.replace(tr, "")
+    function tr(e) {
+        return e.replace(tn, "")
     }
 
-    function ti(e, t) {
+    function to(e, t) {
         for (var n = t;;) {
             if (e.includes(n)) return n;
             var r = n.lastIndexOf("-");
@@ -1389,14 +1389,14 @@ function() {
         }
     }
 
-    function ta(e) {
+    function ti(e) {
         return "[object Object]" === Object.prototype.toString.call(e)
     }
 
-    function tu(e, t, n, r, o) {
+    function ta(e, t, n, r, o) {
         var i = function(e, t) {
-            if ("object" != (void 0 === e ? "undefined" : I(e))) throw TypeError("Given argument ".concat(e, " must be of type Object"));
-            if ("string" != typeof t && "symbol" != (void 0 === t ? "undefined" : I(t))) throw TypeError("Given argument ".concat(t, " must be a PropertyKey"));
+            if ("object" != (void 0 === e ? "undefined" : S(e))) throw TypeError("Given argument ".concat(e, " must be of type Object"));
+            if ("string" != typeof t && "symbol" != (void 0 === t ? "undefined" : S(t))) throw TypeError("Given argument ".concat(t, " must be a PropertyKey"));
             return e[t]
         }(e, t);
         if (void 0 !== i) {
@@ -1406,29 +1406,29 @@ function() {
         }
         return o
     }
-    var ts = new WeakMap,
-        tl = ["nu"],
-        tc = {},
-        td = [];
+    var tu = new WeakMap,
+        ts = ["nu"],
+        tl = {},
+        tc = [];
 
-    function tp(e, t, n) {
-        var r = ts.get(e);
-        null == r && (r = Object.create(null), ts.set(e, r)), r[t] = n
+    function td(e, t, n) {
+        var r = tu.get(e);
+        null == r && (r = Object.create(null), tu.set(e, r)), r[t] = n
     }
 
-    function tf(e, t) {
-        var n = ts.get(e);
+    function tp(e, t) {
+        var n = tu.get(e);
         if (null == n) throw ReferenceError("No internal slots has been allocated for the given instance of RelativeTimeFormat");
         return n[t]
     }
 
-    function tv(e, t) {
-        var n = ts.get(e);
+    function tf(e, t) {
+        var n = tu.get(e);
         return null != n && t in n
     }
 
-    function th(e, t, n) {
-        if (!tv(e, "initializedRelativeTimeFormat")) throw TypeError("Internal function called on incompatible receiver ".concat(e.toString()));
+    function tv(e, t, n) {
+        if (!tf(e, "initializedRelativeTimeFormat")) throw TypeError("Internal function called on incompatible receiver ".concat(e.toString()));
         if ("number" != typeof t) throw TypeError("Argument: 'value' must be a number");
         if ("string" != typeof n) throw TypeError("Argument: 'unit' must be a string");
         if (isNaN(t) || t === 1 / 0 || t === -1 / 0) throw RangeError("Value need to be finite number");
@@ -1442,26 +1442,26 @@ function() {
             if ("months" === e) return "month";
             if ("quarters" === e) return "quarter";
             if ("years" === e) return "year";
-            if (!tt.some(function(t) {
+            if (!te.some(function(t) {
                     return t === e
-                })) throw RangeError("Unit: '".concat(e, "' must be one of: ").concat(tt.map(function(e) {
+                })) throw RangeError("Unit: '".concat(e, "' must be one of: ").concat(te.map(function(e) {
                 return '"'.concat(e, '"')
             }).join(", ")));
             return e
         }(n);
-        var r = tf(e, "fields"),
-            o = tf(e, "style"),
+        var r = tp(e, "fields"),
+            o = tp(e, "style"),
             i = "short" === o ? "".concat(n, "-short") : "narrow" === o ? "".concat(n, "-narrow") : n,
             a = i in r;
         a || (i = n);
         var u = r[i];
-        if (null == u) throw TypeError("Could not match entry: '".concat(i, "' inside fields for locale: '").concat(tf(e, "locale"), "'"));
-        if ("auto" === tf(e, "numeric") && (a = t + "" in u)) return [{
+        if (null == u) throw TypeError("Could not match entry: '".concat(i, "' inside fields for locale: '").concat(tp(e, "locale"), "'"));
+        if ("auto" === tp(e, "numeric") && (a = t + "" in u)) return [{
             type: "literal",
             value: u[t + ""]
         }];
         var s = u[Object.is(t, -0) || t < 0 ? "past" : "future"],
-            l = tf(e, "numberFormat").formatToParts(Math.abs(t));
+            l = tp(e, "numberFormat").formatToParts(Math.abs(t));
         return function(e, t, n) {
             for (var r = [], o = String.prototype.indexOf.call(e, "{", 0), i = 0, a = 0, u = e.length; void 0 !== e[o];) {
                 if (-1 === (i = String.prototype.indexOf.call(e, "}", o))) throw RangeError("The pattern: '".concat(e, "' is malformed"));
@@ -1480,9 +1480,9 @@ function() {
                 try {
                     for (var f, v = n[Symbol.iterator](); !(c = (f = v.next()).done); c = !0) {
                         var h = f.value;
-                        "literal" === h.type ? r.push(S(O({}, h), {
+                        "literal" === h.type ? r.push(O(R({}, h), {
                             type: h.type
-                        })) : r.push(S(O({}, h), {
+                        })) : r.push(O(R({}, h), {
                             unit: t
                         }))
                     }
@@ -1506,21 +1506,21 @@ function() {
             }
             return r
         }(s[function(e, t) {
-            if (!tv(e, "pluralRules")) throw TypeError("Given instance of of Intl.RelativeTimeFormat must have an [[InitializedPluralRules]] internal slot");
+            if (!tf(e, "pluralRules")) throw TypeError("Given instance of of Intl.RelativeTimeFormat must have an [[InitializedPluralRules]] internal slot");
             if ("number" != typeof t) throw TypeError("Argument 'n' must be a number");
-            return isFinite(t) ? tf(e, "pluralRules").select(t) : "other"
+            return isFinite(t) ? tp(e, "pluralRules").select(t) : "other"
         }(e, t)], n, l)
     }
-    var ty = function() {
+    var th = function() {
         function e() {
-            g(this, e);
+            w(this, e);
             var t = arguments[0],
                 n = arguments[1];
-            if (void 0 === (w(this, e) ? this.constructor : void 0)) throw TypeError("Constructor Intl.RelativeTimeFormat requires 'new'");
+            if (void 0 === (T(this, e) ? this.constructor : void 0)) throw TypeError("Constructor Intl.RelativeTimeFormat requires 'new'");
             var r = Intl.getCanonicalLocales(t);
-            n = void 0 === n ? Object.create(null) : tn(n);
+            n = void 0 === n ? Object.create(null) : tt(n);
             var o = Object.create(null);
-            o.localeMatcher = tu(n, "localeMatcher", "string", e7, "best fit");
+            o.localeMatcher = ta(n, "localeMatcher", "string", e7, "best fit");
             var i = function(e, t, n, r, o) {
                     var i = (n.localeMatcher, function(e) {
                             var t = e.availableLocales,
@@ -1532,11 +1532,11 @@ function() {
                             try {
                                 for (var u, s = n[Symbol.iterator](); !(o = (u = s.next()).done); o = !0) {
                                     var l = u.value,
-                                        c = to(l),
-                                        d = ti(t, c);
+                                        c = tr(l),
+                                        d = to(t, c);
                                     if (void 0 !== d) {
                                         if (r.locale = d, l !== c) {
-                                            var p = l.match(tr);
+                                            var p = l.match(tn);
                                             r.extension = null == p ? "" : p[0]
                                         }
                                         return r
@@ -1552,8 +1552,8 @@ function() {
                                 }
                             }
                             return r.locale = function() {
-                                if (null == tN) throw ReferenceError("Could not determine locale: No default locale has been configured");
-                                return tN
+                                if (null == tA) throw ReferenceError("Could not determine locale: No default locale has been configured");
+                                return tA
                             }(), r
                         }({
                             availableLocales: e,
@@ -1570,9 +1570,9 @@ function() {
                         for (var p, f = r[Symbol.iterator](); !(l = (p = f.next()).done); l = !0) {
                             var v = p.value,
                                 h = o[a];
-                            if (!ta(h)) throw TypeError("LocaleData for locale: '".concat(a, "' must be an object"));
+                            if (!ti(h)) throw TypeError("LocaleData for locale: '".concat(a, "' must be an object"));
                             var y = h[v];
-                            if (!Array.isArray(y) && !ta(y)) throw TypeError("key: '".concat(v, "' in LocaleData for locale: '").concat(a, "' must be indexable"));
+                            if (!Array.isArray(y) && !ti(y)) throw TypeError("key: '".concat(v, "' in LocaleData for locale: '").concat(a, "' must be indexable"));
                             var m = y[0];
                             if ("string" != typeof m && null !== m) throw TypeError("value: '".concat(m, "' for key: '").concat(v, "' in LocaleData for locale: '").concat(a, "' must be a string or null"));
                             var b = "";
@@ -1596,10 +1596,10 @@ function() {
                             if ("key" in n) {
                                 var w, g = n.key;
                                 if ("string" != typeof g && null != g) throw TypeError("options value: '".concat(g, "' must be a string, undefined, or null"));
-                                void 0 !== g && y.includes(g) && (w = m, (void 0 === g ? "undefined" : I(g)) == (void 0 === w ? "undefined" : I(w)) && ("number" == typeof g ? !(!isNaN(g) || !isNaN(w)) || (!Object.is(g, 0) || !Object.is(w, -0)) && g === w : function(e, t) {
+                                void 0 !== g && y.includes(g) && (w = m, (void 0 === g ? "undefined" : S(g)) == (void 0 === w ? "undefined" : S(w)) && ("number" == typeof g ? !(!isNaN(g) || !isNaN(w)) || (!Object.is(g, 0) || !Object.is(w, -0)) && g === w : function(e, t) {
                                     if ("number" == typeof e) throw TypeError("First argument 'x' must not be a number");
-                                    if ((void 0 === e ? "undefined" : I(e)) != (void 0 === t ? "undefined" : I(t))) throw TypeError("The given arguments must have the same type");
-                                    return null == e || ("string" == typeof e || "boolean" == typeof e ? e === t : "symbol" == (void 0 === e ? "undefined" : I(e)) ? e.valueOf() === t.valueOf() : e === t)
+                                    if ((void 0 === e ? "undefined" : S(e)) != (void 0 === t ? "undefined" : S(t))) throw TypeError("The given arguments must have the same type");
+                                    return null == e || ("string" == typeof e || "boolean" == typeof e ? e === t : "symbol" == (void 0 === e ? "undefined" : S(e)) ? e.valueOf() === t.valueOf() : e === t)
                                 }(g, w)) || (m = g, b = ""))
                             }
                             u[v] = m, s += b
@@ -1624,21 +1624,21 @@ function() {
                         a = Intl.getCanonicalLocales(a)[0]
                     }
                     return u.locale = a, u
-                }(td, r, o, tl, tc),
+                }(tc, r, o, ts, tl),
                 a = i.locale;
-            tp(this, "locale", a), tp(this, "numberingSystem", i.nu);
+            td(this, "locale", a), td(this, "numberingSystem", i.nu);
             var u = i.dataLocale;
-            tp(this, "style", tu(n, "style", "string", e9, "long")), tp(this, "numeric", tu(n, "numeric", "string", te, "always"));
-            var s = tc[u];
-            if (!w(s, Object)) throw TypeError("Expected the LocaleDataEntry for locale: '".concat(u, "' to be an Object"));
-            tp(this, "fields", s), tp(this, "numberFormat", new Intl.NumberFormat(a)), tp(this, "pluralRules", new Intl.PluralRules(a)), tp(this, "initializedRelativeTimeFormat", this)
+            td(this, "style", ta(n, "style", "string", e8, "long")), td(this, "numeric", ta(n, "numeric", "string", e9, "always"));
+            var s = tl[u];
+            if (!T(s, Object)) throw TypeError("Expected the LocaleDataEntry for locale: '".concat(u, "' to be an Object"));
+            td(this, "fields", s), td(this, "numberFormat", new Intl.NumberFormat(a)), td(this, "pluralRules", new Intl.PluralRules(a)), td(this, "initializedRelativeTimeFormat", this)
         }
-        return E(e, [{
+        return P(e, [{
             key: "format",
             value: function(e, t) {
-                if (!w(this, Object) || !tv(this, "initializedRelativeTimeFormat")) throw TypeError("Method Intl.RelativeTimeFormat.prototype.format called on incompatible receiver ".concat(this.toString()));
+                if (!T(this, Object) || !tf(this, "initializedRelativeTimeFormat")) throw TypeError("Method Intl.RelativeTimeFormat.prototype.format called on incompatible receiver ".concat(this.toString()));
                 return function(e, t, n) {
-                    var r = th(e, t, n),
+                    var r = tv(e, t, n),
                         o = "",
                         i = !0,
                         a = !1,
@@ -1663,25 +1663,25 @@ function() {
         }, {
             key: "formatToParts",
             value: function(e, t) {
-                if (!w(this, Object) || !tv(this, "initializedRelativeTimeFormat")) throw TypeError("Method Intl.RelativeTimeFormat.prototype.formatToParts called on incompatible receiver ".concat(this.toString()));
-                return th(this, e = Number(e), t += "")
+                if (!T(this, Object) || !tf(this, "initializedRelativeTimeFormat")) throw TypeError("Method Intl.RelativeTimeFormat.prototype.formatToParts called on incompatible receiver ".concat(this.toString()));
+                return tv(this, e = Number(e), t += "")
             }
         }, {
             key: "resolvedOptions",
             value: function() {
-                if (!w(this, Object) || !tv(this, "initializedRelativeTimeFormat")) throw TypeError("Method Intl.RelativeTimeFormat.prototype.resolvedOptions called on incompatible receiver ".concat(this.toString()));
+                if (!T(this, Object) || !tf(this, "initializedRelativeTimeFormat")) throw TypeError("Method Intl.RelativeTimeFormat.prototype.resolvedOptions called on incompatible receiver ".concat(this.toString()));
                 return {
-                    locale: tf(this, "locale"),
-                    style: tf(this, "style"),
-                    numeric: tf(this, "numeric"),
-                    numberingSystem: tf(this, "numberingSystem")
+                    locale: tp(this, "locale"),
+                    style: tp(this, "style"),
+                    numeric: tp(this, "numeric"),
+                    numberingSystem: tp(this, "numberingSystem")
                 }
             }
         }], [{
             key: "supportedLocalesOf",
             value: function(e) {
                 var t, n, r = arguments[1];
-                return t = Intl.getCanonicalLocales(e), void 0 !== (n = r) && tu(n = tn(n), "localeMatcher", "string", e7, "best fit"),
+                return t = Intl.getCanonicalLocales(e), void 0 !== (n = r) && ta(n = tt(n), "localeMatcher", "string", e7, "best fit"),
                     function(e, t) {
                         var n = [],
                             r = !0,
@@ -1690,7 +1690,7 @@ function() {
                         try {
                             for (var a, u = t[Symbol.iterator](); !(r = (a = u.next()).done); r = !0) {
                                 var s = a.value;
-                                void 0 !== ti(e, to(s)) && n.push(s)
+                                void 0 !== to(e, tr(s)) && n.push(s)
                             }
                         } catch (e) {
                             o = !0, i = e
@@ -1702,27 +1702,27 @@ function() {
                             }
                         }
                         return n
-                    }(td, t)
+                    }(tc, t)
             }
         }, {
             key: "__addLocaleData",
             value: function(e) {
                 var t = e.data,
                     n = e.locale;
-                null == tN && (tN = n), tc[n] = t, td.includes(n) || td.push(n)
+                null == tA && (tA = n), tl[n] = t, tc.includes(n) || tc.push(n)
             }
         }]), e
     }();
-    Object.defineProperty(ty.prototype, Symbol.toStringTag, {
+    Object.defineProperty(th.prototype, Symbol.toStringTag, {
         writable: !1,
         enumerable: !1,
         value: "Intl.RelativeTimeFormat",
         configurable: !0
-    }), e8 || function() {
+    }), e6 || function() {
         if ("u" < typeof Intl) throw TypeError("Could not define Intl.RelativeTimeFormat: Expected 'Intl' to exist. Remember to include polyfills for Intl.NumberFormat, Intl.getCanonicalLocales, and Intl.PluralRules before applying this polyfill");
-        Intl.RelativeTimeFormat = ty
+        Intl.RelativeTimeFormat = th
     }();
-    var tm = Object.freeze({
+    var ty = Object.freeze({
         __proto__: null
     });
     "__addLocaleData" in Intl.RelativeTimeFormat && Intl.RelativeTimeFormat.__addLocaleData({
@@ -1922,21 +1922,21 @@ function() {
             nu: ["latn"]
         }
     });
-    var tb, tT, tw, tg, tP, tE, tR, tO, tS, tI, tA, tN, t_, tM, tC, tL, tx = Object.freeze({
+    var tm, tb, tT, tw, tg, tP, tE, tR, tO, tS, tI, tA, tN, t_, tM, tC, tL = Object.freeze({
             __proto__: null
         }),
-        tU = new eD.v1.PresenceApi(new ea({
-            basePath: null != (tC = null == (tM = null == (t_ = window.Roblox) ? void 0 : t_.EnvironmentUrls) ? void 0 : tM.presenceApi) ? tC : "https://presence.roblox.com",
+        tx = new eF.v1.PresenceApi(new ei({
+            basePath: null != (tM = null == (t_ = null == (tN = window.Roblox) ? void 0 : tN.EnvironmentUrls) ? void 0 : t_.presenceApi) ? tM : "https://presence.roblox.com",
             credentials: "include"
         }));
-    (o = tL || (tL = {})).WebFriends = "webFriends", o.WebGroups = "webGroups", o.WebNavigation = "webNavigation", o.WebPlayerSearch = "webPlayerSearch", o.WebProfile = "webProfile";
-    var tF = tL,
-        tD = "PresenceData",
-        tk = function(e) {
+    (o = tC || (tC = {})).WebFriends = "webFriends", o.WebGroups = "webGroups", o.WebNavigation = "webNavigation", o.WebPlayerSearch = "webPlayerSearch", o.WebProfile = "webProfile";
+    var tU = tC,
+        tF = "PresenceData",
+        tD = function(e) {
             var t, n, r;
             return {
                 userId: null != (t = null == e ? void 0 : e.userId) ? t : 0,
-                userPresenceType: eB.presenceStatusResponseToPresenceStatus[null != (n = null == e ? void 0 : e.userPresenceType) ? n : 0],
+                userPresenceType: ek.presenceStatusResponseToPresenceStatus[null != (n = null == e ? void 0 : e.userPresenceType) ? n : 0],
                 lastLocation: null != (r = null == e ? void 0 : e.lastLocation) ? r : "Website",
                 placeId: null == e ? void 0 : e.placeId,
                 rootPlaceId: null == e ? void 0 : e.rootPlaceId,
@@ -1947,8 +1947,8 @@ function() {
             }
         };
 
-    function tB() {
-        var e, t = null == (e = window.localStorage) ? void 0 : e.getItem(tD),
+    function tk() {
+        var e, t = null == (e = window.localStorage) ? void 0 : e.getItem(tF),
             n = Object.entries(t ? JSON.parse(t) : {}),
             r = new Map;
         return n.forEach(function(e) {
@@ -1956,8 +1956,8 @@ function() {
         }), r
     }
 
-    function tj(e) {
-        var t, n, r = tB();
+    function tB(e) {
+        var t, n, r = tk();
         e.forEach(function(e) {
             var t, n;
             if (e && e.userId) {
@@ -1980,20 +1980,20 @@ function() {
             Date.now() - e.lastUpdated > 18e5 && r.delete(t)
         });
         try {
-            null == (t = window.localStorage) || t.setItem(tD, JSON.stringify(Object.fromEntries(r)))
+            null == (t = window.localStorage) || t.setItem(tF, JSON.stringify(Object.fromEntries(r)))
         } catch (e) {
-            null == (n = window.localStorage) || n.removeItem(tD)
+            null == (n = window.localStorage) || n.removeItem(tF)
         }
     }
-    var tV = {
+    var tj = {
             fetchUserPresences: function(e) {
-                return ej(this, arguments, void 0, function(e, t) {
+                return eB(this, arguments, void 0, function(e, t) {
                     var n, r, o, i, a, u, s, l, c, d, p, f, v;
-                    return void 0 === t && (t = !1), eV(this, function(h) {
+                    return void 0 === t && (t = !1), ej(this, function(h) {
                         switch (h.label) {
                             case 0:
                                 var y;
-                                return (null == (f = null == (p = window.Roblox) ? void 0 : p.CurrentUser) ? void 0 : f.isAuthenticated) ? (r = [], o = [], t || (y = tB(), o = (r = e.map(function(e) {
+                                return (null == (f = null == (p = window.Roblox) ? void 0 : p.CurrentUser) ? void 0 : f.isAuthenticated) ? (r = [], o = [], t || (y = tk(), o = (r = e.map(function(e) {
                                     return y.get(e)
                                 }).filter(function(e) {
                                     return e && Date.now() - e.lastUpdated < 3e4
@@ -2004,21 +2004,21 @@ function() {
                                 })), (i = e.filter(function(e) {
                                     return !o.includes(e)
                                 })).length > 0 ? [4, function(e) {
-                                    return ej(this, void 0, void 0, function() {
+                                    return eB(this, void 0, void 0, function() {
                                         var t, n;
-                                        return eV(this, function(r) {
+                                        return ej(this, function(r) {
                                             switch (r.label) {
                                                 case 0:
-                                                    return r.trys.push([0, 2, , 3]), [4, tU.v1PresenceUsersPost({
+                                                    return r.trys.push([0, 2, , 3]), [4, tx.v1PresenceUsersPost({
                                                         userPresenceRequest: {
                                                             userIds: e
                                                         }
                                                     })];
                                                 case 1:
-                                                    return (t = (null != (n = r.sent().userPresences) ? n : []).map(tk)).forEach(function(e) {
+                                                    return (t = (null != (n = r.sent().userPresences) ? n : []).map(tD)).forEach(function(e) {
                                                         var t, n, r, o, i, a;
-                                                        Number.parseInt(null != (r = null == (n = null == (t = window.Roblox) ? void 0 : t.CurrentUser) ? void 0 : n.userId) ? r : "-1", 10) === e.userId && e.userPresenceType === C.Invisible && (null == (i = null == (o = window.Roblox) ? void 0 : o.EventStream) || i.SendEventWithTarget("invisibleModeFeedback", "invisibleModeFeedback", {
-                                                            surface: (a = window.location.href).includes("/profile") ? tF.WebProfile : a.includes("/search/users") ? tF.WebPlayerSearch : a.includes("/users/friends") ? tF.WebFriends : a.includes("/groups") ? tF.WebGroups : tF.WebNavigation
+                                                        Number.parseInt(null != (r = null == (n = null == (t = window.Roblox) ? void 0 : t.CurrentUser) ? void 0 : n.userId) ? r : "-1", 10) === e.userId && e.userPresenceType === M.Invisible && (null == (i = null == (o = window.Roblox) ? void 0 : o.EventStream) || i.SendEventWithTarget("invisibleModeFeedback", "invisibleModeFeedback", {
+                                                            surface: (a = window.location.href).includes("/profile") ? tU.WebProfile : a.includes("/search/users") ? tU.WebPlayerSearch : a.includes("/users/friends") ? tU.WebFriends : a.includes("/groups") ? tU.WebGroups : tU.WebNavigation
                                                         }, 1))
                                                     }), [2, t];
                                                 case 2:
@@ -2031,7 +2031,7 @@ function() {
                                 }(i)] : [3, 2]) : (n = new Map, e.forEach(function(e) {
                                     n.set(e, {
                                         userId: e,
-                                        userPresenceType: C.Offline,
+                                        userPresenceType: M.Offline,
                                         lastLocation: "Website"
                                     })
                                 }), [2, n]);
@@ -2042,7 +2042,7 @@ function() {
                             case 3:
                                 return a = u, s = eq(eq([], r, !0), a, !0), l = new Map, s.forEach(function(e) {
                                     e && e.userId && l.set(e.userId, e)
-                                }), tj(a), c = e.map(function(e) {
+                                }), tB(a), c = e.map(function(e) {
                                     return l.get(e)
                                 }).filter(function(e) {
                                     return null != e
@@ -2055,16 +2055,16 @@ function() {
                 })
             },
             invalidateUserPresence: function(e) {
-                tj([e])
+                tB([e])
             }
         },
-        tq = (new e3).createRequestProcessor(function(e) {
-            return ej(void 0, void 0, void 0, function() {
+        tq = (new e4).createRequestProcessor(function(e) {
+            return eB(void 0, void 0, void 0, function() {
                 var t, n;
-                return eV(this, function(r) {
+                return ej(this, function(r) {
                     switch (r.label) {
                         case 0:
-                            return [4, tV.fetchUserPresences(e.map(function(e) {
+                            return [4, tj.fetchUserPresences(e.map(function(e) {
                                 return e.itemId
                             }))];
                         case 1:
@@ -2087,12 +2087,12 @@ function() {
                 return 0
             }
         }),
-        tz = new Map,
-        tG = {
+        tV = new Map,
+        tz = {
             subscribeToPresenceChanges: function(e, t, n) {
                 e.forEach(function(e) {
                     var r;
-                    tz.has(e) || tz.set(e, []), null == (r = tz.get(e)) || r.push(t), n && tq.queueItem(e).then(t)
+                    tV.has(e) || tV.set(e, []), null == (r = tV.get(e)) || r.push(t), n && tq.queueItem(e).then(t)
                 })
             },
             getPresences: function(e) {
@@ -2101,16 +2101,16 @@ function() {
                 }))
             },
             refetchPresences: function(e) {
-                return ej(this, void 0, void 0, function() {
+                return eB(this, void 0, void 0, function() {
                     var t;
-                    return eV(this, function(n) {
+                    return ej(this, function(n) {
                         switch (n.label) {
                             case 0:
-                                return [4, tV.fetchUserPresences(e, !0)];
+                                return [4, tj.fetchUserPresences(e, !0)];
                             case 1:
                                 return (t = n.sent()).forEach(function(e, t, n) {
                                     var r;
-                                    null == (r = tz.get(e.userId)) || r.forEach(function(t) {
+                                    null == (r = tV.get(e.userId)) || r.forEach(function(t) {
                                         return t(e)
                                     })
                                 }), [2, t]
@@ -2122,38 +2122,38 @@ function() {
                 document.addEventListener("Roblox.Presence.Update", function(e) {
                     e && e.detail && e.detail.forEach(function(e) {
                         var t;
-                        tV.invalidateUserPresence(e), e.userId && tz.has(e.userId) && (null == (t = tz.get(e.userId)) || t.forEach(function(t) {
+                        tj.invalidateUserPresence(e), e.userId && tV.has(e.userId) && (null == (t = tV.get(e.userId)) || t.forEach(function(t) {
                             return t(e)
                         }))
                     })
                 })
             },
             clearPresenceSubscriptions: function() {
-                tz = new Map
+                tV = new Map
             }
         };
-    window.Roblox = window.Roblox || {}, window.Roblox.Presence = window.Roblox.Presence || {}, void 0 === (null == (a = null == (i = window.Roblox) ? void 0 : i.Presence) ? void 0 : a.presenceProvider) && (window.Roblox.Presence.presenceProvider = tG, tG.initializeEventListener());
-    var tH = function() {
+    window.Roblox = window.Roblox || {}, window.Roblox.Presence = window.Roblox.Presence || {}, void 0 === (null == (a = null == (i = window.Roblox) ? void 0 : i.Presence) ? void 0 : a.presenceProvider) && (window.Roblox.Presence.presenceProvider = tz, tz.initializeEventListener());
+    var tG = function() {
         return window.Roblox.Presence.presenceProvider
     };
 
-    function tJ(e, t) {
-        var n = (0, A.useState)(null != t ? t : {
+    function tH(e, t) {
+        var n = (0, I.useState)(null != t ? t : {
                 userId: null != e ? e : 0,
                 lastLocation: "Website",
                 userPresenceType: 0
             }),
             r = n[0],
             o = n[1];
-        return (0, A.useEffect)(function() {
-            void 0 !== e && tH().subscribeToPresenceChanges([e], o, void 0 === t)
+        return (0, I.useEffect)(function() {
+            void 0 !== e && tG().subscribeToPresenceChanges([e], o, void 0 === t)
         }, [t, e]), r
     }
-    var tW = window.Roblox["core-scripts"].realtime,
-        tQ = f.n(tW),
-        tY = window.Roblox["core-scripts"].meta.user;
+    var tJ = window.Roblox["core-scripts"].realtime,
+        tW = p.n(tJ),
+        tQ = window.Roblox["core-scripts"].meta.user;
 
-    function tZ(e, t, n, r, o, i, a) {
+    function tY(e, t, n, r, o, i, a) {
         try {
             var u = e[i](a),
                 s = u.value
@@ -2164,7 +2164,7 @@ function() {
         u.done ? t(s) : Promise.resolve(s).then(r, o)
     }
 
-    function tK(e) {
+    function tZ(e) {
         return function() {
             var t = this,
                 n = arguments;
@@ -2172,18 +2172,18 @@ function() {
                 var i = e.apply(t, n);
 
                 function a(e) {
-                    tZ(i, r, o, a, u, "next", e)
+                    tY(i, r, o, a, u, "next", e)
                 }
 
                 function u(e) {
-                    tZ(i, r, o, a, u, "throw", e)
+                    tY(i, r, o, a, u, "throw", e)
                 }
                 a(void 0)
             })
         }
     }
 
-    function t$(e, t) {
+    function tK(e, t) {
         return function(e) {
             if (Array.isArray(e)) return e
         }(e) || function(e, t) {
@@ -2205,12 +2205,12 @@ function() {
                 }
                 return i
             }
-        }(e, t) || h(e, t) || function() {
+        }(e, t) || v(e, t) || function() {
             throw TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
         }()
     }
 
-    function tX(e, t) {
+    function t$(e, t) {
         var n, r, o, i = {
                 label: 0,
                 sent: function() {
@@ -2291,36 +2291,36 @@ function() {
         }
     }
 
-    function t0(e) {
-        return (t0 = Object.setPrototypeOf ? Object.getPrototypeOf : function(e) {
+    function tX(e) {
+        return (tX = Object.setPrototypeOf ? Object.getPrototypeOf : function(e) {
             return e.__proto__ || Object.getPrototypeOf(e)
         })(e)
     }
 
-    function t1() {
+    function t0() {
         try {
             var e = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}))
         } catch (e) {}
-        return (t1 = function() {
+        return (t0 = function() {
             return !!e
         })()
     }
 
-    function t2(e, t, n) {
-        t = t0(t);
-        var r = t1() ? Reflect.construct(t, n || [], t0(e).constructor) : t.apply(e, n);
-        if (r && ("object" === I(r) || "function" == typeof r)) return r;
+    function t1(e, t, n) {
+        t = tX(t);
+        var r = t0() ? Reflect.construct(t, n || [], tX(e).constructor) : t.apply(e, n);
+        if (r && ("object" === S(r) || "function" == typeof r)) return r;
         if (void 0 === e) throw ReferenceError("this hasn't been initialised - super() hasn't been called");
         return e
     }
 
-    function t4(e, t) {
-        return (t4 = Object.setPrototypeOf || function(e, t) {
+    function t2(e, t) {
+        return (t2 = Object.setPrototypeOf || function(e, t) {
             return e.__proto__ = t, e
         })(e, t)
     }
 
-    function t3(e, t) {
+    function t4(e, t) {
         if ("function" != typeof t && null !== t) throw TypeError("Super expression must either be null or a function");
         e.prototype = Object.create(t && t.prototype, {
             constructor: {
@@ -2328,21 +2328,21 @@ function() {
                 writable: !0,
                 configurable: !0
             }
-        }), t && t4(e, t)
+        }), t && t2(e, t)
     }
 
-    function t5(e, t, n) {
-        return (t5 = t1() ? Reflect.construct : function(e, t, n) {
+    function t3(e, t, n) {
+        return (t3 = t0() ? Reflect.construct : function(e, t, n) {
             var r = [null];
             r.push.apply(r, t);
             var o = new(Function.bind.apply(e, r));
-            return n && t4(o, n.prototype), o
+            return n && t2(o, n.prototype), o
         }).apply(null, arguments)
     }
 
-    function t6(e) {
+    function t5(e) {
         var t = "function" == typeof Map ? new Map : void 0;
-        return (t6 = function(e) {
+        return (t5 = function(e) {
             if (null === e || -1 === Function.toString.call(e).indexOf("[native code]")) return e;
             if ("function" != typeof e) throw TypeError("Super expression must either be null or a function");
             if (void 0 !== t) {
@@ -2351,7 +2351,7 @@ function() {
             }
 
             function n() {
-                return t5(e, arguments, t0(this).constructor)
+                return t3(e, arguments, tX(this).constructor)
             }
             return n.prototype = Object.create(e.prototype, {
                 constructor: {
@@ -2360,11 +2360,11 @@ function() {
                     writable: !0,
                     configurable: !0
                 }
-            }), t4(n, e)
+            }), t2(n, e)
         })(e)
     }
 
-    function t8(e, t, n) {
+    function t6(e, t, n) {
         function r(n, r) {
             var o, i;
             for (var u in Object.defineProperty(n, "_zod", {
@@ -2377,9 +2377,9 @@ function() {
         }
         var o, i = function(e) {
             function t() {
-                return g(this, t), t2(this, t, arguments)
+                return w(this, t), t1(this, t, arguments)
             }
-            return t3(t, e), t
+            return t4(t, e), t
         }(null != (o = null == n ? void 0 : n.Parent) ? o : Object);
 
         function a(e) {
@@ -2408,7 +2408,7 @@ function() {
         }), Object.defineProperty(a, Symbol.hasInstance, {
             value: function(t) {
                 var r, o;
-                return !!((null == n ? void 0 : n.Parent) && w(t, n.Parent)) || (null == t || null == (o = t._zod) || null == (r = o.traits) ? void 0 : r.has(e))
+                return !!((null == n ? void 0 : n.Parent) && T(t, n.Parent)) || (null == t || null == (o = t._zod) || null == (r = o.traits) ? void 0 : r.has(e))
             }
         }), Object.defineProperty(a, "name", {
             value: e
@@ -2419,22 +2419,22 @@ function() {
     }), Symbol("zod_brand");
     var t7 = function(e) {
         function t() {
-            return g(this, t), t2(this, t, ["Encountered Promise during synchronous parse. Use .parseAsync() instead."])
+            return w(this, t), t1(this, t, ["Encountered Promise during synchronous parse. Use .parseAsync() instead."])
         }
-        return t3(t, e), t
-    }(t6(Error));
-    t6(Error);
-    var t9 = {};
+        return t4(t, e), t
+    }(t5(Error));
+    t5(Error);
+    var t8 = {};
 
-    function ne(e) {
-        return e && Object.assign(t9, e), t9
+    function t9(e) {
+        return e && Object.assign(t8, e), t8
     }
 
-    function nt(e, t) {
-        return (void 0 === t ? "undefined" : I(t)) === "bigint" ? t.toString() : t
+    function ne(e, t) {
+        return (void 0 === t ? "undefined" : S(t)) === "bigint" ? t.toString() : t
     }
 
-    function nn(e) {
+    function nt(e) {
         return {
             get value() {
                 var t = e();
@@ -2444,13 +2444,13 @@ function() {
             }
         }
     }
-    var nr = Symbol("evaluating");
+    var nn = Symbol("evaluating");
 
-    function no(e, t, n) {
+    function nr(e, t, n) {
         var r = void 0;
         Object.defineProperty(e, t, {
             get: function() {
-                if (r !== nr) return void 0 === r && (r = nr, r = n()), r
+                if (r !== nn) return void 0 === r && (r = nn, r = n()), r
             },
             set: function(n) {
                 Object.defineProperty(e, t, {
@@ -2460,15 +2460,15 @@ function() {
             configurable: !0
         })
     }
-    var ni = "captureStackTrace" in Error ? Error.captureStackTrace : function() {
+    var no = "captureStackTrace" in Error ? Error.captureStackTrace : function() {
         for (var e = arguments.length, t = Array(e), n = 0; n < e; n++) t[n] = arguments[n]
     };
 
-    function na(e) {
+    function ni(e) {
         return e.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
     }
 
-    function nu(e) {
+    function na(e) {
         if (!e) return {};
         if ("string" == typeof e) return {
             error: function() {
@@ -2479,14 +2479,14 @@ function() {
             if ((null == e ? void 0 : e.error) !== void 0) throw Error("Cannot specify both `message` and `error` params");
             e.error = e.message
         }
-        return (delete e.message, "string" == typeof e.error) ? S(O({}, e), {
+        return (delete e.message, "string" == typeof e.error) ? O(R({}, e), {
             error: function() {
                 return e.error
             }
         }) : e
     }
 
-    function ns(e) {
+    function nu(e) {
         var t, n = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 0;
         if (!0 === e.aborted) return !0;
         for (var r = n; r < e.issues.length; r++)
@@ -2494,23 +2494,23 @@ function() {
         return !1
     }
 
-    function nl(e, t) {
+    function ns(e, t) {
         return t.map(function(t) {
             return null != t.path || (t.path = []), t.path.unshift(e), t
         })
     }
 
-    function nc(e) {
+    function nl(e) {
         return "string" == typeof e ? e : null == e ? void 0 : e.message
     }
 
-    function nd(e, t, n) {
-        var r, o, i, a, u, s, l, c, d, p, f, v = S(O({}, e), {
+    function nc(e, t, n) {
+        var r, o, i, a, u, s, l, c, d, p, f, v = O(R({}, e), {
             path: null != (r = e.path) ? r : []
         });
-        return e.message || (v.message = null != (o = null != (i = null != (a = null != (u = nc(null == (c = e.inst) || null == (l = c._zod.def) || null == (s = l.error) ? void 0 : s.call(l, e))) ? u : nc(null == t || null == (d = t.error) ? void 0 : d.call(t, e))) ? a : nc(null == (p = n.customError) ? void 0 : p.call(n, e))) ? i : nc(null == (f = n.localeError) ? void 0 : f.call(n, e))) ? o : "Invalid input"), delete v.inst, delete v.continue, (null == t ? void 0 : t.reportInput) || delete v.input, v
+        return e.message || (v.message = null != (o = null != (i = null != (a = null != (u = nl(null == (c = e.inst) || null == (l = c._zod.def) || null == (s = l.error) ? void 0 : s.call(l, e))) ? u : nl(null == t || null == (d = t.error) ? void 0 : d.call(t, e))) ? a : nl(null == (p = n.customError) ? void 0 : p.call(n, e))) ? i : nl(null == (f = n.localeError) ? void 0 : f.call(n, e))) ? o : "Invalid input"), delete v.inst, delete v.continue, (null == t ? void 0 : t.reportInput) || delete v.input, v
     }
-    nn(function() {
+    nt(function() {
         var e, t;
         if ("u" > typeof navigator && (null == (t = navigator) || null == (e = t.userAgent) ? void 0 : e.includes("Cloudflare"))) return !1;
         try {
@@ -2519,25 +2519,25 @@ function() {
             return !1
         }
     });
-    var np = function(e, t) {
+    var nd = function(e, t) {
             e.name = "$ZodError", Object.defineProperty(e, "_zod", {
                 value: e._zod,
                 enumerable: !1
             }), Object.defineProperty(e, "issues", {
                 value: t,
                 enumerable: !1
-            }), e.message = JSON.stringify(t, nt, 2), Object.defineProperty(e, "toString", {
+            }), e.message = JSON.stringify(t, ne, 2), Object.defineProperty(e, "toString", {
                 value: function() {
                     return e.message
                 },
                 enumerable: !1
             })
         },
-        nf = t8("$ZodError", np),
-        nv = t8("$ZodError", np, {
+        np = t6("$ZodError", nd),
+        nf = t6("$ZodError", nd, {
             Parent: Error
         }),
-        nh = (e = nv, function(t, n, r, o) {
+        nv = (e = nf, function(t, n, r, o) {
             var i = r ? Object.assign(r, {
                     async: !1
                 }) : {
@@ -2547,26 +2547,26 @@ function() {
                     value: n,
                     issues: []
                 }, i);
-            if (w(a, Promise)) throw new t7;
+            if (T(a, Promise)) throw new t7;
             if (a.issues.length) {
                 var u, s = new(null != (u = null == o ? void 0 : o.Err) ? u : e)(a.issues.map(function(e) {
-                    return nd(e, i, ne())
+                    return nc(e, i, t9())
                 }));
-                throw ni(s, null == o ? void 0 : o.callee), s
+                throw no(s, null == o ? void 0 : o.callee), s
             }
             return a.value
         }),
-        ny = (t = nv, function(e, n, r, o) {
-            return tK(function() {
+        nh = (t = nf, function(e, n, r, o) {
+            return tZ(function() {
                 var i, a, u, s;
-                return tX(this, function(l) {
+                return t$(this, function(l) {
                     switch (l.label) {
                         case 0:
                             if (i = r ? Object.assign(r, {
                                     async: !0
                                 }) : {
                                     async: !0
-                                }, !w(a = e._zod.run({
+                                }, !T(a = e._zod.run({
                                     value: n,
                                     issues: []
                                 }, i), Promise)) return [3, 2];
@@ -2574,16 +2574,16 @@ function() {
                         case 1:
                             a = l.sent(), l.label = 2;
                         case 2:
-                            if (a.issues.length) throw ni(s = new(null != (u = null == o ? void 0 : o.Err) ? u : t)(a.issues.map(function(e) {
-                                return nd(e, i, ne())
+                            if (a.issues.length) throw no(s = new(null != (u = null == o ? void 0 : o.Err) ? u : t)(a.issues.map(function(e) {
+                                return nc(e, i, t9())
                             })), null == o ? void 0 : o.callee), s;
                             return [2, a.value]
                     }
                 })
             })()
         }),
-        nm = (n = nv, function(e, t, r) {
-            var o = r ? S(O({}, r), {
+        ny = (n = nf, function(e, t, r) {
+            var o = r ? O(R({}, r), {
                     async: !1
                 }) : {
                     async: !1
@@ -2592,28 +2592,28 @@ function() {
                     value: t,
                     issues: []
                 }, o);
-            if (w(i, Promise)) throw new t7;
+            if (T(i, Promise)) throw new t7;
             return i.issues.length ? {
                 success: !1,
-                error: new(null != n ? n : nf)(i.issues.map(function(e) {
-                    return nd(e, o, ne())
+                error: new(null != n ? n : np)(i.issues.map(function(e) {
+                    return nc(e, o, t9())
                 }))
             } : {
                 success: !0,
                 data: i.value
             }
         }),
-        nb = (r = nv, function(e, t, n) {
-            return tK(function() {
+        nm = (r = nf, function(e, t, n) {
+            return tZ(function() {
                 var o, i;
-                return tX(this, function(a) {
+                return t$(this, function(a) {
                     switch (a.label) {
                         case 0:
                             if (o = n ? Object.assign(n, {
                                     async: !0
                                 }) : {
                                     async: !0
-                                }, !w(i = e._zod.run({
+                                }, !T(i = e._zod.run({
                                     value: t,
                                     issues: []
                                 }, o), Promise)) return [3, 2];
@@ -2624,7 +2624,7 @@ function() {
                             return [2, i.issues.length ? {
                                 success: !1,
                                 error: new r(i.issues.map(function(e) {
-                                    return nd(e, o, ne())
+                                    return nc(e, o, t9())
                                 }))
                             } : {
                                 success: !0,
@@ -2635,15 +2635,15 @@ function() {
             })()
         });
     RegExp('^[^\\s@"]{1,64}@[^\\s@]{1,255}$', "u");
-    var nT = /^-?\d+(?:\.\d+)?/,
-        nw = {
+    var nb = /^-?\d+(?:\.\d+)?/,
+        nT = {
             major: 4,
             minor: 1,
             patch: 11
         },
-        ng = t8("$ZodType", function(e, t) {
-            null != e || (e = {}), e._zod.def = t, e._zod.bag = e._zod.bag || {}, e._zod.version = nw;
-            var n, r = y(null != (u = e._zod.def.checks) ? u : []);
+        nw = t6("$ZodType", function(e, t) {
+            null != e || (e = {}), e._zod.def = t, e._zod.bag = e._zod.bag || {}, e._zod.version = nT;
+            var n, r = h(null != (u = e._zod.def.checks) ? u : []);
             e._zod.traits.has("$ZodCheck") && r.unshift(e);
             var o = !0,
                 i = !1,
@@ -2655,7 +2655,7 @@ function() {
                         f = !1,
                         v = void 0;
                     try {
-                        for (var h, m = d._zod.onattach[Symbol.iterator](); !(p = (h = m.next()).done); p = !0)(0, h.value)(e)
+                        for (var y, m = d._zod.onattach[Symbol.iterator](); !(p = (y = m.next()).done); p = !0)(0, y.value)(e)
                     } catch (e) {
                         f = !0, v = e
                     } finally {
@@ -2680,7 +2680,7 @@ function() {
             });
             else {
                 var b = function(e, t, n) {
-                        var r = ns(e),
+                        var r = nu(e),
                             o = !0,
                             i = !1,
                             a = void 0;
@@ -2692,23 +2692,23 @@ function() {
                                 } else if (r) return;
                                 var o = e.issues.length,
                                     i = t._zod.check(e);
-                                if (w(i, Promise) && (null == n ? void 0 : n.async) === !1) throw new t7;
-                                if (u || w(i, Promise)) u = (null != u ? u : Promise.resolve()).then(function() {
-                                    return tK(function() {
-                                        return tX(this, function(t) {
+                                if (T(i, Promise) && (null == n ? void 0 : n.async) === !1) throw new t7;
+                                if (u || T(i, Promise)) u = (null != u ? u : Promise.resolve()).then(function() {
+                                    return tZ(function() {
+                                        return t$(this, function(t) {
                                             switch (t.label) {
                                                 case 0:
                                                     return [4, i];
                                                 case 1:
                                                     if (t.sent(), e.issues.length === o) return [2];
-                                                    return r || (r = ns(e, o)), [2]
+                                                    return r || (r = nu(e, o)), [2]
                                             }
                                         })
                                     })()
                                 });
                                 else {
                                     if (e.issues.length === o) return;
-                                    r || (r = ns(e, o))
+                                    r || (r = nu(e, o))
                                 }
                             }()
                         } catch (e) {
@@ -2724,10 +2724,10 @@ function() {
                             return e
                         }) : e
                     },
-                    T = function(t, n, o) {
-                        if (ns(t)) return t.aborted = !0, t;
+                    w = function(t, n, o) {
+                        if (nu(t)) return t.aborted = !0, t;
                         var i = b(n, r, o);
-                        if (w(i, Promise)) {
+                        if (T(i, Promise)) {
                             if (!1 === o.async) throw new t7;
                             return i.then(function(t) {
                                 return e._zod.parse(t, o)
@@ -2741,15 +2741,15 @@ function() {
                         var o = e._zod.parse({
                             value: t.value,
                             issues: []
-                        }, S(O({}, n), {
+                        }, O(R({}, n), {
                             skipChecks: !0
                         }));
-                        return w(o, Promise) ? o.then(function(e) {
-                            return T(e, t, n)
-                        }) : T(o, t, n)
+                        return T(o, Promise) ? o.then(function(e) {
+                            return w(e, t, n)
+                        }) : w(o, t, n)
                     }
                     var i = e._zod.parse(t, n);
-                    if (w(i, Promise)) {
+                    if (T(i, Promise)) {
                         if (!1 === n.async) throw new t7;
                         return i.then(function(e) {
                             return b(e, r, n)
@@ -2761,14 +2761,14 @@ function() {
             e["~standard"] = {
                 validate: function(t) {
                     try {
-                        var n, r = nm(e, t);
+                        var n, r = ny(e, t);
                         return r.success ? {
                             value: r.data
                         } : {
                             issues: null == (n = r.error) ? void 0 : n.issues
                         }
                     } catch (n) {
-                        return nb(e, t).then(function(e) {
+                        return nm(e, t).then(function(e) {
                             var t;
                             return e.success ? {
                                 value: e.data
@@ -2782,16 +2782,16 @@ function() {
                 version: 1
             }
         }),
-        nP = t8("$ZodNumber", function(e, t) {
+        ng = t6("$ZodNumber", function(e, t) {
             var n;
-            ng.init(e, t), e._zod.pattern = null != (n = e._zod.bag.pattern) ? n : nT, e._zod.parse = function(n, r) {
+            nw.init(e, t), e._zod.pattern = null != (n = e._zod.bag.pattern) ? n : nb, e._zod.parse = function(n, r) {
                 if (t.coerce) try {
                     n.value = Number(n.value)
                 } catch (e) {}
                 var o = n.value;
                 if ("number" == typeof o && !Number.isNaN(o) && Number.isFinite(o)) return n;
                 var i = "number" == typeof o ? Number.isNaN(o) ? "NaN" : Number.isFinite(o) ? void 0 : "Infinity" : void 0;
-                return n.issues.push(O({
+                return n.issues.push(R({
                     expected: "number",
                     code: "invalid_type",
                     input: o,
@@ -2801,30 +2801,30 @@ function() {
                 } : {})), n
             }
         }),
-        nE = t8("$ZodUnknown", function(e, t) {
-            ng.init(e, t), e._zod.parse = function(e) {
+        nP = t6("$ZodUnknown", function(e, t) {
+            nw.init(e, t), e._zod.parse = function(e) {
                 return e
             }
         });
 
-    function nR(e, t, n) {
+    function nE(e, t, n) {
         if (e.issues.length) {
             var r;
-            (r = t.issues).push.apply(r, y(nl(n, e.issues)))
+            (r = t.issues).push.apply(r, h(ns(n, e.issues)))
         }
         t.value[n] = e.value
     }
-    var nO = t8("$ZodArray", function(e, t) {
-        ng.init(e, t), e._zod.parse = function(n, r) {
+    var nR = t6("$ZodArray", function(e, t) {
+        nw.init(e, t), e._zod.parse = function(n, r) {
             var o = function(e) {
                     var o = i[e],
                         u = t.element._zod.run({
                             value: o,
                             issues: []
                         }, r);
-                    w(u, Promise) ? a.push(u.then(function(t) {
-                        return nR(t, n, e)
-                    })) : nR(u, n, e)
+                    T(u, Promise) ? a.push(u.then(function(t) {
+                        return nE(t, n, e)
+                    })) : nE(u, n, e)
                 },
                 i = n.value;
             if (!Array.isArray(i)) return n.issues.push({
@@ -2841,28 +2841,28 @@ function() {
         }
     });
 
-    function nS(e, t, n, r) {
+    function nO(e, t, n, r) {
         if (e.issues.length) {
             var o;
-            (o = t.issues).push.apply(o, y(nl(n, e.issues)))
+            (o = t.issues).push.apply(o, h(ns(n, e.issues)))
         }
         void 0 === e.value ? n in r && (t.value[n] = void 0) : t.value[n] = e.value
     }
-    var nI = t8("$ZodObject", function(e, t) {
-            ng.init(e, t);
+    var nS = t6("$ZodObject", function(e, t) {
+            nw.init(e, t);
             var n, r = Object.getOwnPropertyDescriptor(t, "shape");
             if (!(null == r ? void 0 : r.get)) {
                 var o = t.shape;
                 Object.defineProperty(t, "shape", {
                     get: function() {
-                        var e = O({}, o);
+                        var e = R({}, o);
                         return Object.defineProperty(t, "shape", {
                             value: e
                         }), e
                     }
                 })
             }
-            var i = nn(function() {
+            var i = nt(function() {
                 return function(e) {
                     var t, n = Object.keys(e.shape),
                         r = !0,
@@ -2885,7 +2885,7 @@ function() {
                     var f = Object.keys(t = e.shape).filter(function(e) {
                         return "optional" === t[e]._zod.optin && "optional" === t[e]._zod.optout
                     });
-                    return S(O({}, e), {
+                    return O(R({}, e), {
                         keys: n,
                         keySet: new Set(n),
                         numKeys: n.length,
@@ -2893,7 +2893,7 @@ function() {
                     })
                 }(t)
             });
-            no(e._zod, "propValues", function() {
+            nr(e._zod, "propValues", function() {
                 var e = t.shape,
                     n = {};
                 for (var r in e) {
@@ -2925,7 +2925,7 @@ function() {
             e._zod.parse = function(t, r) {
                 null != n || (n = i.value);
                 var o = t.value;
-                if (!((void 0 === (p = o) ? "undefined" : I(p)) === "object" && null !== p && !Array.isArray(p))) return t.issues.push({
+                if (!((void 0 === (p = o) ? "undefined" : S(p)) === "object" && null !== p && !Array.isArray(p))) return t.issues.push({
                     expected: "object",
                     code: "invalid_type",
                     input: o,
@@ -2944,9 +2944,9 @@ function() {
                                 value: o[e],
                                 issues: []
                             }, r);
-                        w(n, Promise) ? u.push(n.then(function(n) {
-                            return nS(n, t, e, o)
-                        })) : nS(n, t, e, o)
+                        T(n, Promise) ? u.push(n.then(function(n) {
+                            return nO(n, t, e, o)
+                        })) : nO(n, t, e, o)
                     }()
                 } catch (e) {
                     c = !0, d = e
@@ -2974,9 +2974,9 @@ function() {
                                     value: t[o],
                                     issues: []
                                 }, r);
-                                w(i, Promise) ? e.push(i.then(function(e) {
-                                    return nS(e, n, o, t)
-                                })) : nS(i, n, o, t)
+                                T(i, Promise) ? e.push(i.then(function(e) {
+                                    return nO(e, n, o, t)
+                                })) : nO(i, n, o, t)
                             }
                         }()
                     } catch (e) {
@@ -3001,10 +3001,10 @@ function() {
                 }) : t
             }
         }),
-        nA = t8("$ZodLiteral", function(e, t) {
-            if (ng.init(e, t), 0 === t.values.length) throw Error("Cannot create literal schema with no valid values");
+        nI = t6("$ZodLiteral", function(e, t) {
+            if (nw.init(e, t), 0 === t.values.length) throw Error("Cannot create literal schema with no valid values");
             e._zod.values = new Set(t.values), e._zod.pattern = new RegExp("^(".concat(t.values.map(function(e) {
-                return "string" == typeof e ? na(e) : e ? na(e.toString()) : String(e)
+                return "string" == typeof e ? ni(e) : e ? ni(e.toString()) : String(e)
             }).join("|"), ")$")), e._zod.parse = function(n, r) {
                 var o = n.value;
                 return e._zod.values.has(o) || n.issues.push({
@@ -3016,55 +3016,55 @@ function() {
             }
         });
 
-    function nN(e, t) {
+    function nA(e, t) {
         return e.issues.length && void 0 === t ? {
             issues: [],
             value: void 0
         } : e
     }
-    var n_ = t8("$ZodOptional", function(e, t) {
-        ng.init(e, t), e._zod.optin = "optional", e._zod.optout = "optional", no(e._zod, "values", function() {
-            return t.innerType._zod.values ? new Set(y(t.innerType._zod.values).concat([void 0])) : void 0
-        }), no(e._zod, "pattern", function() {
+    var nN = t6("$ZodOptional", function(e, t) {
+        nw.init(e, t), e._zod.optin = "optional", e._zod.optout = "optional", nr(e._zod, "values", function() {
+            return t.innerType._zod.values ? new Set(h(t.innerType._zod.values).concat([void 0])) : void 0
+        }), nr(e._zod, "pattern", function() {
             var e, n, r, o = t.innerType._zod.pattern;
             return o ? new RegExp("^(".concat((n = +!!(e = o.source).startsWith("^"), r = e.endsWith("$") ? e.length - 1 : e.length, e.slice(n, r)), ")?$")) : void 0
         }), e._zod.parse = function(e, n) {
             if ("optional" === t.innerType._zod.optin) {
                 var r = t.innerType._zod.run(e, n);
-                return w(r, Promise) ? r.then(function(t) {
-                    return nN(t, e.value)
-                }) : nN(r, e.value)
+                return T(r, Promise) ? r.then(function(t) {
+                    return nA(t, e.value)
+                }) : nA(r, e.value)
             }
             return void 0 === e.value ? e : t.innerType._zod.run(e, n)
         }
     });
     Symbol("ZodOutput"), Symbol("ZodInput");
-    var nM = t8("ZodMiniType", function(e, t) {
+    var n_ = t6("ZodMiniType", function(e, t) {
             if (!e._zod) throw Error("Uninitialized schema in ZodMiniType.");
-            ng.init(e, t), e.def = t, e.type = t.type, e.parse = function(t, n) {
-                return nh(e, t, n, {
+            nw.init(e, t), e.def = t, e.type = t.type, e.parse = function(t, n) {
+                return nv(e, t, n, {
                     callee: e.parse
                 })
             }, e.safeParse = function(t, n) {
-                return nm(e, t, n)
+                return ny(e, t, n)
             }, e.parseAsync = function(t, n) {
-                return tK(function() {
-                    return tX(this, function(r) {
-                        return [2, ny(e, t, n, {
+                return tZ(function() {
+                    return t$(this, function(r) {
+                        return [2, nh(e, t, n, {
                             callee: e.parseAsync
                         })]
                     })
                 })()
             }, e.safeParseAsync = function(t, n) {
-                return tK(function() {
-                    return tX(this, function(r) {
-                        return [2, nb(e, t, n)]
+                return tZ(function() {
+                    return t$(this, function(r) {
+                        return [2, nm(e, t, n)]
                     })
                 })()
             }, e.check = function() {
                 for (var n, r = arguments.length, o = Array(r), i = 0; i < r; i++) o[i] = arguments[i];
-                return e.clone(S(O({}, t), {
-                    checks: y(null != (n = t.checks) ? n : []).concat(y(o.map(function(e) {
+                return e.clone(O(R({}, t), {
+                    checks: h(null != (n = t.checks) ? n : []).concat(h(o.map(function(e) {
                         return "function" == typeof e ? {
                             _zod: {
                                 check: e,
@@ -3085,81 +3085,81 @@ function() {
                 return t.add(e, n), e
             }
         }),
-        nC = t8("ZodMiniNumber", function(e, t) {
-            nP.init(e, t), nM.init(e, t)
+        nM = t6("ZodMiniNumber", function(e, t) {
+            ng.init(e, t), n_.init(e, t)
         });
 
-    function nL(e) {
-        return new nC(O({
+    function nC(e) {
+        return new nM(R({
             type: "number",
             checks: []
-        }, nu(e)))
+        }, na(e)))
     }
-    var nx = t8("ZodMiniUnknown", function(e, t) {
-        nE.init(e, t), nM.init(e, t)
+    var nL = t6("ZodMiniUnknown", function(e, t) {
+        nP.init(e, t), n_.init(e, t)
     });
 
-    function nU() {
-        return new nx({
+    function nx() {
+        return new nL({
             type: "unknown"
         })
     }
-    var nF = t8("ZodMiniArray", function(e, t) {
-            nO.init(e, t), nM.init(e, t)
+    var nU = t6("ZodMiniArray", function(e, t) {
+            nR.init(e, t), n_.init(e, t)
         }),
-        nD = t8("ZodMiniObject", function(e, t) {
-            nI.init(e, t), nM.init(e, t), no(e, "shape", function() {
+        nF = t6("ZodMiniObject", function(e, t) {
+            nS.init(e, t), n_.init(e, t), nr(e, "shape", function() {
                 return t.shape
             })
         });
 
-    function nk(e, t) {
-        return new nD(O({
+    function nD(e, t) {
+        return new nF(R({
             type: "object",
             shape: e,
-            catchall: nU()
-        }, nu(t)))
+            catchall: nx()
+        }, na(t)))
     }
-    var nB = t8("ZodMiniLiteral", function(e, t) {
-            nA.init(e, t), nM.init(e, t)
+    var nk = t6("ZodMiniLiteral", function(e, t) {
+            nI.init(e, t), n_.init(e, t)
         }),
-        nj = t8("ZodMiniOptional", function(e, t) {
-            n_.init(e, t), nM.init(e, t)
+        nB = t6("ZodMiniOptional", function(e, t) {
+            nN.init(e, t), n_.init(e, t)
         }),
-        nV = window.Roblox["core-scripts"].environmentUrls,
-        nq = f.n(nV),
-        nz = window.Roblox["core-lib"].http.index,
-        nG = window.Roblox["core-lib"].url.index,
-        nH = "PresenceBulkNotifications",
-        nJ = nk({
-            Type: new nB(O({
+        nj = window.Roblox["core-scripts"].environmentUrls,
+        nq = p.n(nj),
+        nV = window.Roblox["core-lib"].http.index,
+        nz = window.Roblox["core-lib"].url.index,
+        nG = "PresenceBulkNotifications",
+        nH = nD({
+            Type: new nk(R({
                 type: "literal",
                 values: Array.isArray(u = "PresenceChanged") ? u : [u]
-            }, nu(void 0))),
-            UserId: nL(),
-            SessionStarted: nU(),
-            PresenceReport: new nj({
+            }, na(void 0))),
+            UserId: nC(),
+            SessionStarted: nx(),
+            PresenceReport: new nB({
                 type: "optional",
-                innerType: nU()
+                innerType: nx()
             })
         }),
-        nW = (s = {
-            userPresences: new nF(O({
+        nJ = (s = {
+            userPresences: new nU(R({
                 type: "array",
-                element: nk({
-                    userId: nL()
+                element: nD({
+                    userId: nC()
                 })
-            }, nu(void 0)))
-        }, new nD(O({
+            }, na(void 0)))
+        }, new nF(R({
             type: "object",
             shape: null != s ? s : {}
-        }, nu(void 0)))),
-        nQ = function(e) {
+        }, na(void 0)))),
+        nW = function(e) {
             document.dispatchEvent(new CustomEvent("Roblox.Presence.Update", {
                 detail: e
             }))
         },
-        nY = function(e) {
+        nQ = function(e) {
             var t = new Map,
                 n = function(e) {
                     var n = e.UserId,
@@ -3176,7 +3176,7 @@ function() {
                     try {
                         for (var u, s = (Array.isArray(e) ? e : [])[Symbol.iterator](); !(o = (u = s.next()).done); o = !0) {
                             var l = u.value,
-                                c = nJ.safeParse(l);
+                                c = nH.safeParse(l);
                             c.success && r.set(c.data.UserId, c.data)
                         }
                     } catch (e) {
@@ -3195,7 +3195,7 @@ function() {
                         h = void 0;
                     try {
                         for (var y, m = r[Symbol.iterator](); !(f = (y = m.next()).done); f = !0) {
-                            var b = t$(y.value, 2),
+                            var b = tK(y.value, 2),
                                 T = b[0],
                                 w = b[1];
                             null != w.PresenceReport && n(w) ? (d.set(T, w.PresenceReport), t.set(T, w.SessionStarted)) : p.push(T)
@@ -3209,14 +3209,14 @@ function() {
                             if (v) throw h
                         }
                     }
-                    p.length > 0 && tK(function() {
+                    p.length > 0 && tZ(function() {
                         var e;
-                        return tX(this, function(t) {
+                        return t$(this, function(t) {
                             switch (t.label) {
                                 case 0:
-                                    return e = nG.Url.parse(nq().presenceApi).getOrThrow().withPath("/v1/presence/users"), [4, nz.post(e, {
+                                    return e = nz.Url.parse(nq().presenceApi).getOrThrow().withPath("/v1/presence/users"), [4, nV.post(e, {
                                         userIds: p
-                                    }, nW, {
+                                    }, nJ, {
                                         credentials: "include"
                                     })];
                                 case 1:
@@ -3244,56 +3244,56 @@ function() {
                     }).catch(function(e) {
                         console.error(e)
                     }).finally(function() {
-                        nQ(d)
-                    }), nQ(d)
+                        nW(d)
+                    }), nW(d)
                 };
-            return e.Subscribe(nH, r),
+            return e.Subscribe(nG, r),
                 function() {
-                    e.Unsubscribe(nH, r)
+                    e.Unsubscribe(nG, r)
                 }
         };
 
-    function nZ() {
-        return null != c || (c = "".concat(nq().apiGatewayUrl.replace(/\/$/, ""), "/experience-signals-ingest/public")), c
+    function nY() {
+        return null != l || (l = "".concat(nq().apiGatewayUrl.replace(/\/$/, ""), "/experience-signals-ingest/public")), l
     }
-    var nK = function() {},
-        n$ = function(e, t) {
+    var nZ = function() {},
+        nK = function(e, t) {
             return e << 3 | t
         },
-        nX = n$(1, 2),
-        n0 = n$(2, 2),
-        n1 = n$(5, 2),
-        n2 = n$(6, 2),
-        n4 = n$(8, 2),
-        n3 = n$(1, 2),
-        n5 = n$(2, 1),
-        n6 = n$(3, 0),
-        n8 = n$(5, 2);
-    n$(1, 2), n$(2, 1), n$(3, 0), n$(4, 2), n$(5, 2), n$(6, 0), n$(8, 2);
-    var n7 = n$(4, 0),
-        n9 = n$(6, 2),
-        re = n$(7, 2);
-    n$(1, 0), n$(2, 2);
-    var rt = n$(1, 2),
-        rn = n$(2, 2),
-        rr = n$(1, 2);
-    n$(1, 2), n$(2, 2), n$(1, 2);
-    var ro = new TextEncoder,
-        ri = function() {
+        n$ = nK(1, 2),
+        nX = nK(2, 2),
+        n0 = nK(5, 2),
+        n1 = nK(6, 2),
+        n2 = nK(8, 2),
+        n4 = nK(1, 2),
+        n3 = nK(2, 1),
+        n5 = nK(3, 0),
+        n6 = nK(5, 2);
+    nK(1, 2), nK(2, 1), nK(3, 0), nK(4, 2), nK(5, 2), nK(6, 0), nK(8, 2);
+    var n7 = nK(4, 0),
+        n8 = nK(6, 2),
+        n9 = nK(7, 2);
+    nK(1, 0), nK(2, 2);
+    var re = nK(1, 2),
+        rt = nK(2, 2),
+        rn = nK(1, 2);
+    nK(1, 2), nK(2, 2), nK(1, 2);
+    var rr = new TextEncoder,
+        ro = function() {
             function e() {
-                g(this, e), R(this, "buf", [])
+                w(this, e), E(this, "buf", [])
             }
-            return E(e, [{
+            return P(e, [{
                 key: "writeVarint",
                 value: function(e) {
-                    var t = (void 0 === e ? "undefined" : I(e)) === "bigint" ? e : BigInt(Math.trunc(e));
+                    var t = (void 0 === e ? "undefined" : S(e)) === "bigint" ? e : BigInt(Math.trunc(e));
                     for (t < BigInt(0) && (t += BigInt(1) << BigInt(64)); t > BigInt(127);) this.buf.push(128 | Number(t & BigInt(127))), t >>= BigInt(7);
                     this.buf.push(Number(t))
                 }
             }, {
                 key: "writeString",
                 value: function(e) {
-                    var t = ro.encode(e);
+                    var t = rr.encode(e);
                     this.writeVarint(t.length);
                     var n = !0,
                         r = !1,
@@ -3350,61 +3350,61 @@ function() {
             }]), e
         }();
 
-    function ra(e, t, n) {
-        var r = new ri;
-        return r.writeVarint(n$(1, 2)), r.writeString(e), r.writeVarint(t), n(r), r.toBytes()
+    function ri(e, t, n) {
+        var r = new ro;
+        return r.writeVarint(nK(1, 2)), r.writeString(e), r.writeVarint(t), n(r), r.toBytes()
     }
 
-    function ru(e) {
-        var t = new ri;
-        if (t.writeVarint(n3), t.writeString(e.name), t.writeVarint(n5), t.writeDouble(e.value), t.writeVarint(n6), t.writeVarint(e.timestampMs), e.attributes && Object.keys(e.attributes).length > 0) {
+    function ra(e) {
+        var t = new ro;
+        if (t.writeVarint(n4), t.writeString(e.name), t.writeVarint(n3), t.writeDouble(e.value), t.writeVarint(n5), t.writeVarint(e.timestampMs), e.attributes && Object.keys(e.attributes).length > 0) {
             var n = function(e) {
-                var t = new ri,
+                var t = new ro,
                     n = !0,
                     r = !1,
                     o = void 0;
                 try {
                     for (var i, a = Object.entries(e)[Symbol.iterator](); !(n = (i = a.next()).done); n = !0) ! function() {
-                        var e = t$(i.value, 2),
+                        var e = tK(i.value, 2),
                             n = e[0],
                             r = e[1];
                         if ("string" == typeof r) {
-                            var o = ra(n, n$(2, 2), function(e) {
+                            var o = ri(n, nK(2, 2), function(e) {
                                 e.writeString(r)
                             });
-                            t.writeVarint(n1), t.writeBytes(o)
+                            t.writeVarint(n0), t.writeBytes(o)
                         } else if ("boolean" == typeof r) {
-                            var a = ra(n, n$(2, 0), function(e) {
+                            var a = ri(n, nK(2, 0), function(e) {
                                 e.writeVarint(+!!r)
                             });
-                            t.writeVarint(n2), t.writeBytes(a)
-                        } else if ((void 0 === r ? "undefined" : I(r)) === "bigint") {
-                            var u = ra(n, n$(2, 0), function(e) {
+                            t.writeVarint(n1), t.writeBytes(a)
+                        } else if ((void 0 === r ? "undefined" : S(r)) === "bigint") {
+                            var u = ri(n, nK(2, 0), function(e) {
                                 e.writeVarint(r)
                             });
-                            t.writeVarint(n0), t.writeBytes(u)
+                            t.writeVarint(nX), t.writeBytes(u)
                         } else if ("number" == typeof r)
                             if (Number.isFinite(r))
                                 if (Number.isInteger(r) && r >= -0x80000000 && r <= 0x7fffffff) {
-                                    var s = ra(n, n$(2, 0), function(e) {
+                                    var s = ri(n, nK(2, 0), function(e) {
                                         e.writeVarint(r)
                                     });
-                                    t.writeVarint(nX), t.writeBytes(s)
+                                    t.writeVarint(n$), t.writeBytes(s)
                                 } else if (Number.isInteger(r)) {
-                            var l = ra(n, n$(2, 0), function(e) {
+                            var l = ri(n, nK(2, 0), function(e) {
                                 e.writeVarint(BigInt(r))
                             });
-                            t.writeVarint(n0), t.writeBytes(l)
+                            t.writeVarint(nX), t.writeBytes(l)
                         } else {
-                            var c = ra(n, n$(2, 1), function(e) {
+                            var c = ri(n, nK(2, 1), function(e) {
                                 e.writeDouble(r)
                             });
-                            t.writeVarint(n4), t.writeBytes(c)
+                            t.writeVarint(n2), t.writeBytes(c)
                         } else {
-                            var d = ra(n, n$(2, 2), function(e) {
+                            var d = ri(n, nK(2, 2), function(e) {
                                 e.writeString(String(r))
                             });
-                            t.writeVarint(n1), t.writeBytes(d)
+                            t.writeVarint(n0), t.writeBytes(d)
                         }
                     }()
                 } catch (e) {
@@ -3418,13 +3418,13 @@ function() {
                 }
                 return t.toBytes()
             }(e.attributes);
-            t.writeVarint(n8), t.writeBytes(n)
+            t.writeVarint(n6), t.writeBytes(n)
         }
         return t.toBytes()
     }
 
-    function rs(e, t, n) {
-        var r = new ri;
+    function ru(e, t, n) {
+        var r = new ro;
         r.writeVarint(n7), r.writeVarint(n);
         var o = !0,
             i = !1,
@@ -3432,7 +3432,7 @@ function() {
         try {
             for (var u, s = e[Symbol.iterator](); !(o = (u = s.next()).done); o = !0) {
                 var l = u.value;
-                r.writeVarint(n9), r.writeBytes(l)
+                r.writeVarint(n8), r.writeBytes(l)
             }
         } catch (e) {
             i = !0, a = e
@@ -3449,7 +3449,7 @@ function() {
         try {
             for (var f, v = t[Symbol.iterator](); !(c = (f = v.next()).done); c = !0) {
                 var h = f.value;
-                r.writeVarint(re), r.writeBytes(h)
+                r.writeVarint(n9), r.writeBytes(h)
             }
         } catch (e) {
             d = !0, p = e
@@ -3463,23 +3463,23 @@ function() {
         return r.toBytes()
     }
 
-    function rl(e) {
-        var t = new ri;
-        t.writeVarint(rt), t.writeString("eventstream.enginetelemetry.EngineTelemetryBatchEvent"), t.writeVarint(rn), t.writeBytes(e);
+    function rs(e) {
+        var t = new ro;
+        t.writeVarint(re), t.writeString("eventstream.enginetelemetry.EngineTelemetryBatchEvent"), t.writeVarint(rt), t.writeBytes(e);
         var n = t.toBytes(),
-            r = new ri;
-        return r.writeVarint(rr), r.writeBytes(n), r.toBytes()
+            r = new ro;
+        return r.writeVarint(rn), r.writeBytes(n), r.toBytes()
     }
-    var rc = /^[a-zA-Z_][a-zA-Z0-9_]*$/;
+    var rl = /^[a-zA-Z_][a-zA-Z0-9_]*$/;
 
-    function rd(e) {
-        return rc.test(e)
+    function rc(e) {
+        return rl.test(e)
     }
-    var rp = [],
-        rf = !1,
-        rv = !1;
+    var rd = [],
+        rp = !1,
+        rf = !1;
 
-    function rh(e, t) {
+    function rv(e, t) {
         var n, r, o = e.map(function(e) {
                 return {
                     name: e.name,
@@ -3489,7 +3489,7 @@ function() {
                 }
             }),
             i = BigInt(Date.now());
-        !0 === t || rv || "u" > typeof document && "hidden" === document.visibilityState ? (n = rl(rs(o.map(ru), [], i)).buffer, fetch("".concat(nZ()).concat("/v1/events/single"), {
+        !0 === t || rf || "u" > typeof document && "hidden" === document.visibilityState ? (n = rs(ru(o.map(ra), [], i)).buffer, fetch("".concat(nY()).concat("/v1/events/single"), {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-protobuf"
@@ -3497,16 +3497,16 @@ function() {
             body: n,
             credentials: "include",
             keepalive: !0
-        }).catch(nK)) : (r = rl(rs(o.map(ru), [], i)), tK(function() {
+        }).catch(nZ)) : (r = rs(ru(o.map(ra), [], i)), tZ(function() {
             var e, t, n, o, i, a, u, s, l, c, d, p, f;
-            return tX(this, function(v) {
+            return t$(this, function(v) {
                 switch (v.label) {
                     case 0:
                         if ("u" < typeof CompressionStream) return [2, {
                             body: r.buffer,
                             compressed: !1
                         }];
-                        return (t = (e = new CompressionStream("gzip")).writable.getWriter()).write(r).catch(nK), t.close().catch(nK), n = [], [4, (o = e.readable.getReader()).read()];
+                        return (t = (e = new CompressionStream("gzip")).writable.getWriter()).write(r).catch(nZ), t.close().catch(nZ), n = [], [4, (o = e.readable.getReader()).read()];
                     case 1:
                         i = v.sent(), v.label = 2;
                     case 2:
@@ -3541,24 +3541,24 @@ function() {
                 r = {
                     "Content-Type": "application/x-protobuf"
                 };
-            return n && (r["Content-Encoding"] = "gzip"), fetch("".concat(nZ()).concat("/v1/events/single"), {
+            return n && (r["Content-Encoding"] = "gzip"), fetch("".concat(nY()).concat("/v1/events/single"), {
                 method: "POST",
                 headers: r,
                 body: t,
                 credentials: "include",
                 keepalive: !0
             })
-        }).catch(nK)
+        }).catch(nZ)
     }
 
-    function ry() {
+    function rh() {
         var e = !0,
             t = !1,
             n = void 0;
         try {
-            for (var r, o = rp[Symbol.iterator](); !(e = (r = o.next()).done); e = !0) {
+            for (var r, o = rd[Symbol.iterator](); !(e = (r = o.next()).done); e = !0) {
                 var i = r.value.splice(0);
-                0 !== i.length && rh(i, !0)
+                0 !== i.length && rv(i, !0)
             }
         } catch (e) {
             t = !0, n = e
@@ -3570,85 +3570,118 @@ function() {
             }
         }
     }
-    var rm = function() {
+    var ry = globalThis.document,
+        rm = void 0 === ry ? void 0 : ry,
+        rb = new Map(["android", "ios", "xbox", "uwp", "amazon", "win32", "universalApp", "unknown"].map(function(e) {
+            return [e.toLowerCase(), e]
+        })),
+        rT = function(e) {
+            var t, n;
+            return null != (t = rb.get(null != (n = null == e ? void 0 : e.trim().toLowerCase()) ? n : "")) ? t : "unknown"
+        },
+        rw = function() {
             if ("u" > typeof document) {
                 var e = document.querySelector('meta[name="page-meta"]');
                 return null == e ? void 0 : e.dataset.internalPageName
             }
         },
-        rb = ["Messages", "Avatar"],
-        rT = function(e) {
+        rg = ["Messages", "Avatar"],
+        rP = function(e) {
             var t;
-            return null != (t = rb.find(function(t) {
+            return null != (t = rg.find(function(t) {
                 return t === e
             })) ? t : "other"
         },
-        rw = {
+        rE = function() {
+            var e;
+            return rT(null == rm || null == (e = rm.querySelector('meta[name="device-meta"]')) ? void 0 : e.dataset.appType)
+        },
+        rR = {
             featureName: "AppShell",
             team: "User > Consumer Apps > Platforms - Web & Backend",
             features: {
                 page: {
                     counters: [{
                         name: "ShellStart",
-                        dimensions: ["host", "page", "auth_state"]
+                        dimensions: ["host", "page", "appType", "auth_state"]
                     }, {
                         name: "PageHeartbeat",
-                        dimensions: ["host", "page", "beat"]
+                        dimensions: ["host", "page", "appType", "beat"]
                     }]
                 },
                 presence: {
                     counters: [{
                         name: "PresenceHeartbeat",
-                        dimensions: ["host", "page", "outcome"]
+                        dimensions: ["host", "page", "appType", "outcome"]
                     }]
                 },
                 navigation: {
                     counters: [{
                         name: "NavLoad",
-                        dimensions: ["host", "page", "outcome"]
+                        dimensions: ["host", "page", "appType", "outcome"]
                     }]
                 },
                 realtime: {
                     counters: [{
                         name: "RealtimeStart",
-                        dimensions: ["host", "page", "outcome"]
+                        dimensions: ["host", "page", "appType", "outcome"]
                     }]
                 },
                 chat: {
                     counters: [{
                         name: "ChatLoad",
-                        dimensions: ["host", "page", "outcome"]
+                        dimensions: ["host", "page", "appType", "outcome"]
                     }]
                 },
                 gameLaunch: {
                     counters: [{
                         name: "GameLaunch",
-                        dimensions: ["host", "page", "outcome"]
+                        dimensions: ["host", "page", "appType", "outcome"]
                     }]
                 }
             }
         },
-        rg = (l = function(e) {
+        rO = function(e, t, n) {
+            var r = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : {},
+                o = r.appType,
+                i = void 0 !== o && o;
+            return function(r, o) {
+                var a = Object.values(e.features).some(function(e) {
+                    var t;
+                    return null == (t = e.counters) ? void 0 : t.some(function(e) {
+                        var t;
+                        return "string" != typeof e && e.name === r && (null == (t = e.dimensions) ? void 0 : t.includes("page")) === !0
+                    })
+                });
+                t(r, R(O(R({}, a && null == o.page ? {
+                    page: rP(rw())
+                } : {}, o), {
+                    host: n
+                }), i ? {
+                    appType: rE()
+                } : {}))
+            }
+        }(rR, function(e) {
             var t, n = Math.max(1, 10),
                 r = 250;
 
             function o(e, t) {
                 console.error(e, t)
             }
-            if (!rd(e)) return o('@rbx/web-telemetry: invalid featureName "'.concat(e, '"'), {
+            if (!rc(e)) return o('@rbx/web-telemetry: invalid featureName "'.concat(e, '"'), {
                     name: e
                 }),
                 function() {};
             var i = [];
-            return rp.push(i), rf || ("u" > typeof document && document.addEventListener("visibilitychange", function() {
-                    "hidden" === document.visibilityState && ry()
+            return rd.push(i), rp || ("u" > typeof document && document.addEventListener("visibilitychange", function() {
+                    "hidden" === document.visibilityState && rh()
                 }), "u" > typeof window && window.addEventListener("beforeunload", function() {
-                    rv = !0, ry()
-                }), rf = !0),
+                    rf = !0, rh()
+                }), rp = !0),
                 function(a, u, s) {
                     var l = "".concat(e, "_").concat(a);
                     if (! function(e, t) {
-                            if (!rd(e)) return !1;
+                            if (!rc(e)) return !1;
                             if (t) {
                                 var n = !0,
                                     r = !1,
@@ -3656,7 +3689,7 @@ function() {
                                 try {
                                     for (var i, a = Object.keys(t)[Symbol.iterator](); !(n = (i = a.next()).done); n = !0) {
                                         var u = i.value;
-                                        if (!rd(u)) return !1
+                                        if (!rc(u)) return !1
                                     }
                                 } catch (e) {
                                     r = !0, o = e
@@ -3684,45 +3717,34 @@ function() {
                         attributes: d,
                         value: c,
                         timestampMs: BigInt(Date.now())
-                    }), i.length >= n ? (void 0 !== t && (clearTimeout(t), t = void 0), rh(i.splice(0, n))) : void 0 === t && (t = setTimeout(function() {
-                        for (t = void 0; i.length > 0;) rh(i.splice(0, n))
+                    }), i.length >= n ? (void 0 !== t && (clearTimeout(t), t = void 0), rv(i.splice(0, n))) : void 0 === t && (t = setTimeout(function() {
+                        for (t = void 0; i.length > 0;) rv(i.splice(0, n))
                     }, r))
                 }
-        }(rw.featureName), function(e, t) {
-            var n = Object.values(rw.features).some(function(t) {
-                var n;
-                return null == (n = t.counters) ? void 0 : n.some(function(t) {
-                    var n;
-                    return "string" != typeof t && t.name === e && (null == (n = t.dimensions) ? void 0 : n.includes("page")) === !0
-                })
-            });
-            l(e, S(O({}, n && null == t.page ? {
-                page: rT(rm())
-            } : {}, t), {
-                host: "dotnet"
-            }))
+        }(rR.featureName), "dotnet", {
+            appType: !0
         });
-    b(["Roblox", "Presence", "PresenceTypes"], {
+    m(["Roblox", "Presence", "PresenceTypes"], {
         Offline: 0,
         Online: 1,
         InGame: 2,
         InStudio: 3
-    }), b("RobloxPresence", {
-        PresenceType: C,
+    }), m("RobloxPresence", {
+        PresenceType: M,
         PresenceStatusIcon: function(e) {
             var t, n, r = e.userId,
                 o = e.initialPresence,
                 i = e.className,
                 a = e.translate,
-                u = tJ(r, o),
-                s = null != (t = null == u ? void 0 : u.userPresenceType) ? t : C.Offline,
+                u = tH(r, o),
+                s = null != (t = null == u ? void 0 : u.userPresenceType) ? t : M.Offline,
                 l = null != (n = null == u ? void 0 : u.lastLocation) ? n : "";
-            a && s === C.Invisible && (l = a("Label.Invisible"));
-            var c = eB.presenceStatusToClassName[s];
-            return s !== C.Offline ? N().createElement("span", {
+            a && s === M.Invisible && (l = a("Label.Invisible"));
+            var c = ek.presenceStatusToClassName[s];
+            return s !== M.Offline ? A().createElement("span", {
                 "data-testid": "presence-icon",
                 title: l,
-                className: F(i, c, "icon-".concat(c))
+                className: U(i, c, "icon-".concat(c))
             }) : null
         },
         PresenceStatusLabel: function(e) {
@@ -3730,38 +3752,38 @@ function() {
                 o = e.translate,
                 i = e.linkUrlGetter,
                 a = e.linkClassNames,
-                u = tJ(r, void 0);
-            if (u.userPresenceType === C.Offline) return o("Label.Offline");
-            if (u.userPresenceType === C.Online) return o("Label.Online");
-            if (u.userPresenceType === C.Game) {
+                u = tH(r, void 0);
+            if (u.userPresenceType === M.Offline) return o("Label.Offline");
+            if (u.userPresenceType === M.Online) return o("Label.Online");
+            if (u.userPresenceType === M.Game) {
                 if (u.rootPlaceId) {
                     var s = i ? i(u.rootPlaceId) : "".concat(null == (n = null == (t = window.Roblox) ? void 0 : t.EnvironmentUrls) ? void 0 : n.websiteUrl, "/games/").concat(u.rootPlaceId);
-                    return N().createElement("a", {
+                    return A().createElement("a", {
                         href: s,
-                        className: F(null != a ? a : [])
+                        className: U(null != a ? a : [])
                     }, u.lastLocation)
                 }
                 return o("Label.Online")
             }
-            return u.userPresenceType === C.Studio ? u.lastLocation : u.userPresenceType === C.Invisible ? o("Label.Invisible") : void 0
+            return u.userPresenceType === M.Studio ? u.lastLocation : u.userPresenceType === M.Invisible ? o("Label.Invisible") : void 0
         },
-        usePresence: tJ,
-        getPresenceProvider: tH,
-        presenceClient: tU
-    }), (0, tY.isAuthenticated)() && document.addEventListener("DOMContentLoaded", function() {
-        if (T(m)) {
+        usePresence: tH,
+        getPresenceProvider: tG,
+        presenceClient: tx
+    }), (0, tQ.isAuthenticated)() && document.addEventListener("DOMContentLoaded", function() {
+        if (b(y)) {
             var e;
             try {
-                e = tQ().GetClient()
+                e = tW().GetClient()
             } catch (e) {
-                throw rg("RealtimeStart", {
+                throw rO("RealtimeStart", {
                     outcome: "failed"
                 }), e
             }
-            rg("RealtimeStart", {
+            rO("RealtimeStart", {
                 outcome: "started"
-            }), nY(e)
+            }), nQ(e)
         }
     })
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected(document.currentScript && document.currentScript.getAttribute("data-bundlename") || "PresenceStatus");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/presenceStatus-36c33019dbffcb21.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/presenceStatus-da4a97a5b66df16d.js.map

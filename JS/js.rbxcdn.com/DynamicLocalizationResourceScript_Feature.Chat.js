@@ -197,6 +197,10 @@ Roblox.LangDynamic["Feature.Chat"] = {
     "Label.Trusted": "Trusted",
     "Label.MinimizedChats": "Minimized chats",
     "Action.JumpToLatestMessages": "Jump to latest messages",
-    "Label.StartChatting": "Start chatting"
+    "Label.StartChatting": "Start chatting",
+    "Label.ExpandChat": "Expand chat",
+    "Label.ShrinkChat": "Shrink chat",
+    "Label.MinimizeChat": "Minimize chat",
+    "Message.SelectChat": "Select a chat to start messaging"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.Chat");
