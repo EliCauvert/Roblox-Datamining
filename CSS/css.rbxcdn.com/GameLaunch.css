@@ -89,15 +89,29 @@
     background-image: var(--image-thumbnail-pending)
 }
 
-button.btn-common-play-game-lg,
 button.game-play-button-lg,
-button.btn-economy-robux-white-lg,
 button.game-play-button-purchase-lg,
-button.btn-common-play-game-action-needed-lg,
 button.game-play-button-action-needed-lg,
-button.btn-common-play-game-unplayable-lg,
 button.game-play-button-unplayable-lg {
-    height: auto
+    height: auto;
+    font-size: 20px;
+    font-weight: var(--font-weight-500);
+    white-space: nowrap;
+    line-height: 100%
+}
+
+button.game-play-button-lg .btn-text,
+button.game-play-button-purchase-lg .btn-text,
+button.game-play-button-action-needed-lg .btn-text,
+button.game-play-button-unplayable-lg .btn-text {
+    vertical-align: middle
+}
+
+button.game-play-button-lg:disabled,
+button.game-play-button-purchase-lg:disabled,
+button.game-play-button-action-needed-lg:disabled,
+button.game-play-button-unplayable-lg:disabled {
+    cursor: not-allowed
 }
 
 button.game-play-button-unplayable {

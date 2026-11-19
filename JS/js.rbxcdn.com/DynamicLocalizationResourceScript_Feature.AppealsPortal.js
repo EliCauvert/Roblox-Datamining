@@ -259,6 +259,7 @@ Roblox.LangDynamic["Feature.AppealsPortal"] = {
     "Label.AppealSentBy": "Sent by {username}",
     "Description.AppealReceivedNeutral": "We received this appeal. We’ll reply within 5 business days. Complex issues can take longer.",
     "Description.AppealDeniedNeutral": "We reviewed this appeal. This content breaks the rules in our Community Standards.",
-    "Label.MomentDescription": "Moment Description"
+    "Label.MomentDescription": "Moment Description",
+    "Description.AskForReviewFallback": "You're confirming that you've fixed this issue. We'll review this again."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.AppealsPortal");
