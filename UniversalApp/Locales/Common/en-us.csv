@@ -4370,7 +4370,10 @@ Feature.InExperienceShop.Label.Timer.Minute.Singular,1 minute
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} seconds
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 second
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Are you sure you want to permanently delete this item from your inventory? If you change your mind, you'll need to earn it again in an experience."
+Feature.Item.Label.DeleteFromInventoryPermanently,We'll remove it from your inventory permanently.
 Feature.Item.Label.DeleteItemUndercase,Delete item
+Feature.Item.Label.DeleteThisItem,Delete this item?
+Feature.Item.Message.ItemNotDeleted,Item wasn't deleted
 Feature.Landing.Action.PlayNow,Play now
 Feature.Landing.Action.SignInWithRoblox,
 Feature.Landing.Description.ContinuedTermsDisclaimer,"By continuing, you agree to our {startTermsTag}Terms{endTermsTag}, including arbitration, and acknowledge our {startPrivacyTag}Privacy Policy{endPrivacyTag}. If you’re under 18, your parent or guardian must permit your account and agree to our Terms."
@@ -5800,6 +5803,7 @@ Feature.Toast.Username.Copied,Username copied to clipboard.
 Feature.Toast.VoteError.AssetNotVoteable,Experience may not be voted on.
 Feature.Toast.VoteError.Default,Action not available.
 Feature.Toast.VoteError.FloodCheckThresholdMet,You're voting too quickly.
+Feature.Toast.VoteError.NotSaved,Vote wasn’t saved
 Feature.Toast.VoteError.PlayGame,You must visit this experience before rating it.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,You can't check your age right now because you've repeatedly broken our Community Standards. You can try again after the restriction ends.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,Age checks suspended

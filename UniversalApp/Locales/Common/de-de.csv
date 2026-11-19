@@ -4323,7 +4323,10 @@ Feature.InExperienceShop.Label.Timer.Minute.Singular,1 Minute
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} Sekunden
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 Sekunde
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Möchtest du diesen Artikel wirklich dauerhaft aus deinem Inventar löschen? Wenn du deine Meinung änderst, musst du ihn erneut in einer Experience verdienen."
+Feature.Item.Label.DeleteFromInventoryPermanently,Wir werden ihn dauerhaft aus deinem Inventar entfernen.
 Feature.Item.Label.DeleteItemUndercase,Artikel löschen
+Feature.Item.Label.DeleteThisItem,Diesen Artikel löschen?
+Feature.Item.Message.ItemNotDeleted,Der Artikel wurde nicht gelöscht
 Feature.Landing.Action.PlayNow,Jetzt spielen
 Feature.Landing.Action.SignInWithRoblox,
 Feature.Landing.Description.ContinuedTermsDisclaimer,"Wenn du fortfährst, stimmst du unseren {startTermsTag}Bedingungen{endTermsTag}, einschließlich Schiedsverfahren, zu und erkennst unsere {startPrivacyTag}Datenschutzrichtlinie{endPrivacyTag} an. Wenn du unter 18 Jahre alt bist, muss ein Elternteil oder Erziehungsberechtigter dein Konto genehmigen und unseren Bedingungen zustimmen."

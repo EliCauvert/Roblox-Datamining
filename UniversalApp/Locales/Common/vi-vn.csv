@@ -4333,7 +4333,10 @@ Feature.InExperienceShop.Label.Timer.Minute.Singular,1 phút
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} giây
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 giây
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Bạn có chắc chắn muốn xóa vĩnh viễn vật phẩm này khỏi kho? Nếu thay đổi ý định, bạn sẽ phải tự kiếm lại vật phẩm này trong một trải nghiệm."
+Feature.Item.Label.DeleteFromInventoryPermanently,Chúng tôi sẽ xóa vĩnh viễn vật phẩm này khỏi kho của bạn.
 Feature.Item.Label.DeleteItemUndercase,Xóa vật phẩm
+Feature.Item.Label.DeleteThisItem,Xóa vật phẩm này?
+Feature.Item.Message.ItemNotDeleted,Vật phẩm chưa bị xóa
 Feature.Landing.Action.PlayNow,Chơi ngay
 Feature.Landing.Action.SignInWithRoblox,
 Feature.Landing.Description.ContinuedTermsDisclaimer,"Khi tiếp tục, bạn đồng ý với {startTermsTag}Điều khoản{endTermsTag} của chúng tôi (bao gồm điều khoản trọng tài) và xác nhận {startPrivacyTag}Chính sách quyền riêng tư{endPrivacyTag} của chúng tôi. Nếu bạn dưới 18 tuổi, cha mẹ hoặc người giám hộ của bạn phải cho phép bạn tạo tài khoản và đồng ý với Điều khoản của chúng tôi."

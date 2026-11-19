@@ -4332,7 +4332,10 @@ Feature.InExperienceShop.Label.Timer.Minute.Singular,
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} 秒
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 秒
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,確定要從道具欄永久刪除此道具嗎？若日後改變主意，你必須在體驗中重新取得道具。
+Feature.Item.Label.DeleteFromInventoryPermanently,我們會從你的道具欄永久移除此道具。
 Feature.Item.Label.DeleteItemUndercase,刪除道具
+Feature.Item.Label.DeleteThisItem,要刪除此道具嗎？
+Feature.Item.Message.ItemNotDeleted,物品未刪除
 Feature.Landing.Action.PlayNow,立即遊玩
 Feature.Landing.Action.SignInWithRoblox,
 Feature.Landing.Description.ContinuedTermsDisclaimer,繼續操作即表示您同意我們的{startTermsTag}條款{endTermsTag}（包括仲裁條款），並知悉我們的{startPrivacyTag}隱私權政策{endPrivacyTag}。若未滿 18 歲，貴家長或監護人必須允許您建立帳號，並同意我們的條款。

@@ -4331,7 +4331,10 @@ Feature.InExperienceShop.Label.Timer.Minute.Singular,1 menit
 Feature.InExperienceShop.Label.Timer.Second.Plural,{number} detik
 Feature.InExperienceShop.Label.Timer.Second.Singular,1 detik
 Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete,"Kamu yakin ingin menghapus item ini dari inventarismu secara permanen? Jika kamu berubah pikiran, kamu harus mendapatkannya lagi di pengalaman virtual."
+Feature.Item.Label.DeleteFromInventoryPermanently,Kami akan menghapusnya dari inventarismu secara permanen.
 Feature.Item.Label.DeleteItemUndercase,Hapus item
+Feature.Item.Label.DeleteThisItem,Hapus item ini?
+Feature.Item.Message.ItemNotDeleted,Item tidak dihapus
 Feature.Landing.Action.PlayNow,Main sekarang
 Feature.Landing.Action.SignInWithRoblox,
 Feature.Landing.Description.ContinuedTermsDisclaimer,"Dengan melanjutkan, kamu menyetujui {startTermsTag}Ketentuan{endTermsTag} kami, termasuk arbitrase, dan memahami {startPrivacyTag}Kebijakan Privasi{endPrivacyTag} kami. Jika kamu berusia di bawah 18 tahun, orang tua atau wali sahmu harus mengizinkan akunmu dan menyetujui Ketentuan kami."
