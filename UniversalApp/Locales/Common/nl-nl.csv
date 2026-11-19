@@ -2779,12 +2779,15 @@ Feature.Build.Label.ToolAssetSearchRunning,Bezig met doorzoeken van de assetbibl
 Feature.Build.Label.ToolClientDMDone,Client DataModel doorzocht
 Feature.Build.Label.ToolClientDMFailed,Kan client DataModel niet doorzoeken
 Feature.Build.Label.ToolClientDMRunning,Client DataModel doorzoeken
+Feature.Build.Label.ToolCodeRunning,Bezig met het uitvoeren van code
 Feature.Build.Label.ToolCompileDone,De code is gecompileerd
 Feature.Build.Label.ToolCompileFailed,Kan de code niet compileren
 Feature.Build.Label.ToolCompileRunning,Bezig met het compileren van de code
+Feature.Build.Label.ToolDeveloperProductRunning,Er wordt aan je ontwikkelaarsproduct gewerkt
 Feature.Build.Label.ToolGameInfoDone,Spelinformatie bijgewerkt
 Feature.Build.Label.ToolGameInfoFailed,Kan spelinformatie niet bijwerken
 Feature.Build.Label.ToolGameInfoRunning,Bezig met het bijwerken van de spelinformatie…
+Feature.Build.Label.ToolGamePassRunning,Er wordt aan je game pass gewerkt
 Feature.Build.Label.ToolGameSaveDone,Spel opgeslagen
 Feature.Build.Label.ToolGameSaveFailed,Kan spel niet opslaan
 Feature.Build.Label.ToolGameSaveRunning,Bezig met het opslaan van het spel…
@@ -2799,10 +2802,11 @@ Feature.Build.Label.ToolLogsFailed,Kan logbestanden niet aanvragen
 Feature.Build.Label.ToolLogsRunning,Bezig met het aanvragen van logbestanden…
 Feature.Build.Label.ToolLuauDone,Luau uitgevoerd
 Feature.Build.Label.ToolLuauFailed,Kan Luau niet uitvoeren
-Feature.Build.Label.ToolLuauRunning,Bezig met het uitvoeren van Luau…
+Feature.Build.Label.ToolLuauRunning,Bezig met het uitvoeren van Luau
 Feature.Build.Label.ToolModelDone,3D-model gegenereerd
 Feature.Build.Label.ToolModelFailed,Kan 3D-model niet genereren
 Feature.Build.Label.ToolModelRunning,Bezig met het genereren van het 3D-model…
+Feature.Build.Label.ToolMonetizationRunning,Er wordt aan de monetisatie van je game gewerkt
 Feature.Build.Label.ToolPlanPresentDone,Abonnement gepresenteerd
 Feature.Build.Label.ToolPlanPresentFailed,Kan abonnement niet presenteren
 Feature.Build.Label.ToolPlanPresentRunning,Bezig met het presenteren van het abonnement…
@@ -2819,7 +2823,7 @@ Feature.Build.Label.ToolReqUpdateDone,Vereisten bijgewerkt
 Feature.Build.Label.ToolReqUpdateFailed,Kan vereisten niet bijwerken
 Feature.Build.Label.ToolReqUpdateRunning,Bezig met het bijwerken van de vereisten…
 Feature.Build.Label.ToolRestoreVersionDone,Versie hersteld
-Feature.Build.Label.ToolRestoreVersionFailed,Kan versie niet herstellen
+Feature.Build.Label.ToolRestoreVersionFailed,Kon versie niet herstellen
 Feature.Build.Label.ToolRestoreVersionRunning,Versie wordt hersteld
 Feature.Build.Label.ToolScriptDone,Script uitgevoerd
 Feature.Build.Label.ToolScriptFailed,Kan script niet uitvoeren
@@ -2830,6 +2834,7 @@ Feature.Build.Label.ToolSkillLoadRunning,Bezig met laden van de vaardigheid…
 Feature.Build.Label.ToolSkillsDone,Beschikbare vaardigheden weergegeven
 Feature.Build.Label.ToolSkillsFailed,Kan beschikbare vaardigheden niet weergeven
 Feature.Build.Label.ToolSkillsRunning,Bezig met het weergeven van beschikbare vaardigheden…
+Feature.Build.Label.ToolSubscriptionRunning,Er wordt aan je abonnement gewerkt
 Feature.Build.Label.ToolTasksPlanDone,Taken gepland
 Feature.Build.Label.ToolTasksPlanFailed,Kan taken niet plannen
 Feature.Build.Label.ToolTasksPlanRunning,Bezig met het plannen van je taken…
@@ -3565,6 +3570,11 @@ Feature.Chat.RobloxConnectUnavailableWithUser,Op dit moment is Roblox Connect ni
 Feature.Chat.Text.NoFriends,Je hebt nog geen vrienden toegevoegd. Zoek en voeg je vrienden toe op Roblox om te beginnen.
 Feature.Chat.Title.NewChat,Nieuwe chat
 Feature.Chat.Toast.Error.InvalidUserSelected,Een of meerdere mensen in deze lijst kunnen niet worden toegevoegd
+Feature.CloudClient.Action.PlayWithoutCloudPlay,Spelen zonder Cloud Play
+Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play voert de game uit op de computers van Roblox, waardoor deze mogelijk sneller laadt en minder vaak crasht. Het duurt maar zolang je deze game speelt."
+Feature.CloudClient.Heading.CloudPlayOffer,Spelen met Cloud Play
+Feature.CloudClient.Label.RobloxRealityGraphics,"Je game, in een nieuw jasje"
+Feature.CloudClient.Label.RobloxRealityPlusOnly,Alleen voor Plus-abonnees
 Feature.CommunityLinks.Description.CommunityDefault,Word lid van de officiële Guilded-community voor {experienceName} om aankondigingen en meer te bekijken!
 Feature.CommunityLinks.Heading.CommunityTitle,Lid worden van de community
 Feature.CommunityLinks.Label.ViewButton,

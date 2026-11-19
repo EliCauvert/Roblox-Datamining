@@ -2778,12 +2778,15 @@ Feature.Build.Label.ToolAssetSearchRunning,正在搜索素材库
 Feature.Build.Label.ToolClientDMDone,已搜索客户端 DataModel
 Feature.Build.Label.ToolClientDMFailed,无法搜索客户端 DataModel
 Feature.Build.Label.ToolClientDMRunning,正在搜索客户端 DataModel
+Feature.Build.Label.ToolCodeRunning,正在运行代码
 Feature.Build.Label.ToolCompileDone,已编译代码
 Feature.Build.Label.ToolCompileFailed,无法编译代码
 Feature.Build.Label.ToolCompileRunning,正在编译代码
+Feature.Build.Label.ToolDeveloperProductRunning,正在处理你的开发者产品
 Feature.Build.Label.ToolGameInfoDone,已更新游戏信息
 Feature.Build.Label.ToolGameInfoFailed,无法更新游戏信息
 Feature.Build.Label.ToolGameInfoRunning,正在更新游戏信息
+Feature.Build.Label.ToolGamePassRunning,正在处理你的游戏通行证
 Feature.Build.Label.ToolGameSaveDone,已保存游戏
 Feature.Build.Label.ToolGameSaveFailed,无法保存游戏
 Feature.Build.Label.ToolGameSaveRunning,正在保存游戏
@@ -2802,6 +2805,7 @@ Feature.Build.Label.ToolLuauRunning,正在执行 Luau
 Feature.Build.Label.ToolModelDone,已生成 3D 模型
 Feature.Build.Label.ToolModelFailed,无法生成 3D 模型
 Feature.Build.Label.ToolModelRunning,正在生成 3D 模型
+Feature.Build.Label.ToolMonetizationRunning,正在处理你的游戏的收益化
 Feature.Build.Label.ToolPlanPresentDone,已展示计划
 Feature.Build.Label.ToolPlanPresentFailed,无法展示计划
 Feature.Build.Label.ToolPlanPresentRunning,正在展示计划
@@ -2829,6 +2833,7 @@ Feature.Build.Label.ToolSkillLoadRunning,正在加载技能
 Feature.Build.Label.ToolSkillsDone,已列出可用技能
 Feature.Build.Label.ToolSkillsFailed,无法列出可用技能
 Feature.Build.Label.ToolSkillsRunning,正在列出可用技能
+Feature.Build.Label.ToolSubscriptionRunning,正在处理你的订阅
 Feature.Build.Label.ToolTasksPlanDone,已规划任务
 Feature.Build.Label.ToolTasksPlanFailed,无法规划任务
 Feature.Build.Label.ToolTasksPlanRunning,正在规划任务
@@ -3493,6 +3498,7 @@ Feature.Chat.Label.OneToOne.ThemRepliedToYou,回复给你
 Feature.Chat.Label.OneToOne.YouRepliedToThem,你回复了
 Feature.Chat.Label.Pending,处理中
 Feature.Chat.Label.PrivacySettings,隐私设置
+Feature.Chat.Label.Reactions,回应
 Feature.Chat.Label.ReplyChatInputPlaceholder,回复{DISPLAY_NAME}
 Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,回复自己
 Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} 表示...
@@ -3500,9 +3506,11 @@ Feature.Chat.Label.ReplyingToYourself,你表示...
 Feature.Chat.Label.SearchForFriendsAndChat,搜索对话
 Feature.Chat.Label.SearchFriends,搜索好友
 Feature.Chat.Label.SearchWord,
+Feature.Chat.Label.SelectToRemove,选择以移除
 Feature.Chat.Label.Sent,已发送
 Feature.Chat.Label.SnoozePartyNotifications,将体验中的队伍通知静音：
 Feature.Chat.Label.SwipeToReplyTooltip,滑动以回复
+Feature.Chat.Label.TapToRemove,轻点以移除
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} 天
 Feature.Chat.Label.TimestampHoursAbbreviatedPlural,{num_hours} 小时
 Feature.Chat.Label.TimestampMinutesAbbreviatedPlural,{num_minutes} 分钟
@@ -3559,6 +3567,11 @@ Feature.Chat.RobloxConnectUnavailableWithUser,此用户当前无法使用 Roblox
 Feature.Chat.Text.NoFriends,你尚未添加任何好友。若要开始，请在 Roblox 上寻找并添加你的好友。
 Feature.Chat.Title.NewChat,新聊天
 Feature.Chat.Toast.Error.InvalidUserSelected,此列表中的一人或多人无法被添加
+Feature.CloudClient.Action.PlayWithoutCloudPlay,游玩但不使用 Cloud Play
+Feature.CloudClient.Description.CloudPlayOffer,Cloud Play 会使用 Roblox 的计算机运行游戏，因此游戏可能加载得更快，发生崩溃的情况也可能更少。Cloud Play 仅在你游玩此游戏期间运行。
+Feature.CloudClient.Heading.CloudPlayOffer,使用 Cloud Play 游玩
+Feature.CloudClient.Label.RobloxRealityGraphics,你的游戏，焕然一新
+Feature.CloudClient.Label.RobloxRealityPlusOnly,仅限 Plus 订阅用户
 Feature.CommunityLinks.Description.CommunityDefault,加入“{experienceName}”的官方 Guilded 社区 ，查看公告并获取更多信息！
 Feature.CommunityLinks.Heading.CommunityTitle,加入社区
 Feature.CommunityLinks.Label.ViewButton,
@@ -4480,7 +4493,7 @@ Feature.Moments.Label.PostFeedbackPostingTitle,正在发布精彩瞬间
 Feature.Moments.Label.PostRemovedBody,你发布的精彩瞬间违反了社区准则。
 Feature.Moments.Label.PostedOnDate,发布于 {date}
 Feature.Moments.Label.PublishingRodeoBody,此过程不会花太长时间。
-Feature.Moments.Label.Reactions,回应
+Feature.Moments.Label.Reactions,
 Feature.Moments.Label.ReportReason.BreaksRules,此帖子违反了规定
 Feature.Moments.Label.ReportReason.IntellectualProperty,此帖侵犯了我的知识产权
 Feature.Moments.Label.ReportSubmittedBody,感谢你的反馈。
@@ -5030,6 +5043,7 @@ Feature.PlatformRestriction.Action.Signout,
 Feature.PlatformRestriction.Content.NeedPermission,要使用 Roblox，你需要得到家长的许可。家长批准后，请注销，然后重新登录以访问 Roblox。
 Feature.PlatformRestriction.Title.AskParent,
 Feature.PlayerSearchResults.Action.AddFriend,
+Feature.PlayerSearchResults.Heading.SearchResults,搜索结果
 Feature.PlayerSearchResults.Label.FromSearch,来自搜索
 Feature.PlayerSearchResults.Label.KeywordTooShort,请输入至少三个字符
 Feature.PlayerSearchResults.Label.NewUsername,新用户名

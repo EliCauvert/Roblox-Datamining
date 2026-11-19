@@ -43,6 +43,20 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(true)
 	end, {})
+	
+	if FlagsModule.FoundationPopoverPluginSettleRenders then
+		local v1 = #UseSubmenuHoverModuleResult.openPath > 0
+		ReactModule.useEffect(function()
+			-- upvalues: WithDefaultsModuleResult (copy), v1 (copy), UseSubmenuHoverModuleResult (copy)
+			if WithDefaultsModuleResult.isOpen == false and v1 then
+				UseSubmenuHoverModuleResult.reset()
+			end
+		end, {
+			WithDefaultsModuleResult.isOpen,
+			v1,
+			UseSubmenuHoverModuleResult.reset
+		})
+	end
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseBindableModuleResult (copy), FlagsModule (upval), UseScaledValueModuleResult (copy)
 		return UseBindableModuleResult:map(function(p2)

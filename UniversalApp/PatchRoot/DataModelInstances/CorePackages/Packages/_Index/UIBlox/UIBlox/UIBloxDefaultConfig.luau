@@ -17,5 +17,6 @@
 	removeStackedNavigationTabIconLabelSpacing = false,
 	addFoundationNavigationTabIcon = false,
 	useFoundationToastButtonSizing = false,
-	addNavigationTabTooltipAndTruncation = false
+	addNavigationTabTooltipAndTruncation = false,
+	shareDerivedStyleTokens = false
 }

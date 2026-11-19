@@ -1,4 +1,5 @@
 ﻿return {
+	Christmas2026 = "Christmas2026",
 	CircuitRush = "CircuitRush",
 	Classic = "Classic",
 	CosmicDust = "CosmicDust",

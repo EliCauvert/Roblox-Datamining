@@ -2797,12 +2797,15 @@ Feature.Build.Label.ToolAssetSearchRunning,Recherche dans la bibliothèque de co
 Feature.Build.Label.ToolClientDMDone,Recherche dans le DataModel client terminée
 Feature.Build.Label.ToolClientDMFailed,Impossible de rechercher dans le DataModel client
 Feature.Build.Label.ToolClientDMRunning,Recherche dans le DataModel client en cours
+Feature.Build.Label.ToolCodeRunning,Exécution du code
 Feature.Build.Label.ToolCompileDone,Code compilé
 Feature.Build.Label.ToolCompileFailed,Impossible de compiler le code
 Feature.Build.Label.ToolCompileRunning,Compilation du code
+Feature.Build.Label.ToolDeveloperProductRunning,Création de ton produit développeur en cours
 Feature.Build.Label.ToolGameInfoDone,Informations sur le jeu mises à jour
 Feature.Build.Label.ToolGameInfoFailed,Impossible de mettre à jour les informations sur le jeu
 Feature.Build.Label.ToolGameInfoRunning,Mise à jour des informations sur le jeu
+Feature.Build.Label.ToolGamePassRunning,Création de ton passe de jeu en cours
 Feature.Build.Label.ToolGameSaveDone,Jeu sauvegardé
 Feature.Build.Label.ToolGameSaveFailed,Impossible de sauvegarder le jeu
 Feature.Build.Label.ToolGameSaveRunning,Sauvegarde du jeu
@@ -2821,6 +2824,7 @@ Feature.Build.Label.ToolLuauRunning,Exécution de Luau
 Feature.Build.Label.ToolModelDone,Modèle 3D généré
 Feature.Build.Label.ToolModelFailed,Impossible de générer le modèle 3D
 Feature.Build.Label.ToolModelRunning,Génération du modèle 3D
+Feature.Build.Label.ToolMonetizationRunning,Configuration de la monétisation de ton jeu en cours
 Feature.Build.Label.ToolPlanPresentDone,Plan présenté
 Feature.Build.Label.ToolPlanPresentFailed,Impossible de présenter le plan
 Feature.Build.Label.ToolPlanPresentRunning,Présentation du plan
@@ -2848,6 +2852,7 @@ Feature.Build.Label.ToolSkillLoadRunning,Chargement de la compétence
 Feature.Build.Label.ToolSkillsDone,Compétences disponibles listées
 Feature.Build.Label.ToolSkillsFailed,Impossible de lister les compétences disponibles
 Feature.Build.Label.ToolSkillsRunning,Génération de la liste des compétences disponibles
+Feature.Build.Label.ToolSubscriptionRunning,Création de ton abonnement
 Feature.Build.Label.ToolTasksPlanDone,Tâches planifiées
 Feature.Build.Label.ToolTasksPlanFailed,Impossible de planifier les tâches
 Feature.Build.Label.ToolTasksPlanRunning,Planification de tes tâches
@@ -3583,6 +3588,11 @@ Feature.Chat.RobloxConnectUnavailableWithUser,"Pour le moment, Roblox Connect n'
 Feature.Chat.Text.NoFriends,"Tu n'as pas encore ajouté d'amis. Commence par les chercher, puis ajoute-les sur Roblox."
 Feature.Chat.Title.NewChat,Nouveau chat
 Feature.Chat.Toast.Error.InvalidUserSelected,Une ou plusieurs personnes de cette liste ne peuvent pas être ajoutées
+Feature.CloudClient.Action.PlayWithoutCloudPlay,Jouer sans Cloud Play
+Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play exécute le jeu sur les ordinateurs de Roblox, ce qui peut accélérer le chargement et réduire les crashs. Il ne fonctionne que pendant que tu joues à cette expérience."
+Feature.CloudClient.Heading.CloudPlayOffer,Joue avec Cloud Play
+Feature.CloudClient.Label.RobloxRealityGraphics,"Ton jeu, réinventé"
+Feature.CloudClient.Label.RobloxRealityPlusOnly,Uniquement pour les abonnés Plus
 Feature.CommunityLinks.Description.CommunityDefault,Rejoins la communauté officielle Guilded {experienceName} pour voir les annonces et plus encore !
 Feature.CommunityLinks.Heading.CommunityTitle,Rejoindre la communauté
 Feature.CommunityLinks.Label.ViewButton,
