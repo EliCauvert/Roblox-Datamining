@@ -7,6 +7,7 @@
 	authModalShown = require(script.authModalShown),
 	authMsgShown = require(script.authMsgShown),
 	authPageload = require(script.authPageload),
+	pioneerAgeRestrictedActionClicked = require(script.pioneerAgeRestrictedActionClicked),
 	pioneerAgeRestrictedBlocked = require(script.pioneerAgeRestrictedBlocked),
 	pioneerAgeRestrictedInterstitialImpression = require(script.pioneerAgeRestrictedInterstitialImpression),
 	usernameSuggestionShown = require(script.usernameSuggestionShown),

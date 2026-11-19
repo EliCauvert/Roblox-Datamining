@@ -20,6 +20,16 @@ local config = {
 	end
 }
 local config1 = {
+	[ThemeNameModule.Christmas2026] = {
+		Dark = function()
+			-- upvalues: Foundation (copy)
+			return require(Foundation.Generated.StyleRules.Christmas2026.DarkAttribute)
+		end,
+		Light = function()
+			-- upvalues: Foundation (copy)
+			return require(Foundation.Generated.StyleRules.Christmas2026.LightAttribute)
+		end
+	},
 	[ThemeNameModule.CircuitRush] = {
 		Dark = function()
 			-- upvalues: Foundation (copy)

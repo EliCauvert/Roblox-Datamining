@@ -1,22 +1,39 @@
-﻿local _ = require(script:FindFirstAncestor("CloudClientOffer").createCloudClientOffer)
+﻿local CloudClientOffer = script:FindFirstAncestor("CloudClientOffer")
+local _ = require(CloudClientOffer.createCloudClientOffer)
+local FStringLuaAppCloudClientRobloxRealityNameModule = require(CloudClientOffer.Flags.FStringLuaAppCloudClientRobloxRealityName)
 
 return {
 	RobloxReality = {
-		title = "Try Roblox Reality",
-		body = "Roblox Reality gives your favorite games a fresh look. Try an early preview, then tell us what you think.",
-		accept = "Play",
-		decline = "Play without Roblox Reality",
+		title = {
+			"Feature.CloudClient.Heading.RobloxRealityOffer",
+			productName = FStringLuaAppCloudClientRobloxRealityNameModule
+		},
+		body = {
+			"Feature.CloudClient.Description.RobloxRealityOffer",
+			productName = FStringLuaAppCloudClientRobloxRealityNameModule
+		},
 		features = {
-			"15 minute demo",
-			"Graphics that look like real life",
-			"Only for Plus subscribers"
+			{
+				"Feature.CloudClient.Label.RobloxRealityDemoLength",
+				minutes = require(CloudClientOffer.Flags.FIntLuaAppCloudClientRobloxRealityDemoMinutes)
+			},
+			"Feature.CloudClient.Label.RobloxRealityGraphics",
+			"Feature.CloudClient.Label.RobloxRealityPlusOnly"
+		},
+		accept = {
+			"Feature.CloudClient.Action.TryRobloxReality",
+			productName = FStringLuaAppCloudClientRobloxRealityNameModule
+		},
+		decline = {
+			"Feature.CloudClient.Action.PlayWithoutRobloxReality",
+			productName = FStringLuaAppCloudClientRobloxRealityNameModule
 		}
 	},
 	CloudPlay = {
-		title = "Play with Cloud Play",
-		body = "Cloud Play runs the game on Roblox's computers, so it may load faster and have fewer crashes. It only lasts while you're playing this game.",
-		accept = "Play",
-		decline = "Play without Cloud Play",
+		title = "Feature.CloudClient.Heading.CloudPlayOffer",
+		body = "Feature.CloudClient.Description.CloudPlayOffer",
+		accept = "Feature.ExperienceDetails.PlayButtonText.Play",
+		decline = "Feature.CloudClient.Action.PlayWithoutCloudPlay",
 		features = {}
 	}
 }

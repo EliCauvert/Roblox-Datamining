@@ -236,10 +236,7 @@ local function Dialog(p1)
 				["anchor-center-center size-full"] = not ReducedMotion,
 				["size-full"] = ReducedMotion
 			},
-			GroupTransparency = if FlagsModule.FoundationDialogOverlayShadow then if ReducedMotion or not UseAnimatedBindingResult1 then nil else UseAnimatedBindingResult1:map(function(p2)
-				-- upvalues: Size800 (copy)
-				return p2 / Size800
-			end) elseif ReducedMotion or not UseStateResult or not UseAnimatedBindingResult1 then nil else UseAnimatedBindingResult1:map(function(p2)
+			GroupTransparency = if ReducedMotion or not UseStateResult then nil else UseAnimatedBindingResult1:map(function(p2)
 				-- upvalues: Size800 (copy)
 				return p2 / Size800
 			end)

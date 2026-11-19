@@ -1,10 +1,10 @@
 ﻿local Foundation = script:FindFirstAncestor("Foundation")
 local ReactModule = require(Foundation.Parent.React)
 local FlagsModule = require(Foundation.Utility.Flags)
-local SizeAnchorModule = require(Foundation.Components.Slider.SizeAnchor)
+local SizeAnchorModule = require(script.Parent.SizeAnchor)
 local ViewModule = require(Foundation.Components.View)
-local CalculateSliderValueFractionModule = require(Foundation.Components.Slider.calculateSliderValueFraction)
-local _ = require(Foundation.Components.Slider.useSliderVariants)
+local CalculateSliderValueFractionModule = require(script.Parent.calculateSliderValueFraction)
+local _ = require(script.Parent.useSliderVariants)
 local _ = require(script.Parent.useSliderThumbs)
 
 return function(p1)

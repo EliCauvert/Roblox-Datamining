@@ -70,10 +70,12 @@ local function buildTokens(Callback, ScaledClampedValue, p2)
 	end
 end
 
-local function getTokens(p2, p3, p4, p5, p6)
-	-- upvalues: DeviceModule (copy), FlagsModule (copy), ThemeGeneratorsModule (copy), ThemeNameModule (copy), buildTokens (copy)
-	local P6 = p3 or DeviceModule.Desktop
-	local Value: number = p4
+local t = {}
+
+local function getTokens(Dark, Desktop, p2, p3, p4)
+	-- upvalues: DeviceModule (copy), FlagsModule (copy), ThemeNameModule (copy), t (copy), buildTokens (copy), ThemeGeneratorsModule (copy)
+	local Desktop1 = Desktop or DeviceModule.Desktop
+	local Value: number = p2
 	local ScaledClampedValue = nil
 	
 	if FlagsModule.FoundationDisableTokenScaling then
@@ -82,25 +84,23 @@ local function getTokens(p2, p3, p4, p5, p6)
 		if Value == nil then
 			Value = 1
 		end
-		ScaledClampedValue = (if P6 == DeviceModule.Console then 1.5 else 1) * math.clamp(Value, 0, 1e999)
+		ScaledClampedValue = (if Desktop1 == DeviceModule.Console then 1.5 else 1) * math.clamp(Value, 0, 1e999)
 	end
-	return (buildTokens(ThemeGeneratorsModule.getGenerator(p6 or ThemeNameModule.Default, p2), ScaledClampedValue, p5))
+	if not FlagsModule.FoundationShareTokenSets or p3 ~= nil then
+		return (buildTokens(ThemeGeneratorsModule.getGenerator(p4 or ThemeNameModule.Default, Dark), ScaledClampedValue, p3))
+	end
+	local P9 = p4 or ThemeNameModule.Default
+	local Text: string = `{P9}|{Dark}|{ScaledClampedValue}`
+	local Entry = t[Text]
+	
+	if Entry == nil then
+		Entry = buildTokens(ThemeGeneratorsModule.getGenerator(P9, Dark), ScaledClampedValue, nil)
+		t[Text] = Entry
+	end
+	return Entry
 end
 
-local Dark = ColorModeModule.Dark
-local Desktop = DeviceModule.Desktop or DeviceModule.Desktop
-local Value: number? = nil
-local ScaledClampedValue = nil
-
-if FlagsModule.FoundationDisableTokenScaling then
-	ScaledClampedValue = 1
-else
-	if Value == nil then
-		Value = 1
-	end
-	ScaledClampedValue = (if Desktop == DeviceModule.Console then 1.5 else 1) * math.clamp(Value, 0, 1e999)
-end
 return {
 	getTokens = getTokens,
-	defaultTokens = buildTokens(ThemeGeneratorsModule.getGenerator(ThemeNameModule.Default, Dark), ScaledClampedValue, nil)
+	defaultTokens = getTokens(ColorModeModule.Dark, DeviceModule.Desktop)
 }

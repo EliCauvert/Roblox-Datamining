@@ -8,6 +8,7 @@ local UseThrottledCallbackFunction = require(Parent.RoactUtils).Hooks.useThrottl
 local _ = require(SocialCarousel.Common.Enums)
 local SocialCarouselContextModule = require(SocialCarousel.Contexts.SocialCarouselContext)
 local UseSocialCarouselListModule = require(SocialCarousel.Hooks.useSocialCarouselList)
+local UseFriendRequestPresencePollingModule = require(SocialCarousel.Hooks.useFriendRequestPresencePolling)
 local UseSocialCarouselUnifiedLoggingModule = require(SocialCarousel.Analytics.useSocialCarouselUnifiedLogging)
 local UseSocialCarouselAnalyticsModule = require(SocialCarousel.Analytics.useSocialCarouselAnalytics)
 local UseSocialCarouselLoadTimerModule = require(SocialCarousel.Analytics.useSocialCarouselLoadTimer)
@@ -17,15 +18,21 @@ local FFlagSocialCarouselShareQREnabled = require(Parent.SharedFlags).FFlagSocia
 local FFlagMobileGameJoinCardVideo = require(Parent.SharedFlags).FFlagMobileGameJoinCardVideo
 local FFlagSocialCarouselBuildPresence = require(Parent.SharedFlags).FFlagSocialCarouselBuildPresence
 local FFlagSocialCarouselInGameTitleMarquee = require(Parent.SharedFlags).FFlagSocialCarouselInGameTitleMarquee
+local FFlagShowRequestsInCarouselForAllUsers = require(Parent.SharedFlags).FFlagShowRequestsInCarouselForAllUsers
 local CarouselModule = require(SocialCarousel.Components.Carousel)
 
 return function(p1)
-	-- upvalues: UseRoactServiceFunction (copy), RoactAnalytics (copy), AppEventIngestService (copy), UseSocialCarouselAnalyticsModule (copy), UseSocialCarouselLoadTimerModule (copy), ReactModule (copy), UseSocialCarouselListModule (copy), FFlagSocialCarouselBuildPresence (copy), FFlagSocialCarouselInGameTitleMarquee (copy), UseSocialCarouselUnifiedLoggingModule (copy), UseThrottledCallbackFunction (copy), FriendCarouselRefreshThrottleInterval (copy), SocialCarouselContextModule (copy), FFlagSocialCarouselShareQREnabled (copy), FFlagMobileGameJoinCardVideo (copy), CarouselModule (copy)
+	-- upvalues: UseRoactServiceFunction (copy), RoactAnalytics (copy), AppEventIngestService (copy), UseSocialCarouselAnalyticsModule (copy), UseSocialCarouselLoadTimerModule (copy), ReactModule (copy), UseSocialCarouselListModule (copy), FFlagShowRequestsInCarouselForAllUsers (copy), UseFriendRequestPresencePollingModule (copy), FFlagSocialCarouselBuildPresence (copy), FFlagSocialCarouselInGameTitleMarquee (copy), UseSocialCarouselUnifiedLoggingModule (copy), UseThrottledCallbackFunction (copy), FriendCarouselRefreshThrottleInterval (copy), SocialCarouselContextModule (copy), FFlagSocialCarouselShareQREnabled (copy), FFlagMobileGameJoinCardVideo (copy), CarouselModule (copy)
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactAnalytics)
 	local UseRoactServiceResult1 = UseRoactServiceFunction(AppEventIngestService)
 	local UseSocialCarouselLoadTimerModuleResult = UseSocialCarouselLoadTimerModule(UseSocialCarouselAnalyticsModule().reportLoadingEvent)
 	local UseRefResult = ReactModule.useRef(os.clock())
 	local UseSocialCarouselListModuleResult = UseSocialCarouselListModule(p1.roduxKey, p1.customTileList)
+	local UseRefResult1 = if FFlagShowRequestsInCarouselForAllUsers then ReactModule.useRef(nil) else nil
+	
+	if FFlagShowRequestsInCarouselForAllUsers then
+		UseFriendRequestPresencePollingModule(UseSocialCarouselListModuleResult.friendRequests or {}, p1.refreshSignal, if p1.unifiedLogging then p1.unifiedLogging.scrollViewPositionChangedSignal else nil, UseRefResult1)
+	end
 	local UseStateResult2 = nil
 	local UseStateResult
 	UseStateResult, UseStateResult2 = ReactModule.useState(nil)
@@ -33,14 +40,14 @@ return function(p1)
 	local v2 = nil
 	
 	if FFlagSocialCarouselBuildPresence then
-		v1, v27 = ReactModule.useState(nil)
+		v1, v30 = ReactModule.useState(nil)
 	end
-	local UseRefResult1 = ReactModule.useRef(nil)
-	local UseRefResult2 = if FFlagSocialCarouselInGameTitleMarquee then ReactModule.useRef(nil) else nil
+	local UseRefResult2 = ReactModule.useRef(nil)
+	local UseRefResult3 = if FFlagSocialCarouselInGameTitleMarquee then ReactModule.useRef(nil) else nil
 	local UseResult = ReactModule.useCallback(function(Callback)
-		-- upvalues: UseRefResult1 (copy), UseStateResult2 (ref)
-		local CallbackResult = if typeof(Callback) == "function" then Callback(UseRefResult1.current) else Callback
-		UseRefResult1.current = CallbackResult
+		-- upvalues: UseRefResult2 (copy), UseStateResult2 (ref)
+		local CallbackResult = if typeof(Callback) == "function" then Callback(UseRefResult2.current) else Callback
+		UseRefResult2.current = CallbackResult
 		UseStateResult2(CallbackResult)
 	end, { UseStateResult2 })
 	local UseSocialCarouselUnifiedLoggingModuleResult = UseSocialCarouselUnifiedLoggingModule(UseRoactServiceResult, UseRoactServiceResult1, p1.unifiedLogging, UseSocialCarouselListModuleResult, UseRefResult)
@@ -63,8 +70,8 @@ return function(p1)
 			appAnalytics = UseRoactServiceResult,
 			hideCarouselHeader = p1.hideCarouselHeader,
 			openGameJoinCardUserId = UseStateResult,
-			joinPopoverUserIdRef = if FFlagSocialCarouselInGameTitleMarquee then UseRefResult1 else nil,
-			joinSheetUserIdRef = if FFlagSocialCarouselInGameTitleMarquee then UseRefResult2 else nil,
+			joinPopoverUserIdRef = if FFlagSocialCarouselInGameTitleMarquee then UseRefResult2 else nil,
+			joinSheetUserIdRef = if FFlagSocialCarouselInGameTitleMarquee then UseRefResult3 else nil,
 			setOpenGameJoinCardUserId = if FFlagSocialCarouselInGameTitleMarquee then UseResult else UseStateResult2,
 			openBuildCardUserId = if FFlagSocialCarouselBuildPresence then v1 else nil,
 			setOpenBuildCardUserId = if FFlagSocialCarouselBuildPresence then v2 else nil,
@@ -83,6 +90,9 @@ return function(p1)
 			videoPlaybackContext = if FFlagMobileGameJoinCardVideo then p1.videoPlaybackContext else nil
 		}
 	}, {
-		Carousel = ReactModule.createElement(CarouselModule, { appCompositionEnabled = p1.appCompositionEnabled })
+		Carousel = ReactModule.createElement(CarouselModule, {
+			appCompositionEnabled = p1.appCompositionEnabled,
+			carouselFrameRef = if FFlagShowRequestsInCarouselForAllUsers then UseRefResult1 else nil
+		})
 	})
 end

@@ -3,8 +3,8 @@ local ReactModule = require(Foundation.Parent.React)
 local InputModeModule = require(Foundation.Utility.Input.InputMode)
 local GetInputModeModule = require(Foundation.Utility.Input.getInputMode)
 local UserInputService = require(Foundation.Utility.Wrappers.Services).UserInputService
-local CalculateSliderFractionModule = require(Foundation.Components.Slider.calculateSliderFraction)
-local GetGuiInputPositionModule = require(Foundation.Components.Slider.getGuiInputPosition)
+local CalculateSliderFractionModule = require(script.Parent.calculateSliderFraction)
+local GetGuiInputPositionModule = require(script.Parent.getGuiInputPosition)
 local _ = require(script.Parent.useSliderThumbs)
 
 local function getNearestThumbIndex(p1, Entry): number

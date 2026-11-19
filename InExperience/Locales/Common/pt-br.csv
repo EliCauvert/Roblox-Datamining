@@ -2514,12 +2514,15 @@ Feature.Build.Label.ToolAssetSearchRunning,Pesquisando na biblioteca de ativos
 Feature.Build.Label.ToolClientDMDone,Pesquisa no DataModel do cliente concluída
 Feature.Build.Label.ToolClientDMFailed,Não foi possível realizar a pesquisa no DataModel do cliente
 Feature.Build.Label.ToolClientDMRunning,Pesquisando no DataModel do cliente
+Feature.Build.Label.ToolCodeRunning,Executando código
 Feature.Build.Label.ToolCompileDone,Código compilado
 Feature.Build.Label.ToolCompileFailed,Não foi possível compilar o código
 Feature.Build.Label.ToolCompileRunning,Compilando o código
+Feature.Build.Label.ToolDeveloperProductRunning,Trabalhando no seu produto de desenvolvedor
 Feature.Build.Label.ToolGameInfoDone,Informações do jogo atualizadas
 Feature.Build.Label.ToolGameInfoFailed,Não foi possível atualizar as informações do jogo
 Feature.Build.Label.ToolGameInfoRunning,Atualizando as informações do jogo
+Feature.Build.Label.ToolGamePassRunning,Trabalhando no seu passe de jogo
 Feature.Build.Label.ToolGameSaveDone,Jogo salvo
 Feature.Build.Label.ToolGameSaveFailed,Não foi possível salvar o jogo
 Feature.Build.Label.ToolGameSaveRunning,Salvando o jogo
@@ -2538,6 +2541,7 @@ Feature.Build.Label.ToolLuauRunning,Executando o Luau
 Feature.Build.Label.ToolModelDone,Modelo 3D gerado
 Feature.Build.Label.ToolModelFailed,Não foi possível gerar o modelo 3D
 Feature.Build.Label.ToolModelRunning,Gerando o modelo 3D
+Feature.Build.Label.ToolMonetizationRunning,Trabalhando na monetização do seu jogo
 Feature.Build.Label.ToolPlanPresentDone,Plano apresentado
 Feature.Build.Label.ToolPlanPresentFailed,Não foi possível apresentar o plano
 Feature.Build.Label.ToolPlanPresentRunning,Apresentando o plano
@@ -2565,6 +2569,7 @@ Feature.Build.Label.ToolSkillLoadRunning,Carregando a habilidade
 Feature.Build.Label.ToolSkillsDone,Habilidades disponíveis listadas
 Feature.Build.Label.ToolSkillsFailed,Não foi possível listar as habilidades disponíveis
 Feature.Build.Label.ToolSkillsRunning,Listando as habilidades disponíveis
+Feature.Build.Label.ToolSubscriptionRunning,Trabalhando na sua assinatura
 Feature.Build.Label.ToolTasksPlanDone,Tarefas planejadas
 Feature.Build.Label.ToolTasksPlanFailed,Não foi possível planejar as tarefas
 Feature.Build.Label.ToolTasksPlanRunning,Planejando suas tarefas
@@ -3286,14 +3291,17 @@ Feature.Chat.Label.OneToOne.ThemRepliedToYou,Respondeu a você
 Feature.Chat.Label.OneToOne.YouRepliedToThem,Você respondeu
 Feature.Chat.Label.Pending,
 Feature.Chat.Label.PrivacySettings,Configurações de privacidade
+Feature.Chat.Label.Reactions,Reações
 Feature.Chat.Label.ReplyChatInputPlaceholder,Responder a {DISPLAY_NAME}
 Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,Responder a si
 Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} disse...
 Feature.Chat.Label.ReplyingToYourself,Você disse...
 Feature.Chat.Label.SearchFriends,Procurar amigos
 Feature.Chat.Label.SearchWord,
+Feature.Chat.Label.SelectToRemove,Selecione para remover
 Feature.Chat.Label.SnoozePartyNotifications,Silenciar notificações da Turma na experiência para:
 Feature.Chat.Label.SwipeToReplyTooltip,Deslize para responder
+Feature.Chat.Label.TapToRemove,Toque para remover
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} dias
 Feature.Chat.Label.TimestampHoursAbbreviatedPlural,{num_hours}h
 Feature.Chat.Label.TimestampMinutesAbbreviatedPlural,{num_minutes}min
@@ -3349,6 +3357,11 @@ Feature.Chat.Text.NoFriends,"Você ainda não adicionou nenhum amigo. Para come�
 Feature.Chat.Title.FriendsChat,Chat de amizades
 Feature.Chat.Title.NewChat,Novo chat
 Feature.Chat.Toast.Error.InvalidUserSelected,Uma ou mais pessoas nesta lista não podem ser adicionadas
+Feature.CloudClient.Action.PlayWithoutCloudPlay,Jogar sem o Cloud Play
+Feature.CloudClient.Description.CloudPlayOffer,O Cloud Play executa o jogo nos computadores da Roblox para ele carregar mais rápido e ter menos travamentos. Ele só funciona enquanto você estiver jogando este jogo.
+Feature.CloudClient.Heading.CloudPlayOffer,Jogar com o Cloud Play
+Feature.CloudClient.Label.RobloxRealityGraphics,Seu jogo repaginado
+Feature.CloudClient.Label.RobloxRealityPlusOnly,Apenas para assinantes do Plus
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,Ajude suas amizades a encontrarem você
 Feature.Contacts.Action.Invite,Convidar
@@ -4076,7 +4089,7 @@ Feature.Moments.Label.PostFeedbackPostingTitle,Publicando Momento
 Feature.Moments.Label.PostRemovedBody,O Momento que você publicou vai contra as Regras da Comunidade.
 Feature.Moments.Label.PostedOnDate,Publicado em {date}
 Feature.Moments.Label.PublishingRodeoBody,Isso não deve demorar muito.
-Feature.Moments.Label.Reactions,Reações
+Feature.Moments.Label.Reactions,
 Feature.Moments.Label.ReportReason.BreaksRules,Esta publicação quebra as regras
 Feature.Moments.Label.ReportReason.IntellectualProperty,Esta publicação viola minha propriedade intelectual
 Feature.Moments.Label.ReportSubmittedBody,Agradecemos por seu feedback.
@@ -4236,6 +4249,7 @@ Feature.Parents.Message.TooManyAttempts,
 Feature.Parents.Title.EnterParentEmailV2,Insira o e-mail do responsável
 Feature.Parents.Title.SomethingWentWrong,
 Feature.PlayerSearchResults.Action.AddFriend,
+Feature.PlayerSearchResults.Heading.SearchResults,Resultados da pesquisa
 Feature.PlayerSearchResults.Label.FromSearch,Da busca
 Feature.PlayerSearchResults.Label.NewUsername,Novo nome de usuário
 Feature.PlayerSearchResults.Label.Previously,Anteriormente
@@ -4624,8 +4638,8 @@ Feature.SettingsHub.Label.InviteSearchNoResults,
 Feature.SettingsHub.Label.Invited,Convidado
 Feature.SettingsHub.Label.LeaveButton,
 Feature.SettingsHub.Label.LoadingFriendsListFailed,"Ocorreu um erro, tente novamente mais tarde."
-Feature.SettingsHub.Label.LogoutButton,Encerrar a sessão
-Feature.SettingsHub.Label.LogoutConfirmation,Quer mesmo encerrar a sessão?
+Feature.SettingsHub.Label.LogoutButton,
+Feature.SettingsHub.Label.LogoutConfirmation,
 Feature.SettingsHub.Label.MethodOfAbuse,Tipo de abuso?
 Feature.SettingsHub.Label.Moderated,
 Feature.SettingsHub.Label.ModeratedInviteError,O convite da experiência foi moderado e não foi enviado.

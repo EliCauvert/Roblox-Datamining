@@ -2513,12 +2513,15 @@ Feature.Build.Label.ToolAssetSearchRunning,正在搜尋素材庫
 Feature.Build.Label.ToolClientDMDone,已搜尋用戶端 DataModel
 Feature.Build.Label.ToolClientDMFailed,無法搜尋用戶端 DataModel
 Feature.Build.Label.ToolClientDMRunning,正在搜尋用戶端 DataModel
+Feature.Build.Label.ToolCodeRunning,正在執行程式碼
 Feature.Build.Label.ToolCompileDone,已編譯程式碼
 Feature.Build.Label.ToolCompileFailed,無法編譯程式碼
 Feature.Build.Label.ToolCompileRunning,正在編譯程式碼
+Feature.Build.Label.ToolDeveloperProductRunning,正在處理你的開發者產品
 Feature.Build.Label.ToolGameInfoDone,已更新遊戲資訊
 Feature.Build.Label.ToolGameInfoFailed,無法更新遊戲資訊
 Feature.Build.Label.ToolGameInfoRunning,正在更新遊戲資訊
+Feature.Build.Label.ToolGamePassRunning,正在處理你的遊戲通行證
 Feature.Build.Label.ToolGameSaveDone,已儲存遊戲
 Feature.Build.Label.ToolGameSaveFailed,無法儲存遊戲
 Feature.Build.Label.ToolGameSaveRunning,正在儲存遊戲
@@ -2537,6 +2540,7 @@ Feature.Build.Label.ToolLuauRunning,正在執行 Luau
 Feature.Build.Label.ToolModelDone,已生成的 3D 模型
 Feature.Build.Label.ToolModelFailed,無法生成 3D 模型
 Feature.Build.Label.ToolModelRunning,正在生成 3D 模型
+Feature.Build.Label.ToolMonetizationRunning,正在處理你的遊戲變現方法
 Feature.Build.Label.ToolPlanPresentDone,已呈現方案
 Feature.Build.Label.ToolPlanPresentFailed,無法呈現方案
 Feature.Build.Label.ToolPlanPresentRunning,正在呈現方案
@@ -2564,6 +2568,7 @@ Feature.Build.Label.ToolSkillLoadRunning,正在載入技能
 Feature.Build.Label.ToolSkillsDone,已列出可用技能
 Feature.Build.Label.ToolSkillsFailed,無法列出可用技能
 Feature.Build.Label.ToolSkillsRunning,正在列出可用技能
+Feature.Build.Label.ToolSubscriptionRunning,正在處理你的訂閱項目
 Feature.Build.Label.ToolTasksPlanDone,已規劃的任務
 Feature.Build.Label.ToolTasksPlanFailed,無法規劃任務
 Feature.Build.Label.ToolTasksPlanRunning,正在規劃你的任務
@@ -3285,14 +3290,17 @@ Feature.Chat.Label.OneToOne.ThemRepliedToYou,回覆您
 Feature.Chat.Label.OneToOne.YouRepliedToThem,您已回覆
 Feature.Chat.Label.Pending,資格未定
 Feature.Chat.Label.PrivacySettings,隱私設定
+Feature.Chat.Label.Reactions,回應
 Feature.Chat.Label.ReplyChatInputPlaceholder,回覆 {DISPLAY_NAME}
 Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,回覆給自己
 Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} 說...
 Feature.Chat.Label.ReplyingToYourself,你說…
 Feature.Chat.Label.SearchFriends,搜尋好友
 Feature.Chat.Label.SearchWord,
+Feature.Chat.Label.SelectToRemove,選擇以移除
 Feature.Chat.Label.SnoozePartyNotifications,將體驗內的隊伍通知靜音：
 Feature.Chat.Label.SwipeToReplyTooltip,滑動以回覆
+Feature.Chat.Label.TapToRemove,輕觸即可移除
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} 天
 Feature.Chat.Label.TimestampHoursAbbreviatedPlural,{num_hours} 小時
 Feature.Chat.Label.TimestampMinutesAbbreviatedPlural,{num_minutes} 分
@@ -3348,6 +3356,11 @@ Feature.Chat.Text.NoFriends,你尚未新增任何好友。若要開始，請在 
 Feature.Chat.Title.FriendsChat,好友聊天
 Feature.Chat.Title.NewChat,新聊天
 Feature.Chat.Toast.Error.InvalidUserSelected,此清單中有人員無法新增
+Feature.CloudClient.Action.PlayWithoutCloudPlay,不使用 Cloud Play 遊玩
+Feature.CloudClient.Description.CloudPlayOffer,Cloud Play 會在 Roblox 的電腦上執行遊戲，因此載入速度可能會更快，而且當機次數也可能變少。這只會在你玩此遊戲時有效。
+Feature.CloudClient.Heading.CloudPlayOffer,使用 Cloud Play 遊玩
+Feature.CloudClient.Label.RobloxRealityGraphics,你的遊戲，煥然一新
+Feature.CloudClient.Label.RobloxRealityPlusOnly,僅限 Plus 訂閱者使用
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,讓好友找到您
 Feature.Contacts.Action.Invite,邀請
@@ -3727,7 +3740,7 @@ Feature.GamepadDisconnect.Label.Message,"用戶控制器 ""%s"" 已斷線,請按
 Feature.GamepadDisconnect.Label.MessageGeneric,使用者「%s」的控制器已斷線。請重新連線控制器。
 Feature.GamepadDisconnect.Label.Title,缺少控制器
 Feature.Groups.Action.Cancel,
-Feature.Groups.Action.CancelRequest,取消請求
+Feature.Groups.Action.CancelRequest,取消申請
 Feature.Groups.Action.Close,
 Feature.Groups.Action.Continue,
 Feature.Groups.Action.CreateGroup,建立社群
@@ -4234,6 +4247,7 @@ Feature.Parents.Message.TooManyAttempts,
 Feature.Parents.Title.EnterParentEmailV2,輸入家長的電子郵件地址
 Feature.Parents.Title.SomethingWentWrong,
 Feature.PlayerSearchResults.Action.AddFriend,
+Feature.PlayerSearchResults.Heading.SearchResults,搜尋結果
 Feature.PlayerSearchResults.Label.FromSearch,透過搜尋
 Feature.PlayerSearchResults.Label.NewUsername,新使用者名稱
 Feature.PlayerSearchResults.Label.Previously,之前為

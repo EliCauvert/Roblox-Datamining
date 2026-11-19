@@ -6,6 +6,9 @@ return {
 	NominalSideSheetWidth = 320,
 	MinMenuWidthBesideSideSheet = 200,
 	SideSheetDisplayOrder = ConstantsModule.SideSheetDisplayOrder,
+	WindowBesideSideSheetDisplayOrder = ConstantsModule.WindowBesideSideSheetDisplayOrder,
+	PurchasePromptDisplayOrder = ConstantsModule.PurchasePromptDisplayOrder,
+	PurchasePromptTooltipDisplayOrder = ConstantsModule.PurchasePromptTooltipDisplayOrder,
 	IntegrationIds = ConstantsModule.IntegrationIds,
 	LocalizationKeys = {
 		QuitButton = "Feature.SettingsHub.Label.QuitButton",

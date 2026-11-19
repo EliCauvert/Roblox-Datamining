@@ -2514,12 +2514,15 @@ Feature.Build.Label.ToolAssetSearchRunning,Đang tìm kiếm trong thư viện t
 Feature.Build.Label.ToolClientDMDone,Đã tìm kiếm DataModel của máy khách
 Feature.Build.Label.ToolClientDMFailed,Không tìm được DataModel của máy khách
 Feature.Build.Label.ToolClientDMRunning,Đang tìm kiếm DataModel của máy khách
+Feature.Build.Label.ToolCodeRunning,Đang chạy mã
 Feature.Build.Label.ToolCompileDone,Đã biên dịch mã
 Feature.Build.Label.ToolCompileFailed,Không thể biên dịch mã
 Feature.Build.Label.ToolCompileRunning,Đang biên dịch mã
+Feature.Build.Label.ToolDeveloperProductRunning,Đang xử lý sản phẩm dành cho nhà phát triển của bạn
 Feature.Build.Label.ToolGameInfoDone,Đã cập nhật thông tin trò chơi
 Feature.Build.Label.ToolGameInfoFailed,Không thể cập nhật thông tin trò chơi
 Feature.Build.Label.ToolGameInfoRunning,Đang cập nhật thông tin trò chơi
+Feature.Build.Label.ToolGamePassRunning,Đang xử lý vé trò chơi của bạn
 Feature.Build.Label.ToolGameSaveDone,Đã lưu trò chơi
 Feature.Build.Label.ToolGameSaveFailed,Không thể lưu trò chơi
 Feature.Build.Label.ToolGameSaveRunning,Đang lưu trò chơi
@@ -2538,6 +2541,7 @@ Feature.Build.Label.ToolLuauRunning,Đang chạy mã Luau
 Feature.Build.Label.ToolModelDone,Đã tạo mô hình 3D
 Feature.Build.Label.ToolModelFailed,Không thể tạo mô hình 3D
 Feature.Build.Label.ToolModelRunning,Đang tạo mô hình 3D
+Feature.Build.Label.ToolMonetizationRunning,Đang xử lý phương thức kiếm tiền từ trò chơi của bạn
 Feature.Build.Label.ToolPlanPresentDone,Đã trình bày kế hoạch
 Feature.Build.Label.ToolPlanPresentFailed,Không thể trình bày kế hoạch
 Feature.Build.Label.ToolPlanPresentRunning,Đang trình bày kế hoạch
@@ -2565,6 +2569,7 @@ Feature.Build.Label.ToolSkillLoadRunning,Đang tải kỹ năng
 Feature.Build.Label.ToolSkillsDone,Đã liệt kê các kỹ năng hiện có
 Feature.Build.Label.ToolSkillsFailed,Không thể liệt kê các kỹ năng hiện có
 Feature.Build.Label.ToolSkillsRunning,Đang liệt kê các kỹ năng hiện có
+Feature.Build.Label.ToolSubscriptionRunning,Đang xử lý gói đăng ký của bạn
 Feature.Build.Label.ToolTasksPlanDone,Đã lên kế hoạch cho tác vụ
 Feature.Build.Label.ToolTasksPlanFailed,Không thể lên kế hoạch cho tác vụ
 Feature.Build.Label.ToolTasksPlanRunning,Đang lên kế hoạch cho tác vụ
@@ -3286,14 +3291,17 @@ Feature.Chat.Label.OneToOne.ThemRepliedToYou,Đã trả lời bạn
 Feature.Chat.Label.OneToOne.YouRepliedToThem,Bạn đã trả lời
 Feature.Chat.Label.Pending,
 Feature.Chat.Label.PrivacySettings,Cài Đặt Quyền Riêng Tư
+Feature.Chat.Label.Reactions,Bày tỏ cảm xúc
 Feature.Chat.Label.ReplyChatInputPlaceholder,Trả lời {DISPLAY_NAME}
 Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,Trả lời chính mình
 Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} nói...
 Feature.Chat.Label.ReplyingToYourself,Bạn đã nói...
 Feature.Chat.Label.SearchFriends,Tìm kiếm bạn bè
 Feature.Chat.Label.SearchWord,
+Feature.Chat.Label.SelectToRemove,Chọn để xóa
 Feature.Chat.Label.SnoozePartyNotifications,Tắt thông báo tổ đội trong trải nghiệm đối với:
 Feature.Chat.Label.SwipeToReplyTooltip,Vuốt để trả lời
+Feature.Chat.Label.TapToRemove,Nhấn để xóa
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}ng
 Feature.Chat.Label.TimestampHoursAbbreviatedPlural,{num_hours}g
 Feature.Chat.Label.TimestampMinutesAbbreviatedPlural,{num_minutes}ph
@@ -3349,6 +3357,11 @@ Feature.Chat.Text.NoFriends,"Bạn chưa thêm bất kỳ người bạn nào. �
 Feature.Chat.Title.FriendsChat,Trò chuyện cùng bạn bè
 Feature.Chat.Title.NewChat,Cuộc trò chuyện mới
 Feature.Chat.Toast.Error.InvalidUserSelected,Không thể thêm một hoặc nhiều người vào danh sách này
+Feature.CloudClient.Action.PlayWithoutCloudPlay,Chơi mà không dùng Cloud Play
+Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play chạy trò chơi bằng các máy tính của Roblox, do đó trò chơi có thể tải nhanh hơn và ít bị sập hơn. Tính năng này chỉ hoạt động khi bạn đang chơi trò chơi này."
+Feature.CloudClient.Heading.CloudPlayOffer,Chơi với Cloud Play
+Feature.CloudClient.Label.RobloxRealityGraphics,"Trò chơi của bạn, khoác diện mạo mới"
+Feature.CloudClient.Label.RobloxRealityPlusOnly,Chỉ dành cho người đăng ký Plus
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,Hãy Để Bạn Bè Tìm Thấy Bạn
 Feature.Contacts.Action.Invite,Mời
@@ -3728,7 +3741,7 @@ Feature.GamepadDisconnect.Label.Message,"Bộ điều khiển cho người dùng
 Feature.GamepadDisconnect.Label.MessageGeneric,"Bộ điều khiển điều khiển cho người dùng ""%s"" đã bị ngắt kết nối. Vui lòng kết nối lại bộ điều khiển điều khiển của bạn."
 Feature.GamepadDisconnect.Label.Title,Thiếu bộ điều khiển
 Feature.Groups.Action.Cancel,
-Feature.Groups.Action.CancelRequest,Hủy bỏ yêu cầu
+Feature.Groups.Action.CancelRequest,Hủy yêu cầu
 Feature.Groups.Action.Close,
 Feature.Groups.Action.Continue,
 Feature.Groups.Action.CreateGroup,Tạo Cộng Đồng
@@ -4235,6 +4248,7 @@ Feature.Parents.Message.TooManyAttempts,Bạn đã thử quá nhiều lần. Vui
 Feature.Parents.Title.EnterParentEmailV2,Nhập email của phụ huynh
 Feature.Parents.Title.SomethingWentWrong,
 Feature.PlayerSearchResults.Action.AddFriend,
+Feature.PlayerSearchResults.Heading.SearchResults,Kết quả tìm kiếm
 Feature.PlayerSearchResults.Label.FromSearch,Từ phần Tìm kiếm
 Feature.PlayerSearchResults.Label.NewUsername,Tên tài khoản mới
 Feature.PlayerSearchResults.Label.Previously,Tên Cũ
@@ -4626,7 +4640,7 @@ Feature.SettingsHub.Label.Invited,Đã Mời
 Feature.SettingsHub.Label.LeaveButton,
 Feature.SettingsHub.Label.LoadingFriendsListFailed,"Đã xảy ra lỗi, vui lòng thử lại sau."
 Feature.SettingsHub.Label.LogoutButton,Đăng xuất
-Feature.SettingsHub.Label.LogoutConfirmation,Bạn có chắc chắn muốn đăng xuất không?
+Feature.SettingsHub.Label.LogoutConfirmation,Bạn có chắc chắn muốn đăng xuất?
 Feature.SettingsHub.Label.MethodOfAbuse,Loại Vi Phạm?
 Feature.SettingsHub.Label.Moderated,Đã Kiểm Duyệt
 Feature.SettingsHub.Label.ModeratedInviteError,Lời mời tham gia trải nghiệm đã được kiểm duyệt và không được gửi.

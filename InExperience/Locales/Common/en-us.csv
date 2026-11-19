@@ -786,7 +786,7 @@ CoreScripts.FTUX.Heading.NewTiltOnboarding,The menu lives here
 CoreScripts.FTUX.Heading.ReadyToPlaytest,Ready to playtest?
 CoreScripts.FTUX.Heading.SideSheetUpdate,All your actions in one place
 CoreScripts.FTUX.Heading.SocialOnboarding,Social features
-CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,Your new menu
+CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,Two menus are now one
 CoreScripts.FTUX.Heading.YouAreAnEarlyTester,You're an early tester
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,Switch to your saved avatars anytime.
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,Chat with your friends anytime.
@@ -797,7 +797,7 @@ CoreScripts.FTUX.Label.NewTiltOnboarding,The game menu contains in-game actions 
 CoreScripts.FTUX.Label.PartyWithYourFriendsAnytime,Party with your friends anytime.
 CoreScripts.FTUX.Label.SideSheetOnboarding,"The menu contains all your essential features. Invite friends, try out Emotes, control Music, and more."
 CoreScripts.FTUX.Label.SocialOnboarding,"Easily access your social features from the top bar, including Chat."
-CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,Two menus are now one. Tap here to open it.
+CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,"Everything you need is in this menu, including Leave."
 CoreScripts.Feedback.EntryPoint.ButtonText,Give Feedback
 CoreScripts.Feedback.EntryPoint.OptionText,Give Translation Feedback
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,Exit
@@ -2295,7 +2295,7 @@ Feature.Build.Description.BuildReplyNotif,Get notified when Build has a reply fo
 Feature.Build.Description.BuyRobuxToCreate,"Buy more Robux to keep creating, or wait for your free Build usage to reset tomorrow."
 Feature.Build.Description.BuyUsageOrWait,"Buy more Build usage with Robux, or wait for your daily limit to reset."
 Feature.Build.Description.CampaignRunDates,Your ad runs {startDate}-{endDate}.
-Feature.Build.Description.CaptureWhilePlaytesting,"Take a capture while you playtest, then add it to your prompt."
+Feature.Build.Description.CaptureWhilePlaytesting,Take a capture while you playtest to show Build what you see.
 Feature.Build.Description.ChooseAdCampaignLength,Choose how long you want your ad to run.
 Feature.Build.Description.ChoosePlaytesters,Choose friends to preview your game.
 Feature.Build.Description.CreateDeveloperProduct,Create {NAME} for {PRICE} Robux. It won't be available to buy yet.
@@ -2402,9 +2402,9 @@ Feature.Build.Label.BackToBuild,Back to Build
 Feature.Build.Label.Building,Working…
 Feature.Build.Label.CaptureLibrary,Capture library
 Feature.Build.Label.CaptureSelectionCount,{SELECTED_COUNT} of {MAX_SELECTIONS} selected
-Feature.Build.Label.CaptureStepAddImages,Select Add images to attach your capture
+Feature.Build.Label.CaptureStepAddImages,Select <b>Add images</b> to add your capture to the chat
 Feature.Build.Label.CaptureStepPlaytest,Playtest your game
-Feature.Build.Label.CaptureStepTapCamera,Select the camera in the Build toolbar
+Feature.Build.Label.CaptureStepTapCamera,Select the camera icon at the bottom of the screen
 Feature.Build.Label.ContentRating,Content rating
 Feature.Build.Label.CreatedDate,"{MONTH} {DAY}, {YEAR}"
 Feature.Build.Label.CreatorHub,Creator Hub
@@ -3358,18 +3358,34 @@ Feature.Chat.Text.NoFriends,"You haven't added any friends yet. To get started, 
 Feature.Chat.Title.FriendsChat,Friends chat
 Feature.Chat.Title.NewChat,New chat
 Feature.Chat.Toast.Error.InvalidUserSelected,One or more people in this list can’t be added
+Feature.CloudClient.Action.PlayWithoutCloudPlay,Play without Cloud Play
+Feature.CloudClient.Action.PlayWithoutRobloxReality,Play without {productName}
+Feature.CloudClient.Action.TryRobloxReality,Try {productName}
+Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play runs the game on Roblox's computers, so it may load faster and have fewer crashes. It only lasts while you're playing this game."
 Feature.CloudClient.Description.GalleryUnavailableCloudPlay,Rejoin without Cloud Play to use your gallery.
 Feature.CloudClient.Description.GalleryUnavailableRobloxReality,Rejoin without Restyle to use your gallery.
+Feature.CloudClient.Description.GalleryUnavailableRobloxRealityV2,Rejoin without {productName} to use your gallery.
+Feature.CloudClient.Description.RobloxRealityOffer,"{productName} gives your favorite games a fresh new look. Try an early preview, then tell us what you think."
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle is an early preview. Things may look different from the original game.
+Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName} is an early preview. Things may look different from the original game.
+Feature.CloudClient.Heading.CloudPlayOffer,Play with Cloud Play
 Feature.CloudClient.Heading.GalleryUnavailableCloudPlay,Gallery isn’t available in Cloud Play yet.
 Feature.CloudClient.Heading.GalleryUnavailableRobloxReality,Gallery isn’t available with Restyle yet.
+Feature.CloudClient.Heading.GalleryUnavailableRobloxRealityV2,Gallery isn’t available with {productName} yet.
+Feature.CloudClient.Heading.RobloxRealityOffer,Try your game with {productName}
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Capture isn't available in Cloud Play yet.
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Capture isn't available with Restyle yet.
+Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,Capture isn't available with {productName} yet.
 Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Play isn't working. You're playing normally.
 Feature.CloudClient.Label.RobloxReality,Restyle
+Feature.CloudClient.Label.RobloxRealityDemoLength,Try a {minutes} minute demo
 Feature.CloudClient.Label.RobloxRealityEndingSoon,"Restyle ends in 1 minute, and you’ll leave the game."
+Feature.CloudClient.Label.RobloxRealityEndingSoonV2,"{productName} ends in 1 minute, and you’ll leave the game."
+Feature.CloudClient.Label.RobloxRealityGraphics,"Your game, reimagined"
+Feature.CloudClient.Label.RobloxRealityPlusOnly,Only for Plus subscribers
 Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,Self View isn't available in Cloud Play yet.
 Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,Self View isn't available with Restyle yet.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxRealityV2,Self View isn't available with {productName} yet.
 Feature.CloudClient.Label.TimeLeft,Time left
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,Let Your Friends Find You
@@ -4999,7 +5015,7 @@ Feature.UniversalShareSheet.Response.SharedMessage,Message was sent
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Messages were sent
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} others
 Feature.UserLibrary.Label.MyLibrary,My Library
-Feature.VIPServer.Message.TooManyFreeServersOnGame,You can not have more free private servers on this game.
+Feature.VIPServer.Message.TooManyFreeServersOnGame,You cannot have more free private servers on this game.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,You cannot have more active free private servers. Please deactivate some other servers first.
 Feature.VerificationUpsell.Action.AddPhone,Add Phone
 Feature.VerificationUpsell.Action.AddPhoneNumber,Add Phone Number

@@ -1,5 +1,6 @@
 ﻿local AvatarExperienceSave = script:FindFirstAncestor("AvatarExperienceSave")
 local Parent = AvatarExperienceSave.Parent
+local FFlagSplitPaneAvatarInitialSnapshot = require(Parent.SharedFlags).FFlagSplitPaneAvatarInitialSnapshot
 local TutilsModule = require(Parent.tutils)
 local _ = require(AvatarExperienceSave.Context.AvatarSaveContext)
 local ItemTypeEnum = require(Parent.AvatarExperienceModel).Enums.ItemTypeEnum
@@ -9,7 +10,10 @@ local Constants = require(Parent.AvatarExperienceCommon).Constants
 local _ = require(Parent.AvatarExperienceRodux)
 
 return function(p1, p2): boolean
-	-- upvalues: GetSubstateToTrackForChangesModule (copy), TutilsModule (copy), AssetOrderRelativelyEqualModule (copy), Constants (copy), ItemTypeEnum (copy)
+	-- upvalues: FFlagSplitPaneAvatarInitialSnapshot (copy), GetSubstateToTrackForChangesModule (copy), TutilsModule (copy), AssetOrderRelativelyEqualModule (copy), Constants (copy), ItemTypeEnum (copy)
+	if FFlagSplitPaneAvatarInitialSnapshot and p1.lastEquippedOutfitId ~= nil and p2.lastEquippedOutfitId ~= nil and p1.lastEquippedOutfitId ~= p2.lastEquippedOutfitId then
+		return true
+	end
 	local SubstateToTrackForChangesModule = GetSubstateToTrackForChangesModule(p1, true)
 	local SubstateToTrackForChangesModule1 = GetSubstateToTrackForChangesModule(p2, true)
 	

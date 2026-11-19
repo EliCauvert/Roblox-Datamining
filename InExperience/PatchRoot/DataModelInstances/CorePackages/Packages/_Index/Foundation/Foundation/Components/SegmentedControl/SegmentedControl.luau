@@ -29,14 +29,9 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 	local UseTokensModuleResult = UseTokensModule()
 	local UseSegmentedControlVariantsModuleResult = UseSegmentedControlVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.size, if FlagsModule.FoundationSegmentedControlBeta then Variant else nil, if FlagsModule.FoundationSegmentedControlBeta then FillBehavior else nil, WithDefaultsModuleResult.isCircular)
 	local IsFillBehaviorMatch = if FlagsModule.FoundationSegmentedControlBeta then FillBehavior == FillBehaviorModule.Fill else nil
-	local UseRefResult = nil
-	local UseBindingResult2 = nil
-	local UseResult = nil
-	local UseResult1 = nil
-	UseRefResult = ReactModule.useRef(nil)
-	local UseMemoResult = nil
+	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef({})
-	UseMemoResult = ReactModule.useMemo(function()
+	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseRefResult1 (copy), WithDefaultsModuleResult (copy), ReactModule (upval)
 		local Current = UseRefResult1.current
 		
@@ -53,14 +48,13 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 	local ActiveItemHeight = UseAnimatedHighlightModuleResult.activeItemHeight
 	local HighlightPosition = UseAnimatedHighlightModuleResult.highlightPosition
 	local HighlightWidth = UseAnimatedHighlightModuleResult.highlightWidth
-	local UseBindingResult
-	UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Vector2.new(0, 0))
-	UseResult = ReactModule.useCallback(function(Frame)
-		-- upvalues: UseBindingResult2 (ref)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Vector2.new(0, 0))
+	local UseResult = ReactModule.useCallback(function(Frame)
+		-- upvalues: UseBindingResult2 (copy)
 		UseBindingResult2(Frame.AbsoluteSize)
 	end, { UseSegmentedControlVariantsModuleResult.container.tag })
-	UseResult1 = ReactModule.useCallback(function(p3): number
-		-- upvalues: UseMemoResult (ref), WithDefaultsModuleResult (copy)
+	local UseResult1 = ReactModule.useCallback(function(p3): number
+		-- upvalues: UseMemoResult (copy), WithDefaultsModuleResult (copy)
 		local YDelta = 0
 		
 		if p3.current then
@@ -88,7 +82,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 			testId = `{WithDefaultsModuleResult.testId}--segments-container`
 		}, {
 			onAbsoluteSizeChanged = ReactModule.useCallback(function(p3)
-				-- upvalues: WithDefaultsModuleResult (copy), UseResult (ref)
+				-- upvalues: WithDefaultsModuleResult (copy), UseResult (copy)
 				if WithDefaultsModuleResult.onAbsoluteSizeChanged then
 					WithDefaultsModuleResult.onAbsoluteSizeChanged(p3)
 				end
@@ -98,7 +92,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 				UseResult
 			})
 		}), DashModule.map(WithDefaultsModuleResult.segments, function(p3, p4: number)
-			-- upvalues: ReactModule (upval), SegmentModule (upval), WithDefaultsModuleResult (copy), FlagsModule (upval), Variant (copy), FillBehavior (copy), UseMemoResult (ref)
+			-- upvalues: ReactModule (upval), SegmentModule (upval), WithDefaultsModuleResult (copy), FlagsModule (upval), Variant (copy), FillBehavior (copy), UseMemoResult (copy)
 			return ReactModule.createElement(ReactModule.Fragment, { key = tostring(p3.id) }, {
 				Segment = ReactModule.createElement(SegmentModule, {
 					id = p3.id,
@@ -123,7 +117,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, p2)
 				return UDim2.fromOffset(Entry[1], Entry[2])
 			end),
 			Position = HighlightPosition:map(function(XOffset): UDim2
-				-- upvalues: UseResult1 (ref), p2 (copy), UseRefResult (ref)
+				-- upvalues: UseResult1 (copy), p2 (copy), UseRefResult (copy)
 				return UDim2.fromOffset(XOffset, (UseResult1(p2 or UseRefResult)))
 			end),
 			ZIndex = WithDefaultsModuleResult.ZIndex + 1,

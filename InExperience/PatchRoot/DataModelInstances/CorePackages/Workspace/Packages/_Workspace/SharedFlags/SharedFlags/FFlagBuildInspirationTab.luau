@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("BuildInspirationTabDev", false)
+﻿return game:DefineFastFlag("BuildInspirationTab", false)

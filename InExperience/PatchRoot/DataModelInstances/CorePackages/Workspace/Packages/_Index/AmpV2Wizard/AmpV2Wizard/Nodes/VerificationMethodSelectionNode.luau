@@ -13,6 +13,7 @@ local InputSize = FoundationModule.Enums.InputSize
 local _ = require(AmpV2Wizard.Types)
 local OdpAnalyticsModule = require(AmpV2Wizard.OdpAnalytics)
 local FullPageChromeModule = require(AmpV2Wizard.FullPageChrome)
+local FFlagLuaAppAddTestIdsForArrow = require(Parent.SharedFlags).FFlagLuaAppAddTestIdsForArrow
 local config = {
 	FAE = "square-person",
 	IDV = "rectangle-person-with-three-horizontal-lines",
@@ -20,7 +21,7 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: OdpAnalyticsModule (copy), ReactModule (copy), OptionSelectorGroup (copy), config (copy), View (copy), Text (copy), InputLabel (copy), ScrollView (copy), Button (copy), ButtonVariant (copy), InputSize (copy), FullPageChromeModule (copy)
+	-- upvalues: OdpAnalyticsModule (copy), ReactModule (copy), OptionSelectorGroup (copy), config (copy), View (copy), Text (copy), FFlagLuaAppAddTestIdsForArrow (copy), InputLabel (copy), ScrollView (copy), Button (copy), ButtonVariant (copy), InputSize (copy), FullPageChromeModule (copy)
 	local Props = p1.props
 	local ReportFunction = p1.report
 	local Methods = Props.methods or {}
@@ -69,11 +70,13 @@ return function(p1)
 			Title = ReactModule.createElement(Text, {
 				tag = "size-full-0 auto-y text-heading-medium text-wrap text-align-x-left text-align-y-top content-emphasis",
 				LayoutOrder = 1,
+				testId = if FFlagLuaAppAddTestIdsForArrow then "amp-v2-wizard-verification-method-title" else nil,
 				Text = Props.title
 			}),
 			Description = ReactModule.createElement(Text, {
 				tag = "size-full-0 auto-y text-body-large text-wrap text-align-x-left text-align-y-top content-default",
 				LayoutOrder = 2,
+				testId = if FFlagLuaAppAddTestIdsForArrow then "amp-v2-wizard-verification-method-description" else nil,
 				Text = Props.description
 			})
 		}),

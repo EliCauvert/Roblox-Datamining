@@ -2515,12 +2515,15 @@ Feature.Build.Label.ToolAssetSearchRunning,Buscando en la biblioteca de recursos
 Feature.Build.Label.ToolClientDMDone,Se buscó en el DataModel del cliente
 Feature.Build.Label.ToolClientDMFailed,No se pudo buscar en el DataModel del cliente
 Feature.Build.Label.ToolClientDMRunning,Buscando en el DataModel del cliente
+Feature.Build.Label.ToolCodeRunning,Ejecutando el código
 Feature.Build.Label.ToolCompileDone,Se compiló el código
 Feature.Build.Label.ToolCompileFailed,No se pudo compilar el código
 Feature.Build.Label.ToolCompileRunning,Compilando el código
+Feature.Build.Label.ToolDeveloperProductRunning,Trabajando en tu producto del desarrollador
 Feature.Build.Label.ToolGameInfoDone,Se actualizó la información del juego
 Feature.Build.Label.ToolGameInfoFailed,No se pudo actualizar la información del juego
 Feature.Build.Label.ToolGameInfoRunning,Actualizando la información del juego
+Feature.Build.Label.ToolGamePassRunning,Trabajando en tu pase del juego
 Feature.Build.Label.ToolGameSaveDone,Se guardó el juego
 Feature.Build.Label.ToolGameSaveFailed,No se pudo guardar el juego
 Feature.Build.Label.ToolGameSaveRunning,Guardando el juego
@@ -2539,6 +2542,7 @@ Feature.Build.Label.ToolLuauRunning,Ejecutando Luau
 Feature.Build.Label.ToolModelDone,Se generó un modelo 3D
 Feature.Build.Label.ToolModelFailed,No se pudo generar el modelo 3D
 Feature.Build.Label.ToolModelRunning,Generando un modelo 3D
+Feature.Build.Label.ToolMonetizationRunning,Trabajando en la monetización de tu juego
 Feature.Build.Label.ToolPlanPresentDone,Se presentó el plan
 Feature.Build.Label.ToolPlanPresentFailed,No se pudo presentar el plan
 Feature.Build.Label.ToolPlanPresentRunning,Presentando el plan
@@ -2566,6 +2570,7 @@ Feature.Build.Label.ToolSkillLoadRunning,Cargando habilidad
 Feature.Build.Label.ToolSkillsDone,Habilidades disponibles enumeradas
 Feature.Build.Label.ToolSkillsFailed,No se pudieron enumerar las habilidades disponibles
 Feature.Build.Label.ToolSkillsRunning,Enumerando las habilidades disponibles
+Feature.Build.Label.ToolSubscriptionRunning,Trabajando en tu suscripción
 Feature.Build.Label.ToolTasksPlanDone,Tareas planificadas
 Feature.Build.Label.ToolTasksPlanFailed,No se pudieron planificar las tareas
 Feature.Build.Label.ToolTasksPlanRunning,Planificando tus tareas
@@ -3287,14 +3292,17 @@ Feature.Chat.Label.OneToOne.ThemRepliedToYou,Te respondió
 Feature.Chat.Label.OneToOne.YouRepliedToThem,Respondiste
 Feature.Chat.Label.Pending,
 Feature.Chat.Label.PrivacySettings,Configuración de privacidad
+Feature.Chat.Label.Reactions,Reacciones
 Feature.Chat.Label.ReplyChatInputPlaceholder,Responder a {DISPLAY_NAME}
 Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,Respondiéndote a ti mismo(a)
 Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} dijo...
 Feature.Chat.Label.ReplyingToYourself,Tú dijiste...
 Feature.Chat.Label.SearchFriends,Buscar amigos
 Feature.Chat.Label.SearchWord,
+Feature.Chat.Label.SelectToRemove,Selecciona para eliminar
 Feature.Chat.Label.SnoozePartyNotifications,Silenciar notificaciones de Equipo en la experiencia para
 Feature.Chat.Label.SwipeToReplyTooltip,Desliza para responder
+Feature.Chat.Label.TapToRemove,Toca para eliminar
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} d
 Feature.Chat.Label.TimestampHoursAbbreviatedPlural,{num_hours} h
 Feature.Chat.Label.TimestampMinutesAbbreviatedPlural,{num_minutes} min
@@ -3350,6 +3358,11 @@ Feature.Chat.Text.NoFriends,"Aún no has añadido ningún amigo. Para empezar, e
 Feature.Chat.Title.FriendsChat,Chat de amistades
 Feature.Chat.Title.NewChat,Nuevo chat
 Feature.Chat.Toast.Error.InvalidUserSelected,Hay una o más personas en esta lista que no se pueden añadir
+Feature.CloudClient.Action.PlayWithoutCloudPlay,Jugar sin Cloud Play
+Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play ejecuta el juego en las computadoras de Roblox, por lo que puede cargarse más rápido y tener menos fallas. Solo dura mientras juegas este juego."
+Feature.CloudClient.Heading.CloudPlayOffer,Jugar con Cloud Play
+Feature.CloudClient.Label.RobloxRealityGraphics,"Tu juego, reinventado"
+Feature.CloudClient.Label.RobloxRealityPlusOnly,Solo para suscriptores Plus
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,Deja que tus amigos te encuentren
 Feature.Contacts.Action.Invite,Invitar
@@ -3729,7 +3742,7 @@ Feature.GamepadDisconnect.Label.Message,"El mando para el usuario ""%s"" se desc
 Feature.GamepadDisconnect.Label.MessageGeneric,"Se desconectó el mando para el usuario ""%s"". Vuelve a conectarlo."
 Feature.GamepadDisconnect.Label.Title,Falta el mando
 Feature.Groups.Action.Cancel,
-Feature.Groups.Action.CancelRequest,Cancelar la solicitud
+Feature.Groups.Action.CancelRequest,Cancelar solicitud
 Feature.Groups.Action.Close,
 Feature.Groups.Action.Continue,
 Feature.Groups.Action.CreateGroup,Crear comunidad
@@ -4077,7 +4090,7 @@ Feature.Moments.Label.PostFeedbackPostingTitle,Publicando el Momento
 Feature.Moments.Label.PostRemovedBody,El Momento que publicaste va en contra de nuestras Normas de la comunidad.
 Feature.Moments.Label.PostedOnDate,Publicado el {date}
 Feature.Moments.Label.PublishingRodeoBody,Esto no tomará mucho tiempo.
-Feature.Moments.Label.Reactions,Reacciones
+Feature.Moments.Label.Reactions,
 Feature.Moments.Label.ReportReason.BreaksRules,Esta publicación infringe las reglas
 Feature.Moments.Label.ReportReason.IntellectualProperty,Esta publicación infringe mi propiedad intelectual
 Feature.Moments.Label.ReportSubmittedBody,Gracias por tu opinión.
@@ -4236,6 +4249,7 @@ Feature.Parents.Message.TooManyAttempts,
 Feature.Parents.Title.EnterParentEmailV2,Ingresar correo electrónico parental
 Feature.Parents.Title.SomethingWentWrong,
 Feature.PlayerSearchResults.Action.AddFriend,
+Feature.PlayerSearchResults.Heading.SearchResults,Buscar resultados
 Feature.PlayerSearchResults.Label.FromSearch,Desde Búsqueda
 Feature.PlayerSearchResults.Label.NewUsername,Nuevo nombre de usuario
 Feature.PlayerSearchResults.Label.Previously,Anteriormente
@@ -4627,7 +4641,7 @@ Feature.SettingsHub.Label.Invited,Invitado
 Feature.SettingsHub.Label.LeaveButton,
 Feature.SettingsHub.Label.LoadingFriendsListFailed,
 Feature.SettingsHub.Label.LogoutButton,Cerrar sesión
-Feature.SettingsHub.Label.LogoutConfirmation,¿Quieres cerrar la sesión?
+Feature.SettingsHub.Label.LogoutConfirmation,¿Confirmas que deseas cerrar la sesión?
 Feature.SettingsHub.Label.MethodOfAbuse,¿Tipo de abuso?
 Feature.SettingsHub.Label.Moderated,
 Feature.SettingsHub.Label.ModeratedInviteError,Se moderó la invitación a la experiencia y no se envió.
@@ -5479,7 +5493,7 @@ InGame.NotificationScript2.onPointsAwarded.single,¡Recibiste {RBX_NUMBER} punto
 InGame.PlayerDropDown.Accept,
 InGame.PlayerDropDown.Action.ConnectionRequest,
 InGame.PlayerDropDown.Block,
-InGame.PlayerDropDown.CancelRequest,Cancelar solicitud
+InGame.PlayerDropDown.CancelRequest,
 InGame.PlayerDropDown.ConfirmUnfriend,Toca para confirmar que quieres dejar de ser amigo
 InGame.PlayerDropDown.Decline,
 InGame.PlayerDropDown.Examine,

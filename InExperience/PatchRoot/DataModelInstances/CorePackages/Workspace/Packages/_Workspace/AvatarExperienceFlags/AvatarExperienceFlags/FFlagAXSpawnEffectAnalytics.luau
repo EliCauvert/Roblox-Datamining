@@ -1,0 +1,6 @@
+﻿local FFlagAXBackgroundGenerationAnalyticsModule = require(script.Parent.FFlagAXBackgroundGenerationAnalytics)
+local FFlagAXInventoryItemsListImpressionLoggingModule = require(script.Parent.FFlagAXInventoryItemsListImpressionLogging)
+local FFlagAXSpawnEffectsModule = require(script.Parent.FFlagAXSpawnEffects)
+local FFlagAXUnifiedImpressionsOnThumbnailModule = require(script.Parent.FFlagAXUnifiedImpressionsOnThumbnail)
+
+return game:DefineFastFlag("AXSpawnEffectAnalytics", false) and (FFlagAXSpawnEffectsModule and (FFlagAXBackgroundGenerationAnalyticsModule and (FFlagAXInventoryItemsListImpressionLoggingModule and FFlagAXUnifiedImpressionsOnThumbnailModule)))

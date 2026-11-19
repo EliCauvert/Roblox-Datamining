@@ -23,7 +23,7 @@ local config = {
 }
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
-	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), UsePreferredInputModule (copy), UseClippingRectModule (copy), ReactOtterModule (copy), OtterModule (copy), ControlStateModule (copy), ViewModule (copy), WithCommonPropsModule (copy), ScrollViewModule (copy), FlagsModule (copy), StateLayerAffordanceModule (copy), VisibilityModule (copy), ScrimModule (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), UsePreferredInputModule (copy), UseClippingRectModule (copy), ReactOtterModule (copy), OtterModule (copy), ControlStateModule (copy), ViewModule (copy), WithCommonPropsModule (copy), ScrollViewModule (copy), StateLayerAffordanceModule (copy), VisibilityModule (copy), FlagsModule (copy), ScrimModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseTokensModuleResult = UseTokensModule()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
@@ -108,7 +108,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, { tag = "size-full-0 auto-y", ref = Ref }), {
 		Scroll = ReactModule.createElement(ScrollViewModule, {
 			tag = "size-full-0 auto-y",
-			ClipsDescendants = if FlagsModule.FoundationUnifiedScrimScrolling then not UseClippingRectModuleResult2 else false,
+			ClipsDescendants = not UseClippingRectModuleResult2,
 			onStateChanged = UseResult4,
 			stateLayer = { affordance = StateLayerAffordanceModule.None },
 			onCanvasPositionChanged = UseResult,
@@ -130,11 +130,12 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 			tag = "row flex-between",
 			ZIndex = 2,
 			Position = UseClippingRectModuleResult:map(function(p2): UDim2
-				return UDim2.fromOffset(p2.Min.X, 0)
+				-- upvalues: FlagsModule (upval)
+				return UDim2.fromOffset(if FlagsModule.FoundationScrimLayerPixelSnap then math.floor(p2.Min.X) else p2.Min.X, 0)
 			end),
 			Size = UseClippingRectModuleResult:map(function(p2): UDim2
-				-- upvalues: WithDefaultsModuleResult (copy)
-				return UDim2.new(0, p2.Max.X - p2.Min.X, 1, -WithDefaultsModuleResult.scrimBottomInset)
+				-- upvalues: FlagsModule (upval), WithDefaultsModuleResult (copy)
+				return UDim2.new(0, if FlagsModule.FoundationScrimLayerPixelSnap then math.ceil(p2.Max.X) - math.floor(p2.Min.X) else p2.Max.X - p2.Min.X, 1, -WithDefaultsModuleResult.scrimBottomInset)
 			end),
 			testId = `{WithDefaultsModuleResult.testId}--scrim-layer`
 		}, {

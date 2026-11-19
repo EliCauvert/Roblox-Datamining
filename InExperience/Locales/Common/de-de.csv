@@ -3279,6 +3279,11 @@ Feature.Chat.Text.NoFriends,"Du hast noch keine Freunde hinzugefügt. Um loszule
 Feature.Chat.Title.FriendsChat,Freunde-Chat
 Feature.Chat.Title.NewChat,Neuer Chat
 Feature.Chat.Toast.Error.InvalidUserSelected,Eine oder mehrere Personen in dieser Liste können nicht hinzugefügt werden
+Feature.CloudClient.Action.PlayWithoutCloudPlay,Ohne Cloud Play spielen
+Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play führt das Spiel auf den Computern von Roblox aus, sodass es möglicherweise schneller lädt und es zu weniger Abstürzen kommt. Es ist nur verfügbar, während du dieses Spiel spielst."
+Feature.CloudClient.Heading.CloudPlayOffer,Mit Cloud Play spielen
+Feature.CloudClient.Label.RobloxRealityGraphics,"Dein Spiel, neu interpretiert"
+Feature.CloudClient.Label.RobloxRealityPlusOnly,Nur für Plus-Abonnenten
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,Lass dich von Freunden finden
 Feature.Contacts.Action.Invite,Einladen

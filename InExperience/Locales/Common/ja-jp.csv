@@ -2514,12 +2514,15 @@ Feature.Build.Label.ToolAssetSearchRunning,アセットライブラリをサー�
 Feature.Build.Label.ToolClientDMDone,クライアントDataModelをサーチしました
 Feature.Build.Label.ToolClientDMFailed,クライアントDataModelをサーチできませんでした
 Feature.Build.Label.ToolClientDMRunning,クライアントDataModelをサーチしています
+Feature.Build.Label.ToolCodeRunning,コードを実行しています
 Feature.Build.Label.ToolCompileDone,コードをコンパイルしました
 Feature.Build.Label.ToolCompileFailed,コードをコンパイルできませんでした
 Feature.Build.Label.ToolCompileRunning,コードをコンパイル中
+Feature.Build.Label.ToolDeveloperProductRunning,開発者製品に関する作業を行っています
 Feature.Build.Label.ToolGameInfoDone,ゲーム情報を更新しました
 Feature.Build.Label.ToolGameInfoFailed,ゲーム情報を更新できませんでした
 Feature.Build.Label.ToolGameInfoRunning,ゲーム情報を更新しています
+Feature.Build.Label.ToolGamePassRunning,ゲームパスに関する作業を行っています
 Feature.Build.Label.ToolGameSaveDone,ゲームを保存しました
 Feature.Build.Label.ToolGameSaveFailed,ゲームを保存できませんでした
 Feature.Build.Label.ToolGameSaveRunning,ゲームを保存しています
@@ -2538,6 +2541,7 @@ Feature.Build.Label.ToolLuauRunning,Luauを実行しています
 Feature.Build.Label.ToolModelDone,3Dモデルを生成しました
 Feature.Build.Label.ToolModelFailed,3Dモデルを生成できませんでした
 Feature.Build.Label.ToolModelRunning,3Dモデルを生成しています
+Feature.Build.Label.ToolMonetizationRunning,ゲームの収益化に関する作業を行っています
 Feature.Build.Label.ToolPlanPresentDone,計画を提示しました
 Feature.Build.Label.ToolPlanPresentFailed,計画を提示できませんでした
 Feature.Build.Label.ToolPlanPresentRunning,計画を提示しています
@@ -2565,6 +2569,7 @@ Feature.Build.Label.ToolSkillLoadRunning,スキルを読み込んでいます
 Feature.Build.Label.ToolSkillsDone,利用可能なスキルをリストに追加しました
 Feature.Build.Label.ToolSkillsFailed,利用可能なスキルをリストに追加できませんでした
 Feature.Build.Label.ToolSkillsRunning,利用可能なスキルをリストに追加しています
+Feature.Build.Label.ToolSubscriptionRunning,定期購入に関する作業を行っています
 Feature.Build.Label.ToolTasksPlanDone,タスクが計画されました
 Feature.Build.Label.ToolTasksPlanFailed,タスクを計画できませんでした
 Feature.Build.Label.ToolTasksPlanRunning,タスクを計画しています
@@ -3286,14 +3291,17 @@ Feature.Chat.Label.OneToOne.ThemRepliedToYou,あなたへの返信
 Feature.Chat.Label.OneToOne.YouRepliedToThem,あなたの返信
 Feature.Chat.Label.Pending,承認待ち
 Feature.Chat.Label.PrivacySettings,プライバシー設定
+Feature.Chat.Label.Reactions,
 Feature.Chat.Label.ReplyChatInputPlaceholder,{DISPLAY_NAME}さんに返信
 Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,自分自身に返信
 Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME}さんの発言…
 Feature.Chat.Label.ReplyingToYourself,あなたの発言…
 Feature.Chat.Label.SearchFriends,友達をサーチ
 Feature.Chat.Label.SearchWord,
+Feature.Chat.Label.SelectToRemove,選択して削除
 Feature.Chat.Label.SnoozePartyNotifications,以下のバーチャル空間内パーティ通知をミュート:
 Feature.Chat.Label.SwipeToReplyTooltip,スワイプして返信
+Feature.Chat.Label.TapToRemove,タップして削除
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}日
 Feature.Chat.Label.TimestampHoursAbbreviatedPlural,{num_hours}時間
 Feature.Chat.Label.TimestampMinutesAbbreviatedPlural,{num_minutes}分
@@ -3349,6 +3357,11 @@ Feature.Chat.Text.NoFriends,まだ友達を追加していません。始める�
 Feature.Chat.Title.FriendsChat,友達チャット
 Feature.Chat.Title.NewChat,新規チャット
 Feature.Chat.Toast.Error.InvalidUserSelected,このリストに追加できない人が1人以上います
+Feature.CloudClient.Action.PlayWithoutCloudPlay,Cloud Playを使わずにプレイ
+Feature.CloudClient.Description.CloudPlayOffer,Cloud Playは、Robloxのコンピューターでゲームを実行するため、読み込みが速くなり、クラッシュしづらくなる可能性があります。このゲームをプレイしている間のみ有効です。
+Feature.CloudClient.Heading.CloudPlayOffer,Cloud Playを使ってプレイ
+Feature.CloudClient.Label.RobloxRealityGraphics,ゲームを刷新しませんか？
+Feature.CloudClient.Label.RobloxRealityPlusOnly,Plus会員限定
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,友達に見つけてもらいやすくしましょう！
 Feature.Contacts.Action.Invite,招待する
@@ -4234,6 +4247,7 @@ Feature.Parents.Message.TooManyAttempts,
 Feature.Parents.Title.EnterParentEmailV2,保護者のメールアドレスを入力
 Feature.Parents.Title.SomethingWentWrong,
 Feature.PlayerSearchResults.Action.AddFriend,
+Feature.PlayerSearchResults.Heading.SearchResults,サーチ結果
 Feature.PlayerSearchResults.Label.FromSearch,サーチから
 Feature.PlayerSearchResults.Label.NewUsername,新しいユーザーネーム
 Feature.PlayerSearchResults.Label.Previously,前の名前は

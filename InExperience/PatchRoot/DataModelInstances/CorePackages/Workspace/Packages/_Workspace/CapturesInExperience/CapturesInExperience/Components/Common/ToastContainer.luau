@@ -31,6 +31,7 @@ local GetMomentsCapabilitiesFunction = require(Parent1.MomentsCommon).Stores.Get
 local FFlagCreateMomentsToastModule = require(Parent.Flags.FFlagCreateMomentsToast)
 local FFlagCapturesInExpMomentsToastDownloadButtonModule = require(Parent.Flags.FFlagCapturesInExpMomentsToastDownloadButton)
 local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
+local FFlagCapturesOmitToastContentDurationModule = require(Parent.Flags.FFlagCapturesOmitToastContentDuration)
 local FFlagCapturesCarouselMomentsButtonModule = require(Parent.Flags.FFlagCapturesCarouselMomentsButton)
 local Captures = require(Parent1.MomentsCommon).Analytics.FunnelEventNames.CreationIntentSource.Captures
 local IsPlatformMatch: boolean = UserInputService:GetPlatform() == Enum.Platform.Windows or UserInputService:GetPlatform() == Enum.Platform.OSX
@@ -157,7 +158,7 @@ local config = {
 }
 
 return function(_)
-	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), ReactModule (copy), CapturesToastTypeModule (copy), config (copy), ToastVanishedModule (copy), FFlagBuildExperienceInGameCaptureToChat (copy), DashModule (copy), GetMomentsCapabilitiesFunction (copy), FFlagCreateMomentsToastModule (copy), ToastControllerModule (copy), HttpService (copy), StartMomentsCreationFlowModule (copy), EventNamesModule (copy), FFlagCapturesCarouselMomentsButtonModule (copy), Captures (copy), FFlagCapturesInExpMomentsToastDownloadButtonModule (copy), IconName (copy), GetSaveToStoragePermissionModule (copy), Toast (copy)
+	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), ReactModule (copy), CapturesToastTypeModule (copy), config (copy), ToastVanishedModule (copy), FFlagBuildExperienceInGameCaptureToChat (copy), DashModule (copy), FFlagCapturesOmitToastContentDurationModule (copy), GetMomentsCapabilitiesFunction (copy), FFlagCreateMomentsToastModule (copy), ToastControllerModule (copy), HttpService (copy), StartMomentsCreationFlowModule (copy), EventNamesModule (copy), FFlagCapturesCarouselMomentsButtonModule (copy), Captures (copy), FFlagCapturesInExpMomentsToastDownloadButtonModule (copy), IconName (copy), GetSaveToStoragePermissionModule (copy), Toast (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -230,6 +231,10 @@ return function(_)
 			})
 		end
 	end, { UseSelectorResult, UseSelectorResult1 })
+	local UseMemoResult1 = if FFlagCapturesOmitToastContentDurationModule then ReactModule.useMemo(function()
+		-- upvalues: UseMemoResult (copy), DashModule (upval)
+		return if UseMemoResult == nil then nil else DashModule.join(UseMemoResult, { duration = DashModule.None })
+	end, { UseMemoResult }) else nil
 	
 	return if UseMemoResult then if UseSelectorResult == CapturesToastTypeModule.CaptureTakenWithMomentsCTA and not GetMomentsCapabilitiesFunction(false).getCanCreateMoments(false) then nil elseif FFlagCreateMomentsToastModule then if UseSelectorResult == CapturesToastTypeModule.CaptureTakenWithMomentsCTA then ReactModule.createElement(ToastControllerModule, {
 		icon = "icons/brands/moments_large",
@@ -290,13 +295,13 @@ return function(_)
 		[UseSelectorResult] = ReactModule.createElement(Toast, {
 			duration = UseMemoResult.duration,
 			show = not UseSelectorResult2,
-			toastContent = UseMemoResult
+			toastContent = if FFlagCapturesOmitToastContentDurationModule and UseMemoResult1 then UseMemoResult1 else UseMemoResult
 		})
 	}) else ReactModule.createElement(ReactModule.Fragment, {}, {
 		[UseSelectorResult] = ReactModule.createElement(Toast, {
 			duration = UseMemoResult.duration,
 			show = not UseSelectorResult2,
-			toastContent = UseMemoResult
+			toastContent = if FFlagCapturesOmitToastContentDurationModule and UseMemoResult1 then UseMemoResult1 else UseMemoResult
 		})
 	}) else nil
 end

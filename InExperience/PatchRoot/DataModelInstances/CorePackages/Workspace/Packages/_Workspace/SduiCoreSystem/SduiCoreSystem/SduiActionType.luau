@@ -20,6 +20,7 @@
 	OpenExperienceLeaderboardSeeAll = "OpenExperienceLeaderboardSeeAll",
 	OpenExperienceStoreSeeAll = "OpenExperienceStoreSeeAll",
 	OpenGameFeedbackForm = "OpenGameFeedbackForm",
+	OpenGameItemDetails = "OpenGameItemDetails",
 	AiOverviewFeedback = "AiOverviewFeedback",
 	OpenProfileFramesEditor = "OpenProfileFramesEditor",
 	OpenProfile = "OpenProfile",

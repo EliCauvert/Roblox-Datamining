@@ -5,8 +5,8 @@ local GuiService = ServicesModule.GuiService
 local RunService = ServicesModule.RunService
 local ControlStateModule = require(Foundation.Enums.ControlState)
 local InputModeModule = require(Foundation.Utility.Input.InputMode)
-local GetSelectionEntryDirectionModule = require(Foundation.Components.Slider.getSelectionEntryDirection)
-local UseSliderCaptureKeysModule = require(Foundation.Components.Slider.useSliderCaptureKeys)
+local GetSelectionEntryDirectionModule = require(script.Parent.getSelectionEntryDirection)
+local UseSliderCaptureKeysModule = require(script.Parent.useSliderCaptureKeys)
 local UseSliderDirectionalInputModule = require(script.Parent.useSliderDirectionalInput)
 local _ = require(script.Parent.useSliderThumbs)
 

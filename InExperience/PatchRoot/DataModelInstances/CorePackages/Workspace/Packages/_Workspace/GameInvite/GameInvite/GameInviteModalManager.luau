@@ -17,6 +17,8 @@ local FStringGameInviteInExpIxpLayerModule = require(GameInvite.Flags.FStringGam
 local IsGameInviteJoinForPioneerEnabledFunction = require(Parent.NotificationsCommon).isGameInviteJoinForPioneerEnabled
 game:DefineFastFlag("GameInviteModalAnalyticsEmptyEventContextFix", false)
 local FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt = require(Parent.SharedFlags).FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt
+local FFlagKeepSideSheetOpenBesideMenu = require(Parent.SharedFlags).FFlagKeepSideSheetOpenBesideMenu
+local IsInviteFriendsClaimedBesideSideSheet = false
 local Module = {}
 Module.__index = Module
 
@@ -73,10 +75,13 @@ local function openDeveloperInviteModalNonBlocking(p1, p2, p3)
 end
 
 function Module:openModal(p1, p2)
-	-- upvalues: FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt (copy), IsTriggerDDIFunction (copy), openDeveloperInviteModalNonBlocking (copy), GetCustomizedInvitePromptParamsModule (copy), GetCanSendAndCanCustomizeInvitesModule (copy), CryoModule (copy), GameInviteAnalyticsManagerModule (copy), FFlagGameInviteInExpUserListExposureModule (copy), IsTriggerGameMenuFunction (copy), IsGameInviteJoinForPioneerEnabledFunction (copy), IXPServiceWrapper (copy), FStringGameInviteInExpIxpLayerModule (copy), ContextActionService (copy)
+	-- upvalues: FFlagKeepSideSheetOpenBesideMenu (copy), IsInviteFriendsClaimedBesideSideSheet (ref), GameInvite (copy), FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt (copy), IsTriggerDDIFunction (copy), openDeveloperInviteModalNonBlocking (copy), GetCustomizedInvitePromptParamsModule (copy), GetCanSendAndCanCustomizeInvitesModule (copy), CryoModule (copy), GameInviteAnalyticsManagerModule (copy), FFlagGameInviteInExpUserListExposureModule (copy), IsTriggerGameMenuFunction (copy), IsGameInviteJoinForPioneerEnabledFunction (copy), IXPServiceWrapper (copy), FStringGameInviteInExpIxpLayerModule (copy), ContextActionService (copy)
 	if not self.isModalOpen then
 		self.isModalOpen = true
 		
+		if FFlagKeepSideSheetOpenBesideMenu then
+			IsInviteFriendsClaimedBesideSideSheet = require(GameInvite.utils.inviteFriendsBesideSideSheet).isInviteFriendsClaimedBesideSideSheet()
+		end
 		if FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt then
 			self.openSession += 1
 		end
@@ -155,7 +160,7 @@ function Module:openModal(p1, p2)
 end
 
 function Module:closeModal(Max_recipient_row_number)
-	-- upvalues: IsTriggerDDIFunction (copy), GameInviteAnalyticsManagerModule (copy), ContextActionService (copy), FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt (copy)
+	-- upvalues: IsTriggerDDIFunction (copy), GameInviteAnalyticsManagerModule (copy), ContextActionService (copy), FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt (copy), FFlagKeepSideSheetOpenBesideMenu (copy), IsInviteFriendsClaimedBesideSideSheet (ref), GameInvite (copy)
 	if self.isModalOpen then
 		local IsNotLaunchDataMatch = false
 		local IsNotPromptMessageMatch = false
@@ -185,8 +190,28 @@ function Module:closeModal(Max_recipient_row_number)
 		end
 		self.openTrigger = nil
 		self.placeId = nil
+		
+		if FFlagKeepSideSheetOpenBesideMenu then
+			local IsInviteFriendsClaimedBesideSideSheet1: boolean = IsInviteFriendsClaimedBesideSideSheet
+			IsInviteFriendsClaimedBesideSideSheet = false
+			local InviteFriendsBesideSideSheetModule = require(GameInvite.utils.inviteFriendsBesideSideSheet)
+			
+			if IsInviteFriendsClaimedBesideSideSheet1 then
+				InviteFriendsBesideSideSheetModule.releaseInviteFriendsBesideSideSheet()
+			else
+				InviteFriendsBesideSideSheetModule.dropInviteFriendsClaimBesideSideSheet()
+			end
+		end
 	end
 	self.ToggleGameInviteModalEvent:Fire(false)
+end
+
+function Module:closeModalKeepingSideSheet()
+	-- upvalues: FFlagKeepSideSheetOpenBesideMenu (copy), GameInvite (copy)
+	if self.isModalOpen and FFlagKeepSideSheetOpenBesideMenu then
+		require(GameInvite.utils.inviteFriendsBesideSideSheet).dropInviteFriendsClaimBesideSideSheet()
+	end
+	self:closeModal()
 end
 
 function Module:isGameModalOpen()

@@ -6,6 +6,7 @@ local _ = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local View = require(Parent.Foundation).View
 local VerticalItemModule = require(InExperienceSideSheet.Components.VerticalItem)
+local ConstantsModule = require(InExperienceSideSheet.Common.Constants)
 local GetDidSideSheetOpenWithPeoplePageModule = require(InExperienceSideSheet.Utils.getDidSideSheetOpenWithPeoplePage)
 local ShouldShowInviteFriendsInSideSheetModule = require(InExperienceSideSheet.Utils.shouldShowInviteFriendsInSideSheet)
 local SharedFlagsModule = require(Parent.SharedFlags)
@@ -17,14 +18,14 @@ local FFlagKeepSideSheetOpenBesideMenu = FlagsModule.FFlagKeepSideSheetOpenBesid
 local FFlagSideSheetOpenPeoplePage = FlagsModule.FFlagSideSheetOpenPeoplePage
 
 return ReactModule.memo(function(p1)
-	-- upvalues: SignalsReactModule (copy), FFlagSideSheetOpenPeoplePage (copy), GetDidSideSheetOpenWithPeoplePageModule (copy), FFlagHidePeoplePageInviteFriends (copy), FFlagAddInviteFriendsIntegration (copy), ShouldShowInviteFriendsInSideSheetModule (copy), ReactModule (copy), VerticalItemModule (copy), FFlagKeepSideSheetOpenBesideMenu (copy), FFlagSideSheetFocusNav (copy), View (copy)
+	-- upvalues: SignalsReactModule (copy), FFlagSideSheetOpenPeoplePage (copy), GetDidSideSheetOpenWithPeoplePageModule (copy), FFlagHidePeoplePageInviteFriends (copy), FFlagAddInviteFriendsIntegration (copy), FFlagKeepSideSheetOpenBesideMenu (copy), ConstantsModule (copy), ShouldShowInviteFriendsInSideSheetModule (copy), ReactModule (copy), VerticalItemModule (copy), FFlagSideSheetFocusNav (copy), View (copy)
 	local UseSignalStateResult = if FFlagSideSheetOpenPeoplePage then SignalsReactModule.useSignalState(GetDidSideSheetOpenWithPeoplePageModule) else false
 	local Inverted = not (FFlagHidePeoplePageInviteFriends and FFlagAddInviteFriendsIntegration)
 	local Elements = {}
 	local LayoutOrder = 0
 	
 	for _, value in SignalsReactModule.useSignalState(p1.integrationsGetter) do
-		if ShouldShowInviteFriendsInSideSheetModule(value.id, UseSignalStateResult, Inverted) then
+		if (not FFlagSideSheetOpenPeoplePage or not FFlagKeepSideSheetOpenBesideMenu or not Inverted or value.id ~= ConstantsModule.IntegrationIds.InviteFriends) and ShouldShowInviteFriendsInSideSheetModule(value.id, UseSignalStateResult, Inverted) then
 			LayoutOrder += 1
 			Elements[value.id] = ReactModule.createElement(VerticalItemModule, {
 				integrationId = if FFlagKeepSideSheetOpenBesideMenu then value.id else nil,

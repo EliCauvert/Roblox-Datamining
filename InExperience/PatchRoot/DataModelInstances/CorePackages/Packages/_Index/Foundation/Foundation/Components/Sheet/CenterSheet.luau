@@ -34,7 +34,7 @@ local SHADOWIMAGE = ConstantsModule.SHADOW_IMAGE
 local SHADOWSIZE = ConstantsModule.SHADOW_SIZE
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
-	-- upvalues: WithDefaultsModule (copy), config (copy), UseOverlayModule (copy), UseTokensModule (copy), UseElevationModule (copy), ElevationLayerModule (copy), UsePreferencesModule (copy), UseScaledValueModule (copy), DIALOGSIZES (copy), ReactModule (copy), UseAnimatedBindingFunction (copy), ChildrenHasFullBleedModule (copy), OtterModule (copy), DashModule (copy), SheetTypeModule (copy), ViewModule (copy), StateLayerAffordanceModule (copy), TypesModule (copy), SheetContextModule (copy), ElevationOwnerScope (copy), CloseAffordanceModule (copy), CloseAffordanceVariantModule (copy), FlagsModule (copy), ImageModule (copy), SHADOWIMAGE (copy), SHADOWSIZE (copy), ReactRobloxModule (copy), BackdropModule (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseOverlayModule (copy), UseTokensModule (copy), UseElevationModule (copy), ElevationLayerModule (copy), UsePreferencesModule (copy), UseScaledValueModule (copy), DIALOGSIZES (copy), ReactModule (copy), UseAnimatedBindingFunction (copy), FlagsModule (copy), ChildrenHasFullBleedModule (copy), OtterModule (copy), DashModule (copy), SheetTypeModule (copy), ViewModule (copy), StateLayerAffordanceModule (copy), TypesModule (copy), SheetContextModule (copy), ElevationOwnerScope (copy), CloseAffordanceModule (copy), CloseAffordanceVariantModule (copy), ImageModule (copy), SHADOWIMAGE (copy), SHADOWSIZE (copy), ReactRobloxModule (copy), BackdropModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	local UseOverlayModuleResult = UseOverlayModule()
 	local UseTokensModuleResult = UseTokensModule()
@@ -64,16 +64,17 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 		end
 	end)
 	local UseAnimatedBindingResult1, UseAnimatedBindingResult2_1 = UseAnimatedBindingFunction(Size800, function()
-		-- upvalues: UseStateResult2 (copy)
-		UseStateResult2(false)
+		-- upvalues: FlagsModule (upval), UseRefResult (copy), UseStateResult2 (copy)
+		if not FlagsModule.FoundationCenterSheetOverlayShadow or not UseRefResult.current then
+			UseStateResult2(false)
+			
+			return
+		end
 	end)
 	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(false)
 	local UseBindingResult3, UseBindingResult2_2 = ReactModule.useBinding(false)
-	local ChildrenHasFullBleedModuleResult = nil
-	local UseBindingResult4 = nil
-	local UseBindingResult2_3 = nil
-	ChildrenHasFullBleedModuleResult = ChildrenHasFullBleedModule(WithDefaultsModuleResult.children)
-	UseBindingResult4, UseBindingResult2_3 = ReactModule.useBinding(0)
+	local ChildrenHasFullBleedModuleResult = ChildrenHasFullBleedModule(WithDefaultsModuleResult.children)
+	local UseBindingResult4, UseBindingResult2_3 = ReactModule.useBinding(0)
 	local UseBindingResult5, UseBindingResult2_4 = ReactModule.useBinding(0)
 	local UseBindingResult6, UseBindingResult2_5 = ReactModule.useBinding(0)
 	local UseRefResult1 = ReactModule.useRef(nil)
@@ -174,7 +175,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 			end) else nil
 		}, ReactModule.createElement(SheetContextModule.Provider, {
 			value = ReactModule.useMemo(function()
-				-- upvalues: DashModule (upval), UseBindingResult1 (copy), UseBindingResult2_1 (copy), MapResult (copy), UseBindingResult5 (copy), UseBindingResult2_4 (copy), UseBindingResult3 (copy), UseBindingResult2_2 (copy), ChildrenHasFullBleedModuleResult (ref), UseBindingResult4 (ref), UseBindingResult2_3 (ref), UseResult1 (copy), SheetTypeModule (upval), WithDefaultsModuleResult (copy), UseRefResult1 (copy), UseStateResult1 (copy), UseStateResult2_1 (copy)
+				-- upvalues: DashModule (upval), UseBindingResult1 (copy), UseBindingResult2_1 (copy), MapResult (copy), UseBindingResult5 (copy), UseBindingResult2_4 (copy), UseBindingResult3 (copy), UseBindingResult2_2 (copy), ChildrenHasFullBleedModuleResult (copy), UseBindingResult4 (copy), UseBindingResult2_3 (copy), UseResult1 (copy), SheetTypeModule (upval), WithDefaultsModuleResult (copy), UseRefResult1 (copy), UseStateResult1 (copy), UseStateResult2_1 (copy)
 				return {
 					actionsHeight = 0,
 					sheetHeightAvailable = 0,
@@ -258,9 +259,14 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 				Position = UseAnimatedBindingResult1:map(function(YOffset): UDim2
 					return UDim2.new(0.5, 0, 0.5, YOffset)
 				end),
-				GroupTransparency = UseAnimatedBindingResult1:map(function(p2)
+				testId = `{WithDefaultsModuleResult.testId}--shadow-host`,
+				GroupTransparency = if UseStateResult then UseAnimatedBindingResult1:map(function(p2)
 					-- upvalues: Size800 (copy)
 					return p2 / Size800
+				end) else nil,
+				Visible = UseAnimatedBindingResult1:map(function(p2): boolean
+					-- upvalues: UseRefResult (copy), Size800 (copy)
+					return not (UseRefResult.current and Size800 <= p2)
 				end)
 			}, {
 				SheetContainer = ReactModule.createElement(ViewModule, {

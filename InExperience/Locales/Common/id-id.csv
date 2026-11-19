@@ -2514,12 +2514,15 @@ Feature.Build.Label.ToolAssetSearchRunning,Mencari daftar aset
 Feature.Build.Label.ToolClientDMDone,Selesai mencari DataModel klien
 Feature.Build.Label.ToolClientDMFailed,Tidak dapat mencari DataModel klien
 Feature.Build.Label.ToolClientDMRunning,Mencari DataModel klien
+Feature.Build.Label.ToolCodeRunning,Menjalankan kode
 Feature.Build.Label.ToolCompileDone,Sudah mengompilasi kode
 Feature.Build.Label.ToolCompileFailed,Tidak dapat mengompilasi kode
 Feature.Build.Label.ToolCompileRunning,Mengompilasi kode
+Feature.Build.Label.ToolDeveloperProductRunning,Mengerjakan produk developer-mu
 Feature.Build.Label.ToolGameInfoDone,Selesai memperbarui info game
 Feature.Build.Label.ToolGameInfoFailed,Tidak dapat memperbarui info game
 Feature.Build.Label.ToolGameInfoRunning,Memperbarui info game
+Feature.Build.Label.ToolGamePassRunning,Mengerjakan pas game-mu
 Feature.Build.Label.ToolGameSaveDone,Selesai menyimpan game
 Feature.Build.Label.ToolGameSaveFailed,Tidak dapat menyimpan game
 Feature.Build.Label.ToolGameSaveRunning,Menyimpan game
@@ -2538,6 +2541,7 @@ Feature.Build.Label.ToolLuauRunning,Menjalankan Luau
 Feature.Build.Label.ToolModelDone,Selesai membuat model 3D
 Feature.Build.Label.ToolModelFailed,Tidak dapat membuat model 3D
 Feature.Build.Label.ToolModelRunning,Membuat model 3D
+Feature.Build.Label.ToolMonetizationRunning,Mengerjakan monetisasi game-mu
 Feature.Build.Label.ToolPlanPresentDone,Selesai menampilkan rencana
 Feature.Build.Label.ToolPlanPresentFailed,Tidak dapat menampilkan rencana
 Feature.Build.Label.ToolPlanPresentRunning,Menampilkan rencana
@@ -2565,6 +2569,7 @@ Feature.Build.Label.ToolSkillLoadRunning,Me-load skill
 Feature.Build.Label.ToolSkillsDone,Selesai membuat daftar skill yang tersedia
 Feature.Build.Label.ToolSkillsFailed,Tidak dapat membuat daftar skill yang tersedia
 Feature.Build.Label.ToolSkillsRunning,Membuat daftar skill yang tersedia
+Feature.Build.Label.ToolSubscriptionRunning,Mengerjakan subscription-mu
 Feature.Build.Label.ToolTasksPlanDone,Selesai merencanakan tugas
 Feature.Build.Label.ToolTasksPlanFailed,Tidak dapat merencanakan tugas
 Feature.Build.Label.ToolTasksPlanRunning,Merencanakan tugas
@@ -3350,6 +3355,11 @@ Feature.Chat.Text.NoFriends,"Kamu belum menambahkan satu teman pun. Untuk memula
 Feature.Chat.Title.FriendsChat,Chat teman
 Feature.Chat.Title.NewChat,Chat baru
 Feature.Chat.Toast.Error.InvalidUserSelected,Satu atau beberapa orang di daftar ini tidak dapat ditambahkan
+Feature.CloudClient.Action.PlayWithoutCloudPlay,Mainkan tanpa Cloud Play
+Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play menjalankan game di komputer Roblox, sehingga game dapat di-load lebih cepat dan lebih jarang mengalami crash. Fitur ini hanya aktif selama kamu memainkan game ini."
+Feature.CloudClient.Heading.CloudPlayOffer,Main dengan Cloud Play
+Feature.CloudClient.Label.RobloxRealityGraphics,"Game-mu, dengan tampilan baru"
+Feature.CloudClient.Label.RobloxRealityPlusOnly,Hanya untuk subscriber Plus
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,Izinkan Teman Kamu Menemukan Kamu
 Feature.Contacts.Action.Invite,Undang

@@ -13,8 +13,9 @@
 	Classic = "Cartoon",
 	QuantumPulse = "BuilderSans",
 	Halloween2026 = "BuilderSans",
-	Default = "BuilderSans",
+	Christmas2026 = "BuilderSans",
+	HyperPlum = "BuilderSans",
 	Kids = "BuilderSans",
-	InfernoBlast = "BuilderSans",
-	HyperPlum = "BuilderSans"
+	Default = "BuilderSans",
+	InfernoBlast = "BuilderSans"
 }

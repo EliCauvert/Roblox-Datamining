@@ -2495,12 +2495,15 @@ Feature.Build.Label.ToolAssetSearchRunning,Ricerca nella libreria delle risorse 
 Feature.Build.Label.ToolClientDMDone,Ricerca nel DataModel del client effettuata
 Feature.Build.Label.ToolClientDMFailed,Impossibile effettuare la ricerca nel DataModel del client
 Feature.Build.Label.ToolClientDMRunning,Ricerca nel DataModel del client in corso
+Feature.Build.Label.ToolCodeRunning,Esecuzione del codice
 Feature.Build.Label.ToolCompileDone,Codice compilato
 Feature.Build.Label.ToolCompileFailed,Impossibile compilare il codice
 Feature.Build.Label.ToolCompileRunning,Compilazione del codice in corso
+Feature.Build.Label.ToolDeveloperProductRunning,Creazione del tuo Developer Product in corso
 Feature.Build.Label.ToolGameInfoDone,Informazioni sul gioco aggiornate
 Feature.Build.Label.ToolGameInfoFailed,Impossibile aggiornare le informazioni sul gioco
 Feature.Build.Label.ToolGameInfoRunning,Aggiornamento delle informazioni di gioco in corso
+Feature.Build.Label.ToolGamePassRunning,Creazione del tuo pass di gioco in corso
 Feature.Build.Label.ToolGameSaveDone,Partita salvata
 Feature.Build.Label.ToolGameSaveFailed,Impossibile salvare il gioco
 Feature.Build.Label.ToolGameSaveRunning,Salvataggio del gioco
@@ -2519,6 +2522,7 @@ Feature.Build.Label.ToolLuauRunning,Esecuzione di Luau in corso
 Feature.Build.Label.ToolModelDone,Modello 3D generato
 Feature.Build.Label.ToolModelFailed,Impossibile generare il modello 3D
 Feature.Build.Label.ToolModelRunning,Generazione del modello 3D
+Feature.Build.Label.ToolMonetizationRunning,Creazione della monetizzazione del tuo gioco in corso
 Feature.Build.Label.ToolPlanPresentDone,Piano presentato
 Feature.Build.Label.ToolPlanPresentFailed,Impossibile presentare il piano
 Feature.Build.Label.ToolPlanPresentRunning,Presentazione del piano in corso
@@ -2546,6 +2550,7 @@ Feature.Build.Label.ToolSkillLoadRunning,Caricamento dell'abilità in corso...
 Feature.Build.Label.ToolSkillsDone,Competenze disponibili pubblicate
 Feature.Build.Label.ToolSkillsFailed,Impossibile elencare le abilità disponibili
 Feature.Build.Label.ToolSkillsRunning,Elenco delle competenze disponibili
+Feature.Build.Label.ToolSubscriptionRunning,Creazione del tuo abbonamento in corso
 Feature.Build.Label.ToolTasksPlanDone,Attività pianificate
 Feature.Build.Label.ToolTasksPlanFailed,Impossibile pianificare le attività
 Feature.Build.Label.ToolTasksPlanRunning,Pianificazione delle tue attività
@@ -2595,7 +2600,7 @@ Feature.Build.Message.CreateGameToUseBuild,Crea un nuovo gioco per iniziare a us
 Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,Espandi l'idoneità del tuo pubblico sull'Hub Creatore
 Feature.Build.Message.ExperiencesLoadFailed,Impossibile caricare le esperienze
-Feature.Build.Message.FailedTitle,{TITLE} non riuscito
+Feature.Build.Message.FailedTitle,Azione non riuscita: {TITLE}
 Feature.Build.Message.FailedWithTitle,Operazione non riuscita: {TITLE}
 Feature.Build.Message.FinishedTitle,{TITLE} terminato
 Feature.Build.Message.FriendsLoadFailed,Impossibile caricare gli amici. Riprova.
@@ -3267,14 +3272,17 @@ Feature.Chat.Label.OneToOne.ThemRepliedToYou,Risposto a te
 Feature.Chat.Label.OneToOne.YouRepliedToThem,Hai risposto
 Feature.Chat.Label.Pending,
 Feature.Chat.Label.PrivacySettings,Impostazioni sulla privacy
+Feature.Chat.Label.Reactions,Reazioni
 Feature.Chat.Label.ReplyChatInputPlaceholder,Rispondi a {DISPLAY_NAME}
 Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,Rispondi a te stesso/a
 Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} ha detto...
 Feature.Chat.Label.ReplyingToYourself,Hai detto...
 Feature.Chat.Label.SearchFriends,Cerca amici
 Feature.Chat.Label.SearchWord,
+Feature.Chat.Label.SelectToRemove,Seleziona per rimuovere
 Feature.Chat.Label.SnoozePartyNotifications,Silenzia notifiche gruppo dell'esperienza per:
 Feature.Chat.Label.SwipeToReplyTooltip,Scorri per rispondere
+Feature.Chat.Label.TapToRemove,Tocca per rimuovere
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}gg
 Feature.Chat.Label.TimestampHoursAbbreviatedPlural,{num_hours}ore
 Feature.Chat.Label.TimestampMinutesAbbreviatedPlural,{num_minutes} min
@@ -3330,6 +3338,11 @@ Feature.Chat.Text.NoFriends,"Non hai ancora aggiunto nessun amico. Per iniziare,
 Feature.Chat.Title.FriendsChat,Chat tra amici
 Feature.Chat.Title.NewChat,Nuova chat
 Feature.Chat.Toast.Error.InvalidUserSelected,Impossibile aggiungere una o più persone di questo elenco
+Feature.CloudClient.Action.PlayWithoutCloudPlay,Gioca senza Cloud Play
+Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play esegue il gioco sui computer di Roblox, quindi potrebbe caricarsi più velocemente e presentare meno crash. È attivo solo mentre giochi a questo gioco."
+Feature.CloudClient.Heading.CloudPlayOffer,Gioca con Cloud Play
+Feature.CloudClient.Label.RobloxRealityGraphics,"Il tuo gioco, reinventato"
+Feature.CloudClient.Label.RobloxRealityPlusOnly,Solo per gli abbonati a Plus
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,Aiuta i tuoi amici a trovarti
 Feature.Contacts.Action.Invite,Invita
@@ -4057,7 +4070,7 @@ Feature.Moments.Label.PostFeedbackPostingTitle,Pubblicazione del Momento
 Feature.Moments.Label.PostRemovedBody,Il Momento che hai pubblicato viola le nostre norme della community.
 Feature.Moments.Label.PostedOnDate,Pubblicato il {date}
 Feature.Moments.Label.PublishingRodeoBody,Non dovrebbe volerci molto.
-Feature.Moments.Label.Reactions,Reazioni
+Feature.Moments.Label.Reactions,
 Feature.Moments.Label.ReportReason.BreaksRules,Questo post viola le regole
 Feature.Moments.Label.ReportReason.IntellectualProperty,Questo post viola la mia proprietà intellettuale
 Feature.Moments.Label.ReportSubmittedBody,Grazie per il tuo feedback.
@@ -4216,6 +4229,7 @@ Feature.Parents.Message.TooManyAttempts,
 Feature.Parents.Title.EnterParentEmailV2,Inserisci l'email del genitore
 Feature.Parents.Title.SomethingWentWrong,
 Feature.PlayerSearchResults.Action.AddFriend,Aggiungi agli amici
+Feature.PlayerSearchResults.Heading.SearchResults,Risultati di ricerca
 Feature.PlayerSearchResults.Label.FromSearch,Dallo strumento di ricerca
 Feature.PlayerSearchResults.Label.NewUsername,Nuovo nome utente
 Feature.PlayerSearchResults.Label.Previously,Precedentemente
@@ -4606,7 +4620,7 @@ Feature.SettingsHub.Label.InviteSearchNoResults,
 Feature.SettingsHub.Label.Invited,Invitato
 Feature.SettingsHub.Label.LeaveButton,
 Feature.SettingsHub.Label.LoadingFriendsListFailed,
-Feature.SettingsHub.Label.LogoutButton,Disconnetti
+Feature.SettingsHub.Label.LogoutButton,Disconnettiti
 Feature.SettingsHub.Label.LogoutConfirmation,Vuoi davvero disconnetterti?
 Feature.SettingsHub.Label.MethodOfAbuse,Tipo di abuso?
 Feature.SettingsHub.Label.Moderated,

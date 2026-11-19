@@ -57,11 +57,13 @@ return {
 	doesMenuStayOpenAloneOnSideSheetRelease = function(p1, p2, p3)
 		return require(script.Utils.sideSheetBesideMenuPolicy).doesMenuStayOpenAloneOnSideSheetRelease(p1, p2, p3)
 	end,
-	getAreaBesideSideSheet = function(p1, p2)
-		return require(script.Utils.sideSheetBesideMenuPolicy).getAreaBesideSideSheet(p1, p2)
+	getAreaBesideSideSheet = function(p1, p2, p3)
+		-- upvalues: FlagsModule (copy)
+		return if FlagsModule.FFlagKeepSideSheetOpenBesideMenu then require(script.Utils.sideSheetBesideMenuPolicy).getAreaBesideSideSheet(p1, p2, p3) else require(script.Utils.sideSheetBesideMenuPolicy).getAreaBesideSideSheet(p1, p2)
 	end,
-	getBesideSideSheetWindowArea = function()
-		return require(script.Utils.sideSheetBesideMenuPolicy).getBesideSideSheetWindowArea()
+	getBesideSideSheetWindowArea = function(p1)
+		-- upvalues: FlagsModule (copy)
+		return if FlagsModule.FFlagKeepSideSheetOpenBesideMenu then require(script.Utils.sideSheetBesideMenuPolicy).getBesideSideSheetWindowArea(p1) else require(script.Utils.sideSheetBesideMenuPolicy).getBesideSideSheetWindowArea()
 	end,
 	getClaimedWindowAreaBesideSideSheet = function(p1, p2)
 		-- upvalues: Parent (copy)
@@ -93,6 +95,9 @@ return {
 	setIsRespawnEnabled = require(script.Utils.setIsRespawnEnabled),
 	logSidesheetClosed = function(p1)
 		require(script.Analytics.SidesheetAnalytics).logSidesheetClosed(p1)
+	end,
+	shouldDismissPairedSideSheetAfterInvite = function(p1, p2, p3)
+		return require(script.Utils.shouldDismissPairedSideSheetAfterInvite)(p1, p2, p3)
 	end,
 	["jest.config"] = script["jest.config"]
 }

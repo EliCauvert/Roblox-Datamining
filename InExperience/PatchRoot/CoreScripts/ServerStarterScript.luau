@@ -10,6 +10,7 @@ local GetFFlagDisplayServerChannelFunction = require(CorePackages.Workspace.Pack
 local GetFFlagExpChatAlwaysRunTCSFunction = require(CorePackages.Workspace.Packages.SharedFlags).getFFlagExpChatAlwaysRunTCS
 local GetFFlagEnableReferredPlayerJoinRemoteEventFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagEnableReferredPlayerJoinRemoteEvent
 local DebugLogExpchatMigration = game:DefineFastFlag("DebugLogExpchatMigration", false)
+local RunServiceGetRobloxArchitectureEnabledEngineFeature = game:DefineFastFlag("ServerVersionIncludesArchitecture", false) and game:GetEngineFeature("RunServiceGetRobloxArchitectureEnabled")
 local FFlagAXEnableInspectAndBuyBulkPurchase = require(CorePackages.Workspace.Packages.SharedFlags).FFlagAXEnableInspectAndBuyBulkPurchase
 local FFlagPlatformLeaderboardRccEnabled = require(CorePackages.Workspace.Packages.SharedFlags).FFlagPlatformLeaderboardRccEnabled
 local FFlagLuaAppsEnablePromptVIPServerPurchase = require(CorePackages.Workspace.Packages.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
@@ -18,6 +19,7 @@ local EmoteSkinningDisableEnabled = game:DefineFastFlag("EmoteSkinningDisableEna
 local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui", 1e999)
 assert(RobloxGui ~= nil, "RobloxGui should exist")
 local ServerUtilModule = require(RobloxGui.Modules.Server.ServerUtil)
+local GetServerArchitectureSuffixModule = require(RobloxGui.Modules.Server.getServerArchitectureSuffix)
 
 if ServerUtilModule.getFFlagServerCoreScriptSourceCode() then
 	ServerUtilModule.initSourceCodeFolder()
@@ -65,11 +67,17 @@ local function getServerChannel()
 end
 
 function GetServerVersion.OnServerInvoke()
-	-- upvalues: RunService (copy)
+	-- upvalues: RunService (copy), RunServiceGetRobloxArchitectureEnabledEngineFeature (copy), GetServerArchitectureSuffixModule (copy)
 	local RobloxVersion = RunService:GetRobloxVersion()
 	local DEBUGSERVER = if RobloxVersion == "?" then "DEBUG_SERVER" elseif RunService:IsStudio() then "ROBLOX Studio" else RobloxVersion
 	
-	return if RunService:IsStudio() then DEBUGSERVER else string.format("%s (%.6s)", DEBUGSERVER, RunService.ClientGitHash)
+	if RunService:IsStudio() then
+		return DEBUGSERVER
+	else
+		local ClientGitHash = RunService.ClientGitHash
+		
+		return if RunServiceGetRobloxArchitectureEnabledEngineFeature then string.format("%s%s (%.6s)", DEBUGSERVER, GetServerArchitectureSuffixModule(RunService), ClientGitHash) else string.format("%s (%.6s)", DEBUGSERVER, ClientGitHash)
+	end
 end
 
 if GetFFlagDisplayServerChannelFunction() then

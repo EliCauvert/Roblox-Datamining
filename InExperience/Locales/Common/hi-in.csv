@@ -2495,12 +2495,15 @@ Feature.Build.Label.ToolAssetSearchRunning,ऐसेट लाइब्रेर
 Feature.Build.Label.ToolClientDMDone,क्लाइंट DataModel सर्च किया गया
 Feature.Build.Label.ToolClientDMFailed,क्लाइंट DataModel सर्च नहीं किया जा सका
 Feature.Build.Label.ToolClientDMRunning,क्लाइंट DataModel सर्च किया जा रहा है
+Feature.Build.Label.ToolCodeRunning,कोड रन किया जा रहा है
 Feature.Build.Label.ToolCompileDone,कोड को कंपाइल कर लिया गया
 Feature.Build.Label.ToolCompileFailed,कोड को कंपाइल नहीं किया जा सका
 Feature.Build.Label.ToolCompileRunning,कोड को कंपाइल किया जा रहा है
+Feature.Build.Label.ToolDeveloperProductRunning,आपके डेवलपर प्रॉडक्ट पर काम चल रहा है
 Feature.Build.Label.ToolGameInfoDone,गेम की जानकारी अपडेट की गई
 Feature.Build.Label.ToolGameInfoFailed,गेम की जानकारी अपडेट नहीं की जा सकी
 Feature.Build.Label.ToolGameInfoRunning,गेम की जानकारी अपडेट की जा रही है
+Feature.Build.Label.ToolGamePassRunning,आपके गेम पास पर काम चल रहा है
 Feature.Build.Label.ToolGameSaveDone,गेम सेव किया गया
 Feature.Build.Label.ToolGameSaveFailed,गेम सेव नहीं किया जा सका
 Feature.Build.Label.ToolGameSaveRunning,गेम सेव किया जा रहा है
@@ -2519,6 +2522,7 @@ Feature.Build.Label.ToolLuauRunning,Luau एक्ज़ीक्यूट क�
 Feature.Build.Label.ToolModelDone,3D मॉडल जेनरेट किया गया
 Feature.Build.Label.ToolModelFailed,3D मॉडल जेनरेट नहीं किया जा सका
 Feature.Build.Label.ToolModelRunning,3D मॉडल जेनरेट किया जा रहा है
+Feature.Build.Label.ToolMonetizationRunning,आपके गेम के मोनेटाइज़ेशन पर काम चल रहा है
 Feature.Build.Label.ToolPlanPresentDone,प्लान प्रेज़ेंट किया गया
 Feature.Build.Label.ToolPlanPresentFailed,प्लान प्रेज़ेंट नहीं किया जा सका
 Feature.Build.Label.ToolPlanPresentRunning,प्लान प्रेज़ेंट किया जा रहा है
@@ -2546,6 +2550,7 @@ Feature.Build.Label.ToolSkillLoadRunning,स्किल लोड किया 
 Feature.Build.Label.ToolSkillsDone,उपलब्ध स्किल लिस्ट की गईं
 Feature.Build.Label.ToolSkillsFailed,उपलब्ध स्किल लिस्ट नहीं की जा सकीं
 Feature.Build.Label.ToolSkillsRunning,उपलब्ध स्किल लिस्ट की जा रही हैं
+Feature.Build.Label.ToolSubscriptionRunning,आपके सब्सक्रिप्शन पर काम चल रहा है
 Feature.Build.Label.ToolTasksPlanDone,टास्क प्लान किए गए
 Feature.Build.Label.ToolTasksPlanFailed,टास्क प्लान नहीं किए जा सके
 Feature.Build.Label.ToolTasksPlanRunning,आपके टास्क प्लान किए जा रहे हैं
@@ -3267,14 +3272,17 @@ Feature.Chat.Label.OneToOne.ThemRepliedToYou,आपको जवाब भेज
 Feature.Chat.Label.OneToOne.YouRepliedToThem,आपने जवाब दिया
 Feature.Chat.Label.Pending,
 Feature.Chat.Label.PrivacySettings,प्राइवेसी सेटिंग्स
+Feature.Chat.Label.Reactions,रिएक्शन
 Feature.Chat.Label.ReplyChatInputPlaceholder,{DISPLAY_NAME} को जवाब दें
 Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,खुद को जवाब दें
 Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} ने कहा...
 Feature.Chat.Label.ReplyingToYourself,आपने कहा...
 Feature.Chat.Label.SearchFriends,फ़्रेंड्स के लिए सर्च करें
 Feature.Chat.Label.SearchWord,
+Feature.Chat.Label.SelectToRemove,हटाने के लिए चुनें
 Feature.Chat.Label.SnoozePartyNotifications,इन एक्सपीरिएंस पार्टी नोटिफ़िकेशन को म्यूट करें:
 Feature.Chat.Label.SwipeToReplyTooltip,जवाब देने के लिए स्वाइप करें
+Feature.Chat.Label.TapToRemove,हटाने के लिए टैप करें
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}दिन
 Feature.Chat.Label.TimestampHoursAbbreviatedPlural,{num_hours}घंटा
 Feature.Chat.Label.TimestampMinutesAbbreviatedPlural,{num_minutes} मिनट
@@ -3330,6 +3338,11 @@ Feature.Chat.Text.NoFriends,आपके पास अभी तक कोई �
 Feature.Chat.Title.FriendsChat,फ़्रेंड्स चैट
 Feature.Chat.Title.NewChat,नई चैट
 Feature.Chat.Toast.Error.InvalidUserSelected,इस लिस्ट में एक या इससे ज़्यादा लोगों को जोड़ा नहीं जा सकता
+Feature.CloudClient.Action.PlayWithoutCloudPlay,Cloud Play के बिना खेलें
+Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play, गेम को Roblox के कंप्यूटर पर चलाता है, इसलिए हो सकता है कि यह ज़्यादा तेज़ी से लोड हो और इसमें क्रैश की समस्या कम आए. यह सिर्फ़ आपके गेम खेलने तक चलता है."
+Feature.CloudClient.Heading.CloudPlayOffer,Cloud Play के साथ खेलें
+Feature.CloudClient.Label.RobloxRealityGraphics,"आपका गेम, नए अंदाज़ में"
+Feature.CloudClient.Label.RobloxRealityPlusOnly,सिर्फ़ Plus के सब्सक्राइबर्स के लिए
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,खुद को खोजने में अपने फ़्रेंड्स की मदद करें
 Feature.Contacts.Action.Invite,इनवाइट करें
@@ -4216,6 +4229,7 @@ Feature.Parents.Message.TooManyAttempts,इससे ज़्यादा ब�
 Feature.Parents.Title.EnterParentEmailV2,पेरेंट का ईमेल डालें
 Feature.Parents.Title.SomethingWentWrong,
 Feature.PlayerSearchResults.Action.AddFriend,
+Feature.PlayerSearchResults.Heading.SearchResults,सर्च रिज़ल्ट
 Feature.PlayerSearchResults.Label.FromSearch,सर्च से
 Feature.PlayerSearchResults.Label.NewUsername,नया यूज़रनेम
 Feature.PlayerSearchResults.Label.Previously,पहले
@@ -4605,8 +4619,8 @@ Feature.SettingsHub.Label.InviteSearchNoResults,
 Feature.SettingsHub.Label.Invited,इनवाइट किया गया
 Feature.SettingsHub.Label.LeaveButton,
 Feature.SettingsHub.Label.LoadingFriendsListFailed,"कोई गड़बड़ी हुई है, थोड़ी देर बाद कोशिश करें."
-Feature.SettingsHub.Label.LogoutButton,लॉग आउट करें
-Feature.SettingsHub.Label.LogoutConfirmation,आपको वाकई लॉग आउट करना है?
+Feature.SettingsHub.Label.LogoutButton,साइन-आउट करें
+Feature.SettingsHub.Label.LogoutConfirmation,क्या आपको वाकई साइन-आउट करना है?
 Feature.SettingsHub.Label.MethodOfAbuse,किस तरह का दुर्व्यवहार?
 Feature.SettingsHub.Label.Moderated,
 Feature.SettingsHub.Label.ModeratedInviteError,एक्सपीरिएंस का इनवाइट मॉडरेट किया गया था और भेजा नहीं गया था.

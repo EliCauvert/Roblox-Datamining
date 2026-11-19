@@ -5,6 +5,7 @@ local ServiceModule = require(Chrome.Service)
 local ConnectIconModule = require(script.Parent.ConnectIcon)
 local ResponsiveModule = require(CorePackages.Workspace.Packages.Responsive)
 local InExperienceAppChatModalModule = require(CorePackages.Workspace.Packages.AppChat.InExperienceAppChatModal)
+local InExperienceSideSheetModule = require(CorePackages.Workspace.Packages.InExperienceSideSheet)
 local ChromeIntegrationUtilsModule = require(Chrome.Integrations.ChromeIntegrationUtils)
 local LocalStoreModule = require(Chrome.ChromeShared.Service.LocalStore)
 local MappedSignal = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal
@@ -28,7 +29,7 @@ local NewMappedSignal = MappedSignal.new(InExperienceAppChatModalModule.default.
 end)
 
 return function(Id, InitialAvailability)
-	-- upvalues: GetFFlagIsSquadEnabledFunction (copy), FFlagAppChatDistinctUnibarEntryPoint (copy), ChatEntryPointNames (copy), ServiceModule (copy), SideSheetPlacement (copy), FFlagKeepSideSheetOpenBesideMenu (copy), SideSheetOpenBehavior (copy), UniversalAppPolicyModule (copy), InExperienceAppChatModalModule (copy), ChromeIntegrationUtilsModule (copy), ResponsiveModule (copy), FocusUtils (copy), LocalStoreModule (copy), GetFStringConnectTooltipLocalStorageKeyModule (copy), NewMappedSignal (copy), ReactModule (copy), ConnectIconModule (copy), AppChatInExpUseUnibarNotification (copy), Symbol (copy), MouseIconOverrideService (copy)
+	-- upvalues: GetFFlagIsSquadEnabledFunction (copy), FFlagAppChatDistinctUnibarEntryPoint (copy), ChatEntryPointNames (copy), ServiceModule (copy), SideSheetPlacement (copy), FFlagKeepSideSheetOpenBesideMenu (copy), SideSheetOpenBehavior (copy), UniversalAppPolicyModule (copy), InExperienceSideSheetModule (copy), InExperienceAppChatModalModule (copy), ResponsiveModule (copy), FocusUtils (copy), ChromeIntegrationUtilsModule (copy), LocalStoreModule (copy), GetFStringConnectTooltipLocalStorageKeyModule (copy), NewMappedSignal (copy), ReactModule (copy), ConnectIconModule (copy), AppChatInExpUseUnibarNotification (copy), Symbol (copy), MouseIconOverrideService (copy)
 	local FFlagIsSquadEnabled = Id == "connect_unibar" and GetFFlagIsSquadEnabledFunction()
 	local ChromeUnibar = if FFlagAppChatDistinctUnibarEntryPoint and Id == "connect_unibar" then ChatEntryPointNames.ChromeUnibar else nil
 	local RegisterResult = ServiceModule:register({
@@ -37,17 +38,30 @@ return function(Id, InitialAvailability)
 		sideSheetOpenBehavior = if FFlagKeepSideSheetOpenBesideMenu then SideSheetOpenBehavior.WindowBesideSheet else nil,
 		label = if UniversalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTerminology() then "Feature.Chat.Title.FriendsChat" else "Feature.Squads.Label.Party",
 		activated = function()
-			-- upvalues: InExperienceAppChatModalModule (upval), ChromeIntegrationUtilsModule (upval), ResponsiveModule (upval), FocusUtils (upval), ChromeUnibar (copy), LocalStoreModule (upval), GetFStringConnectTooltipLocalStorageKeyModule (upval)
+			-- upvalues: FFlagKeepSideSheetOpenBesideMenu (upval), InExperienceSideSheetModule (upval), InExperienceAppChatModalModule (upval), ResponsiveModule (upval), FocusUtils (upval), ChromeUnibar (copy), ChromeIntegrationUtilsModule (upval), LocalStoreModule (upval), GetFStringConnectTooltipLocalStorageKeyModule (upval)
+			local IsWindowShownBesideSideSheetMatch: boolean = FFlagKeepSideSheetOpenBesideMenu and InExperienceSideSheetModule.getWindowShownBesideSideSheet(false) == InExperienceSideSheetModule.Constants.IntegrationIds.ConnectDropdown
+			
 			if InExperienceAppChatModalModule:getVisible() then
-				InExperienceAppChatModalModule.default:setVisible(false)
+				if not IsWindowShownBesideSideSheetMatch then
+					InExperienceAppChatModalModule.default:setVisible(false)
+				end
 			else
-				ChromeIntegrationUtilsModule.dismissRobloxMenuAndRun(function()
+				local function openFriendsChat()
 					-- upvalues: ResponsiveModule (upval), FocusUtils (upval), InExperienceAppChatModalModule (upval), ChromeUnibar (upval)
 					if ResponsiveModule.GetInputModeStore(false).getLastInputType(false) == ResponsiveModule.Input.Directional then
 						FocusUtils.FocusOffChrome()
 					end
 					InExperienceAppChatModalModule.default:setVisible(true, ChromeUnibar)
-				end)
+				end
+				
+				if IsWindowShownBesideSideSheetMatch then
+					if ResponsiveModule.GetInputModeStore(false).getLastInputType(false) == ResponsiveModule.Input.Directional then
+						FocusUtils.FocusOffChrome()
+					end
+					InExperienceAppChatModalModule.default:setVisible(true, ChromeUnibar)
+				else
+					ChromeIntegrationUtilsModule.dismissRobloxMenuAndRun(openFriendsChat)
+				end
 			end
 			LocalStoreModule.storeForLocalPlayer(GetFStringConnectTooltipLocalStorageKeyModule(), true)
 		end,

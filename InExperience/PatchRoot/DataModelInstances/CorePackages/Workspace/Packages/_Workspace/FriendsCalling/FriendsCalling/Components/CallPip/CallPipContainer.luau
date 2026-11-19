@@ -7,13 +7,15 @@ local ReactModule = require(Parent.React)
 local ResponsiveModule = require(Parent.Responsive)
 local RobloxAppEnumsModule = require(Parent.RobloxAppEnums)
 local RobloxAppHooksModule = require(Parent.RobloxAppHooks)
-local _ = require(FriendsCalling.Stores.GetFriendsCallingStore)
+local FriendsCallingExternalContextModule = require(FriendsCalling.Contexts.FriendsCallingExternalContext)
+local GetFriendsCallingStoreModule = require(FriendsCalling.Stores.GetFriendsCallingStore)
 local PassInputThroughModule = require(FriendsCalling.Utils.passInputThrough)
 local CollapsedCallOverlayModule = require(script.Parent.CollapsedCallOverlay)
 local ExpandedCallOverlayModule = require(script.Parent.ExpandedCallOverlay)
 local ResolveCardLayoutModule = require(script.Parent.resolveCardLayout)
 local UseCallPipViewModelModule = require(script.Parent.useCallPipViewModel)
 local DeviceOrientationMode = RobloxAppEnumsModule.DeviceOrientationMode
+local FriendsCallingParticipantStatus = Enum.FriendsCallingParticipantStatus
 local UseDeviceInsetsFunction = ResponsiveModule.useDeviceInsets
 local UseDeviceOrientationFunction = RobloxAppHooksModule.useDeviceOrientation
 local UseTokensFunction = FoundationModule.Hooks.useTokens
@@ -43,7 +45,7 @@ end
 
 local function noop() end
 
-local function toggleMicrophone(Muted)
+local function _(Muted)
 	-- upvalues: FriendsCallingService (copy)
 	FriendsCallingService:SetMuted(Muted)
 end
@@ -54,7 +56,7 @@ local function toggleConversationAudio(p1)
 end
 
 return function(p1)
-	-- upvalues: UseCallPipViewModelModule (copy), UseTokensFunction (copy), UseDeviceInsetsFunction (copy), UseDeviceOrientationFunction (copy), DeviceOrientationMode (copy), ReactModule (copy), FriendsCallingService (copy), FloatingWindowModule (copy), ResolveCardLayoutModule (copy), ExpandedCallOverlayModule (copy), noop (copy), toggleConversationAudio (copy), toggleMicrophone (copy), CollapsedCallOverlayModule (copy), renderStashedContent (copy), _UDim2_1 (copy), _UDim2 (copy)
+	-- upvalues: UseCallPipViewModelModule (copy), UseTokensFunction (copy), UseDeviceInsetsFunction (copy), UseDeviceOrientationFunction (copy), DeviceOrientationMode (copy), ReactModule (copy), FriendsCallingService (copy), FriendsCallingExternalContextModule (copy), FriendsCallingParticipantStatus (copy), GetFriendsCallingStoreModule (copy), FloatingWindowModule (copy), ResolveCardLayoutModule (copy), ExpandedCallOverlayModule (copy), noop (copy), toggleConversationAudio (copy), CollapsedCallOverlayModule (copy), renderStashedContent (copy), _UDim2_1 (copy), _UDim2 (copy)
 	local Host = p1.host
 	local UseCallPipViewModelModuleResult = UseCallPipViewModelModule(p1.call)
 	local IsExpanded = UseCallPipViewModelModuleResult.isExpanded
@@ -73,9 +75,26 @@ return function(p1)
 		-- upvalues: FriendsCallingService (upval), CallId (copy)
 		FriendsCallingService:EndCall(CallId, "LuaEndAction")
 	end, { CallId })
+	local TryMuteExperienceVoiceFunction = FriendsCallingExternalContextModule.useFriendsCallingExternal().tryMuteExperienceVoice
+	local Status = if UseCallPipViewModelModuleResult.selfParticipant then UseCallPipViewModelModuleResult.selfParticipant.status else nil
+	ReactModule.useEffect(function()
+		-- upvalues: Status (copy), FriendsCallingParticipantStatus (upval), TryMuteExperienceVoiceFunction (copy)
+		if Status == FriendsCallingParticipantStatus.Joined then
+			TryMuteExperienceVoiceFunction(false)
+		end
+	end, { Status, TryMuteExperienceVoiceFunction })
+	local UseResult2 = ReactModule.useCallback(function(Muted)
+		-- upvalues: TryMuteExperienceVoiceFunction (copy), GetFriendsCallingStoreModule (upval), CallId (copy), FriendsCallingService (upval)
+		if not Muted then
+			TryMuteExperienceVoiceFunction(true)
+			
+			if GetFriendsCallingStoreModule(false).getCallId(false) ~= CallId then return end
+		end
+		FriendsCallingService:SetMuted(Muted)
+	end, { CallId, TryMuteExperienceVoiceFunction })
 	local Volume = p1.call.volume
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
-	local UseResult2 = ReactModule.useCallback(function(p2)
+	local UseResult3 = ReactModule.useCallback(function(p2)
 		-- upvalues: UseStateResult2_1 (copy), FloatingWindowModule (upval)
 		UseStateResult2_1(if p2.kind == FloatingWindowModule.PlacementKind.Stashed then p2.edge else nil)
 	end, {})
@@ -95,7 +114,7 @@ return function(p1)
 		onEndCall = UseResult1,
 		onOpenChat = noop,
 		onToggleConversationAudio = toggleConversationAudio,
-		onToggleMicrophone = toggleMicrophone,
+		onToggleMicrophone = UseResult2,
 		participants = Participants,
 		selfParticipant = UseCallPipViewModelModuleResult.selfParticipant,
 		callVolume = Volume,
@@ -104,7 +123,7 @@ return function(p1)
 		isRinging = IsRinging,
 		onDragInputTarget = UseResult,
 		onToggleConversationAudio = toggleConversationAudio,
-		onToggleMicrophone = toggleMicrophone,
+		onToggleMicrophone = UseResult2,
 		participant = Participants[1],
 		selfParticipant = UseCallPipViewModelModuleResult.selfParticipant,
 		callVolume = Volume
@@ -122,7 +141,7 @@ return function(p1)
 		enableStash = not IsExpanded,
 		initialCenter = UDim2.fromScale(0.85, 0.2),
 		onActivated = if IsExpanded then nil else UseCallPipViewModelModuleResult.onExpand,
-		onPlacementChanged = UseResult2,
+		onPlacementChanged = UseResult3,
 		screenInsets = Enum.ScreenInsets.None,
 		size = if UseStateResult1 == nil then if IsExpanded then ResolveCardLayoutModuleResult.expanded.size else _UDim2 else _UDim2_1,
 		stashOptions = StashOptions

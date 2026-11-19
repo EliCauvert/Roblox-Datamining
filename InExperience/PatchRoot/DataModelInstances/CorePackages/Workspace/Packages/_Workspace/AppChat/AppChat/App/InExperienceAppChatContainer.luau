@@ -4,6 +4,7 @@ local Parent = AppChat.Parent
 local FormFactorModule = require(Parent.FormFactor)
 local ReactModule = require(Parent.React)
 local ResponsiveModule = require(Parent.Responsive)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local FoundationModule = require(Parent.Foundation)
 local IconSize = FoundationModule.Enums.IconSize
 local IconButton = FoundationModule.IconButton
@@ -23,6 +24,7 @@ local UseParentContainerExtentsModule = require(AppChat.Contexts.ParentContainer
 local ContainerModule = require(AppChat.Components.ExternalNavigationHandler.Container)
 local UseExternalNavigationByScreenModule = require(AppChat.Hooks.useExternalNavigationByScreen)
 local UseAppChatIsWideModeModule = require(AppChat.Hooks.useAppChatIsWideMode)
+local UseIsChatBesideSideSheetModule = require(AppChat.App.useIsChatBesideSideSheet)
 local ParentContainerContextModule = require(AppChat.Contexts.ParentContainer.ParentContainerContext)
 local LocalPlayer = game:GetService("Players").LocalPlayer
 local RobloxEventReceiver = require(Parent.RealtimeDelivery).RobloxEventReceiver
@@ -36,7 +38,8 @@ local UseContextFunction = ReactModule.useContext
 local UseRefFunction = ReactModule.useRef
 local AppChatInExperienceMountMinLoadingTimeMs = game:DefineFastInt("AppChatInExperienceMountMinLoadingTimeMs", 0)
 local FFlagAppChatInExpSelectChatMembersMobileHeightModule = require(AppChat.Flags.FFlagAppChatInExpSelectChatMembersMobileHeight)
-local FFlagSquadAppChatRTNFix = require(Parent.SharedFlags).FFlagSquadAppChatRTNFix
+local FFlagSquadAppChatRTNFix = SharedFlagsModule.FFlagSquadAppChatRTNFix
+local FFlagKeepSideSheetOpenBesideMenu = SharedFlagsModule.FFlagKeepSideSheetOpenBesideMenu
 local FIntAppChatWideBreakpointMinHeightModule = require(AppChat.Flags.FIntAppChatWideBreakpointMinHeight)
 local FIntAppChatWideBreakpointMinWidthModule = require(AppChat.Flags.FIntAppChatWideBreakpointMinWidth)
 local PartyPageCarouselExperimentation = require(Parent.SocialExperiments).PartyPageCarouselExperimentation
@@ -44,13 +47,18 @@ local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebu
 local GetRootedNavigationStoreModule = require(AppChat.Stores.GetRootedNavigationStore)
 local DomLocatorsModule = require(AppChat.Utils.DomLocators)
 
-local function _()
+local function _(Vector): boolean
+	-- upvalues: FIntAppChatWideBreakpointMinWidthModule (copy), FIntAppChatWideBreakpointMinHeightModule (copy)
+	return Vector.Y > 0 and (Vector.Y <= Vector.X and FIntAppChatWideBreakpointMinWidthModule <= Vector.X) and FIntAppChatWideBreakpointMinHeightModule <= Vector.Y
+end
+
+local _ = function()
 	-- upvalues: AppChat (copy)
 	return require(AppChat.EnumScreens)
 end
 
 return function(p1)
-	-- upvalues: UseDispatchFunction (copy), UseContextFunction (copy), ParentContainerContextModule (copy), UseStateFunction (copy), UseExternalNavigationByScreenModule (copy), UseMemoFunction (copy), Signal (copy), RobloxEventReceiver (copy), NotificationService (copy), ReactModule (copy), ResponsiveModule (copy), FIntAppChatWideBreakpointMinWidthModule (copy), FIntAppChatWideBreakpointMinHeightModule (copy), FFlagAppChatInExpSelectChatMembersMobileHeightModule (copy), UseAppChatIsWideModeModule (copy), AppChat (copy), UseRefFunction (copy), UseSignalStateFunction (copy), GetRootedNavigationStoreModule (copy), UseEffectFunction (copy), PartyPageCarouselExperimentation (copy), SetFormFactorFunction (copy), FormFactorModule (copy), UseParentContainerExtentsModule (copy), UseCallbackFunction (copy), AppChatInExperienceMountMinLoadingTimeMs (copy), AppChatEntryPointModule (copy), LocalPlayer (copy), ChatPlacementContextModule (copy), Loading (copy), IconSize (copy), IconButton (copy), IconName (copy), ButtonSize (copy), ButtonVariant (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), ChatEventReceiverModule (copy), ChatExternalEventReceiverModule (copy), ContainerModule (copy), FFlagSquadAppChatRTNFix (copy), SquadAppChatEventReceiver (copy)
+	-- upvalues: UseDispatchFunction (copy), UseContextFunction (copy), ParentContainerContextModule (copy), UseStateFunction (copy), UseExternalNavigationByScreenModule (copy), UseMemoFunction (copy), Signal (copy), RobloxEventReceiver (copy), NotificationService (copy), ReactModule (copy), ResponsiveModule (copy), FIntAppChatWideBreakpointMinWidthModule (copy), FIntAppChatWideBreakpointMinHeightModule (copy), FFlagAppChatInExpSelectChatMembersMobileHeightModule (copy), UseAppChatIsWideModeModule (copy), AppChat (copy), UseRefFunction (copy), UseParentContainerExtentsModule (copy), FFlagKeepSideSheetOpenBesideMenu (copy), UseIsChatBesideSideSheetModule (copy), UseEffectFunction (copy), UseSignalStateFunction (copy), GetRootedNavigationStoreModule (copy), PartyPageCarouselExperimentation (copy), SetFormFactorFunction (copy), FormFactorModule (copy), UseCallbackFunction (copy), AppChatInExperienceMountMinLoadingTimeMs (copy), AppChatEntryPointModule (copy), LocalPlayer (copy), ChatPlacementContextModule (copy), Loading (copy), IconSize (copy), IconButton (copy), IconName (copy), ButtonSize (copy), ButtonVariant (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), ChatEventReceiverModule (copy), ChatExternalEventReceiverModule (copy), ContainerModule (copy), FFlagSquadAppChatRTNFix (copy), SquadAppChatEventReceiver (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local HideParentContainerFunction = UseContextFunction(ParentContainerContextModule).hideParentContainer
 	local UseStateResult, UseStateResult2 = UseStateFunction(0)
@@ -79,7 +87,30 @@ return function(p1)
 	if IsRooted then
 		UseRefResult1.current = true
 	end
-	local NoFFlagAppChatInExpSelectChatMembersMobileHeightModule1 = not UseRefResult1.current and NoFFlagAppChatInExpSelectChatMembersMobileHeightModule
+	local UseParentContainerExtentsModuleResult, UseParentContainerExtentsModuleResult2 = UseParentContainerExtentsModule()
+	local UseIsChatBesideSideSheetModuleResult = if FFlagKeepSideSheetOpenBesideMenu then UseIsChatBesideSideSheetModule() else false
+	local v1 = false
+	
+	if FFlagKeepSideSheetOpenBesideMenu then
+		local UseStateResult1, UseStateResult2_1 = UseStateFunction(function(): boolean
+			-- upvalues: UseParentContainerExtentsModuleResult (copy), FIntAppChatWideBreakpointMinWidthModule (upval), FIntAppChatWideBreakpointMinHeightModule (upval)
+			local Value = UseParentContainerExtentsModuleResult:getValue()
+			
+			return Value.Y > 0 and (Value.Y <= Value.X and FIntAppChatWideBreakpointMinWidthModule <= Value.X) and FIntAppChatWideBreakpointMinHeightModule <= Value.Y
+		end)
+		UseEffectFunction(function()
+			-- upvalues: UseStateResult2_1 (copy), UseParentContainerExtentsModuleResult (copy), FIntAppChatWideBreakpointMinWidthModule (upval), FIntAppChatWideBreakpointMinHeightModule (upval), ReactModule (upval)
+			local Value = UseParentContainerExtentsModuleResult:getValue()
+			UseStateResult2_1(Value.Y > 0 and (Value.Y <= Value.X and FIntAppChatWideBreakpointMinWidthModule <= Value.X) and FIntAppChatWideBreakpointMinHeightModule <= Value.Y)
+			
+			return ReactModule.__subscribeToBinding(UseParentContainerExtentsModuleResult, function(Vector)
+				-- upvalues: UseStateResult2_1 (upval), FIntAppChatWideBreakpointMinWidthModule (upval), FIntAppChatWideBreakpointMinHeightModule (upval)
+				UseStateResult2_1(Vector.Y > 0 and (Vector.Y <= Vector.X and FIntAppChatWideBreakpointMinWidthModule <= Vector.X) and FIntAppChatWideBreakpointMinHeightModule <= Vector.Y)
+			end)
+		end, { UseParentContainerExtentsModuleResult })
+		v1 = UseStateResult1
+	end
+	local NoFFlagAppChatInExpSelectChatMembersMobileHeightModule1 = not UseRefResult1.current and (if UseIsChatBesideSideSheetModuleResult then v1 else NoFFlagAppChatInExpSelectChatMembersMobileHeightModule)
 	local UseSignalStateResult = UseSignalStateFunction(GetRootedNavigationStoreModule(false).getIsNavigationPending)
 	UseEffectFunction(function()
 		-- upvalues: PartyPageCarouselExperimentation (upval), NoFFlagAppChatInExpSelectChatMembersMobileHeightModule1 (copy), UseDispatchResult (copy), SetFormFactorFunction (upval), FormFactorModule (upval)
@@ -95,9 +126,8 @@ return function(p1)
 		NoFFlagAppChatInExpSelectChatMembersMobileHeightModule1,
 		UseDispatchResult
 	})
-	local UseParentContainerExtentsModuleResult, UseParentContainerExtentsModuleResult2 = UseParentContainerExtentsModule()
 	local IsUseOrientationResultMatch = UseOrientationResult == ResponsiveModule.DefaultKey
-	local UseStateResult1, UseStateResult2_1 = UseStateFunction(IsUseOrientationResultMatch)
+	local UseStateResult3, UseStateResult2_2 = UseStateFunction(IsUseOrientationResultMatch)
 	local UseRefResult2 = UseRefFunction(os.clock())
 	local UseCallbackResult = UseCallbackFunction(function()
 		-- upvalues: p1 (copy), HideParentContainerFunction (copy)
@@ -105,22 +135,22 @@ return function(p1)
 		HideParentContainerFunction()
 	end, { HideParentContainerFunction, p1.hideAppChat })
 	UseEffectFunction(function()
-		-- upvalues: IsUseOrientationResultMatch (copy), UseRefResult2 (copy), AppChatInExperienceMountMinLoadingTimeMs (upval), UseStateResult2_1 (copy)
+		-- upvalues: IsUseOrientationResultMatch (copy), UseRefResult2 (copy), AppChatInExperienceMountMinLoadingTimeMs (upval), UseStateResult2_2 (copy)
 		if not IsUseOrientationResultMatch then
 			local Elapsed = os.clock() - UseRefResult2.current
 			local AppChatInExperienceMountMinLoadingTimeMsRatio = AppChatInExperienceMountMinLoadingTimeMs / 1000
 			
 			if Elapsed < AppChatInExperienceMountMinLoadingTimeMsRatio then
 				delay(AppChatInExperienceMountMinLoadingTimeMsRatio - Elapsed, function()
-					-- upvalues: UseStateResult2_1 (upval)
-					UseStateResult2_1(false)
+					-- upvalues: UseStateResult2_2 (upval)
+					UseStateResult2_2(false)
 				end)
 				
 				return
 			end
-			UseStateResult2_1(false)
+			UseStateResult2_2(false)
 		end
-	end, { IsUseOrientationResultMatch, UseStateResult2_1 })
+	end, { IsUseOrientationResultMatch, UseStateResult2_2 })
 	local Element = ReactModule.createElement(AppChatEntryPointModule, {
 		isVisible = true,
 		setActiveConversationId = UseStateResult2,
@@ -138,7 +168,9 @@ return function(p1)
 	return ReactModule.createElement(ReactModule.Fragment, {}, {
 		AppChatWindow = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
+			Name = if FFlagKeepSideSheetOpenBesideMenu then "AppChatWindow" else nil,
 			BackgroundColor3 = Color3.new(0, 0, 0),
+			ClipsDescendants = if UseIsChatBesideSideSheetModuleResult then true else nil,
 			Size = UseParentContainerExtentsModuleResult:map(function(Vector): UDim2
 				return UDim2.fromOffset(Vector.X, Vector.Y)
 			end),
@@ -149,7 +181,7 @@ return function(p1)
 		}, {
 			Corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
 			containerRef = ReactModule.createElement(ResponsiveModule.ContainerRef.Provider, { value = UseRefResult }, {
-				AppChatContent = if UseStateResult1 then if UseSignalStateResult then nil else ReactModule.createElement(Loading, {
+				AppChatContent = if UseStateResult3 then if UseSignalStateResult then nil else ReactModule.createElement(Loading, {
 					size = IconSize.Large,
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.fromScale(0.5, 0.5)

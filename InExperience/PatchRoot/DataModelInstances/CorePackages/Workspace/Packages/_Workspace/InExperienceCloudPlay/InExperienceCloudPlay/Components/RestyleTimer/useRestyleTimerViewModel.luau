@@ -8,13 +8,15 @@ local _ = require(script.Parent.RestyleTimerView)
 local GetCloudClientServiceModule = require(InExperienceCloudPlay.getCloudClientService)
 local UseSecondsLeftModule = require(InExperienceCloudPlay.Hooks.useSecondsLeft)
 local UseServicePropertyModule = require(InExperienceCloudPlay.Hooks.useServiceProperty)
+local FFlagLuaAppCloudClientRobloxRealityNameParamModule = require(InExperienceCloudPlay.Flags.FFlagLuaAppCloudClientRobloxRealityNameParam)
+local FStringLuaAppCloudClientRobloxRealityNameModule = require(InExperienceCloudPlay.Flags.FStringLuaAppCloudClientRobloxRealityName)
 
 local function _(p1: number): string
 	return string.format("%02d:%02d", p1 // 60, p1 % 60)
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), GetCloudClientServiceModule (copy), UseServicePropertyModule (copy), UseSecondsLeftModule (copy), UseLocalizationFunction (copy), RestyleSessionTelemetryModule (copy)
+	-- upvalues: ReactModule (copy), GetCloudClientServiceModule (copy), UseServicePropertyModule (copy), UseSecondsLeftModule (copy), FFlagLuaAppCloudClientRobloxRealityNameParamModule (copy), UseLocalizationFunction (copy), FStringLuaAppCloudClientRobloxRealityNameModule (copy), RestyleSessionTelemetryModule (copy)
 	local UseMemoResult = ReactModule.useMemo(GetCloudClientServiceModule, {})
 	local IsRobloxRealityEnvironment = UseServicePropertyModule(UseMemoResult, "IsRobloxRealityEnvironment")
 	local RobloxRealityFilterEnabled = UseServicePropertyModule(UseMemoResult, "RobloxRealityFilterEnabled")
@@ -23,7 +25,13 @@ return function(p1)
 	local UseSecondsLeftModuleResult: number = UseSecondsLeftModule(if NoIsHidden then UseMemoResult else nil, if typeof(SessionTimeLimit) == "number" then SessionTimeLimit else nil)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseRefResult = ReactModule.useRef(nil)
-	local UseLocalizationResult = UseLocalizationFunction(if NoIsHidden then {
+	local UseLocalizationResult = if FFlagLuaAppCloudClientRobloxRealityNameParamModule then UseLocalizationFunction(if NoIsHidden then {
+		timeLeft = "Feature.CloudClient.Label.TimeLeft",
+		description = {
+			"Feature.CloudClient.Description.RobloxRealityPreviewV2",
+			productName = FStringLuaAppCloudClientRobloxRealityNameModule
+		}
+	} else {}) else UseLocalizationFunction(if NoIsHidden then {
 		restyle = "Feature.CloudClient.Label.RobloxReality",
 		timeLeft = "Feature.CloudClient.Label.TimeLeft",
 		description = "Feature.CloudClient.Description.RobloxRealityPreview"
@@ -109,7 +117,7 @@ return function(p1)
 	
 	return if NoIsHidden then {
 		text = {
-			restyle = UseLocalizationResult.restyle,
+			restyle = if FFlagLuaAppCloudClientRobloxRealityNameParamModule then FStringLuaAppCloudClientRobloxRealityNameModule else UseLocalizationResult.restyle,
 			timeLeft = UseLocalizationResult.timeLeft,
 			description = UseLocalizationResult.description
 		},

@@ -83,7 +83,8 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 				size = InputSize.Small,
 				Selectable = Selectable,
 				onActivated = p1.onBuyActivated,
-				fillBehavior = FillBehavior.Fill
+				fillBehavior = FillBehavior.Fill,
+				testId = p1.buyButtonTestId
 			})
 		}) else ReactModule.createElement(Button, {
 			AnchorPoint = Vector2.new(1, 0.5),
@@ -91,7 +92,8 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 			text = p1.buyButtonText,
 			size = InputSize.Small,
 			Selectable = Selectable,
-			onActivated = p1.onBuyActivated
+			onActivated = p1.onBuyActivated,
+			testId = p1.buyButtonTestId
 		})
 	})
 end))

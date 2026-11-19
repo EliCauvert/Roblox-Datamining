@@ -14,7 +14,7 @@ local FFlagLuaAppOneByTwoHoverIdleAutoplay = require(Parent.SharedFlags).FFlagLu
 local FFlagEnableOnScreenAPIIntegration = require(Parent.SharedFlags).FFlagEnableOnScreenAPIIntegration
 local UseIsRouteOnScreen = if FFlagEnableOnScreenAPIIntegration then require(Parent.RobloxAppNavigation).useIsRouteOnScreen else nil
 
-return function(p1, p2, p3, p4)
+return function(p1, p2, p3)
 	-- upvalues: FFlagEnableOnScreenAPIIntegration (copy), UseIsRouteOnScreen (copy), UseNavigationFocusFunction (copy), FFlagLuaAppSuppressVideoDetectorDuringScroll (copy), ResponsiveModule (copy), ReactModule (copy), FeedVideoPlaybackContextModule (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), FFlagLuaAppVideoAutoplayFeedElection (copy), AppLifecycleObserverService (copy), VideoEndReason (copy), ExperienceService (copy)
 	local UseIsRouteOnScreenResult = if FFlagEnableOnScreenAPIIntegration then UseIsRouteOnScreen() else UseNavigationFocusFunction()
 	local IsUsePreferredInputResultMatch = if FFlagLuaAppSuppressVideoDetectorDuringScroll then ResponsiveModule.usePreferredInput() == ResponsiveModule.Input.Touch else nil
@@ -27,12 +27,11 @@ return function(p1, p2, p3, p4)
 	local NoUseIsRouteOnScreenResult = not UseIsRouteOnScreenResult
 	local IsEnabled: boolean = FFlagLuaAppSuppressVideoDetectorDuringScroll and Enabled == true
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: FeedVideoPlaybackContextModule (upval), FFlagLuaAppOneByTwoHoverIdleAutoplay (upval), p1 (copy), FFlagLuaAppVideoAutoplayFeedElection (upval), p2 (copy), p3 (copy), p4 (copy)
-		return FeedVideoPlaybackContextModule.new(if FFlagLuaAppOneByTwoHoverIdleAutoplay then nil else p1, if FFlagLuaAppVideoAutoplayFeedElection then p2 else nil, if FFlagLuaAppVideoAutoplayFeedElection then p3 else nil, if FFlagLuaAppOneByTwoHoverIdleAutoplay then p4 else nil)
+		-- upvalues: FeedVideoPlaybackContextModule (upval), FFlagLuaAppOneByTwoHoverIdleAutoplay (upval), p1 (copy), FFlagLuaAppVideoAutoplayFeedElection (upval), p2 (copy), p3 (copy)
+		return FeedVideoPlaybackContextModule.new(if FFlagLuaAppOneByTwoHoverIdleAutoplay then nil else p1, if FFlagLuaAppVideoAutoplayFeedElection then p2 else nil, if FFlagLuaAppOneByTwoHoverIdleAutoplay then p3 else nil)
 	end, {
-		if FFlagLuaAppOneByTwoHoverIdleAutoplay then p4 else p1,
-		if FFlagLuaAppVideoAutoplayFeedElection then p2 else nil,
-		if FFlagLuaAppVideoAutoplayFeedElection then p3 else nil
+		if FFlagLuaAppOneByTwoHoverIdleAutoplay then p3 else p1,
+		if FFlagLuaAppVideoAutoplayFeedElection then p2 else nil
 	})
 	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: NoUseIsRouteOnScreenResult (copy), FFlagLuaAppSuppressVideoDetectorDuringScroll (upval), IsEnabled (copy), UseMemoResult (copy), FeedVideoPlaybackContextModule (upval)
@@ -76,13 +75,13 @@ return function(p1, p2, p3, p4)
 		UseMemoResult1.viewportVideoAutoplayController,
 		if FFlagLuaAppSuppressVideoDetectorDuringScroll then IsUsePreferredInputResultMatch else nil
 	})
-	local UseResult1 = ReactModule.useCallback(function(p5)
+	local UseResult1 = ReactModule.useCallback(function(p4)
 		-- upvalues: FFlagLuaAppSuppressVideoDetectorDuringScroll (upval), Callback (ref), UseMemoResult1 (copy)
 		if FFlagLuaAppSuppressVideoDetectorDuringScroll and Callback then
 			Callback(false)
 		end
 		if UseMemoResult1.viewportVideoAutoplayController then
-			UseMemoResult1.viewportVideoAutoplayController:onScrollSettled("Y", p5, nil)
+			UseMemoResult1.viewportVideoAutoplayController:onScrollSettled("Y", p4, nil)
 		end
 	end, { UseMemoResult1.viewportVideoAutoplayController })
 	

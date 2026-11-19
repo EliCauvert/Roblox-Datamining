@@ -1,15 +1,16 @@
 ﻿local InExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
 local Parent = InExperienceSideSheet.Parent
-local ChromeModule = require(Parent.Chrome)
 local DisplayModule = require(Parent.Display)
 local InGameMenu = require(Parent.CoreScriptsCommon).Constants.InGameMenu
 local _ = require(Parent.InExperienceSideSheetStore.Types)
+local _ = require(Parent.Signals)
 local ConstantsModule = require(InExperienceSideSheet.Common.Constants)
 local DoesMenuPageCloseSideSheetModule = require(InExperienceSideSheet.Utils.doesMenuPageCloseSideSheet)
 local GetHasRoomForPeoplePageModule = require(InExperienceSideSheet.Utils.getHasRoomForPeoplePage)
 local GetSideSheetDrawerWidthModule = require(InExperienceSideSheet.Utils.getSideSheetDrawerWidth)
 local GetSideSheetVisibilityModule = require(InExperienceSideSheet.Utils.getSideSheetVisibility)
-local SideSheetOpenBehavior = ChromeModule.Enums.SideSheetOpenBehavior
+local FFlagKeepSideSheetOpenBesideMenu = require(InExperienceSideSheet.Flags).FFlagKeepSideSheetOpenBesideMenu
+local SideSheetOpenBehavior = require(Parent.Chrome).Enums.SideSheetOpenBehavior
 local _Vector2 = Vector2.new(InGameMenu.HubBarWidth + InGameMenu.HubPaddingX * 2, InGameMenu.PageMaxHeight + InGameMenu.HubBarHeight + InGameMenu.HubPaddingBottom)
 
 local function centerMenuInArea(p1, Vector)
@@ -22,17 +23,19 @@ local function centerMenuInArea(p1, Vector)
 	}
 end
 
-local function getAreaBesideSideSheet(X: number, Y: number)
-	-- upvalues: GetSideSheetVisibilityModule (copy), GetHasRoomForPeoplePageModule (copy), GetSideSheetDrawerWidthModule (copy), ConstantsModule (copy), DisplayModule (copy), centerMenuInArea (copy), _Vector2 (copy)
-	if not GetSideSheetVisibilityModule() or not GetHasRoomForPeoplePageModule(false, X) then
+local function getAreaBesideSideSheet(X: number, Y: number, p1)
+	-- upvalues: FFlagKeepSideSheetOpenBesideMenu (copy), GetSideSheetVisibilityModule (copy), GetHasRoomForPeoplePageModule (copy), GetSideSheetDrawerWidthModule (copy), ConstantsModule (copy), DisplayModule (copy), centerMenuInArea (copy), _Vector2 (copy)
+	local v1 = if FFlagKeepSideSheetOpenBesideMenu and p1 ~= nil then p1 else false
+	
+	if not (if FFlagKeepSideSheetOpenBesideMenu then GetSideSheetVisibilityModule(v1) else GetSideSheetVisibilityModule()) or not GetHasRoomForPeoplePageModule(v1, X) then
 		return nil
 	end
-	local SideSheetDrawerWidthModule = GetSideSheetDrawerWidthModule(false)
+	local SideSheetDrawerWidthModule = GetSideSheetDrawerWidthModule(v1)
 	
 	if SideSheetDrawerWidthModule <= 0 then
 		SideSheetDrawerWidthModule = ConstantsModule.NominalSideSheetWidth
 	end
-	local DeviceSafePadding = DisplayModule.GetDisplayStore(false).getDeviceSafePadding(false)
+	local DeviceSafePadding = DisplayModule.GetDisplayStore(v1).getDeviceSafePadding(v1)
 	local NewSideSheetDrawerWidthModule = SideSheetDrawerWidthModule + math.max(0, ConstantsModule.MenuScreenMargin - DeviceSafePadding.left)
 	local Largest = math.max(0, ConstantsModule.MenuScreenMargin - DeviceSafePadding.top)
 	
@@ -49,11 +52,12 @@ return {
 		return if p1 then if DoesMenuPageCloseSideSheetModule(p2) then true else not GetHasRoomForPeoplePageModule(false) or p3 ~= nil and (p3 > 0 and not GetHasRoomForPeoplePageModule(false, p3)) else false
 	end,
 	getAreaBesideSideSheet = getAreaBesideSideSheet,
-	getBesideSideSheetWindowArea = function()
-		-- upvalues: DisplayModule (copy), getAreaBesideSideSheet (copy)
-		local ViewportSize = DisplayModule.GetDisplayStore(false).getViewportSize(false)
+	getBesideSideSheetWindowArea = function(p1)
+		-- upvalues: FFlagKeepSideSheetOpenBesideMenu (copy), DisplayModule (copy), getAreaBesideSideSheet (copy)
+		local v1 = if FFlagKeepSideSheetOpenBesideMenu and p1 ~= nil then p1 else false
+		local ViewportSize = DisplayModule.GetDisplayStore(v1).getViewportSize(v1)
 		
-		return (getAreaBesideSideSheet(ViewportSize.X, ViewportSize.Y))
+		return (getAreaBesideSideSheet(ViewportSize.X, ViewportSize.Y, v1))
 	end,
 	getInGameMenuMaxSize = function()
 		-- upvalues: _Vector2 (copy)

@@ -8,21 +8,32 @@ local Icon = FoundationModule.Icon
 local IconName = FoundationModule.Enums.IconName
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local GetCloudClientServiceFunction = require(CorePackages.Workspace.Packages.InExperienceCloudPlay).getCloudClientService
+local FFlagLuaAppCloudClientRobloxRealityNameParamModule = require(CorePackages.Workspace.Packages.InExperienceCloudPlay.FFlagLuaAppCloudClientRobloxRealityNameParam)
+local FStringLuaAppCloudClientRobloxRealityNameModule = require(CorePackages.Workspace.Packages.InExperienceCloudPlay.FStringLuaAppCloudClientRobloxRealityName)
 local config = {
 	title = "Feature.CloudClient.Heading.GalleryUnavailableCloudPlay",
 	body = "Feature.CloudClient.Description.GalleryUnavailableCloudPlay"
 }
-local config1 = {
+local Config = if FFlagLuaAppCloudClientRobloxRealityNameParamModule then {
+	title = {
+		"Feature.CloudClient.Heading.GalleryUnavailableRobloxRealityV2",
+		productName = FStringLuaAppCloudClientRobloxRealityNameModule
+	},
+	body = {
+		"Feature.CloudClient.Description.GalleryUnavailableRobloxRealityV2",
+		productName = FStringLuaAppCloudClientRobloxRealityNameModule
+	}
+} else {
 	title = "Feature.CloudClient.Heading.GalleryUnavailableRobloxReality",
 	body = "Feature.CloudClient.Description.GalleryUnavailableRobloxReality"
 }
 
 return function()
-	-- upvalues: UseTokensFunction (copy), GetCloudClientServiceFunction (copy), config1 (copy), config (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), Icon (copy), IconName (copy), Text (copy)
+	-- upvalues: UseTokensFunction (copy), GetCloudClientServiceFunction (copy), Config (copy), config (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), Icon (copy), IconName (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	local CloudClientService = GetCloudClientServiceFunction()
-	local Config = if CloudClientService and CloudClientService.IsRobloxRealityEnvironment then config1 else config
-	local UseLocalizationResult = UseLocalizationFunction({ title = Config.title, body = Config.body })
+	local Config1 = if CloudClientService and CloudClientService.IsRobloxRealityEnvironment then Config else config
+	local UseLocalizationResult = UseLocalizationFunction({ title = Config1.title, body = Config1.body })
 	
 	return ReactModule.createElement(View, {
 		tag = "col align-x-center align-y-center size-full",

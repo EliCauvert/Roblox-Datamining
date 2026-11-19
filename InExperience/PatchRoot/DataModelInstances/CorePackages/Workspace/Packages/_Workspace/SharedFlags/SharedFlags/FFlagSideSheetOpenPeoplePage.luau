@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("SideSheetOpenPeoplePage", false)
+﻿return game:DefineFastFlag("SideSheetOpenPeoplePage2", false)

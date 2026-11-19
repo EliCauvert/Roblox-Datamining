@@ -12,9 +12,10 @@ local _ = require(AmpV2Wizard.Types)
 local FullPageChromeModule = require(AmpV2Wizard.FullPageChrome)
 local ODPTiltedCardsArtModule = require(AmpV2Wizard.ODPTiltedCardsArt)
 local OdpAnalyticsModule = require(AmpV2Wizard.OdpAnalytics)
+local FFlagLuaAppAddTestIdsForArrow = require(Parent.SharedFlags).FFlagLuaAppAddTestIdsForArrow
 
 return function(p1)
-	-- upvalues: OdpAnalyticsModule (copy), ReactModule (copy), View (copy), ScrollView (copy), ODPTiltedCardsArtModule (copy), Text (copy), Button (copy), ButtonVariant (copy), InputSize (copy), FullPageChromeModule (copy)
+	-- upvalues: OdpAnalyticsModule (copy), ReactModule (copy), View (copy), ScrollView (copy), ODPTiltedCardsArtModule (copy), Text (copy), FFlagLuaAppAddTestIdsForArrow (copy), Button (copy), ButtonVariant (copy), InputSize (copy), FullPageChromeModule (copy)
 	local Props = p1.props
 	local ReportFunction = p1.report
 	local Transitions = p1.transitions
@@ -65,11 +66,13 @@ return function(p1)
 							Title = ReactModule.createElement(Text, {
 								tag = "size-full-0 auto-y text-heading-medium text-wrap text-align-x-left content-emphasis",
 								LayoutOrder = 1,
+								testId = if FFlagLuaAppAddTestIdsForArrow then "amp-v2-wizard-odp-handoff-title" else nil,
 								Text = Props.title
 							}),
 							Description = if Props.description == nil or Props.description == "" then nil else ReactModule.createElement(Text, {
 								tag = "size-full-0 auto-y text-body-large text-wrap text-align-x-left content-default",
 								LayoutOrder = 2,
+								testId = if FFlagLuaAppAddTestIdsForArrow then "amp-v2-wizard-odp-handoff-description" else nil,
 								Text = Props.description
 							})
 						})

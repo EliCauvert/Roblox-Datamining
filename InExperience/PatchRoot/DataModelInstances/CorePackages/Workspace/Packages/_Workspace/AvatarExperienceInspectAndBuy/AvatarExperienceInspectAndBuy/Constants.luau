@@ -39,7 +39,7 @@ if FFlagAXCatalogBackgroundsSupport then
 	ConstantsModule.AssetLocalizationKeys[tostring(Enum.AssetType.AvatarBackground.Value)] = "Feature.Avatar.Label.Backgrounds"
 end
 if FFlagAXInspectAndBuySpawnEffects then
-	ConstantsModule.AssetLocalizationKeys[tostring(Enum.AssetType.SpawnEffect.Value)] = "Feature.Avatar.Label.SpawnEffects"
+	ConstantsModule.AssetLocalizationKeys[tostring(97)] = "Feature.Avatar.Label.SpawnEffects"
 end
 ConstantsModule.BundleLocalizationKeys = {
 	[tostring(Enum.BundleType.BodyParts.Value)] = "Feature.Catalog.Label.Body",

@@ -1,5 +1,6 @@
-﻿local SliderStepDirectionModule = require(script.Parent.SliderStepDirection)
-local SliderStepSizeModule = require(script.Parent.SliderStepSize)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local SliderStepDirectionModule = require(Foundation.Components.InternalSlider.SliderStepDirection)
+local SliderStepSizeModule = require(Foundation.Components.InternalSlider.SliderStepSize)
 
 return function(p1, Increment, p2, p3: number, Page): number
 	-- upvalues: SliderStepSizeModule (copy), SliderStepDirectionModule (copy)

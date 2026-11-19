@@ -3294,16 +3294,22 @@ Feature.Chat.Text.NoFriends,لم تضف أي أصدقاء بعد. للبدء، �
 Feature.Chat.Title.FriendsChat,دردشة الأصدقاء
 Feature.Chat.Title.NewChat,دردشة جديدة
 Feature.Chat.Toast.Error.InvalidUserSelected,لا يمكن إضافة شخص واحد أو أكثر من الأشخاص المُدرجين ضمن هذه القائمة
+Feature.CloudClient.Action.PlayWithoutCloudPlay,اللعب بدون Cloud Play
+Feature.CloudClient.Description.CloudPlayOffer,تشغّل Cloud Play اللعبة على أجهزة كمبيوتر Roblox، لذا قد تُحمَّل بشكل أسرع وتتعطل بشكل أقل. وتعمل فقط أثناء لعبك هذه اللعبة.
 Feature.CloudClient.Description.GalleryUnavailableCloudPlay,انضم مجددًا بدون Cloud Play لاستخدام معرضك.
 Feature.CloudClient.Description.GalleryUnavailableRobloxReality,انضم مجددًا بدون Restyle لاستخدام معرضك.
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle نسخة تجريبية مبكرة، وقد يختلف شكل اللعبة عن الأصل.
+Feature.CloudClient.Heading.CloudPlayOffer,العب باستخدام Cloud Play
 Feature.CloudClient.Heading.GalleryUnavailableCloudPlay,المعرض غير متاح في Cloud Play حتى الآن.
 Feature.CloudClient.Heading.GalleryUnavailableRobloxReality,المعرض غير متاح مع Restyle حتى الآن.
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,الالتقاط غير متاح في Cloud Play حتى الآن.
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,الالتقاط غير متاح مع Restyle حتى الآن.
 Feature.CloudClient.Label.CloudPlayJoinFailed,ميزة Cloud Play لا تعمل. أنت تلعب الآن بالطريقة المعتادة.
 Feature.CloudClient.Label.RobloxReality,Restyle
+Feature.CloudClient.Label.RobloxRealityDemoLength,جرّب نسخة تجريبية مدتها {minutes} دقيقة
 Feature.CloudClient.Label.RobloxRealityEndingSoon,ستنتهي Restyle خلال 1 دقيقة، وستغادر اللعبة.
+Feature.CloudClient.Label.RobloxRealityGraphics,لعبتك بحُلّة جديدة
+Feature.CloudClient.Label.RobloxRealityPlusOnly,لمشتركي Plus فقط
 Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,المنظور الذاتي غير متاح في Cloud Play حتى الآن.
 Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,المنظور الذاتي غير متاح مع Restyle حتى الآن.
 Feature.CloudClient.Label.TimeLeft,الوقت المتبقي

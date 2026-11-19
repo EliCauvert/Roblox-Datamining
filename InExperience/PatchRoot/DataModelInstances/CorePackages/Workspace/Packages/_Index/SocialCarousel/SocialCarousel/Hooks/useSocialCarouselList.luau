@@ -200,6 +200,7 @@ return function(p1, p2)
 		end, { UseMemoResult11, P1 }),
 		friendCount = UseGetFriendsCountByUserIdResult,
 		friendRequestCount = UseSelectorResult.friendRequestCount,
+		friendRequests = if FFlagShowRequestsInCarouselForAllUsers then UseMemoResult1 else nil,
 		recommendationCount = #UseGetRecommendationsModuleResult,
 		refreshFriendsList = UseFriendsListOrderedByPresenceResult.refreshFriendsData,
 		isLoading = FFlagSocialCarouselShowLoadingSkeletonModule and UseFriendsListOrderedByPresenceResult.isLoading

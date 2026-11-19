@@ -9,5 +9,6 @@ return {
 	enableOpenTypeSupport = SharedFlagsModule.GetFFlagLuaAppEnableOpenTypeSupport(),
 	useFoundationToastButtonSizing = UIBlox.FFlagUIBloxToastFoundationButtonSizing,
 	useTokenizedShortcutBar = SharedFlagsModule.FFlagEnableConsoleExpControls,
-	disableTokenScaling = UIBlox.FFlagUIBloxDisableTokenScaling
+	disableTokenScaling = UIBlox.FFlagUIBloxDisableTokenScaling,
+	shareDerivedStyleTokens = UIBlox.FFlagUIBloxShareDerivedStyleTokens
 }

@@ -45,6 +45,7 @@ local UseRobloxLocaleModule = require(AppChat.Hooks.useRobloxLocale)
 local ReplyingToMessageProviderModule = require(AppChat.Components.ChatConversation.MessageInteraction.ReplyingContext.ReplyingToMessageProvider)
 local FFlagAppChatSignalsReplyStoreModule = require(AppChat.Flags.FFlagAppChatSignalsReplyStore)
 local FFlagAppChatReactivePaneLayoutOnRotation = SharedFlagsModule.FFlagAppChatReactivePaneLayoutOnRotation
+local FFlagKeepSideSheetOpenBesideMenu = SharedFlagsModule.FFlagKeepSideSheetOpenBesideMenu
 local LayerCollectorProvider = require(Parent.UIBlox).Core.Layout.LayerCollector.LayerCollectorProvider
 local AppChatNetworkingModule = require(Parent.AppChatNetworking)
 local InteractionFeedbackModule = require(Parent.InteractionFeedback)
@@ -115,7 +116,7 @@ local function useReactivePaneRestore(JoinResult)
 end
 
 function AppChatEntryPoint(p1)
-	-- upvalues: CryoModule (copy), config (copy), ChatPlacementContextModule (copy), FFlagAppChatReactiveFeatureRestrictions (copy), UsePartyChatReactiveFeatureRestrictionModule (copy), UseTokensFunction (copy), Inverted (copy), RootNavigatorModule (ref), AppChat (copy), RootNavigatorModule1 (ref), UseSelectorFunction (copy), UseCallbackFunction (copy), FFlagAppChatUseSignalsForLastEntryPointModule (copy), UseSignalStateFunction (copy), GetLastEntryPointStoreModule (copy), UseDispatchFunction (copy), UseEffectFunction (copy), AppChatNetworkingModule (copy), LoggerModule (copy), UseChatIsVisibleModule (copy), FFlagAppChatReactivePaneLayoutOnRotation (copy), useReactivePaneRestore (copy), ReactModule (copy), RoactNavigationModule (copy), GetRoactChatStackNavigatorModule (copy), UseRefFunction (copy), GetOverlayStoreModule (copy), EnumScreensModule (copy), CreateConversationModule (copy), FetchLatestConversationDetailsModule (copy), GetFFlagIsSquadEnabledFunction (copy), FFlagAppChatShowOSAOnPageEntry (copy), NavigateWithOsaGateModule (copy), RootedChatDetailsNavigationModule (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), EnteredChatFromEntryPointModule (copy), NavigateIntoChatModule (copy), UseCurrentSquadParentChannelIdFunction (copy), GetFFlagEnableCrossExpVoiceFunction (copy), UseIsVoiceConnectedFunction (copy), UsePageSideMarginFunction (copy), FFlagLuaAppCompositionAppChat (copy), FFlagAppChatFoundationHeaderBarModule (copy), UseHeaderBarHeightFunction (copy), UseStyleFunction (copy), SetTabBarVisibleFunction (copy), UserInputService (copy), NAVBARWITHFACEPILESIZE (copy), FFlagEnableHeaderBarButtonsUpdate (copy), FFlagChatPushUpsellPromptsEnabled (copy), LuaAppNavigationContextProviderModule (copy), FFlagAppChatSignalsReplyStoreModule (copy), ReplyingToMessageProviderModule (copy), InteractionFeedbackModule (copy), HapticFeedbackConfig (copy), LayerCollectorProvider (copy), UseRobloxLocaleModule (copy), RbxAnalyticsService (copy), AnalyticsProviderModule (copy), AppTelemetryLayerModule (copy), GetFFlagFixChatsBottomInsetBackgroundColorModule (copy), RoactChatAnalyticsProviderModule (copy)
+	-- upvalues: CryoModule (copy), config (copy), ChatPlacementContextModule (copy), FFlagAppChatReactiveFeatureRestrictions (copy), UsePartyChatReactiveFeatureRestrictionModule (copy), UseTokensFunction (copy), Inverted (copy), RootNavigatorModule (ref), AppChat (copy), RootNavigatorModule1 (ref), UseSelectorFunction (copy), UseCallbackFunction (copy), FFlagAppChatUseSignalsForLastEntryPointModule (copy), UseSignalStateFunction (copy), GetLastEntryPointStoreModule (copy), UseDispatchFunction (copy), UseEffectFunction (copy), AppChatNetworkingModule (copy), LoggerModule (copy), UseChatIsVisibleModule (copy), FFlagAppChatReactivePaneLayoutOnRotation (copy), FFlagKeepSideSheetOpenBesideMenu (copy), useReactivePaneRestore (copy), ReactModule (copy), RoactNavigationModule (copy), GetRoactChatStackNavigatorModule (copy), UseRefFunction (copy), GetOverlayStoreModule (copy), EnumScreensModule (copy), CreateConversationModule (copy), FetchLatestConversationDetailsModule (copy), GetFFlagIsSquadEnabledFunction (copy), FFlagAppChatShowOSAOnPageEntry (copy), NavigateWithOsaGateModule (copy), RootedChatDetailsNavigationModule (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), EnteredChatFromEntryPointModule (copy), NavigateIntoChatModule (copy), UseCurrentSquadParentChannelIdFunction (copy), GetFFlagEnableCrossExpVoiceFunction (copy), UseIsVoiceConnectedFunction (copy), UsePageSideMarginFunction (copy), FFlagLuaAppCompositionAppChat (copy), FFlagAppChatFoundationHeaderBarModule (copy), UseHeaderBarHeightFunction (copy), UseStyleFunction (copy), SetTabBarVisibleFunction (copy), UserInputService (copy), NAVBARWITHFACEPILESIZE (copy), FFlagEnableHeaderBarButtonsUpdate (copy), FFlagChatPushUpsellPromptsEnabled (copy), LuaAppNavigationContextProviderModule (copy), FFlagAppChatSignalsReplyStoreModule (copy), ReplyingToMessageProviderModule (copy), InteractionFeedbackModule (copy), HapticFeedbackConfig (copy), LayerCollectorProvider (copy), UseRobloxLocaleModule (copy), RbxAnalyticsService (copy), AnalyticsProviderModule (copy), AppTelemetryLayerModule (copy), GetFFlagFixChatsBottomInsetBackgroundColorModule (copy), RoactChatAnalyticsProviderModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local IsPlacementInExperience = ChatPlacementContextModule.isPlacementInExperience(JoinResult.chatPlacement)
 	
@@ -151,11 +152,12 @@ function AppChatEntryPoint(p1)
 		IsPlacementInExperience
 	})
 	local UseChatIsVisibleModuleResult = UseChatIsVisibleModule()
+	local FFlagAppChatReactivePaneLayoutOnRotation1 = FFlagAppChatReactivePaneLayoutOnRotation or FFlagKeepSideSheetOpenBesideMenu and IsPlacementInExperience
 	local v1 = nil
 	local UseReactivePaneRestoreResult3 = nil
 	local UseReactivePaneRestoreResult2 = nil
 	
-	if FFlagAppChatReactivePaneLayoutOnRotation then
+	if FFlagAppChatReactivePaneLayoutOnRotation1 then
 		v1, UseReactivePaneRestoreResult2, UseReactivePaneRestoreResult3 = useReactivePaneRestore(JoinResult)
 	else
 		UseReactivePaneRestoreResult2 = JoinResult.setActiveConversationId
@@ -542,7 +544,7 @@ function AppChatEntryPoint(p1)
 		}, {
 			navigation = ReactModule.createElement(Container, {
 				externalDispatchConnector = UseCallbackResult5,
-				parameters = if FFlagAppChatReactivePaneLayoutOnRotation then UseMemoResult.restoreParameters else JoinResult.parameters,
+				parameters = if FFlagAppChatReactivePaneLayoutOnRotation1 then UseMemoResult.restoreParameters else JoinResult.parameters,
 				setActiveConversationId = UseReactivePaneRestoreResult2,
 				setBackButtonEnabled = JoinResult.setBackButtonEnabled,
 				setTabBarVisible = UseCallbackFunction(function(p2)

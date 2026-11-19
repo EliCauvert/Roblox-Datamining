@@ -1,0 +1,1 @@
+﻿return (require(script.Parent.Parent.Parent._Index.AmpV2Wizard.AmpV2Wizard))

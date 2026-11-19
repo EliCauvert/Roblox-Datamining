@@ -10,5 +10,6 @@
 	FFlagUIBloxRemoveStackedNavigationTabIconLabelSpacing = game:DefineFastFlag("UIBloxRemoveStackedNavigationTabIconLabelSpacing", false),
 	FFlagUIBloxToastFoundationButtonSizing = game:DefineFastFlag("UIBloxToastFoundationButtonSizing", false),
 	FFlagUIBloxAddFoundationNavigationTabIcon = game:DefineFastFlag("UIBloxAddFoundationNavigationTabIcon2", false),
-	FFlagUIBloxAddNavigationTabTooltipAndTruncation = game:DefineFastFlag("UIBloxAddNavigationTabTooltipAndTruncation", false)
+	FFlagUIBloxAddNavigationTabTooltipAndTruncation = game:DefineFastFlag("UIBloxAddNavigationTabTooltipAndTruncation", false),
+	FFlagUIBloxShareDerivedStyleTokens = game:DefineFastFlag("UIBloxShareDerivedStyleTokens", false)
 }
