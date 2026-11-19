@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "2a16b581-cfd7-0694-9387-c4c7c9d0964b")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "ea114c53-2b59-2af5-9af3-ae6919ef8e56")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 634130, e => {
@@ -40,7 +40,7 @@
             defaultProp: null != i && i,
             onChange: p,
             caller: d
-        }), [b, E] = t.useState(null), [w, x] = t.useState(null), P = t.useRef(!1), k = !b || !!o || !!b.closest("form"), C = {
+        }), [b, E] = t.useState(null), [w, x] = t.useState(null), P = t.useRef(!1), k = !b || !!o || !!b.closest("form"), T = {
             checked: h,
             disabled: s,
             setChecked: y,
@@ -58,8 +58,8 @@
         };
         return (0, c.jsx)(m, {
             scope: n,
-            ...C,
-            children: "function" == typeof g ? g(C) : a
+            ...T,
+            children: "function" == typeof g ? g(T) : a
         })
     }
     var h = "CheckboxTrigger",
@@ -80,11 +80,11 @@
                 hasConsumerStoppedPropagationRef: E,
                 isFormControl: w,
                 bubbleInput: x
-            } = v(h, l), P = (0, n.j)(r, y), C = t.useRef(m);
+            } = v(h, l), P = (0, n.j)(r, y), T = t.useRef(m);
             return t.useEffect(() => {
                 let e = null == d ? void 0 : d.form;
                 if (e) {
-                    let t = () => b(C.current);
+                    let t = () => b(T.current);
                     return e.addEventListener("reset", t), () => e.removeEventListener("reset", t)
                 }
             }, [d, b]), (0, c.jsx)(u.f.button, {
@@ -186,7 +186,7 @@
                 form: b,
                 bubbleInput: E,
                 setBubbleInput: w
-            } = v(x, a), P = (0, n.j)(r, w), k = (0, i.f)(p), C = (0, s.f)(o);
+            } = v(x, a), P = (0, n.j)(r, w), k = (0, i.f)(p), T = (0, s.f)(o);
             t.useEffect(() => {
                 if (!E) return;
                 let e = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "checked").set,
@@ -198,11 +198,11 @@
                     E.indeterminate = S(p), e.call(E, !S(p) && p), E.dispatchEvent(n)
                 }
             }, [E, k, p, d]);
-            let T = t.useRef(!S(p) && p);
+            let C = t.useRef(!S(p) && p);
             return (0, c.jsx)(u.f.input, {
                 type: "checkbox",
                 "aria-hidden": !0,
-                defaultChecked: null != f ? f : T.current,
+                defaultChecked: null != f ? f : C.current,
                 required: m,
                 disabled: g,
                 name: h,
@@ -213,7 +213,7 @@
                 ref: P,
                 style: {
                     ...l.style,
-                    ...C,
+                    ...T,
                     position: "absolute",
                     pointerEvents: "none",
                     opacity: 0,
@@ -366,33 +366,33 @@
             id: P,
             "aria-describedby": S,
             ...k
-        } = e, C = (0, l.useContext)(r.i), T = null != (d = null != (p = null == C ? void 0 : C.size) ? p : b) ? d : "Medium", N = null != (f = null != (m = null == C ? void 0 : C.placement) ? m : w) ? f : "Start", L = y || (null == C ? void 0 : C.isDisabled), A = (0, n.f)(), O = P || A, M = C && v && E ? "".concat(O, "Hint") : void 0, F = v && l.default.createElement("label", {
+        } = e, T = (0, l.useContext)(r.i), C = null != (d = null != (p = null == T ? void 0 : T.size) ? p : b) ? d : "Medium", N = null != (f = null != (m = null == T ? void 0 : T.placement) ? m : w) ? f : "Start", L = y || (null == T ? void 0 : T.isDisabled), A = (0, n.f)(), O = P || A, F = T && v && E ? "".concat(O, "Hint") : void 0, M = v && l.default.createElement("label", {
             htmlFor: O,
             className: (0, a.U)("flex flex-col grow-1 gap-xsmall", !L && "cursor-pointer")
         }, l.default.createElement("span", {
-            className: (0, a.U)(u[T], c[T], "content-emphasis")
+            className: (0, a.U)(u[C], c[C], "content-emphasis")
         }, v), E && l.default.createElement("span", {
-            id: M,
-            className: (0, a.U)(C ? u[T] : "text-body-medium", "content-default")
+            id: F,
+            className: (0, a.U)(T ? u[C] : "text-body-medium", "content-default")
         }, E));
         return l.default.createElement("div", {
             className: (0, a.U)("foundation-web-checkbox flex gap-medium", L && "opacity-[0.5]", !L && "cursor-pointer", g)
-        }, "End" === N && F, l.default.createElement("div", {
-            className: (0, a.U)(o[T])
+        }, "End" === N && M, l.default.createElement("div", {
+            className: (0, a.U)(o[C])
         }, l.default.createElement(i.F, {
             "data-slot": "checkbox",
-            className: (0, a.U)(s[T], t.Y, !L && "cursor-pointer", "flex items-center justify-center radius-small padding-none content-default", "data-[state=unchecked]:bg-none data-[state=unchecked]:stroke-standard data-[state=unchecked]:stroke-contrast-alpha", "data-[state=indeterminate]:bg-system-contrast data-[state=indeterminate]:stroke-none", "data-[state=checked]:bg-system-contrast data-[state=checked]:stroke-none"),
+            className: (0, a.U)(s[C], t.Y, !L && "cursor-pointer", "flex items-center justify-center radius-small padding-none content-default", "data-[state=unchecked]:bg-none data-[state=unchecked]:stroke-standard data-[state=unchecked]:stroke-contrast-alpha", "data-[state=indeterminate]:bg-system-contrast data-[state=indeterminate]:stroke-none", "data-[state=checked]:bg-system-contrast data-[state=checked]:stroke-none"),
             id: O,
             checked: h,
             disabled: L,
             onCheckedChange: x,
             "aria-label": v,
-            "aria-describedby": [S, M].filter(Boolean).join(" ") || void 0,
+            "aria-describedby": [S, F].filter(Boolean).join(" ") || void 0,
             ...k
         }, l.default.createElement(t.v, null), l.default.createElement(i.S, {
             "data-slot": "checkbox-indicator",
-            className: (0, a.U)(s[T], "content-[var(--inverse-content-emphasis)] icon", "data-[state=indeterminate]:icon-filled-minus", "data-[state=checked]:icon-filled-check")
-        }))), "Start" === N && F)
+            className: (0, a.U)(s[C], "content-[var(--inverse-content-emphasis)] icon", "data-[state=indeterminate]:icon-filled-minus", "data-[state=checked]:icon-filled-check")
+        }))), "Start" === N && M)
     }])
 }, 466537, e => {
     "use strict";
@@ -1049,18 +1049,18 @@
             })) ? e : null
         }, [g, w]), P = null == x ? void 0 : x.id, S = null == i ? void 0 : i.id, {
             data: k,
-            error: C,
-            isPending: T,
+            error: T,
+            isPending: C,
             refetch: N
         } = (0, m.$)(P, S), {
             data: L,
             isPending: A,
             refetch: O
-        } = (0, m.V)(P, S), M = (0, n.useCallback)(() => null == P || null == S ? Promise.resolve() : Promise.all([N(), O()]), [O, N, P, S]);
+        } = (0, m.V)(P, S), F = (0, n.useCallback)(() => null == P || null == S ? Promise.resolve() : Promise.all([N(), O()]), [O, N, P, S]);
         (0, n.useEffect)(() => {
             (null == i ? void 0 : i.id) && (null == o ? void 0 : o.groups) && !u && p(null == o ? void 0 : o.groups)
         }, [null == o ? void 0 : o.groups, w, u, p, null == i ? void 0 : i.id]);
-        let F = (0, n.useMemo)(() => {
+        let M = (0, n.useMemo)(() => {
             var e;
             return {
                 groups: w,
@@ -1072,13 +1072,13 @@
                 ...s,
                 permissions: k,
                 isOwner: null != S && (null == L || null == (e = L.owner) ? void 0 : e.userId) === S,
-                isPermissionsLoading: null != x && (T || A),
-                permissionsError: C,
-                refreshPermissions: M
+                isPermissionsLoading: null != x && (C || A),
+                permissionsError: T,
+                refreshPermissions: F
             }
-        }, [x, y, w, u, A, T, L, s, k, C, c, M, E, S]);
+        }, [x, y, w, u, A, C, L, s, k, T, c, F, E, S]);
         return (0, t.jsx)(v.Provider, {
-            value: F,
+            value: M,
             children: l
         })
     }, "W", 0, () => {
@@ -1175,6 +1175,29 @@
         return (0, r.f)({
             queryKey: h(e, a),
             queryFn: e && a ? () => d(e) : n.V,
+            staleTime: 6e4
+        })
+    }, "u", 0, function(e) {
+        return (0, r.f)({
+            queryKey: ["groups", "users", e, "owns-any-group"],
+            queryFn: e ? async () => {
+                try {
+                    let {
+                        data: t
+                    } = await p.U.getUsersGroupRoles(e, {
+                        includeLocked: !0
+                    });
+                    return (null != t ? t : []).some(t => {
+                        var n;
+                        let {
+                            group: r
+                        } = t;
+                        return (null == r || null == (n = r.owner) ? void 0 : n.userId) === e
+                    })
+                } catch (e) {
+                    return null
+                }
+            } : n.V,
             staleTime: 6e4
         })
     }, "v", 0, function(e) {
@@ -1347,5 +1370,5 @@
     }, "X", 0, s])
 }]);
 
-//# debugId=2a16b581-cfd7-0694-9387-c4c7c9d0964b
-//# sourceMappingURL=1y2lkz4lbagbp.js.map
+//# debugId=ea114c53-2b59-2af5-9af3-ae6919ef8e56
+//# sourceMappingURL=12m5r28l7uoc-.js.map
