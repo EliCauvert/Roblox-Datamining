@@ -13,31 +13,39 @@ local FFlagHideHeaderForBuyRobuxInExperienceShop = SharedFlagsModule.FFlagHideHe
 local FFlagKeepSideSheetOpenBesideMenu = SharedFlagsModule.FFlagKeepSideSheetOpenBesideMenu
 local SideSheetOpenBehavior = ChromeModule.Enums.SideSheetOpenBehavior
 
+local function _(): boolean
+	-- upvalues: ServiceModule (copy), ConstantsModule (copy)
+	return ServiceModule:integrations()[ConstantsModule.IN_EXPERIENCE_SHOP_ID] ~= nil and ServiceModule:isWindowOpen(ConstantsModule.IN_EXPERIENCE_SHOP_ID) == true
+end
+
 local function openShop()
-	-- upvalues: ServiceModule (copy), ConstantsModule (copy), FFlagHideHeaderForBuyRobuxInExperienceShop (copy), InExperienceShopModule (copy), FFlagLogFreeTrialDotAndMenuItemClickModule (copy), Chrome (copy)
-	if ServiceModule:isIntegrationValid(ConstantsModule.IN_EXPERIENCE_SHOP_ID) or FFlagHideHeaderForBuyRobuxInExperienceShop then
-		if FFlagHideHeaderForBuyRobuxInExperienceShop then
-			InExperienceShopModule.setOpenedFromBuyRobux(true)
-		end
-		if not ServiceModule:isWindowOpen(ConstantsModule.IN_EXPERIENCE_SHOP_ID) then
-			InExperienceShopModule.requestOpenToRobuxTab()
-		end
-		if FFlagLogFreeTrialDotAndMenuItemClickModule then
-			require(Chrome.Integrations.InExperienceShop.trialIndicatorShopOpen).beginOutsideTrialIndicator()
-		end
-		ServiceModule:activate(ConstantsModule.IN_EXPERIENCE_SHOP_ID)
-		
-		if FFlagLogFreeTrialDotAndMenuItemClickModule then
-			require(Chrome.Integrations.InExperienceShop.trialIndicatorShopOpen).finishOutsideTrialIndicator()
-		end
+	-- upvalues: ServiceModule (copy), ConstantsModule (copy), FFlagHideHeaderForBuyRobuxInExperienceShop (copy), InExperienceShopModule (copy), FFlagKeepSideSheetOpenBesideMenu (copy), FFlagLogFreeTrialDotAndMenuItemClickModule (copy), Chrome (copy)
+	if not ServiceModule:isIntegrationValid(ConstantsModule.IN_EXPERIENCE_SHOP_ID) and not FFlagHideHeaderForBuyRobuxInExperienceShop then
+		return not FFlagKeepSideSheetOpenBesideMenu and nil
 	end
+	if FFlagHideHeaderForBuyRobuxInExperienceShop then
+		InExperienceShopModule.setOpenedFromBuyRobux(true)
+	end
+	if not (if FFlagKeepSideSheetOpenBesideMenu then ServiceModule:integrations()[ConstantsModule.IN_EXPERIENCE_SHOP_ID] ~= nil and ServiceModule:isWindowOpen(ConstantsModule.IN_EXPERIENCE_SHOP_ID) == true else ServiceModule:isWindowOpen(ConstantsModule.IN_EXPERIENCE_SHOP_ID)) then
+		InExperienceShopModule.requestOpenToRobuxTab()
+	end
+	if FFlagLogFreeTrialDotAndMenuItemClickModule then
+		require(Chrome.Integrations.InExperienceShop.trialIndicatorShopOpen).beginOutsideTrialIndicator()
+	end
+	ServiceModule:activate(ConstantsModule.IN_EXPERIENCE_SHOP_ID)
+	
+	if FFlagLogFreeTrialDotAndMenuItemClickModule then
+		require(Chrome.Integrations.InExperienceShop.trialIndicatorShopOpen).finishOutsideTrialIndicator()
+	end
+	return if FFlagKeepSideSheetOpenBesideMenu then ServiceModule:integrations()[ConstantsModule.IN_EXPERIENCE_SHOP_ID] ~= nil and ServiceModule:isWindowOpen(ConstantsModule.IN_EXPERIENCE_SHOP_ID) == true else nil
 end
 
 local function RobuxWidgetIntegration(p1)
-	-- upvalues: ReactModule (copy), InExperienceSideSheetModule (copy), openShop (copy)
+	-- upvalues: ReactModule (copy), InExperienceSideSheetModule (copy), FFlagKeepSideSheetOpenBesideMenu (copy), openShop (copy)
 	return ReactModule.createElement(InExperienceSideSheetModule.RobuxWidget, {
 		layoutOrder = p1.layoutOrder,
 		placement = p1.placement,
+		sideSheetOpenBehavior = if FFlagKeepSideSheetOpenBesideMenu then p1.sideSheetOpenBehavior else nil,
 		onBuyActivated = openShop,
 		firstIntegrationToFocusCallback = p1.firstIntegrationToFocusCallback
 	})

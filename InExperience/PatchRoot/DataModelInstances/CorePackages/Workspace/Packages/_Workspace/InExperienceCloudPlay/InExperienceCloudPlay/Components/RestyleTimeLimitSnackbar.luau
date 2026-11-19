@@ -6,15 +6,22 @@ local TransientUIOverlayModule = require(Parent.TransientUIOverlay)
 local GetCloudClientServiceModule = require(InExperienceCloudPlay.getCloudClientService)
 local UseSecondsLeftModule = require(InExperienceCloudPlay.Hooks.useSecondsLeft)
 local UseServicePropertyModule = require(InExperienceCloudPlay.Hooks.useServiceProperty)
+local FFlagLuaAppCloudClientRobloxRealityNameParamModule = require(InExperienceCloudPlay.Flags.FFlagLuaAppCloudClientRobloxRealityNameParam)
+local FStringLuaAppCloudClientRobloxRealityNameModule = require(InExperienceCloudPlay.Flags.FStringLuaAppCloudClientRobloxRealityName)
 
 return function()
-	-- upvalues: ReactModule (copy), GetCloudClientServiceModule (copy), UseServicePropertyModule (copy), UseSecondsLeftModule (copy), UseLocalizationFunction (copy), TransientUIOverlayModule (copy)
+	-- upvalues: ReactModule (copy), GetCloudClientServiceModule (copy), UseServicePropertyModule (copy), UseSecondsLeftModule (copy), FFlagLuaAppCloudClientRobloxRealityNameParamModule (copy), UseLocalizationFunction (copy), FStringLuaAppCloudClientRobloxRealityNameModule (copy), TransientUIOverlayModule (copy)
 	local UseMemoResult = ReactModule.useMemo(GetCloudClientServiceModule, {})
 	local IsIsRobloxRealityEnvironment = UseServicePropertyModule(UseMemoResult, "IsRobloxRealityEnvironment") == true
 	local SessionTimeLimit = UseServicePropertyModule(UseMemoResult, "SessionTimeLimit")
 	local UseSecondsLeftModuleResult: number = UseSecondsLeftModule(if IsIsRobloxRealityEnvironment then UseMemoResult else nil, if typeof(SessionTimeLimit) == "number" then SessionTimeLimit else nil)
 	local UseRefResult = ReactModule.useRef(false)
-	local UseLocalizationResult = UseLocalizationFunction({
+	local UseLocalizationResult = if FFlagLuaAppCloudClientRobloxRealityNameParamModule then UseLocalizationFunction({
+		title = {
+			"Feature.CloudClient.Label.RobloxRealityEndingSoonV2",
+			productName = FStringLuaAppCloudClientRobloxRealityNameModule
+		}
+	}) else UseLocalizationFunction({
 		title = "Feature.CloudClient.Label.RobloxRealityEndingSoon"
 	})
 	local IsUseSecondsLeftModuleResultBelow: boolean = UseSecondsLeftModuleResult ~= nil and (UseSecondsLeftModuleResult > 0 and UseSecondsLeftModuleResult <= 60)

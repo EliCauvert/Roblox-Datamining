@@ -19,6 +19,7 @@ local SquadComponentAccessWrapperModule = require(Parent.Squads.SquadComponentAc
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagFriendsCallingClientGateDEV = SharedFlagsModule.FFlagFriendsCallingClientGate_DEV
 local UseIsCallButtonEligibleModule = if FFlagFriendsCallingClientGateDEV then require(AppChat.Hooks.useIsCallButtonEligible) else nil
+local UseIsCallButtonDisabledModule = if FFlagFriendsCallingClientGateDEV then require(Parent.FriendsCalling.useIsCallButtonDisabled) else nil
 local GetFFlagIsSquadEnabledFunction = SharedFlagsModule.GetFFlagIsSquadEnabled
 local StartConversationCallModule = if FFlagFriendsCallingClientGateDEV then require(AppChat.Utils.startConversationCall) else nil
 local UseSignalStateFunction = SignalsReactModule.useSignalState
@@ -28,7 +29,7 @@ local function noOp()
 end
 
 return function(p1)
-	-- upvalues: GetTopBarStoreModule (copy), UseSignalStateFunction (copy), FFlagFriendsCallingClientGateDEV (copy), UseIsCallButtonEligibleModule (copy), UseChatPlacementContextFunction (copy), UseLocalizationFunction (copy), AppHeaderBarModule (copy), CreateBackFuncModule (copy), StartConversationCallModule (copy), ReactModule (copy), GetFFlagIsSquadEnabledFunction (copy), FoundationModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), SquadComponentAccessWrapperModule (copy), SquadJoinButtonModule (copy), EnumScreensModule (copy), SquadButtonSourceEnum (copy), HeaderBarTitleLeftAlignedModule (copy), ChatTopBarBaseModule (copy), noOp (copy)
+	-- upvalues: GetTopBarStoreModule (copy), UseSignalStateFunction (copy), FFlagFriendsCallingClientGateDEV (copy), UseIsCallButtonEligibleModule (copy), UseIsCallButtonDisabledModule (copy), UseChatPlacementContextFunction (copy), UseLocalizationFunction (copy), AppHeaderBarModule (copy), CreateBackFuncModule (copy), StartConversationCallModule (copy), ReactModule (copy), GetFFlagIsSquadEnabledFunction (copy), FoundationModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), SquadComponentAccessWrapperModule (copy), SquadJoinButtonModule (copy), EnumScreensModule (copy), SquadButtonSourceEnum (copy), HeaderBarTitleLeftAlignedModule (copy), ChatTopBarBaseModule (copy), noOp (copy)
 	local ScreenName = p1.screenName
 	local Navigation = p1.navigation
 	local UseSignalStateResult = UseSignalStateFunction((GetTopBarStoreModule(false).getScreenTopBar(ScreenName)))
@@ -37,6 +38,7 @@ return function(p1)
 	local IsRoot = UseSignalStateResult.isRoot
 	local ConversationId = UseSignalStateResult.conversationId
 	local UseIsCallButtonEligibleModuleResult = if FFlagFriendsCallingClientGateDEV and UseIsCallButtonEligibleModule then UseIsCallButtonEligibleModule(ConversationId) else false
+	local UseIsCallButtonDisabledModuleResult = if FFlagFriendsCallingClientGateDEV then UseIsCallButtonDisabledModule() else false
 	local NavigateToChatDetails = UseSignalStateResult.navigateToChatDetails
 	local RightPaddingOverride = UseSignalStateResult.rightPaddingOverride
 	local UseChatPlacementContextResult = UseChatPlacementContextFunction()
@@ -61,13 +63,14 @@ return function(p1)
 	local UseIsCallButtonEligibleModuleResult1 = FFlagFriendsCallingClientGateDEV and (ConversationId ~= nil and UseIsCallButtonEligibleModuleResult)
 	local HasConversationId: boolean = not FFlagFriendsCallingClientGateDEV and (GetFFlagIsSquadEnabledFunction() and ConversationId ~= nil)
 	local RenderRight = if UseIsCallButtonEligibleModuleResult1 and UseResult then function()
-		-- upvalues: ReactModule (upval), FoundationModule (upval), UseResult (copy), FFlagDebugAppChatEnableDomLocatorsModule (upval), DomLocatorsModule (upval)
+		-- upvalues: ReactModule (upval), FoundationModule (upval), UseResult (copy), UseIsCallButtonDisabledModuleResult (copy), FFlagDebugAppChatEnableDomLocatorsModule (upval), DomLocatorsModule (upval)
 		return ReactModule.createElement(FoundationModule.View, { tag = "row align-x-right align-y-center auto-xy" }, {
 			CallButton = ReactModule.createElement(FoundationModule.IconButton, {
 				isCircular = true,
 				icon = FoundationModule.Enums.IconName.Phone,
 				size = FoundationModule.Enums.InputSize.Medium,
 				onActivated = UseResult,
+				isDisabled = UseIsCallButtonDisabledModuleResult,
 				testId = if FFlagDebugAppChatEnableDomLocatorsModule then DomLocatorsModule.chatConversationTopBarButton("call") else nil
 			})
 		})

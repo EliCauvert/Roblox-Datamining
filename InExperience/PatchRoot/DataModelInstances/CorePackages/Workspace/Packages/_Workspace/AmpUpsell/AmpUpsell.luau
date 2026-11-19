@@ -1,6 +1,9 @@
 ﻿local _ = require(script.Common.Types)
 
 return {
+	useVpcLauncher = function()
+		return require(script.useVpcLauncher)()
+	end,
 	AccountSettingsUpsell = require(script.Components.Upsells.AccountSettingsUpsell),
 	VPCUpsellContainer = require(script.Components.Upsells.ParentalRequest.VPCUpsellContainer),
 	VPCPrologue = require(script.Components.Prologues.VPCPrologue),

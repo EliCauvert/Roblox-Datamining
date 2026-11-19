@@ -124,10 +124,11 @@ return function()
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextYAlignment = Enum.TextYAlignment.Center,
 				[React.Event.Activated] = function()
-					-- upvalues: UseStateResult1 (upval), Default (upval), value (copy), UseLocalizationResult (upval), UseStateResult2 (upval)
+					-- upvalues: UseStateResult1 (upval), Default (upval), FFlagKeepSideSheetOpenBesideMenu (upval), value (copy), UseLocalizationResult (upval), UseStateResult2 (upval)
 					if UseStateResult1.notificationType then
 						Default:snoozeNotification({
 							context = UseStateResult1.context,
+							displayOrder = if FFlagKeepSideSheetOpenBesideMenu then UseStateResult1.displayOrder else nil,
 							notificationType = UseStateResult1.notificationType,
 							durationMinutes = value.durationMinutes,
 							modalMessage = UseLocalizationResult.snoozeFeedback:gsub("{title}", UseLocalizationResult[if type(UseStateResult1.notificationType) == "table" then UseStateResult1.notificationType[1] else UseStateResult1.notificationType] or ""):gsub("{duration}", UseLocalizationResult[value.textKey])

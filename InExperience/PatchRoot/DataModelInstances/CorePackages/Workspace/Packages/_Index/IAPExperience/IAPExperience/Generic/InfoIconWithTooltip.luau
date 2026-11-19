@@ -2,6 +2,7 @@
 local Parent = script.Parent.Parent.Parent
 local UIBloxModule = require(Parent.UIBlox)
 local RoactModule = require(Parent.Roact)
+local FFlagKeepSideSheetOpenBesideMenu = require(Parent.SharedFlags).FFlagKeepSideSheetOpenBesideMenu
 local WithHoverTooltipFunction = UIBloxModule.App.Dialog.TooltipV2.withHoverTooltip
 local TooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
 local Interactable = UIBloxModule.Core.Control.Interactable
@@ -9,15 +10,15 @@ local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local IconsActionsInfo = UIBloxModule.App.ImageSet.Images["icons/actions/info"]
 
 function InfoIconWithTooltip(p1)
-	-- upvalues: WithHoverTooltipFunction (copy), TooltipOrientation (copy), CoreGui (copy), RoactModule (copy), ImageSetLabel (copy), IconsActionsInfo (copy), Interactable (copy)
+	-- upvalues: FFlagKeepSideSheetOpenBesideMenu (copy), Parent (copy), WithHoverTooltipFunction (copy), TooltipOrientation (copy), CoreGui (copy), RoactModule (copy), ImageSetLabel (copy), IconsActionsInfo (copy), Interactable (copy)
 	local _UDim2 = UDim2.new(0, 18, 0, 18)
 	
 	return WithHoverTooltipFunction({ bodyText = p1.text }, {
-		DisplayOrder = 10,
 		delayTime = 0.2,
 		triggerPointName = "BonusBannerInfoIcon",
 		preferredOrientation = TooltipOrientation.Bottom,
-		guiTarget = CoreGui
+		guiTarget = CoreGui,
+		DisplayOrder = if FFlagKeepSideSheetOpenBesideMenu then require(Parent.InExperienceSideSheetStore.Constants).PurchasePromptTooltipDisplayOrder else 10
 	}, function(p2, OnStateChanged)
 		-- upvalues: RoactModule (upval), _UDim2 (copy), p1 (copy), ImageSetLabel (upval), IconsActionsInfo (upval), Interactable (upval)
 		return RoactModule.createElement("Frame", {

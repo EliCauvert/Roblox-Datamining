@@ -18,20 +18,21 @@ local GameInviteModalManagerModule = require(GameInvite.GameInviteModalManager)
 local GameInviteModalLayoutProviderModule = require(GameInvite.Context.GameInviteModalLayoutProvider)
 local GameInviteModalWindowModule = require(Components.GameInviteModalWindow)
 local GameInviteContentWrapperModule = require(Components.GameInviteContentWrapper)
-local GameInviteDependenciesModule = require(GameInvite.GameInviteDependencies)
 local GameInviteConstantsModule = require(GameInvite.GameInviteConstants)
 local ResetUserInviteStatusModule = require(GameInvite.State.Actions.ResetUserInviteStatus)
 local VrCompatibilityModule = require(Parent.VrCompatibility)
 local VRReadyWrapper = VrCompatibilityModule.VRReadyWrapper
 local VRConstants = VrCompatibilityModule.VRConstants
 local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local NetworkImpl = GameInviteDependenciesModule.networkImpl
+local NetworkImpl = require(GameInvite.GameInviteDependencies).networkImpl
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagUseSignalsForGameInvitesStatus = SharedFlagsModule.FFlagUseSignalsForGameInvitesStatus
 local GetGameInvitesStatusStore = if FFlagUseSignalsForGameInvitesStatus then require(Parent.NotificationsCommon).GetGameInvitesStatusStore else nil
 local GetFFlagEnableGameInviteModalVRSupportFunction = SharedFlagsModule.GetFFlagEnableGameInviteModalVRSupport
 local IsInExperienceUIVREnabled = require(Parent.SharedExperimentDefinition).isInExperienceUIVREnabled
 local FFlagEnableInExperienceUIPCVRFix = SharedFlagsModule.FFlagEnableInExperienceUIPCVRFix
+local FFlagKeepSideSheetOpenBesideMenu = SharedFlagsModule.FFlagKeepSideSheetOpenBesideMenu
+local UseInviteFriendsAreaBesideSideSheetModule = require(GameInvite.utils.useInviteFriendsAreaBesideSideSheet)
 local ResponsiveModule = nil
 local UIManager = nil
 local PanelType = nil
@@ -55,7 +56,7 @@ local CustomEventHandlers = {
 }
 
 return function(p1)
-	-- upvalues: ReactModule (copy), RunService (copy), GameInviteConstantsModule (copy), UseDispatchFunction (copy), IsInExperienceUIVREnabled (copy), ResponsiveModule (ref), FFlagEnableInExperienceUIPCVRFix (copy), Callback (ref), FFlagUseSignalsForGameInvitesStatus (copy), GetGameInvitesStatusStore (copy), ResetUserInviteStatusModule (copy), GameInviteModalManagerModule (copy), GuiService (copy), PromiseModule (copy), RobloxReplicatedStorage (copy), GetGameNameAndDescriptionFunction (copy), NetworkImpl (copy), GameInviteModalWindowModule (copy), GameInviteContentWrapperModule (copy), GetFFlagEnableGameInviteModalVRSupportFunction (copy), VRReadyWrapper (copy), VRConstants (copy), GameInviteModalLayoutProviderModule (copy), FocusNavigableSurfaceWrapper (copy), FocusNavigableSurfaceIdentifierEnum (copy), CustomEventHandlers (copy), UIManager (ref), PanelType (ref), ReactRobloxModule (copy)
+	-- upvalues: ReactModule (copy), RunService (copy), GameInviteConstantsModule (copy), UseDispatchFunction (copy), FFlagKeepSideSheetOpenBesideMenu (copy), UseInviteFriendsAreaBesideSideSheetModule (copy), IsInExperienceUIVREnabled (copy), ResponsiveModule (ref), FFlagEnableInExperienceUIPCVRFix (copy), Callback (ref), FFlagUseSignalsForGameInvitesStatus (copy), GetGameInvitesStatusStore (copy), ResetUserInviteStatusModule (copy), GameInviteModalManagerModule (copy), GuiService (copy), PromiseModule (copy), RobloxReplicatedStorage (copy), GetGameNameAndDescriptionFunction (copy), NetworkImpl (copy), Parent (copy), GameInviteModalWindowModule (copy), GameInviteContentWrapperModule (copy), GetFFlagEnableGameInviteModalVRSupportFunction (copy), VRReadyWrapper (copy), VRConstants (copy), GameInviteModalLayoutProviderModule (copy), FocusNavigableSurfaceWrapper (copy), FocusNavigableSurfaceIdentifierEnum (copy), CustomEventHandlers (copy), UIManager (ref), PanelType (ref), ReactRobloxModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState({})
@@ -65,6 +66,7 @@ return function(p1)
 	local IsRenderLocationMatch = p1.renderLocation == GameInviteConstantsModule.RenderLocation.CoreScripts
 	local IsRenderLocationMatch1 = p1.renderLocation == GameInviteConstantsModule.RenderLocation.UniversalApp
 	local UseDispatchResult = UseDispatchFunction()
+	local UseInviteFriendsAreaBesideSideSheetModuleResult = if FFlagKeepSideSheetOpenBesideMenu then UseInviteFriendsAreaBesideSideSheetModule() else nil
 	local UseIsSpatialResult = nil
 	local StyleSheet = nil
 	
@@ -101,11 +103,16 @@ return function(p1)
 		end
 	end, {})
 	ReactModule.useEffect(function()
-		-- upvalues: IsRenderLocationMatch (copy), GuiService (upval), UseStateResult (copy), GameInviteModalManagerModule (upval)
+		-- upvalues: IsRenderLocationMatch (copy), GuiService (upval), UseStateResult (copy), FFlagKeepSideSheetOpenBesideMenu (upval), GameInviteModalManagerModule (upval)
 		if IsRenderLocationMatch then
 			local MenuOpenedConnection = GuiService.MenuOpened:Connect(function()
-				-- upvalues: UseStateResult (upval), GameInviteModalManagerModule (upval)
+				-- upvalues: UseStateResult (upval), FFlagKeepSideSheetOpenBesideMenu (upval), GameInviteModalManagerModule (upval)
 				if UseStateResult then
+					if FFlagKeepSideSheetOpenBesideMenu then
+						GameInviteModalManagerModule:closeModalKeepingSideSheet()
+						
+						return
+					end
 					GameInviteModalManagerModule:closeModal()
 				end
 			end)
@@ -142,6 +149,7 @@ return function(p1)
 	if not UseStateResult then
 		return nil
 	end
+	local NewSideSheetDisplayOrder = if UseInviteFriendsAreaBesideSideSheetModuleResult then require(Parent.InExperienceSideSheetStore.Constants).SideSheetDisplayOrder + 1 else p1.displayOrder
 	local Element = ReactModule.createElement(GameInviteModalWindowModule, {}, {
 		GameInviteModalContentWrapper = ReactModule.createElement(GameInviteContentWrapperModule, {
 			options = UseStateResult3,
@@ -159,7 +167,7 @@ return function(p1)
 			component = "ScreenGui",
 			props = {
 				IgnoreGuiInset = true,
-				DisplayOrder = p1.displayOrder,
+				DisplayOrder = NewSideSheetDisplayOrder,
 				ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
 				Name = GameInviteConstantsModule.ParentComponentName
 			},
@@ -190,7 +198,9 @@ return function(p1)
 				isCoreScript = IsRenderLocationMatch,
 				screenSizeOverride = if FFlagEnableInExperienceUIPCVRFix then PanelSizeInPixel else nil
 			}, {
-				ModalWindowContainer = ReactModule.createElement(GameInviteModalWindowModule, {}, {
+				ModalWindowContainer = ReactModule.createElement(GameInviteModalWindowModule, {
+					isSpatialPanel = if FFlagKeepSideSheetOpenBesideMenu then true else nil
+				}, {
 					GameInviteModalContentWrapper = ReactModule.createElement(GameInviteContentWrapperModule, {
 						options = UseStateResult3,
 						serverType = UseStateResult5,
@@ -204,7 +214,7 @@ return function(p1)
 	else
 		return ReactModule.createElement("ScreenGui", {
 			IgnoreGuiInset = true,
-			DisplayOrder = p1.displayOrder,
+			DisplayOrder = NewSideSheetDisplayOrder,
 			ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
 			Name = GameInviteConstantsModule.ParentComponentName
 		}, {

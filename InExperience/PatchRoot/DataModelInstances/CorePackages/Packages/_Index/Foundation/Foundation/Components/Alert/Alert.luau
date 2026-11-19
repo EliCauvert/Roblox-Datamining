@@ -74,7 +74,7 @@ local function WrappingRichText(Frame)
 end
 
 return ReactModule.memo(ReactModule.forwardRef(function(p3, Ref)
-	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), config1 (copy), ReactModule (copy), Width (copy), FlagsModule (copy), UseAlertVariantsModule (copy), ButtonVariantModule (copy), AlertConstantsModule (copy), IconVariant (copy), AlertSeverityModule (copy), IsBuilderIconModule (copy), IconModule (copy), IconSizeModule (copy), ViewModule (copy), WrappingRichText (copy), TextModule (copy), LinkModule (copy), TextOverflowModule (copy), EscapeRichTextModule (copy), StateLayerAffordanceModule (copy), ButtonGroupModule (copy), InputSizeModule (copy), CloseAffordanceModule (copy), CloseAffordanceVariantModule (copy), WithCommonPropsModule (copy), AlertVariantModule (copy)
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), config1 (copy), ReactModule (copy), Width (copy), UseAlertVariantsModule (copy), ButtonVariantModule (copy), AlertConstantsModule (copy), IconVariant (copy), AlertSeverityModule (copy), IsBuilderIconModule (copy), IconModule (copy), IconSizeModule (copy), ViewModule (copy), WrappingRichText (copy), TextModule (copy), FlagsModule (copy), LinkModule (copy), TextOverflowModule (copy), EscapeRichTextModule (copy), StateLayerAffordanceModule (copy), ButtonGroupModule (copy), InputSizeModule (copy), CloseAffordanceModule (copy), CloseAffordanceVariantModule (copy), WithCommonPropsModule (copy), AlertVariantModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p3, config)
 	local UseTokensModuleResult = UseTokensModule()
 	local Entry = config1[WithDefaultsModuleResult.variant] or WithDefaultsModuleResult.variant
@@ -103,10 +103,9 @@ return ReactModule.memo(ReactModule.forwardRef(function(p3, Ref)
 		end
 		UseRefResult.current = true
 	end, { Text })
-	local IsXBelow: boolean = UseStateResult.X > 0 and UseStateResult.X <= Width
-	local ScaledX = UseStateResult.X * (if FlagsModule.FoundationAlertStackTrailingOnOverflow then 0.3 else 0.4)
-	local IsXBelow1: boolean = if FlagsModule.FoundationAlertStackTrailingOnOverflow then IsXBelow or ScaledX > 0 and ScaledX < UseStateResult1 else IsXBelow or WithDefaultsModuleResult.actions ~= nil and (ScaledX > 0 and ScaledX < UseStateResult1)
-	local UseAlertVariantsModuleResult = UseAlertVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.severity, Entry, IsXBelow1)
+	local ScaledX = UseStateResult.X * 0.3
+	local IsXBelow: boolean = UseStateResult.X > 0 and UseStateResult.X <= Width or ScaledX > 0 and ScaledX < UseStateResult1
+	local UseAlertVariantsModuleResult = UseAlertVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.severity, Entry, IsXBelow)
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: WithDefaultsModuleResult (copy), ButtonVariantModule (upval)
 		if not WithDefaultsModuleResult.actions then
@@ -185,7 +184,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p3, Ref)
 		padding = UseAlertVariantsModuleResult.message.padding,
 		testId = `{WithDefaultsModuleResult.testId}--message`
 	})
-	local UseResult2 = if IsXBelow1 then nil else UseResult1
+	local UseResult2 = if IsXBelow then nil else UseResult1
 	local Element21 = if WithDefaultsModuleResult.link and FlagsModule.FoundationAlertUseLink then ReactModule.createElement(ViewModule, {
 		LayoutOrder = 3,
 		tag = UseAlertVariantsModuleResult.linkContainer.tag,
@@ -196,10 +195,10 @@ return ReactModule.memo(ReactModule.forwardRef(function(p3, Ref)
 			hasUnderline = true,
 			text = WithDefaultsModuleResult.link.text,
 			onActivated = WithDefaultsModuleResult.link.onActivated,
-			textOverflow = if IsXBelow1 then TextOverflowModule.Wrap else TextOverflowModule.None,
+			textOverflow = if IsXBelow then TextOverflowModule.Wrap else TextOverflowModule.None,
 			testId = `{WithDefaultsModuleResult.testId}--link`
 		})
-	}) elseif WithDefaultsModuleResult.link then if IsXBelow1 and FlagsModule.FoundationAlertLinkWrap then ReactModule.createElement(WrappingRichText, {
+	}) elseif WithDefaultsModuleResult.link then if IsXBelow then ReactModule.createElement(WrappingRichText, {
 		LayoutOrder = 3,
 		slot = UseAlertVariantsModuleResult.link,
 		text = `<u>{EscapeRichTextModule(WithDefaultsModuleResult.link.text)}</u>`,
@@ -213,7 +212,6 @@ return ReactModule.memo(ReactModule.forwardRef(function(p3, Ref)
 		Text = `<u>{EscapeRichTextModule(WithDefaultsModuleResult.link.text)}</u>`,
 		tag = UseAlertVariantsModuleResult.link.tag,
 		padding = UseAlertVariantsModuleResult.link.padding,
-		sizeConstraint = if FlagsModule.FoundationAlertStackTrailingOnOverflow then nil elseif IsXBelow1 or ScaledX <= 0 then nil else { MaxSize = Vector2.new(ScaledX, 1e999) },
 		stateLayer = { affordance = StateLayerAffordanceModule.None },
 		onActivated = WithDefaultsModuleResult.link.onActivated,
 		testId = `{WithDefaultsModuleResult.testId}--link`,
@@ -232,7 +230,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p3, Ref)
 		variant = CloseAffordanceVariantModule.Utility,
 		testId = `{WithDefaultsModuleResult.testId}--close`
 	}) else nil
-	local Config = if IsXBelow1 then {
+	local Config = if IsXBelow then {
 		Icon = Element1,
 		Stack = ReactModule.createElement(ViewModule, {
 			LayoutOrder = 2,

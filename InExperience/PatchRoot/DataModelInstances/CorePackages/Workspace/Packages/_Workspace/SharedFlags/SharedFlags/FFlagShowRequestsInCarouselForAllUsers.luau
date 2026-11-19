@@ -1,3 +1,3 @@
 ﻿local FFlagUserTileAvatarOverlayIconModule = require(script.Parent.FFlagUserTileAvatarOverlayIcon)
 
-return game:DefineFastFlag("ShowRequestsInCarouselForAllUsers_v2", false) and FFlagUserTileAvatarOverlayIconModule
+return game:DefineFastFlag("ShowRequestsInCarouselForAllUsers_v3", false) and FFlagUserTileAvatarOverlayIconModule

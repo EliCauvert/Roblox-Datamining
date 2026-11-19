@@ -48,6 +48,7 @@ return function(p1)
 			end
 		end, { UseDispatchResult, UseNavigationResult }),
 		onTileContentChanged = if FFlagShowRequestsInCarouselForAllUsers then nil else UseResult,
-		appCompositionEnabled = p1.appCompositionEnabled
+		appCompositionEnabled = p1.appCompositionEnabled,
+		carouselFrameRef = if FFlagShowRequestsInCarouselForAllUsers then p1.carouselFrameRef else nil
 	})
 end

@@ -1,16 +1,24 @@
 ﻿local ExperienceStoreServerDrivenUi = script:FindFirstAncestor("ExperienceStoreServerDrivenUi")
-local SduiCoreSystemModule = require(ExperienceStoreServerDrivenUi.Parent.SduiCoreSystem)
+local Parent = ExperienceStoreServerDrivenUi.Parent
+local FFlagEnableOpenGameItemDetailsAction = require(Parent.SharedFlags).FFlagEnableOpenGameItemDetailsAction
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
 local SduiActionType = SduiCoreSystemModule.SduiActionType
 local GetSduiActionHandlerRegistryFunction = SduiCoreSystemModule.getSduiActionHandlerRegistry
 
 return function()
-	-- upvalues: SduiActionType (copy), ExperienceStoreServerDrivenUi (copy), GetSduiActionHandlerRegistryFunction (copy)
+	-- upvalues: SduiActionType (copy), ExperienceStoreServerDrivenUi (copy), FFlagEnableOpenGameItemDetailsAction (copy), GetSduiActionHandlerRegistryFunction (copy)
 	GetSduiActionHandlerRegistryFunction().registerActionHandlerConfigs({
 		[SduiActionType.RefreshDeveloperProducts] = {
 			lazyHandler = function()
 				-- upvalues: ExperienceStoreServerDrivenUi (upval)
 				return require(ExperienceStoreServerDrivenUi.Actions.SduiRefreshDeveloperProductsAction)
 			end
-		}
+		},
+		[SduiActionType.OpenGameItemDetails] = if FFlagEnableOpenGameItemDetailsAction then {
+			lazyHandler = function()
+				-- upvalues: ExperienceStoreServerDrivenUi (upval)
+				return require(ExperienceStoreServerDrivenUi.Actions.SduiOpenGameItemDetailsAction)
+			end
+		} else nil
 	})
 end

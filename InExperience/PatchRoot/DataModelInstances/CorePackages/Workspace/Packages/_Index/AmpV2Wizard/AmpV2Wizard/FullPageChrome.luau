@@ -8,9 +8,10 @@ local Divider = FoundationModule.Divider
 local HeaderBar = FoundationModule.HeaderBar
 local IconName = FoundationModule.Enums.IconName
 local FFlagAmpV2WizardFullPageHeaderAlignModule = require(AmpV2Wizard.FFlagAmpV2WizardFullPageHeaderAlign)
+local FFlagLuaAppAddTestIdsForArrow = require(Parent.SharedFlags).FFlagLuaAppAddTestIdsForArrow
 
 return function(p1)
-	-- upvalues: ReactModule (copy), HeaderBar (copy), IconName (copy), Text (copy), FFlagAmpV2WizardFullPageHeaderAlignModule (copy), View (copy), Divider (copy)
+	-- upvalues: ReactModule (copy), HeaderBar (copy), IconName (copy), Text (copy), FFlagLuaAppAddTestIdsForArrow (copy), FFlagAmpV2WizardFullPageHeaderAlignModule (copy), View (copy), Divider (copy)
 	local OnBack = p1.onBack
 	local OnClose = p1.onClose
 	local Title = p1.title
@@ -28,6 +29,7 @@ return function(p1)
 			Title = if Title == nil or Title == "" then nil else ReactModule.createElement(Text, {
 				tag = "auto-xy text-heading-medium content-emphasis",
 				LayoutOrder = 2,
+				testId = if FFlagLuaAppAddTestIdsForArrow then "amp-v2-wizard-full-page-header-title" else nil,
 				Text = Title
 			})
 		}),

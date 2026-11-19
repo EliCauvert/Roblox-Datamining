@@ -5,5 +5,6 @@
 	useApolloAutoRetry = require(script.useApolloAutoRetry),
 	useMutualFriendsText = require(script.useMutualFriendsText),
 	useRecommendationContextualInfoDisplay = require(script.useRecommendationContextualInfoDisplay),
-	useGetPersonalizationSettingItem = require(script.useGetPersonalizationSettingItem)
+	useGetPersonalizationSettingItem = require(script.useGetPersonalizationSettingItem),
+	useGetRatingDisplayByUniverseId = require(script.useGetRatingDisplayByUniverseId)
 }

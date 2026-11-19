@@ -3,6 +3,7 @@ local GetTokenGeneratorsFunction = DependenciesModule.GetTokenGenerators
 local GetFoundationTokensFunction = DependenciesModule.GetFoundationTokens
 local UIBloxConfigModule = require(script.Parent.Parent.Parent.UIBloxConfig)
 local ConstantsModule = require(script.Parent.Constants)
+local t = {}
 
 local function _(Console, Value: number): number
 	-- upvalues: UIBloxConfigModule (copy), ConstantsModule (copy)
@@ -38,8 +39,7 @@ return {
 	end,
 	Types = require(script.Types),
 	getFoundationTokens = function(Console, p1, p2)
-		-- upvalues: GetFoundationTokensFunction (copy), ConstantsModule (copy), UIBloxConfigModule (copy)
-		local FoundationTokens = GetFoundationTokensFunction(p1) or GetFoundationTokensFunction(ConstantsModule.DefaultThemeName)
+		-- upvalues: UIBloxConfigModule (copy), ConstantsModule (copy), t (copy), GetFoundationTokensFunction (copy)
 		local Value: number = p2
 		local ScaledClampedValue = nil
 		
@@ -51,7 +51,17 @@ return {
 			end
 			ScaledClampedValue = (if Console == ConstantsModule.DeviceType.Console then 1.5 else 1) * math.clamp(Value, 0, 1e999)
 		end
-		return FoundationTokens(ScaledClampedValue)
+		if not UIBloxConfigModule.shareDerivedStyleTokens then
+			return (GetFoundationTokensFunction(p1) or GetFoundationTokensFunction(ConstantsModule.DefaultThemeName))(ScaledClampedValue)
+		end
+		local Text: string = `{p1}|{ScaledClampedValue}`
+		local Entry = t[Text]
+		
+		if Entry == nil then
+			Entry = (GetFoundationTokensFunction(p1) or GetFoundationTokensFunction(ConstantsModule.DefaultThemeName))(ScaledClampedValue)
+			t[Text] = Entry
+		end
+		return Entry
 	end,
 	getFoundationTokensDefaultScale = function(p1)
 		-- upvalues: GetFoundationTokensFunction (copy), ConstantsModule (copy)

@@ -4,6 +4,7 @@ local GetTextSizeOffsetModule = require(Parent1.Utility.getTextSizeOffset)
 local Parent2 = Parent1.Parent
 local ReactModule = require(Parent2.React)
 local RoactModule = require(Parent2.Roact)
+local CryoModule = require(Parent2.Cryo)
 local FoundationModule = require(Parent2.Foundation)
 local FoundationProvider = FoundationModule.FoundationProvider
 local UseTokensFunction = FoundationModule.Hooks.useTokens
@@ -15,6 +16,7 @@ local _ = require(script.Parent.StyleTypes)
 local TokensModule = require(script.Parent.Tokens)
 local StyleContextModule = require(Parent1.Core.Style.StyleContext)
 local LoggerModule = require(Parent1.Logger)
+local UIBloxConfigModule = require(Parent1.UIBloxConfig)
 local GetTokensFunction = TokensModule.getTokens
 local GetFoundationTokensFunction = TokensModule.getFoundationTokens
 local Mappers = TokensModule.Mappers
@@ -30,21 +32,56 @@ local config1 = {
 	settings = ConstantsModule.DefaultSettings
 }
 
+local function deriveStyle(DeviceType, p1, Scale, p2)
+	-- upvalues: GetTokensFunction (copy), GetFoundationTokensFunction (copy), CryoModule (copy), Mappers (copy), GetThemeFromNameModule (copy)
+	local HasConfig = p2.Config ~= nil
+	local Tokens = GetTokensFunction(DeviceType, p1, Scale)
+	local FoundationTokens = GetFoundationTokensFunction(DeviceType, p1)
+	
+	return {
+		tokens = Mappers.addFoundationFlatKeys(Mappers.mapColorTokensToFoundation(Tokens, if HasConfig then CryoModule.Dictionary.join(FoundationTokens, p2) else FoundationTokens), if HasConfig then p2 else FoundationTokens),
+		theme = Mappers.mapThemeToFoundation(GetThemeFromNameModule(p1), if HasConfig then p2 else FoundationTokens),
+		foundationTokens = FoundationTokens
+	}
+end
+
+local self = setmetatable({}, { __mode = "k" })
+local t = {}
+
+local function getSharedDerivedStyle(DeviceType, p1, Scale, p2)
+	-- upvalues: t (copy), self (copy), deriveStyle (copy)
+	local T = if p2.Config == nil then t else p2
+	local SelfEntry = self[T]
+	
+	if SelfEntry == nil then
+		SelfEntry = {}
+		self[T] = SelfEntry
+	end
+	local Text: string = `{p1}|{DeviceType}|{Scale}`
+	local SelfEntry1 = SelfEntry[Text]
+	
+	if SelfEntry1 == nil then
+		SelfEntry1 = deriveStyle(DeviceType, p1, Scale, p2)
+		SelfEntry[Text] = SelfEntry1
+	end
+	return SelfEntry1
+end
+
 return function(p1)
-	-- upvalues: Object (copy), config1 (copy), ReactModule (copy), GetTokensFunction (copy), GetThemeFromNameModule (copy), UseTokensFunction (copy), GetFoundationTokensFunction (copy), Mappers (copy), GetFontFromNameModule (copy), ConstantsModule (copy), GetTextSizeOffsetModule (copy), StyleContextModule (copy), FoundationSurfaceTokensDifferModule (copy), RoactModule (copy), LoggerModule (copy), FoundationProvider (copy), config (copy)
+	-- upvalues: Object (copy), config1 (copy), ReactModule (copy), UseTokensFunction (copy), UIBloxConfigModule (copy), getSharedDerivedStyle (copy), deriveStyle (copy), GetFontFromNameModule (copy), ConstantsModule (copy), GetTextSizeOffsetModule (copy), StyleContextModule (copy), FoundationSurfaceTokensDifferModule (copy), RoactModule (copy), LoggerModule (copy), FoundationProvider (copy), config (copy)
 	local AssignResult = Object.assign({}, config1, p1.style)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(AssignResult.themeName)
-	local Tokens = GetTokensFunction(AssignResult.deviceType, UseStateResult, AssignResult.settings and AssignResult.settings.scale)
+	local Scale = AssignResult.settings and AssignResult.settings.scale
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
-	local ThemeFromNameModule = GetThemeFromNameModule(UseStateResult)
 	local UseTokensResult = UseTokensFunction()
 	local HasConfig = UseTokensResult.Config ~= nil
-	local FoundationTokens = GetFoundationTokensFunction(AssignResult.deviceType, UseStateResult)
-	local AddFoundationFlatKeysResult = Mappers.addFoundationFlatKeys(Mappers.mapColorTokensToFoundation(Tokens, if HasConfig then UseTokensResult else FoundationTokens), if HasConfig then UseTokensResult else FoundationTokens)
+	local SharedDerivedStyle = if UIBloxConfigModule.shareDerivedStyleTokens then getSharedDerivedStyle(AssignResult.deviceType, UseStateResult, Scale, UseTokensResult) else deriveStyle(AssignResult.deviceType, UseStateResult, Scale, UseTokensResult)
+	local FoundationTokens = SharedDerivedStyle.foundationTokens
+	local Tokens = SharedDerivedStyle.tokens
 	local Style = {
-		Font = GetFontFromNameModule(AssignResult.fontName, AddFoundationFlatKeysResult),
-		Theme = Mappers.mapThemeToFoundation(ThemeFromNameModule, if HasConfig then UseTokensResult else FoundationTokens),
-		Tokens = AddFoundationFlatKeysResult,
+		Font = GetFontFromNameModule(AssignResult.fontName, Tokens),
+		Theme = SharedDerivedStyle.theme,
+		Tokens = Tokens,
 		Settings = if AssignResult.settings then {
 			PreferredTransparency = AssignResult.settings.preferredTransparency,
 			ReducedMotion = AssignResult.settings.reducedMotion,
@@ -64,8 +101,8 @@ return function(p1)
 		end
 	end, { UseRefResult, AssignResult.themeName, UseStateResult2 })
 	ReactModule.useEffect(function()
-		-- upvalues: GetTextSizeOffsetModule (upval), AddFoundationFlatKeysResult (copy), UseStateResult2_1 (copy)
-		local TextSizeOffsetModule, TextSizeOffsetModule2 = GetTextSizeOffsetModule(AddFoundationFlatKeysResult.Typography.BodyLarge.Font)
+		-- upvalues: GetTextSizeOffsetModule (upval), Tokens (copy), UseStateResult2_1 (copy)
+		local TextSizeOffsetModule, TextSizeOffsetModule2 = GetTextSizeOffsetModule(Tokens.Typography.BodyLarge.Font)
 		
 		if TextSizeOffsetModule then
 			UseStateResult2_1(TextSizeOffsetModule2)
@@ -98,7 +135,7 @@ return function(p1)
 		local Parent = script.Parent.Parent.Parent
 		local Packages = Parent:FindFirstAncestor("Packages") or Parent:FindFirstAncestor("CorePackages")
 		
-		if not (if Packages and (Packages:FindFirstChild("Dev") and Packages.Dev:FindFirstChild("JestGlobals")) then pcall(require, Packages.Dev.JestGlobals) else false) then
+		if not (if Packages and Packages:FindFirstChild("Dev") and Packages.Dev:FindFirstChild("JestGlobals") then pcall(require, Packages.Dev.JestGlobals) else false) then
 			LoggerModule:warning(debug.traceback("FoundationProvider not found. Please ensure that the FoundationProvider is present in the component tree."))
 		end
 	end

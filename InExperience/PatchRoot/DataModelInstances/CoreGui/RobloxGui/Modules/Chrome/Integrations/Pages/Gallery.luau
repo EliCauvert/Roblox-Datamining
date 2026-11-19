@@ -11,7 +11,6 @@ local IsInExperienceUIVREnabled = require(CorePackages.Workspace.Packages.Shared
 local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
 local FFlagFixSpatialUICaptures = SharedFlagsModule.FFlagFixSpatialUICaptures
 local FFlagKeepSideSheetOpenBesideMenu = SharedFlagsModule.FFlagKeepSideSheetOpenBesideMenu
-local UpdateGalleryIcon = game:DefineFastFlag("UpdateGalleryIcon", false)
 local InGameMenuIntegrationUtilsModule = require(script.Parent.InGameMenuIntegrationUtils)
 local ReadResult = CapturesPolicy.PolicyImplementation.read()
 local Inverted: boolean = (if ReadResult then CapturesPolicy.Mapper(ReadResult).eligibleForCapturesFeature() else false) and (not (IsInExperienceUIVREnabled and FFlagFixSpatialUICaptures) or not IsSpatialFunction())
@@ -32,8 +31,8 @@ if Inverted then
 		isActivated = CapturesPage,
 		components = {
 			Icon = function(_)
-				-- upvalues: UpdateGalleryIcon (copy), CommonIconModule (copy), CapturesPage (copy)
-				return if UpdateGalleryIcon then CommonIconModule("Image", nil, CapturesPage) else CommonIconModule("icons/controls/cameraOff", "icons/controls/cameraOn", CapturesPage)
+				-- upvalues: CommonIconModule (copy), CapturesPage (copy)
+				return CommonIconModule("Image", nil, CapturesPage)
 			end
 		}
 	})

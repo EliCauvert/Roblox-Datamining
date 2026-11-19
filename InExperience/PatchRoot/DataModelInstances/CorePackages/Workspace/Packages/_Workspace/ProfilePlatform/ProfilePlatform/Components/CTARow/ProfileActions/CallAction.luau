@@ -14,6 +14,7 @@ return {
 		return {
 			text = "Call",
 			variant = ButtonVariant.Standard,
+			isDisabled = p1.isCallButtonDisabled,
 			onActivated = {
 				[ProfileTypes.User] = function()
 					-- upvalues: p1 (copy), EnumsModule (upval), EventNamesModule (upval), NewResult (upval)

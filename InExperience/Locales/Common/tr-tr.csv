@@ -2470,12 +2470,15 @@ Feature.Build.Label.ToolAssetSearchRunning,Varlık kütüphanesi aranıyor
 Feature.Build.Label.ToolClientDMDone,İstemci DataModel'i arandı
 Feature.Build.Label.ToolClientDMFailed,İstemci DataModel'i aranamadı
 Feature.Build.Label.ToolClientDMRunning,İstemci DataModel'i aranıyor
+Feature.Build.Label.ToolCodeRunning,Kod çalıştırılıyor
 Feature.Build.Label.ToolCompileDone,Kod derlendi
 Feature.Build.Label.ToolCompileFailed,Kod derlenemedi
 Feature.Build.Label.ToolCompileRunning,Kod derleniyor
+Feature.Build.Label.ToolDeveloperProductRunning,Geliştirici ürünün üzerinde çalışıyoruz
 Feature.Build.Label.ToolGameInfoDone,Oyun bilgileri güncellendi
 Feature.Build.Label.ToolGameInfoFailed,Oyun bilgileri güncellenemedi
 Feature.Build.Label.ToolGameInfoRunning,Oyun bilgileri güncelleniyor
+Feature.Build.Label.ToolGamePassRunning,Oyun biletin üzerinde çalışıyoruz
 Feature.Build.Label.ToolGameSaveDone,Oyun kaydedildi
 Feature.Build.Label.ToolGameSaveFailed,Oyun kaydedilemedi
 Feature.Build.Label.ToolGameSaveRunning,Oyun kaydediliyor
@@ -2494,6 +2497,7 @@ Feature.Build.Label.ToolLuauRunning,Luau çalıştırılıyor
 Feature.Build.Label.ToolModelDone,3 boyutlu model oluşturuldu
 Feature.Build.Label.ToolModelFailed,3 boyutlu model oluşturulamadı
 Feature.Build.Label.ToolModelRunning,3 boyutlu model oluşturuluyor
+Feature.Build.Label.ToolMonetizationRunning,Oyununun gelir elde etme özelliği üzerinde çalışıyoruz
 Feature.Build.Label.ToolPlanPresentDone,Plan sunuldu
 Feature.Build.Label.ToolPlanPresentFailed,Plan sunulamadı
 Feature.Build.Label.ToolPlanPresentRunning,Plan sunuluyor
@@ -2521,6 +2525,7 @@ Feature.Build.Label.ToolSkillLoadRunning,Beceri yükleniyor
 Feature.Build.Label.ToolSkillsDone,Mevcut beceriler listelendi
 Feature.Build.Label.ToolSkillsFailed,Mevcut beceriler listelenemedi
 Feature.Build.Label.ToolSkillsRunning,Mevcut beceriler listeleniyor
+Feature.Build.Label.ToolSubscriptionRunning,Aboneliğin üzerinde çalışıyoruz
 Feature.Build.Label.ToolTasksPlanDone,Görevler planlandı
 Feature.Build.Label.ToolTasksPlanFailed,Görevler planlanamadı
 Feature.Build.Label.ToolTasksPlanRunning,Görevlerin planlanıyor
@@ -2570,8 +2575,8 @@ Feature.Build.Message.CreateGameToUseBuild,İnşa Et'i kullanmaya başlamak içi
 Feature.Build.Message.ErrorCodeText,({ERROR_CODE}) {ERROR_TEXT}
 Feature.Build.Message.ExpandAudience,Yaratıcı Merkezi'nde gerekli şartları karşılama açısından kitleni genişlet
 Feature.Build.Message.ExperiencesLoadFailed,Deneyimler yüklenemedi
-Feature.Build.Message.FailedTitle,{TITLE} başarısız oldu
-Feature.Build.Message.FailedWithTitle,{TITLE} sonuçsuz kaldı
+Feature.Build.Message.FailedTitle,{TITLE} sonuçsuz kaldı
+Feature.Build.Message.FailedWithTitle,
 Feature.Build.Message.FinishedTitle,{TITLE} tamamlandı
 Feature.Build.Message.FriendsLoadFailed,Arkadaşlar yüklenemedi. Tekrar dene.
 Feature.Build.Message.GameNotCreated,Oyunun oluşturulmadı. Tekrar dene.
@@ -3242,14 +3247,17 @@ Feature.Chat.Label.OneToOne.ThemRepliedToYou,Sana yanıt verdi
 Feature.Chat.Label.OneToOne.YouRepliedToThem,Yanıt verdin
 Feature.Chat.Label.Pending,
 Feature.Chat.Label.PrivacySettings,Gizlilik Ayarları
+Feature.Chat.Label.Reactions,Tepkiler
 Feature.Chat.Label.ReplyChatInputPlaceholder,{DISPLAY_NAME} adlı kişiye yanıt ver
 Feature.Chat.Label.ReplyToYourselfChatInputPlaceholder,Kendine yanıt ver
 Feature.Chat.Label.ReplyingToOthers,{DISPLAY_NAME} şöyle dedi:
 Feature.Chat.Label.ReplyingToYourself,Şöyle demiştin:
 Feature.Chat.Label.SearchFriends,Arkadaş ara
 Feature.Chat.Label.SearchWord,
+Feature.Chat.Label.SelectToRemove,Kaldırmak için seç
 Feature.Chat.Label.SnoozePartyNotifications,Deneyim içi parti bildirimlerini sustur:
 Feature.Chat.Label.SwipeToReplyTooltip,Yanıtlamak için kaydır
+Feature.Chat.Label.TapToRemove,Kaldırmak için dokun
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} gün
 Feature.Chat.Label.TimestampHoursAbbreviatedPlural,{num_hours} sa.
 Feature.Chat.Label.TimestampMinutesAbbreviatedPlural,{num_minutes} dk.
@@ -3305,6 +3313,11 @@ Feature.Chat.Text.NoFriends,Henüz arkadaş eklemedin. Başlamak için Roblox'ta
 Feature.Chat.Title.FriendsChat,Arkadaş sohbeti
 Feature.Chat.Title.NewChat,Yeni sohbet
 Feature.Chat.Toast.Error.InvalidUserSelected,Listedeki bir veya daha fazla kişi eklenemiyor
+Feature.CloudClient.Action.PlayWithoutCloudPlay,Cloud Play olmadan oyna
+Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play, oyunu Roblox'un bilgisayarlarında çalıştırdığı için daha hızlı yüklenebilir ve daha az çökme yaşanabilir. Yalnızca bu oyunu oynadığın süre boyunca geçerlidir."
+Feature.CloudClient.Heading.CloudPlayOffer,Cloud Play ile oyna
+Feature.CloudClient.Label.RobloxRealityGraphics,Oyunun yeniden tasarlandı
+Feature.CloudClient.Label.RobloxRealityPlusOnly,Yalnızca Plus aboneleri için
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,Arkadaşlarının Seni Bulmasına İzin Ver
 Feature.Contacts.Action.Invite,Davet Et
@@ -3684,7 +3697,7 @@ Feature.GamepadDisconnect.Label.Message,"""%s"" adlı kullanıcının kontrol ci
 Feature.GamepadDisconnect.Label.MessageGeneric,"""%s"" adlı kullanıcının kontrol cihazı bağlantısı kesildi. Lütfen kontrol cihazı yeniden bağla."
 Feature.GamepadDisconnect.Label.Title,Kontrol cihazı Yok
 Feature.Groups.Action.Cancel,
-Feature.Groups.Action.CancelRequest,Talebi iptal et
+Feature.Groups.Action.CancelRequest,Talebi İptal Et
 Feature.Groups.Action.Close,
 Feature.Groups.Action.Continue,
 Feature.Groups.Action.CreateGroup,Topluluk oluştur
@@ -4032,7 +4045,7 @@ Feature.Moments.Label.PostFeedbackPostingTitle,An Paylaşılıyor
 Feature.Moments.Label.PostRemovedBody,"Paylaştığın An, Topluluk Standartlarımıza aykırı."
 Feature.Moments.Label.PostedOnDate,{date} tarihinde paylaşıldı
 Feature.Moments.Label.PublishingRodeoBody,Bu işlem pek uzun sürmez.
-Feature.Moments.Label.Reactions,Tepkiler
+Feature.Moments.Label.Reactions,
 Feature.Moments.Label.ReportReason.BreaksRules,Bu paylaşım kurallara aykırı
 Feature.Moments.Label.ReportReason.IntellectualProperty,Bu paylaşım fikrî mülkiyetimi ihlal ediyor
 Feature.Moments.Label.ReportSubmittedBody,Geri dönüşün için teşekkürler.
@@ -4191,6 +4204,7 @@ Feature.Parents.Message.TooManyAttempts,Çok fazla girişimde bulunuldu. Daha so
 Feature.Parents.Title.EnterParentEmailV2,Ebeveyn e-postası gir
 Feature.Parents.Title.SomethingWentWrong,
 Feature.PlayerSearchResults.Action.AddFriend,
+Feature.PlayerSearchResults.Heading.SearchResults,Arama sonuçları
 Feature.PlayerSearchResults.Label.FromSearch,Aramadan
 Feature.PlayerSearchResults.Label.NewUsername,Yeni kullanıcı adı
 Feature.PlayerSearchResults.Label.Previously,Önceki Adı
@@ -4581,7 +4595,7 @@ Feature.SettingsHub.Label.InviteSearchNoResults,
 Feature.SettingsHub.Label.Invited,Davet Edildi
 Feature.SettingsHub.Label.LeaveButton,
 Feature.SettingsHub.Label.LoadingFriendsListFailed,"Bir hata oluştu, lütfen daha sonra tekrar dene."
-Feature.SettingsHub.Label.LogoutButton,Çıkış Yap
+Feature.SettingsHub.Label.LogoutButton,Çıkış yap
 Feature.SettingsHub.Label.LogoutConfirmation,Çıkış yapmak istediğine emin misin?
 Feature.SettingsHub.Label.MethodOfAbuse,Kötüye Kullanım Türü Nedir?
 Feature.SettingsHub.Label.Moderated,Denetlendi

@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("LuaAppSearchPersonalizedRecommendationsEntryPoint", false) and require(script.Parent.FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint)

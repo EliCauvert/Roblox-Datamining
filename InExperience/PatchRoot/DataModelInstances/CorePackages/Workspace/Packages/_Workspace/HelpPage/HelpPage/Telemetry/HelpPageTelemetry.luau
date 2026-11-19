@@ -13,10 +13,10 @@ HelpPageTelemetryModule.telemetryConfigs = {
 	helpPageInteraction = {
 		eventConfig = {
 			eventName = "ingame_menu_action",
-			description = "[[Event to track input type and screen orientation for the help page.]]",
+			description = "[[Event to track help-page input, orientation, and displayed ability slots.]]",
 			backends = { "EventIngest" },
 			throttlingPercentage = HelpPageThrottleHundredthsPercent,
-			lastUpdated = { 2025, 8, 25 }
+			lastUpdated = { 2026, 11, 17 }
 		},
 		standardizedFields = {
 			StandardFieldEnumModule.addUniverseId,

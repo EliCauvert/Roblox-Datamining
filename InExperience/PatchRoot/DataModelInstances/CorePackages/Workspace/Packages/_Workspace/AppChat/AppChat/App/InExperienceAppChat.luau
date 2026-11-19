@@ -15,6 +15,7 @@ local GetAppLoadedStoreModule = require(AppChat.Stores.GetAppLoadedStore)
 local FFlagAppChatUseSignalsForAppLoadedModule = require(AppChat.Flags.FFlagAppChatUseSignalsForAppLoaded)
 local EnteredChatFromEntryPointModule = require(AppChat.Actions.EnteredChatFromEntryPoint)
 local InExperienceAppChatContainerModule = require(AppChat.App.InExperienceAppChatContainer)
+local UseIsChatBesideSideSheetModule = require(AppChat.App.useIsChatBesideSideSheet)
 local GetAllFriendsAsyncModule = require(AppChat.Conversations.Thunks.getAllFriendsAsync)
 local GetLocalUserFriendsCountModule = require(AppChat.Conversations.Thunks.getLocalUserFriendsCount)
 local GetLocalUserFunction = require(Parent.UserLib).Thunks.GetLocalUser
@@ -38,6 +39,7 @@ local OverlayHostModule = require(AppChat.Components.OSA.OverlayHost)
 local DebugAppChatDisplayOnJoin = game:DefineFastFlag("DebugAppChatDisplayOnJoin", false)
 local AppChatInExperienceDisplayOrder = game:DefineFastInt("AppChatInExperienceDisplayOrder", 5)
 local FFlagAppChatReactiveFeatureRestrictions = require(Parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
+local FFlagKeepSideSheetOpenBesideMenu = require(Parent.SharedFlags).FFlagKeepSideSheetOpenBesideMenu
 local GetFFlagIsSquadEnabledFunction = require(Parent.SharedFlags).GetFFlagIsSquadEnabled
 local FFlagAppChatGateInExpSquadEventReceiverModule = require(AppChat.Flags.FFlagAppChatGateInExpSquadEventReceiver)
 local GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction = require(Parent.SharedFlags).GetFFlagAppChatInExpToastSnoozeMenuDismissFix
@@ -74,7 +76,7 @@ function wrapWithFocusRoot(p1, EventHandlers, p2)
 end
 
 function InExperienceAppChat()
-	-- upvalues: ReactModule (copy), UseDispatchFunction (copy), UseIsAppChatVisibleModule (copy), DebugAppChatDisplayOnJoin (copy), ParentContainerContextModule (copy), IsSideSheetEnabledModule (copy), FFlagSideSheetFocusNav (copy), FFlagEnableDrawerAnimatingHook (copy), UseDrawerVisibleFunction (copy), UseDrawerAnimatingFunction (copy), UseParentContainerVisibilitySignalModule (copy), UseAppChatUpdateSessionModule (copy), UsePreventExperienceControlsModule (copy), FFlagAppChatReactiveFeatureRestrictions (copy), UsePartyChatReactiveFeatureRestrictionModule (copy), FFlagAppChatUseSignalsForAppLoadedModule (copy), GetAppLoadedStoreModule (copy), SetAppLoadedModule (copy), GetAllFriendsAsyncModule (copy), PartyPageCarouselExperimentation (copy), GetLocalUserFriendsCountModule (copy), GetLocalUserFunction (copy), GetFFlagIsSquadEnabledFunction (copy), UseSelectorFunction (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseAppPolicyFunction (copy), FFlagEnableAppChatSnoozeMenuFocus (copy), NotificationSnoozeMenuVisibleSignal (copy), EnteredChatFromEntryPointModule (copy), SocialCommonModule (copy), FFlagAppChatGateInExpSquadEventReceiverModule (copy), SquadEventReceiverModule (copy), AppChatPersistentEventReceiversModule (copy), AppChatToastManagerInExpModule (copy), GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction (copy), UiModeStyleProvider (copy), ColorMode (copy), Constants (copy), DesignTokenProvider (copy), AppChatInExperienceDisplayOrder (copy), SquadOverlayModule (copy), LayerCollectorProvider (copy), ResponsiveModule (copy), RoactServices (copy), AppSessionService (copy), SessionService (copy), InExperienceAppChatContainerModule (copy), OverlayHostModule (copy), FoundationModule (copy)
+	-- upvalues: ReactModule (copy), UseDispatchFunction (copy), UseIsAppChatVisibleModule (copy), DebugAppChatDisplayOnJoin (copy), ParentContainerContextModule (copy), FFlagKeepSideSheetOpenBesideMenu (copy), UseIsChatBesideSideSheetModule (copy), IsSideSheetEnabledModule (copy), FFlagSideSheetFocusNav (copy), FFlagEnableDrawerAnimatingHook (copy), UseDrawerVisibleFunction (copy), UseDrawerAnimatingFunction (copy), UseParentContainerVisibilitySignalModule (copy), UseAppChatUpdateSessionModule (copy), UsePreventExperienceControlsModule (copy), FFlagAppChatReactiveFeatureRestrictions (copy), UsePartyChatReactiveFeatureRestrictionModule (copy), FFlagAppChatUseSignalsForAppLoadedModule (copy), GetAppLoadedStoreModule (copy), SetAppLoadedModule (copy), GetAllFriendsAsyncModule (copy), PartyPageCarouselExperimentation (copy), GetLocalUserFriendsCountModule (copy), GetLocalUserFunction (copy), GetFFlagIsSquadEnabledFunction (copy), UseSelectorFunction (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseAppPolicyFunction (copy), FFlagEnableAppChatSnoozeMenuFocus (copy), NotificationSnoozeMenuVisibleSignal (copy), EnteredChatFromEntryPointModule (copy), SocialCommonModule (copy), FFlagAppChatGateInExpSquadEventReceiverModule (copy), AppChatInExperienceDisplayOrder (copy), Parent (copy), SquadEventReceiverModule (copy), AppChatPersistentEventReceiversModule (copy), AppChatToastManagerInExpModule (copy), GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction (copy), UiModeStyleProvider (copy), ColorMode (copy), Constants (copy), DesignTokenProvider (copy), SquadOverlayModule (copy), LayerCollectorProvider (copy), ResponsiveModule (copy), RoactServices (copy), AppSessionService (copy), SessionService (copy), InExperienceAppChatContainerModule (copy), OverlayHostModule (copy), FoundationModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseIsAppChatVisibleModuleResult, UseIsAppChatVisibleModuleResult2 = UseIsAppChatVisibleModule(DebugAppChatDisplayOnJoin)
@@ -89,6 +91,7 @@ function InExperienceAppChat()
 	local UseStateResult, UseStateResult2 = ReactModule.useState("")
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(GetRequestedRouteFunction())
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(true)
+	local UseIsChatBesideSideSheetModuleResult = if FFlagKeepSideSheetOpenBesideMenu then UseIsChatBesideSideSheetModule() else false
 	local v1 = nil
 	local v2 = nil
 	
@@ -225,7 +228,13 @@ function InExperienceAppChat()
 		end, { v1, v2 })
 	end
 	local UseAppPolicyResult1 = if FFlagAppChatGateInExpSquadEventReceiverModule then GetFFlagIsSquadEnabledFunction() and UseAppPolicyResult else UseAppPolicyResult
+	local FriendsChatDisplayOrder = AppChatInExperienceDisplayOrder
+	local CoreUISafeInsets = Enum.ScreenInsets.CoreUISafeInsets
 	
+	if UseIsAppChatVisibleModuleResult and UseIsChatBesideSideSheetModuleResult then
+		FriendsChatDisplayOrder = require(Parent.InExperienceSideSheetStore.Constants).FriendsChatDisplayOrder
+		CoreUISafeInsets = Enum.ScreenInsets.DeviceSafeInsets
+	end
 	return ReactModule.createElement(ReactModule.Fragment, {}, {
 		SquadEventReceiver = if UseAppPolicyResult1 then ReactModule.createElement(SquadEventReceiverModule) else nil,
 		AppChatPersistentEventReceivers = ReactModule.createElement(AppChatPersistentEventReceiversModule, { isInExperience = true }),
@@ -244,8 +253,8 @@ function InExperienceAppChat()
 				AppChatScreenGui = if UseIsAppChatVisibleModuleResult or PromptType then ReactModule.createElement("ScreenGui", {
 					ResetOnSpawn = false,
 					ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
-					ScreenInsets = Enum.ScreenInsets.CoreUISafeInsets,
-					DisplayOrder = AppChatInExperienceDisplayOrder,
+					ScreenInsets = CoreUISafeInsets,
+					DisplayOrder = FriendsChatDisplayOrder,
 					ref = UseRefResult
 				}, wrapWithFocusRoot({
 					SquadOverlay = if PromptType then ReactModule.createElement(SquadOverlayModule) else nil,

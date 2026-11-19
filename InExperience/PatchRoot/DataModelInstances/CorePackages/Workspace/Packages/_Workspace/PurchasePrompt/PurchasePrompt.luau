@@ -28,6 +28,7 @@ local _ = require(v1.types)
 local FFlagPurchasePromptSubtitleForTimedOptions = require(v1.Parent.SharedFlags).FFlagPurchasePromptSubtitleForTimedOptions
 local FFlagAXMISWithBlackbird = SharedFlagsModule.FFlagAXMISWithBlackbird
 local FFlagEnableRobuxInExperienceShop = SharedFlagsModule.FFlagEnableRobuxInExperienceShop
+local FFlagKeepSideSheetOpenBesideMenu = SharedFlagsModule.FFlagKeepSideSheetOpenBesideMenu
 local WindowStateModule = require(v1.Enums.WindowState)
 local PromptStateModule = require(v1.Enums.PromptState)
 local PurchasePromptApp = nil
@@ -68,21 +69,25 @@ end
 
 return {
 	mountPurchasePrompt = function()
-		-- upvalues: RunService (copy), PurchasePromptApp (ref), createStore (copy), Roact (copy), PurchasePromptAppModule (copy), NewResult (ref), NewResult1 (ref), CoreGui (copy)
+		-- upvalues: RunService (copy), PurchasePromptApp (ref), createStore (copy), FFlagKeepSideSheetOpenBesideMenu (copy), Parent (copy), Roact (copy), PurchasePromptAppModule (copy), NewResult (ref), NewResult1 (ref), CoreGui (copy)
 		if RunService:IsStudio() and RunService:IsEdit() or PurchasePromptApp then
 			return nil
-		else
-			createStore()
-			PurchasePromptApp = Roact.mount(Roact.createElement("ScreenGui", {
-				AutoLocalize = false,
-				IgnoreGuiInset = true,
-				DisplayOrder = 10
-			}, {
-				Roact.createElement(PurchasePromptAppModule, { store = NewResult, network = NewResult1 })
-			}), CoreGui, "PurchasePromptApp")
-			
-			return PurchasePromptApp
 		end
+		createStore()
+		local ScreenGui = {
+			AutoLocalize = false,
+			IgnoreGuiInset = true,
+			DisplayOrder = 10
+		}
+		
+		if FFlagKeepSideSheetOpenBesideMenu then
+			ScreenGui.DisplayOrder = require(Parent.InExperienceSideSheetStore.Constants).PurchasePromptDisplayOrder
+		end
+		PurchasePromptApp = Roact.mount(Roact.createElement("ScreenGui", ScreenGui, {
+			Roact.createElement(PurchasePromptAppModule, { store = NewResult, network = NewResult1 })
+		}), CoreGui, "PurchasePromptApp")
+		
+		return PurchasePromptApp
 	end,
 	initiateAvatarCreationFeePurchase = function(p1, p2, p3, p4)
 		-- upvalues: NewResult (ref), InitiateAvatarCreationFeePurchaseModule (copy)

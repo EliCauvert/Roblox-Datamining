@@ -1,4 +1,5 @@
-﻿local _ = require(script.Components.CatalogRowItemCard.CatalogRowItemCardFooter)
+﻿local Parent = script.Parent
+local _ = require(script.Components.CatalogRowItemCard.CatalogRowItemCardFooter)
 local _ = require(script.Stores.AnimatedVisibilityStore.createAnimatedVisibilityStore)
 local _ = require(script.Stores.AnimatedVisibilityStore.AnimatedVisibilityContext)
 local _ = require(script.Types.CategoryTypes.CategoryTypes)
@@ -13,7 +14,7 @@ local _ = require(script.Types.AvatarColorTypes)
 local _ = require(script.Types.WidgetAnalyticsInfo)
 local _ = require(script.Types.WidgetInfoContextTypes)
 local _ = require(script.Types.ItemTypes)
-local _ = require(script.Parent.AvatarExperienceModel)
+local _ = require(Parent.AvatarExperienceModel)
 local _ = require(script.Types.PurchaseItemsTypes)
 local _ = require(script.Types.TryOnItemComparisonData)
 local _ = require(script.Backgrounds.types)
@@ -132,6 +133,7 @@ return {
 		}
 	},
 	Stores = {
+		getAppearanceSnapshotStore = if require(Parent.SharedFlags).FFlagSplitPaneAvatarInitialSnapshot then require(script.Stores.AppearanceSnapshotStore) else nil,
 		AnimatedVisibilityStore = {
 			createAnimatedVisibilityStore = require(script.Stores.AnimatedVisibilityStore.createAnimatedVisibilityStore),
 			AnimatedVisibilityContext = require(script.Stores.AnimatedVisibilityStore.AnimatedVisibilityContext),

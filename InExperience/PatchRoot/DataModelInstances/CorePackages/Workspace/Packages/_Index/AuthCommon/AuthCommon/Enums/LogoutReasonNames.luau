@@ -19,5 +19,6 @@
 	VngUserAgreement = "LuaLogout-VNG-User-Agreement",
 	AccountLock = "LuaLogout-Account-Lock",
 	ManageAccountsRemoveCurrentUser = "LuaLogout-Manage-Accounts-Remove-Current-User",
-	PioneerLeaveExperience = "LuaLogout-Pioneer-Leave-Experience"
+	PioneerLeaveExperience = "LuaLogout-Pioneer-Leave-Experience",
+	PioneerBlockedLogOut = "LuaLogout-Pioneer-Blocked-Log-Out"
 }

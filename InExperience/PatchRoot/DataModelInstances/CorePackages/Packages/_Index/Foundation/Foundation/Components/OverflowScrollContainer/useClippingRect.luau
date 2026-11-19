@@ -1,17 +1,16 @@
 ﻿local Foundation = script:FindFirstAncestor("Foundation")
 local ReactModule = require(Foundation.Parent.React)
-local FlagsModule = require(Foundation.Utility.Flags)
 local WrappersModule = require(Foundation.Utility.Wrappers)
 local Connection = WrappersModule.Connection
 local WrappersModuleInstance = WrappersModule.Instance
 local Signal = WrappersModule.Signal
 
 return function(p1)
-	-- upvalues: ReactModule (copy), FlagsModule (copy), Signal (copy), WrappersModuleInstance (copy), Connection (copy)
+	-- upvalues: ReactModule (copy), Signal (copy), WrappersModuleInstance (copy), Connection (copy)
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Rect.new(Vector2.zero, Vector2.zero))
 	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
 	ReactModule.useEffect(function()
-		-- upvalues: p1 (copy), FlagsModule (upval), UseStateResult2 (copy), UseBindingResult2 (copy), Signal (upval), WrappersModuleInstance (upval), Connection (upval)
+		-- upvalues: p1 (copy), UseStateResult2 (copy), UseBindingResult2 (copy), Signal (upval), WrappersModuleInstance (upval), Connection (upval)
 		local Current = p1.current
 		
 		if not Current or not Current:IsA("GuiObject") then return end
@@ -25,19 +24,10 @@ return function(p1)
 			Frame = Parent
 			break
 		end
-		if FlagsModule.FoundationUnifiedScrimScrolling then
-			UseStateResult2(Frame ~= nil)
-		end
+		UseStateResult2(Frame ~= nil)
+		
 		if not Frame then
-			if FlagsModule.FoundationUnifiedScrimScrolling then
-				Frame = Current
-			else
-				local LayerCollector = Current:FindFirstAncestorWhichIsA("LayerCollector")
-				
-				if LayerCollector and LayerCollector:IsA("GuiBase2d") then
-					Frame = LayerCollector
-				end
-			end
+			Frame = Current
 		end
 		local function update()
 			-- upvalues: Frame (ref), Current (copy), UseBindingResult2 (upval)

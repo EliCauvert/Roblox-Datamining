@@ -248,7 +248,11 @@ return function(p1)
 		return t
 	end, { NewItemsPerRow1 })
 	local UseMemoResult1 = if IsLoading then UseMemoResult else UseSocialCarouselContextModuleResult.tiles
-	local Frame = ReactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
+	local Frame = ReactModule.createElement("Frame", {
+		BackgroundTransparency = 1,
+		Size = UDim2.new(1, 0, 1, 0),
+		ref = if FFlagShowRequestsInCarouselForAllUsers then p1.carouselFrameRef else nil
+	}, {
 		UIPadding = ReactModule.createElement("UIPadding", {
 			PaddingLeft = UDim.new(0, 0),
 			PaddingRight = UDim.new(0, 0)

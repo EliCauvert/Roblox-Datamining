@@ -4,7 +4,9 @@ local AppChat = script:FindFirstAncestor("AppChat")
 local Parent = AppChat.Parent
 local Tokens = require(Parent.UIBlox).App.Style.Tokens
 local ColorMode = require(Parent.Foundation).Enums.ColorMode
-local FFlagSettingsHubIndependentBackgroundVisibility = require(Parent.SharedFlags).getFFlagSettingsHubIndependentBackgroundVisibility()
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagSettingsHubIndependentBackgroundVisibility = SharedFlagsModule.getFFlagSettingsHubIndependentBackgroundVisibility()
+local FFlagKeepSideSheetOpenBesideMenu = SharedFlagsModule.FFlagKeepSideSheetOpenBesideMenu
 local GetFFlagAppChatInExperienceTabBarAdjustmentModule = require(AppChat.Flags.getFFlagAppChatInExperienceTabBarAdjustment)
 local EnumScreensModule = require(AppChat.EnumScreens)
 local ChatSessionRefCountModule = require(AppChat.Hooks.ChatSessionRefCount)
@@ -34,6 +36,7 @@ function InExperienceAppChatModalModule._new()
 		currentSquadId = "",
 		requestedRoute = nil,
 		_reserveChatSessionOnClose = false,
+		_areaBesideSideSheetCleanup = nil,
 		topMargin = 12,
 		visibilitySignal = Instance.new("BindableEvent"),
 		unreadCountSignal = Instance.new("BindableEvent"),
@@ -62,7 +65,7 @@ function InExperienceAppChatModalModule.initialize(p1, TopMargin, SettingsHub, V
 end
 
 function InExperienceAppChatModalModule.setVisible(p1, _visible, EntryPoint)
-	-- upvalues: AppChat (copy), ChatSessionRefCountModule (copy), CoreGui (copy), GetFFlagAppChatInExperienceTabBarAdjustmentModule (copy), GuiService (copy), FFlagSettingsHubIndependentBackgroundVisibility (copy)
+	-- upvalues: AppChat (copy), ChatSessionRefCountModule (copy), CoreGui (copy), GetFFlagAppChatInExperienceTabBarAdjustmentModule (copy), GuiService (copy), FFlagKeepSideSheetOpenBesideMenu (copy), Parent (copy), FFlagSettingsHubIndependentBackgroundVisibility (copy)
 	if not _visible then
 		require(AppChat.Stores.GetRootedNavigationStore)(false).cancelNavigation()
 	end
@@ -109,7 +112,7 @@ function InExperienceAppChatModalModule.setVisible(p1, _visible, EntryPoint)
 		ImageButton.Parent = InExperienceAppChatModal
 		
 		if GetFFlagAppChatInExperienceTabBarAdjustmentModule() and p1.viewportUtil then
-			local function v21()
+			local function v23()
 				-- upvalues: p1 (copy), Padding (copy), GuiService (upval)
 				local GetResult = p1.viewportUtil.screenSize:get()
 				
@@ -123,8 +126,8 @@ function InExperienceAppChatModalModule.setVisible(p1, _visible, EntryPoint)
 				end
 			end
 			
-			p1.viewportUtil.screenSize:connect(v21)
-			v21()
+			p1.viewportUtil.screenSize:connect(v23)
+			v23()
 		end
 		local SizeConstraint = Instance.new("UISizeConstraint")
 		SizeConstraint.MaxSize = Vector2.new(850, 780)
@@ -133,7 +136,35 @@ function InExperienceAppChatModalModule.setVisible(p1, _visible, EntryPoint)
 		Corner.CornerRadius = UDim.new(0, 8)
 		Corner.Parent = ImageButton
 		p1.frame = ImageButton
+		
+		if FFlagKeepSideSheetOpenBesideMenu then
+			p1._standAloneLayout = {
+				screenGui = InExperienceAppChatModal,
+				frame = ImageButton,
+				displayOrder = InExperienceAppChatModal.DisplayOrder,
+				backgroundTransparency = ImageButton.BackgroundTransparency,
+				uiPadding = Padding,
+				uiListLayout = ListLayout,
+				uiSizeConstraint = SizeConstraint
+			}
+			p1:_watchAreaBesideSideSheet()
+		end
 	else
+		if FFlagKeepSideSheetOpenBesideMenu then
+			p1:_stopWatchingAreaBesideSideSheet()
+			require(Parent.InExperienceSideSheetStore.releaseWindowBesideSideSheet)(require(Parent.InExperienceSideSheetStore.Constants).IntegrationIds.ConnectDropdown, require(Parent.InExperienceSideSheetStore.AnalyticsConstants).Source.FriendsChatClosed)
+		end
+		if FFlagKeepSideSheetOpenBesideMenu then
+			local StandAloneLayout = p1._standAloneLayout
+			
+			if StandAloneLayout then
+				StandAloneLayout.uiPadding:Destroy()
+				StandAloneLayout.uiListLayout:Destroy()
+				StandAloneLayout.uiSizeConstraint:Destroy()
+			end
+			p1._standAloneLayout = nil
+			p1.areaBesideSideSheet = nil
+		end
 		if p1.frame and p1.frame.Parent then
 			p1.frame.Parent:Destroy()
 			p1.frame = nil
@@ -147,6 +178,68 @@ function InExperienceAppChatModalModule.setVisible(p1, _visible, EntryPoint)
 	end
 	if p1.settingsHub and FFlagSettingsHubIndependentBackgroundVisibility then
 		p1.settingsHub:SetBackgroundVisibility(_visible, false)
+	end
+end
+
+function InExperienceAppChatModalModule._watchAreaBesideSideSheet(p1)
+	-- upvalues: Parent (copy)
+	p1:_stopWatchingAreaBesideSideSheet()
+	local GetClaimedWindowAreaBesideSideSheetModule = require(Parent.InExperienceSideSheetStore.getClaimedWindowAreaBesideSideSheet)
+	local ConnectDropdown = require(Parent.InExperienceSideSheetStore.Constants).IntegrationIds.ConnectDropdown
+	p1._areaBesideSideSheetCleanup = require(Parent.Signals).createEffect(function(p2)
+		-- upvalues: p1 (copy), GetClaimedWindowAreaBesideSideSheetModule (copy), ConnectDropdown (copy)
+		p1:setAreaBesideSideSheet(GetClaimedWindowAreaBesideSideSheetModule(ConnectDropdown, p2))
+	end)
+end
+
+function InExperienceAppChatModalModule._stopWatchingAreaBesideSideSheet(p1)
+	local AreaBesideSideSheetCleanupFunction: () -> () = p1._areaBesideSideSheetCleanup
+	p1._areaBesideSideSheetCleanup = nil
+	
+	if AreaBesideSideSheetCleanupFunction then
+		AreaBesideSideSheetCleanupFunction()
+	end
+end
+
+function InExperienceAppChatModalModule.setAreaBesideSideSheet(p1, AreaBesideSideSheet)
+	-- upvalues: Parent (copy)
+	local StandAloneLayout = p1._standAloneLayout
+	
+	if StandAloneLayout == nil or StandAloneLayout.frame.Parent == nil then return end
+	local ScreenGui = StandAloneLayout.screenGui
+	local Frame = StandAloneLayout.frame
+	
+	if AreaBesideSideSheet ~= nil then
+		p1.areaBesideSideSheet = AreaBesideSideSheet
+		ScreenGui.DisplayOrder = require(Parent.InExperienceSideSheetStore.Constants).FriendsChatFrameDisplayOrder
+		ScreenGui.IgnoreGuiInset = true
+		StandAloneLayout.uiPadding.Parent = nil
+		StandAloneLayout.uiListLayout.Parent = nil
+		StandAloneLayout.uiSizeConstraint.Parent = nil
+		Frame.Modal = false
+		Frame.Active = false
+		Frame.BackgroundTransparency = 0
+		Frame.AnchorPoint = Vector2.zero
+		Frame.Position = UDim2.fromOffset(AreaBesideSideSheet.position.X, AreaBesideSideSheet.position.Y)
+		Frame.Size = UDim2.fromOffset(AreaBesideSideSheet.size.X, AreaBesideSideSheet.size.Y)
+		
+		return
+	end
+	if p1.areaBesideSideSheet ~= nil then
+		p1.areaBesideSideSheet = nil
+		ScreenGui.DisplayOrder = StandAloneLayout.displayOrder
+		ScreenGui.IgnoreGuiInset = false
+		StandAloneLayout.uiPadding.Parent = ScreenGui
+		StandAloneLayout.uiListLayout.Parent = ScreenGui
+		StandAloneLayout.uiSizeConstraint.Parent = Frame
+		Frame.Modal = true
+		Frame.Active = true
+		Frame.BackgroundTransparency = StandAloneLayout.backgroundTransparency
+		Frame.AnchorPoint = Vector2.zero
+		Frame.Position = UDim2.new()
+		Frame.Size = UDim2.fromScale(1, 1)
+		
+		return
 	end
 end
 

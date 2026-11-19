@@ -8,13 +8,14 @@ local TypeModule = require(Parent.type)
 local Cryo = DependenciesModule.Cryo
 local LocalStorage = DependenciesModule.LocalStorage
 local NotificationModalsManager = DependenciesModule.NotificationModalsManager
+local FFlagKeepSideSheetOpenBesideMenu = DependenciesModule.SharedFlags.FFlagKeepSideSheetOpenBesideMenu
 local Images = DependenciesModule.UIBlox.App.ImageSet.Images
 local LocalStorageKey = LocalStorage.Enums.LocalStorageKey
 local ToastNotificationSnoozeManager = {}
 ToastNotificationSnoozeManager.__index = ToastNotificationSnoozeManager
 
 function ToastNotificationSnoozeManager:_batchNotificationAction(p1, Mute)
-	-- upvalues: TypeModule (copy), NotificationSnoozedSignal (copy)
+	-- upvalues: TypeModule (copy), NotificationSnoozedSignal (copy), FFlagKeepSideSheetOpenBesideMenu (copy)
 	local NotificationType = if type(p1.notificationType) == "table" then p1.notificationType else { p1.notificationType }
 	for _, value in ipairs(NotificationType) do
 		if Mute == TypeModule.SnoozeActionEnum.Mute then
@@ -43,7 +44,7 @@ function ToastNotificationSnoozeManager:_batchNotificationAction(p1, Mute)
 		})
 	end
 	if p1.modalMessage and p1.modalMessage ~= "" then
-		self:_showNotificationsModal(p1.modalMessage)
+		self:_showNotificationsModal(p1.modalMessage, if FFlagKeepSideSheetOpenBesideMenu then p1.displayOrder else nil)
 	end
 end
 
@@ -51,12 +52,12 @@ function ToastNotificationSnoozeManager:_isExpiredSnooze(): boolean
 	return self.durationMinutes ~= -1 and self.durationMinutes * 60 <= (DateTime.now().UnixTimestampMillis - self.snoozedTimestampMs) / 1000
 end
 
-function ToastNotificationSnoozeManager:_showNotificationsModal(ToastTitle)
-	-- upvalues: NotificationModalsManager (copy), Images (copy)
+function ToastNotificationSnoozeManager:_showNotificationsModal(ToastTitle, DisplayOrder)
+	-- upvalues: NotificationModalsManager (copy), Images (copy), FFlagKeepSideSheetOpenBesideMenu (copy)
 	NotificationModalsManager.SetUIBloxToast({
 		iconImage = Images["icons/common/notificationOn"],
 		toastTitle = ToastTitle
-	})
+	}, if FFlagKeepSideSheetOpenBesideMenu then DisplayOrder else nil)
 end
 
 function ToastNotificationSnoozeManager:_updateAppStorage()

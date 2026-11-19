@@ -16,9 +16,11 @@ local UseTelemetryModule = require(AppChat.Telemetry.useTelemetry)
 local ChatLandingTelemetryEventsModule = require(script:FindFirstAncestor("ChatLanding").ChatLandingTelemetryEvents)
 local ChatLandingTelemetryLayerModule = require(AppChat.Telemetry.Layers.ChatLandingTelemetryLayer)
 local FFlagAppChatToastChatTerminologyFixEnabled = require(Parent.SharedFlags).FFlagAppChatToastChatTerminologyFixEnabled
+local FFlagKeepSideSheetOpenBesideMenu = require(Parent.SharedFlags).FFlagKeepSideSheetOpenBesideMenu
+local UseDisplayOrderAboveFriendsChatModule = require(AppChat.App.useDisplayOrderAboveFriendsChat)
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), UniversalAppPolicyModule (copy), FFlagAppChatToastChatTerminologyFixEnabled (copy), ReactModule (copy), Default (copy), ToastNotificationTypeModule (copy), NotificationSnoozedSignal (copy), UseTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), IconButton (copy), Images (copy), NotificationGroups (copy), ShowNotificationSnoozeMenuSignal (copy), ChatLandingTelemetryEventsModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), UniversalAppPolicyModule (copy), FFlagAppChatToastChatTerminologyFixEnabled (copy), ReactModule (copy), Default (copy), ToastNotificationTypeModule (copy), NotificationSnoozedSignal (copy), UseTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), FFlagKeepSideSheetOpenBesideMenu (copy), UseDisplayOrderAboveFriendsChatModule (copy), IconButton (copy), Images (copy), NotificationGroups (copy), ShowNotificationSnoozeMenuSignal (copy), ChatLandingTelemetryEventsModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		snoozeDescription = "Feature.Chat.Description.SnoozeDescription",
 		unmuteFeedback = "Feature.Notifications.Heading.RemoveSnoozeFeedback",
@@ -41,25 +43,28 @@ return function(p1)
 		end
 	end, {})
 	local UseTelemetryModuleResult = UseTelemetryModule(ChatLandingTelemetryLayerModule.Context)
+	local UseDisplayOrderAboveFriendsChatModuleResult = if FFlagKeepSideSheetOpenBesideMenu then UseDisplayOrderAboveFriendsChatModule() else nil
 	
 	return ReactModule.createElement(IconButton, {
 		size = p1.size,
 		icon = if UseStateResult then Images["icons/common/snoozeNotificationsOn"] else Images["icons/common/snoozeNotificationsOff"],
 		layoutOrder = p1.layoutOrder,
 		onActivated = function()
-			-- upvalues: UseStateResult (copy), UseLocalizationResult (copy), Default (upval), NotificationGroups (upval), ShowNotificationSnoozeMenuSignal (upval), UseTelemetryModuleResult (copy), ChatLandingTelemetryEventsModule (upval)
+			-- upvalues: UseStateResult (copy), UseLocalizationResult (copy), Default (upval), NotificationGroups (upval), UseDisplayOrderAboveFriendsChatModuleResult (copy), ShowNotificationSnoozeMenuSignal (upval), UseTelemetryModuleResult (copy), ChatLandingTelemetryEventsModule (upval)
 			if UseStateResult then
 				Default:unmuteNotification({
 					context = "ChatLandingSnoozeToastNotificationsButton",
 					notificationType = NotificationGroups.ChatLandingNotificationsGroup,
-					modalMessage = UseLocalizationResult.unmuteFeedback:gsub("{title}", UseLocalizationResult.chat)
+					modalMessage = UseLocalizationResult.unmuteFeedback:gsub("{title}", UseLocalizationResult.chat),
+					displayOrder = UseDisplayOrderAboveFriendsChatModuleResult
 				})
 			else
 				ShowNotificationSnoozeMenuSignal:fire({
 					context = "ChatLandingSnoozeToastNotificationsButton",
 					notificationType = NotificationGroups.ChatLandingNotificationsGroup,
 					title = UseLocalizationResult.snoozeTitle,
-					description = UseLocalizationResult.snoozeDescription
+					description = UseLocalizationResult.snoozeDescription,
+					displayOrder = UseDisplayOrderAboveFriendsChatModuleResult
 				})
 			end
 			UseTelemetryModuleResult.emit(ChatLandingTelemetryEventsModule.ChatLandingSnoozeBtnClicked, { isChatNotificationsMuted = UseStateResult })

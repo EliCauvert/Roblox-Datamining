@@ -35,6 +35,7 @@ local FFlagAXFixBadgeStatusConfigOptions = AvatarExperienceFlagsModule.FFlagAXFi
 local FFlagAXRemoveDynamicHeadBadge = AvatarExperienceFlagsModule.FFlagAXRemoveDynamicHeadBadge
 local FFlagAXMarketplaceItemCardIndicatorStack = AvatarExperienceFlagsModule.FFlagAXMarketplaceItemCardIndicatorStack
 local FFlagAXMarketplaceLicensingItemCards = AvatarExperienceFlagsModule.FFlagAXMarketplaceLicensingItemCards
+local FFlagAXEnableInventorySearch = AvatarExperienceFlagsModule.FFlagAXEnableInventorySearch
 local _ = require(Parent.AvatarExperienceModel)
 local DURABLEICON = CatalogItemCardBadgeMapsModule.DURABLE_ICON
 local FAEICON = CatalogItemCardBadgeMapsModule.FAE_ICON
@@ -109,7 +110,7 @@ local function SelectedIndicatorCorners(p1)
 end
 
 return (ReactModule.forwardRef(function(Frame: Frame, Ref)
-	-- upvalues: FFlagAXModeratedItemIconUpdates (copy), FFlagAXMarketplaceLicensingItemCards (copy), UseTokensFunction (copy), ReactModule (copy), ItemInfoIconMap (copy), ItemTypeToContentMap (copy), UseSelectorFunction (copy), selectIsPortrait (copy), ItemStatusTypeEnumModule (copy), ItemStatusIconTypeToIconMap (copy), LicensingBadgeModule (copy), BadgeSize (copy), FFlagAXMarketplaceItemCardIndicatorStack (copy), buildItemStatusContent (copy), ShouldRenderIndicatorStackModule (copy), IndicatorStackModule (copy), FoundationModule (copy), Icon (copy), IconSize (copy), ItemCard (copy), ItemCardHeader (copy), SelectedIndicatorCorners (copy), ItemCardHeaderCornersOverlay (copy), CatalogItemCardSelectedOverlayModule (copy), FFlagAXFixBadgeStatusConfigOptions (copy), buildSelectedOverlayBadge (copy), FFlagAXShowFaeUpsell (copy), CatalogItemCardStatusIconTypeEnumModule (copy), FAEICON (copy), FFlagAXInventoryDurablesSupport (copy), DURABLEICON (copy), ItemCardStatus (copy), ItemCardBadge (copy), buildBadgeStatusContent (copy), ItemCardIcon (copy), FFlagAXRemoveDynamicHeadBadge (copy), ItemCardFooter (copy)
+	-- upvalues: FFlagAXModeratedItemIconUpdates (copy), FFlagAXMarketplaceLicensingItemCards (copy), UseTokensFunction (copy), ReactModule (copy), ItemInfoIconMap (copy), ItemTypeToContentMap (copy), UseSelectorFunction (copy), selectIsPortrait (copy), ItemStatusTypeEnumModule (copy), ItemStatusIconTypeToIconMap (copy), LicensingBadgeModule (copy), BadgeSize (copy), FFlagAXMarketplaceItemCardIndicatorStack (copy), buildItemStatusContent (copy), ShouldRenderIndicatorStackModule (copy), IndicatorStackModule (copy), FoundationModule (copy), Icon (copy), IconSize (copy), ItemCard (copy), ItemCardHeader (copy), SelectedIndicatorCorners (copy), ItemCardHeaderCornersOverlay (copy), CatalogItemCardSelectedOverlayModule (copy), FFlagAXFixBadgeStatusConfigOptions (copy), buildSelectedOverlayBadge (copy), FFlagAXShowFaeUpsell (copy), CatalogItemCardStatusIconTypeEnumModule (copy), FAEICON (copy), FFlagAXInventoryDurablesSupport (copy), DURABLEICON (copy), ItemCardStatus (copy), ItemCardBadge (copy), buildBadgeStatusContent (copy), ItemCardIcon (copy), FFlagAXRemoveDynamicHeadBadge (copy), ItemCardFooter (copy), FFlagAXEnableInventorySearch (copy)
 	local UseTokensResult = if FFlagAXModeratedItemIconUpdates or FFlagAXMarketplaceLicensingItemCards then UseTokensFunction() else nil
 	local v1 = false
 	local Ref1 = Ref
@@ -247,7 +248,8 @@ return (ReactModule.forwardRef(function(Frame: Frame, Ref)
 			creatorName = if Frame.creator then Frame.creator.name else nil,
 			creatorHasVerifiedBadge = if Frame.creator then Frame.creator.verified else nil,
 			priceLineContent = Frame.priceLineContent,
-			titleTextSize = Frame.titleTextSize
+			titleTextSize = Frame.titleTextSize,
+			titleMaxLines = if FFlagAXEnableInventorySearch then Frame.titleMaxLines else nil
 		}) else nil
 	})
 end))

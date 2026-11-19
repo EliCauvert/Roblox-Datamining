@@ -1,9 +1,9 @@
 ﻿local Foundation = script:FindFirstAncestor("Foundation")
 local ReactModule = require(Foundation.Parent.React)
 local ServicesModule = require(Foundation.Utility.Wrappers.Services)
-local SliderStepDirectionModule = require(Foundation.Components.Slider.SliderStepDirection)
-local CalculateAdjacentStepValueModule = require(Foundation.Components.Slider.calculateAdjacentStepValue)
-local ConstantsModule = require(Foundation.Components.Slider.constants)
+local SliderStepDirectionModule = require(script.Parent.SliderStepDirection)
+local CalculateAdjacentStepValueModule = require(script.Parent.calculateAdjacentStepValue)
+local ConstantsModule = require(script.Parent.constants)
 
 local function _(Value, p1)
 	-- upvalues: ConstantsModule (copy)

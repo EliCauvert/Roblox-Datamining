@@ -18,11 +18,13 @@ local UseTelemetryModule = require(AppChat.Telemetry.useTelemetry)
 local ChatLandingTelemetryLayerModule = require(AppChat.Telemetry.Layers.ChatLandingTelemetryLayer)
 local ChatLandingTelemetryEventsModule = require(AppChat.Components.ChatLanding.ChatLandingTelemetryEvents)
 local StreamNotificationsBellIcon = require(Parent.StreamNotifications).StreamNotificationsBellIcon
+local UseDisplayOrderAboveFriendsChatModule = require(AppChat.App.useDisplayOrderAboveFriendsChat)
 local IconButton = UIBloxModule.App.Button.IconButton
 local Images = UIBloxModule.App.ImageSet.Images
 local DomLocatorsModule = require(AppChat.Utils.DomLocators)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local GetFFlagIsSquadEnabledFunction = SharedFlagsModule.GetFFlagIsSquadEnabled
+local FFlagKeepSideSheetOpenBesideMenu = SharedFlagsModule.FFlagKeepSideSheetOpenBesideMenu
 local FFlagAppChatFoundationSearchInputModule = require(AppChat.Flags.FFlagAppChatFoundationSearchInput)
 local FFlagAppChatWideAlwaysVisibleSearchBoxModule = require(AppChat.Flags.FFlagAppChatWideAlwaysVisibleSearchBox)
 local FFlagEnableHeaderBarButtonsUpdate = SharedFlagsModule.FFlagEnableHeaderBarButtonsUpdate
@@ -72,13 +74,13 @@ local function SearchTopBarWrapper()
 	})
 end
 
-local function v31()
+local function v33()
 	-- upvalues: ReactModule (copy), SearchTopBarWrapper (copy)
 	return ReactModule.createElement(SearchTopBarWrapper)
 end
 
 return function(p1)
-	-- upvalues: ConstantsModule (copy), GetTopBarStoreModule (copy), UseSignalStateFunction (copy), UseChatLandingVisibilityModule (copy), UseTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), UseLocalizationFunction (copy), ReactModule (copy), ChatLandingSearchRowModule (copy), FFlagAppChatFoundationSearchInputModule (copy), v31 (copy), EnumScreensModule (copy), ChatLandingTelemetryEventsModule (copy), FlyoutLeftHeader (copy), FlyoutSidePanelIXP (copy), FFlagAppChatWideAlwaysVisibleSearchBoxModule (copy), FFlagEnableHeaderBarButtonsUpdate (copy), FoundationModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), StreamNotificationsBellIcon (copy), FFlagStreamNotificationBellEntryPoint (copy), AppPage (copy), FFlagAppChatLandingNotifBtnTelemetryModule (copy), SnoozeToastNotificationsButtonModule (copy), IconButton (copy), Images (copy), GetFFlagIsSquadEnabledFunction (copy), ChatTopBarBaseModule (copy)
+	-- upvalues: ConstantsModule (copy), GetTopBarStoreModule (copy), UseSignalStateFunction (copy), UseChatLandingVisibilityModule (copy), UseTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), FFlagKeepSideSheetOpenBesideMenu (copy), UseDisplayOrderAboveFriendsChatModule (copy), UseLocalizationFunction (copy), ReactModule (copy), ChatLandingSearchRowModule (copy), FFlagAppChatFoundationSearchInputModule (copy), v33 (copy), EnumScreensModule (copy), ChatLandingTelemetryEventsModule (copy), FlyoutLeftHeader (copy), FlyoutSidePanelIXP (copy), FFlagAppChatWideAlwaysVisibleSearchBoxModule (copy), FFlagEnableHeaderBarButtonsUpdate (copy), FoundationModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), StreamNotificationsBellIcon (copy), FFlagStreamNotificationBellEntryPoint (copy), AppPage (copy), FFlagAppChatLandingNotifBtnTelemetryModule (copy), SnoozeToastNotificationsButtonModule (copy), IconButton (copy), Images (copy), GetFFlagIsSquadEnabledFunction (copy), ChatTopBarBaseModule (copy)
 	local ScreenName = p1.screenName
 	local Navigation = p1.navigation
 	local IsInExperienceScreenProps = Navigation.getScreenProps("isInExperience", false)
@@ -89,6 +91,7 @@ return function(p1)
 	local UseSignalStateResult = UseSignalStateFunction((TopBarStoreModule.getScreenTopBar(ScreenName)))
 	local UseChatLandingVisibilityModuleResult = UseChatLandingVisibilityModule()
 	local UseTelemetryModuleResult = UseTelemetryModule(ChatLandingTelemetryLayerModule.Context)
+	local UseDisplayOrderAboveFriendsChatModuleResult = if FFlagKeepSideSheetOpenBesideMenu then UseDisplayOrderAboveFriendsChatModule() else nil
 	local ShouldRenderCenter = UseSignalStateResult.shouldRenderCenter
 	local RightHidden = UseSignalStateResult.rightHidden
 	local HeaderText = UseSignalStateResult.headerText or { raw = "", shouldLocalize = false }
@@ -102,7 +105,7 @@ return function(p1)
 			exitVariant = if WideModeScreenProps then "Cancel" else "Chevron"
 		})
 	end, { WideModeScreenProps })
-	local UseResult1 = if ShouldRenderCenter then if FFlagAppChatFoundationSearchInputModule then UseResult else v31 else nil
+	local UseResult1 = if ShouldRenderCenter then if FFlagAppChatFoundationSearchInputModule then UseResult else v33 else nil
 	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: SetScreenTopBarFunction (copy), EnumScreensModule (upval), UseTelemetryModuleResult (copy), ChatLandingTelemetryEventsModule (upval)
 		SetScreenTopBarFunction(EnumScreensModule.ChatLanding, {
@@ -135,7 +138,7 @@ return function(p1)
 	local TopBarShowSnoozeNotifications = UseChatLandingVisibilityModuleResult.topBarShowSnoozeNotifications
 	local NotificationCount = UseChatLandingVisibilityModuleResult.notificationCount
 	local UseResult5 = ReactModule.useCallback(function()
-		-- upvalues: RightHidden (copy), FFlagEnableHeaderBarButtonsUpdate (upval), ReactModule (upval), FoundationModule (upval), TopBarShowSearch (ref), FFlagDebugAppChatEnableDomLocatorsModule (upval), DomLocatorsModule (upval), UseResult2 (copy), TopBarShowCreateChatGroup (copy), UseResult21 (copy), TopBarShowNotifications (copy), StreamNotificationsBellIcon (upval), NotificationCount (copy), FFlagStreamNotificationBellEntryPoint (upval), AppPage (upval), FFlagAppChatLandingNotifBtnTelemetryModule (upval), UseResult3 (copy), TopBarShowSnoozeNotifications (copy), SnoozeToastNotificationsButtonModule (upval), IconButtonWidth (copy), IconButton (upval), Images (upval), GetFFlagIsSquadEnabledFunction (upval), WideModeScreenProps (copy)
+		-- upvalues: RightHidden (copy), FFlagEnableHeaderBarButtonsUpdate (upval), ReactModule (upval), FoundationModule (upval), TopBarShowSearch (ref), FFlagDebugAppChatEnableDomLocatorsModule (upval), DomLocatorsModule (upval), UseResult2 (copy), TopBarShowCreateChatGroup (copy), UseResult21 (copy), TopBarShowNotifications (copy), StreamNotificationsBellIcon (upval), NotificationCount (copy), FFlagStreamNotificationBellEntryPoint (upval), AppPage (upval), FFlagAppChatLandingNotifBtnTelemetryModule (upval), UseResult3 (copy), UseDisplayOrderAboveFriendsChatModuleResult (copy), TopBarShowSnoozeNotifications (copy), SnoozeToastNotificationsButtonModule (upval), IconButtonWidth (copy), IconButton (upval), Images (upval), GetFFlagIsSquadEnabledFunction (upval), WideModeScreenProps (copy)
 		return if RightHidden then nil elseif FFlagEnableHeaderBarButtonsUpdate then ReactModule.createElement(FoundationModule.View, {
 			tag = "row align-x-right align-y-center gap-xsmall auto-xy"
 		}, {
@@ -160,7 +163,8 @@ return function(p1)
 				notificationCount = NotificationCount,
 				entryPoint = if FFlagStreamNotificationBellEntryPoint then AppPage.Chat else nil,
 				onActivated = if FFlagAppChatLandingNotifBtnTelemetryModule then UseResult3 else nil,
-				testId = if FFlagDebugAppChatEnableDomLocatorsModule then DomLocatorsModule.chatLandingTopBarIconButton("notifications") else nil
+				testId = if FFlagDebugAppChatEnableDomLocatorsModule then DomLocatorsModule.chatLandingTopBarIconButton("notifications") else nil,
+				displayOrder = UseDisplayOrderAboveFriendsChatModuleResult
 			}) else nil,
 			snoozeChatNotifications = if TopBarShowSnoozeNotifications then ReactModule.createElement(SnoozeToastNotificationsButtonModule, {
 				layoutOrder = 4,
@@ -202,14 +206,16 @@ return function(p1)
 					notificationCount = NotificationCount,
 					compactWidth = not WideModeScreenProps,
 					entryPoint = if FFlagStreamNotificationBellEntryPoint then AppPage.Chat else nil,
-					onActivated = if FFlagAppChatLandingNotifBtnTelemetryModule then UseResult3 else nil
+					onActivated = if FFlagAppChatLandingNotifBtnTelemetryModule then UseResult3 else nil,
+					displayOrder = UseDisplayOrderAboveFriendsChatModuleResult
 				})
 			}) else ReactModule.createElement(StreamNotificationsBellIcon, {
 				layoutOrder = 3,
 				notificationCount = NotificationCount,
 				compactWidth = not WideModeScreenProps,
 				entryPoint = if FFlagStreamNotificationBellEntryPoint then AppPage.Chat else nil,
-				onActivated = if FFlagAppChatLandingNotifBtnTelemetryModule then UseResult3 else nil
+				onActivated = if FFlagAppChatLandingNotifBtnTelemetryModule then UseResult3 else nil,
+				displayOrder = UseDisplayOrderAboveFriendsChatModuleResult
 			})),
 			snoozeChatNotifications = if TopBarShowSnoozeNotifications then ReactModule.createElement(SnoozeToastNotificationsButtonModule, {
 				layoutOrder = 4,
@@ -220,7 +226,8 @@ return function(p1)
 		IconButtonWidth, NotificationCount, UseResult21, UseResult2,
 		if FFlagAppChatLandingNotifBtnTelemetryModule then UseResult3 else false,
 		RightHidden, TopBarShowCreateChatGroup, TopBarShowNotifications,
-		TopBarShowSearch, TopBarShowSnoozeNotifications, WideModeScreenProps
+		TopBarShowSearch, TopBarShowSnoozeNotifications, WideModeScreenProps,
+		UseDisplayOrderAboveFriendsChatModuleResult
 	})
 	local NoIsInExperienceScreenProps: boolean = FlyoutSidePanelIXP.isFlyoutSidePanelEnabled() and not IsInExperienceScreenProps
 	

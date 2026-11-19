@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("LuaAppVideoAutoplayFeedElection", false)
+﻿return game:DefineFastFlag("LuaAppVideoAutoplayFeedElection2", false)

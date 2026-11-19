@@ -18,6 +18,7 @@ local FlyoutContentSettingsModule = require(script.Parent.Parent.Config.FlyoutCo
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagEnableFlyoutMenuRobuxCardRefactor = SharedFlagsModule.FFlagEnableFlyoutMenuRobuxCardRefactor
 local FFlagEnableSharedFlyoutRobuxPill = SharedFlagsModule.FFlagEnableSharedFlyoutRobuxPill
+local FFlagLuaAppAddTestIdsForArrow = SharedFlagsModule.FFlagLuaAppAddTestIdsForArrow
 local RobuxPill = if FFlagEnableSharedFlyoutRobuxPill then require(Parent.RobuxPill).RobuxPill else nil
 
 local function _(p1)
@@ -25,7 +26,7 @@ local function _(p1)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), FlyoutContentSettingsModule (copy), FlyoutAnalyticsModule (copy), FFlagEnableSharedFlyoutRobuxPill (copy), RobuxPill (copy), FFlagEnableFlyoutMenuRobuxCardRefactor (copy), FoundationModule (copy), Icon (copy), IconSize (copy), Text (copy), Button (copy), InputSize (copy)
+	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), FlyoutContentSettingsModule (copy), FlyoutAnalyticsModule (copy), FFlagEnableSharedFlyoutRobuxPill (copy), RobuxPill (copy), FFlagEnableFlyoutMenuRobuxCardRefactor (copy), FFlagLuaAppAddTestIdsForArrow (copy), FoundationModule (copy), Icon (copy), IconSize (copy), Text (copy), Button (copy), InputSize (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalizationResult = UseLocalizationFunction({ buyRobux = "IAPExperience.RobuxUpsell.Action.BuyRobux" })
@@ -50,7 +51,8 @@ return ReactModule.memo(function(p1)
 		robuxBalance = p1.robuxBalance,
 		buyButtonText = UseLocalizationResult.buyRobux,
 		onBuyActivated = UseResult,
-		showBorder = not FFlagEnableFlyoutMenuRobuxCardRefactor
+		showBorder = not FFlagEnableFlyoutMenuRobuxCardRefactor,
+		buyButtonTestId = if FFlagLuaAppAddTestIdsForArrow then "--core-ui-flyout-button-buy-robux" else nil
 	}) else ReactModule.createElement(FoundationModule.View, {
 		testId = "--core-ui-flyout-robux-pill",
 		tag = if FFlagEnableFlyoutMenuRobuxCardRefactor then "size-full-0 auto-y padding-x-medium padding-y-xlarge" else "size-full-0 auto-y padding-xlarge",

@@ -19,6 +19,7 @@ local LinkBehavior = InlineRichTextModule.Enums.LinkBehavior
 local _ = require(AmpV2Wizard.Types)
 local FullPageChromeModule = require(AmpV2Wizard.FullPageChrome)
 local OdpAnalyticsModule = require(AmpV2Wizard.OdpAnalytics)
+local FFlagLuaAppAddTestIdsForArrow = require(Parent.SharedFlags).FFlagLuaAppAddTestIdsForArrow
 local PrepareRichTextCopyFunction = InlineRichTextModule.prepareRichTextCopy
 
 local function _(Text: string): string
@@ -54,7 +55,7 @@ local function renderBulletLeading(p1)
 end
 
 local function renderBullet(p1, LayoutOrder)
-	-- upvalues: ReactModule (copy), View (copy), renderBulletLeading (copy), Text (copy)
+	-- upvalues: ReactModule (copy), View (copy), renderBulletLeading (copy), Text (copy), FFlagLuaAppAddTestIdsForArrow (copy)
 	return ReactModule.createElement(View, {
 		tag = "row align-y-center gap-medium size-full-0 auto-y padding-y-small",
 		LayoutOrder = LayoutOrder
@@ -64,11 +65,13 @@ local function renderBullet(p1, LayoutOrder)
 			Title = ReactModule.createElement(Text, {
 				tag = "size-full-0 auto-y text-title-large text-wrap text-align-x-left content-emphasis",
 				LayoutOrder = 1,
+				testId = if FFlagLuaAppAddTestIdsForArrow then `amp-v2-wizard-user-agreement-bullet-{LayoutOrder}-title` else nil,
 				Text = p1.title
 			}),
 			Description = if p1.description == nil or p1.description == "" then nil else ReactModule.createElement(Text, {
 				tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
 				LayoutOrder = 2,
+				testId = if FFlagLuaAppAddTestIdsForArrow then `amp-v2-wizard-user-agreement-bullet-{LayoutOrder}-description` else nil,
 				Text = p1.description
 			})
 		})
@@ -76,7 +79,7 @@ local function renderBullet(p1, LayoutOrder)
 end
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), OdpAnalyticsModule (copy), ReactModule (copy), LinkBehavior (copy), renderBullet (copy), PrepareRichTextCopyFunction (copy), View (copy), ScrollView (copy), Text (copy), Button (copy), ButtonVariant (copy), InputSize (copy), Renderer (copy), FullPageChromeModule (copy)
+	-- upvalues: UseTokensFunction (copy), OdpAnalyticsModule (copy), ReactModule (copy), LinkBehavior (copy), renderBullet (copy), PrepareRichTextCopyFunction (copy), View (copy), ScrollView (copy), Text (copy), FFlagLuaAppAddTestIdsForArrow (copy), Button (copy), ButtonVariant (copy), InputSize (copy), Renderer (copy), FullPageChromeModule (copy)
 	local Props = p1.props
 	local ReportFunction = p1.report
 	local UseTokensResult = UseTokensFunction()
@@ -154,11 +157,13 @@ return function(p1)
 							Title = ReactModule.createElement(Text, {
 								tag = "size-full-0 auto-y text-heading-medium text-wrap text-align-x-left content-emphasis",
 								LayoutOrder = 1,
+								testId = if FFlagLuaAppAddTestIdsForArrow then "amp-v2-wizard-user-agreement-title" else nil,
 								Text = Props.title
 							}),
 							Description = if Props.description == nil or Props.description == "" then nil else ReactModule.createElement(Text, {
 								tag = "size-full-0 auto-y text-body-large text-wrap text-align-x-left content-default",
 								LayoutOrder = 2,
+								testId = if FFlagLuaAppAddTestIdsForArrow then "amp-v2-wizard-user-agreement-description" else nil,
 								Text = Props.description
 							})
 						}),

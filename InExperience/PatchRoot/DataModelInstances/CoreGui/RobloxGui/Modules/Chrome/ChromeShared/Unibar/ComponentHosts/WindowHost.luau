@@ -27,15 +27,18 @@ local ChromeWindowLayoutOrder = game:DefineFastInt("ChromeWindowLayoutOrder", 2)
 local FixWindowDragError = game:DefineFastFlag("FixWindowDragError", false)
 local FixWindowDragStaleConnection = game:DefineFastFlag("FixWindowDragStaleConnection", false)
 local FFlagTokenizeUnibarConstantsWithStyleProvider = require(ChromeShared.Flags).FFlagTokenizeUnibarConstantsWithStyleProvider
+local InExperienceSideSheetModule = require(CorePackages.Workspace.Packages.InExperienceSideSheet)
+local FFlagKeepSideSheetOpenBesideMenu = InExperienceSideSheetModule.Flags.FFlagKeepSideSheetOpenBesideMenu
 local UseWindowSizeModule = require(ChromeShared.Hooks.useWindowSize)
 local config = { dampingRatio = 1, frequency = 3 }
 local Flag = false
 
 return function(p1)
-	-- upvalues: UseWindowSizeModule (copy), ReactModule (copy), FFlagTopBarSignalizeMenuOpen (copy), UseSelectorFunction (copy), ReactOtterModule (copy), config (copy), SignalsModule (copy), CoreGuiCommonModule (copy), SettingsShowSignal (copy), ServiceModule (copy), ConstantsModule (copy), ChromeAnalyticsModule (copy), UserInputService (copy), ShouldRejectMultiTouchModule (copy), FFlagTokenizeUnibarConstantsWithStyleProvider (copy), GetUIScaleFunction (copy), VRService (copy), Flag (ref), MouseIconOverrideService (copy), SelfieViewCursorOverride (copy), FixWindowDragStaleConnection (copy), FixWindowDragError (copy), TweenService (copy), ChromeWindowLayoutOrder (copy), UseStyleSheetFunction (copy), ReactRobloxModule (copy), DebounceModule (copy), Interactable (copy), CoreGui (copy)
+	-- upvalues: UseWindowSizeModule (copy), ReactModule (copy), FFlagKeepSideSheetOpenBesideMenu (copy), FFlagTopBarSignalizeMenuOpen (copy), UseSelectorFunction (copy), InExperienceSideSheetModule (copy), SignalsModule (copy), ReactOtterModule (copy), config (copy), CoreGuiCommonModule (copy), SettingsShowSignal (copy), ServiceModule (copy), ConstantsModule (copy), ChromeAnalyticsModule (copy), UserInputService (copy), ShouldRejectMultiTouchModule (copy), FFlagTokenizeUnibarConstantsWithStyleProvider (copy), GetUIScaleFunction (copy), VRService (copy), Flag (ref), MouseIconOverrideService (copy), SelfieViewCursorOverride (copy), FixWindowDragStaleConnection (copy), FixWindowDragError (copy), TweenService (copy), ChromeWindowLayoutOrder (copy), UseStyleSheetFunction (copy), ReactRobloxModule (copy), DebounceModule (copy), Interactable (copy), CoreGui (copy)
 	local UseWindowSizeModuleResult = UseWindowSizeModule(p1.integration.integration)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = if FFlagKeepSideSheetOpenBesideMenu then ReactModule.useRef(nil) else nil
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(false)
 	local Magnitude = 0
 	local UseMemoResult = ReactModule.useMemo(function()
@@ -49,6 +52,53 @@ return function(p1)
 	local UseSelectorResult = if FFlagTopBarSignalizeMenuOpen then nil else UseSelectorFunction(function(p2)
 		return p2.displayOptions.menuOpen or p2.displayOptions.inspectMenuOpen
 	end)
+	local v1 = false
+	local v2 = false
+	
+	if FFlagKeepSideSheetOpenBesideMenu then
+		local UseStateResult2 = nil
+		v1, UseStateResult2 = ReactModule.useState(function()
+			-- upvalues: InExperienceSideSheetModule (upval), p1 (copy)
+			return InExperienceSideSheetModule.isWindowBesideSideSheet(p1.integration.integration.sideSheetOpenBehavior) and (InExperienceSideSheetModule.getSideSheetVisibility(false) and InExperienceSideSheetModule.getHasRoomForPeoplePage())
+		end)
+		local UseStateResult2_1 = nil
+		local UseStateResult
+		UseStateResult, UseStateResult2_1 = ReactModule.useState(function()
+			-- upvalues: InExperienceSideSheetModule (upval)
+			return InExperienceSideSheetModule.getSideSheetVisibility(false)
+		end)
+		ReactModule.useEffect(function()
+			-- upvalues: SignalsModule (upval), UseStateResult2_1 (ref), InExperienceSideSheetModule (upval), UseStateResult2 (ref)
+			return SignalsModule.createEffect(function(p2)
+				-- upvalues: UseStateResult2_1 (upval), InExperienceSideSheetModule (upval), UseStateResult2 (upval)
+				UseStateResult2_1(InExperienceSideSheetModule.getSideSheetVisibility(p2))
+				
+				if not InExperienceSideSheetModule.getHasRoomForPeoplePage(p2) then
+					UseStateResult2(false)
+				end
+			end)
+		end, {})
+		v2 = UseStateResult and not v1
+		ReactModule.useEffect(function()
+			-- upvalues: v1 (ref), p1 (copy), InExperienceSideSheetModule (upval)
+			if not v1 then
+				return nil
+			end
+			local Id = p1.integration.id
+			
+			if InExperienceSideSheetModule.getWindowShownBesideSideSheet(false) ~= Id then
+				InExperienceSideSheetModule.registerInGameMenuPeoplePageActions.closeWindowShownBesideSideSheet()
+				InExperienceSideSheetModule.setWindowShownBesideSideSheet(Id)
+				InExperienceSideSheetModule.registerInGameMenuPeoplePageActions.closeMenuShownBesideSideSheet()
+			end
+			return function()
+				-- upvalues: InExperienceSideSheetModule (upval), Id (copy)
+				if (not InExperienceSideSheetModule.getSideSheetVisibility(false) or InExperienceSideSheetModule.getHasRoomForPeoplePage(false)) and InExperienceSideSheetModule.getWindowShownBesideSideSheet(false) == Id then
+					InExperienceSideSheetModule.setWindowShownBesideSideSheet(nil)
+				end
+			end
+		end, { v1, p1.integration.id })
+	end
 	local UseBindingResult4, UseBindingResult2_3 = ReactModule.useBinding(false)
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(UseWindowSizeModuleResult.X.Offset)
 	local UseAnimatedBindingResult1, UseAnimatedBindingResult2_1 = ReactOtterModule.useAnimatedBinding(UseWindowSizeModuleResult.Y.Offset)
@@ -60,26 +110,27 @@ return function(p1)
 		UseAnimatedBindingResult1,
 		p1.integration
 	})
+	local List = if FFlagKeepSideSheetOpenBesideMenu then { v1, UseWindowSizeModuleResult.Y.Offset } else { UseWindowSizeModuleResult.Y.Offset }
 	ReactModule.useEffect(function()
-		-- upvalues: UseAnimatedBindingResult (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseWindowSizeModuleResult (copy), config (upval)
-		if UseAnimatedBindingResult:getValue() == 0 then
+		-- upvalues: FFlagKeepSideSheetOpenBesideMenu (upval), v1 (ref), UseAnimatedBindingResult (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseWindowSizeModuleResult (copy), config (upval)
+		if FFlagKeepSideSheetOpenBesideMenu and v1 or UseAnimatedBindingResult:getValue() == 0 then
 			UseAnimatedBindingResult2((ReactOtterModule.instant(UseWindowSizeModuleResult.X.Offset)))
 			
 			return
 		else
 			UseAnimatedBindingResult2(ReactOtterModule.spring(UseWindowSizeModuleResult.X.Offset, config))
 		end
-	end, { UseWindowSizeModuleResult.X.Offset })
+	end, if FFlagKeepSideSheetOpenBesideMenu then { v1, UseWindowSizeModuleResult.X.Offset } else { UseWindowSizeModuleResult.X.Offset })
 	ReactModule.useEffect(function()
-		-- upvalues: UseAnimatedBindingResult1 (copy), UseAnimatedBindingResult2_1 (copy), ReactOtterModule (upval), UseWindowSizeModuleResult (copy), config (upval)
-		if UseAnimatedBindingResult1:getValue() == 0 then
+		-- upvalues: FFlagKeepSideSheetOpenBesideMenu (upval), v1 (ref), UseAnimatedBindingResult1 (copy), UseAnimatedBindingResult2_1 (copy), ReactOtterModule (upval), UseWindowSizeModuleResult (copy), config (upval)
+		if FFlagKeepSideSheetOpenBesideMenu and v1 or UseAnimatedBindingResult1:getValue() == 0 then
 			UseAnimatedBindingResult2_1((ReactOtterModule.instant(UseWindowSizeModuleResult.Y.Offset)))
 			
 			return
 		else
 			UseAnimatedBindingResult2_1(ReactOtterModule.spring(UseWindowSizeModuleResult.Y.Offset, config))
 		end
-	end, { UseWindowSizeModuleResult.Y.Offset })
+	end, List)
 	
 	if FFlagTopBarSignalizeMenuOpen then
 		ReactModule.useEffect(function()
@@ -100,7 +151,7 @@ return function(p1)
 		end, {})
 	end
 	ReactModule.useEffect(function()
-		-- upvalues: ServiceModule (upval), p1 (copy), UseRefResult (copy), UseRefResult1 (ref), UseBindingResult2 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), ConstantsModule (upval), UseAnimatedBindingResult2_1 (copy), UseWindowSizeModuleResult (copy), config (upval), ChromeAnalyticsModule (upval), UserInputService (upval), ShouldRejectMultiTouchModule (upval), FFlagTokenizeUnibarConstantsWithStyleProvider (upval), GetUIScaleFunction (upval)
+		-- upvalues: ServiceModule (upval), p1 (copy), UseRefResult (copy), FFlagKeepSideSheetOpenBesideMenu (upval), v1 (ref), UseRefResult1 (ref), UseRefResult2 (copy), UseBindingResult2 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), ConstantsModule (upval), UseAnimatedBindingResult2_1 (copy), UseWindowSizeModuleResult (copy), config (upval), ChromeAnalyticsModule (upval), UserInputService (upval), ShouldRejectMultiTouchModule (upval), FFlagTokenizeUnibarConstantsWithStyleProvider (upval), GetUIScaleFunction (upval), InExperienceSideSheetModule (upval)
 		local Connection = nil
 		local InputObject = nil
 		local DragConnectionResult = ServiceModule:dragConnection(p1.integration.id)
@@ -114,7 +165,14 @@ return function(p1)
 		local Current = UseRefResult.current
 		local AbsoluteSize = UseRefResult.current:FindFirstAncestorWhichIsA("ScreenGui").AbsoluteSize
 		
-		if Connection == nil then
+		if Connection == nil or FFlagKeepSideSheetOpenBesideMenu and v1 then
+			if FFlagKeepSideSheetOpenBesideMenu and Connection ~= nil then
+				if Connection.current then
+					Connection.current:Disconnect()
+					Connection.current = nil
+				end
+				ServiceModule:gesture(p1.integration.id, nil)
+			end
 			local Position = nil
 			if FFlagTokenizeUnibarConstantsWithStyleProvider and p1.position then
 				local UIScale = GetUIScaleFunction(false)
@@ -128,8 +186,19 @@ return function(p1)
 			else
 				Current.Position = UDim2.new(0, (if Position.X.Scale == 1 then AbsoluteSize.X else 0) + Position.X.Offset, 0, Position.Y.Offset)
 			end
+			if FFlagKeepSideSheetOpenBesideMenu and v1 then
+				local BesideSideSheetWindowArea = InExperienceSideSheetModule.getBesideSideSheetWindowArea()
+				
+				if BesideSideSheetWindowArea then
+					Current.Position = UDim2.fromOffset(BesideSideSheetWindowArea.position.X, BesideSideSheetWindowArea.position.Y)
+				end
+			end
 		else
 			UseRefResult1 = Connection
+			
+			if FFlagKeepSideSheetOpenBesideMenu and UseRefResult2 then
+				UseRefResult2.current = Connection
+			end
 			UseBindingResult2(true)
 			
 			if UseRefResult1 then
@@ -157,6 +226,20 @@ return function(p1)
 			end
 		end
 	end, {})
+	
+	if FFlagKeepSideSheetOpenBesideMenu then
+		ReactModule.useEffect(function()
+			-- upvalues: v1 (ref), SignalsModule (upval), InExperienceSideSheetModule (upval), UseRefResult (copy)
+			return if v1 then SignalsModule.createEffect(function(p2)
+				-- upvalues: InExperienceSideSheetModule (upval), UseRefResult (upval)
+				local BesideSideSheetWindowArea = InExperienceSideSheetModule.getBesideSideSheetWindowArea(p2)
+				
+				if BesideSideSheetWindowArea and UseRefResult.current then
+					UseRefResult.current.Position = UDim2.fromOffset(BesideSideSheetWindowArea.position.X, BesideSideSheetWindowArea.position.Y)
+				end
+			end) else nil
+		end, { v1 })
+	end
 	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: p1 (copy), ServiceModule (upval)
 		if p1.integration.integration.cachePosition then
@@ -171,7 +254,7 @@ return function(p1)
 		end
 	end)
 	
-	local function v51(Current): boolean
+	local function v62(Current): boolean
 		-- upvalues: UseResult (copy), UseAnimatedBindingResult (copy), UseAnimatedBindingResult1 (copy)
 		local Parent = Current.Parent
 		local Offset = Current.Position.X.Offset
@@ -183,66 +266,84 @@ return function(p1)
 	end
 	
 	local UseResult3 = ReactModule.useCallback(function(p2)
-		-- upvalues: UseRefResult (copy), UseMemoResult (ref), v51 (copy), UseResult (copy), UseAnimatedBindingResult (copy), UseAnimatedBindingResult1 (copy), UseResult1 (copy), UseBindingResult2_3 (copy), TweenService (upval)
+		-- upvalues: UseRefResult (copy), FFlagKeepSideSheetOpenBesideMenu (upval), v1 (ref), InExperienceSideSheetModule (upval), UseMemoResult (ref), v62 (copy), UseResult (copy), UseAnimatedBindingResult (copy), UseAnimatedBindingResult1 (copy), UseResult1 (copy), UseBindingResult2_3 (copy), TweenService (upval)
 		if UseRefResult == nil or UseRefResult.current == nil then return end
 		assert(UseRefResult.current ~= nil)
 		assert(UseRefResult.current.Parent ~= nil)
 		local Current = UseRefResult.current
-		local Offset: number = Current.Position.X.Offset
-		local Offset1: number = Current.Position.Y.Offset
 		
-		if UseMemoResult and UseMemoResult.PlaybackState == Enum.PlaybackState.Playing then
-			UseMemoResult:Cancel()
-		end
-		if not v51(Current) then
-			UseResult1(UDim2.new(0, Offset, 0, Offset1))
+		if FFlagKeepSideSheetOpenBesideMenu and v1 then
+			local BesideSideSheetWindowArea = InExperienceSideSheetModule.getBesideSideSheetWindowArea()
 			
-			return
-		end
-		if Current == nil then return end
-		local Parent = UseRefResult.current.Parent
-		local UseResultResult = UseResult()
-		local AbsoluteSize = Parent.AbsoluteSize
-		local XOffset = 0
-		local YOffset = 0
-		
-		if UseAnimatedBindingResult:getValue() < AbsoluteSize.X then
-			XOffset = math.clamp(Offset, UseResultResult.X, AbsoluteSize.X - (UseAnimatedBindingResult:getValue() - UseResultResult.X))
-		end
-		if UseAnimatedBindingResult1:getValue() < AbsoluteSize.Y then
-			YOffset = math.clamp(Offset1, UseResultResult.Y, AbsoluteSize.Y - (UseAnimatedBindingResult1:getValue() - UseResultResult.Y))
-		end
-		local _UDim2 = UDim2.new(0, XOffset, 0, YOffset)
-		UseResult1(_UDim2)
-		
-		if p2 then
-			Current.Position = _UDim2
-			
+			if BesideSideSheetWindowArea then
+				Current.Position = UDim2.fromOffset(BesideSideSheetWindowArea.position.X, BesideSideSheetWindowArea.position.Y)
+			end
 			return
 		else
-			UseBindingResult2_3(true)
-			UseMemoResult = TweenService:Create(Current, TweenInfo.new(0.35, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { Position = _UDim2 })
-			assert(UseMemoResult ~= nil)
-			UseMemoResult.Completed:Connect(function(_)
-				-- upvalues: UseBindingResult2_3 (upval), UseMemoResult (upval)
-				UseBindingResult2_3(false)
-				UseMemoResult = nil
-			end)
-			UseMemoResult:Play()
+			local Offset: number = Current.Position.X.Offset
+			local Offset1: number = Current.Position.Y.Offset
+			
+			if UseMemoResult and UseMemoResult.PlaybackState == Enum.PlaybackState.Playing then
+				UseMemoResult:Cancel()
+			end
+			if not v62(Current) then
+				UseResult1(UDim2.new(0, Offset, 0, Offset1))
+				
+				return
+			end
+			if Current == nil then return end
+			local Parent = UseRefResult.current.Parent
+			local UseResultResult = UseResult()
+			local AbsoluteSize = Parent.AbsoluteSize
+			local XOffset = 0
+			local YOffset = 0
+			
+			if UseAnimatedBindingResult:getValue() < AbsoluteSize.X then
+				XOffset = math.clamp(Offset, UseResultResult.X, AbsoluteSize.X - (UseAnimatedBindingResult:getValue() - UseResultResult.X))
+			end
+			if UseAnimatedBindingResult1:getValue() < AbsoluteSize.Y then
+				YOffset = math.clamp(Offset1, UseResultResult.Y, AbsoluteSize.Y - (UseAnimatedBindingResult1:getValue() - UseResultResult.Y))
+			end
+			local _UDim2 = UDim2.new(0, XOffset, 0, YOffset)
+			UseResult1(_UDim2)
+			
+			if p2 then
+				Current.Position = _UDim2
+				
+				return
+			else
+				UseBindingResult2_3(true)
+				UseMemoResult = TweenService:Create(Current, TweenInfo.new(0.35, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { Position = _UDim2 })
+				assert(UseMemoResult ~= nil)
+				UseMemoResult.Completed:Connect(function(_)
+					-- upvalues: UseBindingResult2_3 (upval), UseMemoResult (upval)
+					UseBindingResult2_3(false)
+					UseMemoResult = nil
+				end)
+				UseMemoResult:Play()
+			end
 		end
-	end, { UseResult })
+	end, if FFlagKeepSideSheetOpenBesideMenu then {
+		UseResult,
+		v1,
+		p1.integration,
+		UseWindowSizeModuleResult
+	} else { UseResult })
+	local WindowBesideSideSheetDisplayOrder = if FFlagKeepSideSheetOpenBesideMenu and v1 then InExperienceSideSheetModule.Constants.WindowBesideSideSheetDisplayOrder else ChromeWindowLayoutOrder
 	
 	return ReactRobloxModule.createPortal({
 		Name = ReactModule.createElement("ScreenGui", {
 			Name = ConstantsModule.WINDOW_HOST_GUI_NAME .. ":" .. p1.integration.id,
+			IgnoreGuiInset = if FFlagKeepSideSheetOpenBesideMenu then v1 else nil,
+			Enabled = if FFlagKeepSideSheetOpenBesideMenu then not v2 else nil,
 			[ReactModule.Change.AbsoluteSize] = DebounceModule(function()
 				-- upvalues: UseResult3 (copy)
 				UseResult3()
 			end, 0.2),
 			DisplayOrder = if FFlagTopBarSignalizeMenuOpen and MapResult then MapResult:map(function(p2)
-				-- upvalues: ChromeWindowLayoutOrder (copy)
-				return if p2 then -1 else ChromeWindowLayoutOrder
-			end) elseif UseSelectorResult then -1 else ChromeWindowLayoutOrder,
+				-- upvalues: WindowBesideSideSheetDisplayOrder (ref)
+				return if p2 then -1 else WindowBesideSideSheetDisplayOrder
+			end) elseif UseSelectorResult then -1 else WindowBesideSideSheetDisplayOrder,
 			ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 		}, {
 			WindowFrame = ReactModule.createElement("Frame", {
@@ -275,7 +376,8 @@ return function(p1)
 						Size = UDim2.fromScale(1, 1),
 						BackgroundTransparency = 1,
 						[ReactModule.Event.InputBegan] = ReactModule.useCallback(function(_, Input)
-							-- upvalues: UseRefResult (copy), UseResult (copy), ChromeAnalyticsModule (upval), p1 (copy), FixWindowDragStaleConnection (upval), UseRefResult1 (ref), UseBindingResult2 (copy), UseBindingResult4 (copy), FixWindowDragError (upval), UseAnimatedBindingResult (copy), UseAnimatedBindingResult1 (copy), UserInputService (upval), ShouldRejectMultiTouchModule (upval), Magnitude (ref), ConstantsModule (upval)
+							-- upvalues: FFlagKeepSideSheetOpenBesideMenu (upval), v1 (ref), UseRefResult (copy), UseResult (copy), ChromeAnalyticsModule (upval), p1 (copy), FixWindowDragStaleConnection (upval), UseRefResult1 (ref), UseBindingResult2 (copy), UseBindingResult4 (copy), FixWindowDragError (upval), UseAnimatedBindingResult (copy), UseAnimatedBindingResult1 (copy), UserInputService (upval), ShouldRejectMultiTouchModule (upval), Magnitude (ref), ConstantsModule (upval)
+							if FFlagKeepSideSheetOpenBesideMenu and v1 then return end
 							assert(UseRefResult.current ~= nil)
 							assert(UseRefResult.current.Parent ~= nil)
 							local Current = UseRefResult.current
@@ -317,24 +419,26 @@ return function(p1)
 									end)
 								end
 							end
-						end, { UseResult }),
+						end, if FFlagKeepSideSheetOpenBesideMenu then { UseResult, v1 } else { UseResult }),
 						[ReactModule.Event.InputEnded] = ReactModule.useCallback(function(_, Input)
-							-- upvalues: Magnitude (ref), UseRefResult (copy), ChromeAnalyticsModule (upval), p1 (copy), v51 (copy), UseRefResult1 (ref), UseBindingResult2 (copy), ServiceModule (upval), UseResult3 (copy)
+							-- upvalues: Magnitude (ref), UseRefResult (copy), ChromeAnalyticsModule (upval), p1 (copy), v62 (copy), UseRefResult1 (ref), FFlagKeepSideSheetOpenBesideMenu (upval), UseRefResult2 (copy), UseBindingResult2 (copy), ServiceModule (upval), UseResult3 (copy)
 							Magnitude = 0
 							
 							if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
 								if UseRefResult.current then
-									ChromeAnalyticsModule.default:onWindowTouchEnded(p1.integration.id, Vector2.new(UseRefResult.current.AbsolutePosition.X, UseRefResult.current.AbsolutePosition.Y), (v51(UseRefResult.current)))
+									ChromeAnalyticsModule.default:onWindowTouchEnded(p1.integration.id, Vector2.new(UseRefResult.current.AbsolutePosition.X, UseRefResult.current.AbsolutePosition.Y), (v62(UseRefResult.current)))
 								end
-								if UseRefResult1.current then
-									UseRefResult1.current:Disconnect()
-									UseRefResult1.current = nil
+								local Current = if FFlagKeepSideSheetOpenBesideMenu and UseRefResult2 and UseRefResult2.current then UseRefResult2.current else UseRefResult1
+								
+								if Current.current then
+									Current.current:Disconnect()
+									Current.current = nil
 									UseBindingResult2(false)
 									ServiceModule:gesture(p1.integration.id, nil)
 									UseResult3()
 								end
 							end
-						end, {}),
+						end, if FFlagKeepSideSheetOpenBesideMenu then { UseResult3 } else {}),
 						[ReactModule.Event.MouseEnter] = ReactModule.useCallback(function()
 							-- upvalues: VRService (upval), Flag (upval), MouseIconOverrideService (upval), SelfieViewCursorOverride (upval)
 							if not VRService.VREnabled then

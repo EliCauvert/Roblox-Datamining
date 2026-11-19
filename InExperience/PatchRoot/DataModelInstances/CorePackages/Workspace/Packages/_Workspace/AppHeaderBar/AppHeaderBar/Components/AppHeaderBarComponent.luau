@@ -10,6 +10,7 @@ local HeaderBar = UIBloxModule.App.Bar.HeaderBar
 local UtilityActionIcon = UIBloxModule.App.Button.UtilityActionIcon
 local SharedFlagsModule = require(Parent1.SharedFlags)
 local FFlagEnableConsoleRobloxLogo = SharedFlagsModule.FFlagEnableConsoleRobloxLogo
+local FFlagLuaAppAddTestIdsForArrow = SharedFlagsModule.FFlagLuaAppAddTestIdsForArrow
 local AppHeaderBarUseSizeFull = game:DefineFastFlag("AppHeaderBarUseSizeFull", false)
 local FFlagEnableClassicThemeHeaderBackground = SharedFlagsModule.FFlagEnableClassicThemeHeaderBackground
 local AppHeaderBarClassicThemeBackgroundModule = if FFlagEnableClassicThemeHeaderBackground then require(script.Parent.AppHeaderBarClassicThemeBackground) else nil
@@ -25,15 +26,13 @@ local config = {
 }
 
 local function BarTitle(p1)
-	-- upvalues: UseStyleFunction (copy), ReactModule (copy), GetTextSizeFunction (copy), NormalizeFontFaceFunction (copy), CryoModule (copy)
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), GetTextSizeFunction (copy), NormalizeFontFaceFunction (copy), FFlagLuaAppAddTestIdsForArrow (copy), CryoModule (copy)
 	local Tokens = UseStyleFunction().Tokens
 	local Title = p1.title
 	local TitleFont = p1.titleFont or Tokens.Typography.HeadingLarge
 	local White100 = if p1.onMedia then Tokens.Color.Extended.White.White_100 else Tokens.Color.Content.Emphasis
 	
 	return ReactModule.createElement("TextLabel", {
-		BackgroundTransparency = 1,
-		TextWrapped = true,
 		LayoutOrder = p1.layoutOrder,
 		Size = ReactModule.useMemo(function(): UDim2
 			-- upvalues: GetTextSizeFunction (upval), Title (copy), TitleFont (copy), Tokens (copy)
@@ -41,13 +40,16 @@ local function BarTitle(p1)
 			
 			return UDim2.fromOffset(TextSize.X + 2, TextSize.Y + Tokens.Size.Size_50 * 2)
 		end, { Title, TitleFont.FontSize, TitleFont.Font, Tokens }),
+		BackgroundTransparency = 1,
 		Text = Title,
 		FontFace = NormalizeFontFaceFunction(TitleFont.Font),
 		TextSize = TitleFont.FontSize,
 		LineHeight = TitleFont.LineHeight,
 		TextColor3 = White100.Color3,
 		TextTransparency = White100.Transparency,
-		TextXAlignment = Enum.TextXAlignment.Left
+		TextXAlignment = Enum.TextXAlignment.Left,
+		TextWrapped = true,
+		[ReactModule.Tag] = if FFlagLuaAppAddTestIdsForArrow and p1.testId then `data-testid=--{p0.testId}` else nil
 	}, CryoModule.Dictionary.join(p1.children or {}, {
 		Padding = ReactModule.createElement("UIPadding", {
 			PaddingTop = UDim.new(0, Tokens.Size.Size_50),
@@ -60,13 +62,14 @@ local function useRenderLeft(JoinResult)
 	-- upvalues: ReactModule (copy), BarTitle (copy)
 	local RenderNavigationFunction = JoinResult.renderNavigation
 	local Title = JoinResult.title
+	local TitleTestId = JoinResult.titleTestId
 	local OnMedia = JoinResult.onMedia
 	local TitleFontStyle = JoinResult.titleFontStyle
 	local IsTitleCentered = JoinResult.isTitleCentered
 	local GroupTransparencyLeft = JoinResult.groupTransparencyLeft
 	
 	return ReactModule.useCallback(function(p1)
-		-- upvalues: ReactModule (upval), GroupTransparencyLeft (copy), RenderNavigationFunction (copy), Title (copy), IsTitleCentered (copy), BarTitle (upval), TitleFontStyle (copy), OnMedia (copy)
+		-- upvalues: ReactModule (upval), GroupTransparencyLeft (copy), RenderNavigationFunction (copy), Title (copy), IsTitleCentered (copy), BarTitle (upval), TitleFontStyle (copy), OnMedia (copy), TitleTestId (copy)
 		return ReactModule.createElement(if GroupTransparencyLeft then "CanvasGroup" else "Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
@@ -85,12 +88,13 @@ local function useRenderLeft(JoinResult)
 				layoutOrder = 2,
 				title = Title,
 				titleFont = TitleFontStyle,
-				onMedia = OnMedia
+				onMedia = OnMedia,
+				testId = TitleTestId
 			}, if p1 then p1.children else nil) else nil
 		})
 	end, {
-		RenderNavigationFunction, Title, TitleFontStyle, GroupTransparencyLeft,
-		OnMedia, IsTitleCentered
+		RenderNavigationFunction, Title, TitleTestId, TitleFontStyle,
+		GroupTransparencyLeft, OnMedia, IsTitleCentered
 	})
 end
 
@@ -98,13 +102,14 @@ local function useRenderCenter(JoinResult)
 	-- upvalues: FFlagEnableConsoleRobloxLogo (copy), ReactModule (copy), AppHeaderBarUseSizeFull (copy), BarTitle (copy)
 	local RenderCenterFunction = JoinResult.renderCenter
 	local Title = JoinResult.title
+	local TitleTestId = JoinResult.titleTestId
 	local OnMedia = JoinResult.onMedia
 	local TitleFontStyle = JoinResult.titleFontStyle
 	local IsTitleCentered = JoinResult.isTitleCentered
 	local GroupTransparencyCenter = if FFlagEnableConsoleRobloxLogo then JoinResult.groupTransparencyCenter else nil
 	
 	return ReactModule.useCallback(function()
-		-- upvalues: RenderCenterFunction (copy), FFlagEnableConsoleRobloxLogo (upval), ReactModule (upval), GroupTransparencyCenter (copy), AppHeaderBarUseSizeFull (upval), Title (copy), IsTitleCentered (copy), BarTitle (upval), TitleFontStyle (copy), OnMedia (copy)
+		-- upvalues: RenderCenterFunction (copy), FFlagEnableConsoleRobloxLogo (upval), ReactModule (upval), GroupTransparencyCenter (copy), AppHeaderBarUseSizeFull (upval), Title (copy), IsTitleCentered (copy), BarTitle (upval), TitleFontStyle (copy), OnMedia (copy), TitleTestId (copy)
 		return if RenderCenterFunction then if FFlagEnableConsoleRobloxLogo then ReactModule.createElement(if GroupTransparencyCenter then "CanvasGroup" else "Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
@@ -115,11 +120,12 @@ local function useRenderCenter(JoinResult)
 		}, { CenterContent = RenderCenterFunction() }) else RenderCenterFunction() elseif Title and IsTitleCentered then ReactModule.createElement(BarTitle, {
 			title = Title,
 			titleFont = TitleFontStyle,
-			onMedia = OnMedia
+			onMedia = OnMedia,
+			testId = TitleTestId
 		}) else nil
 	end, {
-		RenderCenterFunction, Title, TitleFontStyle, IsTitleCentered, OnMedia,
-		GroupTransparencyCenter
+		RenderCenterFunction, Title, TitleTestId, TitleFontStyle, IsTitleCentered,
+		OnMedia, GroupTransparencyCenter
 	})
 end
 

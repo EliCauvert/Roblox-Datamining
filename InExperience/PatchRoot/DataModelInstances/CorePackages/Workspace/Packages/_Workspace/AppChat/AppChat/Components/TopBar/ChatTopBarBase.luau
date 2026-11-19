@@ -5,6 +5,7 @@ local FFlagAppChatFoundationHeaderBarPageMarginInsetModule = require(AppChat.Fla
 local FFlagAppChatPerfTrackingModule = require(AppChat.Flags.FFlagAppChatPerfTracking)
 local AppChatPerfTrackerModule = require(AppChat.Telemetry.AppChatPerfTracker)
 local CreateBackFuncModule = require(script.Parent.createBackFunc)
+local MakeRightAlignedCloseModule = require(script.Parent.makeRightAlignedClose)
 local FoundationModule = require(Parent.Foundation)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local ReactModule = require(Parent.React)
@@ -13,7 +14,9 @@ local UIBloxModule = require(Parent.UIBlox)
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local AppNavBarModule = require(Parent.AppNavBar)
 local VisibilityControl = AppNavBarModule.VisibilityControl
-local FFlagAppIaScrollAway = require(Parent.SharedFlags).FFlagAppIaScrollAway
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagAppIaScrollAway = SharedFlagsModule.FFlagAppIaScrollAway
+local FFlagAlignSideSheetWindowCloseRight = SharedFlagsModule.FFlagAlignSideSheetWindowCloseRight
 local HeaderBar = UIBloxModule.App.Bar.HeaderBar
 local HeaderBar1 = FoundationModule.HeaderBar
 local AppHeaderBarModule = require(Parent.AppHeaderBar)
@@ -41,8 +44,31 @@ local function createFoundationTitle(Text, Enabled, IsTitleLeftAligned)
 	}) else nil
 end
 
+local function resolveSideRenderers(p1, p2)
+	-- upvalues: noOp (copy), CreateBackFuncModule (copy), MakeRightAlignedCloseModule (copy)
+	local RenderRight = if p1.renderRight then p1.renderRight else noOp
+	
+	if p2.renderCenter then
+		return nil, nil
+	elseif p1.renderLeft then
+		return p1.renderLeft, RenderRight
+	else
+		local BackFuncModule = CreateBackFuncModule(p2.backFuncParams)
+		
+		if p2.backButtonEnabled then
+			return p2.makeBackButton(BackFuncModule), RenderRight
+		elseif p2.closeButtonEnabled and not p2.wideMode then
+			return nil, MakeRightAlignedCloseModule(p1.renderRight, p2.makeCloseButton(BackFuncModule))
+		elseif p2.closeButtonEnabled then
+			return p2.makeCloseButton(BackFuncModule), RenderRight
+		else
+			return noOp, RenderRight
+		end
+	end
+end
+
 return function(p1)
-	-- upvalues: ReactModule (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), GetTopBarStoreModule (copy), UseSignalStateFunction (copy), FFlagAppIaScrollAway (copy), AppHeaderBarModule (copy), UseLocalizationFunction (copy), UseStyleFunction (copy), UseTokensFunction (copy), noOp (copy), CreateBackFuncModule (copy), AppNavBarModule (copy), VisibilityControl (copy), FFlagAppThemeHalloween2026ChatBackgroundModule (copy), ThemeBackgroundModule (copy), FFlagAppChatFoundationHeaderBarModule (copy), createFoundationTitle (copy), HeaderBar1 (copy), FFlagAppChatFoundationHeaderBarPageMarginInsetModule (copy), FoundationModule (copy), HeaderBar (copy)
+	-- upvalues: ReactModule (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), GetTopBarStoreModule (copy), UseSignalStateFunction (copy), FFlagAppIaScrollAway (copy), FFlagAlignSideSheetWindowCloseRight (copy), AppHeaderBarModule (copy), UseLocalizationFunction (copy), UseStyleFunction (copy), UseTokensFunction (copy), resolveSideRenderers (copy), noOp (copy), CreateBackFuncModule (copy), AppNavBarModule (copy), VisibilityControl (copy), FFlagAppThemeHalloween2026ChatBackgroundModule (copy), ThemeBackgroundModule (copy), FFlagAppChatFoundationHeaderBarModule (copy), createFoundationTitle (copy), HeaderBar1 (copy), FFlagAppChatFoundationHeaderBarPageMarginInsetModule (copy), FoundationModule (copy), HeaderBar (copy)
 	ReactModule.useEffect(function()
 		-- upvalues: FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval)
 		if FFlagAppChatPerfTrackingModule then
@@ -54,6 +80,7 @@ return function(p1)
 	local IsInExperienceScreenProps = if FFlagAppIaScrollAway then Navigation.getScreenProps("isInExperience", false) else nil
 	local TopBarHeightScreenProps = Navigation.getScreenProps("topBarHeight", 0)
 	local NavigateToRootStackScreenProps = Navigation.getScreenProps("navigateToRootStack", nil)
+	local WideModeScreenProps = if FFlagAlignSideSheetWindowCloseRight then Navigation.getScreenProps("wideMode", false) else nil
 	local HeaderText = UseSignalStateResult.headerText or {}
 	local BackButtonEnabled = UseSignalStateResult.backButtonEnabled
 	local CloseButtonEnabled = UseSignalStateResult.closeButtonEnabled
@@ -72,30 +99,46 @@ return function(p1)
 	local HeaderText1 = HeaderText.shouldLocalize and UseLocalizationResult.headerText or (HeaderText.raw or "")
 	local UseStyleResult = UseStyleFunction()
 	local UseTokensResult = UseTokensFunction()
-	local RenderRight = if p1.renderRight then p1.renderRight else noOp
 	local RenderCenter = if p1.renderCenter then p1.renderCenter else nil
+	local ResolveSideRenderersResult2 = nil
+	local ResolveSideRenderersResult = nil
 	
-	if RenderCenter then
-		RenderRight = nil
-	end
-	local RenderLeft = nil
-	if RenderCenter then
-		RenderLeft = nil
-	elseif p1.renderLeft then
-		RenderLeft = p1.renderLeft
-	else
-		local BackFuncModule = CreateBackFuncModule({
-			navigation = Navigation,
-			navigateToRootStack = NavigateToRootStackScreenProps,
-			isRoot = IsRoot,
-			closeInputBar = CloseInputBar
+	if FFlagAlignSideSheetWindowCloseRight then
+		ResolveSideRenderersResult, ResolveSideRenderersResult2 = resolveSideRenderers(p1, {
+			renderCenter = RenderCenter,
+			backButtonEnabled = BackButtonEnabled,
+			closeButtonEnabled = CloseButtonEnabled,
+			wideMode = WideModeScreenProps,
+			backFuncParams = {
+				navigation = Navigation,
+				navigateToRootStack = NavigateToRootStackScreenProps,
+				isRoot = IsRoot,
+				closeInputBar = CloseInputBar
+			},
+			makeBackButton = MakeBackButtonFunction,
+			makeCloseButton = MakeCloseButtonFunction
 		})
-		RenderLeft = if BackButtonEnabled then MakeBackButtonFunction(BackFuncModule) elseif CloseButtonEnabled then MakeCloseButtonFunction(BackFuncModule) else noOp
+	else
+		ResolveSideRenderersResult2 = if RenderCenter then nil elseif p1.renderRight then p1.renderRight else noOp
+		
+		if RenderCenter then
+			ResolveSideRenderersResult = nil
+		elseif p1.renderLeft then
+			ResolveSideRenderersResult = p1.renderLeft
+		else
+			local BackFuncModule = CreateBackFuncModule({
+				navigation = Navigation,
+				navigateToRootStack = NavigateToRootStackScreenProps,
+				isRoot = IsRoot,
+				closeInputBar = CloseInputBar
+			})
+			ResolveSideRenderersResult = if BackButtonEnabled then MakeBackButtonFunction(BackFuncModule) elseif CloseButtonEnabled then MakeCloseButtonFunction(BackFuncModule) else noOp
+		end
 	end
 	local NoRenderCenter: boolean = not BackButtonEnabled and (not CloseButtonEnabled and RenderCenter == nil)
 	
-	if ShouldBoldHeader and RenderLeft == noOp then
-		RenderLeft = nil
+	if ShouldBoldHeader and ResolveSideRenderersResult == noOp then
+		ResolveSideRenderersResult = nil
 	end
 	local Medium = UseTokensResult.Padding.Medium
 	local _UDim = UDim.new(0, if LeftPaddingOverride == nil then Medium else LeftPaddingOverride)
@@ -104,7 +147,7 @@ return function(p1)
 		-- upvalues: TopBarHeightScreenProps (copy)
 		return UDim2.new(0, 0, 0, (p2 - 1) * (TopBarHeightScreenProps + 36))
 	end) else nil
-	local Callback = if RenderCenter then nil elseif p1.renderLeft or NavigateToRootStackScreenProps then RenderLeft elseif NoRenderCenter then nil else RenderLeft or nil
+	local Callback = if RenderCenter then nil elseif p1.renderLeft or NavigateToRootStackScreenProps then ResolveSideRenderersResult elseif NoRenderCenter then nil else ResolveSideRenderersResult or nil
 	local HeaderText2 = if RenderCenter or p1.hideTitle then nil else HeaderText1
 	local UseThemeBackgroundResult = if FFlagAppThemeHalloween2026ChatBackgroundModule then ThemeBackgroundModule.useThemeBackground() else nil
 	
@@ -123,7 +166,7 @@ return function(p1)
 				renderLeft = Callback,
 				isSecondary = IsSecondary,
 				renderCenter = RenderCenter,
-				renderRight = RenderRight,
+				renderRight = ResolveSideRenderersResult2,
 				paddingLeft = _UDim,
 				paddingRight = _UDim1,
 				isTitleCentered = not IsTitleLeftAligned,
@@ -136,14 +179,14 @@ return function(p1)
 	local CallbackResult = if Callback then Callback() else nil
 	local FoundationTitle1 = if IsTitleLeftAligned then FoundationTitle else nil
 	local RenderCenterResult = if RenderCenter then RenderCenter() elseif IsTitleLeftAligned then nil else FoundationTitle
-	local RenderRightResult = if RenderRight then RenderRight() else nil
+	local ResolveSideRenderersResultResult = if ResolveSideRenderersResult2 then ResolveSideRenderersResult2() else nil
 	local NoIsInExperienceScreenProps: boolean = UseThemeBackgroundResult == nil and (FFlagAppIaScrollAway and not IsInExperienceScreenProps)
 	local Element = ReactModule.createElement(HeaderBar1.Root, {
 		hasBackground = NoIsInExperienceScreenProps and not FFlagAppChatFoundationHeaderBarPageMarginInsetModule
 	}, {
 		Leading = if CallbackResult or FoundationTitle1 then ReactModule.createElement(HeaderBar1.Leading, nil, { leftContent = CallbackResult, title = FoundationTitle1 }) else nil,
 		Content = if RenderCenterResult then ReactModule.createElement(HeaderBar1.Content, nil, { centerContent = RenderCenterResult }) else nil,
-		Trailing = if RenderRightResult then ReactModule.createElement(HeaderBar1.Trailing, nil, { rightContent = RenderRightResult }) else nil
+		Trailing = if ResolveSideRenderersResultResult then ReactModule.createElement(HeaderBar1.Trailing, nil, { rightContent = ResolveSideRenderersResultResult }) else nil
 	})
 	local Element1 = nil
 	

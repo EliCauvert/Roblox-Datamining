@@ -47,6 +47,7 @@ local MomentsRenderCreatePostStatus = game:DefineFastFlag("MomentsRenderCreatePo
 local AppNavBarPerItemThemeOverride2 = game:DefineFastFlag("AppNavBarPerItemThemeOverride2", false)
 local EnableSplitPaneV1 = game:DefineFastFlag("EnableSplitPaneV1", false)
 local EnableSplitPaneEDPFix = EnableSplitPaneV1 and game:DefineFastFlag("EnableSplitPaneEDPFix", false)
+local EnableSplitPaneV1_1 = game:DefineFastFlag("EnableSplitPaneAvatarOverlayV1", false) and EnableSplitPaneV1
 local AppThemeHalloween2026HomeBackground = game:DefineFastFlag("AppThemeHalloween2026HomeBackground", false)
 local HomePageSduiPrefetchEngineFeature = game:DefineFastFlag("EnableHomePageSduiPrefetch", false) and game:GetEngineFeature("HomePageSduiPrefetch")
 local LuaAppSduiHomePageSupport3 = game:DefineFastFlag("LuaAppSduiHomePageSupport3", false)
@@ -1004,7 +1005,8 @@ return {
 	FFlagEnableSplitPaneSessionL3 = game:DefineFastFlag("EnableSplitPaneSessionL3", false) and EnableSplitPaneV1,
 	FFlagEnableOnScreenAPIIntegration = game:DefineFastFlag("EnableOnScreenAPIIntegration", false) and EnableSplitPaneV1,
 	FFlagAXPauseSceneWhenSplitPaneCollapsed = game:DefineFastFlag("AXPauseSceneWhenSplitPaneCollapsed1", false),
-	FFlagEnableSplitPaneAvatarOverlay = game:DefineFastFlag("EnableSplitPaneAvatarOverlayV1", false) and EnableSplitPaneV1,
+	FFlagSplitPaneAvatarInitialSnapshot = game:DefineFastFlag("SplitPaneAvatarInitialSnapshot", false) and EnableSplitPaneV1_1,
+	FFlagEnableSplitPaneAvatarOverlay = EnableSplitPaneV1_1,
 	FFlagSplitPaneEducationalTour = game:DefineFastFlag("SplitPaneEducationalTour", false) and EnableSplitPaneV1,
 	FFlagSplitPaneProfileMaxWidth = game:DefineFastFlag("SplitPaneProfileMaxWidth", false) and EnableSplitPaneV1,
 	FFlagSplitPaneUnsavedDialogAlertStyle = game:DefineFastFlag("SplitPaneUnsavedDialogAlertStyle", false) and EnableSplitPaneV1,
@@ -1037,6 +1039,7 @@ return {
 	FFlagLuaAppHomeFriendsRemoveItemImpressions = game:DefineFastFlag("LuaAppHomeFriendsRemoveItemImpressions", false),
 	FIntUserSeenCollectionBatchTimeMs = game:DefineFastInt("UserSeenCollectionBatchTimeMs", 200),
 	FFlagLuaAppSearchPeopleUnifiedSchemaFields = game:DefineFastFlag("LuaAppSearchPeopleUnifiedSchemaFields", false),
+	FFlagLuaAppSearchPersonalizedRecommendationsEntryPoint = require(script.FFlagLuaAppSearchPersonalizedRecommendationsEntryPoint),
 	FFlagLuaAppEdpMediaGalleryVideoPreview = require(script.FFlagLuaAppEdpMediaGalleryVideoPreview),
 	FFlagLuaAppEdpMediaGalleryVideoPreviewIxp = require(script.FFlagLuaAppEdpMediaGalleryVideoPreviewIxp),
 	FFlagLuaAppEdpConsoleMediaGalleryVideo = require(script.FFlagLuaAppEdpConsoleMediaGalleryVideo),
@@ -1136,7 +1139,7 @@ return {
 	FFlagLuaAppEnableStratusStreamingTestOnly = game:DefineFastFlag("LuaAppEnableStratusStreamingTestOnly", false),
 	FFlagLuaAppStratusPassUniverseId = game:DefineFastFlag("LuaAppStratusPassUniverseId", false),
 	FFlagLuaAppEnableStratusStreamingCheck = game:DefineFastFlag("LuaAppEnableStratusStreamingCheck", false) and game:GetEngineFeature("GameStreamingEnabledCheck"),
-	FFlagLuaAppCloudClientPlayButtonOffer = game:DefineFastFlag("LuaAppCloudClientPlayButtonOffer", false) and game:GetEngineFeature("CloudClientOfferTypeApi"),
+	FFlagLuaAppCloudClientPlayButtonOffer = game:DefineFastFlag("LuaAppCloudClientPlayButtonOffer2", false) and game:GetEngineFeature("CloudClientOfferTypeApi"),
 	FFlagLuaAppRobloxRealitySurvey = game:DefineFastFlag("LuaAppRobloxRealitySurvey", false),
 	FFlagInternalOnlyStratusBugReportEnabled = game:DefineFastFlag("InternalOnlyStratusBugReportEnabled", false) and game:GetEngineFeature("StratusBugReport"),
 	FFlagLuaAppStratusBugReportAfterConnect = game:DefineFastFlag("LuaAppStratusBugReportAfterConnect", false) and game:GetEngineFeature("StratusBugReport"),
@@ -1272,6 +1275,7 @@ return {
 	FFlagLuaAppSduiHomeUserInfo = game:DefineFastFlag("LuaAppSduiHomeUserInfo", false),
 	FFlagFixSduiEdpTtiPeekCategory = game:DefineFastFlag("FixSduiEdpTtiPeekCategory", false),
 	FFlagEnableGameItemDetailsSdui = game:DefineFastFlag("EnableGameItemDetailsSduiDev", false),
+	FFlagEnableOpenGameItemDetailsAction = game:DefineFastFlag("EnableOpenGameItemDetailsAction", false),
 	FFlagSduiDismissPromptAction = SduiDismissPromptAction,
 	FFlagSduiMilestoneCountActions = game:DefineFastFlag("SduiMilestoneCountActions", false),
 	FFlagLuaAppSduiMovePromptsActions = LuaAppSduiMovePromptsActions,

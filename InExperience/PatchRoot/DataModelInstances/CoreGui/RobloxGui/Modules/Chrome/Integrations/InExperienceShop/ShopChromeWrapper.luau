@@ -2,20 +2,35 @@
 local CorePackages = game:GetService("CorePackages")
 local GuiService = game:GetService("GuiService")
 local ReactModule = require(CorePackages.Packages.React)
+local SignalsModule = require(CorePackages.Packages.Signals)
 local UseEventConnectionFunction = require(CorePackages.Packages.ReactUtils).useEventConnection
 local ServiceModule = require(Chrome.Service)
 local ViewportUtilModule = require(Chrome.ChromeShared.Service.ViewportUtil)
+local CloseWindowBesideSideSheetModule = require(Chrome.Integrations.closeWindowBesideSideSheet)
 local _ = require(Chrome.ChromeShared.Service.WindowSizeSignal)
 local ConstantsModule = require(Chrome.ChromeShared.Unibar.Constants)
+local InExperienceSideSheetModule = require(CorePackages.Workspace.Packages.InExperienceSideSheet)
+local FFlagKeepSideSheetOpenBesideMenu = InExperienceSideSheetModule.Flags.FFlagKeepSideSheetOpenBesideMenu
 local ShopContainer = require(CorePackages.Workspace.Packages.InExperienceShop).ShopContainer
 
 return function(p1)
-	-- upvalues: ReactModule (copy), GuiService (copy), UseEventConnectionFunction (copy), ViewportUtilModule (copy), ServiceModule (copy), ConstantsModule (copy), ShopContainer (copy)
+	-- upvalues: ReactModule (copy), GuiService (copy), FFlagKeepSideSheetOpenBesideMenu (copy), InExperienceSideSheetModule (copy), UseEventConnectionFunction (copy), ViewportUtilModule (copy), SignalsModule (copy), CloseWindowBesideSideSheetModule (copy), ConstantsModule (copy), ServiceModule (copy), ShopContainer (copy)
 	local WindowSize = p1.windowSize
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseResult = ReactModule.useCallback(function(Vector)
-		-- upvalues: GuiService (upval), p1 (copy), WindowSize (copy), UseStateResult2 (copy)
+		-- upvalues: GuiService (upval), FFlagKeepSideSheetOpenBesideMenu (upval), InExperienceSideSheetModule (upval), WindowSize (copy), UseStateResult2 (copy), p1 (copy)
 		local Y = GuiService.TopbarInset.Max.Y
+		
+		if FFlagKeepSideSheetOpenBesideMenu then
+			local BesideSideSheetWindowArea = InExperienceSideSheetModule.getBesideSideSheetWindowArea()
+			
+			if BesideSideSheetWindowArea then
+				WindowSize:requestSize(BesideSideSheetWindowArea.size.X, BesideSideSheetWindowArea.size.Y, true)
+				UseStateResult2(false)
+				
+				return
+			end
+		end
 		local IsXBelow: boolean = Vector.X < p1.maxWindowWidth or Vector.Y - Y < p1.maxWindowHeight
 		
 		if IsXBelow then
@@ -30,21 +45,40 @@ return function(p1)
 		UseResult(ViewportUtilModule.screenSize:get())
 	end)
 	ReactModule.useEffect(function()
-		-- upvalues: ViewportUtilModule (upval), UseResult (copy)
+		-- upvalues: ViewportUtilModule (upval), UseResult (copy), FFlagKeepSideSheetOpenBesideMenu (upval), SignalsModule (upval), InExperienceSideSheetModule (upval)
 		local ScreenSizeConnection = ViewportUtilModule.screenSize:connect(UseResult)
-		UseResult(ViewportUtilModule.screenSize:get())
+		local Callback = nil
 		
+		if FFlagKeepSideSheetOpenBesideMenu then
+			Callback = SignalsModule.createEffect(function(p2)
+				-- upvalues: InExperienceSideSheetModule (upval), UseResult (upval), ViewportUtilModule (upval)
+				InExperienceSideSheetModule.getBesideSideSheetWindowArea(p2)
+				UseResult(ViewportUtilModule.screenSize:get())
+			end)
+		else
+			UseResult(ViewportUtilModule.screenSize:get())
+		end
 		return function()
-			-- upvalues: ScreenSizeConnection (copy)
+			-- upvalues: ScreenSizeConnection (copy), FFlagKeepSideSheetOpenBesideMenu (upval), Callback (ref)
 			ScreenSizeConnection:disconnect()
+			
+			if FFlagKeepSideSheetOpenBesideMenu and Callback then
+				Callback()
+			end
 		end
 	end, { UseResult })
 	
 	return ReactModule.createElement(ShopContainer, {
 		fullScreen = UseStateResult,
 		toggleWindow = ReactModule.useCallback(function()
-			-- upvalues: ServiceModule (upval), ConstantsModule (upval)
-			ServiceModule:toggleWindow(ConstantsModule.IN_EXPERIENCE_SHOP_ID)
+			-- upvalues: FFlagKeepSideSheetOpenBesideMenu (upval), CloseWindowBesideSideSheetModule (upval), ConstantsModule (upval), ServiceModule (upval)
+			if FFlagKeepSideSheetOpenBesideMenu then
+				CloseWindowBesideSideSheetModule(ConstantsModule.IN_EXPERIENCE_SHOP_ID)
+				
+				return
+			else
+				ServiceModule:toggleWindow(ConstantsModule.IN_EXPERIENCE_SHOP_ID)
+			end
 		end, {})
 	})
 end

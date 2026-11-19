@@ -5,6 +5,7 @@ local EnumScreensModule = require(AppChat.EnumScreens)
 local _ = require(AppChat.types)
 local UseAppPolicyModule = require(AppChat.Hooks.useAppPolicy)
 local UseIsExternalNavigationAvailableModule = require(AppChat.Hooks.useIsExternalNavigationAvailable)
+local UseDisplayOrderAboveFriendsChatModule = require(AppChat.App.useDisplayOrderAboveFriendsChat)
 local ConversationModule = require(AppChat.Models.Conversation)
 local CryoModule = require(Parent.Cryo)
 local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
@@ -26,6 +27,7 @@ local FocusNavigableSurfaceWrapper = FocusNavigationUtilsModule.FocusNavigableSu
 local AppFocusRoot = FocusNavigationUtilsModule.AppFocusRoot
 local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
 local FFlagDisableBlockAndReport = SharedFlagsModule.FFlagDisableBlockAndReport
+local FFlagKeepSideSheetOpenBesideMenu = SharedFlagsModule.FFlagKeepSideSheetOpenBesideMenu
 local FFlagAppChatMigrateFriendshipStatusesModule = require(AppChat.Flags.FFlagAppChatMigrateFriendshipStatuses)
 local MemoFunction = ReactModule.memo
 local GenericDialogTypeModule = require(script.Parent.Parent.Dialogs.GenericDialogType)
@@ -58,7 +60,7 @@ local config1 = {
 }
 
 function ParticipantDialogContainer(p1)
-	-- upvalues: CryoModule (copy), config1 (copy), ReactModule (copy), BackHandlerContextModule (copy), UseNavigationFunction (copy), UseDispatchFunction (copy), UseAppPolicyModule (copy), UseSelectorFunction (copy), ConversationModule (copy), FFlagAppChatMigrateFriendshipStatusesModule (copy), UseGetFriendshipStatusFunction (copy), config (copy), NetworkingFriendsModule (copy), UseLocalizationFunction (copy), UseIsExternalNavigationAvailableModule (copy), EnumScreensModule (copy), UseTrustedFriendActionModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), LoggerModule (copy), GenericDialogTypeModule (copy), RoactChatAnalyticsModule (copy), NotificationModalsManagerModule (copy), Sources (copy), EnteredChatFromEntryPointFunction (copy), ChatEntryPointNames (copy), CreateConversationModule (copy), ParseCreateConversationErrorsModule (copy), FFlagDisableBlockAndReport (copy), AppFocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), PlayerContextualMenuWrapperModule (copy), FocusNavigableSurfaceWrapper (copy), ParticipantDialogModule (copy)
+	-- upvalues: CryoModule (copy), config1 (copy), ReactModule (copy), BackHandlerContextModule (copy), UseNavigationFunction (copy), UseDispatchFunction (copy), UseAppPolicyModule (copy), UseSelectorFunction (copy), ConversationModule (copy), FFlagAppChatMigrateFriendshipStatusesModule (copy), UseGetFriendshipStatusFunction (copy), config (copy), NetworkingFriendsModule (copy), UseLocalizationFunction (copy), UseIsExternalNavigationAvailableModule (copy), EnumScreensModule (copy), UseTrustedFriendActionModule (copy), FFlagKeepSideSheetOpenBesideMenu (copy), UseDisplayOrderAboveFriendsChatModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), LoggerModule (copy), GenericDialogTypeModule (copy), RoactChatAnalyticsModule (copy), NotificationModalsManagerModule (copy), Sources (copy), EnteredChatFromEntryPointFunction (copy), ChatEntryPointNames (copy), CreateConversationModule (copy), ParseCreateConversationErrorsModule (copy), FFlagDisableBlockAndReport (copy), AppFocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), PlayerContextualMenuWrapperModule (copy), FocusNavigableSurfaceWrapper (copy), ParticipantDialogModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config1, p1)
 	local UseContextResult = ReactModule.useContext(BackHandlerContextModule)
 	local UseRefResult = ReactModule.useRef(JoinResult.onDismiss)
@@ -119,6 +121,7 @@ function ParticipantDialogContainer(p1)
 	local UseTrustedFriendActionModuleResult = UseTrustedFriendActionModule(JoinResult.participantId)
 	local Action = UseTrustedFriendActionModuleResult.action
 	local RefetchFunction = UseTrustedFriendActionModuleResult.refetch
+	local UseDisplayOrderAboveFriendsChatModuleResult = if FFlagKeepSideSheetOpenBesideMenu then UseDisplayOrderAboveFriendsChatModule() else nil
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), JoinResult (copy)
 		return {
@@ -196,17 +199,17 @@ function ParticipantDialogContainer(p1)
 			JoinResult.onDismiss
 		}),
 		openTrustedFriend = ReactModule.useCallback(function()
-			-- upvalues: Action (copy), JoinResult (copy), UseDispatchResult (copy), NetworkingFriendsModule (upval), RefetchFunction (copy), NotificationModalsManagerModule (upval), UseTrustedFriendActionModuleResult (copy), LoggerModule (upval), UseNavigationResult (copy), EnumScreensModule (upval), Sources (upval)
+			-- upvalues: Action (copy), JoinResult (copy), UseDispatchResult (copy), NetworkingFriendsModule (upval), RefetchFunction (copy), NotificationModalsManagerModule (upval), UseTrustedFriendActionModuleResult (copy), UseDisplayOrderAboveFriendsChatModuleResult (copy), LoggerModule (upval), UseNavigationResult (copy), EnumScreensModule (upval), Sources (upval)
 			if Action == nil then return end
 			if Action.actionType == "RemoveTrustedConnection" then
 				JoinResult.onDismiss()
 				UseDispatchResult(NetworkingFriendsModule.RemoveTC.API(JoinResult.participantId)):andThen(function()
-					-- upvalues: RefetchFunction (upval), NotificationModalsManagerModule (upval), UseTrustedFriendActionModuleResult (upval)
+					-- upvalues: RefetchFunction (upval), NotificationModalsManagerModule (upval), UseTrustedFriendActionModuleResult (upval), UseDisplayOrderAboveFriendsChatModuleResult (upval)
 					RefetchFunction()
 					NotificationModalsManagerModule.SetUIBloxToast({
 						sequenceNumber = DateTime.now().UnixTimestamp,
 						toastTitle = UseTrustedFriendActionModuleResult.toastText
-					})
+					}, UseDisplayOrderAboveFriendsChatModuleResult)
 				end):catch(function(Err)
 					-- upvalues: LoggerModule (upval), JoinResult (upval)
 					LoggerModule:warning("Error removing trusted connection for userId {}: {}", JoinResult.participantId, (tostring(Err)))
@@ -234,7 +237,8 @@ function ParticipantDialogContainer(p1)
 			end
 		end, {
 			Action, UseTrustedFriendActionModuleResult, JoinResult.participantId,
-			JoinResult.onDismiss, UseDispatchResult, RefetchFunction, UseNavigationResult
+			JoinResult.onDismiss, UseDispatchResult, RefetchFunction, UseNavigationResult,
+			UseDisplayOrderAboveFriendsChatModuleResult
 		}),
 		openChat = ReactModule.useCallback(function(p2)
 			-- upvalues: LoggerModule (upval), UseDispatchResult (copy), EnteredChatFromEntryPointFunction (upval), ChatEntryPointNames (upval), JoinResult (copy), CreateConversationModule (upval), UseNavigationResult (copy), EnumScreensModule (upval), ParseCreateConversationErrorsModule (upval), UseLocalizationResult (copy)

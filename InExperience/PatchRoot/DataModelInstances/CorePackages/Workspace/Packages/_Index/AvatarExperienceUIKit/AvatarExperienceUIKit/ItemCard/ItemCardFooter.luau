@@ -6,9 +6,10 @@ local ItemCardCreatorNameModule = require(script.Parent.ItemCardCreatorName)
 local ItemCardTitleModule = require(script.Parent.ItemCardTitle)
 local FFlagAXAddTextXAlignmentProp = require(Parent.AvatarExperienceFlags).FFlagAXAddTextXAlignmentProp
 local FFlagAXItemCardComponentsMemo = require(Parent.AvatarExperienceFlags).FFlagAXItemCardComponentsMemo
+local FFlagAXItemCardTitleMaxLines = require(Parent.AvatarExperienceFlags).FFlagAXItemCardTitleMaxLines
 
 local function ItemCardFooter(Label)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), ItemCardTitleModule (copy), FFlagAXAddTextXAlignmentProp (copy), ItemCardCreatorNameModule (copy), ItemCardPriceLineModule (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), ItemCardTitleModule (copy), FFlagAXItemCardTitleMaxLines (copy), FFlagAXAddTextXAlignmentProp (copy), ItemCardCreatorNameModule (copy), ItemCardPriceLineModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	
 	return ReactModule.createElement("Frame", {
@@ -42,6 +43,7 @@ local function ItemCardFooter(Label)
 				LayoutOrder = 1,
 				title = Label.title,
 				titleTextSize = Label.titleTextSize,
+				maxLines = if FFlagAXItemCardTitleMaxLines then Label.titleMaxLines else nil,
 				TextXAlignment = if FFlagAXAddTextXAlignmentProp then Label.TextXAlignment else nil
 			}) else nil,
 			ItemCardFooterInfoCreatorName = if Label.creatorName then ReactModule.createElement(ItemCardCreatorNameModule, {

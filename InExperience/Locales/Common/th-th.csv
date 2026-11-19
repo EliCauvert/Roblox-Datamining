@@ -2497,12 +2497,15 @@ Feature.Build.Label.ToolAssetSearchRunning,กำลังค้นหาใน�
 Feature.Build.Label.ToolClientDMDone,ค้นหา DataModel ของไคลเอนต์แล้ว
 Feature.Build.Label.ToolClientDMFailed,ไม่สามารถค้นหา DataModel ของไคลเอนต์ได้
 Feature.Build.Label.ToolClientDMRunning,กำลังค้นหา DataModel ของไคลเอนต์
+Feature.Build.Label.ToolCodeRunning,กำลังเรียกใช้รหัส
 Feature.Build.Label.ToolCompileDone,คอมไพล์โค้ดแล้ว
 Feature.Build.Label.ToolCompileFailed,ไม่สามารถคอมไพล์โค้ดได้
 Feature.Build.Label.ToolCompileRunning,กำลังคอมไพล์โค้ด
+Feature.Build.Label.ToolDeveloperProductRunning,กำลังดำเนินการกับผลิตภัณฑ์นักพัฒนาของคุณ
 Feature.Build.Label.ToolGameInfoDone,อัปเดตข้อมูลเกมแล้ว
 Feature.Build.Label.ToolGameInfoFailed,ไม่สามารถอัปเดตข้อมูลเกมได้
 Feature.Build.Label.ToolGameInfoRunning,กำลังอัปเดตข้อมูลเกม
+Feature.Build.Label.ToolGamePassRunning,กำลังดำเนินการกับบัตรผ่านเกมของคุณ
 Feature.Build.Label.ToolGameSaveDone,บันทึกเกมแล้ว
 Feature.Build.Label.ToolGameSaveFailed,ไม่สามารถบันทึกเกมได้
 Feature.Build.Label.ToolGameSaveRunning,กำลังบันทึกเกม
@@ -2521,6 +2524,7 @@ Feature.Build.Label.ToolLuauRunning,กำลังเรียกใช้โ�
 Feature.Build.Label.ToolModelDone,สร้างโมเดล 3D แล้ว
 Feature.Build.Label.ToolModelFailed,ไม่สามารถสร้างโมเดล 3D ได้
 Feature.Build.Label.ToolModelRunning,กำลังสร้างโมเดล 3D
+Feature.Build.Label.ToolMonetizationRunning,กำลังดำเนินการกับการสร้างรายได้จากเกมของคุณ
 Feature.Build.Label.ToolPlanPresentDone,นำเสนอแผนแล้ว
 Feature.Build.Label.ToolPlanPresentFailed,ไม่สามารถนำเสนอแผนได้
 Feature.Build.Label.ToolPlanPresentRunning,กำลังนำเสนอแผน
@@ -2548,6 +2552,7 @@ Feature.Build.Label.ToolSkillLoadRunning,กำลังโหลดทักษ
 Feature.Build.Label.ToolSkillsDone,แสดงรายการทักษะที่มีแล้ว
 Feature.Build.Label.ToolSkillsFailed,ไม่สามารถแสดงรายการทักษะที่มีได้
 Feature.Build.Label.ToolSkillsRunning,กำลังแสดงรายการทักษะที่มี
+Feature.Build.Label.ToolSubscriptionRunning,กำลังดำเนินการกับการสมัครสมาชิกของคุณ
 Feature.Build.Label.ToolTasksPlanDone,วางแผนงานแล้ว
 Feature.Build.Label.ToolTasksPlanFailed,ไม่สามารถวางแผนงานได้
 Feature.Build.Label.ToolTasksPlanRunning,กำลังวางแผนงานของคุณ
@@ -3335,6 +3340,11 @@ Feature.Chat.Text.NoFriends,คุณยังไม่ได้เพิ่ม�
 Feature.Chat.Title.FriendsChat,การแชทกับเพื่อน
 Feature.Chat.Title.NewChat,แชทใหม่
 Feature.Chat.Toast.Error.InvalidUserSelected,ไม่สามารถเพิ่มอย่างน้อยหนึ่งคนที่อยู่ในรายการนี้ได้
+Feature.CloudClient.Action.PlayWithoutCloudPlay,เล่นโดยไม่ใช้ Cloud Play
+Feature.CloudClient.Description.CloudPlayOffer,Cloud Play จะรันเกมบนคอมพิวเตอร์ของ Roblox เกมจึงอาจโหลดเร็วขึ้นและหยุดทำงานน้อยลง Cloud Play จะทำงานเฉพาะระหว่างที่คุณเล่นเกมนี้
+Feature.CloudClient.Heading.CloudPlayOffer,เล่นผ่าน Cloud Play
+Feature.CloudClient.Label.RobloxRealityGraphics,เกมของคุณในลุคใหม่
+Feature.CloudClient.Label.RobloxRealityPlusOnly,สำหรับสมาชิก Plus เท่านั้น
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,ช่วยให้เพื่อนหาคุณเจอ
 Feature.Contacts.Action.Invite,เชิญ

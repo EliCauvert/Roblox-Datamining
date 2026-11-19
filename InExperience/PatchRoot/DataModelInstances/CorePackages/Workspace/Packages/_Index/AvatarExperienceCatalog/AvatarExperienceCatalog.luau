@@ -5,6 +5,7 @@ local _ = require(script.Components.ResultsList.WidgetListInfoViewModel)
 local _ = require(script.Api.GetFaeStatus.normalizeFaeStatus)
 local AddSpecialFeaturesFilterModule = require(script.Api.GetCatalogV2SearchItemDetails.addSpecialFeaturesFilter)
 local _ = require(script.Stores)
+local _ = require(script.Components.AnimationAutoplay.Types)
 
 return {
 	Api = {
@@ -56,7 +57,15 @@ return {
 			ItemReplacedOnAvatarPrompt = require(script.Components.Prompts.ItemReplacedOnAvatarPrompt),
 			ItemsUnavailablePrompt = require(script.Components.Prompts.ItemsUnavailablePrompt),
 			TimeoutStatusPrompt = require(script.Components.Prompts.TimeoutStatusPrompt)
-		}
+		},
+		loadAnimationAutoplay = function()
+			return {
+				AnimationAutoplayRules = require(script.Components.AnimationAutoplay.AnimationAutoplayRules),
+				AnimationAutoplayTuning = require(script.Components.AnimationAutoplay.AnimationAutoplayTuning),
+				AutoplayStage = require(script.Components.AnimationAutoplay.AutoplayStage),
+				measureAnimationTiles = require(script.Components.AnimationAutoplay.measureAnimationTiles)
+			}
+		end
 	},
 	Constants = require(script.Constants),
 	WidgetConstants = require(script.WidgetConstants),
