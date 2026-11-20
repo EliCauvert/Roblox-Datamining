@@ -361,6 +361,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"抱歉，连接服务器�
 
 请稍候重试。"
 Authentication.Login.Label.ConnectionError.Title,连接错误
+Authentication.Login.Label.DontHaveARobloxAccountCreateOne,
 Authentication.Login.Label.DontHaveAnAccountCreateOne,没有帐户？{startTag}创建一个{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,电子邮件地址
