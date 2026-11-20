@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("LuaAppSduiPersonalizedRecommendationsEntryPoint", false) and (require(script.Parent.FFlagSduiOpenAccountSettingsAction) and require(script.Parent.FFlagInitializeSduiForApp))
+﻿return game:DefineFastFlag("LuaAppSduiPersonalizedRecommendationsEntryPoint", false) and require(script.Parent.FFlagSduiOpenAccountSettingsAction)

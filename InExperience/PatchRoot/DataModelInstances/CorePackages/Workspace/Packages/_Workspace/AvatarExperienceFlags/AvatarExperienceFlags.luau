@@ -488,5 +488,6 @@
 	FFlagAXSduiClaimEventItemAction = require(script.FFlagAXSduiClaimEventItemAction),
 	FFlagAXIaBPlusExclusiveUpsell = require(script.FFlagAXIaBPlusExclusiveUpsell),
 	FFlagAXInspectAndBuySpawnEffects = require(script.FFlagAXInspectAndBuySpawnEffects),
-	FFlagAXRobuxBalanceAndPhotoboothButtonOverMedia = require(script.FFlagAXRobuxBalanceAndPhotoboothButtonOverMedia)
+	FFlagAXRobuxBalanceAndPhotoboothButtonOverMedia = require(script.FFlagAXRobuxBalanceAndPhotoboothButtonOverMedia),
+	FFlagAXPlusBannerItemDetailsPolish = require(script.FFlagAXPlusBannerItemDetailsPolish)
 }

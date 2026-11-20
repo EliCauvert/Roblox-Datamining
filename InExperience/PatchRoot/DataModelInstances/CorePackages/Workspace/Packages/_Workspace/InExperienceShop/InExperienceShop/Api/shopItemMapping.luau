@@ -1,11 +1,9 @@
 ﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
 local _ = require(InExperienceShop.Types)
 local FormatUpdatedDateModule = require(InExperienceShop.Utils.formatUpdatedDate)
-local FFlagShopProductsUseDisplayNameModule = require(InExperienceShop.Flags.FFlagShopProductsUseDisplayName)
 
 local function _(Player)
-	-- upvalues: FFlagShopProductsUseDisplayNameModule (copy)
-	return FFlagShopProductsUseDisplayNameModule and Player.DisplayName or Player.Name
+	return Player.DisplayName or Player.Name
 end
 
 return {
@@ -22,14 +20,14 @@ return {
 		}
 	end,
 	toShopItem = function(Player, ItemType, p1)
-		-- upvalues: FFlagShopProductsUseDisplayNameModule (copy), FormatUpdatedDateModule (copy)
+		-- upvalues: FormatUpdatedDateModule (copy)
 		local IconImageAssetId = Player.IconImageAssetId
 		local Creator = Player.Creator
 		
 		return {
 			isOwned = false,
 			id = if ItemType == "Product" then tostring(Player.ProductId) else tostring(p1),
-			name = FFlagShopProductsUseDisplayNameModule and Player.DisplayName or Player.Name,
+			name = Player.DisplayName or Player.Name,
 			thumbnail = if IconImageAssetId == nil then "" else "rbxassetid://" .. tostring(IconImageAssetId),
 			price = Player.PriceInRobux,
 			userBasePriceInRobux = Player.UserBasePriceInRobux or Player.BasePriceInRobux,

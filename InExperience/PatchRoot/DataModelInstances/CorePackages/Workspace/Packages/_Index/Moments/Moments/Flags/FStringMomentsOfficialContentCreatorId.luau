@@ -1,1 +1,0 @@
-﻿return game:DefineFastString("MomentsOfficialContentCreatorId", "11801915790")

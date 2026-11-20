@@ -42,7 +42,7 @@ return function(p2, p3)
 				table.insert(Copy, item)
 			end
 		end
-		if #Signal(false) < #Copy then
+		if #Result.items > 0 then
 			Signal2(Copy)
 		end
 	end

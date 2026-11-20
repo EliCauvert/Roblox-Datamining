@@ -1,4 +1,4 @@
-﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+﻿local Parent = script:FindFirstAncestor("SduiFoundation").Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local _ = require(Parent.SduiCompat)

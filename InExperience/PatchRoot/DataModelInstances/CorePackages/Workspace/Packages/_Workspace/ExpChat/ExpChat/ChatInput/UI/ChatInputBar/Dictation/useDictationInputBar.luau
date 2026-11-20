@@ -6,6 +6,7 @@ local FoundationModule = require(Parent.Foundation)
 local UseAsyncFunction = require(Parent.ReactUtils).useAsync
 local SignalsReactModule = require(Parent.SignalsReact)
 local SetUIBloxToastFunction = require(Parent.NotificationModalsManager).SetUIBloxToast
+local IXPServiceWrapper = require(Parent.IxpServiceWrapper).IXPServiceWrapper
 local LinkingProtocolModule = require(Parent.LinkingProtocol)
 local Default = LinkingProtocolModule.LinkingProtocol.default
 local SettingsRoute = LinkingProtocolModule.Enums.SettingsRoute
@@ -23,6 +24,8 @@ local FFlagExpChatDictationFTUXModule = require(ExpChat.Flags.FFlagExpChatDictat
 local FFlagExpChatDictationU13PolicyToastModule = require(ExpChat.Flags.FFlagExpChatDictationU13PolicyToast)
 local FFlagExpChatDictationStopOnRateLimitModule = require(ExpChat.Flags.FFlagExpChatDictationStopOnRateLimit)
 local ExpChatDictationMicToastAnalytics = game:DefineFastFlag("ExpChatDictationMicToastAnalytics", false)
+local FFlagExpChatContinuousDictationIxpExposureModule = require(ExpChat.Flags.FFlagExpChatContinuousDictationIxpExposure)
+local ExpChatContinuousDictationIxpLayer = game:DefineFastString("ExpChatContinuousDictationIxpLayer", "UniverseChat.Dictation-Continuous-Follow-Ups")
 local list = {
 	"CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBody",
 	"CoreScripts.TextChat.ChatWindow.TranscriptionNoMicAccessToastBodyAlternate"
@@ -66,7 +69,7 @@ local _ = function(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: FoundationModule (copy), ReactModule (copy), FFlagExpChatDictationFTUXModule (copy), UseDictationTelemetryModule (copy), ExpChatDictationMicToastAnalytics (copy), UseDictationEligibilityModule (copy), UseIsLocalUserUnder13Module (copy), U13PolicyToastStorageModule (copy), UseAsyncFunction (copy), LinkingResumeOnDataModelThreadEngineFeature (copy), FFlagEnableRetryForLinkingProtocolFetch (copy), FIntLinkingProtocolFetchRetries (copy), Default (copy), SettingsRoute (copy), FIntLinkingProtocolFetchTimeoutMS (copy), LocalizationModule (copy), Entry (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), GetMessagesStoreModule (copy), DictationErrorReason (copy), DictationAnalyticsModule (copy), SetUIBloxToastFunction (copy), UseTranscribedSamplesModule (copy), DictationModeModule (copy), FFlagExpChatDictationContinuousSafetyReminder (copy), DictationSafetyReminderModule (copy), FFlagExpChatDictationU13PolicyToastModule (copy), PermissionStatus (copy), UseDictationFunction (copy), SignalsReactModule (copy), DictationState (copy), FFlagExpChatDictationStopOnSafetyIntervention (copy), ExperienceChatInterventionShownSignalModule (copy), FFlagExpChatDictationExplicitFinishModule (copy), FFlagExpChatDictationStopOnRateLimitModule (copy), DictationRateLimitModule (copy), FFlagExpChatLongPressContinuousDictation (copy), FFlagExpChatContinuousDictation (copy), FFlagExpChatDictationVoiceTypingModeSetting (copy), GetDictationModeSettingStoreModule (copy), UseDictationFTUXModule (copy), UseLongPressModule (copy)
+	-- upvalues: FoundationModule (copy), ReactModule (copy), FFlagExpChatDictationFTUXModule (copy), UseDictationTelemetryModule (copy), ExpChatDictationMicToastAnalytics (copy), UseDictationEligibilityModule (copy), UseIsLocalUserUnder13Module (copy), U13PolicyToastStorageModule (copy), UseAsyncFunction (copy), LinkingResumeOnDataModelThreadEngineFeature (copy), FFlagEnableRetryForLinkingProtocolFetch (copy), FIntLinkingProtocolFetchRetries (copy), Default (copy), SettingsRoute (copy), FIntLinkingProtocolFetchTimeoutMS (copy), LocalizationModule (copy), Entry (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), GetMessagesStoreModule (copy), DictationErrorReason (copy), DictationAnalyticsModule (copy), SetUIBloxToastFunction (copy), UseTranscribedSamplesModule (copy), DictationModeModule (copy), FFlagExpChatDictationContinuousSafetyReminder (copy), DictationSafetyReminderModule (copy), FFlagExpChatDictationU13PolicyToastModule (copy), PermissionStatus (copy), UseDictationFunction (copy), SignalsReactModule (copy), DictationState (copy), FFlagExpChatContinuousDictationIxpExposureModule (copy), IXPServiceWrapper (copy), ExpChatContinuousDictationIxpLayer (copy), FFlagExpChatDictationStopOnSafetyIntervention (copy), ExperienceChatInterventionShownSignalModule (copy), FFlagExpChatDictationExplicitFinishModule (copy), FFlagExpChatDictationStopOnRateLimitModule (copy), DictationRateLimitModule (copy), FFlagExpChatLongPressContinuousDictation (copy), FFlagExpChatContinuousDictation (copy), FFlagExpChatDictationVoiceTypingModeSetting (copy), GetDictationModeSettingStoreModule (copy), UseDictationFTUXModule (copy), UseLongPressModule (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseCursorResult = FoundationModule.Hooks.useCursor({
 		radius = UDim.new(0, UseTokensResult.Radius.Circle),
@@ -358,6 +361,17 @@ return function(p1)
 	local IsUseSignalStateResultMatch1 = UseSignalStateResult == DictationState.Transcribing
 	local IsUseSignalStateResultMatch2 = UseSignalStateResult == DictationState.Listening
 	local StartDictationFunction = UseDictationResult.startDictation
+	
+	if FFlagExpChatContinuousDictationIxpExposureModule then
+		local Callback = StartDictationFunction
+		StartDictationFunction = ReactModule.useCallback(function(Continuous)
+			-- upvalues: DictationModeModule (upval), IXPServiceWrapper (upval), ExpChatContinuousDictationIxpLayer (upval), Callback (copy)
+			if Continuous == DictationModeModule.Continuous then
+				IXPServiceWrapper:LogFlagLinkedUserLayerExposure(ExpChatContinuousDictationIxpLayer)
+			end
+			Callback(Continuous)
+		end, { Callback })
+	end
 	local StopDictationFunction = UseDictationResult.stopDictation
 	
 	if FFlagExpChatDictationStopOnSafetyIntervention then
@@ -410,7 +424,7 @@ return function(p1)
 		UseRefResult2.current = UseDictationFTUXModuleResult
 	end
 	local UseResult5 = ReactModule.useCallback(function()
-		-- upvalues: UseDictationResult (copy), DictationState (upval), UseRefResult (copy), StopDictationFunction (copy), UseDictationTelemetryModuleResult (copy), UseSignalStateResult1 (ref), DictationAnalyticsModule (upval), FFlagExpChatDictationFTUXModule (upval), UseDictationFTUXModuleResult (copy), UseRefResult3 (copy), StartDictationFunction (copy)
+		-- upvalues: UseDictationResult (copy), DictationState (upval), UseRefResult (copy), StopDictationFunction (copy), UseDictationTelemetryModuleResult (copy), UseSignalStateResult1 (ref), DictationAnalyticsModule (upval), FFlagExpChatDictationFTUXModule (upval), UseDictationFTUXModuleResult (copy), UseRefResult3 (copy), StartDictationFunction (ref)
 		if UseDictationResult.getDictationState(false) == DictationState.Recording then
 			UseRefResult.current = true
 			StopDictationFunction()
@@ -432,7 +446,7 @@ return function(p1)
 		UseRefResult3, UseDictationTelemetryModuleResult.logMicClick
 	})
 	local UseResult6 = ReactModule.useCallback(function()
-		-- upvalues: UseDictationResult (copy), DictationState (upval), UseDictationTelemetryModuleResult (copy), DictationModeModule (upval), DictationAnalyticsModule (upval), FFlagExpChatDictationFTUXModule (upval), UseDictationFTUXModuleResult (copy), StartDictationFunction (copy)
+		-- upvalues: UseDictationResult (copy), DictationState (upval), UseDictationTelemetryModuleResult (copy), DictationModeModule (upval), DictationAnalyticsModule (upval), FFlagExpChatDictationFTUXModule (upval), UseDictationFTUXModuleResult (copy), StartDictationFunction (ref)
 		if UseDictationResult.getDictationState(false) == DictationState.Idle then
 			UseDictationTelemetryModuleResult.logMicClick(DictationModeModule.Continuous, DictationAnalyticsModule.EntryPoints.LongPress)
 			
