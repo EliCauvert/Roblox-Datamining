@@ -4096,6 +4096,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,{experienceName}에 대한 알�
 Feature.GameJoin.Description.DifferentServer,다른 서버에서 시작하게 됩니다
 Feature.GameJoin.Label.PlayTogether,함께 플레이하실 수 있습니다
 Feature.GameJoin.Label.PlayTogetherSoon,곧 함께 플레이하실 수 있습니다
+Feature.GameJoin.Label.RecentCoplay,최근에 함께 플레이했습니다
 Feature.GamePage.Action.BackToTop,맨 위로 돌아가기
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,

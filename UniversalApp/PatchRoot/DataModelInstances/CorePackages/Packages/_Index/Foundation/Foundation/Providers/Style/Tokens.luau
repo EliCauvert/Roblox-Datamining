@@ -36,6 +36,7 @@ local function buildTokens(Callback, ScaledClampedValue, p2)
 	-- upvalues: applyTokenOverrides (copy), FlagsModule (copy), DeprecatedTokenUtilitiesModule (copy)
 	local CallbackResult = Callback(ScaledClampedValue)
 	local config = {
+		Assets = CallbackResult.Assets,
 		Color = CallbackResult.Color,
 		Config = CallbackResult.Config,
 		DarkMode = CallbackResult.DarkMode,

@@ -2660,6 +2660,8 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,Alle games
 Feature.Build.Label.AmountAvailable,{AMOUNT} beschikbaar
+Feature.Build.Label.AttachmentCountPlural,{count} bijlagen
+Feature.Build.Label.AttachmentCountSingular,1 bijlage
 Feature.Build.Label.Autosaved,Automatisch opgeslagen
 Feature.Build.Label.Available,beschikbaar
 Feature.Build.Label.AvailableForPurchase,Beschikbaar om te kopen
@@ -2703,6 +2705,7 @@ Feature.Build.Label.IconThumbnails,Pictogram en miniaturen
 Feature.Build.Label.Images2D,2D-afbeeldingen
 Feature.Build.Label.InProgress,In uitvoering
 Feature.Build.Label.InputNeeded,Input vereist
+Feature.Build.Label.InspirationTab,Inspiratie
 Feature.Build.Label.InternalSpec,Interne specificatie
 Feature.Build.Label.InternalTesting,Intern testen
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -3570,11 +3573,29 @@ Feature.Chat.RobloxConnectUnavailableWithUser,Op dit moment is Roblox Connect ni
 Feature.Chat.Text.NoFriends,Je hebt nog geen vrienden toegevoegd. Zoek en voeg je vrienden toe op Roblox om te beginnen.
 Feature.Chat.Title.NewChat,Nieuwe chat
 Feature.Chat.Toast.Error.InvalidUserSelected,Een of meerdere mensen in deze lijst kunnen niet worden toegevoegd
+Feature.CloudClient.Action.JoinWithoutCloudPlay,Deelnemen zonder Cloud Play
 Feature.CloudClient.Action.PlayWithoutCloudPlay,Spelen zonder Cloud Play
-Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play voert de game uit op de computers van Roblox, waardoor deze mogelijk sneller laadt en minder vaak crasht. Het duurt maar zolang je deze game speelt."
+Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play voert de game uit op de computers van Roblox, waardoor het mogelijk sneller laadt en minder vaak crasht. Het werkt alleen zolang je deze game speelt."
+Feature.CloudClient.Description.CloudPlayStopped,Neem opnieuw deel aan de game om verder te spelen zonder Cloud Play.
+Feature.CloudClient.Description.RobloxRealityPreview,Restyle is een vroege preview. Dingen kunnen er anders uitzien dan in de originele game.
+Feature.CloudClient.Description.RobloxRealityThanks,Bedankt dat je het als een van de eersten hebt uitgeprobeerd.
 Feature.CloudClient.Heading.CloudPlayOffer,Spelen met Cloud Play
-Feature.CloudClient.Label.RobloxRealityGraphics,"Je game, in een nieuw jasje"
+Feature.CloudClient.Heading.CloudPlayStopped,Cloud Play werkt niet meer
+Feature.CloudClient.Heading.RobloxRealityFailed,Er is iets misgegaan met Restyle
+Feature.CloudClient.Heading.RobloxRealityTimeEnded,Je tijd in Restyle is voorbij
+Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Vastleggen is nog niet beschikbaar in Cloud Play.
+Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Vastleggen is nog niet beschikbaar met Restyle.
+Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Play werkt niet. Je speelt op de normale manier.
+Feature.CloudClient.Label.RobloxReality,Restyle
+Feature.CloudClient.Label.RobloxRealityDemoLength,Probeer een demo van {minutes} minuten
+Feature.CloudClient.Label.RobloxRealityEndingSoon,"Restyle eindigt over 1 minuut, waarna je de game verlaat."
+Feature.CloudClient.Label.RobloxRealityGraphics,Jouw game in een nieuw jasje
 Feature.CloudClient.Label.RobloxRealityPlusOnly,Alleen voor Plus-abonnees
+Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,Zelfweergave is nog niet beschikbaar in Cloud Play.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,Zelfweergave is nog niet beschikbaar met Restyle.
+Feature.CloudClient.Label.StillWeakConnection,Je verbinding is nog steeds zwak.
+Feature.CloudClient.Label.TimeLeft,
+Feature.CloudClient.Label.WeakConnection,Zwakke verbinding.
 Feature.CommunityLinks.Description.CommunityDefault,Word lid van de officiële Guilded-community voor {experienceName} om aankondigingen en meer te bekijken!
 Feature.CommunityLinks.Heading.CommunityTitle,Lid worden van de community
 Feature.CommunityLinks.Label.ViewButton,
@@ -4076,6 +4097,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Meldingen ingeschakeld voor {ex
 Feature.GameJoin.Description.DifferentServer,Je begint op een andere server
 Feature.GameJoin.Label.PlayTogether,Jullie kunnen samen spelen
 Feature.GameJoin.Label.PlayTogetherSoon,Jullie kunnen binnenkort samen spelen
+Feature.GameJoin.Label.RecentCoplay,Jullie hebben onlangs samen gespeeld
 Feature.GamePage.Action.BackToTop,Terug naar boven
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
@@ -5727,6 +5749,7 @@ Feature.Toast.Username.Copied,Gebruikersnaam gekopieerd naar klembord.
 Feature.Toast.VoteError.AssetNotVoteable,Er mag niet op de ervaring worden gestemd.
 Feature.Toast.VoteError.Default,Actie niet beschikbaar.
 Feature.Toast.VoteError.FloodCheckThresholdMet,Je stemt te snel.
+Feature.Toast.VoteError.NotSaved,Stem is niet opgeslagen
 Feature.Toast.VoteError.PlayGame,Je moet deze ervaring bezoeken voordat je deze kunt beoordelen.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,Je kunt je leeftijd nu niet controleren omdat je herhaaldelijk onze Communityrichtlijnen hebt overtreden. Je kunt het opnieuw proberen nadat de beperking is afgelopen.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,Leeftijdscontroles opgeschort
