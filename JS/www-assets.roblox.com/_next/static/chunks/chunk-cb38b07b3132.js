@@ -3,15 +3,15 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "39117745-2f0f-daa9-89e4-52c6e47a868d")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "5e91d9b0-a6f6-a7de-ef2f-1c8bf768f012")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 603134, e => {
     "use strict";
     var t = e.i(809804),
         n = e.i(865581),
-        r = e.i(432464),
-        a = e.i(910030),
+        a = e.i(432464),
+        r = e.i(910030),
         i = e.i(391855),
         l = e.i(981498);
     let s = (0, n.default)(() => e.A(599449).then(e => ((0, l.trackAppShellCounter)("ChatLoad", {
@@ -27,7 +27,7 @@
             ssr: !1,
             loading: () => null
         }),
-        o = new a.QueryClient({
+        o = new r.QueryClient({
             defaultOptions: {
                 queries: {
                     retry: !1,
@@ -41,7 +41,7 @@
         let {
             showPlayButton: n
         } = e;
-        return (0, t.jsx)(r.ErrorBoundary, {
+        return (0, t.jsx)(a.ErrorBoundary, {
             onError: () => {
                 (0, l.trackAppShellCounter)("ChatLoad", {
                     outcome: "crashed"
@@ -89,36 +89,36 @@
     "use strict";
     var t = e.i(646424),
         n = e.i(519003),
-        r = e.i(686790);
+        a = e.i(686790);
     e.i(350223);
-    var a = e.i(874296);
-    let i = a.object({
-            cookieName: a.string(),
-            description: a.catch(a.literal([null, "Description.RBXIDCHECK", "Description.ROBLOSECURITY", "Description.GuestData", "Description.RBXEventTrackerV2", "Description.RBXImageCache", "Description.RBXcp", "Description._cfduid", "Description.HelpCenterSession", "Description.IclVisitorLangJs", "Description.HasGmid", "Description.RbxIp2", "Description.WpmlBrowserRedirectTest", "Description.CookieT", "Description.RBXViralAcquisition", "Description.RBXSource"]), null)
+    var r = e.i(874296);
+    let i = r.object({
+            cookieName: r.string(),
+            description: r.catch(r.literal([null, "Description.RBXIDCHECK", "Description.ROBLOSECURITY", "Description.GuestData", "Description.RBXEventTrackerV2", "Description.RBXImageCache", "Description.RBXcp", "Description._cfduid", "Description.HelpCenterSession", "Description.IclVisitorLangJs", "Description.HasGmid", "Description.RbxIp2", "Description.WpmlBrowserRedirectTest", "Description.CookieT", "Description.RBXViralAcquisition", "Description.RBXSource"]), null)
         }),
-        l = a.object({
-            ShouldDisplayCookieBannerV3: a.boolean(),
-            NonEssentialCookieList: a.array(a.string()),
-            EssentialCookieList: a.array(i),
-            RestrictNonEssentialTrackingConsent: a.catch(a.optional(a.boolean()), void 0)
+        l = r.object({
+            ShouldDisplayCookieBannerV3: r.boolean(),
+            NonEssentialCookieList: r.array(r.string()),
+            EssentialCookieList: r.array(i),
+            RestrictNonEssentialTrackingConsent: r.catch(r.optional(r.boolean()), void 0)
         });
     e.s(["getCookiePolicy", 0, () => t.get((0, n.getPageBaseUrls)().apiGateway.withPath("/guac-v2/v1/bundles/cookie-policy"), l, {
         credentials: "include"
     }).inspect(e => {
-        (0, r.setTrackingRestriction)(e.RestrictNonEssentialTrackingConsent)
+        (0, a.setTrackingRestriction)(e.RestrictNonEssentialTrackingConsent)
     })], 336716)
 }, 809094, e => {
     "use strict";
     var t = e.i(809804),
         n = e.i(371847),
-        r = e.i(708923),
-        a = e.i(545819),
+        a = e.i(708923),
+        r = e.i(545819),
         i = e.i(784859),
         l = e.i(336716),
         s = e.i(686790),
         o = e.i(865581),
-        u = e.i(69134),
-        c = e.i(801827),
+        c = e.i(69134),
+        u = e.i(801827),
         d = e.i(536982),
         m = e.i(690255);
     let p = (0, o.default)(() => e.A(31611), {
@@ -128,16 +128,16 @@
         }),
         g = "{privacyPolicyLink}";
 
-    function f(e) {
+    function h(e) {
         let {
-            cookiePolicy: r,
-            onClose: a
+            cookiePolicy: a,
+            onClose: r
         } = e, [i, l] = (0, n.useState)(!1), {
             wwwRoblox: o
-        } = (0, d.usePageBaseUrls)(), f = (0, c.useTranslations)("Feature.Tracking"), h = (0, c.useTranslations)("CommonUI.Controls"), v = f("Description.CookieBannerContent", {
+        } = (0, d.usePageBaseUrls)(), h = (0, u.useTranslations)("Feature.Tracking"), f = (0, u.useTranslations)("CommonUI.Controls"), b = h("Description.CookieBannerContent", {
             privacyPolicyLink: g
-        }), I = v.indexOf(g), y = e => {
-            (0, s.setUserConsent)(e, r.NonEssentialCookieList), a()
+        }), v = b.indexOf(g), A = e => {
+            (0, s.setUserConsent)(e, a.NonEssentialCookieList), r()
         };
         return (0, t.jsxs)("div", {
             className: "sticky bottom-[0] [z-index:1] bg-surface-100",
@@ -145,42 +145,42 @@
                 className: "flex flex-col gap-small padding-large",
                 children: [(0, t.jsxs)("p", {
                     className: "text-body-medium content-default",
-                    children: [v.substring(0, I), (0, t.jsx)(m.Link, {
+                    children: [b.substring(0, v), (0, t.jsx)(m.Link, {
                         href: o.withPath("/info/privacy"),
                         target: "_blank",
                         rel: "noreferrer",
                         className: "content-link",
-                        children: f("Description.PrivacyPolicy")
-                    }), v.substring(I + g.length)]
+                        children: h("Description.PrivacyPolicy")
+                    }), b.substring(v + g.length)]
                 }), (0, t.jsxs)("div", {
                     className: "flex justify-between",
-                    children: [(0, t.jsx)(u.Button, {
+                    children: [(0, t.jsx)(c.Button, {
                         variant: "Link",
                         onClick: () => {
                             l(!0)
                         },
-                        children: f("Action.SetCookieOptions")
+                        children: h("Action.SetCookieOptions")
                     }), (0, t.jsxs)("div", {
                         className: "flex gap-large",
-                        children: [(0, t.jsx)(u.Button, {
+                        children: [(0, t.jsx)(c.Button, {
                             variant: "Standard",
                             onClick: () => {
-                                y([])
+                                A([])
                             },
-                            children: h("Action.DeclineAll")
-                        }), (0, t.jsx)(u.Button, {
+                            children: f("Action.DeclineAll")
+                        }), (0, t.jsx)(c.Button, {
                             variant: "Emphasis",
                             onClick: () => {
-                                y(r.NonEssentialCookieList)
+                                A(a.NonEssentialCookieList)
                             },
-                            children: h("Action.AcceptAll")
+                            children: f("Action.AcceptAll")
                         })]
                     })]
                 })]
             }), i ? (0, t.jsx)(p, {
-                cookiePolicy: r,
+                cookiePolicy: a,
                 onSubmit: () => {
-                    a()
+                    r()
                 },
                 onClose: () => {
                     l(!1)
@@ -189,24 +189,24 @@
         })
     }
     e.s(["default", 0, function() {
-        let e = (0, n.useRef)(() => i.isClient ? a.get("RBXcb") : null),
+        let e = (0, n.useRef)(() => i.isClient ? r.get("RBXcb") : null),
             o = !!e.current()?.value,
             {
-                data: u,
-                isLoading: c
-            } = (0, r.useQuery)({
+                data: c,
+                isLoading: u
+            } = (0, a.useQuery)({
                 queryKey: ["cookie-policy"],
                 queryFn: () => (0, l.getCookiePolicy)().getOrThrow(),
                 enabled: !o,
                 staleTime: 1 / 0
             }),
             [d, m] = (0, n.useState)(!1),
-            p = u?.ShouldDisplayCookieBannerV3 && u.EssentialCookieList.length > 0,
-            g = !o && !c && !p;
+            p = c?.ShouldDisplayCookieBannerV3 && c.EssentialCookieList.length > 0,
+            g = !o && !u && !p;
         return (0, n.useEffect)(() => {
-            g && null != u && (0, s.setUserConsent)(u.NonEssentialCookieList, u.NonEssentialCookieList)
-        }, [g, u]), o || !p || d ? null : (0, t.jsx)(f, {
-            cookiePolicy: u,
+            g && null != c && (0, s.setUserConsent)(c.NonEssentialCookieList, c.NonEssentialCookieList)
+        }, [g, c]), o || !p || d ? null : (0, t.jsx)(h, {
+            cookiePolicy: c,
             onClose: () => {
                 m(!0)
             }
@@ -216,14 +216,14 @@
     "use strict";
     var t = e.i(809804),
         n = e.i(371847),
-        r = e.i(69134),
-        a = e.i(341950),
+        a = e.i(69134),
+        r = e.i(341950),
         i = e.i(219617),
         l = e.i(7312),
         s = e.i(959491),
         o = e.i(424333),
-        u = e.i(655010),
-        c = e.i(468396),
+        c = e.i(655010),
+        u = e.i(468396),
         d = e.i(7284);
     let m = {
             XSmall: "padding-x-small",
@@ -243,132 +243,132 @@
             Medium: "height-1000",
             Large: "height-1200"
         },
-        f = {
+        h = {
             XSmall: "radius-small",
             Small: "radius-medium",
             Medium: "radius-medium",
             Large: "radius-medium"
         },
-        h = {
+        f = {
             XSmall: "text-title-small",
             Small: "text-title-small",
             Medium: "text-title-medium",
             Large: "text-title-large"
         },
-        v = {
+        b = {
             XSmall: ["text-body-small", "placeholder:text-body-small"],
             Small: ["text-body-small", "placeholder:text-body-small"],
             Medium: ["text-body-medium", "placeholder:text-body-medium"],
             Large: ["text-body-large", "placeholder:text-body-large"]
         },
-        I = (0, n.forwardRef)((e, t) => {
+        v = (0, n.forwardRef)((e, t) => {
             let {
-                label: r,
-                labelTooltip: a,
+                label: a,
+                labelTooltip: r,
                 leadingIconName: i,
-                trailingIconName: I,
-                leadingIconNode: y,
-                trailingIconNode: b,
-                hasError: A,
+                trailingIconName: v,
+                leadingIconNode: A,
+                trailingIconNode: y,
+                hasError: I,
                 error: E,
                 helperText: C,
                 size: w,
-                variant: T = "Standard",
-                isRequired: S,
-                isDisabled: P,
-                className: x,
-                style: _,
-                inputContainerClassName: N,
-                inputContainerClassStyle: L,
-                id: R,
-                ...D
-            } = e, k = (0, o.default)(), F = R || k, B = `${F}-description`, j = w ?? "Large", O = A || !!E, U = E || C, V = (0, n.useMemo)(() => i ? n.default.createElement(s.Icon, {
+                variant: S = "Standard",
+                isRequired: N,
+                isDisabled: x,
+                className: V,
+                style: T,
+                inputContainerClassName: Z,
+                inputContainerClassStyle: R,
+                id: L,
+                ...P
+            } = e, F = (0, o.default)(), B = L || F, k = `${B}-description`, X = w ?? "Large", _ = I || !!E, G = E || C, D = (0, n.useMemo)(() => i ? n.default.createElement(s.Icon, {
                 name: i,
-                size: j,
+                size: X,
                 className: "content-emphasis",
                 "data-testid": "text-input-leading-icon"
-            }) : y, [i, y, j]), G = (0, n.useMemo)(() => I ? n.default.createElement(s.Icon, {
-                name: I,
-                size: j,
+            }) : A, [i, A, X]), W = (0, n.useMemo)(() => v ? n.default.createElement(s.Icon, {
+                name: v,
+                size: X,
                 className: "content-emphasis",
                 "data-testid": "text-input-trailing-icon"
-            }) : b, [j, I, b]), M = r ? n.default.createElement("label", {
-                htmlFor: F,
-                className: (0, d.default)(h[j], "content-emphasis")
-            }, r, S && n.default.createElement(n.default.Fragment, null, " ", n.default.createElement("span", {
+            }) : y, [X, v, y]), U = a ? n.default.createElement("label", {
+                htmlFor: B,
+                className: (0, d.default)(f[X], "content-emphasis")
+            }, a, N && n.default.createElement(n.default.Fragment, null, " ", n.default.createElement("span", {
                 className: "content-default"
             }, "*"))) : null;
             return n.default.createElement("div", {
                 "data-testid": "text-input-wrapper",
-                className: (0, d.default)(`flex width-full flex-col gap-small ${x}`, {
-                    [l.disabledOpacity]: P
+                className: (0, d.default)(`flex width-full flex-col gap-small ${V}`, {
+                    [l.disabledOpacity]: x
                 }),
-                style: _
-            }, M && (a ? n.default.createElement("div", {
+                style: T
+            }, U && (r ? n.default.createElement("div", {
                 className: "flex items-center gap-xsmall"
-            }, M, n.default.createElement(u.LabelTooltip, a)) : M), n.default.createElement("div", {
+            }, U, n.default.createElement(c.LabelTooltip, r)) : U), n.default.createElement("div", {
                 "data-testid": "text-input-container",
-                className: (0, d.default)("foundation-web-input flex items-center width-full", c.INPUT_STROKE_BY_VARIANT[T], c.INPUT_BACKGROUND_BY_VARIANT[T], N, g[j], f[j], m[j], p[j], O ? "stroke-system-alert focus-within:stroke-system-alert" : "stroke-contrast-alpha focus-within:stroke-system-emphasis"),
-                style: L
-            }, V, n.default.createElement("input", {
+                className: (0, d.default)("foundation-web-input flex items-center width-full", u.INPUT_STROKE_BY_VARIANT[S], u.INPUT_BACKGROUND_BY_VARIANT[S], Z, g[X], h[X], m[X], p[X], _ ? "stroke-system-alert focus-within:stroke-system-alert" : "stroke-contrast-alpha focus-within:stroke-system-emphasis"),
+                style: R
+            }, D, n.default.createElement("input", {
                 type: "text",
-                id: F,
+                id: B,
                 ref: t,
-                className: (0, d.default)("width-full padding-none bg-none stroke-none outline-none content-emphasis placeholder:content-muted", v[j]),
+                className: (0, d.default)("width-full padding-none bg-none stroke-none outline-none content-emphasis placeholder:content-muted", b[X]),
                 style: {
                     appearance: "none"
                 },
-                "aria-invalid": O,
-                "aria-describedby": U ? B : void 0,
-                required: S,
-                ...D,
-                disabled: P
-            }), G), U && n.default.createElement("span", {
-                id: B,
+                "aria-invalid": _,
+                "aria-describedby": G ? k : void 0,
+                required: N,
+                ...P,
+                disabled: x
+            }), W), G && n.default.createElement("span", {
+                id: k,
                 className: (0, d.default)("text-caption-small", {
-                    "content-system-alert": O,
-                    "content-default": !O
+                    "content-system-alert": _,
+                    "content-default": !_
                 })
-            }, U))
+            }, G))
         });
-    I.displayName = "TextInput";
-    let y = "configurewebapps:overrideschanged",
-        b = e => {
+    v.displayName = "TextInput";
+    let A = "configurewebapps:overrideschanged",
+        y = e => {
             let {
                 fields: l
-            } = e, s = (0, n.useCallback)(() => l.map(e => e.read()), [l]), [o, u] = (0, n.useState)(s), [c, d] = (0, n.useState)(o), [m, p] = (0, n.useState)(!1), g = o.some(e => "" !== e), f = (0, n.useRef)(o);
-            f.current = o;
-            let h = (0, n.useCallback)(() => {
+            } = e, s = (0, n.useCallback)(() => l.map(e => e.read()), [l]), [o, c] = (0, n.useState)(s), [u, d] = (0, n.useState)(o), [m, p] = (0, n.useState)(!1), g = o.some(e => "" !== e), h = (0, n.useRef)(o);
+            h.current = o;
+            let f = (0, n.useCallback)(() => {
                 let e = s(),
-                    t = f.current;
-                e.every((e, n) => e === t[n]) || (d(n => n.map((n, r) => n === t[r] ? e[r] ?? "" : n)), u(e), p(!0))
+                    t = h.current;
+                e.every((e, n) => e === t[n]) || (d(n => n.map((n, a) => n === t[a] ? e[a] ?? "" : n)), c(e), p(!0))
             }, [s]);
-            (0, n.useEffect)(() => (window.addEventListener(y, h), () => {
-                window.removeEventListener(y, h)
-            }), [h]);
-            let v = (e, t) => {
+            (0, n.useEffect)(() => (window.addEventListener(A, f), () => {
+                window.removeEventListener(A, f)
+            }), [f]);
+            let b = (e, t) => {
                     let n = l[e];
                     if (null == n) return;
                     n.write(t), p(!0);
-                    let r = n.read(),
-                        a = t => t.map((t, n) => n === e ? r : t);
-                    u(a), d(a)
+                    let a = n.read(),
+                        r = t => t.map((t, n) => n === e ? a : t);
+                    c(r), d(r)
                 },
-                b = l.map((e, t) => m || !o[t] ? null : e.warning?.(o[t]) ?? null),
-                A = l.map((e, t) => o[t] ? `${e.summaryLabel}: ${o[t]}${b[t]?" (not served)":""}` : "").filter(Boolean).join(" · ");
+                y = l.map((e, t) => m || !o[t] ? null : e.warning?.(o[t]) ?? null),
+                I = l.map((e, t) => o[t] ? `${e.summaryLabel}: ${o[t]}${y[t]?" (not served)":""}` : "").filter(Boolean).join(" · ");
             return (0, t.jsx)("div", {
                 className: "env-overrides-overlay flex bg-surface-100 radius-medium",
                 children: (0, t.jsxs)(i.Popover, {
                     onOpenChange: e => {
-                        e && h()
+                        e && f()
                     },
                     children: [(0, t.jsx)(i.PopoverTrigger, {
                         asChild: !0,
-                        children: (0, t.jsx)(r.Button, {
+                        children: (0, t.jsx)(a.Button, {
                             size: "Small",
                             variant: g ? "Alert" : "Standard",
                             icon: g ? "icon-filled-triangle-exclamation" : "icon-regular-gear",
-                            children: g ? A : "env"
+                            children: g ? I : "env"
                         })
                     }), (0, t.jsxs)(i.PopoverContent, {
                         side: "top",
@@ -382,7 +382,7 @@
                                 children: "Environment overrides"
                             }), (0, t.jsx)(i.PopoverClose, {
                                 asChild: !0,
-                                children: (0, t.jsx)(a.IconButton, {
+                                children: (0, t.jsx)(r.IconButton, {
                                     icon: "icon-regular-x",
                                     ariaLabel: "Close",
                                     size: "Small",
@@ -391,41 +391,41 @@
                             })]
                         }), l.map((e, n) => (0, t.jsxs)("div", {
                             className: "flex flex-col gap-xsmall",
-                            children: [(0, t.jsx)(I, {
+                            children: [(0, t.jsx)(v, {
                                 label: e.label,
                                 helperText: `current: ${""===o[n]?e.emptyText:o[n]??""}`,
                                 size: "Small",
                                 placeholder: e.placeholder,
-                                value: c[n] ?? "",
+                                value: u[n] ?? "",
                                 onChange: e => {
                                     let {
                                         value: t
                                     } = e.target;
-                                    d(e => e.map((e, r) => r === n ? t : e))
+                                    d(e => e.map((e, a) => a === n ? t : e))
                                 }
-                            }), b[n] && (0, t.jsx)("span", {
+                            }), y[n] && (0, t.jsx)("span", {
                                 role: "alert",
                                 className: "text-caption-medium content-system-alert",
-                                children: b[n]
+                                children: y[n]
                             }), (0, t.jsxs)("div", {
                                 className: "flex gap-small",
-                                children: [(0, t.jsx)(r.Button, {
+                                children: [(0, t.jsx)(a.Button, {
                                     size: "Small",
                                     variant: "Emphasis",
                                     onClick: () => {
-                                        v(n, c[n] ?? "")
+                                        b(n, u[n] ?? "")
                                     },
                                     children: "Set"
-                                }), (0, t.jsx)(r.Button, {
+                                }), (0, t.jsx)(a.Button, {
                                     size: "Small",
                                     variant: "Standard",
                                     onClick: () => {
-                                        v(n, "")
+                                        b(n, "")
                                     },
                                     children: "Clear"
                                 })]
                             })]
-                        }, e.label)), m && (0, t.jsx)(r.Button, {
+                        }, e.label)), m && (0, t.jsx)(a.Button, {
                             className: "width-full",
                             size: "Small",
                             variant: "Alert",
@@ -438,49 +438,49 @@
                 })
             })
         };
-    var A = e.i(357355),
+    var I = e.i(357355),
         E = e.i(586588),
         C = e.i(940311);
     let w = "mrrouter-env",
-        T = /^(\d+)-/,
-        S = /@(\d+)-/,
-        P = {
+        S = /^(\d+)-/,
+        N = /@(\d+)-/,
+        x = {
             label: "MrRouter env",
             summaryLabel: "env",
             placeholder: "e.g. 19563-website-ne",
             emptyText: "default routing",
             read: C.getMrRouterEnvName,
             write: e => {
-                (0, C.setMrRouterEnvName)(e), window.dispatchEvent(new Event(y))
+                (0, C.setMrRouterEnvName)(e), window.dispatchEvent(new Event(A))
             },
             warning: e => {
-                let t = T.exec(e)?.[1],
-                    n = A.document?.getElementById("rbx-sentry-config")?.dataset.release;
-                return null == t || null == n || "" === n || S.exec(n)?.[1] === t ? null : `This page came from ${n}, not ${e}. The env may be missing, expired, or still deploying.`
+                let t = S.exec(e)?.[1],
+                    n = I.document?.getElementById("rbx-sentry-config")?.dataset.release;
+                return null == t || null == n || "" === n || N.exec(n)?.[1] === t ? null : `This page came from ${n}, not ${e}. The env may be missing, expired, or still deploying.`
             }
         },
-        x = [P];
+        V = [x];
     e.s(["default", 0, function() {
-        let [e, r] = (0, n.useState)(!1);
+        let [e, a] = (0, n.useState)(!1);
         return (0, n.useEffect)(() => {
             var e;
-            let t, n, a;
-            (null == (a = null == A.window ? null : (e = A.window.location.href, t = E.AnyUrl.parse(e).getOrNull(), n = t?.searchParams.get(w), null == t || null == n ? null : ((0, C.setMrRouterEnvName)(n.trim()), t.withSearchParams(t.searchParams.copyAndDelete(w)).toString()))) || (A.window?.location.replace(a), 0)) && (window.MrRouter = {
+            let t, n, r;
+            (null == (r = null == I.window ? null : (e = I.window.location.href, t = E.AnyUrl.parse(e).getOrNull(), n = t?.searchParams.get(w), null == t || null == n ? null : ((0, C.setMrRouterEnvName)(n.trim()), t.withSearchParams(t.searchParams.copyAndDelete(w)).toString()))) || (I.window?.location.replace(r), 0)) && (window.MrRouter = {
                 getEnvName: C.getMrRouterEnvName,
                 setEnvName: e => {
-                    P.write(e ?? "")
+                    x.write(e ?? "")
                 }
-            }, r(!("Cypress" in window)))
-        }, []), e ? (0, t.jsx)(b, {
-            fields: x
+            }, a(!("Cypress" in window)))
+        }, []), e ? (0, t.jsx)(y, {
+            fields: V
         }) : null
     }], 963157)
 }, 310119, e => {
     "use strict";
     var t = e.i(809804),
         n = e.i(708923),
-        r = e.i(371847);
-    let a = (0, e.i(865581).default)(() => e.A(389897), {
+        a = e.i(371847);
+    let r = (0, e.i(865581).default)(() => e.A(389897), {
         loadableGenerated: {
             modules: [63400]
         }
@@ -490,7 +490,7 @@
         let {
             userId: n,
             children: i
-        } = e, [l, s] = (0, r.useState)(!1);
+        } = e, [l, s] = (0, a.useState)(!1);
         return (0, t.jsxs)(t.Fragment, {
             children: [(0, t.jsx)("button", {
                 type: "button",
@@ -499,7 +499,7 @@
                     s(!0)
                 },
                 children: i
-            }), l && (0, t.jsx)(a, {
+            }), l && (0, t.jsx)(r, {
                 userId: n,
                 onClose: () => {
                     s(!1)
@@ -510,8 +510,8 @@
     var l = e.i(536982),
         s = e.i(690255),
         o = e.i(931243),
-        u = e.i(801827);
-    let c = {
+        c = e.i(801827);
+    let u = {
         src: e.i(407175).default,
         width: 60,
         height: 29,
@@ -521,10 +521,10 @@
     };
 
     function d() {
-        let e = (0, u.useTranslations)("CommonUI.Features");
+        let e = (0, c.useTranslations)("CommonUI.Features");
         return (0, t.jsxs)(t.Fragment, {
             children: [e("Label.YourPrivacyChoices"), (0, t.jsx)(o.default, {
-                src: c,
+                src: u,
                 alt: "",
                 className: "width-800"
             })]
@@ -546,17 +546,17 @@
     var p = e.i(233971);
     e.s(["default", 0, function(e) {
         let {
-            userId: r
+            userId: a
         } = e, {
-            data: a
+            data: r
         } = (0, n.useQuery)({
             queryKey: ["isYourPrivacyChoicesModalEnabled"],
             queryFn: () => (0, p.getIsYourPrivacyChoicesModalEnabled)().getOrThrow(),
             placeholderData: !1,
             staleTime: 1 / 0
         });
-        return a ? (0, t.jsx)(i, {
-            userId: r,
+        return r ? (0, t.jsx)(i, {
+            userId: a,
             children: (0, t.jsx)(d, {})
         }) : (0, t.jsx)(m, {})
     }], 310119)
@@ -564,11 +564,11 @@
     "use strict";
     var t = e.i(809804),
         n = e.i(371847),
-        r = e.i(865581),
-        a = e.i(708923),
+        a = e.i(865581),
+        r = e.i(708923),
         i = e.i(801827),
         l = e.i(336716);
-    let s = (0, r.default)(() => e.A(31611), {
+    let s = (0, a.default)(() => e.A(31611), {
         loadableGenerated: {
             modules: [358424]
         }
@@ -576,28 +576,28 @@
     e.s(["default", 0, function() {
         let e = (0, i.useTranslations)("Feature.Tracking"),
             {
-                data: r
-            } = (0, a.useQuery)({
+                data: a
+            } = (0, r.useQuery)({
                 queryKey: ["cookie-policy"],
                 queryFn: () => (0, l.getCookiePolicy)().getOrThrow(),
                 staleTime: 1 / 0
             }),
-            [o, u] = (0, n.useState)(!1),
-            c = () => {
-                u(!1)
+            [o, c] = (0, n.useState)(!1),
+            u = () => {
+                c(!1)
             };
-        return null != r && r.EssentialCookieList.length > 0 ? (0, t.jsxs)(t.Fragment, {
+        return null != a && a.EssentialCookieList.length > 0 ? (0, t.jsxs)(t.Fragment, {
             children: [(0, t.jsx)("button", {
                 type: "button",
                 onClick: () => {
-                    u(!0)
+                    c(!0)
                 },
                 className: "hover:content-emphasis",
                 children: e("Heading.CookieSettings")
             }), o ? (0, t.jsx)(s, {
-                cookiePolicy: r,
-                onSubmit: c,
-                onClose: c
+                cookiePolicy: a,
+                onSubmit: u,
+                onClose: u
             }) : null]
         }) : null
     }])
@@ -605,8 +605,8 @@
     "use strict";
     var t = e.i(809804),
         n = e.i(865581),
-        r = e.i(931070);
-    let a = e => e.toLowerCase().replace(/\/+$/u, "") || "/",
+        a = e.i(931070);
+    let r = e => e.toLowerCase().replace(/\/+$/u, "") || "/",
         i = new Set(["/", "/createaccount"]),
         l = new Set(["/", "/createaccount", "/giftcards"]),
         s = (0, n.default)(() => e.A(339834), {
@@ -618,10 +618,10 @@
         let {
             userId: n,
             variant: o
-        } = e, u = (0, r.usePath)();
-        return null != n || l.has(a(u)) ? (0, t.jsx)(s, {
+        } = e, c = (0, a.usePath)();
+        return null != n || l.has(r(c)) ? (0, t.jsx)(s, {
             userId: n,
-            isSignUpOrLandingPage: i.has(a(u)),
+            isSignUpOrLandingPage: i.has(r(c)),
             variant: o
         }) : null
     }], 547434)
@@ -629,8 +629,8 @@
     "use strict";
     var t = e.i(809804),
         n = e.i(865581),
-        r = e.i(371847),
-        a = e.i(652447),
+        a = e.i(371847),
+        r = e.i(652447),
         i = e.i(736536),
         l = e.i(145420);
     let s = (0, n.default)(() => e.A(802269), {
@@ -642,87 +642,87 @@
         {
             ModalEvent: o
         } = i.default,
-        u = e => {
+        c = e => {
             e()
         },
-        c = !1,
+        u = !1,
         d = {
             mount: () => {
-                c = !0, u(() => i.default.mountSearchLanding())
+                u = !0, c(() => i.default.mountSearchLanding())
             },
             show: e => {
-                u(() => i.default.showSearchLanding(e))
+                c(() => i.default.showSearchLanding(e))
             },
             updateSessionInfo: e => {
-                u(() => i.default.updateSessionInfo(e))
+                c(() => i.default.updateSessionInfo(e))
             }
         };
     e.s(["default", 0, function() {
-        let [e, n] = (0, r.useState)(null), i = (0, r.useRef)(!1), u = (0, r.useRef)(null);
-        (0, r.useEffect)(() => {
+        let [e, n] = (0, a.useState)(null), i = (0, a.useRef)(!1), c = (0, a.useRef)(null);
+        (0, a.useEffect)(() => {
             let e = () => {
                     let e = document.getElementById("search-landing-root");
                     null === e ? (0, l.fireEvent)("SearchLandingPageMountError") : n(e)
                 },
                 t = e => {
-                    i.current || (u.current = (e => {
+                    i.current || (c.current = (e => {
                         if (!(e instanceof CustomEvent)) return null;
                         let t = e.detail;
                         return "object" == typeof t && null !== t && "sessionInfo" in t ? String(t.sessionInfo) : null
                     })(e))
                 };
-            return window.addEventListener(o.MountSearchLanding, e), window.addEventListener(o.ShowSearchLanding, t), c && e(), () => {
+            return window.addEventListener(o.MountSearchLanding, e), window.addEventListener(o.ShowSearchLanding, t), u && e(), () => {
                 window.removeEventListener(o.MountSearchLanding, e), window.removeEventListener(o.ShowSearchLanding, t)
             }
         }, []);
-        let m = (0, r.useCallback)(() => {
-            if (i.current = !0, null !== u.current) {
-                let e = u.current;
-                u.current = null, d.show(e)
+        let m = (0, a.useCallback)(() => {
+            if (i.current = !0, null !== c.current) {
+                let e = c.current;
+                c.current = null, d.show(e)
             }
         }, []);
-        return e ? (0, a.createPortal)((0, t.jsx)(s, {
+        return e ? (0, r.createPortal)((0, t.jsx)(s, {
             onReady: m
         }), e) : null
     }, "resetMountRequestForTests", 0, () => {
-        c = !1
+        u = !1
     }, "searchLandingCapability", 0, d])
 }, 776771, e => {
     "use strict";
     let t, n;
-    var r, a, i, l, s, o, u, c, d, m, p, g, f, h, v, I, y, b, A, E = e.i(809804),
+    var a, r, i, l, s, o, c, u, d, m, p, g, h, f, b, v, A, y, I, E = e.i(809804),
         C = e.i(865581),
         w = e.i(371847),
-        T = e.i(285586),
-        S = e.i(708923);
+        S = e.i(285586),
+        N = e.i(708923);
     e.i(350223);
-    var P = e.i(874296),
-        x = e.i(646424),
-        _ = e.i(552566),
-        N = e.i(587541),
-        L = e.i(599965),
-        R = e.i(519003),
-        D = e.i(380952),
-        k = e.i(217827),
-        F = e.i(360702),
-        B = e.i(645020),
-        j = e.i(932598),
-        O = e.i(982249),
-        U = e.i(332210),
-        V = e.i(491965),
-        G = e.i(887524),
-        M = e.i(431545);
-    let $ = (e, t) => ["trustedFriendAction", e, t?.join(",") ?? void 0],
-        X = "RemoveTrustedConnection",
-        K = "AddTrustedConnectionViaLink",
-        W = "AddTrustedFriendDoubleOptin",
-        Q = "AddTrustedFriendWithVpc",
-        Z = "AcceptTrustedFriendViaLinkWithVpcRecipient",
+    var x = e.i(874296),
+        V = e.i(646424),
+        T = e.i(552566),
+        Z = e.i(587541),
+        R = e.i(599965),
+        L = e.i(519003),
+        P = e.i(380952),
+        F = e.i(217827),
+        B = e.i(360702),
+        k = e.i(645020),
+        X = e.i(932598),
+        _ = e.i(982249),
+        G = e.i(332210),
+        D = e.i(491965),
+        W = e.i(887524),
+        U = e.i(431545);
+    let j = (e, t) => ["trustedFriendAction", e, t?.join(",") ?? void 0],
+        Y = "RemoveTrustedConnection",
+        J = "AddTrustedConnectionViaLink",
+        M = "AddTrustedFriendDoubleOptin",
+        O = "AddTrustedFriendWithVpc",
+        z = "AcceptTrustedFriendViaLinkWithVpcRecipient",
         H = "AcceptTrustedFriendWithVpcRecipient",
-        q = "AcceptTrustedFriendViaLink",
-        Y = "AcceptTrustedFriend",
-        J = "PendingTrustedConnection",
-        z = "PendingIncomingTrustedConnection",
+        Q = "AcceptTrustedFriendViaLink",
+        $ = "AcceptTrustedFriend",
+        K = "PendingTrustedConnection",
+        q = "PendingIncomingTrustedConnection",
         ee = {
             connectedOneYear: "Label.ConnectedOneYear",
             connectedNumYears: "Label.ConnectedNumYears",
@@ -747,36 +747,36 @@
         },
         et = "Friends",
         en = "RequestReceived",
-        er = "TrustedFriends",
-        ea = "NotFriends",
+        ea = "TrustedFriends",
+        er = "NotFriends",
         ei = {
-            [X]: er,
-            [K]: ea,
-            [W]: et,
-            [Q]: et,
-            [J]: et,
-            [Z]: en,
+            [Y]: ea,
+            [J]: er,
+            [M]: et,
+            [O]: et,
+            [K]: et,
+            [z]: en,
             [H]: en,
-            [q]: en,
-            [Y]: en,
-            [z]: en
+            [Q]: en,
+            [$]: en,
+            [q]: en
         },
         el = "trustedFriendsOk",
         es = "sendTrustedFriendRequest",
         eo = "acceptTrustedFriend",
-        eu = "acceptTrustedFriendViaLink",
-        ec = "vpcUpsell",
+        ec = "acceptTrustedFriendViaLink",
+        eu = "vpcUpsell",
         ed = "vpcLinkRecipientUpsell",
         em = "noop",
         ep = "addViaLinkEmpty",
         eg = {
-            [X]: {
+            [Y]: {
                 primary: {
                     textKey: "Action.OK"
                 },
                 handler: el
             },
-            [K]: {
+            [J]: {
                 primary: {
                     textKey: "Button.AddViaLink"
                 },
@@ -785,7 +785,7 @@
                 },
                 handler: ep
             },
-            [W]: {
+            [M]: {
                 primary: {
                     textKey: "Action.Add"
                 },
@@ -794,7 +794,7 @@
                 },
                 handler: es
             },
-            [Q]: {
+            [O]: {
                 primary: {
                     textKey: "Action.Add",
                     showVpcIcon: !0
@@ -802,7 +802,7 @@
                 secondary: {
                     textKey: "Button.DontAdd"
                 },
-                handler: ec
+                handler: eu
             },
             [H]: {
                 primary: {
@@ -812,18 +812,18 @@
                 secondary: {
                     textKey: "Action.DontAccept"
                 },
-                handler: ec
+                handler: eu
             },
-            [q]: {
+            [Q]: {
                 primary: {
                     textKey: "Action.Accept"
                 },
                 secondary: {
                     textKey: "Action.DontAccept"
                 },
-                handler: eu
+                handler: ec
             },
-            [Y]: {
+            [$]: {
                 primary: {
                     textKey: "Action.Accept"
                 },
@@ -832,7 +832,7 @@
                 },
                 handler: eo
             },
-            [Z]: {
+            [z]: {
                 primary: {
                     textKey: "Action.Accept",
                     showVpcIcon: !0
@@ -842,7 +842,7 @@
                 },
                 handler: ed
             },
-            [J]: {
+            [K]: {
                 primary: {
                     textKey: "Action.Add",
                     isDisabled: !0
@@ -852,7 +852,7 @@
                 },
                 handler: em
             },
-            [z]: {
+            [q]: {
                 primary: {
                     textKey: "Action.Accept",
                     isDisabled: !0
@@ -863,12 +863,12 @@
                 handler: em
             }
         },
-        ef = {
+        eh = {
             [et]: {
                 title: "TrustedFriend.Label.AddTrustedFriend",
                 description: "Description.DoMoreWithTrustedFriends"
             },
-            [ea]: {
+            [er]: {
                 title: "TrustedFriend.Label.AddTrustedFriend",
                 description: "Description.DoMoreWithTrustedFriends"
             },
@@ -880,89 +880,89 @@
                 title: "TrustedFriend.AddBack.Header",
                 description: "TrustedFriends.InfoLabel.FriendsRename"
             },
-            [er]: {
+            [ea]: {
                 title: "TrustedFriend.Info.Modal.Header",
                 description: "Description.YouCanDoMoreWithTrustedFriends"
             }
         };
-    var eh = e.i(391855);
-    let ev = (0, w.createContext)(null),
-        eI = () => {
-            let e = (0, w.useContext)(ev);
+    var ef = e.i(391855);
+    let eb = (0, w.createContext)(null),
+        ev = () => {
+            let e = (0, w.useContext)(eb);
             if (null == e) throw Error("TrustedFriendsModal needs a TrustedFriendsModalHostContext provider");
             return e
         };
-    var ey = e.i(245837),
-        eb = e.i(10224);
-    let eA = () => `${ey.default.friendsApi}/v1`,
+    var eA = e.i(245837),
+        ey = e.i(10224);
+    let eI = () => `${eA.default.friendsApi}/v1`,
         eE = () => ({
             retryable: !0,
             withCredentials: !0
         });
     async function eC(e) {
         let t = {
-                url: `${eA()}/users/${e}/accept-trusted-friend-request`,
+                url: `${eI()}/users/${e}/accept-trusted-friend-request`,
                 ...eE()
             },
             {
                 data: n
-            } = await eb.post(t, {});
+            } = await ey.post(t, {});
         return n
     }
     async function ew(e, t) {
         let n = t ? `?source=${encodeURIComponent(t)}` : "",
-            r = {
-                url: `${eA()}/users/${e}/send-trusted-friend-request${n}`,
-                ...eE()
-            },
-            {
-                data: a
-            } = await eb.post(r, {});
-        return a
-    }
-    async function eT(e, t) {
-        let n = {
-                url: `${eA()}/users/${e}/validate-trusted-friend-link`,
+            a = {
+                url: `${eI()}/users/${e}/send-trusted-friend-request${n}`,
                 ...eE()
             },
             {
                 data: r
-            } = await eb.post(n, {
-                Tokens: t
-            });
+            } = await ey.post(a, {});
         return r
     }
     async function eS(e, t) {
         let n = {
-                url: `${eA()}/users/${e}/add-trusted-friend-from-link`,
-                ...eE()
-            },
-            {
-                data: r
-            } = await eb.post(n, {
-                Tokens: t
-            });
-        return r
-    }
-    async function eP(e) {
-        let t = {
-                url: `${eA()}/users/${e}/create-trusted-friend-link`,
-                ...eE()
-            },
-            {
-                data: n
-            } = await eb.post(t, {});
-        return n
-    }
-    async function ex(e, t) {
-        let n = t?.friendRequestToken && Array.isArray(t.friendRequestToken) ? t.friendRequestToken.join(",") : void 0,
-            r = {
-                url: `${ey.default.apiGatewayUrl}/profile-platform-api/v1/profiles/get`,
+                url: `${eI()}/users/${e}/validate-trusted-friend-link`,
                 ...eE()
             },
             {
                 data: a
-            } = await eb.post(r, {
+            } = await ey.post(n, {
+                Tokens: t
+            });
+        return a
+    }
+    async function eN(e, t) {
+        let n = {
+                url: `${eI()}/users/${e}/add-trusted-friend-from-link`,
+                ...eE()
+            },
+            {
+                data: a
+            } = await ey.post(n, {
+                Tokens: t
+            });
+        return a
+    }
+    async function ex(e) {
+        let t = {
+                url: `${eI()}/users/${e}/create-trusted-friend-link`,
+                ...eE()
+            },
+            {
+                data: n
+            } = await ey.post(t, {});
+        return n
+    }
+    async function eV(e, t) {
+        let n = t?.friendRequestToken && Array.isArray(t.friendRequestToken) ? t.friendRequestToken.join(",") : void 0,
+            a = {
+                url: `${eA.default.apiGatewayUrl}/profile-platform-api/v1/profiles/get`,
+                ...eE()
+            },
+            {
+                data: r
+            } = await ey.post(a, {
                 profileType: "User",
                 profileId: e,
                 components: [{
@@ -970,9 +970,9 @@
                     context: n
                 }]
             });
-        return a.components?.TrustedFriendActions?.action
+        return r.components?.TrustedFriendActions?.action
     }
-    async function e_(e) {
+    async function eT(e) {
         if ("u" > typeof ClipboardItem && "function" == typeof navigator.clipboard.write) {
             let t = e.then(e => new Blob([e], {
                     type: "text/plain"
@@ -985,7 +985,7 @@
         }
         await navigator.clipboard.writeText(await e)
     }
-    async function eN(e, t) {
+    async function eZ(e, t) {
         try {
             await e({
                 featureName: "TriggerTrustedFriendVPCRecourse",
@@ -1005,27 +1005,27 @@
             throw Error("Failed to start trusted friend VPC upsell")
         }
     }
-    var eL = ((r = {})[r.Invalid = 0] = "Invalid", r[r.PlayerSearch = 1] = "PlayerSearch", r[r.InGame = 2] = "InGame", r[r.UserProfile = 3] = "UserProfile", r[r.QqContactImporter = 4] = "QqContactImporter", r[r.WeChatContactImporter = 5] = "WeChatContactImporter", r[r.QrCode = 6] = "QrCode", r[r.ProfileShare = 7] = "ProfileShare", r[r.PhoneContactImporter = 8] = "PhoneContactImporter", r[r.OffNetworkFriendLink = 9] = "OffNetworkFriendLink", r[r.FriendRecommendations = 10] = "FriendRecommendations", r),
-        eR = e.i(735697);
-    let eD = {
-            [eL.QrCode]: {
+    var eR = ((a = {})[a.Invalid = 0] = "Invalid", a[a.PlayerSearch = 1] = "PlayerSearch", a[a.InGame = 2] = "InGame", a[a.UserProfile = 3] = "UserProfile", a[a.QqContactImporter = 4] = "QqContactImporter", a[a.WeChatContactImporter = 5] = "WeChatContactImporter", a[a.QrCode = 6] = "QrCode", a[a.ProfileShare = 7] = "ProfileShare", a[a.PhoneContactImporter = 8] = "PhoneContactImporter", a[a.OffNetworkFriendLink = 9] = "OffNetworkFriendLink", a[a.FriendRecommendations = 10] = "FriendRecommendations", a),
+        eL = e.i(735697);
+    let eP = {
+            [eR.QrCode]: {
                 iconName: "icon-filled-squares-grid-qr",
                 translationKey: ee.friendRequestOriginQrCode
             },
-            [eL.PhoneContactImporter]: {
+            [eR.PhoneContactImporter]: {
                 iconName: "icon-filled-smartphone-portrait",
                 translationKey: ee.friendRequestOriginPhoneContactImporter
             },
-            [eL.PlayerSearch]: {
+            [eR.PlayerSearch]: {
                 iconName: "icon-filled-magnifying-glass",
                 translationKey: ee.friendRequestOriginPlayerSearch
             }
         },
-        ek = {
+        eF = {
             mutualFriendCount: 0
         };
 
-    function eF(e) {
+    function eB(e) {
         if ("string" == typeof e) {
             let t = Date.parse(e);
             return Number.isFinite(t) ? Math.floor(t / 1e3) : void 0
@@ -1035,98 +1035,98 @@
             return "number" == typeof t && t > 0 ? t : void 0
         }
     }
-    let eB = e => {
+    let ek = e => {
             let {
                 userId: t
             } = e, {
                 translate: n
-            } = (0, M.useTranslation)(), {
-                AvatarHeadshot: r,
-                useUserNames: a
-            } = eI(), {
+            } = (0, U.useTranslation)(), {
+                AvatarHeadshot: a,
+                useUserNames: r
+            } = ev(), {
                 data: i,
                 isSuccess: l,
                 isFetching: s
-            } = (0, S.useQuery)({
+            } = (0, N.useQuery)({
                 queryKey: ["multiProfileInsights", t],
-                queryFn: () => (0, eR.fetchMultiProfileInsights)(t),
+                queryFn: () => (0, eL.fetchMultiProfileInsights)(t),
                 refetchOnMount: !1,
                 refetchOnWindowFocus: !1,
                 refetchOnReconnect: !1
-            }), [o, u] = (0, w.useState)(ek);
+            }), [o, c] = (0, w.useState)(eF);
             (0, w.useEffect)(() => {
-                if (!l) return void u(ek);
+                if (!l) return void c(eF);
                 let e = i.userInsights?.find(e => e.targetUser === t || String(e.targetUser) === String(t)),
                     n = e?.profileInsights;
-                u(function(e) {
-                    let t, n, r, a;
+                c(function(e) {
+                    let t, n, a, r;
                     if (0 === e.length) return {
                         mutualFriendCount: 0
                     };
                     let i = 0;
                     for (let l of e) {
-                        l.userAgeVerifiedBracket && (r = l.userAgeVerifiedBracket);
+                        l.userAgeVerifiedBracket && (a = l.userAgeVerifiedBracket);
                         let e = l.mutualFriendInsight?.mutualFriends;
                         e && (i = Object.keys(e).length);
                         let s = l.friendshipAgeInsight,
-                            o = eF(s?.friendsSinceDateTime);
+                            o = eB(s?.friendsSinceDateTime);
                         o && (t = o);
-                        let u = l.accountCreationDateInsight,
-                            c = eF(u?.accountCreatedDateTime);
-                        c && (n = new Date(1e3 * c).getFullYear());
+                        let c = l.accountCreationDateInsight,
+                            u = eB(c?.accountCreatedDateTime);
+                        u && (n = new Date(1e3 * u).getFullYear());
                         let d = l.friendRequestOriginInsight;
-                        d?.friendRequestOriginSource && (a = eD[d.friendRequestOriginSource])
+                        d?.friendRequestOriginSource && (r = eP[d.friendRequestOriginSource])
                     }
                     return {
                         mutualFriendCount: i,
                         friendshipStartUnixSeconds: t,
                         accountCreationYear: n,
-                        userAgeVerifiedBracketCatalogKey: r,
-                        friendRequestOriginDisplay: a
+                        userAgeVerifiedBracketCatalogKey: a,
+                        friendRequestOriginDisplay: r
                     }
                 }(Array.isArray(n) ? n : []))
             }, [i, l, t]);
             let {
-                mutualFriendCount: c,
+                mutualFriendCount: u,
                 friendshipStartUnixSeconds: d,
                 accountCreationYear: m,
                 userAgeVerifiedBracketCatalogKey: p,
                 friendRequestOriginDisplay: g
-            } = o, f = a(t), h = (0, w.useMemo)(() => (function(e, t, n) {
+            } = o, h = r(t), f = (0, w.useMemo)(() => (function(e, t, n) {
                 if (null == e || e <= 0) return "";
-                let r = Math.floor(Math.max(0, ((void 0) ?? Math.floor(Date.now() / 1e3)) - e) / 60 / 60 / 24);
-                if (r >= 365) {
-                    let e = Math.floor(r / 365);
+                let a = Math.floor(Math.max(0, ((void 0) ?? Math.floor(Date.now() / 1e3)) - e) / 60 / 60 / 24);
+                if (a >= 365) {
+                    let e = Math.floor(a / 365);
                     return 1 === e ? t(n.connectedOneYear) : t(n.connectedNumYears, {
                         num: e
                     })
                 }
-                if (r >= 30) {
-                    let e = Math.floor(r / 30);
+                if (a >= 30) {
+                    let e = Math.floor(a / 30);
                     return 1 === e ? t(n.connectedOneMonth) : t(n.connectedNumMonths, {
                         num: e
                     })
                 }
-                return 1 === r ? t(n.connectedOneDay) : r > 1 ? t(n.connectedNumDays, {
-                    num: r
+                return 1 === a ? t(n.connectedOneDay) : a > 1 ? t(n.connectedNumDays, {
+                    num: a
                 }) : t(n.newFriend)
-            })(d, n, ee), [d, n]), v = p ?? "", I = v ? n(v) : "", y = I ? `${n(ee.ageGroupLabel)} ${I}` : "", b = (0, w.useMemo)(() => [{
+            })(d, n, ee), [d, n]), b = p ?? "", v = b ? n(b) : "", A = v ? `${n(ee.ageGroupLabel)} ${v}` : "", y = (0, w.useMemo)(() => [{
                 id: "age-group",
                 iconName: "icon-filled-shield-check",
-                label: y
-            }, h ? {
+                label: A
+            }, f ? {
                 id: "friendship-duration",
                 iconName: "icon-filled-calendar",
-                label: h
+                label: f
             } : {
                 id: "not-a-friend",
                 iconName: "icon-filled-triangle-exclamation",
                 label: n(ee.notAFriend)
-            }, c > 0 ? {
+            }, u > 0 ? {
                 id: "mutual-friends",
                 iconName: "icon-filled-two-people",
                 label: n(ee.mutualFriends, {
-                    numConnections: c
+                    numConnections: u
                 })
             } : {
                 id: "no-mutual-friends",
@@ -1145,14 +1145,14 @@
             }].filter(e => {
                 var t;
                 return !!(t = e.label) && ("string" != typeof t || t.length > 0)
-            }), [m, y, h, g, c, n]);
+            }), [m, A, f, g, u, n]);
             return (0, E.jsxs)("div", {
                 className: "radius-large bg-shift-100 padding-large flex flex-col gap-large",
                 children: [(0, E.jsxs)("div", {
                     className: "flex flex-row items-center gap-medium",
                     children: [(0, E.jsxs)("div", {
                         className: "trusted-friend-social-avatar-circle bg-shift-200",
-                        children: [(0, E.jsx)(r, {
+                        children: [(0, E.jsx)(a, {
                             userId: t,
                             className: "trusted-friend-social-avatar-thumb radius-circle"
                         }), (0, E.jsx)("div", {
@@ -1163,64 +1163,64 @@
                         className: "flex flex-col gap-xxsmall min-width-0",
                         children: [(0, E.jsx)("p", {
                             className: "text-heading-small text-overflow-ellipsis margin-none",
-                            children: f?.combinedName ?? ""
+                            children: h?.combinedName ?? ""
                         }), (0, E.jsx)("p", {
                             className: "text-body-medium content-default text-overflow-ellipsis margin-none",
-                            children: f?.username ?? ""
+                            children: h?.username ?? ""
                         })]
                     })]
-                }), b.length && !s ? (0, E.jsx)("ul", {
+                }), y.length && !s ? (0, E.jsx)("ul", {
                     className: "flex flex-row flex-wrap gap-medium justify-start items-center list-none margin-none padding-none",
-                    children: b.map(e => {
+                    children: y.map(e => {
                         let {
                             id: t,
                             iconName: n,
-                            label: r
+                            label: a
                         } = e;
                         return (0, E.jsxs)("li", {
                             className: "inline-flex max-width-full flex-row items-center gap-xsmall",
-                            children: [(0, E.jsx)(V.Icon, {
+                            children: [(0, E.jsx)(D.Icon, {
                                 name: n,
                                 size: "XSmall",
                                 className: "content-default shrink-0"
                             }), (0, E.jsx)("span", {
                                 className: "text-body-medium content-default min-width-0",
-                                children: r
+                                children: a
                             })]
                         }, t)
                     })
                 }) : null]
             })
         },
-        ej = e => {
+        eX = e => {
             let {
                 open: t,
                 onClose: n,
-                userId: r,
-                linkTokens: a,
+                userId: a,
+                linkTokens: r,
                 onComplete: i,
                 modalVariant: l,
                 trustedFriendAction: s,
                 setToastMessage: o
             } = e, {
-                translate: u
-            } = (0, M.useTranslation)(), {
-                buttonConfig: c,
+                translate: c
+            } = (0, U.useTranslation)(), {
+                buttonConfig: u,
                 performPrimaryAction: d
             } = function(e) {
                 let {
                     userId: t,
                     linkTokens: n,
-                    trustedFriendAction: r,
-                    onClose: a,
+                    trustedFriendAction: a,
+                    onClose: r,
                     setToastMessage: i,
                     onComplete: l
                 } = e, {
                     translate: s
-                } = (0, M.useTranslation)(), o = (0, eh.useQueryClient)(), {
-                    startAccessManagementUpsell: u,
-                    useUserNames: c
-                } = eI(), d = c(t), m = (0, w.useMemo)(() => (function(e) {
+                } = (0, U.useTranslation)(), o = (0, ef.useQueryClient)(), {
+                    startAccessManagementUpsell: c,
+                    useUserNames: u
+                } = ev(), d = u(t), m = (0, w.useMemo)(() => (function(e) {
                     if (!e || !(e in ei)) return;
                     let t = eg[e];
                     return {
@@ -1228,158 +1228,158 @@
                         secondary: t.secondary,
                         handler: t.handler
                     }
-                })(r), [r]), p = (0, w.useCallback)(async () => {
+                })(a), [a]), p = (0, w.useCallback)(async () => {
                     if (!m) return;
                     let {
                         handler: e
-                    } = m, r = d?.username ?? "", c = async () => {
+                    } = m, a = d?.username ?? "", u = async () => {
                         await o.invalidateQueries({
                             queryKey: ["trustedFriendStatus", t]
                         }), await o.invalidateQueries({
-                            queryKey: $(t, n)
+                            queryKey: j(t, n)
                         })
                     }, p = async () => {
                         if (!n?.length) throw Error("useGetTrustedFriendsModalButtons: linkTokens required for link accept flow");
-                        await eT(t, n), await eS(t, n)
+                        await eS(t, n), await eN(t, n)
                     }, g = async () => {
-                        await e_(eP(t).then(e => {
+                        await eT(ex(t).then(e => {
                             let {
                                 link: t
                             } = e;
                             return t
-                        })), i(s(ee.trustedFriendLinkCopied)), await c(), await l?.(), a(!0)
-                    }, f = async () => {
-                        i(s(ee.trustedFriendRequestSent)), await c(), await l?.(), a(!0)
+                        })), i(s(ee.trustedFriendLinkCopied)), await u(), await l?.(), r(!0)
                     }, h = async () => {
+                        i(s(ee.trustedFriendRequestSent)), await u(), await l?.(), r(!0)
+                    }, f = async () => {
                         i(s(ee.acceptedTrustedFriend, {
-                            username: r
-                        })), await c(), await l?.(), a(!0)
-                    }, v = async e => {
+                            username: a
+                        })), await u(), await l?.(), r(!0)
+                    }, b = async e => {
                         switch (e) {
                             case el:
-                                await l?.(), a(!0);
+                                await l?.(), r(!0);
                                 break;
                             case es:
-                                await ew(t), await f();
+                                await ew(t), await h();
                                 break;
                             case eo:
-                                await eC(t), await h();
-                                break;
-                            case eu:
-                                await p(), await h();
+                                await eC(t), await f();
                                 break;
                             case ec:
-                                a(!1), await eN(u, t), await l?.();
+                                await p(), await f();
+                                break;
+                            case eu:
+                                r(!1), await eZ(c, t), await l?.();
                                 break;
                             case ed:
-                                a(!1), await p(), await eN(u, t), await l?.();
+                                r(!1), await p(), await eZ(c, t), await l?.();
                                 break;
                             case ep:
                                 await g()
                         }
                     };
                     try {
-                        i(null), await v(e)
+                        i(null), await b(e)
                     } catch {
                         i(s(ee.genericError))
                     }
-                }, [t, n, s, a, d, i, o, l, m, u]);
+                }, [t, n, s, r, d, i, o, l, m, c]);
                 return {
                     buttonConfig: m,
                     performPrimaryAction: p
                 }
             }({
-                userId: r,
-                linkTokens: a,
+                userId: a,
+                linkTokens: r,
                 trustedFriendAction: s,
                 onClose: n,
                 setToastMessage: o,
                 onComplete: i
             }), m = (0, w.useCallback)(e => {
                 e || n(!1)
-            }, [n]), p = (0, w.useMemo)(() => ef[l], [l]), g = (0, w.useCallback)(() => {
-                c?.primary.isDisabled || d().catch(() => void 0)
-            }, [c, d]);
-            return (0, E.jsx)(U.Dialog, {
+            }, [n]), p = (0, w.useMemo)(() => eh[l], [l]), g = (0, w.useCallback)(() => {
+                u?.primary.isDisabled || d().catch(() => void 0)
+            }, [u, d]);
+            return (0, E.jsx)(G.Dialog, {
                 open: t,
                 onOpenChange: m,
                 size: "Medium",
                 isModal: !0,
                 hasCloseAffordance: !0,
                 closeLabel: "Close",
-                children: (0, E.jsxs)(U.DialogContent, {
-                    children: [(0, E.jsxs)(U.DialogBody, {
+                children: (0, E.jsxs)(G.DialogContent, {
+                    children: [(0, E.jsxs)(G.DialogBody, {
                         className: "flex flex-col gap-medium",
-                        children: [(0, E.jsx)(U.DialogTitle, {
+                        children: [(0, E.jsx)(G.DialogTitle, {
                             className: "text-heading-small margin-none",
-                            children: u(p.title)
+                            children: c(p.title)
                         }), (0, E.jsxs)("div", {
                             className: "text-body-medium content-default flex flex-col gap-xsmall",
-                            children: [u(p.description), (0, E.jsx)("a", {
+                            children: [c(p.description), (0, E.jsx)("a", {
                                 href: "https://help.roblox.com/hc/articles/37725513985812",
                                 target: "_blank",
                                 rel: "noreferrer",
                                 className: "trusted-friends-modal-learn-more-link text-body-medium content-default",
-                                children: u(ee.learnMore)
+                                children: c(ee.learnMore)
                             })]
-                        }), (0, E.jsx)(eB, {
-                            userId: r
+                        }), (0, E.jsx)(ek, {
+                            userId: a
                         })]
-                    }), (0, E.jsx)(U.DialogFooter, {
+                    }), (0, E.jsx)(G.DialogFooter, {
                         className: "flex flex-col gap-small",
                         children: (0, E.jsxs)("div", {
                             className: "flex width-full min-width-0 flex-row gap-small items-center",
-                            children: [(0, E.jsx)(O.Button, {
+                            children: [(0, E.jsx)(_.Button, {
                                 variant: "Emphasis",
                                 size: "Medium",
                                 className: "fill min-width-0 flex-1 basis-0",
-                                isDisabled: c?.primary.isDisabled === !0,
+                                isDisabled: u?.primary.isDisabled === !0,
                                 onClick: g,
                                 children: (0, E.jsxs)("span", {
                                     className: "flex width-full min-width-0 flex-row items-center justify-center gap-small",
-                                    children: [c?.primary.showVpcIcon ? (0, E.jsx)(V.Icon, {
+                                    children: [u?.primary.showVpcIcon ? (0, E.jsx)(D.Icon, {
                                         name: "icon-regular-lock-closed",
                                         size: "Medium",
                                         className: "flex shrink-0 items-center justify-center",
                                         "aria-hidden": !0
                                     }) : null, (0, E.jsx)("span", {
                                         className: "min-width-0",
-                                        children: u(c?.primary.textKey ?? "")
+                                        children: c(u?.primary.textKey ?? "")
                                     })]
                                 })
-                            }), c?.secondary ? (0, E.jsx)(O.Button, {
+                            }), u?.secondary ? (0, E.jsx)(_.Button, {
                                 variant: "Standard",
                                 size: "Medium",
                                 className: "fill min-width-0 flex-1 basis-0",
                                 onClick: () => {
                                     n(!1)
                                 },
-                                children: u(c.secondary.textKey)
+                                children: c(u.secondary.textKey)
                             }) : null]
                         })
                     })]
                 })
             })
         },
-        eO = e => {
+        e_ = e => {
             let {
                 open: t,
                 onClose: n,
-                userId: r,
-                linkTokens: a,
+                userId: a,
+                linkTokens: r,
                 onComplete: i
             } = e, {
                 translate: l
-            } = (0, M.useTranslation)(), {
+            } = (0, U.useTranslation)(), {
                 startAccessManagementUpsell: s
-            } = eI(), {
+            } = ev(), {
                 data: o,
-                isFetched: u,
-                refetch: c
-            } = (0, S.useQuery)({
-                queryKey: $(r, a),
-                queryFn: () => ex(r, {
-                    friendRequestToken: a
+                isFetched: c,
+                refetch: u
+            } = (0, N.useQuery)({
+                queryKey: j(a, r),
+                queryFn: () => eV(a, {
+                    friendRequestToken: r
                 }),
                 enabled: t,
                 refetchOnMount: !1,
@@ -1387,7 +1387,7 @@
                 refetchOnReconnect: !1
             }), [d, m] = (0, w.useState)(null), p = (0, w.useCallback)(() => {
                 m(null)
-            }, []), g = (0, w.useMemo)(() => t && u ? o && o in ei ? ei[o] : "invalid" : "pending", [t, u, o]), f = (0, w.useCallback)(async () => {
+            }, []), g = (0, w.useMemo)(() => t && c ? o && o in ei ? ei[o] : "invalid" : "pending", [t, c, o]), h = (0, w.useCallback)(async () => {
                 try {
                     await s({
                         featureName: "TriggerAgeCheckUpsellIncludingVPC",
@@ -1397,28 +1397,28 @@
                         featureSpecificData: {
                             context: "trusted-friends-modal"
                         }
-                    }) ? c().catch(() => void 0) : n(!1)
+                    }) ? u().catch(() => void 0) : n(!1)
                 } catch {
                     n(!1)
                 }
-            }, [n, c, s]);
+            }, [n, u, s]);
             (0, w.useEffect)(() => {
                 if ("pending" !== g) {
-                    if ("UnlockTrustedFriendByFAE" === o) return void f().catch(() => void 0);
+                    if ("UnlockTrustedFriendByFAE" === o) return void h().catch(() => void 0);
                     "invalid" === g && (m(l(ee.genericError)), n(!1))
                 }
-            }, [g, o, l, n, f]);
-            let h = !(!t || "pending" === g || "invalid" === g);
+            }, [g, o, l, n, h]);
+            let f = !(!t || "pending" === g || "invalid" === g);
             return (0, E.jsxs)(w.default.Fragment, {
-                children: [d ? (0, E.jsx)(G.Snackbar, {
+                children: [d ? (0, E.jsx)(W.Snackbar, {
                     title: d,
                     onClose: p,
                     shouldAutoDismiss: !0
-                }) : null, h && (0, E.jsx)(ej, {
+                }) : null, f && (0, E.jsx)(eX, {
                     open: t,
                     onClose: n,
-                    userId: r,
-                    linkTokens: a,
+                    userId: a,
+                    linkTokens: r,
                     onComplete: i,
                     modalVariant: g,
                     trustedFriendAction: o,
@@ -1426,23 +1426,23 @@
                 })]
             })
         };
-    var eU = e.i(266712),
-        eV = e.i(44170),
-        eG = e.i(145420),
-        eM = e.i(175067),
-        e$ = e.i(460987),
-        eX = e.i(100266),
-        eK = e.i(723941),
-        eW = e.i(476752),
-        eQ = e.i(851460),
-        eZ = ((a = {}).GameDetails = "game_details", a.Profile = "profile", a.Home = "home", a.Games = "games", a.Avatar = "avatar", a.Catalog = "catalog", a.Friends = "friends", a.ItemDetails = "item_details", a.Navigation = "navigation", a.PlaceId = "placeId", a.UserId = "userId", a.ShareLinks = "share_links", a.Chat = "chat", a.GiftCards = "gift_cards", a.NotificationSettings = "notification_settings", a.AccountInfo = "account_info", a.PrivacySettings = "privacy_settings", a.AppPermissionsSettings = "app_permissions_settings", a.ScreentimeSubsettings = "screentime_subsettings", a.BlockedExperiencesSubsettings = "blocked_experiences_subsettings", a.BlockedUsersSubsettings = "blocked_users_subsettings", a.ExperienceChatSubsettings = "experience_chat_subsettings", a.PartySubsettings = "party_subsettings", a.VoiceSubsettings = "voice_subsettings", a.CommunicationSettings = "communication_settings", a.CommunicationSubsettings = "communication_subsettings", a.TradingInventorySubsettings = "trading_inventory_subsettings", a.PrivateServerSubsettings = "private_server_subsettings", a.FriendsContactsSubsettings = "friends_contacts_subsettings", a.VisibilitySubsettings = "visibility_subsettings", a.ParentalControls = "parental_controls", a.SpendingSettings = "spending_settings", a.RobuxSettings = "robux_settings", a.Group = "group", a.ExternalWebUrl = "external_web_link", a.SecurityAlert = "security_alert", a.Fae = "fae", a.Messages = "messages", a.BuyRobux = "buy_robux", a.CurrencyTransfer = "currency_transfer", a.ProfileCard = "profile_card", a.AmpWizard = "amp_wizard", a.SupportCenter = "support_center", a.PlusUpsell = "plus_upsell", a.PlusReferralDashboard = "plus_referral_dashboard", a.PlusSubscribe = "plus_subscribe", a.PlusWebview = "plus_webview", a.AcceptGift = "accept_gift", a.Moments = "moments", a);
+    var eG = e.i(266712),
+        eD = e.i(44170),
+        eW = e.i(145420),
+        eU = e.i(175067),
+        ej = e.i(460987),
+        eY = e.i(100266),
+        eJ = e.i(723941),
+        eM = e.i(476752),
+        eO = e.i(851460),
+        ez = ((r = {}).GameDetails = "game_details", r.Profile = "profile", r.Home = "home", r.Games = "games", r.Avatar = "avatar", r.Catalog = "catalog", r.Friends = "friends", r.ItemDetails = "item_details", r.Navigation = "navigation", r.PlaceId = "placeId", r.UserId = "userId", r.ShareLinks = "share_links", r.Chat = "chat", r.GiftCards = "gift_cards", r.NotificationSettings = "notification_settings", r.AccountInfo = "account_info", r.PrivacySettings = "privacy_settings", r.AppPermissionsSettings = "app_permissions_settings", r.ScreentimeSubsettings = "screentime_subsettings", r.BlockedExperiencesSubsettings = "blocked_experiences_subsettings", r.BlockedUsersSubsettings = "blocked_users_subsettings", r.ExperienceChatSubsettings = "experience_chat_subsettings", r.PartySubsettings = "party_subsettings", r.VoiceSubsettings = "voice_subsettings", r.CommunicationSettings = "communication_settings", r.CommunicationSubsettings = "communication_subsettings", r.TradingInventorySubsettings = "trading_inventory_subsettings", r.PrivateServerSubsettings = "private_server_subsettings", r.FriendsContactsSubsettings = "friends_contacts_subsettings", r.VisibilitySubsettings = "visibility_subsettings", r.ParentalControls = "parental_controls", r.SpendingSettings = "spending_settings", r.RobuxSettings = "robux_settings", r.Group = "group", r.ExternalWebUrl = "external_web_link", r.SecurityAlert = "security_alert", r.Fae = "fae", r.Messages = "messages", r.BuyRobux = "buy_robux", r.CurrencyTransfer = "currency_transfer", r.ProfileCard = "profile_card", r.AmpWizard = "amp_wizard", r.SupportCenter = "support_center", r.PlusUpsell = "plus_upsell", r.PlusReferralDashboard = "plus_referral_dashboard", r.PlusOnboarding = "plus_onboarding", r.PlusSubscribe = "plus_subscribe", r.PlusWebview = "plus_webview", r.AcceptGift = "accept_gift", r.Moments = "moments", r);
     (i = {}).Asset = "Asset", i.Bundle = "Bundle", i.Look = "Look";
     let eH = {
             Asset: "/catalog",
             Bundle: "/bundles",
             Look: "/looks"
         },
-        eq = {
+        eQ = {
             home: "/home",
             games: "/games",
             catalog: "/catalog",
@@ -1471,7 +1471,7 @@
             buy_robux: "/upgrades/robux",
             plus_webview: "/plus"
         },
-        eY = {
+        e$ = {
             Home: "/home",
             Games: "/games",
             Users: "/users",
@@ -1490,7 +1490,7 @@
             SupportCenter: "/support-center",
             Plus: "/plus"
         },
-        eJ = (e, t, n) => ({
+        eK = (e, t, n) => ({
             type: "linkResolved",
             context: "deepLink",
             params: {
@@ -1499,7 +1499,7 @@
                 linkId: t
             }
         }),
-        ez = "DeeplinkParserExperienceDetailsResolutionFailed",
+        eq = "DeeplinkParserExperienceDetailsResolutionFailed",
         e0 = (e, t, n) => ({
             eventName: "joinGameFromInviteLink",
             ctx: "shareLinks",
@@ -1511,33 +1511,33 @@
                 linkId: t
             }
         });
-    var e1 = ((l = e1 || {}).PROFILE_SHARE = "ProfileShare", l.QR_CODE = "QrCode", l),
-        e8 = ((s = e8 || {}).AVATAR_ITEM_DETAILS = "AvatarItemDetails", s.AVATAR_ITEM_AFFILIATE = "AvatarItemAffiliate", s.CONTENT_POST = "ContentPost", s.EXPERIENCE_INVITE = "ExperienceInvite", s.EXPERIENCE_AFFILIATE = "ExperienceAffiliate", s.FRIEND_INVITE = "FriendInvite", s.NOTIFICATION_EXPERIENCE_INVITE = "NotificationExperienceInvite", s.PROFILE = "Profile", s.SCREENSHOT_INVITE = "ScreenshotInvite", s.SERVER = "Server", s.EXPERIENCE_DETAILS = "ExperienceDetails", s.EXPERIENCE_EVENT = "ExperienceEvent", s),
-        e3 = ((o = e3 || {}).EXPERIENCE_V2 = "ExperienceV2", o.USER_TRUSTED_CONNECTION = "UserTrustedConnection", o.STUDIO_TRUSTED_CONNECTION = "StudioTrustedConnection", o.MOMENTS = "Moments", o.SCHOOL_INVITE = "SchoolInvite", o.REFERRAL = "Referral", o),
-        e2 = ((u = e2 || {}).VALID = "Valid", u.EXPIRED = "Expired", u.INVITER_NOT_IN_EXPERIENCE = "InviterNotInExperience", u),
-        e5 = ((c = e5 || {}).VALID = "Valid", c.EXPIRED = "Expired", c.CONSUMED = "Consumed", c.SENDER_BLOCKED_RECIPIENT = "SenderBlockedRecipient", c.INVALID = "Invalid", c),
-        e9 = ((d = e9 || {}).VALID = "Valid", d.SENDER_BLOCKED_RECIPIENT = "SenderBlockedRecipient", d.INVALID = "Invalid", d),
+    var e2 = ((l = e2 || {}).PROFILE_SHARE = "ProfileShare", l.QR_CODE = "QrCode", l),
+        e1 = ((s = e1 || {}).AVATAR_ITEM_DETAILS = "AvatarItemDetails", s.AVATAR_ITEM_AFFILIATE = "AvatarItemAffiliate", s.CONTENT_POST = "ContentPost", s.EXPERIENCE_INVITE = "ExperienceInvite", s.EXPERIENCE_AFFILIATE = "ExperienceAffiliate", s.FRIEND_INVITE = "FriendInvite", s.NOTIFICATION_EXPERIENCE_INVITE = "NotificationExperienceInvite", s.PROFILE = "Profile", s.SCREENSHOT_INVITE = "ScreenshotInvite", s.SERVER = "Server", s.EXPERIENCE_DETAILS = "ExperienceDetails", s.EXPERIENCE_EVENT = "ExperienceEvent", s),
+        e5 = ((o = e5 || {}).EXPERIENCE_V2 = "ExperienceV2", o.USER_TRUSTED_CONNECTION = "UserTrustedConnection", o.STUDIO_TRUSTED_CONNECTION = "StudioTrustedConnection", o.MOMENTS = "Moments", o.SCHOOL_INVITE = "SchoolInvite", o.REFERRAL = "Referral", o),
+        e3 = ((c = e3 || {}).VALID = "Valid", c.EXPIRED = "Expired", c.INVITER_NOT_IN_EXPERIENCE = "InviterNotInExperience", c),
+        e9 = ((u = e9 || {}).VALID = "Valid", u.EXPIRED = "Expired", u.CONSUMED = "Consumed", u.SENDER_BLOCKED_RECIPIENT = "SenderBlockedRecipient", u.INVALID = "Invalid", u),
+        e8 = ((d = e8 || {}).VALID = "Valid", d.SENDER_BLOCKED_RECIPIENT = "SenderBlockedRecipient", d.INVALID = "Invalid", d),
         e4 = ((m = e4 || {}).VALID = "Valid", m.EXPIRED = "Expired", m.INVITER_NOT_IN_EXPERIENCE = "InviterNotInExperience", m),
         e7 = ((p = e7 || {}).INVALID = "Invalid", p.VALID = "Valid", p.EXPIRED = "Expired", p),
         e6 = ((g = e6 || {}).INVALID = "Invalid", g.EXPIRED = "Expired", g.VALID = "Valid", g),
-        te = ((f = te || {}).Zendesk = "zendesk", f),
-        tt = ((h = tt || {}).INVALID = "Invalid", h.EXPIRED = "Expired", h.VALID = "Valid", h),
-        tn = ((v = tn || {}).INVALID = "Invalid", v.VALID = "Valid", v),
-        tr = ((I = tr || {}).INVALID = "Invalid", I.EXPIRED = "Expired", I.VALID = "Valid", I),
-        ta = ((y = ta || {}).INVALID = "Invalid", y.VALID = "Valid", y),
-        ti = ((b = ti || {})[b.INVALID = 0] = "INVALID", b[b.PROFILE = 1] = "PROFILE", b[b.HOME = 2] = "HOME", b);
-    let tl = (e, t, n, r, a, i, l) => ({
+        te = ((h = te || {}).Zendesk = "zendesk", h),
+        tt = ((f = tt || {}).INVALID = "Invalid", f.EXPIRED = "Expired", f.VALID = "Valid", f),
+        tn = ((b = tn || {}).INVALID = "Invalid", b.VALID = "Valid", b),
+        ta = ((v = ta || {}).INVALID = "Invalid", v.EXPIRED = "Expired", v.VALID = "Valid", v),
+        tr = ((A = tr || {}).INVALID = "Invalid", A.VALID = "Valid", A),
+        ti = ((y = ti || {})[y.INVALID = 0] = "INVALID", y[y.PROFILE = 1] = "PROFILE", y[y.HOME = 2] = "HOME", y);
+    let tl = (e, t, n, a, r, i, l) => ({
             rootPlaceId: e,
             placeId: t,
             gameInstanceId: n,
-            playerId: r,
-            privateServerLinkCode: a,
+            playerId: a,
+            privateServerLinkCode: r,
             referredByPlayerId: i,
             joinData: l
         }),
         ts = (e, t) => {
-            let [n, r] = e.split("?"), a = new URLSearchParams(r);
-            return t && (t.launchData && "" !== t.launchData && a.append("launchData", t.launchData), t.experienceEventId && "" !== t.experienceEventId && a.append("eventId", t.experienceEventId)), `${n}?${a.toString()}`
+            let [n, a] = e.split("?"), r = new URLSearchParams(a);
+            return t && (t.launchData && "" !== t.launchData && r.append("launchData", t.launchData), t.experienceEventId && "" !== t.experienceEventId && r.append("eventId", t.experienceEventId)), `${n}?${r.toString()}`
         },
         to = async e => {
             let t;
@@ -1548,15 +1548,15 @@
             } catch {} finally {
                 clearTimeout(t)
             }
-        }, tu = /\/(\w+)/g, tc = /(\w+)=([^&=]+)/g, td = e => {
+        }, tc = /\/(\w+)/g, tu = /(\w+)=([^&=]+)/g, td = e => {
             let t = [],
                 n = {},
-                r = tu.exec(e);
-            for (; null != r;) t.push(r[1]), r = tu.exec(e);
-            let a = tc.exec(e);
-            for (; null != a;) {
-                let [, t, r] = a;
-                n[t] = r, a = tc.exec(e)
+                a = tc.exec(e);
+            for (; null != a;) t.push(a[1]), a = tc.exec(e);
+            let r = tu.exec(e);
+            for (; null != r;) {
+                let [, t, a] = r;
+                n[t] = a, r = tu.exec(e)
             }
             return {
                 path: t,
@@ -1567,28 +1567,28 @@
     var tm = e.i(341332),
         tp = e.i(778579),
         tg = e.i(817396),
-        tf = e.i(82927),
-        th = e.i(126392);
-    let tv = {
+        th = e.i(82927),
+        tf = e.i(126392);
+    let tb = {
             subscribe: (e, t, n) => {
-                let r, a = !0;
-                return (0, k.getRealtimeClient)().then(i => {
-                    if (a) {
+                let a, r = !0;
+                return (0, F.getRealtimeClient)().then(i => {
+                    if (r) {
                         if (null == i) return void n?.(Error("The realtime client did not load"));
-                        i.Subscribe(e, t), r = () => {
+                        i.Subscribe(e, t), a = () => {
                             i.Unsubscribe(e, t)
                         }
                     }
                 }), () => {
-                    a = !1, r?.()
+                    r = !1, a?.()
                 }
             },
-            subscribeToConnectionEvents: (e, t, n, r) => (0, k.getRealtimeClient)().then(a => {
-                if (null == a) return Promise.reject(Error("The realtime client did not load"));
-                a.SubscribeToConnectionEvents(e, t, n, r)
+            subscribeToConnectionEvents: (e, t, n, a) => (0, F.getRealtimeClient)().then(r => {
+                if (null == r) return Promise.reject(Error("The realtime client did not load"));
+                r.SubscribeToConnectionEvents(e, t, n, a)
             })
         },
-        tI = {
+        tv = {
             avatarHeadshot: "AvatarHeadShot",
             gameIcon: "GameIcon",
             groupIcon: "GroupIcon",
@@ -1596,15 +1596,15 @@
             bundleThumbnail: "BundleThumbnail",
             gamePassIcon: "GamePass"
         },
-        ty = ["names.combinedName", "names.username"],
-        tb = {
-            startAccessManagementUpsell: e => (0, eU.startAccessManagementUpsell)(e),
+        tA = ["names.combinedName", "names.username"],
+        ty = {
+            startAccessManagementUpsell: e => (0, eG.startAccessManagementUpsell)(e),
             AvatarHeadshot: e => {
                 let {
                     userId: t,
                     className: n
                 } = e;
-                return (0, E.jsx)(L.Thumbnail2d, {
+                return (0, E.jsx)(R.Thumbnail2d, {
                     type: "AvatarHeadShot",
                     size: "48x48",
                     format: "webp",
@@ -1613,26 +1613,26 @@
                     includeProfileFrame: !0
                 })
             },
-            useUserNames: e => (0, eX.useUserProfiles)([e], ty).data[e]?.names ?? void 0
+            useUserNames: e => (0, eY.useUserProfiles)([e], tA).data[e]?.names ?? void 0
         },
-        tA = (e, t) => x.postUntyped(N.Url.parse(e).getOrThrow(), t, {
+        tI = (e, t) => V.postUntyped(Z.Url.parse(e).getOrThrow(), t, {
             credentials: "include"
         }).getOrThrow().then(e => ({
             data: e
         })),
-        tE = (e, t) => x.get(N.Url.parse(`${ey.default.gamesApi}${e}`).getOrThrow(), t, {
+        tE = (e, t) => V.get(Z.Url.parse(`${eA.default.gamesApi}${e}`).getOrThrow(), t, {
             credentials: "include"
         }),
         tC = e => {
-            let t = (0, eM.getGameLauncher)();
-            return null != t && (t.joinMultiplayerGame((0, e$.withJoinAttemptId)({
+            let t = (0, eU.getGameLauncher)();
+            return null != t && (t.joinMultiplayerGame((0, ej.withJoinAttemptId)({
                 placeId: e,
                 isPlayTogetherGame: !1
             })), !0)
         },
         {
             navigateToDeepLink: tw
-        } = (A = {
+        } = (I = {
             getDeviceMeta: () => (0, tm.getDeviceMeta)(),
             get navigateToHybridFeature() {
                 let e = window.Roblox?.Hybrid?.Navigation;
@@ -1644,431 +1644,432 @@
                 (0, tp.sendEventWithTarget)(e, t, n)
             },
             fireCounter: e => {
-                (0, eG.fireEvent)(e)
+                (0, eW.fireEvent)(e)
             },
-            resolveShareLinks: (e, t) => tA(`${ey.default.shareLinksApi}/v1/resolve-link`, {
+            resolveShareLinks: (e, t) => tI(`${eA.default.shareLinksApi}/v1/resolve-link`, {
                 linkId: e,
                 linkType: t
             }),
-            resolveShareLinksV2: e => tA(`${ey.default.shareLinksApiV2}/v2/resolve`, {
+            resolveShareLinksV2: e => tI(`${eA.default.shareLinksApiV2}/v2/resolve`, {
                 linkId: e
             }),
-            getPlaceIdFromUniverseId: e => tE(`/v1/games?universeIds[]=${e}`, P.object({
-                data: P.array(P.object({
-                    rootPlaceId: P.optional(P.number())
+            getPlaceIdFromUniverseId: e => tE(`/v1/games?universeIds[]=${e}`, x.object({
+                data: x.array(x.object({
+                    rootPlaceId: x.optional(x.number())
                 }))
             })).andThen(t => {
                 let {
                     data: n
-                } = t, r = n[0]?.rootPlaceId;
-                return r ? (0, F.ok)(r) : (0, F.err)(Error(`Root place ID not found for universe ID: ${e}`))
+                } = t, a = n[0]?.rootPlaceId;
+                return a ? (0, B.ok)(a) : (0, B.err)(Error(`Root place ID not found for universe ID: ${e}`))
             }).getOrThrow(),
-            getUniverseIdFromPlaceId: e => tE(`/v1/games/multiget-place-details?placeIds=${String((0,B.parseInt)(e))}`, P.array(P.object({
-                universeId: P.optional(P.number())
+            getUniverseIdFromPlaceId: e => tE(`/v1/games/multiget-place-details?placeIds=${String((0,k.parseInt)(e))}`, x.array(x.object({
+                universeId: x.optional(x.number())
             }))).andThen(t => {
                 let n = t[0]?.universeId;
-                return n ? (0, F.ok)(n) : (0, F.err)(Error(`Universe ID not found for place ID: ${e}`))
+                return n ? (0, B.ok)(n) : (0, B.err)(Error(`Universe ID not found for place ID: ${e}`))
             }).getOrThrow(),
             launchGame: function() {
                 let e;
-                for (var t = arguments.length, n = Array(t), r = 0; r < t; r++) n[r] = arguments[r];
-                let [a, i] = n, l = (0, eM.getGameLauncher)();
+                for (var t = arguments.length, n = Array(t), a = 0; a < t; a++) n[a] = arguments[a];
+                let [r, i] = n, l = (0, eU.getGameLauncher)();
                 if (null == l) return;
-                let s = (0, j.generateRandomUuid)(),
+                let s = (0, X.generateRandomUuid)(),
                     o = i.gamePlayIntentEventCtx,
-                    u = {
+                    c = {
                         ...i.properties,
                         joinAttemptId: s
                     },
                     {
-                        rootPlaceId: c,
+                        rootPlaceId: u,
                         placeId: d,
                         gameInstanceId: m,
                         playerId: p,
                         joinData: g,
-                        privateServerLinkCode: f,
-                        referredByPlayerId: h
-                    } = a;
+                        privateServerLinkCode: h,
+                        referredByPlayerId: f
+                    } = r;
                 if (null == d) return;
-                let v = (e, t) => {
+                let b = (e, t) => {
                     (0, tp.sendEventWithTarget)(i.eventName, i.ctx, {
-                        ...u,
+                        ...c,
                         ...e
                     }), (0, tp.sendGamePlayEvent)(o, t, void 0, s)
                 };
-                return d === c && m ? (v({
+                return d === u && m ? (b({
                     gameInstanceId: m
-                }, c), e = l.joinGameInstance((0, e$.withJoinAttemptId)({
+                }, u), e = l.joinGameInstance((0, ej.withJoinAttemptId)({
                     placeId: d,
                     gameId: m,
                     isPlayTogetherGame: !0,
-                    referredByPlayerId: h
-                }, s, o))) : c && p ? (v({
+                    referredByPlayerId: f
+                }, s, o))) : u && p ? (b({
                     playerId: p
-                }, c), e = l.followPlayerIntoGame((0, e$.withJoinAttemptId)({
+                }, u), e = l.followPlayerIntoGame((0, ej.withJoinAttemptId)({
                     userId: p
-                }, s, o))) : f ? (v({}, d), e = l.joinPrivateGame((0, e$.withJoinAttemptId)({
+                }, s, o))) : h ? (b({}, d), e = l.joinPrivateGame((0, ej.withJoinAttemptId)({
                     placeId: d,
                     accessCode: null,
-                    linkCode: f
-                }, s, o))) : (v({}, d), e = l.joinMultiplayerGame((0, e$.withJoinAttemptId)({
+                    linkCode: h
+                }, s, o))) : (b({}, d), e = l.joinMultiplayerGame((0, ej.withJoinAttemptId)({
                     placeId: d,
                     launchData: g?.launchData,
                     eventId: g?.eventId,
                     isPlayTogetherGame: !1,
-                    referredByPlayerId: h
+                    referredByPlayerId: f
                 }, s, o))), e
             },
             joinMultiplayerGame: tC,
             startGameWithDeepLinkUrl: (e, t) => {
-                let n = (0, eM.getGameLauncher)();
+                let n = (0, eU.getGameLauncher)();
                 return null != n && (n.startGameWithDeepLinkUrl(e, t), !0)
             },
             startDeepLinkFlow: e => {
-                let t = (0, eM.getGameLauncher)();
+                let t = (0, eU.getGameLauncher)();
                 return null != t && (t.startDeepLinkFlow(e), !0)
             },
             openStudio: e => {
                 let {
                     placeId: t,
                     universeId: n,
-                    startTeamTest: r,
-                    instanceId: a,
+                    startTeamTest: a,
+                    instanceId: r,
                     annotationId: i
-                } = e, l = (0, eM.getGameLauncher)();
+                } = e, l = (0, eU.getGameLauncher)();
                 return !!t && !!n && null != l && (l.editGameInStudio({
                     placeId: t,
                     universeId: n,
-                    startTeamTest: r,
-                    instanceId: a,
+                    startTeamTest: a,
+                    instanceId: r,
                     annotationId: i
                 }), !0)
             },
-            startAccessManagementUpsell: e => (0, eU.startAccessManagementUpsell)(e),
+            startAccessManagementUpsell: e => (0, eG.startAccessManagementUpsell)(e),
             startChat: e => {
                 (0, tm.getDeviceMeta)().isInApp ? window.location.href = `roblox://navigation/chat?userId=${e}&entryPoint=AppShellWebView` : document.dispatchEvent(new CustomEvent("Roblox.Chat.StartChat", {
                     detail: {
-                        userId: (0, B.parseInt)(e)
+                        userId: (0, k.parseInt)(e)
                     }
                 })), (0, tp.sendEventWithTarget)("startChatByUser", "click", {
                     userId: e
                 })
             },
-            getQueryParam: e => (0, tf.getQueryParam)(e),
+            getQueryParam: e => (0, th.getQueryParam)(e),
             getHelpDeskUrl: (e, t) => (0, tg.getHelpDeskUrl)(e, t)
         }, n = {
-            [eZ.Navigation]: e => ((e, t) => {
+            [ez.Navigation]: e => ((e, t) => {
                 let n, {
-                        path: r,
-                        params: a
+                        path: a,
+                        params: r
                     } = t,
-                    i = r[1];
-                if (eq[i])
-                    for (let [e, t] of(n = eq[i], Object.entries(a))) n = n.replace(`{${e}}`, t);
-                else if (i === eZ.ItemDetails.valueOf() && a.itemType && a.itemId) n = `${eH[a.itemType]}/${a.itemId}`;
-                else if (i === eZ.GameDetails && a.gameId) return e.getPlaceIdFromUniverseId(a.gameId).then(e => !!e && (window.location.href = `${eY.Games}/${e}`, !0)).catch(() => !1);
-                else if (i === eZ.Profile || i === eZ.ProfileCard) a.userId ? n = `${eY.Users}/${a.userId}${eY.Profile}` : a.groupId && (n = `${eY.Groups}/${a.groupId}`);
-                else if (i === eZ.GiftCards) n = eY.GiftCards;
-                else if (i === eZ.ShareLinks) {
-                    if ("v2" === a.v && void 0 !== a.code) {
-                        let n = a.code || "";
-                        return e.resolveShareLinksV2(a.code).then(async r => {
-                            if ("Referral" === r.data.linkType) {
-                                let t = r.data.status,
-                                    a = eJ(t, n, e3.REFERRAL);
-                                e.sendEvent(a.type, a.context, a.params), "Valid" !== t && e.fireCounter("DeeplinkParserRobloxPlusReferralResolutionFailed");
-                                let i = r.data.targetId ? `&referrerId=${r.data.targetId}` : "",
+                    i = a[1];
+                if (eQ[i])
+                    for (let [e, t] of(n = eQ[i], Object.entries(r))) n = n.replace(`{${e}}`, t);
+                else if (i === ez.ItemDetails.valueOf() && r.itemType && r.itemId) n = `${eH[r.itemType]}/${r.itemId}`;
+                else if (i === ez.GameDetails && r.gameId) return e.getPlaceIdFromUniverseId(r.gameId).then(e => !!e && (window.location.href = `${e$.Games}/${e}`, !0)).catch(() => !1);
+                else if (i === ez.Profile || i === ez.ProfileCard) r.userId ? n = `${e$.Users}/${r.userId}${e$.Profile}` : r.groupId && (n = `${e$.Groups}/${r.groupId}`);
+                else if (i === ez.GiftCards) n = e$.GiftCards;
+                else if (i === ez.ShareLinks) {
+                    if ("v2" === r.v && void 0 !== r.code) {
+                        let n = r.code || "";
+                        return e.resolveShareLinksV2(r.code).then(async a => {
+                            if ("Referral" === a.data.linkType) {
+                                let t = a.data.status,
+                                    r = eK(t, n, e5.REFERRAL);
+                                e.sendEvent(r.type, r.context, r.params), "Valid" !== t && e.fireCounter("DeeplinkParserRobloxPlusReferralResolutionFailed");
+                                let i = a.data.targetId ? `&referrerId=${a.data.targetId}` : "",
                                     l = "Valid" === t ? `referralCode=${n}${i}` : `referralStatus=${t}`;
-                                return window.location.href = `${eY.Plus}?ctx=plus_referral&${l}`, !0
+                                return window.location.href = `${e$.Plus}?ctx=plus_referral&${l}`, !0
                             }
-                            if ("Invalid" === r.data.status) return !1;
-                            let i = eJ(r.data.status, n, e3.EXPERIENCE_V2);
-                            if (e.sendEvent(i.type, i.context, i.params), "Experience" === r.data.linkType && r.data.targetId) {
-                                let t = r.data.customData || "{}";
-                                await to(() => e.launchGame(tl(r.data.targetId, r.data.targetId, void 0, void 0, void 0, void 0, {
+                            if ("Invalid" === a.data.status) return !1;
+                            let i = eK(a.data.status, n, e5.EXPERIENCE_V2);
+                            if (e.sendEvent(i.type, i.context, i.params), "Experience" === a.data.linkType && a.data.targetId) {
+                                let t = a.data.customData || "{}";
+                                await to(() => e.launchGame(tl(a.data.targetId, a.data.targetId, void 0, void 0, void 0, void 0, {
                                     launchData: t
-                                }), e0(r.data.targetId, n, r.data.status))), window.location.href = `${eY.Games}/${r.data.targetId}`
-                            } else if (("StudioEdit" === r.data.linkType || "StudioTeamTest" === r.data.linkType) && r.data.targetId) return e.getUniverseIdFromPlaceId(r.data.targetId).then(t => {
+                                }), e0(a.data.targetId, n, a.data.status))), window.location.href = `${e$.Games}/${a.data.targetId}`
+                            } else if (("StudioEdit" === a.data.linkType || "StudioTeamTest" === a.data.linkType) && a.data.targetId) return e.getUniverseIdFromPlaceId(a.data.targetId).then(t => {
                                 let n = t.toString();
                                 if (!n) return !1;
-                                let i = "StudioTeamTest" === r.data.linkType,
+                                let i = "StudioTeamTest" === a.data.linkType,
                                     l = {};
-                                return "StudioEdit" === r.data.linkType && (a.instanceId && (l.instanceId = a.instanceId), a.annotationId && (l.annotationId = a.annotationId)), !1 !== e.openStudio({
-                                    placeId: r.data.targetId,
+                                return "StudioEdit" === a.data.linkType && (r.instanceId && (l.instanceId = r.instanceId), r.annotationId && (l.annotationId = r.annotationId)), !1 !== e.openStudio({
+                                    placeId: a.data.targetId,
                                     universeId: n,
                                     startTeamTest: i,
                                     instanceId: l.instanceId,
                                     annotationId: l.annotationId
                                 })
                             }).catch(() => !1);
-                            else if (("UserTrustedConnection" === r.data.linkType || "StudioTrustedConnection" === r.data.linkType) && r.data.targetId) {
-                                if (!(0, B.parseInt)(r.data.targetId)) return !1;
-                                let a = "UserTrustedConnection" === r.data.linkType ? e3.USER_TRUSTED_CONNECTION : e3.STUDIO_TRUSTED_CONNECTION,
-                                    i = eJ(r.data.status, n, a);
-                                e.sendEvent(i.type, i.context, i.params), a === e3.USER_TRUSTED_CONNECTION && (window.location.href = t.url), window.location.href = `${eY.Users}/${r.data.targetId}${eY.Profile}?trustedFriendLinkCode=${n}`
-                            } else if ("Moments" === r.data.linkType && r.data.targetId) {
-                                let a = eJ(r.data.status, n, e3.MOMENTS);
-                                e.sendEvent(a.type, a.context, a.params), window.location.href = t.url, window.location.href = "roblox://navigation/moments"
-                            } else if ("SchoolInvite" === r.data.linkType) {
-                                let a = eJ(r.data.status, n, e3.SCHOOL_INVITE);
-                                if (e.sendEvent(a.type, a.context, a.params), "Valid" !== r.data.status) return e.fireCounter("DeeplinkParserSchoolInviteResolutionFailed"), !1;
+                            else if (("UserTrustedConnection" === a.data.linkType || "StudioTrustedConnection" === a.data.linkType) && a.data.targetId) {
+                                if (!(0, k.parseInt)(a.data.targetId)) return !1;
+                                let r = "UserTrustedConnection" === a.data.linkType ? e5.USER_TRUSTED_CONNECTION : e5.STUDIO_TRUSTED_CONNECTION,
+                                    i = eK(a.data.status, n, r);
+                                e.sendEvent(i.type, i.context, i.params), r === e5.USER_TRUSTED_CONNECTION && (window.location.href = t.url), window.location.href = `${e$.Users}/${a.data.targetId}${e$.Profile}?trustedFriendLinkCode=${n}`
+                            } else if ("Moments" === a.data.linkType && a.data.targetId) {
+                                let r = eK(a.data.status, n, e5.MOMENTS);
+                                e.sendEvent(r.type, r.context, r.params), window.location.href = t.url, window.location.href = "roblox://navigation/moments"
+                            } else if ("SchoolInvite" === a.data.linkType) {
+                                let r = eK(a.data.status, n, e5.SCHOOL_INVITE);
+                                if (e.sendEvent(r.type, r.context, r.params), "Valid" !== a.data.status) return e.fireCounter("DeeplinkParserSchoolInviteResolutionFailed"), !1;
                                 e.startDeepLinkFlow(t.url) || (window.location.href = t.url)
                             }
                             return !0
                         }).catch(() => !1)
                     }
-                    switch (a.type) {
-                        case e8.EXPERIENCE_INVITE:
-                            if (null != a.code) {
+                    switch (r.type) {
+                        case e1.EXPERIENCE_INVITE:
+                            if (null != r.code) {
                                 let {
                                     code: t
-                                } = a;
-                                return e.resolveShareLinks(a.code, e8.EXPERIENCE_INVITE).then(async n => {
-                                    let r = n?.data?.experienceInviteData;
-                                    if (r?.placeId == null) return !1;
-                                    let i = eJ(r.status, t, e8.EXPERIENCE_INVITE);
-                                    return (e.sendEvent(i.type, i.context, i.params), r.status === e2.VALID && r.instanceId) ? (await to(() => e.launchGame(tl(r.placeId, r.placeId, r.instanceId, void 0, void 0, r.inviterId), e0(r.placeId.toString(), t, r.status))), window.location.href = `${eY.Games}/${r.placeId}`, !0) : (r.status === e2.EXPIRED || r.status === e2.INVITER_NOT_IN_EXPERIENCE) && (window.localStorage.setItem("ref_info", (0, eW.stringToBase64)(eK.serialize({
-                                        [r.placeId.toString()]: r.inviterId.toString()
-                                    }).value)), window.location.href = `${eY.Games}/${r.placeId}?experienceInviteLinkId=${a.code}&experienceInviteStatus=${r.status}`, !0)
+                                } = r;
+                                return e.resolveShareLinks(r.code, e1.EXPERIENCE_INVITE).then(async n => {
+                                    let a = n?.data?.experienceInviteData;
+                                    if (a?.placeId == null) return !1;
+                                    let i = eK(a.status, t, e1.EXPERIENCE_INVITE);
+                                    return (e.sendEvent(i.type, i.context, i.params), a.status === e3.VALID && a.instanceId) ? (await to(() => e.launchGame(tl(a.placeId, a.placeId, a.instanceId, void 0, void 0, a.inviterId), e0(a.placeId.toString(), t, a.status))), window.location.href = `${e$.Games}/${a.placeId}`, !0) : (a.status === e3.EXPIRED || a.status === e3.INVITER_NOT_IN_EXPERIENCE) && (window.localStorage.setItem("ref_info", (0, eM.stringToBase64)(eJ.serialize({
+                                        [a.placeId.toString()]: a.inviterId.toString()
+                                    }).value)), window.location.href = `${e$.Games}/${a.placeId}?experienceInviteLinkId=${r.code}&experienceInviteStatus=${a.status}`, !0)
                                 }).catch(() => (e.fireCounter("DeeplinkParserInviteResolutionFailed"), !1))
                             }
                             break;
-                        case e8.NOTIFICATION_EXPERIENCE_INVITE:
-                            if (a.code) return e.resolveShareLinks(a.code, e8.NOTIFICATION_EXPERIENCE_INVITE).then(t => {
+                        case e1.NOTIFICATION_EXPERIENCE_INVITE:
+                            if (r.code) return e.resolveShareLinks(r.code, e1.NOTIFICATION_EXPERIENCE_INVITE).then(t => {
                                 let n = t?.data?.notificationExperienceInviteData;
                                 if (n?.placeId) {
-                                    let t = n.instanceId && n.status === e2.VALID,
-                                        r = `${eY.ExperienceLauncher}placeId=${n.placeId}${n.launchData?`&launchData=${encodeURIComponent(encodeURIComponent(n.launchData))}`:""}${t?`&gameInstanceId=${n.instanceId}`:""}${n.inviterId?`&referredByPlayerId=${n.inviterId}`:""}`;
-                                    return !1 !== e.startGameWithDeepLinkUrl(r, n.placeId)
+                                    let t = n.instanceId && n.status === e3.VALID,
+                                        a = `${e$.ExperienceLauncher}placeId=${n.placeId}${n.launchData?`&launchData=${encodeURIComponent(encodeURIComponent(n.launchData))}`:""}${t?`&gameInstanceId=${n.instanceId}`:""}${n.inviterId?`&referredByPlayerId=${n.inviterId}`:""}`;
+                                    return !1 !== e.startGameWithDeepLinkUrl(a, n.placeId)
                                 }
                                 return !1
                             }).catch(() => (e.fireCounter("DeeplinkParserNotificationInviteResolutionFailed"), !1));
                             break;
-                        case e8.FRIEND_INVITE:
-                            if (a.code) {
+                        case e1.FRIEND_INVITE:
+                            if (r.code) {
                                 let {
                                     code: t
-                                } = a;
-                                return e.resolveShareLinks(a.code, e8.FRIEND_INVITE).then(n => {
-                                    let r = n?.data?.friendInviteData;
-                                    if (r?.senderUserId == null) return !1;
-                                    let a = eJ(r.status, t, e8.FRIEND_INVITE);
-                                    return e.sendEvent(a.type, a.context, a.params), (r.status === e5.VALID || r.status === e5.CONSUMED || r.status === e5.EXPIRED) && (window.location.href = `${eY.Users}/${r.senderUserId}${eY.Profile}`, !0)
+                                } = r;
+                                return e.resolveShareLinks(r.code, e1.FRIEND_INVITE).then(n => {
+                                    let a = n?.data?.friendInviteData;
+                                    if (a?.senderUserId == null) return !1;
+                                    let r = eK(a.status, t, e1.FRIEND_INVITE);
+                                    return e.sendEvent(r.type, r.context, r.params), (a.status === e9.VALID || a.status === e9.CONSUMED || a.status === e9.EXPIRED) && (window.location.href = `${e$.Users}/${a.senderUserId}${e$.Profile}`, !0)
                                 }).catch(() => (e.fireCounter("DeeplinkParserFriendRequestResolutionFailed"), !1))
                             }
                             break;
-                        case e8.PROFILE:
-                            if (a.code) {
+                        case e1.PROFILE:
+                            if (r.code) {
                                 let {
                                     code: t
-                                } = a;
-                                return e.resolveShareLinks(a.code, e8.PROFILE).then(n => {
-                                    let r = n?.data?.profileLinkResolutionResponseData;
-                                    if (r?.userId == null) return !1;
-                                    let a = eJ(r.status, t, e8.PROFILE);
-                                    if (e.sendEvent(a.type, a.context, a.params), r.status === e9.VALID) {
+                                } = r;
+                                return e.resolveShareLinks(r.code, e1.PROFILE).then(n => {
+                                    let a = n?.data?.profileLinkResolutionResponseData;
+                                    if (a?.userId == null) return !1;
+                                    let r = eK(a.status, t, e1.PROFILE);
+                                    if (e.sendEvent(r.type, r.context, r.params), a.status === e8.VALID) {
                                         let t = (e => {
                                             switch (e?.toLowerCase()) {
-                                                case e1.PROFILE_SHARE.toLowerCase():
-                                                    return e1.PROFILE_SHARE;
-                                                case e1.QR_CODE.toLowerCase():
+                                                case e2.PROFILE_SHARE.toLowerCase():
+                                                    return e2.PROFILE_SHARE;
+                                                case e2.QR_CODE.toLowerCase():
                                                 default:
-                                                    return e1.QR_CODE
+                                                    return e2.QR_CODE
                                             }
                                         })(e.getQueryParam("source"));
-                                        return window.location.href = `${eY.Users}/${r.userId}${eY.Profile}?friendshipSourceType=${t}`, !0
+                                        return window.location.href = `${e$.Users}/${a.userId}${e$.Profile}?friendshipSourceType=${t}`, !0
                                     }
                                     return !1
                                 }).catch(() => (e.fireCounter("DeeplinkParserProfileShareResolutionFailed"), !1))
                             }
                             break;
-                        case e8.SCREENSHOT_INVITE:
-                            if (a.code) {
+                        case e1.SCREENSHOT_INVITE:
+                            if (r.code) {
                                 let {
                                     code: t
-                                } = a;
-                                return e.resolveShareLinks(a.code, e8.SCREENSHOT_INVITE).then(n => {
-                                    let r = n?.data?.screenshotInviteData;
-                                    if (r?.placeId == null || ![e4.EXPIRED, e4.INVITER_NOT_IN_EXPERIENCE, e4.VALID].includes(r.status)) return !1;
-                                    let i = eJ(r.status, t, e8.SCREENSHOT_INVITE);
-                                    if (e.sendEvent(i.type, i.context, i.params), r.status === e4.EXPIRED || r.status === e4.INVITER_NOT_IN_EXPERIENCE) return window.location.href = `${eY.Games}/${r.placeId}?experienceInviteLinkId=${a.code}&experienceInviteStatus=${r.status}`, !0;
-                                    let l = `${eY.ExperienceLauncher}placeId=${r.placeId}`;
-                                    return r.launchData && (l += `&launchData=${encodeURIComponent(encodeURIComponent(r.launchData))}`), r.instanceId && (l += `&gameInstanceId=${r.instanceId}`), !1 !== e.startGameWithDeepLinkUrl(l, r.placeId)
+                                } = r;
+                                return e.resolveShareLinks(r.code, e1.SCREENSHOT_INVITE).then(n => {
+                                    let a = n?.data?.screenshotInviteData;
+                                    if (a?.placeId == null || ![e4.EXPIRED, e4.INVITER_NOT_IN_EXPERIENCE, e4.VALID].includes(a.status)) return !1;
+                                    let i = eK(a.status, t, e1.SCREENSHOT_INVITE);
+                                    if (e.sendEvent(i.type, i.context, i.params), a.status === e4.EXPIRED || a.status === e4.INVITER_NOT_IN_EXPERIENCE) return window.location.href = `${e$.Games}/${a.placeId}?experienceInviteLinkId=${r.code}&experienceInviteStatus=${a.status}`, !0;
+                                    let l = `${e$.ExperienceLauncher}placeId=${a.placeId}`;
+                                    return a.launchData && (l += `&launchData=${encodeURIComponent(encodeURIComponent(a.launchData))}`), a.instanceId && (l += `&gameInstanceId=${a.instanceId}`), !1 !== e.startGameWithDeepLinkUrl(l, a.placeId)
                                 }).catch(() => (e.fireCounter("DeeplinkParserScreenshotInviteShareResolutionFailed"), !1))
                             }
                             break;
-                        case e8.SERVER:
-                            if (a.code) {
+                        case e1.SERVER:
+                            if (r.code) {
                                 let {
                                     code: t
-                                } = a;
-                                return e.resolveShareLinks(a.code, e8.SERVER).then(n => {
-                                    let r = n?.data?.privateServerInviteData;
-                                    return r?.universeId != null && !![e7.VALID, e7.EXPIRED].includes(r.status) && (e.getPlaceIdFromUniverseId(r.universeId.toString()).then(n => {
+                                } = r;
+                                return e.resolveShareLinks(r.code, e1.SERVER).then(n => {
+                                    let a = n?.data?.privateServerInviteData;
+                                    return a?.universeId != null && !![e7.VALID, e7.EXPIRED].includes(a.status) && (e.getPlaceIdFromUniverseId(a.universeId.toString()).then(n => {
                                         if (!n) return !1;
-                                        let a = eJ(r.status, t, e8.SERVER);
-                                        return e.sendEvent(a.type, a.context, a.params), window.location.href = `${eY.Games}/${n}?privateServerLinkCode=${r.linkCode}`, !0
+                                        let r = eK(a.status, t, e1.SERVER);
+                                        return e.sendEvent(r.type, r.context, r.params), window.location.href = `${e$.Games}/${n}?privateServerLinkCode=${a.linkCode}`, !0
                                     }).catch(() => !1), !0)
                                 }).catch(() => (e.fireCounter("DeeplinkParserPrivateServerLinkResolutionFailed"), !1))
                             }
                             break;
-                        case e8.EXPERIENCE_AFFILIATE: {
-                            if (!a.code) break;
+                        case e1.EXPERIENCE_AFFILIATE: {
+                            if (!r.code) break;
                             let {
                                 code: t
-                            } = a;
-                            return e.resolveShareLinks(a.code, e8.EXPERIENCE_AFFILIATE).then(n => {
-                                let r = n?.data?.experienceAffiliateData;
-                                if (r?.status !== tn.VALID) return !1;
-                                if (r?.universeId == null) {
-                                    let n = eJ(r.status, t, e8.EXPERIENCE_AFFILIATE);
-                                    if (e.sendEvent(n.type, n.context, n.params), r.fallbackType === ti.PROFILE && r.fallbackId) window.location.href = `${eY.Users}/${r.fallbackId}${eY.Profile}`;
+                            } = r;
+                            return e.resolveShareLinks(r.code, e1.EXPERIENCE_AFFILIATE).then(n => {
+                                let a = n?.data?.experienceAffiliateData;
+                                if (a?.status !== tn.VALID) return !1;
+                                if (a?.universeId == null) {
+                                    let n = eK(a.status, t, e1.EXPERIENCE_AFFILIATE);
+                                    if (e.sendEvent(n.type, n.context, n.params), a.fallbackType === ti.PROFILE && a.fallbackId) window.location.href = `${e$.Users}/${a.fallbackId}${e$.Profile}`;
                                     else {
-                                        let e = `${window.location.protocol}/${window.location.hostname}${window.location.pathname}?type=${e8.EXPERIENCE_AFFILIATE}&code=${a.code}`;
+                                        let e = `${window.location.protocol}/${window.location.hostname}${window.location.pathname}?type=${e1.EXPERIENCE_AFFILIATE}&code=${r.code}`;
                                         window.location.href = `/?referralUrl=${encodeURIComponent(e)}`
                                     }
                                     return !0
                                 }
-                                return e.getPlaceIdFromUniverseId(r.universeId.toString()).then(n => {
+                                return e.getPlaceIdFromUniverseId(a.universeId.toString()).then(n => {
                                     if (!n) return !1;
-                                    let i = eJ(r.status, t, e8.EXPERIENCE_AFFILIATE);
+                                    let i = eK(a.status, t, e1.EXPERIENCE_AFFILIATE);
                                     e.sendEvent(i.type, i.context, i.params);
-                                    let l = `${window.location.protocol}//${window.location.hostname}${window.location.pathname}?type=${e8.EXPERIENCE_AFFILIATE}&code=${a.code}`,
-                                        s = `${eY.Games}/${n}?shareLinkSourceType=${e8.EXPERIENCE_AFFILIATE}&referralUrl=${encodeURIComponent(l)}`;
-                                    return s = ts(s, r.joinData), window.location.href = s, !0
+                                    let l = `${window.location.protocol}//${window.location.hostname}${window.location.pathname}?type=${e1.EXPERIENCE_AFFILIATE}&code=${r.code}`,
+                                        s = `${e$.Games}/${n}?shareLinkSourceType=${e1.EXPERIENCE_AFFILIATE}&referralUrl=${encodeURIComponent(l)}`;
+                                    return s = ts(s, a.joinData), window.location.href = s, !0
                                 }).catch(() => !1)
-                            }).catch(() => (e.fireCounter(ez), !1))
+                            }).catch(() => (e.fireCounter(eq), !1))
                         }
-                        case e8.EXPERIENCE_DETAILS: {
-                            if (!a.code) break;
+                        case e1.EXPERIENCE_DETAILS: {
+                            if (!r.code) break;
                             let {
                                 code: t
-                            } = a;
-                            return e.resolveShareLinks(a.code, e8.EXPERIENCE_DETAILS).then(n => {
-                                let r = n?.data?.experienceDetailsInviteData;
-                                return r?.universeId != null && r.status === e6.VALID && e.getPlaceIdFromUniverseId(r.universeId.toString()).then(n => {
+                            } = r;
+                            return e.resolveShareLinks(r.code, e1.EXPERIENCE_DETAILS).then(n => {
+                                let a = n?.data?.experienceDetailsInviteData;
+                                return a?.universeId != null && a.status === e6.VALID && e.getPlaceIdFromUniverseId(a.universeId.toString()).then(n => {
                                     if (!n) return !1;
-                                    let a = eJ(r.status, t, e8.EXPERIENCE_DETAILS);
-                                    return e.sendEvent(a.type, a.context, a.params), window.location.href = `${eY.Games}/${n}?shareLinkSourceType=${e8.EXPERIENCE_DETAILS}`, !0
+                                    let r = eK(a.status, t, e1.EXPERIENCE_DETAILS);
+                                    return e.sendEvent(r.type, r.context, r.params), window.location.href = `${e$.Games}/${n}?shareLinkSourceType=${e1.EXPERIENCE_DETAILS}`, !0
                                 }).catch(() => !1)
-                            }).catch(() => (e.fireCounter(ez), !1))
+                            }).catch(() => (e.fireCounter(eq), !1))
                         }
-                        case e8.AVATAR_ITEM_DETAILS:
-                        case e8.AVATAR_ITEM_AFFILIATE: {
-                            if (!a.code) break;
+                        case e1.AVATAR_ITEM_DETAILS:
+                        case e1.AVATAR_ITEM_AFFILIATE: {
+                            if (!r.code) break;
                             let {
                                 code: t
-                            } = a, n = a.type === e8.AVATAR_ITEM_AFFILIATE ? e8.AVATAR_ITEM_AFFILIATE : e8.AVATAR_ITEM_DETAILS;
-                            return e.resolveShareLinks(a.code, n).then(r => {
-                                let i = r?.data?.avatarItemDetailsData;
-                                if (i?.itemId == null || "" === i.itemId || "0" === i.itemId || !(i.itemType in eY) || i.status !== tt.VALID) return !1;
+                            } = r, n = r.type === e1.AVATAR_ITEM_AFFILIATE ? e1.AVATAR_ITEM_AFFILIATE : e1.AVATAR_ITEM_DETAILS;
+                            return e.resolveShareLinks(r.code, n).then(a => {
+                                let i = a?.data?.avatarItemDetailsData;
+                                if (i?.itemId == null || "" === i.itemId || "0" === i.itemId || !(i.itemType in e$) || i.status !== tt.VALID) return !1;
                                 let l = i.itemType,
-                                    s = eJ(i.status, t, n);
-                                return e.sendEvent(s.type, s.context, s.params), window.location.href = `${eY[l]}/${i.itemId}?pid=share&is_retargeting=false&deep_link_value=${a.code}`, !0
-                            }).catch(() => (e.fireCounter(n === e8.AVATAR_ITEM_AFFILIATE ? "DeeplinkParserAvatarItemAffiliateResolutionFailed" : "DeeplinkParserAvatarItemDetailsResolutionFailed"), !1))
+                                    s = eK(i.status, t, n);
+                                return e.sendEvent(s.type, s.context, s.params), window.location.href = `${e$[l]}/${i.itemId}?pid=share&is_retargeting=false&deep_link_value=${r.code}`, !0
+                            }).catch(() => (e.fireCounter(n === e1.AVATAR_ITEM_AFFILIATE ? "DeeplinkParserAvatarItemAffiliateResolutionFailed" : "DeeplinkParserAvatarItemDetailsResolutionFailed"), !1))
                         }
-                        case e8.CONTENT_POST: {
-                            if (!a.code) break;
+                        case e1.CONTENT_POST: {
+                            if (!r.code) break;
                             let {
                                 code: t
-                            } = a;
-                            return e.resolveShareLinks(a.code, e8.CONTENT_POST).then(n => {
-                                let r = n?.data?.contentPostData;
-                                if (!r || r.status !== tr.VALID) return !1;
-                                let a = eJ(r.status, t, e8.CONTENT_POST);
-                                return e.sendEvent(a.type, a.context, a.params), window.location.href = `${eY.AppLauncher}${eY.ContentPost}?userId=${r.postCreatorId}&postId=${r.postId}`, window.location.href = `${eY.Users}/${r.postCreatorId}${eY.Profile}`, !0
+                            } = r;
+                            return e.resolveShareLinks(r.code, e1.CONTENT_POST).then(n => {
+                                let a = n?.data?.contentPostData;
+                                if (!a || a.status !== ta.VALID) return !1;
+                                let r = eK(a.status, t, e1.CONTENT_POST);
+                                return e.sendEvent(r.type, r.context, r.params), window.location.href = `${e$.AppLauncher}${e$.ContentPost}?userId=${a.postCreatorId}&postId=${a.postId}`, window.location.href = `${e$.Users}/${a.postCreatorId}${e$.Profile}`, !0
                             }).catch(() => (e.fireCounter("DeeplinkParserContentPostResolutionFailed"), !1))
                         }
-                        case e8.EXPERIENCE_EVENT: {
-                            if (!a.code) break;
+                        case e1.EXPERIENCE_EVENT: {
+                            if (!r.code) break;
                             let {
                                 code: t
-                            } = a;
-                            return e.resolveShareLinks(a.code, e8.EXPERIENCE_EVENT).then(n => {
-                                let r = n?.data?.experienceEventData;
-                                if (r?.universeId == null || !r.placeId || r.status !== ta.VALID) return !1;
-                                let a = eJ(r.status, t, e8.EXPERIENCE_EVENT);
-                                e.sendEvent(a.type, a.context, a.params);
-                                let i = `${eY.ExperienceLauncher}placeId=${r.placeId}`;
-                                return i = ts(i, r.joinData), !1 !== e.startGameWithDeepLinkUrl(i, r.placeId)
+                            } = r;
+                            return e.resolveShareLinks(r.code, e1.EXPERIENCE_EVENT).then(n => {
+                                let a = n?.data?.experienceEventData;
+                                if (a?.universeId == null || !a.placeId || a.status !== tr.VALID) return !1;
+                                let r = eK(a.status, t, e1.EXPERIENCE_EVENT);
+                                e.sendEvent(r.type, r.context, r.params);
+                                let i = `${e$.ExperienceLauncher}placeId=${a.placeId}`;
+                                return i = ts(i, a.joinData), !1 !== e.startGameWithDeepLinkUrl(i, a.placeId)
                             }).catch(() => (e.fireCounter("DeeplinkParserExperienceEventResolutionFailed"), !1))
                         }
                     }
-                } else if (i === eZ.Chat && a.userId) return e.startChat(a.userId), Promise.resolve(!0);
-                else if (i === eZ.ExternalWebUrl) {
+                } else if (i === ez.Chat && r.userId) return e.startChat(r.userId), Promise.resolve(!0);
+                else if (i === ez.ExternalWebUrl) {
                     let t;
-                    if (a.domain === te.Zendesk) {
+                    if (r.domain === te.Zendesk) {
                         let {
                             articleId: n,
-                            locale: r
-                        } = a;
-                        (t = e.getHelpDeskUrl(r, n)) && window.open(t, "_blank")
+                            locale: a
+                        } = r;
+                        (t = e.getHelpDeskUrl(a, n)) && window.open(t, "_blank")
                     }
                     return Promise.resolve(!!t)
-                } else if (i === eZ.Avatar) n = Object.keys(a).length ? t.url : eY.Avatar;
-                else if (i === eZ.Group) a.groupId && (n = a.forumCategoryId && a.forumPostId && a.forumCommentId ? `${eY.Groups}/${a.groupId}#!/forums/category-${a.forumCategoryId}/post/post-${a.forumPostId}/comment/${a.forumCommentId}` : `${eY.Groups}/${a.groupId}`);
-                else if (i === eZ.SupportCenter) n = a.universeId && a.ticketId ? `${eY.SupportCenter}#!/tickets/${a.universeId}/${a.ticketId}` : eY.SupportCenter;
-                else if (i === eZ.SecurityAlert) n = a.payload && a.username ? `${eY.SecurityAlert}?payload=${a.payload}&username=${a.username}` : `${eY.SecurityAlert}?payload=null&username=`;
-                else if (i === eZ.Fae) {
+                } else if (i === ez.Avatar) n = Object.keys(r).length ? t.url : e$.Avatar;
+                else if (i === ez.Group) r.groupId && (n = r.forumCategoryId && r.forumPostId && r.forumCommentId ? `${e$.Groups}/${r.groupId}#!/forums/category-${r.forumCategoryId}/post/post-${r.forumPostId}/comment/${r.forumCommentId}` : `${e$.Groups}/${r.groupId}`);
+                else if (i === ez.SupportCenter) n = r.universeId && r.ticketId ? `${e$.SupportCenter}#!/tickets/${r.universeId}/${r.ticketId}` : e$.SupportCenter;
+                else if (i === ez.SecurityAlert) n = r.payload && r.username ? `${e$.SecurityAlert}?payload=${r.payload}&username=${r.username}` : `${e$.SecurityAlert}?payload=null&username=`;
+                else if (i === ez.Fae) {
                     let t = e.startAccessManagementUpsell({
                         featureName: "TriggerAgeVerifyRecourse",
                         namespace: "social/Upsells"
                     });
                     return t ? t.then(() => !0).catch(() => !1) : Promise.resolve(!1)
-                } else if (i === eZ.CurrencyTransfer) {
-                    let r = a.transferrequestid ?? a.transferRequestId ?? a.transferrequestId,
-                        i = (a.direction ?? a.Direction)?.toLowerCase(),
-                        l = a.userid ?? a.userId,
-                        s = a.transferorigination ?? a.transferOrigination;
-                    if (r || "send" === i && l && s) {
-                        let r = e.getDeviceMeta();
-                        if (r?.isDesktop && e.startDeepLinkFlow(t.url)) return Promise.resolve(!0);
+                } else if (i === ez.CurrencyTransfer) {
+                    let a = r.transferrequestid ?? r.transferRequestId ?? r.transferrequestId,
+                        i = (r.direction ?? r.Direction)?.toLowerCase(),
+                        l = r.userid ?? r.userId,
+                        s = r.transferorigination ?? r.transferOrigination;
+                    if (a || "send" === i && l && s) {
+                        let a = e.getDeviceMeta();
+                        if (a?.isDesktop && e.startDeepLinkFlow(t.url)) return Promise.resolve(!0);
                         n = t.url
                     }
-                } else if (i === eZ.AcceptGift) {
-                    if (a.giftId) {
-                        let r = e.getDeviceMeta();
-                        if (r?.isDesktop && e.startDeepLinkFlow(t.url)) return Promise.resolve(!0);
+                } else if (i === ez.AcceptGift) {
+                    if (r.giftId) {
+                        let a = e.getDeviceMeta();
+                        if (a?.isDesktop && e.startDeepLinkFlow(t.url)) return Promise.resolve(!0);
                         n = t.url
                     }
-                } else if (i === eZ.Moments) {
-                    let r = e.getDeviceMeta();
-                    if (r?.isDesktop && e.startDeepLinkFlow(t.url)) return Promise.resolve(!0);
+                } else if (i === ez.Moments) {
+                    let a = e.getDeviceMeta();
+                    if (a?.isDesktop && e.startDeepLinkFlow(t.url)) return Promise.resolve(!0);
                     n = t.url
-                } else if (i === eZ.AmpWizard) n = t.url;
-                else if (i === eZ.PlusUpsell) n = t.url;
-                else if (i === eZ.PlusReferralDashboard) n = t.url;
-                else if (i === eZ.PlusSubscribe) {
-                    let e = eQ.UrlSearchParams.new([..."PlusReferralLandingSheet" === a.surface ? [
+                } else if (i === ez.AmpWizard) n = t.url;
+                else if (i === ez.PlusUpsell) n = t.url;
+                else if (i === ez.PlusReferralDashboard) n = t.url;
+                else if (i === ez.PlusOnboarding) n = t.url;
+                else if (i === ez.PlusSubscribe) {
+                    let e = eO.UrlSearchParams.new([..."PlusReferralLandingSheet" === r.surface ? [
                         ["ctx", "plus_referral"]
-                    ] : [], ...a.referrer_id ? [
-                        ["referrerId", a.referrer_id]
+                    ] : [], ...r.referrer_id ? [
+                        ["referrerId", r.referrer_id]
                     ] : []]).toString();
-                    n = e ? `${eY.Plus}?${e}` : eY.Plus
+                    n = e ? `${e$.Plus}?${e}` : e$.Plus
                 }
                 return n ? window.location.href = n : e.fireCounter("DeeplinkParserNavigationFailed"), Promise.resolve(!!n)
-            })(A, e),
-            [eZ.PlaceId]: e => ((e, t) => {
+            })(I, e),
+            [ez.PlaceId]: e => ((e, t) => {
                 let {
                     params: n
                 } = t;
                 if (!n.placeId) return Promise.resolve(!1);
-                if (n.linkCode) return window.location.href = `${eY.Games}/${n.placeId}?privateServerLinkCode=${n.linkCode}`, Promise.resolve(!0);
-                if (n.accessCode) return window.location.href = `${eY.GameStart}?placeId=${n.placeId}&accessCode=${n.accessCode}`, Promise.resolve(!0);
+                if (n.linkCode) return window.location.href = `${e$.Games}/${n.placeId}?privateServerLinkCode=${n.linkCode}`, Promise.resolve(!0);
+                if (n.accessCode) return window.location.href = `${e$.GameStart}?placeId=${n.placeId}&accessCode=${n.accessCode}`, Promise.resolve(!0);
                 if (n.launchData) {
-                    let t = `${eY.ExperienceLauncher}placeId=${n.placeId}${n.launchData?`&launchData=${n.launchData}`:""}`,
-                        r = Number(n.placeId);
-                    return Promise.resolve(!1 !== e.startGameWithDeepLinkUrl(t, r))
+                    let t = `${e$.ExperienceLauncher}placeId=${n.placeId}${n.launchData?`&launchData=${n.launchData}`:""}`,
+                        a = Number(n.placeId);
+                    return Promise.resolve(!1 !== e.startGameWithDeepLinkUrl(t, a))
                 }
-                return Promise.resolve(!1 !== e.joinMultiplayerGame((0, B.parseFloat)(n.placeId) ?? NaN))
-            })(A, e),
-            [eZ.UserId]: e => {
+                return Promise.resolve(!1 !== e.joinMultiplayerGame((0, k.parseFloat)(n.placeId) ?? NaN))
+            })(I, e),
+            [ez.UserId]: e => {
                 let {
                     userId: t
                 } = e.params;
                 return t && (window.location.href = `/games/start?userId=${t}`), Promise.resolve(!!t)
             },
-            [eZ.Group]: e => {
+            [ez.Group]: e => {
                 let {
                     groupId: t
                 } = e.params;
@@ -2076,73 +2077,73 @@
             }
         }, {
             navigateToDeepLink: e => {
-                if (A.getDeviceMeta()?.isIosApp && A.navigateToHybridFeature) return A.navigateToHybridFeature({
+                if (I.getDeviceMeta()?.isIosApp && I.navigateToHybridFeature) return I.navigateToHybridFeature({
                     feature: "DeepLink",
                     deepLinkUrlPath: e
                 }), Promise.resolve(!0);
-                if (A.getDeviceMeta()?.isInApp) return window.location.href = e, Promise.resolve(!0);
+                if (I.getDeviceMeta()?.isInApp) return window.location.href = e, Promise.resolve(!0);
                 let t = td(e),
-                    r = n[t.path[0]];
-                return r ? r(t) : Promise.resolve(!1)
+                    a = n[t.path[0]];
+                return a ? a(t) : Promise.resolve(!1)
             }
         }),
-        tT = e => x.getUntyped((0, R.getPageBaseUrls)().apiGateway.withPath(`/guac-v2/v1/bundles/${e}`), {
+        tS = e => V.getUntyped((0, L.getPageBaseUrls)().apiGateway.withPath(`/guac-v2/v1/bundles/${e}`), {
             credentials: "include"
         }).getOrThrow(),
-        tS = {
+        tN = {
             Thumbnail: e => {
                 let {
                     type: t,
                     targetId: n,
-                    containerClass: r,
-                    includeProfileFrame: a
+                    containerClass: a,
+                    includeProfileFrame: r
                 } = e;
-                return (0, E.jsx)(L.Thumbnail2d, {
-                    type: tI[t],
+                return (0, E.jsx)(R.Thumbnail2d, {
+                    type: tv[t],
                     size: "150x150",
                     format: "webp",
                     targetId: n,
-                    containerClassName: r,
-                    includeProfileFrame: a
+                    containerClassName: a,
+                    includeProfileFrame: r
                 })
             },
-            getLocale: () => (0, D.getLocale)(),
+            getLocale: () => (0, P.getLocale)(),
             formatFullDate: e => {
-                let t = (0, D.getLocale)(),
+                let t = (0, P.getLocale)(),
                     n = new Intl.DateTimeFormat(t, {
                         year: "numeric",
                         month: "short",
                         day: "numeric"
                     }),
-                    r = new Intl.DateTimeFormat(t, {
+                    a = new Intl.DateTimeFormat(t, {
                         hour: "numeric",
                         minute: "numeric"
                     });
-                return `${n.format(e)} | ${r.format(e)}`
+                return `${n.format(e)} | ${a.format(e)}`
             },
             get joinMultiplayerGame() {
-                return null == (0, eM.getGameLauncher)() ? null : tC
+                return null == (0, eU.getGameLauncher)() ? null : tC
             },
             parseDeepLink: e => td(e),
             navigateToDeepLink: e => tw(e),
-            getReportAbuseConfig: () => tT("report-abuse-ui"),
-            callGuacBehaviour: tT,
+            getReportAbuseConfig: () => tS("report-abuse-ui"),
+            callGuacBehaviour: tS,
             getDeviceMeta: () => (0, tm.getDeviceMeta)(),
-            getCurrentUserId: () => String((0, th.getCurrentUser)()?.id ?? null ?? ""),
-            hashStringWithSha256: e => (0, eV.hashStringWithSha256)(e),
+            getCurrentUserId: () => String((0, tf.getCurrentUser)()?.id ?? null ?? ""),
+            hashStringWithSha256: e => (0, eD.hashStringWithSha256)(e),
             TrustedFriendsModal: e => {
                 let {
                     userId: t,
                     linkTokens: n,
-                    onClose: r
+                    onClose: a
                 } = e;
-                return (0, E.jsx)(ev.Provider, {
-                    value: tb,
-                    children: (0, E.jsx)(eO, {
+                return (0, E.jsx)(eb.Provider, {
+                    value: ty,
+                    children: (0, E.jsx)(e_, {
                         open: !0,
                         userId: t,
                         linkTokens: n,
-                        onClose: r
+                        onClose: a
                     })
                 })
             },
@@ -2154,84 +2155,84 @@
             },
             LegacyNotificationTemplate: null
         };
-    var tP = e.i(981498),
-        tx = e.i(423517),
-        t_ = e.i(257771),
-        tN = e.i(270784),
-        tL = e.i(889375);
-    let tR = "Website.Navigation",
-        tD = P.looseObject({
-            layers: P.record(P.string(), P.looseObject({
-                experimentName: P.optional(P.string())
+    var tx = e.i(981498),
+        tV = e.i(423517),
+        tT = e.i(257771),
+        tZ = e.i(270784),
+        tR = e.i(889375);
+    let tL = "Website.Navigation",
+        tP = x.looseObject({
+            layers: x.record(x.string(), x.looseObject({
+                experimentName: x.optional(x.string())
             }))
         }),
-        tk = !1,
-        tF = async () => {
-            if (!tk) {
-                tk = !0;
+        tF = !1,
+        tB = async () => {
+            if (!tF) {
+                tF = !0;
                 try {
-                    let e = await x.post((0, R.getPageBaseUrls)().apiGateway.withPath("/product-experimentation-platform/v1/projects/1/values"), {
+                    let e = await V.post((0, L.getPageBaseUrls)().apiGateway.withPath("/product-experimentation-platform/v1/projects/1/values"), {
                         layers: {
-                            [tR]: {}
+                            [tL]: {}
                         }
-                    }, tD, {
+                    }, tP, {
                         credentials: "include"
                     }).getOrThrow();
-                    if (!e.layers[tR]?.experimentName) return;
-                    let t = (0, th.getCurrentUser)()?.id;
-                    (0, tL.sendEvent)(tx.EXPOSED_EVENT_NAME, tx.EXPERIMENTATION_TARGET_NAME, (0, t_.buildLayerExposureEvent)(e, tR, null == t ? 0 : (0, th.userIdToNumber)(t), (0, tN.getBrowserTrackerId)() || "0"))
+                    if (!e.layers[tL]?.experimentName) return;
+                    let t = (0, tf.getCurrentUser)()?.id;
+                    (0, tR.sendEvent)(tV.EXPOSED_EVENT_NAME, tV.EXPERIMENTATION_TARGET_NAME, (0, tT.buildLayerExposureEvent)(e, tL, null == t ? 0 : (0, tf.userIdToNumber)(t), (0, tZ.getBrowserTrackerId)() || "0"))
                 } catch {
-                    tk = !1
+                    tF = !1
                 }
             }
-        }, tB = "Website.DownloadFunnel", tj = P.looseObject({
-            layers: P.record(P.string(), P.looseObject({
-                experimentName: P.optional(P.string())
+        }, tk = "Website.DownloadFunnel", tX = x.looseObject({
+            layers: x.record(x.string(), x.looseObject({
+                experimentName: x.optional(x.string())
             }))
-        }), tO = !1, tU = async () => {
-            if (tO) return;
-            tO = !0;
-            let e = await x.post((0, R.getPageBaseUrls)().apiGateway.withPath("/product-experimentation-platform/v1/projects/1/values"), {
+        }), t_ = !1, tG = async () => {
+            if (t_) return;
+            t_ = !0;
+            let e = await V.post((0, L.getPageBaseUrls)().apiGateway.withPath("/product-experimentation-platform/v1/projects/1/values"), {
                 layers: {
-                    [tB]: {}
+                    [tk]: {}
                 }
-            }, tj, {
+            }, tX, {
                 credentials: "include"
             });
             if (e.isErr()) {
-                tO = !1;
+                t_ = !1;
                 return
             }
-            if (!e.value.layers[tB]?.experimentName) return;
-            let t = (0, th.getCurrentUser)()?.id;
-            (0, tL.sendEvent)(tx.EXPOSED_EVENT_NAME, tx.EXPERIMENTATION_TARGET_NAME, (0, t_.buildLayerExposureEvent)(e.value, tB, null == t ? 0 : (0, th.userIdToNumber)(t), (0, tN.getBrowserTrackerId)() || "0"))
-        }, tV = "Website.TopSearchResultsPage.Exposure", tG = P.looseObject({
-            layers: P.record(P.string(), P.looseObject({
-                parameters: P.nullish(P.record(P.string(), P.unknown()))
+            if (!e.value.layers[tk]?.experimentName) return;
+            let t = (0, tf.getCurrentUser)()?.id;
+            (0, tR.sendEvent)(tV.EXPOSED_EVENT_NAME, tV.EXPERIMENTATION_TARGET_NAME, (0, tT.buildLayerExposureEvent)(e.value, tk, null == t ? 0 : (0, tf.userIdToNumber)(t), (0, tZ.getBrowserTrackerId)() || "0"))
+        }, tD = "Website.TopSearchResultsPage.Exposure", tW = x.looseObject({
+            layers: x.record(x.string(), x.looseObject({
+                parameters: x.nullish(x.record(x.string(), x.unknown()))
             }))
-        }), tM = !1, t$ = async () => {
-            if (tM) return;
-            tM = !0;
-            let e = await x.post((0, R.getPageBaseUrls)().apiGateway.withPath("/product-experimentation-platform/v1/projects/1/values"), {
+        }), tU = !1, tj = async () => {
+            if (tU) return;
+            tU = !0;
+            let e = await V.post((0, L.getPageBaseUrls)().apiGateway.withPath("/product-experimentation-platform/v1/projects/1/values"), {
                 layers: {
-                    [tV]: {}
+                    [tD]: {}
                 }
-            }, tG, {
+            }, tW, {
                 credentials: "include"
             });
             if (e.isErr()) {
-                tM = !1;
+                tU = !1;
                 return
             }
-            let t = e.value.layers[tV]?.parameters;
+            let t = e.value.layers[tD]?.parameters;
             if (null == t || !("shouldShowTopResults" in t)) return;
-            let n = (0, th.getCurrentUser)()?.id;
-            (0, tL.sendEvent)(tx.EXPOSED_EVENT_NAME, tx.EXPERIMENTATION_TARGET_NAME, (0, t_.buildLayerExposureEvent)(e.value, tV, null == n ? 0 : (0, th.userIdToNumber)(n), (0, tN.getBrowserTrackerId)() || "0"))
-        }, tX = P.object({
-            plusIdentityBadgeEnabled: P.optional(P.boolean())
-        }), tK = {
+            let n = (0, tf.getCurrentUser)()?.id;
+            (0, tR.sendEvent)(tV.EXPOSED_EVENT_NAME, tV.EXPERIMENTATION_TARGET_NAME, (0, tT.buildLayerExposureEvent)(e.value, tD, null == n ? 0 : (0, tf.userIdToNumber)(n), (0, tZ.getBrowserTrackerId)() || "0"))
+        }, tY = x.object({
+            plusIdentityBadgeEnabled: x.optional(x.boolean())
+        }), tJ = {
             queryKey: ["guac/web-plus-identity-badge"],
-            queryFn: () => x.get((0, R.getPageBaseUrls)().apiGateway.withPath("/guac-v2/v1/bundles/web-plus-identity-badge"), tX, {
+            queryFn: () => V.get((0, L.getPageBaseUrls)().apiGateway.withPath("/guac-v2/v1/bundles/web-plus-identity-badge"), tY, {
                 credentials: "include"
             }).getOrThrow(),
             select: e => {
@@ -2242,11 +2243,11 @@
             },
             staleTime: 1 / 0
         };
-    var tW = e.i(115718);
-    let tQ = (0, C.default)(() => e.A(957562).then(e => ((0, tP.trackAppShellCounter)("NavLoad", {
+    var tM = e.i(115718);
+    let tO = (0, C.default)(() => e.A(957562).then(e => ((0, tx.trackAppShellCounter)("NavLoad", {
             outcome: "loaded"
         }), e), e => {
-            throw (0, tP.trackAppShellCounter)("NavLoad", {
+            throw (0, tx.trackAppShellCounter)("NavLoad", {
                 outcome: "failed"
             }), e
         }), {
@@ -2258,16 +2259,16 @@
                 "aria-hidden": "true"
             })
         }),
-        tZ = P.object({
-            isVNGComplianceEnabled: P.optional(P.boolean())
+        tz = x.object({
+            isVNGComplianceEnabled: x.optional(x.boolean())
         }),
-        tH = () => x.get((0, R.getPageBaseUrls)().apiGateway.withPath("/guac-v2/v1/bundles/intl-auth-compliance"), tZ, {
+        tH = () => V.get((0, L.getPageBaseUrls)().apiGateway.withPath("/guac-v2/v1/bundles/intl-auth-compliance"), tz, {
             credentials: "include"
         }).getOrThrow(),
-        tq = P.object({
-            notificationsCanAccessStream: P.optional(P.boolean())
+        tQ = x.object({
+            notificationsCanAccessStream: x.optional(x.boolean())
         }),
-        tY = () => x.get((0, R.getPageBaseUrls)().apiGateway.withPath("/guac-v2/v1/bundles/navigation-header-ui"), tq, {
+        t$ = () => V.get((0, L.getPageBaseUrls)().apiGateway.withPath("/guac-v2/v1/bundles/navigation-header-ui"), tQ, {
             credentials: "include"
         }).map(e => {
             let {
@@ -2278,10 +2279,10 @@
                 notificationsCanAccessStream: t ?? !1
             }
         }).getOrThrow(),
-        tJ = P.object({
-            count: P.number()
+        tK = x.object({
+            count: x.number()
         }),
-        tz = (e, t) => x.get(N.Url.parse(`https://${e}.${(0,R.getPageBaseUrls)().rootDomain}`).getOrThrow().withPath(t), tJ, {
+        tq = (e, t) => V.get(Z.Url.parse(`https://${e}.${(0,L.getPageBaseUrls)().rootDomain}`).getOrThrow().withPath(t), tK, {
             credentials: "include"
         }).map(e => {
             let {
@@ -2289,21 +2290,21 @@
             } = e;
             return t
         }).getOrThrow(),
-        t0 = () => tz("friends", "/v1/user/friend-requests/count"),
-        t1 = () => tz("privatemessages", "/v1/messages/unread/count"),
-        t8 = () => tz("trades", "/v1/trades/inbound/count"),
-        t3 = e => x.get(N.Url.parse(`https://economy.${(0,R.getPageBaseUrls)().rootDomain}`).getOrThrow().withPath(`/v1/users/${String(e)}/currency`), P.object({
-            robux: P.number()
+        t0 = () => tq("friends", "/v1/user/friend-requests/count"),
+        t2 = () => tq("privatemessages", "/v1/messages/unread/count"),
+        t1 = () => tq("trades", "/v1/trades/inbound/count"),
+        t5 = e => V.get(Z.Url.parse(`https://economy.${(0,L.getPageBaseUrls)().rootDomain}`).getOrThrow().withPath(`/v1/users/${String(e)}/currency`), x.object({
+            robux: x.number()
         }), {
             credentials: "include"
         }).getOrThrow(),
-        t2 = ["control", "hideCreditAndRobux", "showCreditAndRobux"],
-        t5 = P.object({
-            creditDisplayConfig: P.nullable(P.string()),
-            creditBalance: P.nullable(P.number()),
-            currencyCode: P.nullable(P.string())
+        t3 = ["control", "hideCreditAndRobux", "showCreditAndRobux"],
+        t9 = x.object({
+            creditDisplayConfig: x.nullable(x.string()),
+            creditBalance: x.nullable(x.number()),
+            currencyCode: x.nullable(x.string())
         }),
-        t9 = () => x.get((0, R.getPageBaseUrls)().apiGateway.withPath("/credit-balance/v1/get-credit-balance-for-navigation"), t5, {
+        t8 = () => V.get((0, L.getPageBaseUrls)().apiGateway.withPath("/credit-balance/v1/get-credit-balance-for-navigation"), t9, {
             credentials: "include"
         }).map(e => {
             let {
@@ -2312,39 +2313,39 @@
             } = e;
             return {
                 ...n,
-                creditDisplayConfig: t2.find(e => e === t) ?? null
+                creditDisplayConfig: t3.find(e => e === t) ?? null
             }
         }).getOrThrow(),
-        t4 = () => x.get((0, R.getPageBaseUrls)().apiGateway.withPath("/robuxbadge/v1/robuxbadge"), P.object({
-            is_virtual_item_available: P.boolean(),
-            active_virtual_item_start_time_seconds_utc: P.number()
+        t4 = () => V.get((0, L.getPageBaseUrls)().apiGateway.withPath("/robuxbadge/v1/robuxbadge"), x.object({
+            is_virtual_item_available: x.boolean(),
+            active_virtual_item_start_time_seconds_utc: x.number()
         }), {
             credentials: "include"
         }).getOrThrow(),
-        t7 = () => x.postUntyped((0, R.getPageBaseUrls)().authApi.withPath("/v2/logout"), {}, {
+        t7 = () => V.postUntyped((0, L.getPageBaseUrls)().authApi.withPath("/v2/logout"), {}, {
             credentials: "include"
         }).map(() => void 0).getOrThrow(),
         t6 = "Accounts.AccountSwitcher",
         ne = "Website.LogoutUpsell",
-        nt = P.object({
-            layers: P.object({
-                [t6]: P.object({
-                    parameters: P.object({
-                        isAccountSwitcherEnabled: P.optional(P.unknown())
+        nt = x.object({
+            layers: x.object({
+                [t6]: x.object({
+                    parameters: x.object({
+                        isAccountSwitcherEnabled: x.optional(x.unknown())
                     })
                 })
             })
         }),
-        nn = P.object({
-            layers: P.object({
-                [ne]: P.object({
-                    parameters: P.object({
-                        IsPromptsServiceEnabled: P.optional(P.unknown())
+        nn = x.object({
+            layers: x.object({
+                [ne]: x.object({
+                    parameters: x.object({
+                        IsPromptsServiceEnabled: x.optional(x.unknown())
                     })
                 })
             })
         }),
-        nr = () => t ??= x.post((0, R.getPageBaseUrls)().apiGateway.withPath("/product-experimentation-platform/v1/projects/1/values"), {
+        na = () => t ??= V.post((0, L.getPageBaseUrls)().apiGateway.withPath("/product-experimentation-platform/v1/projects/1/values"), {
             layers: {
                 [t6]: {}
             }
@@ -2356,7 +2357,7 @@
             } = e;
             return !0 === t[t6].parameters.isAccountSwitcherEnabled
         }).getOrDefault(!1),
-        na = () => x.post((0, R.getPageBaseUrls)().apiGateway.withPath("/product-experimentation-platform/v1/projects/1/values"), {
+        nr = () => V.post((0, L.getPageBaseUrls)().apiGateway.withPath("/product-experimentation-platform/v1/projects/1/values"), {
             layers: {
                 [ne]: {}
             }
@@ -2368,23 +2369,23 @@
             } = e;
             return !0 === t[ne].parameters.IsPromptsServiceEnabled
         }).getOrDefault(!1),
-        ni = P.object({
-            IsEmailUpsellAtLogoutEnabled: P.optional(P.boolean())
+        ni = x.object({
+            IsEmailUpsellAtLogoutEnabled: x.optional(x.boolean())
         }),
-        nl = P.object({
-            emailAddress: P.optional(P.nullable(P.string()))
+        nl = x.object({
+            emailAddress: x.optional(x.nullable(x.string()))
         }),
         ns = async () => {
-            let e = await x.get((0, R.getPageBaseUrls)().authApi.withPath("/v2/metadata"), ni, {
+            let e = await V.get((0, L.getPageBaseUrls)().authApi.withPath("/v2/metadata"), ni, {
                 credentials: "include"
             }).getOrNull();
             if (e?.IsEmailUpsellAtLogoutEnabled !== !0) return !1;
-            let t = await x.get(N.Url.parse(`https://accountsettings.${(0,R.getPageBaseUrls)().rootDomain}`).getOrThrow().withPath("/v1/email"), nl, {
+            let t = await V.get(Z.Url.parse(`https://accountsettings.${(0,L.getPageBaseUrls)().rootDomain}`).getOrThrow().withPath("/v1/email"), nl, {
                 credentials: "include"
             }).getOrNull();
             return null != t && !t.emailAddress
-        }, no = e => N.Url.parse(`https://notifications.${(0,R.getPageBaseUrls)().rootDomain}`).getOrThrow().withPath(e), nu = () => x.get(no("/v2/stream-notifications/unread-count"), P.object({
-            unreadNotifications: P.number()
+        }, no = e => Z.Url.parse(`https://notifications.${(0,L.getPageBaseUrls)().rootDomain}`).getOrThrow().withPath(e), nc = () => V.get(no("/v2/stream-notifications/unread-count"), x.object({
+            unreadNotifications: x.number()
         }), {
             credentials: "include"
         }).map(e => {
@@ -2392,79 +2393,79 @@
                 unreadNotifications: t
             } = e;
             return t
-        }).getOrThrow(), nc = () => x.postUntyped(no("/v2/stream-notifications/clear-unread"), {}, {
+        }).getOrThrow(), nu = () => V.postUntyped(no("/v2/stream-notifications/clear-unread"), {}, {
             credentials: "include"
         }).map(() => void 0).getOrThrow(), nd = (e, t) => {
-            let n, r = !0,
-                a = () => {
+            let n, a = !0,
+                r = () => {
                     t()
                 };
-            return (0, k.getRealtimeClient)().then(t => {
-                r && null != t && (t.Subscribe(e, a), n = () => {
-                    t.Unsubscribe(e, a)
+            return (0, F.getRealtimeClient)().then(t => {
+                a && null != t && (t.Subscribe(e, r), n = () => {
+                    t.Unsubscribe(e, r)
                 })
             }), () => {
-                r = !1, n?.()
+                a = !1, n?.()
             }
-        }, nm = P.object({
-            displayName: P.string(),
-            hasVerifiedBadge: P.boolean()
-        }), np = e => (0, S.useQuery)({
+        }, nm = x.object({
+            displayName: x.string(),
+            hasVerifiedBadge: x.boolean()
+        }), np = e => (0, N.useQuery)({
             queryKey: ["navigation-user", e],
-            queryFn: () => x.get(N.Url.parse(`https://users.${(0,R.getPageBaseUrls)().rootDomain}`).getOrThrow().withPath(`/v1/users/${String(e)}`), nm, {
+            queryFn: () => V.get(Z.Url.parse(`https://users.${(0,L.getPageBaseUrls)().rootDomain}`).getOrThrow().withPath(`/v1/users/${String(e)}`), nm, {
                 credentials: "include"
             }).getOrThrow(),
             enabled: null != e,
             staleTime: 1 / 0
-        }).data, ng = e => np(e.id)?.displayName ?? e.displayName ?? "", nf = e => np(e.id)?.hasVerifiedBadge ?? e.hasVerifiedBadge, nh = P.object({
-            access: P.string()
-        }), nv = P.object({
-            eligibility: P.union([P.string(), P.number()])
-        }), nI = new Map([
+        }).data, ng = e => np(e.id)?.displayName ?? e.displayName ?? "", nh = e => np(e.id)?.hasVerifiedBadge ?? e.hasVerifiedBadge, nf = x.object({
+            access: x.string()
+        }), nb = x.object({
+            eligibility: x.union([x.string(), x.number()])
+        }), nv = new Map([
             ["Invalid", "Invalid"],
             ["Eligible", "Eligible"],
             ["Ineligible", "Ineligible"],
             [0, "Invalid"],
             [1, "Eligible"],
             [2, "Ineligible"]
-        ]), ny = P.object({
-            referrals: P.array(P.object({
-                senderUserId: P.union([P.number(), P.string()])
+        ]), nA = x.object({
+            referrals: x.array(x.object({
+                senderUserId: x.union([x.number(), x.string()])
             }))
-        }), nb = P.object({
-            prefix: P.string(),
-            algorithmName: P.string(),
-            entries: P.array(P.object({
-                type: P.union([P.literal(0), P.literal(1), P.literal(2)]),
-                score: P.number(),
-                universeId: P.number(),
-                canonicalTitle: P.nullable(P.string()),
-                thumbnailUrl: P.nullable(P.string()),
-                searchQuery: P.string(),
-                trendingSearchStartDateTime: P.nullable(P.string())
+        }), ny = x.object({
+            prefix: x.string(),
+            algorithmName: x.string(),
+            entries: x.array(x.object({
+                type: x.union([x.literal(0), x.literal(1), x.literal(2)]),
+                score: x.number(),
+                universeId: x.number(),
+                canonicalTitle: x.nullable(x.string()),
+                thumbnailUrl: x.nullable(x.string()),
+                searchQuery: x.string(),
+                trendingSearchStartDateTime: x.nullable(x.string())
             }))
-        }), nA = P.object({
-            Args: P.object({
-                Prefix: P.string(),
-                Limit: P.number(),
-                Algo: P.nullable(P.string())
+        }), nI = x.object({
+            Args: x.object({
+                Prefix: x.string(),
+                Limit: x.number(),
+                Algo: x.nullable(x.string())
             }),
-            Data: P.array(P.object({
-                Query: P.string(),
-                Score: P.number()
+            Data: x.array(x.object({
+                Query: x.string(),
+                Score: x.number()
             }))
-        }), nE = new AbortController, nC = () => (nE.abort(), (nE = new AbortController).signal), nw = e => x.get((0, R.getPageBaseUrls)().apiGateway.withPath(`/games-autocomplete/v1/get-suggestion/${encodeURIComponent(e.toLowerCase())}`), nb, {
+        }), nE = new AbortController, nC = () => (nE.abort(), (nE = new AbortController).signal), nw = e => V.get((0, L.getPageBaseUrls)().apiGateway.withPath(`/games-autocomplete/v1/get-suggestion/${encodeURIComponent(e.toLowerCase())}`), ny, {
             credentials: "include",
             signal: nC()
-        }).getOrThrow(), nT = (e, t, n, r, a) => {
+        }).getOrThrow(), nS = (e, t, n, a, r) => {
             var i;
             let l, s;
-            return x.get((a ? (0, R.getPageBaseUrls)().apiGateway : (0, R.getPageBaseUrls)().apiGatewayCdn).withPath("/autocomplete-avatar/v2/suggest").withSearchParams({
+            return V.get((r ? (0, L.getPageBaseUrls)().apiGateway : (0, L.getPageBaseUrls)().apiGatewayCdn).withPath("/autocomplete-avatar/v2/suggest").withSearchParams({
                 prefix: e.toLowerCase(),
                 limit: String(n),
                 lang: t,
-                q: r
-            }), nA, {
+                q: a
+            }), nI, {
                 credentials: "include",
                 signal: (i = nC(), l = new AbortController, s = setTimeout(() => {
                     l.abort(new DOMException("The request timed out.", "TimeoutError"))
@@ -2474,12 +2475,12 @@
                     once: !0
                 }), l.signal)
             }).getOrThrow()
-        }, nS = e => e instanceof _.AbortError && "Abort" === e.cause.code, nP = e => {
+        }, nN = e => e instanceof T.AbortError && "Abort" === e.cause.code, nx = e => {
             let {
                 universeId: t,
                 onLoad: n
             } = e;
-            return (0, E.jsx)(L.Thumbnail2d, {
+            return (0, E.jsx)(R.Thumbnail2d, {
                 targetId: t,
                 type: "GameIcon",
                 size: "150x150",
@@ -2487,82 +2488,82 @@
                 containerClassName: "thumbnail-icon",
                 onLoad: n
             })
-        }, nx = e => {
+        }, nV = e => {
             let {
                 userId: t,
                 altName: n,
-                containerClass: r
+                containerClass: a
             } = e;
-            return (0, E.jsx)(L.Thumbnail2d, {
+            return (0, E.jsx)(R.Thumbnail2d, {
                 targetId: t,
                 type: "AvatarHeadShot",
                 altName: n,
-                containerClassName: r,
+                containerClassName: a,
                 includeProfileFrame: !0
             })
-        }, n_ = () => {
+        }, nT = () => {
             let {
                 data: e = !1
-            } = (0, S.useQuery)(tK);
+            } = (0, N.useQuery)(tJ);
             return e
         };
     e.s(["default", 0, function(e) {
         let {
             user: t,
             location: n,
-            isPlusMember: r,
-            ageBadgeControl: a,
+            isPlusMember: a,
+            ageBadgeControl: r,
             showUncheckedBadge: i,
             pageName: l,
             isReferralRolloutEnabled: s,
             isTopNavDownloadEnabled: o,
-            isTopSearchResultsEnabled: u,
-            serverHints: c
+            isTopSearchResultsEnabled: c,
+            serverHints: u
         } = e;
-        return (0, E.jsx)(tQ, {
+        return (0, E.jsx)(tO, {
             user: t,
             location: n,
-            serverHints: c,
-            ageBadgeControl: a,
+            serverHints: u,
+            ageBadgeControl: r,
             showUncheckedBadge: i,
             getIntAuthCompliancePolicy: tH,
-            getNavigationHeaderBehavior: tY,
+            getNavigationHeaderBehavior: t$,
             getFriendRequestCount: t0,
-            getMessageUnreadCount: t1,
-            logLeftNavExposure: tF,
-            logTopNavDownloadExposure: tU,
-            getTradeInboundCount: t8,
-            getUserCurrency: t3,
-            getCreditBalanceForNavigation: t9,
+            getMessageUnreadCount: t2,
+            logLeftNavExposure: tB,
+            logTopNavDownloadExposure: tG,
+            getTradeInboundCount: t1,
+            getUserCurrency: t5,
+            getCreditBalanceForNavigation: t8,
             getRobuxBadge: t4,
             isTopNavDownloadEnabled: () => o,
-            getIsTopSearchResultsEnabled: () => u,
-            logTopSearchResultsExposure: t$,
+            getIsTopSearchResultsEnabled: () => c,
+            logTopSearchResultsExposure: tj,
             logout: t7,
-            getAccountSwitcherEnabled: nr,
-            getLogoutPromptsServiceEnabled: na,
+            getAccountSwitcherEnabled: na,
+            getLogoutPromptsServiceEnabled: nr,
             shouldShowLegacyEmailUpsell: ns,
-            getNotificationUnreadCount: nu,
-            clearNotificationUnread: nc,
+            getNotificationUnreadCount: nc,
+            clearNotificationUnread: nu,
             subscribeRealTime: nd,
-            AvatarHeadshot: nx,
+            AvatarHeadshot: nV,
             useLiveUserNameForDisplay: ng,
-            useHasVerifiedBadge: nf,
+            useHasVerifiedBadge: nh,
             useStreamedValue: w.use,
-            useIsPlusBadgeEnabled: n_,
+            useIsPlusBadgeEnabled: nT,
             isReferralRolloutEnabled: s,
-            usePlusStatus: e => ((e, t, n, r) => {
-                let a = e && !t,
+            usePlusStatus: e => ((e, t, n, a) => {
+                let r = e && !t,
                     {
                         data: i,
                         isPending: l
-                    } = (0, S.useQuery)({
+                    } = (0, N.useQuery)({
                         queryKey: ["plus-referrals", "viewer-subscription"],
-                        enabled: a,
-                        queryFn: () => x.get((0, R.getPageBaseUrls)().apiGateway.withPath("/access-management/v1/upsell-feature-access").withSearchParams({
+                        enabled: r,
+                        queryFn: () => V.get((0, L.getPageBaseUrls)().apiGateway.withPath("/access-management/v1/upsell-feature-access").withSearchParams({
                             featureName: "IsRobloxPlusSubscribed",
                             namespace: "subscriptions/PlusSubscription"
-                        }), nh, {
+                        }), nf, {
                             credentials: "include"
                         }).map(e => {
                             let {
@@ -2573,34 +2574,34 @@
                         staleTime: 1 / 0
                     }),
                     s = t || !0 === i,
-                    o = a && l,
+                    o = r && l,
                     {
-                        data: u
-                    } = (0, S.useQuery)({
+                        data: c
+                    } = (0, N.useQuery)({
                         queryKey: ["plus-referrals", "sender-eligibility"],
                         enabled: n && s,
                         queryFn: async () => {
-                            let e = await r;
-                            return null != e ? nI.get(e) : x.get((0, R.getPageBaseUrls)().apiGateway.withPath("/subscriptions/v2/referral-eligibility"), nv, {
+                            let e = await a;
+                            return null != e ? nv.get(e) : V.get((0, L.getPageBaseUrls)().apiGateway.withPath("/subscriptions/v2/referral-eligibility"), nb, {
                                 credentials: "include"
                             }).map(e => {
                                 let {
                                     eligibility: t
                                 } = e;
-                                return nI.get(t)
+                                return nv.get(t)
                             }).getOrThrow()
                         },
                         staleTime: 1 / 0
                     }),
                     {
-                        data: c
-                    } = (0, S.useQuery)({
+                        data: u
+                    } = (0, N.useQuery)({
                         queryKey: ["plus-referrals", "pending-referrer"],
                         enabled: n && e && !o && !s,
-                        queryFn: () => x.get((0, R.getPageBaseUrls)().apiGateway.withPath("/subscriptions/v2/referrals").withSearchParams({
+                        queryFn: () => V.get((0, L.getPageBaseUrls)().apiGateway.withPath("/subscriptions/v2/referrals").withSearchParams({
                             Status: "1",
                             PageSize: "5"
-                        }), ny, {
+                        }), nA, {
                             credentials: "include"
                         }).map(e => {
                             let {
@@ -2613,65 +2614,65 @@
                 return {
                     isPlusSubscriber: s,
                     isPlusStatusLoading: o,
-                    senderEligibility: u,
-                    pendingReferrerId: c ?? void 0
+                    senderEligibility: c,
+                    pendingReferrerId: u ?? void 0
                 }
-            })(null != t, r, e, c.plusReferralEligibilityStream),
+            })(null != t, a, e, u.plusReferralEligibilityStream),
             getGamesAutocompleteSuggestions: nw,
-            getAvatarAutocompleteSuggestions: nT,
-            isSearchRequestCancelled: nS,
+            getAvatarAutocompleteSuggestions: nS,
+            isSearchRequestCancelled: nN,
             getInternalPageName: () => l,
-            getLocale: D.getLocale,
-            GameIconThumbnail: nP,
-            notificationStreamTransport: tv,
-            notificationStreamHost: tS,
+            getLocale: P.getLocale,
+            GameIconThumbnail: nx,
+            notificationStreamTransport: tb,
+            notificationStreamHost: tN,
             captureNotificationStreamError: (e, t) => {
-                (0, T.captureException)(e, t)
+                (0, S.captureException)(e, t)
             },
-            searchLanding: tW.searchLandingCapability
+            searchLanding: tM.searchLandingCapability
         })
     }], 776771)
 }, 767970, e => {
     "use strict";
     var t = e.i(371847),
         n = e.i(360702),
-        r = e.i(883355),
-        a = e.i(418568);
+        a = e.i(883355),
+        r = e.i(418568);
     let i = n.AsyncResult.fn(async e => {
         if (!0 !== navigator.globalPrivacyControl) return (0, n.ok)(null);
         let {
             gpcVersion: t,
             cooldownPeriodInMs: i,
             cooldownPeriodFuzzyInMs: l
-        } = await (0, a.getGlobalPrivacyControlPolicy)().getOrDefault({
+        } = await (0, r.getGlobalPrivacyControlPolicy)().getOrDefault({
             gpcVersion: 0,
             cooldownPeriodInMs: 864e5,
             cooldownPeriodFuzzyInMs: 864e5
-        }), s = r.getItem("globalPrivacyControl");
+        }), s = a.getItem("globalPrivacyControl");
         if (s?.version === 0)
             if (s.data.gpcVersion === t) {
                 let t = s.data.nextSync[e];
                 if (null != t && Date.now() < t) return (0, n.ok)(null)
             } else s.data.nextSync = {};
-        return (0, a.postGlobalPrivacyControl)().andThen(() => {
-            if (null != s && 0 !== s.version) return (0, n.err)(new r.LocalStorageWriteError({
+        return (0, r.postGlobalPrivacyControl)().andThen(() => {
+            if (null != s && 0 !== s.version) return (0, n.err)(new a.LocalStorageWriteError({
                 code: "PageRefreshNeeded"
             }));
-            let a = Date.now(),
+            let r = Date.now(),
                 o = s?.data.nextSync ?? {};
-            o[e] = a + i + Math.floor(Math.random() * l);
-            let u = Object.entries(o).filter(e => {
+            o[e] = r + i + Math.floor(Math.random() * l);
+            let c = Object.entries(o).filter(e => {
                 let [, t] = e;
-                return a < t
+                return r < t
             });
-            u.length > 100 && (u = u.sort((e, t) => e[1] - t[1]).slice(-100));
-            let c = {
+            c.length > 100 && (c = c.sort((e, t) => e[1] - t[1]).slice(-100));
+            let u = {
                 gpcVersion: t,
-                nextSync: Object.fromEntries(u)
+                nextSync: Object.fromEntries(c)
             };
-            return r.setItem("globalPrivacyControl", {
+            return a.setItem("globalPrivacyControl", {
                 version: 0,
-                data: c
+                data: u
             })
         })
     });
@@ -2700,8 +2701,8 @@
     "use strict";
     var t = e.i(809804),
         n = e.i(865581),
-        r = e.i(432464);
-    let a = (0, n.default)(() => e.A(123968), {
+        a = e.i(432464);
+    let r = (0, n.default)(() => e.A(123968), {
         loadableGenerated: {
             modules: [83371]
         },
@@ -2713,8 +2714,8 @@
             username: n,
             isUserUnder13: i
         } = e;
-        return (0, t.jsx)(r.ErrorBoundary, {
-            children: (0, t.jsx)(a, {
+        return (0, t.jsx)(a.ErrorBoundary, {
+            children: (0, t.jsx)(r, {
                 username: n,
                 isUserUnder13: i
             })
@@ -2724,8 +2725,8 @@
     "use strict";
     var t = e.i(809804),
         n = e.i(865581),
-        r = e.i(432464);
-    let a = (0, n.default)(() => e.A(780837), {
+        a = e.i(432464);
+    let r = (0, n.default)(() => e.A(780837), {
         loadableGenerated: {
             modules: [815582]
         },
@@ -2733,29 +2734,29 @@
         loading: () => null
     });
     e.s(["default", 0, function() {
-        return (0, t.jsx)(r.ErrorBoundary, {
-            children: (0, t.jsx)(a, {})
+        return (0, t.jsx)(a.ErrorBoundary, {
+            children: (0, t.jsx)(r, {})
         })
     }])
 }, 879809, e => {
     "use strict";
     var t = e.i(809804),
         n = e.i(371847),
-        r = e.i(865581),
-        a = e.i(165188),
+        a = e.i(865581),
+        r = e.i(165188),
         i = e.i(357355),
         l = e.i(270784),
         s = e.i(460987),
         o = e.i(200643),
-        u = e.i(175067),
-        c = e.i(519003),
+        c = e.i(175067),
+        u = e.i(519003),
         d = e.i(981498),
         m = e.i(57099);
     let p = e => {
         let t, n = (t = i.window, t?.Roblox?.Hybrid?.Game),
-            r = n?.launchGame;
-        return null == r ? null : new Promise(t => {
-            r.call(n, e, () => {
+            a = n?.launchGame;
+        return null == a ? null : new Promise(t => {
+            a.call(n, e, () => {
                 t()
             })
         })
@@ -2772,55 +2773,55 @@
         IsDuarOptOutDisabled: g.boolean(),
         IsOmitPlayerChannelForWinAndMacEnabled: g.boolean()
     });
-    let f = e => null == e || "LIVE" === e.toUpperCase() ? "" : e,
-        h = (0, r.default)(() => e.A(593401), {
+    let h = e => null == e || "LIVE" === e.toUpperCase() ? "" : e,
+        f = (0, a.default)(() => e.A(593401), {
             loadableGenerated: {
                 modules: [518661]
             },
             ssr: !1
         }),
-        v = (0, r.default)(() => e.A(715216), {
+        b = (0, a.default)(() => e.A(715216), {
             loadableGenerated: {
                 modules: [142742]
             },
             ssr: !1
         }),
-        I = (0, r.default)(() => e.A(932954), {
+        v = (0, a.default)(() => e.A(932954), {
             loadableGenerated: {
                 modules: [233080]
             },
             ssr: !1
         }),
-        y = e => (0, c.getPageBaseUrls)().wwwRoblox.withPath(e).toString();
+        A = e => (0, u.getPageBaseUrls)().wwwRoblox.withPath(e).toString();
     e.s(["default", 0, function(e) {
         let {
-            settings: r,
-            userId: c,
+            settings: a,
+            userId: u,
             isWindowsOrMac: g,
-            osName: b,
-            isInApp: A
-        } = e, [E, C] = (0, n.useState)(null), [w, T] = (0, n.useState)(!1), [S, P] = (0, n.useState)(!1), x = (0, n.useRef)(null), _ = (0, n.useRef)(null);
+            osName: y,
+            isInApp: I
+        } = e, [E, C] = (0, n.useState)(null), [w, S] = (0, n.useState)(!1), [N, x] = (0, n.useState)(!1), V = (0, n.useRef)(null), T = (0, n.useRef)(null);
         (0, n.useEffect)(() => {
             let e = {
-                    placeLauncherUrl: y("/Game/PlaceLauncher.ashx"),
-                    robloxLocale: r.RobloxLocale ?? "",
-                    gameLocale: r.GameLocale ?? "",
-                    playerChannel: f(r.PlayerChannelName),
-                    studioChannel: f(r.StudioChannelName),
-                    isDuarAutoOptInEnabled: r.IsDuarAutoOptInEnabled,
-                    isDuarOptOutDisabled: r.IsDuarOptOutDisabled,
-                    isOmitPlayerChannelForWinAndMacEnabled: r.IsOmitPlayerChannelForWinAndMacEnabled
+                    placeLauncherUrl: A("/Game/PlaceLauncher.ashx"),
+                    robloxLocale: a.RobloxLocale ?? "",
+                    gameLocale: a.GameLocale ?? "",
+                    playerChannel: h(a.PlayerChannelName),
+                    studioChannel: h(a.StudioChannelName),
+                    isDuarAutoOptInEnabled: a.IsDuarAutoOptInEnabled,
+                    isDuarOptOutDisabled: a.IsDuarOptOutDisabled,
+                    isOmitPlayerChannelForWinAndMacEnabled: a.IsOmitPlayerChannelForWinAndMacEnabled
                 },
                 t = (0, s.createGameLauncher)({
                     getConfig: () => e,
                     getBrowserTrackerId: l.getBrowserTrackerId,
-                    isAuthenticated: () => null != c,
-                    getUserId: () => c,
+                    isAuthenticated: () => null != u,
+                    getUserId: () => u,
                     isWindowsOrMac: () => g,
                     onEvent: (e, t) => {
                         "startClientAttempted" === e && (0, d.trackAppShellCounter)("GameLaunch", {
                             outcome: "attempted"
-                        }), (0, m.logGameLaunchEvent)(b, e, t)
+                        }), (0, m.logGameLaunchEvent)(y, e, t)
                     },
                     onLaunchStarted: (e, t) => {
                         C({
@@ -2836,49 +2837,49 @@
                     onLaunchFailed: e => {
                         (0, d.trackAppShellCounter)("GameLaunch", {
                             outcome: "failed"
-                        }), console.error(e), T(!0)
+                        }), console.error(e), S(!0)
                     },
                     onGuestLaunch: () => {
-                        P(!0)
+                        x(!0)
                     },
-                    ...A ? {
+                    ...I ? {
                         launchInApp: p
                     } : {}
                 });
-            return x.current = t, (0, u.setGameLauncher)(t), () => {
-                x.current = null, (0, u.setGameLauncher)(null)
+            return V.current = t, (0, c.setGameLauncher)(t), () => {
+                V.current = null, (0, c.setGameLauncher)(null)
             }
-        }, [r, c, g, b, A]);
-        let N = async e => {
-            null != e.placeId && i.window?.localStorage.removeItem("ref_info"), x.current?.beginInstall(e);
-            let t = _.current;
+        }, [a, u, g, y, I]);
+        let Z = async e => {
+            null != e.placeId && i.window?.localStorage.removeItem("ref_info"), V.current?.beginInstall(e);
+            let t = T.current;
             if (null == t || null == i.window) return;
             if ("launchMode" in e && (0, o.isStudioLaunchMode)(e.launchMode)) {
-                t.src = y("/download/studio"), C(null);
+                t.src = A("/download/studio"), C(null);
                 return
             }
             t.referrerPolicy = "no-referrer";
             let n = i.window.location.href;
-            t.src = `${y("/download/client")}${await (0,a.getInstallerDeeplinkQueryParams)(n)}`
+            t.src = `${A("/download/client")}${await (0,r.getInstallerDeeplinkQueryParams)(n)}`
         };
         return (0, t.jsxs)(t.Fragment, {
             children: [(0, t.jsx)("iframe", {
-                ref: _,
+                ref: T,
                 hidden: !0,
                 title: "Roblox installer"
-            }), null == E ? null : (0, t.jsx)(h, {
-                download: () => N(E.params),
+            }), null == E ? null : (0, t.jsx)(f, {
+                download: () => Z(E.params),
                 launchGame: E.launch,
                 unmount: () => {
                     C(null)
                 }
-            }), w ? (0, t.jsx)(v, {
+            }), w ? (0, t.jsx)(b, {
                 unmount: () => {
-                    T(!1)
+                    S(!1)
                 }
-            }) : null, S ? (0, t.jsx)(I, {
+            }) : null, N ? (0, t.jsx)(v, {
                 unmount: () => {
-                    P(!1)
+                    x(!1)
                 }
             }) : null]
         })
@@ -2887,16 +2888,16 @@
     "use strict";
     var t = e.i(809804),
         n = e.i(371847),
-        r = e.i(744420);
+        a = e.i(744420);
     e.s(["default", 0, function(e) {
         let {
-            script: a,
+            script: r,
             nonce: i
         } = e, l = (0, n.useRef)(!1);
-        return (0, r.useServerInsertedHTML)(() => {
+        return (0, a.useServerInsertedHTML)(() => {
             if (!l.current) return l.current = !0, (0, t.jsx)("script", {
                 nonce: i,
-                children: a
+                children: r
             }, "roblox-hybrid")
         }), null
     }])
@@ -2904,20 +2905,20 @@
     "use strict";
     var t = e.i(371847),
         n = e.i(357355);
-    let r = {
+    let a = {
             "Roblox.Friendship.FriendRequestSent": "friendRequestSent",
             "Roblox.Messages.MessageSent": "privateMessageSent",
             "Roblox.Settings.PushEnabledOnDevice": "enableAuthorizationForUser"
         },
-        a = e => {
-            let t, r = (t = n.window, t?.Roblox?.Hybrid?.Push),
+        r = e => {
+            let t, a = (t = n.window, t?.Roblox?.Hybrid?.Push),
                 {
-                    supports: a,
+                    supports: r,
                     pushPermissionTrigger: i
-                } = r ?? {};
-            if (null != a && null != i) try {
-                a.call(r, "pushPermissionTrigger", t => {
-                    t && i.call(r, e)
+                } = a ?? {};
+            if (null != r && null != i) try {
+                r.call(a, "pushPermissionTrigger", t => {
+                    t && i.call(a, e)
                 })
             } catch {}
         };
@@ -2925,20 +2926,20 @@
         return (0, t.useEffect)(() => {
             let e = n.document;
             if (null == e) return;
-            let t = Object.entries(r).map(t => {
-                let [n, r] = t, i = () => {
-                    a(r)
+            let t = Object.entries(a).map(t => {
+                let [n, a] = t, i = () => {
+                    r(a)
                 };
                 return e.addEventListener(n, i), [n, i]
             });
             return () => {
                 t.forEach(t => {
-                    let [n, r] = t;
-                    e.removeEventListener(n, r)
+                    let [n, a] = t;
+                    e.removeEventListener(n, a)
                 })
             }
         }, []), null
-    }, "pushPermissionActions", 0, r, "sendPushPermissionTrigger", 0, a])
+    }, "pushPermissionActions", 0, a, "sendPushPermissionTrigger", 0, r])
 }, 594841, e => {
     "use strict";
     var t = e.i(809804);
@@ -2956,24 +2957,24 @@
     "use strict";
     var t = e.i(809804),
         n = e.i(371847),
-        r = e.i(285586);
+        a = e.i(285586);
     e.s(["default", 0, function(e) {
         let {
-            pageName: a
+            pageName: r
         } = e;
         return (0, n.useEffect)(() => {
-            null != a && (0, r.setTag)("internal-page-name", a)
-        }, [a]), null == a ? null : (0, t.jsx)("meta", {
+            null != r && (0, a.setTag)("internal-page-name", r)
+        }, [r]), null == r ? null : (0, t.jsx)("meta", {
             name: "page-meta",
-            "data-internal-page-name": a
+            "data-internal-page-name": r
         })
     }])
 }, 214795, e => {
     "use strict";
     var t = e.i(371847),
         n = e.i(763170),
-        r = e.i(889375),
-        a = e.i(981498);
+        a = e.i(889375),
+        r = e.i(981498);
     let i = [2e3, 8e3, 2e4, 6e4];
     e.s(["default", 0, function(e) {
         let {
@@ -2989,7 +2990,7 @@
                     if (await (0, n.abortableTimeout)(s, t), t.aborted) break;
                     {
                         let t = `heartbeat${e+1}`;
-                        (0, r.sendEvent)("pageHeartbeat", t), (0, a.trackAppShellCounter)("PageHeartbeat", {
+                        (0, a.sendEvent)("pageHeartbeat", t), (0, r.trackAppShellCounter)("PageHeartbeat", {
                             page: l ?? "unknown",
                             beat: t
                         })
@@ -3005,9 +3006,9 @@
         "use strict";
         var e = {};
         e.d = function(t, n) {
-            for (var r in n) e.o(n, r) && !e.o(t, r) && Object.defineProperty(t, r, {
+            for (var a in n) e.o(n, a) && !e.o(t, a) && Object.defineProperty(t, a, {
                 enumerable: !0,
-                get: n[r]
+                get: n[a]
             })
         }, e.o = function(e, t) {
             return Object.prototype.hasOwnProperty.call(e, t)
@@ -3021,130 +3022,130 @@
         var n = {};
         e.r(n), e.d(n, {
             CLSThresholds: function() {
-                return P
+                return x
             },
             FCPThresholds: function() {
-                return T
+                return S
             },
             FIDThresholds: function() {
                 return ee
             },
             INPThresholds: function() {
-                return V
+                return D
             },
             LCPThresholds: function() {
-                return M
+                return U
             },
             TTFBThresholds: function() {
-                return K
+                return J
             },
             onCLS: function() {
-                return x
+                return V
             },
             onFCP: function() {
-                return S
+                return N
             },
             onFID: function() {
                 return et
             },
             onINP: function() {
-                return G
+                return W
             },
             onLCP: function() {
-                return X
+                return Y
             },
             onTTFB: function() {
-                return Q
+                return O
             }
         });
-        var r, a, i, l, s, o = -1,
-            u = function(e) {
+        var a, r, i, l, s, o = -1,
+            c = function(e) {
                 addEventListener("pageshow", function(t) {
                     t.persisted && (o = t.timeStamp, e(t))
                 }, !0)
             },
-            c = function() {
+            u = function() {
                 var e = self.performance && performance.getEntriesByType && performance.getEntriesByType("navigation")[0];
                 if (e && e.responseStart > 0 && e.responseStart < performance.now()) return e
             },
             d = function() {
-                var e = c();
+                var e = u();
                 return e && e.activationStart || 0
             },
             m = function(e, t) {
-                var n = c(),
-                    r = "navigate";
-                return o >= 0 ? r = "back-forward-cache" : n && (document.prerendering || d() > 0 ? r = "prerender" : document.wasDiscarded ? r = "restore" : n.type && (r = n.type.replace(/_/g, "-"))), {
+                var n = u(),
+                    a = "navigate";
+                return o >= 0 ? a = "back-forward-cache" : n && (document.prerendering || d() > 0 ? a = "prerender" : document.wasDiscarded ? a = "restore" : n.type && (a = n.type.replace(/_/g, "-"))), {
                     name: e,
                     value: void 0 === t ? -1 : t,
                     rating: "good",
                     delta: 0,
                     entries: [],
                     id: "v4-".concat(Date.now(), "-").concat(Math.floor(0x82f79cd8fff * Math.random()) + 1e12),
-                    navigationType: r
+                    navigationType: a
                 }
             },
             p = function(e, t, n) {
                 try {
                     if (PerformanceObserver.supportedEntryTypes.includes(e)) {
-                        var r = new PerformanceObserver(function(e) {
+                        var a = new PerformanceObserver(function(e) {
                             Promise.resolve().then(function() {
                                 t(e.getEntries())
                             })
                         });
-                        return r.observe(Object.assign({
+                        return a.observe(Object.assign({
                             type: e,
                             buffered: !0
-                        }, n || {})), r
+                        }, n || {})), a
                     }
                 } catch (e) {}
             },
-            g = function(e, t, n, r) {
-                var a, i;
+            g = function(e, t, n, a) {
+                var r, i;
                 return function(l) {
                     var s;
-                    t.value >= 0 && (l || r) && ((i = t.value - (a || 0)) || void 0 === a) && (a = t.value, t.delta = i, s = t.value, t.rating = s > n[1] ? "poor" : s > n[0] ? "needs-improvement" : "good", e(t))
+                    t.value >= 0 && (l || a) && ((i = t.value - (r || 0)) || void 0 === r) && (r = t.value, t.delta = i, s = t.value, t.rating = s > n[1] ? "poor" : s > n[0] ? "needs-improvement" : "good", e(t))
                 }
             },
-            f = function(e) {
+            h = function(e) {
                 requestAnimationFrame(function() {
                     return requestAnimationFrame(function() {
                         return e()
                     })
                 })
             },
-            h = function(e) {
+            f = function(e) {
                 document.addEventListener("visibilitychange", function() {
                     "hidden" === document.visibilityState && e()
                 })
             },
-            v = function(e) {
+            b = function(e) {
                 var t = !1;
                 return function() {
                     t || (e(), t = !0)
                 }
             },
-            I = -1,
-            y = function() {
+            v = -1,
+            A = function() {
                 return "hidden" !== document.visibilityState || document.prerendering ? 1 / 0 : 0
             },
-            b = function(e) {
-                "hidden" === document.visibilityState && I > -1 && (I = "visibilitychange" === e.type ? e.timeStamp : 0, E())
+            y = function(e) {
+                "hidden" === document.visibilityState && v > -1 && (v = "visibilitychange" === e.type ? e.timeStamp : 0, E())
             },
-            A = function() {
-                addEventListener("visibilitychange", b, !0), addEventListener("prerenderingchange", b, !0)
+            I = function() {
+                addEventListener("visibilitychange", y, !0), addEventListener("prerenderingchange", y, !0)
             },
             E = function() {
-                removeEventListener("visibilitychange", b, !0), removeEventListener("prerenderingchange", b, !0)
+                removeEventListener("visibilitychange", y, !0), removeEventListener("prerenderingchange", y, !0)
             },
             C = function() {
-                return I < 0 && (I = y(), A(), u(function() {
+                return v < 0 && (v = A(), I(), c(function() {
                     setTimeout(function() {
-                        I = y(), A()
+                        v = A(), I()
                     }, 0)
                 })), {
                     get firstHiddenTime() {
-                        return I
+                        return v
                     }
                 }
             },
@@ -3153,225 +3154,225 @@
                     return e()
                 }, !0) : e()
             },
-            T = [1800, 3e3],
-            S = function(e, t) {
+            S = [1800, 3e3],
+            N = function(e, t) {
                 t = t || {}, w(function() {
-                    var n, r = C(),
-                        a = m("FCP"),
+                    var n, a = C(),
+                        r = m("FCP"),
                         i = p("paint", function(e) {
                             e.forEach(function(e) {
-                                "first-contentful-paint" === e.name && (i.disconnect(), e.startTime < r.firstHiddenTime && (a.value = Math.max(e.startTime - d(), 0), a.entries.push(e), n(!0)))
+                                "first-contentful-paint" === e.name && (i.disconnect(), e.startTime < a.firstHiddenTime && (r.value = Math.max(e.startTime - d(), 0), r.entries.push(e), n(!0)))
                             })
                         });
-                    i && (n = g(e, a, T, t.reportAllChanges), u(function(r) {
-                        n = g(e, a = m("FCP"), T, t.reportAllChanges), f(function() {
-                            a.value = performance.now() - r.timeStamp, n(!0)
+                    i && (n = g(e, r, S, t.reportAllChanges), c(function(a) {
+                        n = g(e, r = m("FCP"), S, t.reportAllChanges), h(function() {
+                            r.value = performance.now() - a.timeStamp, n(!0)
                         })
                     }))
                 })
             },
-            P = [.1, .25],
-            x = function(e, t) {
-                t = t || {}, S(v(function() {
-                    var n, r = m("CLS", 0),
-                        a = 0,
+            x = [.1, .25],
+            V = function(e, t) {
+                t = t || {}, N(b(function() {
+                    var n, a = m("CLS", 0),
+                        r = 0,
                         i = [],
                         l = function(e) {
                             e.forEach(function(e) {
                                 if (!e.hadRecentInput) {
                                     var t = i[0],
                                         n = i[i.length - 1];
-                                    a && e.startTime - n.startTime < 1e3 && e.startTime - t.startTime < 5e3 ? (a += e.value, i.push(e)) : (a = e.value, i = [e])
+                                    r && e.startTime - n.startTime < 1e3 && e.startTime - t.startTime < 5e3 ? (r += e.value, i.push(e)) : (r = e.value, i = [e])
                                 }
-                            }), a > r.value && (r.value = a, r.entries = i, n())
+                            }), r > a.value && (a.value = r, a.entries = i, n())
                         },
                         s = p("layout-shift", l);
-                    s && (n = g(e, r, P, t.reportAllChanges), h(function() {
+                    s && (n = g(e, a, x, t.reportAllChanges), f(function() {
                         l(s.takeRecords()), n(!0)
-                    }), u(function() {
-                        a = 0, n = g(e, r = m("CLS", 0), P, t.reportAllChanges), f(function() {
+                    }), c(function() {
+                        r = 0, n = g(e, a = m("CLS", 0), x, t.reportAllChanges), h(function() {
                             return n()
                         })
                     }), setTimeout(n, 0))
                 }))
             },
-            _ = 0,
-            N = 1 / 0,
-            L = 0,
-            R = function(e) {
+            T = 0,
+            Z = 1 / 0,
+            R = 0,
+            L = function(e) {
                 e.forEach(function(e) {
-                    e.interactionId && (N = Math.min(N, e.interactionId), _ = (L = Math.max(L, e.interactionId)) ? (L - N) / 7 + 1 : 0)
+                    e.interactionId && (Z = Math.min(Z, e.interactionId), T = (R = Math.max(R, e.interactionId)) ? (R - Z) / 7 + 1 : 0)
                 })
             },
-            D = function() {
-                "interactionCount" in performance || r || (r = p("event", R, {
+            P = function() {
+                "interactionCount" in performance || a || (a = p("event", L, {
                     type: "event",
                     buffered: !0,
                     durationThreshold: 0
                 }))
             },
-            k = [],
-            F = new Map,
-            B = 0,
-            j = [],
-            O = function(e) {
-                if (j.forEach(function(t) {
+            F = [],
+            B = new Map,
+            k = 0,
+            X = [],
+            _ = function(e) {
+                if (X.forEach(function(t) {
                         return t(e)
                     }), e.interactionId || "first-input" === e.entryType) {
-                    var t = k[k.length - 1],
-                        n = F.get(e.interactionId);
-                    if (n || k.length < 10 || e.duration > t.latency) {
+                    var t = F[F.length - 1],
+                        n = B.get(e.interactionId);
+                    if (n || F.length < 10 || e.duration > t.latency) {
                         if (n) e.duration > n.latency ? (n.entries = [e], n.latency = e.duration) : e.duration === n.latency && e.startTime === n.entries[0].startTime && n.entries.push(e);
                         else {
-                            var r = {
+                            var a = {
                                 id: e.interactionId,
                                 latency: e.duration,
                                 entries: [e]
                             };
-                            F.set(r.id, r), k.push(r)
+                            B.set(a.id, a), F.push(a)
                         }
-                        k.sort(function(e, t) {
+                        F.sort(function(e, t) {
                             return t.latency - e.latency
-                        }), k.length > 10 && k.splice(10).forEach(function(e) {
-                            return F.delete(e.id)
+                        }), F.length > 10 && F.splice(10).forEach(function(e) {
+                            return B.delete(e.id)
                         })
                     }
                 }
             },
-            U = function(e) {
+            G = function(e) {
                 var t = self.requestIdleCallback || self.setTimeout,
                     n = -1;
-                return e = v(e), "hidden" === document.visibilityState ? e() : (n = t(e), h(e)), n
+                return e = b(e), "hidden" === document.visibilityState ? e() : (n = t(e), f(e)), n
             },
-            V = [200, 500],
-            G = function(e, t) {
+            D = [200, 500],
+            W = function(e, t) {
                 "PerformanceEventTiming" in self && "interactionId" in PerformanceEventTiming.prototype && (t = t || {}, w(function() {
-                    D();
-                    var n, a, i = m("INP"),
+                    P();
+                    var n, r, i = m("INP"),
                         l = function(e) {
-                            U(function() {
-                                e.forEach(O);
-                                var t, n = (t = Math.min(k.length - 1, Math.floor(((r ? _ : performance.interactionCount || 0) - B) / 50)), k[t]);
-                                n && n.latency !== i.value && (i.value = n.latency, i.entries = n.entries, a())
+                            G(function() {
+                                e.forEach(_);
+                                var t, n = (t = Math.min(F.length - 1, Math.floor(((a ? T : performance.interactionCount || 0) - k) / 50)), F[t]);
+                                n && n.latency !== i.value && (i.value = n.latency, i.entries = n.entries, r())
                             })
                         },
                         s = p("event", l, {
                             durationThreshold: null != (n = t.durationThreshold) ? n : 40
                         });
-                    a = g(e, i, V, t.reportAllChanges), s && (s.observe({
+                    r = g(e, i, D, t.reportAllChanges), s && (s.observe({
                         type: "first-input",
                         buffered: !0
-                    }), h(function() {
-                        l(s.takeRecords()), a(!0)
-                    }), u(function() {
-                        B = 0, k.length = 0, F.clear(), a = g(e, i = m("INP"), V, t.reportAllChanges)
+                    }), f(function() {
+                        l(s.takeRecords()), r(!0)
+                    }), c(function() {
+                        k = 0, F.length = 0, B.clear(), r = g(e, i = m("INP"), D, t.reportAllChanges)
                     }))
                 }))
             },
-            M = [2500, 4e3],
-            $ = {},
-            X = function(e, t) {
+            U = [2500, 4e3],
+            j = {},
+            Y = function(e, t) {
                 t = t || {}, w(function() {
-                    var n, r = C(),
-                        a = m("LCP"),
+                    var n, a = C(),
+                        r = m("LCP"),
                         i = function(e) {
                             t.reportAllChanges || (e = e.slice(-1)), e.forEach(function(e) {
-                                e.startTime < r.firstHiddenTime && (a.value = Math.max(e.startTime - d(), 0), a.entries = [e], n())
+                                e.startTime < a.firstHiddenTime && (r.value = Math.max(e.startTime - d(), 0), r.entries = [e], n())
                             })
                         },
                         l = p("largest-contentful-paint", i);
                     if (l) {
-                        n = g(e, a, M, t.reportAllChanges);
-                        var s = v(function() {
-                            $[a.id] || (i(l.takeRecords()), l.disconnect(), $[a.id] = !0, n(!0))
+                        n = g(e, r, U, t.reportAllChanges);
+                        var s = b(function() {
+                            j[r.id] || (i(l.takeRecords()), l.disconnect(), j[r.id] = !0, n(!0))
                         });
                         ["keydown", "click"].forEach(function(e) {
                             addEventListener(e, function() {
-                                return U(s)
+                                return G(s)
                             }, !0)
-                        }), h(s), u(function(r) {
-                            n = g(e, a = m("LCP"), M, t.reportAllChanges), f(function() {
-                                a.value = performance.now() - r.timeStamp, $[a.id] = !0, n(!0)
+                        }), f(s), c(function(a) {
+                            n = g(e, r = m("LCP"), U, t.reportAllChanges), h(function() {
+                                r.value = performance.now() - a.timeStamp, j[r.id] = !0, n(!0)
                             })
                         })
                     }
                 })
             },
-            K = [800, 1800],
-            W = function e(t) {
+            J = [800, 1800],
+            M = function e(t) {
                 document.prerendering ? w(function() {
                     return e(t)
                 }) : "complete" !== document.readyState ? addEventListener("load", function() {
                     return e(t)
                 }, !0) : setTimeout(t, 0)
             },
-            Q = function(e, t) {
+            O = function(e, t) {
                 t = t || {};
                 var n = m("TTFB"),
-                    r = g(e, n, K, t.reportAllChanges);
-                W(function() {
-                    var a = c();
-                    a && (n.value = Math.max(a.responseStart - d(), 0), n.entries = [a], r(!0), u(function() {
-                        (r = g(e, n = m("TTFB", 0), K, t.reportAllChanges))(!0)
+                    a = g(e, n, J, t.reportAllChanges);
+                M(function() {
+                    var r = u();
+                    r && (n.value = Math.max(r.responseStart - d(), 0), n.entries = [r], a(!0), c(function() {
+                        (a = g(e, n = m("TTFB", 0), J, t.reportAllChanges))(!0)
                     }))
                 })
             },
-            Z = {
+            z = {
                 passive: !0,
                 capture: !0
             },
             H = new Date,
-            q = function(e, t) {
-                a || (a = t, i = e, l = new Date, z(removeEventListener), Y())
+            Q = function(e, t) {
+                r || (r = t, i = e, l = new Date, q(removeEventListener), $())
             },
-            Y = function() {
+            $ = function() {
                 if (i >= 0 && i < l - H) {
                     var e = {
                         entryType: "first-input",
-                        name: a.type,
-                        target: a.target,
-                        cancelable: a.cancelable,
-                        startTime: a.timeStamp,
-                        processingStart: a.timeStamp + i
+                        name: r.type,
+                        target: r.target,
+                        cancelable: r.cancelable,
+                        startTime: r.timeStamp,
+                        processingStart: r.timeStamp + i
                     };
                     s.forEach(function(t) {
                         t(e)
                     }), s = []
                 }
             },
-            J = function(e) {
+            K = function(e) {
                 if (e.cancelable) {
-                    var t, n, r, a = (e.timeStamp > 1e12 ? new Date : performance.now()) - e.timeStamp;
+                    var t, n, a, r = (e.timeStamp > 1e12 ? new Date : performance.now()) - e.timeStamp;
                     "pointerdown" == e.type ? (t = function() {
-                        q(a, e), r()
+                        Q(r, e), a()
                     }, n = function() {
-                        r()
-                    }, r = function() {
-                        removeEventListener("pointerup", t, Z), removeEventListener("pointercancel", n, Z)
-                    }, addEventListener("pointerup", t, Z), addEventListener("pointercancel", n, Z)) : q(a, e)
+                        a()
+                    }, a = function() {
+                        removeEventListener("pointerup", t, z), removeEventListener("pointercancel", n, z)
+                    }, addEventListener("pointerup", t, z), addEventListener("pointercancel", n, z)) : Q(r, e)
                 }
             },
-            z = function(e) {
+            q = function(e) {
                 ["mousedown", "keydown", "touchstart", "pointerdown"].forEach(function(t) {
-                    return e(t, J, Z)
+                    return e(t, K, z)
                 })
             },
             ee = [100, 300],
             et = function(e, t) {
                 t = t || {}, w(function() {
-                    var n, r = C(),
+                    var n, a = C(),
                         l = m("FID"),
                         o = function(e) {
-                            e.startTime < r.firstHiddenTime && (l.value = e.processingStart - e.startTime, l.entries.push(e), n(!0))
+                            e.startTime < a.firstHiddenTime && (l.value = e.processingStart - e.startTime, l.entries.push(e), n(!0))
                         },
-                        c = function(e) {
+                        u = function(e) {
                             e.forEach(o)
                         },
-                        d = p("first-input", c);
-                    n = g(e, l, ee, t.reportAllChanges), d && (h(v(function() {
-                        c(d.takeRecords()), d.disconnect()
-                    })), u(function() {
-                        n = g(e, l = m("FID"), ee, t.reportAllChanges), s = [], i = -1, a = null, z(addEventListener), s.push(o), Y()
+                        d = p("first-input", u);
+                    n = g(e, l, ee, t.reportAllChanges), d && (f(b(function() {
+                        u(d.takeRecords()), d.disconnect()
+                    })), c(function() {
+                        n = g(e, l = m("FID"), ee, t.reportAllChanges), s = [], i = -1, r = null, q(addEventListener), s.push(o), $()
                     }))
                 })
             };
@@ -3387,12 +3388,12 @@
             return i
         }
     });
-    let r = e.r(371847),
-        a = e.r(692130);
+    let a = e.r(371847),
+        r = e.r(692130);
 
     function i(e) {
-        (0, r.useEffect)(() => {
-            (0, a.onCLS)(e), (0, a.onFID)(e), (0, a.onLCP)(e), (0, a.onINP)(e), (0, a.onFCP)(e), (0, a.onTTFB)(e)
+        (0, a.useEffect)(() => {
+            (0, r.onCLS)(e), (0, r.onFID)(e), (0, r.onLCP)(e), (0, r.onINP)(e), (0, r.onFCP)(e), (0, r.onTTFB)(e)
         }, [e])
     }("function" == typeof n.default || "object" == typeof n.default && null !== n.default) && void 0 === n.default.__esModule && (Object.defineProperty(n.default, "__esModule", {
         value: !0
@@ -3402,22 +3403,112 @@
 }, 8888, e => {
     "use strict";
     let t, n;
-    var r = e.i(371847),
-        a = e.i(255831),
+    var a = e.i(371847),
+        r = e.i(255831),
         i = e.i(126392),
         l = e.i(683740),
         s = e.i(860430),
         o = e.i(84523),
-        u = e.i(288014);
-    let c = (0, s.fileDesc)("ChtldmVudC91c2VyX2V2ZW50X2Jhc2UucHJvdG8SBWV2ZW50It4HCg1Vc2VyRXZlbnRCYXNlEiUKB3VzZXJfaWQYASABKANCD5K+kgED4D4Bmr6SAQIIAUgAiAEBEiYKCHVzZXJfa2V5GAIgASgJQg+SvpIBA6g/AZq+kgECGAFIAYgBARIgCgljbGllbnRfaXAYAyABKAlCCJK+kgED6D4BSAKIAQESIQoKdXNlcl9hZ2VudBgEIAEoCUIIkr6SAQOgPwFIA4gBARInChBwbGF0Zm9ybV90eXBlX2lkGAUgASgDQgiSvpIBA+A/AUgEiAEBEikKEmJyb3dzZXJfdHJhY2tlcl9pZBgGIAEoA0IIkr6SAQPQPgFIBYgBARIoChFpc190cnVzdGVkX3NvdXJjZRgHIAEoCEIIkr6SAQOwPwFIBogBARIiCgt1c2VyX29yaWdpbhgIIAEoCUIIkr6SAQPYPwFIB4gBARIdCgZ0YXJnZXQYCSABKAlCCJK+kgEDiH0BSAiIAQESIQoKZXZlbnRfdHlwZRgKIAEoCUIIkr6SAQOQfQFICYgBARIfCghhcHBfbmFtZRgLIAEoCUIIkr6SAQO4PwFICogBARIxChtpbmdlc3Rpb25fdGltZV9taWxsaXNlY29uZHMYDCABKANCB4q+kgECCAFIC4gBARJEChFldmVudF9zdHJlYW1fdGFncxgNIAMoCzIpLmV2ZW50LlVzZXJFdmVudEJhc2UuRXZlbnRTdHJlYW1UYWdzRW50cnkSJgoPYXV0aF9zZXNzaW9uX2lkGA4gASgJQgiSvpIBA8A/AUgMiAEBEicKEGh0dHBfZmluZ2VycHJpbnQYDyABKAlCCJK+kgEDyD8BSA2IAQESJgoPdGxzX2ZpbmdlcnByaW50GBAgASgJQgiSvpIBA9A/AUgOiAEBGjYKFEV2ZW50U3RyZWFtVGFnc0VudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAFCCgoIX3VzZXJfaWRCCwoJX3VzZXJfa2V5QgwKCl9jbGllbnRfaXBCDQoLX3VzZXJfYWdlbnRCEwoRX3BsYXRmb3JtX3R5cGVfaWRCFQoTX2Jyb3dzZXJfdHJhY2tlcl9pZEIUChJfaXNfdHJ1c3RlZF9zb3VyY2VCDgoMX3VzZXJfb3JpZ2luQgkKB190YXJnZXRCDQoLX2V2ZW50X3R5cGVCCwoJX2FwcF9uYW1lQh4KHF9pbmdlc3Rpb25fdGltZV9taWxsaXNlY29uZHNCEgoQX2F1dGhfc2Vzc2lvbl9pZEITChFfaHR0cF9maW5nZXJwcmludEISChBfdGxzX2ZpbmdlcnByaW50QjBaLmdpdGh1Yi5yYnguY29tL3JvYmxveC9zY2hlbWEtcHJvdG9nZW4vZ28vZXZlbnRiBnByb3RvMw", [u.file_event_event_field_options]);
+        c = e.i(288014);
+    let u = (0, s.fileDesc)("ChtldmVudC91c2VyX2V2ZW50X2Jhc2UucHJvdG8SBWV2ZW50It4HCg1Vc2VyRXZlbnRCYXNlEiUKB3VzZXJfaWQYASABKANCD5K+kgED4D4Bmr6SAQIIAUgAiAEBEiYKCHVzZXJfa2V5GAIgASgJQg+SvpIBA6g/AZq+kgECGAFIAYgBARIgCgljbGllbnRfaXAYAyABKAlCCJK+kgED6D4BSAKIAQESIQoKdXNlcl9hZ2VudBgEIAEoCUIIkr6SAQOgPwFIA4gBARInChBwbGF0Zm9ybV90eXBlX2lkGAUgASgDQgiSvpIBA+A/AUgEiAEBEikKEmJyb3dzZXJfdHJhY2tlcl9pZBgGIAEoA0IIkr6SAQPQPgFIBYgBARIoChFpc190cnVzdGVkX3NvdXJjZRgHIAEoCEIIkr6SAQOwPwFIBogBARIiCgt1c2VyX29yaWdpbhgIIAEoCUIIkr6SAQPYPwFIB4gBARIdCgZ0YXJnZXQYCSABKAlCCJK+kgEDiH0BSAiIAQESIQoKZXZlbnRfdHlwZRgKIAEoCUIIkr6SAQOQfQFICYgBARIfCghhcHBfbmFtZRgLIAEoCUIIkr6SAQO4PwFICogBARIxChtpbmdlc3Rpb25fdGltZV9taWxsaXNlY29uZHMYDCABKANCB4q+kgECCAFIC4gBARJEChFldmVudF9zdHJlYW1fdGFncxgNIAMoCzIpLmV2ZW50LlVzZXJFdmVudEJhc2UuRXZlbnRTdHJlYW1UYWdzRW50cnkSJgoPYXV0aF9zZXNzaW9uX2lkGA4gASgJQgiSvpIBA8A/AUgMiAEBEicKEGh0dHBfZmluZ2VycHJpbnQYDyABKAlCCJK+kgEDyD8BSA2IAQESJgoPdGxzX2ZpbmdlcnByaW50GBAgASgJQgiSvpIBA9A/AUgOiAEBGjYKFEV2ZW50U3RyZWFtVGFnc0VudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAFCCgoIX3VzZXJfaWRCCwoJX3VzZXJfa2V5QgwKCl9jbGllbnRfaXBCDQoLX3VzZXJfYWdlbnRCEwoRX3BsYXRmb3JtX3R5cGVfaWRCFQoTX2Jyb3dzZXJfdHJhY2tlcl9pZEIUChJfaXNfdHJ1c3RlZF9zb3VyY2VCDgoMX3VzZXJfb3JpZ2luQgkKB190YXJnZXRCDQoLX2V2ZW50X3R5cGVCCwoJX2FwcF9uYW1lQh4KHF9pbmdlc3Rpb25fdGltZV9taWxsaXNlY29uZHNCEgoQX2F1dGhfc2Vzc2lvbl9pZEITChFfaHR0cF9maW5nZXJwcmludEISChBfdGxzX2ZpbmdlcnByaW50QjBaLmdpdGh1Yi5yYnguY29tL3JvYmxveC9zY2hlbWEtcHJvdG9nZW4vZ28vZXZlbnRiBnByb3RvMw", [c.file_event_event_field_options]);
     var d = e.i(861856);
-    let m = (0, s.fileDesc)("CiBldmVudHN0cmVhbS93ZWIvd2ViX3ZpdGFscy5wcm90bxIXZXZlbnRzdHJlYW0uZXZlbnRpbmdlc3QitQUKCVdlYlZpdGFscxInCg9sb2NhbF90aW1lc3RhbXAYASABKAlCCaK+kgEECgJsdEgAiAEBEi0KD3VzZXJfZXZlbnRfYmFzZRgCIAEoCzIULmV2ZW50LlVzZXJFdmVudEJhc2USHgoEcGFnZRgDIAEoCUILor6SAQYKBHBhZ2VIAYgBARIcCgN1cmwYBCABKAlCCqK+kgEFCgN1cmxIAogBARIfCgZsY3BfbXMYBSABKAFCCqK+kgEFCgNsY3BIA4gBARIfCgZmY3BfbXMYBiABKAFCCqK+kgEFCgNmY3BIBIgBARIhCgd0dGZiX21zGAcgASgBQguivpIBBgoEdHRmYkgFiAEBEhwKA2NscxgIIAEoAUIKor6SAQUKA2Nsc0gGiAEBEh8KBmlucF9tcxgJIAEoAUIKor6SAQUKA2lucEgHiAEBEjMKD3JlbmRlcl9wbGF0Zm9ybRgKIAEoCUIVor6SARAKDnJlbmRlclBsYXRmb3JtSAiIAQE6ygHK/JIBIwoMaW5nZXN0X3Byb3RvEgp3ZWJfdml0YWxzIgdkcyxob3Vy2vySAQYIiCcQgATi/JIBUCIDd3d3OjMKBFVzZXISDUNvbnN1bWVyIEFwcHMaGVBsYXRmb3JtcyAtIFdlYiAmIEJhY2tlbmQguRNCCyNjcC1iYWNrZW5kSgdQSDNQS01Y6vySATYKIGV2ZW50c3RyZWFtL3dlYi93ZWJfdml0YWxzLnByb3RvEhAKA3d3dxIJd2ViVml0YWxzGAf6/JIBAggBQhIKEF9sb2NhbF90aW1lc3RhbXBCBwoFX3BhZ2VCBgoEX3VybEIJCgdfbGNwX21zQgkKB19mY3BfbXNCCgoIX3R0ZmJfbXNCBgoEX2Nsc0IJCgdfaW5wX21zQhIKEF9yZW5kZXJfcGxhdGZvcm1COlo4Z2l0aHViLnJieC5jb20vcm9ibG94L3NjaGVtYS1wcm90b2dlbi9nby9ldmVudHN0cmVhbS93ZWJiBnByb3RvMw", [u.file_event_event_field_options, c, d.file_eventstream_core_hive_table_message_options]),
+    let m = (0, s.fileDesc)("CiBldmVudHN0cmVhbS93ZWIvd2ViX3ZpdGFscy5wcm90bxIXZXZlbnRzdHJlYW0uZXZlbnRpbmdlc3QitQUKCVdlYlZpdGFscxInCg9sb2NhbF90aW1lc3RhbXAYASABKAlCCaK+kgEECgJsdEgAiAEBEi0KD3VzZXJfZXZlbnRfYmFzZRgCIAEoCzIULmV2ZW50LlVzZXJFdmVudEJhc2USHgoEcGFnZRgDIAEoCUILor6SAQYKBHBhZ2VIAYgBARIcCgN1cmwYBCABKAlCCqK+kgEFCgN1cmxIAogBARIfCgZsY3BfbXMYBSABKAFCCqK+kgEFCgNsY3BIA4gBARIfCgZmY3BfbXMYBiABKAFCCqK+kgEFCgNmY3BIBIgBARIhCgd0dGZiX21zGAcgASgBQguivpIBBgoEdHRmYkgFiAEBEhwKA2NscxgIIAEoAUIKor6SAQUKA2Nsc0gGiAEBEh8KBmlucF9tcxgJIAEoAUIKor6SAQUKA2lucEgHiAEBEjMKD3JlbmRlcl9wbGF0Zm9ybRgKIAEoCUIVor6SARAKDnJlbmRlclBsYXRmb3JtSAiIAQE6ygHK/JIBIwoMaW5nZXN0X3Byb3RvEgp3ZWJfdml0YWxzIgdkcyxob3Vy2vySAQYIiCcQgATi/JIBUCIDd3d3OjMKBFVzZXISDUNvbnN1bWVyIEFwcHMaGVBsYXRmb3JtcyAtIFdlYiAmIEJhY2tlbmQguRNCCyNjcC1iYWNrZW5kSgdQSDNQS01Y6vySATYKIGV2ZW50c3RyZWFtL3dlYi93ZWJfdml0YWxzLnByb3RvEhAKA3d3dxIJd2ViVml0YWxzGAf6/JIBAggBQhIKEF9sb2NhbF90aW1lc3RhbXBCBwoFX3BhZ2VCBgoEX3VybEIJCgdfbGNwX21zQgkKB19mY3BfbXNCCgoIX3R0ZmJfbXNCBgoEX2Nsc0IJCgdfaW5wX21zQhIKEF9yZW5kZXJfcGxhdGZvcm1COlo4Z2l0aHViLnJieC5jb20vcm9ibG94L3NjaGVtYS1wcm90b2dlbi9nby9ldmVudHN0cmVhbS93ZWJiBnByb3RvMw", [c.file_event_event_field_options, u, d.file_eventstream_core_hive_table_message_options]),
         p = (0, o.messageDesc)(m, 0);
-    var g = e.i(674094),
-        f = e.i(559659),
-        h = e.i(358239);
-    let v = (0, f.createFireTelemetryHistogram)("WWW_PageTelemetry", {}),
-        I = {
+    var g = e.i(868275),
+        h = e.i(400661),
+        f = e.i(343549),
+        b = e.i(950814);
+    e.i(508484), e.i(787386), e.i(778365);
+    let v = (0, s.fileDesc)("ChVnb29nbGUvYXBpL2h0dHAucHJvdG8SCmdvb2dsZS5hcGkiVAoESHR0cBIjCgVydWxlcxgBIAMoCzIULmdvb2dsZS5hcGkuSHR0cFJ1bGUSJwofZnVsbHlfZGVjb2RlX3Jlc2VydmVkX2V4cGFuc2lvbhgCIAEoCCKBAgoISHR0cFJ1bGUSEAoIc2VsZWN0b3IYASABKAkSDQoDZ2V0GAIgASgJSAASDQoDcHV0GAMgASgJSAASDgoEcG9zdBgEIAEoCUgAEhAKBmRlbGV0ZRgFIAEoCUgAEg8KBXBhdGNoGAYgASgJSAASLwoGY3VzdG9tGAggASgLMh0uZ29vZ2xlLmFwaS5DdXN0b21IdHRwUGF0dGVybkgAEgwKBGJvZHkYByABKAkSFQoNcmVzcG9uc2VfYm9keRgMIAEoCRIxChNhZGRpdGlvbmFsX2JpbmRpbmdzGAsgAygLMhQuZ29vZ2xlLmFwaS5IdHRwUnVsZUIJCgdwYXR0ZXJuIi8KEUN1c3RvbUh0dHBQYXR0ZXJuEgwKBGtpbmQYASABKAkSDAoEcGF0aBgCIAEoCUJqCg5jb20uZ29vZ2xlLmFwaUIJSHR0cFByb3RvUAFaQWdvb2dsZS5nb2xhbmcub3JnL2dlbnByb3RvL2dvb2dsZWFwaXMvYXBpL2Fubm90YXRpb25zO2Fubm90YXRpb25z+AEBogIER0FQSWIGcHJvdG8z");
+    var A = e.i(675618);
+    let y = (0, s.fileDesc)("Chxnb29nbGUvYXBpL2Fubm90YXRpb25zLnByb3RvEgpnb29nbGUuYXBpOksKBGh0dHASHi5nb29nbGUucHJvdG9idWYuTWV0aG9kT3B0aW9ucxiwyrwiIAEoCzIULmdvb2dsZS5hcGkuSHR0cFJ1bGVSBGh0dHBCbgoOY29tLmdvb2dsZS5hcGlCEEFubm90YXRpb25zUHJvdG9QAVpBZ29vZ2xlLmdvbGFuZy5vcmcvZ2VucHJvdG8vZ29vZ2xlYXBpcy9hcGkvYW5ub3RhdGlvbnM7YW5ub3RhdGlvbnOiAgRHQVBJYgZwcm90bzM", [v, A.file_google_protobuf_descriptor]),
+        I = (0, s.fileDesc)("Cllyb2Jsb3gvZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QvZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QvdjEvZXhwZXJpZW5jZV9zaWduYWxzX2luZ2VzdC5wcm90bxI5cm9ibG94LmV4cGVyaWVuY2VzaWduYWxzaW5nZXN0LmV4cGVyaWVuY2VzaWduYWxzaW5nZXN0LnYxIoIBCgVFdmVudBIOCgZzb3VyY2UYASABKAkSDwoHcGF5bG9hZBgCIAEoDBJYCgpyb2Jsb3hfY3R4GAMgASgLMkQucm9ibG94LmV4cGVyaWVuY2VzaWduYWxzaW5nZXN0LmV4cGVyaWVuY2VzaWduYWxzaW5nZXN0LnYxLlJvYmxveEN0eCKfAQoJUm9ibG94Q3R4EmIKB2hlYWRlcnMYASADKAsyUS5yb2Jsb3guZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QuZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QudjEuUm9ibG94Q3R4LkhlYWRlcnNFbnRyeRouCgxIZWFkZXJzRW50cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVlGAIgASgJOgI4ASJLCgZTb3VyY2USDAoEbmFtZRgBIAEoCRITCgtrYWZrYV90b3BpYxgCIAEoCRIPCgdibG9ja2VkGAMgASgIEg0KBW5vdGVzGAQgASgJIl0KB1NvdXJjZXMSUgoHc291cmNlcxgBIAMoCzJBLnJvYmxveC5leHBlcmllbmNlc2lnbmFsc2luZ2VzdC5leHBlcmllbmNlc2lnbmFsc2luZ2VzdC52MS5Tb3VyY2UiGwoIUmVzcG9uc2USDwoHbWVzc2FnZRgCIAEoCULPAQo9Y29tLnJvYmxveC5leHBlcmllbmNlc2lnbmFsc2luZ2VzdC5leHBlcmllbmNlc2lnbmFsc2luZ2VzdC52MUIcRXhwZXJpZW5jZVNpZ25hbHNJbmdlc3RQcm90b1ABWjJleHBlcmllbmNlc2lnbmFsc2luZ2VzdC9leHBlcmllbmNlc2lnbmFsc2luZ2VzdC92MaoCOVJvYmxveC5FeHBlcmllbmNlU2lnbmFsc0luZ2VzdC5FeHBlcmllbmNlU2lnbmFsc0luZ2VzdC5WMWIGcHJvdG8z"),
+        E = (0, s.fileDesc)("Ch1yb2Jsb3gvcHJvdG9idWYvb3B0aW9ucy5wcm90bxIPcm9ibG94LnByb3RvYnVmIoQBChZTZXJ2aWNlQ29udHJhY3RPcHRpb25zEg8KB3B1Ymxpc2gYASABKAgSIwobY3NoYXJwX2dlbmVyYXRlX3NlcnZlcl9zdHViGAIgASgIEjQKLGludDY0X2lkX3dyYXBwZXJfZW50aXR5X2lkX2NzaGFycF9jb252ZXJzaW9uGAMgASgJOnQKEXNlcnZpY2VfY29udHJhY3RzEhwuZ29vZ2xlLnByb3RvYnVmLkZpbGVPcHRpb25zGNCGAyABKAsyJy5yb2Jsb3gucHJvdG9idWYuU2VydmljZUNvbnRyYWN0T3B0aW9uc1IQc2VydmljZUNvbnRyYWN0czo9CglzZW5zaXRpdmUSHS5nb29nbGUucHJvdG9idWYuRmllbGRPcHRpb25zGNGGAyABKAhSCXNlbnNpdGl2ZTpACglzcWxfdmFsdWUSIS5nb29nbGUucHJvdG9idWYuRW51bVZhbHVlT3B0aW9ucxji1AMgASgJUghzcWxWYWx1ZUIRWg9yb2Jsb3gvcHJvdG9idWZiBnByb3RvMw", [A.file_google_protobuf_descriptor]),
+        C = (0, s.fileDesc)("Cl1yb2Jsb3gvZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QvZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QvdjEvZXhwZXJpZW5jZV9zaWduYWxzX2luZ2VzdF9hcGkucHJvdG8SOXJvYmxveC5leHBlcmllbmNlc2lnbmFsc2luZ2VzdC5leHBlcmllbmNlc2lnbmFsc2luZ2VzdC52MSJkChBTZW5kQmF0Y2hSZXF1ZXN0ElAKBmV2ZW50cxgBIAMoCzJALnJvYmxveC5leHBlcmllbmNlc2lnbmFsc2luZ2VzdC5leHBlcmllbmNlc2lnbmFsc2luZ2VzdC52MS5FdmVudCITChFTZW5kQmF0Y2hSZXNwb25zZSKZAgoZU2VuZE9wdGltaXplZEJhdGNoUmVxdWVzdBJyCgtzdWJfYmF0Y2hlcxgBIAMoCzJdLnJvYmxveC5leHBlcmllbmNlc2lnbmFsc2luZ2VzdC5leHBlcmllbmNlc2lnbmFsc2luZ2VzdC52MS5TZW5kT3B0aW1pemVkQmF0Y2hSZXF1ZXN0LlN1YkJhdGNoGocBCghTdWJCYXRjaBIOCgZzb3VyY2UYASABKAkSEAoIcGF5bG9hZHMYAiADKAwSWQoLcm9ibG94X2N0eHMYAyADKAsyRC5yb2Jsb3guZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QuZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QudjEuUm9ibG94Q3R4IhwKGlNlbmRPcHRpbWl6ZWRCYXRjaFJlc3BvbnNlIpYBChdTZW5kVW5pZm9ybUJhdGNoUmVxdWVzdBIOCgZzb3VyY2UYASABKAkSEAoIcGF5bG9hZHMYAiADKAwSWQoLcm9ibG94X2N0eHMYAyADKAsyRC5yb2Jsb3guZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QuZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QudjEuUm9ibG94Q3R4IhoKGFNlbmRVbmlmb3JtQmF0Y2hSZXNwb25zZSJjChBTZW5kRXZlbnRSZXF1ZXN0Ek8KBWV2ZW50GAEgASgLMkAucm9ibG94LmV4cGVyaWVuY2VzaWduYWxzaW5nZXN0LmV4cGVyaWVuY2VzaWduYWxzaW5nZXN0LnYxLkV2ZW50IhMKEVNlbmRFdmVudFJlc3BvbnNlIhQKEkxpc3RTb3VyY2VzUmVxdWVzdCJpChNMaXN0U291cmNlc1Jlc3BvbnNlElIKB3NvdXJjZXMYASADKAsyQS5yb2Jsb3guZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QuZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QudjEuU291cmNlIiAKEEdldFNvdXJjZVJlcXVlc3QSDAoEbmFtZRgBIAEoCSJmChFHZXRTb3VyY2VSZXNwb25zZRJRCgZzb3VyY2UYASABKAsyQS5yb2Jsb3guZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QuZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QudjEuU291cmNlImgKE0NyZWF0ZVNvdXJjZVJlcXVlc3QSUQoGc291cmNlGAEgASgLMkEucm9ibG94LmV4cGVyaWVuY2VzaWduYWxzaW5nZXN0LmV4cGVyaWVuY2VzaWduYWxzaW5nZXN0LnYxLlNvdXJjZSJpChRDcmVhdGVTb3VyY2VSZXNwb25zZRJRCgZzb3VyY2UYASABKAsyQS5yb2Jsb3guZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QuZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QudjEuU291cmNlIo0BChNVcGRhdGVTb3VyY2VSZXF1ZXN0EgwKBG5hbWUYASABKAkSGAoLa2Fma2FfdG9waWMYAiABKAlIAIgBARIUCgdibG9ja2VkGAMgASgISAGIAQESEgoFbm90ZXMYBCABKAlIAogBAUIOCgxfa2Fma2FfdG9waWNCCgoIX2Jsb2NrZWRCCAoGX25vdGVzImkKFFVwZGF0ZVNvdXJjZVJlc3BvbnNlElEKBnNvdXJjZRgBIAEoCzJBLnJvYmxveC5leHBlcmllbmNlc2lnbmFsc2luZ2VzdC5leHBlcmllbmNlc2lnbmFsc2luZ2VzdC52MS5Tb3VyY2UiIwoTRGVsZXRlU291cmNlUmVxdWVzdBIMCgRuYW1lGAEgASgJIicKFERlbGV0ZVNvdXJjZVJlc3BvbnNlEg8KB2RlbGV0ZWQYASABKAgiIgoSVG91Y2hTb3VyY2VSZXF1ZXN0EgwKBG5hbWUYASABKAkiaAoTVG91Y2hTb3VyY2VSZXNwb25zZRJRCgZzb3VyY2UYASABKAsyQS5yb2Jsb3guZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QuZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QudjEuU291cmNlMqgQChpFeHBlcmllbmNlU2lnbmFsc0luZ2VzdEFQSRK9AQoJU2VuZEJhdGNoEksucm9ibG94LmV4cGVyaWVuY2VzaWduYWxzaW5nZXN0LmV4cGVyaWVuY2VzaWduYWxzaW5nZXN0LnYxLlNlbmRCYXRjaFJlcXVlc3QaTC5yb2Jsb3guZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QuZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QudjEuU2VuZEJhdGNoUmVzcG9uc2UiFYLT5JMCDyIKL3YxL2V2ZW50czoBKhLiAQoSU2VuZE9wdGltaXplZEJhdGNoElQucm9ibG94LmV4cGVyaWVuY2VzaWduYWxzaW5nZXN0LmV4cGVyaWVuY2VzaWduYWxzaW5nZXN0LnYxLlNlbmRPcHRpbWl6ZWRCYXRjaFJlcXVlc3QaVS5yb2Jsb3guZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QuZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QudjEuU2VuZE9wdGltaXplZEJhdGNoUmVzcG9uc2UiH4LT5JMCGSIUL3YxL2V2ZW50cy9vcHRpbWl6ZWQ6ASoS2gEKEFNlbmRVbmlmb3JtQmF0Y2gSUi5yb2Jsb3guZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QuZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QudjEuU2VuZFVuaWZvcm1CYXRjaFJlcXVlc3QaUy5yb2Jsb3guZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QuZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QudjEuU2VuZFVuaWZvcm1CYXRjaFJlc3BvbnNlIh2C0+STAhciEi92MS9ldmVudHMvdW5pZm9ybToBKhLEAQoJU2VuZEV2ZW50Eksucm9ibG94LmV4cGVyaWVuY2VzaWduYWxzaW5nZXN0LmV4cGVyaWVuY2VzaWduYWxzaW5nZXN0LnYxLlNlbmRFdmVudFJlcXVlc3QaTC5yb2Jsb3guZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QuZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QudjEuU2VuZEV2ZW50UmVzcG9uc2UiHILT5JMCFiIRL3YxL2V2ZW50cy9zaW5nbGU6ASoSwQEKC0xpc3RTb3VyY2VzEk0ucm9ibG94LmV4cGVyaWVuY2VzaWduYWxzaW5nZXN0LmV4cGVyaWVuY2VzaWduYWxzaW5nZXN0LnYxLkxpc3RTb3VyY2VzUmVxdWVzdBpOLnJvYmxveC5leHBlcmllbmNlc2lnbmFsc2luZ2VzdC5leHBlcmllbmNlc2lnbmFsc2luZ2VzdC52MS5MaXN0U291cmNlc1Jlc3BvbnNlIhOC0+STAg0SCy92MS9zb3VyY2VzEsIBCglHZXRTb3VyY2USSy5yb2Jsb3guZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QuZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QudjEuR2V0U291cmNlUmVxdWVzdBpMLnJvYmxveC5leHBlcmllbmNlc2lnbmFsc2luZ2VzdC5leHBlcmllbmNlc2lnbmFsc2luZ2VzdC52MS5HZXRTb3VyY2VSZXNwb25zZSIagtPkkwIUEhIvdjEvc291cmNlcy97bmFtZX0SxwEKDENyZWF0ZVNvdXJjZRJOLnJvYmxveC5leHBlcmllbmNlc2lnbmFsc2luZ2VzdC5leHBlcmllbmNlc2lnbmFsc2luZ2VzdC52MS5DcmVhdGVTb3VyY2VSZXF1ZXN0Gk8ucm9ibG94LmV4cGVyaWVuY2VzaWduYWxzaW5nZXN0LmV4cGVyaWVuY2VzaWduYWxzaW5nZXN0LnYxLkNyZWF0ZVNvdXJjZVJlc3BvbnNlIhaC0+STAhAiCy92MS9zb3VyY2VzOgEqEs4BCgxVcGRhdGVTb3VyY2USTi5yb2Jsb3guZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QuZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QudjEuVXBkYXRlU291cmNlUmVxdWVzdBpPLnJvYmxveC5leHBlcmllbmNlc2lnbmFsc2luZ2VzdC5leHBlcmllbmNlc2lnbmFsc2luZ2VzdC52MS5VcGRhdGVTb3VyY2VSZXNwb25zZSIdgtPkkwIXMhIvdjEvc291cmNlcy97bmFtZX06ASoSywEKDERlbGV0ZVNvdXJjZRJOLnJvYmxveC5leHBlcmllbmNlc2lnbmFsc2luZ2VzdC5leHBlcmllbmNlc2lnbmFsc2luZ2VzdC52MS5EZWxldGVTb3VyY2VSZXF1ZXN0Gk8ucm9ibG94LmV4cGVyaWVuY2VzaWduYWxzaW5nZXN0LmV4cGVyaWVuY2VzaWduYWxzaW5nZXN0LnYxLkRlbGV0ZVNvdXJjZVJlc3BvbnNlIhqC0+STAhQqEi92MS9zb3VyY2VzL3tuYW1lfRLOAQoLVG91Y2hTb3VyY2USTS5yb2Jsb3guZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QuZXhwZXJpZW5jZXNpZ25hbHNpbmdlc3QudjEuVG91Y2hTb3VyY2VSZXF1ZXN0Gk4ucm9ibG94LmV4cGVyaWVuY2VzaWduYWxzaW5nZXN0LmV4cGVyaWVuY2VzaWduYWxzaW5nZXN0LnYxLlRvdWNoU291cmNlUmVzcG9uc2UiIILT5JMCGiIYL3YxL3NvdXJjZXMve25hbWV9L3RvdWNoQtgBCj1jb20ucm9ibG94LmV4cGVyaWVuY2VzaWduYWxzaW5nZXN0LmV4cGVyaWVuY2VzaWduYWxzaW5nZXN0LnYxQh9FeHBlcmllbmNlU2lnbmFsc0luZ2VzdEFwaVByb3RvUAFaMmV4cGVyaWVuY2VzaWduYWxzaW5nZXN0L2V4cGVyaWVuY2VzaWduYWxzaW5nZXN0L3YxqgI5Um9ibG94LkV4cGVyaWVuY2VTaWduYWxzSW5nZXN0LkV4cGVyaWVuY2VTaWduYWxzSW5nZXN0LlYxgrUYAggBYgZwcm90bzM", [y, I, E]),
+        w = (0, o.messageDesc)(C, 2),
+        S = (0, o.messageDesc)(C, 2, 0),
+        N = (0, o.messageDesc)(C, 6);
+    var x = class {
+            async sendEvent(e, t) {
+                try {
+                    let n = (0, h.toBinary)(e, (0, f.create)(e, t), {
+                            writeUnknownFields: !1
+                        }),
+                        a = (0, f.create)(N, {
+                            event: {
+                                source: e.typeName,
+                                payload: n
+                            }
+                        }),
+                        r = await fetch(`${this.baseUrl}/v1/events/single`, {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/x-protobuf",
+                                "Content-Encoding": "gzip"
+                            },
+                            body: (0, b.gzipSync)((0, h.toBinary)(N, a, {
+                                writeUnknownFields: !1
+                            })),
+                            credentials: "include",
+                            keepalive: !0
+                        });
+                    if (!r.ok) throw Error(`status ${r.status}`)
+                } catch (e) {
+                    console.error("EventStream failed to send event:", e)
+                }
+            }
+            async sendBatch(e) {
+                try {
+                    let t = new Map;
+                    for (let n of e) {
+                        let e = n.schema.typeName;
+                        t.has(e) || t.set(e, []), t.get(e).push(n)
+                    }
+                    let n = Array.from(t.entries()).map(e => {
+                            let [t, n] = e, a = n.map(e => {
+                                let {
+                                    schema: t,
+                                    msg: n
+                                } = e;
+                                return (0, h.toBinary)(t, (0, f.create)(t, n), {
+                                    writeUnknownFields: !1
+                                })
+                            });
+                            return (0, f.create)(S, {
+                                source: t,
+                                payloads: a
+                            })
+                        }),
+                        a = (0, f.create)(w, {
+                            subBatches: n
+                        }),
+                        r = await fetch(`${this.baseUrl}/v1/events/optimized`, {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/x-protobuf",
+                                "Content-Encoding": "gzip"
+                            },
+                            body: (0, b.gzipSync)((0, h.toBinary)(w, a, {
+                                writeUnknownFields: !1
+                            })),
+                            credentials: "include",
+                            keepalive: !0
+                        });
+                    if (!r.ok) throw Error(`status ${r.status}`)
+                } catch (e) {
+                    console.error("EventStream failed to send batch events:", e)
+                }
+            }
+            constructor({
+                baseUrl: e = "https://apis.roblox.com"
+            } = {}) {
+                (0, g._)(this, "baseUrl", void 0), this.baseUrl = e.replace(/\/$/, "") + "/experience-signals-ingest/public"
+            }
+        },
+        V = e.i(559659),
+        T = e.i(358239);
+    let Z = (0, V.createFireTelemetryHistogram)("WWW_PageTelemetry", {}),
+        R = {
             ServerList: .001,
             Home: .003,
             Profile: .003,
@@ -3485,43 +3576,43 @@
             SduiLandingPage_survival: 1,
             SduiLandingPage_the_hunt_roblox_20: 1
         },
-        y = /[^A-Za-z0-9_]/g,
-        b = {
+        L = /[^A-Za-z0-9_]/g,
+        P = {
             ttfb: "TTFB",
             fcp: "FCP",
             lcp: "LCP",
             inp: "INP",
             cls: "CLS"
         };
-    var A = e.i(245837);
-    let E = {
+    var F = e.i(245837);
+    let B = {
             LCP: "lcp",
             FCP: "fcp",
             TTFB: "ttfb",
             CLS: "cls",
             INP: "inp"
         },
-        C = () => ({
+        k = () => ({
             pageNameSet: !1,
             pageName: void 0,
             sent: !1
         }),
-        w = C();
+        X = k();
     e.s(["default", 0, function(e) {
         let {
             pageName: s
-        } = e, o = (0, r.useRef)({});
-        return (0, a.useReportWebVitals)(e => {
-            let t = E[e.name];
+        } = e, o = (0, a.useRef)({});
+        return (0, r.useReportWebVitals)(e => {
+            let t = B[e.name];
             t && (o.current[t] = {
                 value: e.value
             })
-        }), (0, r.useEffect)(() => {
-            w.pageNameSet || (w.pageNameSet = !0, w.pageName = s)
-        }, []), (0, r.useEffect)(() => {
+        }), (0, a.useEffect)(() => {
+            X.pageNameSet || (X.pageNameSet = !0, X.pageName = s)
+        }, []), (0, a.useEffect)(() => {
             let e = () => {
-                    if (w.sent) return;
-                    w.sent = !0;
+                    if (X.sent) return;
+                    X.sent = !0;
                     let e = function(e) {
                         if (null != e.ttfb || 0 === Object.keys(e).length || "u" < typeof performance) return;
                         let [t] = performance.getEntriesByType("navigation");
@@ -3533,77 +3624,77 @@
                         }
                     }(o.current);
                     e && (o.current.ttfb = e),
-                        function(e, r, a, i, s, o) {
-                            if (!r) return;
-                            let u = r.lcp?.value,
-                                c = r.fcp?.value,
-                                d = r.ttfb?.value,
-                                m = r.cls?.value,
-                                A = r.inp?.value;
-                            if ([u, c, d, m, A].some(e => "number" == typeof e)) try {
-                                ((null == t || n !== e) && (t = new g.EventStreamClient({
+                        function(e, a, r, i, s, o) {
+                            if (!a) return;
+                            let c = a.lcp?.value,
+                                u = a.fcp?.value,
+                                d = a.ttfb?.value,
+                                m = a.cls?.value,
+                                g = a.inp?.value;
+                            if ([c, u, d, m, g].some(e => "number" == typeof e)) try {
+                                ((null == t || n !== e) && (t = new x({
                                     baseUrl: e
                                 }), n = e), t).sendEvent(p, {
                                         localTimestamp: new Date().toISOString(),
                                         userEventBase: {
                                             userId: function(e) {
                                                 if (null != e) return "bigint" == typeof e ? e : ("number" == typeof e ? (0, l.bigIntFromNumber)(e) : (0, l.parseBigInt)(e)) ?? void 0
-                                            }(a)
+                                            }(r)
                                         },
                                         page: i,
                                         url: window.location.href,
-                                        lcpMs: u,
-                                        fcpMs: c,
+                                        lcpMs: c,
+                                        fcpMs: u,
                                         ttfbMs: d,
                                         cls: m,
-                                        inpMs: A,
+                                        inpMs: g,
                                         renderPlatform: o
                                     }).catch(() => {}),
                                     function(e, t, n) {
                                         if (!e) return;
-                                        let r = (void 0 === t || "" === t ? "Unknown" : t).replace(y, "_");
-                                        if (Math.random() >= (I[r] ?? .05)) return;
+                                        let a = (void 0 === t || "" === t ? "Unknown" : t).replace(L, "_");
+                                        if (Math.random() >= (R[a] ?? .05)) return;
                                         let {
-                                            appType: a,
+                                            appType: r,
                                             browser: i
-                                        } = (0, h.getDeviceClient)(), l = {
-                                            appType: a,
+                                        } = (0, T.getDeviceClient)(), l = {
+                                            appType: r,
                                             browser: i,
                                             host: n
                                         }, s = !1;
-                                        for (let [t, n] of Object.entries(b)) {
-                                            let a = e[t]?.value;
-                                            "number" == typeof a && (v(`PagePerf_${n}_${r}`, l, a), s = !0)
+                                        for (let [t, n] of Object.entries(P)) {
+                                            let r = e[t]?.value;
+                                            "number" == typeof r && (Z(`PagePerf_${n}_${a}`, l, r), s = !0)
                                         }
-                                        s && (0, f.flushTelemetryHistograms)()
-                                    }(r, s, o)
+                                        s && (0, V.flushTelemetryHistograms)()
+                                    }(a, s, o)
                             } catch (e) {
                                 console.error("[PERF] Failed to send web vitals:", e)
                             }
-                        }(A.default.apiGatewayUrl, o.current, (0, i.getCurrentUser)()?.id, s, w.pageName, "nextjs")
+                        }(F.default.apiGatewayUrl, o.current, (0, i.getCurrentUser)()?.id, s, X.pageName, "nextjs")
                 },
-                r = () => {
+                a = () => {
                     "hidden" === document.visibilityState && e()
                 };
-            return document.addEventListener("visibilitychange", r), window.addEventListener("pagehide", e), () => {
-                document.removeEventListener("visibilitychange", r), window.removeEventListener("pagehide", e)
+            return document.addEventListener("visibilitychange", a), window.addEventListener("pagehide", e), () => {
+                document.removeEventListener("visibilitychange", a), window.removeEventListener("pagehide", e)
             }
         }, [s]), null
     }, "resetDocumentLoadForTests", 0, () => {
-        w = C()
+        X = k()
     }], 8888)
 }, 967069, e => {
     "use strict";
     var t = e.i(809804),
         n = e.i(526005),
-        r = e.i(708923),
-        a = e.i(69134),
+        a = e.i(708923),
+        r = e.i(69134),
         i = e.i(386650),
         l = e.i(587541),
         s = e.i(690255),
         o = e.i(801827),
-        u = e.i(360702),
-        c = e.i(883355),
+        c = e.i(360702),
+        u = e.i(883355),
         d = e.i(646424),
         m = e.i(519003);
     e.i(350223);
@@ -3611,7 +3702,7 @@
     let g = p.object({
             cooldownPeriodInMs: p.number()
         }),
-        f = p.object({
+        h = p.object({
             id: p.string(),
             agreementType: p.string(),
             clientType: p.literal(["Web"]),
@@ -3620,9 +3711,9 @@
             agreementBodyText: p.nullish(p.string()),
             action: p.optional(p.string())
         }),
-        h = p.array(f),
-        v = u.AsyncResult.fn(async e => {
-            let t = c.getItem("userAgreements");
+        f = p.array(h),
+        b = c.AsyncResult.fn(async e => {
+            let t = u.getItem("userAgreements");
             if (t?.version === 0) {
                 let n = t.data[e];
                 if (null != n) {
@@ -3633,24 +3724,24 @@
                     }).getOrDefault({
                         cooldownPeriodInMs: 864e5
                     });
-                    if (Date.now() < n + e) return (0, u.ok)([])
+                    if (Date.now() < n + e) return (0, c.ok)([])
                 }
             }
-            return d.get((0, m.getPageBaseUrls)().apiGateway.withPath("/user-agreements/v1/agreements-resolution/web"), h, {
+            return d.get((0, m.getPageBaseUrls)().apiGateway.withPath("/user-agreements/v1/agreements-resolution/web"), f, {
                 credentials: "include"
             }).inspect(n => {
                 if (0 === n.length && (null == t || 0 === t.version)) {
                     let n = t?.data ?? {};
                     n[e] = Date.now();
-                    let r = Object.entries(n);
-                    r.length > 100 && (r = r.sort((e, t) => e[1] - t[1]).slice(-100)), c.setItem("userAgreements", {
+                    let a = Object.entries(n);
+                    a.length > 100 && (a = a.sort((e, t) => e[1] - t[1]).slice(-100)), u.setItem("userAgreements", {
                         version: 0,
-                        data: Object.fromEntries(r)
+                        data: Object.fromEntries(a)
                     })
                 }
             })
         }),
-        I = {
+        v = {
             TermsOfService: "Modal.Agreement.TermsOfService",
             PrivacyPolicy: "Modal.Agreement.PrivacyPolicy",
             RiderTerms: "Modal.Agreement.RiderTerms",
@@ -3658,12 +3749,12 @@
         };
     e.s(["default", 0, function(e) {
         let {
-            userId: u
-        } = e, c = (0, o.useTranslations)("CommonUI.UserAgreements"), {
+            userId: c
+        } = e, u = (0, o.useTranslations)("CommonUI.UserAgreements"), {
             data: p
-        } = (0, r.useQuery)({
-            queryKey: ["outstanding-user-agreements", u],
-            queryFn: () => v(u).getOrThrow(),
+        } = (0, a.useQuery)({
+            queryKey: ["outstanding-user-agreements", c],
+            queryFn: () => b(c).getOrThrow(),
             staleTime: 1 / 0
         }), g = (0, n.useMutation)({
             mutationFn: e => {
@@ -3681,7 +3772,7 @@
                     credentials: "include"
                 })).getOrThrow()
             }
-        }), f = p?.find(e => null != e.agreementBodyText)?.agreementBodyText;
+        }), h = p?.find(e => null != e.agreementBodyText)?.agreementBodyText;
         return null == p || 0 === p.length || g.isSuccess ? null : (0, t.jsx)(i.Dialog, {
             open: !0,
             size: "Medium",
@@ -3692,32 +3783,32 @@
                     className: "flex flex-col items-start gap-medium",
                     children: [(0, t.jsx)(i.DialogTitle, {
                         className: "text-heading-large content-emphasis",
-                        children: c("Modal.Title")
+                        children: u("Modal.Title")
                     }), (0, t.jsx)("p", {
                         className: "text-body-large content-default",
-                        children: f ?? c("Modal.Body")
+                        children: h ?? u("Modal.Body")
                     }), (0, t.jsx)("ul", {
                         className: "flex flex-col gap-medium",
                         children: p.map(e => {
                             let {
                                 id: n,
-                                agreementType: r,
-                                displayUrl: a
+                                agreementType: a,
+                                displayUrl: r
                             } = e;
-                            return l.Url.parse(a).map(e => (0, t.jsx)("li", {
+                            return l.Url.parse(r).map(e => (0, t.jsx)("li", {
                                 children: (0, t.jsx)(s.Link, {
                                     href: e,
                                     target: "_blank",
                                     rel: "noreferrer",
                                     className: "text-body-large content-link",
-                                    children: Object.hasOwn(I, r) ? c(I[r]) : a
+                                    children: Object.hasOwn(v, a) ? u(v[a]) : r
                                 })
                             }, n)).getOrNull()
                         })
                     })]
                 }), (0, t.jsx)(i.DialogFooter, {
                     className: "flex",
-                    children: (0, t.jsx)(a.Button, {
+                    children: (0, t.jsx)(r.Button, {
                         variant: "Emphasis",
                         size: "Medium",
                         className: "fill basis-0",
@@ -3725,7 +3816,7 @@
                         onClick: () => {
                             g.isPending || g.mutate(p)
                         },
-                        children: c("Modal.Agree")
+                        children: u("Modal.Agree")
                     })
                 })]
             })
@@ -3733,33 +3824,33 @@
     }], 967069)
 }, 795883, e => {
     "use strict";
-    let t, n, r, a, i;
+    let t, n, a, r, i;
     var l = e.i(371847),
         s = e.i(357355),
         o = e.i(217827);
     e.i(350223);
-    var u = e.i(874296),
-        c = e.i(646424),
+    var c = e.i(874296),
+        u = e.i(646424),
         d = e.i(519003);
-    let m = u.object({
-            accountTheme: u.object({
-                currentValue: u.string()
+    let m = c.object({
+            accountTheme: c.object({
+                currentValue: c.string()
             })
         }),
         p = ["theme-classic", "theme-circuit-rush", "theme-cosmic-dust", "theme-electric-lime", "theme-hyper-plum", "theme-inferno-blast", "theme-kinetic-energy", "theme-lava-glow", "theme-nebula-drift", "theme-nitro-frost", "theme-pixel-pop", "theme-polar-freeze", "theme-quantum-pulse", "theme-star-burst", "theme-super-charge"],
-        g = (n = new Set, r = null, a = 0, i = e => {
+        g = (n = new Set, a = null, r = 0, i = e => {
             void 0 !== t && t !== e && n.add(t), n.delete(e), t = e
         }, {
-            startChange: e => (n.add(e), void 0 !== t && n.add(t), a += 1, r = a),
+            startChange: e => (n.add(e), void 0 !== t && n.add(t), r += 1, a = r),
             finishChange: (e, t) => {
-                if (e === r) return r = null, i(t), t
+                if (e === a) return a = null, i(t), t
             },
             observeServer: e => {
                 if (n.has(e)) return t;
-                n.size > 0 && (r = null, i(e))
+                n.size > 0 && (a = null, i(e))
             }
         }),
-        f = e => {
+        h = e => {
             if (null == s.document) return;
             let {
                 classList: t
@@ -3773,17 +3864,17 @@
         return (0, l.useLayoutEffect)(() => {
             n.current = t;
             let e = g.observeServer(t);
-            void 0 !== e && f(e)
+            void 0 !== e && h(e)
         }), (0, o.useRealtimeNamespace)("UserSettingsChanged", e => {
             if (!("object" == typeof e && null != e && "SettingsChanged" in e && Array.isArray(e.SettingsChanged) && e.SettingsChanged.includes("AccountTheme"))) return;
             let t = g.startChange(n.current);
-            c.get((0, d.getPageBaseUrls)().apiGateway.withPath("/user-settings-api/v2/user-settings/settings-and-options-subset").withSearchParams({
+            u.get((0, d.getPageBaseUrls)().apiGateway.withPath("/user-settings-api/v2/user-settings/settings-and-options-subset").withSearchParams({
                 requestedUserSettings: "accountTheme"
             }), m, {
                 credentials: "include"
             }).map(e => e.accountTheme.currentValue).inspect(e => {
-                let n, r = g.finishChange(t, (n = `theme-${e.replaceAll(/([a-z])([A-Z])/g,"$1-$2").toLowerCase()}`, p.find(e => e === n) ?? null));
-                void 0 !== r && f(r)
+                let n, a = g.finishChange(t, (n = `theme-${e.replaceAll(/([a-z])([A-Z])/g,"$1-$2").toLowerCase()}`, p.find(e => e === n) ?? null));
+                void 0 !== a && h(a)
             })
         }), null
     }], 795883)
@@ -3792,18 +3883,18 @@
     var t = e.i(371847),
         n = e.i(708923);
     e.i(350223);
-    var r = e.i(874296),
-        a = e.i(646424),
+    var a = e.i(874296),
+        r = e.i(646424),
         i = e.i(883355),
         l = e.i(519003);
     let s = "classic-theme-variant",
         o = "classic-theme-variant-1",
-        u = "PlayerApp.R20.AccessEnrollment",
-        c = r.object({
-            layers: r.object({
-                [u]: r.object({
-                    parameters: r.object({
-                        FFlagAppClassicThemeGreenButtonColors: r.optional(r.unknown())
+        c = "PlayerApp.R20.AccessEnrollment",
+        u = a.object({
+            layers: a.object({
+                [c]: a.object({
+                    parameters: a.object({
+                        FFlagAppClassicThemeGreenButtonColors: a.optional(a.unknown())
                     })
                 })
             })
@@ -3817,52 +3908,52 @@
         };
     e.s(["default", 0, function(e) {
         let {
-            userId: r
+            userId: a
         } = e, [m, p] = (0, t.useState)(!1), {
             data: g
         } = (0, n.useQuery)({
-            queryKey: ["ixp", u],
-            queryFn: () => a.post((0, l.getPageBaseUrls)().apiGateway.withPath("/product-experimentation-platform/v1/projects/1/values"), {
+            queryKey: ["ixp", c],
+            queryFn: () => r.post((0, l.getPageBaseUrls)().apiGateway.withPath("/product-experimentation-platform/v1/projects/1/values"), {
                 layers: {
-                    [u]: {}
+                    [c]: {}
                 }
-            }, c, {
+            }, u, {
                 credentials: "include"
             }).map(e => {
                 let {
                     layers: t
                 } = e;
-                return !0 === t[u].parameters.FFlagAppClassicThemeGreenButtonColors
+                return !0 === t[c].parameters.FFlagAppClassicThemeGreenButtonColors
             }).getOrThrow(),
             enabled: m,
             staleTime: 1 / 0
         });
         return (0, t.useEffect)(() => {
             let e = d();
-            null != e && (e.includes(r) && document.body.classList.add(o), p(!0))
-        }, [r]), (0, t.useEffect)(() => {
+            null != e && (e.includes(a) && document.body.classList.add(o), p(!0))
+        }, [a]), (0, t.useEffect)(() => {
             if (null == g) return;
             document.body.classList.toggle(o, g);
             let e = d();
             if (null == e) return;
-            let t = e.includes(r);
+            let t = e.includes(a);
             g && !t ? i.setItem(s, {
                 version: 0,
-                data: [...e, r]
+                data: [...e, a]
             }) : !g && t && i.setItem(s, {
                 version: 0,
-                data: e.filter(e => e !== r)
+                data: e.filter(e => e !== a)
             })
-        }, [g, r]), null
+        }, [g, a]), null
     }])
 }, 931637, e => {
     "use strict";
     let t;
     var n = e.i(809804),
-        r = e.i(910030),
-        a = e.i(391855),
+        a = e.i(910030),
+        r = e.i(391855),
         i = e.i(784859);
-    let l = () => new r.QueryClient({
+    let l = () => new a.QueryClient({
         defaultOptions: {
             queries: {
                 retry: !1
@@ -3871,11 +3962,11 @@
     });
     e.s(["default", 0, function(e) {
         let {
-            children: r
+            children: a
         } = e;
-        return (0, n.jsx)(a.QueryClientProvider, {
+        return (0, n.jsx)(r.QueryClientProvider, {
             client: i.isServer ? l() : t ??= l(),
-            children: r
+            children: a
         })
     }])
 }, 180158, e => {
@@ -3884,15 +3975,15 @@
     let n = (0, e.i(371847).createContext)(null);
     e.s(["default", 0, function(e) {
         let {
-            appMode: r,
-            children: a
+            appMode: a,
+            children: r
         } = e;
         return (0, t.jsx)(n.Provider, {
-            value: r,
-            children: a
+            value: a,
+            children: r
         })
     }], 180158)
 }]);
 
-//# debugId=39117745-2f0f-daa9-89e4-52c6e47a868d
-//# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/0vn30k-53mgv0.js.map
+//# debugId=5e91d9b0-a6f6-a7de-ef2f-1c8bf768f012
+//# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/0m21rm6_qk-wy.js.map

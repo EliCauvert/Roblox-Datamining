@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "09d87b92-7b3f-0225-a5d4-e4b072890a67")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "85ae4e33-68c3-35c8-cb76-fe58553d3129")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 139047, e => {
@@ -69,7 +69,12 @@
             challengeDisplayed: "ChallengeDisplayed",
             challengeCompleted: "ChallengeCompleted",
             challengeInvalidated: "ChallengeInvalidated",
-            challengeAbandoned: "ChallengeAbandoned"
+            challengeAbandoned: "ChallengeAbandoned",
+            abrLoaded: "AbrLoaded",
+            abrFailed: "AbrFailed",
+            abrSucceeded: "AbrSucceeded",
+            abrAccepted: "AbrAccepted",
+            abrRejected: "AbrRejected"
         },
         sequence: {
             challengeSolveTime: "ChallengeSolveTime",
@@ -137,9 +142,9 @@
         window[u] = e => {
             i && e.Events.on("captcha", i)
         }, document.getElementById(l)?.remove();
-        let c = document.createElement("script");
-        return c.id = l, c.type = "text/javascript", c.src = e.blockScript, c.async = !0, document.head.appendChild(c), () => {
-            c.remove(), document.getElementById(n)?.replaceChildren(), delete o._pxAppId, delete o._pxJsClientSrc, delete o._pxFirstPartyEnabled, delete o._pxVid, delete o._pxUuid, delete o._pxHostUrl, delete o._pxBlockedUrl, Reflect.deleteProperty(window, s), Reflect.deleteProperty(window, u)
+        let d = document.createElement("script");
+        return d.id = l, d.type = "text/javascript", d.src = e.blockScript, d.async = !0, document.head.appendChild(d), () => {
+            d.remove(), document.getElementById(n)?.replaceChildren(), delete o._pxAppId, delete o._pxJsClientSrc, delete o._pxFirstPartyEnabled, delete o._pxVid, delete o._pxUuid, delete o._pxHostUrl, delete o._pxBlockedUrl, Reflect.deleteProperty(window, s), Reflect.deleteProperty(window, u)
         }
     }, "waitForSensorReady", 0, e => {
         let r = 0,
@@ -179,15 +184,15 @@
         o = e.i(646424),
         s = e.i(587541);
     let u = ["click", "dblclick", "focus", "hover", "keypress", "mousedown", "mouseenter", "mouseover", "scroll", "touchmove", "touchstart"],
-        c = ["blur"],
-        d = l.object({
+        d = ["blur"],
+        c = l.object({
             isEnabled: l.optional(l.boolean()),
             rolloutPercentage: l.optional(l.number()),
             intervalTimeMs: l.optional(l.number())
         }),
         f = () => s.Url.parse(i.default.apiGatewayUrl).getOrThrow(),
         m = async e => {
-            let r = await o.get(f().withPath("/guac-v2/v1/bundles/user-heartbeats"), d, {
+            let r = await o.get(f().withPath("/guac-v2/v1/bundles/user-heartbeats"), c, {
                 credentials: "include"
             });
             if (r.isErr()) return "configFailed";
@@ -210,20 +215,20 @@
     e.s(["default", 0, function() {
         return (0, r.useEffect)(() => {
             var e;
-            let r, l, i, o, s, d, f, b, v = (0, n.getCurrentUser)()?.id,
+            let r, l, i, o, s, c, f, b, v = (0, n.getCurrentUser)()?.id,
                 g = null == v ? null : (0, t.parseInt)(v);
             return null == g ? void 0 : (e = e => {
                 (0, h.trackAppShellCounter)("PresenceHeartbeat", {
                     outcome: e
                 })
-            }, l = !1, i = !1, o = !1, s = 3e4, d = () => {
+            }, l = !1, i = !1, o = !1, s = 3e4, c = () => {
                 i = !0, o = !1, p().then(r => {
                     e?.(r ? "sent" : "failed")
                 }), r = setTimeout(() => {
-                    o ? d() : i = !1
+                    o ? c() : i = !1
                 }, s)
             }, f = () => {
-                i ? o = !0 : d()
+                i ? o = !0 : c()
             }, b = () => {
                 o = !1
             }, m(g).then(r => {
@@ -233,14 +238,14 @@
                         a.window?.addEventListener(e, f, {
                             passive: !0
                         })
-                    }), c.forEach(e => {
+                    }), d.forEach(e => {
                         a.window?.addEventListener(e, b)
-                    }), d()
+                    }), c()
                 }
             }), () => {
                 l = !0, clearTimeout(r), u.forEach(e => {
                     a.window?.removeEventListener(e, f)
-                }), c.forEach(e => {
+                }), d.forEach(e => {
                     a.window?.removeEventListener(e, b)
                 })
             })
@@ -329,8 +334,8 @@
             requiredSpec: o,
             timeoutMs: 1e4
         },
-        c = u,
-        d = e => "number" == typeof e && Number.isFinite(e) && e >= 0,
+        d = u,
+        c = e => "number" == typeof e && Number.isFinite(e) && e >= 0,
         f = "RBX_WASM_DEVICE_PROBE",
         m = `${f}_`,
         p = e => {
@@ -406,7 +411,7 @@
             return e >= t && e < n ? y(r) : null
         },
         C = new Set(["error", "timeout", "crashed"]),
-        x = () => {
+        A = () => {
             let e = (0, a.getItem)(h);
             return w(e) && e.browser === g() && S(e.failedAt) && S(e.failureCount) && !(e.failureCount < 1) && C.has(e.reason) ? {
                 browser: e.browser,
@@ -418,8 +423,8 @@
                 }
             } : null
         },
-        A = (e, r) => {
-            let t = x();
+        x = (e, r) => {
+            let t = A();
             if (null == t) return null;
             let n = e - t.failedAt,
                 l = t.failureCount >= 2 ? 864e5 : 36e5;
@@ -435,8 +440,8 @@
             null == e ? (0, a.removeItem)(h) : (0, a.setItem)(h, e)
         };
     var I = e.i(139047);
-    let T = "RBX_WASM_WEB_PLAY_NOT_OFFERED",
-        R = "RBX_WASM_WEB_PLAY_REGION_UNKNOWN",
+    let R = "RBX_WASM_WEB_PLAY_NOT_OFFERED",
+        T = "RBX_WASM_WEB_PLAY_REGION_UNKNOWN",
         M = (e, r, n) => {
             try {
                 let l = Number(t.window?.sessionStorage.getItem(e)),
@@ -458,7 +463,7 @@
                 e[t](n)
             } catch {}
         },
-        W = (e, r) => {
+        q = (e, r) => {
             try {
                 let t = [e, r];
                 if (null != O) return void L(O, t);
@@ -472,7 +477,7 @@
                 }))
             } catch {}
         },
-        q = () => {
+        W = () => {
             try {
                 return B()
             } catch {
@@ -481,21 +486,21 @@
         },
         j = null,
         U = (e, r) => {
-            let t = A(e, r);
-            return null != t && W("probeSkipped", {
+            let t = x(e, r);
+            return null != t && q("probeSkipped", {
                 reason: t.reason,
                 browser: t.browser
             }), null != t
         },
         G = async e => {
             let r = t.navigator?.locks;
-            return null == r ? e(c.timeoutMs) : await r.request("rbx-device-probe", () => e(0))
+            return null == r ? e(d.timeoutMs) : await r.request("rbx-device-probe", () => e(0))
         }, $ = async () => {
             let e = await (() => {
                 var e;
                 let r = t.window;
                 if (null == r) return Promise.resolve("unknown");
-                let n = M(T, 864e5, e = Date.now()) ? "notOffered" : M(R, 9e5, e) ? "unknown" : null;
+                let n = M(R, 864e5, e = Date.now()) ? "notOffered" : M(T, 9e5, e) ? "unknown" : null;
                 return null != n ? Promise.resolve(n) : (r.rbxDeviceProbeRegionAnswer ??= new Promise(e => {
                     let r, n = !1,
                         l = l => {
@@ -503,7 +508,7 @@
                                 try {
                                     t.window?.sessionStorage.setItem(e, String(r))
                                 } catch {}
-                            })("notOffered" === l ? T : R, Date.now()), e(l))
+                            })("notOffered" === l ? R : T, Date.now()), e(l))
                         };
                     r = setTimeout(() => {
                         l("unknown")
@@ -534,15 +539,15 @@
                 var r;
                 let n, l, i = E(Date.now());
                 if (null != i) return i;
-                if (U(Date.now(), e) || !c.enabled || t.document?.visibilityState === "hidden") return null;
-                let o = x(),
+                if (U(Date.now(), e) || !d.enabled || t.document?.visibilityState === "hidden") return null;
+                let o = A(),
                     u = (o?.failureCount ?? 0) + 1,
-                    d = Date.now();
-                if (!P("crashed", u, d)) return null;
+                    c = Date.now();
+                if (!P("crashed", u, c)) return null;
                 let f = g();
-                W("probeStarted", {
+                q("probeStarted", {
                     browser: f
-                }), o?.reason === "crashed" && !0 !== o.crashReported && d - o.failedAt >= e && (W("probeFailed", {
+                }), o?.reason === "crashed" && !0 !== o.crashReported && c - o.failedAt >= e && (q("probeFailed", {
                     reason: "crashed",
                     durationMs: null,
                     browser: f,
@@ -551,7 +556,7 @@
                     ...o,
                     crashReported: !0
                 });
-                let m = await (n = c.timeoutMs, new Promise(e => {
+                let m = await (n = d.timeoutMs, new Promise(e => {
                         let r = t.window,
                             l = t.document;
                         if (null == r || null == l) return void e({
@@ -573,7 +578,7 @@
                                     reason: "error"
                                 })
                             },
-                            c = e => {
+                            d = e => {
                                 let t = e.data;
                                 e.origin === r.location.origin && null != e.source && e.source === i.contentWindow && "object" == typeof t && null !== t && "rbx-device-probe:result" === t.type && 3 === t.version && o(!0 === t.ok ? {
                                     ok: !0,
@@ -583,13 +588,13 @@
                                     reason: "error"
                                 })
                             },
-                            d = () => {
+                            c = () => {
                                 "hidden" === l.visibilityState && o({
                                     ok: !1,
                                     reason: "hidden"
                                 })
                             };
-                        i.addEventListener("load", u), l.body.append(i), r.addEventListener("message", c), l.addEventListener("visibilitychange", d);
+                        i.addEventListener("load", u), l.body.append(i), r.addEventListener("message", d), l.addEventListener("visibilitychange", c);
                         let f = setTimeout(() => {
                             o({
                                 ok: !1,
@@ -597,13 +602,13 @@
                             })
                         }, n);
                         a.push(() => {
-                            clearTimeout(f), i.removeEventListener("load", u), r.removeEventListener("message", c), l.removeEventListener("visibilitychange", d)
+                            clearTimeout(f), i.removeEventListener("load", u), r.removeEventListener("message", d), l.removeEventListener("visibilitychange", c)
                         })
                     })).catch(() => ({
                         ok: !1,
                         reason: "error"
                     })),
-                    p = Date.now() - d,
+                    p = Date.now() - c,
                     b = m.ok ? (e => {
                         if (!w(e) || !w(e.features) || !w(e.cpu)) return null;
                         let {
@@ -625,7 +630,7 @@
                     })(m.scores) : null;
                 if (null == b) {
                     let e = m.ok ? "error" : m.reason;
-                    return "hidden" === e ? _(o) : P(e, u, Date.now()), W("probeFailed", {
+                    return "hidden" === e ? _(o) : P(e, u, Date.now()), q("probeFailed", {
                         reason: e,
                         durationMs: p,
                         browser: f,
@@ -638,17 +643,17 @@
                 } = b, {
                     isolated: C
                 } = v;
-                return S ? (r = Date.now(), l = 0 === s(v, c.requiredSpec).length, (0, a.setItem)(h, {
+                return S ? (r = Date.now(), l = 0 === s(v, d.requiredSpec).length, (0, a.setItem)(h, {
                     measuredAt: r,
                     expiresAt: r + (l ? 6048e5 : 1728e5),
                     browser: g(),
                     ...v
-                }), W("probeCompleted", {
+                }), q("probeCompleted", {
                     durationMs: p,
                     browser: f,
                     isolated: C,
-                    failedRules: s(v, c.requiredSpec)
-                }), v) : (_(o), W("probeFailed", {
+                    failedRules: s(v, d.requiredSpec)
+                }), v) : (_(o), q("probeFailed", {
                     reason: "throttled",
                     durationMs: p,
                     browser: f,
@@ -659,7 +664,7 @@
             try {
                 return await $()
             } catch {
-                return W("probeFailed", {
+                return q("probeFailed", {
                     reason: "error",
                     durationMs: null,
                     browser: g(),
@@ -668,12 +673,12 @@
             }
         }, z = async () => {
             try {
-                if (!q()) return !1;
+                if (!W()) return !1;
                 let e = E(Date.now());
-                if (null == e && (U(Date.now(), c.timeoutMs) || !c.enabled || (j ??= V().finally(() => {
+                if (null == e && (U(Date.now(), d.timeoutMs) || !d.enabled || (j ??= V().finally(() => {
                         j = null
-                    }), e = await j, !q()))) return !1;
-                return null != e && 0 === s(e, c.requiredSpec).length
+                    }), e = await j, !W()))) return !1;
+                return null != e && 0 === s(e, d.requiredSpec).length
             } catch {
                 return !1
             }
@@ -704,28 +709,28 @@
                 } catch {}
                 if (null !== (() => {
                         try {
-                            if (!q()) return !1;
+                            if (!W()) return !1;
                             let e = Date.now(),
                                 r = E(e);
-                            if (null == r) return null == A(e, c.timeoutMs) && null;
-                            return 0 === s(r, c.requiredSpec).length
+                            if (null == r) return null == x(e, d.timeoutMs) && null;
+                            return 0 === s(r, d.requiredSpec).length
                         } catch {
                             return null
                         }
                     })()) return;
-                c = {
+                d = {
                     enabled: !0 === (n = {
                         enabled: !0
                     }).enabled,
                     requiredSpec: null == n.requiredSpec ? o : {
                         requiredFeatures: Array.isArray((l = n.requiredSpec).requiredFeatures) && l.requiredFeatures.every(e => "string" == typeof e) ? l.requiredFeatures : o.requiredFeatures,
-                        minDeviceMemoryGiB: d(l.minDeviceMemoryGiB) ? l.minDeviceMemoryGiB : o.minDeviceMemoryGiB,
-                        minEffectiveCores: d(l.minEffectiveCores) ? l.minEffectiveCores : o.minEffectiveCores,
-                        minSingleThreadScore: d(l.minSingleThreadScore) ? l.minSingleThreadScore : o.minSingleThreadScore,
-                        minWebgl2FillPassesPerMs: d(l.minWebgl2FillPassesPerMs) ? l.minWebgl2FillPassesPerMs : o.minWebgl2FillPassesPerMs,
+                        minDeviceMemoryGiB: c(l.minDeviceMemoryGiB) ? l.minDeviceMemoryGiB : o.minDeviceMemoryGiB,
+                        minEffectiveCores: c(l.minEffectiveCores) ? l.minEffectiveCores : o.minEffectiveCores,
+                        minSingleThreadScore: c(l.minSingleThreadScore) ? l.minSingleThreadScore : o.minSingleThreadScore,
+                        minWebgl2FillPassesPerMs: c(l.minWebgl2FillPassesPerMs) ? l.minWebgl2FillPassesPerMs : o.minWebgl2FillPassesPerMs,
                         requireWebgl2Renders: "boolean" == typeof l.requireWebgl2Renders ? l.requireWebgl2Renders : o.requireWebgl2Renders
                     },
-                    timeoutMs: d(e = n.timeoutMs) && e > 0 ? n.timeoutMs : u.timeoutMs
+                    timeoutMs: c(e = n.timeoutMs) && e > 0 ? n.timeoutMs : u.timeoutMs
                 };
                 let h = () => {
                     z()
@@ -761,8 +766,8 @@
 }, 301475, e => {
     e.v(r => Promise.all(["static/chunks/0jfgwylbrs~u4.js"].map(r => e.l(r))).then(() => r(14383)))
 }, 80066, e => {
-    e.v(r => Promise.all(["static/chunks/04c44~v7437v0.js", "static/chunks/084nx-e0ruby..js", "static/chunks/0f27m0g5rn33v.js"].map(r => e.l(r))).then(() => r(391651)))
+    e.v(r => Promise.all(["static/chunks/14j9tt74uzqq8.js", "static/chunks/0q4qnajlx1fcy.js", "static/chunks/0f27m0g5rn33v.js"].map(r => e.l(r))).then(() => r(391651)))
 }]);
 
-//# debugId=09d87b92-7b3f-0225-a5d4-e4b072890a67
-//# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/0pr93oy8.u2qz.js.map
+//# debugId=85ae4e33-68c3-35c8-cb76-fe58553d3129
+//# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/0s1-gr.my4-kl.js.map

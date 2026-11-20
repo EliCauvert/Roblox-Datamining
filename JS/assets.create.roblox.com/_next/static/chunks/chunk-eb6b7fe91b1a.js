@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "344bb69a-031c-810d-b4ce-0a40fd0722ad")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "30028f1a-bc04-03e6-5a57-a6f58a8e0b9e")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 649499, e => {
@@ -186,12 +186,12 @@
             pathPattern: /\/analytics\/text-to-speech/,
             title: (0, t.Q)("Heading.TextToSpeech", a.f.Navigation)
         },
-        b = {
+        P = {
             path: "/analytics/video-service",
             pathPattern: /\/analytics\/video-service/,
             title: (0, t.Q)("Heading.VideoService", a.f.Navigation)
         },
-        P = {
+        b = {
             path: "/monetization/creator-rewards",
             pathPattern: /\/monetization\/creator-rewards/,
             title: (0, t.Q)("Heading.CreatorRewards", a.f.Navigation),
@@ -403,8 +403,8 @@
             titleOverrideForIAM2: (0, t.Q)("Heading.AvatarCreationTokens", a.f.Navigation),
             group: n
         },
-        es = [M, Q, E, H, n, s, o, c, l, u, d, p, h, g, f, m, v, y, b, ei, P, w, x, C, A, k, I, N, F, j, T, U, S, G, R, K, J, W, D, q, O, z, V, X, Z, ee, i, r, Y, $, et, ea, en, L, _, B, er];
-    e.s(["Q3", 0, J, "l9", 0, W, "g1", 0, _, "PS", 0, L, "rf", 0, B, "ib", 0, i, "xG", 0, K, "gX", 0, k, "kg", 0, er, "is", 0, w, "DH", 0, X, "nu", 0, q, "m2", 0, O, "aQ", 0, C, "c3", 0, ee, "dX", 0, G, "Np", 0, R, "jc", 0, g, "P_", 0, E, "Pu", 0, A, "th", 0, P, "pr", 0, en, "bw", 0, Y, "Ap", 0, r, "Iv", 0, S, "Iw", 0, D, "p_", 0, ei, "jY", 0, f, "Kh", 0, u, "j$", 0, c, "uv", 0, s, "fX", 0, o, "Em", 0, V, "Bt", 0, p, "Vs", 0, m, "du", 0, n, "rJ", 0, ea, "Xe", 0, x, "IQ", 0, h, "pj", 0, $, "vH", 0, I, "Ya", 0, N, "kL", 0, j, "e_", 0, T, "rS", 0, F, "ko", 0, U, "bm", 0, H, "jd", 0, Z, "k7", 0, v, "t", 0, d, "Cu", 0, y, "FO", 0, Q, "N$", 0, M, "D2", 0, b, "xL", 0, function(e) {
+        es = [M, Q, E, H, n, s, o, c, l, u, d, p, h, g, f, m, v, y, P, ei, b, w, x, C, A, k, I, N, F, j, T, U, S, G, R, K, J, W, D, q, O, z, V, X, Z, ee, i, r, Y, $, et, ea, en, L, _, B, er];
+    e.s(["Q3", 0, J, "l9", 0, W, "g1", 0, _, "PS", 0, L, "rf", 0, B, "ib", 0, i, "xG", 0, K, "gX", 0, k, "kg", 0, er, "is", 0, w, "DH", 0, X, "nu", 0, q, "m2", 0, O, "aQ", 0, C, "c3", 0, ee, "dX", 0, G, "Np", 0, R, "jc", 0, g, "P_", 0, E, "Pu", 0, A, "th", 0, b, "pr", 0, en, "bw", 0, Y, "Ap", 0, r, "Iv", 0, S, "Iw", 0, D, "p_", 0, ei, "jY", 0, f, "Kh", 0, u, "j$", 0, c, "uv", 0, s, "fX", 0, o, "Em", 0, V, "Bt", 0, p, "Vs", 0, m, "du", 0, n, "rJ", 0, ea, "Xe", 0, x, "IQ", 0, h, "pj", 0, $, "vH", 0, I, "Ya", 0, N, "kL", 0, j, "e_", 0, T, "rS", 0, F, "ko", 0, U, "bm", 0, H, "jd", 0, Z, "k7", 0, v, "t", 0, d, "Cu", 0, y, "FO", 0, Q, "N$", 0, M, "D2", 0, P, "xL", 0, function(e) {
         return es.find(t => t.pathPattern.test(e))
     }])
 }, 894854, e => {
@@ -421,8 +421,8 @@
         a = e.i(643766),
         n = e.i(260241),
         i = e.i(805290),
-        r = e.i(471518),
-        s = e.i(606092),
+        r = e.i(680241),
+        s = e.i(882782),
         o = e.i(910272),
         c = e.i(415858),
         l = function(e, t) {
@@ -800,7 +800,7 @@
                 credentials: "include",
                 enableMrRouter: !0
             })), v.set(e, t)), t
-        }, b = async e => {
+        }, P = async e => {
             let t = y(e);
             try {
                 await t.userSettingsApiSetGlobalPrivacyControl()
@@ -810,7 +810,7 @@
                     cause: t
                 })
             }
-        }, P = async e => {
+        }, b = async e => {
             let t = y(e);
             try {
                 return await t.userSettingsApiGet({
@@ -951,13 +951,13 @@
                 user: g
             } = (0, G.f)(), f = !!g, m = null != (n = null == c ? void 0 : c.isAdsSellShareDataEnabled) && n, v = null != (i = null == c ? void 0 : c.canUserManageAdsSettings) && i, y = (0, a.useCallback)(e => {
                 window.location.pathname.includes("/my/account") && (e.preventDefault(), window.location.href = p)
-            }, [p]), b = (0, a.useCallback)(e => (0, t.jsx)(k.f, {
+            }, [p]), P = (0, a.useCallback)(e => (0, t.jsx)(k.f, {
                 href: "https://en.help.roblox.com/hc/articles/28943243301780",
                 target: "_blank",
                 rel: "noreferrer",
                 className: h,
                 children: e
-            }), [h]), P = (0, a.useCallback)(e => (0, t.jsx)(k.f, {
+            }), [h]), b = (0, a.useCallback)(e => (0, t.jsx)(k.f, {
                 href: p,
                 className: h,
                 onClick: y,
@@ -995,24 +995,24 @@
                                 let e = [{
                                         opening: "aTagStart",
                                         closing: "aTagEnd",
-                                        content: b
+                                        content: P
                                     }],
                                     t = {
                                         lineBreak: w
                                     };
                                 return o.isGpcDetected ? m ? u(R, e, t) : u(Q, e, t) : u(F, e, t)
                             }
-                            if (!o.isGpcDetected) return v ? x("Body.GpcMissingSettingEligible", P) : u(F, [{
+                            if (!o.isGpcDetected) return v ? x("Body.GpcMissingSettingEligible", b) : u(F, [{
                                 opening: "aTagStart",
                                 closing: "aTagEnd",
-                                content: b
+                                content: P
                             }], {
                                 lineBreak: w
                             });
-                            if (m) return v ? x("Body.GpcDetectedSettingEnabledEligible", P) : u(R, [{
+                            if (m) return v ? x("Body.GpcDetectedSettingEnabledEligible", b) : u(R, [{
                                 opening: "aTagStart",
                                 closing: "aTagEnd",
-                                content: b
+                                content: P
                             }], {
                                 lineBreak: w
                             });
@@ -1020,7 +1020,7 @@
                                 tags: [{
                                     opening: "aTagWithHref",
                                     closing: "aTagEnd",
-                                    content: P
+                                    content: b
                                 }],
                                 args: {
                                     lineBreak: w
@@ -1029,15 +1029,15 @@
                                 tags: [{
                                     opening: "aTagStart",
                                     closing: "aTagEnd",
-                                    content: b
+                                    content: P
                                 }],
                                 args: {
                                     lineBreak: w
                                 }
                             };
-                            if ("signal-with-changes" === o.scenario) return v ? x(M, P) : u(Q, e.tags, e.args);
+                            if ("signal-with-changes" === o.scenario) return v ? x(M, b) : u(Q, e.tags, e.args);
                             let t = v ? M : Q;
-                            return v ? x(t, P) : u(t, e.tags, e.args)
+                            return v ? x(t, b) : u(t, e.tags, e.args)
                         })()
                     })]
                 }), (0, t.jsx)(r.c, {
@@ -1137,7 +1137,7 @@
                             {
                                 isGpcDetected: l
                             } = c;
-                        o && l && await b(n);
+                        o && l && await P(n);
                         let u = !1;
                         if (o) try {
                             let {
@@ -1149,7 +1149,7 @@
                         }
                         let d = !1;
                         if (o) try {
-                            let e = await P(n);
+                            let e = await b(n);
                             d = "Enabled" === e.allowSellShareData
                         } catch (e) {
                             console.error("Failed to get user settings:", e)
@@ -1212,7 +1212,7 @@
                     color: "secondary",
                     component: "span",
                     children: [q, (0, t.jsx)("img", {
-                        src: "".concat("https://assets.create.roblox.com/ac5adf02bced7a5b5d67d1642bfb55cdcde0ab67/assets", "/navigation/privacy_icon.png"),
+                        src: "".concat("https://assets.create.roblox.com/a71010135227b76988daa505e377b93703005aa7/assets", "/navigation/privacy_icon.png"),
                         alt: "",
                         style: {
                             marginLeft: "8px",
@@ -1283,5 +1283,5 @@
     e.s(["Y", 0, e => e.includes("/observability/server-management"), "E", 0, n])
 }]);
 
-//# debugId=344bb69a-031c-810d-b4ce-0a40fd0722ad
-//# sourceMappingURL=0h_fncuvstso-.js.map
+//# debugId=30028f1a-bc04-03e6-5a57-a6f58a8e0b9e
+//# sourceMappingURL=10nxrqtu9vs3-.js.map

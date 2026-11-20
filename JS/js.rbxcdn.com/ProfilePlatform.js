@@ -2,10 +2,10 @@
     try {
         var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "9c42e10b4dec12cc2a491c7193020b496aab6d8d"
+            id: "ba7e4248269334ef3c512f3f9a425171e6ef9170"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "6f7036f6-4697-4277-bc1c-e3faf4fec72f", e._sentryDebugIdIdentifier = "sentry-dbid-6f7036f6-4697-4277-bc1c-e3faf4fec72f")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "c7ed2da5-1a62-46ac-969e-03c994e419a1", e._sentryDebugIdIdentifier = "sentry-dbid-c7ed2da5-1a62-46ac-969e-03c994e419a1")
     } catch (e) {}
 }(),
 function() {
@@ -39821,7 +39821,7 @@ function() {
                                 dangerouslySetInnerHTML: {
                                     __html: d
                                 },
-                                className: "text-wrap text-body-medium text-align-x-left description-content"
+                                className: "text-wrap text-body-medium text-align-x-left description-content description-content-full"
                             }) : (0, n4.jsx)("div", {
                                 className: "text-body-medium",
                                 children: n("Label.NoBioYet")
@@ -46252,4 +46252,4 @@ function() {
             })
         }()
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected(document.currentScript && document.currentScript.getAttribute("data-bundlename") || "ProfilePlatform");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/profilePlatform-c8ab5ab584c7b450.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/profilePlatform-524c26c1f2b771bb.js.map

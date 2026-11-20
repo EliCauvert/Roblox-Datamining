@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "534ee1e1-c28d-ccf0-75fb-9d4323c8bb9f")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "1aa9b59c-e28a-0158-0fb6-0c3c01ea7a4b")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 748348, (e, t, n) => {
@@ -104,9 +104,9 @@
             items: n
         })
     };
-    var M = e.i(574487),
-        k = e.i(162710),
-        E = e.i(305837),
+    var M = e.i(732241),
+        k = e.i(290600),
+        E = e.i(59896),
         P = e.i(335020);
     let A = () => a.default.createElement("div", {
             className: "flex items-center justify-center shrink-0 width-600"
@@ -302,7 +302,7 @@
         W = e.i(458263),
         X = e.i(593430),
         Y = e.i(37819),
-        J = e.i(950064),
+        J = e.i(943236),
         Q = e.i(870999),
         Z = e.i(714039),
         $ = e.i(71375),
@@ -325,9 +325,9 @@
             filterIndex: 0
         };
     var em = e.i(475642),
-        ep = e.i(606092),
-        ef = e.i(823457),
-        eh = e.i(471518),
+        ep = e.i(882782),
+        ef = e.i(629683),
+        eh = e.i(680241),
         ev = e.i(211388);
     let eg = "CreatorHub.MomentsCreations.local",
         ex = e => "".concat(eg, ".").concat(e),
@@ -598,7 +598,7 @@
         e4(e, t), e.prototype = null === t ? Object.create(t) : (n.prototype = t.prototype, new n)
     }
 
-    function e3(e, t, n, i) {
+    function e8(e, t, n, i) {
         return new(n || (n = Promise))(function(a, r) {
             function o(e) {
                 try {
@@ -626,7 +626,7 @@
         })
     }
 
-    function e7(e, t) {
+    function e3(e, t) {
         var n, i, a, r = {
                 label: 0,
                 sent: function() {
@@ -698,18 +698,18 @@
         }
     }
 
-    function e8(e) {
+    function e6(e) {
         if (void 0 !== e) return null === e ? null : {
             chunkNum: e.chunkNum,
             eTag: e.eTag
         }
     }
 
-    function e6(e) {
+    function e7(e) {
         if (void 0 !== e) return null === e ? null : {
             role: e.role,
             operationId: e.operationId,
-            parts: void 0 === e.parts ? void 0 : null === e.parts ? null : e.parts.map(e8)
+            parts: void 0 === e.parts ? void 0 : null === e.parts ? null : e.parts.map(e6)
         }
     }
 
@@ -1054,9 +1054,9 @@
         return null !== tk && tk.apply(this, arguments) || this
     }
     e5(tE, tk), tE.prototype.backfillTriggerB1Raw = function(e, t) {
-        return e3(this, void 0, void 0, function() {
+        return e8(this, void 0, void 0, function() {
             var n, i, a;
-            return e7(this, function(r) {
+            return e3(this, function(r) {
                 switch (r.label) {
                     case 0:
                         return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
@@ -1078,8 +1078,8 @@
             })
         })
     }, tE.prototype.backfillTriggerB1 = function() {
-        return e3(this, arguments, void 0, function(e, t) {
-            return void 0 === e && (e = {}), e7(this, function(n) {
+        return e8(this, arguments, void 0, function(e, t) {
+            return void 0 === e && (e = {}), e3(this, function(n) {
                 switch (n.label) {
                     case 0:
                         return [4, this.backfillTriggerB1Raw(e, t)];
@@ -1094,9 +1094,9 @@
                 return null !== e && e.apply(this, arguments) || this
             }
             return e5(t, e), t.prototype.contentCapturesBatchCheckExperienceUploadabilityRaw = function(e, t) {
-                return e3(this, void 0, void 0, function() {
+                return e8(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e7(this, function(r) {
+                    return e3(this, function(r) {
                         switch (r.label) {
                             case 0:
                                 return n = {}, void 0 !== e.contentType && (n.contentType = e.contentType), void 0 !== e.experienceIds && (n.experienceIds = e.experienceIds), void 0 !== e.allowExternalExperiences && (n.allowExternalExperiences = e.allowExternalExperiences), i = {}, [4, this.request({
@@ -1112,8 +1112,8 @@
                     })
                 })
             }, t.prototype.contentCapturesBatchCheckExperienceUploadability = function() {
-                return e3(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e7(this, function(n) {
+                return e8(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e3(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.contentCapturesBatchCheckExperienceUploadabilityRaw(e, t)];
@@ -1123,9 +1123,9 @@
                     })
                 })
             }, t.prototype.contentCapturesCheckMomentsEligibilityRaw = function(e, t) {
-                return e3(this, void 0, void 0, function() {
+                return e8(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e7(this, function(r) {
+                    return e3(this, function(r) {
                         switch (r.label) {
                             case 0:
                                 return n = {}, void 0 !== e.experienceId && (n.experienceId = e.experienceId), void 0 !== e.contentType && (n.contentType = e.contentType), i = {}, [4, this.request({
@@ -1145,8 +1145,8 @@
                     })
                 })
             }, t.prototype.contentCapturesCheckMomentsEligibility = function() {
-                return e3(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e7(this, function(n) {
+                return e8(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e3(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.contentCapturesCheckMomentsEligibilityRaw(e, t)];
@@ -1158,9 +1158,9 @@
                     })
                 })
             }, t.prototype.contentCapturesCheckUploadStatusRaw = function(e, t) {
-                return e3(this, void 0, void 0, function() {
+                return e8(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e7(this, function(r) {
+                    return e3(this, function(r) {
                         switch (r.label) {
                             case 0:
                                 return n = {}, void 0 !== e.token && (n.token = e.token), i = {}, [4, this.request({
@@ -1178,8 +1178,8 @@
                     })
                 })
             }, t.prototype.contentCapturesCheckUploadStatus = function() {
-                return e3(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e7(this, function(n) {
+                return e8(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e3(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.contentCapturesCheckUploadStatusRaw(e, t)];
@@ -1191,9 +1191,9 @@
                     })
                 })
             }, t.prototype.contentCapturesCheckUploadStatusRccRaw = function(e, t) {
-                return e3(this, void 0, void 0, function() {
+                return e8(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e7(this, function(r) {
+                    return e3(this, function(r) {
                         switch (r.label) {
                             case 0:
                                 return n = {}, void 0 !== e.token && (n.token = e.token), i = {}, [4, this.request({
@@ -1211,8 +1211,8 @@
                     })
                 })
             }, t.prototype.contentCapturesCheckUploadStatusRcc = function() {
-                return e3(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e7(this, function(n) {
+                return e8(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e3(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.contentCapturesCheckUploadStatusRccRaw(e, t)];
@@ -1224,9 +1224,9 @@
                     })
                 })
             }, t.prototype.contentCapturesCreateInfluencerMomentFromVideoRaw = function(e, t) {
-                return e3(this, void 0, void 0, function() {
+                return e8(this, void 0, void 0, function() {
                     var n, i, a, r;
-                    return e7(this, function(o) {
+                    return e3(this, function(o) {
                         switch (o.label) {
                             case 0:
                                 return n = {}, i = {}, a = (0, e2.I)([{
@@ -1251,8 +1251,8 @@
                     })
                 })
             }, t.prototype.contentCapturesCreateInfluencerMomentFromVideo = function() {
-                return e3(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e7(this, function(n) {
+                return e8(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e3(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.contentCapturesCreateInfluencerMomentFromVideoRaw(e, t)];
@@ -1264,9 +1264,9 @@
                     })
                 })
             }, t.prototype.contentCapturesGrantExperiencePermissionsRaw = function(e, t) {
-                return e3(this, void 0, void 0, function() {
+                return e8(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e7(this, function(r) {
+                    return e3(this, function(r) {
                         switch (r.label) {
                             case 0:
                                 return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
@@ -1288,8 +1288,8 @@
                     })
                 })
             }, t.prototype.contentCapturesGrantExperiencePermissions = function() {
-                return e3(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e7(this, function(n) {
+                return e8(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e3(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.contentCapturesGrantExperiencePermissionsRaw(e, t)];
@@ -1299,9 +1299,9 @@
                     })
                 })
             }, t.prototype.contentCapturesSignContentAndMetadataRaw = function(e, t) {
-                return e3(this, void 0, void 0, function() {
+                return e8(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e7(this, function(r) {
+                    return e3(this, function(r) {
                         switch (r.label) {
                             case 0:
                                 return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
@@ -1328,8 +1328,8 @@
                     })
                 })
             }, t.prototype.contentCapturesSignContentAndMetadata = function() {
-                return e3(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e7(this, function(n) {
+                return e8(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e3(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.contentCapturesSignContentAndMetadataRaw(e, t)];
@@ -1341,9 +1341,9 @@
                     })
                 })
             }, t.prototype.contentCapturesSignFileAndMetadataInternalRaw = function(e, t) {
-                return e3(this, void 0, void 0, function() {
+                return e8(this, void 0, void 0, function() {
                     var n, i, a, r;
-                    return e7(this, function(o) {
+                    return e3(this, function(o) {
                         switch (o.label) {
                             case 0:
                                 return n = {}, i = {}, a = (0, e2.I)([{
@@ -1366,8 +1366,8 @@
                     })
                 })
             }, t.prototype.contentCapturesSignFileAndMetadataInternal = function() {
-                return e3(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e7(this, function(n) {
+                return e8(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e3(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.contentCapturesSignFileAndMetadataInternalRaw(e, t)];
@@ -1379,9 +1379,9 @@
                     })
                 })
             }, t.prototype.contentCapturesUploadCaptureWithAssetRaw = function(e, t) {
-                return e3(this, void 0, void 0, function() {
+                return e8(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e7(this, function(r) {
+                    return e3(this, function(r) {
                         switch (r.label) {
                             case 0:
                                 return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
@@ -1445,8 +1445,8 @@
                     })
                 })
             }, t.prototype.contentCapturesUploadCaptureWithAsset = function() {
-                return e3(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e7(this, function(n) {
+                return e8(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e3(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.contentCapturesUploadCaptureWithAssetRaw(e, t)];
@@ -1462,9 +1462,9 @@
                 return null !== e && e.apply(this, arguments) || this
             }
             e5(t, e), t.prototype.moderationApplyModerationDecisionRaw = function(e, t) {
-                return e3(this, void 0, void 0, function() {
+                return e8(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e7(this, function(r) {
+                    return e3(this, function(r) {
                         switch (r.label) {
                             case 0:
                                 return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", void 0 !== e.robloxApiKey && null !== e.robloxApiKey && (i["Roblox-Api-Key"] = String(e.robloxApiKey)), [4, this.request({
@@ -1491,8 +1491,8 @@
                     })
                 })
             }, t.prototype.moderationApplyModerationDecision = function() {
-                return e3(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e7(this, function(n) {
+                return e8(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e3(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.moderationApplyModerationDecisionRaw(e, t)];
@@ -1502,9 +1502,9 @@
                     })
                 })
             }, t.prototype.moderationReportMomentRaw = function(e, t) {
-                return e3(this, void 0, void 0, function() {
+                return e8(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e7(this, function(r) {
+                    return e3(this, function(r) {
                         switch (r.label) {
                             case 0:
                                 if (null === e.momentId || void 0 === e.momentId) throw new e2.w("momentId", "Required parameter requestParameters.momentId was null or undefined when calling moderationReportMoment.");
@@ -1528,8 +1528,8 @@
                     })
                 })
             }, t.prototype.moderationReportMoment = function(e, t) {
-                return e3(this, void 0, void 0, function() {
-                    return e7(this, function(n) {
+                return e8(this, void 0, void 0, function() {
+                    return e3(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.moderationReportMomentRaw(e, t)];
@@ -1544,9 +1544,9 @@
                 return null !== e && e.apply(this, arguments) || this
             }
             e5(t, e), t.prototype.momentTextGenerationCreateMomentVideoUploadUrlRaw = function(e) {
-                return e3(this, void 0, void 0, function() {
+                return e8(this, void 0, void 0, function() {
                     var t, n, i;
-                    return e7(this, function(a) {
+                    return e3(this, function(a) {
                         switch (a.label) {
                             case 0:
                                 return t = {}, n = {}, [4, this.request({
@@ -1567,8 +1567,8 @@
                     })
                 })
             }, t.prototype.momentTextGenerationCreateMomentVideoUploadUrl = function(e) {
-                return e3(this, void 0, void 0, function() {
-                    return e7(this, function(t) {
+                return e8(this, void 0, void 0, function() {
+                    return e3(this, function(t) {
                         switch (t.label) {
                             case 0:
                                 return [4, this.momentTextGenerationCreateMomentVideoUploadUrlRaw(e)];
@@ -1580,9 +1580,9 @@
                     })
                 })
             }, t.prototype.momentTextGenerationGenerateMomentTextRaw = function(e, t) {
-                return e3(this, void 0, void 0, function() {
+                return e8(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e7(this, function(r) {
+                    return e3(this, function(r) {
                         switch (r.label) {
                             case 0:
                                 return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
@@ -1612,8 +1612,8 @@
                     })
                 })
             }, t.prototype.momentTextGenerationGenerateMomentText = function() {
-                return e3(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e7(this, function(n) {
+                return e8(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e3(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.momentTextGenerationGenerateMomentTextRaw(e, t)];
@@ -1625,9 +1625,9 @@
                     })
                 })
             }, t.prototype.momentTextGenerationGenerateMomentTextWithVideoRaw = function(e, t) {
-                return e3(this, void 0, void 0, function() {
+                return e8(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e7(this, function(r) {
+                    return e3(this, function(r) {
                         switch (r.label) {
                             case 0:
                                 return n = {}, void 0 !== e.captureType && (n.captureType = e.captureType), i = {}, [4, this.request({
@@ -1645,8 +1645,8 @@
                     })
                 })
             }, t.prototype.momentTextGenerationGenerateMomentTextWithVideo = function() {
-                return e3(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e7(this, function(n) {
+                return e8(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e3(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.momentTextGenerationGenerateMomentTextWithVideoRaw(e, t)];
@@ -1658,9 +1658,9 @@
                     })
                 })
             }, t.prototype.momentTextGenerationGetMomentTextGenerationStatusRaw = function(e, t) {
-                return e3(this, void 0, void 0, function() {
+                return e8(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e7(this, function(r) {
+                    return e3(this, function(r) {
                         switch (r.label) {
                             case 0:
                                 return n = {}, void 0 !== e.token && (n.token = e.token), i = {}, [4, this.request({
@@ -1687,8 +1687,8 @@
                     })
                 })
             }, t.prototype.momentTextGenerationGetMomentTextGenerationStatus = function() {
-                return e3(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e7(this, function(n) {
+                return e8(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e3(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.momentTextGenerationGetMomentTextGenerationStatusRaw(e, t)];
@@ -1700,9 +1700,9 @@
                     })
                 })
             }, t.prototype.momentTextGenerationSubmitMomentGeneratedTextFeedbackRaw = function(e, t) {
-                return e3(this, void 0, void 0, function() {
+                return e8(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e7(this, function(r) {
+                    return e3(this, function(r) {
                         switch (r.label) {
                             case 0:
                                 return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
@@ -1724,8 +1724,8 @@
                     })
                 })
             }, t.prototype.momentTextGenerationSubmitMomentGeneratedTextFeedback = function() {
-                return e3(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e7(this, function(n) {
+                return e8(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e3(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.momentTextGenerationSubmitMomentGeneratedTextFeedbackRaw(e, t)];
@@ -1740,9 +1740,9 @@
                 return null !== e && e.apply(this, arguments) || this
             }
             return e5(t, e), t.prototype.momentsCleanUserDataRaw = function(e, t) {
-                return e3(this, void 0, void 0, function() {
+                return e8(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e7(this, function(r) {
+                    return e3(this, function(r) {
                         switch (r.label) {
                             case 0:
                                 return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
@@ -1782,8 +1782,8 @@
                     })
                 })
             }, t.prototype.momentsCleanUserData = function() {
-                return e3(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e7(this, function(n) {
+                return e8(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e3(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.momentsCleanUserDataRaw(e, t)];
@@ -1795,9 +1795,9 @@
                     })
                 })
             }, t.prototype.momentsDeleteMomentRaw = function(e, t) {
-                return e3(this, void 0, void 0, function() {
+                return e8(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e7(this, function(r) {
+                    return e3(this, function(r) {
                         switch (r.label) {
                             case 0:
                                 if (null === e.momentId || void 0 === e.momentId) throw new e2.w("momentId", "Required parameter requestParameters.momentId was null or undefined when calling momentsDeleteMoment.");
@@ -1814,8 +1814,8 @@
                     })
                 })
             }, t.prototype.momentsDeleteMoment = function(e, t) {
-                return e3(this, void 0, void 0, function() {
-                    return e7(this, function(n) {
+                return e8(this, void 0, void 0, function() {
+                    return e3(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.momentsDeleteMomentRaw(e, t)];
@@ -1825,9 +1825,9 @@
                     })
                 })
             }, t.prototype.momentsDeleteMomentByFeedItemRaw = function(e, t) {
-                return e3(this, void 0, void 0, function() {
+                return e8(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e7(this, function(r) {
+                    return e3(this, function(r) {
                         switch (r.label) {
                             case 0:
                                 if (null === e.feedItemId || void 0 === e.feedItemId) throw new e2.w("feedItemId", "Required parameter requestParameters.feedItemId was null or undefined when calling momentsDeleteMomentByFeedItem.");
@@ -1844,8 +1844,8 @@
                     })
                 })
             }, t.prototype.momentsDeleteMomentByFeedItem = function(e, t) {
-                return e3(this, void 0, void 0, function() {
-                    return e7(this, function(n) {
+                return e8(this, void 0, void 0, function() {
+                    return e3(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.momentsDeleteMomentByFeedItemRaw(e, t)];
@@ -1855,9 +1855,9 @@
                     })
                 })
             }, t.prototype.momentsGetMomentRecommendationsRaw = function(e, t) {
-                return e3(this, void 0, void 0, function() {
+                return e8(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e7(this, function(r) {
+                    return e3(this, function(r) {
                         switch (r.label) {
                             case 0:
                                 return n = {}, void 0 !== e.paginationContext && (n.PaginationContext = e.paginationContext), void 0 !== e.locationId && (n.LocationId = e.locationId), void 0 !== e.count && (n.Count = e.count), void 0 !== e.signals && (n.Signals = e.signals), i = {}, [4, this.request({
@@ -1875,8 +1875,8 @@
                     })
                 })
             }, t.prototype.momentsGetMomentRecommendations = function() {
-                return e3(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e7(this, function(n) {
+                return e8(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e3(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.momentsGetMomentRecommendationsRaw(e, t)];
@@ -1888,9 +1888,9 @@
                     })
                 })
             }, t.prototype.momentsGetMomentsRaw = function(e, t) {
-                return e3(this, void 0, void 0, function() {
+                return e8(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e7(this, function(r) {
+                    return e3(this, function(r) {
                         switch (r.label) {
                             case 0:
                                 return n = {}, e.ids && (n.Ids = e.ids), void 0 !== e.type && (n.type = e.type), i = {}, [4, this.request({
@@ -1912,8 +1912,8 @@
                     })
                 })
             }, t.prototype.momentsGetMoments = function() {
-                return e3(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e7(this, function(n) {
+                return e8(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e3(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.momentsGetMomentsRaw(e, t)];
@@ -1925,9 +1925,9 @@
                     })
                 })
             }, t.prototype.momentsGetUsersMomentsRaw = function(e, t) {
-                return e3(this, void 0, void 0, function() {
+                return e8(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e7(this, function(r) {
+                    return e3(this, function(r) {
                         switch (r.label) {
                             case 0:
                                 return n = {}, void 0 !== e.targetUserId && (n.TargetUserId = e.targetUserId), void 0 !== e.paginationContext && (n.PaginationContext = e.paginationContext), void 0 !== e.count && (n.Count = e.count), e.filterBy && (n.FilterBy = e.filterBy), i = {}, [4, this.request({
@@ -1951,8 +1951,8 @@
                     })
                 })
             }, t.prototype.momentsGetUsersMoments = function() {
-                return e3(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e7(this, function(n) {
+                return e8(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e3(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.momentsGetUsersMomentsRaw(e, t)];
@@ -1964,9 +1964,9 @@
                     })
                 })
             }, t.prototype.momentsReactToFeedItemRaw = function(e, t) {
-                return e3(this, void 0, void 0, function() {
+                return e8(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e7(this, function(r) {
+                    return e3(this, function(r) {
                         switch (r.label) {
                             case 0:
                                 return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
@@ -1991,8 +1991,8 @@
                     })
                 })
             }, t.prototype.momentsReactToFeedItem = function() {
-                return e3(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e7(this, function(n) {
+                return e8(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e3(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.momentsReactToFeedItemRaw(e, t)];
@@ -2002,9 +2002,9 @@
                     })
                 })
             }, t.prototype.momentsReactToFeedItemV2Raw = function(e, t) {
-                return e3(this, void 0, void 0, function() {
+                return e8(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e7(this, function(r) {
+                    return e3(this, function(r) {
                         switch (r.label) {
                             case 0:
                                 return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
@@ -2028,8 +2028,8 @@
                     })
                 })
             }, t.prototype.momentsReactToFeedItemV2 = function() {
-                return e3(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e7(this, function(n) {
+                return e8(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e3(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.momentsReactToFeedItemV2Raw(e, t)];
@@ -2039,9 +2039,9 @@
                     })
                 })
             }, t.prototype.momentsSearchMomentsRaw = function(e, t) {
-                return e3(this, void 0, void 0, function() {
+                return e8(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e7(this, function(r) {
+                    return e3(this, function(r) {
                         switch (r.label) {
                             case 0:
                                 return n = {}, void 0 !== e.q && (n.q = e.q), void 0 !== e.paginationContext && (n.paginationContext = e.paginationContext), void 0 !== e.locationId && (n.locationId = e.locationId), void 0 !== e.count && (n.count = e.count), i = {}, [4, this.request({
@@ -2059,8 +2059,8 @@
                     })
                 })
             }, t.prototype.momentsSearchMoments = function() {
-                return e3(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e7(this, function(n) {
+                return e8(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e3(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.momentsSearchMomentsRaw(e, t)];
@@ -2072,9 +2072,9 @@
                     })
                 })
             }, t.prototype.momentsTestSuppressOwnedFeedItemsRaw = function(e) {
-                return e3(this, void 0, void 0, function() {
+                return e8(this, void 0, void 0, function() {
                     var t, n, i;
-                    return e7(this, function(a) {
+                    return e3(this, function(a) {
                         switch (a.label) {
                             case 0:
                                 return t = {}, n = {}, [4, this.request({
@@ -2090,8 +2090,8 @@
                     })
                 })
             }, t.prototype.momentsTestSuppressOwnedFeedItems = function(e) {
-                return e3(this, void 0, void 0, function() {
-                    return e7(this, function(t) {
+                return e8(this, void 0, void 0, function() {
+                    return e3(this, function(t) {
                         switch (t.label) {
                             case 0:
                                 return [4, this.momentsTestSuppressOwnedFeedItemsRaw(e)];
@@ -2107,9 +2107,9 @@
                 return null !== e && e.apply(this, arguments) || this
             }
             return e5(t, e), t.prototype.postsCompletePostRaw = function(e, t) {
-                return e3(this, void 0, void 0, function() {
+                return e8(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e7(this, function(r) {
+                    return e3(this, function(r) {
                         switch (r.label) {
                             case 0:
                                 return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
@@ -2120,7 +2120,7 @@
                                     query: n,
                                     body: function(e) {
                                         if (void 0 !== e) return null === e ? null : {
-                                            uploads: void 0 === e.uploads ? void 0 : null === e.uploads ? null : e.uploads.map(e6)
+                                            uploads: void 0 === e.uploads ? void 0 : null === e.uploads ? null : e.uploads.map(e7)
                                         }
                                     }(e.postsCompletePostRequest)
                                 }, t)];
@@ -2134,8 +2134,8 @@
                     })
                 })
             }, t.prototype.postsCompletePost = function() {
-                return e3(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e7(this, function(n) {
+                return e8(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e3(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.postsCompletePostRaw(e, t)];
@@ -2147,9 +2147,9 @@
                     })
                 })
             }, t.prototype.postsCreatePostRaw = function(e, t) {
-                return e3(this, void 0, void 0, function() {
+                return e8(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e7(this, function(r) {
+                    return e3(this, function(r) {
                         switch (r.label) {
                             case 0:
                                 return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
@@ -2223,8 +2223,8 @@
                     })
                 })
             }, t.prototype.postsCreatePost = function() {
-                return e3(this, arguments, void 0, function(e, t) {
-                    return void 0 === e && (e = {}), e7(this, function(n) {
+                return e8(this, arguments, void 0, function(e, t) {
+                    return void 0 === e && (e = {}), e3(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.postsCreatePostRaw(e, t)];
@@ -2236,9 +2236,9 @@
                     })
                 })
             }, t.prototype.postsGetPostOperationStatusRaw = function(e, t) {
-                return e3(this, void 0, void 0, function() {
+                return e8(this, void 0, void 0, function() {
                     var n, i, a;
-                    return e7(this, function(r) {
+                    return e3(this, function(r) {
                         switch (r.label) {
                             case 0:
                                 if (null === e.operationId || void 0 === e.operationId) throw new e2.w("operationId", "Required parameter requestParameters.operationId was null or undefined when calling postsGetPostOperationStatus.");
@@ -2260,8 +2260,8 @@
                     })
                 })
             }, t.prototype.postsGetPostOperationStatus = function(e, t) {
-                return e3(this, void 0, void 0, function() {
-                    return e7(this, function(n) {
+                return e8(this, void 0, void 0, function() {
+                    return e3(this, function(n) {
                         switch (n.label) {
                             case 0:
                                 return [4, this.postsGetPostOperationStatusRaw(e, t)];
@@ -2280,9 +2280,9 @@
         return null !== tN && tN.apply(this, arguments) || this
     }
     e5(tR, tN), tR.prototype.testSeedCreatePostAssetRaw = function(e, t) {
-        return e3(this, void 0, void 0, function() {
+        return e8(this, void 0, void 0, function() {
             var n, i, a;
-            return e7(this, function(r) {
+            return e3(this, function(r) {
                 switch (r.label) {
                     case 0:
                         return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
@@ -2311,8 +2311,8 @@
             })
         })
     }, tR.prototype.testSeedCreatePostAsset = function() {
-        return e3(this, arguments, void 0, function(e, t) {
-            return void 0 === e && (e = {}), e7(this, function(n) {
+        return e8(this, arguments, void 0, function(e, t) {
+            return void 0 === e && (e = {}), e3(this, function(n) {
                 switch (n.label) {
                     case 0:
                         return [4, this.testSeedCreatePostAssetRaw(e, t)];
@@ -2322,9 +2322,9 @@
             })
         })
     }, tR.prototype.testSeedInspectPostRaw = function(e, t) {
-        return e3(this, void 0, void 0, function() {
+        return e8(this, void 0, void 0, function() {
             var n, i, a;
-            return e7(this, function(r) {
+            return e3(this, function(r) {
                 switch (r.label) {
                     case 0:
                         return n = {}, void 0 !== e.id && (n.id = e.id), void 0 !== e.type && (n.type = e.type), i = {}, [4, this.request({
@@ -2340,8 +2340,8 @@
             })
         })
     }, tR.prototype.testSeedInspectPost = function() {
-        return e3(this, arguments, void 0, function(e, t) {
-            return void 0 === e && (e = {}), e7(this, function(n) {
+        return e8(this, arguments, void 0, function(e, t) {
+            return void 0 === e && (e = {}), e3(this, function(n) {
                 switch (n.label) {
                     case 0:
                         return [4, this.testSeedInspectPostRaw(e, t)];
@@ -2351,9 +2351,9 @@
             })
         })
     }, tR.prototype.testSeedListUserMomentsRaw = function(e) {
-        return e3(this, void 0, void 0, function() {
+        return e8(this, void 0, void 0, function() {
             var t, n, i;
-            return e7(this, function(a) {
+            return e3(this, function(a) {
                 switch (a.label) {
                     case 0:
                         return t = {}, n = {}, [4, this.request({
@@ -2369,8 +2369,8 @@
             })
         })
     }, tR.prototype.testSeedListUserMoments = function(e) {
-        return e3(this, void 0, void 0, function() {
-            return e7(this, function(t) {
+        return e8(this, void 0, void 0, function() {
+            return e3(this, function(t) {
                 switch (t.label) {
                     case 0:
                         return [4, this.testSeedListUserMomentsRaw(e)];
@@ -2380,9 +2380,9 @@
             })
         })
     }, tR.prototype.testSeedMomentToPostRaw = function(e, t) {
-        return e3(this, void 0, void 0, function() {
+        return e8(this, void 0, void 0, function() {
             var n, i, a;
-            return e7(this, function(r) {
+            return e3(this, function(r) {
                 switch (r.label) {
                     case 0:
                         return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
@@ -2405,8 +2405,8 @@
             })
         })
     }, tR.prototype.testSeedMomentToPost = function() {
-        return e3(this, arguments, void 0, function(e, t) {
-            return void 0 === e && (e = {}), e7(this, function(n) {
+        return e8(this, arguments, void 0, function(e, t) {
+            return void 0 === e && (e = {}), e3(this, function(n) {
                 switch (n.label) {
                     case 0:
                         return [4, this.testSeedMomentToPostRaw(e, t)];
@@ -2416,9 +2416,9 @@
             })
         })
     }, tR.prototype.testSeedSeedBatchRaw = function(e, t) {
-        return e3(this, void 0, void 0, function() {
+        return e8(this, void 0, void 0, function() {
             var n, i, a;
-            return e7(this, function(r) {
+            return e3(this, function(r) {
                 switch (r.label) {
                     case 0:
                         return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
@@ -2440,8 +2440,8 @@
             })
         })
     }, tR.prototype.testSeedSeedBatch = function() {
-        return e3(this, arguments, void 0, function(e, t) {
-            return void 0 === e && (e = {}), e7(this, function(n) {
+        return e8(this, arguments, void 0, function(e, t) {
+            return void 0 === e && (e = {}), e3(this, function(n) {
                 switch (n.label) {
                     case 0:
                         return [4, this.testSeedSeedBatchRaw(e, t)];
@@ -2451,9 +2451,9 @@
             })
         })
     }, tR.prototype.testSeedSeedMomentRaw = function(e, t) {
-        return e3(this, void 0, void 0, function() {
+        return e8(this, void 0, void 0, function() {
             var n, i, a;
-            return e7(this, function(r) {
+            return e3(this, function(r) {
                 switch (r.label) {
                     case 0:
                         return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
@@ -2476,8 +2476,8 @@
             })
         })
     }, tR.prototype.testSeedSeedMoment = function() {
-        return e3(this, arguments, void 0, function(e, t) {
-            return void 0 === e && (e = {}), e7(this, function(n) {
+        return e8(this, arguments, void 0, function(e, t) {
+            return void 0 === e && (e = {}), e3(this, function(n) {
                 switch (n.label) {
                     case 0:
                         return [4, this.testSeedSeedMomentRaw(e, t)];
@@ -2487,9 +2487,9 @@
             })
         })
     }, tR.prototype.testSeedWirePostRaw = function(e, t) {
-        return e3(this, void 0, void 0, function() {
+        return e8(this, void 0, void 0, function() {
             var n, i, a;
-            return e7(this, function(r) {
+            return e3(this, function(r) {
                 switch (r.label) {
                     case 0:
                         return n = {}, (i = {})["Content-Type"] = "application/json-patch+json", [4, this.request({
@@ -2512,8 +2512,8 @@
             })
         })
     }, tR.prototype.testSeedWirePost = function() {
-        return e3(this, arguments, void 0, function(e, t) {
-            return void 0 === e && (e = {}), e7(this, function(n) {
+        return e8(this, arguments, void 0, function(e, t) {
+            return void 0 === e && (e = {}), e3(this, function(n) {
                 switch (n.label) {
                     case 0:
                         return [4, this.testSeedWirePostRaw(e, t)];
@@ -2611,8 +2611,8 @@
             let t = e === d.v.SimplifiedChineseJV ? d.v.SimplifiedChinese : e;
             return null != t && t4.has(t) ? t : d.v.English
         },
-        t3 = e => null != e ? (0, d.t)(e) : "-",
-        t7 = {
+        t8 = e => null != e ? (0, d.t)(e) : "-",
+        t3 = {
             active: eb,
             captionedassetmoment: eb,
             live: eb,
@@ -2620,8 +2620,8 @@
             pending: eI,
             published: eb
         },
-        t8 = new Date(0).toISOString(),
-        t6 = function(e) {
+        t6 = new Date(0).toISOString(),
+        t7 = function(e) {
             var t, n, i, a, r, o, s;
             let l = arguments.length > 1 && void 0 !== arguments[1] && arguments[1],
                 d = null != (t = e.id) ? t : void 0,
@@ -2641,10 +2641,10 @@
                 assetId: null == p ? void 0 : p.assetId,
                 description: null != (a = null == p ? void 0 : p.caption) ? a : "",
                 experienceName: "",
-                modifiedAt: t8,
+                modifiedAt: t6,
                 status: (e => {
                     if (!e) return eb;
-                    let t = t7[e.toLowerCase()];
+                    let t = t3[e.toLowerCase()];
                     if (t) return t;
                     let n = e.toLowerCase();
                     return n.includes("pending") ? eI : (n.includes("active") || n.includes("publish") || n.includes("live"), eb)
@@ -2658,7 +2658,7 @@
         t9 = function(e) {
             var t;
             let n = arguments.length > 1 && void 0 !== arguments[1] && arguments[1];
-            return (null != (t = e.items) ? t : []).map(e => t6(e, n)).filter(e => null != e)
+            return (null != (t = e.items) ? t : []).map(e => t7(e, n)).filter(e => null != e)
         },
         ne = async (e, t) => tq.momentsGetUsersMoments({
             targetUserId: e,
@@ -3379,7 +3379,7 @@
             })]
         })
     }, [et.f.Creations]);
-    var nF = e.i(398902),
+    var nF = e.i(463693),
         nB = e.i(392782);
     let nG = "UniverseId",
         nH = "PlaceId",
@@ -3524,8 +3524,8 @@
                 })]
             })
         }, [et.f.Creations, et.f.Controls]);
-    var n0 = e.i(180535),
-        n1 = e.i(797117);
+    var n0 = e.i(209431),
+        n1 = e.i(180763);
     let n2 = (0, d.K)(e => {
         let {
             value: t,
@@ -3561,14 +3561,14 @@
     }, [et.f.Creations]);
     var n4 = e.i(321211);
     let n5 = ["mp4", "mov"],
-        n3 = ["video/mp4", "video/quicktime"];
-    var n7 = ((n = {}).FileTooBig = "FileTooBig", n.FileWrongType = "FileWrongType", n.DurationExceeded = "DurationExceeded", n.ResolutionExceeded = "ResolutionExceeded", n.MetadataUnavailable = "MetadataUnavailable", n);
-    let n8 = e => {
+        n8 = ["video/mp4", "video/quicktime"];
+    var n3 = ((n = {}).FileTooBig = "FileTooBig", n.FileWrongType = "FileWrongType", n.DurationExceeded = "DurationExceeded", n.ResolutionExceeded = "ResolutionExceeded", n.MetadataUnavailable = "MetadataUnavailable", n);
+    let n6 = e => {
             var t, n;
             let i;
-            return e.size > 0xc800000 ? "FileTooBig" : null != (i = null == (n = (t = e).name.split(".").pop()) ? void 0 : n.toLowerCase()) && n5.some(e => e === i) && ("" === t.type || n3.includes(t.type)) ? null : "FileWrongType"
+            return e.size > 0xc800000 ? "FileTooBig" : null != (i = null == (n = (t = e).name.split(".").pop()) ? void 0 : n.toLowerCase()) && n5.some(e => e === i) && ("" === t.type || n8.includes(t.type)) ? null : "FileWrongType"
         },
-        n6 = async e => {
+        n7 = async e => {
             try {
                 let t = await new Promise((t, n) => {
                     let i = document.createElement("video");
@@ -3605,7 +3605,7 @@
             let t = [],
                 n = [];
             for (let i of e) {
-                let e = n8(i);
+                let e = n6(i);
                 if (null != e) {
                     n.push({
                         file: i,
@@ -3613,7 +3613,7 @@
                     });
                     continue
                 }
-                let a = await n6(i);
+                let a = await n7(i);
                 if (null != a) {
                     n.push({
                         file: i,
@@ -3667,24 +3667,24 @@
                                     return t
                                 }), [...new Set(a)].map(e => ((e, t) => {
                                     switch (t) {
-                                        case n7.FileTooBig:
+                                        case n3.FileTooBig:
                                             return e("CreateMomentModal.Error.FileTooBigMegabytes", {
                                                 maxFileSizeMB: new Intl.NumberFormat().format(200)
                                             });
-                                        case n7.FileWrongType:
+                                        case n3.FileWrongType:
                                             return e("CreateMomentModal.Error.FileWrongType", {
                                                 formats: ie
                                             });
-                                        case n7.DurationExceeded:
+                                        case n3.DurationExceeded:
                                             return e("CreateMomentModal.Error.DurationExceeded", {
                                                 maxDurationMinutes: String(3)
                                             });
-                                        case n7.ResolutionExceeded:
+                                        case n3.ResolutionExceeded:
                                             return e("CreateMomentModal.Error.ResolutionExceeded", {
                                                 maxWidth: String(4096),
                                                 maxHeight: String(2160)
                                             });
-                                        case n7.MetadataUnavailable:
+                                        case n3.MetadataUnavailable:
                                             return e("CreateMomentModal.Error.MetadataUnavailable");
                                         default:
                                             throw Error("Unhandled Moments video reject reason: ".concat(String(t)))
@@ -3997,7 +3997,7 @@
                 })
             })
         };
-    var is = e.i(665815);
+    var is = e.i(589611);
     let il = e => {
             let {
                 tabs: t = eT,
@@ -4203,9 +4203,9 @@
             })
         };
     var ib = e.i(482979),
-        iI = e.i(37148),
-        iw = e.i(625141),
-        iC = e.i(771344),
+        iI = e.i(188906),
+        iw = e.i(864201),
+        iC = e.i(849641),
         iT = e.i(239328),
         ij = e.i(823062),
         iS = e.i(198528),
@@ -4570,8 +4570,8 @@
     var i2 = e.i(356936),
         i4 = e.i(67243),
         i5 = e.i(759283),
-        i3 = e.i(776344);
-    let i7 = (e, t) => {
+        i8 = e.i(776344);
+    let i3 = (e, t) => {
         switch (null == e ? void 0 : e.code) {
             case void 0:
             default:
@@ -4634,8 +4634,8 @@
                 return "Message.GrantedItemCannotBePublished"
         }
     };
-    var i8 = e.i(330052),
-        i6 = e.i(47252),
+    var i6 = e.i(128834),
+        i7 = e.i(47252),
         i9 = e.i(418162);
     let ae = (0, i4.f)()(e => ({
             dialogPaper: {
@@ -4832,7 +4832,7 @@
                     }), window.location.reload(), r()
                 } catch (e) {
                     m({
-                        message: l(i7(await (0, tF.f)(e), "Error.Unknown")),
+                        message: l(i3(await (0, tF.f)(e), "Error.Unknown")),
                         anchorOrigin: {
                             vertical: "bottom",
                             horizontal: "center"
@@ -4862,7 +4862,7 @@
                 children: [(0, i.jsx)(i2.f, {
                     className: u.descriptionText,
                     children: l("Description.BulkUpdateAllTimedOptions")
-                }), (0, i.jsx)(i3.U, {
+                }), (0, i.jsx)(i8.U, {
                     flexDirection: "column",
                     classes: {
                         root: u.checkboxList
@@ -4890,10 +4890,10 @@
                                         categoryName: o
                                     }),
                                     color: "inherit",
-                                    children: (0, i.jsx)(i6.f, {
+                                    children: (0, i.jsx)(i7.f, {
                                         className: c(n ? u.expandToggleExpanded : u.expandToggleCollapsed)
                                     })
-                                }) : null, (0, i.jsx)(i8.f, {
+                                }) : null, (0, i.jsx)(i6.f, {
                                     label: o,
                                     size: "Small",
                                     placement: "Start",
@@ -4922,7 +4922,7 @@
                             }), v && n ? (0, i.jsx)("div", {
                                 id: r,
                                 className: u.subtypeIndent,
-                                children: t.map(e => (0, i.jsx)(i8.f, {
+                                children: t.map(e => (0, i.jsx)(i6.f, {
                                     label: l(i5.M[e]),
                                     size: "Small",
                                     placement: "Start",
@@ -4937,7 +4937,7 @@
                             }) : null]
                         }, e)
                     })(e))
-                }), (0, i.jsxs)(i3.U, {
+                }), (0, i.jsxs)(i8.U, {
                     flexDirection: "row",
                     classes: {
                         root: u.buttonContainer
@@ -4973,7 +4973,7 @@
             }), (0, i.jsx)(i2.f, {
                 className: u.descriptionText,
                 children: l("Description.ThisWillAlsoReplaceAnyItemLevelSettings")
-            }), (0, i.jsxs)(i3.U, {
+            }), (0, i.jsxs)(i8.U, {
                 flexDirection: "row",
                 classes: {
                     root: u.buttonContainer
@@ -5113,7 +5113,7 @@
                         }), window.location.reload(), l()
                     } catch (e) {
                         f({
-                            message: u(i7(await (0, tF.f)(e), "Error.Unknown")),
+                            message: u(i3(await (0, tF.f)(e), "Error.Unknown")),
                             anchorOrigin: {
                                 vertical: "bottom",
                                 horizontal: "center"
@@ -5161,7 +5161,7 @@
                         children: [(0, i.jsx)(i2.f, {
                             className: p.descriptionText,
                             children: u("Description.BulkUpdateTimedOptions")
-                        }), (0, i.jsxs)(i3.U, {
+                        }), (0, i.jsxs)(i8.U, {
                             flexDirection: "column",
                             classes: {
                                 root: p.buttonContainer
@@ -5202,7 +5202,7 @@
                                     children: e
                                 })
                             }])
-                        }), (0, i.jsxs)(i3.U, {
+                        }), (0, i.jsxs)(i8.U, {
                             flexDirection: "column",
                             classes: {
                                 root: p.buttonContainer
@@ -5509,8 +5509,8 @@
     function aw(e) {
         return null != e.universeId ? e.universeId : "experienceId" in e && "number" == typeof e.experienceId ? e.experienceId : void 0
     }
-    var aC = e.i(34986),
-        aT = e.i(291673);
+    var aC = e.i(151249),
+        aT = e.i(490311);
     let aj = (e, t) => {
             let {
                 user: n
@@ -5687,7 +5687,7 @@
                                     children: v("CreateMomentModal.LanguageInput.Label")
                                 }), (0, i.jsx)("span", {
                                     "data-testid": "edit-moment-content-language-readonly",
-                                    children: t3(o.locale)
+                                    children: t8(o.locale)
                                 })]
                             })
                         }) : null, (0, i.jsx)("div", {
@@ -5750,7 +5750,7 @@
                 })
             })
         }, [et.f.Creations, et.f.Controls]);
-    var aP = e.i(466537),
+    var aP = e.i(798251),
         aA = e.i(493924);
     let aL = e => {
         let {
@@ -5784,8 +5784,8 @@
         })
     };
     var aN = e.i(260022),
-        aR = e.i(573282),
-        aU = e.i(766433),
+        aR = e.i(511021),
+        aU = e.i(250669),
         aO = e.i(125677),
         aD = e.i(20227),
         a_ = e.i(494601);
@@ -6092,7 +6092,7 @@
                 }) : null, u ? (0, i.jsx)(aR.d, {
                     children: (0, i.jsx)("span", {
                         "data-testid": "moment-content-language-".concat(I),
-                        children: t3(n.locale)
+                        children: t8(n.locale)
                     })
                 }) : null, c ? (0, i.jsxs)(i.Fragment, {
                     children: [(0, i.jsx)(aR.d, {
@@ -6796,7 +6796,7 @@
             width: "100%",
             height: "100%"
         },
-        a3 = (0, i4.f)()(e => ({
+        a8 = (0, i4.f)()(e => ({
             section: {
                 ...a5
             },
@@ -6815,19 +6815,19 @@
                 padding: 0
             }
         })),
-        a7 = (0, W.default)(() => e.A(202045), {
+        a3 = (0, W.default)(() => e.A(202045), {
             loadableGenerated: {
                 modules: [623728]
             },
             ssr: !1
         }),
-        a8 = (0, W.default)(() => e.A(378869), {
+        a6 = (0, W.default)(() => e.A(378869), {
             loadableGenerated: {
                 modules: [518808]
             },
             ssr: !1
         }),
-        a6 = (0, W.default)(() => e.A(580854), {
+        a7 = (0, W.default)(() => e.A(580854), {
             loadableGenerated: {
                 modules: [427685]
             },
@@ -6975,7 +6975,7 @@
                         section: D,
                         container: _
                     }
-                } = a3(),
+                } = a8(),
                 q = (0, a.useCallback)(e => {
                     if (A.menuItem === e.menuItem && A.submenuItem === e.submenuItem) return;
                     let t = y.f.getAssetType(e);
@@ -7024,9 +7024,9 @@
                         groupId: null == n ? void 0 : n.id,
                         useTabNavigationSpacing: !1,
                         userId: null == r ? void 0 : r.id
-                    }) : F === c.f.Decal ? (0, i.jsx)(a6, {
+                    }) : F === c.f.Decal ? (0, i.jsx)(a7, {
                         groupId: null == n ? void 0 : n.id
-                    }) : F === c.f.Animation ? (0, i.jsx)(a8, {
+                    }) : F === c.f.Animation ? (0, i.jsx)(a6, {
                         groupId: null == n ? void 0 : n.id
                     }) : F === c.f.Audio || F === c.f.Video ? (0, i.jsx)(a9, {
                         mediaAssetType: F,
@@ -7046,7 +7046,7 @@
                         })
                     }) : F === c.f.ShareLink ? (0, i.jsx)(rr, {}) : F === c.f.Moments ? (0, i.jsx)(a4, {}) : F === c.f.AssetPermissionRequests ? (0, i.jsx)(rl, {}) : F === c.f.Showcase ? (0, i.jsx)(ri, {
                         groupId: null == n ? void 0 : n.id
-                    }) : (0, v.k)(F) ? (0, i.jsx)(a7, {
+                    }) : (0, v.k)(F) ? (0, i.jsx)(a3, {
                         assetType: F,
                         groupId: null == n ? void 0 : n.id
                     }) : F === c.f.Image || F === c.f.Mesh ? (0, i.jsx)(ra, {
@@ -7145,5 +7145,5 @@
     }, e.s(["default", 0, rv], 962059)
 }]);
 
-//# debugId=534ee1e1-c28d-ccf0-75fb-9d4323c8bb9f
-//# sourceMappingURL=1vi14id7f_i46.js.map
+//# debugId=1aa9b59c-e28a-0158-0fb6-0c3c01ea7a4b
+//# sourceMappingURL=083nowuij8v8s.js.map
