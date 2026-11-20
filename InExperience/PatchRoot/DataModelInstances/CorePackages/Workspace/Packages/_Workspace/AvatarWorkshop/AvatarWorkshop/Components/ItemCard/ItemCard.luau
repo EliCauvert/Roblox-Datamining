@@ -1,4 +1,5 @@
-﻿local Parent = script:FindFirstAncestor("AvatarWorkshop").Parent
+﻿local AvatarWorkshop = script:FindFirstAncestor("AvatarWorkshop")
+local Parent = AvatarWorkshop.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
@@ -8,6 +9,7 @@ local InputSize = FoundationModule.Enums.InputSize
 local Image = FoundationModule.Image
 local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local _ = require(AvatarWorkshop.Constants.TileShape)
 local Character = utf8.char(57344)
 
 return function(Frame)
@@ -29,7 +31,7 @@ return function(Frame)
 					["stroke-system-contrast"] = Frame.isSelected
 				},
 				aspectRatio = {
-					AspectRatio = if Frame.vertical then 0.8 else 1,
+					AspectRatio = if Frame.tileShape == "Tall" then 0.6646341463414634 elseif Frame.vertical then 0.8 else 1,
 					AspectType = Enum.AspectType.FitWithinMaxSize,
 					DominantAxis = Enum.DominantAxis.Width
 				},

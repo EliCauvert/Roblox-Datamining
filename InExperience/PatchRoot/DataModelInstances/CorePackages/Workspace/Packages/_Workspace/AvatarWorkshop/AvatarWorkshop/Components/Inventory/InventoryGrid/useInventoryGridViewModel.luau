@@ -41,6 +41,7 @@ return function(p2)
 	-- upvalues: UseTokensFunction (copy), GetInventoryPageStoreModule (copy), UseSignalStateFunction (copy), GetUiStateStoreModule (copy), GetAvatarStateStoreModule (copy), ReactModule (copy), getPinnedAssets (copy), PinEquippedItemsModule (copy), doNothing (copy), GetOutfitKindModule (copy), IsWearingOutfitModule (copy), GetOutfitAvatarStateModule (copy), AssetTypeFromId (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy)
 	local PageData = p2.pageData
 	local AssetTypes = PageData.assetTypes
+	local IsShowTitles = PageData.showTitles == true
 	local UseTokensResult = UseTokensFunction()
 	local InventoryPageStoreModule = GetInventoryPageStoreModule(PageData)
 	local UseSignalStateResult = UseSignalStateFunction(GetUiStateStoreModule)
@@ -82,7 +83,7 @@ return function(p2)
 		return if UseStateResult then PinEquippedItemsModule(UseSignalStateResult2, UseStateResult.ids) else UseSignalStateResult2
 	end, { UseSignalStateResult2, UseStateResult })
 	local UseMemoResult1 = ReactModule.useMemo(function()
-		-- upvalues: UseMemoResult (copy), InventoryPageStoreModule (copy), doNothing (upval), GetOutfitKindModule (upval), UseSignalStateResult9 (copy), IsWearingOutfitModule (upval), GetOutfitAvatarStateModule (upval), UseSignalStateResult1 (copy), AssetTypeFromId (upval), UseStateResult (copy), UseSignalStateResult8 (copy), GetRbxThumbFunction (upval), ThumbnailType (upval), ThumbnailSize (upval)
+		-- upvalues: UseMemoResult (copy), InventoryPageStoreModule (copy), doNothing (upval), GetOutfitKindModule (upval), UseSignalStateResult9 (copy), IsWearingOutfitModule (upval), GetOutfitAvatarStateModule (upval), UseSignalStateResult1 (copy), AssetTypeFromId (upval), UseStateResult (copy), UseSignalStateResult8 (copy), GetRbxThumbFunction (upval), ThumbnailType (upval), ThumbnailSize (upval), IsShowTitles (copy)
 		local Buffer = table.create(#UseMemoResult)
 		
 		for _, value in UseMemoResult do
@@ -119,6 +120,7 @@ return function(p2)
 			table.insert(Buffer, {
 				id = ItemId,
 				image = if value.itemType == "Outfit" then GetRbxThumbFunction(ThumbnailType.Outfit, ItemId, ThumbnailSize.Medium) else GetRbxThumbFunction(ThumbnailType.Asset, ItemId, ThumbnailSize.Medium),
+				title = if IsShowTitles and Item then Item.itemName else nil,
 				isSelected = IsSelected,
 				onActivated = OnActivated
 			})
@@ -126,13 +128,14 @@ return function(p2)
 		return Buffer
 	end, {
 		UseMemoResult, UseStateResult, InventoryPageStoreModule, UseSignalStateResult1,
-		UseSignalStateResult8, UseSignalStateResult9
+		UseSignalStateResult8, UseSignalStateResult9, IsShowTitles
 	})
 	
 	return {
 		fallbackNumColumns = 5,
 		minColumns = 3,
 		items = UseMemoResult1,
+		tileShape = PageData.tileShape or "Square",
 		isLoadingInitialPage = UseSignalStateResult3 and not v1,
 		isLoadingNextPage = UseSignalStateResult3 and v1,
 		isEmpty = UseSignalStateResult4 and (UseSignalStateResult6 and (not UseSignalStateResult3 and (not UseSignalStateResult5 and not (#UseMemoResult1 > 0)))),

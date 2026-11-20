@@ -7,7 +7,10 @@ local FFlagAlignSideSheetWindowCloseRight = require(Parent.SharedFlags).FFlagAli
 return function(p1)
 	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), FoundationModule (copy), FFlagAlignSideSheetWindowCloseRight (copy)
 	return (ReactModule.createElement(FoundationModule.View, {
-		tag = if FFlagAlignSideSheetWindowCloseRight then "size-full-1200 row align-y-center gap-medium padding-x-medium flex-between" else "size-full-1200 row align-y-center gap-medium padding-x-medium"
+		tag = {
+			["row flex-x-between align-y-center gap-medium size-full-1200 padding-x-medium"] = FFlagAlignSideSheetWindowCloseRight,
+			["row align-y-center gap-medium size-full-1200 padding-x-medium"] = not FFlagAlignSideSheetWindowCloseRight
+		}
 	}, {
 		CloseButton = if FFlagAlignSideSheetWindowCloseRight and p1.hideClose then nil else ReactModule.createElement(FoundationModule.Image, {
 			tag = "size-600 radius-small",

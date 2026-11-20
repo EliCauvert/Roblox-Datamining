@@ -2,18 +2,19 @@
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
-local _ = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
 local CoreScriptsCommonModule = require(game:GetService("CorePackages").Workspace.Packages.CoreScriptsCommon)
 local ConnectionUtil = CoreScriptsCommonModule.ConnectionUtil
 local AvatarUtil = CoreScriptsCommonModule.AvatarUtil
+local FFlagVRAvatarUseExtractedModulesModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Flags.FFlagVRAvatarUseExtractedModules)
+local VRGesturesMathModule = require(script.Parent.VRGesturesMath)
 local DebugImmersionModeNonVR = game:DefineFastFlag("DebugImmersionModeNonVR", false)
 local VRAvatarGesturesFixFirstPersonHeadScale = game:DefineFastFlag("VRAvatarGesturesFixFirstPersonHeadScale", false)
 local VRAvatarGesturesAnalyticsThrottleHundrethsPercent = game:DefineFastInt("VRAvatarGesturesAnalyticsThrottleHundrethsPercent", 0)
 
-local function _(p1): boolean
-	-- upvalues: VRAvatarGesturesFixFirstPersonHeadScale (copy)
-	return (p1.CFrame.Position - p1.Focus.Position).Magnitude <= (if VRAvatarGesturesFixFirstPersonHeadScale then 5 * p1.HeadScale else 5)
+local function _(p1)
+	-- upvalues: FFlagVRAvatarUseExtractedModulesModule (copy), VRGesturesMathModule (copy), VRAvatarGesturesFixFirstPersonHeadScale (copy)
+	return if FFlagVRAvatarUseExtractedModulesModule then VRGesturesMathModule.isVRFirstPerson(p1.CFrame.Position, p1.Focus.Position, p1.HeadScale, VRAvatarGesturesFixFirstPersonHeadScale) else (p1.CFrame.Position - p1.Focus.Position).Magnitude <= (if VRAvatarGesturesFixFirstPersonHeadScale then 5 * p1.HeadScale else 5)
 end
 
 local Module = {}
@@ -37,7 +38,7 @@ function Module.new()
 end
 
 function Module:onCharacterChanged(Character)
-	-- upvalues: VRAvatarGesturesFixFirstPersonHeadScale (copy), VRService (copy)
+	-- upvalues: FFlagVRAvatarUseExtractedModulesModule (copy), VRGesturesMathModule (copy), VRAvatarGesturesFixFirstPersonHeadScale (copy), VRService (copy)
 	local Humanoid = Character:FindFirstChild("Humanoid")
 	
 	if not Humanoid then return end
@@ -56,13 +57,13 @@ function Module:onCharacterChanged(Character)
 	
 	if CurrentCamera then
 		local function updateSeated(Sit)
-			-- upvalues: CurrentCamera (copy), VRAvatarGesturesFixFirstPersonHeadScale (upval), Humanoid (copy)
+			-- upvalues: CurrentCamera (copy), FFlagVRAvatarUseExtractedModulesModule (upval), VRGesturesMathModule (upval), VRAvatarGesturesFixFirstPersonHeadScale (upval), Humanoid (copy)
 			local IsVehicleSeat = CurrentCamera.CameraSubject and CurrentCamera.CameraSubject:IsA("VehicleSeat")
-			local IsMagnitudeBelow = (CurrentCamera.CFrame.Position - CurrentCamera.Focus.Position).Magnitude <= (if VRAvatarGesturesFixFirstPersonHeadScale then 5 * CurrentCamera.HeadScale else 5)
+			local IsVRFirstPerson = if FFlagVRAvatarUseExtractedModulesModule then VRGesturesMathModule.isVRFirstPerson(CurrentCamera.CFrame.Position, CurrentCamera.Focus.Position, CurrentCamera.HeadScale, VRAvatarGesturesFixFirstPersonHeadScale) else (CurrentCamera.CFrame.Position - CurrentCamera.Focus.Position).Magnitude <= (if VRAvatarGesturesFixFirstPersonHeadScale then 5 * CurrentCamera.HeadScale else 5)
 			local TrackedIKHead = Humanoid:FindFirstChild("TrackedIKHead")
 			
 			if TrackedIKHead then
-				if Sit and not IsVehicleSeat and IsMagnitudeBelow then
+				if Sit and not IsVehicleSeat and IsVRFirstPerson then
 					TrackedIKHead.Type = Enum.IKControlType.Transform
 					
 					return
@@ -73,10 +74,10 @@ function Module:onCharacterChanged(Character)
 		
 		updateSeated(Humanoid.Sit)
 		self.connections:connect("Seated", Humanoid.Seated, function(p1)
-			-- upvalues: updateSeated (copy), CurrentCamera (copy), VRAvatarGesturesFixFirstPersonHeadScale (upval), VRService (upval)
+			-- upvalues: updateSeated (copy), CurrentCamera (copy), FFlagVRAvatarUseExtractedModulesModule (upval), VRGesturesMathModule (upval), VRAvatarGesturesFixFirstPersonHeadScale (upval), VRService (upval)
 			updateSeated(p1)
 			
-			if p1 and (if VRAvatarGesturesFixFirstPersonHeadScale then 5 * CurrentCamera.HeadScale else 5) >= (CurrentCamera.CFrame.Position - CurrentCamera.Focus.Position).Magnitude then
+			if p1 and (if FFlagVRAvatarUseExtractedModulesModule then VRGesturesMathModule.isVRFirstPerson(CurrentCamera.CFrame.Position, CurrentCamera.Focus.Position, CurrentCamera.HeadScale, VRAvatarGesturesFixFirstPersonHeadScale) else (if VRAvatarGesturesFixFirstPersonHeadScale then 5 * CurrentCamera.HeadScale else 5) >= (CurrentCamera.CFrame.Position - CurrentCamera.Focus.Position).Magnitude) then
 				VRService:RecenterUserHeadCFrame()
 			end
 		end)
@@ -134,7 +135,7 @@ function Module:onAvatarGesturesChanged()
 end
 
 function Module:updateCFrames(Text, p1)
-	-- upvalues: Players (copy), VRService (copy), VRAvatarGesturesFixFirstPersonHeadScale (copy)
+	-- upvalues: Players (copy), VRService (copy), FFlagVRAvatarUseExtractedModulesModule (copy), VRGesturesMathModule (copy), VRAvatarGesturesFixFirstPersonHeadScale (copy)
 	local LocalPlayer = Players.LocalPlayer
 	
 	if not Players.LocalPlayer then return end
@@ -159,7 +160,7 @@ function Module:updateCFrames(Text, p1)
 		local ScaledNewRotation = CurrentCamera.CFrame * NewRotation
 		local Head = Character:FindFirstChild("Head")
 		
-		if (if VRAvatarGesturesFixFirstPersonHeadScale then 5 * CurrentCamera.HeadScale else 5) >= (CurrentCamera.CFrame.Position - CurrentCamera.Focus.Position).Magnitude or not Head then
+		if (if FFlagVRAvatarUseExtractedModulesModule then VRGesturesMathModule.isVRFirstPerson(CurrentCamera.CFrame.Position, CurrentCamera.Focus.Position, CurrentCamera.HeadScale, VRAvatarGesturesFixFirstPersonHeadScale) else (if VRAvatarGesturesFixFirstPersonHeadScale then 5 * CurrentCamera.HeadScale else 5) >= (CurrentCamera.CFrame.Position - CurrentCamera.Focus.Position).Magnitude) or not Head then
 			Child.Position = ScaledNewRotation.Position
 			
 			if Text == "TrackedHead" then
@@ -173,7 +174,12 @@ function Module:updateCFrames(Text, p1)
 			
 			if Text == "TrackedHead" then
 				local PrimaryPartCFrame = Character.PrimaryPart.CFrame
-				Child.Position = (PrimaryPartCFrame * CFrame.new(0, PrimaryPartCFrame.Position.Y * 0.25, -PrimaryPartCFrame.Position.Y * 0.125)).Position
+				
+				if FFlagVRAvatarUseExtractedModulesModule then
+					Child.Position = VRGesturesMathModule.getThirdPersonHeadTargetPosition(PrimaryPartCFrame)
+				else
+					Child.Position = (PrimaryPartCFrame * CFrame.new(0, PrimaryPartCFrame.Position.Y * 0.25, -PrimaryPartCFrame.Position.Y * 0.125)).Position
+				end
 				Child1.CFrame = PrimaryPartCFrame * NewRotation
 			else
 				local WorldPoint = Head.CFrame:ToWorldSpace(ScaledRotation:ToObjectSpace(ScaledNewRotation))

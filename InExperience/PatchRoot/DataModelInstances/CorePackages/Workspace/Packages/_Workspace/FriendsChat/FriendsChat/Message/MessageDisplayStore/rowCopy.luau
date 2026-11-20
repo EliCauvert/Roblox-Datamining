@@ -1,19 +1,19 @@
 ﻿local Parent = script:FindFirstAncestor("FriendsChat").Parent
-local FoundationModule = require(Parent.Foundation)
 local GetModeratedMaskTextModule = require(Parent.AppChat.getModeratedMaskText)
 local GetReplyLabelDescriptorModule = require(Parent.AppChat.getReplyLabelDescriptor)
 local NameInfoModule = require(script.Parent.NameInfo)
 local _ = require(script.Parent.classifyMessage)
 local _ = require(script.Parent.Parent.Parent.Utils.useLocalize)
-local IconName = FoundationModule.Enums.IconName
+local IconName = require(Parent.Foundation).Enums.IconName
+local FFlagEnableExperienceInviteCard = require(Parent.SharedFlags).FFlagEnableExperienceInviteCard
 
 return {
 	MODERATED_ICON = IconName.TriangleExclamation,
 	HIDDEN_ICON = IconName.LockClosed,
 	REPLY_ICON = IconName.ArrowCurlToLeft,
 	systemIcon = function(p1)
-		-- upvalues: IconName (copy)
-		return if p1 == "party" then IconName.TwoPeopleSpeechBubble else IconName.CircleI
+		-- upvalues: FFlagEnableExperienceInviteCard (copy), IconName (copy)
+		return if FFlagEnableExperienceInviteCard and p1 == "experienceInvite" then IconName.Controller elseif p1 == "party" then IconName.TwoPeopleSpeechBubble else IconName.CircleI
 	end,
 	moderatedNoticeText = function(Callback)
 		return if Callback then Callback("Feature.Chat.Message.MessageContentModerated") else ""

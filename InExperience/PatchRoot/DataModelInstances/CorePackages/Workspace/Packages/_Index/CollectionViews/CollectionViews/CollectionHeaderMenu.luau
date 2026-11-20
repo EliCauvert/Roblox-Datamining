@@ -7,6 +7,7 @@ local _ = require(Parent.Foundation)
 local InputHandlersModule = require(Parent.InputHandlers)
 local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
 local ResponsiveModule = require(Parent.Responsive)
+local FFlagLuaAppCollectionHeaderMenuFocusFix = require(Parent.SharedFlags).FFlagLuaAppCollectionHeaderMenuFocusFix
 local NavigateBack = require(Parent.FocusNavigationUtils).FocusNavigationEventNameEnum.NavigateBack
 local config = {
 	[Enum.KeyCode.ButtonB] = NavigateBack,
@@ -22,9 +23,15 @@ local function _()
 end
 
 local function useMenuFocusNavigation(UseStateResult)
-	-- upvalues: ReactModule (copy), ResponsiveModule (copy), AppBloxModule (copy), ReactFocusNavigationModule (copy), config (copy), NavigateBack (copy), InputHandlersModule (copy), GuiService (copy)
-	local UseStateResult1, UseStateResult2 = ReactModule.useState(nil)
-	local UseLastInputResult = ResponsiveModule.useLastInput()
+	-- upvalues: FFlagLuaAppCollectionHeaderMenuFocusFix (copy), ReactModule (copy), ResponsiveModule (copy), AppBloxModule (copy), ReactFocusNavigationModule (copy), config (copy), NavigateBack (copy), InputHandlersModule (copy), GuiService (copy)
+	local Ancestor = nil
+	local Callback = nil
+	local UseLastInputResult = nil
+	
+	if not FFlagLuaAppCollectionHeaderMenuFocusFix then
+		Ancestor, Callback = ReactModule.useState(nil)
+		UseLastInputResult = ResponsiveModule.useLastInput()
+	end
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: AppBloxModule (upval), UseStateResult (copy)
 		AppBloxModule.getOverflowMenuSignalStore().closeMenu(UseStateResult)
@@ -34,59 +41,69 @@ local function useMenuFocusNavigation(UseStateResult)
 		return UseResult
 	end, { UseResult })
 	local UseEventHandlerMapResult = ReactFocusNavigationModule.useEventHandlerMap(ReactModule.useMemo(function()
-		-- upvalues: NavigateBack (upval), InputHandlersModule (upval), UseResult (copy)
+		-- upvalues: NavigateBack (upval), InputHandlersModule (upval), FFlagLuaAppCollectionHeaderMenuFocusFix (upval), UseResult (copy)
 		return {
-			[NavigateBack] = { handler = InputHandlersModule.onRelease(UseResult) }
+			[NavigateBack] = {
+				handler = InputHandlersModule.onRelease(if FFlagLuaAppCollectionHeaderMenuFocusFix then function(p1)
+					-- upvalues: UseResult (upval)
+					p1:cancel()
+					UseResult()
+				end else UseResult)
+			}
 		}
 	end, { UseResult }), (ReactFocusNavigationModule.useEventMap(config)))
-	ReactModule.useEffect(function()
-		-- upvalues: UseStateResult1 (copy), UseLastInputResult (copy), ResponsiveModule (upval), GuiService (upval)
-		if UseStateResult1 and UseLastInputResult == ResponsiveModule.Input.Directional then
-			GuiService:Select(UseStateResult1)
-		end
-	end, { UseStateResult1, UseLastInputResult })
-	ReactModule.useEffect(function()
-		-- upvalues: UseStateResult1 (copy), GuiService (upval), UseResult (copy)
-		if not UseStateResult1 then
-			return nil
-		end
-		local Flag = false
-		
-		local function onSelectionChanged()
-			-- upvalues: GuiService (upval), UseStateResult1 (upval), Flag (ref), UseResult (upval)
+	
+	if not FFlagLuaAppCollectionHeaderMenuFocusFix then
+		ReactModule.useEffect(function()
+			-- upvalues: Ancestor (ref), UseLastInputResult (ref), ResponsiveModule (upval), GuiService (upval)
+			if Ancestor and UseLastInputResult == ResponsiveModule.Input.Directional then
+				GuiService:Select(Ancestor)
+			end
+		end, { Ancestor, UseLastInputResult })
+		ReactModule.useEffect(function()
+			-- upvalues: Ancestor (ref), GuiService (upval), UseResult (copy)
+			if not Ancestor then
+				return nil
+			end
+			local Flag = false
+			
+			local function onSelectionChanged()
+				-- upvalues: GuiService (upval), Ancestor (upval), Flag (ref), UseResult (upval)
+				local SelectedCoreObject = GuiService.SelectedCoreObject
+				
+				if SelectedCoreObject and SelectedCoreObject:IsDescendantOf(Ancestor) then
+					Flag = true
+					
+					return
+				end
+				if Flag then
+					UseResult()
+				end
+			end
+			
 			local SelectedCoreObject = GuiService.SelectedCoreObject
 			
-			if SelectedCoreObject and SelectedCoreObject:IsDescendantOf(UseStateResult1) then
+			if SelectedCoreObject and SelectedCoreObject:IsDescendantOf(Ancestor) then
 				Flag = true
-				
-				return
-			end
-			if Flag then
+			elseif Flag then
 				UseResult()
 			end
-		end
-		
-		local SelectedCoreObject = GuiService.SelectedCoreObject
-		
-		if SelectedCoreObject and SelectedCoreObject:IsDescendantOf(UseStateResult1) then
-			Flag = true
-		elseif Flag then
-			UseResult()
-		end
-		local Connection = GuiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(onSelectionChanged)
-		
-		return function()
-			-- upvalues: Connection (copy)
-			Connection:Disconnect()
-		end
-	end, { UseStateResult1, UseResult })
-	
+			local Connection = GuiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(onSelectionChanged)
+			
+			return function()
+				-- upvalues: Connection (copy)
+				Connection:Disconnect()
+			end
+		end, { Ancestor, UseResult })
+	end
 	return ReactModule.useCallback(function(p1)
-		-- upvalues: UseEventHandlerMapResult (copy), UseStateResult2 (copy)
+		-- upvalues: UseEventHandlerMapResult (copy), FFlagLuaAppCollectionHeaderMenuFocusFix (upval), Callback (ref)
 		if type(UseEventHandlerMapResult) == "function" then
 			UseEventHandlerMapResult(p1)
 		end
-		UseStateResult2(p1)
+		if not FFlagLuaAppCollectionHeaderMenuFocusFix then
+			Callback(p1)
+		end
 	end, { UseEventHandlerMapResult })
 end
 

@@ -31,7 +31,8 @@ local function pageEntry(p1, p2, UseSignalStateResult, LoadingSlot)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: ReactModule (copy), SignalsModule (copy), GetSidebarEntryIdentifierModule (copy), SignalsReactModule (copy), FoundationModule (copy), GroupSidebarHeaderBarModule (copy), pageEntry (copy), GroupSidebarSkeletonModule (copy), GroupOverviewPaneModule (copy), AppBloxModule (copy)
+	-- upvalues: FoundationModule (copy), ReactModule (copy), SignalsModule (copy), GetSidebarEntryIdentifierModule (copy), SignalsReactModule (copy), GroupSidebarHeaderBarModule (copy), pageEntry (copy), GroupSidebarSkeletonModule (copy), GroupOverviewPaneModule (copy), AppBloxModule (copy)
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local ShowOverview = p1.showOverview
 	local SelectedId = p1.selectedId
 	local Element = ReactModule.createElement(FoundationModule.View, {
@@ -73,7 +74,11 @@ return ReactModule.memo(function(p1)
 		Content = if SelectedId and SelectedId ~= "" then if p1.isOverviewEmbedded then pageEntry(p1, "overviewPane", "overviewPane") else ReactModule.createElement(GroupOverviewPaneModule, { source = "communitySidebar", groupId = SelectedId }) else nil
 	}) else nil
 	
-	return ReactModule.createElement(AppBloxModule.FullscreenPageWithSafeArea, { includeStatusBar = true }, {
+	return ReactModule.createElement(AppBloxModule.FullscreenPageWithSafeArea, {
+		includeStatusBar = true,
+		BackgroundColor3 = UseTokensResult.Color.Surface.Surface_0.Color3,
+		BackgroundTransparency = UseTokensResult.Color.Surface.Surface_0.Transparency
+	}, {
 		Layout = ReactModule.createElement(FoundationModule.View, { tag = "size-full", testId = "GroupSidebarPage" }, {
 			Content = if ShowOverview then ReactModule.createElement(FoundationModule.View, { tag = "row size-full" }, { Sidebar = Element, Overview = Element1 }) else Element
 		})

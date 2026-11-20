@@ -5,6 +5,7 @@ local FoundationModule = require(Parent.Foundation)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local ShopOverflowConstantsModule = require(InExperienceShop.Components.Shared.shopOverflowConstants)
 local FFlagEnableContentPersonalizationForExperienceShopModule = require(InExperienceShop.Flags.FFlagEnableContentPersonalizationForExperienceShop)
+local FFlagUseAccountSettingsVlopKeyModule = require(InExperienceShop.Flags.FFlagUseAccountSettingsVlopKey)
 local FFlagAlignSideSheetWindowCloseRight = require(Parent.SharedFlags).FFlagAlignSideSheetWindowCloseRight
 local View = FoundationModule.View
 local Text = FoundationModule.Text
@@ -27,7 +28,7 @@ local CONTENTPERSONALIZATIONICON = ShopOverflowConstantsModule.CONTENT_PERSONALI
 local config = {
 	title = "Feature.Avatar.Action.Shop",
 	report = "Feature.Catalog.Action.Report",
-	contentPersonalization = "Feature.InExperienceShop.Label.ContentPersonalization"
+	contentPersonalization = if FFlagUseAccountSettingsVlopKeyModule then "Feature.AccountSettings.Heading.Tab.PersonalizedRecommendations" else "Feature.InExperienceShop.Label.ContentPersonalization"
 }
 
 return function(p1)

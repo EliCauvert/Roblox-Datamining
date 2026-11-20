@@ -3,14 +3,16 @@ local Players = game:GetService("Players")
 local CreateTemporaryOverlayModule = require(script.Parent.CreateTemporaryOverlay)
 local AimAlignmentProbeModule = require(script.Parent.AimAlignmentProbe)
 local RecordedReticleAlignmentModule = require(script.Parent.RecordedReticleAlignment)
+local RecordedScreenContextModule = require(script.Parent.RecordedScreenContext)
 local ExperienceStateReplayAimAlignmentProbe = game:DefineFastFlag("ExperienceStateReplayAimAlignmentProbe", false)
 local ExperienceStateReplayCenterRecordedReticle = game:DefineFastFlag("ExperienceStateReplayCenterRecordedReticle", false)
 local FFlagExperienceStateReplayRestoreRecordedClothingModule = require(script.Parent.Parent.Flags.FFlagExperienceStateReplayRestoreRecordedClothing)
 local FFlagExperienceStateReplayUseRecordedCurrentCameraModule = require(script.Parent.Parent.Flags.FFlagExperienceStateReplayUseRecordedCurrentCamera)
+local FFlagExperienceStateReplayRecordedViewportEventModule = require(script.Parent.Parent.Flags.FFlagExperienceStateReplayRecordedViewportEvent)
 
 return {
 	create = function()
-		-- upvalues: RecordedReticleAlignmentModule (copy), Workspace (copy), Players (copy), FFlagExperienceStateReplayRestoreRecordedClothingModule (copy), ExperienceStateReplayCenterRecordedReticle (copy), ExperienceStateReplayAimAlignmentProbe (copy), AimAlignmentProbeModule (copy), FFlagExperienceStateReplayUseRecordedCurrentCameraModule (copy), CreateTemporaryOverlayModule (copy)
+		-- upvalues: RecordedReticleAlignmentModule (copy), FFlagExperienceStateReplayRecordedViewportEventModule (copy), ExperienceStateReplayCenterRecordedReticle (copy), ExperienceStateReplayAimAlignmentProbe (copy), RecordedScreenContextModule (copy), Workspace (copy), Players (copy), FFlagExperienceStateReplayRestoreRecordedClothingModule (copy), AimAlignmentProbeModule (copy), FFlagExperienceStateReplayUseRecordedCurrentCameraModule (copy), CreateTemporaryOverlayModule (copy)
 		local t = {}
 		local Model = nil
 		local Flag = false
@@ -27,6 +29,7 @@ return {
 		local IsRECORDEDPOVVIEWMODEL = false
 		local Count1 = 0
 		local NewRecordedReticleAlignment = RecordedReticleAlignmentModule.create()
+		local StartResult = if FFlagExperienceStateReplayRecordedViewportEventModule and (ExperienceStateReplayCenterRecordedReticle or ExperienceStateReplayAimAlignmentProbe) then RecordedScreenContextModule.start() else nil
 		local Flag3 = false
 		local Ancestor = nil
 		local LocalTransparencyModifiers = {}
@@ -358,6 +361,20 @@ return {
 			return nil
 		end
 		
+		local function findRecordedViewport(CurrentCamera)
+			-- upvalues: findRecordedCamera (copy), StartResult (copy)
+			if CurrentCamera == nil then
+				return nil, nil
+			end
+			local RecordedCamera = findRecordedCamera(CurrentCamera)
+			
+			if StartResult == nil then
+				return RecordedCamera, nil
+			else
+				return RecordedCamera, StartResult.getViewportSize()
+			end
+		end
+		
 		local _ = function(p1): boolean
 			return p1 == CFrame.new() or p1 == CFrame.new(0, 0, -5)
 		end
@@ -453,7 +470,7 @@ return {
 		end
 		
 		local function stepRecordedPov()
-			-- upvalues: syncRecordedCamera (copy), Workspace (upval), FFlagExperienceStateReplayRestoreRecordedClothingModule (upval), stepAvatarVisibility (copy), Object (ref), v1 (ref), Count (ref), Flag1 (ref), ExperienceStateReplayCenterRecordedReticle (upval), Flag3 (ref), NewRecordedReticleAlignment (copy), findRecordedCamera (copy), ExperienceStateReplayAimAlignmentProbe (upval), Count1 (ref), AimAlignmentProbeModule (upval), IsRECORDEDPOVVIEWMODEL (ref), findFirstPersonViewmodel (copy), getViewmodelParts (copy)
+			-- upvalues: syncRecordedCamera (copy), Workspace (upval), FFlagExperienceStateReplayRestoreRecordedClothingModule (upval), stepAvatarVisibility (copy), Object (ref), v1 (ref), Count (ref), Flag1 (ref), ExperienceStateReplayCenterRecordedReticle (upval), Flag3 (ref), FFlagExperienceStateReplayRecordedViewportEventModule (upval), NewRecordedReticleAlignment (copy), findRecordedViewport (copy), findRecordedCamera (copy), ExperienceStateReplayAimAlignmentProbe (upval), Count1 (ref), AimAlignmentProbeModule (upval), IsRECORDEDPOVVIEWMODEL (ref), findFirstPersonViewmodel (copy), getViewmodelParts (copy)
 			syncRecordedCamera()
 			local CurrentCamera = Workspace.CurrentCamera
 			
@@ -474,8 +491,13 @@ return {
 				v1 = CurrentCameraCFrame
 			end
 			if ExperienceStateReplayCenterRecordedReticle and not Flag3 then
-				local Success, Result = pcall(NewRecordedReticleAlignment.step, CurrentCamera, CurrentCamera and findRecordedCamera(CurrentCamera))
-				
+				local Success = nil
+				local Result = nil
+				if FFlagExperienceStateReplayRecordedViewportEventModule then
+					Success, Result = pcall(NewRecordedReticleAlignment.step, CurrentCamera, findRecordedViewport(CurrentCamera))
+				else
+					Success, Result = pcall(NewRecordedReticleAlignment.step, CurrentCamera, CurrentCamera and findRecordedCamera(CurrentCamera))
+				end
 				if not Success then
 					Flag3 = true
 					warn("[AIMALIGN] reticle correction failed: " .. tostring(Result))
@@ -485,8 +507,13 @@ return {
 				Count1 += 1
 				
 				if Count1 % 300 == 1 then
-					local Success1, Result1 = pcall(AimAlignmentProbeModule.sample, CurrentCamera, CurrentCamera and findRecordedCamera(CurrentCamera))
-					
+					local Success1 = nil
+					local Result1 = nil
+					if FFlagExperienceStateReplayRecordedViewportEventModule then
+						Success1, Result1 = pcall(AimAlignmentProbeModule.sample, CurrentCamera, findRecordedViewport(CurrentCamera))
+					else
+						Success1, Result1 = pcall(AimAlignmentProbeModule.sample, CurrentCamera, CurrentCamera and findRecordedCamera(CurrentCamera))
+					end
 					if not Success1 then
 						warn("[AIMALIGN] probe failed: " .. tostring(Result1))
 					end
@@ -589,6 +616,13 @@ return {
 				NewRecordedReticleAlignment.clear()
 				Flag3 = false
 			end,
+			destroy = function()
+				-- upvalues: StartResult (copy)
+				if StartResult ~= nil then
+					StartResult.stop()
+				end
+			end,
+			resetRecordedScreenContext = if StartResult == nil then nil else StartResult.reset,
 			hasSyncedRecordedCamera = function()
 				-- upvalues: Flag1 (ref)
 				return Flag1

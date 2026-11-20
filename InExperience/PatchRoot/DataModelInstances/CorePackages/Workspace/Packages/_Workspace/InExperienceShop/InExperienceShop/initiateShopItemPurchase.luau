@@ -4,14 +4,14 @@ local PurchasePromptModule = require(Parent.PurchasePrompt)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local GetShopPurchasePayloadModule = require(InExperienceShop.Utils.getShopPurchasePayload)
 local FFlagCategoryLoggingInShopPurchaseModule = require(InExperienceShop.Flags.FFlagCategoryLoggingInShopPurchase)
-local FFlagEnablePurchasePayloadInExperienceShop = SharedFlagsModule.FFlagEnablePurchasePayloadInExperienceShop
+local EngineFeatureEnablePurchasePayload = SharedFlagsModule.EngineFeatureEnablePurchasePayload
 local FFlagSkipBuyDelayForExperienceShop = SharedFlagsModule.FFlagSkipBuyDelayForExperienceShop
 local _ = require(InExperienceShop.Types)
 
 return function(Id, p1, p2, p3)
-	-- upvalues: FFlagEnablePurchasePayloadInExperienceShop (copy), GetShopPurchasePayloadModule (copy), FFlagCategoryLoggingInShopPurchaseModule (copy), PurchasePromptModule (copy), InExperienceShop (copy), FFlagSkipBuyDelayForExperienceShop (copy)
+	-- upvalues: EngineFeatureEnablePurchasePayload (copy), GetShopPurchasePayloadModule (copy), FFlagCategoryLoggingInShopPurchaseModule (copy), PurchasePromptModule (copy), InExperienceShop (copy), FFlagSkipBuyDelayForExperienceShop (copy)
 	if tonumber(Id) == nil then return end
-	local ShopPurchasePayloadModule = if FFlagEnablePurchasePayloadInExperienceShop then GetShopPurchasePayloadModule(if FFlagCategoryLoggingInShopPurchaseModule then p3 else nil) else nil
+	local ShopPurchasePayloadModule = if EngineFeatureEnablePurchasePayload then GetShopPurchasePayloadModule(if FFlagCategoryLoggingInShopPurchaseModule then p3 else nil) else nil
 	local InitiatePurchaseForProductPayloadFunction: (any) -> () = PurchasePromptModule.initiatePurchaseForProductPayload
 	
 	if p2 ~= nil then

@@ -1,0 +1,3 @@
+﻿local FFlagEnableContentPersonalizationForExperienceShopModule = require(script.Parent.FFlagEnableContentPersonalizationForExperienceShop)
+
+return game:DefineFastFlag("UseAccountSettingsVlopKey", false) and FFlagEnableContentPersonalizationForExperienceShopModule

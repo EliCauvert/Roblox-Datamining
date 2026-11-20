@@ -1,9 +1,14 @@
 ﻿local AvatarWorkshop = script:FindFirstAncestor("AvatarWorkshop")
 local ScreensModule = require(AvatarWorkshop.Navigation.Screens)
+local _ = require(AvatarWorkshop.Constants.TileShape)
 local InventoryOutfitType = require(AvatarWorkshop.Parent.AvatarExperienceModel).Enums.InventoryOutfitType
 
 return {
-	[ScreensModule.Inventory.Avatars] = { outfitInventoryType = InventoryOutfitType.Avatar },
+	[ScreensModule.Inventory.Avatars] = {
+		tileShape = "Tall",
+		showTitles = true,
+		outfitInventoryType = InventoryOutfitType.Avatar
+	},
 	[ScreensModule.Inventory.Body.FullBody] = { outfitInventoryType = InventoryOutfitType.Body },
 	[ScreensModule.Inventory.Body.Head] = { outfitInventoryType = InventoryOutfitType.DynamicHead },
 	[ScreensModule.Inventory.Body.Hair] = { assetTypes = { Enum.AvatarAssetType.HairAccessory } },
