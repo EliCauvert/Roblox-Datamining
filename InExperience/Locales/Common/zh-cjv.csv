@@ -2406,7 +2406,6 @@ Feature.Build.Label.DefaultDeveloperProductName,开发者产品
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,已删除
 Feature.Build.Label.DescribeIdea,描述一个创意
-Feature.Build.Label.DescribeIdeaOrPick,
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,描述：{DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,名称：{NAME}

@@ -18,8 +18,10 @@ return {
 	RobloxSubscriptionFlowCompleteReason = require(v1.Enums.RobloxSubscriptionFlowCompleteReason),
 	SubscriptionGrantType = require(v1.Enums.SubscriptionGrantType),
 	RobloxPlusSheetKind = require(v1.Enums.RobloxPlusSheetKind),
+	CampaignStringsLoadingStatus = require(v1.Enums.CampaignStringsLoadingStatus),
 	Flags = {
 		FFlagTTOnboardingSheet = require(v1.Flags.FFlagTTOnboardingSheet),
+		FFlagClaimSheetWaitForCampaignStrings = require(v1.Flags.FFlagClaimSheetWaitForCampaignStrings),
 		FFlagSubscriptionSheetCampaignLocalizations = require(Parent.SharedFlags).FFlagSubscriptionSheetCampaignLocalizations
 	},
 	Components = {

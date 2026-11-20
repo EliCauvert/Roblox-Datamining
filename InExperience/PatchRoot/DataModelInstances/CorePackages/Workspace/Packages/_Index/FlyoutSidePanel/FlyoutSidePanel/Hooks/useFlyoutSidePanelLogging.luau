@@ -8,17 +8,12 @@ local FFlagFlyoutTradesEntryExposureLoggingModule = require(FlyoutSidePanel.Flag
 local FFlagFlyoutProfileEntryExposureLoggingModule = require(FlyoutSidePanel.Flags.FFlagFlyoutProfileEntryExposureLogging)
 local FFlagFlyoutTradesEntryImpressionLoggingModule = require(FlyoutSidePanel.Flags.FFlagFlyoutTradesEntryImpressionLogging)
 local FFlagFlyoutSidePanelIxpEnabledModule = require(FlyoutSidePanel.Flags.FFlagFlyoutSidePanelIxpEnabled)
-local FFlagEnableFlyoutSessionTrackingModule = require(FlyoutSidePanel.Flags.FFlagEnableFlyoutSessionTracking)
-local UseFlyoutSessionTrackingModule = if FFlagEnableFlyoutSessionTrackingModule then require(FlyoutSidePanel.Hooks.useFlyoutSessionTracking) else nil
 local SharedFlagsModule = require(FlyoutSidePanel.Parent.SharedFlags)
 local FFlagEnableMeTabProfile = SharedFlagsModule.FFlagEnableMeTabProfile
 local FFlagCTAChangeMorePageFlyoutButtonTextIxpEnabled = SharedFlagsModule.FFlagCTAChangeMorePageFlyoutButtonTextIxpEnabled
 
 return function(p1)
-	-- upvalues: FFlagEnableFlyoutSessionTrackingModule (copy), UseFlyoutSessionTrackingModule (copy), FFlagFlyoutTradesEntryExposureLoggingModule (copy), UseFlyoutTradesEntryExposureLoggingModule (copy), FFlagFlyoutProfileEntryExposureLoggingModule (copy), FFlagEnableMeTabProfile (copy), UseFlyoutProfileEntryExposureLoggingModule (copy), FFlagCTAChangeMorePageFlyoutButtonTextIxpEnabled (copy), UseCTAChangeMorePageFlyoutButtonTextExposureLoggingModule (copy), FFlagFlyoutTradesEntryImpressionLoggingModule (copy), UseFlyoutTradesEntryImpressionLoggingModule (copy), FFlagFlyoutSidePanelIxpEnabledModule (copy), UseFlyoutSidePanelExposureLoggingModule (copy)
-	if FFlagEnableFlyoutSessionTrackingModule then
-		UseFlyoutSessionTrackingModule()
-	end
+	-- upvalues: FFlagFlyoutTradesEntryExposureLoggingModule (copy), UseFlyoutTradesEntryExposureLoggingModule (copy), FFlagFlyoutProfileEntryExposureLoggingModule (copy), FFlagEnableMeTabProfile (copy), UseFlyoutProfileEntryExposureLoggingModule (copy), FFlagCTAChangeMorePageFlyoutButtonTextIxpEnabled (copy), UseCTAChangeMorePageFlyoutButtonTextExposureLoggingModule (copy), FFlagFlyoutTradesEntryImpressionLoggingModule (copy), UseFlyoutTradesEntryImpressionLoggingModule (copy), FFlagFlyoutSidePanelIxpEnabledModule (copy), UseFlyoutSidePanelExposureLoggingModule (copy)
 	if FFlagFlyoutTradesEntryExposureLoggingModule then
 		UseFlyoutTradesEntryExposureLoggingModule()
 	end

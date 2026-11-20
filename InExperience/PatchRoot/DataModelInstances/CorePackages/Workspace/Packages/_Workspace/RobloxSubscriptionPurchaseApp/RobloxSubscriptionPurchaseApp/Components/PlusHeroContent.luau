@@ -7,6 +7,7 @@ local Text = FoundationModule.Text
 local Image = FoundationModule.Image
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local GuiService = game:GetService("GuiService")
+local FFlagClaimSheetWaitForCampaignStringsModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagClaimSheetWaitForCampaignStrings)
 local FFlagTTOnboardingSheetModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagTTOnboardingSheet)
 local FFlagOnboardingSheetLayout = require(Parent.SharedFlags).FFlagOnboardingSheetLayout
 local _UDim2 = UDim2.fromScale(0.344, 0.574)
@@ -14,9 +15,10 @@ local _UDim2_1 = UDim2.fromScale(0.626, 0.405)
 local _Vector2 = Vector2.new(280, 158)
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), GuiService (copy), FFlagTTOnboardingSheetModule (copy), _Vector2 (copy), FFlagOnboardingSheetLayout (copy), ReactModule (copy), View (copy), _UDim2_1 (copy), Image (copy), _UDim2 (copy), Text (copy)
+	-- upvalues: UseTokensFunction (copy), GuiService (copy), FFlagOnboardingSheetLayout (copy), FFlagClaimSheetWaitForCampaignStringsModule (copy), FFlagTTOnboardingSheetModule (copy), _Vector2 (copy), ReactModule (copy), View (copy), _UDim2_1 (copy), Image (copy), _UDim2 (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IsNotViewportDisplaySizeMatch = GuiService.ViewportDisplaySize ~= Enum.DisplaySize.Small
+	local FFlagOnboardingSheetLayout1 = FFlagOnboardingSheetLayout or FFlagClaimSheetWaitForCampaignStringsModule and p1.omitsMissingTitle == true
 	local _UDim2_2 = UDim2.fromOffset((if IsNotViewportDisplaySizeMatch then 160 else 280) * UseTokensResult.Config.UI.Scale, (if IsNotViewportDisplaySizeMatch then 90 else 158) * UseTokensResult.Config.UI.Scale)
 	local AccentPictogram = if FFlagTTOnboardingSheetModule then p1.accentPictogram else nil
 	local ZeroVector = Vector2.zero
@@ -110,7 +112,7 @@ return function(p1)
 				Size = _UDim2_2
 			})
 		}) else nil,
-		HeroTitle = if p1.title or not FFlagOnboardingSheetLayout then ReactModule.createElement(Text, {
+		HeroTitle = if p1.title or not FFlagOnboardingSheetLayout1 then ReactModule.createElement(Text, {
 			LayoutOrder = 2,
 			Text = p1.title,
 			tag = {
