@@ -5,6 +5,7 @@ local FoundationModule = require(Parent.Foundation)
 local View = FoundationModule.View
 local Text = FoundationModule.Text
 local Avatar = FoundationModule.Avatar
+local Icon = FoundationModule.Icon
 local Button = FoundationModule.Button
 local TextInput = FoundationModule.TextInput
 local SearchInput = FoundationModule.SearchInput
@@ -18,8 +19,10 @@ local AvatarSize = FoundationModule.Enums.AvatarSize
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local FillBehavior = FoundationModule.Enums.FillBehavior
 local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
 local InputFocusBehavior = FoundationModule.Enums.InputFocusBehavior
 local InputSize = FoundationModule.Enums.InputSize
+local SnapPoints = { 0.5, 0.9 }
 
 local function renderPlayerRow(p1, p2, LayoutOrder)
 	-- upvalues: ReactModule (copy), View (copy), Avatar (copy), AvatarSize (copy), Text (copy), Button (copy), IconName (copy), ButtonVariant (copy), InputSize (copy)
@@ -183,7 +186,7 @@ local function renderPrivateServerLink(ViewProps)
 		}, {
 			Text = ReactModule.createElement(View, { tag = "col fill gap-xsmall auto-y", LayoutOrder = 1 }, {
 				Heading = ReactModule.createElement(Text, {
-					tag = "auto-xy text-heading-small content-emphasis",
+					tag = "auto-xy text-title-large content-emphasis",
 					LayoutOrder = 1,
 					Text = ViewProps.locales.privateServerLink
 				}),
@@ -222,21 +225,39 @@ local function renderPrivateServerLink(ViewProps)
 end
 
 return function(ViewProps)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Sheet (copy), Text (copy), View (copy), TextInput (copy), PeopleSearch (copy), renderAddedPlayerChips (copy), ScrollView (copy), renderPlayerList (copy), Toggle (copy), renderPrivateServerLink (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Sheet (copy), SnapPoints (copy), Text (copy), View (copy), Icon (copy), IconName (copy), IconSize (copy), TextInput (copy), PeopleSearch (copy), renderAddedPlayerChips (copy), ScrollView (copy), renderPlayerList (copy), Toggle (copy), renderPrivateServerLink (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy)
 	return ReactModule.createElement(Sheet.Root, {
 		preferCenterSheet = true,
 		testId = "VIPServerConfigurationView",
 		onClose = ViewProps.onDismiss,
+		snapPoints = SnapPoints,
+		defaultSnapPointIndex = #SnapPoints,
 		ref = ViewProps.focusRootRef
 	}, {
 		Header = ReactModule.createElement(Sheet.Header, {}, {
 			Title = ReactModule.createElement(Text, {
-				tag = "auto-xy text-heading-small text-align-x-left content-default",
+				tag = "auto-xy text-heading-small text-align-x-left content-emphasis",
 				Text = ViewProps.locales.title
 			})
 		}),
 		Content = ReactModule.createElement(Sheet.Content, { LayoutOrder = 2 }, {
 			Body = ReactModule.createElement(View, { tag = "col gap-large size-full-0 auto-y" }, {
+				Purchased = ReactModule.createElement(View, {
+					tag = "row align-y-center gap-small size-full-0 auto-y",
+					LayoutOrder = 0
+				}, {
+					Icon = ReactModule.createElement(Icon, {
+						LayoutOrder = 1,
+						name = IconName.CircleCheck,
+						size = IconSize.Small
+					}),
+					Text = ReactModule.createElement(Text, {
+						testId = "--purchase-prompt-text-purchased",
+						tag = "fill auto-y text-body-medium text-wrap text-align-x-left content-default",
+						LayoutOrder = 2,
+						Text = ViewProps.locales.purchased
+					})
+				}),
 				ServerName = ReactModule.createElement(TextInput, {
 					testId = "--purchase-prompt-textinput-server-name",
 					LayoutOrder = 1,
@@ -250,7 +271,7 @@ return function(ViewProps)
 					LayoutOrder = 2
 				}, {
 					Heading = ReactModule.createElement(Text, {
-						tag = "auto-xy text-heading-small content-emphasis",
+						tag = "auto-xy text-title-large content-emphasis",
 						LayoutOrder = 1,
 						Text = ViewProps.locales.whoCanJoin
 					}),

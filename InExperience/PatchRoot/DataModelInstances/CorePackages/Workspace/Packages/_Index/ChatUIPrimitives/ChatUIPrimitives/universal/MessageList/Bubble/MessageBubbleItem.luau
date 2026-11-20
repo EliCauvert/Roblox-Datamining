@@ -16,7 +16,10 @@ local ReplyQuoteModule = require(script.Parent.Parent.Reply.ReplyQuote)
 local GetBubbleToneModule = require(script.Parent.getBubbleTone)
 local UseMessageBubbleViewModelModule = require(script.Parent.useMessageBubbleViewModel)
 local UseFinishMessageRenderIntervalsModule = require(script.Parent.Parent.useFinishMessageRenderIntervals)
+local FinishMessageRenderIntervalsModule = require(script.Parent.Parent.FinishMessageRenderIntervals)
+local MessageRenderedContextModule = require(script.Parent.Parent.MessageRenderedContext)
 local FFlagExpChatMessageListScrollParityModule = require(ChatUIPrimitives.Flags.FFlagExpChatMessageListScrollParity)
+local FFlagExpChatMessageListFinishIntervalsModule = require(ChatUIPrimitives.Flags.FFlagExpChatMessageListFinishIntervals)
 local WithMessageContentModule = require(script.Parent.Parent.Parent.ContentKinds.withMessageContent)
 local config = {
 	plainText = WithMessageContentModule(require(script.Parent.Parent.Parent.ContentKinds.PlainText.PlainTextBubble), require(script.Parent.Parent.Parent.ContentKinds.PlainText.PlainTextContentModel).getDetail),
@@ -25,10 +28,11 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: UseMessageBubbleViewModelModule (copy), FFlagExpChatMessageListScrollParityModule (copy), UseFinishMessageRenderIntervalsModule (copy), FoundationModule (copy), SizingModule (copy), CreateNextOrderFunction (copy), ReactModule (copy), GetBubbleToneModule (copy), config (copy), ReplyQuoteModule (copy), BubbleUsernameModule (copy), BubbleViewModule (copy), FFlagExpChatMessageAvatarAdornmentModule (copy), MessageAvatarModule (copy), BubbleAvatarModule (copy), BubbleStyleContextModule (copy)
+	-- upvalues: UseMessageBubbleViewModelModule (copy), FFlagExpChatMessageListFinishIntervalsModule (copy), ReactModule (copy), MessageRenderedContextModule (copy), FFlagExpChatMessageListScrollParityModule (copy), UseFinishMessageRenderIntervalsModule (copy), FoundationModule (copy), SizingModule (copy), CreateNextOrderFunction (copy), GetBubbleToneModule (copy), config (copy), ReplyQuoteModule (copy), BubbleUsernameModule (copy), BubbleViewModule (copy), FFlagExpChatMessageAvatarAdornmentModule (copy), MessageAvatarModule (copy), BubbleAvatarModule (copy), BubbleStyleContextModule (copy), FinishMessageRenderIntervalsModule (copy)
 	local UseMessageBubbleViewModelModuleResult = UseMessageBubbleViewModelModule(p1.itemSignal)
+	local UseContextResult = if FFlagExpChatMessageListFinishIntervalsModule then ReactModule.useContext(MessageRenderedContextModule) else nil
 	
-	if FFlagExpChatMessageListScrollParityModule then
+	if FFlagExpChatMessageListScrollParityModule and not FFlagExpChatMessageListFinishIntervalsModule then
 		UseFinishMessageRenderIntervalsModule(p1.itemSignal)
 	end
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
@@ -127,6 +131,7 @@ return function(p1)
 				["padding-top-small"] = IsFirst,
 				["padding-top-xxsmall"] = not IsFirst
 			}
-		}, t1)
+		}, t1),
+		Finish = if FFlagExpChatMessageListFinishIntervalsModule and (FFlagExpChatMessageListScrollParityModule or UseContextResult ~= nil) then ReactModule.createElement(FinishMessageRenderIntervalsModule, { itemSignal = p1.itemSignal }) else nil
 	})
 end

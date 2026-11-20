@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("LuaAppSduiSearchResultsVideoPreview", false) and (require(script.Parent.FFlagLuaAppVideoAutoplayFeedElection) and require(script.Parent.FFlagLuaAppVideoAutoplayPause))

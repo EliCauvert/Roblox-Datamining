@@ -180,6 +180,7 @@ return function(p4)
 	local UseLiveVersionCardViewModelModuleResult = UseLiveVersionCardViewModelModule({
 		placeId = p4.placeId,
 		universeId = p4.universeId,
+		sessionId = p4.sessionId,
 		testId = if p4.testId then `{p4.testId}-live-version-card` else nil
 	})
 	local UseAgentRollbackRestoreResult = useAgentRollbackRestore(p4, RestoreFailed, UseSignalStateResult2)
@@ -200,6 +201,7 @@ return function(p4)
 		entry = UseMemoResult2[1],
 		placeId = p4.placeId,
 		universeId = p4.universeId,
+		sessionId = p4.sessionId,
 		onClose = p4.onClose,
 		permissions = UseGamePermissionsModuleResult,
 		testId = if p4.testId then `{p4.testId}-latest-version-card` else nil

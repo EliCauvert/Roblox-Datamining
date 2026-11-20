@@ -17,10 +17,11 @@ local UseRenderEntityModule = require(UserList.Hooks.useRenderEntity)
 local UseIsWideModeFunction = require(Parent.SocialCommon).Hooks.useIsWideMode
 local AdjustHorizontalUserListSizeForMobile = game:DefineFastFlag("AdjustHorizontalUserListSizeForMobile", false)
 local FFlagLuaAppCompositionAlways = require(Parent.SharedFlags).FFlagLuaAppCompositionAlways
+local FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint = require(Parent.SharedFlags).FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint
 local FFlagUserListRowSelectionOriginSourceModule = require(UserList.Flags.FFlagUserListRowSelectionOriginSource)
 
 return function(p1)
-	-- upvalues: FFlagLuaAppCompositionAlways (copy), ReactModule (copy), UseIsWideModeFunction (copy), AdjustHorizontalUserListSizeForMobile (copy), CollectionItemSize (copy), UsePageSideMarginFunction (copy), UseCollectionLayoutParamsFunction (copy), UseCompactTileHeightModule (copy), UseEntitiesModule (copy), UseEntitySelectionHandlerModule (copy), FFlagUserListRowSelectionOriginSourceModule (copy), UseRenderEntityModule (copy), EnumsModule (copy), CryoModule (copy), View (copy), CollectionCarousel (copy)
+	-- upvalues: FFlagLuaAppCompositionAlways (copy), ReactModule (copy), UseIsWideModeFunction (copy), AdjustHorizontalUserListSizeForMobile (copy), CollectionItemSize (copy), UsePageSideMarginFunction (copy), UseCollectionLayoutParamsFunction (copy), UseCompactTileHeightModule (copy), UseEntitiesModule (copy), UseEntitySelectionHandlerModule (copy), FFlagUserListRowSelectionOriginSourceModule (copy), UseRenderEntityModule (copy), EnumsModule (copy), CryoModule (copy), FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint (copy), View (copy), CollectionCarousel (copy)
 	local FFlagLuaAppCompositionAlways1 = FFlagLuaAppCompositionAlways or p1.appCompositionEnabled
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseRefResult = ReactModule.useRef(nil)
@@ -51,6 +52,7 @@ return function(p1)
 		ReactModule.createElement(CollectionCarousel, (CryoModule.Dictionary.join({}, p1.collectionCarouselConfigs or {}, {
 			title = p1.header and p1.header.title or nil,
 			onActivateHeader = p1.header and p1.header.onTitleActivated or nil,
+			headerMenuItems = if FFlagLuaAppLegacyHomePersonalizedRecommendationsEntryPoint and p1.header then p1.header.menuItems else nil,
 			containerRef = UseStateResult2,
 			scrollingFrameRef = ScrollingFrameRef,
 			items = ReactModule.useMemo(function()

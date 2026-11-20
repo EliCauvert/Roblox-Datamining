@@ -25,13 +25,14 @@ local FFlagBuildExperienceAnalytics = SharedFlagsModule.FFlagBuildExperienceAnal
 local FFlagBuildExperienceInstanceSelection = SharedFlagsModule.FFlagBuildExperienceInstanceSelection
 local FFlagBuildExperienceInGameCaptureToChat = SharedFlagsModule.FFlagBuildExperienceInGameCaptureToChat
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
+local FFlagBuildExperienceInGameShellComposer = SharedFlagsModule.FFlagBuildExperienceInGameShellComposer
 local UseGamePermissionsModule = require(BuildExperience.useGamePermissions)
 local UseChatSheetFundingRecoveryModule = require(BuildExperience.Components.ChatSheet.useChatSheetFundingRecovery)
 
 local function noop() end
 
 return function(p1)
-	-- upvalues: noop (copy), GetAssistantBuildStoreModule (copy), SignalsReactModule (copy), GetCreatorAgentResumeStoreModule (copy), GetCurrentExperienceProjectModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), FFlagBuildExperienceChatSheetDesktopAutoFocusModule (copy), ResponsiveModule (copy), UseChatSessionCoreModule (copy), FFlagBuildExperienceModelPickerModule (copy), UseBuildModelSelectionModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), UseBuildPromptDraftModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), UseChatPlaytestFooterModule (copy), FFlagBuildExperienceInstanceSelection (copy), GetPlayButtonStoreModule (copy), ReactModule (copy), ChatTypesModule (copy), FFlagBuildExperienceInGameCaptureToChat (copy), FFlagBuildExperienceAnalytics (copy), UseChatSheetFundingRecoveryModule (copy), FFlagBuildExperienceAnswerFormModule (copy)
+	-- upvalues: noop (copy), GetAssistantBuildStoreModule (copy), SignalsReactModule (copy), GetCreatorAgentResumeStoreModule (copy), GetCurrentExperienceProjectModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), FFlagBuildExperienceChatSheetDesktopAutoFocusModule (copy), ResponsiveModule (copy), UseChatSessionCoreModule (copy), FFlagBuildExperienceInGameShellComposer (copy), ReactModule (copy), FFlagBuildExperienceModelPickerModule (copy), UseBuildModelSelectionModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), UseBuildPromptDraftModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), UseChatPlaytestFooterModule (copy), FFlagBuildExperienceInstanceSelection (copy), GetPlayButtonStoreModule (copy), ChatTypesModule (copy), FFlagBuildExperienceInGameCaptureToChat (copy), FFlagBuildExperienceAnalytics (copy), UseChatSheetFundingRecoveryModule (copy), FFlagBuildExperienceAnswerFormModule (copy)
 	local OnClose = p1.onClose or noop
 	local NoIsOpen = p1.isOpen == nil or p1.isOpen
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetAssistantBuildStoreModule().getIsDisabled)
@@ -62,8 +63,20 @@ return function(p1)
 		autoFocusComposer = IsAutoFocusComposer,
 		focusComposerWhen = NoIsOpen,
 		hydrateHistoryWhen = NoIsOpen,
-		sendMessageWhen = not NoCanEditOnBuild
+		sendMessageWhen = not NoCanEditOnBuild,
+		onComposerTextChanged = p1.onComposerTextChanged
 	})
+	
+	if FFlagBuildExperienceInGameShellComposer then
+		local v2 = #UseChatSessionCoreModuleResult.composerImages + #UseChatSessionCoreModuleResult.composerResourceAttachments
+		local OnComposerAttachmentCountChangedFunction = p1.onComposerAttachmentCountChanged
+		ReactModule.useEffect(function()
+			-- upvalues: OnComposerAttachmentCountChangedFunction (copy), v2 (copy)
+			if OnComposerAttachmentCountChangedFunction ~= nil then
+				OnComposerAttachmentCountChangedFunction(v2)
+			end
+		end, { v2, OnComposerAttachmentCountChangedFunction })
+	end
 	local UseBuildModelSelectionModuleResult = if FFlagBuildExperienceModelPickerModule then UseBuildModelSelectionModule(UniverseId, p1.modelSelectionDraftId, p1.modelPicker, UseChatSessionCoreModuleResult.modelSessionModels, UseChatSessionCoreModuleResult.hasPreparedModelSession, UseChatSessionCoreModuleResult.internalTesting) else nil
 	
 	if FFlagBuildExperienceMonetizationNativeUIModule then
@@ -162,7 +175,7 @@ return function(p1)
 	
 	return {
 		isOpen = NoIsOpen,
-		creatorCreditRecovery = if FFlagBuildExperienceModelPickerModule then UseChatSheetFundingRecoveryModule(UseChatSessionCoreModuleResult, UseBuildModelSelectionModuleResult, UniverseId, PlaceId, p1.sessionId) else nil,
+		creatorCreditRecovery = if FFlagBuildExperienceModelPickerModule then UseChatSheetFundingRecoveryModule(UseChatSessionCoreModuleResult, UseBuildModelSelectionModuleResult, UniverseId, PlaceId, p1.sessionId, NoIsOpen) else nil,
 		onClose = OnClose,
 		snapPoints = p1.snapPoints,
 		defaultSnapPointIndex = p1.defaultSnapPointIndex,
@@ -195,6 +208,8 @@ return function(p1)
 		onSend = UseChatSessionCoreModuleResult.sendMessage,
 		onStop = UseChatSessionCoreModuleResult.stopAssistantResponse,
 		onOpenChat = UseResult,
-		topBarPillMenuTarget = p1.topBarPillMenuTarget
+		topBarPillMenuTarget = p1.topBarPillMenuTarget,
+		onComposerSelectionActivated = p1.onComposerSelectionActivated,
+		onComposerCaptureActivated = p1.onComposerCaptureActivated
 	}
 end

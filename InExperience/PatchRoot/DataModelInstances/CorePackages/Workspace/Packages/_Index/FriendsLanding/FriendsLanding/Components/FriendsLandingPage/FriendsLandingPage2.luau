@@ -338,7 +338,7 @@ return function(p1)
 					maxWidth = if FFlagConnectionManagementChips then 640 else nil,
 					canAccessTrustedContacts = if FFlagConnectionManagementChips then Enabled else nil
 				}),
-				NoResultsView = if IsTotalFriendCountAbove then ReactModule.createElement(EmptyResultsViewModule, { layoutOrder = 6 }) else nil,
+				NoResultsView = if IsTotalFriendCountAbove and (not FFlagTrustedFriendCandidatesSection or not UseMemoResult) then ReactModule.createElement(EmptyResultsViewModule, { layoutOrder = 6 }) else nil,
 				NoFriendsView = if IsTotalFriendCountMatch then ReactModule.createElement(NoFriendsViewModule, {
 					layoutOrder = 6,
 					pageLoadingTimeReport = PageLoadingTimeReport,

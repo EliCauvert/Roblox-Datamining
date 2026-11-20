@@ -2395,6 +2395,8 @@ Feature.Build.Label.AdvancedModel,Nâng cao
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,Tất cả trò chơi
 Feature.Build.Label.AmountAvailable,Còn {AMOUNT}
+Feature.Build.Label.AttachmentCountPlural,{count} tệp đính kèm
+Feature.Build.Label.AttachmentCountSingular,1 tệp đính kèm
 Feature.Build.Label.Autosaved,Đã tự động lưu
 Feature.Build.Label.Available,còn lại
 Feature.Build.Label.AvailableForPurchase,Có thể mua
@@ -2438,6 +2440,7 @@ Feature.Build.Label.IconThumbnails,Biểu tượng và hình nhỏ
 Feature.Build.Label.Images2D,Hình ảnh 2D
 Feature.Build.Label.InProgress,Đang thực hiện
 Feature.Build.Label.InputNeeded,Cần thông tin đầu vào
+Feature.Build.Label.InspirationTab,Cảm hứng
 Feature.Build.Label.InternalSpec,Thông số nội bộ
 Feature.Build.Label.InternalTesting,Thử nghiệm nội bộ
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -3359,9 +3362,23 @@ Feature.Chat.Title.NewChat,Cuộc trò chuyện mới
 Feature.Chat.Toast.Error.InvalidUserSelected,Không thể thêm một hoặc nhiều người vào danh sách này
 Feature.CloudClient.Action.PlayWithoutCloudPlay,Chơi mà không dùng Cloud Play
 Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play chạy trò chơi bằng các máy tính của Roblox, do đó trò chơi có thể tải nhanh hơn và ít bị sập hơn. Tính năng này chỉ hoạt động khi bạn đang chơi trò chơi này."
+Feature.CloudClient.Description.GalleryUnavailableCloudPlay,Hãy tham gia lại mà không dùng Cloud Play để sử dụng thư viện của bạn.
+Feature.CloudClient.Description.GalleryUnavailableRobloxReality,Hãy tham gia lại mà không dùng Restyle để sử dụng thư viện của bạn.
+Feature.CloudClient.Description.RobloxRealityPreview,Restyle là bản xem trước sớm. Hình ảnh có thể khác so với trò chơi gốc.
 Feature.CloudClient.Heading.CloudPlayOffer,Chơi với Cloud Play
+Feature.CloudClient.Heading.GalleryUnavailableCloudPlay,Cloud Play chưa hỗ trợ thư viện.
+Feature.CloudClient.Heading.GalleryUnavailableRobloxReality,Restyle chưa hỗ trợ thư viện.
+Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Cloud Play chưa hỗ trợ tính năng Chụp.
+Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Restyle chưa hỗ trợ tính năng Chụp.
+Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Play không hoạt động. Bạn đang chơi ở chế độ bình thường.
+Feature.CloudClient.Label.RobloxReality,Restyle
+Feature.CloudClient.Label.RobloxRealityDemoLength,Dùng thử bản demo {minutes} phút
+Feature.CloudClient.Label.RobloxRealityEndingSoon,"Restyle sẽ kết thúc sau 1 phút, và khi đó bạn sẽ rời khỏi trò chơi."
 Feature.CloudClient.Label.RobloxRealityGraphics,"Trò chơi của bạn, khoác diện mạo mới"
 Feature.CloudClient.Label.RobloxRealityPlusOnly,Chỉ dành cho người đăng ký Plus
+Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,Cloud Play chưa hỗ trợ chế độ Tự xem.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,Restyle chưa hỗ trợ chế độ Tự xem.
+Feature.CloudClient.Label.TimeLeft,Thời gian còn lại
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,Hãy Để Bạn Bè Tìm Thấy Bạn
 Feature.Contacts.Action.Invite,Mời
@@ -3676,6 +3693,7 @@ Feature.FriendsActivityFeed.Label.ViewRecentActivity,Xem hoạt động gần đ
 Feature.FriendsMenu.Label.SelectedFriendsCount,Đã chọn {numerator}/{denominator} người bạn
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,Đã chọn {selectedCount} người bạn
 Feature.GameBadges.Label.Experience,
+Feature.GameDetails.Action.Continue,
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,
 Feature.GameDetails.Action.NotInterested,Không quan tâm
@@ -3707,8 +3725,10 @@ Feature.GameDetails.Label.WhyThisAd,
 Feature.GameDetails.Label.Yes,
 Feature.GameDetails.Message.AdPreferences,Tùy chọn ưu tiên đối với quảng cáo
 Feature.GameDetails.Message.AnonymousFeedbackTermsOfUse,Các câu trả lời sẽ được chia sẻ ẩn danh và cấu thành Ý kiến đóng góp theo {underlineStart}Điều khoản sử dụng của Roblox{underlineEnd}.
+Feature.GameDetails.Message.ExternalLinkWarning,"Khi nhấp chuột vào ""Tiếp tục"", bạn sẽ được chuyển hướng đến một trang web khác không do Roblox vận hành hay sở hữu. Trang web đó có thể có những điều khoản và chính sách quyền riêng tư khác."
 Feature.GameDetails.Message.HelpImproveExperience,Giúp chúng tôi cải thiện trải nghiệm của bạn
 Feature.GameDetails.Message.HidingExperienceQuestion,Vì sao bạn ẩn trải nghiệm này?
+Feature.GameDetails.Message.LeavingRobloxTitle,Đang Rời Khỏi Roblox
 Feature.GameDetails.Message.PurchaseGameV2,Mở khóa quyền truy cập cho {gameName} với {X} Robux?
 Feature.GameDetails.Message.SponsoredDisclosure.Error,Không thể hiển thị thông tin tài trợ do lỗi tạm thời.
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"Bạn nhìn thấy nội dung được tài trợ này dựa trên các yếu tố không được cá nhân hóa như thông tin thiết bị, vị trí và độ tuổi để hiển thị nội dung phù hợp với bạn. Nhà sáng tạo trải nghiệm là {CreatorName}. Khoản tài trợ được {PayerName} chi trả. Để tìm hiểu thêm, vui lòng truy cập trang “Quyền riêng tư và mức độ nội dung người lớn” trong phần cài đặt tài khoản tại đây:"
@@ -3728,9 +3748,11 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Đã mở thông báo cho {expe
 Feature.GameJoin.Description.DifferentServer,Bạn sẽ bắt đầu ở máy chủ khác
 Feature.GameJoin.Label.PlayTogether,Các bạn có thể chơi cùng nhau
 Feature.GameJoin.Label.PlayTogetherSoon,Các bạn sẽ sớm có thể chơi cùng nhau
+Feature.GameJoin.Label.RecentCoplay,Gần đây hai bạn đã chơi cùng nhau
 Feature.GamePage.Action.BackToTop,Về đầu trang
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,Được Tài Trợ
+Feature.GamePage.LabelCancelField,
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,Trải nghiệm không khả dụng do trạng thái xác thực tuổi của bạn.
 Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,Khách không thể tham gia trải nghiệm này.
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,Bạn phải mua để ghé thăm trải nghiệm này.
@@ -4952,6 +4974,7 @@ Feature.Toast.Username.Copied,Đã sao chép tên người dùng vào bộ nhớ
 Feature.Toast.VoteError.AssetNotVoteable,Trải nghiệm có thể không đánh giá được.
 Feature.Toast.VoteError.Default,Hành động không khả dụng.
 Feature.Toast.VoteError.FloodCheckThresholdMet,Bạn đang đánh giá quá nhanh.
+Feature.Toast.VoteError.NotSaved,Không lưu được lượt bình chọn
 Feature.Toast.VoteError.PlayGame,Bạn phải vào trước thì mới đánh giá trải nghiệm này được.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,Hiện tại bạn không thể kiểm tra độ tuổi do đã nhiều lần vi phạm Tiêu chuẩn cộng đồng của chúng tôi. Bạn có thể thử lại sau khi lệnh hạn chế kết thúc.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,Bị đình chỉ kiểm tra độ tuổi
@@ -5153,7 +5176,7 @@ IAPExperience.InsufficientRobux.Title.InsufficientRobux,
 IAPExperience.LeaveRoblox.Action.Cancel,
 IAPExperience.LeaveRoblox.Action.Continue,
 IAPExperience.LeaveRoblox.Text.ExternalWebsiteWarning,"Khi nhấp vào ""Tiếp tục"", bạn sẽ được chuyển hướng đến một trang web khác không do Roblox vận hành hay sở hữu. Trang web đó có thể có những điều khoản và chính sách quyền riêng tư khác."
-IAPExperience.LeaveRoblox.Title.LeavingRoblox,Đang Rời Khỏi Roblox
+IAPExperience.LeaveRoblox.Title.LeavingRoblox,
 IAPExperience.Loading.Text.PurchasingItem,Đang mua vật phẩm...
 IAPExperience.Loading.Text.PurchasingRobux,Đang mua Robux...
 IAPExperience.Loading.Text.WaitingForPurchase,Đang chờ mua...

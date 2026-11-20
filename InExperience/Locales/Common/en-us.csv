@@ -637,6 +637,7 @@ CommonUI.UserAgreements.Popup.Agreement.TransferPersonalInformationPolicy,Transf
 CommonUI.UserAgreements.Popup.DefaultAgreementTitle,Updated Agreement
 CommonUI.UserAgreements.Popup.TitleOnWebview,
 CoreScripts.Ads.Action.Close,
+CoreScripts.Ads.Action.Watch,Watch
 CoreScripts.Ads.ImmersiveBrandedAds.WhyThisAd,This non-personalized ad is visible to users in this experience. {AdvertiserName} is the Advertiser and paid for this ad.
 CoreScripts.Ads.Label.IllegalContentReportingLink,Report illegal content or content harmful to children
 CoreScripts.Ads.Label.InExperienceDisclosureDynamic,"Roblox did not use behavioral information to deliver this ad. You are seeing this ad based on information including device type, location, and age to serve you appropriate and relevant ads. The advertiser is {AdvertiserName}."
@@ -647,6 +648,8 @@ CoreScripts.Ads.Label.ReportAd,Report Ad
 CoreScripts.Ads.Label.RewardedVideoEligibleDisclaimer,This is a test ad. Real ads will be shown in your experience.
 CoreScripts.Ads.Label.RewardedVideoExitConfirmation,You're so close to earning your reward! Are you sure you want to exit?
 CoreScripts.Ads.Label.RewardedVideoIneligibleDisclaimer,This is a test ad. Real ads won’t be shown because your experience is not eligible.
+CoreScripts.Ads.Label.SkipAd,Skip ad
+CoreScripts.Ads.Label.SkipIn,Skip in {RBX_NUMBER}
 CoreScripts.Ads.Label.SponsoredAds,Sponsored
 CoreScripts.Ads.Label.SponsoredAdsDisclosureStatic,"Sponsored Experiences are paid for by Creators. For EU users, they may be shown to you based on general information about your device type, location, and demographics. Outside of the EU, ads may also be shown based on additional information."
 CoreScripts.Ads.Label.Teleporting,Teleporting...
@@ -2395,6 +2398,8 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,All games
 Feature.Build.Label.AmountAvailable,{AMOUNT} available
+Feature.Build.Label.AttachmentCountPlural,{count} attachments
+Feature.Build.Label.AttachmentCountSingular,1 attachment
 Feature.Build.Label.Autosaved,Auto-saved
 Feature.Build.Label.Available,available
 Feature.Build.Label.AvailableForPurchase,Available to buy
@@ -2414,6 +2419,7 @@ Feature.Build.Label.DefaultDeveloperProductName,developer product
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,Deleted
 Feature.Build.Label.DescribeIdea,Describe an idea
+Feature.Build.Label.DescribeIdeaOrPick,Describe an idea or pick one below
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,Description: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Name: {NAME}
@@ -3701,6 +3707,7 @@ Feature.FriendsActivityFeed.Label.ViewRecentActivity,View Recent Activity
 Feature.FriendsMenu.Label.SelectedFriendsCount,{numerator}/{denominator} friends selected
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,{selectedCount} friends selected
 Feature.GameBadges.Label.Experience,
+Feature.GameDetails.Action.Continue,
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,Give feedback
 Feature.GameDetails.Action.NotInterested,Not interested
@@ -3732,8 +3739,10 @@ Feature.GameDetails.Label.WhyThisAd,Why this ad?
 Feature.GameDetails.Label.Yes,
 Feature.GameDetails.Message.AdPreferences,Ads Preferences
 Feature.GameDetails.Message.AnonymousFeedbackTermsOfUse,Responses are shared anonymously and constitute as Feedback per the {underlineStart}Roblox Terms of Use{underlineEnd}.
+Feature.GameDetails.Message.ExternalLinkWarning,"By clicking ""Continue"", you will be redirected to a website that is not owned or operated by Roblox. They may have different terms and privacy policies."
 Feature.GameDetails.Message.HelpImproveExperience,Help us improve your experience
 Feature.GameDetails.Message.HidingExperienceQuestion,Why are you hiding this experience?
+Feature.GameDetails.Message.LeavingRobloxTitle,Leaving Roblox
 Feature.GameDetails.Message.PurchaseGameV2,Unlock access to {gameName} for {X} Robux?
 Feature.GameDetails.Message.SponsoredDisclosure.Error,The sponsorship information could not be displayed due to a temporary error.
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"You are seeing this sponsored content based on non-personalized factors such as device info, location, and age to serve you appropriate content. The experience Creator is {CreatorName}. The sponsorship was paid for by {PayerName}. To learn more, please visit the ""Privacy & Content Maturity"" page under Settings in your account, here:"
@@ -3753,9 +3762,11 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Notifications turned on for {ex
 Feature.GameJoin.Description.DifferentServer,You'll start in a different server
 Feature.GameJoin.Label.PlayTogether,You can play together
 Feature.GameJoin.Label.PlayTogetherSoon,You can play together soon
+Feature.GameJoin.Label.RecentCoplay,You played together recently
 Feature.GamePage.Action.BackToTop,Back to top
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
+Feature.GamePage.LabelCancelField,
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,This experience is unavailable due to your age verification status.
 Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,Guests cannot join this experience.
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,To visit this experience purchase is required.
@@ -5190,7 +5201,7 @@ IAPExperience.InsufficientRobux.Title.InsufficientRobux,
 IAPExperience.LeaveRoblox.Action.Cancel,
 IAPExperience.LeaveRoblox.Action.Continue,
 IAPExperience.LeaveRoblox.Text.ExternalWebsiteWarning,"By clicking “Continue”, you will be redirected to a website that is not owned or operated by Roblox. They may have different terms and privacy policies."
-IAPExperience.LeaveRoblox.Title.LeavingRoblox,Leaving Roblox
+IAPExperience.LeaveRoblox.Title.LeavingRoblox,
 IAPExperience.Loading.Text.PurchasingItem,Purchasing item...
 IAPExperience.Loading.Text.PurchasingRobux,Purchasing Robux...
 IAPExperience.Loading.Text.WaitingForPurchase,Waiting for purchase...

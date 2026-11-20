@@ -26,7 +26,6 @@
 	GetFFlagPeoplePageLazyRenderCards = require(script.UI.FFlagPeoplePageLazyRenderCards),
 	GetFFlagFixPeoplePageCardTooltip = require(script.UI.FFlagFixPeoplePageCardTooltip),
 	FFlagEnablePeopleListLazyRender = require(script.UI.FFlagEnablePeopleListLazyRender),
-	GetFFlagPeoplePagePostponeInitialRender = require(script.UI.FFlagPeoplePagePostponeInitialRender),
 	FFlagPeoplePageRemoveSkeletons = require(script.UI.FFlagPeoplePageRemoveSkeletons),
 	FFlagPeoplePageRemoveUseMemoElements = require(script.UI.FFlagPeoplePageRemoveUseMemoElements),
 	FFlagPeopleCardsEnableVirtualizedGrid = require(script.UI.FFlagPeopleCardsEnableVirtualizedGrid),

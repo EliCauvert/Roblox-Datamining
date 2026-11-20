@@ -2231,7 +2231,7 @@ Feature.Build.Description.BuildReplyNotif,احصل على إشعار عندما 
 Feature.Build.Description.BuyRobuxToCreate,اشترِ المزيد من عملات Robux لمواصلة الإنشاء، أو انتظر حتى تتم إعادة تعيين استخدام ميزة Build المجاني غدًا.
 Feature.Build.Description.BuyUsageOrWait,اشترِ المزيد من استخدام ميزة Build باستخدام عملات Robux، أو انتظر حتى تتم إعادة تعيين الحد اليومي.
 Feature.Build.Description.CampaignRunDates,يُعرض إعلانك من {startDate} إلى {endDate}.
-Feature.Build.Description.CaptureWhilePlaytesting,التقط صورة أثناء اختبار اللعب، ثم أضفها إلى طلبك.
+Feature.Build.Description.CaptureWhilePlaytesting,التقط صورة أثناء اختبار اللعب لتُري Build ما تراه.
 Feature.Build.Description.ChooseAdCampaignLength,اختر المدة التي تريد أن يستمر فيها عرض إعلانك.
 Feature.Build.Description.ChoosePlaytesters,اختر أصدقاء لمعاينة لعبتك.
 Feature.Build.Description.CreateDeveloperProduct,إنشاء {NAME} مقابل {PRICE} من عملات Robux. لن يكون متاحًا للشراء بعد.
@@ -2331,6 +2331,8 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,كل الألعاب
 Feature.Build.Label.AmountAvailable,الاستخدام المتاح: {AMOUNT}
+Feature.Build.Label.AttachmentCountPlural,{count} من المرفقات
+Feature.Build.Label.AttachmentCountSingular,1 مرفق
 Feature.Build.Label.Autosaved,تم الحفظ تلقائيًا
 Feature.Build.Label.Available,المتاح
 Feature.Build.Label.AvailableForPurchase,متاح للشراء
@@ -2338,9 +2340,9 @@ Feature.Build.Label.BackToBuild,الرجوع إلى البناء
 Feature.Build.Label.Building,جارٍ العمل…
 Feature.Build.Label.CaptureLibrary,مكتبة اللقطات
 Feature.Build.Label.CaptureSelectionCount,تم تحديد {SELECTED_COUNT} من أصل {MAX_SELECTIONS}
-Feature.Build.Label.CaptureStepAddImages,"اضغط على ""إضافة صور"" لإرفاق لقطتك"
+Feature.Build.Label.CaptureStepAddImages,اختر <b>إضافة صور</b> لإضافة اللقطة إلى الدردشة
 Feature.Build.Label.CaptureStepPlaytest,شغّل اختبار اللعب
-Feature.Build.Label.CaptureStepTapCamera,"اضغط على ""الكاميرا"" في شريط أدوات ميزة Build"
+Feature.Build.Label.CaptureStepTapCamera,اختر أيقونة الكاميرا أسفل الشاشة
 Feature.Build.Label.ContentRating,تصنيف المحتوى
 Feature.Build.Label.CreatedDate,{MONTH} {DAY}، {YEAR}
 Feature.Build.Label.CreatorHub,مركز المصمم
@@ -2350,6 +2352,7 @@ Feature.Build.Label.DefaultDeveloperProductName,منتج المطوّر
 Feature.Build.Label.DefaultModel,افتراضي
 Feature.Build.Label.Deleted,تم الحذف
 Feature.Build.Label.DescribeIdea,صِف فكرتك
+Feature.Build.Label.DescribeIdeaOrPick,صِف فكرتك أو اختر واحدة مما يلي
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,الوصف: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,الاسم: {NAME}
@@ -3295,23 +3298,33 @@ Feature.Chat.Title.FriendsChat,دردشة الأصدقاء
 Feature.Chat.Title.NewChat,دردشة جديدة
 Feature.Chat.Toast.Error.InvalidUserSelected,لا يمكن إضافة شخص واحد أو أكثر من الأشخاص المُدرجين ضمن هذه القائمة
 Feature.CloudClient.Action.PlayWithoutCloudPlay,اللعب بدون Cloud Play
+Feature.CloudClient.Action.PlayWithoutRobloxReality,اللعب بدون {productName}
+Feature.CloudClient.Action.TryRobloxReality,جرّب ميزة {productName}
 Feature.CloudClient.Description.CloudPlayOffer,تشغّل Cloud Play اللعبة على أجهزة كمبيوتر Roblox، لذا قد تُحمَّل بشكل أسرع وتتعطل بشكل أقل. وتعمل فقط أثناء لعبك هذه اللعبة.
 Feature.CloudClient.Description.GalleryUnavailableCloudPlay,انضم مجددًا بدون Cloud Play لاستخدام معرضك.
 Feature.CloudClient.Description.GalleryUnavailableRobloxReality,انضم مجددًا بدون Restyle لاستخدام معرضك.
+Feature.CloudClient.Description.GalleryUnavailableRobloxRealityV2,انضم مجددًا بدون {productName} لاستخدام معرضك.
+Feature.CloudClient.Description.RobloxRealityOffer,تمنح ميزة {productName} ألعابك المفضلة مظهرًا جديدًا ومختلفًا. جرّب النسخة التجريبية المبكرة، ثم أخبرنا برأيك.
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle نسخة تجريبية مبكرة، وقد يختلف شكل اللعبة عن الأصل.
+Feature.CloudClient.Description.RobloxRealityPreviewV2,ميزة {productName} نسخة تجريبية مبكرة، وقد يختلف شكل اللعبة عن الأصل.
 Feature.CloudClient.Heading.CloudPlayOffer,العب باستخدام Cloud Play
 Feature.CloudClient.Heading.GalleryUnavailableCloudPlay,المعرض غير متاح في Cloud Play حتى الآن.
 Feature.CloudClient.Heading.GalleryUnavailableRobloxReality,المعرض غير متاح مع Restyle حتى الآن.
+Feature.CloudClient.Heading.GalleryUnavailableRobloxRealityV2,المعرض غير متاح مع ميزة {productName} حتى الآن.
+Feature.CloudClient.Heading.RobloxRealityOffer,جرّب لعبتك باستخدام {productName}
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,الالتقاط غير متاح في Cloud Play حتى الآن.
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,الالتقاط غير متاح مع Restyle حتى الآن.
+Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,الالتقاط غير متاح مع ميزة {productName} حتى الآن.
 Feature.CloudClient.Label.CloudPlayJoinFailed,ميزة Cloud Play لا تعمل. أنت تلعب الآن بالطريقة المعتادة.
 Feature.CloudClient.Label.RobloxReality,Restyle
 Feature.CloudClient.Label.RobloxRealityDemoLength,جرّب نسخة تجريبية مدتها {minutes} دقيقة
 Feature.CloudClient.Label.RobloxRealityEndingSoon,ستنتهي Restyle خلال 1 دقيقة، وستغادر اللعبة.
+Feature.CloudClient.Label.RobloxRealityEndingSoonV2,ستنتهي ميزة {productName} خلال 1 دقيقة، وستغادر اللعبة.
 Feature.CloudClient.Label.RobloxRealityGraphics,لعبتك بحُلّة جديدة
 Feature.CloudClient.Label.RobloxRealityPlusOnly,لمشتركي Plus فقط
 Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,المنظور الذاتي غير متاح في Cloud Play حتى الآن.
 Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,المنظور الذاتي غير متاح مع Restyle حتى الآن.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxRealityV2,المنظور الذاتي غير متاح مع ميزة {productName} حتى الآن.
 Feature.CloudClient.Label.TimeLeft,الوقت المتبقي
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,السماح لأصدقائك بالبحث عنك
@@ -3627,6 +3640,7 @@ Feature.FriendsActivityFeed.Label.ViewRecentActivity,عرض النشاط الأ�
 Feature.FriendsMenu.Label.SelectedFriendsCount,تم تحديد {numerator}/{denominator} من الأصدقاء
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,تم تحديد {selectedCount} من الأصدقاء
 Feature.GameBadges.Label.Experience,
+Feature.GameDetails.Action.Continue,
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,تقديم الملاحظات
 Feature.GameDetails.Action.NotInterested,غير مهتم
@@ -3658,8 +3672,10 @@ Feature.GameDetails.Label.WhyThisAd,
 Feature.GameDetails.Label.Yes,
 Feature.GameDetails.Message.AdPreferences,تفضيلات الإعلانات
 Feature.GameDetails.Message.AnonymousFeedbackTermsOfUse,تتم مشاركة الردود دون الكشف عن هوية أصحابها، ويتم تصنيفها ضمن فئة الملاحظات وفقًا {underlineStart}لشروط الخدمة في منصّة Roblox{underlineEnd}.
+Feature.GameDetails.Message.ExternalLinkWarning,"بالضغط على ""متابعة""، ستتم إعادة توجيهك إلى موقع إلكتروني لا تملكه ولا تديره منصّة Roblox. قد تكون لدى هذا الموقع شروط وسياسات خصوصية مختلفة."
 Feature.GameDetails.Message.HelpImproveExperience,ساعدنا في تحسين تجربتك
 Feature.GameDetails.Message.HidingExperienceQuestion,لماذا تخفي هذه التجربة؟
+Feature.GameDetails.Message.LeavingRobloxTitle,مغادرة Roblox
 Feature.GameDetails.Message.PurchaseGameV2,التمكن من الوصول إلى {gameName} بمبلغ {X} Robux؟
 Feature.GameDetails.Message.SponsoredDisclosure.Error,تعذّر عرض معلومات الإعلان بسبب خطأ مؤقت.
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"يظهر لك هذا المحتوى المُموَّل استنادًا إلى عوامل غير مُخصَّصة مثل معلومات الجهاز والموقع والعمر لتقديم محتوى مناسب لك. مُصمِّم التجربة: {CreatorName}. مموِّل هذا الإعلان: {PayerName}. لمعرفة المزيد، يُرجى زيارة صفحة ""الخصوصية وحساسية المحتوى"" ضمن الإعدادات في حسابك من هنا:"
@@ -3679,9 +3695,11 @@ Feature.GameFollows.TooltipTurnedOnNotifications,تم تشغيل الإشعار�
 Feature.GameJoin.Description.DifferentServer,ستبدأ في خادم مختلف
 Feature.GameJoin.Label.PlayTogether,يمكنكما اللعب معًا
 Feature.GameJoin.Label.PlayTogetherSoon,يمكنكما اللعب معًا قريبًا
+Feature.GameJoin.Label.RecentCoplay,لعبتما معًا مؤخرًا
 Feature.GamePage.Action.BackToTop,العودة إلى الأعلى
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,برعاية
+Feature.GamePage.LabelCancelField,
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,هذه التجربة غير متوفرة بسبب حالة التحقق من عمرك.
 Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,لا يستطيع الضيوف الانضمام إلى هذه التجربة.
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,تتطلب هذه التجربة إجراء عملية شراء لتتمكن من زيارتها.
@@ -3938,9 +3956,15 @@ Feature.Moments.Description.EngagementFirstLike,اعرضه الآن
 Feature.Moments.Description.EngagementFirstReaction,حصلت لحظتك للتو على أول تفاعل!
 Feature.Moments.Description.EngagementLikedCommentsDigest,حصل {likedComments} من تعليقاتك على إعجابات
 Feature.Moments.Description.EngagementMomentDigest,{comments} من التعليقات الجديدة و{milestone} من التفاعلات
+Feature.Moments.Description.EngagementMomentFirstReactionDigest,{comments} من التعليقات الجديدة وأول تفاعل عليها
+Feature.Moments.Description.EngagementMomentsCommentsDigest,{comments} من التعليقات الجديدة على لحظاتك
 Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementMomentsReactionsDigest,لحظاتك تحظى بالتفاعلات
 Feature.Moments.Description.EngagementNewComment,علّق للتو على لحظتك
 Feature.Moments.Description.EngagementNewComments,و{count} آخرون علّقوا على لحظتك
+Feature.Moments.Description.EngagementNewCommentsOneOther,علّق مع 1 شخص آخر على لحظتك
+Feature.Moments.Description.EngagementOneCommentDigest,1 تعليق جديد و{milestone} من التفاعلات
+Feature.Moments.Description.EngagementOneCommentFirstReactionDigest,1 تعليق جديد وأول تفاعل عليها
 Feature.Moments.Description.EngagementReactionMilestone,{count} من التفاعلات الجديدة
 Feature.Moments.Description.FollowingCaughtUpBody,لقد شاهدتَ جميع اللحظات الجديدة في هذا الموجز. يمكنك التبديل بين الموجزات لعرض المزيد.
 Feature.Moments.Description.FollowingEmptyBodyRecommended,ستظهر لك لحظات المصمّمين الذين تتابعهم هنا.
@@ -5103,8 +5127,8 @@ IAPExperience.InsufficientRobux.Text.YouNeed,تحتاج إلى {robux} إضاف�
 IAPExperience.InsufficientRobux.Title.InsufficientRobux,
 IAPExperience.LeaveRoblox.Action.Cancel,
 IAPExperience.LeaveRoblox.Action.Continue,
-IAPExperience.LeaveRoblox.Text.ExternalWebsiteWarning,"بالضغط على ""متابعة""، ستتم إعادة توجيهك إلى موقع إلكتروني لا تملكه ولا تديره منصّة Roblox. قد تكون لدى هذا الموقع شروط وسياسات خصوصية مختلفة."
-IAPExperience.LeaveRoblox.Title.LeavingRoblox,مغادرة Roblox
+IAPExperience.LeaveRoblox.Text.ExternalWebsiteWarning,
+IAPExperience.LeaveRoblox.Title.LeavingRoblox,
 IAPExperience.Loading.Text.PurchasingItem,جاري شراء العنصر...
 IAPExperience.Loading.Text.PurchasingRobux,شراء Robux...
 IAPExperience.Loading.Text.WaitingForPurchase,في انتظار الشراء...

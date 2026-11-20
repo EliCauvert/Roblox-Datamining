@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("CoplayHistoryGameJoinCard_DEV", false)

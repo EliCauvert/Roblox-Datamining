@@ -1,11 +1,11 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local FFlagBuildExperiencePromptIsInExperienceTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperiencePromptIsInExperienceTelemetry)
 local ChatConstantsModule = require(BuildExperience.Chat.chatConstants)
 local ReportPromptFirstResponseLatencyModule = require(BuildExperience.Telemetry.reportPromptFirstResponseLatency)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
-local config = { FirstResponse = "first_response", MidTurn = "mid_turn" }
 
 return function(Callback)
-	-- upvalues: SendBuildExperienceEventModule (copy), ChatConstantsModule (copy), config (copy), ReportPromptFirstResponseLatencyModule (copy)
+	-- upvalues: FFlagBuildExperiencePromptIsInExperienceTelemetryModule (copy), SendBuildExperienceEventModule (copy), ChatConstantsModule (copy), ReportPromptFirstResponseLatencyModule (copy)
 	local ClockTime = nil
 	local ClockTime1 = nil
 	local v1 = nil
@@ -41,21 +41,25 @@ return function(Callback)
 		return config
 	end
 	
-	local _ = function(p1)
-		-- upvalues: Flag (ref), getLifecycleParameters (copy), v1 (ref), ClockTime1 (ref), SendBuildExperienceEventModule (upval), Callback (copy)
+	local function reportStall(PROMPTSTALLSECONDS)
+		-- upvalues: Flag (ref), getLifecycleParameters (copy), v1 (ref), ClockTime1 (ref), FFlagBuildExperiencePromptIsInExperienceTelemetryModule (upval), SendBuildExperienceEventModule (upval), Callback (copy)
 		Flag = true
 		local LifecycleParameters = getLifecycleParameters()
 		LifecycleParameters.stage = if v1 == nil then "first_response" else "mid_turn"
 		local ClockTime = ClockTime1
 		LifecycleParameters.idleMs = tostring(if ClockTime == nil then 0 else math.max(0, (math.round((os.clock() - ClockTime) * 1000))))
-		LifecycleParameters.thresholdSeconds = tostring(p1)
+		LifecycleParameters.thresholdSeconds = tostring(PROMPTSTALLSECONDS)
+		
+		if FFlagBuildExperiencePromptIsInExperienceTelemetryModule then
+			LifecycleParameters.isInExperience = if game.GameId == 0 then "false" else "true"
+		end
 		SendBuildExperienceEventModule("SEND_PROMPT_STALLED", Callback(), LifecycleParameters)
 	end
 	
 	local function scheduleStallCheck(Delay)
-		-- upvalues: DelayedThread (ref), Flag1 (ref), IsWaitingOnUser (ref), ClockTime1 (ref), ChatConstantsModule (upval), scheduleStallCheck (copy), Flag (ref), getLifecycleParameters (copy), v1 (ref), config (upval), SendBuildExperienceEventModule (upval), Callback (copy)
+		-- upvalues: DelayedThread (ref), Flag1 (ref), IsWaitingOnUser (ref), ClockTime1 (ref), ChatConstantsModule (upval), scheduleStallCheck (copy), reportStall (copy)
 		DelayedThread = task.delay(Delay, function()
-			-- upvalues: DelayedThread (upval), Flag1 (upval), IsWaitingOnUser (upval), ClockTime1 (upval), ChatConstantsModule (upval), scheduleStallCheck (upval), Flag (upval), getLifecycleParameters (upval), v1 (upval), config (upval), SendBuildExperienceEventModule (upval), Callback (upval)
+			-- upvalues: DelayedThread (upval), Flag1 (upval), IsWaitingOnUser (upval), ClockTime1 (upval), ChatConstantsModule (upval), scheduleStallCheck (upval), reportStall (upval)
 			DelayedThread = nil
 			
 			if Flag1 or IsWaitingOnUser or ClockTime1 == nil then return end
@@ -67,26 +71,22 @@ return function(Callback)
 				
 				return
 			else
-				Flag = true
-				local v2 = getLifecycleParameters()
-				v2.stage = if v1 == nil then config.FirstResponse else config.MidTurn
-				local ClockTime = ClockTime1
-				v2.idleMs = tostring(if ClockTime == nil then 0 else math.max(0, (math.round((os.clock() - ClockTime) * 1000))))
-				v2.thresholdSeconds = tostring(PROMPTSTALLSECONDS)
-				SendBuildExperienceEventModule("SEND_PROMPT_STALLED", Callback(), v2)
+				reportStall(PROMPTSTALLSECONDS)
 			end
 		end)
 	end
 	
 	return {
 		start = function()
-			-- upvalues: ClockTime (ref), Flag1 (ref), ClockTime1 (ref), SendBuildExperienceEventModule (upval), Callback (copy), ChatConstantsModule (upval), DelayedThread (ref), IsWaitingOnUser (ref), scheduleStallCheck (copy), Flag (ref), getLifecycleParameters (copy), v1 (ref), config (upval)
+			-- upvalues: ClockTime (ref), Flag1 (ref), ClockTime1 (ref), SendBuildExperienceEventModule (upval), Callback (copy), FFlagBuildExperiencePromptIsInExperienceTelemetryModule (upval), ChatConstantsModule (upval), DelayedThread (ref), IsWaitingOnUser (ref), scheduleStallCheck (copy), reportStall (copy)
 			if ClockTime == nil and not Flag1 then
 				ClockTime = os.clock()
 				ClockTime1 = ClockTime
-				SendBuildExperienceEventModule("SEND_PROMPT_START", Callback())
+				SendBuildExperienceEventModule("SEND_PROMPT_START", Callback(), if FFlagBuildExperiencePromptIsInExperienceTelemetryModule then {
+					isInExperience = if game.GameId == 0 then "false" else "true"
+				} else nil)
 				DelayedThread = task.delay(ChatConstantsModule.PROMPT_STALL_SECONDS, function()
-					-- upvalues: DelayedThread (upval), Flag1 (upval), IsWaitingOnUser (upval), ClockTime1 (upval), ChatConstantsModule (upval), scheduleStallCheck (upval), Flag (upval), getLifecycleParameters (upval), v1 (upval), config (upval), SendBuildExperienceEventModule (upval), Callback (upval)
+					-- upvalues: DelayedThread (upval), Flag1 (upval), IsWaitingOnUser (upval), ClockTime1 (upval), ChatConstantsModule (upval), scheduleStallCheck (upval), reportStall (upval)
 					DelayedThread = nil
 					
 					if Flag1 or IsWaitingOnUser or ClockTime1 == nil then return end
@@ -98,13 +98,7 @@ return function(Callback)
 						
 						return
 					else
-						Flag = true
-						local v2 = getLifecycleParameters()
-						v2.stage = if v1 == nil then config.FirstResponse else config.MidTurn
-						local ClockTime = ClockTime1
-						v2.idleMs = tostring(if ClockTime == nil then 0 else math.max(0, (math.round((os.clock() - ClockTime) * 1000))))
-						v2.thresholdSeconds = tostring(PROMPTSTALLSECONDS)
-						SendBuildExperienceEventModule("SEND_PROMPT_STALLED", Callback(), v2)
+						reportStall(PROMPTSTALLSECONDS)
 					end
 				end)
 				
@@ -112,7 +106,7 @@ return function(Callback)
 			end
 		end,
 		markActivity = function(p1)
-			-- upvalues: ClockTime (ref), Flag1 (ref), ClockTime1 (ref), IsWaitingOnUser (ref), v1 (ref), ReportPromptFirstResponseLatencyModule (upval), Flag (ref), DelayedThread (ref), ChatConstantsModule (upval), scheduleStallCheck (copy), getLifecycleParameters (copy), config (upval), SendBuildExperienceEventModule (upval), Callback (copy)
+			-- upvalues: ClockTime (ref), Flag1 (ref), ClockTime1 (ref), IsWaitingOnUser (ref), v1 (ref), ReportPromptFirstResponseLatencyModule (upval), Flag (ref), DelayedThread (ref), ChatConstantsModule (upval), scheduleStallCheck (copy), reportStall (copy)
 			if ClockTime == nil or Flag1 then return end
 			ClockTime1 = os.clock()
 			IsWaitingOnUser = p1.isWaitingOnUser
@@ -132,7 +126,7 @@ return function(Callback)
 				end
 			elseif DelayedThread == nil then
 				DelayedThread = task.delay(ChatConstantsModule.PROMPT_STALL_SECONDS, function()
-					-- upvalues: DelayedThread (upval), Flag1 (upval), IsWaitingOnUser (upval), ClockTime1 (upval), ChatConstantsModule (upval), scheduleStallCheck (upval), Flag (upval), getLifecycleParameters (upval), v1 (upval), config (upval), SendBuildExperienceEventModule (upval), Callback (upval)
+					-- upvalues: DelayedThread (upval), Flag1 (upval), IsWaitingOnUser (upval), ClockTime1 (upval), ChatConstantsModule (upval), scheduleStallCheck (upval), reportStall (upval)
 					DelayedThread = nil
 					
 					if Flag1 or IsWaitingOnUser or ClockTime1 == nil then return end
@@ -144,21 +138,20 @@ return function(Callback)
 						
 						return
 					else
-						Flag = true
-						local v2 = getLifecycleParameters()
-						v2.stage = if v1 == nil then config.FirstResponse else config.MidTurn
-						local ClockTime = ClockTime1
-						v2.idleMs = tostring(if ClockTime == nil then 0 else math.max(0, (math.round((os.clock() - ClockTime) * 1000))))
-						v2.thresholdSeconds = tostring(PROMPTSTALLSECONDS)
-						SendBuildExperienceEventModule("SEND_PROMPT_STALLED", Callback(), v2)
+						reportStall(PROMPTSTALLSECONDS)
 					end
 				end)
 			end
 		end,
 		reportUserStop = function()
-			-- upvalues: ClockTime (ref), Flag1 (ref), SendBuildExperienceEventModule (upval), Callback (copy), getLifecycleParameters (copy), DelayedThread (ref)
+			-- upvalues: ClockTime (ref), Flag1 (ref), getLifecycleParameters (copy), FFlagBuildExperiencePromptIsInExperienceTelemetryModule (upval), SendBuildExperienceEventModule (upval), Callback (copy), DelayedThread (ref)
 			if ClockTime == nil or Flag1 then return end
-			SendBuildExperienceEventModule("SEND_PROMPT_STOPPED", Callback(), (getLifecycleParameters()))
+			local LifecycleParameters = getLifecycleParameters()
+			
+			if FFlagBuildExperiencePromptIsInExperienceTelemetryModule then
+				LifecycleParameters.isInExperience = if game.GameId == 0 then "false" else "true"
+			end
+			SendBuildExperienceEventModule("SEND_PROMPT_STOPPED", Callback(), LifecycleParameters)
 			Flag1 = true
 			
 			if DelayedThread ~= nil then

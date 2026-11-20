@@ -28,6 +28,7 @@ local function VIPServerConfiguration(p1)
 	-- upvalues: UseVIPServerConfigurationViewModelModule (copy), Players (copy), ReactModule (copy), VIPServerConfigurationViewModule (copy)
 	return ReactModule.createElement(VIPServerConfigurationViewModule, (UseVIPServerConfigurationViewModelModule({
 		defaultServerName = p1.serverName,
+		gameName = p1.gameName,
 		price = p1.price,
 		offerType = p1.offerType,
 		generateLink = p1.generateLink,
@@ -98,6 +99,7 @@ local function VIPServerPostPurchase(p1)
 		onClose = OnCloseFunction
 	}) else ReactModule.createElement(VIPServerConfiguration, {
 		serverName = p1.serverName,
+		gameName = p1.gameName,
 		price = p1.price,
 		offerType = p1.offerType,
 		generateLink = p1.generateLink,

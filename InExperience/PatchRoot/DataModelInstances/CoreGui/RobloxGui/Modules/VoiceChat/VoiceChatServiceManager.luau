@@ -1997,6 +1997,38 @@ function VoiceChatServiceManager:Leave()
 	end
 end
 
+function VoiceChatServiceManager.GetVoiceToggleDisplayState(p4, p5)
+	local VoiceChatState = Enum.VoiceChatState
+	local VoiceChatState1 = if p5 == nil then if p4.service then p4.service.VoiceChatState else nil else p5
+	
+	return if VoiceChatState1 == VoiceChatState.Joined then "Connected" elseif VoiceChatState1 == nil or VoiceChatState1 == VoiceChatState.Ended or VoiceChatState1 == VoiceChatState.Failed or VoiceChatState1 == VoiceChatState.Idle then "Disconnected" else nil
+end
+
+function VoiceChatServiceManager:UserToggleVoice(p4)
+	-- upvalues: FFlagVoiceRewarmTelemetry (copy), ConstantsModule (copy)
+	local VoiceChatState = Enum.VoiceChatState
+	local VoiceChatState1 = if self.service then self.service.VoiceChatState else nil
+	
+	if p4 then
+		if VoiceChatState1 == VoiceChatState.Joined or VoiceChatState1 == VoiceChatState.Joining or VoiceChatState1 == VoiceChatState.JoiningRetry then return end
+	elseif VoiceChatState1 == nil or self:VoiceChatEnded() or VoiceChatState1 == VoiceChatState.Failed then return end
+	if FFlagVoiceRewarmTelemetry then
+		local ConnectDisconnectButtonAnalyticsData, ConnectDisconnectButtonAnalyticsData2, ConnectDisconnectButtonAnalyticsData3, ConnectDisconnectButtonAnalyticsData4 = self:GetConnectDisconnectButtonAnalyticsData(p4)
+		self.Analytics:reportJoinVoiceButtonEventWithVoiceSessionId("clicked", ConnectDisconnectButtonAnalyticsData, ConnectDisconnectButtonAnalyticsData2, ConnectDisconnectButtonAnalyticsData3, ConnectDisconnectButtonAnalyticsData4, self.joinVoiceButtonContext)
+	else
+		self.Analytics:reportJoinVoiceButtonEventWithVoiceSessionId("clicked", self:GetConnectDisconnectButtonAnalyticsData(p4))
+	end
+	if p4 then
+		self.pendingConnectionSource = ConstantsModule.VOICE_CONNECTION_SOURCE.SETTINGS_TOGGLE_ON
+		self:JoinVoice()
+		
+		return
+	else
+		self.pendingDisconnectReason = ConstantsModule.VOICE_DISCONNECT_REASON.USER_DISCONNECT
+		self:Leave()
+	end
+end
+
 function VoiceChatServiceManager:GetVoiceStateFromEnum(p4)
 	-- upvalues: t (ref), VOICESTATE (copy)
 	if not t[p4] then

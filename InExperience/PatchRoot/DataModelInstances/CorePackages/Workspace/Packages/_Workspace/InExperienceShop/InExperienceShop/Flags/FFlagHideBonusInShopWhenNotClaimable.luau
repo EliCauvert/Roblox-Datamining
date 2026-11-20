@@ -1,3 +1,3 @@
-﻿local FFlagEnableRobuxInExperienceShop = require(script:FindFirstAncestor("InExperienceShop").Parent.SharedFlags).FFlagEnableRobuxInExperienceShop
+﻿local FFlagEnableInExperienceShop = require(script:FindFirstAncestor("InExperienceShop").Parent.SharedFlags).FFlagEnableInExperienceShop
 
-return game:DefineFastFlag("HideBonusInShopWhenNotClaimable", false) and FFlagEnableRobuxInExperienceShop
+return game:DefineFastFlag("HideBonusInShopWhenNotClaimable", false) and FFlagEnableInExperienceShop

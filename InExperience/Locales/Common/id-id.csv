@@ -2395,6 +2395,8 @@ Feature.Build.Label.AdvancedModel,Tingkat Lanjut
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,Semua game
 Feature.Build.Label.AmountAvailable,{AMOUNT} tersedia
+Feature.Build.Label.AttachmentCountPlural,{count} lampiran
+Feature.Build.Label.AttachmentCountSingular,1 lampiran
 Feature.Build.Label.Autosaved,Disimpan otomatis
 Feature.Build.Label.Available,tersedia
 Feature.Build.Label.AvailableForPurchase,Tersedia untuk dibeli
@@ -2438,6 +2440,7 @@ Feature.Build.Label.IconThumbnails,Ikon & thumbnail
 Feature.Build.Label.Images2D,Gambar 2D
 Feature.Build.Label.InProgress,Sedang berlangsung
 Feature.Build.Label.InputNeeded,Input diperlukan
+Feature.Build.Label.InspirationTab,Inspirasi
 Feature.Build.Label.InternalSpec,Spesifikasi internal
 Feature.Build.Label.InternalTesting,Uji coba internal
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -3357,9 +3360,23 @@ Feature.Chat.Title.NewChat,Chat baru
 Feature.Chat.Toast.Error.InvalidUserSelected,Satu atau beberapa orang di daftar ini tidak dapat ditambahkan
 Feature.CloudClient.Action.PlayWithoutCloudPlay,Mainkan tanpa Cloud Play
 Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play menjalankan game di komputer Roblox, sehingga game dapat di-load lebih cepat dan lebih jarang mengalami crash. Fitur ini hanya aktif selama kamu memainkan game ini."
+Feature.CloudClient.Description.GalleryUnavailableCloudPlay,Gabung lagi tanpa Cloud Play untuk menggunakan galerimu.
+Feature.CloudClient.Description.GalleryUnavailableRobloxReality,Gabung lagi tanpa Restyle untuk menggunakan galerimu.
+Feature.CloudClient.Description.RobloxRealityPreview,Restyle adalah preview awal. Tampilannya mungkin berbeda dari game aslinya.
 Feature.CloudClient.Heading.CloudPlayOffer,Main dengan Cloud Play
+Feature.CloudClient.Heading.GalleryUnavailableCloudPlay,Galeri belum tersedia di Cloud Play.
+Feature.CloudClient.Heading.GalleryUnavailableRobloxReality,Galeri belum tersedia dengan Restyle.
+Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Media belum tersedia di Cloud Play.
+Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Media belum tersedia dengan Restyle.
+Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Play tidak berfungsi. Kamu bermain seperti biasa.
+Feature.CloudClient.Label.RobloxReality,Restyle
+Feature.CloudClient.Label.RobloxRealityDemoLength,Coba demo {minutes} menit
+Feature.CloudClient.Label.RobloxRealityEndingSoon,"Restyle berakhir dalam 1 menit, dan kamu akan keluar dari game."
 Feature.CloudClient.Label.RobloxRealityGraphics,"Game-mu, dengan tampilan baru"
 Feature.CloudClient.Label.RobloxRealityPlusOnly,Hanya untuk subscriber Plus
+Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,Tampilan Diri belum tersedia di Cloud Play.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,Tampilan Diri belum tersedia dengan Restyle.
+Feature.CloudClient.Label.TimeLeft,Waktu tersisa
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,Izinkan Teman Kamu Menemukan Kamu
 Feature.Contacts.Action.Invite,Undang
@@ -3674,6 +3691,7 @@ Feature.FriendsActivityFeed.Label.ViewRecentActivity,Lihat Aktivitas Baru-Baru I
 Feature.FriendsMenu.Label.SelectedFriendsCount,{numerator}/{denominator} teman dipilih
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,{selectedCount} teman dipilih
 Feature.GameBadges.Label.Experience,
+Feature.GameDetails.Action.Continue,
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,Berikan masukan
 Feature.GameDetails.Action.NotInterested,Tidak tertarik
@@ -3705,8 +3723,10 @@ Feature.GameDetails.Label.WhyThisAd,Kenapa saya melihat iklan ini?
 Feature.GameDetails.Label.Yes,
 Feature.GameDetails.Message.AdPreferences,Preferensi Iklan
 Feature.GameDetails.Message.AnonymousFeedbackTermsOfUse,Tanggapan dibagikan secara anonim dan dianggap sebagai Masukan sesuai {underlineStart}Ketentuan Penggunaan Roblox{underlineEnd}.
+Feature.GameDetails.Message.ExternalLinkWarning,"Dengan mengklik ""Lanjutkan"", kamu akan diarahkan ke situs web yang tidak dimiliki atau dijalankan oleh Roblox. Situs web tersebut mungkin memiliki ketentuan dan kebijakan privasi yang berbeda."
 Feature.GameDetails.Message.HelpImproveExperience,Bantu kami meningkatkan pengalaman virtualmu
 Feature.GameDetails.Message.HidingExperienceQuestion,Kenapa kamu menyembunyikan pengalaman virtual ini?
+Feature.GameDetails.Message.LeavingRobloxTitle,Keluar dari Roblox
 Feature.GameDetails.Message.PurchaseGameV2,Buka kunci akses ke {gameName} seharga {X} Robux?
 Feature.GameDetails.Message.SponsoredDisclosure.Error,Informasi sponsor tidak dapat ditampilkan karena kesalahan sementara.
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"Kamu melihat konten bersponsor ini berdasarkan faktor yang tidak dipersonalisasi seperti info perangkat, lokasi, dan usia untuk menayangkan konten yang sesuai untukmu. Kreator pengalaman virtual ini adalah {CreatorName}. Sponsor ini dibayar oleh {PayerName}. Untuk mempelajari selengkapnya, kunjungi halaman ""Privasi & Kedewasaan Konten"" di bagian Pengaturan pada akunmu, di sini:"
@@ -3726,9 +3746,11 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Notifikasi dinyalakan untuk {ex
 Feature.GameJoin.Description.DifferentServer,Kamu akan memulai di server yang berbeda
 Feature.GameJoin.Label.PlayTogether,Kamu bisa bermain bersama
 Feature.GameJoin.Label.PlayTogetherSoon,Kamu bisa segera bermain bersama
+Feature.GameJoin.Label.RecentCoplay,Baru-baru ini kalian bermain bersama
 Feature.GamePage.Action.BackToTop,Kembali ke atas
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
+Feature.GamePage.LabelCancelField,
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,Pengalaman virtual ini tidak tersedia karena status verifikasi usia kamu.
 Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,Tamu tidak dapat bergabung ke pengalaman virtual ini.
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,Pembelian diperlukan untuk mengunjungi pengalaman virtual ini.
@@ -4950,6 +4972,7 @@ Feature.Toast.Username.Copied,Nama pengguna disalin ke clipboard.
 Feature.Toast.VoteError.AssetNotVoteable,Pengalaman virtual mungkin tidak dapat dipilih.
 Feature.Toast.VoteError.Default,Tindakan tidak tersedia.
 Feature.Toast.VoteError.FloodCheckThresholdMet,Kamu memilih terlalu cepat.
+Feature.Toast.VoteError.NotSaved,Suara tidak disimpan
 Feature.Toast.VoteError.PlayGame,Kamu harus mengunjungi pengalaman virtual sebelum memberi rating.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,Kamu tidak dapat memeriksa usiamu saat ini karena kamu sudah berulang kali melanggar Standar Komunitas kami. Kamu dapat mencoba lagi setelah pembatasan berakhir.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,Pemeriksaan usia ditangguhkan
@@ -5151,7 +5174,7 @@ IAPExperience.InsufficientRobux.Title.InsufficientRobux,Robux Tidak Cukup
 IAPExperience.LeaveRoblox.Action.Cancel,
 IAPExperience.LeaveRoblox.Action.Continue,
 IAPExperience.LeaveRoblox.Text.ExternalWebsiteWarning,"Dengan mengklik “Lanjutkan”, kamu akan diarahkan ke situs web yang tidak dimiliki atau dijalankan oleh Roblox. Situs web tersebut mungkin memiliki ketentuan dan kebijakan privasi yang berbeda."
-IAPExperience.LeaveRoblox.Title.LeavingRoblox,Keluar dari Roblox
+IAPExperience.LeaveRoblox.Title.LeavingRoblox,
 IAPExperience.Loading.Text.PurchasingItem,Membeli item...
 IAPExperience.Loading.Text.PurchasingRobux,Membeli Robux...
 IAPExperience.Loading.Text.WaitingForPurchase,Menunggu pembelian...

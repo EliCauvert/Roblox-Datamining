@@ -5,17 +5,19 @@ local UsePYMKCarouselUserButtonsModule = require(Parent.Components.PYMKUser.useP
 local _ = require(Parent.Common.DirectRecommendationTypes)
 local FFlagLuaAppEnableSduiHomePage = require(Parent1.SharedFlags).FFlagLuaAppEnableSduiHomePage
 local FFlagPymkCarouselExtendProps = require(Parent1.SharedFlags).FFlagPymkCarouselExtendProps
+local FFlagPYMKViewProfileAfterAcceptModule = require(Parent.Flags.FFlagPYMKViewProfileAfterAccept)
 local EntityType = require(Parent1.UserList).Enums.EntityType
 
 return function(p1)
-	-- upvalues: UsePYMKCarouselUserButtonsModule (copy), EntityType (copy), FFlagPymkCarouselExtendProps (copy), FFlagLuaAppEnableSduiHomePage (copy), React (copy)
+	-- upvalues: UsePYMKCarouselUserButtonsModule (copy), EntityType (copy), FFlagPymkCarouselExtendProps (copy), FFlagLuaAppEnableSduiHomePage (copy), FFlagPYMKViewProfileAfterAcceptModule (copy), React (copy)
 	local UsePYMKCarouselUserButtonsModuleResult = UsePYMKCarouselUserButtonsModule({
 		userId = p1.entityId,
 		showToast = p1.showToast,
 		fireAnalyticsEvent = p1.fireAnalyticsEvent,
 		absolutePosition = p1.absolutePosition,
 		contactId = if p1.entityType == EntityType.Contact then p1.entityId else nil,
-		recommendation = if FFlagPymkCarouselExtendProps or FFlagLuaAppEnableSduiHomePage then p1.recommendation else nil
+		recommendation = if FFlagPymkCarouselExtendProps or FFlagLuaAppEnableSduiHomePage then p1.recommendation else nil,
+		onViewProfile = if FFlagPYMKViewProfileAfterAcceptModule then p1.onViewProfile else nil
 	})
 	
 	return React.useMemo(function()

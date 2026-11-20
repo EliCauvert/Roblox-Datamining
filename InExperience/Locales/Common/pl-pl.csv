@@ -2395,6 +2395,8 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,Wszystkie gry
 Feature.Build.Label.AmountAvailable,Dostępne {AMOUNT}
+Feature.Build.Label.AttachmentCountPlural,Liczba załączników: {count}
+Feature.Build.Label.AttachmentCountSingular,1 załącznik
 Feature.Build.Label.Autosaved,Zapisano automatycznie
 Feature.Build.Label.Available,dostępne
 Feature.Build.Label.AvailableForPurchase,Dostępny do zakupu
@@ -2438,6 +2440,7 @@ Feature.Build.Label.IconThumbnails,Ikona i miniatury
 Feature.Build.Label.Images2D,Obrazy 2D
 Feature.Build.Label.InProgress,W toku
 Feature.Build.Label.InputNeeded,Wymagane wprowadzenie
+Feature.Build.Label.InspirationTab,Inspiracje
 Feature.Build.Label.InternalSpec,Specyfikacja wewnętrzna
 Feature.Build.Label.InternalTesting,Testowanie wewnętrzne
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -3359,9 +3362,23 @@ Feature.Chat.Title.NewChat,Nowy czat
 Feature.Chat.Toast.Error.InvalidUserSelected,Nie można dodać co najmniej jednej osoby z tej listy
 Feature.CloudClient.Action.PlayWithoutCloudPlay,Graj bez Cloud Play
 Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play uruchamia grę na komputerach Robloxa, dzięki czemu może ona szybciej się ładować i rzadziej się zawieszać. Działa tylko wtedy, gdy grasz w tę grę."
+Feature.CloudClient.Description.GalleryUnavailableCloudPlay,"Dołącz ponownie bez Cloud Play, aby korzystać ze swojej galerii."
+Feature.CloudClient.Description.GalleryUnavailableRobloxReality,"Dołącz ponownie bez funkcji Restyle, aby korzystać ze swojej galerii."
+Feature.CloudClient.Description.RobloxRealityPreview,Funkcja Restyle jest dostępna we wczesnym podglądzie. Elementy mogą wyglądać inaczej niż w oryginalnej grze.
 Feature.CloudClient.Heading.CloudPlayOffer,Graj z Cloud Play
+Feature.CloudClient.Heading.GalleryUnavailableCloudPlay,Galeria nie jest jeszcze dostępna w usłudze Cloud Play.
+Feature.CloudClient.Heading.GalleryUnavailableRobloxReality,Galeria nie jest jeszcze dostępna w usłudze Restyle.
+Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Funkcja przechwytywania nie jest jeszcze dostępna w usłudze Cloud Play.
+Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Funkcja przechwytywania nie jest jeszcze dostępna w usłudze Restyle.
+Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Play nie działa. Grasz w trybie zwykłym.
+Feature.CloudClient.Label.RobloxReality,Restyle
+Feature.CloudClient.Label.RobloxRealityDemoLength,Wypróbuj {minutes}-minutowe demo
+Feature.CloudClient.Label.RobloxRealityEndingSoon,"Funkcja Restyle wyłączy się za 1 minutę, a Ty opuścisz grę."
 Feature.CloudClient.Label.RobloxRealityGraphics,Twoja gra w nowej odsłonie
 Feature.CloudClient.Label.RobloxRealityPlusOnly,Tylko dla subskrybentów Plus
+Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,Widok własny nie jest jeszcze dostępny w Cloud Play.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,Funkcja podglądu własnego obrazu nie jest jeszcze dostępna w usłudze Restyle.
+Feature.CloudClient.Label.TimeLeft,Pozostały czas
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,Pozwól znajomym cię znajdować
 Feature.Contacts.Action.Invite,Zaproś
@@ -3676,6 +3693,7 @@ Feature.FriendsActivityFeed.Label.ViewRecentActivity,Wyświetl ostatnią aktywno
 Feature.FriendsMenu.Label.SelectedFriendsCount,Wybrano {numerator}/{denominator} znajomych
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,Wybrano {selectedCount} znajomych
 Feature.GameBadges.Label.Experience,
+Feature.GameDetails.Action.Continue,
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,
 Feature.GameDetails.Action.NotInterested,Nie interesuje mnie
@@ -3707,8 +3725,10 @@ Feature.GameDetails.Label.WhyThisAd,
 Feature.GameDetails.Label.Yes,
 Feature.GameDetails.Message.AdPreferences,Preferencje dotyczące reklam
 Feature.GameDetails.Message.AnonymousFeedbackTermsOfUse,Odpowiedzi są udostępniane anonimowo i stanowią Opinię w rozumieniu {underlineStart}Warunków użytkowania platformy Roblox{underlineEnd}.
+Feature.GameDetails.Message.ExternalLinkWarning,Kliknięcie przycisku „Kontynuuj” spowoduje przekierowanie na stronę internetową nienależącą do platformy Roblox ani przez nią niezarządzaną. Mogą tam obowiązywać inne warunki i polityka prywatności.
 Feature.GameDetails.Message.HelpImproveExperience,Pomóż nam poprawić Twoje wrażenia z gry
 Feature.GameDetails.Message.HidingExperienceQuestion,Dlaczego ukrywasz ten projekt?
+Feature.GameDetails.Message.LeavingRobloxTitle,Opuszczasz platformę Roblox
 Feature.GameDetails.Message.PurchaseGameV2,Odblokować dostęp do gry {gameName} za kwotę {X} Robuxów?
 Feature.GameDetails.Message.SponsoredDisclosure.Error,Nie udało się wyświetlić informacji dotyczących sponsoringu z powodu tymczasowego błędu.
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"Wyświetlono Ci tę sponsorowaną treść na podstawie niespersonalizowanych czynników, takich jak informacje o urządzeniu, lokalizacja i wiek, aby dostarczać Ci odpowiednie treści. Twórcą tego projektu jest {CreatorName}. Sponsoring został opłacony przez: {PayerName}. Aby dowiedzieć się więcej, odwiedź stronę „Prywatność i poziom treści dla dorosłych” w sekcji Ustawienia na swoim koncie, którą znajdziesz tutaj:"
@@ -3728,9 +3748,11 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Włączono powiadomienia dotycz
 Feature.GameJoin.Description.DifferentServer,Rozpoczniesz na innym serwerze
 Feature.GameJoin.Label.PlayTogether,Możecie grać razem
 Feature.GameJoin.Label.PlayTogetherSoon,Wkrótce będziecie mogli grać razem
+Feature.GameJoin.Label.RecentCoplay,Niedawno graliście razem
 Feature.GamePage.Action.BackToTop,Powrót na górę strony
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
+Feature.GamePage.LabelCancelField,
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,Projekt jest niedostępny ze względu na twój status weryfikacji wieku.
 Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,Goście nie mogą dołączyć do tego projektu.
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,Do odwiedzenia tego projektu wymagane jest dokonanie zakupu.
@@ -4952,6 +4974,7 @@ Feature.Toast.Username.Copied,Nazwa użytkownika została skopiowana do schowka.
 Feature.Toast.VoteError.AssetNotVoteable,Na ten projekt nie można głosować.
 Feature.Toast.VoteError.Default,Akcja niedostępna.
 Feature.Toast.VoteError.FloodCheckThresholdMet,Głosujesz zbyt szybko.
+Feature.Toast.VoteError.NotSaved,Głos nie został zapisany
 Feature.Toast.VoteError.PlayGame,"Aby ocenić ten projekt, najpierw go odwiedź."
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,"W tej chwili nie możesz zweryfikować swojego wieku, ponieważ wielokrotnie naruszyłeś(-aś) nasze Standardy społeczności. Możesz spróbować ponownie, gdy ograniczenie przestanie obowiązywać."
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,Weryfikacja wieku zawieszona
@@ -5153,7 +5176,7 @@ IAPExperience.InsufficientRobux.Title.InsufficientRobux,
 IAPExperience.LeaveRoblox.Action.Cancel,
 IAPExperience.LeaveRoblox.Action.Continue,
 IAPExperience.LeaveRoblox.Text.ExternalWebsiteWarning,"Kliknięcie przycisku „Kontynuuj” spowoduje przekierowanie na stronę internetową, która nie należy do Robloxa ani nie jest przez niego zarządzana. Mogą na niej obowiązywać inne warunki i zasady ochrony prywatności."
-IAPExperience.LeaveRoblox.Title.LeavingRoblox,Opuszczasz platformę Roblox
+IAPExperience.LeaveRoblox.Title.LeavingRoblox,
 IAPExperience.Loading.Text.PurchasingItem,Kupowanie przedmiotu...
 IAPExperience.Loading.Text.PurchasingRobux,Kupowanie Robuxów...
 IAPExperience.Loading.Text.WaitingForPurchase,Oczekiwanie na zakup...

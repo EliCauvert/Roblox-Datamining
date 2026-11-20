@@ -29,6 +29,9 @@ local SduiParseHelpers = SduiCoreSystemModule.SduiParseHelpers
 local GetSduiComponentWrapperFunction = SduiCoreSystemModule.getSduiComponentWrapper
 local SduiCollectionItemModule = require(ServerDrivenUi.Content.Collections.SduiCollectionItem)
 local SduiCollectionGridRevealRowsModule = require(ServerDrivenUi.Content.Collections.SduiCollectionGridRevealRows)
+local GetViewportAutoplayAnchorTileTagFunction = require(Parent.VideoUtils).getViewportAutoplayAnchorTileTag
+local ViewportAutoplayGridCellTag = require(Parent.VideoUtils).ViewportAutoplayGridCellTag
+local CombineReactTagsFunction = require(Parent.RoactUtils).combineReactTags
 local UseCollectionAnalyticsContextFunction = require(Parent.SduiSharedContent).useCollectionAnalyticsContext
 local CreateGameDwellObserverFunction = require(Parent.DiscoveryAnalytics).Dwell.createGameDwellObserver
 local FFlagLuaAppLayoutParamsInContext = require(Parent.SharedFlags).FFlagLuaAppLayoutParamsInContext
@@ -36,6 +39,7 @@ local FFlagLuaAppCompositionAlways = require(Parent.SharedFlags).FFlagLuaAppComp
 local FFlagSduiFixSearchTelemetry = require(Parent.SharedFlags).FFlagSduiFixSearchTelemetry
 local FFlagSduiPreferredTextSizeLineBudgets = require(Parent.SharedFlags).FFlagSduiPreferredTextSizeLineBudgets
 local FFlagSduiCollectionGridRevealRows = require(Parent.SharedFlags).FFlagSduiCollectionGridRevealRows
+local FFlagLuaAppSduiSearchResultsVideoPreview = require(Parent.SharedFlags).FFlagLuaAppSduiSearchResultsVideoPreview
 local FFlagLuaAppSduiFullBleedHero = require(Parent.SharedFlags).FFlagLuaAppSduiFullBleedHero
 local FFlagLuaAppSduiGameDwell = require(Parent.SharedFlags).FFlagLuaAppSduiGameDwell
 
@@ -49,7 +53,7 @@ end
 local t = {}
 
 return ReactModule.memo(function(p1)
-	-- upvalues: FFlagLuaAppCompositionAlways (copy), ReactModule (copy), t (copy), FFlagLuaAppLayoutParamsInContext (copy), SignalsReactModule (copy), UseCollectionLayoutParamsFunction (copy), CollectionItemSize (copy), CryoModule (copy), UseCollectionLayoutFunction (copy), FindAnalyticsFieldFunction (copy), SduiBuilder (copy), UseCollectionAnalyticsContextFunction (copy), UseCollectionImpressionsSignalFunction (copy), GetImpressionsTagModule (copy), FFlagLuaAppSduiGameDwell (copy), CreateGameDwellObserverFunction (copy), SduiParseHelpers (copy), SduiErrors (copy), ReportUnifiedLoggingImpressionsFunction (copy), SendLegacyGameImpressionsForSduiModule (copy), UseTokensFunction (copy), FFlagSduiPreferredTextSizeLineBudgets (copy), UsePreferredTextSizeLineBudgetFunction (copy), FFlagLuaAppSduiFullBleedHero (copy), FFlagSduiFixSearchTelemetry (copy), SduiCollectionAnalyticsBuilder (copy), FFlagSduiErrorPaths (copy), GetSduiComponentWrapperFunction (copy), SduiCollectionItemModule (copy), FFlagSduiCollectionGridRevealRows (copy), SduiCollectionGridRevealRowsModule (copy), CollectionGrid (copy), WaitForPropWrapper (copy), FrameBoundsImpressionsTracker (copy), ScreenSizeImpressionsTracker (copy)
+	-- upvalues: FFlagLuaAppCompositionAlways (copy), ReactModule (copy), t (copy), FFlagLuaAppLayoutParamsInContext (copy), SignalsReactModule (copy), UseCollectionLayoutParamsFunction (copy), CollectionItemSize (copy), CryoModule (copy), UseCollectionLayoutFunction (copy), FindAnalyticsFieldFunction (copy), SduiBuilder (copy), UseCollectionAnalyticsContextFunction (copy), UseCollectionImpressionsSignalFunction (copy), GetImpressionsTagModule (copy), FFlagLuaAppSduiGameDwell (copy), CreateGameDwellObserverFunction (copy), SduiParseHelpers (copy), SduiErrors (copy), ReportUnifiedLoggingImpressionsFunction (copy), SendLegacyGameImpressionsForSduiModule (copy), UseTokensFunction (copy), FFlagSduiPreferredTextSizeLineBudgets (copy), UsePreferredTextSizeLineBudgetFunction (copy), FFlagLuaAppSduiFullBleedHero (copy), FFlagLuaAppSduiSearchResultsVideoPreview (copy), GetViewportAutoplayAnchorTileTagFunction (copy), FFlagSduiFixSearchTelemetry (copy), SduiCollectionAnalyticsBuilder (copy), FFlagSduiErrorPaths (copy), ViewportAutoplayGridCellTag (copy), GetSduiComponentWrapperFunction (copy), SduiCollectionItemModule (copy), CombineReactTagsFunction (copy), FFlagSduiCollectionGridRevealRows (copy), SduiCollectionGridRevealRowsModule (copy), CollectionGrid (copy), WaitForPropWrapper (copy), FrameBoundsImpressionsTracker (copy), ScreenSizeImpressionsTracker (copy)
 	local FFlagLuaAppCompositionAlways1 = FFlagLuaAppCompositionAlways or (p1.appCompositionEnabled or p1.sduiContext.appCompositionEnabled)
 	local LayoutOrder = p1.layoutOrder
 	local SduiContext = p1.sduiContext
@@ -191,9 +195,15 @@ return ReactModule.memo(function(p1)
 		}),
 		items = UseMemoResult,
 		renderItem = ReactModule.useCallback(function(ComponentConfig, Index, Size, _)
-			-- upvalues: ReactModule (upval), SduiContext (copy), SduiErrors (upval), ImpressionsTag (copy), FindAnalyticsFieldFunction (upval), t (upval), SduiBuilder (upval), FFlagSduiFixSearchTelemetry (upval), UseRefResult1 (copy), SduiCollectionAnalyticsBuilder (upval), FFlagSduiErrorPaths (upval), GetSduiComponentWrapperFunction (upval), UseCollectionAnalyticsContextResult (copy), p1 (copy), VerticalGap (copy), SduiCollectionItemModule (upval), Gutter (copy)
+			-- upvalues: FFlagLuaAppSduiSearchResultsVideoPreview (upval), SduiContext (copy), GetViewportAutoplayAnchorTileTagFunction (upval), ReactModule (upval), SduiErrors (upval), ImpressionsTag (copy), FindAnalyticsFieldFunction (upval), t (upval), SduiBuilder (upval), FFlagSduiFixSearchTelemetry (upval), UseRefResult1 (copy), SduiCollectionAnalyticsBuilder (upval), FFlagSduiErrorPaths (upval), ViewportAutoplayGridCellTag (upval), GetSduiComponentWrapperFunction (upval), UseCollectionAnalyticsContextResult (copy), p1 (copy), VerticalGap (copy), SduiCollectionItemModule (upval), Gutter (copy), CombineReactTagsFunction (upval)
+			local ViewportAutoplayAnchorTileTag = if FFlagLuaAppSduiSearchResultsVideoPreview and SduiContext.videoPlaybackContext then GetViewportAutoplayAnchorTileTagFunction(Index) else nil
+			
 			if ComponentConfig and ComponentConfig.isBlank then
-				return ReactModule.createElement("Frame", { BackgroundTransparency = 1, LayoutOrder = Index }), "blank"
+				return ReactModule.createElement("Frame", {
+					BackgroundTransparency = 1,
+					LayoutOrder = Index,
+					[ReactModule.Tag] = if FFlagLuaAppSduiSearchResultsVideoPreview then ViewportAutoplayAnchorTileTag else nil
+				}), "blank"
 			end
 			if not ComponentConfig then
 				SduiContext.dependencies.logger.reportError(SduiErrors.SduiErrorType.NilItem, {
@@ -223,6 +233,8 @@ return ReactModule.memo(function(p1)
 				topicDataPosition = if FFlagSduiFixSearchTelemetry then ComponentConfig.realIndex else nil
 			}
 			UseRefResult1.current[Index] = SduiCollectionAnalyticsBuilder.buildAndValidateItemAnalyticsData(SduiContext, ComponentConfig.analyticsData, nil, LocalAnalyticsData, ComponentType, nil, if FFlagSduiErrorPaths then ComponentConfig.errorContext else nil)
+			local ViewportAutoplayGridCellTag1 = if FFlagLuaAppSduiSearchResultsVideoPreview and SduiContext.videoPlaybackContext then ViewportAutoplayGridCellTag else nil
+			local ColSpan = if FFlagLuaAppSduiSearchResultsVideoPreview and ViewportAutoplayGridCellTag1 and ComponentConfig.spanOverride and (ComponentConfig.spanOverride.colSpan or 1) > 1 then ComponentConfig.spanOverride.colSpan else nil
 			local Element = ReactModule.createElement(GetSduiComponentWrapperFunction(ComponentConfig), {
 				componentConfig = ComponentConfig,
 				sduiContext = SduiContext,
@@ -251,18 +263,22 @@ return ReactModule.memo(function(p1)
 				InnerWrapperSize = nil
 			else
 				local SpanOverride = ComponentConfig.spanOverride
-				local ColSpan = SpanOverride.colSpan or 1
+				local ColSpan1 = SpanOverride.colSpan or 1
 				local RowSpan = SpanOverride.rowSpan or 1
-				InnerWrapperSize = UDim2.new(ColSpan, Gutter * (ColSpan - 1), RowSpan, VerticalGap * (RowSpan - 1))
+				InnerWrapperSize = UDim2.new(ColSpan1, Gutter * (ColSpan1 - 1), RowSpan, VerticalGap * (RowSpan - 1))
 			end
 			config.innerWrapperSize = InnerWrapperSize
+			config.tag = if FFlagLuaAppSduiSearchResultsVideoPreview then CombineReactTagsFunction(ViewportAutoplayAnchorTileTag, ViewportAutoplayGridCellTag1) else nil
+			config.autoplayColSpan = if FFlagLuaAppSduiSearchResultsVideoPreview then ColSpan else nil
+			config.autoplayCellHorizontalPadding = if FFlagLuaAppSduiSearchResultsVideoPreview and ColSpan then Gutter else nil
 			
 			return CreateElementFunction(SduiCollectionItemModule, config, { Item = Element }), ComponentType or "unknown"
 		end, {
 			SduiContext, p1.analyticsContext, p1.scrollViewPositionChangedSignal,
 			p1.verticalScrollingFrameRef, UseCollectionAnalyticsContextResult,
 			ImpressionsTag, p1.index, p1.disableSelectionOrder, p1.selectionOrderBase,
-			Gutter, VerticalGap
+			Gutter, VerticalGap,
+			if FFlagLuaAppSduiSearchResultsVideoPreview then SduiContext.videoPlaybackContext else nil
 		}),
 		numColumns = if FFlagLuaAppCompositionAlways1 then nil else UseSignalStateResult.numColumns,
 		columnGap = if FFlagLuaAppCompositionAlways1 then nil else UseSignalStateResult.columnGap,

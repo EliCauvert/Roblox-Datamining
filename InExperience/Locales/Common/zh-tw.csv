@@ -2394,6 +2394,8 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,所有遊戲
 Feature.Build.Label.AmountAvailable,尚有 {AMOUNT} 次可使用
+Feature.Build.Label.AttachmentCountPlural,{count} 個附件
+Feature.Build.Label.AttachmentCountSingular,1 個附件
 Feature.Build.Label.Autosaved,已自動儲存
 Feature.Build.Label.Available,可供使用
 Feature.Build.Label.AvailableForPurchase,開放購買
@@ -2437,6 +2439,7 @@ Feature.Build.Label.IconThumbnails,圖示和縮圖
 Feature.Build.Label.Images2D,2D 圖片
 Feature.Build.Label.InProgress,進行中
 Feature.Build.Label.InputNeeded,必須輸入內容
+Feature.Build.Label.InspirationTab,靈感
 Feature.Build.Label.InternalSpec,內部規格
 Feature.Build.Label.InternalTesting,內部測試
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -3358,9 +3361,23 @@ Feature.Chat.Title.NewChat,新聊天
 Feature.Chat.Toast.Error.InvalidUserSelected,此清單中有人員無法新增
 Feature.CloudClient.Action.PlayWithoutCloudPlay,不使用 Cloud Play 遊玩
 Feature.CloudClient.Description.CloudPlayOffer,Cloud Play 會在 Roblox 的電腦上執行遊戲，因此載入速度可能會更快，而且當機次數也可能變少。這只會在你玩此遊戲時有效。
+Feature.CloudClient.Description.GalleryUnavailableCloudPlay,不使用 Cloud Play 重新加入，即可使用你的圖庫。
+Feature.CloudClient.Description.GalleryUnavailableRobloxReality,不使用 Restyle 重新加入即可使用你的圖庫。
+Feature.CloudClient.Description.RobloxRealityPreview,Restyle 為搶先預覽。畫面可能與原始遊戲看起來不同。
 Feature.CloudClient.Heading.CloudPlayOffer,使用 Cloud Play 遊玩
+Feature.CloudClient.Heading.GalleryUnavailableCloudPlay,Cloud Play 尚未提供圖庫功能。
+Feature.CloudClient.Heading.GalleryUnavailableRobloxReality,Restyle 尚未提供圖庫功能。
+Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Cloud Play 尚未提供擷取功能。
+Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Restyle 尚未提供擷取功能。
+Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Play 無法運作。你正在以一般模式遊玩。
+Feature.CloudClient.Label.RobloxReality,Restyle
+Feature.CloudClient.Label.RobloxRealityDemoLength,試玩 {minutes} 分鐘的示範版
+Feature.CloudClient.Label.RobloxRealityEndingSoon,Restyle 將於 1 分鐘後結束，屆時你將離開遊戲。
 Feature.CloudClient.Label.RobloxRealityGraphics,你的遊戲，煥然一新
 Feature.CloudClient.Label.RobloxRealityPlusOnly,僅限 Plus 訂閱者使用
+Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,Cloud Play 尚未提供自身視角功能。
+Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,Restyle 尚未提供自身視角功能。
+Feature.CloudClient.Label.TimeLeft,剩餘時間
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,讓好友找到您
 Feature.Contacts.Action.Invite,邀請
@@ -3675,6 +3692,7 @@ Feature.FriendsActivityFeed.Label.ViewRecentActivity,檢視近期活動
 Feature.FriendsMenu.Label.SelectedFriendsCount,已選取 {numerator}/{denominator} 名好友
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,已選取 {selectedCount} 名好友
 Feature.GameBadges.Label.Experience,
+Feature.GameDetails.Action.Continue,
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,
 Feature.GameDetails.Action.NotInterested,沒有興趣
@@ -3706,8 +3724,10 @@ Feature.GameDetails.Label.WhyThisAd,為何會顯示這則廣告？
 Feature.GameDetails.Label.Yes,
 Feature.GameDetails.Message.AdPreferences,廣告偏好
 Feature.GameDetails.Message.AnonymousFeedbackTermsOfUse,系統會以匿名方式分享回應，並根據 {underlineStart}Roblox 使用條款{underlineEnd}將回應視為回饋。
+Feature.GameDetails.Message.ExternalLinkWarning,按一下「繼續」後，系統會將你重新導向至非 Roblox 擁有或經營的網站。該網站可能有不同的條款與隱私權政策。
 Feature.GameDetails.Message.HelpImproveExperience,請協助我們改善體驗
 Feature.GameDetails.Message.HidingExperienceQuestion,請問你隱藏此體驗的原因為何？
+Feature.GameDetails.Message.LeavingRobloxTitle,您即將離開 Roblox
 Feature.GameDetails.Message.PurchaseGameV2,要以 {X} Robux 解鎖 {gameName} 嗎？
 Feature.GameDetails.Message.SponsoredDisclosure.Error,由於暫時發生錯誤，無法顯示贊助資訊。
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,目前看到的這項贊助內容，是根據非個人化因素（例如裝置資訊、地點與年齡）所顯示的相關內容。此體驗的創作者為 {CreatorName}，贊助費用由 {PayerName} 支付。如需瞭解詳情，請前往帳號中「設定」下的「隱私與成年適宜內容」頁面：
@@ -3727,9 +3747,11 @@ Feature.GameFollows.TooltipTurnedOnNotifications,{experienceName} 的通知已�
 Feature.GameJoin.Description.DifferentServer,你將在不同的伺服器上開始遊戲
 Feature.GameJoin.Label.PlayTogether,你們可以一起玩
 Feature.GameJoin.Label.PlayTogetherSoon,你們很快就可以一起玩了
+Feature.GameJoin.Label.RecentCoplay,你們最近一起玩過
 Feature.GamePage.Action.BackToTop,回到頂端
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
+Feature.GamePage.LabelCancelField,
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,您的年齡驗證狀態無法參訪此體驗。
 Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,訪客無法加入此體驗。
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,必須購買此體驗的參訪權。
@@ -4951,6 +4973,7 @@ Feature.Toast.Username.Copied,使用者名稱已複製到剪貼簿。
 Feature.Toast.VoteError.AssetNotVoteable,無法為此體驗投票。
 Feature.Toast.VoteError.Default,無法進行此動作。
 Feature.Toast.VoteError.FloodCheckThresholdMet,您的投票頻率過高。
+Feature.Toast.VoteError.NotSaved,投票未儲存
 Feature.Toast.VoteError.PlayGame,若要評價，請先參訪此體驗。
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,由於你屢次違反我們的《社群標準》，目前無法驗證你的年齡。你可以在限制結束後重試。
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,年齡驗證已暫停
@@ -5152,7 +5175,7 @@ IAPExperience.InsufficientRobux.Title.InsufficientRobux,
 IAPExperience.LeaveRoblox.Action.Cancel,
 IAPExperience.LeaveRoblox.Action.Continue,
 IAPExperience.LeaveRoblox.Text.ExternalWebsiteWarning,按下「繼續」後，系統會將你導向 Roblox 以外的網站，該網站的條款與隱私權政策可能與 Roblox 不同。
-IAPExperience.LeaveRoblox.Title.LeavingRoblox,您即將離開 Roblox
+IAPExperience.LeaveRoblox.Title.LeavingRoblox,
 IAPExperience.Loading.Text.PurchasingItem,正在購買道具……
 IAPExperience.Loading.Text.PurchasingRobux,正在購買 Robux ……
 IAPExperience.Loading.Text.WaitingForPurchase,正在等待購買……

@@ -14,7 +14,7 @@ local IsGameInviteJoinForPioneerEnabledModule = require(Parent.utils.isGameInvit
 return function(p1)
 	-- upvalues: ReactModule (copy), FFlagGameInviteInExpJoinCta3 (copy), IsGameInviteJoinForPioneerEnabledModule (copy), RobloxTranslatorModule (copy), EnableToastNotificationsDeeplinkConfirmationModalHeightFix (copy), GuiService (copy), ReactRobloxModule (copy), InteractiveAlert (copy), ButtonType (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.new(800, 600))
-	local FFlagGameInviteInExpJoinCta3_1 = FFlagGameInviteInExpJoinCta3 or IsGameInviteJoinForPioneerEnabledModule()
+	local FFlagGameInviteInExpJoinCta3_1 = FFlagGameInviteInExpJoinCta3 or IsGameInviteJoinForPioneerEnabledModule
 	
 	return ReactModule.createElement("Frame", {
 		Active = true,

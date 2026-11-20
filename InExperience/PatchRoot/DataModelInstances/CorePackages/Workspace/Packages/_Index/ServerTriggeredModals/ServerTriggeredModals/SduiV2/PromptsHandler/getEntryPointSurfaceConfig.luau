@@ -7,6 +7,7 @@ local FFlagEdpOpenPromptsHandlerEnabled = SharedFlagsModule.FFlagEdpOpenPromptsH
 local FFlagLuaAppEnableSduiHomePage = SharedFlagsModule.FFlagLuaAppEnableSduiHomePage
 local FFlagChatPushUpsellPromptsEnabled = SharedFlagsModule.FFlagChatPushUpsellPromptsEnabled
 local FFlagNotificationStreamPromptsHandlerEnabled = SharedFlagsModule.FFlagNotificationStreamPromptsHandlerEnabled
+local FFlagEventRsvpPushUpsellEnabled = SharedFlagsModule.FFlagEventRsvpPushUpsellEnabled
 local config = {
 	[PromptsEntryPointModule.HomepageLaunch] = if game:DefineFastFlag("LuaAppPromptsHomepageConfigName", false) or FFlagLuaAppEnableSduiHomePage then {
 		surfaceKey = "Prompts",
@@ -46,6 +47,11 @@ local config = {
 		surfaceKey = "NotificationStreamPrompts",
 		appPage = AppPage.Notifications,
 		configKey = "Prompts" .. PromptsEntryPointModule.NotificationStreamOpen
+	} else nil,
+	[PromptsEntryPointModule.AppEventRsvpGoing] = if FFlagEventRsvpPushUpsellEnabled then {
+		surfaceKey = "EventRsvpGoingPrompts",
+		appPage = AppPage.ExperienceDetail,
+		configKey = "Prompts" .. PromptsEntryPointModule.AppEventRsvpGoing
 	} else nil
 }
 

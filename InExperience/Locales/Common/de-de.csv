@@ -2317,6 +2317,8 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,Alle Spiele
 Feature.Build.Label.AmountAvailable,{AMOUNT} verfügbar
+Feature.Build.Label.AttachmentCountPlural,{count} Anhänge
+Feature.Build.Label.AttachmentCountSingular,1 Anhang
 Feature.Build.Label.Autosaved,Automatisch gespeichert
 Feature.Build.Label.Available,Verfügbar
 Feature.Build.Label.AvailableForPurchase,Zum Kauf verfügbar
@@ -2360,6 +2362,7 @@ Feature.Build.Label.IconThumbnails,Symbol und Vorschaubilder
 Feature.Build.Label.Images2D,2D-Bilder
 Feature.Build.Label.InProgress,In Arbeit
 Feature.Build.Label.InputNeeded,Eingabe erforderlich
+Feature.Build.Label.InspirationTab,Inspiration
 Feature.Build.Label.InternalSpec,Interne Spezifikation
 Feature.Build.Label.InternalTesting,Interner Test
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -3281,9 +3284,23 @@ Feature.Chat.Title.NewChat,Neuer Chat
 Feature.Chat.Toast.Error.InvalidUserSelected,Eine oder mehrere Personen in dieser Liste können nicht hinzugefügt werden
 Feature.CloudClient.Action.PlayWithoutCloudPlay,Ohne Cloud Play spielen
 Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play führt das Spiel auf den Computern von Roblox aus, sodass es möglicherweise schneller lädt und es zu weniger Abstürzen kommt. Es ist nur verfügbar, während du dieses Spiel spielst."
+Feature.CloudClient.Description.GalleryUnavailableCloudPlay,"Tritt ohne Cloud Play erneut bei, um deine Galerie zu verwenden."
+Feature.CloudClient.Description.GalleryUnavailableRobloxReality,"Tritt ohne Restyle erneut bei, um deine Galerie zu verwenden."
+Feature.CloudClient.Description.RobloxRealityPreview,Restyle ist eine frühe Vorschau. Möglicherweise sehen die Dinge anders aus als im Originalspiel.
 Feature.CloudClient.Heading.CloudPlayOffer,Mit Cloud Play spielen
+Feature.CloudClient.Heading.GalleryUnavailableCloudPlay,Die Galerie ist in Cloud Play noch nicht verfügbar.
+Feature.CloudClient.Heading.GalleryUnavailableRobloxReality,Die Galerie ist mit Restyle noch nicht verfügbar.
+Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Die Aufnahmefunktion ist in Cloud Play noch nicht verfügbar.
+Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Die Aufnahmefunktion ist mit Restyle noch nicht verfügbar.
+Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Play funktioniert nicht. Du spielst jetzt normal.
+Feature.CloudClient.Label.RobloxReality,Restyle
+Feature.CloudClient.Label.RobloxRealityDemoLength,Probiere eine {minutes}-minütige Demo aus
+Feature.CloudClient.Label.RobloxRealityEndingSoon,Restyle endet in 1 Minute. Du verlässt anschließend das Spiel.
 Feature.CloudClient.Label.RobloxRealityGraphics,"Dein Spiel, neu interpretiert"
 Feature.CloudClient.Label.RobloxRealityPlusOnly,Nur für Plus-Abonnenten
+Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,Die Selbstansicht ist in Cloud Play noch nicht verfügbar.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,Die Selbstansicht ist mit Restyle noch nicht verfügbar.
+Feature.CloudClient.Label.TimeLeft,Verbleibende Zeit
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,Lass dich von Freunden finden
 Feature.Contacts.Action.Invite,Einladen
@@ -3598,6 +3615,7 @@ Feature.FriendsActivityFeed.Label.ViewRecentActivity,Kürzliche Aktivität anzei
 Feature.FriendsMenu.Label.SelectedFriendsCount,{numerator}/{denominator} Freunde ausgewählt
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,{selectedCount} Freunde ausgewählt
 Feature.GameBadges.Label.Experience,
+Feature.GameDetails.Action.Continue,
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,Feedback geben
 Feature.GameDetails.Action.NotInterested,Nicht interessiert
@@ -3629,8 +3647,10 @@ Feature.GameDetails.Label.WhyThisAd,Warum erscheint diese Anzeige?
 Feature.GameDetails.Label.Yes,
 Feature.GameDetails.Message.AdPreferences,Werbeeinstellungen
 Feature.GameDetails.Message.AnonymousFeedbackTermsOfUse,Antworten werden anonym geteilt und gelten gemäß den {underlineStart}Roblox-Nutzungsbedingungen{underlineEnd} als Feedback.
+Feature.GameDetails.Message.ExternalLinkWarning,"Wenn du auf ""Weiter"" klickst, wirst du zu einer Website weitergeleitet, die Roblox nicht gehört und nicht von Roblox betrieben wird. Sie kann andere Nutzungsbedingungen und Datenschutzrichtlinien haben."
 Feature.GameDetails.Message.HelpImproveExperience,"Hilf uns, deine Erfahrung zu verbessern"
 Feature.GameDetails.Message.HidingExperienceQuestion,Warum hast du diese Experience ausgeblendet?
+Feature.GameDetails.Message.LeavingRobloxTitle,Roblox wird verlassen
 Feature.GameDetails.Message.PurchaseGameV2,Zugriff auf {gameName} für {X} R$ freischalten?
 Feature.GameDetails.Message.SponsoredDisclosure.Error,Die Sponsoring-Informationen konnten aufgrund eines vorübergehenden Fehlers nicht angezeigt werden.
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"Du siehst diesen gesponserten Inhalt auf der Grundlage nicht personalisierter Faktoren wie Geräteinformationen, Standort und Alter, um dir angemessene Inhalte bereitzustellen. Der Creator der Experience ist {CreatorName}. Das Sponsoring wurde von {PayerName} bezahlt. Um mehr zu erfahren, besuche bitte die Seite ""Datenschutz und Inhaltseinstufung"" unter Einstellungen in deinem Konto, hier:"
@@ -3650,9 +3670,11 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Benachrichtigungen aktiviert f�
 Feature.GameJoin.Description.DifferentServer,Ihr werdet auf einem anderen Server starten
 Feature.GameJoin.Label.PlayTogether,Ihr könnt zusammen spielen
 Feature.GameJoin.Label.PlayTogetherSoon,Ihr könnt bald zusammen spielen
+Feature.GameJoin.Label.RecentCoplay,Ihr habt kürzlich zusammen gespielt
 Feature.GamePage.Action.BackToTop,Zurück zum Seitenanfang
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
+Feature.GamePage.LabelCancelField,
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,Diese Experience ist aufgrund deines Altersverifizierungsstatus nicht verfügbar.
 Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,Gäste können dieser Experience nicht beitreten.
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,"Um diese Experience zu besuchen, ist ein Kauf erforderlich."
@@ -4871,6 +4893,7 @@ Feature.Toast.Username.Copied,Benutzername in die Zwischenablage kopiert
 Feature.Toast.VoteError.AssetNotVoteable,Diese Experience kann nicht bewertet werden.
 Feature.Toast.VoteError.Default,Aktion nicht verfügbar.
 Feature.Toast.VoteError.FloodCheckThresholdMet,Du stimmst zu schnell ab.
+Feature.Toast.VoteError.NotSaved,Die Abstimmung wurde nicht gespeichert
 Feature.Toast.VoteError.PlayGame,"Bevor du diese Experience bewerten kannst, musst du sie besuchen."
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,"Du kannst dein Alter derzeit nicht überprüfen lassen, da du wiederholt gegen unsere Community-Regeln verstoßen hast. Du kannst es erneut versuchen, sobald die Einschränkung aufgehoben wurde."
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,Altersprüfungen ausgesetzt
@@ -5072,7 +5095,7 @@ IAPExperience.InsufficientRobux.Title.InsufficientRobux,
 IAPExperience.LeaveRoblox.Action.Cancel,
 IAPExperience.LeaveRoblox.Action.Continue,
 IAPExperience.LeaveRoblox.Text.ExternalWebsiteWarning,"Wenn du auf ""Weiter"" klickst, wirst du zu einer Website weitergeleitet, die nicht Roblox gehört und nicht von Roblox betrieben wird. Dort gelten möglicherweise andere Nutzungsbedingungen und Datenschutzrichtlinien."
-IAPExperience.LeaveRoblox.Title.LeavingRoblox,Roblox wird verlassen
+IAPExperience.LeaveRoblox.Title.LeavingRoblox,
 IAPExperience.Loading.Text.PurchasingItem,Artikel wird gekauft ...
 IAPExperience.Loading.Text.PurchasingRobux,Kaufe Robux ...
 IAPExperience.Loading.Text.WaitingForPurchase,Warten auf Kauf ...

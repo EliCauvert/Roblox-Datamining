@@ -1,5 +1,6 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
+local HttpService = game:GetService("HttpService")
 local LocalizationService = game:GetService("LocalizationService")
 local CreatorCreditModule = require(Parent.DataHydration.CreatorCredit)
 local NumberLocalization = require(Parent.Localization).NumberLocalization
@@ -18,7 +19,7 @@ local function _(Value: number)
 end
 
 return function()
-	-- upvalues: CreatorCreditModule (copy), ReactModule (copy), SignalsReactModule (copy), FFlagBuildExperienceModelPickerModule (copy), GetBuildCreatorCreditRefreshStoreModule (copy), UseOpenBuyRobuxWebViewModule (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), SendBuildExperienceEventModule (copy), NumberLocalization (copy), LocalizationService (copy)
+	-- upvalues: CreatorCreditModule (copy), ReactModule (copy), SignalsReactModule (copy), FFlagBuildExperienceModelPickerModule (copy), GetBuildCreatorCreditRefreshStoreModule (copy), UseOpenBuyRobuxWebViewModule (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), HttpService (copy), SendBuildExperienceEventModule (copy), NumberLocalization (copy), LocalizationService (copy)
 	local CreatorCreditStore = CreatorCreditModule.getCreatorCreditStore(false)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactModule.useMemo(function()
 		-- upvalues: CreatorCreditStore (copy)
@@ -35,12 +36,14 @@ return function()
 		end
 	end, { CreatorCreditStore })))
 	local UseResult = if FFlagBuildExperienceAdsAndRobuxTelemetryModule then ReactModule.useCallback(function()
-		-- upvalues: SendBuildExperienceEventModule (upval), UseOpenBuyRobuxWebViewModuleResult (copy)
+		-- upvalues: HttpService (upval), SendBuildExperienceEventModule (upval), UseOpenBuyRobuxWebViewModuleResult (copy)
+		local Guid = HttpService:GenerateGUID(false)
 		SendBuildExperienceEventModule("BUY_ROBUX_CLICK", {}, {
 			context = "creator_credit_balance_chip",
-			isInExperience = if game.GameId == 0 then "false" else "true"
+			isInExperience = if game.GameId == 0 then "false" else "true",
+			buyRobuxAttemptId = Guid
 		})
-		UseOpenBuyRobuxWebViewModuleResult()
+		UseOpenBuyRobuxWebViewModuleResult({ context = "creator_credit_balance_chip", id = Guid })
 	end, { UseOpenBuyRobuxWebViewModuleResult }) else nil
 	
 	return {

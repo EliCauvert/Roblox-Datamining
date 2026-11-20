@@ -72,6 +72,7 @@ return {
 	FoundationDialogOverlayShadow = SafeFlagsModule.createGetFFlag("FoundationDialogOverlayShadow2")(),
 	FoundationInputSliderTypedValueSteps = SafeFlagsModule.createGetFFlag("FoundationInputSliderTypedValueSteps")(),
 	FoundationShareTokenSets = SafeFlagsModule.createGetFFlag("FoundationShareTokenSets")(),
+	FoundationInputSliderVariant = SafeFlagsModule.createGetFFlag("FoundationInputSliderVariant")(),
 	FoundationSliderAutoSizeFix = FoundationSliderAutoSizeFix,
 	FoundationSliderCapture = FoundationSliderCapture
 }

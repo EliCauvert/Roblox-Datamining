@@ -11,6 +11,9 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 local HttpService = game:GetService("HttpService")
 local FFlagEnableAEGIS2CommsFAEUpsell = require(Parent.SharedFlags).FFlagEnableAEGIS2CommsFAEUpsell
+local FFlagAgeVerificationFocusNav = require(Parent.SharedFlags).FFlagAgeVerificationFocusNav
+local FocusNavigationUtilsModule = if FFlagAgeVerificationFocusNav then require(Parent.FocusNavigationUtils) else nil
+local InputHandlersModule = if FFlagAgeVerificationFocusNav then require(Parent.InputHandlers) else nil
 local SocialUpsellAnalyticsModule = require(SocialUpsell.Analytics.SocialUpsellAnalytics)
 local _ = require(SocialUpsell.Analytics.Enum.UpsellEntrySurfaceType)
 local UpsellComponentModule = require(SocialUpsell.Analytics.Enum.UpsellComponent)
@@ -22,6 +25,11 @@ local EventTypes = SocialLuaAnalyticsModule.Analytics.Enums.EventTypes
 local FIntMaxDaysToShowCountDownLabelModule = require(SocialUpsell.Flag.FIntMaxDaysToShowCountDownLabel)
 local FIntMinDaysToShowCountdownLabelModule = require(SocialUpsell.Flag.FIntMinDaysToShowCountdownLabel)
 local UseSocialUpsellOverlayControllerModule = require(SocialUpsell.Hooks.useSocialUpsellOverlayController)
+local FocusNavigationEventNameEnum = if FFlagAgeVerificationFocusNav then FocusNavigationUtilsModule.FocusNavigationEventNameEnum else nil
+local Config = if FFlagAgeVerificationFocusNav then {
+	[Enum.KeyCode.ButtonB] = FocusNavigationEventNameEnum.NavigateBack,
+	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
+} else nil
 local MinHeightFor = ResponsiveModule.BreakpointConfig.getMinHeightFor(ResponsiveModule.Keys.Medium)
 local BadgeVariant = FoundationModule.Enums.BadgeVariant
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
@@ -34,7 +42,7 @@ local Image = FoundationModule.Image
 local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
 local config = { isInExperience = true }
 
-local function v32(DeadlineUtcTimestamp, p1)
+local function v37(DeadlineUtcTimestamp, p1)
 	-- upvalues: FIntMinDaysToShowCountdownLabelModule (copy), FIntMaxDaysToShowCountDownLabelModule (copy)
 	if DeadlineUtcTimestamp and DeadlineUtcTimestamp ~= 0 then
 		local Floored = math.floor((DeadlineUtcTimestamp - os.time()) / 86400)
@@ -48,7 +56,7 @@ end
 local GetViewportSize = if FFlagEnableAEGIS2CommsFAEUpsell then DisplayModule.GetDisplayStore(false).getViewportSize else nil
 
 return function(p1)
-	-- upvalues: config (copy), UseSocialUpsellOverlayControllerModule (copy), ReactModule (copy), UseScaledValueFunction (copy), ReactFocusNavigationModule (copy), ReactUtilsModule (copy), HttpService (copy), SocialUpsellAnalyticsModule (copy), UpsellComponentModule (copy), UseLocalizationFunction (copy), v32 (copy), FFlagEnableAEGIS2CommsFAEUpsell (copy), SignalsReactModule (copy), GetViewportSize (ref), UseSelectorFunction (copy), MinHeightFor (copy), EventTypes (copy), ConstantsModule (copy), ButtonVariant (copy), Dialog (copy), DialogSize (copy), View (copy), Image (copy), BannerBadge (copy), FoundationModule (copy), IconName (copy), BadgeVariant (copy), Text (copy)
+	-- upvalues: config (copy), UseSocialUpsellOverlayControllerModule (copy), ReactModule (copy), UseScaledValueFunction (copy), ReactFocusNavigationModule (copy), ReactUtilsModule (copy), HttpService (copy), SocialUpsellAnalyticsModule (copy), UpsellComponentModule (copy), UseLocalizationFunction (copy), v37 (copy), FFlagEnableAEGIS2CommsFAEUpsell (copy), SignalsReactModule (copy), GetViewportSize (ref), UseSelectorFunction (copy), MinHeightFor (copy), EventTypes (copy), ConstantsModule (copy), FFlagAgeVerificationFocusNav (copy), InputHandlersModule (copy), Config (copy), FocusNavigationEventNameEnum (copy), ButtonVariant (copy), Dialog (copy), DialogSize (copy), View (copy), Image (copy), BannerBadge (copy), FoundationModule (copy), IconName (copy), BadgeVariant (copy), Text (copy)
 	local P2 = p1 or config
 	local UseSocialUpsellOverlayControllerModuleResult = UseSocialUpsellOverlayControllerModule(P2.isInExperience)
 	local UseRefResult = ReactModule.useRef(nil)
@@ -84,8 +92,8 @@ return function(p1)
 		dayLeft = "Feature.FAE.Label.DayLeft"
 	})
 	local UseMemoResult2 = ReactModule.useMemo(function()
-		-- upvalues: P2 (copy), v32 (upval), UseLocalizationResult (copy)
-		return if P2.countDownBadge then v32(P2.countDownBadge.deadlineUtcTimestamp, UseLocalizationResult) else nil
+		-- upvalues: P2 (copy), v37 (upval), UseLocalizationResult (copy)
+		return if P2.countDownBadge then v37(P2.countDownBadge.deadlineUtcTimestamp, UseLocalizationResult) else nil
 	end, { P2.countDownBadge, UseLocalizationResult })
 	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: P2 (copy), UseMemoResult2 (copy)
@@ -137,25 +145,33 @@ return function(p1)
 		UseResult(ConstantsModule.UPSELL_OVERLAY_BUTTON_ACTION.Primary)
 		P2.primaryAction.onActivated()
 	end, { P2.primaryAction, UseResult })
-	
-	return ReactModule.createElement(Dialog.Root, {
+	local UseResult2 = ReactModule.useCallback(function()
+		-- upvalues: UseResult (copy), ConstantsModule (upval), UseSocialUpsellOverlayControllerModuleResult (copy), P2 (copy)
+		UseResult(ConstantsModule.UPSELL_OVERLAY_BUTTON_ACTION.Dismiss)
+		UseSocialUpsellOverlayControllerModuleResult.closeSocialOverlay()
+		
+		if P2.onClose then
+			P2.onClose()
+		end
+	end, {
+		UseResult,
+		P2.onClose,
+		UseSocialUpsellOverlayControllerModuleResult.closeSocialOverlay
+	})
+	local UseComposedRefResult1 = if FFlagAgeVerificationFocusNav then ReactUtilsModule.useComposedRef(UseDefaultFocusBehaviorResult2, (ReactFocusNavigationModule.useEventHandler(FocusNavigationEventNameEnum.NavigateBack, ReactModule.useMemo(function()
+		-- upvalues: InputHandlersModule (upval), UseResult2 (copy)
+		return InputHandlersModule.onRelease(function(p2)
+			-- upvalues: UseResult2 (upval)
+			UseResult2()
+			p2:cancel()
+		end)
+	end, { UseResult2 }), nil, (ReactFocusNavigationModule.useEventMap(Config))))) else UseDefaultFocusBehaviorResult2
+	local Element = ReactModule.createElement(Dialog.Root, {
 		hasBackdrop = true,
 		closeOnClickOutside = true,
 		size = DialogSize.Medium,
-		onClose = ReactModule.useCallback(function()
-			-- upvalues: UseResult (copy), ConstantsModule (upval), UseSocialUpsellOverlayControllerModuleResult (copy), P2 (copy)
-			UseResult(ConstantsModule.UPSELL_OVERLAY_BUTTON_ACTION.Dismiss)
-			UseSocialUpsellOverlayControllerModuleResult.closeSocialOverlay()
-			
-			if P2.onClose then
-				P2.onClose()
-			end
-		end, {
-			UseResult,
-			P2.onClose,
-			UseSocialUpsellOverlayControllerModuleResult.closeSocialOverlay
-		}),
-		ref = UseComposedRefResult
+		onClose = UseResult2,
+		ref = if FFlagAgeVerificationFocusNav then UseRefResult1 else UseComposedRefResult
 	}, {
 		DialogContent = ReactModule.createElement(Dialog.Content, {}, {
 			Content = ReactModule.createElement(View, {
@@ -216,4 +232,10 @@ return function(p1)
 			})
 		})
 	})
+	
+	return if FFlagAgeVerificationFocusNav then ReactModule.createElement("Frame", {
+		BackgroundTransparency = 1,
+		Size = UDim2.fromScale(1, 1),
+		ref = UseComposedRefResult1
+	}, { Dialog = Element }) else Element
 end

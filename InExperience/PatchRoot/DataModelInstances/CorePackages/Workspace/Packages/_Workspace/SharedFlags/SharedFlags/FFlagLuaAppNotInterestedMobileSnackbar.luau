@@ -1,0 +1,3 @@
+﻿local FFlagLuaAppNotInterestedTileFeedbackButtonModule = require(script.Parent.FFlagLuaAppNotInterestedTileFeedbackButton)
+
+return game:DefineFastFlag("LuaAppNotInterestedMobileSnackbar", false) and FFlagLuaAppNotInterestedTileFeedbackButtonModule

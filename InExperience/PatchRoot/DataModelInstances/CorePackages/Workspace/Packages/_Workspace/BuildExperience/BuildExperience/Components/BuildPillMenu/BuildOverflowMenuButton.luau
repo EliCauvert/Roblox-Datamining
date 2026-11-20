@@ -316,6 +316,7 @@ return function(p1)
 			testId = "build-version-history",
 			universeId = p1.target.universeId,
 			placeId = p1.target.placeId,
+			sessionId = p1.target.sessionId,
 			onClose = UseResult,
 			onAgentRollbackStarted = UseResult
 		}) else nil
