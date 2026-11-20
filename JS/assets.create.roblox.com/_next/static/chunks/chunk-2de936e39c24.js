@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "7fa7c56d-8356-1b65-3965-45b433e89608")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "ebc47750-6838-ce86-43c0-a1401aa36d80")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 713267, e => {
@@ -1219,7 +1219,7 @@
     }, "q", 0, function(e, t) {
         let a = e.toLowerCase(),
             s = f.has(a) ? "".concat(a, "accessory") : a;
-        return "".concat("".concat("https://assets.create.roblox.com/cd87cdaba5257e23ca1c2f8e65eeead2f578dfba/assets", "/unifiedFeeSystem"), "/").concat(t ? "".concat(s, ".svg") : "".concat(s, "_black.svg"))
+        return "".concat("".concat("https://assets.create.roblox.com/ac5adf02bced7a5b5d67d1642bfb55cdcde0ab67/assets", "/unifiedFeeSystem"), "/").concat(t ? "".concat(s, ".svg") : "".concat(s, "_black.svg"))
     }, "U", 0, function(e, t) {
         return "/dashboard/creations/".concat(n.e[e], "/").concat(t, "/publish")
     }, "h", 0, function(e, t) {
@@ -1377,7 +1377,7 @@
         c = [s.f.TShirtAccessory, s.f.ShirtAccessory, s.f.PantsAccessory, s.f.JacketAccessory, s.f.SweaterAccessory, s.f.ShortsAccessory, s.f.DressSkirtAccessory],
         u = [s.f.EyeMakeup, s.f.LipMakeup, s.f.FaceMakeup, s.f.EyebrowAccessory, s.f.EyelashAccessory],
         d = [s.f.Hat, s.f.HairAccessory, s.f.FaceAccessory, s.f.NeckAccessory, s.f.ShoulderAccessory, s.f.FrontAccessory, s.f.BackAccessory, s.f.WaistAccessory];
-    e.s(["U", 0, d, "w", 0, o, "i", () => i, "o", 0, c, "t", 0, 30, "l", 0, 30, "n", 0, u, "S", 0, 50, "X", 0, l, "V", 0, {
+    e.s(["U", 0, d, "w", 0, o, "i", () => i, "o", 0, c, "t", 0, 30, "l", 0, 30, "n", 0, u, "B", 0, 50, "S", 0, 50, "X", 0, l, "V", 0, {
         nameKey: "Label.Recents",
         isRecents: !0
     }], 949599), e.s(["f", 0, e => {
@@ -1455,5 +1455,5 @@
     }])
 }]);
 
-//# debugId=7fa7c56d-8356-1b65-3965-45b433e89608
-//# sourceMappingURL=3xoimm6pcarog.js.map
+//# debugId=ebc47750-6838-ce86-43c0-a1401aa36d80
+//# sourceMappingURL=2vim4y0c7uv9q.js.map

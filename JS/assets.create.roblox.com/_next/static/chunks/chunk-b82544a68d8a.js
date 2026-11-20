@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "8281d234-3da9-1024-1c85-cd397ec2e4a1")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "38201952-9f9e-4c9a-9e4c-0c9b78e772c2")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 678863, 434925, e => {
@@ -2192,59 +2192,62 @@
                 useBreadcrumbs: g = !1,
                 secondarySize: f = "small",
                 omitPageTitle: h = !1,
-                children: k
+                PageProvider: k = t.Fragment,
+                children: N
             } = e, {
-                open: N,
-                dialog: T
+                open: T,
+                dialog: v
             } = (0, p.f)(), {
-                translate: v
-            } = (0, n.A)(), I = (0, t.useCallback)(() => {
-                N({
+                translate: I
+            } = (0, n.A)(), C = (0, t.useCallback)(() => {
+                T({
                     task: m.e.Default
                 })
-            }, [N]), C = t.default.isValidElement(s) && s.type === n.c, x = "string" == typeof s ? (0, a.jsx)("h1", {
+            }, [T]), x = t.default.isValidElement(s) && s.type === n.c, P = "string" == typeof s ? (0, a.jsx)("h1", {
                 className: "text-heading-large margin-none",
-                children: v(s)
-            }) : C ? (0, a.jsx)("h1", {
+                children: I(s)
+            }) : x ? (0, a.jsx)("h1", {
                 className: "text-heading-large margin-none",
                 children: s
             }) : null != s ? s : null;
             return (0, a.jsxs)(i.p, {
-                children: [(0, a.jsx)(S, {}), T, (0, a.jsx)(i.p.Rail, {
-                    openStudio: I,
-                    secondarySize: f,
-                    children: y
-                }), (0, a.jsx)(i.p.Header, {
+                children: [(0, a.jsx)(S, {}), v, (0, a.jsx)(i.p.Header, {
                     children: g ? (0, a.jsx)(A, {
                         inLayoutHeader: !0
                     }) : (0, a.jsxs)(u.f, {
                         container: !0,
                         alignItems: "center",
                         gap: "8px",
-                        children: [x, d && (0, a.jsx)(c.f, {
+                        children: [P, d && (0, a.jsx)(c.f, {
                             children: (0, a.jsx)(o.f, {
-                                labelText: v("Label.Beta")
+                                labelText: I("Label.Beta")
                             })
                         })]
                     })
-                }), (0, a.jsx)(i.p.PageContent, {
-                    id: L,
-                    banner: b,
-                    additionalLinks: (0, a.jsx)(w, {
-                        inline: !0
-                    }),
-                    children: (0, a.jsxs)("div", {
-                        className: "width-full height-full",
-                        children: [g && (null != (r = !h && x) ? r : d) && (0, a.jsxs)("div", {
-                            className: "flex items-center gap-small padding-bottom-large",
-                            children: [!h && x, d && (0, a.jsx)(c.f, {
-                                children: (0, a.jsx)(o.f, {
-                                    labelText: v("Label.Beta")
-                                })
-                            })]
-                        }), k, (0, a.jsx)(l.n, {})]
-                    })
-                })]
+                }), (0, a.jsxs)(k, {
+                    children: [(0, a.jsx)(i.p.Rail, {
+                        openStudio: C,
+                        secondarySize: f,
+                        children: y
+                    }), (0, a.jsx)(i.p.PageContent, {
+                        id: L,
+                        banner: b,
+                        additionalLinks: (0, a.jsx)(w, {
+                            inline: !0
+                        }),
+                        children: (0, a.jsxs)("div", {
+                            className: "width-full height-full",
+                            children: [g && (null != (r = !h && P) ? r : d) && (0, a.jsxs)("div", {
+                                className: "flex items-center gap-small padding-bottom-large",
+                                children: [!h && P, d && (0, a.jsx)(c.f, {
+                                    children: (0, a.jsx)(o.f, {
+                                        labelText: I("Label.Beta")
+                                    })
+                                })]
+                            }), N]
+                        })
+                    })]
+                }), (0, a.jsx)(l.n, {})]
             })
         }, [...i.d, y.f.RightsPortal, y.f.DeveloperProducts, y.f.Passes, y.f.Creations, y.f.PageTitles, y.f.Features, y.f.Privacy, y.f.Error, y.f.Analytics, y.f.TalentHubV2, y.f.Licenses, y.f.PlayerFeedback, y.f.RevenueShareAgreements, y.f.TaxDocumentation]);
     e.s(["X", 0, L, "U", 0, j], 966501), e.s(["f", 0, e => {
@@ -2257,31 +2260,33 @@
             secondaryRail: m,
             pageBanner: p,
             omitPageTitle: y,
-            analyticsAssistantChatHref: b,
-            analyticsAssistantChatUniverseId: g,
-            ...f
+            PageProvider: b,
+            analyticsAssistantChatHref: g,
+            analyticsAssistantChatUniverseId: f,
+            ...h
         } = e, {
-            noBreadCrumbs: h,
-            leftNavigationContents: k
-        } = f, {
-            translate: N
-        } = (0, n.A)(), T = "string" == typeof c ? N(c) : t.default.isValidElement(c) && c.type === n.c ? N(c.props.translationKey, c.props.args) : void 0;
+            noBreadCrumbs: k,
+            leftNavigationContents: N
+        } = h, {
+            translate: T
+        } = (0, n.A)(), v = "string" == typeof c ? T(c) : t.default.isValidElement(c) && c.type === n.c ? T(c.props.translationKey, c.props.args) : void 0;
         return (0, a.jsxs)(s.f, {
-            children: [h && T && (0, a.jsx)(r.i, {
-                title: T
+            children: [k && v && (0, a.jsx)(r.i, {
+                title: v
             }), (0, a.jsx)(i.G, {
                 currentProduct: null != d ? d : "CreatorDashboard",
                 drawerVariant: "belowAppBar",
-                analyticsAssistantChatHref: b,
-                analyticsAssistantChatUniverseId: g,
+                analyticsAssistantChatHref: g,
+                analyticsAssistantChatUniverseId: f,
                 children: (0, a.jsx)(j, {
                     beta: o,
                     title: c,
-                    secondaryRail: null != m ? m : k,
+                    secondaryRail: null != m ? m : N,
                     pageBanner: p,
-                    useBreadcrumbs: !h,
+                    useBreadcrumbs: !k,
                     secondarySize: u,
                     omitPageTitle: y,
+                    PageProvider: b,
                     children: l
                 })
             })]
@@ -2298,5 +2303,5 @@
     }], 634877)
 }]);
 
-//# debugId=8281d234-3da9-1024-1c85-cd397ec2e4a1
-//# sourceMappingURL=33d3gkvist01_.js.map
+//# debugId=38201952-9f9e-4c9a-9e4c-0c9b78e772c2
+//# sourceMappingURL=0b45fxydf0de_.js.map
