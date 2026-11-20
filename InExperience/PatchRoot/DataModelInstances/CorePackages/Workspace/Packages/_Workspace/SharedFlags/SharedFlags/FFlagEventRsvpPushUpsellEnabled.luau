@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("EventRsvpPushUpsellEnabled", false) and require(script.Parent.FFlagInitializeSduiForApp)

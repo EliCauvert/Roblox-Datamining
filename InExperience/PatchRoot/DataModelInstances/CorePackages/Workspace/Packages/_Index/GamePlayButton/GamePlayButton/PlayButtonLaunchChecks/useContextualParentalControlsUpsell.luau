@@ -24,7 +24,7 @@ local CloseCentralOverlayFunction = require(Parent.CentralOverlay).Thunks.CloseC
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
 local OpenAmpWizardContainerFunction = require(Parent.AmpUpsell).OpenAmpWizardContainer
-local _ = require(Parent.AmpUpsell)
+local AmpUpsellModule = require(Parent.AmpUpsell)
 local AuthButtonClickFunction = require(Parent.AuthAnalytics).Events.authButtonClick
 local LoggingProtocolModule = require(Parent.LoggingProtocol)
 local PlayabilityStatusEnum = require(Parent.DiscoveryTypes).PlayabilityStatusEnum
@@ -42,6 +42,7 @@ local FFlagLuaAppParentApprovedExperiences = require(Parent.SharedFlags).FFlagLu
 local GetFFlagEnableAmpWizardVPCNavigationFixFunction = require(Parent.AmpUpsell).GetFFlagEnableAmpWizardVPCNavigationFix
 local FFlagEnablePlayButtonWizardVPCPrologueModule = require(GamePlayButton.Flags.FFlagEnablePlayButtonWizardVPCPrologue)
 local FFlagLuaAppPlayButtonOdpEventUniverseIdModule = require(GamePlayButton.Flags.FFlagLuaAppPlayButtonOdpEventUniverseId)
+local FFlagLuaAppGameJoinVpcUseUfoModule = require(GamePlayButton.Flags.FFlagLuaAppGameJoinVpcUseUfo)
 local FFlagLuaAppPlayButtonWizardCloseDelay = require(Parent.SharedFlags).FFlagLuaAppPlayButtonWizardCloseDelay
 local FIntLuaAppPlayButtonWizardCloseDelayMs = require(Parent.SharedFlags).FIntLuaAppPlayButtonWizardCloseDelayMs
 
@@ -80,10 +81,11 @@ local v1 = (function(p1)
 end)((game:DefineFastString("LuaAppUpsellMaturityRatingToSettingMapping", "mild=NinePlus,moderate=ThirteenPlus,restricted=SeventeenPlus,unrated=ThirteenPlus")))
 
 return function(UniverseId, Callback, PageName)
-	-- upvalues: UseRoactServiceFunction (copy), RoactNetworking (copy), AppEventIngestService (copy), UseDispatchFunction (copy), UseSelectorFunction (copy), GameHydrationReactModule (copy), UseLocalizationFunction (copy), FFlagLuaAppParentApprovedExperiences (copy), ReactModule (copy), OpenAmpWizardContainerFunction (copy), FFlagLuaAppPlayButtonAmpAgeCheckFlow (copy), FFlagLuaAppVpcUpsellNamespace (copy), FFlagLuaAppPlayButtonWizardCloseDelay (copy), FFlagEnablePlayButtonWizardVPCPrologueModule (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), OpenPlayButtonUpsellDialogFunction (copy), OpenCloseOnlyInteractiveAlertFunction (copy), NavigateBackFunction (copy), CloseCentralOverlayFunction (copy), FetchGamePlayButtonDataModule (copy), AuthButtonClickFunction (copy), PlayButtonUpsellBodyModule (copy), FFlagLuaAppPlayButtonOdpEventUniverseIdModule (copy), GetFFlagEnableAmpWizardVPCNavigationFixFunction (copy), FStringLuaAppVpcAccountManagementAmpNameSpace (copy), FStringLuaAppVpcSettingsChangeAmpNameSpace (copy), UnlockPlayIntentFunction (copy), PlayabilityStatusEnum (copy), FFlagLuaAppParentUpsellPolicy (copy), UseAppPolicyFunction (copy), FetchUserSettingsAndOptionsFunction (copy), FlaggedMutedErrorFunction (copy), v1 (copy), LoggingProtocolModule (copy), UnknownUpsellErrorEventHundredthsPercent (copy), DashModule (copy), FStringLuaAppPlayButtonAgeCheckAmpFeatureName (copy), FStringLuaAppPlayButtonAgeCheckAmpNameSpace (copy), DelayedAmpWizardCompletionCallbackOverrideModule (copy), FIntLuaAppPlayButtonWizardCloseDelayMs (copy)
+	-- upvalues: UseRoactServiceFunction (copy), RoactNetworking (copy), AppEventIngestService (copy), UseDispatchFunction (copy), FFlagLuaAppGameJoinVpcUseUfoModule (copy), AmpUpsellModule (copy), UseSelectorFunction (copy), GameHydrationReactModule (copy), UseLocalizationFunction (copy), FFlagLuaAppParentApprovedExperiences (copy), ReactModule (copy), OpenAmpWizardContainerFunction (copy), FFlagLuaAppPlayButtonAmpAgeCheckFlow (copy), FFlagLuaAppVpcUpsellNamespace (copy), FFlagLuaAppPlayButtonWizardCloseDelay (copy), FFlagEnablePlayButtonWizardVPCPrologueModule (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), OpenPlayButtonUpsellDialogFunction (copy), OpenCloseOnlyInteractiveAlertFunction (copy), NavigateBackFunction (copy), CloseCentralOverlayFunction (copy), FetchGamePlayButtonDataModule (copy), AuthButtonClickFunction (copy), PlayButtonUpsellBodyModule (copy), FFlagLuaAppPlayButtonOdpEventUniverseIdModule (copy), FStringLuaAppVpcAccountManagementAmpNameSpace (copy), FStringLuaAppVpcSettingsChangeAmpNameSpace (copy), GetFFlagEnableAmpWizardVPCNavigationFixFunction (copy), UnlockPlayIntentFunction (copy), PlayabilityStatusEnum (copy), FFlagLuaAppParentUpsellPolicy (copy), UseAppPolicyFunction (copy), FetchUserSettingsAndOptionsFunction (copy), FlaggedMutedErrorFunction (copy), v1 (copy), LoggingProtocolModule (copy), UnknownUpsellErrorEventHundredthsPercent (copy), DashModule (copy), FStringLuaAppPlayButtonAgeCheckAmpFeatureName (copy), FStringLuaAppPlayButtonAgeCheckAmpNameSpace (copy), DelayedAmpWizardCompletionCallbackOverrideModule (copy), FIntLuaAppPlayButtonWizardCloseDelayMs (copy)
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
 	local UseRoactServiceResult1 = UseRoactServiceFunction(AppEventIngestService)
 	local UseDispatchResult = UseDispatchFunction()
+	local UseVpcLauncherResult = if FFlagLuaAppGameJoinVpcUseUfoModule then AmpUpsellModule.useVpcLauncher() else nil
 	local UseGameInfoResult = GameHydrationReactModule.useGameInfo(UniverseId)
 	local ContentMaturity = UseGameInfoResult and UseGameInfoResult.contentMaturity
 	local UseSelectorResult = UseSelectorFunction(function(p1)
@@ -167,7 +169,7 @@ return function(UniverseId, Callback, PageName)
 		UseResult6()
 	end, { UseResult5, UseResult6 })
 	local UseResult9 = if FFlagEnablePlayButtonWizardVPCPrologueModule then ReactModule.useCallback(function(BodyText)
-		-- upvalues: UseLocalizationResult (copy), FFlagLuaAppVpcUpsellNamespace (upval), ReactModule (upval), PlayButtonUpsellBodyModule (upval), UseResult8 (copy), AuthButtonClickFunction (upval), FFlagLuaAppPlayButtonOdpEventUniverseIdModule (upval), UniverseId (copy)
+		-- upvalues: UseLocalizationResult (copy), FFlagLuaAppGameJoinVpcUseUfoModule (upval), FFlagLuaAppVpcUpsellNamespace (upval), ReactModule (upval), PlayButtonUpsellBodyModule (upval), UseResult8 (copy), AuthButtonClickFunction (upval), FFlagLuaAppPlayButtonOdpEventUniverseIdModule (upval), UniverseId (copy)
 		return {
 			config = {
 				cancelFirst = true,
@@ -175,7 +177,7 @@ return function(UniverseId, Callback, PageName)
 				hasBackdrop = true,
 				onCloseCancels = true,
 				titleText = UseLocalizationResult.askYourParentTitleText,
-				bodyText = if FFlagLuaAppVpcUpsellNamespace then BodyText else nil,
+				bodyText = if FFlagLuaAppGameJoinVpcUseUfoModule or FFlagLuaAppVpcUpsellNamespace then BodyText else nil,
 				bodyContent = ReactModule.createElement(PlayButtonUpsellBodyModule, { bodyText = BodyText, onCloseModal = UseResult8 }),
 				confirmText = UseLocalizationResult.askYourParentActionButtonText,
 				cancelText = UseLocalizationResult.askYourParentCancelButtonText
@@ -198,27 +200,49 @@ return function(UniverseId, Callback, PageName)
 		if FFlagLuaAppPlayButtonOdpEventUniverseIdModule then UniverseId else nil
 	}) else nil
 	local UseResult10 = ReactModule.useCallback(function(ContentAgeRestriction, p1)
-		-- upvalues: UseResult5 (copy), FFlagEnablePlayButtonWizardVPCPrologueModule (upval), AuthButtonClickFunction (upval), FFlagLuaAppParentApprovedExperiences (upval), UseResult (copy), GetFFlagEnableAmpWizardVPCNavigationFixFunction (upval), UseResult6 (copy), UseResult4 (copy), UniverseId (copy), FFlagLuaAppVpcUpsellNamespace (upval), FStringLuaAppVpcAccountManagementAmpNameSpace (upval), FStringLuaAppVpcSettingsChangeAmpNameSpace (upval)
+		-- upvalues: UseResult5 (copy), FFlagEnablePlayButtonWizardVPCPrologueModule (upval), AuthButtonClickFunction (upval), FFlagLuaAppParentApprovedExperiences (upval), FFlagLuaAppVpcUpsellNamespace (upval), FStringLuaAppVpcAccountManagementAmpNameSpace (upval), FStringLuaAppVpcSettingsChangeAmpNameSpace (upval), UniverseId (copy), GetFFlagEnableAmpWizardVPCNavigationFixFunction (upval), UseResult6 (copy), UseResult4 (copy), UseVpcLauncherResult (copy), UseResult (copy)
 		UseResult5()
 		
 		if not FFlagEnablePlayButtonWizardVPCPrologueModule then
 			AuthButtonClickFunction("gameJoinContentMaturityLock", "askParent")
 		end
-		if FFlagLuaAppParentApprovedExperiences then
-			UseResult("CanApproveExperience", if GetFFlagEnableAmpWizardVPCNavigationFixFunction() then UseResult6 else UseResult4, {
-				experienceManagementAction = "Approve",
-				universeId = UniverseId
-			}, "gameJoinContentMaturityLock", nil, if FFlagLuaAppVpcUpsellNamespace then FStringLuaAppVpcAccountManagementAmpNameSpace else nil, nil, if FFlagEnablePlayButtonWizardVPCPrologueModule then p1 else nil)
+		local CanApproveExperience: string = if FFlagLuaAppParentApprovedExperiences then "CanApproveExperience" else "CanChangeSetting"
+		local FStringLuaAppVpcAccountManagementAmpNameSpace1 = if FFlagLuaAppVpcUpsellNamespace then if FFlagLuaAppParentApprovedExperiences then FStringLuaAppVpcAccountManagementAmpNameSpace else FStringLuaAppVpcSettingsChangeAmpNameSpace else nil
+		local Config = if FFlagLuaAppParentApprovedExperiences then {
+			experienceManagementAction = "Approve",
+			universeId = UniverseId
+		} else { contentAgeRestriction = ContentAgeRestriction }
+		local UseResult1 = if GetFFlagEnableAmpWizardVPCNavigationFixFunction() then UseResult6 else UseResult4
+		local PrologueOptions = if FFlagEnablePlayButtonWizardVPCPrologueModule then p1 else nil
+		
+		if UseVpcLauncherResult then
+			UseVpcLauncherResult({
+				request = {
+					requestType = if FFlagLuaAppParentApprovedExperiences then "ManageExperience" else "UpdateUserSetting",
+					requestDetails = Config
+				},
+				legacy = {
+					entryPointEventCtx = "gameJoinContentMaturityLock",
+					featureName = CanApproveExperience,
+					nameSpace = FStringLuaAppVpcAccountManagementAmpNameSpace1,
+					recourseData = Config,
+					completionCallback = UseResult1,
+					usePrologue = if PrologueOptions then true else nil,
+					prologueOptions = PrologueOptions
+				},
+				onComplete = UseResult6
+			})
 			
 			return
 		else
-			UseResult("CanChangeSetting", if GetFFlagEnableAmpWizardVPCNavigationFixFunction() then UseResult6 else UseResult4, { contentAgeRestriction = ContentAgeRestriction }, "gameJoinContentMaturityLock", nil, if FFlagLuaAppVpcUpsellNamespace then FStringLuaAppVpcSettingsChangeAmpNameSpace else nil, nil, if FFlagEnablePlayButtonWizardVPCPrologueModule then p1 else nil)
+			UseResult(CanApproveExperience, UseResult1, Config, "gameJoinContentMaturityLock", nil, FStringLuaAppVpcAccountManagementAmpNameSpace1, nil, PrologueOptions)
 		end
 	end, {
 		UseResult,
 		if GetFFlagEnableAmpWizardVPCNavigationFixFunction() then UseResult6 else nil,
 		if GetFFlagEnableAmpWizardVPCNavigationFixFunction() then nil else UseResult4,
-		UseResult5,
+		UseResult5, UseVpcLauncherResult,
+		if FFlagLuaAppGameJoinVpcUseUfoModule then UseResult6 else nil,
 		if FFlagLuaAppParentApprovedExperiences or FFlagEnablePlayButtonWizardVPCPrologueModule and FFlagLuaAppPlayButtonOdpEventUniverseIdModule then UniverseId else nil
 	})
 	local UseResult11 = ReactModule.useCallback(function(UpsellName, p1)

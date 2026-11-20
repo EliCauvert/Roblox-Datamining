@@ -10,13 +10,12 @@ local IsSpawnEffectAssetTypeModule = require(AvatarExperienceCommon.Utils.isSpaw
 local IsValidAssetTypeForOutfitTypeModule = require(AvatarExperienceCommon.Utils.isValidAssetTypeForOutfitType)
 local ConstantsModule = require(AvatarExperienceCommon.Constants)
 local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
-local FFlagParseHeadShapeFromAPIResponse = AvatarExperienceFlagsModule.FFlagParseHeadShapeFromAPIResponse
 local FFlagHeadRefinementFacialAnimationToggle = AvatarExperienceFlagsModule.FFlagHeadRefinementFacialAnimationToggle
 local FFlagAXSpawnEffectSaveRoundTrip = AvatarExperienceFlagsModule.FFlagAXSpawnEffectSaveRoundTrip
 local _ = require(AvatarExperienceCommon.Types.CategoryTypes.CategoryTypes)
 
 return function(p1, p2)
-	-- upvalues: IsValidAssetTypeForOutfitTypeModule (copy), ConstantsModule (copy), CreateHumanoidDescriptionAccessoryInfoModule (copy), FFlagParseHeadShapeFromAPIResponse (copy), FFlagHeadRefinementFacialAnimationToggle (copy), IsMakeupAssetTypeModule (copy), FFlagAXSpawnEffectSaveRoundTrip (copy), IsSpawnEffectAssetTypeModule (copy), MutedErrorFunction (copy), SetMakeupDescriptionsModule (copy), HUMANOIDDESCRIPTIONSCALETONAME (copy), SetHumanoidDescriptionColorsFromBodyColor3sModule (copy)
+	-- upvalues: IsValidAssetTypeForOutfitTypeModule (copy), ConstantsModule (copy), CreateHumanoidDescriptionAccessoryInfoModule (copy), FFlagHeadRefinementFacialAnimationToggle (copy), IsMakeupAssetTypeModule (copy), FFlagAXSpawnEffectSaveRoundTrip (copy), IsSpawnEffectAssetTypeModule (copy), MutedErrorFunction (copy), SetMakeupDescriptionsModule (copy), HUMANOIDDESCRIPTIONSCALETONAME (copy), SetHumanoidDescriptionColorsFromBodyColor3sModule (copy)
 	local HumanoidDescription = Instance.new("HumanoidDescription")
 	local EquippedAssets = p1.AvatarEditor.Character.EquippedAssets
 	local AvatarScales = p1.AvatarEditor.Character.AvatarScales
@@ -44,7 +43,7 @@ return function(p1, p2)
 					local Joined = table.concat(List1, ",")
 					
 					if ASSETTYPEIDSTRINGTOHUMANOIDDESCRIPTIONPROPEntry then
-						if FFlagParseHeadShapeFromAPIResponse and ConstantsModule.BODY_PART_NAME_TO_ENUM[ASSETTYPEIDSTRINGTOHUMANOIDDESCRIPTIONPROPEntry] then
+						if ConstantsModule.BODY_PART_NAME_TO_ENUM[ASSETTYPEIDSTRINGTOHUMANOIDDESCRIPTIONPROPEntry] then
 							local BodyPartDescription = Instance.new("BodyPartDescription")
 							BodyPartDescription.AssetId = List1[1]
 							BodyPartDescription.Parent = HumanoidDescription

@@ -10,10 +10,11 @@ local CreateAvatarStateFromOutfitDetailModule = require(AvatarWorkshop.Utils.cre
 local EquipOutfitModule = require(AvatarWorkshop.Utils.equipOutfit)
 local _ = require(AvatarWorkshop.Utils.getOutfitKind)
 local IsWearingOutfitModule = require(AvatarWorkshop.Utils.isWearingOutfit)
+local SaveAvatarModule = require(AvatarWorkshop.Utils.saveAvatar)
 local AssetTypeFromId = require(AvatarWorkshop.Constants.AvatarAssetTypeMappings).assetTypeFromId
 
 return function()
-	-- upvalues: CreateSignalFunction (copy), CreateComputedFunction (copy), AvatarInventoryModule (copy), CreateAvatarStateFromOutfitDetailModule (copy), HumanoidDescriptionAssetsModule (copy), AssetTypeFromId (copy), IsWearingOutfitModule (copy), EquipOutfitModule (copy)
+	-- upvalues: CreateSignalFunction (copy), CreateComputedFunction (copy), AvatarInventoryModule (copy), CreateAvatarStateFromOutfitDetailModule (copy), HumanoidDescriptionAssetsModule (copy), AssetTypeFromId (copy), IsWearingOutfitModule (copy), EquipOutfitModule (copy), SaveAvatarModule (copy)
 	local Signal, Signal2 = CreateSignalFunction(nil)
 	local Computed = CreateComputedFunction(function(p1)
 		-- upvalues: Signal (copy)
@@ -40,6 +41,8 @@ return function()
 		end
 	end
 	
+	local Signal1, Signal2_1 = CreateSignalFunction(nil)
+	
 	local function load(p1)
 		-- upvalues: Signal2 (copy)
 		Signal2(table.freeze({
@@ -50,25 +53,29 @@ return function()
 	end
 	
 	local Flag = false
+	local Signal3, Signal2_2 = CreateSignalFunction(false)
 	
 	local function loadCurrentAvatar()
-		-- upvalues: Flag (ref), Signal (copy), AvatarInventoryModule (upval), CreateAvatarStateFromOutfitDetailModule (upval), HumanoidDescriptionAssetsModule (upval), load (copy)
+		-- upvalues: Flag (ref), Signal (copy), Signal2_2 (copy), AvatarInventoryModule (upval), CreateAvatarStateFromOutfitDetailModule (upval), HumanoidDescriptionAssetsModule (upval), load (copy), Signal2_1 (copy)
 		if not Flag and Signal(false) == nil then
 			Flag = true
+			Signal2_2(false)
 			AvatarInventoryModule.fetchCurrentAvatar():andThen(function(Result)
-				-- upvalues: Flag (upval), Signal (upval), CreateAvatarStateFromOutfitDetailModule (upval), HumanoidDescriptionAssetsModule (upval), load (upval)
+				-- upvalues: Flag (upval), Signal (upval), CreateAvatarStateFromOutfitDetailModule (upval), HumanoidDescriptionAssetsModule (upval), load (upval), Signal2_1 (upval)
 				Flag = false
 				
 				if Signal(false) == nil then
 					local AvatarStateFromOutfitDetailModule = CreateAvatarStateFromOutfitDetailModule(Result)
 					HumanoidDescriptionAssetsModule.setEquippedEmotes(AvatarStateFromOutfitDetailModule.humanoidDescription, Result.emotes)
 					load(AvatarStateFromOutfitDetailModule)
+					Signal2_1(Signal(false))
 					
 					return
 				end
 			end, function(p1)
-				-- upvalues: Flag (upval)
+				-- upvalues: Flag (upval), Signal2_2 (upval)
 				Flag = false
+				Signal2_2(true)
 				
 				if typeof(p1) == "table" then
 					warn("AvatarWorkshop: couldn't load the current avatar:", p1.responseCode, p1.errorMessage)
@@ -166,14 +173,38 @@ return function()
 		end
 	end
 	
+	local function getDroppedAssetIds(HumanoidDescription, p4)
+		-- upvalues: HumanoidDescriptionAssetsModule (upval)
+		local t = {}
+		
+		for _, value in HumanoidDescriptionAssetsModule.getEquippedAssetIds(p4) do
+			t[value] = true
+		end
+		local t1 = {}
+		local Flag = false
+		
+		for _, value1 in HumanoidDescriptionAssetsModule.getEquippedAssetIds(HumanoidDescription) do
+			if not t[value1] then
+				t1[value1] = true
+				Flag = true
+			end
+		end
+		return if Flag then t1 else nil
+	end
+	
 	return {
 		getAvatarState = Signal,
 		getHumanoidDescription = Computed,
 		getRigType = Computed1,
 		getGearId = Computed2,
+		getLoadCurrentAvatarFailed = Signal3,
 		getEquippedAssetIds = Computed3,
+		getHasChanges = CreateComputedFunction(function(p5): boolean
+			-- upvalues: Signal (copy), Signal1 (copy)
+			return Signal(p5) ~= Signal1(p5)
+		end),
 		load = load,
-		toggleOutfit = function(p4, p5)
+		toggleOutfit = function(p5, p6)
 			-- upvalues: Signal (copy), loadCurrentAvatar (copy), IsWearingOutfitModule (upval), CreateAvatarStateFromOutfitDetailModule (upval), takeOffOutfit (copy), Signal2 (copy), EquipOutfitModule (upval)
 			local SignalResult = Signal(false)
 			
@@ -182,39 +213,77 @@ return function()
 				
 				return
 			end
-			if (p5 == "DynamicHead" or (p5 == "Shoes" or p5 == "Animations")) and IsWearingOutfitModule(CreateAvatarStateFromOutfitDetailModule(p4), p5, SignalResult) then
-				takeOffOutfit(p4)
+			if (p6 == "DynamicHead" or (p6 == "Shoes" or p6 == "Animations")) and IsWearingOutfitModule(CreateAvatarStateFromOutfitDetailModule(p5), p6, SignalResult) then
+				takeOffOutfit(p5)
 				
 				return
 			else
-				Signal2(table.freeze(EquipOutfitModule(SignalResult, p4, p5)))
+				Signal2(table.freeze(EquipOutfitModule(SignalResult, p5, p6)))
 			end
 		end,
 		loadCurrentAvatar = loadCurrentAvatar,
 		setRigType = setRigType,
 		setGearId = setGearId,
-		toggleAsset = function(p4, AvatarAssetType)
+		toggleAsset = function(p5, AvatarAssetType)
 			-- upvalues: Computed3 (copy), setGearId (copy), editDescription (copy), HumanoidDescriptionAssetsModule (upval)
-			local IsComputedResultEntry = Computed3(false)[p4] == true
+			local IsComputedResultEntry = Computed3(false)[p5] == true
 			
 			if AvatarAssetType == Enum.AvatarAssetType.Gear then
-				setGearId(if IsComputedResultEntry then nil else p4)
+				setGearId(if IsComputedResultEntry then nil else p5)
 				
 				return
 			end
 			if IsComputedResultEntry then
-				editDescription(function(p5)
-					-- upvalues: HumanoidDescriptionAssetsModule (upval), p4 (copy), AvatarAssetType (copy)
-					return HumanoidDescriptionAssetsModule.unequipAsset(p5, p4, AvatarAssetType)
+				editDescription(function(p6)
+					-- upvalues: HumanoidDescriptionAssetsModule (upval), p5 (copy), AvatarAssetType (copy)
+					return HumanoidDescriptionAssetsModule.unequipAsset(p6, p5, AvatarAssetType)
 				end)
 				
 				return
 			else
-				editDescription(function(p5)
-					-- upvalues: HumanoidDescriptionAssetsModule (upval), p4 (copy), AvatarAssetType (copy)
-					return HumanoidDescriptionAssetsModule.equipAsset(p5, p4, AvatarAssetType)
+				editDescription(function(p6)
+					-- upvalues: HumanoidDescriptionAssetsModule (upval), p5 (copy), AvatarAssetType (copy)
+					return HumanoidDescriptionAssetsModule.equipAsset(p6, p5, AvatarAssetType)
 				end)
 			end
+		end,
+		save = function(): boolean
+			-- upvalues: Signal (copy), SaveAvatarModule (upval), getDroppedAssetIds (copy), HumanoidDescriptionAssetsModule (upval), Signal2 (copy), editDescription (copy), Signal2_1 (copy)
+			local SignalResult = Signal(false)
+			
+			if SignalResult == nil then
+				return false
+			end
+			local SaveAvatarModuleResult, SaveAvatarModuleResult2 = SaveAvatarModule(SignalResult)
+			
+			if not SaveAvatarModuleResult then
+				return false
+			end
+			local Frozen = SignalResult
+			local DroppedAssetIds = if SaveAvatarModuleResult2 then getDroppedAssetIds(SignalResult.humanoidDescription, SaveAvatarModuleResult2) else nil
+			
+			if DroppedAssetIds then
+				local HumanoidDescription = SignalResult.humanoidDescription:Clone()
+				
+				if HumanoidDescriptionAssetsModule.unequipAssetIds(HumanoidDescription, DroppedAssetIds) then
+					Frozen = table.freeze({
+						humanoidDescription = HumanoidDescription,
+						rigType = SignalResult.rigType,
+						gearId = SignalResult.gearId
+					})
+				end
+				if Signal(false) == SignalResult then
+					Signal2(Frozen)
+				else
+					editDescription(function(p5)
+						-- upvalues: HumanoidDescriptionAssetsModule (upval), DroppedAssetIds (copy)
+						return HumanoidDescriptionAssetsModule.unequipAssetIds(p5, DroppedAssetIds)
+					end)
+				end
+			end
+			Signal2_1(Frozen)
+			
+			return true
 		end
 	}
 end

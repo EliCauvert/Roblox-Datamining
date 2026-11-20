@@ -1,3 +1,3 @@
-﻿local FFlagEnableRobuxInExperienceShopModule = require(script.Parent.FFlagEnableRobuxInExperienceShop)
+﻿local FFlagEnableInExperienceShopModule = require(script.Parent.FFlagEnableInExperienceShop)
 
-return game:DefineFastFlag("EnableBonusJwtInShop", false) and FFlagEnableRobuxInExperienceShopModule
+return game:DefineFastFlag("EnableBonusJwtInShop", false) and FFlagEnableInExperienceShopModule

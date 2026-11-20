@@ -42,7 +42,11 @@ return function(p1)
 		generate = "Feature.PrivateServers.Action.Generate",
 		generateLinkPlaceholder = "Feature.PrivateServers.Label.PrivateServerGenerateLinkPlaceholder",
 		somethingWentWrong = "CommonUI.Messages.Response.SomethingWentWrong",
-		["continue"] = "CommonUI.Controls.Action.Continue"
+		["continue"] = "CommonUI.Controls.Action.Continue",
+		purchased = {
+			"IAPExperience.PurchasePrompt.Body.PurchaseCompleted",
+			ITEM_NAME = p1.gameName
+		}
 	})
 	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(p1.defaultServerName)
 	local UseStateResult, UseStateResult2 = ReactModule.useState("")

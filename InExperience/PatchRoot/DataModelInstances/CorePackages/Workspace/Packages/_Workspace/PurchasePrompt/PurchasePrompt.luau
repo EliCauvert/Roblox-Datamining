@@ -27,7 +27,7 @@ local FFlagSkipBuyDelayForExperienceShopModule = require(v1.Flags.FFlagSkipBuyDe
 local _ = require(v1.types)
 local FFlagPurchasePromptSubtitleForTimedOptions = require(v1.Parent.SharedFlags).FFlagPurchasePromptSubtitleForTimedOptions
 local FFlagAXMISWithBlackbird = SharedFlagsModule.FFlagAXMISWithBlackbird
-local FFlagEnableRobuxInExperienceShop = SharedFlagsModule.FFlagEnableRobuxInExperienceShop
+local FFlagEnableInExperienceShop = SharedFlagsModule.FFlagEnableInExperienceShop
 local FFlagKeepSideSheetOpenBesideMenu = SharedFlagsModule.FFlagKeepSideSheetOpenBesideMenu
 local WindowStateModule = require(v1.Enums.WindowState)
 local PromptStateModule = require(v1.Enums.PromptState)
@@ -138,7 +138,7 @@ return {
 			subtitleView = if FFlagPurchasePromptSubtitleForTimedOptions then p1.subtitleView else nil
 		})
 	end,
-	launchRobuxPackagePurchase = if FFlagEnableRobuxInExperienceShop then require(v1.launchRobuxPackagePurchase) else nil,
+	launchRobuxPackagePurchase = if FFlagEnableInExperienceShop then require(v1.launchRobuxPackagePurchase) else nil,
 	["jest.config"] = script["jest.config"],
 	["jest.main.config"] = script["jest.main.config"],
 	["jest.mockDataModel.config"] = script["jest.mockDataModel.config"]

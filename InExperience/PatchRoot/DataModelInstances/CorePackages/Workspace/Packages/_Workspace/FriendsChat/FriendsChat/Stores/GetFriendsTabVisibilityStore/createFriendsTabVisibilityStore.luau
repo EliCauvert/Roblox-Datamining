@@ -5,16 +5,15 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local GetFriendsChatSettingsStoreModule = require(Parent.AppChat.GetFriendsChatSettingsStore)
 local GetLocalUserIdModule = require(script.Parent.Parent.Parent.Utils.getLocalUserId)
 local FFlagExpChatFriendsRespectWindowEnabledModule = require(FriendsChat.Flags.FFlagExpChatFriendsRespectWindowEnabled)
-local FFlagExpChatFriendsTabUsePolicy = SharedFlagsModule.FFlagExpChatFriendsTabUsePolicy
 local FFlagExpChatCanShowFriendsTab = SharedFlagsModule.FFlagExpChatCanShowFriendsTab
 local FFlagExpChatFriendsTabRequireDefaultChannels = SharedFlagsModule.FFlagExpChatFriendsTabRequireDefaultChannels
 local FFlagFriendsChatHasFriendsGate = SharedFlagsModule.FFlagFriendsChatHasFriendsGate
 local TextChatService = game:GetService("TextChatService")
-local GetAppPolicyStore = if FFlagExpChatFriendsTabUsePolicy then require(Parent.UniversalAppPolicy).GetAppPolicyStore else nil
+local GetAppPolicyStoreFunction = require(Parent.UniversalAppPolicy).GetAppPolicyStore
 local GetResult = if FFlagFriendsChatHasFriendsGate then require(Parent.DataHydration).Friends.FriendsStore.get() else nil
 
 return function()
-	-- upvalues: GetFriendsChatSettingsStoreModule (copy), TextChatService (copy), FFlagExpChatFriendsRespectWindowEnabledModule (copy), SignalsModule (copy), FFlagExpChatFriendsTabUsePolicy (copy), GetAppPolicyStore (ref), FFlagFriendsChatHasFriendsGate (copy), FFlagExpChatCanShowFriendsTab (copy), GetLocalUserIdModule (copy), GetResult (ref), FFlagExpChatFriendsTabRequireDefaultChannels (copy)
+	-- upvalues: GetFriendsChatSettingsStoreModule (copy), TextChatService (copy), FFlagExpChatFriendsRespectWindowEnabledModule (copy), SignalsModule (copy), GetAppPolicyStoreFunction (copy), FFlagFriendsChatHasFriendsGate (copy), FFlagExpChatCanShowFriendsTab (copy), GetLocalUserIdModule (copy), GetResult (ref), FFlagExpChatFriendsTabRequireDefaultChannels (copy)
 	local FriendsChatSettingsStoreModule = GetFriendsChatSettingsStoreModule(false)
 	local CreateDefaultTextChannels = TextChatService.CreateDefaultTextChannels
 	local Callback = nil
@@ -34,11 +33,11 @@ return function()
 	end
 	return {
 		getIsFriendsTabVisible = SignalsModule.createComputed(function(p1)
-			-- upvalues: FFlagExpChatFriendsRespectWindowEnabledModule (upval), Callback (ref), FFlagExpChatFriendsTabUsePolicy (upval), GetAppPolicyStore (upval), FFlagFriendsChatHasFriendsGate (upval), FFlagExpChatCanShowFriendsTab (upval), GetLocalUserIdModule (upval), GetResult (upval), FriendsChatSettingsStoreModule (copy), FFlagExpChatFriendsTabRequireDefaultChannels (upval), CreateDefaultTextChannels (copy)
+			-- upvalues: FFlagExpChatFriendsRespectWindowEnabledModule (upval), Callback (ref), GetAppPolicyStoreFunction (upval), FFlagFriendsChatHasFriendsGate (upval), FFlagExpChatCanShowFriendsTab (upval), GetLocalUserIdModule (upval), GetResult (upval), FriendsChatSettingsStoreModule (copy), FFlagExpChatFriendsTabRequireDefaultChannels (upval), CreateDefaultTextChannels (copy)
 			if FFlagExpChatFriendsRespectWindowEnabledModule and not Callback(p1) then
 				return false
 			end
-			local NoFFlagExpChatFriendsTabUsePolicy = not FFlagExpChatFriendsTabUsePolicy or GetAppPolicyStore(false).getAppPolicy(p1).getCanSeeFriendsTab()
+			local CanSeeFriendsTab = GetAppPolicyStoreFunction(false).getAppPolicy(p1).getCanSeeFriendsTab()
 			local Flag = true
 			
 			if FFlagFriendsChatHasFriendsGate and FFlagExpChatCanShowFriendsTab then
@@ -51,7 +50,7 @@ return function()
 					Flag = DataResult ~= nil and DataResult > 0
 				end
 			end
-			return FFlagExpChatCanShowFriendsTab and (NoFFlagExpChatFriendsTabUsePolicy and (Flag and (FriendsChatSettingsStoreModule.getChatEnabled(p1) and (FriendsChatSettingsStoreModule.getChatUserMessagesEnabled(p1) ~= false and (not FFlagExpChatFriendsTabRequireDefaultChannels or CreateDefaultTextChannels)))))
+			return FFlagExpChatCanShowFriendsTab and (CanSeeFriendsTab and (Flag and (FriendsChatSettingsStoreModule.getChatEnabled(p1) and (FriendsChatSettingsStoreModule.getChatUserMessagesEnabled(p1) ~= false and (not FFlagExpChatFriendsTabRequireDefaultChannels or CreateDefaultTextChannels)))))
 		end),
 		dispose = function()
 			-- upvalues: Connection (ref)

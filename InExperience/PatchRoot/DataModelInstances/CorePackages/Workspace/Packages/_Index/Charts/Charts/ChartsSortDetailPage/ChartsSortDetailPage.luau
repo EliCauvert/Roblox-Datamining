@@ -6,6 +6,7 @@ local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
 local CompositionTags = require(Parent.AppComposition).CompositionTags
 local AppPage = require(Parent.RobloxAppEnums).AppPage
 local FFlagAppThemeHalloween2026HomeBackground = require(Parent.SharedFlags).FFlagAppThemeHalloween2026HomeBackground
+local FFlagSduiChartsSeeAllLogExposureModule = require(Charts.Flags.FFlagSduiChartsSeeAllLogExposure)
 local SduiPageEntryPoint = SduiSharedUtilitiesModule.SduiPageEntryPoint
 local SduiSurfaceLoadTimeTracker = SduiSharedUtilitiesModule.SduiSurfaceLoadTimeTracker
 local GetSduiClientPageScopeFunction = SduiSharedUtilitiesModule.getSduiClientPageScope
@@ -16,13 +17,14 @@ local ChartsSortDetailConstantsModule = require(Charts.ChartsSortDetailPage.Char
 local ChartsSortDetailScopeFieldsModule = require(Charts.ChartsSortDetailPage.ChartsSortDetailScopeFields)
 local FetchChartsSortDetailModule = require(Charts.ChartsSortDetailPage.fetchChartsSortDetail)
 local GetChartsSortDetailPageKeyModule = require(Charts.ChartsSortDetailPage.getChartsSortDetailPageKey)
+local LogChartsSeeAllExposureModule = if FFlagSduiChartsSeeAllLogExposureModule then require(Charts.ChartsSortDetailPage.logChartsSeeAllExposure) else nil
 
 local function _(p1, p2)
 	return p1[p2] or p1.navigation and p1.navigation.getParam(p2)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: ReactModule (copy), GetSduiClientPageScopeFunction (copy), ChartsConstantsModule (copy), ChartsPageScopeFieldsModule (copy), GetChartsSortDetailPageKeyModule (copy), UsePageScopeRefFunction (copy), ChartsSortDetailScopeFieldsModule (copy), SduiSurfaceLoadTimeTracker (copy), ChartsSortDetailConstantsModule (copy), FetchChartsSortDetailModule (copy), SduiPageEntryPoint (copy), AppPage (copy), CompositionTags (copy), FFlagAppThemeHalloween2026HomeBackground (copy)
+	-- upvalues: ReactModule (copy), GetSduiClientPageScopeFunction (copy), ChartsConstantsModule (copy), ChartsPageScopeFieldsModule (copy), GetChartsSortDetailPageKeyModule (copy), UsePageScopeRefFunction (copy), ChartsSortDetailScopeFieldsModule (copy), SduiSurfaceLoadTimeTracker (copy), ChartsSortDetailConstantsModule (copy), FetchChartsSortDetailModule (copy), FFlagSduiChartsSeeAllLogExposureModule (copy), LogChartsSeeAllExposureModule (copy), SduiPageEntryPoint (copy), AppPage (copy), CompositionTags (copy), FFlagAppThemeHalloween2026HomeBackground (copy)
 	local SortId = p1.sortId or p1.navigation and p1.navigation.getParam("sortId")
 	local ChartsSortDetailPageKeyModule = GetChartsSortDetailPageKeyModule(SortId, nil, (ReactModule.useMemo(function()
 		-- upvalues: GetSduiClientPageScopeFunction (upval), ChartsConstantsModule (upval), ChartsPageScopeFieldsModule (upval)
@@ -50,6 +52,15 @@ return ReactModule.memo(function(p1)
 			FetchChartsSortDetailModule(SortId, UseMemoResult)
 		end
 	end, { SortId, UseMemoResult })
+	
+	if FFlagSduiChartsSeeAllLogExposureModule then
+		ReactModule.useEffect(function()
+			-- upvalues: SortId (copy), LogChartsSeeAllExposureModule (upval)
+			if SortId then
+				LogChartsSeeAllExposureModule()
+			end
+		end, {})
+	end
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: SortId (copy), SduiSurfaceLoadTimeTracker (upval), ChartsSortDetailPageKeyModule (copy), ChartsSortDetailConstantsModule (upval), FetchChartsSortDetailModule (upval)
 		if SortId then

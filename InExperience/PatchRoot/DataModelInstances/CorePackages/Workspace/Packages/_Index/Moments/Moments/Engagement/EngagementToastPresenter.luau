@@ -23,6 +23,7 @@ local AbbreviateCountFunction = LocalizationModule.abbreviateCount
 local UseSignalStateFunction = SignalsReactModule.useSignalState
 local FFlagMomentsEngagementDigestToastModule = require(Moments.Flags.FFlagMomentsEngagementDigestToast)
 local FFlagMomentsEngagementToastAnalyticsModule = require(Moments.Flags.FFlagMomentsEngagementToastAnalytics)
+local FIntMomentsEngagementToastDisplaySecondsModule = require(Moments.Flags.FIntMomentsEngagementToastDisplaySeconds)
 local List = { "comments", "reactionMilestone", "likes" }
 
 if FFlagMomentsEngagementDigestToastModule then
@@ -170,7 +171,7 @@ local _ = function(p1, p2)
 end
 
 return function(p3)
-	-- upvalues: GetNextToastCoordinatorModule (copy), ReactModule (copy), List (copy), UseSignalStateFunction (copy), useActorName (copy), useMomentThumbnail (copy), useWaitTimedOut (copy), defaultSchedule (copy), LocalizationModule (copy), v1 (ref), SelectEngagementToastCopyModule (copy), formatCount (copy), GetToastStoreModule (copy), FFlagMomentsEngagementToastAnalyticsModule (copy), MakeEngagementToastEventFieldsModule (copy), MomentsCommonModule (copy), EventNames (copy), OpenEngagementToastTargetModule (copy), SignalsModule (copy)
+	-- upvalues: GetNextToastCoordinatorModule (copy), ReactModule (copy), List (copy), UseSignalStateFunction (copy), useActorName (copy), useMomentThumbnail (copy), useWaitTimedOut (copy), defaultSchedule (copy), FIntMomentsEngagementToastDisplaySecondsModule (copy), LocalizationModule (copy), v1 (ref), SelectEngagementToastCopyModule (copy), formatCount (copy), GetToastStoreModule (copy), FFlagMomentsEngagementToastAnalyticsModule (copy), MakeEngagementToastEventFieldsModule (copy), MomentsCommonModule (copy), EventNames (copy), OpenEngagementToastTargetModule (copy), SignalsModule (copy)
 	local NextToastCoordinatorModule = GetNextToastCoordinatorModule(false)
 	ReactModule.useEffect(function()
 		-- upvalues: NextToastCoordinatorModule (copy), List (upval)
@@ -180,9 +181,10 @@ return function(p3)
 	local UseActorNameResult, UseActorNameResult2 = useActorName(UseSignalStateResult)
 	local UseMomentThumbnailResult, UseMomentThumbnailResult2 = useMomentThumbnail(UseSignalStateResult)
 	local UseWaitTimedOutResult = useWaitTimedOut(UseSignalStateResult, p3.schedule or defaultSchedule) or UseActorNameResult2 and UseMomentThumbnailResult2
+	local DisplaySeconds = p3.displaySeconds or FIntMomentsEngagementToastDisplaySecondsModule
 	local UseContextResult = ReactModule.useContext(LocalizationModule.LocalizationRoactContext)
 	ReactModule.useEffect(function()
-		-- upvalues: UseSignalStateResult (copy), UseWaitTimedOutResult (copy), v1 (upval), SelectEngagementToastCopyModule (upval), UseActorNameResult (copy), formatCount (upval), UseContextResult (copy), NextToastCoordinatorModule (copy), GetToastStoreModule (upval), FFlagMomentsEngagementToastAnalyticsModule (upval), MakeEngagementToastEventFieldsModule (upval), UseMomentThumbnailResult (copy), MomentsCommonModule (upval), EventNames (upval), OpenEngagementToastTargetModule (upval), SignalsModule (upval)
+		-- upvalues: UseSignalStateResult (copy), UseWaitTimedOutResult (copy), v1 (upval), SelectEngagementToastCopyModule (upval), UseActorNameResult (copy), formatCount (upval), UseContextResult (copy), NextToastCoordinatorModule (copy), GetToastStoreModule (upval), FFlagMomentsEngagementToastAnalyticsModule (upval), MakeEngagementToastEventFieldsModule (upval), UseMomentThumbnailResult (copy), DisplaySeconds (copy), MomentsCommonModule (upval), EventNames (upval), OpenEngagementToastTargetModule (upval), SignalsModule (upval)
 		if UseSignalStateResult == nil or not UseWaitTimedOutResult or v1 ~= nil and v1.toast == UseSignalStateResult then return end
 		local SelectEngagementToastCopyModuleResult = SelectEngagementToastCopyModule(UseSignalStateResult, UseActorNameResult, formatCount)
 		local Title = nil
@@ -226,10 +228,10 @@ return function(p3)
 		local TriggerToastFunction = ToastStoreModule.triggerToast
 		local config = {
 			placement = "belowHeader",
-			duration = 7,
 			title = Title,
 			text = Text,
-			thumbnail = UseMomentThumbnailResult
+			thumbnail = UseMomentThumbnailResult,
+			duration = if DisplaySeconds > 0 then DisplaySeconds else 7
 		}
 		local Actions = {}
 		local t = {}
@@ -285,7 +287,7 @@ return function(p3)
 		v1 = config1
 		local Id = v4
 		
-		local function v88()
+		local function v90()
 			-- upvalues: v1 (upval), config1 (copy), FFlagMomentsEngagementToastAnalyticsModule (upval), EngagementToastEventFieldsModule (copy), v3 (ref), MomentsCommonModule (upval), EventNames (upval), NextToastCoordinatorModule (upval)
 			if v1 == config1 then
 				v1 = nil
@@ -301,13 +303,13 @@ return function(p3)
 		local ToastStoreModule1 = GetToastStoreModule(false)
 		local v5 = false
 		config1.stopWatching = SignalsModule.createEffect(function(p4)
-			-- upvalues: ToastStoreModule1 (copy), Id (copy), v5 (ref), v88 (copy)
+			-- upvalues: ToastStoreModule1 (copy), Id (copy), v5 (ref), v90 (copy)
 			for _, value in ToastStoreModule1.getToasts(p4) do
 				if value.id == Id then return end
 			end
 			if not v5 then
 				v5 = true
-				v88()
+				v90()
 			end
 		end)
 		
@@ -317,7 +319,8 @@ return function(p3)
 		end
 	end, {
 		NextToastCoordinatorModule, UseContextResult, UseSignalStateResult,
-		UseWaitTimedOutResult, UseActorNameResult, UseMomentThumbnailResult
+		UseWaitTimedOutResult, UseActorNameResult, UseMomentThumbnailResult,
+		DisplaySeconds
 	})
 	
 	return nil

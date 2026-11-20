@@ -255,6 +255,7 @@ return {
 		end
 		return nil
 	end,
+	getPropertyAsset = getPropertyAsset,
 	getSpawnEffect = function(Object)
 		for _, AvatarEffectDescription in Object:GetChildren() do
 			if AvatarEffectDescription:IsA("AvatarEffectDescription") and AvatarEffectDescription.EffectType == Enum.AvatarEffectType.Spawn then
@@ -307,5 +308,35 @@ return {
 				return true
 			end
 		end
+	end,
+	unequipAssetIds = function(Humanoid: Humanoid, p1)
+		-- upvalues: list (copy), getPropertyAsset (copy), setPropertyAsset (copy)
+		local Flag = false
+		local Accessories = Humanoid:GetAccessories(true)
+		local List = {}
+		
+		for _, accessory in Accessories do
+			if not p1[accessory.AssetId] then
+				table.insert(List, accessory)
+			end
+		end
+		if #List ~= #Accessories then
+			Humanoid:SetAccessories(List, true)
+			Flag = true
+		end
+		for _, AvatarAssetType in list do
+			local PropertyAsset = getPropertyAsset(Humanoid, AvatarAssetType)
+			
+			if PropertyAsset and PropertyAsset ~= 0 and p1[PropertyAsset] then
+				Flag = setPropertyAsset(Humanoid, AvatarAssetType, 0) or Flag
+			end
+		end
+		for _, child in Humanoid:GetChildren() do
+			if (child:IsA("MakeupDescription") or child:IsA("AvatarEffectDescription")) and p1[child.AssetId] then
+				child:Destroy()
+				Flag = true
+			end
+		end
+		return Flag
 	end
 }

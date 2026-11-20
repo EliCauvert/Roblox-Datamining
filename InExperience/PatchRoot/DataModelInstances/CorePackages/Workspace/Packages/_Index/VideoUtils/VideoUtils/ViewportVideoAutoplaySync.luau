@@ -5,22 +5,22 @@ local UseViewportBoundsFunction = require(Parent.ViewportUtils).useViewportBound
 local _ = require(VideoUtils.ViewportVideoAutoplayController)
 local VideoEndReason = require(VideoUtils.Analytics.Enums).VideoEndReason
 local FFlagLuaAppOneByTwoHoverIdleAutoplay = require(Parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
-local LuaAppVideoAutoplayWinnerLineOffsetFromTopBarPx = game:DefineFastInt("LuaAppVideoAutoplayWinnerLineOffsetFromTopBarPx", 240)
+local FFlagLuaAppSduiSearchResultsVideoPreview = require(Parent.SharedFlags).FFlagLuaAppSduiSearchResultsVideoPreview
+local FIntLuaAppVideoAutoplayWinnerLineOffsetFromTopBarPx = require(Parent.SharedFlags).FIntLuaAppVideoAutoplayWinnerLineOffsetFromTopBarPx
 
 return function(p1)
-	-- upvalues: UseViewportBoundsFunction (copy), ReactModule (copy), LuaAppVideoAutoplayWinnerLineOffsetFromTopBarPx (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), VideoEndReason (copy)
+	-- upvalues: UseViewportBoundsFunction (copy), ReactModule (copy), FFlagLuaAppSduiSearchResultsVideoPreview (copy), FIntLuaAppVideoAutoplayWinnerLineOffsetFromTopBarPx (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), VideoEndReason (copy)
 	local UseViewportBoundsResult = UseViewportBoundsFunction(p1.scrollingFrameRef)
 	ReactModule.useEffect(function()
-		-- upvalues: p1 (copy), LuaAppVideoAutoplayWinnerLineOffsetFromTopBarPx (upval), UseViewportBoundsResult (copy)
+		-- upvalues: p1 (copy), FFlagLuaAppSduiSearchResultsVideoPreview (upval), FIntLuaAppVideoAutoplayWinnerLineOffsetFromTopBarPx (upval), UseViewportBoundsResult (copy)
 		local ViewportAutoplayController = p1.viewportAutoplayController
 		
-		if ViewportAutoplayController then
-			ViewportAutoplayController:setWinnerLineOffsetFromTopBarPx(LuaAppVideoAutoplayWinnerLineOffsetFromTopBarPx)
-			ViewportAutoplayController:setFeedScopeRef(p1.scrollingFrameRef)
-			ViewportAutoplayController:setViewPortBounds(UseViewportBoundsResult)
-			
-			return
+		if not ViewportAutoplayController then return end
+		if not FFlagLuaAppSduiSearchResultsVideoPreview then
+			ViewportAutoplayController:setWinnerLineOffsetFromTopBarPx(FIntLuaAppVideoAutoplayWinnerLineOffsetFromTopBarPx)
 		end
+		ViewportAutoplayController:setFeedScopeRef(p1.scrollingFrameRef)
+		ViewportAutoplayController:setViewPortBounds(UseViewportBoundsResult)
 	end, {
 		p1.viewportAutoplayController,
 		p1.scrollingFrameRef,

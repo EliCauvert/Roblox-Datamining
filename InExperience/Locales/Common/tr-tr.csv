@@ -2351,6 +2351,8 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,Tüm oyunlar
 Feature.Build.Label.AmountAvailable,{AMOUNT} mevcut
+Feature.Build.Label.AttachmentCountPlural,{count} eklenti
+Feature.Build.Label.AttachmentCountSingular,1 eklenti
 Feature.Build.Label.Autosaved,Otomatik olarak kaydedildi
 Feature.Build.Label.Available,mevcut
 Feature.Build.Label.AvailableForPurchase,Satın alınabilir
@@ -2394,6 +2396,7 @@ Feature.Build.Label.IconThumbnails,Simge ve küçük resimler
 Feature.Build.Label.Images2D,2 boyutlu görseller
 Feature.Build.Label.InProgress,Devam ediyor
 Feature.Build.Label.InputNeeded,Giriş gerekli
+Feature.Build.Label.InspirationTab,İlham
 Feature.Build.Label.InternalSpec,Dâhilî özellikler
 Feature.Build.Label.InternalTesting,Dâhilî testler
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -3314,10 +3317,24 @@ Feature.Chat.Title.FriendsChat,Arkadaş sohbeti
 Feature.Chat.Title.NewChat,Yeni sohbet
 Feature.Chat.Toast.Error.InvalidUserSelected,Listedeki bir veya daha fazla kişi eklenemiyor
 Feature.CloudClient.Action.PlayWithoutCloudPlay,Cloud Play olmadan oyna
-Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play, oyunu Roblox'un bilgisayarlarında çalıştırdığı için daha hızlı yüklenebilir ve daha az çökme yaşanabilir. Yalnızca bu oyunu oynadığın süre boyunca geçerlidir."
+Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play, oyunu Roblox'un bilgisayarlarında çalıştırır. Bu sayede oyun daha hızlı yüklenip daha az çöker. Yalnızca bu oyunu oynadığın süre boyunca geçerlidir."
+Feature.CloudClient.Description.GalleryUnavailableCloudPlay,Galerini kullanmak için Cloud Play olmadan yeniden katıl.
+Feature.CloudClient.Description.GalleryUnavailableRobloxReality,Galerini kullanmak için Restyle olmadan yeniden katıl.
+Feature.CloudClient.Description.RobloxRealityPreview,Restyle bir erken ön izlemedir. Bazı şeyler orijinal oyundan farklı görünebilir.
 Feature.CloudClient.Heading.CloudPlayOffer,Cloud Play ile oyna
-Feature.CloudClient.Label.RobloxRealityGraphics,Oyunun yeniden tasarlandı
+Feature.CloudClient.Heading.GalleryUnavailableCloudPlay,Galeri henüz Cloud Play'de kullanılamıyor.
+Feature.CloudClient.Heading.GalleryUnavailableRobloxReality,Galeri henüz Restyle ile kullanılamıyor.
+Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Yakalama henüz Cloud Play'de kullanılamıyor.
+Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Yakalama henüz Restyle ile kullanılamıyor.
+Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Play çalışmıyor. Normal şekilde oynuyorsun.
+Feature.CloudClient.Label.RobloxReality,Restyle
+Feature.CloudClient.Label.RobloxRealityDemoLength,{minutes} dakikalık bir demo dene
+Feature.CloudClient.Label.RobloxRealityEndingSoon,Restyle 1 dakika içinde sona erecek ve oyundan ayrılacaksın.
+Feature.CloudClient.Label.RobloxRealityGraphics,Oyununa yepyeni bir bakış
 Feature.CloudClient.Label.RobloxRealityPlusOnly,Yalnızca Plus aboneleri için
+Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,Kendi Görüntün henüz Cloud Play'de kullanılamıyor.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,Kendi Görüntün henüz Restyle ile kullanılamıyor.
+Feature.CloudClient.Label.TimeLeft,Kalan süre
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,Arkadaşlarının Seni Bulmasına İzin Ver
 Feature.Contacts.Action.Invite,Davet Et
@@ -3632,6 +3649,7 @@ Feature.FriendsActivityFeed.Label.ViewRecentActivity,Son Etkinlikleri Görüntü
 Feature.FriendsMenu.Label.SelectedFriendsCount,{numerator}/{denominator} arkadaş seçildi
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,{selectedCount} arkadaş seçildi
 Feature.GameBadges.Label.Experience,
+Feature.GameDetails.Action.Continue,
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,Geri dönüş gönder
 Feature.GameDetails.Action.NotInterested,İlgilenmiyorum
@@ -3663,8 +3681,10 @@ Feature.GameDetails.Label.WhyThisAd,
 Feature.GameDetails.Label.Yes,
 Feature.GameDetails.Message.AdPreferences,Reklam Tercihleri
 Feature.GameDetails.Message.AnonymousFeedbackTermsOfUse,Yanıtlar anonim bir şekilde paylaşılır ve {underlineStart}Roblox Kullanım Şartları{underlineEnd} uyarınca geri dönüş anlamına gelir.
+Feature.GameDetails.Message.ExternalLinkWarning,"""Devam et"" butonuna tıkladığında, Roblox'a ait olmayan veya Roblox tarafından işletilmeyen bir web sitesine yönlendirileceksin. Bu web sitesi, farklı koşullara ve gizlilik politikasına sahip olabilir."
 Feature.GameDetails.Message.HelpImproveExperience,Deneyimini iyileştirmemize yardımcı ol
 Feature.GameDetails.Message.HidingExperienceQuestion,Bu deneyimi neden gizliyorsun?
+Feature.GameDetails.Message.LeavingRobloxTitle,Roblox'tan çıkılıyor
 Feature.GameDetails.Message.PurchaseGameV2,{X} Robux karşılığında {gameName} oyununa erişimin kilidi açılsın mı?
 Feature.GameDetails.Message.SponsoredDisclosure.Error,Geçici bir hata nedeniyle sponsorluk bilgileri görüntülenemedi.
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"Bu sponsorlu içeriği, sana uygun içeriği sunmak için kullandığımız cihaz bilgileri, konum ve yaş gibi kişiselleştirilmemiş faktörlere dayalı olarak görüyorsun. Deneyim {CreatorName} tarafından yaratıldı. Sponsorluk için {PayerName} ödeme yaptı. Daha fazla bilgi edinmek için lütfen hesabındaki Ayarlar'ın altında bulunan ""Gizlilik ve İçerik Olgunluk Düzeyi"" sayfasını ziyaret et:"
@@ -3684,9 +3704,11 @@ Feature.GameFollows.TooltipTurnedOnNotifications,{experienceName} için bildirim
 Feature.GameJoin.Description.DifferentServer,Farklı bir sunucuda başlayacaksın
 Feature.GameJoin.Label.PlayTogether,Birlikte oynayabilirsiniz
 Feature.GameJoin.Label.PlayTogetherSoon,Yakında birlikte oynayabileceksiniz
+Feature.GameJoin.Label.RecentCoplay,Yakın zamanda beraber oynadınız
 Feature.GamePage.Action.BackToTop,Başa dön
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
+Feature.GamePage.LabelCancelField,
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,"Bu deneyim, yaş doğrulama durumun nedeniyle kullanılamıyor."
 Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,Misafirler bu deneyime katılamaz.
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,Bu deneyimi ziyaret etmek için satın alım gerekiyor.
@@ -4908,6 +4930,7 @@ Feature.Toast.Username.Copied,Kullanıcı adı panoya kopyalandı.
 Feature.Toast.VoteError.AssetNotVoteable,Deneyim oylanmayabilir.
 Feature.Toast.VoteError.Default,Eylem kullanılamıyor.
 Feature.Toast.VoteError.FloodCheckThresholdMet,Çok hızlı oy veriyorsun.
+Feature.Toast.VoteError.NotSaved,Oy kaydedilmedi
 Feature.Toast.VoteError.PlayGame,Değerlendirmeden önce bu deneyimi ziyaret etmelisin.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,Topluluk Standartlarımızı defalarca ihlal ettiğin için şu anda yaşını kontrol edemezsin. Kısıtlama sona erdikten sonra tekrar deneyebilirsin.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,Yaş kontrolleri askıya alındı

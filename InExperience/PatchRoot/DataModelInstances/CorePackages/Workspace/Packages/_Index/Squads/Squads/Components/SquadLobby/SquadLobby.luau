@@ -705,10 +705,11 @@ return function(p1)
 		UseTokensResult
 	})
 	local UseMemoResult9 = React.useMemo(function()
-		-- upvalues: FFlagSquadMemberJoinDialogAndOverflowMenuModule (upval), UseStateResult6 (copy), UseStateResult5 (copy), React (upval), SquadLobbyJoinDialogContainerModule (upval), p1 (copy), UseStateResult2_4 (copy), UseStateResult2_5 (copy), SquadLobbyUserDropdownMenuModule (upval), UseSelectorResult (copy)
+		-- upvalues: FFlagSquadMemberJoinDialogAndOverflowMenuModule (upval), UseStateResult6 (copy), UseStateResult5 (copy), React (upval), SquadLobbyJoinDialogContainerModule (upval), p1 (copy), IsWideMode (copy), UseStateResult2_4 (copy), UseStateResult2_5 (copy), SquadLobbyUserDropdownMenuModule (upval), UseSelectorResult (copy)
 		return if FFlagSquadMemberJoinDialogAndOverflowMenuModule then if UseStateResult6 and UseStateResult5 then React.createElement(SquadLobbyJoinDialogContainerModule, {
 			userId = UseStateResult5,
 			isInExperience = p1.isInExperience,
+			isWideMode = IsWideMode,
 			onClose = function()
 				-- upvalues: UseStateResult2_4 (upval), UseStateResult2_5 (upval)
 				UseStateResult2_4(nil)
@@ -731,8 +732,10 @@ return function(p1)
 			parentChannelId = UseSelectorResult
 		}) else nil
 	end, {
-		UseSelectorResult, p1.isInExperience, UseStateResult6, UseStateResult2_5,
-		p1.openViewProfile, UseStateResult5, UseStateResult2_4
+		UseSelectorResult, p1.isInExperience,
+		FFlagSquadMemberJoinDialogAndOverflowMenuModule and IsWideMode,
+		UseStateResult6, UseStateResult2_5, p1.openViewProfile, UseStateResult5,
+		UseStateResult2_4
 	})
 	React.useEffect(function()
 		-- upvalues: SquadCoordinationExperienceJoinExperimentation (upval), FFlagEnableSquadRegroupExperimentation (upval), SquadRegroupExperimentation (upval), LuckyRecommendationExperimentation (upval)

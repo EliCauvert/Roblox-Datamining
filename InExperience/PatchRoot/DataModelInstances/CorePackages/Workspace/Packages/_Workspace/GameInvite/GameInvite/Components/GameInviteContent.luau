@@ -4,7 +4,8 @@ local Context = GameInvite.Context
 local Parent = GameInvite.Parent
 local FriendsMenuModule = require(Parent.FriendsMenu)
 local ReactModule = require(Parent.React)
-local DeviceInfo = require(Parent.NotificationsCommon).DeviceInfo
+local NotificationsCommonModule = require(Parent.NotificationsCommon)
+local DeviceInfo = NotificationsCommonModule.DeviceInfo
 local FriendsMenuFriendsList = FriendsMenuModule.FriendsMenuFriendsList
 local InviteFriendContext = FriendsMenuModule.InviteFriendContext
 local FriendsMenuContextWrapper = FriendsMenuModule.FriendsMenuContextWrapper
@@ -24,12 +25,15 @@ local GetFFlagEnableGameInviteRewardsBannerFunction = require(Parent.SharedFlags
 local NewResult = require(Parent.Loggers).Logger:new(script.Name)
 local GetRewardMetadataModule = require(GameInvite.Requests.GetRewardMetadata)
 local FFlagGameInviteInExpUserListRendererModule = require(GameInvite.Flags.FFlagGameInviteInExpUserListRenderer)
-local IsGameInviteJoinForPioneerEnabledFunction = require(Parent.NotificationsCommon).isGameInviteJoinForPioneerEnabled
+local FFlagGameInviteHidePresenceOnLegacyList = require(Parent.SharedFlags).FFlagGameInviteHidePresenceOnLegacyList
+local IsPioneerEnabledLegacyInviteFriendsListModule = require(GameInvite.utils.isPioneerEnabledLegacyInviteFriendsList)
+local GameInvitePresenceHiddenFriendsListModule = if FFlagGameInviteHidePresenceOnLegacyList then require(Components.GameInvitePresenceHiddenFriendsList) else nil
 local SidePadding = GameInviteConstantsModule.Layout.SidePadding
 local TitleHeight = GameInviteConstantsModule.Layout.TitleHeight
 
-local function v25(p1)
-	-- upvalues: ReactModule (copy), GameInviteModalLayoutContextModule (copy), GameDetailsContextModule (copy), GetFFlagEnableGameInviteRewardsBannerFunction (copy), GetRewardMetadataModule (copy), NewResult (copy), UseSelectorFunction (copy), DeviceInfo (copy), TitleHeight (copy), GameInviteTitleModule (copy), SidePadding (copy), FriendsMenuSearch (copy), GameInviteAnalyticsManagerModule (copy), GameInviteCustomTextModule (copy), GameInviteRewardsBannerModule (copy), FFlagGameInviteInExpUserListRendererModule (copy), IsGameInviteJoinForPioneerEnabledFunction (copy), GameInviteConstantsModule (copy), GameInviteFriendsListContainerModule (copy), FriendsMenuFriendsList (copy), FriendMenuType (copy)
+local function v29(p1)
+	-- upvalues: NotificationsCommonModule (copy), ReactModule (copy), GameInviteModalLayoutContextModule (copy), GameDetailsContextModule (copy), GetFFlagEnableGameInviteRewardsBannerFunction (copy), GetRewardMetadataModule (copy), NewResult (copy), UseSelectorFunction (copy), DeviceInfo (copy), TitleHeight (copy), GameInviteConstantsModule (copy), FriendMenuType (copy), GameInviteTitleModule (copy), SidePadding (copy), FriendsMenuSearch (copy), GameInviteAnalyticsManagerModule (copy), GameInviteCustomTextModule (copy), GameInviteRewardsBannerModule (copy), FFlagGameInviteInExpUserListRendererModule (copy), GameInviteFriendsListContainerModule (copy), FFlagGameInviteHidePresenceOnLegacyList (copy), IsPioneerEnabledLegacyInviteFriendsListModule (copy), GameInvitePresenceHiddenFriendsListModule (copy), FriendsMenuFriendsList (copy)
+	local IsGameInviteJoinForPioneerEnabled = NotificationsCommonModule.isGameInviteJoinForPioneerEnabled
 	local UseContextResult = ReactModule.useContext(GameInviteModalLayoutContextModule)
 	local UseContextResult1 = ReactModule.useContext(GameDetailsContextModule)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
@@ -72,6 +76,15 @@ local function v25(p1)
 		NewTitleHeight += UseSelectorResult.statusBarHeight
 		YOffset += UseSelectorResult.statusBarHeight
 	end
+	local config = {
+		layoutOrder = 3,
+		size = UDim2.new(1, 0, 1, -NewTitleHeight),
+		parentComponentName = GameInviteConstantsModule.ParentComponentName,
+		menuType = FriendMenuType.SingleSelect,
+		gameDetailsData = UseContextResult1,
+		disableSelectionParentManagement = p1.disableSelectionParentManagement
+	}
+	
 	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
@@ -131,22 +144,15 @@ local function v25(p1)
 			promptMessage = PromptMessage
 		}) or nil,
 		RewardsBanner = GetFFlagEnableGameInviteRewardsBannerFunction() and UseStateResult ~= nil and ReactModule.createElement(GameInviteRewardsBannerModule, { layoutOrder = 2, rewardMetadata = UseStateResult }) or nil,
-		FriendsList = if (FFlagGameInviteInExpUserListRendererModule or IsGameInviteJoinForPioneerEnabledFunction()) and UseContextResult1.trigger == GameInviteConstantsModule.Triggers.GameMenu then ReactModule.createElement(GameInviteFriendsListContainerModule, {
+		FriendsList = if (FFlagGameInviteInExpUserListRendererModule or IsGameInviteJoinForPioneerEnabled) and UseContextResult1.trigger == GameInviteConstantsModule.Triggers.GameMenu then ReactModule.createElement(GameInviteFriendsListContainerModule, {
 			layoutOrder = 3,
 			size = UDim2.new(1, 0, 1, -NewTitleHeight)
-		}) else ReactModule.createElement(FriendsMenuFriendsList, {
-			layoutOrder = 3,
-			size = UDim2.new(1, 0, 1, -NewTitleHeight),
-			parentComponentName = GameInviteConstantsModule.ParentComponentName,
-			menuType = FriendMenuType.SingleSelect,
-			gameDetailsData = UseContextResult1,
-			disableSelectionParentManagement = p1.disableSelectionParentManagement
-		})
+		}) elseif FFlagGameInviteHidePresenceOnLegacyList and IsPioneerEnabledLegacyInviteFriendsListModule() then ReactModule.createElement(GameInvitePresenceHiddenFriendsListModule, config) else ReactModule.createElement(FriendsMenuFriendsList, config)
 	})
 end
 
 return function(p1)
-	-- upvalues: GetFFlagEnableCommonFriendsMenuFunction (copy), ReactModule (copy), InviteFriendContext (copy), FriendsMenuContextWrapper (copy), v25 (copy)
+	-- upvalues: GetFFlagEnableCommonFriendsMenuFunction (copy), ReactModule (copy), InviteFriendContext (copy), FriendsMenuContextWrapper (copy), v29 (copy)
 	local UseContextResult = if GetFFlagEnableCommonFriendsMenuFunction() then ReactModule.useContext(InviteFriendContext) else {
 		inviteSingleFriend = function() end,
 		getMaxRecipientRowNum = function() end
@@ -156,5 +162,5 @@ return function(p1)
 		inviteSingleFriend = UseContextResult.inviteSingleFriend,
 		inviteMultiFriends = function() end,
 		isLoadingCustomParams = p1.isLoadingCustomParams
-	}, { GameInviteContent = ReactModule.createElement(v25, p1) }) else ReactModule.createElement(v25, p1)
+	}, { GameInviteContent = ReactModule.createElement(v29, p1) }) else ReactModule.createElement(v29, p1)
 end

@@ -2,8 +2,8 @@
 local ReactModule = require(Parent.Parent.React)
 local _ = require(Parent.Configs.ConfigTypes)
 local KeybindContextModule = require(Parent.Context.KeybindContext)
-local UseAbilitiesModule = require(script.Parent.useAbilities)
 local FFlagHelpPageCCLModule = require(Parent.Flags.FFlagHelpPageCCL)
+local UseAbilitiesModule = if FFlagHelpPageCCLModule then require(script.Parent.useAbilities) else nil
 
 return function()
 	-- upvalues: ReactModule (copy), KeybindContextModule (copy), FFlagHelpPageCCLModule (copy), UseAbilitiesModule (copy)

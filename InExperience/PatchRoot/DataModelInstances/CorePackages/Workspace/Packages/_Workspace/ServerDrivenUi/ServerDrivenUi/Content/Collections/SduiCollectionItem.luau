@@ -3,10 +3,14 @@ local ReactModule = require(Parent.React)
 local CryoModule = require(Parent.Cryo)
 local ImpressionsTagUtility = require(Parent.Impressions).ImpressionsTagUtility
 local CombineReactTagsFunction = require(Parent.RoactUtils).combineReactTags
+local VideoUtilsModule = require(Parent.VideoUtils)
+local ViewportAutoplayColSpanAttribute = VideoUtilsModule.ViewportAutoplayColSpanAttribute
+local ViewportAutoplayCellHorizontalPaddingAttribute = VideoUtilsModule.ViewportAutoplayCellHorizontalPaddingAttribute
 local FFlagSduiOptionSelectorAnchorTag = require(Parent.SharedFlags).FFlagSduiOptionSelectorAnchorTag
+local FFlagLuaAppSduiSearchResultsVideoPreview = require(Parent.SharedFlags).FFlagLuaAppSduiSearchResultsVideoPreview
 
 return ReactModule.memo(function(p1)
-	-- upvalues: ReactModule (copy), ImpressionsTagUtility (copy), CryoModule (copy), FFlagSduiOptionSelectorAnchorTag (copy), CombineReactTagsFunction (copy)
+	-- upvalues: ReactModule (copy), ImpressionsTagUtility (copy), FFlagLuaAppSduiSearchResultsVideoPreview (copy), ViewportAutoplayColSpanAttribute (copy), ViewportAutoplayCellHorizontalPaddingAttribute (copy), CryoModule (copy), FFlagSduiOptionSelectorAnchorTag (copy), CombineReactTagsFunction (copy)
 	local LayoutOrder = p1.layoutOrder
 	local Size = p1.size
 	local Position = p1.position
@@ -32,6 +36,29 @@ return ReactModule.memo(function(p1)
 			ImpressionsTagUtility.AddTag(UseRefResult, p1.impressionsTag, p1.index)
 		end
 	end, { p1.impressionsTag, p1.index })
+	local UseRefResult1 = if FFlagLuaAppSduiSearchResultsVideoPreview then ReactModule.useRef(nil) else nil
+	
+	if FFlagLuaAppSduiSearchResultsVideoPreview then
+		local AutoplayColSpan = p1.autoplayColSpan
+		local AutoplayCellHorizontalPadding = p1.autoplayCellHorizontalPadding
+		ReactModule.useEffect(function()
+			-- upvalues: UseRefResult1 (copy), AutoplayColSpan (copy), ViewportAutoplayColSpanAttribute (upval), ViewportAutoplayCellHorizontalPaddingAttribute (upval), AutoplayCellHorizontalPadding (copy)
+			local Current = UseRefResult1.current
+			
+			if Current and AutoplayColSpan ~= nil then
+				Current:SetAttribute(ViewportAutoplayColSpanAttribute, AutoplayColSpan)
+				Current:SetAttribute(ViewportAutoplayCellHorizontalPaddingAttribute, AutoplayCellHorizontalPadding)
+				
+				return function()
+					-- upvalues: Current (copy), ViewportAutoplayColSpanAttribute (upval), ViewportAutoplayCellHorizontalPaddingAttribute (upval)
+					Current:SetAttribute(ViewportAutoplayColSpanAttribute, nil)
+					Current:SetAttribute(ViewportAutoplayCellHorizontalPaddingAttribute, nil)
+				end
+			else
+				return nil
+			end
+		end, { AutoplayColSpan, AutoplayCellHorizontalPadding })
+	end
 	local UseResult1 = ReactModule.useCallback(function(p2)
 		-- upvalues: p1 (copy)
 		if p1.onItemSizeChanged then
@@ -57,7 +84,7 @@ return ReactModule.memo(function(p1)
 		})
 	end
 	return ReactModule.createElement("Frame", {
-		ref = if InnerWrapperSize == nil then UseResult else nil,
+		ref = if InnerWrapperSize == nil then UseResult elseif FFlagLuaAppSduiSearchResultsVideoPreview then UseRefResult1 else nil,
 		AnchorPoint = AnchorPoint,
 		Position = Position,
 		Size = Size,
@@ -66,6 +93,6 @@ return ReactModule.memo(function(p1)
 		BackgroundTransparency = 1,
 		AutomaticSize = AutomaticSize,
 		[ReactModule.Change.AbsoluteSize] = if p1.onItemSizeChanged then UseResult1 else nil,
-		[ReactModule.Tag] = if FFlagSduiOptionSelectorAnchorTag then CombineReactTagsFunction(p1.tag, if p1.testId then `data-testid={p1.testId}` else nil) elseif p1.testId then `data-testid={p1.testId}` else nil
+		[ReactModule.Tag] = if FFlagSduiOptionSelectorAnchorTag or FFlagLuaAppSduiSearchResultsVideoPreview then CombineReactTagsFunction(p1.tag, if p1.testId then `data-testid={p1.testId}` else nil) elseif p1.testId then `data-testid={p1.testId}` else nil
 	}, Children)
 end)

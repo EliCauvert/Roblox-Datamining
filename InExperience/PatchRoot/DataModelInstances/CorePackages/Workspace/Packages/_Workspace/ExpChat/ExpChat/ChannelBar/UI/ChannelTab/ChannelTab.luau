@@ -11,9 +11,8 @@ local ChannelTabDisplayLabel = ExpChatSharedModule.ChannelTabDisplayLabel
 local CursorKind = UIBloxModule.App.SelectionImage.CursorKind
 local Interactable = UIBloxModule.Core.Control.Interactable
 local UseSelectionCursorFunction = UIBloxModule.App.SelectionImage.useSelectionCursor
-local FFlagExpChatChannelTabSizingUpdateModule = require(ExpChat.Flags.FFlagExpChatChannelTabSizingUpdate)
 local FFlagExpChatUseSharedChannelTabDisplayLabel = SharedFlagsModule.FFlagExpChatUseSharedChannelTabDisplayLabel
-local TextService = if FFlagExpChatChannelTabSizingUpdateModule then game:GetService("TextService") else nil
+local TextService = game:GetService("TextService")
 local LocalizationModule = require(ExpChat.Localization)
 local GetOtherDisplayNameInWhisperChannelModule = require(ExpChat.getOtherDisplayNameInWhisperChannel)
 local GetUnreadIndicatorLayoutModule = require(script.Parent.getUnreadIndicatorLayout)
@@ -21,7 +20,6 @@ local UseTabImpressionModule = require(script.Parent.useTabImpression)
 local FFlagExpChatGlobalTabDefaultModule = require(ExpChat.Flags.FFlagExpChatGlobalTabDefault)
 local FFlagExpChatMemoizeChannelBarModule = require(ExpChat.Flags.FFlagExpChatMemoizeChannelBar)
 local UnreachableFunction = ExpChatSharedModule.TabTypes.unreachable
-local Offset: number = if FFlagExpChatChannelTabSizingUpdateModule then 12 else 20
 local _Color3 = Color3.fromRGB(255, 255, 255)
 local config = {
 	channelName = "",
@@ -51,7 +49,7 @@ local function createUnreadDot(Position, SetTransparencyResult)
 end
 
 local function ChannelTab(p1)
-	-- upvalues: Dictionary (copy), config (copy), UseTabImpressionModule (copy), FFlagExpChatGlobalTabDefaultModule (copy), LocalizationModule (copy), FFlagExpChatUseSharedChannelTabDisplayLabel (copy), ChannelTabDisplayLabel (copy), Players (copy), GetOtherDisplayNameInWhisperChannelModule (copy), UnreachableFunction (copy), ReactModule (copy), UseSelectionCursorFunction (copy), CursorKind (copy), FFlagExpChatChannelTabSizingUpdateModule (copy), TextService (copy), GetUnreadIndicatorLayoutModule (copy), Offset (copy), FFlagExpChatMemoizeChannelBarModule (copy), Interactable (copy), createUnreadDot (copy), _Color3 (copy), ConfigModule (copy)
+	-- upvalues: Dictionary (copy), config (copy), UseTabImpressionModule (copy), FFlagExpChatGlobalTabDefaultModule (copy), LocalizationModule (copy), FFlagExpChatUseSharedChannelTabDisplayLabel (copy), ChannelTabDisplayLabel (copy), Players (copy), GetOtherDisplayNameInWhisperChannelModule (copy), UnreachableFunction (copy), ReactModule (copy), UseSelectionCursorFunction (copy), CursorKind (copy), TextService (copy), GetUnreadIndicatorLayoutModule (copy), FFlagExpChatMemoizeChannelBarModule (copy), Interactable (copy), createUnreadDot (copy), _Color3 (copy), ConfigModule (copy)
 	local JoinResult = Dictionary.join(config, p1)
 	UseTabImpressionModule({
 		enabled = JoinResult.isLayoutReady,
@@ -103,72 +101,66 @@ local function ChannelTab(p1)
 	local Text = ChannelName
 	local UseStateResult, UseStateResult2 = ReactModule.useState(JoinResult.channelTabsSettings.BackgroundColor3)
 	local UseSelectionCursorResult = UseSelectionCursorFunction(CursorKind.RoundedSlot)
-	local NoIsTabCollapsed: boolean = FFlagExpChatChannelTabSizingUpdateModule and (JoinResult.hasUnreadMessages and not JoinResult.isTabCollapsed)
-	local v1: ((any) -> ())? = nil
+	local NoIsTabCollapsed: boolean = JoinResult.hasUnreadMessages and not JoinResult.isTabCollapsed
 	local MapResult = nil
 	local MapResult1 = nil
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(nil)
+	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(nil)
 	
-	if FFlagExpChatChannelTabSizingUpdateModule then
-		local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(nil)
-		local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(nil)
+	local function v39(Frame)
+		-- upvalues: UseBindingResult2_1 (copy)
+		UseBindingResult2_1(Frame.AbsoluteSize.X)
+	end
+	
+	ReactModule.useEffect(function()
+		-- upvalues: UseBindingResult2 (copy), JoinResult (copy), Text (copy), TextService (upval)
+		UseBindingResult2(nil)
 		
-		v1 = function(Frame)
-			-- upvalues: UseBindingResult2_1 (copy)
-			UseBindingResult2_1(Frame.AbsoluteSize.X)
-		end
-		
-		ReactModule.useEffect(function()
-			-- upvalues: UseBindingResult2 (copy), JoinResult (copy), Text (copy), TextService (upval)
-			UseBindingResult2(nil)
-			
-			if not JoinResult.hasUnreadMessages or JoinResult.isTabCollapsed then return end
-			local Flag = false
-			task.spawn(function()
-				-- upvalues: Text (upval), JoinResult (upval), TextService (upval), Flag (ref), UseBindingResult2 (upval)
-				local GetTextBoundsParams = Instance.new("GetTextBoundsParams")
-				GetTextBoundsParams.Text = Text
-				GetTextBoundsParams.Font = JoinResult.channelTabsSettings.FontFace
-				GetTextBoundsParams.Size = JoinResult.channelTabsSettings.TextSize
-				GetTextBoundsParams.Width = 1e999
-				local Success, Result = pcall(function()
-					-- upvalues: TextService (upval), GetTextBoundsParams (copy)
-					return TextService:GetTextBoundsAsync(GetTextBoundsParams)
-				end)
-				
-				if Success and not Flag then
-					UseBindingResult2((math.ceil(Result.X)))
-				end
+		if not JoinResult.hasUnreadMessages or JoinResult.isTabCollapsed then return end
+		local Flag = false
+		task.spawn(function()
+			-- upvalues: Text (upval), JoinResult (upval), TextService (upval), Flag (ref), UseBindingResult2 (upval)
+			local GetTextBoundsParams = Instance.new("GetTextBoundsParams")
+			GetTextBoundsParams.Text = Text
+			GetTextBoundsParams.Font = JoinResult.channelTabsSettings.FontFace
+			GetTextBoundsParams.Size = JoinResult.channelTabsSettings.TextSize
+			GetTextBoundsParams.Width = 1e999
+			local Success, Result = pcall(function()
+				-- upvalues: TextService (upval), GetTextBoundsParams (copy)
+				return TextService:GetTextBoundsAsync(GetTextBoundsParams)
 			end)
 			
-			return function()
-				-- upvalues: Flag (ref)
-				Flag = true
+			if Success and not Flag then
+				UseBindingResult2((math.ceil(Result.X)))
 			end
-		end, {
-			JoinResult.channelTabsSettings.FontFace,
-			JoinResult.channelTabsSettings.TextSize,
-			JoinResult.hasUnreadMessages,
-			JoinResult.isTabCollapsed,
-			Text
-		})
+		end)
 		
-		if NoIsTabCollapsed then
-			local MapResult2 = ReactModule.joinBindings({
-				naturalTextWidth = UseBindingResult,
-				tabWidth = UseBindingResult1
-			}):map(function(p2)
-				-- upvalues: GetUnreadIndicatorLayoutModule (upval), JoinResult (copy), Offset (upval)
-				return GetUnreadIndicatorLayoutModule(JoinResult.hasUnreadMessages, JoinResult.isTabCollapsed, p2.tabWidth, p2.naturalTextWidth, Offset, 8, 8)
-			end)
-			MapResult = MapResult2:map(function(p2): UDim2
-				-- upvalues: Offset (upval)
-				return if p2 then UDim2.new(0, p2.textWidth, 1, 0) else UDim2.new(1, -(Offset * 2 + 8 + 8), 1, 0)
-			end)
-			MapResult1 = MapResult2:map(function(p2): UDim2
-				-- upvalues: Offset (upval)
-				return if p2 then UDim2.fromOffset(p2.textLeft, 0) else UDim2.fromOffset(Offset + 8 + 8, 0)
-			end)
+		return function()
+			-- upvalues: Flag (ref)
+			Flag = true
 		end
+	end, {
+		JoinResult.channelTabsSettings.FontFace,
+		JoinResult.channelTabsSettings.TextSize,
+		JoinResult.hasUnreadMessages,
+		JoinResult.isTabCollapsed,
+		Text
+	})
+	
+	if NoIsTabCollapsed then
+		local MapResult2 = ReactModule.joinBindings({
+			naturalTextWidth = UseBindingResult,
+			tabWidth = UseBindingResult1
+		}):map(function(p2)
+			-- upvalues: GetUnreadIndicatorLayoutModule (upval), JoinResult (copy)
+			return GetUnreadIndicatorLayoutModule(JoinResult.hasUnreadMessages, JoinResult.isTabCollapsed, p2.tabWidth, p2.naturalTextWidth, 12, 8, 8)
+		end)
+		MapResult = MapResult2:map(function(p2): UDim2
+			return if p2 then UDim2.new(0, p2.textWidth, 1, 0) else UDim2.new(1, -40, 1, 0)
+		end)
+		MapResult1 = MapResult2:map(function(p2): UDim2
+			return if p2 then UDim2.fromOffset(p2.textLeft, 0) else UDim2.fromOffset(28, 0)
+		end)
 	end
 	return ReactModule.createElement(Interactable, {
 		Size = UDim2.fromScale(1, 1),
@@ -183,7 +175,7 @@ local function ChannelTab(p1)
 		end, { JoinResult.tabRef, JoinResult.channelName }) else JoinResult.tabRef,
 		SelectionImageObject = UseSelectionCursorResult,
 		onStateChanged = if FFlagExpChatMemoizeChannelBarModule then nil else function() end,
-		[ReactModule.Change.AbsoluteSize] = v1,
+		[ReactModule.Change.AbsoluteSize] = v39,
 		[ReactModule.Event.Activated] = if FFlagExpChatMemoizeChannelBarModule then ReactModule.useCallback(function()
 			-- upvalues: JoinResult (copy)
 			if JoinResult.onTabSelected then
@@ -220,12 +212,12 @@ local function ChannelTab(p1)
 			TextTruncate = Enum.TextTruncate.AtEnd
 		}, {
 			UIPadding = if NoIsTabCollapsed then nil else ReactModule.createElement("UIPadding", {
-				PaddingLeft = UDim.new(0, Offset + (if JoinResult.isTabCollapsed then 4 else 0)),
-				PaddingRight = UDim.new(0, Offset)
+				PaddingLeft = UDim.new(0, 12 + (if JoinResult.isTabCollapsed then 4 else 0)),
+				PaddingRight = UDim.new(0, 12)
 			}),
 			UnreadDot = NoIsTabCollapsed and createUnreadDot(UDim2.new(0, -8, 0.5, 0), JoinResult.setTransparency(0))
 		}),
-		UnreadDot = JoinResult.hasUnreadMessages and (not NoIsTabCollapsed and createUnreadDot(UDim2.new(0, Offset - 2, 0.5, 0), JoinResult.setTransparency(0))),
+		UnreadDot = JoinResult.hasUnreadMessages and (not NoIsTabCollapsed and createUnreadDot(UDim2.new(0, 10, 0.5, 0), JoinResult.setTransparency(0))),
 		Highlight = JoinResult.isTabSelected and ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			Size = UDim2.new(1, 0, 0, 4),

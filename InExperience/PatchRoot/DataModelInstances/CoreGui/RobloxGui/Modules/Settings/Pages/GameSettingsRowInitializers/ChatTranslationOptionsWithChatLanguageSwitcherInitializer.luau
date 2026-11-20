@@ -1,10 +1,11 @@
-﻿local TextChatService = game:GetService("TextChatService")
-local HttpService = game:GetService("HttpService")
+﻿local ChatTranslationOptionsServicesModule = require(script.Parent.ChatTranslationOptionsServices)
+local TextChatService = ChatTranslationOptionsServicesModule.TextChatService
+local HttpService = ChatTranslationOptionsServicesModule.HttpService
 local CorePackages = game:GetService("CorePackages")
 local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 local Url = require(CorePackages.Workspace.Packages.CoreScriptsCommon).Url
-local GameSettings = UserSettings().GameSettings
-local Players = game:GetService("Players")
+local GameSettings = ChatTranslationOptionsServicesModule.GameSettings
+local Players = ChatTranslationOptionsServicesModule.Players
 local LocalPlayer = Players.LocalPlayer
 local UtilityModule = require(RobloxGui.Modules.Settings.Utility)
 local NewResult = require(CorePackages.Workspace.Packages.CoreScriptsInitializer).CoreLogger:new(script.Name)
@@ -12,17 +13,18 @@ local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTra
 local FixChatLanguageSwitcherLabel = game:DefineFastFlag("FixChatLanguageSwitcherLabel", false)
 local GetFStringChatTranslationEnabledLocalesModule = require(RobloxGui.Modules.Flags.GetFStringChatTranslationEnabledLocales)
 local TextChatServiceSettingsSavedEngineFeature = game:GetEngineFeature("TextChatServiceSettingsSaved")
+local FFlagChatTranslationReadsUserGameSettings = require(CorePackages.Workspace.Packages.SharedFlags).FFlagChatTranslationReadsUserGameSettings
 local FeatureSettingsHubLanguageSelectionUnavailable = RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.LanguageSelection.Unavailable")
 
 return function(p1, p2, Callback)
-	-- upvalues: Url (copy), Players (copy), HttpService (copy), NewResult (copy), FixChatLanguageSwitcherLabel (copy), UtilityModule (copy), RobloxTranslatorModule (copy), FeatureSettingsHubLanguageSelectionUnavailable (copy), GameSettings (copy), LocalPlayer (copy), TextChatService (copy), TextChatServiceSettingsSavedEngineFeature (copy), GetFStringChatTranslationEnabledLocalesModule (copy)
+	-- upvalues: Url (copy), Players (copy), HttpService (copy), NewResult (copy), FixChatLanguageSwitcherLabel (copy), UtilityModule (copy), RobloxTranslatorModule (copy), FeatureSettingsHubLanguageSelectionUnavailable (copy), GameSettings (copy), LocalPlayer (copy), TextChatService (copy), FFlagChatTranslationReadsUserGameSettings (copy), TextChatServiceSettingsSavedEngineFeature (copy), GetFStringChatTranslationEnabledLocalesModule (copy)
 	local config = { [1] = "en_us" }
 	local config1 = { en_us = 1 }
 	local Names = { "English" }
 	local Text = Url.LOCALE_URL .. string.format("v1/locales?displayValueLocale=%s", Players.LocalPlayer.LocaleId:gsub("-", "_"))
 	
 	local function localeCodeToLanguageCodeMappingCallback(p3, Text: string)
-		-- upvalues: NewResult (upval), FixChatLanguageSwitcherLabel (upval), p1 (copy), UtilityModule (upval), RobloxTranslatorModule (upval), FeatureSettingsHubLanguageSelectionUnavailable (upval), p2 (copy), GameSettings (upval), config (copy), LocalPlayer (upval), TextChatService (upval), Names (copy), Callback (copy), TextChatServiceSettingsSavedEngineFeature (upval)
+		-- upvalues: NewResult (upval), FixChatLanguageSwitcherLabel (upval), p1 (copy), UtilityModule (upval), RobloxTranslatorModule (upval), FeatureSettingsHubLanguageSelectionUnavailable (upval), p2 (copy), GameSettings (upval), config (copy), LocalPlayer (upval), TextChatService (upval), Names (copy), Callback (copy), FFlagChatTranslationReadsUserGameSettings (upval), TextChatServiceSettingsSavedEngineFeature (upval)
 		if not p3 then
 			if Text == nil then
 				Text = "Locales call did not set error message to non-nil value"
@@ -78,12 +80,13 @@ return function(p1, p2, Callback)
 			Entry = Entry1
 			Callback("chat_translation_locale", ChatTranslationLocale, Entry1)
 		end)
-		p1.ChatTranslationToggleFrame, p1.ChatTranslationToggleLabel, p1.ChatTranslationToggleEnabler = UtilityModule:AddNewRow(p1, RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.Chat.TranslationToggleSetting"), "Selector", { "On", "Off" }, if TextChatService.ChatTranslationToggleEnabled then 1 else 2)
+		local ChatTranslationToggleEnabled = if FFlagChatTranslationReadsUserGameSettings then GameSettings.ChatTranslationToggleEnabled else TextChatService.ChatTranslationToggleEnabled
+		p1.ChatTranslationToggleFrame, p1.ChatTranslationToggleLabel, p1.ChatTranslationToggleEnabler = UtilityModule:AddNewRow(p1, RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.Chat.TranslationToggleSetting"), "Selector", { "On", "Off" }, if ChatTranslationToggleEnabled then 1 else 2)
 		p1.ChatTranslationToggleFrame.LayoutOrder = p2.ChatTranslationToggleFrame
 		p1.ChatTranslationToggleEnabler.IndexChanged:connect(function(p4)
-			-- upvalues: TextChatService (upval), TextChatServiceSettingsSavedEngineFeature (upval), GameSettings (upval), Callback (upval), Entry (ref)
+			-- upvalues: FFlagChatTranslationReadsUserGameSettings (upval), GameSettings (upval), TextChatService (upval), TextChatServiceSettingsSavedEngineFeature (upval), Callback (upval), Entry (ref)
 			local ChatTranslationToggleEnabled = p4 == 1
-			local ChatTranslationToggleEnabled1 = TextChatService.ChatTranslationToggleEnabled
+			local ChatTranslationToggleEnabled1 = if FFlagChatTranslationReadsUserGameSettings then GameSettings.ChatTranslationToggleEnabled else TextChatService.ChatTranslationToggleEnabled
 			
 			if ChatTranslationToggleEnabled ~= ChatTranslationToggleEnabled1 then
 				if TextChatServiceSettingsSavedEngineFeature then
@@ -94,7 +97,8 @@ return function(p1, p2, Callback)
 				Callback("chat_translation_toggle", ChatTranslationToggleEnabled1, ChatTranslationToggleEnabled, { locale_id = Entry })
 			end
 		end)
-		local v2: number = if TextChatService.ChatTranslationEnabled then 1 else 2
+		local ChatTranslationEnabled = if FFlagChatTranslationReadsUserGameSettings then GameSettings.ChatTranslationEnabled else TextChatService.ChatTranslationEnabled
+		local v2: number = if ChatTranslationEnabled then 1 else 2
 		
 		if v2 == 2 then
 			p1.ChatLanguageSelectorFrame.Visible = false
@@ -103,9 +107,9 @@ return function(p1, p2, Callback)
 		p1.ChatTranslationFrame, p1.ChatTranslationLabel, p1.ChatTranslationEnabler = UtilityModule:AddNewRow(p1, RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.Chat.TranslationSetting"), "Selector", { "On", "Off" }, v2)
 		p1.ChatTranslationFrame.LayoutOrder = p2.ChatTranslationFrame
 		p1.ChatTranslationEnabler.IndexChanged:connect(function(p4)
-			-- upvalues: TextChatService (upval), TextChatServiceSettingsSavedEngineFeature (upval), GameSettings (upval), Callback (upval), LocalPlayer (upval), p1 (upval)
+			-- upvalues: FFlagChatTranslationReadsUserGameSettings (upval), GameSettings (upval), TextChatService (upval), TextChatServiceSettingsSavedEngineFeature (upval), Callback (upval), LocalPlayer (upval), p1 (upval)
 			local ChatTranslationEnabled = p4 == 1
-			local ChatTranslationEnabled1 = TextChatService.ChatTranslationEnabled
+			local ChatTranslationEnabled1 = if FFlagChatTranslationReadsUserGameSettings then GameSettings.ChatTranslationEnabled else TextChatService.ChatTranslationEnabled
 			
 			if TextChatServiceSettingsSavedEngineFeature then
 				GameSettings.ChatTranslationEnabled = ChatTranslationEnabled
@@ -137,7 +141,7 @@ return function(p1, p2, Callback)
 			elseif p5.StatusCode < 200 or p5.StatusCode >= 400 then
 				v4 = "Locale Code to Language Code Mapping Request Status code: " .. p5.StatusCode
 			else
-				v3, v31 = pcall(function()
+				v3, v35 = pcall(function()
 					-- upvalues: HttpService (upval), p5 (copy), GetFStringChatTranslationEnabledLocalesModule (upval), Names (upval), config (upval), config1 (upval)
 					local Data = HttpService:JSONDecode(p5.Body)
 					local List = {}

@@ -6,6 +6,7 @@ local PublishBottomSheetContainerModule = require(script.Parent.PublishBottomShe
 local VersionHistoryContainerModule = require(BuildExperience.Components.VersionHistory.VersionHistoryContainer)
 local GameInfoUtilsModule = require(BuildExperience.utils.GameInfoUtils)
 local FFlagBuildExperiencePageImpressionsModule = require(BuildExperience.Flags.FFlagBuildExperiencePageImpressions)
+local FFlagBuildExperienceClickEventIdsModule = require(BuildExperience.Flags.FFlagBuildExperienceClickEventIds)
 local UseBuildPageImpressionModule = require(BuildExperience.Telemetry.useBuildPageImpression)
 local Screens = require(BuildExperience.Components.BuildPillMenu.BuildOverflowMenuScreens).Screens
 
@@ -15,7 +16,7 @@ local function _(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), GameInfoUtilsModule (copy), FFlagBuildExperiencePageImpressionsModule (copy), UseBuildPageImpressionModule (copy), Screens (copy), PublishBottomSheetContainerModule (copy), VersionHistoryContainerModule (copy)
+	-- upvalues: ReactModule (copy), GameInfoUtilsModule (copy), FFlagBuildExperiencePageImpressionsModule (copy), UseBuildPageImpressionModule (copy), Screens (copy), PublishBottomSheetContainerModule (copy), VersionHistoryContainerModule (copy), FFlagBuildExperienceClickEventIdsModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local NavigateToSubPageFunction = p1.navigateToSubPage
 	local OnCloseFunction = p1.onClose
@@ -108,7 +109,9 @@ return function(p1)
 		VersionHistory = if UseStateResult and Number ~= nil then ReactModule.createElement(VersionHistoryContainerModule, {
 			isOpen = true,
 			testId = "build-publish-version-history",
+			universeId = if FFlagBuildExperienceClickEventIdsModule then Target.universeId else nil,
 			placeId = Number,
+			sessionId = if FFlagBuildExperienceClickEventIdsModule then Target.sessionId else nil,
 			onClose = UseResult4
 		}) else nil
 	})

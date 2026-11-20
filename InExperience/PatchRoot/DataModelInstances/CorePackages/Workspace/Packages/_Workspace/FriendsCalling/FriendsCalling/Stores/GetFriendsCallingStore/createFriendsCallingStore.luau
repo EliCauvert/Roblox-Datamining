@@ -40,7 +40,7 @@ local function readCall(Sound)
 		endReason = Sound.EndReason,
 		volume = Sound.Volume,
 		isDeafened = Sound.IsDeafened,
-		conversationId = Sound.ConversationId,
+		conversationId = tostring(Sound.ConversationId),
 		participants = Participants
 	}
 end

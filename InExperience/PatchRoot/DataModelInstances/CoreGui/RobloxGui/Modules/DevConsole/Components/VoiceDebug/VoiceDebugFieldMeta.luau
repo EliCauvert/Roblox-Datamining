@@ -33,6 +33,7 @@ v1 = {
 	jitterBufferDelayMs = {
 		label = "Jitter buffer delay",
 		unit = "ms",
+		plottable = true,
 		group = "Incoming",
 		thresholds = { warn = 60, error = 150 }
 	},

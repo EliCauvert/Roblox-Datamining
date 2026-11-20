@@ -41,6 +41,7 @@ local FFlagBuildPublishNavigationSheetModule = require(BuildExperience.Flags.FFl
 local FFlagBuildAdUpsellModule = require(BuildExperience.Flags.FFlagBuildAdUpsell)
 local FFlagBuildExperiencePlaytestCardPublishCtaModule = require(BuildExperience.Flags.FFlagBuildExperiencePlaytestCardPublishCta)
 local FFlagBuildExperienceActionOutcomeTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceActionOutcomeTelemetry)
+local FFlagBuildExperienceClickEventIdsModule = require(BuildExperience.Flags.FFlagBuildExperienceClickEventIds)
 local GetAdUpsellEventStoreModule = if FFlagBuildAdUpsellModule then require(BuildExperience.Stores.GetAdUpsellEventStore) else nil
 local UseStoreFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useStore
 local GetRootNavigationFunction = NavigationModule.getRootNavigation
@@ -137,7 +138,7 @@ local function PreviewButton(p1)
 end
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseSharePublishedExperienceFunction (copy), SignalsReactModule (copy), PlaceVersionHistoryModule (copy), UniverseConfigurationModule (copy), ReactModule (copy), GameConfigurationLabelsModule (copy), UniverseActivationModule (copy), ContentMaturityUtilsModule (copy), UseOpenWebViewFunction (copy), PrivacyType (copy), FFlagBuildExperienceActionOutcomeTelemetryModule (copy), FIntBuildPostPublishSnackbarAutoDismissSecondsModule (copy), FFlagEnableShareSheet (copy), SharePublishedExperienceFunction (copy), ConfigurationActionTelemetryModule (copy), Action (copy), Context (copy), GameConfigurationActionsModule (copy), RefreshPublishEligibilityModule (copy), GetVersionInformationStoreModule (copy), SendBuildExperienceEventModule (copy), Stage (copy), GetAdUpsellEventStoreModule (copy), FFlagBuildAdUpsellModule (copy), buildPublicAudiences (copy), ExperienceGuidelinesModule (copy), t (copy), Debug (copy), FailureReason (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), getPublishFailure (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), FoundationModule (copy), UseClosableFocusRootModule (copy), FocusNavigationUtilsModule (copy), ResponsiveModule (copy), SnackbarDEPRECATED (copy), View (copy), FFlagBuildPublishNavigationSheetModule (copy), Popover (copy), PopoverAlign (copy), PopoverSide (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), PreviewButton (copy), FriendsOnlyShareDialogModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseSharePublishedExperienceFunction (copy), SignalsReactModule (copy), PlaceVersionHistoryModule (copy), UniverseConfigurationModule (copy), ReactModule (copy), GameConfigurationLabelsModule (copy), UniverseActivationModule (copy), ContentMaturityUtilsModule (copy), UseOpenWebViewFunction (copy), PrivacyType (copy), FFlagBuildExperienceActionOutcomeTelemetryModule (copy), FIntBuildPostPublishSnackbarAutoDismissSecondsModule (copy), FFlagEnableShareSheet (copy), SharePublishedExperienceFunction (copy), ConfigurationActionTelemetryModule (copy), Action (copy), Context (copy), GameConfigurationActionsModule (copy), RefreshPublishEligibilityModule (copy), GetVersionInformationStoreModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildExperienceClickEventIdsModule (copy), Stage (copy), GetAdUpsellEventStoreModule (copy), FFlagBuildAdUpsellModule (copy), buildPublicAudiences (copy), ExperienceGuidelinesModule (copy), t (copy), Debug (copy), FailureReason (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), getPublishFailure (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), FoundationModule (copy), UseClosableFocusRootModule (copy), FocusNavigationUtilsModule (copy), ResponsiveModule (copy), SnackbarDEPRECATED (copy), View (copy), FFlagBuildPublishNavigationSheetModule (copy), Popover (copy), PopoverAlign (copy), PopoverSide (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), PreviewButton (copy), FriendsOnlyShareDialogModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		accountTooNewError = LocalizationStringsModule.GAME_CONFIGURATION_PUBLISH_ACCOUNT_TOO_NEW_ERROR,
 		creatorHub = LocalizationStringsModule.GAME_CONFIGURATION_CREATOR_HUB,
@@ -270,7 +271,7 @@ return function(p1)
 		UseMemoResult1
 	})
 	local UseResult5 = ReactModule.useCallback(function()
-		-- upvalues: UseStateResult (copy), p1 (copy), GetVersionInformationStoreModule (upval), SendBuildExperienceEventModule (upval), UseStateResult2 (copy), UseResult (copy), Stage (upval), GetAdUpsellEventStoreModule (upval), UseSignalStateResult2 (copy), FFlagBuildAdUpsellModule (upval), GameConfigurationActionsModule (upval), buildPublicAudiences (upval), UseSignalStateResult4 (ref), ContentMaturityUtilsModule (upval), ExperienceGuidelinesModule (upval), t (upval), Debug (upval), UseSignalStateResult1 (copy), UseSignalStateResult (copy), FFlagBuildExperienceActionOutcomeTelemetryModule (upval), ConfigurationActionTelemetryModule (upval), Action (upval), UseMemoResult1 (copy), FailureReason (upval), FFlagBuildExperiencePlaytestCardPublishCtaModule (upval), UseStateResult2_1 (copy), PublishSuccess (copy), PublishAudienceError (copy), PublishError (copy), AccountTooNewError (copy), getPublishFailure (upval)
+		-- upvalues: UseStateResult (copy), p1 (copy), GetVersionInformationStoreModule (upval), SendBuildExperienceEventModule (upval), FFlagBuildExperienceClickEventIdsModule (upval), Context (upval), UseStateResult2 (copy), UseResult (copy), Stage (upval), GetAdUpsellEventStoreModule (upval), UseSignalStateResult2 (copy), FFlagBuildAdUpsellModule (upval), GameConfigurationActionsModule (upval), buildPublicAudiences (upval), UseSignalStateResult4 (ref), ContentMaturityUtilsModule (upval), ExperienceGuidelinesModule (upval), t (upval), Debug (upval), UseSignalStateResult1 (copy), UseSignalStateResult (copy), FFlagBuildExperienceActionOutcomeTelemetryModule (upval), ConfigurationActionTelemetryModule (upval), Action (upval), UseMemoResult1 (copy), FailureReason (upval), FFlagBuildExperiencePlaytestCardPublishCtaModule (upval), UseStateResult2_1 (copy), PublishSuccess (copy), PublishAudienceError (copy), PublishError (copy), AccountTooNewError (copy), getPublishFailure (upval)
 		if UseStateResult then return end
 		local PlaceId = p1.target.placeId
 		
@@ -299,7 +300,7 @@ return function(p1)
 			universeId = p1.target.universeId,
 			placeId = PlaceId,
 			conversationId = p1.target.sessionId
-		})
+		}, if FFlagBuildExperienceClickEventIdsModule then { context = Context.PublishFooter } else nil)
 		UseStateResult2(true)
 		UseResult()
 		local SaveAndPublish = Stage.SaveAndPublish

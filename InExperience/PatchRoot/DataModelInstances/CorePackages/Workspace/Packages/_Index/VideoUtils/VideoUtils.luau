@@ -18,6 +18,12 @@ return {
 	useCanDevicePlayVideoPreview = require(script.useCanDevicePlayVideoPreview),
 	useFeedVideoPlaybackContext = require(script.useFeedVideoPlaybackContext),
 	useTagAsViewportAutoplayCandidate = require(script.useTagAsViewportAutoplayCandidate),
+	ReadingOrderPosition = require(script.ReadingOrderPosition),
+	ViewportAutoplayAnchorTileTag = require(script.ViewportAutoplayAnchorTileTag),
+	getViewportAutoplayAnchorTileTag = require(script.getViewportAutoplayAnchorTileTag),
+	ViewportAutoplayGridCellTag = require(script.ViewportAutoplayGridCellTag),
+	ViewportAutoplayColSpanAttribute = require(script.ViewportAutoplayColSpanAttribute),
+	ViewportAutoplayCellHorizontalPaddingAttribute = require(script.ViewportAutoplayCellHorizontalPaddingAttribute),
 	EdpVideoBlockingConfig = require(script.EdpVideoBlockingConfig),
 	VideoBlockingHelpers = require(script.VideoBlockingHelpers),
 	["jest.config"] = script["jest.config"]

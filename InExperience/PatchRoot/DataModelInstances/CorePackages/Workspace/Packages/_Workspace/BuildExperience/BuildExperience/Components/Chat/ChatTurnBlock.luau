@@ -36,6 +36,7 @@ local FFlagBuildExperienceAdsAndRobuxTelemetryModule = require(BuildExperience.F
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 local ReportTurnActivityGapModule = require(BuildExperience.Telemetry.reportTurnActivityGap)
 local GetMarkdownRendererPropsModule = require(BuildExperience.utils.getMarkdownRendererProps)
+local FFlagBuildExperienceMarkdownCommonMarkProfileModule = require(BuildExperience.Flags.FFlagBuildExperienceMarkdownCommonMarkProfile)
 local AgentPlanCardModule = require(BuildExperience.Components.AgentCard.AgentPlanCard)
 local AgentDevProductCardModule = if FFlagBuildExperienceManageDevProductModule then require(BuildExperience.Components.AgentCard.AgentDevProductCard) else nil
 local AnswerStackModule = require(BuildExperience.Components.AnswerStack.AnswerStack)
@@ -215,7 +216,7 @@ local function PlanProposalSection(Frame: Frame)
 end
 
 local function AgentMessageSegment(Frame: Frame)
-	-- upvalues: useReactiveValue (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), LocalizationRoactContext (copy), FoundationModule (copy), GetMarkdownRendererPropsModule (copy), View (copy), Icon (copy), IconName (copy), IconVariant (copy), IconSize (copy), Text (copy), MarkdownViewer (copy)
+	-- upvalues: useReactiveValue (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), LocalizationRoactContext (copy), FoundationModule (copy), GetMarkdownRendererPropsModule (copy), View (copy), Icon (copy), IconName (copy), IconVariant (copy), IconSize (copy), Text (copy), MarkdownViewer (copy), FFlagBuildExperienceMarkdownCommonMarkProfileModule (copy)
 	local UseReactiveValueResult = useReactiveValue(Frame.segment.text)
 	local UseLocalizationResult = UseLocalizationFunction({
 		assistantResponseFailed = LocalizationStringsModule.CHAT_ASSISTANT_RESPONSE_FAILED,
@@ -260,7 +261,8 @@ local function AgentMessageSegment(Frame: Frame)
 			tag = "size-full-0 auto-y text-body-medium content-emphasis",
 			LayoutOrder = Frame.LayoutOrder
 		},
-		MarkdownRendererProps = UseMemoResult
+		MarkdownRendererProps = UseMemoResult,
+		ParserProfile = if FFlagBuildExperienceMarkdownCommonMarkProfileModule then "CommonMark" else nil
 	})
 end
 
@@ -427,21 +429,21 @@ local function useStepListState(List)
 		end
 	end
 	local UseReactiveValueResult = useReactiveValue(if HeaderSegment == nil then t1 else HeaderSegment.activityItems)
-	local V116 = v1 or StepSentencesModule.hasSteps(UseReactiveValueResult)
+	local V117 = v1 or StepSentencesModule.hasSteps(UseReactiveValueResult)
 	ReactModule.useLayoutEffect(function()
-		-- upvalues: V116 (copy), UseStateResult2_1 (copy)
-		if V116 then
+		-- upvalues: V117 (copy), UseStateResult2_1 (copy)
+		if V117 then
 			UseStateResult2_1(true)
 		end
 		return nil
-	end, { V116 })
+	end, { V117 })
 	
 	return {
 		headerSegment = HeaderSegment,
 		agentMessagesBeforeHeader = AgentMessagesBeforeHeader,
 		userChoice = UseStateResult,
 		setUserChoice = UseStateResult2,
-		isExpanded = if UseStateResult1 then if UseStateResult == nil then UseStateResult1 else UseStateResult elseif UseStateResult == nil then FFlagBuildExperienceTurnWorkTelemetryModule1 and V116 else UseStateResult,
+		isExpanded = if UseStateResult1 then if UseStateResult == nil then UseStateResult1 else UseStateResult elseif UseStateResult == nil then FFlagBuildExperienceTurnWorkTelemetryModule1 and V117 else UseStateResult,
 		onRowCount = UseResult1,
 		startIndexByKey = StartIndexByKey,
 		lastListKey = Key,
@@ -787,6 +789,7 @@ return ReactModule.memo(function(Frame: Frame)
 			else
 				local Config = if FFlagBuildExperienceAdsAndRobuxTelemetryModule then {
 					context = "agent_card",
+					isInExperience = if game.GameId == 0 then "false" else "true",
 					toolCallId = Segment.toolCallId,
 					state = State1.variant or "active"
 				} else nil

@@ -51,9 +51,8 @@ local FFlagRefetchShopWidgetsAfterPassPurchaseModule = require(InExperienceShop.
 local FFlagSkipPaymentSessionForPlainRobuxModule = require(InExperienceShop.Flags.FFlagSkipPaymentSessionForPlainRobux)
 local FFlagEnablePartialDisplayInExperienceShopModule = require(InExperienceShop.Flags.FFlagEnablePartialDisplayInExperienceShop)
 local _ = require(InExperienceShop.Flags.FFlagPromoteRobuxInTopPicks)
-local FFlagEnableRobuxInExperienceShop = SharedFlagsModule.FFlagEnableRobuxInExperienceShop
+local FFlagEnableInExperienceShop = SharedFlagsModule.FFlagEnableInExperienceShop
 local FFlagLuaAppEnableNativePurchaseFinishedV2Signals = SharedFlagsModule.FFlagLuaAppEnableNativePurchaseFinishedV2Signals
-local FFlagShopListenNativePurchaseFinishedModule = require(InExperienceShop.Flags.FFlagShopListenNativePurchaseFinished)
 local FFlagShopRobuxPurchaseCompletionModalModule = require(InExperienceShop.Flags.FFlagShopRobuxPurchaseCompletionModal)
 local FIntShopOwnershipFetchMaxAttemptsModule = require(InExperienceShop.Flags.FIntShopOwnershipFetchMaxAttempts)
 local MockFetchAllShopDataModule = require(InExperienceShop.Mocks.MockFetchAllShopData)
@@ -81,7 +80,7 @@ local _ = function()
 end
 
 return function()
-	-- upvalues: CreateSignalFunction (copy), ConstantsModule (copy), FFlagEnableGamePassTrialUnifiedLoggingModule (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy), ShopDebugLoggerModule (copy), FFlagRefetchRobuxWidgetAfterPurchaseModule (copy), FFlagShopRobuxPurchaseCompletionModalModule (copy), PioneerInfo (copy), SortRobuxPackagesByAmountDescendingModule (copy), PromoteBonusRobuxPackageToTopPicksModule (copy), FindTopPicksSectionIndexModule (copy), MoveItemToPositionInShopModule (copy), FFlagEnableRobuxInExperienceShop (copy), BonusPromotionEligibilityModule (copy), FFlagUseGetGamePassOwnershipApi (copy), Players (copy), PromiseModule (copy), FFlagMockGetGamePassOwnershipModule (copy), MockGetPassOwnershipModule (copy), GetPassOwnershipModule (copy), FFlagShopUseMockUserOwnsGamePassModule (copy), MockUserOwnsGamePassModule (copy), UserOwnsGamePassModule (copy), FFlagShopUseMockGamePassTrialAvailabilitiesModule (copy), MockGamePassTrialAvailabilitiesModule (copy), FetchGamePassTrialAvailabilitiesModule (copy), InExperienceShop (copy), MarketplaceService (copy), ParseGamePassTrialRedeemErrorCodeModule (copy), FFlagShopUseMockGamePassTrialRedemptionModule (copy), FFlagEnableFreeTrialTopBarChipModule (copy), FFlagCloseShopOnTrialRedemptionModule (copy), RedeemGamePassTrialModule (copy), FFlagEnableExperienceShopGlobalIconModule (copy), FFlagInExperienceShopExpectStringMetadataValuesModule (copy), FFlagHideOfferNotificationsWhenShopEmpty (copy), InExperienceOffersModule (copy), HasOfferEligibleCategoryModule (copy), FFlagShopUseMockDataModule (copy), FFlagShopUseMockMultiGetProductInfoModule (copy), MockMultiGetProductInfoModule (copy), StreamMultiGetProductInfoModule (copy), LogCounterModule (copy), ProductInfoFailedItemsCounterModule (copy), ErrorsModule (copy), FFlagEnableOffersPrefetch (copy), list (copy), FFlagEnablePartialDisplayInExperienceShopModule (copy), FetchShopWidgetsOnlyModule (copy), MockFetchAllShopDataModule (copy), FetchAllShopDataModule (copy), FFlagEnableShopProductInfoRefreshModule (copy), MultiGetProductInfoModule (copy), FFlagOfferNineDotActivityIndicator (copy), FFlagOfferNotifyOnGlobalIcon (copy), FFlagEnableShopExposureLoggingModule (copy), Parent (copy), FStringExperienceShopLayer1Module (copy), FStringExperienceShopLayer2Module (copy), FFlagEnableShopFlagLinkedExposureLoggingModule (copy), FStringExperienceShopFlagLinkedLayerModule (copy), FetchRobuxWidgetsAfterPurchaseModule (copy), MergeRobuxShopDataModule (copy), FFlagRefetchShopWidgetsAfterPassPurchaseModule (copy), FIntShopOwnershipFetchMaxAttemptsModule (copy), FFlagShopListenNativePurchaseFinishedModule (copy), UserOwnsGamePassHttpModule (copy), FFlagSkipPaymentSessionForPlainRobuxModule (copy), FFlagLuaAppEnableNativePurchaseFinishedV2Signals (copy)
+	-- upvalues: CreateSignalFunction (copy), ConstantsModule (copy), FFlagEnableGamePassTrialUnifiedLoggingModule (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy), ShopDebugLoggerModule (copy), FFlagRefetchRobuxWidgetAfterPurchaseModule (copy), FFlagShopRobuxPurchaseCompletionModalModule (copy), PioneerInfo (copy), SortRobuxPackagesByAmountDescendingModule (copy), PromoteBonusRobuxPackageToTopPicksModule (copy), FindTopPicksSectionIndexModule (copy), MoveItemToPositionInShopModule (copy), FFlagEnableInExperienceShop (copy), BonusPromotionEligibilityModule (copy), FFlagUseGetGamePassOwnershipApi (copy), Players (copy), PromiseModule (copy), FFlagMockGetGamePassOwnershipModule (copy), MockGetPassOwnershipModule (copy), GetPassOwnershipModule (copy), FFlagShopUseMockUserOwnsGamePassModule (copy), MockUserOwnsGamePassModule (copy), UserOwnsGamePassModule (copy), FFlagShopUseMockGamePassTrialAvailabilitiesModule (copy), MockGamePassTrialAvailabilitiesModule (copy), FetchGamePassTrialAvailabilitiesModule (copy), InExperienceShop (copy), MarketplaceService (copy), ParseGamePassTrialRedeemErrorCodeModule (copy), FFlagShopUseMockGamePassTrialRedemptionModule (copy), FFlagEnableFreeTrialTopBarChipModule (copy), FFlagCloseShopOnTrialRedemptionModule (copy), RedeemGamePassTrialModule (copy), FFlagEnableExperienceShopGlobalIconModule (copy), FFlagInExperienceShopExpectStringMetadataValuesModule (copy), FFlagHideOfferNotificationsWhenShopEmpty (copy), InExperienceOffersModule (copy), HasOfferEligibleCategoryModule (copy), FFlagShopUseMockDataModule (copy), FFlagShopUseMockMultiGetProductInfoModule (copy), MockMultiGetProductInfoModule (copy), StreamMultiGetProductInfoModule (copy), LogCounterModule (copy), ProductInfoFailedItemsCounterModule (copy), ErrorsModule (copy), FFlagEnableOffersPrefetch (copy), list (copy), FFlagEnablePartialDisplayInExperienceShopModule (copy), FetchShopWidgetsOnlyModule (copy), MockFetchAllShopDataModule (copy), FetchAllShopDataModule (copy), FFlagEnableShopProductInfoRefreshModule (copy), MultiGetProductInfoModule (copy), FFlagOfferNineDotActivityIndicator (copy), FFlagOfferNotifyOnGlobalIcon (copy), FFlagEnableShopExposureLoggingModule (copy), Parent (copy), FStringExperienceShopLayer1Module (copy), FStringExperienceShopLayer2Module (copy), FFlagEnableShopFlagLinkedExposureLoggingModule (copy), FStringExperienceShopFlagLinkedLayerModule (copy), FetchRobuxWidgetsAfterPurchaseModule (copy), MergeRobuxShopDataModule (copy), FFlagRefetchShopWidgetsAfterPassPurchaseModule (copy), FIntShopOwnershipFetchMaxAttemptsModule (copy), UserOwnsGamePassHttpModule (copy), FFlagSkipPaymentSessionForPlainRobuxModule (copy), FFlagLuaAppEnableNativePurchaseFinishedV2Signals (copy)
 	local Signal, Signal2 = CreateSignalFunction({})
 	local Signal1, Signal2_1 = CreateSignalFunction({})
 	local Signal3, Signal2_2 = CreateSignalFunction(false)
@@ -200,12 +199,12 @@ return function()
 	end
 	
 	local function writeOwnership(Key, p1)
-		-- upvalues: Signal9 (copy), Signal2_8 (copy), FFlagEnableRobuxInExperienceShop (upval), PromoteBonusRobuxPackageToTopPicksModule (upval), WithoutFeaturedPromotionResult (ref), BonusPromotionEligibilityModule (upval), Tbl (copy), Signal2_10 (copy), Signal2_1 (copy), sortRobuxPackagesInSections (copy)
+		-- upvalues: Signal9 (copy), Signal2_8 (copy), FFlagEnableInExperienceShop (upval), PromoteBonusRobuxPackageToTopPicksModule (upval), WithoutFeaturedPromotionResult (ref), BonusPromotionEligibilityModule (upval), Tbl (copy), Signal2_10 (copy), Signal2_1 (copy), sortRobuxPackagesInSections (copy)
 		local Copy = table.clone(Signal9(false))
 		Copy[Key] = p1
 		Signal2_8(Copy)
 		
-		if not p1 or not FFlagEnableRobuxInExperienceShop then return end
+		if not p1 or not FFlagEnableInExperienceShop then return end
 		local FirstBonusRobuxPackage = PromoteBonusRobuxPackageToTopPicksModule.findFirstBonusRobuxPackage(WithoutFeaturedPromotionResult)
 		local BonusGamePassId = if FirstBonusRobuxPackage == nil then nil else PromoteBonusRobuxPackageToTopPicksModule.getBonusGamePassId(FirstBonusRobuxPackage)
 		
@@ -631,8 +630,8 @@ return function()
 	end
 	
 	local function fetchBonusGamePassOwnershipForPromotion(WithoutFeaturedPromotionResult)
-		-- upvalues: FFlagEnableRobuxInExperienceShop (upval), PromoteBonusRobuxPackageToTopPicksModule (upval), fetchBonusGamePassOwnershipForPromotionId (copy)
-		if not FFlagEnableRobuxInExperienceShop then return end
+		-- upvalues: FFlagEnableInExperienceShop (upval), PromoteBonusRobuxPackageToTopPicksModule (upval), fetchBonusGamePassOwnershipForPromotionId (copy)
+		if not FFlagEnableInExperienceShop then return end
 		local FirstBonusRobuxPackage = PromoteBonusRobuxPackageToTopPicksModule.findFirstBonusRobuxPackage(WithoutFeaturedPromotionResult)
 		local BonusGamePassId = if FirstBonusRobuxPackage == nil then nil else PromoteBonusRobuxPackageToTopPicksModule.getBonusGamePassId(FirstBonusRobuxPackage)
 		local T = if BonusGamePassId == nil then {} else { BonusGamePassId }
@@ -669,12 +668,12 @@ return function()
 	end
 	
 	local function buildProductInfoRequestsForHydration(WithoutFeaturedPromotionResult, FailedItems)
-		-- upvalues: InExperienceShop (upval), FFlagEnableRobuxInExperienceShop (upval)
+		-- upvalues: InExperienceShop (upval), FFlagEnableInExperienceShop (upval)
 		local RefreshShopItemsModule = require(InExperienceShop.Api.refreshShopItems)
 		local HydrateRobuxBonusItemsModule = require(InExperienceShop.Api.hydrateRobuxBonusItems)
 		local RequestsFromSections = RefreshShopItemsModule.buildRequestsFromSections(WithoutFeaturedPromotionResult)
 		
-		if FFlagEnableRobuxInExperienceShop then
+		if FFlagEnableInExperienceShop then
 			HydrateRobuxBonusItemsModule.appendBonusItemRequests(RequestsFromSections, WithoutFeaturedPromotionResult)
 		end
 		RefreshShopItemsModule.appendFailedItemRequests(RequestsFromSections, FailedItems)
@@ -683,7 +682,7 @@ return function()
 	end
 	
 	local function applyStreamingProductInfoResult(p1, p2, List)
-		-- upvalues: InExperienceShop (upval), FFlagEnableRobuxInExperienceShop (upval)
+		-- upvalues: InExperienceShop (upval), FFlagEnableInExperienceShop (upval)
 		local RefreshShopItemsModule = require(InExperienceShop.Api.refreshShopItems)
 		local HydrateRobuxBonusItemsModule = require(InExperienceShop.Api.hydrateRobuxBonusItems)
 		local MakeRequestKeyFunction = require(InExperienceShop.Api.shopItemMapping).makeRequestKey
@@ -699,7 +698,7 @@ return function()
 			end
 		end
 		local MergeProductInfoIntoSectionsResult = RefreshShopItemsModule.mergeProductInfoIntoSections(p1, { p2 })
-		local InsertRecoveredItemsIntoSectionsResult, InsertRecoveredItemsIntoSectionsResult2 = RefreshShopItemsModule.insertRecoveredItemsIntoSections(if FFlagEnableRobuxInExperienceShop then HydrateRobuxBonusItemsModule.mergeBonusItemDetailsIntoSections(MergeProductInfoIntoSectionsResult, { p2 }) else MergeProductInfoIntoSectionsResult, { p2 }, List1)
+		local InsertRecoveredItemsIntoSectionsResult, InsertRecoveredItemsIntoSectionsResult2 = RefreshShopItemsModule.insertRecoveredItemsIntoSections(if FFlagEnableInExperienceShop then HydrateRobuxBonusItemsModule.mergeBonusItemDetailsIntoSections(MergeProductInfoIntoSectionsResult, { p2 }) else MergeProductInfoIntoSectionsResult, { p2 }, List1)
 		
 		for _, value1 in InsertRecoveredItemsIntoSectionsResult2 do
 			table.insert(List2, value1)
@@ -1009,7 +1008,7 @@ return function()
 	end
 	
 	local function refreshShopItemInfo()
-		-- upvalues: FFlagEnableShopProductInfoRefreshModule (upval), Flag5 (ref), Flag6 (ref), Flag7 (ref), InExperienceShop (upval), WithoutFeaturedPromotionResult (ref), Signal1 (copy), FFlagEnableRobuxInExperienceShop (upval), FailedItems (ref), FFlagEnablePartialDisplayInExperienceShopModule (upval), streamProductInfoIntoSections (copy), FFlagShopUseMockDataModule (upval), FFlagShopUseMockMultiGetProductInfoModule (upval), MockMultiGetProductInfoModule (upval), MultiGetProductInfoModule (upval), Count1 (ref), PromoteBonusRobuxPackageToTopPicksModule (upval), Tbl (copy), Signal2_1 (copy), sortRobuxPackagesInSections (copy), fetchBonusGamePassOwnershipForPromotion (copy)
+		-- upvalues: FFlagEnableShopProductInfoRefreshModule (upval), Flag5 (ref), Flag6 (ref), Flag7 (ref), InExperienceShop (upval), WithoutFeaturedPromotionResult (ref), Signal1 (copy), FFlagEnableInExperienceShop (upval), FailedItems (ref), FFlagEnablePartialDisplayInExperienceShopModule (upval), streamProductInfoIntoSections (copy), FFlagShopUseMockDataModule (upval), FFlagShopUseMockMultiGetProductInfoModule (upval), MockMultiGetProductInfoModule (upval), MultiGetProductInfoModule (upval), Count1 (ref), PromoteBonusRobuxPackageToTopPicksModule (upval), Tbl (copy), Signal2_1 (copy), sortRobuxPackagesInSections (copy), fetchBonusGamePassOwnershipForPromotion (copy)
 		if not FFlagEnableShopProductInfoRefreshModule then return end
 		if not Flag5 or Flag6 or Flag7 then return end
 		local RefreshShopItemsModule = require(InExperienceShop.Api.refreshShopItems)
@@ -1017,7 +1016,7 @@ return function()
 		local WithoutFeaturedPromotionResult1 = if #WithoutFeaturedPromotionResult > 0 then WithoutFeaturedPromotionResult else Signal1(false)
 		local RequestsFromSections = RefreshShopItemsModule.buildRequestsFromSections(WithoutFeaturedPromotionResult1)
 		
-		if FFlagEnableRobuxInExperienceShop then
+		if FFlagEnableInExperienceShop then
 			HydrateRobuxBonusItemsModule.appendBonusItemRequests(RequestsFromSections, WithoutFeaturedPromotionResult1)
 		end
 		local FailedItems1 = FailedItems
@@ -1037,10 +1036,10 @@ return function()
 			local MultiGetProductInfoResult = if FFlagShopUseMockDataModule and FFlagShopUseMockMultiGetProductInfoModule then MockMultiGetProductInfoModule.multiGetProductInfo(RequestsFromSections, 0) else MultiGetProductInfoModule(RequestsFromSections)
 			local Count = Count1
 			MultiGetProductInfoResult:andThen(function(Result)
-				-- upvalues: Count (copy), Count1 (upval), Flag6 (upval), RefreshShopItemsModule (copy), WithoutFeaturedPromotionResult1 (copy), FFlagEnableRobuxInExperienceShop (upval), HydrateRobuxBonusItemsModule (copy), FailedItems1 (copy), FailedItems (upval), WithoutFeaturedPromotionResult (upval), PromoteBonusRobuxPackageToTopPicksModule (upval), Tbl (upval), Signal2_1 (upval), sortRobuxPackagesInSections (upval), fetchBonusGamePassOwnershipForPromotion (upval)
+				-- upvalues: Count (copy), Count1 (upval), Flag6 (upval), RefreshShopItemsModule (copy), WithoutFeaturedPromotionResult1 (copy), FFlagEnableInExperienceShop (upval), HydrateRobuxBonusItemsModule (copy), FailedItems1 (copy), FailedItems (upval), WithoutFeaturedPromotionResult (upval), PromoteBonusRobuxPackageToTopPicksModule (upval), Tbl (upval), Signal2_1 (upval), sortRobuxPackagesInSections (upval), fetchBonusGamePassOwnershipForPromotion (upval)
 				if Count == Count1 then
 					local MergeProductInfoIntoSectionsResult = RefreshShopItemsModule.mergeProductInfoIntoSections(WithoutFeaturedPromotionResult1, Result)
-					local InsertRecoveredItemsIntoSectionsResult, InsertRecoveredItemsIntoSectionsResult2 = RefreshShopItemsModule.insertRecoveredItemsIntoSections(if FFlagEnableRobuxInExperienceShop then HydrateRobuxBonusItemsModule.mergeBonusItemDetailsIntoSections(MergeProductInfoIntoSectionsResult, Result) else MergeProductInfoIntoSectionsResult, Result, FailedItems1)
+					local InsertRecoveredItemsIntoSectionsResult, InsertRecoveredItemsIntoSectionsResult2 = RefreshShopItemsModule.insertRecoveredItemsIntoSections(if FFlagEnableInExperienceShop then HydrateRobuxBonusItemsModule.mergeBonusItemDetailsIntoSections(MergeProductInfoIntoSectionsResult, Result) else MergeProductInfoIntoSectionsResult, Result, FailedItems1)
 					FailedItems = InsertRecoveredItemsIntoSectionsResult2
 					WithoutFeaturedPromotionResult = PromoteBonusRobuxPackageToTopPicksModule.withoutFeaturedPromotion(InsertRecoveredItemsIntoSectionsResult)
 					Signal2_1((sortRobuxPackagesInSections((PromoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(WithoutFeaturedPromotionResult, Tbl)))))
@@ -1251,7 +1250,7 @@ return function()
 		end
 	end)
 	
-	if FFlagShopListenNativePurchaseFinishedModule and FFlagEnableRobuxInExperienceShop then
+	if FFlagEnableInExperienceShop then
 		local function pollBonusOwnershipAfterNativeRobuxPurchase(p3, p4, Player)
 			-- upvalues: Players (upval), ShopDebugLoggerModule (upval), v1 (ref), v2 (ref), v3 (ref), FFlagRefetchRobuxWidgetAfterPurchaseModule (upval), FFlagShopRobuxPurchaseCompletionModalModule (upval), Signal2_12 (copy), FFlagShopUseMockUserOwnsGamePassModule (upval), MockUserOwnsGamePassModule (upval), UserOwnsGamePassHttpModule (upval), pollGamePassOwnershipAfterPurchase (copy), FIntShopOwnershipFetchMaxAttemptsModule (upval), FFlagSkipPaymentSessionForPlainRobuxModule (upval), refreshRobuxWidgetsAfterPurchase (copy)
 			if Player ~= nil then

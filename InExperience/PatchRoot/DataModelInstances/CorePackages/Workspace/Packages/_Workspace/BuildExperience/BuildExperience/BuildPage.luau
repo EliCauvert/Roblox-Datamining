@@ -84,6 +84,8 @@ local FFlagBuildExperienceChatOpenTelemetryModule = require(script.Parent.Flags.
 local FFlagBuildExperienceChatOpenIdModule = require(script.Parent.Flags.FFlagBuildExperienceChatOpenId)
 local FFlagBuildExperiencePageImpressionsModule = require(script.Parent.Flags.FFlagBuildExperiencePageImpressions)
 local UseBuildPageImpressionModule = require(BuildExperience.Telemetry.useBuildPageImpression)
+local GetCreatorCreditUsageImpressionParametersModule = require(BuildExperience.Telemetry.getCreatorCreditUsageImpressionParameters)
+local FFlagBuildExperienceAdsAndRobuxTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceAdsAndRobuxTelemetry)
 local GetAdsCampaignDeepLinkStoreModule = require(BuildExperience.Stores.GetAdsCampaignDeepLinkStore)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 local FFlagBuildAdUpsellModule1 = FFlagBuildAdUpsellModule or FFlagBuildExperienceMonetizationNativeUIModule
@@ -591,13 +593,13 @@ local List = {
 	{
 		[config.BuildChat] = {
 			screen = function(p2)
-				-- upvalues: BuildNavigationParamsModule (copy), FFlagBuildExperienceAnalytics (copy), GetBuildExperienceRefreshStoreModule (copy), UseBuildPageLayoutModule (copy), FFlagBuildAdUpsellModule1 (copy), UseNavigationFocusFunction (copy), UseOnScreenKeyboardVisibleModule (copy), ReactModule (copy), FFlagBuildExperienceModelPickerModule (copy), SignalsReactModule (copy), LocalUserIdStore (copy), PrepareBuildModelSelectionTargetModule (copy), GetBuildModelSelectionStoreModule (copy), FFlagBuildWithGroupsModule (copy), FFlagBuildExperiencePreviewsTabModule (copy), GetBuildHomeTabStoreModule (copy), FFlagBuildPublishNavigationSheetModule (copy), BuildOverflowMenuScreensModule (copy), FFlagBuildExperienceLibrary (copy), OpenLibraryModule (copy), FFlagBuildExperiencePrivateInvitesModule (copy), config (copy), FFlagEnableBuildAdPromotionModule (copy), BuildChatPageModule (copy), FullscreenPageWithSafeArea (copy), PrivateInvitesPickerHostModule (copy), PublishSheetControllerModule (copy)
+				-- upvalues: BuildNavigationParamsModule (copy), FFlagBuildExperienceAnalytics (copy), GetBuildExperienceRefreshStoreModule (copy), UseBuildPageLayoutModule (copy), FFlagBuildAdUpsellModule1 (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), UseNavigationFocusFunction (copy), UseOnScreenKeyboardVisibleModule (copy), ReactModule (copy), FFlagBuildExperienceModelPickerModule (copy), SignalsReactModule (copy), LocalUserIdStore (copy), PrepareBuildModelSelectionTargetModule (copy), GetBuildModelSelectionStoreModule (copy), FFlagBuildWithGroupsModule (copy), FFlagBuildExperiencePreviewsTabModule (copy), GetBuildHomeTabStoreModule (copy), FFlagBuildPublishNavigationSheetModule (copy), BuildOverflowMenuScreensModule (copy), FFlagBuildExperienceLibrary (copy), OpenLibraryModule (copy), FFlagBuildExperiencePrivateInvitesModule (copy), config (copy), FFlagEnableBuildAdPromotionModule (copy), BuildChatPageModule (copy), FullscreenPageWithSafeArea (copy), PrivateInvitesPickerHostModule (copy), PublishSheetControllerModule (copy)
 				local Navigation = p2.navigation
 				local Target = BuildNavigationParamsModule.getTarget(Navigation)
 				local InitialPrompt = if FFlagBuildExperienceAnalytics then BuildNavigationParamsModule.getInitialPrompt(Navigation) else nil
 				local BuildExperienceRefreshStoreModule = GetBuildExperienceRefreshStoreModule()
 				local UseBuildPageLayoutModuleResult = UseBuildPageLayoutModule()
-				local NoFFlagBuildAdUpsellModule1 = not FFlagBuildAdUpsellModule1 or UseNavigationFocusFunction()
+				local NoFFlagBuildExperienceAdsAndRobuxTelemetryModule = not FFlagBuildAdUpsellModule1 and not FFlagBuildExperienceAdsAndRobuxTelemetryModule or UseNavigationFocusFunction()
 				local UseOnScreenKeyboardVisibleModuleResult = UseOnScreenKeyboardVisibleModule()
 				local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 				local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
@@ -687,9 +689,12 @@ local List = {
 					-- upvalues: Navigation (copy), config (upval), Target (copy)
 					Navigation.navigate(config.BuildAgents, { target = Target })
 				end, { Navigation, Target })
-				local UseResult9 = ReactModule.useCallback(function()
-					-- upvalues: Navigation (copy), config (upval), Target (copy)
-					Navigation.navigate(config.BuildCreatorCredit, { target = Target })
+				local UseResult9 = ReactModule.useCallback(function(p3)
+					-- upvalues: Navigation (copy), config (upval), Target (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (upval)
+					Navigation.navigate(config.BuildCreatorCredit, {
+						target = Target,
+						entryContext = if FFlagBuildExperienceAdsAndRobuxTelemetryModule then p3 or "overflow_menu" else nil
+					})
 				end, { Navigation, Target })
 				local UseResult10 = ReactModule.useCallback(function(p3, Target)
 					-- upvalues: Navigation (copy)
@@ -716,7 +721,8 @@ local List = {
 					onOpenInvitePicker = UseResult3,
 					onOpenInviteManagement = UseResult5,
 					onNavigateToResolvedTarget = UseResult12,
-					isFocused = if FFlagBuildAdUpsellModule1 then NoFFlagBuildAdUpsellModule1 else nil
+					isFocused = if FFlagBuildAdUpsellModule1 then NoFFlagBuildExperienceAdsAndRobuxTelemetryModule else nil,
+					isFocusedForCardTelemetry = if FFlagBuildExperienceAdsAndRobuxTelemetryModule then NoFFlagBuildExperienceAdsAndRobuxTelemetryModule else nil
 				})
 				local UniverseId = if Target == nil then nil else Target.universeId
 				
@@ -866,11 +872,11 @@ local List = {
 	{
 		[config.BuildCreatorCredit] = {
 			screen = function(p3)
-				-- upvalues: FFlagBuildExperiencePageImpressionsModule (copy), UseBuildPageImpressionModule (copy), BuildNavigationParamsModule (copy), UseBuildPageLayoutModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), CreatorCreditPageContainerModule (copy), FullscreenPageWithSafeArea (copy), OverflowMenuPageShellModule (copy), CreatorCreditBalanceChipContainerModule (copy)
+				-- upvalues: FFlagBuildExperiencePageImpressionsModule (copy), UseBuildPageImpressionModule (copy), BuildNavigationParamsModule (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), GetCreatorCreditUsageImpressionParametersModule (copy), UseBuildPageLayoutModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), CreatorCreditPageContainerModule (copy), FullscreenPageWithSafeArea (copy), OverflowMenuPageShellModule (copy), CreatorCreditBalanceChipContainerModule (copy)
 				local Navigation = p3.navigation
 				
 				if FFlagBuildExperiencePageImpressionsModule then
-					UseBuildPageImpressionModule("creator-credit-ai-usage", BuildNavigationParamsModule.getTarget(Navigation))
+					UseBuildPageImpressionModule("creator-credit-ai-usage", BuildNavigationParamsModule.getTarget(Navigation), nil, if FFlagBuildExperienceAdsAndRobuxTelemetryModule then GetCreatorCreditUsageImpressionParametersModule(BuildNavigationParamsModule.getUsageEntryContext(Navigation)) else nil)
 				end
 				local UseBuildPageLayoutModuleResult = UseBuildPageLayoutModule()
 				

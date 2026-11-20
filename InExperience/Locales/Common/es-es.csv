@@ -3677,6 +3677,7 @@ Feature.FriendsActivityFeed.Label.ViewRecentActivity,Ver Actividad reciente
 Feature.FriendsMenu.Label.SelectedFriendsCount,{numerator}/{denominator} amigos seleccionados
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,{selectedCount} amigos seleccionados
 Feature.GameBadges.Label.Experience,
+Feature.GameDetails.Action.Continue,
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,Envía tus comentarios
 Feature.GameDetails.Action.NotInterested,No me interesa
@@ -3708,8 +3709,10 @@ Feature.GameDetails.Label.WhyThisAd,
 Feature.GameDetails.Label.Yes,
 Feature.GameDetails.Message.AdPreferences,Preferencias de anuncios
 Feature.GameDetails.Message.AnonymousFeedbackTermsOfUse,Las respuestas se comparten de forma anónima y se tratan como Comentarios según los {underlineStart}Términos de uso de Roblox{underlineEnd}.
+Feature.GameDetails.Message.ExternalLinkWarning,"Al hacer clic en Continuar, serás redirigido a un sitio web que no pertenece y no es operado por Roblox. Puede que se rija por términos y políticas de privacidad diferentes."
 Feature.GameDetails.Message.HelpImproveExperience,Ayúdanos a mejorar tu experiencia
 Feature.GameDetails.Message.HidingExperienceQuestion,¿Por qué estás ocultando esta experiencia?
+Feature.GameDetails.Message.LeavingRobloxTitle,Abandonando Roblox
 Feature.GameDetails.Message.PurchaseGameV2,¿Desbloquear accesso a {gameName} por {X} Robux?
 Feature.GameDetails.Message.SponsoredDisclosure.Error,No se pudo mostrar la información del patrocinio debido a un error temporal.
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"Estás viendo este contenido patrocinado basado en factores no personalizados, como la información del dispositivo, ubicación y edad, para ofrecerte contenido apropiado. El creador de la experiencia es {CreatorName}. El patrocinio fue pagado por {PayerName}. Para obtener más información, visita la página Privacidad y madurez de contenido en Configuración en tu cuenta, aquí:"
@@ -3729,9 +3732,11 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Notificaciones activadas para {
 Feature.GameJoin.Description.DifferentServer,Comenzarán en un servidor diferente
 Feature.GameJoin.Label.PlayTogether,Pueden jugar juntos
 Feature.GameJoin.Label.PlayTogetherSoon,Pronto podrán jugar juntos
+Feature.GameJoin.Label.RecentCoplay,Jugaron juntos hace poco
 Feature.GamePage.Action.BackToTop,Volver arriba
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,Patrocinadas
+Feature.GamePage.LabelCancelField,
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,Esta experiencia no está disponible debido a tu estado de verificación de edad.
 Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,Los invitados no pueden unirse a esta experiencia.
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,Se necesita pagar para unirse a esta experiencia.
@@ -4953,6 +4958,7 @@ Feature.Toast.Username.Copied,Nombre de usuario copiado al portapapeles.
 Feature.Toast.VoteError.AssetNotVoteable,No se puede votar por esta experiencia.
 Feature.Toast.VoteError.Default,Acción no disponible.
 Feature.Toast.VoteError.FloodCheckThresholdMet,Estás votando demasiado rápido.
+Feature.Toast.VoteError.NotSaved,El voto no se guardó
 Feature.Toast.VoteError.PlayGame,Debes unirte a la experiencia para poder votarla.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,No puedes verificar tu edad en este momento porque infringiste reiteradamente nuestras Normas de la comunidad. Puedes volver a intentarlo al finalizar la restricción.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,Verificación de edad suspendida
@@ -5154,7 +5160,7 @@ IAPExperience.InsufficientRobux.Title.InsufficientRobux,
 IAPExperience.LeaveRoblox.Action.Cancel,
 IAPExperience.LeaveRoblox.Action.Continue,
 IAPExperience.LeaveRoblox.Text.ExternalWebsiteWarning,"Al hacer clic en “Continuar”, se te redirigirá a un sitio web que no pertenece y no es operado por Roblox. Puede que se rija por términos y políticas de privacidad diferentes."
-IAPExperience.LeaveRoblox.Title.LeavingRoblox,Abandonando Roblox
+IAPExperience.LeaveRoblox.Title.LeavingRoblox,
 IAPExperience.Loading.Text.PurchasingItem,Comprando el objeto...
 IAPExperience.Loading.Text.PurchasingRobux,Comprando Robux...
 IAPExperience.Loading.Text.WaitingForPurchase,Esperando compra...

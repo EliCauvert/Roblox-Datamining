@@ -90,8 +90,6 @@ return {
 			CollectibleItem = p1 and p1.CollectibleItem or nil,
 			MediaAsset = p1 and p1.MediaAsset or nil,
 			UserProfile = p1 and p1.UserProfile or nil,
-			Community = p1 and p1.Community or nil,
-			CommunityUserMembership = p1 and p1.CommunityUserMembership or nil,
 			NotificationBadge = p1 and p1.NotificationBadge or nil,
 			LeaderboardStats = p1 and p1.LeaderboardStats or nil,
 			BuyRobux = p1 and p1.BuyRobux or nil,

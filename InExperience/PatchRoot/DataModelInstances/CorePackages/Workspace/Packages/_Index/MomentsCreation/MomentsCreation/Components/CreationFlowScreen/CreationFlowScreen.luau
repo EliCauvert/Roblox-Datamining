@@ -51,6 +51,7 @@ local FStringMomentsCreationToolsIxpLayer2Module = require(MomentsCreation.Flags
 local FFlagMomentsCreationToolsIxpEnabled3Module = require(MomentsCreation.Flags.FFlagMomentsCreationToolsIxpEnabled3)
 local FStringMomentsCreationToolsIxpLayer3Module = require(MomentsCreation.Flags.FStringMomentsCreationToolsIxpLayer3)
 local FFlagMomentsTextOverlayDragToDeleteRefinementModule = require(MomentsCreation.Flags.FFlagMomentsTextOverlayDragToDeleteRefinement)
+local FFlagMomentsCreationGalleryExitAnalytics = MomentsCommonModule.Flags.FFlagMomentsCreationGalleryExitAnalytics
 local FFlagMomentsCreateAvatarPosts = require(Parent.SharedFlags).FFlagMomentsCreateAvatarPosts
 local FFlagMomentsRenderCreatePostStatus = require(Parent.SharedFlags).FFlagMomentsRenderCreatePostStatus
 local LogMomentsLayerExposureFunction = MomentsCommonModule.Utils.logMomentsLayerExposure
@@ -102,7 +103,7 @@ local function GallerySourceView(p1)
 end
 
 local function CreationFlowContent(p1)
-	-- upvalues: UseCreationControllerFunction (copy), GetFFlagMomentsCreationSaveDraftFunction (copy), UseDraftRestoreEffectModule (copy), UseDraftSaveEffectModule (copy), FFlagMomentsTTSDraftRestoreModule (copy), UseRestoredVoiceoverCheckModule (copy), UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseFormFactorFunction (copy), UseToggleStateFunction (copy), UseAutoDismissStateModule (copy), UseSignalStateFunction (copy), FFlagMomentsCreateAvatarPosts (copy), IsAvatarMomentModule (copy), FFlagMomentsRenderCreatePostStatus (copy), UseDescriptionKeyboardInsetModule (copy), CreationFlowStateModule (copy), GetFFlagMomentsTTSAudioOverlayModule (copy), FFlagMomentsCreationMusicEditorRedesignModule (copy), ReactModule (copy), UseMemoFunction (copy), UseCallbackFunction (copy), SessionManager (copy), FunnelEventNames (copy), CryoModule (copy), MakeCreationEventFieldsModule (copy), FireAnalyticsEventModule (copy), EventNames (copy), DialogTypeModule (copy), UseRefFunction (copy), UseEffectFunction (copy), GetFFlagMomentsStickerButtonFunction (copy), FFlagMomentsCreationToolsIxpEnabledModule (copy), LogMomentsLayerExposureFunction (copy), FStringMomentsCreationToolsIxpLayerModule (copy), FFlagMomentsCreationToolsIxpEnabled2Module (copy), FStringMomentsCreationToolsIxpLayer2Module (copy), FFlagMomentsCreationToolsIxpEnabled3Module (copy), FStringMomentsCreationToolsIxpLayer3Module (copy), ExitConfirmationDialogModule (copy), TextFilteredDialogModule (copy), GenerateTextOptionsDialogModule (copy), VoiceoverErrorDialogModule (copy), VoiceoverDeleteConfirmDialogModule (copy), VoiceSelectorDialogModule (copy), StepStubModule (copy), SignalsModule (copy), FFlagMomentsTextOverlayDragToDeleteRefinementModule (copy), MomentsCreation (copy), View (copy), StateLayer (copy), FFlagMomentsCreationCompactPanelSquareCornersModule (copy), FormFactor (copy), noopActivated (copy), VoiceBackControlsModule (copy), FFlagMomentsTextOverlayTopNavModule (copy), GetFFlagMomentsCreationCloseButtonZIndexFixModule (copy), Icon (copy), FoundationModule (copy), CaptureViewModule (copy), GradientBackdrop (copy), MusicChipModule (copy), PlaybackControlsModule (copy), EditCTABarModule (copy), GetFFlagEnableMomentTextGenerationFunction (copy), GetFFlagMomentsTTSCoachmarkModule (copy), GallerySourceView (copy), GalleryViewModule (copy), SampleCapturesModule1 (copy), PreviewViewModule (copy), DescriptionViewModule (copy), DockedEditorContextModule (copy), CreationMediaProviderModule (copy)
+	-- upvalues: UseCreationControllerFunction (copy), GetFFlagMomentsCreationSaveDraftFunction (copy), UseDraftRestoreEffectModule (copy), UseDraftSaveEffectModule (copy), FFlagMomentsTTSDraftRestoreModule (copy), UseRestoredVoiceoverCheckModule (copy), UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseFormFactorFunction (copy), UseToggleStateFunction (copy), UseAutoDismissStateModule (copy), UseSignalStateFunction (copy), FFlagMomentsCreateAvatarPosts (copy), IsAvatarMomentModule (copy), FFlagMomentsRenderCreatePostStatus (copy), UseDescriptionKeyboardInsetModule (copy), CreationFlowStateModule (copy), GetFFlagMomentsTTSAudioOverlayModule (copy), FFlagMomentsCreationMusicEditorRedesignModule (copy), ReactModule (copy), UseMemoFunction (copy), UseCallbackFunction (copy), SessionManager (copy), FunnelEventNames (copy), CryoModule (copy), MakeCreationEventFieldsModule (copy), FireAnalyticsEventModule (copy), EventNames (copy), DialogTypeModule (copy), UseRefFunction (copy), UseEffectFunction (copy), FFlagMomentsCreationGalleryExitAnalytics (copy), SampleCapturesModule1 (copy), GetFFlagMomentsStickerButtonFunction (copy), FFlagMomentsCreationToolsIxpEnabledModule (copy), LogMomentsLayerExposureFunction (copy), FStringMomentsCreationToolsIxpLayerModule (copy), FFlagMomentsCreationToolsIxpEnabled2Module (copy), FStringMomentsCreationToolsIxpLayer2Module (copy), FFlagMomentsCreationToolsIxpEnabled3Module (copy), FStringMomentsCreationToolsIxpLayer3Module (copy), ExitConfirmationDialogModule (copy), TextFilteredDialogModule (copy), GenerateTextOptionsDialogModule (copy), VoiceoverErrorDialogModule (copy), VoiceoverDeleteConfirmDialogModule (copy), VoiceSelectorDialogModule (copy), StepStubModule (copy), SignalsModule (copy), FFlagMomentsTextOverlayDragToDeleteRefinementModule (copy), MomentsCreation (copy), View (copy), StateLayer (copy), FFlagMomentsCreationCompactPanelSquareCornersModule (copy), FormFactor (copy), noopActivated (copy), VoiceBackControlsModule (copy), FFlagMomentsTextOverlayTopNavModule (copy), GetFFlagMomentsCreationCloseButtonZIndexFixModule (copy), Icon (copy), FoundationModule (copy), CaptureViewModule (copy), GradientBackdrop (copy), MusicChipModule (copy), PlaybackControlsModule (copy), EditCTABarModule (copy), GetFFlagEnableMomentTextGenerationFunction (copy), GetFFlagMomentsTTSCoachmarkModule (copy), GallerySourceView (copy), GalleryViewModule (copy), PreviewViewModule (copy), DescriptionViewModule (copy), DockedEditorContextModule (copy), CreationMediaProviderModule (copy)
 	local UseCreationControllerResult = UseCreationControllerFunction()
 	
 	if GetFFlagMomentsCreationSaveDraftFunction() then
@@ -238,33 +239,42 @@ local function CreationFlowContent(p1)
 	end, { UseCreationControllerResult, UseSignalStateResult1 })
 	local UseRefResult = UseRefFunction(nil)
 	UseEffectFunction(function()
-		-- upvalues: UseRefResult (copy), UseSignalStateResult (copy), CreationFlowStateModule (upval), FireAnalyticsEventModule (upval), EventNames (upval), withCreationSession (copy), MakeCreationEventFieldsModule (upval), GetFFlagMomentsStickerButtonFunction (upval), GetFFlagMomentsTTSAudioOverlayModule (upval), FFlagMomentsCreationToolsIxpEnabledModule (upval), p1 (copy), LogMomentsLayerExposureFunction (upval), FStringMomentsCreationToolsIxpLayerModule (upval), FFlagMomentsCreationToolsIxpEnabled2Module (upval), FStringMomentsCreationToolsIxpLayer2Module (upval), FFlagMomentsCreationToolsIxpEnabled3Module (upval), FStringMomentsCreationToolsIxpLayer3Module (upval)
+		-- upvalues: UseRefResult (copy), UseSignalStateResult (copy), CreationFlowStateModule (upval), MakeCreationEventFieldsModule (upval), EventNames (upval), FFlagMomentsCreationGalleryExitAnalytics (upval), CaptureSource (copy), SampleCapturesModule1 (upval), FireAnalyticsEventModule (upval), withCreationSession (copy), GetFFlagMomentsStickerButtonFunction (upval), GetFFlagMomentsTTSAudioOverlayModule (upval), FFlagMomentsCreationToolsIxpEnabledModule (upval), p1 (copy), LogMomentsLayerExposureFunction (upval), FStringMomentsCreationToolsIxpLayerModule (upval), FFlagMomentsCreationToolsIxpEnabled2Module (upval), FStringMomentsCreationToolsIxpLayer2Module (upval), FFlagMomentsCreationToolsIxpEnabled3Module (upval), FStringMomentsCreationToolsIxpLayer3Module (upval)
 		local Current = UseRefResult.current
 		UseRefResult.current = UseSignalStateResult
 		
 		if UseSignalStateResult == CreationFlowStateModule.Gallery then
-			FireAnalyticsEventModule(EventNames.EditingFlowGalleryPageAppear, withCreationSession(MakeCreationEventFieldsModule.makeStepField(EventNames.EditingFlowGalleryPageAppear)))
+			local StepField = MakeCreationEventFieldsModule.makeStepField(EventNames.EditingFlowGalleryPageAppear)
+			
+			if FFlagMomentsCreationGalleryExitAnalytics then
+				local Count = #(if CaptureSource == nil then SampleCapturesModule1 else CaptureSource.getCaptures(false))
+				local Count1 = if CaptureSource == nil or CaptureSource.getTotalCaptureCount == nil then Count else CaptureSource.getTotalCaptureCount(false)
+				StepField.eligibleCaptureCount = tostring(Count)
+				StepField.totalCaptureCount = tostring(Count1)
+			end
+			FireAnalyticsEventModule(EventNames.EditingFlowGalleryPageAppear, withCreationSession(StepField))
 			
 			return
-		end
-		if UseSignalStateResult == CreationFlowStateModule.Preview then
-			if Current ~= CreationFlowStateModule.Trimming and (Current ~= CreationFlowStateModule.Music and (Current ~= CreationFlowStateModule.TextOverlay and ((not GetFFlagMomentsStickerButtonFunction() or Current ~= CreationFlowStateModule.StickerOverlay) and (not GetFFlagMomentsTTSAudioOverlayModule or Current ~= CreationFlowStateModule.Voice)))) then
-				FireAnalyticsEventModule(EventNames.EditingFlowEditPageAppear, withCreationSession(MakeCreationEventFieldsModule.makeStepField(EventNames.EditingFlowEditPageAppear)))
-				
-				if FFlagMomentsCreationToolsIxpEnabledModule and not p1.disableExperimentExposure then
-					LogMomentsLayerExposureFunction(FStringMomentsCreationToolsIxpLayerModule)
-				end
-				if FFlagMomentsCreationToolsIxpEnabled2Module and not p1.disableExperimentExposure then
-					LogMomentsLayerExposureFunction(FStringMomentsCreationToolsIxpLayer2Module)
-				end
-				if FFlagMomentsCreationToolsIxpEnabled3Module and not p1.disableExperimentExposure then
-					LogMomentsLayerExposureFunction(FStringMomentsCreationToolsIxpLayer3Module)
+		else
+			if UseSignalStateResult == CreationFlowStateModule.Preview then
+				if Current ~= CreationFlowStateModule.Trimming and (Current ~= CreationFlowStateModule.Music and (Current ~= CreationFlowStateModule.TextOverlay and ((not GetFFlagMomentsStickerButtonFunction() or Current ~= CreationFlowStateModule.StickerOverlay) and (not GetFFlagMomentsTTSAudioOverlayModule or Current ~= CreationFlowStateModule.Voice)))) then
+					FireAnalyticsEventModule(EventNames.EditingFlowEditPageAppear, withCreationSession(MakeCreationEventFieldsModule.makeStepField(EventNames.EditingFlowEditPageAppear)))
 					
-					return
+					if FFlagMomentsCreationToolsIxpEnabledModule and not p1.disableExperimentExposure then
+						LogMomentsLayerExposureFunction(FStringMomentsCreationToolsIxpLayerModule)
+					end
+					if FFlagMomentsCreationToolsIxpEnabled2Module and not p1.disableExperimentExposure then
+						LogMomentsLayerExposureFunction(FStringMomentsCreationToolsIxpLayer2Module)
+					end
+					if FFlagMomentsCreationToolsIxpEnabled3Module and not p1.disableExperimentExposure then
+						LogMomentsLayerExposureFunction(FStringMomentsCreationToolsIxpLayer3Module)
+						
+						return
+					end
 				end
+			elseif UseSignalStateResult == CreationFlowStateModule.Description then
+				FireAnalyticsEventModule(EventNames.EditingFlowPreviewPageAppear, withCreationSession(MakeCreationEventFieldsModule.makeStepField(EventNames.EditingFlowPreviewPageAppear)))
 			end
-		elseif UseSignalStateResult == CreationFlowStateModule.Description then
-			FireAnalyticsEventModule(EventNames.EditingFlowPreviewPageAppear, withCreationSession(MakeCreationEventFieldsModule.makeStepField(EventNames.EditingFlowPreviewPageAppear)))
 		end
 	end, { UseSignalStateResult, p1.disableExperimentExposure })
 	UseEffectFunction(function()

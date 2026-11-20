@@ -8,6 +8,7 @@ local FFlagEdpGameLeavePromptsHandlerEnabled = SharedFlagsModule.FFlagEdpGameLea
 local FFlagEdpOpenPromptsHandlerEnabled = SharedFlagsModule.FFlagEdpOpenPromptsHandlerEnabled
 local FFlagChatPushUpsellPromptsEnabled = SharedFlagsModule.FFlagChatPushUpsellPromptsEnabled
 local FFlagNotificationStreamPromptsHandlerEnabled = SharedFlagsModule.FFlagNotificationStreamPromptsHandlerEnabled
+local FFlagEventRsvpPushUpsellEnabled = SharedFlagsModule.FFlagEventRsvpPushUpsellEnabled
 
 return {
 	["jest.config"] = script["jest.config"],
@@ -26,5 +27,6 @@ return {
 	EdpGameLeavePromptsHandler = if FFlagEdpGameLeavePromptsHandlerEnabled then require(script.SduiV2.EdpGameLeavePromptsHandler) else nil,
 	EdpOpenPromptsHandler = if FFlagEdpOpenPromptsHandlerEnabled then require(script.SduiV2.EdpOpenPromptsHandler) else nil,
 	ChatPromptsHandler = if FFlagChatPushUpsellPromptsEnabled then require(script.SduiV2.ChatPromptsHandler) else nil,
-	StreamPromptsHandler = if FFlagNotificationStreamPromptsHandlerEnabled then require(script.SduiV2.StreamPromptsHandler) else nil
+	StreamPromptsHandler = if FFlagNotificationStreamPromptsHandlerEnabled then require(script.SduiV2.StreamPromptsHandler) else nil,
+	registerPromptsTriggerActions = if FFlagEventRsvpPushUpsellEnabled then require(script.SduiV2.registerPromptsTriggerActions) else nil
 }

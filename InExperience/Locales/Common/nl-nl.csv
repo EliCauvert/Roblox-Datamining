@@ -2377,6 +2377,8 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,Alle games
 Feature.Build.Label.AmountAvailable,{AMOUNT} beschikbaar
+Feature.Build.Label.AttachmentCountPlural,{count} bijlagen
+Feature.Build.Label.AttachmentCountSingular,1 bijlage
 Feature.Build.Label.Autosaved,Automatisch opgeslagen
 Feature.Build.Label.Available,beschikbaar
 Feature.Build.Label.AvailableForPurchase,Beschikbaar om te kopen
@@ -2420,6 +2422,7 @@ Feature.Build.Label.IconThumbnails,Pictogram en miniaturen
 Feature.Build.Label.Images2D,2D-afbeeldingen
 Feature.Build.Label.InProgress,In uitvoering
 Feature.Build.Label.InputNeeded,Input vereist
+Feature.Build.Label.InspirationTab,Inspiratie
 Feature.Build.Label.InternalSpec,Interne specificatie
 Feature.Build.Label.InternalTesting,Intern testen
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -3340,10 +3343,24 @@ Feature.Chat.Title.FriendsChat,Vriendenchat
 Feature.Chat.Title.NewChat,Nieuwe chat
 Feature.Chat.Toast.Error.InvalidUserSelected,Een of meerdere mensen in deze lijst kunnen niet worden toegevoegd
 Feature.CloudClient.Action.PlayWithoutCloudPlay,Spelen zonder Cloud Play
-Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play voert de game uit op de computers van Roblox, waardoor deze mogelijk sneller laadt en minder vaak crasht. Het duurt maar zolang je deze game speelt."
+Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play voert de game uit op de computers van Roblox, waardoor het mogelijk sneller laadt en minder vaak crasht. Het werkt alleen zolang je deze game speelt."
+Feature.CloudClient.Description.GalleryUnavailableCloudPlay,Neem opnieuw deel zonder Cloud Play om je galerij te gebruiken.
+Feature.CloudClient.Description.GalleryUnavailableRobloxReality,Neem opnieuw deel zonder Restyle om je galerij te gebruiken.
+Feature.CloudClient.Description.RobloxRealityPreview,Restyle is een vroege preview. Dingen kunnen er anders uitzien dan in de originele game.
 Feature.CloudClient.Heading.CloudPlayOffer,Spelen met Cloud Play
-Feature.CloudClient.Label.RobloxRealityGraphics,"Je game, in een nieuw jasje"
+Feature.CloudClient.Heading.GalleryUnavailableCloudPlay,Galerij is nog niet beschikbaar in Cloud Play.
+Feature.CloudClient.Heading.GalleryUnavailableRobloxReality,Galerij is nog niet beschikbaar met Restyle.
+Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Vastleggen is nog niet beschikbaar in Cloud Play.
+Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Vastleggen is nog niet beschikbaar met Restyle.
+Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Play werkt niet. Je speelt op de normale manier.
+Feature.CloudClient.Label.RobloxReality,Restyle
+Feature.CloudClient.Label.RobloxRealityDemoLength,Probeer een demo van {minutes} minuten
+Feature.CloudClient.Label.RobloxRealityEndingSoon,"Restyle eindigt over 1 minuut, waarna je de game verlaat."
+Feature.CloudClient.Label.RobloxRealityGraphics,Jouw game in een nieuw jasje
 Feature.CloudClient.Label.RobloxRealityPlusOnly,Alleen voor Plus-abonnees
+Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,Zelfweergave is nog niet beschikbaar in Cloud Play.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,Zelfweergave is nog niet beschikbaar met Restyle.
+Feature.CloudClient.Label.TimeLeft,Resterende tijd
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,Laat je vrienden je vinden
 Feature.Contacts.Action.Invite,Uitnodigen
@@ -3658,6 +3675,7 @@ Feature.FriendsActivityFeed.Label.ViewRecentActivity,Recente activiteit bekijken
 Feature.FriendsMenu.Label.SelectedFriendsCount,{numerator}/{denominator} vrienden geselecteerd
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,{selectedCount} vrienden geselecteerd
 Feature.GameBadges.Label.Experience,
+Feature.GameDetails.Action.Continue,
 Feature.GameDetails.Action.GameDetails,Details van spel
 Feature.GameDetails.Action.GiveFeedback,
 Feature.GameDetails.Action.NotInterested,Niet geïnteresseerd
@@ -3689,8 +3707,10 @@ Feature.GameDetails.Label.WhyThisAd,
 Feature.GameDetails.Label.Yes,
 Feature.GameDetails.Message.AdPreferences,Advertentievoorkeuren
 Feature.GameDetails.Message.AnonymousFeedbackTermsOfUse,Reacties worden anoniem gedeeld en vallen onder feedback zoals gedefinieerd in de Gebruiksvoorwaarden van {underlineStart}Roblox{underlineEnd}.
+Feature.GameDetails.Message.ExternalLinkWarning,"Door op 'Doorgaan' te klikken, word je doorgestuurd naar een website die geen eigendom is van Roblox en niet door Roblox wordt beheerd. Deze website kan andere voorwaarden en een ander privacybeleid hebben."
 Feature.GameDetails.Message.HelpImproveExperience,Help ons je ervaring te verbeteren
 Feature.GameDetails.Message.HidingExperienceQuestion,Waarom verberg je deze ervaring?
+Feature.GameDetails.Message.LeavingRobloxTitle,Roblox verlaten
 Feature.GameDetails.Message.PurchaseGameV2,Toegang tot ontgrendelen {gameName} voor {X} Robux?
 Feature.GameDetails.Message.SponsoredDisclosure.Error,De sponsorinformatie kon niet worden weergegeven vanwege een tijdelijke fout.
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"Je ziet deze gesponsorde content op basis van niet-gepersonaliseerde factoren zoals apparaatinformatie, locatie en leeftijd om je passende content te tonen. De maker van de ervaring is {CreatorName}. De sponsoring is betaald door {PayerName}. Ga voor meer informatie naar de pagina 'Privacy en contentclassificatie' onder Instellingen in je account, hier:"
@@ -3710,9 +3730,11 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Meldingen ingeschakeld voor {ex
 Feature.GameJoin.Description.DifferentServer,Je begint op een andere server
 Feature.GameJoin.Label.PlayTogether,Jullie kunnen samen spelen
 Feature.GameJoin.Label.PlayTogetherSoon,Jullie kunnen binnenkort samen spelen
+Feature.GameJoin.Label.RecentCoplay,Jullie hebben onlangs samen gespeeld
 Feature.GamePage.Action.BackToTop,Terug naar boven
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
+Feature.GamePage.LabelCancelField,
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,Deze ervaring is niet beschikbaar vanwege de status van je leeftijdsverificatie.
 Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,Gasten kunnen niet deelnemen aan deze ervaring.
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,"Om deze ervaring te bezoeken, is een aankoop vereist."
@@ -4934,6 +4956,7 @@ Feature.Toast.Username.Copied,Gebruikersnaam gekopieerd naar klembord.
 Feature.Toast.VoteError.AssetNotVoteable,Er mag niet op de ervaring worden gestemd.
 Feature.Toast.VoteError.Default,Actie niet beschikbaar.
 Feature.Toast.VoteError.FloodCheckThresholdMet,Je stemt te snel.
+Feature.Toast.VoteError.NotSaved,Stem is niet opgeslagen
 Feature.Toast.VoteError.PlayGame,Je moet deze ervaring bezoeken voordat je deze kunt beoordelen.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,Je kunt je leeftijd nu niet controleren omdat je herhaaldelijk onze Communityrichtlijnen hebt overtreden. Je kunt het opnieuw proberen nadat de beperking is afgelopen.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,Leeftijdscontroles opgeschort
@@ -5134,8 +5157,8 @@ IAPExperience.InsufficientRobux.Text.YouNeed,Je hebt nog {robux} nodig. Koop mee
 IAPExperience.InsufficientRobux.Title.InsufficientRobux,
 IAPExperience.LeaveRoblox.Action.Cancel,
 IAPExperience.LeaveRoblox.Action.Continue,
-IAPExperience.LeaveRoblox.Text.ExternalWebsiteWarning,"Door op 'Doorgaan' te klikken, word je doorgestuurd naar een website die geen eigendom is van Roblox en niet door Roblox wordt beheerd. Deze website kan andere voorwaarden en een ander privacybeleid hebben."
-IAPExperience.LeaveRoblox.Title.LeavingRoblox,Roblox verlaten
+IAPExperience.LeaveRoblox.Text.ExternalWebsiteWarning,
+IAPExperience.LeaveRoblox.Title.LeavingRoblox,
 IAPExperience.Loading.Text.PurchasingItem,Bezig met het aankopen van item ...
 IAPExperience.Loading.Text.PurchasingRobux,Bezig met het aankopen van Robux ...
 IAPExperience.Loading.Text.WaitingForPurchase,Wachten op aankoop ...

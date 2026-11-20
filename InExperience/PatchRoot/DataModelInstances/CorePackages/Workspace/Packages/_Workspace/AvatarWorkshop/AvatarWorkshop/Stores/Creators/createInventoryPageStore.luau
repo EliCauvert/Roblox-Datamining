@@ -26,15 +26,23 @@ return function(p2, p3)
 	local Signal4, Signal2_3 = CreateSignalFunction(false)
 	local Signal5, Signal2_4 = CreateSignalFunction(false)
 	local NextPageToken = nil
+	local t = {}
 	
 	local function applyPage(Result)
-		-- upvalues: NextPageToken (ref), Signal2_2 (copy), Signal (copy), Signal2 (copy)
+		-- upvalues: NextPageToken (ref), Signal2_2 (copy), Signal (copy), t (copy), Signal2 (copy)
 		NextPageToken = Result.nextPageToken
 		Signal2_2(Result.nextPageToken == nil)
+		local Copy = table.clone(Signal(false))
 		
-		if #Result.items > 0 then
-			local Copy = table.clone(Signal(false))
-			table.move(Result.items, 1, #Result.items, #Copy + 1, Copy)
+		for _, item in Result.items do
+			local Text: string = `{item.itemType}:{item.itemId}`
+			
+			if not t[Text] then
+				t[Text] = true
+				table.insert(Copy, item)
+			end
+		end
+		if #Signal(false) < #Copy then
 			Signal2(Copy)
 		end
 	end
