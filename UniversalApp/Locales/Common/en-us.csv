@@ -370,6 +370,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Sorry, there was a problem
 
 Please wait and try again."
 Authentication.Login.Label.ConnectionError.Title,Connection Error
+Authentication.Login.Label.DontHaveARobloxAccountCreateOne,Don't have a Roblox account? {startTag}Create one{endTag}
 Authentication.Login.Label.DontHaveAnAccountCreateOne,Don't have an account? {startTag}Create one{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,Email address
