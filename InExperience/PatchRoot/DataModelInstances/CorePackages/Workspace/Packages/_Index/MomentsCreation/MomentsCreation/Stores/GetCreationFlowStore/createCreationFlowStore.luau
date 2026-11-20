@@ -9,14 +9,13 @@ local CreateSelectionStoreModule = require(MomentsCreation.Stores.createSelectio
 local CreateDescriptionStoreModule = require(MomentsCreation.Stores.createDescriptionStore)
 local CreateEditsStoreModule = require(MomentsCreation.Stores.createEditsStore)
 local FFlagMomentsTTSDraftRestoreModule = require(MomentsCreation.Flags.FFlagMomentsTTSDraftRestore)
-local FFlagMomentsCreationGalleryExitAnalytics = MomentsCommonModule.Flags.FFlagMomentsCreationGalleryExitAnalytics
 local CreateComputedFunction = SignalsModule.createComputed
 local CreateSignalFunction = SignalsModule.createSignal
 local FFlagMomentTextGenerationFilteredSignal = MomentsCommonModule.Flags.FFlagMomentTextGenerationFilteredSignal
 local GetFFlagEnableMomentTextGenerationFunction = MomentsCommonModule.Flags.GetFFlagEnableMomentTextGeneration
 
 return function()
-	-- upvalues: CreateNavigationMachineModule (copy), CreationFlowStateModule (copy), CreateSelectionStoreModule (copy), CreateDescriptionStoreModule (copy), CreateEditsStoreModule (copy), CreateSignalFunction (copy), FFlagMomentsCreationGalleryExitAnalytics (copy), CreateComputedFunction (copy), FFlagMomentTextGenerationFilteredSignal (copy), GetFFlagEnableMomentTextGenerationFunction (copy), FFlagMomentsTTSDraftRestoreModule (copy)
+	-- upvalues: CreateNavigationMachineModule (copy), CreationFlowStateModule (copy), CreateSelectionStoreModule (copy), CreateDescriptionStoreModule (copy), CreateEditsStoreModule (copy), CreateSignalFunction (copy), CreateComputedFunction (copy), FFlagMomentTextGenerationFilteredSignal (copy), GetFFlagEnableMomentTextGenerationFunction (copy), FFlagMomentsTTSDraftRestoreModule (copy)
 	local NavigationMachineModule = CreateNavigationMachineModule(CreationFlowStateModule.Gallery)
 	local SelectionStoreModule = CreateSelectionStoreModule()
 	local DescriptionStoreModule = CreateDescriptionStoreModule()
@@ -28,12 +27,7 @@ return function()
 	local Signal5, Signal2_4 = CreateSignalFunction(nil)
 	local Signal6, Signal2_5 = CreateSignalFunction(nil)
 	local Signal7, Signal2_6 = CreateSignalFunction(nil)
-	local GetGalleryPickedCapture = nil
-	local Callback = nil
 	
-	if FFlagMomentsCreationGalleryExitAnalytics then
-		GetGalleryPickedCapture, Callback = CreateSignalFunction(nil)
-	end
 	return {
 		getStep = NavigationMachineModule.getStep,
 		getCurrentState = NavigationMachineModule.getStep,
@@ -66,7 +60,6 @@ return function()
 		getActiveGeneration = Signal5,
 		getTTSAudio = Signal6,
 		getPendingRestoredVoice = Signal7,
-		getGalleryPickedCapture = GetGalleryPickedCapture,
 		updateCurrentState = function(p1)
 			-- upvalues: NavigationMachineModule (copy)
 			NavigationMachineModule.reset(p1)
@@ -120,13 +113,12 @@ return function()
 			-- upvalues: Signal2_6 (copy)
 			Signal2_6(p1)
 		end,
-		setGalleryPickedCapture = Callback,
 		onMusicSearchRetrieved = function(p1)
 			-- upvalues: Signal2_1 (copy)
 			Signal2_1(p1)
 		end,
 		clearEdits = function(p1)
-			-- upvalues: Signal2 (copy), SelectionStoreModule (copy), NavigationMachineModule (copy), DescriptionStoreModule (copy), FFlagMomentTextGenerationFilteredSignal (upval), GetFFlagEnableMomentTextGenerationFunction (upval), Signal2_1 (copy), EditsStoreModule (copy), Signal2_2 (copy), FFlagMomentsTTSDraftRestoreModule (upval), Signal2_6 (copy), FFlagMomentsCreationGalleryExitAnalytics (upval), Callback (ref)
+			-- upvalues: Signal2 (copy), SelectionStoreModule (copy), NavigationMachineModule (copy), DescriptionStoreModule (copy), FFlagMomentTextGenerationFilteredSignal (upval), GetFFlagEnableMomentTextGenerationFunction (upval), Signal2_1 (copy), EditsStoreModule (copy), Signal2_2 (copy), FFlagMomentsTTSDraftRestoreModule (upval), Signal2_6 (copy)
 			Signal2(true)
 			SelectionStoreModule.setSelectedCapture(nil)
 			NavigationMachineModule.reset(p1)
@@ -145,9 +137,6 @@ return function()
 			
 			if FFlagMomentsTTSDraftRestoreModule then
 				Signal2_6(nil)
-			end
-			if FFlagMomentsCreationGalleryExitAnalytics and Callback ~= nil then
-				Callback(nil)
 			end
 		end
 	}

@@ -12,9 +12,6 @@ local UseRefFunction = ReactModule.useRef
 local UseStateFunction = ReactModule.useState
 local CaptureControlsConfigurationModule = require(Parent.Utils.CaptureControlsConfiguration)
 local SnapDirectionModule = require(Parent.Enums.SnapDirection)
-local FFlagCapturesDragAreaExpandHorizontalModule = require(Parent.Flags.FFlagCapturesDragAreaExpandHorizontal)
-local FFlagCapturesDragAreaExpandVerticalModule = require(Parent.Flags.FFlagCapturesDragAreaExpandVertical)
-local FFlagCapturesEntrypointDraggedEventModule = require(Parent.Flags.FFlagCapturesEntrypointDraggedEvent)
 local UIDragDetectorFixEventPositionEnabledEngineFeature = game:GetEngineFeature("UIDragDetectorFixEventPositionEnabled")
 local config = { x = 0.5, y = 0.5 }
 local config1 = { xOffset = -100, yOffset = -100 }
@@ -33,35 +30,15 @@ local function validateRefs(List): boolean
 	return true
 end
 
-local function clampItemPosition(AbsolutePosition, Vector, AbsolutePosition1, Vector1, Vector3, LastRightX): Vector2
-	-- upvalues: FFlagCapturesDragAreaExpandHorizontalModule (copy), FFlagCapturesDragAreaExpandVerticalModule (copy)
+local function clampItemPosition(AbsolutePosition, Vector, AbsolutePosition1, Vector1, Current): Vector2
 	local AbsolutePositionDelta = AbsolutePosition - AbsolutePosition1
-	local v1: number = if FFlagCapturesDragAreaExpandHorizontalModule then 8 else 50
-	local MinValue: number = v1
-	local Y1 = if FFlagCapturesDragAreaExpandVerticalModule then 0 else Vector3.Y
-	local v2: number? = nil
-	
-	if FFlagCapturesDragAreaExpandVerticalModule and AbsolutePositionDelta.Y < Vector3.Y then
-		local Smallest = math.min(LastRightX or 1e999, Vector1.X - v1)
-		local IsLastRightXBelow: boolean = LastRightX ~= nil and LastRightX < AbsolutePositionDelta.X + Vector.X
-		
-		if Vector.X <= Smallest - Vector3.X and not IsLastRightXBelow and AbsolutePositionDelta.X + Vector.X >= Vector3.X then
-			MinValue = math.max(MinValue, Vector3.X)
-			v2 = Smallest - Vector.X
-		else
-			Y1 = Vector3.Y
-		end
-	end
-	local MaxValue = v2 or Vector1.X - Vector.X - v1
-	
-	if FFlagCapturesDragAreaExpandHorizontalModule or FFlagCapturesDragAreaExpandVerticalModule then
-		MaxValue = math.max(MaxValue, MinValue)
-	end
-	local X: number = MinValue
+	local MinValue = 50
+	local Y1: number = Current.Y
+	local X = 50
 	local Y: number = Y1
 	
-	if Vector.X < Vector1.X - MinValue then
-		X = math.clamp(AbsolutePositionDelta.X, MinValue, MaxValue)
+	if Vector.X < Vector1.X - 50 then
+		X = math.clamp(AbsolutePositionDelta.X, MinValue, Vector1.X - Vector.X - 50)
 	end
 	if Vector.Y < Vector1.Y - Y1 then
 		Y = math.clamp(AbsolutePositionDelta.Y, Y1, Vector1.Y - Vector.Y)
@@ -69,9 +46,9 @@ local function clampItemPosition(AbsolutePosition, Vector, AbsolutePosition1, Ve
 	return Vector2.new(X, Y)
 end
 
-local function getSnapPosition(AbsoluteSize, AnchorPoint, AbsolutePosition, AbsoluteSize1, Vector, Current, LastRightX)
+local function getSnapPosition(AbsoluteSize, AnchorPoint, AbsolutePosition, AbsoluteSize1, Vector, Current)
 	-- upvalues: clampItemPosition (copy)
-	return (clampItemPosition(Vector2.new(AbsoluteSize1.X * Vector.X, AbsoluteSize1.Y * Vector.Y) - Vector2.new(AbsoluteSize.X * AnchorPoint.X, AbsoluteSize.Y * AnchorPoint.Y) + AbsolutePosition, AbsoluteSize, AbsolutePosition, AbsoluteSize1, Current, LastRightX))
+	return (clampItemPosition(Vector2.new(AbsoluteSize1.X * Vector.X, AbsoluteSize1.Y * Vector.Y) - Vector2.new(AbsoluteSize.X * AnchorPoint.X, AbsoluteSize.Y * AnchorPoint.Y) + AbsolutePosition, AbsoluteSize, AbsolutePosition, AbsoluteSize1, Current))
 end
 
 local function getSnapAnchorPoint(p1, AbsolutePosition, AbsoluteSize, Current)
@@ -117,26 +94,15 @@ local _ = function(p1, Vector): boolean
 	return Flag
 end
 
-return function(p1, Current, LastRightX, Callback)
-	-- upvalues: UseRefFunction (copy), FFlagCapturesDragAreaExpandVerticalModule (copy), FFlagCapturesEntrypointDraggedEventModule (copy), CaptureControlsConfigurationModule (copy), UseStateFunction (copy), _Vector2 (copy), Right (copy), UseGuiInsetFunction (copy), UseDeviceInsetsFunction (copy), UseCallbackFunction (copy), UseAnimatedBindingFunction (copy), config (copy), config1 (copy), UseEffectFunction (copy), validateRefs (copy), SnapDirectionModule (copy), ReactOtterModule (copy), config2 (copy), getSnapPosition (copy), clampItemPosition (copy), UIDragDetectorFixEventPositionEnabledEngineFeature (copy), getSnapAnchorPoint (copy)
+return function(p1, Current)
+	-- upvalues: UseRefFunction (copy), CaptureControlsConfigurationModule (copy), UseStateFunction (copy), _Vector2 (copy), Right (copy), UseGuiInsetFunction (copy), UseDeviceInsetsFunction (copy), UseCallbackFunction (copy), UseAnimatedBindingFunction (copy), config (copy), config1 (copy), UseEffectFunction (copy), validateRefs (copy), SnapDirectionModule (copy), ReactOtterModule (copy), config2 (copy), getSnapPosition (copy), clampItemPosition (copy), UIDragDetectorFixEventPositionEnabledEngineFeature (copy), getSnapAnchorPoint (copy)
 	local UseRefResult = UseRefFunction(Current)
-	local UseRefResult1 = if FFlagCapturesDragAreaExpandVerticalModule then UseRefFunction({
-		refreshPending = false,
-		refreshPosition = nil,
-		rightX = LastRightX,
-		lastRightX = LastRightX
-	}) else nil
-	
-	if UseRefResult1 then
-		UseRefResult1.current.rightX = LastRightX
-	end
-	local UseRefResult2 = if FFlagCapturesEntrypointDraggedEventModule then UseRefFunction(false) else nil
+	local UseRefResult1 = UseRefFunction(nil)
+	local UseRefResult2 = UseRefFunction(nil)
 	local UseRefResult3 = UseRefFunction(nil)
-	local UseRefResult4 = UseRefFunction(nil)
+	local UseRefResult4 = UseRefFunction(false)
 	local UseRefResult5 = UseRefFunction(nil)
-	local UseRefResult6 = UseRefFunction(false)
-	local UseRefResult7 = UseRefFunction(nil)
-	local UseRefResult8 = UseRefFunction(CaptureControlsConfigurationModule.getStoredSnapAnchorPoint())
+	local UseRefResult6 = UseRefFunction(CaptureControlsConfigurationModule.getStoredSnapAnchorPoint())
 	local UseStateResult, UseStateResult2 = UseStateFunction(_Vector2)
 	local UseStateResult1, UseStateResult2_1 = UseStateFunction(false)
 	local UseStateResult3, UseStateResult2_2 = UseStateFunction(false)
@@ -144,31 +110,22 @@ return function(p1, Current, LastRightX, Callback)
 	local UseGuiInsetResult = UseGuiInsetFunction()
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseCallbackResult = UseCallbackFunction(function()
-		-- upvalues: UseRefResult6 (copy), UseRefResult1 (copy)
-		UseRefResult6.current = false
-		
-		if UseRefResult1 and UseRefResult1.current.refreshPending and UseRefResult1.current.refreshPosition then
-			UseRefResult1.current.refreshPending = false
-			UseRefResult1.current.refreshPosition()
-		end
+		-- upvalues: UseRefResult4 (copy)
+		UseRefResult4.current = false
 	end, {})
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = UseAnimatedBindingFunction(config)
 	local UseAnimatedBindingResult1, UseAnimatedBindingResult2_1 = UseAnimatedBindingFunction(config1, UseCallbackResult)
 	UseEffectFunction(function()
-		-- upvalues: p1 (copy), validateRefs (upval), UseRefResult5 (copy), UseRefResult3 (copy), UseRefResult (copy), Current (copy), UseRefResult1 (copy), UseRefResult8 (copy), UseStateResult2 (copy), UseStateResult2_3 (copy), SnapDirectionModule (upval), UseStateResult3 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config2 (upval), UseStateResult2_2 (copy), getSnapPosition (upval), UseAnimatedBindingResult2_1 (copy)
-		if not p1 or not validateRefs({ UseRefResult5, UseRefResult3 }) then return end
-		assert(UseRefResult5.current ~= nil, "dragItemRef is nil")
-		assert(UseRefResult3.current ~= nil, "dragContainerRef is nil")
+		-- upvalues: p1 (copy), validateRefs (upval), UseRefResult3 (copy), UseRefResult1 (copy), UseRefResult (copy), Current (copy), UseRefResult6 (copy), UseStateResult2 (copy), UseStateResult2_3 (copy), SnapDirectionModule (upval), UseStateResult3 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config2 (upval), UseStateResult2_2 (copy), getSnapPosition (upval), UseAnimatedBindingResult2_1 (copy)
+		if not p1 or not validateRefs({ UseRefResult3, UseRefResult1 }) then return end
+		assert(UseRefResult3.current ~= nil, "dragItemRef is nil")
+		assert(UseRefResult1.current ~= nil, "dragContainerRef is nil")
 		UseRefResult.current = Current
-		
-		if UseRefResult1 then
-			UseRefResult1.current.lastRightX = UseRefResult1.current.rightX
-		end
-		local Current1 = UseRefResult8.current
+		local Current1 = UseRefResult6.current
 		UseStateResult2(Current1)
 		UseStateResult2_3(if Current1.X == 0 then SnapDirectionModule.Left elseif Current1.X == 1 then SnapDirectionModule.Right elseif Current1.Y == 0 then SnapDirectionModule.Top else SnapDirectionModule.Bottom)
-		local AbsoluteSize = UseRefResult5.current.AbsoluteSize
-		local AnchorPoint = UseRefResult5.current.AnchorPoint
+		local AbsoluteSize = UseRefResult3.current.AbsoluteSize
+		local AnchorPoint = UseRefResult3.current.AnchorPoint
 		local IsXMatch: boolean = Current1.X == 0 or Current1.X == 1
 		local IsYMatch: boolean = Current1.Y == 0 or Current1.Y == 1
 		local Flag = false
@@ -189,7 +146,7 @@ return function(p1, Current, LastRightX, Callback)
 			})
 			UseStateResult2_2(not UseStateResult3)
 		end
-		local SnapPosition = getSnapPosition(AbsoluteSize, AnchorPoint, UseRefResult3.current.AbsolutePosition, UseRefResult3.current.AbsoluteSize, Current1, Current, if UseRefResult1 then UseRefResult1.current.rightX else nil)
+		local SnapPosition = getSnapPosition(AbsoluteSize, AnchorPoint, UseRefResult1.current.AbsolutePosition, UseRefResult1.current.AbsoluteSize, Current1, Current)
 		local _Vector2 = Vector2.new(AbsoluteSize.X * AnchorPoint.X, AbsoluteSize.Y * AnchorPoint.Y)
 		UseAnimatedBindingResult2_1({
 			xOffset = ReactOtterModule.instant(SnapPosition.X + _Vector2.X),
@@ -202,19 +159,13 @@ return function(p1, Current, LastRightX, Callback)
 		UseAnimatedBindingResult2_1
 	})
 	local UseCallbackResult1 = UseCallbackFunction(function()
-		-- upvalues: UseRefResult1 (copy), p1 (copy), UseRefResult6 (copy), UseStateResult1 (copy), validateRefs (upval), UseRefResult5 (copy), UseRefResult3 (copy), getSnapPosition (upval), UseStateResult (copy), Current (copy), LastRightX (copy), UseAnimatedBindingResult2_1 (copy), ReactOtterModule (upval)
-		if UseRefResult1 and p1 and UseRefResult6.current then
-			UseRefResult1.current.refreshPending = true
-			
-			return
-		end
-		if UseRefResult1 and UseStateResult1 then return end
-		if p1 and not UseRefResult6.current and validateRefs({ UseRefResult5, UseRefResult3 }) then
-			assert(UseRefResult5.current ~= nil, "dragItemRef is nil")
-			assert(UseRefResult3.current ~= nil, "dragContainerRef is nil")
-			local AbsoluteSize = UseRefResult5.current.AbsoluteSize
-			local AnchorPoint = UseRefResult5.current.AnchorPoint
-			local SnapPosition = getSnapPosition(AbsoluteSize, AnchorPoint, UseRefResult3.current.AbsolutePosition, UseRefResult3.current.AbsoluteSize, UseStateResult, Current, LastRightX)
+		-- upvalues: p1 (copy), UseRefResult4 (copy), validateRefs (upval), UseRefResult3 (copy), UseRefResult1 (copy), getSnapPosition (upval), UseStateResult (copy), Current (copy), UseAnimatedBindingResult2_1 (copy), ReactOtterModule (upval)
+		if p1 and not UseRefResult4.current and validateRefs({ UseRefResult3, UseRefResult1 }) then
+			assert(UseRefResult3.current ~= nil, "dragItemRef is nil")
+			assert(UseRefResult1.current ~= nil, "dragContainerRef is nil")
+			local AbsoluteSize = UseRefResult3.current.AbsoluteSize
+			local AnchorPoint = UseRefResult3.current.AnchorPoint
+			local SnapPosition = getSnapPosition(AbsoluteSize, AnchorPoint, UseRefResult1.current.AbsolutePosition, UseRefResult1.current.AbsoluteSize, UseStateResult, Current)
 			local _Vector2 = Vector2.new(AbsoluteSize.X * AnchorPoint.X, AbsoluteSize.Y * AnchorPoint.Y)
 			UseAnimatedBindingResult2_1({
 				xOffset = ReactOtterModule.instant(SnapPosition.X + _Vector2.X),
@@ -224,57 +175,55 @@ return function(p1, Current, LastRightX, Callback)
 			return
 		end
 	end, {
-		p1, Current, LastRightX, UseStateResult, UseStateResult1,
+		p1,
+		Current,
+		UseStateResult,
+		UseStateResult1,
 		UseAnimatedBindingResult2_1
 	})
-	
-	if UseRefResult1 then
-		UseRefResult1.current.refreshPosition = UseCallbackResult1
-	end
 	local UseCallbackResult11 = UseCallbackFunction(function(p2)
-		-- upvalues: p1 (copy), UseStateResult1 (copy), validateRefs (upval), UseRefResult3 (copy), UseRefResult5 (copy), UseGuiInsetResult (copy), UseDeviceInsetsResult (copy), UseStateResult2_1 (copy), UseRefResult2 (copy), clampItemPosition (upval), Current (copy), LastRightX (copy), UseStateResult3 (copy), UIDragDetectorFixEventPositionEnabledEngineFeature (upval), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseAnimatedBindingResult2_1 (copy)
-		if not p1 or UseStateResult1 or not validateRefs({ UseRefResult3, UseRefResult5 }) then return end
-		assert(UseRefResult5.current ~= nil, "dragItemRef is nil")
-		assert(UseRefResult3.current ~= nil, "dragContainerRef is nil")
-		local v1 = p2 - Vector2.new(UseGuiInsetResult.left + UseDeviceInsetsResult.left, UseGuiInsetResult.top + UseDeviceInsetsResult.top)
-		UseStateResult2_1(true)
-		
-		if UseRefResult2 then
-			UseRefResult2.current = false
+		-- upvalues: p1 (copy), UseStateResult1 (copy), validateRefs (upval), UseRefResult1 (copy), UseRefResult3 (copy), UseGuiInsetResult (copy), UseDeviceInsetsResult (copy), UseStateResult2_1 (copy), clampItemPosition (upval), Current (copy), UseStateResult3 (copy), UIDragDetectorFixEventPositionEnabledEngineFeature (upval), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseAnimatedBindingResult2_1 (copy)
+		if p1 and not UseStateResult1 and validateRefs({ UseRefResult1, UseRefResult3 }) then
+			assert(UseRefResult3.current ~= nil, "dragItemRef is nil")
+			assert(UseRefResult1.current ~= nil, "dragContainerRef is nil")
+			local v1 = p2 - Vector2.new(UseGuiInsetResult.left + UseDeviceInsetsResult.left, UseGuiInsetResult.top + UseDeviceInsetsResult.top)
+			UseStateResult2_1(true)
+			local AbsoluteSize = UseRefResult3.current.AbsoluteSize
+			local AbsolutePosition = UseRefResult3.current.AbsolutePosition
+			local _ = UseRefResult3.current.AnchorPoint
+			local ClampItemPositionResult = clampItemPosition(AbsolutePosition, AbsoluteSize, UseRefResult1.current.AbsolutePosition, UseRefResult1.current.AbsoluteSize, Current)
+			local _Vector2 = Vector2.new(if UseStateResult3 then ((if UIDragDetectorFixEventPositionEnabledEngineFeature then p2 else v1).X - AbsolutePosition.X) / AbsoluteSize.X else 0.5, if UseStateResult3 then 0.5 else ((if UIDragDetectorFixEventPositionEnabledEngineFeature then p2 else v1).Y - AbsolutePosition.Y) / AbsoluteSize.Y)
+			UseAnimatedBindingResult2({
+				x = ReactOtterModule.instant(_Vector2.X),
+				y = ReactOtterModule.instant(_Vector2.Y)
+			})
+			local _Vector2_1 = Vector2.new(AbsoluteSize.X * _Vector2.X, AbsoluteSize.Y * _Vector2.Y)
+			UseAnimatedBindingResult2_1({
+				xOffset = ReactOtterModule.instant(ClampItemPositionResult.X + _Vector2_1.X),
+				yOffset = ReactOtterModule.instant(ClampItemPositionResult.Y + _Vector2_1.Y)
+			})
+			
+			return
 		end
-		local AbsoluteSize = UseRefResult5.current.AbsoluteSize
-		local AbsolutePosition = UseRefResult5.current.AbsolutePosition
-		local _ = UseRefResult5.current.AnchorPoint
-		local ClampItemPositionResult = clampItemPosition(AbsolutePosition, AbsoluteSize, UseRefResult3.current.AbsolutePosition, UseRefResult3.current.AbsoluteSize, Current, LastRightX)
-		local _Vector2 = Vector2.new(if UseStateResult3 then ((if UIDragDetectorFixEventPositionEnabledEngineFeature then p2 else v1).X - AbsolutePosition.X) / AbsoluteSize.X else 0.5, if UseStateResult3 then 0.5 else ((if UIDragDetectorFixEventPositionEnabledEngineFeature then p2 else v1).Y - AbsolutePosition.Y) / AbsoluteSize.Y)
-		UseAnimatedBindingResult2({
-			x = ReactOtterModule.instant(_Vector2.X),
-			y = ReactOtterModule.instant(_Vector2.Y)
-		})
-		local _Vector2_1 = Vector2.new(AbsoluteSize.X * _Vector2.X, AbsoluteSize.Y * _Vector2.Y)
-		UseAnimatedBindingResult2_1({
-			xOffset = ReactOtterModule.instant(ClampItemPositionResult.X + _Vector2_1.X),
-			yOffset = ReactOtterModule.instant(ClampItemPositionResult.Y + _Vector2_1.Y)
-		})
 	end, {
-		p1, Current, LastRightX, clampItemPosition,
+		p1, Current, clampItemPosition,
 		if UIDragDetectorFixEventPositionEnabledEngineFeature then nil else UseDeviceInsetsResult,
 		if UIDragDetectorFixEventPositionEnabledEngineFeature then nil else UseGuiInsetResult,
 		UseStateResult1, UseStateResult3, UseAnimatedBindingResult2_1,
 		UseAnimatedBindingResult2
 	})
 	local UseCallbackResult2 = UseCallbackFunction(function(p2, p3)
-		-- upvalues: validateRefs (upval), UseRefResult5 (copy), UseRefResult3 (copy), UseGuiInsetResult (copy), UseDeviceInsetsResult (copy), getSnapAnchorPoint (upval), UIDragDetectorFixEventPositionEnabledEngineFeature (upval), Current (copy), UseStateResult3 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseStateResult2_2 (copy), getSnapPosition (upval), LastRightX (copy), clampItemPosition (upval), UseAnimatedBindingResult2_1 (copy), UseRefResult6 (copy), config2 (upval), UseStateResult2 (copy), UseStateResult2_3 (copy), SnapDirectionModule (upval), CaptureControlsConfigurationModule (upval), UseRefResult8 (copy)
-		if not validateRefs({ UseRefResult5, UseRefResult3 }) then return end
-		assert(UseRefResult5.current ~= nil, "dragItemRef is nil")
-		assert(UseRefResult3.current ~= nil, "dragContainerRef is nil")
+		-- upvalues: validateRefs (upval), UseRefResult3 (copy), UseRefResult1 (copy), UseGuiInsetResult (copy), UseDeviceInsetsResult (copy), getSnapAnchorPoint (upval), UIDragDetectorFixEventPositionEnabledEngineFeature (upval), Current (copy), UseStateResult3 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseStateResult2_2 (copy), getSnapPosition (upval), clampItemPosition (upval), UseAnimatedBindingResult2_1 (copy), UseRefResult4 (copy), config2 (upval), UseStateResult2 (copy), UseStateResult2_3 (copy), SnapDirectionModule (upval), CaptureControlsConfigurationModule (upval), UseRefResult6 (copy)
+		if not validateRefs({ UseRefResult3, UseRefResult1 }) then return end
+		assert(UseRefResult3.current ~= nil, "dragItemRef is nil")
+		assert(UseRefResult1.current ~= nil, "dragContainerRef is nil")
 		local v1 = p2 - Vector2.new(UseGuiInsetResult.left + UseDeviceInsetsResult.left, UseGuiInsetResult.top + UseDeviceInsetsResult.top)
-		local AbsolutePosition = UseRefResult3.current.AbsolutePosition
-		local AbsoluteSize = UseRefResult3.current.AbsoluteSize
+		local AbsolutePosition = UseRefResult1.current.AbsolutePosition
+		local AbsoluteSize = UseRefResult1.current.AbsoluteSize
 		local SnapAnchorPoint, SnapAnchorPoint2 = getSnapAnchorPoint(if UIDragDetectorFixEventPositionEnabledEngineFeature then p2 else v1, AbsolutePosition, AbsoluteSize, Current)
 		local IsSnapAnchorPointBelow: boolean = SnapAnchorPoint2 < 70 or not p3
-		local AbsoluteSize1 = UseRefResult5.current.AbsoluteSize
-		local AnchorPoint = UseRefResult5.current.AnchorPoint
+		local AbsoluteSize1 = UseRefResult3.current.AbsoluteSize
+		local AnchorPoint = UseRefResult3.current.AnchorPoint
 		local IsXMatch: boolean = SnapAnchorPoint.X == 0 or SnapAnchorPoint.X == 1
 		local IsYMatch: boolean = SnapAnchorPoint.Y == 0 or SnapAnchorPoint.Y == 1
 		local Flag = false
@@ -296,7 +245,7 @@ return function(p1, Current, LastRightX, Callback)
 			UseStateResult2_2(not UseStateResult3)
 		end
 		local _Vector2 = Vector2.new(AbsoluteSize1.X * AnchorPoint.X, AbsoluteSize1.Y * AnchorPoint.Y)
-		local SnapPosition = if IsSnapAnchorPointBelow then getSnapPosition(AbsoluteSize1, AnchorPoint, AbsolutePosition, AbsoluteSize, SnapAnchorPoint, Current, LastRightX) else clampItemPosition((if UIDragDetectorFixEventPositionEnabledEngineFeature then p2 else v1) - _Vector2, AbsoluteSize1, AbsolutePosition, AbsoluteSize, Current, LastRightX)
+		local SnapPosition = if IsSnapAnchorPointBelow then getSnapPosition(AbsoluteSize1, AnchorPoint, AbsolutePosition, AbsoluteSize, SnapAnchorPoint, Current) else clampItemPosition((if UIDragDetectorFixEventPositionEnabledEngineFeature then p2 else v1) - _Vector2, AbsoluteSize1, AbsolutePosition, AbsoluteSize, Current)
 		
 		if p3 then
 			UseAnimatedBindingResult2_1({
@@ -306,7 +255,7 @@ return function(p1, Current, LastRightX, Callback)
 			
 			return
 		else
-			UseRefResult6.current = true
+			UseRefResult4.current = true
 			UseAnimatedBindingResult2_1({
 				xOffset = ReactOtterModule.ease(SnapPosition.X + _Vector2.X, config2),
 				yOffset = ReactOtterModule.ease(SnapPosition.Y + _Vector2.Y, config2)
@@ -314,38 +263,31 @@ return function(p1, Current, LastRightX, Callback)
 			UseStateResult2(SnapAnchorPoint)
 			UseStateResult2_3(if SnapAnchorPoint.X == 0 then SnapDirectionModule.Left elseif SnapAnchorPoint.X == 1 then SnapDirectionModule.Right elseif SnapAnchorPoint.Y == 0 then SnapDirectionModule.Top else SnapDirectionModule.Bottom)
 			CaptureControlsConfigurationModule.setStoredSnapAnchorPoint(SnapAnchorPoint)
-			UseRefResult8.current = SnapAnchorPoint
+			UseRefResult6.current = SnapAnchorPoint
 		end
 	end, {
-		Current, LastRightX,
+		Current,
 		if UIDragDetectorFixEventPositionEnabledEngineFeature then nil else UseDeviceInsetsResult,
 		if UIDragDetectorFixEventPositionEnabledEngineFeature then nil else UseGuiInsetResult,
 		UseStateResult3, UseAnimatedBindingResult2_1, UseAnimatedBindingResult2
 	})
 	local UseCallbackResult3 = UseCallbackFunction(function(p2)
-		-- upvalues: p1 (copy), UseStateResult1 (copy), UseRefResult2 (copy), UseCallbackResult2 (copy)
-		if not p1 or not UseStateResult1 then return end
-		if UseRefResult2 then
-			UseRefResult2.current = true
+		-- upvalues: p1 (copy), UseStateResult1 (copy), UseCallbackResult2 (copy)
+		if p1 and UseStateResult1 then
+			UseCallbackResult2(p2, true)
+			
+			return
 		end
-		UseCallbackResult2(p2, true)
 	end, { p1, UseCallbackResult2, UseStateResult1 })
 	local UseCallbackResult4 = UseCallbackFunction(function(p2)
-		-- upvalues: p1 (copy), UseStateResult1 (copy), UseCallbackResult2 (copy), UseStateResult2_1 (copy), UseRefResult2 (copy), Callback (copy)
-		if not p1 or not UseStateResult1 then return end
-		UseCallbackResult2(p2, false)
-		UseStateResult2_1(false)
-		
-		if UseRefResult2 and UseRefResult2.current and Callback then
-			UseRefResult2.current = false
-			Callback()
+		-- upvalues: p1 (copy), UseStateResult1 (copy), UseCallbackResult2 (copy), UseStateResult2_1 (copy)
+		if p1 and UseStateResult1 then
+			UseCallbackResult2(p2, false)
+			UseStateResult2_1(false)
+			
+			return
 		end
-	end, {
-		p1,
-		UseCallbackResult2,
-		UseStateResult1,
-		if UseRefResult2 then Callback else nil
-	})
+	end, { p1, UseCallbackResult2, UseStateResult1 })
 	UseEffectFunction(function()
 		-- upvalues: p1 (copy), UseRefResult (copy), Current (copy), UseCallbackResult1 (copy)
 		if not p1 then return end
@@ -354,35 +296,21 @@ return function(p1, Current, LastRightX, Callback)
 			UseCallbackResult1()
 		end
 	end, { p1, Current, UseCallbackResult1 })
-	
-	if FFlagCapturesDragAreaExpandVerticalModule then
-		UseEffectFunction(function()
-			-- upvalues: UseRefResult1 (copy), p1 (copy), LastRightX (copy), UseCallbackResult1 (copy)
-			local Current = assert(UseRefResult1, "rowStateRef is set when vertical expansion is enabled").current
-			
-			if p1 and Current.lastRightX ~= LastRightX then
-				Current.lastRightX = LastRightX
-				UseCallbackResult1()
-				
-				return
-			end
-		end, { p1, LastRightX, UseCallbackResult1 })
-	end
 	UseEffectFunction(function()
-		-- upvalues: p1 (copy), UseRefResult4 (copy), UseCallbackResult11 (copy), UseCallbackResult3 (copy), UseCallbackResult4 (copy), UseRefResult3 (copy), UseCallbackResult1 (copy), UseRefResult5 (copy)
+		-- upvalues: p1 (copy), UseRefResult2 (copy), UseCallbackResult11 (copy), UseCallbackResult3 (copy), UseCallbackResult4 (copy), UseRefResult1 (copy), UseCallbackResult1 (copy), UseRefResult3 (copy)
 		if not p1 then return end
 		local List = {}
 		
-		if UseRefResult4.current ~= nil then
-			table.insert(List, UseRefResult4.current.DragStart:Connect(UseCallbackResult11))
-			table.insert(List, UseRefResult4.current.DragContinue:Connect(UseCallbackResult3))
-			table.insert(List, UseRefResult4.current.DragEnd:Connect(UseCallbackResult4))
+		if UseRefResult2.current ~= nil then
+			table.insert(List, UseRefResult2.current.DragStart:Connect(UseCallbackResult11))
+			table.insert(List, UseRefResult2.current.DragContinue:Connect(UseCallbackResult3))
+			table.insert(List, UseRefResult2.current.DragEnd:Connect(UseCallbackResult4))
+		end
+		if UseRefResult1.current ~= nil then
+			table.insert(List, UseRefResult1.current:GetPropertyChangedSignal("AbsoluteSize"):Connect(UseCallbackResult1))
 		end
 		if UseRefResult3.current ~= nil then
 			table.insert(List, UseRefResult3.current:GetPropertyChangedSignal("AbsoluteSize"):Connect(UseCallbackResult1))
-		end
-		if UseRefResult5.current ~= nil then
-			table.insert(List, UseRefResult5.current:GetPropertyChangedSignal("AbsoluteSize"):Connect(UseCallbackResult1))
 		end
 		return function()
 			-- upvalues: List (copy)
@@ -399,13 +327,13 @@ return function(p1, Current, LastRightX, Callback)
 	})
 	
 	return {
-		dragContainerRef = UseRefResult3,
-		dragDetectorRef = UseRefResult4,
+		dragContainerRef = UseRefResult1,
+		dragDetectorRef = UseRefResult2,
 		dragItemAnchorPointBinding = UseAnimatedBindingResult,
 		dragItemPositionBinding = UseAnimatedBindingResult1,
-		dragItemRef = UseRefResult5,
+		dragItemRef = UseRefResult3,
 		isItemHorizontal = UseStateResult3,
-		screenshotButtonRef = UseRefResult7,
+		screenshotButtonRef = UseRefResult5,
 		snapDirection = UseStateResult4
 	}
 end

@@ -6,7 +6,6 @@ local ReactUtilsModule = require(Parent.ReactUtils)
 local FFlagMomentsCommentRowRedesignModule = require(Moments.Flags.FFlagMomentsCommentRowRedesign)
 local FFlagMomentsCommentRowTrailingReactionModule = require(Moments.Flags.FFlagMomentsCommentRowTrailingReaction)
 local FFlagMomentsCommentsAttachSheetScrollerModule = require(Moments.Flags.FFlagMomentsCommentsAttachSheetScroller)
-local FFlagMomentsEngagementToastsModule = require(Moments.Flags.FFlagMomentsEngagementToasts)
 local ImageWithSkeletonModule = require(Moments.Components.ImageWithSkeleton)
 local CommentActionsMenuModule = require(script.Parent.CommentActionsMenu)
 local CommentDeleteConfirmationDialogModule = require(script.Parent.CommentDeleteConfirmationDialog)
@@ -25,7 +24,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local function noop() end
 
 return function(Frame)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), CommentTranslationToggleModule (copy), FFlagMomentsCommentRowRedesignModule (copy), UseComposedRefFunction (copy), FFlagMomentsEngagementToastsModule (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), GetLineHeightsModule (copy), FFlagMomentsCommentRowTrailingReactionModule (copy), FFlagMomentsCommentsAttachSheetScrollerModule (copy), FoundationModule (copy), CommentRowHighlightModule (copy), noop (copy), StateLayerAffordance (copy), ImageWithSkeletonModule (copy), Radius (copy), CommentReactionButtonModule (copy), CommentActionsMenuModule (copy), CommentDeleteConfirmationDialogModule (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), CommentTranslationToggleModule (copy), FFlagMomentsCommentRowRedesignModule (copy), UseComposedRefFunction (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), GetLineHeightsModule (copy), FFlagMomentsCommentRowTrailingReactionModule (copy), FFlagMomentsCommentsAttachSheetScrollerModule (copy), FoundationModule (copy), CommentRowHighlightModule (copy), noop (copy), StateLayerAffordance (copy), ImageWithSkeletonModule (copy), Radius (copy), CommentReactionButtonModule (copy), CommentActionsMenuModule (copy), CommentDeleteConfirmationDialogModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local ActionsMenu = Frame.actionsMenu
 	local DeleteConfirmation = Frame.deleteConfirmation
@@ -44,12 +43,6 @@ return function(Frame)
 		-- upvalues: UseStateResult (copy)
 		return { current = UseStateResult }
 	end, { UseStateResult })
-	local Active = if ActionsMenu == nil or not HasAnchorRef then nil elseif ActionsMenu.isOpen then "Active" elseif Frame.isLongPressCharging then "Charging" else "Idle"
-	local IsIsPinned: boolean = FFlagMomentsEngagementToastsModule and Frame.isPinned == true
-	
-	if IsIsPinned and Active == nil then
-		Active = "Idle"
-	end
 	local RbxThumb = if Frame.avatarUserId == nil then nil else GetRbxThumbFunction(ThumbnailType.AvatarHeadShot, Frame.avatarUserId, ThumbnailSize.Medium)
 	local LineHeightsModule = GetLineHeightsModule(if FFlagMomentsCommentRowRedesignModule then UseTokensResult.Typography.TitleMedium else UseTokensResult.Typography.TitleSmall)
 	local NoHasAnchorRef1: boolean = FFlagMomentsCommentRowTrailingReactionModule and (NoHasAnchorRef or Frame.showReactionControl == true)
@@ -78,10 +71,9 @@ return function(Frame)
 		GroupTransparency = Frame.GroupTransparency,
 		testId = `moments-comment-row-{Frame.commentId}`
 	}, {
-		Highlight = if Active == nil then nil else ReactModule.createElement(CommentRowHighlightModule, {
+		Highlight = if ActionsMenu == nil or not HasAnchorRef then nil else ReactModule.createElement(CommentRowHighlightModule, {
 			commentId = Frame.commentId,
-			phase = Active,
-			restStyle = if IsIsPinned then UseTokensResult.Color.Shift.Shift_100 else nil
+			phase = if ActionsMenu.isOpen then "Active" elseif Frame.isLongPressCharging then "Charging" else "Idle"
 		}),
 		Content = ReactModule.createElement(FoundationModule.View, {
 			tag = {
@@ -234,7 +226,7 @@ return function(Frame)
 					})
 				}) else nil
 			}),
-			ActionsMenu = if FFlagMomentsCommentRowTrailingReactionModule or ActionsMenu == nil or HasAnchorRef then nil else ReactModule.createElement(CommentActionsMenuModule, {
+			ActionsMenu = if FFlagMomentsCommentRowTrailingReactionModule or (ActionsMenu == nil or HasAnchorRef) then nil else ReactModule.createElement(CommentActionsMenuModule, {
 				LayoutOrder = 3,
 				commentId = Frame.commentId,
 				items = ActionsMenu.items,

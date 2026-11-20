@@ -38,15 +38,11 @@ local UseLatestCaptureModule = require(Parent.Hooks.useLatestCapture)
 local UseSystemMenuDetectionModule = require(Parent.Hooks.useSystemMenuDetection)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local UseTopbarInsetModule = require(Parent.Hooks.useTopbarInset)
-local UseScreenSizeFunction = require(Parent1.RobloxAppHooks).useScreenSize
 local DebugOverrideCaptureControlsVideoGuacPolicy = game:DefineFastFlag("DebugOverrideCaptureControlsVideoGuacPolicy", false)
 local FStringSocialCaptureIXPLayer = require(Parent1.SharedFlags).FStringSocialCaptureIXPLayer
 local FFlagKeepSideSheetOpenBesideMenu = require(Parent1.SharedFlags).FFlagKeepSideSheetOpenBesideMenu
 local FFlagCapturesControlsUseBuilderIconsModule = require(Parent.Flags.FFlagCapturesControlsUseBuilderIcons)
 local FFlagCapturesControlsGalleryButtonModule = require(Parent.Flags.FFlagCapturesControlsGalleryButton)
-local FFlagCapturesDragAreaExpandHorizontalModule = require(Parent.Flags.FFlagCapturesDragAreaExpandHorizontal)
-local FFlagCapturesDragAreaExpandVerticalModule = require(Parent.Flags.FFlagCapturesDragAreaExpandVertical)
-local FFlagCapturesEntrypointDraggedEventModule = require(Parent.Flags.FFlagCapturesEntrypointDraggedEvent)
 local FrameCameraCenter = if FFlagCapturesControlsUseBuilderIconsModule then IconName.FrameCameraCenter else "icons/controls/screenCapture"
 local Large = if FFlagCapturesControlsUseBuilderIconsModule then IconSize.Large else nil
 local config = {
@@ -62,7 +58,7 @@ return (CapturesPolicyModule.connect(function(p1)
 		hasVideoCaptureCapability = p1.hasVideoCaptureCapability() and CaptureService:CanCaptureVideo() or DebugOverrideCaptureControlsVideoGuacPolicy
 	}
 end)(function(p1)
-	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), FFlagCapturesControlsGalleryButtonModule (copy), UseTokensFunction (copy), ReactModule (copy), CapturesContextModule (copy), UseSystemMenuDetectionModule (copy), UseLatestCaptureModule (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseTopbarInsetModule (copy), UseEffectFunction (copy), IXPServiceWrapper (copy), FStringSocialCaptureIXPLayer (copy), UsePlayShutterSoundModule (copy), FFlagCapturesDragAreaExpandHorizontalModule (copy), FFlagCapturesDragAreaExpandVerticalModule (copy), UseScreenSizeFunction (copy), FFlagCapturesEntrypointDraggedEventModule (copy), EventNamesModule (copy), UseCaptureControlsControllerModule (copy), UseCallbackFunction (copy), SocialStopwatchModule (copy), TakeCaptureModule (copy), GetLatestCaptureStoreModule (copy), FindCaptureIndexModule (copy), CarouselOpenedModule (copy), GalleryButtonContentModule (copy), View (copy), FFlagKeepSideSheetOpenBesideMenu (copy), FoundationModule (copy), VideoCaptureControlModule (copy), config (copy), Tooltip (copy), PopoverAlign (copy), Icon (copy), FrameCameraCenter (copy), Large (copy), VoiceChatIndicatorModule (copy), FFlagCapturesControlsUseBuilderIconsModule (copy), IconName (copy), Image (copy)
+	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), FFlagCapturesControlsGalleryButtonModule (copy), UseTokensFunction (copy), ReactModule (copy), CapturesContextModule (copy), UseSystemMenuDetectionModule (copy), UseLatestCaptureModule (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseTopbarInsetModule (copy), UseEffectFunction (copy), IXPServiceWrapper (copy), FStringSocialCaptureIXPLayer (copy), UsePlayShutterSoundModule (copy), UseCaptureControlsControllerModule (copy), EventNamesModule (copy), UseCallbackFunction (copy), SocialStopwatchModule (copy), TakeCaptureModule (copy), GetLatestCaptureStoreModule (copy), FindCaptureIndexModule (copy), CarouselOpenedModule (copy), GalleryButtonContentModule (copy), View (copy), FFlagKeepSideSheetOpenBesideMenu (copy), FoundationModule (copy), VideoCaptureControlModule (copy), config (copy), Tooltip (copy), PopoverAlign (copy), Icon (copy), FrameCameraCenter (copy), Large (copy), VoiceChatIndicatorModule (copy), FFlagCapturesControlsUseBuilderIconsModule (copy), IconName (copy), Image (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -93,21 +89,10 @@ end)(function(p1)
 		end
 	end, { UseSelectorResult1 })
 	local UsePlayShutterSoundModuleResult = UsePlayShutterSoundModule()
-	local UseScreenSizeResult = if FFlagCapturesDragAreaExpandVerticalModule then UseScreenSizeFunction() else nil
-	local UseCaptureControlsControllerModuleResult = UseCaptureControlsControllerModule(UseSelectorResult1, ReactModule.useMemo(function(): Vector2
-		-- upvalues: UseTopbarInsetModuleResult (copy), UseTokensResult (copy), FFlagCapturesDragAreaExpandHorizontalModule (upval)
-		return Vector2.new(UseTopbarInsetModuleResult.Min.X - UseTokensResult.Padding.Small + (if FFlagCapturesDragAreaExpandHorizontalModule then UseTokensResult.Padding.Large else 0), UseTopbarInsetModuleResult.Height - UseTokensResult.Padding.XSmall - UseTokensResult.Padding.XXSmall)
-	end, { UseTopbarInsetModuleResult, UseTokensResult }), if FFlagCapturesDragAreaExpandVerticalModule then ReactModule.useMemo(function()
-		-- upvalues: UseScreenSizeResult (copy), UseTopbarInsetModuleResult (copy), UseTokensResult (copy), FFlagCapturesDragAreaExpandHorizontalModule (upval)
-		return if UseScreenSizeResult == nil or UseScreenSizeResult.X <= UseTopbarInsetModuleResult.Max.X then nil else UseTopbarInsetModuleResult.Max.X + UseTokensResult.Padding.Small - UseTokensResult.Padding.Large - (if FFlagCapturesDragAreaExpandHorizontalModule then 0 else UseTokensResult.Padding.Large)
-	end, {
-		UseTopbarInsetModuleResult,
-		UseTokensResult,
-		UseScreenSizeResult
-	}) else nil, if FFlagCapturesEntrypointDraggedEventModule then ReactModule.useCallback(function()
-		-- upvalues: UseAnalyticsModuleResult (copy), EventNamesModule (upval)
-		UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesEntrypointDragged)
-	end, { UseAnalyticsModuleResult.fireEvent }) else nil)
+	local UseCaptureControlsControllerModuleResult = UseCaptureControlsControllerModule(UseSelectorResult1, (ReactModule.useMemo(function(): Vector2
+		-- upvalues: UseTopbarInsetModuleResult (copy), UseTokensResult (copy)
+		return Vector2.new(UseTopbarInsetModuleResult.Min.X - UseTokensResult.Padding.Small, UseTopbarInsetModuleResult.Height - UseTokensResult.Padding.XSmall - UseTokensResult.Padding.XXSmall)
+	end, { UseTopbarInsetModuleResult, UseTokensResult })))
 	local DragContainerRef = UseCaptureControlsControllerModuleResult.dragContainerRef
 	local DragDetectorRef = UseCaptureControlsControllerModuleResult.dragDetectorRef
 	local DragItemAnchorPointBinding = UseCaptureControlsControllerModuleResult.dragItemAnchorPointBinding
@@ -152,10 +137,10 @@ end)(function(p1)
 	local Element = if FFlagCapturesControlsGalleryButtonModule then ReactModule.createElement(GalleryButtonContentModule, { latestCapture = UseLatestCaptureModuleResult }) else nil
 	
 	return ReactModule.createElement(View, {
+		tag = "padding-x-large padding-y-medium",
 		Position = UDim2.fromOffset(0, -UseTopbarInsetModuleResult.Height),
 		Size = UDim2.new(1, 0, 1, UseTopbarInsetModuleResult.Height),
 		Visible = (not FFlagKeepSideSheetOpenBesideMenu or not p1.isHidden or UseSelectorResult2) and nil,
-		tag = if FFlagCapturesDragAreaExpandHorizontalModule then { ["padding-y-medium"] = true } else "padding-x-large padding-y-medium",
 		ZIndex = ConstantsModule.ZIndex.Entrypoint
 	}, {
 		PaddedContainer = ReactModule.createElement(View, {

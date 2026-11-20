@@ -92,5 +92,12 @@ return {
 		backends = { LoggingProtocolModule.TelemetryBackends.Points },
 		lastUpdated = { 2026, 5, 1 },
 		throttlingPercentage = RobloxSubscriptionUpsellTelemetryEventIngestThrottleHundredthsPercent
+	},
+	RobloxSubscriptionTTSheetCopyMissingCounter = {
+		eventName = "RobloxSubscriptionTTSheetCopyMissingCounter",
+		description = "Counter fired when the TT claim sheet stops waiting for campaign strings without all of them.",
+		backends = { LoggingProtocolModule.TelemetryBackends.Counter },
+		lastUpdated = { 2026, 11, 19 },
+		throttlingPercentage = RobloxSubscriptionUpsellTelemetryEventIngestThrottleHundredthsPercent
 	}
 }
