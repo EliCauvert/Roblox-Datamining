@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "0b4c7a04-9857-f07d-e0db-e8be949dd353")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "d36ca0cd-6ac3-9444-8ae8-2fcffd7b610c")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 570098, (t, e, r) => {
@@ -915,12 +915,18 @@
     t.s(["f", 0, e])
 }, 494192, t => {
     "use strict";
-    let e = (0, t.i(157700).e)({
-        namespace: "preset-chat",
-        name: "presetChatEnabled",
-        defaultValue: !1
-    });
-    t.s(["f", 0, e])
+    var e = t.i(157700);
+    let r = (0, e.e)({
+            namespace: "preset-chat",
+            name: "presetChatEnabled",
+            defaultValue: !1
+        }),
+        n = (0, e.e)({
+            namespace: "preset-chat",
+            name: "presetChatViolationReasonsEnabled",
+            defaultValue: !1
+        });
+    t.s(["g", 0, r, "Y", 0, n])
 }, 401263, 884213, t => {
     "use strict";
     var e = t.i(643766);
@@ -1157,7 +1163,7 @@
     t.s(["f", 0, i])
 }, 761084, t => {
     "use strict";
-    let e = "".concat("https://assets.create.roblox.com/ac5adf02bced7a5b5d67d1642bfb55cdcde0ab67/assets", "/common"),
+    let e = "".concat("https://assets.create.roblox.com/a71010135227b76988daa505e377b93703005aa7/assets", "/common"),
         r = "".concat(e, "/error.png"),
         n = "".concat(e, "/maintenance_page.jpg");
     t.s(["v", 0, e, "z", 0, "376", "o", 0, r, "V", 0, n])
@@ -1202,5 +1208,5 @@
     t.s(["f", () => e.u])
 }]);
 
-//# debugId=0b4c7a04-9857-f07d-e0db-e8be949dd353
-//# sourceMappingURL=3z7wsptfllag9.js.map
+//# debugId=d36ca0cd-6ac3-9444-8ae8-2fcffd7b610c
+//# sourceMappingURL=1a5gk-xq_2z7j.js.map

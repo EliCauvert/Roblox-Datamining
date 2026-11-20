@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "f7d6646a-feef-7b79-ba34-56d9a6c2ac8a")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "4ed267fa-d94a-4ebf-5c34-3db13c5c729f")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 730530, e => {
@@ -56,8 +56,8 @@
         g = "".concat((0, o.H)("global"), "/docs/projects/assets/privacy"),
         u = "".concat((0, o.H)("global"), "/docs/projects/assets/draft-status"),
         p = "".concat((0, o.H)("global"), "/docs/parts/models#distribute-models"),
-        b = "".concat((0, o.H)("global"), "/docs/art/marketplace/publishing-to-marketplace#sale-location"),
-        m = "".concat((0, o.H)("global"), "/docs/production/monetization/subscriptions#creating-subscriptions"),
+        m = "".concat((0, o.H)("global"), "/docs/art/marketplace/publishing-to-marketplace#sale-location"),
+        b = "".concat((0, o.H)("global"), "/docs/production/monetization/subscriptions#creating-subscriptions"),
         U = "".concat((0, o.H)("global"), "/docs/production/game-design/subscription-design#bundles"),
         A = "".concat((0, o.H)("global"), "/docs/production/monetization/subscriptions#earning-with-subscriptions"),
         h = (0, o.h)("robloxCommunityStandardsUrl", "production", "global"),
@@ -65,12 +65,12 @@
         v = "".concat((0, o.H)("global"), "/docs/art/marketplace/marketplace-fees-and-commissions#publishing-advance"),
         f = "".concat((0, o.H)("global"), "/docs/production/publishing/account-verification");
     (0, o.H)("global"), (0, o.H)("global");
-    let P = (0, o.h)("ugcSubscriptionTermsOfUseUrl", "production", "global"),
-        L = (0, o.h)("robloxTermsOfUseUrl", "production", "global"),
+    let L = (0, o.h)("ugcSubscriptionTermsOfUseUrl", "production", "global"),
+        P = (0, o.h)("robloxTermsOfUseUrl", "production", "global"),
         x = (0, o.h)("advertisingStandardsUrl", "production", "global"),
         C = "".concat((0, o.H)("global"), "/docs/production/publishing/account-verification"),
         S = "".concat((0, o.H)("global"), "/docs/production/monetization/avatar-creation-token");
-    e.s(["F", 0, C, "U", 0, g, "L", 0, u, "j", 0, c, "M", 0, f, "Y", 0, s, "Z", 0, p, "e", 0, n, "P", 0, y, "T", 0, "https://about.roblox.com/newsroom/2025/09/roblox-moments-user-generated-discovery", "q", 0, i, "I", 0, l, "G", 0, v, "k", 0, d, "K", 0, x, "v", 0, h, "V", 0, L, "i", 0, b, "W", 0, A, "l", 0, U, "d", 0, m, "x", 0, P, "X", 0, S], 253536);
+    e.s(["F", 0, C, "U", 0, g, "L", 0, u, "j", 0, c, "M", 0, f, "Y", 0, s, "Z", 0, p, "e", 0, n, "P", 0, y, "T", 0, "https://about.roblox.com/newsroom/2025/09/roblox-moments-user-generated-discovery", "q", 0, i, "I", 0, l, "G", 0, v, "k", 0, d, "K", 0, x, "v", 0, h, "V", 0, P, "i", 0, m, "W", 0, A, "l", 0, U, "d", 0, b, "x", 0, L, "X", 0, S], 253536);
     let E = {
             [t.f.Place]: r.U.Game,
             [t.f.SharedExperiences]: r.U.Game,
@@ -418,8 +418,8 @@
             [r.U.Badge]: c,
             [r.U.DeveloperProduct]: s,
             [r.U.GamePass]: i,
-            [r.U.CatalogAsset]: b,
-            [r.U.ExperienceSubscription]: m,
+            [r.U.CatalogAsset]: m,
+            [r.U.ExperienceSubscription]: b,
             [r.U.AvatarCreationToken]: S,
             [r.U.Look]: void 0
         };
@@ -702,7 +702,7 @@
         getAnalyticsMonetizationARPPUGuideUrl: () => "".concat(n, "/production/analytics/monetization#improving-average-revenue-per-paying-user-arppu"),
         getAnalyticsFilterByMetricsGuideUrl: () => "".concat(n, "/production/analytics/analytics-dashboard#filter-by-metrics"),
         getAnalyticsEventTypesUrl: () => "".concat(n, "/production/analytics/event-types"),
-        getChatGuidelinesUrl: () => "".concat(n, "/chat/guidelines"),
+        getTemporaryLimitsUrl: () => "".concat(n, "/ui/temporary-limits"),
         getDiscoveryUrl: () => "".concat(n, "/discovery"),
         getDiscoveryBestPracticesUrl: () => "".concat(n, "/discovery#best-practices-for-discovery"),
         getDiscoveryRecommendationUrl: () => "".concat(n, "/discovery#how-recommendation-works"),
@@ -733,6 +733,7 @@
         getExperimentationEarlyHarmMetricsUrl: () => "".concat(n, "/production/experiments#early-harm-metrics"),
         getExperimentationEarlyHarmThresholdsUrl: () => "".concat(n, "/production/experiments#early-harm-thresholds"),
         getExperimentationSrmUrl: () => "".concat(n, "/production/experiments#sample-ratio-mismatch"),
+        getExperimentationTargetedValuesUrl: () => "".concat(n, "/production/experiments#how-roblox-resolves-targeted-values"),
         getReleaseNotesUrl: e => "".concat(n, "/release-notes/release-notes-").concat(e),
         getProductIntelligenceApisUrl: () => "".concat(n, "/production/monetization/developer-products#personalize-your-in-experience-store")
     }, "getDataCollectionSettingsUrl", 0, function(e, a) {
@@ -752,5 +753,5 @@
     }, "getGroupRoleUrl", 0, e => "/dashboard/group/roles/".concat(e), "getRoadmapUrl", 0, () => "/roadmap", "getUrl", 0, () => "/"])
 }]);
 
-//# debugId=f7d6646a-feef-7b79-ba34-56d9a6c2ac8a
-//# sourceMappingURL=3-of-51f8e6r3.js.map
+//# debugId=4ed267fa-d94a-4ebf-5c34-3db13c5c729f
+//# sourceMappingURL=23336g9ye65f_.js.map

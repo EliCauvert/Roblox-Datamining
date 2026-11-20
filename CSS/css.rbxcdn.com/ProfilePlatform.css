@@ -1534,6 +1534,10 @@
     white-space: pre-line
 }
 
+.description-content-full {
+    overflow-wrap: break-word
+}
+
 .profile-transparent-input [data-testid=text-input-container],
 .profile-transparent-input [data-testid=text-input-wrapper],
 .profile-transparent-input [data-testid=text-input-container] input,

@@ -1,0 +1,145 @@
+.light-theme .buy-robux-section-header {
+    color: var(--color-extended-gray-900)
+}
+
+.dark-theme .buy-robux-section-header {
+    color: var(--color-extended-white-100)
+}
+
+@keyframes robux-hydration-bar-in {
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes robux-hydration-bar-slide {
+    0% {
+        transform: translate(-120%)
+    }
+
+    to {
+        transform: translate(350%)
+    }
+}
+
+#robux-hydration-bar {
+    z-index: 2000;
+    pointer-events: none;
+    background: var(--color-action-emphasis-background, #335fff);
+    opacity: 0;
+    height: 4px;
+    animation: .2s .3s forwards robux-hydration-bar-in;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden
+}
+
+#robux-hydration-bar:before {
+    content: "";
+    background: #ffffff73;
+    width: 35%;
+    height: 100%;
+    animation: 1.1s ease-in-out infinite robux-hydration-bar-slide;
+    display: block
+}
+
+@keyframes robux-early-click-spin {
+    to {
+        transform: rotate(360deg)
+    }
+}
+
+#robux-redesign-page [data-early-click][data-pending] :is(button, a) {
+    position: relative
+}
+
+#robux-redesign-page [data-early-click][data-pending] :is(button, a)>* {
+    visibility: hidden
+}
+
+#robux-redesign-page [data-early-click][data-pending] :is(button, a):after {
+    content: "";
+    border: 2px solid;
+    border-right-color: #0000;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    margin: -8px 0 0 -8px;
+    animation: .7s linear infinite robux-early-click-spin;
+    position: absolute;
+    top: 50%;
+    left: 50%
+}
+
+body {
+    width: 100%;
+    min-width: 320px;
+    height: 100%;
+    margin: 0 0 168px;
+    font-family: Builder Sans, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    overflow-y: scroll
+}
+
+body.no-footer {
+    margin-bottom: 0
+}
+
+body.no-footer .container-main {
+    padding-bottom: 0
+}
+
+@media (max-width:991px) {
+    body {
+        margin-bottom: 0
+    }
+}
+
+@media (max-width:767px) {
+    body {
+        font-size: 12px;
+        font-weight: 400
+    }
+}
+
+*,
+:before,
+:after {
+    box-sizing: border-box;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none
+}
+
+a.text-link {
+    color: var(--color-content-emphasis)
+}
+
+a.text-link:hover {
+    text-decoration: underline
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin: 0;
+    padding: 5px 0
+}
+
+.dark-theme,
+.light-theme {
+    background-color: var(--color-surface-0);
+    color: var(--color-content-emphasis)
+}
+
+/*# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/0x4udc_67f8wi.css.map*/
