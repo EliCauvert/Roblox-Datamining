@@ -2045,6 +2045,8 @@ Roblox.LangDynamic["Feature.AccountSettings"] = {
     "Description.ParentSide.MomentsUsage": "Set a daily limit on the time your child spends in the Moments tab.",
     "Description.RequestMomentsUsageLimitUpdate": "To change your Moments time limit, you need parent permission.",
     "Label.MomentsUsageSetting": "Moments time limit",
-    "Heading.MomentsUsageSetting": "Moments time limit"
+    "Heading.MomentsUsageSetting": "Moments time limit",
+    "Description.PrivacyRequestsParentEmail": "Privacy request emails will be sent to this verified parental recovery email.",
+    "Description.PrivacyRequestsAddParentEmail": "Add and verify a parent or guardian’s email before making a privacy request."
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.AccountSettings");

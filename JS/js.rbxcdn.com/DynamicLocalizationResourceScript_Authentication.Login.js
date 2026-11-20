@@ -214,6 +214,7 @@ Roblox.LangDynamic["Authentication.Login"] = {
     "Message.UnexpectedSSOError": "An unexpected error occurred. Go back to {startTag}roblox.com{endTag}.",
     "Message.GenericSsoError": "Close this window, then try signing in again from where you started.",
     "Header.SomethingWentWrong": "Something went wrong",
-    "Heading.EnterYourEmail": "Enter your email"
+    "Heading.EnterYourEmail": "Enter your email",
+    "Label.DontHaveARobloxAccountCreateOne": "Don't have a Roblox account? {startTag}Create one{endTag}"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Authentication.Login");
