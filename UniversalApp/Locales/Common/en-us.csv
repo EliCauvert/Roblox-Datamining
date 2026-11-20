@@ -2686,6 +2686,8 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,All games
 Feature.Build.Label.AmountAvailable,{AMOUNT} available
+Feature.Build.Label.AttachmentCountPlural,{count} attachments
+Feature.Build.Label.AttachmentCountSingular,1 attachment
 Feature.Build.Label.Autosaved,Auto-saved
 Feature.Build.Label.Available,available
 Feature.Build.Label.AvailableForPurchase,Available to buy
@@ -2705,6 +2707,7 @@ Feature.Build.Label.DefaultDeveloperProductName,developer product
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,Deleted
 Feature.Build.Label.DescribeIdea,Describe an idea
+Feature.Build.Label.DescribeIdeaOrPick,Describe an idea or pick one below
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,Description: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Name: {NAME}
@@ -4131,6 +4134,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Notifications turned on for {ex
 Feature.GameJoin.Description.DifferentServer,You'll start in a different server
 Feature.GameJoin.Label.PlayTogether,You can play together
 Feature.GameJoin.Label.PlayTogetherSoon,You can play together soon
+Feature.GameJoin.Label.RecentCoplay,You played together recently
 Feature.GamePage.Action.BackToTop,Back to top
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,

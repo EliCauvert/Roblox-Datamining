@@ -2678,6 +2678,8 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,Wszystkie gry
 Feature.Build.Label.AmountAvailable,Dostępne {AMOUNT}
+Feature.Build.Label.AttachmentCountPlural,Liczba załączników: {count}
+Feature.Build.Label.AttachmentCountSingular,1 załącznik
 Feature.Build.Label.Autosaved,Zapisano automatycznie
 Feature.Build.Label.Available,dostępne
 Feature.Build.Label.AvailableForPurchase,Dostępny do zakupu
@@ -2721,6 +2723,7 @@ Feature.Build.Label.IconThumbnails,Ikona i miniatury
 Feature.Build.Label.Images2D,Obrazy 2D
 Feature.Build.Label.InProgress,W toku
 Feature.Build.Label.InputNeeded,Wymagane wprowadzenie
+Feature.Build.Label.InspirationTab,Inspiracje
 Feature.Build.Label.InternalSpec,Specyfikacja wewnętrzna
 Feature.Build.Label.InternalTesting,Testowanie wewnętrzne
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -3588,11 +3591,29 @@ Feature.Chat.RobloxConnectUnavailableWithUser,Korzystanie z funkcji Roblox Conne
 Feature.Chat.Text.NoFriends,Nie masz jeszcze dodanych żadnych znajomych. Na początek wyszukaj i dodaj znajomych na Robloxie.
 Feature.Chat.Title.NewChat,Nowy czat
 Feature.Chat.Toast.Error.InvalidUserSelected,Nie można dodać co najmniej jednej osoby z tej listy
+Feature.CloudClient.Action.JoinWithoutCloudPlay,Dołącz bez Cloud Play
 Feature.CloudClient.Action.PlayWithoutCloudPlay,Graj bez Cloud Play
 Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play uruchamia grę na komputerach Robloxa, dzięki czemu może ona szybciej się ładować i rzadziej się zawieszać. Działa tylko wtedy, gdy grasz w tę grę."
+Feature.CloudClient.Description.CloudPlayStopped,"Dołącz ponownie do gry, aby dalej grać bez Cloud Play."
+Feature.CloudClient.Description.RobloxRealityPreview,Funkcja Restyle jest dostępna we wczesnym podglądzie. Elementy mogą wyglądać inaczej niż w oryginalnej grze.
+Feature.CloudClient.Description.RobloxRealityThanks,"Dziękujemy, że jesteś jedną z pierwszych osób, które to wypróbowały."
 Feature.CloudClient.Heading.CloudPlayOffer,Graj z Cloud Play
+Feature.CloudClient.Heading.CloudPlayStopped,Cloud Play przestał działać
+Feature.CloudClient.Heading.RobloxRealityFailed,Coś poszło nie tak z funkcją Restyle
+Feature.CloudClient.Heading.RobloxRealityTimeEnded,Twój czas w Restyle dobiegł końca
+Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Funkcja przechwytywania nie jest jeszcze dostępna w usłudze Cloud Play.
+Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Funkcja przechwytywania nie jest jeszcze dostępna w usłudze Restyle.
+Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Play nie działa. Grasz w trybie zwykłym.
+Feature.CloudClient.Label.RobloxReality,Restyle
+Feature.CloudClient.Label.RobloxRealityDemoLength,Wypróbuj {minutes}-minutowe demo
+Feature.CloudClient.Label.RobloxRealityEndingSoon,"Funkcja Restyle wyłączy się za 1 minutę, a Ty opuścisz grę."
 Feature.CloudClient.Label.RobloxRealityGraphics,Twoja gra w nowej odsłonie
 Feature.CloudClient.Label.RobloxRealityPlusOnly,Tylko dla subskrybentów Plus
+Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,Widok własny nie jest jeszcze dostępny w Cloud Play.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,Funkcja podglądu własnego obrazu nie jest jeszcze dostępna w usłudze Restyle.
+Feature.CloudClient.Label.StillWeakConnection,Twoje połączenie jest nadal słabe.
+Feature.CloudClient.Label.TimeLeft,
+Feature.CloudClient.Label.WeakConnection,Słabe połączenie.
 Feature.CommunityLinks.Description.CommunityDefault,"Dołącz do oficjalnej społeczności Guilded, aby móc wyświetlać w projekcie {experienceName} ogłoszenia i nie tylko!"
 Feature.CommunityLinks.Heading.CommunityTitle,Dołącz do społeczności
 Feature.CommunityLinks.Label.ViewButton,
@@ -4094,6 +4115,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Włączono powiadomienia dotycz
 Feature.GameJoin.Description.DifferentServer,Rozpoczniesz na innym serwerze
 Feature.GameJoin.Label.PlayTogether,Możecie grać razem
 Feature.GameJoin.Label.PlayTogetherSoon,Wkrótce będziecie mogli grać razem
+Feature.GameJoin.Label.RecentCoplay,Niedawno graliście razem
 Feature.GamePage.Action.BackToTop,Powrót na górę strony
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
@@ -5745,6 +5767,7 @@ Feature.Toast.Username.Copied,Nazwa użytkownika została skopiowana do schowka.
 Feature.Toast.VoteError.AssetNotVoteable,Na ten projekt nie można głosować.
 Feature.Toast.VoteError.Default,Akcja niedostępna.
 Feature.Toast.VoteError.FloodCheckThresholdMet,Głosujesz zbyt szybko.
+Feature.Toast.VoteError.NotSaved,Głos nie został zapisany
 Feature.Toast.VoteError.PlayGame,"Aby ocenić ten projekt, najpierw go odwiedź."
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,"W tej chwili nie możesz zweryfikować swojego wieku, ponieważ wielokrotnie naruszyłeś(-aś) nasze Standardy społeczności. Możesz spróbować ponownie, gdy ograniczenie przestanie obowiązywać."
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,Weryfikacja wieku zawieszona

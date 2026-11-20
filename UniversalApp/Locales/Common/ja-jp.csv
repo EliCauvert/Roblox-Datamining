@@ -2678,6 +2678,8 @@ Feature.Build.Label.AdvancedModel,詳細選択
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,すべてのゲーム
 Feature.Build.Label.AmountAvailable,残り{AMOUNT}
+Feature.Build.Label.AttachmentCountPlural,{count}件のアタッチメント
+Feature.Build.Label.AttachmentCountSingular,1件のアタッチメント
 Feature.Build.Label.Autosaved,自動保存済み
 Feature.Build.Label.Available,利用可能
 Feature.Build.Label.AvailableForPurchase,購入可能
@@ -2721,6 +2723,7 @@ Feature.Build.Label.IconThumbnails,アイコンとサムネイル
 Feature.Build.Label.Images2D,2D画像
 Feature.Build.Label.InProgress,進行中
 Feature.Build.Label.InputNeeded,入力が必要です
+Feature.Build.Label.InspirationTab,着想
 Feature.Build.Label.InternalSpec,内部仕様
 Feature.Build.Label.InternalTesting,内部テスト
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -3588,11 +3591,29 @@ Feature.Chat.RobloxConnectUnavailableWithUser,現在、このユーザーはRobl
 Feature.Chat.Text.NoFriends,まだ友達を追加していません。始めるには、友達を見つけてRobloxに追加してください。
 Feature.Chat.Title.NewChat,新規チャット
 Feature.Chat.Toast.Error.InvalidUserSelected,このリストに追加できない人が1人以上います
+Feature.CloudClient.Action.JoinWithoutCloudPlay,Cloud Playを使わずに参加
 Feature.CloudClient.Action.PlayWithoutCloudPlay,Cloud Playを使わずにプレイ
 Feature.CloudClient.Description.CloudPlayOffer,Cloud Playは、Robloxのコンピューターでゲームを実行するため、読み込みが速くなり、クラッシュしづらくなる可能性があります。このゲームをプレイしている間のみ有効です。
+Feature.CloudClient.Description.CloudPlayStopped,ゲームに再参加して、Cloud Playを使わずにプレイを続けてください。
+Feature.CloudClient.Description.RobloxRealityPreview,Restyleは初期プレビュー版です。実際のゲームとは異なる可能性があります。
+Feature.CloudClient.Description.RobloxRealityThanks,早期に試していただきありがとうございます。
 Feature.CloudClient.Heading.CloudPlayOffer,Cloud Playを使ってプレイ
+Feature.CloudClient.Heading.CloudPlayStopped,Cloud Playが動作しなくなりました
+Feature.CloudClient.Heading.RobloxRealityFailed,Restyleで問題が発生しました
+Feature.CloudClient.Heading.RobloxRealityTimeEnded,Restyleの利用時間は終了しました
+Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Cloud Playでは、現時点では切り抜き機能は利用できません。
+Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Restyleでは、現時点では切り抜き機能は利用できません。
+Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Playが動作していません。通常通りプレイしています。
+Feature.CloudClient.Label.RobloxReality,Restyle
+Feature.CloudClient.Label.RobloxRealityDemoLength,{minutes}分間のデモを試す
+Feature.CloudClient.Label.RobloxRealityEndingSoon,Restyleは1分後に終了し、ゲームから退出することになります。
 Feature.CloudClient.Label.RobloxRealityGraphics,ゲームを刷新しませんか？
 Feature.CloudClient.Label.RobloxRealityPlusOnly,Plus会員限定
+Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,セルフビューは、現時点ではCloud Playで利用できません。
+Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,セルフビューは、現時点ではRestyleで利用できません。
+Feature.CloudClient.Label.StillWeakConnection,通信状態が今も不安定です。
+Feature.CloudClient.Label.TimeLeft,
+Feature.CloudClient.Label.WeakConnection,通信状態が不安定です。
 Feature.CommunityLinks.Description.CommunityDefault,告知などを表示するには、 {experienceName} の公式 Guilded（ギルデッド）コミュニティに参加してください！
 Feature.CommunityLinks.Heading.CommunityTitle,コミュニティに参加する
 Feature.CommunityLinks.Label.ViewButton,
@@ -4094,6 +4115,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,{experienceName} の通知を�
 Feature.GameJoin.Description.DifferentServer,別のサーバーで開始します
 Feature.GameJoin.Label.PlayTogether,一緒にプレイできます
 Feature.GameJoin.Label.PlayTogetherSoon,もうすぐ一緒にプレイできるようになります
+Feature.GameJoin.Label.RecentCoplay,最近一緒にプレイしました
 Feature.GamePage.Action.BackToTop,トップに戻る
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
@@ -5743,6 +5765,7 @@ Feature.Toast.Username.Copied,ユーザーネームをクリップボードに�
 Feature.Toast.VoteError.AssetNotVoteable,バーチャル空間には投票できません。
 Feature.Toast.VoteError.Default,動作が利用できません。
 Feature.Toast.VoteError.FloodCheckThresholdMet,頻繁に投票しすぎです。
+Feature.Toast.VoteError.NotSaved,投票は保存されませんでした
 Feature.Toast.VoteError.PlayGame,評価する前に、このバーチャル空間に行くことが必須です。
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,当社のコミュニティ基準に繰り返し違反したため、現在、年齢チェックを利用できません。制限が解除された後、もう一度お試しください。
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,年齢チェックの利用停止

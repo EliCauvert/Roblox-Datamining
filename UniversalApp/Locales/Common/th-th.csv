@@ -2661,6 +2661,8 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,เกมทั้งหมด
 Feature.Build.Label.AmountAvailable,พร้อมใช้งาน {AMOUNT} ครั้ง
+Feature.Build.Label.AttachmentCountPlural,{count} รายการที่แนบ
+Feature.Build.Label.AttachmentCountSingular,1 รายการที่แนบ
 Feature.Build.Label.Autosaved,บันทึกอัตโนมัติแล้ว
 Feature.Build.Label.Available,พร้อมใช้งาน
 Feature.Build.Label.AvailableForPurchase,พร้อมให้ซื้อ
@@ -2704,6 +2706,7 @@ Feature.Build.Label.IconThumbnails,ไอคอนและภาพขนาด
 Feature.Build.Label.Images2D,ภาพ 2 มิติ
 Feature.Build.Label.InProgress,อยู่ระหว่างดำเนินการ
 Feature.Build.Label.InputNeeded,ต้องกรอกข้อมูล
+Feature.Build.Label.InspirationTab,แรงบันดาลใจ
 Feature.Build.Label.InternalSpec,สเปกภายใน
 Feature.Build.Label.InternalTesting,การทดสอบภายใน
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -3571,11 +3574,29 @@ Feature.Chat.RobloxConnectUnavailableWithUser,ตอนนี้ผู้ใช�
 Feature.Chat.Text.NoFriends,คุณยังไม่ได้เพิ่มเพื่อน หากต้องการเริ่ม ให้ค้นหาและเพิ่มเพื่อนของคุณบน Roblox
 Feature.Chat.Title.NewChat,แชทใหม่
 Feature.Chat.Toast.Error.InvalidUserSelected,ไม่สามารถเพิ่มอย่างน้อยหนึ่งคนที่อยู่ในรายการนี้ได้
+Feature.CloudClient.Action.JoinWithoutCloudPlay,เข้าร่วมโดยไม่ใช้ Cloud Play
 Feature.CloudClient.Action.PlayWithoutCloudPlay,เล่นโดยไม่ใช้ Cloud Play
 Feature.CloudClient.Description.CloudPlayOffer,Cloud Play จะรันเกมบนคอมพิวเตอร์ของ Roblox เกมจึงอาจโหลดเร็วขึ้นและหยุดทำงานน้อยลง Cloud Play จะทำงานเฉพาะระหว่างที่คุณเล่นเกมนี้
+Feature.CloudClient.Description.CloudPlayStopped,เข้าร่วมเกมอีกครั้งเพื่อเล่นต่อโดยไม่ใช้ Cloud Play
+Feature.CloudClient.Description.RobloxRealityPreview,Restyle เป็นเวอร์ชันที่ให้ทดลองใช้ได้ก่อนใคร อะไรๆ อาจดูแตกต่างไปจากเกมต้นฉบับ
+Feature.CloudClient.Description.RobloxRealityThanks,ขอบคุณที่เป็นหนึ่งในคนแรกๆ ที่ลองใช้
 Feature.CloudClient.Heading.CloudPlayOffer,เล่นผ่าน Cloud Play
+Feature.CloudClient.Heading.CloudPlayStopped,Cloud Play ไม่ทำงาน
+Feature.CloudClient.Heading.RobloxRealityFailed,มีปัญหาบางอย่างเกิดขึ้นกับ Restyle
+Feature.CloudClient.Heading.RobloxRealityTimeEnded,เวลาของคุณใน Restyle สิ้นสุดลงแล้ว
+Feature.CloudClient.Label.CaptureUnavailableCloudPlay,ยังไม่สามารถใช้การจับภาพใน Cloud Play ได้
+Feature.CloudClient.Label.CaptureUnavailableRobloxReality,ยังไม่สามารถใช้การจับภาพกับ Restyle ได้
+Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Play ใช้งานไม่ได้ คุณกำลังเข้าสู่โหมดการเล่นปกติ
+Feature.CloudClient.Label.RobloxReality,Restyle
+Feature.CloudClient.Label.RobloxRealityDemoLength,ลองเล่นเดโม {minutes} นาที
+Feature.CloudClient.Label.RobloxRealityEndingSoon,Restyle จะสิ้นสุดในอีก 1 นาที และนำคุณออกจากเกม
 Feature.CloudClient.Label.RobloxRealityGraphics,เกมของคุณในลุคใหม่
 Feature.CloudClient.Label.RobloxRealityPlusOnly,สำหรับสมาชิก Plus เท่านั้น
+Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,ยังไม่สามารถใช้มุมมองตนเองใน Cloud Play ได้
+Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,ยังไม่สามารถใช้มุมมองตนเองกับ Restyle ได้
+Feature.CloudClient.Label.StillWeakConnection,การเชื่อมต่อของคุณยังไม่เสถียร
+Feature.CloudClient.Label.TimeLeft,
+Feature.CloudClient.Label.WeakConnection,การเชื่อมต่อไม่เสถียร
 Feature.CommunityLinks.Description.CommunityDefault,เข้าร่วมชุมชน Guilded อย่างเป็นทางการของ {experienceName} เพื่อดูประกาศและอื่นๆ อีกมากมาย!
 Feature.CommunityLinks.Heading.CommunityTitle,เข้าร่วมชุมชน
 Feature.CommunityLinks.Label.ViewButton,
@@ -4077,6 +4098,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,"เปิดการแจ้
 Feature.GameJoin.Description.DifferentServer,คุณจะเริ่มในเซิร์ฟเวอร์อื่น
 Feature.GameJoin.Label.PlayTogether,คุณเล่นด้วยกันได้
 Feature.GameJoin.Label.PlayTogetherSoon,คุณจะเล่นด้วยกันได้เร็วๆ นี้
+Feature.GameJoin.Label.RecentCoplay,คุณเพิ่งเล่นด้วยกันเมื่อไม่นานมานี้
 Feature.GamePage.Action.BackToTop,กลับไปด้านบน
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
@@ -5728,6 +5750,7 @@ Feature.Toast.Username.Copied,คัดลอกชื่อผู้ใช้�
 Feature.Toast.VoteError.AssetNotVoteable,คุณไม่สามารถโหวตประสบการณ์นี้ได้ในขณะนี้
 Feature.Toast.VoteError.Default,ไม่สามารถดำเนินการนี้ได้
 Feature.Toast.VoteError.FloodCheckThresholdMet,คุณโหวตบ่อยเกินไป
+Feature.Toast.VoteError.NotSaved,บันทึกการโหวตไม่สำเร็จ
 Feature.Toast.VoteError.PlayGame,คุณต้องเยี่ยมชมประสบการณ์นี้ก่อนจึงจะสามารถโหวตได้
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,คุณตรวจสอบอายุของคุณไม่ได้ในตอนนี้ เนื่องจากมีการละเมิดมาตรฐานชุมชนของเราหลายครั้ง โปรดลองอีกครั้งหลังสิ้นสุดระยะเวลาการจำกัด
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,การตรวจสอบอายุถูกระงับ

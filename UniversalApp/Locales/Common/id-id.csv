@@ -2678,6 +2678,8 @@ Feature.Build.Label.AdvancedModel,Tingkat Lanjut
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,Semua game
 Feature.Build.Label.AmountAvailable,{AMOUNT} tersedia
+Feature.Build.Label.AttachmentCountPlural,{count} lampiran
+Feature.Build.Label.AttachmentCountSingular,1 lampiran
 Feature.Build.Label.Autosaved,Disimpan otomatis
 Feature.Build.Label.Available,tersedia
 Feature.Build.Label.AvailableForPurchase,Tersedia untuk dibeli
@@ -2721,6 +2723,7 @@ Feature.Build.Label.IconThumbnails,Ikon & thumbnail
 Feature.Build.Label.Images2D,Gambar 2D
 Feature.Build.Label.InProgress,Sedang berlangsung
 Feature.Build.Label.InputNeeded,Input diperlukan
+Feature.Build.Label.InspirationTab,Inspirasi
 Feature.Build.Label.InternalSpec,Spesifikasi internal
 Feature.Build.Label.InternalTesting,Uji coba internal
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -3586,11 +3589,29 @@ Feature.Chat.RobloxConnectUnavailableWithUser,"Saat ini, Roblox Connect tidak te
 Feature.Chat.Text.NoFriends,"Kamu belum menambahkan satu teman pun. Untuk memulai, cari dan tambahkan temanmu di Roblox."
 Feature.Chat.Title.NewChat,Chat baru
 Feature.Chat.Toast.Error.InvalidUserSelected,Satu atau beberapa orang di daftar ini tidak dapat ditambahkan
+Feature.CloudClient.Action.JoinWithoutCloudPlay,Bergabung tanpa Cloud Play
 Feature.CloudClient.Action.PlayWithoutCloudPlay,Mainkan tanpa Cloud Play
 Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play menjalankan game di komputer Roblox, sehingga game dapat di-load lebih cepat dan lebih jarang mengalami crash. Fitur ini hanya aktif selama kamu memainkan game ini."
+Feature.CloudClient.Description.CloudPlayStopped,Gabung lagi ke game untuk terus bermain tanpa Cloud Play.
+Feature.CloudClient.Description.RobloxRealityPreview,Restyle adalah preview awal. Tampilannya mungkin berbeda dari game aslinya.
+Feature.CloudClient.Description.RobloxRealityThanks,Terima kasih sudah menjadi salah satu orang pertama yang mencobanya.
 Feature.CloudClient.Heading.CloudPlayOffer,Main dengan Cloud Play
+Feature.CloudClient.Heading.CloudPlayStopped,Cloud Play berhenti berfungsi
+Feature.CloudClient.Heading.RobloxRealityFailed,Terjadi kesalahan dengan Restyle
+Feature.CloudClient.Heading.RobloxRealityTimeEnded,Waktumu di Restyle sudah berakhir
+Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Media belum tersedia di Cloud Play.
+Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Media belum tersedia dengan Restyle.
+Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Play tidak berfungsi. Kamu bermain seperti biasa.
+Feature.CloudClient.Label.RobloxReality,Restyle
+Feature.CloudClient.Label.RobloxRealityDemoLength,Coba demo {minutes} menit
+Feature.CloudClient.Label.RobloxRealityEndingSoon,"Restyle berakhir dalam 1 menit, dan kamu akan keluar dari game."
 Feature.CloudClient.Label.RobloxRealityGraphics,"Game-mu, dengan tampilan baru"
 Feature.CloudClient.Label.RobloxRealityPlusOnly,Hanya untuk subscriber Plus
+Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,Tampilan Diri belum tersedia di Cloud Play.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,Tampilan Diri belum tersedia dengan Restyle.
+Feature.CloudClient.Label.StillWeakConnection,Koneksimu masih lemah.
+Feature.CloudClient.Label.TimeLeft,Waktu tersisa
+Feature.CloudClient.Label.WeakConnection,Koneksi lemah.
 Feature.CommunityLinks.Description.CommunityDefault,Bergabunglah dengan komunitas Guilded resmi untuk {experienceName} untuk melihat pengumuman dan banyak lagi!
 Feature.CommunityLinks.Heading.CommunityTitle,Bergabung ke komunitas
 Feature.CommunityLinks.Label.ViewButton,
@@ -4092,6 +4113,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Notifikasi dinyalakan untuk {ex
 Feature.GameJoin.Description.DifferentServer,Kamu akan memulai di server yang berbeda
 Feature.GameJoin.Label.PlayTogether,Kamu bisa bermain bersama
 Feature.GameJoin.Label.PlayTogetherSoon,Kamu bisa segera bermain bersama
+Feature.GameJoin.Label.RecentCoplay,Baru-baru ini kalian bermain bersama
 Feature.GamePage.Action.BackToTop,Kembali ke atas
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
@@ -5743,6 +5765,7 @@ Feature.Toast.Username.Copied,Nama pengguna disalin ke clipboard.
 Feature.Toast.VoteError.AssetNotVoteable,Pengalaman virtual mungkin tidak dapat dipilih.
 Feature.Toast.VoteError.Default,Tindakan tidak tersedia.
 Feature.Toast.VoteError.FloodCheckThresholdMet,Kamu memilih terlalu cepat.
+Feature.Toast.VoteError.NotSaved,Suara tidak disimpan
 Feature.Toast.VoteError.PlayGame,Kamu harus mengunjungi pengalaman virtual sebelum memberi rating.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,Kamu tidak dapat memeriksa usiamu saat ini karena kamu sudah berulang kali melanggar Standar Komunitas kami. Kamu dapat mencoba lagi setelah pembatasan berakhir.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,Pemeriksaan usia ditangguhkan

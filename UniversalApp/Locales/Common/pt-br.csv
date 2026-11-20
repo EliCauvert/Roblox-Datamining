@@ -4094,6 +4094,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,
 Feature.GameJoin.Description.DifferentServer,Você começará em um servidor diferente
 Feature.GameJoin.Label.PlayTogether,Vocês podem jogar juntos
 Feature.GameJoin.Label.PlayTogetherSoon,Vocês poderão jogar juntos em breve
+Feature.GameJoin.Label.RecentCoplay,Vocês jogaram juntos recentemente
 Feature.GamePage.Action.BackToTop,Voltar para o topo
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,Patrocinadas
@@ -5744,6 +5745,7 @@ Feature.Toast.Username.Copied,Usuário copiado para área de transferência.
 Feature.Toast.VoteError.AssetNotVoteable,Você não pode votar nesta experiência.
 Feature.Toast.VoteError.Default,Ação indisponível.
 Feature.Toast.VoteError.FloodCheckThresholdMet,Você está votando rápido demais.
+Feature.Toast.VoteError.NotSaved,O voto não foi salvo
 Feature.Toast.VoteError.PlayGame,Você precisa explorar a experiência para poder votar.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,Você não pode fazer a verificação da sua idade no momento porque violou as Regras da Comunidade mais de uma vez. Você pode tentar novamente após o término da restrição.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,Verificações de idade suspensas

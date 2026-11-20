@@ -2659,6 +2659,8 @@ Feature.Build.Label.AdvancedModel,高级
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,所有游戏
 Feature.Build.Label.AmountAvailable,{AMOUNT} 可用
+Feature.Build.Label.AttachmentCountPlural,{count} 个附件
+Feature.Build.Label.AttachmentCountSingular,1 个附件
 Feature.Build.Label.Autosaved,已自动保存
 Feature.Build.Label.Available,可用
 Feature.Build.Label.AvailableForPurchase,可供购买
@@ -2702,6 +2704,7 @@ Feature.Build.Label.IconThumbnails,标志和缩略图
 Feature.Build.Label.Images2D,2D 图片
 Feature.Build.Label.InProgress,进行中
 Feature.Build.Label.InputNeeded,需要输入内容
+Feature.Build.Label.InspirationTab,灵感
 Feature.Build.Label.InternalSpec,内部规格
 Feature.Build.Label.InternalTesting,内部测试
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -3567,11 +3570,29 @@ Feature.Chat.RobloxConnectUnavailableWithUser,此用户当前无法使用 Roblox
 Feature.Chat.Text.NoFriends,你尚未添加任何好友。若要开始，请在 Roblox 上寻找并添加你的好友。
 Feature.Chat.Title.NewChat,新聊天
 Feature.Chat.Toast.Error.InvalidUserSelected,此列表中的一人或多人无法被添加
+Feature.CloudClient.Action.JoinWithoutCloudPlay,加入但不使用 Cloud Play
 Feature.CloudClient.Action.PlayWithoutCloudPlay,游玩但不使用 Cloud Play
 Feature.CloudClient.Description.CloudPlayOffer,Cloud Play 会使用 Roblox 的计算机运行游戏，因此游戏可能加载得更快，发生崩溃的情况也可能更少。Cloud Play 仅在你游玩此游戏期间运行。
+Feature.CloudClient.Description.CloudPlayStopped,重新加入游戏，即可在不使用 Cloud Play 的情况下继续游玩。
+Feature.CloudClient.Description.RobloxRealityPreview,Restyle 为抢先预览。画面效果可能与原版游戏有所不同。
+Feature.CloudClient.Description.RobloxRealityThanks,感谢你成为首批试用者之一。
 Feature.CloudClient.Heading.CloudPlayOffer,使用 Cloud Play 游玩
+Feature.CloudClient.Heading.CloudPlayStopped,Cloud Play 已停止运行
+Feature.CloudClient.Heading.RobloxRealityFailed,Restyle 发生错误
+Feature.CloudClient.Heading.RobloxRealityTimeEnded,你在 Restyle 中的时间已结束
+Feature.CloudClient.Label.CaptureUnavailableCloudPlay,录制功能在 Cloud Play 中尚不可用。
+Feature.CloudClient.Label.CaptureUnavailableRobloxReality,截图功能在 Restyle 中尚不可用。
+Feature.CloudClient.Label.CloudPlayJoinFailed,云端游玩功能无法使用。你当前为普通游玩。
+Feature.CloudClient.Label.RobloxReality,Restyle
+Feature.CloudClient.Label.RobloxRealityDemoLength,试用 {minutes} 分钟的演示版
+Feature.CloudClient.Label.RobloxRealityEndingSoon,Restyle 将于 1 分钟后结束，你将离开游戏。
 Feature.CloudClient.Label.RobloxRealityGraphics,你的游戏，焕然一新
 Feature.CloudClient.Label.RobloxRealityPlusOnly,仅限 Plus 订阅用户
+Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,自身视角功能在 Cloud Play 中尚不可用。
+Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,自身视角功能在 Restyle 中尚不可用。
+Feature.CloudClient.Label.StillWeakConnection,你的网络连接仍然不稳定。
+Feature.CloudClient.Label.TimeLeft,
+Feature.CloudClient.Label.WeakConnection,连接不稳定。
 Feature.CommunityLinks.Description.CommunityDefault,加入“{experienceName}”的官方 Guilded 社区 ，查看公告并获取更多信息！
 Feature.CommunityLinks.Heading.CommunityTitle,加入社区
 Feature.CommunityLinks.Label.ViewButton,
@@ -4073,6 +4094,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,已开启关于“{experienceNa
 Feature.GameJoin.Description.DifferentServer,你们将在不同的服务器上开始游戏
 Feature.GameJoin.Label.PlayTogether,你们可以一起游玩
 Feature.GameJoin.Label.PlayTogetherSoon,你们很快就可以一起游玩了
+Feature.GameJoin.Label.RecentCoplay,你们最近一起玩过
 Feature.GamePage.Action.BackToTop,返回顶部
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
@@ -5722,6 +5744,7 @@ Feature.Toast.Username.Copied,用户名已复制到剪贴板。
 Feature.Toast.VoteError.AssetNotVoteable,可能无法对作品评分。
 Feature.Toast.VoteError.Default,操作不可用。
 Feature.Toast.VoteError.FloodCheckThresholdMet,你评分的次数太过频繁。
+Feature.Toast.VoteError.NotSaved,投票未保存
 Feature.Toast.VoteError.PlayGame,你必须先访问作品才能评分。
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,由于多次违反我们的社区准则，你目前无法验证年龄。请在限制结束后重试。
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,年龄验证已暂停

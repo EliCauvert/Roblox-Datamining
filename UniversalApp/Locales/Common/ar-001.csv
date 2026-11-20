@@ -97,7 +97,7 @@ Authentication.AccountPicker.Label.RemoveAccountCancel,
 Authentication.AccountPicker.Label.RemoveAccountDescription,لن يظهر هذا الحساب على هذا الجهاز بعد الآن، إلا عند تسجيل الدخول مرة أخرى.
 Authentication.AccountPicker.Label.RemoveAccountRemove,إزالة
 Authentication.AccountPicker.Label.SignedOut,تم تسجيل الخروج
-Authentication.AccountRecovery.Action.AddAPasskey,نعم، أضِف مفتاح مرور جديدًا
+Authentication.AccountRecovery.Action.AddAPasskey,نعم، أنشئ مفتاح مرور جديدًا
 Authentication.AccountRecovery.Action.Continue,
 Authentication.AccountRecovery.Action.Delete,
 Authentication.AccountRecovery.Action.DeleteAll,إزالة التغييرات
@@ -108,7 +108,7 @@ Authentication.AccountRecovery.Action.ResetPassword,إعادة تعيين كلم
 Authentication.AccountRecovery.Action.Save,احتفظ
 Authentication.AccountRecovery.Action.SendCode,أرسِل لي كودًا
 Authentication.AccountRecovery.Action.SkipAddingPasskey,لا، تخطَّ هذه الخطوة
-Authentication.AccountRecovery.Action.UpdatePassword,تحديث كلمة المرور
+Authentication.AccountRecovery.Action.UpdatePassword,حفظ كلمة المرور
 Authentication.AccountRecovery.Action.UseAnotherMethod,استخدام طريقة أخرى
 Authentication.AccountRecovery.Action.UseBackupCode,استخدام الكود الاحتياطي
 Authentication.AccountRecovery.Action.UseEmail,استخدام البريد الإلكتروني
@@ -1599,6 +1599,7 @@ Feature.AppealsPortal.Description.AppealSubmittedUpdate,سنرسل تحديثً�
 Feature.AppealsPortal.Description.AppealSubmittedUpdate.OptOut,سنرسل تحديثًا بقرارنا وأي إجراء اتخذناه إلى عنوان البريد الإلكتروني الذي زوّدتنا به، إلا إذا اخترت عدم تلقي أي مراسلات أخرى بخصوص هذا الاستئناف.
 Feature.AppealsPortal.Description.AppealsPortal,اطَّلِع على الانتهاكات السابقة وتحكَّم في إدارة طلبات الاستئناف المُقدَّمة منك. تأكد من أن كل عناصر المحتوى والسلوكيات تتوافق مع {link}معايير مجتمع Roblox.{linkEnd}
 Feature.AppealsPortal.Description.AskForReview,أنت تؤكد أنك أصلحت هذه المشكلة. سنراجع {contentType} هذا مرة أخرى.
+Feature.AppealsPortal.Description.AskForReviewFallback,أنت تؤكد أنك أصلحت هذه المشكلة، وسنراجعها مرة أخرى.
 Feature.AppealsPortal.Description.DetailsUnavailable,
 Feature.AppealsPortal.Description.FixByDate,يرجى حل المشكلة في Studio قبل {date}، ثم الرجوع وطلب المراجعة.
 Feature.AppealsPortal.Description.IssueClosed,أغلقنا هذه المشكلة لأنك قررت الالتزام بإحدى قواعدنا لتجنب التعليق.
@@ -2514,7 +2515,7 @@ Feature.Build.Description.BuildReplyNotif,احصل على إشعار عندما 
 Feature.Build.Description.BuyRobuxToCreate,اشترِ المزيد من عملات Robux لمواصلة الإنشاء، أو انتظر حتى تتم إعادة تعيين استخدام ميزة Build المجاني غدًا.
 Feature.Build.Description.BuyUsageOrWait,اشترِ المزيد من استخدام ميزة Build باستخدام عملات Robux، أو انتظر حتى تتم إعادة تعيين الحد اليومي.
 Feature.Build.Description.CampaignRunDates,يُعرض إعلانك من {startDate} إلى {endDate}.
-Feature.Build.Description.CaptureWhilePlaytesting,التقط صورة أثناء اختبار اللعب، ثم أضفها إلى طلبك.
+Feature.Build.Description.CaptureWhilePlaytesting,التقط صورة أثناء اختبار اللعب لتُري Build ما تراه.
 Feature.Build.Description.ChooseAdCampaignLength,اختر المدة التي تريد أن يستمر فيها عرض إعلانك.
 Feature.Build.Description.ChoosePlaytesters,اختر أصدقاء لمعاينة لعبتك.
 Feature.Build.Description.CreateDeveloperProduct,إنشاء {NAME} مقابل {PRICE} من عملات Robux. لن يكون متاحًا للشراء بعد.
@@ -2614,6 +2615,8 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,كل الألعاب
 Feature.Build.Label.AmountAvailable,الاستخدام المتاح: {AMOUNT}
+Feature.Build.Label.AttachmentCountPlural,{count} من المرفقات
+Feature.Build.Label.AttachmentCountSingular,1 مرفق
 Feature.Build.Label.Autosaved,تم الحفظ تلقائيًا
 Feature.Build.Label.Available,المتاح
 Feature.Build.Label.AvailableForPurchase,متاح للشراء
@@ -2621,9 +2624,9 @@ Feature.Build.Label.BackToBuild,الرجوع إلى البناء
 Feature.Build.Label.Building,جارٍ العمل…
 Feature.Build.Label.CaptureLibrary,مكتبة اللقطات
 Feature.Build.Label.CaptureSelectionCount,تم تحديد {SELECTED_COUNT} من أصل {MAX_SELECTIONS}
-Feature.Build.Label.CaptureStepAddImages,"اضغط على ""إضافة صور"" لإرفاق لقطتك"
+Feature.Build.Label.CaptureStepAddImages,اختر <b>إضافة صور</b> لإضافة اللقطة إلى الدردشة
 Feature.Build.Label.CaptureStepPlaytest,شغّل اختبار اللعب
-Feature.Build.Label.CaptureStepTapCamera,"اضغط على ""الكاميرا"" في شريط أدوات ميزة Build"
+Feature.Build.Label.CaptureStepTapCamera,اختر أيقونة الكاميرا أسفل الشاشة
 Feature.Build.Label.ContentRating,تصنيف المحتوى
 Feature.Build.Label.CreatedDate,{MONTH} {DAY}، {YEAR}
 Feature.Build.Label.CreatorHub,مركز المصمم
@@ -2633,6 +2636,7 @@ Feature.Build.Label.DefaultDeveloperProductName,منتج المطوّر
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,تم الحذف
 Feature.Build.Label.DescribeIdea,صِف فكرتك
+Feature.Build.Label.DescribeIdeaOrPick,صِف فكرتك أو اختر واحدة مما يلي
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,الوصف: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,الاسم: {NAME}
@@ -3527,24 +3531,34 @@ Feature.Chat.Title.NewChat,دردشة جديدة
 Feature.Chat.Toast.Error.InvalidUserSelected,لا يمكن إضافة شخص واحد أو أكثر من الأشخاص المُدرجين ضمن هذه القائمة
 Feature.CloudClient.Action.JoinWithoutCloudPlay,الانضمام بدون Cloud Play
 Feature.CloudClient.Action.PlayWithoutCloudPlay,اللعب بدون Cloud Play
+Feature.CloudClient.Action.PlayWithoutRobloxReality,اللعب بدون {productName}
+Feature.CloudClient.Action.TryRobloxReality,جرّب ميزة {productName}
 Feature.CloudClient.Description.CloudPlayOffer,تشغّل Cloud Play اللعبة على أجهزة كمبيوتر Roblox، لذا قد تُحمَّل بشكل أسرع وتتعطل بشكل أقل. وتعمل فقط أثناء لعبك هذه اللعبة.
 Feature.CloudClient.Description.CloudPlayStopped,انضم إلى اللعبة مجددًا لمواصلة اللعب بدون Cloud Play.
+Feature.CloudClient.Description.RobloxRealityOffer,تمنح ميزة {productName} ألعابك المفضلة مظهرًا جديدًا ومختلفًا. جرّب النسخة التجريبية المبكرة، ثم أخبرنا برأيك.
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle نسخة تجريبية مبكرة، وقد يختلف شكل اللعبة عن الأصل.
+Feature.CloudClient.Description.RobloxRealityPreviewV2,ميزة {productName} نسخة تجريبية مبكرة، وقد يختلف شكل اللعبة عن الأصل.
 Feature.CloudClient.Description.RobloxRealityThanks,شكرًا لأنك من أوائل من جرّبوها.
 Feature.CloudClient.Heading.CloudPlayOffer,العب باستخدام Cloud Play
 Feature.CloudClient.Heading.CloudPlayStopped,توقفت Cloud Play عن العمل
 Feature.CloudClient.Heading.RobloxRealityFailed,حدث خطأ في Restyle
+Feature.CloudClient.Heading.RobloxRealityFailedV2,حدث خطأ في ميزة {productName}
+Feature.CloudClient.Heading.RobloxRealityOffer,جرّب لعبتك باستخدام {productName}
 Feature.CloudClient.Heading.RobloxRealityTimeEnded,انتهى وقتك في Restyle
+Feature.CloudClient.Heading.RobloxRealityTimeEndedV2,انتهى وقتك في ميزة {productName}
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,الالتقاط غير متاح في Cloud Play حتى الآن.
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,الالتقاط غير متاح مع Restyle حتى الآن.
+Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,الالتقاط غير متاح مع ميزة {productName} حتى الآن.
 Feature.CloudClient.Label.CloudPlayJoinFailed,ميزة Cloud Play لا تعمل. أنت تلعب الآن بالطريقة المعتادة.
 Feature.CloudClient.Label.RobloxReality,Restyle
 Feature.CloudClient.Label.RobloxRealityDemoLength,جرّب نسخة تجريبية مدتها {minutes} دقيقة
 Feature.CloudClient.Label.RobloxRealityEndingSoon,ستنتهي Restyle خلال 1 دقيقة، وستغادر اللعبة.
+Feature.CloudClient.Label.RobloxRealityEndingSoonV2,ستنتهي ميزة {productName} خلال 1 دقيقة، وستغادر اللعبة.
 Feature.CloudClient.Label.RobloxRealityGraphics,لعبتك بحُلّة جديدة
 Feature.CloudClient.Label.RobloxRealityPlusOnly,لمشتركي Plus فقط
 Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,المنظور الذاتي غير متاح في Cloud Play حتى الآن.
 Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,المنظور الذاتي غير متاح مع Restyle حتى الآن.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxRealityV2,المنظور الذاتي غير متاح مع ميزة {productName} حتى الآن.
 Feature.CloudClient.Label.StillWeakConnection,لا يزال اتصالك ضعيفًا.
 Feature.CloudClient.Label.TimeLeft,
 Feature.CloudClient.Label.WeakConnection,الاتصال ضعيف.
@@ -4049,6 +4063,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,تم تشغيل الإشعار�
 Feature.GameJoin.Description.DifferentServer,ستبدأ في خادم مختلف
 Feature.GameJoin.Label.PlayTogether,يمكنكما اللعب معًا
 Feature.GameJoin.Label.PlayTogetherSoon,يمكنكما اللعب معًا قريبًا
+Feature.GameJoin.Label.RecentCoplay,لعبتما معًا مؤخرًا
 Feature.GamePage.Action.BackToTop,العودة إلى الأعلى
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,برعاية
@@ -4369,9 +4384,15 @@ Feature.Moments.Description.EngagementFirstLike,اعرضه الآن
 Feature.Moments.Description.EngagementFirstReaction,حصلت لحظتك للتو على أول تفاعل!
 Feature.Moments.Description.EngagementLikedCommentsDigest,حصل {likedComments} من تعليقاتك على إعجابات
 Feature.Moments.Description.EngagementMomentDigest,{comments} من التعليقات الجديدة و{milestone} من التفاعلات
+Feature.Moments.Description.EngagementMomentFirstReactionDigest,{comments} من التعليقات الجديدة وأول تفاعل عليها
+Feature.Moments.Description.EngagementMomentsCommentsDigest,{comments} من التعليقات الجديدة على لحظاتك
 Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementMomentsReactionsDigest,لحظاتك تحظى بالتفاعلات
 Feature.Moments.Description.EngagementNewComment,علّق للتو على لحظتك
 Feature.Moments.Description.EngagementNewComments,و{count} آخرون علّقوا على لحظتك
+Feature.Moments.Description.EngagementNewCommentsOneOther,علّق مع 1 شخص آخر على لحظتك
+Feature.Moments.Description.EngagementOneCommentDigest,1 تعليق جديد و{milestone} من التفاعلات
+Feature.Moments.Description.EngagementOneCommentFirstReactionDigest,1 تعليق جديد وأول تفاعل عليها
 Feature.Moments.Description.EngagementReactionMilestone,{count} من التفاعلات الجديدة
 Feature.Moments.Description.FollowingCaughtUpBody,لقد شاهدتَ جميع اللحظات الجديدة في هذا الموجز. يمكنك التبديل بين الموجزات لعرض المزيد.
 Feature.Moments.Description.FollowingEmptyBodyRecommended,ستظهر لك لحظات المصمّمين الذين تتابعهم هنا.
@@ -5347,12 +5368,14 @@ Feature.Schools.Action.UnidaysTermsOfService,شروط خدمة UNiDAYS
 Feature.Schools.Body.EnterCode,أرسلت UNiDAYS بريدًا إلكترونيًا يحتوي على كود لمرة واحدة إلى {user_email}. أدخِل الكود أدناه لتأكيد مدرستك.
 Feature.Schools.Body.UnidaysShare,لن يكون عنوان بريدك الإلكتروني مرئيًا للآخرين.
 Feature.Schools.Body.UnidaysTerms,"نتعاون مع UNiDAYS للتحقق من عنوان بريدك الإلكتروني المدرسي. بالضغط على ""متابعة""، فإنك توافق على شروط الخدمة وسياسة الخصوصية السارية لدى شركة UNiDAYS."
+Feature.Schools.Body.UnidaysTermsCollege,"باختيار ""متابعة""، فإنك توافق على شروط خدمة UNiDAYS وتُقر بأن UNiDAYS قد تستخدم بريدك الإلكتروني الجامعي وفقًا لسياسة الخصوصية الخاصة بها."
 Feature.Schools.Caption.AlumniGroupOnGraduate,بمجرد تخرجك، ستكون في مجموعة خريجي {school}.
 Feature.Schools.Caption.RemovedOnGraduate,بمجرد تخرجك، ستتم إزالتك من {school}.
 Feature.Schools.Description.CantFindSchoolNotify,سنُعلمك عندما تنضم مدرستك إلى منصّة Roblox.
 Feature.Schools.Description.CantVerifySchool,بناءً على المعلومات التي قدمتها، لم نتمكن من التحقق من مدرستك.
 Feature.Schools.Description.ConnectWithFellowAlumni,تواصل مع زملائك الخريجين
 Feature.Schools.Description.FeatureAvailableBody,ابحث عن الأصدقاء من مدرستك.
+Feature.Schools.Description.FeatureAvailableBodyCollege,اعثر على أصدقاء من جامعتك.
 Feature.Schools.Description.InviteFriendsExclusiveItem,بادِر بدعوة الأشخاص الآخرين لإجراء عملية التحقق. واحصل على عنصر مجاني عند فتح صفحة مدرستك.
 Feature.Schools.Description.InviteFriendsUnlockSooner,ساعد في فتح مجموعة خريجي مدرستك بشكلٍ أسرع.
 Feature.Schools.Description.InviteOthersToVerify,ادعُ الآخرين لإجراء عملية التحقق
@@ -5363,7 +5386,9 @@ Feature.Schools.Description.RemoveSchoolBody,سيتعين عليك إعادة ا
 Feature.Schools.Description.SchoolIsLiveBody,
 Feature.Schools.Description.SchoolUnavailableBody,هذه المدرسة غير متاحة حاليًا على منصّة Roblox.
 Feature.Schools.Description.UpsellDisclaimer,لن تظهر مدرستك إلا للأشخاص الذين ينتمون إلى المدرسة نفسها. يمكنك تحديث بيانات مدرستك أو إزالتها في أي وقت.
+Feature.Schools.Description.UpsellDisclaimerCollege,لن تظهر جامعتك إلا للأشخاص من الجامعة نفسها. يمكنك تحديث جامعتك أو إزالتها في أي وقت.
 Feature.Schools.Description.UpsellTagline,اكتشِف الطلاب من مدرستك الذين تم التحقُّق منهم واستمتِع بالتواصل واللعب معهم.
+Feature.Schools.Description.UpsellTaglineCollege,اكتشف الطلاب الموثَّقين من جامعتك وتواصل والعب معهم.
 Feature.Schools.Description.WaitlistAlumniBody,لقد أتممت كل الخطوات. سنُعلمك بمجرد فتح مجموعة خريجي مدرستك.
 Feature.Schools.Description.WaitlistBody,أنت عضو مؤسس. ادعُ زملاءك في الفصل لإطلاق صفحة مدرستكم معًا.
 Feature.Schools.Error.AlreadyLinked,عنوان البريد الإلكتروني هذا مرتبط بالفعل بحساب آخر.
@@ -5380,11 +5405,13 @@ Feature.Schools.Filter.AllYears,جميع السنوات
 Feature.Schools.Filter.Apply,
 Feature.Schools.Filter.GradYear,سنة التخرج
 Feature.Schools.GiftForYou,هدية لك
+Feature.Schools.Heading.AddCollege,إضافة جامعة
 Feature.Schools.Heading.AddSchool,إضافة مدرسة
 Feature.Schools.Heading.AddSchoolNow,انضم إلى زملائك في الفصل الدراسي
 Feature.Schools.Heading.CantFindSchool,لم نتمكن من العثور على مدرستك
 Feature.Schools.Heading.CantVerifySchool,لم نتمكن من التحقق من مدرستك
 Feature.Schools.Heading.CheckYourEmail,تحقَّق من بريدك الإلكتروني
+Feature.Schools.Heading.EnterCollegeEmail,أدخل بريدك الإلكتروني الجامعي
 Feature.Schools.Heading.EnterSchoolEmail,أدخِل بريدك الإلكتروني المدرسي
 Feature.Schools.Heading.InviteYourClassmates,ادعُ زملاءك في الفصل الدراسي
 Feature.Schools.Heading.InviteYourFriends,ادعُ أصدقاءك
@@ -5411,8 +5438,10 @@ Feature.Schools.Label.Search,
 Feature.Schools.Label.SuggestedEmail,هل تقصد {email}؟
 Feature.Schools.Label.UnlockAlumniGroup,مجموعة الخريجين معلقة
 Feature.Schools.Label.UpsellPerkFindFriends,ابحث عن الأصدقاء من مدرستك
+Feature.Schools.Label.UpsellPerkFindFriendsCollege,اعثر على أصدقاء من جامعتك
 Feature.Schools.Label.UpsellPerkPlayAndChat,اطلع على الأشخاص المتواجدين أون لاين والعبوا معًا بسهولة
 Feature.Schools.Label.UpsellPerkTrends,اكتشف ما هو رائج في مدرستك
+Feature.Schools.Label.UpsellPerkTrendsCollege,اكتشف ما هو رائج في جامعتك
 Feature.Schools.Placeholder.Email,البريد الإلكتروني للطالب
 Feature.Schools.Placeholder.SchoolName,اسم المدرسة
 Feature.Schools.Placeholder.SixDigitCode,كود مكون من 6 أرقام

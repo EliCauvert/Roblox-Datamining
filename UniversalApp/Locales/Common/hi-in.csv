@@ -2658,6 +2658,8 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,सभी गेम्स
 Feature.Build.Label.AmountAvailable,{AMOUNT} उपलब्ध हैं
+Feature.Build.Label.AttachmentCountPlural,{count} अटैचमेंट्स
+Feature.Build.Label.AttachmentCountSingular,1 अटैचमेंट
 Feature.Build.Label.Autosaved,अपने-आप सेव हो गया
 Feature.Build.Label.Available,उपलब्ध है
 Feature.Build.Label.AvailableForPurchase,खरीदने के लिए उपलब्ध
@@ -2701,6 +2703,7 @@ Feature.Build.Label.IconThumbnails,आइकॉन और थंबनेल
 Feature.Build.Label.Images2D,2D इमेज
 Feature.Build.Label.InProgress,जारी है
 Feature.Build.Label.InputNeeded,इनपुट चाहिए
+Feature.Build.Label.InspirationTab,प्रेरणा
 Feature.Build.Label.InternalSpec,इंटरनल स्पेसिफ़िकेशन
 Feature.Build.Label.InternalTesting,इंटरनल टेस्टिंग
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -3568,11 +3571,29 @@ Feature.Chat.RobloxConnectUnavailableWithUser,"इस समय, इस यू�
 Feature.Chat.Text.NoFriends,आपके पास अभी तक कोई फ़्रेंड नहीं है. Roblox पर शुरू करने के लिए फ़्रेंड्स को खोजें और जोड़ें.
 Feature.Chat.Title.NewChat,नई चैट
 Feature.Chat.Toast.Error.InvalidUserSelected,इस लिस्ट में एक या इससे ज़्यादा लोगों को जोड़ा नहीं जा सकता
+Feature.CloudClient.Action.JoinWithoutCloudPlay,Cloud Play के बिना जॉइन करें
 Feature.CloudClient.Action.PlayWithoutCloudPlay,Cloud Play के बिना खेलें
-Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play, गेम को Roblox के कंप्यूटर पर चलाता है, इसलिए हो सकता है कि यह ज़्यादा तेज़ी से लोड हो और इसमें क्रैश की समस्या कम आए. यह सिर्फ़ आपके गेम खेलने तक चलता है."
+Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play से गेम Roblox के कंप्यूटर पर चलता है, इसलिए हो सकता है कि वह ज़्यादा जल्दी लोड हो और उसमें क्रैश की समस्या कम आए. यह सिर्फ़ आपके गेम खेलने तक चलता है."
+Feature.CloudClient.Description.CloudPlayStopped,"Cloud Play के बिना खेलना जारी रखने के लिए, गेम को फिर से जॉइन करें."
+Feature.CloudClient.Description.RobloxRealityPreview,Restyle एक अर्ली प्रीव्यू वाली सुविधा है. इसमें चीज़ें ओरिजिनल गेम से अलग नज़र आ सकती हैं.
+Feature.CloudClient.Description.RobloxRealityThanks,इसे सबसे पहले आज़माने के लिए धन्यवाद.
 Feature.CloudClient.Heading.CloudPlayOffer,Cloud Play के साथ खेलें
+Feature.CloudClient.Heading.CloudPlayStopped,Cloud Play काम नहीं कर रहा है
+Feature.CloudClient.Heading.RobloxRealityFailed,Restyle में कुछ गड़बड़ी हुई
+Feature.CloudClient.Heading.RobloxRealityTimeEnded,Restyle में आपका समय खत्म हो गया है
+Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Cloud Play में अभी तक 'कैप्चर करें' बटन उपलब्ध नहीं है.
+Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Restyle में अभी तक 'कैप्चर करें' बटन उपलब्ध नहीं है.
+Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Play काम नहीं कर रहा है. आपका गेम सामान्य रूप से चल रहा है.
+Feature.CloudClient.Label.RobloxReality,Restyle
+Feature.CloudClient.Label.RobloxRealityDemoLength,{minutes} मिनट का डेमो देखें
+Feature.CloudClient.Label.RobloxRealityEndingSoon,Restyle 1 मिनट में खत्म हो जाएगा और आपको गेम छोड़ना होगा.
 Feature.CloudClient.Label.RobloxRealityGraphics,"आपका गेम, नए अंदाज़ में"
 Feature.CloudClient.Label.RobloxRealityPlusOnly,सिर्फ़ Plus के सब्सक्राइबर्स के लिए
+Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,Cloud Play में अभी तक 'सेल्फ़ व्यू' उपलब्ध नहीं है.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,Restyle में अभी तक 'सेल्फ़ व्यू' उपलब्ध नहीं है.
+Feature.CloudClient.Label.StillWeakConnection,आपका कनेक्शन अभी भी कमज़ोर है.
+Feature.CloudClient.Label.TimeLeft,
+Feature.CloudClient.Label.WeakConnection,कनेक्शन कमज़ोर है.
 Feature.CommunityLinks.Description.CommunityDefault,"अनाउंसमेंट्स के साथ-साथ और कई चीज़ें देखने के लिए, {experienceName} की आफ़िशियल Guilded कम्यूनिटी जॉइन करें!"
 Feature.CommunityLinks.Heading.CommunityTitle,कम्यूनिटी जॉइन करें
 Feature.CommunityLinks.Label.ViewButton,
@@ -4074,6 +4095,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,{experienceName} के लि�
 Feature.GameJoin.Description.DifferentServer,आपके पास किसी दूसरे सर्वर में शुरू करने का विकल्प होगा
 Feature.GameJoin.Label.PlayTogether,आपके पास एक साथ खेलने की सुविधा है
 Feature.GameJoin.Label.PlayTogetherSoon,आपके पास जल्द ही एक साथ खेलने की सुविधा होगी
+Feature.GameJoin.Label.RecentCoplay,आपने हाल ही में साथ खेला है
 Feature.GamePage.Action.BackToTop,वापस ऊपर जाएँ
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,स्पॉन्सर किया गया
@@ -5724,6 +5746,7 @@ Feature.Toast.Username.Copied,यूज़रनेम को क्लिपब
 Feature.Toast.VoteError.AssetNotVoteable,हो सकता है कि अनुभव को वोट न किया गया हो.
 Feature.Toast.VoteError.Default,ऐक्शन उपलब्ध नहीं है.
 Feature.Toast.VoteError.FloodCheckThresholdMet,आप बहुत जल्दी-जल्दी वोट कर रहे हैं.
+Feature.Toast.VoteError.NotSaved,वोट सेव नहीं किया गया था
 Feature.Toast.VoteError.PlayGame,इसे रेटिंग देने से पहले आपका इस एक्सपीरिएंस पर जाना ज़रूरी है.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,"हमारे कम्यूनिटी स्टैंडर्ड का बार-बार उल्लंघन करने की वजह से, अभी आपके पास अपनी उम्र वेरिफ़ाई करने की सुविधा नहीं है. प्रतिबंध हटने के बाद फिर से कोशिश करें."
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,उम्र के वेरिफ़िकेशन की सुविधा सस्पेंड कर दी गई है
