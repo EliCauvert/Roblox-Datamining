@@ -769,7 +769,7 @@ CoreScripts.FTUX.Heading.NewTiltOnboarding,Hier vind je het menu
 CoreScripts.FTUX.Heading.ReadyToPlaytest,Klaar voor een playtest?
 CoreScripts.FTUX.Heading.SideSheetUpdate,Al je acties op één plek
 CoreScripts.FTUX.Heading.SocialOnboarding,Sociale functies
-CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,Je nieuwe menu
+CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,Twee menu's zijn nu één
 CoreScripts.FTUX.Heading.YouAreAnEarlyTester,Je bent een vroege tester
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,Schakel op elk gewenst moment tussen je opgeslagen avatars.
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,Chat op elk gewenst moment met je vrienden.
@@ -780,7 +780,7 @@ CoreScripts.FTUX.Label.NewTiltOnboarding,Het spelmenu bevat acties in het spel e
 CoreScripts.FTUX.Label.PartyWithYourFriendsAnytime,Party op elk gewenst moment met je vrienden.
 CoreScripts.FTUX.Label.SideSheetOnboarding,"Het menu bevat al je essentiële functies. Nodig vrienden uit, probeer emotes uit, bedien de muziek en meer."
 CoreScripts.FTUX.Label.SocialOnboarding,"Krijg eenvoudig toegang tot je sociale functies vanuit de bovenste balk, inclusief Chat."
-CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,Twee menu's zijn nu één. Tik hier om het te openen.
+CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,"Alles wat je nodig hebt, staat in dit menu, inclusief Verlaten."
 CoreScripts.Feedback.EntryPoint.ButtonText,Feedback geven
 CoreScripts.Feedback.EntryPoint.OptionText,Feedback geven over de vertaling
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,
@@ -2103,8 +2103,11 @@ Feature.AvatarSwitcher.Message.UnknownSupport,"Je kunt je avatar nog steeds wiss
 Feature.AvatarSwitcher.Message.Unsupported,Deze ervaring maakt gebruik van een aangepaste avatar en ondersteunt geen Roblox-avatars.
 Feature.AvatarWorkshop.Action.EditAvatar,Avatar bewerken
 Feature.AvatarWorkshop.Action.TryAgain,
+Feature.AvatarWorkshop.Description.AddAvatar,Deze avatar toevoegen aan je avatars?
+Feature.AvatarWorkshop.Heading.AddAvatar,Avatar toevoegen?
 Feature.AvatarWorkshop.Heading.Customize,Aanpassen
 Feature.AvatarWorkshop.Heading.YourAvatars,Je avatars
+Feature.AvatarWorkshop.Label.DefaultAvatarName,
 Feature.AvatarWorkshop.Message.LoadItemsError,Er is iets misgegaan bij het laden van je items.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,Kan geen items meer laden.
 Feature.AvatarWorkshop.Message.NoItemsOwned,Je hebt hier nog geen items.
@@ -2277,7 +2280,7 @@ Feature.Build.Description.BuildReplyNotif,Ontvang een melding wanneer Build een 
 Feature.Build.Description.BuyRobuxToCreate,"Koop meer Robux om content te blijven maken, of wacht tot je gratis Build-tegoed morgen wordt gereset."
 Feature.Build.Description.BuyUsageOrWait,"Koop meer Build-tegoed met Robux, of wacht tot je dagelijkse limiet wordt gereset."
 Feature.Build.Description.CampaignRunDates,Je advertentie loopt van {startDate} tot {endDate}.
-Feature.Build.Description.CaptureWhilePlaytesting,Maak een opname tijdens de playtest en voeg deze vervolgens toe aan je prompt.
+Feature.Build.Description.CaptureWhilePlaytesting,Leg tijdens de playtest iets vast om Build te laten zien wat je ziet.
 Feature.Build.Description.ChooseAdCampaignLength,Kies hoelang je wilt dat je advertentie wordt weergegeven.
 Feature.Build.Description.ChoosePlaytesters,Kies vrienden om een voorbeeld van je spel te bekijken.
 Feature.Build.Description.CreateDeveloperProduct,{NAME} aanmaken voor {PRICE} Robux. Dit is nog niet te koop.
@@ -2386,9 +2389,9 @@ Feature.Build.Label.BackToBuild,Terug naar Bouwen
 Feature.Build.Label.Building,Er wordt aan gewerkt...
 Feature.Build.Label.CaptureLibrary,Opnamebibliotheek
 Feature.Build.Label.CaptureSelectionCount,{SELECTED_COUNT} van {MAX_SELECTIONS} geselecteerd
-Feature.Build.Label.CaptureStepAddImages,Selecteer Afbeeldingen toevoegen om je opname toe te voegen
+Feature.Build.Label.CaptureStepAddImages,Selecteer <b>Afbeeldingen toevoegen</b> om wat je hebt vastgelegd aan de chat toe te voegen
 Feature.Build.Label.CaptureStepPlaytest,Je game playtesten
-Feature.Build.Label.CaptureStepTapCamera,Selecteer de camera in de werkbalk Bouwen
+Feature.Build.Label.CaptureStepTapCamera,Selecteer het camerapictogram onderaan het scherm
 Feature.Build.Label.ContentRating,
 Feature.Build.Label.CreatedDate, {DAY} {MONTH} {YEAR} 
 Feature.Build.Label.CreatorHub,Creator Hub
@@ -2398,6 +2401,7 @@ Feature.Build.Label.DefaultDeveloperProductName,ontwikkelaarsproduct
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,Verwijderd
 Feature.Build.Label.DescribeIdea,Beschrijf een idee
+Feature.Build.Label.DescribeIdeaOrPick,Beschrijf een idee of kies er hieronder een
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,Beschrijving: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Naam: {NAME}
@@ -3346,20 +3350,26 @@ Feature.CloudClient.Action.PlayWithoutCloudPlay,Spelen zonder Cloud Play
 Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play voert de game uit op de computers van Roblox, waardoor het mogelijk sneller laadt en minder vaak crasht. Het werkt alleen zolang je deze game speelt."
 Feature.CloudClient.Description.GalleryUnavailableCloudPlay,Neem opnieuw deel zonder Cloud Play om je galerij te gebruiken.
 Feature.CloudClient.Description.GalleryUnavailableRobloxReality,Neem opnieuw deel zonder Restyle om je galerij te gebruiken.
+Feature.CloudClient.Description.GalleryUnavailableRobloxRealityV2,Neem opnieuw deel zonder {productName} om je galerij te gebruiken.
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle is een vroege preview. Dingen kunnen er anders uitzien dan in de originele game.
+Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName} is een vroege preview. Dingen kunnen er anders uitzien dan in de originele game.
 Feature.CloudClient.Heading.CloudPlayOffer,Spelen met Cloud Play
 Feature.CloudClient.Heading.GalleryUnavailableCloudPlay,Galerij is nog niet beschikbaar in Cloud Play.
 Feature.CloudClient.Heading.GalleryUnavailableRobloxReality,Galerij is nog niet beschikbaar met Restyle.
+Feature.CloudClient.Heading.GalleryUnavailableRobloxRealityV2,Galerij is nog niet beschikbaar met {productName}.
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Vastleggen is nog niet beschikbaar in Cloud Play.
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Vastleggen is nog niet beschikbaar met Restyle.
+Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,Vastleggen is nog niet beschikbaar met {productName}.
 Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Play werkt niet. Je speelt op de normale manier.
 Feature.CloudClient.Label.RobloxReality,Restyle
 Feature.CloudClient.Label.RobloxRealityDemoLength,Probeer een demo van {minutes} minuten
 Feature.CloudClient.Label.RobloxRealityEndingSoon,"Restyle eindigt over 1 minuut, waarna je de game verlaat."
+Feature.CloudClient.Label.RobloxRealityEndingSoonV2,"{productName} eindigt over 1 minuut, waarna je de game verlaat."
 Feature.CloudClient.Label.RobloxRealityGraphics,Jouw game in een nieuw jasje
 Feature.CloudClient.Label.RobloxRealityPlusOnly,Alleen voor Plus-abonnees
 Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,Zelfweergave is nog niet beschikbaar in Cloud Play.
 Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,Zelfweergave is nog niet beschikbaar met Restyle.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxRealityV2,Zelfweergave is nog niet beschikbaar met {productName}.
 Feature.CloudClient.Label.TimeLeft,Resterende tijd
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,Laat je vrienden je vinden
@@ -3991,9 +4001,15 @@ Feature.Moments.Description.EngagementFirstLike,Nu bekijken
 Feature.Moments.Description.EngagementFirstReaction,Je moment heeft zojuist zijn eerste reactie gekregen!
 Feature.Moments.Description.EngagementLikedCommentsDigest,{likedComments} van je reacties hebben likes gekregen
 Feature.Moments.Description.EngagementMomentDigest,{comments} nieuwe opmerkingen en {milestone} reacties
+Feature.Moments.Description.EngagementMomentFirstReactionDigest,{comments} nieuwe reacties en het eerste antwoord daarop
+Feature.Moments.Description.EngagementMomentsCommentsDigest,{comments} nieuwe reacties op je Momenten
 Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementMomentsReactionsDigest,Je momenten krijgen reacties
 Feature.Moments.Description.EngagementNewComment,heeft zojuist op je moment gereageerd
 Feature.Moments.Description.EngagementNewComments,en {count} anderen reageerden op je moment
+Feature.Moments.Description.EngagementNewCommentsOneOther,en 1 andere persoon reageerde op je moment
+Feature.Moments.Description.EngagementOneCommentDigest,1 nieuwe reactie en {milestone} antwoorden
+Feature.Moments.Description.EngagementOneCommentFirstReactionDigest,1 nieuwe reactie en het eerste antwoord daarop
 Feature.Moments.Description.EngagementReactionMilestone,{count} nieuwe reacties
 Feature.Moments.Description.FollowingCaughtUpBody,Je hebt alle nieuwe momenten in deze feed bekeken. Wissel van feed om er meer te bekijken.
 Feature.Moments.Description.FollowingEmptyBodyRecommended,Je ziet hier momenten van creators die je volgt.
@@ -4987,7 +5003,7 @@ Feature.UniversalShareSheet.Response.SharedMessage,Bericht is verzonden
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Berichten zijn verzonden
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} anderen
 Feature.UserLibrary.Label.MyLibrary,Mijn bibliotheek
-Feature.VIPServer.Message.TooManyFreeServersOnGame,Je kunt niet meer gratis privéservers hebben voor deze game.
+Feature.VIPServer.Message.TooManyFreeServersOnGame,Je kunt niet nog meer gratis privéservers hebben voor deze game.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,Je kunt niet meer actieve gratis privéservers hebben. Deactiveer eerst een aantal andere servers.
 Feature.VerificationUpsell.Action.AddPhone,Telefoonnummer toevoegen
 Feature.VerificationUpsell.Action.AddPhoneNumber,

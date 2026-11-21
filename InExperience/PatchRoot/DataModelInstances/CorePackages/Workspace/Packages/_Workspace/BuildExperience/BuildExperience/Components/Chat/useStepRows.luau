@@ -8,6 +8,7 @@ local LocalToolStepsModule = require(BuildExperience.Chat.localToolSteps)
 local StepSentencesModule = require(BuildExperience.Chat.stepSentences)
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local ActivityLabelHelpersModule = require(script.Parent.activityLabelHelpers)
+local DevProductSummaryModule = require(BuildExperience.Components.AgentCard.devProductSummary)
 local StepListToolLabelsModule = require(script.Parent.stepListToolLabels)
 local LocalizeActivityLabelFunction = ActivityLabelHelpersModule.localizeActivityLabel
 local UseReactiveValueFunction = ActivityLabelHelpersModule.useReactiveValue
@@ -70,8 +71,15 @@ return {
 	end,
 	localizeStepLabel = localizeStepLabel,
 	useStepRows = function(p2)
-		-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), LocalizationRoactContext (copy), UseReactiveValueFunction (copy), t (copy), LocalToolStepsModule (copy), StepSentencesModule (copy), localizeStepLabel (copy), t1 (copy)
-		local Tool = UseLocalizationFunction({ tool = LocalizationStringsModule.CHAT_TOOL }).tool
+		-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), LocalizationRoactContext (copy), UseReactiveValueFunction (copy), t (copy), LocalToolStepsModule (copy), StepSentencesModule (copy), localizeStepLabel (copy), t1 (copy), DevProductSummaryModule (copy)
+		local UseLocalizationResult = UseLocalizationFunction({
+			tool = LocalizationStringsModule.CHAT_TOOL,
+			defaultName = LocalizationStringsModule.AGENT_DEV_PRODUCT_DEFAULT_NAME,
+			unavailablePrice = LocalizationStringsModule.AGENT_DEV_PRODUCT_PRICE_UNAVAILABLE
+		})
+		local Tool = UseLocalizationResult.tool
+		local DefaultName = UseLocalizationResult.defaultName
+		local UnavailablePrice = UseLocalizationResult.unavailablePrice
 		local UseContextResult = ReactModule.useContext(LocalizationRoactContext)
 		local UseReactiveValueResult = UseReactiveValueFunction(p2.activityItems or t)
 		local UseReactiveValueResult1 = UseReactiveValueFunction(p2.isLoading or false)
@@ -84,17 +92,19 @@ return {
 		local IsCompleted = p2.summaryKind == "completed"
 		
 		return ReactModule.useMemo(function()
-			-- upvalues: StepSentencesModule (upval), UseReactiveValueResult (copy), localizeStepLabel (upval), LocalizationStringsModule (upval), t1 (upval), Tool (copy), UseContextResult (copy), UseReactiveValueResult1 (copy), IsCompleted (copy), Current (copy), LocalToolStepsModule (upval)
+			-- upvalues: StepSentencesModule (upval), UseReactiveValueResult (copy), localizeStepLabel (upval), LocalizationStringsModule (upval), t1 (upval), Tool (copy), UseContextResult (copy), UseReactiveValueResult1 (copy), IsCompleted (copy), Current (copy), LocalToolStepsModule (upval), DevProductSummaryModule (upval), DefaultName (copy), UnavailablePrice (copy)
 			return StepSentencesModule.buildStepRows(UseReactiveValueResult, function(p3)
 				-- upvalues: localizeStepLabel (upval), LocalizationStringsModule (upval), t1 (upval), Tool (upval), UseContextResult (upval)
 				return localizeStepLabel(LocalizationStringsModule.CHAT_TOOL, p3, t1, Tool, UseContextResult)
 			end, UseReactiveValueResult1, IsCompleted, Current, function(p3)
-				-- upvalues: LocalToolStepsModule (upval)
-				return if p3.plan == nil then nil else LocalToolStepsModule.getPlanBody(p3.plan)
+				-- upvalues: LocalToolStepsModule (upval), DevProductSummaryModule (upval), UseContextResult (upval), DefaultName (upval), UnavailablePrice (upval)
+				return if p3.plan == nil then if p3.devProduct == nil then nil else {
+					text = DevProductSummaryModule.cardText(p3.devProduct, UseContextResult, DefaultName, UnavailablePrice)
+				} else LocalToolStepsModule.getPlanBody(p3.plan)
 			end)
 		end, {
 			UseReactiveValueResult, UseReactiveValueResult1, IsCompleted, Current, Tool,
-			UseContextResult
+			DefaultName, UnavailablePrice, UseContextResult
 		})
 	end
 }

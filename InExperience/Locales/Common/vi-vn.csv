@@ -785,7 +785,7 @@ CoreScripts.FTUX.Heading.NewTiltOnboarding,Menu nằm ở đây
 CoreScripts.FTUX.Heading.ReadyToPlaytest,Bạn đã sẵn sàng chơi thử chưa?
 CoreScripts.FTUX.Heading.SideSheetUpdate,Tất cả thao tác ở một nơi
 CoreScripts.FTUX.Heading.SocialOnboarding,Tính năng xã hội
-CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,Menu mới
+CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,Hai menu giờ đã được gộp thành một
 CoreScripts.FTUX.Heading.YouAreAnEarlyTester,Bạn là người chơi thử sớm
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,Chuyển sang avatar bạn đã lưu bất cứ lúc nào.
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,Trò chuyện với bạn bè bất cứ lúc nào.
@@ -796,7 +796,7 @@ CoreScripts.FTUX.Label.NewTiltOnboarding,Menu trò chơi chứa thao tác trong 
 CoreScripts.FTUX.Label.PartyWithYourFriendsAnytime,Lập Party với bạn bè bất cứ lúc nào.
 CoreScripts.FTUX.Label.SideSheetOnboarding,"Menu này chứa mọi tính năng thiết yếu bạn cần. Mời bạn bè, dùng thử Biểu cảm, điều khiển Nhạc và nhiều tính năng khác."
 CoreScripts.FTUX.Label.SocialOnboarding,"Dễ dàng truy cập các tính năng xã hội của bạn từ thanh trên cùng, kể cả tính năng Trò chuyện."
-CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,Hai menu giờ đã được gộp thành một. Nhấn vào đây để mở.
+CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,"Mọi thứ bạn cần đều có trong menu này, bao gồm cả nút Rời khỏi."
 CoreScripts.Feedback.EntryPoint.ButtonText,Đưa Ra Phản Hồi
 CoreScripts.Feedback.EntryPoint.OptionText,Đưa Ra Phản Hồi Về Bản Dịch
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,
@@ -2121,8 +2121,11 @@ Feature.AvatarSwitcher.Message.UnknownSupport,"Bạn vẫn có thể đổi avat
 Feature.AvatarSwitcher.Message.Unsupported,Trải nghiệm này sử dụng avatar tùy chỉnh và không hỗ trợ avatar Roblox.
 Feature.AvatarWorkshop.Action.EditAvatar,Chỉnh sửa avatar
 Feature.AvatarWorkshop.Action.TryAgain,
+Feature.AvatarWorkshop.Description.AddAvatar,Thêm avatar này vào danh sách avatar của bạn?
+Feature.AvatarWorkshop.Heading.AddAvatar,Thêm avatar?
 Feature.AvatarWorkshop.Heading.Customize,Tùy chỉnh
 Feature.AvatarWorkshop.Heading.YourAvatars,Avatar của bạn
+Feature.AvatarWorkshop.Label.DefaultAvatarName,
 Feature.AvatarWorkshop.Message.LoadItemsError,Đã xảy ra lỗi khi tải vật phẩm của bạn.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,Không thể tải thêm vật phẩm.
 Feature.AvatarWorkshop.Message.NoItemsOwned,Bạn chưa sở hữu bất kỳ vật phẩm nào ở đây.
@@ -2295,7 +2298,7 @@ Feature.Build.Description.BuildReplyNotif,Nhận thông báo khi Build gửi ph�
 Feature.Build.Description.BuyRobuxToCreate,Hãy mua thêm Robux để tiếp tục sáng tạo hoặc chờ đến ngày mai để lượt sử dụng Build miễn phí của bạn được làm mới.
 Feature.Build.Description.BuyUsageOrWait,"Dùng Robux để mua thêm lượt sử dụng Build, hoặc đợi hạn mức hằng ngày được làm mới."
 Feature.Build.Description.CampaignRunDates,Quảng cáo của bạn chạy từ {startDate} – {endDate}.
-Feature.Build.Description.CaptureWhilePlaytesting,"Chụp ảnh trong lúc chơi thử, rồi thêm ảnh đó vào câu lệnh của bạn."
+Feature.Build.Description.CaptureWhilePlaytesting,Chụp ảnh trong lúc chơi thử để cho tính năng Tạo dựng xem những gì bạn thấy.
 Feature.Build.Description.ChooseAdCampaignLength,Chọn thời gian bạn muốn chạy quảng cáo.
 Feature.Build.Description.ChoosePlaytesters,Chọn bạn bè để xem trước trò chơi của bạn.
 Feature.Build.Description.CreateDeveloperProduct,Tạo {NAME} với giá {PRICE} Robux. Người dùng sẽ chưa thể mua sản phẩm này.
@@ -2404,9 +2407,9 @@ Feature.Build.Label.BackToBuild,Quay lại phần Xây dựng
 Feature.Build.Label.Building,Đang hoạt động...
 Feature.Build.Label.CaptureLibrary,Thư viện ảnh/video
 Feature.Build.Label.CaptureSelectionCount,Đã chọn {SELECTED_COUNT}/{MAX_SELECTIONS}
-Feature.Build.Label.CaptureStepAddImages,Chọn Thêm hình ảnh để đính kèm ảnh chụp của bạn
+Feature.Build.Label.CaptureStepAddImages,Chọn <b>Thêm hình ảnh</b> để thêm ảnh chụp của bạn vào cuộc trò chuyện
 Feature.Build.Label.CaptureStepPlaytest,Chơi thử trò chơi của bạn
-Feature.Build.Label.CaptureStepTapCamera,Chọn camera trong thanh công cụ Dựng
+Feature.Build.Label.CaptureStepTapCamera,Chọn biểu tượng camera ở cuối màn hình
 Feature.Build.Label.ContentRating,Mức phân loại nội dung
 Feature.Build.Label.CreatedDate,{DAY} {MONTH} năm {YEAR}
 Feature.Build.Label.CreatorHub,Trung tâm nhà sáng tạo
@@ -2416,6 +2419,7 @@ Feature.Build.Label.DefaultDeveloperProductName,sản phẩm của nhà phát tr
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,Đã xóa
 Feature.Build.Label.DescribeIdea,Mô tả ý tưởng
+Feature.Build.Label.DescribeIdeaOrPick,Mô tả ý tưởng hoặc chọn một ý tưởng bên dưới
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,Mô tả: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Tên: {NAME}
@@ -3364,20 +3368,26 @@ Feature.CloudClient.Action.PlayWithoutCloudPlay,Chơi mà không dùng Cloud Pla
 Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play chạy trò chơi bằng các máy tính của Roblox, do đó trò chơi có thể tải nhanh hơn và ít bị sập hơn. Tính năng này chỉ hoạt động khi bạn đang chơi trò chơi này."
 Feature.CloudClient.Description.GalleryUnavailableCloudPlay,Hãy tham gia lại mà không dùng Cloud Play để sử dụng thư viện của bạn.
 Feature.CloudClient.Description.GalleryUnavailableRobloxReality,Hãy tham gia lại mà không dùng Restyle để sử dụng thư viện của bạn.
+Feature.CloudClient.Description.GalleryUnavailableRobloxRealityV2,Hãy tham gia lại mà không dùng {productName} để sử dụng thư viện của bạn.
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle là bản xem trước sớm. Hình ảnh có thể khác so với trò chơi gốc.
+Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName} là bản xem trước sớm. Hình ảnh có thể khác so với trò chơi gốc.
 Feature.CloudClient.Heading.CloudPlayOffer,Chơi với Cloud Play
 Feature.CloudClient.Heading.GalleryUnavailableCloudPlay,Cloud Play chưa hỗ trợ thư viện.
 Feature.CloudClient.Heading.GalleryUnavailableRobloxReality,Restyle chưa hỗ trợ thư viện.
+Feature.CloudClient.Heading.GalleryUnavailableRobloxRealityV2,{productName} chưa hỗ trợ thư viện.
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Cloud Play chưa hỗ trợ tính năng Chụp.
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Restyle chưa hỗ trợ tính năng Chụp.
+Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,{productName} chưa hỗ trợ tính năng Chụp.
 Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Play không hoạt động. Bạn đang chơi ở chế độ bình thường.
 Feature.CloudClient.Label.RobloxReality,Restyle
 Feature.CloudClient.Label.RobloxRealityDemoLength,Dùng thử bản demo {minutes} phút
 Feature.CloudClient.Label.RobloxRealityEndingSoon,"Restyle sẽ kết thúc sau 1 phút, và khi đó bạn sẽ rời khỏi trò chơi."
+Feature.CloudClient.Label.RobloxRealityEndingSoonV2,"{productName} sẽ kết thúc sau 1 phút, và khi đó bạn sẽ rời khỏi trò chơi."
 Feature.CloudClient.Label.RobloxRealityGraphics,"Trò chơi của bạn, khoác diện mạo mới"
 Feature.CloudClient.Label.RobloxRealityPlusOnly,Chỉ dành cho người đăng ký Plus
 Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,Cloud Play chưa hỗ trợ chế độ Tự xem.
 Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,Restyle chưa hỗ trợ chế độ Tự xem.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxRealityV2,{productName} chưa hỗ trợ chế độ Tự xem.
 Feature.CloudClient.Label.TimeLeft,Thời gian còn lại
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,Hãy Để Bạn Bè Tìm Thấy Bạn
@@ -4009,9 +4019,15 @@ Feature.Moments.Description.EngagementFirstLike,Xem ngay
 Feature.Moments.Description.EngagementFirstReaction,Đã có người đầu tiên bày tỏ cảm xúc với Khoảnh khắc của bạn!
 Feature.Moments.Description.EngagementLikedCommentsDigest,{likedComments} bình luận của bạn đã nhận được lượt thích
 Feature.Moments.Description.EngagementMomentDigest,{comments} bình luận mới và {milestone} lượt bày tỏ cảm xúc
+Feature.Moments.Description.EngagementMomentFirstReactionDigest,{comments} bình luận mới và lượt bày tỏ cảm xúc đầu tiên
+Feature.Moments.Description.EngagementMomentsCommentsDigest,{comments} bình luận mới về Khoảnh khắc của bạn
 Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementMomentsReactionsDigest,Các Khoảnh khắc của bạn đang nhận được nhiều lượt bày tỏ cảm xúc
 Feature.Moments.Description.EngagementNewComment,vừa bình luận về Khoảnh khắc của bạn
 Feature.Moments.Description.EngagementNewComments,và {count} người khác đã bình luận về Khoảnh khắc của bạn
+Feature.Moments.Description.EngagementNewCommentsOneOther,và 1 người khác đã bình luận về Khoảnh khắc của bạn
+Feature.Moments.Description.EngagementOneCommentDigest,1 bình luận mới và {milestone} lượt bày tỏ cảm xúc
+Feature.Moments.Description.EngagementOneCommentFirstReactionDigest,1 bình luận mới và lượt bày tỏ cảm xúc đầu tiên
 Feature.Moments.Description.EngagementReactionMilestone,{count} lượt bày tỏ cảm xúc mới
 Feature.Moments.Description.FollowingCaughtUpBody,Bạn đã xem hết Khoảnh khắc mới trong bảng tin này. Hãy chuyển sang bảng tin khác để xem thêm.
 Feature.Moments.Description.FollowingEmptyBodyRecommended,"Tại đây, bạn sẽ xem được Khoảnh khắc của các nhà sáng tạo mà bạn đang theo dõi."

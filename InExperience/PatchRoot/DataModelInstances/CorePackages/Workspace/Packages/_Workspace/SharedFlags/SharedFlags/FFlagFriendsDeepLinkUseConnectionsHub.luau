@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("FriendsDeepLinkUseConnectionsHub", false) and require(script.Parent.FFlagCreateConnectionsHub)

@@ -767,7 +767,7 @@ CoreScripts.FTUX.Heading.NewTiltOnboarding,मेन्यू यहाँ म�
 CoreScripts.FTUX.Heading.ReadyToPlaytest,प्ले-टेस्ट करने के लिए तैयार हैं?
 CoreScripts.FTUX.Heading.SideSheetUpdate,आपके सभी ऐक्शन एक ही जगह पर
 CoreScripts.FTUX.Heading.SocialOnboarding,सोशल फ़ीचर्स
-CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,आपका नया मेन्यू
+CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,अब दो मेन्यू की जगह एक ही मेन्यू है
 CoreScripts.FTUX.Heading.YouAreAnEarlyTester,आप एक अर्ली टेस्टर हैं
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,किसी भी समय अपने सेव किए गए अवतार पर स्विच करें.
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,किसी भी समय अपने दोस्तों से चैट करें.
@@ -778,7 +778,7 @@ CoreScripts.FTUX.Label.NewTiltOnboarding,गेम मेन्यू में 
 CoreScripts.FTUX.Label.PartyWithYourFriendsAnytime,किसी भी समय अपने दोस्तों के साथ पार्टी करें.
 CoreScripts.FTUX.Label.SideSheetOnboarding,"मेन्यू में आपके सभी ज़रूरी फ़ीचर्स मौजूद हैं. दोस्तों को इनवाइट करने, Emotes आज़माने, म्यूज़िक कंट्रोल करने के साथ-साथ और भी बहुत कुछ."
 CoreScripts.FTUX.Label.SocialOnboarding,"टॉप बार से अपने सोशल फ़ीचर्स आसानी से ऐक्सेस करें, जिसमें चैट भी शामिल है."
-CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,अब दो मेन्यू की जगह एक ही मेन्यू है. इसे खोलने के लिए यहाँ टैप करें.
+CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,"इस मेन्यू में आपको सभी ज़रूरी विकल्प मिलेंगे, जिनमें गेम छोड़ने का विकल्प भी शामिल है."
 CoreScripts.Feedback.EntryPoint.ButtonText,फ़ीडबैक दें
 CoreScripts.Feedback.EntryPoint.OptionText,अनुवाद का फ़ीडबैक दें
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,बाहर निकलें
@@ -2102,8 +2102,11 @@ Feature.AvatarSwitcher.Message.UnknownSupport,"आप अभी भी अपन
 Feature.AvatarSwitcher.Message.Unsupported,यह एक्सपीरिएंस कस्टम अवतार का इस्तेमाल करता है और Roblox अवतारों को सपोर्ट नहीं करता है.
 Feature.AvatarWorkshop.Action.EditAvatar,अवतार एडिट करें
 Feature.AvatarWorkshop.Action.TryAgain,
+Feature.AvatarWorkshop.Description.AddAvatar,इस अवतार को अपने अवतारों में जोड़ना है?
+Feature.AvatarWorkshop.Heading.AddAvatar,अवतार जोड़ना है?
 Feature.AvatarWorkshop.Heading.Customize,कस्टमाइज़ करें
 Feature.AvatarWorkshop.Heading.YourAvatars,आपके अवतार
+Feature.AvatarWorkshop.Label.DefaultAvatarName,
 Feature.AvatarWorkshop.Message.LoadItemsError,आपके आइटम लोड नहीं हो सके.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,और आइटम लोड नहीं किए जा सके.
 Feature.AvatarWorkshop.Message.NoItemsOwned,आपके पास अभी तक यहाँ कोई भी आइटम नहीं है.
@@ -2276,7 +2279,7 @@ Feature.Build.Description.BuildReplyNotif,बिल्ड से आपके �
 Feature.Build.Description.BuyRobuxToCreate,"क्रिएट करना जारी रखने के लिए, और Robux खरीदें या कल अपने मुफ़्त बिल्ड के इस्तेमाल के रीसेट होने का इंतज़ार करें."
 Feature.Build.Description.BuyUsageOrWait,Robux की मदद से बिल्ड का ज़्यादा इस्तेमाल खरीदें या अपनी रोज़ाना की लिमिट के रीसेट होने का इंतज़ार करें.
 Feature.Build.Description.CampaignRunDates,आपका ऐड {startDate} से {endDate} तक चलेगा.
-Feature.Build.Description.CaptureWhilePlaytesting,"प्लेटेस्ट के दौरान एक कैप्चर लें, फिर उसे अपने प्रॉम्प्ट में जोड़ें."
+Feature.Build.Description.CaptureWhilePlaytesting,"प्लेटेस्ट के दौरान एक कैप्चर लें, ताकि 'बिल्ड' को दिखा सकें कि आपको क्या दिख रहा है."
 Feature.Build.Description.ChooseAdCampaignLength,चुनें कि आपको अपना ऐड कब तक चलाना है।
 Feature.Build.Description.ChoosePlaytesters,चुनें कि कौन-से फ़्रेंड्स आपका गेम प्रीव्यू कर सकते हैं.
 Feature.Build.Description.CreateDeveloperProduct,{PRICE} Robux में {NAME} क्रिएट करें. यह अभी खरीदने के लिए उपलब्ध नहीं होगा.
@@ -2385,9 +2388,9 @@ Feature.Build.Label.BackToBuild,बिल्ड पर वापस जाएँ
 Feature.Build.Label.Building,काम चल रहा है…
 Feature.Build.Label.CaptureLibrary,कैप्चर लाइब्रेरी
 Feature.Build.Label.CaptureSelectionCount,{MAX_SELECTIONS} में से {SELECTED_COUNT} को चुना गया
-Feature.Build.Label.CaptureStepAddImages,"अपना कैप्चर अटैच करने के लिए, 'इमेज जोड़ें' चुनें"
+Feature.Build.Label.CaptureStepAddImages,"अपने कैप्चर को चैट में जोड़ने के लिए, <b>इमेज जोड़ें</b> चुनें"
 Feature.Build.Label.CaptureStepPlaytest,अपना गेम प्ले-टेस्ट करें
-Feature.Build.Label.CaptureStepTapCamera,'बिल्ड' टूलबार में कैमरा चुनें
+Feature.Build.Label.CaptureStepTapCamera,स्क्रीन पर सबसे नीचे मौजूद कैमरा आइकॉन चुनें
 Feature.Build.Label.ContentRating,कॉन्टेंट रेटिंग
 Feature.Build.Label.CreatedDate,"{MONTH} {DAY}, {YEAR}"
 Feature.Build.Label.CreatorHub,Creator Hub
@@ -2397,6 +2400,7 @@ Feature.Build.Label.DefaultDeveloperProductName,डेवलपर प्रॉ�
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,डिलीट किया गया
 Feature.Build.Label.DescribeIdea,किसी आइडिया के बारे में बताएँ
+Feature.Build.Label.DescribeIdeaOrPick,अपना आइडिया बताएँ या नीचे से कोई आइडिया चुनें
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,विवरण : {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,नाम : {NAME}
@@ -3345,20 +3349,26 @@ Feature.CloudClient.Action.PlayWithoutCloudPlay,Cloud Play के बिना �
 Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play से गेम Roblox के कंप्यूटर पर चलता है, इसलिए हो सकता है कि वह ज़्यादा जल्दी लोड हो और उसमें क्रैश की समस्या कम आए. यह सिर्फ़ आपके गेम खेलने तक चलता है."
 Feature.CloudClient.Description.GalleryUnavailableCloudPlay,"अपनी 'गैलरी' का इस्तेमाल करने के लिए, Cloud Play के बिना फिर से गेम जॉइन करें."
 Feature.CloudClient.Description.GalleryUnavailableRobloxReality,"अपनी 'गैलरी' का इस्तेमाल करने के लिए, Restyle के बिना फिर से गेम जॉइन करें."
+Feature.CloudClient.Description.GalleryUnavailableRobloxRealityV2,"अपनी गैलरी का इस्तेमाल करने के लिए, {productName} के बिना फिर से गेम जॉइन करें."
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle एक अर्ली प्रीव्यू वाली सुविधा है. इसमें चीज़ें ओरिजिनल गेम से अलग नज़र आ सकती हैं.
+Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName} एक अर्ली प्रीव्यू वाली सुविधा है. इसमें चीज़ें ओरिजिनल गेम से अलग नज़र आ सकती हैं.
 Feature.CloudClient.Heading.CloudPlayOffer,Cloud Play के साथ खेलें
 Feature.CloudClient.Heading.GalleryUnavailableCloudPlay,Cloud Play में अभी तक 'गैलरी' उपलब्ध नहीं है.
 Feature.CloudClient.Heading.GalleryUnavailableRobloxReality,Restyle में अभी तक 'गैलरी' उपलब्ध नहीं है.
+Feature.CloudClient.Heading.GalleryUnavailableRobloxRealityV2,अभी {productName} में गैलरी उपलब्ध नहीं है.
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Cloud Play में अभी तक 'कैप्चर करें' बटन उपलब्ध नहीं है.
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Restyle में अभी तक 'कैप्चर करें' बटन उपलब्ध नहीं है.
+Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,{productName} में अभी 'कैप्चर करें' बटन उपलब्ध नहीं है.
 Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Play काम नहीं कर रहा है. आपका गेम सामान्य रूप से चल रहा है.
 Feature.CloudClient.Label.RobloxReality,Restyle
 Feature.CloudClient.Label.RobloxRealityDemoLength,{minutes} मिनट का डेमो देखें
 Feature.CloudClient.Label.RobloxRealityEndingSoon,Restyle 1 मिनट में खत्म हो जाएगा और आपको गेम छोड़ना होगा.
+Feature.CloudClient.Label.RobloxRealityEndingSoonV2,{productName} 1 मिनट में खत्म हो जाएगा और आपको गेम छोड़ना होगा.
 Feature.CloudClient.Label.RobloxRealityGraphics,"आपका गेम, नए अंदाज़ में"
 Feature.CloudClient.Label.RobloxRealityPlusOnly,सिर्फ़ Plus के सब्सक्राइबर्स के लिए
 Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,Cloud Play में अभी तक 'सेल्फ़ व्यू' उपलब्ध नहीं है.
 Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,Restyle में अभी तक 'सेल्फ़ व्यू' उपलब्ध नहीं है.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxRealityV2,{productName} में अभी 'सेल्फ़ व्यू' उपलब्ध नहीं है.
 Feature.CloudClient.Label.TimeLeft,बचा हुआ समय
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,खुद को खोजने में अपने फ़्रेंड्स की मदद करें
@@ -3990,9 +4000,15 @@ Feature.Moments.Description.EngagementFirstLike,इसे अभी देखे
 Feature.Moments.Description.EngagementFirstReaction,आपके Moment पर अभी-अभी पहला रिऐक्शन आया है!
 Feature.Moments.Description.EngagementLikedCommentsDigest,आपके {likedComments} कमेंट को लाइक मिले हैं
 Feature.Moments.Description.EngagementMomentDigest,{comments} नए कमेंट और {milestone} रिऐक्शन
+Feature.Moments.Description.EngagementMomentFirstReactionDigest,{comments} नए कमेंट और इस पर आया पहला रिऐक्शन
+Feature.Moments.Description.EngagementMomentsCommentsDigest,आपके Moments पर {comments} नए कमेंट
 Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementMomentsReactionsDigest,आपके Moments पर रिएक्शन आ रहे हैं
 Feature.Moments.Description.EngagementNewComment,ने अभी-अभी आपके Moment पर कमेंट किया है
 Feature.Moments.Description.EngagementNewComments,और {count} अन्य लोगों ने आपके Moment पर कमेंट किया है
+Feature.Moments.Description.EngagementNewCommentsOneOther,और 1 अन्य व्यक्ति ने आपके Moment पर कमेंट किया है
+Feature.Moments.Description.EngagementOneCommentDigest,1 नया कमेंट और {milestone} रिऐक्शन
+Feature.Moments.Description.EngagementOneCommentFirstReactionDigest,1 नया कमेंट और इस पर आया पहला रिऐक्शन
 Feature.Moments.Description.EngagementReactionMilestone,{count} नए रिऐक्शन
 Feature.Moments.Description.FollowingCaughtUpBody,आपने इस फ़ीड में सभी नए Moments देख लिए हैं. और देखने के लिए फ़ीड बदलें.
 Feature.Moments.Description.FollowingEmptyBodyRecommended,"आपको यहाँ उन क्रिएटर्स के Moments दिखेंगे, जिन्हें आपने फ़ॉलो किया है."
@@ -4986,7 +5002,7 @@ Feature.UniversalShareSheet.Response.SharedMessage,मैसेज भेजा 
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,मैसेज भेजे गए
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} अन्य
 Feature.UserLibrary.Label.MyLibrary,मेरी लाइब्रेरी
-Feature.VIPServer.Message.TooManyFreeServersOnGame,आपको इस एक्सपीरिएंस पर और फ़्री प्राइवेट सर्वर नहीं मिल सकते.
+Feature.VIPServer.Message.TooManyFreeServersOnGame,आपको इस गेम पर और फ़्री प्राइवेट सर्वर नहीं मिल सकते.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,आपके पास ज़्यादा ऐक्टिव फ़्री प्राइवेट सर्वर नहीं हो सकते. पहले कुछ और सर्वर डीऐक्टिवेट करें.
 Feature.VerificationUpsell.Action.AddPhone,फ़ोन नंबर जोड़ें
 Feature.VerificationUpsell.Action.AddPhoneNumber,

@@ -33,6 +33,12 @@ return {
 				-- upvalues: p1 (copy), v1 (ref)
 				p1.finished:Fire(v1)
 			end,
+			requestScreenOrientation = function(p2)
+				-- upvalues: p1 (copy)
+				if p1.screenOrientationRequested then
+					p1.screenOrientationRequested:Fire(p2)
+				end
+			end,
 			subscribeVisibility = function(Callback1: (any) -> ())
 				-- upvalues: Callback (ref), v2 (ref)
 				Callback = Callback1

@@ -31,7 +31,6 @@
 	SduiIconButton = require(script.Components.SduiIconButton),
 	SduiTextAccessoryRow = require(script.Components.SduiTextAccessoryRow),
 	SduiMediaGallery = require(script.Components.SduiMediaGallery),
-	SduiSkeleton = require(script.Components.SduiSkeleton),
 	registerSharedActions = require(script.Actions.registerSharedActions),
 	getSduiContentReactionVerticalRegistry = require(script.Actions.getSduiContentReactionVerticalRegistry),
 	registerSharedUiComponents = require(script.Components.registerSharedUiComponents),

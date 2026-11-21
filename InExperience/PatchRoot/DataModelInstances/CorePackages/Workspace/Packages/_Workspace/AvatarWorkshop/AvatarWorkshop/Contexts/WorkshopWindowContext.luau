@@ -1,4 +1,6 @@
 ﻿return require(script:FindFirstAncestor("AvatarWorkshop").Parent.React).createContext({
 	verticalLayout = false,
-	onClose = function() end
+	respawnEnabled = false,
+	onClose = function() end,
+	respawn = function() end
 })

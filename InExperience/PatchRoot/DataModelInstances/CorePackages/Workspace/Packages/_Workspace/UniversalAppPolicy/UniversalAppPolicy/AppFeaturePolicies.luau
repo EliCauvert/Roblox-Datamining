@@ -1059,6 +1059,10 @@ return function(p1)
 			-- upvalues: p1 (copy)
 			return p1.showInContextPersonalizedRecommendationsSearchOmnisearchPeople or false
 		end,
+		getShowInContextPersonalizedRecommendationsExperienceDetailsStore = function()
+			-- upvalues: p1 (copy)
+			return p1.showInContextPersonalizedRecommendationsExperienceDetailsStore or false
+		end,
 		getSupportCenterEnabled = if GetFFlagEnableSupportCenterFunction() then function()
 			-- upvalues: p1 (copy)
 			return p1.SupportCenterEnabled or false

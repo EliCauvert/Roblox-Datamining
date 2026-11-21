@@ -160,7 +160,14 @@ return function(p1)
 				-- upvalues: UseResult (copy), Current (copy)
 				UseResult(Current:videoEnded())
 			end,
-			onAspectRatioChanged = UseStateResult2_1
+			onAspectRatioChanged = function(p2: number)
+				-- upvalues: UseStateResult2_1 (copy), Current (copy), Host (copy)
+				UseStateResult2_1(p2)
+				
+				if Current:isActive() then
+					Host.requestScreenOrientation(if p2 > 1 then "Landscape" else "Portrait")
+				end
+			end
 		},
 		onScreenSize = function(Frame)
 			-- upvalues: UseRefResult2 (copy)

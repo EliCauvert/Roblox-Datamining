@@ -18,9 +18,9 @@ local function systemRichText(ItemSignalResult)
 	if Detail == nil then
 		return ""
 	else
-		local EscapeRichTextModuleResult = EscapeRichTextModule(Detail.text)
+		local Text = if Detail.richText == true then Detail.text else EscapeRichTextModule(Detail.text)
 		
-		return if Detail.iconName == nil then EscapeRichTextModuleResult else `{FormatInlineIconModule(Detail.iconName, { weight = "600" })} {EscapeRichTextModuleResult}`
+		return if Detail.iconName == nil then Text else `{FormatInlineIconModule(Detail.iconName, { weight = "600" })} {Text}`
 	end
 end
 

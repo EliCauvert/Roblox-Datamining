@@ -32,6 +32,7 @@ local FFlagBuildExperienceInGameShell = require(Parent.SharedFlags).FFlagBuildEx
 local FFlagBuildExperienceInGameShellComposer = require(Parent.SharedFlags).FFlagBuildExperienceInGameShellComposer
 local FFlagBuildExperienceChatAccordionScrollAnchorModule = require(BuildExperience.Flags.FFlagBuildExperienceChatAccordionScrollAnchor)
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
+local FFlagBuildChatSheetComposerOnlyBeforeFirstPromptModule = require(BuildExperience.Flags.FFlagBuildChatSheetComposerOnlyBeforeFirstPrompt)
 local _ = require(BuildExperience.useGamePermissions)
 local Sheet = FoundationModule.Sheet
 local UseScrollPerformanceTrackerModule = require(BuildExperience.Telemetry.useScrollPerformanceTracker)
@@ -46,8 +47,16 @@ local EventMap = {
 	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
 
+local function _(p1)
+	return if p1.showsOnlyComposer then nil else p1.snapPoints
+end
+
+local _ = function(p1): boolean
+	return not p1.showsOnlyComposer
+end
+
 local function ChatSheetContent(p1)
-	-- upvalues: ReactModule (copy), FFlagBuildExperienceLibrary (copy), UseScrollPerformanceTrackerModule (copy)
+	-- upvalues: ReactModule (copy), FFlagBuildExperienceLibrary (copy), UseScrollPerformanceTrackerModule (copy), FFlagBuildChatSheetComposerOnlyBeforeFirstPromptModule (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local v1 = nil
 	local Callback = nil
@@ -74,11 +83,14 @@ local function ChatSheetContent(p1)
 			end
 		end, { p1.onFramesChanged, p1.sheet, v1 })
 	end
-	return ReactModule.createElement(p1.sheetComponent.Content, { isReversed = true, scrollingFrameRef = UseResult }, p1.children)
+	return ReactModule.createElement(p1.sheetComponent.Content, {
+		isReversed = not FFlagBuildChatSheetComposerOnlyBeforeFirstPromptModule or p1.isReversed,
+		scrollingFrameRef = UseResult
+	}, p1.children)
 end
 
 return function(p1)
-	-- upvalues: FFlagBuildExperienceAnswerFormModule (copy), Sheet (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseTokensFunction (copy), ReactModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), ReactUtilsModule (copy), ChatMessageListModule (copy), BuildEmptyStateModule (copy), FFlagBuildExperienceModelPickerModule (copy), BuyMoreRobuxCardModule (copy), AnswerFormContainerModule (copy), ChatConstantsModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), FFlagBuildCheckGamePermissionsModule (copy), ChatPermissionsContextModule (copy), View (copy), FFlagBuildExperienceLibrary (copy), ChatActionsModule (copy), FFlagBuildExperienceInGameShellComposer (copy), DialogSize (copy), ChatSheetContent (copy), BuildPillMenuPageHostModule (copy), FFlagBuildExperienceInGameShell (copy), BuildPillMenuPortalModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), ChatCardEmphasisProviderModule (copy)
+	-- upvalues: FFlagBuildExperienceAnswerFormModule (copy), Sheet (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseTokensFunction (copy), ReactModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), ReactUtilsModule (copy), ChatMessageListModule (copy), BuildEmptyStateModule (copy), FFlagBuildExperienceModelPickerModule (copy), BuyMoreRobuxCardModule (copy), AnswerFormContainerModule (copy), ChatConstantsModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), FFlagBuildCheckGamePermissionsModule (copy), ChatPermissionsContextModule (copy), View (copy), FFlagBuildExperienceLibrary (copy), ChatActionsModule (copy), FFlagBuildExperienceInGameShellComposer (copy), FFlagBuildChatSheetComposerOnlyBeforeFirstPromptModule (copy), DialogSize (copy), ChatSheetContent (copy), BuildPillMenuPageHostModule (copy), FFlagBuildExperienceInGameShell (copy), BuildPillMenuPortalModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), ChatCardEmphasisProviderModule (copy)
 	local HasAnswerForm: boolean = FFlagBuildExperienceAnswerFormModule and p1.answerForm ~= nil
 	local SheetComponent = p1.sheetComponent or Sheet
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -195,7 +207,7 @@ return function(p1)
 	local Element3 = ReactModule.createElement(SheetComponent.Root, {
 		ref = UseComposedRefResult,
 		isOpen = p1.isOpen,
-		snapPoints = p1.snapPoints,
+		snapPoints = if FFlagBuildChatSheetComposerOnlyBeforeFirstPromptModule and p1.showsOnlyComposer then nil else p1.snapPoints,
 		defaultSnapPointIndex = p1.defaultSnapPointIndex,
 		onSnapPointChanged = p1.onSnapPointChanged,
 		size = DialogSize.Large,
@@ -205,8 +217,12 @@ return function(p1)
 			setScrollingFrame = p1.scrollingFrameRef,
 			sheetComponent = SheetComponent,
 			sheet = UseStateResult,
-			onFramesChanged = p1.onFramesChanged
-		}, { MessageList = Element1 }),
+			onFramesChanged = p1.onFramesChanged,
+			key = if FFlagBuildChatSheetComposerOnlyBeforeFirstPromptModule and p1.showsOnlyComposer then "ComposerOnlyContent" else nil,
+			isReversed = if FFlagBuildChatSheetComposerOnlyBeforeFirstPromptModule then not p1.showsOnlyComposer else nil
+		}, {
+			MessageList = if FFlagBuildChatSheetComposerOnlyBeforeFirstPromptModule and p1.showsOnlyComposer then nil else Element1
+		}),
 		Actions = if HasAnswerForm then nil else ReactModule.createElement(SheetComponent.Actions, nil, {
 			Footer = if Element == nil then Element2 else ReactModule.createElement(View, { tag = "col gap-medium size-full-0 auto-y" }, { FundingRecovery = Element, Composer = Element2 })
 		}),

@@ -7,6 +7,7 @@ local VersionHistoryContainerModule = require(BuildExperience.Components.Version
 local GameInfoUtilsModule = require(BuildExperience.utils.GameInfoUtils)
 local FFlagBuildExperiencePageImpressionsModule = require(BuildExperience.Flags.FFlagBuildExperiencePageImpressions)
 local FFlagBuildExperienceClickEventIdsModule = require(BuildExperience.Flags.FFlagBuildExperienceClickEventIds)
+local FFlagBuildPublishSheetReturnOnBackModule = require(BuildExperience.Flags.FFlagBuildPublishSheetReturnOnBack)
 local UseBuildPageImpressionModule = require(BuildExperience.Telemetry.useBuildPageImpression)
 local Screens = require(BuildExperience.Components.BuildPillMenu.BuildOverflowMenuScreens).Screens
 
@@ -16,7 +17,7 @@ local function _(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), GameInfoUtilsModule (copy), FFlagBuildExperiencePageImpressionsModule (copy), UseBuildPageImpressionModule (copy), Screens (copy), PublishBottomSheetContainerModule (copy), VersionHistoryContainerModule (copy), FFlagBuildExperienceClickEventIdsModule (copy)
+	-- upvalues: ReactModule (copy), GameInfoUtilsModule (copy), FFlagBuildExperiencePageImpressionsModule (copy), UseBuildPageImpressionModule (copy), FFlagBuildPublishSheetReturnOnBackModule (copy), Screens (copy), PublishBottomSheetContainerModule (copy), VersionHistoryContainerModule (copy), FFlagBuildExperienceClickEventIdsModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local NavigateToSubPageFunction = p1.navigateToSubPage
 	local OnCloseFunction = p1.onClose
@@ -44,13 +45,12 @@ return function(p1)
 	end
 	local IsTitleDescriptionReady = GameInfoUtilsModule.isTitleDescriptionReady(UseGameInfoResult)
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: IsTitleDescriptionReady (copy), OnCloseFunction (copy), NavigateToSubPageFunction (copy), Screens (upval), UseMemoResult (copy)
-		if IsTitleDescriptionReady then
+		-- upvalues: IsTitleDescriptionReady (copy), FFlagBuildPublishSheetReturnOnBackModule (upval), OnCloseFunction (copy), NavigateToSubPageFunction (copy), Screens (upval), UseMemoResult (copy)
+		if not IsTitleDescriptionReady then return end
+		if not FFlagBuildPublishSheetReturnOnBackModule then
 			OnCloseFunction()
-			NavigateToSubPageFunction(Screens.BuildTitleDescription, UseMemoResult)
-			
-			return
 		end
+		NavigateToSubPageFunction(Screens.BuildTitleDescription, UseMemoResult)
 	end, {
 		OnCloseFunction,
 		NavigateToSubPageFunction,
@@ -58,8 +58,10 @@ return function(p1)
 		UseMemoResult
 	})
 	local UseResult1 = ReactModule.useCallback(function()
-		-- upvalues: OnCloseFunction (copy), NavigateToSubPageFunction (copy), Screens (upval), UseMemoResult (copy)
-		OnCloseFunction()
+		-- upvalues: FFlagBuildPublishSheetReturnOnBackModule (upval), OnCloseFunction (copy), NavigateToSubPageFunction (copy), Screens (upval), UseMemoResult (copy)
+		if not FFlagBuildPublishSheetReturnOnBackModule then
+			OnCloseFunction()
+		end
 		NavigateToSubPageFunction(Screens.BuildMediaSelection, UseMemoResult)
 	end, {
 		OnCloseFunction,
@@ -67,13 +69,12 @@ return function(p1)
 		UseMemoResult
 	})
 	local UseResult2 = ReactModule.useCallback(function()
-		-- upvalues: Number (copy), OnCloseFunction (copy), NavigateToSubPageFunction (copy), Screens (upval), UseMemoResult (copy)
-		if Number ~= nil then
+		-- upvalues: Number (copy), FFlagBuildPublishSheetReturnOnBackModule (upval), OnCloseFunction (copy), NavigateToSubPageFunction (copy), Screens (upval), UseMemoResult (copy)
+		if Number == nil then return end
+		if not FFlagBuildPublishSheetReturnOnBackModule then
 			OnCloseFunction()
-			NavigateToSubPageFunction(Screens.BuildVersionTitleDescription, UseMemoResult)
-			
-			return
 		end
+		NavigateToSubPageFunction(Screens.BuildVersionTitleDescription, UseMemoResult)
 	end, {
 		OnCloseFunction,
 		NavigateToSubPageFunction,
@@ -81,21 +82,21 @@ return function(p1)
 		UseMemoResult
 	})
 	local UseResult3 = ReactModule.useCallback(function()
-		-- upvalues: Number (copy), OnCloseFunction (copy), UseStateResult2 (copy)
-		if Number ~= nil then
+		-- upvalues: Number (copy), FFlagBuildPublishSheetReturnOnBackModule (upval), OnCloseFunction (copy), UseStateResult2 (copy)
+		if Number == nil then return end
+		if not FFlagBuildPublishSheetReturnOnBackModule then
 			OnCloseFunction()
-			UseStateResult2(true)
-			
-			return
 		end
+		UseStateResult2(true)
 	end, { OnCloseFunction, Number })
 	local UseResult4 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, {})
+	local NoUseStateResult = if FFlagBuildPublishSheetReturnOnBackModule then p1.isOpen and (not p1.isCovered and not UseStateResult) else p1.isOpen
 	
 	return ReactModule.createElement(ReactModule.Fragment, nil, {
-		PublishSheet = if p1.isOpen then ReactModule.createElement(PublishBottomSheetContainerModule, {
+		PublishSheet = if NoUseStateResult then ReactModule.createElement(PublishBottomSheetContainerModule, {
 			isOpen = true,
 			target = UseMemoResult,
 			gameInfo = UseGameInfoResult,
@@ -112,7 +113,8 @@ return function(p1)
 			universeId = if FFlagBuildExperienceClickEventIdsModule then Target.universeId else nil,
 			placeId = Number,
 			sessionId = if FFlagBuildExperienceClickEventIdsModule then Target.sessionId else nil,
-			onClose = UseResult4
+			onClose = UseResult4,
+			onOpenPublish = if FFlagBuildPublishSheetReturnOnBackModule then UseResult4 else nil
 		}) else nil
 	})
 end

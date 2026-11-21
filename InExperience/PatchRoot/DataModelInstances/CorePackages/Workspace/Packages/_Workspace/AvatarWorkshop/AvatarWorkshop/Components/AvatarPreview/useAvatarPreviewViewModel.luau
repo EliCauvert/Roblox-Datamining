@@ -63,8 +63,10 @@ return function(Frame)
 	local RefitFunction = UseModelViewportResult.refit
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(true)
 	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(Frame.onBuildFailed)
+	UseRefResult1.current = Frame.onBuildFailed
 	ReactModule.useEffect(function()
-		-- upvalues: CreateAvatarModelPoolModule (upval), AvatarPreviewUtilsModule (upval), UseStateResult2_1 (copy), getFilteredState (upval), SceneRefs (copy), RefitFunction (copy), UseStateResult2 (copy), UseRefResult (copy)
+		-- upvalues: CreateAvatarModelPoolModule (upval), AvatarPreviewUtilsModule (upval), UseStateResult2_1 (copy), getFilteredState (upval), SceneRefs (copy), RefitFunction (copy), UseStateResult2 (copy), UseRefResult1 (copy), UseRefResult (copy)
 		local AvatarModelPoolModule = CreateAvatarModelPoolModule()
 		local v1 = nil
 		local Flag = false
@@ -88,7 +90,7 @@ return function(Frame)
 		end
 		
 		local function runBuilds()
-			-- upvalues: Flag (ref), v1 (ref), Flag1 (ref), v6 (ref), getFilteredState (upval), v2 (ref), AvatarPreviewUtilsModule (upval), UseStateResult2_1 (upval), SceneRefs (upval), AvatarModelPoolModule (copy), showSpinner (copy), v3 (ref), RefitFunction (upval), UseStateResult2 (upval), v4 (ref), v5 (ref)
+			-- upvalues: Flag (ref), v1 (ref), Flag1 (ref), v6 (ref), getFilteredState (upval), v2 (ref), AvatarPreviewUtilsModule (upval), UseStateResult2_1 (upval), SceneRefs (upval), AvatarModelPoolModule (copy), showSpinner (copy), v3 (ref), RefitFunction (upval), UseStateResult2 (upval), v4 (ref), v5 (ref), UseRefResult1 (upval)
 			Flag = true
 			while v1 and not Flag1 do
 				local v7 = v1
@@ -137,6 +139,18 @@ return function(Frame)
 					end
 					if not Success then
 						warn("AvatarPreview failed to build the avatar:", Result)
+						local CurrentFunction = UseRefResult1.current
+						
+						if CurrentFunction then
+							local Success2, Result3 = pcall(function()
+								-- upvalues: CurrentFunction (copy), v7 (copy)
+								CurrentFunction(v7.avatarState)
+							end)
+							
+							if not Success2 then
+								warn("AvatarPreview onBuildFailed threw:", Result3)
+							end
+						end
 					end
 				end
 				if not v1 then
@@ -162,9 +176,9 @@ return function(Frame)
 						local Success, Result = pcall(getFilteredState, p2)
 						
 						if not Success or Flag1 or v1 ~= p2 then return end
-						local V35 = v6 or v2
+						local V36 = v6 or v2
 						
-						if V35 == nil or (V35.rigType ~= Result.rigType or AvatarPreviewUtilsModule.needsClusterComposition(Result, V35.humanoidDescription)) then
+						if V36 == nil or (V36.rigType ~= Result.rigType or AvatarPreviewUtilsModule.needsClusterComposition(Result, V36.humanoidDescription)) then
 							UseStateResult2_1(true)
 						end
 					end)

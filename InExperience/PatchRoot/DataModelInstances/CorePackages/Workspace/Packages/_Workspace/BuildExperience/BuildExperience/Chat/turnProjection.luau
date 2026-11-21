@@ -11,6 +11,7 @@ local GetToolDisplaySummaryFunction = require(script.Parent.toolDisplaySummary).
 local FFlagBuildExperienceStepListModule = require(BuildExperience.Flags.FFlagBuildExperienceStepList)
 local StepSentencesModule = if FFlagBuildExperienceStepListModule then require(script.Parent.stepSentences) else nil
 local LocalToolStepsModule = if FFlagBuildExperienceStepListModule then require(script.Parent.localToolSteps) else nil
+local DevProductCallModule = if FFlagBuildExperienceStepListModule then require(script.Parent.devProductCall) else nil
 local FFlagBuildExperienceThoughtStatus = CreatorAgentChatModule.FFlagBuildExperienceThoughtStatus
 local GetThoughtHeadingFunction = require(script.Parent.thoughtHeading).getThoughtHeading
 local SplitThoughtFunction = require(script.Parent.thoughtHeading).splitThought
@@ -199,7 +200,7 @@ local function getItemsNamingTheHeader(ActivityItems, LocalToolSteps)
 	return List
 end
 
-local function makeActiveActivitySummary(ActivityItems, IsLoading, Key, CHATASSISTANTLOADING, Enabled, p5, p6, LocalToolSteps, Enabled1)
+local function makeActiveActivitySummary(ActivityItems, IsLoading, Key, CHATASSISTANTLOADING, Enabled, p5, LocalToolSteps, Enabled1)
 	-- upvalues: FFlagBuildExperienceStepListModule (copy), getItemsNamingTheHeader (copy), GetSummaryToolActivityFunction (copy), FFlagBuildExperienceToolDisplaySummaryModule (copy), FFlagBuildExperienceThoughtStatus (copy), LocalizationStringsModule (copy)
 	if #ActivityItems == 0 and not IsLoading then
 		return nil
@@ -209,15 +210,7 @@ local function makeActiveActivitySummary(ActivityItems, IsLoading, Key, CHATASSI
 	if v1 and Enabled ~= true then
 		CHATASSISTANTLOADING = nil
 	end
-	local Active = nil
-	
-	if CHATASSISTANTLOADING == nil then
-		Active = GetSummaryToolActivityFunction(if FFlagBuildExperienceStepListModule then getItemsNamingTheHeader(ActivityItems, LocalToolSteps) else ActivityItems, "active")
-		
-		if FFlagBuildExperienceStepListModule and Active == nil and Enabled == true then
-			Active = p6
-		end
-	end
+	local Active = if CHATASSISTANTLOADING == nil then GetSummaryToolActivityFunction(if FFlagBuildExperienceStepListModule then getItemsNamingTheHeader(ActivityItems, LocalToolSteps) else ActivityItems, "active") else nil
 	local CHATASSISTANTLOADING1 = CHATASSISTANTLOADING
 	local HasDisplaySummary: boolean = FFlagBuildExperienceToolDisplaySummaryModule and (Active ~= nil and (Active.kind == "tool_call" and Active.displaySummary ~= nil))
 	
@@ -533,26 +526,37 @@ local function getActiveAskUserActivityLabel(p11, ToolCallId, p12)
 	end
 end
 
+local _ = function(p11): boolean
+	-- upvalues: FFlagBuildExperienceStepListModule (copy), FFlagBuildExperienceManageDevProductModule (copy), LocalToolStepsModule (copy)
+	return FFlagBuildExperienceStepListModule and (FFlagBuildExperienceManageDevProductModule and LocalToolStepsModule.getDevProductToolName(p11) ~= nil)
+end
+
+local function getDevProductStep(ToolCall, p11, IsActiveCall, IsSubmittedToolCallId)
+	-- upvalues: DevProductCallModule (copy), LocalToolStepsModule (copy)
+	local Fields = DevProductCallModule.getFields(ToolCall)
+	
+	return if Fields == nil and p11 == nil and ToolCall.status == "completed" then { isWaiting = false, isFailed = true } else LocalToolStepsModule.fromDevProduct(Fields, p11, IsActiveCall, IsSubmittedToolCallId)
+end
+
 local function projectWorkSegments(p11, TurnKey, p12, NoIsDone)
-	-- upvalues: FFlagBuildExperienceStepListModule (copy), getAnsweredPromptsByToolCallId (copy), getCompletedPlansByToolCallId (copy), makeSegmentKey (copy), makeActiveActivitySummary (copy), getRunningThoughtHeading (copy), FFlagBuildExperienceThoughtStatus (copy), getLatestThoughtHeading (copy), makeCompletedActivitySummary (copy), getItemsNamingTheHeader (copy), contentBlocksToText (copy), makeTurnActivityItem (copy), projectLocalToolSegments (copy), LocalToolStepsModule (copy), StepSentencesModule (copy), getActiveAskUserActivityLabel (copy)
+	-- upvalues: FFlagBuildExperienceStepListModule (copy), getAnsweredPromptsByToolCallId (copy), getCompletedPlansByToolCallId (copy), makeSegmentKey (copy), makeActiveActivitySummary (copy), getRunningThoughtHeading (copy), FFlagBuildExperienceThoughtStatus (copy), getLatestThoughtHeading (copy), makeCompletedActivitySummary (copy), getItemsNamingTheHeader (copy), contentBlocksToText (copy), makeTurnActivityItem (copy), projectLocalToolSegments (copy), FFlagBuildExperienceManageDevProductModule (copy), LocalToolStepsModule (copy), getDevProductStep (copy), StepSentencesModule (copy), getActiveAskUserActivityLabel (copy)
 	local List = {}
 	local List1 = {}
 	local v1 = nil
 	local Flag = false
 	local T = if FFlagBuildExperienceStepListModule then {} else nil
-	local v2 = nil
 	local T1 = if FFlagBuildExperienceStepListModule then {} else nil
 	local Flag1 = nil
 	local AnsweredPromptsByToolCallId = getAnsweredPromptsByToolCallId(p11)
 	local CompletedPlansByToolCallId = getCompletedPlansByToolCallId(p11)
-	local v3 = nil
+	local v2 = nil
 	
 	local function flushActivity(p13, PendingAgentMessageSequenceIndex)
-		-- upvalues: FFlagBuildExperienceStepListModule (upval), v3 (ref), makeSegmentKey (upval), TurnKey (copy), List (copy), T (ref), NoIsDone (copy), makeActiveActivitySummary (upval), List1 (ref), v1 (ref), Flag (ref), getRunningThoughtHeading (upval), FFlagBuildExperienceThoughtStatus (upval), getLatestThoughtHeading (upval), v2 (ref), Flag1 (ref), makeCompletedActivitySummary (upval), T1 (ref), getItemsNamingTheHeader (upval)
-		local v4 = if FFlagBuildExperienceStepListModule then v3 else nil
-		local SegmentKey = makeSegmentKey(TurnKey, if v4 == nil and p13 then "activity-trailing" else "activity", v4 or (PendingAgentMessageSequenceIndex or #List + 1))
+		-- upvalues: FFlagBuildExperienceStepListModule (upval), v2 (ref), makeSegmentKey (upval), TurnKey (copy), List (copy), T (ref), NoIsDone (copy), makeActiveActivitySummary (upval), List1 (ref), v1 (ref), Flag (ref), getRunningThoughtHeading (upval), FFlagBuildExperienceThoughtStatus (upval), getLatestThoughtHeading (upval), Flag1 (ref), makeCompletedActivitySummary (upval), T1 (ref), getItemsNamingTheHeader (upval)
+		local v3 = if FFlagBuildExperienceStepListModule then v2 else nil
+		local SegmentKey = makeSegmentKey(TurnKey, if v3 == nil and p13 then "activity-trailing" else "activity", v3 or (PendingAgentMessageSequenceIndex or #List + 1))
 		local T2 = if FFlagBuildExperienceStepListModule and T ~= nil and next(T) ~= nil then T else nil
-		local ActiveActivitySummary = if NoIsDone and p13 then makeActiveActivitySummary(List1, true, SegmentKey, v1, Flag, if FFlagBuildExperienceStepListModule then getRunningThoughtHeading(List1, T2) elseif FFlagBuildExperienceThoughtStatus then getLatestThoughtHeading(List1) else nil, v2, T2, Flag1) else makeCompletedActivitySummary(List1, SegmentKey, FFlagBuildExperienceStepListModule and NoIsDone, T2)
+		local ActiveActivitySummary = if NoIsDone and p13 then makeActiveActivitySummary(List1, true, SegmentKey, v1, Flag, if FFlagBuildExperienceStepListModule then getRunningThoughtHeading(List1, T2) elseif FFlagBuildExperienceThoughtStatus then getLatestThoughtHeading(List1) else nil, T2, Flag1) else makeCompletedActivitySummary(List1, SegmentKey, FFlagBuildExperienceStepListModule and NoIsDone, T2)
 		
 		if ActiveActivitySummary ~= nil then
 			table.insert(List, ActiveActivitySummary)
@@ -568,10 +572,9 @@ local function projectWorkSegments(p11, TurnKey, p12, NoIsDone)
 			Flag1 = nil
 		end
 		List1 = {}
-		v3 = nil
+		v2 = nil
 		v1 = nil
 		Flag = false
-		v2 = nil
 	end
 	
 	local ContentBlocksToTextResult = contentBlocksToText(p11.pendingAgentMessageContent)
@@ -632,12 +635,14 @@ local function projectWorkSegments(p11, TurnKey, p12, NoIsDone)
 			
 			if TurnActivityItem ~= nil then
 				table.insert(List1, TurnActivityItem)
-				v3 = v3 or value
+				v2 = v2 or value
 			end
 		elseif ActivitySlot.kind == "tool_call" then
 			local ProjectLocalToolSegmentsResult = projectLocalToolSegments(p11, TurnKey, ActivitySlot.toolCallId, AnsweredPromptsByToolCallId, CompletedPlansByToolCallId, p12)
-			local HasPromptToolName: boolean = FFlagBuildExperienceStepListModule and (#ProjectLocalToolSegmentsResult == 0 and LocalToolStepsModule.getPromptToolName(p11.toolCalls[ActivitySlot.toolCallId]) ~= nil)
-			local TurnActivityItem = if FFlagBuildExperienceStepListModule and (HasPromptToolName or LocalToolStepsModule.isStepSegments(ProjectLocalToolSegmentsResult)) then makeTurnActivityItem(p11, ActivitySlot) else nil
+			local ToolCall = if FFlagBuildExperienceStepListModule then p11.toolCalls[ActivitySlot.toolCallId] else nil
+			local HasDevProductToolName: boolean = FFlagBuildExperienceStepListModule and (FFlagBuildExperienceManageDevProductModule and LocalToolStepsModule.getDevProductToolName(ToolCall) ~= nil)
+			local HasDevProductToolName1: boolean = FFlagBuildExperienceStepListModule and (#ProjectLocalToolSegmentsResult == 0 and (HasDevProductToolName or LocalToolStepsModule.getPromptToolName(ToolCall) ~= nil))
+			local TurnActivityItem = if FFlagBuildExperienceStepListModule and (HasDevProductToolName1 or #ProjectLocalToolSegmentsResult > 0) then makeTurnActivityItem(p11, ActivitySlot) else nil
 			
 			if TurnActivityItem == nil then
 				if #ProjectLocalToolSegmentsResult > 0 then
@@ -653,9 +658,7 @@ local function projectWorkSegments(p11, TurnKey, p12, NoIsDone)
 					if NoIsDone then
 						local TurnActivityItem1 = makeTurnActivityItem(p11, ActivitySlot)
 						
-						if FFlagBuildExperienceStepListModule then
-							v2 = TurnActivityItem1
-						elseif TurnActivityItem1 ~= nil then
+						if TurnActivityItem1 ~= nil then
 							table.insert(List1, TurnActivityItem1)
 						end
 						v1 = getActiveAskUserActivityLabel(p11, ActivitySlot.toolCallId, p12)
@@ -669,29 +672,33 @@ local function projectWorkSegments(p11, TurnKey, p12, NoIsDone)
 					
 					if TurnActivityItem2 ~= nil then
 						table.insert(List1, TurnActivityItem2)
-						v3 = v3 or value
+						v2 = v2 or value
 					end
 				end
 			else
-				local PromptToolName = LocalToolStepsModule.getPromptToolName(p11.toolCalls[ActivitySlot.toolCallId])
+				local DevProductToolName = if HasDevProductToolName then LocalToolStepsModule.getDevProductToolName(ToolCall) else LocalToolStepsModule.getPromptToolName(ToolCall)
 				
-				if PromptToolName ~= nil and TurnActivityItem.kind == "tool_call" then
-					TurnActivityItem.title = PromptToolName
+				if DevProductToolName ~= nil and TurnActivityItem.kind == "tool_call" then
+					TurnActivityItem.title = DevProductToolName
 				end
 				table.insert(List1, TurnActivityItem)
-				v3 = v3 or value
-				local FromSegmentsResults = T
-				FromSegmentsResults[ActivitySlot.toolCallId] = if #ProjectLocalToolSegmentsResult > 0 then LocalToolStepsModule.fromSegments(ProjectLocalToolSegmentsResult) else {
+				v2 = v2 or value
+				local DevProductStep = if HasDevProductToolName then getDevProductStep(ToolCall, ProjectLocalToolSegmentsResult[1], NoIsDone and StepSentencesModule.isActiveCall(TurnActivityItem), p12.submittedToolCallIds[ActivitySlot.toolCallId] == true) elseif #ProjectLocalToolSegmentsResult > 0 then LocalToolStepsModule.fromSegments(ProjectLocalToolSegmentsResult) else {
 					isWaiting = StepSentencesModule.isActiveCall(TurnActivityItem)
 				}
+				T[ActivitySlot.toolCallId] = DevProductStep
+				
+				if DevProductStep.isFailed == true and TurnActivityItem.kind == "tool_call" then
+					TurnActivityItem.status = "failed"
+				end
 				local t = {}
 				
-				for _, value2 in ProjectLocalToolSegmentsResult do
-					if value2.isActive then
+				for _, value1 in ProjectLocalToolSegmentsResult do
+					if value1.isActive then
 						Flag = true
 					end
-					if LocalToolStepsModule.keepsCard(value2) then
-						table.insert(if FromSegmentsResults[ActivitySlot.toolCallId].isWaiting then T1 else t, value2)
+					if LocalToolStepsModule.keepsCard(value1) then
+						table.insert(if DevProductStep.isWaiting then T1 else t, value1)
 					end
 				end
 				if NoIsDone then
@@ -701,8 +708,8 @@ local function projectWorkSegments(p11, TurnKey, p12, NoIsDone)
 				if #t > 0 then
 					flushActivity(false, value)
 					
-					for _, value1 in t do
-						table.insert(List, value1)
+					for _, value2 in t do
+						table.insert(List, value2)
 					end
 				end
 			end
@@ -890,9 +897,9 @@ return {
 		if ActiveActivitySummary ~= nil then
 			table.insert(Segments, ActiveActivitySummary)
 		end
-		local v5 = nil
+		local v4 = nil
 		if #Segments == 0 then
-			v5 = nil
+			v4 = nil
 		else
 			local CountActionsInSegmentsResult = countActionsInSegments(Segments)
 			local CHATTURNACTIVITY = nil
@@ -901,7 +908,7 @@ return {
 			if WorkedDurationSeconds == nil and CountActionsInSegmentsResult == 0 then
 				CHATTURNACTIVITY = LocalizationStringsModule.CHAT_TURN_ACTIVITY
 			end
-			v5 = {
+			v4 = {
 				kind = "turn_work",
 				key = makeSegmentKey(TurnKey, "work"),
 				label = CHATTURNACTIVITY,
@@ -910,7 +917,7 @@ return {
 				workedDurationSeconds = WorkedDurationSeconds
 			}
 		end
-		return if v5 == nil then {} else { v5 }
+		return if v4 == nil then {} else { v4 }
 	end,
 	projectSetupErrorSegments = function(Text, p16)
 		-- upvalues: makeSegmentKey (copy)

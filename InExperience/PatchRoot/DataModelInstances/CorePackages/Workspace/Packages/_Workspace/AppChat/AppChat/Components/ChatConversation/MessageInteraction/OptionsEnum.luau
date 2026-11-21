@@ -1,4 +1,5 @@
 ﻿return {
 	Reply = "Reply",
-	MessageContextMenu = "MessageContextMenu"
+	MessageContextMenu = "MessageContextMenu",
+	Reaction = "Reaction"
 }

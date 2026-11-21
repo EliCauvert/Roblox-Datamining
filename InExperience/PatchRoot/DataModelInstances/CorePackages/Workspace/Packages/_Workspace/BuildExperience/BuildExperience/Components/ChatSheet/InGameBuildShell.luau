@@ -12,6 +12,7 @@ local PublishSheetControllerModule = require(BuildExperience.Components.PublishS
 local GetCurrentExperienceProjectModule = require(BuildExperience.utils.getCurrentExperienceProject)
 local UseHardwareInsetsModule = require(script.Parent.useHardwareInsets)
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
+local FFlagBuildPublishSheetReturnOnBackModule = require(BuildExperience.Flags.FFlagBuildPublishSheetReturnOnBack)
 local FFlagBuildExperienceInExperienceEntryTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceInExperienceEntryTelemetry)
 local GetInExperienceEventIdsModule = require(BuildExperience.Telemetry.getInExperienceEventIds)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
@@ -105,7 +106,7 @@ local function createToolbarButtons(p1, UseResult, p2, p3)
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), GetCurrentExperienceProjectModule (copy), FFlagBuildExperienceInExperienceEntryTelemetryModule (copy), SendBuildExperienceEventModule (copy), GetInExperienceEventIdsModule (copy), UseTokensFunction (copy), UsePreferencesFunction (copy), UseOverlayFunction (copy), UseHardwareInsetsModule (copy), DisplayModule (copy), CoreGuiCommonModule (copy), SignalsReactModule (copy), MotionModule (copy), FFlagBuildExperienceInGameShellComposer (copy), View (copy), noop (copy), StateLayerAffordance (copy), createToolbarButtons (copy), Image (copy), InGameBuildShellComposerModule (copy), FoundationModule (copy), PublishSheetControllerModule (copy), BuildPillMenuPageHostModule (copy)
+	-- upvalues: ReactModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), GetCurrentExperienceProjectModule (copy), FFlagBuildExperienceInExperienceEntryTelemetryModule (copy), SendBuildExperienceEventModule (copy), GetInExperienceEventIdsModule (copy), UseTokensFunction (copy), UsePreferencesFunction (copy), UseOverlayFunction (copy), UseHardwareInsetsModule (copy), DisplayModule (copy), CoreGuiCommonModule (copy), SignalsReactModule (copy), MotionModule (copy), FFlagBuildExperienceInGameShellComposer (copy), View (copy), noop (copy), StateLayerAffordance (copy), createToolbarButtons (copy), Image (copy), InGameBuildShellComposerModule (copy), FoundationModule (copy), PublishSheetControllerModule (copy), FFlagBuildPublishSheetReturnOnBackModule (copy), BuildPillMenuPageHostModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(nil)
@@ -296,7 +297,11 @@ return function(p1)
 	end)
 	local Composer = if FFlagBuildExperienceInGameShellComposer and not p1.isSelecting then p1.composer else nil
 	local HasComposer = Composer ~= nil
-	local config = {
+	local Element = ReactModule.createElement(View, {
+		tag = "size-full",
+		Visible = UseStateResult6,
+		testId = p1.testId or "in-game-build-shell"
+	}, {
 		FloatingToolbarBounds = if IsNotUseSignalStateResultMatch then ReactModule.createElement(View, {
 			testId = "in-game-build-shell-floating-toolbar-bounds",
 			Position = UDim2.fromOffset(UseHardwareInsetsModuleResult.left + UseTokensResult.Padding.Large, UseHardwareInsetsModuleResult.top + UseTokensResult.Padding.Large),
@@ -426,15 +431,11 @@ return function(p1)
 				onSelectionActivated = p1.onComposerSelectionActivated
 			})
 		})
-	}
+	})
 	local NewTop = UseHardwareInsetsModuleResult.top + UseSignalStateResult.top
 	
 	return ReactModule.createElement(ReactModule.Fragment, nil, {
-		Shell = ReactModule.createElement(View, {
-			tag = "size-full",
-			Visible = UseStateResult6,
-			testId = p1.testId or "in-game-build-shell"
-		}, config),
+		Shell = Element,
 		PublishOverlay = if UseStateResult3 == nil or p1.isLibraryMode then nil else ReactModule.createElement(View, {
 			ZIndex = 2,
 			testId = "in-game-build-shell-publish-overlay",
@@ -448,7 +449,8 @@ return function(p1)
 				isOpen = UseStateResult,
 				target = UseStateResult3,
 				onClose = UseResult1,
-				navigateToSubPage = UseResult3
+				navigateToSubPage = UseResult3,
+				isCovered = if FFlagBuildPublishSheetReturnOnBackModule then UseStateResult1 ~= nil else nil
 			})
 		}),
 		PublishPage = if UseStateResult3 == nil then nil else ReactModule.createElement(BuildPillMenuPageHostModule, {

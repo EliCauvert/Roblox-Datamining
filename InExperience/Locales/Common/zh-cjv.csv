@@ -780,7 +780,7 @@ CoreScripts.FTUX.Heading.NewTiltOnboarding,菜单位于此处
 CoreScripts.FTUX.Heading.ReadyToPlaytest,准备好进行游戏测试了吗？
 CoreScripts.FTUX.Heading.SideSheetUpdate,一站式完成所有操作
 CoreScripts.FTUX.Heading.SocialOnboarding,社交功能
-CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,你的新菜单
+CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,两个菜单现已合二为一
 CoreScripts.FTUX.Heading.YouAreAnEarlyTester,你是初期测试玩家
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,随时切换成到保存的虚拟形象。
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,随时与你的好友聊天。
@@ -791,7 +791,7 @@ CoreScripts.FTUX.Label.NewTiltOnboarding,游戏菜单包含游戏内操作以及
 CoreScripts.FTUX.Label.PartyWithYourFriendsAnytime,随时与你的好友使用 Party 相聚。
 CoreScripts.FTUX.Label.SideSheetOnboarding,菜单包含所有基本功能。你可以邀请好友、尝试动作、控制音乐等。
 CoreScripts.FTUX.Label.SocialOnboarding,从顶部栏轻松访问你的社交功能，包括聊天。
-CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,两个菜单现已合二为一。轻点此处打开新菜单。
+CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,你需要的一切都在此菜单中，包括“离开”。
 CoreScripts.Feedback.EntryPoint.ButtonText,给予反馈
 CoreScripts.Feedback.EntryPoint.OptionText,给予翻译反馈
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,退出
@@ -2116,8 +2116,11 @@ Feature.AvatarSwitcher.Message.UnknownSupport,你仍然可以切换虚拟形象�
 Feature.AvatarSwitcher.Message.Unsupported,本体验使用自定义虚拟形象，不支持 Roblox 虚拟形象。
 Feature.AvatarWorkshop.Action.EditAvatar,编辑虚拟形象
 Feature.AvatarWorkshop.Action.TryAgain,
+Feature.AvatarWorkshop.Description.AddAvatar,是否将此虚拟形象添加到你的虚拟形象？
+Feature.AvatarWorkshop.Heading.AddAvatar,添加虚拟形象？
 Feature.AvatarWorkshop.Heading.Customize,
 Feature.AvatarWorkshop.Heading.YourAvatars,你的虚拟形象
+Feature.AvatarWorkshop.Label.DefaultAvatarName,
 Feature.AvatarWorkshop.Message.LoadItemsError,加载你的道具时出现问题。
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,无法加载更多道具。
 Feature.AvatarWorkshop.Message.NoItemsOwned,你在这里还没有任何道具。
@@ -2290,7 +2293,7 @@ Feature.Build.Description.BuildReplyNotif,在 Build 回复你后获得通知。
 Feature.Build.Description.BuyRobuxToCreate,购买更多 Robux 以继续创建，或等待你的免费 Build 使用额度在明天重置。
 Feature.Build.Description.BuyUsageOrWait,使用 Robux 购买更多 Build 使用额度，或等待你的每日限额重置。
 Feature.Build.Description.CampaignRunDates,你的广告投放时间为 {startDate}-{endDate}。
-Feature.Build.Description.CaptureWhilePlaytesting,在游戏测试时截图，然后将其添加到你的提示词中。
+Feature.Build.Description.CaptureWhilePlaytesting,在游戏测试时截图，向 Build 展示你所看到的内容。
 Feature.Build.Description.ChooseAdCampaignLength,选择你希望广告投放的时长。
 Feature.Build.Description.ChoosePlaytesters,选择好友来抢先体验你的游戏。
 Feature.Build.Description.CreateDeveloperProduct,以 {PRICE} Robux 的价格创建{NAME}。此商品目前尚不可购买。
@@ -2399,9 +2402,9 @@ Feature.Build.Label.BackToBuild,返回构建
 Feature.Build.Label.Building,正在运作…
 Feature.Build.Label.CaptureLibrary,截图库
 Feature.Build.Label.CaptureSelectionCount,已选择 {SELECTED_COUNT} 张，共 {MAX_SELECTIONS} 张
-Feature.Build.Label.CaptureStepAddImages,选择“添加图片”以附加你的截图
+Feature.Build.Label.CaptureStepAddImages,点击<b>添加图片</b>，将你的截图添加到聊天中
 Feature.Build.Label.CaptureStepPlaytest,测试你的游戏
-Feature.Build.Label.CaptureStepTapCamera,在“构建”工具栏中选择镜头
+Feature.Build.Label.CaptureStepTapCamera,点击界面底部的相机图标
 Feature.Build.Label.ContentRating,内容评级
 Feature.Build.Label.CreatedDate,{YEAR} 年 {MONTH} {DAY} 日
 Feature.Build.Label.CreatorHub,创作者中心
@@ -2411,7 +2414,7 @@ Feature.Build.Label.DefaultDeveloperProductName,开发者产品
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,已删除
 Feature.Build.Label.DescribeIdea,描述一个创意
-Feature.Build.Label.DescribeIdeaOrPick,
+Feature.Build.Label.DescribeIdeaOrPick,描述创意，或在下方选择一个
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,描述：{DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,名称：{NAME}
@@ -3360,28 +3363,28 @@ Feature.CloudClient.Action.TryRobloxReality,
 Feature.CloudClient.Description.CloudPlayOffer,Cloud Play 会使用 Roblox 的计算机运行游戏，因此游戏可能加载得更快，发生崩溃的情况也可能更少。Cloud Play 仅在你游玩此游戏期间运行。
 Feature.CloudClient.Description.GalleryUnavailableCloudPlay,重新加入但不使用 Cloud Play，即可使用你的图库。
 Feature.CloudClient.Description.GalleryUnavailableRobloxReality,重新加入但不使用 Restyle，即可使用你的图库。
-Feature.CloudClient.Description.GalleryUnavailableRobloxRealityV2,
+Feature.CloudClient.Description.GalleryUnavailableRobloxRealityV2,重新加入但不使用 {productName}，即可使用你的图库。
 Feature.CloudClient.Description.RobloxRealityOffer,
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle 为抢先预览。画面效果可能与原版游戏有所不同。
-Feature.CloudClient.Description.RobloxRealityPreviewV2,
+Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName} 为抢先预览。画面效果可能与原版游戏有所不同。
 Feature.CloudClient.Heading.CloudPlayOffer,使用 Cloud Play 游玩
 Feature.CloudClient.Heading.GalleryUnavailableCloudPlay,图库功能在 Cloud Play 中尚不可用。
 Feature.CloudClient.Heading.GalleryUnavailableRobloxReality,图库功能在 Restyle 中尚不可用。
-Feature.CloudClient.Heading.GalleryUnavailableRobloxRealityV2,
+Feature.CloudClient.Heading.GalleryUnavailableRobloxRealityV2,图库功能在 {productName} 中尚不可用。
 Feature.CloudClient.Heading.RobloxRealityOffer,
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,录制功能在 Cloud Play 中尚不可用。
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,截图功能在 Restyle 中尚不可用。
-Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,
+Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,截图功能在 {productName} 中尚不可用。
 Feature.CloudClient.Label.CloudPlayJoinFailed,云端游玩功能无法使用。你当前为普通游玩。
 Feature.CloudClient.Label.RobloxReality,Restyle
 Feature.CloudClient.Label.RobloxRealityDemoLength,试用 {minutes} 分钟的演示版
 Feature.CloudClient.Label.RobloxRealityEndingSoon,Restyle 将于 1 分钟后结束，你将离开游戏。
-Feature.CloudClient.Label.RobloxRealityEndingSoonV2,
+Feature.CloudClient.Label.RobloxRealityEndingSoonV2,{productName} 将于 1 分钟后结束，你将离开游戏。
 Feature.CloudClient.Label.RobloxRealityGraphics,你的游戏，焕然一新
 Feature.CloudClient.Label.RobloxRealityPlusOnly,仅限 Plus 订阅用户
 Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,自身视角功能在 Cloud Play 中尚不可用。
 Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,自身视角功能在 Restyle 中尚不可用。
-Feature.CloudClient.Label.SelfViewUnavailableRobloxRealityV2,
+Feature.CloudClient.Label.SelfViewUnavailableRobloxRealityV2,自身视角功能在 {productName} 中尚不可用。
 Feature.CloudClient.Label.TimeLeft,剩余时间
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,让好友找到你！
@@ -3752,6 +3755,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,已开启关于“{experienceNa
 Feature.GameJoin.Description.DifferentServer,你们将在不同的服务器上开始游戏
 Feature.GameJoin.Label.PlayTogether,你们可以一起游玩
 Feature.GameJoin.Label.PlayTogetherSoon,你们很快就可以一起游玩了
+Feature.GameJoin.Label.Played,
 Feature.GameJoin.Label.RecentCoplay,你们最近一起玩过
 Feature.GamePage.Action.BackToTop,返回顶部
 Feature.GamePage.Label.Ad,
@@ -4012,15 +4016,15 @@ Feature.Moments.Description.EngagementFirstLike,立即查看
 Feature.Moments.Description.EngagementFirstReaction,你的精彩瞬间刚刚获得了第一个回应！
 Feature.Moments.Description.EngagementLikedCommentsDigest,你的 {likedComments} 条评论获得了点赞
 Feature.Moments.Description.EngagementMomentDigest,{comments} 条新评论和 {milestone} 个回应
-Feature.Moments.Description.EngagementMomentFirstReactionDigest,
-Feature.Moments.Description.EngagementMomentsCommentsDigest,
+Feature.Moments.Description.EngagementMomentFirstReactionDigest,{comments} 条新评论及其第 1 条回应
+Feature.Moments.Description.EngagementMomentsCommentsDigest,你的精彩瞬间有 {comments} 条新评论
 Feature.Moments.Description.EngagementMomentsDigest,
-Feature.Moments.Description.EngagementMomentsReactionsDigest,
+Feature.Moments.Description.EngagementMomentsReactionsDigest,你的精彩瞬间正在获得回应
 Feature.Moments.Description.EngagementNewComment,刚刚评论了你的精彩瞬间
 Feature.Moments.Description.EngagementNewComments,和另外 {count} 人评论了你的精彩瞬间
-Feature.Moments.Description.EngagementNewCommentsOneOther,
-Feature.Moments.Description.EngagementOneCommentDigest,
-Feature.Moments.Description.EngagementOneCommentFirstReactionDigest,
+Feature.Moments.Description.EngagementNewCommentsOneOther,和另外 1 人评论了你的精彩瞬间
+Feature.Moments.Description.EngagementOneCommentDigest,1 条新评论和 {milestone} 条回应
+Feature.Moments.Description.EngagementOneCommentFirstReactionDigest,1 条新评论及其第 1 条回应
 Feature.Moments.Description.EngagementReactionMilestone,{count} 个新回应
 Feature.Moments.Description.FollowingCaughtUpBody,你已看完此推送中的所有新“精彩瞬间”。切换推送以查看更多内容。
 Feature.Moments.Description.FollowingEmptyBodyRecommended,你将在这里看到你关注的创作者发布的“精彩瞬间”。

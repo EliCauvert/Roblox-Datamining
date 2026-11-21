@@ -2124,8 +2124,11 @@ Feature.AvatarSwitcher.Message.UnknownSupport,"You can still switch your avatar,
 Feature.AvatarSwitcher.Message.Unsupported,This experience uses a custom avatar and doesn’t support Roblox avatars.
 Feature.AvatarWorkshop.Action.EditAvatar,Edit avatar
 Feature.AvatarWorkshop.Action.TryAgain,Try again
+Feature.AvatarWorkshop.Description.AddAvatar,Add this avatar to your avatars?
+Feature.AvatarWorkshop.Heading.AddAvatar,Add avatar?
 Feature.AvatarWorkshop.Heading.Customize,Customize
 Feature.AvatarWorkshop.Heading.YourAvatars,Your avatars
+Feature.AvatarWorkshop.Label.DefaultAvatarName,My avatar
 Feature.AvatarWorkshop.Message.LoadItemsError,Something went wrong loading your items.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,Couldn't load more items.
 Feature.AvatarWorkshop.Message.NoItemsOwned,You don't own any items here yet.
@@ -3762,6 +3765,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Notifications turned on for {ex
 Feature.GameJoin.Description.DifferentServer,You'll start in a different server
 Feature.GameJoin.Label.PlayTogether,You can play together
 Feature.GameJoin.Label.PlayTogetherSoon,You can play together soon
+Feature.GameJoin.Label.Played,played
 Feature.GameJoin.Label.RecentCoplay,You played together recently
 Feature.GamePage.Action.BackToTop,Back to top
 Feature.GamePage.Label.Ad,

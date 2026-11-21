@@ -13,6 +13,7 @@ local FFlagAXInventoryDurablesExpiredFilter = AvatarExperienceFlagsModule.FFlagA
 local FFlagAXCustomizeBackgrounds = AvatarExperienceFlagsModule.FFlagAXCustomizeBackgrounds
 local FFlagAXDownrankMakeupCustomize = AvatarExperienceFlagsModule.FFlagAXDownrankMakeupCustomize
 local FFlagAXSpawnEffects = AvatarExperienceFlagsModule.FFlagAXSpawnEffects
+local FFlagAXEnableInventorySearch = AvatarExperienceFlagsModule.FFlagAXEnableInventorySearch
 local IconName = require(Parent.Foundation).Enums.IconName
 local IconVariant = require(Parent.Foundation).Enums.IconVariant
 local Character = {
@@ -164,7 +165,8 @@ local SlotEditorCategories = {
 		hide = true,
 		nameTranslationKey = if FFlagAXSlotsDesktopRedesign then "Feature.Avatar.Heading.All" else "Feature.Catalog.Label.Avatars",
 		index = t[CategoriesModule.All],
-		slots = {}
+		slots = {},
+		disableScrollAway = if FFlagAXEnableInventorySearch then true else nil
 	},
 	[CategoriesModule.Avatars] = {
 		name = "Avatars",

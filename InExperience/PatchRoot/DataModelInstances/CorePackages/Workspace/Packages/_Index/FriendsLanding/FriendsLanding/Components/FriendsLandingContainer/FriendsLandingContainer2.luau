@@ -22,6 +22,7 @@ local AppUserLayers = require(Parent.ExperimentLayers).AppUserLayers
 local FFlagConnectionManagementChips = require(Parent.SharedFlags).FFlagConnectionManagementChips
 local FFlagFriendsPageUserListCtaEnabledModule = require(FriendsLanding.Flags.FFlagFriendsPageUserListCtaEnabled)
 local EntityType = if FFlagFriendsPageUserListCtaEnabledModule then require(Parent.UserList).Enums.EntityType else nil
+local FFlagFriendsDeepLinkScrollToCandidates = require(Parent.SharedFlags).FFlagFriendsDeepLinkScrollToCandidates
 local FriendsLandingPageSize = game:DefineFastInt("FriendsLandingPageSize", 50)
 local config = { skipFetch = true }
 local config1 = {
@@ -32,7 +33,7 @@ local config1 = {
 }
 
 function FriendsLandingContainer(_)
-	-- upvalues: ReactModule (copy), IXPServiceWrapper (copy), AppUserLayers (copy), FFlagFriendsLandingLayerExposureModule (copy), UseLocalUserIdFunction (copy), UseGetFriendsCountByUserIdFunction (copy), config (copy), UseAppPolicyFunction (copy), FriendsLandingContextModule (copy), UseFriendsListOrderedByPresenceFunction (copy), FriendsLandingPageSize (copy), FFlagConnectionManagementChips (copy), UseDecoratedTrustedConnectionsFunction (copy), FilterStatesModule (copy), CryoModule (copy), PresenceType1 (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), UserLibConstants (copy), config1 (copy), PresenceType (copy), FFlagFriendsPageUserListCtaEnabledModule (copy), EntityType (copy), FriendsLandingPageModule (copy)
+	-- upvalues: ReactModule (copy), IXPServiceWrapper (copy), AppUserLayers (copy), FFlagFriendsLandingLayerExposureModule (copy), UseLocalUserIdFunction (copy), UseGetFriendsCountByUserIdFunction (copy), config (copy), UseAppPolicyFunction (copy), FriendsLandingContextModule (copy), UseFriendsListOrderedByPresenceFunction (copy), FriendsLandingPageSize (copy), FFlagConnectionManagementChips (copy), FFlagFriendsDeepLinkScrollToCandidates (copy), UseDecoratedTrustedConnectionsFunction (copy), FilterStatesModule (copy), CryoModule (copy), PresenceType1 (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), UserLibConstants (copy), config1 (copy), PresenceType (copy), FFlagFriendsPageUserListCtaEnabledModule (copy), EntityType (copy), FriendsLandingPageModule (copy)
 	ReactModule.useEffect(function()
 		-- upvalues: IXPServiceWrapper (upval), AppUserLayers (upval), FFlagFriendsLandingLayerExposureModule (upval)
 		IXPServiceWrapper:LogFlagLinkedUserLayerExposure(AppUserLayers.ConnectionsHubExposureLayer)
@@ -51,9 +52,20 @@ function FriendsLandingContainer(_)
 		userId = UseLocalUserIdResult,
 		pageSize = FriendsLandingPageSize
 	})
-	local UseDecoratedTrustedConnectionsResult = if FFlagConnectionManagementChips then UseDecoratedTrustedConnectionsFunction(UseFriendsListOrderedByPresenceResult.onlineFriends) else nil
+	local Friends = nil
+	local IsLoading = false
+	
+	if FFlagConnectionManagementChips then
+		if FFlagFriendsDeepLinkScrollToCandidates then
+			local UseDecoratedTrustedConnectionsResult = UseDecoratedTrustedConnectionsFunction(UseFriendsListOrderedByPresenceResult.onlineFriends)
+			Friends = UseDecoratedTrustedConnectionsResult.friends
+			IsLoading = UseDecoratedTrustedConnectionsResult.isLoading
+		else
+			Friends = UseDecoratedTrustedConnectionsFunction(UseFriendsListOrderedByPresenceResult.onlineFriends)
+		end
+	end
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: UseFriendsListOrderedByPresenceResult (copy), UseContextResult (copy), FilterStatesModule (upval), CryoModule (upval), FFlagConnectionManagementChips (upval), UseDecoratedTrustedConnectionsResult (ref), PresenceType1 (upval)
+		-- upvalues: UseFriendsListOrderedByPresenceResult (copy), UseContextResult (copy), FilterStatesModule (upval), CryoModule (upval), FFlagConnectionManagementChips (upval), Friends (ref), PresenceType1 (upval)
 		local FilterResult = {}
 		
 		if UseFriendsListOrderedByPresenceResult.onlineFriends and UseFriendsListOrderedByPresenceResult.offlineFriends then
@@ -67,7 +79,7 @@ function FriendsLandingContainer(_)
 				return UseFriendsListOrderedByPresenceResult.onlineFriends
 			end
 			if FFlagConnectionManagementChips and UseContextResult.filter == FilterStatesModule.Trusted then
-				return UseDecoratedTrustedConnectionsResult or {}
+				return Friends or {}
 			end
 			FilterResult = CryoModule.List.filter(UseFriendsListOrderedByPresenceResult.onlineFriends, function(p1): boolean
 				-- upvalues: PresenceType1 (upval)
@@ -79,7 +91,7 @@ function FriendsLandingContainer(_)
 		UseContextResult.filter,
 		UseFriendsListOrderedByPresenceResult.onlineFriends,
 		UseFriendsListOrderedByPresenceResult.offlineFriends,
-		UseDecoratedTrustedConnectionsResult
+		Friends
 	} else {
 		UseContextResult.filter,
 		UseFriendsListOrderedByPresenceResult.onlineFriends,
@@ -103,6 +115,7 @@ function FriendsLandingContainer(_)
 	
 	return ReactModule.createElement(FriendsLandingPageModule, {
 		totalFriendCount = UseGetFriendsCountByUserIdResult,
+		initialFriendsLoading = if FFlagFriendsDeepLinkScrollToCandidates then UseFriendsListOrderedByPresenceResult.isLoading or IsLoading else nil,
 		friends = if FFlagConnectionManagementChips then UseMemoResult1 or {} else UseMemoResult1,
 		fetchMoreFriends = if UseFriendsListOrderedByPresenceResult and not UseFriendsListOrderedByPresenceResult.isEndOfList then UseFriendsListOrderedByPresenceResult.fetchMoreFriends else nil,
 		refreshFriends = UseFriendsListOrderedByPresenceResult.refreshFriendsData,

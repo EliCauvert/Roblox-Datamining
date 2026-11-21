@@ -785,7 +785,7 @@ CoreScripts.FTUX.Heading.NewTiltOnboarding,Menu ada di sini
 CoreScripts.FTUX.Heading.ReadyToPlaytest,Siap melakukan playtest?
 CoreScripts.FTUX.Heading.SideSheetUpdate,Semua tindakan di 1 tempat
 CoreScripts.FTUX.Heading.SocialOnboarding,Fitur sosial
-CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,Menu barumu
+CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,Dua menu sekarang menjadi satu
 CoreScripts.FTUX.Heading.YouAreAnEarlyTester,Kamu adalah penguji tahap awal
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,Beralih ke avatar tersimpan kapan saja.
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,Chat dengan temanmu kapan saja.
@@ -796,7 +796,7 @@ CoreScripts.FTUX.Label.NewTiltOnboarding,Menu game berisi tindakan dalam game be
 CoreScripts.FTUX.Label.PartyWithYourFriendsAnytime,Party dengan temanmu kapan saja.
 CoreScripts.FTUX.Label.SideSheetOnboarding,"Menu berisi semua fitur pentingmu. Undang teman, coba Emote, atur Musik, dan lainnya."
 CoreScripts.FTUX.Label.SocialOnboarding,"Akses fitur sosialmu dengan mudah dari bilah atas, termasuk Chat."
-CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,Dua menu sekarang menjadi satu. Ketuk di sini untuk membukanya.
+CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,"Semua yang kamu butuhkan ada di menu ini, termasuk Keluar."
 CoreScripts.Feedback.EntryPoint.ButtonText,Beri Masukan
 CoreScripts.Feedback.EntryPoint.OptionText,Beri Masukan Terjemahan
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,
@@ -2121,8 +2121,11 @@ Feature.AvatarSwitcher.Message.UnknownSupport,"Kamu masih bisa mengganti avatar,
 Feature.AvatarSwitcher.Message.Unsupported,Pengalaman virtual ini menggunakan avatar kustom dan tidak mendukung avatar Roblox.
 Feature.AvatarWorkshop.Action.EditAvatar,Edit avatar
 Feature.AvatarWorkshop.Action.TryAgain,
+Feature.AvatarWorkshop.Description.AddAvatar,Tambahkan avatar ini ke avatarmu?
+Feature.AvatarWorkshop.Heading.AddAvatar,Tambahkan avatar?
 Feature.AvatarWorkshop.Heading.Customize,Sesuaikan
 Feature.AvatarWorkshop.Heading.YourAvatars,Avatarmu
+Feature.AvatarWorkshop.Label.DefaultAvatarName,Avatar saya
 Feature.AvatarWorkshop.Message.LoadItemsError,Terjadi kesalahan saat me-load item-mu.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,Tidak dapat me-load item lainnya.
 Feature.AvatarWorkshop.Message.NoItemsOwned,Kamu belum memiliki item apa pun di sini.
@@ -2295,7 +2298,7 @@ Feature.Build.Description.BuildReplyNotif,Dapatkan notifikasi saat Build memilik
 Feature.Build.Description.BuyRobuxToCreate,"Beli lebih banyak Robux untuk terus berkreasi, atau tunggu hingga kuota penggunaan Build gratismu direset besok."
 Feature.Build.Description.BuyUsageOrWait,"Beli lebih banyak kuota penggunaan Build dengan Robux, atau tunggu hingga batas harianmu direset."
 Feature.Build.Description.CampaignRunDates,Iklanmu tayang {startDate}—{endDate}.
-Feature.Build.Description.CaptureWhilePlaytesting,"Ambil screenshot saat playtest, lalu tambahkan ke prompt-mu."
+Feature.Build.Description.CaptureWhilePlaytesting,Ambil screenshot saat playtest untuk menunjukkan Build apa yang kamu lihat.
 Feature.Build.Description.ChooseAdCampaignLength,Pilih durasi yang kamu inginkan untuk menayangkan iklanmu.
 Feature.Build.Description.ChoosePlaytesters,Pilih teman untuk melihat preview game-mu.
 Feature.Build.Description.CreateDeveloperProduct,Buat {NAME} seharga {PRICE} Robux. Item ini belum tersedia untuk dibeli.
@@ -2404,9 +2407,9 @@ Feature.Build.Label.BackToBuild,Kembali ke Build
 Feature.Build.Label.Building,Memproses …
 Feature.Build.Label.CaptureLibrary,Perpustakaan Media
 Feature.Build.Label.CaptureSelectionCount,{SELECTED_COUNT} dari {MAX_SELECTIONS} dipilih
-Feature.Build.Label.CaptureStepAddImages,Pilih Tambahkan gambar untuk melampirkan mediamu
+Feature.Build.Label.CaptureStepAddImages,Pilih <b>Tambahkan gambar</b> untuk menambahkan mediamu ke chat
 Feature.Build.Label.CaptureStepPlaytest,Playtest game-mu
-Feature.Build.Label.CaptureStepTapCamera,Pilih kamera di toolbar Build
+Feature.Build.Label.CaptureStepTapCamera,Pilih ikon kamera di bagian bawah layar
 Feature.Build.Label.ContentRating,Rating konten
 Feature.Build.Label.CreatedDate,"{DAY} {MONTH}, {YEAR}"
 Feature.Build.Label.CreatorHub,Pusat Kreator
@@ -2416,6 +2419,7 @@ Feature.Build.Label.DefaultDeveloperProductName,produk developer
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,Dihapus
 Feature.Build.Label.DescribeIdea,Deskripsikan ide
+Feature.Build.Label.DescribeIdeaOrPick,Jelaskan ide atau pilih salah satu di bawah ini
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,Deskripsi: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Nama: {NAME}
@@ -3362,20 +3366,26 @@ Feature.CloudClient.Action.PlayWithoutCloudPlay,Mainkan tanpa Cloud Play
 Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play menjalankan game di komputer Roblox, sehingga game dapat di-load lebih cepat dan lebih jarang mengalami crash. Fitur ini hanya aktif selama kamu memainkan game ini."
 Feature.CloudClient.Description.GalleryUnavailableCloudPlay,Gabung lagi tanpa Cloud Play untuk menggunakan galerimu.
 Feature.CloudClient.Description.GalleryUnavailableRobloxReality,Gabung lagi tanpa Restyle untuk menggunakan galerimu.
+Feature.CloudClient.Description.GalleryUnavailableRobloxRealityV2,Gabung lagi tanpa {productName} untuk menggunakan galerimu.
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle adalah preview awal. Tampilannya mungkin berbeda dari game aslinya.
+Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName} adalah preview awal. Tampilannya mungkin berbeda dari game aslinya.
 Feature.CloudClient.Heading.CloudPlayOffer,Main dengan Cloud Play
 Feature.CloudClient.Heading.GalleryUnavailableCloudPlay,Galeri belum tersedia di Cloud Play.
 Feature.CloudClient.Heading.GalleryUnavailableRobloxReality,Galeri belum tersedia dengan Restyle.
+Feature.CloudClient.Heading.GalleryUnavailableRobloxRealityV2,Galeri belum tersedia dengan {productName}.
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Media belum tersedia di Cloud Play.
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Media belum tersedia dengan Restyle.
+Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,Media belum tersedia dengan {productName}.
 Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Play tidak berfungsi. Kamu bermain seperti biasa.
 Feature.CloudClient.Label.RobloxReality,Restyle
 Feature.CloudClient.Label.RobloxRealityDemoLength,Coba demo {minutes} menit
 Feature.CloudClient.Label.RobloxRealityEndingSoon,"Restyle berakhir dalam 1 menit, dan kamu akan keluar dari game."
+Feature.CloudClient.Label.RobloxRealityEndingSoonV2,"{productName} berakhir dalam 1 menit, dan kamu akan keluar dari game."
 Feature.CloudClient.Label.RobloxRealityGraphics,"Game-mu, dengan tampilan baru"
 Feature.CloudClient.Label.RobloxRealityPlusOnly,Hanya untuk subscriber Plus
 Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,Tampilan Diri belum tersedia di Cloud Play.
 Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,Tampilan Diri belum tersedia dengan Restyle.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxRealityV2,Tampilan Diri belum tersedia dengan {productName}.
 Feature.CloudClient.Label.TimeLeft,Waktu tersisa
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,Izinkan Teman Kamu Menemukan Kamu
@@ -4007,9 +4017,15 @@ Feature.Moments.Description.EngagementFirstLike,Lihat sekarang
 Feature.Moments.Description.EngagementFirstReaction,Moment-mu baru saja mendapat reaksi pertama.
 Feature.Moments.Description.EngagementLikedCommentsDigest,{likedComments} komentarmu mendapat suka
 Feature.Moments.Description.EngagementMomentDigest,{comments} komentar baru dan {milestone} reaksi
+Feature.Moments.Description.EngagementMomentFirstReactionDigest,{comments} komen baru dan reaksi pertamanya
+Feature.Moments.Description.EngagementMomentsCommentsDigest,{comments} komen baru pada Moment-mu
 Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementMomentsReactionsDigest,Moment-mu mendapatkan reaksi
 Feature.Moments.Description.EngagementNewComment,baru saja mengomentari Moment-mu
 Feature.Moments.Description.EngagementNewComments,dan {count} orang lainnya mengomentari Moment-mu
+Feature.Moments.Description.EngagementNewCommentsOneOther,dan 1 orang lainnya mengomentari Moment-mu
+Feature.Moments.Description.EngagementOneCommentDigest,1 komen baru dan {milestone} reaksi
+Feature.Moments.Description.EngagementOneCommentFirstReactionDigest,1 komen baru dan reaksi pertamanya
 Feature.Moments.Description.EngagementReactionMilestone,{count} reaksi baru
 Feature.Moments.Description.FollowingCaughtUpBody,Kamu sudah menonton semua Moment baru di feed ini. Beralih feed untuk melihat lebih banyak.
 Feature.Moments.Description.FollowingEmptyBodyRecommended,Kamu akan melihat Moment dari kreator yang kamu ikuti di sini.

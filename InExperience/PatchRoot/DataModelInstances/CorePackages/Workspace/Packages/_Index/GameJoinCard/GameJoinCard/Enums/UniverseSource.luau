@@ -1,0 +1,1 @@
+﻿return { Presence = "Presence", Coplay = "Coplay" }
