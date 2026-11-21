@@ -12,6 +12,7 @@ local PublishStatusModule = require(BuildExperience.Chat.PublishStatus)
 local UseScrollPerformanceTrackerModule = require(BuildExperience.Telemetry.useScrollPerformanceTracker)
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local FFlagBuildExperienceConfigurationRowTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceConfigurationRowTelemetry)
+local FFlagBuildPublishSheetReturnOnBackModule = require(BuildExperience.Flags.FFlagBuildPublishSheetReturnOnBack)
 local Sheet = FoundationModule.Sheet
 local Text = FoundationModule.Text
 local View = FoundationModule.View
@@ -42,7 +43,7 @@ local function PublishSheetContent(p1)
 end
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), Sheet (copy), Text (copy), PublishSheetContent (copy), View (copy), PublishPreview (copy), PublishConfigurationContentContainerModule (copy), FFlagBuildExperienceConfigurationRowTelemetryModule (copy), FFlagBuildCheckGamePermissionsModule (copy), PublishFooterModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), Sheet (copy), Text (copy), PublishSheetContent (copy), View (copy), PublishPreview (copy), PublishConfigurationContentContainerModule (copy), FFlagBuildExperienceConfigurationRowTelemetryModule (copy), FFlagBuildCheckGamePermissionsModule (copy), PublishFooterModule (copy), FFlagBuildPublishSheetReturnOnBackModule (copy)
 	local TestId = p1.testId or "publish-bottom-sheet"
 	
 	return ReactModule.createElement(Sheet.Root, {
@@ -85,7 +86,7 @@ return function(p1)
 				},
 				testId = TestId,
 				showPreviewButton = p1.showPreviewButton,
-				onPreview = p1.onClose
+				onPreview = if FFlagBuildPublishSheetReturnOnBackModule then nil else p1.onClose
 			})
 		})
 	})

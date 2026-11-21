@@ -1,5 +1,7 @@
-﻿local CreatorAgentChatModule = require(script:FindFirstAncestor("BuildExperience").Parent.DataHydration.CreatorAgentChat)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local CreatorAgentChatModule = require(BuildExperience.Parent.DataHydration.CreatorAgentChat)
 local _ = require(script.Parent.chatTypes)
+local FFlagBuildExperienceDevProductRecoveryModule = require(BuildExperience.Flags.FFlagBuildExperienceDevProductRecovery)
 
 local function getAnswerTexts(p1)
 	local List = {}
@@ -36,8 +38,53 @@ local function getAnswers(p2)
 	return List
 end
 
+local function areFieldsEqual(DevProduct, DevProduct1): boolean
+	if DevProduct == DevProduct1 then
+		return true
+	end
+	if DevProduct == nil or DevProduct1 == nil then
+		return false
+	end
+	for i, value in DevProduct do
+		if DevProduct1[i] ~= value then
+			return false
+		end
+	end
+	for i1 in DevProduct1 do
+		if DevProduct[i1] == nil then
+			return false
+		end
+	end
+	return true
+end
+
+local config = {
+	manage_developer_product = "manage_developer_product",
+	manage_game_pass = "manage_game_pass",
+	manage_subscription = "manage_subscription",
+	manage_monetization = "manage_monetization"
+}
+
+local function getProductToolName(p3)
+	-- upvalues: config (copy)
+	local RawInput = p3.rawInput
+	local List = { p3.title, p3.kind }
+	
+	if typeof(RawInput) == "table" then
+		table.insert(List, RawInput.name)
+		table.insert(List, RawInput.toolName)
+	end
+	for _, Text in List do
+		if typeof(Text) == "string" and config[string.lower(Text)] ~= nil then
+			return config[string.lower(Text)]
+		end
+	end
+	return nil
+end
+
 return {
 	areStepsEqual = function(List, List1): boolean
+		-- upvalues: areFieldsEqual (copy)
 		if List == List1 then
 			return true
 		end
@@ -47,7 +94,10 @@ return {
 		for i, value in List do
 			local Entry = List1[i]
 			
-			if Entry == nil or value.isWaiting ~= Entry.isWaiting then
+			if Entry == nil or value.isWaiting ~= Entry.isWaiting or value.isFailed ~= Entry.isFailed then
+				return false
+			end
+			if not areFieldsEqual(value.devProduct, Entry.devProduct) then
 				return false
 			end
 			local Plan = value.plan
@@ -82,34 +132,35 @@ return {
 		end
 		return true
 	end,
-	getPlanBody = function(p3)
+	getPlanBody = function(p4)
 		local List = {}
 		
-		if p3.isDefaultTitle ~= true and p3.title ~= "" then
-			table.insert(List, p3.title)
+		if p4.isDefaultTitle ~= true and p4.title ~= "" then
+			table.insert(List, p4.title)
 		end
-		if p3.summary ~= nil and p3.summary ~= "" then
-			table.insert(List, p3.summary)
+		if p4.summary ~= nil and p4.summary ~= "" then
+			table.insert(List, p4.summary)
 		end
 		return {
 			text = if #List > 0 then table.concat(List, "\n\n") else nil,
-			markdown = if p3.textContent == "" then nil else p3.textContent
+			markdown = if p4.textContent == "" then nil else p4.textContent
 		}
 	end,
-	getPromptToolName = function(p3)
+	getPromptToolName = function(p4)
 		-- upvalues: CreatorAgentChatModule (copy)
-		return if p3 == nil then nil elseif CreatorAgentChatModule.StudioAskUserTool.toolCallLooksLikeAskUser(p3) then CreatorAgentChatModule.StudioAskUserTool.TOOL_NAME elseif CreatorAgentChatModule.StudioProposePlanTool.toolCallLooksLikeProposePlan(p3) then CreatorAgentChatModule.StudioProposePlanTool.TOOL_NAME else nil
+		return if p4 == nil then nil elseif CreatorAgentChatModule.StudioAskUserTool.toolCallLooksLikeAskUser(p4) then CreatorAgentChatModule.StudioAskUserTool.TOOL_NAME elseif CreatorAgentChatModule.StudioProposePlanTool.toolCallLooksLikeProposePlan(p4) then CreatorAgentChatModule.StudioProposePlanTool.TOOL_NAME else nil
 	end,
-	isStepSegments = function(List): boolean
-		if #List == 0 then
-			return false
+	getDevProductToolName = function(p4)
+		-- upvalues: getProductToolName (copy)
+		local ProductToolName = if p4 == nil then nil else getProductToolName(p4)
+		
+		if ProductToolName == nil or p4 == nil or typeof(p4.rawInput) ~= "table" then
+			return nil
+		else
+			local Action: string = p4.rawInput.action
+			
+			return if typeof(Action) == "string" and string.lower(Action) ~= "list" then ProductToolName else nil
 		end
-		for _, value in List do
-			if value.devProductProposal ~= nil then
-				return false
-			end
-		end
-		return true
 	end,
 	fromSegments = function(List)
 		-- upvalues: getAnswers (copy)
@@ -134,7 +185,31 @@ return {
 		end
 		return config
 	end,
-	keepsCard = function(p3): boolean
-		return if p3.isActive then true else p3.planProposal ~= nil and p3.planProposal.feedbackText ~= nil
+	fromDevProduct = function(DevProduct, p4, p5, p6)
+		-- upvalues: FFlagBuildExperienceDevProductRecoveryModule (copy)
+		local DevProductProposal = if p4 == nil then nil else p4.devProductProposal
+		
+		if p4 == nil or DevProductProposal == nil then
+			local NoP7: boolean = p5 and not p6
+			
+			return {
+				isWaiting = NoP7,
+				devProduct = if NoP7 then nil else DevProduct
+			}
+		elseif p4.isActive then
+			return { isWaiting = true }
+		else
+			local IsIsPending: boolean = DevProductProposal.isApproved == true and (if FFlagBuildExperienceDevProductRecoveryModule then DevProductProposal.isPending == true else not p6)
+			local IsHasError: boolean = not IsIsPending and DevProductProposal.hasError == true
+			
+			return {
+				isWaiting = IsIsPending,
+				devProduct = DevProduct,
+				isFailed = if IsHasError then true else nil
+			}
+		end
+	end,
+	keepsCard = function(p4): boolean
+		return if p4.isActive then true else p4.planProposal ~= nil and p4.planProposal.feedbackText ~= nil
 	end
 }

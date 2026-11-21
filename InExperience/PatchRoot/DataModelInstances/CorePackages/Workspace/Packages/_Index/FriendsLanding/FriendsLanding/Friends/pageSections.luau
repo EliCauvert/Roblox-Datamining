@@ -1,0 +1,1 @@
+﻿return { TrustedFriendCandidates = "TrustedFriendCandidates" }

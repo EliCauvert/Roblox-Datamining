@@ -55,7 +55,8 @@ return function(p1)
 		viewProfile = "Feature.Profile.Action.ViewProfile",
 		playTogether = "Feature.GameJoin.Label.PlayTogether",
 		playTogetherSoon = "Feature.GameJoin.Label.PlayTogetherSoon",
-		differentServer = "Feature.GameJoin.Description.DifferentServer"
+		differentServer = "Feature.GameJoin.Description.DifferentServer",
+		played = "Feature.GameJoin.Label.Played"
 	})
 	local UseLocalizationResult1 = if FFlagCoplayHistoryGameJoinCard then UseLocalizationFunction(ContextCopyTextKeysModule) else nil
 	local LayoutOrder = p1.layoutOrder
@@ -127,10 +128,10 @@ return function(p1)
 					LayoutOrder = LayoutOrder,
 					testId = if FFlagLuaAppAddTestIdsForArrow then `--game-join-card-action-{p2.id}` else nil
 				})
-			end)
+			end, if FFlagCoplayHistoryGameJoinCard then p1.isCoplayInviteCard else nil)
 		end
 	end
-	local NoIsConsole: boolean = FFlagJoinabilityCTAContextCopy and not p1.isConsole
+	local NoIsConsole: boolean = if FFlagJoinabilityCTAContextCopy then not p1.isConsole else FFlagCoplayHistoryGameJoinCard and (p1.isCoplayInviteCard == true and not p1.isConsole)
 	
 	return ReactModule.createElement(FoundationModule.Popover.Root, { isOpen = p1.isOpen }, {
 		Anchor = ReactModule.createElement(FoundationModule.Popover.Anchor, { anchorRef = p1.anchorRef }),
@@ -208,7 +209,7 @@ return function(p1)
 								IsPlaying = ReactModule.createElement(Text, {
 									tag = "shrink-0 auto-xy text-body-medium content-default text-align-x-left",
 									LayoutOrder = 2,
-									Text = if FFlagGameJoinCardContent and p1.content then p1.content.activityText else UseLocalizationResult.isPlaying
+									Text = if FFlagGameJoinCardContent and p1.content then p1.content.activityText elseif FFlagCoplayHistoryGameJoinCard and p1.isCoplayInviteCard then UseLocalizationResult.played else UseLocalizationResult.isPlaying
 								})
 							}),
 							GameName = if IsLoading then ReactModule.createElement(Skeleton, {

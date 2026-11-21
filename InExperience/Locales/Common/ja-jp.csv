@@ -785,7 +785,7 @@ CoreScripts.FTUX.Heading.NewTiltOnboarding,メニューはこちらです
 CoreScripts.FTUX.Heading.ReadyToPlaytest,プレイテストの準備はできましたか？
 CoreScripts.FTUX.Heading.SideSheetUpdate,すべてのアクションを一元管理
 CoreScripts.FTUX.Heading.SocialOnboarding,SNS機能
-CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,新しいメニュー
+CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,2つのメニューが1つになりました
 CoreScripts.FTUX.Heading.YouAreAnEarlyTester,あなたは早期テスターです
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,保存済みのアバターにいつでも切り替えられます。
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,いつでも友達とチャットできます。
@@ -796,7 +796,7 @@ CoreScripts.FTUX.Label.NewTiltOnboarding,ゲームメニューには、ゲーム
 CoreScripts.FTUX.Label.PartyWithYourFriendsAnytime,いつでも友達とパーティ機能が使えます。
 CoreScripts.FTUX.Label.SideSheetOnboarding,メニューには、すべての基本機能が含まれています。友達を招待したり、リアクションを試したり、音楽をコントロールしたりしましょう。
 CoreScripts.FTUX.Label.SocialOnboarding,上部のバーから、チャットなどのSNS機能に簡単にアクセスできます。
-CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,2つのメニューが1つになりました。ここをタップすると開きます。
+CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,「退出」を含む、必要なものがすべてこのメニューにあります。
 CoreScripts.Feedback.EntryPoint.ButtonText,フィードバックを送信
 CoreScripts.Feedback.EntryPoint.OptionText,翻訳の向上に協力する
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,終了
@@ -2121,8 +2121,11 @@ Feature.AvatarSwitcher.Message.UnknownSupport,アバターの切り替えはで�
 Feature.AvatarSwitcher.Message.Unsupported,このバーチャル空間はカスタムアバターを使用しているため、Robloxアバターに対応していません。
 Feature.AvatarWorkshop.Action.EditAvatar,アバターを編集
 Feature.AvatarWorkshop.Action.TryAgain,もう一度試す
+Feature.AvatarWorkshop.Description.AddAvatar,このアバターをあなたのアバターに追加しますか？
+Feature.AvatarWorkshop.Heading.AddAvatar,アバターを追加しますか？
 Feature.AvatarWorkshop.Heading.Customize,カスタマイズ
 Feature.AvatarWorkshop.Heading.YourAvatars,マイアバター
+Feature.AvatarWorkshop.Label.DefaultAvatarName,
 Feature.AvatarWorkshop.Message.LoadItemsError,アイテムの読み込み中に問題が発生しました。
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,これ以上のアイテムを読み込めませんでした。
 Feature.AvatarWorkshop.Message.NoItemsOwned,ここにはまだ所有するアイテムがありません。
@@ -2295,7 +2298,7 @@ Feature.Build.Description.BuildReplyNotif,ビルドで返信が届いたとき�
 Feature.Build.Description.BuyRobuxToCreate,作成を続けるには、Robuxをさらに購入するか、明日になって無料のビルド使用量がリセットされるのをお待ちください。
 Feature.Build.Description.BuyUsageOrWait,Robuxでビルド使用量をさらに購入するか、1日あたりの限度額がリセットされるのをお待ちください。
 Feature.Build.Description.CampaignRunDates,広告は{startDate}～{endDate}の期間、実施されます。
-Feature.Build.Description.CaptureWhilePlaytesting,プレイテスト中に切り抜きし、プロンプトに追加してください。
+Feature.Build.Description.CaptureWhilePlaytesting,プレイテスト中に切り抜きして、見たものをBuildに表示してください。
 Feature.Build.Description.ChooseAdCampaignLength,広告の掲載期間を選択してください。
 Feature.Build.Description.ChoosePlaytesters,ゲームをテストプレイしてもらう友達を選択してください。
 Feature.Build.Description.CreateDeveloperProduct,{PRICE} Robuxの「{NAME}」を作成します。まだ購入可能にはなりません。
@@ -2404,9 +2407,9 @@ Feature.Build.Label.BackToBuild,ビルドに戻る
 Feature.Build.Label.Building,処理中…
 Feature.Build.Label.CaptureLibrary,切り抜きライブラリ
 Feature.Build.Label.CaptureSelectionCount,{SELECTED_COUNT} / {MAX_SELECTIONS}点を選択済み
-Feature.Build.Label.CaptureStepAddImages,[画像を追加]を選択して、切り抜きを添付します
+Feature.Build.Label.CaptureStepAddImages,[<b>画像を追加</b>]を選択して、切り抜きをチャットに追加します
 Feature.Build.Label.CaptureStepPlaytest,ゲームのプレイテスト
-Feature.Build.Label.CaptureStepTapCamera,ビルドツールバーでカメラを選択します
+Feature.Build.Label.CaptureStepTapCamera,画面下部のカメラアイコンを選択します
 Feature.Build.Label.ContentRating,コンテンツのレーティング
 Feature.Build.Label.CreatedDate,{YEAR}年{MONTH}月{DAY}日
 Feature.Build.Label.CreatorHub,クリエーターハブ
@@ -2416,6 +2419,7 @@ Feature.Build.Label.DefaultDeveloperProductName,開発者製品
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,削除済み
 Feature.Build.Label.DescribeIdea,アイデアを説明してください
+Feature.Build.Label.DescribeIdeaOrPick,アイデアを説明するか、以下から1つ選んでください
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,説明：{DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,製品名：{NAME}
@@ -3364,20 +3368,26 @@ Feature.CloudClient.Action.PlayWithoutCloudPlay,Cloud Playを使わずにプレ�
 Feature.CloudClient.Description.CloudPlayOffer,Cloud Playは、Robloxのコンピューターでゲームを実行するため、読み込みが速くなり、クラッシュしづらくなる可能性があります。このゲームをプレイしている間のみ有効です。
 Feature.CloudClient.Description.GalleryUnavailableCloudPlay,ギャラリーを使用するには、Cloud Playを使わずに再参加してください。
 Feature.CloudClient.Description.GalleryUnavailableRobloxReality,ギャラリーを使用するには、Restyleを使わずに再参加してください。
+Feature.CloudClient.Description.GalleryUnavailableRobloxRealityV2,ギャラリーを使用するには、{productName}を使わずに再参加してください。
 Feature.CloudClient.Description.RobloxRealityPreview,Restyleは初期プレビュー版です。実際のゲームとは異なる可能性があります。
+Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName}は初期プレビュー版です。実際のゲームとは異なる可能性があります。
 Feature.CloudClient.Heading.CloudPlayOffer,Cloud Playを使ってプレイ
 Feature.CloudClient.Heading.GalleryUnavailableCloudPlay,ギャラリーは、現時点ではCloud Playで利用できません。
 Feature.CloudClient.Heading.GalleryUnavailableRobloxReality,ギャラリーは、現時点ではRestyleで利用できません。
+Feature.CloudClient.Heading.GalleryUnavailableRobloxRealityV2,ギャラリーはまだ{productName}で利用できません。
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Cloud Playでは、現時点では切り抜き機能は利用できません。
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Restyleでは、現時点では切り抜き機能は利用できません。
+Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,切り抜き機能はまだ{productName}では利用できません。
 Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Playが動作していません。通常通りプレイしています。
 Feature.CloudClient.Label.RobloxReality,Restyle
 Feature.CloudClient.Label.RobloxRealityDemoLength,{minutes}分間のデモを試す
 Feature.CloudClient.Label.RobloxRealityEndingSoon,Restyleは1分後に終了し、ゲームから退出することになります。
+Feature.CloudClient.Label.RobloxRealityEndingSoonV2,{productName}は1分後に終了し、ゲームから退出することになります。
 Feature.CloudClient.Label.RobloxRealityGraphics,ゲームを刷新しませんか？
 Feature.CloudClient.Label.RobloxRealityPlusOnly,Plus会員限定
 Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,セルフビューは、現時点ではCloud Playで利用できません。
 Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,セルフビューは、現時点ではRestyleで利用できません。
+Feature.CloudClient.Label.SelfViewUnavailableRobloxRealityV2,セルフビューはまだ{productName}ではで利用できません。
 Feature.CloudClient.Label.TimeLeft,残り時間
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,友達に見つけてもらいやすくしましょう！
@@ -4009,9 +4019,15 @@ Feature.Moments.Description.EngagementFirstLike,今すぐ表示
 Feature.Moments.Description.EngagementFirstReaction,あなたのモーメントに最初のリアクションがありました！
 Feature.Moments.Description.EngagementLikedCommentsDigest,あなたのコメントのうち{likedComments}件に「いいね」がつきました
 Feature.Moments.Description.EngagementMomentDigest,{comments}件の新しいコメントと{milestone}件のリアクション
+Feature.Moments.Description.EngagementMomentFirstReactionDigest,{comments}件の新しいコメントと最初のリアクション
+Feature.Moments.Description.EngagementMomentsCommentsDigest,あなたのモーメントへの{comments}件の新しいコメント
 Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementMomentsReactionsDigest,あなたのモーメントへのリアクションがありました
 Feature.Moments.Description.EngagementNewComment,があなたのモーメントにコメントしました
 Feature.Moments.Description.EngagementNewComments,と他{count}人があなたのモーメントにコメントしました
+Feature.Moments.Description.EngagementNewCommentsOneOther,と他1人があなたのモーメントにコメントしました
+Feature.Moments.Description.EngagementOneCommentDigest,1件の新しいコメントと{milestone}件のリアクション
+Feature.Moments.Description.EngagementOneCommentFirstReactionDigest,1件の新しいコメントとその最初のリアクション
 Feature.Moments.Description.EngagementReactionMilestone,{count}件の新しいリアクション
 Feature.Moments.Description.FollowingCaughtUpBody,このフィードの新しいモーメントをすべて視聴しました。さらに見るには、フィードを切りかえてください。
 Feature.Moments.Description.FollowingEmptyBodyRecommended,ここに、フォローしているクリエーターのモーメントが表示されます。

@@ -768,7 +768,7 @@ CoreScripts.FTUX.Heading.NewTiltOnboarding,เมนูอยู่ตรงน�
 CoreScripts.FTUX.Heading.ReadyToPlaytest,พร้อมทดลองเล่นแล้วหรือยัง?
 CoreScripts.FTUX.Heading.SideSheetUpdate,การดำเนินการทั้งหมดของคุณในที่เดียว
 CoreScripts.FTUX.Heading.SocialOnboarding,คุณสมบัติทางโซเชียล
-CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,เมนูใหม่ของคุณ
+CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,รวมสองเมนูเป็นเมนูเดียวแล้ว
 CoreScripts.FTUX.Heading.YouAreAnEarlyTester,คุณเป็นผู้ทดลองเล่นระยะแรก
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,สลับไปใช้อวาตาร์ที่คุณบันทึกไว้ได้ทุกเมื่อ
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,แชทกับเพื่อนได้ทุกเมื่อ
@@ -779,7 +779,7 @@ CoreScripts.FTUX.Label.NewTiltOnboarding,เมนูเกมประกอบ
 CoreScripts.FTUX.Label.PartyWithYourFriendsAnytime,ปาร์ตี้กับเพื่อนได้ทุกเมื่อ
 CoreScripts.FTUX.Label.SideSheetOnboarding,เมนูมีคุณสมบัติที่จำเป็นทั้งหมดของคุณ ทั้งเชิญเพื่อน ลองใช้ท่าทาง ควบคุมเพลง และอื่นๆ อีกมากมาย
 CoreScripts.FTUX.Label.SocialOnboarding,เข้าถึงคุณสมบัติทางโซเชียลของคุณได้อย่างง่ายดายจากแถบด้านบน รวมถึงแชท
-CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,รวมสองเมนูเป็นเมนูเดียวแล้ว แตะที่นี่เพื่อเปิด
+CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,ทุกสิ่งที่คุณต้องการอยู่ในเมนูนี้ รวมถึงการออกจากเกม
 CoreScripts.Feedback.EntryPoint.ButtonText,ให้ข้อเสนอแนะ
 CoreScripts.Feedback.EntryPoint.OptionText,ให้ข้อเสนอแนะเกี่ยวกับคำแปล
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,
@@ -2104,8 +2104,11 @@ Feature.AvatarSwitcher.Message.UnknownSupport,คุณยังสามาร�
 Feature.AvatarSwitcher.Message.Unsupported,ประสบการณ์นี้ใช้อวาตาร์ที่กำหนดเองและไม่รองรับอวาตาร์ของ Roblox
 Feature.AvatarWorkshop.Action.EditAvatar,แก้ไขอวาตาร์
 Feature.AvatarWorkshop.Action.TryAgain,
+Feature.AvatarWorkshop.Description.AddAvatar,เพิ่มอวาตาร์นี้ไปยังอวาตาร์ของคุณไหม?
+Feature.AvatarWorkshop.Heading.AddAvatar,เพิ่มอวาตาร์ไหม?
 Feature.AvatarWorkshop.Heading.Customize,ปรับแต่ง
 Feature.AvatarWorkshop.Heading.YourAvatars,อวาตาร์ของคุณ
+Feature.AvatarWorkshop.Label.DefaultAvatarName,
 Feature.AvatarWorkshop.Message.LoadItemsError,มีบางอย่างผิดปกติขณะโหลดไอเท็มของคุณ
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,ไม่สามารถโหลดไอเท็มเพิ่มเติมได้
 Feature.AvatarWorkshop.Message.NoItemsOwned,คุณยังไม่ได้เป็นเจ้าของไอเท็มไหนในหมวดนี้เลย
@@ -2278,7 +2281,7 @@ Feature.Build.Description.BuildReplyNotif,รับการแจ้งเต�
 Feature.Build.Description.BuyRobuxToCreate,ซื้อ Robux เพิ่มเพื่อสร้างต่อ หรือรอให้โควต้าการใช้งาน Build ฟรีของคุณรีเซ็ตในวันพรุ่งนี้
 Feature.Build.Description.BuyUsageOrWait,ซื้อโควต้าการใช้งาน Build เพิ่มด้วย Robux หรือรอให้โควต้ารายวันของคุณรีเซ็ต
 Feature.Build.Description.CampaignRunDates,โฆษณาของคุณจะแสดงตั้งแต่วันที่ {startDate}-{endDate}
-Feature.Build.Description.CaptureWhilePlaytesting,จับภาพขณะทดลองเล่น จากนั้นแนบภาพลงในพรอมต์ของคุณ
+Feature.Build.Description.CaptureWhilePlaytesting,จับภาพขณะทดลองเล่นเพื่อให้ Build ดูสิ่งที่คุณเห็น
 Feature.Build.Description.ChooseAdCampaignLength,เลือกว่าต้องการให้แสดงโฆษณานานแค่ไหน
 Feature.Build.Description.ChoosePlaytesters,เลือกเพื่อนที่จะช่วยดูตัวอย่างเกมของคุณ
 Feature.Build.Description.CreateDeveloperProduct,สร้าง {NAME} ในราคา {PRICE} Robux โดยสินค้านี้จะยังไม่เปิดขาย
@@ -2387,9 +2390,9 @@ Feature.Build.Label.BackToBuild,ย้อนกลับไปยังการ
 Feature.Build.Label.Building,กำลังดำเนินการ…
 Feature.Build.Label.CaptureLibrary,คลังภาพที่จับไว้
 Feature.Build.Label.CaptureSelectionCount,เลือกแล้ว {SELECTED_COUNT} จาก {MAX_SELECTIONS} ภาพ
-Feature.Build.Label.CaptureStepAddImages,เลือกเพิ่มภาพเพื่อแนบภาพที่จับไว้
+Feature.Build.Label.CaptureStepAddImages,เลือก<b>เพิ่มภาพ</b>เพื่อเพิ่มภาพที่จับไว้ลงในแชท
 Feature.Build.Label.CaptureStepPlaytest,ทดลองเล่นเกมของคุณ
-Feature.Build.Label.CaptureStepTapCamera,เลือกกล้องในแถบเครื่องมือของ Build
+Feature.Build.Label.CaptureStepTapCamera,เลือกไอคอนกล้องที่ด้านล่างของหน้าจอ
 Feature.Build.Label.ContentRating,การจัดระดับความเหมาะสมของเนื้อหา
 Feature.Build.Label.CreatedDate,{DAY} {MONTH} {YEAR}
 Feature.Build.Label.CreatorHub,ศูนย์กลางครีเอเตอร์
@@ -2399,6 +2402,7 @@ Feature.Build.Label.DefaultDeveloperProductName,ผลิตภัณฑ์น�
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,ลบแล้ว
 Feature.Build.Label.DescribeIdea,อธิบายไอเดีย
+Feature.Build.Label.DescribeIdeaOrPick,อธิบายไอเดียหรือเลือกจากด้านล่าง
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,คำอธิบาย: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,ชื่อ: {NAME}
@@ -3347,20 +3351,26 @@ Feature.CloudClient.Action.PlayWithoutCloudPlay,เล่นโดยไม่�
 Feature.CloudClient.Description.CloudPlayOffer,Cloud Play จะรันเกมบนคอมพิวเตอร์ของ Roblox เกมจึงอาจโหลดเร็วขึ้นและหยุดทำงานน้อยลง Cloud Play จะทำงานเฉพาะระหว่างที่คุณเล่นเกมนี้
 Feature.CloudClient.Description.GalleryUnavailableCloudPlay,เข้าร่วมอีกครั้งโดยไม่ใช้ Cloud Play เพื่อใช้แกลเลอรีของคุณ
 Feature.CloudClient.Description.GalleryUnavailableRobloxReality,เข้าร่วมอีกครั้งโดยไม่ใช้ Restyle เพื่อใช้แกลเลอรีของคุณ
+Feature.CloudClient.Description.GalleryUnavailableRobloxRealityV2,เข้าร่วมอีกครั้งโดยไม่ใช้ {productName} เพื่อใช้แกลเลอรีของคุณ
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle เป็นเวอร์ชันที่ให้ทดลองใช้ได้ก่อนใคร อะไรๆ อาจดูแตกต่างไปจากเกมต้นฉบับ
+Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName} เป็นเวอร์ชันที่ให้ทดลองได้ก่อนใคร อะไรๆ อาจดูแตกต่างไปจากเกมต้นฉบับ
 Feature.CloudClient.Heading.CloudPlayOffer,เล่นผ่าน Cloud Play
 Feature.CloudClient.Heading.GalleryUnavailableCloudPlay,ยังไม่สามารถใช้แกลเลอรีใน Cloud Play ได้
 Feature.CloudClient.Heading.GalleryUnavailableRobloxReality,ยังไม่สามารถใช้แกลเลอรีกับ Restyle ได้
+Feature.CloudClient.Heading.GalleryUnavailableRobloxRealityV2,ยังไม่สามารถใช้แกลเลอรีกับ {productName} ได้
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,ยังไม่สามารถใช้การจับภาพใน Cloud Play ได้
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,ยังไม่สามารถใช้การจับภาพกับ Restyle ได้
+Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,ยังไม่สามารถใช้การจับภาพกับ {productName} ได้
 Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Play ใช้งานไม่ได้ คุณกำลังเข้าสู่โหมดการเล่นปกติ
 Feature.CloudClient.Label.RobloxReality,Restyle
 Feature.CloudClient.Label.RobloxRealityDemoLength,ลองเล่นเดโม {minutes} นาที
 Feature.CloudClient.Label.RobloxRealityEndingSoon,Restyle จะสิ้นสุดในอีก 1 นาที และนำคุณออกจากเกม
+Feature.CloudClient.Label.RobloxRealityEndingSoonV2,{productName} จะสิ้นสุดในอีก 1 นาที และคุณจะออกจากเกม
 Feature.CloudClient.Label.RobloxRealityGraphics,เกมของคุณในลุคใหม่
 Feature.CloudClient.Label.RobloxRealityPlusOnly,สำหรับสมาชิก Plus เท่านั้น
 Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,ยังไม่สามารถใช้มุมมองตนเองใน Cloud Play ได้
 Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,ยังไม่สามารถใช้มุมมองตนเองกับ Restyle ได้
+Feature.CloudClient.Label.SelfViewUnavailableRobloxRealityV2,ยังไม่สามารถใช้มุมมองตนเองกับ {productName} ได้
 Feature.CloudClient.Label.TimeLeft,เวลาที่เหลือ
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,ช่วยให้เพื่อนหาคุณเจอ
@@ -3992,9 +4002,15 @@ Feature.Moments.Description.EngagementFirstLike,ดูเลย
 Feature.Moments.Description.EngagementFirstReaction,มีคนแสดงความรู้สึกต่อโมเมนต์ของคุณเป็นครั้งแรก!
 Feature.Moments.Description.EngagementLikedCommentsDigest,มีคนกดถูกใจความคิดเห็นของคุณ {likedComments} รายการ
 Feature.Moments.Description.EngagementMomentDigest,มีความคิดเห็นใหม่ {comments} รายการ และการแสดงความรู้สึก {milestone} ครั้ง
+Feature.Moments.Description.EngagementMomentFirstReactionDigest,มีความคิดเห็นใหม่ {comments} รายการ และการแสดงความรู้สึกครั้งแรก
+Feature.Moments.Description.EngagementMomentsCommentsDigest,มีความคิดเห็นใหม่ {comments} รายการในโมเมนต์ของคุณ
 Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementMomentsReactionsDigest,โมเมนต์ของคุณกำลังได้รับความสนใจ
 Feature.Moments.Description.EngagementNewComment,เพิ่งแสดงความคิดเห็นในโมเมนต์ของคุณ
 Feature.Moments.Description.EngagementNewComments,และอีก {count} คนแสดงความคิดเห็นในโมเมนต์ของคุณ
+Feature.Moments.Description.EngagementNewCommentsOneOther,และอีก 1 คนแสดงความคิดเห็นในโมเมนต์ของคุณ
+Feature.Moments.Description.EngagementOneCommentDigest,มีความคิดเห็นใหม่ 1 รายการ และการแสดงความรู้สึก {milestone} ครั้ง
+Feature.Moments.Description.EngagementOneCommentFirstReactionDigest,มีความคิดเห็นใหม่ 1 รายการ และการแสดงความรู้สึกครั้งแรก
 Feature.Moments.Description.EngagementReactionMilestone,การแสดงความรู้สึกใหม่ {count} ครั้ง
 Feature.Moments.Description.FollowingCaughtUpBody,คุณติดตามโมเมนต์ใหม่ในฟีดนี้หมดแล้ว สลับฟีดเพื่อดูเพิ่มเติม
 Feature.Moments.Description.FollowingEmptyBodyRecommended,คุณจะเห็นโมเมนต์ของครีเอเตอร์ที่คุณติดตามได้ที่นี่

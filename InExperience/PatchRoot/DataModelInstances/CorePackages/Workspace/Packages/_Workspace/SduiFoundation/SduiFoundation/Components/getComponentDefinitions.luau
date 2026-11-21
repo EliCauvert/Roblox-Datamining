@@ -17,9 +17,10 @@ local FFlagSduiFoundationRatingModule = require(SduiFoundation.Flags.FFlagSduiFo
 local FFlagSduiFoundationStatusBadgeModule = require(SduiFoundation.Flags.FFlagSduiFoundationStatusBadge)
 local FFlagSduiFoundationStatusIndicatorModule = require(SduiFoundation.Flags.FFlagSduiFoundationStatusIndicator)
 local FFlagMigrateSduiIcon = require(Parent.SharedFlags).FFlagMigrateSduiIcon
+local FFlagMigrateSduiSkeleton = require(Parent.SharedFlags).FFlagMigrateSduiSkeleton
 
 return function()
-	-- upvalues: SduiComponentType (copy), FFlagSduiFoundationFloatingBannerModule (copy), SduiFoundation (copy), FFlagMigrateSduiIcon (copy), GetLuaTableEnumParserFunction (copy), FoundationModule (copy), ParseColorTokenProp (copy), ParseVector2Prop (copy), ParseIntegerProp (copy), ParseUDim2Prop (copy), ParseBooleanProp (copy), ParseNumberProp (copy), ParseStringProp (copy), FFlagSduiFoundationRatingModule (copy), FFlagSduiFoundationStatusBadgeModule (copy), FFlagSduiFoundationStatusIndicatorModule (copy)
+	-- upvalues: SduiComponentType (copy), FFlagSduiFoundationFloatingBannerModule (copy), SduiFoundation (copy), FFlagMigrateSduiIcon (copy), GetLuaTableEnumParserFunction (copy), FoundationModule (copy), ParseColorTokenProp (copy), ParseVector2Prop (copy), ParseIntegerProp (copy), ParseUDim2Prop (copy), ParseBooleanProp (copy), ParseNumberProp (copy), ParseStringProp (copy), FFlagSduiFoundationRatingModule (copy), FFlagMigrateSduiSkeleton (copy), FFlagSduiFoundationStatusBadgeModule (copy), FFlagSduiFoundationStatusIndicatorModule (copy)
 	return {
 		[SduiComponentType.FloatingBanner] = if FFlagSduiFoundationFloatingBannerModule then {
 			getLazyComponent = function()
@@ -49,6 +50,12 @@ return function()
 			getLazyComponent = function()
 				-- upvalues: SduiFoundation (upval)
 				return require(SduiFoundation.Components.SduiRating)
+			end
+		} else nil,
+		[SduiComponentType.Skeleton] = if FFlagMigrateSduiSkeleton then {
+			getLazyComponent = function()
+				-- upvalues: SduiFoundation (upval)
+				return require(SduiFoundation.Components.SduiSkeleton)
 			end
 		} else nil,
 		[SduiComponentType.StatusBadge] = if FFlagSduiFoundationStatusBadgeModule then {

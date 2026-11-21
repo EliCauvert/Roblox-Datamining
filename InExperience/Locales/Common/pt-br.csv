@@ -785,7 +785,7 @@ CoreScripts.FTUX.Heading.NewTiltOnboarding,O menu fica aqui
 CoreScripts.FTUX.Heading.ReadyToPlaytest,Tudo pronto para o teste de jogo?
 CoreScripts.FTUX.Heading.SideSheetUpdate,Todas as suas ações em um só lugar
 CoreScripts.FTUX.Heading.SocialOnboarding,Recursos sociais
-CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,Seu novo menu
+CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,Os dois menus agora são um só
 CoreScripts.FTUX.Heading.YouAreAnEarlyTester,Você é um testador antecipado
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,Mude para seus avatares salvos a qualquer momento.
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,Converse com suas amizades a qualquer hora.
@@ -796,7 +796,7 @@ CoreScripts.FTUX.Label.NewTiltOnboarding,O menu do jogo reúne ações disponív
 CoreScripts.FTUX.Label.PartyWithYourFriendsAnytime,Crie uma Turma com seus amigos a qualquer hora.
 CoreScripts.FTUX.Label.SideSheetOnboarding,"O menu contém todos os seus recursos essenciais. Convide amizades, experimente emotes, controle a música e muito mais."
 CoreScripts.FTUX.Label.SocialOnboarding,"Acesse facilmente seus recursos sociais na barra superior, incluindo o bate-papo."
-CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,Dois menus agora são um só. Toque aqui para abri-lo.
+CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,"Tudo o que você precisa está neste menu, incluindo a opção Sair."
 CoreScripts.Feedback.EntryPoint.ButtonText,Dar feedback
 CoreScripts.Feedback.EntryPoint.OptionText,Dar feedback de tradução
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,
@@ -2121,8 +2121,11 @@ Feature.AvatarSwitcher.Message.UnknownSupport,"Você ainda pode mudar seu avatar
 Feature.AvatarSwitcher.Message.Unsupported,Esta experiência usa um avatar personalizado e não oferece suporte a avatares da Roblox.
 Feature.AvatarWorkshop.Action.EditAvatar,Editar avatar
 Feature.AvatarWorkshop.Action.TryAgain,
+Feature.AvatarWorkshop.Description.AddAvatar,Deseja adicionar este avatar aos seus avatares?
+Feature.AvatarWorkshop.Heading.AddAvatar,Adicionar avatar?
 Feature.AvatarWorkshop.Heading.Customize,Personalizar
 Feature.AvatarWorkshop.Heading.YourAvatars,Seus avatares
+Feature.AvatarWorkshop.Label.DefaultAvatarName,
 Feature.AvatarWorkshop.Message.LoadItemsError,Algo deu errado ao carregar seus itens.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,Não foi possível carregar mais itens.
 Feature.AvatarWorkshop.Message.NoItemsOwned,Você ainda não possui nenhum item aqui.
@@ -2295,7 +2298,7 @@ Feature.Build.Description.BuildReplyNotif,Receba uma notificação quando a fun�
 Feature.Build.Description.BuyRobuxToCreate,"Compre mais Robux para continuar criando ou aguarde até amanhã, quando o seu limite gratuito da função Criar será restabelecido."
 Feature.Build.Description.BuyUsageOrWait,Use Robux para comprar mais limite para a função Criar ou aguarde o seu limite diário ser restabelecido.
 Feature.Build.Description.CampaignRunDates,Seu anúncio será veiculado de {startDate} a {endDate}.
-Feature.Build.Description.CaptureWhilePlaytesting,Faça uma captura de tela enquanto testa o jogo e adicione-a ao seu prompt.
+Feature.Build.Description.CaptureWhilePlaytesting,Faça uma captura de tela enquanto testa o jogo para mostrar ao chat o que você vê.
 Feature.Build.Description.ChooseAdCampaignLength,Escolha por quanto tempo você quer que seu anúncio seja veiculado.
 Feature.Build.Description.ChoosePlaytesters,Escolha amizades para visualizar seu jogo.
 Feature.Build.Description.CreateDeveloperProduct,Crie {NAME} por {PRICE} Robux. Ainda não estará disponível para compra.
@@ -2395,6 +2398,8 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,Todos os jogos
 Feature.Build.Label.AmountAvailable,{AMOUNT} disponível
+Feature.Build.Label.AttachmentCountPlural,{count} anexos
+Feature.Build.Label.AttachmentCountSingular,1 anexo
 Feature.Build.Label.Autosaved,Salvo automaticamente
 Feature.Build.Label.Available,disponível(is)
 Feature.Build.Label.AvailableForPurchase,Disponível para compra
@@ -2402,9 +2407,9 @@ Feature.Build.Label.BackToBuild,"Voltar para ""Construir"""
 Feature.Build.Label.Building,Executando…
 Feature.Build.Label.CaptureLibrary,Biblioteca de capturas
 Feature.Build.Label.CaptureSelectionCount,{SELECTED_COUNT} de {MAX_SELECTIONS} selecionados
-Feature.Build.Label.CaptureStepAddImages,Selecione Adicionar imagens para anexar sua captura
+Feature.Build.Label.CaptureStepAddImages,Selecione <b>Adicionar imagens</b> para adicionar sua captura ao chat
 Feature.Build.Label.CaptureStepPlaytest,Testar seu jogo
-Feature.Build.Label.CaptureStepTapCamera,Selecione a câmera na barra de ferramentas da função Criar
+Feature.Build.Label.CaptureStepTapCamera,Selecione o ícone da câmera na parte inferior da tela
 Feature.Build.Label.ContentRating,Classificação de conteúdo
 Feature.Build.Label.CreatedDate,{DAY} de {MONTH} de {YEAR}
 Feature.Build.Label.CreatorHub,Salão dos Criadores
@@ -2414,6 +2419,7 @@ Feature.Build.Label.DefaultDeveloperProductName,produto de desenvolvedor
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,Excluído
 Feature.Build.Label.DescribeIdea,Descreva uma ideia
+Feature.Build.Label.DescribeIdeaOrPick,Descreva uma ideia ou escolha uma abaixo
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,Descrição: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Nome: {NAME}
@@ -2438,6 +2444,7 @@ Feature.Build.Label.IconThumbnails,Ícone e miniaturas
 Feature.Build.Label.Images2D,Imagens 2D
 Feature.Build.Label.InProgress,Em andamento
 Feature.Build.Label.InputNeeded,Informações necessárias
+Feature.Build.Label.InspirationTab,Inspiração
 Feature.Build.Label.InternalSpec,Especificação interna
 Feature.Build.Label.InternalTesting,Testes internos
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -3359,9 +3366,29 @@ Feature.Chat.Title.NewChat,Novo chat
 Feature.Chat.Toast.Error.InvalidUserSelected,Uma ou mais pessoas nesta lista não podem ser adicionadas
 Feature.CloudClient.Action.PlayWithoutCloudPlay,Jogar sem o Cloud Play
 Feature.CloudClient.Description.CloudPlayOffer,O Cloud Play executa o jogo nos computadores da Roblox para ele carregar mais rápido e ter menos travamentos. Ele só funciona enquanto você estiver jogando este jogo.
+Feature.CloudClient.Description.GalleryUnavailableCloudPlay,Entre novamente sem o Cloud Play para usar sua galeria.
+Feature.CloudClient.Description.GalleryUnavailableRobloxReality,Entre novamente sem o Restyle para usar sua galeria.
+Feature.CloudClient.Description.GalleryUnavailableRobloxRealityV2,Entre novamente sem o {productName} para usar sua galeria.
+Feature.CloudClient.Description.RobloxRealityPreview,O Restyle é uma prévia. As coisas podem parecer diferentes do jogo original.
+Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName} é uma prévia antecipada. As coisas podem parecer diferentes do jogo original.
 Feature.CloudClient.Heading.CloudPlayOffer,Jogar com o Cloud Play
+Feature.CloudClient.Heading.GalleryUnavailableCloudPlay,A galeria ainda não está disponível no Cloud Play.
+Feature.CloudClient.Heading.GalleryUnavailableRobloxReality,A galeria ainda não está disponível com o Restyle.
+Feature.CloudClient.Heading.GalleryUnavailableRobloxRealityV2,A galeria ainda não está disponível com o {productName}.
+Feature.CloudClient.Label.CaptureUnavailableCloudPlay,A captura ainda não está disponível no Cloud Play.
+Feature.CloudClient.Label.CaptureUnavailableRobloxReality,A função capturar ainda não está disponível com o Restyle.
+Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,A função Capturar ainda não está disponível com o {productName}.
+Feature.CloudClient.Label.CloudPlayJoinFailed,O Cloud Play não está funcionando. Você está jogando normalmente.
+Feature.CloudClient.Label.RobloxReality,Restyle
+Feature.CloudClient.Label.RobloxRealityDemoLength,Teste uma demonstração de {minutes} minutos
+Feature.CloudClient.Label.RobloxRealityEndingSoon,"O Restyle termina em 1 minuto, e você sairá do jogo."
+Feature.CloudClient.Label.RobloxRealityEndingSoonV2,"{productName} termina em 1 minuto, e você sairá do jogo."
 Feature.CloudClient.Label.RobloxRealityGraphics,Seu jogo repaginado
 Feature.CloudClient.Label.RobloxRealityPlusOnly,Apenas para assinantes do Plus
+Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,A visualização tipo self ainda não está disponível no Cloud Play.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,A visualização tipo self ainda não está disponível com o Restyle.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxRealityV2,A visualização própria ainda não está disponível com o {productName}.
+Feature.CloudClient.Label.TimeLeft,Tempo restante
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,Ajude suas amizades a encontrarem você
 Feature.Contacts.Action.Invite,Convidar
@@ -3992,9 +4019,15 @@ Feature.Moments.Description.EngagementFirstLike,Veja agora
 Feature.Moments.Description.EngagementFirstReaction,Seu Momento acabou de receber sua primeira reação!
 Feature.Moments.Description.EngagementLikedCommentsDigest,{likedComments} dos seus comentários receberam curtidas
 Feature.Moments.Description.EngagementMomentDigest,{comments} novos comentários e {milestone} reações
+Feature.Moments.Description.EngagementMomentFirstReactionDigest,{comments} novos comentários e sua primeira reação
+Feature.Moments.Description.EngagementMomentsCommentsDigest,{comments} novos comentários nos seus Momentos
 Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementMomentsReactionsDigest,Seus Momentos estão recebendo reações
 Feature.Moments.Description.EngagementNewComment,acabou de comentar no seu Momento
 Feature.Moments.Description.EngagementNewComments,e mais {count} pessoas comentaram no seu Momento
+Feature.Moments.Description.EngagementNewCommentsOneOther,e mais 1 pessoa comentou no seu Momento
+Feature.Moments.Description.EngagementOneCommentDigest,1 novo comentário e {milestone} reações
+Feature.Moments.Description.EngagementOneCommentFirstReactionDigest,1 novo comentário e sua primeira reação
 Feature.Moments.Description.EngagementReactionMilestone,{count} novas reações
 Feature.Moments.Description.FollowingCaughtUpBody,Você assistiu a todos os novos Momentos neste feed. Mude para outro feed para ver mais.
 Feature.Moments.Description.FollowingEmptyBodyRecommended,Você verá aqui os Momentos dos criadores que segue.
@@ -4987,7 +5020,7 @@ Feature.UniversalShareSheet.Response.SharedMessage,A mensagem foi enviada
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,As mensagens foram enviadas
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} outras pessoas
 Feature.UserLibrary.Label.MyLibrary,Minha biblioteca
-Feature.VIPServer.Message.TooManyFreeServersOnGame,Você não pode ter mais servidores privados gratuitos nesta experiência.
+Feature.VIPServer.Message.TooManyFreeServersOnGame,Você não pode ter mais servidores privados gratuitos neste jogo.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,"Você não pode ter mais servidores gratuitos ativos. Primeiro, desative alguns dos outros servidores."
 Feature.VerificationUpsell.Action.AddPhone,Adicionar telefone
 Feature.VerificationUpsell.Action.AddPhoneNumber,Adicionar número de telefone

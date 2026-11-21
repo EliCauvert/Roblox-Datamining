@@ -785,7 +785,7 @@ CoreScripts.FTUX.Heading.NewTiltOnboarding,Menü burada bulunur
 CoreScripts.FTUX.Heading.ReadyToPlaytest,Oynanış testine hazır mısın?
 CoreScripts.FTUX.Heading.SideSheetUpdate,Tüm eylemlerin tek bir yerde
 CoreScripts.FTUX.Heading.SocialOnboarding,Sosyal özellikler
-CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,Yeni menün
+CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,İki menü şimdi tek menüde birleşti
 CoreScripts.FTUX.Heading.YouAreAnEarlyTester,Sen bir erken test kullanıcısısın
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,İstediğin zaman kayıtlı avatarlarına geç.
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,Arkadaşlarınla istediğin zaman sohbet et.
@@ -796,7 +796,7 @@ CoreScripts.FTUX.Label.NewTiltOnboarding,"Oyun menüsü, oyun ayarlarının yan�
 CoreScripts.FTUX.Label.PartyWithYourFriendsAnytime,Arkadaşlarınla istediğin zaman Parti yap.
 CoreScripts.FTUX.Label.SideSheetOnboarding,"Menü, kullanabileceğin temel özelliklerin tümünü içerir. Arkadaşlarını davet et, İfadeleri dene, Müziği kontrol et ve daha fazlasını yap."
 CoreScripts.FTUX.Label.SocialOnboarding,Sohbet dâhil olmak üzere sosyal özelliklerine üst çubuktan kolayca eriş.
-CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,İki menü şimdi tek menüde birleşti. Açmak için buraya dokun.
+CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,Ayrılma seçeneği dâhil ihtiyacın olan her şey bu menüde.
 CoreScripts.Feedback.EntryPoint.ButtonText,Geri Bildirimde Bulun
 CoreScripts.Feedback.EntryPoint.OptionText,Çeviri Geri Bildiriminde Bulun
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,Çık
@@ -2077,8 +2077,11 @@ Feature.AvatarSwitcher.Message.UnknownSupport,Avatarını yine de değiştirebil
 Feature.AvatarSwitcher.Message.Unsupported,Bu deneyim özel bir avatar kullanıyor ve Roblox avatarlarını desteklemiyor.
 Feature.AvatarWorkshop.Action.EditAvatar,Avatarı düzenle
 Feature.AvatarWorkshop.Action.TryAgain,
+Feature.AvatarWorkshop.Description.AddAvatar,Bu avatarı avatarlarına eklemek istiyor musun?
+Feature.AvatarWorkshop.Heading.AddAvatar,Avatar eklensin mi?
 Feature.AvatarWorkshop.Heading.Customize,Özelleştir
 Feature.AvatarWorkshop.Heading.YourAvatars,Avatarların
+Feature.AvatarWorkshop.Label.DefaultAvatarName,
 Feature.AvatarWorkshop.Message.LoadItemsError,Öğelerin yüklenirken bir şeyler ters gitti.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,Daha fazla öğe yüklenemedi.
 Feature.AvatarWorkshop.Message.NoItemsOwned,Burada henüz hiçbir öğen yok.
@@ -2251,7 +2254,7 @@ Feature.Build.Description.BuildReplyNotif,İnşa Et'ten sana bir yanıt geldiği
 Feature.Build.Description.BuyRobuxToCreate,Bir şeyler oluşturmaya devam etmek için daha fazla Robux satın al veya ücretsiz İnşa Et kullanım hakkının yarın sıfırlanmasını bekle.
 Feature.Build.Description.BuyUsageOrWait,Robux ile daha fazla İnşa Et kullanım hakkı satın al veya günlük sınırının sıfırlanmasını bekle.
 Feature.Build.Description.CampaignRunDates,Reklamın {startDate}-{endDate} arasında yayınlanıyor.
-Feature.Build.Description.CaptureWhilePlaytesting,"Oynanış testi yaparken bir yakalama al, ardından bunu istemine ekle."
+Feature.Build.Description.CaptureWhilePlaytesting,Oynanış testi yaparken gördüklerini İnşa Et'e göstermek için bir yakalama al.
 Feature.Build.Description.ChooseAdCampaignLength,Reklamının ne kadar süreyle yayınlanmasını istediğini seç.
 Feature.Build.Description.ChoosePlaytesters,Oyununun ön izlemesini yapacak arkadaşları seç.
 Feature.Build.Description.CreateDeveloperProduct,{PRICE} Robux karşılığında {NAME} oluştur. Henüz satın alınamaz.
@@ -2360,9 +2363,9 @@ Feature.Build.Label.BackToBuild,Oluşturmaya Dön
 Feature.Build.Label.Building,Çalışılıyor…
 Feature.Build.Label.CaptureLibrary,Yakalama kütüphanesi
 Feature.Build.Label.CaptureSelectionCount,{SELECTED_COUNT}/{MAX_SELECTIONS} seçildi
-Feature.Build.Label.CaptureStepAddImages,Yakalamanı eklemek için Görsel ekle'yi seç
+Feature.Build.Label.CaptureStepAddImages,Yakalamanı sohbete eklemek için <b>Görsel ekle</b>'yi seç
 Feature.Build.Label.CaptureStepPlaytest,Oyununu oynanış testine sok
-Feature.Build.Label.CaptureStepTapCamera,İnşa Et araç çubuğunda kamerayı seç
+Feature.Build.Label.CaptureStepTapCamera,Ekranın altındaki kamera simgesini seç
 Feature.Build.Label.ContentRating,İçerik derecelendirmesi
 Feature.Build.Label.CreatedDate,{DAY} {MONTH} {YEAR}
 Feature.Build.Label.CreatorHub,Yaratıcı Merkezi
@@ -2372,6 +2375,7 @@ Feature.Build.Label.DefaultDeveloperProductName,geliştirici ürünü
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,Silindi
 Feature.Build.Label.DescribeIdea,Fikrini tarif et
+Feature.Build.Label.DescribeIdeaOrPick,Fikrini anlat veya aşağıdakilerden birini seç
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,Açıklama: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Ad: {NAME}
@@ -3320,20 +3324,26 @@ Feature.CloudClient.Action.PlayWithoutCloudPlay,Cloud Play olmadan oyna
 Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play, oyunu Roblox'un bilgisayarlarında çalıştırır. Bu sayede oyun daha hızlı yüklenip daha az çöker. Yalnızca bu oyunu oynadığın süre boyunca geçerlidir."
 Feature.CloudClient.Description.GalleryUnavailableCloudPlay,Galerini kullanmak için Cloud Play olmadan yeniden katıl.
 Feature.CloudClient.Description.GalleryUnavailableRobloxReality,Galerini kullanmak için Restyle olmadan yeniden katıl.
+Feature.CloudClient.Description.GalleryUnavailableRobloxRealityV2,Galerini kullanmak için {productName} olmadan yeniden katıl.
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle bir erken ön izlemedir. Bazı şeyler orijinal oyundan farklı görünebilir.
+Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName} bir erken ön izlemedir. Bazı şeyler orijinal oyundan farklı görünebilir.
 Feature.CloudClient.Heading.CloudPlayOffer,Cloud Play ile oyna
 Feature.CloudClient.Heading.GalleryUnavailableCloudPlay,Galeri henüz Cloud Play'de kullanılamıyor.
 Feature.CloudClient.Heading.GalleryUnavailableRobloxReality,Galeri henüz Restyle ile kullanılamıyor.
+Feature.CloudClient.Heading.GalleryUnavailableRobloxRealityV2,Galeri henüz {productName} ürünü ile kullanılamıyor.
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Yakalama henüz Cloud Play'de kullanılamıyor.
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Yakalama henüz Restyle ile kullanılamıyor.
+Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,Yakalama henüz {productName} ile kullanılamıyor.
 Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Play çalışmıyor. Normal şekilde oynuyorsun.
 Feature.CloudClient.Label.RobloxReality,Restyle
 Feature.CloudClient.Label.RobloxRealityDemoLength,{minutes} dakikalık bir demo dene
 Feature.CloudClient.Label.RobloxRealityEndingSoon,Restyle 1 dakika içinde sona erecek ve oyundan ayrılacaksın.
+Feature.CloudClient.Label.RobloxRealityEndingSoonV2,{productName} 1 dakika içinde sona erecek ve oyundan ayrılacaksın.
 Feature.CloudClient.Label.RobloxRealityGraphics,Oyununa yepyeni bir bakış
 Feature.CloudClient.Label.RobloxRealityPlusOnly,Yalnızca Plus aboneleri için
 Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,Kendi Görüntün henüz Cloud Play'de kullanılamıyor.
 Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,Kendi Görüntün henüz Restyle ile kullanılamıyor.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxRealityV2,Kendi Görüntün henüz {productName} ile kullanılamıyor.
 Feature.CloudClient.Label.TimeLeft,Kalan süre
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,Arkadaşlarının Seni Bulmasına İzin Ver
@@ -3965,9 +3975,15 @@ Feature.Moments.Description.EngagementFirstLike,Şimdi görüntüle
 Feature.Moments.Description.EngagementFirstReaction,Anın az önce ilk tepkisini aldı!
 Feature.Moments.Description.EngagementLikedCommentsDigest,Yorumlarından {likedComments} tanesi beğenildi
 Feature.Moments.Description.EngagementMomentDigest,{comments} yeni yorum ve {milestone} tepki
+Feature.Moments.Description.EngagementMomentFirstReactionDigest,{comments} yeni yorum ve verilen ilk tepki
+Feature.Moments.Description.EngagementMomentsCommentsDigest,Paylaştığın Anlarda {comments} yeni yorum
 Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementMomentsReactionsDigest,Paylaştığın Anlar tepki alıyor
 Feature.Moments.Description.EngagementNewComment,az önce Anına yorum yaptı
 Feature.Moments.Description.EngagementNewComments,"ve {count} diğer kişi, paylaştığın An hakkında yorum yaptı"
+Feature.Moments.Description.EngagementNewCommentsOneOther,ve 1 kişi daha paylaştığın An hakkında yorum yaptı
+Feature.Moments.Description.EngagementOneCommentDigest,1 yeni yorum ve {milestone}. tepki
+Feature.Moments.Description.EngagementOneCommentFirstReactionDigest,1 yeni yorum ve verilen ilk tepki
 Feature.Moments.Description.EngagementReactionMilestone,{count} yeni tepki
 Feature.Moments.Description.FollowingCaughtUpBody,Bu sayfadaki tüm yeni Anları izledin. Daha fazlasını görüntülemek için sayfa değiştir.
 Feature.Moments.Description.FollowingEmptyBodyRecommended,Takip ettiğin yaratıcıların Anlarını burada göreceksin.

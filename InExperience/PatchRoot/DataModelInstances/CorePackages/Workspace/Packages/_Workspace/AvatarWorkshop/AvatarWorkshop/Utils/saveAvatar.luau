@@ -21,11 +21,15 @@ return function(p1)
 		return AvatarEditorService.PromptSaveAvatarCompleted:Wait()
 	end)
 	
-	if Success then
-		return Result == Enum.AvatarPromptResult.Success, Result3
-	else
+	if not Success then
 		warn("AvatarWorkshop: couldn't save the avatar:", Result)
 		
 		return false, nil
+	elseif Result == Enum.AvatarPromptResult.Success then
+		return true, Result3
+	else
+		warn("AvatarWorkshop: the avatar wasn't saved:", Result)
+		
+		return false, Result3
 	end
 end

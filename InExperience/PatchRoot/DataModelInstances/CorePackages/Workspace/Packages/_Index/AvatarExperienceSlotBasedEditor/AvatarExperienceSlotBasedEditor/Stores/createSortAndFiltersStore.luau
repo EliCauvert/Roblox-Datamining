@@ -4,13 +4,24 @@ local SignalsModule = require(Parent.Signals)
 local InventoryFiltersModule = require(script.Parent.Parent.Enums.InventoryFilters)
 local InventorySortsModule = require(script.Parent.Parent.Enums.InventorySorts)
 local FFlagAXInventoryDurablesExpiredFilter = AvatarExperienceFlagsModule.FFlagAXInventoryDurablesExpiredFilter
+local FFlagAXEnableInventorySearch = AvatarExperienceFlagsModule.FFlagAXEnableInventorySearch
 
-return function()
-	-- upvalues: SignalsModule (copy), FFlagAXInventoryDurablesExpiredFilter (copy), InventoryFiltersModule (copy), InventorySortsModule (copy)
-	local Signal, Signal2 = SignalsModule.createSignal(if FFlagAXInventoryDurablesExpiredFilter then {
+local function getDefaultSortAndFilters()
+	-- upvalues: FFlagAXInventoryDurablesExpiredFilter (copy), InventoryFiltersModule (copy), InventorySortsModule (copy)
+	return if FFlagAXInventoryDurablesExpiredFilter then {
 		filter = InventoryFiltersModule.Active,
 		sort = InventorySortsModule.Newest
-	} else { sort = InventorySortsModule.Newest })
+	} else { sort = InventorySortsModule.Newest }
+end
+
+return function()
+	-- upvalues: SignalsModule (copy), getDefaultSortAndFilters (copy), FFlagAXInventoryDurablesExpiredFilter (copy), InventorySortsModule (copy), InventoryFiltersModule (copy), FFlagAXEnableInventorySearch (copy)
+	local Signal, Signal2 = SignalsModule.createSignal((getDefaultSortAndFilters()))
+	
+	local function resetSortAndFilters()
+		-- upvalues: Signal2 (copy), getDefaultSortAndFilters (upval)
+		Signal2((getDefaultSortAndFilters()))
+	end
 	
 	return {
 		getSortAndFilters = Signal,
@@ -33,6 +44,7 @@ return function()
 		applySortAndFilters = function(p1)
 			-- upvalues: Signal2 (copy)
 			Signal2(p1)
-		end
+		end,
+		resetSortAndFilters = if FFlagAXEnableInventorySearch then resetSortAndFilters else nil
 	}
 end

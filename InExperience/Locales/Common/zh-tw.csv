@@ -784,7 +784,7 @@ CoreScripts.FTUX.Heading.NewTiltOnboarding,選單在此處
 CoreScripts.FTUX.Heading.ReadyToPlaytest,準備好試玩了嗎？
 CoreScripts.FTUX.Heading.SideSheetUpdate,集中一處管理所有操作
 CoreScripts.FTUX.Heading.SocialOnboarding,社交功能
-CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,你的全新選單
+CoreScripts.FTUX.Heading.UnifiedMenuEntrypointUpdate,兩個選單現已合而為一
 CoreScripts.FTUX.Heading.YouAreAnEarlyTester,你是搶先遊玩的測試員
 CoreScripts.FTUX.Label.AvatarSwitcherDescription,隨時切換至已儲存的虛擬人偶。
 CoreScripts.FTUX.Label.ChatWithYourFriendsAnytime,隨時與好友聊天。
@@ -795,7 +795,7 @@ CoreScripts.FTUX.Label.NewTiltOnboarding,遊戲選單包含遊戲內動作以及
 CoreScripts.FTUX.Label.PartyWithYourFriendsAnytime,隨時與好友一起利用 Party 同樂。
 CoreScripts.FTUX.Label.SideSheetOnboarding,選單包含所有基本功能，邀請好友、試用動作、控制音樂等。
 CoreScripts.FTUX.Label.SocialOnboarding,從頂端列輕鬆存取聊天等社交功能。
-CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,兩個選單現已合而為一。輕觸此處即可開啟。
+CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,此選單提供你所需的一切功能，包括「離開」。
 CoreScripts.Feedback.EntryPoint.ButtonText,給予回饋
 CoreScripts.Feedback.EntryPoint.OptionText,給予翻譯回饋
 CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,
@@ -2120,8 +2120,11 @@ Feature.AvatarSwitcher.Message.UnknownSupport,你仍可切換虛擬人偶，但�
 Feature.AvatarSwitcher.Message.Unsupported,此體驗使用自訂虛擬人偶，不支援 Roblox 虛擬人偶。
 Feature.AvatarWorkshop.Action.EditAvatar,編輯虛擬人偶
 Feature.AvatarWorkshop.Action.TryAgain,再試一次
+Feature.AvatarWorkshop.Description.AddAvatar,要將此虛擬人偶新增至你的虛擬人偶嗎？
+Feature.AvatarWorkshop.Heading.AddAvatar,要新增虛擬人偶嗎？
 Feature.AvatarWorkshop.Heading.Customize,
 Feature.AvatarWorkshop.Heading.YourAvatars,你的虛擬人偶
+Feature.AvatarWorkshop.Label.DefaultAvatarName,
 Feature.AvatarWorkshop.Message.LoadItemsError,載入物品時發生錯誤。
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,無法載入更多物品。
 Feature.AvatarWorkshop.Message.NoItemsOwned,你在此處還沒有任何物品。
@@ -2294,7 +2297,7 @@ Feature.Build.Description.BuildReplyNotif,在組建回覆你時收到通知。
 Feature.Build.Description.BuyRobuxToCreate,購買更多 Robux 以繼續創作，或等待明天重置的免費組建使用量。
 Feature.Build.Description.BuyUsageOrWait,使用 Robux 購買更多組建使用量，或等待每日上限重置。
 Feature.Build.Description.CampaignRunDates,你的廣告在 {startDate}至 {endDate}期間投放。
-Feature.Build.Description.CaptureWhilePlaytesting,在試玩時截圖，然後將截圖新增至提示中。
+Feature.Build.Description.CaptureWhilePlaytesting,在試玩時截圖，以向組建顯示你看到的內容。
 Feature.Build.Description.ChooseAdCampaignLength,選擇廣告投放的時間長度。
 Feature.Build.Description.ChoosePlaytesters,選擇好友預覽你的遊戲。
 Feature.Build.Description.CreateDeveloperProduct,以 {PRICE} Robux 建立 {NAME}。目前還無法購買。
@@ -2403,9 +2406,9 @@ Feature.Build.Label.BackToBuild,返回建立
 Feature.Build.Label.Building,正在運作...
 Feature.Build.Label.CaptureLibrary,截圖資料庫
 Feature.Build.Label.CaptureSelectionCount,已選擇 {SELECTED_COUNT} 個，共 {MAX_SELECTIONS} 個
-Feature.Build.Label.CaptureStepAddImages,選擇「新增圖片」即可附加截圖
+Feature.Build.Label.CaptureStepAddImages,選擇「新增圖片」<b></b>即可將截圖新增至聊天
 Feature.Build.Label.CaptureStepPlaytest,試玩你的遊戲
-Feature.Build.Label.CaptureStepTapCamera,在「組建」工具列中選擇攝影機
+Feature.Build.Label.CaptureStepTapCamera,選擇畫面底部的攝影機圖示
 Feature.Build.Label.ContentRating,內容分級
 Feature.Build.Label.CreatedDate,{MONTH} {DAY}，{YEAR}
 Feature.Build.Label.CreatorHub,創作者中心
@@ -2415,6 +2418,7 @@ Feature.Build.Label.DefaultDeveloperProductName,開發者產品
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,已刪除
 Feature.Build.Label.DescribeIdea,描述想法
+Feature.Build.Label.DescribeIdeaOrPick,描述想法或從下方選擇一個
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,說明：{DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,名稱：{NAME}
@@ -3363,20 +3367,26 @@ Feature.CloudClient.Action.PlayWithoutCloudPlay,不使用 Cloud Play 遊玩
 Feature.CloudClient.Description.CloudPlayOffer,Cloud Play 會在 Roblox 的電腦上執行遊戲，因此載入速度可能會更快，而且當機次數也可能變少。這只會在你玩此遊戲時有效。
 Feature.CloudClient.Description.GalleryUnavailableCloudPlay,不使用 Cloud Play 重新加入，即可使用你的圖庫。
 Feature.CloudClient.Description.GalleryUnavailableRobloxReality,不使用 Restyle 重新加入即可使用你的圖庫。
+Feature.CloudClient.Description.GalleryUnavailableRobloxRealityV2,不使用 {productName} 重新加入，即可使用你的圖庫。
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle 為搶先預覽。畫面可能與原始遊戲看起來不同。
+Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName} 為搶先預覽。畫面可能與原始遊戲看起來不同。
 Feature.CloudClient.Heading.CloudPlayOffer,使用 Cloud Play 遊玩
 Feature.CloudClient.Heading.GalleryUnavailableCloudPlay,Cloud Play 尚未提供圖庫功能。
 Feature.CloudClient.Heading.GalleryUnavailableRobloxReality,Restyle 尚未提供圖庫功能。
+Feature.CloudClient.Heading.GalleryUnavailableRobloxRealityV2,{productName} 尚未提供圖庫功能。
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Cloud Play 尚未提供擷取功能。
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Restyle 尚未提供擷取功能。
+Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,{productName} 尚未提供擷取功能。
 Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Play 無法運作。你正在以一般模式遊玩。
 Feature.CloudClient.Label.RobloxReality,Restyle
 Feature.CloudClient.Label.RobloxRealityDemoLength,試玩 {minutes} 分鐘的示範版
 Feature.CloudClient.Label.RobloxRealityEndingSoon,Restyle 將於 1 分鐘後結束，屆時你將離開遊戲。
+Feature.CloudClient.Label.RobloxRealityEndingSoonV2,{productName} 將於 1 分鐘後結束，屆時你將離開遊戲。
 Feature.CloudClient.Label.RobloxRealityGraphics,你的遊戲，煥然一新
 Feature.CloudClient.Label.RobloxRealityPlusOnly,僅限 Plus 訂閱者使用
 Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,Cloud Play 尚未提供自身視角功能。
 Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,Restyle 尚未提供自身視角功能。
+Feature.CloudClient.Label.SelfViewUnavailableRobloxRealityV2,{productName} 尚未提供自身視角功能。
 Feature.CloudClient.Label.TimeLeft,剩餘時間
 Feature.ContactUpsell.Action.Continue,
 Feature.ContactUpsell.Heading.LetFriendsFindYou,讓好友找到您
@@ -4008,9 +4018,15 @@ Feature.Moments.Description.EngagementFirstLike,立即檢視
 Feature.Moments.Description.EngagementFirstReaction,你的「美好時光」剛剛獲得了第一個反應！
 Feature.Moments.Description.EngagementLikedCommentsDigest,你的 {likedComments} 則留言獲得了讚
 Feature.Moments.Description.EngagementMomentDigest,{comments} 則新留言和 {milestone} 個反應
+Feature.Moments.Description.EngagementMomentFirstReactionDigest,{comments} 則新留言和第一個反應
+Feature.Moments.Description.EngagementMomentsCommentsDigest,你的「美好時光」有 {comments} 則新留言
 Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementMomentsReactionsDigest,你的「美好時光」獲得了反應
 Feature.Moments.Description.EngagementNewComment,剛剛在你的「美好時光」上留言
 Feature.Moments.Description.EngagementNewComments,和其他 {count} 人在你的「美好時光」上留言
+Feature.Moments.Description.EngagementNewCommentsOneOther,和其他 1 人在你的「美好時光」上留言
+Feature.Moments.Description.EngagementOneCommentDigest,1 則新留言和 {milestone} 個反應
+Feature.Moments.Description.EngagementOneCommentFirstReactionDigest,1 則新留言和第一個反應
 Feature.Moments.Description.EngagementReactionMilestone,{count} 個新反應
 Feature.Moments.Description.FollowingCaughtUpBody,你已觀看此饋送中所有新的「美好時光」。切換饋送以檢視更多內容。
 Feature.Moments.Description.FollowingEmptyBodyRecommended,你將在此處看到追蹤創作者的「美好時光」。
@@ -5004,7 +5020,7 @@ Feature.UniversalShareSheet.Response.SharedMessage,訊息已傳送
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} 和另外 {N} 人
 Feature.UserLibrary.Label.MyLibrary,我的收藏庫
-Feature.VIPServer.Message.TooManyFreeServersOnGame,無法在此體驗擁有更多免費私人伺服器。
+Feature.VIPServer.Message.TooManyFreeServersOnGame,無法在此遊戲擁有更多免費私人伺服器。
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,無法啟用更多免費私人伺服器，請先停用其他伺服器。
 Feature.VerificationUpsell.Action.AddPhone,新增手機號碼
 Feature.VerificationUpsell.Action.AddPhoneNumber,

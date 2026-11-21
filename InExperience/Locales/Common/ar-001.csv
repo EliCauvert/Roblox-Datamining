@@ -619,6 +619,7 @@ CommonUI.UserAgreements.Popup.Agreement.TransferPersonalInformationPolicy,نقل
 CommonUI.UserAgreements.Popup.DefaultAgreementTitle,الاتفاقية المحدثة
 CommonUI.UserAgreements.Popup.TitleOnWebview,
 CoreScripts.Ads.Action.Close,
+CoreScripts.Ads.Action.Watch,مشاهدة
 CoreScripts.Ads.ImmersiveBrandedAds.WhyThisAd,هذا الإعلان غير المخصص يظهر للمستخدمين في هذه التجربة. المُعلِن هو {AdvertiserName} وقد دفع مقابل هذا الإعلان.
 CoreScripts.Ads.Label.IllegalContentReportingLink,الإبلاغ عن محتوى غير قانوني أو محتوى ضار بالأطفال
 CoreScripts.Ads.Label.InExperienceDisclosureDynamic,لم تستخدم Roblox أي معلومات تتعلق بسلوك المستخدم لعرض هذا الإعلان. أنت تشاهد هذا الإعلان بناءً على معلومات تتضمن نوع الجهاز والموقع والعمر، نهدف من خلالها إلى عرض إعلانات ذات صلة ومناسبة لاهتماماتك. المُعلِن هو {AdvertiserName}.
@@ -629,6 +630,8 @@ CoreScripts.Ads.Label.ReportAd,الإبلاغ عن الإعلان
 CoreScripts.Ads.Label.RewardedVideoEligibleDisclaimer,هذا إعلان تجريبي. سيتم عرض الإعلانات الحقيقية في تجربتك.
 CoreScripts.Ads.Label.RewardedVideoExitConfirmation,لقد أوشكت على الحصول على مكافأتك. هل تريد بالتأكيد الخروج؟
 CoreScripts.Ads.Label.RewardedVideoIneligibleDisclaimer,هذا إعلان تجريبي. لن يتم عرض الإعلانات الحقيقية لأن تجربتك غير مؤهلة.
+CoreScripts.Ads.Label.SkipAd,تخطي الإعلان
+CoreScripts.Ads.Label.SkipIn,التخطي خلال {RBX_NUMBER}
 CoreScripts.Ads.Label.SponsoredAds,ممولة
 CoreScripts.Ads.Label.SponsoredAdsDisclosureStatic,التجارب التي تم رعايتها مدفوعة من قبل المصممين. بالنسبة للمستخدمي في الاتحاد الأوروبي، قد يتم عرضهم لك على أساس معلومات عامة مثل نوع جهازك وموقعك الجغرافي. أما خارج الاتحاد الأوروبي، فقد يتم عرض الإعلانات استنادًا إلى معلومات إضافية.
 CoreScripts.Ads.Label.Teleporting,انتقال فوري...
@@ -2057,8 +2060,11 @@ Feature.AvatarSwitcher.Message.UnknownSupport,لا يزال بإمكانك تب�
 Feature.AvatarSwitcher.Message.Unsupported,تستخدم هذه التجربة أفاتارًا مخصصًا ولا تدعم أفاتارات منصة Roblox.
 Feature.AvatarWorkshop.Action.EditAvatar,تحرير الأفاتار
 Feature.AvatarWorkshop.Action.TryAgain,
+Feature.AvatarWorkshop.Description.AddAvatar,هل تريد إضافة هذا الأفاتار إلى أفاتاراتك؟
+Feature.AvatarWorkshop.Heading.AddAvatar,إضافة الأفاتار؟
 Feature.AvatarWorkshop.Heading.Customize,
 Feature.AvatarWorkshop.Heading.YourAvatars,أفاتاراتك
+Feature.AvatarWorkshop.Label.DefaultAvatarName,
 Feature.AvatarWorkshop.Message.LoadItemsError,حدث خطأ ما أثناء تحميل عناصرك.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,تعذَّر تحميل المزيد من العناصر.
 Feature.AvatarWorkshop.Message.NoItemsOwned,لا تملك أي عناصر هنا حتى الآن.
@@ -3695,6 +3701,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,تم تشغيل الإشعار�
 Feature.GameJoin.Description.DifferentServer,ستبدأ في خادم مختلف
 Feature.GameJoin.Label.PlayTogether,يمكنكما اللعب معًا
 Feature.GameJoin.Label.PlayTogetherSoon,يمكنكما اللعب معًا قريبًا
+Feature.GameJoin.Label.Played,تم اللعب
 Feature.GameJoin.Label.RecentCoplay,لعبتما معًا مؤخرًا
 Feature.GamePage.Action.BackToTop,العودة إلى الأعلى
 Feature.GamePage.Label.Ad,

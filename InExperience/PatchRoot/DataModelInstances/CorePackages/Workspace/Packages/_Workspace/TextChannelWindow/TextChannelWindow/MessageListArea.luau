@@ -7,10 +7,12 @@ local TextChannelWindowAnalyticsModule = require(script.Parent.TextChannelWindow
 local UseTranslationToggleAvailableModule = require(script.Parent.useTranslationToggleAvailable)
 local UseInExperienceLocalizationFunction = require(Parent.ChatUIPrimitives).Hooks.useInExperienceLocalization
 local FFlagTCWTranslationSupport = ChatUIPrimitivesModule.Flags.FFlagTCWTranslationSupport
+local FFlagExpChatMessageListFinishIntervals = ChatUIPrimitivesModule.Flags.FFlagExpChatMessageListFinishIntervals
 local MessageLayoutContainer = ChatUIPrimitivesModule.MessageLayoutContainer
+local MessageListContainerModule = if require(script.Parent.Flags.FFlagExpChatTCWMessageList) and FFlagExpChatMessageListFinishIntervals then require(script.Parent.MessageListContainer) else nil
 
 return ReactModule.memo(function(p1)
-	-- upvalues: FoundationModule (copy), UseInExperienceLocalizationFunction (copy), FFlagTCWTranslationSupport (copy), UseTranslationToggleAvailableModule (copy), ReactModule (copy), TextChannelWindowAnalyticsModule (copy), MessageLayoutContainer (copy)
+	-- upvalues: FoundationModule (copy), UseInExperienceLocalizationFunction (copy), FFlagTCWTranslationSupport (copy), UseTranslationToggleAvailableModule (copy), ReactModule (copy), TextChannelWindowAnalyticsModule (copy), MessageListContainerModule (copy), MessageLayoutContainer (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseInExperienceLocalizationResult = UseInExperienceLocalizationFunction()
 	local UseTranslationToggleAvailableModuleResult = if FFlagTCWTranslationSupport then UseTranslationToggleAvailableModule() else nil
@@ -38,7 +40,11 @@ return ReactModule.memo(function(p1)
 	}) elseif p1.channelState == "not-member" then ReactModule.createElement(FoundationModule.Empty, {
 		icon = { name = "icons/status/oof_xlarge" },
 		text = UseInExperienceLocalizationResult("CoreScripts.TextChat.Error.NoChannelAccess")
-	}) elseif p1.channelState == "member" then ReactModule.createElement(MessageLayoutContainer, {
+	}) elseif p1.channelState == "member" then if MessageListContainerModule then ReactModule.createElement(MessageListContainerModule, {
+		messagesSignal = p1.messagesSignal,
+		onScroll = UseMemoResult,
+		contentPadding = UseMemoResult1
+	}) else ReactModule.createElement(MessageLayoutContainer, {
 		layoutStyle = "textLine",
 		messagesSignal = p1.messagesSignal,
 		fontFace = p1.fontFace,

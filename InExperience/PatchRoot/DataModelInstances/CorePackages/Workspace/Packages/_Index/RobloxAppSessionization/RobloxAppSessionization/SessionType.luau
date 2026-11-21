@@ -85,6 +85,8 @@
 			CaptchaNative = "CaptchaNative",
 			TwoStep = "TwoStep",
 			ViewFriends = "ViewFriends",
+			CoHubMyConnections = "CoHubMyConnections",
+			CoHubAddConnections = "CoHubAddConnections",
 			FriendsActivityFeed = "FriendsActivityFeed",
 			SellItemPage = "SellItemPage",
 			ItemOwnershipPage = "ItemOwnershipPage",

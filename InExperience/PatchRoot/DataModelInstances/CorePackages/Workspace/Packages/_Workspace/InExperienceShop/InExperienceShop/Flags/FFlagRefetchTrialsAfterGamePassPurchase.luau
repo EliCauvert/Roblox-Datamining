@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("RefetchTrialsAfterGamePassPurchase", false) and require(script.Parent.FFlagLuaAppEnableGamePassFreeTrials)

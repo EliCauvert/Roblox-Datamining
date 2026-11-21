@@ -1,0 +1,3 @@
+﻿local FFlagAppIaHomeCampaignDeepLinkModule = require(script.Parent.FFlagAppIaHomeCampaignDeepLink)
+
+return game:DefineFastFlag("CampaignDeepLinkRefreshEligibility", false) and FFlagAppIaHomeCampaignDeepLinkModule
