@@ -216,6 +216,14 @@ Roblox.LangDynamic["Authentication.Login"] = {
     "Header.SomethingWentWrong": "Something went wrong",
     "Heading.EnterYourEmail": "Enter your email",
     "Label.DontHaveARobloxAccountCreateOne": "Don't have a Roblox account? {startTag}Create one{endTag}",
-    "Action.Leave": "Leave"
+    "Header.LeaveAccountSetup": "Leave account setup?",
+    "Action.ContinueSetup": "Continue setup",
+    "Action.Leave": "Leave",
+    "Action.ContinueWithProvider": "Continue with {provider}",
+    "Header.YouAlreadyHaveAnAccount": "You already have an account",
+    "Description.LeaveAccountSetup": "If you leave now, your Roblox account won’t be set up.",
+    "Description.SsoLinkSingle": "We found a Roblox account that uses this email. Link it to {provider} to sign in faster, or create a new account.",
+    "Description.SsoLinkMultiple": "We found multiple Roblox accounts that use this email. Choose one to link with {provider} so you can sign in faster, or create a new account.",
+    "Message.SsoProviderLinked": "You can now sign in with {provider}"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Authentication.Login");
