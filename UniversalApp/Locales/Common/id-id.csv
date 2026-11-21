@@ -114,7 +114,7 @@ Authentication.AccountPicker.Label.RemoveAccountCancel,
 Authentication.AccountPicker.Label.RemoveAccountDescription,"Kamu tidak akan melihat akun ini di perangkat ini lagi, kecuali kamu log in lagi."
 Authentication.AccountPicker.Label.RemoveAccountRemove,Hapus
 Authentication.AccountPicker.Label.SignedOut,Log out
-Authentication.AccountRecovery.Action.AddAPasskey,"Ya, tambahkan passkey baru"
+Authentication.AccountRecovery.Action.AddAPasskey,"Ya, buat passkey baru"
 Authentication.AccountRecovery.Action.Continue,
 Authentication.AccountRecovery.Action.Delete,
 Authentication.AccountRecovery.Action.DeleteAll,Hapus perubahan
@@ -125,7 +125,7 @@ Authentication.AccountRecovery.Action.ResetPassword,Reset password
 Authentication.AccountRecovery.Action.Save,Simpan
 Authentication.AccountRecovery.Action.SendCode,Kirimi saya kode
 Authentication.AccountRecovery.Action.SkipAddingPasskey,"Tidak, lewati langkah ini"
-Authentication.AccountRecovery.Action.UpdatePassword,Perbarui Password
+Authentication.AccountRecovery.Action.UpdatePassword,Simpan kata sandi
 Authentication.AccountRecovery.Action.UseAnotherMethod,Gunakan metode lain
 Authentication.AccountRecovery.Action.UseBackupCode,Gunakan kode pemulihan
 Authentication.AccountRecovery.Action.UseEmail,Gunakan email
@@ -1663,6 +1663,7 @@ Feature.AppealsPortal.Description.AppealSubmittedUpdate,Kami akan mengirimkan in
 Feature.AppealsPortal.Description.AppealSubmittedUpdate.OptOut,"Kami akan mengirimkan info terbaru terkait keputusan kami dan tindakan yang diambil ke alamat email yang kamu berikan, kecuali jika kamu memberi tahu kami bahwa kamu tidak ingin menerima komunikasi lebih lanjut mengenai banding ini."
 Feature.AppealsPortal.Description.AppealsPortal,Lihat pelanggaran sebelumnya dan kelola bandingmu. Semua konten dan perilaku harus mematuhi {link}Standar Komunitas Roblox.{linkEnd}
 Feature.AppealsPortal.Description.AskForReview,Kamu mengonfirmasi bahwa kamu sudah memperbaiki masalah ini. Kami akan me-review {contentType} ini lagi.
+Feature.AppealsPortal.Description.AskForReviewFallback,Kamu mengonfirmasi sudah memperbaiki masalah ini. Kami akan me-review-nya lagi.
 Feature.AppealsPortal.Description.DetailsUnavailable,
 Feature.AppealsPortal.Description.FixByDate,"Perbaiki masalah di Studio paling lambat {date}, lalu kembali dan minta review."
 Feature.AppealsPortal.Description.IssueClosed,Kami menutup masalah ini karena kamu memutuskan untuk mempelajari salah satu aturan kami untuk menghindari penangguhan.
@@ -2578,7 +2579,7 @@ Feature.Build.Description.BuildReplyNotif,Dapatkan notifikasi saat Build memilik
 Feature.Build.Description.BuyRobuxToCreate,"Beli lebih banyak Robux untuk terus berkreasi, atau tunggu hingga kuota penggunaan Build gratismu direset besok."
 Feature.Build.Description.BuyUsageOrWait,"Beli lebih banyak kuota penggunaan Build dengan Robux, atau tunggu hingga batas harianmu direset."
 Feature.Build.Description.CampaignRunDates,Iklanmu tayang {startDate}—{endDate}.
-Feature.Build.Description.CaptureWhilePlaytesting,"Ambil screenshot saat playtest, lalu tambahkan ke prompt-mu."
+Feature.Build.Description.CaptureWhilePlaytesting,Ambil screenshot saat playtest untuk menunjukkan Build apa yang kamu lihat.
 Feature.Build.Description.ChooseAdCampaignLength,Pilih durasi yang kamu inginkan untuk menayangkan iklanmu.
 Feature.Build.Description.ChoosePlaytesters,Pilih teman untuk melihat preview game-mu.
 Feature.Build.Description.CreateDeveloperProduct,Buat {NAME} seharga {PRICE} Robux. Item ini belum tersedia untuk dibeli.
@@ -2687,9 +2688,9 @@ Feature.Build.Label.BackToBuild,Kembali ke Build
 Feature.Build.Label.Building,Memproses …
 Feature.Build.Label.CaptureLibrary,Perpustakaan Media
 Feature.Build.Label.CaptureSelectionCount,{SELECTED_COUNT} dari {MAX_SELECTIONS} dipilih
-Feature.Build.Label.CaptureStepAddImages,Pilih Tambahkan gambar untuk melampirkan mediamu
+Feature.Build.Label.CaptureStepAddImages,Pilih <b>Tambahkan gambar</b> untuk menambahkan mediamu ke chat
 Feature.Build.Label.CaptureStepPlaytest,Playtest game-mu
-Feature.Build.Label.CaptureStepTapCamera,Pilih kamera di toolbar Build
+Feature.Build.Label.CaptureStepTapCamera,Pilih ikon kamera di bagian bawah layar
 Feature.Build.Label.ContentRating,Rating konten
 Feature.Build.Label.CreatedDate,"{DAY} {MONTH}, {YEAR}"
 Feature.Build.Label.CreatorHub,Pusat Kreator
@@ -2699,6 +2700,7 @@ Feature.Build.Label.DefaultDeveloperProductName,produk developer
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,Dihapus
 Feature.Build.Label.DescribeIdea,Deskripsikan ide
+Feature.Build.Label.DescribeIdeaOrPick,Jelaskan ide atau pilih salah satu di bawah ini
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,Deskripsi: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Nama: {NAME}
@@ -3594,21 +3596,27 @@ Feature.CloudClient.Action.PlayWithoutCloudPlay,Mainkan tanpa Cloud Play
 Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play menjalankan game di komputer Roblox, sehingga game dapat di-load lebih cepat dan lebih jarang mengalami crash. Fitur ini hanya aktif selama kamu memainkan game ini."
 Feature.CloudClient.Description.CloudPlayStopped,Gabung lagi ke game untuk terus bermain tanpa Cloud Play.
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle adalah preview awal. Tampilannya mungkin berbeda dari game aslinya.
+Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName} adalah preview awal. Tampilannya mungkin berbeda dari game aslinya.
 Feature.CloudClient.Description.RobloxRealityThanks,Terima kasih sudah menjadi salah satu orang pertama yang mencobanya.
 Feature.CloudClient.Heading.CloudPlayOffer,Main dengan Cloud Play
 Feature.CloudClient.Heading.CloudPlayStopped,Cloud Play berhenti berfungsi
 Feature.CloudClient.Heading.RobloxRealityFailed,Terjadi kesalahan dengan Restyle
+Feature.CloudClient.Heading.RobloxRealityFailedV2,Terjadi kesalahan dengan {productName}
 Feature.CloudClient.Heading.RobloxRealityTimeEnded,Waktumu di Restyle sudah berakhir
+Feature.CloudClient.Heading.RobloxRealityTimeEndedV2,Waktumu di {productName} sudah berakhir
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Media belum tersedia di Cloud Play.
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Media belum tersedia dengan Restyle.
+Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,Media belum tersedia dengan {productName}.
 Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Play tidak berfungsi. Kamu bermain seperti biasa.
 Feature.CloudClient.Label.RobloxReality,Restyle
 Feature.CloudClient.Label.RobloxRealityDemoLength,Coba demo {minutes} menit
 Feature.CloudClient.Label.RobloxRealityEndingSoon,"Restyle berakhir dalam 1 menit, dan kamu akan keluar dari game."
+Feature.CloudClient.Label.RobloxRealityEndingSoonV2,"{productName} berakhir dalam 1 menit, dan kamu akan keluar dari game."
 Feature.CloudClient.Label.RobloxRealityGraphics,"Game-mu, dengan tampilan baru"
 Feature.CloudClient.Label.RobloxRealityPlusOnly,Hanya untuk subscriber Plus
 Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,Tampilan Diri belum tersedia di Cloud Play.
 Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,Tampilan Diri belum tersedia dengan Restyle.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxRealityV2,Tampilan Diri belum tersedia dengan {productName}.
 Feature.CloudClient.Label.StillWeakConnection,Koneksimu masih lemah.
 Feature.CloudClient.Label.TimeLeft,Waktu tersisa
 Feature.CloudClient.Label.WeakConnection,Koneksi lemah.
@@ -4434,9 +4442,15 @@ Feature.Moments.Description.EngagementFirstLike,Lihat sekarang
 Feature.Moments.Description.EngagementFirstReaction,Moment-mu baru saja mendapat reaksi pertama.
 Feature.Moments.Description.EngagementLikedCommentsDigest,{likedComments} komentarmu mendapat suka
 Feature.Moments.Description.EngagementMomentDigest,{comments} komentar baru dan {milestone} reaksi
+Feature.Moments.Description.EngagementMomentFirstReactionDigest,{comments} komen baru dan reaksi pertamanya
+Feature.Moments.Description.EngagementMomentsCommentsDigest,{comments} komen baru pada Moment-mu
 Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementMomentsReactionsDigest,Moment-mu mendapatkan reaksi
 Feature.Moments.Description.EngagementNewComment,baru saja mengomentari Moment-mu
 Feature.Moments.Description.EngagementNewComments,dan {count} orang lainnya mengomentari Moment-mu
+Feature.Moments.Description.EngagementNewCommentsOneOther,dan 1 orang lainnya mengomentari Moment-mu
+Feature.Moments.Description.EngagementOneCommentDigest,1 komen baru dan {milestone} reaksi
+Feature.Moments.Description.EngagementOneCommentFirstReactionDigest,1 komen baru dan reaksi pertamanya
 Feature.Moments.Description.EngagementReactionMilestone,{count} reaksi baru
 Feature.Moments.Description.FollowingCaughtUpBody,Kamu sudah menonton semua Moment baru di feed ini. Beralih feed untuk melihat lebih banyak.
 Feature.Moments.Description.FollowingEmptyBodyRecommended,Kamu akan melihat Moment dari kreator yang kamu ikuti di sini.
@@ -5412,12 +5426,14 @@ Feature.Schools.Action.UnidaysTermsOfService,Ketentuan Layanan UNiDAYS
 Feature.Schools.Body.EnterCode,UNiDAYS sudah mengirim email berisi kode sekali pakai untukmu ke {user_email}. Masukkan kode di bawah ini untuk mengonfirmasi sekolahmu.
 Feature.Schools.Body.UnidaysShare,Alamat emailmu tidak akan terlihat oleh orang lain.
 Feature.Schools.Body.UnidaysTerms,"Kami bermitra dengan UNiDAYS untuk memverifikasi alamat email sekolahmu. Dengan mengeklik ""Lanjutkan"", kamu menyetujui Ketentuan Layanan dan Kebijakan Privasi UNiDAYS."
+Feature.Schools.Body.UnidaysTermsCollege,"Dengan memilih Lanjutkan, kamu menyetujui Ketentuan Layanan UNiDAYS dan memahami bahwa UNiDAYS dapat menggunakan alamat email kampusmu sesuai dengan Kebijakan Privasi mereka."
 Feature.Schools.Caption.AlumniGroupOnGraduate,"Setelah kamu lulus, kamu akan masuk di grup alumni {school}."
 Feature.Schools.Caption.RemovedOnGraduate,"Setelah kamu lulus, kamu akan dihapus dari {school}."
 Feature.Schools.Description.CantFindSchoolNotify,Kami akan beri tahu saat sekolahmu ada di Roblox.
 Feature.Schools.Description.CantVerifySchool,"Berdasarkan informasi yang kamu berikan, kami tidak dapat memverifikasi sekolahmu."
 Feature.Schools.Description.ConnectWithFellowAlumni,Terhubung dengan sesama alumni
 Feature.Schools.Description.FeatureAvailableBody,Temukan teman dari sekolahmu.
+Feature.Schools.Description.FeatureAvailableBodyCollege,Temukan teman dari kampusmu.
 Feature.Schools.Description.InviteFriendsExclusiveItem,Undang pengguna lain untuk melakukan verifikasi. Dapatkan item gratis saat sekolahmu diluncurkan.
 Feature.Schools.Description.InviteFriendsUnlockSooner,Bantu luncurkan grup alumni sekolahmu lebih cepat.
 Feature.Schools.Description.InviteOthersToVerify,Undang pengguna lain untuk melakukan verifikasi
@@ -5428,7 +5444,9 @@ Feature.Schools.Description.RemoveSchoolBody,Kamu harus memverifikasi ulang alam
 Feature.Schools.Description.SchoolIsLiveBody,
 Feature.Schools.Description.SchoolUnavailableBody,Sekolah ini saat ini tidak tersedia di Roblox.
 Feature.Schools.Description.UpsellDisclaimer,Sekolahmu hanya akan terlihat oleh orang-orang dari sekolah yang sama. Kamu bisa memperbarui atau menghapus sekolahmu kapan saja.
+Feature.Schools.Description.UpsellDisclaimerCollege,Kampusmu hanya akan terlihat oleh orang-orang dari kampus yang sama. Kamu bisa memperbarui atau menghapus kampusmu kapan saja.
 Feature.Schools.Description.UpsellTagline,"Jelajahi, berinteraksi, dan bermain bersama siswa terverifikasi dari sekolahmu."
+Feature.Schools.Description.UpsellTaglineCollege,"Jelajahi, berinteraksi, dan bermain bersama mahasiswa terverifikasi dari kampusmu."
 Feature.Schools.Description.WaitlistAlumniBody,Semuanya sudah siap. Kami akan segera memberitahumu setelah grup alumni sekolahmu diluncurkan.
 Feature.Schools.Description.WaitlistBody,Kamu adalah anggota pendiri. Undang teman sekelasmu untuk meluncurkan sekolahmu bersama-sama.
 Feature.Schools.Error.AlreadyLinked,Alamat email ini sudah terhubung ke akun lain.
@@ -5445,11 +5463,13 @@ Feature.Schools.Filter.AllYears,Semua tahun
 Feature.Schools.Filter.Apply,
 Feature.Schools.Filter.GradYear,Tahun kelulusan
 Feature.Schools.GiftForYou,Hadiah untukmu
+Feature.Schools.Heading.AddCollege,Tambahkan kampus
 Feature.Schools.Heading.AddSchool,Tambahkan sekolah
 Feature.Schools.Heading.AddSchoolNow,Gabung dengan teman sekelasmu
 Feature.Schools.Heading.CantFindSchool,Kami tidak dapat menemukan sekolahmu
 Feature.Schools.Heading.CantVerifySchool,Kami tidak dapat memverifikasi sekolahmu
 Feature.Schools.Heading.CheckYourEmail,Periksa emailmu
+Feature.Schools.Heading.EnterCollegeEmail,Masukkan email kampusmu
 Feature.Schools.Heading.EnterSchoolEmail,Masukkan email sekolahmu
 Feature.Schools.Heading.InviteYourClassmates,Undang teman sekelasmu
 Feature.Schools.Heading.InviteYourFriends,Undang teman-temanmu
@@ -5476,8 +5496,10 @@ Feature.Schools.Label.Search,
 Feature.Schools.Label.SuggestedEmail,Apakah maksudmu {email}?
 Feature.Schools.Label.UnlockAlumniGroup,Grup alumni pending
 Feature.Schools.Label.UpsellPerkFindFriends,Temukan teman dari sekolahmu
+Feature.Schools.Label.UpsellPerkFindFriendsCollege,Temukan teman dari kampusmu
 Feature.Schools.Label.UpsellPerkPlayAndChat,Lihat siapa yang sedang online dan bermain bersama dengan mudah
 Feature.Schools.Label.UpsellPerkTrends,Jelajahi yang sedang tren di sekolahmu
+Feature.Schools.Label.UpsellPerkTrendsCollege,Jelajahi yang sedang tren di kampusmu
 Feature.Schools.Placeholder.Email,Email siswa
 Feature.Schools.Placeholder.SchoolName,Nama sekolah
 Feature.Schools.Placeholder.SixDigitCode,

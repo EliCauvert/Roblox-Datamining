@@ -115,7 +115,7 @@ Authentication.AccountPicker.Label.RemoveAccountCancel,
 Authentication.AccountPicker.Label.RemoveAccountDescription,다시 로그인하기 전까지 이 기기에서 더는 해당 계정을 볼 수 없습니다.
 Authentication.AccountPicker.Label.RemoveAccountRemove,삭제
 Authentication.AccountPicker.Label.SignedOut,로그아웃되었습니다
-Authentication.AccountRecovery.Action.AddAPasskey,"네, 새 패스키를 추가합니다"
+Authentication.AccountRecovery.Action.AddAPasskey,"네, 새 패스키를 만듭니다"
 Authentication.AccountRecovery.Action.Continue,
 Authentication.AccountRecovery.Action.Delete,제거
 Authentication.AccountRecovery.Action.DeleteAll,변경 사항 제거
@@ -126,7 +126,7 @@ Authentication.AccountRecovery.Action.ResetPassword,비밀번호 재설정
 Authentication.AccountRecovery.Action.Save,유지
 Authentication.AccountRecovery.Action.SendCode,인증 코드 받기
 Authentication.AccountRecovery.Action.SkipAddingPasskey,"아니요, 이 단계를 건너뜁니다"
-Authentication.AccountRecovery.Action.UpdatePassword,비밀번호 업데이트
+Authentication.AccountRecovery.Action.UpdatePassword,비밀번호 저장
 Authentication.AccountRecovery.Action.UseAnotherMethod,다른 방법 사용
 Authentication.AccountRecovery.Action.UseBackupCode,백업 코드 사용
 Authentication.AccountRecovery.Action.UseEmail,이메일 사용
@@ -1664,6 +1664,7 @@ Feature.AppealsPortal.Description.AppealSubmittedUpdate,결정 내용과 조치 
 Feature.AppealsPortal.Description.AppealSubmittedUpdate.OptOut,결정이 내려지고 제공해 주신 이메일 주소에 조치가 취해지면 업데이트 소식을 전해 드리겠습니다. 이 이의 제기에 관련된 내용을 더 이상 수신하지 않기로 표시하는 경우 업데이트를 받으실 수 없습니다.
 Feature.AppealsPortal.Description.AppealsPortal,과거 위반 이력을 확인하고 이의 신청을 관리하세요. 모든 콘텐츠와 행동은 {link}Roblox 커뮤니티 규정{linkEnd}을 준수해야 합니다.
 Feature.AppealsPortal.Description.AskForReview,"이 문제를 해결하였으며, Roblox가 이 {contentType}을(를) 다시 검토할 준비가 되었음을 확인합니다."
+Feature.AppealsPortal.Description.AskForReviewFallback,"이 문제를 해결하였으며, Roblox가 이를 다시 검토할 준비가 되었음을 확인합니다."
 Feature.AppealsPortal.Description.DetailsUnavailable,
 Feature.AppealsPortal.Description.FixByDate,{date}까지 Studio에서 문제를 해결한 후 다시 돌아와 검토를 요청하세요.
 Feature.AppealsPortal.Description.IssueClosed,계정 정지를 피하기 위해 당사의 규칙을 숙지하기로 결정하였으므로 본 문제는 종료되었습니다.
@@ -2579,7 +2580,7 @@ Feature.Build.Description.BuildReplyNotif,Build에서 답변이 있을 때 알�
 Feature.Build.Description.BuyRobuxToCreate,"계속 제작하려면 Robux를 더 구매하거나, 내일 무료 Build 사용량이 초기화될 때까지 기다리세요."
 Feature.Build.Description.BuyUsageOrWait,"Robux로 Build 사용량을 더 구매하거나, 일일 한도가 초기화될 때까지 기다리세요."
 Feature.Build.Description.CampaignRunDates,광고가 {startDate}~{endDate}에 게재됩니다.
-Feature.Build.Description.CaptureWhilePlaytesting,플레이테스트하는 동안 캡처한 후 프롬프트에 추가하세요.
+Feature.Build.Description.CaptureWhilePlaytesting,플레이테스트하는 동안 캡처하여 지금 보고 있는 화면을 Build에 보여주세요.
 Feature.Build.Description.ChooseAdCampaignLength,광고 게재 기간을 선택하세요.
 Feature.Build.Description.ChoosePlaytesters,게임을 미리 볼 친구를 선택하세요.
 Feature.Build.Description.CreateDeveloperProduct,{PRICE} Robux로 구매할 수 있는 {NAME}(을)를 만듭니다. 아직은 구매할 수 없습니다.
@@ -2679,6 +2680,8 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,모든 게임
 Feature.Build.Label.AmountAvailable,{AMOUNT} 이용 가능
+Feature.Build.Label.AttachmentCountPlural,첨부 파일 {count}개
+Feature.Build.Label.AttachmentCountSingular,첨부 파일 1개
 Feature.Build.Label.Autosaved,자동 저장됨
 Feature.Build.Label.Available,이용 가능
 Feature.Build.Label.AvailableForPurchase,구매 가능
@@ -2686,9 +2689,9 @@ Feature.Build.Label.BackToBuild,빌드로 돌아가기
 Feature.Build.Label.Building,작업 중...
 Feature.Build.Label.CaptureLibrary,캡처 라이브러리
 Feature.Build.Label.CaptureSelectionCount,{MAX_SELECTIONS}개 중 {SELECTED_COUNT}개 선택됨
-Feature.Build.Label.CaptureStepAddImages,이미지 추가하기를 선택하여 캡처 첨부
+Feature.Build.Label.CaptureStepAddImages,<b>이미지 추가</b>를 선택하여 캡처한 이미지를 채팅에 추가하세요
 Feature.Build.Label.CaptureStepPlaytest,내 게임 플레이테스트하기
-Feature.Build.Label.CaptureStepTapCamera,빌드 도구 모음에서 카메라 선택
+Feature.Build.Label.CaptureStepTapCamera,화면 하단의 카메라 아이콘을 선택하세요
 Feature.Build.Label.ContentRating,콘텐츠 등급
 Feature.Build.Label.CreatedDate,{YEAR}년 {MONTH}월 {DAY}일
 Feature.Build.Label.CreatorHub,크리에이터 허브
@@ -2698,6 +2701,7 @@ Feature.Build.Label.DefaultDeveloperProductName,개발자 상품
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,삭제됨
 Feature.Build.Label.DescribeIdea,아이디어 설명
+Feature.Build.Label.DescribeIdeaOrPick,아이디어를 설명하거나 아래에서 하나를 선택하세요
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,설명: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,이름: {NAME}
@@ -2722,6 +2726,7 @@ Feature.Build.Label.IconThumbnails,아이콘 및 섬네일
 Feature.Build.Label.Images2D,2D 이미지
 Feature.Build.Label.InProgress,진행 중
 Feature.Build.Label.InputNeeded,입력 필요
+Feature.Build.Label.InspirationTab,영감
 Feature.Build.Label.InternalSpec,내부 사양
 Feature.Build.Label.InternalTesting,내부 테스트
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -3590,11 +3595,35 @@ Feature.Chat.RobloxConnectUnavailableWithUser,현재 이 사용자와는 Roblox 
 Feature.Chat.Text.NoFriends,아직 추가한 친구가 없습니다. 시작하려면 먼저 Roblox에서 친구를 찾아 추가하세요.
 Feature.Chat.Title.NewChat,새 채팅
 Feature.Chat.Toast.Error.InvalidUserSelected,이 목록에는 추가할 수 없는 사람이 한 명 이상 있습니다
+Feature.CloudClient.Action.JoinWithoutCloudPlay,Cloud Play 없이 참가하기
 Feature.CloudClient.Action.PlayWithoutCloudPlay,Cloud Play 없이 플레이하기
 Feature.CloudClient.Description.CloudPlayOffer,Cloud Play는 Roblox의 컴퓨터에서 게임을 실행하므로 불러오는 속도가 더 빠르고 충돌이 적을 수 있습니다. 이 게임을 플레이하는 동안에만 적용됩니다.
+Feature.CloudClient.Description.CloudPlayStopped,Cloud Play 없이 계속 플레이하려면 게임에 다시 참여하세요.
+Feature.CloudClient.Description.RobloxRealityPreview,Restyle은 초기 미리 보기 단계입니다. 오리지널 게임과 다르게 표시될 수 있습니다.
+Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName}은(는) 초기 미리 보기 단계입니다. 오리지널 게임과 다르게 표시될 수 있습니다.
+Feature.CloudClient.Description.RobloxRealityThanks,가장 먼저 사용해 주셔서 감사합니다.
 Feature.CloudClient.Heading.CloudPlayOffer,Cloud Play로 플레이하기
+Feature.CloudClient.Heading.CloudPlayStopped,Cloud Play 작동 중단됨
+Feature.CloudClient.Heading.RobloxRealityFailed,Restyle에 문제 발생
+Feature.CloudClient.Heading.RobloxRealityFailedV2,{productName}에 문제가 발생했습니다
+Feature.CloudClient.Heading.RobloxRealityTimeEnded,Restyle 이용 시간이 종료되었습니다
+Feature.CloudClient.Heading.RobloxRealityTimeEndedV2,{productName} 이용 시간이 종료되었습니다
+Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Cloud Play에서는 아직 캡처 기능을 이용할 수 없습니다.
+Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Restyle에서는 아직 캡처 기능을 이용할 수 없습니다.
+Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,{productName}에서는 아직 캡처 기능을 이용할 수 없습니다.
+Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Play가 작동하지 않습니다. 일반 방식으로 플레이합니다.
+Feature.CloudClient.Label.RobloxReality,Restyle
+Feature.CloudClient.Label.RobloxRealityDemoLength,{minutes}분 데모를 체험해 보세요
+Feature.CloudClient.Label.RobloxRealityEndingSoon,"Restyle이 1분 후에 종료되고, 게임에서 나갑니다."
+Feature.CloudClient.Label.RobloxRealityEndingSoonV2,"{productName}이(가) 1분 후에 종료되고, 게임에서 나가게 됩니다."
 Feature.CloudClient.Label.RobloxRealityGraphics,새롭게 단장한 내 게임
 Feature.CloudClient.Label.RobloxRealityPlusOnly,Plus 구독자 전용
+Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,Cloud Play에서는 아직 셀프 뷰 기능을 이용할 수 없습니다.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,Restyle에서는 아직 셀프 뷰 기능을 이용할 수 없습니다.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxRealityV2,{productName}에서는 아직 셀프 뷰 기능을 이용할 수 없습니다.
+Feature.CloudClient.Label.StillWeakConnection,인터넷 연결이 여전히 불안정합니다.
+Feature.CloudClient.Label.TimeLeft,
+Feature.CloudClient.Label.WeakConnection,인터넷 연결 상태가 약합니다.
 Feature.CommunityLinks.Description.CommunityDefault,공식 Guilded 커뮤니티에 가입하고 {experienceName} 관련 공지 등 다양한 것들을 확인하세요!
 Feature.CommunityLinks.Heading.CommunityTitle,커뮤니티 가입
 Feature.CommunityLinks.Label.ViewButton,
@@ -4418,9 +4447,15 @@ Feature.Moments.Description.EngagementFirstLike,지금 보기
 Feature.Moments.Description.EngagementFirstReaction,방금 내 모멘트에 첫 번째 반응이 있었습니다!
 Feature.Moments.Description.EngagementLikedCommentsDigest,내 코멘트 중 {likedComments}개에 '좋아요'를 받았습니다
 Feature.Moments.Description.EngagementMomentDigest,새로운 코멘트 {comments}개 및 반응 {milestone}개
+Feature.Moments.Description.EngagementMomentFirstReactionDigest,새 코멘트 {comments}개 및 첫 번째 반응
+Feature.Moments.Description.EngagementMomentsCommentsDigest,내 모멘트에 대한 새 코멘트 {comments}개
 Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementMomentsReactionsDigest,내 모멘트가 반응을 얻고 있습니다
 Feature.Moments.Description.EngagementNewComment,방금 회원님의 모멘트에 코멘트를 남김
 Feature.Moments.Description.EngagementNewComments,{count}명이 회원님의 모멘트에 코멘트를 남김
+Feature.Moments.Description.EngagementNewCommentsOneOther,님 외 1명이 회원님의 모멘트에 코멘트를 남겼습니다
+Feature.Moments.Description.EngagementOneCommentDigest,새 코멘트 1개 및 반응 {milestone}개
+Feature.Moments.Description.EngagementOneCommentFirstReactionDigest,새 코멘트 1개와 첫 번째 반응
 Feature.Moments.Description.EngagementReactionMilestone,새로운 반응 {count}개
 Feature.Moments.Description.FollowingCaughtUpBody,이 피드의 새로운 모멘트를 모두 시청하셨습니다. 더 많은 내용을 보려면 피드를 전환하세요.
 Feature.Moments.Description.FollowingEmptyBodyRecommended,여기에서 팔로우하는 크리에이터의 모멘트를 확인할 수 있습니다.
@@ -5396,12 +5431,14 @@ Feature.Schools.Action.UnidaysTermsOfService,UNiDAYS 서비스 약관
 Feature.Schools.Body.EnterCode,UNiDAYS에서 일회용 코드가 포함된 이메일을 {user_email} 주소로 전송했습니다. 학교를 확인하려면 아래에 해당 코드를 입력하세요.
 Feature.Schools.Body.UnidaysShare,이메일 주소는 다른 사람에게 표시되지 않습니다.
 Feature.Schools.Body.UnidaysTerms,학교 이메일 주소를 확인하기 위해 UNiDAYS와 파트너십을 맺고 있습니다. '계속'을 클릭하면 UNiDAYS의 서비스 약관 및 개인정보 처리방침에 동의하는 것으로 간주됩니다.
+Feature.Schools.Body.UnidaysTermsCollege,'계속하기'를 선택하면 UNiDAYS 서비스 약관에 동의하고 UNiDAYS가 개인정보 처리방침에 따라 사용자의 대학 이메일 주소를 사용할 수 있음을 인정하는 것으로 간주됩니다.
 Feature.Schools.Caption.AlumniGroupOnGraduate,졸업하면 {school} 동문 그룹에 속하게 됩니다.
 Feature.Schools.Caption.RemovedOnGraduate,졸업하면 {school}에서 제거됩니다.
 Feature.Schools.Description.CantFindSchoolNotify,내 학교가 Roblox에 등록되면 알려드리겠습니다.
 Feature.Schools.Description.CantVerifySchool,제공해주신 정보로는 학교를 확인할 수 없습니다.
 Feature.Schools.Description.ConnectWithFellowAlumni,동문과 연결
 Feature.Schools.Description.FeatureAvailableBody,내 학교에서 친구를 찾아 보세요.
+Feature.Schools.Description.FeatureAvailableBodyCollege,같은 대학 친구를 찾아보세요.
 Feature.Schools.Description.InviteFriendsExclusiveItem,다른 사람을 초대해서 인증하세요. 학교가 개설되면 무료 아이템을 받습니다.
 Feature.Schools.Description.InviteFriendsUnlockSooner,학교 동문 그룹을 더 빨리 시작할 수 있게 도움을 주세요.
 Feature.Schools.Description.InviteOthersToVerify,다른 사람을 초대해서 인증하세요
@@ -5412,7 +5449,9 @@ Feature.Schools.Description.RemoveSchoolBody,학교에 다시 가입하려면 �
 Feature.Schools.Description.SchoolIsLiveBody,
 Feature.Schools.Description.SchoolUnavailableBody,이 학교는 현재 Roblox에서 이용할 수 없습니다.
 Feature.Schools.Description.UpsellDisclaimer,학교는 같은 학교 출신인 사람들에게만 표시됩니다. 언제든지 학교를 변경하거나 삭제할 수 있습니다.
+Feature.Schools.Description.UpsellDisclaimerCollege,대학은 같은 대학 출신인 사람들에게만 표시됩니다. 언제든지 대학을 변경하거나 삭제할 수 있습니다.
 Feature.Schools.Description.UpsellTagline,같은 학교의 인증된 학생들을 찾아 소통하고 함께 플레이하세요.
+Feature.Schools.Description.UpsellTaglineCollege,같은 대학의 인증된 학생들을 찾아 소통하고 함께 플레이하세요.
 Feature.Schools.Description.WaitlistAlumniBody,모든 준비가 끝났습니다. 학교 동문 그룹이 개설되는 대로 알려드리겠습니다.
 Feature.Schools.Description.WaitlistBody,창립 멤버입니다. 학교를 함께 시작할 수 있도록 반 친구들을 초대하세요.
 Feature.Schools.Error.AlreadyLinked,이 이메일 주소는 이미 다른 계정에 연결되어 있습니다.
@@ -5429,11 +5468,13 @@ Feature.Schools.Filter.AllYears,모든 연도
 Feature.Schools.Filter.Apply,적용하기
 Feature.Schools.Filter.GradYear,졸업 연도
 Feature.Schools.GiftForYou,나를 위한 선물
+Feature.Schools.Heading.AddCollege,대학 추가
 Feature.Schools.Heading.AddSchool,학교 추가
 Feature.Schools.Heading.AddSchoolNow,학급 친구들과 함께 참가하세요
 Feature.Schools.Heading.CantFindSchool,학교를 찾을 수 없습니다
 Feature.Schools.Heading.CantVerifySchool,학교를 확인할 수 없음
 Feature.Schools.Heading.CheckYourEmail,내 이메일 확인
+Feature.Schools.Heading.EnterCollegeEmail,대학 이메일 입력
 Feature.Schools.Heading.EnterSchoolEmail,학교 이메일 입력
 Feature.Schools.Heading.InviteYourClassmates,학급 친구 초대
 Feature.Schools.Heading.InviteYourFriends,
@@ -5460,8 +5501,10 @@ Feature.Schools.Label.Search,
 Feature.Schools.Label.SuggestedEmail,{email}을(를) 입력하려 하셨습니까?
 Feature.Schools.Label.UnlockAlumniGroup,동문 그룹 보류 중
 Feature.Schools.Label.UpsellPerkFindFriends,내 학교에서 친구 찾기
+Feature.Schools.Label.UpsellPerkFindFriendsCollege,같은 대학 친구를 찾아보세요
 Feature.Schools.Label.UpsellPerkPlayAndChat,누가 온라인 상태인지 확인하고 쉽게 같이 플레이하기
 Feature.Schools.Label.UpsellPerkTrends,내 학교에서 인기 있는 게임 둘러보기
+Feature.Schools.Label.UpsellPerkTrendsCollege,같은 대학 친구들 사이에서 인기 있는 게임 둘러보기
 Feature.Schools.Placeholder.Email,학생 이메일
 Feature.Schools.Placeholder.SchoolName,학교 이름
 Feature.Schools.Placeholder.SixDigitCode,
@@ -5749,6 +5792,7 @@ Feature.Toast.Username.Copied,사용자 이름이 클립보드에 복사되었�
 Feature.Toast.VoteError.AssetNotVoteable,지금은 이 체험에 투표할 수 없습니다.
 Feature.Toast.VoteError.Default,실행 불가.
 Feature.Toast.VoteError.FloodCheckThresholdMet,너무 자주 투표를 하시는군요.
+Feature.Toast.VoteError.NotSaved,투표가 저장되지 않았습니다
 Feature.Toast.VoteError.PlayGame,체험을 평가하려면 먼저 이 체험을 방문하셔야 합니다.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended,커뮤니티 규정을 반복적으로 위반하셨기 때문에 지금은 회원님의 나이를 확인할 수 없습니다. 제한이 종료된 후 다시 시도하세요.
 Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended,나이 확인 일시 중지됨

@@ -114,7 +114,7 @@ Authentication.AccountPicker.Label.RemoveAccountCancel,
 Authentication.AccountPicker.Label.RemoveAccountDescription,"Dieses Konto wird auf diesem Gerät nicht mehr angezeigt, es sei denn, du meldest dich erneut an."
 Authentication.AccountPicker.Label.RemoveAccountRemove,Entfernen
 Authentication.AccountPicker.Label.SignedOut,Abgemeldet
-Authentication.AccountRecovery.Action.AddAPasskey,"Ja, neuen Passkey hinzufügen"
+Authentication.AccountRecovery.Action.AddAPasskey,"Ja, neuen Passkey erstellen"
 Authentication.AccountRecovery.Action.Continue,
 Authentication.AccountRecovery.Action.Delete,
 Authentication.AccountRecovery.Action.DeleteAll,Änderungen entfernen
@@ -125,7 +125,7 @@ Authentication.AccountRecovery.Action.ResetPassword,Passwort zurücksetzen
 Authentication.AccountRecovery.Action.Save,Beibehalten
 Authentication.AccountRecovery.Action.SendCode,Code senden
 Authentication.AccountRecovery.Action.SkipAddingPasskey,"Nein, diesen Schritt überspringen"
-Authentication.AccountRecovery.Action.UpdatePassword,Passwort aktualisieren
+Authentication.AccountRecovery.Action.UpdatePassword,Passwort speichern
 Authentication.AccountRecovery.Action.UseAnotherMethod,Andere Methode verwenden
 Authentication.AccountRecovery.Action.UseBackupCode,Backup-Code verwenden
 Authentication.AccountRecovery.Action.UseEmail,E-Mail-Adresse verwenden
@@ -1653,6 +1653,7 @@ Feature.AppealsPortal.Description.AppealSubmittedUpdate,Wir senden dir ein Updat
 Feature.AppealsPortal.Description.AppealSubmittedUpdate.OptOut,"Wir senden dir ein Update mit unserer Entscheidung und allen weiteren Schritten an die von dir angegebene E-Mail-Adresse – es sei denn, du hast uns mitgeteilt, dass du keine weiteren Mitteilungen zu diesem Widerspruch erhalten möchtest."
 Feature.AppealsPortal.Description.AppealsPortal,Sieh dir frühere Verstöße an und verwalte deine Widersprüche. Alle Inhalte und Verhaltensweisen müssen den {link}Community-Regeln auf Roblox{linkEnd} entsprechen.
 Feature.AppealsPortal.Description.AskForReview,"Du bestätigst, dass du dieses Problem behoben hast. Wir werden {contentType} erneut überprüfen."
+Feature.AppealsPortal.Description.AskForReviewFallback,"Du bestätigst, dass du dieses Problem behoben hast. Wir werden dies erneut überprüfen."
 Feature.AppealsPortal.Description.DetailsUnavailable,
 Feature.AppealsPortal.Description.FixByDate,"Behebe das Problem in Studio bis zum {date}, komm dann zurück und bitte um eine Überprüfung."
 Feature.AppealsPortal.Description.IssueClosed,"Wir haben diesen Fall geschlossen, weil du dich entschieden hast, eine unserer Regeln zu lernen, um eine Suspendierung zu vermeiden."
@@ -2568,7 +2569,7 @@ Feature.Build.Description.BuildReplyNotif,"Erhalte Benachrichtigungen, wenn Buil
 Feature.Build.Description.BuyRobuxToCreate,"Kaufe mehr Robux, um weiter zu erstellen, oder warte, bis dein kostenloses Build-Kontingent morgen zurückgesetzt wird."
 Feature.Build.Description.BuyUsageOrWait,"Kaufe mehr Build-Kontingent mit Robux oder warte, bis dein Tageslimit zurückgesetzt wird."
 Feature.Build.Description.CampaignRunDates,Deine Werbung läuft von {startDate}–{endDate}.
-Feature.Build.Description.CaptureWhilePlaytesting,"Mache eine Aufnahme, während du dein Spiel testest, und füge sie dann deinem Prompt hinzu."
+Feature.Build.Description.CaptureWhilePlaytesting,"Mach beim Spieltest eine Aufnahme, um Build zu zeigen, was du siehst."
 Feature.Build.Description.ChooseAdCampaignLength,"Wähle aus, wie lange deine Anzeige geschaltet werden soll."
 Feature.Build.Description.ChoosePlaytesters,"Wähle Freunde aus, die eine Vorschau deines Spiels erhalten."
 Feature.Build.Description.CreateDeveloperProduct,Erstelle {NAME} für {PRICE} Robux. Es wird noch nicht zum Kauf verfügbar sein.
@@ -2677,9 +2678,9 @@ Feature.Build.Label.BackToBuild,Zurück zu Build
 Feature.Build.Label.Building,In Arbeit ...
 Feature.Build.Label.CaptureLibrary,Aufnahmen-Bibliothek
 Feature.Build.Label.CaptureSelectionCount,{SELECTED_COUNT} von {MAX_SELECTIONS} ausgewählt
-Feature.Build.Label.CaptureStepAddImages,"Wähle “Bilder hinzufügen” aus, um deine Aufnahme anzuhängen"
+Feature.Build.Label.CaptureStepAddImages,"Wähle <b>Bilder hinzufügen</b> aus, um deine Aufnahme zum Chat hinzuzufügen"
 Feature.Build.Label.CaptureStepPlaytest,Teste dein Spiel
-Feature.Build.Label.CaptureStepTapCamera,Wähle die Kamera in der Build-Symbolleiste aus
+Feature.Build.Label.CaptureStepTapCamera,Wähle das Kamerasymbol am unteren Bildschirmrand aus
 Feature.Build.Label.ContentRating,Altersfreigabe
 Feature.Build.Label.CreatedDate,{DAY}. {MONTH} {YEAR}
 Feature.Build.Label.CreatorHub,Creator Hub
@@ -2689,6 +2690,7 @@ Feature.Build.Label.DefaultDeveloperProductName,Entwicklerprodukt
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,Gelöscht
 Feature.Build.Label.DescribeIdea,Beschreibe eine Idee
+Feature.Build.Label.DescribeIdeaOrPick,Beschreibe eine Idee oder wähle unten eine aus
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,Beschreibung: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Name: {NAME}
@@ -3586,21 +3588,27 @@ Feature.CloudClient.Action.PlayWithoutCloudPlay,Ohne Cloud Play spielen
 Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play führt das Spiel auf den Computern von Roblox aus, sodass es möglicherweise schneller lädt und es zu weniger Abstürzen kommt. Es ist nur verfügbar, während du dieses Spiel spielst."
 Feature.CloudClient.Description.CloudPlayStopped,"Tritt dem Spiel erneut bei, um ohne Cloud Play weiterzuspielen."
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle ist eine frühe Vorschau. Möglicherweise sehen die Dinge anders aus als im Originalspiel.
+Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName} ist eine frühe Vorschau. Möglicherweise sehen die Dinge anders aus als im Originalspiel.
 Feature.CloudClient.Description.RobloxRealityThanks,"Vielen Dank, dass du zu den Ersten gehörst, die es ausprobiert haben."
 Feature.CloudClient.Heading.CloudPlayOffer,Mit Cloud Play spielen
 Feature.CloudClient.Heading.CloudPlayStopped,Cloud Play funktioniert nicht mehr
 Feature.CloudClient.Heading.RobloxRealityFailed,Bei Restyle ist etwas schiefgelaufen
+Feature.CloudClient.Heading.RobloxRealityFailedV2,Bei {productName} ist etwas schiefgelaufen
 Feature.CloudClient.Heading.RobloxRealityTimeEnded,Deine Zeit in Restyle ist abgelaufen
+Feature.CloudClient.Heading.RobloxRealityTimeEndedV2,Deine Zeit in {productName} ist abgelaufen
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Die Aufnahmefunktion ist in Cloud Play noch nicht verfügbar.
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Die Aufnahmefunktion ist mit Restyle noch nicht verfügbar.
+Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,Die Aufnahmefunktion ist mit {productName} noch nicht verfügbar.
 Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Play funktioniert nicht. Du spielst jetzt normal.
 Feature.CloudClient.Label.RobloxReality,Restyle
 Feature.CloudClient.Label.RobloxRealityDemoLength,Probiere eine {minutes}-minütige Demo aus
 Feature.CloudClient.Label.RobloxRealityEndingSoon,Restyle endet in 1 Minute. Du verlässt anschließend das Spiel.
+Feature.CloudClient.Label.RobloxRealityEndingSoonV2,{productName} endet in 1 Minute. Du verlässt anschließend das Spiel.
 Feature.CloudClient.Label.RobloxRealityGraphics,"Dein Spiel, neu interpretiert"
 Feature.CloudClient.Label.RobloxRealityPlusOnly,Nur für Plus-Abonnenten
 Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,Die Selbstansicht ist in Cloud Play noch nicht verfügbar.
 Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,Die Selbstansicht ist mit Restyle noch nicht verfügbar.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxRealityV2,Die Selbstansicht ist mit {productName} noch nicht verfügbar.
 Feature.CloudClient.Label.StillWeakConnection,Deine Verbindung ist immer noch langsam.
 Feature.CloudClient.Label.TimeLeft,
 Feature.CloudClient.Label.WeakConnection,Langsame Verbindung.
@@ -4426,9 +4434,15 @@ Feature.Moments.Description.EngagementFirstLike,Jetzt anzeigen
 Feature.Moments.Description.EngagementFirstReaction,Dein Moment hat gerade seine erste Reaktion erhalten!
 Feature.Moments.Description.EngagementLikedCommentsDigest,{likedComments} deiner Kommentare haben Likes erhalten.
 Feature.Moments.Description.EngagementMomentDigest,{comments} neue Kommentare und {milestone} Reaktionen
+Feature.Moments.Description.EngagementMomentFirstReactionDigest,{comments} neue Kommentare und die erste Reaktion auf deinen Moment
+Feature.Moments.Description.EngagementMomentsCommentsDigest,{comments} neue Kommentare zu deinen Moments
 Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementMomentsReactionsDigest,Deine Moments erhalten Reaktionen
 Feature.Moments.Description.EngagementNewComment,hat gerade deinen Moment kommentiert.
 Feature.Moments.Description.EngagementNewComments,und {count} weitere Personen haben deinen Moment kommentiert.
+Feature.Moments.Description.EngagementNewCommentsOneOther,und 1 weitere Person haben deinen Moment kommentiert.
+Feature.Moments.Description.EngagementOneCommentDigest,1 neuer Kommentar und {milestone} Reaktionen
+Feature.Moments.Description.EngagementOneCommentFirstReactionDigest,1 neuer Kommentar und die erste Reaktion auf deinen Moment
 Feature.Moments.Description.EngagementReactionMilestone,{count} neue Reaktionen
 Feature.Moments.Description.FollowingCaughtUpBody,"Du hast dir alle neuen Moments in diesem Feed angesehen. Wechsle die Feeds, um mehr anzuzeigen."
 Feature.Moments.Description.FollowingEmptyBodyRecommended,"Hier siehst du Moments von Creatorn, denen du folgst."
@@ -5401,12 +5415,14 @@ Feature.Schools.Action.UnidaysTermsOfService,UNiDAYS-Nutzungsbedingungen
 Feature.Schools.Body.EnterCode,"UNiDAYS hat eine E-Mail mit deinem einmaligen Code an {user_email} gesendet. Gib den Code unten ein, um deine Schule zu bestätigen."
 Feature.Schools.Body.UnidaysShare,Deine E-Mail-Adresse ist für andere nicht sichtbar.
 Feature.Schools.Body.UnidaysTerms,"Wir arbeiten mit UNiDAYS zusammen, um deine Schul-E-Mail-Adresse zu verifizieren. Indem du auf ""Weiter"" klickst, stimmst du den Nutzungsbedingungen und der Datenschutzrichtlinie von UNiDAYS zu."
+Feature.Schools.Body.UnidaysTermsCollege,"Indem du “Weiter” auswählst, stimmst du den Nutzungsbedingungen von UNiDAYS zu und nimmst zur Kenntnis, dass UNiDAYS deine Hochschul-E-Mail-Adresse gemäß seiner Datenschutzrichtlinie verwenden darf."
 Feature.Schools.Caption.AlumniGroupOnGraduate,"Sobald du deinen Abschluss gemacht hast, kommst du in die Alumni-Gruppe von {school}."
 Feature.Schools.Caption.RemovedOnGraduate,"Sobald du deinen Abschluss gemacht hast, wirst du von {school} entfernt."
 Feature.Schools.Description.CantFindSchoolNotify,"Wir werden dich benachrichtigen, sobald deine Schule auf Roblox ist."
 Feature.Schools.Description.CantVerifySchool,Anhand der von dir angegebenen Informationen konnten wir deine Schule nicht verifizieren.
 Feature.Schools.Description.ConnectWithFellowAlumni,Mit anderen Alumni vernetzen
 Feature.Schools.Description.FeatureAvailableBody,Finde Freunde aus deiner Schule.
+Feature.Schools.Description.FeatureAvailableBodyCollege,Finde Freunde aus deiner Hochschule.
 Feature.Schools.Description.InviteFriendsExclusiveItem,"Lade andere zur Verifizierung ein. Erhalte einen kostenlosen Artikel, wenn deine Schule startet."
 Feature.Schools.Description.InviteFriendsUnlockSooner,"Hilf, die Alumni-Gruppe deiner Schule früher zu starten."
 Feature.Schools.Description.InviteOthersToVerify,Andere zur Verifizierung einladen
@@ -5417,7 +5433,9 @@ Feature.Schools.Description.RemoveSchoolBody,"Du musst deine Schul-E-Mail-Adress
 Feature.Schools.Description.SchoolIsLiveBody,
 Feature.Schools.Description.SchoolUnavailableBody,Diese Schule ist derzeit nicht auf Roblox verfügbar.
 Feature.Schools.Description.UpsellDisclaimer,Deine Schule ist nur für Personen derselben Schule sichtbar. Du kannst deine Schule jederzeit aktualisieren oder entfernen.
+Feature.Schools.Description.UpsellDisclaimerCollege,Deine Hochschule ist nur für Personen derselben Hochschule sichtbar. Du kannst deine Hochschule jederzeit aktualisieren oder entfernen.
 Feature.Schools.Description.UpsellTagline,"Entdecke verifizierte Schüler aus deiner Schule, tritt mit ihnen in Kontakt und spiele mit ihnen."
+Feature.Schools.Description.UpsellTaglineCollege,"Entdecke verifizierte Studenten aus deiner Hochschule, tritt mit ihnen in Kontakt und spiele mit ihnen."
 Feature.Schools.Description.WaitlistAlumniBody,"Du bist startklar. Wir werden dich benachrichtigen, sobald die Alumni-Gruppe deiner Schule hier gestartet wurde."
 Feature.Schools.Description.WaitlistBody,"Du bist ein Gründungsmitglied. Lade deine Klassenkameraden ein, eure Schule gemeinsam zu starten."
 Feature.Schools.Error.AlreadyLinked,Diese E-Mail-Adresse ist bereits mit einem anderen Konto verknüpft.
@@ -5434,11 +5452,13 @@ Feature.Schools.Filter.AllYears,Alle Jahre
 Feature.Schools.Filter.Apply,
 Feature.Schools.Filter.GradYear,Abschlussjahr
 Feature.Schools.GiftForYou,Ein Geschenk für dich
+Feature.Schools.Heading.AddCollege,Hochschule hinzufügen
 Feature.Schools.Heading.AddSchool,Schule hinzufügen
 Feature.Schools.Heading.AddSchoolNow,Spiele mit deinen Mitschülern
 Feature.Schools.Heading.CantFindSchool,Wir können deine Schule nicht finden
 Feature.Schools.Heading.CantVerifySchool,Wir können deine Schule nicht verifizieren
 Feature.Schools.Heading.CheckYourEmail,Überprüfe deine E-Mails
+Feature.Schools.Heading.EnterCollegeEmail,Gib deine Hochschul-E-Mail-Adresse ein
 Feature.Schools.Heading.EnterSchoolEmail,Gib deine Schul-E-Mail-Adresse ein
 Feature.Schools.Heading.InviteYourClassmates,Lade deine Mitschüler ein
 Feature.Schools.Heading.InviteYourFriends,Lade deine Freunde ein
@@ -5465,8 +5485,10 @@ Feature.Schools.Label.Search,
 Feature.Schools.Label.SuggestedEmail,Meintest du {email}?
 Feature.Schools.Label.UnlockAlumniGroup,Alumni-Gruppe ausstehend
 Feature.Schools.Label.UpsellPerkFindFriends,Finde Freunde aus deiner Schule
+Feature.Schools.Label.UpsellPerkFindFriendsCollege,Finde Freunde von deiner Hochschule
 Feature.Schools.Label.UpsellPerkPlayAndChat,"Sieh, wer online ist, und spielt ganz einfach gemeinsam"
 Feature.Schools.Label.UpsellPerkTrends,"Entdecke, was an deiner Schule angesagt ist"
+Feature.Schools.Label.UpsellPerkTrendsCollege,"Entdecke, was an deiner Hochschule angesagt ist"
 Feature.Schools.Placeholder.Email,E-Mail-Adresse des Schülers
 Feature.Schools.Placeholder.SchoolName,Name der Schule
 Feature.Schools.Placeholder.SixDigitCode,6-stelliger Code

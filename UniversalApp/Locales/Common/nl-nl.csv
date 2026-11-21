@@ -97,7 +97,7 @@ Authentication.AccountPicker.Label.RemoveAccountCancel,
 Authentication.AccountPicker.Label.RemoveAccountDescription,"Je ziet dit account niet meer op dit apparaat, tenzij je je opnieuw aanmeldt."
 Authentication.AccountPicker.Label.RemoveAccountRemove,Verwijderen
 Authentication.AccountPicker.Label.SignedOut,Afgemeld
-Authentication.AccountRecovery.Action.AddAPasskey,"Ja, een nieuwe toegangssleutel toevoegen"
+Authentication.AccountRecovery.Action.AddAPasskey,"Ja, een nieuwe toegangssleutel aanmaken"
 Authentication.AccountRecovery.Action.Continue,
 Authentication.AccountRecovery.Action.Delete,
 Authentication.AccountRecovery.Action.DeleteAll,Wijzigingen verwijderen
@@ -108,7 +108,7 @@ Authentication.AccountRecovery.Action.ResetPassword,Wachtwoord resetten
 Authentication.AccountRecovery.Action.Save,Behouden
 Authentication.AccountRecovery.Action.SendCode,Stuur me een code
 Authentication.AccountRecovery.Action.SkipAddingPasskey,"Nee, deze stap overslaan"
-Authentication.AccountRecovery.Action.UpdatePassword,Wachtwoord bijwerken
+Authentication.AccountRecovery.Action.UpdatePassword,Wachtwoord opslaan
 Authentication.AccountRecovery.Action.UseAnotherMethod,Een andere methode gebruiken
 Authentication.AccountRecovery.Action.UseBackupCode,Back-upcode gebruiken
 Authentication.AccountRecovery.Action.UseEmail,E-mailadres gebruiken
@@ -1645,6 +1645,7 @@ Feature.AppealsPortal.Description.AppealSubmittedUpdate,We sturen een update met
 Feature.AppealsPortal.Description.AppealSubmittedUpdate.OptOut,"We sturen een update met onze beslissing en eventuele maatregelen naar het door jou opgegeven e-mailadres, tenzij je ons hebt laten weten dat je geen verdere communicatie over dit bezwaar wilt ontvangen."
 Feature.AppealsPortal.Description.AppealsPortal,Bekijk eerdere overtredingen en beheer je bezwaren. Alle content en gedrag moeten voldoen aan de {link}Communityrichtlijnen van Roblox.{linkEnd}
 Feature.AppealsPortal.Description.AskForReview,Je bevestigt dat je dit probleem hebt opgelost. We beoordelen dit {contentType} opnieuw.
+Feature.AppealsPortal.Description.AskForReviewFallback,Je bevestigt dat je dit probleem hebt opgelost. We beoordelen dit opnieuw.
 Feature.AppealsPortal.Description.DetailsUnavailable,
 Feature.AppealsPortal.Description.FixByDate,"Los het probleem in Studio uiterlijk {date} op, kom dan terug en vraag om een beoordeling."
 Feature.AppealsPortal.Description.IssueClosed,We hebben dit probleem gesloten omdat je hebt besloten om een van onze regels te leren om een schorsing te voorkomen.
@@ -2560,7 +2561,7 @@ Feature.Build.Description.BuildReplyNotif,Ontvang een melding wanneer Build een 
 Feature.Build.Description.BuyRobuxToCreate,"Koop meer Robux om content te blijven maken, of wacht tot je gratis Build-tegoed morgen wordt gereset."
 Feature.Build.Description.BuyUsageOrWait,"Koop meer Build-tegoed met Robux, of wacht tot je dagelijkse limiet wordt gereset."
 Feature.Build.Description.CampaignRunDates,Je advertentie loopt van {startDate} tot {endDate}.
-Feature.Build.Description.CaptureWhilePlaytesting,Maak een opname tijdens de playtest en voeg deze vervolgens toe aan je prompt.
+Feature.Build.Description.CaptureWhilePlaytesting,Leg tijdens de playtest iets vast om Build te laten zien wat je ziet.
 Feature.Build.Description.ChooseAdCampaignLength,Kies hoelang je wilt dat je advertentie wordt weergegeven.
 Feature.Build.Description.ChoosePlaytesters,Kies vrienden om een voorbeeld van je spel te bekijken.
 Feature.Build.Description.CreateDeveloperProduct,{NAME} aanmaken voor {PRICE} Robux. Dit is nog niet te koop.
@@ -2669,9 +2670,9 @@ Feature.Build.Label.BackToBuild,Terug naar Bouwen
 Feature.Build.Label.Building,Er wordt aan gewerkt...
 Feature.Build.Label.CaptureLibrary,Opnamebibliotheek
 Feature.Build.Label.CaptureSelectionCount,{SELECTED_COUNT} van {MAX_SELECTIONS} geselecteerd
-Feature.Build.Label.CaptureStepAddImages,Selecteer Afbeeldingen toevoegen om je opname toe te voegen
+Feature.Build.Label.CaptureStepAddImages,Selecteer <b>Afbeeldingen toevoegen</b> om wat je hebt vastgelegd aan de chat toe te voegen
 Feature.Build.Label.CaptureStepPlaytest,Je game playtesten
-Feature.Build.Label.CaptureStepTapCamera,Selecteer de camera in de werkbalk Bouwen
+Feature.Build.Label.CaptureStepTapCamera,Selecteer het camerapictogram onderaan het scherm
 Feature.Build.Label.ContentRating,
 Feature.Build.Label.CreatedDate, {DAY} {MONTH} {YEAR} 
 Feature.Build.Label.CreatorHub,Creator Hub
@@ -2681,6 +2682,7 @@ Feature.Build.Label.DefaultDeveloperProductName,ontwikkelaarsproduct
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,Verwijderd
 Feature.Build.Label.DescribeIdea,Beschrijf een idee
+Feature.Build.Label.DescribeIdeaOrPick,Beschrijf een idee of kies er hieronder een
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,Beschrijving: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Naam: {NAME}
@@ -3578,21 +3580,27 @@ Feature.CloudClient.Action.PlayWithoutCloudPlay,Spelen zonder Cloud Play
 Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play voert de game uit op de computers van Roblox, waardoor het mogelijk sneller laadt en minder vaak crasht. Het werkt alleen zolang je deze game speelt."
 Feature.CloudClient.Description.CloudPlayStopped,Neem opnieuw deel aan de game om verder te spelen zonder Cloud Play.
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle is een vroege preview. Dingen kunnen er anders uitzien dan in de originele game.
+Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName} is een vroege preview. Dingen kunnen er anders uitzien dan in de originele game.
 Feature.CloudClient.Description.RobloxRealityThanks,Bedankt dat je het als een van de eersten hebt uitgeprobeerd.
 Feature.CloudClient.Heading.CloudPlayOffer,Spelen met Cloud Play
 Feature.CloudClient.Heading.CloudPlayStopped,Cloud Play werkt niet meer
 Feature.CloudClient.Heading.RobloxRealityFailed,Er is iets misgegaan met Restyle
+Feature.CloudClient.Heading.RobloxRealityFailedV2,Er is iets misgegaan met {productName}
 Feature.CloudClient.Heading.RobloxRealityTimeEnded,Je tijd in Restyle is voorbij
+Feature.CloudClient.Heading.RobloxRealityTimeEndedV2,Je tijd in {productName} is voorbij
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Vastleggen is nog niet beschikbaar in Cloud Play.
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Vastleggen is nog niet beschikbaar met Restyle.
+Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,Vastleggen is nog niet beschikbaar met {productName}.
 Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Play werkt niet. Je speelt op de normale manier.
 Feature.CloudClient.Label.RobloxReality,Restyle
 Feature.CloudClient.Label.RobloxRealityDemoLength,Probeer een demo van {minutes} minuten
 Feature.CloudClient.Label.RobloxRealityEndingSoon,"Restyle eindigt over 1 minuut, waarna je de game verlaat."
+Feature.CloudClient.Label.RobloxRealityEndingSoonV2,"{productName} eindigt over 1 minuut, waarna je de game verlaat."
 Feature.CloudClient.Label.RobloxRealityGraphics,Jouw game in een nieuw jasje
 Feature.CloudClient.Label.RobloxRealityPlusOnly,Alleen voor Plus-abonnees
 Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,Zelfweergave is nog niet beschikbaar in Cloud Play.
 Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,Zelfweergave is nog niet beschikbaar met Restyle.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxRealityV2,Zelfweergave is nog niet beschikbaar met {productName}.
 Feature.CloudClient.Label.StillWeakConnection,Je verbinding is nog steeds zwak.
 Feature.CloudClient.Label.TimeLeft,
 Feature.CloudClient.Label.WeakConnection,Zwakke verbinding.
@@ -4418,9 +4426,15 @@ Feature.Moments.Description.EngagementFirstLike,Nu bekijken
 Feature.Moments.Description.EngagementFirstReaction,Je moment heeft zojuist zijn eerste reactie gekregen!
 Feature.Moments.Description.EngagementLikedCommentsDigest,{likedComments} van je reacties hebben likes gekregen
 Feature.Moments.Description.EngagementMomentDigest,{comments} nieuwe opmerkingen en {milestone} reacties
+Feature.Moments.Description.EngagementMomentFirstReactionDigest,{comments} nieuwe reacties en het eerste antwoord daarop
+Feature.Moments.Description.EngagementMomentsCommentsDigest,{comments} nieuwe reacties op je Momenten
 Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementMomentsReactionsDigest,Je momenten krijgen reacties
 Feature.Moments.Description.EngagementNewComment,heeft zojuist op je moment gereageerd
 Feature.Moments.Description.EngagementNewComments,en {count} anderen reageerden op je moment
+Feature.Moments.Description.EngagementNewCommentsOneOther,en 1 andere persoon reageerde op je moment
+Feature.Moments.Description.EngagementOneCommentDigest,1 nieuwe reactie en {milestone} antwoorden
+Feature.Moments.Description.EngagementOneCommentFirstReactionDigest,1 nieuwe reactie en het eerste antwoord daarop
 Feature.Moments.Description.EngagementReactionMilestone,{count} nieuwe reacties
 Feature.Moments.Description.FollowingCaughtUpBody,Je hebt alle nieuwe momenten in deze feed bekeken. Wissel van feed om er meer te bekijken.
 Feature.Moments.Description.FollowingEmptyBodyRecommended,Je ziet hier momenten van creators die je volgt.
@@ -5396,12 +5410,14 @@ Feature.Schools.Action.UnidaysTermsOfService,Gebruiksvoorwaarden van UNiDAYS
 Feature.Schools.Body.EnterCode,UNiDAYS heeft een e-mail met je unieke code gestuurd naar {user_email}. Voer de code hieronder in om je school te bevestigen.
 Feature.Schools.Body.UnidaysShare,Je e-mailadres is niet zichtbaar voor anderen.
 Feature.Schools.Body.UnidaysTerms,"We werken samen met UNiDAYS om je school-e-mailadres te verifiëren. Door op 'Doorgaan' te klikken, ga je akkoord met de Servicevoorwaarden en het Privacybeleid van UNiDAYS."
+Feature.Schools.Body.UnidaysTermsCollege,"Door Doorgaan te selecteren, ga je akkoord met de Servicevoorwaarden van UNiDAYS en erken je dat UNiDAYS je studentenmailadres mag gebruiken in overeenstemming met hun Privacybeleid."
 Feature.Schools.Caption.AlumniGroupOnGraduate,"Zodra je bent afgestudeerd, kom je in de alumnigroep van {school}."
 Feature.Schools.Caption.RemovedOnGraduate,"Zodra je bent afgestudeerd, word je verwijderd uit {school}."
 Feature.Schools.Description.CantFindSchoolNotify,We laten het je weten wanneer je school op Roblox zit.
 Feature.Schools.Description.CantVerifySchool,"Op basis van de informatie die je hebt verstrekt, konden we je school niet verifiëren."
 Feature.Schools.Description.ConnectWithFellowAlumni,Kom in contact met andere alumni
 Feature.Schools.Description.FeatureAvailableBody,Vind vrienden van je school.
+Feature.Schools.Description.FeatureAvailableBodyCollege,Vind vrienden van je universiteit.
 Feature.Schools.Description.InviteFriendsExclusiveItem,Nodig anderen uit om te verifiëren. Krijg een gratis item wanneer je school wordt gelanceerd.
 Feature.Schools.Description.InviteFriendsUnlockSooner,Help de alumnigroep van je school sneller te lanceren.
 Feature.Schools.Description.InviteOthersToVerify,Anderen uitnodigen om te verifiëren
@@ -5412,7 +5428,9 @@ Feature.Schools.Description.RemoveSchoolBody,"Je moet je school-e-mailadres opni
 Feature.Schools.Description.SchoolIsLiveBody,
 Feature.Schools.Description.SchoolUnavailableBody,Deze school is momenteel niet beschikbaar op Roblox.
 Feature.Schools.Description.UpsellDisclaimer,Je school is alleen zichtbaar voor mensen van dezelfde school. Je kunt je school op elk gewenst moment bijwerken of verwijderen.
+Feature.Schools.Description.UpsellDisclaimerCollege,Je universiteit is alleen zichtbaar voor personen van dezelfde universiteit. Je kunt je universiteit op elk gewenst moment bijwerken of verwijderen.
 Feature.Schools.Description.UpsellTagline,"Ontdek geverifieerde leerlingen van je school, kom met ze in contact en speel met ze."
+Feature.Schools.Description.UpsellTaglineCollege,"Zoek geverifieerde studenten van je universiteit, kom met ze in contact en speel samen."
 Feature.Schools.Description.WaitlistAlumniBody,Je bent helemaal klaar. We laten het je weten zodra de alumnigroep van je school is gelanceerd.
 Feature.Schools.Description.WaitlistBody,Je bent een van de oprichters. Nodig je klasgenoten uit om samen jullie school te lanceren.
 Feature.Schools.Error.AlreadyLinked,Dit e-mailadres is al gekoppeld aan een ander account.
@@ -5429,11 +5447,13 @@ Feature.Schools.Filter.AllYears,Alle jaren
 Feature.Schools.Filter.Apply,
 Feature.Schools.Filter.GradYear,Afstudeerjaar
 Feature.Schools.GiftForYou,Een cadeau voor jou
+Feature.Schools.Heading.AddCollege,Universiteit toevoegen
 Feature.Schools.Heading.AddSchool,School toevoegen
 Feature.Schools.Heading.AddSchoolNow,Sluit je aan bij je klasgenoten
 Feature.Schools.Heading.CantFindSchool,We kunnen je school niet vinden
 Feature.Schools.Heading.CantVerifySchool,We kunnen je school niet verifiëren
 Feature.Schools.Heading.CheckYourEmail,Controleer je e-mail
+Feature.Schools.Heading.EnterCollegeEmail,Voer je universiteits-e-mailadres in
 Feature.Schools.Heading.EnterSchoolEmail,Voer je school-e-mailadres in
 Feature.Schools.Heading.InviteYourClassmates,Je klasgenoten uitnodigen
 Feature.Schools.Heading.InviteYourFriends,Je vrienden uitnodigen
@@ -5460,8 +5480,10 @@ Feature.Schools.Label.Search,
 Feature.Schools.Label.SuggestedEmail,Bedoelde je {email}?
 Feature.Schools.Label.UnlockAlumniGroup,Alumnigroep in behandeling
 Feature.Schools.Label.UpsellPerkFindFriends,Vind vrienden van je school
+Feature.Schools.Label.UpsellPerkFindFriendsCollege,Vind vrienden van je universiteit
 Feature.Schools.Label.UpsellPerkPlayAndChat,Bekijk wie er online is en speel eenvoudig samen
 Feature.Schools.Label.UpsellPerkTrends,Ontdek wat er populair is op je school
+Feature.Schools.Label.UpsellPerkTrendsCollege,Ontdek wat er populair is op je universiteit
 Feature.Schools.Placeholder.Email,E-mailadres van student
 Feature.Schools.Placeholder.SchoolName,Naam van de school
 Feature.Schools.Placeholder.SixDigitCode,
@@ -5771,7 +5793,7 @@ Feature.UniversalShareSheet.Response.SharedMessage,Bericht is verzonden
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Berichten zijn verzonden
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} anderen
 Feature.UserLibrary.Label.MyLibrary,Mijn bibliotheek
-Feature.VIPServer.Message.TooManyFreeServersOnGame,Je kunt niet meer gratis privéservers hebben voor deze game.
+Feature.VIPServer.Message.TooManyFreeServersOnGame,Je kunt niet nog meer gratis privéservers hebben voor deze game.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,Je kunt niet meer actieve gratis privéservers hebben. Deactiveer eerst een aantal andere servers.
 Feature.VerificationUpsell.Action.AddPhone,
 Feature.VerificationUpsell.Action.AddPhoneVoice,Telefoonnummer toevoegen voor spraakchat

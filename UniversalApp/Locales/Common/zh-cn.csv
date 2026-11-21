@@ -97,7 +97,7 @@ Authentication.AccountPicker.Label.RemoveAccountCancel,
 Authentication.AccountPicker.Label.RemoveAccountDescription,你将不会在此设备上再看到此帐户，除非再次登录。
 Authentication.AccountPicker.Label.RemoveAccountRemove,移除
 Authentication.AccountPicker.Label.SignedOut,已注销
-Authentication.AccountRecovery.Action.AddAPasskey,是的，添加新的通行密钥
+Authentication.AccountRecovery.Action.AddAPasskey,是，创建一个新的通行密钥
 Authentication.AccountRecovery.Action.Continue,
 Authentication.AccountRecovery.Action.Delete,
 Authentication.AccountRecovery.Action.DeleteAll,移除更改
@@ -1644,6 +1644,7 @@ Feature.AppealsPortal.Description.AppealSubmittedUpdate,我们会将处理结果
 Feature.AppealsPortal.Description.AppealSubmittedUpdate.OptOut,除非你已告知我们不希望收到更多关于此申诉的通知，否则我们会将处理结果及采取的措施发送至你提供的电子邮箱。
 Feature.AppealsPortal.Description.AppealsPortal,查看过去的违规行为并管理你的申诉。所有内容和行为都必须遵守 {link}Roblox 社区准则{linkEnd}
 Feature.AppealsPortal.Description.AskForReview,你确认你已解决此问题。我们会再次审核此{contentType}。
+Feature.AppealsPortal.Description.AskForReviewFallback,你确认你已解决此问题。我们会再次审核此问题。
 Feature.AppealsPortal.Description.DetailsUnavailable,
 Feature.AppealsPortal.Description.FixByDate,请于 {date}前在 Studio 中解决此问题，然后返回并申请审核。
 Feature.AppealsPortal.Description.IssueClosed,我们已关闭此问题，因为你决定了解并遵守我们的规定，以避免被封号。
@@ -2559,7 +2560,7 @@ Feature.Build.Description.BuildReplyNotif,在 Build 回复你后获得通知。
 Feature.Build.Description.BuyRobuxToCreate,购买更多 Robux 以继续创建，或等待你的免费 Build 使用额度在明天重置。
 Feature.Build.Description.BuyUsageOrWait,使用 Robux 购买更多 Build 使用额度，或等待你的每日限额重置。
 Feature.Build.Description.CampaignRunDates,你的广告投放时间为 {startDate}-{endDate}。
-Feature.Build.Description.CaptureWhilePlaytesting,在游戏测试时截图，然后将其添加到你的提示词中。
+Feature.Build.Description.CaptureWhilePlaytesting,在游戏测试时截图，向 Build 展示你所看到的内容。
 Feature.Build.Description.ChooseAdCampaignLength,选择你希望广告投放的时长。
 Feature.Build.Description.ChoosePlaytesters,选择好友来抢先体验你的游戏。
 Feature.Build.Description.CreateDeveloperProduct,以 {PRICE} Robux 的价格创建{NAME}。此商品目前尚不可购买。
@@ -2668,9 +2669,9 @@ Feature.Build.Label.BackToBuild,返回构建
 Feature.Build.Label.Building,正在运作…
 Feature.Build.Label.CaptureLibrary,截图库
 Feature.Build.Label.CaptureSelectionCount,已选择 {SELECTED_COUNT} 张，共 {MAX_SELECTIONS} 张
-Feature.Build.Label.CaptureStepAddImages,选择“添加图片”以附加你的截图
+Feature.Build.Label.CaptureStepAddImages,点击<b>添加图片</b>，将你的截图添加到聊天中
 Feature.Build.Label.CaptureStepPlaytest,测试你的游戏
-Feature.Build.Label.CaptureStepTapCamera,在“构建”工具栏中选择镜头
+Feature.Build.Label.CaptureStepTapCamera,点击界面底部的相机图标
 Feature.Build.Label.ContentRating,内容评级
 Feature.Build.Label.CreatedDate,{YEAR} 年 {MONTH} {DAY} 日
 Feature.Build.Label.CreatorHub,创作者中心
@@ -2680,6 +2681,7 @@ Feature.Build.Label.DefaultDeveloperProductName,开发者产品
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,已删除
 Feature.Build.Label.DescribeIdea,描述一个创意
+Feature.Build.Label.DescribeIdeaOrPick,描述创意，或在下方选择一个
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,描述：{DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,名称：{NAME}
@@ -3575,21 +3577,27 @@ Feature.CloudClient.Action.PlayWithoutCloudPlay,游玩但不使用 Cloud Play
 Feature.CloudClient.Description.CloudPlayOffer,Cloud Play 会使用 Roblox 的计算机运行游戏，因此游戏可能加载得更快，发生崩溃的情况也可能更少。Cloud Play 仅在你游玩此游戏期间运行。
 Feature.CloudClient.Description.CloudPlayStopped,重新加入游戏，即可在不使用 Cloud Play 的情况下继续游玩。
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle 为抢先预览。画面效果可能与原版游戏有所不同。
+Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName} 为抢先预览。画面效果可能与原版游戏有所不同。
 Feature.CloudClient.Description.RobloxRealityThanks,感谢你成为首批试用者之一。
 Feature.CloudClient.Heading.CloudPlayOffer,使用 Cloud Play 游玩
 Feature.CloudClient.Heading.CloudPlayStopped,Cloud Play 已停止运行
 Feature.CloudClient.Heading.RobloxRealityFailed,Restyle 发生错误
+Feature.CloudClient.Heading.RobloxRealityFailedV2,{productName} 发生错误
 Feature.CloudClient.Heading.RobloxRealityTimeEnded,你在 Restyle 中的时间已结束
+Feature.CloudClient.Heading.RobloxRealityTimeEndedV2,你在 {productName} 中的时间已结束
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,录制功能在 Cloud Play 中尚不可用。
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,截图功能在 Restyle 中尚不可用。
+Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,截图功能在 {productName} 中尚不可用。
 Feature.CloudClient.Label.CloudPlayJoinFailed,云端游玩功能无法使用。你当前为普通游玩。
 Feature.CloudClient.Label.RobloxReality,Restyle
 Feature.CloudClient.Label.RobloxRealityDemoLength,试用 {minutes} 分钟的演示版
 Feature.CloudClient.Label.RobloxRealityEndingSoon,Restyle 将于 1 分钟后结束，你将离开游戏。
+Feature.CloudClient.Label.RobloxRealityEndingSoonV2,{productName} 将于 1 分钟后结束，你将离开游戏。
 Feature.CloudClient.Label.RobloxRealityGraphics,你的游戏，焕然一新
 Feature.CloudClient.Label.RobloxRealityPlusOnly,仅限 Plus 订阅用户
 Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,自身视角功能在 Cloud Play 中尚不可用。
 Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,自身视角功能在 Restyle 中尚不可用。
+Feature.CloudClient.Label.SelfViewUnavailableRobloxRealityV2,自身视角功能在 {productName} 中尚不可用。
 Feature.CloudClient.Label.StillWeakConnection,你的网络连接仍然不稳定。
 Feature.CloudClient.Label.TimeLeft,
 Feature.CloudClient.Label.WeakConnection,连接不稳定。
@@ -4414,9 +4422,15 @@ Feature.Moments.Description.EngagementFirstLike,立即查看
 Feature.Moments.Description.EngagementFirstReaction,你的精彩瞬间刚刚获得了第一个回应！
 Feature.Moments.Description.EngagementLikedCommentsDigest,你的 {likedComments} 条评论获得了点赞
 Feature.Moments.Description.EngagementMomentDigest,{comments} 条新评论和 {milestone} 个回应
+Feature.Moments.Description.EngagementMomentFirstReactionDigest,{comments} 条新评论及其第 1 条回应
+Feature.Moments.Description.EngagementMomentsCommentsDigest,你的精彩瞬间有 {comments} 条新评论
 Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementMomentsReactionsDigest,你的精彩瞬间正在获得回应
 Feature.Moments.Description.EngagementNewComment,刚刚评论了你的精彩瞬间
 Feature.Moments.Description.EngagementNewComments,和另外 {count} 人评论了你的精彩瞬间
+Feature.Moments.Description.EngagementNewCommentsOneOther,和另外 1 人评论了你的精彩瞬间
+Feature.Moments.Description.EngagementOneCommentDigest,1 条新评论和 {milestone} 条回应
+Feature.Moments.Description.EngagementOneCommentFirstReactionDigest,1 条新评论及其第 1 条回应
 Feature.Moments.Description.EngagementReactionMilestone,{count} 个新回应
 Feature.Moments.Description.FollowingCaughtUpBody,你已看完此推送中的所有新“精彩瞬间”。切换推送以查看更多内容。
 Feature.Moments.Description.FollowingEmptyBodyRecommended,你将在这里看到你关注的创作者发布的“精彩瞬间”。
@@ -5391,12 +5405,14 @@ Feature.Schools.Action.UnidaysTermsOfService,UNiDAYS 服务条款
 Feature.Schools.Body.EnterCode,UNiDAYS 已将一封包含一次性验证码的电子邮件发送至 {user_email}。请在下方输入验证码，以确认你的学校。
 Feature.Schools.Body.UnidaysShare,其他人不会看到你的电子邮件地址。
 Feature.Schools.Body.UnidaysTerms,我们与 UNiDAYS 合作，以验证你的学校电子邮件地址。点按“继续”即表示你同意 UNiDAYS 的服务条款和隐私政策。
+Feature.Schools.Body.UnidaysTermsCollege,选择“继续”，即表示你已同意 UNiDAYS 的服务条款，并确认 UNiDAYS 可以根据其隐私政策使用你的学院电子邮件地址。
 Feature.Schools.Caption.AlumniGroupOnGraduate,毕业后，你将加入{school}的校友群组。
 Feature.Schools.Caption.RemovedOnGraduate,毕业后，系统会将你从{school}移除。
 Feature.Schools.Description.CantFindSchoolNotify,你的学校加入 Roblox 时，我们会通知你。
 Feature.Schools.Description.CantVerifySchool,根据你提供的信息，我们无法验证你的学校。
 Feature.Schools.Description.ConnectWithFellowAlumni,与其他校友建立联系
 Feature.Schools.Description.FeatureAvailableBody,寻找同校的好友。
+Feature.Schools.Description.FeatureAvailableBodyCollege,
 Feature.Schools.Description.InviteFriendsExclusiveItem,邀请其他人进行验证。在你的学校上线时获得免费道具。
 Feature.Schools.Description.InviteFriendsUnlockSooner,让你们学校的校友群组尽快上线。
 Feature.Schools.Description.InviteOthersToVerify,邀请其他人进行验证
@@ -5407,7 +5423,9 @@ Feature.Schools.Description.RemoveSchoolBody,你必须重新验证学校电子�
 Feature.Schools.Description.SchoolIsLiveBody,
 Feature.Schools.Description.SchoolUnavailableBody,此学校目前在 Roblox 上不可用。
 Feature.Schools.Description.UpsellDisclaimer,你的学校信息只对同校的人可见。你可以随时更新或移除你的学校。
+Feature.Schools.Description.UpsellDisclaimerCollege,你的学院信息只对同校的人可见。你可以随时更新或移除你的学院。
 Feature.Schools.Description.UpsellTagline,找到已通过验证的同校学生，与他们交流并一起游玩。
+Feature.Schools.Description.UpsellTaglineCollege,
 Feature.Schools.Description.WaitlistAlumniBody,你已完成验证。你的学校校友群组上线后，我们会立即通知你。
 Feature.Schools.Description.WaitlistBody,你是创始成员。不妨邀请同学一起让你们的学校上线。
 Feature.Schools.Error.AlreadyLinked,此电子邮件地址已经与另一个帐户关联。
@@ -5424,11 +5442,13 @@ Feature.Schools.Filter.AllYears,所有年份
 Feature.Schools.Filter.Apply,
 Feature.Schools.Filter.GradYear,毕业年份
 Feature.Schools.GiftForYou,为你准备的礼物
+Feature.Schools.Heading.AddCollege,添加学院
 Feature.Schools.Heading.AddSchool,添加学校
 Feature.Schools.Heading.AddSchoolNow,加入同学们的行列
 Feature.Schools.Heading.CantFindSchool,我们找不到你的学校
 Feature.Schools.Heading.CantVerifySchool,我们无法验证你的学校
 Feature.Schools.Heading.CheckYourEmail,检查你的电子邮箱
+Feature.Schools.Heading.EnterCollegeEmail,输入你的学院电子邮箱
 Feature.Schools.Heading.EnterSchoolEmail,输入你学校的电子邮件地址
 Feature.Schools.Heading.InviteYourClassmates,邀请你的同学
 Feature.Schools.Heading.InviteYourFriends,邀请你的好友
@@ -5455,8 +5475,10 @@ Feature.Schools.Label.Search,
 Feature.Schools.Label.SuggestedEmail,你是否想输入“{email}”？
 Feature.Schools.Label.UnlockAlumniGroup,校友群组待上线
 Feature.Schools.Label.UpsellPerkFindFriends,寻找同校的好友
+Feature.Schools.Label.UpsellPerkFindFriendsCollege,寻找同一学院的好友
 Feature.Schools.Label.UpsellPerkPlayAndChat,查看在线好友，轻松一起游玩
 Feature.Schools.Label.UpsellPerkTrends,探索你学校的热门内容
+Feature.Schools.Label.UpsellPerkTrendsCollege,探索你所在学院的热门内容
 Feature.Schools.Placeholder.Email,学生电子邮件
 Feature.Schools.Placeholder.SchoolName,学校名称
 Feature.Schools.Placeholder.SixDigitCode,

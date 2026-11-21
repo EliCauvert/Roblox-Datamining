@@ -114,7 +114,7 @@ Authentication.AccountPicker.Label.RemoveAccountCancel,
 Authentication.AccountPicker.Label.RemoveAccountDescription,Tekrar giriş yapmadığın sürece bu hesabı artık bu cihazda görmeyeceksin.
 Authentication.AccountPicker.Label.RemoveAccountRemove,Kaldır
 Authentication.AccountPicker.Label.SignedOut,Çıkış yapıldı
-Authentication.AccountRecovery.Action.AddAPasskey,"Evet, yeni bir geçiş anahtarı ekle"
+Authentication.AccountRecovery.Action.AddAPasskey,"Evet, yeni bir geçiş anahtarı oluştur"
 Authentication.AccountRecovery.Action.Continue,
 Authentication.AccountRecovery.Action.Delete,
 Authentication.AccountRecovery.Action.DeleteAll,Değişiklikleri kaldır
@@ -125,7 +125,7 @@ Authentication.AccountRecovery.Action.ResetPassword,Şifreyi sıfırla
 Authentication.AccountRecovery.Action.Save,Sakla
 Authentication.AccountRecovery.Action.SendCode,Bana kod gönder
 Authentication.AccountRecovery.Action.SkipAddingPasskey,"Hayır, bu adımı atla"
-Authentication.AccountRecovery.Action.UpdatePassword,Şifreyi güncelle
+Authentication.AccountRecovery.Action.UpdatePassword,Şifreyi kaydet
 Authentication.AccountRecovery.Action.UseAnotherMethod,Başka bir yöntem kullan
 Authentication.AccountRecovery.Action.UseBackupCode,Yedek kod kullan
 Authentication.AccountRecovery.Action.UseEmail,E-posta kullan
@@ -1619,6 +1619,7 @@ Feature.AppealsPortal.Description.AppealSubmittedUpdate,Verdiğin e-posta adresi
 Feature.AppealsPortal.Description.AppealSubmittedUpdate.OptOut,Eğer bu itirazla ilgili olarak seninle daha fazla iletişim kurulmasını istemediğini daha önceden belirtmiş değilsen verdiğin e-posta adresine kararımızı ve yapılan işlemleri içeren bir güncelleme göndereceğiz.
 Feature.AppealsPortal.Description.AppealsPortal,"Önceki ihlallerini gör ve itirazlarını yönet. Tüm içerikler ve davranışlar, {link}Roblox Topluluk Standartları{linkEnd}'na uygun olmalıdır."
 Feature.AppealsPortal.Description.AskForReview,Bu sorunu çözdüğünü onaylıyorsun. Bu {contentType} tekrar incelenecek.
+Feature.AppealsPortal.Description.AskForReviewFallback,Bu sorunu çözdüğünü onaylıyorsun. Bunu tekrar inceleyeceğiz.
 Feature.AppealsPortal.Description.DetailsUnavailable,
 Feature.AppealsPortal.Description.FixByDate,"{date} tarihine kadar Studio'daki sorunu çöz, ardından geri dönüp inceleme iste."
 Feature.AppealsPortal.Description.IssueClosed,Askıya alınmaktan kaçınmak amacıyla kurallarımızdan birini öğrenmeye karar verdiğin için bu sorunu kapattık.
@@ -2534,7 +2535,7 @@ Feature.Build.Description.BuildReplyNotif,İnşa Et'ten sana bir yanıt geldiği
 Feature.Build.Description.BuyRobuxToCreate,Bir şeyler oluşturmaya devam etmek için daha fazla Robux satın al veya ücretsiz İnşa Et kullanım hakkının yarın sıfırlanmasını bekle.
 Feature.Build.Description.BuyUsageOrWait,Robux ile daha fazla İnşa Et kullanım hakkı satın al veya günlük sınırının sıfırlanmasını bekle.
 Feature.Build.Description.CampaignRunDates,Reklamın {startDate}-{endDate} arasında yayınlanıyor.
-Feature.Build.Description.CaptureWhilePlaytesting,"Oynanış testi yaparken bir yakalama al, ardından bunu istemine ekle."
+Feature.Build.Description.CaptureWhilePlaytesting,Oynanış testi yaparken gördüklerini İnşa Et'e göstermek için bir yakalama al.
 Feature.Build.Description.ChooseAdCampaignLength,Reklamının ne kadar süreyle yayınlanmasını istediğini seç.
 Feature.Build.Description.ChoosePlaytesters,Oyununun ön izlemesini yapacak arkadaşları seç.
 Feature.Build.Description.CreateDeveloperProduct,{PRICE} Robux karşılığında {NAME} oluştur. Henüz satın alınamaz.
@@ -2643,9 +2644,9 @@ Feature.Build.Label.BackToBuild,Oluşturmaya Dön
 Feature.Build.Label.Building,Çalışılıyor…
 Feature.Build.Label.CaptureLibrary,Yakalama kütüphanesi
 Feature.Build.Label.CaptureSelectionCount,{SELECTED_COUNT}/{MAX_SELECTIONS} seçildi
-Feature.Build.Label.CaptureStepAddImages,Yakalamanı eklemek için Görsel ekle'yi seç
+Feature.Build.Label.CaptureStepAddImages,Yakalamanı sohbete eklemek için <b>Görsel ekle</b>'yi seç
 Feature.Build.Label.CaptureStepPlaytest,Oyununu oynanış testine sok
-Feature.Build.Label.CaptureStepTapCamera,İnşa Et araç çubuğunda kamerayı seç
+Feature.Build.Label.CaptureStepTapCamera,Ekranın altındaki kamera simgesini seç
 Feature.Build.Label.ContentRating,İçerik derecelendirmesi
 Feature.Build.Label.CreatedDate,{DAY} {MONTH} {YEAR}
 Feature.Build.Label.CreatorHub,Yaratıcı Merkezi
@@ -2655,6 +2656,7 @@ Feature.Build.Label.DefaultDeveloperProductName,geliştirici ürünü
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,Silindi
 Feature.Build.Label.DescribeIdea,Fikrini tarif et
+Feature.Build.Label.DescribeIdeaOrPick,Fikrini anlat veya aşağıdakilerden birini seç
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,Açıklama: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Ad: {NAME}
@@ -3552,21 +3554,27 @@ Feature.CloudClient.Action.PlayWithoutCloudPlay,Cloud Play olmadan oyna
 Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play, oyunu Roblox'un bilgisayarlarında çalıştırır. Bu sayede oyun daha hızlı yüklenip daha az çöker. Yalnızca bu oyunu oynadığın süre boyunca geçerlidir."
 Feature.CloudClient.Description.CloudPlayStopped,Cloud Play olmadan oynamaya devam etmek için oyuna yeniden katıl.
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle bir erken ön izlemedir. Bazı şeyler orijinal oyundan farklı görünebilir.
+Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName} bir erken ön izlemedir. Bazı şeyler orijinal oyundan farklı görünebilir.
 Feature.CloudClient.Description.RobloxRealityThanks,Bunu deneyen ilk kişilerden biri olduğun için teşekkür ederiz.
 Feature.CloudClient.Heading.CloudPlayOffer,Cloud Play ile oyna
 Feature.CloudClient.Heading.CloudPlayStopped,Cloud Play çalışmayı durdurdu
 Feature.CloudClient.Heading.RobloxRealityFailed,Restyle ile ilgili bir şeyler ters gitti
+Feature.CloudClient.Heading.RobloxRealityFailedV2,{productName} ile ilgili bir şeyler ters gitti
 Feature.CloudClient.Heading.RobloxRealityTimeEnded,Restyle'daki süren sona erdi
+Feature.CloudClient.Heading.RobloxRealityTimeEndedV2,{productName} ürünündeki süren sona erdi
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Yakalama henüz Cloud Play'de kullanılamıyor.
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Yakalama henüz Restyle ile kullanılamıyor.
+Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,Yakalama henüz {productName} ile kullanılamıyor.
 Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Play çalışmıyor. Normal şekilde oynuyorsun.
 Feature.CloudClient.Label.RobloxReality,Restyle
 Feature.CloudClient.Label.RobloxRealityDemoLength,{minutes} dakikalık bir demo dene
 Feature.CloudClient.Label.RobloxRealityEndingSoon,Restyle 1 dakika içinde sona erecek ve oyundan ayrılacaksın.
+Feature.CloudClient.Label.RobloxRealityEndingSoonV2,{productName} 1 dakika içinde sona erecek ve oyundan ayrılacaksın.
 Feature.CloudClient.Label.RobloxRealityGraphics,Oyununa yepyeni bir bakış
 Feature.CloudClient.Label.RobloxRealityPlusOnly,Yalnızca Plus aboneleri için
 Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,Kendi Görüntün henüz Cloud Play'de kullanılamıyor.
 Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,Kendi Görüntün henüz Restyle ile kullanılamıyor.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxRealityV2,Kendi Görüntün henüz {productName} ile kullanılamıyor.
 Feature.CloudClient.Label.StillWeakConnection,Bağlantın hâlâ zayıf.
 Feature.CloudClient.Label.TimeLeft,Kalan süre
 Feature.CloudClient.Label.WeakConnection,Bağlantı zayıf.
@@ -4392,9 +4400,15 @@ Feature.Moments.Description.EngagementFirstLike,Şimdi görüntüle
 Feature.Moments.Description.EngagementFirstReaction,Anın az önce ilk tepkisini aldı!
 Feature.Moments.Description.EngagementLikedCommentsDigest,Yorumlarından {likedComments} tanesi beğenildi
 Feature.Moments.Description.EngagementMomentDigest,{comments} yeni yorum ve {milestone} tepki
+Feature.Moments.Description.EngagementMomentFirstReactionDigest,{comments} yeni yorum ve verilen ilk tepki
+Feature.Moments.Description.EngagementMomentsCommentsDigest,Paylaştığın Anlarda {comments} yeni yorum
 Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementMomentsReactionsDigest,Paylaştığın Anlar tepki alıyor
 Feature.Moments.Description.EngagementNewComment,az önce Anına yorum yaptı
 Feature.Moments.Description.EngagementNewComments,"ve {count} diğer kişi, paylaştığın An hakkında yorum yaptı"
+Feature.Moments.Description.EngagementNewCommentsOneOther,ve 1 kişi daha paylaştığın An hakkında yorum yaptı
+Feature.Moments.Description.EngagementOneCommentDigest,1 yeni yorum ve {milestone}. tepki
+Feature.Moments.Description.EngagementOneCommentFirstReactionDigest,1 yeni yorum ve verilen ilk tepki
 Feature.Moments.Description.EngagementReactionMilestone,{count} yeni tepki
 Feature.Moments.Description.FollowingCaughtUpBody,Bu sayfadaki tüm yeni Anları izledin. Daha fazlasını görüntülemek için sayfa değiştir.
 Feature.Moments.Description.FollowingEmptyBodyRecommended,Takip ettiğin yaratıcıların Anlarını burada göreceksin.
@@ -5370,12 +5384,14 @@ Feature.Schools.Action.UnidaysTermsOfService,UNiDAYS Hizmet Koşulları
 Feature.Schools.Body.EnterCode,"UNiDAYS, tek kullanımlık kodunu içeren bir e-postayı {user_email} adresine gönderdi. Okulunu onaylamak için kodu aşağıya gir."
 Feature.Schools.Body.UnidaysShare,E-posta adresin başkaları tarafından görülmeyecek.
 Feature.Schools.Body.UnidaysTerms,"Okul e-posta adresini doğrulamak için UNiDAYS ile iş birliği yapıyoruz. ""Devam Et"" düğmesine tıklayarak UNiDAYS'in Hizmet Koşullarını ve Gizlilik Politikasını kabul etmiş olursun."
+Feature.Schools.Body.UnidaysTermsCollege,"""Devam et""i seçerek UNiDAYS Hizmet Koşulları'nı kabul etmiş ve UNiDAYS'in üniversite e-posta adresini Gizlilik Politikası uyarınca kullanabileceğini onaylamış olursun."
 Feature.Schools.Caption.AlumniGroupOnGraduate,Mezun olduğunda {school} mezunlar grubuna katılacaksın.
 Feature.Schools.Caption.RemovedOnGraduate,Mezun olduğunda {school} okulundan çıkarılacaksın.
 Feature.Schools.Description.CantFindSchoolNotify,Okulun Roblox'ta olduğunda seni bilgilendireceğiz.
 Feature.Schools.Description.CantVerifySchool,Sağladığın bilgilere dayanarak okulunu doğrulayamadık.
 Feature.Schools.Description.ConnectWithFellowAlumni,Diğer mezunlarla bağlantı kur
 Feature.Schools.Description.FeatureAvailableBody,Okulundan arkadaşlarını bul.
+Feature.Schools.Description.FeatureAvailableBodyCollege,Üniversitenden arkadaşlarını bul.
 Feature.Schools.Description.InviteFriendsExclusiveItem,Doğrulama için başkalarını davet et. Okulun kullanıma sunulduğunda ücretsiz bir öğe kazan.
 Feature.Schools.Description.InviteFriendsUnlockSooner,Okulunun mezunlar grubunun daha kısa sürede kullanıma sunulmasına yardımcı ol.
 Feature.Schools.Description.InviteOthersToVerify,Başkalarını doğrulamaya davet et
@@ -5386,7 +5402,9 @@ Feature.Schools.Description.RemoveSchoolBody,Okuluna yeniden katılmak için oku
 Feature.Schools.Description.SchoolIsLiveBody,
 Feature.Schools.Description.SchoolUnavailableBody,Bu okul şu anda Roblox'ta mevcut değil.
 Feature.Schools.Description.UpsellDisclaimer,Okulun yalnızca aynı okuldan insanlar tarafından görülebilir. Okulunu istediğin zaman güncelleyebilir veya kaldırabilirsin.
+Feature.Schools.Description.UpsellDisclaimerCollege,Üniversiten yalnızca aynı üniversiteden insanlar tarafından görülebilir. Üniversiteni istediğin zaman güncelleyebilir veya kaldırabilirsin.
 Feature.Schools.Description.UpsellTagline,"Okulundaki doğrulanmış öğrencileri keşfet, onlarla bağlantı kur ve oyna."
+Feature.Schools.Description.UpsellTaglineCollege,"Üniversitendeki doğrulanmış öğrencileri keşfet, onlarla bağlantı kur ve oyna."
 Feature.Schools.Description.WaitlistAlumniBody,Artık tamamen hazırsın. Okulunun mezunlar grubu kullanıma sunulur sunulmaz seni bilgilendireceğiz.
 Feature.Schools.Description.WaitlistBody,Kurucu üyesin. Okulunuzu birlikte kullanıma sunmak için sınıf arkadaşlarını davet et.
 Feature.Schools.Error.AlreadyLinked,Bu e-posta adresi zaten başka bir hesaba bağlı.
@@ -5403,11 +5421,13 @@ Feature.Schools.Filter.AllYears,Tüm yıllar
 Feature.Schools.Filter.Apply,
 Feature.Schools.Filter.GradYear,Mezuniyet yılı
 Feature.Schools.GiftForYou,Senin için bir hediye
+Feature.Schools.Heading.AddCollege,Üniversite ekle
 Feature.Schools.Heading.AddSchool,Okul ekle
 Feature.Schools.Heading.AddSchoolNow,Sınıf arkadaşlarına katıl
 Feature.Schools.Heading.CantFindSchool,Okulunu bulamıyoruz
 Feature.Schools.Heading.CantVerifySchool,Okulunu doğrulayamıyoruz
 Feature.Schools.Heading.CheckYourEmail,E-postanı kontrol et
+Feature.Schools.Heading.EnterCollegeEmail,Üniversite e-posta adresini gir
 Feature.Schools.Heading.EnterSchoolEmail,Okul e-posta adresini gir
 Feature.Schools.Heading.InviteYourClassmates,Sınıf arkadaşlarını davet et
 Feature.Schools.Heading.InviteYourFriends,Arkadaşlarını davet et
@@ -5434,8 +5454,10 @@ Feature.Schools.Label.Search,
 Feature.Schools.Label.SuggestedEmail,Bunu mu demek istedin: {email}?
 Feature.Schools.Label.UnlockAlumniGroup,Mezun grubu beklemede
 Feature.Schools.Label.UpsellPerkFindFriends,Okulundan arkadaşlarını bul
+Feature.Schools.Label.UpsellPerkFindFriendsCollege,Üniversitenden arkadaşlarını bul
 Feature.Schools.Label.UpsellPerkPlayAndChat,Kimin çevrimiçi olduğunu gör ve kolayca birlikte oyna
 Feature.Schools.Label.UpsellPerkTrends,Okulundaki trendleri keşfet
+Feature.Schools.Label.UpsellPerkTrendsCollege,Üniversitenizdeki trendleri keşfedin
 Feature.Schools.Placeholder.Email,Öğrenci e-postası
 Feature.Schools.Placeholder.SchoolName,Okul adı
 Feature.Schools.Placeholder.SixDigitCode,6 basamaklı kod
