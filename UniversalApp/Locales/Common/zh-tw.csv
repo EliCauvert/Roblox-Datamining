@@ -113,7 +113,7 @@ Authentication.AccountPicker.Label.RemoveAccountCancel,
 Authentication.AccountPicker.Label.RemoveAccountDescription,除非再次登入，否則你將不會再在此裝置上看到此帳號。
 Authentication.AccountPicker.Label.RemoveAccountRemove,移除
 Authentication.AccountPicker.Label.SignedOut,已登出
-Authentication.AccountRecovery.Action.AddAPasskey,是，新增密碼金鑰
+Authentication.AccountRecovery.Action.AddAPasskey,是，建立新的密碼金鑰
 Authentication.AccountRecovery.Action.Continue,
 Authentication.AccountRecovery.Action.Delete,
 Authentication.AccountRecovery.Action.DeleteAll,移除變更
@@ -124,7 +124,7 @@ Authentication.AccountRecovery.Action.ResetPassword,重置密碼
 Authentication.AccountRecovery.Action.Save,保留
 Authentication.AccountRecovery.Action.SendCode,傳送驗證碼給我
 Authentication.AccountRecovery.Action.SkipAddingPasskey,否，略過此步驟
-Authentication.AccountRecovery.Action.UpdatePassword,更新密碼
+Authentication.AccountRecovery.Action.UpdatePassword,儲存密碼
 Authentication.AccountRecovery.Action.UseAnotherMethod,使用其他方式
 Authentication.AccountRecovery.Action.UseBackupCode,使用備份碼
 Authentication.AccountRecovery.Action.UseEmail,使用電子郵件地址
@@ -1662,6 +1662,7 @@ Feature.AppealsPortal.Description.AppealSubmittedUpdate,我們會將判定結果
 Feature.AppealsPortal.Description.AppealSubmittedUpdate.OptOut,除非已告知不想收到更多關於此上訴的通知，否則我們會將判定結果和所有處置的最新情況，傳送至所提供的電子郵件地址。
 Feature.AppealsPortal.Description.AppealsPortal,檢視過去的違規行為並管理你的上訴。所有內容和行為都必須遵守 {link}Roblox 社群標準{linkEnd}。
 Feature.AppealsPortal.Description.AskForReview,提交即表示你確認已解決此問題。我們將再次審核此{contentType}。
+Feature.AppealsPortal.Description.AskForReviewFallback,提交即表示你確認已解決此問題。我們將再次審核。
 Feature.AppealsPortal.Description.DetailsUnavailable,
 Feature.AppealsPortal.Description.FixByDate,請在 {date}前於 Studio 中解決問題，然後再回來請求審核。
 Feature.AppealsPortal.Description.IssueClosed,由於你決定瞭解我們的規則以免遭到停權，我們已將此問題關閉。
@@ -2577,7 +2578,7 @@ Feature.Build.Description.BuildReplyNotif,在組建回覆你時收到通知。
 Feature.Build.Description.BuyRobuxToCreate,購買更多 Robux 以繼續創作，或等待明天重置的免費組建使用量。
 Feature.Build.Description.BuyUsageOrWait,使用 Robux 購買更多組建使用量，或等待每日上限重置。
 Feature.Build.Description.CampaignRunDates,你的廣告在 {startDate}至 {endDate}期間投放。
-Feature.Build.Description.CaptureWhilePlaytesting,在試玩時截圖，然後將截圖新增至提示中。
+Feature.Build.Description.CaptureWhilePlaytesting,在試玩時截圖，以向組建顯示你看到的內容。
 Feature.Build.Description.ChooseAdCampaignLength,選擇廣告投放的時間長度。
 Feature.Build.Description.ChoosePlaytesters,選擇好友預覽你的遊戲。
 Feature.Build.Description.CreateDeveloperProduct,以 {PRICE} Robux 建立 {NAME}。目前還無法購買。
@@ -2686,9 +2687,9 @@ Feature.Build.Label.BackToBuild,返回建立
 Feature.Build.Label.Building,正在運作...
 Feature.Build.Label.CaptureLibrary,截圖資料庫
 Feature.Build.Label.CaptureSelectionCount,已選擇 {SELECTED_COUNT} 個，共 {MAX_SELECTIONS} 個
-Feature.Build.Label.CaptureStepAddImages,選擇「新增圖片」即可附加截圖
+Feature.Build.Label.CaptureStepAddImages,選擇「新增圖片」<b></b>即可將截圖新增至聊天
 Feature.Build.Label.CaptureStepPlaytest,試玩你的遊戲
-Feature.Build.Label.CaptureStepTapCamera,在「組建」工具列中選擇攝影機
+Feature.Build.Label.CaptureStepTapCamera,選擇畫面底部的攝影機圖示
 Feature.Build.Label.ContentRating,內容分級
 Feature.Build.Label.CreatedDate,{MONTH} {DAY}，{YEAR}
 Feature.Build.Label.CreatorHub,創作者中心
@@ -2698,6 +2699,7 @@ Feature.Build.Label.DefaultDeveloperProductName,開發者產品
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,已刪除
 Feature.Build.Label.DescribeIdea,描述想法
+Feature.Build.Label.DescribeIdeaOrPick,描述想法或從下方選擇一個
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,說明：{DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,名稱：{NAME}
@@ -3595,21 +3597,27 @@ Feature.CloudClient.Action.PlayWithoutCloudPlay,不使用 Cloud Play 遊玩
 Feature.CloudClient.Description.CloudPlayOffer,Cloud Play 會在 Roblox 的電腦上執行遊戲，因此載入速度可能會更快，而且當機次數也可能變少。這只會在你玩此遊戲時有效。
 Feature.CloudClient.Description.CloudPlayStopped,重新加入遊戲，即可在不使用 Cloud Play 的情況下繼續遊玩。
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle 為搶先預覽。畫面可能與原始遊戲看起來不同。
+Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName} 為搶先預覽。畫面可能與原始遊戲看起來不同。
 Feature.CloudClient.Description.RobloxRealityThanks,感謝你成為首批試用者之一。
 Feature.CloudClient.Heading.CloudPlayOffer,使用 Cloud Play 遊玩
 Feature.CloudClient.Heading.CloudPlayStopped,Cloud Play 已停止運作
 Feature.CloudClient.Heading.RobloxRealityFailed,Restyle 發生錯誤
+Feature.CloudClient.Heading.RobloxRealityFailedV2,{productName} 發生錯誤
 Feature.CloudClient.Heading.RobloxRealityTimeEnded,你在 Restyle 中的時間已結束
+Feature.CloudClient.Heading.RobloxRealityTimeEndedV2,你在 {productName} 中的時間已結束
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Cloud Play 尚未提供擷取功能。
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Restyle 尚未提供擷取功能。
+Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,{productName} 尚未提供擷取功能。
 Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Play 無法運作。你正在以一般模式遊玩。
 Feature.CloudClient.Label.RobloxReality,Restyle
 Feature.CloudClient.Label.RobloxRealityDemoLength,試玩 {minutes} 分鐘的示範版
 Feature.CloudClient.Label.RobloxRealityEndingSoon,Restyle 將於 1 分鐘後結束，屆時你將離開遊戲。
+Feature.CloudClient.Label.RobloxRealityEndingSoonV2,{productName} 將於 1 分鐘後結束，屆時你將離開遊戲。
 Feature.CloudClient.Label.RobloxRealityGraphics,你的遊戲，煥然一新
 Feature.CloudClient.Label.RobloxRealityPlusOnly,僅限 Plus 訂閱者使用
 Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,Cloud Play 尚未提供自身視角功能。
 Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,Restyle 尚未提供自身視角功能。
+Feature.CloudClient.Label.SelfViewUnavailableRobloxRealityV2,{productName} 尚未提供自身視角功能。
 Feature.CloudClient.Label.StillWeakConnection,你的網路連線仍然不穩定。
 Feature.CloudClient.Label.TimeLeft,
 Feature.CloudClient.Label.WeakConnection,連線不穩。
@@ -4435,9 +4443,15 @@ Feature.Moments.Description.EngagementFirstLike,立即檢視
 Feature.Moments.Description.EngagementFirstReaction,你的「美好時光」剛剛獲得了第一個反應！
 Feature.Moments.Description.EngagementLikedCommentsDigest,你的 {likedComments} 則留言獲得了讚
 Feature.Moments.Description.EngagementMomentDigest,{comments} 則新留言和 {milestone} 個反應
+Feature.Moments.Description.EngagementMomentFirstReactionDigest,{comments} 則新留言和第一個反應
+Feature.Moments.Description.EngagementMomentsCommentsDigest,你的「美好時光」有 {comments} 則新留言
 Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementMomentsReactionsDigest,你的「美好時光」獲得了反應
 Feature.Moments.Description.EngagementNewComment,剛剛在你的「美好時光」上留言
 Feature.Moments.Description.EngagementNewComments,和其他 {count} 人在你的「美好時光」上留言
+Feature.Moments.Description.EngagementNewCommentsOneOther,和其他 1 人在你的「美好時光」上留言
+Feature.Moments.Description.EngagementOneCommentDigest,1 則新留言和 {milestone} 個反應
+Feature.Moments.Description.EngagementOneCommentFirstReactionDigest,1 則新留言和第一個反應
 Feature.Moments.Description.EngagementReactionMilestone,{count} 個新反應
 Feature.Moments.Description.FollowingCaughtUpBody,你已觀看此饋送中所有新的「美好時光」。切換饋送以檢視更多內容。
 Feature.Moments.Description.FollowingEmptyBodyRecommended,你將在此處看到追蹤創作者的「美好時光」。
@@ -5413,12 +5427,14 @@ Feature.Schools.Action.UnidaysTermsOfService,UNiDAYS 服務條款
 Feature.Schools.Body.EnterCode,UNiDAYS 已傳送一封包含一次性代碼的電子郵件至 {user_email}。請在下方輸入代碼以確認你的學校。
 Feature.Schools.Body.UnidaysShare,其他人不會看到你的電子郵件地址。
 Feature.Schools.Body.UnidaysTerms,我們與 UNiDAYS 合作驗證你的學校電子郵件地址。按一下「繼續」，即表示你同意 UNiDAYS 的服務條款與隱私權政策。
+Feature.Schools.Body.UnidaysTermsCollege,選擇「繼續」即表示你同意 UNiDAYS 的服務條款，並確認 UNiDAYS 可能會根據隱私權政策，使用你的大學電子郵件地址。
 Feature.Schools.Caption.AlumniGroupOnGraduate,畢業後，你將加入{school}的校友群組。
 Feature.Schools.Caption.RemovedOnGraduate,畢業後，你將從{school}中移除。
 Feature.Schools.Description.CantFindSchoolNotify,我們會在你的學校加入 Roblox 時通知你。
 Feature.Schools.Description.CantVerifySchool,根據你提供的資訊，我們無法驗證你的學校。
 Feature.Schools.Description.ConnectWithFellowAlumni,與其他校友交流互動
 Feature.Schools.Description.FeatureAvailableBody,尋找校內好友。
+Feature.Schools.Description.FeatureAvailableBodyCollege,尋找來自同所大學的好友。
 Feature.Schools.Description.InviteFriendsExclusiveItem,邀請其他人驗證。學校群組設立成功時，你可以獲得免費道具。
 Feature.Schools.Description.InviteFriendsUnlockSooner,加快校友群組設立的進度。
 Feature.Schools.Description.InviteOthersToVerify,邀請其他人驗證
@@ -5429,7 +5445,9 @@ Feature.Schools.Description.RemoveSchoolBody,你必須重新驗證學校的電�
 Feature.Schools.Description.SchoolIsLiveBody,
 Feature.Schools.Description.SchoolUnavailableBody,此學校目前無法用於 Roblox。
 Feature.Schools.Description.UpsellDisclaimer,只有同所學校的使用者會看到你的校名。你可以隨時更新或移除學校。
+Feature.Schools.Description.UpsellDisclaimerCollege,只有同所大學的使用者會看到你的學校。你可以隨時更新或移除大學。
 Feature.Schools.Description.UpsellTagline,探索、交流並與校內經驗證的學生一起遊玩。
+Feature.Schools.Description.UpsellTaglineCollege,探索、交流並與同所大學的已驗證學生一起遊玩。
 Feature.Schools.Description.WaitlistAlumniBody,你已準備就緒。學校的校友群組設立後，我們會立即通知你。
 Feature.Schools.Description.WaitlistBody,你是創始成員，快邀請同學一起設立學校群組。
 Feature.Schools.Error.AlreadyLinked,此電子郵件地址已連結到其他帳號。
@@ -5446,11 +5464,13 @@ Feature.Schools.Filter.AllYears,所有年份
 Feature.Schools.Filter.Apply,
 Feature.Schools.Filter.GradYear,畢業年份
 Feature.Schools.GiftForYou,專屬於你的禮物
+Feature.Schools.Heading.AddCollege,新增大學
 Feature.Schools.Heading.AddSchool,新增學校
 Feature.Schools.Heading.AddSchoolNow,加入同學的行列
 Feature.Schools.Heading.CantFindSchool,我們找不到你的學校
 Feature.Schools.Heading.CantVerifySchool,我們無法驗證你的學校
 Feature.Schools.Heading.CheckYourEmail,
+Feature.Schools.Heading.EnterCollegeEmail,輸入你的大學電子郵件
 Feature.Schools.Heading.EnterSchoolEmail,輸入你的學校電子郵件
 Feature.Schools.Heading.InviteYourClassmates,邀請同學
 Feature.Schools.Heading.InviteYourFriends,
@@ -5477,8 +5497,10 @@ Feature.Schools.Label.Search,
 Feature.Schools.Label.SuggestedEmail,是否想輸入「{email}」？
 Feature.Schools.Label.UnlockAlumniGroup,校友群組擱置
 Feature.Schools.Label.UpsellPerkFindFriends,尋找校內的好友
+Feature.Schools.Label.UpsellPerkFindFriendsCollege,尋找來自同所大學的好友
 Feature.Schools.Label.UpsellPerkPlayAndChat,查看誰在線上，輕輕鬆鬆就能一起遊玩
 Feature.Schools.Label.UpsellPerkTrends,探索貴校的趨勢
+Feature.Schools.Label.UpsellPerkTrendsCollege,探索貴校趨勢
 Feature.Schools.Placeholder.Email,學生電子郵件
 Feature.Schools.Placeholder.SchoolName,學校名稱
 Feature.Schools.Placeholder.SixDigitCode,6 位數代碼
@@ -5788,7 +5810,7 @@ Feature.UniversalShareSheet.Response.SharedMessage,訊息已傳送
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} 和另外 {N} 人
 Feature.UserLibrary.Label.MyLibrary,我的收藏庫
-Feature.VIPServer.Message.TooManyFreeServersOnGame,無法在此體驗擁有更多免費私人伺服器。
+Feature.VIPServer.Message.TooManyFreeServersOnGame,無法在此遊戲擁有更多免費私人伺服器。
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,無法啟用更多免費私人伺服器，請先停用其他伺服器。
 Feature.VerificationUpsell.Action.AddPhone,
 Feature.VerificationUpsell.Action.AddPhoneVoice,新增手機號碼以使用語音聊天

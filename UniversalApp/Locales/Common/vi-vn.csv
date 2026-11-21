@@ -114,7 +114,7 @@ Authentication.AccountPicker.Label.RemoveAccountCancel,
 Authentication.AccountPicker.Label.RemoveAccountDescription,"Bạn sẽ không còn thấy tài khoản này trên thiết bị nữa, trừ khi bạn đăng nhập lại."
 Authentication.AccountPicker.Label.RemoveAccountRemove,Xóa bỏ
 Authentication.AccountPicker.Label.SignedOut,Đã đăng xuất
-Authentication.AccountRecovery.Action.AddAPasskey,"Có, thêm mã xác nhận mới"
+Authentication.AccountRecovery.Action.AddAPasskey,"Có, tạo mã xác nhận mới"
 Authentication.AccountRecovery.Action.Continue,
 Authentication.AccountRecovery.Action.Delete,Xóa
 Authentication.AccountRecovery.Action.DeleteAll,Xóa thay đổi
@@ -125,7 +125,7 @@ Authentication.AccountRecovery.Action.ResetPassword,Đặt lại mật khẩu
 Authentication.AccountRecovery.Action.Save,Giữ
 Authentication.AccountRecovery.Action.SendCode,Gửi mã cho tôi
 Authentication.AccountRecovery.Action.SkipAddingPasskey,"Không, bỏ qua bước này"
-Authentication.AccountRecovery.Action.UpdatePassword,Cập nhật mật khẩu
+Authentication.AccountRecovery.Action.UpdatePassword,Lưu mật khẩu
 Authentication.AccountRecovery.Action.UseAnotherMethod,Sử dụng phương thức khác
 Authentication.AccountRecovery.Action.UseBackupCode,Sử dụng mã dự phòng
 Authentication.AccountRecovery.Action.UseEmail,Sử dụng email
@@ -1663,6 +1663,7 @@ Feature.AppealsPortal.Description.AppealSubmittedUpdate,Chúng tôi sẽ gửi t
 Feature.AppealsPortal.Description.AppealSubmittedUpdate.OptOut,"Chúng tôi sẽ gửi thông báo về quyết định và mọi biện pháp xử lý mà chúng tôi đưa ra đến địa chỉ email bạn đã cung cấp, trừ phi bạn đã chọn không nhận thêm thông tin trao đổi về khiếu nại này."
 Feature.AppealsPortal.Description.AppealsPortal,Xem các trường hợp vi phạm trước đây và quản lý yêu cầu khiếu nại của bạn. Mọi nội dung và hành vi phải tuân thủ {link}Tiêu chuẩn cộng đồng của Roblox{linkEnd}.
 Feature.AppealsPortal.Description.AskForReview,Bạn đang xác nhận rằng mình đã khắc phục vấn đề này. Chúng tôi sẽ xem xét lại {contentType} này.
+Feature.AppealsPortal.Description.AskForReviewFallback,Bạn đang xác nhận rằng mình đã khắc phục vấn đề này. Chúng tôi sẽ xem xét lại nội dung này.
 Feature.AppealsPortal.Description.DetailsUnavailable,
 Feature.AppealsPortal.Description.FixByDate,"Hãy khắc phục sự cố trong Studio chậm nhất vào ngày {date}, sau đó quay lại và yêu cầu xem xét."
 Feature.AppealsPortal.Description.IssueClosed,Chúng tôi đã đóng vấn đề này vì bạn đã quyết định tìm hiểu một trong các quy tắc của chúng tôi để tránh bị đình chỉ.
@@ -2578,7 +2579,7 @@ Feature.Build.Description.BuildReplyNotif,Nhận thông báo khi Build gửi ph�
 Feature.Build.Description.BuyRobuxToCreate,Hãy mua thêm Robux để tiếp tục sáng tạo hoặc chờ đến ngày mai để lượt sử dụng Build miễn phí của bạn được làm mới.
 Feature.Build.Description.BuyUsageOrWait,"Dùng Robux để mua thêm lượt sử dụng Build, hoặc đợi hạn mức hằng ngày được làm mới."
 Feature.Build.Description.CampaignRunDates,Quảng cáo của bạn chạy từ {startDate} – {endDate}.
-Feature.Build.Description.CaptureWhilePlaytesting,"Chụp ảnh trong lúc chơi thử, rồi thêm ảnh đó vào câu lệnh của bạn."
+Feature.Build.Description.CaptureWhilePlaytesting,Chụp ảnh trong lúc chơi thử để cho tính năng Tạo dựng xem những gì bạn thấy.
 Feature.Build.Description.ChooseAdCampaignLength,Chọn thời gian bạn muốn chạy quảng cáo.
 Feature.Build.Description.ChoosePlaytesters,Chọn bạn bè để xem trước trò chơi của bạn.
 Feature.Build.Description.CreateDeveloperProduct,Tạo {NAME} với giá {PRICE} Robux. Người dùng sẽ chưa thể mua sản phẩm này.
@@ -2687,9 +2688,9 @@ Feature.Build.Label.BackToBuild,Quay lại phần Xây dựng
 Feature.Build.Label.Building,Đang hoạt động...
 Feature.Build.Label.CaptureLibrary,Thư viện ảnh/video
 Feature.Build.Label.CaptureSelectionCount,Đã chọn {SELECTED_COUNT}/{MAX_SELECTIONS}
-Feature.Build.Label.CaptureStepAddImages,Chọn Thêm hình ảnh để đính kèm ảnh chụp của bạn
+Feature.Build.Label.CaptureStepAddImages,Chọn <b>Thêm hình ảnh</b> để thêm ảnh chụp của bạn vào cuộc trò chuyện
 Feature.Build.Label.CaptureStepPlaytest,Chơi thử trò chơi của bạn
-Feature.Build.Label.CaptureStepTapCamera,Chọn camera trong thanh công cụ Dựng
+Feature.Build.Label.CaptureStepTapCamera,Chọn biểu tượng camera ở cuối màn hình
 Feature.Build.Label.ContentRating,Mức phân loại nội dung
 Feature.Build.Label.CreatedDate,{DAY} {MONTH} năm {YEAR}
 Feature.Build.Label.CreatorHub,Trung tâm nhà sáng tạo
@@ -2699,6 +2700,7 @@ Feature.Build.Label.DefaultDeveloperProductName,sản phẩm của nhà phát tr
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,Đã xóa
 Feature.Build.Label.DescribeIdea,Mô tả ý tưởng
+Feature.Build.Label.DescribeIdeaOrPick,Mô tả ý tưởng hoặc chọn một ý tưởng bên dưới
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,Mô tả: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Tên: {NAME}
@@ -3596,21 +3598,27 @@ Feature.CloudClient.Action.PlayWithoutCloudPlay,Chơi mà không dùng Cloud Pla
 Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play chạy trò chơi bằng các máy tính của Roblox, do đó trò chơi có thể tải nhanh hơn và ít bị sập hơn. Tính năng này chỉ hoạt động khi bạn đang chơi trò chơi này."
 Feature.CloudClient.Description.CloudPlayStopped,Hãy tham gia lại trò chơi để tiếp tục chơi mà không dùng Cloud Play.
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle là bản xem trước sớm. Hình ảnh có thể khác so với trò chơi gốc.
+Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName} là bản xem trước sớm. Hình ảnh có thể khác so với trò chơi gốc.
 Feature.CloudClient.Description.RobloxRealityThanks,Cảm ơn bạn đã là một trong những người đầu tiên trải nghiệm tính năng này.
 Feature.CloudClient.Heading.CloudPlayOffer,Chơi với Cloud Play
 Feature.CloudClient.Heading.CloudPlayStopped,Cloud Play đã ngừng hoạt động
 Feature.CloudClient.Heading.RobloxRealityFailed,Đã xảy ra sự cố với Restyle
+Feature.CloudClient.Heading.RobloxRealityFailedV2,Đã xảy ra sự cố với {productName}
 Feature.CloudClient.Heading.RobloxRealityTimeEnded,Thời gian trải nghiệm Restyle của bạn đã kết thúc
+Feature.CloudClient.Heading.RobloxRealityTimeEndedV2,Thời gian trải nghiệm {productName} của bạn đã kết thúc
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Cloud Play chưa hỗ trợ tính năng Chụp.
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Restyle chưa hỗ trợ tính năng Chụp.
+Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,{productName} chưa hỗ trợ tính năng Chụp.
 Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Play không hoạt động. Bạn đang chơi ở chế độ bình thường.
 Feature.CloudClient.Label.RobloxReality,Restyle
 Feature.CloudClient.Label.RobloxRealityDemoLength,Dùng thử bản demo {minutes} phút
 Feature.CloudClient.Label.RobloxRealityEndingSoon,"Restyle sẽ kết thúc sau 1 phút, và khi đó bạn sẽ rời khỏi trò chơi."
+Feature.CloudClient.Label.RobloxRealityEndingSoonV2,"{productName} sẽ kết thúc sau 1 phút, và khi đó bạn sẽ rời khỏi trò chơi."
 Feature.CloudClient.Label.RobloxRealityGraphics,"Trò chơi của bạn, khoác diện mạo mới"
 Feature.CloudClient.Label.RobloxRealityPlusOnly,Chỉ dành cho người đăng ký Plus
 Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,Cloud Play chưa hỗ trợ chế độ Tự xem.
 Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,Restyle chưa hỗ trợ chế độ Tự xem.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxRealityV2,{productName} chưa hỗ trợ chế độ Tự xem.
 Feature.CloudClient.Label.StillWeakConnection,Kết nối của bạn vẫn yếu.
 Feature.CloudClient.Label.TimeLeft,
 Feature.CloudClient.Label.WeakConnection,Kết nối yếu.
@@ -4436,9 +4444,15 @@ Feature.Moments.Description.EngagementFirstLike,Xem ngay
 Feature.Moments.Description.EngagementFirstReaction,Đã có người đầu tiên bày tỏ cảm xúc với Khoảnh khắc của bạn!
 Feature.Moments.Description.EngagementLikedCommentsDigest,{likedComments} bình luận của bạn đã nhận được lượt thích
 Feature.Moments.Description.EngagementMomentDigest,{comments} bình luận mới và {milestone} lượt bày tỏ cảm xúc
+Feature.Moments.Description.EngagementMomentFirstReactionDigest,{comments} bình luận mới và lượt bày tỏ cảm xúc đầu tiên
+Feature.Moments.Description.EngagementMomentsCommentsDigest,{comments} bình luận mới về Khoảnh khắc của bạn
 Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementMomentsReactionsDigest,Các Khoảnh khắc của bạn đang nhận được nhiều lượt bày tỏ cảm xúc
 Feature.Moments.Description.EngagementNewComment,vừa bình luận về Khoảnh khắc của bạn
 Feature.Moments.Description.EngagementNewComments,và {count} người khác đã bình luận về Khoảnh khắc của bạn
+Feature.Moments.Description.EngagementNewCommentsOneOther,và 1 người khác đã bình luận về Khoảnh khắc của bạn
+Feature.Moments.Description.EngagementOneCommentDigest,1 bình luận mới và {milestone} lượt bày tỏ cảm xúc
+Feature.Moments.Description.EngagementOneCommentFirstReactionDigest,1 bình luận mới và lượt bày tỏ cảm xúc đầu tiên
 Feature.Moments.Description.EngagementReactionMilestone,{count} lượt bày tỏ cảm xúc mới
 Feature.Moments.Description.FollowingCaughtUpBody,Bạn đã xem hết Khoảnh khắc mới trong bảng tin này. Hãy chuyển sang bảng tin khác để xem thêm.
 Feature.Moments.Description.FollowingEmptyBodyRecommended,"Tại đây, bạn sẽ xem được Khoảnh khắc của các nhà sáng tạo mà bạn đang theo dõi."
@@ -5414,12 +5428,14 @@ Feature.Schools.Action.UnidaysTermsOfService,Điều khoản dịch vụ của U
 Feature.Schools.Body.EnterCode,UNiDAYS đã gửi email chứa mã dùng một lần dành cho bạn đến {user_email}. Hãy nhập mã đó vào phần bên dưới để xác nhận trường học của bạn.
 Feature.Schools.Body.UnidaysShare,Người khác sẽ không nhìn thấy địa chỉ email của bạn.
 Feature.Schools.Body.UnidaysTerms,"Chúng tôi hợp tác với UNiDAYS để xác minh địa chỉ email do trường bạn học cấp. Khi nhấp chuột vào ""Tiếp tục"", bạn đồng ý với Điều khoản dịch vụ và Chính sách quyền riêng tư của UNiDAYS."
+Feature.Schools.Body.UnidaysTermsCollege,"Khi chọn ""Tiếp tục"", bạn đồng ý với Điều khoản dịch vụ của UNiDAYS và xác nhận rằng UNiDAYS có thể sử dụng địa chỉ email do trường đại học của bạn cấp theo Chính sách quyền riêng tư của họ."
 Feature.Schools.Caption.AlumniGroupOnGraduate,"Sau khi tốt nghiệp, bạn sẽ ở trong nhóm cựu học sinh {school}."
 Feature.Schools.Caption.RemovedOnGraduate,"Sau khi tốt nghiệp, bạn sẽ bị xóa khỏi {school}."
 Feature.Schools.Description.CantFindSchoolNotify,Chúng tôi sẽ thông báo cho bạn khi trường học của bạn có trên Roblox.
 Feature.Schools.Description.CantVerifySchool,"Dựa trên thông tin bạn đã cung cấp, chúng tôi không xác minh được trường học của bạn."
 Feature.Schools.Description.ConnectWithFellowAlumni,Kết nối với những cựu học sinh khác
 Feature.Schools.Description.FeatureAvailableBody,Tìm bạn bè học cùng trường với bạn.
+Feature.Schools.Description.FeatureAvailableBodyCollege,Tìm bạn bè học cùng trường đại học với bạn.
 Feature.Schools.Description.InviteFriendsExclusiveItem,Mời người khác xác minh. Nhận vật phẩm miễn phí khi trường học của bạn ra mắt.
 Feature.Schools.Description.InviteFriendsUnlockSooner,Giúp ra mắt nhóm cựu học sinh của trường bạn sớm hơn.
 Feature.Schools.Description.InviteOthersToVerify,Mời người khác xác minh
@@ -5430,7 +5446,9 @@ Feature.Schools.Description.RemoveSchoolBody,Bạn sẽ phải xác minh lại �
 Feature.Schools.Description.SchoolIsLiveBody,
 Feature.Schools.Description.SchoolUnavailableBody,Trường học này hiện chưa hoạt động trên Roblox.
 Feature.Schools.Description.UpsellDisclaimer,Chỉ những người học cùng trường với bạn mới thấy trường bạn học. Bạn có thể cập nhật hoặc xóa thông tin trường học của mình bất cứ lúc nào.
+Feature.Schools.Description.UpsellDisclaimerCollege,Chỉ những người học cùng trường đại học với bạn mới thấy trường đại học của bạn. Bạn có thể cập nhật hoặc xóa thông tin trường đại học của mình bất cứ lúc nào.
 Feature.Schools.Description.UpsellTagline,"Khám phá, kết nối và vui chơi cùng những học sinh đã được xác minh là học cùng trường với bạn."
+Feature.Schools.Description.UpsellTaglineCollege,"Khám phá, kết nối và vui chơi với những sinh viên đã được xác minh là học cùng trường đại học với bạn."
 Feature.Schools.Description.WaitlistAlumniBody,Mọi thứ đã sẵn sàng. Chúng tôi sẽ thông báo cho bạn ngay khi nhóm cựu học sinh của trường bạn được ra mắt.
 Feature.Schools.Description.WaitlistBody,Bạn là thành viên sáng lập. Hãy mời bạn cùng lớp tham gia để cùng nhau ra mắt trường học của bạn.
 Feature.Schools.Error.AlreadyLinked,Địa chỉ email này đã được liên kết với một tài khoản khác.
@@ -5447,11 +5465,13 @@ Feature.Schools.Filter.AllYears,Tất cả năm
 Feature.Schools.Filter.Apply,
 Feature.Schools.Filter.GradYear,Năm tốt nghiệp
 Feature.Schools.GiftForYou,Quà tặng dành cho bạn
+Feature.Schools.Heading.AddCollege,Thêm trường đại học
 Feature.Schools.Heading.AddSchool,Thêm trường học
 Feature.Schools.Heading.AddSchoolNow,Tham gia với bạn cùng lớp
 Feature.Schools.Heading.CantFindSchool,Chúng tôi không tìm thấy trường học của bạn
 Feature.Schools.Heading.CantVerifySchool,Chúng tôi không xác minh được trường học của bạn
 Feature.Schools.Heading.CheckYourEmail,Kiểm tra email của bạn
+Feature.Schools.Heading.EnterCollegeEmail,Nhập email do trường đại học của bạn cấp
 Feature.Schools.Heading.EnterSchoolEmail,Nhập email do trường bạn học cấp
 Feature.Schools.Heading.InviteYourClassmates,Mời bạn cùng lớp
 Feature.Schools.Heading.InviteYourFriends,
@@ -5478,8 +5498,10 @@ Feature.Schools.Label.Search,
 Feature.Schools.Label.SuggestedEmail,Ý bạn là {email}?
 Feature.Schools.Label.UnlockAlumniGroup,Nhóm cựu học sinh đang chờ xử lý
 Feature.Schools.Label.UpsellPerkFindFriends,Tìm bạn bè học cùng trường với bạn
+Feature.Schools.Label.UpsellPerkFindFriendsCollege,Tìm bạn bè học cùng trường đại học với bạn
 Feature.Schools.Label.UpsellPerkPlayAndChat,Dễ dàng biết ai đang trực tuyến để chơi cùng nhau
 Feature.Schools.Label.UpsellPerkTrends,Khám phá xu hướng tại trường bạn học
+Feature.Schools.Label.UpsellPerkTrendsCollege,Khám phá xu hướng tại trường đại học của bạn
 Feature.Schools.Placeholder.Email,Email học sinh/sinh viên
 Feature.Schools.Placeholder.SchoolName,Tên trường
 Feature.Schools.Placeholder.SixDigitCode,

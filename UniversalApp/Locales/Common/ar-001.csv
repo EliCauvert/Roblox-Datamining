@@ -351,6 +351,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"عذراً، حدثت مش
 
 الرجاء الانتظار والمحاولة مرة أخرى."
 Authentication.Login.Label.ConnectionError.Title,خطأ في الاتصال
+Authentication.Login.Label.DontHaveARobloxAccountCreateOne,ليس لديك حساب على Roblox؟ {startTag}أنشئ حسابًا{endTag}
 Authentication.Login.Label.DontHaveAnAccountCreateOne,أليس لديك حساب؟ {startTag}أنشئ حسابًا{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,عنوان البريد الإلكتروني
@@ -4063,6 +4064,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,تم تشغيل الإشعار�
 Feature.GameJoin.Description.DifferentServer,ستبدأ في خادم مختلف
 Feature.GameJoin.Label.PlayTogether,يمكنكما اللعب معًا
 Feature.GameJoin.Label.PlayTogetherSoon,يمكنكما اللعب معًا قريبًا
+Feature.GameJoin.Label.Played,تم اللعب
 Feature.GameJoin.Label.RecentCoplay,لعبتما معًا مؤخرًا
 Feature.GamePage.Action.BackToTop,العودة إلى الأعلى
 Feature.GamePage.Label.Ad,

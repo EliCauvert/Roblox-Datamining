@@ -114,7 +114,7 @@ Authentication.AccountPicker.Label.RemoveAccountCancel,
 Authentication.AccountPicker.Label.RemoveAccountDescription,"Ya no verás esta cuenta en este dispositivo, a menos que inicies sesión de nuevo."
 Authentication.AccountPicker.Label.RemoveAccountRemove,Eliminar
 Authentication.AccountPicker.Label.SignedOut,Sesión cerrada
-Authentication.AccountRecovery.Action.AddAPasskey,"Sí, agregar una nueva clave de acceso"
+Authentication.AccountRecovery.Action.AddAPasskey,"Sí, crear nueva llave de acceso"
 Authentication.AccountRecovery.Action.Continue,Continuar
 Authentication.AccountRecovery.Action.Delete,
 Authentication.AccountRecovery.Action.DeleteAll,Eliminar cambios
@@ -125,7 +125,7 @@ Authentication.AccountRecovery.Action.ResetPassword,Restablecer contraseña
 Authentication.AccountRecovery.Action.Save,Guardar
 Authentication.AccountRecovery.Action.SendCode,Envíame un código
 Authentication.AccountRecovery.Action.SkipAddingPasskey,"No, omitir este paso"
-Authentication.AccountRecovery.Action.UpdatePassword,Actualizar contraseña
+Authentication.AccountRecovery.Action.UpdatePassword,Guardar contraseña
 Authentication.AccountRecovery.Action.UseAnotherMethod,Usar otro método
 Authentication.AccountRecovery.Action.UseBackupCode,Usar código de respaldo
 Authentication.AccountRecovery.Action.UseEmail,Usar correo electrónico
@@ -1664,6 +1664,7 @@ Feature.AppealsPortal.Description.AppealSubmittedUpdate,Enviaremos una actualiza
 Feature.AppealsPortal.Description.AppealSubmittedUpdate.OptOut,"Enviaremos una actualización con nuestra decisión y cualquier acción tomada a la dirección de correo electrónico proporcionada, a menos que nos informaste que no quieres recibit más comunicación sobre este asunto."
 Feature.AppealsPortal.Description.AppealsPortal,Mira las infracciones pasadas y gestiona tus apelaciones. Todo el contenido y comportamiento deben adherir a las {link}Normas de la comunidad de Roblox{linkEnd}
 Feature.AppealsPortal.Description.AskForReview,Estás confirmando que solucionaste este problema. Revisaremos este {contentType} de nuevo.
+Feature.AppealsPortal.Description.AskForReviewFallback,Estás confirmando que solucionaste este problema. Lo revisaremos de nuevo.
 Feature.AppealsPortal.Description.DetailsUnavailable,
 Feature.AppealsPortal.Description.FixByDate,"Corrige el problema en Studio antes del {date}, luego regresa y solicita una revisión."
 Feature.AppealsPortal.Description.IssueClosed,Cerramos este problema porque decidiste familiarizarte con una de nuestras reglas para evitar una suspensión.
@@ -2579,7 +2580,7 @@ Feature.Build.Description.BuildReplyNotif,Recibe una notificación cuando la com
 Feature.Build.Description.BuyRobuxToCreate,Compra más Robux para seguir creando o espera a que tu uso gratuito de la compilación se restablezca mañana.
 Feature.Build.Description.BuyUsageOrWait,Compra más uso de la compilación con Robux o espera a que se restablezca tu límite diario.
 Feature.Build.Description.CampaignRunDates,Tu anuncio se publicará del {startDate} al {endDate}.
-Feature.Build.Description.CaptureWhilePlaytesting,Toma una captura mientras pruebas el juego y luego agrégala a tu prompt.
+Feature.Build.Description.CaptureWhilePlaytesting,Toma una captura mientras pruebas el juego para mostrarle a Build lo que ves.
 Feature.Build.Description.ChooseAdCampaignLength,Elige por cuánto tiempo quieres publicar tu anuncio.
 Feature.Build.Description.ChoosePlaytesters,Elige amistades para que previsualicen tu juego.
 Feature.Build.Description.CreateDeveloperProduct,Crea {NAME} por {PRICE} Robux. Todavía no estará disponible para comprar.
@@ -2679,6 +2680,8 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,Todos los juegos
 Feature.Build.Label.AmountAvailable,{AMOUNT} disponible
+Feature.Build.Label.AttachmentCountPlural, {count} conexiones
+Feature.Build.Label.AttachmentCountSingular,1 archivo adjunto
 Feature.Build.Label.Autosaved,Guardado automáticamente
 Feature.Build.Label.Available,disponible
 Feature.Build.Label.AvailableForPurchase,Disponible para su compra
@@ -2686,9 +2689,9 @@ Feature.Build.Label.BackToBuild,Volver a Crear
 Feature.Build.Label.Building,Trabajando…
 Feature.Build.Label.CaptureLibrary,Biblioteca de capturas
 Feature.Build.Label.CaptureSelectionCount,{SELECTED_COUNT} de {MAX_SELECTIONS} seleccionados
-Feature.Build.Label.CaptureStepAddImages,Selecciona Añadir imágenes para adjuntar tu captura.
+Feature.Build.Label.CaptureStepAddImages,Selecciona <b>Añadir imágenes</b> para agregar tu captura al chat
 Feature.Build.Label.CaptureStepPlaytest,Prueba tu juego
-Feature.Build.Label.CaptureStepTapCamera,Selecciona la cámara en la barra de herramientas de Creación.
+Feature.Build.Label.CaptureStepTapCamera,Selecciona el ícono de la cámara en la parte inferior de la pantalla
 Feature.Build.Label.ContentRating,Clasificación de contenido
 Feature.Build.Label.CreatedDate,"{DAY} {MONTH}, {YEAR}"
 Feature.Build.Label.CreatorHub,
@@ -2698,6 +2701,7 @@ Feature.Build.Label.DefaultDeveloperProductName,producto del desarrollador
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,Eliminado
 Feature.Build.Label.DescribeIdea,Describe una idea
+Feature.Build.Label.DescribeIdeaOrPick,Describe una idea o elige una de las siguientes
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,Descripción: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Nombre: {NAME}
@@ -2722,6 +2726,7 @@ Feature.Build.Label.IconThumbnails,Ícono y miniaturas
 Feature.Build.Label.Images2D,Imágenes 2D
 Feature.Build.Label.InProgress,En curso
 Feature.Build.Label.InputNeeded,Se necesita una entrada
+Feature.Build.Label.InspirationTab,Inspiración
 Feature.Build.Label.InternalSpec,Especificación interna
 Feature.Build.Label.InternalTesting,Pruebas internas
 Feature.Build.Label.InviteCount,{COUNT}/{MAX_INVITES}
@@ -3589,11 +3594,35 @@ Feature.Chat.RobloxConnectUnavailableWithUser,"En este momento, Roblox Connect n
 Feature.Chat.Text.NoFriends,"Aún no has añadido ningún amigo. Para empezar, encuentra y añade tus amigos en Roblox."
 Feature.Chat.Title.NewChat,Nuevo chat
 Feature.Chat.Toast.Error.InvalidUserSelected,Hay una o más personas en esta lista que no se pueden añadir
+Feature.CloudClient.Action.JoinWithoutCloudPlay,Unirse sin Cloud Play
 Feature.CloudClient.Action.PlayWithoutCloudPlay,Jugar sin Cloud Play
 Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play ejecuta el juego en las computadoras de Roblox, por lo que puede cargarse más rápido y tener menos fallas. Solo dura mientras juegas este juego."
+Feature.CloudClient.Description.CloudPlayStopped,Vuelve a unirte al juego para seguir jugando sin Cloud Play.
+Feature.CloudClient.Description.RobloxRealityPreview,Restyle es una vista previa anticipada. Las cosas pueden verse diferentes al juego original.
+Feature.CloudClient.Description.RobloxRealityPreviewV2,Esta es la versión preliminar de {productName}. Algunas cosas pueden verse diferentes al juego original.
+Feature.CloudClient.Description.RobloxRealityThanks,Gracias por ser uno de los primeros en probarlo.
 Feature.CloudClient.Heading.CloudPlayOffer,Jugar con Cloud Play
+Feature.CloudClient.Heading.CloudPlayStopped,Cloud Play dejó de funcionar
+Feature.CloudClient.Heading.RobloxRealityFailed,Algo salió mal con Restyle
+Feature.CloudClient.Heading.RobloxRealityFailedV2,Algo salió mal con {productName}
+Feature.CloudClient.Heading.RobloxRealityTimeEnded,Tu tiempo en Restyle finalizó
+Feature.CloudClient.Heading.RobloxRealityTimeEndedV2,Tu tiempo en {productName} finalizó
+Feature.CloudClient.Label.CaptureUnavailableCloudPlay,La captura aún no está disponible en Cloud Play.
+Feature.CloudClient.Label.CaptureUnavailableRobloxReality,La captura aún no está disponible con Restyle.
+Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,La captura aún no está disponible con {productName}.
+Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Play no funciona. Estás jugando normalmente.
+Feature.CloudClient.Label.RobloxReality,Restyle
+Feature.CloudClient.Label.RobloxRealityDemoLength,Prueba una demostración de {minutes} minuto
+Feature.CloudClient.Label.RobloxRealityEndingSoon,Restyle termina en 1 minuto y saldrás del juego.
+Feature.CloudClient.Label.RobloxRealityEndingSoonV2,{productName} termina en 1 minuto y saldrás del juego.
 Feature.CloudClient.Label.RobloxRealityGraphics,"Tu juego, reinventado"
 Feature.CloudClient.Label.RobloxRealityPlusOnly,Solo para suscriptores Plus
+Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,La vista propia aún no está disponible en Cloud Play.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,La vista propia aún no está disponible con Restyle.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxRealityV2,La vista propia aún no está disponible con {productName}.
+Feature.CloudClient.Label.StillWeakConnection,Tu conexión sigue siendo débil.
+Feature.CloudClient.Label.TimeLeft,
+Feature.CloudClient.Label.WeakConnection,Conexión débil.
 Feature.CommunityLinks.Description.CommunityDefault,Únete a la comunidad oficial de Guilded de {experienceName} para ver anuncios y más.
 Feature.CommunityLinks.Heading.CommunityTitle,Únete a la comunidad
 Feature.CommunityLinks.Label.ViewButton,
@@ -4416,9 +4445,15 @@ Feature.Moments.Description.EngagementFirstLike,Verlo ahora
 Feature.Moments.Description.EngagementFirstReaction,¡Tu Momento acaba de recibir su primera reacción!
 Feature.Moments.Description.EngagementLikedCommentsDigest,{likedComments} de tus comentarios recibieron Me gusta
 Feature.Moments.Description.EngagementMomentDigest,{comments} comentarios nuevos y {milestone} reacciones
+Feature.Moments.Description.EngagementMomentFirstReactionDigest,{comments} comentarios nuevos y su primera reacción
+Feature.Moments.Description.EngagementMomentsCommentsDigest,{comments} comentarios nuevos en tus Momentos
 Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementMomentsReactionsDigest,Tus Momentos están recibiendo reacciones
 Feature.Moments.Description.EngagementNewComment,acaba de comentar en tu Momento
 Feature.Moments.Description.EngagementNewComments,y {count} personas más comentaron en tu Momento
+Feature.Moments.Description.EngagementNewCommentsOneOther,y 1 persona más comentaron en tu Momento
+Feature.Moments.Description.EngagementOneCommentDigest,1 comentario nuevo y {milestone} reacciones
+Feature.Moments.Description.EngagementOneCommentFirstReactionDigest,1 comentario nuevo y su primera reacción
 Feature.Moments.Description.EngagementReactionMilestone,{count} nuevas reacciones
 Feature.Moments.Description.FollowingCaughtUpBody,Viste todos los Momentos nuevos en este feed. Cambia de feed para ver más.
 Feature.Moments.Description.FollowingEmptyBodyRecommended,Aquí verás los Momentos de los creadores a los que sigues.
@@ -5394,12 +5429,14 @@ Feature.Schools.Action.UnidaysTermsOfService,Términos de servicio de UNiDAYS
 Feature.Schools.Body.EnterCode,UNiDAYS envió un correo electrónico con tu código de un solo uso a {user_email}. Ingresa el código a continuación para confirmar tu escuela.
 Feature.Schools.Body.UnidaysShare,Tu dirección de correo electrónico no será visible para otros usuarios.
 Feature.Schools.Body.UnidaysTerms,"Nos asociamos con UNiDAYS para verificar la dirección de correo electrónico de tu escuela. Al hacer clic en “Continuar”, aceptas los términos de servicio y la política de privacidad de UNiDAYS."
+Feature.Schools.Body.UnidaysTermsCollege,"Al seleccionar Continuar, aceptas los Términos de servicio de UNiDAYS y reconoces que UNiDAYS puede usar tu dirección de correo electrónico de estudiante de acuerdo con su Política de privacidad."
 Feature.Schools.Caption.AlumniGroupOnGraduate,"Una vez que te gradúes, formarás parte del grupo de exalumnos de {school}."
 Feature.Schools.Caption.RemovedOnGraduate,"Una vez que te gradúes, se te eliminará de {school}."
 Feature.Schools.Description.CantFindSchoolNotify,Te notificaremos cuando tu escuela esté en Roblox.
 Feature.Schools.Description.CantVerifySchool,"Según la información que proporcionaste, no pudimos verificar tu escuela."
 Feature.Schools.Description.ConnectWithFellowAlumni,Conecta con otros exalumnos
 Feature.Schools.Description.FeatureAvailableBody,Encuentra amistades de tu escuela
+Feature.Schools.Description.FeatureAvailableBodyCollege,Encuentra amistades de tu universidad.
 Feature.Schools.Description.InviteFriendsExclusiveItem,Invita a otras personas a verificar su escuela. Obtén un objeto gratis cuando tu escuela se lance.
 Feature.Schools.Description.InviteFriendsUnlockSooner,Ayuda a lanzar el grupo de exalumnos de tu escuela más rápido.
 Feature.Schools.Description.InviteOthersToVerify,Invita a otras personas a verificar su escuela
@@ -5410,7 +5447,9 @@ Feature.Schools.Description.RemoveSchoolBody,Tendrás que verificar la direcció
 Feature.Schools.Description.SchoolIsLiveBody,
 Feature.Schools.Description.SchoolUnavailableBody,Esta escuela no está disponible actualmente en Roblox.
 Feature.Schools.Description.UpsellDisclaimer,Tu escuela solo será visible para personas de la misma escuela. Puedes actualizarla o eliminarla en cualquier momento.
+Feature.Schools.Description.UpsellDisclaimerCollege,Tu universidad solo será visible para personas de tu misma institución. Puedes actualizar o eliminar esta información en cualquier momento.
 Feature.Schools.Description.UpsellTagline,"Descubre, conecta y juega con estudiantes verificados de tu escuela."
+Feature.Schools.Description.UpsellTaglineCollege,"Descubre, conecta y juega con estudiantes verificados de tu universidad."
 Feature.Schools.Description.WaitlistAlumniBody,Todo listo. Te notificaremos tan pronto como el grupo de exalumnos de tu escuela se lance.
 Feature.Schools.Description.WaitlistBody,Eres miembro fundador. Invita a tus compañeros de clase a lanzar juntos tu escuela.
 Feature.Schools.Error.AlreadyLinked,Esta dirección de correo electrónico ya está vinculada a otra cuenta
@@ -5427,11 +5466,13 @@ Feature.Schools.Filter.AllYears,Todos los años
 Feature.Schools.Filter.Apply,
 Feature.Schools.Filter.GradYear,Año de graduación
 Feature.Schools.GiftForYou,Un regalo para ti
+Feature.Schools.Heading.AddCollege,Añadir universidad
 Feature.Schools.Heading.AddSchool,Añadir escuela
 Feature.Schools.Heading.AddSchoolNow,Únete a tus compañeros de clase
 Feature.Schools.Heading.CantFindSchool,No podemos encontrar tu escuela
 Feature.Schools.Heading.CantVerifySchool,No podemos verificar tu escuela
 Feature.Schools.Heading.CheckYourEmail,Revisa tu correo
+Feature.Schools.Heading.EnterCollegeEmail,Ingresa tu correo electrónico de estudiante
 Feature.Schools.Heading.EnterSchoolEmail,Ingresa el correo electrónico de tu escuela
 Feature.Schools.Heading.InviteYourClassmates,Invita a tus amistades de la escuela
 Feature.Schools.Heading.InviteYourFriends,Invita a tus amistades
@@ -5458,8 +5499,10 @@ Feature.Schools.Label.Search,
 Feature.Schools.Label.SuggestedEmail,¿Querías decir {email}?
 Feature.Schools.Label.UnlockAlumniGroup,Grupo de exalumnos pendiente
 Feature.Schools.Label.UpsellPerkFindFriends,
+Feature.Schools.Label.UpsellPerkFindFriendsCollege,Encuentra amistades de tu universidad
 Feature.Schools.Label.UpsellPerkPlayAndChat,Mira quién está conectado y jueguen juntos fácilmente
 Feature.Schools.Label.UpsellPerkTrends,Descubre lo que está de moda en tu escuela
+Feature.Schools.Label.UpsellPerkTrendsCollege,Descubre qué es tendencia en tu universidad
 Feature.Schools.Placeholder.Email,Correo electrónico de estudiante
 Feature.Schools.Placeholder.SchoolName,Nombre de la escuela
 Feature.Schools.Placeholder.SixDigitCode,Código de 6 dígitos
@@ -5769,7 +5812,7 @@ Feature.UniversalShareSheet.Response.SharedMessage,El mensaje se envió
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Los mensajes se enviaron
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} más
 Feature.UserLibrary.Label.MyLibrary,Mi biblioteca
-Feature.VIPServer.Message.TooManyFreeServersOnGame,No puedes crear más servidores privados gratis para este juego.
+Feature.VIPServer.Message.TooManyFreeServersOnGame,No puedes tener más servidores privados gratuitos en este juego.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,"No puedes tener más servidores privados gratuitos. Primero, tendrás que desactivar algunos."
 Feature.VerificationUpsell.Action.AddPhone,
 Feature.VerificationUpsell.Action.AddPhoneVoice,

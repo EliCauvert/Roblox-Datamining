@@ -97,7 +97,7 @@ Authentication.AccountPicker.Label.RemoveAccountCancel,
 Authentication.AccountPicker.Label.RemoveAccountDescription,"दोबारा साइन-इन करने तक, आपको इस डिवाइस पर यह अकाउंट नहीं दिखेगा."
 Authentication.AccountPicker.Label.RemoveAccountRemove,हटाएँ
 Authentication.AccountPicker.Label.SignedOut,साइन-आउट किया गया
-Authentication.AccountRecovery.Action.AddAPasskey,"हाँ, एक नई पास-की जोड़ें"
+Authentication.AccountRecovery.Action.AddAPasskey,"हाँ, एक नई पास-की क्रिएट करें"
 Authentication.AccountRecovery.Action.Continue,
 Authentication.AccountRecovery.Action.Delete,
 Authentication.AccountRecovery.Action.DeleteAll,बदलाव हटाएँ
@@ -108,7 +108,7 @@ Authentication.AccountRecovery.Action.ResetPassword,पासवर्ड री
 Authentication.AccountRecovery.Action.Save,बनाए रखें
 Authentication.AccountRecovery.Action.SendCode,मुझे कोड भेजें
 Authentication.AccountRecovery.Action.SkipAddingPasskey,"नहीं, इस स्टेप को छोड़ दें"
-Authentication.AccountRecovery.Action.UpdatePassword,पासवर्ड अपडेट करें
+Authentication.AccountRecovery.Action.UpdatePassword,पासवर्ड सेव करें
 Authentication.AccountRecovery.Action.UseAnotherMethod,कोई दूसरा तरीका इस्तेमाल करें
 Authentication.AccountRecovery.Action.UseBackupCode,बैकअप कोड का इस्तेमाल करें
 Authentication.AccountRecovery.Action.UseEmail,ईमेल इस्तेमाल करें
@@ -1643,6 +1643,7 @@ Feature.AppealsPortal.Description.AppealSubmittedUpdate,"हम आपके द
 Feature.AppealsPortal.Description.AppealSubmittedUpdate.OptOut,"हम आपके दिए गए ईमेल पते पर अपने फ़ैसले और लिए गए किसी भी ऐक्शन का अपडेट भेज देंगे, बशर्ते आपने इस अपील के बारे में और कम्यूनिकेशन पाने से इनकार न किया हो."
 Feature.AppealsPortal.Description.AppealsPortal,पिछले उल्लंघनों को देखें और अपनी अपीलों को मैनेज करें. सभी कॉन्टेंट और व्यवहार में {link}Roblox कम्यूनिटी स्टैंडर्ड{linkEnd} का पालन होना चाहिए.
 Feature.AppealsPortal.Description.AskForReview,आपने यह कन्फ़र्म किया है कि आपने इस समस्या को दूर कर दिया है. हम इस {contentType} का रिव्यू फिर से करेंगे.
+Feature.AppealsPortal.Description.AskForReviewFallback,आपने यह कन्फ़र्म किया है कि आपने इस समस्या को दूर कर दिया है. हम इसे दोबारा रिव्यू करेंगे.
 Feature.AppealsPortal.Description.DetailsUnavailable,
 Feature.AppealsPortal.Description.FixByDate,"{date} तक Studio में समस्या को दूर करें. फिर, वापस आएँ और रिव्यू की रिक्वेस्ट करें."
 Feature.AppealsPortal.Description.IssueClosed,"हमने इस समस्या को बंद कर दिया है, क्योंकि आपने सस्पेंशन से बचने के लिए हमारे एक नियम को सीखने का फ़ैसला किया था."
@@ -2558,7 +2559,7 @@ Feature.Build.Description.BuildReplyNotif,बिल्ड से आपके �
 Feature.Build.Description.BuyRobuxToCreate,"क्रिएट करना जारी रखने के लिए, और Robux खरीदें या कल अपने मुफ़्त बिल्ड के इस्तेमाल के रीसेट होने का इंतज़ार करें."
 Feature.Build.Description.BuyUsageOrWait,Robux की मदद से बिल्ड का ज़्यादा इस्तेमाल खरीदें या अपनी रोज़ाना की लिमिट के रीसेट होने का इंतज़ार करें.
 Feature.Build.Description.CampaignRunDates,आपका ऐड {startDate} से {endDate} तक चलेगा.
-Feature.Build.Description.CaptureWhilePlaytesting,"प्लेटेस्ट के दौरान एक कैप्चर लें, फिर उसे अपने प्रॉम्प्ट में जोड़ें."
+Feature.Build.Description.CaptureWhilePlaytesting,"प्लेटेस्ट के दौरान एक कैप्चर लें, ताकि 'बिल्ड' को दिखा सकें कि आपको क्या दिख रहा है."
 Feature.Build.Description.ChooseAdCampaignLength,चुनें कि आपको अपना ऐड कब तक चलाना है।
 Feature.Build.Description.ChoosePlaytesters,चुनें कि कौन-से फ़्रेंड्स आपका गेम प्रीव्यू कर सकते हैं.
 Feature.Build.Description.CreateDeveloperProduct,{PRICE} Robux में {NAME} क्रिएट करें. यह अभी खरीदने के लिए उपलब्ध नहीं होगा.
@@ -2667,9 +2668,9 @@ Feature.Build.Label.BackToBuild,बिल्ड पर वापस जाएँ
 Feature.Build.Label.Building,काम चल रहा है…
 Feature.Build.Label.CaptureLibrary,कैप्चर लाइब्रेरी
 Feature.Build.Label.CaptureSelectionCount,{MAX_SELECTIONS} में से {SELECTED_COUNT} को चुना गया
-Feature.Build.Label.CaptureStepAddImages,"अपना कैप्चर अटैच करने के लिए, 'इमेज जोड़ें' चुनें"
+Feature.Build.Label.CaptureStepAddImages,"अपने कैप्चर को चैट में जोड़ने के लिए, <b>इमेज जोड़ें</b> चुनें"
 Feature.Build.Label.CaptureStepPlaytest,अपना गेम प्ले-टेस्ट करें
-Feature.Build.Label.CaptureStepTapCamera,'बिल्ड' टूलबार में कैमरा चुनें
+Feature.Build.Label.CaptureStepTapCamera,स्क्रीन पर सबसे नीचे मौजूद कैमरा आइकॉन चुनें
 Feature.Build.Label.ContentRating,कॉन्टेंट रेटिंग
 Feature.Build.Label.CreatedDate,"{MONTH} {DAY}, {YEAR}"
 Feature.Build.Label.CreatorHub,Creator Hub
@@ -2679,6 +2680,7 @@ Feature.Build.Label.DefaultDeveloperProductName,डेवलपर प्रॉ�
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,डिलीट किया गया
 Feature.Build.Label.DescribeIdea,किसी आइडिया के बारे में बताएँ
+Feature.Build.Label.DescribeIdeaOrPick,अपना आइडिया बताएँ या नीचे से कोई आइडिया चुनें
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,विवरण : {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,नाम : {NAME}
@@ -3576,21 +3578,27 @@ Feature.CloudClient.Action.PlayWithoutCloudPlay,Cloud Play के बिना �
 Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play से गेम Roblox के कंप्यूटर पर चलता है, इसलिए हो सकता है कि वह ज़्यादा जल्दी लोड हो और उसमें क्रैश की समस्या कम आए. यह सिर्फ़ आपके गेम खेलने तक चलता है."
 Feature.CloudClient.Description.CloudPlayStopped,"Cloud Play के बिना खेलना जारी रखने के लिए, गेम को फिर से जॉइन करें."
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle एक अर्ली प्रीव्यू वाली सुविधा है. इसमें चीज़ें ओरिजिनल गेम से अलग नज़र आ सकती हैं.
+Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName} एक अर्ली प्रीव्यू वाली सुविधा है. इसमें चीज़ें ओरिजिनल गेम से अलग नज़र आ सकती हैं.
 Feature.CloudClient.Description.RobloxRealityThanks,इसे सबसे पहले आज़माने के लिए धन्यवाद.
 Feature.CloudClient.Heading.CloudPlayOffer,Cloud Play के साथ खेलें
 Feature.CloudClient.Heading.CloudPlayStopped,Cloud Play काम नहीं कर रहा है
 Feature.CloudClient.Heading.RobloxRealityFailed,Restyle में कुछ गड़बड़ी हुई
+Feature.CloudClient.Heading.RobloxRealityFailedV2,{productName} में कुछ गड़बड़ी हुई है
 Feature.CloudClient.Heading.RobloxRealityTimeEnded,Restyle में आपका समय खत्म हो गया है
+Feature.CloudClient.Heading.RobloxRealityTimeEndedV2,{productName} में आपका समय खत्म हो गया है
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Cloud Play में अभी तक 'कैप्चर करें' बटन उपलब्ध नहीं है.
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Restyle में अभी तक 'कैप्चर करें' बटन उपलब्ध नहीं है.
+Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,{productName} में अभी 'कैप्चर करें' बटन उपलब्ध नहीं है.
 Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Play काम नहीं कर रहा है. आपका गेम सामान्य रूप से चल रहा है.
 Feature.CloudClient.Label.RobloxReality,Restyle
 Feature.CloudClient.Label.RobloxRealityDemoLength,{minutes} मिनट का डेमो देखें
 Feature.CloudClient.Label.RobloxRealityEndingSoon,Restyle 1 मिनट में खत्म हो जाएगा और आपको गेम छोड़ना होगा.
+Feature.CloudClient.Label.RobloxRealityEndingSoonV2,{productName} 1 मिनट में खत्म हो जाएगा और आपको गेम छोड़ना होगा.
 Feature.CloudClient.Label.RobloxRealityGraphics,"आपका गेम, नए अंदाज़ में"
 Feature.CloudClient.Label.RobloxRealityPlusOnly,सिर्फ़ Plus के सब्सक्राइबर्स के लिए
 Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,Cloud Play में अभी तक 'सेल्फ़ व्यू' उपलब्ध नहीं है.
 Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,Restyle में अभी तक 'सेल्फ़ व्यू' उपलब्ध नहीं है.
+Feature.CloudClient.Label.SelfViewUnavailableRobloxRealityV2,{productName} में अभी 'सेल्फ़ व्यू' उपलब्ध नहीं है.
 Feature.CloudClient.Label.StillWeakConnection,आपका कनेक्शन अभी भी कमज़ोर है.
 Feature.CloudClient.Label.TimeLeft,
 Feature.CloudClient.Label.WeakConnection,कनेक्शन कमज़ोर है.
@@ -4416,9 +4424,15 @@ Feature.Moments.Description.EngagementFirstLike,इसे अभी देखे
 Feature.Moments.Description.EngagementFirstReaction,आपके Moment पर अभी-अभी पहला रिऐक्शन आया है!
 Feature.Moments.Description.EngagementLikedCommentsDigest,आपके {likedComments} कमेंट को लाइक मिले हैं
 Feature.Moments.Description.EngagementMomentDigest,{comments} नए कमेंट और {milestone} रिऐक्शन
+Feature.Moments.Description.EngagementMomentFirstReactionDigest,{comments} नए कमेंट और इस पर आया पहला रिऐक्शन
+Feature.Moments.Description.EngagementMomentsCommentsDigest,आपके Moments पर {comments} नए कमेंट
 Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementMomentsReactionsDigest,आपके Moments पर रिएक्शन आ रहे हैं
 Feature.Moments.Description.EngagementNewComment,ने अभी-अभी आपके Moment पर कमेंट किया है
 Feature.Moments.Description.EngagementNewComments,और {count} अन्य लोगों ने आपके Moment पर कमेंट किया है
+Feature.Moments.Description.EngagementNewCommentsOneOther,और 1 अन्य व्यक्ति ने आपके Moment पर कमेंट किया है
+Feature.Moments.Description.EngagementOneCommentDigest,1 नया कमेंट और {milestone} रिऐक्शन
+Feature.Moments.Description.EngagementOneCommentFirstReactionDigest,1 नया कमेंट और इस पर आया पहला रिऐक्शन
 Feature.Moments.Description.EngagementReactionMilestone,{count} नए रिऐक्शन
 Feature.Moments.Description.FollowingCaughtUpBody,आपने इस फ़ीड में सभी नए Moments देख लिए हैं. और देखने के लिए फ़ीड बदलें.
 Feature.Moments.Description.FollowingEmptyBodyRecommended,"आपको यहाँ उन क्रिएटर्स के Moments दिखेंगे, जिन्हें आपने फ़ॉलो किया है."
@@ -5394,12 +5408,14 @@ Feature.Schools.Action.UnidaysTermsOfService,UNiDAYS की सेवा की 
 Feature.Schools.Body.EnterCode,UNiDAYS ने {user_email} पर आपको वन-टाइम कोड वाला ईमेल भेजा है. अपने स्कूल को कन्फ़र्म करने के लिए नीचे कोड डालें.
 Feature.Schools.Body.UnidaysShare,आपका ईमेल एड्रेस दूसरों को नहीं दिखेगा.
 Feature.Schools.Body.UnidaysTerms,"हम आपके स्कूल के ईमेल एड्रेस को वेरिफ़ाई करने के लिए UNiDAYS के साथ पार्टनरशिप करते हैं. ""जारी रखें"" पर क्लिक करने का मतलब है कि आप UNiDAYS की सेवा की शर्तों और प्राइवेसी पॉलिसी से सहमत हैं."
+Feature.Schools.Body.UnidaysTermsCollege,'जारी रखें' चुनने का मतलब है कि आप UNiDAYS की सेवा की शर्तों से सहमत हैं और आपको यह स्वीकार है कि UNiDAYS अपने प्राइवेसी पॉलिसी के मुताबिक आपके कॉलेज के ईमेल पते का इस्तेमाल कर सकता है.
 Feature.Schools.Caption.AlumniGroupOnGraduate,"पढ़ाई पूरी कर लेने के बाद, आपको {school} के पूर्व छात्रों के ग्रुप में शामिल कर लिया जाएगा."
 Feature.Schools.Caption.RemovedOnGraduate,"पढ़ाई पूरी होने के बाद, आपको {school} से हटा दिया जाएगा."
 Feature.Schools.Description.CantFindSchoolNotify,आपका स्कूल Roblox पर आने पर हम आपको सूचित करेंगे.
 Feature.Schools.Description.CantVerifySchool,आपकी दी गई जानकारी के आधार पर हम आपके स्कूल को वेरिफ़ाई नहीं कर सके.
 Feature.Schools.Description.ConnectWithFellowAlumni,साथी एल्युमनाई से कनेक्ट करें
 Feature.Schools.Description.FeatureAvailableBody,अपने स्कूल के फ़्रेंड्स को ढूँढें.
+Feature.Schools.Description.FeatureAvailableBodyCollege,अपने कॉलेज के फ़्रेंड्स को ढूँढें.
 Feature.Schools.Description.InviteFriendsExclusiveItem,वेरिफ़िकेशन के लिए दूसरों को इनवाइट करें. अपने स्कूल के लॉन्च होने पर एक फ़्री आइटम पाएँ.
 Feature.Schools.Description.InviteFriendsUnlockSooner,अपने स्कूल के एल्युमनाई ग्रुप को जल्दी लॉन्च करने में मदद करें.
 Feature.Schools.Description.InviteOthersToVerify,वेरिफ़ाई करने के लिए दूसरों को इनवाइट करें
@@ -5410,7 +5426,9 @@ Feature.Schools.Description.RemoveSchoolBody,"अपने स्कूल म�
 Feature.Schools.Description.SchoolIsLiveBody,
 Feature.Schools.Description.SchoolUnavailableBody,यह स्कूल फ़िलहाल Roblox पर उपलब्ध नहीं है.
 Feature.Schools.Description.UpsellDisclaimer,आपका स्कूल सिर्फ़ उसी स्कूल के लोगों को दिखेगा. किसी भी समय अपने स्कूल की जानकारी को अपडेट किया जा सकता है या हटाया जा सकता है.
+Feature.Schools.Description.UpsellDisclaimerCollege,आपका कॉलेज सिर्फ़ उसी कॉलेज के लोगों को दिखेगा. आपके पास कभी भी अपने कॉलेज की जानकारी को अपडेट करने या हटाने का विकल्प होता है.
 Feature.Schools.Description.UpsellTagline,"अपने स्कूल के वेरिफ़ाइड स्टूडेंट्स को खोजें, उनसे कनेक्ट करें और उनके साथ खेलें."
+Feature.Schools.Description.UpsellTaglineCollege,"अपने कॉलेज के वेरिफ़ाइड स्टूडेंट्स को खोजें, उनसे कनेक्ट करें और उनके साथ खेलें."
 Feature.Schools.Description.WaitlistAlumniBody,"आपका वेरिफ़िकेशन पूरा हो गया है. आपके स्कूल के एल्युमनाई ग्रुप के लॉन्च होते ही, हम आपको बता देंगे."
 Feature.Schools.Description.WaitlistBody,आप एक फ़ाउंडिंग मेंबर हैं. अपने क्लासमेट्स को इनवाइट करें और उनके साथ मिलकर अपना स्कूल लॉन्च करें.
 Feature.Schools.Error.AlreadyLinked,यह ईमेल एड्रेस पहले से ही किसी दूसरे अकाउंट से लिंक किया जा चुका है.
@@ -5427,11 +5445,13 @@ Feature.Schools.Filter.AllYears,सभी साल
 Feature.Schools.Filter.Apply,
 Feature.Schools.Filter.GradYear,ग्रैजुएशन का साल
 Feature.Schools.GiftForYou,आपके लिए एक गिफ़्ट
+Feature.Schools.Heading.AddCollege,कॉलेज जोड़ें
 Feature.Schools.Heading.AddSchool,स्कूल जोड़ें
 Feature.Schools.Heading.AddSchoolNow,अपने क्लासमेट के साथ शामिल हों
 Feature.Schools.Heading.CantFindSchool,हमें आपका स्कूल नहीं मिल रहा है
 Feature.Schools.Heading.CantVerifySchool,हम आपका स्कूल वेरिफ़ाई नहीं कर सकते
 Feature.Schools.Heading.CheckYourEmail,अपना ईमेल चेक करें
+Feature.Schools.Heading.EnterCollegeEmail,अपने कॉलेज का ईमेल पता डालें
 Feature.Schools.Heading.EnterSchoolEmail,अपने स्कूल का ईमेल पता डालें
 Feature.Schools.Heading.InviteYourClassmates,अपने क्लासमेट्स को इनवाइट करें
 Feature.Schools.Heading.InviteYourFriends,अपने फ़्रेंड्स को इनवाइट करें
@@ -5458,8 +5478,10 @@ Feature.Schools.Label.Search,
 Feature.Schools.Label.SuggestedEmail,क्या आपका मतलब {email} है?
 Feature.Schools.Label.UnlockAlumniGroup,एल्युमनाई ग्रुप पेंडिंग है
 Feature.Schools.Label.UpsellPerkFindFriends,अपने स्कूल के फ़्रेंड्स को ढूँढें
+Feature.Schools.Label.UpsellPerkFindFriendsCollege,अपने कॉलेज के फ़्रेंड्स को ढूँढें
 Feature.Schools.Label.UpsellPerkPlayAndChat,देखें कि कौन ऑनलाइन है और आसानी से एक साथ खेलें
 Feature.Schools.Label.UpsellPerkTrends,जानें कि आपके स्कूल में क्या ट्रेंड चल रहा है
+Feature.Schools.Label.UpsellPerkTrendsCollege,जानें कि आपके कॉलेज में क्या ट्रेंडिंग है
 Feature.Schools.Placeholder.Email,स्टूडेंट का ईमेल
 Feature.Schools.Placeholder.SchoolName,स्कूल का नाम
 Feature.Schools.Placeholder.SixDigitCode,
@@ -5768,7 +5790,7 @@ Feature.UniversalShareSheet.Response.SharedMessage,मैसेज भेजा 
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,मैसेज भेजे गए
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} अन्य
 Feature.UserLibrary.Label.MyLibrary,मेरी लाइब्रेरी
-Feature.VIPServer.Message.TooManyFreeServersOnGame,आपको इस एक्सपीरिएंस पर और फ़्री प्राइवेट सर्वर नहीं मिल सकते.
+Feature.VIPServer.Message.TooManyFreeServersOnGame,आपको इस गेम पर और फ़्री प्राइवेट सर्वर नहीं मिल सकते.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,आपके पास ज़्यादा ऐक्टिव फ़्री प्राइवेट सर्वर नहीं हो सकते. पहले कुछ और सर्वर डीऐक्टिवेट करें.
 Feature.VerificationUpsell.Action.AddPhone,
 Feature.VerificationUpsell.Action.AddPhoneVoice,वॉइस चैट के लिए फ़ोन नंबर जोड़ें

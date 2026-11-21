@@ -114,7 +114,7 @@ Authentication.AccountPicker.Label.RemoveAccountCancel,
 Authentication.AccountPicker.Label.RemoveAccountDescription,もう一度サインインしない限り、このアカウントはこのデバイス上で表示されなくなります。
 Authentication.AccountPicker.Label.RemoveAccountRemove,削除する
 Authentication.AccountPicker.Label.SignedOut,ログアウト済み
-Authentication.AccountRecovery.Action.AddAPasskey,はい、新しいパスキーを追加します
+Authentication.AccountRecovery.Action.AddAPasskey,はい、新しいパスキーを作成します
 Authentication.AccountRecovery.Action.Continue,
 Authentication.AccountRecovery.Action.Delete,削除
 Authentication.AccountRecovery.Action.DeleteAll,変更を削除
@@ -125,7 +125,7 @@ Authentication.AccountRecovery.Action.ResetPassword,パスワードのリセッ�
 Authentication.AccountRecovery.Action.Save,維持
 Authentication.AccountRecovery.Action.SendCode,コードを受け取る
 Authentication.AccountRecovery.Action.SkipAddingPasskey,いいえ、この手順をスキップします
-Authentication.AccountRecovery.Action.UpdatePassword,パスワードを更新
+Authentication.AccountRecovery.Action.UpdatePassword,パスワードを保存
 Authentication.AccountRecovery.Action.UseAnotherMethod,他の方法を使用
 Authentication.AccountRecovery.Action.UseBackupCode,バックアップコードを使用
 Authentication.AccountRecovery.Action.UseEmail,メールアドレスを使用
@@ -1663,6 +1663,7 @@ Feature.AppealsPortal.Description.AppealSubmittedUpdate,当社が何らかの措
 Feature.AppealsPortal.Description.AppealSubmittedUpdate.OptOut,この異議申し立てについて連絡を受け取りたくないことをお伝えいただいていない限り、当社の決定とご提供いただいたメールアドレスへの対応に関するアップデートを送信いたします。
 Feature.AppealsPortal.Description.AppealsPortal,過去の違反を表示し、あなたの異議申し立てを管理します。すべてのコンテンツと言動は、 {link}Robloxコミュニティ基準{linkEnd} を守る必要があります
 Feature.AppealsPortal.Description.AskForReview,この問題が解決済みであることを確定しています。なお、この{contentType}はRobloxが再度審査します。
+Feature.AppealsPortal.Description.AskForReviewFallback,この問題が解決済みであることを確定しています。Robloxが再度審査します。
 Feature.AppealsPortal.Description.DetailsUnavailable,
 Feature.AppealsPortal.Description.FixByDate,{date}までにStudioで問題を解決してから、再度審査をリクエストしてください。
 Feature.AppealsPortal.Description.IssueClosed,当社の規則の1つを学ぶことで、一時停止を回避するという選択がされたため、この問題は終了しました。
@@ -2578,7 +2579,7 @@ Feature.Build.Description.BuildReplyNotif,ビルドで返信が届いたとき�
 Feature.Build.Description.BuyRobuxToCreate,作成を続けるには、Robuxをさらに購入するか、明日になって無料のビルド使用量がリセットされるのをお待ちください。
 Feature.Build.Description.BuyUsageOrWait,Robuxでビルド使用量をさらに購入するか、1日あたりの限度額がリセットされるのをお待ちください。
 Feature.Build.Description.CampaignRunDates,広告は{startDate}～{endDate}の期間、実施されます。
-Feature.Build.Description.CaptureWhilePlaytesting,プレイテスト中に切り抜きし、プロンプトに追加してください。
+Feature.Build.Description.CaptureWhilePlaytesting,プレイテスト中に切り抜きして、見たものをBuildに表示してください。
 Feature.Build.Description.ChooseAdCampaignLength,広告の掲載期間を選択してください。
 Feature.Build.Description.ChoosePlaytesters,ゲームをテストプレイしてもらう友達を選択してください。
 Feature.Build.Description.CreateDeveloperProduct,{PRICE} Robuxの「{NAME}」を作成します。まだ購入可能にはなりません。
@@ -2687,9 +2688,9 @@ Feature.Build.Label.BackToBuild,ビルドに戻る
 Feature.Build.Label.Building,処理中…
 Feature.Build.Label.CaptureLibrary,切り抜きライブラリ
 Feature.Build.Label.CaptureSelectionCount,{SELECTED_COUNT} / {MAX_SELECTIONS}点を選択済み
-Feature.Build.Label.CaptureStepAddImages,[画像を追加]を選択して、切り抜きを添付します
+Feature.Build.Label.CaptureStepAddImages,[<b>画像を追加</b>]を選択して、切り抜きをチャットに追加します
 Feature.Build.Label.CaptureStepPlaytest,ゲームのプレイテスト
-Feature.Build.Label.CaptureStepTapCamera,ビルドツールバーでカメラを選択します
+Feature.Build.Label.CaptureStepTapCamera,画面下部のカメラアイコンを選択します
 Feature.Build.Label.ContentRating,コンテンツのレーティング
 Feature.Build.Label.CreatedDate,{YEAR}年{MONTH}月{DAY}日
 Feature.Build.Label.CreatorHub,クリエーターハブ
@@ -2699,6 +2700,7 @@ Feature.Build.Label.DefaultDeveloperProductName,開発者製品
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,削除済み
 Feature.Build.Label.DescribeIdea,アイデアを説明してください
+Feature.Build.Label.DescribeIdeaOrPick,アイデアを説明するか、以下から1つ選んでください
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,説明：{DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,製品名：{NAME}
@@ -3596,21 +3598,27 @@ Feature.CloudClient.Action.PlayWithoutCloudPlay,Cloud Playを使わずにプレ�
 Feature.CloudClient.Description.CloudPlayOffer,Cloud Playは、Robloxのコンピューターでゲームを実行するため、読み込みが速くなり、クラッシュしづらくなる可能性があります。このゲームをプレイしている間のみ有効です。
 Feature.CloudClient.Description.CloudPlayStopped,ゲームに再参加して、Cloud Playを使わずにプレイを続けてください。
 Feature.CloudClient.Description.RobloxRealityPreview,Restyleは初期プレビュー版です。実際のゲームとは異なる可能性があります。
+Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName}は初期プレビュー版です。実際のゲームとは異なる可能性があります。
 Feature.CloudClient.Description.RobloxRealityThanks,早期に試していただきありがとうございます。
 Feature.CloudClient.Heading.CloudPlayOffer,Cloud Playを使ってプレイ
 Feature.CloudClient.Heading.CloudPlayStopped,Cloud Playが動作しなくなりました
 Feature.CloudClient.Heading.RobloxRealityFailed,Restyleで問題が発生しました
+Feature.CloudClient.Heading.RobloxRealityFailedV2,{productName}で問題が発生しました
 Feature.CloudClient.Heading.RobloxRealityTimeEnded,Restyleの利用時間は終了しました
+Feature.CloudClient.Heading.RobloxRealityTimeEndedV2,{productName}の利用時間は終了しました
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Cloud Playでは、現時点では切り抜き機能は利用できません。
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Restyleでは、現時点では切り抜き機能は利用できません。
+Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,切り抜き機能はまだ{productName}では利用できません。
 Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Playが動作していません。通常通りプレイしています。
 Feature.CloudClient.Label.RobloxReality,Restyle
 Feature.CloudClient.Label.RobloxRealityDemoLength,{minutes}分間のデモを試す
 Feature.CloudClient.Label.RobloxRealityEndingSoon,Restyleは1分後に終了し、ゲームから退出することになります。
+Feature.CloudClient.Label.RobloxRealityEndingSoonV2,{productName}は1分後に終了し、ゲームから退出することになります。
 Feature.CloudClient.Label.RobloxRealityGraphics,ゲームを刷新しませんか？
 Feature.CloudClient.Label.RobloxRealityPlusOnly,Plus会員限定
 Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,セルフビューは、現時点ではCloud Playで利用できません。
 Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,セルフビューは、現時点ではRestyleで利用できません。
+Feature.CloudClient.Label.SelfViewUnavailableRobloxRealityV2,セルフビューはまだ{productName}ではで利用できません。
 Feature.CloudClient.Label.StillWeakConnection,通信状態が今も不安定です。
 Feature.CloudClient.Label.TimeLeft,
 Feature.CloudClient.Label.WeakConnection,通信状態が不安定です。
@@ -4436,9 +4444,15 @@ Feature.Moments.Description.EngagementFirstLike,今すぐ表示
 Feature.Moments.Description.EngagementFirstReaction,あなたのモーメントに最初のリアクションがありました！
 Feature.Moments.Description.EngagementLikedCommentsDigest,あなたのコメントのうち{likedComments}件に「いいね」がつきました
 Feature.Moments.Description.EngagementMomentDigest,{comments}件の新しいコメントと{milestone}件のリアクション
+Feature.Moments.Description.EngagementMomentFirstReactionDigest,{comments}件の新しいコメントと最初のリアクション
+Feature.Moments.Description.EngagementMomentsCommentsDigest,あなたのモーメントへの{comments}件の新しいコメント
 Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementMomentsReactionsDigest,あなたのモーメントへのリアクションがありました
 Feature.Moments.Description.EngagementNewComment,があなたのモーメントにコメントしました
 Feature.Moments.Description.EngagementNewComments,と他{count}人があなたのモーメントにコメントしました
+Feature.Moments.Description.EngagementNewCommentsOneOther,と他1人があなたのモーメントにコメントしました
+Feature.Moments.Description.EngagementOneCommentDigest,1件の新しいコメントと{milestone}件のリアクション
+Feature.Moments.Description.EngagementOneCommentFirstReactionDigest,1件の新しいコメントとその最初のリアクション
 Feature.Moments.Description.EngagementReactionMilestone,{count}件の新しいリアクション
 Feature.Moments.Description.FollowingCaughtUpBody,このフィードの新しいモーメントをすべて視聴しました。さらに見るには、フィードを切りかえてください。
 Feature.Moments.Description.FollowingEmptyBodyRecommended,ここに、フォローしているクリエーターのモーメントが表示されます。
@@ -5412,12 +5426,14 @@ Feature.Schools.Action.UnidaysTermsOfService,UNiDAYS利用規約
 Feature.Schools.Body.EnterCode,UNiDAYSから、ワンタイムコードが記載されたメールが{user_email}に送信されました。以下にコードを入力して、あなたの学校を確認してください。
 Feature.Schools.Body.UnidaysShare,あなたのメールアドレスは他のユーザーには表示されません。
 Feature.Schools.Body.UnidaysTerms,当社は、UNiDAYSと提携して、あなたの学校のメールアドレスを確認します。「続ける」をクリックすると、UNiDAYSのサービス規約およびプライバシーポリシーに同意したものとみなされます。
+Feature.Schools.Body.UnidaysTermsCollege,「続ける」を選択すると、UNiDAYSの利用規約に同意し、UNiDAYSがそのプライバシーポリシーに従ってあなたの大学のメールアドレスを使用することに同意したものとみなされます。
 Feature.Schools.Caption.AlumniGroupOnGraduate,卒業すると、{school}の卒業生グループに所属します。
 Feature.Schools.Caption.RemovedOnGraduate,卒業すると、{school}から削除されます。
 Feature.Schools.Description.CantFindSchoolNotify,学校がRobloxに登録され次第、通知します。
 Feature.Schools.Description.CantVerifySchool,提供された情報から学校を確認できませんでした。
 Feature.Schools.Description.ConnectWithFellowAlumni,他の卒業生とつながる
 Feature.Schools.Description.FeatureAvailableBody,学校の友達を見つける。
+Feature.Schools.Description.FeatureAvailableBodyCollege,大学の友達を見つけよう。
 Feature.Schools.Description.InviteFriendsExclusiveItem,他の人を招待して認証しましょう。学校が立ち上がったら無料アイテムが手に入ります。
 Feature.Schools.Description.InviteFriendsUnlockSooner,該当校の卒業生グループがより早く立ち上がるよう協力しましょう。
 Feature.Schools.Description.InviteOthersToVerify,他の人を招待して認証しましょう
@@ -5428,7 +5444,9 @@ Feature.Schools.Description.RemoveSchoolBody,学校に再参加するには、�
 Feature.Schools.Description.SchoolIsLiveBody,
 Feature.Schools.Description.SchoolUnavailableBody,現在、この学校はRobloxでは利用できません。
 Feature.Schools.Description.UpsellDisclaimer,学校の表示はその学校の人だけに行われます。学校の変更や削除はいつでも可能です。
+Feature.Schools.Description.UpsellDisclaimerCollege,大学の表示はその大学の人だけに行われます。大学の変更や削除はいつでも可能です。
 Feature.Schools.Description.UpsellTagline,あなたと同じ学校の認証済みの生徒を見つけて、つながり、プレイしましょう。
+Feature.Schools.Description.UpsellTaglineCollege,あなたと同じ大学の認証済みの生徒を見つけて、つながり、プレイしましょう。
 Feature.Schools.Description.WaitlistAlumniBody,準備が整いました。該当校の卒業生グループが立ち上がり次第、通知します。
 Feature.Schools.Description.WaitlistBody,あなたは創設メンバーです。クラスメートを招待して、一緒に学校を立ち上げましょう。
 Feature.Schools.Error.AlreadyLinked,このメールアドレスは、すでに別のアカウントに紐づけられています。
@@ -5445,11 +5463,13 @@ Feature.Schools.Filter.AllYears,すべての年
 Feature.Schools.Filter.Apply,
 Feature.Schools.Filter.GradYear,卒業年
 Feature.Schools.GiftForYou,受け取れるギフト
+Feature.Schools.Heading.AddCollege,大学を追加
 Feature.Schools.Heading.AddSchool,学校を追加
 Feature.Schools.Heading.AddSchoolNow,クラスメートと一緒に参加
 Feature.Schools.Heading.CantFindSchool,学校が見つかりません
 Feature.Schools.Heading.CantVerifySchool,学校を確認できません
 Feature.Schools.Heading.CheckYourEmail,メールをチェックしてください
+Feature.Schools.Heading.EnterCollegeEmail,大学のメールアドレスを入力
 Feature.Schools.Heading.EnterSchoolEmail,学校のメールアドレスを入力
 Feature.Schools.Heading.InviteYourClassmates,クラスメートを招待する
 Feature.Schools.Heading.InviteYourFriends,友達を招待する
@@ -5476,8 +5496,10 @@ Feature.Schools.Label.Search,
 Feature.Schools.Label.SuggestedEmail,もしかして：{email}
 Feature.Schools.Label.UnlockAlumniGroup,保留中の卒業生グループ
 Feature.Schools.Label.UpsellPerkFindFriends,学校の友達を見つける
+Feature.Schools.Label.UpsellPerkFindFriendsCollege,大学の友達を見つける
 Feature.Schools.Label.UpsellPerkPlayAndChat,オンライン状況を確認して、簡単に一緒にプレイ
 Feature.Schools.Label.UpsellPerkTrends,学校でのトレンドを見つけよう
+Feature.Schools.Label.UpsellPerkTrendsCollege,大学でのトレンドを見つけよう
 Feature.Schools.Placeholder.Email,生徒のメールアドレス
 Feature.Schools.Placeholder.SchoolName,学校名
 Feature.Schools.Placeholder.SixDigitCode,

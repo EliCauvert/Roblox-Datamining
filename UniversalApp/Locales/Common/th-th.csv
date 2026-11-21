@@ -97,7 +97,7 @@ Authentication.AccountPicker.Label.RemoveAccountCancel,
 Authentication.AccountPicker.Label.RemoveAccountDescription,คุณจะไม่เห็นบัญชีนี้บนอุปกรณ์นี้อีกต่อไป เว้นแต่จะลงชื่อเข้าใช้อีกครั้ง
 Authentication.AccountPicker.Label.RemoveAccountRemove,ลบ
 Authentication.AccountPicker.Label.SignedOut,ออกจากระบบแล้ว
-Authentication.AccountRecovery.Action.AddAPasskey,ใช่ เพิ่มพาสคีย์ใหม่
+Authentication.AccountRecovery.Action.AddAPasskey,ใช่ สร้างพาสคีย์ใหม่
 Authentication.AccountRecovery.Action.Continue,
 Authentication.AccountRecovery.Action.Delete,
 Authentication.AccountRecovery.Action.DeleteAll,ลบการเปลี่ยนแปลง
@@ -108,7 +108,7 @@ Authentication.AccountRecovery.Action.ResetPassword,รีเซ็ตรหั�
 Authentication.AccountRecovery.Action.Save,เก็บไว้
 Authentication.AccountRecovery.Action.SendCode,ส่งรหัสให้ฉัน
 Authentication.AccountRecovery.Action.SkipAddingPasskey,ไม่ ข้ามขั้นตอนนี้
-Authentication.AccountRecovery.Action.UpdatePassword,อัปเดตรหัสผ่าน
+Authentication.AccountRecovery.Action.UpdatePassword,บันทึกรหัสผ่าน
 Authentication.AccountRecovery.Action.UseAnotherMethod,ใช้วิธีอื่น
 Authentication.AccountRecovery.Action.UseBackupCode,ใช้รหัสสำรอง
 Authentication.AccountRecovery.Action.UseEmail,ใช้อีเมล
@@ -1646,6 +1646,7 @@ Feature.AppealsPortal.Description.AppealSubmittedUpdate,เราจะส่ง
 Feature.AppealsPortal.Description.AppealSubmittedUpdate.OptOut,เราจะส่งข้อมูลอัพเดทพร้อมคำตัดสินและการดำเนินการใดๆ ที่มีขึ้นไปยังอีเมลที่คุณให้ไว้ เว้นแต่คุณจะแจ้งให้เราทราบว่าไม่ต้องการรับข้อมูลเพิ่มเติมเกี่ยวกับการอุทธรณ์นี้
 Feature.AppealsPortal.Description.AppealsPortal,ดูการละเมิดที่ผ่านมาและจัดการการอุทธรณ์ของคุณ เนื้อหาและพฤติกรรมทั้งหมดต้องเป็นไปตาม{link}มาตรฐานชุมชนของ Roblox{linkEnd}
 Feature.AppealsPortal.Description.AskForReview,คุณกำลังยืนยันว่าได้แก้ปัญหานี้แล้ว เราจะตรวจสอบ{contentType}นี้อีกครั้ง
+Feature.AppealsPortal.Description.AskForReviewFallback,คุณกำลังยืนยันว่าได้แก้ปัญหานี้แล้ว เราจะตรวจสอบเรื่องนี้อีกครั้ง
 Feature.AppealsPortal.Description.DetailsUnavailable,
 Feature.AppealsPortal.Description.FixByDate,แก้ปัญหานี้ใน Studio ภายในวันที่ {date} แล้วกลับมาขอให้ตรวจสอบอีกครั้ง
 Feature.AppealsPortal.Description.IssueClosed,เราปิดปัญหานี้แล้ว เพราะคุณตัดสินใจเรียนรู้กฎข้อหนึ่งของเราเพื่อหลีกเลี่ยงการถูกระงับ
@@ -2561,7 +2562,7 @@ Feature.Build.Description.BuildReplyNotif,รับการแจ้งเต�
 Feature.Build.Description.BuyRobuxToCreate,ซื้อ Robux เพิ่มเพื่อสร้างต่อ หรือรอให้โควต้าการใช้งาน Build ฟรีของคุณรีเซ็ตในวันพรุ่งนี้
 Feature.Build.Description.BuyUsageOrWait,ซื้อโควต้าการใช้งาน Build เพิ่มด้วย Robux หรือรอให้โควต้ารายวันของคุณรีเซ็ต
 Feature.Build.Description.CampaignRunDates,โฆษณาของคุณจะแสดงตั้งแต่วันที่ {startDate}-{endDate}
-Feature.Build.Description.CaptureWhilePlaytesting,จับภาพขณะทดลองเล่น จากนั้นแนบภาพลงในพรอมต์ของคุณ
+Feature.Build.Description.CaptureWhilePlaytesting,จับภาพขณะทดลองเล่นเพื่อให้ Build ดูสิ่งที่คุณเห็น
 Feature.Build.Description.ChooseAdCampaignLength,เลือกว่าต้องการให้แสดงโฆษณานานแค่ไหน
 Feature.Build.Description.ChoosePlaytesters,เลือกเพื่อนที่จะช่วยดูตัวอย่างเกมของคุณ
 Feature.Build.Description.CreateDeveloperProduct,สร้าง {NAME} ในราคา {PRICE} Robux โดยสินค้านี้จะยังไม่เปิดขาย
@@ -2670,9 +2671,9 @@ Feature.Build.Label.BackToBuild,ย้อนกลับไปยังการ
 Feature.Build.Label.Building,กำลังดำเนินการ…
 Feature.Build.Label.CaptureLibrary,คลังภาพที่จับไว้
 Feature.Build.Label.CaptureSelectionCount,เลือกแล้ว {SELECTED_COUNT} จาก {MAX_SELECTIONS} ภาพ
-Feature.Build.Label.CaptureStepAddImages,เลือกเพิ่มภาพเพื่อแนบภาพที่จับไว้
+Feature.Build.Label.CaptureStepAddImages,เลือก<b>เพิ่มภาพ</b>เพื่อเพิ่มภาพที่จับไว้ลงในแชท
 Feature.Build.Label.CaptureStepPlaytest,ทดลองเล่นเกมของคุณ
-Feature.Build.Label.CaptureStepTapCamera,เลือกกล้องในแถบเครื่องมือของ Build
+Feature.Build.Label.CaptureStepTapCamera,เลือกไอคอนกล้องที่ด้านล่างของหน้าจอ
 Feature.Build.Label.ContentRating,การจัดระดับความเหมาะสมของเนื้อหา
 Feature.Build.Label.CreatedDate,{DAY} {MONTH} {YEAR}
 Feature.Build.Label.CreatorHub,ศูนย์กลางครีเอเตอร์
@@ -2682,6 +2683,7 @@ Feature.Build.Label.DefaultDeveloperProductName,ผลิตภัณฑ์น�
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,ลบแล้ว
 Feature.Build.Label.DescribeIdea,อธิบายไอเดีย
+Feature.Build.Label.DescribeIdeaOrPick,อธิบายไอเดียหรือเลือกจากด้านล่าง
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,คำอธิบาย: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,ชื่อ: {NAME}
@@ -3579,21 +3581,27 @@ Feature.CloudClient.Action.PlayWithoutCloudPlay,เล่นโดยไม่�
 Feature.CloudClient.Description.CloudPlayOffer,Cloud Play จะรันเกมบนคอมพิวเตอร์ของ Roblox เกมจึงอาจโหลดเร็วขึ้นและหยุดทำงานน้อยลง Cloud Play จะทำงานเฉพาะระหว่างที่คุณเล่นเกมนี้
 Feature.CloudClient.Description.CloudPlayStopped,เข้าร่วมเกมอีกครั้งเพื่อเล่นต่อโดยไม่ใช้ Cloud Play
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle เป็นเวอร์ชันที่ให้ทดลองใช้ได้ก่อนใคร อะไรๆ อาจดูแตกต่างไปจากเกมต้นฉบับ
+Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName} เป็นเวอร์ชันที่ให้ทดลองได้ก่อนใคร อะไรๆ อาจดูแตกต่างไปจากเกมต้นฉบับ
 Feature.CloudClient.Description.RobloxRealityThanks,ขอบคุณที่เป็นหนึ่งในคนแรกๆ ที่ลองใช้
 Feature.CloudClient.Heading.CloudPlayOffer,เล่นผ่าน Cloud Play
 Feature.CloudClient.Heading.CloudPlayStopped,Cloud Play ไม่ทำงาน
 Feature.CloudClient.Heading.RobloxRealityFailed,มีปัญหาบางอย่างเกิดขึ้นกับ Restyle
+Feature.CloudClient.Heading.RobloxRealityFailedV2,มีปัญหาบางอย่างเกิดขึ้นกับ {productName}
 Feature.CloudClient.Heading.RobloxRealityTimeEnded,เวลาของคุณใน Restyle สิ้นสุดลงแล้ว
+Feature.CloudClient.Heading.RobloxRealityTimeEndedV2,เวลาของคุณใน {productName} สิ้นสุดลงแล้ว
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,ยังไม่สามารถใช้การจับภาพใน Cloud Play ได้
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,ยังไม่สามารถใช้การจับภาพกับ Restyle ได้
+Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,ยังไม่สามารถใช้การจับภาพกับ {productName} ได้
 Feature.CloudClient.Label.CloudPlayJoinFailed,Cloud Play ใช้งานไม่ได้ คุณกำลังเข้าสู่โหมดการเล่นปกติ
 Feature.CloudClient.Label.RobloxReality,Restyle
 Feature.CloudClient.Label.RobloxRealityDemoLength,ลองเล่นเดโม {minutes} นาที
 Feature.CloudClient.Label.RobloxRealityEndingSoon,Restyle จะสิ้นสุดในอีก 1 นาที และนำคุณออกจากเกม
+Feature.CloudClient.Label.RobloxRealityEndingSoonV2,{productName} จะสิ้นสุดในอีก 1 นาที และคุณจะออกจากเกม
 Feature.CloudClient.Label.RobloxRealityGraphics,เกมของคุณในลุคใหม่
 Feature.CloudClient.Label.RobloxRealityPlusOnly,สำหรับสมาชิก Plus เท่านั้น
 Feature.CloudClient.Label.SelfViewUnavailableCloudPlay,ยังไม่สามารถใช้มุมมองตนเองใน Cloud Play ได้
 Feature.CloudClient.Label.SelfViewUnavailableRobloxReality,ยังไม่สามารถใช้มุมมองตนเองกับ Restyle ได้
+Feature.CloudClient.Label.SelfViewUnavailableRobloxRealityV2,ยังไม่สามารถใช้มุมมองตนเองกับ {productName} ได้
 Feature.CloudClient.Label.StillWeakConnection,การเชื่อมต่อของคุณยังไม่เสถียร
 Feature.CloudClient.Label.TimeLeft,
 Feature.CloudClient.Label.WeakConnection,การเชื่อมต่อไม่เสถียร
@@ -4419,9 +4427,15 @@ Feature.Moments.Description.EngagementFirstLike,ดูเลย
 Feature.Moments.Description.EngagementFirstReaction,มีคนแสดงความรู้สึกต่อโมเมนต์ของคุณเป็นครั้งแรก!
 Feature.Moments.Description.EngagementLikedCommentsDigest,มีคนกดถูกใจความคิดเห็นของคุณ {likedComments} รายการ
 Feature.Moments.Description.EngagementMomentDigest,มีความคิดเห็นใหม่ {comments} รายการ และการแสดงความรู้สึก {milestone} ครั้ง
+Feature.Moments.Description.EngagementMomentFirstReactionDigest,มีความคิดเห็นใหม่ {comments} รายการ และการแสดงความรู้สึกครั้งแรก
+Feature.Moments.Description.EngagementMomentsCommentsDigest,มีความคิดเห็นใหม่ {comments} รายการในโมเมนต์ของคุณ
 Feature.Moments.Description.EngagementMomentsDigest,
+Feature.Moments.Description.EngagementMomentsReactionsDigest,โมเมนต์ของคุณกำลังได้รับความสนใจ
 Feature.Moments.Description.EngagementNewComment,เพิ่งแสดงความคิดเห็นในโมเมนต์ของคุณ
 Feature.Moments.Description.EngagementNewComments,และอีก {count} คนแสดงความคิดเห็นในโมเมนต์ของคุณ
+Feature.Moments.Description.EngagementNewCommentsOneOther,และอีก 1 คนแสดงความคิดเห็นในโมเมนต์ของคุณ
+Feature.Moments.Description.EngagementOneCommentDigest,มีความคิดเห็นใหม่ 1 รายการ และการแสดงความรู้สึก {milestone} ครั้ง
+Feature.Moments.Description.EngagementOneCommentFirstReactionDigest,มีความคิดเห็นใหม่ 1 รายการ และการแสดงความรู้สึกครั้งแรก
 Feature.Moments.Description.EngagementReactionMilestone,การแสดงความรู้สึกใหม่ {count} ครั้ง
 Feature.Moments.Description.FollowingCaughtUpBody,คุณติดตามโมเมนต์ใหม่ในฟีดนี้หมดแล้ว สลับฟีดเพื่อดูเพิ่มเติม
 Feature.Moments.Description.FollowingEmptyBodyRecommended,คุณจะเห็นโมเมนต์ของครีเอเตอร์ที่คุณติดตามได้ที่นี่
@@ -5397,12 +5411,14 @@ Feature.Schools.Action.UnidaysTermsOfService,ข้อกำหนดการ�
 Feature.Schools.Body.EnterCode,UNiDAYS ส่งรหัสแบบใช้ครั้งเดียวไปให้ทางอีเมล {user_email} แล้ว โปรดกรอกรหัสด้านล่างเพื่อยืนยันโรงเรียนของคุณ
 Feature.Schools.Body.UnidaysShare,ผู้อื่นจะไม่เห็นอีเมลของคุณ
 Feature.Schools.Body.UnidaysTerms,"เราร่วมมือกับ UNiDAYS เพื่อตรวจสอบยืนยันอีเมลของโรงเรียนคุณ การคลิก ""ดำเนินการต่อ"" จะถือว่าคุณยอมรับข้อกำหนดการใช้บริการและนโยบายความเป็นส่วนตัวของ UNiDAYS"
+Feature.Schools.Body.UnidaysTermsCollege,"การเลือก ""ดำเนินการต่อ"" จะถือว่าคุณยอมรับข้อกำหนดการใช้บริการของ UNiDAYS และรับทราบว่า UNiDAYS อาจใช้อีเมลนักศึกษาของคุณตามนโยบายความเป็นส่วนตัวของ UNiDAYS"
 Feature.Schools.Caption.AlumniGroupOnGraduate,เมื่อคุณสำเร็จการศึกษา คุณจะอยู่ในกลุ่มศิษย์เก่าของ {school}
 Feature.Schools.Caption.RemovedOnGraduate,เมื่อคุณสำเร็จการศึกษา คุณจะถูกลบออกจาก {school}
 Feature.Schools.Description.CantFindSchoolNotify,เราจะแจ้งให้คุณทราบเมื่อโรงเรียนของคุณอยู่บน Roblox
 Feature.Schools.Description.CantVerifySchool,เราไม่สามารถตรวจสอบยืนยันโรงเรียนของคุณได้จากข้อมูลที่คุณระบุ
 Feature.Schools.Description.ConnectWithFellowAlumni,เชื่อมต่อกับชาวศิษย์เก่า
 Feature.Schools.Description.FeatureAvailableBody,ค้นหาเพื่อนจากโรงเรียนเดียวกัน
+Feature.Schools.Description.FeatureAvailableBodyCollege,ค้นหาเพื่อนจากมหาวิทยาลัยเดียวกัน
 Feature.Schools.Description.InviteFriendsExclusiveItem,ชวนคนอื่นมายืนยันตัวตน แล้วรับไอเท็มฟรีเมื่อโรงเรียนของคุณเปิดตัว
 Feature.Schools.Description.InviteFriendsUnlockSooner,ช่วยให้กลุ่มศิษย์เก่าของโรงเรียนคุณเปิดได้เร็วยิ่งขึ้น
 Feature.Schools.Description.InviteOthersToVerify,เชิญคนอื่นมายืนยันตัวตนกัน
@@ -5413,7 +5429,9 @@ Feature.Schools.Description.RemoveSchoolBody,คุณจะต้องตร�
 Feature.Schools.Description.SchoolIsLiveBody,
 Feature.Schools.Description.SchoolUnavailableBody,โรงเรียนนี้ยังไม่พร้อมให้บริการบน Roblox
 Feature.Schools.Description.UpsellDisclaimer,โรงเรียนของคุณจะปรากฏให้เห็นเฉพาะผู้ใช้ที่มาจากโรงเรียนเดียวกันเท่านั้น คุณสามารถอัปเดตหรือลบโรงเรียนของคุณได้ตลอดเวลา
+Feature.Schools.Description.UpsellDisclaimerCollege,มหาวิทยาลัยของคุณจะปรากฏให้เห็นเฉพาะผู้ใช้ที่มาจากมหาวิทยาลัยเดียวกันเท่านั้น คุณสามารถอัปเดตหรือลบมหาวิทยาลัยของคุณได้ตลอดเวลา
 Feature.Schools.Description.UpsellTagline,ค้นพบ เชื่อมต่อ และเล่นกับเพื่อนจากโรงเรียนเดียวกันที่ตรวจสอบยืนยันแล้ว
+Feature.Schools.Description.UpsellTaglineCollege,ค้นพบ เชื่อมต่อ และเล่นกับเพื่อนจากมหาวิทยาลัยเดียวกันที่ตรวจสอบยืนยันแล้ว
 Feature.Schools.Description.WaitlistAlumniBody,เรียบร้อยแล้ว เราจะแจ้งให้คุณทราบทันทีที่มีการเปิดกลุ่มศิษย์เก่าของโรงเรียนคุณ
 Feature.Schools.Description.WaitlistBody,คุณเป็นสมาชิกผู้ก่อตั้ง เชิญเพื่อนร่วมชั้นมาร่วมเปิดตัวโรงเรียนของคุณกัน
 Feature.Schools.Error.AlreadyLinked,ที่อยู่อีเมลนี้เชื่อมโยงกับบัญชีอื่นอยู่แล้ว
@@ -5430,11 +5448,13 @@ Feature.Schools.Filter.AllYears,ทุกปี
 Feature.Schools.Filter.Apply,ใช้
 Feature.Schools.Filter.GradYear,ปีที่สำเร็จการศึกษา
 Feature.Schools.GiftForYou,ของขวัญสำหรับคุณ
+Feature.Schools.Heading.AddCollege,เพิ่มมหาวิทยาลัย
 Feature.Schools.Heading.AddSchool,เพิ่มโรงเรียน
 Feature.Schools.Heading.AddSchoolNow,เข้าร่วมกับเพื่อนร่วมชั้น
 Feature.Schools.Heading.CantFindSchool,เราไม่พบโรงเรียนของคุณ
 Feature.Schools.Heading.CantVerifySchool,เราไม่สามารถตรวจสอบยืนยันโรงเรียนของคุณได้
 Feature.Schools.Heading.CheckYourEmail,ตรวจสอบอีเมลของคุณ
+Feature.Schools.Heading.EnterCollegeEmail,กรอกอีเมลนักศึกษาของคุณ
 Feature.Schools.Heading.EnterSchoolEmail,กรอกอีเมลของโรงเรียน
 Feature.Schools.Heading.InviteYourClassmates,เชิญเพื่อนร่วมชั้น
 Feature.Schools.Heading.InviteYourFriends,เชิญเพื่อนของคุณ
@@ -5461,8 +5481,10 @@ Feature.Schools.Label.Search,
 Feature.Schools.Label.SuggestedEmail,คุณหมายถึง {email} ใช่ไหม?
 Feature.Schools.Label.UnlockAlumniGroup,รอกลุ่มศิษย์เก่าดำเนินการ
 Feature.Schools.Label.UpsellPerkFindFriends,
+Feature.Schools.Label.UpsellPerkFindFriendsCollege,
 Feature.Schools.Label.UpsellPerkPlayAndChat,ดูว่าใครออนไลน์อยู่แล้วเล่นด้วยกัน ง่ายๆ เลย
 Feature.Schools.Label.UpsellPerkTrends,ค้นพบว่ามีอะไรที่กำลังเป็นที่นิยมในโรงเรียนของคุณบ้าง
+Feature.Schools.Label.UpsellPerkTrendsCollege,ค้นพบว่ามีอะไรที่กำลังเป็นที่นิยมในมหาวิทยาลัยของคุณบ้าง
 Feature.Schools.Placeholder.Email,อีเมลนักเรียน
 Feature.Schools.Placeholder.SchoolName,ชื่อโรงเรียน
 Feature.Schools.Placeholder.SixDigitCode,

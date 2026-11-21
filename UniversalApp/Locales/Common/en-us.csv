@@ -4135,6 +4135,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Notifications turned on for {ex
 Feature.GameJoin.Description.DifferentServer,You'll start in a different server
 Feature.GameJoin.Label.PlayTogether,You can play together
 Feature.GameJoin.Label.PlayTogetherSoon,You can play together soon
+Feature.GameJoin.Label.Played,played
 Feature.GameJoin.Label.RecentCoplay,You played together recently
 Feature.GamePage.Action.BackToTop,Back to top
 Feature.GamePage.Label.Ad,
