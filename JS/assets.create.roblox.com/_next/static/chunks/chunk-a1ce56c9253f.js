@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "10076ac1-dafd-d811-1e04-c030d401e307")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "a5066d9e-2520-3a06-1fe9-8d99989cd563")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 899196, 764665, t => {
@@ -1541,8 +1541,16 @@
         return (0, e.useEffect)(() => {
             s.current = t
         }, [t]), s.current
-    }, "_", 0, (t, e) => o(() => window.sessionStorage, "session-storage")(t, e)])
+    }, "_", 0, (t, e) => o(() => window.sessionStorage, "session-storage")(t, e), "T", 0, t => {
+        let s = (0, e.useRef)(t);
+        return (0, e.useInsertionEffect)(() => {
+            s.current = t
+        }), (0, e.useCallback)(function() {
+            for (var t = arguments.length, e = Array(t), o = 0; o < t; o++) e[o] = arguments[o];
+            return s.current(...e)
+        }, [])
+    }])
 }]);
 
-//# debugId=10076ac1-dafd-d811-1e04-c030d401e307
-//# sourceMappingURL=42dhpk3awq___.js.map
+//# debugId=a5066d9e-2520-3a06-1fe9-8d99989cd563
+//# sourceMappingURL=0ad22s2chyqdm.js.map

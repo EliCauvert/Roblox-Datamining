@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "06b07f68-64c2-c1b7-495b-a7d90657e248")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "7883c1d0-859c-229d-2b0a-209b715dba28")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 550934, e => {
@@ -50,7 +50,7 @@
                 style: k,
                 timeout: x = "auto",
                 TransitionComponent: P = r.T
-            } = e, N = (0, a._)(e, d), L = (0, o.u)(), U = i.useRef(), A = (0, n.u)(), V = i.useRef(null), R = (0, l.u)(V, (0, c.g)(y), h), _ = e => t => {
+            } = e, U = (0, a._)(e, d), N = (0, o.u)(), L = i.useRef(), A = (0, n.u)(), V = i.useRef(null), R = (0, l.u)(V, (0, c.g)(y), h), _ = e => t => {
                 if (e) {
                     let a = V.current;
                     void 0 === t ? e(a) : e(a, t)
@@ -69,7 +69,7 @@
                 }, {
                     mode: "enter"
                 });
-                "auto" === x ? U.current = a = A.transitions.getAutoHeightDuration(e.clientHeight) : a = i, e.style.transition = [A.transitions.create("opacity", {
+                "auto" === x ? L.current = a = A.transitions.getAutoHeightDuration(e.clientHeight) : a = i, e.style.transition = [A.transitions.create("opacity", {
                     duration: a,
                     delay: n
                 }), A.transitions.create("transform", {
@@ -89,7 +89,7 @@
                 }, {
                     mode: "exit"
                 });
-                "auto" === x ? U.current = t = A.transitions.getAutoHeightDuration(e.clientHeight) : t = a, e.style.transition = [A.transitions.create("opacity", {
+                "auto" === x ? L.current = t = A.transitions.getAutoHeightDuration(e.clientHeight) : t = a, e.style.transition = [A.transitions.create("opacity", {
                     duration: t,
                     delay: i
                 }), A.transitions.create("transform", {
@@ -109,10 +109,10 @@
                 onExited: z,
                 onExiting: F,
                 addEndListener: e => {
-                    "auto" === x && L.start(U.current || 0, e), v && v(V.current, e)
+                    "auto" === x && N.start(L.current || 0, e), v && v(V.current, e)
                 },
                 timeout: "auto" === x ? null : x
-            }, N, {
+            }, U, {
                 children: (e, a) => i.cloneElement(y, (0, t._)({
                     style: (0, t._)({
                         opacity: 0,
@@ -763,7 +763,7 @@
                 currentUrl: String(t),
                 additionalProperties: {
                     ...r,
-                    loggerVersion: "1.13.0",
+                    loggerVersion: "1.14.0",
                     viewportWidth: i,
                     viewportHeight: n
                 }
@@ -859,11 +859,7 @@
             }])
         }
     }
-
-    function f(e) {
-        return window.location.href.replace(/#.*$/, "")
-    }
-    class S {
+    class f {
         static parseCookieValue() {
             let e = (0, i.M)("UnifiedLoggerSession");
             return e ? decodeURIComponent(e).split("&").reduce((e, t) => {
@@ -872,7 +868,7 @@
             }, {}) : {}
         }
         initCacheFromCookies() {
-            let e = S.parseCookieValue();
+            let e = f.parseCookieValue();
             if (void 0 !== e[this.productName]) return {
                 ...e[this.productName],
                 timestamp: Date.now()
@@ -921,7 +917,7 @@
         }
         updateCookie() {
             if (!this.cache) return;
-            let e = S.parseCookieValue();
+            let e = f.parseCookieValue();
             e[this.productName] = this.cache, (0, i.d)("UnifiedLoggerSession", Object.entries(e).map(e => {
                 let [t, {
                     sessionId: a,
@@ -950,6 +946,13 @@
         }) {
             (0, t._)(this, "productName", void 0), (0, t._)(this, "cache", void 0), (0, t._)(this, "cacheExpiryTime", void 0), (0, t._)(this, "inactiveSessionExpireTime", void 0), (0, t._)(this, "onSessionRefresh", void 0), this.productName = e, this.cacheExpiryTime = a, this.inactiveSessionExpireTime = i, this.onSessionRefresh = n
         }
+    }
+
+    function S(e) {
+        let t = arguments.length > 1 && void 0 !== arguments[1] && arguments[1];
+        if (!e) return "";
+        let a = new URL(e);
+        return a.hash = "", t && (a.search = ""), a.href
     }
     e.s(["f", 0, class {
         getEventLoggers() {
@@ -1032,16 +1035,19 @@
                     })
             }
         }
+        currentUrl() {
+            return S(window.location.href, this.omitUrlQuery)
+        }
         logPageLoadEvent() {
             var e;
-            let t = f();
+            let t = this.currentUrl();
             if (t === this.lastPageLoadUrl) return;
             let a = this.sessionService.getOrCreateSessionId(),
                 i = new n({
                     product: this.product,
                     url: t,
                     sessionId: a,
-                    referralUrl: null != (e = this.referrer) ? e : document.referrer,
+                    referralUrl: null != (e = this.referrer) ? e : S(document.referrer, this.omitUrlQuery),
                     parameters: {
                         browserLocale: navigator.language,
                         navigationType: void 0 === this.lastPageLoadUrl ? "initial" : "client"
@@ -1054,7 +1060,7 @@
                 eventName: t,
                 parameters: a,
                 tags: i
-            } = e, n = f(), s = this.sessionService.getOrCreateSessionId(), o = new r({
+            } = e, n = this.currentUrl(), s = this.sessionService.getOrCreateSessionId(), o = new r({
                 product: this.product,
                 url: n,
                 sessionId: s,
@@ -1069,7 +1075,7 @@
                 eventName: t,
                 parameters: a,
                 tags: i
-            } = e, n = f(), r = this.sessionService.getOrCreateSessionId(), s = new o({
+            } = e, n = this.currentUrl(), r = this.sessionService.getOrCreateSessionId(), s = new o({
                 product: this.product,
                 url: n,
                 sessionId: r,
@@ -1084,7 +1090,7 @@
                 eventName: t,
                 parameters: a,
                 tags: i
-            } = e, n = f(), r = this.sessionService.getOrCreateSessionId(), o = new s({
+            } = e, n = this.currentUrl(), r = this.sessionService.getOrCreateSessionId(), o = new s({
                 product: this.product,
                 url: n,
                 sessionId: r,
@@ -1119,7 +1125,7 @@
                 parameters: i,
                 tags: n,
                 pageContext: r
-            } = e, s = f(), o = this.sessionService.getOrCreateSessionId(), l = new a.W({
+            } = e, s = this.currentUrl(), o = this.sessionService.getOrCreateSessionId(), l = new a.W({
                 product: this.product,
                 url: s,
                 sessionId: o,
@@ -1135,7 +1141,7 @@
                 eventName: t,
                 parameters: a,
                 tags: i
-            } = e, n = f(), r = this.sessionService.getOrCreateSessionId(), s = new l({
+            } = e, n = this.currentUrl(), r = this.sessionService.getOrCreateSessionId(), s = new l({
                 product: this.product,
                 url: n,
                 sessionId: r,
@@ -1150,7 +1156,7 @@
                 eventName: t,
                 parameters: a,
                 tags: i
-            } = e, n = f(), r = this.sessionService.getOrCreateSessionId(), s = new g({
+            } = e, n = this.currentUrl(), r = this.sessionService.getOrCreateSessionId(), s = new g({
                 product: this.product,
                 url: n,
                 sessionId: r,
@@ -1165,7 +1171,7 @@
                 eventName: t,
                 parameters: a,
                 tags: i
-            } = e, n = f(), r = this.sessionService.getOrCreateSessionId(), s = new c({
+            } = e, n = this.currentUrl(), r = this.sessionService.getOrCreateSessionId(), s = new c({
                 product: this.product,
                 url: n,
                 sessionId: r,
@@ -1181,7 +1187,7 @@
                 context: a,
                 properties: i,
                 hostProperties: n = {}
-            } = e, r = f(), s = this.sessionService.getOrCreateSessionId();
+            } = e, r = this.currentUrl(), s = this.sessionService.getOrCreateSessionId();
             this.hostRoutedEventStreamLogger.log({
                 eventType: t,
                 context: a,
@@ -1200,7 +1206,7 @@
                 sessionId: a,
                 parameters: i,
                 tags: n
-            } = e, r = f(), s = new d({
+            } = e, r = this.currentUrl(), s = new d({
                 product: this.product,
                 url: r,
                 eventName: t,
@@ -1220,19 +1226,20 @@
             debugMode: n,
             eventLogger: r,
             sessionProductGroup: s,
-            disableSession: o = !1
+            disableSession: o = !1,
+            omitUrlQuery: l = !1
         }) {
-            let l;
-            (0, t._)(this, "eventLoggers", []), (0, t._)(this, "debugMode", !1), (0, t._)(this, "product", void 0), (0, t._)(this, "commonEventParameters", void 0), (0, t._)(this, "sessionProductGroup", void 0), (0, t._)(this, "sessionService", void 0), (0, t._)(this, "hostRoutedEventStreamLogger", void 0), (0, t._)(this, "disableSession", void 0), (0, t._)(this, "lastPageLoadUrl", void 0), (0, t._)(this, "referrer", void 0), (0, t._)(this, "isAutoCollectEnabled", !1), (0, t._)(this, "events", (l = new Map, {
+            let c;
+            (0, t._)(this, "eventLoggers", []), (0, t._)(this, "debugMode", !1), (0, t._)(this, "product", void 0), (0, t._)(this, "commonEventParameters", void 0), (0, t._)(this, "sessionProductGroup", void 0), (0, t._)(this, "sessionService", void 0), (0, t._)(this, "hostRoutedEventStreamLogger", void 0), (0, t._)(this, "disableSession", void 0), (0, t._)(this, "lastPageLoadUrl", void 0), (0, t._)(this, "referrer", void 0), (0, t._)(this, "omitUrlQuery", void 0), (0, t._)(this, "isAutoCollectEnabled", !1), (0, t._)(this, "events", (c = new Map, {
                 on(e, t) {
-                    l.has(e) ? l.get(e).push(t) : l.set(e, [t])
+                    c.has(e) ? c.get(e).push(t) : c.set(e, [t])
                 },
                 off(e, t) {
-                    l.has(e) && l.set(e, (l.get(e) || []).filter(e => e !== t))
+                    c.has(e) && c.set(e, (c.get(e) || []).filter(e => e !== t))
                 },
                 emit(e, t) {
                     for (var a = arguments.length, i = Array(a > 2 ? a - 2 : 0), n = 2; n < a; n++) i[n - 2] = arguments[n];
-                    (l.get(e) || []).forEach(e => {
+                    (c.get(e) || []).forEach(e => {
                         e(t, ...i)
                     })
                 }
@@ -1245,9 +1252,9 @@
                 eventBaseUrl: e
             })), this.debugMode = !!n, this.product = a, this.commonEventParameters = i, this.sessionProductGroup = null != s ? s : a, this.debugMode && this.eventLoggers.push(new b), this.hostRoutedEventStreamLogger = new y({
                 eventBaseUrl: e
-            }), this.disableSession = o, this.sessionService = this.disableSession ? {
+            }), this.disableSession = o, this.omitUrlQuery = l, this.sessionService = this.disableSession ? {
                 getOrCreateSessionId: () => {}
-            } : new S({
+            } : new f({
                 productName: this.sessionProductGroup,
                 onSessionRefresh: this.onSessionRefresh
             })
@@ -1255,5 +1262,5 @@
     }])
 }]);
 
-//# debugId=06b07f68-64c2-c1b7-495b-a7d90657e248
-//# sourceMappingURL=2wjh7qfliaxo8.js.map
+//# debugId=7883c1d0-859c-229d-2b0a-209b715dba28
+//# sourceMappingURL=35eq7af_c3mm7.js.map

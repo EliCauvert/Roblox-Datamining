@@ -52,6 +52,7 @@ Roblox.LangDynamic["CommonUI.Messages"] = {
     "Description.RedirectToPartnerWebsite": "This purchase must be completed on our partner’s website. You will be returned to Roblox after the purchase is completed.\n\nProceed to partner website for payment?",
     "Heading.LeaveRoblox": "Leaving Roblox",
     "Action.ContinueToPayment": "Continue to Payment",
-    "Response.PleaseTryAgainLater": "Please try again later."
+    "Response.PleaseTryAgainLater": "Please try again later.",
+    "Message.SsoProviderLinked": "You can now sign in with {provider}"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_CommonUI.Messages");
