@@ -1,0 +1,23 @@
+{
+    "clientVersionUpload":  "version-1ef59424f70d4932",
+    "shellBuildId":  "GB7CxFP4tFrb_rbGWkeVM",
+    "shellAssetPrefix":  "/6536749aa05e452da9c4d6ed4b464613ff9ba84a",
+    "wasm":  {
+                 "size":  102268042,
+                 "sha256":  "be370a4446dcfce62635f7e6d271526b15e2099507fb7250b2d3360eacd4a61f",
+                 "stored":  false
+             },
+    "shaderPacks":  [
+                        {
+                            "path":  "shaders/shaders_glsles3_web.pack",
+                            "size":  4930577
+                        },
+                        {
+                            "path":  "shaders/shaders_webgpu.pack",
+                            "size":  31705416
+                        }
+                    ],
+    "flagsApplication":  "WindowsWebClientApp",
+    "flagsCount":  24456,
+    "fetchedAt":  "2026-11-22T18:32:32.6309110Z"
+}
