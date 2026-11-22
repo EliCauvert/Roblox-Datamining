@@ -9,11 +9,12 @@ local HorizontalLayoutModule = require(AvatarWorkshop.Components.HorizontalLayou
 local VerticalLayoutModule = require(AvatarWorkshop.Components.VerticalLayout)
 local TopBarModule = require(AvatarWorkshop.Components.TopBar)
 local CurrentAvatarPreviewModule = require(AvatarWorkshop.Components.AvatarPreview.CurrentAvatarPreview)
+local WorkshopToastHostModule = require(AvatarWorkshop.Components.WorkshopToastHost.WorkshopToastHost)
 local ScreenTitlesModule = require(AvatarWorkshop.Constants.ScreenTitles)
 local GetActiveRouteModule = require(AvatarWorkshop.Navigation.getActiveRoute)
 local FFlagAlignSideSheetWindowCloseRight = require(Parent.SharedFlags).FFlagAlignSideSheetWindowCloseRight
 
-return function(p1)
+local function WorkshopLayout(p1)
 	-- upvalues: ReactModule (copy), WorkshopWindowContextModule (copy), GetActiveRouteModule (copy), FFlagAlignSideSheetWindowCloseRight (copy), TopBarModule (copy), ScreenTitlesModule (copy), RoactNavigationModule (copy), VerticalLayoutModule (copy), CurrentAvatarPreviewModule (copy), FoundationModule (copy), HorizontalLayoutModule (copy)
 	local UseContextResult = ReactModule.useContext(WorkshopWindowContextModule)
 	local Navigation = p1.navigation
@@ -56,5 +57,13 @@ return function(p1)
 				LayoutOrder = 2
 			}, { ActionBar = Element2 }) else nil
 		})
+	})
+end
+
+return function(p1)
+	-- upvalues: ReactModule (copy), FoundationModule (copy), WorkshopLayout (copy), WorkshopToastHostModule (copy)
+	return ReactModule.createElement(FoundationModule.View, { tag = "size-full-full" }, {
+		Layout = ReactModule.createElement(WorkshopLayout, p1),
+		Toast = ReactModule.createElement(WorkshopToastHostModule)
 	})
 end
