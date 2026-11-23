@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "f5c0aa20-7bd0-d393-649e-646b1aa841eb")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "c8a731ca-08a8-bdad-8922-ec6f90d7af80")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 713267, e => {
@@ -522,7 +522,7 @@
             let {
                 data: t,
                 nextCursor: s
-            } = await o.f.getLooksByCuratorAndType(e.toString(), n, m.l, i);
+            } = await o.U.getLooksByCuratorAndType(e.toString(), n, m.l, i);
             if (a = null != s ? s : void 0, !t) return {
                 items: [],
                 nextPageCursor: void 0
@@ -571,7 +571,7 @@
             let {
                 data: t,
                 nextCursor: s
-            } = await o.f.getLooksByGroupAndType(e.toString(), n, m.l, i);
+            } = await o.U.getLooksByGroupAndType(e.toString(), n, m.l, i);
             if (a = null != s ? s : void 0, !t) return {
                 items: [],
                 nextPageCursor: void 0
@@ -1219,7 +1219,7 @@
     }, "q", 0, function(e, t) {
         let a = e.toLowerCase(),
             s = f.has(a) ? "".concat(a, "accessory") : a;
-        return "".concat("".concat("https://assets.create.roblox.com/1fa0039d05c341e9c81aecdd6a0639c836f2742e/assets", "/unifiedFeeSystem"), "/").concat(t ? "".concat(s, ".svg") : "".concat(s, "_black.svg"))
+        return "".concat("".concat("https://assets.create.roblox.com/c9ffeba1bec1b62d380e6aea46310ba61fa8a81c/assets", "/unifiedFeeSystem"), "/").concat(t ? "".concat(s, ".svg") : "".concat(s, "_black.svg"))
     }, "U", 0, function(e, t) {
         return "/dashboard/creations/".concat(n.e[e], "/").concat(t, "/publish")
     }, "h", 0, function(e, t) {
@@ -1455,5 +1455,5 @@
     }])
 }]);
 
-//# debugId=f5c0aa20-7bd0-d393-649e-646b1aa841eb
-//# sourceMappingURL=3a535mtall0nb.js.map
+//# debugId=c8a731ca-08a8-bdad-8922-ec6f90d7af80
+//# sourceMappingURL=3pspsmot6mahi.js.map

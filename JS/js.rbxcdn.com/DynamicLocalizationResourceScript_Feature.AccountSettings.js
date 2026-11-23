@@ -2048,6 +2048,7 @@ Roblox.LangDynamic["Feature.AccountSettings"] = {
     "Heading.MomentsUsageSetting": "Moments time limit",
     "Description.PrivacyRequestsParentEmail": "Privacy request emails will be sent to this verified parental recovery email.",
     "Description.PrivacyRequestsAddParentEmail": "Add and verify a parent or guardian’s email before making a privacy request.",
-    "Description.MonthlySpendLimitNotificationUpgradeUpsell": "Create a parent account to receive notifications about your child’s spending."
+    "Description.MonthlySpendLimitNotificationUpgradeUpsell": "Create a parent account to receive notifications about your child’s spending.",
+    "Description.UpdateChildSettingParentFacingNoValue": "Update {settingName} on your child’s account"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.AccountSettings");

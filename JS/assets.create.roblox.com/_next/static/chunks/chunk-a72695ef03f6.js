@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "9915a611-3b67-1ef1-0b04-3719935fc29a")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "aadb1a56-7184-310d-1945-bb6667f1014c")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 69181, e => {
@@ -3096,27 +3096,26 @@
         n = e.i(445550),
         r = ((t = {}).FrontendFlagEnableModelPricingTransition = "PublicFrontendEMPT", t.FrontendFlagEnableSocialLinkCustomTitles = "PublicFrontendSLCT", t.FrontendFlagEnableAudioWavUpload = "PublicFrontendAWU", t.FrontendFlagEnableAudioFlacUpload = "PublicFrontendAFU", t.FrontendFlagEnableCreatorInsightsPage = "PublicFrontendCIP", t.FrontendFlagEnableTryAssetSocialLink = "PublicFrontendETIR", t.FrontendFlagEnableTryAssetDefaultExperience = "PublicFrontendETADE", t.FrontendFlagEnablePaidModelDependenciesModal = "PublicFrontendPMDM", t.FrontendFlagTaxonomyExperiment = "PublicFrontendTE", t.FrontendFlagUniverseBansManagerLabelUpdate = "PublicFrontendUBMLU", t.FrontendFlagEnableHiddenFromSearchVisibilityAlert = "PublicFrontendHFS", t);
     let l = Object.values(r),
-        o = (e => {
+        o = e => {
             let t = {};
             for (let a of l) t[a] = e(a);
             if (!l.every(e => Object.hasOwn(t, e))) throw Error("Failed to build frontend flags.");
             return t
-        })(() => !1);
-    e.s(["o", 0, o, "m", 0, l, "Q", () => r], 448005);
-    let s = (0, i.createContext)(null);
+        },
+        s = o(() => !1);
+    e.s(["o", 0, s, "m", 0, l, "Q", () => r, "Z", 0, o], 448005);
+    let c = (0, i.createContext)(null);
     e.s(["U", 0, e => {
         let {
             children: t
-        } = e, [r, c] = (0, i.useState)(o), [d, u] = (0, i.useState)(!1), m = (0, i.useCallback)(async e => {
+        } = e, [r, d] = (0, i.useState)(s), [u, m] = (0, i.useState)(!1), p = (0, i.useCallback)(async e => {
             try {
                 let t = await n.U.getFrontendFlagsValues(e),
-                    a = Object.assign({}, ...l.map(e => {
+                    a = o(e => {
                         var a, i;
-                        return {
-                            [e]: null != (a = null == t || null == (i = t.data) ? void 0 : i[e]) && a
-                        }
-                    }));
-                c(a)
+                        return null != (a = null == t || null == (i = t.data) ? void 0 : i[e]) && a
+                    });
+                d(a)
             } catch (e) {}
         }, []);
         (0, i.useEffect)(() => {
@@ -3124,23 +3123,23 @@
                 t = {
                     flags: [...l]
                 };
-            return u(!0), (async () => {
-                await m(t), e && u(!1)
+            return m(!0), (async () => {
+                await p(t), e && m(!1)
             })(), () => {
                 e = !1
             }
-        }, [m]);
-        let p = (0, i.useMemo)(() => ({
+        }, [p]);
+        let f = (0, i.useMemo)(() => ({
             frontendFlags: r,
-            getFrontendFlags: m,
-            loadingFrontendFlags: d
-        }), [r, m, d]);
-        return (0, a.jsx)(s.Provider, {
-            value: p,
+            getFrontendFlags: p,
+            loadingFrontendFlags: u
+        }), [r, p, u]);
+        return (0, a.jsx)(c.Provider, {
+            value: f,
             children: t
         })
     }, "L", 0, function() {
-        let e = (0, i.useContext)(s);
+        let e = (0, i.useContext)(c);
         if (null === e) throw Error("useToolboxServiceApiProvider must be used within a ToolboxServiceApiProvider");
         return e
     }], 845592)
@@ -3208,5 +3207,5 @@
     }])
 }]);
 
-//# debugId=9915a611-3b67-1ef1-0b04-3719935fc29a
-//# sourceMappingURL=2iy_7wmq7u60t.js.map
+//# debugId=aadb1a56-7184-310d-1945-bb6667f1014c
+//# sourceMappingURL=3h2m-ity2upzg.js.map
