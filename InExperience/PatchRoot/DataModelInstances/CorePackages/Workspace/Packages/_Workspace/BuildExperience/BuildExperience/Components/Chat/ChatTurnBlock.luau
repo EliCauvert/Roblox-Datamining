@@ -32,7 +32,6 @@ local FFlagBuildExperienceChatAccordionScrollAnchorModule = require(BuildExperie
 local FFlagBuildExperienceManageDevProductModule = require(BuildExperience.Flags.FFlagBuildExperienceManageDevProduct)
 local FFlagBuildAgentAdCampaignCardModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignCard)
 local FFlagBuildAgentAdCampaignRefreshEligibilityModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignRefreshEligibility)
-local FFlagBuildEventsUpdate1Module = require(BuildExperience.Flags.FFlagBuildEventsUpdate1)
 local FFlagBuildExperiencePlaytestCardPublishCtaModule = require(BuildExperience.Flags.FFlagBuildExperiencePlaytestCardPublishCta)
 local FFlagBuildExperienceAdsAndRobuxTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceAdsAndRobuxTelemetry)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
@@ -518,14 +517,14 @@ local function useStepListState(List, WasDone)
 		end
 	end
 	local UseReactiveValueResult = useReactiveValue(if HeaderSegment == nil then t1 else HeaderSegment.activityItems)
-	local V130 = v1 or StepSentencesModule.hasSteps(UseReactiveValueResult)
+	local V129 = v1 or StepSentencesModule.hasSteps(UseReactiveValueResult)
 	ReactModule.useLayoutEffect(function()
-		-- upvalues: V130 (copy), UseStateResult2_1 (copy)
-		if V130 then
+		-- upvalues: V129 (copy), UseStateResult2_1 (copy)
+		if V129 then
 			UseStateResult2_1(true)
 		end
 		return nil
-	end, { V130 })
+	end, { V129 })
 	local UseReactiveValueResult1 = useReactiveValue(HeaderSegment ~= nil and (HeaderSegment.isLoading or false))
 	local LoadingRowId: string? = nil
 	
@@ -716,7 +715,7 @@ local function TurnWorkSegment(Frame)
 end
 
 return ReactModule.memo(function(Frame: Frame)
-	-- upvalues: ReactModule (copy), TurnProjectionModule (copy), ReportTurnActivityGapModule (copy), useReactiveValue (copy), t (copy), FFlagBuildAgentAdCampaignCardModule (copy), UseAgentAdCampaignTurnCardsModule (copy), config (copy), FoundationModule (copy), FFlagBuildCheckGamePermissionsModule (copy), ChatPermissionsContextModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildEventsUpdate1Module (copy), FFlagBuildExperienceTurnWorkTelemetryModule1 (copy), UseTurnWorkTelemetryModule (copy), renderWorkSegment (copy), TurnWorkSegment (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), PlaytestCardSection (copy), PlaytestCompletedCardModule (copy), FFlagBuildAgentAdCampaignRefreshEligibilityModule (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), AdCampaignIsActiveCardModule (copy), AdUpsellCardModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), ChatCardEmphasisPositionProviderModule (copy), View (copy), AgentTurnFeedbackModule (copy), TurnWorkTelemetryContextModule (copy)
+	-- upvalues: ReactModule (copy), TurnProjectionModule (copy), ReportTurnActivityGapModule (copy), useReactiveValue (copy), t (copy), FFlagBuildAgentAdCampaignCardModule (copy), UseAgentAdCampaignTurnCardsModule (copy), config (copy), FoundationModule (copy), FFlagBuildCheckGamePermissionsModule (copy), ChatPermissionsContextModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildExperienceTurnWorkTelemetryModule1 (copy), UseTurnWorkTelemetryModule (copy), renderWorkSegment (copy), TurnWorkSegment (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), PlaytestCardSection (copy), PlaytestCompletedCardModule (copy), FFlagBuildAgentAdCampaignRefreshEligibilityModule (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), AdCampaignIsActiveCardModule (copy), AdUpsellCardModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), ChatCardEmphasisPositionProviderModule (copy), View (copy), AgentTurnFeedbackModule (copy), TurnWorkTelemetryContextModule (copy)
 	local Turn = Frame.turn
 	local TurnState = Turn.turnState
 	local TurnKey = Turn.turnKey
@@ -775,13 +774,13 @@ return ReactModule.memo(function(Frame: Frame)
 	local NoCanPublish: boolean = UseContextResult ~= nil and not UseContextResult.canPublish
 	local OnPlaytestFunction = Frame.onPlaytest
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: SendBuildExperienceEventModule (upval), UseReactiveValueResult (copy), FFlagBuildEventsUpdate1Module (upval), OnPlaytestFunction (copy)
+		-- upvalues: SendBuildExperienceEventModule (upval), UseReactiveValueResult (copy), OnPlaytestFunction (copy)
 		SendBuildExperienceEventModule("PLAYTEST_CLICK", {
 			universeId = UseReactiveValueResult.universeId,
 			placeId = UseReactiveValueResult.placeId,
 			conversationId = UseReactiveValueResult.sessionId,
 			messageId = UseReactiveValueResult.sequenceId
-		}, if FFlagBuildEventsUpdate1Module then { context = "chat_widget" } else nil)
+		}, { context = "chat_widget" })
 		
 		if OnPlaytestFunction ~= nil then
 			OnPlaytestFunction()

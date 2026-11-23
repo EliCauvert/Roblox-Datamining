@@ -3286,6 +3286,7 @@ Feature.Chat.Label.SearchFriends,搜索好友
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,选择以移除
 Feature.Chat.Label.SnoozePartyNotifications,将体验中的队伍通知静音：
+Feature.Chat.Label.StartChatting,开始聊天
 Feature.Chat.Label.SwipeToReplyTooltip,滑动以回复
 Feature.Chat.Label.TapToRemove,轻点以移除
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} 天
@@ -3548,6 +3549,7 @@ Feature.Friends.Button.GotIt,
 Feature.Friends.Description.ContactsModal,你的联系人也在 Roblox 上！成为好友后，你将可以看到他们完整的虚拟形象和个人资料。前往添加好友页面，查看更多你可能认识的人。
 Feature.Friends.Description.DoMoreWithTrustedConnections,在 Roblox 上与可信赖的联系人通过更多方式沟通。请仅添加你认识并信任的人。
 Feature.Friends.Description.DoMoreWithTrustedFriends,在 Roblox 上与信赖的好友通过更多方式沟通。请仅添加你认识并信任的人。
+Feature.Friends.Description.FoundFromContactImporter,从联系人批量导入工具发送
 Feature.Friends.Description.FromContacts,从通讯录
 Feature.Friends.Description.FromContactsV2,通讯录联系人名称：{contactName}
 Feature.Friends.Description.FromQrCode,来自二维码
@@ -3638,6 +3640,7 @@ Feature.Friends.Label.SentFromWithContext,发送自 {gameName}
 Feature.Friends.Label.SingularMutualFriend,
 Feature.Friends.Label.Suggested,建议体验
 Feature.Friends.Label.Unfollowed,已取消关注
+Feature.Friends.Label.YouAreFollowing,你正在关注
 Feature.Friends.Label.YourLinkedParent,你关联的家长
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,你想被推荐至其他经过验证并拥有你手机号码的用户吗？

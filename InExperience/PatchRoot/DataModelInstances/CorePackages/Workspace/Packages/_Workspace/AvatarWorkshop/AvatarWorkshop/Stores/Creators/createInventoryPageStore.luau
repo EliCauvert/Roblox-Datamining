@@ -25,15 +25,17 @@ return function(p2, p3)
 	local Signal3, Signal2_2 = CreateSignalFunction(false)
 	local Signal4, Signal2_3 = CreateSignalFunction(false)
 	local Signal5, Signal2_4 = CreateSignalFunction(false)
+	local Signal6, Signal2_5 = CreateSignalFunction(false)
 	local NextPageToken = nil
 	local Count = 0
 	local Flag = false
 	local t = {}
 	
 	local function applyPage(p4)
-		-- upvalues: NextPageToken (ref), Signal2_2 (copy), Flag (ref), t (ref), Signal (copy), Signal2 (copy)
+		-- upvalues: NextPageToken (ref), Signal2_2 (copy), Signal2_3 (copy), Flag (ref), t (ref), Signal (copy), Signal2 (copy)
 		NextPageToken = p4.nextPageToken
-		Signal2_2(p4.nextPageToken == nil)
+		Signal2_2(true)
+		Signal2_3(p4.nextPageToken == nil)
 		local Flag1: boolean = Flag
 		Flag = false
 		
@@ -55,11 +57,11 @@ return function(p2, p3)
 	end
 	
 	local function fetchNextPage()
-		-- upvalues: Signal4 (copy), Signal3 (copy), Query (copy), Signal2_3 (copy), Signal2_4 (copy), Count (ref), P2 (copy), NextPageToken (ref), applyPage (copy), Signal2_1 (copy)
-		if Signal4(false) or Signal3(false) then return end
+		-- upvalues: Signal5 (copy), Signal4 (copy), Query (copy), Signal2_4 (copy), Signal2_5 (copy), Count (ref), P2 (copy), NextPageToken (ref), applyPage (copy), Signal2_1 (copy)
+		if Signal5(false) or Signal4(false) then return end
 		if Query then
-			Signal2_3(true)
-			Signal2_4(false)
+			Signal2_4(true)
+			Signal2_5(false)
 			local Count1 = Count
 			P2.fetchPage(Query, NextPageToken):andThen(function(Result)
 				-- upvalues: Count1 (copy), Count (upval), applyPage (upval)
@@ -67,18 +69,18 @@ return function(p2, p3)
 					applyPage(Result)
 				end
 			end):catch(function(Err)
-				-- upvalues: Count1 (copy), Count (upval), Signal2_4 (upval)
+				-- upvalues: Count1 (copy), Count (upval), Signal2_5 (upval)
 				if Count1 == Count then
 					warn("createInventoryPageStore: avatar-inventory fetch failed:", if typeof(Err) == "table" then Err.errorMessage else Err)
-					Signal2_4(true)
+					Signal2_5(true)
 					
 					return
 				end
 			end):finally(function()
-				-- upvalues: Count1 (copy), Count (upval), Signal2_1 (upval), Signal2_3 (upval)
+				-- upvalues: Count1 (copy), Count (upval), Signal2_1 (upval), Signal2_4 (upval)
 				if Count1 == Count then
 					Signal2_1(true)
-					Signal2_3(false)
+					Signal2_4(false)
 					
 					return
 				end
@@ -93,18 +95,19 @@ return function(p2, p3)
 	return {
 		getEntries = Signal,
 		getDidInitialFetch = Signal1,
-		getLastPageReached = Signal3,
-		getIsFetching = Signal4,
-		getHasFetchError = Signal5,
+		getHasLoadedPage = Signal3,
+		getLastPageReached = Signal4,
+		getIsFetching = Signal5,
+		getHasFetchError = Signal6,
 		fetchNextPage = fetchNextPage,
 		refresh = function()
-			-- upvalues: Count (ref), NextPageToken (ref), Flag (ref), Signal2_2 (copy), Signal2_4 (copy), Signal2_3 (copy), fetchNextPage (copy)
+			-- upvalues: Count (ref), NextPageToken (ref), Flag (ref), Signal2_3 (copy), Signal2_5 (copy), Signal2_4 (copy), fetchNextPage (copy)
 			Count += 1
 			NextPageToken = nil
 			Flag = true
-			Signal2_2(false)
-			Signal2_4(false)
 			Signal2_3(false)
+			Signal2_5(false)
+			Signal2_4(false)
 			fetchNextPage()
 		end,
 		getItem = function(p5)

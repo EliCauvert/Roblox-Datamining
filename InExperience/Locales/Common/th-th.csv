@@ -3290,6 +3290,7 @@ Feature.Chat.Label.SearchFriends,ค้นหาเพื่อน
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,เลือกเพื่อลบออก
 Feature.Chat.Label.SnoozePartyNotifications,ปิดเสียงการแจ้งเตือนเกี่ยวกับ Party ในประสบการณ์สำหรับ:
+Feature.Chat.Label.StartChatting,เริ่มแชท
 Feature.Chat.Label.SwipeToReplyTooltip,ปัดเพื่อตอบกลับ
 Feature.Chat.Label.TapToRemove,แตะเพื่อลบออก
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} วัน
@@ -3552,6 +3553,7 @@ Feature.Friends.Button.GotIt,
 Feature.Friends.Description.ContactsModal,Roblox มีรายชื่อผู้ติดต่อของคุณ! เพิ่มคนเหล่านั้นเป็นเพื่อนเพื่อดูอวาตาร์และโปรไฟล์แบบเต็มของเขา หรือไปที่หน้าเพิ่มเพื่อนเพื่อค้นหาคนที่คุณรู้จักเพิ่มเติมได้ที่นั่น
 Feature.Friends.Description.DoMoreWithTrustedConnections,ดำเนินการบน Roblox ได้มากขึ้นกับคนรู้จักที่เชื่อได้ โปรดเพิ่มเฉพาะผู้ใช้ที่คุณรู้จักและไว้ใจ
 Feature.Friends.Description.DoMoreWithTrustedFriends,ดำเนินการบน Roblox ได้มากขึ้นกับเพื่อนที่เชื่อได้ โปรดเพิ่มเฉพาะผู้ใช้ที่คุณรู้จักและไว้ใจ
+Feature.Friends.Description.FoundFromContactImporter,ส่งมาจากเครื่องมือนำเข้ารายชื่อผู้ติดต่อ
 Feature.Friends.Description.FromContacts,จากรายชื่อผู้ติดต่อ
 Feature.Friends.Description.FromContactsV2,{contactName} จากรายชื่อผู้ติดต่อ
 Feature.Friends.Description.FromQrCode,จากรหัส QR
@@ -3642,6 +3644,7 @@ Feature.Friends.Label.SentFromWithContext,ส่งมาจาก {gameName}
 Feature.Friends.Label.SingularMutualFriend,
 Feature.Friends.Label.Suggested,คัดสรรมาแล้ว
 Feature.Friends.Label.Unfollowed,เลิกติดตาม
+Feature.Friends.Label.YouAreFollowing,คุณกำลังติดตาม
 Feature.Friends.Label.YourLinkedParent,ผู้ปกครองที่เชื่อมโยงอยู่
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,คุณต้องการให้เราแนะนำคุณแก่ผู้ใช้ Roblox คนอื่นๆ ที่มีหมายเลขโทรศัพท์ของคุณใช่หรือไม่?
@@ -4278,7 +4281,7 @@ Feature.PlayerSearchResults.Label.NewUsername,ชื่อผู้ใช้ใ�
 Feature.PlayerSearchResults.Label.Previously,
 Feature.PlayerSearchResults.Label.ThisIsYou,ตัวคุณเอง
 Feature.PlayerSearchResults.Label.You,คุณ
-Feature.PlayerSearchResults.Label.YouAreFollowing,คุณกำลังติดตาม
+Feature.PlayerSearchResults.Label.YouAreFollowing,
 Feature.PlayerSearchResults.Label.YouAreFriends,คุณเป็นเพื่อนกันแล้ว
 Feature.PrivateServers.Action.CreatePrivateServer,สร้างเซิร์ฟเวอร์ส่วนตัว
 Feature.PrivateServers.Action.FreeWithBlackbird,ฟรีเมื่อสมัคร Plus

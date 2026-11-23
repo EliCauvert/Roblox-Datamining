@@ -3307,6 +3307,7 @@ Feature.Chat.Label.SearchFriends,친구 검색
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,선택하여 제거
 Feature.Chat.Label.SnoozePartyNotifications,체험 내 파티 알림 음소거 대상:
+Feature.Chat.Label.StartChatting,채팅 시작
 Feature.Chat.Label.SwipeToReplyTooltip,밀어서 답장하기
 Feature.Chat.Label.TapToRemove,눌러서 제거
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}일
@@ -3569,6 +3570,7 @@ Feature.Friends.Button.GotIt,
 Feature.Friends.Description.ContactsModal,"Roblox에 내 연락처 목록이 있습니다! 친구가 되어 전체 아바타와 프로필을 확인하세요. 친구 추가 페이지로 이동하면, 아는 사이일 수 있는 사람을 더 많이 확인할 수 있습니다."
 Feature.Friends.Description.DoMoreWithTrustedConnections,신뢰할 수 있는 인맥과 함께 Roblox에서 더 많은 것을 즐기세요. 아는 사람과 신뢰할 수 있는 사람만 추가하세요.
 Feature.Friends.Description.DoMoreWithTrustedFriends,신뢰할 수 있는 친구와 함께 Roblox에서 더 많은 것을 즐기세요. 아는 사람과 신뢰할 수 있는 사람만 추가하세요.
+Feature.Friends.Description.FoundFromContactImporter,연락처 가져오기에서 전송됨
 Feature.Friends.Description.FromContacts,연락처에서
 Feature.Friends.Description.FromContactsV2,연락처 목록의 {contactName} 님
 Feature.Friends.Description.FromQrCode,QR 코드로 요청
@@ -3659,6 +3661,7 @@ Feature.Friends.Label.SentFromWithContext,전송 위치: {gameName}
 Feature.Friends.Label.SingularMutualFriend,
 Feature.Friends.Label.Suggested,추천
 Feature.Friends.Label.Unfollowed,언팔로우됨
+Feature.Friends.Label.YouAreFollowing,내가 현재 팔로잉
 Feature.Friends.Label.YourLinkedParent,연결된 보호자
 Feature.Friends.LinkText.LearnMore,자세히 알아보기
 Feature.Friends.Message.DiscoverableSettings,내 휴대폰 번호를 알고 있는 Roblox 사용자에게 나를 추천할까요?
@@ -4296,7 +4299,7 @@ Feature.PlayerSearchResults.Label.NewUsername,새로운 사용자 이름
 Feature.PlayerSearchResults.Label.Previously,
 Feature.PlayerSearchResults.Label.ThisIsYou,회원님이네요
 Feature.PlayerSearchResults.Label.You,나
-Feature.PlayerSearchResults.Label.YouAreFollowing,내가 현재 팔로잉
+Feature.PlayerSearchResults.Label.YouAreFollowing,
 Feature.PlayerSearchResults.Label.YouAreFriends,여러분은 친구예요
 Feature.PrivateServers.Action.CreatePrivateServer,비공개 서버 만들기
 Feature.PrivateServers.Action.FreeWithBlackbird,Plus로 무료 이용

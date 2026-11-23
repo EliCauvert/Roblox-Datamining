@@ -3229,6 +3229,7 @@ Feature.Chat.Label.SearchFriends,Suche nach Freunden
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,Zum Entfernen auswählen
 Feature.Chat.Label.SnoozePartyNotifications,In-Experience Party-Benachrichtigungen stummschalten für:
+Feature.Chat.Label.StartChatting,Mit dem Chatten beginnen
 Feature.Chat.Label.SwipeToReplyTooltip,Zum Antworten wischen
 Feature.Chat.Label.TapToRemove,Zum Entfernen tippen
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} Tag(e)
@@ -3491,6 +3492,7 @@ Feature.Friends.Button.GotIt,
 Feature.Friends.Description.ContactsModal,"Deine Kontakte sind auf Roblox! Befreunde dich mit ihnen auf Roblox, um ihre vollständigen Avatare und Profile zu sehen. Gehe auf die Seite ""Freunde hinzufügen"", um mehr Leute zu sehen, die du vielleicht kennst."
 Feature.Friends.Description.DoMoreWithTrustedConnections,"Erlebe auf Roblox noch mehr mit vertrauten Connections. Füge nur Personen hinzu, die du kennst und denen du vertraust."
 Feature.Friends.Description.DoMoreWithTrustedFriends,"Erlebe auf Roblox noch mehr mit vertrauten Freunden. Füge nur Personen hinzu, die du kennst und denen du vertraust."
+Feature.Friends.Description.FoundFromContactImporter,Vom Kontakt-Importierer gesendet
 Feature.Friends.Description.FromContacts,Aus Kontakten
 Feature.Friends.Description.FromContactsV2,{contactName} von Kontakten
 Feature.Friends.Description.FromQrCode,Von QR-Code
@@ -3581,6 +3583,7 @@ Feature.Friends.Label.SentFromWithContext,Von {gameName} gesendet
 Feature.Friends.Label.SingularMutualFriend,gemeinsamer Freund
 Feature.Friends.Label.Suggested,Empfohlen
 Feature.Friends.Label.Unfollowed,Nicht mehr gefolgt
+Feature.Friends.Label.YouAreFollowing,Du folgst
 Feature.Friends.Label.YourLinkedParent,Dein verknüpftes Elternteil
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,"Möchtest du anderen Roblox-Benutzern, die deine Telefonnummer haben, vorgeschlagen werden?"
@@ -4217,7 +4220,7 @@ Feature.PlayerSearchResults.Label.NewUsername,Neuer Benutzername
 Feature.PlayerSearchResults.Label.Previously,Vorher
 Feature.PlayerSearchResults.Label.ThisIsYou,Das bist du
 Feature.PlayerSearchResults.Label.You,Du
-Feature.PlayerSearchResults.Label.YouAreFollowing,Du folgst
+Feature.PlayerSearchResults.Label.YouAreFollowing,
 Feature.PlayerSearchResults.Label.YouAreFriends,Ihr seid befreundet
 Feature.PrivateServers.Action.CreatePrivateServer,Privaten Server erstellen
 Feature.PrivateServers.Action.FreeWithBlackbird,Mit Plus-Abo gratis

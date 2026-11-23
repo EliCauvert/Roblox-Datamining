@@ -3307,6 +3307,7 @@ Feature.Chat.Label.SearchFriends,Wyszukaj znajomych
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,"Wybierz, aby usunąć"
 Feature.Chat.Label.SnoozePartyNotifications,Wycisz powiadomienia dotyczące Imprezy w projekcie na:
+Feature.Chat.Label.StartChatting,Zacznij czatować
 Feature.Chat.Label.SwipeToReplyTooltip,"Przesuń, aby odpowiedzieć"
 Feature.Chat.Label.TapToRemove,"Dotknij, aby usunąć"
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} dni
@@ -3569,6 +3570,7 @@ Feature.Friends.Button.GotIt,
 Feature.Friends.Description.ContactsModal,"Osoby, które znasz, są na platformie Roblox! Dodajcie się nawzajem do znajomych, aby zobaczyć swoje pełne awatary i profile. Przejdź na stronę Dodaj znajomych, aby zobaczyć więcej osób, które możesz znać."
 Feature.Friends.Description.DoMoreWithTrustedConnections,"Korzystaj z Robloxa jeszcze lepiej dzięki zaufanym znajomym. Dodawaj tylko osoby, które znasz i którym ufasz."
 Feature.Friends.Description.DoMoreWithTrustedFriends,"Korzystaj z Robloxa jeszcze lepiej dzięki zaufanym znajomym. Dodawaj tylko osoby, które znasz i którym ufasz."
+Feature.Friends.Description.FoundFromContactImporter,Wysłano z narzędzia do importowania kontaktów
 Feature.Friends.Description.FromContacts,Z kontaktów
 Feature.Friends.Description.FromContactsV2,{contactName} z kontaktów
 Feature.Friends.Description.FromQrCode,Z kodu QR
@@ -3659,6 +3661,7 @@ Feature.Friends.Label.SentFromWithContext,Wysłano z gry {gameName}
 Feature.Friends.Label.SingularMutualFriend,wspólny znajomy
 Feature.Friends.Label.Suggested,Sugerowani
 Feature.Friends.Label.Unfollowed,Usunięto z obserwowanych
+Feature.Friends.Label.YouAreFollowing,
 Feature.Friends.Label.YourLinkedParent,Połączony z Tobą rodzic
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,"Czy chcesz, abyśmy polecali cię użytkownikom platformy Roblox, którzy mają twój numer telefonu?"

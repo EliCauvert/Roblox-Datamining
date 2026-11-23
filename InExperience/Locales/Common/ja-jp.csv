@@ -3307,6 +3307,7 @@ Feature.Chat.Label.SearchFriends,友達をサーチ
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,選択して削除
 Feature.Chat.Label.SnoozePartyNotifications,以下のバーチャル空間内パーティ通知をミュート:
+Feature.Chat.Label.StartChatting,チャットを始める
 Feature.Chat.Label.SwipeToReplyTooltip,スワイプして返信
 Feature.Chat.Label.TapToRemove,タップして削除
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}日
@@ -3569,6 +3570,7 @@ Feature.Friends.Button.GotIt,
 Feature.Friends.Description.ContactsModal,あなたの連絡先の中にRobloxを使っている人がいます！アバターとプロフィールを見るには、友達になりましょう。 「友達を追加」ページに移動して、知り合いをさらに探せます。
 Feature.Friends.Description.DoMoreWithTrustedConnections,信頼するつながりを活用して、Robloxでさらに楽しみましょう。知り合いの信頼する人だけを追加してください。
 Feature.Friends.Description.DoMoreWithTrustedFriends,信頼する友達と一緒に、Robloxでさらに楽しみましょう。知り合いの信頼する人だけを追加してください。
+Feature.Friends.Description.FoundFromContactImporter,連絡先インポート機能から送信
 Feature.Friends.Description.FromContacts,連絡先から
 Feature.Friends.Description.FromContactsV2,連絡先にある {contactName} さん
 Feature.Friends.Description.FromQrCode,QRコードから
@@ -3659,6 +3661,7 @@ Feature.Friends.Label.SentFromWithContext,{gameName} から送信されました
 Feature.Friends.Label.SingularMutualFriend,
 Feature.Friends.Label.Suggested,
 Feature.Friends.Label.Unfollowed,フォローをやめました
+Feature.Friends.Label.YouAreFollowing,
 Feature.Friends.Label.YourLinkedParent,紐づけられた保護者
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,あなたの電話番号を持っているRobloxユーザーへのおすすめ表示を希望しますか？

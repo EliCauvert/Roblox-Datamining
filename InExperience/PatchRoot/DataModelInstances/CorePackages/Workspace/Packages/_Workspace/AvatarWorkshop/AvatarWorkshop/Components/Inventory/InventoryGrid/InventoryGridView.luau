@@ -3,16 +3,18 @@ local Parent = AvatarWorkshop.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local LocalizationModule = require(Parent.Localization)
+local AddNewCardModule = require(AvatarWorkshop.Components.AddNewCard.AddNewCard)
 local ItemCardModule = require(AvatarWorkshop.Components.ItemCard.ItemCard)
 local _ = require(AvatarWorkshop.Constants.TileShape)
 local VirtualizedGridModule = require(AvatarWorkshop.Components.VirtualizedGrid.VirtualizedGrid)
+local InventoryGridConstantsModule = require(script.Parent.InventoryGridConstants)
 local _ = require(script.Parent.InventoryGridTypes)
 local InputSize = FoundationModule.Enums.InputSize
 local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 
 local function renderItem(p1, TileShape)
-	-- upvalues: ReactModule (copy), ItemCardModule (copy)
-	return ReactModule.createElement(ItemCardModule, {
+	-- upvalues: InventoryGridConstantsModule (copy), ReactModule (copy), AddNewCardModule (copy), ItemCardModule (copy)
+	return if p1.id == InventoryGridConstantsModule.ADD_NEW_ITEM_ID then ReactModule.createElement(AddNewCardModule, { onActivated = p1.onActivated, tileShape = TileShape }) else ReactModule.createElement(ItemCardModule, {
 		showDetails = false,
 		image = p1.image,
 		title = p1.title,

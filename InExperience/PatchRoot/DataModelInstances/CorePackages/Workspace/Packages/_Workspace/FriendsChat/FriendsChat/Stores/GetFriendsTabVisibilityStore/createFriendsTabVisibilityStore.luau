@@ -5,6 +5,7 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local GetFriendsChatSettingsStoreModule = require(Parent.AppChat.GetFriendsChatSettingsStore)
 local GetLocalUserIdModule = require(script.Parent.Parent.Parent.Utils.getLocalUserId)
 local FFlagExpChatFriendsRespectWindowEnabledModule = require(FriendsChat.Flags.FFlagExpChatFriendsRespectWindowEnabled)
+local FFlagFriendsChatSuggestedUsersModule = require(FriendsChat.Flags.FFlagFriendsChatSuggestedUsers)
 local FFlagExpChatCanShowFriendsTab = SharedFlagsModule.FFlagExpChatCanShowFriendsTab
 local FFlagExpChatFriendsTabRequireDefaultChannels = SharedFlagsModule.FFlagExpChatFriendsTabRequireDefaultChannels
 local FFlagFriendsChatHasFriendsGate = SharedFlagsModule.FFlagFriendsChatHasFriendsGate
@@ -13,7 +14,7 @@ local GetAppPolicyStoreFunction = require(Parent.UniversalAppPolicy).GetAppPolic
 local GetResult = if FFlagFriendsChatHasFriendsGate then require(Parent.DataHydration).Friends.FriendsStore.get() else nil
 
 return function()
-	-- upvalues: GetFriendsChatSettingsStoreModule (copy), TextChatService (copy), FFlagExpChatFriendsRespectWindowEnabledModule (copy), SignalsModule (copy), GetAppPolicyStoreFunction (copy), FFlagFriendsChatHasFriendsGate (copy), FFlagExpChatCanShowFriendsTab (copy), GetLocalUserIdModule (copy), GetResult (ref), FFlagExpChatFriendsTabRequireDefaultChannels (copy)
+	-- upvalues: GetFriendsChatSettingsStoreModule (copy), TextChatService (copy), FFlagExpChatFriendsRespectWindowEnabledModule (copy), SignalsModule (copy), GetAppPolicyStoreFunction (copy), FFlagFriendsChatHasFriendsGate (copy), FFlagExpChatCanShowFriendsTab (copy), GetLocalUserIdModule (copy), GetResult (ref), FFlagFriendsChatSuggestedUsersModule (copy), FFlagExpChatFriendsTabRequireDefaultChannels (copy)
 	local FriendsChatSettingsStoreModule = GetFriendsChatSettingsStoreModule(false)
 	local CreateDefaultTextChannels = TextChatService.CreateDefaultTextChannels
 	local Callback = nil
@@ -33,7 +34,7 @@ return function()
 	end
 	return {
 		getIsFriendsTabVisible = SignalsModule.createComputed(function(p1)
-			-- upvalues: FFlagExpChatFriendsRespectWindowEnabledModule (upval), Callback (ref), GetAppPolicyStoreFunction (upval), FFlagFriendsChatHasFriendsGate (upval), FFlagExpChatCanShowFriendsTab (upval), GetLocalUserIdModule (upval), GetResult (upval), FriendsChatSettingsStoreModule (copy), FFlagExpChatFriendsTabRequireDefaultChannels (upval), CreateDefaultTextChannels (copy)
+			-- upvalues: FFlagExpChatFriendsRespectWindowEnabledModule (upval), Callback (ref), GetAppPolicyStoreFunction (upval), FFlagFriendsChatHasFriendsGate (upval), FFlagExpChatCanShowFriendsTab (upval), GetLocalUserIdModule (upval), GetResult (upval), FFlagFriendsChatSuggestedUsersModule (upval), FriendsChatSettingsStoreModule (copy), FFlagExpChatFriendsTabRequireDefaultChannels (upval), CreateDefaultTextChannels (copy)
 			if FFlagExpChatFriendsRespectWindowEnabledModule and not Callback(p1) then
 				return false
 			end
@@ -47,7 +48,7 @@ return function()
 				if LocalUserIdModule ~= nil then
 					local FriendsCountByUserId = GetResult.GetFriendsCountByUserId((tostring(LocalUserIdModule)))
 					local DataResult = if FriendsCountByUserId then FriendsCountByUserId.data(p1) else nil
-					Flag = DataResult ~= nil and DataResult > 0
+					Flag = DataResult ~= nil and (FFlagFriendsChatSuggestedUsersModule or DataResult > 0)
 				end
 			end
 			return FFlagExpChatCanShowFriendsTab and (CanSeeFriendsTab and (Flag and (FriendsChatSettingsStoreModule.getChatEnabled(p1) and (FriendsChatSettingsStoreModule.getChatUserMessagesEnabled(p1) ~= false and (not FFlagExpChatFriendsTabRequireDefaultChannels or CreateDefaultTextChannels)))))

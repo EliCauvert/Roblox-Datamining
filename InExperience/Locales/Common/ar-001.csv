@@ -3246,6 +3246,7 @@ Feature.Chat.Label.SearchFriends,البحث عن أصدقاء
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,اضغط للإزالة
 Feature.Chat.Label.SnoozePartyNotifications,كتم إشعارات الفرقة داخل التجربة لمدة:
+Feature.Chat.Label.StartChatting,ابدأ الدردشة
 Feature.Chat.Label.SwipeToReplyTooltip,اسحب للرد
 Feature.Chat.Label.TapToRemove,
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}ي
@@ -3512,6 +3513,7 @@ Feature.Friends.Button.GotIt,
 Feature.Friends.Description.ContactsModal,"جهات اتصالك على Roblox! أنشئ صداقة لمعاينة أفاتارهم وملفاتهم الشخصية. انتقل إلى صفحة ""إضافة أصدقاء"" لمعاينة المزيد من الأشخاص الذين قد تعرفهم."
 Feature.Friends.Description.DoMoreWithTrustedConnections,استمتِع بالمزيد على منصّة Roblox مع جهات التواصل الموثوقة. أضِف الأشخاص الذين تعرفهم وتثق بهم فقط.
 Feature.Friends.Description.DoMoreWithTrustedFriends,استمتع بالمزيد على منصّة Roblox مع الأصدقاء الموثوقين. أضِف الأشخاص الذين تعرفهم وتثق بهم فقط.
+Feature.Friends.Description.FoundFromContactImporter,أرسلت من مستورد جهات الاتصال
 Feature.Friends.Description.FromContacts,من جهات الاتصال
 Feature.Friends.Description.FromContactsV2,{contactName} من جهات الاتصال
 Feature.Friends.Description.FromQrCode,من كود QR
@@ -3602,6 +3604,7 @@ Feature.Friends.Label.SentFromWithContext,أرسلت من {gameName}
 Feature.Friends.Label.SingularMutualFriend,صديق مشترك
 Feature.Friends.Label.Suggested,مقترح
 Feature.Friends.Label.Unfollowed,تم إلغاء المتابعة
+Feature.Friends.Label.YouAreFollowing,أنت تتابع
 Feature.Friends.Label.YourLinkedParent,أحد حساب الوالدين المرتبط بحسابك
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,هل تريد أن نوصي بك لمستخدمي Roblox الذين لديهم رقم هاتفك؟
@@ -4239,7 +4242,7 @@ Feature.PlayerSearchResults.Label.NewUsername,اسم مستخدم جديد
 Feature.PlayerSearchResults.Label.Previously,سابقًا
 Feature.PlayerSearchResults.Label.ThisIsYou,هذا أنت
 Feature.PlayerSearchResults.Label.You,أنت
-Feature.PlayerSearchResults.Label.YouAreFollowing,أنت تتابع
+Feature.PlayerSearchResults.Label.YouAreFollowing,
 Feature.PlayerSearchResults.Label.YouAreFriends,صرت صديقًا
 Feature.PrivateServers.Action.CreatePrivateServer,إنشاء خادم خاص
 Feature.PrivateServers.Action.FreeWithBlackbird,مجانًا مع Plus

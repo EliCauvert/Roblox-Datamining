@@ -3305,6 +3305,7 @@ Feature.Chat.Label.SearchFriends,Cari teman
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,Pilih untuk menghapus
 Feature.Chat.Label.SnoozePartyNotifications,Bisukan notifikasi party dalam pengalaman virtual selama:
+Feature.Chat.Label.StartChatting,Mulai chat
 Feature.Chat.Label.SwipeToReplyTooltip,Geser untuk membalas
 Feature.Chat.Label.TapToRemove,Ketuk untuk menghapus
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}hr
@@ -3567,6 +3568,7 @@ Feature.Friends.Button.GotIt,
 Feature.Friends.Description.ContactsModal,Kontak kamu ada di Roblox! Berteman dengan mereka untuk melihat profil lengkap dan avatar mereka. Buka halaman Tambahkan Teman untuk melihat lebih banyak pengguna yang mungkin kamu kenal.
 Feature.Friends.Description.DoMoreWithTrustedConnections,Lakukan lebih banyak hal di Roblox dengan Koneksi Tepercaya. Hanya tambahkan pengguna yang kamu kenal dan percayai.
 Feature.Friends.Description.DoMoreWithTrustedFriends,Lakukan lebih banyak hal di Roblox bersama teman tepercaya. Hanya tambahkan pengguna yang kamu kenal dan percayai.
+Feature.Friends.Description.FoundFromContactImporter,Dikirim dari importir kontak
 Feature.Friends.Description.FromContacts,Dari Kontak
 Feature.Friends.Description.FromContactsV2,{contactName} dari kontak
 Feature.Friends.Description.FromQrCode,Dari kode QR
@@ -3657,6 +3659,7 @@ Feature.Friends.Label.SentFromWithContext,Terkirim dari {gameName}
 Feature.Friends.Label.SingularMutualFriend,teman bersama
 Feature.Friends.Label.Suggested,Disarankan
 Feature.Friends.Label.Unfollowed,Berhenti mengikuti
+Feature.Friends.Label.YouAreFollowing,Kamu mengikuti
 Feature.Friends.Label.YourLinkedParent,Orang tua yang terhubung
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,Akunmu ingin direkomendasikan ke pengguna Roblox yang memiliki nomor ponselmu?
@@ -4293,7 +4296,7 @@ Feature.PlayerSearchResults.Label.NewUsername,Nama pengguna baru
 Feature.PlayerSearchResults.Label.Previously,Sebelumnya
 Feature.PlayerSearchResults.Label.ThisIsYou,Ini adalah kamu
 Feature.PlayerSearchResults.Label.You,Kamu
-Feature.PlayerSearchResults.Label.YouAreFollowing,Kamu mengikuti
+Feature.PlayerSearchResults.Label.YouAreFollowing,
 Feature.PlayerSearchResults.Label.YouAreFriends,Kalian berteman
 Feature.PrivateServers.Action.CreatePrivateServer,Buat Server Pribadi
 Feature.PrivateServers.Action.FreeWithBlackbird,Gratis dengan Plus

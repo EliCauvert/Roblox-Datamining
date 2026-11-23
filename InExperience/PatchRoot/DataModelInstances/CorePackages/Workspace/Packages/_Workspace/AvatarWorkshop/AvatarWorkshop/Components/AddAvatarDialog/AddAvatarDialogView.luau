@@ -53,6 +53,7 @@ return function(p1)
 			})
 		}),
 		DialogActions = ReactModule.createElement(Dialog.Actions, {
+			LayoutOrder = 1,
 			orientation = Orientation.Vertical,
 			actions = {
 				{

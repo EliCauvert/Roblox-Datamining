@@ -3307,6 +3307,7 @@ Feature.Chat.Label.SearchFriends,Tìm kiếm bạn bè
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,Chọn để xóa
 Feature.Chat.Label.SnoozePartyNotifications,Tắt thông báo tổ đội trong trải nghiệm đối với:
+Feature.Chat.Label.StartChatting,Bắt đầu trò chuyện
 Feature.Chat.Label.SwipeToReplyTooltip,Vuốt để trả lời
 Feature.Chat.Label.TapToRemove,Nhấn để xóa
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}ng
@@ -3569,6 +3570,7 @@ Feature.Friends.Button.GotIt,
 Feature.Friends.Description.ContactsModal,Các liên hệ của bạn đang ở trên Roblox! Trở thành bạn bè để xem avatar và hồ sơ đầy đủ của họ. Truy cập trang Thêm Bạn Bè để xem thêm những người bạn có thể biết.
 Feature.Friends.Description.DoMoreWithTrustedConnections,Nhiều hoạt động tương tác hơn trên Roblox với Người thân. Chỉ thêm những người bạn quen biết và tin tưởng.
 Feature.Friends.Description.DoMoreWithTrustedFriends,Nhiều hoạt động tương tác hơn trên Roblox với bạn bè đáng tin cậy. Chỉ thêm những người bạn quen biết và tin tưởng.
+Feature.Friends.Description.FoundFromContactImporter,Được gửi từ trình nhập danh bạ
 Feature.Friends.Description.FromContacts,Từ danh bạ
 Feature.Friends.Description.FromContactsV2,{contactName} từ danh bạ
 Feature.Friends.Description.FromQrCode,Từ mã QR
@@ -3659,6 +3661,7 @@ Feature.Friends.Label.SentFromWithContext,Gửi Từ {gameName}
 Feature.Friends.Label.SingularMutualFriend,bạn bè chung
 Feature.Friends.Label.Suggested,Gợi Ý
 Feature.Friends.Label.Unfollowed,Đã Hủy Theo Dõi
+Feature.Friends.Label.YouAreFollowing,Bạn đang theo dõi
 Feature.Friends.Label.YourLinkedParent,Cha mẹ được liên kết
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,Bạn có muốn tài khoản của mình được đề xuất cho người chơi Roblox có số điện thoại của bạn không?
@@ -4295,7 +4298,7 @@ Feature.PlayerSearchResults.Label.NewUsername,Tên tài khoản mới
 Feature.PlayerSearchResults.Label.Previously,Tên Cũ
 Feature.PlayerSearchResults.Label.ThisIsYou,Đây là bạn
 Feature.PlayerSearchResults.Label.You,Bạn
-Feature.PlayerSearchResults.Label.YouAreFollowing,Bạn đang theo dõi
+Feature.PlayerSearchResults.Label.YouAreFollowing,
 Feature.PlayerSearchResults.Label.YouAreFriends,Đã trở thành bạn bè
 Feature.PrivateServers.Action.CreatePrivateServer,Tạo Máy Chủ Riêng Tư
 Feature.PrivateServers.Action.FreeWithBlackbird,Miễn phí khi có gói Plus

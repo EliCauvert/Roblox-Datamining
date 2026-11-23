@@ -3288,6 +3288,7 @@ Feature.Chat.Label.SearchFriends,फ़्रेंड्स के लिए �
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,हटाने के लिए चुनें
 Feature.Chat.Label.SnoozePartyNotifications,इन एक्सपीरिएंस पार्टी नोटिफ़िकेशन को म्यूट करें:
+Feature.Chat.Label.StartChatting,चैट करना शुरू करें
 Feature.Chat.Label.SwipeToReplyTooltip,जवाब देने के लिए स्वाइप करें
 Feature.Chat.Label.TapToRemove,हटाने के लिए टैप करें
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}दिन
@@ -3550,6 +3551,7 @@ Feature.Friends.Button.GotIt,
 Feature.Friends.Description.ContactsModal,"आपके कॉन्टेक्ट्स Roblox पर हैं! फ़ुल अवतार और प्रोफ़ाइल देखने के लिए फ़्रेंड्स बनें. ऐसे और लोगों को देखने के लिए 'फ़्रेंड्स जोड़ें' पेज पर जाएँ, जिन्हें शायद आप जानते हैं."
 Feature.Friends.Description.DoMoreWithTrustedConnections,भरोसेमंद कनेक्शन के साथ Roblox पर और बहुत कुछ करें. सिर्फ़ जान-पहचान के और भरोसेमंद लोगों को जोड़ें.
 Feature.Friends.Description.DoMoreWithTrustedFriends,भरोसेमंद फ़्रेंड्स के साथ Roblox पर और बहुत कुछ करें. सिर्फ़ जान-पहचान के और भरोसेमंद लोगों को जोड़ें.
+Feature.Friends.Description.FoundFromContactImporter,कॉन्टैक्ट इंपोर्टर से भेजा गया
 Feature.Friends.Description.FromContacts,कॉन्टैक्ट्स से
 Feature.Friends.Description.FromContactsV2,कॉन्टैक्ट्स से {contactName}
 Feature.Friends.Description.FromQrCode,QR कोड से
@@ -3640,6 +3642,7 @@ Feature.Friends.Label.SentFromWithContext,{gameName} से भेजा गय�
 Feature.Friends.Label.SingularMutualFriend,कॉमन फ़्रेंड
 Feature.Friends.Label.Suggested,सुझाया गया
 Feature.Friends.Label.Unfollowed,फ़ॉलो नहीं किया गया
+Feature.Friends.Label.YouAreFollowing,आप फ़ॉलो कर रहे/रही हैं
 Feature.Friends.Label.YourLinkedParent,आपके लिंक किए गए पेरेंट
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,"क्या आपके नाम का सुझाव उन Roblox यूज़र्स को दिया जा सकता है, जिनके पास आपका फ़ोन नंबर है?"

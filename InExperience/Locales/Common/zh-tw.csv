@@ -3306,6 +3306,7 @@ Feature.Chat.Label.SearchFriends,搜尋好友
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,選擇以移除
 Feature.Chat.Label.SnoozePartyNotifications,將體驗內的隊伍通知靜音：
+Feature.Chat.Label.StartChatting,開始聊天
 Feature.Chat.Label.SwipeToReplyTooltip,滑動以回覆
 Feature.Chat.Label.TapToRemove,輕觸即可移除
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} 天
@@ -3568,6 +3569,7 @@ Feature.Friends.Button.GotIt,
 Feature.Friends.Description.ContactsModal,您有在 Roblox 的聯絡人！和他成為好友後，您就可以看到他的完整虛擬人偶和個人檔案。前往新增好友頁面尋找更多可能認識的人。
 Feature.Friends.Description.DoMoreWithTrustedConnections,透過「信任的聯絡對象」功能，在 Roblox 享受更多樂趣！請確保新增對象是你認識且信任的人員。
 Feature.Friends.Description.DoMoreWithTrustedFriends,與信任的聯絡對象一起在 Roblox 享受更多樂趣！請確保新增對象是你認識且信任的人員。
+Feature.Friends.Description.FoundFromContactImporter,已從聯絡人匯入工具寄出
 Feature.Friends.Description.FromContacts,從通訊錄
 Feature.Friends.Description.FromContactsV2,通訊錄名稱：{contactName}
 Feature.Friends.Description.FromQrCode,來自 QR 碼
@@ -3658,6 +3660,7 @@ Feature.Friends.Label.SentFromWithContext,來自 {gameName}
 Feature.Friends.Label.SingularMutualFriend,位共同好友
 Feature.Friends.Label.Suggested,建議給您
 Feature.Friends.Label.Unfollowed,已取消追蹤
+Feature.Friends.Label.YouAreFollowing,您在追蹤
 Feature.Friends.Label.YourLinkedParent,已連結的家長
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,您想被推薦給其他擁有您的手機號碼的 Roblox 使用者嗎？
@@ -4294,7 +4297,7 @@ Feature.PlayerSearchResults.Label.NewUsername,新使用者名稱
 Feature.PlayerSearchResults.Label.Previously,之前為
 Feature.PlayerSearchResults.Label.ThisIsYou,這是您
 Feature.PlayerSearchResults.Label.You,您自己
-Feature.PlayerSearchResults.Label.YouAreFollowing,您在追蹤
+Feature.PlayerSearchResults.Label.YouAreFollowing,
 Feature.PlayerSearchResults.Label.YouAreFriends,您們是好友
 Feature.PrivateServers.Action.CreatePrivateServer,建立私人伺服器
 Feature.PrivateServers.Action.FreeWithBlackbird,透過 Plus 免費使用

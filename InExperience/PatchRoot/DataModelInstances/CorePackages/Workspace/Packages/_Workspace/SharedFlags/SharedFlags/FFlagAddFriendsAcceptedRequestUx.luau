@@ -1,0 +1,3 @@
+﻿local FFlagAddFriendsPageKeepAcceptedRequestModule = require(script.Parent.FFlagAddFriendsPageKeepAcceptedRequest)
+
+return game:DefineFastFlag("AddFriendsAcceptedRequestUx", false) and FFlagAddFriendsPageKeepAcceptedRequestModule

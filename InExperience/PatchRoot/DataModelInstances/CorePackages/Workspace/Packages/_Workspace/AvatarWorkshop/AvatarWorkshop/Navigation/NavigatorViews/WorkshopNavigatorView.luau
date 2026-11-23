@@ -9,6 +9,7 @@ local HorizontalLayoutModule = require(AvatarWorkshop.Components.HorizontalLayou
 local VerticalLayoutModule = require(AvatarWorkshop.Components.VerticalLayout)
 local TopBarModule = require(AvatarWorkshop.Components.TopBar)
 local CurrentAvatarPreviewModule = require(AvatarWorkshop.Components.AvatarPreview.CurrentAvatarPreview)
+local SaveAvatarFlowModule = require(AvatarWorkshop.Components.SaveAvatarFlow.SaveAvatarFlow)
 local WorkshopToastHostModule = require(AvatarWorkshop.Components.WorkshopToastHost.WorkshopToastHost)
 local ScreenTitlesModule = require(AvatarWorkshop.Constants.ScreenTitles)
 local GetActiveRouteModule = require(AvatarWorkshop.Navigation.getActiveRoute)
@@ -61,9 +62,10 @@ local function WorkshopLayout(p1)
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), FoundationModule (copy), WorkshopLayout (copy), WorkshopToastHostModule (copy)
+	-- upvalues: ReactModule (copy), FoundationModule (copy), WorkshopLayout (copy), SaveAvatarFlowModule (copy), WorkshopToastHostModule (copy)
 	return ReactModule.createElement(FoundationModule.View, { tag = "size-full-full" }, {
 		Layout = ReactModule.createElement(WorkshopLayout, p1),
+		SaveAvatarFlow = ReactModule.createElement(SaveAvatarFlowModule),
 		Toast = ReactModule.createElement(WorkshopToastHostModule)
 	})
 end

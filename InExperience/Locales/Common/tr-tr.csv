@@ -3263,6 +3263,7 @@ Feature.Chat.Label.SearchFriends,Arkadaş ara
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,Kaldırmak için seç
 Feature.Chat.Label.SnoozePartyNotifications,Deneyim içi parti bildirimlerini sustur:
+Feature.Chat.Label.StartChatting,Sohbete başla
 Feature.Chat.Label.SwipeToReplyTooltip,Yanıtlamak için kaydır
 Feature.Chat.Label.TapToRemove,Kaldırmak için dokun
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} gün
@@ -3525,6 +3526,7 @@ Feature.Friends.Button.GotIt,
 Feature.Friends.Description.ContactsModal,Rehberindeki kişiler Roblox'ta! Tam avatarlarını ve profillerini görmek için arkadaş ol. Tanıyor olabileceğin daha fazla kişiyi görmek için Arkadaş Ekle sayfasına git.
 Feature.Friends.Description.DoMoreWithTrustedConnections,Güvenilir Etkileşim Ağı ile Roblox'ta daha fazlasını yap. Yalnızca tanıdığın ve güvendiğin insanları ekle.
 Feature.Friends.Description.DoMoreWithTrustedFriends,Güvenilir arkadaşlarınla Roblox'ta daha fazlasını yap. Yalnızca tanıdığın ve güvendiğin insanları ekle.
+Feature.Friends.Description.FoundFromContactImporter,Rehber aktarıcısı tarafından gönderildi
 Feature.Friends.Description.FromContacts,Rehberden
 Feature.Friends.Description.FromContactsV2,Rehberindeki {contactName}
 Feature.Friends.Description.FromQrCode,QR kodundan
@@ -3615,6 +3617,7 @@ Feature.Friends.Label.SentFromWithContext,{gameName} oyunundan gönderildi
 Feature.Friends.Label.SingularMutualFriend,ortak arkadaş
 Feature.Friends.Label.Suggested,Önerilen
 Feature.Friends.Label.Unfollowed,Takipten çıkıldı
+Feature.Friends.Label.YouAreFollowing,Takip Ediyorsun
 Feature.Friends.Label.YourLinkedParent,Bağlantılı ebeveynin
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,Telefon numaranı bilen Roblox kullanıcılarına tavsiye edilmek ister misin?

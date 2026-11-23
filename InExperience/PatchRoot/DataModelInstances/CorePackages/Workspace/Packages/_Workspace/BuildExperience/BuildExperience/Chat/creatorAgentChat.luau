@@ -26,7 +26,6 @@ local AskManageSubscriptionControllerModule = if FFlagBuildExperienceManageDevPr
 local UnifiedMonetizationToolModule = require(script.Parent.unifiedMonetizationTool)
 local CreatePromptLifecycleTelemetryModule = require(BuildExperience.Telemetry.createPromptLifecycleTelemetry)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
-local FFlagBuildEventsUpdate1Module = require(BuildExperience.Flags.FFlagBuildEventsUpdate1)
 local FFlagBuildExperienceHistoryPollTelemetry = SharedFlagsModule.FFlagBuildExperienceHistoryPollTelemetry
 local FFlagBuildExperienceChatOpenIdModule = require(BuildExperience.Flags.FFlagBuildExperienceChatOpenId)
 local FFlagBuildExperiencePaywallBlockTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperiencePaywallBlockTelemetry)
@@ -386,8 +385,8 @@ local function createLocalToolControllers(p2, p3, p4)
 end
 
 return {
-	createLiveAssistantTurn = function(p7, Prompt, Callback1, p8, p9, Callback2, Callback3, SendConfiguration, ExpectedSessionId, IsCancelled)
-		-- upvalues: createLocalToolControllers (copy), FFlagBuildExperienceChatOpenIdModule (copy), CreatorAgentChatModule (copy), StudioAskUserTool (copy), StudioProposePlanTool (copy), StudioClientLogsTool (copy), StudioClientDataModelTools (copy), UnifiedMonetizationToolModule (copy), FFlagBuildExperienceManageDevProductModule (copy), StudioManageDevProductTool (copy), FFlagBuildExperienceManageDevProductModule1 (copy), StudioManageGamePassTool (copy), FFlagBuildExperienceManageDevProductModule2 (copy), StudioManageSubscriptionTool (copy), FFlagBuildExperiencePromptFailureTelemetry (copy), CreatePromptLifecycleTelemetryModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildExperienceHistoryPollTelemetry (copy), FFlagBuildEventsUpdate1Module (copy), FFlagBuildExperiencePromptIsInExperienceTelemetryModule (copy), FFlagBuildExperienceLibrary (copy), resolvePromptFailure (copy), Debug (copy), getPromptFailureTelemetryParameters (copy), LocalizationStringsModule (copy), config1 (copy), FFlagBuildExperienceModelPickerModule (copy), trackPromptActivity (copy)
+	createLiveAssistantTurn = function(p7, Prompt, Callback3, p8, p9, Callback1, Callback2, SendConfiguration, ExpectedSessionId, IsCancelled)
+		-- upvalues: createLocalToolControllers (copy), FFlagBuildExperienceChatOpenIdModule (copy), CreatorAgentChatModule (copy), StudioAskUserTool (copy), StudioProposePlanTool (copy), StudioClientLogsTool (copy), StudioClientDataModelTools (copy), UnifiedMonetizationToolModule (copy), FFlagBuildExperienceManageDevProductModule (copy), StudioManageDevProductTool (copy), FFlagBuildExperienceManageDevProductModule1 (copy), StudioManageGamePassTool (copy), FFlagBuildExperienceManageDevProductModule2 (copy), StudioManageSubscriptionTool (copy), FFlagBuildExperiencePromptFailureTelemetry (copy), CreatePromptLifecycleTelemetryModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildExperienceHistoryPollTelemetry (copy), FFlagBuildExperiencePromptIsInExperienceTelemetryModule (copy), FFlagBuildExperienceLibrary (copy), resolvePromptFailure (copy), Debug (copy), getPromptFailureTelemetryParameters (copy), LocalizationStringsModule (copy), config1 (copy), FFlagBuildExperienceModelPickerModule (copy), trackPromptActivity (copy)
 		local LocalToolControllers = createLocalToolControllers(p7, p8, p9)
 		local UniverseId = p7.universeId
 		local ChatOpenIdForUniverse = if FFlagBuildExperienceChatOpenIdModule then CreatorAgentChatModule.chatOpenTelemetry.getChatOpenIdForUniverse(UniverseId) else nil
@@ -429,25 +428,6 @@ return {
 			}
 		end) else nil
 		local Flag = false
-		
-		local function handleReceived(TurnId)
-			-- upvalues: FFlagBuildEventsUpdate1Module (upval), Flag (ref), SendBuildExperienceEventModule (upval), UniverseId (copy), p7 (copy), ChatOpenIdForUniverse (copy), FFlagBuildExperiencePromptIsInExperienceTelemetryModule (upval), Callback2 (copy)
-			if FFlagBuildEventsUpdate1Module and not Flag then
-				SendBuildExperienceEventModule("SEND_PROMPT_RECIEVED", {
-					universeId = UniverseId,
-					placeId = p7.placeId,
-					conversationId = p7.getCasSessionId(),
-					chatOpenId = ChatOpenIdForUniverse,
-					turnId = TurnId
-				}, if FFlagBuildExperiencePromptIsInExperienceTelemetryModule then {
-					isInExperience = if game.GameId == 0 then "false" else "true"
-				} else nil)
-			end
-			if Callback2 ~= nil then
-				Callback2(TurnId)
-			end
-		end
-		
 		local SendPromptResult = nil
 		local Callback: (() -> ())? = nil
 		
@@ -489,24 +469,38 @@ return {
 				end
 				SendBuildExperienceEventModule(v1, config, v2)
 			end,
-			onReceived = if FFlagBuildEventsUpdate1Module or Callback2 ~= nil then handleReceived else nil,
-			onAccepted = if FFlagBuildExperienceLibrary and Callback3 ~= nil then function()
-				-- upvalues: FFlagBuildEventsUpdate1Module (upval), Flag (ref), SendBuildExperienceEventModule (upval), UniverseId (copy), p7 (copy), ChatOpenIdForUniverse (copy), FFlagBuildExperiencePromptIsInExperienceTelemetryModule (upval), Callback3 (copy)
-				if FFlagBuildEventsUpdate1Module then
-					Flag = true
+			onReceived = function(TurnId)
+				-- upvalues: Flag (ref), SendBuildExperienceEventModule (upval), UniverseId (copy), p7 (copy), ChatOpenIdForUniverse (copy), FFlagBuildExperiencePromptIsInExperienceTelemetryModule (upval), Callback1 (copy)
+				if not Flag then
 					SendBuildExperienceEventModule("SEND_PROMPT_RECIEVED", {
 						universeId = UniverseId,
 						placeId = p7.placeId,
 						conversationId = p7.getCasSessionId(),
-						chatOpenId = ChatOpenIdForUniverse
+						chatOpenId = ChatOpenIdForUniverse,
+						turnId = TurnId
 					}, if FFlagBuildExperiencePromptIsInExperienceTelemetryModule then {
 						isInExperience = if game.GameId == 0 then "false" else "true"
 					} else nil)
 				end
-				Callback3()
+				if Callback1 ~= nil then
+					Callback1(TurnId)
+				end
+			end,
+			onAccepted = if FFlagBuildExperienceLibrary and Callback2 ~= nil then function()
+				-- upvalues: Flag (ref), SendBuildExperienceEventModule (upval), UniverseId (copy), p7 (copy), ChatOpenIdForUniverse (copy), FFlagBuildExperiencePromptIsInExperienceTelemetryModule (upval), Callback2 (copy)
+				Flag = true
+				SendBuildExperienceEventModule("SEND_PROMPT_RECIEVED", {
+					universeId = UniverseId,
+					placeId = p7.placeId,
+					conversationId = p7.getCasSessionId(),
+					chatOpenId = ChatOpenIdForUniverse
+				}, if FFlagBuildExperiencePromptIsInExperienceTelemetryModule then {
+					isInExperience = if game.GameId == 0 then "false" else "true"
+				} else nil)
+				Callback2()
 			end else nil,
 			onCompleted = function(p10)
-				-- upvalues: resolvePromptFailure (upval), SendPromptResult (ref), Debug (upval), UniverseId (copy), p7 (copy), getPromptFailureTelemetryParameters (upval), FFlagBuildExperiencePromptFailureTelemetry (upval), PromptLifecycleTelemetryModule (copy), LocalizationStringsModule (upval), config1 (upval), FFlagBuildExperiencePromptIsInExperienceTelemetryModule (upval), SendBuildExperienceEventModule (upval), ChatOpenIdForUniverse (copy), Callback (ref), Callback1 (copy)
+				-- upvalues: resolvePromptFailure (upval), SendPromptResult (ref), Debug (upval), UniverseId (copy), p7 (copy), getPromptFailureTelemetryParameters (upval), FFlagBuildExperiencePromptFailureTelemetry (upval), PromptLifecycleTelemetryModule (copy), LocalizationStringsModule (upval), config1 (upval), FFlagBuildExperiencePromptIsInExperienceTelemetryModule (upval), SendBuildExperienceEventModule (upval), ChatOpenIdForUniverse (copy), Callback (ref), Callback3 (copy)
 				local ResolvePromptFailureResult = resolvePromptFailure(p10, SendPromptResult.getSetupError(false))
 				
 				if ResolvePromptFailureResult == nil then
@@ -595,7 +589,7 @@ return {
 					end
 					PromptLifecycleTelemetryModule.finish()
 				end
-				Callback1(ResolvePromptFailureResult)
+				Callback3(ResolvePromptFailureResult)
 			end
 		}
 		

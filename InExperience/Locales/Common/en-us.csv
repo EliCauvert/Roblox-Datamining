@@ -3310,6 +3310,7 @@ Feature.Chat.Label.SearchFriends,Search for friends
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,Select to remove
 Feature.Chat.Label.SnoozePartyNotifications,Mute in-experience party notifications for:
+Feature.Chat.Label.StartChatting,Start chatting
 Feature.Chat.Label.SwipeToReplyTooltip,Swipe to reply
 Feature.Chat.Label.TapToRemove,Tap to remove
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}d
@@ -3576,6 +3577,7 @@ Feature.Friends.Button.GotIt,
 Feature.Friends.Description.ContactsModal,Your contacts are on Roblox! Become friends to see their full avatars and profiles. Go to the Add Friends page to see more people you may know.
 Feature.Friends.Description.DoMoreWithTrustedConnections,Do more on Roblox with Trusted Connections. Only add people you know and trust.
 Feature.Friends.Description.DoMoreWithTrustedFriends,Do more on Roblox with trusted friends. Only add people you know and trust.
+Feature.Friends.Description.FoundFromContactImporter,Sent from contact importer
 Feature.Friends.Description.FromContacts,From contacts
 Feature.Friends.Description.FromContactsV2,{contactName} from contacts
 Feature.Friends.Description.FromQrCode,From QR code
@@ -3666,6 +3668,7 @@ Feature.Friends.Label.SentFromWithContext,Sent From {gameName}
 Feature.Friends.Label.SingularMutualFriend,mutual friend
 Feature.Friends.Label.Suggested,Suggested
 Feature.Friends.Label.Unfollowed,Unfollowed
+Feature.Friends.Label.YouAreFollowing,You are following
 Feature.Friends.Label.YourLinkedParent,Your linked parent
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,Do you want to be recommended to Roblox users who have your phone number?
@@ -4303,7 +4306,7 @@ Feature.PlayerSearchResults.Label.NewUsername,New username
 Feature.PlayerSearchResults.Label.Previously,Previously
 Feature.PlayerSearchResults.Label.ThisIsYou,This is you
 Feature.PlayerSearchResults.Label.You,You
-Feature.PlayerSearchResults.Label.YouAreFollowing,You are following
+Feature.PlayerSearchResults.Label.YouAreFollowing,
 Feature.PlayerSearchResults.Label.YouAreFriends,You are friends
 Feature.PrivateServers.Action.CreatePrivateServer,Create Private Server
 Feature.PrivateServers.Action.FreeWithBlackbird,Free with Plus

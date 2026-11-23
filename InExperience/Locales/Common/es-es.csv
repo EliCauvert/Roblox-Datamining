@@ -3308,6 +3308,7 @@ Feature.Chat.Label.SearchFriends,Buscar amigos
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,Selecciona para eliminar
 Feature.Chat.Label.SnoozePartyNotifications,Silenciar notificaciones de Equipo en la experiencia para
+Feature.Chat.Label.StartChatting,Comenzar a chatear
 Feature.Chat.Label.SwipeToReplyTooltip,Desliza para responder
 Feature.Chat.Label.TapToRemove,Toca para eliminar
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} d
@@ -3570,6 +3571,7 @@ Feature.Friends.Button.GotIt,
 Feature.Friends.Description.ContactsModal,¡Tus contactos están en Roblox! Envíales una solicitud de amistad para ver sus avatares y perfiles completos. Ve a la página Añadir amigos para ver más personas que conoces.
 Feature.Friends.Description.DoMoreWithTrustedConnections,Haz más en Roblox con conexiones de confianza. Solo agrega personas que conozcas y en las que confíes.
 Feature.Friends.Description.DoMoreWithTrustedFriends,Haz más en Roblox con amigos de confianza. Solo agrega personas que conozcas y en las que confíes.
+Feature.Friends.Description.FoundFromContactImporter,Enviado desde el importador de contactos
 Feature.Friends.Description.FromContacts,De contactos
 Feature.Friends.Description.FromContactsV2,{contactName} desde contactos
 Feature.Friends.Description.FromQrCode,Desde el código QR
@@ -3660,6 +3662,7 @@ Feature.Friends.Label.SentFromWithContext,Enviada desde {gameName}
 Feature.Friends.Label.SingularMutualFriend,amistad mutua
 Feature.Friends.Label.Suggested,Sugeridas
 Feature.Friends.Label.Unfollowed,Dejaste de seguir
+Feature.Friends.Label.YouAreFollowing,Estás siguiendo
 Feature.Friends.Label.YourLinkedParent,"Tu padre, madre o tutor vinculado"
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,¿Quieres que te recomendemos a otros usuarios de Roblox que tienen tu número de teléfono?

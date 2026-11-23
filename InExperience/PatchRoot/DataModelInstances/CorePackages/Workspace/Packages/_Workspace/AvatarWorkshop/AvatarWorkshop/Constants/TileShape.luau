@@ -1,1 +1,1 @@
-﻿return {}
+﻿return { SQUARE_ASPECT = 1, TALL_ASPECT = 0.6646341463414634 }

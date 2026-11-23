@@ -3288,6 +3288,7 @@ Feature.Chat.Label.SearchFriends,Cerca amici
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,Seleziona per rimuovere
 Feature.Chat.Label.SnoozePartyNotifications,Silenzia notifiche gruppo dell'esperienza per:
+Feature.Chat.Label.StartChatting,Inizia a chattare
 Feature.Chat.Label.SwipeToReplyTooltip,Scorri per rispondere
 Feature.Chat.Label.TapToRemove,Tocca per rimuovere
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}gg
@@ -3550,6 +3551,7 @@ Feature.Friends.Button.GotIt,
 Feature.Friends.Description.ContactsModal,I tuoi contatti sono su Roblox! Invia loro una richiesta di amicizia per vedere i loro avatar e profili completi. Vai alla pagina Aggiungi amici per vedere più persone che conosci.
 Feature.Friends.Description.DoMoreWithTrustedConnections,Fai di più su Roblox con i collegamenti affidabili. Aggiungi solo le persone che conosci e di cui ti fidi.
 Feature.Friends.Description.DoMoreWithTrustedFriends,Fai di più su Roblox con gli amici affidabili. Aggiungi solo le persone che conosci e di cui ti fidi.
+Feature.Friends.Description.FoundFromContactImporter,Inviato dall'importatore di contatti
 Feature.Friends.Description.FromContacts,Dai contatti
 Feature.Friends.Description.FromContactsV2,{contactName} dai contatti
 Feature.Friends.Description.FromQrCode,Dal codice QR
@@ -3640,6 +3642,7 @@ Feature.Friends.Label.SentFromWithContext,Inviato da {gameName}
 Feature.Friends.Label.SingularMutualFriend,amico reciproco
 Feature.Friends.Label.Suggested,Suggerito
 Feature.Friends.Label.Unfollowed,Non seguito più
+Feature.Friends.Label.YouAreFollowing,Stai seguendo
 Feature.Friends.Label.YourLinkedParent,Il tuo genitore collegato
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,Vuoi essere consigliato ad altri utenti Roblox verificati che hanno il tuo numero di telefono?
@@ -4276,7 +4279,7 @@ Feature.PlayerSearchResults.Label.NewUsername,Nuovo nome utente
 Feature.PlayerSearchResults.Label.Previously,Precedentemente
 Feature.PlayerSearchResults.Label.ThisIsYou,Questo sei tu
 Feature.PlayerSearchResults.Label.You,Tu
-Feature.PlayerSearchResults.Label.YouAreFollowing,Stai seguendo
+Feature.PlayerSearchResults.Label.YouAreFollowing,
 Feature.PlayerSearchResults.Label.YouAreFriends,Sei amico
 Feature.PrivateServers.Action.CreatePrivateServer,Crea server privato
 Feature.PrivateServers.Action.FreeWithBlackbird,Gratis con il piano Plus

@@ -3289,6 +3289,7 @@ Feature.Chat.Label.SearchFriends,Vrienden zoeken
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,Selecteren om te verwijderen
 Feature.Chat.Label.SnoozePartyNotifications,Groepsmeldingen in de ervaring dempen voor:
+Feature.Chat.Label.StartChatting,Beginnen met chatten
 Feature.Chat.Label.SwipeToReplyTooltip,Veeg om te antwoorden
 Feature.Chat.Label.TapToRemove,Tik om te verwijderen
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} d
@@ -3551,6 +3552,7 @@ Feature.Friends.Button.GotIt,
 Feature.Friends.Description.ContactsModal,Je contactpersonen zitten op Roblox! Word vrienden om hun volledige avatars en profielen te zien. Ga naar de pagina Vrienden toevoegen om meer personen te zien die je misschien kent.
 Feature.Friends.Description.DoMoreWithTrustedConnections,Doe meer op Roblox met vertrouwde connecties. Voeg alleen mensen toe die je kent en vertrouwt.
 Feature.Friends.Description.DoMoreWithTrustedFriends,Doe meer op Roblox met vertrouwde vrienden. Voeg alleen mensen toe die je kent en vertrouwt.
+Feature.Friends.Description.FoundFromContactImporter,Verzonden van contactimporter
 Feature.Friends.Description.FromContacts,Van contactpersonen
 Feature.Friends.Description.FromContactsV2,{contactName} van contactpersonen
 Feature.Friends.Description.FromQrCode,Van QR-code
@@ -3641,6 +3643,7 @@ Feature.Friends.Label.SentFromWithContext,Verzonden van {gameName}
 Feature.Friends.Label.SingularMutualFriend,gemeenschappelijke vriend
 Feature.Friends.Label.Suggested,Aanbevolen
 Feature.Friends.Label.Unfollowed,Ontvolgd
+Feature.Friends.Label.YouAreFollowing,Je volgt
 Feature.Friends.Label.YourLinkedParent,Je gekoppelde ouder
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,Wil je worden aanbevolen aan Roblox-gebruikers die jouw telefoonnummer hebben?
@@ -4277,7 +4280,7 @@ Feature.PlayerSearchResults.Label.NewUsername,Nieuwe gebruikersnaam
 Feature.PlayerSearchResults.Label.Previously,Eerder
 Feature.PlayerSearchResults.Label.ThisIsYou,Dit ben jij
 Feature.PlayerSearchResults.Label.You,Jij
-Feature.PlayerSearchResults.Label.YouAreFollowing,Je volgt
+Feature.PlayerSearchResults.Label.YouAreFollowing,
 Feature.PlayerSearchResults.Label.YouAreFriends,Jullie zijn vrienden
 Feature.PrivateServers.Action.CreatePrivateServer,Privéserver maken
 Feature.PrivateServers.Action.FreeWithBlackbird,Gratis met Plus

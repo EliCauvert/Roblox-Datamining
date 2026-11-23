@@ -1,0 +1,1 @@
+﻿return game:DefineFastInt("FriendsChatSuggestedUsersFriendCountThreshold", 5)
