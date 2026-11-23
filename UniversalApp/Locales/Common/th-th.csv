@@ -3518,6 +3518,7 @@ Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,เลือกเพื่อลบออก
 Feature.Chat.Label.Sent,ส่งแล้ว
 Feature.Chat.Label.SnoozePartyNotifications,ปิดเสียงการแจ้งเตือนเกี่ยวกับ Party ในประสบการณ์สำหรับ:
+Feature.Chat.Label.StartChatting,เริ่มแชท
 Feature.Chat.Label.SwipeToReplyTooltip,ปัดเพื่อตอบกลับ
 Feature.Chat.Label.TapToRemove,แตะเพื่อลบออก
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} วัน

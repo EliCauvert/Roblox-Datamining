@@ -3491,6 +3491,7 @@ Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,Kaldırmak için seç
 Feature.Chat.Label.Sent,Gönderildi
 Feature.Chat.Label.SnoozePartyNotifications,Deneyim içi parti bildirimlerini sustur:
+Feature.Chat.Label.StartChatting,Sohbete başla
 Feature.Chat.Label.SwipeToReplyTooltip,Yanıtlamak için kaydır
 Feature.Chat.Label.TapToRemove,Kaldırmak için dokun
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} gün

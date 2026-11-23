@@ -3537,6 +3537,7 @@ Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,선택하여 제거
 Feature.Chat.Label.Sent,전송됨
 Feature.Chat.Label.SnoozePartyNotifications,체험 내 파티 알림 음소거 대상:
+Feature.Chat.Label.StartChatting,채팅 시작
 Feature.Chat.Label.SwipeToReplyTooltip,밀어서 답장하기
 Feature.Chat.Label.TapToRemove,눌러서 제거
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}일

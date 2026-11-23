@@ -3525,6 +3525,7 @@ Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,Zum Entfernen auswählen
 Feature.Chat.Label.Sent,Gesendet
 Feature.Chat.Label.SnoozePartyNotifications,In-Experience Party-Benachrichtigungen stummschalten für:
+Feature.Chat.Label.StartChatting,Mit dem Chatten beginnen
 Feature.Chat.Label.SwipeToReplyTooltip,Zum Antworten wischen
 Feature.Chat.Label.TapToRemove,Zum Entfernen tippen
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} Tag(e)

@@ -3515,6 +3515,7 @@ Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,हटाने के लिए चुनें
 Feature.Chat.Label.Sent,भेज दिया गया
 Feature.Chat.Label.SnoozePartyNotifications,इन एक्सपीरिएंस पार्टी नोटिफ़िकेशन को म्यूट करें:
+Feature.Chat.Label.StartChatting,चैट करना शुरू करें
 Feature.Chat.Label.SwipeToReplyTooltip,जवाब देने के लिए स्वाइप करें
 Feature.Chat.Label.TapToRemove,हटाने के लिए टैप करें
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}दिन

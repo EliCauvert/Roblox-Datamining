@@ -3535,6 +3535,7 @@ Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,"Wybierz, aby usunąć"
 Feature.Chat.Label.Sent,Wysłano
 Feature.Chat.Label.SnoozePartyNotifications,Wycisz powiadomienia dotyczące Imprezy w projekcie na:
+Feature.Chat.Label.StartChatting,Zacznij czatować
 Feature.Chat.Label.SwipeToReplyTooltip,"Przesuń, aby odpowiedzieć"
 Feature.Chat.Label.TapToRemove,"Dotknij, aby usunąć"
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} dni

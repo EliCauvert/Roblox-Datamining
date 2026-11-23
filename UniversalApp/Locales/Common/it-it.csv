@@ -3517,6 +3517,7 @@ Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,Seleziona per rimuovere
 Feature.Chat.Label.Sent,Inviato
 Feature.Chat.Label.SnoozePartyNotifications,Silenzia notifiche gruppo dell'esperienza per:
+Feature.Chat.Label.StartChatting,Inizia a chattare
 Feature.Chat.Label.SwipeToReplyTooltip,Scorri per rispondere
 Feature.Chat.Label.TapToRemove,Tocca per rimuovere
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}gg

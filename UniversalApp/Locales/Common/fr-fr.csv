@@ -3535,6 +3535,7 @@ Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,Sélectionner pour retirer
 Feature.Chat.Label.Sent,Envoyé
 Feature.Chat.Label.SnoozePartyNotifications,Mets en sourdine les notifications de la Party en cours dans l'expérience pour :
+Feature.Chat.Label.StartChatting,
 Feature.Chat.Label.SwipeToReplyTooltip,Balaie l'écran pour répondre
 Feature.Chat.Label.TapToRemove,Appuyer pour retirer
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} j

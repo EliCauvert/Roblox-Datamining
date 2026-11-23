@@ -3533,6 +3533,7 @@ Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,Pilih untuk menghapus
 Feature.Chat.Label.Sent,Terkirim
 Feature.Chat.Label.SnoozePartyNotifications,Bisukan notifikasi party dalam pengalaman virtual selama:
+Feature.Chat.Label.StartChatting,Mulai chat
 Feature.Chat.Label.SwipeToReplyTooltip,Geser untuk membalas
 Feature.Chat.Label.TapToRemove,Ketuk untuk menghapus
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}hr

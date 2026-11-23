@@ -3534,6 +3534,7 @@ Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,選擇以移除
 Feature.Chat.Label.Sent,已傳送
 Feature.Chat.Label.SnoozePartyNotifications,將體驗內的隊伍通知靜音：
+Feature.Chat.Label.StartChatting,開始聊天
 Feature.Chat.Label.SwipeToReplyTooltip,滑動以回覆
 Feature.Chat.Label.TapToRemove,輕觸即可移除
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} 天

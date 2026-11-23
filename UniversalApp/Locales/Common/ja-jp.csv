@@ -3535,6 +3535,7 @@ Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,選択して削除
 Feature.Chat.Label.Sent,送信済み
 Feature.Chat.Label.SnoozePartyNotifications,以下のバーチャル空間内パーティ通知をミュート:
+Feature.Chat.Label.StartChatting,チャットを始める
 Feature.Chat.Label.SwipeToReplyTooltip,スワイプして返信
 Feature.Chat.Label.TapToRemove,タップして削除
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}日

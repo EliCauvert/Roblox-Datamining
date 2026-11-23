@@ -3472,6 +3472,7 @@ Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,اضغط للإزالة
 Feature.Chat.Label.Sent,مرسلة
 Feature.Chat.Label.SnoozePartyNotifications,كتم إشعارات الفرقة داخل التجربة لمدة:
+Feature.Chat.Label.StartChatting,ابدأ الدردشة
 Feature.Chat.Label.SwipeToReplyTooltip,اسحب للرد
 Feature.Chat.Label.TapToRemove,
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}ي

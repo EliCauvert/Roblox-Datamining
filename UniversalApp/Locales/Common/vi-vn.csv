@@ -3535,6 +3535,7 @@ Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,Chọn để xóa
 Feature.Chat.Label.Sent,Đã Gửi
 Feature.Chat.Label.SnoozePartyNotifications,Tắt thông báo tổ đội trong trải nghiệm đối với:
+Feature.Chat.Label.StartChatting,Bắt đầu trò chuyện
 Feature.Chat.Label.SwipeToReplyTooltip,Vuốt để trả lời
 Feature.Chat.Label.TapToRemove,Nhấn để xóa
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}ng

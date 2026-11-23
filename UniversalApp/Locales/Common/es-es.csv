@@ -3536,6 +3536,7 @@ Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,Selecciona para eliminar
 Feature.Chat.Label.Sent,Enviado
 Feature.Chat.Label.SnoozePartyNotifications,Silenciar notificaciones de Equipo en la experiencia para
+Feature.Chat.Label.StartChatting,Comenzar a chatear
 Feature.Chat.Label.SwipeToReplyTooltip,Desliza para responder
 Feature.Chat.Label.TapToRemove,Toca para eliminar
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} d
