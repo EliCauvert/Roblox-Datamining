@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "1aa9b59c-e28a-0158-0fb6-0c3c01ea7a4b")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "89ab7d7c-583a-ffb3-52d2-ed4730093779")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 748348, (e, t, n) => {
@@ -2622,36 +2622,38 @@
         },
         t6 = new Date(0).toISOString(),
         t7 = function(e) {
-            var t, n, i, a, r, o, s;
-            let l = arguments.length > 1 && void 0 !== arguments[1] && arguments[1],
-                d = null != (t = e.id) ? t : void 0,
-                u = null != (n = e.feedItemId) ? n : void 0,
-                c = l ? u : d;
-            if (null == c || "" === c) return null;
-            let m = null != (i = null == (r = e.type) ? void 0 : r.toLowerCase()) ? i : "";
-            if ("draft" === m || m.includes("draft")) return null;
-            let p = e.captionedAssetMoment,
-                f = null == (s = e.primaryCta) || null == (o = s.experienceCta) ? void 0 : o.experienceId,
+            var t, n, i, a, r, o, s, l;
+            let d = arguments.length > 1 && void 0 !== arguments[1] && arguments[1],
+                u = null != (t = e.id) ? t : void 0,
+                c = null != (n = e.feedItemId) ? n : void 0,
+                m = d ? c : u;
+            if (null == m || "" === m) return null;
+            let p = null != (i = null == (r = e.type) ? void 0 : r.toLowerCase()) ? i : "";
+            if ("draft" === p || p.includes("draft")) return null;
+            let f = e.captionedAssetMoment,
                 h = (e => {
-                    if (null != e && "" !== e) return t1.D.get(e.toLowerCase())
-                })(null == p ? void 0 : p.videoContentLanguage);
-            return {
-                momentId: d,
-                feedItemId: u,
-                assetId: null == p ? void 0 : p.assetId,
-                description: null != (a = null == p ? void 0 : p.caption) ? a : "",
-                experienceName: "",
-                modifiedAt: t6,
-                status: (e => {
                     if (!e) return eb;
                     let t = t3[e.toLowerCase()];
                     if (t) return t;
                     let n = e.toLowerCase();
                     return n.includes("pending") ? eI : (n.includes("active") || n.includes("publish") || n.includes("live"), eb)
-                })(e.type),
-                universeId: f,
-                ...null != h ? {
-                    locale: h
+                })(e.type);
+            if (h === eb && (null == f || null == (o = f.partnerUploadType) ? void 0 : o.toLowerCase()) !== "influencer") return null;
+            let v = null == (l = e.primaryCta) || null == (s = l.experienceCta) ? void 0 : s.experienceId,
+                g = (e => {
+                    if (null != e && "" !== e) return t1.D.get(e.toLowerCase())
+                })(null == f ? void 0 : f.videoContentLanguage);
+            return {
+                momentId: u,
+                feedItemId: c,
+                assetId: null == f ? void 0 : f.assetId,
+                description: null != (a = null == f ? void 0 : f.caption) ? a : "",
+                experienceName: "",
+                modifiedAt: t6,
+                status: h,
+                universeId: v,
+                ...null != g ? {
+                    locale: g
                 } : {}
             }
         },
@@ -6193,63 +6195,64 @@
                 onPublishMoment: o,
                 publishingDraftId: s = null,
                 isPublishDisabled: l = !1,
-                hasNextPage: u = !1,
-                fetchNextPage: c,
-                serverPageSize: m = 25
+                isLoadingMoreMoments: u = !1,
+                hasNextPage: c = !1,
+                fetchNextPage: m,
+                serverPageSize: p = 25
             } = e, {
-                translate: p,
-                translateWithNamespace: f
+                translate: f,
+                translateWithNamespace: h
             } = (0, d.A)(), {
                 classes: {
-                    gridContainer: h,
-                    createButtonContainer: v
+                    gridContainer: v,
+                    createButtonContainer: g
                 }
             } = (0, a_.f)(), {
-                statusTab: g
-            } = n_(), x = nN(), y = (0, a.useCallback)(e => {
+                statusTab: x
+            } = n_(), y = nN(), b = (0, a.useCallback)(e => {
                 switch (e) {
                     case eb:
-                        return p("MomentsTable.Pills.Active");
+                        return f("MomentsTable.Pills.Active");
                     case eI:
-                        return p("MomentsTable.Pills.Pending");
+                        return f("MomentsTable.Pills.Pending");
                     case ew:
-                        return p("MomentsTable.Pills.Draft");
+                        return f("MomentsTable.Pills.Draft");
                     case eC:
-                        return p("MomentsTable.Pills.Moderated");
+                        return f("MomentsTable.Pills.Moderated");
                     default:
                         return e
                 }
-            }, [p]), b = g === eb, I = g === eC, w = !I, C = x && !I, T = (0, a.useMemo)(() => g === ew ? t.filter(e => e.status === ew || e.status === eI) : t.filter(e => e.status === g), [t, g]), {
-                page: j,
-                rowsPerPage: S,
-                onPageChange: M,
-                onRowsPerPageChange: k
+            }, [f]), I = x === eb, w = x === eC, C = !w, T = y && !w, j = (0, a.useMemo)(() => x === ew ? t.filter(e => e.status === ew || e.status === eI) : t.filter(e => e.status === x), [t, x]), {
+                page: S,
+                rowsPerPage: M,
+                onPageChange: k,
+                onRowsPerPageChange: E
             } = (0, aD.f)({
-                count: T.length,
+                count: j.length,
                 initialRowsPerPage: 10,
-                resetKey: g
+                resetKey: x
             }), {
-                currentPage: E
-            } = (0, aO.f)(T, {
-                page: j,
-                rowsPerPage: S,
-                hasNextPage: !!b && u,
-                fetchNextPage: b ? c : void 0,
-                fetchLimit: m
-            }), A = (0, a.useCallback)((e, t) => {
+                currentPage: A
+            } = (0, aO.f)(j, {
+                page: S,
+                rowsPerPage: M,
+                hasNextPage: !!I && c,
+                fetchNextPage: I ? m : void 0,
+                fetchLimit: p
+            }), L = (0, a.useCallback)((e, t) => {
                 let n = t.target.value;
                 n !== e.description && r(e, {
                     description: n
                 })
-            }, [r]), L = (0, a.useCallback)(e => {
-                M(void 0, e)
-            }, [M]), N = p("Action.Edit"), R = f(et.f.OAuth, "Label.OAuthMoreDetails"), U = (0, aN.h)("reportAppealsUrl", "production", "global"), O = (0, i.jsx)(aR.U, {
-                children: p("MomentsTable.Header.Status")
-            }), D = 3 + 2 * !!w + +!!C + 3 * !!I;
+            }, [r]), N = (0, a.useCallback)(e => {
+                k(void 0, e)
+            }, [k]), R = f("Action.Edit"), U = h(et.f.OAuth, "Label.OAuthMoreDetails"), O = (0, aN.h)("reportAppealsUrl", "production", "global"), D = (0, i.jsx)(aR.U, {
+                children: f("MomentsTable.Header.Status")
+            }), _ = 3 + 2 * !!C + +!!T + 3 * !!w;
             return (0, i.jsx)("div", {
-                className: h,
+                className: v,
                 children: (0, i.jsx)("div", {
-                    className: (0, P.q)(v, "flex flex-col gap-xlarge width-full self-stretch"),
+                    className: (0, P.q)(g, "flex flex-col gap-xlarge width-full self-stretch"),
                     children: (0, i.jsxs)("div", {
                         className: "flex flex-col gap-y-medium width-full",
                         children: [(0, i.jsxs)(aR.s, {
@@ -6258,69 +6261,73 @@
                             children: [(0, i.jsx)(aR.E, {
                                 children: (0, i.jsxs)(aR.N, {
                                     children: [(0, i.jsx)(aR.U, {
-                                        children: p("MomentsTable.Header.Moments")
-                                    }), w ? (0, i.jsxs)(i.Fragment, {
+                                        children: f("MomentsTable.Header.Moments")
+                                    }), C ? (0, i.jsxs)(i.Fragment, {
                                         children: [(0, i.jsx)(aR.U, {
-                                            children: p("MomentsTable.Header.ExperienceName")
+                                            children: f("MomentsTable.Header.ExperienceName")
                                         }), (0, i.jsx)(aR.U, {
-                                            children: p("MomentsTable.Header.Description")
+                                            children: f("MomentsTable.Header.Description")
                                         })]
-                                    }) : null, C ? (0, i.jsx)(aR.U, {
-                                        children: p("CreateMomentModal.LanguageInput.Label")
-                                    }) : null, I ? (0, i.jsxs)(i.Fragment, {
+                                    }) : null, T ? (0, i.jsx)(aR.U, {
+                                        children: f("CreateMomentModal.LanguageInput.Label")
+                                    }) : null, w ? (0, i.jsxs)(i.Fragment, {
                                         children: [(0, i.jsx)(aR.U, {
-                                            children: p("MomentsTable.Header.Description")
+                                            children: f("MomentsTable.Header.Description")
                                         }), (0, i.jsx)(aR.U, {
-                                            children: f(et.f.AppealsPortal, "Label.UploadTime")
+                                            children: h(et.f.AppealsPortal, "Label.UploadTime")
                                         }), (0, i.jsx)(aR.U, {
-                                            children: p("TableHeader.Reason")
-                                        }), O, (0, i.jsx)(aR.U, {
+                                            children: f("TableHeader.Reason")
+                                        }), D, (0, i.jsx)(aR.U, {
                                             align: "end",
                                             children: " "
                                         })]
                                     }) : (0, i.jsxs)(i.Fragment, {
-                                        children: [O, (0, i.jsx)(aR.U, {
+                                        children: [D, (0, i.jsx)(aR.U, {
                                             align: "end",
                                             children: " "
                                         })]
                                     })]
                                 })
                             }), (0, i.jsx)(aR.z, {
-                                children: 0 === T.length ? (0, i.jsx)(aR.N, {
+                                children: 0 === j.length ? (0, i.jsx)(aR.N, {
                                     children: (0, i.jsx)(aR.d, {
-                                        colSpan: D,
+                                        colSpan: _,
                                         align: "center",
                                         className: "padding-y-xxlarge",
-                                        children: (0, i.jsx)("span", {
+                                        children: u && x !== eC ? (0, i.jsx)(J.f, {
+                                            ariaLabel: f("Label.Loading"),
+                                            size: "Medium",
+                                            variant: "Indeterminate"
+                                        }) : (0, i.jsx)("span", {
                                             className: "text-body-medium content-muted block padding-y-xxlarge",
                                             "data-testid": "moments-table-empty-filter-message",
-                                            children: p(aY[g])
+                                            children: f(aY[x])
                                         })
                                     })
-                                }) : E.map(e => (0, i.jsx)(aQ, {
+                                }) : A.map(e => (0, i.jsx)(aQ, {
                                     moment: e,
-                                    editLabel: N,
+                                    editLabel: R,
                                     publishingDraftId: s,
                                     isPublishDisabled: l,
-                                    showMomentDetailColumns: w,
-                                    showContentLanguageColumn: C,
-                                    showModerationColumns: I,
-                                    moreDetailsLabel: R,
-                                    reportAppealsUrl: U,
-                                    statusLabel: y(e.status),
+                                    showMomentDetailColumns: C,
+                                    showContentLanguageColumn: T,
+                                    showModerationColumns: w,
+                                    moreDetailsLabel: U,
+                                    reportAppealsUrl: O,
+                                    statusLabel: b(e.status),
                                     onEditMoment: n,
-                                    onDescriptionBlur: A,
+                                    onDescriptionBlur: L,
                                     onPublishMoment: o
                                 }, nR(e)))
                             })]
-                        }), T.length > 0 ? (0, i.jsx)(aR.c, {
+                        }), j.length > 0 ? (0, i.jsx)(aR.c, {
                             paginationAriaLabel: "Pagination",
-                            page: j,
-                            rowsPerPage: S,
-                            totalRows: T.length,
+                            page: S,
+                            rowsPerPage: M,
+                            totalRows: j.length,
                             rowsPerPageOptions: aX,
-                            onPageChange: L,
-                            onRowsPerPageChange: k
+                            onPageChange: N,
+                            onRowsPerPageChange: E
                         }) : null]
                     })
                 })
@@ -6751,12 +6758,13 @@
                     size: "Large",
                     variant: "Indeterminate"
                 })
-            }) : !O || P === ew || H || en ? (!D || H || en) && (N || H || en) ? (0, i.jsxs)("div", {
+            }) : !O || P === ew || H || en ? !D || H || en ? (0, i.jsxs)("div", {
                 className: "flex grow-1 flex-col gap-medium self-stretch width-full",
                 children: [l ? (0, i.jsx)(a$, {
                     onRetry: f
-                }) : null, p ? (0, i.jsx)(a2, {}) : null, en || H ? (0, i.jsx)(aZ, {
+                }) : null, p ? (0, i.jsx)(a2, {}) : null, en || H || !N ? (0, i.jsx)(aZ, {
                     moments: et,
+                    isLoadingMoreMoments: !N,
                     hasNextPage: R,
                     fetchNextPage: U,
                     serverPageSize: G,
@@ -7145,5 +7153,5 @@
     }, e.s(["default", 0, rv], 962059)
 }]);
 
-//# debugId=1aa9b59c-e28a-0158-0fb6-0c3c01ea7a4b
-//# sourceMappingURL=083nowuij8v8s.js.map
+//# debugId=89ab7d7c-583a-ffb3-52d2-ed4730093779
+//# sourceMappingURL=1keaqexlwm-_o.js.map
