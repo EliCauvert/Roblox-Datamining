@@ -42,7 +42,7 @@ local MeasurementTelemetryModule = {
 		}
 		
 		if p3.playSessionId then
-			config.playsessionid = p3.playSessionId
+			config.play_session_id = p3.playSessionId
 		end
 		for i, field in p1.fields do
 			config[i] = field

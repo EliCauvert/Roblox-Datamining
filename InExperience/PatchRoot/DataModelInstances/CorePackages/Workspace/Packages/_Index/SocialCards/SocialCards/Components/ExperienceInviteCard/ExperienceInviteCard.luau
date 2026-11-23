@@ -13,11 +13,16 @@ local function ConnectedInviteCard(p1)
 	-- upvalues: ReactModule (copy), SignalsModule (copy), UseInviteCardViewModelModule (copy), InviteCardViewModule (copy)
 	local UniverseId = p1.universeId
 	local ActorId = p1.actorId
+	local ShareLinkId = p1.shareLinkId
 	
 	return ReactModule.createElement(InviteCardViewModule, (UseInviteCardViewModelModule((ReactModule.useMemo(function()
-		-- upvalues: SignalsModule (upval), UniverseId (copy), ActorId (copy)
-		return (SignalsModule.createSignal({ universeId = UniverseId, actorId = ActorId }))
-	end, { UniverseId, ActorId })))))
+		-- upvalues: SignalsModule (upval), UniverseId (copy), ActorId (copy), ShareLinkId (copy)
+		return (SignalsModule.createSignal({
+			universeId = UniverseId,
+			actorId = ActorId,
+			shareLinkId = ShareLinkId
+		}))
+	end, { UniverseId, ActorId, ShareLinkId })))))
 end
 
 local function UnavailableInviteCard()

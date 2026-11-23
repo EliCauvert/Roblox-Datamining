@@ -6,6 +6,7 @@ local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
 local InputHandlersModule = require(Parent.InputHandlers)
 local ResponsiveModule = require(Parent.Responsive)
 local _ = require(script.Parent.SettingsTextInputFieldView)
+local UseSettingsTextInputDraftModule = require(script.Parent.useSettingsTextInputDraft)
 local NavigateBack = FocusNavigationUtilsModule.FocusNavigationEventNameEnum.NavigateBack
 local EventMap = {
 	[Enum.KeyCode.ButtonB] = NavigateBack,
@@ -13,54 +14,34 @@ local EventMap = {
 }
 
 return function(Frame)
-	-- upvalues: ReactModule (copy), UseLocalizationFunction (copy), NavigateBack (copy), InputHandlersModule (copy), FocusNavigationUtilsModule (copy), EventMap (copy), ReactFocusNavigationModule (copy), ResponsiveModule (copy)
+	-- upvalues: ReactModule (copy), UseSettingsTextInputDraftModule (copy), UseLocalizationFunction (copy), NavigateBack (copy), InputHandlersModule (copy), FocusNavigationUtilsModule (copy), EventMap (copy), ReactFocusNavigationModule (copy), ResponsiveModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
-	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(Frame.value)
-	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Frame.value)
-	local UseResult = ReactModule.useCallback(function(p1)
-		-- upvalues: UseStateResult2_1 (copy), UseBindingResult2 (copy)
-		UseStateResult2_1(p1)
-		UseBindingResult2(p1)
-	end, { UseBindingResult2 })
-	local Length = utf8.len(UseStateResult1)
-	local NoLength: boolean = Length == nil or (Length == 0 or Frame.maxLength < Length)
-	local IsNotUseStateResultMatch: boolean = not NoLength and UseStateResult1 ~= Frame.value
+	local UseSettingsTextInputDraftModuleResult = UseSettingsTextInputDraftModule(Frame.value, Frame.maxLength)
+	local SetDraftFunction = UseSettingsTextInputDraftModuleResult.setDraft
+	local DraftValue = UseSettingsTextInputDraftModuleResult.draftValue
+	local CanSave = UseSettingsTextInputDraftModuleResult.canSave
 	local UseLocalizationResult = UseLocalizationFunction({
 		save = "CommonUI.Controls.Action.Confirm",
 		cancel = "CommonUI.Controls.Action.Cancel"
 	})
-	local UseResult1 = ReactModule.useCallback(function()
-		-- upvalues: UseResult (copy), Frame (copy), UseStateResult2 (copy)
-		UseResult(Frame.value)
+	local UseResult = ReactModule.useCallback(function()
+		-- upvalues: SetDraftFunction (copy), Frame (copy), UseStateResult2 (copy)
+		SetDraftFunction(Frame.value)
 		UseStateResult2(true)
-	end, { Frame.value, UseResult })
-	local UseResult2 = ReactModule.useCallback(function(Text: string)
-		-- upvalues: Frame (copy), UseResult (copy)
-		local Length = utf8.len(Text)
-		
-		if Length and Frame.maxLength < Length then
-			Text = string.sub(Text, 1, utf8.offset(Text, Frame.maxLength + 1) - 1)
-		end
-		UseResult(Text)
-	end, { Frame.maxLength, UseResult })
-	local UseResult3 = ReactModule.useCallback(function()
+	end, { Frame.value, SetDraftFunction })
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, {})
-	local UseResult4 = ReactModule.useCallback(function()
-		-- upvalues: UseStateResult (copy), IsNotUseStateResultMatch (copy), Frame (copy), UseStateResult1 (copy), UseStateResult2 (copy)
-		if UseStateResult and IsNotUseStateResultMatch then
-			Frame.onChange(UseStateResult1)
+	local UseResult2 = ReactModule.useCallback(function()
+		-- upvalues: UseStateResult (copy), CanSave (copy), Frame (copy), DraftValue (copy), UseStateResult2 (copy)
+		if UseStateResult and CanSave then
+			Frame.onChange(DraftValue)
 			UseStateResult2(false)
 			
 			return
 		end
-	end, {
-		UseStateResult,
-		IsNotUseStateResultMatch,
-		UseStateResult1,
-		Frame.onChange
-	})
+	end, { UseStateResult, CanSave, DraftValue, Frame.onChange })
 	local UseDefaultFocusBehaviorResult, UseDefaultFocusBehaviorResult2 = ReactFocusNavigationModule.useDefaultFocusBehavior((FocusNavigationUtilsModule.useFocusRoot({
 		isAutoFocusRoot = true,
 		shouldRestoreFocus = false,
@@ -68,17 +49,17 @@ return function(Frame)
 		isFocusable = UseStateResult,
 		eventMap = EventMap,
 		eventHandlers = ReactModule.useMemo(function()
-			-- upvalues: NavigateBack (upval), InputHandlersModule (upval), UseResult3 (copy)
+			-- upvalues: NavigateBack (upval), InputHandlersModule (upval), UseResult1 (copy)
 			return {
 				[NavigateBack] = {
 					handler = InputHandlersModule.onRelease(function(p1)
-						-- upvalues: UseResult3 (upval)
-						UseResult3()
+						-- upvalues: UseResult1 (upval)
+						UseResult1()
 						p1:cancel()
 					end)
 				}
 			}
-		end, { UseResult3 })
+		end, { UseResult1 })
 	})))
 	
 	return {
@@ -86,19 +67,19 @@ return function(Frame)
 		value = Frame.value,
 		description = Frame.description,
 		isEditing = UseStateResult,
-		draft = UseBindingResult,
-		hasError = NoLength,
-		canSave = IsNotUseStateResultMatch,
+		draft = UseSettingsTextInputDraftModuleResult.draft,
+		hasError = UseSettingsTextInputDraftModuleResult.hasError,
+		canSave = CanSave,
 		saveText = UseLocalizationResult.save,
 		cancelText = UseLocalizationResult.cancel,
-		remainingCharacters = Frame.maxLength - (Length or 0),
+		remainingCharacters = UseSettingsTextInputDraftModuleResult.remainingCharacters,
 		hideCloseButton = ResponsiveModule.usePreferredInput() == ResponsiveModule.Input.Directional,
 		dialogRef = UseDefaultFocusBehaviorResult2,
 		inputRef = UseDefaultFocusBehaviorResult,
-		onOpen = UseResult1,
-		onCancel = UseResult3,
-		onDraftChanged = UseResult2,
-		onSave = UseResult4,
+		onOpen = UseResult,
+		onCancel = UseResult1,
+		onDraftChanged = UseSettingsTextInputDraftModuleResult.onDraftChanged,
+		onSave = UseResult2,
 		LayoutOrder = Frame.LayoutOrder,
 		testId = Frame.testId or "--settings-text-input-field"
 	}
