@@ -47,6 +47,7 @@ local FFlagCapturesControlsGalleryButtonModule = require(Parent.Flags.FFlagCaptu
 local FFlagCapturesDragAreaExpandHorizontalModule = require(Parent.Flags.FFlagCapturesDragAreaExpandHorizontal)
 local FFlagCapturesDragAreaExpandVerticalModule = require(Parent.Flags.FFlagCapturesDragAreaExpandVertical)
 local FFlagCapturesEntrypointDraggedEventModule = require(Parent.Flags.FFlagCapturesEntrypointDraggedEvent)
+local Size: string = if FFlagCapturesControlsGalleryButtonModule then "size-1000-1000" else "size-1200-1200"
 local FrameCameraCenter = if FFlagCapturesControlsUseBuilderIconsModule then IconName.FrameCameraCenter else "icons/controls/screenCapture"
 local Large = if FFlagCapturesControlsUseBuilderIconsModule then IconSize.Large else nil
 local config = {
@@ -62,7 +63,7 @@ return (CapturesPolicyModule.connect(function(p1)
 		hasVideoCaptureCapability = p1.hasVideoCaptureCapability() and CaptureService:CanCaptureVideo() or DebugOverrideCaptureControlsVideoGuacPolicy
 	}
 end)(function(p1)
-	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), FFlagCapturesControlsGalleryButtonModule (copy), UseTokensFunction (copy), ReactModule (copy), CapturesContextModule (copy), UseSystemMenuDetectionModule (copy), UseLatestCaptureModule (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseTopbarInsetModule (copy), UseEffectFunction (copy), IXPServiceWrapper (copy), FStringSocialCaptureIXPLayer (copy), UsePlayShutterSoundModule (copy), FFlagCapturesDragAreaExpandHorizontalModule (copy), FFlagCapturesDragAreaExpandVerticalModule (copy), UseScreenSizeFunction (copy), FFlagCapturesEntrypointDraggedEventModule (copy), EventNamesModule (copy), UseCaptureControlsControllerModule (copy), UseCallbackFunction (copy), SocialStopwatchModule (copy), TakeCaptureModule (copy), GetLatestCaptureStoreModule (copy), FindCaptureIndexModule (copy), CarouselOpenedModule (copy), GalleryButtonContentModule (copy), View (copy), FFlagKeepSideSheetOpenBesideMenu (copy), FoundationModule (copy), VideoCaptureControlModule (copy), config (copy), Tooltip (copy), PopoverAlign (copy), Icon (copy), FrameCameraCenter (copy), Large (copy), VoiceChatIndicatorModule (copy), FFlagCapturesControlsUseBuilderIconsModule (copy), IconName (copy), Image (copy)
+	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), FFlagCapturesControlsGalleryButtonModule (copy), UseTokensFunction (copy), ReactModule (copy), CapturesContextModule (copy), UseSystemMenuDetectionModule (copy), UseLatestCaptureModule (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseTopbarInsetModule (copy), UseEffectFunction (copy), IXPServiceWrapper (copy), FStringSocialCaptureIXPLayer (copy), UsePlayShutterSoundModule (copy), FFlagCapturesDragAreaExpandHorizontalModule (copy), FFlagCapturesDragAreaExpandVerticalModule (copy), UseScreenSizeFunction (copy), FFlagCapturesEntrypointDraggedEventModule (copy), EventNamesModule (copy), UseCaptureControlsControllerModule (copy), UseCallbackFunction (copy), SocialStopwatchModule (copy), TakeCaptureModule (copy), GetLatestCaptureStoreModule (copy), FindCaptureIndexModule (copy), CarouselOpenedModule (copy), GalleryButtonContentModule (copy), View (copy), FFlagKeepSideSheetOpenBesideMenu (copy), FoundationModule (copy), VideoCaptureControlModule (copy), config (copy), Size (copy), Tooltip (copy), PopoverAlign (copy), Icon (copy), FrameCameraCenter (copy), Large (copy), VoiceChatIndicatorModule (copy), FFlagCapturesControlsUseBuilderIconsModule (copy), IconName (copy), Image (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -190,7 +191,7 @@ end)(function(p1)
 				ScreenshotCTA = if UseSelectorResult2 then nil else ReactModule.createElement(View, {
 					LayoutOrder = 2,
 					tag = {
-						["size-1200-1200"] = true,
+						[Size] = true,
 						["anchor-center-center auto-xy clip position-center-center radius-circle"] = true
 					},
 					onActivated = UseCallbackResult,
@@ -200,7 +201,7 @@ end)(function(p1)
 						align = PopoverAlign.Center,
 						side = config[SnapDirection],
 						title = UseLocalizationResult.captureScreenshot
-					}, ReactModule.createElement(View, { tag = "size-1200-1200" }, {
+					}, ReactModule.createElement(View, { tag = Size }, {
 						ReactModule.createElement(Icon, {
 							AnchorPoint = Vector2.new(0.5, 0.5),
 							Position = UDim2.fromScale(0.5, 0.5),
@@ -212,7 +213,7 @@ end)(function(p1)
 				}),
 				GalleryCTA = if FFlagCapturesControlsGalleryButtonModule and OpenGallery and not UseSelectorResult2 then ReactModule.createElement(View, {
 					LayoutOrder = 3,
-					tag = "position-center-center anchor-center-center size-1200-1200 auto-xy radius-circle clip",
+					tag = "position-center-center anchor-center-center size-1000-1000 auto-xy radius-circle clip",
 					testId = "--social-captures-controls-gallery-button",
 					onActivated = UseCallbackResult1
 				}, {
@@ -221,7 +222,7 @@ end)(function(p1)
 						align = PopoverAlign.Center,
 						side = config[SnapDirection],
 						title = UseLocalizationResult.gallery
-					}, ReactModule.createElement(View, { tag = "size-1200-1200" }))
+					}, ReactModule.createElement(View, { tag = "size-1000-1000" }))
 				}) else nil,
 				VoiceChatIndicator = if UseSelectorResult2 then ReactModule.createElement(VoiceChatIndicatorModule, {
 					layoutOrder = if FFlagCapturesControlsGalleryButtonModule then 4 else 3,

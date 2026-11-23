@@ -31,11 +31,12 @@ local MaxVideoCaptureDurationSeconds = game:DefineFastInt("MaxVideoCaptureDurati
 local FFlagCapturesControlsUseBuilderIconsModule = require(Parent.Flags.FFlagCapturesControlsUseBuilderIcons)
 local FFlagMomentsCaptureEndIxpEnabledModule = require(Parent.Flags.FFlagMomentsCaptureEndIxpEnabled)
 local FIntMomentsInExperienceMinCaptureSecondsModule = require(Parent.Flags.FIntMomentsInExperienceMinCaptureSeconds)
+local Size: string = if require(Parent.Flags.FFlagCapturesControlsGalleryButton) then "size-1000-1000" else "size-1200-1200"
 local FrameVideoCamera = if FFlagCapturesControlsUseBuilderIconsModule then IconName.FrameVideoCamera else "icons/controls/screenRecord_alt"
 local Large = if FFlagCapturesControlsUseBuilderIconsModule then IconSize.Large else nil
 
 return function(p1)
-	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), UseTokensFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), FFlagMomentsCaptureEndIxpEnabledModule (copy), UseRefFunction (copy), UseEffectFunction (copy), IsEligibleForMomentsModule (copy), FIntMomentsInExperienceMinCaptureSecondsModule (copy), UseCallbackFunction (copy), EventNamesModule (copy), StopVideoCaptureModule (copy), CaptureTriggerTypeModule (copy), LogCaptureEndLayerExposureModule (copy), ReactOtterModule (copy), MaxVideoCaptureDurationSeconds (copy), StartVideoCaptureModule (copy), ReactModule (copy), View (copy), Tooltip (copy), PopoverAlign (copy), Icon (copy), FrameVideoCamera (copy), Large (copy), FoundationModule (copy), RadialProgressBarModule (copy)
+	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), UseTokensFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), FFlagMomentsCaptureEndIxpEnabledModule (copy), UseRefFunction (copy), UseEffectFunction (copy), IsEligibleForMomentsModule (copy), FIntMomentsInExperienceMinCaptureSecondsModule (copy), UseCallbackFunction (copy), EventNamesModule (copy), StopVideoCaptureModule (copy), CaptureTriggerTypeModule (copy), LogCaptureEndLayerExposureModule (copy), ReactOtterModule (copy), MaxVideoCaptureDurationSeconds (copy), StartVideoCaptureModule (copy), ReactModule (copy), View (copy), Size (copy), Tooltip (copy), PopoverAlign (copy), Icon (copy), FrameVideoCamera (copy), Large (copy), FoundationModule (copy), RadialProgressBarModule (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -130,7 +131,7 @@ return function(p1)
 			LayoutOrder = p1.layoutOrder,
 			onActivated = UseCallbackResult,
 			tag = {
-				["size-1200-1200"] = true,
+				[Size] = true,
 				["anchor-center-center auto-xy clip position-center-center radius-circle"] = true
 			}
 		}, {
@@ -138,7 +139,7 @@ return function(p1)
 				align = PopoverAlign.Center,
 				side = p1.popoverSide,
 				title = UseLocalizationResult.captureVideo
-			}, ReactModule.createElement(View, { tag = "size-1200-1200" }, {
+			}, ReactModule.createElement(View, { tag = Size }, {
 				Icon = ReactModule.createElement(Icon, {
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.fromScale(0.5, 0.5),

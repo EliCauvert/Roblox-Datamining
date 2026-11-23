@@ -2004,6 +2004,7 @@ return {
 	FFlagFriendsLandingRefreshKeepsFilter = game:DefineFastFlag("FriendsLandingRefreshKeepsFilter", false),
 	FFlagAlignSideSheetWindowCloseRight = game:DefineFastFlag("AlignSideSheetWindowCloseRight", false),
 	FFlagRecycledInlineLayoutLinkedText = game:DefineFastFlag("RecycledInlineLayoutLinkedText", false),
+	FFlagThemeAssetsFromTokens = game:DefineFastFlag("ThemeAssetsFromTokens", false),
 	FFlagAccountSettingsQrDialogFocusNavigation = require(script.FFlagAccountSettingsQrDialogFocusNavigation),
 	FFlagEnableExperienceInviteCard = game:DefineFastFlag("EnableExperienceInviteCard", false)
 }
