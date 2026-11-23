@@ -395,6 +395,7 @@
 	FFlagAXFixVRControlBarFlicker = require(script.FFlagAXFixVRControlBarFlicker),
 	FFlagAXAvatarPreviewPhotoboothMomentsButton = require(script.FFlagAXAvatarPreviewPhotoboothMomentsButton),
 	FFlagAXPhotoboothMomentsButtonsEditorOnly = require(script.FFlagAXPhotoboothMomentsButtonsEditorOnly),
+	FFlagAXHidePhotoboothMomentsFullViewButtonOnAvatarBackground = require(script.FFlagAXHidePhotoboothMomentsFullViewButtonOnAvatarBackground),
 	FFlagAXShowPhotoboothMomentsButtonFtuxTooltip = require(script.FFlagAXShowPhotoboothMomentsButtonFtuxTooltip),
 	FFlagAXIaBEnableShopContext = require(script.FFlagAXIaBEnableShopContext),
 	FFlagAXFixR6CharacterPlacement = require(script.FFlagAXFixR6CharacterPlacement),
