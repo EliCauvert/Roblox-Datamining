@@ -370,6 +370,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"죄송합니다. 서버에
 
 잠시 기다렸다가 다시 시도하세요."
 Authentication.Login.Label.ConnectionError.Title,연결 오류
+Authentication.Login.Label.DontHaveARobloxAccountCreateOne,Roblox 계정이 없으신가요? {startTag}계정 만들기{endTag}
 Authentication.Login.Label.DontHaveAnAccountCreateOne,계정이 없으신가요? {startTag}계정 만들기{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,이메일 주소
@@ -457,6 +458,8 @@ Authentication.Passkey.Label.UpsellErrorTitle,다시 시도하기
 Authentication.Passkey.Label.UpsellTitle,패스키로 더 빠르게 로그인
 Authentication.Passkey.Label.UpsellToastPageTitle,패스키 생성 완료!
 Authentication.Passkey.Label.UpsellToastTitle,패스키가 생성되었습니다!
+Authentication.Pioneer.Heading.GameUnavailable,이용할 수 없는 게임
+Authentication.Pioneer.Heading.NotAvailableForAge,회원님의 연령대에서는 사용할 수 없습니다
 Authentication.ResetPassword.Response.ResetPasswordStarted,계속하기 전에 비밀번호를 재설정해야 합니다.
 Authentication.SignUp.Action.ApplyOnNextRespawn,다음 리스폰 시 적용
 Authentication.SignUp.Action.Cancel,
@@ -1609,7 +1612,6 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,"사용자 이름이나 �
 Feature.AddFriends.Label.ConnectWithContacts,"연락처 목록의 친구들을 초대하거나, 이미 Roblox에 있는 친구들과 소통하세요!"
 Feature.AddFriends.Label.ContactsTile,연락처
 Feature.AddFriends.Label.DeclineAllBackgrounded,친구 요청을 모두 무시합니다. 1분 정도 걸릴 수 있습니다.
-Feature.AddFriends.Label.EmptyStatePrompt,"Roblox에서 함께하고 싶은 사람이 있나요? 친구로 추가할 사람을 찾아 보거나, 이미 알고 있는 친구와 소통하세요!"
 Feature.AddFriends.Label.FriendRequests,친구 요청
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,사람 검색
 Feature.AddFriends.Label.MyQrCode,내 QR 코드
@@ -3598,8 +3600,11 @@ Feature.Chat.Title.NewChat,새 채팅
 Feature.Chat.Toast.Error.InvalidUserSelected,이 목록에는 추가할 수 없는 사람이 한 명 이상 있습니다
 Feature.CloudClient.Action.JoinWithoutCloudPlay,Cloud Play 없이 참가하기
 Feature.CloudClient.Action.PlayWithoutCloudPlay,Cloud Play 없이 플레이하기
+Feature.CloudClient.Action.PlayWithoutRobloxReality,{productName} 없이 플레이하기
+Feature.CloudClient.Action.TryRobloxReality,{productName} 사용해 보기
 Feature.CloudClient.Description.CloudPlayOffer,Cloud Play는 Roblox의 컴퓨터에서 게임을 실행하므로 불러오는 속도가 더 빠르고 충돌이 적을 수 있습니다. 이 게임을 플레이하는 동안에만 적용됩니다.
 Feature.CloudClient.Description.CloudPlayStopped,Cloud Play 없이 계속 플레이하려면 게임에 다시 참여하세요.
+Feature.CloudClient.Description.RobloxRealityOffer,{productName}을(를) 사용하면 좋아하는 게임에 새로운 룩을 적용할 수 있습니다. 초기 미리 보기를 체험해 보고 의견을 알려주세요.
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle은 초기 미리 보기 단계입니다. 오리지널 게임과 다르게 표시될 수 있습니다.
 Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName}은(는) 초기 미리 보기 단계입니다. 오리지널 게임과 다르게 표시될 수 있습니다.
 Feature.CloudClient.Description.RobloxRealityThanks,가장 먼저 사용해 주셔서 감사합니다.
@@ -3607,6 +3612,7 @@ Feature.CloudClient.Heading.CloudPlayOffer,Cloud Play로 플레이하기
 Feature.CloudClient.Heading.CloudPlayStopped,Cloud Play 작동 중단됨
 Feature.CloudClient.Heading.RobloxRealityFailed,Restyle에 문제 발생
 Feature.CloudClient.Heading.RobloxRealityFailedV2,{productName}에 문제가 발생했습니다
+Feature.CloudClient.Heading.RobloxRealityOffer,{productName}(으)로 내 게임을 체험해 보세요
 Feature.CloudClient.Heading.RobloxRealityTimeEnded,Restyle 이용 시간이 종료되었습니다
 Feature.CloudClient.Heading.RobloxRealityTimeEndedV2,{productName} 이용 시간이 종료되었습니다
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Cloud Play에서는 아직 캡처 기능을 이용할 수 없습니다.
@@ -3884,7 +3890,6 @@ Feature.Friends.Error.UserBannedError,회원님의 작업 수행이 정지되었
 Feature.Friends.Error.UserBlockedError,회원님의 작업 수행이 차단되었습니다.
 Feature.Friends.Error.UserNotPassedCaptcha,Captcha를 통과하지 못했습니다.
 Feature.Friends.Feature.Friends.Heading.AddFriends,
-Feature.Friends.FriendingTooltipBody,일부 친구 요청은 단지 내 휴대폰 번호를 이용해 나를 찾은 사용자가 보낸 것일 수도 있습니다. 친구 초대를 수락하기 전에 내가 아는 사람인지 꼭 확인하세요.
 Feature.Friends.Heading.Activities,
 Feature.Friends.Heading.FilterBy,필터링 기준
 Feature.Friends.Heading.Friends,
@@ -3918,7 +3923,6 @@ Feature.Friends.Label.FriendOfUser,{displayName} 님의 친구
 Feature.Friends.Label.FriendOwns,친구 1명이 보유함
 Feature.Friends.Label.FriendRecentlyPlayed,<b>친구 1명</b>이 최근에 플레이함
 Feature.Friends.Label.FriendRequest,
-Feature.Friends.Label.FriendingTooltip,친구 맺기 관련 팁
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,Roblox의 친구라는 명칭이 이제 인맥으로 변경되었습니다!
 Feature.Friends.Label.FriendsHintBold,같이 플레이해요!
@@ -4126,6 +4130,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,{experienceName}에 대한 알�
 Feature.GameJoin.Description.DifferentServer,다른 서버에서 시작하게 됩니다
 Feature.GameJoin.Label.PlayTogether,함께 플레이하실 수 있습니다
 Feature.GameJoin.Label.PlayTogetherSoon,곧 함께 플레이하실 수 있습니다
+Feature.GameJoin.Label.Played,사용자가 플레이함
 Feature.GameJoin.Label.RecentCoplay,최근에 함께 플레이했습니다
 Feature.GamePage.Action.BackToTop,맨 위로 돌아가기
 Feature.GamePage.Label.Ad,
@@ -5374,6 +5379,7 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,새로운 Plus 구독자에게만 제공되는 혜택입니다.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,누군가 회원님의 링크를 통해 Plus를 구매하는 경우.
 Feature.RobloxSubscription.Description.ReferralShare,"다른 사람을 Plus에 초대한 경우, 초대 받은 사람이 Plus를 구매하면 두 사람 모두 {amount} Robux를 받습니다."
+Feature.RobloxSubscription.Description.SpawnEffectsPlusUpsell,Plus를 구독하고 스폰 효과 등 다양한 혜택을 누리세요.
 Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,Plus로 스폰 효과 받기
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D}를 클릭하면 <a href=""{termsUrl}"">Roblox 구독 약관</a>에 동의하는 것으로 간주됩니다. 구독을 취소하기 전까지 매월 자동으로 요금이 청구됩니다."
 Feature.RobloxSubscription.Heading.ReferralEntry,Plus를 공유하고 {amount} Robux  받기

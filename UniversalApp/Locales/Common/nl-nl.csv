@@ -352,6 +352,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Sorry, er is een probleem 
 
 Wacht even en probeer het opnieuw."
 Authentication.Login.Label.ConnectionError.Title,Verbindingsfout
+Authentication.Login.Label.DontHaveARobloxAccountCreateOne,Heb je geen Roblox-account? {startTag}Maak er een{endTag}
 Authentication.Login.Label.DontHaveAnAccountCreateOne,Heb je geen account? {startTag}Maak er een aan{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,E-mailadressen
@@ -439,6 +440,8 @@ Authentication.Passkey.Label.UpsellErrorTitle,
 Authentication.Passkey.Label.UpsellTitle,Sneller aanmelden met een toegangssleutel
 Authentication.Passkey.Label.UpsellToastPageTitle,Succes! De toegangssleutel is aangemaakt
 Authentication.Passkey.Label.UpsellToastTitle,Toegangssleutel is aangemaakt.
+Authentication.Pioneer.Heading.GameUnavailable,Game niet beschikbaar
+Authentication.Pioneer.Heading.NotAvailableForAge,Niet beschikbaar voor jouw leeftijd
 Authentication.ResetPassword.Response.ResetPasswordStarted,Je moet je wachtwoord resetten voordat je verder kunt gaan.
 Authentication.SignUp.Action.ApplyOnNextRespawn,Toepassen bij de volgende respawn
 Authentication.SignUp.Action.Cancel,
@@ -1590,7 +1593,6 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Vind personen op Roblox do
 Feature.AddFriends.Label.ConnectWithContacts,Nodig contactpersonen uit of maak contact met vrienden die al op Roblox zitten!
 Feature.AddFriends.Label.ContactsTile,Contactpersonen
 Feature.AddFriends.Label.DeclineAllBackgrounded,Alle vriendschapsverzoeken worden genegeerd. Dit kan een minuut duren.
-Feature.AddFriends.Label.EmptyStatePrompt,Met wie ga je Roblox verkennen? Zoek naar personen om toe te voegen of maak contact met vrienden die je al kent!
 Feature.AddFriends.Label.FriendRequests,Vriendschapsverzoeken
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,Personen zoeken
 Feature.AddFriends.Label.MyQrCode,Mijn QR-code
@@ -3578,8 +3580,11 @@ Feature.Chat.Title.NewChat,Nieuwe chat
 Feature.Chat.Toast.Error.InvalidUserSelected,Een of meerdere mensen in deze lijst kunnen niet worden toegevoegd
 Feature.CloudClient.Action.JoinWithoutCloudPlay,Deelnemen zonder Cloud Play
 Feature.CloudClient.Action.PlayWithoutCloudPlay,Spelen zonder Cloud Play
+Feature.CloudClient.Action.PlayWithoutRobloxReality,Spelen zonder {productName}
+Feature.CloudClient.Action.TryRobloxReality,{productName} proberen
 Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play voert de game uit op de computers van Roblox, waardoor het mogelijk sneller laadt en minder vaak crasht. Het werkt alleen zolang je deze game speelt."
 Feature.CloudClient.Description.CloudPlayStopped,Neem opnieuw deel aan de game om verder te spelen zonder Cloud Play.
+Feature.CloudClient.Description.RobloxRealityOffer,{productName} geeft je favoriete games een frisse nieuwe look. Probeer deze functie als een van de eersten en laat ons weten wat je ervan vindt.
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle is een vroege preview. Dingen kunnen er anders uitzien dan in de originele game.
 Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName} is een vroege preview. Dingen kunnen er anders uitzien dan in de originele game.
 Feature.CloudClient.Description.RobloxRealityThanks,Bedankt dat je het als een van de eersten hebt uitgeprobeerd.
@@ -3587,6 +3592,7 @@ Feature.CloudClient.Heading.CloudPlayOffer,Spelen met Cloud Play
 Feature.CloudClient.Heading.CloudPlayStopped,Cloud Play werkt niet meer
 Feature.CloudClient.Heading.RobloxRealityFailed,Er is iets misgegaan met Restyle
 Feature.CloudClient.Heading.RobloxRealityFailedV2,Er is iets misgegaan met {productName}
+Feature.CloudClient.Heading.RobloxRealityOffer,Probeer je game met {productName}
 Feature.CloudClient.Heading.RobloxRealityTimeEnded,Je tijd in Restyle is voorbij
 Feature.CloudClient.Heading.RobloxRealityTimeEndedV2,Je tijd in {productName} is voorbij
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Vastleggen is nog niet beschikbaar in Cloud Play.
@@ -3864,7 +3870,6 @@ Feature.Friends.Error.UserBannedError,Je bent verbannen van het uitvoeren van de
 Feature.Friends.Error.UserBlockedError,Je bent geblokkeerd voor het uitvoeren van deze bewerking.
 Feature.Friends.Error.UserNotPassedCaptcha,Je hebt de captcha-test niet doorstaan.
 Feature.Friends.Feature.Friends.Heading.AddFriends,
-Feature.Friends.FriendingTooltipBody,Sommige vriendschapsverzoeken kunnen afkomstig zijn van gebruikers die je vinden via je telefoonnummer. Zorg ervoor dat je ze kent voordat je vrienden wordt.
 Feature.Friends.Heading.Activities,Activiteiten
 Feature.Friends.Heading.FilterBy,Filteren op
 Feature.Friends.Heading.Friends,
@@ -3898,7 +3903,6 @@ Feature.Friends.Label.FriendOfUser,Vriend van {displayName}
 Feature.Friends.Label.FriendOwns,1 vriend bezit
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 vriend</b> speelde onlangs
 Feature.Friends.Label.FriendRequest,
-Feature.Friends.Label.FriendingTooltip,Tip voor vrienden maken
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,Vrienden zijn nu connecties!
 Feature.Friends.Label.FriendsHintBold,Laten we gaan!
@@ -4106,6 +4110,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Meldingen ingeschakeld voor {ex
 Feature.GameJoin.Description.DifferentServer,Je begint op een andere server
 Feature.GameJoin.Label.PlayTogether,Jullie kunnen samen spelen
 Feature.GameJoin.Label.PlayTogetherSoon,Jullie kunnen binnenkort samen spelen
+Feature.GameJoin.Label.Played,gespeeld
 Feature.GameJoin.Label.RecentCoplay,Jullie hebben onlangs samen gespeeld
 Feature.GamePage.Action.BackToTop,Terug naar boven
 Feature.GamePage.Label.Ad,
@@ -5353,6 +5358,7 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,Aanbieding alleen geldig voor nieuwe Plus-abonnees.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,Wanneer iemand Plus afsluit via jouw link.
 Feature.RobloxSubscription.Description.ReferralShare,Nodig iemand uit voor Plus en jullie krijgen allebei {amount} Robux wanneer die persoon Plus afsluit.
+Feature.RobloxSubscription.Description.SpawnEffectsPlusUpsell,Abonneer je op Plus om voordelen zoals spawneffecten en meer te ontdekken.
 Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,Krijg spawneffecten met Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Door op {201C}{ctaText} te klikken{201D}, ga je akkoord met de <a href=""{termsUrl}"">Abonnementsvoorwaarden van Roblox</a>. Er worden elke maand automatisch kosten in rekening gebracht totdat je opzegt."
 Feature.RobloxSubscription.Heading.ReferralEntry,Deel Plus om {amount} Robux te krijgen

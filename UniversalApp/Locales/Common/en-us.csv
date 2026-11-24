@@ -458,6 +458,10 @@ Authentication.Passkey.Label.UpsellErrorTitle,Try again
 Authentication.Passkey.Label.UpsellTitle,Sign in faster with a passkey
 Authentication.Passkey.Label.UpsellToastPageTitle,Success! Passkey created
 Authentication.Passkey.Label.UpsellToastTitle,Passkey created successfully!
+Authentication.Pioneer.Description.GameNotAvailableOtherGames,This game isn't available for you. You can still find other games to play on Roblox.
+Authentication.Pioneer.Description.MinimumAgeNotMetOtherGames,Your account doesn't meet the minimum age for this game. You can still play other games on Roblox.
+Authentication.Pioneer.Heading.GameUnavailable,Game unavailable
+Authentication.Pioneer.Heading.NotAvailableForAge,Not available for your age
 Authentication.ResetPassword.Response.ResetPasswordStarted,You must reset your password before continuing.
 Authentication.SignUp.Action.ApplyOnNextRespawn,Apply on next respawn
 Authentication.SignUp.Action.Cancel,
@@ -1615,7 +1619,6 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Find people on Roblox by s
 Feature.AddFriends.Label.ConnectWithContacts,Invite contacts or connect with friends already on Roblox!
 Feature.AddFriends.Label.ContactsTile,Contacts
 Feature.AddFriends.Label.DeclineAllBackgrounded,Ignoring all friend requests. This may take a minute.
-Feature.AddFriends.Label.EmptyStatePrompt,"Who will you explore Roblox with? Search for people to add, or connect with friends you already know!"
 Feature.AddFriends.Label.FriendRequests,Friend Requests
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,Search for people
 Feature.AddFriends.Label.MyQrCode,My QR Code
@@ -2930,6 +2933,7 @@ Feature.Build.Message.InvitesLoadFailed,Couldn't load invites
 Feature.Build.Message.LimitBelowSpend,You've already spent {ALREADY_SPENT} Robux today. Set a limit that's at least that much.
 Feature.Build.Message.LinkCopied,Link copied to clipboard.
 Feature.Build.Message.LoadingVersions,Loading version history...
+Feature.Build.Message.MakeGamesByChatting,Got a game idea? Soon you can make it real just by chatting.
 Feature.Build.Message.NoAssetsFound,No assets here yet.
 Feature.Build.Message.NoCapturesAvailable,No captures yet
 Feature.Build.Message.NoDescriptionProvided,No description provided.
@@ -2993,6 +2997,7 @@ Feature.Build.Title.AdsStatsEmptyFree,Create your first ad
 Feature.Build.Title.ArchiveThisGame,Archive this game?
 Feature.Build.Title.AssetLibrary,Library
 Feature.Build.Title.Audience,Audience
+Feature.Build.Title.BuildComingSoon,Build is almost here
 Feature.Build.Title.BuildQuestion,Build has a question
 Feature.Build.Title.BuildQuestions,Build has some questions
 Feature.Build.Title.BuildUnavailable,Build isn't available
@@ -3021,6 +3026,7 @@ Feature.Build.Title.NoMonetizationPasses,You haven't created any Passes
 Feature.Build.Title.NoMonetizationProducts,Start earning in your game
 Feature.Build.Title.NoMonetizationSubscriptions,You haven't created any Subscriptions
 Feature.Build.Title.NoRobuxForUsage,No Robux left for Build usage
+Feature.Build.Title.PastedText,Pasted text
 Feature.Build.Title.PickCampaign,Pick a length
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,We couldn't add some friends as early testers:
@@ -3894,7 +3900,6 @@ Feature.Friends.Error.UserBannedError,You are banned from performing this operat
 Feature.Friends.Error.UserBlockedError,You are blocked from performing this operation.
 Feature.Friends.Error.UserNotPassedCaptcha,You have not passed the captcha.
 Feature.Friends.Feature.Friends.Heading.AddFriends,
-Feature.Friends.FriendingTooltipBody,Some friend requests may come from users who find you by your phone number. Make sure you know them before becoming friends.
 Feature.Friends.Heading.Activities,Activities
 Feature.Friends.Heading.FilterBy,Filter By
 Feature.Friends.Heading.Friends,
@@ -3928,7 +3933,6 @@ Feature.Friends.Label.FriendOfUser,Friend of {displayName}
 Feature.Friends.Label.FriendOwns,1 Friend owns
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 Friend</b> recently played
 Feature.Friends.Label.FriendRequest,
-Feature.Friends.Label.FriendingTooltip,Friending Tip
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,Friends are now Connections!
 Feature.Friends.Label.FriendsHintBold,Let’s play!
@@ -4137,7 +4141,9 @@ Feature.GameJoin.Description.DifferentServer,You'll start in a different server
 Feature.GameJoin.Label.PlayTogether,You can play together
 Feature.GameJoin.Label.PlayTogetherSoon,You can play together soon
 Feature.GameJoin.Label.Played,played
+Feature.GameJoin.Label.PlayedExperience,played <b>{experienceName}</b>
 Feature.GameJoin.Label.RecentCoplay,You played together recently
+Feature.GameJoin.Label.UserPlayedExperience,<b>{userName}</b> played <b>{experienceName}</b>
 Feature.GamePage.Action.BackToTop,Back to top
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
@@ -5390,6 +5396,7 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,Offer valid for new Plus subscribers only.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,When anyone buys Plus with your link.
 Feature.RobloxSubscription.Description.ReferralShare,Invite someone to Plus and you both get {amount} Robux when they buy Plus.
+Feature.RobloxSubscription.Description.SpawnEffectsPlusUpsell,Subscribe to Plus to explore benefits like spawn effects and more.
 Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,Get spawn effects with Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"By clicking \u{201C}{ctaText}\u{201D}, you agree to the <a href=""{termsUrl}"">Roblox Subscription Terms</a>. You will be automatically charged each month until you cancel."
 Feature.RobloxSubscription.Heading.ReferralEntry,Share Plus to get {amount} Robux

@@ -352,6 +352,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"抱歉，连接服务器�
 
 请稍候重试。"
 Authentication.Login.Label.ConnectionError.Title,连接错误
+Authentication.Login.Label.DontHaveARobloxAccountCreateOne,没有 Roblox 帐户？{startTag}创建一个{endTag}
 Authentication.Login.Label.DontHaveAnAccountCreateOne,没有帐户？{startTag}创建一个{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,电子邮件地址
@@ -439,6 +440,8 @@ Authentication.Passkey.Label.UpsellErrorTitle,
 Authentication.Passkey.Label.UpsellTitle,使用通行密钥更快登录
 Authentication.Passkey.Label.UpsellToastPageTitle,成功！通行密钥已创建
 Authentication.Passkey.Label.UpsellToastTitle,已成功创建通行密钥！
+Authentication.Pioneer.Heading.GameUnavailable,游戏不可用
+Authentication.Pioneer.Heading.NotAvailableForAge,不适用于你的年龄段
 Authentication.ResetPassword.Response.ResetPasswordStarted,继续之前，你必须重置你的密码。
 Authentication.SignUp.Action.ApplyOnNextRespawn,在下次重生时应用
 Authentication.SignUp.Action.Cancel,
@@ -1589,7 +1592,6 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,通过搜索用户名或�
 Feature.AddFriends.Label.ConnectWithContacts,邀请联系人或与已经在 Roblox 上的好友交流！
 Feature.AddFriends.Label.ContactsTile,联系人
 Feature.AddFriends.Label.DeclineAllBackgrounded,正在忽略所有好友邀请。请稍候。
-Feature.AddFriends.Label.EmptyStatePrompt,你要和谁一起探索 Roblox？寻找新的朋友，或添加你认识的人为好友！
 Feature.AddFriends.Label.FriendRequests,好友邀请
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,搜索用户
 Feature.AddFriends.Label.MyQrCode,我的二维码
@@ -3575,8 +3577,11 @@ Feature.Chat.Title.NewChat,新聊天
 Feature.Chat.Toast.Error.InvalidUserSelected,此列表中的一人或多人无法被添加
 Feature.CloudClient.Action.JoinWithoutCloudPlay,加入但不使用 Cloud Play
 Feature.CloudClient.Action.PlayWithoutCloudPlay,游玩但不使用 Cloud Play
+Feature.CloudClient.Action.PlayWithoutRobloxReality,继续游玩，不试用 {productName}
+Feature.CloudClient.Action.TryRobloxReality,试用 {productName}
 Feature.CloudClient.Description.CloudPlayOffer,Cloud Play 会使用 Roblox 的计算机运行游戏，因此游戏可能加载得更快，发生崩溃的情况也可能更少。Cloud Play 仅在你游玩此游戏期间运行。
 Feature.CloudClient.Description.CloudPlayStopped,重新加入游戏，即可在不使用 Cloud Play 的情况下继续游玩。
+Feature.CloudClient.Description.RobloxRealityOffer,{productName} 为你喜爱的游戏换上新外观。请试用抢先预览版，然后告诉我们你的想法。
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle 为抢先预览。画面效果可能与原版游戏有所不同。
 Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName} 为抢先预览。画面效果可能与原版游戏有所不同。
 Feature.CloudClient.Description.RobloxRealityThanks,感谢你成为首批试用者之一。
@@ -3584,6 +3589,7 @@ Feature.CloudClient.Heading.CloudPlayOffer,使用 Cloud Play 游玩
 Feature.CloudClient.Heading.CloudPlayStopped,Cloud Play 已停止运行
 Feature.CloudClient.Heading.RobloxRealityFailed,Restyle 发生错误
 Feature.CloudClient.Heading.RobloxRealityFailedV2,{productName} 发生错误
+Feature.CloudClient.Heading.RobloxRealityOffer,尝试使用 {productName} 体验你的游戏
 Feature.CloudClient.Heading.RobloxRealityTimeEnded,你在 Restyle 中的时间已结束
 Feature.CloudClient.Heading.RobloxRealityTimeEndedV2,你在 {productName} 中的时间已结束
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,录制功能在 Cloud Play 中尚不可用。
@@ -3861,7 +3867,6 @@ Feature.Friends.Error.UserBannedError,你被禁止执行此操作。
 Feature.Friends.Error.UserBlockedError,你被阻止执行此操作。
 Feature.Friends.Error.UserNotPassedCaptcha,你没有通过 captcha 验证。
 Feature.Friends.Feature.Friends.Heading.AddFriends,
-Feature.Friends.FriendingTooltipBody,有些人可能会通过手机号码找到你，并发送好友邀请。接受邀请之前，请先确认对方的身份。
 Feature.Friends.Heading.Activities,
 Feature.Friends.Heading.FilterBy,过滤条件
 Feature.Friends.Heading.Friends,
@@ -3895,7 +3900,6 @@ Feature.Friends.Label.FriendOfUser,{displayName}的好友
 Feature.Friends.Label.FriendOwns,1 位好友拥有
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 位好友</b>最近玩过
 Feature.Friends.Label.FriendRequest,
-Feature.Friends.Label.FriendingTooltip,交友小贴士
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,好友现已升级为“联系人”！
 Feature.Friends.Label.FriendsHintBold,一起开始游戏吧！
@@ -4103,6 +4107,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,已开启关于“{experienceNa
 Feature.GameJoin.Description.DifferentServer,你们将在不同的服务器上开始游戏
 Feature.GameJoin.Label.PlayTogether,你们可以一起游玩
 Feature.GameJoin.Label.PlayTogetherSoon,你们很快就可以一起游玩了
+Feature.GameJoin.Label.Played,玩过
 Feature.GameJoin.Label.RecentCoplay,你们最近一起玩过
 Feature.GamePage.Action.BackToTop,返回顶部
 Feature.GamePage.Label.Ad,
@@ -5348,6 +5353,7 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,优惠仅适用于新订阅 Plus 的用户。
 Feature.RobloxSubscription.Description.ReferralReferrerReward,当有人通过你的链接购买 Plus 时。
 Feature.RobloxSubscription.Description.ReferralShare,邀请他人加入 Plus。对方购买 Plus 后，你们双方都将获得 {amount} Robux。
+Feature.RobloxSubscription.Description.SpawnEffectsPlusUpsell,订阅 Plus，探索重生点特效等福利。
 Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,订阅 Plus，获得重生特效
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"点按\u{201C}{ctaText}\u{201D}，即表示你同意 <a href=""{termsUrl}"">Roblox 订阅条款</a>。系统将每月自动向你收取费用，直至你取消订阅。"
 Feature.RobloxSubscription.Heading.ReferralEntry,分享 Plus，获得 {amount} Robux

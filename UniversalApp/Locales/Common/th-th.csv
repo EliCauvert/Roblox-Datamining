@@ -352,6 +352,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"ขออภัย เก�
 
 โปรดรอสักครู่แล้วลองอีกครั้ง"
 Authentication.Login.Label.ConnectionError.Title,เกิดข้อผิดพลาดในการเชื่อมต่อ
+Authentication.Login.Label.DontHaveARobloxAccountCreateOne,ยังไม่มีบัญชี Roblox ใช่ไหม? {startTag}สร้างบัญชี{endTag}
 Authentication.Login.Label.DontHaveAnAccountCreateOne,ยังไม่มีบัญชีใช่ไหม? {startTag}สร้างบัญชี{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,ที่อยู่อีเมล
@@ -439,6 +440,8 @@ Authentication.Passkey.Label.UpsellErrorTitle,
 Authentication.Passkey.Label.UpsellTitle,ลงชื่อเข้าใช้เร็วขึ้นด้วยพาสคีย์
 Authentication.Passkey.Label.UpsellToastPageTitle,สำเร็จ! สร้างพาสคีย์แล้ว
 Authentication.Passkey.Label.UpsellToastTitle,สร้างพาสคีย์สำเร็จเรียบร้อยแล้ว!
+Authentication.Pioneer.Heading.GameUnavailable,เกมนี้ไม่พร้อมใช้งาน
+Authentication.Pioneer.Heading.NotAvailableForAge,ใช้งานไม่ได้เนื่องจากอายุของคุณ
 Authentication.ResetPassword.Response.ResetPasswordStarted,คุณต้องรีเซ็ตรหัสผ่านของคุณก่อนที่จะดำเนินการต่อ
 Authentication.SignUp.Action.ApplyOnNextRespawn,ใช้เมื่อเกิดใหม่ครั้งต่อไป
 Authentication.SignUp.Action.Cancel,
@@ -1591,7 +1594,6 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,ค้นหาผู้�
 Feature.AddFriends.Label.ConnectWithContacts,เชิญเพื่อนจากรายชื่อผู้ติดต่อหรือเชื่อมต่อกับเพื่อนๆ ที่อยู่บน Roblox อยู่แล้วก็ได้!
 Feature.AddFriends.Label.ContactsTile,รายชื่อผู้ติดต่อ
 Feature.AddFriends.Label.DeclineAllBackgrounded,ปฏิเสธคำขอเป็นเพื่อนทั้งหมด การดำเนินการนี้อาจใช้เวลาสักครู่
-Feature.AddFriends.Label.EmptyStatePrompt,ใครที่คุณจะสำรวจ Roblox ด้วย? ค้นหาผู้ใช้เพื่อเพิ่มเป็นเพื่อนหรือเชื่อมต่อกับเพื่อนๆ ที่คุณรู้จักอยู่แล้วก็ได้!
 Feature.AddFriends.Label.FriendRequests,คำขอเป็นเพื่อน
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,ค้นหาผู้ใช้
 Feature.AddFriends.Label.MyQrCode,รหัส QR ของฉัน
@@ -3579,8 +3581,11 @@ Feature.Chat.Title.NewChat,แชทใหม่
 Feature.Chat.Toast.Error.InvalidUserSelected,ไม่สามารถเพิ่มอย่างน้อยหนึ่งคนที่อยู่ในรายการนี้ได้
 Feature.CloudClient.Action.JoinWithoutCloudPlay,เข้าร่วมโดยไม่ใช้ Cloud Play
 Feature.CloudClient.Action.PlayWithoutCloudPlay,เล่นโดยไม่ใช้ Cloud Play
+Feature.CloudClient.Action.PlayWithoutRobloxReality,เล่นโดยไม่ใช้ {productName}
+Feature.CloudClient.Action.TryRobloxReality,ลอง {productName}
 Feature.CloudClient.Description.CloudPlayOffer,Cloud Play จะรันเกมบนคอมพิวเตอร์ของ Roblox เกมจึงอาจโหลดเร็วขึ้นและหยุดทำงานน้อยลง Cloud Play จะทำงานเฉพาะระหว่างที่คุณเล่นเกมนี้
 Feature.CloudClient.Description.CloudPlayStopped,เข้าร่วมเกมอีกครั้งเพื่อเล่นต่อโดยไม่ใช้ Cloud Play
+Feature.CloudClient.Description.RobloxRealityOffer,{productName} เปลี่ยนโฉมเกมโปรดของคุณให้ดูสดใหม่ ลองใช้เวอร์ชันทดลองก่อนใคร แล้วบอกเราหน่อยว่าคุณคิดยังไง
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle เป็นเวอร์ชันที่ให้ทดลองใช้ได้ก่อนใคร อะไรๆ อาจดูแตกต่างไปจากเกมต้นฉบับ
 Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName} เป็นเวอร์ชันที่ให้ทดลองได้ก่อนใคร อะไรๆ อาจดูแตกต่างไปจากเกมต้นฉบับ
 Feature.CloudClient.Description.RobloxRealityThanks,ขอบคุณที่เป็นหนึ่งในคนแรกๆ ที่ลองใช้
@@ -3588,6 +3593,7 @@ Feature.CloudClient.Heading.CloudPlayOffer,เล่นผ่าน Cloud Play
 Feature.CloudClient.Heading.CloudPlayStopped,Cloud Play ไม่ทำงาน
 Feature.CloudClient.Heading.RobloxRealityFailed,มีปัญหาบางอย่างเกิดขึ้นกับ Restyle
 Feature.CloudClient.Heading.RobloxRealityFailedV2,มีปัญหาบางอย่างเกิดขึ้นกับ {productName}
+Feature.CloudClient.Heading.RobloxRealityOffer,ลองเล่นเกมของคุณด้วย {productName}
 Feature.CloudClient.Heading.RobloxRealityTimeEnded,เวลาของคุณใน Restyle สิ้นสุดลงแล้ว
 Feature.CloudClient.Heading.RobloxRealityTimeEndedV2,เวลาของคุณใน {productName} สิ้นสุดลงแล้ว
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,ยังไม่สามารถใช้การจับภาพใน Cloud Play ได้
@@ -3865,7 +3871,6 @@ Feature.Friends.Error.UserBannedError,คุณถูกแบนไม่ให
 Feature.Friends.Error.UserBlockedError,คุณถูกบล็อคไม่ให้ดำเนินการนี้
 Feature.Friends.Error.UserNotPassedCaptcha,คุณทำ Captcha ไม่ผ่าน
 Feature.Friends.Feature.Friends.Heading.AddFriends,
-Feature.Friends.FriendingTooltipBody,คำขอเป็นเพื่อนบางคำขออาจมาจากผู้ใช้ที่หาคุณเจอจากเบอร์โทรศัพท์ของคุณ โปรดตรวจสอบให้แน่ใจว่าคุณรู้จักพวกเขาก่อนที่จะเป็นเพื่อน
 Feature.Friends.Heading.Activities,
 Feature.Friends.Heading.FilterBy,กรองตาม
 Feature.Friends.Heading.Friends,
@@ -3899,7 +3904,6 @@ Feature.Friends.Label.FriendOfUser,เพื่อนของ {displayName}
 Feature.Friends.Label.FriendOwns,เพื่อน 1 คนเป็นเจ้าของ
 Feature.Friends.Label.FriendRecentlyPlayed,<b>เพื่อน 1 คน</b>เพิ่งเล่นเมื่อเร็วๆ นี้
 Feature.Friends.Label.FriendRequest,
-Feature.Friends.Label.FriendingTooltip,เคล็ดลับในการหาเพื่อน
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,เพื่อนเปลี่ยนเป็นคนรู้จักแล้ว!
 Feature.Friends.Label.FriendsHintBold,มาเล่นกันเถอะ!
@@ -4107,6 +4111,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,"เปิดการแจ้
 Feature.GameJoin.Description.DifferentServer,คุณจะเริ่มในเซิร์ฟเวอร์อื่น
 Feature.GameJoin.Label.PlayTogether,คุณเล่นด้วยกันได้
 Feature.GameJoin.Label.PlayTogetherSoon,คุณจะเล่นด้วยกันได้เร็วๆ นี้
+Feature.GameJoin.Label.Played,เล่นแล้ว
 Feature.GameJoin.Label.RecentCoplay,คุณเพิ่งเล่นด้วยกันเมื่อไม่นานมานี้
 Feature.GamePage.Action.BackToTop,กลับไปด้านบน
 Feature.GamePage.Label.Ad,
@@ -5354,6 +5359,7 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,ข้อเสนอใช้ได้กับสมาชิก Plus รายใหม่เท่านั้น
 Feature.RobloxSubscription.Description.ReferralReferrerReward,เมื่อมีคนซื้อ Plus ด้วยลิงก์ของคุณ
 Feature.RobloxSubscription.Description.ReferralShare,ชวนเพื่อนมาใช้ Plus แล้วรับ {amount} Robux ไปเลยทั้งคู่เมื่อเพื่อนซื้อ Plus
+Feature.RobloxSubscription.Description.SpawnEffectsPlusUpsell,สมัครสมาชิก Plus เพื่อสำรวจสิทธิประโยชน์ต่างๆ เช่น เอฟเฟกต์การเกิดใหม่ และอีกมากมาย
 Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,รับเอฟเฟกต์การเกิดใหม่เมื่อสมัคร Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"การคลิก \u{201C}{ctaText}\u{201D} จะถือว่าคุณยอมรับ<a href=""{termsUrl}"">ข้อกำหนดการสมัครสมาชิกของ Roblox</a> โดยจะมีการเรียกเก็บเงินในแต่ละเดือนโดยอัตโนมัติจนกว่าคุณจะยกเลิก"
 Feature.RobloxSubscription.Heading.ReferralEntry,แชร์ Plus แล้วรับ {amount} Robux

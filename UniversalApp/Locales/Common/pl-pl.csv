@@ -369,6 +369,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Wystąpił problem z nawi�
 
 Zaczekaj i spróbuj ponownie."
 Authentication.Login.Label.ConnectionError.Title,Błąd połączenia
+Authentication.Login.Label.DontHaveARobloxAccountCreateOne,Nie masz konta Roblox? {startTag}Utwórz je{endTag}
 Authentication.Login.Label.DontHaveAnAccountCreateOne,Nie masz konta? {startTag}Utwórz je{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,
@@ -456,6 +457,8 @@ Authentication.Passkey.Label.UpsellErrorTitle,
 Authentication.Passkey.Label.UpsellTitle,Loguj się szybciej za pomocą klucza dostępu
 Authentication.Passkey.Label.UpsellToastPageTitle,Udało się! Utworzono klucz dostępu
 Authentication.Passkey.Label.UpsellToastTitle,Utworzono klucz dostępu
+Authentication.Pioneer.Heading.GameUnavailable,Gra niedostępna
+Authentication.Pioneer.Heading.NotAvailableForAge,Niedostępne dla Twojej grupy wiekowej
 Authentication.ResetPassword.Response.ResetPasswordStarted,Przed kontynuowaniem należy zresetować hasło.
 Authentication.SignUp.Action.ApplyOnNextRespawn,Zastosuj przy następnym odrodzeniu
 Authentication.SignUp.Action.Cancel,
@@ -1608,7 +1611,6 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,"Znajdź znajomych na plat
 Feature.AddFriends.Label.ConnectWithContacts,"Zaproś osoby ze swoich kontaktów lub odszukaj znajomych, którzy już korzystają z platformy Roblox!"
 Feature.AddFriends.Label.ContactsTile,Kontakty
 Feature.AddFriends.Label.DeclineAllBackgrounded,Trwa ignorowanie wszystkich próśb o dodanie do znajomych. Może to chwilę potrwać.
-Feature.AddFriends.Label.EmptyStatePrompt,"Z kim chcesz eksplorować platformę Roblox? Wyszukaj użytkowników, których chcesz dodać, lub skontaktuj się z osobami, które już znasz!"
 Feature.AddFriends.Label.FriendRequests,Prośby o dodanie do znajomych
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,Wyszukaj osoby
 Feature.AddFriends.Label.MyQrCode,Mój kod QR
@@ -3596,8 +3598,11 @@ Feature.Chat.Title.NewChat,Nowy czat
 Feature.Chat.Toast.Error.InvalidUserSelected,Nie można dodać co najmniej jednej osoby z tej listy
 Feature.CloudClient.Action.JoinWithoutCloudPlay,Dołącz bez Cloud Play
 Feature.CloudClient.Action.PlayWithoutCloudPlay,Graj bez Cloud Play
+Feature.CloudClient.Action.PlayWithoutRobloxReality,Graj bez {productName}
+Feature.CloudClient.Action.TryRobloxReality,Wypróbuj {productName}
 Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play uruchamia grę na komputerach Robloxa, dzięki czemu może ona szybciej się ładować i rzadziej się zawieszać. Działa tylko wtedy, gdy grasz w tę grę."
 Feature.CloudClient.Description.CloudPlayStopped,"Dołącz ponownie do gry, aby dalej grać bez Cloud Play."
+Feature.CloudClient.Description.RobloxRealityOffer,"{productName} nadaje Twoim ulubionym grom zupełnie nowy wygląd. Wypróbuj wczesny podgląd, a następnie podziel się z nami swoją opinią."
 Feature.CloudClient.Description.RobloxRealityPreview,Funkcja Restyle jest dostępna we wczesnym podglądzie. Elementy mogą wyglądać inaczej niż w oryginalnej grze.
 Feature.CloudClient.Description.RobloxRealityPreviewV2,Usługa {productName} jest dostępna we wczesnym dostępie. Elementy mogą wyglądać inaczej niż w oryginalnej grze.
 Feature.CloudClient.Description.RobloxRealityThanks,"Dziękujemy, że jesteś jedną z pierwszych osób, które to wypróbowały."
@@ -3605,6 +3610,7 @@ Feature.CloudClient.Heading.CloudPlayOffer,Graj z Cloud Play
 Feature.CloudClient.Heading.CloudPlayStopped,Cloud Play przestał działać
 Feature.CloudClient.Heading.RobloxRealityFailed,Coś poszło nie tak z funkcją Restyle
 Feature.CloudClient.Heading.RobloxRealityFailedV2,Coś poszło nie tak z usługą {productName}
+Feature.CloudClient.Heading.RobloxRealityOffer,Wypróbuj swoją grę z {productName}
 Feature.CloudClient.Heading.RobloxRealityTimeEnded,Twój czas w Restyle dobiegł końca
 Feature.CloudClient.Heading.RobloxRealityTimeEndedV2,Twój czas z usługą {productName} dobiegł końca
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Funkcja przechwytywania nie jest jeszcze dostępna w usłudze Cloud Play.
@@ -3882,7 +3888,6 @@ Feature.Friends.Error.UserBannedError,Masz bana na wykonywanie tej operacji.
 Feature.Friends.Error.UserBlockedError,Zablokowano Ci możliwość wykonywania tej operacji.
 Feature.Friends.Error.UserNotPassedCaptcha,Nie zaliczono testu captcha.
 Feature.Friends.Feature.Friends.Heading.AddFriends,
-Feature.Friends.FriendingTooltipBody,"Niektóre prośby o dodanie do znajomych mogą pochodzić od użytkowników, którzy znaleźli cię na podstawie numeru telefonu. Przed zaakceptowaniem upewnij się, że się znacie."
 Feature.Friends.Heading.Activities,Działania
 Feature.Friends.Heading.FilterBy,Filtruj wg
 Feature.Friends.Heading.Friends,
@@ -3916,7 +3921,6 @@ Feature.Friends.Label.FriendOfUser,Znajomy użytkownika {displayName}
 Feature.Friends.Label.FriendOwns,Posiadane przez 1 znajomego
 Feature.Friends.Label.FriendRecentlyPlayed,Ostatnio grane przez <b>1 znajomego</b>
 Feature.Friends.Label.FriendRequest,
-Feature.Friends.Label.FriendingTooltip,Wskazówka dotycząca znajomych
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,Koledzy to od teraz znajomi.
 Feature.Friends.Label.FriendsHintBold,Zagrajmy!
@@ -4124,6 +4128,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Włączono powiadomienia dotycz
 Feature.GameJoin.Description.DifferentServer,Rozpoczniesz na innym serwerze
 Feature.GameJoin.Label.PlayTogether,Możecie grać razem
 Feature.GameJoin.Label.PlayTogetherSoon,Wkrótce będziecie mogli grać razem
+Feature.GameJoin.Label.Played,grano
 Feature.GameJoin.Label.RecentCoplay,Niedawno graliście razem
 Feature.GamePage.Action.BackToTop,Powrót na górę strony
 Feature.GamePage.Label.Ad,
@@ -5371,6 +5376,7 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,Oferta ważna tylko dla nowych subskrybentów Plus.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,Gdy ktoś kupi subskrypcję Plus za pomocą Twojego linku.
 Feature.RobloxSubscription.Description.ReferralShare,"Zaproś kogoś do subskrypcji Plus, a gdy ją wykupi, oboje otrzymacie tyle Robuxów: {amount}."
+Feature.RobloxSubscription.Description.SpawnEffectsPlusUpsell,"Wykup subskrypcję Plus, aby odkryć korzyści, takie jak efekty punktu odrodzenia i inne."
 Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,Uzyskaj efekty punktu odrodzenia dzięki subskrypcji Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Klikając przycisk \u{201C}{ctaText}\u{201D}, akceptujesz <a href=""{termsUrl}"">Warunki subskrypcji Robloxa</a>. Opłata będzie pobierana automatycznie co miesiąc do momentu anulowania subskrypcji."
 Feature.RobloxSubscription.Heading.ReferralEntry,Udostępnij Plus i zyskaj tyle Robuxów: {amount}

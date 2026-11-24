@@ -369,6 +369,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Maaf, terjadi eror saat me
 
 Tunggu dan coba lagi."
 Authentication.Login.Label.ConnectionError.Title,Kesalahan koneksi
+Authentication.Login.Label.DontHaveARobloxAccountCreateOne,Tidak punya akun Roblox? {startTag}Buat akun{endTag}
 Authentication.Login.Label.DontHaveAnAccountCreateOne,Tidak punya akun? {startTag}Buat akun{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,Alamat email
@@ -456,6 +457,8 @@ Authentication.Passkey.Label.UpsellErrorTitle,Coba lagi
 Authentication.Passkey.Label.UpsellTitle,Log in lebih cepat dengan passkey
 Authentication.Passkey.Label.UpsellToastPageTitle,Passkey berhasil dibuat
 Authentication.Passkey.Label.UpsellToastTitle,
+Authentication.Pioneer.Heading.GameUnavailable,Game tidak tersedia
+Authentication.Pioneer.Heading.NotAvailableForAge,Tidak tersedia untuk usiamu
 Authentication.ResetPassword.Response.ResetPasswordStarted,Kamu harus mereset password sebelum melanjutkan.
 Authentication.SignUp.Action.ApplyOnNextRespawn,Terapkan pada respawn berikutnya
 Authentication.SignUp.Action.Cancel,
@@ -1608,7 +1611,6 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Temukan pengguna di Roblox
 Feature.AddFriends.Label.ConnectWithContacts,Undang kontak atau terhubung dengan teman yang sudah ada di Roblox.
 Feature.AddFriends.Label.ContactsTile,Kontak
 Feature.AddFriends.Label.DeclineAllBackgrounded,Mengabaikan semua permintaan teman. Ini mungkin membutuhkan waktu satu menit.
-Feature.AddFriends.Label.EmptyStatePrompt,Dengan siapa kamu akan menjelajahi Roblox? Cari pengguna untuk kamu tambahkan sebagai teman atau terhubung dengan teman yang sudah kamu kenal.
 Feature.AddFriends.Label.FriendRequests,Permintaan Pertemanan
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,Cari orang
 Feature.AddFriends.Label.MyQrCode,Kode QR Saya
@@ -3594,8 +3596,11 @@ Feature.Chat.Title.NewChat,Chat baru
 Feature.Chat.Toast.Error.InvalidUserSelected,Satu atau beberapa orang di daftar ini tidak dapat ditambahkan
 Feature.CloudClient.Action.JoinWithoutCloudPlay,Bergabung tanpa Cloud Play
 Feature.CloudClient.Action.PlayWithoutCloudPlay,Mainkan tanpa Cloud Play
+Feature.CloudClient.Action.PlayWithoutRobloxReality,Main tanpa {productName}
+Feature.CloudClient.Action.TryRobloxReality,Coba {productName}
 Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play menjalankan game di komputer Roblox, sehingga game dapat di-load lebih cepat dan lebih jarang mengalami crash. Fitur ini hanya aktif selama kamu memainkan game ini."
 Feature.CloudClient.Description.CloudPlayStopped,Gabung lagi ke game untuk terus bermain tanpa Cloud Play.
+Feature.CloudClient.Description.RobloxRealityOffer,"{productName} memberikan tampilan baru yang segar pada game favoritmu. Coba preview awal, lalu beri tahu kami pendapatmu."
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle adalah preview awal. Tampilannya mungkin berbeda dari game aslinya.
 Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName} adalah preview awal. Tampilannya mungkin berbeda dari game aslinya.
 Feature.CloudClient.Description.RobloxRealityThanks,Terima kasih sudah menjadi salah satu orang pertama yang mencobanya.
@@ -3603,6 +3608,7 @@ Feature.CloudClient.Heading.CloudPlayOffer,Main dengan Cloud Play
 Feature.CloudClient.Heading.CloudPlayStopped,Cloud Play berhenti berfungsi
 Feature.CloudClient.Heading.RobloxRealityFailed,Terjadi kesalahan dengan Restyle
 Feature.CloudClient.Heading.RobloxRealityFailedV2,Terjadi kesalahan dengan {productName}
+Feature.CloudClient.Heading.RobloxRealityOffer,Coba game-mu dengan {productName}
 Feature.CloudClient.Heading.RobloxRealityTimeEnded,Waktumu di Restyle sudah berakhir
 Feature.CloudClient.Heading.RobloxRealityTimeEndedV2,Waktumu di {productName} sudah berakhir
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Media belum tersedia di Cloud Play.
@@ -3880,7 +3886,6 @@ Feature.Friends.Error.UserBannedError,Kamu dilarang melakukan tindakan ini.
 Feature.Friends.Error.UserBlockedError,Kamu diblokir untuk melakukan tindakan ini.
 Feature.Friends.Error.UserNotPassedCaptcha,Kamu belum berhasil melewati Captcha.
 Feature.Friends.Feature.Friends.Heading.AddFriends,Tambah Teman
-Feature.Friends.FriendingTooltipBody,Sebagian permintaan pertemanan mungkin berasal dari pengguna yang menemukan kamu dari nomor telepon kamu. Pastikan kamu memang kenal dengan mereka sebelum menerima permintaan pertemanan mereka.
 Feature.Friends.Heading.Activities,
 Feature.Friends.Heading.FilterBy,Filter Berdasarkan
 Feature.Friends.Heading.Friends,
@@ -3914,7 +3919,6 @@ Feature.Friends.Label.FriendOfUser,Teman dari {displayName}
 Feature.Friends.Label.FriendOwns,1 Teman memiliki
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 Teman</b> telah bermain baru-baru ini
 Feature.Friends.Label.FriendRequest,
-Feature.Friends.Label.FriendingTooltip,Tip Berteman
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,Teman sekarang disebut Koneksi!
 Feature.Friends.Label.FriendsHintBold,Ayo main
@@ -4122,6 +4126,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Notifikasi dinyalakan untuk {ex
 Feature.GameJoin.Description.DifferentServer,Kamu akan memulai di server yang berbeda
 Feature.GameJoin.Label.PlayTogether,Kamu bisa bermain bersama
 Feature.GameJoin.Label.PlayTogetherSoon,Kamu bisa segera bermain bersama
+Feature.GameJoin.Label.Played,pernah dimainkan
 Feature.GameJoin.Label.RecentCoplay,Baru-baru ini kalian bermain bersama
 Feature.GamePage.Action.BackToTop,Kembali ke atas
 Feature.GamePage.Label.Ad,
@@ -5369,6 +5374,7 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,Penawaran hanya berlaku untuk subscriber Plus baru.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,Ketika ada yang membeli Plus menggunakan link-mu.
 Feature.RobloxSubscription.Description.ReferralShare,Undang seseorang ke Plus dan kalian akan mendapatkan {amount} Robux saat dia membeli Plus.
+Feature.RobloxSubscription.Description.SpawnEffectsPlusUpsell,Subscribe Plus untuk mendapatkan manfaat seperti efek spawn dan lainnya.
 Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,Dapatkan efek spawn dengan Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Dengan mengklik \u{201C}{ctaText}\u{201D}, kamu menyetujui <a href=""{termsUrl}"">Ketentuan Subscription Roblox</a>. Biaya akan otomatis dibebankan setiap bulan hingga kamu membatalkan."
 Feature.RobloxSubscription.Heading.ReferralEntry,Bagikan Plus untuk mendapatkan {amount} Robux

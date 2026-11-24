@@ -352,6 +352,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"माफ़ करें,
 
 इंतज़ार के बाद, फिर से कोशिश करें."
 Authentication.Login.Label.ConnectionError.Title,कनेक्ट करने में गड़बड़ी हुई
+Authentication.Login.Label.DontHaveARobloxAccountCreateOne,आपके पास Roblox अकाउंट नहीं है? {startTag}एक अकाउंट क्रिएट करें{endTag}
 Authentication.Login.Label.DontHaveAnAccountCreateOne,आपके पास अकाउंट नहीं है? {startTag}एक अकाउंट बनाएँ{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,ईमेल पता
@@ -439,6 +440,8 @@ Authentication.Passkey.Label.UpsellErrorTitle,
 Authentication.Passkey.Label.UpsellTitle,पास-की की मदद से तेज़ी से साइन इन करें
 Authentication.Passkey.Label.UpsellToastPageTitle,काम हो गया! पास-की बन गई है
 Authentication.Passkey.Label.UpsellToastTitle,पास-की बन गई है!
+Authentication.Pioneer.Heading.GameUnavailable,गेम उपलब्ध नहीं है
+Authentication.Pioneer.Heading.NotAvailableForAge,आपकी उम्र के लोगों के लिए उपलब्ध नहीं है
 Authentication.ResetPassword.Response.ResetPasswordStarted,आपको पहले अपना पासवर्ड रीसेट करना होगा.
 Authentication.SignUp.Action.ApplyOnNextRespawn,अगली बार रीस्पॉन करने पर लागू करें
 Authentication.SignUp.Action.Cancel,
@@ -1588,7 +1591,6 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,"लोगों को �
 Feature.AddFriends.Label.ConnectWithContacts,कॉन्टैक्ट्स को इनवाइट करें या Roblox पर पहले से मौजूद फ़्रेंड्स से कनेक्ट हों!
 Feature.AddFriends.Label.ContactsTile,कॉन्टैक्ट्स
 Feature.AddFriends.Label.DeclineAllBackgrounded,सभी फ़्रेंड रिक्वेस्ट को इग्नोर किया जा रहा है. इसमें एक मिनट लग सकता है.
-Feature.AddFriends.Label.EmptyStatePrompt,"आप Roblox को किसके साथ एक्सप्लोर करेंगे? लोगों को जोड़ने के लिए सर्च करें या उन फ़्रेंड्स से कनेक्ट हों, जिन्हें आप पहले से जानते हैं!"
 Feature.AddFriends.Label.FriendRequests,फ़्रेंड रिक्वेस्ट
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,लोगों को सर्च करें
 Feature.AddFriends.Label.MyQrCode,मेरा QR कोड
@@ -3576,8 +3578,11 @@ Feature.Chat.Title.NewChat,नई चैट
 Feature.Chat.Toast.Error.InvalidUserSelected,इस लिस्ट में एक या इससे ज़्यादा लोगों को जोड़ा नहीं जा सकता
 Feature.CloudClient.Action.JoinWithoutCloudPlay,Cloud Play के बिना जॉइन करें
 Feature.CloudClient.Action.PlayWithoutCloudPlay,Cloud Play के बिना खेलें
+Feature.CloudClient.Action.PlayWithoutRobloxReality,{productName} के बिना खेलें
+Feature.CloudClient.Action.TryRobloxReality,{productName} को आज़माएँ
 Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play से गेम Roblox के कंप्यूटर पर चलता है, इसलिए हो सकता है कि वह ज़्यादा जल्दी लोड हो और उसमें क्रैश की समस्या कम आए. यह सिर्फ़ आपके गेम खेलने तक चलता है."
 Feature.CloudClient.Description.CloudPlayStopped,"Cloud Play के बिना खेलना जारी रखने के लिए, गेम को फिर से जॉइन करें."
+Feature.CloudClient.Description.RobloxRealityOffer,"{productName} से आपके पसंदीदा गेम्स को बिलकुल नया लुक मिलता है. अर्ली प्रीव्यू आज़माएँ, फिर हमें अपनी राय दें."
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle एक अर्ली प्रीव्यू वाली सुविधा है. इसमें चीज़ें ओरिजिनल गेम से अलग नज़र आ सकती हैं.
 Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName} एक अर्ली प्रीव्यू वाली सुविधा है. इसमें चीज़ें ओरिजिनल गेम से अलग नज़र आ सकती हैं.
 Feature.CloudClient.Description.RobloxRealityThanks,इसे सबसे पहले आज़माने के लिए धन्यवाद.
@@ -3585,6 +3590,7 @@ Feature.CloudClient.Heading.CloudPlayOffer,Cloud Play के साथ खेल
 Feature.CloudClient.Heading.CloudPlayStopped,Cloud Play काम नहीं कर रहा है
 Feature.CloudClient.Heading.RobloxRealityFailed,Restyle में कुछ गड़बड़ी हुई
 Feature.CloudClient.Heading.RobloxRealityFailedV2,{productName} में कुछ गड़बड़ी हुई है
+Feature.CloudClient.Heading.RobloxRealityOffer,{productName} के साथ अपना गेम आज़माएँ
 Feature.CloudClient.Heading.RobloxRealityTimeEnded,Restyle में आपका समय खत्म हो गया है
 Feature.CloudClient.Heading.RobloxRealityTimeEndedV2,{productName} में आपका समय खत्म हो गया है
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Cloud Play में अभी तक 'कैप्चर करें' बटन उपलब्ध नहीं है.
@@ -3862,7 +3868,6 @@ Feature.Friends.Error.UserBannedError,आप पर इस ऑपरेशन �
 Feature.Friends.Error.UserBlockedError,आपको यह ऑपरेशन करने से ब्लॉक कर दिया गया है.
 Feature.Friends.Error.UserNotPassedCaptcha,आपने कैप्चा पास नहीं किया है.
 Feature.Friends.Feature.Friends.Heading.AddFriends,
-Feature.Friends.FriendingTooltipBody,"कुछ फ़्रेंड रिक्वेस्ट उन यूज़र्स से मिल सकती है, जिन्होंने आपको आपके फ़ोन नंबर से खोजा है. फ़्रेंड्स बनने से पहले पक्का कर लें कि आप उनसे परिचित हैं."
 Feature.Friends.Heading.Activities,ऐक्टिविटीज़
 Feature.Friends.Heading.FilterBy,इस आधार पर फ़िल्टर करें
 Feature.Friends.Heading.Friends,
@@ -3896,7 +3901,6 @@ Feature.Friends.Label.FriendOfUser,{displayName} का फ़्रेंड
 Feature.Friends.Label.FriendOwns,1 फ़्रेंड के पास है
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 फ़्रेंड ने</b> हाल ही में खेला
 Feature.Friends.Label.FriendRequest,
-Feature.Friends.Label.FriendingTooltip,फ़्रेंडिंग टिप
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,फ़्रेंड्स अब कनेक्शन हैं!
 Feature.Friends.Label.FriendsHintBold,"चलिए, खेलें!"
@@ -4104,6 +4108,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,{experienceName} के लि�
 Feature.GameJoin.Description.DifferentServer,आपके पास किसी दूसरे सर्वर में शुरू करने का विकल्प होगा
 Feature.GameJoin.Label.PlayTogether,आपके पास एक साथ खेलने की सुविधा है
 Feature.GameJoin.Label.PlayTogetherSoon,आपके पास जल्द ही एक साथ खेलने की सुविधा होगी
+Feature.GameJoin.Label.Played,खेला गया
 Feature.GameJoin.Label.RecentCoplay,आपने हाल ही में साथ खेला है
 Feature.GamePage.Action.BackToTop,वापस ऊपर जाएँ
 Feature.GamePage.Label.Ad,
@@ -5351,6 +5356,7 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,ऑफ़र सिर्फ़ Plus के नए सब्सक्राइबर्स के लिए मान्य है.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,जब कोई आपके लिंक से Plus खरीदता है.
 Feature.RobloxSubscription.Description.ReferralShare,किसी को Plus जॉइन करने के लिए इन्वाइट करें और उनके Plus खरीदने पर आप दोनों को {amount} Robux मिलेंगे.
+Feature.RobloxSubscription.Description.SpawnEffectsPlusUpsell,"स्पॉन इफ़ेक्ट्स और अन्य फ़ायदों का लाभ उठाने के लिए, Plus को सब्सक्राइब करें."
 Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,Plus के सब्सक्रिप्शन के साथ स्पॉन इफ़ेक्ट्स पाएँ
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D} पर क्लिक करने का मतलब है कि आप <a href=""{termsUrl}"">Roblox के सब्सक्रिप्शन की शर्तों</a> से सहमत हैं. आपके कैंसिल करने तक आपसे हर महीने अपने आप शुल्क ले लिया जाएगा."
 Feature.RobloxSubscription.Heading.ReferralEntry,Plus शेयर करें और {amount} Robux पाएँ

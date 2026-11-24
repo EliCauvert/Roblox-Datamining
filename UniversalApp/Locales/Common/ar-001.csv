@@ -439,6 +439,8 @@ Authentication.Passkey.Label.UpsellErrorTitle,
 Authentication.Passkey.Label.UpsellTitle,تسجيل الدخول بشكلٍ أسرع باستخدام مفتاح مرور
 Authentication.Passkey.Label.UpsellToastPageTitle,اكتمل بنجاح! تم إنشاء مفتاح المرور
 Authentication.Passkey.Label.UpsellToastTitle,تم إنشاء مفتاح مرور بنجاح!
+Authentication.Pioneer.Heading.GameUnavailable,اللعبة غير متاحة
+Authentication.Pioneer.Heading.NotAvailableForAge,غير متاحة لفئتك العمرية
 Authentication.ResetPassword.Response.ResetPasswordStarted,يجب عليك إعادة تعيين كلمة المرور الخاصة بك قبل المتابعة.
 Authentication.SignUp.Action.ApplyOnNextRespawn,تطبيق عند إعادة الظهور التالي
 Authentication.SignUp.Action.Cancel,
@@ -1545,7 +1547,6 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,العثور على أشخ
 Feature.AddFriends.Label.ConnectWithContacts,دعوة جهات اتصالك أو الاتصال بأصدقاء على Roblox.
 Feature.AddFriends.Label.ContactsTile,
 Feature.AddFriends.Label.DeclineAllBackgrounded,تجاهل جميع طلبات الصداقة. قد يستغرق ذلك دقيقة.
-Feature.AddFriends.Label.EmptyStatePrompt,من سيستكشف Roblox معك؟ ابحث عن أشخاص لإضافتهم أو اتصل بالأصدقاء الذين تعرفهم.
 Feature.AddFriends.Label.FriendRequests,طلبات الصداقة
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,البحث عن أشخاص
 Feature.AddFriends.Label.MyQrCode,رمز QR الشخصي
@@ -3823,7 +3824,6 @@ Feature.Friends.Error.UserBannedError,تم حظرك من تنفيذ هذه ال�
 Feature.Friends.Error.UserBlockedError,أنت محظور من تنفيذ هذه العملية.
 Feature.Friends.Error.UserNotPassedCaptcha,أنت لم تجتز اختبار Captcha.
 Feature.Friends.Feature.Friends.Heading.AddFriends,
-Feature.Friends.FriendingTooltipBody,قد تأتي بعض طلبات الصداقة من المستخدمين الذين يجدونك من خلال رقم هاتفك. تأكد من أنك تعرفهم قبل أن تتصل بهم.
 Feature.Friends.Heading.Activities,الأنشطة
 Feature.Friends.Heading.FilterBy,تصفية حسب
 Feature.Friends.Heading.Friends,
@@ -3857,7 +3857,6 @@ Feature.Friends.Label.FriendOfUser,صديق {displayName}
 Feature.Friends.Label.FriendOwns,يملكها صديق واحد
 Feature.Friends.Label.FriendRecentlyPlayed,<b>صديق واحد</b> لعبها مؤخرًا
 Feature.Friends.Label.FriendRequest,
-Feature.Friends.Label.FriendingTooltip,نصائح حول الصداقة
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,أصبح الأصدقاء الآن ضمن جهات التواصل لديك!
 Feature.Friends.Label.FriendsHintBold,هيا نلعب!
@@ -5313,6 +5312,7 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,العرض صالح لمشتركي Plus الجدد فقط.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,عندما يشتري أي شخص اشتراك Plus باستخدام رابطك.
 Feature.RobloxSubscription.Description.ReferralShare,ادعُ شخصًا إلى اشتراك Plus وسيحصل كلاكما على {amount} من عملات Robux عند شرائه اشتراك Plus.
+Feature.RobloxSubscription.Description.SpawnEffectsPlusUpsell,اشترك في Plus لاكتشاف مزايا مثل تأثيرات الظهور والمزيد.
 Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,افتح تأثيرات نقطة العودة المجانية مع Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"بالضغط على \u{201C}{ctaText}\u{201D}، فإنك توافق على <a href=""{termsUrl}"">شروط الاشتراك في منصّة Roblox</a>. سيتم تحصيل الرسوم منك تلقائيًا كل شهر حتى تقوم بالإلغاء."
 Feature.RobloxSubscription.Heading.ReferralEntry,شارك Plus للحصول على {amount} من عملات Robux

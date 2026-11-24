@@ -369,6 +369,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Rất tiếc, tiến trìn
 
 Vui lòng chờ và thử lại."
 Authentication.Login.Label.ConnectionError.Title,Lỗi kết nối
+Authentication.Login.Label.DontHaveARobloxAccountCreateOne,Bạn chưa có tài khoản Roblox? {startTag}Tạo tài khoản{endTag}
 Authentication.Login.Label.DontHaveAnAccountCreateOne,Bạn chưa có tài khoản? {startTag}Tạo tài khoản{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,Địa chỉ email
@@ -456,6 +457,8 @@ Authentication.Passkey.Label.UpsellErrorTitle,
 Authentication.Passkey.Label.UpsellTitle,Đăng nhập nhanh hơn bằng mã xác nhận
 Authentication.Passkey.Label.UpsellToastPageTitle,Thành công! Đã tạo mã xác nhận
 Authentication.Passkey.Label.UpsellToastTitle,Đã tạo thành công mã xác nhận!
+Authentication.Pioneer.Heading.GameUnavailable,Trò chơi không hoạt động
+Authentication.Pioneer.Heading.NotAvailableForAge,Không dành cho độ tuổi của bạn
 Authentication.ResetPassword.Response.ResetPasswordStarted,Bạn phải đặt lại mật khẩu trước khi tiếp tục.
 Authentication.SignUp.Action.ApplyOnNextRespawn,Áp dụng cho lần hồi sinh tiếp theo
 Authentication.SignUp.Action.Cancel,
@@ -1608,7 +1611,6 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Tìm người chơi trên 
 Feature.AddFriends.Label.ConnectWithContacts,Mời liên hệ hoặc kết nối với bạn bè đang chơi Roblox!
 Feature.AddFriends.Label.ContactsTile,Liên hệ
 Feature.AddFriends.Label.DeclineAllBackgrounded,Bỏ qua tất cả yêu cầu kết bạn. Quá trình này có thể mất chút thời gian.
-Feature.AddFriends.Label.EmptyStatePrompt,Bạn sẽ khám phá Roblox với ai? Tìm kiếm người chơi để thêm hoặc kết nối với bạn bè mà bạn đã biết!
 Feature.AddFriends.Label.FriendRequests,Yêu Cầu Kết Bạn
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,Tìm kiếm mọi người
 Feature.AddFriends.Label.MyQrCode,Mã QR Của Tôi
@@ -3596,8 +3598,11 @@ Feature.Chat.Title.NewChat,Cuộc trò chuyện mới
 Feature.Chat.Toast.Error.InvalidUserSelected,Không thể thêm một hoặc nhiều người vào danh sách này
 Feature.CloudClient.Action.JoinWithoutCloudPlay,Tham gia mà không dùng Cloud Play
 Feature.CloudClient.Action.PlayWithoutCloudPlay,Chơi mà không dùng Cloud Play
+Feature.CloudClient.Action.PlayWithoutRobloxReality,Chơi mà không dùng {productName}
+Feature.CloudClient.Action.TryRobloxReality,Dùng thử {productName}
 Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play chạy trò chơi bằng các máy tính của Roblox, do đó trò chơi có thể tải nhanh hơn và ít bị sập hơn. Tính năng này chỉ hoạt động khi bạn đang chơi trò chơi này."
 Feature.CloudClient.Description.CloudPlayStopped,Hãy tham gia lại trò chơi để tiếp tục chơi mà không dùng Cloud Play.
+Feature.CloudClient.Description.RobloxRealityOffer,{productName} mang đến một diện mạo hoàn toàn mới cho các trò chơi yêu thích của bạn. Hãy trải nghiệm sớm rồi cho chúng tôi biết cảm nhận của bạn nhé.
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle là bản xem trước sớm. Hình ảnh có thể khác so với trò chơi gốc.
 Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName} là bản xem trước sớm. Hình ảnh có thể khác so với trò chơi gốc.
 Feature.CloudClient.Description.RobloxRealityThanks,Cảm ơn bạn đã là một trong những người đầu tiên trải nghiệm tính năng này.
@@ -3605,6 +3610,7 @@ Feature.CloudClient.Heading.CloudPlayOffer,Chơi với Cloud Play
 Feature.CloudClient.Heading.CloudPlayStopped,Cloud Play đã ngừng hoạt động
 Feature.CloudClient.Heading.RobloxRealityFailed,Đã xảy ra sự cố với Restyle
 Feature.CloudClient.Heading.RobloxRealityFailedV2,Đã xảy ra sự cố với {productName}
+Feature.CloudClient.Heading.RobloxRealityOffer,Dùng thử {productName} cho trò chơi của bạn
 Feature.CloudClient.Heading.RobloxRealityTimeEnded,Thời gian trải nghiệm Restyle của bạn đã kết thúc
 Feature.CloudClient.Heading.RobloxRealityTimeEndedV2,Thời gian trải nghiệm {productName} của bạn đã kết thúc
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Cloud Play chưa hỗ trợ tính năng Chụp.
@@ -3882,7 +3888,6 @@ Feature.Friends.Error.UserBannedError,Bạn bị cấm thực hiện thao tác n
 Feature.Friends.Error.UserBlockedError,Bạn bị chặn thực hiện thao tác này.
 Feature.Friends.Error.UserNotPassedCaptcha,Bạn chưa vượt qua captcha.
 Feature.Friends.Feature.Friends.Heading.AddFriends,
-Feature.Friends.FriendingTooltipBody,Một số yêu cầu kết bạn có thể đến từ những người dùng tìm thấy bạn bằng số điện thoại của bạn. Hãy chắc chắn rằng bạn biết họ trước khi trở thành bạn bè.
 Feature.Friends.Heading.Activities,
 Feature.Friends.Heading.FilterBy,Lọc Theo
 Feature.Friends.Heading.Friends,
@@ -3916,7 +3921,6 @@ Feature.Friends.Label.FriendOfUser,Bạn bè của {displayName}
 Feature.Friends.Label.FriendOwns,1 Người bạn sở hữu
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 Người bạn</b> vừa mới chơi
 Feature.Friends.Label.FriendRequest,
-Feature.Friends.Label.FriendingTooltip,Mẹo Kết Bạn
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,"Bạn bè bây giờ được gọi là ""Người quen""!"
 Feature.Friends.Label.FriendsHintBold,Cùng chơi nào!
@@ -4124,6 +4128,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Đã mở thông báo cho {expe
 Feature.GameJoin.Description.DifferentServer,Bạn sẽ bắt đầu ở máy chủ khác
 Feature.GameJoin.Label.PlayTogether,Các bạn có thể chơi cùng nhau
 Feature.GameJoin.Label.PlayTogetherSoon,Các bạn sẽ sớm có thể chơi cùng nhau
+Feature.GameJoin.Label.Played,đã chơi
 Feature.GameJoin.Label.RecentCoplay,Gần đây hai bạn đã chơi cùng nhau
 Feature.GamePage.Action.BackToTop,Về đầu trang
 Feature.GamePage.Label.Ad,
@@ -5371,6 +5376,7 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,Ưu đãi chỉ áp dụng cho người mới đăng ký Plus.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,Khi có người mua gói Plus bằng đường liên kết của bạn.
 Feature.RobloxSubscription.Description.ReferralShare,Mời bạn bè đăng ký gói Plus để cả hai cùng nhận được {amount} Robux khi họ mua gói Plus.
+Feature.RobloxSubscription.Description.SpawnEffectsPlusUpsell,Đăng ký gói Plus để được hưởng các quyền lợi như hiệu ứng hồi sinh và nhiều tính năng khác.
 Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,Nhận hiệu ứng hồi sinh với gói Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Khi nhấp chuột vào \u{201C}{ctaText}\u{201D}, bạn đồng ý với <a href=""{termsUrl}"">Điều khoản gói đăng ký của Roblox</a>. Hệ thống sẽ tự động thu phí hằng tháng cho đến khi bạn hủy."
 Feature.RobloxSubscription.Heading.ReferralEntry,Chia sẻ Plus để nhận {amount} Robux
