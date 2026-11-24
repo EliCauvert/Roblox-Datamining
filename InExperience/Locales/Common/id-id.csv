@@ -2124,8 +2124,11 @@ Feature.AvatarSwitcher.Message.UnknownSupport,"Kamu masih bisa mengganti avatar,
 Feature.AvatarSwitcher.Message.Unsupported,Pengalaman virtual ini menggunakan avatar kustom dan tidak mendukung avatar Roblox.
 Feature.AvatarWorkshop.Action.EditAvatar,Edit avatar
 Feature.AvatarWorkshop.Action.TryAgain,
+Feature.AvatarWorkshop.Description.AddAvatar,Tambahkan avatar ini ke avatarmu?
+Feature.AvatarWorkshop.Heading.AddAvatar,Tambahkan avatar?
 Feature.AvatarWorkshop.Heading.Customize,Sesuaikan
 Feature.AvatarWorkshop.Heading.YourAvatars,Avatarmu
+Feature.AvatarWorkshop.Label.DefaultAvatarName,Avatar saya
 Feature.AvatarWorkshop.Message.LoadItemsError,Terjadi kesalahan saat me-load item-mu.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,Tidak dapat me-load item lainnya.
 Feature.AvatarWorkshop.Message.NoItemsOwned,Kamu belum memiliki item apa pun di sini.
@@ -2398,6 +2401,8 @@ Feature.Build.Label.AdvancedModel,Tingkat Lanjut
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,Semua game
 Feature.Build.Label.AmountAvailable,{AMOUNT} tersedia
+Feature.Build.Label.AttachmentCountPlural,{count} lampiran
+Feature.Build.Label.AttachmentCountSingular,1 lampiran
 Feature.Build.Label.Autosaved,Disimpan otomatis
 Feature.Build.Label.Available,tersedia
 Feature.Build.Label.AvailableForPurchase,Tersedia untuk dibeli
@@ -2417,6 +2422,7 @@ Feature.Build.Label.DefaultDeveloperProductName,produk developer
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,Dihapus
 Feature.Build.Label.DescribeIdea,Deskripsikan ide
+Feature.Build.Label.DescribeIdeaOrPick,Jelaskan ide atau pilih salah satu di bawah ini
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,Deskripsi: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Nama: {NAME}
@@ -3302,6 +3308,7 @@ Feature.Chat.Label.SearchFriends,Cari teman
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,Pilih untuk menghapus
 Feature.Chat.Label.SnoozePartyNotifications,Bisukan notifikasi party dalam pengalaman virtual selama:
+Feature.Chat.Label.StartChatting,Mulai chat
 Feature.Chat.Label.SwipeToReplyTooltip,Geser untuk membalas
 Feature.Chat.Label.TapToRemove,Ketuk untuk menghapus
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}hr
@@ -3568,6 +3575,7 @@ Feature.Friends.Button.GotIt,
 Feature.Friends.Description.ContactsModal,Kontak kamu ada di Roblox! Berteman dengan mereka untuk melihat profil lengkap dan avatar mereka. Buka halaman Tambahkan Teman untuk melihat lebih banyak pengguna yang mungkin kamu kenal.
 Feature.Friends.Description.DoMoreWithTrustedConnections,Lakukan lebih banyak hal di Roblox dengan Koneksi Tepercaya. Hanya tambahkan pengguna yang kamu kenal dan percayai.
 Feature.Friends.Description.DoMoreWithTrustedFriends,Lakukan lebih banyak hal di Roblox bersama teman tepercaya. Hanya tambahkan pengguna yang kamu kenal dan percayai.
+Feature.Friends.Description.FoundFromContactImporter,Dikirim dari importir kontak
 Feature.Friends.Description.FromContacts,Dari Kontak
 Feature.Friends.Description.FromContactsV2,{contactName} dari kontak
 Feature.Friends.Description.FromQrCode,Dari kode QR
@@ -3658,6 +3666,7 @@ Feature.Friends.Label.SentFromWithContext,Terkirim dari {gameName}
 Feature.Friends.Label.SingularMutualFriend,teman bersama
 Feature.Friends.Label.Suggested,Disarankan
 Feature.Friends.Label.Unfollowed,Berhenti mengikuti
+Feature.Friends.Label.YouAreFollowing,Kamu mengikuti
 Feature.Friends.Label.YourLinkedParent,Orang tua yang terhubung
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,Akunmu ingin direkomendasikan ke pengguna Roblox yang memiliki nomor ponselmu?
@@ -3702,6 +3711,7 @@ Feature.FriendsActivityFeed.Label.ViewRecentActivity,Lihat Aktivitas Baru-Baru I
 Feature.FriendsMenu.Label.SelectedFriendsCount,{numerator}/{denominator} teman dipilih
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,{selectedCount} teman dipilih
 Feature.GameBadges.Label.Experience,
+Feature.GameDetails.Action.Continue,
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,Berikan masukan
 Feature.GameDetails.Action.NotInterested,Tidak tertarik
@@ -3733,8 +3743,10 @@ Feature.GameDetails.Label.WhyThisAd,Kenapa saya melihat iklan ini?
 Feature.GameDetails.Label.Yes,
 Feature.GameDetails.Message.AdPreferences,Preferensi Iklan
 Feature.GameDetails.Message.AnonymousFeedbackTermsOfUse,Tanggapan dibagikan secara anonim dan dianggap sebagai Masukan sesuai {underlineStart}Ketentuan Penggunaan Roblox{underlineEnd}.
+Feature.GameDetails.Message.ExternalLinkWarning,"Dengan mengklik ""Lanjutkan"", kamu akan diarahkan ke situs web yang tidak dimiliki atau dijalankan oleh Roblox. Situs web tersebut mungkin memiliki ketentuan dan kebijakan privasi yang berbeda."
 Feature.GameDetails.Message.HelpImproveExperience,Bantu kami meningkatkan pengalaman virtualmu
 Feature.GameDetails.Message.HidingExperienceQuestion,Kenapa kamu menyembunyikan pengalaman virtual ini?
+Feature.GameDetails.Message.LeavingRobloxTitle,Keluar dari Roblox
 Feature.GameDetails.Message.PurchaseGameV2,Buka kunci akses ke {gameName} seharga {X} Robux?
 Feature.GameDetails.Message.SponsoredDisclosure.Error,Informasi sponsor tidak dapat ditampilkan karena kesalahan sementara.
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"Kamu melihat konten bersponsor ini berdasarkan faktor yang tidak dipersonalisasi seperti info perangkat, lokasi, dan usia untuk menayangkan konten yang sesuai untukmu. Kreator pengalaman virtual ini adalah {CreatorName}. Sponsor ini dibayar oleh {PayerName}. Untuk mempelajari selengkapnya, kunjungi halaman ""Privasi & Kedewasaan Konten"" di bagian Pengaturan pada akunmu, di sini:"
@@ -3754,9 +3766,12 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Notifikasi dinyalakan untuk {ex
 Feature.GameJoin.Description.DifferentServer,Kamu akan memulai di server yang berbeda
 Feature.GameJoin.Label.PlayTogether,Kamu bisa bermain bersama
 Feature.GameJoin.Label.PlayTogetherSoon,Kamu bisa segera bermain bersama
+Feature.GameJoin.Label.Played,pernah dimainkan
+Feature.GameJoin.Label.RecentCoplay,Baru-baru ini kalian bermain bersama
 Feature.GamePage.Action.BackToTop,Kembali ke atas
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
+Feature.GamePage.LabelCancelField,
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,Pengalaman virtual ini tidak tersedia karena status verifikasi usia kamu.
 Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,Tamu tidak dapat bergabung ke pengalaman virtual ini.
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,Pembelian diperlukan untuk mengunjungi pengalaman virtual ini.
@@ -4289,7 +4304,7 @@ Feature.PlayerSearchResults.Label.NewUsername,Nama pengguna baru
 Feature.PlayerSearchResults.Label.Previously,Sebelumnya
 Feature.PlayerSearchResults.Label.ThisIsYou,Ini adalah kamu
 Feature.PlayerSearchResults.Label.You,Kamu
-Feature.PlayerSearchResults.Label.YouAreFollowing,Kamu mengikuti
+Feature.PlayerSearchResults.Label.YouAreFollowing,
 Feature.PlayerSearchResults.Label.YouAreFriends,Kalian berteman
 Feature.PrivateServers.Action.CreatePrivateServer,Buat Server Pribadi
 Feature.PrivateServers.Action.FreeWithBlackbird,Gratis dengan Plus
@@ -5014,7 +5029,6 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 la
 Feature.UniversalShareSheet.Response.SharedMessage,Pesan terkirim
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Beberapa pesan terkirim
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} lainnya
-Feature.UserLibrary.Label.MyLibrary,Perpustakaan Saya
 Feature.VIPServer.Message.TooManyFreeServersOnGame,Jumlah server privat gratis di game ini sudah mencapai maksimum.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,Jumlah server privat gratis sudah mencapai maksimum. Nonaktifkan beberapa server lainnya terlebih dahulu.
 Feature.VerificationUpsell.Action.AddPhone,Tambahkan Nomor Ponsel
@@ -5186,7 +5200,7 @@ IAPExperience.InsufficientRobux.Title.InsufficientRobux,Robux Tidak Cukup
 IAPExperience.LeaveRoblox.Action.Cancel,
 IAPExperience.LeaveRoblox.Action.Continue,
 IAPExperience.LeaveRoblox.Text.ExternalWebsiteWarning,"Dengan mengklik “Lanjutkan”, kamu akan diarahkan ke situs web yang tidak dimiliki atau dijalankan oleh Roblox. Situs web tersebut mungkin memiliki ketentuan dan kebijakan privasi yang berbeda."
-IAPExperience.LeaveRoblox.Title.LeavingRoblox,Keluar dari Roblox
+IAPExperience.LeaveRoblox.Title.LeavingRoblox,
 IAPExperience.Loading.Text.PurchasingItem,Membeli item...
 IAPExperience.Loading.Text.PurchasingRobux,Membeli Robux...
 IAPExperience.Loading.Text.WaitingForPurchase,Menunggu pembelian...

@@ -1,9 +1,15 @@
 ﻿local FriendsCalling = script:FindFirstAncestor("FriendsCalling")
 local SignalsModule = require(FriendsCalling.Parent.Signals)
+local FFlagFriendsCallingCallEndedSnackbarModule = require(FriendsCalling.Flags.FFlagFriendsCallingCallEndedSnackbar)
 local LoggerModule = require(FriendsCalling.Logger)
-local _ = Enum.FriendsCallingEndReason
+local IsRingingForSomeoneElseModule = require(FriendsCalling.Utils.isRingingForSomeoneElse)
+local FriendsCallingEndReason = Enum.FriendsCallingEndReason
 local _ = Enum.FriendsCallingParticipantStatus
-local _ = Enum.FriendsCallingPhase
+local FriendsCallingPhase = Enum.FriendsCallingPhase
+local config = {
+	[FriendsCallingEndReason.Failed] = true,
+	[FriendsCallingEndReason.RemoteHangup] = true
+}
 
 local function _(Player)
 	return {
@@ -40,9 +46,14 @@ local function readCall(Sound)
 		endReason = Sound.EndReason,
 		volume = Sound.Volume,
 		isDeafened = Sound.IsDeafened,
-		conversationId = Sound.ConversationId,
+		conversationId = tostring(Sound.ConversationId),
 		participants = Participants
 	}
+end
+
+local _ = function(p1): boolean
+	-- upvalues: FriendsCallingPhase (copy), IsRingingForSomeoneElseModule (copy)
+	return p1.phase ~= FriendsCallingPhase.Ended and not IsRingingForSomeoneElseModule(p1)
 end
 
 local function disconnectObservedCall(p1)
@@ -55,57 +66,82 @@ local function disconnectObservedCall(p1)
 end
 
 return function(Object)
-	-- upvalues: SignalsModule (copy), readCall (copy), LoggerModule (copy), disconnectObservedCall (copy)
+	-- upvalues: SignalsModule (copy), FFlagFriendsCallingCallEndedSnackbarModule (copy), readCall (copy), FriendsCallingPhase (copy), IsRingingForSomeoneElseModule (copy), LoggerModule (copy), config (copy), disconnectObservedCall (copy)
 	local Signal, Signal2 = SignalsModule.createSignal({})
-	local Signal1, Signal2_1 = SignalsModule.createSignal(true)
+	local Signal1, Signal2_1 = SignalsModule.createSignal(nil)
+	local Signal3, Signal2_2 = SignalsModule.createSignal(true)
 	local Computed = SignalsModule.createComputed(function(p2)
-		-- upvalues: Signal (copy)
-		return Signal(p2)[1]
-	end)
-	local Computed1 = SignalsModule.createComputed(function(p2)
-		-- upvalues: Computed (copy)
-		local ComputedResult = Computed(p2)
+		-- upvalues: Signal1 (copy)
+		local SignalResult = Signal1(p2)
 		
-		return if ComputedResult then ComputedResult.callId else nil
+		return if SignalResult then SignalResult.callId else nil
 	end)
-	local Computed2 = SignalsModule.createComputed(function(p2): boolean
-		-- upvalues: Computed (copy)
-		return Computed(p2) ~= nil
+	local Computed1 = SignalsModule.createComputed(function(p2): boolean
+		-- upvalues: Signal1 (copy)
+		return Signal1(p2) ~= nil
 	end)
 	local List = {}
 	local ArrivalOrder = 0
-	local Flag = false
+	local v1 = nil
+	local Signal2_3 = nil
+	
+	if FFlagFriendsCallingCallEndedSnackbarModule then
+		local Signal4
+		Signal4, Signal2_3 = SignalsModule.createSignal(nil)
+	else
+		local function Signal4(_)
+			return nil
+		end
+		
+		Signal2_3 = function(_) end
+	end
+	local function clearCallEndedReason()
+		-- upvalues: Signal2_3 (ref)
+		Signal2_3(nil)
+	end
 	
 	local function publish()
-		-- upvalues: List (copy), readCall (upval), Flag (ref), Signal2 (copy), Signal2_1 (copy), LoggerModule (upval)
+		-- upvalues: List (copy), readCall (upval), FriendsCallingPhase (upval), IsRingingForSomeoneElseModule (upval), v1 (ref), Signal2 (copy), Signal2_1 (copy), Signal2_2 (copy), LoggerModule (upval)
 		local Copy = table.clone(List)
 		table.sort(Copy, function(A, B): boolean
 			return A.arrivalOrder < B.arrivalOrder
 		end)
 		local List1 = {}
+		local Call = nil
+		local v2 = nil
 		
 		for _, value in Copy do
-			table.insert(List1, (readCall(value.instance)))
+			local Call1 = readCall(value.instance)
+			table.insert(List1, Call1)
+			
+			if Call == nil and (Call1.phase ~= FriendsCallingPhase.Ended and not IsRingingForSomeoneElseModule(Call1)) then
+				Call = Call1
+				v2 = value
+			end
 		end
-		local v1 = #List1 > 0
-		local NoV28: boolean = Flag and not v1
-		Flag = v1
+		local v3 = v1
+		v1 = v2
 		Signal2(List1)
+		Signal2_1(Call)
 		
-		if NoV28 then
-			Signal2_1(true)
+		if v3 ~= nil and v3 ~= v2 then
+			Signal2_2(true)
 		end
-		local Entry = List1[1]
-		LoggerModule:debug("{} - published: hasCall={}, callId={}, phase={}, endReason={}, participants={}", script.Name, tostring(v1), Entry and Entry.callId or "", if Entry then Entry.phase.Name else "", if Entry then Entry.endReason.Name else "", if Entry then #Entry.participants else 0)
+		LoggerModule:debug("{} - published: calls={}, hasCall={}, callId={}, phase={}, endReason={}, participants={}", script.Name, #List1, tostring(Call ~= nil), Call and Call.callId or "", if Call then Call.phase.Name else "", if Call then Call.endReason.Name else "", if Call then #Call.participants else 0)
 	end
 	
 	local function unobserveCall(FriendsCallingInstance)
-		-- upvalues: List (copy), LoggerModule (upval), disconnectObservedCall (upval), publish (copy)
+		-- upvalues: List (copy), FFlagFriendsCallingCallEndedSnackbarModule (upval), FriendsCallingPhase (upval), config (upval), LoggerModule (upval), disconnectObservedCall (upval), Signal2_3 (ref), publish (copy)
 		for i, value in List do
 			if value.instance == FriendsCallingInstance then
+				local EndReason = if FFlagFriendsCallingCallEndedSnackbarModule and FriendsCallingInstance.Phase == FriendsCallingPhase.Ended and config[FriendsCallingInstance.EndReason] then FriendsCallingInstance.EndReason else nil
 				LoggerModule:debug("{} - unobserveCall: callId={}, phase={}", script.Name, FriendsCallingInstance.CallId or "", FriendsCallingInstance.Phase.Name)
 				disconnectObservedCall(value)
 				table.remove(List, i)
+				
+				if EndReason ~= nil then
+					Signal2_3(EndReason)
+				end
 				publish()
 				break
 			end
@@ -214,20 +250,22 @@ return function(Object)
 	end
 	return {
 		getCalls = Signal,
-		getCall = Computed,
-		getCallId = Computed1,
-		getHasCall = Computed2,
-		getIsExpanded = Signal1,
+		getCall = Signal1,
+		getCallId = Computed,
+		getHasCall = Computed1,
+		getCallEndedReason = Signal4,
+		getIsExpanded = Signal3,
 		expand = function()
-			-- upvalues: Signal2_1 (copy)
-			Signal2_1(true)
+			-- upvalues: Signal2_2 (copy)
+			Signal2_2(true)
 		end,
 		collapse = function()
-			-- upvalues: Signal2_1 (copy)
-			Signal2_1(false)
+			-- upvalues: Signal2_2 (copy)
+			Signal2_2(false)
 		end,
+		clearCallEndedReason = clearCallEndedReason,
 		cleanup = function()
-			-- upvalues: LoggerModule (upval), ChildAddedConnection (copy), ChildRemovedConnection (copy), List (copy), disconnectObservedCall (upval), Flag (ref), Signal2 (copy), Signal2_1 (copy)
+			-- upvalues: LoggerModule (upval), ChildAddedConnection (copy), ChildRemovedConnection (copy), List (copy), disconnectObservedCall (upval), v1 (ref), Signal2 (copy), Signal2_1 (copy), Signal2_2 (copy), FFlagFriendsCallingCallEndedSnackbarModule (upval), Signal2_3 (ref)
 			LoggerModule:debug("{} - store cleanup", script.Name)
 			ChildAddedConnection:Disconnect()
 			ChildRemovedConnection:Disconnect()
@@ -236,12 +274,16 @@ return function(Object)
 				disconnectObservedCall(value)
 			end
 			table.clear(List)
-			local Flag1: boolean = Flag
-			Flag = false
+			local v4 = v1 ~= nil
+			v1 = nil
 			Signal2({})
+			Signal2_1(nil)
 			
-			if Flag1 then
-				Signal2_1(true)
+			if v4 then
+				Signal2_2(true)
+			end
+			if FFlagFriendsCallingCallEndedSnackbarModule then
+				Signal2_3(nil)
 			end
 		end
 	}

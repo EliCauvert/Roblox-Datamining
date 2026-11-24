@@ -3,6 +3,7 @@ local Parent = Moments.Parent
 local SharedFlagsModule = require(Parent.SharedFlags)
 local SignalsModule = require(Parent.Signals)
 local FFlagMomentsCreationEntryOutcomeModule = require(Moments.Flags.FFlagMomentsCreationEntryOutcome)
+local FFlagMomentsCreationGalleryExitAnalytics = require(Parent.MomentsCommon).Flags.FFlagMomentsCreationGalleryExitAnalytics
 local FFlagMyStatsMediaSelector = SharedFlagsModule.FFlagMyStatsMediaSelector
 
 local function _(Sound: Sound): boolean
@@ -10,15 +11,21 @@ local function _(Sound: Sound): boolean
 end
 
 return function(p1, Callback, p2)
-	-- upvalues: SignalsModule (copy), FFlagMyStatsMediaSelector (copy), FFlagMomentsCreationEntryOutcomeModule (copy)
+	-- upvalues: SignalsModule (copy), FFlagMomentsCreationGalleryExitAnalytics (copy), FFlagMyStatsMediaSelector (copy), FFlagMomentsCreationEntryOutcomeModule (copy)
 	local P1 = p1 or game:GetService("CaptureService")
 	local P2 = p2 or {}
 	local Signal, Signal2 = SignalsModule.createSignal({})
 	local Signal1, Signal2_1 = SignalsModule.createSignal(false)
+	local Callback2 = nil
+	local Callback1 = nil
+	
+	if FFlagMomentsCreationGalleryExitAnalytics then
+		Callback2, Callback1 = SignalsModule.createSignal(0)
+	end
 	local Pages = nil
 	
 	local function appendCurrentPage()
-		-- upvalues: Signal (copy), Pages (ref), Signal2 (copy), Signal2_1 (copy)
+		-- upvalues: Signal (copy), Pages (ref), Signal2 (copy), FFlagMomentsCreationGalleryExitAnalytics (upval), Callback2 (ref), Callback1 (ref), Signal2_1 (copy)
 		local Copy = table.clone(Signal(false))
 		
 		for _, Sound in Pages:GetCurrentPage() do
@@ -27,13 +34,17 @@ return function(p1, Callback, p2)
 			end
 		end
 		Signal2(Copy)
+		
+		if FFlagMomentsCreationGalleryExitAnalytics and Callback2 ~= nil and Callback1 ~= nil then
+			Callback1(Callback2(false) + #Pages:GetCurrentPage())
+		end
 		Signal2_1(Pages.IsFinished == true)
 	end
 	
 	local function _()
-		-- upvalues: P1 (copy), FFlagMyStatsMediaSelector (upval), P2 (copy), Pages (ref), Signal2_1 (copy), Callback (copy), FFlagMomentsCreationEntryOutcomeModule (upval), appendCurrentPage (copy), Signal (copy)
+		-- upvalues: P1 (copy), FFlagMyStatsMediaSelector (upval), P2 (copy), Pages (ref), Signal2_1 (copy), Callback (copy), FFlagMomentsCreationEntryOutcomeModule (upval), appendCurrentPage (copy), Signal (copy), FFlagMomentsCreationGalleryExitAnalytics (upval), Callback2 (ref)
 		task.spawn(function()
-			-- upvalues: P1 (upval), FFlagMyStatsMediaSelector (upval), P2 (upval), Pages (upval), Signal2_1 (upval), Callback (upval), FFlagMomentsCreationEntryOutcomeModule (upval), appendCurrentPage (upval), Signal (upval)
+			-- upvalues: P1 (upval), FFlagMyStatsMediaSelector (upval), P2 (upval), Pages (upval), Signal2_1 (upval), Callback (upval), FFlagMomentsCreationEntryOutcomeModule (upval), appendCurrentPage (upval), Signal (upval), FFlagMomentsCreationGalleryExitAnalytics (upval), Callback2 (upval)
 			local Success, Result = pcall(function()
 				-- upvalues: P1 (upval), FFlagMyStatsMediaSelector (upval), P2 (upval), Pages (upval)
 				local CapturesFromGalleryAsync, CapturesFromGalleryAsync2 = P1:ReadCapturesFromGalleryAsync(if FFlagMyStatsMediaSelector then P2 else {}, true)
@@ -46,7 +57,7 @@ return function(p1, Callback, p2)
 				appendCurrentPage()
 				
 				if Callback ~= nil then
-					Callback(Signal(false), true)
+					Callback(Signal(false), true, nil, if FFlagMomentsCreationGalleryExitAnalytics and Callback2 ~= nil then Callback2(false) else nil)
 				end
 				return
 			else
@@ -80,7 +91,7 @@ return function(p1, Callback, p2)
 	end
 	
 	task.spawn(function()
-		-- upvalues: P1 (copy), FFlagMyStatsMediaSelector (upval), P2 (copy), Pages (ref), Signal2_1 (copy), Callback (copy), FFlagMomentsCreationEntryOutcomeModule (upval), appendCurrentPage (copy), Signal (copy)
+		-- upvalues: P1 (copy), FFlagMyStatsMediaSelector (upval), P2 (copy), Pages (ref), Signal2_1 (copy), Callback (copy), FFlagMomentsCreationEntryOutcomeModule (upval), appendCurrentPage (copy), Signal (copy), FFlagMomentsCreationGalleryExitAnalytics (upval), Callback2 (ref)
 		local Success, Result = pcall(function()
 			-- upvalues: P1 (upval), FFlagMyStatsMediaSelector (upval), P2 (upval), Pages (upval)
 			local CapturesFromGalleryAsync, CapturesFromGalleryAsync2 = P1:ReadCapturesFromGalleryAsync(if FFlagMyStatsMediaSelector then P2 else {}, true)
@@ -93,7 +104,7 @@ return function(p1, Callback, p2)
 			appendCurrentPage()
 			
 			if Callback ~= nil then
-				Callback(Signal(false), true)
+				Callback(Signal(false), true, nil, if FFlagMomentsCreationGalleryExitAnalytics and Callback2 ~= nil then Callback2(false) else nil)
 			end
 			return
 		else
@@ -109,6 +120,7 @@ return function(p1, Callback, p2)
 	return {
 		getCaptures = Signal,
 		getIsFinished = Signal1,
+		getTotalCaptureCount = Callback2,
 		fetchMore = fetchMore
 	}
 end

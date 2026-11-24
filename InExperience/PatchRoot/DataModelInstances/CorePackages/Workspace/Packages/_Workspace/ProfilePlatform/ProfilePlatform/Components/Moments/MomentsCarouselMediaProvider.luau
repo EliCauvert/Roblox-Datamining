@@ -17,9 +17,7 @@ local Media = MomentsCommonModule.Media
 local GetMomentsCapabilitiesFunction = MomentsCommonModule.Stores.GetMomentsCapabilities
 local _ = require(Parent.DataHydration.MomentsStoreTypes)
 local ToMediaItemModule = require(Parent.Moments.ToMediaItem)
-local SharedFlagsModule = require(Parent.SharedFlags)
-local FFlagMomentsAutoplayAmpPolicy = SharedFlagsModule.FFlagMomentsAutoplayAmpPolicy
-local FFlagProfileMomentSceneOutfitPoster = SharedFlagsModule.FFlagProfileMomentSceneOutfitPoster
+local FFlagProfileMomentSceneOutfitPoster = require(Parent.SharedFlags).FFlagProfileMomentSceneOutfitPoster
 local UseSignalStateFunction = SignalsReactModule.useSignalState
 
 local function _(): boolean
@@ -65,10 +63,10 @@ local function defaultCreateCoordinator(p1, MasterVolume)
 end
 
 return function(p1)
-	-- upvalues: FFlagMomentsAutoplayAmpPolicy (copy), UseSignalStateFunction (copy), GetMomentsCapabilitiesFunction (copy), ReactModule (copy), SignalsModule (copy), UserInputService (copy), AppLifecycleObserverService (ref), ToMediaItemModule (copy), FFlagProfileMomentSceneOutfitPoster (copy), defaultCreateCoordinator (copy), Media (copy)
+	-- upvalues: UseSignalStateFunction (copy), GetMomentsCapabilitiesFunction (copy), ReactModule (copy), SignalsModule (copy), UserInputService (copy), AppLifecycleObserverService (ref), ToMediaItemModule (copy), FFlagProfileMomentSceneOutfitPoster (copy), defaultCreateCoordinator (copy), Media (copy)
 	local ActiveIndex = p1.activeIndex
 	local PlaybackActive = p1.playbackActive
-	local UseSignalStateResult = if FFlagMomentsAutoplayAmpPolicy then UseSignalStateFunction(GetMomentsCapabilitiesFunction(false).getIsAutoPlayEnabled) else nil
+	local UseSignalStateResult = UseSignalStateFunction(GetMomentsCapabilitiesFunction(false).getIsAutoPlayEnabled)
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), ActiveIndex (copy)
 		local Signal, Signal2 = SignalsModule.createSignal(ActiveIndex)
@@ -81,12 +79,12 @@ return function(p1)
 		
 		return { get = Signal, set = Signal2 }
 	end, {})
-	local UseMemoResult2 = if FFlagMomentsAutoplayAmpPolicy then ReactModule.useMemo(function()
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), UseSignalStateResult (copy)
 		local Signal, Signal2 = SignalsModule.createSignal(UseSignalStateResult)
 		
 		return { get = Signal, set = Signal2 }
-	end, {}) else nil
+	end, {})
 	local UseMemoResult3 = ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval)
 		local Signal, Signal2 = SignalsModule.createSignal(true)
@@ -101,13 +99,10 @@ return function(p1)
 		-- upvalues: UseMemoResult1 (copy), PlaybackActive (copy)
 		UseMemoResult1.set(PlaybackActive)
 	end, { PlaybackActive, UseMemoResult1 })
-	
-	if FFlagMomentsAutoplayAmpPolicy then
-		ReactModule.useEffect(function()
-			-- upvalues: UseMemoResult2 (copy), UseSignalStateResult (copy)
-			UseMemoResult2.set(UseSignalStateResult)
-		end, { UseSignalStateResult, UseMemoResult2 })
-	end
+	ReactModule.useEffect(function()
+		-- upvalues: UseMemoResult2 (copy), UseSignalStateResult (copy)
+		UseMemoResult2.set(UseSignalStateResult)
+	end, { UseSignalStateResult, UseMemoResult2 })
 	ReactModule.useEffect(function()
 		-- upvalues: UserInputService (upval), AppLifecycleObserverService (upval), UseMemoResult3 (copy)
 		if UserInputService:GetDeviceType() == Enum.DeviceType.Desktop or AppLifecycleObserverService == nil then return end
@@ -156,7 +151,7 @@ return function(p1)
 		end
 	end, { UseMemoResult1, UseMemoResult3 })
 	local UseMemoResult6 = ReactModule.useMemo(function()
-		-- upvalues: UseMemoResult (copy), UseMemoResult4 (copy), UseMemoResult5 (copy), FFlagMomentsAutoplayAmpPolicy (upval), UseMemoResult2 (copy)
+		-- upvalues: UseMemoResult (copy), UseMemoResult4 (copy), UseMemoResult5 (copy), UseMemoResult2 (copy)
 		return {
 			getActiveIndex = UseMemoResult.get,
 			getItems = function(_)
@@ -164,13 +159,13 @@ return function(p1)
 				return UseMemoResult4
 			end,
 			getPlaybackActive = UseMemoResult5,
-			getCanAutoPlay = if FFlagMomentsAutoplayAmpPolicy then UseMemoResult2.get else nil
+			getCanAutoPlay = UseMemoResult2.get
 		}
 	end, {
 		UseMemoResult4,
 		UseMemoResult,
 		UseMemoResult5,
-		if FFlagMomentsAutoplayAmpPolicy then UseMemoResult2 else nil
+		UseMemoResult2
 	})
 	local CreateCoordinator = p1.createCoordinator or defaultCreateCoordinator
 	local UseMemoResult7 = ReactModule.useMemo(function()

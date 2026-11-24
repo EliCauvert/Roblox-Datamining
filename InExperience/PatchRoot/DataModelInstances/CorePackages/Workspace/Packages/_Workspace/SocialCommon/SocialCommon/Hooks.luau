@@ -6,5 +6,6 @@
 	useMutualFriendsText = require(script.useMutualFriendsText),
 	useRecommendationContextualInfoDisplay = require(script.useRecommendationContextualInfoDisplay),
 	useGetPersonalizationSettingItem = require(script.useGetPersonalizationSettingItem),
-	useGetRatingDisplayByUniverseId = require(script.useGetRatingDisplayByUniverseId)
+	useGetRatingDisplayByUniverseId = require(script.useGetRatingDisplayByUniverseId),
+	useGetMinimizedRatingIcon = require(script.useGetMinimizedRatingIcon)
 }

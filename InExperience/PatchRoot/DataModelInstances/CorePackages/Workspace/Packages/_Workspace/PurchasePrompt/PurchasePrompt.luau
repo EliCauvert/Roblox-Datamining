@@ -22,12 +22,12 @@ local DispatchPurchaseForProductPayloadModule = require(v1.Utils.dispatchPurchas
 local SetProductPayloadModule = require(v1.Actions.SetProductPayload)
 local SetPurchaseAnalyticsMetadataModule = require(v1.Actions.SetPurchaseAnalyticsMetadata)
 local FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow = require(v1.Parent.SharedFlags).FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow
-local FFlagEnablePurchasePayloadInExperienceShop = SharedFlagsModule.FFlagEnablePurchasePayloadInExperienceShop
+local EngineFeatureEnablePurchasePayload = SharedFlagsModule.EngineFeatureEnablePurchasePayload
 local FFlagSkipBuyDelayForExperienceShopModule = require(v1.Flags.FFlagSkipBuyDelayForExperienceShop)
 local _ = require(v1.types)
 local FFlagPurchasePromptSubtitleForTimedOptions = require(v1.Parent.SharedFlags).FFlagPurchasePromptSubtitleForTimedOptions
 local FFlagAXMISWithBlackbird = SharedFlagsModule.FFlagAXMISWithBlackbird
-local FFlagEnableRobuxInExperienceShop = SharedFlagsModule.FFlagEnableRobuxInExperienceShop
+local FFlagEnableInExperienceShop = SharedFlagsModule.FFlagEnableInExperienceShop
 local FFlagKeepSideSheetOpenBesideMenu = SharedFlagsModule.FFlagKeepSideSheetOpenBesideMenu
 local WindowStateModule = require(v1.Enums.WindowState)
 local PromptStateModule = require(v1.Enums.PromptState)
@@ -97,13 +97,13 @@ return {
 		NewResult:dispatch(InitiateAvatarCreationFeePurchaseModule(p1, p2, p3, p4))
 	end,
 	initiatePurchaseForProductPayload = function(p1, p2)
-		-- upvalues: NewResult (ref), FFlagEnablePurchasePayloadInExperienceShop (copy), FFlagSkipBuyDelayForExperienceShopModule (copy), SetProductPayloadModule (copy), SetPurchaseAnalyticsMetadataModule (copy), DispatchPurchaseForProductPayloadModule (copy)
+		-- upvalues: NewResult (ref), EngineFeatureEnablePurchasePayload (copy), FFlagSkipBuyDelayForExperienceShopModule (copy), SetProductPayloadModule (copy), SetPurchaseAnalyticsMetadataModule (copy), DispatchPurchaseForProductPayloadModule (copy)
 		if not NewResult then
 			warn("initiatePurchaseForProductPayload called before mountPurchasePrompt; ignoring.")
 			
 			return
 		end
-		if FFlagEnablePurchasePayloadInExperienceShop or FFlagSkipBuyDelayForExperienceShopModule then
+		if EngineFeatureEnablePurchasePayload or FFlagSkipBuyDelayForExperienceShopModule then
 			NewResult:dispatch(SetProductPayloadModule(p1))
 		end
 		if p2 then
@@ -138,7 +138,7 @@ return {
 			subtitleView = if FFlagPurchasePromptSubtitleForTimedOptions then p1.subtitleView else nil
 		})
 	end,
-	launchRobuxPackagePurchase = if FFlagEnableRobuxInExperienceShop then require(v1.launchRobuxPackagePurchase) else nil,
+	launchRobuxPackagePurchase = if FFlagEnableInExperienceShop then require(v1.launchRobuxPackagePurchase) else nil,
 	["jest.config"] = script["jest.config"],
 	["jest.main.config"] = script["jest.main.config"],
 	["jest.mockDataModel.config"] = script["jest.mockDataModel.config"]

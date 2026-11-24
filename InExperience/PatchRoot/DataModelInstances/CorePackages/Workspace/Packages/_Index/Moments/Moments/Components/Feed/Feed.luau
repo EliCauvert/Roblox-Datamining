@@ -15,6 +15,7 @@ local FFlagMomentsPostInsightsIxpEnabledModule = require(Moments.Flags.FFlagMome
 local FFlagMomentsRemoveDeletedFromProfile = SharedFlagsModule.FFlagMomentsRemoveDeletedFromProfile
 local FFlagMomentsOptimisticProfilePending = SharedFlagsModule.FFlagMomentsOptimisticProfilePending
 local FFlagMomentsRenderAvatarPostsInFeed = SharedFlagsModule.FFlagMomentsRenderAvatarPostsInFeed
+local FFlagMomentsCreatorFollowPreferenceModule = require(Moments.Flags.FFlagMomentsCreatorFollowPreference)
 local FFlagMomentsFeedMediaLoadAttemptedEvent = MomentsCommonModule.Flags.FFlagMomentsFeedMediaLoadAttemptedEvent
 local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
 local FFlagMomentsCommentDeepLinks = SharedFlagsModule.FFlagMomentsCommentDeepLinks
@@ -47,6 +48,7 @@ local LogMomentViewBeganModule = require(Moments.Analytics.logMomentViewBegan)
 local FFlagMomentsImpressionPrimaryEntityModule = require(Moments.Flags.FFlagMomentsImpressionPrimaryEntity)
 local UseMomentsHostFunction = require(Moments.MomentsHostContext).useMomentsHost
 local FFlagMomentsNavigationEventModule = require(Moments.Flags.FFlagMomentsNavigationEvent)
+local FFlagMomentsEndDwellWhenAppHiddenModule = require(Moments.Flags.FFlagMomentsEndDwellWhenAppHidden)
 local LogFeedEndStateReachedModule = require(Moments.Analytics.logFeedEndStateReached)
 local MakeFeedActionFieldsModule = require(Moments.Analytics.makeFeedActionFields)
 local MomentMediaCoordinatorProviderModule = require(script.Parent.Media.MomentMediaCoordinatorProvider)
@@ -135,7 +137,7 @@ local _ = function()
 end
 
 return function(Frame: Frame)
-	-- upvalues: NoopTelemetry (copy), FFlagMomentsComments (copy), GetCommentsSheetStoreModule (copy), SignalsReactModule (copy), FFlagMomentsCreatorAnalyticsModule (copy), GetPostInsightsPageStoreModule (copy), GetImmersiveChromeStoreModule (copy), UseLocalizationFunction (copy), config (copy), UseMomentsSessionFunction (copy), GetToastStoreModule (copy), ReactModule (copy), GetFeedScrollLimitModule (copy), GetMomentsCapabilitiesFunction (copy), CreateFeedStoreModule (copy), feedItemDedupeKey (copy), FFlagMomentsParentTimeLimit (copy), Moments (copy), GetExperienceDetailsSheetStoreModule (copy), FFlagMomentsCommentsCloseOnFeedJumpModule (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), SignalsModule (copy), FFlagMomentsNavigationEventModule (copy), UseMomentsHostFunction (copy), FFlagMomentsPostInsightsIxpEnabledModule (copy), LogMomentViewBeganModule (copy), FFlagMomentsImpressionPrimaryEntityModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), LogFeedEndStateReachedModule (copy), UseFeedTelemetryModule (copy), feedItemAttribution (copy), FFlagMomentsOptimisticProfilePending (copy), FFlagMomentsFixTappedMomentIndexModule (copy), MomentsSurfaceLoadManager (copy), FeedItemRegistryModule (copy), DeleteMomentModule (copy), MomentsFeed (ref), Parent (copy), FFlagMomentsRemoveDeletedFromProfile (copy), GetDeletedMomentsStoreModule (copy), MakeFeedActionFieldsModule (copy), FFlagMomentsDeleteSnackbarModule (copy), FFlagMomentsFixDeleteToastCopyModule (copy), makeMediaLoadEventFields (copy), Analytics (copy), FFlagMomentsFeedMediaLoadAttemptedEvent (copy), FFlagMomentsCommentDeepLinks (copy), FFlagMomentsHideNavBarOnScrollModule (copy), ImmersiveChromeControllerModule (copy), FeedContext (copy), withLimitReachedHidden (copy), VerticalPager (copy), renderFeedItem (copy), feedItemKey (copy), FeedStateViewModule (copy), FeedNavigationBarModule (copy), SwipeLatencyTrackerModule (copy), DeletionConfirmationDialogModule (copy), MomentMediaCoordinatorProviderModule (copy), SurfaceReadyTrackerModule (copy)
+	-- upvalues: NoopTelemetry (copy), FFlagMomentsComments (copy), GetCommentsSheetStoreModule (copy), SignalsReactModule (copy), FFlagMomentsCreatorAnalyticsModule (copy), GetPostInsightsPageStoreModule (copy), GetImmersiveChromeStoreModule (copy), UseLocalizationFunction (copy), config (copy), UseMomentsSessionFunction (copy), GetToastStoreModule (copy), ReactModule (copy), GetFeedScrollLimitModule (copy), GetMomentsCapabilitiesFunction (copy), CreateFeedStoreModule (copy), feedItemDedupeKey (copy), FFlagMomentsParentTimeLimit (copy), Moments (copy), GetExperienceDetailsSheetStoreModule (copy), FFlagMomentsCommentsCloseOnFeedJumpModule (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), SignalsModule (copy), FFlagMomentsNavigationEventModule (copy), UseMomentsHostFunction (copy), FFlagMomentsPostInsightsIxpEnabledModule (copy), LogMomentViewBeganModule (copy), FFlagMomentsImpressionPrimaryEntityModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), LogFeedEndStateReachedModule (copy), UseFeedTelemetryModule (copy), feedItemAttribution (copy), FFlagMomentsEndDwellWhenAppHiddenModule (copy), FFlagMomentsOptimisticProfilePending (copy), FFlagMomentsFixTappedMomentIndexModule (copy), MomentsSurfaceLoadManager (copy), FeedItemRegistryModule (copy), DeleteMomentModule (copy), MomentsFeed (ref), Parent (copy), FFlagMomentsRemoveDeletedFromProfile (copy), GetDeletedMomentsStoreModule (copy), MakeFeedActionFieldsModule (copy), FFlagMomentsDeleteSnackbarModule (copy), FFlagMomentsFixDeleteToastCopyModule (copy), makeMediaLoadEventFields (copy), Analytics (copy), FFlagMomentsFeedMediaLoadAttemptedEvent (copy), FFlagMomentsCommentDeepLinks (copy), FFlagMomentsCreatorFollowPreferenceModule (copy), FFlagMomentsHideNavBarOnScrollModule (copy), ImmersiveChromeControllerModule (copy), FeedContext (copy), withLimitReachedHidden (copy), VerticalPager (copy), renderFeedItem (copy), feedItemKey (copy), FeedStateViewModule (copy), FeedNavigationBarModule (copy), SwipeLatencyTrackerModule (copy), DeletionConfirmationDialogModule (copy), MomentMediaCoordinatorProviderModule (copy), SurfaceReadyTrackerModule (copy)
 	local Source = Frame.source
 	local NoActive = Frame.active == nil or Frame.active
 	local NoActive1 = if Frame.playbackActive == nil then NoActive else Frame.playbackActive
@@ -371,7 +373,9 @@ return function(Frame: Frame)
 			})
 		end, { UseMomentsSessionResult, Source }),
 		onViewEnded = if FFlagMomentsNavigationEventModule then UseResult3 else nil,
-		inactiveDestination = if FFlagMomentsNavigationEventModule then Frame.inactiveDestination else nil
+		inactiveDestination = if FFlagMomentsNavigationEventModule then Frame.inactiveDestination else nil,
+		getIsAway = if FFlagMomentsEndDwellWhenAppHiddenModule then require(Moments.Stores.GetAppAttentionStore)(false).getIsAway else nil,
+		visible = if FFlagMomentsEndDwellWhenAppHiddenModule then NoActive1 else nil
 	})
 	UseRefResult7.current = UseFeedTelemetryModuleResult.getViewId
 	UseRefResult6.current = UseFeedTelemetryModuleResult.flushView
@@ -645,7 +649,7 @@ return function(Frame: Frame)
 	})
 	local Element1 = ReactModule.createElement(FeedContext.Provider, {
 		value = ReactModule.useMemo(function()
-			-- upvalues: UseMemoResult (copy), NoActive (copy), NoActive1 (ref), FFlagMomentsRenderAvatarPostsInFeed (upval), FFlagMomentsCommentDeepLinks (upval), Source (copy), Telemetry (copy), UseFeedTelemetryModuleResult (copy), ImmersiveChromeStoreModule (copy), UseResult6 (copy), UseResult4 (copy), Frame (copy)
+			-- upvalues: UseMemoResult (copy), NoActive (copy), NoActive1 (ref), FFlagMomentsRenderAvatarPostsInFeed (upval), FFlagMomentsCommentDeepLinks (upval), Source (copy), Telemetry (copy), FFlagMomentsCreatorFollowPreferenceModule (upval), UseFeedTelemetryModuleResult (copy), ImmersiveChromeStoreModule (copy), UseResult6 (copy), UseResult4 (copy), Frame (copy)
 			return {
 				getStatus = UseMemoResult.getStatus,
 				isActiveFeed = NoActive,
@@ -657,6 +661,12 @@ return function(Frame: Frame)
 					-- upvalues: Telemetry (upval)
 					return Telemetry.logAction(p3, p4, p5)
 				end,
+				logPreference = if FFlagMomentsCreatorFollowPreferenceModule then function(p3, p4)
+					-- upvalues: Telemetry (upval)
+					local LogPreferenceFunction: (any, any) -> () = Telemetry.logPreference
+					assert(LogPreferenceFunction ~= nil, "Expected preference telemetry when follow preferences are enabled")
+					LogPreferenceFunction(p3, p4)
+				end else nil,
 				flushView = UseFeedTelemetryModuleResult.flushView,
 				getChromeVisible = ImmersiveChromeStoreModule.getChromeVisible,
 				revealChrome = ImmersiveChromeStoreModule.revealChrome,

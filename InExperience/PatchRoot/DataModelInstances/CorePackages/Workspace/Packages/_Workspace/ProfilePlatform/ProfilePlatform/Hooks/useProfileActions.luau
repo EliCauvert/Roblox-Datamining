@@ -3,6 +3,7 @@ local Parent = ProfilePlatform.Parent
 local ReactModule = require(Parent.React)
 local RoactUtilsModule = require(Parent.RoactUtils)
 local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagEnableFriendsWidgetDeepLink = SharedFlagsModule.FFlagEnableFriendsWidgetDeepLink
 local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
 local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
 local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
@@ -49,7 +50,7 @@ local Text = tostring(DateTime.now().UnixTimestampMillis)
 local config = { skipFetch = true }
 
 return function(ButtonSurface)
-	-- upvalues: UseLocalUserIdFunction (copy), UseDispatchFunction (copy), UseNavigationFunction (copy), UseProfileWrapperContextModule (copy), UseProfileAnalyticsContextModule (copy), UseShortUrlFunction (copy), UseGetOrGenerateLinkUrlFunction (copy), UseEffectOnceFunction (copy), ReactModule (copy), Text (copy), TextKeysModule (copy), UseLocalizationFunction (copy), EnumsModule (copy), FFlagProfilePlatformAddTC (copy), FFlagProfilePlatformEnableEditAppearanceMenuModule (copy), FFlagProfilePlatformEditBackgroundMenuItemModule (copy), FFlagProfilePlatformEnableEditLookModule (copy), FFlagJoinabilityCTAContextCopy (copy), FFlagJoinabilityCTARefactor (copy), FFlagProfilePlatformNewProfileHeader (copy), FFlagEnablePlatformProfileContextualMenuOption (copy), FFlagProfilePlatformEnableCurrencyTransfer (copy), FFlagProfilePlatformEnableTradeItemsModule (copy), FFlagProfilePlatformEnableUserFollowModule (copy), FFlagProfilePlatformPresenceStoreMigrationModule (copy), UseGetPresenceByUserId (copy), config (copy), FFlagProfilePlatformPassPresenceToJoinUserInExperience (copy), UseSelectorFunction (copy), PresenceModule (copy), UseAboutSectionsModule (copy), FFlagProfileAboutDetailsUseSheet (copy), FFlagProfilePlatformRefreshActionsRespectPoliciesModule (copy), UseActionsComponentRequestModule (copy), FFlagHideLeaveFromOpenCommunityOwnerModule (copy), UseProfileJsonModule (copy), ViewerOwnsOpenCommunityModule (copy), FFlagFriendsCallingClientGateDEV (copy), UseIsCallButtonDisabledModule (copy), UseJoinUserInExperienceFunction (copy), UseProfileShareLinkFunction (copy), Contexts (copy), ProfileActionsModule (copy)
+	-- upvalues: UseLocalUserIdFunction (copy), UseDispatchFunction (copy), UseNavigationFunction (copy), UseProfileWrapperContextModule (copy), UseProfileAnalyticsContextModule (copy), UseShortUrlFunction (copy), UseGetOrGenerateLinkUrlFunction (copy), UseEffectOnceFunction (copy), ReactModule (copy), Text (copy), TextKeysModule (copy), UseLocalizationFunction (copy), EnumsModule (copy), FFlagProfilePlatformAddTC (copy), FFlagProfilePlatformEnableEditAppearanceMenuModule (copy), FFlagProfilePlatformEditBackgroundMenuItemModule (copy), FFlagProfilePlatformEnableEditLookModule (copy), FFlagJoinabilityCTAContextCopy (copy), FFlagJoinabilityCTARefactor (copy), FFlagProfilePlatformNewProfileHeader (copy), FFlagEnablePlatformProfileContextualMenuOption (copy), FFlagProfilePlatformEnableCurrencyTransfer (copy), FFlagProfilePlatformEnableTradeItemsModule (copy), FFlagProfilePlatformEnableUserFollowModule (copy), FFlagProfilePlatformPresenceStoreMigrationModule (copy), UseGetPresenceByUserId (copy), config (copy), FFlagProfilePlatformPassPresenceToJoinUserInExperience (copy), UseSelectorFunction (copy), PresenceModule (copy), UseAboutSectionsModule (copy), FFlagProfileAboutDetailsUseSheet (copy), FFlagProfilePlatformRefreshActionsRespectPoliciesModule (copy), UseActionsComponentRequestModule (copy), FFlagHideLeaveFromOpenCommunityOwnerModule (copy), UseProfileJsonModule (copy), ViewerOwnsOpenCommunityModule (copy), FFlagEnableFriendsWidgetDeepLink (copy), FFlagFriendsCallingClientGateDEV (copy), UseIsCallButtonDisabledModule (copy), UseJoinUserInExperienceFunction (copy), UseProfileShareLinkFunction (copy), Contexts (copy), ProfileActionsModule (copy)
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseNavigationResult = UseNavigationFunction()
@@ -159,10 +160,13 @@ return function(ButtonSurface)
 	local UseActionsComponentRequestModuleResult = if FFlagProfilePlatformRefreshActionsRespectPoliciesModule then UseActionsComponentRequestModule() else nil
 	local UseProfileJsonModuleResult = if FFlagHideLeaveFromOpenCommunityOwnerModule then UseProfileJsonModule() else nil
 	local ViewerOwnsOpenCommunityModuleResult = if FFlagHideLeaveFromOpenCommunityOwnerModule and ProfileType == EnumsModule.ProfileTypes.Community then ViewerOwnsOpenCommunityModule(UseProfileJsonModuleResult, UseLocalUserIdResult) else false
+	local IsSourceMatch: boolean = FFlagEnableFriendsWidgetDeepLink and UseProfileWrapperContextModuleResult.sourceInfo.source == EnumsModule.Sources.FriendsWidget
 	local UseIsCallButtonDisabledModuleResult = if FFlagFriendsCallingClientGateDEV then UseIsCallButtonDisabledModule() else false
 	local UseJoinUserInExperienceResult = UseJoinUserInExperienceFunction(ProfileId, {
 		isHomePageCarousel = UseProfileWrapperContextModuleResult.sourceInfo.source == EnumsModule.Sources.HomepageFriendsCarousel,
 		homepageCarouselAbsolutePosition = UseProfileWrapperContextModuleResult.sourceInfo.homepageCarouselAbsolutePosition,
+		analyticProps = if IsSourceMatch then { context = EnumsModule.Sources.FriendsWidget } else nil,
+		joinAttemptOrigin = if IsSourceMatch then EnumsModule.Sources.FriendsWidget else nil,
 		openGameDetailsPeekViewClosed = UseResult,
 		presence = if FFlagProfilePlatformPassPresenceToJoinUserInExperience then UseGetPresenceByUserIdResult else nil
 	})

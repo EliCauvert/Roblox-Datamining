@@ -4,9 +4,11 @@ local _ = require(BuildExperience.Chat.useChatSessionCore)
 local _ = require(BuildExperience.Components.ModelPicker.ModelPickerTypes)
 local UseCreatorCreditChatUpsellViewModelModule = require(BuildExperience.Components.BuildChatPage.useCreatorCreditChatUpsellViewModel)
 local _ = require(BuildExperience.Components.BuildPillMenu.BuildPillMenuPageHost)
+local FFlagBuildExperienceAdsAndRobuxTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceAdsAndRobuxTelemetry)
+local FFlagBuildExperienceAnswerFormModule = require(BuildExperience.Flags.FFlagBuildExperienceAnswerForm)
 
-return function(p1, p2, UniverseId, PlaceId, SessionId)
-	-- upvalues: ReactModule (copy), UseCreatorCreditChatUpsellViewModelModule (copy)
+return function(p1, p2, UniverseId, PlaceId, SessionId, p3)
+	-- upvalues: ReactModule (copy), FFlagBuildExperienceAnswerFormModule (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), UseCreatorCreditChatUpsellViewModelModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), UseStateResult2 (copy)
@@ -25,6 +27,8 @@ return function(p1, p2, UniverseId, PlaceId, SessionId)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(false)
 	end, { UniverseId, SessionId })
+	local CurrentSessionId = p1.currentSessionId or SessionId
+	local P5 = (not FFlagBuildExperienceAnswerFormModule or p1.answerForm == nil) and ((not UseStateResult or UniverseId == nil) and p3)
 	local FundingFailure = p1.fundingFailure
 	
 	return {
@@ -33,10 +37,25 @@ return function(p1, p2, UniverseId, PlaceId, SessionId)
 			isAssistantResponding = p1.isAssistantResponding,
 			outOfCreditsPromptFailureCount = if FundingFailure then FundingFailure.count else nil,
 			outOfCreditsPromptFailureReason = if FundingFailure then FundingFailure.reason else nil,
-			onOpenCreatorCreditPage = if UniverseId == nil then nil else UseResult
+			onOpenCreatorCreditPage = if UniverseId == nil then nil else UseResult,
+			telemetry = if FFlagBuildExperienceAdsAndRobuxTelemetryModule then ReactModule.useMemo(function()
+				-- upvalues: UniverseId (copy), PlaceId (copy), CurrentSessionId (copy), P5 (copy)
+				return {
+					context = "chat_sheet_card",
+					granularity = {
+						universeId = UniverseId,
+						placeId = PlaceId,
+						conversationId = CurrentSessionId
+					},
+					isSurfaceVisible = P5
+				}
+			end, { UniverseId, PlaceId, CurrentSessionId, P5 }) else nil
 		}),
 		page = if UseStateResult and UniverseId ~= nil then {
-			activePage = { type = "creator-credit" },
+			activePage = {
+				type = "creator-credit",
+				entryContext = if FFlagBuildExperienceAdsAndRobuxTelemetryModule then "chat_sheet_card" else nil
+			},
 			target = {
 				isNewGameTarget = false,
 				universeId = UniverseId,

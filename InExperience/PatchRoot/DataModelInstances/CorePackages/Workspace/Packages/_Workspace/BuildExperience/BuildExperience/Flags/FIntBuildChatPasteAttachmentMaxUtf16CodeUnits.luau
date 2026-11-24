@@ -1,0 +1,1 @@
+﻿return game:DefineFastInt("BuildChatPasteAttachmentMaxUtf16CodeUnits", 4096)

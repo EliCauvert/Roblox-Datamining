@@ -2105,8 +2105,11 @@ Feature.AvatarSwitcher.Message.UnknownSupport,"Puoi comunque cambiare il tuo ava
 Feature.AvatarSwitcher.Message.Unsupported,Questa esperienza utilizza un avatar personalizzato e non supporta gli avatar Roblox.
 Feature.AvatarWorkshop.Action.EditAvatar,Modifica avatar
 Feature.AvatarWorkshop.Action.TryAgain,
+Feature.AvatarWorkshop.Description.AddAvatar,Vuoi aggiungere questo avatar ai tuoi avatar?
+Feature.AvatarWorkshop.Heading.AddAvatar,Vuoi aggiungere l'avatar?
 Feature.AvatarWorkshop.Heading.Customize,Personalizza
 Feature.AvatarWorkshop.Heading.YourAvatars,I tuoi avatar
+Feature.AvatarWorkshop.Label.DefaultAvatarName,
 Feature.AvatarWorkshop.Message.LoadItemsError,Si è verificato un problema durante il caricamento dei tuoi articoli.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,Impossibile caricare altri articoli.
 Feature.AvatarWorkshop.Message.NoItemsOwned,Non possiedi ancora nessun articolo qui.
@@ -2379,6 +2382,8 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,Tutti i giochi
 Feature.Build.Label.AmountAvailable,{AMOUNT} a disposizione
+Feature.Build.Label.AttachmentCountPlural,{count} allegati
+Feature.Build.Label.AttachmentCountSingular,1 allegato
 Feature.Build.Label.Autosaved,Salvato automaticamente
 Feature.Build.Label.Available,disponibile
 Feature.Build.Label.AvailableForPurchase,Disponibile per l'acquisto
@@ -2398,6 +2403,7 @@ Feature.Build.Label.DefaultDeveloperProductName,developer product
 Feature.Build.Label.DefaultModel,Impostazione predefinita
 Feature.Build.Label.Deleted,Eliminato
 Feature.Build.Label.DescribeIdea,Descrivi un'idea
+Feature.Build.Label.DescribeIdeaOrPick,Descrivi un'idea o scegline una tra quelle riportate di seguito
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,Descrizione: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Nome: {NAME}
@@ -3285,6 +3291,7 @@ Feature.Chat.Label.SearchFriends,Cerca amici
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,Seleziona per rimuovere
 Feature.Chat.Label.SnoozePartyNotifications,Silenzia notifiche gruppo dell'esperienza per:
+Feature.Chat.Label.StartChatting,Inizia a chattare
 Feature.Chat.Label.SwipeToReplyTooltip,Scorri per rispondere
 Feature.Chat.Label.TapToRemove,Tocca per rimuovere
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}gg
@@ -3551,6 +3558,7 @@ Feature.Friends.Button.GotIt,
 Feature.Friends.Description.ContactsModal,I tuoi contatti sono su Roblox! Invia loro una richiesta di amicizia per vedere i loro avatar e profili completi. Vai alla pagina Aggiungi amici per vedere più persone che conosci.
 Feature.Friends.Description.DoMoreWithTrustedConnections,Fai di più su Roblox con i collegamenti affidabili. Aggiungi solo le persone che conosci e di cui ti fidi.
 Feature.Friends.Description.DoMoreWithTrustedFriends,Fai di più su Roblox con gli amici affidabili. Aggiungi solo le persone che conosci e di cui ti fidi.
+Feature.Friends.Description.FoundFromContactImporter,Inviato dall'importatore di contatti
 Feature.Friends.Description.FromContacts,Dai contatti
 Feature.Friends.Description.FromContactsV2,{contactName} dai contatti
 Feature.Friends.Description.FromQrCode,Dal codice QR
@@ -3641,6 +3649,7 @@ Feature.Friends.Label.SentFromWithContext,Inviato da {gameName}
 Feature.Friends.Label.SingularMutualFriend,amico reciproco
 Feature.Friends.Label.Suggested,Suggerito
 Feature.Friends.Label.Unfollowed,Non seguito più
+Feature.Friends.Label.YouAreFollowing,Stai seguendo
 Feature.Friends.Label.YourLinkedParent,Il tuo genitore collegato
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,Vuoi essere consigliato ad altri utenti Roblox verificati che hanno il tuo numero di telefono?
@@ -3685,6 +3694,7 @@ Feature.FriendsActivityFeed.Label.ViewRecentActivity,Visualizza attività recent
 Feature.FriendsMenu.Label.SelectedFriendsCount,{numerator}/{denominator} amici selezionati
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,{selectedCount} amici selezionati
 Feature.GameBadges.Label.Experience,
+Feature.GameDetails.Action.Continue,
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,Lascia un feedback
 Feature.GameDetails.Action.NotInterested,Non mi interessa
@@ -3716,8 +3726,10 @@ Feature.GameDetails.Label.WhyThisAd,
 Feature.GameDetails.Label.Yes,
 Feature.GameDetails.Message.AdPreferences,Preferenze annunci pubblicitari
 Feature.GameDetails.Message.AnonymousFeedbackTermsOfUse,Le risposte vengono condivise in forma anonima e hanno la valenza di feedback ai sensi dei {underlineStart}Termini di utilizzo di Roblox{underlineEnd}.
+Feature.GameDetails.Message.ExternalLinkWarning,"Facendo clic su ""Continua"", il browser ti reindirizzerà a un sito Web che non è di proprietà o gestito da Roblox, quindi potenzialmente soggetto a termini e politiche sulla privacy differenti."
 Feature.GameDetails.Message.HelpImproveExperience,Aiutaci a migliorare la tua esperienza
 Feature.GameDetails.Message.HidingExperienceQuestion,Perché nascondi questa esperienza?
+Feature.GameDetails.Message.LeavingRobloxTitle,Uscendo da Roblox
 Feature.GameDetails.Message.PurchaseGameV2,Sblocca l'accesso a {gameName} per {X} Robux?
 Feature.GameDetails.Message.SponsoredDisclosure.Error,Impossibile visualizzare le informazioni sulla sponsorizzazione a causa di un errore temporaneo.
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"Stai visualizzando questo annuncio sponsorizzato che si basa su fattori non personalizzati, come le informazioni sul dispositivo, la posizione e l'età, perché desideriamo offrirti contenuti appropriati. Il creatore dell'esperienza è {CreatorName}. La sponsorizzazione è stata pagata da {PayerName}. Per saperne di più, visita la pagina ""Privacy e livello di maturità dei contenuti"" nella sezione Impostazioni del tuo account, disponibile qui:"
@@ -3737,9 +3749,12 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Notifiche attivate per {experie
 Feature.GameJoin.Description.DifferentServer,Inizierai su un server diverso
 Feature.GameJoin.Label.PlayTogether,Potete giocare insieme
 Feature.GameJoin.Label.PlayTogetherSoon,Presto potrete giocare insieme
+Feature.GameJoin.Label.Played,giocato
+Feature.GameJoin.Label.RecentCoplay,Avete giocato insieme di recente
 Feature.GamePage.Action.BackToTop,Torna all'inizio
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
+Feature.GamePage.LabelCancelField,
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,Questa esperienza non è disponibile a causa del tuo stato sulla verifica dell'età.
 Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,Gli ospiti non possono partecipare a questa esperienza.
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,Per visitare questa esperienza è richiesto l'acquisto.
@@ -4272,7 +4287,7 @@ Feature.PlayerSearchResults.Label.NewUsername,Nuovo nome utente
 Feature.PlayerSearchResults.Label.Previously,Precedentemente
 Feature.PlayerSearchResults.Label.ThisIsYou,Questo sei tu
 Feature.PlayerSearchResults.Label.You,Tu
-Feature.PlayerSearchResults.Label.YouAreFollowing,Stai seguendo
+Feature.PlayerSearchResults.Label.YouAreFollowing,
 Feature.PlayerSearchResults.Label.YouAreFriends,Sei amico
 Feature.PrivateServers.Action.CreatePrivateServer,Crea server privato
 Feature.PrivateServers.Action.FreeWithBlackbird,Gratis con il piano Plus
@@ -4997,7 +5012,6 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 al
 Feature.UniversalShareSheet.Response.SharedMessage,Il messaggio è stato inviato
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,I messaggi sono stati inviati
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + altri {N}
-Feature.UserLibrary.Label.MyLibrary,La mia libreria
 Feature.VIPServer.Message.TooManyFreeServersOnGame,Non puoi avere più server privati gratuiti su questo gioco.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,Non puoi avere più server attivi privati gratuiti. Prima disattiva alcuni dei server.
 Feature.VerificationUpsell.Action.AddPhone,Aggiungi Telefono

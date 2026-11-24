@@ -1,0 +1,1 @@
+﻿return { AddFollow = "AddFollow", RemoveFollow = "RemoveFollow" }

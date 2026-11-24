@@ -350,10 +350,9 @@ function MenuIcon.render(p1)
 	local NoVREnabled = nil
 	NoVREnabled = if IsInExperienceUIVREnabled then true else not VRService.VREnabled or p1.state.vrShowMenuIcon
 	local ScaledTopBarButtonHeight = ConstantsModule1.TopBarButtonHeight * p1.state.UiScale
-	local ScaledTopBarButtonPadding = ConstantsModule1.TopBarButtonPadding * p1.state.UiScale
 	local ScaledMENUICONSIZE = ConstantsModule1.MENU_ICON_SIZE * p1.state.UiScale
 	
-	local function v78(Frame: Frame)
+	local function v77(Frame: Frame)
 		-- upvalues: FFlagReduceTopBarInsetsWhileHidden (upval), p1 (copy), FFlagEnableConsoleExpControls (upval), EnabledFunction (upval), GamepadConnectorModule (upval), ConstantsModule1 (upval), FFlagAddUILessMode (upval), FIntAddUILessModeVariant (upval)
 		if Frame then
 			if FFlagReduceTopBarInsetsWhileHidden then
@@ -394,9 +393,7 @@ function MenuIcon.render(p1)
 		event = VRHub.ShowTopBarChanged.Event or GamepadService:GetPropertyChangedSignal("GamepadCursorEnabled"),
 		callback = p1.showTopBarCallback
 	})
-	local Element2 = if p1.props.showBadgeOver12 then RoactModule.createElement(BadgeOver12Module, {
-		position = if EnabledFunction() then UDim2.new(0, 1, 1, -(ScaledTopBarButtonPadding + 1)) else UDim2.new(0, -4, 1, 4)
-	}) else nil
+	local Element2 = if p1.props.showBadgeOver12 then RoactModule.createElement(BadgeOver12Module) else nil
 	
 	if not EnabledResult then
 		local CoreScriptsTopBarRobloxMenu = RoactModule
@@ -406,15 +403,15 @@ function MenuIcon.render(p1)
 			Visible = if EnabledFunction() and FFlagEnableConsoleExpControls then p1.showIcon:map(function(p2)
 				-- upvalues: NoVREnabled (ref)
 				return NoVREnabled and p2
-			end) elseif FFlagAddUILessMode and (FIntAddUILessModeVariant ~= 0 and p1.uiLessStore.getUILessModeEnabled(false)) then p1.showIcon:map(function(p2)
+			end) elseif FFlagAddUILessMode and FIntAddUILessModeVariant ~= 0 and p1.uiLessStore.getUILessModeEnabled(false) then p1.showIcon:map(function(p2)
 				-- upvalues: NoVREnabled (ref)
 				return NoVREnabled and p2
 			end) else NoVREnabled,
 			BackgroundTransparency = 1,
 			Size = UDim2.new(0, ScaledTopBarButtonHeight, 1, 0),
 			LayoutOrder = p1.props.layoutOrder,
-			[RoactModule.Change.AbsoluteSize] = v78,
-			[RoactModule.Change.AbsolutePosition] = v78
+			[RoactModule.Change.AbsoluteSize] = v77,
+			[RoactModule.Change.AbsolutePosition] = v77
 		}, {
 			BadgeOver12 = Element2,
 			Background = Element,
@@ -447,10 +444,10 @@ function MenuIcon.render(p1)
 		config1.active = true
 	end
 	return p1:renderWithTooltipCompat(config, config1, function(Callback)
-		-- upvalues: v78 (copy), EnabledFunction (upval), FFlagEnableConsoleExpControls (upval), p1 (copy), ServiceModule (upval), ConstantsModule (upval), RoactModule (upval), IconButtonModule (upval), IsNewTiltIconEnabledModule (upval), Images (upval), FFlagTopBarSignalizeMenuOpen (upval), ScaledMENUICONSIZE (copy), ConstantsModule1 (upval), EnabledResult (upval), FFlagAddUILessMode (upval), FIntAddUILessModeVariant (upval), NoVREnabled (ref), ScaledTopBarButtonHeight (copy), Element2 (copy), Element (copy), Element1 (copy)
-		local function v85(Frame)
-			-- upvalues: v78 (upval), Callback (copy)
-			v78(Frame)
+		-- upvalues: v77 (copy), EnabledFunction (upval), FFlagEnableConsoleExpControls (upval), p1 (copy), ServiceModule (upval), ConstantsModule (upval), RoactModule (upval), IconButtonModule (upval), IsNewTiltIconEnabledModule (upval), Images (upval), FFlagTopBarSignalizeMenuOpen (upval), ScaledMENUICONSIZE (copy), ConstantsModule1 (upval), EnabledResult (upval), FFlagAddUILessMode (upval), FIntAddUILessModeVariant (upval), NoVREnabled (ref), ScaledTopBarButtonHeight (copy), Element2 (copy), Element (copy), Element1 (copy)
+		local function v84(Frame)
+			-- upvalues: v77 (upval), Callback (copy)
+			v77(Frame)
 			Callback(Frame)
 		end
 		
@@ -487,8 +484,8 @@ function MenuIcon.render(p1)
 			SelectionBehaviorLeft = if EnabledFunction() and FFlagEnableConsoleExpControls then Enum.SelectionBehavior.Stop else nil,
 			SelectionBehaviorUp = if EnabledFunction() and FFlagEnableConsoleExpControls then Enum.SelectionBehavior.Stop else nil,
 			SelectionBehaviorDown = if EnabledFunction() and FFlagEnableConsoleExpControls then Enum.SelectionBehavior.Stop else nil,
-			[RoactModule.Change.AbsoluteSize] = v85,
-			[RoactModule.Change.AbsolutePosition] = v85
+			[RoactModule.Change.AbsoluteSize] = v84,
+			[RoactModule.Change.AbsolutePosition] = v84
 		}, {
 			BadgeOver12 = Element2,
 			Background = if EnabledFunction() and FFlagEnableConsoleExpControls and p1.props.unibarMenuRef and p1.props.unibarMenuRef.current then nil else Element,

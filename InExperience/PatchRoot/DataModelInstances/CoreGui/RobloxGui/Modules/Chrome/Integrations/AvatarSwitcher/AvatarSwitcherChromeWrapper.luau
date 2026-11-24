@@ -106,7 +106,9 @@ return function(p1)
 				else
 					ServiceModule:toggleWindow(ConstantsModule.AVATAR_SWITCHER_ID)
 				end
-			end
+			end,
+			getRespawnBehaviour = SettingsHubModule.GetRespawnBehaviour,
+			respawnBehaviorChangedEvent = SettingsHubModule.RespawnBehaviourChangedEvent
 		})
 	}) else ReactModule.createElement(FoundationModule.View, {
 		tag = `size-full {if UseStateResult1 then "padding-x-large padding-top-medium padding-bottom-xlarge" else ""}`

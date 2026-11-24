@@ -623,5 +623,20 @@ return {
 				}
 			}
 		}
+	},
+	[EventNamesModule.CapturesCreateMomentToastShareActivated] = {
+		backendsList = {
+			{
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function()
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
+				end,
+				staticCustomFields = {
+					eventContext = Contexts.Captures,
+					btn = EventNamesModule.CapturesCreateMomentToastShareActivated
+				}
+			}
+		}
 	}
 }

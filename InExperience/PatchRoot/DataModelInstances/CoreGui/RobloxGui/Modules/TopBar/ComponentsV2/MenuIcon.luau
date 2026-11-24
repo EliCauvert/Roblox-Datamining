@@ -69,7 +69,6 @@ return function(p1)
 		-- upvalues: DisplayModule (upval)
 		return DisplayModule.GetDisplayStore(p2).getUIScale(p2)
 	end)
-	local ScaledTopBarButtonPadding = ConstantsModule.TopBarButtonPadding * UseSignalStateResult
 	local ScaledMENUICONSIZE = ConstantsModule.MENU_ICON_SIZE * UseSignalStateResult
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: MotionModule (upval), ScaledMENUICONSIZE (copy), ConstantsModule (upval)
@@ -238,7 +237,7 @@ return function(p1)
 			return WithTooltipFunction(p2, p3, Callback)
 		end
 	end)(config, config1, (ReactModule.useCallback(function(OnAbsolutePositionChanged)
-		-- upvalues: ReactModule (upval), View (upval), IsSideSheetEnabledModule (upval), UseBindingResult (copy), OverMedia0 (copy), p1 (copy), Child (ref), FFlagSideSheetFocusNav (upval), UseCursorResult (copy), UseResult1 (copy), UseResult (copy), BadgeOver12Module (upval), ScaledTopBarButtonPadding (copy), Icon (upval), FoundationModule (upval), UseMotionResult (copy), Emphasis (copy)
+		-- upvalues: ReactModule (upval), View (upval), IsSideSheetEnabledModule (upval), UseBindingResult (copy), OverMedia0 (copy), p1 (copy), Child (ref), FFlagSideSheetFocusNav (upval), UseCursorResult (copy), UseResult1 (copy), UseResult (copy), BadgeOver12Module (upval), Icon (upval), FoundationModule (upval), UseMotionResult (copy), Emphasis (copy)
 		return ReactModule.createElement(View, {
 			tag = "radius-circle aspect-1-1",
 			backgroundStyle = if IsSideSheetEnabledModule then nil else UseBindingResult:map(function(p2)
@@ -264,9 +263,7 @@ return function(p1)
 			onActivated = if IsSideSheetEnabledModule then nil else UseResult1,
 			onStateChanged = if IsSideSheetEnabledModule then nil else UseResult
 		}, {
-			BadgeOver12 = if p1.showBadgeOver12 then ReactModule.createElement(BadgeOver12Module, {
-				position = UDim2.new(0, 1, 1, -(ScaledTopBarButtonPadding + 1))
-			}) else nil,
+			BadgeOver12 = if p1.showBadgeOver12 then ReactModule.createElement(BadgeOver12Module) else nil,
 			Icon = ReactModule.createElement(Icon, {
 				name = FoundationModule.Enums.IconName.Tilt,
 				size = UseMotionResult.size,

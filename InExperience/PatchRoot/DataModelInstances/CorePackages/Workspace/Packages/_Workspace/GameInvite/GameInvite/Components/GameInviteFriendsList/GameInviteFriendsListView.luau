@@ -6,7 +6,7 @@ local FoundationModule = require(Parent.Foundation)
 local FriendsMenuModule = require(Parent.FriendsMenu)
 local UserListModule = require(Parent.UserList)
 local FFlagGameInviteInExpJoinCtaModule = require(GameInvite.Flags.FFlagGameInviteInExpJoinCta)
-local IsGameInviteJoinForPioneerEnabledFunction = require(Parent.NotificationsCommon).isGameInviteJoinForPioneerEnabled
+local IsGameInviteJoinForPioneerEnabled = require(Parent.NotificationsCommon).isGameInviteJoinForPioneerEnabled
 local FFlagUserListFixedRowHeightConfig = require(Parent.SharedFlags).FFlagUserListFixedRowHeightConfig
 local _ = require(script.Parent.useGameInviteJoinCard)
 local VerticalUserList = UserListModule.VerticalUserList.VerticalUserList
@@ -34,7 +34,7 @@ local function GameInviteJoinCardPortal(p1)
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), FoundationModule (copy), FriendsMenuShareGameInviteLink (copy), VerticalUserList (copy), Configs (copy), FFlagGameInviteInExpJoinCtaModule (copy), IsGameInviteJoinForPioneerEnabledFunction (copy), GameInviteJoinCardPortal (copy)
+	-- upvalues: ReactModule (copy), FoundationModule (copy), FriendsMenuShareGameInviteLink (copy), VerticalUserList (copy), Configs (copy), FFlagGameInviteInExpJoinCtaModule (copy), IsGameInviteJoinForPioneerEnabled (copy), GameInviteJoinCardPortal (copy)
 	return ReactModule.createElement(FoundationModule.View, {
 		tag = "col",
 		testId = "GameInviteFriendsListView",
@@ -54,9 +54,9 @@ return function(p1)
 				onRowSelected = p1.onRowSelected,
 				onEndReached = p1.onEndReached,
 				configs = Configs,
-				ctaConfig = if FFlagGameInviteInExpJoinCtaModule or IsGameInviteJoinForPioneerEnabledFunction() then p1.ctaConfig else nil
+				ctaConfig = if FFlagGameInviteInExpJoinCtaModule or IsGameInviteJoinForPioneerEnabled then p1.ctaConfig else nil
 			})
 		}),
-		JoinCard = if (FFlagGameInviteInExpJoinCtaModule or IsGameInviteJoinForPioneerEnabledFunction()) and (p1.joinCard and p1.joinCard.userId) then ReactModule.createElement(GameInviteJoinCardPortal, { joinCard = p1.joinCard }) else nil
+		JoinCard = if (FFlagGameInviteInExpJoinCtaModule or IsGameInviteJoinForPioneerEnabled) and (p1.joinCard and p1.joinCard.userId) then ReactModule.createElement(GameInviteJoinCardPortal, { joinCard = p1.joinCard }) else nil
 	})
 end

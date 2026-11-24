@@ -2125,8 +2125,11 @@ Feature.AvatarSwitcher.Message.UnknownSupport,"Aún puedes cambiar tu avatar, pe
 Feature.AvatarSwitcher.Message.Unsupported,Esta experiencia utiliza un avatar personalizado y no es compatible con los avatares de Roblox.
 Feature.AvatarWorkshop.Action.EditAvatar,Editar avatar
 Feature.AvatarWorkshop.Action.TryAgain,Inténtalo de nuevo
+Feature.AvatarWorkshop.Description.AddAvatar,¿Quieres añadir este avatar a tu colección?
+Feature.AvatarWorkshop.Heading.AddAvatar,¿Añadir un avatar?
 Feature.AvatarWorkshop.Heading.Customize,Personalizar
 Feature.AvatarWorkshop.Heading.YourAvatars,Tus avatares
+Feature.AvatarWorkshop.Label.DefaultAvatarName,
 Feature.AvatarWorkshop.Message.LoadItemsError,Algo salió mal al cargar tus artículos.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,No se pudieron cargar más objetos.
 Feature.AvatarWorkshop.Message.NoItemsOwned,Aún no tienes ningún artículo aquí.
@@ -2399,6 +2402,8 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,Todos los juegos
 Feature.Build.Label.AmountAvailable,{AMOUNT} disponible
+Feature.Build.Label.AttachmentCountPlural, {count} conexiones
+Feature.Build.Label.AttachmentCountSingular,1 archivo adjunto
 Feature.Build.Label.Autosaved,Guardado automáticamente
 Feature.Build.Label.Available,disponible
 Feature.Build.Label.AvailableForPurchase,Disponible para su compra
@@ -2418,6 +2423,7 @@ Feature.Build.Label.DefaultDeveloperProductName,producto del desarrollador
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,Eliminado
 Feature.Build.Label.DescribeIdea,Describe una idea
+Feature.Build.Label.DescribeIdeaOrPick,Describe una idea o elige una de las siguientes
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,Descripción: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Nombre: {NAME}
@@ -3305,6 +3311,7 @@ Feature.Chat.Label.SearchFriends,Buscar amigos
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,Selecciona para eliminar
 Feature.Chat.Label.SnoozePartyNotifications,Silenciar notificaciones de Equipo en la experiencia para
+Feature.Chat.Label.StartChatting,Comenzar a chatear
 Feature.Chat.Label.SwipeToReplyTooltip,Desliza para responder
 Feature.Chat.Label.TapToRemove,Toca para eliminar
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} d
@@ -3571,6 +3578,7 @@ Feature.Friends.Button.GotIt,
 Feature.Friends.Description.ContactsModal,¡Tus contactos están en Roblox! Envíales una solicitud de amistad para ver sus avatares y perfiles completos. Ve a la página Añadir amigos para ver más personas que conoces.
 Feature.Friends.Description.DoMoreWithTrustedConnections,Haz más en Roblox con conexiones de confianza. Solo agrega personas que conozcas y en las que confíes.
 Feature.Friends.Description.DoMoreWithTrustedFriends,Haz más en Roblox con amigos de confianza. Solo agrega personas que conozcas y en las que confíes.
+Feature.Friends.Description.FoundFromContactImporter,Enviado desde el importador de contactos
 Feature.Friends.Description.FromContacts,De contactos
 Feature.Friends.Description.FromContactsV2,{contactName} desde contactos
 Feature.Friends.Description.FromQrCode,Desde el código QR
@@ -3661,6 +3669,7 @@ Feature.Friends.Label.SentFromWithContext,Enviada desde {gameName}
 Feature.Friends.Label.SingularMutualFriend,amistad mutua
 Feature.Friends.Label.Suggested,Sugeridas
 Feature.Friends.Label.Unfollowed,Dejaste de seguir
+Feature.Friends.Label.YouAreFollowing,Estás siguiendo
 Feature.Friends.Label.YourLinkedParent,"Tu padre, madre o tutor vinculado"
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,¿Quieres que te recomendemos a otros usuarios de Roblox que tienen tu número de teléfono?
@@ -3705,6 +3714,7 @@ Feature.FriendsActivityFeed.Label.ViewRecentActivity,Ver Actividad reciente
 Feature.FriendsMenu.Label.SelectedFriendsCount,{numerator}/{denominator} amigos seleccionados
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,{selectedCount} amigos seleccionados
 Feature.GameBadges.Label.Experience,
+Feature.GameDetails.Action.Continue,
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,Envía tus comentarios
 Feature.GameDetails.Action.NotInterested,No me interesa
@@ -3736,8 +3746,10 @@ Feature.GameDetails.Label.WhyThisAd,
 Feature.GameDetails.Label.Yes,
 Feature.GameDetails.Message.AdPreferences,Preferencias de anuncios
 Feature.GameDetails.Message.AnonymousFeedbackTermsOfUse,Las respuestas se comparten de forma anónima y se tratan como Comentarios según los {underlineStart}Términos de uso de Roblox{underlineEnd}.
+Feature.GameDetails.Message.ExternalLinkWarning,"Al hacer clic en Continuar, serás redirigido a un sitio web que no pertenece y no es operado por Roblox. Puede que se rija por términos y políticas de privacidad diferentes."
 Feature.GameDetails.Message.HelpImproveExperience,Ayúdanos a mejorar tu experiencia
 Feature.GameDetails.Message.HidingExperienceQuestion,¿Por qué estás ocultando esta experiencia?
+Feature.GameDetails.Message.LeavingRobloxTitle,Abandonando Roblox
 Feature.GameDetails.Message.PurchaseGameV2,¿Desbloquear accesso a {gameName} por {X} Robux?
 Feature.GameDetails.Message.SponsoredDisclosure.Error,No se pudo mostrar la información del patrocinio debido a un error temporal.
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"Estás viendo este contenido patrocinado basado en factores no personalizados, como la información del dispositivo, ubicación y edad, para ofrecerte contenido apropiado. El creador de la experiencia es {CreatorName}. El patrocinio fue pagado por {PayerName}. Para obtener más información, visita la página Privacidad y madurez de contenido en Configuración en tu cuenta, aquí:"
@@ -3757,9 +3769,12 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Notificaciones activadas para {
 Feature.GameJoin.Description.DifferentServer,Comenzarán en un servidor diferente
 Feature.GameJoin.Label.PlayTogether,Pueden jugar juntos
 Feature.GameJoin.Label.PlayTogetherSoon,Pronto podrán jugar juntos
+Feature.GameJoin.Label.Played,jugado
+Feature.GameJoin.Label.RecentCoplay,Jugaron juntos hace poco
 Feature.GamePage.Action.BackToTop,Volver arriba
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,Patrocinadas
+Feature.GamePage.LabelCancelField,
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,Esta experiencia no está disponible debido a tu estado de verificación de edad.
 Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,Los invitados no pueden unirse a esta experiencia.
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,Se necesita pagar para unirse a esta experiencia.
@@ -5017,7 +5032,6 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 m
 Feature.UniversalShareSheet.Response.SharedMessage,El mensaje se envió
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Los mensajes se enviaron
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} más
-Feature.UserLibrary.Label.MyLibrary,Mi biblioteca
 Feature.VIPServer.Message.TooManyFreeServersOnGame,No puedes tener más servidores privados gratuitos en este juego.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,"No puedes tener más servidores privados gratuitos. Primero, tendrás que desactivar algunos."
 Feature.VerificationUpsell.Action.AddPhone,Añadir teléfono
@@ -5189,7 +5203,7 @@ IAPExperience.InsufficientRobux.Title.InsufficientRobux,
 IAPExperience.LeaveRoblox.Action.Cancel,
 IAPExperience.LeaveRoblox.Action.Continue,
 IAPExperience.LeaveRoblox.Text.ExternalWebsiteWarning,"Al hacer clic en “Continuar”, se te redirigirá a un sitio web que no pertenece y no es operado por Roblox. Puede que se rija por términos y políticas de privacidad diferentes."
-IAPExperience.LeaveRoblox.Title.LeavingRoblox,Abandonando Roblox
+IAPExperience.LeaveRoblox.Title.LeavingRoblox,
 IAPExperience.Loading.Text.PurchasingItem,Comprando el objeto...
 IAPExperience.Loading.Text.PurchasingRobux,Comprando Robux...
 IAPExperience.Loading.Text.WaitingForPurchase,Esperando compra...

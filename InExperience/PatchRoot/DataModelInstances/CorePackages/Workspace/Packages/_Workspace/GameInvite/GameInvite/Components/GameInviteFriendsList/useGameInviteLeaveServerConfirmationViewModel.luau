@@ -6,6 +6,9 @@ local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
 local InputHandlersModule = require(Parent.InputHandlers)
 local _ = require(Parent.ReactFocusNavigation)
 local UseGetPresenceByUserIdFunction = require(Parent.FriendsCommon).Hooks.useGetPresenceByUserId
+local FFlagGameInviteHidePresenceInOtherExperienceModule = require(GameInvite.Flags.FFlagGameInviteHidePresenceInOtherExperience)
+local NotificationsCommonModule = require(Parent.NotificationsCommon)
+local IsInCurrentExperienceModule = require(GameInvite.utils.isInCurrentExperience)
 local IsInThisServerModule = require(GameInvite.utils.isInThisServer)
 local _ = require(script.Parent.joinFriendFromExperience)
 local NavigateBack = FocusNavigationUtilsModule.FocusNavigationEventNameEnum.NavigateBack
@@ -13,8 +16,10 @@ local InGame = DataHydrationModule.Presence.PresenceEnums.PresenceType.InGame
 local config = { skipFetch = true }
 
 local function getJoinTarget(UserId, p1)
-	-- upvalues: InGame (copy), IsInThisServerModule (copy)
-	return if p1 == nil or p1.userPresenceType ~= InGame or p1.universeId == "" or IsInThisServerModule(p1, game.JobId) then nil else {
+	-- upvalues: NotificationsCommonModule (copy), FFlagGameInviteHidePresenceInOtherExperienceModule (copy), IsInCurrentExperienceModule (copy), InGame (copy), IsInThisServerModule (copy)
+	local IsGameInviteJoinForPioneerEnabled = NotificationsCommonModule.isGameInviteJoinForPioneerEnabled
+	
+	return if FFlagGameInviteHidePresenceInOtherExperienceModule and IsGameInviteJoinForPioneerEnabled and (p1 == nil or p1.gameId == "" or not IsInCurrentExperienceModule(p1)) then nil elseif p1 == nil or p1.userPresenceType ~= InGame or p1.universeId == "" or IsInThisServerModule(p1, game.JobId) then nil else {
 		userId = UserId,
 		placeId = p1.placeId,
 		rootPlaceId = p1.rootPlaceId,

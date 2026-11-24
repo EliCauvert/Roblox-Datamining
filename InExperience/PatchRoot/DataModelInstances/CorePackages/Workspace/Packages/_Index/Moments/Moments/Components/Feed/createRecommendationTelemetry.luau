@@ -6,9 +6,11 @@ local ConstantsModule = require(Moments.Constants)
 local _ = require(Moments.Enums.MomentsFeedType)
 local EmitRecommendationImpressionModule = require(Moments.Analytics.emitRecommendationImpression)
 local EmitRecommendationActionModule = require(Moments.Analytics.emitRecommendationAction)
+local EmitRecommendationPreferenceModule = require(Moments.Analytics.emitRecommendationPreference)
 local _ = require(Moments.SignalTracker)
 local _ = require(script.Parent.FeedTypes)
 local FFlagMomentsComments = require(Parent.SharedFlags).FFlagMomentsComments
+local FFlagMomentsCreatorFollowPreferenceModule = require(Moments.Flags.FFlagMomentsCreatorFollowPreference)
 local config = {
 	AddReaction = ConstantsModule.RecommendationActionType.AddReaction,
 	RemoveReaction = ConstantsModule.RecommendationActionType.RemoveReaction,
@@ -21,6 +23,10 @@ local config = {
 }
 local config1 = { AddFollow = true, RemoveFollow = true }
 local config2 = {
+	AddFollow = ConstantsModule.RecommendationPreferenceType.AddFollow,
+	RemoveFollow = ConstantsModule.RecommendationPreferenceType.RemoveFollow
+}
+local config3 = {
 	AddReaction = "reaction_add",
 	RemoveReaction = "reaction_remove",
 	Share = "share",
@@ -33,7 +39,7 @@ local function _(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: EmitRecommendationImpressionModule (copy), config (copy), config1 (copy), config2 (copy), Analytics (copy), EmitRecommendationActionModule (copy), FFlagMomentsComments (copy)
+	-- upvalues: EmitRecommendationImpressionModule (copy), config (copy), config1 (copy), config3 (copy), Analytics (copy), EmitRecommendationActionModule (copy), FFlagMomentsComments (copy), FFlagMomentsCreatorFollowPreferenceModule (copy), EmitRecommendationPreferenceModule (copy), ConstantsModule (copy), config2 (copy)
 	local GetMomentsSessionIdFunction = p1.getMomentsSessionId
 	local SignalTracker = p1.signalTracker
 	local FeedType = p1.feedType
@@ -56,7 +62,7 @@ return function(p1)
 			end
 		end,
 		logAction = function(p2, p3, p4)
-			-- upvalues: config (upval), SignalTracker (copy), config1 (upval), config2 (upval), Analytics (upval), EmitRecommendationActionModule (upval), FFlagMomentsComments (upval), GetMomentsSessionIdFunction (copy), FeedType (copy)
+			-- upvalues: config (upval), SignalTracker (copy), config1 (upval), config3 (upval), Analytics (upval), EmitRecommendationActionModule (upval), FFlagMomentsComments (upval), GetMomentsSessionIdFunction (copy), FeedType (copy)
 			local Entry = config[p2]
 			
 			if Entry == nil then
@@ -65,7 +71,7 @@ return function(p1)
 				end
 				return nil
 			else
-				local Entry1 = config2[p2]
+				local Entry1 = config3[p2]
 				
 				if Entry1 ~= nil then
 					Analytics.reportMomentsEngagement(Entry1)
@@ -89,6 +95,20 @@ return function(p1)
 				end
 				return EmitRecommendationActionModuleResult
 			end
-		end
+		end,
+		logPreference = if FFlagMomentsCreatorFollowPreferenceModule then function(p2, p3)
+			-- upvalues: EmitRecommendationPreferenceModule (upval), ConstantsModule (upval), config2 (upval), SignalTracker (copy)
+			EmitRecommendationPreferenceModule({
+				targetType = ConstantsModule.RecommendationPreferenceTargetType.User,
+				targetId = p3.targetId,
+				preferenceType = config2[p2],
+				tracingId = p3.tracingId or "",
+				itemId = p3.itemId
+			})
+			
+			if SignalTracker and p3.itemId ~= nil and p3.itemId ~= "" then
+				SignalTracker:recordSignal(p3.itemId, p2)
+			end
+		end else nil
 	}
 end

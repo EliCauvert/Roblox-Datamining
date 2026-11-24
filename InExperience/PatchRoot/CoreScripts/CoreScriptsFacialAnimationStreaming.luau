@@ -12,22 +12,22 @@ local Default = require(CorePackages.Workspace.Packages.CallProtocol).CallProtoc
 local Enums = require(CorePackages.Workspace.Packages.CallProtocol).Enums
 local LoadStreamAnimationReplaceErrorsWithTelemetryFeatureEngineFeature = game:GetEngineFeature("LoadStreamAnimationReplaceErrorsWithTelemetryFeature")
 local FaceAnimatorNotifyLODRecommendCameraInputDisableEngineFeature = game:GetEngineFeature("FaceAnimatorNotifyLODRecommendCameraInputDisable")
-local FacialAnimationStreamingClearTrackImprovementsV2 = game:DefineFastFlag("FacialAnimationStreamingClearTrackImprovementsV2", false)
-game:DefineFastFlag("FacialAnimationStreamingValidateAnimatorBeforeRemoving", false)
-game:DefineFastFlag("FacialAnimationStreamingSearchForReplacementWhenRemovingAnimator", false)
-game:DefineFastFlag("StopStreamTrackOnDeath", false)
-game:DefineFastFlag("FacialAnimationStreamingClearAllConnectionsFix2", false)
-game:DefineFastFlag("FacialAnimationStreamingIfNoDynamicHeadDisableA2C", false)
+local FFlagFacialAnimationStreamingClearTrackImprovementsV2Module = require(RobloxGui.Modules.Flags.FFlagFacialAnimationStreamingClearTrackImprovementsV2)
+local FFlagFacialAnimationStreamingValidateAnimatorBeforeRemovingModule = require(RobloxGui.Modules.Flags.FFlagFacialAnimationStreamingValidateAnimatorBeforeRemoving)
+local FFlagFacialAnimationStreamingSearchForReplacementWhenRemovingAnimatorModule = require(RobloxGui.Modules.Flags.FFlagFacialAnimationStreamingSearchForReplacementWhenRemovingAnimator)
+local FFlagStopStreamTrackOnDeathModule = require(RobloxGui.Modules.Flags.FFlagStopStreamTrackOnDeath)
+local FFlagFacialAnimationStreamingClearAllConnectionsFix2Module = require(RobloxGui.Modules.Flags.FFlagFacialAnimationStreamingClearAllConnectionsFix2)
+local FFlagFacialAnimationStreamingIfNoDynamicHeadDisableA2CModule = require(RobloxGui.Modules.Flags.FFlagFacialAnimationStreamingIfNoDynamicHeadDisableA2C)
 local GetFFlagAvatarChatServiceEnabledFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagAvatarChatServiceEnabled
 local AvatarChatService = if GetFFlagAvatarChatServiceEnabledFunction() then game:GetService("AvatarChatService") else nil
 local FaceAnimatorService = game:GetService("FaceAnimatorService")
-local UXForCameraPerformanceEnabled = game:DefineFastFlag("UXForCameraPerformanceEnabled", false)
-local DisableCameraOnLowspecAndroidCalls = game:DefineFastFlag("DisableCameraOnLowspecAndroidCalls", false)
-local UXForCameraPerformanceSessionDelay = game:DefineFastInt("UXForCameraPerformanceSessionDelay", 300)
-local UXForCameraPerformanceDeviceDelay = game:DefineFastInt("UXForCameraPerformanceDeviceDelay", 43200)
+local FFlagUXForCameraPerformanceEnabledModule = require(RobloxGui.Modules.Flags.FFlagUXForCameraPerformanceEnabled)
+local FFlagDisableCameraOnLowspecAndroidCallsModule = require(RobloxGui.Modules.Flags.FFlagDisableCameraOnLowspecAndroidCalls)
+local FIntUXForCameraPerformanceSessionDelayModule = require(RobloxGui.Modules.Flags.FIntUXForCameraPerformanceSessionDelay)
+local FIntUXForCameraPerformanceDeviceDelayModule = require(RobloxGui.Modules.Flags.FIntUXForCameraPerformanceDeviceDelay)
 local GetFFlagUXForCameraPerformanceIXPEnabledModule = require(RobloxGui.Modules.Flags.GetFFlagUXForCameraPerformanceIXPEnabled)
 local GetFStringUXForCameraPerformanceIXPLayerNameModule = require(RobloxGui.Modules.Flags.GetFStringUXForCameraPerformanceIXPLayerName)
-local IsCamEnabledForUserAndPlaceModule = if DisableCameraOnLowspecAndroidCalls then require(RobloxGui.Modules.Settings.isCamEnabledForUserAndPlace) else function(): boolean
+local IsCamEnabledForUserAndPlaceModule = if FFlagDisableCameraOnLowspecAndroidCallsModule then require(RobloxGui.Modules.Settings.isCamEnabledForUserAndPlace) else function(): boolean
 	return true
 end
 local FacialAnimationStreamingHeartbeatStatsModule = require(RobloxGui.Modules.FacialAnimationStreaming.FacialAnimationStreamingHeartbeatStats)
@@ -89,8 +89,8 @@ local _ = function(Player: Player, p1)
 end
 
 local function clearAllConnections(Player1: Player)
-	-- upvalues: Player (copy), t3 (copy)
-	if game:GetFastFlag("FacialAnimationStreamingClearAllConnectionsFix2") then
+	-- upvalues: FFlagFacialAnimationStreamingClearAllConnectionsFix2Module (copy), Player (copy), t3 (copy)
+	if FFlagFacialAnimationStreamingClearAllConnectionsFix2Module then
 		for _, value in pairs(Player) do
 			if t3[Player1.UserId] and t3[Player1.UserId][value] then
 				t3[Player1.UserId][value]:Disconnect()
@@ -109,7 +109,7 @@ local function clearAllConnections(Player1: Player)
 end
 
 local function clearCharacterAnimations(Player: Player)
-	-- upvalues: NewResult (copy), t2 (copy), FacialAnimationStreamingClearTrackImprovementsV2 (copy)
+	-- upvalues: NewResult (copy), t2 (copy), FFlagFacialAnimationStreamingClearTrackImprovementsV2Module (copy)
 	local v1 = ""
 	local Name = ""
 	
@@ -124,7 +124,7 @@ local function clearCharacterAnimations(Player: Player)
 	NewResult:trace(string.format("%s {id: %s, name: %s}.", "clearCharacterAnimations", v1, Name))
 	
 	if t2[Player.UserId] then
-		if FacialAnimationStreamingClearTrackImprovementsV2 then
+		if FFlagFacialAnimationStreamingClearTrackImprovementsV2Module then
 			if t2[Player.UserId].animationTrack then
 				t2[Player.UserId].animationTrack:Stop(0)
 				t2[Player.UserId].animationTrack = nil
@@ -344,7 +344,7 @@ local function onPlayerChatted(Player: Player, Text: string)
 end
 
 local function onAnimatorAdded(Player1: Player, Object)
-	-- upvalues: t2 (copy), NewResult (copy), Player (copy), t3 (copy), LoadStreamAnimationReplaceErrorsWithTelemetryFeatureEngineFeature (copy), FaceAnimatorService (copy), Players (copy), t4 (copy)
+	-- upvalues: t2 (copy), NewResult (copy), Player (copy), t3 (copy), LoadStreamAnimationReplaceErrorsWithTelemetryFeatureEngineFeature (copy), FaceAnimatorService (copy), Players (copy), FFlagFacialAnimationStreamingValidateAnimatorBeforeRemovingModule (copy), t4 (copy)
 	if not Object then return end
 	if not Object.Parent or not Object.Parent:IsA("Humanoid") then return end
 	if t2[Player1.UserId] then
@@ -369,8 +369,8 @@ local function onAnimatorAdded(Player1: Player, Object)
 			t3[Player1.UserId][AnimatorDataModelReady]:Disconnect()
 			t3[Player1.UserId][AnimatorDataModelReady] = nil
 		end
-		local function v100()
-			-- upvalues: Object (copy), Player1 (copy), LoadStreamAnimationReplaceErrorsWithTelemetryFeatureEngineFeature (upval), t2 (upval), FaceAnimatorService (upval), Players (upval), NewResult (upval), t4 (upval)
+		local function v105()
+			-- upvalues: Object (copy), Player1 (copy), LoadStreamAnimationReplaceErrorsWithTelemetryFeatureEngineFeature (upval), t2 (upval), FaceAnimatorService (upval), Players (upval), NewResult (upval), FFlagFacialAnimationStreamingValidateAnimatorBeforeRemovingModule (upval), t4 (upval)
 			local config = { animation = Instance.new("TrackerStreamAnimation") }
 			
 			if game:GetEngineFeature("UseNewLoadStreamAnimationAPI") then
@@ -399,18 +399,18 @@ local function onAnimatorAdded(Player1: Player, Object)
 				NewResult:trace(string.format("%s {id: %s, name: %s}.", "Pausing facial streaming animations...", v2, Name))
 				t2[Player1.UserId].animationTrack:AdjustWeight(0.1, 0.5)
 			end
-			if game:GetFastFlag("FacialAnimationStreamingValidateAnimatorBeforeRemoving") then
+			if FFlagFacialAnimationStreamingValidateAnimatorBeforeRemovingModule then
 				t4[Player1.UserId] = Object
 			end
 		end
 		
 		if Object:IsDescendantOf(game) then
-			v100()
+			v105()
 			
 			return
 		else
 			t3[Player1.UserId][Player.AnimatorDataModelReady] = Object.AncestryChanged:Connect(function(_, _)
-				-- upvalues: Object (copy), Player1 (copy), Player (upval), t3 (upval), v100 (copy)
+				-- upvalues: Object (copy), Player1 (copy), Player (upval), t3 (upval), v105 (copy)
 				if Object:IsDescendantOf(game) then
 					local AnimatorDataModelReady = Player.AnimatorDataModelReady
 					
@@ -418,7 +418,7 @@ local function onAnimatorAdded(Player1: Player, Object)
 						t3[Player1.UserId][AnimatorDataModelReady]:Disconnect()
 						t3[Player1.UserId][AnimatorDataModelReady] = nil
 					end
-					v100()
+					v105()
 				end
 			end)
 		end
@@ -426,7 +426,7 @@ local function onAnimatorAdded(Player1: Player, Object)
 end
 
 local function onHumanoidAdded(Player1: Player, Humanoid)
-	-- upvalues: Player (copy), t3 (copy), handleEmote (copy), clearCharacterAnimations (copy)
+	-- upvalues: Player (copy), t3 (copy), handleEmote (copy), FFlagStopStreamTrackOnDeathModule (copy), clearCharacterAnimations (copy)
 	if not Humanoid then return end
 	local PlayerEmoted = Player.PlayerEmoted
 	
@@ -441,7 +441,7 @@ local function onHumanoidAdded(Player1: Player, Humanoid)
 		end
 	end)
 	
-	if game:GetFastFlag("StopStreamTrackOnDeath") then
+	if FFlagStopStreamTrackOnDeathModule then
 		local PlayerDied = Player.PlayerDied
 		
 		if t3[Player1.UserId] and t3[Player1.UserId][PlayerDied] then
@@ -456,8 +456,8 @@ local function onHumanoidAdded(Player1: Player, Humanoid)
 end
 
 local function onFaceControlsAdded(Player: Player, p1)
-	-- upvalues: Players (copy), t5 (copy), Default1 (copy), NewResult (copy), FaceAnimatorService (copy)
-	assert(game:GetFastFlag("FacialAnimationStreamingIfNoDynamicHeadDisableA2C"))
+	-- upvalues: FFlagFacialAnimationStreamingIfNoDynamicHeadDisableA2CModule (copy), Players (copy), t5 (copy), Default1 (copy), NewResult (copy), FaceAnimatorService (copy)
+	assert(FFlagFacialAnimationStreamingIfNoDynamicHeadDisableA2CModule)
 	
 	if Player ~= Players.LocalPlayer then return end
 	if t5[Player.UserId] ~= nil and p1 == t5[Player.UserId] then return end
@@ -529,7 +529,7 @@ local function onFaceControlsAdded(Player: Player, p1)
 end
 
 local function onCharacterDescendantAdded(Player: Player, Object)
-	-- upvalues: onAnimatorAdded (copy), onHumanoidAdded (copy), onFaceControlsAdded (copy), getPlayerFaceControls (copy)
+	-- upvalues: onAnimatorAdded (copy), onHumanoidAdded (copy), FFlagFacialAnimationStreamingIfNoDynamicHeadDisableA2CModule (copy), onFaceControlsAdded (copy), getPlayerFaceControls (copy)
 	if Object:IsDescendantOf(game) then
 		if Object:IsA("Animator") then
 			onAnimatorAdded(Player, Object)
@@ -541,21 +541,21 @@ local function onCharacterDescendantAdded(Player: Player, Object)
 			
 			return
 		end
-		if game:GetFastFlag("FacialAnimationStreamingIfNoDynamicHeadDisableA2C") and Object:IsA("MeshPart") and Object.Name == "Head" then
+		if FFlagFacialAnimationStreamingIfNoDynamicHeadDisableA2CModule and Object:IsA("MeshPart") and Object.Name == "Head" then
 			onFaceControlsAdded(Player, getPlayerFaceControls(Player))
 			
 			return
 		end
-		if game:GetFastFlag("FacialAnimationStreamingIfNoDynamicHeadDisableA2C") and Object:IsA("FaceControls") then
+		if FFlagFacialAnimationStreamingIfNoDynamicHeadDisableA2CModule and Object:IsA("FaceControls") then
 			onFaceControlsAdded(Player, Object)
 		end
 	end
 end
 
 local function onCharacterDescendantRemoving(Player1: Player, Object)
-	-- upvalues: t4 (copy), Player (copy), t3 (copy), clearCharacterAnimations (copy), onAnimatorAdded (copy), onFaceControlsAdded (copy), getPlayerFaceControls (copy)
+	-- upvalues: FFlagFacialAnimationStreamingValidateAnimatorBeforeRemovingModule (copy), t4 (copy), Player (copy), t3 (copy), clearCharacterAnimations (copy), FFlagFacialAnimationStreamingSearchForReplacementWhenRemovingAnimatorModule (copy), onAnimatorAdded (copy), FFlagStopStreamTrackOnDeathModule (copy), FFlagFacialAnimationStreamingIfNoDynamicHeadDisableA2CModule (copy), onFaceControlsAdded (copy), getPlayerFaceControls (copy)
 	if Object:IsA("Animator") then
-		if game:GetFastFlag("FacialAnimationStreamingValidateAnimatorBeforeRemoving") then
+		if FFlagFacialAnimationStreamingValidateAnimatorBeforeRemovingModule then
 			if Object == t4[Player1.UserId] then
 				local AnimatorDataModelReady1 = Player.AnimatorDataModelReady
 				
@@ -566,7 +566,7 @@ local function onCharacterDescendantRemoving(Player1: Player, Object)
 				clearCharacterAnimations(Player1)
 				t4[Player1.UserId] = nil
 				
-				if game:GetFastFlag("FacialAnimationStreamingSearchForReplacementWhenRemovingAnimator") then
+				if FFlagFacialAnimationStreamingSearchForReplacementWhenRemovingAnimatorModule then
 					local Humanoid = if Player1.Character then Player1.Character:FindFirstChildOfClass("Humanoid") else nil
 					local Animator = if Humanoid then Humanoid:FindFirstChildOfClass("Animator") else nil
 					
@@ -595,7 +595,7 @@ local function onCharacterDescendantRemoving(Player1: Player, Object)
 			t3[Player1.UserId][PlayerEmoted]:Disconnect()
 			t3[Player1.UserId][PlayerEmoted] = nil
 		end
-		if game:GetFastFlag("StopStreamTrackOnDeath") then
+		if FFlagStopStreamTrackOnDeathModule then
 			local PlayerDied = Player.PlayerDied
 			
 			if t3[Player1.UserId] and t3[Player1.UserId][PlayerDied] then
@@ -605,13 +605,13 @@ local function onCharacterDescendantRemoving(Player1: Player, Object)
 				return
 			end
 		end
-	elseif game:GetFastFlag("FacialAnimationStreamingIfNoDynamicHeadDisableA2C") and (Object:IsA("MeshPart") and Object.Name == "Head" or Object:IsA("FaceControls")) then
+	elseif FFlagFacialAnimationStreamingIfNoDynamicHeadDisableA2CModule and (Object:IsA("MeshPart") and Object.Name == "Head" or Object:IsA("FaceControls")) then
 		onFaceControlsAdded(Player1, getPlayerFaceControls(Player1))
 	end
 end
 
 local function onCharacterAdded(Player1: Player, Character)
-	-- upvalues: NewResult (copy), Player (copy), t3 (copy), onCharacterDescendantAdded (copy), onCharacterDescendantRemoving (copy), onFaceControlsAdded (copy), getPlayerFaceControls (copy), onHumanoidAdded (copy), getPlayerHumanoid (copy), onAnimatorAdded (copy), getPlayerAnimator (copy)
+	-- upvalues: NewResult (copy), Player (copy), t3 (copy), onCharacterDescendantAdded (copy), onCharacterDescendantRemoving (copy), FFlagFacialAnimationStreamingIfNoDynamicHeadDisableA2CModule (copy), onFaceControlsAdded (copy), getPlayerFaceControls (copy), onHumanoidAdded (copy), getPlayerHumanoid (copy), onAnimatorAdded (copy), getPlayerAnimator (copy)
 	local v1 = ""
 	local Name = ""
 	
@@ -645,15 +645,15 @@ local function onCharacterAdded(Player1: Player, Character)
 		onCharacterDescendantRemoving(Player1, Descendant)
 	end)
 	
-	if game:GetFastFlag("FacialAnimationStreamingIfNoDynamicHeadDisableA2C") then
+	if FFlagFacialAnimationStreamingIfNoDynamicHeadDisableA2CModule then
 		onFaceControlsAdded(Player1, getPlayerFaceControls(Player1))
 	end
 	onHumanoidAdded(Player1, getPlayerHumanoid(Player1))
 	onAnimatorAdded(Player1, getPlayerAnimator(Player1))
 end
 
-local function onCharacterRemoving(Player1: Player, _)
-	-- upvalues: NewResult (copy), Player (copy), t3 (copy), clearAllConnections (copy), clearCharacterAnimations (copy)
+local _ = function(Player1: Player, _)
+	-- upvalues: NewResult (copy), FFlagFacialAnimationStreamingClearAllConnectionsFix2Module (copy), Player (copy), t3 (copy), clearAllConnections (copy), clearCharacterAnimations (copy)
 	local v1 = ""
 	local Name = ""
 	
@@ -667,7 +667,7 @@ local function onCharacterRemoving(Player1: Player, _)
 	end
 	NewResult:trace(string.format("%s {id: %s, name: %s}.", "Player character removing", v1, Name))
 	
-	if game:GetFastFlag("FacialAnimationStreamingClearAllConnectionsFix2") then
+	if FFlagFacialAnimationStreamingClearAllConnectionsFix2Module then
 		local CharacterDescendantAdded = Player.CharacterDescendantAdded
 		
 		if t3[Player1.UserId] and t3[Player1.UserId][CharacterDescendantAdded] then
@@ -687,7 +687,7 @@ local function onCharacterRemoving(Player1: Player, _)
 end
 
 local function playerUpdate(Player1: Player)
-	-- upvalues: NewResult (copy), t1 (copy), t2 (copy), clearAllConnections (copy), onCharacterAdded (copy), t3 (copy), Player (copy), onCharacterRemoving (copy), onPlayerChatted (copy), clearCharacterAnimations (copy)
+	-- upvalues: NewResult (copy), t1 (copy), FFlagFacialAnimationStreamingClearAllConnectionsFix2Module (copy), t2 (copy), clearAllConnections (copy), onCharacterAdded (copy), t3 (copy), Player (copy), clearCharacterAnimations (copy), onPlayerChatted (copy)
 	local v1 = ""
 	local Name = ""
 	
@@ -702,7 +702,7 @@ local function playerUpdate(Player1: Player)
 	NewResult:trace(string.format("%s {id: %s, name: %s}.", "Player update", v1, Name))
 	local Entry = t1[Player1.UserId]
 	
-	if game:GetFastFlag("FacialAnimationStreamingClearAllConnectionsFix2") and Entry and t2[Player1.UserId] then
+	if FFlagFacialAnimationStreamingClearAllConnectionsFix2Module and Entry and t2[Player1.UserId] then
 		local v2 = ""
 		local Name1 = ""
 		
@@ -721,7 +721,7 @@ local function playerUpdate(Player1: Player)
 		clearAllConnections(Player1)
 		
 		if Entry then
-			if game:GetFastFlag("FacialAnimationStreamingClearAllConnectionsFix2") or not t2[Player1.UserId] then
+			if FFlagFacialAnimationStreamingClearAllConnectionsFix2Module or not t2[Player1.UserId] then
 				local v3 = ""
 				local Name1 = ""
 				
@@ -742,9 +742,38 @@ local function playerUpdate(Player1: Player)
 					-- upvalues: onCharacterAdded (upval), Player1 (copy)
 					onCharacterAdded(Player1, Character)
 				end)
-				t3[Player1.UserId][Player.CharacterRemoving] = Player1.CharacterRemoving:Connect(function(Character)
-					-- upvalues: onCharacterRemoving (upval), Player1 (copy)
-					onCharacterRemoving(Player1, Character)
+				t3[Player1.UserId][Player.CharacterRemoving] = Player1.CharacterRemoving:Connect(function(_)
+					-- upvalues: Player1 (copy), NewResult (upval), FFlagFacialAnimationStreamingClearAllConnectionsFix2Module (upval), Player (upval), t3 (upval), clearAllConnections (upval), clearCharacterAnimations (upval)
+					local v4 = ""
+					local Name = ""
+					
+					if Player1 then
+						if Player1.UserId then
+							v4 = tostring(Player1.UserId)
+						end
+						if Player1.Name then
+							Name = Player1.Name
+						end
+					end
+					NewResult:trace(string.format("%s {id: %s, name: %s}.", "Player character removing", v4, Name))
+					
+					if FFlagFacialAnimationStreamingClearAllConnectionsFix2Module then
+						local CharacterDescendantAdded = Player.CharacterDescendantAdded
+						
+						if t3[Player1.UserId] and t3[Player1.UserId][CharacterDescendantAdded] then
+							t3[Player1.UserId][CharacterDescendantAdded]:Disconnect()
+							t3[Player1.UserId][CharacterDescendantAdded] = nil
+						end
+						local CharacterDescendantRemoving = Player.CharacterDescendantRemoving
+						
+						if t3[Player1.UserId] and t3[Player1.UserId][CharacterDescendantRemoving] then
+							t3[Player1.UserId][CharacterDescendantRemoving]:Disconnect()
+							t3[Player1.UserId][CharacterDescendantRemoving] = nil
+						end
+					else
+						clearAllConnections(Player1)
+					end
+					clearCharacterAnimations(Player1)
 				end)
 				t3[Player1.UserId][Player.PlayerChatted] = Player1.Chatted:Connect(function(Message)
 					-- upvalues: onPlayerChatted (upval), Player1 (copy)
@@ -906,7 +935,7 @@ local function ConnectStateChangeCallback()
 end
 
 local function AttemptToShowCameraPerformanceToast(p1)
-	-- upvalues: GetFFlagUXForCameraPerformanceIXPEnabledModule (copy), IXPServiceWrapper (copy), GetFStringUXForCameraPerformanceIXPLayerNameModule (copy), Timestamp (copy), UXForCameraPerformanceSessionDelay (copy), AttemptToShowCameraPerformanceToast (copy), AppStorageService (copy), UXForCameraPerformanceDeviceDelay (copy), TrackerMenuModule (copy), TrackerPromptTypeModule (copy), RbxAnalyticsService (copy), Players (copy)
+	-- upvalues: GetFFlagUXForCameraPerformanceIXPEnabledModule (copy), IXPServiceWrapper (copy), GetFStringUXForCameraPerformanceIXPLayerNameModule (copy), Timestamp (copy), FIntUXForCameraPerformanceSessionDelayModule (copy), AttemptToShowCameraPerformanceToast (copy), AppStorageService (copy), FIntUXForCameraPerformanceDeviceDelayModule (copy), TrackerMenuModule (copy), TrackerPromptTypeModule (copy), RbxAnalyticsService (copy), Players (copy)
 	if GetFFlagUXForCameraPerformanceIXPEnabledModule() then
 		local Success, Result = pcall(function()
 			-- upvalues: IXPServiceWrapper (upval), GetFStringUXForCameraPerformanceIXPLayerNameModule (upval)
@@ -919,8 +948,8 @@ local function AttemptToShowCameraPerformanceToast(p1)
 	end
 	local Elapsed = os.time() - Timestamp
 	
-	if not p1 and Elapsed < UXForCameraPerformanceSessionDelay then
-		task.delay(UXForCameraPerformanceSessionDelay - Elapsed, function()
+	if not p1 and Elapsed < FIntUXForCameraPerformanceSessionDelayModule then
+		task.delay(FIntUXForCameraPerformanceSessionDelayModule - Elapsed, function()
 			-- upvalues: AttemptToShowCameraPerformanceToast (upval)
 			AttemptToShowCameraPerformanceToast(true)
 		end)
@@ -935,7 +964,7 @@ local function AttemptToShowCameraPerformanceToast(p1)
 	
 	if not Success1 then return end
 	Number = tonumber(Result1)
-	if os.time() - Number >= UXForCameraPerformanceDeviceDelay then
+	if os.time() - Number >= FIntUXForCameraPerformanceDeviceDelayModule then
 		pcall(function()
 			-- upvalues: AppStorageService (upval), Number (ref), TrackerMenuModule (upval), TrackerPromptTypeModule (upval), RbxAnalyticsService (upval), Players (upval)
 			AppStorageService:SetItem("CameraPerformanceUXUnixTimestamp", (tostring(Number)))
@@ -952,8 +981,8 @@ local function AttemptToShowCameraPerformanceToast(p1)
 end
 
 function InitializeVoiceChat()
-	-- upvalues: ConnectStateChangeCallback (copy), Default1 (copy), NewResult (copy), EventConnection (ref), Players (copy), FaceAnimatorService (copy)
-	local function v161()
+	-- upvalues: ConnectStateChangeCallback (copy), Default1 (copy), NewResult (copy), EventConnection (ref), FFlagFacialAnimationStreamingIfNoDynamicHeadDisableA2CModule (copy), Players (copy), FaceAnimatorService (copy)
+	local function v170()
 		-- upvalues: ConnectStateChangeCallback (upval)
 		ConnectStateChangeCallback()
 	end
@@ -966,10 +995,10 @@ function InitializeVoiceChat()
 	Default1:asyncInit():catch(function(_)
 		-- upvalues: NewResult (upval)
 		NewResult:trace("VoiceChat:asyncInit failed (possibly denied mic permission)")
-	end):finally(v161)
+	end):finally(v170)
 	EventConnection = Default1.muteChanged.Event:connect(function(p1)
-		-- upvalues: Players (upval), NewResult (upval), FaceAnimatorService (upval)
-		if game:GetFastFlag("FacialAnimationStreamingIfNoDynamicHeadDisableA2C") then
+		-- upvalues: FFlagFacialAnimationStreamingIfNoDynamicHeadDisableA2CModule (upval), Players (upval), NewResult (upval), FaceAnimatorService (upval)
+		if FFlagFacialAnimationStreamingIfNoDynamicHeadDisableA2CModule then
 			local LocalPlayer = Players.LocalPlayer
 			local FaceControls = if LocalPlayer and LocalPlayer.Character then LocalPlayer.Character:FindFirstChildWhichIsA("FaceControls", true) else nil
 			NewResult:trace("Syncing audio processing with VoiceChat mute changed: muted=" .. tostring(p1) .. " hasFaceControls=" .. tostring(FaceControls ~= nil))
@@ -987,7 +1016,7 @@ function InitializeVoiceChat()
 		NewResult:trace("Syncing audio processing with VoiceChat mute status: muted=" .. tostring(Default1.localMuted))
 		NoLocalMuted = not Default1.localMuted
 	end
-	if game:GetFastFlag("FacialAnimationStreamingIfNoDynamicHeadDisableA2C") then
+	if FFlagFacialAnimationStreamingIfNoDynamicHeadDisableA2CModule then
 		local LocalPlayer = Players.LocalPlayer
 		local FaceControls = if LocalPlayer and LocalPlayer.Character then LocalPlayer.Character:FindFirstChildWhichIsA("FaceControls", true) else nil
 		NewResult:trace("Syncing audio processing with Dynamic Head status: hasFaceControls=" .. tostring(FaceControls ~= nil))
@@ -1005,7 +1034,7 @@ function CleanupVoiceChat()
 end
 
 function InitializeFacialAnimationStreaming(p1)
-	-- upvalues: Flag (ref), TrackerErrorConnection (ref), FaceAnimatorService (copy), NewResult (copy), TrackerMenuModule (copy), TrackerPromptTypeModule (copy), DisableCameraOnLowspecAndroidCalls (copy), IsCamEnabledForUserAndPlaceModule (ref), GetFFlagAvatarChatServiceEnabledFunction (copy), AvatarChatService (copy), FaceAnimatorNotifyLODRecommendCameraInputDisableEngineFeature (copy), TrackerPromptConnection (ref), UXForCameraPerformanceEnabled (copy), AttemptToShowCameraPerformanceToast (copy), Default (copy), Enums (copy), JoinAllExistingPlayers (copy), FacialAnimationStreamingHeartbeatStatsModule (copy)
+	-- upvalues: Flag (ref), TrackerErrorConnection (ref), FaceAnimatorService (copy), NewResult (copy), TrackerMenuModule (copy), TrackerPromptTypeModule (copy), FFlagDisableCameraOnLowspecAndroidCallsModule (copy), IsCamEnabledForUserAndPlaceModule (ref), GetFFlagAvatarChatServiceEnabledFunction (copy), AvatarChatService (copy), FaceAnimatorNotifyLODRecommendCameraInputDisableEngineFeature (copy), TrackerPromptConnection (ref), FFlagUXForCameraPerformanceEnabledModule (copy), AttemptToShowCameraPerformanceToast (copy), Default (copy), Enums (copy), JoinAllExistingPlayers (copy), FacialAnimationStreamingHeartbeatStatsModule (copy)
 	if Flag then return end
 	Flag = true
 	TrackerErrorConnection = FaceAnimatorService.TrackerError:Connect(function(TrackerError)
@@ -1031,7 +1060,7 @@ function InitializeFacialAnimationStreaming(p1)
 		end
 	end)
 	
-	if DisableCameraOnLowspecAndroidCalls and not IsCamEnabledForUserAndPlaceModule() then
+	if FFlagDisableCameraOnLowspecAndroidCallsModule and not IsCamEnabledForUserAndPlaceModule() then
 		NewResult:trace("Camera is disabled for user and place")
 		
 		return
@@ -1041,11 +1070,11 @@ function InitializeFacialAnimationStreaming(p1)
 	end
 	if FaceAnimatorNotifyLODRecommendCameraInputDisableEngineFeature then
 		TrackerPromptConnection = FaceAnimatorService.TrackerPrompt:Connect(function(Prompt)
-			-- upvalues: NewResult (upval), UXForCameraPerformanceEnabled (upval), AttemptToShowCameraPerformanceToast (upval), TrackerMenuModule (upval), TrackerPromptTypeModule (upval)
+			-- upvalues: NewResult (upval), FFlagUXForCameraPerformanceEnabledModule (upval), AttemptToShowCameraPerformanceToast (upval), TrackerMenuModule (upval), TrackerPromptTypeModule (upval)
 			NewResult:trace(string.format("%s {id: %s, name: %s}.", string.format("TrackerPrompt: %s", (tostring(Prompt))), "", ""))
 			
 			if Prompt == Enum.TrackerPromptEvent.LODCameraRecommendDisable then
-				if UXForCameraPerformanceEnabled then
+				if FFlagUXForCameraPerformanceEnabledModule then
 					AttemptToShowCameraPerformanceToast()
 					
 					return

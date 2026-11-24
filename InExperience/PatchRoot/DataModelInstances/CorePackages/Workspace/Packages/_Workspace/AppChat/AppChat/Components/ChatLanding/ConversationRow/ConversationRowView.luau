@@ -195,7 +195,7 @@ return ReactModule.memo(function(p1)
 							})
 						})
 					}),
-					divider = if FFlagAppChatRemoveConversationListDividerModule then nil else ReactModule.createElement(FoundationModule.View, {
+					divider = if FFlagAppChatRemoveConversationListDividerModule or p1.hideDivider then nil else ReactModule.createElement(FoundationModule.View, {
 						tag = "size-full-0 auto-y",
 						Name = "divider",
 						LayoutOrder = 2

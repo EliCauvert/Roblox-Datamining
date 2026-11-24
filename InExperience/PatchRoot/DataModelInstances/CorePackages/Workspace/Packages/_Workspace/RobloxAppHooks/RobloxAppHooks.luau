@@ -9,6 +9,7 @@
 	useLocalUserId = require(script.useLocalUserId),
 	useRoactService = require(script.useRoactService),
 	useScreenSize = require(script.useScreenSize),
+	useScrollToTargetOnce = require(script.useScrollToTargetOnce),
 	useSignalsEffect = require(script.useSignalsEffect),
 	useStatusBarHeight = require(script.useStatusBarHeight),
 	useSystemInfo = require(script.useSystemInfo),

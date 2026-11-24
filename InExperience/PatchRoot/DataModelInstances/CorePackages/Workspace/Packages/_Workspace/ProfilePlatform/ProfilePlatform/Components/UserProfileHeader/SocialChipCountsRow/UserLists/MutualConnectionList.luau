@@ -25,9 +25,11 @@ local FFlagMutualConnectionsListPagination = require(Parent.SharedFlags).FFlagMu
 local FFlagEnableSplitPane = require(Parent.SharedFlags).FFlagEnableSplitPane
 local SplitPaneModule = if FFlagEnableSplitPane then require(Parent.SplitPane) else nil
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local DisplayModule = require(Parent.Display)
+local FFlagSocialTabsPageDockedPanelSafeArea = require(Parent.SharedFlags).FFlagSocialTabsPageDockedPanelSafeArea
 
 return function(_)
-	-- upvalues: UseDispatchFunction (copy), UseNavigationPropsFunction (copy), UseScreenSizeFunction (copy), UseSelectorFunction (copy), GetSafeAreaSizeFunction (copy), FFlagProfilePlatformNewProfileHeader (copy), UseProfileFormFactorModule (copy), EnumsModule (copy), FFlagSwitchProfileWidthHookToSocialCommon (copy), UseProfileCardWidthFunction (copy), UseProfileCardWidthModule (copy), ConstantsModule (copy), FFlagEnableSplitPane (copy), SplitPaneModule (copy), UseSignalStateFunction (copy), FFlagMutualConnectionsListPagination (copy), ReactModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UserListViewAdaptor (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
+	-- upvalues: UseDispatchFunction (copy), UseNavigationPropsFunction (copy), UseScreenSizeFunction (copy), UseSelectorFunction (copy), GetSafeAreaSizeFunction (copy), FFlagProfilePlatformNewProfileHeader (copy), UseProfileFormFactorModule (copy), EnumsModule (copy), FFlagSwitchProfileWidthHookToSocialCommon (copy), UseProfileCardWidthFunction (copy), UseProfileCardWidthModule (copy), ConstantsModule (copy), FFlagEnableSplitPane (copy), SplitPaneModule (copy), UseSignalStateFunction (copy), FFlagSocialTabsPageDockedPanelSafeArea (copy), DisplayModule (copy), FFlagMutualConnectionsListPagination (copy), ReactModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UserListViewAdaptor (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseNavigationPropsResult = UseNavigationPropsFunction(function(_, p1)
 		return { mutualFriendIds = p1.mutualFriendIds }
@@ -36,21 +38,24 @@ return function(_)
 		return p1.GlobalGuiInset
 	end)))
 	local IsFormFactorMatch: boolean = if FFlagProfilePlatformNewProfileHeader then UseProfileFormFactorModule().formFactor == EnumsModule.ProfileFormFactor.Wide else false
-	local v1 = (if FFlagProfilePlatformNewProfileHeader then if FFlagSwitchProfileWidthHookToSocialCommon then UseProfileCardWidthFunction() else UseProfileCardWidthModule(IsFormFactorMatch) else math.min(SafeAreaSize.X.Offset, ConstantsModule.MAXIMUM_CONTAINER_WIDTH)) / SafeAreaSize.X.Offset
+	local UseProfileCardWidthResult = if FFlagProfilePlatformNewProfileHeader then if FFlagSwitchProfileWidthHookToSocialCommon then UseProfileCardWidthFunction() else UseProfileCardWidthModule(IsFormFactorMatch) else math.min(SafeAreaSize.X.Offset, ConstantsModule.MAXIMUM_CONTAINER_WIDTH)
+	local UseProfileCardWidthResultRatio = UseProfileCardWidthResult / SafeAreaSize.X.Offset
 	local HasProfileSplitPaneEligibility = false
 	
 	if FFlagEnableSplitPane then
 		local UseSignalStateResult = UseSignalStateFunction(SplitPaneModule.SplitPaneStore.getStore().getSupportPaneModeIfActive)
 		HasProfileSplitPaneEligibility = UseSignalStateResult ~= nil and SplitPaneModule.SplitPaneVariant.getProfileSplitPaneEligibility(UseSignalStateResult) ~= nil
 	end
+	local XScale = if FFlagEnableSplitPane and HasProfileSplitPaneEligibility then 1 else UseProfileCardWidthResultRatio
+	local UseSignalStateResult = if FFlagSocialTabsPageDockedPanelSafeArea then UseSignalStateFunction(DisplayModule.GetDisplayStore().getDeviceSafePadding) else nil
 	local WideModePeekViewLayout = {
-		position = UDim2.fromScale(1, 0),
-		size = UDim2.fromScale(if FFlagEnableSplitPane and HasProfileSplitPaneEligibility then 1 else v1, 1),
+		position = if FFlagSocialTabsPageDockedPanelSafeArea then UDim2.new(1, UseSignalStateResult.right, 0, -UseSignalStateResult.top) else UDim2.fromScale(1, 0),
+		size = if FFlagSocialTabsPageDockedPanelSafeArea then UDim2.new(if HasProfileSplitPaneEligibility then 1 else 0, if HasProfileSplitPaneEligibility then UseSignalStateResult.right else UseProfileCardWidthResult, 1, UseSignalStateResult.top + UseSignalStateResult.bottom) else UDim2.fromScale(XScale, 1),
 		anchorPoint = Vector2.new(1, 0)
 	}
 	local MutualFriendIds = UseNavigationPropsResult.mutualFriendIds
 	local MutualFriendIds1 = if FFlagMutualConnectionsListPagination then MutualFriendIds else nil
-	local v2: boolean? = nil
+	local v1: boolean? = nil
 	local UseResult = nil
 	
 	if FFlagMutualConnectionsListPagination then
@@ -78,7 +83,7 @@ return function(_)
 			end
 			return List
 		end, { MutualFriendIds, UseStateResult })
-		v2 = UseStateResult < #MutualFriendIds
+		v1 = UseStateResult < #MutualFriendIds
 	end
 	local UseLocalizationResult = UseLocalizationFunction({
 		mutualConnections = {
@@ -111,7 +116,7 @@ return function(_)
 				UseDispatchResult(NavigateDownFunction(config))
 			end
 		end,
-		hasMore = if FFlagMutualConnectionsListPagination then v2 else nil,
+		hasMore = if FFlagMutualConnectionsListPagination then v1 else nil,
 		onLoadMore = if FFlagMutualConnectionsListPagination then UseResult else nil
 	})
 end

@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("BuildPublishSheetReturnOnBack", false) and require(script.Parent.FFlagBuildPublishNavigationSheet)

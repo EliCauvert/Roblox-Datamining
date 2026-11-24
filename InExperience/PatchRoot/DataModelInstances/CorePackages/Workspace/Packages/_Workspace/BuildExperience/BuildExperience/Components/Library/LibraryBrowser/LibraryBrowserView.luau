@@ -77,6 +77,8 @@ local function renderCategory(p1, LayoutOrder, Offset, XOffset, UseTokensResult)
 			thumbnail = item.thumbnail,
 			model = item.model,
 			onActivated = item.onActivated,
+			isSoundPlaying = item.isSoundPlaying,
+			onTogglePlayback = item.onTogglePlayback,
 			LayoutOrder = LayoutOrder1,
 			Size = UDim2.fromOffset(XOffset, NewXOffset),
 			mediaSize = UDim2.fromOffset(XOffset, XOffset)

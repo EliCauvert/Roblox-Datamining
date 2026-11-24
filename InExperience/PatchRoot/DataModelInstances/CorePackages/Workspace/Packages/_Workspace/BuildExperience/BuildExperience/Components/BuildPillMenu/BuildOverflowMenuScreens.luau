@@ -267,6 +267,7 @@ local function ConfigurationScreen(p1, Page, TestId)
 			testId = "build-publish-version-history",
 			universeId = TargetWithGameInfo.universeId,
 			placeId = TargetWithGameInfo.placeId,
+			sessionId = TargetWithGameInfo.sessionId,
 			onClose = UseResult7,
 			onAgentRollbackStarted = UseResult8
 		}) else nil

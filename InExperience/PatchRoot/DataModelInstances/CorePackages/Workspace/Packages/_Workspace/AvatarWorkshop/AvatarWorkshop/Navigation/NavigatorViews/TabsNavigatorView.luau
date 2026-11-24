@@ -20,7 +20,7 @@ return function(p1)
 	for _, route in Routes do
 		table.insert(Tabs, {
 			id = route.key,
-			text = UseLocalizationResult[route.routeName] or route.routeName
+			text = UseLocalizationResult[route.routeName]
 		})
 	end
 	local Key = p1.navigation.state.key

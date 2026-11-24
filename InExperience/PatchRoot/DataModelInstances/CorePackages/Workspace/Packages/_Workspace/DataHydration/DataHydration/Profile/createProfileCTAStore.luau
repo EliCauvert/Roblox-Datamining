@@ -11,6 +11,7 @@ local _ = require(DataHydration.Profile.Enums.ProfileCTAEnums)
 local HydratePresenceFromProfileMetadataModule = require(DataHydration.Profile.hydratePresenceFromProfileMetadata)
 local FFlagProfileCTAHydratePresenceFromMetadataModule = require(DataHydration.Flags.FFlagProfileCTAHydratePresenceFromMetadata)
 local FFlagJoinabilityCTARefactor = require(Parent.SharedFlags).FFlagJoinabilityCTARefactor
+local FFlagGameJoinCardSupportedActions = require(Parent.SharedFlags).FFlagGameJoinCardSupportedActions
 local FFlagUserListActionsV2 = require(Parent.SharedFlags).FFlagUserListActionsV2
 game:DefineFastInt("ProfileCTAStoreProcessDelaySec", 1)
 
@@ -30,7 +31,12 @@ local list1 = {
 		supportedActions = require(DataHydration.Profile.UserListSupportedActions)
 	}
 }
-local list2 = { { component = "JoinUserActions" } }
+local list2 = {
+	{
+		component = "JoinUserActions",
+		supportedActions = if FFlagGameJoinCardSupportedActions then require(DataHydration.Profile.JoinUserActionsSupportedActions) else nil
+	}
+}
 
 return function(p1)
 	-- upvalues: CreateDataCacheModule (copy), FFlagJoinabilityCTARefactor (copy), FFlagUserListActionsV2 (copy), list1 (copy), list (copy), CryoModule (copy), RequestsModule (copy), FFlagProfileCTAHydratePresenceFromMetadataModule (copy), HydratePresenceFromProfileMetadataModule (copy), CreateDataResolverModule (copy), ProfileJoinUserActionsProcessDelaySec (copy), NewResult (copy), list2 (copy), DataHydration (copy), PromiseModule (copy)

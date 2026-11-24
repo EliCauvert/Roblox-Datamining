@@ -4,7 +4,11 @@ local GuiService = game:GetService("GuiService")
 local HttpService = game:GetService("HttpService")
 local UserInputService = game:GetService("UserInputService")
 local CaptureServiceModule = require(Parent.Services.CaptureService)
+local CanCreateMomentsModule = require(Parent.Utils.canCreateMoments)
+local CaptureGenerationsModule = require(Parent.Utils.captureGenerations)
+local CaptureSnapshotTree = require(Parent.Scene3DSnapshot.captureSnapshotTree).captureSnapshotTree
 local CapturesToastTypeModule = require(Parent.Enums.CapturesToastType)
+local CheckMomentsEligibilityModule = require(Parent.Thunks.CheckMomentsEligibility)
 local ConstantsModule = require(Parent.Constants)
 local GetAvatarAssetsModule = require(Parent.Utils.getAvatarAssets)
 local GetScreenshotHudModule = require(Parent.Utils.getScreenshotHud)
@@ -12,17 +16,21 @@ local GetUserMetadataModule = require(Parent.Utils.getUserMetadata)
 local IsEligibleForMomentsModule = require(Parent.Utils.isEligibleForMoments)
 local IXPServiceWrapper = require(Parent1.IXPServiceWrapper).IXPServiceWrapper
 local LogCaptureEndLayerExposureModule = require(Parent.Utils.logCaptureEndLayerExposure)
+local LogCaptureEndExposureWhenEligibleModule = require(Parent.Thunks.LogCaptureEndExposureWhenEligible)
 local OverlayActivatedModule = require(Parent.Actions.OverlayActivated)
 local OverlayDeactivatedModule = require(Parent.Actions.OverlayDeactivated)
 local OverlayFlashActivatedModule = require(Parent.Actions.OverlayFlashActivated)
 local OverlayFlashDeactivatedModule = require(Parent.Actions.OverlayFlashDeactivated)
 local PendingCaptureToastActionModule = require(Parent.Utils.pendingCaptureToastAction)
 local RemoveCoreUIModule = require(Parent.Utils.removeCoreUI)
+local SaveSnapshotWithScreenshotModule = require(Parent.Scene3DSnapshot.saveSnapshotWithScreenshot)
 local ToastTriggeredModule = require(Parent.Actions.ToastTriggered)
 local _ = require(Parent.Types)
 local FStringSocialCaptureTakenIXPLayer = require(Parent1.SharedFlags).FStringSocialCaptureTakenIXPLayer
 local FFlagBuildExperienceInGameCaptureToChat = require(Parent1.SharedFlags).FFlagBuildExperienceInGameCaptureToChat
 local FFlagMomentsCaptureEndIxpEnabledModule = require(Parent.Flags.FFlagMomentsCaptureEndIxpEnabled)
+local FFlagCapturesInExpAttachScene3DSnapshotModule = require(Parent.Flags.FFlagCapturesInExpAttachScene3DSnapshot)
+local FFlagCapturesInExpLazyMomentsEligibilityModule = require(Parent.Flags.FFlagCapturesInExpLazyMomentsEligibility)
 local DebugAPPEXP4747B = game:DefineFastFlag("DebugAPPEXP4747B", false)
 
 local function _(GuiType)
@@ -54,9 +62,9 @@ local _ = function()
 end
 
 return function(p1)
-	-- upvalues: FFlagBuildExperienceInGameCaptureToChat (copy), PendingCaptureToastActionModule (copy), ToastTriggeredModule (copy), CapturesToastTypeModule (copy), UserInputService (copy), GetScreenshotHudModule (copy), DebugAPPEXP4747B (copy), GuiService (copy), RemoveCoreUIModule (copy), OverlayActivatedModule (copy), CaptureServiceModule (copy), GetAvatarAssetsModule (copy), GetUserMetadataModule (copy), HttpService (copy), OverlayFlashActivatedModule (copy), OverlayFlashDeactivatedModule (copy), OverlayDeactivatedModule (copy), IXPServiceWrapper (copy), FStringSocialCaptureTakenIXPLayer (copy), FFlagMomentsCaptureEndIxpEnabledModule (copy), IsEligibleForMomentsModule (copy), ConstantsModule (copy), LogCaptureEndLayerExposureModule (copy)
+	-- upvalues: FFlagBuildExperienceInGameCaptureToChat (copy), PendingCaptureToastActionModule (copy), ToastTriggeredModule (copy), CapturesToastTypeModule (copy), FFlagCapturesInExpLazyMomentsEligibilityModule (copy), CaptureGenerationsModule (copy), CanCreateMomentsModule (copy), CheckMomentsEligibilityModule (copy), UserInputService (copy), GetScreenshotHudModule (copy), DebugAPPEXP4747B (copy), GuiService (copy), RemoveCoreUIModule (copy), OverlayActivatedModule (copy), CaptureServiceModule (copy), GetAvatarAssetsModule (copy), GetUserMetadataModule (copy), FFlagCapturesInExpAttachScene3DSnapshotModule (copy), SaveSnapshotWithScreenshotModule (copy), HttpService (copy), OverlayFlashActivatedModule (copy), CaptureSnapshotTree (copy), OverlayFlashDeactivatedModule (copy), OverlayDeactivatedModule (copy), IXPServiceWrapper (copy), FStringSocialCaptureTakenIXPLayer (copy), FFlagMomentsCaptureEndIxpEnabledModule (copy), LogCaptureEndExposureWhenEligibleModule (copy), IsEligibleForMomentsModule (copy), ConstantsModule (copy), LogCaptureEndLayerExposureModule (copy)
 	return function(p2)
-		-- upvalues: FFlagBuildExperienceInGameCaptureToChat (upval), PendingCaptureToastActionModule (upval), p1 (copy), ToastTriggeredModule (upval), CapturesToastTypeModule (upval), UserInputService (upval), GetScreenshotHudModule (upval), DebugAPPEXP4747B (upval), GuiService (upval), RemoveCoreUIModule (upval), OverlayActivatedModule (upval), CaptureServiceModule (upval), GetAvatarAssetsModule (upval), GetUserMetadataModule (upval), HttpService (upval), OverlayFlashActivatedModule (upval), OverlayFlashDeactivatedModule (upval), OverlayDeactivatedModule (upval), IXPServiceWrapper (upval), FStringSocialCaptureTakenIXPLayer (upval), FFlagMomentsCaptureEndIxpEnabledModule (upval), IsEligibleForMomentsModule (upval), ConstantsModule (upval), LogCaptureEndLayerExposureModule (upval)
+		-- upvalues: FFlagBuildExperienceInGameCaptureToChat (upval), PendingCaptureToastActionModule (upval), p1 (copy), ToastTriggeredModule (upval), CapturesToastTypeModule (upval), FFlagCapturesInExpLazyMomentsEligibilityModule (upval), CaptureGenerationsModule (upval), CanCreateMomentsModule (upval), CheckMomentsEligibilityModule (upval), UserInputService (upval), GetScreenshotHudModule (upval), DebugAPPEXP4747B (upval), GuiService (upval), RemoveCoreUIModule (upval), OverlayActivatedModule (upval), CaptureServiceModule (upval), GetAvatarAssetsModule (upval), GetUserMetadataModule (upval), FFlagCapturesInExpAttachScene3DSnapshotModule (upval), SaveSnapshotWithScreenshotModule (upval), HttpService (upval), OverlayFlashActivatedModule (upval), CaptureSnapshotTree (upval), OverlayFlashDeactivatedModule (upval), OverlayDeactivatedModule (upval), IXPServiceWrapper (upval), FStringSocialCaptureTakenIXPLayer (upval), FFlagMomentsCaptureEndIxpEnabledModule (upval), LogCaptureEndExposureWhenEligibleModule (upval), IsEligibleForMomentsModule (upval), ConstantsModule (upval), LogCaptureEndLayerExposureModule (upval)
 		local Flag = false
 		local Flag1 = false
 		
@@ -64,6 +72,15 @@ return function(p1)
 			PendingCaptureToastActionModule.set(if p1 then p1.toastAction else nil)
 		end
 		p2:dispatch(ToastTriggeredModule(CapturesToastTypeModule.None))
+		local StartScreenshotResult = nil
+		
+		if FFlagCapturesInExpLazyMomentsEligibilityModule then
+			StartScreenshotResult = CaptureGenerationsModule.startScreenshot()
+			
+			if CanCreateMomentsModule() then
+				p2:dispatch(CheckMomentsEligibilityModule(game.GameId))
+			end
+		end
 		local OverrideMouseIconBehavior = UserInputService.OverrideMouseIconBehavior
 		UserInputService.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.ForceHide
 		local ScreenshotHudModule = GetScreenshotHudModule()
@@ -97,6 +114,7 @@ return function(p1)
 		task.wait(0.1)
 		local AvatarAssetsModule = GetAvatarAssetsModule()
 		local UserMetadataModule = GetUserMetadataModule()
+		local ListenResult = if FFlagCapturesInExpAttachScene3DSnapshotModule then SaveSnapshotWithScreenshotModule.listen() else nil
 		
 		if next(AvatarAssetsModule) == nil and next(UserMetadataModule) == nil then
 			CaptureServiceModule:SaveScreenshotCapture()
@@ -108,6 +126,18 @@ return function(p1)
 		end
 		task.wait()
 		p2:dispatch(OverlayFlashActivatedModule())
+		
+		if FFlagCapturesInExpAttachScene3DSnapshotModule and ListenResult ~= nil then
+			task.wait()
+			task.wait()
+			local Success, Result = pcall(CaptureSnapshotTree)
+			
+			if not Success then
+				warn("captureSnapshotTree failed with error:", Result)
+				Result = nil
+			end
+			ListenResult.attach(Result)
+		end
 		task.wait(0.5)
 		CaptureServiceModule:OnCaptureEnded()
 		p2:dispatch(OverlayFlashDeactivatedModule())
@@ -132,7 +162,13 @@ return function(p1)
 		end
 		IXPServiceWrapper:LogUserLayerExposure(FStringSocialCaptureTakenIXPLayer)
 		
-		if FFlagMomentsCaptureEndIxpEnabledModule and IsEligibleForMomentsModule(p2:getState()[ConstantsModule.RoduxKey].MomentsEligibility) then
+		if FFlagCapturesInExpLazyMomentsEligibilityModule then
+			if FFlagMomentsCaptureEndIxpEnabledModule then
+				p2:dispatch(LogCaptureEndExposureWhenEligibleModule(StartScreenshotResult))
+				
+				return
+			end
+		elseif FFlagMomentsCaptureEndIxpEnabledModule and IsEligibleForMomentsModule(p2:getState()[ConstantsModule.RoduxKey].MomentsEligibility) then
 			LogCaptureEndLayerExposureModule()
 		end
 	end

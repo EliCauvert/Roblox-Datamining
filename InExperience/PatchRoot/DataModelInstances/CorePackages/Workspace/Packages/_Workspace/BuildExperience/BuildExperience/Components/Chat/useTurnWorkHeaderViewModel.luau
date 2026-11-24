@@ -19,7 +19,7 @@ end
 return function(p1)
 	-- upvalues: UseActivitySummaryLabelFunction (copy), FFlagBuildExperiencePromptStallMessageModule (copy), UseStallStateFunction (copy), ReactModule (copy), ChatConstantsModule (copy), formatTitleForDuration (copy)
 	local Segment = p1.segment
-	local UseActivitySummaryLabelResult = UseActivitySummaryLabelFunction(Segment)
+	local UseActivitySummaryLabelResult = UseActivitySummaryLabelFunction(Segment, p1.otherStep)
 	local LocalizationContext = UseActivitySummaryLabelResult.localizationContext
 	local Label = UseActivitySummaryLabelResult.label
 	local DoneText = p1.doneText
@@ -27,20 +27,31 @@ return function(p1)
 	local UseStallStateResult = if FFlagBuildExperiencePromptStallMessageModule then UseStallStateFunction(Segment, UseActivitySummaryLabelResult.labelSource, #UseActivitySummaryLabelResult.activityItems) else nil
 	local ClockBinding = p1.clockBinding
 	local UseRefResult = ReactModule.useRef(nil)
-	local Text: string = if UseActivitySummaryLabelResult.runningKey == nil then `{p1.agentMessageCount}:{UseActivitySummaryLabelResult.labelSource}` else `{Segment.key}:{UseActivitySummaryLabelResult.runningKey}`
+	local UseRefResult1 = ReactModule.useRef({})
+	local Text = if UseActivitySummaryLabelResult.stepId == nil then `{p1.agentMessageCount}:{UseActivitySummaryLabelResult.labelSource}` else UseActivitySummaryLabelResult.stepId
 	
-	if UseRefResult.current == nil or UseRefResult.current.id ~= Text then
-		UseRefResult.current = { id = Text, startedAt = ClockBinding:getValue() }
+	if UseActivitySummaryLabelResult.stepId == nil then
+		table.clear(UseRefResult1.current)
 	end
-	local IsLabelSourceMatch = UseActivitySummaryLabelResult.labelSource == ChatConstantsModule.ASSISTANT_LOADING_TEXT
+	if UseRefResult.current == nil or UseRefResult.current.id ~= Text then
+		local CurrentEntry = (if UseActivitySummaryLabelResult.stepId == nil then nil else UseRefResult1.current[Text]) or ClockBinding:getValue()
+		
+		if UseActivitySummaryLabelResult.stepId ~= nil then
+			UseRefResult1.current[Text] = CurrentEntry
+		end
+		UseRefResult.current = { id = Text, startedAt = CurrentEntry }
+	end
+	local NoIsStepRunning: boolean = UseActivitySummaryLabelResult.labelSource == ChatConstantsModule.ASSISTANT_LOADING_TEXT and not UseActivitySummaryLabelResult.isStepRunning
 	local TakingLongerText = UseActivitySummaryLabelResult.takingLongerText
+	local StillWorkingText = UseActivitySummaryLabelResult.stillWorkingText
+	local NoStepId: boolean = NoIsStepRunning and UseActivitySummaryLabelResult.stepId == nil
 	
 	return {
 		text = ReactModule.useMemo(function()
-			-- upvalues: p1 (copy), DoneText (copy), ClockBinding (copy), FFlagBuildExperiencePromptStallMessageModule (upval), IsLabelSourceMatch (copy), IsIsWaitingForLocalTool (copy), UseStallStateResult (copy), TakingLongerText (copy), ChatConstantsModule (upval), UseRefResult (copy), Label (copy), formatTitleForDuration (upval), LocalizationContext (copy)
+			-- upvalues: p1 (copy), DoneText (copy), ClockBinding (copy), FFlagBuildExperiencePromptStallMessageModule (upval), NoIsStepRunning (copy), IsIsWaitingForLocalTool (copy), UseStallStateResult (copy), TakingLongerText (copy), ChatConstantsModule (upval), UseRefResult (copy), Label (copy), NoStepId (copy), StillWorkingText (copy), formatTitleForDuration (upval), LocalizationContext (copy)
 			return if p1.isDone then DoneText else ClockBinding:map(function(p2)
-				-- upvalues: FFlagBuildExperiencePromptStallMessageModule (upval), IsLabelSourceMatch (upval), IsIsWaitingForLocalTool (upval), UseStallStateResult (upval), TakingLongerText (upval), ChatConstantsModule (upval), UseRefResult (upval), Label (upval), formatTitleForDuration (upval), LocalizationContext (upval)
-				if FFlagBuildExperiencePromptStallMessageModule and IsLabelSourceMatch and not IsIsWaitingForLocalTool and UseStallStateResult ~= nil and TakingLongerText ~= nil then
+				-- upvalues: FFlagBuildExperiencePromptStallMessageModule (upval), NoIsStepRunning (upval), IsIsWaitingForLocalTool (upval), UseStallStateResult (upval), TakingLongerText (upval), ChatConstantsModule (upval), UseRefResult (upval), Label (upval), NoStepId (upval), StillWorkingText (upval), formatTitleForDuration (upval), LocalizationContext (upval)
+				if FFlagBuildExperiencePromptStallMessageModule and NoIsStepRunning and not IsIsWaitingForLocalTool and UseStallStateResult ~= nil and TakingLongerText ~= nil then
 					local LastProgressAt = UseStallStateResult.lastProgressAt or p2
 					UseStallStateResult.lastProgressAt = LastProgressAt
 					
@@ -50,11 +61,18 @@ return function(p1)
 				end
 				local Current = UseRefResult.current
 				
-				return if IsIsWaitingForLocalTool then Label else formatTitleForDuration(LocalizationContext, Label, (math.max(0, (math.floor(p2 - Current.startedAt)))))
+				if IsIsWaitingForLocalTool then
+					return Label
+				else
+					local Largest = math.max(0, (math.floor(p2 - Current.startedAt)))
+					
+					return if NoStepId and math.floor(Largest / ChatConstantsModule.ASSISTANT_STATUS_SWAP_INTERVAL_SECONDS) % 2 == 1 then StillWorkingText else formatTitleForDuration(LocalizationContext, Label, Largest)
+				end
 			end)
 		end, {
-			p1.isDone, DoneText, Label, IsLabelSourceMatch, IsIsWaitingForLocalTool,
-			TakingLongerText, UseStallStateResult, LocalizationContext, ClockBinding
+			p1.isDone, DoneText, Label, NoIsStepRunning, NoStepId, IsIsWaitingForLocalTool,
+			TakingLongerText, StillWorkingText, UseStallStateResult, LocalizationContext,
+			ClockBinding
 		})
 	}
 end

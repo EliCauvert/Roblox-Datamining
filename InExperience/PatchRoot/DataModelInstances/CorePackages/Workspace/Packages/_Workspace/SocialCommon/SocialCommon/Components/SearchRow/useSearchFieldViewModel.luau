@@ -4,7 +4,6 @@ local Parent = SocialCommon.Parent
 local ReactModule = require(Parent.React)
 local _ = require(Parent.Foundation)
 local IsTenFootInterfaceFunction = require(Parent.AppCommonLib).isTenFootInterface
-local FFlagLuaAppAllowNilHookDepsCleanup = require(Parent.SharedFlags).FFlagLuaAppAllowNilHookDepsCleanup
 local FFlagAppChatSearchFieldReleaseFocusOnConsoleKeyboardModule = require(SocialCommon.Flags.FFlagAppChatSearchFieldReleaseFocusOnConsoleKeyboard)
 local InputHandlersModule = require(Parent.InputHandlers)
 local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
@@ -12,7 +11,7 @@ local FocusNavigationEventNameEnum = require(Parent.FocusNavigationUtils).FocusN
 local _ = require(script.Parent.SearchFieldView)
 
 return function(Frame)
-	-- upvalues: ReactModule (copy), InputHandlersModule (copy), ReactFocusNavigationModule (copy), FocusNavigationEventNameEnum (copy), UserInputService (copy), FFlagLuaAppAllowNilHookDepsCleanup (copy), FFlagAppChatSearchFieldReleaseFocusOnConsoleKeyboardModule (copy), IsTenFootInterfaceFunction (copy)
+	-- upvalues: ReactModule (copy), InputHandlersModule (copy), ReactFocusNavigationModule (copy), FocusNavigationEventNameEnum (copy), UserInputService (copy), FFlagAppChatSearchFieldReleaseFocusOnConsoleKeyboardModule (copy), IsTenFootInterfaceFunction (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local OnExitFunction = Frame.onExit
 	local OnChangedFunction = Frame.onChanged
@@ -86,10 +85,7 @@ return function(Frame)
 		if UseRefResult3.current and UseContextResult and UseContextResult.focusedGuiObject:getValue() ~= nil then
 			UseFocusGuiObjectResult(UseRefResult3.current)
 		end
-	end, {
-		UseFocusGuiObjectResult,
-		if FFlagLuaAppAllowNilHookDepsCleanup then UseContextResult else UseContextResult or false
-	})
+	end, { UseFocusGuiObjectResult, UseContextResult })
 	local UseResult3 = ReactModule.useCallback(function(p1)
 		-- upvalues: UseResult2 (copy), FFlagAppChatSearchFieldReleaseFocusOnConsoleKeyboardModule (upval), IsTenFootInterfaceFunction (upval), UseRefResult2 (copy), UseRefResult (copy), OnChangedFunction (copy)
 		if p1 == "" then

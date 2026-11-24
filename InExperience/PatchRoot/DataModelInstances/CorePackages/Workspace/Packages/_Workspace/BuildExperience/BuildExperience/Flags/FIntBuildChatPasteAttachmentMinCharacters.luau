@@ -1,0 +1,1 @@
+﻿return game:DefineFastInt("BuildChatPasteAttachmentMinCharacters", 150)

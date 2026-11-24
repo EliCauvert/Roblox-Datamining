@@ -1,0 +1,3 @@
+﻿local FFlagAXCharacterManagerResumeFromLastUpdateModule = require(script.Parent.FFlagAXCharacterManagerResumeFromLastUpdate)
+
+return game:DefineFastFlag("AXLookTryOnConvertR6ToR15", false) and FFlagAXCharacterManagerResumeFromLastUpdateModule

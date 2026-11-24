@@ -75,6 +75,7 @@ return {
 		CatalogCategoryKeys = require(script.Enums.CatalogCategoryKey),
 		CatalogSubcategoryKeys = require(script.Enums.CatalogSubcategoryKey),
 		FullView = require(script.Enums.FullView),
+		LookTryOnRigPolicy = require(script.Enums.LookTryOnRigPolicy),
 		WearTimeFilter = require(script.Enums.WearTimeFilter),
 		SpecialFeatureFilter = require(script.Enums.SpecialFeatureFilter),
 		DiscountTypeEnum = require(script.Enums.DiscountType)

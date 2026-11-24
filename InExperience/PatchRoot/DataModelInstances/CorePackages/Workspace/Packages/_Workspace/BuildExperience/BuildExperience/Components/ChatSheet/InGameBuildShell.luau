@@ -7,13 +7,16 @@ local MotionModule = require(Parent.Motion)
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
 local BuildPillMenuPageHostModule = require(BuildExperience.Components.BuildPillMenu.BuildPillMenuPageHost)
+local InGameBuildShellComposerModule = require(script.Parent.InGameBuildShellComposer)
 local PublishSheetControllerModule = require(BuildExperience.Components.PublishSheet.PublishSheetController)
 local GetCurrentExperienceProjectModule = require(BuildExperience.utils.getCurrentExperienceProject)
 local UseHardwareInsetsModule = require(script.Parent.useHardwareInsets)
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
+local FFlagBuildPublishSheetReturnOnBackModule = require(BuildExperience.Flags.FFlagBuildPublishSheetReturnOnBack)
 local FFlagBuildExperienceInExperienceEntryTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceInExperienceEntryTelemetry)
 local GetInExperienceEventIdsModule = require(BuildExperience.Telemetry.getInExperienceEventIds)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
+local FFlagBuildExperienceInGameShellComposer = require(Parent.SharedFlags).FFlagBuildExperienceInGameShellComposer
 local UseGamePermissionsModule = require(BuildExperience.useGamePermissions)
 local Image = FoundationModule.Image
 local IconButton = FoundationModule.IconButton
@@ -103,7 +106,7 @@ local function createToolbarButtons(p1, UseResult, p2, p3)
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), GetCurrentExperienceProjectModule (copy), FFlagBuildExperienceInExperienceEntryTelemetryModule (copy), SendBuildExperienceEventModule (copy), GetInExperienceEventIdsModule (copy), UseTokensFunction (copy), UsePreferencesFunction (copy), UseOverlayFunction (copy), UseHardwareInsetsModule (copy), DisplayModule (copy), CoreGuiCommonModule (copy), SignalsReactModule (copy), MotionModule (copy), View (copy), noop (copy), StateLayerAffordance (copy), createToolbarButtons (copy), Image (copy), FoundationModule (copy), PublishSheetControllerModule (copy), BuildPillMenuPageHostModule (copy)
+	-- upvalues: ReactModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), GetCurrentExperienceProjectModule (copy), FFlagBuildExperienceInExperienceEntryTelemetryModule (copy), SendBuildExperienceEventModule (copy), GetInExperienceEventIdsModule (copy), UseTokensFunction (copy), UsePreferencesFunction (copy), UseOverlayFunction (copy), UseHardwareInsetsModule (copy), DisplayModule (copy), CoreGuiCommonModule (copy), SignalsReactModule (copy), MotionModule (copy), FFlagBuildExperienceInGameShellComposer (copy), View (copy), noop (copy), StateLayerAffordance (copy), createToolbarButtons (copy), Image (copy), InGameBuildShellComposerModule (copy), FoundationModule (copy), PublishSheetControllerModule (copy), FFlagBuildPublishSheetReturnOnBackModule (copy), BuildPillMenuPageHostModule (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(nil)
@@ -268,22 +271,32 @@ return function(p1)
 		-- upvalues: UseStateResult8 (copy)
 		return UDim2.new(1, -UseStateResult8 * p2 + 1, 0, 0)
 	end)
-	local MapResult2 = Progress:map(function(p2): UDim2
+	local MapResult2 = Progress:map(function(p2: number): UDim2
+		-- upvalues: UseStateResult7 (copy)
+		return UDim2.new(0, 0, 1, UseStateResult7 * (1 - p2))
+	end)
+	local MapResult3 = Progress:map(function(p2): UDim2
 		-- upvalues: UseStateResult7 (copy)
 		return UDim2.new(0, -1, 1, -UseStateResult7 * p2 + 1)
 	end)
-	local MapResult3 = Progress:map(function(p2): UDim2
+	local MapResult4 = Progress:map(function(p2): UDim2
 		-- upvalues: IsYBelow (copy), UseStateResult8 (copy), UseStateResult7 (copy)
 		return UDim2.new(1, -(if IsYBelow then UseStateResult8 else 0) * p2 + 1, 1, -(if IsYBelow then 0 else UseStateResult7) * p2 + 1)
 	end)
+	local MapResult5 = Progress:map(function(p2): UDim2
+		-- upvalues: IsNotUseSignalStateResultMatch (copy), IsYBelow (copy), UseStateResult8 (copy), UseStateResult7 (copy)
+		return if IsNotUseSignalStateResultMatch then UDim2.fromOffset(0, 0) else UDim2.fromOffset((if IsYBelow then UseStateResult8 else 0) * p2, (if IsYBelow then 0 else UseStateResult7) * p2)
+	end)
 	local Surface100 = UseTokensResult.Color.Surface.Surface_100
-	local MapResult4 = Progress:map(function(p2)
+	local MapResult6 = Progress:map(function(p2)
 		-- upvalues: Surface100 (copy)
 		return {
 			Color3 = Surface100.Color3,
 			Transparency = 1 - (1 - Surface100.Transparency) * p2
 		}
 	end)
+	local Composer = if FFlagBuildExperienceInGameShellComposer and not p1.isSelecting then p1.composer else nil
+	local HasComposer = Composer ~= nil
 	local Element = ReactModule.createElement(View, {
 		tag = "size-full",
 		Visible = UseStateResult6,
@@ -324,10 +337,7 @@ return function(p1)
 		}) else nil,
 		InsetReporter = ReactModule.createElement(View, {
 			testId = "in-game-build-shell-inset-reporter",
-			Size = Progress:map(function(p2): UDim2
-				-- upvalues: IsNotUseSignalStateResultMatch (copy), IsYBelow (copy), UseStateResult8 (copy), UseStateResult7 (copy)
-				return if IsNotUseSignalStateResultMatch then UDim2.fromOffset(0, 0) else UDim2.fromOffset((if IsYBelow then UseStateResult8 else 0) * p2, (if IsYBelow then 0 else UseStateResult7) * p2)
-			end),
+			Size = MapResult5,
 			onAbsoluteSizeChanged = UseResult7
 		}),
 		RightInset = if IsYBelow and not IsNotUseSignalStateResultMatch then ReactModule.createElement(View, {
@@ -355,14 +365,14 @@ return function(p1)
 				testId = "in-game-build-shell-top-right-inner-corner-image",
 				Position = UDim2.fromOffset(-Size1200, 0),
 				Size = UDim2.fromOffset(Size1200 * 2, Size1200 * 2),
-				imageStyle = MapResult4
+				imageStyle = MapResult6
 			})
 		}) else nil,
 		BottomLeftInnerCorner = if IsNotUseSignalStateResultMatch or IsYBelow or UseStateResult7 == 0 then nil else ReactModule.createElement(View, {
 			ZIndex = 1000,
 			tag = "anchor-bottom-left clip",
 			testId = "in-game-build-shell-bottom-left-inner-corner",
-			Position = MapResult2,
+			Position = MapResult3,
 			Size = UDim2.fromOffset(Size1200, Size1200)
 		}, {
 			Image = ReactModule.createElement(Image, {
@@ -371,14 +381,14 @@ return function(p1)
 				testId = "in-game-build-shell-bottom-left-inner-corner-image",
 				Position = UDim2.fromOffset(0, -Size1200),
 				Size = UDim2.fromOffset(Size1200 * 2, Size1200 * 2),
-				imageStyle = MapResult4
+				imageStyle = MapResult6
 			})
 		}),
 		BottomRightInnerCorner = if IsNotUseSignalStateResultMatch or not IsYBelow and UseStateResult7 == 0 then nil else ReactModule.createElement(View, {
 			ZIndex = 1000,
 			tag = "anchor-bottom-right clip",
 			testId = "in-game-build-shell-bottom-right-inner-corner",
-			Position = MapResult3,
+			Position = MapResult4,
 			Size = UDim2.fromOffset(Size1200, Size1200)
 		}, {
 			Image = ReactModule.createElement(Image, {
@@ -387,25 +397,40 @@ return function(p1)
 				testId = "in-game-build-shell-bottom-right-inner-corner-image",
 				Position = UDim2.fromOffset(-Size1200, -Size1200),
 				Size = UDim2.fromOffset(Size1200 * 2, Size1200 * 2),
-				imageStyle = MapResult4
+				imageStyle = MapResult6
 			})
 		}),
 		BottomBar = ReactModule.createElement(View, {
 			tag = "row align-x-center align-y-center gap-xsmall anchor-bottom-left size-full-0 auto-y bg-surface-100",
 			testId = "in-game-build-shell-bottom-inset",
-			Position = Progress:map(function(p2: number): UDim2
-				-- upvalues: UseStateResult7 (copy)
-				return UDim2.new(0, 0, 1, UseStateResult7 * (1 - p2))
-			end),
+			Position = MapResult2,
 			Visible = not IsYBelow and not IsNotUseSignalStateResultMatch,
 			onAbsoluteSizeChanged = UseResult5,
-			padding = {
+			padding = if HasComposer then {
+				top = UDim.new(0, UseTokensResult.Margin.Small),
+				left = UDim.new(0, UseTokensResult.Margin.Small),
+				right = UDim.new(0, UseTokensResult.Margin.Small),
+				bottom = UDim.new(0, UseTokensResult.Margin.Small + UseHardwareInsetsModuleResult.bottom)
+			} else {
 				top = UDim.new(0, UseTokensResult.Padding.Small),
 				left = UDim.new(0, UseTokensResult.Padding.Large),
 				right = UDim.new(0, UseTokensResult.Padding.Large),
 				bottom = UDim.new(0, UseTokensResult.Margin.Small + UseHardwareInsetsModuleResult.bottom)
 			}
-		}, (createToolbarButtons(p1, UseResult, "in-game-build-shell", UseGamePermissionsModuleResult)))
+		}, if Composer == nil then createToolbarButtons(p1, UseResult, "in-game-build-shell", UseGamePermissionsModuleResult) else {
+			Composer = ReactModule.createElement(InGameBuildShellComposerModule, {
+				testIdPrefix = "in-game-build-shell",
+				draftText = Composer.draftText,
+				placeholder = Composer.placeholder,
+				attachmentCount = Composer.attachmentCount,
+				attachmentCountText = Composer.attachmentCountText,
+				isAttachingDisabled = FFlagBuildCheckGamePermissionsModule and not UseGamePermissionsModuleResult.canEditOnBuild,
+				showAttachTools = not p1.isLibraryMode,
+				onActivated = p1.onComposerActivated or p1.onActivated,
+				onCaptureActivated = p1.onComposerCaptureActivated,
+				onSelectionActivated = p1.onComposerSelectionActivated
+			})
+		})
 	})
 	local NewTop = UseHardwareInsetsModuleResult.top + UseSignalStateResult.top
 	
@@ -424,7 +449,8 @@ return function(p1)
 				isOpen = UseStateResult,
 				target = UseStateResult3,
 				onClose = UseResult1,
-				navigateToSubPage = UseResult3
+				navigateToSubPage = UseResult3,
+				isCovered = if FFlagBuildPublishSheetReturnOnBackModule then UseStateResult1 ~= nil else nil
 			})
 		}),
 		PublishPage = if UseStateResult3 == nil then nil else ReactModule.createElement(BuildPillMenuPageHostModule, {

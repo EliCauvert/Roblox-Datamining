@@ -9,6 +9,9 @@ local config = {
 	[SocialPersonalizationSurfaceKeysModule.Friends_AddFriends_PeopleYouMayKnow] = function(p1)
 		return p1.getShowInContextPersonalizedRecommendationsFriendsAddFriendsPeopleYouMayKnow()
 	end,
+	[SocialPersonalizationSurfaceKeysModule.Home_PeopleYouMayKnow] = function(p1)
+		return p1.getShowInContextPersonalizedRecommendationsHomePeopleYouMayKnow()
+	end,
 	[SocialPersonalizationSurfaceKeysModule.Friends_AddFriends_Search] = function(p1)
 		return p1.getShowInContextPersonalizedRecommendationsFriendsAddFriendsSearch()
 	end,

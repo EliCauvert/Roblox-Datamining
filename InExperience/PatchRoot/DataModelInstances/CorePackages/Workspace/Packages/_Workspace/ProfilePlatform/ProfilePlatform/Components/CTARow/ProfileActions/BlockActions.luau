@@ -11,16 +11,23 @@ local _ = require(ProfilePlatform.Components.CTARow.Types)
 local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
 local ConstantsModule = require(ProfilePlatform.Common.Constants)
 local ProfileTypes = EnumsModule.ProfileTypes
+local FFlagProfileBlockingModalAboveSplitPaneModule = require(ProfilePlatform.Flags.FFlagProfileBlockingModalAboveSplitPane)
+local SplitPaneModule = if FFlagProfileBlockingModalAboveSplitPaneModule then require(Parent.SplitPane) else nil
 local USERBLOCKINGERRORS = ConstantsModule.USER_BLOCKING_ERRORS
+
+local function _()
+	-- upvalues: SplitPaneModule (copy)
+	return SplitPaneModule.SplitPaneVariant.getProfileRoutePresentation(SplitPaneModule.SplitPaneStore.getStore().getSupportPaneModeIfActive(false)).rendersAboveSplitPane
+end
 
 return {
 	[EnumsModule.ProfileActions.Block] = function(p1)
-		-- upvalues: EnumsModule (copy), ProfileTypes (copy), EventNamesModule (copy), AppPage (copy), SetCurrentToastMessageFunction (copy), Images (copy), RefreshProfilePlatformActionInfoModule (copy)
+		-- upvalues: EnumsModule (copy), ProfileTypes (copy), EventNamesModule (copy), AppPage (copy), SetCurrentToastMessageFunction (copy), Images (copy), RefreshProfilePlatformActionInfoModule (copy), FFlagProfileBlockingModalAboveSplitPaneModule (copy), SplitPaneModule (copy)
 		return {
 			text = p1.localized[EnumsModule.ProfileActions.Block],
 			onActivated = {
 				[ProfileTypes.User] = function()
-					-- upvalues: p1 (copy), EventNamesModule (upval), AppPage (upval), SetCurrentToastMessageFunction (upval), Images (upval), RefreshProfilePlatformActionInfoModule (upval)
+					-- upvalues: p1 (copy), EventNamesModule (upval), AppPage (upval), SetCurrentToastMessageFunction (upval), Images (upval), RefreshProfilePlatformActionInfoModule (upval), FFlagProfileBlockingModalAboveSplitPaneModule (upval), SplitPaneModule (upval)
 					p1.analytics.fireAnalyticsEvent(EventNamesModule.ContextualMenuButtonBlock, { buttonSurface = p1.buttonSurface })
 					p1.navigation.push(AppPage.BlockingModal, {
 						navProps = {
@@ -33,7 +40,8 @@ return {
 									toastIcon = Images["icons/actions/block"]
 								}))
 								p1.dispatch(RefreshProfilePlatformActionInfoModule(p1.profileId, p1.actionsComponentRequest))
-							end
+							end,
+							presentInOverlay = if FFlagProfileBlockingModalAboveSplitPaneModule then SplitPaneModule.SplitPaneVariant.getProfileRoutePresentation(SplitPaneModule.SplitPaneStore.getStore().getSupportPaneModeIfActive(false)).rendersAboveSplitPane else nil
 						}
 					})
 				end

@@ -1,0 +1,1 @@
+﻿return { Ready = "Ready", Loading = "Loading", Error = "Error" }

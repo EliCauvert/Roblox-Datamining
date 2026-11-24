@@ -4,7 +4,6 @@ local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local ResponsiveModule = require(Parent.Responsive)
 local _ = require(Parent.SduiCompat)
-local FFlagSduiContentRowStateLayerModule = require(SduiSharedContent.Flags.FFlagSduiContentRowStateLayer)
 local FFlagSDUIContentRowSelectableModule = require(SduiSharedContent.Flags.FFlagSDUIContentRowSelectable)
 local FFlagSduiContentRowTrailingHover = require(Parent.SharedFlags).FFlagSduiContentRowTrailingHover
 local FFlagSduiContentRowTrailingHoverPointerOnlyModule = require(SduiSharedContent.Flags.FFlagSduiContentRowTrailingHoverPointerOnly)
@@ -14,7 +13,7 @@ local CursorType = FoundationModule.Enums.CursorType
 local UseCursorFunction = FoundationModule.Hooks.useCursor
 
 return ReactModule.memo(function(p1)
-	-- upvalues: FFlagSduiContentRowTrailingHover (copy), FFlagSduiContentRowTrailingHoverPointerOnlyModule (copy), ResponsiveModule (copy), ReactModule (copy), ControlState (copy), FFlagSDUIContentRowSelectableModule (copy), UseCursorFunction (copy), CursorType (copy), View (copy), FFlagSduiContentRowStateLayerModule (copy), FoundationModule (copy)
+	-- upvalues: FFlagSduiContentRowTrailingHover (copy), FFlagSduiContentRowTrailingHoverPointerOnlyModule (copy), ResponsiveModule (copy), ReactModule (copy), ControlState (copy), FFlagSDUIContentRowSelectableModule (copy), UseCursorFunction (copy), CursorType (copy), View (copy), FoundationModule (copy)
 	local UseResult = nil
 	local Trailing = nil
 	
@@ -43,7 +42,7 @@ return ReactModule.memo(function(p1)
 			SelectionImageObject = if IsSelectable then UseCursorResult else nil
 		},
 		stateLayer = {
-			affordance = FFlagSduiContentRowStateLayerModule and p1.stateLayerAffordance or FoundationModule.Enums.StateLayerAffordance.None
+			affordance = p1.stateLayerAffordance or FoundationModule.Enums.StateLayerAffordance.None
 		},
 		testId = p1.testId
 	}, {

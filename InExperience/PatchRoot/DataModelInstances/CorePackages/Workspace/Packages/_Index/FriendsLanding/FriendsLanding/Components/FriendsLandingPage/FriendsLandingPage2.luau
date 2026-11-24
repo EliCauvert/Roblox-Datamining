@@ -70,9 +70,14 @@ local FStringCanAccessTrustedContactsAmpNameSpace = require(Parent.SharedFlags).
 local FFlagTrustedFriendCandidatesSection = require(Parent.SharedFlags).FFlagTrustedFriendCandidatesSection
 local FFlagTrustedFriendCandidatesSectionIxpEnabledModule = require(FriendsLanding.Flags.FFlagTrustedFriendCandidatesSectionIxpEnabled)
 local FFlagFriendsLandingRefreshKeepsFilter = require(Parent.SharedFlags).FFlagFriendsLandingRefreshKeepsFilter
+local FFlagFriendsDeepLinkScrollToCandidates = require(Parent.SharedFlags).FFlagFriendsDeepLinkScrollToCandidates
+local PageSectionsModule = require(FriendsLanding.Friends.pageSections)
+local UseScrollToTargetOnceFunction = require(Parent.RobloxAppHooks).useScrollToTargetOnce
+local ResponsiveModule = require(Parent.Responsive)
+local config = { dampingRatio = 1, frequency = 2 }
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), FriendsLandingContextModule (copy), FriendsLandingAnalyticsModule (copy), UseNavigationFunction (copy), UseDesignTokensFunction (copy), UseUiModeInfoFunction (copy), FFlagFixScalingOnFriendsLandingModule (copy), UseTokensFunction (copy), UseFocusGuiObjectFunction (copy), GetPageMarginFunction (copy), UseScreenSizeFunction (copy), UiMode (copy), FocusNavigationUtilsModule (copy), InputHandlersModule (copy), AppPage (copy), ReactFocusNavigationModule (copy), FocusNavigationEventNameEnum (copy), UseTextSizeOffsetFunction (copy), FFlagConnectionManagementChips (copy), AmpApiProvider (copy), FStringIsUserInTcEligibleCountryAmpFeature (copy), FStringCanAccessTrustedContactsAmpNameSpace (copy), AccessResponseEnum (copy), FFlagFriendsPageAlwaysOpenPPV (copy), ConvertUserPresenceTypeToStringFunction (copy), EnumScreensModule (copy), ButtonClickEventsModule (copy), ConstantsModule (copy), FriendTileModule (copy), DependencyArrayFunction (copy), OnFewestInteractionsSelection (copy), FFlagLogFriendsFilterPillTypeModule (copy), FFlagTrustedFriendCandidatesSection (copy), FFlagTrustedFriendCandidatesSectionIxpEnabledModule (copy), FilterStatesModule (copy), TrustedFriendCandidatesHostModule (copy), FFlagFriendsLandingRefreshKeepsFilter (copy), AppCommonLibModule (copy), FFlagCreateConnectionsHub (copy), GridMetrics (copy), UseAnimatedScrollToSelectionFunction (copy), FFlagExtendScrollingFramesBySafeInsets (copy), UseSignalStateFunction (copy), DisplayModule (copy), IsFromConnectionsHubModule (copy), FFlagAppThemeHalloween2026FriendsBackground (copy), UseThemeBackgroundFunction (copy), FFlagFixFriendsListGapInConnectionsHubModule (copy), UseFocusOnMountFunction (copy), FFlagFriendsPageUserListEnabled (copy), RoactModule (copy), HorizontalPageMargin (copy), RefreshScrollingFrame (copy), FilterByButtonModule (copy), EmptyResultsViewModule (copy), NoFriendsViewModule (copy), UserListLayoutAdaptor (copy), LayoutMode (copy), FFlagFriendsPageUserListCtaEnabledModule (copy), FriendsLandingCtaConfigModule (ref), CollectionGrid (copy), Button (copy), ButtonType (copy)
+	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), FriendsLandingContextModule (copy), FriendsLandingAnalyticsModule (copy), UseNavigationFunction (copy), UseDesignTokensFunction (copy), UseUiModeInfoFunction (copy), FFlagFixScalingOnFriendsLandingModule (copy), UseTokensFunction (copy), UseFocusGuiObjectFunction (copy), GetPageMarginFunction (copy), UseScreenSizeFunction (copy), UiMode (copy), FocusNavigationUtilsModule (copy), InputHandlersModule (copy), AppPage (copy), ReactFocusNavigationModule (copy), FocusNavigationEventNameEnum (copy), UseTextSizeOffsetFunction (copy), FFlagConnectionManagementChips (copy), AmpApiProvider (copy), FStringIsUserInTcEligibleCountryAmpFeature (copy), FStringCanAccessTrustedContactsAmpNameSpace (copy), AccessResponseEnum (copy), FFlagFriendsPageAlwaysOpenPPV (copy), ConvertUserPresenceTypeToStringFunction (copy), EnumScreensModule (copy), ButtonClickEventsModule (copy), ConstantsModule (copy), FriendTileModule (copy), DependencyArrayFunction (copy), OnFewestInteractionsSelection (copy), FFlagLogFriendsFilterPillTypeModule (copy), FFlagTrustedFriendCandidatesSection (copy), FFlagTrustedFriendCandidatesSectionIxpEnabledModule (copy), FilterStatesModule (copy), TrustedFriendCandidatesHostModule (copy), FFlagFriendsLandingRefreshKeepsFilter (copy), AppCommonLibModule (copy), FFlagCreateConnectionsHub (copy), GridMetrics (copy), FFlagFriendsDeepLinkScrollToCandidates (copy), UseAnimatedScrollToSelectionFunction (copy), config (copy), ResponsiveModule (copy), UseScrollToTargetOnceFunction (copy), FFlagExtendScrollingFramesBySafeInsets (copy), UseSignalStateFunction (copy), DisplayModule (copy), IsFromConnectionsHubModule (copy), FFlagAppThemeHalloween2026FriendsBackground (copy), UseThemeBackgroundFunction (copy), FFlagFixFriendsListGapInConnectionsHubModule (copy), UseFocusOnMountFunction (copy), FFlagFriendsPageUserListEnabled (copy), RoactModule (copy), HorizontalPageMargin (copy), RefreshScrollingFrame (copy), FilterByButtonModule (copy), EmptyResultsViewModule (copy), NoFriendsViewModule (copy), UserListLayoutAdaptor (copy), LayoutMode (copy), FFlagFriendsPageUserListCtaEnabledModule (copy), FriendsLandingCtaConfigModule (ref), CollectionGrid (copy), PageSectionsModule (copy), Button (copy), ButtonType (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		pageError = "CommonUI.Messages.Response.PageError",
 		successText = "Feature.Friends.Action.FriendRemoved",
@@ -272,10 +277,28 @@ return function(p1)
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2(p2.X)
 	end, {})
-	local UseRefResult = ReactModule.useRef({})
-	local UseAnimatedScrollToSelectionResult, UseAnimatedScrollToSelectionResult2 = UseAnimatedScrollToSelectionFunction(Enum.ScrollingDirection.Y, 0, UseDesignTokensResult.Size.Size_2000, UseDesignTokensResult.LuaApps.App.Page.ScrollAnimationConfig)
+	local UseRefResult = if FFlagFriendsDeepLinkScrollToCandidates then ReactModule.useRef(nil) else ReactModule.useRef({})
+	local UseAnimatedScrollToSelectionResult, UseAnimatedScrollToSelectionResult2, UseAnimatedScrollToSelectionResult3 = UseAnimatedScrollToSelectionFunction(Enum.ScrollingDirection.Y, 0, UseDesignTokensResult.Size.Size_2000, UseDesignTokensResult.LuaApps.App.Page.ScrollAnimationConfig)
+	local UseRefResult1 = if FFlagFriendsDeepLinkScrollToCandidates then ReactModule.useRef(nil) else nil
+	
+	if FFlagFriendsDeepLinkScrollToCandidates then
+		local IsUsePreferredInputResultMatch = ResponsiveModule.usePreferredInput() == ResponsiveModule.Input.Directional
+		UseScrollToTargetOnceFunction({
+			enabled = UseContextResult.initialSection ~= nil and not IsUsePreferredInputResultMatch,
+			ready = p1.initialFriendsLoading ~= true,
+			scrollingFrameRef = UseRefResult,
+			targetRef = UseRefResult1,
+			scrollTo = ReactModule.useCallback(function(p2, p3)
+				-- upvalues: UseAnimatedScrollToSelectionResult3 (copy), config (upval)
+				if UseAnimatedScrollToSelectionResult3 then
+					UseAnimatedScrollToSelectionResult3(p2, p3, config)
+				end
+			end, { UseAnimatedScrollToSelectionResult3 })
+		})
+	end
+	local v1: number = if IsUiModeMatch then if IsTotalFriendCountMatch or IsTotalFriendCountAbove or IsCursor then 8 else 1000 else 8
 	local UseSignalStateResult = if FFlagExtendScrollingFramesBySafeInsets then UseSignalStateFunction(DisplayModule.GetDisplayStore().getDeviceSafePadding) else nil
-	local YOffset = (if IsUiModeMatch then if IsTotalFriendCountMatch or IsTotalFriendCountAbove or IsCursor then 8 else 1000 else 8) + (if FFlagExtendScrollingFramesBySafeInsets then UseSignalStateResult.bottom else 0)
+	local YOffset = v1 + (if FFlagExtendScrollingFramesBySafeInsets then UseSignalStateResult.bottom else 0)
 	local IsFromConnectionsHubModule1 = FFlagCreateConnectionsHub and IsFromConnectionsHubModule(UseNavigationResult)
 	local HasUseThemeBackgroundResult: boolean = if FFlagAppThemeHalloween2026FriendsBackground then UseThemeBackgroundFunction() ~= nil else false
 	local YOffset1 = -(if FFlagFixFriendsListGapInConnectionsHubModule then 0 else ConstantsModule.TOP_BAR_HEIGHT) + (if FFlagExtendScrollingFramesBySafeInsets then UseSignalStateResult.bottom else 0)
@@ -338,7 +361,7 @@ return function(p1)
 					maxWidth = if FFlagConnectionManagementChips then 640 else nil,
 					canAccessTrustedContacts = if FFlagConnectionManagementChips then Enabled else nil
 				}),
-				NoResultsView = if IsTotalFriendCountAbove then ReactModule.createElement(EmptyResultsViewModule, { layoutOrder = 6 }) else nil,
+				NoResultsView = if IsTotalFriendCountAbove and (not FFlagTrustedFriendCandidatesSection or not UseMemoResult) then ReactModule.createElement(EmptyResultsViewModule, { layoutOrder = 6 }) else nil,
 				NoFriendsView = if IsTotalFriendCountMatch then ReactModule.createElement(NoFriendsViewModule, {
 					layoutOrder = 6,
 					pageLoadingTimeReport = PageLoadingTimeReport,
@@ -367,7 +390,15 @@ return function(p1)
 					verticalPadding = VerticalPadding,
 					onContainerSizeChanged = UseResult9
 				}),
-				TrustedFriendCandidatesSection = if FFlagTrustedFriendCandidatesSection and UseMemoResult then ReactModule.createElement(TrustedFriendCandidatesHostModule.TrustedFriendCandidatesHost, { layoutOrder = 7, refreshSignal = UseMemoResult1 }) else nil,
+				TrustedFriendCandidatesSection = if FFlagTrustedFriendCandidatesSection and UseMemoResult then if FFlagFriendsDeepLinkScrollToCandidates then ReactModule.createElement("Frame", {
+					BackgroundTransparency = 1,
+					LayoutOrder = 7,
+					Size = UDim2.fromScale(1, 0),
+					AutomaticSize = Enum.AutomaticSize.Y,
+					ref = if UseContextResult.initialSection == PageSectionsModule.TrustedFriendCandidates then UseRefResult1 else nil
+				}, {
+					Content = ReactModule.createElement(TrustedFriendCandidatesHostModule.TrustedFriendCandidatesHost, { layoutOrder = 1, refreshSignal = UseMemoResult1 })
+				}) else ReactModule.createElement(TrustedFriendCandidatesHostModule.TrustedFriendCandidatesHost, { layoutOrder = 7, refreshSignal = UseMemoResult1 }) else nil,
 				showMoreFrame = if FFlagFriendsPageUserListEnabled then nil elseif NoFilter then ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 7,

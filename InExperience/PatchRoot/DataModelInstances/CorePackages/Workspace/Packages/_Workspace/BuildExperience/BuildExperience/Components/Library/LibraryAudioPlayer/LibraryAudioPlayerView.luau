@@ -16,11 +16,13 @@ return function(p1)
 		artist = p1.artist,
 		isPlaying = p1.isPlaying,
 		elapsed = p1.elapsed,
+		progress = p1.progress,
 		duration = p1.duration,
 		onTogglePlayback = p1.onTogglePlayback,
 		onSeek = p1.onSeek,
 		onSeekStarted = p1.onSeekStarted,
-		onSeekEnded = p1.onSeekEnded
+		onSeekEnded = p1.onSeekEnded,
+		scrubWithPointer = p1.scrubWithPointer
 	}) else ReactModule.createElement(FoundationModule.Skeleton, {
 		testId = "Library.Preview.SoundLoading",
 		Size = UDim2.fromOffset(UseScaledValueResult, UseScaledValueResult),

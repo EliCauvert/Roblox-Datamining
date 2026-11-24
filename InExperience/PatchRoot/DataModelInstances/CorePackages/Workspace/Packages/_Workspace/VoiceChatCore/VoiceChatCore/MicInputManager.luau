@@ -17,6 +17,9 @@ local GetFFlagMicConsumerRegistryModule = require(Flags.GetFFlagMicConsumerRegis
 local FFlagMicSyncVoiceDeviceAcrossRejoinModule = require(Flags.FFlagMicSyncVoiceDeviceAcrossRejoin)
 local FFlagMicPermissionCheckOnConsumerUnmuteModule = require(Flags.FFlagMicPermissionCheckOnConsumerUnmute)
 local FFlagMicRegistryIgnoreDefaultVoiceDeviceModule = require(Flags.FFlagMicRegistryIgnoreDefaultVoiceDevice)
+local FFlagMicPrivacyToastWithVoiceChatModule = require(Flags.FFlagMicPrivacyToastWithVoiceChat)
+local FFlagAgeCheckJoinIntentUnmutes = require(Parent.SharedFlags).FFlagAgeCheckJoinIntentUnmutes
+local FFlagHideMicWhileJoinVoiceShown = require(Parent.SharedFlags).FFlagHideMicWhileJoinVoiceShown
 local PERMISSIONSTATE = ConstantsModule.PERMISSION_STATE
 local MINVOICECHATAPIVERSIONLOCALMICACTIVITY = ConstantsModule.MIN_VOICE_CHAT_API_VERSION_LOCAL_MIC_ACTIVITY
 local MicInputManager = {}
@@ -69,7 +72,7 @@ local _ = function(AudioDeviceInput): boolean
 end
 
 function MicInputManager:SetMicActive(p1, Context)
-	-- upvalues: GetFFlagJoinWithoutMicPermissionsFunction (copy), PERMISSIONSTATE (copy), PermissionsProtocol (copy), VoiceChatService (copy), GetFFlagMicConsumerRegistryModule (copy), Players (copy)
+	-- upvalues: GetFFlagJoinWithoutMicPermissionsFunction (copy), PERMISSIONSTATE (copy), PermissionsProtocol (copy), VoiceChatService (copy), GetFFlagMicConsumerRegistryModule (copy), Players (copy), FFlagMicPrivacyToastWithVoiceChatModule (copy)
 	if self.localMuted == nil then
 		self.log:trace("SetMicActive context: {} - Voice not connected yet", Context)
 		
@@ -141,6 +144,10 @@ function MicInputManager:SetMicActive(p1, Context)
 	else
 		self.talkingChanged:Fire(self.isTalking)
 		self.callbacks.emitOnShowDataConsentToast()
+		
+		if FFlagMicPrivacyToastWithVoiceChatModule and GetFFlagMicConsumerRegistryModule() then
+			self:_showPrivacyToastIfNonVoiceMicLive()
+		end
 	end
 	if Context then
 		self.callbacks.reportVoiceMuteSelf(self.callbacks.getJoinWithVoiceMuteData({ context = Context, muted = self.localMuted }))
@@ -248,8 +255,11 @@ function MicInputManager:SetupEarlyAudioDeviceGuard()
 	end
 end
 
-function MicInputManager:SetAndSyncActive(p3, Active)
-	-- upvalues: Players (copy)
+function MicInputManager:SetAndSyncActive(p3, Active: boolean)
+	-- upvalues: FFlagHideMicWhileJoinVoiceShown (copy), GetFFlagMicConsumerRegistryModule (copy), Players (copy)
+	if FFlagHideMicWhileJoinVoiceShown and Active and GetFFlagMicConsumerRegistryModule() and not self._micIndicatorReady and p3.Player == Players.LocalPlayer then
+		Active = false
+	end
 	p3.Active = Active
 	local SendMuteEvent = self.callbacks.getSendMuteEvent()
 	
@@ -347,7 +357,7 @@ function MicInputManager:SetAdMuteBlocked(IsPlayerWatchingAd)
 end
 
 function MicInputManager:RegisterConsumer(p3): boolean
-	-- upvalues: GetFFlagMicConsumerRegistryModule (copy), PERMISSIONSTATE (copy)
+	-- upvalues: GetFFlagMicConsumerRegistryModule (copy), PERMISSIONSTATE (copy), FFlagMicPrivacyToastWithVoiceChatModule (copy)
 	if not GetFFlagMicConsumerRegistryModule() then
 		return false
 	end
@@ -394,6 +404,9 @@ function MicInputManager:RegisterConsumer(p3): boolean
 				p3.device.Active = MicIndicatorReady
 			end
 		end
+		if FFlagMicPrivacyToastWithVoiceChatModule then
+			self:_showPrivacyToastIfNonVoiceMicLive()
+		end
 		self.log:trace("Consumer registered: {} type={} count={}", p3.id, p3.consumerType, self._consumerCount)
 		self:_assertDeviceStateConsistency()
 		
@@ -402,7 +415,7 @@ function MicInputManager:RegisterConsumer(p3): boolean
 end
 
 function MicInputManager:UnregisterConsumer(p3, p4)
-	-- upvalues: GetFFlagMicConsumerRegistryModule (copy)
+	-- upvalues: GetFFlagMicConsumerRegistryModule (copy), FFlagHideMicWhileJoinVoiceShown (copy)
 	if not GetFFlagMicConsumerRegistryModule() then return end
 	local Consumer = self._consumers[p3]
 	
@@ -424,6 +437,10 @@ function MicInputManager:UnregisterConsumer(p3, p4)
 		self.localMuted = nil
 		self._micIndicatorReady = false
 		self:_stopLevelDetectionTask()
+		
+		if FFlagHideMicWhileJoinVoiceShown then
+			self:_setLocalPlayerAudioDevicesActive(false)
+		end
 	end
 	if not p4 then
 		self.hasConsumersChanged:Fire(self._consumerCount)
@@ -431,20 +448,44 @@ function MicInputManager:UnregisterConsumer(p3, p4)
 	self.log:trace("Consumer unregistered: {} count={}", p3, self._consumerCount)
 end
 
-function MicInputManager:SetMicIndicatorReady(_micIndicatorReady)
-	-- upvalues: GetFFlagMicConsumerRegistryModule (copy), FFlagMicSyncVoiceDeviceAcrossRejoinModule (copy), VoiceChatService (copy)
-	if not GetFFlagMicConsumerRegistryModule() or self._micIndicatorReady == _micIndicatorReady then return end
-	self._micIndicatorReady = _micIndicatorReady
-	local IsNotLocalMuted: boolean = _micIndicatorReady and self.localMuted == false
+function MicInputManager:_showPrivacyToastIfNonVoiceMicLive()
+	if self._hasShownPrivacyToast or not self.callbacks.emitOnMicFirstUnmutePrivacy then return end
+	if self.localMuted ~= false or not self._micIndicatorReady then return end
 	for _, consumer in self._consumers do
-		if consumer.device and consumer.device.Active ~= IsNotLocalMuted then
-			consumer.device.Active = IsNotLocalMuted
+		if consumer.consumerType ~= "VoiceChat" then
+			self._hasShownPrivacyToast = true
+			self.callbacks.emitOnMicFirstUnmutePrivacy()
+			break
 		end
 	end
-	if FFlagMicSyncVoiceDeviceAcrossRejoinModule and VoiceChatService.UseNewAudioApi and self._activeConsumerType == "VoiceChat" then
-		self:_syncLocalAudioDeviceActiveToServer()
+end
+
+function MicInputManager:SetMicIndicatorReady(_micIndicatorReady)
+	-- upvalues: GetFFlagMicConsumerRegistryModule (copy), FFlagHideMicWhileJoinVoiceShown (copy), FFlagMicPrivacyToastWithVoiceChatModule (copy), FFlagMicSyncVoiceDeviceAcrossRejoinModule (copy), VoiceChatService (copy)
+	if not GetFFlagMicConsumerRegistryModule() then return end
+	if self._micIndicatorReady ~= _micIndicatorReady then
+		self._micIndicatorReady = _micIndicatorReady
+		local IsNotLocalMuted: boolean = _micIndicatorReady and self.localMuted == false
+		for _, consumer in self._consumers do
+			if consumer.device and consumer.device.Active ~= IsNotLocalMuted then
+				consumer.device.Active = IsNotLocalMuted
+			end
+		end
+		if FFlagMicPrivacyToastWithVoiceChatModule and IsNotLocalMuted then
+			self:_showPrivacyToastIfNonVoiceMicLive()
+		end
+		if FFlagHideMicWhileJoinVoiceShown and not _micIndicatorReady then
+			self:_setLocalPlayerAudioDevicesActive(false)
+		end
+		if FFlagMicSyncVoiceDeviceAcrossRejoinModule and VoiceChatService.UseNewAudioApi and self._activeConsumerType == "VoiceChat" then
+			self:_syncLocalAudioDeviceActiveToServer()
+		end
+		self:_assertDeviceStateConsistency()
+		
+		return
+	elseif FFlagHideMicWhileJoinVoiceShown and not _micIndicatorReady then
+		self:_setLocalPlayerAudioDevicesActive(false)
 	end
-	self:_assertDeviceStateConsistency()
 end
 
 function MicInputManager.GetConsumerCount(p3)
@@ -677,7 +718,7 @@ function MicInputManager:SetupDeveloperDeviceTracking()
 end
 
 function MicInputManager:SetMicActiveForAllConsumers(p3, p4)
-	-- upvalues: GetFFlagMicConsumerRegistryModule (copy), FFlagMicPermissionCheckOnConsumerUnmuteModule (copy), GetFFlagJoinWithoutMicPermissionsFunction (copy), PERMISSIONSTATE (copy), PermissionsProtocol (copy)
+	-- upvalues: GetFFlagMicConsumerRegistryModule (copy), FFlagMicPermissionCheckOnConsumerUnmuteModule (copy), GetFFlagJoinWithoutMicPermissionsFunction (copy), PERMISSIONSTATE (copy), PermissionsProtocol (copy), FFlagAgeCheckJoinIntentUnmutes (copy)
 	if not GetFFlagMicConsumerRegistryModule() then return end
 	if p3 then
 		if self.isPlayerWatchingAd then
@@ -729,7 +770,9 @@ function MicInputManager:SetMicActiveForAllConsumers(p3, p4)
 				break
 			end
 		end
-		if not Flag and self.callbacks.emitOnMicFirstUnmutePrivacy then
+		local NoFFlagAgeCheckJoinIntentUnmutes: boolean = not FFlagAgeCheckJoinIntentUnmutes or self._consumerCount > 0
+		
+		if not Flag and NoFFlagAgeCheckJoinIntentUnmutes and self.callbacks.emitOnMicFirstUnmutePrivacy then
 			self._hasShownPrivacyToast = true
 			self.callbacks.emitOnMicFirstUnmutePrivacy()
 		end

@@ -10,6 +10,7 @@ local ControlState = FoundationModule.Enums.ControlState
 local View = FoundationModule.View
 local UsePreferencesFunction = FoundationModule.Hooks.usePreferences
 local UseTokensFunction = FoundationModule.Hooks.useTokens
+local ReactionPickerShiftHighlight = game:DefineFastFlag("ReactionPickerShiftHighlight", false)
 local _Vector2 = Vector2.new(0.5, 0.5)
 local config = { frequency = 4, dampingRatio = 0.65 }
 local config1 = { frequency = 4, dampingRatio = 1 }
@@ -19,7 +20,7 @@ local function _(Frame: Frame)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseTokensFunction (copy), UsePreferencesFunction (copy), ReactModule (copy), ControlState (copy), ReactOtterModule (copy), config1 (copy), config (copy), View (copy), _Vector2 (copy), ReactionModule (copy), ReactionSizeModule (copy)
+	-- upvalues: UseTokensFunction (copy), UsePreferencesFunction (copy), ReactModule (copy), ControlState (copy), ReactOtterModule (copy), config1 (copy), config (copy), View (copy), ReactionPickerShiftHighlight (copy), _Vector2 (copy), ReactionModule (copy), ReactionSizeModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local ReducedMotion = UsePreferencesFunction().reducedMotion
 	local UseMemoResult = ReactModule.useMemo(function()
@@ -84,7 +85,7 @@ return ReactModule.memo(function(p1)
 	return ReactModule.createElement(View, {
 		tag = {
 			["size-1000-1000 radius-circle"] = true,
-			["bg-surface-300"] = p1.isActive == true
+			[if ReactionPickerShiftHighlight then "bg-shift-300" else "bg-surface-300"] = p1.isActive == true
 		},
 		onActivated = ReactModule.useCallback(function(Frame: Frame)
 			-- upvalues: OnActivatedFunction (copy)

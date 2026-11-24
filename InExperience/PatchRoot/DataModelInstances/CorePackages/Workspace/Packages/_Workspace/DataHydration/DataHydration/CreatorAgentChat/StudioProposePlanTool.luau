@@ -28,30 +28,44 @@ local function getRawInputContent(RawInput)
 	end
 end
 
-local _ = function(p1): boolean
-	-- upvalues: config (copy)
-	local Kind: string = p1.kind
-	
-	if typeof(Kind) ~= "string" or config[string.lower(Kind)] ~= true then
-		local Title: string = p1.title
-		
-		if typeof(Title) ~= "string" or config[string.lower(Title)] ~= true then
-			local RawInput = p1.rawInput
+local function extractPlanFromToolCall(ToolCall)
+	-- upvalues: config (copy), getRawInputContent (copy)
+	local Kind: string = ToolCall.kind
+	local Flag = nil
+	repeat
+		if typeof(Kind) ~= "string" or config[string.lower(Kind)] ~= true then
+			local Title: string = ToolCall.title
 			
-			if typeof(RawInput) ~= "table" then
-				return false
+			if typeof(Title) ~= "string" or config[string.lower(Title)] ~= true then
+				local RawInput = ToolCall.rawInput
+				
+				if typeof(RawInput) == "table" then
+					local Name: string = RawInput.name
+					Flag = typeof(Name) == "string" and config[string.lower(Name)] == true
+					
+					if Flag then break end
+					local ToolName: string = RawInput.toolName
+					Flag = typeof(ToolName) == "string" and config[string.lower(ToolName)] == true
+					break
+				end
+				Flag = false
 			end
-			local Name: string = RawInput.name
-			local IsEntry: boolean = typeof(Name) == "string" and config[string.lower(Name)] == true
-			
-			if not IsEntry then
-				local ToolName: string = RawInput.toolName
-				IsEntry = typeof(ToolName) == "string" and config[string.lower(ToolName)] == true
-			end
-			return IsEntry
 		end
+		Flag = true
+		break
+	until true
+	if Flag then
+		local RawInputContent, RawInputContent2, RawInputContent3 = getRawInputContent(ToolCall.rawInput)
+		
+		return if RawInputContent == nil then nil else {
+			title = RawInputContent2 or "Proposed Plan",
+			isDefaultTitle = RawInputContent2 == nil or nil,
+			textContent = RawInputContent,
+			summary = RawInputContent3
+		}
+	else
+		return nil
 	end
-	return true
 end
 
 local _ = function(p1)
@@ -117,6 +131,7 @@ end
 
 return {
 	TOOL_NAME = "present_plan",
+	DEFAULT_PLAN_TITLE = "Proposed Plan",
 	LOCAL_TOOL_DEFINITION = {
 		name = "present_plan",
 		inputSchema = {
@@ -129,54 +144,42 @@ return {
 			}
 		}
 	},
-	extractPlanFromToolCall = function(p2)
-		-- upvalues: config (copy), getRawInputContent (copy)
+	toolCallLooksLikeProposePlan = function(p2): boolean
+		-- upvalues: config (copy)
 		local Kind: string = p2.kind
-		local Flag = nil
-		repeat
-			if typeof(Kind) ~= "string" or config[string.lower(Kind)] ~= true then
-				local Title: string = p2.title
-				
-				if typeof(Title) ~= "string" or config[string.lower(Title)] ~= true then
-					local RawInput = p2.rawInput
-					
-					if typeof(RawInput) == "table" then
-						local Name: string = RawInput.name
-						Flag = typeof(Name) == "string" and config[string.lower(Name)] == true
-						
-						if Flag then break end
-						local ToolName: string = RawInput.toolName
-						Flag = typeof(ToolName) == "string" and config[string.lower(ToolName)] == true
-						break
-					end
-					Flag = false
-				end
-			end
-			Flag = true
-			break
-		until true
-		if Flag then
-			local RawInputContent, RawInputContent2, RawInputContent3 = getRawInputContent(p2.rawInput)
+		
+		if typeof(Kind) ~= "string" or config[string.lower(Kind)] ~= true then
+			local Title: string = p2.title
 			
-			return if RawInputContent == nil then nil else {
-				title = RawInputContent2 or "Proposed Plan",
-				textContent = RawInputContent,
-				summary = RawInputContent3
-			}
-		else
-			return nil
+			if typeof(Title) ~= "string" or config[string.lower(Title)] ~= true then
+				local RawInput = p2.rawInput
+				
+				if typeof(RawInput) ~= "table" then
+					return false
+				end
+				local Name: string = RawInput.name
+				local IsEntry: boolean = typeof(Name) == "string" and config[string.lower(Name)] == true
+				
+				if not IsEntry then
+					local ToolName: string = RawInput.toolName
+					IsEntry = typeof(ToolName) == "string" and config[string.lower(ToolName)] == true
+				end
+				return IsEntry
+			end
 		end
+		return true
 	end,
+	extractPlanFromToolCall = extractPlanFromToolCall,
 	findPlanInTurnState = function(p2, p3)
-		-- upvalues: getPersistedToolResultText (copy), config (copy), getRawInputContent (copy)
+		-- upvalues: getPersistedToolResultText (copy), extractPlanFromToolCall (copy)
 		local List = {}
 		
 		for toolCall in p2.toolCalls do
 			table.insert(List, toolCall)
 		end
 		table.sort(List)
-		local v1 = nil
 		local ToolCall = nil
+		local ExtractPlanFromToolCallResult = nil
 		
 		for _, value in List do
 			local IsCompleted = p3 and p3[value]
@@ -185,51 +188,20 @@ return {
 				ToolCall = p2.toolCalls[value]
 				IsCompleted = ToolCall.status == "completed" or ToolCall.status == "failed" or ToolCall.status == "cancelled" or getPersistedToolResultText(ToolCall) ~= nil
 			end
-			if not IsCompleted then
-				local Kind: string = ToolCall.kind
-				local IsEntry: boolean = typeof(Kind) == "string" and config[string.lower(Kind)] == true
-				
-				if not IsEntry then
-					local Title: string = ToolCall.title
-					IsEntry = typeof(Title) == "string" and config[string.lower(Title)] == true
-				end
-				local Flag = nil
-				if IsEntry then
-					Flag = true
-				else
-					local RawInput = ToolCall.rawInput
-					
-					if typeof(RawInput) == "table" then
-						local Name: string = RawInput.name
-						Flag = typeof(Name) == "string" and config[string.lower(Name)] == true
-						
-						if not Flag then
-							local ToolName: string = RawInput.toolName
-							Flag = typeof(ToolName) == "string" and config[string.lower(ToolName)] == true
-						end
-					else
-						Flag = false
-					end
-				end
-				if Flag then
-					local RawInputContent, RawInputContent2, RawInputContent3 = getRawInputContent(ToolCall.rawInput)
-					v1 = if RawInputContent == nil then nil else {
-						title = RawInputContent2 or "Proposed Plan",
-						textContent = RawInputContent,
-						summary = RawInputContent3
-					}
-				else
-					v1 = nil
-				end
-				if v1 ~= nil then
-					return v1, value, ToolCall.rawInput, ToolCall.turnId, ToolCall.referenceId
-				end
+			local NoExtractPlanFromToolCallResult: boolean = IsCompleted
+			
+			if not NoExtractPlanFromToolCallResult then
+				ExtractPlanFromToolCallResult = extractPlanFromToolCall(ToolCall)
+				NoExtractPlanFromToolCallResult = ExtractPlanFromToolCallResult == nil
+			end
+			if not NoExtractPlanFromToolCallResult then
+				return ExtractPlanFromToolCallResult, value, ToolCall.rawInput, ToolCall.turnId, ToolCall.referenceId
 			end
 		end
 		return nil, nil, nil, nil, nil
 	end,
 	getCompletedPlansFromTurnState = function(p4)
-		-- upvalues: config (copy), getRawInputContent (copy), getPersistedToolResultText (copy), HttpService (copy), getToolCallOrder (copy)
+		-- upvalues: extractPlanFromToolCall (copy), getPersistedToolResultText (copy), HttpService (copy), getToolCallOrder (copy)
 		local List = {}
 		local List1 = {}
 		
@@ -240,42 +212,7 @@ return {
 		
 		for _, ToolCallId in List1 do
 			local ToolCall = p4.toolCalls[ToolCallId]
-			local Kind: string = ToolCall.kind
-			local IsEntry: boolean = typeof(Kind) == "string" and config[string.lower(Kind)] == true
-			
-			if not IsEntry then
-				local Title: string = ToolCall.title
-				IsEntry = typeof(Title) == "string" and config[string.lower(Title)] == true
-			end
-			local Flag = nil
-			if IsEntry then
-				Flag = true
-			else
-				local RawInput = ToolCall.rawInput
-				
-				if typeof(RawInput) == "table" then
-					local Name: string = RawInput.name
-					Flag = typeof(Name) == "string" and config[string.lower(Name)] == true
-					
-					if not Flag then
-						local ToolName: string = RawInput.toolName
-						Flag = typeof(ToolName) == "string" and config[string.lower(ToolName)] == true
-					end
-				else
-					Flag = false
-				end
-			end
-			local v2 = nil
-			if Flag then
-				local RawInputContent, RawInputContent2, RawInputContent3 = getRawInputContent(ToolCall.rawInput)
-				v2 = if RawInputContent == nil then nil else {
-					title = RawInputContent2 or "Proposed Plan",
-					textContent = RawInputContent,
-					summary = RawInputContent3
-				}
-			else
-				v2 = nil
-			end
+			local ExtractPlanFromToolCallResult = extractPlanFromToolCall(ToolCall)
 			local PersistedToolResultText = getPersistedToolResultText(ToolCall)
 			local Result1 = nil
 			
@@ -285,11 +222,12 @@ return {
 				local Success, Result = pcall(HttpService.JSONDecode, HttpService, PersistedToolResultText)
 				Result1 = if Success and typeof(Result) == "table" and (typeof(Result.accepted) == "boolean" and (Result.feedbackText == nil or typeof(Result.feedbackText) == "string")) then Result else nil
 			end
-			if v2 ~= nil and Result1 ~= nil then
+			if ExtractPlanFromToolCallResult ~= nil and Result1 ~= nil then
 				table.insert(List, {
-					title = v2.title,
-					textContent = v2.textContent,
-					summary = v2.summary,
+					title = ExtractPlanFromToolCallResult.title,
+					isDefaultTitle = ExtractPlanFromToolCallResult.isDefaultTitle,
+					textContent = ExtractPlanFromToolCallResult.textContent,
+					summary = ExtractPlanFromToolCallResult.summary,
 					toolCallId = ToolCallId,
 					callOrder = getToolCallOrder(p4, ToolCallId),
 					isAccepted = Result1.accepted,

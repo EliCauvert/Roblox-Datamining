@@ -10,6 +10,7 @@ return function()
 		categoryInventoryStores = {},
 		sortAndFiltersStore = CreateSortAndFiltersStoreModule(),
 		thumbnailLatencyStores = {},
-		inventorySearchStore = if FFlagAXEnableInventorySearch then CreateInventorySearchStoreModule() else nil
+		inventorySearchStore = if FFlagAXEnableInventorySearch then CreateInventorySearchStoreModule() else nil,
+		searchInventoryStores = if FFlagAXEnableInventorySearch then {} else nil
 	}
 end

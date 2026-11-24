@@ -64,15 +64,15 @@ return {
 	roact = ReactModule,
 	reactRoblox = ReactRobloxModule,
 	mapStory = function(Callback)
-		-- upvalues: config (copy), ReactModule (copy), LocalizationProvider (copy), Localization (copy), StyleProviderWithDefaultTheme (copy), RoactRoduxModule (copy), createStore (copy), mockNavigation (copy), FoundationProvider (copy), DesignTokenProvider (copy)
+		-- upvalues: config (copy), ReactModule (copy), LocalizationProvider (copy), Localization (copy), FoundationProvider (copy), StyleProviderWithDefaultTheme (copy), RoactRoduxModule (copy), createStore (copy), mockNavigation (copy), DesignTokenProvider (copy)
 		return function(p1)
-			-- upvalues: config (upval), ReactModule (upval), LocalizationProvider (upval), Localization (upval), StyleProviderWithDefaultTheme (upval), RoactRoduxModule (upval), createStore (upval), mockNavigation (upval), FoundationProvider (upval), DesignTokenProvider (upval), Callback (copy)
+			-- upvalues: config (upval), ReactModule (upval), LocalizationProvider (upval), Localization (upval), FoundationProvider (upval), StyleProviderWithDefaultTheme (upval), RoactRoduxModule (upval), createStore (upval), mockNavigation (upval), DesignTokenProvider (upval), Callback (copy)
 			return ReactModule.createElement(LocalizationProvider, { localization = Localization }, {
-				StyleProvider = ReactModule.createElement(StyleProviderWithDefaultTheme, { withDarkTheme = true, withUiModeSupport = false }, {
-					ReactModule.createElement(RoactRoduxModule.StoreProvider, { store = createStore(nil) }, {
-						navigationProvider = mockNavigation(ReactModule.createElement(FoundationProvider, { colorMode = config[p1.theme] }, {
-							designTokenProvider = ReactModule.createElement(DesignTokenProvider, { tokenMappers = {} }, { Child = Callback(p1) })
-						}))
+				FoundationProvider = ReactModule.createElement(FoundationProvider, { colorMode = config[p1.theme] }, {
+					StyleProvider = ReactModule.createElement(StyleProviderWithDefaultTheme, { withDarkTheme = true, withUiModeSupport = false }, {
+						ReactModule.createElement(RoactRoduxModule.StoreProvider, { store = createStore(nil) }, {
+							navigationProvider = mockNavigation(ReactModule.createElement(DesignTokenProvider, { tokenMappers = {} }, { Child = Callback(p1) }))
+						})
 					})
 				})
 			})

@@ -2,6 +2,7 @@
 local Parent = BuildExperience.Parent
 local _ = require(BuildExperience.Components.ModelPicker.ModelPickerTypes)
 local FFlagBuildExperienceModelPickerModule = require(BuildExperience.Flags.FFlagBuildExperienceModelPicker)
+local FFlagBuildChatPasteAsAttachmentModule = require(BuildExperience.Flags.FFlagBuildChatPasteAsAttachment)
 local UseBuildModelSelectionModule = require(BuildExperience.Chat.useBuildModelSelection)
 local GetBuildModelSelectionStoreModule = require(BuildExperience.Stores.GetBuildModelSelectionStore)
 local GuiService = game:GetService("GuiService")
@@ -17,11 +18,14 @@ local UseChatPlaytestFooterModule = require(BuildExperience.Chat.useChatPlaytest
 local FFlagBuildExperienceMonetizationNativeUIModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
 local FFlagBuildExperienceDeveloperProductContextModule = require(BuildExperience.Flags.FFlagBuildExperienceDeveloperProductContext)
 local FFlagBuildRequestPromptChipsOnEditModule = require(BuildExperience.Flags.FFlagBuildRequestPromptChipsOnEdit)
+local FFlagBuildPublishSheetReturnOnBackModule = require(BuildExperience.Flags.FFlagBuildPublishSheetReturnOnBack)
 local UseBuildPromptChipRequestsModule = require(BuildExperience.Chat.useBuildPromptChipRequests)
 local UseBuildPromptDraftModule = require(BuildExperience.Chat.useBuildPromptDraft)
 local UseChatSessionCoreModule = require(BuildExperience.Chat.useChatSessionCore)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
+local _ = require(BuildExperience.Telemetry.getCreatorCreditUsageImpressionParameters)
 local FFlagBuildExperienceChatOpenIdModule = require(BuildExperience.Flags.FFlagBuildExperienceChatOpenId)
+local FFlagBuildExperienceClickEventIdsModule = require(BuildExperience.Flags.FFlagBuildExperienceClickEventIds)
 local GetBuildPromptChipsStoreModule = require(BuildExperience.Stores.GetBuildPromptChipsStore)
 local GetBuildOverflowMenuStoreModule = require(BuildExperience.Stores.GetBuildOverflowMenuStore)
 local GetCreatorAgentResumeStoreModule = require(BuildExperience.Stores.GetCreatorAgentResumeStore)
@@ -36,6 +40,7 @@ local FFlagBuildFTUXChipInfiniteScrollModule = require(BuildExperience.Flags.FFl
 local UseCreatorCreditChatUpsellViewModelModule = require(script.Parent.useCreatorCreditChatUpsellViewModel)
 local FFlagBuildExperienceLibrary = require(Parent.SharedFlags).FFlagBuildExperienceLibrary
 local FFlagBuildExperienceAnalytics = require(Parent.SharedFlags).FFlagBuildExperienceAnalytics
+local FFlagBuildExperienceUnreadServiceModule = require(BuildExperience.Flags.FFlagBuildExperienceUnreadService)
 local FFlagBuildAdsFundedNotCreatedError = require(Parent.SharedFlags).FFlagBuildAdsFundedNotCreatedError
 local FFlagBuildAdUpsellModule = require(BuildExperience.Flags.FFlagBuildAdUpsell)
 local FFlagBuildExperienceAdsAndRobuxTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceAdsAndRobuxTelemetry)
@@ -47,7 +52,6 @@ local GameConfigurationLabelsModule = if FFlagBuildAdUpsellModule or FFlagEnable
 local UseAdUpsellChatViewModelModule = if FFlagBuildAdUpsellModule then require(script.Parent.useAdUpsellChatViewModel) else nil
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
 local UseGamePermissionsModule = require(BuildExperience.useGamePermissions)
-local FFlagBuildEventsUpdate1Module = require(BuildExperience.Flags.FFlagBuildEventsUpdate1)
 local FFlagBuildExperiencePlaytestCardPublishCtaModule = require(BuildExperience.Flags.FFlagBuildExperiencePlaytestCardPublishCta)
 local FFlagBuildExperienceManageDevProductModule = require(BuildExperience.Flags.FFlagBuildExperienceManageDevProduct)
 local FFlagBuildInspirationTabModule = require(BuildExperience.Flags.FFlagBuildInspirationTab)
@@ -218,11 +222,11 @@ local function usePromptChipViewModel(p1, Target, NoCanEditOnBuild)
 	local UseRefResult = ReactModule.useRef(nil)
 	local v1 = 0
 	
-	local function v94(_) end
+	local function v99(_) end
 	
 	local v2 = false
 	
-	local function v96(_) end
+	local function v101(_) end
 	
 	local UseRefResult1 = { current = false }
 	local UseRefResult2 = { current = 0 }
@@ -231,28 +235,28 @@ local function usePromptChipViewModel(p1, Target, NoCanEditOnBuild)
 	local UseRefResult5 = { current = 0 }
 	
 	if FFlagBuildExperienceFTUXChipSendGuidanceModule then
-		v1, v94 = ReactModule.useState(0)
-		v2, v96 = ReactModule.useState(false)
+		v1, v99 = ReactModule.useState(0)
+		v2, v101 = ReactModule.useState(false)
 		UseRefResult1 = ReactModule.useRef(false)
 		UseRefResult2 = ReactModule.useRef(0)
 		UseRefResult3 = ReactModule.useRef(false)
 		UseRefResult4 = ReactModule.useRef(0)
 		UseRefResult5 = ReactModule.useRef(0)
 		ReactModule.useEffect(function()
-			-- upvalues: UseRefResult2 (ref), UseRefResult4 (ref), UseRefResult5 (ref), v94 (ref), v96 (ref), UseRefResult1 (ref), UseRefResult (copy)
+			-- upvalues: UseRefResult2 (ref), UseRefResult4 (ref), UseRefResult5 (ref), v99 (ref), v101 (ref), UseRefResult1 (ref), UseRefResult (copy)
 			UseRefResult2.current = 0
 			UseRefResult4.current = 0
 			UseRefResult5.current = 0
-			v94(0)
-			v96(false)
+			v99(0)
+			v101(false)
 			UseRefResult1.current = false
 			UseRefResult.current = nil
 		end, { Text })
 		SetPrefilledComposerText = ReactModule.useCallback(function(p2)
-			-- upvalues: UseRefResult1 (ref), v96 (ref), p1 (copy)
+			-- upvalues: UseRefResult1 (ref), v101 (ref), p1 (copy)
 			if p2 ~= "" then
 				UseRefResult1.current = true
-				v96(true)
+				v101(true)
 			end
 			p1.setPrefilledComposerText(p2)
 		end, { p1.setPrefilledComposerText })
@@ -263,7 +267,7 @@ local function usePromptChipViewModel(p1, Target, NoCanEditOnBuild)
 		PromptChips = if IsActive then UseSignalStateResult else {}
 		IsPromptChipsLoading = IsActive and UseSignalStateResult1 == PromptChipsStatusModule.PROMPT_CHIPS_STATUS.Loading
 		OnPromptChipActivated = ReactModule.useCallback(function(p2)
-			-- upvalues: p1 (copy), FFlagBuildExperienceFTUXChipSendGuidanceModule (upval), UseRefResult4 (ref), UseRefResult5 (ref), UseBuildPromptChipRequestsModuleResult (copy), UseRefResult (copy), IsActive (copy), UseRefResult2 (ref), v94 (ref)
+			-- upvalues: p1 (copy), FFlagBuildExperienceFTUXChipSendGuidanceModule (upval), UseRefResult4 (ref), UseRefResult5 (ref), UseBuildPromptChipRequestsModuleResult (copy), UseRefResult (copy), IsActive (copy), UseRefResult2 (ref), v99 (ref)
 			local Value = p1.composerText:getValue()
 			
 			if FFlagBuildExperienceFTUXChipSendGuidanceModule then
@@ -273,14 +277,14 @@ local function usePromptChipViewModel(p1, Target, NoCanEditOnBuild)
 			local Current = UseRefResult4.current
 			local Current1 = UseRefResult5.current
 			UseBuildPromptChipRequestsModuleResult.requestChipsForSelection(Value, p2, function(Current2)
-				-- upvalues: FFlagBuildExperienceFTUXChipSendGuidanceModule (upval), Current (copy), UseRefResult4 (upval), p1 (upval), Value (copy), UseRefResult (upval), Current1 (copy), UseRefResult5 (upval), IsActive (upval), UseRefResult2 (upval), v94 (upval)
+				-- upvalues: FFlagBuildExperienceFTUXChipSendGuidanceModule (upval), Current (copy), UseRefResult4 (upval), p1 (upval), Value (copy), UseRefResult (upval), Current1 (copy), UseRefResult5 (upval), IsActive (upval), UseRefResult2 (upval), v99 (upval)
 				if (not FFlagBuildExperienceFTUXChipSendGuidanceModule or Current == UseRefResult4.current) and p1.composerText:getValue() == Value then
 					UseRefResult.current = Current2
 					p1.setComposerText(Current2)
 					
 					if FFlagBuildExperienceFTUXChipSendGuidanceModule and Current1 == UseRefResult5.current and IsActive and Current2 ~= Value then
 						UseRefResult2.current = math.min(UseRefResult2.current + 1, 4)
-						v94(UseRefResult2.current)
+						v99(UseRefResult2.current)
 					end
 				end
 			end)
@@ -307,7 +311,7 @@ local function usePromptChipViewModel(p1, Target, NoCanEditOnBuild)
 	end
 	if FFlagBuildRequestPromptChipsOnEditModule or FFlagBuildExperienceFTUXChipSendGuidanceModule then
 		SetComposerText = ReactModule.useCallback(function(Current)
-			-- upvalues: p1 (copy), UseRefResult (copy), FFlagBuildExperienceFTUXChipSendGuidanceModule (upval), UseRefResult5 (ref), UseRefResult1 (ref), v96 (ref), FFlagBuildRequestPromptChipsOnEditModule (upval), UseBuildPromptChipRequestsModuleResult (copy)
+			-- upvalues: p1 (copy), UseRefResult (copy), FFlagBuildExperienceFTUXChipSendGuidanceModule (upval), UseRefResult5 (ref), UseRefResult1 (ref), v101 (ref), FFlagBuildRequestPromptChipsOnEditModule (upval), UseBuildPromptChipRequestsModuleResult (copy)
 			p1.setComposerText(Current)
 			
 			if UseRefResult.current == Current then
@@ -323,7 +327,7 @@ local function usePromptChipViewModel(p1, Target, NoCanEditOnBuild)
 			end
 			if FFlagBuildExperienceFTUXChipSendGuidanceModule then
 				UseRefResult1.current = true
-				v96(true)
+				v101(true)
 			end
 			if FFlagBuildRequestPromptChipsOnEditModule then
 				UseBuildPromptChipRequestsModuleResult.requestChipsForEdit(Current)
@@ -404,7 +408,10 @@ local function useAdCampaignCreatedToastView(UniverseId, ConversationId, Callbac
 	-- upvalues: ReactModule (copy), SendBuildExperienceEventModule (copy)
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: SendBuildExperienceEventModule (upval), UniverseId (copy), ConversationId (copy), Callback (copy)
-		SendBuildExperienceEventModule("AD_CAMPAIGN_VIEW_CLICK", { universeId = UniverseId, conversationId = ConversationId }, { context = "success_toast" })
+		SendBuildExperienceEventModule("AD_CAMPAIGN_VIEW_CLICK", { universeId = UniverseId, conversationId = ConversationId }, {
+			context = "success_toast",
+			isInExperience = if game.GameId == 0 then "false" else "true"
+		})
 		
 		if Callback ~= nil then
 			Callback()
@@ -412,6 +419,45 @@ local function useAdCampaignCreatedToastView(UniverseId, ConversationId, Callbac
 	end, { UniverseId, ConversationId, Callback })
 	
 	return if Callback == nil then nil else UseResult
+end
+
+local function useCreatorCreditUpsell(p1, p2, ModelPicker, p3, Callback, ChatOpenId)
+	-- upvalues: FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), ReactModule (copy), UseCreatorCreditChatUpsellViewModelModule (copy), FFlagBuildExperienceModelPickerModule (copy)
+	local CurrentSessionId = p2.currentSessionId or p1.target.sessionId
+	local IsIsFocusedForCardTelemetry = p1.isFocusedForCardTelemetry ~= false
+	local UseResult = if FFlagBuildExperienceAdsAndRobuxTelemetryModule then ReactModule.useCallback(function()
+		-- upvalues: Callback (copy)
+		if Callback ~= nil then
+			Callback("chat_card")
+		end
+	end, { Callback }) else nil
+	
+	return UseCreatorCreditChatUpsellViewModelModule({
+		namedTier = if FFlagBuildExperienceModelPickerModule and ModelPicker and ModelPicker.selectedId == "advanced" and (not ModelPicker.internalTesting or not ModelPicker.internalTesting.isSelected) then "advanced" else nil,
+		onOpenCreatorCreditPage = if UseResult == nil or Callback == nil then Callback else UseResult,
+		outOfCreditsPromptFailureCount = if FFlagBuildExperienceModelPickerModule then if p2.fundingFailure then p2.fundingFailure.count else nil else p3.count,
+		outOfCreditsPromptFailureReason = if FFlagBuildExperienceModelPickerModule then if p2.fundingFailure then p2.fundingFailure.reason else nil else p3.reason,
+		isAssistantResponding = p2.isAssistantResponding,
+		telemetry = if FFlagBuildExperienceAdsAndRobuxTelemetryModule then ReactModule.useMemo(function()
+			-- upvalues: p1 (copy), CurrentSessionId (copy), ChatOpenId (copy), IsIsFocusedForCardTelemetry (copy)
+			return {
+				context = "chat_card",
+				granularity = {
+					universeId = p1.target.universeId,
+					placeId = p1.target.placeId,
+					conversationId = CurrentSessionId,
+					chatOpenId = ChatOpenId
+				},
+				isSurfaceVisible = IsIsFocusedForCardTelemetry
+			}
+		end, {
+			p1.target.universeId,
+			p1.target.placeId,
+			CurrentSessionId,
+			ChatOpenId,
+			IsIsFocusedForCardTelemetry
+		}) else nil
+	})
 end
 
 local function useChatPromptDraft(p1, p2, p3)
@@ -427,7 +473,7 @@ local function useChatPromptDraft(p1, p2, p3)
 end
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), useUniverseSummary (copy), GetBuildOverflowMenuStoreModule (copy), GetCreatorAgentResumeStoreModule (copy), ReactModule (copy), BuildAppStorageKeyEngineFeature (copy), BuildAppStorageModule (copy), UserInputService (copy), GuiService (copy), PermissionsProtocol (copy), MessageBusService (copy), RealtimeMessageId (copy), Default (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), FFlagBuildExperienceChatOpenIdModule (copy), useChatOpen (copy), FFlagBuildExperienceModelPickerModule (copy), GetBuildModelSelectionStoreModule (copy), CreatorAgentChatModule (copy), FFlagBuildAdUpsellModule (copy), GetAdUpsellEventStoreModule (copy), UseChatSessionCoreModule (copy), useChatOpenSessionLink (copy), usePromptChipViewModel (copy), FFlagBuildExperienceFTUXChipSendGuidanceModule (copy), UseBuildModelSelectionModule (copy), FFlagBuildExperienceAnalytics (copy), useChatPromptDraft (copy), UseChatPlaytestFooterModule (copy), UniverseConfigurationModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), FFlagEnableBuildAdPromotionModule (copy), UseCreatorCreditChatUpsellViewModelModule (copy), GameConfigurationLabelsModule (copy), FFlagBuildExperienceLibrary (copy), getResolvedSessionId (copy), UseAdUpsellChatViewModelModule (copy), config1 (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), useAdCampaignCreatedToastView (copy), FFlagBuildAgentAdCampaignCardModule (copy), UseAgentAdCampaignChatViewModelModule (copy), config2 (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildEventsUpdate1Module (copy), config (copy), FFlagBuildExperienceAnswerFormModule (copy), FFlagBuildAdsFundedNotCreatedError (copy)
+	-- upvalues: UseTokensFunction (copy), useUniverseSummary (copy), GetBuildOverflowMenuStoreModule (copy), GetCreatorAgentResumeStoreModule (copy), ReactModule (copy), BuildAppStorageKeyEngineFeature (copy), BuildAppStorageModule (copy), UserInputService (copy), GuiService (copy), PermissionsProtocol (copy), MessageBusService (copy), RealtimeMessageId (copy), Default (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), FFlagBuildExperienceChatOpenIdModule (copy), useChatOpen (copy), FFlagBuildExperienceModelPickerModule (copy), GetBuildModelSelectionStoreModule (copy), CreatorAgentChatModule (copy), FFlagBuildAdUpsellModule (copy), GetAdUpsellEventStoreModule (copy), UseChatSessionCoreModule (copy), useChatOpenSessionLink (copy), usePromptChipViewModel (copy), FFlagBuildExperienceFTUXChipSendGuidanceModule (copy), UseBuildModelSelectionModule (copy), FFlagBuildExperienceAnalytics (copy), useChatPromptDraft (copy), UseChatPlaytestFooterModule (copy), UniverseConfigurationModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), FFlagEnableBuildAdPromotionModule (copy), useCreatorCreditUpsell (copy), GameConfigurationLabelsModule (copy), FFlagBuildExperienceLibrary (copy), getResolvedSessionId (copy), UseAdUpsellChatViewModelModule (copy), config1 (copy), useAdCampaignCreatedToastView (copy), FFlagBuildAgentAdCampaignCardModule (copy), UseAgentAdCampaignChatViewModelModule (copy), config2 (copy), FFlagBuildExperienceUnreadServiceModule (copy), FFlagBuildPublishSheetReturnOnBackModule (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), FFlagBuildExperienceClickEventIdsModule (copy), SendBuildExperienceEventModule (copy), config (copy), FFlagBuildExperienceAnswerFormModule (copy), FFlagBuildAdsFundedNotCreatedError (copy), FFlagBuildChatPasteAsAttachmentModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseUniverseSummaryResult = useUniverseSummary(p1.target.universeId)
 	local BuildOverflowMenuStoreModule = GetBuildOverflowMenuStoreModule()
@@ -771,11 +817,16 @@ return function(p1)
 			UseChatSessionCoreModuleResult.textBoxRef.current.releaseFocus()
 		end
 	end, { UseChatSessionCoreModuleResult.textBoxRef })
-	local UseResult11 = ReactModule.useCallback(function()
-		-- upvalues: UseResult10 (copy), p1 (copy)
+	local UseResult11 = ReactModule.useCallback(function(p2)
+		-- upvalues: UseResult10 (copy), p1 (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (upval)
 		UseResult10()
 		
 		if p1.onOpenCreatorCreditPage ~= nil then
+			if FFlagBuildExperienceAdsAndRobuxTelemetryModule and p2 ~= nil then
+				p1.onOpenCreatorCreditPage(p2)
+				
+				return
+			end
 			p1.onOpenCreatorCreditPage()
 		end
 	end, { UseResult10, p1.onOpenCreatorCreditPage })
@@ -789,13 +840,7 @@ return function(p1)
 		end
 	end, { UseResult10, p1.onOpenGetUsersPage }) else nil
 	local UseResult14 = if p1.onOpenGetUsersPage == nil then nil else UseResult13
-	local UseCreatorCreditChatUpsellViewModelModuleResult = UseCreatorCreditChatUpsellViewModelModule({
-		namedTier = if FFlagBuildExperienceModelPickerModule and (UseBuildModelSelectionModuleResult and UseBuildModelSelectionModuleResult.selectedId == "advanced") and (not UseBuildModelSelectionModuleResult.internalTesting or not UseBuildModelSelectionModuleResult.internalTesting.isSelected) then "advanced" else nil,
-		onOpenCreatorCreditPage = UseResult12,
-		outOfCreditsPromptFailureCount = if FFlagBuildExperienceModelPickerModule then if UseChatSessionCoreModuleResult.fundingFailure then UseChatSessionCoreModuleResult.fundingFailure.count else nil else UseStateResult11.count,
-		outOfCreditsPromptFailureReason = if FFlagBuildExperienceModelPickerModule then if UseChatSessionCoreModuleResult.fundingFailure then UseChatSessionCoreModuleResult.fundingFailure.reason else nil else UseStateResult11.reason,
-		isAssistantResponding = UseChatSessionCoreModuleResult.isAssistantResponding
-	})
+	local UseCreatorCreditUpsellResult = useCreatorCreditUpsell(p1, UseChatSessionCoreModuleResult, UseBuildModelSelectionModuleResult, UseStateResult11, UseResult12, UseChatOpenResult)
 	local IsAudienceMatch: boolean = if FFlagBuildAdUpsellModule then GameConfigurationLabelsModule.getAudience(UseUniverseSummaryResult) == UniverseConfigurationModule.PrivacyType.Public else FFlagEnableBuildAdPromotionModule and GameConfigurationLabelsModule.getAudience(UseUniverseSummaryResult) == UniverseConfigurationModule.PrivacyType.Public
 	local ResolvedSessionId = if FFlagBuildAdUpsellModule or FFlagBuildExperienceLibrary then getResolvedSessionId(UseChatSessionCoreModuleResult.messages, p1.target.sessionId, p1.target.universeId) else nil
 	local UseAdUpsellChatViewModelModuleResult = if FFlagBuildAdUpsellModule then UseAdUpsellChatViewModelModule({
@@ -806,18 +851,36 @@ return function(p1)
 		isPageVisible = p1.isFocused ~= false,
 		universeId = p1.target.universeId
 	}) else config1
+	local UseAdCampaignCreatedToastViewResult = if FFlagBuildExperienceAdsAndRobuxTelemetryModule then useAdCampaignCreatedToastView(p1.target.universeId, ResolvedSessionId, UseResult14) else nil
 	local UseAgentAdCampaignChatViewModelModuleResult = if FFlagBuildAgentAdCampaignCardModule then UseAgentAdCampaignChatViewModelModule({
 		universeId = p1.target.universeId,
 		sessionId = ResolvedSessionId,
 		isPageVisible = p1.isFocused ~= false
 	}) else config2
+	
+	if FFlagBuildExperienceUnreadServiceModule then
+		local UnreadStore = CreatorAgentChatModule.getUnreadStore(false)
+		ReactModule.useEffect(function()
+			-- upvalues: p1 (copy), UnreadStore (copy)
+			local UniverseId: number = p1.target.universeId
+			
+			return if p1.isFocused == false or UniverseId == nil or UniverseId <= 0 then nil else function()
+				-- upvalues: UnreadStore (upval), UniverseId (copy)
+				UnreadStore.acknowledge({ kind = "game", universeId = tostring(UniverseId) })
+			end
+		end, {
+			UnreadStore,
+			p1.isFocused ~= false,
+			p1.target.universeId or false
+		})
+	end
 	local UseResult15 = ReactModule.useCallback(function(p2)
-		-- upvalues: UseResult10 (copy), p1 (copy)
+		-- upvalues: UseResult10 (copy), p1 (copy), FFlagBuildPublishSheetReturnOnBackModule (upval)
 		if p2.type == "openPage" then
 			UseResult10()
 			
 			if p1.onOpenConfigurationPage then
-				p1.onOpenConfigurationPage(p2.page)
+				p1.onOpenConfigurationPage(p2.page, if FFlagBuildPublishSheetReturnOnBackModule then p2.onReturn else nil)
 				
 				return
 			end
@@ -843,9 +906,22 @@ return function(p1)
 		p1.onOpenInviteManagement
 	})
 	local UseResult16 = if FFlagBuildExperiencePlaytestCardPublishCtaModule then ReactModule.useCallback(function()
-		-- upvalues: UseResult15 (copy)
+		-- upvalues: FFlagBuildExperienceClickEventIdsModule (upval), SendBuildExperienceEventModule (upval), p1 (copy), UseChatSessionCoreModuleResult (copy), UseResult15 (copy)
+		if FFlagBuildExperienceClickEventIdsModule then
+			SendBuildExperienceEventModule("PUBLISH_CLICK", {
+				universeId = p1.target.universeId,
+				placeId = UseChatSessionCoreModuleResult.playtestPlaceId,
+				conversationId = UseChatSessionCoreModuleResult.currentSessionId or p1.target.sessionId
+			}, { context = "chat_widget" })
+		end
 		UseResult15({ type = "openPage", page = "publish" })
-	end, { UseResult15 }) else nil
+	end, {
+		UseResult15,
+		UseChatSessionCoreModuleResult.playtestPlaceId,
+		UseChatSessionCoreModuleResult.currentSessionId,
+		p1.target.universeId,
+		p1.target.sessionId
+	}) else nil
 	
 	return {
 		target = UseMemoResult,
@@ -879,11 +955,12 @@ return function(p1)
 		isLibraryDisabled = FFlagBuildExperienceLibrary and (p1.target.universeId == nil or NoCanEdit),
 		onOverflowMenuAction = UseResult15,
 		onPlayActivated = ReactModule.useCallback(function()
-			-- upvalues: SendBuildExperienceEventModule (upval), FFlagBuildEventsUpdate1Module (upval), p1 (copy), UseChatSessionCoreModuleResult (copy)
-			SendBuildExperienceEventModule(if FFlagBuildEventsUpdate1Module then "PLAYTEST_CLICK" else "PLAY_CLICK", {
+			-- upvalues: SendBuildExperienceEventModule (upval), p1 (copy), UseChatSessionCoreModuleResult (copy), FFlagBuildExperienceClickEventIdsModule (upval)
+			SendBuildExperienceEventModule("PLAYTEST_CLICK", {
 				universeId = p1.target.universeId,
-				placeId = UseChatSessionCoreModuleResult.playtestPlaceId
-			}, if FFlagBuildEventsUpdate1Module then { context = "app_header" } else nil)
+				placeId = UseChatSessionCoreModuleResult.playtestPlaceId,
+				conversationId = if FFlagBuildExperienceClickEventIdsModule then UseChatSessionCoreModuleResult.currentSessionId or p1.target.sessionId else nil
+			}, { context = "app_header" })
 			
 			if UseChatSessionCoreModuleResult.launchPlaytest then
 				UseChatSessionCoreModuleResult.launchPlaytest("BuildChatPage")
@@ -891,7 +968,9 @@ return function(p1)
 		end, {
 			UseChatSessionCoreModuleResult.launchPlaytest,
 			UseChatSessionCoreModuleResult.playtestPlaceId,
-			p1.target.universeId
+			UseChatSessionCoreModuleResult.currentSessionId,
+			p1.target.universeId,
+			p1.target.sessionId
 		}),
 		onOpenAgentsPage = ReactModule.useCallback(function()
 			-- upvalues: UseResult10 (copy), p1 (copy), SubagentTaskState (copy), config (upval)
@@ -900,7 +979,7 @@ return function(p1)
 		end, { UseResult10, p1.onOpenAgentsPage, SubagentTaskState }),
 		onOpenCreatorCreditPage = UseResult12,
 		onOpenGetUsersPage = UseResult14,
-		onAdCampaignCreatedToastView = if FFlagBuildExperienceAdsAndRobuxTelemetryModule then useAdCampaignCreatedToastView(p1.target.universeId, ResolvedSessionId, UseResult14) else nil,
+		onAdCampaignCreatedToastView = UseAdCampaignCreatedToastViewResult,
 		isUniversePublic = IsAudienceMatch,
 		buildOverflowMenuStore = BuildOverflowMenuStoreModule,
 		messages = UseChatSessionCoreModuleResult.messages,
@@ -918,13 +997,13 @@ return function(p1)
 		onNotifyMe = UseResult1,
 		onOpenPushNotificationsSettings = UseResult2,
 		onNotNow = UseResult3,
-		showBuyMoreRobuxCard = UseCreatorCreditChatUpsellViewModelModuleResult.showBuyMoreRobuxCard,
-		buyMoreRobuxCardTitle = UseCreatorCreditChatUpsellViewModelModuleResult.buyMoreRobuxCardTitle,
-		buyMoreRobuxCardDescription = UseCreatorCreditChatUpsellViewModelModuleResult.buyMoreRobuxCardDescription,
-		buyMoreRobuxCardPrimaryActionText = UseCreatorCreditChatUpsellViewModelModuleResult.buyMoreRobuxCardPrimaryActionText,
-		onBuyMoreRobuxCardPrimaryAction = UseCreatorCreditChatUpsellViewModelModuleResult.onBuyMoreRobuxCardPrimaryAction,
-		buyMoreRobuxCardSecondaryActionText = UseCreatorCreditChatUpsellViewModelModuleResult.buyMoreRobuxCardSecondaryActionText,
-		onBuyMoreRobuxCardSecondaryAction = UseCreatorCreditChatUpsellViewModelModuleResult.onBuyMoreRobuxCardSecondaryAction,
+		showBuyMoreRobuxCard = UseCreatorCreditUpsellResult.showBuyMoreRobuxCard,
+		buyMoreRobuxCardTitle = UseCreatorCreditUpsellResult.buyMoreRobuxCardTitle,
+		buyMoreRobuxCardDescription = UseCreatorCreditUpsellResult.buyMoreRobuxCardDescription,
+		buyMoreRobuxCardPrimaryActionText = UseCreatorCreditUpsellResult.buyMoreRobuxCardPrimaryActionText,
+		onBuyMoreRobuxCardPrimaryAction = UseCreatorCreditUpsellResult.onBuyMoreRobuxCardPrimaryAction,
+		buyMoreRobuxCardSecondaryActionText = UseCreatorCreditUpsellResult.buyMoreRobuxCardSecondaryActionText,
+		onBuyMoreRobuxCardSecondaryAction = UseCreatorCreditUpsellResult.onBuyMoreRobuxCardSecondaryAction,
 		adUpsellCards = UseAdUpsellChatViewModelModuleResult.adUpsellCards,
 		adUpsellCongratsAnchorIndex = UseAdUpsellChatViewModelModuleResult.adUpsellCongratsAnchorIndex,
 		adUpsellFreePromotionsRemaining = UseAdUpsellChatViewModelModuleResult.adUpsellFreePromotionsRemaining,
@@ -985,6 +1064,7 @@ return function(p1)
 		onComposerImagesChanged = UseChatSessionCoreModuleResult.setComposerImages,
 		onRetryComposerImage = UseChatSessionCoreModuleResult.retryComposerImage,
 		composerResourceAttachments = UseChatSessionCoreModuleResult.composerResourceAttachments,
+		onAddComposerResourceAttachment = if FFlagBuildChatPasteAsAttachmentModule then UseChatSessionCoreModuleResult.addComposerResourceAttachment else nil,
 		onRemoveComposerResourceAttachment = UseChatSessionCoreModuleResult.removeComposerResourceAttachmentAtIndex,
 		isComposerSendBlocked = UseChatSessionCoreModuleResult.isComposerSendBlocked,
 		textBoxRef = UseChatSessionCoreModuleResult.textBoxRef,

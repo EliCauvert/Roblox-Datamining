@@ -19,6 +19,7 @@ local GetFFlagIntegratePhoneUpsellJoinVoiceFunction = require(CorePackages.Works
 local FFlagKeepSideSheetOpenBesideMenu = require(CorePackages.Workspace.Packages.SharedFlags).FFlagKeepSideSheetOpenBesideMenu
 local GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoice
 local FFlagProactiveVoiceRestrictionsUFR = require(CorePackages.Workspace.Packages.SharedFlags).FFlagProactiveVoiceRestrictionsUFR
+local FFlagAgeCheckJoinIntentUnmutes = require(CorePackages.Workspace.Packages.SharedFlags).FFlagAgeCheckJoinIntentUnmutes
 local FFlagTokenizeUnibarConstantsWithStyleProvider = require(Chrome.ChromeShared.Flags).FFlagTokenizeUnibarConstantsWithStyleProvider
 local CheckShouldShowJoinVoiceInEvent = game:DefineFastFlag("CheckShouldShowJoinVoiceInEvent", false)
 local ReplaceJoinVoiceIconToMuted = game:DefineFastFlag("ReplaceJoinVoiceIconToMuted", false)
@@ -163,6 +164,12 @@ ObserveCurrentContextIdFunction(function(CONTEXTID1)
 	end
 end)
 
+if FFlagAgeCheckJoinIntentUnmutes then
+	Default.ageCheckEndedWithoutVoice.Event:Connect(function()
+		-- upvalues: setAvailability (copy), ServiceModule (copy)
+		setAvailability(ServiceModule.AvailabilitySignal.Unavailable)
+	end)
+end
 if IsVoiceChatSupportedModule() then
 	if GetFFlagIntegratePhoneUpsellJoinVoiceFunction() then
 		task.spawn(function()

@@ -150,13 +150,14 @@ local IsGlobalTabFirstModule = require(ExpChat.isGlobalTabFirst)
 local GetGlobalWelcomeMessageKeyModule = require(ExpChat.getGlobalWelcomeMessageKey)
 local FFlagExpChatGlobalTabDefaultModule = require(Flags.FFlagExpChatGlobalTabDefault)
 local FFlagExpChatStickyTabs = SharedFlagsModule.FFlagExpChatStickyTabs
+local FFlagChatTranslationReadsUserGameSettings = SharedFlagsModule.FFlagChatTranslationReadsUserGameSettings
 local StickyTabObserverModule = require(ExpChat.StickyTabs.StickyTabObserver)
 
 function getChatTranslationEnabled()
-	-- upvalues: TextChatService (copy)
+	-- upvalues: FFlagChatTranslationReadsUserGameSettings (copy), TextChatService (copy)
 	local Success, Result = pcall(function()
-		-- upvalues: TextChatService (upval)
-		return TextChatService.ChatTranslationEnabled
+		-- upvalues: FFlagChatTranslationReadsUserGameSettings (upval), TextChatService (upval)
+		return if FFlagChatTranslationReadsUserGameSettings then UserSettings().GameSettings.ChatTranslationEnabled else TextChatService.ChatTranslationEnabled
 	end)
 	
 	return Success and Result

@@ -29,7 +29,7 @@ end
 
 return function(p1)
 	-- upvalues: ReactModule (copy), View (copy), renderThumbnailSlot (copy), Icon (copy), IconName (copy), IconSize (copy)
-	return ReactModule.createElement(View, { tag = "size-1200-1200" }, {
+	return ReactModule.createElement(View, { tag = "size-1000-1000" }, {
 		GalleryThumbnail1 = renderThumbnailSlot(p1.slotCaptures[1], p1.thumbnails[1], p1.activeSlot == 1),
 		GalleryThumbnail2 = renderThumbnailSlot(p1.slotCaptures[2], p1.thumbnails[2], p1.activeSlot == 2),
 		GalleryIcon = ReactModule.createElement(View, {

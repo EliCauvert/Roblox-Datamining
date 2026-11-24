@@ -17,7 +17,6 @@ local FFlagEnableSearchGameItemOwnershipUpdate = SharedFlagsModule.FFlagEnableSe
 local FFlagAppIaHomeCampaignSubTab = SharedFlagsModule.FFlagAppIaHomeCampaignSubTab
 local FFlagEnableCampaignGameItemPurchaseLocation = SharedFlagsModule.FFlagEnableCampaignGameItemPurchaseLocation
 local FFlagEnableEdpPreviewPurchaseSurface = SharedFlagsModule.FFlagEnableEdpPreviewPurchaseSurface
-local FFlagEnableLaunchAfterPurchase = SharedFlagsModule.FFlagEnableLaunchAfterPurchase
 local FFlagEnableGameItemDetailsSdui = SharedFlagsModule.FFlagEnableGameItemDetailsSdui
 local ExperienceService = game:GetService("ExperienceService")
 local Players = game:GetService("Players")
@@ -176,7 +175,7 @@ local function buildPurchasePayload(LocationType)
 end
 
 return function(p1, AnalyticsContext, SduiContext)
-	-- upvalues: SduiErrorType (copy), SduiActionType (copy), normalizeProductPayload (copy), config (copy), buildPurchasePayload (copy), PurchasePromptLiteModule (copy), TimeToInteractiveTracker (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), buildOnPurchaseSuccess (copy), PromiseModule (copy), mapPriceDiscountDetails (copy), CloseCentralOverlayFunction (copy), EnableJoinAfterBuyFromEDP (copy), ProductPurchaseSurface (copy), ExperienceService (copy), FFlagEnableLaunchAfterPurchase (copy), SduiCoreSystemModule (copy), SduiReportGamePlayIntentFunction (copy)
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), normalizeProductPayload (copy), config (copy), buildPurchasePayload (copy), PurchasePromptLiteModule (copy), TimeToInteractiveTracker (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), buildOnPurchaseSuccess (copy), PromiseModule (copy), mapPriceDiscountDetails (copy), CloseCentralOverlayFunction (copy), EnableJoinAfterBuyFromEDP (copy), ProductPurchaseSurface (copy), ExperienceService (copy), SduiCoreSystemModule (copy), SduiReportGamePlayIntentFunction (copy)
 	local Logger = SduiContext.dependencies.logger
 	local AppPage = SduiContext.appPage
 	local DispatchFunction: (any) -> () = SduiContext.dependencies.dispatch
@@ -253,7 +252,7 @@ return function(p1, AnalyticsContext, SduiContext)
 				ExperienceService:LaunchExperience({ placeId = tonumber(RootPlaceId) })
 				DispatchFunction(CloseCentralOverlayFunction())
 			end else nil,
-			onLaunchAfterPurchase = if FFlagEnableLaunchAfterPurchase then function()
+			onLaunchAfterPurchase = function()
 				-- upvalues: SduiContext (copy), RootPlaceId (copy), SduiErrorType (upval), SduiActionType (upval), SduiCoreSystemModule (upval), AnalyticsContext (copy), SduiReportGamePlayIntentFunction (upval)
 				local Logger = SduiContext.dependencies.logger
 				
@@ -284,7 +283,7 @@ return function(p1, AnalyticsContext, SduiContext)
 						rootPlaceId = RootPlaceId
 					})
 				end
-			end else nil
+			end
 		},
 		purchaseAnalyticsMetadata = PurchaseAnalyticsMetadata,
 		purchaseOptions = PurchaseOptions

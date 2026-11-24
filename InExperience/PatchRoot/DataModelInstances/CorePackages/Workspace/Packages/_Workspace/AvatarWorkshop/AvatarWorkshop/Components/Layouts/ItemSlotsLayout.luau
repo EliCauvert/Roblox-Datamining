@@ -25,7 +25,7 @@ return function(p1)
 			slotType = slot.slotType,
 			slotContent = slot.content,
 			onActivated = p1.onSlotActivated,
-			selected = slot.id == p1.activeSlotId,
+			selected = p1.activeSlotIds[slot.id] == true,
 			LayoutOrder = LayoutOrder
 		})
 	end

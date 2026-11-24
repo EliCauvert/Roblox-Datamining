@@ -8,11 +8,11 @@ local function SkeletonRow(p1)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	
 	return ReactModule.createElement(FoundationModule.View, {
-		tag = "row align-y-center size-full-1000 padding-left-xsmall",
+		tag = "row align-y-center gap-medium size-full-1200 padding-x-small padding-y-xsmall",
 		LayoutOrder = p1.layoutOrder
 	}, {
 		Leading = ReactModule.createElement(FoundationModule.View, {
-			tag = "col align-x-center align-y-center size-1000-1000",
+			tag = "col align-x-center align-y-center size-600-full",
 			LayoutOrder = 1
 		}, {
 			LeadingSkeleton = ReactModule.createElement(FoundationModule.Skeleton, {
@@ -21,7 +21,7 @@ local function SkeletonRow(p1)
 			})
 		}),
 		Name = ReactModule.createElement(FoundationModule.View, {
-			tag = "row align-y-center fill size-0-full padding-x-small",
+			tag = "row align-y-center fill size-0-full",
 			LayoutOrder = 2
 		}, {
 			NameSkeleton = ReactModule.createElement(FoundationModule.View, {
