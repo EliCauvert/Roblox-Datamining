@@ -41,7 +41,6 @@ local Localization = require(Parent.RobloxAppLocales).Localization
 local LibraryTypesModule = require(BuildExperience.Components.Library.LibraryTypes)
 local _ = require(BuildExperience.Chat.chatTypes)
 local FFlagBuildExperienceLibrary = require(Parent.SharedFlags).FFlagBuildExperienceLibrary
-local FFlagBuildExperienceWorldJoystick = require(Parent.SharedFlags).FFlagBuildExperienceWorldJoystick
 local FFlagBuildExperienceEventContextTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceEventContextTelemetry)
 local Tbl = {}
 local v1 = nil
@@ -259,8 +258,7 @@ local function ConnectedLibrary(p2)
 		isAvailable = IsAvailable,
 		isHome = UseStateResult.routeName == "Browser",
 		isOpen = UseIsOpenResult,
-		onViewportRectChanged = LibraryStoreModule.setWorldViewportRect,
-		onTransitioningChanged = LibraryStoreModule.setWorldCutoutTransitioning
+		onViewportRectChanged = LibraryStoreModule.setWorldViewportRect
 	})
 	ReactModule.useEffect(function()
 		-- upvalues: ItemId (copy), p2 (copy), SendBuildExperienceEventModule (upval), UseResult (copy), UseIsOpenResult (copy), UseStateResult (copy), Model (copy), Params (copy)
@@ -1149,7 +1147,7 @@ local function ConnectedLibrary(p2)
 	})
 	local LimitSelectAllResult, LimitSelectAllResult2 = limitSelectAll(UseMemoResult3, UseLibraryStringsModuleResult)
 	
-	local function v150()
+	local function v149()
 		-- upvalues: SendBuildExperienceEventModule (upval), UseResult (copy), UseStateResult (copy), Params1 (copy), UseStateResult6 (copy), LimitSelectAllResult (copy), UseMemoResult3 (copy), UseResult10 (copy)
 		SendBuildExperienceEventModule("LIBRARY_ASSET_CLICK", UseResult(), {
 			action = "select_all",
@@ -1204,7 +1202,7 @@ local function ConnectedLibrary(p2)
 			onQueryChanged = if ItemId == nil then UseResult3 else nil,
 			onSearchReset = if ItemId == nil then UseResult4 else nil,
 			selectAllLabel = LimitSelectAllResult2,
-			onSelectAll = if #UseMemoResult3 > 0 then v150 else nil,
+			onSelectAll = if #UseMemoResult3 > 0 then v149 else nil,
 			assetLabel = Title,
 			worldLabel = UseLibraryStringsModuleResult.world,
 			onShowLibrary = OnShowLibrary,
@@ -1226,58 +1224,49 @@ local function ConnectedLibrary(p2)
 end
 
 return function(p4, SessionId)
-	-- upvalues: v1 (ref), GetLibraryStoreModule (copy), CoreGui (copy), CreateBuildLibraryStoreModule (copy), FFlagBuildExperienceWorldJoystick (copy), ReactRobloxModule (copy), Localization (copy), LocalizationService (copy), ReactFocusNavigationModule (copy), ReactModule (copy), LocalizationProvider (copy), LibraryThemeProviderModule (copy), BuildExperienceCompositionStyleSheetModule (copy), FocusNavigationUtilsModule (copy), ConnectedLibrary (copy), FFlagBuildExperienceEventContextTelemetryModule (copy)
-	if v1 ~= nil then
-		return v1
-	end
-	GetLibraryStoreModule().setIsOpen(true)
-	local BuildExperienceLibrary = Instance.new("ScreenGui")
-	BuildExperienceLibrary.Name = "BuildExperienceLibrary"
-	BuildExperienceLibrary.ScreenInsets = Enum.ScreenInsets.DeviceSafeInsets
-	BuildExperienceLibrary.ClipToDeviceSafeArea = false
-	BuildExperienceLibrary.ResetOnSpawn = false
-	BuildExperienceLibrary.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-	BuildExperienceLibrary.DisplayOrder = 10
-	BuildExperienceLibrary.Parent = CoreGui
-	local BuildLibraryStoreModule = CreateBuildLibraryStoreModule(p4 or game)
-	
-	if FFlagBuildExperienceWorldJoystick then
-		GetLibraryStoreModule().setWorldItemResolver(function(p5): boolean
-			-- upvalues: BuildLibraryStoreModule (copy)
-			return BuildLibraryStoreModule.resolveWorldItem(p5) ~= nil
-		end)
-	end
-	local Root = ReactRobloxModule.createRoot(BuildExperienceLibrary)
-	v1 = Root
-	local NewLocalization = Localization.new(LocalizationService.RobloxLocaleId)
-	local NewResult = ReactFocusNavigationModule.FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)
-	ReactRobloxModule.flushSync(function()
-		-- upvalues: Root (copy), ReactModule (upval), LocalizationProvider (upval), NewLocalization (copy), LibraryThemeProviderModule (upval), BuildExperienceCompositionStyleSheetModule (upval), ReactFocusNavigationModule (upval), NewResult (copy), FocusNavigationUtilsModule (upval), ConnectedLibrary (upval), p4 (copy), BuildLibraryStoreModule (copy), SessionId (copy), FFlagBuildExperienceEventContextTelemetryModule (upval), FFlagBuildExperienceWorldJoystick (upval), GetLibraryStoreModule (upval), v1 (upval), BuildExperienceLibrary (copy)
-		Root:render(ReactModule.createElement(LocalizationProvider, { localization = NewLocalization }, {
-			FoundationProvider = ReactModule.createElement(LibraryThemeProviderModule, { displayOrder = 10 }, {
-				CompositionStyleSheet = ReactModule.createElement(BuildExperienceCompositionStyleSheetModule),
-				Library = ReactModule.createElement(ReactFocusNavigationModule.FocusNavigationContext.Provider, { value = NewResult }, {
-					Registry = ReactModule.createElement(FocusNavigationUtilsModule.FocusNavigableSurfaceRegistry.Provider, nil, {
-						Content = ReactModule.createElement(ConnectedLibrary, {
-							dataModel = p4 or game,
-							library = BuildLibraryStoreModule,
-							sessionId = SessionId,
-							eventSessionId = if FFlagBuildExperienceEventContextTelemetryModule then SessionId else nil,
-							onUnmount = function()
-								-- upvalues: FFlagBuildExperienceWorldJoystick (upval), GetLibraryStoreModule (upval), NewResult (upval), v1 (upval), BuildExperienceLibrary (upval)
-								if FFlagBuildExperienceWorldJoystick then
-									GetLibraryStoreModule().setWorldItemResolver(nil)
+	-- upvalues: v1 (ref), GetLibraryStoreModule (copy), CoreGui (copy), CreateBuildLibraryStoreModule (copy), ReactRobloxModule (copy), Localization (copy), LocalizationService (copy), ReactFocusNavigationModule (copy), ReactModule (copy), LocalizationProvider (copy), LibraryThemeProviderModule (copy), BuildExperienceCompositionStyleSheetModule (copy), FocusNavigationUtilsModule (copy), ConnectedLibrary (copy), FFlagBuildExperienceEventContextTelemetryModule (copy)
+	if v1 == nil then
+		GetLibraryStoreModule().setIsOpen(true)
+		local BuildExperienceLibrary = Instance.new("ScreenGui")
+		BuildExperienceLibrary.Name = "BuildExperienceLibrary"
+		BuildExperienceLibrary.ScreenInsets = Enum.ScreenInsets.DeviceSafeInsets
+		BuildExperienceLibrary.ClipToDeviceSafeArea = false
+		BuildExperienceLibrary.ResetOnSpawn = false
+		BuildExperienceLibrary.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+		BuildExperienceLibrary.DisplayOrder = 10
+		BuildExperienceLibrary.Parent = CoreGui
+		local BuildLibraryStoreModule = CreateBuildLibraryStoreModule(p4 or game)
+		local Root = ReactRobloxModule.createRoot(BuildExperienceLibrary)
+		v1 = Root
+		local NewLocalization = Localization.new(LocalizationService.RobloxLocaleId)
+		local NewResult = ReactFocusNavigationModule.FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)
+		ReactRobloxModule.flushSync(function()
+			-- upvalues: Root (copy), ReactModule (upval), LocalizationProvider (upval), NewLocalization (copy), LibraryThemeProviderModule (upval), BuildExperienceCompositionStyleSheetModule (upval), ReactFocusNavigationModule (upval), NewResult (copy), FocusNavigationUtilsModule (upval), ConnectedLibrary (upval), p4 (copy), BuildLibraryStoreModule (copy), SessionId (copy), FFlagBuildExperienceEventContextTelemetryModule (upval), v1 (upval), BuildExperienceLibrary (copy)
+			Root:render(ReactModule.createElement(LocalizationProvider, { localization = NewLocalization }, {
+				FoundationProvider = ReactModule.createElement(LibraryThemeProviderModule, { displayOrder = 10 }, {
+					CompositionStyleSheet = ReactModule.createElement(BuildExperienceCompositionStyleSheetModule),
+					Library = ReactModule.createElement(ReactFocusNavigationModule.FocusNavigationContext.Provider, { value = NewResult }, {
+						Registry = ReactModule.createElement(FocusNavigationUtilsModule.FocusNavigableSurfaceRegistry.Provider, nil, {
+							Content = ReactModule.createElement(ConnectedLibrary, {
+								dataModel = p4 or game,
+								library = BuildLibraryStoreModule,
+								sessionId = SessionId,
+								eventSessionId = if FFlagBuildExperienceEventContextTelemetryModule then SessionId else nil,
+								onUnmount = function()
+									-- upvalues: NewResult (upval), v1 (upval), BuildExperienceLibrary (upval)
+									NewResult:teardown()
+									v1 = nil
+									BuildExperienceLibrary:Destroy()
 								end
-								NewResult:teardown()
-								v1 = nil
-								BuildExperienceLibrary:Destroy()
-							end
+							})
 						})
 					})
 				})
-			})
-		}))
-	end)
-	
-	return Root
+			}))
+		end)
+		
+		return Root
+	else
+		return v1
+	end
 end

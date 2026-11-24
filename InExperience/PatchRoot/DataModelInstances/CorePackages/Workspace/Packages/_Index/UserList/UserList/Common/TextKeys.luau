@@ -18,17 +18,5 @@
 	UserBannedError = "Feature.Friends.Error.UserBannedError",
 	UserBlockedError = "Feature.Friends.Error.UserBlockedError",
 	UserNotPassedCaptchaError = "Feature.Friends.Error.UserNotPassedCaptcha",
-	TooManyRequestsError = "Feature.Friends.Message.FloodLimitExceededError",
-	SomethingIsWrong = "Feature.Toast.NetworkingError.SomethingIsWrong",
-	MutualFriend = "Feature.Friends.Label.MutualFriendTitle",
-	MutualFriends = "Feature.Friends.Label.MutualFriendsTitle",
-	FromContactName = "Feature.Friends.Description.FromContactsV2",
-	FoundFromContactImporter = "Feature.Friends.Description.FoundFromContactImporter",
-	FoundThroughQRCode = "Feature.Profile.Label.QRCodeFriendRequest",
-	SentFromExperience = "Feature.Friends.Label.SentFromWithContext",
-	ConnectionRequest = "Feature.Friends.Label.ConnectionRequest",
-	NewFriend = "Feature.Friends.Label.NewFriend",
-	Classmates = "Feature.Schools.Label.Classmates",
-	YouAreFollowing = "Feature.Friends.Label.YouAreFollowing",
-	FollowsYou = "Feature.Friends.Label.FollowsYou"
+	TooManyRequestsError = "Feature.Friends.Message.FloodLimitExceededError"
 }

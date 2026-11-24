@@ -2,8 +2,6 @@
 local UserGameSettings = UserSettings():GetService("UserGameSettings")
 local Players = game:GetService("Players")
 local AvatarUtil = require(game:GetService("CorePackages").Workspace.Packages.CoreScriptsCommon).AvatarUtil
-local FFlagVRAvatarUseExtractedModulesModule = require(script.Parent.Parent.Flags.FFlagVRAvatarUseExtractedModules)
-local VRHeadScaleModule = require(script.Parent.VRHeadScale)
 local Module = {}
 Module.__index = Module
 
@@ -31,27 +29,23 @@ function Module.new()
 end
 
 function Module:setHeadScale(Character)
-	-- upvalues: VRService (copy), FFlagVRAvatarUseExtractedModulesModule (copy), VRHeadScaleModule (copy), UserGameSettings (copy)
+	-- upvalues: VRService (copy), UserGameSettings (copy)
 	if VRService.AutomaticScaling ~= Enum.VRScaling.World then return end
 	local SubjectHeight: number = self:GetSubjectHeight(Character)
 	
 	if not SubjectHeight or SubjectHeight <= 0 then return end
 	local Negated = -VRService:GetUserCFrame(Enum.UserCFrame.Floor).Position.Y
-	local HeadScale = if FFlagVRAvatarUseExtractedModulesModule then VRHeadScaleModule.computeHeadScale(SubjectHeight, Negated, UserGameSettings.PlayerHeight) elseif Negated < 0.8 * UserGameSettings.PlayerHeight then SubjectHeight / UserGameSettings.PlayerHeight else SubjectHeight / Negated
+	local SubjectHeightRatio = if Negated < 0.8 * UserGameSettings.PlayerHeight then SubjectHeight / UserGameSettings.PlayerHeight else SubjectHeight / Negated
 	local CurrentCamera = workspace.CurrentCamera
 	
 	if CurrentCamera then
-		CurrentCamera.HeadScale = HeadScale
+		CurrentCamera.HeadScale = SubjectHeightRatio
 		
 		return
 	end
 end
 
-function Module:GetSubjectHeight(Object)
-	-- upvalues: FFlagVRAvatarUseExtractedModulesModule (copy), VRHeadScaleModule (copy)
-	if FFlagVRAvatarUseExtractedModulesModule then
-		return VRHeadScaleModule.getSubjectHeight(Object)
-	end
+function Module:GetSubjectHeight(Object): number?
 	local Humanoid = Object:FindFirstChild("Humanoid")
 	
 	if Humanoid and Humanoid:GetState() == Enum.HumanoidStateType.Dead then return end

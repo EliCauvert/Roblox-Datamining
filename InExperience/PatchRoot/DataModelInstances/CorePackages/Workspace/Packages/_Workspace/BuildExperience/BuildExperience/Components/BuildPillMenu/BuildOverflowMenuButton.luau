@@ -21,7 +21,6 @@ local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlag
 local FFlagBuildExperiencePageImpressionsModule = require(BuildExperience.Flags.FFlagBuildExperiencePageImpressions)
 local UseBuildPageImpressionModule = require(BuildExperience.Telemetry.useBuildPageImpression)
 local FFlagBuildExperienceOverflowMenuTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceOverflowMenuTelemetry)
-local FFlagBuildPublishSheetReturnOnBackModule = require(BuildExperience.Flags.FFlagBuildPublishSheetReturnOnBack)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 local UseGamePermissionsModule = require(BuildExperience.useGamePermissions)
 local UseGetAdCampaignEligibilityModule = require(BuildExperience.Components.Ads.useGetAdCampaignEligibility)
@@ -63,7 +62,7 @@ local function sendOverflowMenuEvent(p1, Target, Item)
 end
 
 return function(p1)
-	-- upvalues: UseScaledValueFunction (copy), BuildOverflowMenuWidth (copy), UseOpenWebViewFunction (copy), ReactModule (copy), FFlagBuildExperiencePageImpressionsModule (copy), UseBuildPageImpressionModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), UseExperienceShareFlowModule (copy), UseSharePublishedExperienceFunction (copy), FFlagEnableBuildAdPromotionModule (copy), UseGetAdCampaignEligibilityModule (copy), AdCampaignEligibilityUtilsModule (copy), UseLocalizationFunction (copy), UseCreatorCreditMenuItemFunction (copy), BadgeVariant (copy), UserInputService (copy), FFlagBuildExperienceOverflowMenuTelemetryModule (copy), sendOverflowMenuEvent (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), DeveloperProducts (copy), LocalizationStringsModule (copy), ReleaseAnyFocusModule (copy), FFlagBuildExperiencePrivateInvitesModule (copy), LeaveExperienceModule (copy), FFlagBuildPublishSheetReturnOnBackModule (copy), VersionHistoryContainerModule (copy), Menu (copy), PopoverSide (copy), InputSize (copy), PopoverAlign (copy), IconButton (copy), ButtonVariant (copy), ExperienceShareOverlaysModule (copy), FriendsOnlyShareDialogModule (copy)
+	-- upvalues: UseScaledValueFunction (copy), BuildOverflowMenuWidth (copy), UseOpenWebViewFunction (copy), ReactModule (copy), FFlagBuildExperiencePageImpressionsModule (copy), UseBuildPageImpressionModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), UseExperienceShareFlowModule (copy), UseSharePublishedExperienceFunction (copy), FFlagEnableBuildAdPromotionModule (copy), UseGetAdCampaignEligibilityModule (copy), AdCampaignEligibilityUtilsModule (copy), UseLocalizationFunction (copy), UseCreatorCreditMenuItemFunction (copy), BadgeVariant (copy), UserInputService (copy), FFlagBuildExperienceOverflowMenuTelemetryModule (copy), sendOverflowMenuEvent (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), DeveloperProducts (copy), LocalizationStringsModule (copy), ReleaseAnyFocusModule (copy), FFlagBuildExperiencePrivateInvitesModule (copy), LeaveExperienceModule (copy), VersionHistoryContainerModule (copy), Menu (copy), PopoverSide (copy), InputSize (copy), PopoverAlign (copy), IconButton (copy), ButtonVariant (copy), ExperienceShareOverlaysModule (copy), FriendsOnlyShareDialogModule (copy)
 	local UseScaledValueResult = UseScaledValueFunction(BuildOverflowMenuWidth)
 	local UseOpenWebViewResult = UseOpenWebViewFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
@@ -146,22 +145,7 @@ return function(p1)
 		-- upvalues: UseStateResult2_1 (copy)
 		UseStateResult2_1(false)
 	end, {})
-	local UseResult1 = if FFlagBuildPublishSheetReturnOnBackModule then ReactModule.useCallback(function()
-		-- upvalues: UseStateResult2_1 (copy), p1 (copy)
-		UseStateResult2_1(false)
-		
-		if p1.onAction then
-			p1.onAction({
-				type = "openPage",
-				page = "publish",
-				onReturn = function()
-					-- upvalues: UseStateResult2_1 (upval)
-					UseStateResult2_1(true)
-				end
-			})
-		end
-	end, { p1.onAction }) else nil
-	local UseResult2 = ReactModule.useCallback(function()
+	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult3 (copy), UseStateResult2_2 (copy), UseSharePublishedExperienceResult (copy)
 		UseStateResult2_2(nil)
 		
@@ -169,7 +153,7 @@ return function(p1)
 			UseSharePublishedExperienceResult(UseStateResult3)
 		end
 	end, { UseStateResult3, UseSharePublishedExperienceResult })
-	local UseResult3 = ReactModule.useCallback(function()
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2_2 (copy)
 		UseStateResult2_2(nil)
 	end, {})
@@ -326,16 +310,14 @@ return function(p1)
 			onConfirmFriends = UseExperienceShareFlowModuleResult.onConfirmFriends,
 			onConfirmPlaytesters = UseExperienceShareFlowModuleResult.onConfirmPlaytesters
 		}) else nil,
-		FriendsOnlyShareDialog = if FFlagBuildExperiencePrivateInvitesModule or UseStateResult3 == nil then nil else ReactModule.createElement(FriendsOnlyShareDialogModule, { onCancel = UseResult3, onShare = UseResult2 }),
+		FriendsOnlyShareDialog = if FFlagBuildExperiencePrivateInvitesModule or UseStateResult3 == nil then nil else ReactModule.createElement(FriendsOnlyShareDialogModule, { onCancel = UseResult2, onShare = UseResult1 }),
 		VersionHistory = if UseStateResult1 and p1.target.placeId ~= nil then ReactModule.createElement(VersionHistoryContainerModule, {
 			isOpen = true,
 			testId = "build-version-history",
 			universeId = p1.target.universeId,
 			placeId = p1.target.placeId,
-			sessionId = p1.target.sessionId,
 			onClose = UseResult,
-			onAgentRollbackStarted = UseResult,
-			onOpenPublish = if FFlagBuildPublishSheetReturnOnBackModule and p1.onAction ~= nil then UseResult1 else nil
+			onAgentRollbackStarted = UseResult
 		}) else nil
 	})
 end

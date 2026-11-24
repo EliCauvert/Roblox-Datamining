@@ -21,10 +21,9 @@ local EnableChromeAudioFocusManagement1 = game:GetEngineFeature("AudioFocusManag
 local MicConsumerRegistry = game:DefineFastFlag("MicConsumerRegistry", false)
 local ChromeModule = require(CorePackages.Workspace.Packages.Chrome)
 local SideSheetOpenBehavior = ChromeModule.Enums.SideSheetOpenBehavior
-local SideSheetPlacement = ChromeModule.Enums.SideSheetPlacement
 local FFlagTokenizeUnibarConstantsWithStyleProvider = require(Chrome.ChromeShared.Flags).FFlagTokenizeUnibarConstantsWithStyleProvider
-local ServiceModule = require(Chrome.Service)
 local ChromeUtilsModule = require(Chrome.ChromeShared.Service.ChromeUtils)
+local IsVoiceChatSupportedModule = require(Chrome.Integrations.isVoiceChatSupported)
 local RedVoiceDotModule = require(Chrome.Integrations.RedVoiceDot)
 local UnibarStyle = require(CorePackages.Workspace.Packages.Chrome).UnibarStyle
 local UseIsPlaytestModeModule = require(Chrome.ChromeShared.Hooks.useIsPlaytestMode)
@@ -111,11 +110,10 @@ local function Activated2(_)
 	Default:ShowVoiceChatLoadingMessage()
 end
 
-local FFlagHideMicWhileJoinVoiceShown = SharedFlagsModule.FFlagHideMicWhileJoinVoiceShown
-RegisterResult = ServiceModule:register({
+RegisterResult = require(Chrome.Service):register({
 	id = "toggle_mic_mute",
 	label = if require(Chrome.Flags.FFlagChangeToggleMicText) then "CoreScripts.TopBar.Mic" else "CoreScripts.TopBar.ToggleMic",
-	sideSheetPlacement = SideSheetPlacement.Unibar,
+	sideSheetPlacement = ChromeModule.Enums.SideSheetPlacement.Unibar,
 	sideSheetOpenBehavior = if FFlagKeepSideSheetOpenBesideMenu then SideSheetOpenBehavior.CloseSheet else nil,
 	activated = Activated,
 	isActivated = NewResult,
@@ -326,17 +324,8 @@ local function applyVoiceUIVisibility()
 	end
 end
 
-local v1 = nil
-
-local _ = function(): boolean
-	-- upvalues: Default (copy), v1 (ref), ServiceModule (copy)
-	local MicManager = Default:GetMicManager()
-	
-	return v1 ~= nil and (MicManager ~= nil and (v1.availability:get() ~= ServiceModule.AvailabilitySignal.Unavailable and not MicManager:HasConsumer("voice_chat")))
-end
-
 local function updateMicAvailabilityFromConsumers()
-	-- upvalues: FFlagProactiveVoiceRestrictionsUFR (copy), Default (copy), RegisterResult (ref), handleRestrictedActivation (copy), FFlagReactiveVoiceRestrictionsUFR (copy), FFlagHideMicWhileJoinVoiceShown (copy), v1 (ref), ServiceModule (copy)
+	-- upvalues: FFlagProactiveVoiceRestrictionsUFR (copy), Default (copy), RegisterResult (ref), handleRestrictedActivation (copy), FFlagReactiveVoiceRestrictionsUFR (copy)
 	if FFlagProactiveVoiceRestrictionsUFR then
 		local Flag = nil
 		if Default:GetVoiceRestrictionState(false) == "normal" then
@@ -355,15 +344,6 @@ local function updateMicAvailabilityFromConsumers()
 	end
 	local MicManager = Default:GetMicManager()
 	
-	if FFlagHideMicWhileJoinVoiceShown then
-		local MicManager1 = Default:GetMicManager()
-		
-		if v1 ~= nil and (MicManager1 ~= nil and (v1.availability:get() ~= ServiceModule.AvailabilitySignal.Unavailable and not MicManager1:HasConsumer("voice_chat"))) then
-			RegisterResult.availability:unavailable()
-			
-			return
-		end
-	end
 	if MicManager and MicManager:GetConsumerCount() > 0 then
 		RegisterResult.availability:pinned()
 		
@@ -371,21 +351,6 @@ local function updateMicAvailabilityFromConsumers()
 	end
 	if not Default.voiceUIVisible then
 		RegisterResult.availability:unavailable()
-	end
-end
-
-local _ = function()
-	-- upvalues: Default (copy), v1 (ref), ServiceModule (copy)
-	local MicManager = Default:GetMicManager()
-	
-	if MicManager then
-		local v2 = false
-		
-		if MicManager:GetConsumerCount() > 0 then
-			local MicManager1 = Default:GetMicManager()
-			v2 = not (v1 ~= nil and (MicManager1 ~= nil and (v1.availability:get() ~= ServiceModule.AvailabilitySignal.Unavailable and not MicManager1:HasConsumer("voice_chat"))))
-		end
-		MicManager:SetMicIndicatorReady(v2)
 	end
 end
 
@@ -450,7 +415,7 @@ local function updateVoiceState(_, NewState)
 	end
 end
 
-if require(Chrome.Integrations.isVoiceChatSupported)() then
+if IsVoiceChatSupportedModule() then
 	if FFlagProactiveVoiceRestrictionsUFR then
 		script.Destroying:Once((observeMicPresentation()))
 	end
@@ -516,64 +481,12 @@ if MicConsumerRegistry then
 	
 	if MicManager and MicManager.hasConsumersChanged then
 		MicManager.hasConsumersChanged.Event:Connect(function()
-			-- upvalues: updateMicAvailabilityFromConsumers (copy), FFlagHideMicWhileJoinVoiceShown (copy), Default (copy), v1 (ref), ServiceModule (copy), MicManager (copy)
+			-- upvalues: updateMicAvailabilityFromConsumers (copy), MicManager (copy)
 			updateMicAvailabilityFromConsumers()
-			
-			if FFlagHideMicWhileJoinVoiceShown then
-				local MicManager1 = Default:GetMicManager()
-				
-				if MicManager1 then
-					local v2 = false
-					
-					if MicManager1:GetConsumerCount() > 0 then
-						local MicManager2 = Default:GetMicManager()
-						v2 = not (v1 ~= nil and (MicManager2 ~= nil and (v1.availability:get() ~= ServiceModule.AvailabilitySignal.Unavailable and not MicManager2:HasConsumer("voice_chat"))))
-					end
-					MicManager1:SetMicIndicatorReady(v2)
-					
-					return
-				end
-			else
-				MicManager:SetMicIndicatorReady(MicManager:GetConsumerCount() > 0)
-			end
-		end)
-		
-		if FFlagHideMicWhileJoinVoiceShown then
-			local JoinVoiceModule = require(Chrome.Integrations.JoinVoice)
-			v1 = JoinVoiceModule
-			JoinVoiceModule.availability:connect(function()
-				-- upvalues: updateMicAvailabilityFromConsumers (copy), Default (copy), v1 (ref), ServiceModule (copy)
-				updateMicAvailabilityFromConsumers()
-				local MicManager = Default:GetMicManager()
-				
-				if MicManager then
-					local v2 = false
-					
-					if MicManager:GetConsumerCount() > 0 then
-						local MicManager1 = Default:GetMicManager()
-						v2 = not (v1 ~= nil and (MicManager1 ~= nil and (v1.availability:get() ~= ServiceModule.AvailabilitySignal.Unavailable and not MicManager1:HasConsumer("voice_chat"))))
-					end
-					MicManager:SetMicIndicatorReady(v2)
-				end
-			end)
-		end
-		updateMicAvailabilityFromConsumers()
-		
-		if FFlagHideMicWhileJoinVoiceShown then
-			local MicManager1 = Default:GetMicManager()
-			
-			if MicManager1 then
-				local v2 = false
-				
-				if MicManager1:GetConsumerCount() > 0 then
-					local MicManager2 = Default:GetMicManager()
-					v2 = not (v1 ~= nil and (MicManager2 ~= nil and (v1.availability:get() ~= ServiceModule.AvailabilitySignal.Unavailable and not MicManager2:HasConsumer("voice_chat"))))
-				end
-				MicManager1:SetMicIndicatorReady(v2)
-			end
-		else
 			MicManager:SetMicIndicatorReady(MicManager:GetConsumerCount() > 0)
-		end
+		end)
+		updateMicAvailabilityFromConsumers()
+		MicManager:SetMicIndicatorReady(MicManager:GetConsumerCount() > 0)
 	end
 end
 return RegisterResult

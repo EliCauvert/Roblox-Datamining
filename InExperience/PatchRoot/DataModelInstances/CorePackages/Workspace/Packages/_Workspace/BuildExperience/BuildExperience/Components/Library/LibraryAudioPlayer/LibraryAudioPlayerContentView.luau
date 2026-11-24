@@ -1,9 +1,6 @@
-﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
-local Parent = BuildExperience.Parent
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
-local LibraryAudioScrubInputModule = require(script.Parent.LibraryAudioScrubInput)
-local FFlagBuildExperienceLibraryAudioScrubModule = require(BuildExperience.Flags.FFlagBuildExperienceLibraryAudioScrub)
 local Icon = FoundationModule.Icon
 local IconButton = FoundationModule.IconButton
 local Image = FoundationModule.Image
@@ -34,25 +31,10 @@ local function _(p1: number): string
 end
 
 return function(Frame)
-	-- upvalues: FoundationModule (copy), FFlagBuildExperienceLibraryAudioScrubModule (copy), ReactModule (copy), Slider (copy), InputSize (copy), View (copy), Image (copy), Icon (copy), IconName (copy), IconSize (copy), Text (copy), LibraryAudioScrubInputModule (copy), formatTime (copy), IconButton (copy), ButtonVariant (copy)
+	-- upvalues: FoundationModule (copy), ReactModule (copy), View (copy), Image (copy), Icon (copy), IconName (copy), IconSize (copy), Text (copy), Slider (copy), InputSize (copy), formatTime (copy), IconButton (copy), ButtonVariant (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseScaledValueResult = FoundationModule.Hooks.useScaledValue(168)
 	local IsIsCompact = Frame.isCompact == true
-	local Element = ReactModule.createElement(Slider, {
-		LayoutOrder = 1,
-		testId = "Library.AudioPlayer.Timeline.Slider",
-		value = if FFlagBuildExperienceLibraryAudioScrubModule and Frame.progress ~= nil then Frame.progress else Frame.elapsed:map(function(p1): number
-			-- upvalues: Frame (copy)
-			return if Frame.duration <= 0 then 0 else math.clamp(p1 / Frame.duration, 0, 1)
-		end),
-		onValueChanged = Frame.onSeek,
-		onDragStarted = Frame.onSeekStarted,
-		onDragEnded = Frame.onSeekEnded,
-		isDisabled = Frame.onSeek == nil or Frame.duration <= 0,
-		size = InputSize.XSmall,
-		knobVisibility = FoundationModule.Enums.Visibility.Always,
-		variant = FoundationModule.Enums.SliderVariant.Emphasis
-	})
 	
 	return ReactModule.createElement(View, {
 		testId = "Library.AudioPlayer",
@@ -128,13 +110,21 @@ return function(Frame)
 				tag = "col gap-xsmall size-full-0 auto-y",
 				testId = "Library.AudioPlayer.Timeline"
 			}, {
-				Slider = if FFlagBuildExperienceLibraryAudioScrubModule and Frame.scrubWithPointer then ReactModule.createElement(LibraryAudioScrubInputModule, {
+				Slider = ReactModule.createElement(Slider, {
 					LayoutOrder = 1,
+					testId = "Library.AudioPlayer.Timeline.Slider",
+					value = Frame.elapsed:map(function(p1): number
+						-- upvalues: Frame (copy)
+						return if Frame.duration <= 0 then 0 else math.clamp(p1 / Frame.duration, 0, 1)
+					end),
+					onValueChanged = Frame.onSeek,
+					onDragStarted = Frame.onSeekStarted,
+					onDragEnded = Frame.onSeekEnded,
 					isDisabled = Frame.onSeek == nil or Frame.duration <= 0,
-					onScrubStarted = Frame.onSeekStarted,
-					onScrub = Frame.onSeek,
-					onScrubEnded = Frame.onSeekEnded
-				}, Element) else Element,
+					size = InputSize.XSmall,
+					knobVisibility = FoundationModule.Enums.Visibility.Always,
+					variant = FoundationModule.Enums.SliderVariant.Emphasis
+				}),
 				Times = ReactModule.createElement(View, { LayoutOrder = 2, tag = "row size-full-0 auto-y" }, {
 					Elapsed = ReactModule.createElement(Text, {
 						LayoutOrder = 1,

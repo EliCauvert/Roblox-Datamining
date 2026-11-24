@@ -15,10 +15,7 @@ local SquadExternalContractContext = require(Parent.SquadsCore.SquadExternalCont
 local SquadLocationEnum = require(Parent.SquadsCore.Enums).SquadLocationEnum
 local UseCurrentSquadParentChannelIdFunction = require(Parent.SquadsCore.Hooks).useCurrentSquadParentChannelId
 local _ = require(script.Parent.SquadLobbyJoinDialogView)
-local SquadLobbyRatingIconModule = require(script.Parent.SquadLobbyRatingIcon)
 local IsPresenceJoinableModule = require(Squads.Common.isPresenceJoinable)
-local FFlagExperienceGuidelinesRatingDisplayStoreModule = require(Parent.DataHydration.FFlagExperienceGuidelinesRatingDisplayStore)
-local UseGetRatingDisplayByUniverseId = if FFlagExperienceGuidelinesRatingDisplayStoreModule then require(Parent.SocialCommon).Hooks.useGetRatingDisplayByUniverseId else nil
 local FFlagSquadLaunchExperienceMobileFix = DependenciesModule.SharedFlags.FFlagSquadLaunchExperienceMobileFix
 local UseLocalizationFunction = DependenciesModule.Hooks.useLocalization
 local UseSelectorFunction = DependenciesModule.Hooks.useSelector
@@ -43,7 +40,7 @@ local function _(p1)
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), SquadExternalContractContext (copy), UseVoiceStatusFunction (copy), UseCurrentSquadParentChannelIdFunction (copy), FFlagSquadsPresenceStoreMigration (copy), UseGetPresenceByUserId (copy), UseSelectorFunction (copy), IsPresenceJoinableModule (copy), FFlagExperienceGuidelinesRatingDisplayStoreModule (copy), UseGetRatingDisplayByUniverseId (copy), UserProfilesModule (copy), UseLocalizationFunction (copy), FFlagSquadLaunchExperienceMobileFix (copy), SquadLocationEnum (copy), ExperienceService (copy), GameParams (copy), EventNamesModule (copy), SquadPartySheetActionEnumModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), UseLastInputModeFunction (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), SquadLobbyRatingIconModule (copy)
+	-- upvalues: ReactModule (copy), SquadExternalContractContext (copy), UseVoiceStatusFunction (copy), UseCurrentSquadParentChannelIdFunction (copy), FFlagSquadsPresenceStoreMigration (copy), UseGetPresenceByUserId (copy), UseSelectorFunction (copy), IsPresenceJoinableModule (copy), UserProfilesModule (copy), UseLocalizationFunction (copy), FFlagSquadLaunchExperienceMobileFix (copy), SquadLocationEnum (copy), ExperienceService (copy), GameParams (copy), EventNamesModule (copy), SquadPartySheetActionEnumModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), UseLastInputModeFunction (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy)
 	local UserId = p1.userId
 	local OnCloseFunction = p1.onClose
 	local UseContextResult = ReactModule.useContext(SquadExternalContractContext)
@@ -84,19 +81,6 @@ return function(p1)
 		local LastLocation = UseGetPresenceByUserIdResult.lastLocation
 		UseGetPresenceByUserIdResult1 = if LastLocation == nil or LastLocation == "" then nil else tostring(LastLocation)
 	end
-	local v1 = nil
-	if FFlagExperienceGuidelinesRatingDisplayStoreModule then
-		local UseGetPresenceByUserIdResult2 = UseGetPresenceByUserIdResult
-		
-		if UseGetPresenceByUserIdResult2 then
-			local UniverseId = UseGetPresenceByUserIdResult.universeId
-			UseGetPresenceByUserIdResult2 = if UniverseId == nil or UniverseId == "" then nil else tostring(UniverseId)
-		end
-		v1 = UseGetRatingDisplayByUniverseId(UseGetPresenceByUserIdResult2)
-	else
-		v1 = nil
-	end
-	local MinimizedIconVariant = if type(v1) == "table" then v1.minimizedIconVariant else nil
 	local UseUserProfilesFetchResult = UserProfilesModule.Hooks.useUserProfilesFetch({
 		userIds = { UserId },
 		query = UserProfilesModule.Queries.userProfilesCombinedNameByUserIds
@@ -178,11 +162,6 @@ return function(p1)
 		viewProfileText = if p1.isInExperience then nil else UseLocalizationResult.viewProfile,
 		onViewProfile = if p1.isInExperience then nil else UseResult11,
 		onClose = if IsFocus then nil else OnCloseFunction,
-		rating = if type(MinimizedIconVariant) == "table" and (type(MinimizedIconVariant.contentId) == "string" and MinimizedIconVariant.contentId ~= "" and type(MinimizedIconVariant.aspectRatio) == "number" and MinimizedIconVariant.aspectRatio > 0) then ReactModule.createElement(SquadLobbyRatingIconModule, {
-			image = MinimizedIconVariant.contentId,
-			aspectRatio = MinimizedIconVariant.aspectRatio
-		}) else nil,
-		isWideMode = p1.isWideMode,
 		dialogRef = UseFocusRootResult,
 		testId = `--social-squad-lobby-join-dialog-{UserId}`
 	}

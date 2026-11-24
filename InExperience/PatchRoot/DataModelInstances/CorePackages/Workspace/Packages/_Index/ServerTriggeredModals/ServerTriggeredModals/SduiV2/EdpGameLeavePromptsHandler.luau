@@ -8,7 +8,6 @@ local IsPinShortcutAvailableModule = require(script.Parent.isPinShortcutAvailabl
 local IsCustomAppEntryPointAutoJoinAvailableModule = require(script.Parent.isCustomAppEntryPointAutoJoinAvailable)
 local IsRecentInstallModule = require(script.Parent.isRecentInstall)
 local GetOsInfoModule = require(script.Parent.getOsInfo)
-local ConsumeCoplaySessionModule = require(script.Parent.consumeCoplaySession)
 local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
 local GetAppFeaturePoliciesFunction = require(Parent.UniversalAppPolicy).getAppFeaturePolicies
 local SharedFlagsModule = require(Parent.SharedFlags)
@@ -19,13 +18,10 @@ local AvoidShowingMobileUpsellDialogOnDesktopHackyLuaFix = game:DefineFastFlag("
 local PassInPinShortcutTargetDestinationToUpsellResolver = game:DefineFastFlag("PassInPinShortcutTargetDestinationToUpsellResolver", false)
 local FFlagEdpGameLeavePromptsPassIsRecentInstall = SharedFlagsModule.FFlagEdpGameLeavePromptsPassIsRecentInstall
 local FFlagEdpGameLeavePromptsPassOsVersion = SharedFlagsModule.FFlagEdpGameLeavePromptsPassOsVersion
-local FFlagEdpGameLeavePromptsPassIsCoplaySession = SharedFlagsModule.FFlagEdpGameLeavePromptsPassIsCoplaySession
 
 return function(p1)
-	-- upvalues: ReactModule (copy), IsPinShortcutAvailableModule (copy), FFlagEdpGameLeavePromptsPassCustomAppEntryPointAutoJoin (copy), IsCustomAppEntryPointAutoJoinAvailableModule (copy), FFlagEdpGameLeavePromptsPassOsVersion (copy), GetOsInfoModule (copy), FFlagEdpGameLeavePromptsPassIsRecentInstall (copy), UseLocalUserIdFunction (copy), FFlagAddPinExperienceTargetDestinationGUACPolicy (copy), GetAppFeaturePoliciesFunction (copy), FFlagEdpGameLeavePromptsPassPinShortcutAvailable (copy), AvoidShowingMobileUpsellDialogOnDesktopHackyLuaFix (copy), IsRecentInstallModule (copy), FFlagEdpGameLeavePromptsPassIsCoplaySession (copy), PassInPinShortcutTargetDestinationToUpsellResolver (copy), MessageBus (copy), TModule (copy), ConsumeCoplaySessionModule (copy), PromptsHandler (copy), PromptsEntryPointModule (copy)
-	local UseStateResult, UseStateResult2 = ReactModule.useState({ count = 0 })
-	local Count = UseStateResult.count
-	local CoplaySession = UseStateResult.coplaySession
+	-- upvalues: ReactModule (copy), IsPinShortcutAvailableModule (copy), FFlagEdpGameLeavePromptsPassCustomAppEntryPointAutoJoin (copy), IsCustomAppEntryPointAutoJoinAvailableModule (copy), FFlagEdpGameLeavePromptsPassOsVersion (copy), GetOsInfoModule (copy), FFlagEdpGameLeavePromptsPassIsRecentInstall (copy), UseLocalUserIdFunction (copy), FFlagAddPinExperienceTargetDestinationGUACPolicy (copy), GetAppFeaturePoliciesFunction (copy), FFlagEdpGameLeavePromptsPassPinShortcutAvailable (copy), AvoidShowingMobileUpsellDialogOnDesktopHackyLuaFix (copy), IsRecentInstallModule (copy), PassInPinShortcutTargetDestinationToUpsellResolver (copy), MessageBus (copy), TModule (copy), PromptsHandler (copy), PromptsEntryPointModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
 	local UseMemoResult = ReactModule.useMemo(IsPinShortcutAvailableModule, {})
 	local UseMemoResult1 = ReactModule.useMemo(function()
 		-- upvalues: FFlagEdpGameLeavePromptsPassCustomAppEntryPointAutoJoin (upval), IsCustomAppEntryPointAutoJoinAvailableModule (upval)
@@ -35,7 +31,7 @@ return function(p1)
 	local UseLocalUserIdResult = if FFlagEdpGameLeavePromptsPassIsRecentInstall then UseLocalUserIdFunction() else nil
 	local PinExperienceTargetDestination = if FFlagAddPinExperienceTargetDestinationGUACPolicy then GetAppFeaturePoliciesFunction().getPinExperienceTargetDestination() else "HomeScreen"
 	local UseMemoResult3 = ReactModule.useMemo(function()
-		-- upvalues: p1 (copy), FFlagEdpGameLeavePromptsPassPinShortcutAvailable (upval), AvoidShowingMobileUpsellDialogOnDesktopHackyLuaFix (upval), FFlagAddPinExperienceTargetDestinationGUACPolicy (upval), PinExperienceTargetDestination (copy), UseMemoResult (copy), FFlagEdpGameLeavePromptsPassCustomAppEntryPointAutoJoin (upval), UseMemoResult1 (copy), FFlagEdpGameLeavePromptsPassOsVersion (upval), UseMemoResult2 (copy), FFlagEdpGameLeavePromptsPassIsRecentInstall (upval), Count (copy), IsRecentInstallModule (upval), UseLocalUserIdResult (copy), FFlagEdpGameLeavePromptsPassIsCoplaySession (upval), CoplaySession (copy), PassInPinShortcutTargetDestinationToUpsellResolver (upval), GetAppFeaturePoliciesFunction (upval)
+		-- upvalues: p1 (copy), FFlagEdpGameLeavePromptsPassPinShortcutAvailable (upval), AvoidShowingMobileUpsellDialogOnDesktopHackyLuaFix (upval), FFlagAddPinExperienceTargetDestinationGUACPolicy (upval), PinExperienceTargetDestination (copy), UseMemoResult (copy), FFlagEdpGameLeavePromptsPassCustomAppEntryPointAutoJoin (upval), UseMemoResult1 (copy), FFlagEdpGameLeavePromptsPassOsVersion (upval), UseMemoResult2 (copy), FFlagEdpGameLeavePromptsPassIsRecentInstall (upval), UseStateResult (copy), IsRecentInstallModule (upval), UseLocalUserIdResult (copy), PassInPinShortcutTargetDestinationToUpsellResolver (upval), GetAppFeaturePoliciesFunction (upval)
 		if p1.universeId == nil then
 			return nil
 		end
@@ -60,11 +56,8 @@ return function(p1)
 			config.osName = UseMemoResult2.osName
 			config.osMajorVersion = UseMemoResult2.osMajorVersion
 		end
-		if FFlagEdpGameLeavePromptsPassIsRecentInstall and Count > 0 then
+		if FFlagEdpGameLeavePromptsPassIsRecentInstall and UseStateResult > 0 then
 			config.isRecentInstall = tostring(IsRecentInstallModule(UseLocalUserIdResult))
-		end
-		if FFlagEdpGameLeavePromptsPassIsCoplaySession and Count > 0 then
-			config.isCoplaySession = tostring(CoplaySession ~= nil and (CoplaySession.universeId == config.universeId and CoplaySession.isCoplaySession))
 		end
 		if PassInPinShortcutTargetDestinationToUpsellResolver and FFlagAddPinExperienceTargetDestinationGUACPolicy then
 			config.pinnedShortcutTargetDestination = GetAppFeaturePoliciesFunction().getPinExperienceTargetDestination()
@@ -72,24 +65,18 @@ return function(p1)
 		return config
 	end, {
 		p1.universeId, UseMemoResult, UseMemoResult1, PinExperienceTargetDestination,
-		UseLocalUserIdResult, Count, CoplaySession
+		UseLocalUserIdResult, UseStateResult
 	})
 	ReactModule.useEffect(function()
-		-- upvalues: p1 (copy), FFlagEdpGameLeavePromptsPassPinShortcutAvailable (upval), UseMemoResult (copy), MessageBus (upval), TModule (upval), FFlagEdpGameLeavePromptsPassIsCoplaySession (upval), ConsumeCoplaySessionModule (upval), UseStateResult2 (copy)
+		-- upvalues: p1 (copy), FFlagEdpGameLeavePromptsPassPinShortcutAvailable (upval), UseMemoResult (copy), MessageBus (upval), TModule (upval), UseStateResult2 (copy)
 		if p1.universeId == nil then return end
 		if not FFlagEdpGameLeavePromptsPassPinShortcutAvailable and not UseMemoResult then return end
 		local NewResult = MessageBus.Subscriber.new()
 		local GameMessageId = MessageBus.getMessageId("Game", "onGameLeave")
 		NewResult:subscribe({ mid = GameMessageId, validateParams = TModule.table }, function()
-			-- upvalues: p1 (upval), FFlagEdpGameLeavePromptsPassIsCoplaySession (upval), ConsumeCoplaySessionModule (upval), UseStateResult2 (upval)
-			local UniverseId = p1.universeId
-			local Config = if FFlagEdpGameLeavePromptsPassIsCoplaySession then {
-				universeId = UniverseId,
-				isCoplaySession = ConsumeCoplaySessionModule(UniverseId)
-			} else nil
-			UseStateResult2(function(p2)
-				-- upvalues: Config (copy)
-				return { count = p2.count + 1, coplaySession = Config }
+			-- upvalues: UseStateResult2 (upval)
+			UseStateResult2(function(p2: number): number
+				return p2 + 1
 			end)
 		end)
 		
@@ -99,8 +86,8 @@ return function(p1)
 		end
 	end, { UseMemoResult, p1.universeId })
 	
-	return if Count == 0 or UseMemoResult3 == nil then nil elseif FFlagEdpGameLeavePromptsPassPinShortcutAvailable or UseMemoResult then ReactModule.createElement(PromptsHandler, {
-		key = "EdpPrompts" .. tostring(Count),
+	return if UseStateResult == 0 or UseMemoResult3 == nil then nil elseif FFlagEdpGameLeavePromptsPassPinShortcutAvailable or UseMemoResult then ReactModule.createElement(PromptsHandler, {
+		key = "EdpPrompts" .. tostring(UseStateResult),
 		entryPoint = PromptsEntryPointModule.ExperienceDetailsPageSessionEnd,
 		clientAttributes = UseMemoResult3
 	}) else nil

@@ -7,11 +7,9 @@ local RoactNavigationModule = require(Parent.RoactNavigation)
 local SignalsReactModule = require(Parent.SignalsReact)
 local _ = require(script.Parent.LibraryAudioPlayerView)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
-local FFlagBuildExperienceLibraryAudioScrubModule = require(BuildExperience.Flags.FFlagBuildExperienceLibraryAudioScrub)
-local UseLibraryAudioScrubModule = require(script.Parent.useLibraryAudioScrub)
 
 return function(p1)
-	-- upvalues: MediaPlaybackModule (copy), NavigationModule (copy), ReactModule (copy), RoactNavigationModule (copy), SignalsReactModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildExperienceLibraryAudioScrubModule (copy), UseLibraryAudioScrubModule (copy)
+	-- upvalues: MediaPlaybackModule (copy), NavigationModule (copy), ReactModule (copy), RoactNavigationModule (copy), SignalsReactModule (copy), SendBuildExperienceEventModule (copy)
 	local IsIsActive = p1.isActive ~= false
 	local UseAudioStoreResult = MediaPlaybackModule.useAudioStore(p1.soundId, false)
 	local UseNavigationResult = NavigationModule.useNavigation()
@@ -119,12 +117,6 @@ return function(p1)
 		end
 		UseRefResult.current = false
 	end, { UseAudioStoreResult, IsIsActive, UseStateResult })
-	local UseLibraryAudioScrubModuleResult = if FFlagBuildExperienceLibraryAudioScrubModule then UseLibraryAudioScrubModule({
-		audioStore = UseAudioStoreResult,
-		elapsed = UseSignalBindingResult,
-		duration = UseSignalStateResult2,
-		canSeek = UseSignalStateResult1 and (IsIsActive and UseStateResult)
-	}) else nil
 	ReactModule.useEffect(function()
 		-- upvalues: UseStateResult (copy), UseAudioStoreResult (copy), IsIsActive (copy)
 		if not UseStateResult then
@@ -149,14 +141,12 @@ return function(p1)
 		title = p1.title,
 		artist = p1.soundLabel or "",
 		isPlaying = UseSignalStateResult,
-		elapsed = if UseLibraryAudioScrubModuleResult == nil then UseSignalBindingResult else UseLibraryAudioScrubModuleResult.elapsed,
-		progress = if UseLibraryAudioScrubModuleResult == nil then nil else UseLibraryAudioScrubModuleResult.progress,
+		elapsed = UseSignalBindingResult,
 		duration = UseSignalStateResult2,
 		onTogglePlayback = UseResult,
-		onSeek = if UseLibraryAudioScrubModuleResult == nil then UseResult2 else UseLibraryAudioScrubModuleResult.onScrub,
-		onSeekStarted = if UseLibraryAudioScrubModuleResult == nil then UseResult1 else UseLibraryAudioScrubModuleResult.onScrubStarted,
-		onSeekEnded = if UseLibraryAudioScrubModuleResult == nil then UseResult3 else UseLibraryAudioScrubModuleResult.onScrubEnded,
-		scrubWithPointer = UseLibraryAudioScrubModuleResult ~= nil or nil,
+		onSeek = UseResult2,
+		onSeekStarted = UseResult1,
+		onSeekEnded = UseResult3,
 		unavailableText = p1.unavailableText,
 		status = if UseSignalStateResult1 then "Ready" elseif UseStateResult1 then "Failed" else "Loading"
 	}

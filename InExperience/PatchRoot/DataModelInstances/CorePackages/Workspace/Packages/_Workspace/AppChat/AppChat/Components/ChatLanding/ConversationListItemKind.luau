@@ -8,6 +8,5 @@
 	SectionHeader = "sectionHeader",
 	SocialCarousel = "socialCarousel",
 	StatusText = "statusText",
-	SuggestedUser = "suggestedUser",
-	SuggestedUserPlaceholder = "suggestedUserPlaceholder"
+	SuggestedUser = "suggestedUser"
 }))

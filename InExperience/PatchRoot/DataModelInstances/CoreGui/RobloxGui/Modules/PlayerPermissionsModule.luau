@@ -7,6 +7,7 @@ local HttpRbxApiService = game:GetService("HttpRbxApiService")
 local HttpService = game:GetService("HttpService")
 local _ = UserSettings().GameSettings
 local Url = require(CorePackages.Workspace.Packages.CoreScriptsCommon).Url
+local FFlagInExperienceUserProfileSettingsEnabledModule = require(RobloxGui.Modules.Common.Flags.FFlagInExperienceUserProfileSettingsEnabled)
 local FFlagBadgeVisibilitySettingEnabled = require(CorePackages.Workspace.Packages.SharedFlags).FFlagBadgeVisibilitySettingEnabled
 local FFlagInExperienceRequestProfileSettingsModule = require(RobloxGui.Modules.Common.Flags.FFlagInExperienceRequestProfileSettings)
 local VerifiedBadgeDisplayStore = require(CorePackages.Workspace.Packages.UserProfiles).Stores.VerifiedBadgeDisplayStore
@@ -92,14 +93,17 @@ function Module:setProfileSettings(ProfileSettings)
 end
 
 function Module.destroy(p2)
+	-- upvalues: FFlagInExperienceUserProfileSettingsEnabledModule (copy)
 	for _, value in pairs(p2.pendingGroupData) do
 		coroutine.resume(value)
 	end
 	for _, value1 in pairs(p2.pendingCanManage) do
 		coroutine.resume(value1)
 	end
-	for _, pendingProfileSetting in pairs(p2.pendingProfileSettings) do
-		coroutine.resume(pendingProfileSetting)
+	if FFlagInExperienceUserProfileSettingsEnabledModule then
+		for _, pendingProfileSetting in pairs(p2.pendingProfileSettings) do
+			coroutine.resume(pendingProfileSetting)
+		end
 	end
 end
 
@@ -176,33 +180,36 @@ coroutine.wrap(function()
 		end
 	end)
 end)()
-coroutine.wrap(function()
-	-- upvalues: Players (copy), NewResults (copy), Module (copy), FFlagEnableVerifiedBadgeStore (copy), VerifiedBadgeDisplayStore (copy), FFlagInExperienceRequestProfileSettingsModule (copy)
-	local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
-	RobloxReplicatedStorage:WaitForChild("SendPlayerProfileSettings", 1e999).OnClientEvent:Connect(function(p3, ProfileSettings)
-		-- upvalues: Players (upval), NewResults (upval), Module (upval), FFlagEnableVerifiedBadgeStore (upval), VerifiedBadgeDisplayStore (upval)
-		local Player = Players:GetPlayerByUserId((tonumber(p3)))
-		
-		if Player then
-			local NewResult = NewResults[Player]
+
+if FFlagInExperienceUserProfileSettingsEnabledModule then
+	coroutine.wrap(function()
+		-- upvalues: Players (copy), NewResults (copy), Module (copy), FFlagEnableVerifiedBadgeStore (copy), VerifiedBadgeDisplayStore (copy), FFlagInExperienceRequestProfileSettingsModule (copy)
+		local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
+		RobloxReplicatedStorage:WaitForChild("SendPlayerProfileSettings", 1e999).OnClientEvent:Connect(function(p3, ProfileSettings)
+			-- upvalues: Players (upval), NewResults (upval), Module (upval), FFlagEnableVerifiedBadgeStore (upval), VerifiedBadgeDisplayStore (upval)
+			local Player = Players:GetPlayerByUserId((tonumber(p3)))
 			
-			if not NewResult and Player.Parent ~= nil then
-				NewResult = Module.new(Player)
-				NewResults[Player] = NewResult
+			if Player then
+				local NewResult = NewResults[Player]
+				
+				if not NewResult and Player.Parent ~= nil then
+					NewResult = Module.new(Player)
+					NewResults[Player] = NewResult
+				end
+				if NewResult then
+					NewResult:setProfileSettings(ProfileSettings)
+				end
+				if FFlagEnableVerifiedBadgeStore and ProfileSettings.isInExperienceNameEnabled ~= nil then
+					VerifiedBadgeDisplayStore.get().setBadgeVisibility(Player.UserId, not ProfileSettings.isInExperienceNameEnabled)
+				end
 			end
-			if NewResult then
-				NewResult:setProfileSettings(ProfileSettings)
-			end
-			if FFlagEnableVerifiedBadgeStore and ProfileSettings.isInExperienceNameEnabled ~= nil then
-				VerifiedBadgeDisplayStore.get().setBadgeVisibility(Player.UserId, not ProfileSettings.isInExperienceNameEnabled)
-			end
+		end)
+		
+		if FFlagInExperienceRequestProfileSettingsModule then
+			RobloxReplicatedStorage:WaitForChild("RequestPlayerProfileSettings", 1e999):FireServer()
 		end
-	end)
-	
-	if FFlagInExperienceRequestProfileSettingsModule then
-		RobloxReplicatedStorage:WaitForChild("RequestPlayerProfileSettings", 1e999):FireServer()
-	end
-end)()
+	end)()
+end
 Players.PlayerRemoving:Connect(function(Player)
 	-- upvalues: NewResults (copy)
 	if NewResults[Player] then
@@ -487,8 +494,10 @@ else
 end
 PlayerPermissionsModule.IsPlayerPlaceOwnerAsync = IsPlayerPlaceOwnerAsync
 PlayerPermissionsModule.CanPlayerManagePlaceAsync = CanPlayerManagePlace
-PlayerPermissionsModule.IsPlayerInExperienceNameEnabledAsync = IsPlayerInExperienceNameEnabled
 
+if FFlagInExperienceUserProfileSettingsEnabledModule then
+	PlayerPermissionsModule.IsPlayerInExperienceNameEnabledAsync = IsPlayerInExperienceNameEnabled
+end
 if FFlagBadgeVisibilitySettingEnabled then
 	PlayerPermissionsModule.SetPlayerInExperienceNameEnabled = SetPlayerInExperienceNameEnabled
 end

@@ -26,8 +26,6 @@ local MainViewLuauHeapModule = require(Components.LuauHeap.MainViewLuauHeap)
 local MainViewVoiceChatModule = require(Components.VoiceChat.MainViewVoiceChat)
 local MainViewVoiceDebugModule = require(Components.VoiceDebug.MainViewVoiceDebug)
 local GetFFlagVoiceDebugConsoleV2Module = require(Components.VoiceDebug.GetFFlagVoiceDebugConsoleV2)
-local IsVoiceDebugTabEngineVersionSupportedModule = require(Components.VoiceDebug.IsVoiceDebugTabEngineVersionSupported)
-local GetFFlagDevConsoleVoiceDebugPlayerVisibleModule = require(Components.GetFFlagDevConsoleVoiceDebugPlayerVisible)
 local MainViewRequestOrchestratorModule = require(Components.RequestOrchestrator.MainViewRequestOrchestrator)
 local RCCProfilerDataCompleteListenerModule = require(Components.MicroProfiler.RCCProfilerDataCompleteListener)
 local GetClientReplicatorModule = require(DevConsole.Util.getClientReplicator)
@@ -143,12 +141,9 @@ local function getAdminTabList()
 	-- upvalues: config (copy), config2 (copy)
 	local Copy = table.clone(config)
 	
-	for i, VoiceDebug in pairs(config2) do
-		if VoiceDebug.isEnabled == nil or VoiceDebug.isEnabled() then
-			Copy[i] = {
-				tab = VoiceDebug.tab,
-				layoutOrder = VoiceDebug.layoutOrder
-			}
+	for i, value in pairs(config2) do
+		if value.isEnabled == nil or value.isEnabled() then
+			Copy[i] = { tab = value.tab, layoutOrder = value.layoutOrder }
 		end
 	end
 	return Copy
@@ -216,20 +211,18 @@ function Module:refreshTabList()
 end
 
 function Module.refreshVoiceDevConsoleAvailability(p1)
-	-- upvalues: GetFFlagVoiceDebugConsoleV2Module (copy), Default (copy), IsVoiceDebugTabEngineVersionSupportedModule (copy), v1 (ref), GetFFlagDevConsoleVoiceDebugPlayerVisibleModule (copy)
+	-- upvalues: GetFFlagVoiceDebugConsoleV2Module (copy), Default (copy), v1 (ref)
 	if not GetFFlagVoiceDebugConsoleV2Module() then return end
-	if not game:GetEngineFeature("VoiceChatDevConsoleTabEnabled") or not Default then return end
-	if IsVoiceDebugTabEngineVersionSupportedModule.get() then
+	if game:GetEngineFeature("VoiceChatDevConsoleTabEnabled") and Default then
 		local function apply()
-			-- upvalues: Default (upval), v1 (upval), p1 (copy), GetFFlagDevConsoleVoiceDebugPlayerVisibleModule (upval)
+			-- upvalues: Default (upval), v1 (upval), p1 (copy)
 			local VoiceChatAvailableResult = Default:VoiceChatAvailable()
 			
-			if VoiceChatAvailableResult == v1 then return end
-			v1 = VoiceChatAvailableResult
-			p1:refreshTabList()
-			
-			if GetFFlagDevConsoleVoiceDebugPlayerVisibleModule() then
-				p1:refreshPlayerVoiceDebugTab()
+			if VoiceChatAvailableResult ~= v1 then
+				v1 = VoiceChatAvailableResult
+				p1:refreshTabList()
+				
+				return
 			end
 		end
 		
@@ -239,21 +232,8 @@ function Module.refreshVoiceDevConsoleAvailability(p1)
 	end
 end
 
-function Module:refreshPlayerVoiceDebugTab()
-	-- upvalues: GetFFlagDevConsoleVoiceDebugPlayerVisibleModule (copy), GetFFlagVoiceDebugConsoleV2Module (copy), Default (copy), v1 (ref), TabList (copy), MainViewVoiceDebugModule (copy), SetTabListModule (copy)
-	if not GetFFlagDevConsoleVoiceDebugPlayerVisibleModule() then return end
-	TabList.VoiceDebug = nil
-	
-	if GetFFlagVoiceDebugConsoleV2Module() and (game:GetEngineFeature("VoiceChatDevConsoleTabEnabled") and (Default and v1)) then
-		TabList.VoiceDebug = { layoutOrder = 3, tab = MainViewVoiceDebugModule }
-	end
-	if not self.isEmployee and not self.isDeveloperTabListActive and not self.isLegacyAdmin then
-		self.store:dispatch(SetTabListModule(TabList, "Log", false))
-	end
-end
-
 function Module:Start()
-	-- upvalues: RoactModule (copy), CoreGui (copy), GetClientReplicatorModule (copy), DevConsoleAdminSeesDevTabs (copy), PlayerPermissionsModule (copy), Players (copy), GetFFlagDevConsoleVoiceDebugPlayerVisibleModule (copy), SetTabListModule (copy), config1 (copy), config (copy)
+	-- upvalues: RoactModule (copy), CoreGui (copy), GetClientReplicatorModule (copy), DevConsoleAdminSeesDevTabs (copy), PlayerPermissionsModule (copy), Players (copy), SetTabListModule (copy), config1 (copy), config (copy)
 	if not self.init then
 		if self.waitForStart then
 			self.waitForStartBindable.Event:Wait()
@@ -262,19 +242,16 @@ function Module:Start()
 		self.element = RoactModule.mount(self.root, CoreGui, "DevConsoleMaster")
 		local ClientReplicatorModule = GetClientReplicatorModule()
 		task.spawn(function()
-			-- upvalues: DevConsoleAdminSeesDevTabs (upval), PlayerPermissionsModule (upval), Players (upval), self (copy), GetFFlagDevConsoleVoiceDebugPlayerVisibleModule (upval), SetTabListModule (upval), config1 (upval)
-			if not DevConsoleAdminSeesDevTabs then
-				if PlayerPermissionsModule.IsPlayerAdminAsync(Players.LocalPlayer) and not self.isDeveloperTabListActive then
-					if GetFFlagDevConsoleVoiceDebugPlayerVisibleModule() then
-						self.isLegacyAdmin = true
-					end
-					self.store:dispatch(SetTabListModule(config1, "Log", false))
+			-- upvalues: DevConsoleAdminSeesDevTabs (upval), PlayerPermissionsModule (upval), Players (upval), self (copy), SetTabListModule (upval), config1 (upval)
+			if DevConsoleAdminSeesDevTabs then
+				if PlayerPermissionsModule.IsPlayerAdminAsync(Players.LocalPlayer) then
+					self.isEmployee = true
+					self:refreshTabList()
+					
+					return
 				end
-			elseif PlayerPermissionsModule.IsPlayerAdminAsync(Players.LocalPlayer) then
-				self.isEmployee = true
-				self:refreshTabList()
-				
-				return
+			elseif PlayerPermissionsModule.IsPlayerAdminAsync(Players.LocalPlayer) and not self.isDeveloperTabListActive then
+				self.store:dispatch(SetTabListModule(config1, "Log", false))
 			end
 		end)
 		task.spawn(function()

@@ -9,7 +9,7 @@ local FullscreenPageWithSafeArea = require(Parent.AppBlox).FullscreenPageWithSaf
 local UseNavigationFunction = require(Parent.Navigation).useNavigation
 local DisplayModule = require(Parent.Display)
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
-local FFlagSocialTabsPageDockedPanelSafeArea = require(Parent.SharedFlags).FFlagSocialTabsPageDockedPanelSafeArea
+local FFlagSocialTabsPageDockedPanelSafeAreaModule = require(SocialTabsPage.Flags.FFlagSocialTabsPageDockedPanelSafeArea)
 local FFlagSocialTabsPageSplitPaneLayout = require(Parent.SharedFlags).FFlagSocialTabsPageSplitPaneLayout
 local SocialTabsHeaderModule = require(SocialTabsPage.Components.SocialTabsHeader)
 local SocialTabBarModule = require(SocialTabsPage.Components.SocialTabBar)
@@ -18,7 +18,7 @@ local UseLocalizedTabsModule = require(SocialTabsPage.Hooks.useLocalizedTabs)
 local _ = require(SocialTabsPage.Common.Types)
 
 return function(p1)
-	-- upvalues: FFlagSocialTabsPageSplitPaneLayout (copy), ReactModule (copy), UseLocalizedTabsModule (copy), UseTokensFunction (copy), UseNavigationFunction (copy), FFlagSocialTabsPageDockedPanelSafeArea (copy), UseSignalStateFunction (copy), DisplayModule (copy), View (copy), SocialTabsHeaderModule (copy), SocialTabBarModule (copy), StateLayerAffordance (copy), SocialTabsContextModule (copy), FullscreenPageWithSafeArea (copy)
+	-- upvalues: FFlagSocialTabsPageSplitPaneLayout (copy), ReactModule (copy), UseLocalizedTabsModule (copy), UseTokensFunction (copy), UseNavigationFunction (copy), FFlagSocialTabsPageDockedPanelSafeAreaModule (copy), UseSignalStateFunction (copy), DisplayModule (copy), View (copy), SocialTabsHeaderModule (copy), SocialTabBarModule (copy), StateLayerAffordance (copy), SocialTabsContextModule (copy), FullscreenPageWithSafeArea (copy)
 	local RenderNavigatorFunction = p1.renderNavigator
 	local RenderHeaderFunction = p1.renderHeader
 	local TabConfig = p1.tabConfig
@@ -36,7 +36,7 @@ return function(p1)
 	local UseLocalizedTabsModuleResult = UseLocalizedTabsModule(TabConfig)
 	local UseTokensResult = UseTokensFunction()
 	local UseNavigationResult = UseNavigationFunction()
-	local UseSignalStateResult = if FFlagSocialTabsPageDockedPanelSafeArea then UseSignalStateFunction(DisplayModule.GetDisplayStore().getDeviceSafePadding) else nil
+	local UseSignalStateResult = if FFlagSocialTabsPageDockedPanelSafeAreaModule then UseSignalStateFunction(DisplayModule.GetDisplayStore().getDeviceSafePadding) else nil
 	local UseRefResult = ReactModule.useRef(false)
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: UseNavigationResult (copy)
@@ -95,11 +95,11 @@ return function(p1)
 				Panel = ReactModule.createElement(View, {
 					tag = {
 						["col anchor-top-right bg-surface-0"] = true,
-						["position-top-right padding-top-xxlarge"] = not FFlagSocialTabsPageDockedPanelSafeArea
+						["position-top-right padding-top-xxlarge"] = not FFlagSocialTabsPageDockedPanelSafeAreaModule
 					},
-					Position = if FFlagSocialTabsPageDockedPanelSafeArea then UDim2.new(1, UseSignalStateResult.right, 0, -UseSignalStateResult.top) else nil,
-					Size = if FFlagSocialTabsPageDockedPanelSafeArea then UDim2.new(0, PageWidth, 1, UseSignalStateResult.top + UseSignalStateResult.bottom) else UDim2.new(0, PageWidth, 1, 0),
-					padding = if FFlagSocialTabsPageDockedPanelSafeArea then {
+					Position = if FFlagSocialTabsPageDockedPanelSafeAreaModule then UDim2.new(1, UseSignalStateResult.right, 0, -UseSignalStateResult.top) else nil,
+					Size = if FFlagSocialTabsPageDockedPanelSafeAreaModule then UDim2.new(0, PageWidth, 1, UseSignalStateResult.top + UseSignalStateResult.bottom) else UDim2.new(0, PageWidth, 1, 0),
+					padding = if FFlagSocialTabsPageDockedPanelSafeAreaModule then {
 						top = UDim.new(0, UseSignalStateResult.top + UseTokensResult.Padding.XXLarge),
 						right = UDim.new(0, UseSignalStateResult.right),
 						bottom = UDim.new(0, UseSignalStateResult.bottom)

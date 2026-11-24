@@ -14,6 +14,7 @@ local View = require(CorePackages.Packages.Foundation).View
 local FIntRelocateMobileMenuButtonsVariantModule = require(RobloxGui.Modules.Settings.Flags.FIntRelocateMobileMenuButtonsVariant)
 local FFlagAddTraversalHistoryReactMenuButtonsModule = require(RobloxGui.Modules.Settings.Flags.FFlagAddTraversalHistoryReactMenuButtons)
 local FFlagGamepadIconSupportCheck = require(CorePackages.Workspace.Packages.SharedFlags).FFlagGamepadIconSupportCheck
+local MenuButtonsDisconnectGamepadConnected = game:DefineFastFlag("MenuButtonsDisconnectGamepadConnected", false)
 local MenuButtonsUseGreyResumeButton = game:DefineFastFlag("MenuButtonsUseGreyResumeButton", false)
 local FFlagIEMFocusNavSupportNewButtonsModule = require(RobloxGui.Modules.Settings.Flags.FFlagIEMFocusNavSupportNewButtons)
 
@@ -53,7 +54,7 @@ local function createMenuButtons(UseMemoResult, LastInput, IsSmall)
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), UtilityModule (copy), UseSignalStateFunction (copy), FFlagIEMFocusNavSupportNewButtonsModule (copy), UseLocalizationFunction (copy), ConstantsModule (copy), UseLastInputFunction (copy), FFlagAddTraversalHistoryReactMenuButtonsModule (copy), MenuButtonsUseGreyResumeButton (copy), FIntRelocateMobileMenuButtonsVariantModule (copy), ContextActionService (copy), UserInputService (copy), View (copy), createMenuButtons (copy)
+	-- upvalues: ReactModule (copy), UtilityModule (copy), UseSignalStateFunction (copy), FFlagIEMFocusNavSupportNewButtonsModule (copy), UseLocalizationFunction (copy), ConstantsModule (copy), UseLastInputFunction (copy), FFlagAddTraversalHistoryReactMenuButtonsModule (copy), MenuButtonsUseGreyResumeButton (copy), FIntRelocateMobileMenuButtonsVariantModule (copy), ContextActionService (copy), UserInputService (copy), MenuButtonsDisconnectGamepadConnected (copy), View (copy), createMenuButtons (copy)
 	local UseStateResult, _ = ReactModule.useState(UtilityModule:IsSmallTouchScreen())
 	local _ = UseSignalStateFunction(p1.getCanRespawn)
 	local UseRefResult = ReactModule.useRef(nil)
@@ -254,7 +255,7 @@ return function(p1)
 		return UseResult2(UseMemoResult)
 	end, { UseMemoResult })
 	ReactModule.useEffect(function()
-		-- upvalues: UserInputService (upval), UseMemoResult1 (copy)
+		-- upvalues: UserInputService (upval), UseMemoResult1 (copy), MenuButtonsDisconnectGamepadConnected (upval)
 		local GamepadConnectedConnection = UserInputService.GamepadConnected:Connect(function()
 			-- upvalues: UseMemoResult1 (upval), UserInputService (upval)
 			for i = 1, #UseMemoResult1 do
@@ -263,8 +264,10 @@ return function(p1)
 		end)
 		
 		return function()
-			-- upvalues: GamepadConnectedConnection (copy)
-			GamepadConnectedConnection:Disconnect()
+			-- upvalues: MenuButtonsDisconnectGamepadConnected (upval), GamepadConnectedConnection (copy)
+			if MenuButtonsDisconnectGamepadConnected then
+				GamepadConnectedConnection:Disconnect()
+			end
 		end
 	end, { UseMemoResult1 })
 	

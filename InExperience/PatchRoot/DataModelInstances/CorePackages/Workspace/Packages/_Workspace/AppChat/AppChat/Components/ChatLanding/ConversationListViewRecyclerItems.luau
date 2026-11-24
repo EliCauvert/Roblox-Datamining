@@ -16,7 +16,6 @@ local UseMarkedRowRefModule = require(script.Parent.ConversationRow.useMarkedRow
 local PartyQuickStartContainerModule = require(script.Parent.PartyQuickStartContainer)
 local UseChatPagePaddingModule = require(AppChat.Contexts.ChatPagePadding.useChatPagePadding)
 local FFlagAppChatUseBindingViewRecyclerConversationRowModule = require(AppChat.Flags.FFlagAppChatUseBindingViewRecyclerConversationRow)
-local FFlagFriendsChatSuggestedUsers = require(Parent.SharedFlags).FFlagFriendsChatSuggestedUsers
 local Constants = SocialCarouselModule.Constants
 local Text = FoundationModule.Text
 local View = FoundationModule.View
@@ -30,23 +29,6 @@ end
 
 local function _(p1)
 	return p1.backgroundStyle
-end
-
-local function SuggestedUserItemView(p1)
-	-- upvalues: SignalsReactModule (copy), UseChatPagePaddingModule (copy), ReactModule (copy), View (copy)
-	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.itemSignal)
-	local RenderSuggestedUserFunction = SignalsReactModule.useSignalState(UseSignalStateResult.presentationSignal).renderSuggestedUser
-	local UseChatPagePaddingModuleResult = UseChatPagePaddingModule()
-	
-	return ReactModule.createElement(View, {
-		tag = "size-full-0 auto-y",
-		padding = {
-			left = UDim.new(0, UseChatPagePaddingModuleResult.left),
-			right = UDim.new(0, UseChatPagePaddingModuleResult.right)
-		}
-	}, {
-		[UseSignalStateResult.id] = if RenderSuggestedUserFunction == nil then nil else RenderSuggestedUserFunction(UseSignalStateResult.suggestedUser)
-	})
 end
 
 local RecyclableView = ViewRecyclerModule.createRecyclableView(function(p1)
@@ -66,8 +48,7 @@ local RecyclableView = ViewRecyclerModule.createRecyclableView(function(p1)
 		fireClickEvent = UseSignalStateResult1.fireClickEvent,
 		showBackground = UseSignalStateResult1.showBackground,
 		localUserId = UseSignalStateResult1.localUserId,
-		debugCellValue = if UseSignalStateResult1.isDebugEnabled then UseSignalStateResult.id else nil,
-		hideDivider = UseSignalStateResult.hideDivider
+		debugCellValue = if UseSignalStateResult1.isDebugEnabled then UseSignalStateResult.id else nil
 	})
 end, config)
 local RecyclableView1 = ViewRecyclerModule.createRecyclableView(function(p1)
@@ -151,8 +132,22 @@ local Frozen = table.freeze({
 		})
 	end, config),
 	[ConversationListItemKindModule.StatusText] = RecyclableView3,
-	[ConversationListItemKindModule.SuggestedUser] = ViewRecyclerModule.createRecyclableView(SuggestedUserItemView, config),
-	[ConversationListItemKindModule.SuggestedUserPlaceholder] = if FFlagFriendsChatSuggestedUsers then ViewRecyclerModule.createRecyclableView(SuggestedUserItemView, config) else nil
+	[ConversationListItemKindModule.SuggestedUser] = ViewRecyclerModule.createRecyclableView(function(p1)
+		-- upvalues: SignalsReactModule (copy), UseChatPagePaddingModule (copy), ReactModule (copy), View (copy)
+		local UseSignalStateResult = SignalsReactModule.useSignalState(p1.itemSignal)
+		local RenderSuggestedUserFunction = SignalsReactModule.useSignalState(UseSignalStateResult.presentationSignal).renderSuggestedUser
+		local UseChatPagePaddingModuleResult = UseChatPagePaddingModule()
+		
+		return ReactModule.createElement(View, {
+			tag = "size-full-0 auto-y",
+			padding = {
+				left = UDim.new(0, UseChatPagePaddingModuleResult.left),
+				right = UDim.new(0, UseChatPagePaddingModuleResult.right)
+			}
+		}, {
+			[UseSignalStateResult.id] = if RenderSuggestedUserFunction == nil then nil else RenderSuggestedUserFunction(UseSignalStateResult.suggestedUser)
+		})
+	end, config)
 })
 
 return table.freeze({
@@ -181,13 +176,12 @@ return table.freeze({
 			kind = ConversationListItemKindModule.ChatLandingModal
 		}
 	end,
-	conversation = function(p1, PresentationSignal, HideDivider)
+	conversation = function(p1, PresentationSignal)
 		-- upvalues: ConversationListItemKindModule (copy)
 		return {
 			id = tostring(p1),
 			kind = ConversationListItemKindModule.Conversation,
-			presentationSignal = PresentationSignal,
-			hideDivider = HideDivider
+			presentationSignal = PresentationSignal
 		}
 	end,
 	getItemKey = function(p1)
@@ -227,9 +221,10 @@ return table.freeze({
 		}
 	end,
 	suggestedUser = function(SuggestedUser, PresentationSignal)
+		-- upvalues: ConversationListItemKindModule (copy)
 		return {
 			id = SuggestedUser.id,
-			kind = SuggestedUser.kind,
+			kind = ConversationListItemKindModule.SuggestedUser,
 			suggestedUser = SuggestedUser,
 			presentationSignal = PresentationSignal
 		}

@@ -13,7 +13,6 @@ local MakeCommentCountFieldsModule = require(Moments.Analytics.makeCommentCountF
 local _ = require(Moments.Analytics.RecommendationContentType)
 local FFlagMomentsCommentsCountAnalyticsModule = require(Moments.Flags.FFlagMomentsCommentsCountAnalytics)
 local FFlagMomentsRecommendationContentTypeModule = require(Moments.Flags.FFlagMomentsRecommendationContentType)
-local FFlagMomentsEndDwellWhenAppHiddenModule = require(Moments.Flags.FFlagMomentsEndDwellWhenAppHidden)
 local GetCommentsSheetStoreModule = require(script.Parent.Sheet.getCommentsSheetStore)
 local CreateCommentsRecommendationSessionModule = require(script.Parent.createCommentsRecommendationSession)
 local CreateCommentsAnalyticsSessionModule = require(script.Parent.createCommentsAnalyticsSession)
@@ -23,7 +22,7 @@ local FFlagMomentsCommentDeepLinks = require(Parent.SharedFlags).FFlagMomentsCom
 local GetDeepLinkStoreModule = if FFlagMomentsCommentDeepLinks then require(Moments.Stores.GetDeepLinkStore) else nil
 
 return function(p1, Callback, p2)
-	-- upvalues: UseFeedOptionalFunction (copy), UseRoactServiceFunction (copy), AppAppLifecycleObserverService (copy), GetCommentsSheetStoreModule (copy), ReactModule (copy), SignalsModule (copy), FFlagMomentsEndDwellWhenAppHiddenModule (copy), Moments (copy), UseCommentCapabilitiesModule (copy), MakeRecommendationAttributionModule (copy), FFlagMomentsRecommendationContentTypeModule (copy), CreateCommentsRecommendationSessionModule (copy), MomentsGetMomentsCommentsStoreModule (copy), MomentsCommonModule (copy), FFlagMomentsCommentsCountAnalyticsModule (copy), MakeCommentCountFieldsModule (copy), CreateCommentsAnalyticsSessionModule (copy), FFlagMomentsCommentDeepLinks (copy), GetDeepLinkStoreModule (copy)
+	-- upvalues: UseFeedOptionalFunction (copy), UseRoactServiceFunction (copy), AppAppLifecycleObserverService (copy), GetCommentsSheetStoreModule (copy), ReactModule (copy), SignalsModule (copy), UseCommentCapabilitiesModule (copy), MakeRecommendationAttributionModule (copy), FFlagMomentsRecommendationContentTypeModule (copy), CreateCommentsRecommendationSessionModule (copy), MomentsGetMomentsCommentsStoreModule (copy), MomentsCommonModule (copy), FFlagMomentsCommentsCountAnalyticsModule (copy), MakeCommentCountFieldsModule (copy), CreateCommentsAnalyticsSessionModule (copy), FFlagMomentsCommentDeepLinks (copy), GetDeepLinkStoreModule (copy)
 	local UseFeedOptionalResult = UseFeedOptionalFunction()
 	local UseRoactServiceResult = UseRoactServiceFunction(AppAppLifecycleObserverService)
 	local CommentsSheetStoreModule = GetCommentsSheetStoreModule(false)
@@ -54,12 +53,11 @@ return function(p1, Callback, p2)
 			OnUnhideConnection:Disconnect()
 		end
 	end, { UseRoactServiceResult, UseMemoResult })
-	local GetIsAway = if FFlagMomentsEndDwellWhenAppHiddenModule then require(Moments.Stores.GetAppAttentionStore)(false).getIsAway else nil
 	ReactModule.useEffect(function()
-		-- upvalues: SignalsModule (upval), UseMemoResult (copy), FFlagMomentsEndDwellWhenAppHiddenModule (upval), GetIsAway (copy), CommentsSheetStoreModule (copy), UseRefResult (copy), UseRefResult1 (copy), IsPlaybackActive (copy)
+		-- upvalues: SignalsModule (upval), UseMemoResult (copy), CommentsSheetStoreModule (copy), UseRefResult (copy), UseRefResult1 (copy), IsPlaybackActive (copy)
 		return SignalsModule.createEffect(function(p3)
-			-- upvalues: UseMemoResult (upval), FFlagMomentsEndDwellWhenAppHiddenModule (upval), GetIsAway (upval), CommentsSheetStoreModule (upval), UseRefResult (upval), UseRefResult1 (upval), IsPlaybackActive (upval)
-			local GetResult = (not FFlagMomentsEndDwellWhenAppHiddenModule or not GetIsAway(p3)) and UseMemoResult.get(p3)
+			-- upvalues: UseMemoResult (upval), CommentsSheetStoreModule (upval), UseRefResult (upval), UseRefResult1 (upval), IsPlaybackActive (upval)
+			local GetResult = UseMemoResult.get(p3)
 			local IsOpen = CommentsSheetStoreModule.getIsOpen(p3)
 			local OpenSessionId = CommentsSheetStoreModule.getOpenSessionId(p3)
 			local FeedItemId = CommentsSheetStoreModule.getFeedItemId(false) or ""

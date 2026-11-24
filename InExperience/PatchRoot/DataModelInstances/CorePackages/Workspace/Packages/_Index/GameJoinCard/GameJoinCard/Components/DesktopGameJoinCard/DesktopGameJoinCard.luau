@@ -25,7 +25,6 @@ local ViewProfileSourceValues = AnalyticsConstantsModule.viewProfileSourceValues
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagBlockEDPClickthrough = SharedFlagsModule.FFlagBlockEDPClickthrough
 local FFlagJoinabilityCTARefactor = SharedFlagsModule.FFlagJoinabilityCTARefactor
-local FFlagCoplayHistoryGameJoinCard = SharedFlagsModule.FFlagCoplayHistoryGameJoinCard
 local FFlagJoinabilityCTAContextCopy = SharedFlagsModule.FFlagJoinabilityCTAContextCopy
 local FFlagDesktopGameJoinCardGamepadSupport = SharedFlagsModule.FFlagDesktopGameJoinCardGamepadSupport
 local FFlagConsoleOpenGameJoinCard = SharedFlagsModule.FFlagConsoleOpenGameJoinCard
@@ -42,10 +41,9 @@ end
 local AgeCheckUpsellCTAModule = require(script.Parent.Parent.AgeCheckUpsellCTA)
 local _ = require(GameJoinCard.Components.Actions.Types)
 local BuildJoinCardActionsComponentModule = require(GameJoinCard.Components.Actions.buildJoinCardActionsComponent)
-local ContextCopyTextKeysModule = require(GameJoinCard.Components.Actions.ContextCopyTextKeys)
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), UseScaledValueFunction (copy), UseLocalizationFunction (copy), FFlagCoplayHistoryGameJoinCard (copy), ContextCopyTextKeysModule (copy), ReactModule (copy), GetBuilderIconForCurrentPlatformFunction (copy), ViewEDPsourceValues (copy), ViewProfileSourceValues (copy), ControlState (copy), FFlagConsoleOpenGameJoinCard (copy), FFlagDesktopGameJoinCardGamepadSupport (copy), UseGameJoinCardGamepadNavigationFunction (ref), UseComposedRefFunction (copy), FFlagJoinabilityCTARefactor (copy), FFlagGameJoinCardContent (copy), Skeleton (copy), Radius (copy), AssignPrimaryFocusRefFunction (ref), BuildJoinCardActionsComponentModule (copy), Button (copy), FFlagLuaAppAddTestIdsForArrow (copy), FFlagJoinabilityCTAContextCopy (copy), View (copy), Image (copy), FFlagBlockEDPClickthrough (copy), StateLayerAffordance (copy), Text (copy), Icon (copy), IconSize (copy), AgeCheckUpsellCTAModule (copy), ButtonVariant (copy), InputSize (copy), FoundationModule (copy)
+	-- upvalues: UseTokensFunction (copy), UseScaledValueFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), GetBuilderIconForCurrentPlatformFunction (copy), ViewEDPsourceValues (copy), ViewProfileSourceValues (copy), ControlState (copy), FFlagConsoleOpenGameJoinCard (copy), FFlagDesktopGameJoinCardGamepadSupport (copy), UseGameJoinCardGamepadNavigationFunction (ref), UseComposedRefFunction (copy), FFlagJoinabilityCTARefactor (copy), FFlagGameJoinCardContent (copy), Skeleton (copy), Radius (copy), AssignPrimaryFocusRefFunction (ref), BuildJoinCardActionsComponentModule (copy), Button (copy), FFlagLuaAppAddTestIdsForArrow (copy), FFlagJoinabilityCTAContextCopy (copy), View (copy), Image (copy), FFlagBlockEDPClickthrough (copy), StateLayerAffordance (copy), Text (copy), Icon (copy), IconSize (copy), AgeCheckUpsellCTAModule (copy), ButtonVariant (copy), InputSize (copy), FoundationModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseScaledValueResult = UseScaledValueFunction(260)
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -55,10 +53,8 @@ return function(p1)
 		viewProfile = "Feature.Profile.Action.ViewProfile",
 		playTogether = "Feature.GameJoin.Label.PlayTogether",
 		playTogetherSoon = "Feature.GameJoin.Label.PlayTogetherSoon",
-		differentServer = "Feature.GameJoin.Description.DifferentServer",
-		played = "Feature.GameJoin.Label.Played"
+		differentServer = "Feature.GameJoin.Description.DifferentServer"
 	})
-	local UseLocalizationResult1 = if FFlagCoplayHistoryGameJoinCard then UseLocalizationFunction(ContextCopyTextKeysModule) else nil
 	local LayoutOrder = p1.layoutOrder
 	local PlayerName = p1.playerName
 	local ExperienceName = p1.experienceName
@@ -106,7 +102,7 @@ return function(p1)
 				radius = Radius.Medium
 			})
 		else
-			t, v58 = BuildJoinCardActionsComponentModule(PrimaryButtonFocusRef and AssignPrimaryFocusRefFunction(p1.actions, PrimaryButtonFocusRef) or p1.actions, if FFlagCoplayHistoryGameJoinCard then UseLocalizationResult1 else {
+			t, v55 = BuildJoinCardActionsComponentModule(PrimaryButtonFocusRef and AssignPrimaryFocusRefFunction(p1.actions, PrimaryButtonFocusRef) or p1.actions, {
 				playTogether = UseLocalizationResult.playTogether,
 				playTogetherSoon = UseLocalizationResult.playTogetherSoon,
 				differentServer = UseLocalizationResult.differentServer
@@ -128,10 +124,10 @@ return function(p1)
 					LayoutOrder = LayoutOrder,
 					testId = if FFlagLuaAppAddTestIdsForArrow then `--game-join-card-action-{p2.id}` else nil
 				})
-			end, if FFlagCoplayHistoryGameJoinCard then p1.isCoplayInviteCard else nil)
+			end)
 		end
 	end
-	local NoIsConsole: boolean = if FFlagJoinabilityCTAContextCopy then not p1.isConsole else FFlagCoplayHistoryGameJoinCard and (p1.isCoplayInviteCard == true and not p1.isConsole)
+	local NoIsConsole: boolean = FFlagJoinabilityCTAContextCopy and not p1.isConsole
 	
 	return ReactModule.createElement(FoundationModule.Popover.Root, { isOpen = p1.isOpen }, {
 		Anchor = ReactModule.createElement(FoundationModule.Popover.Anchor, { anchorRef = p1.anchorRef }),
@@ -209,7 +205,7 @@ return function(p1)
 								IsPlaying = ReactModule.createElement(Text, {
 									tag = "shrink-0 auto-xy text-body-medium content-default text-align-x-left",
 									LayoutOrder = 2,
-									Text = if FFlagGameJoinCardContent and p1.content then p1.content.activityText elseif FFlagCoplayHistoryGameJoinCard and p1.isCoplayInviteCard then UseLocalizationResult.played else UseLocalizationResult.isPlaying
+									Text = if FFlagGameJoinCardContent and p1.content then p1.content.activityText else UseLocalizationResult.isPlaying
 								})
 							}),
 							GameName = if IsLoading then ReactModule.createElement(Skeleton, {

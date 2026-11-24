@@ -1,5 +1,4 @@
-﻿local AvatarWorkshop = script:FindFirstAncestor("AvatarWorkshop")
-local Parent = AvatarWorkshop.Parent
+﻿local Parent = script:FindFirstAncestor("AvatarWorkshop").Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
@@ -9,13 +8,10 @@ local InputSize = FoundationModule.Enums.InputSize
 local Image = FoundationModule.Image
 local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
-local TileShapeModule = require(AvatarWorkshop.Constants.TileShape)
 local Character = utf8.char(57344)
-local SQUAREASPECT = TileShapeModule.SQUARE_ASPECT
-local TALLASPECT = TileShapeModule.TALL_ASPECT
 
 return function(Frame)
-	-- upvalues: UseLocalizationFunction (copy), Character (copy), TALLASPECT (copy), SQUAREASPECT (copy), ReactModule (copy), FoundationModule (copy), StateLayerAffordance (copy), Image (copy), FillBehavior (copy), InputSize (copy), ButtonVariant (copy), IconSize (copy)
+	-- upvalues: UseLocalizationFunction (copy), Character (copy), ReactModule (copy), FoundationModule (copy), StateLayerAffordance (copy), Image (copy), FillBehavior (copy), InputSize (copy), ButtonVariant (copy), IconSize (copy)
 	local UseLocalizationResult = UseLocalizationFunction({ detailsText = "Feature.Avatar.Label.DetailsButton" })
 	local Text = if Frame.username and Frame.hasVerifiedBadge then `{Frame.username}{Character}` else Frame.username
 	local HasTitle: boolean = Frame.title ~= nil or Text ~= nil or Frame.price ~= nil
@@ -33,7 +29,7 @@ return function(Frame)
 					["stroke-system-contrast"] = Frame.isSelected
 				},
 				aspectRatio = {
-					AspectRatio = if Frame.tileShape == "Tall" then TALLASPECT elseif Frame.vertical then 0.8 else SQUAREASPECT,
+					AspectRatio = if Frame.vertical then 0.8 else 1,
 					AspectType = Enum.AspectType.FitWithinMaxSize,
 					DominantAxis = Enum.DominantAxis.Width
 				},

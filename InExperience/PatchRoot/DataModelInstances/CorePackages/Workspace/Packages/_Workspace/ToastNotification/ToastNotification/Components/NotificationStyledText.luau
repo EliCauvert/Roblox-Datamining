@@ -75,8 +75,9 @@ return function(Label)
 	
 	return React.createElement("TextLabel", {
 		RichText = true,
-		Text = if Label.Text then formatString(Label.Text) else "",
 		BackgroundTransparency = 1,
+		TextWrapped = true,
+		Text = if Label.Text then formatString(Label.Text) else "",
 		TextColor3 = Label.TextColor3 or UseStyleResult.Theme.TextDefault.Color,
 		TextTransparency = Label.TextTransparency or UseStyleResult.Theme.TextDefault.Transparency,
 		Font = if Label.FontFace then nil else Label.Font or UseStyleResult.Font.Body.Font,
@@ -87,9 +88,7 @@ return function(Label)
 		Position = Label.Position,
 		AnchorPoint = Label.AnchorPoint,
 		TextXAlignment = Label.TextXAlignment,
-		TextTruncate = Enum.TextTruncate.AtEnd,
-		TextWrapped = true,
-		[React.Tag] = Label.testTag
+		TextTruncate = Enum.TextTruncate.AtEnd
 	}, {
 		UISizeConstraint = if Label.MaxSize then React.createElement("UISizeConstraint", { MaxSize = Label.MaxSize }) else nil
 	})

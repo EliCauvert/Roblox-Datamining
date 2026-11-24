@@ -17,8 +17,6 @@ local AXUnifiedEventFilter = require(CorePackages.Workspace.Packages.AvatarExper
 local UnifiedEventCounterAggregator = require(CorePackages.Workspace.Packages.AvatarExperienceAnalytics).UnifiedEventCounterAggregator
 local FFlagAXUnifiedEventCounters = require(CorePackages.Workspace.Packages.AvatarExperienceFlags).FFlagAXUnifiedEventCounters
 local FFlagAXUnifiedEventStrictPayloads = require(CorePackages.Workspace.Packages.AvatarExperienceFlags).FFlagAXUnifiedEventStrictPayloads
-local FFlagAXUnifiedEventJourneySession = require(CorePackages.Workspace.Packages.AvatarExperienceFlags).FFlagAXUnifiedEventJourneySession
-local JourneySession = require(CorePackages.Workspace.Packages.AvatarExperienceAnalytics).Lib.JourneySession
 local GetMarketplaceUnifiedItemTypeFunction = require(CorePackages.Workspace.Packages.AvatarExperienceAnalytics).Utils.getMarketplaceUnifiedItemType
 local GetMarketplaceUnifiedAssetTypeFunction = require(CorePackages.Workspace.Packages.AvatarExperienceAnalytics).Utils.getMarketplaceUnifiedAssetType
 local GetMarketplaceUnifiedBundleTypeFunction = require(CorePackages.Workspace.Packages.AvatarExperienceAnalytics).Utils.getMarketplaceUnifiedBundleType
@@ -178,10 +176,10 @@ function AnalyticsModule:report(p1, p2)
 end
 
 function AnalyticsModule:reportUnifiedEvent(p1)
-	-- upvalues: UnifiedLoggingSurface (copy), CryoModule (copy), FFlagAXUnifiedEventJourneySession (copy), JourneySession (copy), FFlagAXUnifiedEventCounters (copy), UnifiedEventCounterAggregator (copy), AXUnifiedEventFilter (copy), UnifiedEventLogConstants (copy)
+	-- upvalues: UnifiedLoggingSurface (copy), CryoModule (copy), FFlagAXUnifiedEventCounters (copy), UnifiedEventCounterAggregator (copy), AXUnifiedEventFilter (copy), UnifiedEventLogConstants (copy)
 	local JoinResult = CryoModule.Dictionary.join({
 		surface = UnifiedLoggingSurface.IN_EXPERIENCE_INSPECT_BUY
-	}, p1, if FFlagAXUnifiedEventJourneySession then { journeySessionId = JourneySession.get() } else {})
+	}, p1)
 	
 	if FFlagAXUnifiedEventCounters then
 		UnifiedEventCounterAggregator.record(JoinResult, AXUnifiedEventFilter.filter(JoinResult, { skipReporting = true }))

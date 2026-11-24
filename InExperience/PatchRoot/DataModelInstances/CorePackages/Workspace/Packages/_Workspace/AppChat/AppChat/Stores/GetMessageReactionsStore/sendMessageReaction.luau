@@ -6,7 +6,7 @@ local PromiseModule = require(Parent.Promise)
 local NewResult = require(AppChat.Logger):new(script.Name)
 local GetMessageReactionsStoreModule = require(AppChat.Stores.GetMessageReactionsStore)
 local ApplyPendingReactionModule = require(AppChat.Stores.GetMessageReactionsViewModelStore.applyPendingReaction)
-local QueueMessageReactionsFetchModule = require(script.Parent.queueMessageReactionsFetch)
+local FetchMessageReactionsModule = require(script.Parent.fetchMessageReactions)
 local t = {}
 
 local function _(p1)
@@ -44,9 +44,9 @@ local function sendRequest(ConversationId, p2, SentEmoteId)
 	return if SentEmoteId == nil then AppChatNetworkingModule.http.RemoveMessagesReactions(nil, ConversationId, p2, EmoteId) else AppChatNetworkingModule.http.SetMessagesReactions(nil, ConversationId, p2, SentEmoteId, EmoteId)
 end
 
-local _ = function(Key, p3)
-	-- upvalues: QueueMessageReactionsFetchModule (copy), t (copy), GetMessageReactionsStoreModule (copy)
-	QueueMessageReactionsFetchModule(p3.conversationId, Key):finally(function()
+local function clearPendingAfterRefetch(Key, p3)
+	-- upvalues: FetchMessageReactionsModule (copy), t (copy), GetMessageReactionsStoreModule (copy)
+	FetchMessageReactionsModule(p3.conversationId, { Key }):finally(function()
 		-- upvalues: t (upval), Key (copy), p3 (copy), GetMessageReactionsStoreModule (upval)
 		if t[Key] == p3 then
 			t[Key] = nil
@@ -60,7 +60,7 @@ end
 local Callback = nil
 
 local function onRequestFinished(Key, p3, p4)
-	-- upvalues: GetMessageReactionsStoreModule (copy), t (copy), LocalUserIdStore (copy), ApplyPendingReactionModule (copy), Callback (ref), QueueMessageReactionsFetchModule (copy)
+	-- upvalues: GetMessageReactionsStoreModule (copy), t (copy), LocalUserIdStore (copy), ApplyPendingReactionModule (copy), Callback (ref), clearPendingAfterRefetch (copy), FetchMessageReactionsModule (copy)
 	p3.isSending = false
 	local MessageReactionsStoreModule = GetMessageReactionsStoreModule(false)
 	local MessageReactions = MessageReactionsStoreModule.getMessageReactions(Key, false)
@@ -83,26 +83,18 @@ local function onRequestFinished(Key, p3, p4)
 		return
 	end
 	if p4 then
-		QueueMessageReactionsFetchModule(p3.conversationId, Key):finally(function()
-			-- upvalues: t (upval), Key (copy), p3 (copy), GetMessageReactionsStoreModule (upval)
-			if t[Key] == p3 then
-				t[Key] = nil
-				GetMessageReactionsStoreModule(false).setPendingReaction(Key, nil)
-				
-				return
-			end
-		end)
+		clearPendingAfterRefetch(Key, p3)
 		
 		return
 	else
 		t[Key] = nil
 		MessageReactionsStoreModule.setPendingReaction(Key, nil)
-		QueueMessageReactionsFetchModule(p3.conversationId, Key)
+		FetchMessageReactionsModule(p3.conversationId, { Key })
 	end
 end
 
 Callback = function(Key, p3, EmoteId)
-	-- upvalues: PromiseModule (copy), sendRequest (copy), onRequestFinished (copy), NewResult (copy), GetMessageReactionsStoreModule (copy), t (copy), Callback (ref), QueueMessageReactionsFetchModule (copy)
+	-- upvalues: PromiseModule (copy), sendRequest (copy), onRequestFinished (copy), NewResult (copy)
 	p3.isSending = true
 	p3.sentEmoteId = EmoteId
 	PromiseModule.try(function()
@@ -112,27 +104,9 @@ Callback = function(Key, p3, EmoteId)
 		-- upvalues: onRequestFinished (upval), Key (copy), p3 (copy)
 		onRequestFinished(Key, p3, true)
 	end, function(p4)
-		-- upvalues: NewResult (upval), p3 (copy), Key (copy), EmoteId (copy), GetMessageReactionsStoreModule (upval), t (upval), Callback (upval), QueueMessageReactionsFetchModule (upval)
+		-- upvalues: NewResult (upval), p3 (copy), Key (copy), EmoteId (copy), onRequestFinished (upval)
 		NewResult:warning("Failed to update reaction for conversationId: {}, messageId: {}, emoteId: {}, error: {}", p3.conversationId, Key, EmoteId, (tostring(p4)))
-		p3.isSending = false
-		local MessageReactionsStoreModule = GetMessageReactionsStoreModule(false)
-		local MessageReactions = MessageReactionsStoreModule.getMessageReactions(Key, false)
-		local Pending = if MessageReactions then MessageReactions.pending else nil
-		
-		if MessageReactions == nil or Pending == nil then
-			t[Key] = nil
-			
-			return
-		end
-		if Pending.emoteId == p3.sentEmoteId then
-			t[Key] = nil
-			MessageReactionsStoreModule.setPendingReaction(Key, nil)
-			QueueMessageReactionsFetchModule(p3.conversationId, Key)
-			
-			return
-		else
-			Callback(Key, p3, Pending.emoteId)
-		end
+		onRequestFinished(Key, p3, false)
 	end)
 end
 

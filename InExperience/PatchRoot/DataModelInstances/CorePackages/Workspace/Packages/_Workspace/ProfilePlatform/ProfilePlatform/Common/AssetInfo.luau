@@ -1,6 +1,8 @@
 ﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
 local EnumsModule = require(ProfilePlatform.Common.Enums)
-local FFlagSocialEnableProfileInspectAndBuy = require(ProfilePlatform.Parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy
+local FFlagSocialEnableProfileInspectAndBuy = require(Parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy
+local FFlagProfilePlatformEnableBundlesInAssetsCarousel = require(Parent.SharedFlags).FFlagProfilePlatformEnableBundlesInAssetsCarousel
 local FFlagProfileStoreShowLimitedResalePriceModule = require(ProfilePlatform.Flags.FFlagProfileStoreShowLimitedResalePrice)
 local Count = 0
 
@@ -29,10 +31,10 @@ return {
 		return t
 	end,
 	fromAsset = function(p1)
-		-- upvalues: FFlagSocialEnableProfileInspectAndBuy (copy), FFlagProfileStoreShowLimitedResalePriceModule (copy)
+		-- upvalues: FFlagProfilePlatformEnableBundlesInAssetsCarousel (copy), FFlagSocialEnableProfileInspectAndBuy (copy), FFlagProfileStoreShowLimitedResalePriceModule (copy)
 		local config = {
 			id = tostring(p1.id),
-			assetType = tostring(p1.assetType or p1.bundleType),
+			assetType = tostring(p1.assetType or (if FFlagProfilePlatformEnableBundlesInAssetsCarousel then p1.bundleType else nil)),
 			itemType = p1.itemType,
 			name = p1.name,
 			price = p1.price,

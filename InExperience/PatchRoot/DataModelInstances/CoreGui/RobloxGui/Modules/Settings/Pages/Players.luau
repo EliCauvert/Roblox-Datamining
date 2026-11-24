@@ -37,6 +37,7 @@ local FFlagIEMTabFocusNav = SharedFlagsModule.FFlagIEMTabFocusNav
 local IsSideSheetEnabledModule = require(CorePackages.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
 local FFlagRelocateMobileMenuButtonsModule = require(RobloxGui.Modules.Settings.Flags.FFlagRelocateMobileMenuButtons)
 local FIntRelocateMobileMenuButtonsVariantModule = require(RobloxGui.Modules.Settings.Flags.FIntRelocateMobileMenuButtonsVariant)
+local FFlagMenuButtonsMountWithIEMModule = require(RobloxGui.Modules.Settings.Flags.FFlagMenuButtonsMountWithIEM)
 local RbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId")
 local FFlagHidePeoplePageInviteFriends = SharedFlagsModule.FFlagHidePeoplePageInviteFriends
 local FFlagAddInviteFriendsIntegration = SharedFlagsModule.FFlagAddInviteFriendsIntegration
@@ -73,7 +74,7 @@ local MuteStatusIcons = Default.MuteStatusIcons
 local PlayerMuteStatusIcons = Default.PlayerMuteStatusIcons
 
 return ((function()
-	-- upvalues: RobloxGui (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), RbxAnalyticsService (copy), LocalizationService (copy), Localization (copy), Uiblox (copy), BuilderIconsModule (copy), LocalPlayer (ref), UtilityModule (copy), BlockingUtilityModule (copy), ThemeModule (copy), ConstantsModule1 (copy), GetFFlagDefaultFriendingLabelTextNonEmptyModule (copy), VoiceAnalyticsModule (copy), SettingsHubPlayersButtonsResponsiveThreshold (copy), GetFFlagEnableConsoleJoinVoiceModule (copy), GetFFlagCleanupMuteSelfButtonModule (copy), CheckButtonFrameBeforeDestroy (copy), GuiService (copy), BlockingAnalyticsModule (copy), OnBlockButtonActivatedModule (copy), RobloxTranslatorModule (copy), MuteStatusIcons (copy), LuaFlagVoiceChatDisableSubscribeRetryForMultistream (copy), VoiceChatMultistreamSubscriptionsEnabledEngineFeature (copy), Default (copy), ConstantsModule (copy), CreateFunction (copy), IsSideSheetEnabledModule (copy), FFlagRelocateMobileMenuButtonsModule (copy), FIntRelocateMobileMenuButtonsVariantModule (copy), GetFFlagEnableLeaveGameUpsellEntrypointModule (copy), FFlagIEMTabFocusNav (copy), PlayerMuteStatusIcons (copy), ReportAbuseMenuContainerPageModule (copy), EnabledResult (copy), _UDim2 (copy), EnableConsoleJoinVoiceTranslation (copy), Result (copy), GetFFlagLuaAppEnableOpenTypeSupportFunction (copy), OpenTypeSupport (copy), CheckForNilUserIdOnPlayerList (copy), UserProfileStore (copy), IsEngineTruncationEnabledForIngameSettingsModule (copy), PlayerListRefactorUsernameFormatting (copy), FormatUsernameFunction (copy), Players (copy), UserInputService (copy), FFlagHidePeoplePageInviteFriends (copy), FFlagAddInviteFriendsIntegration (copy), RunService (copy), GameInviteAnalyticsManager (copy), SocialUtilModule (copy), GetFFlagVoiceChatUILoggingModule (copy), NewResult (copy), CheckShareGameButtonInMuteAllLayout (copy), CryoModule (copy), FFlagUserProfilePlatformProfile (copy), OnlyCaptureFocusIfOnPlayerPage (copy), GetFFlagDestroyPlayerCardOnLeaveModule (copy), ReactRobloxModule (copy), ReactModule (copy), MenuButtonsContainerModule (copy)
+	-- upvalues: RobloxGui (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), RbxAnalyticsService (copy), LocalizationService (copy), Localization (copy), Uiblox (copy), BuilderIconsModule (copy), LocalPlayer (ref), UtilityModule (copy), BlockingUtilityModule (copy), ThemeModule (copy), ConstantsModule1 (copy), GetFFlagDefaultFriendingLabelTextNonEmptyModule (copy), VoiceAnalyticsModule (copy), SettingsHubPlayersButtonsResponsiveThreshold (copy), GetFFlagEnableConsoleJoinVoiceModule (copy), GetFFlagCleanupMuteSelfButtonModule (copy), CheckButtonFrameBeforeDestroy (copy), GuiService (copy), BlockingAnalyticsModule (copy), OnBlockButtonActivatedModule (copy), RobloxTranslatorModule (copy), MuteStatusIcons (copy), LuaFlagVoiceChatDisableSubscribeRetryForMultistream (copy), VoiceChatMultistreamSubscriptionsEnabledEngineFeature (copy), Default (copy), ConstantsModule (copy), CreateFunction (copy), IsSideSheetEnabledModule (copy), FFlagRelocateMobileMenuButtonsModule (copy), FIntRelocateMobileMenuButtonsVariantModule (copy), GetFFlagEnableLeaveGameUpsellEntrypointModule (copy), FFlagIEMTabFocusNav (copy), PlayerMuteStatusIcons (copy), ReportAbuseMenuContainerPageModule (copy), EnabledResult (copy), _UDim2 (copy), EnableConsoleJoinVoiceTranslation (copy), Result (copy), GetFFlagLuaAppEnableOpenTypeSupportFunction (copy), OpenTypeSupport (copy), CheckForNilUserIdOnPlayerList (copy), UserProfileStore (copy), IsEngineTruncationEnabledForIngameSettingsModule (copy), PlayerListRefactorUsernameFormatting (copy), FormatUsernameFunction (copy), Players (copy), UserInputService (copy), FFlagHidePeoplePageInviteFriends (copy), FFlagAddInviteFriendsIntegration (copy), RunService (copy), GameInviteAnalyticsManager (copy), SocialUtilModule (copy), GetFFlagVoiceChatUILoggingModule (copy), NewResult (copy), CheckShareGameButtonInMuteAllLayout (copy), CryoModule (copy), FFlagUserProfilePlatformProfile (copy), OnlyCaptureFocusIfOnPlayerPage (copy), GetFFlagDestroyPlayerCardOnLeaveModule (copy), ReactRobloxModule (copy), ReactModule (copy), MenuButtonsContainerModule (copy), FFlagMenuButtonsMountWithIEMModule (copy)
 	local NewPage = require(RobloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
 	NewPage.PageListLayout.Padding = UDim.new(0, 16)
 	NewPage.playSessionId = ""
@@ -144,7 +145,7 @@ return ((function()
 				FriendStatus1.Text = "Request Sent"
 			end
 		elseif FriendStatus == Enum.FriendStatus.Unknown or FriendStatus == Enum.FriendStatus.NotFriend or FriendStatus == Enum.FriendStatus.FriendRequestReceived then
-			FriendStatus1, v144 = UtilityModule:MakeStyledButton("FriendStatus", NewResults[RobloxLocaleId]:Format(ConstantsModule1.AddFriendLocalizedKey), UDim2.new(0, 182, 0, ThemeModule.ButtonHeight), function()
+			FriendStatus1, v145 = UtilityModule:MakeStyledButton("FriendStatus", NewResults[RobloxLocaleId]:Format(ConstantsModule1.AddFriendLocalizedKey), UDim2.new(0, 182, 0, ThemeModule.ButtonHeight), function()
 				-- upvalues: FriendStatus1 (ref), v1 (ref), GetFFlagDefaultFriendingLabelTextNonEmptyModule (upval), NewResults (upval), RobloxLocaleId (upval), ConstantsModule1 (upval), LocalPlayer (upval), Player (copy), RbxAnalyticsService (upval)
 				if FriendStatus1 and v1 and v1.Text ~= "" then
 					FriendStatus1.ImageTransparency = 1
@@ -393,41 +394,41 @@ return ((function()
 			end
 		end
 	end)
-	local Callback = nil
 	local Callback1 = nil
+	local Callback2 = nil
 	local NewBlockingAnalytics = BlockingAnalyticsModule.new(LocalPlayer.UserId, { EventStream = RbxAnalyticsService })
 	
 	local function createBlockButton(Parent, Player: Player, p1, _)
-		-- upvalues: BlockingUtilityModule (upval), Callback (ref), resizeFriendButton (copy), Callback1 (ref), GuiService (upval), OnBlockButtonActivatedModule (upval), NewBlockingAnalytics (copy), ConstantsModule1 (upval), UtilityModule (upval), RobloxTranslatorModule (upval), ThemeModule (upval)
+		-- upvalues: BlockingUtilityModule (upval), Callback1 (ref), resizeFriendButton (copy), Callback2 (ref), GuiService (upval), OnBlockButtonActivatedModule (upval), NewBlockingAnalytics (copy), ConstantsModule1 (upval), UtilityModule (upval), RobloxTranslatorModule (upval), ThemeModule (upval)
 		local function _(p2)
-			-- upvalues: Callback (upval), Parent (copy), Player (copy), p1 (copy), resizeFriendButton (upval), Callback1 (upval)
-			local CallbackResult = Callback(Parent, Player, p1, not p1)
+			-- upvalues: Callback1 (upval), Parent (copy), Player (copy), p1 (copy), resizeFriendButton (upval), Callback2 (upval)
+			local CallbackResult = Callback1(Parent, Player, p1, not p1)
 			resizeFriendButton(Parent, Player, p1, not p1)
 			
 			if p2 then
-				Callback1(CallbackResult)
+				Callback2(CallbackResult)
 			end
 		end
 		
 		local function blockUser()
-			-- upvalues: GuiService (upval), OnBlockButtonActivatedModule (upval), Player (copy), NewBlockingAnalytics (upval), ConstantsModule1 (upval), Callback (upval), Parent (copy), p1 (copy), resizeFriendButton (upval), Callback1 (upval)
+			-- upvalues: GuiService (upval), OnBlockButtonActivatedModule (upval), Player (copy), NewBlockingAnalytics (upval), ConstantsModule1 (upval), Callback1 (upval), Parent (copy), p1 (copy), resizeFriendButton (upval), Callback2 (upval)
 			local HasSelectedCoreObject: boolean = GuiService.SelectedCoreObject ~= nil or GuiService.SelectedObject ~= nil
 			OnBlockButtonActivatedModule(Player, NewBlockingAnalytics, ConstantsModule1.AnalyticsInGameMenuName):andThen(function()
-				-- upvalues: HasSelectedCoreObject (copy), Callback (upval), Parent (upval), Player (upval), p1 (upval), resizeFriendButton (upval), Callback1 (upval)
-				local CallbackResult = Callback(Parent, Player, p1, not p1)
+				-- upvalues: HasSelectedCoreObject (copy), Callback1 (upval), Parent (upval), Player (upval), p1 (upval), resizeFriendButton (upval), Callback2 (upval)
+				local CallbackResult = Callback1(Parent, Player, p1, not p1)
 				resizeFriendButton(Parent, Player, p1, not p1)
 				
 				if HasSelectedCoreObject then
-					Callback1(CallbackResult)
+					Callback2(CallbackResult)
 				end
 			end)
 		end
 		
 		local function unBlockUser()
-			-- upvalues: BlockingUtilityModule (upval), Player (copy), NewBlockingAnalytics (upval), Callback (upval), Parent (copy), p1 (copy), resizeFriendButton (upval)
+			-- upvalues: BlockingUtilityModule (upval), Player (copy), NewBlockingAnalytics (upval), Callback1 (upval), Parent (copy), p1 (copy), resizeFriendButton (upval)
 			if BlockingUtilityModule:UnblockPlayerAsync(Player) then
 				NewBlockingAnalytics:action("SettingsHub", "unblockUser", { blockeeUserId = Player.UserId })
-				local _ = Callback(Parent, Player, p1, not p1)
+				local _ = Callback1(Parent, Player, p1, not p1)
 				resizeFriendButton(Parent, Player, p1, not p1)
 			end
 		end
@@ -435,7 +436,7 @@ return ((function()
 		return if BlockingUtilityModule:IsPlayerBlockedByUserId(Player.UserId) then UtilityModule:MakeStyledButton("BlockButton", RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.Action.Unblock"), UDim2.new(0, 110, 0, ThemeModule.ButtonHeight), unBlockUser) else UtilityModule:MakeStyledImageButton("BlockButton", "icons/actions/block", UDim2.new(0, ThemeModule.ButtonHeight, 0, ThemeModule.ButtonHeight), UDim2.new(0, 28, 0, 28), blockUser)
 	end
 	
-	Callback1 = function(SelectedCoreObject)
+	Callback2 = function(SelectedCoreObject)
 		-- upvalues: GuiService (upval)
 		if SelectedCoreObject and not SelectedCoreObject.Selectable then
 			GuiService:Select(SelectedCoreObject)
@@ -446,7 +447,7 @@ return ((function()
 		end
 	end
 	
-	Callback = function(Parent, Player: Player, p1, p2)
+	Callback1 = function(Parent, Player: Player, p1, p2)
 		-- upvalues: LocalPlayer (upval), createBlockButton (copy), UtilityModule (upval)
 		local BlockButton = Parent:FindFirstChild("BlockButton")
 		
@@ -763,7 +764,7 @@ return ((function()
 	local v7 = nil
 	local v8 = nil
 	local v9 = nil
-	local Callback2: (() -> any)? = nil
+	local Callback: (() -> any)? = nil
 	local v10 = nil
 	local Enabled = false
 	local EventConnection = nil
@@ -1111,7 +1112,7 @@ return ((function()
 	end
 	
 	if GetFFlagEnableConsoleJoinVoiceModule() then
-		Callback2 = function()
+		Callback = function()
 			-- upvalues: createRow (copy), _UDim2 (upval), ThemeModule (upval), EnableConsoleJoinVoiceTranslation (upval), NewResults (copy), RobloxLocaleId (copy), Uiblox (upval), BuilderIconsModule (upval), UtilityModule (upval), Default (upval), ConstantsModule (upval)
 			local ImageButton = createRow("ImageButton", nil, true)
 			ImageButton.Size = UDim2.new(1, 0, 0, 52)
@@ -1193,9 +1194,9 @@ return ((function()
 		end
 	end
 	local _ = function()
-		-- upvalues: shouldShowJoinVoiceButton (copy), Object2 (ref), Callback2 (ref)
+		-- upvalues: shouldShowJoinVoiceButton (copy), Object2 (ref), Callback (ref)
 		if shouldShowJoinVoiceButton() and not Object2 then
-			Object2 = Callback2()
+			Object2 = Callback()
 			
 			return
 		end
@@ -1661,8 +1662,8 @@ return ((function()
 		end
 	end
 	
-	local function v137(_)
-		-- upvalues: NewPage (copy), FFlagIEMTabFocusNav (upval), Players2 (ref), Players (upval), EnabledResult (upval), LocalPlayer (upval), UtilityModule (upval), Enabled (ref), Object (ref), Default (upval), FFlagHidePeoplePageInviteFriends (upval), FFlagAddInviteFriendsIntegration (upval), IsSideSheetEnabledModule (upval), SelectedCoreObject (ref), RunService (upval), Parent (ref), CreateFunction (upval), v4 (ref), _UDim2 (upval), GameInviteAnalyticsManager (upval), v7 (ref), GetFFlagEnableConsoleJoinVoiceModule (upval), shouldShowJoinVoiceButton (copy), Object2 (ref), Callback2 (ref), v1 (ref), GuiService (upval), t (copy), t1 (copy), v10 (ref), muteButtonUpdate (copy), SocialUtilModule (upval), PlayerListRefactorUsernameFormatting (upval), FormatUsernameFunction (upval), IsEngineTruncationEnabledForIngameSettingsModule (upval), managePlayerNameCutoff (copy), friendStatusCreate (copy), resizeFriendButton (copy), Callback (ref), resizeInspectButton (copy), reportAbuseButtonCreate (copy), v8 (ref), v6 (ref), RobloxTranslatorModule (upval), GetFFlagVoiceChatUILoggingModule (upval), NewResult (upval), Players1 (copy), ConstantsModule (upval), updateAllMuteButtons (copy), CheckShareGameButtonInMuteAllLayout (upval), CheckForNilUserIdOnPlayerList (upval), CryoModule (upval), UserProfileStore (upval), resizePlatformName (copy), FFlagUserProfilePlatformProfile (upval), Flag (ref), GetFFlagCleanupMuteSelfButtonModule (upval), pollImage (copy), UserInputService (upval), OnlyCaptureFocusIfOnPlayerPage (upval)
+	local function v138(_)
+		-- upvalues: NewPage (copy), FFlagIEMTabFocusNav (upval), Players2 (ref), Players (upval), EnabledResult (upval), LocalPlayer (upval), UtilityModule (upval), Enabled (ref), Object (ref), Default (upval), FFlagHidePeoplePageInviteFriends (upval), FFlagAddInviteFriendsIntegration (upval), IsSideSheetEnabledModule (upval), SelectedCoreObject (ref), RunService (upval), Parent (ref), CreateFunction (upval), v4 (ref), _UDim2 (upval), GameInviteAnalyticsManager (upval), v7 (ref), GetFFlagEnableConsoleJoinVoiceModule (upval), shouldShowJoinVoiceButton (copy), Object2 (ref), Callback (ref), v1 (ref), GuiService (upval), t (copy), t1 (copy), v10 (ref), muteButtonUpdate (copy), SocialUtilModule (upval), PlayerListRefactorUsernameFormatting (upval), FormatUsernameFunction (upval), IsEngineTruncationEnabledForIngameSettingsModule (upval), managePlayerNameCutoff (copy), friendStatusCreate (copy), resizeFriendButton (copy), Callback1 (ref), resizeInspectButton (copy), reportAbuseButtonCreate (copy), v8 (ref), v6 (ref), RobloxTranslatorModule (upval), GetFFlagVoiceChatUILoggingModule (upval), NewResult (upval), Players1 (copy), ConstantsModule (upval), updateAllMuteButtons (copy), CheckShareGameButtonInMuteAllLayout (upval), CheckForNilUserIdOnPlayerList (upval), CryoModule (upval), UserProfileStore (upval), resizePlatformName (copy), FFlagUserProfilePlatformProfile (upval), Flag (ref), GetFFlagCleanupMuteSelfButtonModule (upval), pollImage (copy), UserInputService (upval), OnlyCaptureFocusIfOnPlayerPage (upval)
 		NewPage.LastSelectableObjects = {}
 		
 		if FFlagIEMTabFocusNav and not NewPage.ButtonsContainer.Visible then
@@ -1748,7 +1749,7 @@ return ((function()
 		end
 		if GetFFlagEnableConsoleJoinVoiceModule() and shouldShowJoinVoiceButton() then
 			if shouldShowJoinVoiceButton() and not Object2 then
-				Object2 = Callback2()
+				Object2 = Callback()
 			end
 			v1()
 		end
@@ -1796,7 +1797,7 @@ return ((function()
 				friendStatusCreate(Entry, Player)
 				local v13 = nil
 				UtilityModule:OnResized(Entry, function(_, p2)
-					-- upvalues: Entry (ref), UtilityModule (upval), resizeFriendButton (upval), Player (copy), v13 (ref), Callback (upval), InspectMenuEnabled (copy), resizeInspectButton (upval)
+					-- upvalues: Entry (ref), UtilityModule (upval), resizeFriendButton (upval), Player (copy), v13 (ref), Callback1 (upval), InspectMenuEnabled (copy), resizeInspectButton (upval)
 					local RightSideButtons = Entry:FindFirstChild("RightSideButtons")
 					local DisplayNameLabel = Entry:FindFirstChild("DisplayNameLabel")
 					local NameLabel = Entry:FindFirstChild("NameLabel")
@@ -1843,7 +1844,7 @@ return ((function()
 					end
 					if RightSideButtons then
 						resizeFriendButton(RightSideButtons, Player, p2, v13)
-						Callback(RightSideButtons, Player, p2, v13)
+						Callback1(RightSideButtons, Player, p2, v13)
 						
 						if InspectMenuEnabled then
 							resizeInspectButton(RightSideButtons, Player, p2, v13)
@@ -1997,7 +1998,7 @@ return ((function()
 		end)
 	end
 	
-	local function v138()
+	local function v139()
 		-- upvalues: Flag (ref), NewResult (upval), RunService (upval)
 		if Flag then
 			NewResult:debug("Unbinding Playerlist Mic Update Renderstep Hook")
@@ -2008,7 +2009,7 @@ return ((function()
 	
 	if game:GetEngineFeature("VoiceChatSupported") and not Enabled then
 		Default:asyncInit():andThen(function()
-			-- upvalues: Enabled (ref), Default (upval), EnabledResult (upval), GetFFlagCleanupMuteSelfButtonModule (upval), Object1 (ref), v9 (ref), updateAllMuteButtons (copy), Images (copy), Object (ref), v1 (ref), EventConnection (ref), GetFFlagEnableConsoleJoinVoiceModule (upval), Object2 (ref), v137 (copy), Parent1 (copy), destroyAllUserMuteButtons (copy), resetButtonRow (copy)
+			-- upvalues: Enabled (ref), Default (upval), EnabledResult (upval), GetFFlagCleanupMuteSelfButtonModule (upval), Object1 (ref), v9 (ref), updateAllMuteButtons (copy), Images (copy), Object (ref), v1 (ref), EventConnection (ref), GetFFlagEnableConsoleJoinVoiceModule (upval), Object2 (ref), v138 (copy), Parent1 (copy), destroyAllUserMuteButtons (copy), resetButtonRow (copy)
 			Enabled = true
 			Default:SetupParticipantListeners()
 			
@@ -2029,7 +2030,7 @@ return ((function()
 				Images[Key] = nil
 			end)
 			Default:getService().StateChanged:Connect(function(_, NewState)
-				-- upvalues: Object (upval), v1 (upval), Object1 (upval), EventConnection (upval), GetFFlagEnableConsoleJoinVoiceModule (upval), Object2 (upval), Enabled (upval), v137 (upval)
+				-- upvalues: Object (upval), v1 (upval), Object1 (upval), EventConnection (upval), GetFFlagEnableConsoleJoinVoiceModule (upval), Object2 (upval), Enabled (upval), v138 (upval)
 				if NewState == Enum.VoiceChatState.Ended then
 					if Object then
 						Object.Visible = false
@@ -2072,16 +2073,16 @@ return ((function()
 							end
 							v1()
 						end
-						v137()
+						v138()
 					end
 				end
 			end)
 			
 			if not GetFFlagCleanupMuteSelfButtonModule() then
-				v137()
+				v138()
 			end
 			Default.showVoiceUI.Event:Connect(function()
-				-- upvalues: GetFFlagCleanupMuteSelfButtonModule (upval), Object1 (upval), EnabledResult (upval), v9 (upval), Parent1 (upval), GetFFlagEnableConsoleJoinVoiceModule (upval), Object2 (upval), v1 (upval), v137 (upval)
+				-- upvalues: GetFFlagCleanupMuteSelfButtonModule (upval), Object1 (upval), EnabledResult (upval), v9 (upval), Parent1 (upval), GetFFlagEnableConsoleJoinVoiceModule (upval), Object2 (upval), v1 (upval), v138 (upval)
 				if GetFFlagCleanupMuteSelfButtonModule() then
 					if not Object1 and not EnabledResult then
 						if GetFFlagCleanupMuteSelfButtonModule() then
@@ -2105,10 +2106,10 @@ return ((function()
 					end
 					v1()
 				end
-				v137()
+				v138()
 			end)
 			Default.hideVoiceUI.Event:Connect(function()
-				-- upvalues: Object (upval), v1 (upval), Object1 (upval), EventConnection (upval), destroyAllUserMuteButtons (upval), v137 (upval), resetButtonRow (upval)
+				-- upvalues: Object (upval), v1 (upval), Object1 (upval), EventConnection (upval), destroyAllUserMuteButtons (upval), v138 (upval), resetButtonRow (upval)
 				if Object then
 					if Object then
 						Object.Visible = false
@@ -2128,7 +2129,7 @@ return ((function()
 				end
 				v1()
 				destroyAllUserMuteButtons()
-				v137()
+				v138()
 				resetButtonRow()
 			end)
 			Default.muteAllChanged.Event:Connect(function()
@@ -2142,8 +2143,8 @@ return ((function()
 			end
 		end)
 	end
-	NewPage.Displayed.Event:connect(v137)
-	NewPage.Hidden.Event:connect(v138)
+	NewPage.Displayed.Event:connect(v138)
+	NewPage.Hidden.Event:connect(v139)
 	Players.PlayerRemoving:Connect(function(Player)
 		-- upvalues: t1 (copy), t (copy), GuiService (upval), UserInputService (upval), SelectedCoreObject (ref), GetFFlagDestroyPlayerCardOnLeaveModule (upval)
 		t1[Player.Name] = nil
@@ -2261,8 +2262,8 @@ return ((function()
 	end
 	
 	function NewPage:UnmountMenuButtonsContainer()
-		-- upvalues: FIntRelocateMobileMenuButtonsVariantModule (upval), NewPage (copy)
-		if FIntRelocateMobileMenuButtonsVariantModule == 2 and NewPage.buttonsContainerRoot then
+		-- upvalues: FFlagMenuButtonsMountWithIEMModule (upval), FIntRelocateMobileMenuButtonsVariantModule (upval), NewPage (copy)
+		if FFlagMenuButtonsMountWithIEMModule and FIntRelocateMobileMenuButtonsVariantModule == 2 and NewPage.buttonsContainerRoot then
 			NewPage.buttonsContainerRoot:unmount()
 			NewPage.buttonsContainerRoot = nil
 		end

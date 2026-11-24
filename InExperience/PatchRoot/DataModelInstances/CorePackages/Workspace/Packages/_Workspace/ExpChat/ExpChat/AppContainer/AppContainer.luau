@@ -22,7 +22,6 @@ local FFlagExpChatPresetChatEnabled = ExpChatSharedModule.Flags.FFlagExpChatPres
 local FFlagExpChatNewInputBarModule = require(ExpChat.Flags.FFlagExpChatNewInputBar)
 local GetFFlagExpChatAlwaysRunTCSFunction = SharedFlagsModule.getFFlagExpChatAlwaysRunTCS
 local FFlagExpChatUseChannelTabsStore = SharedFlagsModule.FFlagExpChatUseChannelTabsStore
-local GameSettings = if SharedFlagsModule.FFlagChatTranslationReadsUserGameSettings then UserSettings().GameSettings else TextChatService
 local GetChannelTabsStoreModule = if FFlagExpChatUseChannelTabsStore then require(ExpChat.Stores.GetChannelTabsStore) else nil
 
 function getChatWindowEnabled()
@@ -38,31 +37,31 @@ function getChatWindowEnabled()
 end
 
 function getChatTranslationEnabled()
-	-- upvalues: GameSettings (copy)
+	-- upvalues: TextChatService (copy)
 	local Success, Result = pcall(function()
-		-- upvalues: GameSettings (upval)
-		return GameSettings.ChatTranslationEnabled
+		-- upvalues: TextChatService (upval)
+		return TextChatService.ChatTranslationEnabled
 	end)
 	
 	return Success and Result
 end
 
 function getChatTranslationToggleEnabled()
-	-- upvalues: GameSettings (copy)
+	-- upvalues: TextChatService (copy)
 	local Success, Result = pcall(function()
-		-- upvalues: GameSettings (upval)
-		return GameSettings.ChatTranslationToggleEnabled
+		-- upvalues: TextChatService (upval)
+		return TextChatService.ChatTranslationToggleEnabled
 	end)
 	
 	return Success and Result
 end
 
 function shouldShowChatTranslationFTUX(): boolean
-	-- upvalues: GameSettings (copy)
+	-- upvalues: TextChatService (copy)
 	if game:GetEngineFeature("TextChatServiceSettingsSaved") then
 		local Success, Result = pcall(function()
-			-- upvalues: GameSettings (upval)
-			return GameSettings.ChatTranslationFTUXShown
+			-- upvalues: TextChatService (upval)
+			return TextChatService.ChatTranslationFTUXShown
 		end)
 		
 		return not (Success and Result)
@@ -101,7 +100,7 @@ function AppContainer:willUnmount()
 end
 
 function AppContainer.didMount(p1)
-	-- upvalues: GameSettings (copy), ChangedConnection (ref), GetFFlagExpChatAlwaysRunTCSFunction (copy)
+	-- upvalues: TextChatService (copy), ChangedConnection (ref), GetFFlagExpChatAlwaysRunTCSFunction (copy)
 	p1.migrationConnection = p1.props.chat:GetPropertyChangedSignal("IsAutoMigrated"):Connect(function()
 		-- upvalues: p1 (copy)
 		if p1.props.chat.IsAutoMigrated then
@@ -110,11 +109,11 @@ function AppContainer.didMount(p1)
 	end)
 	
 	local function onTextChatServicePropertyChanged(p2)
-		-- upvalues: GameSettings (upval), p1 (copy)
+		-- upvalues: TextChatService (upval), p1 (copy)
 		if p2 == "ChatTranslationEnabled" then
 			local Success, Result = pcall(function()
-				-- upvalues: GameSettings (upval)
-				return GameSettings.ChatTranslationEnabled
+				-- upvalues: TextChatService (upval)
+				return TextChatService.ChatTranslationEnabled
 			end)
 			
 			if Success then
@@ -127,12 +126,12 @@ function AppContainer.didMount(p1)
 			end
 		elseif p2 == "ChatTranslationToggleEnabled" then
 			local Success1, _ = pcall(function()
-				-- upvalues: GameSettings (upval)
-				return GameSettings.ChatTranslationToggleEnabled
+				-- upvalues: TextChatService (upval)
+				return TextChatService.ChatTranslationToggleEnabled
 			end)
 			local Success2, Result1 = pcall(function()
-				-- upvalues: GameSettings (upval)
-				return GameSettings.ChatTranslationEnabled
+				-- upvalues: TextChatService (upval)
+				return TextChatService.ChatTranslationEnabled
 			end)
 			
 			if Success1 then
@@ -147,7 +146,7 @@ function AppContainer.didMount(p1)
 	end
 	
 	if not ChangedConnection then
-		ChangedConnection = GameSettings.Changed:Connect(onTextChatServicePropertyChanged)
+		ChangedConnection = TextChatService.Changed:Connect(onTextChatServicePropertyChanged)
 	end
 	p1:setState({
 		showTranslationButton = getChatTranslationEnabled() and getChatTranslationToggleEnabled(),

@@ -12,6 +12,7 @@ local LabeledTextBoxModule = require(Parent.Common.LabeledTextBox)
 local PublishInfoListModule = require(Parent.Common.PublishInfoList)
 local MakeupPartGridModule = require(Parent.Common.MakeupPartGrid)
 local MakeupPreviewUtilsModule = require(script.Parent.Parent.Parent.MakeupPreviewUtils)
+local GetFFlagUploadMakeupSupportModule = require(script.Parent.Parent.Parent.Flags.GetFFlagUploadMakeupSupport)
 local PurchasePromptModule = require(CorePackages.Workspace.Packages.PurchasePrompt)
 local PublishAssetAnalytics = PurchasePromptModule.PublishAssetAnalytics
 local SetPromptVisibilityModule = require(script.Parent.Parent.Parent.Actions.SetPromptVisibility)
@@ -189,7 +190,7 @@ function PublishMakeupLookPrompt.willUnmount(p1)
 end
 
 function PublishMakeupLookPrompt.renderPromptBody(p1)
-	-- upvalues: RoactModule (copy), _UDim (copy), ObjectViewportModule (copy), LabeledTextBoxModule (copy), RobloxTranslatorModule (copy), PublishInfoListModule (copy), MakeupPartGridModule (copy)
+	-- upvalues: RoactModule (copy), _UDim (copy), ObjectViewportModule (copy), GetFFlagUploadMakeupSupportModule (copy), LabeledTextBoxModule (copy), RobloxTranslatorModule (copy), PublishInfoListModule (copy), MakeupPartGridModule (copy)
 	local PreviewModel = p1.state.previewModel
 	
 	return RoactModule.createFragment({
@@ -204,10 +205,10 @@ function PublishMakeupLookPrompt.renderPromptBody(p1)
 			useFullBodyCameraSettings = false,
 			fieldOfView = 30,
 			LayoutOrder = 1,
-			isMakeupPreview = true,
 			openPreviewView = p1.openPreviewView,
 			model = PreviewModel,
-			isLoading = PreviewModel == nil
+			isLoading = PreviewModel == nil,
+			isMakeupPreview = GetFFlagUploadMakeupSupportModule()
 		}),
 		DescriptionInput = RoactModule.createElement(LabeledTextBoxModule, {
 			LayoutOrder = 2,
@@ -234,14 +235,14 @@ function PublishMakeupLookPrompt.renderPromptBody(p1)
 end
 
 function PublishMakeupLookPrompt.render(p1)
-	-- upvalues: RoactModule (copy), BasePublishPromptModule (copy), RobloxTranslatorModule (copy)
+	-- upvalues: RoactModule (copy), BasePublishPromptModule (copy), GetFFlagUploadMakeupSupportModule (copy), RobloxTranslatorModule (copy)
 	return RoactModule.createElement(BasePublishPromptModule, {
-		isMakeupPreview = true,
 		delayInputSeconds = 3,
 		promptBody = p1:renderPromptBody(),
 		screenSize = p1.props.screenSize,
 		showingPreviewView = p1.state.showingPreviewView,
 		closePreviewView = p1.closePreviewView,
+		isMakeupPreview = GetFFlagUploadMakeupSupportModule(),
 		asset = p1.state.previewModel,
 		nameLabel = RobloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.Name"),
 		defaultName = p1.state.name,

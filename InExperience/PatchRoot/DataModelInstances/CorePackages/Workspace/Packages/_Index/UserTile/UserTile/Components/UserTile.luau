@@ -18,10 +18,9 @@ local FFlagSocialCarouselInGamePlayIcon = require(Parent.SharedFlags).FFlagSocia
 local FFlagUserTileAddContextualInfoIcon = require(Parent.SharedFlags).FFlagUserTileAddContextualInfoIcon
 local FFlagUserTileTitleStackAddExtraInfo = require(Parent.SharedFlags).FFlagUserTileTitleStackAddExtraInfo
 local FFlagUserTileUnfilteredChatIndicator = require(Parent.SharedFlags).FFlagUserTileUnfilteredChatIndicator
-local FFlagProfilePlatformUniformIdentityBadgeSize = require(Parent.SharedFlags).FFlagProfilePlatformUniformIdentityBadgeSize
 
 return function(p1)
-	-- upvalues: ReactModule (copy), ControlState (copy), View (copy), LayoutModeModule (copy), Enums (copy), FFlagSocialCarouselInGamePlayIcon (copy), AvatarPileModule (copy), AvatarModule (copy), FFlagUserTileShowShimmerWhenLoadingModule (copy), TitleStackModule (copy), FFlagUserTileShowBadges (copy), FFlagProfilePlatformUniformIdentityBadgeSize (copy), FFlagUserTileAddContextualInfoIcon (copy), FFlagProfilePlatformNewProfileHeader (copy), FFlagEnableMobileGameJoinCard (copy), FFlagUserTileUnfilteredChatIndicator (copy), FFlagEnableBlackbirdCheck (copy), FFlagUserTileTitleStackAddExtraInfo (copy)
+	-- upvalues: ReactModule (copy), ControlState (copy), View (copy), LayoutModeModule (copy), Enums (copy), FFlagSocialCarouselInGamePlayIcon (copy), AvatarPileModule (copy), AvatarModule (copy), FFlagUserTileShowShimmerWhenLoadingModule (copy), TitleStackModule (copy), FFlagUserTileShowBadges (copy), FFlagUserTileAddContextualInfoIcon (copy), FFlagProfilePlatformNewProfileHeader (copy), FFlagEnableMobileGameJoinCard (copy), FFlagUserTileUnfilteredChatIndicator (copy), FFlagEnableBlackbirdCheck (copy), FFlagUserTileTitleStackAddExtraInfo (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local HasOnActivated = p1.onActivated ~= nil
 	
@@ -75,7 +74,6 @@ return function(p1)
 			isVerified = if FFlagUserTileShowBadges then p1.isVerified else nil,
 			isPremium = if FFlagUserTileShowBadges then p1.isPremium else nil,
 			isRobloxAdmin = if FFlagUserTileShowBadges then p1.isRobloxAdmin else nil,
-			badgeSize = if FFlagProfilePlatformUniformIdentityBadgeSize then p1.badgeSize else nil,
 			subtitle = p1.subtitle,
 			contextualInfo = p1.contextualInfo,
 			contextualInfoIcon = if FFlagUserTileAddContextualInfoIcon then p1.contextualInfoIcon else nil,

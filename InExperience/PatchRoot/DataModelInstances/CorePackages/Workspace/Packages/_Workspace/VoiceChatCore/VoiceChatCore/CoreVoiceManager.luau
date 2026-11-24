@@ -36,8 +36,6 @@ local ConsoleVoiceIXPEnabled = game:DefineFastFlag("ConsoleVoiceIXPEnabled", fal
 local FFlagExpChatDictation = require(Parent1.SharedFlags).FFlagExpChatDictation
 local FFlagMicIndicatorRequiresVoiceDevice = require(Parent1.SharedFlags).FFlagMicIndicatorRequiresVoiceDevice
 local FFlagFaeEnablesVoiceDevice = require(Parent1.SharedFlags).FFlagFaeEnablesVoiceDevice
-local FFlagAgeCheckJoinIntentUnmutes = require(Parent1.SharedFlags).FFlagAgeCheckJoinIntentUnmutes
-local FFlagHideMicWhileJoinVoiceShown = require(Parent1.SharedFlags).FFlagHideMicWhileJoinVoiceShown
 local ConsoleVoiceIXPLayerName = game:DefineFastString("ConsoleVoiceIXPLayerName", "User.Communication.ConsoleVoice")
 local ConsoleVoiceEnabledIXPLayerValue = game:DefineFastString("ConsoleVoiceEnabledIXPLayerValue", "ConsoleVoiceEnabled")
 local SendVoiceCapturedDuringVideoCaptureEvent = game:DefineFastFlag("SendVoiceCapturedDuringVideoCaptureEvent", false)
@@ -117,7 +115,6 @@ local config1 = {
 	previousMutedState = nil,
 	permissionPromise = nil,
 	hasOptedToJoinVoiceOnAgeVerification = false,
-	_ageCheckJoinIntentPending = false,
 	permissionState = if GetFFlagJoinWithoutMicPermissionsFunction() then PERMISSIONSTATE.IDLE else nil,
 	recentUsersInteractionData = nil,
 	NotificationService = NotificationService,
@@ -826,13 +823,13 @@ function config1:OptUserToJoinVoice()
 end
 
 function config1:SetupFAECompleteListener()
-	-- upvalues: NewResult (copy), FFlagAgeCheckJoinIntentUnmutes (copy), FFlagFaeEnablesVoiceDevice (copy)
+	-- upvalues: NewResult (copy), FFlagFaeEnablesVoiceDevice (copy)
 	NewResult:debug("Setting up FAE complete listener")
 	
 	if game:GetEngineFeature("ChatReconcileAccess") then
 		NewResult:debug("Using ChatService ReconcileCommunicationAccessCompleted event")
 		self.ChatService.ReconcileCommunicationAccessCompleted:Connect(function()
-			-- upvalues: NewResult (upval), self (copy), FFlagAgeCheckJoinIntentUnmutes (upval), FFlagFaeEnablesVoiceDevice (upval)
+			-- upvalues: NewResult (upval), self (copy), FFlagFaeEnablesVoiceDevice (upval)
 			NewResult:debug("FAE complete listener triggered, re-fetching voice permissions")
 			self.communicationPermissionsResult = nil
 			self:FetchVoicePermissions()
@@ -841,35 +838,20 @@ function config1:SetupFAECompleteListener()
 			if self.hasOptedToJoinVoiceOnAgeVerification then
 				NewResult:debug("FAE complete listener triggered, attempting voice rejoin")
 				
-				if not FFlagAgeCheckJoinIntentUnmutes or self:IsSeamlessVoice() then
-					if self:IsSeamlessVoice() then
-						NewResult:debug("Opting-in user to voice")
+				if self:IsSeamlessVoice() then
+					NewResult:debug("Opting-in user to voice")
+					
+					if FFlagFaeEnablesVoiceDevice then
+						self:_enableVoiceThenRejoinWhenUserAudioEnabled()
 						
-						if FFlagAgeCheckJoinIntentUnmutes then
-							self.hasOptedToJoinVoiceOnAgeVerification = false
-							self._ageCheckJoinIntentPending = true
-						end
-						if FFlagFaeEnablesVoiceDevice then
-							self:_enableVoiceThenRejoinWhenUserAudioEnabled()
-							
-							return
-						end
-						self.AvatarChatService:EnableVoice()
-						self.attemptVoiceRejoin:Fire()
+						return
 					end
-				elseif self:_isValidAgeVerificationOverlayData(self._getShowAgeVerificationOverlayResult) then
-					self:emit("OnAgeCheckCompletedWithoutVoice")
+					self.AvatarChatService:EnableVoice()
+					self.attemptVoiceRejoin:Fire()
 				end
-				return
 			end
 		end)
 	end
-end
-
-function config1:ConsumeAgeCheckJoinIntent()
-	self._ageCheckJoinIntentPending = false
-	
-	return self._ageCheckJoinIntentPending
 end
 
 function config1:_enableVoiceThenRejoinWhenUserAudioEnabled()
@@ -2071,21 +2053,21 @@ function config1.SetNewUserFTUXCookieValue(p4, p5)
 	end))
 end
 
-function config1:SetAndSyncActive(p4, ShouldLocalAudioDeviceBeActive)
+function config1:SetAndSyncActive(p4, Active)
 	-- upvalues: GetFFlagCoreMicManagerRefactorModule (copy), Players (copy)
 	if GetFFlagCoreMicManagerRefactorModule() then
-		return self.micManager:SetAndSyncActive(p4, ShouldLocalAudioDeviceBeActive)
+		return self.micManager:SetAndSyncActive(p4, Active)
 	end
-	p4.Active = ShouldLocalAudioDeviceBeActive
+	p4.Active = Active
 	local SendMuteEvent = self:GetSendMuteEvent()
 	
 	if SendMuteEvent and p4.Player == Players.LocalPlayer then
-		SendMuteEvent:FireServer(ShouldLocalAudioDeviceBeActive)
+		SendMuteEvent:FireServer(Active)
 	end
 end
 
 function config1:CreateAudioDeviceData(Object)
-	-- upvalues: Players (copy), EnableMutedByLocalUserEngineFeature (copy), FFlagHideMicWhileJoinVoiceShown (copy), GetFFlagCoreMicManagerRefactorModule (copy), NewResult (copy), FFlagMicIndicatorRequiresVoiceDevice (copy), FFlagDebugShowAudioDeviceInputDebugger (copy), VoiceChatService (copy)
+	-- upvalues: Players (copy), EnableMutedByLocalUserEngineFeature (copy), NewResult (copy), FFlagMicIndicatorRequiresVoiceDevice (copy), FFlagDebugShowAudioDeviceInputDebugger (copy), VoiceChatService (copy)
 	local t = {}
 	local IsPlayerMatch = Object.Player == Players.LocalPlayer
 	
@@ -2109,16 +2091,7 @@ function config1:CreateAudioDeviceData(Object)
 	if Object.Active and IsPlayerMatch and self.localMuted == nil then
 		self:SetAndSyncActive(Object, false)
 	end
-	local FFlagCoreMicManagerRefactorModule = FFlagHideMicWhileJoinVoiceShown and GetFFlagCoreMicManagerRefactorModule()
-	
-	if FFlagCoreMicManagerRefactorModule and IsPlayerMatch and self.localMuted ~= nil and not self.isInCall then
-		local ShouldLocalAudioDeviceBeActive = self.micManager:_shouldLocalAudioDeviceBeActive()
-		
-		if Object.Active ~= ShouldLocalAudioDeviceBeActive then
-			NewResult:debug("Mismatch between the mic state and device.Active")
-			self:SetAndSyncActive(Object, ShouldLocalAudioDeviceBeActive)
-		end
-	elseif IsPlayerMatch and self.localMuted ~= nil and self.localMuted ~= not Object.Active and not self.isInCall then
+	if IsPlayerMatch and self.localMuted ~= nil and self.localMuted ~= not Object.Active and not self.isInCall then
 		NewResult:debug("Mismatch between LocalMuted and device.Active")
 		local NoLocalMuted = not self.localMuted
 		Object.Active = NoLocalMuted
@@ -2138,20 +2111,13 @@ function config1:CreateAudioDeviceData(Object)
 		end
 	end
 	t.onPlayerChanged = Object:GetPropertyChangedSignal("Player"):Connect(function()
-		-- upvalues: IsPlayerMatch (ref), Object (copy), Players (upval), self (copy), NewResult (upval), FFlagCoreMicManagerRefactorModule (copy), EnableMutedByLocalUserEngineFeature (upval), FFlagMicIndicatorRequiresVoiceDevice (upval)
+		-- upvalues: IsPlayerMatch (ref), Object (copy), Players (upval), self (copy), NewResult (upval), EnableMutedByLocalUserEngineFeature (upval), FFlagMicIndicatorRequiresVoiceDevice (upval)
 		IsPlayerMatch = Object.Player == Players.LocalPlayer
 		
 		if IsPlayerMatch then
 			if Object.Active and self.localMuted == nil then
 				NewResult:debug("Player is still in connecting state, setting Active to false")
 				self:SetAndSyncActive(Object, false)
-			elseif FFlagCoreMicManagerRefactorModule and self.localMuted ~= nil then
-				local ShouldLocalAudioDeviceBeActive = self.micManager:_shouldLocalAudioDeviceBeActive()
-				
-				if Object.Active ~= ShouldLocalAudioDeviceBeActive then
-					NewResult:debug("Mismatch between the mic state and device.Active")
-					self:SetAndSyncActive(Object, ShouldLocalAudioDeviceBeActive)
-				end
 			elseif self.localMuted ~= nil and self.localMuted ~= not Object.Active then
 				NewResult:debug("Mismatch between LocalMuted and device.Active")
 				self:SetAndSyncActive(Object, not self.localMuted)

@@ -59,14 +59,6 @@ local function LeaveButtonsContainer(p1)
 	if FFlagLeaveGameButtonKeepsFocusWhileLeavingModule then
 		v2, Callback = ReactModule.useState(false)
 	end
-	local UseRefResult1 = if FFlagLeaveGameButtonKeepsFocusWhileLeavingModule then ReactModule.useRef(false) else nil
-	
-	local function _(Current)
-		-- upvalues: UseRefResult1 (copy), Callback (ref)
-		UseRefResult1.current = Current
-		Callback(Current)
-	end
-	
 	local UseLastInputResult = UseLastInputFunction()
 	local UseFocusGuiObjectResult = UseFocusGuiObjectFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -90,20 +82,15 @@ local function LeaveButtonsContainer(p1)
 	if FFlagLeaveGameButtonKeepsFocusWhileLeavingModule then
 		local SetShowLeavingFunction = p1.setShowLeaving
 		ReactModule.useEffect(function()
-			-- upvalues: SetShowLeavingFunction (copy), UseRefResult1 (copy), Callback (ref), UseFocusGuiObjectResult (copy), UseRefResult (copy)
+			-- upvalues: SetShowLeavingFunction (copy), Callback (ref), UseFocusGuiObjectResult (copy), UseRefResult (copy)
 			if SetShowLeavingFunction then
-				SetShowLeavingFunction(function(Current): boolean
-					-- upvalues: UseRefResult1 (upval), Callback (upval), UseFocusGuiObjectResult (upval), UseRefResult (upval)
-					if Current and UseRefResult1.current then
-						return false
-					end
-					UseRefResult1.current = Current
-					Callback(Current)
+				SetShowLeavingFunction(function(p2)
+					-- upvalues: Callback (upval), UseFocusGuiObjectResult (upval), UseRefResult (upval)
+					Callback(p2)
 					
-					if Current then
+					if p2 then
 						UseFocusGuiObjectResult(UseRefResult.current)
 					end
-					return true
 				end)
 				
 				return function()
@@ -142,10 +129,8 @@ local function LeaveButtonsContainer(p1)
 				width = UDim.new(0, if NoFFlagResponsiveUnitsDeprecateTenFoot then 300 else 200),
 				ref = UseRefResult,
 				onActivated = ReactModule.useCallback(function()
-					-- upvalues: FFlagLeaveGameButtonKeepsFocusWhileLeavingModule (upval), UseRefResult1 (copy), Callback (ref), FFlagPioneerLeaveLogsOut (upval), IsPioneerLaunchFunction (upval), LeaveGameModule (upval), PioneerLeaveReason (upval)
+					-- upvalues: FFlagLeaveGameButtonKeepsFocusWhileLeavingModule (upval), Callback (ref), FFlagPioneerLeaveLogsOut (upval), IsPioneerLaunchFunction (upval), LeaveGameModule (upval), PioneerLeaveReason (upval)
 					if FFlagLeaveGameButtonKeepsFocusWhileLeavingModule then
-						if UseRefResult1.current then return end
-						UseRefResult1.current = true
 						Callback(true)
 					end
 					if FFlagPioneerLeaveLogsOut and IsPioneerLaunchFunction() then
@@ -163,7 +148,6 @@ local function LeaveButtonsContainer(p1)
 						LeaveGameModule(true, if FFlagLeaveGameButtonKeepsFocusWhileLeavingModule then { keepSelection = true } else nil)
 					end
 					if FFlagLeaveGameButtonKeepsFocusWhileLeavingModule and IsPioneerLaunchFunction() then
-						UseRefResult1.current = false
 						Callback(false)
 					end
 				end, { LeaveGameModule }),

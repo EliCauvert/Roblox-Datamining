@@ -14,14 +14,12 @@ local VersionHistoryUtilsModule = require(script.Parent.Parent.VersionHistoryUti
 local _ = require(script.Parent.LatestVersionCardView)
 local _ = require(BuildExperience.useGamePermissions)
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
-local FFlagBuildExperienceClickEventIdsModule = require(BuildExperience.Flags.FFlagBuildExperienceClickEventIds)
-local FFlagBuildPublishSheetReturnOnBackModule = require(BuildExperience.Flags.FFlagBuildPublishSheetReturnOnBack)
 local DataStatus = DataHydrationModule.DataStatus
 local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 local UseNavigationFunction = NavigationModule.useNavigation
 
 return function(p1)
-	-- upvalues: PlaceVersionHistoryModule (copy), ReactModule (copy), SignalsReactModule (copy), GetPlaytestLoadingStoreModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseNavigationFunction (copy), SendBuildExperienceEventModule (copy), FFlagBuildExperienceClickEventIdsModule (copy), LaunchPlaytestWithLoadingStateModule (copy), FFlagBuildPublishSheetReturnOnBackModule (copy), VersionHistoryUtilsModule (copy), DataStatus (copy), FFlagBuildCheckGamePermissionsModule (copy)
+	-- upvalues: PlaceVersionHistoryModule (copy), ReactModule (copy), SignalsReactModule (copy), GetPlaytestLoadingStoreModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseNavigationFunction (copy), SendBuildExperienceEventModule (copy), LaunchPlaytestWithLoadingStateModule (copy), VersionHistoryUtilsModule (copy), DataStatus (copy), FFlagBuildCheckGamePermissionsModule (copy)
 	local PlaceVersionHistoryStore = PlaceVersionHistoryModule.getPlaceVersionHistoryStore()
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: PlaceVersionHistoryStore (copy), p1 (copy)
@@ -43,32 +41,14 @@ return function(p1)
 	})
 	local UseNavigationResult = UseNavigationFunction()
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: SendBuildExperienceEventModule (upval), p1 (copy), FFlagBuildExperienceClickEventIdsModule (upval), LaunchPlaytestWithLoadingStateModule (upval)
-		SendBuildExperienceEventModule("PLAYTEST_CLICK", {
-			universeId = p1.universeId,
-			placeId = p1.placeId,
-			conversationId = if FFlagBuildExperienceClickEventIdsModule then p1.sessionId else nil
-		}, { context = "LatestVersionCard" })
+		-- upvalues: SendBuildExperienceEventModule (upval), p1 (copy), LaunchPlaytestWithLoadingStateModule (upval)
+		SendBuildExperienceEventModule("PLAYTEST_CLICK", { universeId = p1.universeId, placeId = p1.placeId }, { context = "LatestVersionCard" })
 		LaunchPlaytestWithLoadingStateModule(p1.placeId, "LatestVersionCard", true)
-	end, { p1.placeId, p1.universeId, p1.sessionId })
+	end, { p1.placeId, p1.universeId })
 	local UseResult1 = ReactModule.useCallback(function()
-		-- upvalues: FFlagBuildPublishSheetReturnOnBackModule (upval), p1 (copy), SendBuildExperienceEventModule (upval), FFlagBuildExperienceClickEventIdsModule (upval), UseNavigationResult (copy)
-		if FFlagBuildPublishSheetReturnOnBackModule and p1.onOpenPublish ~= nil then
-			SendBuildExperienceEventModule("PUBLISH_CLICK", {
-				universeId = p1.universeId,
-				placeId = p1.placeId,
-				conversationId = if FFlagBuildExperienceClickEventIdsModule then p1.sessionId else nil
-			}, { context = "LatestVersionCard" })
-			p1.onOpenPublish()
-			
-			return
-		end
+		-- upvalues: UseNavigationResult (copy), SendBuildExperienceEventModule (upval), p1 (copy)
 		if UseNavigationResult == nil then return end
-		SendBuildExperienceEventModule("PUBLISH_CLICK", {
-			universeId = p1.universeId,
-			placeId = p1.placeId,
-			conversationId = if FFlagBuildExperienceClickEventIdsModule then p1.sessionId else nil
-		}, { context = "LatestVersionCard" })
+		SendBuildExperienceEventModule("PUBLISH_CLICK", { universeId = p1.universeId, placeId = p1.placeId }, { context = "LatestVersionCard" })
 		
 		if p1.onClose then
 			p1.onClose()
@@ -77,8 +57,10 @@ return function(p1)
 			target = UseNavigationResult.getParam("target") or { universeId = p1.universeId, placeId = p1.placeId }
 		})
 	end, {
-		p1.placeId, p1.universeId, p1.sessionId, p1.onClose, UseNavigationResult,
-		if FFlagBuildPublishSheetReturnOnBackModule then p1.onOpenPublish else nil
+		p1.placeId,
+		p1.universeId,
+		p1.onClose,
+		UseNavigationResult
 	})
 	local Entry = p1.entry
 	

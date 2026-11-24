@@ -50,7 +50,48 @@ local config = {
 			SettingsHubModule.Instance:SwitchToPage(LeaveGamePage, true, nil, nil, nil, { used_shortcut = true })
 		end
 		
-		if not SettingsHubModule:GetVisibility() then
+		if SettingsHubModule:GetVisibility() then
+			if SettingsHubModule.Instance.Pages.CurrentPage == LeaveGamePage then
+				local HasShowLeaving: boolean = FFlagLeaveGameButtonKeepsFocusWhileLeavingModule and LeaveGamePage.ShowLeaving ~= nil
+				
+				if HasShowLeaving then
+					LeaveGamePage.ShowLeaving(true)
+				end
+				if FFlagPioneerLeaveLogsOut and PioneerUtilsModule.isPioneerLaunch() then
+					LeaveGameModule(false, {
+						inhibitAppRating = true,
+						leaveReason = PioneerUtilsModule.PioneerLeaveReason.Logout,
+						telemetryFields = if FFlagLeaveActionChromeShortcutTelemetryModule then { used_shortcut = true } else nil,
+						keepSelection = if HasShowLeaving then true else nil
+					})
+					
+					if FFlagLeaveGameButtonKeepsFocusWhileLeavingModule and LeaveGamePage.ShowLeaving then
+						LeaveGamePage.ShowLeaving(false)
+						
+						return
+					end
+				elseif FFlagLeaveActionChromeShortcutTelemetryModule then
+					LeaveGameModule(true, {
+						telemetryFields = { used_shortcut = true },
+						keepSelection = if HasShowLeaving then true else nil
+					})
+					
+					return
+				else
+					LeaveGameModule(true, if HasShowLeaving then { keepSelection = true } else nil)
+					
+					return
+				end
+			elseif FFlagLeaveChromeShortcutTelemetryModule then
+				SettingsHubModule.Instance:SwitchToPage(LeaveGamePage, true, nil, nil, nil, { used_shortcut = true })
+				
+				return
+			else
+				SettingsHubModule:SwitchToPage(LeaveGamePage, true)
+				
+				return
+			end
+		else
 			if FFlagConsoleChatUseChromeFocusUtils and FocusNavigationStore.getChatInputBarFocused(false) then
 				FocusNavigationStore.unfocusChatInputBar()
 			end
@@ -62,43 +103,6 @@ local config = {
 			else
 				SettingsHubModule:SetVisibility(true, false, LeaveGamePage)
 			end
-		elseif SettingsHubModule.Instance.Pages.CurrentPage == LeaveGamePage then
-			local HasShowLeaving: boolean = FFlagLeaveGameButtonKeepsFocusWhileLeavingModule and LeaveGamePage.ShowLeaving ~= nil
-			
-			if HasShowLeaving and not LeaveGamePage.ShowLeaving(true) then return end
-			if FFlagPioneerLeaveLogsOut and PioneerUtilsModule.isPioneerLaunch() then
-				LeaveGameModule(false, {
-					inhibitAppRating = true,
-					leaveReason = PioneerUtilsModule.PioneerLeaveReason.Logout,
-					telemetryFields = if FFlagLeaveActionChromeShortcutTelemetryModule then { used_shortcut = true } else nil,
-					keepSelection = if HasShowLeaving then true else nil
-				})
-				
-				if FFlagLeaveGameButtonKeepsFocusWhileLeavingModule and LeaveGamePage.ShowLeaving then
-					LeaveGamePage.ShowLeaving(false)
-					
-					return
-				end
-			elseif FFlagLeaveActionChromeShortcutTelemetryModule then
-				LeaveGameModule(true, {
-					telemetryFields = { used_shortcut = true },
-					keepSelection = if HasShowLeaving then true else nil
-				})
-				
-				return
-			else
-				LeaveGameModule(true, if HasShowLeaving then { keepSelection = true } else nil)
-				
-				return
-			end
-		elseif FFlagLeaveChromeShortcutTelemetryModule then
-			SettingsHubModule.Instance:SwitchToPage(LeaveGamePage, true, nil, nil, nil, { used_shortcut = true })
-			
-			return
-		else
-			SettingsHubModule:SwitchToPage(LeaveGamePage, true)
-			
-			return
 		end
 	end
 }

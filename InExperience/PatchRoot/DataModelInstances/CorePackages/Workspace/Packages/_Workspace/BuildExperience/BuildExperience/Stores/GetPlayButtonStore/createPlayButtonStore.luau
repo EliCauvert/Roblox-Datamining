@@ -3,22 +3,13 @@ local Parent = BuildExperience.Parent
 local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local _ = require(BuildExperience.Chat.chatTypes)
-local FFlagBuildExperienceInGameShellComposer = require(Parent.SharedFlags).FFlagBuildExperienceInGameShellComposer
 
 return function()
-	-- upvalues: SignalsModule (copy), FFlagBuildExperienceInGameShellComposer (copy), SignalsReactModule (copy)
+	-- upvalues: SignalsModule (copy), SignalsReactModule (copy)
 	local Signal, Signal2 = SignalsModule.createSignal(false)
 	local Signal1, Signal2_1 = SignalsModule.createSignal(nil)
 	local Signal3, Signal2_2 = SignalsModule.createSignal(nil)
-	local GetComposerDraftText = nil
-	local SetComposerDraftText = nil
-	local GetComposerAttachmentCount = nil
-	local SetComposerAttachmentCount = nil
 	
-	if FFlagBuildExperienceInGameShellComposer then
-		GetComposerDraftText, SetComposerDraftText = SignalsModule.createSignal("")
-		GetComposerAttachmentCount, SetComposerAttachmentCount = SignalsModule.createSignal(0)
-	end
 	return {
 		getIsActive = Signal,
 		useIsActive = function()
@@ -33,10 +24,6 @@ return function()
 		end,
 		setResumeTarget = Signal2_1,
 		getPendingResourceAttachment = Signal3,
-		setPendingResourceAttachment = Signal2_2,
-		getComposerDraftText = GetComposerDraftText,
-		setComposerDraftText = SetComposerDraftText,
-		getComposerAttachmentCount = GetComposerAttachmentCount,
-		setComposerAttachmentCount = SetComposerAttachmentCount
+		setPendingResourceAttachment = Signal2_2
 	}
 end

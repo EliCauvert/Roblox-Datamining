@@ -7,7 +7,7 @@ local PlaceVersionHistoryModule = require(Parent.DataHydration.PlaceVersionHisto
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
 local TimeModule = require(Parent.Time)
-local FFlagBuildExperienceClickEventIdsModule = require(BuildExperience.Flags.FFlagBuildExperienceClickEventIds)
+local FFlagBuildEventsUpdate1Module = require(BuildExperience.Flags.FFlagBuildEventsUpdate1)
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local LaunchExperienceModule = require(Parent.BuildExperiencePlaytestLaunch.launchExperience)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
@@ -18,7 +18,7 @@ local UseAbbreviatedNumberLocalizationFunction = LocalizationModule.Hooks.useAbb
 local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 
 return function(p1)
-	-- upvalues: PlaceVersionHistoryModule (copy), ReactModule (copy), SignalsReactModule (copy), GameGetGameInfoStoreModule (copy), GameGetVotesStoreModule (copy), VersionHistoryUtilsModule (copy), UseLocalizationFunction (copy), DateHelper (copy), LocalizationStringsModule (copy), UseAbbreviatedNumberLocalizationFunction (copy), SendBuildExperienceEventModule (copy), FFlagBuildExperienceClickEventIdsModule (copy), LaunchExperienceModule (copy)
+	-- upvalues: PlaceVersionHistoryModule (copy), ReactModule (copy), SignalsReactModule (copy), GameGetGameInfoStoreModule (copy), GameGetVotesStoreModule (copy), VersionHistoryUtilsModule (copy), UseLocalizationFunction (copy), DateHelper (copy), LocalizationStringsModule (copy), UseAbbreviatedNumberLocalizationFunction (copy), SendBuildExperienceEventModule (copy), FFlagBuildEventsUpdate1Module (copy), LaunchExperienceModule (copy)
 	local PlaceVersionHistoryStore = PlaceVersionHistoryModule.getPlaceVersionHistoryStore()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactModule.useMemo(function()
 		-- upvalues: PlaceVersionHistoryStore (copy), p1 (copy)
@@ -90,23 +90,14 @@ return function(p1)
 	local UseAbbreviatedNumberLocalizationResult = UseAbbreviatedNumberLocalizationFunction(if UseSignalStateResult3 then UseSignalStateResult3.upVotes else nil)
 	local UseAbbreviatedNumberLocalizationResult1 = UseAbbreviatedNumberLocalizationFunction(if UseSignalStateResult1 then UseSignalStateResult1.totalVisits else nil)
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: SendBuildExperienceEventModule (upval), p1 (copy), FFlagBuildExperienceClickEventIdsModule (upval), LaunchExperienceModule (upval)
-		SendBuildExperienceEventModule("PLAYTEST_CLICK", {
-			universeId = p1.universeId,
-			placeId = p1.placeId,
-			conversationId = if FFlagBuildExperienceClickEventIdsModule then p1.sessionId else nil
-		}, { context = "LiveVersionCard" })
+		-- upvalues: SendBuildExperienceEventModule (upval), FFlagBuildEventsUpdate1Module (upval), p1 (copy), LaunchExperienceModule (upval)
+		SendBuildExperienceEventModule(if FFlagBuildEventsUpdate1Module then "PLAYTEST_CLICK" else "PLAY_CLICK", { universeId = p1.universeId, placeId = p1.placeId }, if FFlagBuildEventsUpdate1Module then { context = "LiveVersionCard" } else nil)
 		LaunchExperienceModule(p1.placeId, "LiveVersionCard")
 		
 		if p1.onPlayActivated then
 			p1.onPlayActivated()
 		end
-	end, {
-		p1.placeId,
-		p1.universeId,
-		p1.sessionId,
-		p1.onPlayActivated
-	})
+	end, { p1.placeId, p1.universeId, p1.onPlayActivated })
 	
 	return if PlaceVersion == nil then nil else {
 		versionLabel = UseLocalizationResult1.versionLabel,

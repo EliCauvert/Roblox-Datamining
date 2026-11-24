@@ -14,6 +14,9 @@
 			return require(script.Utils.IncomingTransferHomepagePromptDismiss).createCallbacks(p1)
 		end
 	},
+	getSduiEconomyRegister = function()
+		return require(script.System.SduiEconomyRegister)
+	end,
 	registerCurrencyTransferSduiActions = require(script.Actions.registerCurrencyTransferSduiActions),
 	["jest.config"] = script["jest.config"]
 }

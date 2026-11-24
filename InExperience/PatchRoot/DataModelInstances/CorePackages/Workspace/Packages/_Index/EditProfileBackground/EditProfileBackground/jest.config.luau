@@ -3,11 +3,6 @@
 return {
 	displayName = "EditProfileBackground",
 	testMatch = { "**/*.test" },
-	testPathIgnorePatterns = {
-		"AvatarModelPrefetch.test",
-		"DisplayBackground.test",
-		"EditProfileBackgroundPage.test"
-	},
 	setupFilesAfterEnv = {
 		JestConfigsModule.setupFiles.LogHandler,
 		JestConfigsModule.setupFiles.UIBloxInitializer,

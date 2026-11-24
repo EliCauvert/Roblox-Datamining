@@ -30,11 +30,10 @@ local FFlagUserTileTitleStackAddExtraInfo = require(Parent.SharedFlags).FFlagUse
 local FFlagUserTileUnfilteredChatIndicator = require(Parent.SharedFlags).FFlagUserTileUnfilteredChatIndicator
 local FFlagUnifyVerifiedBadgeComponent = require(Parent.SharedFlags).FFlagUnifyVerifiedBadgeComponent
 local FFlagSocialCarouselInGameTitleMarquee = require(Parent.SharedFlags).FFlagSocialCarouselInGameTitleMarquee
-local FFlagProfilePlatformUniformIdentityBadgeSize = require(Parent.SharedFlags).FFlagProfilePlatformUniformIdentityBadgeSize
 local config = { layoutOrder = 2 }
 
 return function(p1)
-	-- upvalues: Llama (copy), config (copy), UseTokensFunction (copy), LayoutModeModule (copy), ReactModule (copy), Image (copy), FFlagSocialCarouselInGameTitleMarquee (copy), FFlagUserTileTitleStackAddExtraInfo (copy), FFlagUserTileShowShimmerWhenLoadingModule (copy), ConstantsModule (copy), FFlagEnableBlackbirdCheck (copy), FFlagHidePremiumIconography (copy), UseLocalizationFunction (copy), TextKeysModule (copy), FFlagUserTileUnfilteredChatIndicator (copy), View (copy), Skeleton (copy), Radius (copy), FFlagProfilePlatformNewProfileHeader (copy), Text (copy), FFlagUserTileShowBadges (copy), FFlagUnifyVerifiedBadgeComponent (copy), VerifiedBadgeModule (copy), FFlagProfilePlatformUniformIdentityBadgeSize (copy), IconSize (copy), FoundationModule (copy), FFlagEnableMobileGameJoinCard (copy), StateLayerAffordance (copy), FFlagUserTileAddContextualInfoIcon (copy), Icon (copy), UserTileRemoveContextualInfoTag (copy)
+	-- upvalues: Llama (copy), config (copy), UseTokensFunction (copy), LayoutModeModule (copy), ReactModule (copy), Image (copy), FFlagSocialCarouselInGameTitleMarquee (copy), FFlagUserTileTitleStackAddExtraInfo (copy), FFlagUserTileShowShimmerWhenLoadingModule (copy), ConstantsModule (copy), FFlagEnableBlackbirdCheck (copy), FFlagHidePremiumIconography (copy), UseLocalizationFunction (copy), TextKeysModule (copy), FFlagUserTileUnfilteredChatIndicator (copy), View (copy), Skeleton (copy), Radius (copy), FFlagProfilePlatformNewProfileHeader (copy), Text (copy), FFlagUserTileShowBadges (copy), FFlagUnifyVerifiedBadgeComponent (copy), VerifiedBadgeModule (copy), IconSize (copy), FoundationModule (copy), FFlagEnableMobileGameJoinCard (copy), StateLayerAffordance (copy), FFlagUserTileAddContextualInfoIcon (copy), Icon (copy), UserTileRemoveContextualInfoTag (copy)
 	local JoinResult = Llama.Dictionary.join(config, p1 or {})
 	local UseTokensResult = UseTokensFunction()
 	local AlignXCenter: string = if JoinResult.layoutMode == LayoutModeModule.compact then "align-x-center" else "align-x-left"
@@ -53,20 +52,20 @@ return function(p1)
 	local IsLayoutModeMatch1 = if FFlagUserTileShowShimmerWhenLoadingModule then JoinResult.layoutMode == LayoutModeModule.compact else nil
 	local XScale = nil
 	local XScale1 = nil
-	local XScale3 = nil
 	local XScale2 = nil
+	local XScale3 = nil
 	
 	if FFlagUserTileShowShimmerWhenLoadingModule then
 		if IsLayoutModeMatch1 then
 			XScale = ConstantsModule.TITLE_SHIMMER_WIDTH_SCALE_COMPACT
 			XScale1 = ConstantsModule.SUBTITLE_SHIMMER_WIDTH_SCALE_COMPACT
-			XScale3 = ConstantsModule.CONTEXTUAL_INFO_SHIMMER_WIDTH_SCALE_COMPACT
-			XScale2 = ConstantsModule.EXTRA_INFO_SHIMMER_WIDTH_SCALE_COMPACT
+			XScale2 = ConstantsModule.CONTEXTUAL_INFO_SHIMMER_WIDTH_SCALE_COMPACT
+			XScale3 = ConstantsModule.EXTRA_INFO_SHIMMER_WIDTH_SCALE_COMPACT
 		else
 			XScale = ConstantsModule.TITLE_SHIMMER_WIDTH_SCALE_WIDE
 			XScale1 = ConstantsModule.SUBTITLE_SHIMMER_WIDTH_SCALE_WIDE
-			XScale3 = ConstantsModule.CONTEXTUAL_INFO_SHIMMER_WIDTH_SCALE_WIDE
-			XScale2 = ConstantsModule.EXTRA_INFO_SHIMMER_WIDTH_SCALE_WIDE
+			XScale2 = ConstantsModule.CONTEXTUAL_INFO_SHIMMER_WIDTH_SCALE_WIDE
+			XScale3 = ConstantsModule.EXTRA_INFO_SHIMMER_WIDTH_SCALE_WIDE
 		end
 	end
 	local AlignXCenter1: string = if FFlagUserTileShowShimmerWhenLoadingModule and JoinResult.layoutMode == LayoutModeModule.compact then "align-x-center" else "align-x-left"
@@ -124,10 +123,7 @@ return function(p1)
 					["text-align-x-center"] = JoinResult.layoutMode == LayoutModeModule.compact,
 					LayoutOrder = 2
 				}, {
-					VerifiedBadge = JoinResult.isVerified and (if FFlagUnifyVerifiedBadgeComponent then ReactModule.createElement(VerifiedBadgeModule, {
-						LayoutOrder = 2,
-						size = FFlagProfilePlatformUniformIdentityBadgeSize and JoinResult.badgeSize or IconSize.Large
-					}) else ReactModule.createElement(View, { tag = "auto-xy content-default", LayoutOrder = 2 }, {
+					VerifiedBadge = JoinResult.isVerified and (if FFlagUnifyVerifiedBadgeComponent then ReactModule.createElement(VerifiedBadgeModule, { LayoutOrder = 2, size = IconSize.Large }) else ReactModule.createElement(View, { tag = "auto-xy content-default", LayoutOrder = 2 }, {
 						VerifiedBackplateIcon = ReactModule.createElement(FoundationModule.Icon, {
 							ZIndex = 1,
 							name = FoundationModule.Enums.IconName.VerifiedBackplate,
@@ -148,18 +144,18 @@ return function(p1)
 					SubscriptionBadge = if IsIsRobloxSubscriber then ReactModule.createElement(FoundationModule.Icon, {
 						LayoutOrder = 3,
 						name = FoundationModule.Enums.IconName.RobloxPlus,
-						size = FFlagProfilePlatformUniformIdentityBadgeSize and JoinResult.badgeSize or FoundationModule.Enums.IconSize.Small,
+						size = FoundationModule.Enums.IconSize.Small,
 						style = UseTokensResult.Color.Content.Emphasis
 					}) else nil,
 					PremiumBadge = if NoIsIsRobloxSubscriber then ReactModule.createElement(FoundationModule.Icon, {
 						LayoutOrder = 4,
 						name = FoundationModule.Enums.IconName.Premium,
-						size = FFlagProfilePlatformUniformIdentityBadgeSize and JoinResult.badgeSize or FoundationModule.Enums.IconSize.Large
+						size = FoundationModule.Enums.IconSize.Large
 					}) else nil,
 					AdminBadge = JoinResult.isRobloxAdmin and ReactModule.createElement(FoundationModule.Icon, {
 						LayoutOrder = 5,
 						name = FoundationModule.Enums.IconName.Tilt,
-						size = FFlagProfilePlatformUniformIdentityBadgeSize and JoinResult.badgeSize or FoundationModule.Enums.IconSize.Large
+						size = FoundationModule.Enums.IconSize.Large
 					})
 				}) else nil
 			}) else JoinResult.title and ReactModule.createElement(Text, {
@@ -238,7 +234,7 @@ return function(p1)
 			tag = `size-full-0 auto-y padding-xsmall {AlignXCenter1}`
 		}, {
 			ContextualInfoSkeleton = ReactModule.createElement(Skeleton, {
-				Size = UDim2.new(XScale3, 0, 0, FontSizeDelta2),
+				Size = UDim2.new(XScale2, 0, 0, FontSizeDelta2),
 				radius = Radius.Small
 			})
 		}) else JoinResult.contextualInfo and (if FFlagUserTileAddContextualInfoIcon and JoinResult.contextualInfoIcon then ReactModule.createElement(View, {
@@ -283,7 +279,7 @@ return function(p1)
 			tag = `size-full-0 auto-y padding-xsmall {AlignXCenter1}`
 		}, {
 			ExtraInfoSkeleton = ReactModule.createElement(Skeleton, {
-				Size = UDim2.new(XScale2, 0, 0, FontSizeDelta3),
+				Size = UDim2.new(XScale3, 0, 0, FontSizeDelta3),
 				radius = Radius.Small
 			})
 		}) elseif FFlagUserTileTitleStackAddExtraInfo and JoinResult.extraInfo then ReactModule.createElement(Text, {

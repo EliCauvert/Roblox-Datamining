@@ -2,7 +2,6 @@
 local Parent = BuildExperience.Parent
 local _ = require(BuildExperience.Components.ModelPicker.ModelPickerTypes)
 local FFlagBuildExperienceModelPickerModule = require(BuildExperience.Flags.FFlagBuildExperienceModelPicker)
-local FFlagBuildChatPasteAsAttachmentModule = require(BuildExperience.Flags.FFlagBuildChatPasteAsAttachment)
 local UseBuildModelSelectionModule = require(BuildExperience.Chat.useBuildModelSelection)
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
@@ -26,39 +25,29 @@ local FFlagBuildExperienceAnalytics = SharedFlagsModule.FFlagBuildExperienceAnal
 local FFlagBuildExperienceInstanceSelection = SharedFlagsModule.FFlagBuildExperienceInstanceSelection
 local FFlagBuildExperienceInGameCaptureToChat = SharedFlagsModule.FFlagBuildExperienceInGameCaptureToChat
 local FFlagBuildCheckGamePermissionsModule = require(BuildExperience.Flags.FFlagBuildCheckGamePermissions)
-local FFlagBuildExperienceInGameShellComposer = SharedFlagsModule.FFlagBuildExperienceInGameShellComposer
 local UseGamePermissionsModule = require(BuildExperience.useGamePermissions)
-local FFlagBuildChatSheetComposerOnlyBeforeFirstPromptModule = require(BuildExperience.Flags.FFlagBuildChatSheetComposerOnlyBeforeFirstPrompt)
-local GetIsBottomSheetModule = require(BuildExperience.utils.getIsBottomSheet)
 local UseChatSheetFundingRecoveryModule = require(BuildExperience.Components.ChatSheet.useChatSheetFundingRecovery)
 
 local function noop() end
 
 return function(p1)
-	-- upvalues: noop (copy), GetAssistantBuildStoreModule (copy), SignalsReactModule (copy), FFlagBuildChatSheetComposerOnlyBeforeFirstPromptModule (copy), GetIsBottomSheetModule (copy), ReactModule (copy), GetCreatorAgentResumeStoreModule (copy), GetCurrentExperienceProjectModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), FFlagBuildExperienceChatSheetDesktopAutoFocusModule (copy), ResponsiveModule (copy), UseChatSessionCoreModule (copy), FFlagBuildExperienceInGameShellComposer (copy), FFlagBuildExperienceModelPickerModule (copy), UseBuildModelSelectionModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), UseBuildPromptDraftModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), UseChatPlaytestFooterModule (copy), FFlagBuildExperienceInstanceSelection (copy), GetPlayButtonStoreModule (copy), ChatTypesModule (copy), FFlagBuildExperienceInGameCaptureToChat (copy), FFlagBuildExperienceAnalytics (copy), UseChatSheetFundingRecoveryModule (copy), FFlagBuildExperienceAnswerFormModule (copy), FFlagBuildChatPasteAsAttachmentModule (copy)
+	-- upvalues: noop (copy), GetAssistantBuildStoreModule (copy), SignalsReactModule (copy), GetCreatorAgentResumeStoreModule (copy), GetCurrentExperienceProjectModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), FFlagBuildExperienceChatSheetDesktopAutoFocusModule (copy), ResponsiveModule (copy), UseChatSessionCoreModule (copy), FFlagBuildExperienceModelPickerModule (copy), UseBuildModelSelectionModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), UseBuildPromptDraftModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), UseChatPlaytestFooterModule (copy), FFlagBuildExperienceInstanceSelection (copy), GetPlayButtonStoreModule (copy), ReactModule (copy), ChatTypesModule (copy), FFlagBuildExperienceInGameCaptureToChat (copy), FFlagBuildExperienceAnalytics (copy), UseChatSheetFundingRecoveryModule (copy), FFlagBuildExperienceAnswerFormModule (copy)
 	local OnClose = p1.onClose or noop
 	local NoIsOpen = p1.isOpen == nil or p1.isOpen
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetAssistantBuildStoreModule().getIsDisabled)
-	local UseSignalStateResult1 = if FFlagBuildChatSheetComposerOnlyBeforeFirstPromptModule then SignalsReactModule.useSignalState(GetIsBottomSheetModule) else nil
-	local v1 = nil
-	local Callback: (any) -> () = nil
-	
-	if FFlagBuildChatSheetComposerOnlyBeforeFirstPromptModule then
-		v1, Callback = ReactModule.useState({ isOpen = false, showsOnlyComposer = false })
-	end
 	local CreatorAgentResumeStoreModule = GetCreatorAgentResumeStoreModule()
 	local CurrentExperienceProjectModule = GetCurrentExperienceProjectModule()
 	local UniverseId = p1.universeId or CurrentExperienceProjectModule.universeId
 	local PlaceId = p1.placeId or CurrentExperienceProjectModule.placeId
 	local ChatPermissions = nil
 	local NoCanEditOnBuild = false
-	local v2 = false
+	local v1 = false
 	
 	if FFlagBuildCheckGamePermissionsModule then
 		local UseGamePermissionsModuleResult, UseGamePermissionsModuleResult2 = UseGamePermissionsModule({ universeId = UniverseId })
 		ChatPermissions = UseGamePermissionsModuleResult
 		NoCanEditOnBuild = not UseGamePermissionsModuleResult.canEditOnBuild
-		v2 = UseGamePermissionsModuleResult2
+		v1 = UseGamePermissionsModuleResult2
 	end
 	local IsAutoFocusComposer = p1.autoFocusComposer == true
 	
@@ -73,20 +62,8 @@ return function(p1)
 		autoFocusComposer = IsAutoFocusComposer,
 		focusComposerWhen = NoIsOpen,
 		hydrateHistoryWhen = NoIsOpen,
-		sendMessageWhen = not NoCanEditOnBuild,
-		onComposerTextChanged = p1.onComposerTextChanged
+		sendMessageWhen = not NoCanEditOnBuild
 	})
-	
-	if FFlagBuildExperienceInGameShellComposer then
-		local v3 = #UseChatSessionCoreModuleResult.composerImages + #UseChatSessionCoreModuleResult.composerResourceAttachments
-		local OnComposerAttachmentCountChangedFunction = p1.onComposerAttachmentCountChanged
-		ReactModule.useEffect(function()
-			-- upvalues: OnComposerAttachmentCountChangedFunction (copy), v3 (copy)
-			if OnComposerAttachmentCountChangedFunction ~= nil then
-				OnComposerAttachmentCountChangedFunction(v3)
-			end
-		end, { v3, OnComposerAttachmentCountChangedFunction })
-	end
 	local UseBuildModelSelectionModuleResult = if FFlagBuildExperienceModelPickerModule then UseBuildModelSelectionModule(UniverseId, p1.modelSelectionDraftId, p1.modelPicker, UseChatSessionCoreModuleResult.modelSessionModels, UseChatSessionCoreModuleResult.hasPreparedModelSession, UseChatSessionCoreModuleResult.internalTesting) else nil
 	
 	if FFlagBuildExperienceMonetizationNativeUIModule then
@@ -96,16 +73,16 @@ return function(p1)
 	
 	if FFlagBuildExperienceInstanceSelection then
 		local PlayButtonStoreModule = GetPlayButtonStoreModule()
-		local UseSignalStateResult2 = SignalsReactModule.useSignalState(PlayButtonStoreModule.getPendingResourceAttachment)
+		local UseSignalStateResult1 = SignalsReactModule.useSignalState(PlayButtonStoreModule.getPendingResourceAttachment)
 		ReactModule.useEffect(function()
-			-- upvalues: UseSignalStateResult2 (copy), ChatTypesModule (upval), UseChatSessionCoreModuleResult (copy), PlayButtonStoreModule (copy)
-			if UseSignalStateResult2 == nil then return end
-			if UseChatSessionCoreModuleResult.findComposerResourceAttachmentIndexByUri((ChatTypesModule.getResourceAttachmentUri(UseSignalStateResult2))) == nil then
-				UseChatSessionCoreModuleResult.addComposerResourceAttachment(UseSignalStateResult2)
+			-- upvalues: UseSignalStateResult1 (copy), ChatTypesModule (upval), UseChatSessionCoreModuleResult (copy), PlayButtonStoreModule (copy)
+			if UseSignalStateResult1 == nil then return end
+			if UseChatSessionCoreModuleResult.findComposerResourceAttachmentIndexByUri((ChatTypesModule.getResourceAttachmentUri(UseSignalStateResult1))) == nil then
+				UseChatSessionCoreModuleResult.addComposerResourceAttachment(UseSignalStateResult1)
 			end
 			PlayButtonStoreModule.setPendingResourceAttachment(nil)
 		end, {
-			UseSignalStateResult2,
+			UseSignalStateResult1,
 			UseChatSessionCoreModuleResult.addComposerResourceAttachment,
 			UseChatSessionCoreModuleResult.findComposerResourceAttachmentIndexByUri
 		})
@@ -182,22 +159,13 @@ return function(p1)
 		UniverseId,
 		p1.sessionId
 	})
-	local ShowsOnlyComposer = false
 	
-	if FFlagBuildChatSheetComposerOnlyBeforeFirstPromptModule then
-		ShowsOnlyComposer = if NoIsOpen then if v1.isOpen then v1.showsOnlyComposer and (UseSignalStateResult1 and (#UseChatSessionCoreModuleResult.messages == 0 and not UseChatSessionCoreModuleResult.canStopAssistantResponse)) else UseSignalStateResult1 and (#UseChatSessionCoreModuleResult.messages == 0 and not UseChatSessionCoreModuleResult.canStopAssistantResponse) else v1.showsOnlyComposer
-		
-		if NoIsOpen ~= v1.isOpen or ShowsOnlyComposer ~= v1.showsOnlyComposer then
-			Callback({ isOpen = NoIsOpen, showsOnlyComposer = ShowsOnlyComposer })
-		end
-	end
 	return {
 		isOpen = NoIsOpen,
-		creatorCreditRecovery = if FFlagBuildExperienceModelPickerModule then UseChatSheetFundingRecoveryModule(UseChatSessionCoreModuleResult, UseBuildModelSelectionModuleResult, UniverseId, PlaceId, p1.sessionId, NoIsOpen) else nil,
+		creatorCreditRecovery = if FFlagBuildExperienceModelPickerModule then UseChatSheetFundingRecoveryModule(UseChatSessionCoreModuleResult, UseBuildModelSelectionModuleResult, UniverseId, PlaceId, p1.sessionId) else nil,
 		onClose = OnClose,
 		snapPoints = p1.snapPoints,
 		defaultSnapPointIndex = p1.defaultSnapPointIndex,
-		showsOnlyComposer = if FFlagBuildChatSheetComposerOnlyBeforeFirstPromptModule then ShowsOnlyComposer else nil,
 		messages = UseChatSessionCoreModuleResult.messages,
 		localToolActions = UseChatSessionCoreModuleResult.localToolActions,
 		answerForm = if FFlagBuildExperienceAnswerFormModule then UseChatSessionCoreModuleResult.answerForm else nil,
@@ -205,7 +173,7 @@ return function(p1)
 		clockBinding = UseChatSessionCoreModuleResult.clockBinding,
 		onPlaytest = ChatSheetPlaytestCta.onPlaytest,
 		isPlaytestLoading = ChatSheetPlaytestCta.isPlaytestLoading,
-		isHistoryLoading = UseChatSessionCoreModuleResult.isHistoryLoading or v2,
+		isHistoryLoading = UseChatSessionCoreModuleResult.isHistoryLoading or v1,
 		scrollingFrameRef = UseChatSessionCoreModuleResult.setScrollingFrame,
 		anchorScrollToInstance = UseChatSessionCoreModuleResult.anchorScrollToInstance,
 		modelPicker = UseBuildModelSelectionModuleResult,
@@ -216,7 +184,6 @@ return function(p1)
 		onComposerImagesChanged = UseChatSessionCoreModuleResult.setComposerImages,
 		onRetryComposerImage = UseChatSessionCoreModuleResult.retryComposerImage,
 		composerResourceAttachments = UseChatSessionCoreModuleResult.composerResourceAttachments,
-		onAddComposerResourceAttachment = if FFlagBuildChatPasteAsAttachmentModule then UseChatSessionCoreModuleResult.addComposerResourceAttachment else nil,
 		onRemoveComposerResourceAttachment = UseChatSessionCoreModuleResult.removeComposerResourceAttachmentAtIndex,
 		isComposerSendBlocked = UseChatSessionCoreModuleResult.isComposerSendBlocked,
 		textBoxRef = UseChatSessionCoreModuleResult.textBoxRef,
@@ -228,8 +195,6 @@ return function(p1)
 		onSend = UseChatSessionCoreModuleResult.sendMessage,
 		onStop = UseChatSessionCoreModuleResult.stopAssistantResponse,
 		onOpenChat = UseResult,
-		topBarPillMenuTarget = p1.topBarPillMenuTarget,
-		onComposerSelectionActivated = p1.onComposerSelectionActivated,
-		onComposerCaptureActivated = p1.onComposerCaptureActivated
+		topBarPillMenuTarget = p1.topBarPillMenuTarget
 	}
 end

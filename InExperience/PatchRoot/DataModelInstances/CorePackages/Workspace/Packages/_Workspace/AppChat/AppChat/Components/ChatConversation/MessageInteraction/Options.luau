@@ -6,7 +6,6 @@ local BuilderIconsModule = require(Parent.BuilderIcons)
 local CryoModule = require(Parent.Cryo)
 local OptionsEnumModule = require(script.Parent.OptionsEnum)
 local FFlagAppChatEnableMessageContextMenuModule = require(AppChat.Flags.FFlagAppChatEnableMessageContextMenu)
-local FFlagAppChatEnableReactions = require(Parent.SharedFlags).FFlagAppChatEnableReactions
 local SignalsMigrationConfigModule = require(AppChat.Flags.SignalsMigrationConfig)
 local config = {
 	LayoutOrder = 1,
@@ -16,7 +15,7 @@ local config = {
 }
 
 function Options(p1)
-	-- upvalues: CryoModule (copy), config (copy), FoundationModule (copy), ReactModule (copy), OptionsEnumModule (copy), FFlagAppChatEnableReactions (copy), BuilderIconsModule (copy), FFlagAppChatEnableMessageContextMenuModule (copy), SignalsMigrationConfigModule (copy)
+	-- upvalues: CryoModule (copy), config (copy), FoundationModule (copy), ReactModule (copy), OptionsEnumModule (copy), BuilderIconsModule (copy), FFlagAppChatEnableMessageContextMenuModule (copy), SignalsMigrationConfigModule (copy)
 	local UnionResult = CryoModule.Dictionary.union(config, p1)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	ReactModule.useEffect(function()
@@ -27,10 +26,6 @@ function Options(p1)
 		-- upvalues: UnionResult (copy), ReactModule (upval), OptionsEnumModule (upval)
 		UnionResult.handleEvent(ReactModule.Event.Activated, nil, OptionsEnumModule.MessageContextMenu)
 	end, { UnionResult.handleEvent })
-	local UseResult1 = if FFlagAppChatEnableReactions then ReactModule.useCallback(function()
-		-- upvalues: UnionResult (copy), ReactModule (upval), OptionsEnumModule (upval)
-		UnionResult.handleEvent(ReactModule.Event.Activated, nil, OptionsEnumModule.Reaction)
-	end, { UnionResult.handleEvent }) else nil
 	local config1 = {
 		Reply = ReactModule.createElement(FoundationModule.IconButton, {
 			isCircular = true,
@@ -43,14 +38,6 @@ function Options(p1)
 			size = FoundationModule.Enums.InputSize.Medium,
 			LayoutOrder = if UnionResult.isIncoming then 1 else -1
 		}),
-		Reaction = if UnionResult.showReactionButton and UseResult1 then ReactModule.createElement(FoundationModule.IconButton, {
-			isCircular = true,
-			onActivated = UseResult1,
-			icon = BuilderIconsModule.Icon.CircleFaceEmoji,
-			variant = FoundationModule.Enums.ButtonVariant.Standard,
-			size = FoundationModule.Enums.InputSize.Medium,
-			LayoutOrder = if UnionResult.isIncoming then 2 else -2
-		}) else nil,
 		MessageContextMenu = if FFlagAppChatEnableMessageContextMenuModule then ReactModule.createElement(FoundationModule.IconButton, {
 			isCircular = true,
 			onActivated = UseResult,

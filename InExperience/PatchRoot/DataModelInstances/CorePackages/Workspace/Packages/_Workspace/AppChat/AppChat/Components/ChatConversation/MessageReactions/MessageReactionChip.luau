@@ -24,9 +24,9 @@ return ReactModule.memo(function(p1)
 		},
 		LayoutOrder = p1.layoutOrder
 	}, {
-		ReactionChip = if p1.isHidden then nil else ReactModule.createElement(ReactionsModule.ReactionChip, {
+		ReactionChip = ReactModule.createElement(ReactionsModule.ReactionChip, {
 			reactionCounts = UseMessageReactionCountsModuleResult,
-			onActivated = if p1.isDisabled then nil else UseResult
+			onActivated = UseResult
 		})
 	})
 end)

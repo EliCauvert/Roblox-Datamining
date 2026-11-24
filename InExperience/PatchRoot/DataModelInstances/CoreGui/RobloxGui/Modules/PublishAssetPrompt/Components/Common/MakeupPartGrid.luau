@@ -6,6 +6,7 @@ local DefaultMetricsGridView = UIBloxModule.App.Grid.DefaultMetricsGridView
 local ItemTile = UIBloxModule.Tile.ItemTile
 local ConstantsModule = require(script.Parent.Parent.Parent.Constants)
 local AvatarItemCardModule = require(script.Parent.Parent.PublishAvatarPrompt.AvatarParts.AvatarItemCard)
+local GetFFlagUploadMakeupSupportModule = require(script.Parent.Parent.Parent.Flags.GetFFlagUploadMakeupSupport)
 local _Vector2 = Vector2.new(20, 20)
 local config = {
 	[Enum.AvatarAssetType.FaceMakeup] = "Face Makeup",
@@ -16,22 +17,28 @@ local config = {
 }
 
 local function getItemsFromFolder(MakeupFolder, Name, MakeupEntries, NoShowAssetTypeInLabel)
-	-- upvalues: config (copy)
+	-- upvalues: GetFFlagUploadMakeupSupportModule (copy), config (copy)
 	local List = {}
 	
 	for i, child in ipairs((MakeupFolder:GetChildren())) do
 		if child:IsA("Decal") or child:IsA("Accessory") then
-			local PartName: string = Name
+			local BodyName = nil
+			local Name1 = Name
 			local AssetType = if MakeupEntries and MakeupEntries[i] then MakeupEntries[i].assetType else nil
 			
 			if NoShowAssetTypeInLabel then
-				PartName = Name .. " - " .. (if AssetType and config[AssetType] then config[AssetType] else child.Name)
+				if GetFFlagUploadMakeupSupportModule() then
+					Name1 = Name .. " - " .. (if AssetType and config[AssetType] then config[AssetType] else child.Name)
+				else
+					BodyName = Name
+					Name1 = if AssetType and config[AssetType] then config[AssetType] else child.Name
+				end
 			end
 			table.insert(List, {
-				bodyName = nil,
 				asset = child,
 				assetType = AssetType,
-				partName = PartName,
+				bodyName = BodyName,
+				partName = Name1,
 				LayoutOrder = if MakeupEntries and MakeupEntries[i] and MakeupEntries[i].sortOrder then MakeupEntries[i].sortOrder else i
 			})
 		end
@@ -44,7 +51,7 @@ local function getItemsFromFolder(MakeupFolder, Name, MakeupEntries, NoShowAsset
 end
 
 return function(Frame)
-	-- upvalues: ReactModule (copy), getItemsFromFolder (copy), config (copy), ConstantsModule (copy), AvatarItemCardModule (copy), ItemTile (copy), DefaultMetricsGridView (copy), GridMetrics (copy), _Vector2 (copy)
+	-- upvalues: ReactModule (copy), getItemsFromFolder (copy), config (copy), GetFFlagUploadMakeupSupportModule (copy), ConstantsModule (copy), AvatarItemCardModule (copy), ItemTile (copy), DefaultMetricsGridView (copy), GridMetrics (copy), _Vector2 (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState({})
 	local NoShowAssetTypeInLabel = Frame.showAssetTypeInLabel == nil or Frame.showAssetTypeInLabel
 	ReactModule.useEffect(function()
@@ -78,18 +85,27 @@ return function(Frame)
 		})
 	end, { Frame.makeupFolder, Frame.singleDecal })
 	ReactModule.useEffect(function()
-		-- upvalues: UseStateResult (copy), NoShowAssetTypeInLabel (copy), config (upval), Frame (copy), UseStateResult2 (copy)
+		-- upvalues: UseStateResult (copy), GetFFlagUploadMakeupSupportModule (upval), NoShowAssetTypeInLabel (copy), config (upval), Frame (copy), UseStateResult2 (copy)
 		if UseStateResult[1] and UseStateResult[1].asset then
 			local t = {}
 			
 			for i, Frame1 in UseStateResult do
-				local _ = Frame1.bodyName
-				local _ = Frame1.partName
+				local BodyName = Frame1.bodyName
+				local PartName = Frame1.partName
+				
+				if GetFFlagUploadMakeupSupportModule() then
+					PartName = if NoShowAssetTypeInLabel then Frame.name .. " - " .. (Frame1.assetType and config[Frame1.assetType] or "") else Frame.name
+					BodyName = nil
+				elseif NoShowAssetTypeInLabel then
+					BodyName = Frame.name
+				else
+					PartName = Frame.name
+				end
 				t[i] = {
 					asset = Frame1.asset,
 					assetType = Frame1.assetType,
-					bodyName = nil,
-					partName = if NoShowAssetTypeInLabel then Frame.name .. " - " .. (Frame1.assetType and config[Frame1.assetType] or "") else Frame.name,
+					bodyName = BodyName,
+					partName = PartName,
 					LayoutOrder = Frame1.LayoutOrder
 				}
 			end

@@ -8,7 +8,6 @@ local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local AgentCardModule = require(script.Parent.AgentCard)
 local AgentCardActionsModule = require(script.Parent.AgentCardActions)
 local GetMarkdownRendererPropsModule = require(BuildExperience.utils.getMarkdownRendererProps)
-local FFlagBuildExperienceMarkdownCommonMarkProfileModule = require(BuildExperience.Flags.FFlagBuildExperienceMarkdownCommonMarkProfile)
 local ChatCardPriorityModule = require(BuildExperience.Components.Chat.ChatCardEmphasis.ChatCardPriority)
 local UseChatCardEmphasisModule = require(BuildExperience.Components.Chat.ChatCardEmphasis.useChatCardEmphasis)
 local FFlagBuildExperienceChatCardEmphasisModule = require(BuildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
@@ -22,7 +21,7 @@ local InputSize = FoundationModule.Enums.InputSize
 local MarkdownViewer = MarkdownModule.Components.MarkdownViewer
 
 local function AgentPlanSheet(p1)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FoundationModule (copy), ReactModule (copy), GetMarkdownRendererPropsModule (copy), Sheet (copy), Text (copy), View (copy), MarkdownViewer (copy), FFlagBuildExperienceMarkdownCommonMarkProfileModule (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FoundationModule (copy), ReactModule (copy), GetMarkdownRendererPropsModule (copy), Sheet (copy), Text (copy), View (copy), MarkdownViewer (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local Default = UseTokensResult.Color.Content.Default
 	
@@ -59,8 +58,7 @@ local function AgentPlanSheet(p1)
 					MarkdownRendererProps = ReactModule.useMemo(function()
 						-- upvalues: GetMarkdownRendererPropsModule (upval), UseTokensResult (copy), Default (copy)
 						return GetMarkdownRendererPropsModule(UseTokensResult, Default)
-					end, { UseTokensResult, Default }),
-					ParserProfile = if FFlagBuildExperienceMarkdownCommonMarkProfileModule then "CommonMark" else nil
+					end, { UseTokensResult, Default })
 				})
 			})
 		})

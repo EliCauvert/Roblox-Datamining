@@ -25,10 +25,11 @@ local FFlagSideSheetOpenPeoplePage = require(Parent.SharedFlags).FFlagSideSheetO
 local FFlagPeoplePageAvatarBackgroundModule = require(PeopleReactView.Flags.FFlagPeoplePageAvatarBackground)
 local UseAvatarBackgroundImageModule = if FFlagPeoplePageAvatarBackgroundModule then require(PeopleReactView.Hooks.useAvatarBackgroundImage) else nil
 local GetFFlagPeoplePageLazyRenderCardsFunction = PeopleServiceModule.getService("Flags").GetFFlagPeoplePageLazyRenderCards
+local PeoplePageCardMenuUseVisibleProperty = game:DefineFastFlag("PeoplePageCardMenuUseVisibleProperty", false)
 local PeoplePageFixCardMenuZIndex = game:DefineFastFlag("PeoplePageFixCardMenuZIndex", false)
 
 return ReactModule.memo(function(p1)
-	-- upvalues: ReactModule (copy), GetFFlagPeoplePageLazyRenderCardsFunction (copy), UsePreferredInputFunction (copy), UseLastInputModeFunction (copy), UseGetPeopleServiceModule (copy), PersonButtonConfigsModule (copy), FFlagPeoplePageAvatarBackgroundModule (copy), UseAvatarBackgroundImageModule (copy), SignalsReactModule (copy), FFlagSideSheetOpenPeoplePage (copy), UseIsComponentInputEndedModule (copy), ControlState (copy), Input (copy), View (copy), StateLayerAffordance (copy), Image (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), PeoplePageFixCardMenuZIndex (copy), CardMenuModule (copy), ConnectButtonModule (copy), InputSize (copy)
+	-- upvalues: ReactModule (copy), GetFFlagPeoplePageLazyRenderCardsFunction (copy), UsePreferredInputFunction (copy), UseLastInputModeFunction (copy), UseGetPeopleServiceModule (copy), PersonButtonConfigsModule (copy), FFlagPeoplePageAvatarBackgroundModule (copy), UseAvatarBackgroundImageModule (copy), SignalsReactModule (copy), FFlagSideSheetOpenPeoplePage (copy), UseIsComponentInputEndedModule (copy), ControlState (copy), Input (copy), View (copy), StateLayerAffordance (copy), Image (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), PeoplePageFixCardMenuZIndex (copy), PeoplePageCardMenuUseVisibleProperty (copy), CardMenuModule (copy), ConnectButtonModule (copy), InputSize (copy)
 	local UseRefResult = ReactModule.useRef(nil)
 	local UsePreferredInputResult = if GetFFlagPeoplePageLazyRenderCardsFunction() then nil else UsePreferredInputFunction()
 	local UseLastInputModeResult = if GetFFlagPeoplePageLazyRenderCardsFunction() then nil else UseLastInputModeFunction()
@@ -51,11 +52,24 @@ return ReactModule.memo(function(p1)
 	end
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
 	local UseIsComponentInputEndedModuleResult = UseIsComponentInputEndedModule(UseRefResult)
-	local UseResult = if FFlagSideSheetOpenPeoplePage then ReactModule.useCallback(function(Hover)
+	local UseResult = ReactModule.useCallback(function(Hover)
+		-- upvalues: UseStateResult2_1 (copy), ControlState (upval)
+		UseStateResult2_1(Hover == ControlState.Hover)
+	end, {})
+	local UseResult1 = if FFlagSideSheetOpenPeoplePage then ReactModule.useCallback(function(Hover)
 		-- upvalues: Callback (ref), ControlState (upval)
 		Callback(Hover == ControlState.Hover or Hover == ControlState.Pressed)
 	end, {}) else nil
 	local UseMemoResult1 = ReactModule.useMemo(function()
+		-- upvalues: GetFFlagPeoplePageLazyRenderCardsFunction (upval), p1 (copy), UseLastInputModeResult (copy), UsePreferredInputResult (copy), Input (upval), UseStateResult (copy), UseStateResult3 (copy), UseSignalStateResult (copy)
+		local ShouldShowMenu = if GetFFlagPeoplePageLazyRenderCardsFunction() then p1.shouldShowMenu else UseLastInputModeResult == "Focus" or UsePreferredInputResult ~= Input.Pointer
+		
+		return UseStateResult or (UseStateResult3 or (UseSignalStateResult or ShouldShowMenu))
+	end, {
+		UseStateResult, UseStateResult3, UseSignalStateResult, UsePreferredInputResult,
+		UseLastInputModeResult, p1.shouldShowMenu
+	})
+	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: FFlagSideSheetOpenPeoplePage (upval), UseStateResult1 (copy), v1 (ref), UseStateResult3 (copy), UseIsComponentInputEndedModuleResult (copy)
 		return (if FFlagSideSheetOpenPeoplePage then UseStateResult1 or v1 else UseStateResult1) or (UseStateResult3 or UseIsComponentInputEndedModuleResult)
 	end, if FFlagSideSheetOpenPeoplePage then {
@@ -68,7 +82,7 @@ return ReactModule.memo(function(p1)
 		UseStateResult3,
 		UseIsComponentInputEndedModuleResult
 	})
-	local UseResult1 = ReactModule.useCallback(function()
+	local UseResult2 = ReactModule.useCallback(function()
 		-- upvalues: UseMemoResult (copy), Constants (copy)
 		UseMemoResult.onActivated(Constants.ANALYTICS.ENTRY_POINT.PEOPLE_CARD)
 	end, { UseMemoResult.onActivated })
@@ -78,9 +92,9 @@ return ReactModule.memo(function(p1)
 		selection = { Selectable = UseMemoResult.shouldShow() },
 		LayoutOrder = p1.layoutOrder,
 		stateLayer = {
-			affordance = if UseMemoResult1 then StateLayerAffordance.None else StateLayerAffordance.Background
+			affordance = if UseMemoResult2 then StateLayerAffordance.None else StateLayerAffordance.Background
 		},
-		onActivated = if UseMemoResult.shouldShow() then UseResult1 else nil,
+		onActivated = if UseMemoResult.shouldShow() then UseResult2 else nil,
 		onStateChanged = ReactModule.useCallback(function(Hover)
 			-- upvalues: UseStateResult2 (copy), ControlState (upval)
 			UseStateResult2(Hover == ControlState.Hover)
@@ -104,26 +118,15 @@ return ReactModule.memo(function(p1)
 			tag = "row size-full-0 auto-y align-x-right padding-small",
 			ZIndex = if PeoplePageFixCardMenuZIndex then 2 else nil
 		}, {
-			CardMenuBackground = ReactModule.createElement(View, {
+			CardMenuBackground = if PeoplePageCardMenuUseVisibleProperty or UseMemoResult1 then ReactModule.createElement(View, {
 				AutomaticSize = Enum.AutomaticSize.XY,
 				selection = { Selectable = false },
 				stateLayer = { affordance = StateLayerAffordance.None },
-				onStateChanged = ReactModule.useCallback(function(Hover)
-					-- upvalues: UseStateResult2_1 (copy), ControlState (upval)
-					UseStateResult2_1(Hover == ControlState.Hover)
-				end, {}),
-				Visible = ReactModule.useMemo(function()
-					-- upvalues: GetFFlagPeoplePageLazyRenderCardsFunction (upval), p1 (copy), UseLastInputModeResult (copy), UsePreferredInputResult (copy), Input (upval), UseStateResult (copy), UseStateResult3 (copy), UseSignalStateResult (copy)
-					local ShouldShowMenu = if GetFFlagPeoplePageLazyRenderCardsFunction() then p1.shouldShowMenu else UseLastInputModeResult == "Focus" or UsePreferredInputResult ~= Input.Pointer
-					
-					return UseStateResult or (UseStateResult3 or (UseSignalStateResult or ShouldShowMenu))
-				end, {
-					UseStateResult, UseStateResult3, UseSignalStateResult, UsePreferredInputResult,
-					UseLastInputModeResult, p1.shouldShowMenu
-				})
+				onStateChanged = UseResult,
+				Visible = if PeoplePageCardMenuUseVisibleProperty then UseMemoResult1 else nil
 			}, {
 				CardMenu = ReactModule.createElement(CardMenuModule, { person = p1.person, onIsOpenChanged = UseStateResult2_2 })
-			})
+			}) else nil
 		}),
 		ConnectButtonAnchor = if FFlagSideSheetOpenPeoplePage and p1.isCompactCardLayout then ReactModule.createElement(View, {
 			tag = "position-bottom-left anchor-bottom-left auto-xy padding-small",
@@ -132,7 +135,7 @@ return ReactModule.memo(function(p1)
 			ConnectButtonBackground = ReactModule.createElement(ConnectButtonModule, {
 				person = p1.person,
 				size = InputSize.Small,
-				onStateChanged = UseResult
+				onStateChanged = UseResult1
 			})
 		}) else nil
 	})

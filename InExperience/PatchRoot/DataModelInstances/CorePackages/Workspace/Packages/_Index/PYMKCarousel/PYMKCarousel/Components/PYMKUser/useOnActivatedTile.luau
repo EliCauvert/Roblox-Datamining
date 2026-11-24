@@ -11,13 +11,9 @@ local GetFriendStatusModule = require(Parent.Analytics.getFriendStatus)
 local EventNames = require(Parent.Analytics).EventNames
 local _ = require(Parent.Analytics.AnalyticsTypes)
 local FFlagPymkCarouselExtendProps = require(Parent1.SharedFlags).FFlagPymkCarouselExtendProps
-local FFlagPYMKViewProfileAfterAcceptModule = require(Parent.Flags.FFlagPYMKViewProfileAfterAccept)
-local UseGetFriendshipStatusFunction = require(Parent1.FriendsHydrationReact).useGetFriendshipStatus
-local config = { skipFetch = true }
 
 return function(p1)
-	-- upvalues: FFlagPYMKViewProfileAfterAcceptModule (copy), UseGetFriendshipStatusFunction (copy), config (copy), React (copy), FFlagPymkCarouselExtendProps (copy), ConstantsModule (copy), GetRecommendationContextualInfoTypeFunction (copy), RecommendationContextType (copy), EventNames (copy), GetFriendStatusModule (copy), HttpService (copy)
-	local UseGetFriendshipStatusResult = if FFlagPYMKViewProfileAfterAcceptModule then UseGetFriendshipStatusFunction(p1.userId, config) else p1.friendshipStatus
+	-- upvalues: React (copy), FFlagPymkCarouselExtendProps (copy), ConstantsModule (copy), GetRecommendationContextualInfoTypeFunction (copy), RecommendationContextType (copy), EventNames (copy), GetFriendStatusModule (copy), HttpService (copy)
 	local UseMemoResult = React.useMemo(function()
 		-- upvalues: p1 (copy)
 		return if p1.recommendation.mutualFriendsCount then p1.recommendation.mutualFriendsCount elseif p1.recommendation.mutualFriendsList then #p1.recommendation.mutualFriendsList else nil
@@ -50,11 +46,11 @@ return function(p1)
 	})
 	
 	return (React.useCallback(function()
-		-- upvalues: UseResult (copy), p1 (copy), EventNames (upval), GetFriendStatusModule (upval), UseGetFriendshipStatusResult (ref), RecommendationContextType (upval), HttpService (upval)
+		-- upvalues: UseResult (copy), p1 (copy), EventNames (upval), GetFriendStatusModule (upval), RecommendationContextType (upval), HttpService (upval)
 		UseResult()
 		p1.fireAnalyticsEvent(EventNames.UserPressed, {
 			recommendationId = p1.userId,
-			friendStatus = GetFriendStatusModule(UseGetFriendshipStatusResult, p1.recommendation.hasIncomingFriendRequest),
+			friendStatus = GetFriendStatusModule(p1.friendshipStatus, p1.recommendation.hasIncomingFriendRequest),
 			recommendationContextType = p1.recommendation.contextType,
 			recommendationRank = p1.recommendation.rank,
 			absolutePosition = p1.absolutePosition,
@@ -64,7 +60,7 @@ return function(p1)
 			interactionUuid = HttpService:GenerateGUID(false)
 		})
 	end, {
-		UseResult, p1.fireAnalyticsEvent, p1.userId, UseGetFriendshipStatusResult,
+		UseResult, p1.fireAnalyticsEvent, p1.userId, p1.friendshipStatus,
 		p1.absolutePosition, p1.userPresenceType,
 		p1.recommendation.hasIncomingFriendRequest, p1.recommendation.contextType,
 		p1.recommendation.rank

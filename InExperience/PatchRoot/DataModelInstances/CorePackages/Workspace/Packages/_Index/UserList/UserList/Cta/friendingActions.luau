@@ -11,6 +11,11 @@ local SetCurrentToastMessageFunction = require(Parent.ToastRodux).Actions.SetCur
 local FriendingErrorCodesModule = require(script.Parent.FriendingErrorCodes)
 local IconsActionsFriendsFriendAdd = Images["icons/actions/friends/friendAdd"]
 
+local function _(p1)
+	-- upvalues: ProfileCTAStore (copy)
+	ProfileCTAStore.get().getCTA(p1, true)
+end
+
 local function getErrorToastMessage(p1, StatusCode, FirstErrorCode)
 	-- upvalues: FriendingErrorCodesModule (copy)
 	return if StatusCode == 400 then ({
@@ -38,12 +43,6 @@ local function showErrorToast(Callback: (any) -> (), Localized, p1)
 end
 
 return {
-	FRIEND_ADD_ICON = IconsActionsFriendsFriendAdd,
-	refreshCTA = function(p1)
-		-- upvalues: ProfileCTAStore (copy)
-		ProfileCTAStore.get().getCTA(p1, true)
-	end,
-	getErrorToastMessage = getErrorToastMessage,
 	executeAddFriend = function(p1)
 		-- upvalues: Requests (copy), FFlagEnableFriendsStoreChallengeInterceptor (copy), FriendsStoreChallengeNetworkModule (copy), ProfileCTAStore (copy), SetCurrentToastMessageFunction (copy), IconsActionsFriendsFriendAdd (copy), showErrorToast (copy)
 		return Requests.RequestFriendshipFromUserId(p1.targetUserId, p1.friendshipOriginSourceType, if FFlagEnableFriendsStoreChallengeInterceptor then FriendsStoreChallengeNetworkModule else nil):andThen(function()

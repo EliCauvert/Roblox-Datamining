@@ -4,18 +4,14 @@ local _ = require(BuildExperience.Components.ModelPicker.ModelPickerTypes)
 local FFlagBuildExperienceModelPickerModule = require(BuildExperience.Flags.FFlagBuildExperienceModelPicker)
 local FFlagBuildExperienceSingleLineComposerModule = require(BuildExperience.Flags.FFlagBuildExperienceSingleLineComposer)
 local FFlagBuildEnableFTUXChipsModule = require(BuildExperience.Flags.FFlagBuildEnableFTUXChips)
-local FFlagBuildExperienceInGameShellComposer = require(Parent.SharedFlags).FFlagBuildExperienceInGameShellComposer
 local FFlagBuildExperienceFTUXChipSendGuidanceModule = require(BuildExperience.Flags.FFlagBuildExperienceFTUXChipSendGuidance)
 local FFlagBuildExperienceFTUXChipExhaustedTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceFTUXChipExhaustedTelemetry)
 local FFlagBuildFTUXChipInfiniteScrollModule = require(BuildExperience.Flags.FFlagBuildFTUXChipInfiniteScroll)
-local FFlagBuildChatPasteAsAttachmentModule = require(BuildExperience.Flags.FFlagBuildChatPasteAsAttachment)
-local FIntBuildChatMaxResourceAttachmentsModule = require(BuildExperience.Flags.FIntBuildChatMaxResourceAttachments)
 local IsImageAttachmentSupportedModule = require(BuildExperience.utils.isImageAttachmentSupported)
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local CreateGalleryCaptureSourceModule = require(Parent.Moments.createGalleryCaptureSource)
 local _ = require(BuildExperience.Chat.chatTypes)
-local PastedTextAttachmentModule = require(BuildExperience.Chat.pastedTextAttachment)
 local ChatCaptureGalleryContainerModule = require(script.Parent.ChatCaptureGallery.ChatCaptureGalleryContainer)
 local ChatComposerModule = require(script.Parent.ChatComposer)
 local ChatImagePreviewListModule = require(script.Parent.ChatImagePreviewList)
@@ -25,7 +21,7 @@ local View = FoundationModule.View
 local Text = FoundationModule.Text
 
 return function(Frame)
-	-- upvalues: FFlagBuildEnableFTUXChipsModule (copy), FFlagBuildExperienceFTUXChipSendGuidanceModule (copy), ReactModule (copy), IsImageAttachmentSupportedModule (copy), CreateGalleryCaptureSourceModule (copy), FFlagBuildChatPasteAsAttachmentModule (copy), PastedTextAttachmentModule (copy), View (copy), ChatResourceAttachmentListModule (copy), ChatImagePreviewListModule (copy), ChatComposerModule (copy), FFlagBuildExperienceModelPickerModule (copy), FIntBuildChatMaxResourceAttachmentsModule (copy), FFlagBuildExperienceInGameShellComposer (copy), FFlagBuildExperienceSingleLineComposerModule (copy), PromptChipGroupModule (copy), FFlagBuildExperienceFTUXChipExhaustedTelemetryModule (copy), FFlagBuildFTUXChipInfiniteScrollModule (copy), Text (copy), ChatCaptureGalleryContainerModule (copy)
+	-- upvalues: FFlagBuildEnableFTUXChipsModule (copy), FFlagBuildExperienceFTUXChipSendGuidanceModule (copy), ReactModule (copy), IsImageAttachmentSupportedModule (copy), CreateGalleryCaptureSourceModule (copy), View (copy), ChatResourceAttachmentListModule (copy), ChatImagePreviewListModule (copy), ChatComposerModule (copy), FFlagBuildExperienceModelPickerModule (copy), FFlagBuildExperienceSingleLineComposerModule (copy), PromptChipGroupModule (copy), FFlagBuildExperienceFTUXChipExhaustedTelemetryModule (copy), FFlagBuildFTUXChipInfiniteScrollModule (copy), Text (copy), ChatCaptureGalleryContainerModule (copy)
 	local Images = Frame.images or {}
 	local ResourceAttachments = Frame.resourceAttachments or {}
 	local PromptChips = Frame.promptChips or {}
@@ -93,15 +89,6 @@ return function(Frame)
 		end
 	end
 	
-	local UseMemoResult = if FFlagBuildChatPasteAsAttachmentModule then ReactModule.useMemo(function()
-		-- upvalues: Frame (copy), PastedTextAttachmentModule (upval)
-		local OnAddResourceAttachmentFunction = Frame.onAddResourceAttachment
-		
-		return if OnAddResourceAttachmentFunction == nil then nil else function(p1)
-			-- upvalues: OnAddResourceAttachmentFunction (copy), PastedTextAttachmentModule (upval)
-			OnAddResourceAttachmentFunction(PastedTextAttachmentModule.create(p1))
-		end
-	end, { Frame.onAddResourceAttachment }) else nil
 	local InitialCaptures = {}
 	
 	for _, image in Images do
@@ -146,10 +133,6 @@ return function(Frame)
 			tracksExternalText = Frame.tracksExternalText,
 			isAttachmentSupported = IsImageAttachmentSupportedModule1,
 			onOpenCaptureGallery = if IsImageAttachmentSupportedModule1 then openCaptureGallery else nil,
-			onTextPasted = if FFlagBuildChatPasteAsAttachmentModule and (not Frame.isAssistantResponding and #ResourceAttachments < FIntBuildChatMaxResourceAttachmentsModule) then UseMemoResult else nil,
-			hasSendableAttachments = if FFlagBuildChatPasteAsAttachmentModule then PastedTextAttachmentModule.hasPastedText(ResourceAttachments) else nil,
-			onSelectionActivated = if FFlagBuildExperienceInGameShellComposer then Frame.onSelectionActivated else nil,
-			onCaptureActivated = if FFlagBuildExperienceInGameShellComposer then Frame.onCaptureActivated else nil,
 			onSend = Frame.onSend,
 			onStop = Frame.onStop,
 			maxLines = Frame.maxLines,

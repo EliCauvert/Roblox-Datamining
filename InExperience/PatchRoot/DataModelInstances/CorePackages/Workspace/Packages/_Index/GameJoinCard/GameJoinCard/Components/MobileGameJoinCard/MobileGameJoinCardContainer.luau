@@ -33,7 +33,6 @@ local Players = game:GetService("Players")
 local UserProfilesModule = require(Parent.UserProfiles)
 local SocialCommonModule = require(Parent.SocialCommon)
 local ChatEntryPointNames = SocialCommonModule.Enums.ChatEntryPointNames
-local PresenceTypes = SocialCommonModule.Enums.PresenceTypes
 local EnteredChatFromEntryPointFunction = SocialCommonModule.Actions.EnteredChatFromEntryPoint
 local _ = require(Parent.VideoUtils)
 local SharedFlagsModule = require(Parent.SharedFlags)
@@ -48,7 +47,6 @@ local FFlagJoinabilityCTARefactor = SharedFlagsModule.FFlagJoinabilityCTARefacto
 local FFlagJoinUserCTAsIxpEnabled = SharedFlagsModule.FFlagJoinUserCTAsIxpEnabled
 local FStringJoinUserCTAsIxpLayer = SharedFlagsModule.FStringJoinUserCTAsIxpLayer
 local FFlagMobileGameJoinCardGamepadSupport = SharedFlagsModule.FFlagMobileGameJoinCardGamepadSupport
-local FFlagCoplayHistoryGameJoinCard = SharedFlagsModule.FFlagCoplayHistoryGameJoinCard
 local IXPServiceWrapper = if FFlagJoinUserCTAsIxpEnabled then require(Parent.IXPServiceWrapper).IXPServiceWrapper else nil
 local DataHydrationModule = require(Parent.DataHydration)
 local UserCtaAction = require(Parent.UserCtaCommon).Enums.UserCtaAction
@@ -81,9 +79,6 @@ local MobileGameJoinCardModule = require(script.Parent.MobileGameJoinCard)
 local ActionsModule = require(GameJoinCard.Components.Actions)
 local ContainsActionModule = require(GameJoinCard.Components.Actions.containsAction)
 local UseJoinUserActionsModule = require(GameJoinCard.Hooks.useJoinUserActions)
-local UseExperienceDetailsModule = if FFlagCoplayHistoryGameJoinCard then require(GameJoinCard.Hooks.useExperienceDetails) else nil
-local ResolveGameJoinCardUniverseModule = require(GameJoinCard.Utils.resolveGameJoinCardUniverse)
-local UniverseSourceModule = require(GameJoinCard.Enums.UniverseSource)
 local UseLogActionsResolveTimeModule = require(GameJoinCard.Telemetry.useLogActionsResolveTime)
 local DataStatus = DataHydrationModule.DataStatus
 local GetResult1 = DataHydrationModule.Presence.PresenceStore.get()
@@ -99,7 +94,7 @@ local config = {
 local config1 = { skipFetch = true }
 
 return function()
-	-- upvalues: FFlagMobileGameJoinCardEDPFromTitleModule (copy), FFlagMobileGameJoinCardEDPFromThumbnailModule (copy), FFlagGameJoinCardChatEntryPointModule (copy), FFlagJoinabilityCTARefactor (copy), UseDispatchFunction (copy), UseNavigationFunction (copy), FFlagMobileGameJoinCardGamepadSupport (copy), UseNavigationFocusFunction (copy), FFlagGameJoinCardSourceAttribution (copy), ReactModule (copy), FFlagGameJoinCardAnalyticsCardId (copy), HttpService (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), AppGuiService (copy), AppSessionService (copy), UseAppPolicyFunction (copy), Players (copy), FFlagFriendSortedByPresenceSignalsImplementation (copy), SignalsModule (copy), GetResult1 (copy), FFlagProfileCTAHydratePresenceFromMetadataModule (copy), config1 (copy), SignalsReactModule (copy), UseQueryFunction (copy), ApolloLocalStateModule (copy), FFlagCoplayHistoryGameJoinCard (copy), PresenceTypes (copy), ResolveGameJoinCardUniverseModule (copy), FFlagJoinUserCTAsIxpEnabled (copy), IXPServiceWrapper (copy), FStringJoinUserCTAsIxpLayer (copy), UseGameJoinCardAnalyticsModule (copy), FFlagSocialCarouselBuildPresence (copy), UsePlayerNameModule (copy), FFlagSocialCarouselUseProfileStore (copy), GetResult (copy), UserProfilesModule (copy), FFlagUserProfilePlatformProfile (copy), UseExperienceDetailsModule (copy), UniverseSourceModule (copy), FFlagMobileGameJoinCardVideo (copy), UseExperienceBannerImageFunction (copy), FFlagMobileGameJoinCardThumbnailModule (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), GameJoinCardTelemetryModule (copy), UseAgeCheckCompletionLoggerFunction (copy), UseJoinUserInExperienceFunction (copy), config (copy), UseJoinCardBannerVideoIdModule (copy), UseJoinUserActionsModule (copy), UseLocalizationFunction (copy), ActionsModule (copy), UseLogActionsResolveTimeModule (copy), GameJoinCardSurface (copy), UseAgeCheckPressLoggerFunction (copy), DataStatus (copy), ContainsActionModule (copy), UserCtaAction (copy), GameJoinCardButtonAction (copy), GamePlayIntentFunction (copy), PeopleListInHomePage (copy), DependencyArrayFunction (copy), FFlagEnableSplitPane (copy), AppPage (copy), ViewProfileSourceValues (copy), SetGamePlaySessionFunction (copy), SessionType (copy), GameDetailReferralFunction (copy), OpenGameDetailsFunction (copy), ViewEDPsourceValues (copy), EnteredChatFromEntryPointFunction (copy), ChatEntryPointNames (copy), NotificationType (copy), MobileGameJoinCardModule (copy)
+	-- upvalues: FFlagMobileGameJoinCardEDPFromTitleModule (copy), FFlagMobileGameJoinCardEDPFromThumbnailModule (copy), FFlagGameJoinCardChatEntryPointModule (copy), FFlagJoinabilityCTARefactor (copy), UseDispatchFunction (copy), UseNavigationFunction (copy), FFlagMobileGameJoinCardGamepadSupport (copy), UseNavigationFocusFunction (copy), FFlagGameJoinCardSourceAttribution (copy), ReactModule (copy), FFlagGameJoinCardAnalyticsCardId (copy), HttpService (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), AppGuiService (copy), AppSessionService (copy), UseAppPolicyFunction (copy), Players (copy), FFlagFriendSortedByPresenceSignalsImplementation (copy), SignalsModule (copy), GetResult1 (copy), FFlagProfileCTAHydratePresenceFromMetadataModule (copy), config1 (copy), SignalsReactModule (copy), UseQueryFunction (copy), ApolloLocalStateModule (copy), FFlagJoinUserCTAsIxpEnabled (copy), IXPServiceWrapper (copy), FStringJoinUserCTAsIxpLayer (copy), UseGameJoinCardAnalyticsModule (copy), FFlagSocialCarouselBuildPresence (copy), UsePlayerNameModule (copy), FFlagSocialCarouselUseProfileStore (copy), GetResult (copy), UserProfilesModule (copy), FFlagUserProfilePlatformProfile (copy), UseExperienceBannerImageFunction (copy), FFlagMobileGameJoinCardThumbnailModule (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), GameJoinCardTelemetryModule (copy), UseAgeCheckCompletionLoggerFunction (copy), UseJoinUserInExperienceFunction (copy), config (copy), FFlagMobileGameJoinCardVideo (copy), UseJoinCardBannerVideoIdModule (copy), UseJoinUserActionsModule (copy), UseLocalizationFunction (copy), ActionsModule (copy), UseLogActionsResolveTimeModule (copy), GameJoinCardSurface (copy), UseAgeCheckPressLoggerFunction (copy), DataStatus (copy), ContainsActionModule (copy), UserCtaAction (copy), GameJoinCardButtonAction (copy), GamePlayIntentFunction (copy), PeopleListInHomePage (copy), DependencyArrayFunction (copy), FFlagEnableSplitPane (copy), AppPage (copy), ViewProfileSourceValues (copy), SetGamePlaySessionFunction (copy), SessionType (copy), GameDetailReferralFunction (copy), OpenGameDetailsFunction (copy), ViewEDPsourceValues (copy), EnteredChatFromEntryPointFunction (copy), ChatEntryPointNames (copy), NotificationType (copy), MobileGameJoinCardModule (copy)
 	local UseDispatchResult = if FFlagMobileGameJoinCardEDPFromTitleModule or FFlagMobileGameJoinCardEDPFromThumbnailModule or FFlagGameJoinCardChatEntryPointModule or FFlagJoinabilityCTARefactor then UseDispatchFunction() else nil
 	local UseNavigationResult = UseNavigationFunction()
 	local UseNavigationFocusResult = if FFlagMobileGameJoinCardGamepadSupport then UseNavigationFocusFunction() else nil
@@ -151,47 +146,31 @@ return function()
 			return nil
 		end, { UseQueryResult.data, UserIdParam })
 	end
-	local UseStateResult, UseStateResult2 = ReactModule.useState(if FFlagCoplayHistoryGameJoinCard and UseSignalStateResult and tostring(UseSignalStateResult.universeId) ~= "" and UseSignalStateResult.userPresenceType == PresenceTypes.InGame then {
-		universeId = tostring(UseSignalStateResult.universeId),
-		experienceName = UseSignalStateResult.lastLocation,
-		userPresenceType = UseSignalStateResult.userPresenceType
-	} else {
-		universeId = "",
-		experienceName = "",
-		userPresenceType = nil
-	})
+	local UseStateResult, UseStateResult2 = ReactModule.useState({ universeId = "", experienceName = "" })
 	ReactModule.useEffect(function()
-		-- upvalues: UseSignalStateResult (ref), FFlagCoplayHistoryGameJoinCard (upval), PresenceTypes (upval), UseStateResult2 (copy)
-		if UseSignalStateResult and tostring(UseSignalStateResult.universeId) ~= "" and (not FFlagCoplayHistoryGameJoinCard or UseSignalStateResult.userPresenceType == PresenceTypes.InGame) then
+		-- upvalues: UseSignalStateResult (ref), UseStateResult2 (copy)
+		if UseSignalStateResult and tostring(UseSignalStateResult.universeId) ~= "" then
 			UseStateResult2({
 				universeId = tostring(UseSignalStateResult.universeId),
-				experienceName = UseSignalStateResult.lastLocation,
-				userPresenceType = if FFlagCoplayHistoryGameJoinCard then UseSignalStateResult.userPresenceType else nil
+				experienceName = UseSignalStateResult.lastLocation
 			})
 			
 			return
 		end
 	end, { UseSignalStateResult })
 	local UniverseId = UseStateResult.universeId
-	local Coplay = nil
-	
-	if FFlagCoplayHistoryGameJoinCard then
-		local ResolveGameJoinCardUniverseModuleResult = ResolveGameJoinCardUniverseModule(UseNavigationResult.getParam("isCoplayInviteCard"), UseNavigationResult.getParam("universeId"), UseStateResult.userPresenceType, UseStateResult.universeId)
-		UniverseId = ResolveGameJoinCardUniverseModuleResult.universeId
-		Coplay = ResolveGameJoinCardUniverseModuleResult.source
-	end
 	local ExperienceName = UseStateResult.experienceName
 	ReactModule.useEffect(function()
-		-- upvalues: UserIdParam (copy), FFlagCoplayHistoryGameJoinCard (upval), UniverseId (ref), UseSignalStateResult (ref), FFlagJoinUserCTAsIxpEnabled (upval), IXPServiceWrapper (upval), FStringJoinUserCTAsIxpLayer (upval), UseGameJoinCardAnalyticsModule (upval), HomepageCarouselAbsolutePositionParam (copy), FFlagGameJoinCardAnalyticsCardId (upval), UseMemoResult (copy)
+		-- upvalues: UserIdParam (copy), UseSignalStateResult (ref), FFlagJoinUserCTAsIxpEnabled (upval), IXPServiceWrapper (upval), FStringJoinUserCTAsIxpLayer (upval), UseGameJoinCardAnalyticsModule (upval), HomepageCarouselAbsolutePositionParam (copy), FFlagGameJoinCardAnalyticsCardId (upval), UseMemoResult (copy)
 		if UserIdParam == "" then return end
-		local UniverseId1 = if FFlagCoplayHistoryGameJoinCard then if UniverseId == "" then nil else UniverseId elseif UseSignalStateResult and UseSignalStateResult.universeId ~= nil and tostring(UseSignalStateResult.universeId) ~= "" then tostring(UseSignalStateResult.universeId) else nil
+		local Text = if UseSignalStateResult and UseSignalStateResult.universeId ~= nil and tostring(UseSignalStateResult.universeId) ~= "" then tostring(UseSignalStateResult.universeId) else nil
 		
 		if FFlagJoinUserCTAsIxpEnabled then
 			IXPServiceWrapper:LogFlagLinkedUserLayerExposure(FStringJoinUserCTAsIxpLayer)
 		end
 		UseGameJoinCardAnalyticsModule.logGameJoinCardPageLoaded({
 			friendId = UserIdParam,
-			universeId = UniverseId1,
+			universeId = Text,
 			absolutePosition = HomepageCarouselAbsolutePositionParam,
 			joinGameCardId = if FFlagGameJoinCardAnalyticsCardId then UseMemoResult else nil
 		})
@@ -226,31 +205,16 @@ return function()
 		end, { UseUserProfilesFetchResult.data, UserIdParam })
 	end
 	local Text1 = if UseSignalStateResult and UseSignalStateResult.rootPlaceId ~= nil then tostring(UseSignalStateResult.rootPlaceId) else nil
-	local v1 = nil
-	
-	if FFlagCoplayHistoryGameJoinCard then
-		v1 = UseExperienceDetailsModule(if Coplay == UniverseSourceModule.Coplay then UniverseId else nil, FFlagMobileGameJoinCardVideo and UseNavigationResult.getParam("isBannerVideoEnabled") == true)
-		
-		if Coplay == UniverseSourceModule.Coplay then
-			ExperienceName = v1.name or ""
-			Text1 = v1.rootPlaceId
-		end
-	end
 	local UseExperienceBannerImageResult = UseExperienceBannerImageFunction(UniverseId, Text1)
 	local RbxThumb = if FFlagMobileGameJoinCardThumbnailModule and UniverseId ~= "" then GetRbxThumbFunction(ThumbnailType.GameIcon, UniverseId, ThumbnailSize.Medium) else nil
 	ReactModule.useEffect(function()
-		-- upvalues: UniverseId (ref), FFlagCoplayHistoryGameJoinCard (upval), v1 (ref), GameJoinCardTelemetryModule (upval), UseExperienceBannerImageResult (copy)
-		if UniverseId == "" then return end
-		if not FFlagCoplayHistoryGameJoinCard or not v1 or not v1.isLoading then
+		-- upvalues: UniverseId (copy), GameJoinCardTelemetryModule (upval), UseExperienceBannerImageResult (copy)
+		if UniverseId ~= "" then
 			GameJoinCardTelemetryModule.logBannerLoadResult(UseExperienceBannerImageResult.status)
 			
 			return
 		end
-	end, {
-		UseExperienceBannerImageResult.status,
-		UniverseId,
-		if FFlagCoplayHistoryGameJoinCard and v1 then v1.isLoading else nil
-	})
+	end, { UseExperienceBannerImageResult.status, UniverseId })
 	local UseJoinUserInExperienceResult = UseJoinUserInExperienceFunction(UserIdParam, {
 		isHomePageCarousel = not FFlagGameJoinCardSourceAttribution or JoinSourceParam == nil,
 		analyticProps = if FFlagGameJoinCardSourceAttribution then ReactModule.useMemo(function()
@@ -270,14 +234,14 @@ return function()
 		end, { UseNavigationResult }),
 		onAgeCheckCompletion = UseAgeCheckCompletionLoggerFunction(UniverseId)
 	})
-	local UseJoinCardBannerVideoIdModuleResult = if FFlagMobileGameJoinCardVideo then UseJoinCardBannerVideoIdModule(UniverseId, if FFlagCoplayHistoryGameJoinCard and v1 and Coplay == UniverseSourceModule.Coplay then v1.playabilityStatus else UseJoinUserInExperienceResult.cachedPlayabilityStatus, UseNavigationResult.getParam("isBannerVideoEnabled") == true) else nil
+	local UseJoinCardBannerVideoIdModuleResult = if FFlagMobileGameJoinCardVideo then UseJoinCardBannerVideoIdModule(UniverseId, UseJoinUserInExperienceResult.cachedPlayabilityStatus, UseNavigationResult.getParam("isBannerVideoEnabled") == true) else nil
 	local VideoPlaybackContextParam = if FFlagMobileGameJoinCardVideo then UseNavigationResult.getParam("videoPlaybackContext") else nil
-	local v2 = nil
+	local v1 = nil
 	local Ready = nil
 	local Localized = nil
 	
 	if FFlagJoinabilityCTARefactor then
-		v2, Ready = UseJoinUserActionsModule(UserIdParam, true, `{tostring(UseSignalStateResult and UseSignalStateResult.userPresenceType)}:{tostring(UseSignalStateResult and UseSignalStateResult.universeId)}:{tostring(UseSignalStateResult and UseSignalStateResult.placeId)}:{tostring(UseSignalStateResult and UseSignalStateResult.rootPlaceId)}:{tostring(UseJoinUserInExperienceResult.ageCheckRequired)}`)
+		v1, Ready = UseJoinUserActionsModule(UserIdParam, true, `{tostring(UseSignalStateResult and UseSignalStateResult.userPresenceType)}:{tostring(UseSignalStateResult and UseSignalStateResult.universeId)}:{tostring(UseSignalStateResult and UseSignalStateResult.placeId)}:{tostring(UseSignalStateResult and UseSignalStateResult.rootPlaceId)}:{tostring(UseJoinUserInExperienceResult.ageCheckRequired)}`)
 		Localized = UseLocalizationFunction(ActionsModule.TextKeys)
 	end
 	UseLogActionsResolveTimeModule(if FFlagJoinabilityCTARefactor then Ready else nil, true, GameJoinCardSurface.Mobile)
@@ -288,9 +252,9 @@ return function()
 		joinGameCardId = if FFlagGameJoinCardAnalyticsCardId then UseMemoResult else nil,
 		joinAgeCheckUpsellFlow = UseJoinUserInExperienceResult.joinAgeCheckUpsellFlow
 	})
-	local ContainsActionModuleResult = if FFlagJoinabilityCTARefactor then Ready == DataStatus.Ready and ContainsActionModule(v2, UserCtaAction.UnlockExperience) else UseJoinUserInExperienceResult.ageCheckRequired == true
+	local ContainsActionModuleResult = if FFlagJoinabilityCTARefactor then Ready == DataStatus.Ready and ContainsActionModule(v1, UserCtaAction.UnlockExperience) else UseJoinUserInExperienceResult.ageCheckRequired == true
 	ReactModule.useEffect(function()
-		-- upvalues: ContainsActionModuleResult (copy), UniverseId (ref), UseGameJoinCardAnalyticsModule (upval)
+		-- upvalues: ContainsActionModuleResult (copy), UniverseId (copy), UseGameJoinCardAnalyticsModule (upval)
 		if ContainsActionModuleResult and UniverseId ~= "" then
 			UseGameJoinCardAnalyticsModule.logJoinCardAgeCheckUpsellImpression({ universeId = UniverseId })
 			
@@ -298,7 +262,7 @@ return function()
 		end
 	end, { ContainsActionModuleResult, UniverseId })
 	local UseResult1 = ReactModule.useCallback(function()
-		-- upvalues: UserIdParam (copy), UseGameJoinCardAnalyticsModule (upval), GameJoinCardButtonAction (upval), UniverseId (ref), HomepageCarouselAbsolutePositionParam (copy), FFlagGameJoinCardAnalyticsCardId (upval), UseMemoResult (copy), UseSignalStateResult (ref), GamePlayIntentFunction (upval), UseRoactServiceResult (copy), PeopleListInHomePage (upval), HttpService (upval)
+		-- upvalues: UserIdParam (copy), UseGameJoinCardAnalyticsModule (upval), GameJoinCardButtonAction (upval), UniverseId (copy), HomepageCarouselAbsolutePositionParam (copy), FFlagGameJoinCardAnalyticsCardId (upval), UseMemoResult (copy), UseSignalStateResult (ref), GamePlayIntentFunction (upval), UseRoactServiceResult (copy), PeopleListInHomePage (upval), HttpService (upval)
 		if UserIdParam ~= "" then
 			UseGameJoinCardAnalyticsModule.logGameJoinCardButtonEvent(GameJoinCardButtonAction.JoinGame, {
 				friendId = UserIdParam,
@@ -327,7 +291,7 @@ return function()
 		(if FFlagEnableSplitPane then UseNavigationResult.push else UseNavigationResult.navigate)(AppPage.ProfilePlatform, { detail = UserIdParam })
 	end, { UseNavigationResult, UserIdParam })
 	local UseResult3 = ReactModule.useCallback(function(UserTile)
-		-- upvalues: UserIdParam (copy), UniverseId (ref), HomepageCarouselAbsolutePositionParam (copy), FFlagGameJoinCardAnalyticsCardId (upval), UseMemoResult (copy), ViewProfileSourceValues (upval), UseGameJoinCardAnalyticsModule (upval), GameJoinCardButtonAction (upval), UseResult2 (copy)
+		-- upvalues: UserIdParam (copy), UniverseId (copy), HomepageCarouselAbsolutePositionParam (copy), FFlagGameJoinCardAnalyticsCardId (upval), UseMemoResult (copy), ViewProfileSourceValues (upval), UseGameJoinCardAnalyticsModule (upval), GameJoinCardButtonAction (upval), UseResult2 (copy)
 		if UserIdParam ~= "" then
 			local config = {
 				friendId = UserIdParam,
@@ -345,9 +309,9 @@ return function()
 		UseResult2()
 	end, DependencyArrayFunction(UseResult2, UserIdParam, UniverseId, HomepageCarouselAbsolutePositionParam))
 	local UseResult4 = if FFlagMobileGameJoinCardEDPFromTitleModule or FFlagMobileGameJoinCardEDPFromThumbnailModule then ReactModule.useCallback(function()
-		-- upvalues: FFlagCoplayHistoryGameJoinCard (upval), Text1 (ref), UseSignalStateResult (ref), UniverseId (ref), HomepageCarouselAbsolutePositionParam (copy), UseRoactServiceResult2 (copy), SetGamePlaySessionFunction (upval), SessionType (upval), GameDetailReferralFunction (upval), UseRoactServiceResult (copy), UserIdParam (copy), UseDispatchResult (copy), OpenGameDetailsFunction (upval), UseNavigationResult (copy)
-		local Text1 = if FFlagCoplayHistoryGameJoinCard then Text1 else UseSignalStateResult and UseSignalStateResult.rootPlaceId
-		local UniverseId1 = if Text1 == nil or tostring(Text1) == "" then UniverseId else tostring(Text1)
+		-- upvalues: UseSignalStateResult (ref), UniverseId (copy), HomepageCarouselAbsolutePositionParam (copy), UseRoactServiceResult2 (copy), SetGamePlaySessionFunction (upval), SessionType (upval), GameDetailReferralFunction (upval), UseRoactServiceResult (copy), UserIdParam (copy), UseDispatchResult (copy), OpenGameDetailsFunction (upval), UseNavigationResult (copy)
+		local RootPlaceId = UseSignalStateResult and UseSignalStateResult.rootPlaceId
+		local UniverseId1 = if RootPlaceId == nil or tostring(RootPlaceId) == "" then UniverseId else tostring(RootPlaceId)
 		local HomepageCarouselAbsolutePositionParam1 = HomepageCarouselAbsolutePositionParam or 0
 		
 		if UseRoactServiceResult2 then
@@ -368,10 +332,10 @@ return function()
 	end, {
 		UseDispatchResult, UseNavigationResult, UniverseId, UseSignalStateResult,
 		HomepageCarouselAbsolutePositionParam, UserIdParam, UseRoactServiceResult,
-		UseRoactServiceResult2, if FFlagCoplayHistoryGameJoinCard then Text1 else nil
+		UseRoactServiceResult2
 	}) else nil
 	local UseResult5 = if FFlagMobileGameJoinCardEDPFromTitleModule or FFlagMobileGameJoinCardEDPFromThumbnailModule then ReactModule.useCallback(function(Thumbnail)
-		-- upvalues: UserIdParam (copy), UniverseId (ref), HomepageCarouselAbsolutePositionParam (copy), FFlagGameJoinCardAnalyticsCardId (upval), UseMemoResult (copy), ViewEDPsourceValues (upval), GameJoinCardButtonAction (upval), UseGameJoinCardAnalyticsModule (upval), UseResult4 (copy)
+		-- upvalues: UserIdParam (copy), UniverseId (copy), HomepageCarouselAbsolutePositionParam (copy), FFlagGameJoinCardAnalyticsCardId (upval), UseMemoResult (copy), ViewEDPsourceValues (upval), GameJoinCardButtonAction (upval), UseGameJoinCardAnalyticsModule (upval), UseResult4 (copy)
 		if UserIdParam ~= "" then
 			local config = {
 				friendId = UserIdParam,
@@ -401,7 +365,7 @@ return function()
 		UseJoinUserInExperienceResult.joinExperience()
 	end, DependencyArrayFunction(UseResult1, UseJoinUserInExperienceResult))
 	local UseResult7 = ReactModule.useCallback(function()
-		-- upvalues: UserIdParam (copy), UseGameJoinCardAnalyticsModule (upval), GameJoinCardButtonAction (upval), UniverseId (ref), HomepageCarouselAbsolutePositionParam (copy), FFlagGameJoinCardAnalyticsCardId (upval), UseMemoResult (copy), FFlagGameJoinCardChatEntryPointModule (upval), UseDispatchResult (copy), EnteredChatFromEntryPointFunction (upval), ChatEntryPointNames (upval), UseRoactServiceResult1 (copy), NotificationType (upval)
+		-- upvalues: UserIdParam (copy), UseGameJoinCardAnalyticsModule (upval), GameJoinCardButtonAction (upval), UniverseId (copy), HomepageCarouselAbsolutePositionParam (copy), FFlagGameJoinCardAnalyticsCardId (upval), UseMemoResult (copy), FFlagGameJoinCardChatEntryPointModule (upval), UseDispatchResult (copy), EnteredChatFromEntryPointFunction (upval), ChatEntryPointNames (upval), UseRoactServiceResult1 (copy), NotificationType (upval)
 		if UserIdParam == "" then return end
 		UseGameJoinCardAnalyticsModule.logGameJoinCardButtonEvent(GameJoinCardButtonAction.Chat, {
 			friendId = UserIdParam,
@@ -415,7 +379,7 @@ return function()
 		end
 		UseRoactServiceResult1:BroadcastNotification(UserIdParam, NotificationType.LAUNCH_CONVERSATION)
 	end, DependencyArrayFunction(UserIdParam, UniverseId, HomepageCarouselAbsolutePositionParam, UseNavigationResult, UseRoactServiceResult1, UseDispatchResult))
-	local v3 = nil
+	local v2 = nil
 	local IsNotReadyMatch = false
 	
 	if FFlagJoinabilityCTARefactor then
@@ -423,7 +387,7 @@ return function()
 		local List = {}
 		
 		if Ready == DataStatus.Ready and Localized ~= nil then
-			for _, value in ActionsModule.resolveJoinCardActions(v2, {
+			for _, value in ActionsModule.resolveJoinCardActions(v1, {
 				localized = Localized,
 				userId = UserIdParam,
 				telemetry = {
@@ -433,7 +397,7 @@ return function()
 				},
 				presence = {
 					placeId = if UseSignalStateResult and UseSignalStateResult.placeId ~= nil then tostring(UseSignalStateResult.placeId) else nil,
-					rootPlaceId = if FFlagCoplayHistoryGameJoinCard then if UseSignalStateResult and UseSignalStateResult.rootPlaceId ~= nil then tostring(UseSignalStateResult.rootPlaceId) else nil else Text1
+					rootPlaceId = Text1
 				},
 				experience = {
 					isLoading = UseJoinUserInExperienceResult.isLoading,
@@ -455,7 +419,7 @@ return function()
 				end
 			end
 		end
-		v3 = List
+		v2 = List
 	end
 	return ReactModule.createElement(MobileGameJoinCardModule, {
 		isNavigationFocused = UseNavigationFocusResult,
@@ -479,8 +443,7 @@ return function()
 		ageCheckRequired = UseJoinUserInExperienceResult.ageCheckRequired,
 		onAgeCheckPressed = UseAgeCheckPressLoggerResult,
 		wasPlayabilityCached = UseJoinUserInExperienceResult.playabilityFromCache,
-		actions = if FFlagJoinabilityCTARefactor then v3 else {},
-		areActionsLoading = if FFlagJoinabilityCTARefactor then IsNotReadyMatch else nil,
-		isCoplayInviteCard = if FFlagCoplayHistoryGameJoinCard then Coplay == UniverseSourceModule.Coplay else nil
+		actions = if FFlagJoinabilityCTARefactor then v2 else {},
+		areActionsLoading = if FFlagJoinabilityCTARefactor then IsNotReadyMatch else nil
 	})
 end

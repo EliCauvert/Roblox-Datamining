@@ -20,7 +20,6 @@ local SystemMessageModule = require(script.Parent.SystemMessage)
 local SystemMessageContainerModule = require(script.Parent.SystemMessageContainer)
 local CustomMessageEntryContainerModule = require(script.Parent.CustomMessageEntryContainer)
 local GetFFlagEnableSocialCardsFunction = require(Parent.SharedFlags).GetFFlagEnableSocialCards
-local FFlagChatTranslationReadsUserGameSettings = require(Parent.SharedFlags).FFlagChatTranslationReadsUserGameSettings
 local FIntAppChatMessageInitialFetchMinMessagesModule = require(AppChat.Flags.FIntAppChatMessageInitialFetchMinMessages)
 local FIntAppChatInitialMessageFetchLimitModule = require(AppChat.Flags.FIntAppChatInitialMessageFetchLimit)
 local FFlagAppChatGuardOsaScrollToIndexModule = require(AppChat.Flags.FFlagAppChatGuardOsaScrollToIndex)
@@ -70,7 +69,7 @@ local function compareItemData(p1, p2): boolean
 end
 
 function MessageList.init(p1)
-	-- upvalues: FFlagAppChatPerfTrackingModule (copy), MessageModelModule (copy), EnumMessageTypesModule (copy), RoactModule (copy), FFlagAppChatAutotranslationRespectsExperienceChatSettingModule (copy), FFlagChatTranslationReadsUserGameSettings (copy), GetLastMessageWithFilterModule (copy), isIncomingChatMessage (copy), CustomMessageEntryContainerModule (copy), SystemMessageContainerModule (copy), GetFFlagEnableSocialCardsFunction (copy), FFlagAppChatEnableAutotranslationModule (copy), ChatMessageModule (copy), MessageModelModule1 (copy), SystemMessageModule (copy), IsScrolledAwayFromLatestModule (copy), CreateScrollIntervalTrackerModule (copy), AppChatPerfTrackerModule (copy), FFlagAppChatScrollToLatestModule (copy), FocusNavigationService (copy), CoreGui (copy)
+	-- upvalues: FFlagAppChatPerfTrackingModule (copy), MessageModelModule (copy), EnumMessageTypesModule (copy), RoactModule (copy), FFlagAppChatAutotranslationRespectsExperienceChatSettingModule (copy), GetLastMessageWithFilterModule (copy), isIncomingChatMessage (copy), CustomMessageEntryContainerModule (copy), SystemMessageContainerModule (copy), GetFFlagEnableSocialCardsFunction (copy), FFlagAppChatEnableAutotranslationModule (copy), ChatMessageModule (copy), MessageModelModule1 (copy), SystemMessageModule (copy), IsScrolledAwayFromLatestModule (copy), CreateScrollIntervalTrackerModule (copy), AppChatPerfTrackerModule (copy), FFlagAppChatScrollToLatestModule (copy), FocusNavigationService (copy), CoreGui (copy)
 	p1.state = {
 		width = 0,
 		startIndex = 1,
@@ -87,7 +86,7 @@ function MessageList.init(p1)
 	end
 	
 	p1.ref = p1.props.messageListRef or RoactModule.createRef()
-	local ChatTranslationEnabled = if FFlagAppChatAutotranslationRespectsExperienceChatSettingModule then if FFlagChatTranslationReadsUserGameSettings then UserSettings().GameSettings.ChatTranslationEnabled else game:GetService("TextChatService").ChatTranslationEnabled else false
+	local ChatTranslationEnabled = if FFlagAppChatAutotranslationRespectsExperienceChatSettingModule then game:GetService("TextChatService").ChatTranslationEnabled else false
 	p1.lastIncomingChatMessageId = nil
 	
 	if p1.props.itemList then

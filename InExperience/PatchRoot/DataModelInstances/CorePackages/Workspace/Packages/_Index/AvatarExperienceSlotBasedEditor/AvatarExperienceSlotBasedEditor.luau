@@ -57,8 +57,7 @@ return {
 		buildSlotCategoryLocalizationKeys = require(script.Utils.buildSlotCategoryLocalizationKeys),
 		buildSearchAvatarInventoryQuery = require(script.Utils.buildSearchAvatarInventoryQuery),
 		toSearchableItemCategories = require(script.Utils.toSearchableItemCategories),
-		getInventorySearchKey = require(script.Utils.getInventorySearchKey),
-		getActiveInventoryStore = require(script.Utils.getActiveInventoryStore)
+		getInventorySearchKey = require(script.Utils.getInventorySearchKey)
 	},
 	["jest.config"] = script["jest.config"]
 }

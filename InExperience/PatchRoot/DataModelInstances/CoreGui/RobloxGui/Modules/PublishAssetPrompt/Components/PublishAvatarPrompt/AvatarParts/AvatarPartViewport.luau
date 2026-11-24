@@ -6,6 +6,7 @@ local CameraUtility = require(CorePackages.Packages.Thumbnailing).CameraUtility
 local MannequinUtility = require(CorePackages.Packages.Thumbnailing).MannequinUtility
 local ConstantsModule = require(script.Parent.Parent.Parent.Parent.Constants)
 local MakeupPreviewUtilsModule = require(script.Parent.Parent.Parent.Parent.MakeupPreviewUtils)
+local GetFFlagSingleUploadMakeupSupportModule = require(script.Parent.Parent.Parent.Parent.Flags.GetFFlagSingleUploadMakeupSupport)
 local AvatarPartViewport = RoactModule.PureComponent:extend("AvatarPartViewport")
 AvatarPartViewport.validateProps = TModule.strictInterface({
 	LayoutOrder = TModule.optional(TModule.number),
@@ -74,7 +75,7 @@ function AvatarPartViewport.addMakeupDecalToViewport(p1)
 end
 
 function AvatarPartViewport.didMount(p1)
-	-- upvalues: MakeupPreviewUtilsModule (copy)
+	-- upvalues: GetFFlagSingleUploadMakeupSupportModule (copy), MakeupPreviewUtilsModule (copy)
 	local Asset = p1.props.asset
 	
 	if typeof(Asset) ~= "Instance" then
@@ -87,7 +88,7 @@ function AvatarPartViewport.didMount(p1)
 		
 		return
 	end
-	if Asset:IsA("Decal") or p1.props.assetType and MakeupPreviewUtilsModule.isMakeupAssetType(p1.props.assetType) then
+	if GetFFlagSingleUploadMakeupSupportModule() and (Asset:IsA("Decal") or p1.props.assetType and MakeupPreviewUtilsModule.isMakeupAssetType(p1.props.assetType)) then
 		p1:addMakeupDecalToViewport()
 		
 		return

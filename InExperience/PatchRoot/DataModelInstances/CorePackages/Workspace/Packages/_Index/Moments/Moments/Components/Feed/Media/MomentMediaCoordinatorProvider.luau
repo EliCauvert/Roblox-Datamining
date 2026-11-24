@@ -11,12 +11,14 @@ pcall(function()
 	AppLifecycleObserverService = game:GetService("AppLifecycleObserverService")
 end)
 local ReactModule = require(Parent.React)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local SignalsModule = require(Parent.Signals)
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local EnableAudioPlaybackInAppFunction = require(Parent.MediaPlayback).enableAudioPlaybackInApp
 local MomentsCommonModule = require(Parent.MomentsCommon)
 local Media = MomentsCommonModule.Media
 local GetMomentsCapabilitiesFunction = MomentsCommonModule.Stores.GetMomentsCapabilities
+local FFlagMomentsAutoplayAmpPolicy = SharedFlagsModule.FFlagMomentsAutoplayAmpPolicy
 local _ = require(Moments.Components.Feed.FeedTypes)
 local CreateFeedMediaSourceModule = require(script.Parent.createFeedMediaSource)
 
@@ -51,9 +53,9 @@ local function defaultCreateCoordinator(p1)
 end
 
 return function(p1)
-	-- upvalues: UseSignalStateFunction (copy), GetMomentsCapabilitiesFunction (copy), defaultCreateCoordinator (copy), ReactModule (copy), SignalsModule (copy), UserInputService (copy), AppLifecycleObserverService (ref), CreateFeedMediaSourceModule (copy), Media (copy)
+	-- upvalues: FFlagMomentsAutoplayAmpPolicy (copy), UseSignalStateFunction (copy), GetMomentsCapabilitiesFunction (copy), defaultCreateCoordinator (copy), ReactModule (copy), SignalsModule (copy), UserInputService (copy), AppLifecycleObserverService (ref), CreateFeedMediaSourceModule (copy), Media (copy)
 	local Pager = p1.pager
-	local UseSignalStateResult = UseSignalStateFunction(GetMomentsCapabilitiesFunction(false).getIsAutoPlayEnabled)
+	local UseSignalStateResult = if FFlagMomentsAutoplayAmpPolicy then UseSignalStateFunction(GetMomentsCapabilitiesFunction(false).getIsAutoPlayEnabled) else nil
 	local PlaybackActive = p1.playbackActive
 	local CreateCoordinator = p1.createCoordinator or defaultCreateCoordinator
 	local UseMemoResult = ReactModule.useMemo(function()
@@ -62,12 +64,12 @@ return function(p1)
 		
 		return { get = Signal, set = Signal2 }
 	end, {})
-	local UseMemoResult1 = ReactModule.useMemo(function()
+	local UseMemoResult1 = if FFlagMomentsAutoplayAmpPolicy then ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval), UseSignalStateResult (copy)
 		local Signal, Signal2 = SignalsModule.createSignal(UseSignalStateResult)
 		
 		return { get = Signal, set = Signal2 }
-	end, {})
+	end, {}) else nil
 	local UseMemoResult2 = ReactModule.useMemo(function()
 		-- upvalues: SignalsModule (upval)
 		local Signal, Signal2 = SignalsModule.createSignal(true)
@@ -78,10 +80,13 @@ return function(p1)
 		-- upvalues: UseMemoResult (copy), PlaybackActive (copy)
 		UseMemoResult.set(PlaybackActive)
 	end, { PlaybackActive, UseMemoResult })
-	ReactModule.useEffect(function()
-		-- upvalues: UseMemoResult1 (copy), UseSignalStateResult (copy)
-		UseMemoResult1.set(UseSignalStateResult)
-	end, { UseSignalStateResult, UseMemoResult1 })
+	
+	if FFlagMomentsAutoplayAmpPolicy then
+		ReactModule.useEffect(function()
+			-- upvalues: UseMemoResult1 (copy), UseSignalStateResult (copy)
+			UseMemoResult1.set(UseSignalStateResult)
+		end, { UseSignalStateResult, UseMemoResult1 })
+	end
 	ReactModule.useEffect(function()
 		-- upvalues: UserInputService (upval), UseMemoResult2 (copy), AppLifecycleObserverService (upval)
 		if UserInputService:GetDeviceType() == Enum.DeviceType.Desktop then return end
@@ -116,9 +121,14 @@ return function(p1)
 		end
 	end, { UseMemoResult, UseMemoResult2 })
 	local UseMemoResult4 = ReactModule.useMemo(function()
-		-- upvalues: CreateFeedMediaSourceModule (upval), Pager (copy), UseMemoResult3 (copy), UseMemoResult1 (copy), CreateCoordinator (copy)
-		return CreateCoordinator((CreateFeedMediaSourceModule(Pager, UseMemoResult3, UseMemoResult1.get)))
-	end, { Pager, CreateCoordinator, UseMemoResult3, UseMemoResult1 })
+		-- upvalues: CreateFeedMediaSourceModule (upval), Pager (copy), UseMemoResult3 (copy), FFlagMomentsAutoplayAmpPolicy (upval), UseMemoResult1 (copy), CreateCoordinator (copy)
+		return CreateCoordinator((CreateFeedMediaSourceModule(Pager, UseMemoResult3, if FFlagMomentsAutoplayAmpPolicy then UseMemoResult1.get else nil)))
+	end, {
+		Pager,
+		CreateCoordinator,
+		UseMemoResult3,
+		if FFlagMomentsAutoplayAmpPolicy then UseMemoResult1 else nil
+	})
 	ReactModule.useEffect(function()
 		-- upvalues: UseMemoResult4 (copy)
 		return function()

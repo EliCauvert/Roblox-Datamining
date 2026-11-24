@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("LeaveGameButtonKeepsFocusWhileLeaving2", false)
+﻿return game:DefineFastFlag("LeaveGameButtonKeepsFocusWhileLeaving", false)

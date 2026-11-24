@@ -4,7 +4,6 @@ local _ = require(Parent.MomentsTypes)
 local ShallowEqualFunction = require(Parent.Dash).shallowEqual
 local CommentCollectionTypesModule = require(Moments.Components.Comments.GetCommentCollectionStore.CommentCollectionTypes)
 local _ = require(script.Parent.CommentRowTypes)
-local FFlagMomentsEngagementToastsModule = require(Moments.Flags.FFlagMomentsEngagementToasts)
 
 local function reusePreviousRows(PreviousRows, List)
 	-- upvalues: ShallowEqualFunction (copy)
@@ -26,7 +25,7 @@ local function reusePreviousRows(PreviousRows, List)
 end
 
 return function(p1)
-	-- upvalues: CommentCollectionTypesModule (copy), FFlagMomentsEngagementToastsModule (copy), reusePreviousRows (copy)
+	-- upvalues: CommentCollectionTypesModule (copy), reusePreviousRows (copy)
 	local State = p1.state
 	local ResolveCommentFunction = p1.resolveComment
 	local PreviousRows = p1.previousRows
@@ -65,8 +64,7 @@ return function(p1)
 				text = Text,
 				createdAt = if ResolveCommentResult == nil then "" else ResolveCommentResult.createdAt,
 				isExpanded = ExpandedCommentIds ~= nil and ExpandedCommentIds[orderedCommentId] == true,
-				translationState = TranslationState,
-				isPinned = FFlagMomentsEngagementToastsModule and State.pinnedCommentId == orderedCommentId or nil
+				translationState = TranslationState
 			})
 		end
 	end

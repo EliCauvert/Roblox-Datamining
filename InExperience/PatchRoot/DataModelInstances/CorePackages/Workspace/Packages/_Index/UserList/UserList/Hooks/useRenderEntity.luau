@@ -6,10 +6,9 @@ local _ = require(UserList.Common.Types)
 local EntityRow = require(UserList.Components.UserRow).EntityRow
 local FFlagUserListCtaIntegrationEnabled = require(Parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
 local FFlagUserListSurfaceExtensions = require(Parent.SharedFlags).FFlagUserListSurfaceExtensions
-local FFlagUserListClientRowProps = require(Parent.SharedFlags).FFlagUserListClientRowProps
 
 return function(p1)
-	-- upvalues: FFlagUserListSurfaceExtensions (copy), ReactModule (copy), View (copy), EntityRow (copy), FFlagUserListCtaIntegrationEnabled (copy), FFlagUserListClientRowProps (copy)
+	-- upvalues: FFlagUserListSurfaceExtensions (copy), ReactModule (copy), View (copy), EntityRow (copy), FFlagUserListCtaIntegrationEnabled (copy)
 	local OnActivated = p1.onActivated
 	local RenderRowFunction = p1.renderRow
 	local EntitiesMap = p1.entitiesMap
@@ -18,11 +17,11 @@ return function(p1)
 	local FirstRowRef = if FFlagUserListSurfaceExtensions then p1.firstRowRef else nil
 	
 	return (ReactModule.useCallback(function(p2, LayoutOrder, Size)
-		-- upvalues: EntitiesMap (copy), RenderRowFunction (copy), OnActivated (copy), ReactModule (upval), View (upval), FFlagUserListSurfaceExtensions (upval), FirstRowRef (copy), EntityRow (upval), FFlagUserListCtaIntegrationEnabled (upval), Configs (copy), LayoutMode (copy), FFlagUserListClientRowProps (upval)
+		-- upvalues: EntitiesMap (copy), RenderRowFunction (copy), OnActivated (copy), ReactModule (upval), View (upval), FFlagUserListSurfaceExtensions (upval), FirstRowRef (copy), EntityRow (upval), FFlagUserListCtaIntegrationEnabled (upval), Configs (copy), LayoutMode (copy)
 		local Entities = EntitiesMap[p2]
 		
 		return if Entities then if RenderRowFunction then RenderRowFunction(function(p3)
-			-- upvalues: Entities (copy), LayoutOrder (copy), OnActivated (upval), ReactModule (upval), View (upval), Size (copy), FFlagUserListSurfaceExtensions (upval), FirstRowRef (upval), EntityRow (upval), FFlagUserListCtaIntegrationEnabled (upval), Configs (upval), LayoutMode (upval), FFlagUserListClientRowProps (upval)
+			-- upvalues: Entities (copy), LayoutOrder (copy), OnActivated (upval), ReactModule (upval), View (upval), Size (copy), FFlagUserListSurfaceExtensions (upval), FirstRowRef (upval), EntityRow (upval), FFlagUserListCtaIntegrationEnabled (upval), Configs (upval), LayoutMode (upval)
 			return ReactModule.createElement(View, {
 				tag = "size-full-full",
 				Size = Size,
@@ -45,13 +44,12 @@ return function(p1)
 					trailingContent = p3.trailingContent,
 					configs = Configs,
 					layoutMode = LayoutMode,
-					primaryClientAction = if FFlagUserListClientRowProps then p3.primaryClientAction else nil,
-					secondaryClientAction = if FFlagUserListClientRowProps then p3.secondaryClientAction else nil,
-					onClientActionSuccess = if FFlagUserListClientRowProps then p3.onClientActionSuccess else nil,
-					contextualInfoSource = if FFlagUserListClientRowProps then p3.contextualInfoSource else nil,
-					rowSize = if FFlagUserListClientRowProps then p3.rowSize else nil,
-					showToast = if FFlagUserListClientRowProps then p3.showToast else nil,
-					friendshipOriginSourceType = if FFlagUserListClientRowProps then p3.friendshipOriginSourceType else nil
+					primaryCtaEnum = p3.primaryCtaEnum,
+					secondaryCtaEnum = p3.secondaryCtaEnum,
+					onCtaSuccess = p3.onCtaSuccess,
+					contextualInfoSource = p3.contextualInfoSource,
+					onCtaToast = p3.onCtaToast,
+					friendshipOriginSourceType = p3.friendshipOriginSourceType
 				})
 			})
 		end, Entities, LayoutOrder) else ReactModule.createElement(View, {

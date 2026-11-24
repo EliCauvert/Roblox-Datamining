@@ -16,10 +16,11 @@ local UnifiedProductPurchaseCompletionModalShownCounter = require(Parent.Generic
 local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
 local FormatTextWithParamsModule = require(Parent.Utility.formatTextWithParams)
 local UseFocusNavigationRefsModule = require(Parent.Generic.Hooks.useFocusNavigationRefs)
+local FFlagEnableLaunchAfterPurchase = require(Parent1.SharedFlags).FFlagEnableLaunchAfterPurchase
 local PlayXlarge = if require(Parent1.SharedFlags).FFlagEnableLargerLaunchAfterPurchasePlayIcon then IconName.PlayXlarge else IconName.PlaySmall
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), UseFocusNavigationRefsModule (copy), UseTokensFunction (copy), ReactModule (copy), FoundationModule (copy), LoggingProtocolModule (copy), UnifiedProductPurchaseCompletionModalShownCounter (copy), FormatTextWithParamsModule (copy), Dialog (copy), DialogSize (copy), View (copy), Icon (copy), Text (copy), Orientation (copy), PlayXlarge (copy), ButtonVariant (copy)
+	-- upvalues: UseLocalizationFunction (copy), UseFocusNavigationRefsModule (copy), UseTokensFunction (copy), ReactModule (copy), FoundationModule (copy), FFlagEnableLaunchAfterPurchase (copy), LoggingProtocolModule (copy), UnifiedProductPurchaseCompletionModalShownCounter (copy), FormatTextWithParamsModule (copy), Dialog (copy), DialogSize (copy), View (copy), Icon (copy), Text (copy), Orientation (copy), PlayXlarge (copy), ButtonVariant (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		PurchaseCompleteTitle = "IAPExperience.PurchasePrompt.Title.PurchaseCompleted",
 		PurchaseCompleteBody = "IAPExperience.PurchasePrompt.Body.PurchaseCompleted",
@@ -31,14 +32,14 @@ return function(p1)
 	local UseFocusNavigationRefsModuleResult, UseFocusNavigationRefsModuleResult2 = UseFocusNavigationRefsModule(p1.buttons.onClose or p1.buttons.onActivated, nil)
 	local UseTokensResult = UseTokensFunction()
 	local UseStateResult, UseStateResult2 = ReactModule.useState(FoundationModule.Enums.IconName.CircleCheck)
-	local NoIsError: boolean = p1.enableLaunchAfterPurchase == true and not p1.isError
+	local NoIsError: boolean = FFlagEnableLaunchAfterPurchase and (p1.enableLaunchAfterPurchase == true and not p1.isError)
 	local UseRefResult = ReactModule.useRef(p1.buttons.onShown)
 	UseRefResult.current = p1.buttons.onShown
 	ReactModule.useEffect(function()
-		-- upvalues: LoggingProtocolModule (upval), UnifiedProductPurchaseCompletionModalShownCounter (upval), UseRefResult (copy)
+		-- upvalues: LoggingProtocolModule (upval), UnifiedProductPurchaseCompletionModalShownCounter (upval), FFlagEnableLaunchAfterPurchase (upval), UseRefResult (copy)
 		LoggingProtocolModule.default:logRobloxTelemetryCounter(UnifiedProductPurchaseCompletionModalShownCounter, 1, {})
 		
-		if UseRefResult.current then
+		if FFlagEnableLaunchAfterPurchase and UseRefResult.current then
 			UseRefResult.current()
 		end
 	end, {})

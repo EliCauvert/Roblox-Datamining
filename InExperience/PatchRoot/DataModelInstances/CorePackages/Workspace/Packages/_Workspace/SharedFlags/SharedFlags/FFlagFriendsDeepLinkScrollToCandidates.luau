@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("FriendsDeepLinkScrollToCandidates2", false) and require(script.Parent.FFlagFriendsDeepLinkInitialFilter)
