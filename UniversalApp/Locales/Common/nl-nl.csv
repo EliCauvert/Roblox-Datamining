@@ -352,6 +352,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Sorry, er is een probleem 
 
 Wacht even en probeer het opnieuw."
 Authentication.Login.Label.ConnectionError.Title,Verbindingsfout
+Authentication.Login.Label.DontHaveARobloxAccountCreateOne,Heb je geen Roblox-account? {startTag}Maak er een{endTag}
 Authentication.Login.Label.DontHaveAnAccountCreateOne,Heb je geen account? {startTag}Maak er een aan{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,E-mailadressen
@@ -1592,7 +1593,6 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Vind personen op Roblox do
 Feature.AddFriends.Label.ConnectWithContacts,Nodig contactpersonen uit of maak contact met vrienden die al op Roblox zitten!
 Feature.AddFriends.Label.ContactsTile,Contactpersonen
 Feature.AddFriends.Label.DeclineAllBackgrounded,Alle vriendschapsverzoeken worden genegeerd. Dit kan een minuut duren.
-Feature.AddFriends.Label.EmptyStatePrompt,Met wie ga je Roblox verkennen? Zoek naar personen om toe te voegen of maak contact met vrienden die je al kent!
 Feature.AddFriends.Label.FriendRequests,Vriendschapsverzoeken
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,Personen zoeken
 Feature.AddFriends.Label.MyQrCode,Mijn QR-code
@@ -2663,6 +2663,8 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,Alle games
 Feature.Build.Label.AmountAvailable,{AMOUNT} beschikbaar
+Feature.Build.Label.AttachmentCountPlural,{count} bijlagen
+Feature.Build.Label.AttachmentCountSingular,1 bijlage
 Feature.Build.Label.Autosaved,Automatisch opgeslagen
 Feature.Build.Label.Available,beschikbaar
 Feature.Build.Label.AvailableForPurchase,Beschikbaar om te kopen
@@ -2682,6 +2684,7 @@ Feature.Build.Label.DefaultDeveloperProductName,ontwikkelaarsproduct
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,Verwijderd
 Feature.Build.Label.DescribeIdea,Beschrijf een idee
+Feature.Build.Label.DescribeIdeaOrPick,Beschrijf een idee of kies er hieronder een
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,Beschrijving: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Naam: {NAME}
@@ -3516,6 +3519,7 @@ Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,Selecteren om te verwijderen
 Feature.Chat.Label.Sent,Verzonden
 Feature.Chat.Label.SnoozePartyNotifications,Groepsmeldingen in de ervaring dempen voor:
+Feature.Chat.Label.StartChatting,Beginnen met chatten
 Feature.Chat.Label.SwipeToReplyTooltip,Veeg om te antwoorden
 Feature.Chat.Label.TapToRemove,Tik om te verwijderen
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} d
@@ -3866,7 +3870,6 @@ Feature.Friends.Error.UserBannedError,Je bent verbannen van het uitvoeren van de
 Feature.Friends.Error.UserBlockedError,Je bent geblokkeerd voor het uitvoeren van deze bewerking.
 Feature.Friends.Error.UserNotPassedCaptcha,Je hebt de captcha-test niet doorstaan.
 Feature.Friends.Feature.Friends.Heading.AddFriends,
-Feature.Friends.FriendingTooltipBody,Sommige vriendschapsverzoeken kunnen afkomstig zijn van gebruikers die je vinden via je telefoonnummer. Zorg ervoor dat je ze kent voordat je vrienden wordt.
 Feature.Friends.Heading.Activities,Activiteiten
 Feature.Friends.Heading.FilterBy,Filteren op
 Feature.Friends.Heading.Friends,
@@ -3900,7 +3903,6 @@ Feature.Friends.Label.FriendOfUser,Vriend van {displayName}
 Feature.Friends.Label.FriendOwns,1 vriend bezit
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 vriend</b> speelde onlangs
 Feature.Friends.Label.FriendRequest,
-Feature.Friends.Label.FriendingTooltip,Tip voor vrienden maken
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,Vrienden zijn nu connecties!
 Feature.Friends.Label.FriendsHintBold,Laten we gaan!
@@ -4108,6 +4110,8 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Meldingen ingeschakeld voor {ex
 Feature.GameJoin.Description.DifferentServer,Je begint op een andere server
 Feature.GameJoin.Label.PlayTogether,Jullie kunnen samen spelen
 Feature.GameJoin.Label.PlayTogetherSoon,Jullie kunnen binnenkort samen spelen
+Feature.GameJoin.Label.Played,gespeeld
+Feature.GameJoin.Label.RecentCoplay,Jullie hebben onlangs samen gespeeld
 Feature.GamePage.Action.BackToTop,Terug naar boven
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
@@ -5354,6 +5358,7 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,Aanbieding alleen geldig voor nieuwe Plus-abonnees.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,Wanneer iemand Plus afsluit via jouw link.
 Feature.RobloxSubscription.Description.ReferralShare,Nodig iemand uit voor Plus en jullie krijgen allebei {amount} Robux wanneer die persoon Plus afsluit.
+Feature.RobloxSubscription.Description.SpawnEffectsPlusUpsell,Abonneer je op Plus om voordelen zoals spawneffecten en meer te ontdekken.
 Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,Krijg spawneffecten met Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Door op {201C}{ctaText} te klikken{201D}, ga je akkoord met de <a href=""{termsUrl}"">Abonnementsvoorwaarden van Roblox</a>. Er worden elke maand automatisch kosten in rekening gebracht totdat je opzegt."
 Feature.RobloxSubscription.Heading.ReferralEntry,Deel Plus om {amount} Robux te krijgen

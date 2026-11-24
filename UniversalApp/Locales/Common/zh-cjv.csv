@@ -361,6 +361,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"抱歉，连接服务器�
 
 请稍候重试。"
 Authentication.Login.Label.ConnectionError.Title,连接错误
+Authentication.Login.Label.DontHaveARobloxAccountCreateOne,没有 Roblox 帐户？{startTag}创建一个{endTag}
 Authentication.Login.Label.DontHaveAnAccountCreateOne,没有帐户？{startTag}创建一个{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,电子邮件地址
@@ -1609,7 +1610,6 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,通过搜索用户名或�
 Feature.AddFriends.Label.ConnectWithContacts,邀请联系人或与已经在 Roblox 上的好友交流！
 Feature.AddFriends.Label.ContactsTile,联系人
 Feature.AddFriends.Label.DeclineAllBackgrounded,正在忽略所有好友邀请。请稍候。
-Feature.AddFriends.Label.EmptyStatePrompt,你要和谁一起探索 Roblox？寻找新的朋友，或添加你认识的人为好友！
 Feature.AddFriends.Label.FriendRequests,好友邀请
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,搜索用户
 Feature.AddFriends.Label.MyQrCode,我的二维码
@@ -2682,6 +2682,8 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,所有游戏
 Feature.Build.Label.AmountAvailable,{AMOUNT} 可用
+Feature.Build.Label.AttachmentCountPlural,{count} 个附件
+Feature.Build.Label.AttachmentCountSingular,1 个附件
 Feature.Build.Label.Autosaved,已自动保存
 Feature.Build.Label.Available,可用
 Feature.Build.Label.AvailableForPurchase,可供购买
@@ -2701,6 +2703,7 @@ Feature.Build.Label.DefaultDeveloperProductName,开发者产品
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,已删除
 Feature.Build.Label.DescribeIdea,描述一个创意
+Feature.Build.Label.DescribeIdeaOrPick,描述创意，或在下方选择一个
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,描述：{DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,名称：{NAME}
@@ -3015,6 +3018,7 @@ Feature.Build.Title.NoMonetizationPasses,你尚未创建任何游戏通行证
 Feature.Build.Title.NoMonetizationProducts,开始在你的游戏中赚取收入
 Feature.Build.Title.NoMonetizationSubscriptions,你尚未创建任何订阅
 Feature.Build.Title.NoRobuxForUsage,没有剩余的 Robux 可用于购买 Build 使用额度
+Feature.Build.Title.PastedText,
 Feature.Build.Title.PickCampaign,选择时长
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,我们无法将部分好友添加为初期测试玩家：
@@ -3535,6 +3539,7 @@ Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,选择以移除
 Feature.Chat.Label.Sent,已发送
 Feature.Chat.Label.SnoozePartyNotifications,将体验中的队伍通知静音：
+Feature.Chat.Label.StartChatting,开始聊天
 Feature.Chat.Label.SwipeToReplyTooltip,滑动以回复
 Feature.Chat.Label.TapToRemove,轻点以移除
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} 天
@@ -3885,7 +3890,6 @@ Feature.Friends.Error.UserBannedError,你被禁止执行此操作。
 Feature.Friends.Error.UserBlockedError,你被阻止执行此操作。
 Feature.Friends.Error.UserNotPassedCaptcha,你没有通过 captcha 验证。
 Feature.Friends.Feature.Friends.Heading.AddFriends,
-Feature.Friends.FriendingTooltipBody,有些人可能会通过手机号码找到你，并发送好友邀请。接受邀请之前，请先确认对方的身份。
 Feature.Friends.Heading.Activities,
 Feature.Friends.Heading.FilterBy,过滤条件
 Feature.Friends.Heading.Friends,
@@ -3919,7 +3923,6 @@ Feature.Friends.Label.FriendOfUser,{displayName}的好友
 Feature.Friends.Label.FriendOwns,1 位好友拥有
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 位好友</b>最近玩过
 Feature.Friends.Label.FriendRequest,
-Feature.Friends.Label.FriendingTooltip,交友小贴士
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,好友现已升级为“联系人”！
 Feature.Friends.Label.FriendsHintBold,一起开始游戏吧！
@@ -4127,6 +4130,10 @@ Feature.GameFollows.TooltipTurnedOnNotifications,已开启关于“{experienceNa
 Feature.GameJoin.Description.DifferentServer,你们将在不同的服务器上开始游戏
 Feature.GameJoin.Label.PlayTogether,你们可以一起游玩
 Feature.GameJoin.Label.PlayTogetherSoon,你们很快就可以一起游玩了
+Feature.GameJoin.Label.Played,玩过
+Feature.GameJoin.Label.PlayedExperience,
+Feature.GameJoin.Label.RecentCoplay,你们最近一起玩过
+Feature.GameJoin.Label.UserPlayedExperience,
 Feature.GamePage.Action.BackToTop,返回顶部
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
@@ -5378,6 +5385,7 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,优惠仅适用于新订阅 Plus 的用户。
 Feature.RobloxSubscription.Description.ReferralReferrerReward,当有人通过你的链接购买 Plus 时。
 Feature.RobloxSubscription.Description.ReferralShare,邀请他人加入 Plus。对方购买 Plus 后，你们双方都将获得 {amount} Robux。
+Feature.RobloxSubscription.Description.SpawnEffectsPlusUpsell,订阅 Plus，探索重生点特效等福利。
 Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,订阅 Plus，获得重生特效
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"点按\u{201C}{ctaText}\u{201D}，即表示你同意 <a href=""{termsUrl}"">Roblox 订阅条款</a>。系统将每月自动向你收取费用，直至你取消订阅。"
 Feature.RobloxSubscription.Heading.ReferralEntry,分享 Plus，获得 {amount} Robux

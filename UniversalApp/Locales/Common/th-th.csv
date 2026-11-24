@@ -352,6 +352,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"ขออภัย เก�
 
 โปรดรอสักครู่แล้วลองอีกครั้ง"
 Authentication.Login.Label.ConnectionError.Title,เกิดข้อผิดพลาดในการเชื่อมต่อ
+Authentication.Login.Label.DontHaveARobloxAccountCreateOne,ยังไม่มีบัญชี Roblox ใช่ไหม? {startTag}สร้างบัญชี{endTag}
 Authentication.Login.Label.DontHaveAnAccountCreateOne,ยังไม่มีบัญชีใช่ไหม? {startTag}สร้างบัญชี{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,ที่อยู่อีเมล
@@ -1593,7 +1594,6 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,ค้นหาผู้�
 Feature.AddFriends.Label.ConnectWithContacts,เชิญเพื่อนจากรายชื่อผู้ติดต่อหรือเชื่อมต่อกับเพื่อนๆ ที่อยู่บน Roblox อยู่แล้วก็ได้!
 Feature.AddFriends.Label.ContactsTile,รายชื่อผู้ติดต่อ
 Feature.AddFriends.Label.DeclineAllBackgrounded,ปฏิเสธคำขอเป็นเพื่อนทั้งหมด การดำเนินการนี้อาจใช้เวลาสักครู่
-Feature.AddFriends.Label.EmptyStatePrompt,ใครที่คุณจะสำรวจ Roblox ด้วย? ค้นหาผู้ใช้เพื่อเพิ่มเป็นเพื่อนหรือเชื่อมต่อกับเพื่อนๆ ที่คุณรู้จักอยู่แล้วก็ได้!
 Feature.AddFriends.Label.FriendRequests,คำขอเป็นเพื่อน
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,ค้นหาผู้ใช้
 Feature.AddFriends.Label.MyQrCode,รหัส QR ของฉัน
@@ -2664,6 +2664,8 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,เกมทั้งหมด
 Feature.Build.Label.AmountAvailable,พร้อมใช้งาน {AMOUNT} ครั้ง
+Feature.Build.Label.AttachmentCountPlural,{count} รายการที่แนบ
+Feature.Build.Label.AttachmentCountSingular,1 รายการที่แนบ
 Feature.Build.Label.Autosaved,บันทึกอัตโนมัติแล้ว
 Feature.Build.Label.Available,พร้อมใช้งาน
 Feature.Build.Label.AvailableForPurchase,พร้อมให้ซื้อ
@@ -2683,6 +2685,7 @@ Feature.Build.Label.DefaultDeveloperProductName,ผลิตภัณฑ์น�
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,ลบแล้ว
 Feature.Build.Label.DescribeIdea,อธิบายไอเดีย
+Feature.Build.Label.DescribeIdeaOrPick,อธิบายไอเดียหรือเลือกจากด้านล่าง
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,คำอธิบาย: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,ชื่อ: {NAME}
@@ -3517,6 +3520,7 @@ Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,เลือกเพื่อลบออก
 Feature.Chat.Label.Sent,ส่งแล้ว
 Feature.Chat.Label.SnoozePartyNotifications,ปิดเสียงการแจ้งเตือนเกี่ยวกับ Party ในประสบการณ์สำหรับ:
+Feature.Chat.Label.StartChatting,เริ่มแชท
 Feature.Chat.Label.SwipeToReplyTooltip,ปัดเพื่อตอบกลับ
 Feature.Chat.Label.TapToRemove,แตะเพื่อลบออก
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} วัน
@@ -3867,7 +3871,6 @@ Feature.Friends.Error.UserBannedError,คุณถูกแบนไม่ให
 Feature.Friends.Error.UserBlockedError,คุณถูกบล็อคไม่ให้ดำเนินการนี้
 Feature.Friends.Error.UserNotPassedCaptcha,คุณทำ Captcha ไม่ผ่าน
 Feature.Friends.Feature.Friends.Heading.AddFriends,
-Feature.Friends.FriendingTooltipBody,คำขอเป็นเพื่อนบางคำขออาจมาจากผู้ใช้ที่หาคุณเจอจากเบอร์โทรศัพท์ของคุณ โปรดตรวจสอบให้แน่ใจว่าคุณรู้จักพวกเขาก่อนที่จะเป็นเพื่อน
 Feature.Friends.Heading.Activities,
 Feature.Friends.Heading.FilterBy,กรองตาม
 Feature.Friends.Heading.Friends,
@@ -3901,7 +3904,6 @@ Feature.Friends.Label.FriendOfUser,เพื่อนของ {displayName}
 Feature.Friends.Label.FriendOwns,เพื่อน 1 คนเป็นเจ้าของ
 Feature.Friends.Label.FriendRecentlyPlayed,<b>เพื่อน 1 คน</b>เพิ่งเล่นเมื่อเร็วๆ นี้
 Feature.Friends.Label.FriendRequest,
-Feature.Friends.Label.FriendingTooltip,เคล็ดลับในการหาเพื่อน
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,เพื่อนเปลี่ยนเป็นคนรู้จักแล้ว!
 Feature.Friends.Label.FriendsHintBold,มาเล่นกันเถอะ!
@@ -4109,6 +4111,8 @@ Feature.GameFollows.TooltipTurnedOnNotifications,"เปิดการแจ้
 Feature.GameJoin.Description.DifferentServer,คุณจะเริ่มในเซิร์ฟเวอร์อื่น
 Feature.GameJoin.Label.PlayTogether,คุณเล่นด้วยกันได้
 Feature.GameJoin.Label.PlayTogetherSoon,คุณจะเล่นด้วยกันได้เร็วๆ นี้
+Feature.GameJoin.Label.Played,เล่นแล้ว
+Feature.GameJoin.Label.RecentCoplay,คุณเพิ่งเล่นด้วยกันเมื่อไม่นานมานี้
 Feature.GamePage.Action.BackToTop,กลับไปด้านบน
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
@@ -5355,6 +5359,7 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,ข้อเสนอใช้ได้กับสมาชิก Plus รายใหม่เท่านั้น
 Feature.RobloxSubscription.Description.ReferralReferrerReward,เมื่อมีคนซื้อ Plus ด้วยลิงก์ของคุณ
 Feature.RobloxSubscription.Description.ReferralShare,ชวนเพื่อนมาใช้ Plus แล้วรับ {amount} Robux ไปเลยทั้งคู่เมื่อเพื่อนซื้อ Plus
+Feature.RobloxSubscription.Description.SpawnEffectsPlusUpsell,สมัครสมาชิก Plus เพื่อสำรวจสิทธิประโยชน์ต่างๆ เช่น เอฟเฟกต์การเกิดใหม่ และอีกมากมาย
 Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,รับเอฟเฟกต์การเกิดใหม่เมื่อสมัคร Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"การคลิก \u{201C}{ctaText}\u{201D} จะถือว่าคุณยอมรับ<a href=""{termsUrl}"">ข้อกำหนดการสมัครสมาชิกของ Roblox</a> โดยจะมีการเรียกเก็บเงินในแต่ละเดือนโดยอัตโนมัติจนกว่าคุณจะยกเลิก"
 Feature.RobloxSubscription.Heading.ReferralEntry,แชร์ Plus แล้วรับ {amount} Robux

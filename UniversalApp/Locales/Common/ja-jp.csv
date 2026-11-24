@@ -369,6 +369,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"申し訳ありません�
 
 しばらくしてからもう一度お試しください。"
 Authentication.Login.Label.ConnectionError.Title,接続エラー
+Authentication.Login.Label.DontHaveARobloxAccountCreateOne,Robloxアカウントをお持ちではありませんか？{startTag}作成する{endTag}
 Authentication.Login.Label.DontHaveAnAccountCreateOne,アカウントをお持ちではありませんか？{startTag}作成{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,
@@ -1610,7 +1611,6 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Robloxで人を見つけ�
 Feature.AddFriends.Label.ConnectWithContacts,連絡先にある人を招待するか、すでに知っている友達とロブロックスでつながりましょう！
 Feature.AddFriends.Label.ContactsTile,連絡先
 Feature.AddFriends.Label.DeclineAllBackgrounded,友達リクエストをすべて無視しています。数分かかるかもしれません。
-Feature.AddFriends.Label.EmptyStatePrompt,誰と一緒にRobloxを楽しみますか？新しくつながる人を検索したり、すでに知っている友達とつながりましょう！
 Feature.AddFriends.Label.FriendRequests,友達リクエスト
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,人をサーチ
 Feature.AddFriends.Label.MyQrCode,マイQRコード
@@ -2681,6 +2681,8 @@ Feature.Build.Label.AdvancedModel,詳細選択
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,すべてのゲーム
 Feature.Build.Label.AmountAvailable,残り{AMOUNT}
+Feature.Build.Label.AttachmentCountPlural,{count}件のアタッチメント
+Feature.Build.Label.AttachmentCountSingular,1件のアタッチメント
 Feature.Build.Label.Autosaved,自動保存済み
 Feature.Build.Label.Available,利用可能
 Feature.Build.Label.AvailableForPurchase,購入可能
@@ -2700,6 +2702,7 @@ Feature.Build.Label.DefaultDeveloperProductName,開発者製品
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,削除済み
 Feature.Build.Label.DescribeIdea,アイデアを説明してください
+Feature.Build.Label.DescribeIdeaOrPick,アイデアを説明するか、以下から1つ選んでください
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,説明：{DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,製品名：{NAME}
@@ -3534,6 +3537,7 @@ Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,選択して削除
 Feature.Chat.Label.Sent,送信済み
 Feature.Chat.Label.SnoozePartyNotifications,以下のバーチャル空間内パーティ通知をミュート:
+Feature.Chat.Label.StartChatting,チャットを始める
 Feature.Chat.Label.SwipeToReplyTooltip,スワイプして返信
 Feature.Chat.Label.TapToRemove,タップして削除
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}日
@@ -3884,7 +3888,6 @@ Feature.Friends.Error.UserBannedError,あなたがこの操作をすることは
 Feature.Friends.Error.UserBlockedError,ブロックされているため、あなたがこの操作をすることはできません。
 Feature.Friends.Error.UserNotPassedCaptcha,Captcha 認証をクリアしていません。
 Feature.Friends.Feature.Friends.Heading.AddFriends,
-Feature.Friends.FriendingTooltipBody,電話番号であなたを見つけたユーザーからの友達リクエストがあるかもしれません。友達になる前に、実際に相手を知っているかどうかを確認してください。
 Feature.Friends.Heading.Activities,
 Feature.Friends.Heading.FilterBy,並べ替え：
 Feature.Friends.Heading.Friends,
@@ -3918,7 +3921,6 @@ Feature.Friends.Label.FriendOfUser,{displayName}の友達
 Feature.Friends.Label.FriendOwns,友達1人が持っています
 Feature.Friends.Label.FriendRecentlyPlayed,<b>友達1人が</b>最近プレイしました
 Feature.Friends.Label.FriendRequest,
-Feature.Friends.Label.FriendingTooltip,友達申請のヒント
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,「友達」が「つながり」に変わりました！
 Feature.Friends.Label.FriendsHintBold,プレイしよう！
@@ -4126,6 +4128,8 @@ Feature.GameFollows.TooltipTurnedOnNotifications,{experienceName} の通知を�
 Feature.GameJoin.Description.DifferentServer,別のサーバーで開始します
 Feature.GameJoin.Label.PlayTogether,一緒にプレイできます
 Feature.GameJoin.Label.PlayTogetherSoon,もうすぐ一緒にプレイできるようになります
+Feature.GameJoin.Label.Played,プレイ済み
+Feature.GameJoin.Label.RecentCoplay,最近一緒にプレイしました
 Feature.GamePage.Action.BackToTop,トップに戻る
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
@@ -5370,6 +5374,7 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,このオファーは、新規のPlus会員のみが対象です。
 Feature.RobloxSubscription.Description.ReferralReferrerReward,相手があなたのリンクからPlusを定期購入した場合。
 Feature.RobloxSubscription.Description.ReferralShare,Plusに招待した相手がPlusを定期購入すると、お互いに{amount} Robuxを獲得できます。
+Feature.RobloxSubscription.Description.SpawnEffectsPlusUpsell,Plusを定期購入して、スポーンエフェクトなどの特典をお楽しみください。
 Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,Plusでスポーンエフェクトを活用
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D}をクリックすると、<a href=""{termsUrl}"">Roblox定期購入規約</a>に同意したとみなされます。キャンセルするまで、毎月自動的に料金が課金されます。"
 Feature.RobloxSubscription.Heading.ReferralEntry,Plusをシェアして、{amount} Robuxを獲得

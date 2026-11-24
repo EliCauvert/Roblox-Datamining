@@ -369,6 +369,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Üzgünüz, sunucularımı
 
 Lütfen biraz bekleyip tekrar dene."
 Authentication.Login.Label.ConnectionError.Title,Bağlantı Hatası
+Authentication.Login.Label.DontHaveARobloxAccountCreateOne,Roblox hesabın yok mu? {startTag}Bir hesap oluştur{endTag}
 Authentication.Login.Label.DontHaveAnAccountCreateOne,Hesabın yok mu? {startTag}Bir hesap oluştur{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,E-posta adresi
@@ -1566,7 +1567,6 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Kullanıcı adlarını vey
 Feature.AddFriends.Label.ConnectWithContacts,Rehberindeki kişileri davet et veya hâlihazırda Roblox'ta olan arkadaşlarınla bağlantı kur!
 Feature.AddFriends.Label.ContactsTile,Kişiler
 Feature.AddFriends.Label.DeclineAllBackgrounded,"Tüm arkadaş istekleri yok sayılıyor. Bu işlem, biraz zaman alabilir."
-Feature.AddFriends.Label.EmptyStatePrompt,Roblox'u kiminle keşfedeceksin? Eklemek istediğin kişileri ara veya zaten tanıdığın arkadaşlarınla bağlantı kur!
 Feature.AddFriends.Label.FriendRequests,Arkadaş İstekleri
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,İnsanlar ara
 Feature.AddFriends.Label.MyQrCode,QR Kodum
@@ -2637,6 +2637,8 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,Tüm oyunlar
 Feature.Build.Label.AmountAvailable,{AMOUNT} mevcut
+Feature.Build.Label.AttachmentCountPlural,{count} eklenti
+Feature.Build.Label.AttachmentCountSingular,1 eklenti
 Feature.Build.Label.Autosaved,Otomatik olarak kaydedildi
 Feature.Build.Label.Available,mevcut
 Feature.Build.Label.AvailableForPurchase,Satın alınabilir
@@ -2656,6 +2658,7 @@ Feature.Build.Label.DefaultDeveloperProductName,geliştirici ürünü
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,Silindi
 Feature.Build.Label.DescribeIdea,Fikrini tarif et
+Feature.Build.Label.DescribeIdeaOrPick,Fikrini anlat veya aşağıdakilerden birini seç
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,Açıklama: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Ad: {NAME}
@@ -3490,6 +3493,7 @@ Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,Kaldırmak için seç
 Feature.Chat.Label.Sent,Gönderildi
 Feature.Chat.Label.SnoozePartyNotifications,Deneyim içi parti bildirimlerini sustur:
+Feature.Chat.Label.StartChatting,Sohbete başla
 Feature.Chat.Label.SwipeToReplyTooltip,Yanıtlamak için kaydır
 Feature.Chat.Label.TapToRemove,Kaldırmak için dokun
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} gün
@@ -3840,7 +3844,6 @@ Feature.Friends.Error.UserBannedError,Bu işlemi gerçekleştirmen yasaklandı.
 Feature.Friends.Error.UserBlockedError,Bu işlemi gerçekleştirmen engellendi.
 Feature.Friends.Error.UserNotPassedCaptcha,Captcha'yı geçemedin.
 Feature.Friends.Feature.Friends.Heading.AddFriends,
-Feature.Friends.FriendingTooltipBody,"Bazı arkadaşlık istekleri, seni telefon numarandan bulan kullanıcılardan gelebilir. Arkadaş olmadan önce onları tanıdığından emin ol."
 Feature.Friends.Heading.Activities,Etkinlikler
 Feature.Friends.Heading.FilterBy,Filtrele
 Feature.Friends.Heading.Friends,
@@ -3874,7 +3877,6 @@ Feature.Friends.Label.FriendOfUser,{displayName} ile arkadaş
 Feature.Friends.Label.FriendOwns,1 Arkadaşında var
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 Arkadaşın</b> yakın zamanda oynadı
 Feature.Friends.Label.FriendRequest,
-Feature.Friends.Label.FriendingTooltip,Arkadaşlık Tavsiyesi
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,Arkadaşlar artık Etkileşim Ağı oldu!
 Feature.Friends.Label.FriendsHintBold,Hadi oynayalım!
@@ -4082,6 +4084,8 @@ Feature.GameFollows.TooltipTurnedOnNotifications,{experienceName} için bildirim
 Feature.GameJoin.Description.DifferentServer,Farklı bir sunucuda başlayacaksın
 Feature.GameJoin.Label.PlayTogether,Birlikte oynayabilirsiniz
 Feature.GameJoin.Label.PlayTogetherSoon,Yakında birlikte oynayabileceksiniz
+Feature.GameJoin.Label.Played,oynandı
+Feature.GameJoin.Label.RecentCoplay,Yakın zamanda beraber oynadınız
 Feature.GamePage.Action.BackToTop,Başa dön
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
@@ -5328,6 +5332,7 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,Teklif yalnızca yeni Plus aboneleri için geçerlidir.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,Herhangi biri senin bağlantınla Plus satın aldığında.
 Feature.RobloxSubscription.Description.ReferralShare,Birini Plus'a davet et; o Plus'ı satın aldığında ikiniz de {amount} Robux kazanın.
+Feature.RobloxSubscription.Description.SpawnEffectsPlusUpsell,Yeniden doğma efektleri ve daha pek çok avantajı keşfetmek için Plus'a abone ol.
 Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,Plus ile yeniden doğma alanı efektleri edin
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D} düğmesine tıklayarak <a href=""{termsUrl}"">Roblox Abonelik Koşulları</a>'nı kabul etmiş olursun. Sen iptal edene kadar her ay otomatik tahsilat yapılır."
 Feature.RobloxSubscription.Heading.ReferralEntry,Plus'ı paylaşarak {amount} Robux kazan
