@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "97ae48dc-1ca6-9468-fb37-233bfbbac0eb")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "48c4eab1-d960-bad0-26ee-af1f459fa20c")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 225287, e => {
@@ -1127,23 +1127,25 @@
     var t, n, r, o = e.i(785517);
     e.i(805290);
     var a = e.i(643766),
-        i = e.i(415858),
-        l = e.i(79187),
-        s = e.i(67243),
-        c = e.i(870999),
-        u = e.i(47277),
-        d = e.i(433285),
-        p = e.i(899627);
-    e.i(446475), e.i(463655), e.i(242930), e.i(534516), e.i(350898), e.i(148792), e.i(402976), e.i(8994), e.i(397407), e.i(77326), e.i(563045), e.i(811314);
-    var v = function(e, t) {
-        return (v = Object.setPrototypeOf || ({
-            __proto__: []
-        }) instanceof Array && function(e, t) {
-            e.__proto__ = t
-        } || function(e, t) {
-            for (var n in t) Object.prototype.hasOwnProperty.call(t, n) && (e[n] = t[n])
-        })(e, t)
-    };
+        i = e.i(79187);
+    e.i(446475);
+    var l = e.i(67243);
+    e.i(463655), e.i(242930);
+    var s = e.i(870999),
+        c = e.i(47277);
+    e.i(534516), e.i(350898), e.i(148792), e.i(402976), e.i(8994), e.i(397407), e.i(77326), e.i(563045), e.i(811314);
+    var u = e.i(433285),
+        d = e.i(899627),
+        p = e.i(415858),
+        v = function(e, t) {
+            return (v = Object.setPrototypeOf || ({
+                __proto__: []
+            }) instanceof Array && function(e, t) {
+                e.__proto__ = t
+            } || function(e, t) {
+                for (var n in t) Object.prototype.hasOwnProperty.call(t, n) && (e[n] = t[n])
+            })(e, t)
+        };
 
     function h(e, t, n, r) {
         return new(n || (n = Promise))(function(o, a) {
@@ -1248,8 +1250,8 @@
     function f(e) {
         var t;
         return null == (t = e) ? t : {
-            labelTranslationKey: (0, i.u)(t, "labelTranslationKey") ? t.labelTranslationKey : void 0,
-            utteranceText: (0, i.u)(t, "utteranceText") ? t.utteranceText : void 0
+            labelTranslationKey: (0, p.u)(t, "labelTranslationKey") ? t.labelTranslationKey : void 0,
+            utteranceText: (0, p.u)(t, "utteranceText") ? t.utteranceText : void 0
         }
     }
     "function" == typeof SuppressedError && SuppressedError;
@@ -1258,7 +1260,7 @@
         var t;
         return null == (t = e) ? t : {
             fieldId: t.field_id,
-            required: (0, i.u)(t, "required") ? t.required : void 0
+            required: (0, p.u)(t, "required") ? t.required : void 0
         }
     }
 
@@ -1266,22 +1268,22 @@
         var t, n, r;
         return null == (t = e) ? t : {
             actionId: t.action_id,
-            archivedAt: (0, i.u)(t, "archived_at") ? t.archived_at : void 0,
+            archivedAt: (0, p.u)(t, "archived_at") ? t.archived_at : void 0,
             associatedEntityType: t.associated_entity_type,
-            createdAt: (0, i.u)(t, "created_at") ? t.created_at : void 0,
+            createdAt: (0, p.u)(t, "created_at") ? t.created_at : void 0,
             description: t.description,
-            fields: (0, i.A)(t.fields, b),
+            fields: (0, p.A)(t.fields, b),
             handler: null == (n = t.handler) ? n : {
                 handlerType: n.handler_type,
                 path: n.path
             },
-            reversalHandler: (0, i.u)(t, "reversal_handler") ? null == (r = t.reversal_handler) ? r : {
+            reversalHandler: (0, p.u)(t, "reversal_handler") ? null == (r = t.reversal_handler) ? r : {
                 handlerType: r.handler_type,
                 path: r.path
             } : void 0,
             teamId: t.team_id,
-            updatedAt: (0, i.u)(t, "updated_at") ? t.updated_at : void 0,
-            updatedBy: (0, i.u)(t, "updated_by") ? t.updated_by : void 0
+            updatedAt: (0, p.u)(t, "updated_at") ? t.updated_at : void 0,
+            updatedBy: (0, p.u)(t, "updated_by") ? t.updated_by : void 0
         }
     }
     var g = function(e) {
@@ -1309,7 +1311,7 @@
                                 query: t
                             }, e)];
                         case 1:
-                            return r = o.sent(), [2, new i.H(r)]
+                            return r = o.sent(), [2, new p.H(r)]
                     }
                 })
             })
@@ -1340,7 +1342,7 @@
                                 query: t
                             }, e)];
                         case 1:
-                            return r = o.sent(), [2, new i.H(r)]
+                            return r = o.sent(), [2, new p.H(r)]
                     }
                 })
             })
@@ -1363,8 +1365,8 @@
                 return m(this, function(a) {
                     switch (a.label) {
                         case 0:
-                            if (null === e.accountId || void 0 === e.accountId) throw new i.w("accountId", "Required parameter requestParameters.accountId was null or undefined when calling behaviorInterventionGetAction.");
-                            if (null === e.actionId || void 0 === e.actionId) throw new i.w("actionId", "Required parameter requestParameters.actionId was null or undefined when calling behaviorInterventionGetAction.");
+                            if (null === e.accountId || void 0 === e.accountId) throw new p.w("accountId", "Required parameter requestParameters.accountId was null or undefined when calling behaviorInterventionGetAction.");
+                            if (null === e.actionId || void 0 === e.actionId) throw new p.w("actionId", "Required parameter requestParameters.actionId was null or undefined when calling behaviorInterventionGetAction.");
                             return n = {}, r = {}, [4, this.request({
                                 path: "/v1/accounts/{accountId}/action/{actionId}".replace("{".concat("accountId", "}"), encodeURIComponent(String(e.accountId))).replace("{".concat("actionId", "}"), encodeURIComponent(String(e.actionId))),
                                 schemaPath: "/v1/accounts/{accountId}/action/{actionId}",
@@ -1373,7 +1375,7 @@
                                 query: n
                             }, t)];
                         case 1:
-                            return o = a.sent(), [2, new i.H(o, function(e) {
+                            return o = a.sent(), [2, new p.H(o, function(e) {
                                 return y(e)
                             })]
                     }
@@ -1406,39 +1408,39 @@
                                 query: n
                             }, t)];
                         case 1:
-                            return o = a.sent(), [2, new i.H(o, function(e) {
+                            return o = a.sent(), [2, new p.H(o, function(e) {
                                 var t, n, r;
                                 return null == e ? e : {
-                                    acknowledgeable: (0, i.u)(e, "acknowledgeable") ? e.acknowledgeable : void 0,
-                                    badUtterances: (0, i.u)(e, "badUtterances") ? e.badUtterances.map(f) : void 0,
-                                    beginDate: (0, i.u)(e, "beginDate") ? new Date(e.beginDate) : void 0,
-                                    consequenceTransparencyMessage: (0, i.u)(e, "consequenceTransparencyMessage") ? e.consequenceTransparencyMessage : void 0,
-                                    context: (0, i.u)(e, "context") ? e.context : void 0,
-                                    duration: (0, i.u)(e, "duration") ? e.duration : void 0,
-                                    endDate: (0, i.u)(e, "endDate") ? new Date(e.endDate) : void 0,
-                                    interventionId: (0, i.u)(e, "interventionId") ? e.interventionId : void 0,
-                                    isForeshadowingConsequenceEnabled: (0, i.u)(e, "isForeshadowingConsequenceEnabled") ? e.isForeshadowingConsequenceEnabled : void 0,
-                                    labelTranslationKey: (0, i.u)(e, "labelTranslationKey") ? e.labelTranslationKey : void 0,
-                                    messageToUser: (0, i.u)(e, "messageToUser") ? e.messageToUser : void 0,
-                                    punishedUserId: (0, i.u)(e, "punishedUserId") ? e.punishedUserId : void 0,
-                                    punishmentId: (0, i.u)(e, "punishmentId") ? e.punishmentId : void 0,
-                                    punishmentTypeDescription: (0, i.u)(e, "punishmentTypeDescription") ? e.punishmentTypeDescription : void 0,
-                                    showAppealsProcessLink: (0, i.u)(e, "showAppealsProcessLink") ? e.showAppealsProcessLink : void 0,
-                                    showUGCAvatarGuidelinesLink: (0, i.u)(e, "showUGCAvatarGuidelinesLink") ? e.showUGCAvatarGuidelinesLink : void 0,
-                                    verificationCategory: (0, i.u)(e, "verificationCategory") ? e.verificationCategory : void 0,
-                                    violation: (0, i.u)(e, "violation") ? null == (t = e.violation) ? t : {
-                                        abuseTypeTranslationKeys: (0, i.u)(t, "abuseTypeTranslationKeys") ? t.abuseTypeTranslationKeys : void 0,
-                                        evidence: (0, i.u)(t, "evidence") ? null == (n = t.evidence) ? n : {
-                                            displayMeta: (0, i.u)(n, "displayMeta") ? null == (r = n.displayMeta) ? r : {
-                                                capitalizedKey: (0, i.u)(r, "capitalizedKey") ? r.capitalizedKey : void 0,
-                                                icon: (0, i.u)(r, "icon") ? r.icon : void 0,
-                                                lowercaseKey: (0, i.u)(r, "lowercaseKey") ? r.lowercaseKey : void 0
+                                    acknowledgeable: (0, p.u)(e, "acknowledgeable") ? e.acknowledgeable : void 0,
+                                    badUtterances: (0, p.u)(e, "badUtterances") ? e.badUtterances.map(f) : void 0,
+                                    beginDate: (0, p.u)(e, "beginDate") ? new Date(e.beginDate) : void 0,
+                                    consequenceTransparencyMessage: (0, p.u)(e, "consequenceTransparencyMessage") ? e.consequenceTransparencyMessage : void 0,
+                                    context: (0, p.u)(e, "context") ? e.context : void 0,
+                                    duration: (0, p.u)(e, "duration") ? e.duration : void 0,
+                                    endDate: (0, p.u)(e, "endDate") ? new Date(e.endDate) : void 0,
+                                    interventionId: (0, p.u)(e, "interventionId") ? e.interventionId : void 0,
+                                    isForeshadowingConsequenceEnabled: (0, p.u)(e, "isForeshadowingConsequenceEnabled") ? e.isForeshadowingConsequenceEnabled : void 0,
+                                    labelTranslationKey: (0, p.u)(e, "labelTranslationKey") ? e.labelTranslationKey : void 0,
+                                    messageToUser: (0, p.u)(e, "messageToUser") ? e.messageToUser : void 0,
+                                    punishedUserId: (0, p.u)(e, "punishedUserId") ? e.punishedUserId : void 0,
+                                    punishmentId: (0, p.u)(e, "punishmentId") ? e.punishmentId : void 0,
+                                    punishmentTypeDescription: (0, p.u)(e, "punishmentTypeDescription") ? e.punishmentTypeDescription : void 0,
+                                    showAppealsProcessLink: (0, p.u)(e, "showAppealsProcessLink") ? e.showAppealsProcessLink : void 0,
+                                    showUGCAvatarGuidelinesLink: (0, p.u)(e, "showUGCAvatarGuidelinesLink") ? e.showUGCAvatarGuidelinesLink : void 0,
+                                    verificationCategory: (0, p.u)(e, "verificationCategory") ? e.verificationCategory : void 0,
+                                    violation: (0, p.u)(e, "violation") ? null == (t = e.violation) ? t : {
+                                        abuseTypeTranslationKeys: (0, p.u)(t, "abuseTypeTranslationKeys") ? t.abuseTypeTranslationKeys : void 0,
+                                        evidence: (0, p.u)(t, "evidence") ? null == (n = t.evidence) ? n : {
+                                            displayMeta: (0, p.u)(n, "displayMeta") ? null == (r = n.displayMeta) ? r : {
+                                                capitalizedKey: (0, p.u)(r, "capitalizedKey") ? r.capitalizedKey : void 0,
+                                                icon: (0, p.u)(r, "icon") ? r.icon : void 0,
+                                                lowercaseKey: (0, p.u)(r, "lowercaseKey") ? r.lowercaseKey : void 0
                                             } : void 0,
-                                            elements: (0, i.u)(n, "elements") ? n.elements : void 0,
-                                            elementsObj: (0, i.u)(n, "elementsObj") ? n.elementsObj : void 0,
-                                            type: (0, i.u)(n, "type") ? n.type : void 0
+                                            elements: (0, p.u)(n, "elements") ? n.elements : void 0,
+                                            elementsObj: (0, p.u)(n, "elementsObj") ? n.elementsObj : void 0,
+                                            type: (0, p.u)(n, "type") ? n.type : void 0
                                         } : void 0,
-                                        uid: (0, i.u)(t, "uid") ? t.uid : void 0
+                                        uid: (0, p.u)(t, "uid") ? t.uid : void 0
                                     } : void 0
                                 }
                             })]
@@ -1472,14 +1474,14 @@
                                 query: t
                             }, e)];
                         case 1:
-                            return r = o.sent(), [2, new i.H(r, function(e) {
+                            return r = o.sent(), [2, new p.H(r, function(e) {
                                 return null == e ? e : {
-                                    contentVariant: (0, i.u)(e, "contentVariant") ? e.contentVariant : void 0,
-                                    experimentVariant: (0, i.u)(e, "experimentVariant") ? e.experimentVariant : void 0,
-                                    interventionId: (0, i.u)(e, "interventionId") ? e.interventionId : void 0,
-                                    policyViolation: (0, i.u)(e, "policyViolation") ? e.policyViolation : void 0,
-                                    reminderNumber: (0, i.u)(e, "reminderNumber") ? e.reminderNumber : void 0,
-                                    shouldSurfaceReminder: (0, i.u)(e, "shouldSurfaceReminder") ? e.shouldSurfaceReminder : void 0
+                                    contentVariant: (0, p.u)(e, "contentVariant") ? e.contentVariant : void 0,
+                                    experimentVariant: (0, p.u)(e, "experimentVariant") ? e.experimentVariant : void 0,
+                                    interventionId: (0, p.u)(e, "interventionId") ? e.interventionId : void 0,
+                                    policyViolation: (0, p.u)(e, "policyViolation") ? e.policyViolation : void 0,
+                                    reminderNumber: (0, p.u)(e, "reminderNumber") ? e.reminderNumber : void 0,
+                                    shouldSurfaceReminder: (0, p.u)(e, "shouldSurfaceReminder") ? e.shouldSurfaceReminder : void 0
                                 }
                             })]
                     }
@@ -1512,7 +1514,7 @@
                                 query: t
                             }, e)];
                         case 1:
-                            return r = o.sent(), this.isJsonMime(r.headers.get("content-type")) ? [2, new i.H(r)] : [2, new i.U(r)]
+                            return r = o.sent(), this.isJsonMime(r.headers.get("content-type")) ? [2, new p.H(r)] : [2, new p.U(r)]
                     }
                 })
             })
@@ -1543,7 +1545,7 @@
                                 query: t
                             }, e)];
                         case 1:
-                            return r = o.sent(), [2, new i.H(r)]
+                            return r = o.sent(), [2, new p.H(r)]
                     }
                 })
             })
@@ -1566,7 +1568,7 @@
                 return m(this, function(a) {
                     switch (a.label) {
                         case 0:
-                            if (null === e.accountId || void 0 === e.accountId) throw new i.w("accountId", "Required parameter requestParameters.accountId was null or undefined when calling behaviorInterventionListActions.");
+                            if (null === e.accountId || void 0 === e.accountId) throw new p.w("accountId", "Required parameter requestParameters.accountId was null or undefined when calling behaviorInterventionListActions.");
                             return n = {}, r = {}, [4, this.request({
                                 path: "/v1/accounts/{accountId}/actions".replace("{".concat("accountId", "}"), encodeURIComponent(String(e.accountId))),
                                 schemaPath: "/v1/accounts/{accountId}/actions",
@@ -1575,9 +1577,9 @@
                                 query: n
                             }, t)];
                         case 1:
-                            return o = a.sent(), [2, new i.H(o, function(e) {
+                            return o = a.sent(), [2, new p.H(o, function(e) {
                                 return null == e ? e : {
-                                    actions: (0, i.u)(e, "actions") ? e.actions.map(y) : void 0
+                                    actions: (0, p.u)(e, "actions") ? e.actions.map(y) : void 0
                                 }
                             })]
                     }
@@ -1602,7 +1604,7 @@
                 return m(this, function(a) {
                     switch (a.label) {
                         case 0:
-                            if (null === e.accountId || void 0 === e.accountId) throw new i.w("accountId", "Required parameter requestParameters.accountId was null or undefined when calling behaviorInterventionListInterventions.");
+                            if (null === e.accountId || void 0 === e.accountId) throw new p.w("accountId", "Required parameter requestParameters.accountId was null or undefined when calling behaviorInterventionListInterventions.");
                             return n = {}, r = {}, [4, this.request({
                                 path: "/v1/accounts/{account_id}/interventions".replace("{".concat("account_id", "}"), encodeURIComponent(String(e.accountId))),
                                 schemaPath: "/v1/accounts/{account_id}/interventions",
@@ -1611,7 +1613,7 @@
                                 query: n
                             }, t)];
                         case 1:
-                            return o = a.sent(), [2, new i.H(o)]
+                            return o = a.sent(), [2, new p.H(o)]
                     }
                 })
             })
@@ -1634,9 +1636,9 @@
                 return m(this, function(a) {
                     switch (a.label) {
                         case 0:
-                            if (null === e.accountId || void 0 === e.accountId) throw new i.w("accountId", "Required parameter requestParameters.accountId was null or undefined when calling behaviorInterventionListUserInterventions.");
-                            if (null === e.userId || void 0 === e.userId) throw new i.w("userId", "Required parameter requestParameters.userId was null or undefined when calling behaviorInterventionListUserInterventions.");
-                            if (null === e.pageSize || void 0 === e.pageSize) throw new i.w("pageSize", "Required parameter requestParameters.pageSize was null or undefined when calling behaviorInterventionListUserInterventions.");
+                            if (null === e.accountId || void 0 === e.accountId) throw new p.w("accountId", "Required parameter requestParameters.accountId was null or undefined when calling behaviorInterventionListUserInterventions.");
+                            if (null === e.userId || void 0 === e.userId) throw new p.w("userId", "Required parameter requestParameters.userId was null or undefined when calling behaviorInterventionListUserInterventions.");
+                            if (null === e.pageSize || void 0 === e.pageSize) throw new p.w("pageSize", "Required parameter requestParameters.pageSize was null or undefined when calling behaviorInterventionListUserInterventions.");
                             return n = {}, void 0 !== e.pageSize && (n.page_size = e.pageSize), void 0 !== e.pageToken && (n.page_token = e.pageToken), void 0 !== e.includeDryRun && (n.include_dry_run = e.includeDryRun), r = {}, [4, this.request({
                                 path: "/v1/accounts/{account_id}/interventions/robloxUsers/{user_id}".replace("{".concat("account_id", "}"), encodeURIComponent(String(e.accountId))).replace("{".concat("user_id", "}"), encodeURIComponent(String(e.userId))),
                                 schemaPath: "/v1/accounts/{account_id}/interventions/robloxUsers/{user_id}",
@@ -1645,10 +1647,10 @@
                                 query: n
                             }, t)];
                         case 1:
-                            return o = a.sent(), [2, new i.H(o, function(e) {
+                            return o = a.sent(), [2, new p.H(o, function(e) {
                                 return null == e ? e : {
-                                    interventions: (0, i.u)(e, "interventions") ? e.interventions : void 0,
-                                    nextPageToken: (0, i.u)(e, "nextPageToken") ? e.nextPageToken : void 0
+                                    interventions: (0, p.u)(e, "interventions") ? e.interventions : void 0,
+                                    nextPageToken: (0, p.u)(e, "nextPageToken") ? e.nextPageToken : void 0
                                 }
                             })]
                     }
@@ -1681,7 +1683,7 @@
                                 query: t
                             }, e)];
                         case 1:
-                            return r = o.sent(), [2, new i.H(r)]
+                            return r = o.sent(), [2, new p.H(r)]
                     }
                 })
             })
@@ -1699,7 +1701,7 @@
                 })
             })
         }, t
-    }(i._);
+    }(p._);
     e.s(["P", 0, {
         Communication: "communication",
         ExperienceChat: "experience_chat",
@@ -1718,118 +1720,8 @@
         _ = e.i(576205),
         k = e.i(845792),
         S = e.i(225287);
-    let R = ["https://users.roblox.com/v1/users/authenticated", "https://users.sitetest1.robloxlabs.com/v1/users/authenticated", "https://users.sitetest2.robloxlabs.com/v1/users/authenticated", "https://users.sitetest3.robloxlabs.com/v1/users/authenticated"],
-        A = (0, s.f)()(() => ({
-            background: {
-                marginTop: 68,
-                marginBottom: 68
-            },
-            button: {
-                marginTop: 12
-            }
-        })),
-        T = e => {
-            let {
-                src: t,
-                onReload: n
-            } = e, {
-                translate: r
-            } = (0, l.A)(), {
-                classes: {
-                    background: o,
-                    button: i
-                }
-            } = A();
-            return a.default.createElement(c.f, {
-                container: !0,
-                classes: {
-                    root: o
-                },
-                direction: "column",
-                alignItems: "center"
-            }, a.default.createElement(c.f, {
-                container: !0,
-                item: !0,
-                justifyContent: "center"
-            }, a.default.createElement("img", {
-                src: t,
-                alt: "Error Illustration",
-                width: "192px",
-                height: "192px"
-            })), a.default.createElement(c.f, {
-                container: !0,
-                item: !0,
-                direction: "column",
-                justifyContent: "center",
-                alignItems: "center"
-            }, a.default.createElement(u.f, {
-                variant: "h6",
-                align: "center"
-            }, r("Heading.FailedToLoadPage")), a.default.createElement(u.f, {
-                color: "secondary",
-                align: "center"
-            }, r("Message.FailedToLoadPage")), a.default.createElement(d.f, {
-                classes: {
-                    root: i
-                },
-                variant: "outlined",
-                color: "secondary",
-                onClick: n
-            }, r("Action.FailedToLoadPage"))))
-        };
-
-    function P(e) {
-        let t = e.displayName || e.name || "Component",
-            n = t => a.default.createElement(p.f, null, a.default.createElement(e, t));
-        return n.displayName = "withTheme(".concat(t, ")"), n
-    }
-    P(T);
-    let M = (0, s.f)()(() => ({
-            background: {
-                marginTop: 68,
-                marginBottom: 68
-            }
-        })),
-        j = () => {
-            let {
-                translate: e
-            } = (0, l.A)(), {
-                classes: {
-                    background: t
-                }
-            } = M();
-            return a.default.createElement(c.f, {
-                container: !0,
-                classes: {
-                    root: t
-                },
-                direction: "column",
-                alignItems: "center"
-            }, a.default.createElement(c.f, {
-                container: !0,
-                item: !0,
-                justifyContent: "center"
-            }, a.default.createElement("img", {
-                src: "751a3e023908351b.png",
-                alt: "Error Illustration",
-                width: "192px",
-                height: "192px"
-            })), a.default.createElement(c.f, {
-                container: !0,
-                item: !0,
-                direction: "column",
-                justifyContent: "center",
-                alignItems: "center"
-            }, a.default.createElement(u.f, {
-                variant: "h6",
-                align: "center"
-            }, e("Heading.AccessDenied")), a.default.createElement(u.f, {
-                color: "secondary",
-                align: "center"
-            }, e("Description.AccessDenied"))))
-        };
-    P(j), (t = {})[t.Reactivate = 0] = "Reactivate", t[t.RobloxRedirect = 1] = "RobloxRedirect", t[t.RequestAppeal = 2] = "RequestAppeal", (n = {}).ModerationModalImpressionEvent = "moderationModalImpression", n.ModerationModalReactivateEvent = "moderationModalReactivate", n.ModerationModalLogoutEvent = "moderationModalLogout", (r = {}).Warn = "Warn", r.Delete = "Delete", r.Hour1 = "Ban 1 Hour", r.Hour6 = "Ban 6 Hours", r.Day1 = "Ban 1 Day", r.Day3 = "Ban 3 Days", r.Day7 = "Ban 7 Days", r.Day14 = "Ban 14 Days", r.Month6 = "Ban 6 Months", r.Year1 = "Ban 1 Year";
-    let E = w.z.object({
+    (t = {})[t.Reactivate = 0] = "Reactivate", t[t.RobloxRedirect = 1] = "RobloxRedirect", t[t.RequestAppeal = 2] = "RequestAppeal", (n = {}).ModerationModalImpressionEvent = "moderationModalImpression", n.ModerationModalReactivateEvent = "moderationModalReactivate", n.ModerationModalLogoutEvent = "moderationModalLogout", (r = {}).Warn = "Warn", r.Delete = "Delete", r.Hour1 = "Ban 1 Hour", r.Hour6 = "Ban 6 Hours", r.Day1 = "Ban 1 Day", r.Day3 = "Ban 3 Days", r.Day7 = "Ban 7 Days", r.Day14 = "Ban 14 Days", r.Month6 = "Ban 6 Months", r.Year1 = "Ban 1 Year";
+    let R = w.z.object({
             type: I.z.literal("platform"),
             displayMeta: C.optional(w.z.object({
                 lowercaseKey: x.z.string().min(1),
@@ -1838,7 +1730,7 @@
             })),
             elements: C.optional(_.z.array(k.z.unknown()))
         }),
-        q = S.z.discriminatedUnion("type", [w.z.object({
+        A = S.z.discriminatedUnion("type", [w.z.object({
             type: I.z.literal("text"),
             labelKey: x.z.string(),
             text: x.z.string()
@@ -1847,49 +1739,159 @@
             labelKey: x.z.string(),
             url: x.z.string(),
             altLabelKey: C.optional(x.z.string())
-        })]);
-    E.merge(w.z.object({
-        elements: C.optional(_.z.array(q))
-    })), (0, s.f)()(e => ({
-        image: {
-            maxWidth: 212,
-            maxHeight: 212,
-            borderRadius: 8
-        },
-        boldText: {
-            fontWeight: e.typography.fontWeightBold
-        },
-        moderatorNote: {
-            maxWidth: 900
-        },
-        alert: {
-            marginLeft: 20,
-            marginRight: 20
-        }
-    })), e.s(["a", 0, j, "D", 0, T, "A", 0, e => {
+        })]),
+        T = (R.merge(w.z.object({
+            elements: C.optional(_.z.array(A))
+        })), (0, l.f)()(e => ({
+            image: {
+                maxWidth: 212,
+                maxHeight: 212,
+                borderRadius: 8
+            },
+            boldText: {
+                fontWeight: e.typography.fontWeightBold
+            },
+            moderatorNote: {
+                maxWidth: 900
+            },
+            alert: {
+                marginLeft: 20,
+                marginRight: 20
+            }
+        })), ["https://users.roblox.com/v1/users/authenticated", "https://users.sitetest1.robloxlabs.com/v1/users/authenticated", "https://users.sitetest2.robloxlabs.com/v1/users/authenticated", "https://users.sitetest3.robloxlabs.com/v1/users/authenticated"]),
+        P = (0, l.f)()(() => ({
+            background: {
+                marginTop: 68,
+                marginBottom: 68
+            },
+            button: {
+                marginTop: 12
+            }
+        })),
+        M = e => {
+            let {
+                src: t,
+                onReload: n
+            } = e, {
+                translate: r
+            } = (0, i.A)(), {
+                classes: {
+                    background: o,
+                    button: l
+                }
+            } = P();
+            return a.default.createElement(s.f, {
+                container: !0,
+                classes: {
+                    root: o
+                },
+                direction: "column",
+                alignItems: "center"
+            }, a.default.createElement(s.f, {
+                container: !0,
+                item: !0,
+                justifyContent: "center"
+            }, a.default.createElement("img", {
+                src: t,
+                alt: "Error Illustration",
+                width: "192px",
+                height: "192px"
+            })), a.default.createElement(s.f, {
+                container: !0,
+                item: !0,
+                direction: "column",
+                justifyContent: "center",
+                alignItems: "center"
+            }, a.default.createElement(c.f, {
+                variant: "h6",
+                align: "center"
+            }, r("Heading.FailedToLoadPage")), a.default.createElement(c.f, {
+                color: "secondary",
+                align: "center"
+            }, r("Message.FailedToLoadPage")), a.default.createElement(u.f, {
+                classes: {
+                    root: l
+                },
+                variant: "outlined",
+                color: "secondary",
+                onClick: n
+            }, r("Action.FailedToLoadPage"))))
+        };
+
+    function j(e) {
+        let t = e.displayName || e.name || "Component",
+            n = t => a.default.createElement(d.f, null, a.default.createElement(e, t));
+        return n.displayName = "withTheme(".concat(t, ")"), n
+    }
+    j(M);
+    let E = (0, l.f)()(() => ({
+            background: {
+                marginTop: 68,
+                marginBottom: 68
+            }
+        })),
+        q = () => {
+            let {
+                translate: e
+            } = (0, i.A)(), {
+                classes: {
+                    background: t
+                }
+            } = E();
+            return a.default.createElement(s.f, {
+                container: !0,
+                classes: {
+                    root: t
+                },
+                direction: "column",
+                alignItems: "center"
+            }, a.default.createElement(s.f, {
+                container: !0,
+                item: !0,
+                justifyContent: "center"
+            }, a.default.createElement("img", {
+                src: "751a3e023908351b.png",
+                alt: "Error Illustration",
+                width: "192px",
+                height: "192px"
+            })), a.default.createElement(s.f, {
+                container: !0,
+                item: !0,
+                direction: "column",
+                justifyContent: "center",
+                alignItems: "center"
+            }, a.default.createElement(c.f, {
+                variant: "h6",
+                align: "center"
+            }, e("Heading.AccessDenied")), a.default.createElement(c.f, {
+                color: "secondary",
+                align: "center"
+            }, e("Description.AccessDenied"))))
+        };
+    j(q), e.s(["a", 0, q, "D", 0, M, "A", 0, e => {
         let t = t => {
             let {
                 location: {
                     pathname: n
                 }
             } = window;
-            "/" !== n && "/landing" !== n && "/roadmap" !== n && "/maintenance" !== n && !n.startsWith("/docs") && R.includes(t) && window.location.replace("".concat(e, "/maintenance"))
+            "/" !== n && "/landing" !== n && "/roadmap" !== n && "/maintenance" !== n && !n.startsWith("/docs") && T.includes(t) && window.location.replace("".concat(e, "/maintenance"))
         };
-        return (0, a.useEffect)(() => (i.c.subscribe(t), () => {
-            i.c.unsubscribe(t)
+        return (0, a.useEffect)(() => (p.c.subscribe(t), () => {
+            p.c.unsubscribe(t)
         }), []), null
     }], 429884);
     var L = e.i(695841),
         z = e.i(659509),
         N = e.i(921394),
         D = e.i(881670);
-    let O = (0, l.K)(e => {
+    let O = (0, i.K)(e => {
         let {
             onReload: t
         } = e, {
             themeMode: n
         } = (0, N.g)(), r = "dark" === n ? L.default : z.default;
-        return (0, o.jsx)(T, {
+        return (0, o.jsx)(M, {
             src: r,
             onReload: t
         })
@@ -1897,5 +1899,5 @@
     e.s(["f", 0, O], 71375)
 }]);
 
-//# debugId=97ae48dc-1ca6-9468-fb37-233bfbbac0eb
-//# sourceMappingURL=3hdo4098vvnqp.js.map
+//# debugId=48c4eab1-d960-bad0-26ee-af1f459fa20c
+//# sourceMappingURL=3nj3yjd7hfg0a.js.map

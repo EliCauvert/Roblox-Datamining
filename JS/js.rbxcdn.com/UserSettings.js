@@ -2,10 +2,10 @@
     try {
         var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "8ebf89959cdf7a9b5ce565e2ad30b9bcb6ad0a49"
+            id: "8e50f1b158260db923b3d061940be615e6a7c55d"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "366a8308-24d3-4cfb-8154-9898a0161a44", e._sentryDebugIdIdentifier = "sentry-dbid-366a8308-24d3-4cfb-8154-9898a0161a44")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "3d072d15-8766-4d42-8320-5558fb34c59f", e._sentryDebugIdIdentifier = "sentry-dbid-3d072d15-8766-4d42-8320-5558fb34c59f")
     } catch (e) {}
 }(),
 function() {
@@ -43109,7 +43109,7 @@ function() {
                         consentCenterAllowActionConsentName: "consentCenterAllowAction",
                         consentCenterUpdateSettingNoValueConsentName: "consentCenterUpdateSettingNoValue",
                         consentCenterUpdateSettingWithValueConsentName: "consentCenterUpdateSettingWithValue",
-                        consentCenterUpdateSettingParentFacingWithValueConsentName: "consentCenterUpdateSettingParentFacingWithValue",
+                        consentCenterUpdateSettingParentFacingNoValueConsentName: "consentCenterUpdateSettingParentFacingNoValue",
                         legallySensitiveConsentSurfaceName: "consent-center"
                     },
                     parentalConsents: {
@@ -66265,7 +66265,7 @@ function() {
                                 settings: a
                             }))
                         };
-                    return m(dh.ContentRestrictions, [
+                    m(dh.ContentRestrictions, [
                         [f5.contentAgeRestriction, u],
                         [f5.allowSensitiveIssues, !0],
                         [f5.privatePlaytest, e.canParentManageChildsPrivatePlaytestSetting, !0]
@@ -66282,23 +66282,24 @@ function() {
                         [f5.allowPresetChat, e.canParentManageChildsPresetChatSetting, !0]
                     ]), m(dh.Spending, [
                         [f5.enablePurchases, e.canParentViewChildSpendRestrictions]
-                    ]), [
-                        [f5.monthlySpendLimit, null == i ? void 0 : i.monthlyLimitVisible],
-                        [f5.monthlySpendLimitNotificationType, (c || (null == r ? void 0 : r.showRemoteOnlySettingsForAnyLinkedParent) === !0) && (null == i ? void 0 : i.notificationSettingVisible)]
-                    ].forEach(function(t) {
-                        var n, r = (0, em._)(t, 2),
-                            i = r[0],
-                            a = r[1];
-                        if (e.canParentViewChildSpendRestrictions && a) {
-                            var o = dh.Spending,
-                                s = null != (n = v[o]) ? n : ey((0, eg._)({}, MU.find(function(e) {
-                                    return e.name === o
+                    ]);
+                    var g = (!0 === e.canParentViewChildSpendRestrictions || !0 === e.shouldParentSeeSpendingInsights) && (c || (null == r ? void 0 : r.showRemoteOnlySettingsForAnyLinkedParent) === !0);
+                    return [
+                        [f5.monthlySpendLimit, e.canParentViewChildSpendRestrictions && (null == i ? void 0 : i.monthlyLimitVisible)],
+                        [f5.monthlySpendLimitNotificationType, g]
+                    ].forEach(function(e) {
+                        var t, n = (0, em._)(e, 2),
+                            r = n[0];
+                        if (n[1]) {
+                            var i = dh.Spending,
+                                a = null != (t = v[i]) ? t : ey((0, eg._)({}, MU.find(function(e) {
+                                    return e.name === i
                                 })), {
                                     settings: []
                                 });
-                            s.settings.push({
-                                name: i
-                            }), v[o] = s
+                            a.settings.push({
+                                name: r
+                            }), v[i] = a
                         }
                     }), m(dh.VisibilityAndPrivateServers, [
                         [f5.whoCanSeeMyOnlineStatus, u],
@@ -73637,13 +73638,10 @@ function() {
                         x = (0, ef.useMemo)(function() {
                             return hr(a)
                         }, [a]),
-                        E = vn(null == a ? void 0 : a.childUserId, {
-                            skip: x !== f5.monthlySpendLimitNotificationType
-                        }).data,
-                        C = (0, ef.useMemo)(function() {
+                        E = (0, ef.useMemo)(function() {
                             return u4.uuidService.generateRandomUuid()
                         }, []),
-                        w = (0, ef.useMemo)(function() {
+                        C = (0, ef.useMemo)(function() {
                             var e, t, n, r, c, u, d;
                             return ((null == a ? void 0 : a.consentType) === pA.UpdateUserSetting && (r = _i(x, null != (c = i.canSeeChatTerminology) && c)), (null == a ? void 0 : a.consentType) === pA.UpdateBirthdate && (r = _e.birthday), (null == a ? void 0 : a.consentType) === pA.LiftPunishment && (null == a || null == (e = a.consentData) ? void 0 : e.punishmentType) === pk.Chargeback && (r = _e.chargebackUnlock), (null == a ? void 0 : a.consentType) === pA.ManageFriend) ? l(_e.unblockUser, {
                                 displayName: _
@@ -73659,7 +73657,7 @@ function() {
                                 amount: (null == s ? void 0 : s.transferAmount) || 0
                             }) : ((null == a ? void 0 : a.consentType) === pA.LiftRestriction && (r = _e.liftPlatformAccessRestriction), r) ? l(r) : void 0
                         }, [a, x, _, o, s, i.canSeeChatTerminology]),
-                        A = function(e, t) {
+                        w = function(e, t) {
                             var n = null == (r = hY[e]) ? void 0 : r.call(hY);
                             if (n) {
                                 var r, i, a = null == (i = n.find(function(e) {
@@ -73669,23 +73667,22 @@ function() {
                             }
                             return _u(t, l)
                         },
-                        T = function() {
+                        A = function() {
                             switch (null == a ? void 0 : a.consentType) {
                                 case pA.UpdateBirthdate:
                                     return gJ.formatBirthdateFromISO(i.birthDate);
                                 case pA.UpdateUserSetting:
-                                    if (x === f5.monthlySpendLimitNotificationType) return A(x, null == E ? void 0 : E.spendNotificationSetting);
                                     if (x) {
                                         var e, t = null == (e = (0, eg._)({}, p, h)[x]) ? void 0 : e.currentValue,
                                             n = x === f5.robuxTransferApprovalMode && void 0 === t ? f4.AlwaysAsk : t;
-                                        return A(x, n)
+                                        return w(x, n)
                                     }
                                     return "";
                                 default:
                                     return ""
                             }
                         },
-                        P = function() {
+                        T = function() {
                             switch (null == a ? void 0 : a.consentType) {
                                 case pA.UpdateBirthdate:
                                     var e;
@@ -73694,63 +73691,58 @@ function() {
                                     var t = hr(a),
                                         n = hi(a);
                                     if (!t) return "";
-                                    return A(t, n);
+                                    return w(t, n);
                                 default:
                                     return ""
                             }
                         },
-                        k = (0, em._)(function() {
+                        P = (0, em._)(function() {
                             var e, t;
-                            if (!a || !w) return [void 0, void 0];
+                            if (!a || !C) return [void 0, void 0];
                             if (a.consentType === pA.LiftPunishment && (null == a || null == (e = a.consentData) ? void 0 : e.punishmentType) === pk.Chargeback || a.consentType === pA.ManageFriend || a.consentType === pA.ManageExperience || a.consentType === pA.AddTrustedConnection || a.consentType === pA.ReceiveTransfer || a.consentType === pA.SendTransfer || a.consentType === pA.LiftRestriction && (null == a || null == (t = a.consentData) ? void 0 : t.restrictionType) === pD.PlatformAccess) return [f.consentCenterAllowActionConsentName, {
-                                actionName: "<b>".concat(w, "</b>")
+                                actionName: "<b>".concat(C, "</b>")
                             }];
                             switch (x) {
                                 case f5.monthlySpendLimit:
                                 case f5.dailyScreenTimeLimit:
                                 case f5.robuxTransferLimits:
                                     return [f.consentCenterUpdateSettingNoValueConsentName, {
-                                        settingName: "<b>".concat(w, "</b>")
+                                        settingName: "<b>".concat(C, "</b>")
                                     }];
                                 case f5.enablePurchases:
                                 case f5.allowFacialAgeEstimation:
                                     return [f.consentCenterAllowActionConsentName, {
-                                        actionName: "<b>".concat(w, "</b>")
+                                        actionName: "<b>".concat(C, "</b>")
                                     }];
                                 case f5.monthlySpendLimitNotificationType:
-                                    var n = T(),
-                                        r = P();
-                                    if (!n || !r) return [void 0, void 0];
-                                    return [f.consentCenterUpdateSettingParentFacingWithValueConsentName, {
-                                        settingName: "<b>".concat(w, "</b>"),
-                                        currentValue: n,
-                                        proposedValue: "<b>".concat(r, "</b>")
+                                    return [f.consentCenterUpdateSettingParentFacingNoValueConsentName, {
+                                        settingName: "<b>".concat(C, "</b>")
                                     }];
                                 default:
-                                    var i = T(),
-                                        o = P();
-                                    if (!i || !o) return [void 0, void 0];
+                                    var n = A(),
+                                        r = T();
+                                    if (!n || !r) return [void 0, void 0];
                                     return [f.consentCenterUpdateSettingWithValueConsentName, {
-                                        settingName: "<b>".concat(w, "</b>"),
-                                        currentValue: i,
-                                        proposedValue: "<b>".concat(o, "</b>")
+                                        settingName: "<b>".concat(C, "</b>"),
+                                        currentValue: n,
+                                        proposedValue: "<b>".concat(r, "</b>")
                                     }]
                             }
                         }(), 2),
-                        R = k[0],
-                        I = k[1],
-                        N = (0, em._)(ed.LegallySensitiveContentService.useLegallySensitiveContentAndActions(null != R ? R : "", f.legallySensitiveConsentSurfaceName, null != I ? I : void 0), 2),
-                        D = N[0],
-                        O = N[1],
-                        L = function() {
+                        k = P[0],
+                        R = P[1],
+                        I = (0, em._)(ed.LegallySensitiveContentService.useLegallySensitiveContentAndActions(null != k ? k : "", f.legallySensitiveConsentSurfaceName, null != R ? R : void 0), 2),
+                        N = I[0],
+                        D = I[1],
+                        O = function() {
                             var e;
-                            if (a && w && D) return (0, eu.jsx)("span", {
+                            if (a && C && N) return (0, eu.jsx)("span", {
                                 dangerouslySetInnerHTML: {
-                                    __html: null != (e = D.wordsOfConsent.text) ? e : ""
+                                    __html: null != (e = N.wordsOfConsent.text) ? e : ""
                                 }
                             })
                         },
-                        M = function(e) {
+                        L = function(e) {
                             var t, n = e === pR.Approve;
                             switch (null == a ? void 0 : a.consentType) {
                                 case pA.LiftPunishment:
@@ -73778,19 +73770,19 @@ function() {
                                         displayName: _
                                     })
                             }
-                            return w ? n ? l(d.childSettingUpdated, {
-                                settingName: w
+                            return C ? n ? l(d.childSettingUpdated, {
+                                settingName: C
                             }) : l(d.childSettingNotUpdated, {
-                                settingName: w
+                                settingName: C
                             }) : n ? l(d.childRequestApproved) : l(d.childRequestDenied)
                         },
-                        j = function(e) {
+                        M = function(e) {
                             return e4(function() {
                                 var t, n, r, i;
                                 return (0, e5._)(this, function(o) {
                                     switch (o.label) {
                                         case 0:
-                                            y(e), n = null == O || null == (t = O.getBase64EncodedAuditHeader) ? void 0 : t.call(O), o.label = 1;
+                                            y(e), n = null == D || null == (t = D.getBase64EncodedAuditHeader) ? void 0 : t.call(D), o.label = 1;
                                         case 1:
                                             return o.trys.push([1, 3, , 4]), [4, v((0, eg._)({
                                                 consentId: a.id,
@@ -73800,7 +73792,7 @@ function() {
                                                 auditDataHeader: n
                                             } : {})).unwrap()];
                                         case 2:
-                                            return o.sent(), c.success(M(e)), [3, 4];
+                                            return o.sent(), c.success(L(e)), [3, 4];
                                         case 3:
                                             if ((null == (r = o.sent()) || null == (i = r.data) ? void 0 : i.code) === _v.ParentNotVerified) return window.location.href = fu(a.id), [2];
                                             return c.warning(l(c6)), [3, 4];
@@ -73810,12 +73802,12 @@ function() {
                                 })
                             })()
                         },
-                        F = uA(pX(i.userId));
-                    return L() ? (0, eu.jsxs)("div", {
+                        j = uA(pX(i.userId));
+                    return O() ? (0, eu.jsxs)("div", {
                         className: "consent-card section-content",
                         children: [(0, eu.jsx)("div", {
                             className: "font-header-2",
-                            children: L()
+                            children: O()
                         }), (0, eu.jsxs)("div", {
                             className: "btn-container",
                             children: [(0, eu.jsx)(e8.Button, {
@@ -73828,7 +73820,7 @@ function() {
                                         return (0, e5._)(this, function(e) {
                                             switch (e.label) {
                                                 case 0:
-                                                    return [4, j(pR.Deny)];
+                                                    return [4, M(pR.Deny)];
                                                 case 1:
                                                     return e.sent(), [2]
                                             }
@@ -73837,28 +73829,28 @@ function() {
                                 },
                                 children: l("Action.Deny")
                             }), (t = function() {
-                                var e, t, n, r, i, o, s;
+                                var e, t, n, r, o, s, c, u;
                                 if ((null == a ? void 0 : a.consentType) === pA.AddTrustedConnection) return {
-                                    url: (e = a.id, "/parental-requests?requestType=AddTrustedConnection&analyticsSessionId=".concat(C, "&consentId=").concat(e, "&redirectUrl=").concat(encodeURIComponent(window.location.href))),
+                                    url: (e = a.id, "/parental-requests?requestType=AddTrustedConnection&analyticsSessionId=".concat(E, "&consentId=").concat(e, "&redirectUrl=").concat(encodeURIComponent(window.location.href))),
                                     isExternal: !0,
                                     label: l(up)
                                 };
                                 if ((null == a ? void 0 : a.consentType) === pA.UpdateUserSetting) {
                                     switch (x) {
                                         case f5.enablePurchases:
-                                            t = null == F || null == (r = F.childSettingCategoryPages) || null == (n = r[dh.Spending]) ? void 0 : n.path;
+                                            t = null == j || null == (r = j.childSettingCategoryPages) || null == (n = r[dh.Spending]) ? void 0 : n.path;
                                             break;
                                         case f5.monthlySpendLimit:
-                                            t = null == F || null == (i = F.spendingPages[df.MonthlySpendingLimit]) ? void 0 : i.path;
+                                            t = null == j || null == (o = j.spendingPages[df.MonthlySpendingLimit]) ? void 0 : o.path;
                                             break;
                                         case f5.monthlySpendLimitNotificationType:
-                                            t = null == F || null == (o = F.spendingPages[df.SpendNotifications]) ? void 0 : o.path;
+                                            i.canParentViewChildSpendRestrictions ? t = null == j || null == (s = j.spendingPages[df.SpendNotifications]) ? void 0 : s.path : i.shouldParentSeeSpendingInsights && (t = null == j || null == (c = j.childSettingCategoryPages[df.SpendNotifications]) ? void 0 : c.path);
                                             break;
                                         case f5.dailyScreenTimeLimit:
-                                            t = null == F ? void 0 : F.screenTimeManagementPage.path;
+                                            t = null == j ? void 0 : j.screenTimeManagementPage.path;
                                             break;
                                         case f5.robuxTransferLimits:
-                                            t = null == F || null == (s = F.robuxPages[dp.TransferLimits]) ? void 0 : s.path
+                                            t = null == j || null == (u = j.robuxPages[dp.TransferLimits]) ? void 0 : u.path
                                     }
                                     if (t) return {
                                         url: t,
@@ -73883,7 +73875,7 @@ function() {
                                         return (0, e5._)(this, function(e) {
                                             switch (e.label) {
                                                 case 0:
-                                                    return [4, j(pR.Approve)];
+                                                    return [4, M(pR.Approve)];
                                                 case 1:
                                                     return e.sent(), [2]
                                             }
@@ -79430,46 +79422,47 @@ function() {
             var Wa = function(e) {
                     var t = e.child,
                         n = e.onUpdateSetting,
-                        r = (0, e6.useTranslation)().translate,
-                        i = e2().snackbarService,
-                        a = vn(n ? void 0 : t.userId).data,
-                        o = (0, em._)(vq(), 2),
-                        s = o[0],
-                        l = o[1].status,
-                        c = pH.spendControls.getSpendNotificationsOptions(l === e7.QueryStatus.pending),
-                        u = db.spendControls;
+                        r = e.displayedSetting,
+                        i = (0, e6.useTranslation)().translate,
+                        a = e2().snackbarService,
+                        o = vn(n ? void 0 : t.userId).data,
+                        s = (0, em._)(vq(), 2),
+                        l = s[0],
+                        c = s[1].status,
+                        u = pH.spendControls.getSpendNotificationsOptions(c === e7.QueryStatus.pending),
+                        d = db.spendControls;
                     return (0, eu.jsx)(lK, {
                         description: (0, eu.jsx)("span", {
                             dangerouslySetInnerHTML: {
-                                __html: r(u.spendNotificationsDescription, {
+                                __html: i(d.spendNotificationsDescription, {
                                     lineBreak: "<br><br>"
                                 })
                             }
                         }),
                         children: (0, eu.jsx)(Wi, {
                             className: "section-content",
-                            options: c,
-                            selectedOption: null == a ? void 0 : a.spendNotificationSetting,
+                            options: u,
+                            selectedOption: null != r ? r : null == o ? void 0 : o.spendNotificationSetting,
                             onValueChange: function(e) {
                                 return e4(function() {
-                                    var a, o;
-                                    return (0, e5._)(this, function(l) {
-                                        switch (l.label) {
+                                    var r, o;
+                                    return (0, e5._)(this, function(s) {
+                                        switch (s.label) {
                                             case 0:
-                                                if (a = {
+                                                if (r = {
                                                         childUserId: t.userId,
                                                         setting: f5.monthlySpendLimitNotificationType,
                                                         value: e
                                                     }, !n) return [3, 2];
-                                                return [4, n(a)];
+                                                return [4, n(r)];
                                             case 1:
-                                                return l.sent(), [2];
+                                                return s.sent(), [2];
                                             case 2:
-                                                return l.trys.push([2, 4, , 5]), [4, s(a).unwrap()];
+                                                return s.trys.push([2, 4, , 5]), [4, l(r).unwrap()];
                                             case 3:
-                                                return l.sent(), bb.authButtonClickSettingsPControlsSpendingNotifications(t, e), i.success(r(c5)), [3, 5];
+                                                return s.sent(), bb.authButtonClickSettingsPControlsSpendingNotifications(t, e), a.success(i(c5)), [3, 5];
                                             case 4:
-                                                return (o = _g(l.sent(), t.userId, f5.monthlySpendLimitNotificationType)) && i.warning(r(o)), [3, 5];
+                                                return (o = _g(s.sent(), t.userId, f5.monthlySpendLimitNotificationType)) && a.warning(i(o)), [3, 5];
                                             case 5:
                                                 return [2]
                                         }
@@ -79509,52 +79502,53 @@ function() {
                     var t, n, r, i = e.child,
                         a = e.pages,
                         o = e.onUpdateSetting,
-                        s = (0, e6.useTranslation)().translate,
-                        l = uA(pX(i.userId)),
-                        c = null != a ? a : l,
-                        u = vn(o ? void 0 : i.userId).data,
-                        d = (0, em._)(vG(null == i ? void 0 : i.userId), 1)[0],
-                        f = db.spendControls,
-                        p = null == c ? void 0 : c.childSettingCategoryPages[dh.Spending],
-                        h = (0, ef.useMemo)(function() {
-                            var e = (0, eg._)({}, null == c ? void 0 : c.spendingPages);
-                            return (null == d ? void 0 : d[f5.enablePurchases]) || delete e[df.AllowPurchases], e
-                        }, [c, d]),
+                        s = e.displayedSpendNotificationSetting,
+                        l = (0, e6.useTranslation)().translate,
+                        c = uA(pX(i.userId)),
+                        u = null != a ? a : c,
+                        d = vn(o ? void 0 : i.userId).data,
+                        f = (0, em._)(vG(null == i ? void 0 : i.userId), 1)[0],
+                        p = db.spendControls,
+                        h = null == u ? void 0 : u.childSettingCategoryPages[dh.Spending],
                         v = (0, ef.useMemo)(function() {
+                            var e = (0, eg._)({}, null == u ? void 0 : u.spendingPages);
+                            return (null == f ? void 0 : f[f5.enablePurchases]) || delete e[df.AllowPurchases], e
+                        }, [u, f]),
+                        m = (0, ef.useMemo)(function() {
                             var e = {};
-                            return Object.keys(h).forEach(function(t) {
+                            return Object.keys(v).forEach(function(t) {
                                 var n = !1;
                                 switch (t) {
                                     case df.MonthlySpendingLimit:
                                         var r, i, a = (0, eu.jsx)("span", {
                                                 className: "fiat-spending-limit-tag",
-                                                "data-amount": null == u ? void 0 : u.monthlySpendLimit,
-                                                "data-currency-code": null == u ? void 0 : u.monthlySpendLimitCurrencyType
+                                                "data-amount": null == d ? void 0 : d.monthlySpendLimit,
+                                                "data-currency-code": null == d ? void 0 : d.monthlySpendLimitCurrencyType
                                             }),
                                             o = (0, eu.jsx)("span", {
-                                                children: s(f.noLimit)
+                                                children: l(p.noLimit)
                                             });
-                                        r = (null == u ? void 0 : u.monthlySpendLimit) !== void 0 && (null == u ? void 0 : u.monthlySpendLimit) !== null ? a : o, n = (null == d || null == (i = d[f5.enablePurchases]) ? void 0 : i.currentValue) === fJ.Disabled;
+                                        r = (null == d ? void 0 : d.monthlySpendLimit) !== void 0 && (null == d ? void 0 : d.monthlySpendLimit) !== null ? a : o, n = (null == f || null == (i = f[f5.enablePurchases]) ? void 0 : i.currentValue) === fJ.Disabled;
                                         break;
                                     case df.SpendNotifications:
-                                        var l, c = _u(null == u ? void 0 : u.spendNotificationSetting, s);
+                                        var c, u = _u(null != s ? s : null == d ? void 0 : d.spendNotificationSetting, l);
                                         r = (0, eu.jsx)("span", {
-                                            children: c
-                                        }), n = (null == d || null == (l = d[f5.enablePurchases]) ? void 0 : l.currentValue) === fJ.Disabled;
+                                            children: u
+                                        }), n = (null == f || null == (c = f[f5.enablePurchases]) ? void 0 : c.currentValue) === fJ.Disabled;
                                         break;
                                     case df.AllowPurchases:
-                                        var p, v = _u(null == d || null == (p = d[f5.enablePurchases]) ? void 0 : p.currentValue, s);
+                                        var h, m = _u(null == f || null == (h = f[f5.enablePurchases]) ? void 0 : h.currentValue, l);
                                         r = (0, eu.jsx)("span", {
-                                            children: v
+                                            children: m
                                         })
                                 }
-                                e[t] = ey((0, eg._)({}, h[t]), {
+                                e[t] = ey((0, eg._)({}, v[t]), {
                                     currentValueComponent: r,
                                     disabled: n
                                 })
                             }), e
-                        }, [h, u, d, f]),
-                        m = function() {
+                        }, [v, d, s, f, p]),
+                        g = function() {
                             window.dispatchEvent(new CustomEvent("price-tag:render", {
                                 detail: {
                                     targetSelector: ".fiat-spending-limit-tag",
@@ -79563,40 +79557,41 @@ function() {
                             }))
                         };
                     return (0, ef.useEffect)(function() {
-                        m()
-                    }, [u, v]), (0, eu.jsxs)("div", {
+                        g()
+                    }, [d, m]), (0, eu.jsxs)("div", {
                         ref: function() {
-                            return m()
+                            return g()
                         },
                         children: [(0, eu.jsx)(j9, {
-                            subPages: v,
-                            routingPath: null == p ? void 0 : p.path,
+                            subPages: m,
+                            routingPath: null == h ? void 0 : h.path,
                             description: (0, eu.jsx)("span", {
                                 dangerouslySetInnerHTML: {
-                                    __html: s(f.parentSideSpendSettingsDescripion, {
+                                    __html: l(p.parentSideSpendSettingsDescripion, {
                                         linkStart: "<a class=text-link href=".concat("https://help.roblox.com/hc/categories/200213820", ">"),
                                         linkEnd: "</a>",
                                         lineBreak: "<br><br>"
                                     })
                                 }
                             })
-                        }), (null == d ? void 0 : d[f5.enablePurchases]) && h[df.AllowPurchases] && (0, eu.jsx)(gY.Route, {
-                            path: null == (t = h[df.AllowPurchases]) ? void 0 : t.path,
+                        }), (null == f ? void 0 : f[f5.enablePurchases]) && v[df.AllowPurchases] && (0, eu.jsx)(gY.Route, {
+                            path: null == (t = v[df.AllowPurchases]) ? void 0 : t.path,
                             children: (0, eu.jsx)(Wo, {
                                 child: i,
                                 onUpdateSetting: o
                             })
-                        }), h[df.MonthlySpendingLimit] && (0, eu.jsx)(gY.Route, {
-                            path: null == (n = h[df.MonthlySpendingLimit]) ? void 0 : n.path,
+                        }), v[df.MonthlySpendingLimit] && (0, eu.jsx)(gY.Route, {
+                            path: null == (n = v[df.MonthlySpendingLimit]) ? void 0 : n.path,
                             children: (0, eu.jsx)(Wr, {
                                 child: i,
                                 onUpdateSetting: o
                             })
-                        }), h[df.SpendNotifications] && (0, eu.jsx)(gY.Route, {
-                            path: null == (r = h[df.SpendNotifications]) ? void 0 : r.path,
+                        }), v[df.SpendNotifications] && (0, eu.jsx)(gY.Route, {
+                            path: null == (r = v[df.SpendNotifications]) ? void 0 : r.path,
                             children: (0, eu.jsx)(Wa, {
                                 child: i,
-                                onUpdateSetting: o
+                                onUpdateSetting: o,
+                                displayedSetting: s
                             })
                         })]
                     })
@@ -82098,7 +82093,11 @@ function() {
                     kind: "Variable",
                     name: "key",
                     variableName: "surface"
-                }], x = {
+                }], x = [{
+                    kind: "Variable",
+                    name: "surface",
+                    variableName: "surface"
+                }], E = {
                     alias: null,
                     args: null,
                     concreteType: "DisplayText",
@@ -82155,14 +82154,14 @@ function() {
                         storageKey: null
                     }],
                     storageKey: null
-                }, C = [{
+                }, w = [{
                     alias: null,
                     args: null,
                     concreteType: "PresentableValue",
                     kind: "LinkedField",
                     name: "option",
                     plural: !1,
-                    selections: [E = {
+                    selections: [C = {
                         alias: null,
                         args: null,
                         kind: "ScalarField",
@@ -82213,7 +82212,7 @@ function() {
                                     name: "surface",
                                     plural: !1,
                                     selections: [{
-                                        args: null,
+                                        args: x,
                                         kind: "FragmentSpread",
                                         name: "SettingsSurfaceFragment"
                                     }],
@@ -82259,7 +82258,7 @@ function() {
                                         kind: "LinkedField",
                                         name: "header",
                                         plural: !1,
-                                        selections: [x],
+                                        selections: [E],
                                         storageKey: null
                                     }, {
                                         alias: null,
@@ -82281,12 +82280,18 @@ function() {
                                             kind: "InlineFragment",
                                             selections: [{
                                                 alias: null,
+                                                args: x,
+                                                kind: "ScalarField",
+                                                name: "auditData",
+                                                storageKey: null
+                                            }, {
+                                                alias: null,
                                                 args: null,
                                                 concreteType: "PresentableValue",
                                                 kind: "LinkedField",
                                                 name: "setting",
                                                 plural: !1,
-                                                selections: [E, x],
+                                                selections: [C, E],
                                                 storageKey: null
                                             }, {
                                                 alias: null,
@@ -82301,7 +82306,7 @@ function() {
                                                 kind: "LinkedField",
                                                 name: "on",
                                                 plural: !1,
-                                                selections: C,
+                                                selections: w,
                                                 storageKey: null
                                             }, {
                                                 alias: null,
@@ -82310,7 +82315,7 @@ function() {
                                                 kind: "LinkedField",
                                                 name: "off",
                                                 plural: !1,
-                                                selections: C,
+                                                selections: w,
                                                 storageKey: null
                                             }],
                                             type: "BooleanSetting",
@@ -82326,14 +82331,14 @@ function() {
                         }]
                     },
                     params: {
-                        id: "QSl7x0zXCKFmpg_Dx5l83A",
+                        id: "H8IXxVZT-zXZBxmO-9QNPQ",
                         metadata: {},
                         name: "SettingsSurfaceQuery",
                         operationKind: "query",
                         text: null
                     }
                 });
-            WQ.hash = "1e220e916b1afd963618aaaea23ee53e";
+            WQ.hash = "9fcc649eae707c850302355bf0039265";
             var WY = (0, ef.createContext)(null),
                 WX = {
                     didCatch: !1,
@@ -82420,7 +82425,11 @@ function() {
                     }]), t
                 }(ef.Component),
                 WZ = {
-                    argumentDefinitions: [],
+                    argumentDefinitions: [{
+                        defaultValue: null,
+                        kind: "LocalArgument",
+                        name: "surface"
+                    }],
                     kind: "Fragment",
                     metadata: null,
                     name: "SettingsSurfaceFragment",
@@ -82510,7 +82519,11 @@ function() {
                             name: "__typename",
                             storageKey: null
                         }, {
-                            args: null,
+                            args: [{
+                                kind: "Variable",
+                                name: "surface",
+                                variableName: "surface"
+                            }],
                             kind: "FragmentSpread",
                             name: "SettingsSurfaceRowFragment"
                         }],
@@ -82519,7 +82532,7 @@ function() {
                     type: "SettingsSurface",
                     abstractKey: null
                 };
-            WZ.hash = "7533bc8699a4591bc78a07f0ce58f737";
+            WZ.hash = "5563a90c79f2975f3d09286b6ee7eee5";
             var W$ = new Set(["_self", "_parent", "_top"]),
                 W0 = {
                     Small: "text-body-small",
@@ -82591,9 +82604,8 @@ function() {
                         a = [],
                         o = "";
                     return r.split(W3).forEach(function(e, n) {
-                        n % 2 == 0 ? t ? o += e : a.push(e) : t ? e === t.closing && (a.push((0, eu.jsx)(W2, {
+                        n % 2 == 0 ? t ? o += e : a.push(e) : t || "lineBreak" !== e ? t ? e === t.closing && (a.push((0, eu.jsx)(W2, {
                             href: t.url,
-                            target: "_blank",
                             rel: "noreferrer",
                             variant: "Inline",
                             color: "Standard",
@@ -82601,19 +82613,19 @@ function() {
                             children: o
                         }, n)), t = void 0) : (t = i.find(function(t) {
                             return t.opening === e && t.url.startsWith("https://")
-                        }), o = "")
+                        }), o = "") : a.push((0, eu.jsx)("br", {}, "line-break-".concat(n)))
                     }), t && a.push(o), (0, eu.jsx)("span", {
                         children: a
                     })
                 },
-                W5 = (A = [{
+                W5 = (T = [{
                     alias: null,
                     args: null,
                     concreteType: "PresentableValue",
                     kind: "LinkedField",
                     name: "option",
                     plural: !1,
-                    selections: [w = {
+                    selections: [A = {
                         alias: null,
                         args: null,
                         kind: "ScalarField",
@@ -82637,7 +82649,11 @@ function() {
                     }],
                     storageKey: null
                 }], {
-                    argumentDefinitions: [],
+                    argumentDefinitions: [{
+                        defaultValue: null,
+                        kind: "LocalArgument",
+                        name: "surface"
+                    }],
                     kind: "Fragment",
                     metadata: null,
                     name: "BooleanSettingRowFragment",
@@ -82649,12 +82665,22 @@ function() {
                         storageKey: null
                     }, {
                         alias: null,
+                        args: [{
+                            kind: "Variable",
+                            name: "surface",
+                            variableName: "surface"
+                        }],
+                        kind: "ScalarField",
+                        name: "auditData",
+                        storageKey: null
+                    }, {
+                        alias: null,
                         args: null,
                         concreteType: "PresentableValue",
                         kind: "LinkedField",
                         name: "setting",
                         plural: !1,
-                        selections: [w, {
+                        selections: [A, {
                             alias: null,
                             args: null,
                             concreteType: "DisplayText",
@@ -82726,7 +82752,7 @@ function() {
                         kind: "LinkedField",
                         name: "on",
                         plural: !1,
-                        selections: A,
+                        selections: T,
                         storageKey: null
                     }, {
                         alias: null,
@@ -82735,22 +82761,22 @@ function() {
                         kind: "LinkedField",
                         name: "off",
                         plural: !1,
-                        selections: A,
+                        selections: T,
                         storageKey: null
                     }],
                     type: "BooleanSetting",
                     abstractKey: null
                 });
-            W5.hash = "51144420bb23a2fa235f5c901dba74ec";
-            var W6 = (T = {
+            W5.hash = "e93ffa821421814852957ff9acdb6480";
+            var W6 = (P = {
                 defaultValue: null,
                 kind: "LocalArgument",
                 name: "input"
-            }, P = {
+            }, k = {
                 defaultValue: null,
                 kind: "LocalArgument",
                 name: "userId"
-            }, k = [{
+            }, R = [{
                 kind: "Variable",
                 name: "input",
                 variableName: "input"
@@ -82758,47 +82784,17 @@ function() {
                 kind: "Variable",
                 name: "userId",
                 variableName: "userId"
-            }], R = {
+            }], N = [{
+                args: null,
+                kind: "FragmentSpread",
+                name: "UpdateUserSettingMutationStateFragment"
+            }], O = [I = {
                 alias: null,
                 args: null,
                 kind: "ScalarField",
                 name: "__typename",
                 storageKey: null
-            }, I = [{
-                args: null,
-                kind: "FragmentSpread",
-                name: "SettingsSurfaceRowFragment"
-            }], D = [{
-                alias: null,
-                args: null,
-                concreteType: "PresentableValue",
-                kind: "LinkedField",
-                name: "option",
-                plural: !1,
-                selections: [N = {
-                    alias: null,
-                    args: null,
-                    kind: "ScalarField",
-                    name: "value",
-                    storageKey: null
-                }],
-                storageKey: null
             }, {
-                alias: null,
-                args: null,
-                concreteType: "RequiredAction",
-                kind: "LinkedField",
-                name: "requiredActions",
-                plural: !0,
-                selections: [{
-                    alias: null,
-                    args: null,
-                    kind: "ScalarField",
-                    name: "actionType",
-                    storageKey: null
-                }],
-                storageKey: null
-            }], O = [R, {
                 kind: "TypeDiscriminator",
                 abstractKey: "__isUserSetting"
             }, {
@@ -82812,72 +82808,6 @@ function() {
                 selections: [{
                     alias: null,
                     args: null,
-                    concreteType: "PresentableValue",
-                    kind: "LinkedField",
-                    name: "setting",
-                    plural: !1,
-                    selections: [N, {
-                        alias: null,
-                        args: null,
-                        concreteType: "DisplayText",
-                        kind: "LinkedField",
-                        name: "presentation",
-                        plural: !1,
-                        selections: [{
-                            alias: null,
-                            args: null,
-                            kind: "ScalarField",
-                            name: "label",
-                            storageKey: null
-                        }, {
-                            alias: null,
-                            args: null,
-                            concreteType: "FormattedText",
-                            kind: "LinkedField",
-                            name: "description",
-                            plural: !1,
-                            selections: [{
-                                alias: null,
-                                args: null,
-                                kind: "ScalarField",
-                                name: "text",
-                                storageKey: null
-                            }, {
-                                alias: null,
-                                args: null,
-                                concreteType: "TextLink",
-                                kind: "LinkedField",
-                                name: "links",
-                                plural: !0,
-                                selections: [{
-                                    alias: null,
-                                    args: null,
-                                    kind: "ScalarField",
-                                    name: "opening",
-                                    storageKey: null
-                                }, {
-                                    alias: null,
-                                    args: null,
-                                    kind: "ScalarField",
-                                    name: "closing",
-                                    storageKey: null
-                                }, {
-                                    alias: null,
-                                    args: null,
-                                    kind: "ScalarField",
-                                    name: "url",
-                                    storageKey: null
-                                }],
-                                storageKey: null
-                            }],
-                            storageKey: null
-                        }],
-                        storageKey: null
-                    }],
-                    storageKey: null
-                }, {
-                    alias: null,
-                    args: null,
                     kind: "ScalarField",
                     name: "enabled",
                     storageKey: null
@@ -82888,7 +82818,37 @@ function() {
                     kind: "LinkedField",
                     name: "on",
                     plural: !1,
-                    selections: D,
+                    selections: D = [{
+                        alias: null,
+                        args: null,
+                        concreteType: "PresentableValue",
+                        kind: "LinkedField",
+                        name: "option",
+                        plural: !1,
+                        selections: [{
+                            alias: null,
+                            args: null,
+                            kind: "ScalarField",
+                            name: "value",
+                            storageKey: null
+                        }],
+                        storageKey: null
+                    }, {
+                        alias: null,
+                        args: null,
+                        concreteType: "RequiredAction",
+                        kind: "LinkedField",
+                        name: "requiredActions",
+                        plural: !0,
+                        selections: [{
+                            alias: null,
+                            args: null,
+                            kind: "ScalarField",
+                            name: "actionType",
+                            storageKey: null
+                        }],
+                        storageKey: null
+                    }],
                     storageKey: null
                 }, {
                     alias: null,
@@ -82904,18 +82864,18 @@ function() {
                 abstractKey: null
             }], {
                 fragment: {
-                    argumentDefinitions: [T, P],
+                    argumentDefinitions: [P, k],
                     kind: "Fragment",
                     metadata: null,
                     name: "UpdateUserSettingMutation",
                     selections: [{
                         alias: null,
-                        args: k,
+                        args: R,
                         concreteType: null,
                         kind: "LinkedField",
                         name: "updateUserSetting",
                         plural: !1,
-                        selections: [R, {
+                        selections: [I, {
                             kind: "InlineFragment",
                             selections: [{
                                 alias: null,
@@ -82924,7 +82884,7 @@ function() {
                                 kind: "LinkedField",
                                 name: "settings",
                                 plural: !0,
-                                selections: I,
+                                selections: N,
                                 storageKey: null
                             }],
                             type: "UserSettingUpdated",
@@ -82938,7 +82898,7 @@ function() {
                                 kind: "LinkedField",
                                 name: "setting",
                                 plural: !1,
-                                selections: I,
+                                selections: N,
                                 storageKey: null
                             }],
                             type: "UserSettingUpdateRejected",
@@ -82951,17 +82911,17 @@ function() {
                 },
                 kind: "Request",
                 operation: {
-                    argumentDefinitions: [P, T],
+                    argumentDefinitions: [k, P],
                     kind: "Operation",
                     name: "UpdateUserSettingMutation",
                     selections: [{
                         alias: null,
-                        args: k,
+                        args: R,
                         concreteType: null,
                         kind: "LinkedField",
                         name: "updateUserSetting",
                         plural: !1,
-                        selections: [R, {
+                        selections: [I, {
                             kind: "InlineFragment",
                             selections: [{
                                 alias: null,
@@ -82994,45 +82954,47 @@ function() {
                     }]
                 },
                 params: {
-                    id: "528EVmtst-oJbFHbns6wEw",
+                    id: "cJcRNSfGgBH-FaIUmIfwmw",
                     metadata: {},
                     name: "UpdateUserSettingMutation",
                     operationKind: "mutation",
                     text: null
                 }
             });
-            W6.hash = "0c5824f3df155da7c25118f19bc114cb";
+            W6.hash = "db22b85cbd4980dd4e6fce372a1c03e2";
             var W8 = function(e) {
                     var t = e.setting,
                         n = e.userId,
                         r = (0, EO.useFragment)(W5, t),
                         i = r.id,
-                        a = r.setting,
-                        o = r.enabled,
-                        s = r.on,
-                        l = r.off,
-                        c = (0, e6.useTranslation)().translate,
-                        u = e2().snackbarService,
-                        d = (0, em._)((0, EO.useMutation)(W6), 2),
-                        f = d[0],
-                        p = d[1],
-                        h = (0, ef.useContext)(WG),
-                        v = (0, ef.useRef)(!1),
-                        m = a.presentation;
-                    if (!m) return null;
-                    var g = o ? l : s,
-                        y = "setting-".concat(i, "-label"),
-                        b = "setting-".concat(i, "-description"),
-                        S = function(e) {
-                            v.current = !0, new Promise(function(t) {
+                        a = r.auditData,
+                        o = r.setting,
+                        s = r.enabled,
+                        l = r.on,
+                        c = r.off,
+                        u = (0, e6.useTranslation)().translate,
+                        d = e2().snackbarService,
+                        f = (0, em._)((0, EO.useMutation)(W6), 2),
+                        p = f[0],
+                        h = f[1],
+                        v = (0, ef.useContext)(WG),
+                        m = (0, ef.useRef)(!1),
+                        g = o.presentation;
+                    if (!g) return null;
+                    var y = s ? c : l,
+                        b = "setting-".concat(i, "-label"),
+                        S = "setting-".concat(i, "-description"),
+                        _ = function(e) {
+                            m.current = !0, new Promise(function(t) {
                                 t(e({
                                     id: i,
-                                    name: a.value,
-                                    option: g.option.value,
-                                    enabled: !o
+                                    name: o.value,
+                                    option: y.option.value,
+                                    enabled: !s,
+                                    auditData: null != a ? a : null
                                 }))
                             }).catch(function() {}).finally(function() {
-                                v.current = !1
+                                m.current = !1
                             })
                         };
                     return (0, eu.jsxs)("div", {
@@ -83040,49 +83002,51 @@ function() {
                         children: [(0, eu.jsxs)("div", {
                             className: "flex flex-col gap-xxsmall",
                             children: [(0, eu.jsx)("span", {
-                                id: y,
-                                className: "text-body-large content-emphasis",
-                                children: m.label
-                            }), m.description && (0, eu.jsx)("span", {
                                 id: b,
+                                className: "text-body-large content-emphasis",
+                                children: g.label
+                            }), g.description && (0, eu.jsx)("span", {
+                                id: S,
                                 className: "text-body-small content-default",
                                 children: (0, eu.jsx)(W4, {
-                                    text: m.description
+                                    text: g.description
                                 })
                             })]
                         }), (0, eu.jsx)("div", {
                             className: "flex shrink-0 items-center gap-small",
                             children: (0, eu.jsx)(kC, {
-                                "aria-labelledby": y,
-                                "aria-describedby": m.description ? b : void 0,
-                                isChecked: o,
+                                "aria-labelledby": b,
+                                "aria-describedby": g.description ? S : void 0,
+                                isChecked: s,
                                 onCheckedChange: function() {
-                                    if (!p && !v.current) {
-                                        if (h) return void S(h);
+                                    if (!h && !m.current) {
+                                        if (v) return void _(v);
                                         var e = function() {
-                                            u.warning(c("MessageUnknownError"))
+                                            d.warning(u("MessageUnknownError"))
                                         };
-                                        f({
+                                        p({
                                             variables: {
                                                 userId: n,
-                                                input: {
-                                                    name: a.value,
+                                                input: (0, eg._)({
+                                                    name: o.value,
                                                     value: {
-                                                        option: g.option.value
+                                                        option: y.option.value
                                                     }
-                                                }
+                                                }, null != a && {
+                                                    auditData: a
+                                                })
                                             },
                                             optimisticUpdater: function(e) {
                                                 var t;
-                                                null == (t = e.get(i)) || t.setValue(!o, "enabled")
+                                                null == (t = e.get(i)) || t.setValue(!s, "enabled")
                                             },
                                             updater: function(e, t) {
                                                 var n, r = null == t ? void 0 : t.updateUserSetting;
-                                                (null == r ? void 0 : r.__typename) === "UserSettingUpdated" && null == r.settings[0] && (null == (n = e.get(i)) || n.setValue(!o, "enabled"))
+                                                (null == r ? void 0 : r.__typename) === "UserSettingUpdated" && null == r.settings[0] && (null == (n = e.get(i)) || n.setValue(!s, "enabled"))
                                             },
                                             onCompleted: function(t) {
                                                 var n = t.updateUserSetting;
-                                                (null == n ? void 0 : n.__typename) === "UserSettingUpdated" ? u.success(c("Description.SuccessDialogMessage")): e()
+                                                (null == n ? void 0 : n.__typename) === "UserSettingUpdated" ? d.success(u("Description.SuccessDialogMessage")): e()
                                             },
                                             onError: e
                                         })
@@ -83093,7 +83057,11 @@ function() {
                     })
                 },
                 W9 = {
-                    argumentDefinitions: [],
+                    argumentDefinitions: [{
+                        defaultValue: null,
+                        kind: "LocalArgument",
+                        name: "surface"
+                    }],
                     kind: "Fragment",
                     metadata: null,
                     name: "SettingsSurfaceRowFragment",
@@ -83106,7 +83074,11 @@ function() {
                             name: "__typename",
                             storageKey: null
                         }, {
-                            args: null,
+                            args: [{
+                                kind: "Variable",
+                                name: "surface",
+                                variableName: "surface"
+                            }],
                             kind: "FragmentSpread",
                             name: "BooleanSettingRowFragment"
                         }],
@@ -83116,7 +83088,7 @@ function() {
                     type: "UserSetting",
                     abstractKey: "__isUserSetting"
                 };
-            W9.hash = "cd4e8b0fe19ef30b27015f628ab907b0";
+            W9.hash = "ef14fe14d5d9bb99c2d76048dfbe6e0e";
             var W7 = function(e) {
                     return "BooleanSetting" === e
                 },
@@ -83471,45 +83443,48 @@ function() {
                         var l = s.id,
                             c = s.name,
                             u = s.option,
-                            d = s.enabled;
+                            d = s.enabled,
+                            f = s.auditData;
                         return e4(function() {
-                            var s, f, p, h, v, m, g, y;
-                            return (0, e5._)(this, function(b) {
-                                switch (b.label) {
+                            var s, p, h, v, m, g, y, b;
+                            return (0, e5._)(this, function(S) {
+                                switch (S.label) {
                                     case 0:
-                                        s = "".concat(c.charAt(0).toLowerCase()).concat(c.slice(1)), f = n.applyUpdate({
+                                        s = "".concat(c.charAt(0).toLowerCase()).concat(c.slice(1)), p = n.applyUpdate({
                                             storeUpdater: function(e) {
                                                 var t;
                                                 null == (t = e.get(l)) || t.setValue(d, "enabled")
                                             }
-                                        }), b.label = 1;
+                                        }), S.label = 1;
                                     case 1:
-                                        return b.trys.push([1, 3, , 4]), [4, a({
+                                        return S.trys.push([1, 3, , 4]), [4, a((0, eg._)({
                                             childUserId: e.userId,
                                             setting: s,
                                             value: u
-                                        }).unwrap()];
+                                        }, null != f && {
+                                            auditHeader: f
+                                        })).unwrap()];
                                     case 2:
-                                        return b.sent(), [3, 4];
+                                        return S.sent(), [3, 4];
                                     case 3:
-                                        return p = b.sent(), f.dispose(), (h = _g(p, e.userId, s)) && i.warning(r(h)), [2];
+                                        return h = S.sent(), p.dispose(), (v = _g(h, e.userId, s)) && i.warning(r(v)), [2];
                                     case 4:
-                                        return i.success(r(c5)), v = {
+                                        return i.success(r(c5)), m = {
                                             userId: String(e.userId),
                                             surface: t
-                                        }, m = (0, EL.createOperationDescriptor)(WQ, v).request, g = function() {
-                                            return (0, EL.fetchQuery)(n, WQ, v, {
+                                        }, g = (0, EL.createOperationDescriptor)(WQ, m).request, y = function() {
+                                            return (0, EL.fetchQuery)(n, WQ, m, {
                                                 fetchPolicy: "network-only"
                                             }).toPromise()
-                                        }, y = o.current.then(function() {
-                                            return n.isRequestActive(m.identifier) ? g().catch(function() {}) : void 0
-                                        }).then(g), o.current = y.catch(function() {
+                                        }, b = o.current.then(function() {
+                                            return n.isRequestActive(g.identifier) ? y().catch(function() {}) : void 0
+                                        }).then(y), o.current = b.catch(function() {
                                             (0, EL.commitLocalUpdate)(n, function(e) {
                                                 var t;
                                                 null == (t = e.get(l)) || t.setValue(d, "enabled")
                                             })
                                         }).finally(function() {
-                                            f.dispose()
+                                            p.dispose()
                                         }), [2]
                                 }
                             })
@@ -84323,30 +84298,33 @@ function() {
                         m = da(void 0, {
                             skip: s
                         }),
-                        g = vn(void 0, {
-                            skip: s || (null == (n = a.data) ? void 0 : n.canParentViewChildSpendRestrictions) !== !0
+                        g = (null == (n = a.data) ? void 0 : n.canParentViewChildSpendRestrictions) === !0 || (null == (r = a.data) ? void 0 : r.shouldParentSeeSpendingInsights) === !0,
+                        y = vn(void 0, {
+                            skip: s || !g
                         }),
-                        y = v_(void 0, {
-                            skip: s || (null == (r = a.data) ? void 0 : r.canParentViewChildSpendRestrictions) !== !0
+                        b = v_(void 0, {
+                            skip: s || !g
                         }),
-                        b = !y.isError && (null == (i = y.data) ? void 0 : i.parents.some(function(e) {
+                        S = !b.isError && (null == (i = b.data) ? void 0 : i.parents.some(function(e) {
                             return !0 === e.isRemoteParent
                         })) === !0,
-                        S = [a, m].concat((0, eD._)(e === dh.Spending ? [g] : [])),
-                        _ = u === Dj.rejected || h || S.some(function(e) {
+                        _ = !b.isError && void 0 !== b.data && !S,
+                        x = [a, m].concat((0, eD._)(e === dh.Spending ? [y] : [])),
+                        E = u === Dj.rejected || h || x.some(function(e) {
                             return e.isError
                         });
                     return {
-                        pages: _ || s ? {} : MW(a.data, c, f, m.data, g.data, b),
-                        isLoading: u === Dj.pending && !c || p || e === dh.Spending && y.isLoading || S.some(function(e) {
+                        pages: E || s ? {} : MW(a.data, c, f, m.data, y.data, S),
+                        isLoading: u === Dj.pending && !c || p || e === dh.Spending && b.isLoading || x.some(function(e) {
                             return e.isLoading
                         }),
-                        isError: _,
-                        isFetching: u === Dj.pending || v || S.some(function(e) {
+                        isError: E,
+                        isFetching: u === Dj.pending || v || x.some(function(e) {
                             return e.isFetching
                         }),
                         policy: m.data,
-                        context: a.data
+                        context: a.data,
+                        hasConfirmedNoRemoteParent: _
                     }
                 },
                 KK = function() {
@@ -84814,68 +84792,70 @@ function() {
                         r = e.onUpdateSetting,
                         i = e.onManageExperience,
                         a = e.policy,
-                        o = function() {
+                        o = e.hasConfirmedNoRemoteParent,
+                        s = function() {
                             for (var e = arguments.length, n = Array(e), r = 0; r < e; r++) n[r] = arguments[r];
                             return t.settings.some(function(e) {
                                 return n.includes(e.name)
                             })
                         },
-                        s = {
+                        l = {
                             child: n,
                             onUpdateSetting: r
                         },
-                        l = {
+                        c = {
                             childUserId: n.userId,
                             onUpdateSetting: r
                         },
-                        c = MH(t, n, a);
+                        u = MH(t, n, a);
                     switch (t.name) {
                         case dh.ContentRestrictions:
-                            return (0, eu.jsx)(WN, ey((0, eg._)({}, s), {
+                            return (0, eu.jsx)(WN, ey((0, eg._)({}, l), {
                                 contentRestrictionsPage: t,
-                                subpages: c,
+                                subpages: u,
                                 onManageExperience: i
                             }));
                         case dh.Communication:
-                            return (0, eu.jsx)(Wt, ey((0, eg._)({}, s), {
+                            return (0, eu.jsx)(Wt, ey((0, eg._)({}, l), {
                                 communicationPage: t,
-                                subpages: c
+                                subpages: u
                             }));
                         case dh.Spending:
-                            return (0, eu.jsx)(Ws, ey((0, eg._)({}, s), {
+                            return (0, eu.jsx)(Ws, ey((0, eg._)({}, l), {
                                 pages: {
                                     childSettingCategoryPages: (0, ev._)({}, t.name, t),
-                                    spendingPages: c
-                                }
+                                    spendingPages: u
+                                },
+                                displayedSpendNotificationSetting: void 0 !== o && o ? fY.NotificationsOff : void 0
                             }));
                         case dh.VisibilityAndPrivateServers:
-                            return (0, eu.jsx)(W_, ey((0, eg._)({}, s), {
+                            return (0, eu.jsx)(W_, ey((0, eg._)({}, l), {
                                 showThirdPartyFriendAccess: !1,
                                 pages: {
                                     childSettingCategoryPages: (0, ev._)({}, t.name, t),
-                                    visibilityAndPrivateServersPages: c
+                                    visibilityAndPrivateServersPages: u
                                 }
                             }));
                         case dh.FriendsAndContacts:
-                            return (0, eu.jsx)(HF, (0, eg._)({}, s));
+                            return (0, eu.jsx)(HF, (0, eg._)({}, l));
                         case dS.BlockedUsers:
                             return (0, eu.jsx)(K2, {});
                         case dh.TradingAndInventory:
-                            return (0, eu.jsx)(HU, ey((0, eg._)({}, l), {
+                            return (0, eu.jsx)(HU, ey((0, eg._)({}, c), {
                                 showTradeQualityFilter: !1
                             }));
                         case dh.ThirdPartyApplications:
-                            return (0, eu.jsx)(Tn, (0, eg._)({}, l));
+                            return (0, eu.jsx)(Tn, (0, eg._)({}, c));
                         case dh.Notifications:
-                            return (0, eu.jsx)(HW, ey((0, eg._)({}, s), {
+                            return (0, eu.jsx)(HW, ey((0, eg._)({}, l), {
                                 child: ey((0, eg._)({}, n), {
-                                    canParentManageChildsDoNotDisturb: o(f5.doNotDisturb)
+                                    canParentManageChildsDoNotDisturb: s(f5.doNotDisturb)
                                 })
                             }));
                         case dh.AgeCheck:
-                            return (0, eu.jsx)(WK, ey((0, eg._)({}, s), {
-                                showFae: o(f5.allowFacialAgeEstimation),
-                                showIdv: o(f5.allowIdentityVerification)
+                            return (0, eu.jsx)(WK, ey((0, eg._)({}, l), {
+                                showFae: s(f5.allowFacialAgeEstimation),
+                                showIdv: s(f5.allowIdentityVerification)
                             }));
                         case dg.ActivityUpdates:
                             return (0, eu.jsx)(K3, {});
@@ -84891,58 +84871,60 @@ function() {
                         a = n.isError,
                         o = n.isFetching,
                         s = n.policy,
-                        l = K5(),
-                        c = K4(),
-                        u = c.manageSetting,
-                        d = c.isManaging,
-                        f = c.revision,
-                        p = K0(),
-                        h = p.manageExperience,
-                        v = p.isManaging;
+                        l = n.hasConfirmedNoRemoteParent,
+                        c = K5(),
+                        u = K4(),
+                        d = u.manageSetting,
+                        f = u.isManaging,
+                        p = u.revision,
+                        h = K0(),
+                        v = h.manageExperience,
+                        m = h.isManaging;
                     dT().translate;
-                    var m = v_(),
-                        g = m.data,
-                        y = m.isLoading,
-                        b = null == g ? void 0 : g.parents,
-                        S = a || l.isError;
+                    var g = v_(),
+                        y = g.data,
+                        b = g.isLoading,
+                        S = null == y ? void 0 : y.parents,
+                        _ = a || c.isError;
                     (0, ef.useEffect)(function() {
-                        S && KD(KL, {
+                        _ && KD(KL, {
                             page: t
                         })
-                    }, [S, t]), (0, ef.useEffect)(function() {
-                        S && !y && bh(t, b)
-                    }, [S, y, t, b]);
-                    var _ = !i && !l.isLoading && !!r[t] && !!l.child;
+                    }, [_, t]), (0, ef.useEffect)(function() {
+                        _ && !b && bh(t, S)
+                    }, [_, b, t, S]);
+                    var x = !i && !c.isLoading && !!r[t] && !!c.child;
                     if ((0, ef.useEffect)(function() {
-                            _ && KD(KO, {
+                            x && KD(KO, {
                                 page: t
                             })
-                        }, [_, t]), S) return (0, eu.jsx)(qI, {
+                        }, [x, t]), _) return (0, eu.jsx)(qI, {
                         descriptionTranslationKey: c6
                     });
-                    if (i || l.isLoading) return (0, eu.jsx)(e8.Loading, {});
-                    var x = r[t];
-                    return x && l.child ? (0, eu.jsx)("fieldset", {
-                        disabled: o || d || v,
+                    if (i || c.isLoading) return (0, eu.jsx)(e8.Loading, {});
+                    var E = r[t];
+                    return E && c.child ? (0, eu.jsx)("fieldset", {
+                        disabled: o || f || m,
                         className: "stroke-none padding-none margin-none",
                         children: (0, eu.jsxs)(gY.Switch, {
                             children: [(0, eu.jsx)(gY.Route, {
                                 exact: !0,
-                                path: [x.path].concat((0, eD._)(Object.values(MH(x, l.child, s)).map(function(e) {
+                                path: [E.path].concat((0, eD._)(Object.values(MH(E, c.child, s)).map(function(e) {
                                     return e.path
                                 }))),
                                 children: (0, eu.jsx)(K6, {
-                                    page: x,
-                                    child: l.child,
+                                    page: E,
+                                    child: c.child,
                                     policy: s,
+                                    hasConfirmedNoRemoteParent: l,
                                     onManageExperience: function(e, n) {
                                         return e4(function() {
                                             var r;
                                             return (0, e5._)(this, function(i) {
                                                 switch (i.label) {
                                                     case 0:
-                                                        if (!(!o && !d && !v && t === dh.ContentRestrictions && (null == (r = l.child) ? void 0 : r.canParentManageChildsExperiences) === !0)) return [3, 2];
-                                                        return bf(t, e, n, b), [4, h(e, n)];
+                                                        if (!(!o && !f && !m && t === dh.ContentRestrictions && (null == (r = c.child) ? void 0 : r.canParentManageChildsExperiences) === !0)) return [3, 2];
+                                                        return bf(t, e, n, S), [4, v(e, n)];
                                                     case 1:
                                                         i.sent(), i.label = 2;
                                                     case 2:
@@ -84957,10 +84939,10 @@ function() {
                                             return (0, e5._)(this, function(i) {
                                                 switch (i.label) {
                                                     case 0:
-                                                        if (n = e.setting === f5.doNotDisturbTimeWindow ? f5.doNotDisturb : e.setting, r = x.settings.find(function(e) {
+                                                        if (n = e.setting === f5.doNotDisturbTimeWindow ? f5.doNotDisturb : e.setting, r = E.settings.find(function(e) {
                                                                 return e.name === n
-                                                            }), !(!o && !d && !v && r)) return [3, 2];
-                                                        return void 0 !== e.value && bd(t, e.setting, e.value, b), [4, u(e)];
+                                                            }), !(!o && !f && !m && r)) return [3, 2];
+                                                        return void 0 !== e.value && bd(t, e.setting, e.value, S), [4, d(e)];
                                                     case 1:
                                                         i.sent(), i.label = 2;
                                                     case 2:
@@ -84969,9 +84951,9 @@ function() {
                                             })
                                         })()
                                     }
-                                }, f)
+                                }, p)
                             }), (0, eu.jsx)(gY.Redirect, {
-                                to: x.path
+                                to: E.path
                             })]
                         })
                     }) : (0, eu.jsx)(gY.Redirect, {
@@ -91844,4 +91826,4 @@ function() {
             })
         }()
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected(document.currentScript && document.currentScript.getAttribute("data-bundlename") || "UserSettings");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/userSettings-dc711f5219d7424e.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/userSettings-4351e384f3ca4689.js.map

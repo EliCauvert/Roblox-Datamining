@@ -5,6 +5,10 @@
     right: 0
 }
 
+.top-\[0\] {
+    top: 0
+}
+
 .margin-x-\[calc\(var\(--padding-xxlarge\)\*-1\)\] {
     margin-left: calc(var(--padding-xxlarge)*-1);
     margin-right: calc(var(--padding-xxlarge)*-1)
@@ -168,6 +172,10 @@
 
 .min-width-\[96px\] {
     min-width: 96px
+}
+
+.min-width-\[min\(200px\,100\%\)\] {
+    min-width: min(200px, 100%)
 }
 
 .width-\[150px\] {
@@ -340,6 +348,22 @@
     -webkit-line-clamp: 3
 }
 
+.\[background-image\:linear-gradient\(var\(--color-shift-200\)\,var\(--color-shift-200\)\)\] {
+    background-image: linear-gradient(var(--color-shift-200), var(--color-shift-200))
+}
+
+.\[box-shadow\:inset_0_0_0_var\(--stroke-standard\)_var\(--color-stroke-default\)\] {
+    box-shadow: inset 0 0 0 var(--stroke-standard)var(--color-stroke-default)
+}
+
+.\[box-shadow\:inset_0_calc\(var\(--stroke-standard\)\*-1\)_0_0_var\(--color-stroke-default\)\] {
+    box-shadow: inset 0 calc(var(--stroke-standard)*-1)0 0 var(--color-stroke-default)
+}
+
+.\[box-sizing\:border-box\] {
+    box-sizing: border-box
+}
+
 .\[color\:var\(--color-extended-gray-600\)\] {
     color: var(--color-extended-gray-600)
 }
@@ -372,6 +396,10 @@
     list-style: none
 }
 
+.\[overflow-wrap\:anywhere\] {
+    overflow-wrap: anywhere
+}
+
 .\[overflow\:clip\] {
     overflow: clip
 }
@@ -390,6 +418,10 @@
 
 .\[width\:0\] {
     width: 0
+}
+
+.\[z-index\:1\] {
+    z-index: 1
 }
 
 #content {
