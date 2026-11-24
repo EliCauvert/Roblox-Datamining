@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "85ae4e33-68c3-35c8-cb76-fe58553d3129")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "008b38c9-7568-a1f5-8c04-e9972bfd5147")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 139047, e => {
@@ -322,23 +322,21 @@
             minWebgl2FillPassesPerMs: 0,
             requireWebgl2Renders: !0
         },
-        s = (e, r) => {
-            let t = r.requiredFeatures.filter(r => !Object.hasOwn(e.features, r) || !e.features[r]).map(e => `feature:${e}`),
-                {
-                    deviceMemoryGiB: n
-                } = e.memory;
-            return r.minDeviceMemoryGiB > 0 && (n ?? 0) < r.minDeviceMemoryGiB && t.push("minDeviceMemoryGiB"), e.cpu.effectiveCores < r.minEffectiveCores && t.push("minEffectiveCores"), e.cpu.singleThreadScore < r.minSingleThreadScore && t.push("minSingleThreadScore"), e.gpu.fillPassesPerMs < r.minWebgl2FillPassesPerMs && t.push("minWebgl2FillPassesPerMs"), r.requireWebgl2Renders && !e.gpu.webgl2Renders && t.push("requireWebgl2Renders"), t
+        s = (e, r) => r.minDeviceMemoryGiB > 0 && (e ?? 0) < r.minDeviceMemoryGiB,
+        u = (e, r) => {
+            let t, n = (t = e.features, r.requiredFeatures.filter(e => !Object.hasOwn(t, e) || !t[e]).map(e => `feature:${e}`));
+            return s(e.memory.deviceMemoryGiB, r) && n.push("minDeviceMemoryGiB"), e.cpu.effectiveCores < r.minEffectiveCores && n.push("minEffectiveCores"), e.cpu.singleThreadScore < r.minSingleThreadScore && n.push("minSingleThreadScore"), e.gpu.fillPassesPerMs < r.minWebgl2FillPassesPerMs && n.push("minWebgl2FillPassesPerMs"), r.requireWebgl2Renders && !e.gpu.webgl2Renders && n.push("requireWebgl2Renders"), n
         },
-        u = {
+        d = {
             enabled: !1,
             requiredSpec: o,
             timeoutMs: 1e4
         },
-        d = u,
-        c = e => "number" == typeof e && Number.isFinite(e) && e >= 0,
-        f = "RBX_WASM_DEVICE_PROBE",
-        m = `${f}_`,
-        p = e => {
+        c = d,
+        f = e => "number" == typeof e && Number.isFinite(e) && e >= 0,
+        m = "RBX_WASM_DEVICE_PROBE",
+        p = `${m}_`,
+        h = e => {
             try {
                 let r = JSON.parse(e ?? "null");
                 if ("object" != typeof r || null === r) return null;
@@ -349,9 +347,9 @@
                 return null
             }
         },
-        h = "RBX_WASM_DEVICE_PROBE_V1_P3",
-        b = ["wasmSimd", "wasmExceptions", "jspi", "bulkMemory", "bigInt", "sharedArrayBuffer", "crossOriginIsolated", "atomics", "webWorkers", "webgl2", "webSocket", "fetch", "audioContext", "audioWorklet", "opfs", "textDecoder", "can2GBAlloc", "can4GBAlloc"],
-        v = [
+        b = "RBX_WASM_DEVICE_PROBE_V1_P3",
+        v = ["wasmSimd", "wasmExceptions", "jspi", "bulkMemory", "bigInt", "sharedArrayBuffer", "crossOriginIsolated", "atomics", "webWorkers", "webgl2", "webSocket", "fetch", "audioContext", "audioWorklet", "opfs", "textDecoder", "can2GBAlloc", "can4GBAlloc"],
+        g = [
             ["Edge", /\bEdg(?:e|A|iOS)?\/(\d+)/],
             ["Opera", /\bOPR\/(\d+)/],
             ["SamsungBrowser", /\bSamsungBrowser\/(\d+)/],
@@ -359,33 +357,33 @@
             ["Chrome", /\b(?:Chrome|CriOS)\/(\d+)/],
             ["Safari", /\bVersion\/(\d+)\b.*\bSafari\//]
         ],
-        g = () => {
+        w = () => {
             let e = t.navigator?.userAgent ?? "";
-            for (let [r, t] of v) {
+            for (let [r, t] of g) {
                 let n = t.exec(e)?.[1];
                 if (null != n) return `${r}/${n}`
             }
             return "unknown"
         },
-        w = e => "object" == typeof e && null !== e && !Array.isArray(e),
-        S = e => "number" == typeof e && Number.isFinite(e),
-        y = e => {
+        S = e => "object" == typeof e && null !== e && !Array.isArray(e),
+        y = e => "number" == typeof e && Number.isFinite(e),
+        E = e => {
             let {
                 isolated: r,
                 cpu: t,
                 gpu: n,
                 memory: l
             } = e, i = (e => {
-                if (!w(e)) return null;
+                if (!S(e)) return null;
                 let r = {};
-                for (let t of b) {
+                for (let t of v) {
                     let n = e[t];
                     if ("boolean" != typeof n) return null;
                     r[t] = n
                 }
                 return r
             })(e.features);
-            return "boolean" == typeof r && null != i && w(t) && S(t.effectiveCores) && S(t.singleThreadScore) && w(n) && "boolean" == typeof n.webgl2Renders && S(n.fillPassesPerMs) && w(l) && (null === l.deviceMemoryGiB || S(l.deviceMemoryGiB)) && S(l.maxSharedAllocMiB) ? {
+            return "boolean" == typeof r && null != i && S(t) && y(t.effectiveCores) && y(t.singleThreadScore) && S(n) && "boolean" == typeof n.webgl2Renders && y(n.fillPassesPerMs) && S(l) && (null === l.deviceMemoryGiB || y(l.deviceMemoryGiB)) && y(l.maxSharedAllocMiB) ? {
                 isolated: r,
                 features: i,
                 cpu: {
@@ -402,18 +400,30 @@
                 }
             } : null
         },
-        E = e => {
-            let r = (0, a.getItem)(h);
-            if (!w(r) || r.browser !== g() || !S(r.measuredAt)) return null;
+        C = new Set(["minDeviceMemoryGiB", "minEffectiveCores", "minSingleThreadScore", "minWebgl2FillPassesPerMs", "requireWebgl2Renders", "softwareRenderer"]),
+        A = new Set(v.map(e => `feature:${e}`)),
+        R = e => C.has(e) || A.has(e),
+        P = e => {
+            let r = (0, a.getItem)(b);
+            if (!S(r) || r.browser !== w() || !y(r.measuredAt)) return null;
             let {
                 measuredAt: t
-            } = r, n = Math.min(S(r.expiresAt) ? r.expiresAt : t + 1728e5, t + 6048e5);
-            return e >= t && e < n ? y(r) : null
+            } = r, n = Math.min(y(r.expiresAt) ? r.expiresAt : t + 1728e5, t + 6048e5);
+            return e >= t && e < n ? E(r) : null
         },
-        C = new Set(["error", "timeout", "crashed"]),
-        A = () => {
-            let e = (0, a.getItem)(h);
-            return w(e) && e.browser === g() && S(e.failedAt) && S(e.failureCount) && !(e.failureCount < 1) && C.has(e.reason) ? {
+        x = (e, r) => {
+            let t = 0 === u(e, c.requiredSpec).length;
+            (0, a.setItem)(b, {
+                measuredAt: r,
+                expiresAt: r + (t ? 6048e5 : 1728e5),
+                browser: w(),
+                ...e
+            })
+        },
+        I = new Set(["error", "timeout", "crashed"]),
+        M = () => {
+            let e = (0, a.getItem)(b);
+            return S(e) && e.browser === w() && y(e.failedAt) && y(e.failureCount) && !(e.failureCount < 1) && I.has(e.reason) ? {
                 browser: e.browser,
                 failedAt: e.failedAt,
                 failureCount: e.failureCount,
@@ -423,26 +433,26 @@
                 }
             } : null
         },
-        x = (e, r) => {
-            let t = A();
+        _ = (e, r) => {
+            let t = M();
             if (null == t) return null;
             let n = e - t.failedAt,
-                l = t.failureCount >= 2 ? 864e5 : 36e5;
+                l = t.failureCount >= 2 ? 6048e5 : 36e5;
             return n >= 0 && n < l && !("crashed" === t.reason && n < r) ? t : null
         },
-        P = (e, r, t) => (0, a.setItem)(h, {
-            browser: g(),
+        k = (e, r, t) => (0, a.setItem)(b, {
+            browser: w(),
             failedAt: t,
             failureCount: r,
             reason: e
         }).isOk(),
-        _ = e => {
-            null == e ? (0, a.removeItem)(h) : (0, a.setItem)(h, e)
+        T = e => {
+            null == e ? (0, a.removeItem)(b) : (0, a.setItem)(b, e)
         };
-    var I = e.i(139047);
-    let R = "RBX_WASM_WEB_PLAY_NOT_OFFERED",
-        T = "RBX_WASM_WEB_PLAY_REGION_UNKNOWN",
-        M = (e, r, n) => {
+    var B = e.i(139047);
+    let F = "RBX_WASM_WEB_PLAY_NOT_OFFERED",
+        D = "RBX_WASM_WEB_PLAY_REGION_UNKNOWN",
+        O = (e, r, n) => {
             try {
                 let l = Number(t.window?.sessionStorage.getItem(e)),
                     i = n - l;
@@ -451,56 +461,67 @@
                 return !1
             }
         },
-        k = () => e.A(301475).then(e => e.deviceProbeTelemetry),
-        F = () => !0,
-        B = F,
-        O = null,
-        D = [],
-        N = "unloaded",
-        L = (e, r) => {
+        N = () => e.A(301475).then(e => e.deviceProbeTelemetry),
+        L = () => !0,
+        q = L,
+        W = null,
+        j = [],
+        G = "unloaded",
+        U = (e, r) => {
             let [t, n] = r;
             try {
                 e[t](n)
             } catch {}
         },
-        q = (e, r) => {
+        $ = (e, r) => {
             try {
                 let t = [e, r];
-                if (null != O) return void L(O, t);
-                if ("failed" === N) return;
-                D.push(t), "unloaded" === N && (N = "loading", Promise.resolve().then(k).then(e => {
-                    O = e;
-                    let r = D;
-                    for (let t of (D = [], r)) L(e, t)
+                if (null != W) return void U(W, t);
+                if ("failed" === G) return;
+                j.push(t), "unloaded" === G && (G = "loading", Promise.resolve().then(N).then(e => {
+                    W = e;
+                    let r = j;
+                    for (let t of (j = [], r)) U(e, t)
                 }, () => {
-                    N = "failed", D = []
+                    G = "failed", j = []
                 }))
             } catch {}
         },
-        W = () => {
+        V = () => {
             try {
-                return B()
+                return q()
             } catch {
                 return !1
             }
         },
-        j = null,
-        U = (e, r) => {
-            let t = x(e, r);
-            return null != t && q("probeSkipped", {
+        z = "RBX_DEVICE_PROBE_STARTS",
+        X = () => {
+            let e = (0, a.getItem)(z);
+            if ("object" != typeof e || null === e || Reflect.get(e, "browser") !== w()) return null;
+            let r = Reflect.get(e, "startedAt");
+            return {
+                startedAt: Array.isArray(r) ? r : [],
+                skipReported: !0 === Reflect.get(e, "skipReported")
+            }
+        },
+        H = (e, r) => (e?.startedAt ?? []).filter(e => "number" == typeof e && r - e >= 0 && r - e < 864e5),
+        Y = null,
+        K = (e, r) => {
+            let t = _(e, r);
+            return null != t && $("probeSkipped", {
                 reason: t.reason,
                 browser: t.browser
             }), null != t
         },
-        G = async e => {
+        J = async e => {
             let r = t.navigator?.locks;
-            return null == r ? e(d.timeoutMs) : await r.request("rbx-device-probe", () => e(0))
-        }, $ = async () => {
+            return null == r ? e(c.timeoutMs) : await r.request("rbx-device-probe", () => e(0))
+        }, Q = async () => {
             let e = await (() => {
                 var e;
                 let r = t.window;
                 if (null == r) return Promise.resolve("unknown");
-                let n = M(R, 864e5, e = Date.now()) ? "notOffered" : M(T, 9e5, e) ? "unknown" : null;
+                let n = O(F, 864e5, e = Date.now()) ? "notOffered" : O(D, 9e5, e) ? "unknown" : null;
                 return null != n ? Promise.resolve(n) : (r.rbxDeviceProbeRegionAnswer ??= new Promise(e => {
                     let r, n = !1,
                         l = l => {
@@ -508,11 +529,11 @@
                                 try {
                                     t.window?.sessionStorage.setItem(e, String(r))
                                 } catch {}
-                            })("notOffered" === l ? R : T, Date.now()), e(l))
+                            })("notOffered" === l ? F : D, Date.now()), e(l))
                         };
                     r = setTimeout(() => {
                         l("unknown")
-                    }, 5e3), (0, I.callBehaviour)("wasm").then(e => {
+                    }, 5e3), (0, B.callBehaviour)("wasm").then(e => {
                         l((e => {
                             switch (e?.wasmClientAvailable) {
                                 case !0:
@@ -528,59 +549,122 @@
                     })
                 }), r.rbxDeviceProbeRegionAnswer)
             })();
-            return "offered" !== e ? ("notOffered" === e && (0, a.removeItem)(h), null) : (await new Promise(e => {
+            return "offered" !== e ? ("notOffered" === e && (0, a.removeItem)(b), null) : (await new Promise(e => {
                 let r = t.document;
                 if (r?.visibilityState !== "hidden") return void e();
                 let n = () => {
                     "hidden" !== r.visibilityState && (r.removeEventListener("visibilitychange", n), e())
                 };
                 r.addEventListener("visibilitychange", n)
-            }), G(async e => {
+            }), J(async e => {
                 var r;
-                let n, l, i = E(Date.now());
-                if (null != i) return i;
-                if (U(Date.now(), e) || !d.enabled || t.document?.visibilityState === "hidden") return null;
-                let o = A(),
-                    u = (o?.failureCount ?? 0) + 1,
-                    c = Date.now();
-                if (!P("crashed", u, c)) return null;
-                let f = g();
-                q("probeStarted", {
-                    browser: f
-                }), o?.reason === "crashed" && !0 !== o.crashReported && c - o.failedAt >= e && (q("probeFailed", {
+                let n, l, i, o = P(Date.now());
+                if (null != o) return o;
+                if (K(Date.now(), e) || !c.enabled || t.document?.visibilityState === "hidden") return null;
+                let d = {
+                        deviceMemoryGiB: "number" == typeof(n = null == t.navigator ? void 0 : Reflect.get(t.navigator, "deviceMemory")) && n > 0 ? n : null,
+                        reportedCores: Math.max(t.navigator?.hardwareConcurrency ?? 1, 1)
+                    },
+                    f = (r = c.requiredSpec, l = [], s(d.deviceMemoryGiB, r) && l.push("minDeviceMemoryGiB"), d.reportedCores < r.minEffectiveCores && l.push("minEffectiveCores"), l);
+                if (f.length > 0) {
+                    let e = (e => {
+                        let {
+                            deviceMemoryGiB: r
+                        } = e;
+                        return {
+                            isolated: !1,
+                            features: Object.fromEntries(v.map(e => [e, !1])),
+                            cpu: {
+                                effectiveCores: 0,
+                                singleThreadScore: 0
+                            },
+                            gpu: {
+                                webgl2Renders: !1,
+                                fillPassesPerMs: 0
+                            },
+                            memory: {
+                                deviceMemoryGiB: r,
+                                maxSharedAllocMiB: 0
+                            }
+                        }
+                    })(d);
+                    return x(e, Date.now()), $("probeCompleted", {
+                        durationMs: 0,
+                        browser: w(),
+                        isolated: null,
+                        failedRules: f
+                    }), e
+                }
+                if ((e => {
+                        let {
+                            reached: r,
+                            firstSkip: t
+                        } = (e => {
+                            let r = X(),
+                                t = H(r, e);
+                            if (t.length < 2) return {
+                                reached: !1,
+                                firstSkip: !1
+                            };
+                            let n = r?.skipReported !== !0;
+                            return n && (0, a.setItem)(z, {
+                                browser: w(),
+                                startedAt: t,
+                                skipReported: !0
+                            }), {
+                                reached: !0,
+                                firstSkip: n
+                            }
+                        })(e);
+                        return t && $("probeSkipped", {
+                            reason: "attemptCap",
+                            browser: w()
+                        }), r
+                    })(Date.now())) return null;
+                let m = M(),
+                    p = (m?.failureCount ?? 0) + 1,
+                    h = Date.now();
+                if (!(0, a.setItem)(z, {
+                        browser: w(),
+                        startedAt: [...H(X(), h), h].slice(-2)
+                    }).isOk() || !k("crashed", p, h)) return null;
+                let b = w();
+                $("probeStarted", {
+                    browser: b
+                }), m?.reason === "crashed" && !0 !== m.crashReported && h - m.failedAt >= e && ($("probeFailed", {
                     reason: "crashed",
                     durationMs: null,
-                    browser: f,
+                    browser: b,
                     isolated: null
-                }), o = {
-                    ...o,
+                }), m = {
+                    ...m,
                     crashReported: !0
                 });
-                let m = await (n = d.timeoutMs, new Promise(e => {
+                let g = await (i = c.timeoutMs, new Promise(e => {
                         let r = t.window,
-                            l = t.document;
-                        if (null == r || null == l) return void e({
+                            n = t.document;
+                        if (null == r || null == n) return void e({
                             ok: !1,
                             reason: "error"
                         });
-                        let i = l.createElement("iframe"),
+                        let l = n.createElement("iframe"),
                             a = [],
                             o = r => {
                                 for (let e of a) e();
-                                i.remove(), e(r)
+                                l.remove(), e(r)
                             };
-                        i.src = `/device-probe?v=${encodeURIComponent("1.4.0")}`, i.title = "Device probe", i.tabIndex = -1, i.setAttribute("aria-hidden", "true"), i.style.cssText = "position:fixed;top:0;left:0;width:1px;height:1px;border:0;opacity:0;pointer-events:none";
+                        l.src = `/device-probe?v=${encodeURIComponent("1.5.0")}`, l.title = "Device probe", l.tabIndex = -1, l.setAttribute("aria-hidden", "true"), l.style.cssText = "position:fixed;top:0;left:0;width:1px;height:1px;border:0;opacity:0;pointer-events:none";
                         let s = "u" < typeof performance ? 0 : performance.now(),
                             u = () => {
                                 let e;
-                                e = i.src, "u" > typeof performance && "function" == typeof performance.getEntriesByName && performance.getEntriesByName(e).some(e => e.startTime >= s && "responseStatus" in e && "number" == typeof e.responseStatus && e.responseStatus >= 400) && o({
+                                e = l.src, "u" > typeof performance && "function" == typeof performance.getEntriesByName && performance.getEntriesByName(e).some(e => e.startTime >= s && "responseStatus" in e && "number" == typeof e.responseStatus && e.responseStatus >= 400) && o({
                                     ok: !1,
                                     reason: "error"
                                 })
                             },
                             d = e => {
                                 let t = e.data;
-                                e.origin === r.location.origin && null != e.source && e.source === i.contentWindow && "object" == typeof t && null !== t && "rbx-device-probe:result" === t.type && 3 === t.version && o(!0 === t.ok ? {
+                                e.origin === r.location.origin && null != e.source && e.source === l.contentWindow && "object" == typeof t && null !== t && "rbx-device-probe:result" === t.type && 3 === t.version && o(!0 === t.ok ? {
                                     ok: !0,
                                     scores: t.scores
                                 } : {
@@ -589,96 +673,100 @@
                                 })
                             },
                             c = () => {
-                                "hidden" === l.visibilityState && o({
+                                "hidden" === n.visibilityState && o({
                                     ok: !1,
                                     reason: "hidden"
                                 })
                             };
-                        i.addEventListener("load", u), l.body.append(i), r.addEventListener("message", d), l.addEventListener("visibilitychange", c);
+                        l.addEventListener("load", u), n.body.append(l), r.addEventListener("message", d), n.addEventListener("visibilitychange", c);
                         let f = setTimeout(() => {
                             o({
                                 ok: !1,
                                 reason: "timeout"
                             })
-                        }, n);
+                        }, i);
                         a.push(() => {
-                            clearTimeout(f), i.removeEventListener("load", u), r.removeEventListener("message", d), l.removeEventListener("visibilitychange", c)
+                            clearTimeout(f), l.removeEventListener("load", u), r.removeEventListener("message", d), n.removeEventListener("visibilitychange", c)
                         })
                     })).catch(() => ({
                         ok: !1,
                         reason: "error"
                     })),
-                    p = Date.now() - c,
-                    b = m.ok ? (e => {
-                        if (!w(e) || !w(e.features) || !w(e.cpu)) return null;
+                    y = Date.now() - h,
+                    C = g.ok ? (e => {
+                        var r;
+                        if (!S(e) || !S(e.features) || !S(e.cpu)) return null;
+                        let t = null == (r = e.earlyStop) ? null : S(r) && Array.isArray(r.failedRules) && 0 !== r.failedRules.length && r.failedRules.every(R) ? r.failedRules : void 0;
+                        if (void 0 === t) return null;
                         let {
-                            measuredWhileVisible: r
-                        } = e.cpu, t = w(e.gpu) && w(e.gpu.webgl2) ? e.gpu.webgl2 : {}, n = y({
+                            measuredWhileVisible: n
+                        } = e.cpu, l = S(e.gpu) && S(e.gpu.webgl2) ? e.gpu.webgl2 : {}, i = E({
                             isolated: e.features.crossOriginIsolated,
                             features: e.features,
                             cpu: e.cpu,
                             gpu: {
-                                webgl2Renders: t.renders,
-                                fillPassesPerMs: t.fillPassesPerMs
+                                webgl2Renders: l.renders,
+                                fillPassesPerMs: l.fillPassesPerMs
                             },
                             memory: e.memory
                         });
-                        return null == n || "boolean" != typeof r || n.cpu.effectiveCores < 1 || "error" === t.renderer ? null : {
-                            measurement: n,
-                            measuredWhileVisible: r
+                        return null == i || "boolean" != typeof n ? null : null != t ? {
+                            measurement: i,
+                            measuredWhileVisible: n,
+                            earlyStop: t
+                        } : i.cpu.effectiveCores < 1 || "error" === l.renderer ? null : {
+                            measurement: i,
+                            measuredWhileVisible: n,
+                            earlyStop: null
                         }
-                    })(m.scores) : null;
-                if (null == b) {
-                    let e = m.ok ? "error" : m.reason;
-                    return "hidden" === e ? _(o) : P(e, u, Date.now()), q("probeFailed", {
+                    })(g.scores) : null;
+                if (null == C) {
+                    let e = g.ok ? "error" : g.reason;
+                    return "hidden" === e ? T(m) : k(e, p, Date.now()), $("probeFailed", {
                         reason: e,
-                        durationMs: p,
-                        browser: f,
+                        durationMs: y,
+                        browser: b,
                         isolated: null
                     }), null
                 }
                 let {
-                    measurement: v,
-                    measuredWhileVisible: S
-                } = b, {
-                    isolated: C
-                } = v;
-                return S ? (r = Date.now(), l = 0 === s(v, d.requiredSpec).length, (0, a.setItem)(h, {
-                    measuredAt: r,
-                    expiresAt: r + (l ? 6048e5 : 1728e5),
-                    browser: g(),
-                    ...v
-                }), q("probeCompleted", {
-                    durationMs: p,
-                    browser: f,
-                    isolated: C,
-                    failedRules: s(v, d.requiredSpec)
-                }), v) : (_(o), q("probeFailed", {
+                    measurement: A,
+                    measuredWhileVisible: I,
+                    earlyStop: _
+                } = C, {
+                    isolated: B
+                } = A;
+                return I ? (x(A, Date.now()), $("probeCompleted", {
+                    durationMs: y,
+                    browser: b,
+                    isolated: B,
+                    failedRules: _ ?? u(A, c.requiredSpec)
+                }), A) : (T(m), $("probeFailed", {
                     reason: "throttled",
-                    durationMs: p,
-                    browser: f,
-                    isolated: C
+                    durationMs: y,
+                    browser: b,
+                    isolated: B
                 }), null)
             }))
-        }, V = async () => {
+        }, Z = async () => {
             try {
-                return await $()
+                return await Q()
             } catch {
-                return q("probeFailed", {
+                return $("probeFailed", {
                     reason: "error",
                     durationMs: null,
-                    browser: g(),
+                    browser: w(),
                     isolated: null
                 }), null
             }
-        }, z = async () => {
+        }, ee = async () => {
             try {
-                if (!W()) return !1;
-                let e = E(Date.now());
-                if (null == e && (U(Date.now(), d.timeoutMs) || !d.enabled || (j ??= V().finally(() => {
-                        j = null
-                    }), e = await j, !W()))) return !1;
-                return null != e && 0 === s(e, d.requiredSpec).length
+                if (!V()) return !1;
+                let e = P(Date.now());
+                if (null == e && (K(Date.now(), c.timeoutMs) || !c.enabled || (Y ??= Z().finally(() => {
+                        Y = null
+                    }), e = await Y, !V()))) return !1;
+                return null != e && 0 === u(e, c.requiredSpec).length
             } catch {
                 return !1
             }
@@ -686,10 +774,10 @@
     e.s(["default", 0, function() {
         return (0, r.useEffect)(() => {
             (() => {
-                let e, r = t.window;
-                if (null == r || !0 === r.rbxDeviceProbeBackgroundRun || (r.rbxDeviceProbeBackgroundRun = !0, r.top !== r)) return;
-                B = i ?? F;
-                var n, l, a = Date.now();
+                let e, r, n = t.window;
+                if (null == n || !0 === n.rbxDeviceProbeBackgroundRun || (n.rbxDeviceProbeBackgroundRun = !0, n.top !== n)) return;
+                q = i ?? L;
+                var l, s, b, v, g = Date.now();
                 try {
                     let e = t.window?.localStorage;
                     null != e && (e => {
@@ -697,45 +785,53 @@
                                 let r = [];
                                 for (let t = 0; t < e.length; t += 1) {
                                     let n = e.key(t);
-                                    (n === f || n?.startsWith(m) === !0) && r.push(n)
+                                    (n === m || n?.startsWith(p) === !0) && r.push(n)
                                 }
                                 return r
                             })(e)) {
-                            let t = r === f ? null : p(e.getItem(r)),
-                                n = null == t ? NaN : a - t;
+                            let t = r === m ? null : h(e.getItem(r)),
+                                n = null == t ? NaN : g - t;
                             n >= -6e4 && n < 6048e5 || e.removeItem(r)
                         }
                     })(e)
                 } catch {}
-                if (null !== (() => {
+                if (l = Date.now(), (0, a.hasItem)(z) && 0 === H(X(), l).length && (0, a.removeItem)(z), s = Date.now(), e = M(), e?.reason === "crashed" && e.failureCount >= 2 && !0 !== e.crashReported && s - e.failedAt >= c.timeoutMs && ($("probeFailed", {
+                        reason: "crashed",
+                        durationMs: null,
+                        browser: e.browser,
+                        isolated: null
+                    }), T({
+                        ...e,
+                        crashReported: !0
+                    })), null !== (() => {
                         try {
-                            if (!W()) return !1;
+                            if (!V()) return !1;
                             let e = Date.now(),
-                                r = E(e);
-                            if (null == r) return null == x(e, d.timeoutMs) && null;
-                            return 0 === s(r, d.requiredSpec).length
+                                r = P(e);
+                            if (null == r) return null == _(e, c.timeoutMs) && null;
+                            return 0 === u(r, c.requiredSpec).length
                         } catch {
                             return null
                         }
                     })()) return;
-                d = {
-                    enabled: !0 === (n = {
+                c = {
+                    enabled: !0 === (b = {
                         enabled: !0
                     }).enabled,
-                    requiredSpec: null == n.requiredSpec ? o : {
-                        requiredFeatures: Array.isArray((l = n.requiredSpec).requiredFeatures) && l.requiredFeatures.every(e => "string" == typeof e) ? l.requiredFeatures : o.requiredFeatures,
-                        minDeviceMemoryGiB: c(l.minDeviceMemoryGiB) ? l.minDeviceMemoryGiB : o.minDeviceMemoryGiB,
-                        minEffectiveCores: c(l.minEffectiveCores) ? l.minEffectiveCores : o.minEffectiveCores,
-                        minSingleThreadScore: c(l.minSingleThreadScore) ? l.minSingleThreadScore : o.minSingleThreadScore,
-                        minWebgl2FillPassesPerMs: c(l.minWebgl2FillPassesPerMs) ? l.minWebgl2FillPassesPerMs : o.minWebgl2FillPassesPerMs,
-                        requireWebgl2Renders: "boolean" == typeof l.requireWebgl2Renders ? l.requireWebgl2Renders : o.requireWebgl2Renders
+                    requiredSpec: null == b.requiredSpec ? o : {
+                        requiredFeatures: Array.isArray((v = b.requiredSpec).requiredFeatures) && v.requiredFeatures.every(e => "string" == typeof e) ? v.requiredFeatures : o.requiredFeatures,
+                        minDeviceMemoryGiB: f(v.minDeviceMemoryGiB) ? v.minDeviceMemoryGiB : o.minDeviceMemoryGiB,
+                        minEffectiveCores: f(v.minEffectiveCores) ? v.minEffectiveCores : o.minEffectiveCores,
+                        minSingleThreadScore: f(v.minSingleThreadScore) ? v.minSingleThreadScore : o.minSingleThreadScore,
+                        minWebgl2FillPassesPerMs: f(v.minWebgl2FillPassesPerMs) ? v.minWebgl2FillPassesPerMs : o.minWebgl2FillPassesPerMs,
+                        requireWebgl2Renders: "boolean" == typeof v.requireWebgl2Renders ? v.requireWebgl2Renders : o.requireWebgl2Renders
                     },
-                    timeoutMs: c(e = n.timeoutMs) && e > 0 ? n.timeoutMs : u.timeoutMs
+                    timeoutMs: f(r = b.timeoutMs) && r > 0 ? b.timeoutMs : d.timeoutMs
                 };
-                let h = () => {
-                    z()
+                let w = () => {
+                    ee()
                 };
-                t.document?.readyState === "complete" ? h() : r.addEventListener("load", h, {
+                t.document?.readyState === "complete" ? w() : n.addEventListener("load", w, {
                     once: !0
                 })
             })()
@@ -764,10 +860,10 @@
 }, 860834, e => {
     e.v(r => Promise.all(["static/chunks/01sqoc6rh7hn6.js", "static/chunks/0o41rrf.qz-eb.js"].map(r => e.l(r))).then(() => r(60484)))
 }, 301475, e => {
-    e.v(r => Promise.all(["static/chunks/0jfgwylbrs~u4.js"].map(r => e.l(r))).then(() => r(14383)))
+    e.v(r => Promise.all(["static/chunks/07hmcr403d5.p.js"].map(r => e.l(r))).then(() => r(14383)))
 }, 80066, e => {
-    e.v(r => Promise.all(["static/chunks/14j9tt74uzqq8.js", "static/chunks/0q4qnajlx1fcy.js", "static/chunks/0f27m0g5rn33v.js"].map(r => e.l(r))).then(() => r(391651)))
+    e.v(r => Promise.all(["static/chunks/01r0jfmp8mzaq.js", "static/chunks/0q4qnajlx1fcy.js", "static/chunks/0bz--g2k-igct.js"].map(r => e.l(r))).then(() => r(391651)))
 }]);
 
-//# debugId=85ae4e33-68c3-35c8-cb76-fe58553d3129
-//# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/0s1-gr.my4-kl.js.map
+//# debugId=008b38c9-7568-a1f5-8c04-e9972bfd5147
+//# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/17.qruhdtyt~4.js.map

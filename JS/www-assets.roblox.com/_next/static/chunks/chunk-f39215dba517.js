@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "9d0b213f-0dcf-c4c0-dc9b-e356b157b927")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "12d15aa7-e13e-67e2-49c5-2074dd037c5b")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 586588, e => {
@@ -11,20 +11,20 @@
     var t = e.i(473897),
         r = e.i(360702),
         s = e.i(574999),
-        n = e.i(851460),
-        i = e.i(246382);
-    class a extends s.BaseUrl {
+        a = e.i(851460),
+        n = e.i(246382);
+    class i extends s.BaseUrl {
         static new(e) {
             e.password = "", e.username = "";
-            let r = n.UrlSearchParams.internalFromUniqueURLSearchParams((0, t.downcast)(e.searchParams));
-            return new a(e, r)
+            let r = a.UrlSearchParams.internalFromUniqueURLSearchParams((0, t.downcast)(e.searchParams));
+            return new i(e, r)
         }
         static fromURL(e) {
-            return a.new((0, i.cloneURL)(e))
+            return i.new((0, n.cloneURL)(e))
         }
         static parse(e) {
             try {
-                return (0, r.ok)(a.new((0, t.downcast)(new URL(e))))
+                return (0, r.ok)(i.new((0, t.downcast)(new URL(e))))
             } catch (e) {
                 return (0, r.err)(e)
             }
@@ -39,132 +39,132 @@
                 fragment: p
             } = e;
             if (null == t && null == r && null == s && null == o && null == l && null == p) return this;
-            let c = (0, i.cloneURL)(this.url);
+            let c = (0, n.cloneURL)(this.url);
             if (null != t && (c.protocol = t), null != r && (c.hostname = r), null != s && (c.port = "number" == typeof s ? s.toString() : s), null != o && (c.pathname = o), null != p && (c.hash = p), null != l) {
-                let e = n.UrlSearchParams.new(l);
-                return c.search = e.toString(), new a(c, e)
+                let e = a.UrlSearchParams.new(l);
+                return c.search = e.toString(), new i(c, e)
             }
-            return new a(c, this.searchParams)
+            return new i(c, this.searchParams)
         }
         withScheme(e) {
-            let t = (0, i.cloneURL)(this.url);
-            return t.protocol = e, new a(t, this.searchParams)
+            let t = (0, n.cloneURL)(this.url);
+            return t.protocol = e, new i(t, this.searchParams)
         }
         withHost(e) {
-            let t = (0, i.cloneURL)(this.url);
-            return t.hostname = e, new a(t, this.searchParams)
+            let t = (0, n.cloneURL)(this.url);
+            return t.hostname = e, new i(t, this.searchParams)
         }
         withPort(e) {
-            let t = (0, i.cloneURL)(this.url);
-            return t.port = "number" == typeof e ? e.toString() : e, new a(t, this.searchParams)
+            let t = (0, n.cloneURL)(this.url);
+            return t.port = "number" == typeof e ? e.toString() : e, new i(t, this.searchParams)
         }
         withPath(e) {
-            let t = (0, i.cloneURL)(this.url);
-            return t.pathname = e, new a(t, this.searchParams)
+            let t = (0, n.cloneURL)(this.url);
+            return t.pathname = e, new i(t, this.searchParams)
         }
         withSearchParams(e) {
-            let t = n.UrlSearchParams.new(e),
-                r = (0, i.cloneURL)(this.url);
-            return r.search = t.toString(), new a(r, t)
+            let t = a.UrlSearchParams.new(e),
+                r = (0, n.cloneURL)(this.url);
+            return r.search = t.toString(), new i(r, t)
         }
         withSearchParamsAppended(e) {
             let t = this.searchParams.copyAndAppendAll(e),
-                r = (0, i.cloneURL)(this.url);
-            return r.search = t.toString(), new a(r, t)
+                r = (0, n.cloneURL)(this.url);
+            return r.search = t.toString(), new i(r, t)
         }
         withFragment(e) {
-            let t = (0, i.cloneURL)(this.url);
-            return t.hash = e, new a(t, this.searchParams)
+            let t = (0, n.cloneURL)(this.url);
+            return t.hash = e, new i(t, this.searchParams)
         }
         constructor(e, t) {
             super(e, t)
         }
     }
-    e.s(["AnyUrl", 0, a])
+    e.s(["AnyUrl", 0, i])
 }, 245837, e => {
     "use strict";
     var t = e.i(152972),
         r = e.i(519003),
         s = e.i(577896);
     let {
-        rootDomain: n,
-        apiGateway: i,
-        apiGatewayCdn: a,
+        rootDomain: a,
+        apiGateway: n,
+        apiGatewayCdn: i,
         wwwRoblox: o,
         authApi: l,
         metricsApi: p
     } = (0, r.getPageBaseUrls)(), c = e => e.toString().replace(/\/+$/, ""), u = {
-        apiGatewayUrl: c(i),
+        apiGatewayUrl: c(n),
         websiteUrl: c(o),
         authApi: c(l),
-        avatarApi: `https://avatar.${n}`,
-        beaconApi: i.withPath("/beacon-api").toString(),
-        catalogApi: `https://catalog.${n}`,
-        domain: n,
-        economyApi: `https://economy.${n}`,
-        inventoryApi: `https://inventory.${n}`,
+        avatarApi: `https://avatar.${a}`,
+        beaconApi: n.withPath("/beacon-api").toString(),
+        catalogApi: `https://catalog.${a}`,
+        domain: a,
+        economyApi: `https://economy.${a}`,
+        inventoryApi: `https://inventory.${a}`,
         metricsApi: c(p),
-        privateMessagesApi: `https://privatemessages.${n}`,
-        thumbnailsApi: `https://thumbnails.${n}`,
-        accountInformationApi: `https://accountinformation.${n}`,
-        accountSettingsApi: `https://accountsettings.${n}`,
-        apiGatewayCdnUrl: c(a),
-        gamesApi: `https://games.${n}`,
-        tradesApi: `https://trades.${n}`,
-        twoStepVerificationApi: `https://twostepverification.${n}`,
-        userModerationApi: `https://usermoderation.${n}`,
-        usersApi: `https://users.${n}`,
-        abtestingApiSite: `https://abtesting.${n}`,
-        adConfigurationApi: `https://adconfiguration.${n}`,
-        adsApi: `https://ads.${n}`,
+        privateMessagesApi: `https://privatemessages.${a}`,
+        thumbnailsApi: `https://thumbnails.${a}`,
+        accountInformationApi: `https://accountinformation.${a}`,
+        accountSettingsApi: `https://accountsettings.${a}`,
+        apiGatewayCdnUrl: c(i),
+        gamesApi: `https://games.${a}`,
+        tradesApi: `https://trades.${a}`,
+        twoStepVerificationApi: `https://twostepverification.${a}`,
+        userModerationApi: `https://usermoderation.${a}`,
+        usersApi: `https://users.${a}`,
+        abtestingApiSite: `https://abtesting.${a}`,
+        adConfigurationApi: `https://adconfiguration.${a}`,
+        adsApi: `https://ads.${a}`,
         advertiseApi: `https://advertise.${s.defaultRootDomain}`,
-        apiProxyUrl: `https://api.${n}`,
-        assetDeliveryApi: `https://assetdelivery.${n}`,
+        apiProxyUrl: `https://api.${a}`,
+        assetDeliveryApi: `https://assetdelivery.${a}`,
         assetPathPrefix: `https://assets.create.${s.defaultRootDomain}`,
-        badgesApi: `https://badges.${n}`,
-        billingApi: `https://billing.${n}`,
+        badgesApi: `https://badges.${a}`,
+        billingApi: `https://billing.${a}`,
         captchaApi: `https://captcha.${s.defaultRootDomain}`,
-        chatApi: i.withPath("/platform-chat-api").toString(),
-        chatModerationApi: `https://chatmoderation.${n}`,
-        contactsApi: `https://contacts.${n}`,
-        contactsServiceApi: i.withPath("/contacts-api").toString(),
-        contentStoreApi: `https://contentstore.${n}`,
-        developApi: `https://develop.${n}`,
-        economycreatorstatsApi: `https://economycreatorstats.${n}`,
-        engagementPayoutsApi: `https://engagementpayouts.${n}`,
-        followingsApi: `https://followings.${n}`,
-        friendsApi: `https://friends.${n}`,
-        gameInternationalizationApi: `https://gameinternationalization.${n}`,
-        gameJoinApi: `https://gamejoin.${n}`,
-        gameUpdateNotificationsApi: i.withPath("/game-update-notifications").toString(),
-        groupsApi: `https://groups.${n}`,
-        groupsModerationApi: `https://groupsmoderation.${n}`,
+        chatApi: n.withPath("/platform-chat-api").toString(),
+        chatModerationApi: `https://chatmoderation.${a}`,
+        contactsApi: `https://contacts.${a}`,
+        contactsServiceApi: n.withPath("/contacts-api").toString(),
+        contentStoreApi: `https://contentstore.${a}`,
+        developApi: `https://develop.${a}`,
+        economycreatorstatsApi: `https://economycreatorstats.${a}`,
+        engagementPayoutsApi: `https://engagementpayouts.${a}`,
+        followingsApi: `https://followings.${a}`,
+        friendsApi: `https://friends.${a}`,
+        gameInternationalizationApi: `https://gameinternationalization.${a}`,
+        gameJoinApi: `https://gamejoin.${a}`,
+        gameUpdateNotificationsApi: n.withPath("/game-update-notifications").toString(),
+        groupsApi: `https://groups.${a}`,
+        groupsModerationApi: `https://groupsmoderation.${a}`,
         helpSite: `https://en.help.${s.defaultRootDomain}`,
-        itemConfigurationApi: `https://itemconfiguration.${n}`,
-        legacyChatApi: `https://chat.${n}`,
-        localeApi: `https://locale.${n}`,
-        localizationTablesApi: `https://localizationtables.${n}`,
-        matchmakingApi: i.withPath("/matchmaking-api").toString(),
-        midasApi: `https://midas.${n}`,
-        modalsApi: i.withPath("/modals-api").toString(),
-        notificationApi: `https://notifications.${n}`,
-        passProductPurchasingApi: i.withPath("/pass-product-purchasing").toString(),
+        itemConfigurationApi: `https://itemconfiguration.${a}`,
+        legacyChatApi: `https://chat.${a}`,
+        localeApi: `https://locale.${a}`,
+        localizationTablesApi: `https://localizationtables.${a}`,
+        matchmakingApi: n.withPath("/matchmaking-api").toString(),
+        midasApi: `https://midas.${a}`,
+        modalsApi: n.withPath("/modals-api").toString(),
+        notificationApi: `https://notifications.${a}`,
+        passProductPurchasingApi: n.withPath("/pass-product-purchasing").toString(),
         playWebsite: `https://play.${s.defaultRootDomain}`,
-        bundlesProductPurchasingApi: i.withPath("/bundles-product-purchasing").toString(),
-        premiumFeaturesApi: `https://premiumfeatures.${n}`,
-        presenceApi: `https://presence.${n}`,
-        profileInsightsApi: i.withPath("/profile-insights-api").toString(),
-        publishApi: `https://publish.${n}`,
-        restrictedHoursServiceApi: i.withPath("/restricted-hours-service").toString(),
+        bundlesProductPurchasingApi: n.withPath("/bundles-product-purchasing").toString(),
+        premiumFeaturesApi: `https://premiumfeatures.${a}`,
+        presenceApi: `https://presence.${a}`,
+        profileInsightsApi: n.withPath("/profile-insights-api").toString(),
+        publishApi: `https://publish.${a}`,
+        restrictedHoursServiceApi: n.withPath("/restricted-hours-service").toString(),
         screenTimeApi: "https://apis.rcs.roblox.com/screen-time-api",
-        shareApi: `https://share.${n}`,
-        shareLinksApi: i.withPath("/sharelinks").toString(),
-        shareLinksApiV2: i.withPath("/deeplinks").toString(),
-        showcasesApi: i.withPath("/showcases-api").toString(),
-        translationRolesApi: `https://translationroles.${n}`,
-        userAgreementsServiceApi: i.withPath("/user-agreements").toString(),
-        userSettingsApi: i.withPath("/user-settings-api").toString(),
-        voiceApi: `https://voice.${n}`,
+        shareApi: `https://share.${a}`,
+        shareLinksApi: n.withPath("/sharelinks").toString(),
+        shareLinksApiV2: n.withPath("/deeplinks").toString(),
+        showcasesApi: n.withPath("/showcases-api").toString(),
+        translationRolesApi: `https://translationroles.${a}`,
+        userAgreementsServiceApi: n.withPath("/user-agreements").toString(),
+        userSettingsApi: n.withPath("/user-settings-api").toString(),
+        voiceApi: `https://voice.${a}`,
         eduAuthenticationApi: "production" === t.robloxEnv ? "https://auth.rblx.org" : `https://auth.${t.robloxEnv}.rblx.org`,
         eduWebsiteUrl: "production" === t.robloxEnv ? "https://www.rblx.org" : `https://www.${t.robloxEnv}.rblx.org`,
         guildedBaseUrl: "production" === t.robloxEnv ? "https://guilded.gg" : "sitetest1" === t.robloxEnv ? "https://tarobi-dev-test.com" : "https://tarobi-dev-sandbox.com",
@@ -188,9 +188,9 @@
         if (t.length <= 2 || t.some(e => 0 === e.length)) return;
         let r = t.slice(0, 2),
             s = t.slice(2).join(":"),
-            n = r.join(":");
+            a = r.join(":");
         return {
-            path: `${n}.${s}`,
+            path: `${a}.${s}`,
             namespace: r.join("."),
             key: s
         }
@@ -219,48 +219,48 @@
         },
         r = (e, r) => {
             let s, {
-                    delay: n,
-                    maxSize: i
+                    delay: a,
+                    maxSize: n
                 } = e,
-                a = [],
+                i = [],
                 o = t(),
                 l = () => {
                     let {
                         resolve: e,
                         reject: s
-                    } = o, n = a;
-                    a = [], o = t(), r(n).then(e).catch(s)
+                    } = o, a = i;
+                    i = [], o = t(), r(a).then(e).catch(s)
                 };
             return e => {
-                0 === a.length && (s = setTimeout(l, n)), a.push(e);
+                0 === i.length && (s = setTimeout(l, a)), i.push(e);
                 let {
                     promise: t
                 } = o;
-                return null != i && a.length >= i && (clearTimeout(s), l()), t
+                return null != n && i.length >= n && (clearTimeout(s), l()), t
             }
         };
     e.s(["batch", 0, r, "batchQuery", 0, (e, t, s) => {
-        let n = r(e, t);
-        return e => n(e).then(t => s(t, e))
+        let a = r(e, t);
+        return e => a(e).then(t => s(t, e))
     }, "queue", 0, (e, r) => {
         let s = 0,
-            n = [],
-            i = () => {
-                let e = n.shift();
+            a = [],
+            n = () => {
+                let e = a.shift();
                 if (void 0 === e) s -= 1;
                 else {
                     let [t, {
                         resolve: s,
-                        reject: n
+                        reject: a
                     }] = e;
-                    r(...t).then(s).catch(n).finally(i)
+                    r(...t).then(s).catch(a).finally(n)
                 }
             };
         return function() {
-            for (var a = arguments.length, o = Array(a), l = 0; l < a; l++) o[l] = arguments[l];
-            if (s < e) return s += 1, r(...o).finally(i);
+            for (var i = arguments.length, o = Array(i), l = 0; l < i; l++) o[l] = arguments[l];
+            if (s < e) return s += 1, r(...o).finally(n);
             let p = t();
-            return n.push([o, p]), p.promise
+            return a.push([o, p]), p.promise
         }
     }, "timeout", 0, e => new Promise(t => {
         setTimeout(t, e)
@@ -279,28 +279,28 @@
             code: "AbortError" === e.name ? "Abort" : "Timeout",
             message: e.message
         }) : null,
-        n = e => s(e.reason) ?? new r({
+        a = e => s(e.reason) ?? new r({
             code: "Reason",
             reason: e.reason
         });
-    e.s(["AbortError", 0, r, "abortErrorFromError", 0, s, "abortErrorFromSignal", 0, n], 552566);
-    var i = e.i(723941),
-        a = e.i(360702),
+    e.s(["AbortError", 0, r, "abortErrorFromError", 0, s, "abortErrorFromSignal", 0, a], 552566);
+    var n = e.i(723941),
+        i = e.i(360702),
         o = e.i(240549);
     class l extends Error {
         static new(e, t, r, s) {
             let {
-                headers: n,
-                redirected: i,
-                status: a,
+                headers: a,
+                redirected: n,
+                status: i,
                 statusText: o,
                 type: p,
                 url: c
             } = r;
             return new l(e, t, {
-                headers: n,
-                redirected: i,
-                status: a,
+                headers: a,
+                redirected: n,
+                status: i,
                 statusText: o,
                 type: p,
                 url: c,
@@ -320,13 +320,13 @@
     }
     e.s(["HttpError", 0, l, "UnknownFetchError", 0, p], 849735);
     var c = e.i(734899);
-    let u = (e, t) => a.AsyncResult.fromExecutor(r => {
-        if (t.aborted) return void r((0, a.err)(n(t)));
+    let u = (e, t) => i.AsyncResult.fromExecutor(r => {
+        if (t.aborted) return void r((0, i.err)(a(t)));
         let s = setTimeout(() => {
-            r((0, a.ok)(null))
+            r((0, i.ok)(null))
         }, e);
         t.addEventListener("abort", () => {
-            clearTimeout(s), r((0, a.err)(n(t)))
+            clearTimeout(s), r((0, i.err)(a(t)))
         }, {
             once: !0
         })
@@ -341,7 +341,7 @@
             if (null == t) return null;
             let r = (0, h.parseInt)(t);
             if (null != r) return 1e3 * r;
-            let s = (0, a.tryCatch)(() => new Date(t), () => null).getOrNull();
+            let s = (0, i.tryCatch)(() => new Date(t), () => null).getOrNull();
             return null != s ? s.getTime() - Date.now() : null
         },
         f = function(e) {
@@ -351,26 +351,26 @@
         w = e => (t, r) => {
             let {
                 retry: s,
-                signal: n
+                signal: a
             } = r;
-            return null == s ? e(t, r) : e(t, r).orElse(async i => {
-                let o = i,
+            return null == s ? e(t, r) : e(t, r).orElse(async n => {
+                let o = n,
                     l = 0,
                     p = s(0, o);
                 for (; null != p && Number.isFinite(p);) {
                     if (p > 0)
-                        if (null == n) await (0, c.timeout)(p);
+                        if (null == a) await (0, c.timeout)(p);
                         else {
-                            let e = await u(p, n);
+                            let e = await u(p, a);
                             if (e.isErr()) return e.cast()
                         } l += 1, r.headers.set("x-retry-attempt", l.toString());
-                    let i = await e(t, r);
-                    if (i.isOk()) return i;
+                    let n = await e(t, r);
+                    if (n.isOk()) return n;
                     ({
                         error: o
-                    } = i), p = s(l, o)
+                    } = n), p = s(l, o)
                 }
-                return (0, a.errAsync)(o)
+                return (0, i.errAsync)(o)
             })
         };
     e.s(["defaultRetryableHttpStatuses", 0, m, "exponentialBackoff", 0, d, "isRetryableError", 0, f, "retryAfterHeaderDelay", 0, g, "retryInterceptor", 0, w], 874775);
@@ -379,15 +379,15 @@
                 maxRetries: t,
                 factor: r,
                 maxDelay: s,
-                retryableHttpStatuses: n = m
-            } = e, i = d(r, s);
-            return (e, r) => e < t && f(r, n) ? g(r) ?? i(e) : NaN
+                retryableHttpStatuses: a = m
+            } = e, n = d(r, s);
+            return (e, r) => e < t && f(r, a) ? g(r) ?? n(e) : NaN
         })({
             maxRetries: 3,
             factor: 1e3,
             maxDelay: 3e4
         }),
-        v = (e, t) => a.AsyncResult.fromPromise(globalThis.fetch(e.href, t), e => s(e) ?? new p(e)).andThen(r => r.ok ? (0, a.ok)(r) : t.includeBodyOnError ? r.text().catch(() => void 0).then(s => (0, a.err)(l.new(e, t, r, s))) : (0, a.err)(l.new(e, t, r))),
+        v = (e, t) => i.AsyncResult.fromPromise(globalThis.fetch(e.href, t), e => s(e) ?? new p(e)).andThen(r => r.ok ? (0, i.ok)(r) : t.includeBodyOnError ? r.text().catch(() => void 0).then(s => (0, i.err)(l.new(e, t, r, s))) : (0, i.err)(l.new(e, t, r))),
         A = w(v),
         y = function(e) {
             let t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
@@ -399,28 +399,28 @@
                 headers: s
             })
         },
-        S = e => a.AsyncResult.fromPromise(e.json(), e => new i.JsonDeserializationError({
+        S = e => i.AsyncResult.fromPromise(e.json(), e => new n.JsonDeserializationError({
             code: "Syntax",
             error: e
         })),
-        k = e => t => S(t).andThen(t => (0, o.zodSafeParse)(e, t).mapErr(e => new i.JsonDeserializationError({
+        P = e => t => S(t).andThen(t => (0, o.zodSafeParse)(e, t).mapErr(e => new n.JsonDeserializationError({
             code: "Validation",
             error: e
         }))),
-        P = (e, t, r) => {
-            let s = (0, i.serialize)(t);
-            if (s.isErr()) return (0, a.errAsync)(s.error);
-            let n = new Headers(r?.headers);
-            return n.set("content-type", "application/json"), y(e, {
+        k = (e, t, r) => {
+            let s = (0, n.serialize)(t);
+            if (s.isErr()) return (0, i.errAsync)(s.error);
+            let a = new Headers(r?.headers);
+            return a.set("content-type", "application/json"), y(e, {
                 ...r,
                 method: "POST",
-                headers: n,
+                headers: a,
                 body: s.value
             })
         };
-    e.s(["defaultBrowserRetryDelay", 0, b, "fetch", 0, y, "get", 0, (e, t, r) => y(e, r).andThen(k(t)), "getUntyped", 0, (e, t) => y(e, t).andThen(S), "post", 0, (e, t, r, s) => P(e, t, s).andThen(k(r)), "postUntyped", 0, (e, t, r) => P(e, t, r).andThen(e => {
+    e.s(["defaultBrowserRetryDelay", 0, b, "fetch", 0, y, "get", 0, (e, t, r) => y(e, r).andThen(P(t)), "getUntyped", 0, (e, t) => y(e, t).andThen(S), "post", 0, (e, t, r, s) => k(e, t, s).andThen(P(r)), "postUntyped", 0, (e, t, r) => k(e, t, r).andThen(e => {
         let t;
-        return "application/json" === (t = e.headers.get("content-type")) || t?.startsWith("application/json;") ? S(e) : (0, a.okAsync)(void 0)
+        return "application/json" === (t = e.headers.get("content-type")) || t?.startsWith("application/json;") ? S(e) : (0, i.okAsync)(void 0)
     }), "setInterceptors", 0, e => {
         A = e.toReversed().reduce((e, t) => t(e), v)
     }], 646424)
@@ -429,9 +429,9 @@
     var t = e.i(682259);
     let r = ["ar_001", "de_de", "en_us", "es_es", "fr_fr", "hi_in", "id_id", "it_it", "ja_jp", "ko_kr", "nl_nl", "pl_pl", "pt_br", "th_th", "tr_tr", "vi_vn", "zh_cn", "zh_tw"],
         s = [...r, "bg_bg", "bn_bd", "bs_ba", "cs_cz", "da_dk", "el_gr", "en_gb", "es_mx", "et_ee", "fi_fi", "fil_ph", "fr_ca", "hr_hr", "hu_hu", "ka_ge", "kk_kz", "km_kh", "lt_lt", "lv_lv", "ms_my", "my_mm", "nb_no", "pt_pt", "ro_ro", "ru_ru", "si_lk", "sk_sk", "sl_sl", "sq_al", "sr_rs", "sv_se", "uk_ua"],
-        n = ["ar-001", "de-de", "es-es", "fr-fr", "hi-in", "id-id", "it-it", "ja-jp", "ko-kr", "nl-nl", "pl-pl", "pt-br", "th-th", "tr-tr", "vi-vn"],
-        i = ["ar", "de", "es", "fr", "hi", "id", "it", "ja", "ko", "nl", "pl", "pt", "th", "tr", "vi"],
-        a = [...i, ...n];
+        a = ["ar-001", "de-de", "es-es", "fr-fr", "hi-in", "id-id", "it-it", "ja-jp", "ko-kr", "nl-nl", "pl-pl", "pt-br", "th-th", "tr-tr", "vi-vn"],
+        n = ["ar", "de", "es", "fr", "hi", "id", "it", "ja", "ko", "nl", "pl", "pt", "th", "tr", "vi"],
+        i = [...n, ...a];
     e.s(["defaultLanguage", 0, "en", "defaultLocale", 0, "en-us", "fullySupportedLocalesLowercaseUnderscore", 0, r, "localeFromLowercaseUnderscore", 0, e => e.replace("_", "-"), "localeFromUppercaseDash", 0, e => e.toLowerCase(), "localeToLowercaseUnderscore", 0, e => e.replace("-", "_").toLowerCase(), "localeToUppercaseDash", 0, e => {
         let [t, r] = e.split("-");
         return `${t}-${r?.toUpperCase()}`
@@ -439,8 +439,8 @@
         if (!e.startsWith("/")) return e;
         let r = e.indexOf("/", 1),
             s = (-1 === r ? e.substring(1) : e.substring(1, r)).toLowerCase();
-        return (0, t.arrayIncludes)(i, s) ? -1 === r ? "/" : e.substring(r) : e
-    }, "urlLanguageOrLocalePrefixes", 0, a, "urlLocalePrefixToLanguage", 0, {
+        return (0, t.arrayIncludes)(n, s) ? -1 === r ? "/" : e.substring(r) : e
+    }, "urlLanguageOrLocalePrefixes", 0, i, "urlLocalePrefixToLanguage", 0, {
         "ar-001": "ar",
         "de-de": "de",
         "es-es": "es",
@@ -456,25 +456,25 @@
         "pt-br": "pt",
         "tr-tr": "tr",
         "vi-vn": "vi"
-    }, "urlLocalePrefixes", 0, n])
+    }, "urlLocalePrefixes", 0, a])
 }, 545819, e => {
     "use strict";
     let t = (e, t, r) => {
         let s = null == r.sameSite ? "" : `;samesite=${r.sameSite}`,
-            n = null == r.domain ? "" : `;domain=${r.domain}`,
-            i = `;path=${r.path??"/"}`,
-            a = null == r.expires ? "" : `;expires=${r.expires.toUTCString()}`,
+            a = null == r.domain ? "" : `;domain=${r.domain}`,
+            n = `;path=${r.path??"/"}`,
+            i = null == r.expires ? "" : `;expires=${r.expires.toUTCString()}`,
             o = null == r.maxAge ? "" : `;max-age=${r.maxAge}`;
-        document.cookie = `${e}=${encodeURIComponent(t)};secure${s}${n}${i}${a}${o}`
+        document.cookie = `${e}=${encodeURIComponent(t)};secure${s}${a}${n}${i}${o}`
     };
     e.s(["delete", 0, (e, r) => {
         let {
             domain: s,
-            path: n
+            path: a
         } = r;
         t(e, "", {
             domain: s,
-            path: n,
+            path: a,
             expires: new Date(0)
         })
     }, "get", 0, e => {
@@ -490,9 +490,9 @@
 }, 889375, 621899, 270784, e => {
     "use strict";
     let t, r;
-    var s, n = e.i(357355),
-        i = e.i(646424),
-        a = e.i(849735),
+    var s, a = e.i(357355),
+        n = e.i(646424),
+        i = e.i(849735),
         o = e.i(868275);
     class l {
         constructor(e = {
@@ -507,14 +507,14 @@
                 localTime: t,
                 target: r,
                 eventType: s,
-                context: n,
-                additionalProperties: i,
-                currentUrl: a,
+                context: a,
+                additionalProperties: n,
+                currentUrl: i,
                 guestId: o,
                 sessionId: l
             } = e, p = t.toISOString(), c = new URL(`${this.baseUrl}/pe`);
-            return c.searchParams.append("t", r), c.searchParams.append("evt", s), c.searchParams.append("ctx", n), c.searchParams.append("lt", p), c.searchParams.append("url", a || window.location.href), void 0 !== o && c.searchParams.append("gid", o), void 0 !== l && c.searchParams.append("sid", l), void 0 !== i && Object.keys(i).forEach(e => {
-                c.searchParams.append(e, (i[e] ?? "").toString())
+            return c.searchParams.append("t", r), c.searchParams.append("evt", s), c.searchParams.append("ctx", a), c.searchParams.append("lt", p), c.searchParams.append("url", i || window.location.href), void 0 !== o && c.searchParams.append("gid", o), void 0 !== l && c.searchParams.append("sid", l), void 0 !== n && Object.keys(n).forEach(e => {
+                c.searchParams.append(e, (n[e] ?? "").toString())
             }), fetch(c.href, {
                 credentials: "same-origin"
             })
@@ -542,14 +542,14 @@
                 localTime: t,
                 target: r,
                 eventType: s,
-                context: n,
-                additionalProperties: i,
-                currentUrl: a,
+                context: a,
+                additionalProperties: n,
+                currentUrl: i,
                 guestId: o,
                 sessionId: l
             } = e, p = t.toISOString(), c = new URL(`${this.baseUrl}/e.png`);
-            return c.searchParams.append("t", r), c.searchParams.append("evt", s), c.searchParams.append("ctx", n), c.searchParams.append("lt", p), c.searchParams.append("url", a || window.location.href), void 0 !== o && c.searchParams.append("gid", o), void 0 !== l && c.searchParams.append("sid", l), void 0 !== i && Object.keys(i).forEach(e => {
-                c.searchParams.append(e, (i[e] ?? "").toString())
+            return c.searchParams.append("t", r), c.searchParams.append("evt", s), c.searchParams.append("ctx", a), c.searchParams.append("lt", p), c.searchParams.append("url", i || window.location.href), void 0 !== o && c.searchParams.append("gid", o), void 0 !== l && c.searchParams.append("sid", l), void 0 !== n && Object.keys(n).forEach(e => {
+                c.searchParams.append(e, (n[e] ?? "").toString())
             }), c
         }
         constructor(e = new l) {
@@ -566,7 +566,7 @@
     let m = (t = new p(new l({
         baseUrl: (0, d.getPageBaseUrls)().eventStreamApi.withPath("www").href
     })), r = (e, t, r) => {
-        let s = null != n.document;
+        let s = null != a.document;
         return {
             target: "www",
             localTime: new Date,
@@ -580,8 +580,8 @@
             }
         }
     }, {
-        sendEvent: (e, s, n) => {
-            t.sendEventViaImg(r(e, s, n))
+        sendEvent: (e, s, a) => {
+            t.sendEventViaImg(r(e, s, a))
         },
         sendEventWithKeepalive: (e, t, s) => {
             var o;
@@ -590,18 +590,18 @@
                 ["evt", o.eventType],
                 ["ctx", o.context],
                 ["lt", o.localTime.toISOString()],
-                ["url", o.currentUrl ?? n.document?.URL ?? ""]
+                ["url", o.currentUrl ?? a.document?.URL ?? ""]
             ], void 0 !== o.guestId && l.push(["gid", o.guestId]), void 0 !== o.sessionId && l.push(["sid", o.sessionId]), Object.entries(o.additionalProperties ?? {}).forEach(e => {
                 let [t, r] = e;
                 l.push([t, String(r ?? "")])
             }), (0, d.getPageBaseUrls)().eventStreamApi.withPath("www/e.png").withSearchParams(l));
-            i.fetch(p, {
+            n.fetch(p, {
                 mode: "no-cors",
                 credentials: "include",
                 keepalive: !0,
                 retry: () => null
             }).inspectErr(e => {
-                e instanceof a.HttpError || console.error(e)
+                e instanceof i.HttpError || console.error(e)
             })
         }
     });
@@ -631,27 +631,27 @@
     var t = e.i(473897),
         r = e.i(645020),
         s = e.i(683740);
-    let n = e => {
+    let a = e => {
             let r = (0, s.parseBigInt)(e);
             return null == r ? null : r > 0 && r <= Number.MAX_SAFE_INTEGER ? (0, t.downcast)(r.toString()) : null
         },
-        i = "blackbird";
-    e.s(["blackbirdMembership", 0, i, "getCurrentUser", 0, () => {
+        n = "blackbird";
+    e.s(["blackbirdMembership", 0, n, "getCurrentUser", 0, () => {
         if ("u" < typeof document) return;
         var e = document.querySelector('meta[name="user-data"]')?.dataset ?? document.documentElement.dataset;
         let t = e.userid ?? e.user,
-            r = null == t ? void 0 : n(t) ?? void 0;
+            r = null == t ? void 0 : a(t) ?? void 0;
         return "string" == typeof r ? {
             isAuthenticated: !0,
             id: r,
             userName: e.name ?? e.userName,
             displayName: e.displayname ?? e.userDisplayName,
             isPremiumUser: "true" === e.ispremiumuser || "true" === e.userIsPremium,
-            membership: e.membership === i || e.userMembership === i ? i : void 0,
+            membership: e.membership === n || e.userMembership === n ? n : void 0,
             isVerified: "true" === e.hasverifiedbadge || "true" === e.userHasVerifiedBadge,
             isUnder13: "true" === e.isunder13 || "AgeUnder13" === e.userAgeBracket
         } : void 0
-    }, "parseUserId", 0, n, "userIdToNumber", 0, function(e) {
+    }, "parseUserId", 0, a, "userIdToNumber", 0, function(e) {
         if (void 0 === e) return;
         let t = (0, r.parseInt)(e);
         if (null == t) throw Error(`UserId ${e} was not parsable as an integer.`);
@@ -669,44 +669,44 @@
     var r = e.i(874296),
         s = e.i(189571),
         s = s,
-        n = e.i(683898);
-    let i = r.catch(r.union([r.boolean(), r.stringbool({
+        a = e.i(683898);
+    let n = r.catch(r.union([r.boolean(), r.stringbool({
             truthy: ["true"],
             falsy: ["false"]
         })]), !1),
-        a = (e, t) => {
-            let n = new Map(e.map(e => [e.toLowerCase(), e]));
-            return r.pipe(r.catch(r.string().check(s._toLowerCase()), t.toLowerCase()), r.transform(e => n.get(e) ?? t))
+        i = (e, t) => {
+            let a = new Map(e.map(e => [e.toLowerCase(), e]));
+            return r.pipe(r.catch(r.string().check(s._toLowerCase()), t.toLowerCase()), r.transform(e => a.get(e) ?? t))
         },
         o = {
             isUwpApp: "isUWPApp",
             isPcgdkApp: "isPcGdkApp"
         },
         l = r.object({
-            browser: a(["chrome", "edge", "firefox", "safari", "unknown"], "unknown"),
-            operatingSystem: a(["ios", "android", "osx", "windows", "windowsPhone", "xboxOne", "xboxOneSTx", "playStation", "chromeOS", "unknown"], "unknown"),
-            deviceType: a(["computer", "tablet", "phone", "console", "vr", "unknown"], "unknown"),
-            appType: a(n.AppType, "unknown"),
-            isInApp: i,
-            isDesktop: i,
-            isPhone: i,
-            isTablet: i,
-            isConsole: i,
-            isAndroidApp: i,
-            isIosApp: i,
-            isUWPApp: i,
-            isXboxApp: i,
-            isAmazonApp: i,
-            isWin32App: i,
-            isStudio: i,
-            isIosDevice: i,
-            isAndroidDevice: i,
-            isUniversalApp: i,
-            isChromeOs: i,
-            isSamsungGalaxyStoreApp: i,
-            isPcGdkApp: i,
-            isMac: i,
-            isWindows: i
+            browser: i(["chrome", "edge", "firefox", "safari", "unknown"], "unknown"),
+            operatingSystem: i(["ios", "android", "osx", "windows", "windowsPhone", "xboxOne", "xboxOneSTx", "playStation", "chromeOS", "unknown"], "unknown"),
+            deviceType: i(["computer", "tablet", "phone", "console", "vr", "unknown"], "unknown"),
+            appType: i(a.AppType, "unknown"),
+            isInApp: n,
+            isDesktop: n,
+            isPhone: n,
+            isTablet: n,
+            isConsole: n,
+            isAndroidApp: n,
+            isIosApp: n,
+            isUWPApp: n,
+            isXboxApp: n,
+            isAmazonApp: n,
+            isWin32App: n,
+            isStudio: n,
+            isIosDevice: n,
+            isAndroidDevice: n,
+            isUniversalApp: n,
+            isChromeOs: n,
+            isSamsungGalaxyStoreApp: n,
+            isPcGdkApp: n,
+            isMac: n,
+            isWindows: n
         }),
         p = Object.assign(r.pipe(r.transform(e => {
             if (!("object" == typeof e && null != e && !Array.isArray(e))) return e;
@@ -764,11 +764,11 @@
     var t = e.i(371847),
         r = e.i(682259),
         s = e.i(880983);
-    let n = new Map([
+    let a = new Map([
         ["zh_cjv", "zh_cn"]
     ]);
 
-    function i() {
+    function n() {
         return function() {
             if ("u" < typeof document) return;
             let {
@@ -783,12 +783,12 @@
                 languageCode: t
             } = e.dataset;
             if (!t) return;
-            let i = n.get(t) ?? t;
-            if ((0, r.arrayIncludes)(s.localesLowercaseUnderscore, i)) return (0, s.localeFromLowercaseUnderscore)(i)
+            let n = a.get(t) ?? t;
+            if ((0, r.arrayIncludes)(s.localesLowercaseUnderscore, n)) return (0, s.localeFromLowercaseUnderscore)(n)
         }() ?? s.defaultLocale
     }
 
-    function a(e) {
+    function i(e) {
         return {
             dateTime: (t, r) => {
                 try {
@@ -807,11 +807,11 @@
         }
     }
     e.s(["format", 0, {
-        dateTime: (e, t) => a(i()).dateTime(e, t),
-        number: (e, t) => a(i()).number(e, t)
-    }, "getLocaleFromDocument", 0, i, "useFormatter", 0, function(e) {
-        let r = e ?? i();
-        return (0, t.useMemo)(() => a(r), [r])
+        dateTime: (e, t) => i(n()).dateTime(e, t),
+        number: (e, t) => i(n()).number(e, t)
+    }, "getLocaleFromDocument", 0, n, "useFormatter", 0, function(e) {
+        let r = e ?? n();
+        return (0, t.useMemo)(() => i(r), [r])
     }])
 }, 44170, 476752, e => {
     "use strict";
@@ -821,37 +821,46 @@
             return (0, t.downcast)(btoa(r))
         },
         s = e => Uint8Array.from(atob(e), e => e.codePointAt(0)),
-        n = new TextEncoder;
-    new TextDecoder, e.s(["base64ToBytes", 0, s, "bytesToBase64", 0, r, "stringToBase64", 0, e => r(n.encode(e))], 476752);
+        a = new TextEncoder;
+    new TextDecoder;
+    let n = {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;",
+        "/": "&#x2F;"
+    };
+    e.s(["base64ToBytes", 0, s, "bytesToBase64", 0, r, "escapeHtml", 0, e => e.replace(/[&<>"'\\/]/g, e => n[e] ?? e), "formatSeoName", 0, e => e.replace(/'/g, "").replace(/[^a-zA-Z0-9]+/g, "-").replace(/^-+|-+$/g, "").replace(/^(COM\d|LPT\d|AUX|PRT|NUL|CON|BIN)$/i, "") || "unnamed", "stringToBase64", 0, e => r(a.encode(e))], 476752);
     let i = {
             name: "ECDSA",
             namedCurve: "P-256"
         },
-        a = {
+        o = {
             name: "ECDSA",
             hash: {
                 name: "SHA-256"
             }
         },
-        o = e => {
+        l = e => {
             let t = new Uint8Array(e.length);
             for (let r = 0; r < e.length; r += 1) t[r] = e.charCodeAt(r);
             return t.buffer
         },
-        l = e => r(new Uint8Array(e)),
-        p = async () => crypto.subtle.generateKey(i, !1, ["sign"]), c = async (e, t) => l(await crypto.subtle.sign(a, e, o(t))), u = async e => l(await crypto.subtle.exportKey("spki", e)), h = e => new TextEncoder().encode(e), d = async e => {
-            let t = h(e);
-            return l(await crypto.subtle.digest(a.hash.name, t))
+        p = e => r(new Uint8Array(e)),
+        c = async () => crypto.subtle.generateKey(i, !1, ["sign"]), u = async (e, t) => p(await crypto.subtle.sign(o, e, l(t))), h = async e => p(await crypto.subtle.exportKey("spki", e)), d = e => new TextEncoder().encode(e), m = async e => {
+            let t = d(e);
+            return p(await crypto.subtle.digest(o.hash.name, t))
         };
-    e.s(["arrayBufferToBase64String", 0, l, "base64StringToArrayBuffer", 0, e => new Uint8Array(s((0, t.downcast)(e))).buffer, "exportPublicKeyAsSpki", 0, u, "generateSigningKeyPairUnextractable", 0, p, "hashStringWithFnv1a32", 0, e => {
-        let t = h(e),
+    e.s(["arrayBufferToBase64String", 0, p, "base64StringToArrayBuffer", 0, e => new Uint8Array(s((0, t.downcast)(e))).buffer, "exportPublicKeyAsSpki", 0, h, "generateSigningKeyPairUnextractable", 0, c, "hashStringWithFnv1a32", 0, e => {
+        let t = d(e),
             r = 0x811c9dc5;
         for (let e of t) r ^= e, r = Math.imul(r, 0x1000193);
         let s = (r >>> 0).toString(16).toLowerCase();
         for (; s.length < 8;) s = `0${s}`;
         return s
-    }, "hashStringWithSha256", 0, d, "sign", 0, c, "stringToArrayBuffer", 0, o, "stringToUrlSafeBase64", 0, e => l(h(e).buffer).replace(/\+/g, "-").replace(/\//g, "_").replace(/=/g, ""), "textEncode", 0, h], 44170)
+    }, "hashStringWithSha256", 0, m, "sign", 0, u, "stringToArrayBuffer", 0, l, "stringToUrlSafeBase64", 0, e => p(d(e).buffer).replace(/\+/g, "-").replace(/\//g, "_").replace(/=/g, ""), "textEncode", 0, d], 44170)
 }]);
 
-//# debugId=9d0b213f-0dcf-c4c0-dc9b-e356b157b927
-//# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/0l5agqoe91~91.js.map
+//# debugId=12d15aa7-e13e-67e2-49c5-2074dd037c5b
+//# sourceMappingURL=https://internal-assets.rbxcdn.com/_next/static/chunks/0vnfsn_krheg4.js.map

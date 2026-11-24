@@ -279,6 +279,9 @@ Roblox.LangDynamic["Feature.RobloxSubscription"] = {
     "Message.CancelPlanChangeFailed": "Something went wrong. Please try again.",
     "Description.BillingInfoWithFreeTrialOfferV3": "{boldTagStart}{trialPeriodType, select, Week {{trialPeriod, plural, one {{trialPeriod} week} other {{trialPeriod} weeks}}} Month {{trialPeriod, plural, one {{trialPeriod} month} other {{trialPeriod} months}}} Year {{trialPeriod, plural, one {{trialPeriod} year} other {{trialPeriod} years}}} other {{trialPeriod} {trialPeriodType}} } free{boldTagEnd}, then {price} per {periodType, select, Week {{periodCount, plural, one {week} other {{periodCount} weeks}}} Month {{periodCount, plural, one {month} other {{periodCount} months}}} Year {{periodCount, plural, one {year} other {{periodCount} years}}} other {{periodType}} }",
     "Heading.PlusBenefits": "Plus benefits",
-    "Action.ViewAccount": "View account"
+    "Action.ViewAccount": "View account",
+    "Description.FreePlusUntil": "Free Plus until {date}",
+    "Description.KeepPlusBenefits": "Keep your Plus benefits for {price}/month",
+    "Action.Upgrade": "Upgrade"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.RobloxSubscription");
