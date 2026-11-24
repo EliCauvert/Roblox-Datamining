@@ -217,6 +217,7 @@
             engineBase,
             channel,
             server,
+            canStoreTelemetry: host.canStoreTelemetry === true,
             ...host.workerStubUrl !== void 0 ? {
                 workerStubUrl: new URL(host.workerStubUrl, location.href).href
             } : {}

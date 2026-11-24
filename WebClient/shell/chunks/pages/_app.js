@@ -8,20 +8,20 @@
         1760: (e, n, s) => {
             "use strict";
             s.r(n), s.d(n, {
-                default: () => i
+                default: () => a
             });
             var t = s(7876),
-                a = s(4232),
-                r = s(7328),
-                c = s.n(r);
+                r = s(4232),
+                c = s(7328),
+                i = s.n(c);
             s(5379), s(6448);
-            let i = function(e) {
+            let a = function(e) {
                 let {
                     Component: n,
                     pageProps: s
                 } = e;
-                return (0, t.jsxs)(a.Fragment, {
-                    children: [(0, t.jsxs)(c(), {
+                return (0, t.jsxs)(r.Fragment, {
+                    children: [(0, t.jsxs)(i(), {
                         children: [(0, t.jsx)("title", {
                             children: "Roblox Web Experience"
                         }), (0, t.jsx)("meta", {
@@ -30,7 +30,7 @@
                         }), (0, t.jsx)("link", {
                             rel: "icon",
                             type: "image/svg+xml",
-                            href: "".concat("/6536749aa05e452da9c4d6ed4b464613ff9ba84a/assets", "/favicon.svg")
+                            href: "".concat("/4cf83f8627d9609709ef5165081e6f27acdfe5d8/assets", "/favicon.svg")
                         })]
                     }), (0, t.jsx)(n, {
                         ...s

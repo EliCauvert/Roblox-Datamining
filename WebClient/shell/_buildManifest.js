@@ -1,10 +1,10 @@
-self.__BUILD_MANIFEST = function(e, s, t, a, r) {
+self.__BUILD_MANIFEST = function(e, s, t, r, a) {
     return {
         __rewrites: {
             afterFiles: [],
             beforeFiles: [{
                 has: void 0,
-                source: "/6536749aa05e452da9c4d6ed4b464613ff9ba84a/_next/:path+",
+                source: "/4cf83f8627d9609709ef5165081e6f27acdfe5d8/_next/:path+",
                 destination: "/_next/:path+"
             }],
             fallback: []
@@ -23,10 +23,9 @@ self.__BUILD_MANIFEST = function(e, s, t, a, r) {
             numHashes: null,
             bitArray: []
         },
-        "/": [s, r, "static/chunks/pages/index-378f53d0d6d44e48.js"],
-        "/WebClient/Launcher": [s, "static/chunks/pages/WebClient/Launcher-ba9c76d2497e7b48.js"],
+        "/": [r, a, "static/chunks/pages/index-e5ae9ddb406d6be0.js"],
         "/_error": ["static/chunks/pages/_error-5366f00fee9a89ba.js"],
-        "/games/start": [s, r, "static/chunks/pages/games/start-95660a61a2f135cd.js"],
-        sortedPages: ["/", "/WebClient/Launcher", "/_app", "/_error", "/games/start"]
+        "/games/start": [r, a, "static/chunks/pages/games/start-920e79298a9ac7db.js"],
+        sortedPages: ["/", "/_app", "/_error", "/games/start"]
     }
-}(0, "static/chunks/625-1b544f6168c24e1c.js", 1e-4, null, "static/chunks/51-e67dc1acff0bee27.js"), self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB();
+}(0, 1e-4, null, "static/chunks/463-eb1bf35b6d125952.js", "static/chunks/774-3688b4b1497af314.js"), self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB();

@@ -17,7 +17,7 @@ a {
     width: 32px;
     height: 32px;
     margin-top: .5rem;
-    background-image: url(/6536749aa05e452da9c4d6ed4b464613ff9ba84a/assets/favicon.svg)
+    background-image: url(/4cf83f8627d9609709ef5165081e6f27acdfe5d8/assets/favicon.svg)
 }
 
 .emscripten {
@@ -52,35 +52,35 @@ html {
 
 @font-face {
     font-family: Builder Sans;
-    src: url(/6536749aa05e452da9c4d6ed4b464613ff9ba84a/assets/loading/BuilderSans-Regular.otf) format("opentype");
+    src: url(/4cf83f8627d9609709ef5165081e6f27acdfe5d8/assets/loading/BuilderSans-Regular.otf) format("opentype");
     font-weight: 400;
     font-display: block
 }
 
 @font-face {
     font-family: Builder Sans;
-    src: url(/6536749aa05e452da9c4d6ed4b464613ff9ba84a/assets/loading/BuilderSans-Medium.otf) format("opentype");
+    src: url(/4cf83f8627d9609709ef5165081e6f27acdfe5d8/assets/loading/BuilderSans-Medium.otf) format("opentype");
     font-weight: 500;
     font-display: block
 }
 
 @font-face {
     font-family: Builder Sans;
-    src: url(/6536749aa05e452da9c4d6ed4b464613ff9ba84a/assets/loading/BuilderSans-Bold.otf) format("opentype");
+    src: url(/4cf83f8627d9609709ef5165081e6f27acdfe5d8/assets/loading/BuilderSans-Bold.otf) format("opentype");
     font-weight: 700;
     font-display: block
 }
 
 @font-face {
     font-family: Source Sans Pro;
-    src: url(/6536749aa05e452da9c4d6ed4b464613ff9ba84a/assets/loading/SourceSansPro-Regular.ttf) format("truetype");
+    src: url(/4cf83f8627d9609709ef5165081e6f27acdfe5d8/assets/loading/SourceSansPro-Regular.ttf) format("truetype");
     font-weight: 400;
     font-display: block
 }
 
 @font-face {
     font-family: Source Sans Pro;
-    src: url(/6536749aa05e452da9c4d6ed4b464613ff9ba84a/assets/loading/SourceSansPro-Semibold.ttf) format("truetype");
+    src: url(/4cf83f8627d9609709ef5165081e6f27acdfe5d8/assets/loading/SourceSansPro-Semibold.ttf) format("truetype");
     font-weight: 600;
     font-display: block
 }
@@ -254,7 +254,7 @@ html {
     width: 16px;
     height: 16px;
     flex: 0 0 16px;
-    background: url(/6536749aa05e452da9c4d6ed4b464613ff9ba84a/assets/loading/VerifiedBadgeNameIcon.png) 50%/contain no-repeat
+    background: url(/4cf83f8627d9609709ef5165081e6f27acdfe5d8/assets/loading/VerifiedBadgeNameIcon.png) 50%/contain no-repeat
 }
 
 #loading-verified-badge[hidden] {
@@ -341,7 +341,7 @@ html {
     padding: 0;
     border: 0;
     visibility: hidden;
-    background: transparent url(/6536749aa05e452da9c4d6ed4b464613ff9ba84a/assets/loading/cancelButton.png) 50%/contain no-repeat;
+    background: transparent url(/4cf83f8627d9609709ef5165081e6f27acdfe5d8/assets/loading/cancelButton.png) 50%/contain no-repeat;
     cursor: pointer;
     pointer-events: none;
     animation: loading-cancel-reveal 0s step-end 5s forwards
