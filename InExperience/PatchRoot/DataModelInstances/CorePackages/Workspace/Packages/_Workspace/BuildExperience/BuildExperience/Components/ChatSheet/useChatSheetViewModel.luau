@@ -2,6 +2,7 @@
 local Parent = BuildExperience.Parent
 local _ = require(BuildExperience.Components.ModelPicker.ModelPickerTypes)
 local FFlagBuildExperienceModelPickerModule = require(BuildExperience.Flags.FFlagBuildExperienceModelPicker)
+local FFlagBuildChatPasteAsAttachmentModule = require(BuildExperience.Flags.FFlagBuildChatPasteAsAttachment)
 local UseBuildModelSelectionModule = require(BuildExperience.Chat.useBuildModelSelection)
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
@@ -34,7 +35,7 @@ local UseChatSheetFundingRecoveryModule = require(BuildExperience.Components.Cha
 local function noop() end
 
 return function(p1)
-	-- upvalues: noop (copy), GetAssistantBuildStoreModule (copy), SignalsReactModule (copy), FFlagBuildChatSheetComposerOnlyBeforeFirstPromptModule (copy), GetIsBottomSheetModule (copy), ReactModule (copy), GetCreatorAgentResumeStoreModule (copy), GetCurrentExperienceProjectModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), FFlagBuildExperienceChatSheetDesktopAutoFocusModule (copy), ResponsiveModule (copy), UseChatSessionCoreModule (copy), FFlagBuildExperienceInGameShellComposer (copy), FFlagBuildExperienceModelPickerModule (copy), UseBuildModelSelectionModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), UseBuildPromptDraftModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), UseChatPlaytestFooterModule (copy), FFlagBuildExperienceInstanceSelection (copy), GetPlayButtonStoreModule (copy), ChatTypesModule (copy), FFlagBuildExperienceInGameCaptureToChat (copy), FFlagBuildExperienceAnalytics (copy), UseChatSheetFundingRecoveryModule (copy), FFlagBuildExperienceAnswerFormModule (copy)
+	-- upvalues: noop (copy), GetAssistantBuildStoreModule (copy), SignalsReactModule (copy), FFlagBuildChatSheetComposerOnlyBeforeFirstPromptModule (copy), GetIsBottomSheetModule (copy), ReactModule (copy), GetCreatorAgentResumeStoreModule (copy), GetCurrentExperienceProjectModule (copy), FFlagBuildCheckGamePermissionsModule (copy), UseGamePermissionsModule (copy), FFlagBuildExperienceChatSheetDesktopAutoFocusModule (copy), ResponsiveModule (copy), UseChatSessionCoreModule (copy), FFlagBuildExperienceInGameShellComposer (copy), FFlagBuildExperienceModelPickerModule (copy), UseBuildModelSelectionModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), UseBuildPromptDraftModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), UseChatPlaytestFooterModule (copy), FFlagBuildExperienceInstanceSelection (copy), GetPlayButtonStoreModule (copy), ChatTypesModule (copy), FFlagBuildExperienceInGameCaptureToChat (copy), FFlagBuildExperienceAnalytics (copy), UseChatSheetFundingRecoveryModule (copy), FFlagBuildExperienceAnswerFormModule (copy), FFlagBuildChatPasteAsAttachmentModule (copy)
 	local OnClose = p1.onClose or noop
 	local NoIsOpen = p1.isOpen == nil or p1.isOpen
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetAssistantBuildStoreModule().getIsDisabled)
@@ -215,6 +216,7 @@ return function(p1)
 		onComposerImagesChanged = UseChatSessionCoreModuleResult.setComposerImages,
 		onRetryComposerImage = UseChatSessionCoreModuleResult.retryComposerImage,
 		composerResourceAttachments = UseChatSessionCoreModuleResult.composerResourceAttachments,
+		onAddComposerResourceAttachment = if FFlagBuildChatPasteAsAttachmentModule then UseChatSessionCoreModuleResult.addComposerResourceAttachment else nil,
 		onRemoveComposerResourceAttachment = UseChatSessionCoreModuleResult.removeComposerResourceAttachmentAtIndex,
 		isComposerSendBlocked = UseChatSessionCoreModuleResult.isComposerSendBlocked,
 		textBoxRef = UseChatSessionCoreModuleResult.textBoxRef,

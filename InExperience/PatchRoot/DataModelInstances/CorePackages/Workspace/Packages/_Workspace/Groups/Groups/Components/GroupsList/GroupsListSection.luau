@@ -33,6 +33,7 @@ return ReactModule.memo(function(p1)
 		}, {
 			Item = ReactModule.createElement(GroupListItemModule, {
 				group = group,
+				slot = p1.slot,
 				layoutOrder = i + 1,
 				showRank = p1.showRank,
 				showMemberCount = p1.showMemberCount

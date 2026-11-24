@@ -216,6 +216,7 @@ return function(Image)
 				video = Image.video,
 				muted = Image.muted,
 				looped = Image.looped,
+				internalVideoUsage = Image.internalVideoUsage,
 				videoPlayerRef = VideoPlayerRef,
 				videoDisplayRef = UseRefResult,
 				onVideoLooped = UseResult1,

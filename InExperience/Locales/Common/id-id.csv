@@ -636,6 +636,7 @@ CommonUI.UserAgreements.Popup.Agreement.TransferPersonalInformationPolicy,Transf
 CommonUI.UserAgreements.Popup.DefaultAgreementTitle,Persetujuan Terbaru
 CommonUI.UserAgreements.Popup.TitleOnWebview,
 CoreScripts.Ads.Action.Close,
+CoreScripts.Ads.Action.Watch,Tonton
 CoreScripts.Ads.ImmersiveBrandedAds.WhyThisAd,Iklan yang tidak dipersonalisasi ini bisa dilihat oleh pengguna dalam pengalaman virtual ini. {AdvertiserName} adalah Pengiklan dan telah membayar iklan ini.
 CoreScripts.Ads.Label.IllegalContentReportingLink,Laporkan konten ilegal atau konten yang berbahaya bagi anak-anak
 CoreScripts.Ads.Label.InExperienceDisclosureDynamic,"Roblox tidak menggunakan informasi perilaku untuk menayangkan iklan ini. Kamu melihat iklan ini berdasarkan informasi seperti tipe perangkat, lokasi, dan usia untuk menayangkan iklan yang sesuai dan relevan untukmu. Pengiklannya adalah {AdvertiserName}."
@@ -646,6 +647,8 @@ CoreScripts.Ads.Label.ReportAd,Laporkan Iklan
 CoreScripts.Ads.Label.RewardedVideoEligibleDisclaimer,Ini adalah tes iklan. Iklan sebenarnya akan ditampilkan di pengalaman virtualmu.
 CoreScripts.Ads.Label.RewardedVideoExitConfirmation,Kamu hampir memperoleh hadiah! Yakin ingin keluar?
 CoreScripts.Ads.Label.RewardedVideoIneligibleDisclaimer,Ini adalah tes iklan. Iklan sebenarnya tidak akan ditampilkan karena pengalaman virtualmu tidak memenuhi syarat.
+CoreScripts.Ads.Label.SkipAd,Lewati iklan
+CoreScripts.Ads.Label.SkipIn,Lewati dalam {RBX_NUMBER}
 CoreScripts.Ads.Label.SponsoredAds,Bersponsor
 CoreScripts.Ads.Label.SponsoredAdsDisclosureStatic,"Pengalaman Virtual Bersponsor dibayar oleh Kreator. Untuk pengguna di UE, pengalaman virtual tersebut mungkin ditampilkan kepadamu berdasarkan informasi umum tentang tipe perangkat, lokasi, dan demografi kamu. Di luar UE, iklan juga dapat ditampilkan berdasarkan informasi tambahan."
 CoreScripts.Ads.Label.Teleporting,Berteleportasi...
@@ -3364,16 +3367,20 @@ Feature.Chat.Title.FriendsChat,Chat teman
 Feature.Chat.Title.NewChat,Chat baru
 Feature.Chat.Toast.Error.InvalidUserSelected,Satu atau beberapa orang di daftar ini tidak dapat ditambahkan
 Feature.CloudClient.Action.PlayWithoutCloudPlay,Mainkan tanpa Cloud Play
+Feature.CloudClient.Action.PlayWithoutRobloxReality,Main tanpa {productName}
+Feature.CloudClient.Action.TryRobloxReality,Coba {productName}
 Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play menjalankan game di komputer Roblox, sehingga game dapat di-load lebih cepat dan lebih jarang mengalami crash. Fitur ini hanya aktif selama kamu memainkan game ini."
 Feature.CloudClient.Description.GalleryUnavailableCloudPlay,Gabung lagi tanpa Cloud Play untuk menggunakan galerimu.
 Feature.CloudClient.Description.GalleryUnavailableRobloxReality,Gabung lagi tanpa Restyle untuk menggunakan galerimu.
 Feature.CloudClient.Description.GalleryUnavailableRobloxRealityV2,Gabung lagi tanpa {productName} untuk menggunakan galerimu.
+Feature.CloudClient.Description.RobloxRealityOffer,"{productName} memberikan tampilan baru yang segar pada game favoritmu. Coba preview awal, lalu beri tahu kami pendapatmu."
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle adalah preview awal. Tampilannya mungkin berbeda dari game aslinya.
 Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName} adalah preview awal. Tampilannya mungkin berbeda dari game aslinya.
 Feature.CloudClient.Heading.CloudPlayOffer,Main dengan Cloud Play
 Feature.CloudClient.Heading.GalleryUnavailableCloudPlay,Galeri belum tersedia di Cloud Play.
 Feature.CloudClient.Heading.GalleryUnavailableRobloxReality,Galeri belum tersedia dengan Restyle.
 Feature.CloudClient.Heading.GalleryUnavailableRobloxRealityV2,Galeri belum tersedia dengan {productName}.
+Feature.CloudClient.Heading.RobloxRealityOffer,Coba game-mu dengan {productName}
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Media belum tersedia di Cloud Play.
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Media belum tersedia dengan Restyle.
 Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,Media belum tersedia dengan {productName}.
@@ -3759,6 +3766,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Notifikasi dinyalakan untuk {ex
 Feature.GameJoin.Description.DifferentServer,Kamu akan memulai di server yang berbeda
 Feature.GameJoin.Label.PlayTogether,Kamu bisa bermain bersama
 Feature.GameJoin.Label.PlayTogetherSoon,Kamu bisa segera bermain bersama
+Feature.GameJoin.Label.Played,pernah dimainkan
 Feature.GameJoin.Label.RecentCoplay,Baru-baru ini kalian bermain bersama
 Feature.GamePage.Action.BackToTop,Kembali ke atas
 Feature.GamePage.Label.Ad,

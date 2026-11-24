@@ -93,6 +93,9 @@ local FFlagBuildAdUpsellModule1 = FFlagBuildAdUpsellModule or FFlagBuildExperien
 local NoFFlagEnableBuildTabOverride = not FFlagEnableBuildTabOverride
 local BuildEligibilityDialogModule = require(script.Parent.Components.BuildEligibilityDialog)
 local UseBuildPageEligibilityModule = require(script.Parent.useBuildPageEligibility)
+local BuildComingSoonViewModule = require(script.Parent.Components.BuildComingSoon.BuildComingSoonView)
+local UniversalAppPolicyModule = require(Parent.UniversalAppPolicy)
+local FFlagBuildComingSoonModule = require(script.Parent.Flags.FFlagBuildComingSoon)
 local PublishSheetControllerModule = if FFlagBuildPublishNavigationSheetModule then require(script.Parent.Components.PublishSheet.PublishSheetController) else nil
 local UseTTINavigationTrackingFunction = require(Parent.TTINavigationTracking).useTTINavigationTracking
 local config = {
@@ -244,6 +247,146 @@ local function BuildMonetizationScreen(p2)
 			universeId = Target.universeId
 		}) else nil
 	})
+end
+
+local function BuildHomeScreen(p2)
+	-- upvalues: UseBuildPageLayoutModule (copy), UseNavigationFocusFunction (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), useOpenBuildChat (copy), FFlagBuildExperienceEventContextTelemetryModule (copy), FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), useHomeConfigurationPages (copy), FFlagAppThemeHalloween2026BuildBackgroundModule (copy), UseThemeBackgroundFunction (copy), ReactModule (copy), FFlagBuildAdUpsellModule (copy), GetAdsCampaignDeepLinkStoreModule (copy), SendBuildExperienceEventModule (copy), ResumeBuildChatModule (copy), GetSearchQueryStoreModule (copy), FFlagBuildUpdatedSearchUXForGAModule (copy), FFlagBuildExperiencePreviewsTabModule (copy), GetBuildHomeTabStoreModule (copy), FFlagBuildExperienceHomeTelemetryModule (copy), config (copy), FFlagBuildInspirationTabModule (copy), BUILDHOMETAB (copy), MyCreationsTabModule (copy), FullscreenPageWithSafeArea (copy), View (copy), BuildPageHeaderModule (copy), BuildHomeTabsContainerModule (copy), FFlagBuildPublishNavigationSheetModule (copy), PublishSheetControllerModule (copy), FFlagBuildPublishSheetReturnOnBackModule (copy)
+	local ScreenProps = p2.screenProps or {}
+	local Navigation = p2.navigation
+	local UseBuildPageLayoutModuleResult = UseBuildPageLayoutModule()
+	local UseNavigationFocusResult = UseNavigationFocusFunction()
+	local Tokens = UseBuildPageLayoutModuleResult.tokens
+	local FallbackExperienceName = UseLocalizationFunction({
+		fallbackExperienceName = LocalizationStringsModule.BUILD_ASSISTANT_FALLBACK_NAME
+	}).fallbackExperienceName
+	local UseOpenBuildChatResult = useOpenBuildChat(Navigation, if FFlagBuildExperienceEventContextTelemetryModule then "my_creations" else nil)
+	local UseHomeConfigurationPagesResult = if FFlagBuildExperienceMyCreationsLongPressMenuModule then useHomeConfigurationPages(Navigation) else nil
+	local PublishSheetTarget = if UseHomeConfigurationPagesResult == nil then nil else UseHomeConfigurationPagesResult.publishSheetTarget
+	local HasUseThemeBackgroundResult: boolean = if FFlagAppThemeHalloween2026BuildBackgroundModule then UseThemeBackgroundFunction() ~= nil else false
+	ReactModule.useEffect(function()
+		-- upvalues: FFlagBuildAdUpsellModule (upval), GetAdsCampaignDeepLinkStoreModule (upval), ScreenProps (copy), SendBuildExperienceEventModule (upval), ResumeBuildChatModule (upval), FallbackExperienceName (copy), FFlagBuildExperienceEventContextTelemetryModule (upval), UseOpenBuildChatResult (copy)
+		if FFlagBuildAdUpsellModule then
+			local AdsCampaignDeepLinkStoreModule = GetAdsCampaignDeepLinkStoreModule(false)
+			
+			if ScreenProps.resumeRequestId then
+				local UniverseId = if ScreenProps.adsCampaignIntent then ScreenProps.universeId else nil
+				
+				if AdsCampaignDeepLinkStoreModule.begin(ScreenProps.resumeRequestId, UniverseId) and UniverseId ~= nil then
+					SendBuildExperienceEventModule("AD_CAMPAIGN_DEEP_LINK_RECEIVED", { universeId = ScreenProps.universeId }, { requestId = ScreenProps.resumeRequestId })
+				end
+			else
+				local Request = AdsCampaignDeepLinkStoreModule.getRequest(false)
+				
+				if Request ~= nil then
+					AdsCampaignDeepLinkStoreModule.finish(Request.id)
+				end
+			end
+		end
+		return ResumeBuildChatModule({
+			universeId = ScreenProps.universeId,
+			sessionId = ScreenProps.sessionId,
+			creatorAgentChatStore = ScreenProps.creatorAgentChatStore,
+			configurationStore = ScreenProps.configurationStore,
+			fallbackExperienceName = FallbackExperienceName,
+			onOpenChat = if FFlagBuildExperienceEventContextTelemetryModule then function(p3)
+				-- upvalues: UseOpenBuildChatResult (upval)
+				UseOpenBuildChatResult(p3, "deep_link")
+			end else UseOpenBuildChatResult
+		})
+	end, {
+		UseOpenBuildChatResult, ScreenProps.universeId, ScreenProps.sessionId,
+		ScreenProps.resumeRequestId,
+		if FFlagBuildAdUpsellModule then ScreenProps.adsCampaignIntent else nil,
+		ScreenProps.creatorAgentChatStore, ScreenProps.configurationStore,
+		FallbackExperienceName
+	})
+	local SearchQueryStore = ScreenProps.searchQueryStore or GetSearchQueryStoreModule()
+	local IsGames = if FFlagBuildUpdatedSearchUXForGAModule and FFlagBuildExperiencePreviewsTabModule then GetBuildHomeTabStoreModule().useTab() == "Games" else nil
+	local UseResult = ReactModule.useCallback(function()
+		-- upvalues: SearchQueryStore (copy), FFlagBuildExperienceHomeTelemetryModule (upval), SendBuildExperienceEventModule (upval), FFlagBuildUpdatedSearchUXForGAModule (upval), Navigation (copy), config (upval)
+		if FFlagBuildExperienceHomeTelemetryModule then
+			SendBuildExperienceEventModule("SEARCH_OPEN", {}, { context = "home_header" })
+		end
+		SearchQueryStore.beginSearch()
+		
+		if not FFlagBuildUpdatedSearchUXForGAModule then
+			Navigation.navigate(config.BuildSearch, { searchQueryStore = SearchQueryStore })
+		end
+	end, { Navigation, SearchQueryStore })
+	local IsUseTabResultMatch = true
+	local UseResult1 = nil
+	
+	if FFlagBuildInspirationTabModule then
+		IsUseTabResultMatch = GetBuildHomeTabStoreModule().useTab() == BUILDHOMETAB.Games
+		UseResult1 = ReactModule.useCallback(function(Sort)
+			-- upvalues: Navigation (copy), config (upval)
+			Navigation.navigate(config.BuildInspirationSeeMore, { sort = Sort })
+		end, { Navigation })
+	end
+	local Element = ReactModule.createElement(MyCreationsTabModule, {
+		LayoutOrder = 3,
+		creatorAgentChatStore = ScreenProps.creatorAgentChatStore,
+		configurationStore = ScreenProps.configurationStore,
+		searchStore = ScreenProps.searchStore,
+		searchQueryStore = ScreenProps.searchQueryStore,
+		isActiveTab = if FFlagBuildUpdatedSearchUXForGAModule and FFlagBuildExperiencePreviewsTabModule then IsGames else nil,
+		isFocused = UseNavigationFocusResult,
+		autoOpenNewGame = ScreenProps.universeId == nil and ScreenProps.sessionId == nil and IsUseTabResultMatch,
+		onOpenChat = UseOpenBuildChatResult,
+		onOpenConfigurationPage = if UseHomeConfigurationPagesResult == nil then nil else UseHomeConfigurationPagesResult.onOpenConfigurationPage
+	})
+	
+	return ReactModule.createElement(FullscreenPageWithSafeArea, {
+		includeStatusBar = true,
+		BackgroundColor3 = Tokens.Color.Surface.Surface_0.Color3,
+		BackgroundTransparency = if HasUseThemeBackgroundResult then 1 else Tokens.Color.Surface.Surface_0.Transparency,
+		includeBottomBar = UseBuildPageLayoutModuleResult.shouldIncludeBottomBar
+	}, {
+		Page = ReactModule.createElement(View, {
+			tag = if FFlagAppThemeHalloween2026BuildBackgroundModule then {
+				["col align-x-center size-full"] = true,
+				["bg-surface-0"] = not HasUseThemeBackgroundResult
+			} else "col align-x-center size-full bg-surface-0"
+		}, {
+			Header = ReactModule.createElement(BuildPageHeaderModule, {
+				LayoutOrder = 1,
+				height = UseBuildPageLayoutModuleResult.topBarHeight,
+				isFocused = if FFlagBuildUpdatedSearchUXForGAModule then UseNavigationFocusResult else nil,
+				searchQueryStore = SearchQueryStore,
+				onOpenSearch = UseResult
+			}),
+			Content = ReactModule.createElement(View, {
+				LayoutOrder = 2,
+				ZIndex = 4,
+				tag = "col align-x-center fill gap-small size-full-0"
+			}, {
+				SearchBarContainer = nil,
+				MyCreations = if FFlagBuildExperiencePreviewsTabModule then ReactModule.createElement(BuildHomeTabsContainerModule, {
+					LayoutOrder = 3,
+					gamesContent = Element,
+					isFocused = UseNavigationFocusResult,
+					searchStore = ScreenProps.searchStore,
+					searchQueryStore = SearchQueryStore,
+					onOpenChat = if FFlagBuildInspirationTabModule then UseOpenBuildChatResult else nil,
+					onOpenInspirationSeeMore = UseResult1
+				}) else Element
+			})
+		}),
+		PublishSheet = if FFlagBuildPublishNavigationSheetModule and UseHomeConfigurationPagesResult ~= nil and PublishSheetTarget ~= nil and PublishSheetTarget.universeId ~= nil then ReactModule.createElement(PublishSheetControllerModule, {
+			isOpen = UseHomeConfigurationPagesResult.isPublishSheetOpen,
+			target = PublishSheetTarget,
+			onClose = UseHomeConfigurationPagesResult.onClosePublishSheet,
+			navigateToSubPage = UseHomeConfigurationPagesResult.navigateToPublishSubPage,
+			isCovered = if FFlagBuildPublishSheetReturnOnBackModule then not UseNavigationFocusResult else nil
+		}) else nil
+	})
+end
+
+local function BuildHomeOrComingSoonScreen(p2)
+	-- upvalues: UniversalAppPolicyModule (copy), ReactModule (copy), BuildComingSoonViewModule (copy), BuildHomeScreen (copy)
+	return if UniversalAppPolicyModule.useAppPolicy(function(p3)
+		return p3.getCanViewBuildComingSoon()
+	end) then ReactModule.createElement(BuildComingSoonViewModule) else ReactModule.createElement(BuildHomeScreen, p2)
 end
 
 local function BuildSearchResults(p2)
@@ -458,138 +601,7 @@ end
 local List = {
 	{
 		[config.BuildHome] = {
-			screen = function(p2)
-				-- upvalues: UseBuildPageLayoutModule (copy), UseNavigationFocusFunction (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), useOpenBuildChat (copy), FFlagBuildExperienceEventContextTelemetryModule (copy), FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), useHomeConfigurationPages (copy), FFlagAppThemeHalloween2026BuildBackgroundModule (copy), UseThemeBackgroundFunction (copy), ReactModule (copy), FFlagBuildAdUpsellModule (copy), GetAdsCampaignDeepLinkStoreModule (copy), SendBuildExperienceEventModule (copy), ResumeBuildChatModule (copy), GetSearchQueryStoreModule (copy), FFlagBuildUpdatedSearchUXForGAModule (copy), FFlagBuildExperiencePreviewsTabModule (copy), GetBuildHomeTabStoreModule (copy), FFlagBuildExperienceHomeTelemetryModule (copy), config (copy), FFlagBuildInspirationTabModule (copy), BUILDHOMETAB (copy), MyCreationsTabModule (copy), FullscreenPageWithSafeArea (copy), View (copy), BuildPageHeaderModule (copy), BuildHomeTabsContainerModule (copy), FFlagBuildPublishNavigationSheetModule (copy), PublishSheetControllerModule (copy), FFlagBuildPublishSheetReturnOnBackModule (copy)
-				local ScreenProps = p2.screenProps or {}
-				local Navigation = p2.navigation
-				local UseBuildPageLayoutModuleResult = UseBuildPageLayoutModule()
-				local UseNavigationFocusResult = UseNavigationFocusFunction()
-				local Tokens = UseBuildPageLayoutModuleResult.tokens
-				local FallbackExperienceName = UseLocalizationFunction({
-					fallbackExperienceName = LocalizationStringsModule.BUILD_ASSISTANT_FALLBACK_NAME
-				}).fallbackExperienceName
-				local UseOpenBuildChatResult = useOpenBuildChat(Navigation, if FFlagBuildExperienceEventContextTelemetryModule then "my_creations" else nil)
-				local UseHomeConfigurationPagesResult = if FFlagBuildExperienceMyCreationsLongPressMenuModule then useHomeConfigurationPages(Navigation) else nil
-				local PublishSheetTarget = if UseHomeConfigurationPagesResult == nil then nil else UseHomeConfigurationPagesResult.publishSheetTarget
-				local HasUseThemeBackgroundResult: boolean = if FFlagAppThemeHalloween2026BuildBackgroundModule then UseThemeBackgroundFunction() ~= nil else false
-				ReactModule.useEffect(function()
-					-- upvalues: FFlagBuildAdUpsellModule (upval), GetAdsCampaignDeepLinkStoreModule (upval), ScreenProps (copy), SendBuildExperienceEventModule (upval), ResumeBuildChatModule (upval), FallbackExperienceName (copy), FFlagBuildExperienceEventContextTelemetryModule (upval), UseOpenBuildChatResult (copy)
-					if FFlagBuildAdUpsellModule then
-						local AdsCampaignDeepLinkStoreModule = GetAdsCampaignDeepLinkStoreModule(false)
-						
-						if ScreenProps.resumeRequestId then
-							local UniverseId = if ScreenProps.adsCampaignIntent then ScreenProps.universeId else nil
-							
-							if AdsCampaignDeepLinkStoreModule.begin(ScreenProps.resumeRequestId, UniverseId) and UniverseId ~= nil then
-								SendBuildExperienceEventModule("AD_CAMPAIGN_DEEP_LINK_RECEIVED", { universeId = ScreenProps.universeId }, { requestId = ScreenProps.resumeRequestId })
-							end
-						else
-							local Request = AdsCampaignDeepLinkStoreModule.getRequest(false)
-							
-							if Request ~= nil then
-								AdsCampaignDeepLinkStoreModule.finish(Request.id)
-							end
-						end
-					end
-					return ResumeBuildChatModule({
-						universeId = ScreenProps.universeId,
-						sessionId = ScreenProps.sessionId,
-						creatorAgentChatStore = ScreenProps.creatorAgentChatStore,
-						configurationStore = ScreenProps.configurationStore,
-						fallbackExperienceName = FallbackExperienceName,
-						onOpenChat = if FFlagBuildExperienceEventContextTelemetryModule then function(p3)
-							-- upvalues: UseOpenBuildChatResult (upval)
-							UseOpenBuildChatResult(p3, "deep_link")
-						end else UseOpenBuildChatResult
-					})
-				end, {
-					UseOpenBuildChatResult, ScreenProps.universeId, ScreenProps.sessionId,
-					ScreenProps.resumeRequestId,
-					if FFlagBuildAdUpsellModule then ScreenProps.adsCampaignIntent else nil,
-					ScreenProps.creatorAgentChatStore, ScreenProps.configurationStore,
-					FallbackExperienceName
-				})
-				local SearchQueryStore = ScreenProps.searchQueryStore or GetSearchQueryStoreModule()
-				local IsGames = if FFlagBuildUpdatedSearchUXForGAModule and FFlagBuildExperiencePreviewsTabModule then GetBuildHomeTabStoreModule().useTab() == "Games" else nil
-				local UseResult = ReactModule.useCallback(function()
-					-- upvalues: SearchQueryStore (copy), FFlagBuildExperienceHomeTelemetryModule (upval), SendBuildExperienceEventModule (upval), FFlagBuildUpdatedSearchUXForGAModule (upval), Navigation (copy), config (upval)
-					if FFlagBuildExperienceHomeTelemetryModule then
-						SendBuildExperienceEventModule("SEARCH_OPEN", {}, { context = "home_header" })
-					end
-					SearchQueryStore.beginSearch()
-					
-					if not FFlagBuildUpdatedSearchUXForGAModule then
-						Navigation.navigate(config.BuildSearch, { searchQueryStore = SearchQueryStore })
-					end
-				end, { Navigation, SearchQueryStore })
-				local IsUseTabResultMatch = true
-				local UseResult1 = nil
-				
-				if FFlagBuildInspirationTabModule then
-					IsUseTabResultMatch = GetBuildHomeTabStoreModule().useTab() == BUILDHOMETAB.Games
-					UseResult1 = ReactModule.useCallback(function(Sort)
-						-- upvalues: Navigation (copy), config (upval)
-						Navigation.navigate(config.BuildInspirationSeeMore, { sort = Sort })
-					end, { Navigation })
-				end
-				local Element = ReactModule.createElement(MyCreationsTabModule, {
-					LayoutOrder = 3,
-					creatorAgentChatStore = ScreenProps.creatorAgentChatStore,
-					configurationStore = ScreenProps.configurationStore,
-					searchStore = ScreenProps.searchStore,
-					searchQueryStore = ScreenProps.searchQueryStore,
-					isActiveTab = if FFlagBuildUpdatedSearchUXForGAModule and FFlagBuildExperiencePreviewsTabModule then IsGames else nil,
-					isFocused = UseNavigationFocusResult,
-					autoOpenNewGame = ScreenProps.universeId == nil and ScreenProps.sessionId == nil and IsUseTabResultMatch,
-					onOpenChat = UseOpenBuildChatResult,
-					onOpenConfigurationPage = if UseHomeConfigurationPagesResult == nil then nil else UseHomeConfigurationPagesResult.onOpenConfigurationPage
-				})
-				
-				return ReactModule.createElement(FullscreenPageWithSafeArea, {
-					includeStatusBar = true,
-					BackgroundColor3 = Tokens.Color.Surface.Surface_0.Color3,
-					BackgroundTransparency = if HasUseThemeBackgroundResult then 1 else Tokens.Color.Surface.Surface_0.Transparency,
-					includeBottomBar = UseBuildPageLayoutModuleResult.shouldIncludeBottomBar
-				}, {
-					Page = ReactModule.createElement(View, {
-						tag = if FFlagAppThemeHalloween2026BuildBackgroundModule then {
-							["col align-x-center size-full"] = true,
-							["bg-surface-0"] = not HasUseThemeBackgroundResult
-						} else "col align-x-center size-full bg-surface-0"
-					}, {
-						Header = ReactModule.createElement(BuildPageHeaderModule, {
-							LayoutOrder = 1,
-							height = UseBuildPageLayoutModuleResult.topBarHeight,
-							isFocused = if FFlagBuildUpdatedSearchUXForGAModule then UseNavigationFocusResult else nil,
-							searchQueryStore = SearchQueryStore,
-							onOpenSearch = UseResult
-						}),
-						Content = ReactModule.createElement(View, {
-							LayoutOrder = 2,
-							ZIndex = 4,
-							tag = "col align-x-center fill gap-small size-full-0"
-						}, {
-							SearchBarContainer = nil,
-							MyCreations = if FFlagBuildExperiencePreviewsTabModule then ReactModule.createElement(BuildHomeTabsContainerModule, {
-								LayoutOrder = 3,
-								gamesContent = Element,
-								isFocused = UseNavigationFocusResult,
-								searchStore = ScreenProps.searchStore,
-								searchQueryStore = SearchQueryStore,
-								onOpenChat = if FFlagBuildInspirationTabModule then UseOpenBuildChatResult else nil,
-								onOpenInspirationSeeMore = UseResult1
-							}) else Element
-						})
-					}),
-					PublishSheet = if FFlagBuildPublishNavigationSheetModule and UseHomeConfigurationPagesResult ~= nil and PublishSheetTarget ~= nil and PublishSheetTarget.universeId ~= nil then ReactModule.createElement(PublishSheetControllerModule, {
-						isOpen = UseHomeConfigurationPagesResult.isPublishSheetOpen,
-						target = PublishSheetTarget,
-						onClose = UseHomeConfigurationPagesResult.onClosePublishSheet,
-						navigateToSubPage = UseHomeConfigurationPagesResult.navigateToPublishSubPage,
-						isCovered = if FFlagBuildPublishSheetReturnOnBackModule then not UseNavigationFocusResult else nil
-					}) else nil
-				})
-			end
+			screen = if FFlagBuildComingSoonModule then BuildHomeOrComingSoonScreen else BuildHomeScreen
 		}
 	},
 	{

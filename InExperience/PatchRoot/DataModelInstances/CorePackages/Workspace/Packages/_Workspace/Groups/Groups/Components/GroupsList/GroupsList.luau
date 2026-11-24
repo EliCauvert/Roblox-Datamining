@@ -118,6 +118,7 @@ return function(p1)
 		}, {
 			PrimarySection = ReactModule.createElement(GroupsListSectionModule, {
 				layoutOrder = 1,
+				slot = "primary",
 				showRank = true,
 				showMemberCount = true,
 				heading = UseLocalizationResult.primaryHeading,
@@ -126,6 +127,7 @@ return function(p1)
 			}),
 			OtherGroupsSection = ReactModule.createElement(GroupsListSectionModule, {
 				layoutOrder = 2,
+				slot = "joined",
 				showRank = true,
 				showMemberCount = true,
 				heading = if #UseMemoResult2 > 0 then UseLocalizationResult.myGroupsHeading else nil,

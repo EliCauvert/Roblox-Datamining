@@ -53,7 +53,7 @@ return {
 			}),
 			Chevron = ReactModule.createElement(Icon, {
 				LayoutOrder = 2,
-				name = "chevron-small-right",
+				name = "chevron-large-right",
 				size = IconSize.Small,
 				style = UseTokensResult.Color.Content.Emphasis
 			})
@@ -77,12 +77,12 @@ return {
 		-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), Text (copy)
 		return ReactModule.createElement(View, {
 			tag = "row align-x-center padding-top-xlarge",
-			Size = UDim2.new(1, 0, 0, 87),
+			Size = UDim2.new(1, 0, 0, 80),
 			backgroundStyle = UseTokensFunction().Color.Surface.Surface_0
 		}, {
 			Scrim = ReactModule.createElement("UIGradient", { Rotation = 90, Transparency = NumberSequence.new(0.2, 1) }),
 			Label = ReactModule.createElement(Text, {
-				tag = "auto-xy text-body-small content-emphasis",
+				tag = "auto-xy text-label-small content-emphasis",
 				Text = UseLocalizationFunction({ JoiningServer = "InGame.ConnectionError.Joining" }).JoiningServer
 			})
 		})
@@ -95,7 +95,7 @@ return {
 		}, {
 			Chevron = ReactModule.createElement(Icon, {
 				name = "chevron-large-left",
-				size = IconSize.Medium,
+				size = IconSize.Large,
 				style = UseTokensFunction().Color.Content.Emphasis
 			})
 		})

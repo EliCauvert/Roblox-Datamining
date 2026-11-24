@@ -8,6 +8,7 @@
 	RefreshFromApi = "RefreshFromApi",
 	RefreshHome = "RefreshHome",
 	RefreshChartsSortDetail = "RefreshChartsSortDetail",
+	RefreshSearchResultsGuidedPill = "RefreshSearchResultsGuidedPill",
 	RefreshDeveloperProducts = "RefreshDeveloperProducts",
 	RefreshOmniRecommendationFeedItem = "RefreshOmniRecommendationFeedItem",
 	RefreshGamePasses = "RefreshGamePasses",

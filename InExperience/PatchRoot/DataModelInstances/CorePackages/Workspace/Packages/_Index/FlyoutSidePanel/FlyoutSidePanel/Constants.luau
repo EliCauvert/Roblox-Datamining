@@ -15,8 +15,7 @@ return {
 	MAX_SHOWN_STATUS_INDICATOR_COUNT = 99,
 	FLYOUT_DEFAULT_POLICY = {
 		MyLibrary = {
-			if FFlagUserLibrary then "UserLibrary" else nil, "Favorites",
-			"ContinuePlaying",
+			if FFlagUserLibrary then "UserLibrary" else "Favorites", "ContinuePlaying",
 			if FFlagEnableChartsInFlyout and FlyoutSidePanelIXP.isChartsInFlyoutEnabled() then "Charts" else nil,
 			"Connections", "Communities", "Inventory", "Trades", "Messages", "Blackbird",
 			"Premium", "GiftCards", "Redeem", "Settings",

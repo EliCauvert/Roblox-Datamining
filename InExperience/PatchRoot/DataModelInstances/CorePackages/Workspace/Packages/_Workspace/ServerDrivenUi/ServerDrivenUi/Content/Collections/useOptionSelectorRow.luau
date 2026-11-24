@@ -8,12 +8,13 @@ local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 local SduiVariableItemWidthCarouselModule = require(ServerDrivenUi.Content.Collections.SduiVariableItemWidthCarousel)
 local FFlagSduiOptionImpressionsEventName = require(Parent.SharedFlags).FFlagSduiOptionImpressionsEventName
 local FFlagSduiOptionSelectorHeaderComponent = require(Parent.SharedFlags).FFlagSduiOptionSelectorHeaderComponent
+local FFlagSduiSearchGuidedPills = require(Parent.SharedFlags).FFlagSduiSearchGuidedPills
 local FFlagSduiChartsSortDetailGenreFilter = require(Parent.SharedFlags).FFlagSduiChartsSortDetailGenreFilter
 local FFlagSduiOptionSelectorAnchorTag = require(Parent.SharedFlags).FFlagSduiOptionSelectorAnchorTag
 local FFlagSduiOptionSelectorSkipSelectedRefresh = require(Parent.SharedFlags).FFlagSduiOptionSelectorSkipSelectedRefresh
 
 return function(p1)
-	-- upvalues: ReactModule (copy), SduiErrorType (copy), SduiComponentType (copy), FFlagSduiOptionSelectorSkipSelectedRefresh (copy), FFlagSduiChartsSortDetailGenreFilter (copy), FFlagSduiOptionSelectorAnchorTag (copy), CryoModule (copy), SduiVariableItemWidthCarouselModule (copy), FFlagSduiOptionImpressionsEventName (copy), FFlagSduiOptionSelectorHeaderComponent (copy)
+	-- upvalues: ReactModule (copy), SduiErrorType (copy), SduiComponentType (copy), FFlagSduiOptionSelectorSkipSelectedRefresh (copy), FFlagSduiChartsSortDetailGenreFilter (copy), FFlagSduiSearchGuidedPills (copy), FFlagSduiOptionSelectorAnchorTag (copy), CryoModule (copy), SduiVariableItemWidthCarouselModule (copy), FFlagSduiOptionImpressionsEventName (copy), FFlagSduiOptionSelectorHeaderComponent (copy)
 	local SduiContext = p1.sduiContext
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseStateResult1 = UseStateResult or p1.selectedOption
@@ -23,7 +24,7 @@ return function(p1)
 		UseStateResult2(nil)
 	end, { p1.selectedOption })
 	local UseResult = ReactModule.useCallback(function(SelectedOption)
-		-- upvalues: SduiContext (copy), SduiErrorType (upval), SduiComponentType (upval), FFlagSduiOptionSelectorSkipSelectedRefresh (upval), UseStateResult1 (copy), UseStateResult (copy), FFlagSduiChartsSortDetailGenreFilter (upval), UseStateResult2 (copy), UseRefResult (copy), p1 (copy)
+		-- upvalues: SduiContext (copy), SduiErrorType (upval), SduiComponentType (upval), FFlagSduiOptionSelectorSkipSelectedRefresh (upval), UseStateResult1 (copy), UseStateResult (copy), FFlagSduiChartsSortDetailGenreFilter (upval), FFlagSduiSearchGuidedPills (upval), UseStateResult2 (copy), UseRefResult (copy), p1 (copy)
 		if typeof(SelectedOption) ~= "string" or SelectedOption == "" then
 			SduiContext.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 				propName = "optionId",
@@ -36,14 +37,14 @@ return function(p1)
 		if (if FFlagSduiOptionSelectorSkipSelectedRefresh then UseStateResult1 else UseStateResult) == SelectedOption then return end
 		local Current = nil
 		
-		if not FFlagSduiChartsSortDetailGenreFilter then
+		if not FFlagSduiChartsSortDetailGenreFilter and not FFlagSduiSearchGuidedPills then
 			UseStateResult2(SelectedOption)
 			UseRefResult.current += 1
 			Current = UseRefResult.current
 		end
 		local OnOptionActivatedResult = p1.onOptionActivated(nil, nil, { selectedOption = SelectedOption })
 		
-		if FFlagSduiChartsSortDetailGenreFilter then
+		if FFlagSduiChartsSortDetailGenreFilter or FFlagSduiSearchGuidedPills then
 			if OnOptionActivatedResult == nil then return end
 			UseStateResult2(SelectedOption)
 			UseRefResult.current += 1

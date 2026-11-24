@@ -18,11 +18,10 @@ local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
 local ConstantsModule = require(Parent1.Constants)
 local MakeupPreviewUtilsModule = require(Parent1.MakeupPreviewUtils)
 local MakeupPartGridModule = require(Parent.Common.MakeupPartGrid)
-local GetFFlagSingleUploadMakeupSupportModule = require(Parent1.Flags.GetFFlagSingleUploadMakeupSupport)
 local _UDim = UDim.new(0, 20)
 
 return function(p1)
-	-- upvalues: Players (copy), UseSelectorFunction (copy), UseDispatchFunction (copy), ConstantsModule (copy), ReactModule (copy), GetFFlagSingleUploadMakeupSupportModule (copy), MakeupPreviewUtilsModule (copy), PublishAssetAnalytics (copy), PurchasePromptModule (copy), MutedErrorFunction (copy), SetPromptVisibilityModule (copy), RobloxTranslatorModule (copy), _UDim (copy), ObjectViewportModule (copy), LabeledTextBoxModule (copy), PublishInfoListModule (copy), MakeupPartGridModule (copy), BasePublishPromptModule (copy)
+	-- upvalues: Players (copy), UseSelectorFunction (copy), UseDispatchFunction (copy), ConstantsModule (copy), ReactModule (copy), MakeupPreviewUtilsModule (copy), PublishAssetAnalytics (copy), PurchasePromptModule (copy), MutedErrorFunction (copy), SetPromptVisibilityModule (copy), RobloxTranslatorModule (copy), _UDim (copy), ObjectViewportModule (copy), LabeledTextBoxModule (copy), PublishInfoListModule (copy), MakeupPartGridModule (copy), BasePublishPromptModule (copy)
 	local LocalPlayer = Players.LocalPlayer
 	assert(LocalPlayer, "LocalPlayer must not be nil")
 	local UseSelectorResult = UseSelectorFunction(function(p2)
@@ -37,7 +36,7 @@ return function(p1)
 	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(true)
 	local UseStateResult6, UseStateResult2_5 = ReactModule.useState(false)
 	local UseStateResult7, UseStateResult2_6 = ReactModule.useState(true)
-	local IsMakeupAssetType = if GetFFlagSingleUploadMakeupSupportModule() then MakeupPreviewUtilsModule.isMakeupAssetType(UseSelectorResult.accessoryType) else false
+	local IsMakeupAssetType = MakeupPreviewUtilsModule.isMakeupAssetType(UseSelectorResult.accessoryType)
 	local UseStateResult8, UseStateResult2_7 = ReactModule.useState(nil)
 	ReactModule.useEffect(function()
 		-- upvalues: IsMakeupAssetType (copy), UseSelectorResult (copy), MakeupPreviewUtilsModule (upval), UseStateResult2_7 (copy)
@@ -177,7 +176,7 @@ return function(p1)
 	return ReactModule.createElement(BasePublishPromptModule, {
 		delayInputSeconds = 3,
 		promptBody = ReactModule.useCallback(function()
-			-- upvalues: UseStateResult9 (copy), ReactModule (upval), _UDim (upval), ObjectViewportModule (upval), UseResult (copy), GetFFlagSingleUploadMakeupSupportModule (upval), IsMakeupAssetType (copy), LabeledTextBoxModule (upval), RobloxTranslatorModule (upval), UseStateResult4 (copy), UseResult5 (copy), PublishInfoListModule (upval), Text1 (copy), MakeupPartGridModule (upval), UseSelectorResult (copy), UseStateResult1 (copy), p1 (copy)
+			-- upvalues: UseStateResult9 (copy), ReactModule (upval), _UDim (upval), ObjectViewportModule (upval), UseResult (copy), IsMakeupAssetType (copy), LabeledTextBoxModule (upval), RobloxTranslatorModule (upval), UseStateResult4 (copy), UseResult5 (copy), PublishInfoListModule (upval), Text1 (copy), MakeupPartGridModule (upval), UseSelectorResult (copy), UseStateResult1 (copy), p1 (copy)
 			return ReactModule.createElement(ReactModule.Fragment, nil, {
 				UIListLayout = ReactModule.createElement("UIListLayout", {
 					Padding = _UDim,
@@ -192,7 +191,7 @@ return function(p1)
 					openPreviewView = UseResult,
 					model = UseStateResult9,
 					isLoading = UseStateResult9 == nil,
-					useFullBodyCameraSettings = not GetFFlagSingleUploadMakeupSupportModule() or not IsMakeupAssetType,
+					useFullBodyCameraSettings = not IsMakeupAssetType,
 					isMakeupPreview = IsMakeupAssetType
 				}),
 				DescriptionInput = ReactModule.createElement(LabeledTextBoxModule, {

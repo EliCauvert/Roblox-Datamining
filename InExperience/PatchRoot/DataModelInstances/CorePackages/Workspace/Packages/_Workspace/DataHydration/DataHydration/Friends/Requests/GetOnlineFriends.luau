@@ -20,7 +20,7 @@ local function collectFriendIdsFromResponse(ResponseBody)
 	return List
 end
 
-return function(p1)
+return function(p1, p2)
 	-- upvalues: FFlagFriendsSkipInvalidUserIdFetchesModule (copy), IsInvalidUserIdModule (copy), PromiseModule (copy), FFlagFriendsSignalMigrationTelemetry (copy), FriendsRequestTelemetryModule (copy), Url (copy), MyHttpRequestModule (copy), collectFriendIdsFromResponse (copy)
 	if FFlagFriendsSkipInvalidUserIdFetchesModule then
 		if IsInvalidUserIdModule(p1) then
@@ -29,7 +29,7 @@ return function(p1)
 	elseif p1 == nil or tostring(p1) == "" then
 		return PromiseModule.reject("GetOnlineFriends called with nil userId")
 	end
-	local RequestId = if FFlagFriendsSignalMigrationTelemetry then FriendsRequestTelemetryModule.generateRequestId() else nil
+	local RequestId = if FFlagFriendsSignalMigrationTelemetry then FriendsRequestTelemetryModule.generateRequestId(p2) else nil
 	
 	return MyHttpRequestModule(string.format("%s/users/%s/friends/online", Url.FRIEND_URL, (tostring(p1))), "GET", if FFlagFriendsSignalMigrationTelemetry then FriendsRequestTelemetryModule.getRequestOptions(RequestId) else nil):andThen(function(Result)
 		-- upvalues: FFlagFriendsSignalMigrationTelemetry (upval), RequestId (copy), FriendsRequestTelemetryModule (upval), collectFriendIdsFromResponse (upval)

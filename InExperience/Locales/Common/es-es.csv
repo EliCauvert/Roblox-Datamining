@@ -637,6 +637,7 @@ CommonUI.UserAgreements.Popup.Agreement.TransferPersonalInformationPolicy,Transf
 CommonUI.UserAgreements.Popup.DefaultAgreementTitle,Acuerdo actualizado
 CommonUI.UserAgreements.Popup.TitleOnWebview,
 CoreScripts.Ads.Action.Close,
+CoreScripts.Ads.Action.Watch,
 CoreScripts.Ads.ImmersiveBrandedAds.WhyThisAd,Este anuncio no personalizado es visible para los usuarios de esta experiencia. {AdvertiserName} es el anunciante y pagó por este anuncio.
 CoreScripts.Ads.Label.IllegalContentReportingLink,Reportar contenido ilegal o contenido dañino para niños
 CoreScripts.Ads.Label.InExperienceDisclosureDynamic,"Roblox no utilizó información de comportamiento para mostrar este anuncio. Estás viendo este anuncio que se basa en información que incluye el tipo de dispositivo, la ubicación y la edad para ofrecerte anuncios apropiados y relevantes. El anunciante es {AdvertiserName}."
@@ -647,6 +648,8 @@ CoreScripts.Ads.Label.ReportAd,Reportar anuncio
 CoreScripts.Ads.Label.RewardedVideoEligibleDisclaimer,Este es un anuncio de prueba. Los anuncios reales se mostrarán en tu experiencia.
 CoreScripts.Ads.Label.RewardedVideoExitConfirmation,Estás tan cerca de ganar una recompensa. ¿Realmente quieres salir?
 CoreScripts.Ads.Label.RewardedVideoIneligibleDisclaimer,Este es un anuncio de prueba. Los anuncios reales no se mostrarán porque tu experiencia no es elegible.
+CoreScripts.Ads.Label.SkipAd,Omitir anuncio
+CoreScripts.Ads.Label.SkipIn,Saltar en {RBX_NUMBER}
 CoreScripts.Ads.Label.SponsoredAds,Patrocinado
 CoreScripts.Ads.Label.SponsoredAdsDisclosureStatic,"Las experiencias patrocinadas las pagan los creadores. Para los usuarios de la UE, pueden mostrarse basándose en información general como tu tipo de dispositivo, ubicación y datos demográficos. Fuera de la UE, los anuncios pueden mostrarse en base a información adicional."
 CoreScripts.Ads.Label.Teleporting,Teletransportando...
@@ -3367,16 +3370,20 @@ Feature.Chat.Title.FriendsChat,Chat de amistades
 Feature.Chat.Title.NewChat,Nuevo chat
 Feature.Chat.Toast.Error.InvalidUserSelected,Hay una o más personas en esta lista que no se pueden añadir
 Feature.CloudClient.Action.PlayWithoutCloudPlay,Jugar sin Cloud Play
+Feature.CloudClient.Action.PlayWithoutRobloxReality,Jugar sin {productName}
+Feature.CloudClient.Action.TryRobloxReality,Probar {productName}
 Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play ejecuta el juego en las computadoras de Roblox, por lo que puede cargarse más rápido y tener menos fallas. Solo dura mientras juegas este juego."
 Feature.CloudClient.Description.GalleryUnavailableCloudPlay,Vuelve a unirte sin Cloud Play para usar tu galería.
 Feature.CloudClient.Description.GalleryUnavailableRobloxReality,Vuelve a unirte sin Restyle para usar tu galería.
 Feature.CloudClient.Description.GalleryUnavailableRobloxRealityV2,Vuelve a unirte sin {productName} para usar tu galería.
+Feature.CloudClient.Description.RobloxRealityOffer,{productName} le da a tus juegos favoritos un aspecto nuevo y fresco. Prueba una vista previa anticipada y luego cuéntanos lo que piensas.
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle es una vista previa anticipada. Las cosas pueden verse diferentes al juego original.
 Feature.CloudClient.Description.RobloxRealityPreviewV2,Esta es la versión preliminar de {productName}. Algunas cosas pueden verse diferentes al juego original.
 Feature.CloudClient.Heading.CloudPlayOffer,Jugar con Cloud Play
 Feature.CloudClient.Heading.GalleryUnavailableCloudPlay,La galería aún no está disponible en Cloud Play.
 Feature.CloudClient.Heading.GalleryUnavailableRobloxReality,La galería aún no está disponible con Restyle.
 Feature.CloudClient.Heading.GalleryUnavailableRobloxRealityV2,La galería aún no está disponible con {productName}.
+Feature.CloudClient.Heading.RobloxRealityOffer,Prueba tu juego con {productName}
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,La captura aún no está disponible en Cloud Play.
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,La captura aún no está disponible con Restyle.
 Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,La captura aún no está disponible con {productName}.
@@ -3762,6 +3769,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Notificaciones activadas para {
 Feature.GameJoin.Description.DifferentServer,Comenzarán en un servidor diferente
 Feature.GameJoin.Label.PlayTogether,Pueden jugar juntos
 Feature.GameJoin.Label.PlayTogetherSoon,Pronto podrán jugar juntos
+Feature.GameJoin.Label.Played,jugado
 Feature.GameJoin.Label.RecentCoplay,Jugaron juntos hace poco
 Feature.GamePage.Action.BackToTop,Volver arriba
 Feature.GamePage.Label.Ad,

@@ -636,6 +636,7 @@ CommonUI.UserAgreements.Popup.Agreement.TransferPersonalInformationPolicy,Transf
 CommonUI.UserAgreements.Popup.DefaultAgreementTitle,Accord mis à jour
 CommonUI.UserAgreements.Popup.TitleOnWebview,
 CoreScripts.Ads.Action.Close,
+CoreScripts.Ads.Action.Watch,Regarder
 CoreScripts.Ads.ImmersiveBrandedAds.WhyThisAd,Cette annonce non personnalisée est visible par les utilisateurs de cette expérience. Elle a été payée par l'annonceur {AdvertiserName}.
 CoreScripts.Ads.Label.IllegalContentReportingLink,Signaler un contenu illégal ou un contenu préjudiciable aux enfants
 CoreScripts.Ads.Label.InExperienceDisclosureDynamic,"Roblox n'a pas utilisé d'informations comportementales pour diffuser cette publicité. Tu vois cette publicité en fonction d'informations incluant le type d'appareil, l'emplacement et l'âge afin de te proposer des publicités appropriées et pertinentes. L'annonceur est {AdvertiserName}."
@@ -646,6 +647,8 @@ CoreScripts.Ads.Label.ReportAd,Signaler une annonce
 CoreScripts.Ads.Label.RewardedVideoEligibleDisclaimer,Ceci est une annonce test. Les annonces réelles seront affichées dans ton expérience.
 CoreScripts.Ads.Label.RewardedVideoExitConfirmation,Tu es si près de gagner ta récompense ! Es-tu sûr de vouloir quitter le jeu ?
 CoreScripts.Ads.Label.RewardedVideoIneligibleDisclaimer,Ceci est une annonce test. Les annonces réelles ne seront pas affichées parce que ton expérience n'est pas éligible.
+CoreScripts.Ads.Label.SkipAd,Ignorer l'annonce
+CoreScripts.Ads.Label.SkipIn,Ignorer dans {RBX_NUMBER}
 CoreScripts.Ads.Label.SponsoredAds,Sponsorisé
 CoreScripts.Ads.Label.SponsoredAdsDisclosureStatic,"Les expériences sponsorisées sont payées par les créateurs. Pour les utilisateurs de l'UE, elles peuvent vous être présentées sur la base d'informations générales concernant votre type d'appareil, votre localisation et vos données démographiques. En dehors de l'UE, les publicités peuvent également être affichées sur la base d'informations supplémentaires."
 CoreScripts.Ads.Label.Teleporting,Téléportation...
@@ -3366,16 +3369,20 @@ Feature.Chat.Title.FriendsChat,Chat entre amis
 Feature.Chat.Title.NewChat,Nouveau chat
 Feature.Chat.Toast.Error.InvalidUserSelected,Une ou plusieurs personnes de cette liste ne peuvent pas être ajoutées
 Feature.CloudClient.Action.PlayWithoutCloudPlay,Jouer sans Cloud Play
+Feature.CloudClient.Action.PlayWithoutRobloxReality,Jouer sans {productName}
+Feature.CloudClient.Action.TryRobloxReality,Essayer {productName}
 Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play exécute le jeu sur les ordinateurs de Roblox, ce qui peut accélérer le chargement et réduire les crashs. Il ne fonctionne que pendant que tu joues à cette expérience."
 Feature.CloudClient.Description.GalleryUnavailableCloudPlay,Rejoins la partie sans Cloud Play pour accéder à ta galerie.
 Feature.CloudClient.Description.GalleryUnavailableRobloxReality,Rejoins la partie sans Restyle pour accéder à ta galerie.
 Feature.CloudClient.Description.GalleryUnavailableRobloxRealityV2,Rejoins-la sans {productName} pour utiliser ta galerie.
+Feature.CloudClient.Description.RobloxRealityOffer,{productName} donne un tout nouveau look à tes jeux préférés. Essaie cette version en aperçu anticipé et donne-nous ton avis.
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle est encore en version préliminaire. Certains éléments peuvent avoir une apparence différente de celle du jeu d'origine.
 Feature.CloudClient.Description.RobloxRealityPreviewV2,Ceci n'est qu'un aperçu anticipé de {productName}. Certains éléments peuvent avoir une apparence différente de celle du jeu d'origine.
 Feature.CloudClient.Heading.CloudPlayOffer,Joue avec Cloud Play
 Feature.CloudClient.Heading.GalleryUnavailableCloudPlay,La galerie n'est pas encore disponible dans Cloud Play.
 Feature.CloudClient.Heading.GalleryUnavailableRobloxReality,La galerie n'est pas encore disponible avec Restyle.
 Feature.CloudClient.Heading.GalleryUnavailableRobloxRealityV2,La galerie n'est pas encore accessible avec {productName}.
+Feature.CloudClient.Heading.RobloxRealityOffer,Teste ton jeu avec {productName}
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,La capture d'écran n'est pas encore disponible dans Cloud Play.
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,La capture d'écran n'est pas encore disponible avec Restyle.
 Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,La capture n'est pas encore accessible avec {productName}.
@@ -3761,6 +3768,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Notifications activées pour {e
 Feature.GameJoin.Description.DifferentServer,Tu commenceras sur un autre serveur
 Feature.GameJoin.Label.PlayTogether,Vous pouvez jouer ensemble
 Feature.GameJoin.Label.PlayTogetherSoon,Vous pourrez bientôt jouer ensemble
+Feature.GameJoin.Label.Played,jouée
 Feature.GameJoin.Label.RecentCoplay,Vous avez joué ensemble récemment
 Feature.GamePage.Action.BackToTop,Haut de la page
 Feature.GamePage.Label.Ad,

@@ -1,4 +1,5 @@
-﻿local _ = require(script.Parent.chatTypes)
+﻿local FFlagBuildExperienceTurnWorkTelemetryModule = require(script:FindFirstAncestor("BuildExperience").Flags.FFlagBuildExperienceTurnWorkTelemetry)
+local _ = require(script.Parent.chatTypes)
 local ThoughtHeadingModule = require(script.Parent.thoughtHeading)
 
 local function normalize(Text: string): string
@@ -49,7 +50,7 @@ local function _(p1, p2)
 end
 
 local function groupSteps(List, Callback, p1, p2)
-	-- upvalues: ThoughtHeadingModule (copy)
+	-- upvalues: ThoughtHeadingModule (copy), FFlagBuildExperienceTurnWorkTelemetryModule (copy)
 	local List1 = {}
 	local Body = nil
 	
@@ -63,6 +64,7 @@ local function groupSteps(List, Callback, p1, p2)
 						isFailed = true,
 						key = `Step{i}`,
 						title = Callback(value),
+						titleSource = if FFlagBuildExperienceTurnWorkTelemetryModule then "failed" else nil,
 						localTool = LocalTool
 					})
 					continue
@@ -73,7 +75,8 @@ local function groupSteps(List, Callback, p1, p2)
 					if LocalTool ~= nil then
 						local config = {
 							key = `Step{i}`,
-							title = DisplaySummary or Callback(value)
+							title = DisplaySummary or Callback(value),
+							titleSource = if FFlagBuildExperienceTurnWorkTelemetryModule then "askedUser" else nil
 						}
 						config.body = Body
 						config.hasActiveCall = LocalTool.isWaiting
@@ -89,7 +92,8 @@ local function groupSteps(List, Callback, p1, p2)
 					else
 						local config = {
 							key = `Step{i}`,
-							title = DisplaySummary or Callback(value)
+							title = DisplaySummary or Callback(value),
+							titleSource = if FFlagBuildExperienceTurnWorkTelemetryModule then if DisplaySummary == nil then "fallback" else "summary" else nil
 						}
 						config.body = Body
 						config.isFallback = DisplaySummary == nil
@@ -112,6 +116,7 @@ local function groupSteps(List, Callback, p1, p2)
 			table.insert(List1, {
 				key = `Step{i}`,
 				title = Title,
+				titleSource = if FFlagBuildExperienceTurnWorkTelemetryModule then "heading" else nil,
 				body = if Body == nil or Body == "" then Body1 elseif Body1 == nil or Body1 == "" then Body else `{Body}\n\n{Body1}`
 			})
 			Body = nil
@@ -129,7 +134,7 @@ local function groupSteps(List, Callback, p1, p2)
 		v1 = List1[i1]
 		break
 	end
-	if not p1 and Body ~= nil and (v1 ~= nil and not v1.isFailed) then
+	if not p1 and Body ~= nil and v1 ~= nil and not v1.isFailed then
 		local Body4 = v1.body
 		v1.body = if Body4 == nil or Body4 == "" then Body elseif Body == nil or Body == "" then Body4 else `{Body4}\n\n{Body}`
 	end
@@ -137,7 +142,7 @@ local function groupSteps(List, Callback, p1, p2)
 end
 
 local function buildStepRows(p3, p4, p5, Enabled, p6, Callback)
-	-- upvalues: mergeRepeats (copy), groupSteps (copy)
+	-- upvalues: mergeRepeats (copy), groupSteps (copy), FFlagBuildExperienceTurnWorkTelemetryModule (copy)
 	local List = {}
 	
 	for _, value in mergeRepeats((groupSteps(p3, p4, p5 and Enabled ~= true, p6))) do
@@ -149,6 +154,8 @@ local function buildStepRows(p3, p4, p5, Enabled, p6, Callback)
 		table.insert(List, {
 			key = value.key,
 			title = value.title,
+			titleSource = value.titleSource,
+			toolKey = if FFlagBuildExperienceTurnWorkTelemetryModule then value.toolKey else nil,
 			body = if Body == nil or Body == "" then Text elseif Text == nil or Text == "" then Body else `{Body}\n\n{Text}`,
 			markdown = if CallbackResult == nil then nil else CallbackResult.markdown,
 			answers = if LocalTool == nil then nil else LocalTool.answers,

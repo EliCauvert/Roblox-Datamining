@@ -2,6 +2,7 @@
 local Parent = BuildExperience.Parent
 local _ = require(BuildExperience.Components.ModelPicker.ModelPickerTypes)
 local FFlagBuildExperienceModelPickerModule = require(BuildExperience.Flags.FFlagBuildExperienceModelPicker)
+local FFlagBuildChatPasteAsAttachmentModule = require(BuildExperience.Flags.FFlagBuildChatPasteAsAttachment)
 local FFlagBuildExperienceLibrary = require(Parent.SharedFlags).FFlagBuildExperienceLibrary
 local FoundationModule = require(Parent.Foundation)
 local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
@@ -90,7 +91,7 @@ local function ChatSheetContent(p1)
 end
 
 return function(p1)
-	-- upvalues: FFlagBuildExperienceAnswerFormModule (copy), Sheet (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseTokensFunction (copy), ReactModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), ReactUtilsModule (copy), ChatMessageListModule (copy), BuildEmptyStateModule (copy), FFlagBuildExperienceModelPickerModule (copy), BuyMoreRobuxCardModule (copy), AnswerFormContainerModule (copy), ChatConstantsModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), FFlagBuildCheckGamePermissionsModule (copy), ChatPermissionsContextModule (copy), View (copy), FFlagBuildExperienceLibrary (copy), ChatActionsModule (copy), FFlagBuildExperienceInGameShellComposer (copy), FFlagBuildChatSheetComposerOnlyBeforeFirstPromptModule (copy), DialogSize (copy), ChatSheetContent (copy), BuildPillMenuPageHostModule (copy), FFlagBuildExperienceInGameShell (copy), BuildPillMenuPortalModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), ChatCardEmphasisProviderModule (copy)
+	-- upvalues: FFlagBuildExperienceAnswerFormModule (copy), Sheet (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseTokensFunction (copy), ReactModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), ReactUtilsModule (copy), ChatMessageListModule (copy), BuildEmptyStateModule (copy), FFlagBuildExperienceModelPickerModule (copy), BuyMoreRobuxCardModule (copy), AnswerFormContainerModule (copy), ChatConstantsModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), FFlagBuildCheckGamePermissionsModule (copy), ChatPermissionsContextModule (copy), View (copy), FFlagBuildExperienceLibrary (copy), ChatActionsModule (copy), FFlagBuildChatPasteAsAttachmentModule (copy), FFlagBuildExperienceInGameShellComposer (copy), FFlagBuildChatSheetComposerOnlyBeforeFirstPromptModule (copy), DialogSize (copy), ChatSheetContent (copy), BuildPillMenuPageHostModule (copy), FFlagBuildExperienceInGameShell (copy), BuildPillMenuPortalModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), ChatCardEmphasisProviderModule (copy)
 	local HasAnswerForm: boolean = FFlagBuildExperienceAnswerFormModule and p1.answerForm ~= nil
 	local SheetComponent = p1.sheetComponent or Sheet
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -190,6 +191,7 @@ return function(p1)
 		isSendBlocked = p1.isComposerSendBlocked,
 		tracksExternalText = p1.tracksExternalComposerText,
 		resourceAttachments = p1.composerResourceAttachments,
+		onAddResourceAttachment = if FFlagBuildChatPasteAsAttachmentModule then p1.onAddComposerResourceAttachment else nil,
 		onRemoveResourceAttachment = p1.onRemoveComposerResourceAttachment,
 		onActivateResourceAttachment = p1.onActivateComposerResourceAttachment,
 		placeholder = UseLocalizationResult.composerPlaceholder,

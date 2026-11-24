@@ -5,6 +5,7 @@ local FoundationModule = require(Parent.Foundation)
 local SignalsReactModule = require(Parent.SignalsReact)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local FFlagEnableExperienceShopGlobalIconModule = require(InExperienceShop.Flags.FFlagEnableExperienceShopGlobalIcon)
+local FFlagEnableNotificationsBuyModalSurfaceModule = require(InExperienceShop.Flags.FFlagEnableNotificationsBuyModalSurface)
 local FFlagFixFreeTrialTooltipLocalizationModule = require(InExperienceShop.Flags.FFlagFixFreeTrialTooltipLocalization)
 local GetShopGlobalIconStoreModule = require(InExperienceShop.Stores.GetShopGlobalIconStore)
 local SubmitFreeTrialTooltipsModule = require(InExperienceShop.submitFreeTrialTooltips)
@@ -52,7 +53,7 @@ local function ShownFreeTrialToolTip(p1)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: SignalsReactModule (copy), SubmitFreeTrialTooltipsModule (copy), FFlagEnableExperienceShopGlobalIconModule (copy), GetShopGlobalIconStoreModule (copy), ReactModule (copy), InExperienceShop (copy), FFlagFixFreeTrialTooltipLocalizationModule (copy), UseLocalizationFunction (copy), ShownFreeTrialToolTip (copy), createShownTooltip (copy)
+	-- upvalues: SignalsReactModule (copy), SubmitFreeTrialTooltipsModule (copy), FFlagEnableExperienceShopGlobalIconModule (copy), GetShopGlobalIconStoreModule (copy), ReactModule (copy), InExperienceShop (copy), FFlagEnableNotificationsBuyModalSurfaceModule (copy), Parent (copy), FFlagFixFreeTrialTooltipLocalizationModule (copy), UseLocalizationFunction (copy), ShownFreeTrialToolTip (copy), createShownTooltip (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(SubmitFreeTrialTooltipsModule.getActiveTooltip)
 	local UseSignalStateResult1 = SignalsReactModule.useSignalState(function(p2)
 		-- upvalues: FFlagEnableExperienceShopGlobalIconModule (upval), GetShopGlobalIconStoreModule (upval)
@@ -76,12 +77,12 @@ return ReactModule.memo(function(p1)
 	local Action = if UseSignalStateResult == nil then nil else UseSignalStateResult.action
 	local GamePassId = if UseSignalStateResult == nil then nil else UseSignalStateResult.gamePassId
 	local UseResult1 = ReactModule.useCallback(function()
-		-- upvalues: SubmitFreeTrialTooltipsModule (upval), UseResult (copy), Action (copy), GamePassId (copy), InExperienceShop (upval), p1 (copy)
+		-- upvalues: SubmitFreeTrialTooltipsModule (upval), UseResult (copy), Action (copy), GamePassId (copy), InExperienceShop (upval), FFlagEnableNotificationsBuyModalSurfaceModule (upval), Parent (upval), p1 (copy)
 		SubmitFreeTrialTooltipsModule.reportActivated()
 		UseResult("activated")
 		
 		if Action == "promptGamePassPurchase" and GamePassId ~= nil then
-			require(InExperienceShop.initiateShopItemPurchase)(GamePassId, "GamePass")
+			require(InExperienceShop.initiateShopItemPurchase)(GamePassId, "GamePass", nil, nil, if FFlagEnableNotificationsBuyModalSurfaceModule then require(Parent.PurchasePromptLite).Enums.ProductPurchaseSurface.Tooltip else nil)
 			
 			return
 		else

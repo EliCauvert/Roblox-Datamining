@@ -705,7 +705,7 @@ return function()
 				ObserveResult()
 			end
 		end,
-		_fetchOnlineFriendsAsync = function()
+		_fetchOnlineFriendsAsync = function(p12)
 			-- upvalues: LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval), RequestsModule (upval), applyGetOnlineFriendsResponseBody (copy), DataCacheModule (copy)
 			local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
 			local CurrentUserId1 = nil
@@ -716,7 +716,7 @@ return function()
 			else
 				CurrentUserId1 = CurrentUserId
 			end
-			return RequestsModule.GetOnlineFriends(CurrentUserId1):andThen(function(Result)
+			return RequestsModule.GetOnlineFriends(CurrentUserId1, p12):andThen(function(Result)
 				-- upvalues: applyGetOnlineFriendsResponseBody (upval), DataCacheModule (upval), CurrentUserId1 (copy)
 				DataCacheModule.replaceItems({
 					[CurrentUserId1] = applyGetOnlineFriendsResponseBody(Result)
@@ -797,7 +797,7 @@ return function()
 		_updateFriendsPresences = function(List, p12, _)
 			-- upvalues: normalizeStoredOnlineFriendRow (upval), NormalizePresenceRawDataModule (upval), GetResult (copy), DataCacheModule1 (copy), appendUserToAllFriends (copy), DataCacheModule3 (copy), DataCacheModule (copy), LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval)
 			if not List then return end
-			local P68 = p12 or {}
+			local P69 = p12 or {}
 			local t = {}
 			
 			for _, value in pairs(List) do
@@ -805,7 +805,7 @@ return function()
 				local Text = if UserId then tostring(UserId) else nil
 				
 				if Text then
-					t[Text] = normalizeStoredOnlineFriendRow({ id = Text, sortScore = P68[Text] })
+					t[Text] = normalizeStoredOnlineFriendRow({ id = Text, sortScore = P69[Text] })
 					GetResult.UpdateUserPresence(Text, NormalizePresenceRawDataModule(value), { isUpdatedRealtime = true })
 					DataCacheModule1.replaceItem(Text, true)
 					appendUserToAllFriends(Text)

@@ -13,19 +13,18 @@ return function(p1)
 	UseSignalStateFunction(FriendsCallingStoreModule.getCallEndedReason)
 	local CallEndedReason = FriendsCallingStoreModule.getCallEndedReason(false)
 	local CallEndedMessageModule = if CallEndedReason == nil then nil else GetCallEndedMessageModule(CallEndedReason)
-	local Call = p1.call
 	ReactModule.useEffect(function()
-		-- upvalues: Call (copy), CallEndedMessageModule (copy), FriendsCallingStoreModule (copy)
-		if Call ~= nil or CallEndedMessageModule == nil then return end
+		-- upvalues: CallEndedMessageModule (copy), FriendsCallingStoreModule (copy)
+		if CallEndedMessageModule == nil then return end
 		local DelayedThread = task.delay(4, FriendsCallingStoreModule.clearCallEndedReason)
 		
 		return function()
 			-- upvalues: DelayedThread (copy)
 			task.cancel(DelayedThread)
 		end
-	end, { Call, CallEndedMessageModule, FriendsCallingStoreModule })
+	end, { CallEndedMessageModule, FriendsCallingStoreModule })
 	
-	return if Call == nil and CallEndedMessageModule ~= nil and CallEndedReason ~= nil then ReactModule.createElement("ScreenGui", {
+	return if CallEndedMessageModule == nil or CallEndedReason == nil then nil else ReactModule.createElement("ScreenGui", {
 		DisplayOrder = p1.displayOrder,
 		IgnoreGuiInset = true,
 		ResetOnSpawn = false,
@@ -33,5 +32,5 @@ return function(p1)
 		[ReactModule.Tag] = "data-testid=friends-calling-call-ended-screen"
 	}, {
 		Snackbar = ReactModule.createElement(CallEndedSnackbarModule, { endReason = CallEndedReason })
-	}) else nil
+	})
 end

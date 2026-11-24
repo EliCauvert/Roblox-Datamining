@@ -12,5 +12,7 @@
 	HomePageGameItemShop = "HomePageGameItemShop",
 	SearchPageGameItemShop = "SearchPageGameItemShop",
 	CampaignPageGameItemShop = "CampaignPageGameItemShop",
-	GameItemDetailsPage = "GameItemDetailsPage"
+	GameItemDetailsPage = "GameItemDetailsPage",
+	TopBarChip = "TopBarChip",
+	Tooltip = "Tooltip"
 }

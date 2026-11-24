@@ -2644,6 +2644,7 @@ Feature.Build.Message.InvitesLoadFailed,Couldn't load invites
 Feature.Build.Message.LimitBelowSpend,You've already spent {ALREADY_SPENT} Robux today. Set a limit that's at least that much.
 Feature.Build.Message.LinkCopied,Link copied to clipboard.
 Feature.Build.Message.LoadingVersions,Loading version history...
+Feature.Build.Message.MakeGamesByChatting,Got a game idea? Soon you can make it real just by chatting.
 Feature.Build.Message.NoAssetsFound,No assets here yet.
 Feature.Build.Message.NoCapturesAvailable,No captures yet
 Feature.Build.Message.NoDescriptionProvided,No description provided.
@@ -2707,6 +2708,7 @@ Feature.Build.Title.AdsStatsEmptyFree,Create your first ad
 Feature.Build.Title.ArchiveThisGame,Archive this game?
 Feature.Build.Title.AssetLibrary,Library
 Feature.Build.Title.Audience,Audience
+Feature.Build.Title.BuildComingSoon,Build is almost here
 Feature.Build.Title.BuildQuestion,Build has a question
 Feature.Build.Title.BuildQuestions,Build has some questions
 Feature.Build.Title.BuildUnavailable,Build isn't available
@@ -2735,6 +2737,7 @@ Feature.Build.Title.NoMonetizationPasses,You haven't created any Passes
 Feature.Build.Title.NoMonetizationProducts,Start earning in your game
 Feature.Build.Title.NoMonetizationSubscriptions,You haven't created any Subscriptions
 Feature.Build.Title.NoRobuxForUsage,No Robux left for Build usage
+Feature.Build.Title.PastedText,Pasted text
 Feature.Build.Title.PickCampaign,Pick a length
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,We couldn't add some friends as early testers:
@@ -3769,7 +3772,9 @@ Feature.GameJoin.Description.DifferentServer,You'll start in a different server
 Feature.GameJoin.Label.PlayTogether,You can play together
 Feature.GameJoin.Label.PlayTogetherSoon,You can play together soon
 Feature.GameJoin.Label.Played,played
+Feature.GameJoin.Label.PlayedExperience,played <b>{experienceName}</b>
 Feature.GameJoin.Label.RecentCoplay,You played together recently
+Feature.GameJoin.Label.UserPlayedExperience,<b>{userName}</b> played <b>{experienceName}</b>
 Feature.GamePage.Action.BackToTop,Back to top
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,

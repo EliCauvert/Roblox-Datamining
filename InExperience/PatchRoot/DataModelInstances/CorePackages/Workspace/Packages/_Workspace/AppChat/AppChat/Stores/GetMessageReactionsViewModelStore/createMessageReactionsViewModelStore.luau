@@ -38,7 +38,6 @@ return function(p1)
 	-- upvalues: SignalsModule (copy), t (copy), LocalUserIdStore (copy), ApplyPendingReactionModule (copy), areReactionListsEqual (copy), GetEmojiSetsStoreModule (copy), DashModule (copy)
 	local t2 = {}
 	local t3 = {}
-	local t4 = {}
 	
 	return {
 		getDisplayReactions = function(Key)
@@ -67,7 +66,7 @@ return function(p1)
 				return Entry
 			end
 			local Entry1 = t2[Key]
-			local Entry11 = nil
+			local Callback = nil
 			
 			if Entry1 == nil then
 				local Computed = SignalsModule.createComputed(function(p2)
@@ -77,18 +76,18 @@ return function(p1)
 					return if MessageReactions == nil then t else ApplyPendingReactionModule(MessageReactions, (tonumber(LocalUserIdStore.getCurrentUserId(p2))))
 				end, areReactionListsEqual)
 				t2[Key] = Computed
-				Entry11 = Computed
+				Callback = Computed
 			else
-				Entry11 = Entry1
+				Callback = Entry1
 			end
 			local Computed = SignalsModule.createComputed(function(p2)
-				-- upvalues: GetEmojiSetsStoreModule (upval), Entry11 (copy)
-				local v1 = GetEmojiSetsStoreModule(p2)
+				-- upvalues: GetEmojiSetsStoreModule (upval), Callback (copy)
+				local EmojiSetsStoreModule = GetEmojiSetsStoreModule(p2)
 				local NewCounts = {}
 				local Flag = false
 				
-				for _, value in Entry11(p2) do
-					local ReactionType = v1.getReactionType(value.emote_id, p2)
+				for _, value in Callback(p2) do
+					local ReactionType = EmojiSetsStoreModule.getReactionType(value.emote_id, p2)
 					
 					if ReactionType ~= nil and value.count > 0 then
 						NewCounts[ReactionType] = (NewCounts[ReactionType] or 0) + value.count
@@ -101,67 +100,11 @@ return function(p1)
 			
 			return Computed
 		end,
-		getHasReactions = function(Key)
-			-- upvalues: t4 (copy), t3 (copy), t2 (copy), SignalsModule (upval), p1 (copy), t (upval), LocalUserIdStore (upval), ApplyPendingReactionModule (upval), areReactionListsEqual (upval), GetEmojiSetsStoreModule (upval), DashModule (upval)
-			local Entry = t4[Key]
-			
-			if Entry ~= nil then
-				return Entry
-			end
-			local Entry1 = t3[Key]
-			local Callback1 = nil
-			
-			if Entry1 == nil then
-				local Entry2 = t2[Key]
-				local Callback = nil
-				
-				if Entry2 == nil then
-					local Computed = SignalsModule.createComputed(function(p2)
-						-- upvalues: p1 (upval), Key (copy), t (upval), LocalUserIdStore (upval), ApplyPendingReactionModule (upval)
-						local MessageReactions = p1.getMessageReactions(Key, p2)
-						
-						return if MessageReactions == nil then t else ApplyPendingReactionModule(MessageReactions, (tonumber(LocalUserIdStore.getCurrentUserId(p2))))
-					end, areReactionListsEqual)
-					t2[Key] = Computed
-					Callback = Computed
-				else
-					Callback = Entry2
-				end
-				local Computed = SignalsModule.createComputed(function(p2)
-					-- upvalues: GetEmojiSetsStoreModule (upval), Callback (copy)
-					local v1 = GetEmojiSetsStoreModule(p2)
-					local NewCounts = {}
-					local Flag = false
-					
-					for _, value in Callback(p2) do
-						local ReactionType = v1.getReactionType(value.emote_id, p2)
-						
-						if ReactionType ~= nil and value.count > 0 then
-							NewCounts[ReactionType] = (NewCounts[ReactionType] or 0) + value.count
-							Flag = true
-						end
-					end
-					return if Flag then NewCounts else nil
-				end, DashModule.shallowEqual)
-				t3[Key] = Computed
-				Callback1 = Computed
-			else
-				Callback1 = Entry1
-			end
-			local Computed = SignalsModule.createComputed(function(p2): boolean
-				-- upvalues: Callback1 (copy)
-				return Callback1(p2) ~= nil
-			end)
-			t4[Key] = Computed
-			
-			return Computed
-		end,
 		evictMessages = function(List)
-			-- upvalues: t2 (copy), t3 (copy), t4 (copy)
+			-- upvalues: t2 (copy), t3 (copy)
 			for _, value in List do
 				t2[value] = nil
 				t3[value] = nil
-				t4[value] = nil
 			end
 		end
 	}

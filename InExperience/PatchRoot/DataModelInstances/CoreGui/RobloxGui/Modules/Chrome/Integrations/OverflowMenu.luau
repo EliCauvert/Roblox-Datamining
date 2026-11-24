@@ -40,7 +40,6 @@ local GetFIntRobloxConnectFtuxShowDelayMsModule = require(Chrome.Flags.GetFIntRo
 local GetFIntRobloxConnectFtuxDismissDelayMsModule = require(Chrome.Flags.GetFIntRobloxConnectFtuxDismissDelayMs)
 local GetFFlagEnableAppChatInExperienceFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagEnableAppChatInExperience
 local GetShouldShowPlatformChatBasedOnPolicyModule = require(Chrome.Flags.GetShouldShowPlatformChatBasedOnPolicy)
-local FixInventoryFilledIcon = game:DefineFastFlag("FixInventoryFilledIcon", false)
 local FlagsModule = require(Chrome.ChromeShared.Flags)
 local FFlagTokenizeUnibarConstantsWithStyleProvider = FlagsModule.FFlagTokenizeUnibarConstantsWithStyleProvider
 local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
@@ -86,7 +85,7 @@ local ShouldShowPlatformChatBasedOnPolicyModule = GetFFlagEnableAppChatInExperie
 local IsInExperienceUIVREnabled = require(CorePackages.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
 local InExperienceUIVRIXP = require(CorePackages.Workspace.Packages.SharedExperimentDefinition).InExperienceUIVRIXP
 local SELFIEVIEWID = ConstantsModule.SELFIE_VIEW_ID
-local NewMappedSignal1 = MappedSignal.new(PlayerListManagerModule:GetSetVisibleChangedEvent().Event, function()
+local NewMappedSignal = MappedSignal.new(PlayerListManagerModule:GetSetVisibleChangedEvent().Event, function()
 	-- upvalues: PlayerListManagerModule (copy)
 	return PlayerListManagerModule:GetSetVisible()
 end)
@@ -118,19 +117,19 @@ ChromeUtilsModule.setCoreGuiAvailability(ServiceModule:register({
 			end)
 		end
 	end,
-	isActivated = NewMappedSignal1,
+	isActivated = NewMappedSignal,
 	components = {
 		Icon = function(_)
-			-- upvalues: CommonIconModule (copy), NewMappedSignal1 (copy)
-			return CommonIconModule("icons/controls/leaderboardOff", "icons/controls/leaderboardOn", NewMappedSignal1)
+			-- upvalues: CommonIconModule (copy), NewMappedSignal (copy)
+			return CommonIconModule("icons/controls/leaderboardOff", "icons/controls/leaderboardOn", NewMappedSignal)
 		end
 	}
 }), Enum.CoreGuiType.PlayerList)
-local NewMappedSignal2 = MappedSignal.new(EmotesMenuMasterModule.EmotesMenuToggled.Event, function()
+local NewMappedSignal1 = MappedSignal.new(EmotesMenuMasterModule.EmotesMenuToggled.Event, function()
 	-- upvalues: EmotesMenuMasterModule (copy)
 	return EmotesMenuMasterModule:isOpen()
 end)
-local RegisterResult1 = ServiceModule:register({
+local RegisterResult = ServiceModule:register({
 	id = "emotes",
 	label = "CoreScripts.TopBar.Emotes",
 	sideSheetPlacement = SideSheetPlacement.BelowFold,
@@ -153,11 +152,11 @@ local RegisterResult1 = ServiceModule:register({
 			end)
 		end
 	end,
-	isActivated = NewMappedSignal2,
+	isActivated = NewMappedSignal1,
 	components = {
 		Icon = function(_)
-			-- upvalues: CommonIconModule (copy), NewMappedSignal2 (copy)
-			return CommonIconModule("icons/controls/emoteOff", "icons/controls/emoteOn", NewMappedSignal2)
+			-- upvalues: CommonIconModule (copy), NewMappedSignal1 (copy)
+			return CommonIconModule("icons/controls/emoteOff", "icons/controls/emoteOn", NewMappedSignal1)
 		end
 	}
 })
@@ -165,17 +164,17 @@ local v1 = false
 local MenuIsVisible = EmotesMenuMasterModule.MenuIsVisible
 
 function updateEmoteAvailability()
-	-- upvalues: v1 (ref), MenuIsVisible (ref), RegisterResult1 (copy)
+	-- upvalues: v1 (ref), MenuIsVisible (ref), RegisterResult (copy)
 	if v1 and MenuIsVisible then
-		RegisterResult1.availability:available()
+		RegisterResult.availability:available()
 		
 		return
 	else
-		RegisterResult1.availability:unavailable()
+		RegisterResult.availability:unavailable()
 	end
 end
 
-ChromeUtilsModule.setCoreGuiAvailability(RegisterResult1, Enum.CoreGuiType.EmotesMenu, function(p1)
+ChromeUtilsModule.setCoreGuiAvailability(RegisterResult, Enum.CoreGuiType.EmotesMenu, function(p1)
 	-- upvalues: v1 (ref)
 	v1 = p1
 	updateEmoteAvailability()
@@ -185,11 +184,11 @@ EmotesMenuMasterModule.MenuVisibilityChanged.Event:Connect(function()
 	MenuIsVisible = EmotesMenuMasterModule.MenuIsVisible
 	updateEmoteAvailability()
 end)
-local NewMappedSignal3 = if FFlagEnableNewBackpack then nil else MappedSignal.new(BackpackScriptModule.StateChanged.Event, function()
+local NewMappedSignal2 = if FFlagEnableNewBackpack then nil else MappedSignal.new(BackpackScriptModule.StateChanged.Event, function()
 	-- upvalues: BackpackScriptModule (copy)
 	return BackpackScriptModule.IsOpen
 end)
-local NewMappedSignal4 = nil
+local NewMappedSignal3 = nil
 
 if FFlagEnableNewBackpack then
 	local NewSignal = Signal.new()
@@ -199,15 +198,15 @@ if FFlagEnableNewBackpack then
 		
 		return nil
 	end)
-	NewMappedSignal4 = MappedSignal.new(NewSignal, function()
+	NewMappedSignal3 = MappedSignal.new(NewSignal, function()
 		-- upvalues: Features (copy)
 		return Features.getVisibility(Features.FeatureName.Backpack)
 	end)
 else
-	NewMappedSignal4 = NewMappedSignal3
+	NewMappedSignal3 = NewMappedSignal2
 end
 if IsSideSheetEnabledModule and FFlagSideSheetFocusNav and FFlagEnableConsoleExpControls then
-	NewMappedSignal4:connect(function(p1)
+	NewMappedSignal3:connect(function(p1)
 		-- upvalues: ServiceModule (copy)
 		ServiceModule:setHideShortcutBar("Backpack", p1)
 	end)
@@ -254,15 +253,15 @@ ChromeUtilsModule.setCoreGuiAvailability(ServiceModule:register({
 			end
 		end
 	end,
-	isActivated = NewMappedSignal4,
+	isActivated = NewMappedSignal3,
 	components = {
 		Icon = function(_)
-			-- upvalues: CommonIconModule (copy), FixInventoryFilledIcon (copy), NewMappedSignal3 (copy)
-			return CommonIconModule("icons/menu/inventoryOff", if FixInventoryFilledIcon then "icons/menu/inventoryOn" else "icons/menu/inventory", NewMappedSignal3)
+			-- upvalues: CommonIconModule (copy), NewMappedSignal2 (copy)
+			return CommonIconModule("icons/menu/inventoryOff", "icons/menu/inventoryOn", NewMappedSignal2)
 		end
 	}
 }), Enum.CoreGuiType.Backpack)
-local RegisterResult = ServiceModule:register({
+local RegisterResult1 = ServiceModule:register({
 	id = "respawn",
 	label = "CoreScripts.InGameMenu.QuickActions.Respawn",
 	sideSheetPlacement = SideSheetPlacement.BelowFold,
@@ -281,13 +280,13 @@ local RegisterResult = ServiceModule:register({
 })
 
 function updateRespawn(p1)
-	-- upvalues: RegisterResult (copy)
+	-- upvalues: RegisterResult1 (copy)
 	if p1 then
-		RegisterResult.availability:available()
+		RegisterResult1.availability:available()
 		
 		return
 	else
-		RegisterResult.availability:unavailable()
+		RegisterResult1.availability:unavailable()
 	end
 end
 
@@ -298,19 +297,19 @@ task.defer(function()
 	updateRespawn(SettingsHubModule:GetRespawnBehaviour())
 end)
 local CurrentSubMenuResult = ServiceModule:currentSubMenu()
-local NewMappedSignal = MappedSignal.new(CurrentSubMenuResult:signal(), function(): boolean
+local NewMappedSignal4 = MappedSignal.new(CurrentSubMenuResult:signal(), function(): boolean
 	-- upvalues: CurrentSubMenuResult (copy)
 	return CurrentSubMenuResult:get() == "nine_dot"
 end)
 
 if ServiceModule:orderAlignment():get() == Enum.HorizontalAlignment.Right then
-	NewMappedSignal:connect(function(p1)
+	NewMappedSignal4:connect(function(p1)
 		-- upvalues: PlayerListManagerModule (copy)
 		PlayerListManagerModule:SetMinimized(p1)
 	end)
 end
 function HamburgerButton(p1)
-	-- upvalues: UseStyleFunction (copy), ReactModule (copy), RunService (copy), FFlagChromeNineDotActivityIndicator (copy), FFlagChromeNineDotActivityIndicator1 (copy), FFlagEnableAnyFreeTrialToolTipModule (copy), UsePublishShopAvailabilityModule (copy), UseInExperienceOfferExposureModule (copy), UseOfferNineDotActivityIndicatorModule (ref), UseFreeTrialNineDotActivityIndicatorModule (ref), FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule (copy), NewMappedSignal (copy), UseMappedSignalFunction (copy), ShouldShowPlatformChatBasedOnPolicyModule (copy), CommonFtuxTooltipModule (copy), UnibarConnectTooltipPriority (copy), GetFFlagIsSquadEnabledFunction (copy), GetFStringConnectTooltipLocalStorageKeyModule (copy), GetFIntRobloxConnectFtuxShowDelayMsModule (copy), GetFIntRobloxConnectFtuxDismissDelayMsModule (copy), FFlagShowGameAgeRating (copy), UseAppPolicyFunction (copy), FFlagExperienceAgeRatingBadge (copy), MenuIconContextModule (copy), IsSideSheetEnabledModule (copy), SelectionCursorProvider (copy), MenuIconModule (copy), ImageSetLabel (copy), Images (copy), SelfieViewModule (copy), ServiceModule (copy), SELFIEVIEWID (copy), AvatarSwitcherFtuxTooltip (copy), AvatarSwitcherFtuxTooltipModule (copy), FFlagEnableInExperienceShop (copy), InExperienceShopFtuxTooltipModule (ref), MenuOfferTooltipModule (copy), FreeTrialToolTipChrome (ref), OpenInExperienceShopWindow (ref)
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), RunService (copy), FFlagChromeNineDotActivityIndicator (copy), FFlagChromeNineDotActivityIndicator1 (copy), FFlagEnableAnyFreeTrialToolTipModule (copy), UsePublishShopAvailabilityModule (copy), UseInExperienceOfferExposureModule (copy), UseOfferNineDotActivityIndicatorModule (ref), UseFreeTrialNineDotActivityIndicatorModule (ref), FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule (copy), NewMappedSignal4 (copy), UseMappedSignalFunction (copy), ShouldShowPlatformChatBasedOnPolicyModule (copy), CommonFtuxTooltipModule (copy), UnibarConnectTooltipPriority (copy), GetFFlagIsSquadEnabledFunction (copy), GetFStringConnectTooltipLocalStorageKeyModule (copy), GetFIntRobloxConnectFtuxShowDelayMsModule (copy), GetFIntRobloxConnectFtuxDismissDelayMsModule (copy), FFlagShowGameAgeRating (copy), UseAppPolicyFunction (copy), FFlagExperienceAgeRatingBadge (copy), MenuIconContextModule (copy), IsSideSheetEnabledModule (copy), SelectionCursorProvider (copy), MenuIconModule (copy), ImageSetLabel (copy), Images (copy), SelfieViewModule (copy), ServiceModule (copy), SELFIEVIEWID (copy), AvatarSwitcherFtuxTooltip (copy), AvatarSwitcherFtuxTooltipModule (copy), FFlagEnableInExperienceShop (copy), InExperienceShopFtuxTooltipModule (ref), MenuOfferTooltipModule (copy), FreeTrialToolTipChrome (ref), OpenInExperienceShopWindow (ref)
 	local ToggleTransition = p1.toggleTransition
 	local UseStyleResult = UseStyleFunction()
 	local UseRefResult = ReactModule.useRef(nil)
@@ -338,7 +337,7 @@ function HamburgerButton(p1)
 		ICONSIZE = ConstantsModule.ICON_SIZE
 		MEDIUMICONSIZE = ConstantsModule.MEDIUM_ICON_SIZE
 	end
-	local UseMappedSignalResult = NewMappedSignal and UseMappedSignalFunction(NewMappedSignal) or false
+	local UseMappedSignalResult = NewMappedSignal4 and UseMappedSignalFunction(NewMappedSignal4) or false
 	local UseAppPolicyResult = if FFlagShowGameAgeRating then UseAppPolicyFunction(function(p2)
 		return p2.getShowGameAgeRating()
 	end) else UseAppPolicyFunction(function(p2)
@@ -428,7 +427,7 @@ return ServiceModule:register({
 	label = if IsSideSheetEnabledModule then "CoreScripts.TopBar.RobloxMenu" else "CoreScripts.TopBar.MoreMenu",
 	sideSheetPlacement = SideSheetPlacement.None,
 	hotkeyCodes = if IsSideSheetEnabledModule then { Enum.KeyCode.Escape } else nil,
-	isActivated = NewMappedSignal,
+	isActivated = NewMappedSignal4,
 	components = {
 		Icon = function(p1)
 			-- upvalues: ReactModule (copy)

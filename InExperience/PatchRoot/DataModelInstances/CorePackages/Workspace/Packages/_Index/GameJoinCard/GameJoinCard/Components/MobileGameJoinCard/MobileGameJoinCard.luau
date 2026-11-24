@@ -181,6 +181,15 @@ return function(p1)
 			userName = p1.playerName,
 			experienceName = p1.experienceName
 		},
+		playedExperience = if FFlagCoplayHistoryGameJoinCard then {
+			"Feature.GameJoin.Label.PlayedExperience",
+			experienceName = p1.experienceName
+		} else nil,
+		userPlayedExperience = if FFlagCoplayHistoryGameJoinCard then {
+			"Feature.GameJoin.Label.UserPlayedExperience",
+			userName = p1.playerName,
+			experienceName = p1.experienceName
+		} else nil,
 		chatWithName = {
 			"Feature.Home.PeopleList.ChatWith",
 			username = p1.playerName
@@ -218,9 +227,11 @@ return function(p1)
 					LayoutOrder = LayoutOrder,
 					testId = if FFlagLuaAppAddTestIdsForArrow then `--game-join-card-action-{p3.id}` else nil
 				})
-			end)
+			end, if FFlagCoplayHistoryGameJoinCard then p1.isCoplayInviteCard else nil)
 		end
 	end
+	local FFlagJoinabilityCTAContextCopy1 = FFlagJoinabilityCTAContextCopy or FFlagCoplayHistoryGameJoinCard and p1.isCoplayInviteCard == true
+	
 	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.fromScale(1, 1),
@@ -320,12 +331,12 @@ return function(p1)
 									LayoutOrder = 1,
 									RichText = true,
 									fontStyle = UseTokensResult.Typography.BodyMedium,
-									Text = UseLocalizationResult.userIsPlayingExperience
+									Text = if FFlagCoplayHistoryGameJoinCard and p1.isCoplayInviteCard then UseLocalizationResult.userPlayedExperience else UseLocalizationResult.userIsPlayingExperience
 								})
 							}) else ReactModule.createElement(UserTile, {
 								userId = p1.userId,
 								title = p1.playerName,
-								subtitle = UseLocalizationResult.playingExperience,
+								subtitle = if FFlagCoplayHistoryGameJoinCard and p1.isCoplayInviteCard then UseLocalizationResult.playedExperience else UseLocalizationResult.playingExperience,
 								layoutMode = LayoutMode.compact,
 								avatarSize = UDim2.fromOffset(88, 88),
 								backplateStyle = UseTokensResult.Color.Surface.Surface_100,
@@ -333,7 +344,7 @@ return function(p1)
 								selectable = (not FFlagGameJoinCardOptionalActions or p1.onViewProfile ~= nil) and nil
 							})
 						}) else nil,
-						CtaContext = if FFlagJoinabilityCTAContextCopy and v2 ~= nil then ReactModule.createElement(View, {
+						CtaContext = if FFlagJoinabilityCTAContextCopy1 and v2 ~= nil then ReactModule.createElement(View, {
 							tag = "col align-x-center items-center gap-xxsmall size-full-0 auto-y",
 							LayoutOrder = 3
 						}, {
@@ -350,7 +361,7 @@ return function(p1)
 						}) else nil,
 						Buttons = ReactModule.createElement(View, {
 							tag = "col gap-small size-full-0 auto-y",
-							LayoutOrder = if FFlagJoinabilityCTAContextCopy and v2 ~= nil then 4 else 3
+							LayoutOrder = if FFlagJoinabilityCTAContextCopy1 and v2 ~= nil then 4 else 3
 						}, if FFlagJoinabilityCTARefactor or Content ~= nil then t else {
 							PrimaryButton = if Flag1 then ReactModule.createElement(AgeCheckUpsellCTAModule, {
 								LayoutOrder = 1,

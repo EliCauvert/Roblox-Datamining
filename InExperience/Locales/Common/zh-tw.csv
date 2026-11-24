@@ -635,6 +635,7 @@ CommonUI.UserAgreements.Popup.Agreement.TransferPersonalInformationPolicy,海外
 CommonUI.UserAgreements.Popup.DefaultAgreementTitle,更新協議
 CommonUI.UserAgreements.Popup.TitleOnWebview,
 CoreScripts.Ads.Action.Close,
+CoreScripts.Ads.Action.Watch,觀看
 CoreScripts.Ads.ImmersiveBrandedAds.WhyThisAd,此體驗中的使用者會看到這項非個人化廣告。{AdvertiserName} 是支付此廣告費用的廣告商。
 CoreScripts.Ads.Label.IllegalContentReportingLink,檢舉非法內容或對兒童有害的內容
 CoreScripts.Ads.Label.InExperienceDisclosureDynamic,Roblox 不會使用行為資訊來投放此廣告。您會看到此廣告，是根據裝置類型、位置及年齡，所提供的適當相關廣告。廣告主為 {AdvertiserName}。
@@ -645,6 +646,8 @@ CoreScripts.Ads.Label.ReportAd,檢舉廣告
 CoreScripts.Ads.Label.RewardedVideoEligibleDisclaimer,這是測試廣告。您的體驗中會顯示真實廣告。
 CoreScripts.Ads.Label.RewardedVideoExitConfirmation,您就快要獲得獎勵了！確定要退出嗎？
 CoreScripts.Ads.Label.RewardedVideoIneligibleDisclaimer,這是測試廣告。由於您的體驗不符合條件，因此不會顯示真實廣告。
+CoreScripts.Ads.Label.SkipAd,跳過廣告
+CoreScripts.Ads.Label.SkipIn,{RBX_NUMBER} 後即可跳過
 CoreScripts.Ads.Label.SponsoredAds,贊助
 CoreScripts.Ads.Label.SponsoredAdsDisclosureStatic,贊助體驗是由創作者支付。針對歐盟的使用者，可能會依據裝置類型、位置和人口統計資訊等一般資訊來向您顯示。針對歐盟外的使用者，廣告可能也會根據額外資訊向您顯示。
 CoreScripts.Ads.Label.Teleporting,正在傳送……
@@ -3365,16 +3368,20 @@ Feature.Chat.Title.FriendsChat,好友聊天
 Feature.Chat.Title.NewChat,新聊天
 Feature.Chat.Toast.Error.InvalidUserSelected,此清單中有人員無法新增
 Feature.CloudClient.Action.PlayWithoutCloudPlay,不使用 Cloud Play 遊玩
+Feature.CloudClient.Action.PlayWithoutRobloxReality,不使用 {productName} 遊玩
+Feature.CloudClient.Action.TryRobloxReality,試用 {productName}
 Feature.CloudClient.Description.CloudPlayOffer,Cloud Play 會在 Roblox 的電腦上執行遊戲，因此載入速度可能會更快，而且當機次數也可能變少。這只會在你玩此遊戲時有效。
 Feature.CloudClient.Description.GalleryUnavailableCloudPlay,不使用 Cloud Play 重新加入，即可使用你的圖庫。
 Feature.CloudClient.Description.GalleryUnavailableRobloxReality,不使用 Restyle 重新加入即可使用你的圖庫。
 Feature.CloudClient.Description.GalleryUnavailableRobloxRealityV2,不使用 {productName} 重新加入，即可使用你的圖庫。
+Feature.CloudClient.Description.RobloxRealityOffer,{productName} 可將你最愛的遊戲換上嶄新風格。搶先預覽，然後分享你的想法。
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle 為搶先預覽。畫面可能與原始遊戲看起來不同。
 Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName} 為搶先預覽。畫面可能與原始遊戲看起來不同。
 Feature.CloudClient.Heading.CloudPlayOffer,使用 Cloud Play 遊玩
 Feature.CloudClient.Heading.GalleryUnavailableCloudPlay,Cloud Play 尚未提供圖庫功能。
 Feature.CloudClient.Heading.GalleryUnavailableRobloxReality,Restyle 尚未提供圖庫功能。
 Feature.CloudClient.Heading.GalleryUnavailableRobloxRealityV2,{productName} 尚未提供圖庫功能。
+Feature.CloudClient.Heading.RobloxRealityOffer,使用 {productName} 試玩你的遊戲
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Cloud Play 尚未提供擷取功能。
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Restyle 尚未提供擷取功能。
 Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,{productName} 尚未提供擷取功能。
@@ -3760,6 +3767,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,{experienceName} 的通知已�
 Feature.GameJoin.Description.DifferentServer,你將在不同的伺服器上開始遊戲
 Feature.GameJoin.Label.PlayTogether,你們可以一起玩
 Feature.GameJoin.Label.PlayTogetherSoon,你們很快就可以一起玩了
+Feature.GameJoin.Label.Played,已玩過
 Feature.GameJoin.Label.RecentCoplay,你們最近一起玩過
 Feature.GamePage.Action.BackToTop,回到頂端
 Feature.GamePage.Label.Ad,

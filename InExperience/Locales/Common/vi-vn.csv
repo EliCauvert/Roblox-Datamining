@@ -636,6 +636,7 @@ CommonUI.UserAgreements.Popup.Agreement.TransferPersonalInformationPolicy,Chuy�
 CommonUI.UserAgreements.Popup.DefaultAgreementTitle,Thỏa Thuận Được Cập Nhật
 CommonUI.UserAgreements.Popup.TitleOnWebview,Điều Khoản
 CoreScripts.Ads.Action.Close,
+CoreScripts.Ads.Action.Watch,
 CoreScripts.Ads.ImmersiveBrandedAds.WhyThisAd,"Đây là quảng cáo không cá nhân hóa, hiển thị đến người dùng trong trải nghiệm này. {AdvertiserName} là nhà quảng cáo và đã trả phí cho quảng cáo này."
 CoreScripts.Ads.Label.IllegalContentReportingLink,Báo cáo nội dung bất hợp pháp hoặc nội dung có hại cho trẻ em
 CoreScripts.Ads.Label.InExperienceDisclosureDynamic,"Roblox đã không sử dụng thông tin hành vi để phân phối quảng cáo này. Quảng cáo mà bạn đang xem được dựa trên các thông tin bao gồm loại thiết bị, vị trí và độ tuổi, từ đó hiện cho bạn những quảng cáo phù hợp và liên quan. Đơn vị quảng cáo là {AdvertiserName}."
@@ -646,6 +647,8 @@ CoreScripts.Ads.Label.ReportAd,Báo Cáo Quảng Cáo
 CoreScripts.Ads.Label.RewardedVideoEligibleDisclaimer,Đây là quảng cáo thử nghiệm. Quảng cáo thực tế sẽ được hiển thị trong trải nghiệm của bạn.
 CoreScripts.Ads.Label.RewardedVideoExitConfirmation,Bạn sắp nhận được phần thưởng rồi! Bạn chắc chắn muốn thoát không?
 CoreScripts.Ads.Label.RewardedVideoIneligibleDisclaimer,Đây là quảng cáo thử nghiệm. Quảng cáo thực tế sẽ không được hiển thị vì trải nghiệm của bạn không đủ điều kiện.
+CoreScripts.Ads.Label.SkipAd,Bỏ qua quảng cáo
+CoreScripts.Ads.Label.SkipIn,Bỏ qua sau {RBX_NUMBER}
 CoreScripts.Ads.Label.SponsoredAds,Được tài trợ
 CoreScripts.Ads.Label.SponsoredAdsDisclosureStatic,"Trải nghiệm được tài trợ do Người sáng tạo trả phí. Đối với người dùng EU, những trải nghiệm này có thể được hiển thị cho bạn dựa trên thông tin tổng quan về loại thiết bị, vị trí và thông tin nhân khẩu học của bạn. Ở ngoài EU, quảng cáo cũng có thể được hiển thị dựa trên các thông tin bổ sung."
 CoreScripts.Ads.Label.Teleporting,Đang dịch chuyển...
@@ -3366,16 +3369,20 @@ Feature.Chat.Title.FriendsChat,Trò chuyện cùng bạn bè
 Feature.Chat.Title.NewChat,Cuộc trò chuyện mới
 Feature.Chat.Toast.Error.InvalidUserSelected,Không thể thêm một hoặc nhiều người vào danh sách này
 Feature.CloudClient.Action.PlayWithoutCloudPlay,Chơi mà không dùng Cloud Play
+Feature.CloudClient.Action.PlayWithoutRobloxReality,Chơi mà không dùng {productName}
+Feature.CloudClient.Action.TryRobloxReality,Dùng thử {productName}
 Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play chạy trò chơi bằng các máy tính của Roblox, do đó trò chơi có thể tải nhanh hơn và ít bị sập hơn. Tính năng này chỉ hoạt động khi bạn đang chơi trò chơi này."
 Feature.CloudClient.Description.GalleryUnavailableCloudPlay,Hãy tham gia lại mà không dùng Cloud Play để sử dụng thư viện của bạn.
 Feature.CloudClient.Description.GalleryUnavailableRobloxReality,Hãy tham gia lại mà không dùng Restyle để sử dụng thư viện của bạn.
 Feature.CloudClient.Description.GalleryUnavailableRobloxRealityV2,Hãy tham gia lại mà không dùng {productName} để sử dụng thư viện của bạn.
+Feature.CloudClient.Description.RobloxRealityOffer,{productName} mang đến một diện mạo hoàn toàn mới cho các trò chơi yêu thích của bạn. Hãy trải nghiệm sớm rồi cho chúng tôi biết cảm nhận của bạn nhé.
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle là bản xem trước sớm. Hình ảnh có thể khác so với trò chơi gốc.
 Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName} là bản xem trước sớm. Hình ảnh có thể khác so với trò chơi gốc.
 Feature.CloudClient.Heading.CloudPlayOffer,Chơi với Cloud Play
 Feature.CloudClient.Heading.GalleryUnavailableCloudPlay,Cloud Play chưa hỗ trợ thư viện.
 Feature.CloudClient.Heading.GalleryUnavailableRobloxReality,Restyle chưa hỗ trợ thư viện.
 Feature.CloudClient.Heading.GalleryUnavailableRobloxRealityV2,{productName} chưa hỗ trợ thư viện.
+Feature.CloudClient.Heading.RobloxRealityOffer,Dùng thử {productName} cho trò chơi của bạn
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Cloud Play chưa hỗ trợ tính năng Chụp.
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Restyle chưa hỗ trợ tính năng Chụp.
 Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,{productName} chưa hỗ trợ tính năng Chụp.
@@ -3761,6 +3768,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Đã mở thông báo cho {expe
 Feature.GameJoin.Description.DifferentServer,Bạn sẽ bắt đầu ở máy chủ khác
 Feature.GameJoin.Label.PlayTogether,Các bạn có thể chơi cùng nhau
 Feature.GameJoin.Label.PlayTogetherSoon,Các bạn sẽ sớm có thể chơi cùng nhau
+Feature.GameJoin.Label.Played,đã chơi
 Feature.GameJoin.Label.RecentCoplay,Gần đây hai bạn đã chơi cùng nhau
 Feature.GamePage.Action.BackToTop,Về đầu trang
 Feature.GamePage.Label.Ad,

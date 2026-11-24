@@ -30,6 +30,7 @@ local FFlagBuildExperienceInGameCaptureToChat = require(Parent1.SharedFlags).FFl
 local GetMomentsCapabilitiesFunction = require(Parent1.MomentsCommon).Stores.GetMomentsCapabilities
 local FFlagCreateMomentsToastModule = require(Parent.Flags.FFlagCreateMomentsToast)
 local FFlagCapturesInExpMomentsToastDownloadButtonModule = require(Parent.Flags.FFlagCapturesInExpMomentsToastDownloadButton)
+local FFlagCapturesInExpMomentsToastShareButtonModule = require(Parent.Flags.FFlagCapturesInExpMomentsToastShareButton)
 local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 local FFlagCapturesOmitToastContentDurationModule = require(Parent.Flags.FFlagCapturesOmitToastContentDuration)
 local FFlagCapturesCarouselMomentsButtonModule = require(Parent.Flags.FFlagCapturesCarouselMomentsButton)
@@ -157,8 +158,8 @@ local config = {
 	}
 }
 
-return function(_)
-	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), ReactModule (copy), CapturesToastTypeModule (copy), config (copy), ToastVanishedModule (copy), FFlagBuildExperienceInGameCaptureToChat (copy), DashModule (copy), FFlagCapturesOmitToastContentDurationModule (copy), GetMomentsCapabilitiesFunction (copy), FFlagCreateMomentsToastModule (copy), ToastControllerModule (copy), HttpService (copy), StartMomentsCreationFlowModule (copy), EventNamesModule (copy), FFlagCapturesCarouselMomentsButtonModule (copy), Captures (copy), FFlagCapturesInExpMomentsToastDownloadButtonModule (copy), IconName (copy), GetSaveToStoragePermissionModule (copy), Toast (copy)
+local function v36(p1)
+	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), ReactModule (copy), CapturesToastTypeModule (copy), config (copy), ToastVanishedModule (copy), FFlagBuildExperienceInGameCaptureToChat (copy), DashModule (copy), FFlagCapturesOmitToastContentDurationModule (copy), GetMomentsCapabilitiesFunction (copy), FFlagCreateMomentsToastModule (copy), FFlagCapturesInExpMomentsToastShareButtonModule (copy), IconName (copy), SocialStopwatchModule (copy), ShareCaptureModule (copy), ExternalShareSourceTypeModule (copy), EventNamesModule (copy), ToastControllerModule (copy), HttpService (copy), StartMomentsCreationFlowModule (copy), FFlagCapturesCarouselMomentsButtonModule (copy), Captures (copy), FFlagCapturesInExpMomentsToastDownloadButtonModule (copy), GetSaveToStoragePermissionModule (copy), Toast (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -183,21 +184,21 @@ return function(_)
 		videoCaptureOtherError = "Feature.Captures.Toast.VideoCaptureOtherError",
 		viewAction = "Feature.Captures.Action.ViewCapture"
 	})
-	local UseSelectorResult = UseSelectorFunction(function(p1)
+	local UseSelectorResult = UseSelectorFunction(function(p2)
 		-- upvalues: ConstantsModule (upval)
-		return p1[ConstantsModule.RoduxKey].Toast.ToastType
+		return p2[ConstantsModule.RoduxKey].Toast.ToastType
 	end)
-	local UseSelectorResult1 = UseSelectorFunction(function(p1)
+	local UseSelectorResult1 = UseSelectorFunction(function(p2)
 		-- upvalues: ConstantsModule (upval)
-		return p1[ConstantsModule.RoduxKey].Toast.ToastConfig
+		return p2[ConstantsModule.RoduxKey].Toast.ToastConfig
 	end)
-	local UseSelectorResult2 = UseSelectorFunction(function(p1)
+	local UseSelectorResult2 = UseSelectorFunction(function(p2)
 		-- upvalues: ConstantsModule (upval)
-		return p1[ConstantsModule.RoduxKey].Toast.IsDismissed
+		return p2[ConstantsModule.RoduxKey].Toast.IsDismissed
 	end)
-	local UseResult = ReactModule.useCallback(function(p1)
+	local UseResult = ReactModule.useCallback(function(p2)
 		-- upvalues: UseLocalizationResult (copy)
-		return if p1 then UseLocalizationResult[p1] else nil
+		return if p2 then UseLocalizationResult[p2] else nil
 	end)
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseSelectorResult (copy), CapturesToastTypeModule (upval), config (upval), UseDispatchResult (copy), ToastVanishedModule (upval), UseAnalyticsModuleResult (copy), UseSelectorResult1 (copy), ConstantsModule (upval), UseResult (copy), FFlagBuildExperienceInGameCaptureToChat (upval), DashModule (upval)
@@ -236,54 +237,60 @@ return function(_)
 		return if UseMemoResult == nil then nil else DashModule.join(UseMemoResult, { duration = DashModule.None })
 	end, { UseMemoResult }) else nil
 	
-	return if UseMemoResult then if UseSelectorResult == CapturesToastTypeModule.CaptureTakenWithMomentsCTA and not GetMomentsCapabilitiesFunction(false).getCanCreateMoments(false) then nil elseif FFlagCreateMomentsToastModule then if UseSelectorResult == CapturesToastTypeModule.CaptureTakenWithMomentsCTA then ReactModule.createElement(ToastControllerModule, {
-		icon = "icons/brands/moments_large",
-		title = UseResult("momentsTitle"),
-		text = UseResult("discoverPostWatch"),
-		actionText = UseResult("createAction"),
-		onAction = function()
-			-- upvalues: UseSelectorResult1 (copy), HttpService (upval), UseDispatchResult (copy), StartMomentsCreationFlowModule (upval), UseAnalyticsModuleResult (copy), EventNamesModule (upval), FFlagCapturesCarouselMomentsButtonModule (upval), Captures (upval)
-			if UseSelectorResult1 and UseSelectorResult1.captureInfo then
-				local Guid = HttpService:GenerateGUID(false)
-				UseDispatchResult(StartMomentsCreationFlowModule(UseSelectorResult1.captureInfo, Guid))
-				UseAnalyticsModuleResult.fireEvent(EventNamesModule.XExpMomentCreationStarted, {
-					creationSessionId = Guid,
-					source = if FFlagCapturesCarouselMomentsButtonModule then Captures else nil
-				})
-			end
-			UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesCreateMomentToastButtonActivated)
-		end,
-		iconAction = if FFlagCapturesInExpMomentsToastDownloadButtonModule then {
-			icon = IconName.ArrowDownToLine,
+	if not UseMemoResult then
+		return nil
+	elseif UseSelectorResult == CapturesToastTypeModule.CaptureTakenWithMomentsCTA and not GetMomentsCapabilitiesFunction(false).getCanCreateMoments(false) then
+		return nil
+	elseif not FFlagCreateMomentsToastModule then
+		return ReactModule.createElement(ReactModule.Fragment, {}, {
+			[UseSelectorResult] = ReactModule.createElement(Toast, {
+				duration = UseMemoResult.duration,
+				show = not UseSelectorResult2,
+				toastContent = if FFlagCapturesOmitToastContentDurationModule and UseMemoResult1 then UseMemoResult1 else UseMemoResult
+			})
+		})
+	elseif UseSelectorResult == CapturesToastTypeModule.CaptureTakenWithMomentsCTA then
+		local Config = if FFlagCapturesInExpMomentsToastShareButtonModule and p1.enableShareCaptureCTA then {
+			icon = IconName.ArrowUpFromLandscapeRectangle,
 			onActivated = function()
-				-- upvalues: UseSelectorResult1 (copy), GetSaveToStoragePermissionModule (upval), UseDispatchResult (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval)
+				-- upvalues: UseSelectorResult1 (copy), SocialStopwatchModule (upval), UseDispatchResult (copy), ShareCaptureModule (upval), ExternalShareSourceTypeModule (upval), UseAnalyticsModuleResult (copy), EventNamesModule (upval)
 				if UseSelectorResult1 and UseSelectorResult1.captureInfo then
-					GetSaveToStoragePermissionModule({ UseSelectorResult1.captureInfo }, nil, UseDispatchResult)
+					if not SocialStopwatchModule.Stopwatch.get(SocialStopwatchModule.Events.CaptureShared) then
+						SocialStopwatchModule.Stopwatch.start(SocialStopwatchModule.Events.CaptureShared)
+					end
+					UseDispatchResult(ShareCaptureModule(UseSelectorResult1.captureInfo, ExternalShareSourceTypeModule.Toast))
 				end
-				UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesCreateMomentToastDownloadActivated)
+				UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesCreateMomentToastShareActivated)
 			end
-		} else nil,
-		onDismissed = function()
-			-- upvalues: UseDispatchResult (copy), ToastVanishedModule (upval)
-			UseDispatchResult(ToastVanishedModule())
-		end,
-		duration = UseMemoResult.duration,
-		show = not UseSelectorResult2
-	}) elseif UseSelectorResult == CapturesToastTypeModule.MomentProcessing then ReactModule.createElement(ToastControllerModule, {
-		icon = "icons/brands/moments_large",
-		title = UseResult("momentProcessingTitle"),
-		text = UseResult("momentProcessingDescription"),
-		onDismissed = function()
-			-- upvalues: UseDispatchResult (copy), ToastVanishedModule (upval)
-			UseDispatchResult(ToastVanishedModule())
-		end,
-		duration = UseMemoResult.duration,
-		show = not UseSelectorResult2
-	}) elseif UseSelectorResult == CapturesToastTypeModule.MomentFailed then ReactModule.createElement(ReactModule.Fragment, {}, {
-		[UseSelectorResult] = ReactModule.createElement(ToastControllerModule, {
+		} else nil
+		
+		return ReactModule.createElement(ToastControllerModule, {
 			icon = "icons/brands/moments_large",
-			title = UseResult("momentFailedTitle"),
-			text = UseResult("momentFailedDescription"),
+			title = UseResult("momentsTitle"),
+			text = UseResult("discoverPostWatch"),
+			actionText = UseResult("createAction"),
+			onAction = function()
+				-- upvalues: UseSelectorResult1 (copy), HttpService (upval), UseDispatchResult (copy), StartMomentsCreationFlowModule (upval), UseAnalyticsModuleResult (copy), EventNamesModule (upval), FFlagCapturesCarouselMomentsButtonModule (upval), Captures (upval)
+				if UseSelectorResult1 and UseSelectorResult1.captureInfo then
+					local Guid = HttpService:GenerateGUID(false)
+					UseDispatchResult(StartMomentsCreationFlowModule(UseSelectorResult1.captureInfo, Guid))
+					UseAnalyticsModuleResult.fireEvent(EventNamesModule.XExpMomentCreationStarted, {
+						creationSessionId = Guid,
+						source = if FFlagCapturesCarouselMomentsButtonModule then Captures else nil
+					})
+				end
+				UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesCreateMomentToastButtonActivated)
+			end,
+			iconAction = if Config then Config elseif FFlagCapturesInExpMomentsToastDownloadButtonModule then {
+				icon = IconName.ArrowDownToLine,
+				onActivated = function()
+					-- upvalues: UseSelectorResult1 (copy), GetSaveToStoragePermissionModule (upval), UseDispatchResult (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval)
+					if UseSelectorResult1 and UseSelectorResult1.captureInfo then
+						GetSaveToStoragePermissionModule({ UseSelectorResult1.captureInfo }, nil, UseDispatchResult)
+					end
+					UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesCreateMomentToastDownloadActivated)
+				end
+			} else nil,
 			onDismissed = function()
 				-- upvalues: UseDispatchResult (copy), ToastVanishedModule (upval)
 				UseDispatchResult(ToastVanishedModule())
@@ -291,17 +298,42 @@ return function(_)
 			duration = UseMemoResult.duration,
 			show = not UseSelectorResult2
 		})
-	}) else ReactModule.createElement(ReactModule.Fragment, {}, {
-		[UseSelectorResult] = ReactModule.createElement(Toast, {
+	else
+		return if UseSelectorResult == CapturesToastTypeModule.MomentProcessing then ReactModule.createElement(ToastControllerModule, {
+			icon = "icons/brands/moments_large",
+			title = UseResult("momentProcessingTitle"),
+			text = UseResult("momentProcessingDescription"),
+			onDismissed = function()
+				-- upvalues: UseDispatchResult (copy), ToastVanishedModule (upval)
+				UseDispatchResult(ToastVanishedModule())
+			end,
 			duration = UseMemoResult.duration,
-			show = not UseSelectorResult2,
-			toastContent = if FFlagCapturesOmitToastContentDurationModule and UseMemoResult1 then UseMemoResult1 else UseMemoResult
+			show = not UseSelectorResult2
+		}) elseif UseSelectorResult == CapturesToastTypeModule.MomentFailed then ReactModule.createElement(ReactModule.Fragment, {}, {
+			[UseSelectorResult] = ReactModule.createElement(ToastControllerModule, {
+				icon = "icons/brands/moments_large",
+				title = UseResult("momentFailedTitle"),
+				text = UseResult("momentFailedDescription"),
+				onDismissed = function()
+					-- upvalues: UseDispatchResult (copy), ToastVanishedModule (upval)
+					UseDispatchResult(ToastVanishedModule())
+				end,
+				duration = UseMemoResult.duration,
+				show = not UseSelectorResult2
+			})
+		}) else ReactModule.createElement(ReactModule.Fragment, {}, {
+			[UseSelectorResult] = ReactModule.createElement(Toast, {
+				duration = UseMemoResult.duration,
+				show = not UseSelectorResult2,
+				toastContent = if FFlagCapturesOmitToastContentDurationModule and UseMemoResult1 then UseMemoResult1 else UseMemoResult
+			})
 		})
-	}) else ReactModule.createElement(ReactModule.Fragment, {}, {
-		[UseSelectorResult] = ReactModule.createElement(Toast, {
-			duration = UseMemoResult.duration,
-			show = not UseSelectorResult2,
-			toastContent = if FFlagCapturesOmitToastContentDurationModule and UseMemoResult1 then UseMemoResult1 else UseMemoResult
-		})
-	}) else nil
+	end
 end
+
+if FFlagCapturesInExpMomentsToastShareButtonModule then
+	v36 = require(Parent.App.CapturesPolicy).connect(function(p1)
+		return { enableShareCaptureCTA = p1.enableShareCaptureCTA() }
+	end)(v36)
+end
+return v36

@@ -12,13 +12,14 @@ local EventNames = require(TrustedContacts.Analytics).EventNames
 local FFlagTCUpdateProfileCTAButton = require(Parent.SharedFlags).FFlagTCUpdateProfileCTAButton
 local FFlagTrustedFriendsLinkVPCModule = require(TrustedContacts.Flags.FFlagTrustedFriendsLinkVPC)
 local FFlagTFUpdateAnalyticsModule = require(TrustedContacts.Flags.FFlagTFUpdateAnalytics)
+local FFlagLuaAppTrustedContactsVpcUseUfoModule = require(TrustedContacts.Flags.FFlagLuaAppTrustedContactsVpcUseUfo)
 local FFlagEnableAmpWizardVPCNavigationFix = require(TrustedContacts.Flags.FFlagEnableTrustedFriendsWizardVPCPrologue) and (AmpUpsellModule.GetFFlagEnableAmpVPCPrologue() and (AmpUpsellModule.GetFFlagEnableReusableVPCPrologue() and AmpUpsellModule.GetFFlagEnableAmpWizardVPCNavigationFix()))
 local FStringConnectionGraphCoreAmpNameSpace = require(Parent.SharedFlags).FStringConnectionGraphCoreAmpNameSpace
 local _ = require(TrustedContacts.Common.Types)
 local GetResult = require(Parent.DataHydration).TrustedConnections.TrustedConnectionsStore.get()
 
 return function(TargetUserId, p1)
-	-- upvalues: UseNavigationFunction (copy), UseAppPolicyFunction (copy), UserProfilesModule (copy), UseLocalizationFunction (copy), FFlagEnableAmpWizardVPCNavigationFix (copy), ReactModule (copy), EventNames (copy), FFlagTCUpdateProfileCTAButton (copy), Contexts (copy), FStringConnectionGraphCoreAmpNameSpace (copy), AppPage (copy), FFlagTFUpdateAnalyticsModule (copy), GetResult (copy), FFlagTrustedFriendsLinkVPCModule (copy)
+	-- upvalues: UseNavigationFunction (copy), UseAppPolicyFunction (copy), UserProfilesModule (copy), UseLocalizationFunction (copy), FFlagEnableAmpWizardVPCNavigationFix (copy), ReactModule (copy), EventNames (copy), FFlagTCUpdateProfileCTAButton (copy), Contexts (copy), FStringConnectionGraphCoreAmpNameSpace (copy), FFlagLuaAppTrustedContactsVpcUseUfoModule (copy), AppPage (copy), FFlagTFUpdateAnalyticsModule (copy), GetResult (copy), FFlagTrustedFriendsLinkVPCModule (copy)
 	local FireAnalyticsEventFunction = p1.fireAnalyticsEvent
 	local UseNavigationResult = UseNavigationFunction()
 	local UseAppPolicyResult = UseAppPolicyFunction(function(p2)
@@ -45,7 +46,7 @@ return function(TargetUserId, p1)
 		vpcRequired = if FFlagEnableAmpWizardVPCNavigationFix then "Feature.Friends.Label.AddFriendVPC" else nil
 	})
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: FireAnalyticsEventFunction (copy), EventNames (upval), FFlagTCUpdateProfileCTAButton (upval), p1 (copy), FFlagEnableAmpWizardVPCNavigationFix (upval), TargetUserId (copy), Contexts (upval), FStringConnectionGraphCoreAmpNameSpace (upval), UseLocalizationResult (copy), UseNavigationResult (copy), AppPage (upval)
+		-- upvalues: FireAnalyticsEventFunction (copy), EventNames (upval), FFlagTCUpdateProfileCTAButton (upval), p1 (copy), FFlagEnableAmpWizardVPCNavigationFix (upval), TargetUserId (copy), Contexts (upval), FStringConnectionGraphCoreAmpNameSpace (upval), UseLocalizationResult (copy), FFlagLuaAppTrustedContactsVpcUseUfoModule (upval), UseNavigationResult (copy), AppPage (upval)
 		FireAnalyticsEventFunction(EventNames.TrustedFriendsVPCPrologueOpened)
 		local OnRequestAcceptedFunction = nil
 		
@@ -96,7 +97,12 @@ return function(TargetUserId, p1)
 				}
 			}
 			DismissModalFunction()
-			OpenAmpWizardFunction(config)
+			
+			if FFlagLuaAppTrustedContactsVpcUseUfoModule then
+				p1.openVpc(config)
+			else
+				OpenAmpWizardFunction(config)
+			end
 		else
 			UseNavigationResult.replace(AppPage.TrustedFriendsVPCPrologue, {
 				userId = TargetUserId,
@@ -109,7 +115,8 @@ return function(TargetUserId, p1)
 		if FFlagTCUpdateProfileCTAButton then p1.onRequestAccepted else nil,
 		if FFlagEnableAmpWizardVPCNavigationFix then p1.dismissModal else nil,
 		if FFlagEnableAmpWizardVPCNavigationFix then p1.openAmpWizard else nil,
-		if FFlagEnableAmpWizardVPCNavigationFix then UseLocalizationResult else nil
+		if FFlagEnableAmpWizardVPCNavigationFix then UseLocalizationResult else nil,
+		if FFlagLuaAppTrustedContactsVpcUseUfoModule then p1.openVpc else nil
 	})
 	local UseResult1 = ReactModule.useCallback(function()
 		-- upvalues: FFlagTFUpdateAnalyticsModule (upval), FireAnalyticsEventFunction (copy), EventNames (upval), p1 (copy), UseLocalizationResult (copy)

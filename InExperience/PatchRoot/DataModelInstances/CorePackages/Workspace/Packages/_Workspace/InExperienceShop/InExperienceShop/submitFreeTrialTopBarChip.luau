@@ -4,6 +4,7 @@ local SignalsModule = require(Parent.Signals)
 local NotificationsOrchestratorModule = require(Parent.NotificationsOrchestrator)
 local MarketplaceUnifiedItemType = require(Parent.AvatarExperienceAnalytics).UnifiedEventLogEnums.MarketplaceUnifiedItemType
 local GetInExperienceShopStoreModule = require(InExperienceShop.Stores.getInExperienceShopStore)
+local FFlagEnableNotificationsBuyModalSurfaceModule = require(InExperienceShop.Flags.FFlagEnableNotificationsBuyModalSurface)
 local FFlagFreeTrialChipBuyAnimationModule = require(InExperienceShop.Flags.FFlagFreeTrialChipBuyAnimation)
 local FFlagTrialNotificationTopBarChipOnStudioModule = require(InExperienceShop.Flags.FFlagTrialNotificationTopBarChipOnStudio)
 local FIntFreeTrialUpsellTimerSecsModule = require(InExperienceShop.Flags.FIntFreeTrialUpsellTimerSecs)
@@ -617,13 +618,13 @@ return (setmetatable({
 		return Active(p1) == "upsell"
 	end,
 	promptPurchase = function()
-		-- upvalues: report (copy), GamePassId (ref), InExperienceShop (copy)
+		-- upvalues: report (copy), GamePassId (ref), InExperienceShop (copy), FFlagEnableNotificationsBuyModalSurfaceModule (copy), Parent (copy)
 		report({ type = "activated" })
 		local GamePassId1 = GamePassId
 		report({ type = "dismissed", reason = "activated" })
 		
 		if GamePassId1 ~= nil and GamePassId1 ~= "" then
-			require(InExperienceShop.initiateShopItemPurchase)(GamePassId1, "GamePass")
+			require(InExperienceShop.initiateShopItemPurchase)(GamePassId1, "GamePass", nil, nil, if FFlagEnableNotificationsBuyModalSurfaceModule then require(Parent.PurchasePromptLite).Enums.ProductPurchaseSurface.TopBarChip else nil)
 			
 			return
 		end

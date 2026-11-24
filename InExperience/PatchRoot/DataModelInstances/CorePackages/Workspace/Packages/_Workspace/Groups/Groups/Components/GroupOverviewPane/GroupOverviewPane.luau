@@ -95,7 +95,7 @@ local function GroupOverviewPaneContent(p1)
 		refresh = UseResult,
 		additionalAnalyticsData = ReactModule.useMemo(function()
 			-- upvalues: p1 (copy)
-			return { source = p1.source }
+			return { channel = "communityOverview", source = p1.source }
 		end, { p1.source })
 	})
 	

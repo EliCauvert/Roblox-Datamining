@@ -4,9 +4,11 @@ local FoundationModule = require(Parent.Foundation)
 local MarkdownModule = require(Parent.Markdown)
 local ReactModule = require(Parent.React)
 local ChatScrollAnchorContextModule = require(BuildExperience.Chat.ChatScrollAnchorContext)
+local FFlagBuildExperienceStepTextAnimationModule = require(BuildExperience.Flags.FFlagBuildExperienceStepTextAnimation)
 local FFlagBuildExperienceTurnWorkTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceTurnWorkTelemetry)
 local TurnWorkTelemetryContextModule = require(BuildExperience.Chat.TurnWorkTelemetryContext)
 local FFlagBuildExperienceChatAccordionScrollAnchorModule = require(BuildExperience.Flags.FFlagBuildExperienceChatAccordionScrollAnchor)
+local HeightRevealModule = if FFlagBuildExperienceStepTextAnimationModule then require(script.Parent.HeightReveal) else nil
 local EscapeRichTextModule = require(BuildExperience.utils.escapeRichText)
 local GetMarkdownRendererPropsModule = require(BuildExperience.utils.getMarkdownRendererProps)
 local _ = require(BuildExperience.Chat.chatTypes)
@@ -47,7 +49,7 @@ local function getBodyText(Body, Answers)
 end
 
 return function(Frame)
-	-- upvalues: FoundationModule (copy), ReactModule (copy), getBodyText (copy), GetMarkdownRendererPropsModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), FFlagBuildExperienceTurnWorkTelemetryModule (copy), TurnWorkTelemetryContextModule (copy), EscapeRichTextModule (copy), View (copy), StateLayerAffordance (copy), Icon (copy), IconName (copy), IconSize (copy), Progress (copy), ProgressShape (copy), ProgressSize (copy), Text (copy), MarkdownViewer (copy)
+	-- upvalues: FoundationModule (copy), ReactModule (copy), getBodyText (copy), GetMarkdownRendererPropsModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), FFlagBuildExperienceTurnWorkTelemetryModule (copy), TurnWorkTelemetryContextModule (copy), EscapeRichTextModule (copy), FFlagBuildExperienceStepTextAnimationModule (copy), View (copy), Text (copy), MarkdownViewer (copy), StateLayerAffordance (copy), Icon (copy), IconName (copy), IconSize (copy), Progress (copy), ProgressShape (copy), ProgressSize (copy), HeightRevealModule (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseBindingResult = ReactModule.useBinding(0)
 	local Size500 = UseTokensResult.Size.Size_500
@@ -66,6 +68,25 @@ return function(Frame)
 	local UseContextResult = if FFlagBuildExperienceChatAccordionScrollAnchorModule then ReactModule.useContext(ChatScrollAnchorContextModule) else nil
 	local UseContextResult1 = if FFlagBuildExperienceTurnWorkTelemetryModule then ReactModule.useContext(TurnWorkTelemetryContextModule) else nil
 	local Index = Frame.index
+	
+	if FFlagBuildExperienceTurnWorkTelemetryModule then
+		local HasBodyText1: boolean = IsIsExpanded and HasBodyText
+		local UseRefResult1 = ReactModule.useRef(Index)
+		UseRefResult1.current = Index
+		ReactModule.useEffect(function()
+			-- upvalues: UseContextResult1 (copy), HasBodyText1 (copy), UseRefResult1 (copy)
+			if UseContextResult1 == nil or not HasBodyText1 then
+				return nil
+			else
+				local OpenStepSpanResult = UseContextResult1.openStepSpan(UseRefResult1.current)
+				
+				return function()
+					-- upvalues: UseContextResult1 (upval), OpenStepSpanResult (copy)
+					UseContextResult1.closeStepSpan(OpenStepSpanResult)
+				end
+			end
+		end, { UseContextResult1, HasBodyText1 })
+	end
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: FFlagBuildExperienceChatAccordionScrollAnchorModule (upval), UseContextResult (copy), UseRefResult (copy), UseContextResult1 (copy), Index (copy), IsIsExpanded (copy), OnToggleFunction (copy)
 		if FFlagBuildExperienceChatAccordionScrollAnchorModule and UseContextResult ~= nil and UseRefResult ~= nil then
@@ -90,6 +111,43 @@ return function(Frame)
 	if Match2 ~= nil and Match2 ~= "" then
 		Text1 ..= ` <font color="{`#{UseTokensResult.Color.Content.Muted.Color3:ToHex()}`}">{EscapeRichTextModule(Match2)}</font>`
 	end
+	local Element = if FFlagBuildExperienceStepTextAnimationModule or IsIsExpanded and (BodyText ~= nil or Markdown ~= nil) then ReactModule.createElement(View, {
+		LayoutOrder = 2,
+		tag = "row gap-small size-full-0 auto-y padding-y-xxsmall"
+	}, {
+		Gutter = ReactModule.createElement(View, {
+			LayoutOrder = 1,
+			tag = "self-stretch",
+			Size = UDim2.fromOffset(Size500, 0)
+		}, {
+			Rail = if Frame.isLast == true and not RichText then nil else ReactModule.createElement(View, {
+				testId = "StepActivityRow.Rail",
+				tag = "bg-shift-200",
+				AnchorPoint = Vector2.new(0.5, 0),
+				Position = UDim2.fromScale(0.5, 0),
+				Size = UDim2.new(0, 1, 1, 0)
+			})
+		}),
+		Content = ReactModule.createElement(View, { LayoutOrder = 2, tag = "col gap-small fill auto-y" }, {
+			Text = if BodyText == nil then nil else ReactModule.createElement(Text, {
+				LayoutOrder = 1,
+				testId = "StepActivityRow.Body",
+				tag = "size-full-0 auto-y text-body-small text-wrap text-align-x-left content-muted",
+				RichText = RichText,
+				Text = BodyText
+			}),
+			Markdown = if Markdown == nil then nil else ReactModule.createElement(MarkdownViewer, {
+				Markdown = Markdown,
+				WrapperProps = {
+					LayoutOrder = 2,
+					tag = "col size-full-0 auto-y text-body-small content-muted",
+					testId = "StepActivityRow.Markdown"
+				},
+				MarkdownRendererProps = UseMemoResult
+			})
+		})
+	}) else nil
+	
 	return ReactModule.createElement(View, {
 		tag = "col size-full-0 auto-y",
 		LayoutOrder = Frame.LayoutOrder
@@ -160,42 +218,7 @@ return function(Frame)
 				})
 			}) else nil
 		}),
-		Body = if IsIsExpanded and (BodyText ~= nil or Markdown ~= nil) then ReactModule.createElement(View, {
-			LayoutOrder = 2,
-			tag = "row gap-small size-full-0 auto-y padding-y-xxsmall"
-		}, {
-			Gutter = ReactModule.createElement(View, {
-				LayoutOrder = 1,
-				tag = "self-stretch",
-				Size = UDim2.fromOffset(Size500, 0)
-			}, {
-				Rail = if Frame.isLast == true and not RichText then nil else ReactModule.createElement(View, {
-					testId = "StepActivityRow.Rail",
-					tag = "bg-shift-200",
-					AnchorPoint = Vector2.new(0.5, 0),
-					Position = UDim2.fromScale(0.5, 0),
-					Size = UDim2.new(0, 1, 1, 0)
-				})
-			}),
-			Content = ReactModule.createElement(View, { LayoutOrder = 2, tag = "col gap-small fill auto-y" }, {
-				Text = if BodyText == nil then nil else ReactModule.createElement(Text, {
-					LayoutOrder = 1,
-					testId = "StepActivityRow.Body",
-					tag = "size-full-0 auto-y text-body-small text-wrap text-align-x-left content-muted",
-					RichText = RichText,
-					Text = BodyText
-				}),
-				Markdown = if Markdown == nil then nil else ReactModule.createElement(MarkdownViewer, {
-					Markdown = Markdown,
-					WrapperProps = {
-						LayoutOrder = 2,
-						tag = "col size-full-0 auto-y text-body-small content-muted",
-						testId = "StepActivityRow.Markdown"
-					},
-					MarkdownRendererProps = UseMemoResult
-				})
-			})
-		}) else nil,
+		Body = if FFlagBuildExperienceStepTextAnimationModule then ReactModule.createElement(HeightRevealModule, { LayoutOrder = 2, isOpen = IsIsExpanded and HasBodyText }, { Body = Element }) else Element,
 		Connector = if Frame.isLast == true then nil else ReactModule.createElement(View, {
 			LayoutOrder = 3,
 			tag = "align-x-center align-y-center",

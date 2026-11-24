@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("InExperienceShop").Parent.SharedFlags).FFlagEnableNotificationsBuyModalSurface

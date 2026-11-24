@@ -24,6 +24,7 @@
 	CapturesCreateMomentToastViewed = "CapturesCreateMomentToastViewed",
 	CapturesCreateMomentToastButtonActivated = "CapturesCreateMomentToastButtonActivated",
 	CapturesCreateMomentToastDownloadActivated = "CapturesCreateMomentToastDownloadActivated",
+	CapturesCreateMomentToastShareActivated = "CapturesCreateMomentToastShareActivated",
 	CapturesDeactivatedChrome = "CapturesDeactivatedChrome",
 	CapturesDeactivatedInGameMenu = "CapturesDeactivatedInGameMenu",
 	CapturesDeleteActivatedInCaptureManager = "CapturesDeleteActivatedInCaptureManager",

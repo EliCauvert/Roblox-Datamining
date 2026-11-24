@@ -9,6 +9,7 @@ local UseLocalRobuxBalanceFunction = require(Parent.RobloxAppHooks).useLocalRobu
 local FoundationModule = require(Parent.Foundation)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local Divider = FoundationModule.Divider
+local FFlagLuaAppAddTestIdsForArrow = require(Parent.SharedFlags).FFlagLuaAppAddTestIdsForArrow
 local CreateNextOrderFunction = require(Parent.ReactUtils).createNextOrder
 local ConstantsModule = require(script.Parent.Parent.Constants)
 local UseFlyoutNavigationItemsModule = require(script.Parent.Parent.Hooks.useFlyoutNavigationItems)
@@ -64,7 +65,7 @@ local function _(p1, p2): number
 end
 
 return ReactModule.memo(function(p1, _)
-	-- upvalues: UseTokensFunction (copy), UseLocalRobuxBalanceFunction (copy), UseSelectorFunction (copy), selectStatusBarHeight (copy), selectGlobalGuiInset (copy), FFlagFixOverlayTopInsetForDeviceSafeInsets (copy), UseDeviceInsetsFunction (copy), ShouldUseDeviceSafeInsets (copy), FFlagEnableFlyoutOnNavRail (copy), UseScreenSizeFunction (copy), FlyoutScaleMenuWidth (copy), ConstantsModule (copy), UseAppPolicyFunction (copy), FFlagEnableBlackbirdCheck (copy), UseHasRobloxSubscriptionModule (copy), FFlagEnablePlusReferralRecipientFlyoutEntry (copy), UsePlusReferralFlyoutBannerBlindnessModule (copy), PlusReferralRecipientFlyoutBannerMaxImpressions (copy), FFlagEnableBlackbird (copy), BlackbirdUpsellBannerModule (copy), FFlagEnablePlusReferralFlyoutEntry (copy), UseFlyoutNavigationItemsModule (copy), CreateNextOrderFunction (copy), UseSetDrawerVisibleFunction (copy), FFlagFlyoutSidePanelUseSharedProfileCardModule (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), UseFlyoutSidePanelLoggingModule (copy), ReactModule (copy), FlyoutAccountSwitcherIXP (copy), UseFlyoutSwitchAccountModule (copy), FlyoutAnalyticsModule (copy), ProfileCard (copy), FFlagFlyoutSidePanelUseProfileFrameThumbnail (copy), FlyoutProfileCardModule (copy), SwitchAccountTooltipModule (copy), FFlagEnableFlyoutMenuRobuxCardRefactor (copy), RobuxPillModule (copy), FoundationModule (copy), Divider (copy), PlusReferralBannerModule (copy), PlusReferralRecipientBannerModule (copy), FlyoutNavigationListModule (copy), FlyoutSwitchAccountButtonModule (copy), FlyoutQuickSigninButtonModule (copy), FlyoutReportLogsModule (copy), TermsPrivacyFooterModule (copy), UseDismissFlyoutOnPartyTopBannerModule (copy), DrawerContainer (copy)
+	-- upvalues: UseTokensFunction (copy), UseLocalRobuxBalanceFunction (copy), UseSelectorFunction (copy), selectStatusBarHeight (copy), selectGlobalGuiInset (copy), FFlagFixOverlayTopInsetForDeviceSafeInsets (copy), UseDeviceInsetsFunction (copy), ShouldUseDeviceSafeInsets (copy), FFlagEnableFlyoutOnNavRail (copy), UseScreenSizeFunction (copy), FlyoutScaleMenuWidth (copy), ConstantsModule (copy), UseAppPolicyFunction (copy), FFlagEnableBlackbirdCheck (copy), UseHasRobloxSubscriptionModule (copy), FFlagEnablePlusReferralRecipientFlyoutEntry (copy), UsePlusReferralFlyoutBannerBlindnessModule (copy), PlusReferralRecipientFlyoutBannerMaxImpressions (copy), FFlagEnableBlackbird (copy), BlackbirdUpsellBannerModule (copy), FFlagEnablePlusReferralFlyoutEntry (copy), UseFlyoutNavigationItemsModule (copy), CreateNextOrderFunction (copy), UseSetDrawerVisibleFunction (copy), FFlagFlyoutSidePanelUseSharedProfileCardModule (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), UseFlyoutSidePanelLoggingModule (copy), ReactModule (copy), FlyoutAccountSwitcherIXP (copy), UseFlyoutSwitchAccountModule (copy), FlyoutAnalyticsModule (copy), ProfileCard (copy), FFlagFlyoutSidePanelUseProfileFrameThumbnail (copy), FlyoutProfileCardModule (copy), SwitchAccountTooltipModule (copy), FFlagEnableFlyoutMenuRobuxCardRefactor (copy), RobuxPillModule (copy), FoundationModule (copy), Divider (copy), PlusReferralBannerModule (copy), PlusReferralRecipientBannerModule (copy), FlyoutNavigationListModule (copy), FFlagLuaAppAddTestIdsForArrow (copy), FlyoutSwitchAccountButtonModule (copy), FlyoutQuickSigninButtonModule (copy), FlyoutReportLogsModule (copy), TermsPrivacyFooterModule (copy), UseDismissFlyoutOnPartyTopBannerModule (copy), DrawerContainer (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalRobuxBalanceResult: number = UseLocalRobuxBalanceFunction()
 	local UseSelectorResult = UseSelectorFunction(selectStatusBarHeight)
@@ -163,7 +164,7 @@ return ReactModule.memo(function(p1, _)
 			localUserModel = p1.localUserModel,
 			isRobloxSubscriber = if FFlagEnableBlackbirdCheck then UseHasRobloxSubscriptionModuleResult else nil,
 			onProfileActivated = UseResult2,
-			onSwitchAccountActivated = if FlyoutAccountSwitcherIXP.isUsernameAccountSwitcherEnabled() then UseFlyoutSwitchAccountModuleResult.onActivated else nil,
+			onSwitchAccountActivated = if FlyoutAccountSwitcherIXP.isUsernameAccountSwitcherEnabled() then UseFlyoutSwitchAccountModuleResult.onProfileActivated else nil,
 			switchAccountAnchorRef = if FlyoutAccountSwitcherIXP.isUsernameAccountSwitcherEnabled() then UseFlyoutSwitchAccountModuleResult.anchorRef else nil,
 			useProfileFrameThumbnail = FFlagFlyoutSidePanelUseProfileFrameThumbnail
 		}) else ReactModule.createElement(FlyoutProfileCardModule, {
@@ -218,7 +219,10 @@ return ReactModule.memo(function(p1, _)
 			closeDrawer = UseResult,
 			buildCreatorWebNavUrl = p1.buildCreatorWebNavUrl
 		}),
-		Divider = ReactModule.createElement(Divider, { LayoutOrder = NextOrder() }),
+		Divider = ReactModule.createElement(Divider, {
+			testId = if FFlagLuaAppAddTestIdsForArrow then "--core-ui-flyout-divider-library" else nil,
+			LayoutOrder = NextOrder()
+		}),
 		AdditionalNavigation = ReactModule.createElement(FlyoutNavigationListModule, {
 			layoutOrder = NextOrder(),
 			navigationItems = UseFlyoutNavigationItemsModuleResult.additionalNavigationItems,
@@ -227,7 +231,7 @@ return ReactModule.memo(function(p1, _)
 		}),
 		SwitchAccountButton = if p1.onSwitchAccountActivated and FlyoutAccountSwitcherIXP.isBottomButtonEnabled() then ReactModule.createElement(FlyoutSwitchAccountButtonModule, {
 			layoutOrder = NextOrder(),
-			onSwitchAccountActivated = if FlyoutAccountSwitcherIXP.isUsernameAccountSwitcherEnabled() then UseFlyoutSwitchAccountModuleResult.onActivated else p1.onSwitchAccountActivated,
+			onSwitchAccountActivated = if FlyoutAccountSwitcherIXP.isUsernameAccountSwitcherEnabled() then UseFlyoutSwitchAccountModuleResult.onBottomButtonActivated else p1.onSwitchAccountActivated,
 			closeDrawer = if FlyoutAccountSwitcherIXP.isUsernameAccountSwitcherEnabled() then nil else UseResult
 		}) else nil,
 		QuickSigninButton = ReactModule.createElement(FlyoutQuickSigninButtonModule, { layoutOrder = NextOrder(), closeDrawer = UseResult }),

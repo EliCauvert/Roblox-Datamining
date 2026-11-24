@@ -1,4 +1,5 @@
-﻿local EnableFlyoutUsernameAccountSwitcher = game:DefineFastFlag("EnableFlyoutUsernameAccountSwitcher", false)
+﻿local FFlagFlyoutKeepSwitchAccountBottomButton = require(script.Parent.Parent.SharedFlags).FFlagFlyoutKeepSwitchAccountBottomButton
+local EnableFlyoutUsernameAccountSwitcher = game:DefineFastFlag("EnableFlyoutUsernameAccountSwitcher", false)
 local FlyoutEnableSwitchAccountTooltip = game:DefineFastFlag("FlyoutEnableSwitchAccountTooltip", false)
 local FlyoutUsernameAccountSwitcherVariant = game:DefineFastInt("FlyoutUsernameAccountSwitcherVariant", 0)
 
@@ -20,8 +21,8 @@ return {
 		return EnableFlyoutUsernameAccountSwitcher and FlyoutUsernameAccountSwitcherVariant == 2
 	end,
 	isBottomButtonEnabled = function(): boolean
-		-- upvalues: EnableFlyoutUsernameAccountSwitcher (copy), FlyoutUsernameAccountSwitcherVariant (copy)
-		return not (EnableFlyoutUsernameAccountSwitcher and FlyoutUsernameAccountSwitcherVariant == 1) and not (EnableFlyoutUsernameAccountSwitcher and FlyoutUsernameAccountSwitcherVariant == 2)
+		-- upvalues: EnableFlyoutUsernameAccountSwitcher (copy), FFlagFlyoutKeepSwitchAccountBottomButton (copy), FlyoutUsernameAccountSwitcherVariant (copy)
+		return if EnableFlyoutUsernameAccountSwitcher and FFlagFlyoutKeepSwitchAccountBottomButton then true else not (EnableFlyoutUsernameAccountSwitcher and FlyoutUsernameAccountSwitcherVariant == 1) and not (EnableFlyoutUsernameAccountSwitcher and FlyoutUsernameAccountSwitcherVariant == 2)
 	end,
 	getClickSource = function(): string
 		-- upvalues: EnableFlyoutUsernameAccountSwitcher (copy), FlyoutUsernameAccountSwitcherVariant (copy)

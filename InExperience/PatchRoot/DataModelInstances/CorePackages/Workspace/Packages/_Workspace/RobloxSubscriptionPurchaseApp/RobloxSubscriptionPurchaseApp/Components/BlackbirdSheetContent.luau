@@ -40,6 +40,7 @@ FoundationCloudAssetsModule.preloadAsset("pictograms/plus_robux")
 local FFlagRobloxPlusDynamicFreeTrialLengthModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusDynamicFreeTrialLength)
 local FFlagEnablePlusReferralLegalDisclosureModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagEnablePlusReferralLegalDisclosure)
 local FFlagTTOnboardingSheetModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagTTOnboardingSheet)
+local FFlagRobloxPlusSheetSubtitleModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusSheetSubtitle)
 local RobloxPlusSheetKindModule = require(RobloxSubscriptionPurchaseApp.Enums.RobloxPlusSheetKind)
 local TTSheetSlotsModule = require(script.Parent.TTSheetSlots)
 local GuiService = game:GetService("GuiService")
@@ -49,7 +50,7 @@ local config = {
 }
 
 return function()
-	-- upvalues: RobloxSubscriptionStoreModule (copy), SignalsReactModule (copy), FFlagEnablePlusReferralLandingSheet (copy), UseReferrerNameModule (copy), UseLocalizationFunction (copy), FIntPlusReferralRewardRobux (copy), IsRobloxSubscriptionProductFreeTrialModule (copy), FFlagRobloxPlusDynamicFreeTrialLengthModule (copy), GetFreeTrialOfferModule (copy), ReactModule (copy), FFlagEnableSubscriptionPurchaseFlowEventIngestModule (copy), LogSubscriptionPurchaseFlowEventModule (copy), LogRobloxSubscriptionUpsellCounterModule (copy), RobloxSubscriptionUpsellTelemetryModule (copy), PromptStateModule (copy), FinalizeRobloxSubscriptionUpsellFlowModule (copy), CompleteRobloxSubscriptionUpsellFlowModule (copy), PerformRobloxSubscriptionPurchaseModule (copy), config (copy), GuiService (copy), FFlagTTOnboardingSheetModule (copy), TTSheetSlotsModule (copy), RobloxPlusSheetKindModule (copy), Sheet (copy), View (copy), Text (copy), GetIconRichTextFunction (copy), IconName (copy), HandleBackButtonActionModule (copy), PlusHeroContentModule (copy), PictogramsPlusRobux (copy), RobloxSubscriptionPriceRowModule (copy), RobloxSubscriptionFeatureListModule (copy), Button (copy), FillBehavior (copy), ButtonVariant (copy), LegalDisclosureModule (copy), FFlagSupportFreeTrialModule (copy), FFlagEnablePlusReferralLegalDisclosureModule (copy)
+	-- upvalues: RobloxSubscriptionStoreModule (copy), SignalsReactModule (copy), FFlagEnablePlusReferralLandingSheet (copy), UseReferrerNameModule (copy), UseLocalizationFunction (copy), FIntPlusReferralRewardRobux (copy), IsRobloxSubscriptionProductFreeTrialModule (copy), FFlagRobloxPlusDynamicFreeTrialLengthModule (copy), GetFreeTrialOfferModule (copy), FFlagRobloxPlusSheetSubtitleModule (copy), ReactModule (copy), FFlagEnableSubscriptionPurchaseFlowEventIngestModule (copy), LogSubscriptionPurchaseFlowEventModule (copy), LogRobloxSubscriptionUpsellCounterModule (copy), RobloxSubscriptionUpsellTelemetryModule (copy), PromptStateModule (copy), FinalizeRobloxSubscriptionUpsellFlowModule (copy), CompleteRobloxSubscriptionUpsellFlowModule (copy), PerformRobloxSubscriptionPurchaseModule (copy), config (copy), GuiService (copy), FFlagTTOnboardingSheetModule (copy), TTSheetSlotsModule (copy), RobloxPlusSheetKindModule (copy), Sheet (copy), View (copy), Text (copy), GetIconRichTextFunction (copy), IconName (copy), HandleBackButtonActionModule (copy), PlusHeroContentModule (copy), PictogramsPlusRobux (copy), RobloxSubscriptionPriceRowModule (copy), RobloxSubscriptionFeatureListModule (copy), Button (copy), FillBehavior (copy), ButtonVariant (copy), LegalDisclosureModule (copy), FFlagSupportFreeTrialModule (copy), FFlagEnablePlusReferralLegalDisclosureModule (copy)
 	local GetResult = RobloxSubscriptionStoreModule.get()
 	local OnCtaOverride = GetResult.getOnCtaOverride()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetResult.getPurchaseUIOptions)
@@ -72,6 +73,7 @@ return function()
 	local FreeTrialOfferModule = if FFlagRobloxPlusDynamicFreeTrialLengthModule then GetFreeTrialOfferModule(UseSignalStateResult3) else nil
 	local ReferralInvite = if FFlagEnablePlusReferralLandingSheet and UseReferrerNameModuleResult and UseReferrerNameModuleResult ~= "" then UseLocalizationResult.referralInvite else nil
 	local Description = if UseSignalStateResult.description then UseSignalStateResult.description elseif FFlagEnablePlusReferralLandingSheet and ReferralInvite then ReferralInvite else nil
+	local Subtitle = if FFlagRobloxPlusSheetSubtitleModule then UseSignalStateResult.subtitle else nil
 	local GetFreeTrialText = if IsRobloxSubscriptionProductFreeTrialModule1 then UseLocalizationResult.getFreeTrialText else UseLocalizationResult.buttonText
 	local NoShowLegalDisclosure = UseSignalStateResult.showLegalDisclosure == nil or UseSignalStateResult.showLegalDisclosure
 	local NoPurchaseMethodRequired = UseSignalStateResult.noPurchaseMethodRequired ~= nil and UseSignalStateResult.noPurchaseMethodRequired
@@ -139,9 +141,14 @@ return function()
 		}),
 		Content = ReactModule.createElement(Sheet.Content, { LayoutOrder = 2 }, {
 			ContentContainer = ReactModule.createElement(View, {
-				tag = if HasReferralInvite and not IsNotViewportDisplaySizeMatch then "col gap-xsmall size-full-0 auto-y padding-bottom-large" elseif HasReferralInvite and IsNotViewportDisplaySizeMatch then "col gap-xsmall size-full-0" elseif Description == nil then "col" else "col size-full-0 auto-y",
-				Size = if HasReferralInvite and IsNotViewportDisplaySizeMatch then UDim2.new(1, 0, 0, 300) elseif HasReferralInvite or Description ~= nil then nil else UDim2.new(1, 0, 0, 140)
+				tag = if HasReferralInvite and not IsNotViewportDisplaySizeMatch then "col gap-xsmall size-full-0 auto-y padding-bottom-large" elseif HasReferralInvite and IsNotViewportDisplaySizeMatch then "col gap-xsmall size-full-0" elseif Description == nil then if Subtitle == nil then "col" else "col gap-small size-full-0 auto-y" else "col size-full-0 auto-y",
+				Size = if HasReferralInvite and IsNotViewportDisplaySizeMatch then UDim2.new(1, 0, 0, 300) elseif HasReferralInvite or Description ~= nil then nil elseif Subtitle == nil then UDim2.new(1, 0, 0, 140) else nil
 			}, {
+				Subtitle = if Subtitle then ReactModule.createElement(Text, {
+					LayoutOrder = 0,
+					tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
+					Text = Subtitle
+				}) else nil,
 				HeroContent = if HasReferralInvite then ReactModule.createElement(PlusHeroContentModule, {
 					layoutOrder = 1,
 					titleRichText = true,

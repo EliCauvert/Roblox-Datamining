@@ -636,6 +636,7 @@ CommonUI.UserAgreements.Popup.Agreement.TransferPersonalInformationPolicy,개인
 CommonUI.UserAgreements.Popup.DefaultAgreementTitle,약관 업데이트
 CommonUI.UserAgreements.Popup.TitleOnWebview,약관
 CoreScripts.Ads.Action.Close,
+CoreScripts.Ads.Action.Watch,
 CoreScripts.Ads.ImmersiveBrandedAds.WhyThisAd,"이 광고는 개인 맞춤화되지 않은 광고로, 이 체험 내의 사용자에게 표시됩니다. 이 광고의 광고주는 {AdvertiserName}이며, 이 광고에 대한 비용을 지불했습니다."
 CoreScripts.Ads.Label.IllegalContentReportingLink,불법 콘텐츠나 아동에게 유해한 콘텐츠 신고
 CoreScripts.Ads.Label.InExperienceDisclosureDynamic,"Roblox는 행동 정보를 사용해 이 광고를 게재하지 않았습니다. 현재 표시 중인 광고는 적절하고 관련성이 높은 광고를 제공하기 위해 기기 유형, 위치, 연령 등의 정보에 기반한 것입니다. 광고주는 {AdvertiserName}입니다."
@@ -646,6 +647,8 @@ CoreScripts.Ads.Label.ReportAd,광고 신고하기
 CoreScripts.Ads.Label.RewardedVideoEligibleDisclaimer,테스트 광고입니다. 체험에는 실제 광고가 표시됩니다.
 CoreScripts.Ads.Label.RewardedVideoExitConfirmation,조금만 더 기다리면 보상을 받을 수 있어요! 정말 나갈까요?
 CoreScripts.Ads.Label.RewardedVideoIneligibleDisclaimer,테스트 광고입니다. 체험에 권한이 없어 실제 광고가 표시되지 않습니다.
+CoreScripts.Ads.Label.SkipAd,광고 건너뛰기
+CoreScripts.Ads.Label.SkipIn,{RBX_NUMBER}초 후 건너뛰기
 CoreScripts.Ads.Label.SponsoredAds,스폰서
 CoreScripts.Ads.Label.SponsoredAdsDisclosureStatic,"스폰서 체험은 크리에이터가 비용을 지불합니다. EU 사용자의 경우, 기기 유형, 위치, 인구 통계에 관한 일반적인 정보를 기반으로 표시될 수 있습니다. EU 외 지역은 추가 정보를 기반으로 광고가 표시될 수 있습니다."
 CoreScripts.Ads.Label.Teleporting,텔레포트 중...
@@ -3366,16 +3369,20 @@ Feature.Chat.Title.FriendsChat,친구 채팅
 Feature.Chat.Title.NewChat,새 채팅
 Feature.Chat.Toast.Error.InvalidUserSelected,이 목록에는 추가할 수 없는 사람이 한 명 이상 있습니다
 Feature.CloudClient.Action.PlayWithoutCloudPlay,Cloud Play 없이 플레이하기
+Feature.CloudClient.Action.PlayWithoutRobloxReality,{productName} 없이 플레이하기
+Feature.CloudClient.Action.TryRobloxReality,{productName} 사용해 보기
 Feature.CloudClient.Description.CloudPlayOffer,Cloud Play는 Roblox의 컴퓨터에서 게임을 실행하므로 불러오는 속도가 더 빠르고 충돌이 적을 수 있습니다. 이 게임을 플레이하는 동안에만 적용됩니다.
 Feature.CloudClient.Description.GalleryUnavailableCloudPlay,갤러리를 사용하려면 Cloud Play 없이 다시 참여하세요.
 Feature.CloudClient.Description.GalleryUnavailableRobloxReality,갤러리를 사용하려면 Restyle 없이 다시 참여하세요.
 Feature.CloudClient.Description.GalleryUnavailableRobloxRealityV2,갤러리를 사용하려면 {productName} 없이 다시 참가하세요.
+Feature.CloudClient.Description.RobloxRealityOffer,{productName}을(를) 사용하면 좋아하는 게임에 새로운 룩을 적용할 수 있습니다. 초기 미리 보기를 체험해 보고 의견을 알려주세요.
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle은 초기 미리 보기 단계입니다. 오리지널 게임과 다르게 표시될 수 있습니다.
 Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName}은(는) 초기 미리 보기 단계입니다. 오리지널 게임과 다르게 표시될 수 있습니다.
 Feature.CloudClient.Heading.CloudPlayOffer,Cloud Play로 플레이하기
 Feature.CloudClient.Heading.GalleryUnavailableCloudPlay,Cloud Play에서는 아직 갤러리 기능을 이용할 수 없습니다.
 Feature.CloudClient.Heading.GalleryUnavailableRobloxReality,Restyle에서는 아직 갤러리 기능을 이용할 수 없습니다.
 Feature.CloudClient.Heading.GalleryUnavailableRobloxRealityV2,{productName}에서는 아직 갤러리 기능을 이용할 수 없습니다.
+Feature.CloudClient.Heading.RobloxRealityOffer,{productName}(으)로 내 게임을 체험해 보세요
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Cloud Play에서는 아직 캡처 기능을 이용할 수 없습니다.
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Restyle에서는 아직 캡처 기능을 이용할 수 없습니다.
 Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,{productName}에서는 아직 캡처 기능을 이용할 수 없습니다.
@@ -3761,6 +3768,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,{experienceName}에 대한 알�
 Feature.GameJoin.Description.DifferentServer,다른 서버에서 시작하게 됩니다
 Feature.GameJoin.Label.PlayTogether,함께 플레이하실 수 있습니다
 Feature.GameJoin.Label.PlayTogetherSoon,곧 함께 플레이하실 수 있습니다
+Feature.GameJoin.Label.Played,사용자가 플레이함
 Feature.GameJoin.Label.RecentCoplay,최근에 함께 플레이했습니다
 Feature.GamePage.Action.BackToTop,맨 위로 돌아가기
 Feature.GamePage.Label.Ad,

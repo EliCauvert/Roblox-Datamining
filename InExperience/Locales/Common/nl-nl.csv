@@ -620,6 +620,7 @@ CommonUI.UserAgreements.Popup.Agreement.TransferPersonalInformationPolicy,Doorgi
 CommonUI.UserAgreements.Popup.DefaultAgreementTitle,Bijgewerkte overeenkomst
 CommonUI.UserAgreements.Popup.TitleOnWebview,
 CoreScripts.Ads.Action.Close,
+CoreScripts.Ads.Action.Watch,
 CoreScripts.Ads.ImmersiveBrandedAds.WhyThisAd,Deze niet-gepersonaliseerde advertentie is zichtbaar voor gebruikers in deze ervaring. {AdvertiserName} is de adverteerder en heeft voor deze advertentie betaald.
 CoreScripts.Ads.Label.IllegalContentReportingLink,Meld illegale content of schadelijke content voor kinderen
 CoreScripts.Ads.Label.InExperienceDisclosureDynamic,"Roblox heeft geen gedragsinformatie voor deze advertentie gebruikt. Je ziet deze advertentie vanwege informatie zoals apparaattype, locatie en leeftijd op basis waarvan we je passende en relevante advertenties tonen. De adverteerder is {AdvertiserName}."
@@ -630,6 +631,8 @@ CoreScripts.Ads.Label.ReportAd,Advertentie melden
 CoreScripts.Ads.Label.RewardedVideoEligibleDisclaimer,Dit is een testadvertentie. Echte advertenties worden weergegeven in je ervaring.
 CoreScripts.Ads.Label.RewardedVideoExitConfirmation,Je krijgt bijna een beloning! Weet je zeker dat je wilt afsluiten?
 CoreScripts.Ads.Label.RewardedVideoIneligibleDisclaimer,Dit is een testadvertentie. Je ervaring komt niet voor echte advertenties in aanmerking.
+CoreScripts.Ads.Label.SkipAd,Advertentie overslaan
+CoreScripts.Ads.Label.SkipIn,Overslaan over {RBX_NUMBER}
 CoreScripts.Ads.Label.SponsoredAds,Gesponsord
 CoreScripts.Ads.Label.SponsoredAdsDisclosureStatic,"Gesponsorde ervaringsen worden betaald door makers. Gebruikers in de EU krijgen die te zien op basis van algemene informatie over je apparaattype, locatie en demografische gegevens. Buiten de EU worden dit soort advertenties ook getoond op basis van aanvullende informatie."
 CoreScripts.Ads.Label.Teleporting,Teleporteren...
@@ -3348,16 +3351,20 @@ Feature.Chat.Title.FriendsChat,Vriendenchat
 Feature.Chat.Title.NewChat,Nieuwe chat
 Feature.Chat.Toast.Error.InvalidUserSelected,Een of meerdere mensen in deze lijst kunnen niet worden toegevoegd
 Feature.CloudClient.Action.PlayWithoutCloudPlay,Spelen zonder Cloud Play
+Feature.CloudClient.Action.PlayWithoutRobloxReality,Spelen zonder {productName}
+Feature.CloudClient.Action.TryRobloxReality,{productName} proberen
 Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play voert de game uit op de computers van Roblox, waardoor het mogelijk sneller laadt en minder vaak crasht. Het werkt alleen zolang je deze game speelt."
 Feature.CloudClient.Description.GalleryUnavailableCloudPlay,Neem opnieuw deel zonder Cloud Play om je galerij te gebruiken.
 Feature.CloudClient.Description.GalleryUnavailableRobloxReality,Neem opnieuw deel zonder Restyle om je galerij te gebruiken.
 Feature.CloudClient.Description.GalleryUnavailableRobloxRealityV2,Neem opnieuw deel zonder {productName} om je galerij te gebruiken.
+Feature.CloudClient.Description.RobloxRealityOffer,{productName} geeft je favoriete games een frisse nieuwe look. Probeer deze functie als een van de eersten en laat ons weten wat je ervan vindt.
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle is een vroege preview. Dingen kunnen er anders uitzien dan in de originele game.
 Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName} is een vroege preview. Dingen kunnen er anders uitzien dan in de originele game.
 Feature.CloudClient.Heading.CloudPlayOffer,Spelen met Cloud Play
 Feature.CloudClient.Heading.GalleryUnavailableCloudPlay,Galerij is nog niet beschikbaar in Cloud Play.
 Feature.CloudClient.Heading.GalleryUnavailableRobloxReality,Galerij is nog niet beschikbaar met Restyle.
 Feature.CloudClient.Heading.GalleryUnavailableRobloxRealityV2,Galerij is nog niet beschikbaar met {productName}.
+Feature.CloudClient.Heading.RobloxRealityOffer,Probeer je game met {productName}
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Vastleggen is nog niet beschikbaar in Cloud Play.
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Vastleggen is nog niet beschikbaar met Restyle.
 Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,Vastleggen is nog niet beschikbaar met {productName}.
@@ -3743,6 +3750,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Meldingen ingeschakeld voor {ex
 Feature.GameJoin.Description.DifferentServer,Je begint op een andere server
 Feature.GameJoin.Label.PlayTogether,Jullie kunnen samen spelen
 Feature.GameJoin.Label.PlayTogetherSoon,Jullie kunnen binnenkort samen spelen
+Feature.GameJoin.Label.Played,gespeeld
 Feature.GameJoin.Label.RecentCoplay,Jullie hebben onlangs samen gespeeld
 Feature.GamePage.Action.BackToTop,Terug naar boven
 Feature.GamePage.Label.Ad,

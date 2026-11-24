@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("SduiSearchGuidedPills", false) and (require(script.Parent.FFlagSduiOptionSelectorCollection) and (require(script.Parent.FFlagSduiStreamingRefreshReplacesInputData) and require(script.Parent.FFlagSduiReleaseSearchResultsPageState)))

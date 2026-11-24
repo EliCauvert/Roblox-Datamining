@@ -7,6 +7,7 @@ local UniversalAppPolicyModule = require(Parent.UniversalAppPolicy)
 local AbuseReportModule = require(InterstitialAdPlayer.AbuseReport)
 local MeasurementTelemetryModule = require(InterstitialAdPlayer.MeasurementTelemetry)
 local _ = require(InterstitialAdPlayer.types)
+local LuaAppInterstitialAdLearnMoreUrl = game:DefineFastString("LuaAppInterstitialAdLearnMoreUrl", "")
 local Text = HttpModule.Url.APIS_URL .. "abuse-reporting/v1/abuse-report"
 local config = {
 	eventName = "InterstitialAdReportSentCounter",
@@ -42,19 +43,25 @@ end
 
 return {
 	default = function()
-		-- upvalues: HttpModule (copy), config (copy), config1 (copy), AbuseReportModule (copy), Text (copy), readAppPolicy (copy), UniversalAppPolicyModule (copy), nowMs (copy), MeasurementTelemetryModule (copy), VideoPlayerModule (copy)
+		-- upvalues: HttpModule (copy), LuaAppInterstitialAdLearnMoreUrl (copy), config (copy), config1 (copy), AbuseReportModule (copy), Text (copy), readAppPolicy (copy), UniversalAppPolicyModule (copy), nowMs (copy), MeasurementTelemetryModule (copy), VideoPlayerModule (copy)
 		local BrowserService = game:GetService("BrowserService")
 		local ContentProvider = game:GetService("ContentProvider")
 		local HttpService = game:GetService("HttpService")
+		local LinkingService = game:GetService("LinkingService")
 		local MemStorageService = game:GetService("MemStorageService")
 		local TelemetryService = game:GetService("TelemetryService")
+		local UserInputService = game:GetService("UserInputService")
 		local WebViewService = game:GetService("WebViewService")
 		local RequestInternalWrapperResult = HttpModule.NetworkLayers.requestInternalWrapper(HttpService)
 		local WebViewServiceEngineFeature = game:GetEngineFeature("WebViewService")
 		
 		return {
 			heartbeat = game:GetService("RunService").Heartbeat,
-			inputBegan = game:GetService("UserInputService").InputBegan,
+			inputBegan = UserInputService.InputBegan,
+			isTypingText = function(): boolean
+				-- upvalues: UserInputService (copy)
+				return UserInputService:GetFocusedTextBox() ~= nil
+			end,
 			leaveRequested = game:GetService("GuiService").ShowLeaveConfirmation,
 			openBrowser = function(Url, Callback)
 				-- upvalues: WebViewServiceEngineFeature (copy), WebViewService (copy), BrowserService (copy), HttpService (copy)
@@ -101,6 +108,14 @@ return {
 					end
 				end)
 			end,
+			openExternally = function(p1)
+				-- upvalues: LinkingService (copy)
+				task.spawn(function()
+					-- upvalues: LinkingService (upval), p1 (copy)
+					pcall(LinkingService.OpenUrl, LinkingService, p1)
+				end)
+			end,
+			learnMoreUrl = LuaAppInterstitialAdLearnMoreUrl,
 			preloadFonts = function(ContentIdList)
 				-- upvalues: ContentProvider (copy)
 				ContentProvider:PreloadAsync(ContentIdList)

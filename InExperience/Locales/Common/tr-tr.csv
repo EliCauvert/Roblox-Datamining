@@ -636,6 +636,7 @@ CommonUI.UserAgreements.Popup.Agreement.TransferPersonalInformationPolicy,Kişis
 CommonUI.UserAgreements.Popup.DefaultAgreementTitle,Güncellenmiş Anlaşma
 CommonUI.UserAgreements.Popup.TitleOnWebview,
 CoreScripts.Ads.Action.Close,
+CoreScripts.Ads.Action.Watch,İzle
 CoreScripts.Ads.ImmersiveBrandedAds.WhyThisAd,"Kişiselleştirilmiş olmayan bu reklam, deneyimdeki kullanıcılar tarafından görülebilir. Reklamveren {AdvertiserName}, bu reklamın ücretini ödemiştir."
 CoreScripts.Ads.Label.IllegalContentReportingLink,Yasa dışı veya çocuklara zararlı içeriği raporla
 CoreScripts.Ads.Label.InExperienceDisclosureDynamic,"Roblox, bu reklamı yayınlamak için davranışsal bilgiler kullanmadı. Bu reklamı; sana uygun ve alakalı reklamlar sunmak için kullandığımız cihaz türü, konum ve yaş gibi bilgilere dayalı olarak görüyorsun. Reklamcı: {AdvertiserName}."
@@ -646,6 +647,8 @@ CoreScripts.Ads.Label.ReportAd,Reklamı Bildir
 CoreScripts.Ads.Label.RewardedVideoEligibleDisclaimer,Bu bir deneme reklamıdır. Deneyiminde gerçek reklamlar gösterilir.
 CoreScripts.Ads.Label.RewardedVideoExitConfirmation,Ödülünü kazanmaya çok yaklaştın! Çıkmak istediğine emin misin?
 CoreScripts.Ads.Label.RewardedVideoIneligibleDisclaimer,Bu bir deneme reklamıdır. Deneyimin uygun olmadığı için gerçek reklamlar gösterilmez.
+CoreScripts.Ads.Label.SkipAd,Reklamı atla
+CoreScripts.Ads.Label.SkipIn,{RBX_NUMBER} sn. sonra atla
 CoreScripts.Ads.Label.SponsoredAds,Sponsorlu
 CoreScripts.Ads.Label.SponsoredAdsDisclosureStatic,"Sponsorlu Deneyimlerin ücreti, Yaratıcılar tarafından ödenir. Reklamlar, AB bölgelerindeki kullanıcılar için cihazının türü, konumu ve demografik hakkındaki genel bilgilere dayalı olarak sana gösterilebilir. Reklamlar, AB dışındaki bölgeler için ilave başka bilgilere dayalı olarak gösterilebilir."
 CoreScripts.Ads.Label.Teleporting,Işınlanıyor...
@@ -3322,16 +3325,20 @@ Feature.Chat.Title.FriendsChat,Arkadaş sohbeti
 Feature.Chat.Title.NewChat,Yeni sohbet
 Feature.Chat.Toast.Error.InvalidUserSelected,Listedeki bir veya daha fazla kişi eklenemiyor
 Feature.CloudClient.Action.PlayWithoutCloudPlay,Cloud Play olmadan oyna
+Feature.CloudClient.Action.PlayWithoutRobloxReality,{productName} olmadan oyna
+Feature.CloudClient.Action.TryRobloxReality,{productName} ile dene
 Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play, oyunu Roblox'un bilgisayarlarında çalıştırır. Bu sayede oyun daha hızlı yüklenip daha az çöker. Yalnızca bu oyunu oynadığın süre boyunca geçerlidir."
 Feature.CloudClient.Description.GalleryUnavailableCloudPlay,Galerini kullanmak için Cloud Play olmadan yeniden katıl.
 Feature.CloudClient.Description.GalleryUnavailableRobloxReality,Galerini kullanmak için Restyle olmadan yeniden katıl.
 Feature.CloudClient.Description.GalleryUnavailableRobloxRealityV2,Galerini kullanmak için {productName} olmadan yeniden katıl.
+Feature.CloudClient.Description.RobloxRealityOffer,"{productName}, favori oyunlarına yepyeni bir görünüm kazandırıyor. Erken ön izlemeyi dene ve ne düşündüğünü bize söyle."
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle bir erken ön izlemedir. Bazı şeyler orijinal oyundan farklı görünebilir.
 Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName} bir erken ön izlemedir. Bazı şeyler orijinal oyundan farklı görünebilir.
 Feature.CloudClient.Heading.CloudPlayOffer,Cloud Play ile oyna
 Feature.CloudClient.Heading.GalleryUnavailableCloudPlay,Galeri henüz Cloud Play'de kullanılamıyor.
 Feature.CloudClient.Heading.GalleryUnavailableRobloxReality,Galeri henüz Restyle ile kullanılamıyor.
 Feature.CloudClient.Heading.GalleryUnavailableRobloxRealityV2,Galeri henüz {productName} ürünü ile kullanılamıyor.
+Feature.CloudClient.Heading.RobloxRealityOffer,Oyununu {productName} ile dene
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Yakalama henüz Cloud Play'de kullanılamıyor.
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Yakalama henüz Restyle ile kullanılamıyor.
 Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,Yakalama henüz {productName} ile kullanılamıyor.
@@ -3717,6 +3724,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,{experienceName} için bildirim
 Feature.GameJoin.Description.DifferentServer,Farklı bir sunucuda başlayacaksın
 Feature.GameJoin.Label.PlayTogether,Birlikte oynayabilirsiniz
 Feature.GameJoin.Label.PlayTogetherSoon,Yakında birlikte oynayabileceksiniz
+Feature.GameJoin.Label.Played,oynandı
 Feature.GameJoin.Label.RecentCoplay,Yakın zamanda beraber oynadınız
 Feature.GamePage.Action.BackToTop,Başa dön
 Feature.GamePage.Label.Ad,

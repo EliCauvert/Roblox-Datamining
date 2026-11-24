@@ -1,9 +1,11 @@
-﻿local Parent = script:FindFirstAncestor("VideoPlayer").Parent
+﻿local VideoPlayer = script:FindFirstAncestor("VideoPlayer")
+local Parent = VideoPlayer.Parent
 local ReactModule = require(Parent.React)
 local ArgCheckModule = require(Parent.ArgCheck)
+local FFlagLuaAppInterstitialAdVideoUsageModule = require(VideoPlayer.Flags.FFlagLuaAppInterstitialAdVideoUsage)
 
 return function(p1)
-	-- upvalues: ReactModule (copy), ArgCheckModule (copy)
+	-- upvalues: ReactModule (copy), ArgCheckModule (copy), FFlagLuaAppInterstitialAdVideoUsageModule (copy)
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: p1 (copy)
 		return Content.fromUri(p1.video)
@@ -50,6 +52,7 @@ return function(p1)
 		VideoContent = UseMemoResult,
 		Volume = if p1.muted then 0 else 1,
 		Looping = p1.looped or false,
+		InternalVideoUsage = if FFlagLuaAppInterstitialAdVideoUsageModule then p1.internalVideoUsage else nil,
 		[ReactModule.Event.DidLoop] = UseResult,
 		[ReactModule.Event.DidEnd] = UseResult1,
 		ref = p1.videoPlayerRef

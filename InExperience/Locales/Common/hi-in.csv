@@ -618,6 +618,7 @@ CommonUI.UserAgreements.Popup.Agreement.TransferPersonalInformationPolicy,अन
 CommonUI.UserAgreements.Popup.DefaultAgreementTitle,अपडेट किया गया एग्रीमेंट
 CommonUI.UserAgreements.Popup.TitleOnWebview,
 CoreScripts.Ads.Action.Close,
+CoreScripts.Ads.Action.Watch,
 CoreScripts.Ads.ImmersiveBrandedAds.WhyThisAd,"पर्सनलाइज़ नहीं किया गया यह ऐड, इस एक्सपीरियंस में यूज़र्स को दिख रहा है. इसका ऐडवरटाइज़र {AdvertiserName} है और इसी ने इस ऐड का पेमेंट किया है."
 CoreScripts.Ads.Label.IllegalContentReportingLink,गैरकानूनी कॉन्टेंट या बच्चों के लिए नुकसानदेह कॉन्टेंट की रिपोर्ट करें
 CoreScripts.Ads.Label.InExperienceDisclosureDynamic,"Roblox ने इस ऐड को डिलीवर करने के लिए बिहैवियर से जुड़ी जानकारी का इस्तेमाल नहीं किया है. आपको यह ऐड डिवाइस टाइप, लोकेशन और उम्र जैसी जानकारी के आधार पर दिखाया जा रहा है, ताकि आपको सही और प्रासंगिक ऐड दिखाए जा सकें. ऐडवरटाइज़र का नाम {AdvertiserName} है."
@@ -628,6 +629,8 @@ CoreScripts.Ads.Label.ReportAd,ऐड की रिपोर्ट करें
 CoreScripts.Ads.Label.RewardedVideoEligibleDisclaimer,यह एक टेस्ट ऐड है. असली ऐड आपके एक्सपीरिएंस में दिखाए जाएँगे.
 CoreScripts.Ads.Label.RewardedVideoExitConfirmation,आप अपना रिवॉर्ड पाने के बहुत करीब हैं! क्या आपको वाकई बाहर निकलना है?
 CoreScripts.Ads.Label.RewardedVideoIneligibleDisclaimer,"यह एक टेस्ट ऐड है. असली ऐड नहीं दिखाए जाएँगे, क्योंकि आपका एक्सपीरिएंस ज़रूरी शर्तें पूरी नहीं करता है."
+CoreScripts.Ads.Label.SkipAd,ऐड छोड़ें
+CoreScripts.Ads.Label.SkipIn,{RBX_NUMBER} में छोड़ें
 CoreScripts.Ads.Label.SponsoredAds,स्पॉन्सर्ड
 CoreScripts.Ads.Label.SponsoredAdsDisclosureStatic,"स्पॉन्सर किए गए एक्सपीरिएंस का पेमेंट क्रिएटर्स करते हैं. EU के यूज़र के लिए, डिवाइस टाइप, लोकेशन और डेमोग्राफ़िक के बारे में सामान्य जानकारी के आधार पर ऐड दिखाया जा सकता है. EU के बाहर, अतिरिक्त जानकारी के आधार पर भी ऐड दिखाए जा सकते हैं."
 CoreScripts.Ads.Label.Teleporting,टेलीपोर्ट किया जा रहा है...
@@ -3347,16 +3350,20 @@ Feature.Chat.Title.FriendsChat,फ़्रेंड्स चैट
 Feature.Chat.Title.NewChat,नई चैट
 Feature.Chat.Toast.Error.InvalidUserSelected,इस लिस्ट में एक या इससे ज़्यादा लोगों को जोड़ा नहीं जा सकता
 Feature.CloudClient.Action.PlayWithoutCloudPlay,Cloud Play के बिना खेलें
+Feature.CloudClient.Action.PlayWithoutRobloxReality,{productName} के बिना खेलें
+Feature.CloudClient.Action.TryRobloxReality,{productName} को आज़माएँ
 Feature.CloudClient.Description.CloudPlayOffer,"Cloud Play से गेम Roblox के कंप्यूटर पर चलता है, इसलिए हो सकता है कि वह ज़्यादा जल्दी लोड हो और उसमें क्रैश की समस्या कम आए. यह सिर्फ़ आपके गेम खेलने तक चलता है."
 Feature.CloudClient.Description.GalleryUnavailableCloudPlay,"अपनी 'गैलरी' का इस्तेमाल करने के लिए, Cloud Play के बिना फिर से गेम जॉइन करें."
 Feature.CloudClient.Description.GalleryUnavailableRobloxReality,"अपनी 'गैलरी' का इस्तेमाल करने के लिए, Restyle के बिना फिर से गेम जॉइन करें."
 Feature.CloudClient.Description.GalleryUnavailableRobloxRealityV2,"अपनी गैलरी का इस्तेमाल करने के लिए, {productName} के बिना फिर से गेम जॉइन करें."
+Feature.CloudClient.Description.RobloxRealityOffer,"{productName} से आपके पसंदीदा गेम्स को बिलकुल नया लुक मिलता है. अर्ली प्रीव्यू आज़माएँ, फिर हमें अपनी राय दें."
 Feature.CloudClient.Description.RobloxRealityPreview,Restyle एक अर्ली प्रीव्यू वाली सुविधा है. इसमें चीज़ें ओरिजिनल गेम से अलग नज़र आ सकती हैं.
 Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName} एक अर्ली प्रीव्यू वाली सुविधा है. इसमें चीज़ें ओरिजिनल गेम से अलग नज़र आ सकती हैं.
 Feature.CloudClient.Heading.CloudPlayOffer,Cloud Play के साथ खेलें
 Feature.CloudClient.Heading.GalleryUnavailableCloudPlay,Cloud Play में अभी तक 'गैलरी' उपलब्ध नहीं है.
 Feature.CloudClient.Heading.GalleryUnavailableRobloxReality,Restyle में अभी तक 'गैलरी' उपलब्ध नहीं है.
 Feature.CloudClient.Heading.GalleryUnavailableRobloxRealityV2,अभी {productName} में गैलरी उपलब्ध नहीं है.
+Feature.CloudClient.Heading.RobloxRealityOffer,{productName} के साथ अपना गेम आज़माएँ
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Cloud Play में अभी तक 'कैप्चर करें' बटन उपलब्ध नहीं है.
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Restyle में अभी तक 'कैप्चर करें' बटन उपलब्ध नहीं है.
 Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,{productName} में अभी 'कैप्चर करें' बटन उपलब्ध नहीं है.
@@ -3742,6 +3749,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,{experienceName} के लि�
 Feature.GameJoin.Description.DifferentServer,आपके पास किसी दूसरे सर्वर में शुरू करने का विकल्प होगा
 Feature.GameJoin.Label.PlayTogether,आपके पास एक साथ खेलने की सुविधा है
 Feature.GameJoin.Label.PlayTogetherSoon,आपके पास जल्द ही एक साथ खेलने की सुविधा होगी
+Feature.GameJoin.Label.Played,खेला गया
 Feature.GameJoin.Label.RecentCoplay,आपने हाल ही में साथ खेला है
 Feature.GamePage.Action.BackToTop,वापस ऊपर जाएँ
 Feature.GamePage.Label.Ad,

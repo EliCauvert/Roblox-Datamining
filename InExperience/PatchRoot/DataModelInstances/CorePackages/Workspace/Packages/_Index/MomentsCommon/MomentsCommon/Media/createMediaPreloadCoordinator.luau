@@ -1,7 +1,5 @@
 ﻿local MomentsCommon = script:FindFirstAncestor("MomentsCommon")
-local Parent = MomentsCommon.Parent
-local SignalsModule = require(Parent.Signals)
-local FFlagMomentsAutoplayAmpPolicy = require(Parent.SharedFlags).FFlagMomentsAutoplayAmpPolicy
+local SignalsModule = require(MomentsCommon.Parent.Signals)
 local _ = require(MomentsCommon.Media.MediaTypes)
 local _ = require(MomentsCommon.Media.Preload.selectPreloadPolicy)
 local _ = require(MomentsCommon.Media.Telemetry.mediaTelemetry)
@@ -17,7 +15,7 @@ local function _(p1, p2, p3): boolean
 end
 
 return function(p1, p2, p3, AudioDeviceOutput, Services, p4)
-	-- upvalues: GetFFlagMomentsRenderPostAssetsModule (copy), DefaultMediaNodeRegistryModule (copy), CreateMomentMediaControllerModule (copy), CreateSignalFunction (copy), FFlagMomentsAutoplayAmpPolicy (copy), CreateEffectFunction (copy)
+	-- upvalues: GetFFlagMomentsRenderPostAssetsModule (copy), DefaultMediaNodeRegistryModule (copy), CreateMomentMediaControllerModule (copy), CreateSignalFunction (copy), CreateEffectFunction (copy)
 	local P8 = p4 or {}
 	local FFlagMomentsRenderPostAssetsModule = GetFFlagMomentsRenderPostAssetsModule()
 	local Now = Services.now or os.clock
@@ -75,11 +73,11 @@ return function(p1, p2, p3, AudioDeviceOutput, Services, p4)
 	end
 	
 	local function reconcile(p5)
-		-- upvalues: p1 (copy), FFlagMomentsAutoplayAmpPolicy (upval), v1 (ref), p2 (copy), FFlagMomentsRenderPostAssetsModule (copy), Tbl (copy), MomentId (ref), CreateController (copy), Flag (ref), scheduleDecodeRetry (copy), Signal2 (copy), Now (copy), p3 (copy)
+		-- upvalues: p1 (copy), v1 (ref), p2 (copy), FFlagMomentsRenderPostAssetsModule (copy), Tbl (copy), MomentId (ref), CreateController (copy), Flag (ref), scheduleDecodeRetry (copy), Signal2 (copy), Now (copy), p3 (copy)
 		local Items = p1.getItems(p5)
 		local ActiveIndex = p1.getActiveIndex(p5)
 		local PlaybackActive = p1.getPlaybackActive(p5)
-		local CanAutoPlay = if FFlagMomentsAutoplayAmpPolicy then p1.getCanAutoPlay(p5) else nil
+		local CanAutoPlay = p1.getCanAutoPlay(p5)
 		local Item = Items[ActiveIndex]
 		local MomentId1 = if Item == nil then nil else Item.momentId
 		v1 = MomentId1
@@ -190,19 +188,17 @@ return function(p1, p2, p3, AudioDeviceOutput, Services, p4)
 		local Entry = if MomentId1 == nil then nil else Tbl[MomentId1]
 		local IsReady: boolean = Entry ~= nil and Entry.controller.getState(p5).readiness == "Ready"
 		
-		if FFlagMomentsAutoplayAmpPolicy then
-			if MomentId ~= nil and MomentId ~= MomentId1 then
-				if Tbl[MomentId] ~= nil then
-					Tbl[MomentId].controller.pause()
-				end
-				MomentId = nil
+		if MomentId ~= nil and MomentId ~= MomentId1 then
+			if Tbl[MomentId] ~= nil then
+				Tbl[MomentId].controller.pause()
 			end
-			if Entry ~= nil and Entry.controller.getState(p5).isPlaying then
-				MomentId = MomentId1
-			end
+			MomentId = nil
+		end
+		if Entry ~= nil and Entry.controller.getState(p5).isPlaying then
+			MomentId = MomentId1
 		end
 		if PlaybackActive and Entry ~= nil and IsReady then
-			if (not FFlagMomentsAutoplayAmpPolicy or CanAutoPlay) and MomentId ~= MomentId1 then
+			if CanAutoPlay and MomentId ~= MomentId1 then
 				if MomentId ~= nil and Tbl[MomentId] ~= nil then
 					Tbl[MomentId].controller.pause()
 				end

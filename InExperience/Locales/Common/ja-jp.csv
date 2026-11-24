@@ -636,6 +636,7 @@ CommonUI.UserAgreements.Popup.Agreement.TransferPersonalInformationPolicy,個人
 CommonUI.UserAgreements.Popup.DefaultAgreementTitle,更新済み規約
 CommonUI.UserAgreements.Popup.TitleOnWebview,
 CoreScripts.Ads.Action.Close,
+CoreScripts.Ads.Action.Watch,視聴する
 CoreScripts.Ads.ImmersiveBrandedAds.WhyThisAd,このパーソナライズされていない広告は、このバーチャル空間内のユーザーに表示されます。広告主である{AdvertiserName}が、この広告の費用を負担しています。
 CoreScripts.Ads.Label.IllegalContentReportingLink,違法なコンテンツや子どもに有害なコンテンツを報告
 CoreScripts.Ads.Label.InExperienceDisclosureDynamic,Robloxは、みなさんの行動情報を使用した広告配信はしていません。適切で関連性の高い広告を表示させるため、デバイスの種類や場所、年齢などの情報に基づいてこの広告を配信しています。広告主は {AdvertiserName} です。
@@ -646,6 +647,8 @@ CoreScripts.Ads.Label.ReportAd,広告の規約違反を報告
 CoreScripts.Ads.Label.RewardedVideoEligibleDisclaimer,これはテスト広告です。実際の広告はあなたのバーチャル空間内で表示されます。
 CoreScripts.Ads.Label.RewardedVideoExitConfirmation,あと少しで報酬がもらえます！終了しますか？
 CoreScripts.Ads.Label.RewardedVideoIneligibleDisclaimer,これはテスト広告です。あなたのバーチャル空間内は条件を満たしていないため、実際の広告は表示されません。
+CoreScripts.Ads.Label.SkipAd,広告をスキップ
+CoreScripts.Ads.Label.SkipIn,スキップまで{RBX_NUMBER}
 CoreScripts.Ads.Label.SponsoredAds,スポンサー提供
 CoreScripts.Ads.Label.SponsoredAdsDisclosureStatic,スポンサーつきバーチャル空間はクリエーターによって支払われます。EUユーザーの場合、デバイスの種類、場所、人口統計学的属性などの情報に基づいて表示されるかもしれません。EU圏以外では、その他の追加情報に基づいて広告が表示されるかもしれません。
 CoreScripts.Ads.Label.Teleporting,テレポート中...
@@ -3366,16 +3369,20 @@ Feature.Chat.Title.FriendsChat,友達チャット
 Feature.Chat.Title.NewChat,新規チャット
 Feature.Chat.Toast.Error.InvalidUserSelected,このリストに追加できない人が1人以上います
 Feature.CloudClient.Action.PlayWithoutCloudPlay,Cloud Playを使わずにプレイ
+Feature.CloudClient.Action.PlayWithoutRobloxReality,{productName}を使わずにプレイ
+Feature.CloudClient.Action.TryRobloxReality,{productName}を試す
 Feature.CloudClient.Description.CloudPlayOffer,Cloud Playは、Robloxのコンピューターでゲームを実行するため、読み込みが速くなり、クラッシュしづらくなる可能性があります。このゲームをプレイしている間のみ有効です。
 Feature.CloudClient.Description.GalleryUnavailableCloudPlay,ギャラリーを使用するには、Cloud Playを使わずに再参加してください。
 Feature.CloudClient.Description.GalleryUnavailableRobloxReality,ギャラリーを使用するには、Restyleを使わずに再参加してください。
 Feature.CloudClient.Description.GalleryUnavailableRobloxRealityV2,ギャラリーを使用するには、{productName}を使わずに再参加してください。
+Feature.CloudClient.Description.RobloxRealityOffer,{productName}を使うと、お気に入りのゲームの見た目が新しく生まれ変わります。先行プレビューを試して、ご意見をお聞かせください。
 Feature.CloudClient.Description.RobloxRealityPreview,Restyleは初期プレビュー版です。実際のゲームとは異なる可能性があります。
 Feature.CloudClient.Description.RobloxRealityPreviewV2,{productName}は初期プレビュー版です。実際のゲームとは異なる可能性があります。
 Feature.CloudClient.Heading.CloudPlayOffer,Cloud Playを使ってプレイ
 Feature.CloudClient.Heading.GalleryUnavailableCloudPlay,ギャラリーは、現時点ではCloud Playで利用できません。
 Feature.CloudClient.Heading.GalleryUnavailableRobloxReality,ギャラリーは、現時点ではRestyleで利用できません。
 Feature.CloudClient.Heading.GalleryUnavailableRobloxRealityV2,ギャラリーはまだ{productName}で利用できません。
+Feature.CloudClient.Heading.RobloxRealityOffer,{productName}でゲームを試してみよう
 Feature.CloudClient.Label.CaptureUnavailableCloudPlay,Cloud Playでは、現時点では切り抜き機能は利用できません。
 Feature.CloudClient.Label.CaptureUnavailableRobloxReality,Restyleでは、現時点では切り抜き機能は利用できません。
 Feature.CloudClient.Label.CaptureUnavailableRobloxRealityV2,切り抜き機能はまだ{productName}では利用できません。
@@ -3761,6 +3768,7 @@ Feature.GameFollows.TooltipTurnedOnNotifications,{experienceName} の通知を�
 Feature.GameJoin.Description.DifferentServer,別のサーバーで開始します
 Feature.GameJoin.Label.PlayTogether,一緒にプレイできます
 Feature.GameJoin.Label.PlayTogetherSoon,もうすぐ一緒にプレイできるようになります
+Feature.GameJoin.Label.Played,プレイ済み
 Feature.GameJoin.Label.RecentCoplay,最近一緒にプレイしました
 Feature.GamePage.Action.BackToTop,トップに戻る
 Feature.GamePage.Label.Ad,

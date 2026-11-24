@@ -1,7 +1,6 @@
 ﻿local MomentsCommon = script:FindFirstAncestor("MomentsCommon")
 local Parent = MomentsCommon.Parent
 local SharedFlagsModule = require(Parent.SharedFlags)
-local FFlagMomentsAutoplayAmpPolicy = SharedFlagsModule.FFlagMomentsAutoplayAmpPolicy
 local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
 local FFlagMomentsCommentsIxpEnabled = SharedFlagsModule.FFlagMomentsCommentsIxpEnabled
 local FFlagAXAvatarMomentsCreation = SharedFlagsModule.FFlagAXAvatarMomentsCreation
@@ -12,7 +11,7 @@ local CreateComputedFunction = require(Parent.Signals).createComputed
 local GetAppPolicyStoreFunction = require(Parent.UniversalAppPolicy).GetAppPolicyStore
 
 return function()
-	-- upvalues: GetFIntMomentsNonInfiniteScrollLimitModule (copy), CreateComputedFunction (copy), FFlagDebugForceEnableMomentsModule (copy), GetAppPolicyStoreFunction (copy), FFlagAXAvatarMomentsCreation (copy), FFlagMomentsAutoplayAmpPolicy (copy), FFlagMomentsComments (copy), FFlagMomentsCommentsIxpEnabled (copy), FFlagMomentsParentTimeLimitModule (copy), MomentsCommon (copy)
+	-- upvalues: GetFIntMomentsNonInfiniteScrollLimitModule (copy), CreateComputedFunction (copy), FFlagDebugForceEnableMomentsModule (copy), GetAppPolicyStoreFunction (copy), FFlagAXAvatarMomentsCreation (copy), FFlagMomentsComments (copy), FFlagMomentsCommentsIxpEnabled (copy), FFlagMomentsParentTimeLimitModule (copy), MomentsCommon (copy)
 	local Largest = math.max(1, GetFIntMomentsNonInfiniteScrollLimitModule())
 	
 	local function _(Value)
@@ -49,16 +48,11 @@ return function()
 	else
 		Computed3 = nil
 	end
-	local Computed4 = nil
-	if FFlagMomentsAutoplayAmpPolicy then
-		local Value4 = "auto_play"
-		Computed4 = CreateComputedFunction(function(p1): boolean
-			-- upvalues: FFlagDebugForceEnableMomentsModule (upval), GetAppPolicyStoreFunction (upval), Value4 (copy)
-			return if FFlagDebugForceEnableMomentsModule then true else table.find(GetAppPolicyStoreFunction(false).getAppPolicy(p1).getMomentsFeatureList(), Value4) ~= nil
-		end)
-	else
-		Computed4 = nil
-	end
+	local Value4 = "auto_play"
+	local Computed4 = CreateComputedFunction(function(p1): boolean
+		-- upvalues: FFlagDebugForceEnableMomentsModule (upval), GetAppPolicyStoreFunction (upval), Value4 (copy)
+		return if FFlagDebugForceEnableMomentsModule then true else table.find(GetAppPolicyStoreFunction(false).getAppPolicy(p1).getMomentsFeatureList(), Value4) ~= nil
+	end)
 	local Value5 = "engagement_metrics"
 	local Computed5 = CreateComputedFunction(function(p1): boolean
 		-- upvalues: FFlagDebugForceEnableMomentsModule (upval), GetAppPolicyStoreFunction (upval), Value5 (copy)

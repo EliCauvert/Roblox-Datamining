@@ -97,13 +97,20 @@ return function(p1)
 				}))
 			end),
 			Environment.inputBegan:Connect(function(Input, p2)
-				-- upvalues: UseResult (upval), Current (upval)
-				if Input.KeyCode == Enum.KeyCode.Escape or Input.KeyCode == Enum.KeyCode.ButtonB then
-					UseResult(Current:back("Device"))
-					
-					return
-				end
-				if Input.KeyCode == Enum.KeyCode.Space and not p2 then
+				-- upvalues: Current (upval), UseResult (upval), Environment (upval)
+				if Input.KeyCode == Enum.KeyCode.Escape then
+					if not p2 or Current.overlay ~= "ReportAd" then
+						UseResult(Current:back("Device"))
+						
+						return
+					end
+				elseif Input.KeyCode == Enum.KeyCode.ButtonB then
+					if not Environment.isTypingText() then
+						UseResult(Current:back("Device"))
+						
+						return
+					end
+				elseif Input.KeyCode == Enum.KeyCode.Space and not p2 then
 					UseResult(Current:togglePause())
 				end
 			end),
@@ -127,7 +134,8 @@ return function(p1)
 		end
 	end, {
 		UseResult, Current, Environment.heartbeat, Environment.nowMs,
-		Environment.inputBegan, Environment.leaveRequested, Host.subscribeVisibility
+		Environment.inputBegan, Environment.isTypingText, Environment.leaveRequested,
+		Host.subscribeVisibility
 	})
 	
 	return {
@@ -139,6 +147,22 @@ return function(p1)
 		controlsVisible = UseIconFontLoadedModule(Environment.preloadFonts),
 		advertiserLogo = Config.advertiserLogo,
 		ctaButtonType = Config.ctaButtonType,
+		advertiserName = Config.advertiserName or "",
+		payerName = Config.payerName or "",
+		learnMoreUrl = Environment.learnMoreUrl,
+		reportAbuse = function(p2, p3)
+			-- upvalues: Environment (copy), Config (copy), Host (copy)
+			return Environment.reportAd(Config, Host.userId, p2, p3)
+		end,
+		illegalContentReportingUrl = ReactModule.useMemo(function()
+			-- upvalues: Environment (copy), Config (copy), Host (copy)
+			return Environment.illegalContentReportingUrl(Config.creativeAssetId, Host.userId)
+		end, {
+			Environment.illegalContentReportingUrl,
+			Config.creativeAssetId,
+			Host.userId,
+			UseStateResult.overlay == "ReportAd"
+		}),
 		video = {
 			Component = Environment.VideoDisplay,
 			content = Config.video,
@@ -186,6 +210,14 @@ return function(p1)
 			-- upvalues: UseResult (copy), Current (copy)
 			UseResult(Current:toggleMute())
 		end,
+		onToggleMenu = function()
+			-- upvalues: UseResult (copy), Current (copy)
+			UseResult(if Current.overlay == "Menu" then Current:closeOverlay() else Current:openOverlay("Menu"))
+		end,
+		onOpenOverlay = function(p2)
+			-- upvalues: UseResult (copy), Current (copy)
+			UseResult(Current:openOverlay(p2))
+		end,
 		onClickOut = function()
 			-- upvalues: Current (copy), Environment (copy), Config (copy), UseResult (copy)
 			if not Current:canOpenOverlay("Browser") then return end
@@ -198,6 +230,10 @@ return function(p1)
 				UseResult(Current:openOverlay("Browser"))
 			end
 		end,
+		onCloseOverlay = function()
+			-- upvalues: UseResult (copy), Current (copy)
+			UseResult(Current:closeOverlay())
+		end,
 		onSkip = function()
 			-- upvalues: UseResult (copy), Current (copy)
 			UseResult(Current:skip())
@@ -205,6 +241,7 @@ return function(p1)
 		onBack = function()
 			-- upvalues: UseResult (copy), Current (copy)
 			UseResult(Current:back("Button"))
-		end
+		end,
+		onOpenExternally = Environment.openExternally
 	}
 end

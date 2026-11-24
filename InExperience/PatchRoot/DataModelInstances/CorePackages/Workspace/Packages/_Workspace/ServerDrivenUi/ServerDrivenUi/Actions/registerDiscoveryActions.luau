@@ -9,6 +9,7 @@ local SduiActionType = SduiCoreSystemModule.SduiActionType
 local GetSduiActionHandlerRegistryFunction = SduiCoreSystemModule.getSduiActionHandlerRegistry
 local FFlagSduiActionsUpdateFiresOwnTelemetry = require(Parent.SharedFlags).FFlagSduiActionsUpdateFiresOwnTelemetry
 local FFlagSduiChartsSortDetailGenreFilter = require(Parent.SharedFlags).FFlagSduiChartsSortDetailGenreFilter
+local FFlagSduiSearchGuidedPills = require(Parent.SharedFlags).FFlagSduiSearchGuidedPills
 local FFlagSduiAiOverviewEnabled = require(Parent.SharedFlags).FFlagSduiAiOverviewEnabled
 local FFlagSduiPinShortcutAction = require(Parent.SharedFlags).FFlagSduiPinShortcutAction
 local FFlagLuaAppSduiHomePageSupport = require(Parent.SharedFlags).FFlagLuaAppSduiHomePageSupport
@@ -17,7 +18,7 @@ local FFlagLuaAppNotInterestedTileFeedbackButton = require(Parent.SharedFlags).F
 local FFlagAXOwnMarketplaceTryOnAction = require(Parent.SharedFlags).FFlagAXOwnMarketplaceTryOnAction
 
 return function()
-	-- upvalues: SduiActionType (copy), ServerDrivenUi (copy), FFlagSduiActionsUpdateFiresOwnTelemetry (copy), FFlagSduiOpenSearchResultsTabAction (copy), FFlagLuaAppSduiOpenExternalLinkAction (copy), FFlagSduiAiOverviewEnabled (copy), FFlagLuaAppSduiGameTileFeedback (copy), FFlagLuaAppNotInterestedTileFeedbackButton (copy), FFlagAXOwnMarketplaceTryOnAction (copy), Parent (copy), FFlagLuaAppSduiUpdateUserSettingsAction (copy), FFlagMoveSduiUpdateUserSettingsToAccountManagement (copy), FFlagLuaAppSduiHomePageSupport (copy), FFlagSduiChartsSortDetailGenreFilter (copy), FFlagSduiPinShortcutAction (copy), GetSduiActionHandlerRegistryFunction (copy)
+	-- upvalues: SduiActionType (copy), ServerDrivenUi (copy), FFlagSduiActionsUpdateFiresOwnTelemetry (copy), FFlagSduiOpenSearchResultsTabAction (copy), FFlagLuaAppSduiOpenExternalLinkAction (copy), FFlagSduiAiOverviewEnabled (copy), FFlagLuaAppSduiGameTileFeedback (copy), FFlagLuaAppNotInterestedTileFeedbackButton (copy), FFlagAXOwnMarketplaceTryOnAction (copy), Parent (copy), FFlagLuaAppSduiUpdateUserSettingsAction (copy), FFlagMoveSduiUpdateUserSettingsToAccountManagement (copy), FFlagLuaAppSduiHomePageSupport (copy), FFlagSduiChartsSortDetailGenreFilter (copy), FFlagSduiSearchGuidedPills (copy), FFlagSduiPinShortcutAction (copy), GetSduiActionHandlerRegistryFunction (copy)
 	GetSduiActionHandlerRegistryFunction().registerActionHandlerConfigs({
 		[SduiActionType.DismissDialog] = {
 			skipUnifiedLogging = false,
@@ -364,6 +365,13 @@ return function()
 			lazyHandler = function()
 				-- upvalues: ServerDrivenUi (upval)
 				return require(ServerDrivenUi.Actions.SduiRefreshChartsSortDetailAction)
+			end
+		} else nil,
+		[SduiActionType.RefreshSearchResultsGuidedPill] = if FFlagSduiSearchGuidedPills then {
+			skipUnifiedLogging = false,
+			lazyHandler = function()
+				-- upvalues: ServerDrivenUi (upval)
+				return require(ServerDrivenUi.Actions.SduiRefreshSearchResultsGuidedPillAction)
 			end
 		} else nil,
 		[SduiActionType.PinExperienceShortcut] = if FFlagSduiPinShortcutAction then {

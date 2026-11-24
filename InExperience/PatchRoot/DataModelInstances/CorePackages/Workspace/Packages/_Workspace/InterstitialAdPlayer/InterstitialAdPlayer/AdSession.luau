@@ -11,7 +11,7 @@ local Frozen1 = table.freeze({
 	RenderTimeout = 405,
 	PlaybackFailed = 400
 })
-local config = { Browser = true }
+local config = { WhyThisAd = true, ReportAd = true, Browser = true }
 local Video_progresses = { 25, 50, 75 }
 local AdSessionModule = {}
 AdSessionModule.__index = AdSessionModule
@@ -413,9 +413,24 @@ function AdSessionModule.videoFailed(p6)
 	}) else {}
 end
 
+local _ = function(p6): boolean
+	return p6.overlay ~= nil and p6.overlay ~= "Browser"
+end
+
+local _ = function(p6)
+	local CloseOverlayResult = p6:closeOverlay()
+	table.insert(CloseOverlayResult, { kind = "CloseBrowser" })
+	
+	return CloseOverlayResult
+end
+
 function AdSessionModule:togglePause()
 	-- upvalues: measure (copy), AdSessionModule (copy)
-	if self.overlay == "Browser" then
+	if self.overlay == "Menu" then
+		self.overlay = nil
+		
+		return {}
+	elseif self.overlay == "Browser" then
 		local CloseOverlayResult = self:closeOverlay()
 		table.insert(CloseOverlayResult, { kind = "CloseBrowser" })
 		
@@ -439,7 +454,7 @@ end
 
 function AdSessionModule:toggleMute()
 	-- upvalues: measure (copy)
-	if self:isActive() then
+	if self:isActive() and (self.overlay == nil or self.overlay == "Browser") then
 		self.muted = not self.muted
 		
 		return if self.shown then {
@@ -453,7 +468,7 @@ function AdSessionModule:toggleMute()
 end
 
 function AdSessionModule:canOpenOverlay(Overlay): boolean
-	if not self:isActive() or self.overlay ~= nil then
+	if not self:isActive() or self.overlay == Overlay or self.overlay ~= nil and self.overlay ~= "Menu" then
 		return false
 	end
 	local v1 = true
@@ -486,6 +501,11 @@ function AdSessionModule:openOverlay(Overlay)
 				is_end_card_visible = false
 			}
 		}))
+	} elseif Overlay == "WhyThisAd" then {
+		(measure(self, {
+			name = "ImmersiveAdClickCTA",
+			fields = { click_element = "ad_info", is_end_card_visible = false }
+		}))
 	} else {} else {}
 end
 
@@ -510,14 +530,29 @@ function AdSessionModule:canSkip(): boolean
 	return self.phase == "Playing" and (SkipAfterSeconds ~= nil and SkipAfterSeconds <= self.watchedSeconds)
 end
 
-function AdSessionModule.skip(p6)
+function AdSessionModule:skip()
 	-- upvalues: finish (copy), Frozen (copy)
-	return if p6:canSkip() then finish(p6, Frozen.Skipped, "skip") else {}
+	local IsNotBrowser: boolean = self.overlay ~= nil and self.overlay ~= "Browser"
+	
+	return if IsNotBrowser or not self:canSkip() then {} else finish(self, Frozen.Skipped, "skip")
 end
 
-function AdSessionModule.back(p6, p7)
+function AdSessionModule:back(p6)
 	-- upvalues: finish (copy), Frozen (copy)
-	return if p6:isActive() then if p7 == "Device" and p6.overlay ~= nil then p6:closeOverlay() else finish(p6, Frozen.Cancelled, if p7 == "Button" then "close_button" else "system_back") else {}
+	if not self:isActive() then
+		return {}
+	elseif p6 ~= "Device" or self.overlay == nil then
+		local IsNotBrowser: boolean = self.overlay ~= nil and self.overlay ~= "Browser"
+		
+		return if IsNotBrowser then {} else finish(self, Frozen.Cancelled, if p6 == "Button" then "close_button" else "system_back")
+	elseif self.overlay == "Browser" then
+		local CloseOverlayResult = self:closeOverlay()
+		table.insert(CloseOverlayResult, { kind = "CloseBrowser" })
+		
+		return CloseOverlayResult
+	else
+		return (self:closeOverlay())
+	end
 end
 
 local _ = function(p6): boolean
@@ -533,6 +568,7 @@ function AdSessionModule:view()
 		isActive = self:isActive(),
 		isHeld = self:isHeld(),
 		userPaused = self.userPaused,
+		overlay = self.overlay,
 		muted = self.muted,
 		hasClickThrough = ClickThroughUrl ~= nil and (string.match(ClickThroughUrl, "^https://") ~= nil and (string.find(ClickThroughUrl, "[<>]") == nil and #ClickThroughUrl <= 4096)),
 		isSkippable = self.config.skipAfterSeconds ~= nil,

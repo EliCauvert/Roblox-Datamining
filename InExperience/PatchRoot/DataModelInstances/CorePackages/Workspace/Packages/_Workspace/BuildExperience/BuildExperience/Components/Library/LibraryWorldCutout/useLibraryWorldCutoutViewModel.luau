@@ -1,5 +1,6 @@
 ﻿local RunService = game:GetService("RunService")
 local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local FFlagBuildExperienceWorldJoystick = require(Parent.SharedFlags).FFlagBuildExperienceWorldJoystick
 local FoundationModule = require(Parent.Foundation)
 local MotionModule = require(Parent.Motion)
 local ReactModule = require(Parent.React)
@@ -17,7 +18,7 @@ local _ = function(p1, p2)
 end
 
 return function(Current)
-	-- upvalues: FoundationModule (copy), UserGameSettings (copy), ReactModule (copy), WorldCutoutTransitionModule (copy), MotionModule (copy), RunService (copy)
+	-- upvalues: FoundationModule (copy), UserGameSettings (copy), ReactModule (copy), WorldCutoutTransitionModule (copy), MotionModule (copy), RunService (copy), FFlagBuildExperienceWorldJoystick (copy)
 	local ReducedMotion = FoundationModule.Hooks.usePreferences().reducedMotion or UserGameSettings.ReducedMotion
 	local UseRefResult = ReactModule.useRef(WorldCutoutTransitionModule.initialState)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(UseRefResult.current.phase)
@@ -215,6 +216,13 @@ return function(Current)
 		end)
 	end, { Progress, UseBindingResult, UseBindingResult1 })
 	local IsTransitioning = WorldCutoutTransitionModule.isTransitioning(UseStateResult)
+	local OnTransitioningChangedFunction = Current.onTransitioningChanged
+	ReactModule.useEffect(function()
+		-- upvalues: FFlagBuildExperienceWorldJoystick (upval), OnTransitioningChangedFunction (copy), IsTransitioning (copy)
+		if FFlagBuildExperienceWorldJoystick and OnTransitioningChangedFunction ~= nil then
+			OnTransitioningChangedFunction(IsTransitioning)
+		end
+	end, { IsTransitioning, OnTransitioningChangedFunction })
 	
 	return {
 		phase = UseStateResult,
