@@ -4762,14 +4762,14 @@ a.btn-uiblox-common-common-notification-bell-md .btn-text {
 }
 
 .left-nav {
-    height: calc(100vh - 74px);
-    top: 74px
+    top: calc(74px + var(--top-app-banner-height, 0px));
+    height: calc(100vh - 74px - var(--top-app-banner-height, 0px))
 }
 
 @media (min-width:991px) {
     .left-nav {
-        height: calc(100vh - 40px);
-        top: 40px
+        top: calc(40px + var(--top-app-banner-height, 0px));
+        height: calc(100vh - 40px - var(--top-app-banner-height, 0px))
     }
 }
 
@@ -5387,6 +5387,36 @@ a.btn-uiblox-common-common-notification-bell-md .btn-text {
 
 .navbar-download-app-instructions>li+li {
     margin-top: 16px
+}
+
+#top-app-banner {
+    z-index: 1030;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0
+}
+
+#header {
+    top: var(--top-app-banner-height, 0px)
+}
+
+body {
+    padding-top: var(--top-app-banner-height, 0px)
+}
+
+#skip-to-main-content:not(:focus) {
+    transform: translateY(calc(-200% - var(--top-app-banner-height, 0px)))
+}
+
+body .alert-system-feedback .alert.on {
+    top: calc(40px + var(--top-app-banner-height, 0px))
+}
+
+@media (max-width:991px) {
+    body .alert-system-feedback .alert.on {
+        top: calc(80px + var(--top-app-banner-height, 0px))
+    }
 }
 
 .placeholder\:text-body-large::-webkit-input-placeholder {

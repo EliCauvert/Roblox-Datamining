@@ -2,10 +2,10 @@
     try {
         var e = "u" > typeof window ? window : "u" > typeof global ? global : "u" > typeof globalThis ? globalThis : "u" > typeof self ? self : {};
         e.SENTRY_RELEASE = {
-            id: "52964e959b958a3076c13a1017011fbf94d1330f"
+            id: "bbbd6d51ed752a663ebb21997405dad4d09995cc"
         };
         var t = (new e.Error).stack;
-        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "3eb5b618-db37-40c7-9189-236f8297dbdf", e._sentryDebugIdIdentifier = "sentry-dbid-3eb5b618-db37-40c7-9189-236f8297dbdf")
+        t && (e._sentryDebugIds = e._sentryDebugIds || {}, e._sentryDebugIds[t] = "1185dbaf-1c4c-4a5c-981a-daa7b7373a38", e._sentryDebugIdIdentifier = "sentry-dbid-1185dbaf-1c4c-4a5c-981a-daa7b7373a38")
     } catch (e) {}
 }(),
 function() {
@@ -48041,7 +48041,7 @@ function() {
                     }
                 },
                 O_ = function(e, t) {
-                    Og(e.link.name)
+                    Og(e.link.name, null == t ? void 0 : t.source)
                 },
                 Ox = function() {
                     var e = (0, tX._)(M5, 2),
@@ -51406,4 +51406,4 @@ function() {
             })
         }()
 }(), window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected(document.currentScript && document.currentScript.getAttribute("data-bundlename") || "Navigation");
-//# sourceMappingURL=https://sourcemaps.rbxcdn.com/navigation-2b74694e710eb56e.js.map
+//# sourceMappingURL=https://sourcemaps.rbxcdn.com/navigation-b847b389bfaa154e.js.map
