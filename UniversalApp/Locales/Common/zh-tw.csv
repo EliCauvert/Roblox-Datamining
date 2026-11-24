@@ -368,7 +368,6 @@ Authentication.Login.Label.ConnectionError.RetryWait,"對不起，連線到伺�
 
 請稍後再試。"
 Authentication.Login.Label.ConnectionError.Title,連線錯誤
-Authentication.Login.Label.DontHaveARobloxAccountCreateOne,沒有 Roblox 帳號嗎？{startTag}立即建立{endTag}
 Authentication.Login.Label.DontHaveAnAccountCreateOne,沒有帳號嗎？{startTag}立即建立{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,
@@ -1610,6 +1609,7 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,搜尋使用者名稱或�
 Feature.AddFriends.Label.ConnectWithContacts,邀請聯絡人或與已經在 Roblox 的好友交流！
 Feature.AddFriends.Label.ContactsTile,通訊錄
 Feature.AddFriends.Label.DeclineAllBackgrounded,忽略所有好友邀請。這可能需要一分鐘。
+Feature.AddFriends.Label.EmptyStatePrompt,您要和誰探索 Roblox 呢？尋找新的朋友，或新增您認識的人為好友！
 Feature.AddFriends.Label.FriendRequests,好友邀請
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,搜尋人員
 Feature.AddFriends.Label.MyQrCode,我的 QR 碼
@@ -2680,8 +2680,6 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,所有遊戲
 Feature.Build.Label.AmountAvailable,尚有 {AMOUNT} 次可使用
-Feature.Build.Label.AttachmentCountPlural,{count} 個附件
-Feature.Build.Label.AttachmentCountSingular,1 個附件
 Feature.Build.Label.Autosaved,已自動儲存
 Feature.Build.Label.Available,可供使用
 Feature.Build.Label.AvailableForPurchase,開放購買
@@ -2701,7 +2699,6 @@ Feature.Build.Label.DefaultDeveloperProductName,開發者產品
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,已刪除
 Feature.Build.Label.DescribeIdea,描述想法
-Feature.Build.Label.DescribeIdeaOrPick,描述想法或從下方選擇一個
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,說明：{DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,名稱：{NAME}
@@ -3536,7 +3533,6 @@ Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,選擇以移除
 Feature.Chat.Label.Sent,已傳送
 Feature.Chat.Label.SnoozePartyNotifications,將體驗內的隊伍通知靜音：
-Feature.Chat.Label.StartChatting,開始聊天
 Feature.Chat.Label.SwipeToReplyTooltip,滑動以回覆
 Feature.Chat.Label.TapToRemove,輕觸即可移除
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} 天
@@ -3887,6 +3883,7 @@ Feature.Friends.Error.UserBannedError,你已遭到停權，無法執行這項操
 Feature.Friends.Error.UserBlockedError,你已遭到封鎖，無法執行這項操作。
 Feature.Friends.Error.UserNotPassedCaptcha,尚未通過 Captcha 驗證。
 Feature.Friends.Feature.Friends.Heading.AddFriends,
+Feature.Friends.FriendingTooltipBody,有些人可能會透過手機號碼找到您並傳送好友邀請。接受邀請之前，請先確認對方的身分。
 Feature.Friends.Heading.Activities,
 Feature.Friends.Heading.FilterBy,
 Feature.Friends.Heading.Friends,
@@ -3920,6 +3917,7 @@ Feature.Friends.Label.FriendOfUser,{displayName} 的好友
 Feature.Friends.Label.FriendOwns,1 位好友擁有
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 位好友</b>最近玩過
 Feature.Friends.Label.FriendRequest,
+Feature.Friends.Label.FriendingTooltip,交友提示
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,好友現在稱為「聯絡對象」！
 Feature.Friends.Label.FriendsHintBold,開始遊玩！
@@ -4127,8 +4125,6 @@ Feature.GameFollows.TooltipTurnedOnNotifications,{experienceName} 的通知已�
 Feature.GameJoin.Description.DifferentServer,你將在不同的伺服器上開始遊戲
 Feature.GameJoin.Label.PlayTogether,你們可以一起玩
 Feature.GameJoin.Label.PlayTogetherSoon,你們很快就可以一起玩了
-Feature.GameJoin.Label.Played,已玩過
-Feature.GameJoin.Label.RecentCoplay,你們最近一起玩過
 Feature.GamePage.Action.BackToTop,回到頂端
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
@@ -5375,7 +5371,6 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,優惠僅適用於新的 Plus 訂閱者。
 Feature.RobloxSubscription.Description.ReferralReferrerReward,當有人使用你的連結購買 Plus 時。
 Feature.RobloxSubscription.Description.ReferralShare,邀請他人加入 Plus，對方購買 Plus 時，雙方皆可獲得 {amount} Robux。
-Feature.RobloxSubscription.Description.SpawnEffectsPlusUpsell,訂閱 Plus，探索生成效果等福利。
 Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,透過 Plus 獲得生成效果
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"按一下\u{201C}{ctaText}\u{201D}，即表示您同意 <a href=""{termsUrl}"">Roblox 訂閱條款</a>。系統將每月自動向您收取費用，直到取消訂閱為止。"
 Feature.RobloxSubscription.Heading.ReferralEntry,分享 Plus 即可獲得 {amount} Robux

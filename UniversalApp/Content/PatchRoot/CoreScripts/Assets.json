@@ -512,11 +512,13 @@
   "139684048008734": "content/textures/ui/LuaApp/graphic/starburst_center_classic_light.png",
   "139800775885170": "content/textures/ui/LuaApp/graphic/FTUXTutorial.png",
   "140037450784600": "content/textures/ui/LuaChat/graphic/gr-indicator-ingame-6x6@2x.png",
+  "140125470348492": "content/textures/ui/LuaApp/graphic/starburst_center_classic_kids_light.png",
   "140241754409316": "content/textures/ui/LuaChat/icons/share-game-thumbnail.png",
   "140266308294450": "content/textures/ui/LuaChat/graphic/ic-checkbox@3x.png",
   "140354383280818": "content/textures/ui/LuaApp/graphic/GameDetailsBackground/loadingBkg_base.jpg",
   "140425518748849": "content/textures/ui/LuaApp/graphic/light_bg@2x.png",
   "140480470380157": "content/textures/ui/LuaChatV2/actions_notificationOn.png",
+  "140530713628856": "content/textures/ui/LuaApp/graphic/starburst_center_classic_kids_dark.png",
   "140674410454059": "content/textures/ui/LuaChat/icons/ic-more@3x.png",
   "116761895340178": "content/LuaPackages/Packages/_Index/BuilderIcons/BuilderIcons/Font/BuilderIcons-Filled.ttf",
   "70443132726538": "content/LuaPackages/Packages/_Index/BuilderIcons/BuilderIcons/Font/BuilderIcons-Regular.ttf"

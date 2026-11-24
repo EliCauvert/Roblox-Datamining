@@ -370,7 +370,6 @@ Authentication.Login.Label.ConnectionError.RetryWait,"죄송합니다. 서버에
 
 잠시 기다렸다가 다시 시도하세요."
 Authentication.Login.Label.ConnectionError.Title,연결 오류
-Authentication.Login.Label.DontHaveARobloxAccountCreateOne,Roblox 계정이 없으신가요? {startTag}계정 만들기{endTag}
 Authentication.Login.Label.DontHaveAnAccountCreateOne,계정이 없으신가요? {startTag}계정 만들기{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,이메일 주소
@@ -1612,6 +1611,7 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,"사용자 이름이나 �
 Feature.AddFriends.Label.ConnectWithContacts,"연락처 목록의 친구들을 초대하거나, 이미 Roblox에 있는 친구들과 소통하세요!"
 Feature.AddFriends.Label.ContactsTile,연락처
 Feature.AddFriends.Label.DeclineAllBackgrounded,친구 요청을 모두 무시합니다. 1분 정도 걸릴 수 있습니다.
+Feature.AddFriends.Label.EmptyStatePrompt,"Roblox에서 함께하고 싶은 사람이 있나요? 친구로 추가할 사람을 찾아 보거나, 이미 알고 있는 친구와 소통하세요!"
 Feature.AddFriends.Label.FriendRequests,친구 요청
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,사람 검색
 Feature.AddFriends.Label.MyQrCode,내 QR 코드
@@ -2682,8 +2682,6 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,모든 게임
 Feature.Build.Label.AmountAvailable,{AMOUNT} 이용 가능
-Feature.Build.Label.AttachmentCountPlural,첨부 파일 {count}개
-Feature.Build.Label.AttachmentCountSingular,첨부 파일 1개
 Feature.Build.Label.Autosaved,자동 저장됨
 Feature.Build.Label.Available,이용 가능
 Feature.Build.Label.AvailableForPurchase,구매 가능
@@ -2703,7 +2701,6 @@ Feature.Build.Label.DefaultDeveloperProductName,개발자 상품
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,삭제됨
 Feature.Build.Label.DescribeIdea,아이디어 설명
-Feature.Build.Label.DescribeIdeaOrPick,아이디어를 설명하거나 아래에서 하나를 선택하세요
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,설명: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,이름: {NAME}
@@ -3539,7 +3536,6 @@ Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,선택하여 제거
 Feature.Chat.Label.Sent,전송됨
 Feature.Chat.Label.SnoozePartyNotifications,체험 내 파티 알림 음소거 대상:
-Feature.Chat.Label.StartChatting,채팅 시작
 Feature.Chat.Label.SwipeToReplyTooltip,밀어서 답장하기
 Feature.Chat.Label.TapToRemove,눌러서 제거
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}일
@@ -3890,6 +3886,7 @@ Feature.Friends.Error.UserBannedError,회원님의 작업 수행이 정지되었
 Feature.Friends.Error.UserBlockedError,회원님의 작업 수행이 차단되었습니다.
 Feature.Friends.Error.UserNotPassedCaptcha,Captcha를 통과하지 못했습니다.
 Feature.Friends.Feature.Friends.Heading.AddFriends,
+Feature.Friends.FriendingTooltipBody,일부 친구 요청은 단지 내 휴대폰 번호를 이용해 나를 찾은 사용자가 보낸 것일 수도 있습니다. 친구 초대를 수락하기 전에 내가 아는 사람인지 꼭 확인하세요.
 Feature.Friends.Heading.Activities,
 Feature.Friends.Heading.FilterBy,필터링 기준
 Feature.Friends.Heading.Friends,
@@ -3923,6 +3920,7 @@ Feature.Friends.Label.FriendOfUser,{displayName} 님의 친구
 Feature.Friends.Label.FriendOwns,친구 1명이 보유함
 Feature.Friends.Label.FriendRecentlyPlayed,<b>친구 1명</b>이 최근에 플레이함
 Feature.Friends.Label.FriendRequest,
+Feature.Friends.Label.FriendingTooltip,친구 맺기 관련 팁
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,Roblox의 친구라는 명칭이 이제 인맥으로 변경되었습니다!
 Feature.Friends.Label.FriendsHintBold,같이 플레이해요!
@@ -4130,8 +4128,6 @@ Feature.GameFollows.TooltipTurnedOnNotifications,{experienceName}에 대한 알�
 Feature.GameJoin.Description.DifferentServer,다른 서버에서 시작하게 됩니다
 Feature.GameJoin.Label.PlayTogether,함께 플레이하실 수 있습니다
 Feature.GameJoin.Label.PlayTogetherSoon,곧 함께 플레이하실 수 있습니다
-Feature.GameJoin.Label.Played,사용자가 플레이함
-Feature.GameJoin.Label.RecentCoplay,최근에 함께 플레이했습니다
 Feature.GamePage.Action.BackToTop,맨 위로 돌아가기
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
@@ -5379,7 +5375,6 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,새로운 Plus 구독자에게만 제공되는 혜택입니다.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,누군가 회원님의 링크를 통해 Plus를 구매하는 경우.
 Feature.RobloxSubscription.Description.ReferralShare,"다른 사람을 Plus에 초대한 경우, 초대 받은 사람이 Plus를 구매하면 두 사람 모두 {amount} Robux를 받습니다."
-Feature.RobloxSubscription.Description.SpawnEffectsPlusUpsell,Plus를 구독하고 스폰 효과 등 다양한 혜택을 누리세요.
 Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,Plus로 스폰 효과 받기
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D}를 클릭하면 <a href=""{termsUrl}"">Roblox 구독 약관</a>에 동의하는 것으로 간주됩니다. 구독을 취소하기 전까지 매월 자동으로 요금이 청구됩니다."
 Feature.RobloxSubscription.Heading.ReferralEntry,Plus를 공유하고 {amount} Robux  받기

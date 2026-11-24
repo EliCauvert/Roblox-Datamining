@@ -369,7 +369,6 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Sorry, es gab ein Problem 
 
 Bitte warte eine Weile und versuche es erneut."
 Authentication.Login.Label.ConnectionError.Title,Verbindungsfehler
-Authentication.Login.Label.DontHaveARobloxAccountCreateOne,Hast du noch kein Roblox-Konto? {startTag}Konto erstellen{endTag}
 Authentication.Login.Label.DontHaveAnAccountCreateOne,Du hast kein Konto? {startTag}Konto erstellen{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,
@@ -1601,6 +1600,7 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,"Finde Leute auf Roblox, i
 Feature.AddFriends.Label.ConnectWithContacts,"Lade Kontakte ein oder verbinde dich mit Freunden, die schon auf Roblox sind!"
 Feature.AddFriends.Label.ContactsTile,Kontakte
 Feature.AddFriends.Label.DeclineAllBackgrounded,Alle Freundschaftsanfragen werden ignoriert. Dies kann einen Moment dauern.
+Feature.AddFriends.Label.EmptyStatePrompt,"Mit wem wirst du Roblox entdecken? Suche nach Leuten, die du hinzufügen kannst, oder verbinde dich mit Freunden, die du schon kennst!"
 Feature.AddFriends.Label.FriendRequests,Freundschaftsanfragen
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,Nach Personen suchen
 Feature.AddFriends.Label.MyQrCode,Mein QR-Code
@@ -2671,8 +2671,6 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,Alle Spiele
 Feature.Build.Label.AmountAvailable,{AMOUNT} verfügbar
-Feature.Build.Label.AttachmentCountPlural,{count} Anhänge
-Feature.Build.Label.AttachmentCountSingular,1 Anhang
 Feature.Build.Label.Autosaved,Automatisch gespeichert
 Feature.Build.Label.Available,Verfügbar
 Feature.Build.Label.AvailableForPurchase,Zum Kauf verfügbar
@@ -2692,7 +2690,6 @@ Feature.Build.Label.DefaultDeveloperProductName,Entwicklerprodukt
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,Gelöscht
 Feature.Build.Label.DescribeIdea,Beschreibe eine Idee
-Feature.Build.Label.DescribeIdeaOrPick,Beschreibe eine Idee oder wähle unten eine aus
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,Beschreibung: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Name: {NAME}
@@ -3527,7 +3524,6 @@ Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,Zum Entfernen auswählen
 Feature.Chat.Label.Sent,Gesendet
 Feature.Chat.Label.SnoozePartyNotifications,In-Experience Party-Benachrichtigungen stummschalten für:
-Feature.Chat.Label.StartChatting,Mit dem Chatten beginnen
 Feature.Chat.Label.SwipeToReplyTooltip,Zum Antworten wischen
 Feature.Chat.Label.TapToRemove,Zum Entfernen tippen
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} Tag(e)
@@ -3878,6 +3874,7 @@ Feature.Friends.Error.UserBannedError,Du bist für diesen Vorgang gesperrt.
 Feature.Friends.Error.UserBlockedError,Du bist für diesen Vorgang blockiert.
 Feature.Friends.Error.UserNotPassedCaptcha,Die Captcha-Prüfung wurde nicht erfolgreich abgeschlossen.
 Feature.Friends.Feature.Friends.Heading.AddFriends,
+Feature.Friends.FriendingTooltipBody,"Einige Freundschaftsanfragen können von Nutzern kommen, die dich über deine Telefonnummer gefunden haben. Vergewissere dich, dass du die Personen kennst, bevor du ihre Anfrage annimmst."
 Feature.Friends.Heading.Activities,Aktivitäten
 Feature.Friends.Heading.FilterBy,Filtern nach
 Feature.Friends.Heading.Friends,
@@ -3911,6 +3908,7 @@ Feature.Friends.Label.FriendOfUser,Freund von {displayName}
 Feature.Friends.Label.FriendOwns,1 Freund besitzt
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 Freund</b> hat kürzlich gespielt
 Feature.Friends.Label.FriendRequest,
+Feature.Friends.Label.FriendingTooltip,Hinweis zu Freundschaftsanfragen
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,Freunde sind jetzt Connections!
 Feature.Friends.Label.FriendsHintBold,Lasst uns spielen!
@@ -4118,8 +4116,6 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Benachrichtigungen aktiviert f�
 Feature.GameJoin.Description.DifferentServer,Ihr werdet auf einem anderen Server starten
 Feature.GameJoin.Label.PlayTogether,Ihr könnt zusammen spielen
 Feature.GameJoin.Label.PlayTogetherSoon,Ihr könnt bald zusammen spielen
-Feature.GameJoin.Label.Played,Gespielt
-Feature.GameJoin.Label.RecentCoplay,Ihr habt kürzlich zusammen gespielt
 Feature.GamePage.Action.BackToTop,Zurück zum Seitenanfang
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
@@ -5363,7 +5359,6 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,Das Angebot gilt nur für neue Plus-Abonnenten.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,Wenn jemand über deinen Link Plus kauft.
 Feature.RobloxSubscription.Description.ReferralShare,"Lade jemanden zu Plus ein. Wenn die Person Plus kauft, erhaltet ihr beide {amount} Robux."
-Feature.RobloxSubscription.Description.SpawnEffectsPlusUpsell,"Abonniere Plus, um Vorteile wie Spawn-Effekte und mehr zu erhalten."
 Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,Hol dir Spawn-Effekte mit dem Plus-Abo
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Indem du auf \u{201C}{ctaText}\u{201D} klickst, stimmst du den <a href=""{termsUrl}"">Abonnementbedingungen von Roblox</a> zu. Dir wird jeden Monat automatisch eine Gebühr berechnet, bis du das Abo kündigst."
 Feature.RobloxSubscription.Heading.ReferralEntry,"Lade jemanden zu Plus ein, um {amount} Robux zu erhalten"

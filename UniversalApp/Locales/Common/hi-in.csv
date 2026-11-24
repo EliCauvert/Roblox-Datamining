@@ -352,7 +352,6 @@ Authentication.Login.Label.ConnectionError.RetryWait,"माफ़ करें,
 
 इंतज़ार के बाद, फिर से कोशिश करें."
 Authentication.Login.Label.ConnectionError.Title,कनेक्ट करने में गड़बड़ी हुई
-Authentication.Login.Label.DontHaveARobloxAccountCreateOne,आपके पास Roblox अकाउंट नहीं है? {startTag}एक अकाउंट क्रिएट करें{endTag}
 Authentication.Login.Label.DontHaveAnAccountCreateOne,आपके पास अकाउंट नहीं है? {startTag}एक अकाउंट बनाएँ{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,ईमेल पता
@@ -1591,6 +1590,7 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,"लोगों को �
 Feature.AddFriends.Label.ConnectWithContacts,कॉन्टैक्ट्स को इनवाइट करें या Roblox पर पहले से मौजूद फ़्रेंड्स से कनेक्ट हों!
 Feature.AddFriends.Label.ContactsTile,कॉन्टैक्ट्स
 Feature.AddFriends.Label.DeclineAllBackgrounded,सभी फ़्रेंड रिक्वेस्ट को इग्नोर किया जा रहा है. इसमें एक मिनट लग सकता है.
+Feature.AddFriends.Label.EmptyStatePrompt,"आप Roblox को किसके साथ एक्सप्लोर करेंगे? लोगों को जोड़ने के लिए सर्च करें या उन फ़्रेंड्स से कनेक्ट हों, जिन्हें आप पहले से जानते हैं!"
 Feature.AddFriends.Label.FriendRequests,फ़्रेंड रिक्वेस्ट
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,लोगों को सर्च करें
 Feature.AddFriends.Label.MyQrCode,मेरा QR कोड
@@ -2661,8 +2661,6 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,सभी गेम्स
 Feature.Build.Label.AmountAvailable,{AMOUNT} उपलब्ध हैं
-Feature.Build.Label.AttachmentCountPlural,{count} अटैचमेंट्स
-Feature.Build.Label.AttachmentCountSingular,1 अटैचमेंट
 Feature.Build.Label.Autosaved,अपने-आप सेव हो गया
 Feature.Build.Label.Available,उपलब्ध है
 Feature.Build.Label.AvailableForPurchase,खरीदने के लिए उपलब्ध
@@ -2682,7 +2680,6 @@ Feature.Build.Label.DefaultDeveloperProductName,डेवलपर प्रॉ�
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,डिलीट किया गया
 Feature.Build.Label.DescribeIdea,किसी आइडिया के बारे में बताएँ
-Feature.Build.Label.DescribeIdeaOrPick,अपना आइडिया बताएँ या नीचे से कोई आइडिया चुनें
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,विवरण : {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,नाम : {NAME}
@@ -3517,7 +3514,6 @@ Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,हटाने के लिए चुनें
 Feature.Chat.Label.Sent,भेज दिया गया
 Feature.Chat.Label.SnoozePartyNotifications,इन एक्सपीरिएंस पार्टी नोटिफ़िकेशन को म्यूट करें:
-Feature.Chat.Label.StartChatting,चैट करना शुरू करें
 Feature.Chat.Label.SwipeToReplyTooltip,जवाब देने के लिए स्वाइप करें
 Feature.Chat.Label.TapToRemove,हटाने के लिए टैप करें
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}दिन
@@ -3868,6 +3864,7 @@ Feature.Friends.Error.UserBannedError,आप पर इस ऑपरेशन �
 Feature.Friends.Error.UserBlockedError,आपको यह ऑपरेशन करने से ब्लॉक कर दिया गया है.
 Feature.Friends.Error.UserNotPassedCaptcha,आपने कैप्चा पास नहीं किया है.
 Feature.Friends.Feature.Friends.Heading.AddFriends,
+Feature.Friends.FriendingTooltipBody,"कुछ फ़्रेंड रिक्वेस्ट उन यूज़र्स से मिल सकती है, जिन्होंने आपको आपके फ़ोन नंबर से खोजा है. फ़्रेंड्स बनने से पहले पक्का कर लें कि आप उनसे परिचित हैं."
 Feature.Friends.Heading.Activities,ऐक्टिविटीज़
 Feature.Friends.Heading.FilterBy,इस आधार पर फ़िल्टर करें
 Feature.Friends.Heading.Friends,
@@ -3901,6 +3898,7 @@ Feature.Friends.Label.FriendOfUser,{displayName} का फ़्रेंड
 Feature.Friends.Label.FriendOwns,1 फ़्रेंड के पास है
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 फ़्रेंड ने</b> हाल ही में खेला
 Feature.Friends.Label.FriendRequest,
+Feature.Friends.Label.FriendingTooltip,फ़्रेंडिंग टिप
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,फ़्रेंड्स अब कनेक्शन हैं!
 Feature.Friends.Label.FriendsHintBold,"चलिए, खेलें!"
@@ -4108,8 +4106,6 @@ Feature.GameFollows.TooltipTurnedOnNotifications,{experienceName} के लि�
 Feature.GameJoin.Description.DifferentServer,आपके पास किसी दूसरे सर्वर में शुरू करने का विकल्प होगा
 Feature.GameJoin.Label.PlayTogether,आपके पास एक साथ खेलने की सुविधा है
 Feature.GameJoin.Label.PlayTogetherSoon,आपके पास जल्द ही एक साथ खेलने की सुविधा होगी
-Feature.GameJoin.Label.Played,खेला गया
-Feature.GameJoin.Label.RecentCoplay,आपने हाल ही में साथ खेला है
 Feature.GamePage.Action.BackToTop,वापस ऊपर जाएँ
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,स्पॉन्सर किया गया
@@ -5356,7 +5352,6 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,ऑफ़र सिर्फ़ Plus के नए सब्सक्राइबर्स के लिए मान्य है.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,जब कोई आपके लिंक से Plus खरीदता है.
 Feature.RobloxSubscription.Description.ReferralShare,किसी को Plus जॉइन करने के लिए इन्वाइट करें और उनके Plus खरीदने पर आप दोनों को {amount} Robux मिलेंगे.
-Feature.RobloxSubscription.Description.SpawnEffectsPlusUpsell,"स्पॉन इफ़ेक्ट्स और अन्य फ़ायदों का लाभ उठाने के लिए, Plus को सब्सक्राइब करें."
 Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,Plus के सब्सक्रिप्शन के साथ स्पॉन इफ़ेक्ट्स पाएँ
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D} पर क्लिक करने का मतलब है कि आप <a href=""{termsUrl}"">Roblox के सब्सक्रिप्शन की शर्तों</a> से सहमत हैं. आपके कैंसिल करने तक आपसे हर महीने अपने आप शुल्क ले लिया जाएगा."
 Feature.RobloxSubscription.Heading.ReferralEntry,Plus शेयर करें और {amount} Robux पाएँ

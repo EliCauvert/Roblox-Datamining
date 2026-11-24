@@ -369,7 +369,6 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Maaf, terjadi eror saat me
 
 Tunggu dan coba lagi."
 Authentication.Login.Label.ConnectionError.Title,Kesalahan koneksi
-Authentication.Login.Label.DontHaveARobloxAccountCreateOne,Tidak punya akun Roblox? {startTag}Buat akun{endTag}
 Authentication.Login.Label.DontHaveAnAccountCreateOne,Tidak punya akun? {startTag}Buat akun{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,Alamat email
@@ -1611,6 +1610,7 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Temukan pengguna di Roblox
 Feature.AddFriends.Label.ConnectWithContacts,Undang kontak atau terhubung dengan teman yang sudah ada di Roblox.
 Feature.AddFriends.Label.ContactsTile,Kontak
 Feature.AddFriends.Label.DeclineAllBackgrounded,Mengabaikan semua permintaan teman. Ini mungkin membutuhkan waktu satu menit.
+Feature.AddFriends.Label.EmptyStatePrompt,Dengan siapa kamu akan menjelajahi Roblox? Cari pengguna untuk kamu tambahkan sebagai teman atau terhubung dengan teman yang sudah kamu kenal.
 Feature.AddFriends.Label.FriendRequests,Permintaan Pertemanan
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,Cari orang
 Feature.AddFriends.Label.MyQrCode,Kode QR Saya
@@ -2681,8 +2681,6 @@ Feature.Build.Label.AdvancedModel,Tingkat Lanjut
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,Semua game
 Feature.Build.Label.AmountAvailable,{AMOUNT} tersedia
-Feature.Build.Label.AttachmentCountPlural,{count} lampiran
-Feature.Build.Label.AttachmentCountSingular,1 lampiran
 Feature.Build.Label.Autosaved,Disimpan otomatis
 Feature.Build.Label.Available,tersedia
 Feature.Build.Label.AvailableForPurchase,Tersedia untuk dibeli
@@ -2702,7 +2700,6 @@ Feature.Build.Label.DefaultDeveloperProductName,produk developer
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,Dihapus
 Feature.Build.Label.DescribeIdea,Deskripsikan ide
-Feature.Build.Label.DescribeIdeaOrPick,Jelaskan ide atau pilih salah satu di bawah ini
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,Deskripsi: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Nama: {NAME}
@@ -3535,7 +3532,6 @@ Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,Pilih untuk menghapus
 Feature.Chat.Label.Sent,Terkirim
 Feature.Chat.Label.SnoozePartyNotifications,Bisukan notifikasi party dalam pengalaman virtual selama:
-Feature.Chat.Label.StartChatting,Mulai chat
 Feature.Chat.Label.SwipeToReplyTooltip,Geser untuk membalas
 Feature.Chat.Label.TapToRemove,Ketuk untuk menghapus
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}hr
@@ -3886,6 +3882,7 @@ Feature.Friends.Error.UserBannedError,Kamu dilarang melakukan tindakan ini.
 Feature.Friends.Error.UserBlockedError,Kamu diblokir untuk melakukan tindakan ini.
 Feature.Friends.Error.UserNotPassedCaptcha,Kamu belum berhasil melewati Captcha.
 Feature.Friends.Feature.Friends.Heading.AddFriends,Tambah Teman
+Feature.Friends.FriendingTooltipBody,Sebagian permintaan pertemanan mungkin berasal dari pengguna yang menemukan kamu dari nomor telepon kamu. Pastikan kamu memang kenal dengan mereka sebelum menerima permintaan pertemanan mereka.
 Feature.Friends.Heading.Activities,
 Feature.Friends.Heading.FilterBy,Filter Berdasarkan
 Feature.Friends.Heading.Friends,
@@ -3919,6 +3916,7 @@ Feature.Friends.Label.FriendOfUser,Teman dari {displayName}
 Feature.Friends.Label.FriendOwns,1 Teman memiliki
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 Teman</b> telah bermain baru-baru ini
 Feature.Friends.Label.FriendRequest,
+Feature.Friends.Label.FriendingTooltip,Tip Berteman
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,Teman sekarang disebut Koneksi!
 Feature.Friends.Label.FriendsHintBold,Ayo main
@@ -4126,8 +4124,6 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Notifikasi dinyalakan untuk {ex
 Feature.GameJoin.Description.DifferentServer,Kamu akan memulai di server yang berbeda
 Feature.GameJoin.Label.PlayTogether,Kamu bisa bermain bersama
 Feature.GameJoin.Label.PlayTogetherSoon,Kamu bisa segera bermain bersama
-Feature.GameJoin.Label.Played,pernah dimainkan
-Feature.GameJoin.Label.RecentCoplay,Baru-baru ini kalian bermain bersama
 Feature.GamePage.Action.BackToTop,Kembali ke atas
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
@@ -5374,7 +5370,6 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,Penawaran hanya berlaku untuk subscriber Plus baru.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,Ketika ada yang membeli Plus menggunakan link-mu.
 Feature.RobloxSubscription.Description.ReferralShare,Undang seseorang ke Plus dan kalian akan mendapatkan {amount} Robux saat dia membeli Plus.
-Feature.RobloxSubscription.Description.SpawnEffectsPlusUpsell,Subscribe Plus untuk mendapatkan manfaat seperti efek spawn dan lainnya.
 Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,Dapatkan efek spawn dengan Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Dengan mengklik \u{201C}{ctaText}\u{201D}, kamu menyetujui <a href=""{termsUrl}"">Ketentuan Subscription Roblox</a>. Biaya akan otomatis dibebankan setiap bulan hingga kamu membatalkan."
 Feature.RobloxSubscription.Heading.ReferralEntry,Bagikan Plus untuk mendapatkan {amount} Robux
