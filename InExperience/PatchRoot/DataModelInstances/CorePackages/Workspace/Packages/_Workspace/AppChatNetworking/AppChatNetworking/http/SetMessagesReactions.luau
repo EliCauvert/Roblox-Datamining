@@ -5,7 +5,7 @@ local Default = require(AppChatNetworking.url.HttpRequest).default
 
 return function(p1, Conversation_id, Message_id, Emote_id, Current_emote_id)
 	-- upvalues: Default (copy), HttpService (copy), CHATPLATFORMBASEURLModule (copy)
-	return (p1 or Default)(`{CHATPLATFORMBASEURLModule}/v1/set-message-reaction`, "POST", {
+	return (p1 or Default)(`{CHATPLATFORMBASEURLModule}/v1/set-messages-reactions`, "POST", {
 		postBody = HttpService:JSONEncode({
 			conversation_id = Conversation_id,
 			message_id = Message_id,

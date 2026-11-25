@@ -85,7 +85,7 @@ return function(p1)
 	
 	return {
 		isOpen = NoIsOpen,
-		creatorCreditRecovery = if FFlagBuildExperienceModelPickerModule then UseChatSheetFundingRecoveryModule(UseChatSessionCoreModuleResult, UseBuildModelSelectionModuleResult, UniverseId, p1.placeId or CurrentExperienceProjectModule.placeId, p1.sessionId, NoIsOpen) else nil,
+		creatorCreditRecovery = if FFlagBuildExperienceModelPickerModule then UseChatSheetFundingRecoveryModule(UseChatSessionCoreModuleResult, UseBuildModelSelectionModuleResult, UniverseId, p1.placeId or CurrentExperienceProjectModule.placeId, p1.sessionId) else nil,
 		onClose = OnClose,
 		sheetComponent = FoundationModule.Sheet,
 		snapPoints = p1.snapPoints,

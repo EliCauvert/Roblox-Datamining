@@ -1813,7 +1813,6 @@ Feature.Friends.Action.Unfriend,
 Feature.Friends.Action.ViewPlatformProfile,Просмотреть карту игрока
 Feature.Friends.Button.GotIt,
 Feature.Friends.Description.ContactsModal,"Твои контакты есть в Roblox! Добавь их в друзья, чтобы увидеть их полные аватары и профили. Перейди на страницу «Добавить друзей», чтобы увидеть больше людей, которых ты можешь знать."
-Feature.Friends.Description.FoundFromContactImporter,Отправлено от импортера контактов
 Feature.Friends.Description.FromContacts,Из контактов
 Feature.Friends.Description.FromContactsV2,{contactName} из контактов
 Feature.Friends.Description.FromQrCode,Из QR-кода
@@ -1870,7 +1869,6 @@ Feature.Friends.Label.SentFromWithContext,Отправлено из: {gameName}
 Feature.Friends.Label.SingularMutualFriend,общий друг
 Feature.Friends.Label.Suggested,Рекомендуемый
 Feature.Friends.Label.Unfollowed,Подписка отменена
-Feature.Friends.Label.YouAreFollowing,Подписка
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,"Хочешь, чтобы мы рекомендовали тебя другим пользователям Roblox, у которых есть твой номер телефона?"
 Feature.Friends.Message.EmptyState,"Когда твои контакты станут доступны, ты сможешь найти их в разделе «Добавить друзей»."
@@ -1892,7 +1890,6 @@ Feature.Friends.Text.NoConnections,"Ни одного контакта не до
 Feature.Friends.Text.NoFriends,"Друзья не добавлены. Чтобы начать, найди и добавь друзей в Roblox."
 Feature.FriendsMenu.Label.SelectedFriendsCount,Выбрано друзей: {numerator}/{denominator}
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,Выбрано друзей: {selectedCount}
-Feature.GameDetails.Action.Continue,
 Feature.GameDetails.Action.GiveFeedback,
 Feature.GameDetails.Action.NotInterested,Не интересует
 Feature.GameDetails.Action.Report,
@@ -1916,10 +1913,8 @@ Feature.GameDetails.Label.Updated,Обновлено
 Feature.GameDetails.Label.VoiceChat,
 Feature.GameDetails.Label.Yes,
 Feature.GameDetails.Message.AnonymousFeedbackTermsOfUse,Ответы публикуются анонимно и считаются обратной связью в соответствии с {underlineStart}Условиями использования Roblox{underlineEnd}.
-Feature.GameDetails.Message.ExternalLinkWarning,"Нажав «Продолжить», ты перейдёшь на сайт, не принадлежащий Roblox. Он регулируется другими Условиями использования и другой Политикой конфиденциальности."
 Feature.GameDetails.Message.HelpImproveExperience,Помоги улучшить твоё взаимодействие с Roblox
 Feature.GameDetails.Message.HidingExperienceQuestion,Почему ты скрываешь этот плейс?
-Feature.GameDetails.Message.LeavingRobloxTitle,Ты покидаешь Roblox
 Feature.GameDetails.Message.PurchaseGameV2,Разблокировать доступ к игре {gameName} за {X} Robux?
 Feature.GameDetails.Message.SuggestLessOften,Мы будем предлагать это реже
 Feature.GameDetails.RatingPercentOnly,Рейтинг {percentRating}%
@@ -1931,7 +1926,6 @@ Feature.GameFollows.TooltipTurnedOffNotifications,Уведомления отк�
 Feature.GameFollows.TooltipTurnedOnNotifications,Уведомления включены для плейса {experienceName}
 Feature.GamePage.Action.BackToTop,Наверх
 Feature.GamePage.Label.Sponsored,
-Feature.GamePage.LabelCancelField,
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,Этот плейс недоступен в связи со статусом подтверждения возраста.
 Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,Гости не могут присоединиться к этой игре.
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,Необходимо оплатить вход в этот плейс.
@@ -2714,8 +2708,8 @@ IAPExperience.InsufficientRobux.Text.YouNeed,Необходимо ещё {robux}
 IAPExperience.InsufficientRobux.Title.InsufficientRobux,
 IAPExperience.LeaveRoblox.Action.Cancel,
 IAPExperience.LeaveRoblox.Action.Continue,
-IAPExperience.LeaveRoblox.Text.ExternalWebsiteWarning,
-IAPExperience.LeaveRoblox.Title.LeavingRoblox,
+IAPExperience.LeaveRoblox.Text.ExternalWebsiteWarning,"Нажав «Продолжить», ты перейдёшь на сайт, не принадлежащий Roblox. Он регулируется другими Условиями использования и другой Политикой конфиденциальности."
+IAPExperience.LeaveRoblox.Title.LeavingRoblox,Ты покидаешь Roblox
 IAPExperience.Loading.Text.PurchasingItem,Покупка предмета...
 IAPExperience.Loading.Text.PurchasingRobux,Покупка Robux...
 IAPExperience.Loading.Text.WaitingForPurchase,Ожидание покупки...

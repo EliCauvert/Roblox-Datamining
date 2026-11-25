@@ -12,10 +12,9 @@ local UseGroupsWrapperContextModule = require(Groups.Contexts.useGroupsWrapperCo
 local UseGroupsAnalyticsModule = require(Groups.Hooks.useGroupsAnalytics)
 local EventNamesModule = require(Groups.Analytics.EventNames)
 local SearchBarWrapperModule = require(script.Parent.SearchBarWrapper)
-local FFlagLuaAppAddTestIdsForArrow = require(Parent.SharedFlags).FFlagLuaAppAddTestIdsForArrow
 
 return function(p1)
-	-- upvalues: UseGroupsWrapperContextModule (copy), UseGroupsAnalyticsModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), EventNamesModule (copy), View (copy), SearchBarWrapperModule (copy), Button (copy), FFlagLuaAppAddTestIdsForArrow (copy), ButtonVariant (copy), InputSize (copy)
+	-- upvalues: UseGroupsWrapperContextModule (copy), UseGroupsAnalyticsModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), EventNamesModule (copy), View (copy), SearchBarWrapperModule (copy), Button (copy), ButtonVariant (copy), InputSize (copy)
 	local UseGroupsWrapperContextModuleResult = UseGroupsWrapperContextModule()
 	local UseGroupsAnalyticsModuleResult = UseGroupsAnalyticsModule()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -39,7 +38,6 @@ return function(p1)
 			AutomaticSize = Enum.AutomaticSize.Y
 		}, {
 			Button = ReactModule.createElement(Button, {
-				testId = if FFlagLuaAppAddTestIdsForArrow then "--communities-list-button-create" else nil,
 				text = UseLocalizationResult.createGroup,
 				variant = ButtonVariant.Standard,
 				size = InputSize.Medium,

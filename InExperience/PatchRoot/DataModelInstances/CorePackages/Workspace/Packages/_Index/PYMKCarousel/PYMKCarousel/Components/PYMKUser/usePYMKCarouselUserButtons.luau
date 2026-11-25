@@ -18,7 +18,6 @@ local ContextualInfoTypes = require(Parent1.SocialCommon).Enums.ContextualInfoTy
 local _ = require(Parent.Common.DirectRecommendationTypes)
 local GetFFlagPYMKDisableButtonsOnFetchModule = require(Parent.Flags.getFFlagPYMKDisableButtonsOnFetch)
 local FFlagMigrateFriendshipStatusesPYMKModule = require(Parent.Flags.FFlagMigrateFriendshipStatusesPYMK)
-local FFlagPYMKViewProfileAfterAcceptModule = require(Parent.Flags.FFlagPYMKViewProfileAfterAccept)
 local FFlagLuaAppEnableSduiHomePage = require(Parent1.SharedFlags).FFlagLuaAppEnableSduiHomePage
 local FFlagPymkCarouselExtendProps = require(Parent1.SharedFlags).FFlagPymkCarouselExtendProps
 local UseGetFriendshipStatusFunction = require(Parent1.FriendsHydrationReact).useGetFriendshipStatus
@@ -36,7 +35,7 @@ local function _(p1, p2, p3): boolean
 end
 
 return function(p1)
-	-- upvalues: UseDispatchFunction (copy), UseSelectorFunction (copy), FFlagMigrateFriendshipStatusesPYMKModule (copy), UseGetFriendshipStatusFunction (copy), config (copy), RoduxFriends (copy), FFlagLuaAppEnableSduiHomePage (copy), FFlagPymkCarouselExtendProps (copy), GetDeepValueFunction (copy), GetFFlagPYMKDisableButtonsOnFetchModule (copy), NetworkingFriends (copy), NetworkStatus (copy), React (copy), Images (copy), FFlagPYMKViewProfileAfterAcceptModule (copy), EventNames (copy), GetResult (copy), TextKeysModule (copy), FocusNavigationEventNameEnum (copy), HttpService (copy), ContextualInfoTypes (copy), FriendshipOriginSourceType (copy), config1 (copy), FFlagEnableFriendsStoreChallengeInterceptor (copy), FriendsStoreChallengeNetworkModule (copy)
+	-- upvalues: UseDispatchFunction (copy), UseSelectorFunction (copy), FFlagMigrateFriendshipStatusesPYMKModule (copy), UseGetFriendshipStatusFunction (copy), config (copy), RoduxFriends (copy), FFlagLuaAppEnableSduiHomePage (copy), FFlagPymkCarouselExtendProps (copy), GetDeepValueFunction (copy), GetFFlagPYMKDisableButtonsOnFetchModule (copy), NetworkingFriends (copy), NetworkStatus (copy), React (copy), Images (copy), EventNames (copy), GetResult (copy), TextKeysModule (copy), FocusNavigationEventNameEnum (copy), HttpService (copy), ContextualInfoTypes (copy), FriendshipOriginSourceType (copy), config1 (copy), FFlagEnableFriendsStoreChallengeInterceptor (copy), FriendsStoreChallengeNetworkModule (copy)
 	local Text = tostring(p1.userId)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseSelectorResult = UseSelectorFunction(function(p2): string
@@ -85,7 +84,7 @@ return function(p1)
 		}
 	end) else nil
 	local UseMemoResult = React.useMemo(function()
-		-- upvalues: UseGetFriendshipStatusResult (ref), Images (upval), FFlagPYMKViewProfileAfterAcceptModule (upval), p1 (copy), IsHasIncomingFriendRequest (ref), FFlagMigrateFriendshipStatusesPYMKModule (upval), GetFFlagPYMKDisableButtonsOnFetchModule (upval), UseSelectorResult1 (copy), EventNames (upval), Recommendation (ref), Text (copy), GetResult (upval), UseDispatchResult (copy), NetworkingFriends (upval), UseSelectorResult (copy), TextKeysModule (upval), FocusNavigationEventNameEnum (upval), HttpService (upval), ContextualInfoTypes (upval), FriendshipOriginSourceType (upval), config1 (upval), FFlagEnableFriendsStoreChallengeInterceptor (upval), FriendsStoreChallengeNetworkModule (upval)
+		-- upvalues: UseGetFriendshipStatusResult (ref), Images (upval), IsHasIncomingFriendRequest (ref), FFlagMigrateFriendshipStatusesPYMKModule (upval), GetFFlagPYMKDisableButtonsOnFetchModule (upval), UseSelectorResult1 (copy), p1 (copy), EventNames (upval), Recommendation (ref), Text (copy), GetResult (upval), UseDispatchResult (copy), NetworkingFriends (upval), UseSelectorResult (copy), TextKeysModule (upval), FocusNavigationEventNameEnum (upval), HttpService (upval), ContextualInfoTypes (upval), FriendshipOriginSourceType (upval), config1 (upval), FFlagEnableFriendsStoreChallengeInterceptor (upval), FriendsStoreChallengeNetworkModule (upval)
 		return if UseGetFriendshipStatusResult == Enum.FriendStatus.FriendRequestSent then {
 			{
 				isSecondary = true,
@@ -95,21 +94,6 @@ return function(p1)
 				focusEvent = nil,
 				icon = Images["icons/actions/friends/friendpending"],
 				onActivated = function() end
-			}
-		} elseif FFlagPYMKViewProfileAfterAcceptModule and UseGetFriendshipStatusResult == Enum.FriendStatus.Friend then {
-			{
-				isSecondary = false,
-				isDisabled = false,
-				isLoading = false,
-				buttonType = "View",
-				focusEvent = nil,
-				icon = Images["icons/menu/profile"],
-				onActivated = function()
-					-- upvalues: p1 (upval)
-					if p1.onViewProfile then
-						p1.onViewProfile()
-					end
-				end
 			}
 		} elseif IsHasIncomingFriendRequest or FFlagMigrateFriendshipStatusesPYMKModule and UseGetFriendshipStatusResult == Enum.FriendStatus.FriendRequestReceived then {
 			{
@@ -180,8 +164,7 @@ return function(p1)
 		}
 	end, {
 		UseGetFriendshipStatusResult, Text, IsHasIncomingFriendRequest, Recommendation,
-		UseSelectorResult, UseDispatchResult, p1.userPresenceType,
-		if FFlagPYMKViewProfileAfterAcceptModule then p1.onViewProfile else nil
+		UseSelectorResult, UseDispatchResult, p1.userPresenceType
 	})
 	
 	return React.useCallback(function()

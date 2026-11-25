@@ -1,9 +1,7 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
-local FoundationModule = require(Parent.Foundation)
-local LocalizationModule = require(Parent.Localization)
+local _ = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
-local _ = require(Parent.DataHydration.CreatorAgentChat)
 local GetBuildHomeTabStoreModule = require(BuildExperience.Stores.GetBuildHomeTabStore)
 local GetSearchQueryStoreModule = require(BuildExperience.Stores.GetSearchQueryStore)
 local _ = require(BuildExperience.Stores.GetSearchQueryStore.createSearchQueryStore)
@@ -12,14 +10,12 @@ local UseBuildHomeTabsPageLayoutModule = require(script.Parent.useBuildHomeTabsP
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 local FFlagBuildExperienceHomeTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceHomeTelemetry)
 local FFlagBuildUpdatedSearchUXForGAModule = require(BuildExperience.Flags.FFlagBuildUpdatedSearchUXForGA)
-local FFlagBuildExperienceUnreadServiceModule = require(BuildExperience.Flags.FFlagBuildExperienceUnreadService)
 local FFlagBuildInspirationTabModule = require(BuildExperience.Flags.FFlagBuildInspirationTab)
 local BUILDHOMETAB = require(BuildExperience.Stores.GetBuildHomeTabStore.createBuildHomeTabStore).BUILD_HOME_TAB
-local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
-local StatusIndicatorVariant = FoundationModule.Enums.StatusIndicatorVariant
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
 return function(p1)
-	-- upvalues: GetBuildHomeTabStoreModule (copy), FFlagBuildUpdatedSearchUXForGAModule (copy), GetSearchQueryStoreModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildInspirationTabModule (copy), FFlagBuildExperienceUnreadServiceModule (copy), ReactModule (copy), BUILDHOMETAB (copy), StatusIndicatorVariant (copy), FFlagBuildExperienceHomeTelemetryModule (copy), SendBuildExperienceEventModule (copy), UseBuildHomeTabsPageLayoutModule (copy)
+	-- upvalues: GetBuildHomeTabStoreModule (copy), FFlagBuildUpdatedSearchUXForGAModule (copy), GetSearchQueryStoreModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildInspirationTabModule (copy), ReactModule (copy), BUILDHOMETAB (copy), FFlagBuildExperienceHomeTelemetryModule (copy), SendBuildExperienceEventModule (copy), UseBuildHomeTabsPageLayoutModule (copy)
 	local TabStore = p1.tabStore or GetBuildHomeTabStoreModule()
 	local UseTabResult = TabStore.useTab()
 	local UseIsSearchActiveResult = if FFlagBuildUpdatedSearchUXForGAModule then nil else (p1.searchQueryStore or GetSearchQueryStoreModule()).useIsSearchActive()
@@ -29,7 +25,7 @@ return function(p1)
 		inspiration = if FFlagBuildInspirationTabModule then LocalizationStringsModule.BUILD_HOME_TAB_INSPIRATION else nil
 	})
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: BUILDHOMETAB (upval), UseLocalizationResult (copy), FFlagBuildExperienceUnreadServiceModule (upval), p1 (copy), StatusIndicatorVariant (upval), FFlagBuildInspirationTabModule (upval)
+		-- upvalues: BUILDHOMETAB (upval), UseLocalizationResult (copy), FFlagBuildInspirationTabModule (upval)
 		local List = {
 			{
 				id = BUILDHOMETAB.Games,
@@ -41,14 +37,6 @@ return function(p1)
 			}
 		}
 		
-		if FFlagBuildExperienceUnreadServiceModule and p1.unreadSummary ~= nil then
-			if p1.unreadSummary.hasUnreadGames then
-				List[1].indicator = { variant = StatusIndicatorVariant.Emphasis }
-			end
-			if p1.unreadSummary.hasUnreadPlaytests then
-				List[2].indicator = { variant = StatusIndicatorVariant.Emphasis }
-			end
-		end
 		if FFlagBuildInspirationTabModule then
 			table.insert(List, {
 				id = BUILDHOMETAB.Inspiration,
@@ -56,12 +44,7 @@ return function(p1)
 			})
 		end
 		return List
-	end, if FFlagBuildExperienceUnreadServiceModule then {
-		p1.unreadSummary or false,
-		UseLocalizationResult.games,
-		UseLocalizationResult.previews,
-		UseLocalizationResult.inspiration
-	} else {
+	end, {
 		UseLocalizationResult.games,
 		UseLocalizationResult.previews,
 		UseLocalizationResult.inspiration

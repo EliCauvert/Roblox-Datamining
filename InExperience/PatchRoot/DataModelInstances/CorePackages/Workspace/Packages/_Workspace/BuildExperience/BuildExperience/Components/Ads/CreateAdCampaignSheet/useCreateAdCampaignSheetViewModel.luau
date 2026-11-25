@@ -1,6 +1,5 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
-local HttpService = game:GetService("HttpService")
 local LocalizationService = game:GetService("LocalizationService")
 local CreatorCreditModule = require(Parent.DataHydration.CreatorCredit)
 local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
@@ -85,8 +84,8 @@ local function toCampaignOption(Feedback, Title, RunDates, Description, Free)
 	}
 end
 
-local function useTwoOptionsControls(IsOpen, Callback, Callback2, CampaignOffers, IsIsCreatePending, IsHasCreateError, Callback1, AttemptedOption, AdsManager, UniverseId, NoIsDismissed, IsRetryPending, IsSheetHiddenAfterRetry, p3, UniverseId1)
-	-- upvalues: ResponsiveModule (copy), CreatorAgentChatModule (copy), AdCampaignEligibilityUtilsModule (copy), ReactModule (copy), SignalsReactModule (copy), Signal (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), FFlagBuildAdsFundedNotCreatedError (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), UseDefaultFocusBehaviorFunction (copy), UseOpenBuyRobuxWebViewModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), GetAdsManagerUrlModule (copy), UseOpenWebViewWithResumeRefreshModule (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), SendBuildExperienceEventModule (copy), HttpService (copy)
+local function useTwoOptionsControls(IsOpen, Callback1, Callback, CampaignOffers, IsIsCreatePending, IsHasCreateError, Callback2, AttemptedOption, AdsManager, UniverseId, NoIsDismissed, IsRetryPending, IsSheetHiddenAfterRetry, p3, UniverseId1)
+	-- upvalues: ResponsiveModule (copy), CreatorAgentChatModule (copy), AdCampaignEligibilityUtilsModule (copy), ReactModule (copy), SignalsReactModule (copy), Signal (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), FFlagBuildAdsFundedNotCreatedError (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), UseDefaultFocusBehaviorFunction (copy), UseOpenBuyRobuxWebViewModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), GetAdsManagerUrlModule (copy), UseOpenWebViewWithResumeRefreshModule (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), SendBuildExperienceEventModule (copy)
 	local UsePreferredInputResult = ResponsiveModule.usePreferredInput()
 	local AdCampaignCheckFundsFunction = CreatorAgentChatModule.getCreatorAgentChatStore(false).adCampaignCheckFunds
 	local DefaultOffer = AdCampaignEligibilityUtilsModule.getDefaultOffer(CampaignOffers)
@@ -161,17 +160,17 @@ local function useTwoOptionsControls(IsOpen, Callback, Callback2, CampaignOffers
 		isFocusable = IsOpen and not NoCurrent1_1,
 		eventMap = EventMap,
 		eventHandlers = ReactModule.useMemo(function()
-			-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), Callback (copy)
+			-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), Callback1 (copy)
 			return {
 				[FocusNavigationEventNameEnum.NavigateBack] = {
 					handler = InputHandlersModule.onRelease(function(p4)
-						-- upvalues: Callback (upval)
-						Callback()
+						-- upvalues: Callback1 (upval)
+						Callback1()
 						p4:cancel()
 					end)
 				}
 			}
-		end, { Callback })
+		end, { Callback1 })
 	})))
 	local UseResult1 = ReactModule.useCallback(function(p4)
 		-- upvalues: FFlagBuildAdsFundedNotCreatedError (upval), p3 (copy), UseStateResult2 (copy)
@@ -188,8 +187,8 @@ local function useTwoOptionsControls(IsOpen, Callback, Callback2, CampaignOffers
 	local CanFund = IsPaid and (UseSignalStateResult.status == "succeeded" and (Result ~= nil and Result.canFund))
 	local NoCanFund: boolean = not IsIsCreatePending and (not NoCurrent and (IsPaid and (UseSignalStateResult.status == "succeeded" and (Result ~= nil and not Result.canFund))))
 	local UseResult2 = ReactModule.useCallback(function()
-		-- upvalues: Callback1 (copy), IsOpen (copy), IsPaid (copy), UseResult (copy), Feedback (copy)
-		Callback1()
+		-- upvalues: Callback2 (copy), IsOpen (copy), IsPaid (copy), UseResult (copy), Feedback (copy)
+		Callback2()
 		
 		if IsOpen and IsPaid then
 			UseResult(Feedback)
@@ -199,50 +198,28 @@ local function useTwoOptionsControls(IsOpen, Callback, Callback2, CampaignOffers
 		IsPaid,
 		Feedback,
 		UseResult,
-		Callback1
+		Callback2
 	})
 	local UseOpenBuyRobuxWebViewModuleResult = UseOpenBuyRobuxWebViewModule(UseResult2)
 	local UseOpenWebViewWithResumeRefreshModuleResult = nil
 	UseOpenWebViewWithResumeRefreshModuleResult = if FFlagBuildAdsManagerUniverseUrlModule then UseOpenWebViewWithResumeRefreshModule(GetAdsManagerUrlModule.getAdsManagerUrl(UniverseId), AdsManager, UseResult2) else UseOpenWebViewWithResumeRefreshModule(GetAdsManagerUrlModule.getDefaultAdsManagerUrl(), AdsManager, UseResult2)
-	local UseResult3 = if FFlagBuildExperienceAdsAndRobuxTelemetryModule then ReactModule.useCallback(function(p4, Context, BuyRobuxAttemptId)
+	local UseResult3 = if FFlagBuildExperienceAdsAndRobuxTelemetryModule then ReactModule.useCallback(function(p4, Context)
 		-- upvalues: UseStateResult (copy), SendBuildExperienceEventModule (upval), UniverseId1 (copy)
-		local config = {
-			context = Context,
-			isInExperience = if game.GameId == 0 then "false" else "true"
-		}
+		local config = { context = Context }
 		
 		if UseStateResult ~= nil then
 			config.campaignOption = UseStateResult
 		end
-		if BuyRobuxAttemptId ~= nil then
-			config.buyRobuxAttemptId = BuyRobuxAttemptId
-		end
 		SendBuildExperienceEventModule(p4, { universeId = UniverseId1 }, config)
 	end, { UseStateResult, UniverseId1 }) else nil
-	local UseResult4 = if FFlagBuildExperienceAdsAndRobuxTelemetryModule then ReactModule.useCallback(function(Context)
-		-- upvalues: HttpService (upval), UseResult3 (copy), UseOpenBuyRobuxWebViewModuleResult (copy), UniverseId1 (copy)
-		local Guid = HttpService:GenerateGUID(false)
-		
+	local UseResult4 = if FFlagBuildExperienceAdsAndRobuxTelemetryModule then ReactModule.useCallback(function()
+		-- upvalues: UseResult3 (copy), UseOpenBuyRobuxWebViewModuleResult (copy)
 		if UseResult3 ~= nil then
-			UseResult3("BUY_ROBUX_CLICK", Context, Guid)
+			UseResult3("BUY_ROBUX_CLICK", "ad_campaign_balance")
 		end
-		UseOpenBuyRobuxWebViewModuleResult({
-			id = Guid,
-			context = Context,
-			granularity = { universeId = UniverseId1 }
-		})
-	end, {
-		UseResult3,
-		UseOpenBuyRobuxWebViewModuleResult,
-		UniverseId1
-	}) else nil
+		UseOpenBuyRobuxWebViewModuleResult()
+	end, { UseResult3, UseOpenBuyRobuxWebViewModuleResult }) else nil
 	local UseResult5 = if FFlagBuildExperienceAdsAndRobuxTelemetryModule then ReactModule.useCallback(function()
-		-- upvalues: UseResult4 (copy)
-		if UseResult4 ~= nil then
-			UseResult4("ad_campaign_balance")
-		end
-	end, { UseResult4 }) else nil
-	local UseResult6 = if FFlagBuildExperienceAdsAndRobuxTelemetryModule then ReactModule.useCallback(function()
 		-- upvalues: UseResult3 (copy), UseOpenWebViewWithResumeRefreshModuleResult (ref)
 		if UseResult3 ~= nil then
 			UseResult3("ADS_MANAGER_OPEN_CLICK", "ad_credits_callout")
@@ -263,20 +240,17 @@ local function useTwoOptionsControls(IsOpen, Callback, Callback2, CampaignOffers
 		isFundedErrorDialogOpen = NoCurrent1,
 		isSheetHidden = NoCurrent1_1,
 		onOptionChanged = UseResult1,
-		onOpenBuyRobux = if FFlagBuildExperienceAdsAndRobuxTelemetryModule and UseResult5 ~= nil then UseResult5 else UseOpenBuyRobuxWebViewModuleResult,
-		onOpenAdsManager = if FFlagBuildExperienceAdsAndRobuxTelemetryModule and UseResult6 ~= nil then UseResult6 else UseOpenWebViewWithResumeRefreshModuleResult,
+		onOpenBuyRobux = if FFlagBuildExperienceAdsAndRobuxTelemetryModule and UseResult4 ~= nil then UseResult4 else UseOpenBuyRobuxWebViewModuleResult,
+		onOpenAdsManager = if FFlagBuildExperienceAdsAndRobuxTelemetryModule and UseResult5 ~= nil then UseResult5 else UseOpenWebViewWithResumeRefreshModuleResult,
 		onCreate = ReactModule.useCallback(function()
-			-- upvalues: NoCanFund (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (upval), UseResult4 (copy), UseOpenBuyRobuxWebViewModuleResult (copy), IsFailed (copy), UseResult (copy), Feedback (copy), IsPaid (copy), NoCurrent (copy), CanFund (copy), UseRefResult (copy), Callback2 (copy)
+			-- upvalues: NoCanFund (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (upval), UseResult3 (copy), UseOpenBuyRobuxWebViewModuleResult (copy), IsFailed (copy), UseResult (copy), Feedback (copy), IsPaid (copy), NoCurrent (copy), CanFund (copy), UseRefResult (copy), Callback (copy)
 			if NoCanFund then
-				if FFlagBuildExperienceAdsAndRobuxTelemetryModule and UseResult4 ~= nil then
-					UseResult4("ad_campaign_primary")
-					
-					return
-				else
-					UseOpenBuyRobuxWebViewModuleResult()
-					
-					return
+				if FFlagBuildExperienceAdsAndRobuxTelemetryModule and UseResult3 ~= nil then
+					UseResult3("BUY_ROBUX_CLICK", "ad_campaign_primary")
 				end
+				UseOpenBuyRobuxWebViewModuleResult()
+				
+				return
 			elseif IsFailed then
 				UseResult(Feedback)
 				
@@ -285,7 +259,7 @@ local function useTwoOptionsControls(IsOpen, Callback, Callback2, CampaignOffers
 				if IsPaid and not NoCurrent and not CanFund then return end
 				if Feedback ~= nil then
 					UseRefResult.current = Feedback.campaignOption
-					Callback2({
+					Callback({
 						paymentType = Feedback.fundingType,
 						campaignOption = Feedback.campaignOption
 					})
@@ -294,9 +268,9 @@ local function useTwoOptionsControls(IsOpen, Callback, Callback2, CampaignOffers
 				end
 			end
 		end, {
-			Callback2, Feedback, NoCanFund, UseOpenBuyRobuxWebViewModuleResult, IsPaid,
+			Callback, Feedback, NoCanFund, UseOpenBuyRobuxWebViewModuleResult, IsPaid,
 			NoCurrent, CanFund, IsFailed, UseResult,
-			if FFlagBuildExperienceAdsAndRobuxTelemetryModule then UseResult4 else nil
+			if FFlagBuildExperienceAdsAndRobuxTelemetryModule then UseResult3 else nil
 		})
 	}
 end
@@ -518,8 +492,8 @@ return function(p3)
 		CreatorCreditStore.refreshQuotaSummary():catch(function() end)
 	end, { CreatorCreditStore }), p3.attemptedOption, UseLocalizationResult.adsManager, if FFlagBuildAdsManagerUniverseUrlModule then p3.universeId else nil, NoIsDismissed, UseFundedErrorDialogFlowResult.isRetryPending, UseFundedErrorDialogFlowResult.isSheetHiddenAfterRetry, IsHasCreateError1, if FFlagBuildExperienceAdsAndRobuxTelemetryModule then p3.universeId else nil) else nil
 	local UseCloseWhileSheetShownResult = if FFlagBuildAdsFundedNotCreatedError then useCloseWhileSheetShown(UseTwoOptionsControlsResult ~= nil and UseTwoOptionsControlsResult.isSheetHidden, UseResult) else UseResult
-	local BalanceState = nil
 	local BALANCELOADING = nil
+	local BalanceState = nil
 	
 	if UseSignalStateResult == nil then
 		if UseSignalStateResult1 == DataStatus.Failed then

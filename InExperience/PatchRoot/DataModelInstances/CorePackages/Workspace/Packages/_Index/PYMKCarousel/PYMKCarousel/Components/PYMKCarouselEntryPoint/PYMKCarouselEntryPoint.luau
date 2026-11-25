@@ -17,10 +17,9 @@ local FFlagLuaAppUserSeenCollectionUnifiedFields = SharedFlagsModule.FFlagLuaApp
 local FFlagLuaAppEnableSduiHomePage = SharedFlagsModule.FFlagLuaAppEnableSduiHomePage
 local FFlagPymkCarouselExtendProps = SharedFlagsModule.FFlagPymkCarouselExtendProps
 local FFlagProfilePlatformSeededPymk = SharedFlagsModule.FFlagProfilePlatformSeededPymk
-local FFlagPYMKCarouselSettingsMenuEnabledModule = require(PYMKCarousel.Flags.FFlagPYMKCarouselSettingsMenuEnabled)
 
 return function(p1)
-	-- upvalues: UseLocalUserIdFunction (copy), FFlagLuaAppEnableSduiHomePage (copy), FFlagPymkCarouselExtendProps (copy), UseSelectorFunction (copy), GetSessionIdByKeyFunction (copy), RECOMMENDATIONSESSIONIDKEY (copy), React (copy), SetupFireEventFunction (copy), HomepagePYMKCarouselSourceName (copy), PYMKCollectionCarouselModule (copy), FFlagLuaAppUserSeenCollectionUnifiedFields (copy), FFlagProfilePlatformSeededPymk (copy), FFlagPYMKCarouselSettingsMenuEnabledModule (copy)
+	-- upvalues: UseLocalUserIdFunction (copy), FFlagLuaAppEnableSduiHomePage (copy), FFlagPymkCarouselExtendProps (copy), UseSelectorFunction (copy), GetSessionIdByKeyFunction (copy), RECOMMENDATIONSESSIONIDKEY (copy), React (copy), SetupFireEventFunction (copy), HomepagePYMKCarouselSourceName (copy), PYMKCollectionCarouselModule (copy), FFlagLuaAppUserSeenCollectionUnifiedFields (copy), FFlagProfilePlatformSeededPymk (copy)
 	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	local RecommendationSessionId = nil
 	RecommendationSessionId = if FFlagLuaAppEnableSduiHomePage then p1.recommendationSessionId elseif FFlagPymkCarouselExtendProps then if p1.recommendations then p1.recommendationSessionId else UseSelectorFunction(function(p2)
@@ -74,7 +73,6 @@ return function(p1)
 		recommendations = if FFlagPymkCarouselExtendProps or FFlagLuaAppEnableSduiHomePage then p1.recommendations else nil,
 		onRecommendationsShown = if FFlagPymkCarouselExtendProps then p1.onRecommendationsShown else nil,
 		analyticsSurface = if FFlagPymkCarouselExtendProps then p1.analyticsSurface else nil,
-		seedUserDisplayName = if FFlagProfilePlatformSeededPymk then p1.seedUserDisplayName else nil,
-		personalizationSettingsSurfaceKey = if FFlagPYMKCarouselSettingsMenuEnabledModule then p1.personalizationSettingsSurfaceKey else nil
+		seedUserDisplayName = if FFlagProfilePlatformSeededPymk then p1.seedUserDisplayName else nil
 	}) else nil
 end

@@ -13,10 +13,9 @@ local AppHeaderBarModule = require(Parent.AppHeaderBar)
 local TextKeysModule = require(Groups.Common.TextKeys)
 local UseGroupsWrapperContextModule = require(Groups.Contexts.useGroupsWrapperContext)
 local FFlagEnableGroupOverviewPane = require(Parent.SharedFlags).FFlagEnableGroupOverviewPane
-local FFlagLuaAppAddTestIdsForArrow = require(Parent.SharedFlags).FFlagLuaAppAddTestIdsForArrow
 
 return function(p1)
-	-- upvalues: UseGroupsWrapperContextModule (copy), UseNavigationFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), FFlagEnableGroupOverviewPane (copy), AppHeaderBarModule (copy), View (copy), Text (copy), Button (copy), FFlagLuaAppAddTestIdsForArrow (copy), ButtonVariant (copy), InputSize (copy)
+	-- upvalues: UseGroupsWrapperContextModule (copy), UseNavigationFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), FFlagEnableGroupOverviewPane (copy), AppHeaderBarModule (copy), View (copy), Text (copy), Button (copy), ButtonVariant (copy), InputSize (copy)
 	local UseGroupsWrapperContextModuleResult = UseGroupsWrapperContextModule()
 	local UseNavigationResult = UseNavigationFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -59,7 +58,6 @@ return function(p1)
 			})
 		}),
 		SeeAllButton = ReactModule.createElement(Button, {
-			testId = if FFlagLuaAppAddTestIdsForArrow then "--communities-list-button-see-all" else nil,
 			text = UseLocalizationResult.seeAll,
 			variant = ButtonVariant.Text,
 			size = InputSize.Medium,

@@ -5,15 +5,6 @@ local FFlagBuildExperienceAdvancedPreviewSpecs = require(Parent.SharedFlags).FFl
 local _ = require(Parent.DataHydration.CreatorCredit)
 local _ = require(BuildExperience.Stores.GetBuildModelSelectionStore.createBuildModelSelectionStore)
 local ChatConstantsModule = require(script.Parent.chatConstants)
-local FFlagBuildExperiencePaywallBlockTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperiencePaywallBlockTelemetry)
-
-local function withModelTier(BlockDetails, Tier)
-	return {
-		modelTier = if BlockDetails == nil or BlockDetails.modelTier == nil then Tier else BlockDetails.modelTier,
-		requiredRobux = if BlockDetails == nil then nil else BlockDetails.requiredRobux,
-		availableRobux = if BlockDetails == nil then nil else BlockDetails.availableRobux
-	}
-end
 
 local function _(p1, Id): boolean
 	if p1 == nil then
@@ -56,7 +47,7 @@ local function awaitRefreshedQuota(p2, Tier, IsCurrent)
 end
 
 return function(p3, p4, p5, p6)
-	-- upvalues: FFlagBuildExperienceAdvancedPreviewSpecs (copy), CreatorAgentChatModule (copy), FFlagBuildExperiencePaywallBlockTelemetryModule (copy), awaitRefreshedQuota (copy), withModelTier (copy)
+	-- upvalues: FFlagBuildExperienceAdvancedPreviewSpecs (copy), CreatorAgentChatModule (copy), awaitRefreshedQuota (copy)
 	if p3 == nil then
 		return nil
 	end
@@ -80,7 +71,7 @@ return function(p3, p4, p5, p6)
 		
 		return {
 			prepare = function(p7)
-				-- upvalues: Flag1 (ref), Flag (ref), p3 (copy), v1 (ref), CasSessionId (ref), CaptureSendConfigurationResult (copy), AcquireLockResult (copy), FFlagBuildExperiencePaywallBlockTelemetryModule (upval), IsSelected (copy), awaitRefreshedQuota (upval), p4 (copy), isCurrent (copy), CreatorAgentChatModule (upval), withModelTier (upval)
+				-- upvalues: Flag1 (ref), Flag (ref), p3 (copy), v1 (ref), CasSessionId (ref), CaptureSendConfigurationResult (copy), AcquireLockResult (copy), IsSelected (copy), awaitRefreshedQuota (upval), p4 (copy), isCurrent (copy), CreatorAgentChatModule (upval)
 				assert(not Flag1, "A model send attempt can only prepare once")
 				Flag1 = true
 				
@@ -115,12 +106,7 @@ return function(p3, p4, p5, p6)
 							kind = "setup",
 							errorCode = if PrepareSessionResult2 == nil then nil else PrepareSessionResult2.errorCode,
 							reason = if PrepareSessionResult2 == nil then nil else PrepareSessionResult2.fundingReason,
-							setupError = PrepareSessionResult2,
-							blockDetails = if FFlagBuildExperiencePaywallBlockTelemetryModule and PrepareSessionResult2 ~= nil and PrepareSessionResult2.fundingReason ~= nil and PrepareSessionResult2.fundingDetails == nil then {
-								requiredRobux = nil,
-								availableRobux = nil,
-								modelTier = CaptureSendConfigurationResult.tier
-							} else nil
+							setupError = PrepareSessionResult2
 						}
 					end
 					v1 = p7
@@ -168,8 +154,7 @@ return function(p3, p4, p5, p6)
 						return nil, {
 							kind = "denied",
 							errorCode = CreatorAgentChatModule.ErrorCodes.OutOfCredits,
-							reason = AwaitRefreshedQuotaResult.reason,
-							blockDetails = if FFlagBuildExperiencePaywallBlockTelemetryModule then withModelTier(AwaitRefreshedQuotaResult.blockDetails, Frozen.tier) else nil
+							reason = AwaitRefreshedQuotaResult.reason
 						}
 					end
 					local Models1 = p7.getModels(false)

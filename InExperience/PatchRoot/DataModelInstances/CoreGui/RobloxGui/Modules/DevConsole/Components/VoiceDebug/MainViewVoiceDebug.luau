@@ -658,11 +658,7 @@ function MainViewVoiceDebug.render(p3)
 				Padding = UDim.new(0, MainRowPadding)
 			}),
 			ContentPadding = RoactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, 24) }),
-			MetricsSection = RoactModule.createElement(CollapsibleSectionModule, {
-				title = "Metrics",
-				layoutOrder = 1,
-				headerNote = string.format("Data may lag up to %ds", p3.props.VoiceDebugData.PARTY_STATS_POLL_INTERVAL_SECONDS)
-			}, {
+			MetricsSection = RoactModule.createElement(CollapsibleSectionModule, { title = "Metrics", layoutOrder = 1 }, {
 				HealthStrip = p3:renderHealthStrip(),
 				StatsContainer = RoactModule.createElement("Frame", {
 					LayoutOrder = 2,

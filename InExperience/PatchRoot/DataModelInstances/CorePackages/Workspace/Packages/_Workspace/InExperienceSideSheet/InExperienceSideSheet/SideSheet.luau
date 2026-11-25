@@ -51,6 +51,7 @@ local ToggleSideSheetModule = require(InExperienceSideSheet.Utils.toggleSideShee
 local FlagsModule = require(InExperienceSideSheet.Flags)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagKeepSideSheetOpenBesideMenu = FlagsModule.FFlagKeepSideSheetOpenBesideMenu
+local FFlagMountUnmountSideSheet = FlagsModule.FFlagMountUnmountSideSheet
 local FFlagSideSheetOpenPeoplePage = FlagsModule.FFlagSideSheetOpenPeoplePage
 local FFlagSideSheetOpenPeoplePageRestoreChat = FlagsModule.FFlagSideSheetOpenPeoplePageRestoreChat
 local FFlagSideSheetFullWidthScrollView = FlagsModule.FFlagSideSheetFullWidthScrollView
@@ -118,13 +119,13 @@ local UseFocusGuiObject = if FFlagSideSheetFocusNav then require(Parent.ReactFoc
 local Root = nil
 
 local function SideSheetContent(p1)
-	-- upvalues: UseScaledValueFunction (copy), UseStyleSheetFunction (copy), FFlagSideSheetFullWidthScrollView (copy), UseTokensFunction (copy), UseBackgroundStyleModule (copy), SignalsReactModule (copy), getDeviceSafePadding (copy), UseDrawerShouldMountFunction (copy), FFlagSideSheetOpenPeoplePage (copy), FFlagKeepSideSheetOpenBesideMenu (copy), GetSideSheetVisibilityModule (copy), GetIsPeoplePageOpenModule (copy), GetDidSideSheetOpenWithPeoplePageModule (copy), GetHasRoomForPeoplePageModule (copy), getIsMenuShownBesideSideSheet (copy), getIsWindowShownBesideSideSheet (copy), getScrollableContentTopWidgetIntegrations (copy), FFlagEnableSideSheetWidgets (copy), ReactModule (copy), SidesheetAnalyticsModule (copy), FFlagSideSheetFocusNav (copy), UseFocusGuiObject (ref), UseLastInputModeFunction (copy), FFlagSideSheetOpenPeoplePageRestoreChat (copy), UsePreferredInputFunction (copy), SignalsModule (copy), GuiService (copy), NextWrappedIntegerFunction (copy), ResponsiveModule (copy), MouseIconOverrideService (copy), FFlagShowSwitchServerButton (copy), IsPioneerLaunchFunction (copy), GetSwitchServerStoreFunction (copy), SwitchServerTelemetry (copy), ContextActionService (copy), list (copy), ToggleSideSheetModule (copy), FFlagUseAnimateScrollViewToSelectionHelper (copy), UseSideSheetFocusNavScrollViewAnimationModule (copy), ConstantsModule (copy), GetSideSheetConfigStoreModule (copy), ClosePeoplePageOpenedWithSideSheetModule (copy), InExperienceSideSheet (copy), RegisterInGameMenuPeoplePageActionsModule (copy), AnalyticsConstantsModule (copy), UserProfileRowModule (copy), config (copy), ExperienceDetailsRowModule (copy), FFlagSideSheetUnifiedMenuOrder (copy), View (copy), Divider (copy), SideSheetWidgetListModule (copy), ChromeModule (copy), VerticalListModule (copy), getAboveFoldIntegrations (copy), getBelowFoldIntegrations (copy), getScrollableContentBottomWidgetIntegrations (copy), ScrollView (copy), FooterModule (copy), FFlagEnableWhatsNew (copy), WhatsNewAnchor (copy), DrawerContainer (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
+	-- upvalues: UseScaledValueFunction (copy), UseStyleSheetFunction (copy), FFlagSideSheetFullWidthScrollView (copy), UseTokensFunction (copy), UseBackgroundStyleModule (copy), SignalsReactModule (copy), getDeviceSafePadding (copy), FFlagMountUnmountSideSheet (copy), UseDrawerShouldMountFunction (copy), FFlagSideSheetOpenPeoplePage (copy), FFlagKeepSideSheetOpenBesideMenu (copy), GetSideSheetVisibilityModule (copy), GetIsPeoplePageOpenModule (copy), GetDidSideSheetOpenWithPeoplePageModule (copy), GetHasRoomForPeoplePageModule (copy), getIsMenuShownBesideSideSheet (copy), getIsWindowShownBesideSideSheet (copy), getScrollableContentTopWidgetIntegrations (copy), FFlagEnableSideSheetWidgets (copy), ReactModule (copy), SidesheetAnalyticsModule (copy), FFlagSideSheetFocusNav (copy), UseFocusGuiObject (ref), UseLastInputModeFunction (copy), FFlagSideSheetOpenPeoplePageRestoreChat (copy), UsePreferredInputFunction (copy), SignalsModule (copy), GuiService (copy), NextWrappedIntegerFunction (copy), ResponsiveModule (copy), MouseIconOverrideService (copy), FFlagShowSwitchServerButton (copy), IsPioneerLaunchFunction (copy), GetSwitchServerStoreFunction (copy), SwitchServerTelemetry (copy), ContextActionService (copy), list (copy), ToggleSideSheetModule (copy), FFlagUseAnimateScrollViewToSelectionHelper (copy), UseSideSheetFocusNavScrollViewAnimationModule (copy), ConstantsModule (copy), GetSideSheetConfigStoreModule (copy), ClosePeoplePageOpenedWithSideSheetModule (copy), InExperienceSideSheet (copy), RegisterInGameMenuPeoplePageActionsModule (copy), AnalyticsConstantsModule (copy), UserProfileRowModule (copy), config (copy), ExperienceDetailsRowModule (copy), FFlagSideSheetUnifiedMenuOrder (copy), View (copy), Divider (copy), SideSheetWidgetListModule (copy), ChromeModule (copy), VerticalListModule (copy), getAboveFoldIntegrations (copy), getBelowFoldIntegrations (copy), getScrollableContentBottomWidgetIntegrations (copy), ScrollView (copy), FooterModule (copy), FFlagEnableWhatsNew (copy), WhatsNewAnchor (copy), DrawerContainer (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
 	local UseScaledValueResult = UseScaledValueFunction(320)
 	local UseStyleSheetResult = UseStyleSheetFunction()
 	local UseTokensResult = if FFlagSideSheetFullWidthScrollView then UseTokensFunction() else nil
 	local UseBackgroundStyleModuleResult = UseBackgroundStyleModule()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(getDeviceSafePadding)
-	local UseDrawerShouldMountResult = UseDrawerShouldMountFunction()
+	local NoFFlagMountUnmountSideSheet = not FFlagMountUnmountSideSheet or UseDrawerShouldMountFunction()
 	local UseSignalStateResult1 = if FFlagSideSheetOpenPeoplePage or FFlagKeepSideSheetOpenBesideMenu then SignalsReactModule.useSignalState(GetSideSheetVisibilityModule) else false
 	local UseSignalStateResult2 = if FFlagSideSheetOpenPeoplePage then SignalsReactModule.useSignalState(GetIsPeoplePageOpenModule) else false
 	local UseSignalStateResult2_1 = (if FFlagSideSheetOpenPeoplePage then SignalsReactModule.useSignalState(GetDidSideSheetOpenWithPeoplePageModule) else false) and (UseSignalStateResult1 and UseSignalStateResult2)
@@ -400,7 +401,7 @@ local function SideSheetContent(p1)
 			UseSignalStateResult5
 		})
 	end
-	if not UseDrawerShouldMountResult then
+	if not NoFFlagMountUnmountSideSheet then
 		return nil
 	end
 	local Element = ReactModule.createElement(View, { tag = "col size-full" }, {
@@ -450,7 +451,7 @@ local function SideSheetContent(p1)
 			BelowFoldList = ReactModule.createElement(VerticalListModule, {
 				layoutOrder = config.SecondaryList,
 				integrationsGetter = getBelowFoldIntegrations,
-				firstIntegrationToFocusCallback = if FFlagSideSheetUnifiedMenuOrder and (FFlagSideSheetFocusNav and not v1) then UseResult1 else nil,
+				firstIntegrationToFocusCallback = if FFlagSideSheetUnifiedMenuOrder and FFlagSideSheetFocusNav and not v1 then UseResult1 else nil,
 				allowRightFocusEscape = AllowRightFocusEscape
 			}),
 			BottomWidgets = if FFlagEnableSideSheetWidgets then ReactModule.createElement(SideSheetWidgetListModule, {

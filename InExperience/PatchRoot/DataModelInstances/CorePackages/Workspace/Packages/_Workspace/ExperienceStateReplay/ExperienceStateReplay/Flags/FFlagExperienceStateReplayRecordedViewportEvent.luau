@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("ExperienceStateReplayRecordedViewportEvent", false) and game:GetEngineFeature("ScreenContextReplayingLua")

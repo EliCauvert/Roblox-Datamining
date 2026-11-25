@@ -56,35 +56,6 @@ local function _(): boolean
 end
 
 local GetFFlagFilterSecurityAlertsVRToastEnabledFunction = SharedFlagsModule.GetFFlagFilterSecurityAlertsVRToastEnabled
-local FFlagPioneerHideOtherGameInvites = SharedFlagsModule.FFlagPioneerHideOtherGameInvites
-
-local _ = function()
-	-- upvalues: Parent1 (copy)
-	return require(Parent1.PioneerInviteFilter)
-end
-
-local function findShareLink(Current)
-	-- upvalues: TypeModule (copy)
-	local Content = Current.content
-	local State = Content.states and Content.states[Content.currentState]
-	
-	if not State then
-		return nil
-	end
-	for _, visualItem in ipairs(State.visualItems) do
-		for _, value in pairs(visualItem) do
-			if type(value) == "table" and value.actions then
-				for _, action in ipairs(value.actions) do
-					if action.actionType == TypeModule.ActionTypeEnum.Deeplink and action.path and string.find(action.path, "navigation/share_links", 1, true) then
-						return action.path
-					end
-				end
-			end
-		end
-	end
-	return nil
-end
-
 local EnableDisplayLoggingForToastsFix = game:DefineFastFlag("EnableDisplayLoggingForToastsFix", false)
 local IXPServiceWrapper = require(Parent1.IXPServiceWrapper).IXPServiceWrapper
 local FFlagFriendshipNotifsUseSendrExperiment = SharedFlagsModule.FFlagFriendshipNotifsUseSendrExperiment
@@ -97,7 +68,7 @@ local v2 = nil
 local _ = function()
 	-- upvalues: FFlagFriendshipNotifsUseSendrExperiment (copy), Flag (ref), v1 (ref), v2 (ref), IXPServiceWrapper (copy), FriendshipNotifsUseSendrLayerName (copy), FRRToastPositionVariantKey (copy)
 	if FFlagFriendshipNotifsUseSendrExperiment and not Flag then
-		v1, v54 = pcall(function()
+		v1, v51 = pcall(function()
 			-- upvalues: Flag (upval), IXPServiceWrapper (upval), FriendshipNotifsUseSendrLayerName (upval)
 			Flag = true
 			
@@ -116,7 +87,7 @@ local IsToastToRightFunction = ToastNotificationHelperModule.isToastToRight
 local CalculateTimeRemainingFunction = ToastNotificationHelperModule.calculateTimeRemaining
 
 return function(p1)
-	-- upvalues: TypeModule (copy), ToastNotificationHelperModule (copy), ConstantsModule (copy), ToastNotificationProtocol (copy), ReactModule (copy), UserGameSettings (copy), GetNotificationSizeFunction (copy), GetDeviceOrientationFunction (copy), FFlagFriendshipNotifsUseSendrExperiment (copy), CalculateToastPositionFunction (copy), IsToastToRightFunction (copy), FFlagPioneerHideOtherGameInvites (copy), UseIsSpatialFunction (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), UserInputService (copy), UseKeyCodeHoldModule (copy), UseStyleFunction (copy), Players (copy), LoggerModule (copy), AnalyticsServiceModule (copy), ToastNotificationSessionizationHelperModule (copy), CryoModule (copy), Default (copy), Flag (ref), v1 (ref), v2 (ref), IXPServiceWrapper (copy), FriendshipNotifsUseSendrLayerName (copy), FRRToastPositionVariantKey (copy), EnableNotificationsToastTTLFix (copy), ClientToastNotificationsEnabledEngineFeature (copy), GuiService (copy), FFlagNotificationDeeplinkTapListenersEnabled (copy), DeeplinkTapListeners (copy), JoinExperienceFunction (copy), HttpService (copy), CalculateTimeRemainingFunction (copy), LifecycleEventsModule (copy), GetFStringPCGDKFilteredNotificationTypesFunction (copy), ThirdPartyUserService (copy), EnableDisplayLoggingForToastsFix (copy), MarshalNotificationDataFunction (copy), IsTenFootInterfaceFunction (copy), GetFFlagFilterSecurityAlertsVRToastEnabledFunction (copy), GetFFlagEnableChatNewMessageFunction (copy), Parent1 (copy), findShareLink (copy), SpringOptions (copy), ReactOtterModule (copy), IsVRAppBuildFunction (copy), TouchEnabled (copy), ImageSetLabel (copy), IconsNavigationClose (copy), SpringAnimatedItem (copy), SwipeDetectionWrapperModule (copy), ClientNotificationWrapperModule (copy), EnableClientToastNotificationsReducedMotion (copy), NotificationCardProviderModule (copy), NotificationCardModule (copy), ToastVRWrapperModule (copy), ToastNotificationSnoozeMenuModule (copy), DeeplinkConfirmationModal (copy)
+	-- upvalues: TypeModule (copy), ToastNotificationHelperModule (copy), ConstantsModule (copy), ToastNotificationProtocol (copy), ReactModule (copy), UserGameSettings (copy), GetNotificationSizeFunction (copy), GetDeviceOrientationFunction (copy), FFlagFriendshipNotifsUseSendrExperiment (copy), CalculateToastPositionFunction (copy), IsToastToRightFunction (copy), UseIsSpatialFunction (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), UserInputService (copy), UseKeyCodeHoldModule (copy), UseStyleFunction (copy), Players (copy), LoggerModule (copy), AnalyticsServiceModule (copy), ToastNotificationSessionizationHelperModule (copy), CryoModule (copy), Default (copy), Flag (ref), v1 (ref), v2 (ref), IXPServiceWrapper (copy), FriendshipNotifsUseSendrLayerName (copy), FRRToastPositionVariantKey (copy), EnableNotificationsToastTTLFix (copy), ClientToastNotificationsEnabledEngineFeature (copy), GuiService (copy), FFlagNotificationDeeplinkTapListenersEnabled (copy), DeeplinkTapListeners (copy), JoinExperienceFunction (copy), HttpService (copy), CalculateTimeRemainingFunction (copy), LifecycleEventsModule (copy), GetFStringPCGDKFilteredNotificationTypesFunction (copy), ThirdPartyUserService (copy), EnableDisplayLoggingForToastsFix (copy), IsTenFootInterfaceFunction (copy), GetFFlagFilterSecurityAlertsVRToastEnabledFunction (copy), GetFFlagEnableChatNewMessageFunction (copy), MarshalNotificationDataFunction (copy), SpringOptions (copy), ReactOtterModule (copy), IsVRAppBuildFunction (copy), TouchEnabled (copy), ImageSetLabel (copy), IconsNavigationClose (copy), SpringAnimatedItem (copy), SwipeDetectionWrapperModule (copy), ClientNotificationWrapperModule (copy), EnableClientToastNotificationsReducedMotion (copy), NotificationCardProviderModule (copy), NotificationCardModule (copy), ToastVRWrapperModule (copy), ToastNotificationSnoozeMenuModule (copy), DeeplinkConfirmationModal (copy)
 	local IsRenderLocationMatch = p1.renderLocation == TypeModule.RenderLocationEnum.CoreScript
 	local IsDesktopDevice = ToastNotificationHelperModule.isDesktopDevice()
 	local Experience = if IsRenderLocationMatch then ConstantsModule.CardTopMargin.Experience else ConstantsModule.CardTopMargin.App
@@ -149,9 +120,6 @@ return function(p1)
 	local UseStateResult13, UseStateResult2_12 = ReactModule.useState(false)
 	local UseStateResult14, UseStateResult2_13 = ReactModule.useState(false)
 	local UseRefResult = ReactModule.useRef(false)
-	local UseRefResult1 = if FFlagPioneerHideOtherGameInvites then ReactModule.useRef({}) else nil
-	local UseRefResult2 = if FFlagPioneerHideOtherGameInvites then ReactModule.useRef({}) else nil
-	local UseRefResult3 = if FFlagPioneerHideOtherGameInvites then ReactModule.useRef(nil) else nil
 	local UseStateResult15, UseStateResult2_14 = ReactModule.useState(false)
 	local UseStateResult16, UseStateResult2_15 = ReactModule.useState(false)
 	local UseStateResult17, UseStateResult2_16 = ReactModule.useState(false)
@@ -211,7 +179,7 @@ return function(p1)
 	local UseStateResult15_1 = UseStateResult15 or UseStateResult16
 	local UserId = Players and Players.LocalPlayer and Players.LocalPlayer.UserId or nil
 	
-	local function v122(Dismissed, UserId, NotificationData)
+	local function v114(Dismissed, UserId, NotificationData)
 		-- upvalues: LoggerModule (upval), AnalyticsServiceModule (upval), ToastNotificationSessionizationHelperModule (upval), ToastNotificationHelperModule (upval), CryoModule (upval), ConstantsModule (upval), IsRenderLocationMatch (copy), Default (upval), FFlagFriendshipNotifsUseSendrExperiment (upval), TypeModule (upval), Flag (upval), v1 (upval), v2 (upval), IXPServiceWrapper (upval), FriendshipNotifsUseSendrLayerName (upval), FRRToastPositionVariantKey (upval)
 		if NotificationData == nil then return end
 		LoggerModule:info("NotificationType: {} with event: {}", NotificationData.notificationType, Dismissed)
@@ -235,7 +203,7 @@ return function(p1)
 		
 		if FFlagFriendshipNotifsUseSendrExperiment and NotificationData.notificationType == TypeModule.NotificationTypeEnum.FriendRequestReceived then
 			if FFlagFriendshipNotifsUseSendrExperiment and not Flag then
-				v1, v54 = pcall(function()
+				v1, v51 = pcall(function()
 					-- upvalues: Flag (upval), IXPServiceWrapper (upval), FriendshipNotifsUseSendrLayerName (upval)
 					Flag = true
 					
@@ -275,13 +243,13 @@ return function(p1)
 	end, { UseStateResult2, UserGameSettings })
 	
 	local function CloseCallback(p2)
-		-- upvalues: v122 (copy), TypeModule (upval), UserId (copy), UseStateResult6 (copy), UseStateResult2_12 (copy), UseStateResult20 (copy)
+		-- upvalues: v114 (copy), TypeModule (upval), UserId (copy), UseStateResult6 (copy), UseStateResult2_12 (copy), UseStateResult20 (copy)
 		if not p2 then
-			v122(TypeModule.ToastNotificationActionsEnum.ModalCancel, UserId, UseStateResult6)
+			v114(TypeModule.ToastNotificationActionsEnum.ModalCancel, UserId, UseStateResult6)
 			UseStateResult2_12(false)
 		end
 		if UseStateResult20 then
-			v122(TypeModule.ToastNotificationActionsEnum.ModalConfirm, UserId, UseStateResult6)
+			v114(TypeModule.ToastNotificationActionsEnum.ModalConfirm, UserId, UseStateResult6)
 			UseStateResult20:Fire(p2)
 		end
 	end
@@ -313,16 +281,16 @@ return function(p1)
 	
 	local UseResult1 = nil
 	UseResult1 = if EnableNotificationsToastTTLFix then function(NotificationId, Delay, p2)
-		-- upvalues: UseResult (copy), UseRefResult (copy), v122 (copy), TypeModule (upval), UserId (copy), ClientToastNotificationsEnabledEngineFeature (upval), GuiService (upval), Default1 (copy), UseStateResult2_6 (copy), UseStateResult2_8 (copy)
+		-- upvalues: UseResult (copy), UseRefResult (copy), v114 (copy), TypeModule (upval), UserId (copy), ClientToastNotificationsEnabledEngineFeature (upval), GuiService (upval), Default1 (copy), UseStateResult2_6 (copy), UseStateResult2_8 (copy)
 		UseResult()
 		UseStateResult2_8((task.delay(Delay, function()
-			-- upvalues: UseRefResult (upval), UseResult (upval), v122 (upval), TypeModule (upval), UserId (upval), p2 (copy), ClientToastNotificationsEnabledEngineFeature (upval), GuiService (upval), NotificationId (copy), Default1 (upval), UseStateResult2_6 (upval)
+			-- upvalues: UseRefResult (upval), UseResult (upval), v114 (upval), TypeModule (upval), UserId (upval), p2 (copy), ClientToastNotificationsEnabledEngineFeature (upval), GuiService (upval), NotificationId (copy), Default1 (upval), UseStateResult2_6 (upval)
 			if UseRefResult.current then
 				UseResult()
 				
 				return
 			end
-			v122(TypeModule.ToastNotificationActionsEnum.Ignored, UserId, p2)
+			v114(TypeModule.ToastNotificationActionsEnum.Ignored, UserId, p2)
 			
 			if ClientToastNotificationsEnabledEngineFeature and p2 and p2.luaNotifInfo then
 				GuiService:DismissNotification(NotificationId)
@@ -335,12 +303,12 @@ return function(p1)
 			end
 		end)))
 	end else ReactModule.useCallback(function(NotificationId, Delay, p2)
-		-- upvalues: UseResult (copy), UseStateResult14 (copy), v122 (copy), TypeModule (upval), UserId (copy), ClientToastNotificationsEnabledEngineFeature (upval), GuiService (upval), Default1 (copy), UseStateResult2_6 (copy), UseStateResult2_8 (copy)
+		-- upvalues: UseResult (copy), UseStateResult14 (copy), v114 (copy), TypeModule (upval), UserId (copy), ClientToastNotificationsEnabledEngineFeature (upval), GuiService (upval), Default1 (copy), UseStateResult2_6 (copy), UseStateResult2_8 (copy)
 		UseResult()
 		UseStateResult2_8((task.delay(Delay, function()
-			-- upvalues: UseStateResult14 (upval), v122 (upval), TypeModule (upval), UserId (upval), p2 (copy), ClientToastNotificationsEnabledEngineFeature (upval), GuiService (upval), NotificationId (copy), Default1 (upval), UseStateResult2_6 (upval), UseResult (upval)
+			-- upvalues: UseStateResult14 (upval), v114 (upval), TypeModule (upval), UserId (upval), p2 (copy), ClientToastNotificationsEnabledEngineFeature (upval), GuiService (upval), NotificationId (copy), Default1 (upval), UseStateResult2_6 (upval), UseResult (upval)
 			if not UseStateResult14 then
-				v122(TypeModule.ToastNotificationActionsEnum.Ignored, UserId, p2)
+				v114(TypeModule.ToastNotificationActionsEnum.Ignored, UserId, p2)
 				
 				if ClientToastNotificationsEnabledEngineFeature and p2 and p2.luaNotifInfo then
 					GuiService:DismissNotification(NotificationId)
@@ -367,9 +335,9 @@ return function(p1)
 		end
 	end, { UseStateResult6, UseStateResult7 })
 	
-	local function v130()
-		-- upvalues: v122 (copy), TypeModule (upval), UserId (copy), UseStateResult6 (copy), UseResult2 (copy), UseStateResult2_15 (copy)
-		v122(TypeModule.ToastNotificationActionsEnum.Dismissed, UserId, UseStateResult6)
+	local function v122()
+		-- upvalues: v114 (copy), TypeModule (upval), UserId (copy), UseStateResult6 (copy), UseResult2 (copy), UseStateResult2_15 (copy)
+		v114(TypeModule.ToastNotificationActionsEnum.Dismissed, UserId, UseStateResult6)
 		UseResult2()
 		UseStateResult2_15(false)
 	end
@@ -385,7 +353,7 @@ return function(p1)
 		end
 	end, { IsRenderLocationMatch, UseStateResult20 })
 	
-	local function v132()
+	local function v124()
 		-- upvalues: UseStateResult6 (copy), UseStateResult7 (copy), UseStateResult9 (copy), UseResult1 (ref), ConstantsModule (upval)
 		if UseStateResult6 and UseStateResult7 and not UseStateResult9 then
 			local Callback: (any, any, any) -> () = UseResult1
@@ -440,7 +408,7 @@ return function(p1)
 		end
 	end, { UseResult4 })
 	local UseResult5 = ReactModule.useCallback(function(p2, p3, p4)
-		-- upvalues: TypeModule (upval), UseResult2 (copy), UseResult3 (copy), FFlagNotificationDeeplinkTapListenersEnabled (upval), DeeplinkTapListeners (upval), IsRenderLocationMatch (copy), JoinExperienceFunction (upval), UseStateResult2_12 (copy), Default1 (copy), v122 (copy), UserId (copy), HttpService (upval), LoggerModule (upval), ToastNotificationProtocol (upval)
+		-- upvalues: TypeModule (upval), UseResult2 (copy), UseResult3 (copy), FFlagNotificationDeeplinkTapListenersEnabled (upval), DeeplinkTapListeners (upval), IsRenderLocationMatch (copy), JoinExperienceFunction (upval), UseStateResult2_12 (copy), Default1 (copy), v114 (copy), UserId (copy), HttpService (upval), LoggerModule (upval), ToastNotificationProtocol (upval)
 		if p2.actionType == TypeModule.ActionTypeEnum.Dismiss then
 			UseResult2()
 			
@@ -458,7 +426,7 @@ return function(p1)
 					})
 				end
 				if not JoinExperienceFunction(p2.path or "", IsRenderLocationMatch) then
-					v122(TypeModule.ToastNotificationActionsEnum.DeeplinkFailed, UserId, p3)
+					v114(TypeModule.ToastNotificationActionsEnum.DeeplinkFailed, UserId, p3)
 					UseResult2()
 					
 					return
@@ -526,12 +494,12 @@ return function(p1)
 		end
 	end, { UseResult5, UseResult4, CalculateTimeRemainingFunction })
 	local UseResult7 = ReactModule.useCallback(function(VisualItem)
-		-- upvalues: UseStateResult12 (copy), UseStateResult2_11 (copy), v122 (copy), UserId (copy), UseStateResult6 (copy), LifecycleEventsModule (upval), UseResult5 (copy), FFlagNotificationDeeplinkTapListenersEnabled (upval), TypeModule (upval), UseResult3 (copy)
+		-- upvalues: UseStateResult12 (copy), UseStateResult2_11 (copy), v114 (copy), UserId (copy), UseStateResult6 (copy), LifecycleEventsModule (upval), UseResult5 (copy), FFlagNotificationDeeplinkTapListenersEnabled (upval), TypeModule (upval), UseResult3 (copy)
 		if UseStateResult12 then return end
 		UseStateResult2_11(true)
 		
 		if VisualItem.eventName then
-			v122(VisualItem.eventName, UserId, UseStateResult6)
+			v114(VisualItem.eventName, UserId, UseStateResult6)
 		end
 		if VisualItem.actionEventParams and UseStateResult6 then
 			LifecycleEventsModule:DispatchEvent(LifecycleEventsModule.ToastEvents.UserAction, UseStateResult6.notificationType, {
@@ -556,8 +524,8 @@ return function(p1)
 		UseResult3
 	})
 	
-	local function v137(p3, p4)
-		-- upvalues: GetFStringPCGDKFilteredNotificationTypesFunction (upval), ThirdPartyUserService (upval), Default1 (copy), TypeModule (upval), EnableDisplayLoggingForToastsFix (upval), Default (upval), v122 (copy), UserId (copy), UseStateResult2_5 (copy), ConstantsModule (upval), UseResult1 (ref), UseResult6 (copy), ClientToastNotificationsEnabledEngineFeature (upval), GuiService (upval), UseStateResult2_9 (copy)
+	local function v129(p3, p4)
+		-- upvalues: GetFStringPCGDKFilteredNotificationTypesFunction (upval), ThirdPartyUserService (upval), Default1 (copy), TypeModule (upval), EnableDisplayLoggingForToastsFix (upval), Default (upval), v114 (copy), UserId (copy), UseStateResult2_5 (copy), ConstantsModule (upval), UseResult1 (ref), UseResult6 (copy), ClientToastNotificationsEnabledEngineFeature (upval), GuiService (upval), UseStateResult2_9 (copy)
 		p3.displayTimestamp = DateTime.now().UnixTimestampMillis
 		
 		if GetFStringPCGDKFilteredNotificationTypesFunction()[p3.notificationType] and (ThirdPartyUserService and (ThirdPartyUserService:IsChatRestrictionSupported() and ThirdPartyUserService.FriendCommunicationRestrictionStatus ~= Enum.ChatRestrictionStatus.NotRestricted)) then
@@ -573,9 +541,9 @@ return function(p1)
 				
 				return
 			end
-			v122(Update, UserId, p3)
+			v114(Update, UserId, p3)
 		else
-			v122(Update, UserId, p3)
+			v114(Update, UserId, p3)
 			
 			if Default:isSnoozedNotificationType(p3.notificationType) then
 				Default1:dismissNotification(p3.id)
@@ -601,74 +569,28 @@ return function(p1)
 	end
 	
 	local _ = function(p3, Delay)
-		-- upvalues: UseStateResult10 (copy), v137 (copy), LifecycleEventsModule (upval), UseStateResult2_9 (copy)
+		-- upvalues: UseStateResult10 (copy), v129 (copy), LifecycleEventsModule (upval), UseStateResult2_9 (copy)
 		if UseStateResult10 then
 			task.cancel(UseStateResult10)
 		end
 		UseStateResult2_9((task.delay(Delay, function()
-			-- upvalues: v137 (upval), p3 (copy), LifecycleEventsModule (upval)
-			v137(p3, "display")
+			-- upvalues: v129 (upval), p3 (copy), LifecycleEventsModule (upval)
+			v129(p3, "display")
 			LifecycleEventsModule:DispatchEvent(LifecycleEventsModule.ToastEvents.Display, p3.notificationType, p3)
 		end)))
 	end
 	
-	local function v139(Current)
-		-- upvalues: MarshalNotificationDataFunction (upval), UseStateResult2_6 (copy), LifecycleEventsModule (upval)
-		if Current and Current.content and Current.content.id ~= nil then
-			local MarshalNotificationDataResult = MarshalNotificationDataFunction(Current)
-			UseStateResult2_6(MarshalNotificationDataResult)
-			LifecycleEventsModule:DispatchEvent(LifecycleEventsModule.ToastEvents.AttemptDisplay, MarshalNotificationDataResult.notificationType, MarshalNotificationDataResult)
-			
-			return
-		else
-			UseStateResult2_6(nil)
-		end
-	end
-	
-	local UseResult8 = ReactModule.useCallback(function(Current)
-		-- upvalues: IsTenFootInterfaceFunction (upval), TypeModule (upval), GetFFlagFilterSecurityAlertsVRToastEnabledFunction (upval), UseIsSpatialResult (copy), GetFFlagEnableChatNewMessageFunction (upval), Default1 (copy), FFlagPioneerHideOtherGameInvites (upval), UseRefResult3 (copy), UseRefResult1 (copy), Parent1 (upval), UseRefResult2 (copy), findShareLink (upval), v139 (copy), MarshalNotificationDataFunction (upval), UseStateResult2_6 (copy), LifecycleEventsModule (upval)
-		if IsTenFootInterfaceFunction() and Current and Current.notificationType ~= nil and Current.notificationType ~= TypeModule.NotificationTypeEnum.ClientNotification then return end
-		if GetFFlagFilterSecurityAlertsVRToastEnabledFunction() and UseIsSpatialResult and Current and Current.notificationType ~= nil and Current.notificationType == TypeModule.NotificationTypeEnum.SecurityAlert then return end
-		if Current and Current.notificationType == TypeModule.NotificationTypeEnum.ChatNewMessage and not GetFFlagEnableChatNewMessageFunction() and Current.content and Current.content.id then
-			Default1:dismissNotification(Current.content.id)
+	local UseResult8 = ReactModule.useCallback(function(p3)
+		-- upvalues: IsTenFootInterfaceFunction (upval), TypeModule (upval), GetFFlagFilterSecurityAlertsVRToastEnabledFunction (upval), UseIsSpatialResult (copy), GetFFlagEnableChatNewMessageFunction (upval), Default1 (copy), MarshalNotificationDataFunction (upval), UseStateResult2_6 (copy), LifecycleEventsModule (upval)
+		if IsTenFootInterfaceFunction() and p3 and p3.notificationType ~= nil and p3.notificationType ~= TypeModule.NotificationTypeEnum.ClientNotification then return end
+		if GetFFlagFilterSecurityAlertsVRToastEnabledFunction() and UseIsSpatialResult and p3 and p3.notificationType ~= nil and p3.notificationType == TypeModule.NotificationTypeEnum.SecurityAlert then return end
+		if p3 and p3.notificationType == TypeModule.NotificationTypeEnum.ChatNewMessage and not GetFFlagEnableChatNewMessageFunction() and p3.content and p3.content.id then
+			Default1:dismissNotification(p3.content.id)
 			
 			return
 		end
-		if FFlagPioneerHideOtherGameInvites then
-			UseRefResult3.current = Current
-			
-			if not Current or Current.notificationType ~= TypeModule.NotificationTypeEnum.ExperienceInvitation or not Current.content or Current.content.id == nil or UseRefResult1.current[Current.content.id] or not require(Parent1.PioneerInviteFilter).isActive() then
-				v139(Current)
-				
-				return
-			end
-			local Id = Current.content.id
-			
-			if not UseRefResult2.current[Id] then
-				UseRefResult2.current[Id] = true
-				local ShareLink = findShareLink(Current)
-				task.spawn(function()
-					-- upvalues: ShareLink (copy), Parent1 (upval), UseRefResult2 (upval), Id (copy), Default1 (upval), UseRefResult3 (upval), UseRefResult1 (upval), v139 (upval)
-					UseRefResult2.current[Id] = nil
-					
-					if not ShareLink or not require(Parent1.PioneerInviteFilter).isShareLinkForCurrentGame(ShareLink) then
-						Default1:dismissNotification(Id)
-						
-						return
-					end
-					local Current = UseRefResult3.current
-					
-					if Current and Current.content and Current.content.id == Id then
-						UseRefResult1.current[Id] = true
-						v139(Current)
-					end
-				end)
-				
-				return
-			end
-			return
-		elseif Current and Current.content and Current.content.id ~= nil then
-			local MarshalNotificationDataResult = MarshalNotificationDataFunction(Current)
+		if p3 and p3.content and p3.content.id ~= nil then
+			local MarshalNotificationDataResult = MarshalNotificationDataFunction(p3)
 			UseStateResult2_6(MarshalNotificationDataResult)
 			LifecycleEventsModule:DispatchEvent(LifecycleEventsModule.ToastEvents.AttemptDisplay, MarshalNotificationDataResult.notificationType, MarshalNotificationDataResult)
 			
@@ -677,21 +599,11 @@ return function(p1)
 			UseStateResult2_6(nil)
 		end
 	end, {})
-	
-	if FFlagPioneerHideOtherGameInvites then
-		ReactModule.useEffect(function()
-			-- upvalues: UseRefResult3 (copy)
-			return function()
-				-- upvalues: UseRefResult3 (upval)
-				UseRefResult3.current = nil
-			end
-		end, {})
-	end
 	ReactModule.useEffect(function()
-		-- upvalues: UseStateResult7 (copy), UseStateResult6 (copy), v137 (copy), LifecycleEventsModule (upval), ConstantsModule (upval), SpringOptions (upval), UseStateResult10 (copy), UseStateResult2_9 (copy)
+		-- upvalues: UseStateResult7 (copy), UseStateResult6 (copy), v129 (copy), LifecycleEventsModule (upval), ConstantsModule (upval), SpringOptions (upval), UseStateResult10 (copy), UseStateResult2_9 (copy)
 		if UseStateResult7 then
 			if UseStateResult6 and UseStateResult6.id == UseStateResult7.id then
-				v137(UseStateResult7, "update")
+				v129(UseStateResult7, "update")
 				LifecycleEventsModule:DispatchEvent(LifecycleEventsModule.ToastEvents.Update, UseStateResult7.notificationType, UseStateResult7)
 				
 				return
@@ -702,8 +614,8 @@ return function(p1)
 				task.cancel(UseStateResult10)
 			end
 			UseStateResult2_9((task.delay(DisplayNotificationDelay, function()
-				-- upvalues: v137 (upval), UseStateResult7 (copy), LifecycleEventsModule (upval)
-				v137(UseStateResult7, "display")
+				-- upvalues: v129 (upval), UseStateResult7 (copy), LifecycleEventsModule (upval)
+				v129(UseStateResult7, "display")
 				LifecycleEventsModule:DispatchEvent(LifecycleEventsModule.ToastEvents.Display, UseStateResult7.notificationType, UseStateResult7)
 			end)))
 		end
@@ -730,13 +642,13 @@ return function(p1)
 		UseStateResult17, UseStateResult19, Holding
 	})
 	ReactModule.useEffect(function()
-		-- upvalues: EnableNotificationsToastTTLFix (upval), Callback (ref), UseStateResult14 (copy), UseResult (copy), v132 (copy)
+		-- upvalues: EnableNotificationsToastTTLFix (upval), Callback (ref), UseStateResult14 (copy), UseResult (copy), v124 (copy)
 		if EnableNotificationsToastTTLFix then
 			Callback(UseStateResult14)
 			
 			return
 		else
-			Callback(UseStateResult14, UseResult, v132)
+			Callback(UseStateResult14, UseResult, v124)
 		end
 	end, { UseStateResult14 })
 	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(1, function()
@@ -759,7 +671,7 @@ return function(p1)
 				repeat
 					if UseStateResult6 and UseStateResult6.notificationType == TypeModule.NotificationTypeEnum.FriendRequestReceived then
 						if FFlagFriendshipNotifsUseSendrExperiment and not Flag then
-							v1, v54 = pcall(function()
+							v1, v51 = pcall(function()
 								-- upvalues: Flag (upval), IXPServiceWrapper (upval), FriendshipNotifsUseSendrLayerName (upval)
 								Flag = true
 								
@@ -872,7 +784,7 @@ return function(p1)
 		BackgroundTransparency = UseStyleResult.Theme.BackgroundUIDefault.Transparency,
 		BackgroundColor3 = UseStyleResult.Theme.BackgroundUIDefault.Color,
 		Text = "",
-		[ReactModule.Event.Activated] = v130,
+		[ReactModule.Event.Activated] = v122,
 		[ReactModule.Event.MouseEnter] = function()
 			-- upvalues: UseStateResult2_15 (copy)
 			UseStateResult2_15(true)
@@ -899,7 +811,7 @@ return function(p1)
 		})
 	})
 	local UseMemoResult1 = ReactModule.useMemo(function()
-		-- upvalues: ReactModule (upval), SpringAnimatedItem (upval), UseStateResult1 (copy), UseStateResult5_1 (copy), UseStateResult6 (copy), v122 (copy), TypeModule (upval), UserId (copy), UseStateResult2_14 (copy), UseStateResult8 (copy), SpringOptions (upval), IsVRAppBuild (copy), UseStateResult5 (copy), UseStateResult2_5 (copy), UseResult4 (copy), SwipeDetectionWrapperModule (upval), UseResult2 (copy), UseStateResult2_15 (copy), ClientToastNotificationsEnabledEngineFeature (upval), ClientNotificationWrapperModule (upval), UseStateResult2_16 (copy), EnableClientToastNotificationsReducedMotion (upval), UseAnimatedBindingResult (copy), UseStateResult5_2 (copy), TextButton (copy), NotificationCardProviderModule (upval), UseStateResult11 (copy), UseResult7 (copy), NotificationCardModule (upval), UseStateResult15_1 (copy), UseStateResult19 (ref), IsUsePreferredInputResultMatch (copy), HoldProgress (copy)
+		-- upvalues: ReactModule (upval), SpringAnimatedItem (upval), UseStateResult1 (copy), UseStateResult5_1 (copy), UseStateResult6 (copy), v114 (copy), TypeModule (upval), UserId (copy), UseStateResult2_14 (copy), UseStateResult8 (copy), SpringOptions (upval), IsVRAppBuild (copy), UseStateResult5 (copy), UseStateResult2_5 (copy), UseResult4 (copy), SwipeDetectionWrapperModule (upval), UseResult2 (copy), UseStateResult2_15 (copy), ClientToastNotificationsEnabledEngineFeature (upval), ClientNotificationWrapperModule (upval), UseStateResult2_16 (copy), EnableClientToastNotificationsReducedMotion (upval), UseAnimatedBindingResult (copy), UseStateResult5_2 (copy), TextButton (copy), NotificationCardProviderModule (upval), UseStateResult11 (copy), UseResult7 (copy), NotificationCardModule (upval), UseStateResult15_1 (copy), UseStateResult19 (ref), IsUsePreferredInputResultMatch (copy), HoldProgress (copy)
 		return ReactModule.createElement(SpringAnimatedItem.AnimatedFrame, {
 			regularProps = {
 				ClipsDescendants = false,
@@ -909,8 +821,8 @@ return function(p1)
 				Active = true,
 				Visible = UseStateResult5_1 and UseStateResult6 ~= nil,
 				[ReactModule.Event.MouseEnter] = function()
-					-- upvalues: v122 (upval), TypeModule (upval), UserId (upval), UseStateResult6 (upval), UseStateResult2_14 (upval)
-					v122(TypeModule.ToastNotificationActionsEnum.Hover, UserId, UseStateResult6)
+					-- upvalues: v114 (upval), TypeModule (upval), UserId (upval), UseStateResult6 (upval), UseStateResult2_14 (upval)
+					v114(TypeModule.ToastNotificationActionsEnum.Hover, UserId, UseStateResult6)
 					UseStateResult2_14(true)
 				end,
 				[ReactModule.Event.MouseLeave] = function()
@@ -940,9 +852,9 @@ return function(p1)
 				AutomaticSize = Enum.AutomaticSize.Y,
 				swipeEnabled = UseStateResult5,
 				swipeCallback = function(SwipeDirection)
-					-- upvalues: v122 (upval), TypeModule (upval), UserId (upval), UseStateResult6 (upval), UseResult2 (upval), UseStateResult2_15 (upval)
+					-- upvalues: v114 (upval), TypeModule (upval), UserId (upval), UseStateResult6 (upval), UseResult2 (upval), UseStateResult2_15 (upval)
 					if SwipeDirection == Enum.SwipeDirection.Up or SwipeDirection == Enum.SwipeDirection.Right then
-						v122(TypeModule.ToastNotificationActionsEnum.Dismissed, UserId, UseStateResult6)
+						v114(TypeModule.ToastNotificationActionsEnum.Dismissed, UserId, UseStateResult6)
 						UseResult2()
 						UseStateResult2_15(false)
 					end
@@ -986,7 +898,7 @@ return function(p1)
 	end, {
 		ConstantsModule, UseStyleResult, UseStateResult6, UseStateResult5_1,
 		UseStateResult5, UseStateResult11, UseStateResult5_2, UseStateResult15_1,
-		UseStateResult8, v130, UseStateResult2_14, UseStateResult2_15, UseResult7
+		UseStateResult8, v122, UseStateResult2_14, UseStateResult2_15, UseResult7
 	})
 	
 	return if IsVRAppBuild then ReactModule.createElement(ToastVRWrapperModule, {

@@ -77,13 +77,11 @@ Amp.Upsell.Title.RequestSent,Request sent
 Authentication.AccountSwitch.Action.SwitchAccount,Switch Accounts
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,Switch accounts
 Authentication.CrossDevice.Heading.QuickLogin,Quick Sign-in
-Authentication.Login.Action.Leave,Leave
 Authentication.Login.Action.QuickSignIn,Quick sign-in
 Authentication.Login.Action.Save,Save
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Exit Roblox to switch account for {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,Use a different Roblox account
 Authentication.Login.Button.XboxAccountSwitcher,Switch Xbox account
-Authentication.Login.Description.LeaveAccountSetup,"If you leave now, your Roblox account won’t be set up."
 Authentication.Login.Error.PasskeyOnlyAccount,Your account only has a passkey set up for sign-in. Try signing in with your passkey or recover your account.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Cannot verify platform account. Please try again later.
 Authentication.Login.Heading.IncompatibleAccounts,Incompatible Accounts
@@ -112,7 +110,7 @@ Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.ContinueSetup,Continue setup
 Authentication.SignUp.Action.Create,Create
 Authentication.SignUp.Action.CreateAccountSentenceCase,Create account
-Authentication.SignUp.Action.ExitModalLeave,
+Authentication.SignUp.Action.ExitModalLeave,Leave
 Authentication.SignUp.Action.RespawnNow,Respawn now
 Authentication.SignUp.Button.OKCaptialized,OK
 Authentication.SignUp.Button.RetryLogIn,Retry log in
@@ -2126,11 +2124,8 @@ Feature.AvatarSwitcher.Message.UnknownSupport,"You can still switch your avatar,
 Feature.AvatarSwitcher.Message.Unsupported,This experience uses a custom avatar and doesn’t support Roblox avatars.
 Feature.AvatarWorkshop.Action.EditAvatar,Edit avatar
 Feature.AvatarWorkshop.Action.TryAgain,Try again
-Feature.AvatarWorkshop.Description.AddAvatar,Add this avatar to your avatars?
-Feature.AvatarWorkshop.Heading.AddAvatar,Add avatar?
 Feature.AvatarWorkshop.Heading.Customize,Customize
 Feature.AvatarWorkshop.Heading.YourAvatars,Your avatars
-Feature.AvatarWorkshop.Label.DefaultAvatarName,My avatar
 Feature.AvatarWorkshop.Message.LoadItemsError,Something went wrong loading your items.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,Couldn't load more items.
 Feature.AvatarWorkshop.Message.NoItemsOwned,You don't own any items here yet.
@@ -2403,8 +2398,6 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,All games
 Feature.Build.Label.AmountAvailable,{AMOUNT} available
-Feature.Build.Label.AttachmentCountPlural,{count} attachments
-Feature.Build.Label.AttachmentCountSingular,1 attachment
 Feature.Build.Label.Autosaved,Auto-saved
 Feature.Build.Label.Available,available
 Feature.Build.Label.AvailableForPurchase,Available to buy
@@ -2424,7 +2417,6 @@ Feature.Build.Label.DefaultDeveloperProductName,developer product
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,Deleted
 Feature.Build.Label.DescribeIdea,Describe an idea
-Feature.Build.Label.DescribeIdeaOrPick,Describe an idea or pick one below
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,Description: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Name: {NAME}
@@ -2739,7 +2731,6 @@ Feature.Build.Title.NoMonetizationPasses,You haven't created any Passes
 Feature.Build.Title.NoMonetizationProducts,Start earning in your game
 Feature.Build.Title.NoMonetizationSubscriptions,You haven't created any Subscriptions
 Feature.Build.Title.NoRobuxForUsage,No Robux left for Build usage
-Feature.Build.Title.PastedText,Pasted text
 Feature.Build.Title.PickCampaign,Pick a length
 Feature.Build.Title.Playtesters,
 Feature.Build.Title.PlaytestersAddRejected,We couldn't add some friends as early testers:
@@ -2761,7 +2752,7 @@ Feature.Build.Title.VersionInfo,Version information
 Feature.Build.Title.VersionNumber,Version {VERSION}
 Feature.Build.Title.Versions,Versions
 Feature.Build.Title.WhatsIncluded,What's included?
-Feature.BuyRobux.Action.ContentPersonalization,
+Feature.BuyRobux.Action.ContentPersonalization,Content personalization
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.Allow,Allow
 Feature.Captures.Action.AllowPhotoAccessAccepted,
@@ -3315,7 +3306,6 @@ Feature.Chat.Label.SearchFriends,Search for friends
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,Select to remove
 Feature.Chat.Label.SnoozePartyNotifications,Mute in-experience party notifications for:
-Feature.Chat.Label.StartChatting,Start chatting
 Feature.Chat.Label.SwipeToReplyTooltip,Swipe to reply
 Feature.Chat.Label.TapToRemove,Tap to remove
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}d
@@ -3582,7 +3572,6 @@ Feature.Friends.Button.GotIt,
 Feature.Friends.Description.ContactsModal,Your contacts are on Roblox! Become friends to see their full avatars and profiles. Go to the Add Friends page to see more people you may know.
 Feature.Friends.Description.DoMoreWithTrustedConnections,Do more on Roblox with Trusted Connections. Only add people you know and trust.
 Feature.Friends.Description.DoMoreWithTrustedFriends,Do more on Roblox with trusted friends. Only add people you know and trust.
-Feature.Friends.Description.FoundFromContactImporter,Sent from contact importer
 Feature.Friends.Description.FromContacts,From contacts
 Feature.Friends.Description.FromContactsV2,{contactName} from contacts
 Feature.Friends.Description.FromQrCode,From QR code
@@ -3673,7 +3662,6 @@ Feature.Friends.Label.SentFromWithContext,Sent From {gameName}
 Feature.Friends.Label.SingularMutualFriend,mutual friend
 Feature.Friends.Label.Suggested,Suggested
 Feature.Friends.Label.Unfollowed,Unfollowed
-Feature.Friends.Label.YouAreFollowing,You are following
 Feature.Friends.Label.YourLinkedParent,Your linked parent
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,Do you want to be recommended to Roblox users who have your phone number?
@@ -3718,7 +3706,6 @@ Feature.FriendsActivityFeed.Label.ViewRecentActivity,View Recent Activity
 Feature.FriendsMenu.Label.SelectedFriendsCount,{numerator}/{denominator} friends selected
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,{selectedCount} friends selected
 Feature.GameBadges.Label.Experience,
-Feature.GameDetails.Action.Continue,
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,Give feedback
 Feature.GameDetails.Action.NotInterested,Not interested
@@ -3750,10 +3737,8 @@ Feature.GameDetails.Label.WhyThisAd,Why this ad?
 Feature.GameDetails.Label.Yes,
 Feature.GameDetails.Message.AdPreferences,Ads Preferences
 Feature.GameDetails.Message.AnonymousFeedbackTermsOfUse,Responses are shared anonymously and constitute as Feedback per the {underlineStart}Roblox Terms of Use{underlineEnd}.
-Feature.GameDetails.Message.ExternalLinkWarning,"By clicking ""Continue"", you will be redirected to a website that is not owned or operated by Roblox. They may have different terms and privacy policies."
 Feature.GameDetails.Message.HelpImproveExperience,Help us improve your experience
 Feature.GameDetails.Message.HidingExperienceQuestion,Why are you hiding this experience?
-Feature.GameDetails.Message.LeavingRobloxTitle,Leaving Roblox
 Feature.GameDetails.Message.PurchaseGameV2,Unlock access to {gameName} for {X} Robux?
 Feature.GameDetails.Message.SponsoredDisclosure.Error,The sponsorship information could not be displayed due to a temporary error.
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"You are seeing this sponsored content based on non-personalized factors such as device info, location, and age to serve you appropriate content. The experience Creator is {CreatorName}. The sponsorship was paid for by {PayerName}. To learn more, please visit the ""Privacy & Content Maturity"" page under Settings in your account, here:"
@@ -3773,14 +3758,9 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Notifications turned on for {ex
 Feature.GameJoin.Description.DifferentServer,You'll start in a different server
 Feature.GameJoin.Label.PlayTogether,You can play together
 Feature.GameJoin.Label.PlayTogetherSoon,You can play together soon
-Feature.GameJoin.Label.Played,played
-Feature.GameJoin.Label.PlayedExperience,played <b>{experienceName}</b>
-Feature.GameJoin.Label.RecentCoplay,You played together recently
-Feature.GameJoin.Label.UserPlayedExperience,<b>{userName}</b> played <b>{experienceName}</b>
 Feature.GamePage.Action.BackToTop,Back to top
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
-Feature.GamePage.LabelCancelField,
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,This experience is unavailable due to your age verification status.
 Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,Guests cannot join this experience.
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,To visit this experience purchase is required.
@@ -3953,7 +3933,7 @@ Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,Bonus item
 Feature.InExperienceShop.Label.BuyGamePass,Buy game pass
 Feature.InExperienceShop.Label.BuyNow,Buy Now
-Feature.InExperienceShop.Label.ContentPersonalization,Content personalization
+Feature.InExperienceShop.Label.ContentPersonalization,
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Ends in {timeRemaining}
 Feature.InExperienceShop.Label.FreeTrial,Free trial
@@ -4313,7 +4293,7 @@ Feature.PlayerSearchResults.Label.NewUsername,New username
 Feature.PlayerSearchResults.Label.Previously,Previously
 Feature.PlayerSearchResults.Label.ThisIsYou,This is you
 Feature.PlayerSearchResults.Label.You,You
-Feature.PlayerSearchResults.Label.YouAreFollowing,
+Feature.PlayerSearchResults.Label.YouAreFollowing,You are following
 Feature.PlayerSearchResults.Label.YouAreFriends,You are friends
 Feature.PrivateServers.Action.CreatePrivateServer,Create Private Server
 Feature.PrivateServers.Action.FreeWithBlackbird,Free with Plus
@@ -5043,7 +5023,7 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 ot
 Feature.UniversalShareSheet.Response.SharedMessage,Message was sent
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Messages were sent
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} others
-Feature.UserLibrary.Label.Library,
+Feature.UserLibrary.Label.MyLibrary,My Library
 Feature.VIPServer.Message.TooManyFreeServersOnGame,You cannot have more free private servers on this game.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,You cannot have more active free private servers. Please deactivate some other servers first.
 Feature.VerificationUpsell.Action.AddPhone,Add Phone
@@ -5215,7 +5195,7 @@ IAPExperience.InsufficientRobux.Title.InsufficientRobux,
 IAPExperience.LeaveRoblox.Action.Cancel,
 IAPExperience.LeaveRoblox.Action.Continue,
 IAPExperience.LeaveRoblox.Text.ExternalWebsiteWarning,"By clicking “Continue”, you will be redirected to a website that is not owned or operated by Roblox. They may have different terms and privacy policies."
-IAPExperience.LeaveRoblox.Title.LeavingRoblox,
+IAPExperience.LeaveRoblox.Title.LeavingRoblox,Leaving Roblox
 IAPExperience.Loading.Text.PurchasingItem,Purchasing item...
 IAPExperience.Loading.Text.PurchasingRobux,Purchasing Robux...
 IAPExperience.Loading.Text.WaitingForPurchase,Waiting for purchase...

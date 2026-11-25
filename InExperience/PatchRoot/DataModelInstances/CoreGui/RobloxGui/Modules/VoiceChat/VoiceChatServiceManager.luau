@@ -40,7 +40,6 @@ local GetFFlagEnableVoicePromptReasonTextModule = require(RobloxGui.Modules.Flag
 local GetFFlagAvatarChatServiceEnabledFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagAvatarChatServiceEnabled
 local GetFFlagVoiceChatServiceManagerUseAvatarChatFunction = VoiceChatCoreModule.Flags.GetFFlagVoiceChatServiceManagerUseAvatarChat
 local GetFFlagNonVoiceFTUXFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagNonVoiceFTUX
-local FFlagAgeCheckJoinIntentUnmutes = require(CorePackages.Workspace.Packages.SharedFlags).FFlagAgeCheckJoinIntentUnmutes
 local GetFFlagJoinWithoutMicPermissionsFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagJoinWithoutMicPermissions
 local GetFIntVoiceReverseNudgeUXDisplayTimeSecondsModule = require(RobloxGui.Modules.Flags.GetFIntVoiceReverseNudgeUXDisplayTimeSeconds)
 local RbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId")
@@ -157,7 +156,6 @@ local VoiceChatServiceManager = {
 	attemptVoiceRejoin = Instance.new("BindableEvent"),
 	showVoiceUI = Instance.new("BindableEvent"),
 	hideVoiceUI = Instance.new("BindableEvent"),
-	ageCheckEndedWithoutVoice = if FFlagAgeCheckJoinIntentUnmutes then Instance.new("BindableEvent") else nil,
 	voiceUIVisible = false,
 	mutedNonFriends = Instance.new("BindableEvent"),
 	userAgencySelected = Instance.new("BindableEvent"),
@@ -272,7 +270,7 @@ local _ = function(List, p1)
 end
 
 function VoiceChatServiceManager.new(CoreVoiceManager, Service, HttpRbxApiService, PermissionsService, BlockStatusChanged, CoreVoiceManager1, NotificationService, p2, AvatarChatService, CaptureService)
-	-- upvalues: Analytics (copy), GetCamMicPermissionsModule (copy), VoiceChatServiceManager (copy), FFlagProactiveVoiceRestrictionsUFR (copy), FFlagReactiveVoiceRestrictionsUFR (copy), CreateVoiceRestrictionControllerModule (copy), CreateVoiceRestrictionControllerDEPRECATEDModule (copy), GetUserSettingsFunction (copy), GetInformedOfBanFunction (copy), ShowLegacyVoiceRestrictionModule (copy), ShowUFRVoiceRestrictionModule (copy), GetServerNowModule (copy), VoiceInterventionReceivedSignal (copy), WATCHEDMESSAGETYPES (copy), GetFIntThrottleParticipantsUpdateMsFunction (copy), IXPServiceWrapper (copy), VoiceUIImprovementsIXPLayerName (copy), ThrottleParticipantsUpdateIXPLayerValue (copy), GetFFlagExpChatUseVoiceParticipantsStoreFunction (copy), ExpChatModule (copy), GetFFlagEnableUniveralVoiceToastsModule (copy), FFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (copy), FFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (copy), DebugSkipVoicePermissionCheck (copy), GetFFlagMicConsumerRegistryFunction (copy), FFlagAgeCheckJoinIntentUnmutes (copy), FFlagDebugShowAudioDeviceInputDebugger (copy), FFlagEnablePartyVoiceChangersInLua (copy), MicrophoneDevicePermissionsLoggingModule (copy), VoiceVolumeControlsGlobalVoiceVolumeSliderIxpExposure (copy), VoiceVolumeControlsEligibility (copy), VoiceVolumeControlsGlobalVoiceVolumeSliderIxpLayer (copy), ShowJoinVoiceWhenDisconnectedV3 (copy), EnableVoiceRewarmReArmV2 (copy), VOICEJOINPROGRESS (copy), ConstantsModule (copy), VoiceConnectDisconnectGrafanaMetrics (copy), DisableLeaveToastInStudio (copy), PromptTypeModule (copy), DebugSimulateConnectDisconnect (copy), NewResult (copy), AppStorageService (copy), FFlagProactiveVoiceRestrictionsUFRIXPExposureModule (copy), AppUserLayers (copy), GetFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (copy), VoiceNudgeUseNewDACopyModule (copy), GetFFlagShowDevicePermissionsModalFunction (copy), GetFFlagEnableSeamlessVoiceDataConsentToastModule (copy), GetFFlagNonVoiceFTUXFunction (copy), GetFFlagEnableVoiceChatMuteForVideoCapturesFunction (copy), GetFFlagEnableCrossExperienceVoiceCaptureMuteFunction (copy), Default1 (copy)
+	-- upvalues: Analytics (copy), GetCamMicPermissionsModule (copy), VoiceChatServiceManager (copy), FFlagProactiveVoiceRestrictionsUFR (copy), FFlagReactiveVoiceRestrictionsUFR (copy), CreateVoiceRestrictionControllerModule (copy), CreateVoiceRestrictionControllerDEPRECATEDModule (copy), GetUserSettingsFunction (copy), GetInformedOfBanFunction (copy), ShowLegacyVoiceRestrictionModule (copy), ShowUFRVoiceRestrictionModule (copy), GetServerNowModule (copy), VoiceInterventionReceivedSignal (copy), WATCHEDMESSAGETYPES (copy), GetFIntThrottleParticipantsUpdateMsFunction (copy), IXPServiceWrapper (copy), VoiceUIImprovementsIXPLayerName (copy), ThrottleParticipantsUpdateIXPLayerValue (copy), GetFFlagExpChatUseVoiceParticipantsStoreFunction (copy), ExpChatModule (copy), GetFFlagEnableUniveralVoiceToastsModule (copy), FFlagVoiceVolumeControlsEnableNotAudibleVoiceChatVolumeToastModule (copy), FFlagVoiceVolumeControlsEnableVoiceChatVolumeSliderModule (copy), DebugSkipVoicePermissionCheck (copy), GetFFlagMicConsumerRegistryFunction (copy), FFlagDebugShowAudioDeviceInputDebugger (copy), FFlagEnablePartyVoiceChangersInLua (copy), MicrophoneDevicePermissionsLoggingModule (copy), VoiceVolumeControlsGlobalVoiceVolumeSliderIxpExposure (copy), VoiceVolumeControlsEligibility (copy), VoiceVolumeControlsGlobalVoiceVolumeSliderIxpLayer (copy), ShowJoinVoiceWhenDisconnectedV3 (copy), EnableVoiceRewarmReArmV2 (copy), VOICEJOINPROGRESS (copy), ConstantsModule (copy), VoiceConnectDisconnectGrafanaMetrics (copy), DisableLeaveToastInStudio (copy), PromptTypeModule (copy), DebugSimulateConnectDisconnect (copy), NewResult (copy), AppStorageService (copy), FFlagProactiveVoiceRestrictionsUFRIXPExposureModule (copy), AppUserLayers (copy), GetFFlagVoiceChatDisruptiveVoiceNudgeEnableVariant2Module (copy), VoiceNudgeUseNewDACopyModule (copy), GetFFlagShowDevicePermissionsModalFunction (copy), GetFFlagEnableSeamlessVoiceDataConsentToastModule (copy), GetFFlagNonVoiceFTUXFunction (copy), GetFFlagEnableVoiceChatMuteForVideoCapturesFunction (copy), GetFFlagEnableCrossExperienceVoiceCaptureMuteFunction (copy), Default1 (copy)
 	local self = setmetatable({
 		_mutedAnyone = false,
 		voiceConnectEventReportedForActiveSession = false,
@@ -451,12 +449,6 @@ function VoiceChatServiceManager.new(CoreVoiceManager, Service, HttpRbxApiServic
 		self.coreVoiceManager:subscribe("OnMicFirstUnmutePrivacy", function()
 			-- upvalues: self (copy)
 			self:showPrompt("MicFirstUnmutePrivacy")
-		end)
-	end
-	if FFlagAgeCheckJoinIntentUnmutes then
-		self.coreVoiceManager:subscribe("OnAgeCheckCompletedWithoutVoice", function()
-			-- upvalues: self (copy)
-			self:_applyJoinIntentWithoutVoice()
 		end)
 	end
 	if FFlagDebugShowAudioDeviceInputDebugger then
@@ -670,7 +662,7 @@ function VoiceChatServiceManager.new(CoreVoiceManager, Service, HttpRbxApiServic
 		end
 	end)
 	self.coreVoiceManager:subscribe("OnVoiceJoin", function()
-		-- upvalues: GetFFlagNonVoiceFTUXFunction (upval), self (copy), PromptTypeModule (upval), FFlagAgeCheckJoinIntentUnmutes (upval), ConstantsModule (upval), GetFFlagEnableVoiceChatMuteForVideoCapturesFunction (upval), GetFFlagEnableCrossExperienceVoiceCaptureMuteFunction (upval), Default1 (upval), Flag (ref), VoiceConnectDisconnectGrafanaMetrics (upval), EventConnection (copy)
+		-- upvalues: GetFFlagNonVoiceFTUXFunction (upval), self (copy), PromptTypeModule (upval), GetFFlagEnableVoiceChatMuteForVideoCapturesFunction (upval), GetFFlagEnableCrossExperienceVoiceCaptureMuteFunction (upval), Default1 (upval), Flag (ref), VoiceConnectDisconnectGrafanaMetrics (upval), ConstantsModule (upval), EventConnection (copy)
 		if GetFFlagNonVoiceFTUXFunction() and self.hasLeftFTUX then
 			self.hasLeftFTUX = false
 			self:showJoinVoicePrompt()
@@ -680,15 +672,6 @@ function VoiceChatServiceManager.new(CoreVoiceManager, Service, HttpRbxApiServic
 			self:SetVoiceConnectCookieValue(true)
 		else
 			self:showPrompt(PromptTypeModule.VoiceConsentAcceptedToast)
-		end
-		if FFlagAgeCheckJoinIntentUnmutes and self.coreVoiceManager:ConsumeAgeCheckJoinIntent() and self.inExpUpsellEntrypoint ~= ConstantsModule.IN_EXP_UPSELL_ENTRYPOINTS.JOIN_VOICE then
-			local MicManager = self:GetMicManager()
-			
-			if MicManager then
-				MicManager:SetMicActive(true)
-			elseif self.localMuted == true then
-				self:ToggleMic()
-			end
 		end
 		if GetFFlagEnableVoiceChatMuteForVideoCapturesFunction() and self.CaptureService:IsCapturingVideo() then
 			if GetFFlagEnableCrossExperienceVoiceCaptureMuteFunction() then
@@ -1372,7 +1355,7 @@ function VoiceChatServiceManager:createPromptInstance(OnReadyForSignal, DevicePe
 			for _ = 0, FIntLinkingProtocolFetchRetries do
 				local SpawnedThread = task.spawn(function()
 					-- upvalues: v3 (ref), v4 (ref), Default2 (upval), SettingsRoute (upval)
-					v3, v168 = Default2:supportsSwitchToSettingsApp(SettingsRoute.Microphone):await()
+					v3, v166 = Default2:supportsSwitchToSettingsApp(SettingsRoute.Microphone):await()
 				end)
 				task.wait(FIntLinkingProtocolFetchTimeoutMS / 1000)
 				task.cancel(SpawnedThread)
@@ -1380,7 +1363,7 @@ function VoiceChatServiceManager:createPromptInstance(OnReadyForSignal, DevicePe
 				if v4 ~= nil then break end
 			end
 		else
-			v3, v168 = Default2:supportsSwitchToSettingsApp(SettingsRoute.Microphone):await()
+			v3, v166 = Default2:supportsSwitchToSettingsApp(SettingsRoute.Microphone):await()
 		end
 		self.settingsAppAvailable = v3 and v4
 	end
@@ -1855,17 +1838,6 @@ function VoiceChatServiceManager:JoinVoice(p4)
 			-- upvalues: self (copy)
 			self.coreVoiceManager:PostUserVoiceConnectionStatus(true)
 		end)
-	end
-end
-
-function VoiceChatServiceManager:_applyJoinIntentWithoutVoice()
-	if self:ShouldShowJoinVoice() then return end
-	self.coreVoiceManager.hasOptedToJoinVoiceOnAgeVerification = false
-	self.ageCheckEndedWithoutVoice:Fire()
-	local MicManager = self:GetMicManager()
-	
-	if MicManager and MicManager:GetConsumerCount() > 0 then
-		MicManager:SetMicActiveForAllConsumers(true, "AgeCheckJoinIntent")
 	end
 end
 

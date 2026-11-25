@@ -28,10 +28,9 @@ local FFlagEnableNewReportFlowGameTile = SharedFlagsModule.FFlagEnableNewReportF
 local FFlagAddThumbnailSelectorReport = SharedFlagsModule.FFlagAddThumbnailSelectorReport
 local FFlagLuaAppEnableNxMRoduxApportioning = SharedFlagsModule.FFlagLuaAppEnableNxMRoduxApportioning
 local FFlagLuaAppContinueSortInstantPlay = SharedFlagsModule.FFlagLuaAppContinueSortInstantPlay
-local FFlagLuaAppNotInterestedMobileSnackbar = SharedFlagsModule.FFlagLuaAppNotInterestedMobileSnackbar
 
 return function(p1, Callback)
-	-- upvalues: UseDispatchFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), UseLocalizationFunction (copy), FFlagLuaAppEnableReportExperience (copy), FFlagLuaAppContinueSortInstantPlay (copy), FFlagLuaAppNotInterestedMobileSnackbar (copy), ReactModule (copy), TileOverflowMenuItems (copy), ActivateGameNotInterestedModule (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), FFlagLuaAppEnableNxMRoduxApportioning (copy), FlaggedMutedErrorFunction (copy), OpenDynamicAbuseReportModule (copy), AbuseVectorModule (copy), CloseCentralOverlayFunction (copy), FFlagEnableNewReportFlowGameTile (copy), FFlagAddThumbnailSelectorReport (copy), IconName (copy)
+	-- upvalues: UseDispatchFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), UseLocalizationFunction (copy), FFlagLuaAppEnableReportExperience (copy), FFlagLuaAppContinueSortInstantPlay (copy), ReactModule (copy), TileOverflowMenuItems (copy), ActivateGameNotInterestedModule (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), FFlagLuaAppEnableNxMRoduxApportioning (copy), FlaggedMutedErrorFunction (copy), OpenDynamicAbuseReportModule (copy), AbuseVectorModule (copy), CloseCentralOverlayFunction (copy), FFlagEnableNewReportFlowGameTile (copy), FFlagAddThumbnailSelectorReport (copy), IconName (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -47,8 +46,7 @@ return function(p1, Callback)
 		inappropriateContent = "Feature.GameDetails.Label.InappropriateContent",
 		somethingElse = "Feature.GameDetails.Label.SomethingElse",
 		reportExperience = if FFlagLuaAppEnableReportExperience then "Feature.GameDetails.Action.Report" else nil,
-		gameDetails = if FFlagLuaAppContinueSortInstantPlay then "Feature.GameDetails.Action.GameDetails" else nil,
-		suggestLessOften = if FFlagLuaAppNotInterestedMobileSnackbar then "Feature.GameDetails.Message.SuggestLessOften" else nil
+		gameDetails = if FFlagLuaAppContinueSortInstantPlay then "Feature.GameDetails.Action.GameDetails" else nil
 	})
 	local CollectionId = p1.collectionId or ""
 	local UseResult = if FFlagLuaAppContinueSortInstantPlay then ReactModule.useCallback(function()

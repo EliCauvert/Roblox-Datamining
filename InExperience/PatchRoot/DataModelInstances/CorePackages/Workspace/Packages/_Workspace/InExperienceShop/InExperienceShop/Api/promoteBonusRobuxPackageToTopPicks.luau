@@ -4,7 +4,7 @@ local _ = require(InExperienceShop.Types)
 local FindTopPicksSectionIndexModule = require(InExperienceShop.Utils.findTopPicksSectionIndex)
 local FFlagPromoteRobuxInTopPicksModule = require(InExperienceShop.Flags.FFlagPromoteRobuxInTopPicks)
 local FFlagHideBonusInShopWhenNotClaimableModule = require(InExperienceShop.Flags.FFlagHideBonusInShopWhenNotClaimable)
-local FFlagEnableInExperienceShop = SharedFlagsModule.FFlagEnableInExperienceShop
+local FFlagEnableRobuxInExperienceShop = SharedFlagsModule.FFlagEnableRobuxInExperienceShop
 local FFlagEnableBonusJwtInShop = SharedFlagsModule.FFlagEnableBonusJwtInShop
 local BonusPromotionEligibilityModule = require(InExperienceShop.Api.BonusPromotionEligibility)
 
@@ -73,8 +73,8 @@ return {
 	end,
 	withoutFeaturedPromotion = withoutFeaturedPromotion,
 	promoteBonusRobuxPackageToTopPicks = function(Tbl, p1)
-		-- upvalues: FFlagEnableInExperienceShop (copy), FFlagPromoteRobuxInTopPicksModule (copy), withoutFeaturedPromotion (copy), findFirstBonusRobuxPackageWithPaymentSession (copy), FFlagEnableBonusJwtInShop (copy), FFlagHideBonusInShopWhenNotClaimableModule (copy), FindTopPicksSectionIndexModule (copy), BonusPromotionEligibilityModule (copy)
-		if not FFlagEnableInExperienceShop or not FFlagPromoteRobuxInTopPicksModule then
+		-- upvalues: FFlagEnableRobuxInExperienceShop (copy), FFlagPromoteRobuxInTopPicksModule (copy), withoutFeaturedPromotion (copy), findFirstBonusRobuxPackageWithPaymentSession (copy), FFlagEnableBonusJwtInShop (copy), FFlagHideBonusInShopWhenNotClaimableModule (copy), FindTopPicksSectionIndexModule (copy), BonusPromotionEligibilityModule (copy)
+		if not FFlagEnableRobuxInExperienceShop or not FFlagPromoteRobuxInTopPicksModule then
 			return (withoutFeaturedPromotion(Tbl))
 		end
 		local FirstBonusRobuxPackageWithPaymentSession, FirstBonusRobuxPackageWithPaymentSession2, FirstBonusRobuxPackageWithPaymentSession3 = findFirstBonusRobuxPackageWithPaymentSession(Tbl)

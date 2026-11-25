@@ -16,7 +16,6 @@ local NormalizeTFActionsEnumToModalVariantModule = require(TrustedContacts.Trust
 local FFlagTCLearnMoreLinkModule = require(TrustedContacts.Flags.FFlagTCLearnMoreLink)
 local FFlagTFUpdateAnalyticsModule = require(TrustedContacts.Flags.FFlagTFUpdateAnalytics)
 local FFlagEnableTrustedFriendsWizardVPCPrologueModule = require(TrustedContacts.Flags.FFlagEnableTrustedFriendsWizardVPCPrologue)
-local FFlagLuaAppTrustedContactsVpcUseUfoModule = require(TrustedContacts.Flags.FFlagLuaAppTrustedContactsVpcUseUfo)
 local _ = require(TrustedContacts.Common.Types)
 local TrustedConnectionsLearnMoreLink = game:DefineFastString("TrustedConnectionsLearnMoreLink", "https://help.roblox.com/hc/articles/37725513985812")
 local List = {
@@ -26,7 +25,7 @@ local List = {
 }
 
 return function(p1)
-	-- upvalues: ReactModule (copy), NormalizeTFActionsEnumToModalVariantModule (copy), UseTCAnalyticsFunction (copy), FFlagTFUpdateAnalyticsModule (copy), EventNames (copy), UseLocalizationFunction (copy), FFlagTCLearnMoreLinkModule (copy), List (copy), RoactUtilsModule (copy), UseModalTextsModule (copy), UseModalButtonActionsModule (copy), Sources (copy), FFlagEnableTrustedFriendsWizardVPCPrologueModule (copy), FFlagLuaAppTrustedContactsVpcUseUfoModule (copy), TrustedConnectionsLearnMoreLink (copy), TrustedContactsModalModule (copy)
+	-- upvalues: ReactModule (copy), NormalizeTFActionsEnumToModalVariantModule (copy), UseTCAnalyticsFunction (copy), FFlagTFUpdateAnalyticsModule (copy), EventNames (copy), UseLocalizationFunction (copy), FFlagTCLearnMoreLinkModule (copy), List (copy), RoactUtilsModule (copy), UseModalTextsModule (copy), UseModalButtonActionsModule (copy), Sources (copy), FFlagEnableTrustedFriendsWizardVPCPrologueModule (copy), TrustedConnectionsLearnMoreLink (copy), TrustedContactsModalModule (copy)
 	local UseMemoResult = nil
 	local TfActionsEnum = nil
 	TfActionsEnum = p1.tfActionsEnum
@@ -84,7 +83,6 @@ return function(p1)
 		showToast = p1.externalNavigation.showToast,
 		shareUrl = p1.externalNavigation.shareUrl,
 		openAmpWizard = if FFlagEnableTrustedFriendsWizardVPCPrologueModule then p1.externalNavigation.openAmpWizard else nil,
-		openVpc = if FFlagLuaAppTrustedContactsVpcUseUfoModule then p1.externalNavigation.openVpc else nil,
 		dismissModal = if FFlagEnableTrustedFriendsWizardVPCPrologueModule then p1.externalNavigation.closeModal else nil,
 		fireAnalyticsEvent = FireAnalyticsEventFunction
 	})

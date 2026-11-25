@@ -12,9 +12,6 @@ local CompositionTags = require(Parent.AppComposition).CompositionTags
 local FFlagSplitPaneDevStoreSeeAllSupportRegion = require(Parent.SharedFlags).FFlagSplitPaneDevStoreSeeAllSupportRegion
 local PaneHostContext = if FFlagSplitPaneDevStoreSeeAllSupportRegion then require(Parent.SplitPane).PaneHostContext else nil
 local FetchDevStoreSeeAllPageIfNeededModule = require(ExperienceStoreServerDrivenUi.Api.fetchDevStoreSeeAllPageIfNeeded)
-local FFlagDevStoreSeeAllPersonalizedRecommendationsEntryPointModule = require(ExperienceStoreServerDrivenUi.Flags.FFlagDevStoreSeeAllPersonalizedRecommendationsEntryPoint)
-local UseAppPolicy = if FFlagDevStoreSeeAllPersonalizedRecommendationsEntryPointModule then require(Parent.UniversalAppPolicy).useAppPolicy else nil
-local PersonalizedRecommendationsHeaderMenuModule = if FFlagDevStoreSeeAllPersonalizedRecommendationsEntryPointModule then require(ExperienceStoreServerDrivenUi.Components.PersonalizedRecommendationsHeaderMenu) else nil
 local GetDevStoreSeeAllPageKeyModule = require(ExperienceStoreServerDrivenUi.Utils.getDevStoreSeeAllPageKey)
 
 local function _(p1, p2)
@@ -22,13 +19,10 @@ local function _(p1, p2)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: GetDevStoreSeeAllPageKeyModule (copy), UseLocalizationFunction (copy), FFlagDevStoreSeeAllPersonalizedRecommendationsEntryPointModule (copy), UseAppPolicy (copy), FFlagSplitPaneDevStoreSeeAllSupportRegion (copy), ReactModule (copy), PaneHostContext (copy), SduiLoadTimer (copy), FFlagSduiErrorPaths (copy), GetSduiClientPageScopeFunction (copy), FetchDevStoreSeeAllPageIfNeededModule (copy), SduiPageEntryPoint (copy), PersonalizedRecommendationsHeaderMenuModule (copy), CompositionTags (copy)
+	-- upvalues: GetDevStoreSeeAllPageKeyModule (copy), UseLocalizationFunction (copy), FFlagSplitPaneDevStoreSeeAllSupportRegion (copy), ReactModule (copy), PaneHostContext (copy), SduiLoadTimer (copy), FFlagSduiErrorPaths (copy), GetSduiClientPageScopeFunction (copy), FetchDevStoreSeeAllPageIfNeededModule (copy), SduiPageEntryPoint (copy), CompositionTags (copy)
 	local UniverseId = p1.universeId or p1.navigation and p1.navigation.getParam("universeId")
 	local DevStoreSeeAllPageKeyModule = GetDevStoreSeeAllPageKeyModule(UniverseId)
 	local UseLocalizationResult = UseLocalizationFunction({ pageTitle = "Feature.GameDetails.Label.Store" })
-	local UseAppPolicyResult = if FFlagDevStoreSeeAllPersonalizedRecommendationsEntryPointModule then UseAppPolicy(function(p2)
-		return p2.getShowInContextPersonalizedRecommendationsExperienceDetailsStore()
-	end) else false
 	local UseContextResult = if FFlagSplitPaneDevStoreSeeAllSupportRegion then ReactModule.useContext(PaneHostContext) else nil
 	local PageTimer = p1.pageTimer or p1.navigation and p1.navigation.getParam("pageTimer")
 	local UseMemoResult = ReactModule.useMemo(function()
@@ -72,10 +66,6 @@ return ReactModule.memo(function(p1)
 		navButtonType = if FFlagSplitPaneDevStoreSeeAllSupportRegion and UseContextResult ~= nil and UseContextResult.isHostCloseVisible then "none" else nil,
 		pageTitle = UseLocalizationResult.pageTitle,
 		refresh = UseResult,
-		renderUtilities = if FFlagDevStoreSeeAllPersonalizedRecommendationsEntryPointModule and UseAppPolicyResult then function()
-			-- upvalues: ReactModule (upval), PersonalizedRecommendationsHeaderMenuModule (upval)
-			return ReactModule.createElement(PersonalizedRecommendationsHeaderMenuModule)
-		end else nil,
 		contentTag = CompositionTags.ContentRegion.Body,
 		layoutTag = CompositionTags.Layout.Detail
 	})

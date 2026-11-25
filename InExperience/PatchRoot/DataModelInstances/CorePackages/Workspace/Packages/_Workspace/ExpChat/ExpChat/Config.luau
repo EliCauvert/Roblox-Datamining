@@ -1,6 +1,8 @@
-﻿local Parent = script:FindFirstAncestor("ExpChat").Parent
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
 local IsTenFootInterfaceFunction = require(Parent.AppCommonLib).isTenFootInterface
 local Config1 = require(Parent.ExpChatShared).Config
+local FFlagExpChatChannelTabSizingUpdateModule = require(ExpChat.Flags.FFlagExpChatChannelTabSizingUpdate)
 local Config = {
 	ChatInputBarFont = Enum.Font.BuilderSansMedium,
 	ChatInputBarFontFace = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal),
@@ -40,7 +42,6 @@ local Config = {
 		DividerSize = 1,
 		DividerTransparency = 0.7,
 		BorderTransparency = 0,
-		MinTabWidth = 72,
 		DropdownIconContainerWidth = 55,
 		DropdownIconPadding = 15,
 		BackgroundColor3 = Color3.fromRGB(25, 27, 29),
@@ -51,7 +52,8 @@ local Config = {
 		TextStrokeColor3 = Color3.fromRGB(0, 0, 0),
 		UnreadDotColor3 = Color3.fromRGB(255, 255, 255),
 		DividerColor3 = Color3.fromRGB(255, 255, 255),
-		BorderColor3 = Color3.fromRGB(100, 100, 100)
+		BorderColor3 = Color3.fromRGB(100, 100, 100),
+		MinTabWidth = if FFlagExpChatChannelTabSizingUpdateModule then 72 else 100
 	},
 	DefaultChannelNames = Config1.DefaultChannelNames,
 	MessageCharacterLimit = 200,

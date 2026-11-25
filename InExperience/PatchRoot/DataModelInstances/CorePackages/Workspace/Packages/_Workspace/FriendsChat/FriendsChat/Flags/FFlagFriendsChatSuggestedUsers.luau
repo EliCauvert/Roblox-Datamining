@@ -1,3 +1,0 @@
-﻿local FFlagFriendsChatUseViewRecyclerConversationListModule = require(script.Parent.FFlagFriendsChatUseViewRecyclerConversationList)
-
-return require(script:FindFirstAncestor("FriendsChat").Parent.SharedFlags).FFlagFriendsChatSuggestedUsers and FFlagFriendsChatUseViewRecyclerConversationListModule

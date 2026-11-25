@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AXEnableInventorySearch4", false)
+﻿return game:DefineFastFlag("AXEnableInventorySearch2", false)

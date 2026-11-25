@@ -77,13 +77,11 @@ Amp.Upsell.Title.RequestSent,リクエストを送信しました
 Authentication.AccountSwitch.Action.SwitchAccount,アカウントを切り替える
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,クイックログイン
-Authentication.Login.Action.Leave,
 Authentication.Login.Action.QuickSignIn,クイックサインイン
 Authentication.Login.Action.Save,保存
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Robloxから退出して {platformAccountName} のアカウントを切り替え
 Authentication.Login.Button.UseDifferentRobloxAccount,別のRobloxアカウントを使用
 Authentication.Login.Button.XboxAccountSwitcher,Xboxアカウントを切りかえる
-Authentication.Login.Description.LeaveAccountSetup,この画面を閉じると、Robloxアカウントの設定は完了しません。
 Authentication.Login.Error.PasskeyOnlyAccount,アカウントにはログイン用のパスキーが設定されています。パスキーでログインするか、アカウントを回復してください。
 Authentication.Login.Error.PlatformAccountConnectionFailure,プラットフォーム用アカウントを確認できません。後でもう一度お試しください。
 Authentication.Login.Heading.IncompatibleAccounts,アカウントに互換性がありません
@@ -2126,11 +2124,8 @@ Feature.AvatarSwitcher.Message.UnknownSupport,アバターの切り替えはで�
 Feature.AvatarSwitcher.Message.Unsupported,このバーチャル空間はカスタムアバターを使用しているため、Robloxアバターに対応していません。
 Feature.AvatarWorkshop.Action.EditAvatar,アバターを編集
 Feature.AvatarWorkshop.Action.TryAgain,もう一度試す
-Feature.AvatarWorkshop.Description.AddAvatar,このアバターをあなたのアバターに追加しますか？
-Feature.AvatarWorkshop.Heading.AddAvatar,アバターを追加しますか？
 Feature.AvatarWorkshop.Heading.Customize,カスタマイズ
 Feature.AvatarWorkshop.Heading.YourAvatars,マイアバター
-Feature.AvatarWorkshop.Label.DefaultAvatarName,
 Feature.AvatarWorkshop.Message.LoadItemsError,アイテムの読み込み中に問題が発生しました。
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,これ以上のアイテムを読み込めませんでした。
 Feature.AvatarWorkshop.Message.NoItemsOwned,ここにはまだ所有するアイテムがありません。
@@ -2403,8 +2398,6 @@ Feature.Build.Label.AdvancedModel,詳細選択
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,すべてのゲーム
 Feature.Build.Label.AmountAvailable,残り{AMOUNT}
-Feature.Build.Label.AttachmentCountPlural,{count}件のアタッチメント
-Feature.Build.Label.AttachmentCountSingular,1件のアタッチメント
 Feature.Build.Label.Autosaved,自動保存済み
 Feature.Build.Label.Available,利用可能
 Feature.Build.Label.AvailableForPurchase,購入可能
@@ -2424,7 +2417,6 @@ Feature.Build.Label.DefaultDeveloperProductName,開発者製品
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,削除済み
 Feature.Build.Label.DescribeIdea,アイデアを説明してください
-Feature.Build.Label.DescribeIdeaOrPick,アイデアを説明するか、以下から1つ選んでください
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,説明：{DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,製品名：{NAME}
@@ -3312,7 +3304,6 @@ Feature.Chat.Label.SearchFriends,友達をサーチ
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,選択して削除
 Feature.Chat.Label.SnoozePartyNotifications,以下のバーチャル空間内パーティ通知をミュート:
-Feature.Chat.Label.StartChatting,チャットを始める
 Feature.Chat.Label.SwipeToReplyTooltip,スワイプして返信
 Feature.Chat.Label.TapToRemove,タップして削除
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}日
@@ -3579,7 +3570,6 @@ Feature.Friends.Button.GotIt,
 Feature.Friends.Description.ContactsModal,あなたの連絡先の中にRobloxを使っている人がいます！アバターとプロフィールを見るには、友達になりましょう。 「友達を追加」ページに移動して、知り合いをさらに探せます。
 Feature.Friends.Description.DoMoreWithTrustedConnections,信頼するつながりを活用して、Robloxでさらに楽しみましょう。知り合いの信頼する人だけを追加してください。
 Feature.Friends.Description.DoMoreWithTrustedFriends,信頼する友達と一緒に、Robloxでさらに楽しみましょう。知り合いの信頼する人だけを追加してください。
-Feature.Friends.Description.FoundFromContactImporter,連絡先インポート機能から送信
 Feature.Friends.Description.FromContacts,連絡先から
 Feature.Friends.Description.FromContactsV2,連絡先にある {contactName} さん
 Feature.Friends.Description.FromQrCode,QRコードから
@@ -3633,7 +3623,7 @@ Feature.Friends.Label.FollowsYou,あなたをフォロー中
 Feature.Friends.Label.Frequent,一緒に遊んだ人
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,Robloxで友達になるように招待しました。
-Feature.Friends.Label.FriendOfUser,
+Feature.Friends.Label.FriendOfUser,{displayName}の友達
 Feature.Friends.Label.FriendOwns,友達1人が持っています
 Feature.Friends.Label.FriendRecentlyPlayed,<b>友達1人が</b>最近プレイしました
 Feature.Friends.Label.FriendRequest,
@@ -3670,7 +3660,6 @@ Feature.Friends.Label.SentFromWithContext,{gameName} から送信されました
 Feature.Friends.Label.SingularMutualFriend,
 Feature.Friends.Label.Suggested,
 Feature.Friends.Label.Unfollowed,フォローをやめました
-Feature.Friends.Label.YouAreFollowing,
 Feature.Friends.Label.YourLinkedParent,紐づけられた保護者
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,あなたの電話番号を持っているRobloxユーザーへのおすすめ表示を希望しますか？
@@ -3715,7 +3704,6 @@ Feature.FriendsActivityFeed.Label.ViewRecentActivity,最近のアクティビテ
 Feature.FriendsMenu.Label.SelectedFriendsCount,選択済みの友達（ {numerator}/{denominator} ）
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,選択済みの友達（{selectedCount}人）
 Feature.GameBadges.Label.Experience,
-Feature.GameDetails.Action.Continue,
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,
 Feature.GameDetails.Action.NotInterested,興味なし
@@ -3747,10 +3735,8 @@ Feature.GameDetails.Label.WhyThisAd,
 Feature.GameDetails.Label.Yes,
 Feature.GameDetails.Message.AdPreferences,広告設定
 Feature.GameDetails.Message.AnonymousFeedbackTermsOfUse,回答は匿名で共有され、 {underlineStart}Roblox利用規約{underlineEnd} に基づいてフィードバック（ご意見・ご感想）とみなされます。
-Feature.GameDetails.Message.ExternalLinkWarning,「続ける」をクリックすると、Robloxが所有・管理していないウェブサイトに移動します。独自の異なる規約やプライバシーポリシーが適用される場合があります。
 Feature.GameDetails.Message.HelpImproveExperience,ユーザー体験向上にご協力ください
 Feature.GameDetails.Message.HidingExperienceQuestion,このバーチャル空間を非表示にしている理由は何ですか？
-Feature.GameDetails.Message.LeavingRobloxTitle,Robloxではないサイトに移動中
 Feature.GameDetails.Message.PurchaseGameV2,{gameName} へのアクセスを {X} Robux でアンロックしますか？
 Feature.GameDetails.Message.SponsoredDisclosure.Error,一時的なエラーのため、スポンサー情報を表示できませんでした。
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,表示されているスポンサーコンテンツは、デバイス情報、位置情報、年齢などの個人を特定しない情報に基づいて、適切なコンテンツを提供しています。このバーチャル空間を提供するのは{CreatorName}で、{PayerName}がスポンサー費用を負担しています。詳細については、アカウントの設定にある「プライバシーとコンテンツ成熟度」ページをご覧ください。
@@ -3770,12 +3756,9 @@ Feature.GameFollows.TooltipTurnedOnNotifications,{experienceName} の通知を�
 Feature.GameJoin.Description.DifferentServer,別のサーバーで開始します
 Feature.GameJoin.Label.PlayTogether,一緒にプレイできます
 Feature.GameJoin.Label.PlayTogetherSoon,もうすぐ一緒にプレイできるようになります
-Feature.GameJoin.Label.Played,プレイ済み
-Feature.GameJoin.Label.RecentCoplay,最近一緒にプレイしました
 Feature.GamePage.Action.BackToTop,トップに戻る
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
-Feature.GamePage.LabelCancelField,
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,このバーチャル空間は、年齢確認の状態によって利用できません。
 Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,ゲストはこのバーチャル空間に参加できません。
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,このバーチャル空間に行くには購入が必要です。
@@ -5032,6 +5015,7 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + そ�
 Feature.UniversalShareSheet.Response.SharedMessage,メッセージが送信されました
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + その他{N}件
+Feature.UserLibrary.Label.MyLibrary,マイライブラリ
 Feature.VIPServer.Message.TooManyFreeServersOnGame,このゲーム上では、これ以上は無料のプライベートサーバーを持つことができません。
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,これ以上、無料プライベートサーバーを持つことはできません。まず、他のサーバーを無効化してください。
 Feature.VerificationUpsell.Action.AddPhone,電話番号を追加
@@ -5202,7 +5186,7 @@ IAPExperience.InsufficientRobux.Text.YouNeed,追加で {robux} 必要です。Ro
 IAPExperience.InsufficientRobux.Title.InsufficientRobux,Robuxが足りません
 IAPExperience.LeaveRoblox.Action.Cancel,
 IAPExperience.LeaveRoblox.Action.Continue,
-IAPExperience.LeaveRoblox.Text.ExternalWebsiteWarning,
+IAPExperience.LeaveRoblox.Text.ExternalWebsiteWarning,「続ける」をクリックすると、Robloxが所有・管理していないウェブサイトに移動します。独自の異なる規約やプライバシーポリシーが適用される場合があります。
 IAPExperience.LeaveRoblox.Title.LeavingRoblox,Robloxから退出中
 IAPExperience.Loading.Text.PurchasingItem,アイテムを購入中...
 IAPExperience.Loading.Text.PurchasingRobux,Robuxを購入中...

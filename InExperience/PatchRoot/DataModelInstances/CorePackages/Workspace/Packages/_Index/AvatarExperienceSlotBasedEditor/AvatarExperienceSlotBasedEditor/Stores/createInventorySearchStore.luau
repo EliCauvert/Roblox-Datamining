@@ -1,6 +1,6 @@
 ﻿local SignalsModule = require(script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent.Signals)
 
-return function(Callback)
+return function()
 	-- upvalues: SignalsModule (copy)
 	local Signal, Signal2 = SignalsModule.createSignal("")
 	
@@ -11,17 +11,11 @@ return function(Callback)
 			return Signal(p1) ~= ""
 		end),
 		setQuery = function(p1)
-			-- upvalues: Callback (copy), Signal (copy), Signal2 (copy)
-			if Callback and p1 ~= Signal(false) then
-				Callback()
-			end
+			-- upvalues: Signal2 (copy)
 			Signal2(p1)
 		end,
 		clearQuery = function()
-			-- upvalues: Callback (copy), Signal (copy), Signal2 (copy)
-			if Callback and Signal(false) ~= "" then
-				Callback()
-			end
+			-- upvalues: Signal2 (copy)
 			Signal2("")
 		end
 	}

@@ -154,7 +154,7 @@ function SearchBar.render(p1)
 				}),
 				SearchBorder = Roact.createElement("Frame", {
 					Size = UDim2.new(1, -66, 0, 38),
-					BackgroundColor3 = Color3.fromRGB(136, 136, 136),
+					BackgroundColor3 = Color3.new(136, 136, 136),
 					BackgroundTransparency = 0.8,
 					[Roact.Change.AbsoluteSize] = p1.onAbsoluteSizeChanged
 				}, {

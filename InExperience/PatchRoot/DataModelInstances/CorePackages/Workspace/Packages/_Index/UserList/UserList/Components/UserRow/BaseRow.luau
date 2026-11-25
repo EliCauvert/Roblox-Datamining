@@ -12,7 +12,6 @@ local FFlagFriendsPageViewBtnEnabled = require(Parent.SharedFlags).FFlagFriendsP
 local FFlagEnableBlackbirdCheck = require(Parent.SharedFlags).FFlagEnableBlackbirdCheck
 local FFlagUserListCtaIntegrationEnabled = require(Parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
 local FFlagUserListSurfaceExtensions = require(Parent.SharedFlags).FFlagUserListSurfaceExtensions
-local FFlagUserListClientRowProps = require(Parent.SharedFlags).FFlagUserListClientRowProps
 local FFlagUserListInviteCta = require(Parent.SharedFlags).FFlagUserListInviteCta
 local FFlagProfilePlatformSeededPymk = require(Parent.SharedFlags).FFlagProfilePlatformSeededPymk
 local View = FoundationModule.View
@@ -35,22 +34,9 @@ local config = {
 }
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseTokensFunction (copy), FFlagUserListSurfaceExtensions (copy), ConstantsModule (copy), FFlagUserListClientRowProps (copy), EnumsModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), FFlagUserListInviteCta (copy), FFlagFriendsPageViewBtnEnabled (copy), FFlagUserListCtaIntegrationEnabled (copy), ReactModule (copy), View (copy), UserTile (copy), FoundationModule (copy), FFlagEnableBlackbirdCheck (copy), FFlagProfilePlatformSeededPymk (copy), config (copy), StatusIndicator (copy), StatusIndicatorVariant (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), Skeleton (copy), Radius (copy), IconButton (copy), IconSize (copy)
+	-- upvalues: UseTokensFunction (copy), FFlagUserListSurfaceExtensions (copy), UseLocalizationFunction (copy), TextKeysModule (copy), EnumsModule (copy), FFlagUserListInviteCta (copy), FFlagFriendsPageViewBtnEnabled (copy), FFlagUserListCtaIntegrationEnabled (copy), ReactModule (copy), View (copy), ConstantsModule (copy), UserTile (copy), FoundationModule (copy), FFlagEnableBlackbirdCheck (copy), FFlagProfilePlatformSeededPymk (copy), config (copy), StatusIndicator (copy), StatusIndicatorVariant (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), Skeleton (copy), Radius (copy), IconButton (copy), IconSize (copy)
 	local UseTokensResult = UseTokensFunction()
 	local IsDisableRowActivation: boolean = FFlagUserListSurfaceExtensions and p1.disableRowActivation == true
-	local IsRowSizeMatch = false
-	local v1 = false
-	local USERROWHEIGHT = ConstantsModule.USER_ROW_HEIGHT
-	
-	if FFlagUserListClientRowProps then
-		IsRowSizeMatch = p1.layoutMode == EnumsModule.RowLayoutMode.Wide and p1.rowSize == EnumsModule.RowSize.Small
-		local IsIsContextualInfoLoading: boolean = p1.isContextualInfoLoading == true or p1.contextualInfo ~= nil and p1.contextualInfo.text ~= nil
-		v1 = IsRowSizeMatch and IsIsContextualInfoLoading
-		
-		if IsRowSizeMatch then
-			USERROWHEIGHT = if IsIsContextualInfoLoading then UseTokensResult.Size.Size_1400 else UseTokensResult.Size.Size_1000
-		end
-	end
 	local UseLocalizationResult = UseLocalizationFunction({
 		Accept = TextKeysModule.Accept,
 		Add = TextKeysModule.Add,
@@ -66,8 +52,7 @@ return ReactModule.memo(function(p1)
 		LayoutOrder = p1.layoutOrder,
 		tag = {
 			["size-full-0 auto-y align-y-center"] = true,
-			["row gap-medium padding-top-medium padding-bottom-medium padding-right-xsmall flex-x-between"] = if FFlagUserListClientRowProps then p1.layoutMode == EnumsModule.RowLayoutMode.Wide and not v1 else p1.layoutMode == EnumsModule.RowLayoutMode.Wide,
-			["row flex-x-between gap-medium padding-bottom-xsmall padding-right-xsmall padding-top-medium"] = if FFlagUserListClientRowProps then v1 else nil,
+			["row gap-medium padding-top-medium padding-bottom-medium padding-right-xsmall flex-x-between"] = p1.layoutMode == EnumsModule.RowLayoutMode.Wide,
 			["col gap-small padding-medium bg-surface-100 radius-medium"] = p1.layoutMode == EnumsModule.RowLayoutMode.Compact
 		}
 	}, {
@@ -77,7 +62,7 @@ return ReactModule.memo(function(p1)
 				fill = p1.layoutMode == EnumsModule.RowLayoutMode.Wide,
 				["size-full-0 auto-y"] = p1.layoutMode == EnumsModule.RowLayoutMode.Compact
 			},
-			Size = if FFlagUserListClientRowProps then if p1.layoutMode == EnumsModule.RowLayoutMode.Wide then UDim2.new(0, 0, 0, USERROWHEIGHT) else nil elseif p1.layoutMode == EnumsModule.RowLayoutMode.Wide then UDim2.new(0, 0, 0, ConstantsModule.USER_ROW_HEIGHT) else nil
+			Size = if p1.layoutMode == EnumsModule.RowLayoutMode.Wide then UDim2.new(0, 0, 0, ConstantsModule.USER_ROW_HEIGHT) else nil
 		}, {
 			UserTile = ReactModule.createElement(UserTile, {
 				userId = p1.userId or "",
@@ -92,8 +77,7 @@ return ReactModule.memo(function(p1)
 				isSubtitleLoading = p1.isSubtitleLoading,
 				contextualInfo = p1.contextualInfo and p1.contextualInfo.text,
 				isContextualInfoLoading = p1.isContextualInfoLoading,
-				avatarSize = if FFlagUserListClientRowProps then if p1.layoutMode == EnumsModule.RowLayoutMode.Compact then UDim2.new(0, UseTokensResult.Size.Size_1400, 0, UseTokensResult.Size.Size_1400) elseif IsRowSizeMatch then UDim2.new(0, UseTokensResult.Size.Size_1000, 0, UseTokensResult.Size.Size_1000) else nil elseif p1.layoutMode == EnumsModule.RowLayoutMode.Compact then UDim2.new(0, UseTokensResult.Size.Size_1400, 0, UseTokensResult.Size.Size_1400) else nil,
-				subtitleStyle = if FFlagUserListClientRowProps and IsRowSizeMatch then UseTokensResult.Typography.BodySmall else nil,
+				avatarSize = if p1.layoutMode == EnumsModule.RowLayoutMode.Compact then UDim2.new(0, UseTokensResult.Size.Size_1400, 0, UseTokensResult.Size.Size_1400) else nil,
 				trustedConnectionIndicatorEnabled = p1.trustedConnectionIndicatorEnabled,
 				isRobloxSubscriber = if FFlagEnableBlackbirdCheck then p1.isRobloxSubscriber else nil,
 				customTextTruncation = if FFlagProfilePlatformSeededPymk then p1.textTruncation else nil

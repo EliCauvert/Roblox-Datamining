@@ -9,6 +9,7 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local UseChatPagePaddingModule = require(AppChat.Contexts.ChatPagePadding.useChatPagePadding)
 local ChatPlacementContextModule = require(AppChat.Contexts.ChatPlacementContext)
 local UseThemeBackgroundFunction = require(Parent.ThemeBackground).useThemeBackground
+local FFlagAppThemeHalloween2026ChatBackgroundModule = require(AppChat.Flags.FFlagAppThemeHalloween2026ChatBackground)
 local UseTelemetryModule = require(AppChat.Telemetry.useTelemetry)
 local ChatLandingTelemetryLayerModule = require(AppChat.Telemetry.Layers.ChatLandingTelemetryLayer)
 local GetConversationStoreModule = require(AppChat.Stores.GetConversationStore)
@@ -67,7 +68,7 @@ local function useSubscriptionBadgeVisibility(Callback, p1)
 end
 
 return function(p1)
-	-- upvalues: GetConversationStoreModule (copy), GetConversationViewModelStoreModule (copy), UseLocalizationFunction (copy), ReactModule (copy), SignalsModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), SignalsReactModule (copy), UseRelativeTimestampSignalBindingModule (copy), useSubscriptionBadgeVisibility (copy), UseChatPagePaddingModule (copy), ChatPlacementContextModule (copy), UseThemeBackgroundFunction (copy), UseTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), UseConversationRowActivationModule (copy), FFlagAppChatUseActivationOnFocus (copy), UseActivationOnFocusFunction (copy), ConversationFocusActivationDelaySecondsModule (copy), ReactFocusNavigationModule (copy), NormalizeConversationForTelemetryModule (copy)
+	-- upvalues: GetConversationStoreModule (copy), GetConversationViewModelStoreModule (copy), UseLocalizationFunction (copy), ReactModule (copy), SignalsModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), SignalsReactModule (copy), UseRelativeTimestampSignalBindingModule (copy), useSubscriptionBadgeVisibility (copy), UseChatPagePaddingModule (copy), ChatPlacementContextModule (copy), FFlagAppThemeHalloween2026ChatBackgroundModule (copy), UseThemeBackgroundFunction (copy), UseTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), UseConversationRowActivationModule (copy), FFlagAppChatUseActivationOnFocus (copy), UseActivationOnFocusFunction (copy), ConversationFocusActivationDelaySecondsModule (copy), ReactFocusNavigationModule (copy), NormalizeConversationForTelemetryModule (copy)
 	local ConversationStoreModule = GetConversationStoreModule(false)
 	local ConversationViewModelStoreModule = GetConversationViewModelStoreModule(false)
 	local PendingSubtitleText = UseLocalizationFunction({
@@ -165,7 +166,7 @@ return function(p1)
 	end)
 	local UseChatPagePaddingModuleResult = UseChatPagePaddingModule()
 	local UseChatPlacementContextResult = ChatPlacementContextModule.useChatPlacementContext()
-	local HasUseThemeBackgroundResult = UseThemeBackgroundFunction() ~= nil
+	local HasUseThemeBackgroundResult: boolean = if FFlagAppThemeHalloween2026ChatBackgroundModule then UseThemeBackgroundFunction() ~= nil else false
 	local UseConversationRowActivationModuleResult = UseConversationRowActivationModule({
 		conversationId = UseMemoResult.conversationId(false),
 		hasConversation = UseSignalStateResult1,

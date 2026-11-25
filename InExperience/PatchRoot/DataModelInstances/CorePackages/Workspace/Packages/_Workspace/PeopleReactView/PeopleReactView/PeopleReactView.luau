@@ -28,6 +28,7 @@ local FFlagPeopleListButtonOverflowModule = require(Parent.Flags.FFlagPeopleList
 local FlagsService = PeopleServiceModule.getService("Flags")
 local GetFFlagAddPeoplePageCardLayoutFunction = FlagsService.GetFFlagAddPeoplePageCardLayout
 local GetFFlagPeoplePageLazyRenderCardsFunction = FlagsService.GetFFlagPeoplePageLazyRenderCards
+local GetFFlagPeoplePagePostponeInitialRenderFunction = FlagsService.GetFFlagPeoplePagePostponeInitialRender
 local FFlagEnablePeopleListLazyRender = FlagsService.FFlagEnablePeopleListLazyRender
 local FFlagPeoplePageRemoveUseMemoElements = FlagsService.FFlagPeoplePageRemoveUseMemoElements
 local FFlagPeopleCardsEnableVirtualizedGrid = FlagsService.FFlagPeopleCardsEnableVirtualizedGrid
@@ -37,7 +38,7 @@ local FFlagPeoplePageDismissCardMenuOnScrollOutOfView = FlagsService.FFlagPeople
 local FFlagFixVirtualizedGridNumItems = FlagsService.FFlagFixVirtualizedGridNumItems
 
 return function(p1)
-	-- upvalues: GetFFlagAddPeoplePageCardLayoutFunction (copy), UseGetPeopleServiceModule (copy), ReactModule (copy), PeopleServiceModule (copy), UseDeviceOrientationFunction (copy), RobloxAppEnumsModule (copy), FFlagPeopleListButtonOverflowModule (copy), UsePeopleWindowWidthModule (copy), IsPeoplePageCompactModule (copy), GameSettings (copy), GetFFlagPeoplePageLazyRenderCardsFunction (copy), FFlagEnablePeopleListLazyRender (copy), FFlagPeopleCardsEnableVirtualizedGrid (copy), FFlagPeoplePageDismissVolumePopoverOnScrollOutOfView (copy), FFlagPeoplePageFlipVolumePopoverToFitViewport (copy), FFlagPeoplePageDismissCardMenuOnScrollOutOfView (copy), UseScrollingFrameStoreModule (copy), FFlagFixVirtualizedGridNumItems (copy), FFlagPeoplePageRemoveUseMemoElements (copy), PeopleCardsModule (copy), FFlagSideSheetOpenPeoplePage (copy), PeopleListModule (copy), FFlagShowSwitchServerButton (copy), IsSideSheetEnabledModule (copy), MenuButtonsWrapperModule (copy), CoreButtonRowModule (copy), ConstantsModule (copy), SwitchServerTelemetry (copy), TitleBarModule (copy), View (copy), SwitchServerConfirmation (copy), PeoplePageLayoutContextModule (copy)
+	-- upvalues: GetFFlagAddPeoplePageCardLayoutFunction (copy), UseGetPeopleServiceModule (copy), ReactModule (copy), PeopleServiceModule (copy), UseDeviceOrientationFunction (copy), RobloxAppEnumsModule (copy), FFlagPeopleListButtonOverflowModule (copy), UsePeopleWindowWidthModule (copy), IsPeoplePageCompactModule (copy), GameSettings (copy), GetFFlagPeoplePagePostponeInitialRenderFunction (copy), GetFFlagPeoplePageLazyRenderCardsFunction (copy), FFlagEnablePeopleListLazyRender (copy), FFlagPeopleCardsEnableVirtualizedGrid (copy), FFlagPeoplePageDismissVolumePopoverOnScrollOutOfView (copy), FFlagPeoplePageFlipVolumePopoverToFitViewport (copy), FFlagPeoplePageDismissCardMenuOnScrollOutOfView (copy), UseScrollingFrameStoreModule (copy), FFlagFixVirtualizedGridNumItems (copy), FFlagPeoplePageRemoveUseMemoElements (copy), PeopleCardsModule (copy), FFlagSideSheetOpenPeoplePage (copy), PeopleListModule (copy), FFlagShowSwitchServerButton (copy), IsSideSheetEnabledModule (copy), MenuButtonsWrapperModule (copy), CoreButtonRowModule (copy), ConstantsModule (copy), SwitchServerTelemetry (copy), TitleBarModule (copy), View (copy), SwitchServerConfirmation (copy), PeoplePageLayoutContextModule (copy)
 	local PeopleAnalyticsManager = if GetFFlagAddPeoplePageCardLayoutFunction() then UseGetPeopleServiceModule("PeopleAnalyticsManager") else nil
 	local PeopleBlockingModalManager = nil
 	PeopleBlockingModalManager = if GetFFlagAddPeoplePageCardLayoutFunction() then UseGetPeopleServiceModule("PeopleBlockingModalManager") else ReactModule.useMemo(function()
@@ -71,7 +72,12 @@ return function(p1)
 	if GetFFlagAddPeoplePageCardLayoutFunction() then
 		PeoplePageLayout, Callback = ReactModule.useState(GameSettings.PeoplePageLayout)
 	end
-	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local v2 = nil
+	local Callback1 = nil
+	
+	if GetFFlagPeoplePagePostponeInitialRenderFunction() then
+		v2, Callback1 = ReactModule.useState(false)
+	end
 	local UseScrollingFrameStoreModuleResult = if GetFFlagPeoplePageLazyRenderCardsFunction() or FFlagEnablePeopleListLazyRender or FFlagPeopleCardsEnableVirtualizedGrid or FFlagPeoplePageDismissVolumePopoverOnScrollOutOfView or FFlagPeoplePageFlipVolumePopoverToFitViewport or FFlagPeoplePageDismissCardMenuOnScrollOutOfView then UseScrollingFrameStoreModule(p1.scrollingFrame) else nil
 	local UseResult = if FFlagFixVirtualizedGridNumItems then ReactModule.useCallback(function(Frame)
 		-- upvalues: UseScrollingFrameStoreModuleResult (copy)
@@ -110,15 +116,18 @@ return function(p1)
 		p1.getUniversesExposedTo, p1.addUniverseToExposureList,
 		p1.minimumCardWidth or 0
 	}) else nil
-	ReactModule.useEffect(function()
-		-- upvalues: UseStateResult2 (copy)
-		UseStateResult2(true)
-	end, {})
-	local v2 = nil
-	local Callback1 = nil
+	
+	if GetFFlagPeoplePagePostponeInitialRenderFunction() then
+		ReactModule.useEffect(function()
+			-- upvalues: Callback1 (ref)
+			Callback1(true)
+		end, {})
+	end
+	local UseStateResult = nil
+	local Callback2 = nil
 	
 	if FFlagShowSwitchServerButton then
-		v2, Callback1 = ReactModule.useState(false)
+		UseStateResult, Callback2 = ReactModule.useState(false)
 	end
 	local Element1 = ReactModule.createElement(ReactModule.Fragment, {}, {
 		MenuButtonsWrapper = if IsSideSheetEnabledModule then nil else ReactModule.createElement(MenuButtonsWrapperModule),
@@ -127,9 +136,9 @@ return function(p1)
 			LayoutOrder = if GetFFlagAddPeoplePageCardLayoutFunction() then 1 else nil,
 			buttonActivatedTable = if FFlagShowSwitchServerButton then {
 				[ConstantsModule.PEOPLEPAGE.BUTTON_ACTIVATED_TABLE_KEYS.SWITCH_SERVER] = function()
-					-- upvalues: SwitchServerTelemetry (upval), Callback1 (ref)
+					-- upvalues: SwitchServerTelemetry (upval), Callback2 (ref)
 					SwitchServerTelemetry.sendSwitchServerButtonActions({ event_type = "click" })
-					Callback1(true)
+					Callback2(true)
 				end
 			} else nil
 		}),
@@ -157,11 +166,11 @@ return function(p1)
 		ref = if FFlagPeopleListButtonOverflowModule then v1 else nil
 	}, {
 		PeopleHeader = Element1,
-		People = if UseStateResult then if GetFFlagAddPeoplePageCardLayoutFunction() then Element else ReactModule.createElement(PeopleListModule, {
+		People = if GetFFlagPeoplePagePostponeInitialRenderFunction() and not v2 then nil elseif GetFFlagAddPeoplePageCardLayoutFunction() then Element else ReactModule.createElement(PeopleListModule, {
 			scrollingFrameStore = if FFlagEnablePeopleListLazyRender and p1.scrollingFrame then UseScrollingFrameStoreModuleResult else nil
-		}) else nil,
+		}),
 		BlockingModalManager = ReactModule.createElement(UseMemoResult),
-		SwitchServerConfirmation = if FFlagShowSwitchServerButton and v2 then ReactModule.createElement(SwitchServerConfirmation, { setSwitchServerConfirmationOpen = Callback1 }) else nil
+		SwitchServerConfirmation = if FFlagShowSwitchServerButton and UseStateResult then ReactModule.createElement(SwitchServerConfirmation, { setSwitchServerConfirmationOpen = Callback2 }) else nil
 	})
 	
 	return if FFlagPeopleListButtonOverflowModule then ReactModule.createElement(PeoplePageLayoutContextModule.Provider, { value = UseMemoResult1 }, { Page = Element2 }) else Element2

@@ -20,7 +20,6 @@ local FFlagPlusUpsellSheetHomePromptModule = require(ServerTriggeredModals.Flags
 local PlusUpsellSheetPromptModule = if FFlagPlusUpsellSheetHomePromptModule then require(script.Parent.PlusUpsellSheetPrompt) else nil
 local FFlagPromptsEdpOpenReplaceOnFetch = require(Parent.SharedFlags).FFlagPromptsEdpOpenReplaceOnFetch
 local FFlagChatPushUpsellPromptsEnabled = require(Parent.SharedFlags).FFlagChatPushUpsellPromptsEnabled
-local FFlagEventRsvpPushUpsellEnabled = require(Parent.SharedFlags).FFlagEventRsvpPushUpsellEnabled
 
 local function getPromptsUrl(EntryPoint, ClientAttributes, List)
 	-- upvalues: UrlBuilder (copy), UrlBase (copy), HttpService (copy)
@@ -43,17 +42,9 @@ local function _(p1): boolean
 	return FFlagChatPushUpsellPromptsEnabled and p1.entryPoint == PromptsEntryPointModule.ChatLandingOpen
 end
 
-local function getParsePageEntriesFromResponse(p1, Callback)
-	-- upvalues: FFlagEventRsvpPushUpsellEnabled (copy), PromptsEntryPointModule (copy), ParsePageEntriesFromResponseFunction (copy), FFlagChatPushUpsellPromptsEnabled (copy), ChatPushUpsellLegacyPrompt (copy), FFlagPushNotificationsUpsellHomePromptsExperiment (copy), NativePushNotificationPermissionPrompt (copy), FFlagSplitPaneEducationalTour (copy), FFlagPlusUpsellSheetHomePromptModule (copy), SplitPaneTourPromptModule (copy), PlusUpsellSheetPromptModule (copy)
-	if FFlagEventRsvpPushUpsellEnabled and p1.entryPoint == PromptsEntryPointModule.AppEventRsvpGoing and Callback ~= nil then
-		return function(p2)
-			-- upvalues: ParsePageEntriesFromResponseFunction (upval), Callback (copy)
-			local ParsePageEntriesFromResponseResult = ParsePageEntriesFromResponseFunction(p2)
-			Callback(ParsePageEntriesFromResponseResult)
-			
-			return ParsePageEntriesFromResponseResult
-		end
-	elseif FFlagChatPushUpsellPromptsEnabled and p1.entryPoint == PromptsEntryPointModule.ChatLandingOpen then
+local function getParsePageEntriesFromResponse(p1)
+	-- upvalues: FFlagChatPushUpsellPromptsEnabled (copy), PromptsEntryPointModule (copy), ChatPushUpsellLegacyPrompt (copy), ParsePageEntriesFromResponseFunction (copy), FFlagPushNotificationsUpsellHomePromptsExperiment (copy), NativePushNotificationPermissionPrompt (copy), FFlagSplitPaneEducationalTour (copy), FFlagPlusUpsellSheetHomePromptModule (copy), SplitPaneTourPromptModule (copy), PlusUpsellSheetPromptModule (copy)
+	if FFlagChatPushUpsellPromptsEnabled and p1.entryPoint == PromptsEntryPointModule.ChatLandingOpen then
 		return function(p2)
 			-- upvalues: ChatPushUpsellLegacyPrompt (upval), ParsePageEntriesFromResponseFunction (upval)
 			ChatPushUpsellLegacyPrompt.handlePromptsResponse(p2)
@@ -79,8 +70,8 @@ local function getParsePageEntriesFromResponse(p1, Callback)
 	end
 end
 
-return function(p1, p2, p3)
-	-- upvalues: Parent (copy), FFlagSduiExtendedCapabilitiesPrompts (copy), SduiSharedUtilitiesModule (copy), GetSduiApiStoreFunction (copy), SduiResponseType (copy), UrlBuilder (copy), UrlBase (copy), getPromptsUrl (copy), FFlagPromptsEdpOpenReplaceOnFetch (copy), FFlagSduiAllowNoConfigsBuilt (copy), getParsePageEntriesFromResponse (copy), FFlagEventRsvpPushUpsellEnabled (copy)
+return function(p1, p2)
+	-- upvalues: Parent (copy), FFlagSduiExtendedCapabilitiesPrompts (copy), SduiSharedUtilitiesModule (copy), GetSduiApiStoreFunction (copy), SduiResponseType (copy), UrlBuilder (copy), UrlBase (copy), getPromptsUrl (copy), FFlagPromptsEdpOpenReplaceOnFetch (copy), FFlagSduiAllowNoConfigsBuilt (copy), getParsePageEntriesFromResponse (copy)
 	local ServiceContractsProtoModule = require(Parent.ServiceContractsProto)
 	local GetEligiblePromptsRequest = ServiceContractsProtoModule.apppageplatform.prompts.prompts.GetEligiblePromptsRequest
 	local config = {
@@ -89,7 +80,7 @@ return function(p1, p2, p3)
 		client_capabilities = if FFlagSduiExtendedCapabilitiesPrompts then SduiSharedUtilitiesModule.SduiCapabilities.buildClientCapabilities() else nil,
 		prompt_styles = p1.promptStyles
 	}
-	local IfNeeded = GetSduiApiStoreFunction().fetchIfNeeded({
+	GetSduiApiStoreFunction().fetchIfNeeded({
 		responseType = SduiResponseType.ProtobufJson,
 		url = if FFlagSduiExtendedCapabilitiesPrompts then UrlBuilder.new({ path = "modals-api/v1/prompts", base = UrlBase.APIS })() else getPromptsUrl(p1.entryPoint, p1.clientAttributes, p1.promptStyles),
 		surfaceKey = p1.surfaceKey,
@@ -99,13 +90,11 @@ return function(p1, p2, p3)
 		allowNoConfigsBuilt = if FFlagSduiAllowNoConfigsBuilt then p1.allowNoConfigsBuilt else nil,
 		loadTimer = p1.loadTimer,
 		apiProto = ServiceContractsProtoModule.apppageplatform.prompts.prompts.GetEligiblePromptsResponse,
-		parsePageEntriesFromResponse = getParsePageEntriesFromResponse(p1, p3),
+		parsePageEntriesFromResponse = getParsePageEntriesFromResponse(p1),
 		postConfig = if FFlagSduiExtendedCapabilitiesPrompts then {
 			contentType = SduiSharedUtilitiesModule.SduiApiStorePostConfigContentType.Proto,
 			protoMessage = GetEligiblePromptsRequest,
 			body = GetEligiblePromptsRequest.new(config)
 		} else nil
 	}, p2)
-	
-	return if FFlagEventRsvpPushUpsellEnabled then IfNeeded else nil
 end

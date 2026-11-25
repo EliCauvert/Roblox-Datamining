@@ -150,6 +150,7 @@ return function(p1)
 			hasTail = UnionResult.hasTail,
 			isIncoming = UnionResult.isIncoming,
 			isPending = IsPending,
+			isUnfiltered = nil,
 			isAssetCard = true,
 			LayoutOrder = UnionResult.LayoutOrder,
 			padding = 0,

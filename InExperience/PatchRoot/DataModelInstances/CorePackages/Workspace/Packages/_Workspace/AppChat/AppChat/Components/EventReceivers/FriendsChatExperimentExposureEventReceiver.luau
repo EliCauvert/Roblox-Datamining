@@ -5,28 +5,27 @@ local SignalsModule = require(Parent.Signals)
 local SignalsReactModule = require(Parent.SignalsReact)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FStringAppChatFriendsTabIxpLayerModule = require(AppChat.Flags.FStringAppChatFriendsTabIxpLayer)
-local FFlagFriendsChatUseViewRecyclerConversationListModule = require(AppChat.Flags.FFlagFriendsChatUseViewRecyclerConversationList)
 local GetFriendsChatSettingsStoreModule = require(AppChat.Stores.GetFriendsChatSettingsStore)
 local IXPNavigationUtilsModule = require(AppChat.Utils.IXPNavigationUtils)
+local FFlagExpChatFriendsTabUsePolicy = SharedFlagsModule.FFlagExpChatFriendsTabUsePolicy
 local FFlagExpChatFriendsTabRequireDefaultChannels = SharedFlagsModule.FFlagExpChatFriendsTabRequireDefaultChannels
 local FFlagFriendsChatHasFriendsGate = SharedFlagsModule.FFlagFriendsChatHasFriendsGate
 local Players = game:GetService("Players")
-local FFlagFriendsChatUseViewRecyclerConversationListModule1 = SharedFlagsModule.FFlagFriendsChatSuggestedUsers and FFlagFriendsChatUseViewRecyclerConversationListModule
-local GetAppPolicyStoreFunction = require(Parent.UniversalAppPolicy).GetAppPolicyStore
+local GetAppPolicyStore = if FFlagExpChatFriendsTabUsePolicy then require(Parent.UniversalAppPolicy).GetAppPolicyStore else nil
 local GetResult = if FFlagFriendsChatHasFriendsGate then require(Parent.DataHydration).Friends.FriendsStore.get() else nil
 local Exposure = IXPNavigationUtilsModule.createExposureHandler(FStringAppChatFriendsTabIxpLayerModule)
 
 return function()
-	-- upvalues: GetFriendsChatSettingsStoreModule (copy), ReactModule (copy), SignalsModule (copy), GetAppPolicyStoreFunction (copy), FFlagFriendsChatHasFriendsGate (copy), Players (copy), GetResult (ref), FFlagFriendsChatUseViewRecyclerConversationListModule1 (copy), FFlagExpChatFriendsTabRequireDefaultChannels (copy), SignalsReactModule (copy), Exposure (copy)
+	-- upvalues: GetFriendsChatSettingsStoreModule (copy), ReactModule (copy), SignalsModule (copy), FFlagExpChatFriendsTabUsePolicy (copy), GetAppPolicyStore (ref), FFlagFriendsChatHasFriendsGate (copy), Players (copy), GetResult (ref), FFlagExpChatFriendsTabRequireDefaultChannels (copy), SignalsReactModule (copy), Exposure (copy)
 	local FriendsChatSettingsStoreModule = GetFriendsChatSettingsStoreModule(false)
 	local UseMemoResult = ReactModule.useMemo(function()
 		return game:GetService("TextChatService").CreateDefaultTextChannels
 	end, {})
 	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function()
-		-- upvalues: SignalsModule (upval), GetAppPolicyStoreFunction (upval), FFlagFriendsChatHasFriendsGate (upval), Players (upval), GetResult (upval), FFlagFriendsChatUseViewRecyclerConversationListModule1 (upval), FriendsChatSettingsStoreModule (copy), FFlagExpChatFriendsTabRequireDefaultChannels (upval), UseMemoResult (copy)
+		-- upvalues: SignalsModule (upval), FFlagExpChatFriendsTabUsePolicy (upval), GetAppPolicyStore (upval), FFlagFriendsChatHasFriendsGate (upval), Players (upval), GetResult (upval), FriendsChatSettingsStoreModule (copy), FFlagExpChatFriendsTabRequireDefaultChannels (upval), UseMemoResult (copy)
 		return SignalsModule.createComputed(function(p1)
-			-- upvalues: GetAppPolicyStoreFunction (upval), FFlagFriendsChatHasFriendsGate (upval), Players (upval), GetResult (upval), FFlagFriendsChatUseViewRecyclerConversationListModule1 (upval), FriendsChatSettingsStoreModule (upval), FFlagExpChatFriendsTabRequireDefaultChannels (upval), UseMemoResult (upval)
-			local CanSeeFriendsTab = GetAppPolicyStoreFunction(false).getAppPolicy(p1).getCanSeeFriendsTab()
+			-- upvalues: FFlagExpChatFriendsTabUsePolicy (upval), GetAppPolicyStore (upval), FFlagFriendsChatHasFriendsGate (upval), Players (upval), GetResult (upval), FriendsChatSettingsStoreModule (upval), FFlagExpChatFriendsTabRequireDefaultChannels (upval), UseMemoResult (upval)
+			local NoFFlagExpChatFriendsTabUsePolicy = not FFlagExpChatFriendsTabUsePolicy or GetAppPolicyStore(false).getAppPolicy(p1).getCanSeeFriendsTab()
 			local Flag = true
 			
 			if FFlagFriendsChatHasFriendsGate then
@@ -36,10 +35,10 @@ return function()
 				if LocalPlayer then
 					local FriendsCountByUserId = GetResult.GetFriendsCountByUserId((tostring(LocalPlayer.UserId)))
 					local DataResult = if FriendsCountByUserId then FriendsCountByUserId.data(p1) else nil
-					Flag = DataResult ~= nil and (FFlagFriendsChatUseViewRecyclerConversationListModule1 or DataResult > 0)
+					Flag = DataResult ~= nil and DataResult > 0
 				end
 			end
-			return CanSeeFriendsTab and (Flag and (FriendsChatSettingsStoreModule.getChatEnabled(p1) and (FriendsChatSettingsStoreModule.getChatUserMessagesEnabled(p1) ~= false and (not FFlagExpChatFriendsTabRequireDefaultChannels or UseMemoResult))))
+			return NoFFlagExpChatFriendsTabUsePolicy and (Flag and (FriendsChatSettingsStoreModule.getChatEnabled(p1) and (FriendsChatSettingsStoreModule.getChatUserMessagesEnabled(p1) ~= false and (not FFlagExpChatFriendsTabRequireDefaultChannels or UseMemoResult))))
 		end)
 	end, { FriendsChatSettingsStoreModule, UseMemoResult })))
 	ReactModule.useEffect(function()

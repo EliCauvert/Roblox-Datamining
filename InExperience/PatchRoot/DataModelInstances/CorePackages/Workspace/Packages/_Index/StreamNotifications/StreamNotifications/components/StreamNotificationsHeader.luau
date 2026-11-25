@@ -18,16 +18,14 @@ local AnalyticsConstantsModule = require(StreamNotifications.analytics.analytics
 local StreamNotificationDropdownExperimentationModule = require(StreamNotifications.StreamNotificationDropdownExperimentation)
 local StreamNotificationSettingsExperimentationModule = require(StreamNotifications.StreamNotificationSettingsExperimentation)
 local StreamNotificationSettingsActivationModule = require(StreamNotifications.StreamNotificationSettingsActivation)
-local SharedFlagsModule = require(Parent.SharedFlags)
-local FFlagStreamNotificationUXSettingsHeader = SharedFlagsModule.FFlagStreamNotificationUXSettingsHeader
-local FFlagLuaAppAddTestIdsForArrow = SharedFlagsModule.FFlagLuaAppAddTestIdsForArrow
+local FFlagStreamNotificationUXSettingsHeader = require(Parent.SharedFlags).FFlagStreamNotificationUXSettingsHeader
 
 local function _(p1, p2: number): number
 	return p1 - p2 * 2
 end
 
 return function(p1)
-	-- upvalues: UseStyleFunction (copy), UseTokensFunction (copy), NormalizeFontFaceFunction (copy), UserInputService (copy), UseLocalizationFunction (copy), ConstantsModule (copy), StreamNotificationDropdownExperimentationModule (copy), FFlagStreamNotificationUXSettingsHeader (copy), UseDispatchFunction (copy), StreamNotificationSettingsExperimentationModule (copy), StreamNotificationSettingsActivationModule (copy), ReactModule (copy), FFlagLuaAppAddTestIdsForArrow (copy), IconButton (copy), IconSize (copy), NotificationHelper (copy), EventStream (copy), AnalyticsConstantsModule (copy)
+	-- upvalues: UseStyleFunction (copy), UseTokensFunction (copy), NormalizeFontFaceFunction (copy), UserInputService (copy), UseLocalizationFunction (copy), ConstantsModule (copy), StreamNotificationDropdownExperimentationModule (copy), FFlagStreamNotificationUXSettingsHeader (copy), UseDispatchFunction (copy), StreamNotificationSettingsExperimentationModule (copy), StreamNotificationSettingsActivationModule (copy), ReactModule (copy), IconButton (copy), IconSize (copy), NotificationHelper (copy), EventStream (copy), AnalyticsConstantsModule (copy)
 	local UseStyleResult = UseStyleFunction()
 	local UseTokensResult = UseTokensFunction()
 	local NormalizeFontFaceResult = NormalizeFontFaceFunction(UseTokensResult.Typography.HeadingSmall.Font)
@@ -53,15 +51,14 @@ return function(p1)
 			Size = UDim2.new(1, 0, 0, HeaderMinHeight)
 		}, {
 			HeaderText = ReactModule.createElement("TextLabel", {
+				BackgroundTransparency = 1,
 				Text = UseLocalizationResult and UseLocalizationResult.headerText,
 				FontFace = NormalizeFontFaceResult,
 				TextSize = FontSize,
 				TextColor3 = UseStyleResult.Theme.TextEmphasis.Color,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextYAlignment = Enum.TextYAlignment.Center,
-				Size = UDim2.new(1, -(if SettingsGearEnabled then XOffset else 0), 1, 0),
-				BackgroundTransparency = 1,
-				[ReactModule.Tag] = if FFlagLuaAppAddTestIdsForArrow then "data-testid=--stream-notifications-header-title" else nil
+				Size = UDim2.new(1, -(if SettingsGearEnabled then XOffset else 0), 1, 0)
 			}),
 			SettingsButton = if FFlagStreamNotificationUXSettingsHeader and SettingsGearEnabled then ReactModule.createElement(IconButton, {
 				anchorPoint = Vector2.new(1, 0.5),
@@ -99,15 +96,14 @@ return function(p1)
 					end
 				}),
 				HeaderText = ReactModule.createElement("TextLabel", {
+					BackgroundTransparency = 1,
 					Text = UseLocalizationResult and UseLocalizationResult.headerText,
 					FontFace = NormalizeFontFaceResult,
 					TextSize = FontSize,
 					TextColor3 = UseStyleResult.Theme.TextEmphasis.Color,
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.new(0.5, 0, 0.5, 0),
-					Size = UDim2.new(1, 0, 0, ConstantsModule.Modal.HeaderHeight),
-					BackgroundTransparency = 1,
-					[ReactModule.Tag] = if FFlagLuaAppAddTestIdsForArrow then "data-testid=--stream-notifications-header-title" else nil
+					Size = UDim2.new(1, 0, 0, ConstantsModule.Modal.HeaderHeight)
 				}),
 				SettingsButton = if FFlagStreamNotificationUXSettingsHeader and SettingsGearEnabled then ReactModule.createElement(IconButton, {
 					anchorPoint = Vector2.new(1, 0),

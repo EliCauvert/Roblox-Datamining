@@ -1,7 +1,10 @@
-﻿local Constants = require(script:FindFirstAncestor("AvatarExperienceCatalog").Parent.AvatarExperienceCommon).Constants
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local AvatarExperienceCommonModule = require(Parent.AvatarExperienceCommon)
+local FFlagParseHeadShapeFromAPIResponse = require(Parent.AvatarExperienceFlags).FFlagParseHeadShapeFromAPIResponse
+local Constants = AvatarExperienceCommonModule.Constants
 
 return function(List)
-	-- upvalues: Constants (copy)
+	-- upvalues: Constants (copy), FFlagParseHeadShapeFromAPIResponse (copy)
 	table.sort(List, function(A, B): boolean
 		return tonumber(A.itemRecency) < tonumber(B.itemRecency)
 	end)
@@ -20,7 +23,7 @@ return function(List)
 					table.insert(List1, {
 						assetId = AssetId,
 						assetTypeId = value1.assetType,
-						headShape = if value1 then value1.headShape else nil
+						headShape = if FFlagParseHeadShapeFromAPIResponse and value1 then value1.headShape else nil
 					})
 				end
 			end

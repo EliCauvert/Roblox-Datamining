@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AddFriendsPageUpdateOnNewFriendshipRequest_v1", false)

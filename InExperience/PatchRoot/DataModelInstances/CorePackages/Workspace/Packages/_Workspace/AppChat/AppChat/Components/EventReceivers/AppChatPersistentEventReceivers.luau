@@ -19,14 +19,10 @@ end
 
 local FFlagEnableShareSheet = require(Parent.SharedFlags).FFlagEnableShareSheet
 local ExternalChatMessageSenderRegistrationModule = if FFlagEnableShareSheet then require(script.Parent.ExternalChatMessageSenderRegistration) else nil
-local FFlagFriendsCallingClientGateDEV = require(Parent.SharedFlags).FFlagFriendsCallingClientGate_DEV
-local FFlagAppChatEphemeralSessionCoordinatorModule = require(AppChat.Flags.FFlagAppChatEphemeralSessionCoordinator)
-local FFlagFriendsCallingCallPipModule = require(Parent.FriendsCalling.FFlagFriendsCallingCallPip)
-local EphemeralSessionCoordinatorModule = if FFlagAppChatEphemeralSessionCoordinatorModule and FFlagFriendsCallingClientGateDEV and FFlagFriendsCallingCallPipModule then require(Parent.EphemeralSessionCoordinator.EphemeralSessionCoordinator) else nil
 local ThirdPartyUserService = game:GetService("ThirdPartyUserService")
 
 return function(p1)
-	-- upvalues: ReactModule (copy), AppChatAccountSettingsEventReceiverModule (copy), AppChatInterventionEventReceiverModule (copy), ThirdPartyUserService (copy), AppChatThirdPartySettingsEventReceiverModule (copy), AppChatRemoveThirdPartyRestrictionModule (copy), AppChatNotificationEventReceiverModule (copy), FFlagAppChatFriendsTabIxpEnabledModule (copy), FriendsChatExperimentExposureEventReceiverModule (ref), FFlagEnableShareSheet (copy), ExternalChatMessageSenderRegistrationModule (copy), FFlagAppChatEphemeralSessionCoordinatorModule (copy), FFlagFriendsCallingClientGateDEV (copy), FFlagFriendsCallingCallPipModule (copy), EphemeralSessionCoordinatorModule (copy)
+	-- upvalues: ReactModule (copy), AppChatAccountSettingsEventReceiverModule (copy), AppChatInterventionEventReceiverModule (copy), ThirdPartyUserService (copy), AppChatThirdPartySettingsEventReceiverModule (copy), AppChatRemoveThirdPartyRestrictionModule (copy), AppChatNotificationEventReceiverModule (copy), FFlagAppChatFriendsTabIxpEnabledModule (copy), FriendsChatExperimentExposureEventReceiverModule (ref), FFlagEnableShareSheet (copy), ExternalChatMessageSenderRegistrationModule (copy)
 	local CreateElementFunction1 = ReactModule.createElement
 	local Fragment = ReactModule.Fragment
 	local v1 = nil
@@ -50,7 +46,6 @@ return function(p1)
 	end
 	config.friendsChatExperimentExposure = FriendsChatExperimentExposure
 	config.externalChatMessageSenderRegistration = if FFlagEnableShareSheet then ReactModule.createElement(ExternalChatMessageSenderRegistrationModule, { isInExperience = p1.isInExperience }) else nil
-	config.ephemeralSessionCoordinator = if FFlagAppChatEphemeralSessionCoordinatorModule and FFlagFriendsCallingClientGateDEV and FFlagFriendsCallingCallPipModule then ReactModule.createElement(EphemeralSessionCoordinatorModule) else nil
 	
 	return CreateElementFunction1(Fragment, v1, config)
 end

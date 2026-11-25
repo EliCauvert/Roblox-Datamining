@@ -4,11 +4,9 @@ local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local LocalizationRoactContext = require(Parent.Localization).LocalizationRoactContext
 local _ = require(BuildExperience.Chat.chatTypes)
-local LocalToolStepsModule = require(BuildExperience.Chat.localToolSteps)
 local StepSentencesModule = require(BuildExperience.Chat.stepSentences)
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local ActivityLabelHelpersModule = require(script.Parent.activityLabelHelpers)
-local DevProductSummaryModule = require(BuildExperience.Components.AgentCard.devProductSummary)
 local StepListToolLabelsModule = require(script.Parent.stepListToolLabels)
 local LocalizeActivityLabelFunction = ActivityLabelHelpersModule.localizeActivityLabel
 local UseReactiveValueFunction = ActivityLabelHelpersModule.useReactiveValue
@@ -41,70 +39,25 @@ local function localizeStepLabel(CHATTOOL, p1, p2, Tool, UseContextResult)
 end
 
 return {
-	getHeaderStep = function(p1, p2, p3, p4)
-		if p2 and p1.isWaitingForLocalTool ~= true and p1.hasLabelOverride ~= true then
-			local v1 = if p1.ignoresEarlierSteps == true then nil else p4
-			local P16 = if p3 == nil or not p3.isRunning then (v1 == nil or not v1.isRunning) and p3 or v1 else p3
-			
-			return if P16 == nil or P16.isFailed ~= true then P16 else nil
-		else
-			return nil
-		end
-	end,
-	getNamedStep = function(SegmentKey, p1)
-		local v1 = p1[#p1]
-		
-		for i = #p1, 1, -1 do
-			if p1[i].isRunning ~= true then
-				continue
-			end
-			v1 = p1[i]
-			break
-		end
-		return if v1 == nil then nil else {
-			segmentKey = SegmentKey,
-			key = v1.key,
-			title = v1.title,
-			isRunning = v1.isRunning == true,
-			isFailed = v1.isFailed == true
-		}
-	end,
 	localizeStepLabel = localizeStepLabel,
-	useStepRows = function(p2)
-		-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), LocalizationRoactContext (copy), UseReactiveValueFunction (copy), t (copy), LocalToolStepsModule (copy), StepSentencesModule (copy), localizeStepLabel (copy), t1 (copy), DevProductSummaryModule (copy)
-		local UseLocalizationResult = UseLocalizationFunction({
-			tool = LocalizationStringsModule.CHAT_TOOL,
-			defaultName = LocalizationStringsModule.AGENT_DEV_PRODUCT_DEFAULT_NAME,
-			unavailablePrice = LocalizationStringsModule.AGENT_DEV_PRODUCT_PRICE_UNAVAILABLE
-		})
-		local Tool = UseLocalizationResult.tool
-		local DefaultName = UseLocalizationResult.defaultName
-		local UnavailablePrice = UseLocalizationResult.unavailablePrice
+	useStepRows = function(p1)
+		-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), LocalizationRoactContext (copy), UseReactiveValueFunction (copy), t (copy), StepSentencesModule (copy), localizeStepLabel (copy), t1 (copy)
+		local Tool = UseLocalizationFunction({ tool = LocalizationStringsModule.CHAT_TOOL }).tool
 		local UseContextResult = ReactModule.useContext(LocalizationRoactContext)
-		local UseReactiveValueResult = UseReactiveValueFunction(p2.activityItems or t)
-		local UseReactiveValueResult1 = UseReactiveValueFunction(p2.isLoading or false)
-		local UseRefResult = ReactModule.useRef(p2.localToolSteps)
-		
-		if not LocalToolStepsModule.areStepsEqual(UseRefResult.current, p2.localToolSteps) then
-			UseRefResult.current = p2.localToolSteps
-		end
-		local Current = UseRefResult.current
-		local IsCompleted = p2.summaryKind == "completed"
+		local UseReactiveValueResult = UseReactiveValueFunction(p1.activityItems or t)
+		local UseReactiveValueResult1 = UseReactiveValueFunction(p1.isLoading or false)
 		
 		return ReactModule.useMemo(function()
-			-- upvalues: StepSentencesModule (upval), UseReactiveValueResult (copy), localizeStepLabel (upval), LocalizationStringsModule (upval), t1 (upval), Tool (copy), UseContextResult (copy), UseReactiveValueResult1 (copy), IsCompleted (copy), Current (copy), LocalToolStepsModule (upval), DevProductSummaryModule (upval), DefaultName (copy), UnavailablePrice (copy)
-			return StepSentencesModule.buildStepRows(UseReactiveValueResult, function(p3)
+			-- upvalues: StepSentencesModule (upval), UseReactiveValueResult (copy), localizeStepLabel (upval), LocalizationStringsModule (upval), t1 (upval), Tool (copy), UseContextResult (copy), UseReactiveValueResult1 (copy)
+			return StepSentencesModule.buildStepRows(UseReactiveValueResult, function(p2)
 				-- upvalues: localizeStepLabel (upval), LocalizationStringsModule (upval), t1 (upval), Tool (upval), UseContextResult (upval)
-				return localizeStepLabel(LocalizationStringsModule.CHAT_TOOL, p3, t1, Tool, UseContextResult)
-			end, UseReactiveValueResult1, IsCompleted, Current, function(p3)
-				-- upvalues: LocalToolStepsModule (upval), DevProductSummaryModule (upval), UseContextResult (upval), DefaultName (upval), UnavailablePrice (upval)
-				return if p3.plan == nil then if p3.devProduct == nil then nil else {
-					text = DevProductSummaryModule.cardText(p3.devProduct, UseContextResult, DefaultName, UnavailablePrice)
-				} else LocalToolStepsModule.getPlanBody(p3.plan)
-			end)
+				return localizeStepLabel(LocalizationStringsModule.CHAT_TOOL, p2, t1, Tool, UseContextResult)
+			end, UseReactiveValueResult1)
 		end, {
-			UseReactiveValueResult, UseReactiveValueResult1, IsCompleted, Current, Tool,
-			DefaultName, UnavailablePrice, UseContextResult
+			UseReactiveValueResult,
+			UseReactiveValueResult1,
+			Tool,
+			UseContextResult
 		})
 	end
 }

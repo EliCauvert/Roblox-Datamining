@@ -49,6 +49,7 @@ local DebugMomentsFeatureList = game:DefineFastString("DebugMomentsFeatureList",
 local GuacAppPolicyDisableSignupCheckbox = game:DefineFastFlag("GuacAppPolicyDisableSignupCheckbox", false)
 local FlyoutDisablePremiumEntrypoint1 = game:DefineFastFlag("FlyoutDisablePremiumEntrypoint1", false)
 local GuacDisableBlackbirdEntrypoints = game:DefineFastFlag("GuacDisableBlackbirdEntrypoints", false)
+local FlyoutEnableGiftcardsWithRedeem = game:DefineFastFlag("FlyoutEnableGiftcardsWithRedeem", false)
 local DebugForceShowIllegalContentReportingUI = game:DefineFastFlag("DebugForceShowIllegalContentReportingUI", false)
 local FFlagExpChatUseGuacForFOMOUpsell = SharedFlagsModule.FFlagExpChatUseGuacForFOMOUpsell
 local FFlagExpChatUseGuacForCrossAgeChat = SharedFlagsModule.FFlagExpChatUseGuacForCrossAgeChat
@@ -58,6 +59,8 @@ local FFlagEnableCoreContentBadge = SharedFlagsModule.FFlagEnableCoreContentBadg
 local FFlagEnableFlyoutUncheckedBadge = SharedFlagsModule.FFlagEnableFlyoutUncheckedBadge
 local FFlagEnableNonFlyoutUncheckedBadge = SharedFlagsModule.FFlagEnableNonFlyoutUncheckedBadge
 local GetFFlagEnableAccountSwitcherUncheckedBadgeFunction = SharedFlagsModule.GetFFlagEnableAccountSwitcherUncheckedBadge
+local FFlagShowGameAgeRating = SharedFlagsModule.FFlagShowGameAgeRating
+local FFlagDefaultKidsToDarkTheme = SharedFlagsModule.FFlagDefaultKidsToDarkTheme
 local FFlagLuaAppSupportDisablePlayableWhenLoading = SharedFlagsModule.FFlagLuaAppSupportDisablePlayableWhenLoading
 local FFlagAppNavMyStatsTab = SharedFlagsModule.FFlagAppNavMyStatsTab
 local FFlagAppChatOnConsoles = SharedFlagsModule.FFlagAppChatOnConsoles
@@ -67,13 +70,12 @@ local FFlagFriendsChatDiscloseUpdateSecondVersion = SharedFlagsModule.FFlagFrien
 local FFlagFriendsChatHasFriendsGate = SharedFlagsModule.FFlagFriendsChatHasFriendsGate
 local FFlagAddPinExperienceTargetDestinationGUACPolicy = SharedFlagsModule.FFlagAddPinExperienceTargetDestinationGUACPolicy
 local FFlagFlyoutGateLearnPlace = SharedFlagsModule.FFlagFlyoutGateLearnPlace
-local FFlagFriendsChatSuggestedUsers = SharedFlagsModule.FFlagFriendsChatSuggestedUsers
 game:DefineFastFlag("BehaviorCollectionControlEnabled", false)
 game:DefineFastFlag("LuaAppPromotionalEmailsCheckboxEnabledInAppPolicy", false)
 local GetFFlagNotificationsComplianceShouldRestrictStreamFunction = SharedFlagsModule.GetFFlagNotificationsComplianceShouldRestrictStream
 
 return function(p1)
-	-- upvalues: IsVRAppBuildFunction (copy), LuaAppEnableRecommendedCarouselForDesktop (copy), IsSubjectToDesktopPoliciesFunction (copy), UseOriginalPlatformChatPolicy (copy), FFlagAppChatOnConsoles (copy), FFlagAppIaScrollAwayGuac (copy), IsTenFootInterfaceFunction (copy), IsRunningInStudioFunction (copy), DisableWebViewSupportInStudio (copy), GetFFlagLuafiedReportEntryPointsFunction (copy), GetFFlagEnableAbuseReport10ftFunction (copy), GetFFlagSeamlessVoiceConsentToastPolicyFunction (copy), GetFFlagExpChatGuacChatDisabledReasonFunction (copy), FFlagAEGIS2UseGuacToShowEnabledMessage (copy), FFlagAEGIS2UseGuacToShowFAEUpsell (copy), FFlagExpChatUseGuacForFOMOUpsell (copy), FFlagExpChatUseGuacForCrossAgeChat (copy), GetFFlagDisableCDLQrCodeForMaquettesFunction (copy), CryoModule (copy), ValuesResult (copy), DebugUseLegacyCrossPlayApi (copy), DebugCrossPlaySystemUi (copy), DebugOverrideCrossPlayUri (copy), CrossPlayCapabilitiesModule (copy), DebugOverrideCrossPlaySettingsKey (copy), DebugOverrideCrossPlayQueryParam (copy), GetFFlagUseEnablePremiumUserFeaturesAppPolicyFunction (copy), GetFFlagUseExternalBrowserForAgeGuidelines10ftFunction (copy), FFlagGuacCanRenderTransferOnProfile (copy), GetFFlagEnableGateNotificationPreferencesTabFunction (copy), UserInputService (copy), FFlagLuaAppHomeVngAppUpsell (copy), FFlagVngAppUpsellPcLayout (copy), FFlagLuaAppParentUpsellPolicy (copy), FFlagLuaAppSupportDisablePlayableWhenLoading (copy), GetFFlagNotificationsComplianceShouldRestrictStreamFunction (copy), DebugForceShowIllegalContentReportingUI (copy), FFlagRenameParentEmailForVerificationUpsellFunction (copy), FFlagFriendsChatDiscloseUpdateSecondVersion (copy), FFlagFriendsChatEnableConversationConsent (copy), FFlagFriendsChatHasFriendsGate (copy), FFlagFriendsChatSuggestedUsers (copy), FFlagEnableAndroidTvAppPolicies (copy), GetFFlagEnableMultiPageSignupFunction (copy), GetFIntExclusiveFallbackExclusiveUnderageCutoffForMultiPageSignupFunction (copy), FFlagEnableMicrosoftStorePaymentsPlatform (copy), FFlagEnableFriendsRenamingForAll (copy), FFlagEnableMilkyWayPaymentsPlatformV2 (copy), FFlagEnableScreentimeMoreTimeOption (copy), FlyoutDisablePremiumEntrypoint1 (copy), GuacDisableBlackbirdEntrypoints (copy), GuacAppPolicyDisableSignupCheckbox (copy), FFlagEnableFaceIDTextOnAddAuthMethodPage (copy), FFlagEnableMorePageExitButtonSupport (copy), FFlagEnableMorePageDirectionalLayoutRolloutFix (copy), DebugMomentsFeatureList (copy), FFlagSduiConditionalPropsAppPolicyCondition (copy), FFlagAXPersonalizedRecommendationsMenu (copy), GetFFlagEnableSupportCenterFunction (copy), FFlagEnableCoreContentAccountType (copy), FFlagEnableCoreContentBadge (copy), FFlagEnableFlyoutUncheckedBadge (copy), FFlagEnableNonFlyoutUncheckedBadge (copy), GetFFlagEnableAccountSwitcherUncheckedBadgeFunction (copy), FFlagMacMenuBarContentUpdates (copy), FFlagUsesCancelSearchAppPolicy (copy), FFlagAppNavMyStatsTab (copy), FFlagAddPinExperienceTargetDestinationGUACPolicy (copy), FFlagFlyoutGateLearnPlace (copy)
+	-- upvalues: IsVRAppBuildFunction (copy), LuaAppEnableRecommendedCarouselForDesktop (copy), IsSubjectToDesktopPoliciesFunction (copy), UseOriginalPlatformChatPolicy (copy), FFlagAppChatOnConsoles (copy), FFlagAppIaScrollAwayGuac (copy), IsTenFootInterfaceFunction (copy), IsRunningInStudioFunction (copy), DisableWebViewSupportInStudio (copy), GetFFlagLuafiedReportEntryPointsFunction (copy), GetFFlagEnableAbuseReport10ftFunction (copy), GetFFlagSeamlessVoiceConsentToastPolicyFunction (copy), GetFFlagExpChatGuacChatDisabledReasonFunction (copy), FFlagAEGIS2UseGuacToShowEnabledMessage (copy), FFlagAEGIS2UseGuacToShowFAEUpsell (copy), FFlagExpChatUseGuacForFOMOUpsell (copy), FFlagExpChatUseGuacForCrossAgeChat (copy), GetFFlagDisableCDLQrCodeForMaquettesFunction (copy), CryoModule (copy), ValuesResult (copy), DebugUseLegacyCrossPlayApi (copy), DebugCrossPlaySystemUi (copy), DebugOverrideCrossPlayUri (copy), CrossPlayCapabilitiesModule (copy), DebugOverrideCrossPlaySettingsKey (copy), DebugOverrideCrossPlayQueryParam (copy), GetFFlagUseEnablePremiumUserFeaturesAppPolicyFunction (copy), GetFFlagUseExternalBrowserForAgeGuidelines10ftFunction (copy), FFlagGuacCanRenderTransferOnProfile (copy), GetFFlagEnableGateNotificationPreferencesTabFunction (copy), UserInputService (copy), FFlagLuaAppHomeVngAppUpsell (copy), FFlagVngAppUpsellPcLayout (copy), FFlagLuaAppParentUpsellPolicy (copy), FFlagLuaAppSupportDisablePlayableWhenLoading (copy), GetFFlagNotificationsComplianceShouldRestrictStreamFunction (copy), DebugForceShowIllegalContentReportingUI (copy), FFlagRenameParentEmailForVerificationUpsellFunction (copy), FFlagFriendsChatDiscloseUpdateSecondVersion (copy), FFlagFriendsChatEnableConversationConsent (copy), FFlagFriendsChatHasFriendsGate (copy), FFlagEnableAndroidTvAppPolicies (copy), GetFFlagEnableMultiPageSignupFunction (copy), GetFIntExclusiveFallbackExclusiveUnderageCutoffForMultiPageSignupFunction (copy), FFlagEnableMicrosoftStorePaymentsPlatform (copy), FFlagEnableFriendsRenamingForAll (copy), FFlagEnableMilkyWayPaymentsPlatformV2 (copy), FFlagEnableScreentimeMoreTimeOption (copy), FlyoutDisablePremiumEntrypoint1 (copy), GuacDisableBlackbirdEntrypoints (copy), FlyoutEnableGiftcardsWithRedeem (copy), GuacAppPolicyDisableSignupCheckbox (copy), FFlagEnableFaceIDTextOnAddAuthMethodPage (copy), FFlagEnableMorePageExitButtonSupport (copy), FFlagEnableMorePageDirectionalLayoutRolloutFix (copy), DebugMomentsFeatureList (copy), FFlagSduiConditionalPropsAppPolicyCondition (copy), FFlagAXPersonalizedRecommendationsMenu (copy), GetFFlagEnableSupportCenterFunction (copy), FFlagEnableCoreContentAccountType (copy), FFlagEnableCoreContentBadge (copy), FFlagEnableFlyoutUncheckedBadge (copy), FFlagEnableNonFlyoutUncheckedBadge (copy), GetFFlagEnableAccountSwitcherUncheckedBadgeFunction (copy), FFlagShowGameAgeRating (copy), FFlagDefaultKidsToDarkTheme (copy), FFlagMacMenuBarContentUpdates (copy), FFlagUsesCancelSearchAppPolicy (copy), FFlagAppNavMyStatsTab (copy), FFlagAddPinExperienceTargetDestinationGUACPolicy (copy), FFlagFlyoutGateLearnPlace (copy)
 	local function _(p2, p3)
 		-- upvalues: p1 (copy), IsVRAppBuildFunction (upval)
 		return if p1[p2] == nil then if IsVRAppBuildFunction() then p3 else not p3 else p1[p2]
@@ -810,7 +812,7 @@ return function(p1)
 			return (if UseOriginalPlatformChatPolicy then p1.CanSeeChatTab elseif FFlagAppChatOnConsoles then p1.CanSeeChatTab2 else p1.CanSeeChatTab) or false
 		end,
 		getCanSeeFriendsTab = function(): boolean
-			-- upvalues: FFlagFriendsChatDiscloseUpdateSecondVersion (upval), FFlagFriendsChatEnableConversationConsent (upval), FFlagFriendsChatHasFriendsGate (upval), FFlagFriendsChatSuggestedUsers (upval), p1 (copy)
+			-- upvalues: FFlagFriendsChatDiscloseUpdateSecondVersion (upval), FFlagFriendsChatEnableConversationConsent (upval), FFlagFriendsChatHasFriendsGate (upval), p1 (copy)
 			local config = {
 				ContextCard = true,
 				VR = false,
@@ -818,7 +820,7 @@ return function(p1)
 				Gamepad = false,
 				ContextCardUkCopy = FFlagFriendsChatDiscloseUpdateSecondVersion,
 				ConversationConsent = FFlagFriendsChatEnableConversationConsent,
-				FriendCountGate = FFlagFriendsChatHasFriendsGate and not FFlagFriendsChatSuggestedUsers
+				FriendCountGate = FFlagFriendsChatHasFriendsGate
 			}
 			local FriendsTabRequiredCapabilities = p1.FriendsTabRequiredCapabilities or {}
 			for _, friendsTabRequiredCapability in FriendsTabRequiredCapabilities do
@@ -927,8 +929,8 @@ return function(p1)
 			return GuacDisableBlackbirdEntrypoints and p1.DisableBlackbirdEntrypoints or false
 		end,
 		getEnableGiftcardsWithRedeem = function()
-			-- upvalues: p1 (copy)
-			return p1.EnableGiftcardsWithRedeem or false
+			-- upvalues: FlyoutEnableGiftcardsWithRedeem (upval), p1 (copy)
+			return FlyoutEnableGiftcardsWithRedeem and p1.EnableGiftcardsWithRedeem or false
 		end,
 		getGiftCardSourceRefOverride = function()
 			-- upvalues: p1 (copy)
@@ -1046,10 +1048,6 @@ return function(p1)
 			-- upvalues: p1 (copy)
 			return p1.showInContextPersonalizedRecommendationsFriendsAddFriendsPeopleYouMayKnow or false
 		end,
-		getShowInContextPersonalizedRecommendationsHomePeopleYouMayKnow = function()
-			-- upvalues: p1 (copy)
-			return p1.showInContextPersonalizedRecommendationsHomePeopleYouMayKnow or false
-		end,
 		getShowInContextPersonalizedRecommendationsFriendsAddFriendsSearch = function()
 			-- upvalues: p1 (copy)
 			return p1.showInContextPersonalizedRecommendationsFriendsAddFriendsSearch or false
@@ -1057,10 +1055,6 @@ return function(p1)
 		getShowInContextPersonalizedRecommendationsSearchOmnisearchPeople = function()
 			-- upvalues: p1 (copy)
 			return p1.showInContextPersonalizedRecommendationsSearchOmnisearchPeople or false
-		end,
-		getShowInContextPersonalizedRecommendationsExperienceDetailsStore = function()
-			-- upvalues: p1 (copy)
-			return p1.showInContextPersonalizedRecommendationsExperienceDetailsStore or false
 		end,
 		getSupportCenterEnabled = if GetFFlagEnableSupportCenterFunction() then function()
 			-- upvalues: p1 (copy)
@@ -1094,14 +1088,18 @@ return function(p1)
 			-- upvalues: GetFFlagEnableAccountSwitcherUncheckedBadgeFunction (upval), p1 (copy)
 			return if GetFFlagEnableAccountSwitcherUncheckedBadgeFunction() then p1.ShowUncheckedBadge else false
 		end,
-		getShowGameAgeRating = function()
+		getShowGameAgeRating = if FFlagShowGameAgeRating then function()
 			-- upvalues: p1 (copy)
 			return p1.ShowGameAgeRating or false
+		end else nil,
+		getShowBadgeOver12 = if FFlagShowGameAgeRating then nil else function()
+			-- upvalues: p1 (copy)
+			return p1.ShowBadgeOver12 or false
 		end,
-		getDefaultTheme = function()
+		getDefaultTheme = if FFlagDefaultKidsToDarkTheme then function()
 			-- upvalues: p1 (copy)
 			return p1.DefaultTheme
-		end,
+		end else nil,
 		getDevicePreferencesPersistentPresenceVariant = if FFlagMacMenuBarContentUpdates then function()
 			-- upvalues: p1 (copy)
 			return p1.DevicePreferencesPersistentPresenceVariant

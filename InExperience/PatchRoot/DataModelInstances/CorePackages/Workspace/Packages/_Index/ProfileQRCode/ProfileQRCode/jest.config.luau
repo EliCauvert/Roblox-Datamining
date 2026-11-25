@@ -9,7 +9,6 @@ return {
 		JestConfigsModule.setupFiles.createPromiseRejectionHandler(),
 		script.Parent.TestHelpers.collisionMatcherSetup,
 		script.Parent.TestHelpers.NetworkImplHandler,
-		JestConfigsModule.setupFiles.RemoveLeakedScreenGuis,
 		JestConfigsModule.setupFiles.RetryTimes
 	}
 }

@@ -82,8 +82,6 @@ return function(Frame)
 					thumbnail = item.thumbnail,
 					model = item.model,
 					onActivated = item.onActivated,
-					isSoundPlaying = item.isSoundPlaying,
-					onTogglePlayback = item.onTogglePlayback,
 					Size = UDim2.fromScale(1, 1),
 					mediaSize = UDim2.new(1, 0, 1, -Size1200)
 				})

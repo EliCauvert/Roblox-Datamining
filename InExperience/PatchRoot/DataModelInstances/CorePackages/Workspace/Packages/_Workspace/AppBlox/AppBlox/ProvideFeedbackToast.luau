@@ -5,7 +5,6 @@ local LocalizationModule = require(Parent.Localization)
 local ReactModule = require(Parent.React)
 local RoactUtilsModule = require(Parent.RoactUtils)
 local RobloxAppEnumsModule = require(Parent.RobloxAppEnums)
-local SharedFlagsModule = require(Parent.SharedFlags)
 local CloseCentralOverlayFunction = CentralOverlayModule.Thunks.CloseCentralOverlay
 local SetCentralOverlayFunction = CentralOverlayModule.Actions.SetCentralOverlay
 local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
@@ -13,10 +12,9 @@ local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
 local CentralOverlayType = RobloxAppEnumsModule.CentralOverlayType
 local _ = require(script.Parent.CheckboxFeedbackFormModal)
 local SnackbarWrapperModule = require(script.Parent.SnackbarWrapper)
-local FFlagLuaAppNotInterestedMobileSnackbar = SharedFlagsModule.FFlagLuaAppNotInterestedMobileSnackbar
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseDispatchFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), CloseCentralOverlayFunction (copy), SnackbarWrapperModule (copy), FFlagLuaAppNotInterestedMobileSnackbar (copy)
+	-- upvalues: UseDispatchFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), CloseCentralOverlayFunction (copy), SnackbarWrapperModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
 		giveFeedback = "Feature.GameDetails.Action.GiveFeedback",
@@ -27,7 +25,7 @@ return ReactModule.memo(function(p1)
 		autoDismissDelaySeconds = 5,
 		titleText = p1.toastTitle or UseLocalizationResult.helpUsImprove,
 		icon = p1.toastIcon,
-		buttonText = if FFlagLuaAppNotInterestedMobileSnackbar and p1.hideToastButton then nil else p1.toastButtonText or UseLocalizationResult.giveFeedback,
+		buttonText = p1.toastButtonText or UseLocalizationResult.giveFeedback,
 		onButtonActivated = ReactModule.useCallback(function()
 			-- upvalues: p1 (copy), UseDispatchResult (copy), SetCentralOverlayFunction (upval), CentralOverlayType (upval)
 			if p1.onToastActivated then

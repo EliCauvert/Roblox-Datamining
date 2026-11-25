@@ -343,7 +343,7 @@ else
 					ImageTransparency = p1.bindings.thumbnailTransparency
 				}),
 				renderStepped = not p2.Settings.ReducedMotion and RoactModule.createElement(ExternalEventConnection, {
-					event = RunService.RenderStepped,
+					event = RunService.renderStepped,
 					callback = p1.renderBackgroundSteppedCallback
 				})
 			})
@@ -449,7 +449,7 @@ else
 			config3.Offset = Vector2.new(ShimPos, 0)
 			config2.Gradient = CreateElementFunction1(v4, config3)
 			config2.renderStepped = RoactModule.createElement(ExternalEventConnection, {
-				event = RunService.RenderStepped,
+				event = RunService.renderStepped,
 				callback = p1.renderShimmerCallback
 			})
 			NoReducedMotion = CreateElementFunction2(v3, config1, config2)

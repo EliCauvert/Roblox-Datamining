@@ -6,8 +6,7 @@ return {
 	Constants = require(script.Constants),
 	ModelSources = {
 		fromUserId = require(script.ModelSources.createUserIdModelSource),
-		fromUserIdWithRigType = require(script.ModelSources.createUserIdRigTypeModelSource),
-		finishModelSetup = require(script.ModelSources.finishModelSetup)
+		fromUserIdWithRigType = require(script.ModelSources.createUserIdRigTypeModelSource)
 	},
 	useRotatableOrbitViewport = require(script.Hooks.useRotatableOrbitViewport),
 	useAvatarViewportScene = require(script.Hooks.useAvatarViewportScene),

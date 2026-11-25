@@ -29,12 +29,5 @@ return table.freeze({
 			source = p1.source,
 			request = p1.request
 		}
-	end,
-	suggestedUserPlaceholder = function(p1)
-		-- upvalues: ConversationListItemKindModule (copy)
-		return {
-			id = `trailing:suggestedUserPlaceholder:{p1}`,
-			kind = ConversationListItemKindModule.SuggestedUserPlaceholder
-		}
 	end
 })

@@ -5,7 +5,6 @@ local ContentProvider = game:GetService("ContentProvider")
 local Players = game:GetService("Players")
 local ExperienceStateReplayPreloadAssets = game:DefineFastFlag("ExperienceStateReplayPreloadAssets", false)
 local FFlagExperienceStateReplaySourceClockPlaybackModule = require(script.Parent.Parent.Flags.FFlagExperienceStateReplaySourceClockPlayback)
-local FFlagExperienceStateReplayRecordedViewportEventModule = require(script.Parent.Parent.Flags.FFlagExperienceStateReplayRecordedViewportEvent)
 local ExperienceStateReplayCaptureMetadataUrl = game:DefineFastString("ExperienceStateReplayCaptureMetadataUrl", "https://apis.roblox.com/data-model-capture-service/v1/GetCaptureMetadataByEngineContextGuid")
 
 function debugPrint(_) end
@@ -158,7 +157,6 @@ local _ = function(p2, Loading)
 end
 
 local _ = function(p2)
-	-- upvalues: FFlagExperienceStateReplayRecordedViewportEventModule (copy)
 	p2.minLoadedFrameNumber = 0
 	p2.maxLoadedFrameNumber = 0
 	p2.minLoadedEpoch = 0
@@ -167,14 +165,9 @@ local _ = function(p2)
 	p2.maxOverallEpoch = nil
 	p2.nextSliceToLoad = nil
 	p2.noncontiguousSliceToLoad = nil
-	
-	if FFlagExperienceStateReplayRecordedViewportEventModule and p2.resetRecordedScreenContext then
-		p2.resetRecordedScreenContext()
-	end
 end
 
 local _ = function(p2, RecordingsToPlayback, PlaceURL, SourceType)
-	-- upvalues: FFlagExperienceStateReplayRecordedViewportEventModule (copy)
 	p2.LoadingOverlay.Visible = true
 	p2.state.Loading = true
 	p2.minLoadedFrameNumber = 0
@@ -185,10 +178,6 @@ local _ = function(p2, RecordingsToPlayback, PlaceURL, SourceType)
 	p2.maxOverallEpoch = nil
 	p2.nextSliceToLoad = nil
 	p2.noncontiguousSliceToLoad = nil
-	
-	if FFlagExperienceStateReplayRecordedViewportEventModule and p2.resetRecordedScreenContext then
-		p2.resetRecordedScreenContext()
-	end
 	p2.recordingsToPlayback = RecordingsToPlayback
 	p2.placeURL = PlaceURL
 	p2.sourceType = SourceType
@@ -199,21 +188,20 @@ function LoadSlicesModule:loadGUIDSlices(p2, _, _)
 end
 
 function LoadSlicesModule.loadGUID(p2, DirectGuid, Callback1, Callback, Callback2, p3, p4)
-	-- upvalues: ExperienceStateRecordingService (copy), LoadSlicesModule (copy), FFlagExperienceStateReplayRecordedViewportEventModule (copy)
+	-- upvalues: ExperienceStateRecordingService (copy), LoadSlicesModule (copy)
 	debugPrint("Loading slices for GUID: " .. tostring(DirectGuid))
 	local RecordingService = if p4 and p4.recordingService then p4.recordingService else ExperienceStateRecordingService
 	local Spawn = if p4 and p4.spawn then p4.spawn else task.spawn
 	local SetLoadedState = if p4 and p4.setLoadedState then p4.setLoadedState else LoadSlicesModule.SetLoadedState
 	local LoadSlicesAfterFirst = if p4 and p4.loadSlicesAfterFirst then p4.loadSlicesAfterFirst else LoadSlicesModule.loadSlicesAfterFirst
 	local _ = (if p4 and p4.getMetadataForGuid then p4.getMetadataForGuid else getMetadataForGuid)(DirectGuid, function(p5, p6, p7, p8)
-		-- upvalues: Callback1 (copy), RecordingService (copy), DirectGuid (copy), p2 (copy), FFlagExperienceStateReplayRecordedViewportEventModule (upval), Spawn (copy), SetLoadedState (copy), Callback2 (copy), LoadSlicesAfterFirst (copy), Callback (copy), p3 (copy)
+		-- upvalues: Callback1 (copy), RecordingService (copy), DirectGuid (copy), p2 (copy), Spawn (copy), SetLoadedState (copy), Callback2 (copy), LoadSlicesAfterFirst (copy), Callback (copy), p3 (copy)
 		debugPrint("Received metadata - PlaceId: " .. tostring(p5) .. " PlaceVersion: " .. tostring(p6))
 		
 		if Callback1 ~= nil and (type(p7) ~= "string" or type(p8) ~= "string") then
 			error("capture metadata is missing recording timestamps")
 		end
 		local PlaceFileURLAsync = RecordingService:GetPlaceFileURLAsync(p6, p5)
-		local Urls = RecordingService:ListCaptureURLsAsync(DirectGuid, if Callback1 == nil or type(p7) ~= "string" then "2024-12-10T00:20:14.556Z" else p7, if Callback1 == nil or type(p8) ~= "string" then "2026-12-18T00:25:59.412Z" else p8).urls
 		local S3Url = Enum.ExperienceStateRecordingLoadSourceType.S3Url
 		p2.LoadingOverlay.Visible = true
 		p2.state.Loading = true
@@ -225,11 +213,7 @@ function LoadSlicesModule.loadGUID(p2, DirectGuid, Callback1, Callback, Callback
 		p2.maxOverallEpoch = nil
 		p2.nextSliceToLoad = nil
 		p2.noncontiguousSliceToLoad = nil
-		
-		if FFlagExperienceStateReplayRecordedViewportEventModule and p2.resetRecordedScreenContext then
-			p2.resetRecordedScreenContext()
-		end
-		p2.recordingsToPlayback = Urls
+		p2.recordingsToPlayback = RecordingService:ListCaptureURLsAsync(DirectGuid, if Callback1 == nil or type(p7) ~= "string" then "2024-12-10T00:20:14.556Z" else p7, if Callback1 == nil or type(p8) ~= "string" then "2026-12-18T00:25:59.412Z" else p8).urls
 		p2.placeURL = PlaceFileURLAsync
 		p2.sourceType = S3Url
 		
@@ -313,12 +297,11 @@ function LoadSlicesModule.preloadAssets(p5)
 end
 
 function LoadSlicesModule.loadFileForCapture(p6, Dir, Callback1, Callback: (any) -> (), SliceCount: number, p7)
-	-- upvalues: ExperienceStateRecordingService (copy), LoadSlicesModule (copy), FFlagExperienceStateReplayRecordedViewportEventModule (copy), ExperienceStateReplayPreloadAssets (copy)
+	-- upvalues: ExperienceStateRecordingService (copy), LoadSlicesModule (copy), ExperienceStateReplayPreloadAssets (copy)
 	local RecordingService = if p7 and p7.recordingService then p7.recordingService else ExperienceStateRecordingService
 	local Spawn: (any) -> () = if p7 and p7.spawn then p7.spawn else task.spawn
 	local SetLoadedState = if p7 and p7.setLoadedState then p7.setLoadedState else LoadSlicesModule.SetLoadedState
 	local PreloadAssets = if p7 and p7.preloadAssets then p7.preloadAssets else LoadSlicesModule.preloadAssets
-	local File = Enum.ExperienceStateRecordingLoadSourceType.File
 	p6.LoadingOverlay.Visible = true
 	p6.state.Loading = true
 	p6.minLoadedFrameNumber = 0
@@ -329,13 +312,9 @@ function LoadSlicesModule.loadFileForCapture(p6, Dir, Callback1, Callback: (any)
 	p6.maxOverallEpoch = nil
 	p6.nextSliceToLoad = nil
 	p6.noncontiguousSliceToLoad = nil
-	
-	if FFlagExperienceStateReplayRecordedViewportEventModule and p6.resetRecordedScreenContext then
-		p6.resetRecordedScreenContext()
-	end
 	p6.recordingsToPlayback = nil
 	p6.placeURL = nil
-	p6.sourceType = File
+	p6.sourceType = Enum.ExperienceStateRecordingLoadSourceType.File
 	
 	if SliceCount == nil then
 		p6.LoadingOverlay.Visible = false
@@ -406,7 +385,7 @@ function LoadSlicesModule.loadFileForCapture(p6, Dir, Callback1, Callback: (any)
 end
 
 function LoadSlicesModule.loadRwsForCapture(p8, Dir, Callback1, Callback: (any) -> (), p9)
-	-- upvalues: ExperienceStateRecordingService (copy), LoadSlicesModule (copy), FFlagExperienceStateReplayRecordedViewportEventModule (copy), ExperienceStateReplayPreloadAssets (copy)
+	-- upvalues: ExperienceStateRecordingService (copy), LoadSlicesModule (copy), ExperienceStateReplayPreloadAssets (copy)
 	local RecordingService = if p9 and p9.recordingService then p9.recordingService else ExperienceStateRecordingService
 	local Spawn: (any) -> () = if p9 and p9.spawn then p9.spawn else task.spawn
 	local SetLoadedState = if p9 and p9.setLoadedState then p9.setLoadedState else LoadSlicesModule.SetLoadedState
@@ -423,7 +402,6 @@ function LoadSlicesModule.loadRwsForCapture(p8, Dir, Callback1, Callback: (any) 
 		end
 		return
 	else
-		local RecordingsToPlayback = { Dir }
 		p8.LoadingOverlay.Visible = true
 		p8.state.Loading = true
 		p8.minLoadedFrameNumber = 0
@@ -434,11 +412,7 @@ function LoadSlicesModule.loadRwsForCapture(p8, Dir, Callback1, Callback: (any) 
 		p8.maxOverallEpoch = nil
 		p8.nextSliceToLoad = nil
 		p8.noncontiguousSliceToLoad = nil
-		
-		if FFlagExperienceStateReplayRecordedViewportEventModule and p8.resetRecordedScreenContext then
-			p8.resetRecordedScreenContext()
-		end
-		p8.recordingsToPlayback = RecordingsToPlayback
+		p8.recordingsToPlayback = { Dir }
 		p8.placeURL = nil
 		p8.sourceType = RwsSourceType
 		Spawn(function()
@@ -525,7 +499,7 @@ function LoadSlicesModule.experienceCallback(p8)
 end
 
 function LoadSlicesModule.loadSlices(p8)
-	-- upvalues: FFlagExperienceStateReplayRecordedViewportEventModule (copy), TeleportService (copy), ExperienceStateRecordingService (copy), LoadSlicesModule (copy)
+	-- upvalues: TeleportService (copy), ExperienceStateRecordingService (copy), LoadSlicesModule (copy)
 	p8.LoadingOverlay.Visible = true
 	p8.state.Loading = true
 	p8.minLoadedFrameNumber = 0
@@ -536,10 +510,6 @@ function LoadSlicesModule.loadSlices(p8)
 	p8.maxOverallEpoch = nil
 	p8.nextSliceToLoad = nil
 	p8.noncontiguousSliceToLoad = nil
-	
-	if FFlagExperienceStateReplayRecordedViewportEventModule and p8.resetRecordedScreenContext then
-		p8.resetRecordedScreenContext()
-	end
 	local LocalPlayerTeleportData = TeleportService:GetLocalPlayerTeleportData()
 	p8.recordingsToPlayback = { "/path/to/default/file" }
 	p8.sourceType = Enum.ExperienceStateRecordingLoadSourceType.File
@@ -578,17 +548,17 @@ function LoadSlicesModule.loadSlices(p8)
 	end)
 end
 
-function LoadSlicesModule.loadSlicesAfterFirst(p9, Callback2, Callback: (any) -> (), Callback1, p10)
+function LoadSlicesModule.loadSlicesAfterFirst(p9, Callback1, Callback: (any) -> (), Callback2, p10)
 	-- upvalues: ExperienceStateRecordingService (copy), LoadSlicesModule (copy)
 	local RecordingService = if p10 and p10.recordingService then p10.recordingService else ExperienceStateRecordingService
 	local Wait = if p10 and p10.wait then p10.wait else task.wait
 	local SetLoadedState = if p10 and p10.setLoadedState then p10.setLoadedState else LoadSlicesModule.SetLoadedState
 	local Success, Result = pcall(function()
-		-- upvalues: Wait (copy), Callback2 (copy), p9 (copy), RecordingService (copy), SetLoadedState (copy), Callback1 (copy)
+		-- upvalues: Wait (copy), Callback1 (copy), p9 (copy), RecordingService (copy), SetLoadedState (copy), Callback2 (copy)
 		local Count = 0
 		while true do
 			Wait(1)
-			if Callback2 ~= nil and #p9.recordingsToPlayback < p9.nextSliceToLoad then
+			if Callback1 ~= nil and #p9.recordingsToPlayback < p9.nextSliceToLoad then
 				break
 			elseif p9.noncontiguousSliceToLoad == nil then
 				if p9.nextSliceToLoad <= #p9.recordingsToPlayback and Count >= 4 then
@@ -597,8 +567,8 @@ function LoadSlicesModule.loadSlicesAfterFirst(p9, Callback2, Callback: (any) ->
 					SetLoadedState(p9, (RecordingService:LoadPlaybackAsync(RecordingsToPlaybackEntry, nil, Enum.ExperienceStateRecordingLoadMode.ContiguousSlice, p9.sourceType)))
 					p9.nextSliceToLoad += 1
 					
-					if Callback1 ~= nil then
-						Callback1()
+					if Callback2 ~= nil then
+						Callback2()
 					end
 					Count = 0
 				else
@@ -618,7 +588,7 @@ function LoadSlicesModule.loadSlicesAfterFirst(p9, Callback2, Callback: (any) ->
 			end
 			continue
 		end
-		Callback2()
+		Callback1()
 	end)
 	
 	if not Success then

@@ -17,14 +17,13 @@ local ReactModule = require(Parent2.React)
 local FoundationModule = require(Parent2.Foundation)
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
-local FFlagLuaAppAddTestIdsForArrow = require(Parent2.SharedFlags).FFlagLuaAppAddTestIdsForArrow
 local DefaultContentPadding = ConstantsModule.DefaultContentPadding
 local DefaultTextContentPadding = ConstantsModule.DefaultTextContentPadding
 local _Vector2 = Vector2.new(36, 36)
 local IsUserThumbnailFunction = require(Parent1.utils.toastNotificationHelper).isUserThumbnail
 
 return function(p1)
-	-- upvalues: UseStyleFunction (copy), UseTokensFunction (copy), UseNotificationCardDataModule (copy), IsUserThumbnailFunction (copy), UseNotificationCardStateModule (copy), ReactModule (copy), ConstantsModule (copy), NormalizeFontFaceFunction (copy), FFlagLuaAppAddTestIdsForArrow (copy), DefaultContentPadding (copy), _Vector2 (copy), NotificationThumbnailModule (copy), DefaultTextContentPadding (copy), NotificationStyledTextModule (copy), ToastHoldButtonModule (copy), Interactable (copy), ImageSetLabel (copy), TypeModule (copy)
+	-- upvalues: UseStyleFunction (copy), UseTokensFunction (copy), UseNotificationCardDataModule (copy), IsUserThumbnailFunction (copy), UseNotificationCardStateModule (copy), ReactModule (copy), ConstantsModule (copy), NormalizeFontFaceFunction (copy), DefaultContentPadding (copy), _Vector2 (copy), NotificationThumbnailModule (copy), DefaultTextContentPadding (copy), NotificationStyledTextModule (copy), ToastHoldButtonModule (copy), Interactable (copy), ImageSetLabel (copy), TypeModule (copy)
 	local UseStyleResult = UseStyleFunction()
 	local UseTokensResult = UseTokensFunction()
 	local FontSize: number = UseTokensResult.Typography.CaptionLarge.FontSize
@@ -67,8 +66,7 @@ return function(p1)
 		AutomaticSize = Enum.AutomaticSize.Y,
 		TextXAlignment = Enum.TextXAlignment.Left,
 		FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.CaptionLarge.Font),
-		TextColor3 = UseStyleResult.Theme.TextEmphasis.Color,
-		testTag = if FFlagLuaAppAddTestIdsForArrow then "data-testid=--toast-notification-title" else nil
+		TextColor3 = UseStyleResult.Theme.TextEmphasis.Color
 	})
 	local Config1 = TextBodyEntry and (TextBodyEntry.label and {
 		LayoutOrder = 2,
@@ -78,8 +76,7 @@ return function(p1)
 		TextSize = FontSize1,
 		AutomaticSize = Enum.AutomaticSize.Y,
 		TextXAlignment = Enum.TextXAlignment.Left,
-		FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.BodySmall.Font),
-		testTag = if FFlagLuaAppAddTestIdsForArrow then "data-testid=--toast-notification-subtitle" else nil
+		FontFace = NormalizeFontFaceFunction(UseTokensResult.Typography.BodySmall.Font)
 	})
 	local UseNotificationCardDataModuleResult = UseNotificationCardDataModule()
 	CardSize = UseNotificationCardDataModuleResult.cardSize

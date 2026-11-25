@@ -34,10 +34,11 @@ local FFlagLuaAppSduiPageEntryPointSnackbar = require(Parent.SharedFlags).FFlagL
 local FFlagSduiPageEntryUseSharedHooks = require(Parent.SharedFlags).FFlagSduiPageEntryUseSharedHooks
 local FFlagLuaAppMediaGalleryGamepadSupport = require(Parent.SharedFlags).FFlagLuaAppMediaGalleryGamepadSupport
 local FFlagSduiPageEntryPointResolvedSlot = require(Parent.SharedFlags).FFlagSduiPageEntryPointResolvedSlot
+local FFlagAppThemeHalloween2026HomeBackground = require(Parent.SharedFlags).FFlagAppThemeHalloween2026HomeBackground
 local FFlagSduiVerticalFeedScrollTelemetry = require(Parent.SharedFlags).FFlagSduiVerticalFeedScrollTelemetry
 
 local function SduiPageEntryPoint(p1, p2)
-	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), FFlagSduiPageEntryUseSharedHooks (copy), UseComponentConfigModule (copy), ReactModule (copy), GetSduiApiStoreModule (copy), SignalsReactModule (copy), UseUiStatusModule (copy), UiStatus (copy), FFlagSduiPageEntryPointResolvedSlot (copy), UseComponentLifecycleTimingModule (copy), UseLocalAnalyticsDataModule (copy), UseStatefulRefModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateBackFunction (copy), ReactFocusNavigationModule (copy), UseCloseWithBackButtonFunction (copy), FFlagLuaAppSduiPageEntryPointSnackbar (copy), UsePageEntrySnackbarModule (copy), UseDataUpdatedTimestampModule (copy), UseCreateClientBindingSduiContextModule (copy), GetSduiComponentWrapperFunction (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), FFlagSduiVerticalFeedScrollTelemetry (copy), SduiPageNavigationHeaderModule (copy), CompositionTags (copy), NavButtonType (copy), FoundationModule (copy), Loading (copy), SduiPageErrorStateModule (copy), ReactRobloxModule (copy), SnackbarDEPRECATED (copy), CoreGui (copy)
+	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), FFlagSduiPageEntryUseSharedHooks (copy), UseComponentConfigModule (copy), ReactModule (copy), GetSduiApiStoreModule (copy), SignalsReactModule (copy), UseUiStatusModule (copy), UiStatus (copy), FFlagSduiPageEntryPointResolvedSlot (copy), UseComponentLifecycleTimingModule (copy), UseLocalAnalyticsDataModule (copy), UseStatefulRefModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateBackFunction (copy), ReactFocusNavigationModule (copy), UseCloseWithBackButtonFunction (copy), FFlagLuaAppSduiPageEntryPointSnackbar (copy), UsePageEntrySnackbarModule (copy), UseDataUpdatedTimestampModule (copy), UseCreateClientBindingSduiContextModule (copy), GetSduiComponentWrapperFunction (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), FFlagSduiVerticalFeedScrollTelemetry (copy), FFlagAppThemeHalloween2026HomeBackground (copy), SduiPageNavigationHeaderModule (copy), CompositionTags (copy), NavButtonType (copy), FoundationModule (copy), Loading (copy), SduiPageErrorStateModule (copy), ReactRobloxModule (copy), SnackbarDEPRECATED (copy), CoreGui (copy)
 	local AppPage = p1.appPage
 	local ConfigKey = p1.configKey or AppPage
 	local SduiPageEntryPointName: string = `SduiPageEntryPoint-{ConfigKey}`
@@ -82,8 +83,8 @@ local function SduiPageEntryPoint(p1, p2)
 		-- upvalues: ConfigKey (copy), AppPage (copy)
 		return { configKey = ConfigKey, appPage = AppPage }
 	end, { ConfigKey, AppPage })
-	local UseStatefulRefModuleResult2 = nil
 	local UseStatefulRefModuleResult = nil
+	local UseStatefulRefModuleResult2 = nil
 	
 	if FFlagSduiPageEntryUseSharedHooks then
 		UseStatefulRefModuleResult, UseStatefulRefModuleResult2 = UseStatefulRefModule(p2)
@@ -114,7 +115,7 @@ local function SduiPageEntryPoint(p1, p2)
 	local UseCreateClientBindingSduiContextModuleResult = UseCreateClientBindingSduiContextModule(AppPage, UseStateResult, nil, UseDataUpdatedTimestampModuleResult, ConfigKey, nil, p1.routeName, p1.scrollAway, p1.videoPlaybackContext)
 	local NoUseStatefulRefModuleResult = UseStatefulRefModuleResult == nil
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: UseComponentConfigModuleResult (ref), GetSduiComponentWrapperFunction (upval), ReactModule (upval), SduiPageEntryPointName (copy), UseCreateClientBindingSduiContextModuleResult (copy), UseLocalAnalyticsDataModuleResult (copy), p1 (copy), FFlagLuaAppMediaGalleryGamepadSupport (upval), FFlagSduiVerticalFeedScrollTelemetry (upval)
+		-- upvalues: UseComponentConfigModuleResult (ref), GetSduiComponentWrapperFunction (upval), ReactModule (upval), SduiPageEntryPointName (copy), UseCreateClientBindingSduiContextModuleResult (copy), UseLocalAnalyticsDataModuleResult (copy), p1 (copy), FFlagLuaAppMediaGalleryGamepadSupport (upval), FFlagSduiVerticalFeedScrollTelemetry (upval), FFlagAppThemeHalloween2026HomeBackground (upval)
 		return if UseComponentConfigModuleResult == nil then nil else ReactModule.createElement(GetSduiComponentWrapperFunction(UseComponentConfigModuleResult), {
 			debugName = SduiPageEntryPointName,
 			componentConfig = UseComponentConfigModuleResult,
@@ -129,7 +130,7 @@ local function SduiPageEntryPoint(p1, p2)
 				defaultContentTag = p1.contentTag,
 				defaultStickyContentTag = p1.stickyContentTag,
 				scrollPerformanceIntervalName = if FFlagSduiVerticalFeedScrollTelemetry then p1.scrollPerformanceIntervalName else nil,
-				backgroundStyle = p1.feedBackgroundStyle
+				backgroundStyle = if FFlagAppThemeHalloween2026HomeBackground then p1.feedBackgroundStyle else nil
 			}
 		})
 	end, {
@@ -140,7 +141,7 @@ local function SduiPageEntryPoint(p1, p2)
 		if FFlagLuaAppMediaGalleryGamepadSupport then p1.scrollToSelectionRevealOnly else nil,
 		p1.onScrollDirectionChanged,
 		if FFlagSduiVerticalFeedScrollTelemetry then p1.scrollPerformanceIntervalName else nil,
-		p1.feedBackgroundStyle
+		if FFlagAppThemeHalloween2026HomeBackground then p1.feedBackgroundStyle else nil
 	})
 	local HasScrollingFrameRef = p1.scrollingFrameRef ~= nil
 	

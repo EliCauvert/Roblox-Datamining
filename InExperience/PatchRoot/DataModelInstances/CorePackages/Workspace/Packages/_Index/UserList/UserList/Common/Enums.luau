@@ -11,7 +11,6 @@
 	},
 	LayoutMode = { Vertical = "vertical", Horizontal = "horizontal" },
 	RowLayoutMode = { Compact = "compact", Wide = "wide" },
-	RowSize = { Small = "small", Medium = "medium" },
 	ButtonTypes = {
 		Accept = "Accept",
 		Add = "Add",
@@ -42,11 +41,7 @@
 		FromQR = "FromQR",
 		FromExperience = "FromExperience",
 		OffNetworkFriendRequest = "OffNetworkFriendRequest",
-		Loading = "Loading",
-		NewFriend = "NewFriend",
-		SchoolMemberList = "SchoolMemberList",
-		FollowingUser = "FollowingUser",
-		FollowingMe = "FollowingMe"
+		Loading = "Loading"
 	},
 	Joinability = { Joinable = "Joinable", NotJoinable = "NotJoinable" }
 }

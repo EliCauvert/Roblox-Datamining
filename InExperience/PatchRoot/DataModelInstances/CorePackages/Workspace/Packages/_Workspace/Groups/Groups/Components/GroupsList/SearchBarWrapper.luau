@@ -1,12 +1,11 @@
 ﻿local Parent = script:FindFirstAncestor("Groups").Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
-local FFlagLuaAppAddTestIdsForArrow = require(Parent.SharedFlags).FFlagLuaAppAddTestIdsForArrow
 local TextInput = FoundationModule.TextInput
 local IconName = FoundationModule.Enums.IconName
 
 return function(p1)
-	-- upvalues: ReactModule (copy), TextInput (copy), FFlagLuaAppAddTestIdsForArrow (copy), IconName (copy)
+	-- upvalues: ReactModule (copy), TextInput (copy), IconName (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState("")
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseResult = ReactModule.useCallback(function()
@@ -44,7 +43,6 @@ return function(p1)
 	return ReactModule.createElement(TextInput, {
 		label = "",
 		leadingIcon = "icons/common/search",
-		testId = if FFlagLuaAppAddTestIdsForArrow then "--communities-list-input-search" else nil,
 		text = UseStateResult,
 		width = UDim.new(1, 0),
 		placeholder = p1.placeholderText or "",

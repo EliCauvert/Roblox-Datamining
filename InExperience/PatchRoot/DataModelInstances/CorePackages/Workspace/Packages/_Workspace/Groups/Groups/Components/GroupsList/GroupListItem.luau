@@ -19,10 +19,9 @@ local TextKeysModule = require(Groups.Common.TextKeys)
 local _ = require(Groups.Common.Types)
 local UseMembersFollowersLabelModule = require(Groups.Hooks.useMembersFollowersLabel)
 local UseGroupsWrapperContextModule = require(Groups.Contexts.useGroupsWrapperContext)
-local FFlagLuaAppAddTestIdsForArrow = require(Parent.SharedFlags).FFlagLuaAppAddTestIdsForArrow
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseGroupsWrapperContextModule (copy), UseAbbreviatedNumberLocalizationFunction (copy), UseMembersFollowersLabelModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), Constants (copy), FFlagLuaAppAddTestIdsForArrow (copy), Chip (copy), ChipSize (copy), View (copy), Image (copy), EmojiWrapper (copy), VerifiedBadgesModule (copy), Text (copy)
+	-- upvalues: UseGroupsWrapperContextModule (copy), UseAbbreviatedNumberLocalizationFunction (copy), UseMembersFollowersLabelModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), Constants (copy), Chip (copy), ChipSize (copy), View (copy), Image (copy), EmojiWrapper (copy), VerifiedBadgesModule (copy), Text (copy)
 	local UseGroupsWrapperContextModuleResult = UseGroupsWrapperContextModule()
 	local Group = p1.group
 	
@@ -36,11 +35,12 @@ return ReactModule.memo(function(p1)
 		})
 		local UseLocalizationResult = UseLocalizationFunction({ owned = TextKeysModule.LabelOwned })
 		local Id = Group.id
-		local CommunitiesName = if FFlagLuaAppAddTestIdsForArrow then `--communities-list-{p0.slot or "joined"}-item` else nil
 		local UseMembersFollowersLabelModuleResult1 = if p1.showMemberCount and Group.memberCount ~= nil then UseMembersFollowersLabelModuleResult else nil
 		
 		return ReactModule.createElement(View, {
 			tag = "row size-full-0 auto-y gap-large align-y-center padding-small radius-medium",
+			Size = UDim2.new(1, 0, 0, 0),
+			AutomaticSize = Enum.AutomaticSize.Y,
 			LayoutOrder = p1.layoutOrder,
 			onActivated = ReactModule.useCallback(function()
 				-- upvalues: Id (copy), UseGroupsWrapperContextModuleResult (copy)
@@ -50,13 +50,11 @@ return ReactModule.memo(function(p1)
 			end, {
 				UseGroupsWrapperContextModuleResult.navigateTo.groupDetails,
 				Id
-			}),
-			testId = if CommunitiesName then `{CommunitiesName}-{Id}` else nil
+			})
 		}, {
 			Thumbnail = ReactModule.createElement(Image, {
 				LayoutOrder = 1,
 				tag = "radius-medium bg-surface-100",
-				testId = if CommunitiesName then `{CommunitiesName}-thumbnail-{Id}` else nil,
 				Image = ReactModule.useMemo(function()
 					-- upvalues: Group (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (upval), Id (copy), Constants (upval)
 					return if Group.thumbnail and Group.thumbnail ~= "" then Group.thumbnail else GetRbxthumbWithTypeSizeAndOptionsFunction(tostring(Id), Constants.RbxthumbTypes.GroupIcon, 150)

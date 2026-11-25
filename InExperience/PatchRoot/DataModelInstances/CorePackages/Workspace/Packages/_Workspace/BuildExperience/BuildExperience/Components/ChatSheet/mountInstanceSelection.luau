@@ -7,7 +7,6 @@ local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local ReactRobloxModule = require(Parent.ReactRoblox)
 local BuildExperienceCompositionStyleSheetModule = require(BuildExperience.Components.BuildExperienceCompositionStyleSheet)
-local FFlagBuildExperienceInGameShellComposer = require(Parent.SharedFlags).FFlagBuildExperienceInGameShellComposer
 local InstanceSelectionShellModule = require(script.Parent.InstanceSelectionShell)
 
 local function isTouchInput(): boolean
@@ -16,7 +15,7 @@ local function isTouchInput(): boolean
 end
 
 return function()
-	-- upvalues: ExperienceStateCaptureService (copy), CoreGui (copy), ReactRobloxModule (copy), ReactModule (copy), FoundationModule (copy), BuildExperienceCompositionStyleSheetModule (copy), InstanceSelectionShellModule (copy), isTouchInput (copy), FFlagBuildExperienceInGameShellComposer (copy), UserInputService (copy)
+	-- upvalues: ExperienceStateCaptureService (copy), CoreGui (copy), ReactRobloxModule (copy), ReactModule (copy), FoundationModule (copy), BuildExperienceCompositionStyleSheetModule (copy), InstanceSelectionShellModule (copy), isTouchInput (copy)
 	local ExperienceStateCaptureSelectionMode = Enum.ExperienceStateCaptureSelectionMode
 	
 	if ExperienceStateCaptureSelectionMode ~= nil then
@@ -40,9 +39,7 @@ return function()
 		CompositionStyleSheet = ReactModule.createElement(BuildExperienceCompositionStyleSheetModule),
 		Shell = ReactModule.createElement(InstanceSelectionShellModule, {
 			itemSelected = ExperienceStateCaptureService.ItemSelectedInCaptureMode,
-			isTouchInput = isTouchInput,
-			touchStarted = if FFlagBuildExperienceInGameShellComposer then UserInputService.TouchStarted else nil,
-			touchEnded = if FFlagBuildExperienceInGameShellComposer then UserInputService.TouchEnded else nil
+			isTouchInput = isTouchInput
 		})
 	}))
 	

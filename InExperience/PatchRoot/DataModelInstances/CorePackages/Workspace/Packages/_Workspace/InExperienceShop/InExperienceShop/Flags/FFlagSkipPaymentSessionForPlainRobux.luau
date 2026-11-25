@@ -1,3 +1,3 @@
-﻿local FFlagEnableInExperienceShop = require(script:FindFirstAncestor("InExperienceShop").Parent.SharedFlags).FFlagEnableInExperienceShop
+﻿local FFlagEnableRobuxInExperienceShop = require(script:FindFirstAncestor("InExperienceShop").Parent.SharedFlags).FFlagEnableRobuxInExperienceShop
 
-return game:DefineFastFlag("SkipPaymentSessionForPlainRobux", false) and FFlagEnableInExperienceShop
+return game:DefineFastFlag("SkipPaymentSessionForPlainRobux", false) and FFlagEnableRobuxInExperienceShop

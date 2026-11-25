@@ -7,6 +7,7 @@ local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
 local CryoModule = require(Parent.Cryo)
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 local FFlagAppChatEnableAutotranslationModule = require(AppChat.Flags.FFlagAppChatEnableAutotranslation)
+local FFlagAppChatBlueSentBubblesModule = require(AppChat.Flags.FFlagAppChatBlueSentBubbles)
 local FoundationModule = require(Parent.Foundation)
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local View = FoundationModule.View
@@ -29,7 +30,7 @@ local config = {
 }
 
 function PlainText(p1)
-	-- upvalues: CryoModule (copy), config (copy), UseTokensFunction (copy), UseStyleFunction (copy), GetTextSizeFunction (copy), FFlagAppChatEnableAutotranslationModule (copy), ReactModule (copy), NormalizeFontFaceFunction (copy), ChatBubbleContainerModule (copy), View (copy), Text (copy), Divider (copy), DividerVariant (copy)
+	-- upvalues: CryoModule (copy), config (copy), UseTokensFunction (copy), UseStyleFunction (copy), GetTextSizeFunction (copy), FFlagAppChatBlueSentBubblesModule (copy), FFlagAppChatEnableAutotranslationModule (copy), ReactModule (copy), NormalizeFontFaceFunction (copy), ChatBubbleContainerModule (copy), View (copy), Text (copy), Divider (copy), DividerVariant (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseTokensResult = UseTokensFunction()
 	local UseStyleResult = UseStyleFunction()
@@ -42,7 +43,9 @@ function PlainText(p1)
 	local _Font = JoinResult.font or Body.Font
 	local IsRepliedTo = JoinResult.isRepliedTo
 	local TextSize1 = GetTextSizeFunction(Text1, TextSize, _Font, Vector2.new(Largest, if IsRepliedTo then TextSize * 3 else 1e999), { addTemporaryPadding = false })
-	local Color = if JoinResult.isRepliedTo then UseStyleResult.Theme.TextDefault.Color elseif JoinResult.isIncoming then UseTokensResult.Color.Content.Emphasis.Color3 else Color3.new(1, 1, 1)
+	local IsRepliedTo1 = JoinResult.isRepliedTo
+	local NoIsIncoming: boolean = if JoinResult.isUnfiltered then not JoinResult.isIncoming else FFlagAppChatBlueSentBubblesModule and not JoinResult.isIncoming
+	local Color = if IsRepliedTo1 then UseStyleResult.Theme.TextDefault.Color elseif NoIsIncoming then Color3.new(1, 1, 1) elseif JoinResult.isIncoming then UseTokensResult.Color.Content.Emphasis.Color3 else UseTokensResult.Color.ActionEmphasis.Foreground.Color3
 	local UseMemoResult = if FFlagAppChatEnableAutotranslationModule then ReactModule.useMemo(function()
 		-- upvalues: IsRepliedTo (copy), TextSize (copy)
 		return {
@@ -71,6 +74,7 @@ function PlainText(p1)
 			isIncoming = JoinResult.isIncoming,
 			hasTail = JoinResult.hasTail,
 			isPending = JoinResult.isPending,
+			isUnfiltered = JoinResult.isUnfiltered,
 			padding = {
 				top = UDim.new(0, InnerPadding),
 				bottom = UDim.new(0, InnerPadding),
@@ -114,6 +118,7 @@ function PlainText(p1)
 			isIncoming = JoinResult.isIncoming,
 			hasTail = JoinResult.hasTail,
 			isPending = JoinResult.isPending,
+			isUnfiltered = JoinResult.isUnfiltered,
 			padding = {
 				top = UDim.new(0, InnerPadding),
 				bottom = UDim.new(0, InnerPadding),

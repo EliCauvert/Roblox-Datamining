@@ -14,7 +14,7 @@ local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local FFlagBuildExperienceFreeLimitCardModule = require(BuildExperience.Flags.FFlagBuildExperienceFreeLimitCard)
 local FFlagBuildExperienceModelPickerModule = require(BuildExperience.Flags.FFlagBuildExperienceModelPicker)
 local FFlagBuildExperienceAdsAndRobuxTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceAdsAndRobuxTelemetry)
-local CreatorCreditCardTelemetryModule = require(script.Parent.creatorCreditCardTelemetry)
+local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 local GetBuildCreatorCreditRefreshStoreModule = require(BuildExperience.Stores.GetBuildCreatorCreditRefreshStore)
 local LocalUserIdStore = require(Parent.LocalUserIdStore).LocalUserIdStore
 
@@ -29,7 +29,7 @@ local function getQuotaBlockReason(UseSignalStateResult)
 end
 
 return function(p1)
-	-- upvalues: CreatorCreditModule (copy), FFlagBuildExperienceModelPickerModule (copy), SignalsReactModule (copy), LocalUserIdStore (copy), ReactModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), NumberLocalization (copy), LocalizationService (copy), FFlagBuildExperienceFreeLimitCardModule (copy), GetBuildCreatorCreditRefreshStoreModule (copy), getQuotaBlockReason (copy), CreatorCreditConfigModule (copy), UseOpenBuyRobuxWebViewModule (copy), UseRefreshCreatorCreditOnUnhideModule (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), CreatorCreditCardTelemetryModule (copy)
+	-- upvalues: CreatorCreditModule (copy), FFlagBuildExperienceModelPickerModule (copy), SignalsReactModule (copy), LocalUserIdStore (copy), ReactModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), NumberLocalization (copy), LocalizationService (copy), FFlagBuildExperienceFreeLimitCardModule (copy), GetBuildCreatorCreditRefreshStoreModule (copy), getQuotaBlockReason (copy), CreatorCreditConfigModule (copy), UseOpenBuyRobuxWebViewModule (copy), UseRefreshCreatorCreditOnUnhideModule (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), SendBuildExperienceEventModule (copy)
 	local CreatorCreditStore = CreatorCreditModule.getCreatorCreditStore(false)
 	local UseSignalStateResult = if FFlagBuildExperienceModelPickerModule then SignalsReactModule.useSignalState(LocalUserIdStore.getCurrentUserId) else nil
 	local UseMemoResult = ReactModule.useMemo(function()
@@ -188,63 +188,61 @@ return function(p1)
 	end, {})
 	local UseStateResult1_1 = UseStateResult1 or getQuotaBlockReason(UseSignalStateResult1)
 	local NamedTier = p1.namedTier
-	local UseCardBuyRobuxResult = if FFlagBuildExperienceAdsAndRobuxTelemetryModule then CreatorCreditCardTelemetryModule.useCardBuyRobux(p1.telemetry, UseStateResult1_1, NamedTier, Value, UseOpenBuyRobuxWebViewModuleResult) else nil
+	local UseResult3 = if FFlagBuildExperienceAdsAndRobuxTelemetryModule then ReactModule.useCallback(function()
+		-- upvalues: UseStateResult1_1 (copy), NamedTier (copy), Value (ref), SendBuildExperienceEventModule (upval), UseOpenBuyRobuxWebViewModuleResult (copy)
+		local config = {
+			context = "chat_card",
+			isInExperience = if game.GameId == 0 then "false" else "true",
+			reason = if UseStateResult1_1 == nil then "unknown" else UseStateResult1_1,
+			tier = if NamedTier == nil then "default" else NamedTier
+		}
+		
+		if Value ~= nil then
+			config.requiredRobux = tostring(Value)
+		end
+		SendBuildExperienceEventModule("BUY_ROBUX_CLICK", {}, config)
+		UseOpenBuyRobuxWebViewModuleResult()
+	end, {
+		UseStateResult1_1,
+		NamedTier,
+		Value,
+		UseOpenBuyRobuxWebViewModuleResult
+	}) else nil
 	local BuyMoreTitle = UseLocalizationResult.buyMoreTitle
 	local BuyMoreDescription = UseLocalizationResult.buyMoreDescription
 	local BuyRobux = UseLocalizationResult.buyRobux
 	local ViewUsage = UseLocalizationResult.viewUsage
-	local UseCardBuyRobuxResult1 = if FFlagBuildExperienceAdsAndRobuxTelemetryModule and UseCardBuyRobuxResult ~= nil then UseCardBuyRobuxResult else UseOpenBuyRobuxWebViewModuleResult
-	local OnSecondaryAction = UseResult1
-	local ManageUsage = "buy_robux"
-	local SecondaryAction = "view_usage"
+	local UseResult4 = if FFlagBuildExperienceAdsAndRobuxTelemetryModule and UseResult3 ~= nil then UseResult3 else UseOpenBuyRobuxWebViewModuleResult
+	local OnBuyMoreRobuxCardSecondaryAction = UseResult1
 	
 	if UseStateResult1_1 == "FreeTrialExhausted" then
 		BuyMoreTitle = UseLocalizationResult.freeTrialTitle
 		BuyMoreDescription = UseLocalizationResult.freeTrialDescription
 		BuyRobux = UseLocalizationResult.freeTrialAction
 		ViewUsage = UseLocalizationResult.notNow
-		UseCardBuyRobuxResult1 = UseResult1
-		OnSecondaryAction = UseResult2
-		ManageUsage = if FFlagBuildExperienceFreeLimitCardModule then "manage_usage" else "view_usage"
-		SecondaryAction = "not_now"
+		UseResult4 = UseResult1
+		OnBuyMoreRobuxCardSecondaryAction = UseResult2
 	elseif UseStateResult1_1 == "DailyLimitReached" then
 		BuyMoreTitle = UseLocalizationResult.dailyLimitTitle
 		BuyMoreDescription = UseLocalizationResult.dailyLimitDescription
 		BuyRobux = UseLocalizationResult.adjustLimit
 		ViewUsage = UseLocalizationResult.notNow
-		UseCardBuyRobuxResult1 = UseResult1
-		OnSecondaryAction = UseResult2
-		ManageUsage = "adjust_limit"
-		SecondaryAction = "not_now"
+		UseResult4 = UseResult1
+		OnBuyMoreRobuxCardSecondaryAction = UseResult2
 	elseif UseStateResult1_1 == "InsufficientRobuxBalance" and Value ~= nil then
 		BuyMoreTitle = UseLocalizationResult.insufficientTitle
 		BuyMoreDescription = UseLocalizationResult.insufficientDescription
 		BuyRobux = UseLocalizationResult.modelBuyRobux
 		ViewUsage = UseLocalizationResult.notNow
-		OnSecondaryAction = UseResult2
-		SecondaryAction = "not_now"
+		OnBuyMoreRobuxCardSecondaryAction = UseResult2
 	end
-	local HasOnOpenCreatorCreditPage: boolean = UseStateResult1_1 ~= nil and (not UseStateResult and p1.onOpenCreatorCreditPage ~= nil)
-	local UseCardEventsResult = if FFlagBuildExperienceAdsAndRobuxTelemetryModule then CreatorCreditCardTelemetryModule.useCardEvents({
-		telemetry = p1.telemetry,
-		isCardVisible = HasOnOpenCreatorCreditPage,
-		reason = UseStateResult1_1,
-		isPromptFailure = UseStateResult1 ~= nil,
-		namedTier = NamedTier,
-		requiredRobux = Value,
-		primaryAction = ManageUsage,
-		onPrimaryAction = UseCardBuyRobuxResult1,
-		secondaryAction = SecondaryAction,
-		onSecondaryAction = OnSecondaryAction
-	}) else nil
-	
 	return {
-		showBuyMoreRobuxCard = HasOnOpenCreatorCreditPage,
+		showBuyMoreRobuxCard = UseStateResult1_1 ~= nil and (not UseStateResult and p1.onOpenCreatorCreditPage ~= nil),
 		buyMoreRobuxCardTitle = BuyMoreTitle,
 		buyMoreRobuxCardDescription = BuyMoreDescription,
 		buyMoreRobuxCardPrimaryActionText = BuyRobux,
-		onBuyMoreRobuxCardPrimaryAction = if UseCardEventsResult == nil then UseCardBuyRobuxResult1 else UseCardEventsResult.onPrimaryAction,
+		onBuyMoreRobuxCardPrimaryAction = UseResult4,
 		buyMoreRobuxCardSecondaryActionText = ViewUsage,
-		onBuyMoreRobuxCardSecondaryAction = if UseCardEventsResult == nil then OnSecondaryAction else UseCardEventsResult.onSecondaryAction
+		onBuyMoreRobuxCardSecondaryAction = OnBuyMoreRobuxCardSecondaryAction
 	}
 end

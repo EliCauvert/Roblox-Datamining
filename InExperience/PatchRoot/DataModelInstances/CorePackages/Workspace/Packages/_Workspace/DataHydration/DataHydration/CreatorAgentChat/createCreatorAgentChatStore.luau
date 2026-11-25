@@ -207,26 +207,6 @@ return function(p1)
 		return rpcCallSync(AcpProtocolModule.Methods.Initialize, p2 or { protocolVersion = AcpProtocolModule.ProtocolVersion })
 	end
 	
-	local function unreadSummary()
-		-- upvalues: rpcCallSync (copy), AcpProtocolModule (upval)
-		return rpcCallSync(AcpProtocolModule.Methods.UnreadSummary, {})
-	end
-	
-	local function unreadList(p2)
-		-- upvalues: rpcCallSync (copy), AcpProtocolModule (upval)
-		assert(p2.kind == "game" or p2.kind == "playtest", "kind must be game or playtest")
-		
-		return rpcCallSync(AcpProtocolModule.Methods.UnreadList, p2)
-	end
-	
-	local function unreadAck(p2)
-		-- upvalues: rpcCallSync (copy), AcpProtocolModule (upval)
-		assert(p2.kind == "game" or p2.kind == "playtest", "kind must be game or playtest")
-		assert(typeof(p2.universeId) == "string" and p2.universeId ~= "", "universeId is required")
-		
-		return rpcCallSync(AcpProtocolModule.Methods.UnreadAck, { kind = p2.kind, universeId = p2.universeId })
-	end
-	
 	local function sessionNew(p2)
 		-- upvalues: FFlagBuildExperienceModelPickerData (upval), rpcCallSync (copy), AcpProtocolModule (upval), FFlagBuildExperienceChatOpenId (upval)
 		assert(p2 ~= nil, "sessionNew requires params")
@@ -507,7 +487,7 @@ return function(p1)
 				local v4 = nil
 				
 				if FFlagBuildExperienceModelPickerData then
-					v3, v128 = GetFundingErrorModule(RpcCallResult.state(false))
+					v3, v125 = GetFundingErrorModule(RpcCallResult.state(false))
 				end
 				ActiveBySessionEntry.fail(p3, p4, ClassifyRequestFailureModuleResult, v3, v4)
 				
@@ -550,9 +530,6 @@ return function(p1)
 	
 	return {
 		initialize = initialize,
-		unreadSummary = unreadSummary,
-		unreadList = unreadList,
-		unreadAck = unreadAck,
 		sessionNew = sessionNew,
 		sessionList = sessionList,
 		getSessionListStore = function()

@@ -9,10 +9,7 @@ local IdentityInlineModule = require(script.Parent.Parent.Parent.Identity.Identi
 local ReplyQuoteModule = require(script.Parent.Parent.Reply.ReplyQuote)
 local UseMessageInlineViewModelModule = require(script.Parent.useMessageInlineViewModel)
 local UseFinishMessageRenderIntervalsModule = require(script.Parent.Parent.useFinishMessageRenderIntervals)
-local FinishMessageRenderIntervalsModule = require(script.Parent.Parent.FinishMessageRenderIntervals)
-local MessageRenderedContextModule = require(script.Parent.Parent.MessageRenderedContext)
 local FFlagExpChatMessageListScrollParityModule = require(ChatUIPrimitives.Flags.FFlagExpChatMessageListScrollParity)
-local FFlagExpChatMessageListFinishIntervalsModule = require(ChatUIPrimitives.Flags.FFlagExpChatMessageListFinishIntervals)
 local WithMessageContentModule = require(script.Parent.Parent.Parent.ContentKinds.withMessageContent)
 local config = {
 	plainText = WithMessageContentModule(require(script.Parent.Parent.Parent.ContentKinds.PlainText.PlainTextInline), require(script.Parent.Parent.Parent.ContentKinds.PlainText.PlainTextContentModel).getDetail),
@@ -21,11 +18,10 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: UseMessageInlineViewModelModule (copy), FFlagExpChatMessageListFinishIntervalsModule (copy), ReactModule (copy), MessageRenderedContextModule (copy), FFlagExpChatMessageListScrollParityModule (copy), UseFinishMessageRenderIntervalsModule (copy), CreateNextOrderFunction (copy), config (copy), IdentityInlineModule (copy), FoundationModule (copy), ReplyQuoteModule (copy), FinishMessageRenderIntervalsModule (copy)
+	-- upvalues: UseMessageInlineViewModelModule (copy), FFlagExpChatMessageListScrollParityModule (copy), UseFinishMessageRenderIntervalsModule (copy), CreateNextOrderFunction (copy), config (copy), ReactModule (copy), IdentityInlineModule (copy), FoundationModule (copy), ReplyQuoteModule (copy)
 	local UseMessageInlineViewModelModuleResult = UseMessageInlineViewModelModule(p1.itemSignal)
-	local UseContextResult = if FFlagExpChatMessageListFinishIntervalsModule then ReactModule.useContext(MessageRenderedContextModule) else nil
 	
-	if FFlagExpChatMessageListScrollParityModule and not FFlagExpChatMessageListFinishIntervalsModule then
+	if FFlagExpChatMessageListScrollParityModule then
 		UseFinishMessageRenderIntervalsModule(p1.itemSignal)
 	end
 	local NextOrder = CreateNextOrderFunction()
@@ -62,7 +58,6 @@ return function(p1)
 		Row = ReactModule.createElement(FoundationModule.View, {
 			tag = "row align-x-left gap-xsmall size-full-0 auto-y",
 			LayoutOrder = 2
-		}, t),
-		Finish = if FFlagExpChatMessageListFinishIntervalsModule and (FFlagExpChatMessageListScrollParityModule or UseContextResult ~= nil) then ReactModule.createElement(FinishMessageRenderIntervalsModule, { itemSignal = p1.itemSignal }) else nil
+		}, t)
 	})
 end

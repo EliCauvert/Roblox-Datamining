@@ -1,1 +1,0 @@
-﻿return game:DefineFastInt("UGCEmoteSkinningDisableTranslationThresholdMillistuds", 100)

@@ -21,8 +21,10 @@ local HeaderBar = UIBloxModule.App.Bar.HeaderBar
 local HeaderBar1 = FoundationModule.HeaderBar
 local AppHeaderBarModule = require(Parent.AppHeaderBar)
 local GetTopBarStoreModule = require(AppChat.Stores.GetTopBarStore)
+local SignalsReactModule = require(Parent.SignalsReact)
 local ThemeBackgroundModule = require(Parent.ThemeBackground)
-local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local FFlagAppThemeHalloween2026ChatBackgroundModule = require(AppChat.Flags.FFlagAppThemeHalloween2026ChatBackground)
+local UseSignalStateFunction = SignalsReactModule.useSignalState
 
 local function noOp()
 	return nil
@@ -66,7 +68,7 @@ local function resolveSideRenderers(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: ReactModule (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), GetTopBarStoreModule (copy), UseSignalStateFunction (copy), FFlagAppIaScrollAway (copy), FFlagAlignSideSheetWindowCloseRight (copy), AppHeaderBarModule (copy), UseLocalizationFunction (copy), UseStyleFunction (copy), UseTokensFunction (copy), resolveSideRenderers (copy), noOp (copy), CreateBackFuncModule (copy), AppNavBarModule (copy), VisibilityControl (copy), ThemeBackgroundModule (copy), FFlagAppChatFoundationHeaderBarModule (copy), createFoundationTitle (copy), HeaderBar1 (copy), FFlagAppChatFoundationHeaderBarPageMarginInsetModule (copy), FoundationModule (copy), HeaderBar (copy)
+	-- upvalues: ReactModule (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), GetTopBarStoreModule (copy), UseSignalStateFunction (copy), FFlagAppIaScrollAway (copy), FFlagAlignSideSheetWindowCloseRight (copy), AppHeaderBarModule (copy), UseLocalizationFunction (copy), UseStyleFunction (copy), UseTokensFunction (copy), resolveSideRenderers (copy), noOp (copy), CreateBackFuncModule (copy), AppNavBarModule (copy), VisibilityControl (copy), FFlagAppThemeHalloween2026ChatBackgroundModule (copy), ThemeBackgroundModule (copy), FFlagAppChatFoundationHeaderBarModule (copy), createFoundationTitle (copy), HeaderBar1 (copy), FFlagAppChatFoundationHeaderBarPageMarginInsetModule (copy), FoundationModule (copy), HeaderBar (copy)
 	ReactModule.useEffect(function()
 		-- upvalues: FFlagAppChatPerfTrackingModule (upval), AppChatPerfTrackerModule (upval)
 		if FFlagAppChatPerfTrackingModule then
@@ -98,8 +100,8 @@ return function(p1)
 	local UseStyleResult = UseStyleFunction()
 	local UseTokensResult = UseTokensFunction()
 	local RenderCenter = if p1.renderCenter then p1.renderCenter else nil
-	local ResolveSideRenderersResult = nil
 	local ResolveSideRenderersResult2 = nil
+	local ResolveSideRenderersResult = nil
 	
 	if FFlagAlignSideSheetWindowCloseRight then
 		ResolveSideRenderersResult, ResolveSideRenderersResult2 = resolveSideRenderers(p1, {
@@ -147,7 +149,7 @@ return function(p1)
 	end) else nil
 	local Callback = if RenderCenter then nil elseif p1.renderLeft or NavigateToRootStackScreenProps then ResolveSideRenderersResult elseif NoRenderCenter then nil else ResolveSideRenderersResult or nil
 	local HeaderText2 = if RenderCenter or p1.hideTitle then nil else HeaderText1
-	local UseThemeBackgroundResult = ThemeBackgroundModule.useThemeBackground()
+	local UseThemeBackgroundResult = if FFlagAppThemeHalloween2026ChatBackgroundModule then ThemeBackgroundModule.useThemeBackground() else nil
 	
 	if not FFlagAppChatFoundationHeaderBarModule then
 		return ReactModule.createElement(FoundationModule.View, {

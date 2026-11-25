@@ -2,10 +2,7 @@
 local Parent = BuildExperience.Parent
 local _ = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
-local SignalsReactModule = require(Parent.SignalsReact)
-local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
 local FFlagBuildExperienceFoundationTabsModule = require(BuildExperience.Flags.FFlagBuildExperienceFoundationTabs)
-local FFlagBuildExperienceUnreadServiceModule = require(BuildExperience.Flags.FFlagBuildExperienceUnreadService)
 local FFlagBuildExperienceHomeTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceHomeTelemetry)
 local FFlagBuildInspirationTabModule = require(BuildExperience.Flags.FFlagBuildInspirationTab)
 local FFlagBuildUpdatedSearchUXForGAModule = require(BuildExperience.Flags.FFlagBuildUpdatedSearchUXForGA)
@@ -30,41 +27,14 @@ local Options = {
 local DefaultFilter = { games = GamesFilterModule.SharedGames }
 
 return function(Frame)
-	-- upvalues: GetPreviewsFilterStoreModule (copy), FFlagBuildExperienceUnreadServiceModule (copy), CreatorAgentChatModule (copy), SignalsReactModule (copy), ReactModule (copy), UseBuildHomeTabsViewModelModule (copy), FFlagBuildUpdatedSearchUXForGAModule (copy), FFlagBuildExperienceHomeTelemetryModule (copy), UsePreviewResultsModule (copy), BUILDHOMETAB (copy), FFlagBuildExperienceFoundationTabsModule (copy), UseBuildHomeTabsFillBehaviorModule (copy), UsePreviewsTabViewModelModule (copy), FFlagBuildInspirationTabModule (copy), BuildInspirationTabModule (copy), BuildHomeTabsViewModule (copy), PreviewsTabViewModule (copy), MyCreationsFilterContainerModule (copy), DefaultFilter (copy), Options (copy)
+	-- upvalues: GetPreviewsFilterStoreModule (copy), UseBuildHomeTabsViewModelModule (copy), FFlagBuildUpdatedSearchUXForGAModule (copy), FFlagBuildExperienceHomeTelemetryModule (copy), UsePreviewResultsModule (copy), BUILDHOMETAB (copy), FFlagBuildExperienceFoundationTabsModule (copy), UseBuildHomeTabsFillBehaviorModule (copy), UsePreviewsTabViewModelModule (copy), FFlagBuildInspirationTabModule (copy), ReactModule (copy), BuildInspirationTabModule (copy), BuildHomeTabsViewModule (copy), PreviewsTabViewModule (copy), MyCreationsFilterContainerModule (copy), DefaultFilter (copy), Options (copy)
 	local CreatorGroupsStore = Frame.creatorGroupsStore
 	local PreviewsFilterStore = Frame.previewsFilterStore or GetPreviewsFilterStoreModule()
 	local UseFilterResult = PreviewsFilterStore.useFilter()
-	local UnreadSummary = nil
-	local Entries = nil
-	local UseResult = nil
-	
-	if FFlagBuildExperienceUnreadServiceModule then
-		local UnreadStore = Frame.unreadStore or CreatorAgentChatModule.getUnreadStore(false)
-		local Summary = UnreadStore.getSummary()
-		local PlaytestCategory = UnreadStore.getCategory("playtest")
-		local UseSignalStateResult = SignalsReactModule.useSignalState(Summary.data)
-		local UseSignalStateResult1 = SignalsReactModule.useSignalState(Summary.status)
-		local UseSignalStateResult2 = SignalsReactModule.useSignalState(PlaytestCategory.data)
-		UnreadSummary = if UseSignalStateResult1 == "Ready" then UseSignalStateResult else nil
-		Entries = if SignalsReactModule.useSignalState(PlaytestCategory.status) == "Ready" and UseSignalStateResult2 ~= nil then UseSignalStateResult2.entries else nil
-		UseResult = ReactModule.useCallback(function()
-			-- upvalues: UnreadStore (copy)
-			UnreadStore.refreshCategory("playtest")
-			UnreadStore.refreshSummary()
-		end, { UnreadStore })
-		local IsIsFocused = Frame.isFocused ~= false
-		ReactModule.useEffect(function()
-			-- upvalues: IsIsFocused (copy), UnreadStore (copy)
-			if IsIsFocused then
-				UnreadStore.refreshCategory("playtest")
-			end
-		end, { UnreadStore, IsIsFocused })
-	end
 	local UseBuildHomeTabsViewModelModuleResult = UseBuildHomeTabsViewModelModule({
 		tabStore = Frame.tabStore,
 		searchQueryStore = if FFlagBuildUpdatedSearchUXForGAModule then nil else Frame.searchQueryStore,
-		isFocused = if FFlagBuildExperienceHomeTelemetryModule then Frame.isFocused else nil,
-		unreadSummary = UnreadSummary
+		isFocused = if FFlagBuildExperienceHomeTelemetryModule then Frame.isFocused else nil
 	})
 	local UsePreviewResultsModuleResult = UsePreviewResultsModule({
 		searchStore = Frame.searchStore,
@@ -74,11 +44,7 @@ return function(Frame)
 		isActiveTab = if FFlagBuildUpdatedSearchUXForGAModule then UseBuildHomeTabsViewModelModuleResult.activeTab == BUILDHOMETAB.Previews else nil,
 		isFocused = Frame.isFocused
 	})
-	local UsePreviewsTabViewModelModuleResult = UsePreviewsTabViewModelModule({
-		results = UsePreviewResultsModuleResult,
-		unreadEntries = Entries,
-		refreshUnread = UseResult
-	})
+	local UsePreviewsTabViewModelModuleResult = UsePreviewsTabViewModelModule({ results = UsePreviewResultsModuleResult })
 	
 	return ReactModule.createElement(BuildHomeTabsViewModule, {
 		LayoutOrder = Frame.LayoutOrder,

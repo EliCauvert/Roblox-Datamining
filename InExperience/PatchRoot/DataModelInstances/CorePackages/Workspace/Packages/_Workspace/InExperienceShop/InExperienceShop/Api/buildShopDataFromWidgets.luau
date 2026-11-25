@@ -4,7 +4,7 @@ local PromiseModule = require(Parent.Promise)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local ConstantsModule = require(InExperienceShop.Constants)
 local _ = require(InExperienceShop.Types)
-local FFlagEnableInExperienceShop = SharedFlagsModule.FFlagEnableInExperienceShop
+local FFlagEnableRobuxInExperienceShop = SharedFlagsModule.FFlagEnableRobuxInExperienceShop
 local FFlagEnableBonusJwtInShop = SharedFlagsModule.FFlagEnableBonusJwtInShop
 local _ = require(script.Parent.multiGetProductInfo)
 local ParseGamePassTrialAvailabilitiesModule = require(script.Parent.parseGamePassTrialAvailabilities)
@@ -50,7 +50,7 @@ local config = {
 }
 
 return function(p2, Callback)
-	-- upvalues: config (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy), ParseGamePassTrialAvailabilitiesModule (copy), ConstantsModule (copy), FFlagIdentifyTopPicksByCategoryTypeModule (copy), FFlagParseStableCategoryIdModule (copy), FFlagEnableInExperienceShop (copy), FFlagEnableBonusJwtInShop (copy), ToRobuxPackageItemFunction (copy), PromiseModule (copy), FFlagEnableExperienceShopGlobalIconModule (copy), readFreeTrialTopBarChipFromNotificationSettings (copy), AppendBonusItemRequestsFunction (copy), MakeRequestKeyFunction (copy), ToShopItemFunction (copy), LogCounterModule (copy), ProductInfoFailedItemsCounterModule (copy), MergeBonusItemDetailsIntoSectionsFunction (copy)
+	-- upvalues: config (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy), ParseGamePassTrialAvailabilitiesModule (copy), ConstantsModule (copy), FFlagIdentifyTopPicksByCategoryTypeModule (copy), FFlagParseStableCategoryIdModule (copy), FFlagEnableRobuxInExperienceShop (copy), FFlagEnableBonusJwtInShop (copy), ToRobuxPackageItemFunction (copy), PromiseModule (copy), FFlagEnableExperienceShopGlobalIconModule (copy), readFreeTrialTopBarChipFromNotificationSettings (copy), AppendBonusItemRequestsFunction (copy), MakeRequestKeyFunction (copy), ToShopItemFunction (copy), LogCounterModule (copy), ProductInfoFailedItemsCounterModule (copy), MergeBonusItemDetailsIntoSectionsFunction (copy)
 	local List = { config }
 	local t = {}
 	local List1 = {}
@@ -74,7 +74,7 @@ return function(p2, Callback)
 			if FFlagParseStableCategoryIdModule and Metadata ~= nil and Metadata.categoryGroup ~= nil then
 				config1.categoryGroup = Metadata.categoryGroup
 			end
-			if FFlagEnableInExperienceShop and Metadata ~= nil and Metadata.paymentSessionId ~= nil then
+			if FFlagEnableRobuxInExperienceShop and Metadata ~= nil and Metadata.paymentSessionId ~= nil then
 				config1.paymentSessionId = Metadata.paymentSessionId
 			end
 			if FFlagEnableBonusJwtInShop and Metadata ~= nil and Metadata.bonusJwt ~= nil then
@@ -95,7 +95,7 @@ return function(p2, Callback)
 					Product = Enum.InfoType.GamePass
 					ItemType = Type
 				else
-					if Type == "Robux" and FFlagEnableInExperienceShop then
+					if Type == "Robux" and FFlagEnableRobuxInExperienceShop then
 						local RobuxPackageItem = ToRobuxPackageItemFunction(item)
 						
 						if RobuxPackageItem ~= nil then
@@ -173,11 +173,11 @@ return function(p2, Callback)
 	else
 		local CountList1 = #List1
 		
-		if FFlagEnableInExperienceShop then
+		if FFlagEnableRobuxInExperienceShop then
 			AppendBonusItemRequestsFunction(List1, t)
 		end
 		return Callback(List1):andThen(function(Result)
-			-- upvalues: MakeRequestKeyFunction (upval), CountList1 (copy), List1 (copy), List2 (copy), t (copy), ToShopItemFunction (upval), LogCounterModule (upval), ProductInfoFailedItemsCounterModule (upval), FFlagEnableInExperienceShop (upval), MergeBonusItemDetailsIntoSectionsFunction (upval), filterOutput (copy), FFlagEnableExperienceShopGlobalIconModule (upval), p2 (copy), readFreeTrialTopBarChipFromNotificationSettings (upval), ParseGamePassTrialAvailabilitiesModuleResult (ref)
+			-- upvalues: MakeRequestKeyFunction (upval), CountList1 (copy), List1 (copy), List2 (copy), t (copy), ToShopItemFunction (upval), LogCounterModule (upval), ProductInfoFailedItemsCounterModule (upval), FFlagEnableRobuxInExperienceShop (upval), MergeBonusItemDetailsIntoSectionsFunction (upval), filterOutput (copy), FFlagEnableExperienceShopGlobalIconModule (upval), p2 (copy), readFreeTrialTopBarChipFromNotificationSettings (upval), ParseGamePassTrialAvailabilitiesModuleResult (ref)
 			local t2 = {}
 			
 			for _, value in ipairs(Result) do
@@ -208,7 +208,7 @@ return function(p2, Callback)
 			if #FailedItems > 0 then
 				LogCounterModule(ProductInfoFailedItemsCounterModule, #FailedItems)
 			end
-			local FilterOutputResult, FilterOutputResult2 = filterOutput(if FFlagEnableInExperienceShop then MergeBonusItemDetailsIntoSectionsFunction(t, Result) else t)
+			local FilterOutputResult, FilterOutputResult2 = filterOutput(if FFlagEnableRobuxInExperienceShop then MergeBonusItemDetailsIntoSectionsFunction(t, Result) else t)
 			
 			return {
 				categories = FilterOutputResult,

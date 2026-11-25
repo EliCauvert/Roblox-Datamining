@@ -48,7 +48,6 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local GetFFlagExpChatProtectedChatInternalAPIsFunction = SharedFlagsModule.getFFlagExpChatProtectedChatInternalAPIs
 local FFlagExpChatUseChatConfigStore = SharedFlagsModule.FFlagExpChatUseChatConfigStore
 local FFlagExpChatDictation = SharedFlagsModule.FFlagExpChatDictation
-local FFlagChatTranslationReadsUserGameSettings = SharedFlagsModule.FFlagChatTranslationReadsUserGameSettings
 local GetChatConfigurationStoreModule = require(ExpChat.Stores.GetChatConfigurationStore)
 local ComputeNameColorFunction = require(Parent.ChatUIPrimitives).Utils.computeNameColor
 local GetFFlagExpChatExcludeFOMORendersModule = require(ExpChat.Flags.getFFlagExpChatExcludeFOMORenders)
@@ -62,10 +61,10 @@ local ChannelTabsConfigurationEnabledModule = require(Actions.ChannelTabsConfigu
 local TextChatService = game:GetService("TextChatService")
 
 function getChatTranslationEnabled()
-	-- upvalues: FFlagChatTranslationReadsUserGameSettings (copy), TextChatService (copy)
+	-- upvalues: TextChatService (copy)
 	local Success, Result = pcall(function()
-		-- upvalues: FFlagChatTranslationReadsUserGameSettings (upval), TextChatService (upval)
-		return if FFlagChatTranslationReadsUserGameSettings then UserSettings().GameSettings.ChatTranslationEnabled else TextChatService.ChatTranslationEnabled
+		-- upvalues: TextChatService (upval)
+		return TextChatService.ChatTranslationEnabled
 	end)
 	
 	return Success and Result

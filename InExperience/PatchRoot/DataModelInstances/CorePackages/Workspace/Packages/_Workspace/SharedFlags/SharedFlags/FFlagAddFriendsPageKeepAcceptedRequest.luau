@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("AddFriendsPageKeepAcceptedRequest_1", false)
