@@ -288,6 +288,9 @@ Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,इतनी देर बाद कोशिश करें : {WaitTime}
 Authentication.Login.Action.Continue,
+Authentication.Login.Action.ContinueSetup,सेटअप जारी रखें
+Authentication.Login.Action.ContinueWithProvider,{provider} के साथ जारी रखें
+Authentication.Login.Action.CreateANewAccount,
 Authentication.Login.Action.DownloadNow,अभी डाउनलोड करें
 Authentication.Login.Action.EmailACode,कोड ईमेल करें
 Authentication.Login.Action.EmailMeCode,मुझे कोड ईमेल करें
@@ -327,10 +330,14 @@ Authentication.Login.Description.PasskeyDescription,"आपका अकाउ�
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"हम यह नहीं तय कर सकते कि आपका डिवाइस पास-की का सपोर्ट करता है या नहीं. ईमेल या फ़ोन इस्तेमाल करके, अपना अकाउंट रिकवर करने के लिए फिर से कोशिश करें या “साइन इन करने में समस्या” पर टैप करें."
 Authentication.Login.Description.PasskeyMobileOnly,पास-की सिर्फ़ मोबाइल पर उपलब्ध हैं. साइन-इन करने का कोई दूसरा तरीका चुनें.
 Authentication.Login.Description.SigningInWith,<b>{identifier}</b> से साइन-इन किया जा रहा है
+Authentication.Login.Description.SsoLinkMultiple,"हमें एक से ज़्यादा ऐसे Roblox अकाउंट मिले हैं, जिनमें इस ईमेल पते का इस्तेमाल किया गया है. ज़ल्दी साइन-इन करने के लिए, किसी एक अकाउंट को {provider} से लिंक करें या नया अकाउंट क्रिएट करें."
+Authentication.Login.Description.SsoLinkSingle,"हमें एक Roblox अकाउंट मिला है, जिसमें इस ईमेल पते का इस्तेमाल किया गया है. ज़ल्दी साइन-इन करने के लिए, इसे {provider} से लिंक करें या नया अकाउंट क्रिएट करें."
 Authentication.Login.Description.UsernameHandle,@<b>{username}</b>
 Authentication.Login.Description.VerificationCodeSentTo,"अगर कोई Roblox अकाउंट मौजूद है, तो आपको {email} पर एक वेरिफ़िकेशन कोड मिलेगा"
 Authentication.Login.Error.PasskeyOnlyAccount,"आपके अकाउंट में साइन-इन करने के लिए सिर्फ़ पास-की सेटअप है. अपने अकाउंट को वापस पाने के लिए, अपनी पास-की से साइन-इन करके देखें."
 Authentication.Login.Error.PlatformAccountConnectionFailure,प्लैटफ़ॉर्म अकाउंट वेरिफ़ाई नहीं किया जा सका. बाद में फिर से कोशिश करें.
+Authentication.Login.Header.LeaveAccountSetup,अकाउंट सेटअप छोड़ना है?
+Authentication.Login.Header.YouAlreadyHaveAnAccount,आपके पास पहले से ही एक अकाउंट है
 Authentication.Login.Heading.EnterYourCode,अपना कोड डालें :
 Authentication.Login.Heading.GetStarted,शुरू करें
 Authentication.Login.Heading.IncompatibleAccounts,अकाउंट कंपैटिबल नहीं हैं
@@ -390,6 +397,7 @@ Authentication.Login.Label.VerificationCode,वेरिफ़िकेशन �
 Authentication.Login.Label.WeChatUserCancel,आप WeChat से लॉग आउट हो गए हैं. WeChat में लॉग इन करें.
 Authentication.Login.Label.WeChatVersionNotSupported,WeChat वर्ज़न को सपोर्ट हासिल नहीं है
 Authentication.Login.LinkIllegalChildAccountLinking,इस Roblox अकाउंट को Xbox चाइल्ड अकाउंट से लिंक नहीं किया जा सका. कृपया कोई दूसरे अकाउंट से कोशिश करें या अपनी सेटिंग चेक करें.
+Authentication.Login.Message.SsoProviderLinked,अब {provider} से साइन-इन किया जा सकता है
 Authentication.Login.QrCodeLoginTitle,"लॉग इन करने के लिए, QR कोड स्कैन करें"
 Authentication.Login.Response.AccountNotFound,अकाउंट नहीं मिला. फिर से कोशिश करें.
 Authentication.Login.Response.AlreadyLinked,इस Roblox अकाउंट को पहले से ही {platform} पर किसी दूसरे अकाउंट से लिंक किया गया है. किसी दूसरे Roblox अकाउंट से लॉग इन करने की कोशिश करें.
@@ -448,7 +456,7 @@ Authentication.ResetPassword.Response.ResetPasswordStarted,आपको पह�
 Authentication.SignUp.Action.ApplyOnNextRespawn,अगली बार रीस्पॉन करने पर लागू करें
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
-Authentication.SignUp.Action.ContinueSetup,सेटअप जारी रखें
+Authentication.SignUp.Action.ContinueSetup,
 Authentication.SignUp.Action.Create,क्रिएट करें
 Authentication.SignUp.Action.CreateAPasskey,पास-की क्रिएट करें
 Authentication.SignUp.Action.CreateAccount,अकाउंट बनाएँ

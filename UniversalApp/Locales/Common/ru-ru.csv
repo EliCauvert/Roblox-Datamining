@@ -142,6 +142,7 @@ Authentication.CrossDevice.Response.LoginSuccess,Вход выполнен
 Authentication.Login.Action.ConnectionError.RetryReady,Повторно
 Authentication.Login.Action.ConnectionError.RetryWait,Повторите в: {WaitTime}
 Authentication.Login.Action.Continue,Продолжить
+Authentication.Login.Action.CreateANewAccount,
 Authentication.Login.Action.DownloadNow,Загрузить сейчас
 Authentication.Login.Action.EmailACode,Отправить код по электронной почте
 Authentication.Login.Action.EmailOtpWaitTime,Отправить код повторно через {WaitTime}с

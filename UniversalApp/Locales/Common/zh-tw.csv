@@ -304,6 +304,9 @@ Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,請在 {WaitTime} 後重試
 Authentication.Login.Action.Continue,
+Authentication.Login.Action.ContinueSetup,繼續設定
+Authentication.Login.Action.ContinueWithProvider,使用 {provider} 繼續
+Authentication.Login.Action.CreateANewAccount,建立新帳戶
 Authentication.Login.Action.DownloadNow,立即下載
 Authentication.Login.Action.EmailACode,透過電子郵件發送代碼
 Authentication.Login.Action.EmailMeCode,透過電子郵件傳送驗證碼
@@ -343,10 +346,14 @@ Authentication.Login.Description.PasskeyDescription,您的帳號有密碼金鑰�
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,我們無法判斷您的裝置是否支援密碼金鑰。請再試一次，或輕觸「登入有問題」來使用電子郵件或手機恢復帳號。
 Authentication.Login.Description.PasskeyMobileOnly,密碼金鑰僅適用於行動裝置。請選擇其他登入方式。
 Authentication.Login.Description.SigningInWith,使用 <b>{identifier}</b> 登入
+Authentication.Login.Description.SsoLinkMultiple,我們發現多個 Roblox 帳號使用此電子郵件地址。選擇一個帳號並將其連結至 {provider} 以便更快登入，或建立新帳號。
+Authentication.Login.Description.SsoLinkSingle,我們發現了一個使用此電子郵件地址的 Roblox 帳號。將其連結至 {provider} 以便更快登入，或建立新帳號。
 Authentication.Login.Description.UsernameHandle,@<b>{username}</b>
 Authentication.Login.Description.VerificationCodeSentTo,若已擁有 Roblox 帳號，你將透過 {email} 收到驗證碼
 Authentication.Login.Error.PasskeyOnlyAccount,您的帳號只有一組密碼金鑰可用於登入。請嘗試使用密碼金鑰登入或恢復帳號。
 Authentication.Login.Error.PlatformAccountConnectionFailure,無法驗證平台帳號，請稍後再試。
+Authentication.Login.Header.LeaveAccountSetup,要離開帳號設定流程嗎？
+Authentication.Login.Header.YouAlreadyHaveAnAccount,你已經有帳號了
 Authentication.Login.Heading.EnterYourCode,
 Authentication.Login.Heading.GetStarted,立即開始
 Authentication.Login.Heading.IncompatibleAccounts,帳號不相容
@@ -406,6 +413,7 @@ Authentication.Login.Label.VerificationCode,驗證碼
 Authentication.Login.Label.WeChatUserCancel,您已登出微信，請重新登入。
 Authentication.Login.Label.WeChatVersionNotSupported,不支援此微信版本
 Authentication.Login.LinkIllegalChildAccountLinking,此 Roblox 帳號無法連結至 Xbox 兒童帳號。請嘗試使用其他帳號，或檢查你的設定。
+Authentication.Login.Message.SsoProviderLinked,你現在可以使用 {provider} 登入
 Authentication.Login.QrCodeLoginTitle,掃描 QR 碼登入
 Authentication.Login.Response.AccountNotFound,找不到帳號，請重新嘗試。
 Authentication.Login.Response.AlreadyLinked,這個 Roblox 帳號已連結到 {platform} 上的其他帳號。請嘗試使用其他 Roblox 帳號登入。
@@ -464,7 +472,7 @@ Authentication.ResetPassword.Response.ResetPasswordStarted,若要繼續，請先
 Authentication.SignUp.Action.ApplyOnNextRespawn,在下次重生時套用
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
-Authentication.SignUp.Action.ContinueSetup,繼續設定
+Authentication.SignUp.Action.ContinueSetup,
 Authentication.SignUp.Action.Create,建立
 Authentication.SignUp.Action.CreateAPasskey,
 Authentication.SignUp.Action.CreateAccount,

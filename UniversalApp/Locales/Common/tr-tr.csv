@@ -305,6 +305,9 @@ Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,Tekrar Deneme Bekleme Süresi: {WaitTime}
 Authentication.Login.Action.Continue,Devam Et
+Authentication.Login.Action.ContinueSetup,Kuruluma devam et
+Authentication.Login.Action.ContinueWithProvider,{provider} ile devam et
+Authentication.Login.Action.CreateANewAccount,
 Authentication.Login.Action.DownloadNow,Şimdi İndir
 Authentication.Login.Action.EmailACode,E-postayla bir kod gönder
 Authentication.Login.Action.EmailMeCode,Bana e-postayla bir kod gönder
@@ -344,10 +347,14 @@ Authentication.Login.Description.PasskeyDescription,"Hesabında şifreden daha g
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"Cihazının geçiş anahtarlarını destekleyip desteklemediğini belirleyemiyoruz. Tekrar dene ya da hesabını e-posta veya telefon numarasıyla kurtarmak için ""Giriş yaparken sorun mu yaşıyorsun"" seçeneğine dokun."
 Authentication.Login.Description.PasskeyMobileOnly,Geçiş anahtarları yalnızca mobil cihazlarda kullanılabilir. Giriş yapmak için başka bir yöntem seç.
 Authentication.Login.Description.SigningInWith,<b>{identifier}</b> ile giriş yapılıyor
+Authentication.Login.Description.SsoLinkMultiple,Bu e-posta adresini kullanan birden fazla Roblox hesabı bulduk. Daha hızlı giriş yapabilmek için {provider} ile bağlayacağın bir hesap seç veya yeni bir hesap oluştur.
+Authentication.Login.Description.SsoLinkSingle,Bu e-posta adresini kullanan bir Roblox hesabı bulduk. Daha hızlı giriş yapmak için bu hesabı {provider} ile bağla veya yeni bir hesap oluştur.
 Authentication.Login.Description.UsernameHandle,@<b>{username}</b>
 Authentication.Login.Description.VerificationCodeSentTo,Bir Roblox hesabı varsa {email} adresine bir doğrulama kodu alacaksın
 Authentication.Login.Error.PasskeyOnlyAccount,Hesabına yalnızca giriş yapmak için bir geçiş anahtarı ayarlanmış. Geçiş anahtarınla giriş yapmayı dene veya hesabını kurtar.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Platform hesabı doğrulanamıyor. Lütfen daha sonra tekrar dene.
+Authentication.Login.Header.LeaveAccountSetup,Hesap kurulumundan ayrılmak mı istiyorsun?
+Authentication.Login.Header.YouAlreadyHaveAnAccount,Zaten bir hesabın var
 Authentication.Login.Heading.EnterYourCode,Kodunu gir
 Authentication.Login.Heading.GetStarted,Başla
 Authentication.Login.Heading.IncompatibleAccounts,Uyumsuz Hesaplar
@@ -407,6 +414,7 @@ Authentication.Login.Label.VerificationCode,Doğrulama kodu
 Authentication.Login.Label.WeChatUserCancel,WeChat'ten çıkış yaptın. Lütfen WeChat'e giriş yap.
 Authentication.Login.Label.WeChatVersionNotSupported,WeChat sürümü desteklenmiyor
 Authentication.Login.LinkIllegalChildAccountLinking,Bu Roblox hesabı bir Xbox çocuk hesabına bağlanamadı. Lütfen başka bir hesabı dene veya ayarlarını kontrol et.
+Authentication.Login.Message.SsoProviderLinked,Artık {provider} ile giriş yapabilirsin
 Authentication.Login.QrCodeLoginTitle,Giriş Yapmak için QR Kodunu tara
 Authentication.Login.Response.AccountNotFound,Hesap bulunamadı. Lütfen tekrar dene.
 Authentication.Login.Response.AlreadyLinked,Bu Roblox hesabı zaten {platform} için hesap farklı bir hesaba bağlı. Lütfen farklı bir Roblox hesabıyla giriş yapmayı dene.
@@ -465,7 +473,7 @@ Authentication.ResetPassword.Response.ResetPasswordStarted,Devam edebilmek için
 Authentication.SignUp.Action.ApplyOnNextRespawn,Bir dahaki sıfırlamada uygula
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
-Authentication.SignUp.Action.ContinueSetup,Kuruluma devam et
+Authentication.SignUp.Action.ContinueSetup,
 Authentication.SignUp.Action.Create,Oluştur
 Authentication.SignUp.Action.CreateAPasskey,
 Authentication.SignUp.Action.CreateAccount,Hesap Oluştur

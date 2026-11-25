@@ -305,6 +305,9 @@ Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,Thử lại: {WaitTime}
 Authentication.Login.Action.Continue,
+Authentication.Login.Action.ContinueSetup,Tiếp tục thiết lập
+Authentication.Login.Action.ContinueWithProvider,Tiếp tục với {provider}
+Authentication.Login.Action.CreateANewAccount,
 Authentication.Login.Action.DownloadNow,Tải Xuống Ngay
 Authentication.Login.Action.EmailACode,Gửi mã qua email
 Authentication.Login.Action.EmailMeCode,Gửi mã cho tôi qua email
@@ -344,10 +347,14 @@ Authentication.Login.Description.PasskeyDescription,"Tài khoản của bạn c�
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"Chúng tôi không thể xác định thiết bị của bạn có hỗ trợ mã xác nhận hay không. Hãy thử lại hoặc chạm vào ""Lỗi Đăng Nhập"" để khôi phục tài khoản của bạn bằng email hoặc số điện thoại."
 Authentication.Login.Description.PasskeyMobileOnly,Mã xác nhận chỉ dùng được trên thiết bị di động. Vui lòng chọn cách đăng nhập khác.
 Authentication.Login.Description.SigningInWith,Đăng nhập bằng <b>{identifier}</b>
+Authentication.Login.Description.SsoLinkMultiple,"Chúng tôi tìm thấy nhiều tài khoản Roblox đang dùng email này. Hãy chọn một tài khoản để liên kết với {provider} giúp đăng nhập nhanh hơn, hoặc hãy tạo tài khoản mới."
+Authentication.Login.Description.SsoLinkSingle,"Chúng tôi tìm thấy một tài khoản Roblox đang dùng email này. Hãy liên kết tài khoản đó với {provider} để đăng nhập nhanh hơn, hoặc hãy tạo tài khoản mới."
 Authentication.Login.Description.UsernameHandle,@<b>{username}</b>
 Authentication.Login.Description.VerificationCodeSentTo,"Nếu tài khoản Roblox tồn tại, bạn sẽ nhận được mã xác minh tại địa chỉ {email}"
 Authentication.Login.Error.PasskeyOnlyAccount,Tài khoản của bạn được thiết lập ở chế độ chỉ cho phép đăng nhập bằng khóa bảo mật. Hãy đăng nhập bằng khóa bảo mật hoặc tiến hành khôi phục tài khoản.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Không xác minh được tài khoản trên nền tảng. Vui lòng thử lại sau.
+Authentication.Login.Header.LeaveAccountSetup,Rời khỏi quá trình thiết lập tài khoản?
+Authentication.Login.Header.YouAlreadyHaveAnAccount,Bạn đã có tài khoản rồi
 Authentication.Login.Heading.EnterYourCode,Nhập mã của bạn
 Authentication.Login.Heading.GetStarted,Bắt đầu
 Authentication.Login.Heading.IncompatibleAccounts,Tài khoản không phù hợp
@@ -407,6 +414,7 @@ Authentication.Login.Label.VerificationCode,Mã xác minh
 Authentication.Login.Label.WeChatUserCancel,Bạn đã đăng xuất khỏi WeChat. Vui lòng đăng nhập vào WeChat.
 Authentication.Login.Label.WeChatVersionNotSupported,Phiên bản WeChat không được hỗ trợ
 Authentication.Login.LinkIllegalChildAccountLinking,Không thể liên kết tài khoản Roblox này với tài khoản Xbox của trẻ em. Vui lòng thử dùng một tài khoản khác hoặc kiểm tra tùy chọn cài đặt của bạn.
+Authentication.Login.Message.SsoProviderLinked,Hiện bạn đã có thể đăng nhập bằng {provider}
 Authentication.Login.QrCodeLoginTitle,Quét mã QR để đăng nhập
 Authentication.Login.Response.AccountNotFound,Không tìm thấy tài khoản. Vui lòng thử lại.
 Authentication.Login.Response.AlreadyLinked,Tài khoản Roblox này đã được liên kết với một tài khoản dùng cho {platform}. Vui lòng thử đăng nhập bằng một tài khoản Roblox khác.
@@ -465,7 +473,7 @@ Authentication.ResetPassword.Response.ResetPasswordStarted,Bạn phải đặt l
 Authentication.SignUp.Action.ApplyOnNextRespawn,Áp dụng cho lần hồi sinh tiếp theo
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
-Authentication.SignUp.Action.ContinueSetup,Tiếp tục thiết lập
+Authentication.SignUp.Action.ContinueSetup,
 Authentication.SignUp.Action.Create,Tạo
 Authentication.SignUp.Action.CreateAPasskey,
 Authentication.SignUp.Action.CreateAccount,Tạo Tài khoản

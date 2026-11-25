@@ -305,6 +305,9 @@ Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,Spróbuj ponownie za: {WaitTime}
 Authentication.Login.Action.Continue,
+Authentication.Login.Action.ContinueSetup,Kontynuuj konfigurację
+Authentication.Login.Action.ContinueWithProvider,Kontynuuj za pomocą {provider}
+Authentication.Login.Action.CreateANewAccount,
 Authentication.Login.Action.DownloadNow,Pobierz teraz
 Authentication.Login.Action.EmailACode,Wyślij wiadomość e-mail z kodem
 Authentication.Login.Action.EmailMeCode,Wyślij kod na mój adres e-mail
@@ -344,10 +347,14 @@ Authentication.Login.Description.PasskeyDescription,"Na twoim koncie używany je
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"Nie jesteśmy w stanie ustalić, czy twoje urządzenie obsługuje klucz dostępu. Spróbuj ponownie lub dotknij opcji „Kłopoty z logowaniem”, aby odzyskać konto za pomocą adresu e-mail lub numeru telefonu."
 Authentication.Login.Description.PasskeyMobileOnly,Klucze dostępu są dostępne wyłącznie na urządzeniach mobilnych. Wybierz inny sposób logowania.
 Authentication.Login.Description.SigningInWith,Logujesz się za pomocą <b>{identifier}</b>
+Authentication.Login.Description.SsoLinkMultiple,"Znaleźliśmy wiele kont Roblox, które używają tego adresu e-mail. Wybierz jedno z nich i połącz je z {provider}, aby szybciej się logować, lub utwórz nowe konto."
+Authentication.Login.Description.SsoLinkSingle,"Znaleźliśmy konto Roblox, które korzysta z tego adresu e-mail. Połącz je z {provider}, aby szybciej się logować, lub utwórz nowe konto."
 Authentication.Login.Description.UsernameHandle,@<b>{username}</b>
 Authentication.Login.Description.VerificationCodeSentTo,"Jeżeli istnieje konto Roblox, otrzymasz kod weryfikacyjny na {email}"
 Authentication.Login.Error.PasskeyOnlyAccount,Na Twoim koncie skonfigurowano wyłącznie logowanie za pomocą klucza dostępu. Spróbuj zalogować się za pomocą klucza dostępu lub odzyskaj konto.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Nie można zweryfikować konta na platformie. Spróbuj ponownie później.
+Authentication.Login.Header.LeaveAccountSetup,Wyjść z konfiguracji konta?
+Authentication.Login.Header.YouAlreadyHaveAnAccount,Masz już konto
 Authentication.Login.Heading.EnterYourCode,
 Authentication.Login.Heading.GetStarted,Rozpocznij
 Authentication.Login.Heading.IncompatibleAccounts,Niezgodne konta
@@ -407,6 +414,7 @@ Authentication.Login.Label.VerificationCode,Kod weryfikacyjny
 Authentication.Login.Label.WeChatUserCancel,Wylogowano się z aplikacji WeChat. Zaloguj się do niej.
 Authentication.Login.Label.WeChatVersionNotSupported,Wersja aplikacji WeChat nie jest obsługiwana
 Authentication.Login.LinkIllegalChildAccountLinking,Nie udało się połączyć tego konta Roblox z kontem dziecka na konsoli Xbox. Spróbuj użyć innego konta lub sprawdź ustawienia.
+Authentication.Login.Message.SsoProviderLinked,Możesz teraz logować się za pomocą {provider}
 Authentication.Login.QrCodeLoginTitle,"Aby się zalogować, zeskanuj kod QR"
 Authentication.Login.Response.AccountNotFound,Nie znaleziono konta. Spróbuj ponownie.
 Authentication.Login.Response.AlreadyLinked,To konto Roblox jest już powiązane z innym konto w {platform}. Zaloguj się na inne konto Roblox.
@@ -465,7 +473,7 @@ Authentication.ResetPassword.Response.ResetPasswordStarted,Przed kontynuowaniem 
 Authentication.SignUp.Action.ApplyOnNextRespawn,Zastosuj przy następnym odrodzeniu
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
-Authentication.SignUp.Action.ContinueSetup,Kontynuuj konfigurację
+Authentication.SignUp.Action.ContinueSetup,
 Authentication.SignUp.Action.Create,Utwórz
 Authentication.SignUp.Action.CreateAPasskey,
 Authentication.SignUp.Action.CreateAccount,

@@ -305,6 +305,9 @@ Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,再試行する
 Authentication.Login.Action.ConnectionError.RetryWait,{WaitTime} で再試行する
 Authentication.Login.Action.Continue,
+Authentication.Login.Action.ContinueSetup,設定を続ける
+Authentication.Login.Action.ContinueWithProvider,{provider}で続ける
+Authentication.Login.Action.CreateANewAccount,新しいアカウントを作成
 Authentication.Login.Action.DownloadNow,今すぐダウンロード
 Authentication.Login.Action.EmailACode,コードをメールで送信
 Authentication.Login.Action.EmailMeCode,コードをメールで受け取る
@@ -344,10 +347,14 @@ Authentication.Login.Description.PasskeyDescription,お持ちのアカウント�
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,お使いのデバイスがパスキーに対応しているかどうかを判断できません。もう一度お試しいただくか、「ログインできない」をタップしてメールアドレスまたは電話番号でアカウントを復元してください。
 Authentication.Login.Description.PasskeyMobileOnly,パスキーはモバイルでのみ利用可能です。別の方法でログインしてください。
 Authentication.Login.Description.SigningInWith,<b>{identifier}</b>でログイン中
+Authentication.Login.Description.SsoLinkMultiple,このメールアドレスを使用しているRobloxアカウントが複数見つかりました。ログインをスムーズにするには、{provider}と連携するアカウントを1つ選んでください。新しいアカウントを作成することもできます。
+Authentication.Login.Description.SsoLinkSingle,このメールアドレスを使用しているRobloxアカウントが見つかりました。{provider}と連携してより早くログインするか、新しいアカウントを作成してください。
 Authentication.Login.Description.UsernameHandle,@<b>{username}</b>
 Authentication.Login.Description.VerificationCodeSentTo,Robloxアカウントが存在する場合、{email}に認証コードが届きます
 Authentication.Login.Error.PasskeyOnlyAccount,アカウントにはログイン用のパスキーが設定されています。パスキーでログインするか、アカウントを回復してください。
 Authentication.Login.Error.PlatformAccountConnectionFailure,プラットフォーム用アカウントを確認できません。後でもう一度お試しください。
+Authentication.Login.Header.LeaveAccountSetup,アカウントの設定をやめますか？
+Authentication.Login.Header.YouAlreadyHaveAnAccount,すでにアカウントを持っている
 Authentication.Login.Heading.EnterYourCode,
 Authentication.Login.Heading.GetStarted,始める
 Authentication.Login.Heading.IncompatibleAccounts,アカウントに互換性がありません
@@ -407,6 +414,7 @@ Authentication.Login.Label.VerificationCode,認証コード
 Authentication.Login.Label.WeChatUserCancel,WeChatからログアウトしました。WeChatにログインしてください。
 Authentication.Login.Label.WeChatVersionNotSupported,WeChatバージョンには対応していません
 Authentication.Login.LinkIllegalChildAccountLinking,このRobloxアカウントはXboxの子ども用アカウントに紐づけできませんでした。別のRobloxアカウントを試すか、その設定を確認してください。
+Authentication.Login.Message.SsoProviderLinked,{provider}でログインできるようになりました
 Authentication.Login.QrCodeLoginTitle,ログインするにはQRコードをスキャン
 Authentication.Login.Response.AccountNotFound,アカウントが見つかりませんでした。もう一度お試しください。
 Authentication.Login.Response.AlreadyLinked,このRobloxアカウントは {platform} ですでに別のアカウントに紐づけられています。別のRobloxアカウントでログインしてみてください。
@@ -465,7 +473,7 @@ Authentication.ResetPassword.Response.ResetPasswordStarted,続ける前に、パ
 Authentication.SignUp.Action.ApplyOnNextRespawn,次のリスポーンで適用
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
-Authentication.SignUp.Action.ContinueSetup,設定を続ける
+Authentication.SignUp.Action.ContinueSetup,
 Authentication.SignUp.Action.Create,作成
 Authentication.SignUp.Action.CreateAPasskey,
 Authentication.SignUp.Action.CreateAccount,アカウントを作成する

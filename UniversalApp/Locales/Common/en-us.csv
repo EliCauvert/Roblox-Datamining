@@ -306,6 +306,9 @@ Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,Retry in: {WaitTime}
 Authentication.Login.Action.Continue,
+Authentication.Login.Action.ContinueSetup,Continue setup
+Authentication.Login.Action.ContinueWithProvider,Continue with {provider}
+Authentication.Login.Action.CreateANewAccount,Create A New Account
 Authentication.Login.Action.DownloadNow,Download Now
 Authentication.Login.Action.EmailACode,Email a code
 Authentication.Login.Action.EmailMeCode,Email me a code
@@ -337,18 +340,24 @@ Authentication.Login.Button.UseDifferentRobloxAccount,Use a different Roblox acc
 Authentication.Login.Button.XboxAccountSwitcher,Switch Xbox account
 Authentication.Login.Description.AccountSelectorHelp,All of your associated accounts are listed here.
 Authentication.Login.Description.ChooseHowToPlay,Choose how you want to play
+Authentication.Login.Description.ChooseSignInMethod,Choose a way to sign in to {username}.
 Authentication.Login.Description.DownloadNewVersion,This version of Roblox isn’t available for your account. Please download the correct version to continue.
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,Enter the code we just sent to: {email}
+Authentication.Login.Description.EnterPassword,Enter the password for {username}.
 Authentication.Login.Description.GetOneTimeCodeHelp,Enter the email verified on your account to receive a one-time code.
 Authentication.Login.Description.LeaveAccountSetup,"If you leave now, your Roblox account won’t be set up."
 Authentication.Login.Description.PasskeyDescription,"Your account has passkey, a more secure sign-in method than password. You can use your fingerprint, face, or screen lock to sign in on this device."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"We cannot determine whether your device supports passkey. Try again, or tap “Trouble signing in” to recover your account with an email or phone number."
 Authentication.Login.Description.PasskeyMobileOnly,Passkeys are only available on mobile. Choose another way to sign in.
 Authentication.Login.Description.SigningInWith,Signing in with <b>{identifier}</b>
+Authentication.Login.Description.SsoLinkMultiple,"We found multiple Roblox accounts that use this email. Choose one to link with {provider} so you can sign in faster, or create a new account."
+Authentication.Login.Description.SsoLinkSingle,"We found a Roblox account that uses this email. Link it to {provider} to sign in faster, or create a new account."
 Authentication.Login.Description.UsernameHandle,@<b>{username}</b>
 Authentication.Login.Description.VerificationCodeSentTo,"If a Roblox account exists, you'll receive a verification code at {email}"
 Authentication.Login.Error.PasskeyOnlyAccount,Your account only has a passkey set up for sign-in. Try signing in with your passkey or recover your account.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Cannot verify platform account. Please try again later.
+Authentication.Login.Header.LeaveAccountSetup,Leave account setup?
+Authentication.Login.Header.YouAlreadyHaveAnAccount,You already have an account
 Authentication.Login.Heading.EnterYourCode,Enter your code
 Authentication.Login.Heading.GetStarted,Get started
 Authentication.Login.Heading.IncompatibleAccounts,Incompatible Accounts
@@ -408,6 +417,7 @@ Authentication.Login.Label.VerificationCode,Verification code
 Authentication.Login.Label.WeChatUserCancel,You are logged out of WeChat. Please log in to WeChat.
 Authentication.Login.Label.WeChatVersionNotSupported,WeChat version is not supported
 Authentication.Login.LinkIllegalChildAccountLinking,This Roblox account could not be linked to an Xbox child account. Please try another account or check your settings.
+Authentication.Login.Message.SsoProviderLinked,You can now sign in with {provider}
 Authentication.Login.QrCodeLoginTitle,Scan QR Code to Login
 Authentication.Login.Response.AccountNotFound,Account not found. Please try again.
 Authentication.Login.Response.AlreadyLinked,This Roblox account is already linked to a different account on {platform}. Please try logging in with a different Roblox account.
@@ -468,7 +478,7 @@ Authentication.ResetPassword.Response.ResetPasswordStarted,You must reset your p
 Authentication.SignUp.Action.ApplyOnNextRespawn,Apply on next respawn
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
-Authentication.SignUp.Action.ContinueSetup,Continue setup
+Authentication.SignUp.Action.ContinueSetup,
 Authentication.SignUp.Action.Create,Create
 Authentication.SignUp.Action.CreateAPasskey,
 Authentication.SignUp.Action.CreateAccount,Create Account

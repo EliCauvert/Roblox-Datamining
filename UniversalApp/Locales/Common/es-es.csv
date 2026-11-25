@@ -305,6 +305,9 @@ Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,Reintentarlo
 Authentication.Login.Action.ConnectionError.RetryWait,Volver a intentar: {WaitTime}
 Authentication.Login.Action.Continue,
+Authentication.Login.Action.ContinueSetup,Continuar configuración
+Authentication.Login.Action.ContinueWithProvider,Continuar con {provider}
+Authentication.Login.Action.CreateANewAccount,
 Authentication.Login.Action.DownloadNow,Descarga ahora
 Authentication.Login.Action.EmailACode,Enviar un código por correo electrónico
 Authentication.Login.Action.EmailMeCode,Recibir código por correo electrónico
@@ -344,10 +347,14 @@ Authentication.Login.Description.PasskeyDescription,"Tu cuenta tiene una llave d
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"No podemos determinar si tu dispositivo es compatible con la llave de acceso. Inténtalo de nuevo o toca ""Problemas al iniciar sesión"" para recuperar tu cuenta con un correo electrónico o número de teléfono."
 Authentication.Login.Description.PasskeyMobileOnly,Las llaves de acceso solo están disponibles en dispositivos móviles. Elige otra forma de iniciar sesión.
 Authentication.Login.Description.SigningInWith,Iniciando sesión con <b>{identifier}</b>
+Authentication.Login.Description.SsoLinkMultiple,Encontramos varias cuentas de Roblox que usan este correo electrónico. Elige una para vincularla a {provider} para que puedas iniciar sesión más rápido o crea una cuenta nueva.
+Authentication.Login.Description.SsoLinkSingle,Encontramos una cuenta de Roblox que usa este correo electrónico. Víncula la cuenta a {provider} para iniciar sesión más rápido o crea una cuenta nueva.
 Authentication.Login.Description.UsernameHandle,@<b>{username}</b>
 Authentication.Login.Description.VerificationCodeSentTo,"Si existe una cuenta de Roblox, recibirás un código de verificación en {email}"
 Authentication.Login.Error.PasskeyOnlyAccount,Tu cuenta solo tiene una llave de acceso configurada para iniciar sesión. Intenta iniciar sesión con tu llave o recupera la cuenta.
 Authentication.Login.Error.PlatformAccountConnectionFailure,No se puede verificar la cuenta de la plataforma. Inténtalo de nuevo más tarde.
+Authentication.Login.Header.LeaveAccountSetup,¿Salir de la configuración de la cuenta?
+Authentication.Login.Header.YouAlreadyHaveAnAccount,Ya tienes una cuenta
 Authentication.Login.Heading.EnterYourCode,
 Authentication.Login.Heading.GetStarted,Comenzar
 Authentication.Login.Heading.IncompatibleAccounts,Cuentas incompatibles
@@ -407,6 +414,7 @@ Authentication.Login.Label.VerificationCode,Código de verificación
 Authentication.Login.Label.WeChatUserCancel,Cerraste sesión de WeChat. Vuelve a iniciarla.
 Authentication.Login.Label.WeChatVersionNotSupported,Esta versión de WeChat no es compatible
 Authentication.Login.LinkIllegalChildAccountLinking,Esta cuenta de Roblox no se pudo vincular a una cuenta infantil de Xbox. Inténtalo con otra cuenta o revisa tu configuración.
+Authentication.Login.Message.SsoProviderLinked,Ahora puedes iniciar sesión con {provider}
 Authentication.Login.QrCodeLoginTitle,Escanear el código QR para iniciar sesión
 Authentication.Login.Response.AccountNotFound,No se encontró la cuenta. Inténtalo de nuevo más tarde.
 Authentication.Login.Response.AlreadyLinked,Esta cuenta de Roblox ya está vinculada a una cuenta diferente en {platform}. Intenta iniciar sesión con una cuenta Roblox diferente.
@@ -465,7 +473,7 @@ Authentication.ResetPassword.Response.ResetPasswordStarted,Debes restablecer la 
 Authentication.SignUp.Action.ApplyOnNextRespawn,Aplicar en la próxima regeneración
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
-Authentication.SignUp.Action.ContinueSetup,Continuar configuración
+Authentication.SignUp.Action.ContinueSetup,
 Authentication.SignUp.Action.Create,Crear
 Authentication.SignUp.Action.CreateAPasskey,
 Authentication.SignUp.Action.CreateAccount,
