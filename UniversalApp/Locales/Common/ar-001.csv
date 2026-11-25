@@ -297,6 +297,7 @@ Authentication.Login.Action.ForgotUsername,هل نسيت اسم المستخدم
 Authentication.Login.Action.ForgotUsernameOrPassword,هل نسيت اسم المستخدم أو كلمة المرور؟
 Authentication.Login.Action.GetCodeByEmail,الحصول على الكود عبر البريد الإلكتروني
 Authentication.Login.Action.Google,Google
+Authentication.Login.Action.Leave,مغادرة
 Authentication.Login.Action.LogInEmailOneTimeCode,إرسال رمز صالح لمرة واحدة عبر البريد إلكتروني
 Authentication.Login.Action.NeedHelp,بحاجة إلى مساعدة؟
 Authentication.Login.Action.Next,
@@ -321,6 +322,7 @@ Authentication.Login.Description.ChooseHowToPlay,اختر الطريقة الت�
 Authentication.Login.Description.DownloadNewVersion,هذا الإصدار من منصّة Roblox غير متاح لحسابك. يُرجى تنزيل الإصدار الصحيح للمتابعة.
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,أدخل الرمز الذي أرسلناه للتو إلى: {email}
 Authentication.Login.Description.GetOneTimeCodeHelp,أدخل بريدك الإلكتروني الذي تم التحقق منه في حسابك لتلقي رمز مرة واحدة.
+Authentication.Login.Description.LeaveAccountSetup,إذا غادرت الآن، فلن يتم إعداد حسابك على Roblox.
 Authentication.Login.Description.PasskeyDescription,يحتوي حسابك على مفتاح مرور، وهو طريقة تسجيل دخول أكثر أمانًا من كلمة المرور. يمكنك استخدام بصمة إصبعك أو وجهك أو قفل الشاشة لتسجيل الدخول على هذا الجهاز.
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"لا يمكننا تحديد ما إذا كان جهازك يدعم مفتاح المرور. حاول مرة أخرى، أو اضغط على ""مشكلة في تسجيل الدخول"" لاسترداد حسابك باستخدام بريد إلكتروني أو رقم هاتف."
 Authentication.Login.Description.PasskeyMobileOnly,مفاتيح المرور متاحة فقط على الهاتف المحمول. اختر طريقة أخرى لتسجيل الدخول.
@@ -1193,7 +1195,7 @@ CoreScripts.InGameMenu.GameSettings.UIScaleMode,وضع تغيير حجم واج�
 CoreScripts.InGameMenu.GameSettings.UIScaleModeAuto,تلقائي
 CoreScripts.InGameMenu.GameSettings.UIScaleModeManual,يدوي
 CoreScripts.InGameMenu.GameSettings.Volume,المستوى
-CoreScripts.InGameMenu.Leave,مغادرة
+CoreScripts.InGameMenu.Leave,
 CoreScripts.InGameMenu.PageTitle.InviteFriends,دعوة أصدقاء
 CoreScripts.InGameMenu.PageTitle.JoinOrInviteFriends,الانضمام إلى الأصدقاء أو دعوتهم
 CoreScripts.InGameMenu.Traversal.HistoryDescription,انضم إلى الألعاب التي قمت بزيارتها سابقًا
@@ -2979,6 +2981,7 @@ Feature.BuyRobux.Label.MyFriendsWithCount,أصدقائي ({count})
 Feature.BuyRobux.Label.PeopleWithCount,الأشخاص ({count})
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
+Feature.Captures.Title.Captures,لقطات
 Feature.Captures.Title.Gallery,المعرض
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
@@ -5752,7 +5755,6 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + شخ
 Feature.UniversalShareSheet.Response.SharedMessage,تم إرسال الرسالة
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,تم إرسال الرسائل
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} من الأشخاص الآخرين
-Feature.UserLibrary.Label.MyLibrary,مكتبتي
 Feature.VIPServer.Message.TooManyFreeServersOnGame,لا يمكنك امتلاك المزيد من الخوادم الخاصة المجانية في هذه اللعبة.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,لا يمكنك الحصول على خوادم خاصة نشطة مجانية أكثر مما لديك. يرجى إلغاء تنشيط بعض الخوادم الأخرى أولاً.
 Feature.VerificationUpsell.Action.AddPhone,

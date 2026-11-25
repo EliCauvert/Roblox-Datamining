@@ -314,6 +314,7 @@ Authentication.Login.Action.ForgotUsername,Esqueceu o nome de usuário?
 Authentication.Login.Action.ForgotUsernameOrPassword,Esqueceu o nome de usuário/senha?
 Authentication.Login.Action.GetCodeByEmail,Receber código por e-mail
 Authentication.Login.Action.Google,Google
+Authentication.Login.Action.Leave,
 Authentication.Login.Action.LogInEmailOneTimeCode,Envie-me um código único por e-mail
 Authentication.Login.Action.NeedHelp,Precisa de ajuda?
 Authentication.Login.Action.Next,
@@ -338,6 +339,7 @@ Authentication.Login.Description.ChooseHowToPlay,Escolha como você quer jogar
 Authentication.Login.Description.DownloadNewVersion,Esta versão do aplicativo Roblox não está disponível para sua conta. Baixe a versão correta para continuar.
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,Insira o código enviado para: {email}
 Authentication.Login.Description.GetOneTimeCodeHelp,Digite o e-mail verificado na sua conta para receber um código único.
+Authentication.Login.Description.LeaveAccountSetup,"Se você sair agora, sua conta do Roblox não será configurada."
 Authentication.Login.Description.PasskeyDescription,"Sua conta tem uma chave de acesso e um método de login mais seguro do que uma senha. Você pode usar sua impressão digital, rosto ou bloqueio de tela para fazer entrar na conta neste dispositivo."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"Não é possível determinar se o dispositivo suporta a chave de acesso. Tente novamente ou toque em ""Problemas ao entrar na conta"" para recuperar sua conta com um número de e-mail ou telefone."
 Authentication.Login.Description.PasskeyMobileOnly,As chaves de acesso só estão disponíveis no celular. Escolha outra maneira de entrar.
@@ -3043,6 +3045,7 @@ Feature.BuyRobux.Label.MyFriendsWithCount,Minhas amizades ({count})
 Feature.BuyRobux.Label.PeopleWithCount,Pessoas ({count})
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,"Algo deu errado, tente novamente mais tarde."
+Feature.Captures.Title.Captures,Capturas
 Feature.Captures.Title.Gallery,Galeria
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
@@ -5816,7 +5819,6 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 ou
 Feature.UniversalShareSheet.Response.SharedMessage,A mensagem foi enviada
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,As mensagens foram enviadas
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} outras pessoas
-Feature.UserLibrary.Label.MyLibrary,Minha biblioteca
 Feature.VIPServer.Message.TooManyFreeServersOnGame,Você não pode ter mais servidores privados gratuitos neste jogo.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,"Você não pode ter mais servidores gratuitos ativos. Primeiro, desative alguns dos outros servidores."
 Feature.VerificationUpsell.Action.AddPhone,

@@ -315,6 +315,7 @@ Authentication.Login.Action.ForgotUsername,Forgot username?
 Authentication.Login.Action.ForgotUsernameOrPassword,Forgot username or password?
 Authentication.Login.Action.GetCodeByEmail,Get code by email
 Authentication.Login.Action.Google,Google
+Authentication.Login.Action.Leave,Leave
 Authentication.Login.Action.LogInEmailOneTimeCode,Email Me a One-Time Code
 Authentication.Login.Action.NeedHelp,Need help?
 Authentication.Login.Action.Next,
@@ -339,6 +340,7 @@ Authentication.Login.Description.ChooseHowToPlay,Choose how you want to play
 Authentication.Login.Description.DownloadNewVersion,This version of Roblox isn’t available for your account. Please download the correct version to continue.
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,Enter the code we just sent to: {email}
 Authentication.Login.Description.GetOneTimeCodeHelp,Enter the email verified on your account to receive a one-time code.
+Authentication.Login.Description.LeaveAccountSetup,"If you leave now, your Roblox account won’t be set up."
 Authentication.Login.Description.PasskeyDescription,"Your account has passkey, a more secure sign-in method than password. You can use your fingerprint, face, or screen lock to sign in on this device."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"We cannot determine whether your device supports passkey. Try again, or tap “Trouble signing in” to recover your account with an email or phone number."
 Authentication.Login.Description.PasskeyMobileOnly,Passkeys are only available on mobile. Choose another way to sign in.
@@ -472,7 +474,7 @@ Authentication.SignUp.Action.CreateAPasskey,
 Authentication.SignUp.Action.CreateAccount,Create Account
 Authentication.SignUp.Action.CreateAccountSentenceCase,
 Authentication.SignUp.Action.EnableFaceId,Enable Face ID
-Authentication.SignUp.Action.ExitModalLeave,Leave
+Authentication.SignUp.Action.ExitModalLeave,
 Authentication.SignUp.Action.IUnderstand,I Understand
 Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,Respawn now
@@ -3048,13 +3050,14 @@ Feature.Build.Title.VersionInfo,Version information
 Feature.Build.Title.VersionNumber,Version {VERSION}
 Feature.Build.Title.Versions,Versions
 Feature.Build.Title.WhatsIncluded,What's included?
-Feature.BuyRobux.Action.ContentPersonalization,Content personalization
+Feature.BuyRobux.Action.ContentPersonalization,
 Feature.BuyRobux.Heading.Banner,
 Feature.BuyRobux.Heading.PendingTransfers,Pending Robux
 Feature.BuyRobux.Label.MyFriendsWithCount,My friends ({count})
 Feature.BuyRobux.Label.PeopleWithCount,People ({count})
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
+Feature.Captures.Title.Captures,Captures
 Feature.Captures.Title.Gallery,Gallery
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
@@ -5838,7 +5841,7 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 ot
 Feature.UniversalShareSheet.Response.SharedMessage,Message was sent
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Messages were sent
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} others
-Feature.UserLibrary.Label.MyLibrary,My Library
+Feature.UserLibrary.Label.Library,
 Feature.VIPServer.Message.TooManyFreeServersOnGame,You cannot have more free private servers on this game.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,You cannot have more active free private servers. Please deactivate some other servers first.
 Feature.VerificationUpsell.Action.AddPhone,

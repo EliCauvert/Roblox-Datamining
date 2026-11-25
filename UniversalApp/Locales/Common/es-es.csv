@@ -314,6 +314,7 @@ Authentication.Login.Action.ForgotUsername,¿Olvidaste el nombre de usuario?
 Authentication.Login.Action.ForgotUsernameOrPassword,¿Olvidaste el nombre de usuario o la contraseña?
 Authentication.Login.Action.GetCodeByEmail,Obtener el código por correo electrónico
 Authentication.Login.Action.Google,Google
+Authentication.Login.Action.Leave,Salir
 Authentication.Login.Action.LogInEmailOneTimeCode,Envíame un código de un solo uso
 Authentication.Login.Action.NeedHelp,¿Necesitas ayuda?
 Authentication.Login.Action.Next,
@@ -338,6 +339,7 @@ Authentication.Login.Description.ChooseHowToPlay,Elige cómo quieres jugar
 Authentication.Login.Description.DownloadNewVersion,Esta versión de Roblox no está disponible para tu cuenta. Descarga la versión correcta para continuar.
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,Ingresa el código que te acabamos de enviar a {email}
 Authentication.Login.Description.GetOneTimeCodeHelp,Ingresa el correo electrónico verificado en tu cuenta para recibir un código de un solo uso.
+Authentication.Login.Description.LeaveAccountSetup,"Si sales ahora, tu cuenta de Roblox no se configurará."
 Authentication.Login.Description.PasskeyDescription,"Tu cuenta tiene una llave de acceso, un método de inicio de sesión más seguro que la contraseña. Puedes usar tu huella digital, cara o bloqueo de pantalla para iniciar sesión en este dispositivo."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"No podemos determinar si tu dispositivo es compatible con la llave de acceso. Inténtalo de nuevo o toca ""Problemas al iniciar sesión"" para recuperar tu cuenta con un correo electrónico o número de teléfono."
 Authentication.Login.Description.PasskeyMobileOnly,Las llaves de acceso solo están disponibles en dispositivos móviles. Elige otra forma de iniciar sesión.
@@ -469,7 +471,7 @@ Authentication.SignUp.Action.CreateAPasskey,
 Authentication.SignUp.Action.CreateAccount,
 Authentication.SignUp.Action.CreateAccountSentenceCase,
 Authentication.SignUp.Action.EnableFaceId,Activar Face ID
-Authentication.SignUp.Action.ExitModalLeave,Salir
+Authentication.SignUp.Action.ExitModalLeave,
 Authentication.SignUp.Action.IUnderstand,Entiendo
 Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,Reaparecer ahora
@@ -3044,6 +3046,7 @@ Feature.BuyRobux.Label.MyFriendsWithCount,Mis amistades ({count})
 Feature.BuyRobux.Label.PeopleWithCount,Personas ({count})
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
+Feature.Captures.Title.Captures,Capturas
 Feature.Captures.Title.Gallery,Galería
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
@@ -5818,7 +5821,6 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 m
 Feature.UniversalShareSheet.Response.SharedMessage,El mensaje se envió
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Los mensajes se enviaron
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} más
-Feature.UserLibrary.Label.MyLibrary,Mi biblioteca
 Feature.VIPServer.Message.TooManyFreeServersOnGame,No puedes tener más servidores privados gratuitos en este juego.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,"No puedes tener más servidores privados gratuitos. Primero, tendrás que desactivar algunos."
 Feature.VerificationUpsell.Action.AddPhone,

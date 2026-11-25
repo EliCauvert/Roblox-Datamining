@@ -314,6 +314,7 @@ Authentication.Login.Action.ForgotUsername,Đã quên tên tài khoản?
 Authentication.Login.Action.ForgotUsernameOrPassword,Quên tên tài khoản hoặc mật khẩu?
 Authentication.Login.Action.GetCodeByEmail,Nhận mã qua email
 Authentication.Login.Action.Google,Google
+Authentication.Login.Action.Leave,Rời khỏi
 Authentication.Login.Action.LogInEmailOneTimeCode,Gửi mã một lần cho tôi qua email
 Authentication.Login.Action.NeedHelp,Bạn cần trợ giúp?
 Authentication.Login.Action.Next,
@@ -338,6 +339,7 @@ Authentication.Login.Description.ChooseHowToPlay,Chọn cách chơi mong muốn
 Authentication.Login.Description.DownloadNewVersion,Tài khoản của bạn không thể sử dụng phiên bản Roblox này. Vui lòng tải xuống phiên bản phù hợp để tiếp tục.
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,Nhập mã chúng tôi vừa gửi đến: {email}
 Authentication.Login.Description.GetOneTimeCodeHelp,Nhập email đã xác minh cho tài khoản của bạn để nhận mã một lần.
+Authentication.Login.Description.LeaveAccountSetup,"Nếu rời khỏi ngay lúc này, tài khoản Roblox của bạn sẽ chưa được thiết lập."
 Authentication.Login.Description.PasskeyDescription,"Tài khoản của bạn có mã xác nhận, phương thức đăng nhập an toàn hơn mật khẩu. Bạn có thể sử dụng vân tay, khuôn mặt hoặc khóa màn hình để đăng nhập trên thiết bị này."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"Chúng tôi không thể xác định thiết bị của bạn có hỗ trợ mã xác nhận hay không. Hãy thử lại hoặc chạm vào ""Lỗi Đăng Nhập"" để khôi phục tài khoản của bạn bằng email hoặc số điện thoại."
 Authentication.Login.Description.PasskeyMobileOnly,Mã xác nhận chỉ dùng được trên thiết bị di động. Vui lòng chọn cách đăng nhập khác.
@@ -3043,6 +3045,7 @@ Feature.BuyRobux.Label.MyFriendsWithCount,Bạn bè của tôi ({count})
 Feature.BuyRobux.Label.PeopleWithCount,Mọi người ({count})
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
+Feature.Captures.Title.Captures,Ảnh chụp/Video quay màn hình
 Feature.Captures.Title.Gallery,Thư Viện
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
@@ -5817,7 +5820,6 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 ng
 Feature.UniversalShareSheet.Response.SharedMessage,Tin nhắn đã được gửi
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} người khác
-Feature.UserLibrary.Label.MyLibrary,Thư viện của tôi
 Feature.VIPServer.Message.TooManyFreeServersOnGame,Bạn không thể tạo thêm máy chủ riêng miễn phí trong trò chơi này.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,Số lượng máy chủ riêng tư miễn phí có thể hoạt động cùng lúc đã đạt mức tối đa. Vui lòng tắt máy chủ khác trước.
 Feature.VerificationUpsell.Action.AddPhone,

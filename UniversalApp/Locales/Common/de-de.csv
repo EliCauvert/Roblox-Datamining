@@ -314,6 +314,7 @@ Authentication.Login.Action.ForgotUsername,Benutzernamen vergessen?
 Authentication.Login.Action.ForgotUsernameOrPassword,Benutzername oder Passwort vergessen?
 Authentication.Login.Action.GetCodeByEmail,Code per E-Mail erhalten
 Authentication.Login.Action.Google,Google
+Authentication.Login.Action.Leave,Verlassen
 Authentication.Login.Action.LogInEmailOneTimeCode,Einmaligen Code per E-Mail senden
 Authentication.Login.Action.NeedHelp,Brauchst du Hilfe?
 Authentication.Login.Action.Next,
@@ -338,6 +339,7 @@ Authentication.Login.Description.ChooseHowToPlay,"Wähle aus, wie du spielen mö
 Authentication.Login.Description.DownloadNewVersion,"Diese Version von Roblox ist für dein Konto nicht verfügbar. Bitte lade die richtige Version herunter, um fortzufahren."
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,"Gib den Code ein, den wir gerade an {email} gesendet haben"
 Authentication.Login.Description.GetOneTimeCodeHelp,"Gib die auf deinem Konto verifizierte E-Mail ein, um einen einmaligen Code zu erhalten."
+Authentication.Login.Description.LeaveAccountSetup,"Wenn du jetzt gehst, wird dein Roblox-Konto nicht eingerichtet."
 Authentication.Login.Description.PasskeyDescription,"Dein Konto hat Passkey. Diese Anmeldemethode ist sicherer, als ein Passwort zu verwenden. Du kannst dich auf diesem Gerät mit deinem Fingerabdruck, deinem Gesicht oder der Bildschirmsperre anmelden."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"Wir können nicht feststellen, ob dein Gerät Passkey unterstützt. Versuche es erneut oder tippe auf ""Probleme bei der Anmeldung"", um dein Konto mit einer E-Mail-Adresse oder Telefonnummer wiederherzustellen."
 Authentication.Login.Description.PasskeyMobileOnly,"Passkeys sind nur auf Mobilgeräten verfügbar. Versuche, dich auf eine andere Weise anzumelden."
@@ -469,7 +471,7 @@ Authentication.SignUp.Action.CreateAPasskey,
 Authentication.SignUp.Action.CreateAccount,
 Authentication.SignUp.Action.CreateAccountSentenceCase,
 Authentication.SignUp.Action.EnableFaceId,Face ID aktivieren
-Authentication.SignUp.Action.ExitModalLeave,Verlassen
+Authentication.SignUp.Action.ExitModalLeave,
 Authentication.SignUp.Action.IUnderstand,Ich verstehe
 Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,Jetzt respawnen
@@ -3033,6 +3035,7 @@ Feature.BuyRobux.Label.MyFriendsWithCount,Meine Freunde ({count})
 Feature.BuyRobux.Label.PeopleWithCount,Personen ({count})
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
+Feature.Captures.Title.Captures,Aufnahmen
 Feature.Captures.Title.Gallery,Galerie
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
@@ -5802,7 +5805,6 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 we
 Feature.UniversalShareSheet.Response.SharedMessage,Nachricht wurde gesendet
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Nachrichten wurden gesendet
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} weitere
-Feature.UserLibrary.Label.MyLibrary,Meine Bibliothek
 Feature.VIPServer.Message.TooManyFreeServersOnGame,Du kannst keine zusätzlichen kostenlosen privaten Server für dieses Spiel haben.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,Du kannst keine zusätzlichen aktiven kostenlosen privaten Server haben. Bitte deaktiviere erst einige deiner anderen Server.
 Feature.VerificationUpsell.Action.AddPhone,

@@ -314,6 +314,7 @@ Authentication.Login.Action.ForgotUsername,Lupa nama pengguna?
 Authentication.Login.Action.ForgotUsernameOrPassword,Lupa nama pengguna atau password?
 Authentication.Login.Action.GetCodeByEmail,Dapatkan kode melalui email
 Authentication.Login.Action.Google,Google
+Authentication.Login.Action.Leave,Keluar
 Authentication.Login.Action.LogInEmailOneTimeCode,Kirimi Saya Kode Sekali Pakai
 Authentication.Login.Action.NeedHelp,Butuh bantuan?
 Authentication.Login.Action.Next,
@@ -338,6 +339,7 @@ Authentication.Login.Description.ChooseHowToPlay,Pilih cara bermain yang kamu in
 Authentication.Login.Description.DownloadNewVersion,Versi Roblox ini tidak tersedia untuk akunmu. Download versi yang sesuai untuk melanjutkan.
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,Masukkan kode yang baru saja kami kirim ke: {email}
 Authentication.Login.Description.GetOneTimeCodeHelp,Masukkan email terverifikasi di akun kamu untuk menerima kode sekali pakai.
+Authentication.Login.Description.LeaveAccountSetup,"Jika kamu keluar sekarang, akun Roblox-mu tidak akan selesai."
 Authentication.Login.Description.PasskeyDescription,"Akunmu memiliki passkey, yaitu metode log in yang lebih aman daripada password. Kamu bisa menggunakan sidik jari, wajah, atau kunci layar untuk log in di perangkat ini."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,Kami tidak bisa menentukan apakah perangkatmu mendukung passkey. Coba lagi atau ketuk “Masalah log in” untuk memulihkan akunmu dengan email atau nomor ponsel.
 Authentication.Login.Description.PasskeyMobileOnly,Passkey hanya tersedia di ponsel. Pilih cara lain untuk log in.
@@ -469,7 +471,7 @@ Authentication.SignUp.Action.CreateAPasskey,
 Authentication.SignUp.Action.CreateAccount,Buat Akun
 Authentication.SignUp.Action.CreateAccountSentenceCase,
 Authentication.SignUp.Action.EnableFaceId,Aktifkan ID Wajah
-Authentication.SignUp.Action.ExitModalLeave,Keluar
+Authentication.SignUp.Action.ExitModalLeave,
 Authentication.SignUp.Action.IUnderstand,Saya Mengerti
 Authentication.SignUp.Action.NextWord,Berikutnya
 Authentication.SignUp.Action.RespawnNow,Respawn sekarang
@@ -3043,6 +3045,7 @@ Feature.BuyRobux.Label.MyFriendsWithCount,Teman saya ({count})
 Feature.BuyRobux.Label.PeopleWithCount,Pengguna ({count})
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
+Feature.Captures.Title.Captures,Media
 Feature.Captures.Title.Gallery,Galeri
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
@@ -4032,7 +4035,7 @@ Feature.GameDetails.Action.Undo,
 Feature.GameDetails.Action.Unlock,
 Feature.GameDetails.Action.WhyThisAd,Kenapa saya melihat iklan ini
 Feature.GameDetails.Heading.FeaturedSongs,Lagu Teratas di {experienceName}
-Feature.GameDetails.Heading.Media,Media
+Feature.GameDetails.Heading.Media,
 Feature.GameDetails.Heading.PurchaseGame,Buka Kunci Pengalaman Virtual Ini
 Feature.GameDetails.Heading.Recommended,
 Feature.GameDetails.Label.Age,
@@ -5815,7 +5818,6 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 la
 Feature.UniversalShareSheet.Response.SharedMessage,Pesan terkirim
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Beberapa pesan terkirim
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} lainnya
-Feature.UserLibrary.Label.MyLibrary,Perpustakaan Saya
 Feature.VIPServer.Message.TooManyFreeServersOnGame,Jumlah server privat gratis di game ini sudah mencapai maksimum.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,Jumlah server privat gratis sudah mencapai maksimum. Nonaktifkan beberapa server lainnya terlebih dahulu.
 Feature.VerificationUpsell.Action.AddPhone,

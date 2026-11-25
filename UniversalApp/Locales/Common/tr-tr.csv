@@ -314,6 +314,7 @@ Authentication.Login.Action.ForgotUsername,Kullanıcı adını mı unuttun?
 Authentication.Login.Action.ForgotUsernameOrPassword,Kullanıcı adını veya şifreni mi unuttun?
 Authentication.Login.Action.GetCodeByEmail,Kodu e-posta ile al
 Authentication.Login.Action.Google,Google
+Authentication.Login.Action.Leave,Ayrıl
 Authentication.Login.Action.LogInEmailOneTimeCode,Tek Kullanımlık Kodu Bana E-postayla Gönder
 Authentication.Login.Action.NeedHelp,Yardıma mı ihtiyacın var?
 Authentication.Login.Action.Next,
@@ -338,6 +339,7 @@ Authentication.Login.Description.ChooseHowToPlay,Nasıl oynamak istediğini seç
 Authentication.Login.Description.DownloadNewVersion,Roblox'un bu sürümü hesabında kullanılamıyor. Devam etmek için lütfen doğru sürümü indir.
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,Az önce {email} adresine gönderdiğimiz kodu gir.
 Authentication.Login.Description.GetOneTimeCodeHelp,Tek kullanımlık kod almak için hesabında doğruladığın e-posta adresini gir.
+Authentication.Login.Description.LeaveAccountSetup,Şimdi ayrılırsan Roblox hesabın oluşturulmayacak.
 Authentication.Login.Description.PasskeyDescription,"Hesabında şifreden daha güvenli bir giriş yöntemi olan geçiş anahtarı bulunuyor. Bu cihazda giriş yapmak için parmak izini, yüzünü veya ekran kilidini kullanabilirsin."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"Cihazının geçiş anahtarlarını destekleyip desteklemediğini belirleyemiyoruz. Tekrar dene ya da hesabını e-posta veya telefon numarasıyla kurtarmak için ""Giriş yaparken sorun mu yaşıyorsun"" seçeneğine dokun."
 Authentication.Login.Description.PasskeyMobileOnly,Geçiş anahtarları yalnızca mobil cihazlarda kullanılabilir. Giriş yapmak için başka bir yöntem seç.
@@ -469,7 +471,7 @@ Authentication.SignUp.Action.CreateAPasskey,
 Authentication.SignUp.Action.CreateAccount,Hesap Oluştur
 Authentication.SignUp.Action.CreateAccountSentenceCase,
 Authentication.SignUp.Action.EnableFaceId,Face ID'yi etkinleştir
-Authentication.SignUp.Action.ExitModalLeave,Ayrıl
+Authentication.SignUp.Action.ExitModalLeave,
 Authentication.SignUp.Action.IUnderstand,Anladım
 Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,Şimdi sıfırla
@@ -2999,6 +3001,7 @@ Feature.BuyRobux.Label.MyFriendsWithCount,Arkadaşlarım ({count})
 Feature.BuyRobux.Label.PeopleWithCount,İnsanlar ({count})
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
+Feature.Captures.Title.Captures,Yakalamalar
 Feature.Captures.Title.Gallery,Galeri
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
@@ -3873,7 +3876,7 @@ Feature.Friends.Label.FollowsYou,Seni Takip Ediyor
 Feature.Friends.Label.Frequent,Beraber oynadınız
 Feature.Friends.Label.Friend,Arkadaş
 Feature.Friends.Label.FriendInvite,Seni Roblox'ta arkadaş olmaya davet etti
-Feature.Friends.Label.FriendOfUser,{displayName} ile arkadaş
+Feature.Friends.Label.FriendOfUser,Senin için önerilenler
 Feature.Friends.Label.FriendOwns,1 Arkadaşında var
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 Arkadaşın</b> yakın zamanda oynadı
 Feature.Friends.Label.FriendRequest,
@@ -5773,7 +5776,6 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE}: 1 ki�
 Feature.UniversalShareSheet.Response.SharedMessage,Mesaj gönderildi
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Mesajlar gönderildi
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE}: {N} kişiyle daha
-Feature.UserLibrary.Label.MyLibrary,Kütüphanem
 Feature.VIPServer.Message.TooManyFreeServersOnGame,Bu oyunda daha fazla ücretsiz özel sunucuya sahip olamazsın.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,Daha fazla etkin ücretsiz özel sunucuya sahip olamazsın. Lütfen önce diğer birkaç sunucuyu devre dışı bırak.
 Feature.VerificationUpsell.Action.AddPhone,

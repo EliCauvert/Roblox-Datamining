@@ -297,6 +297,7 @@ Authentication.Login.Action.ForgotUsername,ลืมชื่อผู้ใช�
 Authentication.Login.Action.ForgotUsernameOrPassword,ลืมชื่อผู้ใช้หรือรหัสผ่านใช่ไหม?
 Authentication.Login.Action.GetCodeByEmail,รับรหัสทางอีเมล
 Authentication.Login.Action.Google,Google
+Authentication.Login.Action.Leave,ออก
 Authentication.Login.Action.LogInEmailOneTimeCode,ส่งรหัสแบบใช้ครั้งเดียวให้ฉันทางอีเมล
 Authentication.Login.Action.NeedHelp,ต้องการความช่วยเหลือใช่หรือไม่?
 Authentication.Login.Action.Next,
@@ -321,6 +322,7 @@ Authentication.Login.Description.ChooseHowToPlay,เลือกวิธีท�
 Authentication.Login.Description.DownloadNewVersion,บัญชีของคุณไม่สามารถใช้ Roblox เวอร์ชันนี้ได้ โปรดดาวน์โหลดเวอร์ชันที่ถูกต้องเพื่อดำเนินการต่อ
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,กรอกรหัสที่เราเพิ่งส่งไปยัง: {email}
 Authentication.Login.Description.GetOneTimeCodeHelp,กรอกอีเมลที่ตรวจสอบยืนยันแล้วในบัญชีของคุณเพื่อรับรหัสแบบใช้ครั้งเดียว
+Authentication.Login.Description.LeaveAccountSetup,หากออกตอนนี้ บัญชี Roblox ของคุณจะยังตั้งค่าไม่เสร็จ
 Authentication.Login.Description.PasskeyDescription,บัญชีของคุณมีพาสคีย์ ซึ่งเป็นวิธีลงชื่อเข้าใช้ที่ปลอดภัยกว่ารหัสผ่าน คุณใช้ลายนิ้วมือ ใบหน้า หรือการล็อคหน้าจอเพื่อเข้าสู่ระบบบนอุปกรณ์นี้ได้
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,เราไม่สามารถระบุได้ว่าอุปกรณ์ของคุณรองรับพาสคีย์หรือไม่ โปรดลองอีกครั้งหรือแตะ “ปัญหาในการเข้าสู่ระบบ” เพื่อกู้คืนบัญชีของคุณด้วยอีเมลหรือหมายเลขโทรศัพท์
 Authentication.Login.Description.PasskeyMobileOnly,ใช้พาสคีย์ได้เฉพาะบนมือถือ โปรดเลือกวิธีอื่นในการลงชื่อเข้าใช้
@@ -452,7 +454,7 @@ Authentication.SignUp.Action.CreateAPasskey,
 Authentication.SignUp.Action.CreateAccount,
 Authentication.SignUp.Action.CreateAccountSentenceCase,
 Authentication.SignUp.Action.EnableFaceId,เปิดใช้งาน Face ID
-Authentication.SignUp.Action.ExitModalLeave,ออก
+Authentication.SignUp.Action.ExitModalLeave,
 Authentication.SignUp.Action.IUnderstand,ฉันเข้าใจ
 Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,เกิดใหม่ตอนนี้เลย
@@ -3026,6 +3028,7 @@ Feature.BuyRobux.Label.MyFriendsWithCount,เพื่อนของฉัน (
 Feature.BuyRobux.Label.PeopleWithCount,ผู้ใช้ ({count})
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
+Feature.Captures.Title.Captures,จับภาพ
 Feature.Captures.Title.Gallery,แกลลอรี
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
@@ -5800,7 +5803,6 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + อ�
 Feature.UniversalShareSheet.Response.SharedMessage,ส่งข้อความแล้ว
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + อีก {N} คน
-Feature.UserLibrary.Label.MyLibrary,คลังของฉัน
 Feature.VIPServer.Message.TooManyFreeServersOnGame,คุณไม่สามารถเพิ่มเซิร์ฟเวอร์ส่วนตัวฟรีในเกมนี้ได้อีก
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,คุณไม่สามารถเพิ่มเซิร์ฟเวอร์ส่วนตัวฟรีที่เปิดใช้งานอยู่ได้อีก โปรดปิดใช้งานบางเซิร์ฟเวอร์ก่อน
 Feature.VerificationUpsell.Action.AddPhone,

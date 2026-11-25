@@ -1324,6 +1324,7 @@ Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,Заблокировать: {DisplayName}?
 Feature.BuyRobux.Heading.Banner,Купить Robux
 Feature.Call.Error.Description.Generic,
+Feature.Captures.Title.Captures,Захват экрана
 Feature.Captures.Title.Gallery,Галерея
 Feature.Catalog.Action.Buy,Купить
 Feature.Catalog.Action.Cancel,

@@ -297,6 +297,7 @@ Authentication.Login.Action.ForgotUsername,यूज़रनेम भूल �
 Authentication.Login.Action.ForgotUsernameOrPassword,यूज़रनेम या पासवर्ड याद नहीं है?
 Authentication.Login.Action.GetCodeByEmail,ईमेल से कोड पाएँ
 Authentication.Login.Action.Google,Google
+Authentication.Login.Action.Leave,छोड़ें
 Authentication.Login.Action.LogInEmailOneTimeCode,मुझे वन-टाइम कोड ईमेल करें
 Authentication.Login.Action.NeedHelp,मदद चाहिए?
 Authentication.Login.Action.Next,
@@ -321,6 +322,7 @@ Authentication.Login.Description.ChooseHowToPlay,अपने खेलने �
 Authentication.Login.Description.DownloadNewVersion,"Roblox का यह वर्ज़न आपके अकाउंट के लिए उपलब्ध नहीं है. जारी रखने के लिए, कृपया सही वर्ज़न डाउनलोड करें."
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,अभी-अभी आपके इस ईमेल पर भेजा गया कोड डालें : {email}
 Authentication.Login.Description.GetOneTimeCodeHelp,"वन-टाइम कोड पाने के लिए, अपना वेरिफ़ाइड ईमेल डालें."
+Authentication.Login.Description.LeaveAccountSetup,"अगर आपने अभी छोड़ा, तो आपका Roblox अकाउंट सेट अप नहीं होगा."
 Authentication.Login.Description.PasskeyDescription,"आपका अकाउंट पास-की का इस्तेमाल करता है. यह पासवर्ड से ज़्यादा सुरक्षित है. आप इस डिवाइस पर अपने फ़िंगरप्रिंट, फ़ेस या स्क्रीन लॉक से साइन इन कर सकते हैं."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"हम यह नहीं तय कर सकते कि आपका डिवाइस पास-की का सपोर्ट करता है या नहीं. ईमेल या फ़ोन इस्तेमाल करके, अपना अकाउंट रिकवर करने के लिए फिर से कोशिश करें या “साइन इन करने में समस्या” पर टैप करें."
 Authentication.Login.Description.PasskeyMobileOnly,पास-की सिर्फ़ मोबाइल पर उपलब्ध हैं. साइन-इन करने का कोई दूसरा तरीका चुनें.
@@ -452,7 +454,7 @@ Authentication.SignUp.Action.CreateAPasskey,पास-की क्रिएट 
 Authentication.SignUp.Action.CreateAccount,अकाउंट बनाएँ
 Authentication.SignUp.Action.CreateAccountSentenceCase,
 Authentication.SignUp.Action.EnableFaceId,Face ID चालू करें
-Authentication.SignUp.Action.ExitModalLeave,छोड़ें
+Authentication.SignUp.Action.ExitModalLeave,
 Authentication.SignUp.Action.IUnderstand,मैं सहमत हूँ
 Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,अभी रीस्पॉन करें
@@ -3023,6 +3025,7 @@ Feature.BuyRobux.Label.MyFriendsWithCount,मेरे फ़्रेंड्�
 Feature.BuyRobux.Label.PeopleWithCount,लोग ({count})
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
+Feature.Captures.Title.Captures,कैप्चर
 Feature.Captures.Title.Gallery,गैलरी
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
@@ -3897,7 +3900,7 @@ Feature.Friends.Label.FollowsYou,आपको फ़ॉलो करता ह�
 Feature.Friends.Label.Frequent,एक साथ खेले
 Feature.Friends.Label.Friend,फ़्रेंड
 Feature.Friends.Label.FriendInvite,Roblox पर फ़्रेंड्स बनने के लिए इनवाइट किया है
-Feature.Friends.Label.FriendOfUser,{displayName} का फ़्रेंड
+Feature.Friends.Label.FriendOfUser,
 Feature.Friends.Label.FriendOwns,1 फ़्रेंड के पास है
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 फ़्रेंड ने</b> हाल ही में खेला
 Feature.Friends.Label.FriendRequest,
@@ -5796,7 +5799,6 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 �
 Feature.UniversalShareSheet.Response.SharedMessage,मैसेज भेजा गया
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,मैसेज भेजे गए
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} अन्य
-Feature.UserLibrary.Label.MyLibrary,मेरी लाइब्रेरी
 Feature.VIPServer.Message.TooManyFreeServersOnGame,आपको इस गेम पर और फ़्री प्राइवेट सर्वर नहीं मिल सकते.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,आपके पास ज़्यादा ऐक्टिव फ़्री प्राइवेट सर्वर नहीं हो सकते. पहले कुछ और सर्वर डीऐक्टिवेट करें.
 Feature.VerificationUpsell.Action.AddPhone,

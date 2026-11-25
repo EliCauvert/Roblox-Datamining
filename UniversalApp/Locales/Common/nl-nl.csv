@@ -297,6 +297,7 @@ Authentication.Login.Action.ForgotUsername,Gebruikersnaam vergeten?
 Authentication.Login.Action.ForgotUsernameOrPassword,Je gebruikersnaam of wachtwoord vergeten?
 Authentication.Login.Action.GetCodeByEmail,Code per e-mail ontvangen
 Authentication.Login.Action.Google,Google
+Authentication.Login.Action.Leave,Afsluiten
 Authentication.Login.Action.LogInEmailOneTimeCode,Stuur me een unieke code per e-mail
 Authentication.Login.Action.NeedHelp,Hulp nodig?
 Authentication.Login.Action.Next,
@@ -321,6 +322,7 @@ Authentication.Login.Description.ChooseHowToPlay,Kies hoe je wilt spelen
 Authentication.Login.Description.DownloadNewVersion,Deze versie van Roblox is niet beschikbaar voor je account. Download de juiste versie om door te gaan.
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,Voer de code in die we zojuist hebben gestuurd naar: {email}
 Authentication.Login.Description.GetOneTimeCodeHelp,Voer het e-mailadres in dat is geverifieerd op je account om een unieke code te ontvangen.
+Authentication.Login.Description.LeaveAccountSetup,"Als je nu stopt, wordt je Roblox-account niet ingesteld."
 Authentication.Login.Description.PasskeyDescription,"Je account heeft een toegangssleutel, een veiligere aanmeldingsmethode dan een wachtwoord. Je kunt je vingerafdruk, gezicht of schermvergrendeling gebruiken om je op dit apparaat aan te melden."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,We kunnen niet bepalen of je apparaat een toegangssleutel ondersteunt. Probeer het opnieuw of tik op 'Problemen bij het inloggen' om je account te herstellen met een e-mailadres of telefoonnummer.
 Authentication.Login.Description.PasskeyMobileOnly,Toegangssleutels zijn alleen beschikbaar op mobiele apparaten. Kies een andere manier om je aan te melden.
@@ -452,7 +454,7 @@ Authentication.SignUp.Action.CreateAPasskey,Een passkey aanmaken
 Authentication.SignUp.Action.CreateAccount,
 Authentication.SignUp.Action.CreateAccountSentenceCase,
 Authentication.SignUp.Action.EnableFaceId,Face-ID inschakelen
-Authentication.SignUp.Action.ExitModalLeave,Afsluiten
+Authentication.SignUp.Action.ExitModalLeave,
 Authentication.SignUp.Action.IUnderstand,Begrepen
 Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,Nu respawnen
@@ -3025,6 +3027,7 @@ Feature.BuyRobux.Label.MyFriendsWithCount,Mijn vrienden ({count})
 Feature.BuyRobux.Label.PeopleWithCount,Personen ({count})
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
+Feature.Captures.Title.Captures,Opnames
 Feature.Captures.Title.Gallery,Galerij
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
@@ -5799,7 +5802,6 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 an
 Feature.UniversalShareSheet.Response.SharedMessage,Bericht is verzonden
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Berichten zijn verzonden
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} anderen
-Feature.UserLibrary.Label.MyLibrary,Mijn bibliotheek
 Feature.VIPServer.Message.TooManyFreeServersOnGame,Je kunt niet nog meer gratis privéservers hebben voor deze game.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,Je kunt niet meer actieve gratis privéservers hebben. Deactiveer eerst een aantal andere servers.
 Feature.VerificationUpsell.Action.AddPhone,

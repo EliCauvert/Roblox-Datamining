@@ -297,6 +297,7 @@ Authentication.Login.Action.ForgotUsername,忘记用户名？
 Authentication.Login.Action.ForgotUsernameOrPassword,忘记了用户名或密码？
 Authentication.Login.Action.GetCodeByEmail,通过电子邮件获取验证码
 Authentication.Login.Action.Google,Google
+Authentication.Login.Action.Leave,离开
 Authentication.Login.Action.LogInEmailOneTimeCode,通过电子邮件向我发送一次性验证码
 Authentication.Login.Action.NeedHelp,需要帮助？
 Authentication.Login.Action.Next,
@@ -321,6 +322,7 @@ Authentication.Login.Description.ChooseHowToPlay,选择你的游玩方式
 Authentication.Login.Description.DownloadNewVersion,你的帐户无法使用此版本的 Roblox。请下载正确版本以继续。
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,请输入我们发送至 {email} 的验证码
 Authentication.Login.Description.GetOneTimeCodeHelp,请输入你帐户中已验证的电子邮件来接收一次性验证码。
+Authentication.Login.Description.LeaveAccountSetup,如果现在离开，你的 Roblox 帐户将无法完成设置。
 Authentication.Login.Description.PasskeyDescription,你的帐户有通行密钥，这是比密码更安全地登录方式。你可以使用指纹、面部或屏幕锁定在此设备上登录。
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,我们无法确定你的设备是否支持通行密钥。请重试，或点按“登录有问题”来使用电子邮件或手机号码恢复你的帐户。
 Authentication.Login.Description.PasskeyMobileOnly,通行密钥仅适用于移动设备。请选择其他方式登录。
@@ -452,7 +454,7 @@ Authentication.SignUp.Action.CreateAPasskey,
 Authentication.SignUp.Action.CreateAccount,
 Authentication.SignUp.Action.CreateAccountSentenceCase,
 Authentication.SignUp.Action.EnableFaceId,启用面容 ID
-Authentication.SignUp.Action.ExitModalLeave,离开
+Authentication.SignUp.Action.ExitModalLeave,
 Authentication.SignUp.Action.IUnderstand,我了解
 Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,立即重生
@@ -3024,6 +3026,7 @@ Feature.BuyRobux.Label.MyFriendsWithCount,我的好友（{count} 位）
 Feature.BuyRobux.Label.PeopleWithCount,用户（{count} 个）
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
+Feature.Captures.Title.Captures,截屏
 Feature.Captures.Title.Gallery,图库
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
@@ -3896,7 +3899,7 @@ Feature.Friends.Label.FollowsYou,已关注了你
 Feature.Friends.Label.Frequent,一起玩过
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,已邀请你成为 Roblox 好友
-Feature.Friends.Label.FriendOfUser,{displayName}的好友
+Feature.Friends.Label.FriendOfUser,
 Feature.Friends.Label.FriendOwns,1 位好友拥有
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 位好友</b>最近玩过
 Feature.Friends.Label.FriendRequest,
@@ -5794,7 +5797,6 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE}和另�
 Feature.UniversalShareSheet.Response.SharedMessage,信息已发送
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE}和另外 {N} 人
-Feature.UserLibrary.Label.MyLibrary,我的资源库
 Feature.VIPServer.Message.TooManyFreeServersOnGame,你无法为此游戏添加更多免费私人服务器。
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,您无法激活更多免费私人服务器。请先关闭一些其他的服务器。
 Feature.VerificationUpsell.Action.AddPhone,添加手机

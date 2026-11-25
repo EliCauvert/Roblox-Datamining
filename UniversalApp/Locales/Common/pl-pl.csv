@@ -314,6 +314,7 @@ Authentication.Login.Action.ForgotUsername,Nie pamiętasz nazwy użytkownika?
 Authentication.Login.Action.ForgotUsernameOrPassword,Nie pamiętasz nazwy użytkownika lub hasła?
 Authentication.Login.Action.GetCodeByEmail,Otrzymaj kod e-mailem
 Authentication.Login.Action.Google,Google
+Authentication.Login.Action.Leave,Wyjdź
 Authentication.Login.Action.LogInEmailOneTimeCode,Wyślij kod jednorazowy na mój adres e-mail
 Authentication.Login.Action.NeedHelp,Potrzebujesz pomocy?
 Authentication.Login.Action.Next,
@@ -338,6 +339,7 @@ Authentication.Login.Description.ChooseHowToPlay,"Wybierz, jak chcesz grać"
 Authentication.Login.Description.DownloadNewVersion,"Ta wersja Robloxa nie jest dostępna na Twoim koncie. Pobierz odpowiednią wersję, aby kontynuować."
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,"Wprowadź kod, który właśnie wysłaliśmy na adres {email}"
 Authentication.Login.Description.GetOneTimeCodeHelp,"Aby otrzymać kod jednorazowy, wprowadź adres e-mail zweryfikowany na twoim koncie."
+Authentication.Login.Description.LeaveAccountSetup,"Jeśli wyjdziesz teraz, Twoje konto Roblox nie zostanie skonfigurowane."
 Authentication.Login.Description.PasskeyDescription,"Na twoim koncie używany jest klucz dostępu – bezpieczniejsza metoda logowania niż hasło. Na tym urządzeniu możesz logować się, używając odcisku palca, twarzy lub blokady ekranu."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"Nie jesteśmy w stanie ustalić, czy twoje urządzenie obsługuje klucz dostępu. Spróbuj ponownie lub dotknij opcji „Kłopoty z logowaniem”, aby odzyskać konto za pomocą adresu e-mail lub numeru telefonu."
 Authentication.Login.Description.PasskeyMobileOnly,Klucze dostępu są dostępne wyłącznie na urządzeniach mobilnych. Wybierz inny sposób logowania.
@@ -1201,7 +1203,7 @@ CommonUI.UserAgreements.Popup.VNSignupMessage,"Klikając „Zgadzam się”, akc
 CoreScripts.Ads.Label.SponsoredAds,Sponsorowane
 CoreScripts.Ads.Label.SponsoredAdsDisclosureStatic,"Projekty sponsorowane są opłacane przez twórców. W przypadku użytkowników z UE mogą być wyświetlane na podstawie informacji ogólnych dotyczących typu używanego urządzenia, lokalizacji oraz danych demograficznych. W przypadku użytkowników spoza UE mogą być wyświetlane również na podstawie dodatkowych informacji."
 CoreScripts.BulkPurchasePrompt.CompletedPrompt.SuccessHeading,Zrealizowano zakup
-CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,Wyjdź
+CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,
 CoreScripts.InGameMenu.Actions.Continue,
 CoreScripts.InGameMenu.Cancel,
 CoreScripts.InGameMenu.Controls.RobloxMenu,Menu Robloxa
@@ -3043,6 +3045,7 @@ Feature.BuyRobux.Label.MyFriendsWithCount,Moi znajomi ({count})
 Feature.BuyRobux.Label.PeopleWithCount,Osoby ({count})
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
+Feature.Captures.Title.Captures,Przechwycone
 Feature.Captures.Title.Gallery,Galeria
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
@@ -5817,7 +5820,6 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} i jesz
 Feature.UniversalShareSheet.Response.SharedMessage,Wiadomość została wysłana
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Wiadomości zostały wysłane
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} i jeszcze {N} osobom
-Feature.UserLibrary.Label.MyLibrary,Moja biblioteka
 Feature.VIPServer.Message.TooManyFreeServersOnGame,Osiągnięto limit darmowych serwerów prywatnych dla tej gry.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,Osiągnięto limit aktywnych darmowych serwerów prywatnych. Najpierw dezaktywuj niektóre z innych serwerów.
 Feature.VerificationUpsell.Action.AddPhone,

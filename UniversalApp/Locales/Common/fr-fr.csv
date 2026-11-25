@@ -314,6 +314,7 @@ Authentication.Login.Action.ForgotUsername,Nom d'utilisateur oublié ?
 Authentication.Login.Action.ForgotUsernameOrPassword,Nom d'utilisateur ou mot de passe oublié ?
 Authentication.Login.Action.GetCodeByEmail,Recevoir le code par e-mail
 Authentication.Login.Action.Google,Google
+Authentication.Login.Action.Leave,
 Authentication.Login.Action.LogInEmailOneTimeCode,Envoyez-moi un code unique par email
 Authentication.Login.Action.NeedHelp,Besoin d'aide?
 Authentication.Login.Action.Next,
@@ -338,6 +339,7 @@ Authentication.Login.Description.ChooseHowToPlay,Choisis ton mode de jeu
 Authentication.Login.Description.DownloadNewVersion,Cette version de Roblox n'est pas disponible pour ton compte. Télécharge la version requise pour continuer.
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,Entre le code que nous venons d'envoyer à : {email}
 Authentication.Login.Description.GetOneTimeCodeHelp,Entre l'email vérifié sur ton compte pour recevoir un code unique.
+Authentication.Login.Description.LeaveAccountSetup,"Si tu quittes cette page maintenant, ton compte Roblox ne sera pas configuré."
 Authentication.Login.Description.PasskeyDescription,"Ton compte dispose de passkey, une méthode de connexion plus sûre que le mot de passe. Tu peux utiliser ton empreinte digitale, ton visage ou le verrouillage de l'écran pour te connecter sur cet appareil."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"Nous ne pouvons pas déterminer si ton appareil prend en charge le passkey. Essaie à nouveau, ou appuie sur « Problème de connexion » pour récupérer ton compte avec un email ou un numéro de téléphone."
 Authentication.Login.Description.PasskeyMobileOnly,Les passkeys sont uniquement disponibles sur mobile. Choisis une autre méthode de connexion.
@@ -3043,6 +3045,7 @@ Feature.BuyRobux.Label.MyFriendsWithCount,Mes amis ({count})
 Feature.BuyRobux.Label.PeopleWithCount,Personnes ({count})
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
+Feature.Captures.Title.Captures,Captures
 Feature.Captures.Title.Gallery,Galerie
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
@@ -5817,7 +5820,6 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 
 Feature.UniversalShareSheet.Response.SharedMessage,Le message a bien été envoyé
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Les messages ont bien été envoyés
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} autres
-Feature.UserLibrary.Label.MyLibrary,Ma bibliothèque
 Feature.VIPServer.Message.TooManyFreeServersOnGame,Tu ne peux pas avoir davantage de serveurs privés gratuits pour ce jeu.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,Tu ne peux pas avoir plus de serveurs privés gratuits actifs. Essaie de désactiver d'autres serveurs d'abord.
 Feature.VerificationUpsell.Action.AddPhone,
