@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "11c4e73b-b1b7-39bf-c497-9c81d37d1391")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "5d8d0b0b-7348-9425-e1ee-cf535b4615fb")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 796701, (e, t, a) => {
@@ -707,8 +707,8 @@
                 primaryActionLinkTarget: h,
                 onPrimaryAction: b,
                 secondaryActionLabel: T,
-                secondaryActionHref: w,
-                secondaryActionLinkTarget: x,
+                secondaryActionHref: x,
+                secondaryActionLinkTarget: w,
                 onSecondaryAction: E,
                 hasCloseAffordance: k = !0,
                 closeLabel: I = "Dismiss alert",
@@ -731,8 +731,8 @@
             }));
             let j = R ? o.default.createElement(p, {
                 label: T || "",
-                href: w,
-                linkTarget: x,
+                href: x,
+                linkTarget: w,
                 onAction: E,
                 variant: "Utility"
             }) : null;
@@ -822,7 +822,7 @@
             }, l), T = v && a.default.createElement("span", {
                 className: (0, t.U)("content-emphasis flex-shrink-0", n),
                 "aria-hidden": "true"
-            }, c), w = (g || v) && a.default.createElement("div", {
+            }, c), x = (g || v) && a.default.createElement("div", {
                 className: "flex justify-between width-full gap-xsmall"
             }, g ? b : a.default.createElement("span", null), v ? T : a.default.createElement("span", null));
             return a.default.createElement("div", {
@@ -838,7 +838,7 @@
                 className: "flex items-center gap-small width-full"
             }, b, h, T) : a.default.createElement("div", {
                 className: "flex flex-col gap-small width-full"
-            }, "Top" === u && w, h, "Bottom" === u && w))
+            }, "Top" === u && x, h, "Bottom" === u && x))
         });
     i.displayName = "ProgressBar", e.s(["f", 0, i])
 }, 735807, e => {
@@ -1115,8 +1115,8 @@
     var h = e.i(463146),
         b = e.i(605),
         T = e.i(176522),
-        w = e.i(455596),
-        x = (t = new WeakMap, class extends w.f {
+        x = e.i(455596),
+        w = (t = new WeakMap, class extends x.f {
             build(e, t, a) {
                 var n;
                 let i = t.queryKey,
@@ -1198,7 +1198,7 @@
             }
         }),
         E = e.i(769747),
-        k = w,
+        k = x,
         I = (a = new WeakMap, n = new WeakMap, i = new WeakMap, class extends k.f {
             build(e, t, a) {
                 let n = new E.I({
@@ -1539,7 +1539,7 @@
                 }), (0, m._)(this, p, {
                     writable: !0,
                     value: void 0
-                }), (0, g._)(this, r, e.queryCache || new x), (0, g._)(this, s, e.mutationCache || new I), (0, g._)(this, o, e.defaultOptions || {}), (0, g._)(this, l, new Map), (0, g._)(this, c, new Map), (0, g._)(this, u, 0)
+                }), (0, g._)(this, r, e.queryCache || new w), (0, g._)(this, s, e.mutationCache || new I), (0, g._)(this, o, e.defaultOptions || {}), (0, g._)(this, l, new Map), (0, g._)(this, c, new Map), (0, g._)(this, u, 0)
             }
         });
     e.s(["f", 0, O], 436089)
@@ -1565,8 +1565,8 @@
         h = e.i(92174),
         b = e.i(926415),
         T = e.i(481186),
-        w = e.i(426173),
-        x = e.i(242002);
+        x = e.i(426173),
+        w = e.i(242002);
     let E = (0, e.i(157700).e)({
         namespace: "game-engine-geometry",
         name: "enableMeshTextureApiRemoveIdVerification",
@@ -2547,7 +2547,7 @@
             contextType: "static"
         }
     }, {
-        flag: w.b,
+        flag: x.b,
         metadata: {
             namespace: "financial-platform",
             name: "ShowDevExWithholdingAmount",
@@ -2556,7 +2556,7 @@
             contextType: "static"
         }
     }, {
-        flag: w.h,
+        flag: x.h,
         metadata: {
             namespace: "financial-platform",
             name: "ShowOct20ShutoffBanner",
@@ -2565,7 +2565,7 @@
             contextType: "static"
         }
     }, {
-        flag: w.p,
+        flag: x.p,
         metadata: {
             namespace: "financial-platform",
             name: "isTaxDocumentationOpenToDevexEligible",
@@ -2574,7 +2574,7 @@
             contextType: "static"
         }
     }, {
-        flag: w.u,
+        flag: x.u,
         metadata: {
             namespace: "financial-platform",
             name: "isTaxFormDeliveryConsentEnabled",
@@ -2583,7 +2583,7 @@
             contextType: "static"
         }
     }, {
-        flag: w.f,
+        flag: x.f,
         metadata: {
             namespace: "financial-platform",
             name: "taxFormDeliveryConsentRolloutPercentage",
@@ -2592,7 +2592,7 @@
             contextType: "static"
         }
     }, {
-        flag: w.d,
+        flag: x.d,
         metadata: {
             namespace: "financial-platform",
             name: "devexFinancialPolicyRolloutPercentage",
@@ -2601,7 +2601,7 @@
             contextType: "static"
         }
     }, {
-        flag: x.B,
+        flag: w.B,
         metadata: {
             namespace: "game-discovery-serving",
             name: "isAcquisitionThumbnailUpsellEnabled",
@@ -2610,7 +2610,7 @@
             contextType: "universe"
         }
     }, {
-        flag: x.p,
+        flag: w.p,
         metadata: {
             namespace: "game-discovery-serving",
             name: "isHomeAcquisitionSignalsLayoutRefreshEnabled",
@@ -2688,24 +2688,6 @@
             name: "isInGameTemplatePlacementEnabled",
             defaultValue: !1,
             valueType: "boolean",
-            contextType: "static"
-        }
-    }, {
-        flag: S.Z,
-        metadata: {
-            namespace: "immersive-ads",
-            name: "managedRewardedCtrBenchmarkLow",
-            defaultValue: .01,
-            valueType: "number",
-            contextType: "static"
-        }
-    }, {
-        flag: S.k,
-        metadata: {
-            namespace: "immersive-ads",
-            name: "managedRewardedCtrBenchmarkHigh",
-            defaultValue: .05,
-            valueType: "number",
             contextType: "static"
         }
     }, {
@@ -3210,20 +3192,10 @@
         }),
         r = (0, t.e)({
             namespace: "immersive-ads",
-            name: "managedRewardedCtrBenchmarkLow",
-            defaultValue: .01
-        }),
-        s = (0, t.e)({
-            namespace: "immersive-ads",
-            name: "managedRewardedCtrBenchmarkHigh",
-            defaultValue: .05
-        }),
-        o = (0, t.e)({
-            namespace: "immersive-ads",
             name: "isRewardItemAnalyticsEnabled",
             defaultValue: !1
         });
-    e.s(["O", 0, a, "j", 0, i, "J", 0, n, "D", 0, o, "k", 0, s, "Z", 0, r])
+    e.s(["O", 0, a, "j", 0, i, "J", 0, n, "D", 0, r])
 }, 199972, e => {
     "use strict";
     var t = e.i(157700);
@@ -3405,7 +3377,7 @@
             unifiedLogger: b
         } = (0, r.X)(), {
             isHighPriority: T,
-            isEnabled: w
+            isEnabled: x
         } = (0, a.useMemo)(() => {
             let e = f(o.X),
                 t = f(o.A),
@@ -3415,11 +3387,11 @@
                 isHighPriority: a <= n,
                 isEnabled: e <= n && n < t
             }
-        }, []), x = (0, a.useCallback)(async () => {
+        }, []), w = (0, a.useCallback)(async () => {
             await d(), c(!0)
         }, [c]);
         (0, a.useEffect)(() => {
-            w && y && (null == h ? void 0 : h.id) && (async () => {
+            x && y && (null == h ? void 0 : h.id) && (async () => {
                 let e = !1;
                 try {
                     e = await u()
@@ -3455,17 +3427,17 @@
                     }
                 })
             })
-        }, [w, y, h, b]);
+        }, [x, y, h, b]);
         let E = (0, a.useMemo)(() => {
-            let e = w && "doNotShow" !== g;
+            let e = x && "doNotShow" !== g;
             return {
                 isBannerVisible: e && !l,
                 isBannerEligible: e,
                 isHighPriority: T,
                 variant: "doNotShow" !== g ? g : "ageVerification",
-                dismissBanner: x
+                dismissBanner: w
             }
-        }, [w, g, l, T, x]);
+        }, [x, g, l, T, w]);
         return (0, t.jsx)(p.Provider, {
             value: E,
             children: s
@@ -3964,8 +3936,8 @@
         h = e.i(12246),
         b = e.i(156071),
         T = e.i(790806),
-        w = e.i(759283),
-        x = e.i(719338);
+        x = e.i(759283),
+        w = e.i(719338);
     let E = (0, y.f)()(() => ({
             dialogTitle: {
                 marginBottom: 12
@@ -3988,7 +3960,7 @@
                 translate: c
             } = (0, i.A)(), {
                 organization: u
-            } = (0, x.f)(), {
+            } = (0, w.f)(), {
                 classes: {
                     dialogTitle: y,
                     dialogContent: k,
@@ -4004,7 +3976,7 @@
                         vertical: "bottom",
                         horizontal: "center"
                     },
-                    autoHideDuration: w.A,
+                    autoHideDuration: x.A,
                     autoHide: !0,
                     onClose: C
                 })
@@ -4139,12 +4111,12 @@
                     dialogContent: u,
                     dialogActions: y
                 }
-            } = I(), [h, b] = (0, a.useState)(), [w, x] = (0, a.useState)(), E = (0, a.useCallback)(async () => {
+            } = I(), [h, b] = (0, a.useState)(), [x, w] = (0, a.useState)(), E = (0, a.useCallback)(async () => {
                 if (null == s ? void 0 : s.senderUserId) try {
                     let e = await T.U.getUserById(Number.parseInt(s.senderUserId, 10));
-                    b(e.name), x(!1)
+                    b(e.name), w(!1)
                 } catch (e) {
-                    x(!0)
+                    w(!0)
                 }
             }, [s]);
             (0, a.useEffect)(() => {
@@ -4170,11 +4142,11 @@
                         }), (0, t.jsx)(v.f, {
                             variant: "body1",
                             children: o ? (0, t.jsx)(t.Fragment, {
-                                children: w ? l("Message.InvitationAcceptedWithoutUsername") : l("Message.InvitationAccepted", {
+                                children: x ? l("Message.InvitationAcceptedWithoutUsername") : l("Message.InvitationAccepted", {
                                     username: null != h ? h : ""
                                 })
                             }) : (0, t.jsx)(t.Fragment, {
-                                children: w ? l("Message.InvitationDeclinedWithoutUsername") : l("Message.InvitationDeclined", {
+                                children: x ? l("Message.InvitationDeclinedWithoutUsername") : l("Message.InvitationDeclined", {
                                     username: null != h ? h : ""
                                 })
                             })
@@ -4205,7 +4177,7 @@
             user: d
         } = (0, r.f)(), p = (0, u.W)(), {
             currentItemGroupId: f
-        } = (0, c.f)(), [m, g] = (0, a.useState)(), [v, y] = (0, a.useState)(), [h, b] = (0, a.useState)(!1), [T, w] = (0, a.useState)(!1), [x, E] = (0, a.useState)(), [I, A] = (0, a.useState)(!1), O = null == d ? void 0 : d.id, P = (0, a.useMemo)(() => {
+        } = (0, c.f)(), [m, g] = (0, a.useState)(), [v, y] = (0, a.useState)(), [h, b] = (0, a.useState)(!1), [T, x] = (0, a.useState)(!1), [w, E] = (0, a.useState)(), [I, A] = (0, a.useState)(!1), O = null == d ? void 0 : d.id, P = (0, a.useMemo)(() => {
             var e;
             return null != (e = null == p ? void 0 : p.id) ? e : f
         }, [p, f]), R = l.query[C.L], _ = l.isReady, M = (0, a.useCallback)(() => {
@@ -4220,7 +4192,7 @@
             }
         }, [O, M]), z = (0, a.useCallback)(async () => {
             if (_) {
-                w(!0);
+                x(!0);
                 try {
                     if ("string" == typeof R) return void await q(R);
                     if (!P) return void g(null);
@@ -4232,7 +4204,7 @@
                 } catch (e) {
                     g(null), y(null)
                 } finally {
-                    w(!1)
+                    x(!1)
                 }
             }
         }, [P, q, R, _]), j = (0, a.useCallback)(() => {
@@ -4250,7 +4222,7 @@
             children: (0, t.jsxs)(t.Fragment, {
                 children: [i, v && (0, t.jsxs)(t.Fragment, {
                     children: [(0, t.jsx)(k, {
-                        open: v.invitationStatusType === o.P.Open && void 0 === x,
+                        open: v.invitationStatusType === o.P.Open && void 0 === w,
                         onClose: e => {
                             !0 === e ? (E(!0), A(!0)) : !1 === e ? (E(!1), A(!0)) : (M(), y(null))
                         },
@@ -4258,10 +4230,10 @@
                     }), (0, t.jsx)(S, {
                         open: I,
                         onClose: () => {
-                            A(!1), !0 === x && j(), M()
+                            A(!1), !0 === w && j(), M()
                         },
                         invitation: v,
-                        accepted: !0 === x
+                        accepted: !0 === w
                     })]
                 })]
             })
@@ -4338,8 +4310,8 @@
                 background: h,
                 loggedinErrorArea: b,
                 guestErrorArea: T,
-                errorImage: w,
-                textHeader: x,
+                errorImage: x,
+                textHeader: w,
                 loggedinImageArea: E,
                 guestImageArea: k
             }
@@ -4365,7 +4337,7 @@
                     children: [(0, t.jsx)(r.f, {
                         color: "primary",
                         variant: "h1",
-                        className: x,
+                        className: w,
                         align: v ? "center" : "left",
                         children: g(I)
                     }), (0, t.jsx)("br", {}), (0, t.jsx)(r.f, {
@@ -4378,7 +4350,7 @@
                     className: C ? E : k,
                     Medium: 6,
                     children: (0, t.jsx)("img", {
-                        className: w,
+                        className: x,
                         src: l.o,
                         alt: "error",
                         width: l.z,
@@ -4881,7 +4853,7 @@
         }), null
     }
 
-    function w(e, t) {
+    function x(e, t) {
         var a;
         let n, i, r, s, o = m(t);
         return a = Object.values(e), i = new Set(o.map(e => e.requestId)), r = new Set, s = new Map, a.forEach(function e(t) {
@@ -4901,7 +4873,7 @@
         }
     }
 
-    function x(e) {
+    function w(e) {
         let t = [...e],
             a = new Set;
         for (let e of t) {
@@ -5018,7 +4990,7 @@
                 E(f, u);
                 let v = function(e) {
                         let t = Object.values(e).filter(e => "required" === e.requirement),
-                            a = x(t);
+                            a = w(t);
                         if (a) return {
                             kind: "unavailable",
                             requestId: a.id,
@@ -5041,7 +5013,7 @@
                                 return {
                                     kind: "error",
                                     failures: t,
-                                    recovery: w(e, t)
+                                    recovery: x(e, t)
                                 }
                             }
                             if ("skipped" === t.kind) return {
@@ -5149,7 +5121,7 @@
                                                 kind: "error", failure: null != (n = i.failures[0]) ? n : {
                                                     requestId: e.id,
                                                     classification: "contract"
-                                                }, recovery: w(t, i.failures)
+                                                }, recovery: x(t, i.failures)
                                             };
                                         case "skipped":
                                             return {
@@ -5173,7 +5145,7 @@
                                 cause: "enablement" === a ? "disabled" : (null == e ? void 0 : e.purpose) === "access-prerequisite" ? "not-found" : "denied"
                             }
                         }
-                        let s = x(n.filter(e => "gate" !== e.kind));
+                        let s = w(n.filter(e => "gate" !== e.kind));
                         if (s) return {
                             kind: "unavailable",
                             requestId: s.id,
@@ -5191,7 +5163,7 @@
                             return {
                                 kind: "error",
                                 failures: t,
-                                recovery: w(e, t)
+                                recovery: x(e, t)
                             }
                         }
                         let c = i.filter(e => "waiting" === e.outcome.kind);
@@ -5398,7 +5370,7 @@
                             } catch (e) {}
                         }
                     } : p),
-                    w = function(e, t, a) {
+                    x = function(e, t, a) {
                         var n;
                         let i = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : {
                                 selectionFailed: !1,
@@ -5484,12 +5456,12 @@
                         selectionFailed: b,
                         hasUsableSelection: h.state.dataUpdateCount > 0
                     }),
-                    x = {
+                    w = {
                         id: e.id,
                         kind: "query",
                         purpose: e.purpose,
                         requirement: e.requirement,
-                        outcome: w,
+                        outcome: x,
                         parents: e.input.parents
                     };
                 return "permission" === e.purpose && (i = function(e, t) {
@@ -5526,7 +5498,7 @@
                             recovery: p
                         }
                     }
-                }(e, w), f.set(x, i)), x
+                }(e, x), f.set(w, i)), w
             }({
                 ...t,
                 queryOptions: e.queryOptions
@@ -5643,5 +5615,5 @@
     }])
 }]);
 
-//# debugId=11c4e73b-b1b7-39bf-c497-9c81d37d1391
-//# sourceMappingURL=303dxgwwpylm6.js.map
+//# debugId=5d8d0b0b-7348-9425-e1ee-cf535b4615fb
+//# sourceMappingURL=1gosfd9u2ewey.js.map
