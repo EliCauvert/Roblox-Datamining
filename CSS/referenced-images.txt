@@ -72,6 +72,7 @@ https://images.rbxcdn.com/832ccf166229af21.png
 https://images.rbxcdn.com/84c64723e9fffacee7469f651b0fb764-payment_methods_sprite.svg
 https://images.rbxcdn.com/851c0bd958784fdf.svg
 https://images.rbxcdn.com/87685ed0b827a94d.svg
+https://images.rbxcdn.com/89ca21cbae69f94f.webp
 https://images.rbxcdn.com/89edcd21e2d2a3a6.png
 https://images.rbxcdn.com/9187f3f9d8448f99.svg
 https://images.rbxcdn.com/939975b8d34b63b9.png
@@ -123,7 +124,6 @@ https://images.rbxcdn.com/e5588d48a87d54c2.svg
 https://images.rbxcdn.com/e5e40430d74ac9243accf5de8948c537-economy_28x28_dark.svg
 https://images.rbxcdn.com/edf7aeadb32b5c26.png
 https://images.rbxcdn.com/f2327451cd5349ff.svg
-https://images.rbxcdn.com/f4c88e17784943d3.webp
 https://images.rbxcdn.com/f6278bdb80b2f24c.svg
 https://images.rbxcdn.com/f6d39fbab06f1ad69f6e6c36ffeff02e-SocialLinkSquareIconsV4.svg
 https://images.rbxcdn.com/f7bc610bcc81bde2.svg
