@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "6ec07c61-be92-91cd-cb9e-0616a6c98e63")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "3570db42-a06c-e3cd-1f13-512fd1cc66c0")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 913826, 913785, 462534, 232360, 155281, 862359, 644520, 880002, 879376, 223280, 575177, 620331, 702800, e => {
@@ -16753,7 +16753,7 @@
                 }
             }
         }),
-        S = "".concat("https://assets.create.roblox.com/1a533dbd56be917f38cf56bbcad2f6134bb9b38c/assets", "/thumbnails"),
+        S = "".concat("https://assets.create.roblox.com/0d045df0307856f616da5b289911e566478588a9/assets", "/thumbnails"),
         z = "".concat(S, "/broken.svg"),
         U = "".concat(S, "/not_approved.svg"),
         A = "".concat(S, "/review_pending.svg"),
@@ -17463,5 +17463,5 @@
     e.s(["f", 0, P], 646555)
 }]);
 
-//# debugId=6ec07c61-be92-91cd-cb9e-0616a6c98e63
-//# sourceMappingURL=0wfmalpm3wmnz.js.map
+//# debugId=3570db42-a06c-e3cd-1f13-512fd1cc66c0
+//# sourceMappingURL=18ch9dstfctft.js.map

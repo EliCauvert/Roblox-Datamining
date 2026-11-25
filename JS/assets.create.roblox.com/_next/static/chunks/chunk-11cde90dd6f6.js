@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "92896a74-46d9-a59a-a3e8-78a57a366eb6")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "11c4e73b-b1b7-39bf-c497-9c81d37d1391")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 796701, (e, t, a) => {
@@ -1836,6 +1836,15 @@
             contextType: "static"
         }
     }, {
+        flag: o.V,
+        metadata: {
+            namespace: "content-licensing",
+            name: "isExperienceOverviewEnabled",
+            defaultValue: !1,
+            valueType: "boolean",
+            contextType: "static"
+        }
+    }, {
         flag: o.Z,
         metadata: {
             namespace: "content-licensing",
@@ -3022,10 +3031,15 @@
         }),
         d = (0, t.e)({
             namespace: "content-licensing",
+            name: "isExperienceOverviewEnabled",
+            defaultValue: !1
+        }),
+        p = (0, t.e)({
+            namespace: "content-licensing",
             name: "isCreatorAcceptLicenseOfferEnabled",
             defaultValue: !1
         });
-    e.s(["j", 0, i, "p", 0, c, "Z", 0, d, "b", 0, n, "X", 0, o, "g", 0, r, "a", 0, u, "N", 0, s, "m", 0, a, "y", 0, l])
+    e.s(["j", 0, i, "p", 0, c, "Z", 0, p, "V", 0, d, "b", 0, n, "X", 0, o, "g", 0, r, "a", 0, u, "N", 0, s, "m", 0, a, "y", 0, l])
 }, 942100, e => {
     "use strict";
     var t = e.i(157700);
@@ -5629,5 +5643,5 @@
     }])
 }]);
 
-//# debugId=92896a74-46d9-a59a-a3e8-78a57a366eb6
-//# sourceMappingURL=0e7hqwo71cv3_.js.map
+//# debugId=11c4e73b-b1b7-39bf-c497-9c81d37d1391
+//# sourceMappingURL=303dxgwwpylm6.js.map

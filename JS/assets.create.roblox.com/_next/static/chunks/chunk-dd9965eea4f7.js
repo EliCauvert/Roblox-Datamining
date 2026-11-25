@@ -3,7 +3,7 @@
     try {
         var e = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof global ? global : "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
             n = (new e.Error).stack;
-        n && ((e._debugIds || (e._debugIds = {}))[n] = "98a09db9-d3a2-6cc9-99eb-3945816dd677")
+        n && ((e._debugIds || (e._debugIds = {}))[n] = "143d6028-028e-6178-6502-b4e76c3740e5")
     } catch (e) {}
 }();
 (globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push(["object" == typeof document ? document.currentScript : void 0, 974184, e => {
@@ -4509,7 +4509,10 @@
         IPNotUsed: "IPNotUsed",
         IPRemoved: "IPRemoved",
         FairUse: "FairUse"
-    }, "Z", 0, ep, "k", 0, {
+    }, "Z", 0, ep, "M", 0, {
+        Ready: "Ready",
+        Unavailable: "Unavailable"
+    }, "k", 0, {
         None: "None",
         Pending: "Pending",
         Attested: "Attested",
@@ -4581,5 +4584,5 @@
     }])
 }]);
 
-//# debugId=98a09db9-d3a2-6cc9-99eb-3945816dd677
-//# sourceMappingURL=3i6am2295klif.js.map
+//# debugId=143d6028-028e-6178-6502-b4e76c3740e5
+//# sourceMappingURL=2-jr25u855mf5.js.map

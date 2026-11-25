@@ -62,6 +62,6 @@ Roblox.LangDynamic["Feature.BuyRobux"] = {
     "Heading.ReviewPendingRequests": "Review pending requests",
     "Label.AcceptTheseRobux": "Accept these Robux",
     "Heading.GetUpTo50PercentMoreRobux": "Get up to 50% more Robux",
-    "Action.ContentPersonalization": "Content personalization"
+    "Action.ContentPersonalization": "Personalized recommendations"
 };
 window.Roblox && window.Roblox.BundleDetector && window.Roblox.BundleDetector.bundleDetected("DynamicLocalizationResourceScript_Feature.BuyRobux");
