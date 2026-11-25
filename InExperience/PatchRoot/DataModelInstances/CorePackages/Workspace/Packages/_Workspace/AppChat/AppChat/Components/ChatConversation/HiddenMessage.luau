@@ -24,7 +24,6 @@ return function(p1)
 		isIncoming = UnionResult.isIncoming,
 		hasTail = UnionResult.hasTail,
 		isPending = UnionResult.isPending,
-		isUnfiltered = false,
 		padding = {
 			top = UDim.new(0, UseTokensResult.Padding.Small),
 			bottom = UDim.new(0, UseTokensResult.Padding.Small),

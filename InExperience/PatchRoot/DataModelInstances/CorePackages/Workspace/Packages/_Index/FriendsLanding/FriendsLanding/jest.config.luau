@@ -9,6 +9,8 @@ return {
 		JestConfigsModule.setupFiles.UIBloxInitializer,
 		JestConfigsModule.setupFiles.createPromiseRejectionHandler(),
 		Parent.TestHelpers.CollisionMatchersSetup,
-		Parent.TestHelpers.NetworkImplHandler, JestConfigsModule.setupFiles.RetryTimes
+		Parent.TestHelpers.NetworkImplHandler,
+		JestConfigsModule.setupFiles.RemoveLeakedScreenGuis,
+		JestConfigsModule.setupFiles.RetryTimes
 	}
 }

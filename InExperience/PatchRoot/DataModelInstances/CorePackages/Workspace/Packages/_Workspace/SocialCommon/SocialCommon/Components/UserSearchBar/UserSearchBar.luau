@@ -10,7 +10,6 @@ local Images = UIBloxModule.App.ImageSet.Images
 local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local FoundationModule = require(Parent.Foundation)
-local FFlagAppThemeHalloween2026FriendsBackground = require(Parent.SharedFlags).FFlagAppThemeHalloween2026FriendsBackground
 local UseThemeBackgroundFunction = require(Parent.ThemeBackground).useThemeBackground
 local Icon = FoundationModule.Icon
 local Enums = FoundationModule.Enums
@@ -33,14 +32,14 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: FFlagDisableAutocorrectSocialUserSearch (copy), RoactAppExperimentModule (copy), DisableAutocorrectExperimentLayer (copy), FFlagLuaAppLogSocialUserSearchUXExposure (copy), DashModule (copy), config (copy), UseStyleFunction (copy), FFlagAppThemeHalloween2026FriendsBackground (copy), UseThemeBackgroundFunction (copy), ReactModule (copy), GetTextSizeFunction (copy), TextButton (copy), ImageSetLabel (copy), Icon (copy), Enums (copy), NormalizeFontFaceFunction (copy), CallbackInputBox (copy), IconsActionsEditClearSmall (copy), IconSize (copy)
+	-- upvalues: FFlagDisableAutocorrectSocialUserSearch (copy), RoactAppExperimentModule (copy), DisableAutocorrectExperimentLayer (copy), FFlagLuaAppLogSocialUserSearchUXExposure (copy), DashModule (copy), config (copy), UseStyleFunction (copy), UseThemeBackgroundFunction (copy), ReactModule (copy), GetTextSizeFunction (copy), TextButton (copy), ImageSetLabel (copy), Icon (copy), Enums (copy), NormalizeFontFaceFunction (copy), CallbackInputBox (copy), IconsActionsEditClearSmall (copy), IconSize (copy)
 	local UseUserExperimentResult = if FFlagDisableAutocorrectSocialUserSearch then RoactAppExperimentModule.useUserExperiment({ DisableAutocorrectExperimentLayer }, function(p2)
 		-- upvalues: DisableAutocorrectExperimentLayer (upval)
 		return (p2[DisableAutocorrectExperimentLayer] or {}).disableAutocorrectSocialUserSearch
 	end, not FFlagLuaAppLogSocialUserSearchUXExposure) else nil
 	local JoinResult = DashModule.join(config, p1 or {})
 	local UseStyleResult = UseStyleFunction()
-	local HasUseThemeBackgroundResult: boolean = if FFlagAppThemeHalloween2026FriendsBackground then UseThemeBackgroundFunction() ~= nil else false
+	local HasUseThemeBackgroundResult = UseThemeBackgroundFunction() ~= nil
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)

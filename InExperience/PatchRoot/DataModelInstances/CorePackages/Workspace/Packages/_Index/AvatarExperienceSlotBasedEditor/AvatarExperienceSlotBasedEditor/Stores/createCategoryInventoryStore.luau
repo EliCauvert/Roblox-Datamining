@@ -9,9 +9,10 @@ local _ = require(script.Parent.Parent.Types)
 local FFlagAXInventoryDurablesSupport = require(Parent.AvatarExperienceFlags).FFlagAXInventoryDurablesSupport
 local FFlagAXBackgroundGeneration = require(Parent.AvatarExperienceFlags).FFlagAXBackgroundGeneration
 local FFlagAXRefetchInventoryOnUpdate = require(Parent.AvatarExperienceFlags).FFlagAXRefetchInventoryOnUpdate
+local FFlagAXEnableInventorySearch = require(Parent.AvatarExperienceFlags).FFlagAXEnableInventorySearch
 
 return function()
-	-- upvalues: SignalsModule (copy), HttpService (copy), FFlagAXRefetchInventoryOnUpdate (copy), InventoryItemTypeModule (copy), MutedErrorFunction (copy), FFlagAXInventoryDurablesSupport (copy), FFlagAXBackgroundGeneration (copy)
+	-- upvalues: SignalsModule (copy), HttpService (copy), FFlagAXRefetchInventoryOnUpdate (copy), FFlagAXEnableInventorySearch (copy), InventoryItemTypeModule (copy), MutedErrorFunction (copy), FFlagAXInventoryDurablesSupport (copy), FFlagAXBackgroundGeneration (copy)
 	local v1 = nil
 	local Signal, Signal2 = SignalsModule.createSignal(nil)
 	local Signal1, Signal2_1 = SignalsModule.createSignal(false)
@@ -68,8 +69,9 @@ return function()
 			end
 		end,
 		addResultsPage = function(p1, p2)
-			-- upvalues: FFlagAXRefetchInventoryOnUpdate (upval), Signal3 (copy), Flag (ref), Signal (copy), InventoryItemTypeModule (upval), MutedErrorFunction (upval), FFlagAXInventoryDurablesSupport (upval), FFlagAXBackgroundGeneration (upval), Signal2 (copy), v1 (ref), Signal2_1 (copy)
+			-- upvalues: FFlagAXRefetchInventoryOnUpdate (upval), Signal3 (copy), FFlagAXEnableInventorySearch (upval), Flag (ref), Signal (copy), InventoryItemTypeModule (upval), MutedErrorFunction (upval), FFlagAXInventoryDurablesSupport (upval), FFlagAXBackgroundGeneration (upval), Signal2 (copy), v1 (ref), Signal2_1 (copy)
 			if FFlagAXRefetchInventoryOnUpdate and p2 ~= nil and p2 ~= Signal3(false) then return end
+			if FFlagAXEnableInventorySearch and p2 ~= nil and p2 ~= Signal3(false) then return end
 			local IsFlag: boolean = FFlagAXRefetchInventoryOnUpdate and Flag == true
 			
 			if FFlagAXRefetchInventoryOnUpdate then

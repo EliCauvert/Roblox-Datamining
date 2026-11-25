@@ -168,11 +168,11 @@ local function performPurchaseV2(InfoType, ProductId, ExpectedPrice, RequestId, 
 	end
 end
 
-local function performCreatorStorePurchase(p1, p2)
+local function performCreatorStorePurchase(ProductTargetId, AssetType)
 	-- upvalues: CreatorStoreService (copy), IsGenericChallengeResponseModule (copy)
 	local Success, Result = pcall(function()
-		-- upvalues: CreatorStoreService (upval), p1 (copy), p2 (copy)
-		return CreatorStoreService:performCreatorStorePurchase(p1, p2)
+		-- upvalues: CreatorStoreService (upval), ProductTargetId (copy), AssetType (copy)
+		return CreatorStoreService:PerformCreatorStorePurchase(ProductTargetId, AssetType)
 	end)
 	
 	if Success then
@@ -184,14 +184,14 @@ local function performCreatorStorePurchase(p1, p2)
 	end
 end
 
-local function getAssetInfo(p1)
+local function getAssetInfo(AssetId)
 	-- upvalues: CreatorStoreService (copy)
-	return CreatorStoreService:getAssetInfoAsync(p1)
+	return CreatorStoreService:GetAssetInfoAsync(AssetId)
 end
 
-local function getCreatorStoreProductInfo(p1, p2)
+local function getCreatorStoreProductInfo(ProductTargetId, AssetType)
 	-- upvalues: CreatorStoreService (copy)
-	return CreatorStoreService:getCreatorStoreProductInfoAsync(p1, p2)
+	return CreatorStoreService:GetCreatorStoreProductInfoAsync(ProductTargetId, AssetType)
 end
 
 local function loadAssetForEquip(AssetId)

@@ -4,7 +4,6 @@ local Modules = RobloxGui.Modules
 local ReactModule = require(CorePackages.Packages.React)
 local ReactRobloxModule = require(CorePackages.Packages.ReactRoblox)
 local FFlagRefactorPeoplePageModule = require(Modules.Settings.Flags.FFlagRefactorPeoplePage)
-local FFlagRelocateMobileMenuButtonsModule = require(Modules.Settings.Flags.FFlagRelocateMobileMenuButtons)
 local FIntRelocateMobileMenuButtonsVariantModule = require(Modules.Settings.Flags.FIntRelocateMobileMenuButtonsVariant)
 local Chrome = RobloxGui.Modules.Chrome
 local EnabledResult = require(CorePackages.Workspace.Packages.Chrome).Enabled()
@@ -45,7 +44,7 @@ local function PeopleFocusRoot(p1)
 end
 
 local function createPeoplePage()
-	-- upvalues: CorePackages (copy), SettingsPageFactoryModule (copy), Constants (ref), Uiblox (copy), BuilderIconsModule (copy), NewResult (copy), FFlagRelocateMobileMenuButtonsModule (copy), FIntRelocateMobileMenuButtonsVariantModule (copy), Root (ref), GetFFlagPeoplePageLazyRenderCardsFunction (copy), FFlagEnablePeopleListLazyRender (copy), FFlagPeopleCardsEnableVirtualizedGrid (copy), FFlagPeoplePageDismissVolumePopoverOnScrollOutOfView (copy), FFlagPeoplePageFlipVolumePopoverToFitViewport (copy), FFlagPeoplePageDismissCardMenuOnScrollOutOfView (copy), SignalsReactModule (copy), Signal (copy), FFlagSideSheetOpenPeoplePage (copy), FFlagKeepSideSheetOpenBesideMenu (copy), InExperienceSideSheetModule (copy), ReactModule (copy), CoreScriptsRootProvider (copy), LocalizationProvider (copy), PeopleFocusRoot (copy), BlockingModalScreenModule (copy), EnabledResult (copy), GetFFlagAddPeoplePageCardLayoutFunction (copy), LocalStoreModule (copy), ReactRobloxModule (copy), Signal2 (copy), SettingsShowSignal (copy)
+	-- upvalues: CorePackages (copy), SettingsPageFactoryModule (copy), Constants (ref), Uiblox (copy), BuilderIconsModule (copy), NewResult (copy), FIntRelocateMobileMenuButtonsVariantModule (copy), Root (ref), GetFFlagPeoplePageLazyRenderCardsFunction (copy), FFlagEnablePeopleListLazyRender (copy), FFlagPeopleCardsEnableVirtualizedGrid (copy), FFlagPeoplePageDismissVolumePopoverOnScrollOutOfView (copy), FFlagPeoplePageFlipVolumePopoverToFitViewport (copy), FFlagPeoplePageDismissCardMenuOnScrollOutOfView (copy), SignalsReactModule (copy), Signal (copy), FFlagSideSheetOpenPeoplePage (copy), FFlagKeepSideSheetOpenBesideMenu (copy), InExperienceSideSheetModule (copy), ReactModule (copy), CoreScriptsRootProvider (copy), LocalizationProvider (copy), PeopleFocusRoot (copy), BlockingModalScreenModule (copy), EnabledResult (copy), GetFFlagAddPeoplePageCardLayoutFunction (copy), LocalStoreModule (copy), ReactRobloxModule (copy), Signal2 (copy), SettingsShowSignal (copy)
 	local PeopleReactViewModule = require(CorePackages.Workspace.Packages.PeopleReactView)
 	local PeopleReactView = PeopleReactViewModule.PeopleReactView
 	local SideSheetFocusContext = PeopleReactViewModule.SideSheetFocusContext
@@ -65,7 +64,7 @@ local function createPeoplePage()
 		SettingsHubService.setShowMenuButtonsContainer(true)
 	end
 	
-	if FFlagRelocateMobileMenuButtonsModule and FIntRelocateMobileMenuButtonsVariantModule == 2 then
+	if FIntRelocateMobileMenuButtonsVariantModule == 2 then
 		function NewPage:UnmountMenuButtonsContainer()
 			-- upvalues: SettingsHubService (copy)
 			SettingsHubService.setShowMenuButtonsContainer(false)

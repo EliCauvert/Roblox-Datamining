@@ -60,11 +60,13 @@ Amp.Upsell.Title.RequestSent,Verzoek verzonden
 Authentication.AccountSwitch.Action.SwitchAccount,Van account wisselen
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,Snel aanmelden
+Authentication.Login.Action.Leave,Afsluiten
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.Save,Opslaan
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Roblox afsluiten om van account te wisselen voor {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,Een ander Roblox-account gebruiken
 Authentication.Login.Button.XboxAccountSwitcher,Van Xbox-account wisselen
+Authentication.Login.Description.LeaveAccountSetup,"Als je nu stopt, wordt je Roblox-account niet ingesteld."
 Authentication.Login.Error.PasskeyOnlyAccount,Voor je account is alleen een toegangssleutel ingesteld om je aan te melden. Probeer je aan te melden met je toegangssleutel of herstel je account.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Kan platformaccount niet verifiëren. Probeer het later opnieuw.
 Authentication.Login.Heading.IncompatibleAccounts,Incompatibele accounts
@@ -93,7 +95,7 @@ Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.ContinueSetup,Doorgaan met instellen
 Authentication.SignUp.Action.Create,Maken
 Authentication.SignUp.Action.CreateAccountSentenceCase,Account aanmaken
-Authentication.SignUp.Action.ExitModalLeave,Afsluiten
+Authentication.SignUp.Action.ExitModalLeave,
 Authentication.SignUp.Action.RespawnNow,Nu respawnen
 Authentication.SignUp.Button.OKCaptialized,Oké
 Authentication.SignUp.Button.RetryLogIn,Opnieuw proberen inloggen

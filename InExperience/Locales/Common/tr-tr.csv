@@ -77,11 +77,13 @@ Amp.Upsell.Title.RequestSent,Talep gönderildi
 Authentication.AccountSwitch.Action.SwitchAccount,Hesap Değiştir
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,Hesap değiştir
 Authentication.CrossDevice.Heading.QuickLogin,Hızlı giriş
+Authentication.Login.Action.Leave,Ayrıl
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.Save,Kaydet
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,{platformAccountName} hesabını değiştirmek için Roblox'tan çıkış yap
 Authentication.Login.Button.UseDifferentRobloxAccount,Farklı bir Roblox hesabı kullan
 Authentication.Login.Button.XboxAccountSwitcher,Xbox hesabını değiştir
+Authentication.Login.Description.LeaveAccountSetup,Şimdi ayrılırsan Roblox hesabın oluşturulmayacak.
 Authentication.Login.Error.PasskeyOnlyAccount,Hesabına yalnızca giriş yapmak için bir geçiş anahtarı ayarlanmış. Geçiş anahtarınla giriş yapmayı dene veya hesabını kurtar.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Platform hesabı doğrulanamıyor. Lütfen daha sonra tekrar dene.
 Authentication.Login.Heading.IncompatibleAccounts,Uyumsuz Hesaplar
@@ -110,7 +112,7 @@ Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.ContinueSetup,Kuruluma devam et
 Authentication.SignUp.Action.Create,Oluştur
 Authentication.SignUp.Action.CreateAccountSentenceCase,Hesap oluştur
-Authentication.SignUp.Action.ExitModalLeave,Ayrıl
+Authentication.SignUp.Action.ExitModalLeave,
 Authentication.SignUp.Action.RespawnNow,Şimdi sıfırla
 Authentication.SignUp.Button.OKCaptialized,Tamam
 Authentication.SignUp.Button.RetryLogIn,Giriş yapmayı tekrar dene
@@ -3587,7 +3589,7 @@ Feature.Friends.Label.FollowsYou,Seni Takip Ediyor
 Feature.Friends.Label.Frequent,Beraber oynadınız
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,Seni Roblox'ta arkadaş olmaya davet etti
-Feature.Friends.Label.FriendOfUser,{displayName} ile arkadaş
+Feature.Friends.Label.FriendOfUser,Senin için önerilenler
 Feature.Friends.Label.FriendOwns,1 Arkadaşında var
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 Arkadaşın</b> yakın zamanda oynadı
 Feature.Friends.Label.FriendRequest,

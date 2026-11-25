@@ -77,11 +77,13 @@ Amp.Upsell.Title.RequestSent,Request sent
 Authentication.AccountSwitch.Action.SwitchAccount,Switch Accounts
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,Switch accounts
 Authentication.CrossDevice.Heading.QuickLogin,Quick Sign-in
+Authentication.Login.Action.Leave,Leave
 Authentication.Login.Action.QuickSignIn,Quick sign-in
 Authentication.Login.Action.Save,Save
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Exit Roblox to switch account for {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,Use a different Roblox account
 Authentication.Login.Button.XboxAccountSwitcher,Switch Xbox account
+Authentication.Login.Description.LeaveAccountSetup,"If you leave now, your Roblox account won’t be set up."
 Authentication.Login.Error.PasskeyOnlyAccount,Your account only has a passkey set up for sign-in. Try signing in with your passkey or recover your account.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Cannot verify platform account. Please try again later.
 Authentication.Login.Heading.IncompatibleAccounts,Incompatible Accounts
@@ -110,7 +112,7 @@ Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.ContinueSetup,Continue setup
 Authentication.SignUp.Action.Create,Create
 Authentication.SignUp.Action.CreateAccountSentenceCase,Create account
-Authentication.SignUp.Action.ExitModalLeave,Leave
+Authentication.SignUp.Action.ExitModalLeave,
 Authentication.SignUp.Action.RespawnNow,Respawn now
 Authentication.SignUp.Button.OKCaptialized,OK
 Authentication.SignUp.Button.RetryLogIn,Retry log in
@@ -2759,7 +2761,7 @@ Feature.Build.Title.VersionInfo,Version information
 Feature.Build.Title.VersionNumber,Version {VERSION}
 Feature.Build.Title.Versions,Versions
 Feature.Build.Title.WhatsIncluded,What's included?
-Feature.BuyRobux.Action.ContentPersonalization,Content personalization
+Feature.BuyRobux.Action.ContentPersonalization,
 Feature.Call.Error.Description.Generic,
 Feature.Captures.Action.Allow,Allow
 Feature.Captures.Action.AllowPhotoAccessAccepted,
@@ -3951,7 +3953,7 @@ Feature.InExperienceShop.Label.Active,
 Feature.InExperienceShop.Label.BonusItem,Bonus item
 Feature.InExperienceShop.Label.BuyGamePass,Buy game pass
 Feature.InExperienceShop.Label.BuyNow,Buy Now
-Feature.InExperienceShop.Label.ContentPersonalization,
+Feature.InExperienceShop.Label.ContentPersonalization,Content personalization
 Feature.InExperienceShop.Label.DescriptionWithTime,{description} {timeRemaining}
 Feature.InExperienceShop.Label.EndTime,Ends in {timeRemaining}
 Feature.InExperienceShop.Label.FreeTrial,Free trial

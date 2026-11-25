@@ -393,6 +393,7 @@ return {
 	CHAT_ASSISTANT_STILL_WORKING = "Feature.Build.Message.BuildStillWorking",
 	CHAT_ASSISTANT_STOPPED = "Feature.Build.Message.BuildStopped",
 	CHAT_ASSISTANT_TAKING_LONGER = "Feature.Build.Message.BuildTakingLonger",
+	CHAT_ATTACHMENT_MENU_CAPTURES = "Feature.Captures.Title.Captures",
 	CHAT_BUILD_CHAT_PAGE_TITLE = "New Game",
 	CHAT_COMPLETED_GAME_CREATION_DESCRIPTION = if FFlagEnableTeamTestLua then "Feature.Build.Description.GameSavedPlaytest" else "Feature.Build.Description.GameCreationDone",
 	CHAT_COMPLETED_GAME_CREATION_TITLE = "Feature.Build.Title.GameCreationDone",

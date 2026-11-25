@@ -7,6 +7,7 @@ local SupportedProfileTypesModule = require(script.SupportedProfileTypes)
 local SharedFlagsModule = require(ProfilePlatform.Parent.SharedFlags)
 local FFlagFriendsCallingClientGateDEV = SharedFlagsModule.FFlagFriendsCallingClientGate_DEV
 local FFlagJoinabilityCTARefactor = SharedFlagsModule.FFlagJoinabilityCTARefactor
+local FFlagDisableProfilePlayExperienceActionModule = require(ProfilePlatform.Flags.FFlagDisableProfilePlayExperienceAction)
 local t = {}
 local List = {
 	require(script.AcceptFriendRequestActions), require(script.AddFriendActions),
@@ -26,7 +27,7 @@ local List = {
 if FFlagFriendsCallingClientGateDEV then
 	table.insert(List, CallActionModule)
 end
-if FFlagJoinabilityCTARefactor then
+if FFlagJoinabilityCTARefactor and not FFlagDisableProfilePlayExperienceActionModule then
 	table.insert(List, PlayExperienceActionModule)
 end
 local function _(Value, Callback)

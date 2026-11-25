@@ -69,7 +69,6 @@ local FFlagBuildExperienceMyCreationsLongPressMenuModule = require(script.Parent
 local FFlagBuildExperiencePreviewsTabModule = require(script.Parent.Flags.FFlagBuildExperiencePreviewsTab)
 local FFlagBuildUpdatedSearchUXForGAModule = require(script.Parent.Flags.FFlagBuildUpdatedSearchUXForGA)
 local GetBuildHomeTabStoreModule = if FFlagBuildExperiencePreviewsTabModule then require(script.Parent.Stores.GetBuildHomeTabStore) else nil
-local FFlagAppThemeHalloween2026BuildBackgroundModule = require(script.Parent.Flags.FFlagAppThemeHalloween2026BuildBackground)
 local UseThemeBackgroundFunction = require(Parent.ThemeBackground).useThemeBackground
 local FFlagBuildWithGroupsModule = require(script.Parent.Flags.FFlagBuildWithGroups)
 local BuildHomeTabsContainerModule = if FFlagBuildExperiencePreviewsTabModule then require(script.Parent.Components.BuildHomeTabs.BuildHomeTabsContainer) else nil
@@ -250,7 +249,7 @@ local function BuildMonetizationScreen(p2)
 end
 
 local function BuildHomeScreen(p2)
-	-- upvalues: UseBuildPageLayoutModule (copy), UseNavigationFocusFunction (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), useOpenBuildChat (copy), FFlagBuildExperienceEventContextTelemetryModule (copy), FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), useHomeConfigurationPages (copy), FFlagAppThemeHalloween2026BuildBackgroundModule (copy), UseThemeBackgroundFunction (copy), ReactModule (copy), FFlagBuildAdUpsellModule (copy), GetAdsCampaignDeepLinkStoreModule (copy), SendBuildExperienceEventModule (copy), ResumeBuildChatModule (copy), GetSearchQueryStoreModule (copy), FFlagBuildUpdatedSearchUXForGAModule (copy), FFlagBuildExperiencePreviewsTabModule (copy), GetBuildHomeTabStoreModule (copy), FFlagBuildExperienceHomeTelemetryModule (copy), config (copy), FFlagBuildInspirationTabModule (copy), BUILDHOMETAB (copy), MyCreationsTabModule (copy), FullscreenPageWithSafeArea (copy), View (copy), BuildPageHeaderModule (copy), BuildHomeTabsContainerModule (copy), FFlagBuildPublishNavigationSheetModule (copy), PublishSheetControllerModule (copy), FFlagBuildPublishSheetReturnOnBackModule (copy)
+	-- upvalues: UseBuildPageLayoutModule (copy), UseNavigationFocusFunction (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), useOpenBuildChat (copy), FFlagBuildExperienceEventContextTelemetryModule (copy), FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), useHomeConfigurationPages (copy), UseThemeBackgroundFunction (copy), ReactModule (copy), FFlagBuildAdUpsellModule (copy), GetAdsCampaignDeepLinkStoreModule (copy), SendBuildExperienceEventModule (copy), ResumeBuildChatModule (copy), GetSearchQueryStoreModule (copy), FFlagBuildUpdatedSearchUXForGAModule (copy), FFlagBuildExperiencePreviewsTabModule (copy), GetBuildHomeTabStoreModule (copy), FFlagBuildExperienceHomeTelemetryModule (copy), config (copy), FFlagBuildInspirationTabModule (copy), BUILDHOMETAB (copy), MyCreationsTabModule (copy), FullscreenPageWithSafeArea (copy), View (copy), BuildPageHeaderModule (copy), BuildHomeTabsContainerModule (copy), FFlagBuildPublishNavigationSheetModule (copy), PublishSheetControllerModule (copy), FFlagBuildPublishSheetReturnOnBackModule (copy)
 	local ScreenProps = p2.screenProps or {}
 	local Navigation = p2.navigation
 	local UseBuildPageLayoutModuleResult = UseBuildPageLayoutModule()
@@ -262,7 +261,7 @@ local function BuildHomeScreen(p2)
 	local UseOpenBuildChatResult = useOpenBuildChat(Navigation, if FFlagBuildExperienceEventContextTelemetryModule then "my_creations" else nil)
 	local UseHomeConfigurationPagesResult = if FFlagBuildExperienceMyCreationsLongPressMenuModule then useHomeConfigurationPages(Navigation) else nil
 	local PublishSheetTarget = if UseHomeConfigurationPagesResult == nil then nil else UseHomeConfigurationPagesResult.publishSheetTarget
-	local HasUseThemeBackgroundResult: boolean = if FFlagAppThemeHalloween2026BuildBackgroundModule then UseThemeBackgroundFunction() ~= nil else false
+	local HasUseThemeBackgroundResult = UseThemeBackgroundFunction() ~= nil
 	ReactModule.useEffect(function()
 		-- upvalues: FFlagBuildAdUpsellModule (upval), GetAdsCampaignDeepLinkStoreModule (upval), ScreenProps (copy), SendBuildExperienceEventModule (upval), ResumeBuildChatModule (upval), FallbackExperienceName (copy), FFlagBuildExperienceEventContextTelemetryModule (upval), UseOpenBuildChatResult (copy)
 		if FFlagBuildAdUpsellModule then
@@ -343,10 +342,10 @@ local function BuildHomeScreen(p2)
 		includeBottomBar = UseBuildPageLayoutModuleResult.shouldIncludeBottomBar
 	}, {
 		Page = ReactModule.createElement(View, {
-			tag = if FFlagAppThemeHalloween2026BuildBackgroundModule then {
+			tag = {
 				["col align-x-center size-full"] = true,
 				["bg-surface-0"] = not HasUseThemeBackgroundResult
-			} else "col align-x-center size-full bg-surface-0"
+			}
 		}, {
 			Header = ReactModule.createElement(BuildPageHeaderModule, {
 				LayoutOrder = 1,

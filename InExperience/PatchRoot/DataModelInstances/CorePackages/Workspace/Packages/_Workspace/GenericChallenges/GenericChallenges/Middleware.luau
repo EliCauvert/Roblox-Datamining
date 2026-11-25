@@ -9,6 +9,7 @@
 	ChallengeNetworkWrapper = require(script.ChallengeNetworkWrapper),
 	createChallengeNetwork = require(script.createChallengeNetwork),
 	RenderChallenge = require(script.RenderChallenge),
+	renderTwoStepVerification = require(script.renderTwoStepVerification),
 	Challenges = require(script.Challenges),
 	InitExperienceChallengeInterceptor = require(script.InitExperienceChallengeInterceptor)
 }

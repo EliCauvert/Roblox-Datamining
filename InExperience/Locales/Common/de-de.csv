@@ -76,11 +76,13 @@ Amp.Upsell.Title.RequestSent,Anfrage gesendet
 Authentication.AccountSwitch.Action.SwitchAccount,Konto wechseln
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,Schnellanmeldung
+Authentication.Login.Action.Leave,Verlassen
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.Save,Speichern
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,"Roblox verlassen, um dich bei einem anderen {platformAccountName}-Konto anzumelden"
 Authentication.Login.Button.UseDifferentRobloxAccount,Ein anderes Roblox-Konto verwenden
 Authentication.Login.Button.XboxAccountSwitcher,Xbox-Konto wechseln
+Authentication.Login.Description.LeaveAccountSetup,"Wenn du jetzt gehst, wird dein Roblox-Konto nicht eingerichtet."
 Authentication.Login.Error.PasskeyOnlyAccount,"Für dein Konto ist nur ein Passkey für die Anmeldung eingerichtet. Versuche, dich mit deinem Passkey anzumelden, oder stelle dein Konto wieder her."
 Authentication.Login.Error.PlatformAccountConnectionFailure,Das Plattform-Konto kann nicht verifiziert werden. Bitte versuche es später erneut.
 Authentication.Login.Heading.IncompatibleAccounts,Konten nicht kompatibel
@@ -109,7 +111,7 @@ Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.ContinueSetup,Einrichtung fortsetzen
 Authentication.SignUp.Action.Create,Erstellen
 Authentication.SignUp.Action.CreateAccountSentenceCase,Konto erstellen
-Authentication.SignUp.Action.ExitModalLeave,Verlassen
+Authentication.SignUp.Action.ExitModalLeave,
 Authentication.SignUp.Action.RespawnNow,Jetzt respawnen
 Authentication.SignUp.Button.OKCaptialized,OK
 Authentication.SignUp.Button.RetryLogIn,Erneut anmelden

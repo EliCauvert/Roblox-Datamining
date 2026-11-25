@@ -1,15 +1,14 @@
 ﻿local Parent = script:FindFirstAncestor("SocialCommon").Parent
 local ReactModule = require(Parent.React)
 local RoactUtilsModule = require(Parent.RoactUtils)
-local FFlagAppThemeHalloween2026FriendsBackground = require(Parent.SharedFlags).FFlagAppThemeHalloween2026FriendsBackground
 local UseThemeBackgroundFunction = require(Parent.ThemeBackground).useThemeBackground
 local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
 local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
 
 return function()
-	-- upvalues: UseStyleFunction (copy), FFlagAppThemeHalloween2026FriendsBackground (copy), UseThemeBackgroundFunction (copy), UseSelectorFunction (copy), ReactModule (copy)
+	-- upvalues: UseStyleFunction (copy), UseThemeBackgroundFunction (copy), UseSelectorFunction (copy), ReactModule (copy)
 	local UseStyleResult = UseStyleFunction()
-	local HasUseThemeBackgroundResult: boolean = if FFlagAppThemeHalloween2026FriendsBackground then UseThemeBackgroundFunction() ~= nil else false
+	local HasUseThemeBackgroundResult = UseThemeBackgroundFunction() ~= nil
 	
 	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,

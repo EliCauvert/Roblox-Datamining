@@ -7,12 +7,14 @@ local FFlagBuildExperienceLibrary = require(Parent.SharedFlags).FFlagBuildExperi
 local FFlagBuildExperienceInGameShellComposer = require(Parent.SharedFlags).FFlagBuildExperienceInGameShellComposer
 local FFlagBuildExperienceFTUXChipSendGuidanceModule = require(BuildExperience.Flags.FFlagBuildExperienceFTUXChipSendGuidance)
 local FFlagBuildChatPasteAsAttachmentModule = require(BuildExperience.Flags.FFlagBuildChatPasteAsAttachment)
+local FFlagBuildChatAttachmentMenuModule = require(BuildExperience.Flags.FFlagBuildChatAttachmentMenu)
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local SignalsModule = require(Parent.Signals)
 local _ = require(BuildExperience.Chat.chatTypes)
 local ModelPickerContainerModule = if FFlagBuildExperienceModelPickerModule then require(BuildExperience.Components.ModelPicker.ModelPickerContainer) else nil
 local ChatActionsRowModule = require(script.Parent.ChatActionsRow)
+local ChatAttachmentMenuContainerModule = require(script.Parent.ChatAttachmentMenuContainer)
 local Composer = if require(BuildExperience.Flags.FFlagBuildExperienceUseCommonTextArea) then require(Parent.AppBlox).Composer else require(BuildExperience.FoundationFork.TextArea)
 local UseReleaseFocusOnDownSwipeModule = require(script.Parent.useReleaseFocusOnDownSwipe)
 local SplitPastedTextModule = require(script.Parent.splitPastedText)
@@ -39,7 +41,7 @@ local _ = function(p1, p2)
 end
 
 return function(Frame)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), SignalsModule (copy), FFlagBuildExperienceLibrary (copy), FFlagBuildExperienceModelPickerModule (copy), FFlagBuildChatPasteAsAttachmentModule (copy), FFlagBuildExperienceFTUXChipSendGuidanceModule (copy), SplitPastedTextModule (copy), UseReleaseFocusOnDownSwipeModule (copy), FFlagBuildExperienceSingleLineComposerModule (copy), View (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), ModelPickerContainerModule (copy), FFlagBuildExperienceInGameShellComposer (copy), ChatActionsRowModule (copy), EducationalTooltip (copy), FoundationModule (copy), Composer (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), SignalsModule (copy), FFlagBuildExperienceLibrary (copy), FFlagBuildExperienceModelPickerModule (copy), FFlagBuildChatPasteAsAttachmentModule (copy), FFlagBuildChatAttachmentMenuModule (copy), FFlagBuildExperienceFTUXChipSendGuidanceModule (copy), SplitPastedTextModule (copy), UseReleaseFocusOnDownSwipeModule (copy), FFlagBuildExperienceSingleLineComposerModule (copy), View (copy), ChatAttachmentMenuContainerModule (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), ModelPickerContainerModule (copy), FFlagBuildExperienceInGameShellComposer (copy), ChatActionsRowModule (copy), EducationalTooltip (copy), FoundationModule (copy), Composer (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseMemoResult = ReactModule.useMemo(function()
@@ -66,17 +68,17 @@ return function(Frame)
 	end
 	local HasComposerErrorText = Frame.composerErrorText ~= nil
 	local HasSendableAttachments = if Frame.images == nil then FFlagBuildChatPasteAsAttachmentModule and Frame.hasSendableAttachments else #Frame.images > 0 or FFlagBuildChatPasteAsAttachmentModule and Frame.hasSendableAttachments
-	local HasOnOpenCaptureGallery: boolean = Frame.isAttachmentSupported and Frame.onOpenCaptureGallery ~= nil
+	local HasOnOpenCaptureGallery: boolean = if FFlagBuildChatAttachmentMenuModule then #Frame.attachmentMenuItems > 0 else Frame.isAttachmentSupported and Frame.onOpenCaptureGallery ~= nil
 	local IsOpen = false
 	
-	local function v37(_) end
+	local function v39(_) end
 	
 	if FFlagBuildExperienceFTUXChipSendGuidanceModule then
-		IsOpen, v37 = ReactModule.useState(false)
+		IsOpen, v39 = ReactModule.useState(false)
 		ReactModule.useEffect(function()
-			-- upvalues: Frame (copy), v37 (ref)
+			-- upvalues: Frame (copy), v39 (ref)
 			if Frame.isFtuxSendGated ~= true then
-				v37(false)
+				v39(false)
 			end
 		end, { Frame.isFtuxSendGated })
 	end
@@ -109,18 +111,18 @@ return function(Frame)
 		Frame.onChanged(Text)
 	end, { Frame.onChanged, UseMemoResult })
 	local UseResult1 = ReactModule.useCallback(function()
-		-- upvalues: v1 (ref), FFlagBuildExperienceFTUXChipSendGuidanceModule (upval), Frame (copy), IsIsReadOnly (copy), FFlagBuildExperienceModelPickerModule (upval), HasComposerErrorText (copy), HasSendableAttachments (copy), v37 (ref), UseMemoResult (copy)
+		-- upvalues: v1 (ref), FFlagBuildExperienceFTUXChipSendGuidanceModule (upval), Frame (copy), IsIsReadOnly (copy), FFlagBuildExperienceModelPickerModule (upval), HasComposerErrorText (copy), HasSendableAttachments (copy), v39 (ref), UseMemoResult (copy)
 		if v1 then return end
 		if not FFlagBuildExperienceFTUXChipSendGuidanceModule or Frame.isFtuxSendGated ~= true then
 			if FFlagBuildExperienceFTUXChipSendGuidanceModule then
-				v37(false)
+				v39(false)
 			end
 			if Frame.onSend() then
 				UseMemoResult.setIsComposerEmpty(not FFlagBuildExperienceModelPickerModule or string.gsub(Frame.text:getValue(), "^%s*(.-)%s*$", "%1") == "")
 			end
 			return
 		elseif not IsIsReadOnly and (FFlagBuildExperienceModelPickerModule or not HasComposerErrorText) and (Frame.isSendBlocked ~= true and (string.gsub(Frame.text:getValue(), "^%s*(.-)%s*$", "%1") ~= "" or HasSendableAttachments)) then
-			v37(true)
+			v39(true)
 		end
 	end, if FFlagBuildExperienceFTUXChipSendGuidanceModule then {
 		Frame.onSend, UseMemoResult, v1, IsIsReadOnly, HasComposerErrorText,
@@ -189,7 +191,12 @@ return function(Frame)
 		},
 		tag = Tag
 	}, {
-		Attach = if HasOnOpenCaptureGallery then ReactModule.createElement(IconButton, {
+		Attach = if FFlagBuildChatAttachmentMenuModule then if HasOnOpenCaptureGallery then ReactModule.createElement(ChatAttachmentMenuContainerModule, {
+			testId = "ChatComposer.AttachImage",
+			items = Frame.attachmentMenuItems,
+			isDisabled = Frame.isAssistantResponding or IsIsReadOnly,
+			LayoutOrder = LayoutOrder
+		}) else nil elseif HasOnOpenCaptureGallery then ReactModule.createElement(IconButton, {
 			isCircular = true,
 			testId = "ChatComposer.AttachImage",
 			LayoutOrder = LayoutOrder,
@@ -227,8 +234,8 @@ return function(Frame)
 	local Element1 = nil
 	
 	if FFlagBuildExperienceInGameShellComposer and Frame.onSelectionActivated ~= nil then
-		local TextBoxRef1 = Frame.textBoxRef
-		local OnSelectionActivatedFunction = Frame.onSelectionActivated
+		local TextBoxRef = Frame.textBoxRef
+		local OnSelectionActivated = Frame.onSelectionActivated
 		Element1 = ReactModule.createElement(IconButton, {
 			LayoutOrder = 1,
 			isCircular = true,
@@ -236,11 +243,11 @@ return function(Frame)
 			icon = IconName.CursorStars,
 			isDisabled = Frame.isAssistantResponding or IsIsReadOnly,
 			onActivated = function()
-				-- upvalues: TextBoxRef1 (copy), OnSelectionActivatedFunction (copy)
-				if TextBoxRef1 ~= nil and TextBoxRef1.current ~= nil then
-					TextBoxRef1.current.releaseFocus()
+				-- upvalues: TextBoxRef (copy), OnSelectionActivated (copy)
+				if TextBoxRef ~= nil and TextBoxRef.current ~= nil then
+					TextBoxRef.current.releaseFocus()
 				end
-				OnSelectionActivatedFunction()
+				OnSelectionActivated()
 			end,
 			size = InputSize.Small,
 			variant = ButtonVariant.Utility
@@ -252,8 +259,8 @@ return function(Frame)
 	local Element2 = nil
 	
 	if FFlagBuildExperienceInGameShellComposer and Frame.onCaptureActivated ~= nil then
-		local TextBoxRef = Frame.textBoxRef
-		local OnCaptureActivated = Frame.onCaptureActivated
+		local TextBoxRef1 = Frame.textBoxRef
+		local OnCaptureActivatedFunction = Frame.onCaptureActivated
 		Element2 = ReactModule.createElement(IconButton, {
 			LayoutOrder = 2,
 			isCircular = true,
@@ -261,11 +268,11 @@ return function(Frame)
 			icon = IconName.FrameCameraCenter,
 			isDisabled = Frame.isAssistantResponding or IsIsReadOnly,
 			onActivated = function()
-				-- upvalues: TextBoxRef (copy), OnCaptureActivated (copy)
-				if TextBoxRef ~= nil and TextBoxRef.current ~= nil then
-					TextBoxRef.current.releaseFocus()
+				-- upvalues: TextBoxRef1 (copy), OnCaptureActivatedFunction (copy)
+				if TextBoxRef1 ~= nil and TextBoxRef1.current ~= nil then
+					TextBoxRef1.current.releaseFocus()
 				end
-				OnCaptureActivated()
+				OnCaptureActivatedFunction()
 			end,
 			size = InputSize.Small,
 			variant = ButtonVariant.Utility
@@ -300,8 +307,8 @@ return function(Frame)
 			align = FoundationModule.Enums.PopoverAlign.End,
 			isOpen = IsOpen,
 			onPressedOutside = function()
-				-- upvalues: v37 (ref)
-				v37(false)
+				-- upvalues: v39 (ref)
+				v39(false)
 			end,
 			side = FoundationModule.Enums.PopoverSide.Top
 		}, { Anchor = Element3 })

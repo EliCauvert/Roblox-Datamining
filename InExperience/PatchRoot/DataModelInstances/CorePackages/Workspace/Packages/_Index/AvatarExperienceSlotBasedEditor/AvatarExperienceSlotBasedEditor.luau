@@ -16,7 +16,8 @@ return {
 	},
 	Hooks = {
 		useSlotItemCardBreakpoints = require(script.Hooks.useSlotItemCardBreakpoints),
-		useSlotCustomizeFtux = require(script.Hooks.useSlotCustomizeFtux)
+		useSlotCustomizeFtux = require(script.Hooks.useSlotCustomizeFtux),
+		useInventorySearchQuery = require(script.Hooks.useInventorySearchQuery)
 	},
 	Context = {
 		SlotBasedEditorContext = require(script.Context.SlotBasedEditorContext),
@@ -58,6 +59,7 @@ return {
 		buildSearchAvatarInventoryQuery = require(script.Utils.buildSearchAvatarInventoryQuery),
 		toSearchableItemCategories = require(script.Utils.toSearchableItemCategories),
 		getInventorySearchKey = require(script.Utils.getInventorySearchKey),
+		getInventorySearchFetchKey = require(script.Utils.getInventorySearchFetchKey),
 		getActiveInventoryStore = require(script.Utils.getActiveInventoryStore)
 	},
 	["jest.config"] = script["jest.config"]

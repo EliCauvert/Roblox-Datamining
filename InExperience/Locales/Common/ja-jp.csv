@@ -77,11 +77,13 @@ Amp.Upsell.Title.RequestSent,リクエストを送信しました
 Authentication.AccountSwitch.Action.SwitchAccount,アカウントを切り替える
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,クイックログイン
+Authentication.Login.Action.Leave,
 Authentication.Login.Action.QuickSignIn,クイックサインイン
 Authentication.Login.Action.Save,保存
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Robloxから退出して {platformAccountName} のアカウントを切り替え
 Authentication.Login.Button.UseDifferentRobloxAccount,別のRobloxアカウントを使用
 Authentication.Login.Button.XboxAccountSwitcher,Xboxアカウントを切りかえる
+Authentication.Login.Description.LeaveAccountSetup,この画面を閉じると、Robloxアカウントの設定は完了しません。
 Authentication.Login.Error.PasskeyOnlyAccount,アカウントにはログイン用のパスキーが設定されています。パスキーでログインするか、アカウントを回復してください。
 Authentication.Login.Error.PlatformAccountConnectionFailure,プラットフォーム用アカウントを確認できません。後でもう一度お試しください。
 Authentication.Login.Heading.IncompatibleAccounts,アカウントに互換性がありません
@@ -3631,7 +3633,7 @@ Feature.Friends.Label.FollowsYou,あなたをフォロー中
 Feature.Friends.Label.Frequent,一緒に遊んだ人
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,Robloxで友達になるように招待しました。
-Feature.Friends.Label.FriendOfUser,{displayName}の友達
+Feature.Friends.Label.FriendOfUser,
 Feature.Friends.Label.FriendOwns,友達1人が持っています
 Feature.Friends.Label.FriendRecentlyPlayed,<b>友達1人が</b>最近プレイしました
 Feature.Friends.Label.FriendRequest,

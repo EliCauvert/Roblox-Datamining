@@ -77,11 +77,13 @@ Amp.Upsell.Title.RequestSent,요청 전송 완료
 Authentication.AccountSwitch.Action.SwitchAccount,계정 전환
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,빠른 로그인
+Authentication.Login.Action.Leave,나가기
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.Save,저장
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,{platformAccountName} 계정으로 전환하려면 Roblox를 종료하세요
 Authentication.Login.Button.UseDifferentRobloxAccount,다른 Roblox 계정 사용
 Authentication.Login.Button.XboxAccountSwitcher,Xbox 계정 전환
+Authentication.Login.Description.LeaveAccountSetup,지금 나가면 Roblox 계정이 설정되지 않습니다.
 Authentication.Login.Error.PasskeyOnlyAccount,계정에 로그인용 패스키만 설정되어 있습니다. 패스키로 로그인을 시도하거나 계정을 복구하세요.
 Authentication.Login.Error.PlatformAccountConnectionFailure,플랫폼 계정을 인증할 수 없습니다. 나중에 다시 시도하세요.
 Authentication.Login.Heading.IncompatibleAccounts,계정이 호환되지 않음
@@ -110,7 +112,7 @@ Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.ContinueSetup,설정 계속
 Authentication.SignUp.Action.Create,만들기
 Authentication.SignUp.Action.CreateAccountSentenceCase,계정 생성
-Authentication.SignUp.Action.ExitModalLeave,나가기
+Authentication.SignUp.Action.ExitModalLeave,
 Authentication.SignUp.Action.RespawnNow,지금 리스폰
 Authentication.SignUp.Button.OKCaptialized,확인
 Authentication.SignUp.Button.RetryLogIn,로그인 재시도
@@ -3631,7 +3633,7 @@ Feature.Friends.Label.FollowsYou,나를 팔로우 중
 Feature.Friends.Label.Frequent,함께 플레이함
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,Roblox 친구로 초대받았어요.
-Feature.Friends.Label.FriendOfUser,{displayName} 님의 친구
+Feature.Friends.Label.FriendOfUser,회원님을 위한 추천
 Feature.Friends.Label.FriendOwns,친구 1명이 보유함
 Feature.Friends.Label.FriendRecentlyPlayed,<b>친구 1명</b>이 최근에 플레이함
 Feature.Friends.Label.FriendRequest,친구 요청

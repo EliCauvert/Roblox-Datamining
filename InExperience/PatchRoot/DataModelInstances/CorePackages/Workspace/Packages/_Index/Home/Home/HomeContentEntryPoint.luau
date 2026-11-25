@@ -27,7 +27,6 @@ local FFlagAppPageShellScrollToTopFocus = require(Parent.SharedFlags).FFlagAppPa
 local FFlagAppPageShellScrollTelemetry = require(Parent.SharedFlags).FFlagAppPageShellScrollTelemetry
 local FFlagHomePageRefetchOnDataHydrationAccountReset = require(Parent.SharedFlags).FFlagHomePageRefetchOnDataHydrationAccountReset
 local FFlagLuaAppSduiHomeSponsoredAdViewabilityModule = require(Home.Flags.FFlagLuaAppSduiHomeSponsoredAdViewability)
-local FFlagAppThemeHalloween2026HomeBackground = require(Parent.SharedFlags).FFlagAppThemeHalloween2026HomeBackground
 local FFlagSduiHomeStartupSnapshot = require(Parent.SharedFlags).FFlagSduiHomeStartupSnapshot
 
 local function _(p1, p2)
@@ -42,7 +41,7 @@ local function getCommittedHomeSessionId(p1)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: HomeConstantsModule (copy), FFlagLuaAppAddHomeExtraTopPadding (copy), UseEntrySurfacingFunction (copy), FFlagSduiDismissPromptPageScope (copy), UsePageScopeRefFunction (copy), ReactModule (copy), SduiSharedUtilitiesModule (copy), AppPage (copy), FFlagHomePageRefetchOnDataHydrationAccountReset (copy), FetchHomePageModule (copy), Home (copy), UseHomeCollectionLayoutSyncModule (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), ResponsiveModule (copy), VideoUtilsModule (copy), FFlagLuaAppSduiHomeSponsoredAdViewabilityModule (copy), SignalsReactModule (copy), getCommittedHomeSessionId (copy), UseSponsoredAdViewabilityDetectorFunction (copy), AppLifecycleObserverService (copy), FFlagSduiHomeStartupSnapshot (copy), UseHomeStartupSnapshotModule (copy), FFlagLuaAppSduiSuppressVideoDetectorDuringScroll (copy), ExperienceService (copy), SduiPageWrapperEntryPoint (copy), RefreshHomePageModule (copy), FFlagAppPageShellScrollTelemetry (copy), FFlagAppPageShellScrollToTopFocus (copy), FFlagAppThemeHalloween2026HomeBackground (copy)
+	-- upvalues: HomeConstantsModule (copy), FFlagLuaAppAddHomeExtraTopPadding (copy), UseEntrySurfacingFunction (copy), FFlagSduiDismissPromptPageScope (copy), UsePageScopeRefFunction (copy), ReactModule (copy), SduiSharedUtilitiesModule (copy), AppPage (copy), FFlagHomePageRefetchOnDataHydrationAccountReset (copy), FetchHomePageModule (copy), Home (copy), UseHomeCollectionLayoutSyncModule (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), ResponsiveModule (copy), VideoUtilsModule (copy), FFlagLuaAppSduiHomeSponsoredAdViewabilityModule (copy), SignalsReactModule (copy), getCommittedHomeSessionId (copy), UseSponsoredAdViewabilityDetectorFunction (copy), AppLifecycleObserverService (copy), FFlagSduiHomeStartupSnapshot (copy), UseHomeStartupSnapshotModule (copy), FFlagLuaAppSduiSuppressVideoDetectorDuringScroll (copy), ExperienceService (copy), SduiPageWrapperEntryPoint (copy), RefreshHomePageModule (copy), FFlagAppPageShellScrollTelemetry (copy), FFlagAppPageShellScrollToTopFocus (copy)
 	local ConfigKey = HomeConstantsModule.ConfigKey
 	local v1 = nil
 	
@@ -153,7 +152,7 @@ return ReactModule.memo(function(p1)
 		videoPlaybackContext = UseFeedVideoPlaybackContextResult,
 		handleBackButton = not FFlagAppPageShellScrollToTopFocus and nil,
 		defaultFocusRef = if FFlagAppPageShellScrollToTopFocus then p1.defaultFocusRef else nil,
-		backgroundStyle = if FFlagAppThemeHalloween2026HomeBackground then p1.backgroundStyle else nil,
-		stickyBackgroundStyle = if FFlagAppThemeHalloween2026HomeBackground then p1.stickyBackgroundStyle else nil
+		backgroundStyle = p1.backgroundStyle,
+		stickyBackgroundStyle = p1.stickyBackgroundStyle
 	})
 end)

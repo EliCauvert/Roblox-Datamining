@@ -77,11 +77,13 @@ Amp.Upsell.Title.RequestSent,Wysłano prośbę
 Authentication.AccountSwitch.Action.SwitchAccount,Przełącz konta
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,Szybkie logowanie
+Authentication.Login.Action.Leave,Wyjdź
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.Save,Zapisz
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,"Wyjdź z Robloxa, aby przełączyć konto na {platformAccountName}"
 Authentication.Login.Button.UseDifferentRobloxAccount,Użyj innego konta Roblox
 Authentication.Login.Button.XboxAccountSwitcher,Zmień konto Xbox
+Authentication.Login.Description.LeaveAccountSetup,"Jeśli wyjdziesz teraz, Twoje konto Roblox nie zostanie skonfigurowane."
 Authentication.Login.Error.PasskeyOnlyAccount,Na Twoim koncie skonfigurowano wyłącznie logowanie za pomocą klucza dostępu. Spróbuj zalogować się za pomocą klucza dostępu lub odzyskaj konto.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Nie można zweryfikować konta na platformie. Spróbuj ponownie później.
 Authentication.Login.Heading.IncompatibleAccounts,Niezgodne konta
@@ -802,7 +804,7 @@ CoreScripts.FTUX.Label.SocialOnboarding,"Łatwy dostęp do funkcji społecznośc
 CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,"W tym menu znajdziesz wszystko, czego potrzebujesz, w tym opcję Opuść."
 CoreScripts.Feedback.EntryPoint.ButtonText,Prześlij opinię
 CoreScripts.Feedback.EntryPoint.OptionText,Prześlij opinię dotyczącą tłumaczenia
-CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,Wyjdź
+CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,
 CoreScripts.Feedback.FeedbackBar.HelpButton,Pomoc
 CoreScripts.Feedback.FeedbackBar.MainLabel,
 CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,Poniżej wpisz dodatkowe uwagi

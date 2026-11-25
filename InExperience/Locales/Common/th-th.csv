@@ -60,11 +60,13 @@ Amp.Upsell.Title.RequestSent,ส่งคำขอแล้ว
 Authentication.AccountSwitch.Action.SwitchAccount,สลับบัญชี
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,ลงชื่อเข้าใช้ด่วน
+Authentication.Login.Action.Leave,ออก
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.Save,บันทึก
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,ออกจาก Roblox เพื่อสลับไปใช้บัญชี {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,ใช้บัญชี Roblox บัญชีอื่น
 Authentication.Login.Button.XboxAccountSwitcher,สลับบัญชี Xbox
+Authentication.Login.Description.LeaveAccountSetup,หากออกตอนนี้ บัญชี Roblox ของคุณจะยังตั้งค่าไม่เสร็จ
 Authentication.Login.Error.PasskeyOnlyAccount,บัญชีของคุณตั้งค่าให้ลงชื่อเข้าใช้ด้วยพาสคีย์เท่านั้น ลองลงชื่อเข้าใช้ด้วยพาสคีย์หรือกู้คืนบัญชี
 Authentication.Login.Error.PlatformAccountConnectionFailure,ไม่สามารถยืนยันบัญชีแพลตฟอร์มได้ โปรดลองอีกครั้งในภายหลัง
 Authentication.Login.Heading.IncompatibleAccounts,บัญชีที่เข้ากันไม่ได้
@@ -93,7 +95,7 @@ Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.ContinueSetup,ตั้งค่าต่อ
 Authentication.SignUp.Action.Create,สร้าง
 Authentication.SignUp.Action.CreateAccountSentenceCase,สร้างบัญชี
-Authentication.SignUp.Action.ExitModalLeave,ออก
+Authentication.SignUp.Action.ExitModalLeave,
 Authentication.SignUp.Action.RespawnNow,เกิดใหม่ตอนนี้เลย
 Authentication.SignUp.Button.OKCaptialized,ตกลง
 Authentication.SignUp.Button.RetryLogIn,ลองเข้าสู่ระบบอีกครั้ง

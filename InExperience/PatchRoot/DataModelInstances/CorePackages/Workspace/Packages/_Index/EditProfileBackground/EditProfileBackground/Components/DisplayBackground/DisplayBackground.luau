@@ -234,7 +234,7 @@ return function(p1)
 					-- upvalues: FFlagProfileInspectAvatarSlideIn (upval), FFlagProfileInspectAvatarShopChip (upval), GetCharacterAppearanceInfoAsyncModule (upval), UserId (upval), ResolveResult (ref), PromiseModule (upval), InsertService (upval), CryoModule (upval), ResolveResult1 (ref)
 					local Success, Result = pcall(function()
 						-- upvalues: FFlagProfileInspectAvatarSlideIn (upval), FFlagProfileInspectAvatarShopChip (upval), GetCharacterAppearanceInfoAsyncModule (upval), UserId (upval)
-						return if FFlagProfileInspectAvatarSlideIn or FFlagProfileInspectAvatarShopChip then GetCharacterAppearanceInfoAsyncModule(UserId) else game.Players:GetCharacterAppearanceInfoAsync(UserId)
+						return if FFlagProfileInspectAvatarSlideIn or FFlagProfileInspectAvatarShopChip then GetCharacterAppearanceInfoAsyncModule(UserId) else game:GetService("Players"):GetCharacterAppearanceInfoAsync(UserId)
 					end)
 					
 					if Success and Result then

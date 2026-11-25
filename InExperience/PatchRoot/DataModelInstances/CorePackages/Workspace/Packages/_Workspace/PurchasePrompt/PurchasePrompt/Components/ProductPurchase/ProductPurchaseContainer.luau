@@ -98,6 +98,7 @@ local FFlagAddCenterDialogForUnifiedPurchaseModal = require(Parent.SharedFlags).
 local FFlagUnifiedPurchaseAddSkeleton = require(Parent.SharedFlags).FFlagUnifiedPurchaseAddSkeleton
 local FFlagEnableSubscriptionUpsellUnifiedPurchaseEventTelemetry = require(Parent.SharedFlags).FFlagEnableSubscriptionUpsellUnifiedPurchaseEventTelemetry
 local RemoveDelayedInputForUnifiedPurchaseModal = game:DefineFastFlag("RemoveDelayedInputForUnifiedPurchaseModal", true)
+local PurchasePromptFixDidMountSetShown = game:DefineFastFlag("PurchasePromptFixDidMountSetShown", false)
 local FFlagPurchasePromptSubtitleForTimedOptions = require(Parent.SharedFlags).FFlagPurchasePromptSubtitleForTimedOptions
 local FFlagPurchaseModalTimedOptionExtension = require(Parent.SharedFlags).FFlagPurchaseModalTimedOptionExtension
 local FFlagAddOnRobloxSubscriptionUpsellSuccessCallbackToUnifiedPurchaseModal = require(Parent.SharedFlags).FFlagAddOnRobloxSubscriptionUpsellSuccessCallbackToUnifiedPurchaseModal
@@ -379,13 +380,19 @@ function ExtendResult.init(p1)
 end
 
 function ExtendResult.didMount(p1)
-	-- upvalues: WindowStateModule (copy), isRelevantRequestType (copy), GuiService (copy)
+	-- upvalues: WindowStateModule (copy), isRelevantRequestType (copy), PurchasePromptFixDidMountSetShown (copy), GuiService (copy)
 	local PurchaseFlow = p1.props.purchaseFlow
 	local RequestType = p1.props.requestType
 	
 	if p1.props.windowState == WindowStateModule.Shown and isRelevantRequestType(RequestType, PurchaseFlow) then
 		p1:setState({ isAnimating = true })
 		p1.configContextActionService(p1.props.windowState)
+		
+		if PurchasePromptFixDidMountSetShown then
+			GuiService:SetPurchasePromptIsShown(true)
+			
+			return
+		end
 		GuiService.SetPurchasePromptIsShown(true)
 	end
 end
@@ -739,7 +746,7 @@ function ExtendResult.determinePrompt(p1)
 		local ProductPrice1 = if IsProductPriceMatch or DeriveCartPricingViewResult == nil or UnifiedPurchaseModalTypeModule ~= UnifiedPurchaseModalTypeEnum.MultiItem then p1.props.productPrice else DeriveCartPricingViewResult.priceAfterDiscount
 		local BlackbirdUpsellBannerProductInfoModule = if ShouldShowBlackbirdUpsellModule(Price, p1.props.requestType, IsProductPriceMatch, if FFlagBlackbirdUpsellGateResaleAndTimedOptionModule then p1.props.productPayload else nil) and p1.props.robloxSubscriptionProducts then GetBlackbirdUpsellBannerProductInfoModule(p1.props.robloxSubscriptionProducts) else nil
 		
-		local function v147(p2)
+		local function v148(p2)
 			-- upvalues: p1 (copy), FFlagEnableSubscriptionUpsellUnifiedPurchaseEventTelemetry (upval), BlackbirdUpsellBannerProductInfoModule (copy), UnifiedPurchaseEventNameEnumModule (upval), FFlagEnableBlackbirdUpsellImpressionGating (upval), BlackbirdUpsellImpressionTrackerModule (upval)
 			p1.onBuyItemButtonMounted(p2)
 			
@@ -751,7 +758,7 @@ function ExtendResult.determinePrompt(p1)
 			end
 		end
 		
-		local OnBuyItemButtonMounted = if FFlagEnableSubscriptionUpsellUnifiedPurchaseEventTelemetry or FFlagEnableBlackbirdUpsellImpressionGating then v147 else p1.onBuyItemButtonMounted
+		local OnBuyItemButtonMounted = if FFlagEnableSubscriptionUpsellUnifiedPurchaseEventTelemetry or FFlagEnableBlackbirdUpsellImpressionGating then v148 else p1.onBuyItemButtonMounted
 		
 		local function OnCartOfferAppliedChanged(_, p2)
 			-- upvalues: p1 (copy), RequestTypeModule (upval)

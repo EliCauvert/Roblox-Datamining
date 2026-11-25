@@ -5,7 +5,6 @@ local ReactModule = require(Parent.React)
 local AppPage = require(Parent.RobloxAppEnums).AppPage
 local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
 local CompositionTags = require(Parent.AppComposition).CompositionTags
-local FFlagAppThemeHalloween2026HomeBackground = require(Parent.SharedFlags).FFlagAppThemeHalloween2026HomeBackground
 local SduiPageEntryPoint = SduiSharedUtilitiesModule.SduiPageEntryPoint
 local SduiSurfaceLoadTimeTracker = SduiSharedUtilitiesModule.SduiSurfaceLoadTimeTracker
 local GetSduiClientPageScopeFunction = SduiSharedUtilitiesModule.getSduiClientPageScope
@@ -18,7 +17,7 @@ local function _(p1, p2)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: ChartsConstantsModule (copy), UsePageScopeRefFunction (copy), ReactModule (copy), GetSduiClientPageScopeFunction (copy), SduiSurfaceLoadTimeTracker (copy), FetchChartsPageModule (copy), SduiPageEntryPoint (copy), AppPage (copy), CompositionTags (copy), FFlagAppThemeHalloween2026HomeBackground (copy)
+	-- upvalues: ChartsConstantsModule (copy), UsePageScopeRefFunction (copy), ReactModule (copy), GetSduiClientPageScopeFunction (copy), SduiSurfaceLoadTimeTracker (copy), FetchChartsPageModule (copy), SduiPageEntryPoint (copy), AppPage (copy), CompositionTags (copy)
 	local ConfigKey = ChartsConstantsModule.ConfigKey
 	local PageTimer = p1.pageTimer or p1.navigation and p1.navigation.getParam("pageTimer")
 	UsePageScopeRefFunction(ConfigKey)
@@ -65,7 +64,7 @@ return ReactModule.memo(function(p1)
 		pageTopPadding = p1.pageTopPadding,
 		feedTopMargin = p1.feedTopMargin,
 		scrollAway = p1.scrollAway,
-		backgroundStyle = if FFlagAppThemeHalloween2026HomeBackground then p1.backgroundStyle else nil,
-		feedBackgroundStyle = if FFlagAppThemeHalloween2026HomeBackground then p1.backgroundStyle else nil
+		backgroundStyle = p1.backgroundStyle,
+		feedBackgroundStyle = p1.backgroundStyle
 	})
 end)

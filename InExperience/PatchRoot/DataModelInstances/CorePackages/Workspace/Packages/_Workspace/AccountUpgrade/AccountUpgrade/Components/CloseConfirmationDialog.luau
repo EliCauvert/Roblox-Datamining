@@ -13,20 +13,24 @@ local DialogSize = FoundationModule.Enums.DialogSize
 local Orientation = FoundationModule.Enums.Orientation
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local UseMobilePageModule = require(AccountUpgrade.MobilePage.useMobilePage)
+local FFlagLuaAppSsoLinkCandidateModule = require(AccountUpgrade.Flags.FFlagLuaAppSsoLinkCandidate)
+local Frozen = table.freeze({})
 
 return function(p1)
-	-- upvalues: FoundationModule (copy), UseMobilePageModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), UseLocalizationFunction (copy), ReactModule (copy), ButtonVariant (copy), Dialog (copy), DialogSize (copy), View (copy), Text (copy), Orientation (copy)
+	-- upvalues: FoundationModule (copy), UseMobilePageModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), FFlagLuaAppSsoLinkCandidateModule (copy), Frozen (copy), UseLocalizationFunction (copy), ReactModule (copy), ButtonVariant (copy), Dialog (copy), DialogSize (copy), View (copy), Text (copy), Orientation (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseMobilePageModuleResult = UseMobilePageModule()
 	local UseFocusRootResult = UseFocusRootFunction({
 		isAutoFocusRoot = true,
 		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp
 	})
+	local Frozen1 = if FFlagLuaAppSsoLinkCandidateModule then p1 else Frozen
+	local TestId = Frozen1.testId or "account-upgrade-close-dialog"
 	local UseLocalizationResult = UseLocalizationFunction({
-		titleText = "Authentication.SignUp.Header.CancelAccountCreation",
-		bodyText = "Authentication.SignUp.Subtitle.YoureAlmostThereClose",
-		continueSetupText = "Authentication.SignUp.Action.ContinueSetup",
-		cancelText = "Authentication.SignUp.Action.Cancel"
+		titleText = Frozen1.titleKey or "Authentication.SignUp.Header.CancelAccountCreation",
+		bodyText = Frozen1.bodyKey or "Authentication.SignUp.Subtitle.YoureAlmostThereClose",
+		continueSetupText = Frozen1.primaryKey or "Authentication.SignUp.Action.ContinueSetup",
+		cancelText = Frozen1.secondaryKey or "Authentication.SignUp.Action.Cancel"
 	})
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local UseRefResult = ReactModule.useRef(false)
@@ -36,24 +40,24 @@ return function(p1)
 	return ReactModule.createElement(Dialog.Root, {
 		disablePortal = false,
 		hasBackdrop = true,
-		testId = "account-upgrade-close-dialog",
 		ref = UseFocusRootResult,
-		size = DialogSize.Small
+		size = DialogSize.Small,
+		testId = TestId
 	}, {
 		Header = ReactModule.createElement(View, {
 			tag = "col gap-xsmall size-full-0 auto-y",
 			LayoutOrder = 1,
-			testId = "account-upgrade-close-dialog--header",
 			padding = {
 				top = UDim.new(0, UseTokensResult.Size.Size_450),
 				bottom = UDim.new(0, UseTokensResult.Padding.Large)
-			}
+			},
+			testId = `{TestId}--header`
 		}, {
 			Title = ReactModule.createElement(Text, {
 				tag = "size-full-0 auto-y text-heading-small text-wrap text-align-x-left content-emphasis",
 				LayoutOrder = 1,
-				testId = "account-upgrade-close-dialog--title",
-				Text = UseLocalizationResult.titleText
+				Text = UseLocalizationResult.titleText,
+				testId = `{TestId}--title`
 			}),
 			Body = ReactModule.createElement(Dialog.Text, { LayoutOrder = 2, Text = UseLocalizationResult.bodyText })
 		}),

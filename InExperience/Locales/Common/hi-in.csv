@@ -60,11 +60,13 @@ Amp.Upsell.Title.RequestSent,रिक्वेस्ट भेजी गई
 Authentication.AccountSwitch.Action.SwitchAccount,अकाउंट बदलें
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,क्विक साइन-इन
+Authentication.Login.Action.Leave,छोड़ें
 Authentication.Login.Action.QuickSignIn,क्विक साइन-इन करें
 Authentication.Login.Action.Save,सेव करें
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,{platformAccountName} के अकाउंट पर स्विच करने के लिए Roblox से बाहर निकलें
 Authentication.Login.Button.UseDifferentRobloxAccount,किसी दूसरे Roblox अकाउंट का इस्तेमाल करें
 Authentication.Login.Button.XboxAccountSwitcher,Xbox अकाउंट बदलें
+Authentication.Login.Description.LeaveAccountSetup,"अगर आपने अभी छोड़ा, तो आपका Roblox अकाउंट सेट अप नहीं होगा."
 Authentication.Login.Error.PasskeyOnlyAccount,"आपके अकाउंट में साइन-इन करने के लिए सिर्फ़ पास-की सेटअप है. अपने अकाउंट को वापस पाने के लिए, अपनी पास-की से साइन-इन करके देखें."
 Authentication.Login.Error.PlatformAccountConnectionFailure,प्लैटफ़ॉर्म अकाउंट वेरिफ़ाई नहीं किया जा सका. बाद में फिर से कोशिश करें.
 Authentication.Login.Heading.IncompatibleAccounts,अकाउंट कंपैटिबल नहीं हैं
@@ -93,7 +95,7 @@ Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.ContinueSetup,सेटअप जारी रखें
 Authentication.SignUp.Action.Create,क्रिएट करें
 Authentication.SignUp.Action.CreateAccountSentenceCase,अकाउंट बनाएँ
-Authentication.SignUp.Action.ExitModalLeave,छोड़ें
+Authentication.SignUp.Action.ExitModalLeave,
 Authentication.SignUp.Action.RespawnNow,अभी रीस्पॉन करें
 Authentication.SignUp.Button.OKCaptialized,ठीक है
 Authentication.SignUp.Button.RetryLogIn,फिर से लॉग इन करने की कोशिश करें
@@ -3612,7 +3614,7 @@ Feature.Friends.Label.FollowsYou,आपको फ़ॉलो करता ह�
 Feature.Friends.Label.Frequent,एक साथ खेले
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,Roblox पर फ़्रेंड्स बनने के लिए इनवाइट किया है
-Feature.Friends.Label.FriendOfUser,{displayName} का फ़्रेंड
+Feature.Friends.Label.FriendOfUser,
 Feature.Friends.Label.FriendOwns,1 फ़्रेंड के पास है
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 फ़्रेंड ने</b> हाल ही में खेला
 Feature.Friends.Label.FriendRequest,

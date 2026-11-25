@@ -77,11 +77,13 @@ Amp.Upsell.Title.RequestSent,Permintaan terkirim
 Authentication.AccountSwitch.Action.SwitchAccount,Beralih Akun
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,Beralih akun
 Authentication.CrossDevice.Heading.QuickLogin,Log In Cepat
+Authentication.Login.Action.Leave,Keluar
 Authentication.Login.Action.QuickSignIn,Log in cepat
 Authentication.Login.Action.Save,Simpan
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Keluar dari Roblox untuk beralih ke akun {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,Gunakan akun Roblox lain
 Authentication.Login.Button.XboxAccountSwitcher,Ganti akun Xbox
+Authentication.Login.Description.LeaveAccountSetup,"Jika kamu keluar sekarang, akun Roblox-mu tidak akan selesai."
 Authentication.Login.Error.PasskeyOnlyAccount,Akunmu hanya memiliki passkey yang diatur untuk log in. Coba log in dengan passkey atau pulihkan akunmu.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Tidak dapat memverifikasi akun platform. Coba lagi nanti.
 Authentication.Login.Heading.IncompatibleAccounts,Akun Tidak Kompatibel
@@ -110,7 +112,7 @@ Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.ContinueSetup,Lanjutkan pengaturan
 Authentication.SignUp.Action.Create,Buat
 Authentication.SignUp.Action.CreateAccountSentenceCase,Buat akun
-Authentication.SignUp.Action.ExitModalLeave,Keluar
+Authentication.SignUp.Action.ExitModalLeave,
 Authentication.SignUp.Action.RespawnNow,Respawn sekarang
 Authentication.SignUp.Button.OKCaptialized,OKE
 Authentication.SignUp.Button.RetryLogIn,Coba log in lagi

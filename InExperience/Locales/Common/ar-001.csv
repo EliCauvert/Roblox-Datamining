@@ -60,11 +60,13 @@ Amp.Upsell.Title.RequestSent,تم إرسال الطلب
 Authentication.AccountSwitch.Action.SwitchAccount,تبديل الحسابات
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,تسجيل دخول سريع
+Authentication.Login.Action.Leave,مغادرة
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.Save,حفظ
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,يجب الخروج من منصة Roblox للتبديل إلى الحساب على منصة {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,استخدِم حساب Roblox مختلف
 Authentication.Login.Button.XboxAccountSwitcher,تبديل حساب Xbox
+Authentication.Login.Description.LeaveAccountSetup,إذا غادرت الآن، فلن يتم إعداد حسابك على Roblox.
 Authentication.Login.Error.PasskeyOnlyAccount,تم إعداد حسابك لتسجيل الدخول باستخدام مفتاح مرور فقط. جرِّب تسجيل الدخول باستخدام مفتاح المرور أو استعادة حسابك.
 Authentication.Login.Error.PlatformAccountConnectionFailure,يتعذّر التحقق من حساب المنصة. يُرجى إعادة المحاولة لاحقًا.
 Authentication.Login.Heading.IncompatibleAccounts,حسابات غير متوافقة
@@ -897,7 +899,7 @@ CoreScripts.InGameMenu.ConfirmLeaveGame,هل تريد حقًّا المغادر�
 CoreScripts.InGameMenu.ControllerBar.Back,
 CoreScripts.InGameMenu.ControllerBar.Cancel,
 CoreScripts.InGameMenu.ControllerBar.CloseMoreMenu,إغلاق قائمة المزيد
-CoreScripts.InGameMenu.ControllerBar.Leave,مغادرة
+CoreScripts.InGameMenu.ControllerBar.Leave,
 CoreScripts.InGameMenu.ControllerBar.OpenMoreMenu,فتح قائمة المزيد
 CoreScripts.InGameMenu.ControllerBar.Respawn,Respawn
 CoreScripts.InGameMenu.ControllerBar.RespawnCharacter,استرجاع الشخصية

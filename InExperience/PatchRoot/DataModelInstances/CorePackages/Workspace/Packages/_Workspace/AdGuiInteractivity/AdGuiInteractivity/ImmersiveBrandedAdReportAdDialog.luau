@@ -181,7 +181,7 @@ local function ImmersiveBrandedAdReportAdDialog(p1)
 			return true
 		end
 		Default1:logRobloxTelemetryCounter(config)
-		local LocalPlayer = game.Players.LocalPlayer
+		local LocalPlayer = game:GetService("Players").LocalPlayer
 		
 		if not LocalPlayer then
 			Default1:logRobloxTelemetryCounter(config2, 1, { reason = "noPlayer" })

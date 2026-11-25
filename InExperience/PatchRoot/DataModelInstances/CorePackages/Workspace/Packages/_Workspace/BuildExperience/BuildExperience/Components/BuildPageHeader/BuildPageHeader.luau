@@ -7,7 +7,6 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local FFlagEnableHomeRobloxLogo = require(Parent.SharedFlags).FFlagEnableHomeRobloxLogo
-local FFlagAppThemeHalloween2026BuildBackgroundModule = require(BuildExperience.Flags.FFlagAppThemeHalloween2026BuildBackground)
 local FFlagBuildUpdatedSearchUXForGAModule = require(BuildExperience.Flags.FFlagBuildUpdatedSearchUXForGA)
 local UseThemeBackgroundFunction = require(Parent.ThemeBackground).useThemeBackground
 local HeaderBar = require(Parent.UIBlox).App.Bar.HeaderBar
@@ -135,9 +134,9 @@ local function CompactHeaderSearch(p1)
 end
 
 return function(Frame)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagAppThemeHalloween2026BuildBackgroundModule (copy), UseThemeBackgroundFunction (copy), FlyoutSidePanelIXP (copy), GetSearchQueryStoreModule (copy), DisplayModule (copy), SignalsReactModule (copy), FFlagBuildUpdatedSearchUXForGAModule (copy), UseBuildPageHeaderSearchModule (copy), ReactModule (copy), HeaderCenter (copy), View (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), renderEmptyRight (copy), HeaderBar (copy), renderFlyoutLeftHeader (copy), CompactHeaderSearch (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseThemeBackgroundFunction (copy), FlyoutSidePanelIXP (copy), GetSearchQueryStoreModule (copy), DisplayModule (copy), SignalsReactModule (copy), FFlagBuildUpdatedSearchUXForGAModule (copy), UseBuildPageHeaderSearchModule (copy), ReactModule (copy), HeaderCenter (copy), View (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), renderEmptyRight (copy), HeaderBar (copy), renderFlyoutLeftHeader (copy), CompactHeaderSearch (copy)
 	local Title = UseLocalizationFunction({ title = LocalizationStringsModule.BUILD_HEADER_TITLE }).title
-	local HasUseThemeBackgroundResult: boolean = if FFlagAppThemeHalloween2026BuildBackgroundModule then UseThemeBackgroundFunction() ~= nil else false
+	local HasUseThemeBackgroundResult = UseThemeBackgroundFunction() ~= nil
 	local IsFlyoutSidePanelEnabled = FlyoutSidePanelIXP.isFlyoutSidePanelEnabled()
 	local SearchQueryStore = Frame.searchQueryStore or GetSearchQueryStoreModule()
 	local IsUseSignalStateResultMatch = SignalsReactModule.useSignalState(DisplayModule.GetDisplayStore(false).getDisplaySize) == Enum.DisplaySize.Small

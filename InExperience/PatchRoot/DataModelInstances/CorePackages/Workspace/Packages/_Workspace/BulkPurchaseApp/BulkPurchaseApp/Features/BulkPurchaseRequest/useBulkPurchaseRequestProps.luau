@@ -52,7 +52,6 @@ local SelectBulkPurchaseRequestStateModule = require(script.Parent.Utils.selectB
 local SelectOptionsModule = require(script.Parent.Utils.selectOptions)
 local FixBuyRobuxForAndroid = game:DefineFastFlag("FixBuyRobuxForAndroid", false)
 local FixBulkPurchaseInExperienceBuyRobux = game:DefineFastFlag("FixBulkPurchaseInExperienceBuyRobux", false)
-local FixBulkPurchaseStarterGuiRename = game:DefineFastFlag("FixBulkPurchaseStarterGuiRename", false)
 local FFlagAXAddPlusUpsellToBulkPurchaseModule = require(BulkPurchaseApp.Flags.FFlagAXAddPlusUpsellToBulkPurchase)
 local FFlagAXAddOffersToBulkPurchaseModule = require(BulkPurchaseApp.Flags.FFlagAXAddOffersToBulkPurchase)
 local FFlagAXMoreBulkPurchaseCountersModule = require(BulkPurchaseApp.Flags.FFlagAXMoreBulkPurchaseCounters)
@@ -62,7 +61,7 @@ local FIntBlackbirdUpsellMaxPriceForDiscountInclusive = SharedFlagsModule.FIntBl
 local _ = require(script.Parent.BulkPurchaseRequest)
 
 return function()
-	-- upvalues: UseDispatchFunction (copy), UseSelectorFunction (copy), SelectBulkPurchaseRequestStateModule (copy), SelectPurchaseResultsModule (copy), SelectOrderRequestModule (copy), SelectOptionsModule (copy), SelectItemDataModule (copy), FFlagAXAddPlusUpsellToBulkPurchaseModule (copy), ReactModule (copy), RobloxSubscriptionSignals (copy), SignalsReactModule (copy), MarketplaceService (copy), BulkPurchaseEndedModule (copy), BulkPurchaseDisablePurchaseModule (copy), IsErrorReasonContainsEconomicRestrictionsFunction (copy), HandleEconomicRestrictionErrorModule (copy), GetItemResultsFromResponseModule (copy), GetCommonItemStatusModule (copy), FFlagAXMoreBulkPurchaseCountersModule (copy), ReportBulkPurchaseRequestCountersModule (copy), BulkPurchaseCountersEnumModule (copy), BulkPurchaseSucceededModule (copy), BulkPurchasePromptStateEnumModule (copy), FFlagBulkPurchaseReportCountersModule (copy), ItemStatusToErrorCodeMapModule (copy), BulkPurchaseFailedModule (copy), ErrorCodeEnumModule (copy), GetPaymentPlatformModule (copy), PaymentPlatformEnumModule (copy), SharedFlagsModule (copy), Parent (copy), FixBulkPurchaseInExperienceBuyRobux (copy), WebViewUtilsModule (copy), FixBuyRobuxForAndroid (copy), HttpService (copy), BrowserService (copy), GetRobuxStoreUrlModule (copy), UseAppPolicyFunction (copy), GetRobloxSubscriptionProductsFunction (copy), MutedErrorFunction (copy), FIntBlackbirdUpsellMinPriceForDiscountInclusive (copy), FIntBlackbirdUpsellMaxPriceForDiscountInclusive (copy), RobloxSubscriptionPurchaseAppModule (copy), RobloxSubscriptionFlowCompleteReason (copy), SurfaceName (copy), SurfaceContext (copy), PurchasePromptModule (copy), FFlagAXAddOffersToBulkPurchaseModule (copy), FFlagFixVP8143Module (copy), RunService (copy), GetGuiObjectIsObscuredModule (copy), FixBulkPurchaseStarterGuiRename (copy), StarterGui (copy), FFlagBulkPurchaseTestPurchaseHintModule (copy)
+	-- upvalues: UseDispatchFunction (copy), UseSelectorFunction (copy), SelectBulkPurchaseRequestStateModule (copy), SelectPurchaseResultsModule (copy), SelectOrderRequestModule (copy), SelectOptionsModule (copy), SelectItemDataModule (copy), FFlagAXAddPlusUpsellToBulkPurchaseModule (copy), ReactModule (copy), RobloxSubscriptionSignals (copy), SignalsReactModule (copy), MarketplaceService (copy), BulkPurchaseEndedModule (copy), BulkPurchaseDisablePurchaseModule (copy), IsErrorReasonContainsEconomicRestrictionsFunction (copy), HandleEconomicRestrictionErrorModule (copy), GetItemResultsFromResponseModule (copy), GetCommonItemStatusModule (copy), FFlagAXMoreBulkPurchaseCountersModule (copy), ReportBulkPurchaseRequestCountersModule (copy), BulkPurchaseCountersEnumModule (copy), BulkPurchaseSucceededModule (copy), BulkPurchasePromptStateEnumModule (copy), FFlagBulkPurchaseReportCountersModule (copy), ItemStatusToErrorCodeMapModule (copy), BulkPurchaseFailedModule (copy), ErrorCodeEnumModule (copy), GetPaymentPlatformModule (copy), PaymentPlatformEnumModule (copy), SharedFlagsModule (copy), Parent (copy), FixBulkPurchaseInExperienceBuyRobux (copy), WebViewUtilsModule (copy), FixBuyRobuxForAndroid (copy), HttpService (copy), BrowserService (copy), GetRobuxStoreUrlModule (copy), UseAppPolicyFunction (copy), GetRobloxSubscriptionProductsFunction (copy), MutedErrorFunction (copy), FIntBlackbirdUpsellMinPriceForDiscountInclusive (copy), FIntBlackbirdUpsellMaxPriceForDiscountInclusive (copy), RobloxSubscriptionPurchaseAppModule (copy), RobloxSubscriptionFlowCompleteReason (copy), SurfaceName (copy), SurfaceContext (copy), PurchasePromptModule (copy), FFlagAXAddOffersToBulkPurchaseModule (copy), FFlagFixVP8143Module (copy), RunService (copy), GetGuiObjectIsObscuredModule (copy), StarterGui (copy), FFlagBulkPurchaseTestPurchaseHintModule (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseSelectorResult = UseSelectorFunction(SelectBulkPurchaseRequestStateModule)
 	local UseSelectorResult1 = UseSelectorFunction(SelectPurchaseResultsModule)
@@ -86,7 +85,7 @@ return function()
 		UseDispatchResult(BulkPurchaseEndedModule())
 	end
 	
-	local function v63()
+	local function v62()
 		-- upvalues: FFlagAXAddPlusUpsellToBulkPurchaseModule (upval), UseDispatchResult (copy), BulkPurchaseDisablePurchaseModule (upval), MarketplaceService (upval), UseSelectorResult2 (copy), UseSelectorResult3 (copy), IsErrorReasonContainsEconomicRestrictionsFunction (upval), HandleEconomicRestrictionErrorModule (upval), GetItemResultsFromResponseModule (upval), UseSelectorResult4 (copy), GetCommonItemStatusModule (upval), FFlagAXMoreBulkPurchaseCountersModule (upval), ReportBulkPurchaseRequestCountersModule (upval), BulkPurchaseCountersEnumModule (upval), BulkPurchaseSucceededModule (upval), BulkPurchasePromptStateEnumModule (upval), FFlagBulkPurchaseReportCountersModule (upval), ItemStatusToErrorCodeMapModule (upval), BulkPurchaseFailedModule (upval), ErrorCodeEnumModule (upval)
 		if FFlagAXAddPlusUpsellToBulkPurchaseModule then
 			UseDispatchResult(BulkPurchaseDisablePurchaseModule())
@@ -144,7 +143,7 @@ return function()
 		end
 	end
 	
-	local function v64()
+	local function v63()
 		-- upvalues: GetPaymentPlatformModule (upval), PaymentPlatformEnumModule (upval), SharedFlagsModule (upval), Parent (upval), FixBulkPurchaseInExperienceBuyRobux (upval), WebViewUtilsModule (upval), FixBuyRobuxForAndroid (upval), HttpService (upval), BrowserService (upval), GetRobuxStoreUrlModule (upval), UseDispatchResult (copy), BulkPurchaseEndedModule (upval), BulkPurchaseFailedModule (upval), ErrorCodeEnumModule (upval)
 		local PaymentPlatformModule = GetPaymentPlatformModule()
 		
@@ -274,11 +273,11 @@ return function()
 		UseRefResult = ReactModule.useRef(nil)
 		v2, UseStateResult2 = ReactModule.useState(true)
 		ReactModule.useEffect(function()
-			-- upvalues: RunService (upval), UseRefResult (ref), GetGuiObjectIsObscuredModule (upval), FixBulkPurchaseStarterGuiRename (upval), StarterGui (upval), UseStateResult2 (ref)
+			-- upvalues: RunService (upval), UseRefResult (ref), GetGuiObjectIsObscuredModule (upval), StarterGui (upval), UseStateResult2 (ref)
 			local HeartbeatConnection = RunService.Heartbeat:Connect(function()
-				-- upvalues: UseRefResult (upval), GetGuiObjectIsObscuredModule (upval), FixBulkPurchaseStarterGuiRename (upval), StarterGui (upval), UseStateResult2 (upval)
+				-- upvalues: UseRefResult (upval), GetGuiObjectIsObscuredModule (upval), StarterGui (upval), UseStateResult2 (upval)
 				if UseRefResult.current and typeof(UseRefResult.current) == "Instance" and UseRefResult.current:IsA("GuiObject") then
-					local DevConsoleVisibleCore = if FixBulkPurchaseStarterGuiRename then StarterGui:GetCore("DevConsoleVisible") else game.StarterGui:GetCore("DevConsoleVisible")
+					local DevConsoleVisibleCore = StarterGui:GetCore("DevConsoleVisible")
 					UseStateResult2(GetGuiObjectIsObscuredModule(UseRefResult.current) or DevConsoleVisibleCore)
 				end
 			end)
@@ -295,7 +294,7 @@ return function()
 		ownedItems = UseSelectorResult.ownedItems,
 		unpurchasableItems = UseSelectorResult.unpurchasableItems,
 		onClose = OnClose,
-		onAccept = if Balance < TotalCost then v64 else v63,
+		onAccept = if Balance < TotalCost then v63 else v62,
 		totalCost = UseSelectorResult.totalCost,
 		isDisabled = FFlagFixVP8143Module and v2 or (#UseSelectorResult.items == 0 or FFlagAXAddPlusUpsellToBulkPurchaseModule and UseSelectorResult.disablePurchase == true),
 		purchaseButtonRef = if FFlagFixVP8143Module then UseRefResult else nil,

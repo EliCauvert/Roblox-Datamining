@@ -77,11 +77,13 @@ Amp.Upsell.Title.RequestSent,Đã gửi yêu cầu
 Authentication.AccountSwitch.Action.SwitchAccount,Chuyển đổi tài khoản
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,Đăng Nhập Nhanh
+Authentication.Login.Action.Leave,Rời khỏi
 Authentication.Login.Action.QuickSignIn,Đăng nhập nhanh
 Authentication.Login.Action.Save,Lưu
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Thoát Roblox để chuyển tài khoản sang {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,Sử dụng tài khoản Roblox khác
 Authentication.Login.Button.XboxAccountSwitcher,Đổi tài khoản Xbox
+Authentication.Login.Description.LeaveAccountSetup,"Nếu rời khỏi ngay lúc này, tài khoản Roblox của bạn sẽ chưa được thiết lập."
 Authentication.Login.Error.PasskeyOnlyAccount,Tài khoản của bạn được thiết lập ở chế độ chỉ cho phép đăng nhập bằng khóa bảo mật. Hãy đăng nhập bằng khóa bảo mật hoặc tiến hành khôi phục tài khoản.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Không xác minh được tài khoản trên nền tảng. Vui lòng thử lại sau.
 Authentication.Login.Heading.IncompatibleAccounts,Tài khoản không phù hợp
