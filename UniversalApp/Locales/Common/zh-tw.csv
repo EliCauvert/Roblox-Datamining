@@ -304,9 +304,6 @@ Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,請在 {WaitTime} 後重試
 Authentication.Login.Action.Continue,
-Authentication.Login.Action.ContinueSetup,繼續設定
-Authentication.Login.Action.ContinueWithProvider,使用 {provider} 繼續
-Authentication.Login.Action.CreateANewAccount,建立新帳戶
 Authentication.Login.Action.DownloadNow,立即下載
 Authentication.Login.Action.EmailACode,透過電子郵件發送代碼
 Authentication.Login.Action.EmailMeCode,透過電子郵件傳送驗證碼
@@ -316,7 +313,6 @@ Authentication.Login.Action.ForgotUsername,忘記使用者名稱了?
 Authentication.Login.Action.ForgotUsernameOrPassword,忘記使用者名稱或密碼了嗎？
 Authentication.Login.Action.GetCodeByEmail,透過電子郵件取得驗證碼
 Authentication.Login.Action.Google,Google
-Authentication.Login.Action.Leave,離開
 Authentication.Login.Action.LogInEmailOneTimeCode,透過電子郵件給我一次性驗證碼
 Authentication.Login.Action.NeedHelp,需要幫助嗎？
 Authentication.Login.Action.Next,
@@ -341,19 +337,14 @@ Authentication.Login.Description.ChooseHowToPlay,選擇你想要玩的方式
 Authentication.Login.Description.DownloadNewVersion,你的帳號無法使用此版本的 Roblox。若要繼續，請先下載正確版本。
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,輸入我們剛才發送的驗證碼：{email}
 Authentication.Login.Description.GetOneTimeCodeHelp,輸入帳號上經過驗證的電子郵件地址即可獲得一次性驗證碼。
-Authentication.Login.Description.LeaveAccountSetup,如果現在離開，你的 Roblox 帳號將無法設定。
 Authentication.Login.Description.PasskeyDescription,您的帳號有密碼金鑰，這是比密碼更安全的登入方式。您可以使用指紋、臉部或螢幕所來登入此裝置。
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,我們無法判斷您的裝置是否支援密碼金鑰。請再試一次，或輕觸「登入有問題」來使用電子郵件或手機恢復帳號。
 Authentication.Login.Description.PasskeyMobileOnly,密碼金鑰僅適用於行動裝置。請選擇其他登入方式。
 Authentication.Login.Description.SigningInWith,使用 <b>{identifier}</b> 登入
-Authentication.Login.Description.SsoLinkMultiple,我們發現多個 Roblox 帳號使用此電子郵件地址。選擇一個帳號並將其連結至 {provider} 以便更快登入，或建立新帳號。
-Authentication.Login.Description.SsoLinkSingle,我們發現了一個使用此電子郵件地址的 Roblox 帳號。將其連結至 {provider} 以便更快登入，或建立新帳號。
 Authentication.Login.Description.UsernameHandle,@<b>{username}</b>
 Authentication.Login.Description.VerificationCodeSentTo,若已擁有 Roblox 帳號，你將透過 {email} 收到驗證碼
 Authentication.Login.Error.PasskeyOnlyAccount,您的帳號只有一組密碼金鑰可用於登入。請嘗試使用密碼金鑰登入或恢復帳號。
 Authentication.Login.Error.PlatformAccountConnectionFailure,無法驗證平台帳號，請稍後再試。
-Authentication.Login.Header.LeaveAccountSetup,要離開帳號設定流程嗎？
-Authentication.Login.Header.YouAlreadyHaveAnAccount,你已經有帳號了
 Authentication.Login.Heading.EnterYourCode,
 Authentication.Login.Heading.GetStarted,立即開始
 Authentication.Login.Heading.IncompatibleAccounts,帳號不相容
@@ -377,7 +368,6 @@ Authentication.Login.Label.ConnectionError.RetryWait,"對不起，連線到伺�
 
 請稍後再試。"
 Authentication.Login.Label.ConnectionError.Title,連線錯誤
-Authentication.Login.Label.DontHaveARobloxAccountCreateOne,沒有 Roblox 帳號嗎？{startTag}立即建立{endTag}
 Authentication.Login.Label.DontHaveAnAccountCreateOne,沒有帳號嗎？{startTag}立即建立{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,
@@ -413,7 +403,6 @@ Authentication.Login.Label.VerificationCode,驗證碼
 Authentication.Login.Label.WeChatUserCancel,您已登出微信，請重新登入。
 Authentication.Login.Label.WeChatVersionNotSupported,不支援此微信版本
 Authentication.Login.LinkIllegalChildAccountLinking,此 Roblox 帳號無法連結至 Xbox 兒童帳號。請嘗試使用其他帳號，或檢查你的設定。
-Authentication.Login.Message.SsoProviderLinked,你現在可以使用 {provider} 登入
 Authentication.Login.QrCodeLoginTitle,掃描 QR 碼登入
 Authentication.Login.Response.AccountNotFound,找不到帳號，請重新嘗試。
 Authentication.Login.Response.AlreadyLinked,這個 Roblox 帳號已連結到 {platform} 上的其他帳號。請嘗試使用其他 Roblox 帳號登入。
@@ -472,13 +461,13 @@ Authentication.ResetPassword.Response.ResetPasswordStarted,若要繼續，請先
 Authentication.SignUp.Action.ApplyOnNextRespawn,在下次重生時套用
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
-Authentication.SignUp.Action.ContinueSetup,
+Authentication.SignUp.Action.ContinueSetup,繼續設定
 Authentication.SignUp.Action.Create,建立
 Authentication.SignUp.Action.CreateAPasskey,
 Authentication.SignUp.Action.CreateAccount,
 Authentication.SignUp.Action.CreateAccountSentenceCase,
 Authentication.SignUp.Action.EnableFaceId,啟用 Face ID
-Authentication.SignUp.Action.ExitModalLeave,
+Authentication.SignUp.Action.ExitModalLeave,離開
 Authentication.SignUp.Action.IUnderstand,我了解
 Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,立即重生
@@ -1620,6 +1609,7 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,搜尋使用者名稱或�
 Feature.AddFriends.Label.ConnectWithContacts,邀請聯絡人或與已經在 Roblox 的好友交流！
 Feature.AddFriends.Label.ContactsTile,通訊錄
 Feature.AddFriends.Label.DeclineAllBackgrounded,忽略所有好友邀請。這可能需要一分鐘。
+Feature.AddFriends.Label.EmptyStatePrompt,您要和誰探索 Roblox 呢？尋找新的朋友，或新增您認識的人為好友！
 Feature.AddFriends.Label.FriendRequests,好友邀請
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,搜尋人員
 Feature.AddFriends.Label.MyQrCode,我的 QR 碼
@@ -2690,8 +2680,6 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,所有遊戲
 Feature.Build.Label.AmountAvailable,尚有 {AMOUNT} 次可使用
-Feature.Build.Label.AttachmentCountPlural,{count} 個附件
-Feature.Build.Label.AttachmentCountSingular,1 個附件
 Feature.Build.Label.Autosaved,已自動儲存
 Feature.Build.Label.Available,可供使用
 Feature.Build.Label.AvailableForPurchase,開放購買
@@ -2711,7 +2699,6 @@ Feature.Build.Label.DefaultDeveloperProductName,開發者產品
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,已刪除
 Feature.Build.Label.DescribeIdea,描述想法
-Feature.Build.Label.DescribeIdeaOrPick,描述想法或從下方選擇一個
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,說明：{DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,名稱：{NAME}
@@ -3052,7 +3039,6 @@ Feature.BuyRobux.Label.MyFriendsWithCount,我的好友（{count} 位）
 Feature.BuyRobux.Label.PeopleWithCount,人員 ({count})
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
-Feature.Captures.Title.Captures,截圖
 Feature.Captures.Title.Gallery,圖庫
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
@@ -3547,7 +3533,6 @@ Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,選擇以移除
 Feature.Chat.Label.Sent,已傳送
 Feature.Chat.Label.SnoozePartyNotifications,將體驗內的隊伍通知靜音：
-Feature.Chat.Label.StartChatting,開始聊天
 Feature.Chat.Label.SwipeToReplyTooltip,滑動以回覆
 Feature.Chat.Label.TapToRemove,輕觸即可移除
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} 天
@@ -3898,6 +3883,7 @@ Feature.Friends.Error.UserBannedError,你已遭到停權，無法執行這項操
 Feature.Friends.Error.UserBlockedError,你已遭到封鎖，無法執行這項操作。
 Feature.Friends.Error.UserNotPassedCaptcha,尚未通過 Captcha 驗證。
 Feature.Friends.Feature.Friends.Heading.AddFriends,
+Feature.Friends.FriendingTooltipBody,有些人可能會透過手機號碼找到您並傳送好友邀請。接受邀請之前，請先確認對方的身分。
 Feature.Friends.Heading.Activities,
 Feature.Friends.Heading.FilterBy,
 Feature.Friends.Heading.Friends,
@@ -3927,10 +3913,11 @@ Feature.Friends.Label.FollowsYou,正在追蹤您
 Feature.Friends.Label.Frequent,密切玩伴
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,已邀請您成為 Roblox 好友
-Feature.Friends.Label.FriendOfUser,為你推薦
+Feature.Friends.Label.FriendOfUser,{displayName} 的好友
 Feature.Friends.Label.FriendOwns,1 位好友擁有
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 位好友</b>最近玩過
 Feature.Friends.Label.FriendRequest,
+Feature.Friends.Label.FriendingTooltip,交友提示
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,好友現在稱為「聯絡對象」！
 Feature.Friends.Label.FriendsHintBold,開始遊玩！
@@ -4138,8 +4125,6 @@ Feature.GameFollows.TooltipTurnedOnNotifications,{experienceName} 的通知已�
 Feature.GameJoin.Description.DifferentServer,你將在不同的伺服器上開始遊戲
 Feature.GameJoin.Label.PlayTogether,你們可以一起玩
 Feature.GameJoin.Label.PlayTogetherSoon,你們很快就可以一起玩了
-Feature.GameJoin.Label.Played,已玩過
-Feature.GameJoin.Label.RecentCoplay,你們最近一起玩過
 Feature.GamePage.Action.BackToTop,回到頂端
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
@@ -5386,7 +5371,6 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,優惠僅適用於新的 Plus 訂閱者。
 Feature.RobloxSubscription.Description.ReferralReferrerReward,當有人使用你的連結購買 Plus 時。
 Feature.RobloxSubscription.Description.ReferralShare,邀請他人加入 Plus，對方購買 Plus 時，雙方皆可獲得 {amount} Robux。
-Feature.RobloxSubscription.Description.SpawnEffectsPlusUpsell,訂閱 Plus，探索生成效果等福利。
 Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,透過 Plus 獲得生成效果
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"按一下\u{201C}{ctaText}\u{201D}，即表示您同意 <a href=""{termsUrl}"">Roblox 訂閱條款</a>。系統將每月自動向您收取費用，直到取消訂閱為止。"
 Feature.RobloxSubscription.Heading.ReferralEntry,分享 Plus 即可獲得 {amount} Robux
@@ -5827,6 +5811,7 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} 和另
 Feature.UniversalShareSheet.Response.SharedMessage,訊息已傳送
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} 和另外 {N} 人
+Feature.UserLibrary.Label.MyLibrary,我的收藏庫
 Feature.VIPServer.Message.TooManyFreeServersOnGame,無法在此遊戲擁有更多免費私人伺服器。
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,無法啟用更多免費私人伺服器，請先停用其他伺服器。
 Feature.VerificationUpsell.Action.AddPhone,

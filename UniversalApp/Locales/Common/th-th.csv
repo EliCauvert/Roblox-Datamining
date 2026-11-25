@@ -288,9 +288,6 @@ Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,ลองอีกครั้งในอีก: {WaitTime}
 Authentication.Login.Action.Continue,
-Authentication.Login.Action.ContinueSetup,ตั้งค่าต่อ
-Authentication.Login.Action.ContinueWithProvider,ดำเนินการต่อด้วย {provider}
-Authentication.Login.Action.CreateANewAccount,
 Authentication.Login.Action.DownloadNow,ดาวน์โหลดตอนนี้
 Authentication.Login.Action.EmailACode,ส่งรหัสทางอีเมล
 Authentication.Login.Action.EmailMeCode,ส่งรหัสให้ฉันทางอีเมล
@@ -300,7 +297,6 @@ Authentication.Login.Action.ForgotUsername,ลืมชื่อผู้ใช�
 Authentication.Login.Action.ForgotUsernameOrPassword,ลืมชื่อผู้ใช้หรือรหัสผ่านใช่ไหม?
 Authentication.Login.Action.GetCodeByEmail,รับรหัสทางอีเมล
 Authentication.Login.Action.Google,Google
-Authentication.Login.Action.Leave,ออก
 Authentication.Login.Action.LogInEmailOneTimeCode,ส่งรหัสแบบใช้ครั้งเดียวให้ฉันทางอีเมล
 Authentication.Login.Action.NeedHelp,ต้องการความช่วยเหลือใช่หรือไม่?
 Authentication.Login.Action.Next,
@@ -325,19 +321,14 @@ Authentication.Login.Description.ChooseHowToPlay,เลือกวิธีท�
 Authentication.Login.Description.DownloadNewVersion,บัญชีของคุณไม่สามารถใช้ Roblox เวอร์ชันนี้ได้ โปรดดาวน์โหลดเวอร์ชันที่ถูกต้องเพื่อดำเนินการต่อ
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,กรอกรหัสที่เราเพิ่งส่งไปยัง: {email}
 Authentication.Login.Description.GetOneTimeCodeHelp,กรอกอีเมลที่ตรวจสอบยืนยันแล้วในบัญชีของคุณเพื่อรับรหัสแบบใช้ครั้งเดียว
-Authentication.Login.Description.LeaveAccountSetup,หากออกตอนนี้ บัญชี Roblox ของคุณจะยังตั้งค่าไม่เสร็จ
 Authentication.Login.Description.PasskeyDescription,บัญชีของคุณมีพาสคีย์ ซึ่งเป็นวิธีลงชื่อเข้าใช้ที่ปลอดภัยกว่ารหัสผ่าน คุณใช้ลายนิ้วมือ ใบหน้า หรือการล็อคหน้าจอเพื่อเข้าสู่ระบบบนอุปกรณ์นี้ได้
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,เราไม่สามารถระบุได้ว่าอุปกรณ์ของคุณรองรับพาสคีย์หรือไม่ โปรดลองอีกครั้งหรือแตะ “ปัญหาในการเข้าสู่ระบบ” เพื่อกู้คืนบัญชีของคุณด้วยอีเมลหรือหมายเลขโทรศัพท์
 Authentication.Login.Description.PasskeyMobileOnly,ใช้พาสคีย์ได้เฉพาะบนมือถือ โปรดเลือกวิธีอื่นในการลงชื่อเข้าใช้
 Authentication.Login.Description.SigningInWith,กำลังลงชื่อเข้าใช้ด้วย <b>{identifier}</b>
-Authentication.Login.Description.SsoLinkMultiple,เราพบบัญชี Roblox หลายบัญชีที่ใช้อีเมลนี้ เลือกบัญชีที่ต้องการเชื่อมโยงกับ {provider} เพื่อลงชื่อเข้าใช้ได้เร็วขึ้น หรือสร้างบัญชีใหม่
-Authentication.Login.Description.SsoLinkSingle,เราพบบัญชี Roblox ที่ใช้อีเมลนี้ เชื่อมโยงบัญชีกับ {provider} เพื่อลงชื่อเข้าใช้ได้เร็วขึ้น หรือสร้างบัญชีใหม่
 Authentication.Login.Description.UsernameHandle,@<b>{username}</b>
 Authentication.Login.Description.VerificationCodeSentTo,หากมีบัญชี Roblox คุณจะได้รับรหัสการตรวจสอบยืนยันที่ {email}
 Authentication.Login.Error.PasskeyOnlyAccount,บัญชีของคุณตั้งค่าให้ลงชื่อเข้าใช้ด้วยพาสคีย์เท่านั้น ลองลงชื่อเข้าใช้ด้วยพาสคีย์หรือกู้คืนบัญชี
 Authentication.Login.Error.PlatformAccountConnectionFailure,ไม่สามารถยืนยันบัญชีแพลตฟอร์มได้ โปรดลองอีกครั้งในภายหลัง
-Authentication.Login.Header.LeaveAccountSetup,ต้องการออกจากการตั้งค่าบัญชีใช่ไหม?
-Authentication.Login.Header.YouAlreadyHaveAnAccount,คุณมีบัญชีผู้ใช้อยู่แล้วหรือเปล่า?
 Authentication.Login.Heading.EnterYourCode,กรอกรหัสของคุณ
 Authentication.Login.Heading.GetStarted,เริ่มใช้งาน
 Authentication.Login.Heading.IncompatibleAccounts,บัญชีที่เข้ากันไม่ได้
@@ -361,7 +352,6 @@ Authentication.Login.Label.ConnectionError.RetryWait,"ขออภัย เก�
 
 โปรดรอสักครู่แล้วลองอีกครั้ง"
 Authentication.Login.Label.ConnectionError.Title,เกิดข้อผิดพลาดในการเชื่อมต่อ
-Authentication.Login.Label.DontHaveARobloxAccountCreateOne,ยังไม่มีบัญชี Roblox ใช่ไหม? {startTag}สร้างบัญชี{endTag}
 Authentication.Login.Label.DontHaveAnAccountCreateOne,ยังไม่มีบัญชีใช่ไหม? {startTag}สร้างบัญชี{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,ที่อยู่อีเมล
@@ -397,7 +387,6 @@ Authentication.Login.Label.VerificationCode,รหัสการตรวจส
 Authentication.Login.Label.WeChatUserCancel,คุณลงชื่อออกจาก WeChat แล้ว โปรดลงชื่อเข้าใช้ WeChat
 Authentication.Login.Label.WeChatVersionNotSupported,ไม่รองรับ WeChat เวอร์ชันนี้
 Authentication.Login.LinkIllegalChildAccountLinking,บัญชี Roblox นี้ไม่สามารถเชื่อมโยงกับบัญชี Xbox ของบุตรหลานได้ โปรดลองใช้บัญชีอื่นหรือตรวจสอบการตั้งค่าของคุณ
-Authentication.Login.Message.SsoProviderLinked,คุณสามารถลงชื่อเข้าใช้ด้วย {provider} ได้แล้ว
 Authentication.Login.QrCodeLoginTitle,สแกน QR Code เพื่อลงชื่อเข้าใช้
 Authentication.Login.Response.AccountNotFound,ไม่พบบัญชี โปรดลองอีกครั้ง
 Authentication.Login.Response.AlreadyLinked,บัญชี Roblox นี้เชื่อมโยงอยู่กับบัญชีสำหรับ {platform} แล้ว โปรดลงชื่อเข้าใช้ด้วยบัญชี Roblox บัญชีอื่น
@@ -456,13 +445,13 @@ Authentication.ResetPassword.Response.ResetPasswordStarted,คุณต้อง
 Authentication.SignUp.Action.ApplyOnNextRespawn,ใช้เมื่อเกิดใหม่ครั้งต่อไป
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
-Authentication.SignUp.Action.ContinueSetup,
+Authentication.SignUp.Action.ContinueSetup,ตั้งค่าต่อ
 Authentication.SignUp.Action.Create,สร้าง
 Authentication.SignUp.Action.CreateAPasskey,
 Authentication.SignUp.Action.CreateAccount,
 Authentication.SignUp.Action.CreateAccountSentenceCase,
 Authentication.SignUp.Action.EnableFaceId,เปิดใช้งาน Face ID
-Authentication.SignUp.Action.ExitModalLeave,
+Authentication.SignUp.Action.ExitModalLeave,ออก
 Authentication.SignUp.Action.IUnderstand,ฉันเข้าใจ
 Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,เกิดใหม่ตอนนี้เลย
@@ -1604,6 +1593,7 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,ค้นหาผู้�
 Feature.AddFriends.Label.ConnectWithContacts,เชิญเพื่อนจากรายชื่อผู้ติดต่อหรือเชื่อมต่อกับเพื่อนๆ ที่อยู่บน Roblox อยู่แล้วก็ได้!
 Feature.AddFriends.Label.ContactsTile,รายชื่อผู้ติดต่อ
 Feature.AddFriends.Label.DeclineAllBackgrounded,ปฏิเสธคำขอเป็นเพื่อนทั้งหมด การดำเนินการนี้อาจใช้เวลาสักครู่
+Feature.AddFriends.Label.EmptyStatePrompt,ใครที่คุณจะสำรวจ Roblox ด้วย? ค้นหาผู้ใช้เพื่อเพิ่มเป็นเพื่อนหรือเชื่อมต่อกับเพื่อนๆ ที่คุณรู้จักอยู่แล้วก็ได้!
 Feature.AddFriends.Label.FriendRequests,คำขอเป็นเพื่อน
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,ค้นหาผู้ใช้
 Feature.AddFriends.Label.MyQrCode,รหัส QR ของฉัน
@@ -2674,8 +2664,6 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,เกมทั้งหมด
 Feature.Build.Label.AmountAvailable,พร้อมใช้งาน {AMOUNT} ครั้ง
-Feature.Build.Label.AttachmentCountPlural,{count} รายการที่แนบ
-Feature.Build.Label.AttachmentCountSingular,1 รายการที่แนบ
 Feature.Build.Label.Autosaved,บันทึกอัตโนมัติแล้ว
 Feature.Build.Label.Available,พร้อมใช้งาน
 Feature.Build.Label.AvailableForPurchase,พร้อมให้ซื้อ
@@ -2695,7 +2683,6 @@ Feature.Build.Label.DefaultDeveloperProductName,ผลิตภัณฑ์น�
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,ลบแล้ว
 Feature.Build.Label.DescribeIdea,อธิบายไอเดีย
-Feature.Build.Label.DescribeIdeaOrPick,อธิบายไอเดียหรือเลือกจากด้านล่าง
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,คำอธิบาย: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,ชื่อ: {NAME}
@@ -3036,7 +3023,6 @@ Feature.BuyRobux.Label.MyFriendsWithCount,เพื่อนของฉัน (
 Feature.BuyRobux.Label.PeopleWithCount,ผู้ใช้ ({count})
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
-Feature.Captures.Title.Captures,จับภาพ
 Feature.Captures.Title.Gallery,แกลลอรี
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
@@ -3531,7 +3517,6 @@ Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,เลือกเพื่อลบออก
 Feature.Chat.Label.Sent,ส่งแล้ว
 Feature.Chat.Label.SnoozePartyNotifications,ปิดเสียงการแจ้งเตือนเกี่ยวกับ Party ในประสบการณ์สำหรับ:
-Feature.Chat.Label.StartChatting,เริ่มแชท
 Feature.Chat.Label.SwipeToReplyTooltip,ปัดเพื่อตอบกลับ
 Feature.Chat.Label.TapToRemove,แตะเพื่อลบออก
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} วัน
@@ -3882,6 +3867,7 @@ Feature.Friends.Error.UserBannedError,คุณถูกแบนไม่ให
 Feature.Friends.Error.UserBlockedError,คุณถูกบล็อคไม่ให้ดำเนินการนี้
 Feature.Friends.Error.UserNotPassedCaptcha,คุณทำ Captcha ไม่ผ่าน
 Feature.Friends.Feature.Friends.Heading.AddFriends,
+Feature.Friends.FriendingTooltipBody,คำขอเป็นเพื่อนบางคำขออาจมาจากผู้ใช้ที่หาคุณเจอจากเบอร์โทรศัพท์ของคุณ โปรดตรวจสอบให้แน่ใจว่าคุณรู้จักพวกเขาก่อนที่จะเป็นเพื่อน
 Feature.Friends.Heading.Activities,
 Feature.Friends.Heading.FilterBy,กรองตาม
 Feature.Friends.Heading.Friends,
@@ -3915,6 +3901,7 @@ Feature.Friends.Label.FriendOfUser,เพื่อนของ {displayName}
 Feature.Friends.Label.FriendOwns,เพื่อน 1 คนเป็นเจ้าของ
 Feature.Friends.Label.FriendRecentlyPlayed,<b>เพื่อน 1 คน</b>เพิ่งเล่นเมื่อเร็วๆ นี้
 Feature.Friends.Label.FriendRequest,
+Feature.Friends.Label.FriendingTooltip,เคล็ดลับในการหาเพื่อน
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,เพื่อนเปลี่ยนเป็นคนรู้จักแล้ว!
 Feature.Friends.Label.FriendsHintBold,มาเล่นกันเถอะ!
@@ -4122,8 +4109,6 @@ Feature.GameFollows.TooltipTurnedOnNotifications,"เปิดการแจ้
 Feature.GameJoin.Description.DifferentServer,คุณจะเริ่มในเซิร์ฟเวอร์อื่น
 Feature.GameJoin.Label.PlayTogether,คุณเล่นด้วยกันได้
 Feature.GameJoin.Label.PlayTogetherSoon,คุณจะเล่นด้วยกันได้เร็วๆ นี้
-Feature.GameJoin.Label.Played,เล่นแล้ว
-Feature.GameJoin.Label.RecentCoplay,คุณเพิ่งเล่นด้วยกันเมื่อไม่นานมานี้
 Feature.GamePage.Action.BackToTop,กลับไปด้านบน
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
@@ -5370,7 +5355,6 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,ข้อเสนอใช้ได้กับสมาชิก Plus รายใหม่เท่านั้น
 Feature.RobloxSubscription.Description.ReferralReferrerReward,เมื่อมีคนซื้อ Plus ด้วยลิงก์ของคุณ
 Feature.RobloxSubscription.Description.ReferralShare,ชวนเพื่อนมาใช้ Plus แล้วรับ {amount} Robux ไปเลยทั้งคู่เมื่อเพื่อนซื้อ Plus
-Feature.RobloxSubscription.Description.SpawnEffectsPlusUpsell,สมัครสมาชิก Plus เพื่อสำรวจสิทธิประโยชน์ต่างๆ เช่น เอฟเฟกต์การเกิดใหม่ และอีกมากมาย
 Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,รับเอฟเฟกต์การเกิดใหม่เมื่อสมัคร Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"การคลิก \u{201C}{ctaText}\u{201D} จะถือว่าคุณยอมรับ<a href=""{termsUrl}"">ข้อกำหนดการสมัครสมาชิกของ Roblox</a> โดยจะมีการเรียกเก็บเงินในแต่ละเดือนโดยอัตโนมัติจนกว่าคุณจะยกเลิก"
 Feature.RobloxSubscription.Heading.ReferralEntry,แชร์ Plus แล้วรับ {amount} Robux
@@ -5811,6 +5795,7 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + อ�
 Feature.UniversalShareSheet.Response.SharedMessage,ส่งข้อความแล้ว
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + อีก {N} คน
+Feature.UserLibrary.Label.MyLibrary,คลังของฉัน
 Feature.VIPServer.Message.TooManyFreeServersOnGame,คุณไม่สามารถเพิ่มเซิร์ฟเวอร์ส่วนตัวฟรีในเกมนี้ได้อีก
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,คุณไม่สามารถเพิ่มเซิร์ฟเวอร์ส่วนตัวฟรีที่เปิดใช้งานอยู่ได้อีก โปรดปิดใช้งานบางเซิร์ฟเวอร์ก่อน
 Feature.VerificationUpsell.Action.AddPhone,

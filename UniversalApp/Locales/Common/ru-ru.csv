@@ -142,7 +142,6 @@ Authentication.CrossDevice.Response.LoginSuccess,Вход выполнен
 Authentication.Login.Action.ConnectionError.RetryReady,Повторно
 Authentication.Login.Action.ConnectionError.RetryWait,Повторите в: {WaitTime}
 Authentication.Login.Action.Continue,Продолжить
-Authentication.Login.Action.CreateANewAccount,
 Authentication.Login.Action.DownloadNow,Загрузить сейчас
 Authentication.Login.Action.EmailACode,Отправить код по электронной почте
 Authentication.Login.Action.EmailOtpWaitTime,Отправить код повторно через {WaitTime}с
@@ -861,6 +860,7 @@ Feature.AddFriends.Label.AddFriendsTooltip,"Начни с поиска друз�
 Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,"Находи пользователей Roblox, используя поиск по имени пользователя или отображаемому имени."
 Feature.AddFriends.Label.ConnectWithContacts,"Приглашай своих друзей или общайся с друзьями, которые уже в Roblox!"
 Feature.AddFriends.Label.DeclineAllBackgrounded,Отклоняем все запросы в друзья. Это может занять некоторое время.
+Feature.AddFriends.Label.EmptyStatePrompt,С кем ты будешь исследовать Roblox? Общайся со своими друзьями и находи новых!
 Feature.AddFriends.Label.FriendRequests,Запросы дружбы
 Feature.AddFriends.Label.MyQrCode,Мой QR-код
 Feature.AddFriends.Label.SearchForFriendsPrompt,"Найди людей в Roblox, используя поиск по имени пользователя или отображаемому имени."
@@ -1325,7 +1325,6 @@ Feature.BlockingModal.Action.Cancel,
 Feature.BlockingModal.Heading.BlockUser,Заблокировать: {DisplayName}?
 Feature.BuyRobux.Heading.Banner,Купить Robux
 Feature.Call.Error.Description.Generic,
-Feature.Captures.Title.Captures,Захват экрана
 Feature.Captures.Title.Gallery,Галерея
 Feature.Catalog.Action.Buy,Купить
 Feature.Catalog.Action.Cancel,
@@ -1895,6 +1894,7 @@ Feature.Friends.Error.UserBannedError,Невозможно выполнить э
 Feature.Friends.Error.UserBlockedError,
 Feature.Friends.Error.UserNotPassedCaptcha,Капча не пройдена
 Feature.Friends.Feature.Friends.Heading.AddFriends,
+Feature.Friends.FriendingTooltipBody,"Некоторые запросы в друзья могут поступать от пользователей, нашедших тебя по номеру телефона. Убедись, что вы знакомы, прежде чем стать друзьями."
 Feature.Friends.Heading.FilterBy,Фильтр по
 Feature.Friends.Label.All,
 Feature.Friends.Label.AllowContactsAccess,"Разреши доступ к своим контактам, чтобы связаться с друзьями в Roblox!"
@@ -1918,6 +1918,7 @@ Feature.Friends.Label.Frequent,Сыграно вместе
 Feature.Friends.Label.Friend,Друг
 Feature.Friends.Label.FriendInvite,Приглашает тебя стать друзьями в Roblox
 Feature.Friends.Label.FriendRequest,
+Feature.Friends.Label.FriendingTooltip,Совет!
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.InGame,
 Feature.Friends.Label.IntroducingConnections,Представляем контакты

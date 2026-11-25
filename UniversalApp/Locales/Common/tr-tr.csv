@@ -305,9 +305,6 @@ Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,Tekrar Deneme Bekleme Süresi: {WaitTime}
 Authentication.Login.Action.Continue,Devam Et
-Authentication.Login.Action.ContinueSetup,Kuruluma devam et
-Authentication.Login.Action.ContinueWithProvider,{provider} ile devam et
-Authentication.Login.Action.CreateANewAccount,
 Authentication.Login.Action.DownloadNow,Şimdi İndir
 Authentication.Login.Action.EmailACode,E-postayla bir kod gönder
 Authentication.Login.Action.EmailMeCode,Bana e-postayla bir kod gönder
@@ -317,7 +314,6 @@ Authentication.Login.Action.ForgotUsername,Kullanıcı adını mı unuttun?
 Authentication.Login.Action.ForgotUsernameOrPassword,Kullanıcı adını veya şifreni mi unuttun?
 Authentication.Login.Action.GetCodeByEmail,Kodu e-posta ile al
 Authentication.Login.Action.Google,Google
-Authentication.Login.Action.Leave,Ayrıl
 Authentication.Login.Action.LogInEmailOneTimeCode,Tek Kullanımlık Kodu Bana E-postayla Gönder
 Authentication.Login.Action.NeedHelp,Yardıma mı ihtiyacın var?
 Authentication.Login.Action.Next,
@@ -342,19 +338,14 @@ Authentication.Login.Description.ChooseHowToPlay,Nasıl oynamak istediğini seç
 Authentication.Login.Description.DownloadNewVersion,Roblox'un bu sürümü hesabında kullanılamıyor. Devam etmek için lütfen doğru sürümü indir.
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,Az önce {email} adresine gönderdiğimiz kodu gir.
 Authentication.Login.Description.GetOneTimeCodeHelp,Tek kullanımlık kod almak için hesabında doğruladığın e-posta adresini gir.
-Authentication.Login.Description.LeaveAccountSetup,Şimdi ayrılırsan Roblox hesabın oluşturulmayacak.
 Authentication.Login.Description.PasskeyDescription,"Hesabında şifreden daha güvenli bir giriş yöntemi olan geçiş anahtarı bulunuyor. Bu cihazda giriş yapmak için parmak izini, yüzünü veya ekran kilidini kullanabilirsin."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"Cihazının geçiş anahtarlarını destekleyip desteklemediğini belirleyemiyoruz. Tekrar dene ya da hesabını e-posta veya telefon numarasıyla kurtarmak için ""Giriş yaparken sorun mu yaşıyorsun"" seçeneğine dokun."
 Authentication.Login.Description.PasskeyMobileOnly,Geçiş anahtarları yalnızca mobil cihazlarda kullanılabilir. Giriş yapmak için başka bir yöntem seç.
 Authentication.Login.Description.SigningInWith,<b>{identifier}</b> ile giriş yapılıyor
-Authentication.Login.Description.SsoLinkMultiple,Bu e-posta adresini kullanan birden fazla Roblox hesabı bulduk. Daha hızlı giriş yapabilmek için {provider} ile bağlayacağın bir hesap seç veya yeni bir hesap oluştur.
-Authentication.Login.Description.SsoLinkSingle,Bu e-posta adresini kullanan bir Roblox hesabı bulduk. Daha hızlı giriş yapmak için bu hesabı {provider} ile bağla veya yeni bir hesap oluştur.
 Authentication.Login.Description.UsernameHandle,@<b>{username}</b>
 Authentication.Login.Description.VerificationCodeSentTo,Bir Roblox hesabı varsa {email} adresine bir doğrulama kodu alacaksın
 Authentication.Login.Error.PasskeyOnlyAccount,Hesabına yalnızca giriş yapmak için bir geçiş anahtarı ayarlanmış. Geçiş anahtarınla giriş yapmayı dene veya hesabını kurtar.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Platform hesabı doğrulanamıyor. Lütfen daha sonra tekrar dene.
-Authentication.Login.Header.LeaveAccountSetup,Hesap kurulumundan ayrılmak mı istiyorsun?
-Authentication.Login.Header.YouAlreadyHaveAnAccount,Zaten bir hesabın var
 Authentication.Login.Heading.EnterYourCode,Kodunu gir
 Authentication.Login.Heading.GetStarted,Başla
 Authentication.Login.Heading.IncompatibleAccounts,Uyumsuz Hesaplar
@@ -378,7 +369,6 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Üzgünüz, sunucularımı
 
 Lütfen biraz bekleyip tekrar dene."
 Authentication.Login.Label.ConnectionError.Title,Bağlantı Hatası
-Authentication.Login.Label.DontHaveARobloxAccountCreateOne,Roblox hesabın yok mu? {startTag}Bir hesap oluştur{endTag}
 Authentication.Login.Label.DontHaveAnAccountCreateOne,Hesabın yok mu? {startTag}Bir hesap oluştur{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,E-posta adresi
@@ -414,7 +404,6 @@ Authentication.Login.Label.VerificationCode,Doğrulama kodu
 Authentication.Login.Label.WeChatUserCancel,WeChat'ten çıkış yaptın. Lütfen WeChat'e giriş yap.
 Authentication.Login.Label.WeChatVersionNotSupported,WeChat sürümü desteklenmiyor
 Authentication.Login.LinkIllegalChildAccountLinking,Bu Roblox hesabı bir Xbox çocuk hesabına bağlanamadı. Lütfen başka bir hesabı dene veya ayarlarını kontrol et.
-Authentication.Login.Message.SsoProviderLinked,Artık {provider} ile giriş yapabilirsin
 Authentication.Login.QrCodeLoginTitle,Giriş Yapmak için QR Kodunu tara
 Authentication.Login.Response.AccountNotFound,Hesap bulunamadı. Lütfen tekrar dene.
 Authentication.Login.Response.AlreadyLinked,Bu Roblox hesabı zaten {platform} için hesap farklı bir hesaba bağlı. Lütfen farklı bir Roblox hesabıyla giriş yapmayı dene.
@@ -473,13 +462,13 @@ Authentication.ResetPassword.Response.ResetPasswordStarted,Devam edebilmek için
 Authentication.SignUp.Action.ApplyOnNextRespawn,Bir dahaki sıfırlamada uygula
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
-Authentication.SignUp.Action.ContinueSetup,
+Authentication.SignUp.Action.ContinueSetup,Kuruluma devam et
 Authentication.SignUp.Action.Create,Oluştur
 Authentication.SignUp.Action.CreateAPasskey,
 Authentication.SignUp.Action.CreateAccount,Hesap Oluştur
 Authentication.SignUp.Action.CreateAccountSentenceCase,
 Authentication.SignUp.Action.EnableFaceId,Face ID'yi etkinleştir
-Authentication.SignUp.Action.ExitModalLeave,
+Authentication.SignUp.Action.ExitModalLeave,Ayrıl
 Authentication.SignUp.Action.IUnderstand,Anladım
 Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,Şimdi sıfırla
@@ -1577,6 +1566,7 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Kullanıcı adlarını vey
 Feature.AddFriends.Label.ConnectWithContacts,Rehberindeki kişileri davet et veya hâlihazırda Roblox'ta olan arkadaşlarınla bağlantı kur!
 Feature.AddFriends.Label.ContactsTile,Kişiler
 Feature.AddFriends.Label.DeclineAllBackgrounded,"Tüm arkadaş istekleri yok sayılıyor. Bu işlem, biraz zaman alabilir."
+Feature.AddFriends.Label.EmptyStatePrompt,Roblox'u kiminle keşfedeceksin? Eklemek istediğin kişileri ara veya zaten tanıdığın arkadaşlarınla bağlantı kur!
 Feature.AddFriends.Label.FriendRequests,Arkadaş İstekleri
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,İnsanlar ara
 Feature.AddFriends.Label.MyQrCode,QR Kodum
@@ -2647,8 +2637,6 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,Tüm oyunlar
 Feature.Build.Label.AmountAvailable,{AMOUNT} mevcut
-Feature.Build.Label.AttachmentCountPlural,{count} eklenti
-Feature.Build.Label.AttachmentCountSingular,1 eklenti
 Feature.Build.Label.Autosaved,Otomatik olarak kaydedildi
 Feature.Build.Label.Available,mevcut
 Feature.Build.Label.AvailableForPurchase,Satın alınabilir
@@ -2668,7 +2656,6 @@ Feature.Build.Label.DefaultDeveloperProductName,geliştirici ürünü
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,Silindi
 Feature.Build.Label.DescribeIdea,Fikrini tarif et
-Feature.Build.Label.DescribeIdeaOrPick,Fikrini anlat veya aşağıdakilerden birini seç
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,Açıklama: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Ad: {NAME}
@@ -3009,7 +2996,6 @@ Feature.BuyRobux.Label.MyFriendsWithCount,Arkadaşlarım ({count})
 Feature.BuyRobux.Label.PeopleWithCount,İnsanlar ({count})
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
-Feature.Captures.Title.Captures,Yakalamalar
 Feature.Captures.Title.Gallery,Galeri
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
@@ -3504,7 +3490,6 @@ Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,Kaldırmak için seç
 Feature.Chat.Label.Sent,Gönderildi
 Feature.Chat.Label.SnoozePartyNotifications,Deneyim içi parti bildirimlerini sustur:
-Feature.Chat.Label.StartChatting,Sohbete başla
 Feature.Chat.Label.SwipeToReplyTooltip,Yanıtlamak için kaydır
 Feature.Chat.Label.TapToRemove,Kaldırmak için dokun
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} gün
@@ -3855,6 +3840,7 @@ Feature.Friends.Error.UserBannedError,Bu işlemi gerçekleştirmen yasaklandı.
 Feature.Friends.Error.UserBlockedError,Bu işlemi gerçekleştirmen engellendi.
 Feature.Friends.Error.UserNotPassedCaptcha,Captcha'yı geçemedin.
 Feature.Friends.Feature.Friends.Heading.AddFriends,
+Feature.Friends.FriendingTooltipBody,"Bazı arkadaşlık istekleri, seni telefon numarandan bulan kullanıcılardan gelebilir. Arkadaş olmadan önce onları tanıdığından emin ol."
 Feature.Friends.Heading.Activities,Etkinlikler
 Feature.Friends.Heading.FilterBy,Filtrele
 Feature.Friends.Heading.Friends,
@@ -3884,10 +3870,11 @@ Feature.Friends.Label.FollowsYou,Seni Takip Ediyor
 Feature.Friends.Label.Frequent,Beraber oynadınız
 Feature.Friends.Label.Friend,Arkadaş
 Feature.Friends.Label.FriendInvite,Seni Roblox'ta arkadaş olmaya davet etti
-Feature.Friends.Label.FriendOfUser,Senin için önerilenler
+Feature.Friends.Label.FriendOfUser,{displayName} ile arkadaş
 Feature.Friends.Label.FriendOwns,1 Arkadaşında var
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 Arkadaşın</b> yakın zamanda oynadı
 Feature.Friends.Label.FriendRequest,
+Feature.Friends.Label.FriendingTooltip,Arkadaşlık Tavsiyesi
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,Arkadaşlar artık Etkileşim Ağı oldu!
 Feature.Friends.Label.FriendsHintBold,Hadi oynayalım!
@@ -4095,8 +4082,6 @@ Feature.GameFollows.TooltipTurnedOnNotifications,{experienceName} için bildirim
 Feature.GameJoin.Description.DifferentServer,Farklı bir sunucuda başlayacaksın
 Feature.GameJoin.Label.PlayTogether,Birlikte oynayabilirsiniz
 Feature.GameJoin.Label.PlayTogetherSoon,Yakında birlikte oynayabileceksiniz
-Feature.GameJoin.Label.Played,oynandı
-Feature.GameJoin.Label.RecentCoplay,Yakın zamanda beraber oynadınız
 Feature.GamePage.Action.BackToTop,Başa dön
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
@@ -5343,7 +5328,6 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,Teklif yalnızca yeni Plus aboneleri için geçerlidir.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,Herhangi biri senin bağlantınla Plus satın aldığında.
 Feature.RobloxSubscription.Description.ReferralShare,Birini Plus'a davet et; o Plus'ı satın aldığında ikiniz de {amount} Robux kazanın.
-Feature.RobloxSubscription.Description.SpawnEffectsPlusUpsell,Yeniden doğma efektleri ve daha pek çok avantajı keşfetmek için Plus'a abone ol.
 Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,Plus ile yeniden doğma alanı efektleri edin
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D} düğmesine tıklayarak <a href=""{termsUrl}"">Roblox Abonelik Koşulları</a>'nı kabul etmiş olursun. Sen iptal edene kadar her ay otomatik tahsilat yapılır."
 Feature.RobloxSubscription.Heading.ReferralEntry,Plus'ı paylaşarak {amount} Robux kazan
@@ -5784,6 +5768,7 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE}: 1 ki�
 Feature.UniversalShareSheet.Response.SharedMessage,Mesaj gönderildi
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Mesajlar gönderildi
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE}: {N} kişiyle daha
+Feature.UserLibrary.Label.MyLibrary,Kütüphanem
 Feature.VIPServer.Message.TooManyFreeServersOnGame,Bu oyunda daha fazla ücretsiz özel sunucuya sahip olamazsın.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,Daha fazla etkin ücretsiz özel sunucuya sahip olamazsın. Lütfen önce diğer birkaç sunucuyu devre dışı bırak.
 Feature.VerificationUpsell.Action.AddPhone,

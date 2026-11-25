@@ -306,9 +306,6 @@ Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,잠시 후 다시 시도: {WaitTime}
 Authentication.Login.Action.Continue,계속
-Authentication.Login.Action.ContinueSetup,설정 계속
-Authentication.Login.Action.ContinueWithProvider,다음으로 계속 진행: {provider}
-Authentication.Login.Action.CreateANewAccount,
 Authentication.Login.Action.DownloadNow,지금 다운로드
 Authentication.Login.Action.EmailACode,이메일로 로그인 코드 받기
 Authentication.Login.Action.EmailMeCode,이메일로 코드 받기
@@ -318,7 +315,6 @@ Authentication.Login.Action.ForgotUsername,사용자 이름을 잊어버리셨�
 Authentication.Login.Action.ForgotUsernameOrPassword,사용자 이름이나 비밀번호를 잊어버리셨나요?
 Authentication.Login.Action.GetCodeByEmail,
 Authentication.Login.Action.Google,Google
-Authentication.Login.Action.Leave,나가기
 Authentication.Login.Action.LogInEmailOneTimeCode,이메일로 일회용 코드 받기
 Authentication.Login.Action.NeedHelp,도움이 필요하세요?
 Authentication.Login.Action.Next,
@@ -343,19 +339,14 @@ Authentication.Login.Description.ChooseHowToPlay,원하는 플레이 방법을 �
 Authentication.Login.Description.DownloadNewVersion,회원님의 계정에서는 Roblox의 이 버전을 이용할 수 없습니다. 계속하려면 올바른 버전을 다운로드하세요.
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,{email}(으)로 방금 전송된 코드를 입력하세요
 Authentication.Login.Description.GetOneTimeCodeHelp,일회용 코드를 받으려면 계정의 인증된 이메일을 입력하세요.
-Authentication.Login.Description.LeaveAccountSetup,지금 나가면 Roblox 계정이 설정되지 않습니다.
 Authentication.Login.Description.PasskeyDescription,"이 계정은 비밀번호보다 더욱 안전한 로그인 방식인 패스키를 보유하고 있습니다. 지문, 얼굴, 또는 화면 잠금을 사용해 로그인하세요."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,내 기기가 패스키를 지원하는지 확인할 수 없습니다. 다시 시도하거나 '로그인할 수 없음'을 탭하여 이메일 또는 전화번호를 통해 계정을 복구하세요.
 Authentication.Login.Description.PasskeyMobileOnly,패스키는 모바일에서만 사용할 수 있습니다. 다른 방법으로 로그인하세요.
 Authentication.Login.Description.SigningInWith,로그인 방법: <b>{identifier}</b>
-Authentication.Login.Description.SsoLinkMultiple,본 이메일을 사용하는 Roblox 계정이 여러 개 발견되었습니다. 더 빠르게 로그인하려면 해당 계정 중 하나를 선택하여 {provider}에 연결하거나 새 계정을 만드세요.
-Authentication.Login.Description.SsoLinkSingle,이 이메일을 사용하는 Roblox 계정을 찾았습니다. 더 빠르게 로그인하려면 해당 계정을 {provider}에 연결하거나 새 계정을 만드세요.
 Authentication.Login.Description.UsernameHandle,@<b>{username}</b>
 Authentication.Login.Description.VerificationCodeSentTo,Roblox 계정이 있는 경우 이메일 주소({email})로 인증 코드가 전송됩니다.
 Authentication.Login.Error.PasskeyOnlyAccount,계정에 로그인용 패스키만 설정되어 있습니다. 패스키로 로그인을 시도하거나 계정을 복구하세요.
 Authentication.Login.Error.PlatformAccountConnectionFailure,플랫폼 계정을 인증할 수 없습니다. 나중에 다시 시도하세요.
-Authentication.Login.Header.LeaveAccountSetup,계정 설정을 중단하시겠어요?
-Authentication.Login.Header.YouAlreadyHaveAnAccount,이미 계정을 가지고 계십니다
 Authentication.Login.Heading.EnterYourCode,
 Authentication.Login.Heading.GetStarted,시작하기
 Authentication.Login.Heading.IncompatibleAccounts,계정이 호환되지 않음
@@ -379,7 +370,6 @@ Authentication.Login.Label.ConnectionError.RetryWait,"죄송합니다. 서버에
 
 잠시 기다렸다가 다시 시도하세요."
 Authentication.Login.Label.ConnectionError.Title,연결 오류
-Authentication.Login.Label.DontHaveARobloxAccountCreateOne,Roblox 계정이 없으신가요? {startTag}계정 만들기{endTag}
 Authentication.Login.Label.DontHaveAnAccountCreateOne,계정이 없으신가요? {startTag}계정 만들기{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,이메일 주소
@@ -415,7 +405,6 @@ Authentication.Login.Label.VerificationCode,인증 코드
 Authentication.Login.Label.WeChatUserCancel,WeChat에서 로그아웃하셨어요. WeChat에 다시 로그인하세요.
 Authentication.Login.Label.WeChatVersionNotSupported,WeChat 버전이 지원되지 않습니다
 Authentication.Login.LinkIllegalChildAccountLinking,이 Roblox 계정을 Xbox 자녀 계정에 연결할 수 없습니다. 다른 계정을 사용하거나 설정을 확인하세요.
-Authentication.Login.Message.SsoProviderLinked,이제 {provider}(으)로 로그인하실 수 있습니다
 Authentication.Login.QrCodeLoginTitle,QR 코드 스캔으로 로그인
 Authentication.Login.Response.AccountNotFound,계정을 찾을 수 없습니다. 다시 시도하세요.
 Authentication.Login.Response.AlreadyLinked,이 Roblox 계정은 이미 {platform}상의 다른 계정에 연결되어 있습니다. 다른 Roblox 계정으로 로그인해 보세요.
@@ -474,13 +463,13 @@ Authentication.ResetPassword.Response.ResetPasswordStarted,계속하기 전에 �
 Authentication.SignUp.Action.ApplyOnNextRespawn,다음 리스폰 시 적용
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
-Authentication.SignUp.Action.ContinueSetup,
+Authentication.SignUp.Action.ContinueSetup,설정 계속
 Authentication.SignUp.Action.Create,만들기
 Authentication.SignUp.Action.CreateAPasskey,패스키 생성
 Authentication.SignUp.Action.CreateAccount,
 Authentication.SignUp.Action.CreateAccountSentenceCase,
 Authentication.SignUp.Action.EnableFaceId,Face ID 활성화
-Authentication.SignUp.Action.ExitModalLeave,
+Authentication.SignUp.Action.ExitModalLeave,나가기
 Authentication.SignUp.Action.IUnderstand,이해했습니다
 Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,지금 리스폰
@@ -1622,6 +1611,7 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,"사용자 이름이나 �
 Feature.AddFriends.Label.ConnectWithContacts,"연락처 목록의 친구들을 초대하거나, 이미 Roblox에 있는 친구들과 소통하세요!"
 Feature.AddFriends.Label.ContactsTile,연락처
 Feature.AddFriends.Label.DeclineAllBackgrounded,친구 요청을 모두 무시합니다. 1분 정도 걸릴 수 있습니다.
+Feature.AddFriends.Label.EmptyStatePrompt,"Roblox에서 함께하고 싶은 사람이 있나요? 친구로 추가할 사람을 찾아 보거나, 이미 알고 있는 친구와 소통하세요!"
 Feature.AddFriends.Label.FriendRequests,친구 요청
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,사람 검색
 Feature.AddFriends.Label.MyQrCode,내 QR 코드
@@ -2692,8 +2682,6 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,모든 게임
 Feature.Build.Label.AmountAvailable,{AMOUNT} 이용 가능
-Feature.Build.Label.AttachmentCountPlural,첨부 파일 {count}개
-Feature.Build.Label.AttachmentCountSingular,첨부 파일 1개
 Feature.Build.Label.Autosaved,자동 저장됨
 Feature.Build.Label.Available,이용 가능
 Feature.Build.Label.AvailableForPurchase,구매 가능
@@ -2713,7 +2701,6 @@ Feature.Build.Label.DefaultDeveloperProductName,개발자 상품
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,삭제됨
 Feature.Build.Label.DescribeIdea,아이디어 설명
-Feature.Build.Label.DescribeIdeaOrPick,아이디어를 설명하거나 아래에서 하나를 선택하세요
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,설명: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,이름: {NAME}
@@ -3054,7 +3041,6 @@ Feature.BuyRobux.Label.MyFriendsWithCount,내 친구({count}명)
 Feature.BuyRobux.Label.PeopleWithCount,회원({count}명)
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
-Feature.Captures.Title.Captures,캡처
 Feature.Captures.Title.Gallery,갤러리
 Feature.Catalog.Action.Buy,구매
 Feature.Catalog.Action.Cancel,
@@ -3550,7 +3536,6 @@ Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,선택하여 제거
 Feature.Chat.Label.Sent,전송됨
 Feature.Chat.Label.SnoozePartyNotifications,체험 내 파티 알림 음소거 대상:
-Feature.Chat.Label.StartChatting,채팅 시작
 Feature.Chat.Label.SwipeToReplyTooltip,밀어서 답장하기
 Feature.Chat.Label.TapToRemove,눌러서 제거
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}일
@@ -3901,6 +3886,7 @@ Feature.Friends.Error.UserBannedError,회원님의 작업 수행이 정지되었
 Feature.Friends.Error.UserBlockedError,회원님의 작업 수행이 차단되었습니다.
 Feature.Friends.Error.UserNotPassedCaptcha,Captcha를 통과하지 못했습니다.
 Feature.Friends.Feature.Friends.Heading.AddFriends,
+Feature.Friends.FriendingTooltipBody,일부 친구 요청은 단지 내 휴대폰 번호를 이용해 나를 찾은 사용자가 보낸 것일 수도 있습니다. 친구 초대를 수락하기 전에 내가 아는 사람인지 꼭 확인하세요.
 Feature.Friends.Heading.Activities,
 Feature.Friends.Heading.FilterBy,필터링 기준
 Feature.Friends.Heading.Friends,
@@ -3930,10 +3916,11 @@ Feature.Friends.Label.FollowsYou,나를 팔로우 중
 Feature.Friends.Label.Frequent,함께 플레이함
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,Roblox 친구로 초대받았어요.
-Feature.Friends.Label.FriendOfUser,회원님을 위한 추천
+Feature.Friends.Label.FriendOfUser,{displayName} 님의 친구
 Feature.Friends.Label.FriendOwns,친구 1명이 보유함
 Feature.Friends.Label.FriendRecentlyPlayed,<b>친구 1명</b>이 최근에 플레이함
 Feature.Friends.Label.FriendRequest,
+Feature.Friends.Label.FriendingTooltip,친구 맺기 관련 팁
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,Roblox의 친구라는 명칭이 이제 인맥으로 변경되었습니다!
 Feature.Friends.Label.FriendsHintBold,같이 플레이해요!
@@ -4141,8 +4128,6 @@ Feature.GameFollows.TooltipTurnedOnNotifications,{experienceName}에 대한 알�
 Feature.GameJoin.Description.DifferentServer,다른 서버에서 시작하게 됩니다
 Feature.GameJoin.Label.PlayTogether,함께 플레이하실 수 있습니다
 Feature.GameJoin.Label.PlayTogetherSoon,곧 함께 플레이하실 수 있습니다
-Feature.GameJoin.Label.Played,사용자가 플레이함
-Feature.GameJoin.Label.RecentCoplay,최근에 함께 플레이했습니다
 Feature.GamePage.Action.BackToTop,맨 위로 돌아가기
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
@@ -5390,7 +5375,6 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,새로운 Plus 구독자에게만 제공되는 혜택입니다.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,누군가 회원님의 링크를 통해 Plus를 구매하는 경우.
 Feature.RobloxSubscription.Description.ReferralShare,"다른 사람을 Plus에 초대한 경우, 초대 받은 사람이 Plus를 구매하면 두 사람 모두 {amount} Robux를 받습니다."
-Feature.RobloxSubscription.Description.SpawnEffectsPlusUpsell,Plus를 구독하고 스폰 효과 등 다양한 혜택을 누리세요.
 Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,Plus로 스폰 효과 받기
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D}를 클릭하면 <a href=""{termsUrl}"">Roblox 구독 약관</a>에 동의하는 것으로 간주됩니다. 구독을 취소하기 전까지 매월 자동으로 요금이 청구됩니다."
 Feature.RobloxSubscription.Heading.ReferralEntry,Plus를 공유하고 {amount} Robux  받기
@@ -5831,6 +5815,7 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} 외 1�
 Feature.UniversalShareSheet.Response.SharedMessage,메시지가 전송되었습니다.
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} 외 {N}명
+Feature.UserLibrary.Label.MyLibrary,내 라이브러리
 Feature.VIPServer.Message.TooManyFreeServersOnGame,이 게임에서는 더 이상 무료 비공개 서버를 추가할 수 없습니다.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,더 이상 무료 비공개 서버를 활성화할 수 없습니다. 먼저 다른 서버를 비활성화하세요.
 Feature.VerificationUpsell.Action.AddPhone,
