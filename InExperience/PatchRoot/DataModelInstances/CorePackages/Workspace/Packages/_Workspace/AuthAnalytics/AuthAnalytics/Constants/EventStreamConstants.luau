@@ -132,7 +132,12 @@
 		LoginOtherSignInOptionsModal = "loginOtherSignInOptionsModal",
 		MarketingEmailConsent = "marketingEmailConsent",
 		MarketingEmailAutoOptIn = "marketingEmailAutoOptIn",
-		Toast = "toast"
+		Toast = "toast",
+		Select = "select",
+		Passkey = "passkey",
+		EmailOtp = "emailOtp",
+		TwoStep = "twoStep",
+		CreateAccount = "createAccount"
 	},
 	Context = {
 		AccountPickerLandingScreen = "accountPickerLandingScreen",
@@ -332,5 +337,6 @@
 		SsoLinkTwoStepAbandoned = "abandoned",
 		SsoLinkTwoStepInvalidated = "invalidated"
 	},
+	SsoAccountLinkErrorCode = { Network = "network", PasskeyFailed = "passkeyFailed" },
 	EventTimingKeys = { OsClock = "os_clock", OsTime = "os_time" }
 }
