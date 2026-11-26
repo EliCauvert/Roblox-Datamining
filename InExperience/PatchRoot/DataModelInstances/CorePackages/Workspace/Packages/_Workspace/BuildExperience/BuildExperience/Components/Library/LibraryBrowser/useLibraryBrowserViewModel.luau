@@ -10,6 +10,9 @@ local UseLibraryStringsModule = require(script.Parent.Parent.useLibraryStrings)
 local UseLibraryItemsModule = require(script.Parent.Parent.useLibraryItems)
 local GetFolderPreviewModule = require(script.Parent.Parent.getFolderPreview)
 local _ = require(script.Parent.Parent.LibraryWorldCutout.LibraryWorldCutoutView)
+local UseLibraryTilePlaybackModule = require(script.Parent.Parent.useLibraryTilePlayback)
+local GetLibraryTileSoundIdModule = require(script.Parent.Parent.getLibraryTileSoundId)
+local FFlagBuildExperienceLibraryTilePlaybackModule = require(BuildExperience.Flags.FFlagBuildExperienceLibraryTilePlayback)
 
 local function useCarousel(Library, UseSignalStateResult, p1, Query)
 	-- upvalues: UseLibraryItemsModule (copy), ReactModule (copy)
@@ -28,15 +31,14 @@ local function useCarousel(Library, UseSignalStateResult, p1, Query)
 end
 
 return function(p1)
-	-- upvalues: UseLibraryStringsModule (copy), SignalsReactModule (copy), useCarousel (copy), LibraryCategoriesModule (copy), GetFolderPreviewModule (copy)
+	-- upvalues: UseLibraryStringsModule (copy), SignalsReactModule (copy), useCarousel (copy), FFlagBuildExperienceLibraryTilePlaybackModule (copy), GetLibraryTileSoundIdModule (copy), UseLibraryTilePlaybackModule (copy), LibraryCategoriesModule (copy), GetFolderPreviewModule (copy)
 	local UseLibraryStringsModuleResult = UseLibraryStringsModule()
 	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.library.getItems)
 	local Query = p1.query
-	local config = {
-		Model = useCarousel(p1.library, UseSignalStateResult, "Model", Query),
-		Image = useCarousel(p1.library, UseSignalStateResult, "Image", Query),
-		Sound = useCarousel(p1.library, UseSignalStateResult, "Sound", Query)
-	}
+	local Model = useCarousel(p1.library, UseSignalStateResult, "Model", Query)
+	local Image = useCarousel(p1.library, UseSignalStateResult, "Image", Query)
+	local Sound = useCarousel(p1.library, UseSignalStateResult, "Sound", Query)
+	local config = { Model = Model, Image = Image, Sound = Sound }
 	local List = {}
 	
 	for _, value in config do
@@ -45,34 +47,58 @@ return function(p1)
 		end
 	end
 	local Ready: string = if p1.isReady then "Ready" else "Loading"
+	local v1 = nil
+	
+	if FFlagBuildExperienceLibraryTilePlaybackModule then
+		local VisibleSoundIds = {}
+		
+		for _, item1 in Sound.items do
+			local LibraryTileSoundIdModule = GetLibraryTileSoundIdModule(item1)
+			
+			if LibraryTileSoundIdModule ~= nil then
+				table.insert(VisibleSoundIds, LibraryTileSoundIdModule)
+			end
+		end
+		v1 = UseLibraryTilePlaybackModule({
+			surface = "Browser",
+			isOpen = p1.isOpen ~= false,
+			visibleSoundIds = VisibleSoundIds
+		})
+	end
 	local Categories = {}
 	
 	for _, value1 in LibraryCategoriesModule.fromItems(List, UseLibraryStringsModuleResult) do
 		local Entry = config[value1.itemKind]
 		local Items = {}
 		
-		for _, item1 in Entry.items do
+		for _, item2 in Entry.items do
+			local LibraryTileSoundIdModule = if v1 == nil then nil else GetLibraryTileSoundIdModule(item2)
 			table.insert(Items, {
-				tileKey = `library-item-{item1.id}`,
-				itemId = item1.id,
-				itemKind = item1.kind,
-				isFolder = item1.className == "Folder",
-				folderPreview = GetFolderPreviewModule(item1, UseSignalStateResult),
-				displayName = item1.displayName,
+				tileKey = `library-item-{item2.id}`,
+				itemId = item2.id,
+				itemKind = item2.kind,
+				isFolder = item2.className == "Folder",
+				folderPreview = GetFolderPreviewModule(item2, UseSignalStateResult),
+				displayName = item2.displayName,
 				unavailableText = UseLibraryStringsModuleResult.modelUnavailable,
-				thumbnail = item1.image,
-				model = item1.model,
+				thumbnail = item2.image,
+				model = item2.model,
 				onActivated = if p1.onOpenItem == nil and p1.onOpenCategory == nil then nil else function()
-					-- upvalues: item1 (copy), p1 (copy)
-					if item1.className == "Folder" then
+					-- upvalues: item2 (copy), p1 (copy)
+					if item2.className == "Folder" then
 						if p1.onOpenCategory ~= nil then
-							p1.onOpenCategory(item1.kind, item1.id, item1.displayName, item1.id)
+							p1.onOpenCategory(item2.kind, item2.id, item2.displayName, item2.id)
 							
 							return
 						end
 					elseif p1.onOpenItem ~= nil then
-						p1.onOpenItem(item1.id, item1.kind)
+						p1.onOpenItem(item2.id, item2.kind)
 					end
+				end,
+				isSoundPlaying = if v1 == nil or LibraryTileSoundIdModule == nil then nil else v1.playingSoundId == LibraryTileSoundIdModule,
+				onTogglePlayback = if v1 == nil or LibraryTileSoundIdModule == nil then nil else function()
+					-- upvalues: v1 (ref), LibraryTileSoundIdModule (copy)
+					v1.onTogglePlayback(LibraryTileSoundIdModule)
 				end
 			})
 		end

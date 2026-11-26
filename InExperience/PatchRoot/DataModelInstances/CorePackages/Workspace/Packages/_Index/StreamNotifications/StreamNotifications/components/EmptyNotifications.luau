@@ -7,9 +7,10 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FFlagLuaAppAddTestIdsForArrow = require(Parent.SharedFlags).FFlagLuaAppAddTestIdsForArrow
 
 return function()
-	-- upvalues: UseStyleFunction (copy), UseTokensFunction (copy), NormalizeFontFaceFunction (copy), UseLocalizationFunction (copy), ConstantsModule (copy), ReactModule (copy)
+	-- upvalues: UseStyleFunction (copy), UseTokensFunction (copy), NormalizeFontFaceFunction (copy), UseLocalizationFunction (copy), ConstantsModule (copy), ReactModule (copy), FFlagLuaAppAddTestIdsForArrow (copy)
 	local UseStyleResult = UseStyleFunction()
 	local UseTokensResult = UseTokensFunction()
 	local NormalizeFontFaceResult = NormalizeFontFaceFunction(UseTokensResult.Typography.TitleLarge.Font)
@@ -30,13 +31,14 @@ return function()
 			Padding = UDim.new(0, ConstantsModule.DefaultPadding)
 		}),
 		ReactModule.createElement("TextLabel", {
-			LayoutOrder = 2,
-			BackgroundTransparency = 1,
 			Text = UseLocalizationResult and UseLocalizationResult.emptyText,
+			LayoutOrder = 2,
 			FontFace = NormalizeFontFaceResult,
 			TextSize = FontSize,
+			BackgroundTransparency = 1,
 			TextColor3 = UseStyleResult.Theme.TextDefault.Color,
-			Size = UDim2.new(1, 0, 0, ConstantsModule.EmptyNotifications.LabelHeight)
+			Size = UDim2.new(1, 0, 0, ConstantsModule.EmptyNotifications.LabelHeight),
+			[ReactModule.Tag] = if FFlagLuaAppAddTestIdsForArrow then "data-testid=--stream-notifications-empty-text" else nil
 		})
 	})
 end

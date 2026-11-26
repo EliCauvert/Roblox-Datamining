@@ -3,12 +3,15 @@ local Parent = BuildExperience.Parent
 local _ = require(BuildExperience.Components.ModelPicker.ModelPickerTypes)
 local FFlagBuildExperienceModelPickerModule = require(BuildExperience.Flags.FFlagBuildExperienceModelPicker)
 local FFlagBuildExperienceFTUXChipSendGuidanceModule = require(BuildExperience.Flags.FFlagBuildExperienceFTUXChipSendGuidance)
+local FFlagBuildExperienceFTUXChipComposerPlaceholderModule = require(BuildExperience.Flags.FFlagBuildExperienceFTUXChipComposerPlaceholder)
+local FFlagBuildEnableFTUXChipsModule = require(BuildExperience.Flags.FFlagBuildEnableFTUXChips)
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local FFlagBuildAdUpsellModule = require(BuildExperience.Flags.FFlagBuildAdUpsell)
 local FFlagBuildAdUpsellPinnedModule = require(BuildExperience.Flags.FFlagBuildAdUpsellPinned)
+local FFlagBuildChatPasteAsAttachmentModule = require(BuildExperience.Flags.FFlagBuildChatPasteAsAttachment)
 local FFlagBuildAdsManagerUniverseUrlModule = require(BuildExperience.Flags.FFlagBuildAdsManagerUniverseUrl)
 local FFlagBuildAgentAdCampaignCardModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignCard)
 local ChatConstantsModule = require(BuildExperience.Chat.chatConstants)
@@ -136,7 +139,7 @@ local function renderAdUpsells(p1, Tbl, ScrollingFrameRef, CongratsText)
 end
 
 return function(p2)
-	-- upvalues: FFlagBuildExperienceAnswerFormModule (copy), IsEnabled (copy), ReactModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildAdUpsellModule (copy), UseTokensFunction (copy), UseScrollPerformanceTrackerModule (copy), ChatMessageListModule (copy), BuildEmptyStateModule (copy), FFlagBuildAgentAdCampaignCardModule (copy), ChatConstantsModule (copy), PushNotificationsUpsellCardModule (copy), renderAdUpsells (copy), AnswerFormContainerModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), FFlagBuildCheckGamePermissionsModule (copy), ChatPermissionsContextModule (copy), View (copy), FFlagBuildAdUpsellPinnedModule (copy), BuyMoreRobuxCardModule (copy), ChatActionsModule (copy), FFlagBuildExperienceModelPickerModule (copy), FFlagBuildExperienceFTUXChipSendGuidanceModule (copy), FFlagBuildExperienceLibrary (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), Text (copy), PlayButtonModule (copy), IconVariant (copy), BuildOverflowMenuButtonModule (copy), FFlagEnableBuildAdPromotionModule (copy), Divider (copy), ScrollView (copy), AgentSpecDebugSheetModule (copy), CreateAdCampaignSheetContainerModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), FFlagBuildAdsFundedNotCreatedError (copy), AdCampaignCreatedToastModule (copy)
+	-- upvalues: FFlagBuildExperienceAnswerFormModule (copy), IsEnabled (copy), ReactModule (copy), UseLocalizationFunction (copy), FFlagBuildExperienceFTUXChipComposerPlaceholderModule (copy), FFlagBuildEnableFTUXChipsModule (copy), LocalizationStringsModule (copy), FFlagBuildAdUpsellModule (copy), UseTokensFunction (copy), UseScrollPerformanceTrackerModule (copy), ChatMessageListModule (copy), BuildEmptyStateModule (copy), FFlagBuildAgentAdCampaignCardModule (copy), ChatConstantsModule (copy), PushNotificationsUpsellCardModule (copy), renderAdUpsells (copy), AnswerFormContainerModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), FFlagBuildCheckGamePermissionsModule (copy), ChatPermissionsContextModule (copy), View (copy), FFlagBuildAdUpsellPinnedModule (copy), BuyMoreRobuxCardModule (copy), ChatActionsModule (copy), FFlagBuildExperienceModelPickerModule (copy), FFlagBuildExperienceFTUXChipSendGuidanceModule (copy), FFlagBuildChatPasteAsAttachmentModule (copy), FFlagBuildExperienceLibrary (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), Text (copy), PlayButtonModule (copy), IconVariant (copy), BuildOverflowMenuButtonModule (copy), FFlagEnableBuildAdPromotionModule (copy), Divider (copy), ScrollView (copy), AgentSpecDebugSheetModule (copy), CreateAdCampaignSheetContainerModule (copy), FFlagBuildAdsManagerUniverseUrlModule (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), FFlagBuildAdsFundedNotCreatedError (copy), AdCampaignCreatedToastModule (copy)
 	local HasAnswerForm: boolean = FFlagBuildExperienceAnswerFormModule and p2.answerForm ~= nil
 	local v1 = false
 	local Callback = nil
@@ -145,7 +148,7 @@ return function(p2)
 		v1, Callback = ReactModule.useState(false)
 	end
 	local UseLocalizationResult = UseLocalizationFunction({
-		composerPlaceholder = LocalizationStringsModule.CHAT_COMPOSER_PLACEHOLDER,
+		composerPlaceholder = if FFlagBuildExperienceFTUXChipComposerPlaceholderModule and FFlagBuildEnableFTUXChipsModule and (#p2.promptChips > 0 or p2.isPromptChipsLoading) then LocalizationStringsModule.CHAT_COMPOSER_PLACEHOLDER_ALT else LocalizationStringsModule.CHAT_COMPOSER_PLACEHOLDER,
 		adUpsellCongrats = if FFlagBuildAdUpsellModule then if p2.adUpsellFreePromotionsRemaining == 1 then LocalizationStringsModule.AD_UPSELL_CONGRATS_SINGULAR else {
 			LocalizationStringsModule.AD_UPSELL_CONGRATS,
 			promotionCount = p2.adUpsellFreePromotionsRemaining
@@ -390,6 +393,7 @@ return function(p2)
 					onRetryImage = p2.onRetryComposerImage,
 					isSendBlocked = p2.isComposerSendBlocked,
 					resourceAttachments = p2.composerResourceAttachments,
+					onAddResourceAttachment = if FFlagBuildChatPasteAsAttachmentModule then p2.onAddComposerResourceAttachment else nil,
 					onRemoveResourceAttachment = p2.onRemoveComposerResourceAttachment,
 					placeholder = UseLocalizationResult.composerPlaceholder,
 					textBoxRef = p2.textBoxRef,

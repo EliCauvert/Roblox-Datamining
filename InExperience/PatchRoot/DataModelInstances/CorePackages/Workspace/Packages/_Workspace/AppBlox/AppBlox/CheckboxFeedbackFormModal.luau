@@ -11,6 +11,7 @@ local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local Checkbox = FoundationModule.Checkbox
 local Dialog = FoundationModule.Dialog
 local Text = FoundationModule.Text
+local UseStyleTagsFunction = FoundationModule.Hooks.useStyleTags
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
 local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
@@ -24,9 +25,10 @@ local UrlBuilder = UrlBuilderModule.UrlBuilder
 local FFlagLuaAppMakeDisclaimerOptInForFeedbackForm = SharedFlagsModule.FFlagLuaAppMakeDisclaimerOptInForFeedbackForm
 local FFlagLuaAppNotInterestedFeedbackFormTelemetry = SharedFlagsModule.FFlagLuaAppNotInterestedFeedbackFormTelemetry
 local LuaAppCheckboxFeedbackFormTitleTextWrapping = game:DefineFastFlag("LuaAppCheckboxFeedbackFormTitleTextWrapping", false)
+local LuaAppCheckboxFeedbackFormTextBoxSpacing = game:DefineFastFlag("LuaAppCheckboxFeedbackFormTextBoxSpacing", false)
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseDispatchFunction (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), CloseCentralOverlayFunction (copy), FFlagLuaAppNotInterestedFeedbackFormTelemetry (copy), CryoModule (copy), Checkbox (copy), UseAppPolicyFunction (copy), AppPage (copy), UrlBuilder (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), Dialog (copy), Text (copy), LuaAppCheckboxFeedbackFormTitleTextWrapping (copy), NormalizeFontFaceFunction (copy), ButtonVariant (copy), FFlagLuaAppMakeDisclaimerOptInForFeedbackForm (copy)
+	-- upvalues: UseDispatchFunction (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), CloseCentralOverlayFunction (copy), FFlagLuaAppNotInterestedFeedbackFormTelemetry (copy), CryoModule (copy), Checkbox (copy), UseStyleTagsFunction (copy), LuaAppCheckboxFeedbackFormTextBoxSpacing (copy), UseAppPolicyFunction (copy), AppPage (copy), UrlBuilder (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), Dialog (copy), Text (copy), LuaAppCheckboxFeedbackFormTitleTextWrapping (copy), NormalizeFontFaceFunction (copy), ButtonVariant (copy), FFlagLuaAppMakeDisclaimerOptInForFeedbackForm (copy)
 	local UseDispatchResult = UseDispatchFunction()
 	local UseTokensResult = UseTokensFunction()
 	local UseLocalizationResult = UseLocalizationFunction({
@@ -90,6 +92,7 @@ return ReactModule.memo(function(p1)
 		end
 		return Flag, Flag1
 	end, { p1.checkboxItems, UseStateResult })
+	local UseStyleTagsResult = UseStyleTagsFunction(if LuaAppCheckboxFeedbackFormTextBoxSpacing and UseMemoResult2 then "padding-bottom-large" else nil)
 	local UseRefResult = ReactModule.useRef("")
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	local v1: boolean = (not UseMemoResult2 or UseStateResult1) and (if UseMemoResult1 or UseMemoResult2 and UseStateResult1 then true else false)
@@ -142,11 +145,12 @@ return ReactModule.memo(function(p1)
 		DialogText = ReactModule.createElement(Dialog.Text, { LayoutOrder = 2, Text = p1.dialogText }),
 		DialogContent = ReactModule.createElement(Dialog.Content, { LayoutOrder = 3 }, {
 			CheckboxListWrapper = ReactModule.createElement("Frame", {
+				AutomaticSize = Enum.AutomaticSize.Y,
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				LayoutOrder = 1,
-				AutomaticSize = Enum.AutomaticSize.Y,
-				Size = UDim2.fromScale(1, 0)
+				Size = UDim2.fromScale(1, 0),
+				[ReactModule.Tag] = UseStyleTagsResult
 			}, CryoModule.Dictionary.union(UseMemoResult, {
 				Title = ReactModule.createElement(Text, {
 					LayoutOrder = 0,

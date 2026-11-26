@@ -27,7 +27,7 @@ return {
 		task.wait(1)
 		TouchedConnection = Part.Touched:Connect(function(Hit)
 			-- upvalues: Part (copy), Callback (copy), TouchedConnection (upval)
-			if game.Players:GetPlayerFromCharacter(Hit.Parent) then
+			if game:GetService("Players"):GetPlayerFromCharacter(Hit.Parent) then
 				Part:Destroy()
 				task.wait(0.2)
 				Callback()

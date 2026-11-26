@@ -8,6 +8,8 @@ return {
 	FFlagBuildAgentAdCampaignCard = require(script.FFlagBuildAgentAdCampaignCard),
 	FFlagBuildExperienceThoughtStatus = require(script.FFlagBuildExperienceThoughtStatus),
 	getCreatorAgentChatStore = require(script.getCreatorAgentChatStore),
+	getUnreadStore = require(script.getUnreadStore),
+	createUnreadStore = require(script.createUnreadStore),
 	createCreatorAgentChatStore = require(script.createCreatorAgentChatStore),
 	createMockStore = require(script.createMockStore),
 	TurnStateReducer = require(script.turnState),

@@ -1,7 +1,9 @@
 ﻿local NewResult = require(game:GetService("CorePackages").Workspace.Packages.CoreScriptsInitializer).CoreLogger:new(script.Name)
+local FFlagEmoteHelperInjectableWaitModule = require(script.Parent.Flags.FFlagEmoteHelperInjectableWait)
 local EmoteHelper = {
 	EMOTE_LOOP_TRANSITION_WAIT_TIME = 0.3,
 	EMOTE_LOOP_WAIT_TIMEOUT = 5,
+	wait = if FFlagEmoteHelperInjectableWaitModule then wait else nil,
 	LegacyDefaultEmotes = {
 		wave = true,
 		point = true,
@@ -43,7 +45,7 @@ function EmoteHelper.getAnyActiveDefaultChatTriggeredEmoteTrack(Player: Player)
 end
 
 local function waitForEmoteEventInternal(Player, AnimationTrack, p1, Callback: () -> ())
-	-- upvalues: NewResult (copy), EmoteHelper (copy), waitForEmoteEventInternal (copy)
+	-- upvalues: NewResult (copy), EmoteHelper (copy), FFlagEmoteHelperInjectableWaitModule (copy), waitForEmoteEventInternal (copy)
 	local BindableEvent = Instance.new("BindableEvent")
 	local ClockTime = os.clock()
 	local Flag = true
@@ -81,10 +83,14 @@ local function waitForEmoteEventInternal(Player, AnimationTrack, p1, Callback: (
 		end
 	end)
 	task.spawn(function()
-		-- upvalues: ClockTime (ref), Flag (ref), EmoteHelper (upval), NewResult (upval), BindableEvent (copy)
+		-- upvalues: ClockTime (ref), Flag (ref), EmoteHelper (upval), FFlagEmoteHelperInjectableWaitModule (upval), NewResult (upval), BindableEvent (copy)
 		local Elapsed = os.clock() - ClockTime
 		while Flag and Elapsed < EmoteHelper.EMOTE_LOOP_WAIT_TIMEOUT do
-			wait(EmoteHelper.EMOTE_LOOP_WAIT_TIMEOUT - Elapsed)
+			if FFlagEmoteHelperInjectableWaitModule then
+				EmoteHelper.wait(EmoteHelper.EMOTE_LOOP_WAIT_TIMEOUT - Elapsed)
+			else
+				wait(EmoteHelper.EMOTE_LOOP_WAIT_TIMEOUT - Elapsed)
+			end
 			Elapsed = os.clock() - ClockTime
 		end
 		if Flag then
@@ -106,7 +112,11 @@ local function waitForEmoteEventInternal(Player, AnimationTrack, p1, Callback: (
 		KeyframeReachedConnection:Disconnect()
 	end
 	if p1 then
-		wait(EmoteHelper.EMOTE_LOOP_TRANSITION_WAIT_TIME)
+		if FFlagEmoteHelperInjectableWaitModule then
+			EmoteHelper.wait(EmoteHelper.EMOTE_LOOP_TRANSITION_WAIT_TIME)
+		else
+			wait(EmoteHelper.EMOTE_LOOP_TRANSITION_WAIT_TIME)
+		end
 		local AnyActiveDefaultChatTriggeredEmoteTrack = EmoteHelper.getAnyActiveDefaultChatTriggeredEmoteTrack(Player)
 		
 		if AnyActiveDefaultChatTriggeredEmoteTrack then

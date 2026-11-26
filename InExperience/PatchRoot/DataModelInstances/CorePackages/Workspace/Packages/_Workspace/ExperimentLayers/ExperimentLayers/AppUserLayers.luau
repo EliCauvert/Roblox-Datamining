@@ -104,6 +104,8 @@ return {
 	ExpChatOpenExpressionTrayLayer = "UniverseChat.OpenExpressionTray",
 	ExpChatStickyTabsLayer = "User.Communication.SwitchChatTab.HasChatAccess.UserId",
 	ExpChatOpenChatWindowHasChatAccessLayer = "User.Communication.OpenChatWindow.HasChatAccess.UserId",
+	ExpChatPortraitWidthLayer = "User.Communication.ChatOpenedInPortrait.HasChatAccess.UserId",
+	ExpChatRightShiftLayer = "User.Communication.ChatOpenedInLandscape.HasChatAccess.UserId",
 	ExperienceDetailsPageLayer = "PlayerApp.GameDetailsPage",
 	ExperienceDetailsPageExposureLayer = "PlayerApp.GameDetailsPage.Exposure",
 	ExperienceMenuLayer = "Experience.Menu",

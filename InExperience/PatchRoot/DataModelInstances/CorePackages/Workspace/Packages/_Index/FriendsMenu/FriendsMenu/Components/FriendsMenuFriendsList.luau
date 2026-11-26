@@ -12,12 +12,13 @@ local _ = require(FriendsMenu.Enums.FriendMenuType)
 local _ = require(FriendsMenu.friendsMenuModalType)
 local VerticalScrollView = require(Parent.UIBlox).App.Container.VerticalScrollView
 local FFlagUpdateInvitesToUsePaginatedFriendsModule = require(FriendsMenu.Flags.FFlagUpdateInvitesToUsePaginatedFriends)
+local FFlagGameInviteLegacyListJoin = require(Parent.SharedFlags).FFlagGameInviteLegacyListJoin
 local FriendsMenuShareGameInviteLinkModule = require(Components.FriendsMenuShareGameInviteLink)
 local EnableFriendsMenuShareGameInviteLink3 = game:DefineFastFlag("EnableFriendsMenuShareGameInviteLink3", false)
 local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
 
 return function(p1)
-	-- upvalues: ReactModule (copy), FriendsListContextModule (copy), UserInputService (copy), GuiService (copy), UseAppPolicyFunction (copy), EnableFriendsMenuShareGameInviteLink3 (copy), FriendRowModule (copy), FriendsMenuShareGameInviteLinkModule (copy), FriendsListMsgModule (copy), EmptyFriendsListModule (copy), VerticalScrollView (copy), FFlagUpdateInvitesToUsePaginatedFriendsModule (copy)
+	-- upvalues: ReactModule (copy), FriendsListContextModule (copy), UserInputService (copy), GuiService (copy), UseAppPolicyFunction (copy), EnableFriendsMenuShareGameInviteLink3 (copy), FriendRowModule (copy), FFlagGameInviteLegacyListJoin (copy), FriendsMenuShareGameInviteLinkModule (copy), FriendsListMsgModule (copy), EmptyFriendsListModule (copy), VerticalScrollView (copy), FFlagUpdateInvitesToUsePaginatedFriendsModule (copy)
 	local UseContextResult = ReactModule.useContext(FriendsListContextModule)
 	local Friends = UseContextResult.friends
 	local IsFetchingFriends = UseContextResult.isFetchingFriends
@@ -65,7 +66,7 @@ return function(p1)
 	end)
 	local UseAppPolicyResult1 = EnableFriendsMenuShareGameInviteLink3 and (p1.parentComponentName == "GameInviteModal" and game.GameId > 0 and (p1.gameDetailsData and (p1.gameDetailsData.isCoreScript and (p1.gameDetailsData.serverType == "StandardServer" and UseAppPolicyResult))))
 	local UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: ReactModule (upval), Friends (copy), FriendRowModule (upval), UserInputService (upval), p1 (copy), IsFetchingFriends (copy), IsFetchingFriends1 (copy)
+		-- upvalues: ReactModule (upval), Friends (copy), FriendRowModule (upval), UserInputService (upval), p1 (copy), IsFetchingFriends (copy), IsFetchingFriends1 (copy), FFlagGameInviteLegacyListJoin (upval)
 		local config = {
 			RowListLayout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
@@ -84,11 +85,12 @@ return function(p1)
 				sidePadding = p1.sidePadding,
 				backgroundTransparency = p1.backgroundTransparency,
 				isFetchingFriends = IsFetchingFriends,
-				isFetchingFriendsNames = IsFetchingFriends1
+				isFetchingFriendsNames = IsFetchingFriends1,
+				renderJoinButton = if FFlagGameInviteLegacyListJoin then p1.renderJoinButton else nil
 			})
 		end
 		return config
-	end, { Friends })
+	end, if FFlagGameInviteLegacyListJoin then { Friends, p1.renderJoinButton } else { Friends })
 	local Config = nil
 	
 	if IsFriendsListFetchFailed then

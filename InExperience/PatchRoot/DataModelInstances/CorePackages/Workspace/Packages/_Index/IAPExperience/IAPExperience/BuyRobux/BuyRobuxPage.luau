@@ -368,7 +368,7 @@ function ExtendResult.renderWithLocale(p1, p2, Callback)
 					width = FitTextLabel.Width.FitToText,
 					Text = if Props.robuxBalance then FormatNumberModule(LocalizationService.RobloxLocaleId, Props.robuxBalance) else "",
 					Font = _Font.Header1.Font,
-					TextColor3 = if Props.showBackground then Color3.new(255, 255, 255) else Theme.TextEmphasis.Color,
+					TextColor3 = if Props.showBackground then Color3.fromRGB(255, 255, 255) else Theme.TextEmphasis.Color,
 					TextTransparency = Theme.TextEmphasis.Transparency,
 					TextSize = ScaledScale
 				})
@@ -399,7 +399,7 @@ function ExtendResult.renderWithLocale(p1, p2, Callback)
 					FontFace = NormalizeFontFaceFunction(p3.Tokens.Typography.HeadingLarge.Font),
 					Text = p2.BannerTitle,
 					TextSize = 46 * p1:getScale(),
-					TextColor3 = if Props.showBackground then Color3.new(255, 255, 255) else Theme.TextEmphasis.Color
+					TextColor3 = if Props.showBackground then Color3.fromRGB(255, 255, 255) else Theme.TextEmphasis.Color
 				}),
 				BannerText = RoactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
@@ -411,7 +411,7 @@ function ExtendResult.renderWithLocale(p1, p2, Callback)
 					FontFace = NormalizeFontFaceFunction(p3.Tokens.Typography.HeadingSmall.Font),
 					Text = p2.BannerText,
 					TextSize = 38 * p1:getScale(),
-					TextColor3 = if Props.showBackground then Color3.new(255, 255, 255) else Theme.TextEmphasis.Color
+					TextColor3 = if Props.showBackground then Color3.fromRGB(255, 255, 255) else Theme.TextEmphasis.Color
 				})
 			}),
 			RobuxPackageTilesFrame = RoactModule.createElement("ScrollingFrame", {

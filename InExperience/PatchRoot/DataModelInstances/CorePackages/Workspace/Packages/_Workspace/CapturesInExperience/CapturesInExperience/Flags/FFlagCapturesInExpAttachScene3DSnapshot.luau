@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("CapturesInExpAttachScene3DSnapshot", false)

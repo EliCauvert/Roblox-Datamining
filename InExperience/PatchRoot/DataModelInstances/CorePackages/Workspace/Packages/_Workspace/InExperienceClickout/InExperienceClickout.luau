@@ -1,1 +1,4 @@
-﻿return { starterScript = require(script.starterScript) }
+﻿return {
+	starterScript = require(script.starterScript),
+	["jest.config"] = script["jest.config"]
+}

@@ -1,6 +1,7 @@
 ﻿local Players = game:GetService("Players")
 local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
+local FFlagMomentsSearchInterfaceModule = require(Moments.Flags.FFlagMomentsSearchInterface)
 local MomentsCommonModule = require(Parent.MomentsCommon)
 local ReactModule = require(Parent.React)
 local UseCompositionLayoutFunction = require(Parent.AppComposition).useCompositionLayout
@@ -40,7 +41,7 @@ local function _()
 end
 
 return function(p1, p2, ShowHamburger)
-	-- upvalues: UseTokensFunction (copy), UseDeviceInsetsFunction (copy), UseSetDrawerVisibleFunction (copy), UseIsTvRemoteDeviceFunction (copy), UseCompositionLayoutFunction (copy), UseStatusBarHeightFunction (copy), FFlagMomentsFtuxTooltipCreateCopyModule (copy), UseLocalizationFunction (copy), config (copy), FFlagMomentsFollowingFeedModule (copy), config1 (copy), UseTrendingFeedLabelModule (copy), MomentsFeedTypeModule (copy), noop (copy), ReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), Players (copy), FFlagMomentsFixFeedForDeviceSafeInsetsModule (copy), ShouldUseDeviceSafeInsets (copy), FFlagMomentsCreateAvatarPosts (copy), GetFFlagMomentsAndroidTvEnabledModule (copy)
+	-- upvalues: UseTokensFunction (copy), UseDeviceInsetsFunction (copy), UseSetDrawerVisibleFunction (copy), UseIsTvRemoteDeviceFunction (copy), UseCompositionLayoutFunction (copy), UseStatusBarHeightFunction (copy), FFlagMomentsFtuxTooltipCreateCopyModule (copy), UseLocalizationFunction (copy), config (copy), FFlagMomentsFollowingFeedModule (copy), config1 (copy), UseTrendingFeedLabelModule (copy), MomentsFeedTypeModule (copy), noop (copy), ReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), Players (copy), FFlagMomentsFixFeedForDeviceSafeInsetsModule (copy), ShouldUseDeviceSafeInsets (copy), FFlagMomentsCreateAvatarPosts (copy), FFlagMomentsSearchInterfaceModule (copy), GetFFlagMomentsAndroidTvEnabledModule (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
 	local UseSetDrawerVisibleResult = UseSetDrawerVisibleFunction()
@@ -151,6 +152,7 @@ return function(p1, p2, ShowHamburger)
 		onBack = p1.onBack or noop,
 		onClose = p1.onClose or noop,
 		onNavigateToTrending = p1.onNavigateToTrending or noop,
+		onSearch = if FFlagMomentsSearchInterfaceModule then p1.onSearch else nil,
 		onNavigateToMyMoments = p1.onNavigateToMyMoments or noop,
 		title = p1.title or "",
 		showTopScrim = p1.showTopScrim == true,

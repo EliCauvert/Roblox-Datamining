@@ -135,6 +135,7 @@ return {
 		OffNetworkFriendRequest = "OffNetworkFriendRequest",
 		PlayerSearch = "PlayerSearch",
 		ProfileDeepLink = "ProfileDeepLink",
+		FriendsWidget = "FriendsWidget",
 		ProfileShare = "ProfileShare",
 		QrCode = "QrCode",
 		HomepageAd = "HomepageAd",

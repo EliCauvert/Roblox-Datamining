@@ -77,11 +77,13 @@ Amp.Upsell.Title.RequestSent,Đã gửi yêu cầu
 Authentication.AccountSwitch.Action.SwitchAccount,Chuyển đổi tài khoản
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,Đăng Nhập Nhanh
+Authentication.Login.Action.Leave,Rời khỏi
 Authentication.Login.Action.QuickSignIn,Đăng nhập nhanh
 Authentication.Login.Action.Save,Lưu
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Thoát Roblox để chuyển tài khoản sang {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,Sử dụng tài khoản Roblox khác
 Authentication.Login.Button.XboxAccountSwitcher,Đổi tài khoản Xbox
+Authentication.Login.Description.LeaveAccountSetup,"Nếu rời khỏi ngay lúc này, tài khoản Roblox của bạn sẽ chưa được thiết lập."
 Authentication.Login.Error.PasskeyOnlyAccount,Tài khoản của bạn được thiết lập ở chế độ chỉ cho phép đăng nhập bằng khóa bảo mật. Hãy đăng nhập bằng khóa bảo mật hoặc tiến hành khôi phục tài khoản.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Không xác minh được tài khoản trên nền tảng. Vui lòng thử lại sau.
 Authentication.Login.Heading.IncompatibleAccounts,Tài khoản không phù hợp
@@ -2124,8 +2126,11 @@ Feature.AvatarSwitcher.Message.UnknownSupport,"Bạn vẫn có thể đổi avat
 Feature.AvatarSwitcher.Message.Unsupported,Trải nghiệm này sử dụng avatar tùy chỉnh và không hỗ trợ avatar Roblox.
 Feature.AvatarWorkshop.Action.EditAvatar,Chỉnh sửa avatar
 Feature.AvatarWorkshop.Action.TryAgain,
+Feature.AvatarWorkshop.Description.AddAvatar,Thêm avatar này vào danh sách avatar của bạn?
+Feature.AvatarWorkshop.Heading.AddAvatar,Thêm avatar?
 Feature.AvatarWorkshop.Heading.Customize,Tùy chỉnh
 Feature.AvatarWorkshop.Heading.YourAvatars,Avatar của bạn
+Feature.AvatarWorkshop.Label.DefaultAvatarName,
 Feature.AvatarWorkshop.Message.LoadItemsError,Đã xảy ra lỗi khi tải vật phẩm của bạn.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,Không thể tải thêm vật phẩm.
 Feature.AvatarWorkshop.Message.NoItemsOwned,Bạn chưa sở hữu bất kỳ vật phẩm nào ở đây.
@@ -2398,6 +2403,8 @@ Feature.Build.Label.AdvancedModel,Nâng cao
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,Tất cả trò chơi
 Feature.Build.Label.AmountAvailable,Còn {AMOUNT}
+Feature.Build.Label.AttachmentCountPlural,{count} tệp đính kèm
+Feature.Build.Label.AttachmentCountSingular,1 tệp đính kèm
 Feature.Build.Label.Autosaved,Đã tự động lưu
 Feature.Build.Label.Available,còn lại
 Feature.Build.Label.AvailableForPurchase,Có thể mua
@@ -2417,6 +2424,7 @@ Feature.Build.Label.DefaultDeveloperProductName,sản phẩm của nhà phát tr
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,Đã xóa
 Feature.Build.Label.DescribeIdea,Mô tả ý tưởng
+Feature.Build.Label.DescribeIdeaOrPick,Mô tả ý tưởng hoặc chọn một ý tưởng bên dưới
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,Mô tả: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Tên: {NAME}
@@ -3304,6 +3312,7 @@ Feature.Chat.Label.SearchFriends,Tìm kiếm bạn bè
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,Chọn để xóa
 Feature.Chat.Label.SnoozePartyNotifications,Tắt thông báo tổ đội trong trải nghiệm đối với:
+Feature.Chat.Label.StartChatting,Bắt đầu trò chuyện
 Feature.Chat.Label.SwipeToReplyTooltip,Vuốt để trả lời
 Feature.Chat.Label.TapToRemove,Nhấn để xóa
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}ng
@@ -3570,6 +3579,7 @@ Feature.Friends.Button.GotIt,
 Feature.Friends.Description.ContactsModal,Các liên hệ của bạn đang ở trên Roblox! Trở thành bạn bè để xem avatar và hồ sơ đầy đủ của họ. Truy cập trang Thêm Bạn Bè để xem thêm những người bạn có thể biết.
 Feature.Friends.Description.DoMoreWithTrustedConnections,Nhiều hoạt động tương tác hơn trên Roblox với Người thân. Chỉ thêm những người bạn quen biết và tin tưởng.
 Feature.Friends.Description.DoMoreWithTrustedFriends,Nhiều hoạt động tương tác hơn trên Roblox với bạn bè đáng tin cậy. Chỉ thêm những người bạn quen biết và tin tưởng.
+Feature.Friends.Description.FoundFromContactImporter,Được gửi từ trình nhập danh bạ
 Feature.Friends.Description.FromContacts,Từ danh bạ
 Feature.Friends.Description.FromContactsV2,{contactName} từ danh bạ
 Feature.Friends.Description.FromQrCode,Từ mã QR
@@ -3660,6 +3670,7 @@ Feature.Friends.Label.SentFromWithContext,Gửi Từ {gameName}
 Feature.Friends.Label.SingularMutualFriend,bạn bè chung
 Feature.Friends.Label.Suggested,Gợi Ý
 Feature.Friends.Label.Unfollowed,Đã Hủy Theo Dõi
+Feature.Friends.Label.YouAreFollowing,Bạn đang theo dõi
 Feature.Friends.Label.YourLinkedParent,Cha mẹ được liên kết
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,Bạn có muốn tài khoản của mình được đề xuất cho người chơi Roblox có số điện thoại của bạn không?
@@ -3704,6 +3715,7 @@ Feature.FriendsActivityFeed.Label.ViewRecentActivity,Xem hoạt động gần đ
 Feature.FriendsMenu.Label.SelectedFriendsCount,Đã chọn {numerator}/{denominator} người bạn
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,Đã chọn {selectedCount} người bạn
 Feature.GameBadges.Label.Experience,
+Feature.GameDetails.Action.Continue,
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,
 Feature.GameDetails.Action.NotInterested,Không quan tâm
@@ -3735,9 +3747,12 @@ Feature.GameDetails.Label.WhyThisAd,
 Feature.GameDetails.Label.Yes,
 Feature.GameDetails.Message.AdPreferences,Tùy chọn ưu tiên đối với quảng cáo
 Feature.GameDetails.Message.AnonymousFeedbackTermsOfUse,Các câu trả lời sẽ được chia sẻ ẩn danh và cấu thành Ý kiến đóng góp theo {underlineStart}Điều khoản sử dụng của Roblox{underlineEnd}.
+Feature.GameDetails.Message.ExternalLinkWarning,"Khi nhấp chuột vào ""Tiếp tục"", bạn sẽ được chuyển hướng đến một trang web khác không do Roblox vận hành hay sở hữu. Trang web đó có thể có những điều khoản và chính sách quyền riêng tư khác."
 Feature.GameDetails.Message.HelpImproveExperience,Giúp chúng tôi cải thiện trải nghiệm của bạn
 Feature.GameDetails.Message.HidingExperienceQuestion,Vì sao bạn ẩn trải nghiệm này?
+Feature.GameDetails.Message.LeavingRobloxTitle,Đang Rời Khỏi Roblox
 Feature.GameDetails.Message.PurchaseGameV2,Mở khóa quyền truy cập cho {gameName} với {X} Robux?
+Feature.GameDetails.Message.RobloxWebsiteSignedInWarning,"Khi nhấp chuột vào ""Tiếp tục"", trình duyệt web sẽ mở trang roblox.com và bạn sẽ được đăng nhập vào tài khoản Roblox của mình."
 Feature.GameDetails.Message.SponsoredDisclosure.Error,Không thể hiển thị thông tin tài trợ do lỗi tạm thời.
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"Bạn nhìn thấy nội dung được tài trợ này dựa trên các yếu tố không được cá nhân hóa như thông tin thiết bị, vị trí và độ tuổi để hiển thị nội dung phù hợp với bạn. Nhà sáng tạo trải nghiệm là {CreatorName}. Khoản tài trợ được {PayerName} chi trả. Để tìm hiểu thêm, vui lòng truy cập trang “Quyền riêng tư và mức độ nội dung người lớn” trong phần cài đặt tài khoản tại đây:"
 Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,"Bạn nhìn thấy nội dung được tài trợ này dựa trên các yếu tố khác như vị trí, thông tin thiết bị, độ tuổi và hoạt động trên nền tảng để hiển thị nội dung phù hợp với bạn. Nhà sáng tạo trải nghiệm là {CreatorName}. Khoản tài trợ được {PayerName} chi trả. Để tìm hiểu thêm, vui lòng truy cập trang “Quyền riêng tư và mức độ nội dung người lớn” trong phần cài đặt tài khoản tại đây:"
@@ -3756,9 +3771,12 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Đã mở thông báo cho {expe
 Feature.GameJoin.Description.DifferentServer,Bạn sẽ bắt đầu ở máy chủ khác
 Feature.GameJoin.Label.PlayTogether,Các bạn có thể chơi cùng nhau
 Feature.GameJoin.Label.PlayTogetherSoon,Các bạn sẽ sớm có thể chơi cùng nhau
+Feature.GameJoin.Label.Played,đã chơi
+Feature.GameJoin.Label.RecentCoplay,Gần đây hai bạn đã chơi cùng nhau
 Feature.GamePage.Action.BackToTop,Về đầu trang
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,Được Tài Trợ
+Feature.GamePage.LabelCancelField,
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,Trải nghiệm không khả dụng do trạng thái xác thực tuổi của bạn.
 Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,Khách không thể tham gia trải nghiệm này.
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,Bạn phải mua để ghé thăm trải nghiệm này.
@@ -3989,6 +4007,7 @@ Feature.Moments.Action.Hide,Ẩn chi tiết
 Feature.Moments.Action.HowToCapture,Xem cách chụp
 Feature.Moments.Action.KeepEditing,Tiếp tục chỉnh sửa
 Feature.Moments.Action.Leave,
+Feature.Moments.Action.LoadMore,Tải thêm
 Feature.Moments.Action.Minimize,
 Feature.Moments.Action.Ok,
 Feature.Moments.Action.Play,Phát
@@ -4291,7 +4310,7 @@ Feature.PlayerSearchResults.Label.NewUsername,Tên tài khoản mới
 Feature.PlayerSearchResults.Label.Previously,Tên Cũ
 Feature.PlayerSearchResults.Label.ThisIsYou,Đây là bạn
 Feature.PlayerSearchResults.Label.You,Bạn
-Feature.PlayerSearchResults.Label.YouAreFollowing,Bạn đang theo dõi
+Feature.PlayerSearchResults.Label.YouAreFollowing,
 Feature.PlayerSearchResults.Label.YouAreFriends,Đã trở thành bạn bè
 Feature.PrivateServers.Action.CreatePrivateServer,Tạo Máy Chủ Riêng Tư
 Feature.PrivateServers.Action.FreeWithBlackbird,Miễn phí khi có gói Plus
@@ -5016,7 +5035,6 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 ng
 Feature.UniversalShareSheet.Response.SharedMessage,Tin nhắn đã được gửi
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} người khác
-Feature.UserLibrary.Label.MyLibrary,Thư viện của tôi
 Feature.VIPServer.Message.TooManyFreeServersOnGame,Bạn không thể tạo thêm máy chủ riêng miễn phí trong trò chơi này.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,Số lượng máy chủ riêng tư miễn phí có thể hoạt động cùng lúc đã đạt mức tối đa. Vui lòng tắt máy chủ khác trước.
 Feature.VerificationUpsell.Action.AddPhone,Thêm Điện Thoại
@@ -5188,7 +5206,7 @@ IAPExperience.InsufficientRobux.Title.InsufficientRobux,
 IAPExperience.LeaveRoblox.Action.Cancel,
 IAPExperience.LeaveRoblox.Action.Continue,
 IAPExperience.LeaveRoblox.Text.ExternalWebsiteWarning,"Khi nhấp vào ""Tiếp tục"", bạn sẽ được chuyển hướng đến một trang web khác không do Roblox vận hành hay sở hữu. Trang web đó có thể có những điều khoản và chính sách quyền riêng tư khác."
-IAPExperience.LeaveRoblox.Title.LeavingRoblox,Đang Rời Khỏi Roblox
+IAPExperience.LeaveRoblox.Title.LeavingRoblox,
 IAPExperience.Loading.Text.PurchasingItem,Đang mua vật phẩm...
 IAPExperience.Loading.Text.PurchasingRobux,Đang mua Robux...
 IAPExperience.Loading.Text.WaitingForPurchase,Đang chờ mua...

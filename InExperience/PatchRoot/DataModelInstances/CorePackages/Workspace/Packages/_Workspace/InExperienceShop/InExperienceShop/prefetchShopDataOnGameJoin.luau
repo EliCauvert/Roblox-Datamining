@@ -3,7 +3,6 @@ local SignalsModule = require(InExperienceShop.Parent.Signals)
 local ConstantsModule = require(InExperienceShop.Constants)
 local _ = require(InExperienceShop.Types)
 local FFlagEnableShopPrefetchModule = require(InExperienceShop.Flags.FFlagEnableShopPrefetch)
-local FFlagEnableShopProductInfoRefreshModule = require(InExperienceShop.Flags.FFlagEnableShopProductInfoRefresh)
 local FFlagShopPrefetchProductInfoModule = require(InExperienceShop.Flags.FFlagShopPrefetchProductInfo)
 local FIntShopPrefetchMaxRetriesModule = require(InExperienceShop.Flags.FIntShopPrefetchMaxRetries)
 local FIntShopPrefetchRetryBackoffMsModule = require(InExperienceShop.Flags.FIntShopPrefetchRetryBackoffMs)
@@ -57,7 +56,7 @@ local _ = function(p1)
 end
 
 local function triggerPrefetch(p1, Callback)
-	-- upvalues: ShopDebugLoggerModule (copy), LogCounterModule (copy), PrefetchOnJoinFiredPrimaryPathCounterModule (copy), PrefetchOnJoinFiredFallbackPathCounterModule (copy), GetInExperienceShopStoreModule (copy), FFlagEnableShopProductInfoRefreshModule (copy), FFlagShopPrefetchProductInfoModule (copy), FIntShopPrefetchMaxRetriesModule (copy), FIntShopPrefetchRetryBackoffMsModule (copy), ConstantsModule (copy), PrefetchOnJoinRetriedCounterModule (copy), ScheduleRetryModule (copy), SignalsModule (copy)
+	-- upvalues: ShopDebugLoggerModule (copy), LogCounterModule (copy), PrefetchOnJoinFiredPrimaryPathCounterModule (copy), PrefetchOnJoinFiredFallbackPathCounterModule (copy), GetInExperienceShopStoreModule (copy), FFlagShopPrefetchProductInfoModule (copy), FIntShopPrefetchMaxRetriesModule (copy), FIntShopPrefetchRetryBackoffMsModule (copy), ConstantsModule (copy), PrefetchOnJoinRetriedCounterModule (copy), ScheduleRetryModule (copy), SignalsModule (copy)
 	ShopDebugLoggerModule.logLazy(function(): string
 		-- upvalues: p1 (copy)
 		return "prefetchShopDataOnGameJoin: triggerPrefetch path=" .. p1
@@ -72,15 +71,15 @@ local function triggerPrefetch(p1, Callback)
 	local StartTimerResult = ShopDebugLoggerModule.startTimer()
 	
 	local function _()
-		-- upvalues: FFlagEnableShopProductInfoRefreshModule (upval), FFlagShopPrefetchProductInfoModule (upval), ShopDebugLoggerModule (upval), InExperienceShopStoreModule (copy)
-		if FFlagEnableShopProductInfoRefreshModule and not FFlagShopPrefetchProductInfoModule then
-			ShopDebugLoggerModule.log("prefetchShopDataOnGameJoin: starting prefetchWidgetsOnly")
-			InExperienceShopStoreModule.prefetchWidgetsOnly()
+		-- upvalues: FFlagShopPrefetchProductInfoModule (upval), ShopDebugLoggerModule (upval), InExperienceShopStoreModule (copy)
+		if FFlagShopPrefetchProductInfoModule then
+			ShopDebugLoggerModule.log("prefetchShopDataOnGameJoin: starting fetchAllShopData")
+			InExperienceShopStoreModule.fetchAllShopData()
 			
 			return
 		else
-			ShopDebugLoggerModule.log("prefetchShopDataOnGameJoin: starting fetchAllShopData")
-			InExperienceShopStoreModule.fetchAllShopData()
+			ShopDebugLoggerModule.log("prefetchShopDataOnGameJoin: starting prefetchWidgetsOnly")
+			InExperienceShopStoreModule.prefetchWidgetsOnly()
 		end
 	end
 	
@@ -89,20 +88,20 @@ local function triggerPrefetch(p1, Callback)
 		local Count = FIntShopPrefetchMaxRetriesModule
 		
 		local function tryFetch()
-			-- upvalues: ShopDebugLoggerModule (upval), FIntShopPrefetchMaxRetriesModule (copy), Count (ref), FFlagEnableShopProductInfoRefreshModule (upval), FFlagShopPrefetchProductInfoModule (upval), InExperienceShopStoreModule (copy), ConstantsModule (upval), FIntShopPrefetchRetryBackoffMsModuleRatio (copy), LogCounterModule (upval), PrefetchOnJoinRetriedCounterModule (upval), ScheduleRetryModule (upval), tryFetch (copy), StartTimerResult (copy), Callback (copy), GetInExperienceShopStoreModule (upval), SignalsModule (upval)
+			-- upvalues: ShopDebugLoggerModule (upval), FIntShopPrefetchMaxRetriesModule (copy), Count (ref), FFlagShopPrefetchProductInfoModule (upval), InExperienceShopStoreModule (copy), ConstantsModule (upval), FIntShopPrefetchRetryBackoffMsModuleRatio (copy), LogCounterModule (upval), PrefetchOnJoinRetriedCounterModule (upval), ScheduleRetryModule (upval), tryFetch (copy), StartTimerResult (copy), Callback (copy), GetInExperienceShopStoreModule (upval), SignalsModule (upval)
 			ShopDebugLoggerModule.logLazy(function(): string
 				-- upvalues: FIntShopPrefetchMaxRetriesModule (upval), Count (upval)
 				return "prefetchShopDataOnGameJoin: attempt=" .. FIntShopPrefetchMaxRetriesModule - Count + 1 .. " of " .. FIntShopPrefetchMaxRetriesModule + 1
 			end)
 			
-			if FFlagEnableShopProductInfoRefreshModule and not FFlagShopPrefetchProductInfoModule then
-				ShopDebugLoggerModule.log("prefetchShopDataOnGameJoin: starting prefetchWidgetsOnly")
-				InExperienceShopStoreModule.prefetchWidgetsOnly()
-			else
+			if FFlagShopPrefetchProductInfoModule then
 				ShopDebugLoggerModule.log("prefetchShopDataOnGameJoin: starting fetchAllShopData")
 				InExperienceShopStoreModule.fetchAllShopData()
+			else
+				ShopDebugLoggerModule.log("prefetchShopDataOnGameJoin: starting prefetchWidgetsOnly")
+				InExperienceShopStoreModule.prefetchWidgetsOnly()
 			end
-			local function v33(Error, Categories)
+			local function v32(Error, Categories)
 				-- upvalues: ConstantsModule (upval), Count (upval), ShopDebugLoggerModule (upval), FIntShopPrefetchRetryBackoffMsModuleRatio (upval), LogCounterModule (upval), PrefetchOnJoinRetriedCounterModule (upval), ScheduleRetryModule (upval), tryFetch (upval), StartTimerResult (upval), Callback (upval)
 				local Flag = false
 				
@@ -139,15 +138,15 @@ local function triggerPrefetch(p1, Callback)
 			local v1 = false
 			local Callback1 = nil
 			Callback1 = SignalsModule.createEffect(function(p2)
-				-- upvalues: v1 (ref), InExperienceShopStoreModule1 (copy), v33 (copy), Callback1 (ref)
+				-- upvalues: v1 (ref), InExperienceShopStoreModule1 (copy), v32 (copy), Callback1 (ref)
 				if v1 then return end
 				if not InExperienceShopStoreModule1.getLoading(p2) then
 					local Categories = InExperienceShopStoreModule1.getCategories(p2)
 					local Error = InExperienceShopStoreModule1.getError(p2)
 					v1 = true
 					task.spawn(function()
-						-- upvalues: v33 (upval), Error (copy), Categories (copy)
-						v33(Error, Categories)
+						-- upvalues: v32 (upval), Error (copy), Categories (copy)
+						v32(Error, Categories)
 					end)
 					task.defer(function()
 						-- upvalues: Callback1 (upval)
@@ -165,14 +164,14 @@ local function triggerPrefetch(p1, Callback)
 		
 		return
 	end
-	if FFlagEnableShopProductInfoRefreshModule and not FFlagShopPrefetchProductInfoModule then
-		ShopDebugLoggerModule.log("prefetchShopDataOnGameJoin: starting prefetchWidgetsOnly")
-		InExperienceShopStoreModule.prefetchWidgetsOnly()
+	if FFlagShopPrefetchProductInfoModule then
+		ShopDebugLoggerModule.log("prefetchShopDataOnGameJoin: starting fetchAllShopData")
+		InExperienceShopStoreModule.fetchAllShopData()
 		
 		return
 	else
-		ShopDebugLoggerModule.log("prefetchShopDataOnGameJoin: starting fetchAllShopData")
-		InExperienceShopStoreModule.fetchAllShopData()
+		ShopDebugLoggerModule.log("prefetchShopDataOnGameJoin: starting prefetchWidgetsOnly")
+		InExperienceShopStoreModule.prefetchWidgetsOnly()
 	end
 end
 

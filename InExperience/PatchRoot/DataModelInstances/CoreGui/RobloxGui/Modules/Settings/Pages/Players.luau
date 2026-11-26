@@ -35,9 +35,7 @@ local FFlagUserProfilePlatformProfile = SharedFlagsModule.FFlagUserProfilePlatfo
 local GetFFlagLuaAppEnableOpenTypeSupportFunction = SharedFlagsModule.GetFFlagLuaAppEnableOpenTypeSupport
 local FFlagIEMTabFocusNav = SharedFlagsModule.FFlagIEMTabFocusNav
 local IsSideSheetEnabledModule = require(CorePackages.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
-local FFlagRelocateMobileMenuButtonsModule = require(RobloxGui.Modules.Settings.Flags.FFlagRelocateMobileMenuButtons)
 local FIntRelocateMobileMenuButtonsVariantModule = require(RobloxGui.Modules.Settings.Flags.FIntRelocateMobileMenuButtonsVariant)
-local FFlagMenuButtonsMountWithIEMModule = require(RobloxGui.Modules.Settings.Flags.FFlagMenuButtonsMountWithIEM)
 local RbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId")
 local FFlagHidePeoplePageInviteFriends = SharedFlagsModule.FFlagHidePeoplePageInviteFriends
 local FFlagAddInviteFriendsIntegration = SharedFlagsModule.FFlagAddInviteFriendsIntegration
@@ -74,7 +72,7 @@ local MuteStatusIcons = Default.MuteStatusIcons
 local PlayerMuteStatusIcons = Default.PlayerMuteStatusIcons
 
 return ((function()
-	-- upvalues: RobloxGui (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), RbxAnalyticsService (copy), LocalizationService (copy), Localization (copy), Uiblox (copy), BuilderIconsModule (copy), LocalPlayer (ref), UtilityModule (copy), BlockingUtilityModule (copy), ThemeModule (copy), ConstantsModule1 (copy), GetFFlagDefaultFriendingLabelTextNonEmptyModule (copy), VoiceAnalyticsModule (copy), SettingsHubPlayersButtonsResponsiveThreshold (copy), GetFFlagEnableConsoleJoinVoiceModule (copy), GetFFlagCleanupMuteSelfButtonModule (copy), CheckButtonFrameBeforeDestroy (copy), GuiService (copy), BlockingAnalyticsModule (copy), OnBlockButtonActivatedModule (copy), RobloxTranslatorModule (copy), MuteStatusIcons (copy), LuaFlagVoiceChatDisableSubscribeRetryForMultistream (copy), VoiceChatMultistreamSubscriptionsEnabledEngineFeature (copy), Default (copy), ConstantsModule (copy), CreateFunction (copy), IsSideSheetEnabledModule (copy), FFlagRelocateMobileMenuButtonsModule (copy), FIntRelocateMobileMenuButtonsVariantModule (copy), GetFFlagEnableLeaveGameUpsellEntrypointModule (copy), FFlagIEMTabFocusNav (copy), PlayerMuteStatusIcons (copy), ReportAbuseMenuContainerPageModule (copy), EnabledResult (copy), _UDim2 (copy), EnableConsoleJoinVoiceTranslation (copy), Result (copy), GetFFlagLuaAppEnableOpenTypeSupportFunction (copy), OpenTypeSupport (copy), CheckForNilUserIdOnPlayerList (copy), UserProfileStore (copy), IsEngineTruncationEnabledForIngameSettingsModule (copy), PlayerListRefactorUsernameFormatting (copy), FormatUsernameFunction (copy), Players (copy), UserInputService (copy), FFlagHidePeoplePageInviteFriends (copy), FFlagAddInviteFriendsIntegration (copy), RunService (copy), GameInviteAnalyticsManager (copy), SocialUtilModule (copy), GetFFlagVoiceChatUILoggingModule (copy), NewResult (copy), CheckShareGameButtonInMuteAllLayout (copy), CryoModule (copy), FFlagUserProfilePlatformProfile (copy), OnlyCaptureFocusIfOnPlayerPage (copy), GetFFlagDestroyPlayerCardOnLeaveModule (copy), ReactRobloxModule (copy), ReactModule (copy), MenuButtonsContainerModule (copy), FFlagMenuButtonsMountWithIEMModule (copy)
+	-- upvalues: RobloxGui (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), RbxAnalyticsService (copy), LocalizationService (copy), Localization (copy), Uiblox (copy), BuilderIconsModule (copy), LocalPlayer (ref), UtilityModule (copy), BlockingUtilityModule (copy), ThemeModule (copy), ConstantsModule1 (copy), GetFFlagDefaultFriendingLabelTextNonEmptyModule (copy), VoiceAnalyticsModule (copy), SettingsHubPlayersButtonsResponsiveThreshold (copy), GetFFlagEnableConsoleJoinVoiceModule (copy), GetFFlagCleanupMuteSelfButtonModule (copy), CheckButtonFrameBeforeDestroy (copy), GuiService (copy), BlockingAnalyticsModule (copy), OnBlockButtonActivatedModule (copy), RobloxTranslatorModule (copy), MuteStatusIcons (copy), LuaFlagVoiceChatDisableSubscribeRetryForMultistream (copy), VoiceChatMultistreamSubscriptionsEnabledEngineFeature (copy), Default (copy), ConstantsModule (copy), CreateFunction (copy), IsSideSheetEnabledModule (copy), FIntRelocateMobileMenuButtonsVariantModule (copy), GetFFlagEnableLeaveGameUpsellEntrypointModule (copy), FFlagIEMTabFocusNav (copy), PlayerMuteStatusIcons (copy), ReportAbuseMenuContainerPageModule (copy), EnabledResult (copy), _UDim2 (copy), EnableConsoleJoinVoiceTranslation (copy), Result (copy), GetFFlagLuaAppEnableOpenTypeSupportFunction (copy), OpenTypeSupport (copy), CheckForNilUserIdOnPlayerList (copy), UserProfileStore (copy), IsEngineTruncationEnabledForIngameSettingsModule (copy), PlayerListRefactorUsernameFormatting (copy), FormatUsernameFunction (copy), Players (copy), UserInputService (copy), FFlagHidePeoplePageInviteFriends (copy), FFlagAddInviteFriendsIntegration (copy), RunService (copy), GameInviteAnalyticsManager (copy), SocialUtilModule (copy), GetFFlagVoiceChatUILoggingModule (copy), NewResult (copy), CheckShareGameButtonInMuteAllLayout (copy), CryoModule (copy), FFlagUserProfilePlatformProfile (copy), OnlyCaptureFocusIfOnPlayerPage (copy), GetFFlagDestroyPlayerCardOnLeaveModule (copy), ReactRobloxModule (copy), ReactModule (copy), MenuButtonsContainerModule (copy)
 	local NewPage = require(RobloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
 	NewPage.PageListLayout.Padding = UDim.new(0, 16)
 	NewPage.playSessionId = ""
@@ -145,7 +143,7 @@ return ((function()
 				FriendStatus1.Text = "Request Sent"
 			end
 		elseif FriendStatus == Enum.FriendStatus.Unknown or FriendStatus == Enum.FriendStatus.NotFriend or FriendStatus == Enum.FriendStatus.FriendRequestReceived then
-			FriendStatus1, v145 = UtilityModule:MakeStyledButton("FriendStatus", NewResults[RobloxLocaleId]:Format(ConstantsModule1.AddFriendLocalizedKey), UDim2.new(0, 182, 0, ThemeModule.ButtonHeight), function()
+			FriendStatus1, v143 = UtilityModule:MakeStyledButton("FriendStatus", NewResults[RobloxLocaleId]:Format(ConstantsModule1.AddFriendLocalizedKey), UDim2.new(0, 182, 0, ThemeModule.ButtonHeight), function()
 				-- upvalues: FriendStatus1 (ref), v1 (ref), GetFFlagDefaultFriendingLabelTextNonEmptyModule (upval), NewResults (upval), RobloxLocaleId (upval), ConstantsModule1 (upval), LocalPlayer (upval), Player (copy), RbxAnalyticsService (upval)
 				if FriendStatus1 and v1 and v1.Text ~= "" then
 					FriendStatus1.ImageTransparency = 1
@@ -557,7 +555,7 @@ return ((function()
 	})
 	NewPage.ButtonsContainer = Parent1
 	
-	if IsSideSheetEnabledModule or FFlagRelocateMobileMenuButtonsModule and (FIntRelocateMobileMenuButtonsVariantModule == 1 or FIntRelocateMobileMenuButtonsVariantModule == 3) then
+	if IsSideSheetEnabledModule or FIntRelocateMobileMenuButtonsVariantModule == 1 or FIntRelocateMobileMenuButtonsVariantModule == 3 then
 		Parent1.Parent = nil
 	end
 	CreateFunction("UIPadding")({
@@ -591,7 +589,7 @@ return ((function()
 	LeaveButton2.Size = UDim2.new(0, 0, 1, 0)
 	CreateFunction("UIFlexItem")({ FlexMode = Enum.UIFlexMode.Grow, Parent = LeaveButton2 })
 	
-	if not FFlagRelocateMobileMenuButtonsModule or FIntRelocateMobileMenuButtonsVariantModule == 0 then
+	if FIntRelocateMobileMenuButtonsVariantModule == 0 then
 		LeaveButton.Parent = Parent1
 	end
 	local ResetButton, ResetButton2 = UtilityModule:MakeStyledButton("ResetButton", NewResults[RobloxLocaleId]:Format(ConstantsModule1.RespawnLocalizedKey), UDim2.new(0.3333333333333333, -12, 1, 0), function()
@@ -603,7 +601,7 @@ return ((function()
 	ResetButton2.Size = UDim2.new(1, -4, 1, 0)
 	ResetButton2.Position = UDim2.new(0, 2, 0, 0)
 	
-	if not FFlagRelocateMobileMenuButtonsModule or FIntRelocateMobileMenuButtonsVariantModule == 0 then
+	if FIntRelocateMobileMenuButtonsVariantModule == 0 then
 		ResetButton.Parent = Parent1
 	end
 	local ResumeButton, ResumeButton2 = UtilityModule:MakeStyledButton("ResumeButton", "Resume", UDim2.new(0.3333333333333333, -12, 1, 0), function()
@@ -620,7 +618,7 @@ return ((function()
 	ResumeButton2.Size = UDim2.new(1, -4, 1, 0)
 	ResumeButton2.Position = UDim2.new(0, 2, 0, 0)
 	
-	if not FFlagRelocateMobileMenuButtonsModule or FIntRelocateMobileMenuButtonsVariantModule == 0 then
+	if FIntRelocateMobileMenuButtonsVariantModule == 0 then
 		ResumeButton.Parent = Parent1
 		
 		if FFlagIEMTabFocusNav then
@@ -658,8 +656,8 @@ return ((function()
 	end
 	
 	local function resetButtonRow()
-		-- upvalues: FFlagRelocateMobileMenuButtonsModule (upval), FIntRelocateMobileMenuButtonsVariantModule (upval), Parent1 (copy)
-		if not FFlagRelocateMobileMenuButtonsModule or FIntRelocateMobileMenuButtonsVariantModule == 0 then
+		-- upvalues: FIntRelocateMobileMenuButtonsVariantModule (upval), Parent1 (copy)
+		if FIntRelocateMobileMenuButtonsVariantModule == 0 then
 			local _UDim2 = UDim2.new(1, 0, 0, 0)
 			local _UDim2_1 = UDim2.new(0.3333333333333333, -12, 1, 0)
 			local _Vector2 = Vector2.new(1, 0)
@@ -717,13 +715,13 @@ return ((function()
 	end
 	
 	UtilityModule:OnResized(Parent1, function(_, p1)
-		-- upvalues: UtilityModule (upval), ThemeModule (upval), Parent1 (copy), FFlagRelocateMobileMenuButtonsModule (upval), FIntRelocateMobileMenuButtonsVariantModule (upval), ResetButton2 (copy), LeaveButton2 (copy), ResumeButton2 (copy)
+		-- upvalues: UtilityModule (upval), ThemeModule (upval), Parent1 (copy), FIntRelocateMobileMenuButtonsVariantModule (upval), ResetButton2 (copy), LeaveButton2 (copy), ResumeButton2 (copy)
 		if (p1 or UtilityModule:IsSmallTouchScreen()) and not ThemeModule.AlwaysShowBottomBar() then
 			local TextSizeResult = p1 and ThemeModule.textSize(18) or ThemeModule.textSize(24)
 			Parent1.Visible = true
 			Parent1.Size = UDim2.new(1, 0, 0, ThemeModule.ButtonHeight)
 			
-			if not FFlagRelocateMobileMenuButtonsModule or FIntRelocateMobileMenuButtonsVariantModule == 0 then
+			if FIntRelocateMobileMenuButtonsVariantModule == 0 then
 				ResetButton2.TextSize = TextSizeResult
 				LeaveButton2.TextSize = TextSizeResult
 				ResumeButton2.TextSize = TextSizeResult
@@ -1662,7 +1660,7 @@ return ((function()
 		end
 	end
 	
-	local function v138(_)
+	local function v137(_)
 		-- upvalues: NewPage (copy), FFlagIEMTabFocusNav (upval), Players2 (ref), Players (upval), EnabledResult (upval), LocalPlayer (upval), UtilityModule (upval), Enabled (ref), Object (ref), Default (upval), FFlagHidePeoplePageInviteFriends (upval), FFlagAddInviteFriendsIntegration (upval), IsSideSheetEnabledModule (upval), SelectedCoreObject (ref), RunService (upval), Parent (ref), CreateFunction (upval), v4 (ref), _UDim2 (upval), GameInviteAnalyticsManager (upval), v7 (ref), GetFFlagEnableConsoleJoinVoiceModule (upval), shouldShowJoinVoiceButton (copy), Object2 (ref), Callback (ref), v1 (ref), GuiService (upval), t (copy), t1 (copy), v10 (ref), muteButtonUpdate (copy), SocialUtilModule (upval), PlayerListRefactorUsernameFormatting (upval), FormatUsernameFunction (upval), IsEngineTruncationEnabledForIngameSettingsModule (upval), managePlayerNameCutoff (copy), friendStatusCreate (copy), resizeFriendButton (copy), Callback1 (ref), resizeInspectButton (copy), reportAbuseButtonCreate (copy), v8 (ref), v6 (ref), RobloxTranslatorModule (upval), GetFFlagVoiceChatUILoggingModule (upval), NewResult (upval), Players1 (copy), ConstantsModule (upval), updateAllMuteButtons (copy), CheckShareGameButtonInMuteAllLayout (upval), CheckForNilUserIdOnPlayerList (upval), CryoModule (upval), UserProfileStore (upval), resizePlatformName (copy), FFlagUserProfilePlatformProfile (upval), Flag (ref), GetFFlagCleanupMuteSelfButtonModule (upval), pollImage (copy), UserInputService (upval), OnlyCaptureFocusIfOnPlayerPage (upval)
 		NewPage.LastSelectableObjects = {}
 		
@@ -1998,7 +1996,7 @@ return ((function()
 		end)
 	end
 	
-	local function v139()
+	local function v138()
 		-- upvalues: Flag (ref), NewResult (upval), RunService (upval)
 		if Flag then
 			NewResult:debug("Unbinding Playerlist Mic Update Renderstep Hook")
@@ -2009,7 +2007,7 @@ return ((function()
 	
 	if game:GetEngineFeature("VoiceChatSupported") and not Enabled then
 		Default:asyncInit():andThen(function()
-			-- upvalues: Enabled (ref), Default (upval), EnabledResult (upval), GetFFlagCleanupMuteSelfButtonModule (upval), Object1 (ref), v9 (ref), updateAllMuteButtons (copy), Images (copy), Object (ref), v1 (ref), EventConnection (ref), GetFFlagEnableConsoleJoinVoiceModule (upval), Object2 (ref), v138 (copy), Parent1 (copy), destroyAllUserMuteButtons (copy), resetButtonRow (copy)
+			-- upvalues: Enabled (ref), Default (upval), EnabledResult (upval), GetFFlagCleanupMuteSelfButtonModule (upval), Object1 (ref), v9 (ref), updateAllMuteButtons (copy), Images (copy), Object (ref), v1 (ref), EventConnection (ref), GetFFlagEnableConsoleJoinVoiceModule (upval), Object2 (ref), v137 (copy), Parent1 (copy), destroyAllUserMuteButtons (copy), resetButtonRow (copy)
 			Enabled = true
 			Default:SetupParticipantListeners()
 			
@@ -2030,7 +2028,7 @@ return ((function()
 				Images[Key] = nil
 			end)
 			Default:getService().StateChanged:Connect(function(_, NewState)
-				-- upvalues: Object (upval), v1 (upval), Object1 (upval), EventConnection (upval), GetFFlagEnableConsoleJoinVoiceModule (upval), Object2 (upval), Enabled (upval), v138 (upval)
+				-- upvalues: Object (upval), v1 (upval), Object1 (upval), EventConnection (upval), GetFFlagEnableConsoleJoinVoiceModule (upval), Object2 (upval), Enabled (upval), v137 (upval)
 				if NewState == Enum.VoiceChatState.Ended then
 					if Object then
 						Object.Visible = false
@@ -2073,16 +2071,16 @@ return ((function()
 							end
 							v1()
 						end
-						v138()
+						v137()
 					end
 				end
 			end)
 			
 			if not GetFFlagCleanupMuteSelfButtonModule() then
-				v138()
+				v137()
 			end
 			Default.showVoiceUI.Event:Connect(function()
-				-- upvalues: GetFFlagCleanupMuteSelfButtonModule (upval), Object1 (upval), EnabledResult (upval), v9 (upval), Parent1 (upval), GetFFlagEnableConsoleJoinVoiceModule (upval), Object2 (upval), v1 (upval), v138 (upval)
+				-- upvalues: GetFFlagCleanupMuteSelfButtonModule (upval), Object1 (upval), EnabledResult (upval), v9 (upval), Parent1 (upval), GetFFlagEnableConsoleJoinVoiceModule (upval), Object2 (upval), v1 (upval), v137 (upval)
 				if GetFFlagCleanupMuteSelfButtonModule() then
 					if not Object1 and not EnabledResult then
 						if GetFFlagCleanupMuteSelfButtonModule() then
@@ -2106,10 +2104,10 @@ return ((function()
 					end
 					v1()
 				end
-				v138()
+				v137()
 			end)
 			Default.hideVoiceUI.Event:Connect(function()
-				-- upvalues: Object (upval), v1 (upval), Object1 (upval), EventConnection (upval), destroyAllUserMuteButtons (upval), v138 (upval), resetButtonRow (upval)
+				-- upvalues: Object (upval), v1 (upval), Object1 (upval), EventConnection (upval), destroyAllUserMuteButtons (upval), v137 (upval), resetButtonRow (upval)
 				if Object then
 					if Object then
 						Object.Visible = false
@@ -2129,7 +2127,7 @@ return ((function()
 				end
 				v1()
 				destroyAllUserMuteButtons()
-				v138()
+				v137()
 				resetButtonRow()
 			end)
 			Default.muteAllChanged.Event:Connect(function()
@@ -2143,8 +2141,8 @@ return ((function()
 			end
 		end)
 	end
-	NewPage.Displayed.Event:connect(v138)
-	NewPage.Hidden.Event:connect(v139)
+	NewPage.Displayed.Event:connect(v137)
+	NewPage.Hidden.Event:connect(v138)
 	Players.PlayerRemoving:Connect(function(Player)
 		-- upvalues: t1 (copy), t (copy), GuiService (upval), UserInputService (upval), SelectedCoreObject (ref), GetFFlagDestroyPlayerCardOnLeaveModule (upval)
 		t1[Player.Name] = nil
@@ -2262,8 +2260,8 @@ return ((function()
 	end
 	
 	function NewPage:UnmountMenuButtonsContainer()
-		-- upvalues: FFlagMenuButtonsMountWithIEMModule (upval), FIntRelocateMobileMenuButtonsVariantModule (upval), NewPage (copy)
-		if FFlagMenuButtonsMountWithIEMModule and FIntRelocateMobileMenuButtonsVariantModule == 2 and NewPage.buttonsContainerRoot then
+		-- upvalues: FIntRelocateMobileMenuButtonsVariantModule (upval), NewPage (copy)
+		if FIntRelocateMobileMenuButtonsVariantModule == 2 and NewPage.buttonsContainerRoot then
 			NewPage.buttonsContainerRoot:unmount()
 			NewPage.buttonsContainerRoot = nil
 		end

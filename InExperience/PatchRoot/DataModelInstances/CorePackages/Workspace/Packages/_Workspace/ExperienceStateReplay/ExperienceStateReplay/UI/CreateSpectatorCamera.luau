@@ -5,6 +5,7 @@ game:DefineFastString("ExperienceStateReplayCameraMode", "RECORDED_POV_VIEWMODEL
 local Parent = script.Parent
 local CreateTemporaryOverlayModule = require(Parent.CreateTemporaryOverlay)
 local FFlagDmctVideoCapturePlaybackClientEnabledModule = require(Parent.Parent.Flags.FFlagDmctVideoCapturePlaybackClientEnabled)
+local FFlagExperienceStateReplayRecordedViewportEventModule = require(Parent.Parent.Flags.FFlagExperienceStateReplayRecordedViewportEvent)
 local DisplayName = nil
 local CF = nil
 local v1 = 0
@@ -19,7 +20,7 @@ local Clears = {}
 
 return {
 	createSpectatorCamera = function(p1)
-		-- upvalues: Freecams (copy), RunService (copy), Clears (copy), Value (ref), Players (ref), v2 (ref), UserInputService (copy), CF (ref), Interpolated (ref), Vector (ref), Workspace (copy), FFlagDmctVideoCapturePlaybackClientEnabledModule (copy), Parent (copy), DisplayName (ref), CreateTemporaryOverlayModule (copy), CameraSubject (ref), v1 (ref)
+		-- upvalues: Freecams (copy), RunService (copy), Clears (copy), Value (ref), Players (ref), v2 (ref), UserInputService (copy), CF (ref), Interpolated (ref), Vector (ref), Workspace (copy), FFlagDmctVideoCapturePlaybackClientEnabledModule (copy), Parent (copy), DisplayName (ref), CreateTemporaryOverlayModule (copy), CameraSubject (ref), v1 (ref), FFlagExperienceStateReplayRecordedViewportEventModule (copy)
 		local Freecam = {}
 		
 		local function _(Key)
@@ -381,12 +382,24 @@ return {
 			
 			p1.hasSyncedRecordedCamera = CreateResult.hasSyncedRecordedCamera
 			p1.noteSourceClockFrameApplied = CreateResult.noteAppliedProjection
+			
+			if FFlagExperienceStateReplayRecordedViewportEventModule then
+				p1.resetRecordedScreenContext = CreateResult.resetRecordedScreenContext
+			end
 			p1.screenGui.Destroying:Connect(function()
-				-- upvalues: InputBeganConnection (copy), p1 (copy), Freecams (upval), Freecam (copy), Clears (upval), RunService (upval)
+				-- upvalues: InputBeganConnection (copy), FFlagExperienceStateReplayRecordedViewportEventModule (upval), CreateResult (ref), p1 (copy), Freecams (upval), Freecam (copy), Clears (upval), RunService (upval)
 				InputBeganConnection:Disconnect()
+				
+				if FFlagExperienceStateReplayRecordedViewportEventModule then
+					CreateResult.destroy()
+				end
 				p1.activateFollowRecordedCamera = nil
 				p1.hasSyncedRecordedCamera = nil
 				p1.noteSourceClockFrameApplied = nil
+				
+				if FFlagExperienceStateReplayRecordedViewportEventModule then
+					p1.resetRecordedScreenContext = nil
+				end
 				local IsFreecamMatch: boolean = Freecams.Freecam == Freecam or Freecams.ReplayCam == Freecam
 				local Clear: () -> () = Clears[Freecam]
 				

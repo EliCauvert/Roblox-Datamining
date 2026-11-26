@@ -9,6 +9,8 @@ local BuildPillMenuModule = require(script.Parent.BuildPillMenu)
 local BuildPillMenuPageHostModule = require(script.Parent.BuildPillMenuPageHost)
 local GetBuildPillMenuPortalStoreModule = require(BuildExperience.Stores.GetBuildPillMenuPortalStore)
 local FFlagBuildPublishNavigationSheetModule = require(BuildExperience.Flags.FFlagBuildPublishNavigationSheet)
+local FFlagBuildExperienceAdsAndRobuxTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceAdsAndRobuxTelemetry)
+local FFlagBuildPublishSheetReturnOnBackModule = require(BuildExperience.Flags.FFlagBuildPublishSheetReturnOnBack)
 local PublishSheetControllerModule = if FFlagBuildPublishNavigationSheetModule then require(BuildExperience.Components.PublishSheet.PublishSheetController) else nil
 local View = FoundationModule.View
 local UseOverlayFunction = FoundationModule.Hooks.useOverlay
@@ -26,7 +28,7 @@ local _ = function(Frame, Frame1: Frame): UDim2
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: GetBuildPillMenuPortalStoreModule (copy), SignalsReactModule (copy), UseOverlayFunction (copy), UseStyleSheetFunction (copy), UseTokensFunction (copy), DisplayModule (copy), ReactModule (copy), FFlagBuildPublishNavigationSheetModule (copy), View (copy), BuildPillMenuModule (copy), ReactRobloxModule (copy), BuildPillMenuPageHostModule (copy), PublishSheetControllerModule (copy)
+	-- upvalues: GetBuildPillMenuPortalStoreModule (copy), SignalsReactModule (copy), UseOverlayFunction (copy), UseStyleSheetFunction (copy), UseTokensFunction (copy), DisplayModule (copy), ReactModule (copy), FFlagBuildPublishNavigationSheetModule (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), View (copy), BuildPillMenuModule (copy), ReactRobloxModule (copy), BuildPillMenuPageHostModule (copy), PublishSheetControllerModule (copy), FFlagBuildPublishSheetReturnOnBackModule (copy)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetBuildPillMenuPortalStoreModule().getPortalTarget)
 	local UseOverlayResult = UseOverlayFunction()
 	local UseStyleSheetResult = UseStyleSheetFunction()
@@ -81,8 +83,11 @@ return ReactModule.memo(function(p1)
 		UseStateResult2({ type = "playtestManagement" })
 	end, {})
 	local UseResult6 = ReactModule.useCallback(function()
-		-- upvalues: UseStateResult2 (copy)
-		UseStateResult2({ type = "creator-credit" })
+		-- upvalues: UseStateResult2 (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (upval)
+		UseStateResult2({
+			type = "creator-credit",
+			entryContext = if FFlagBuildExperienceAdsAndRobuxTelemetryModule then "pill_menu" else nil
+		})
 	end, {})
 	local UseResult7 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
@@ -177,7 +182,8 @@ return ReactModule.memo(function(p1)
 			isOpen = UseStateResult1,
 			target = p1.target,
 			onClose = UseResult9,
-			navigateToSubPage = UseResult10
+			navigateToSubPage = UseResult10,
+			isCovered = if FFlagBuildPublishSheetReturnOnBackModule then UseStateResult ~= nil else nil
 		}) else nil
 	})
 end)

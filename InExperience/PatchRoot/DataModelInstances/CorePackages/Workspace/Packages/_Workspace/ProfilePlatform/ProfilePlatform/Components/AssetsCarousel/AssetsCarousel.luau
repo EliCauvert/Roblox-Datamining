@@ -25,7 +25,6 @@ local FFlagProfilePlatformEnableVRModule = require(ProfilePlatform.Flags.FFlagPr
 local FFlagProfilePlatformDisableCurrentlyWearingOnConsoleModule = require(ProfilePlatform.Flags.FFlagProfilePlatformDisableCurrentlyWearingOnConsole)
 local FFlagAddIEMProfilePage = require(Parent.SharedFlags).FFlagAddIEMProfilePage
 local FFlagProfilePlatformFixResaleLimitedPriceModule = require(ProfilePlatform.Flags.FFlagProfilePlatformFixResaleLimitedPrice)
-local FFlagProfilePlatformEnableBundlesInAssetsCarousel = require(Parent.SharedFlags).FFlagProfilePlatformEnableBundlesInAssetsCarousel
 local FFlagAXEnableProfileTab = require(Parent.SharedFlags).FFlagAXEnableProfileTab
 local FFlagSplitPaneProfileMaxWidth = require(Parent.SharedFlags).FFlagSplitPaneProfileMaxWidth
 local SeeMoreCurrentlyWearingCompact = game:DefineFastFlag("SeeMoreCurrentlyWearingCompact", false)
@@ -35,7 +34,7 @@ local UseTokensFunction = FoundationModule.Hooks.useTokens
 local v1 = 2
 
 return function(p1)
-	-- upvalues: FFlagAXEnableProfileTab (copy), EnumsModule (copy), UseProfileFormFactorModule (copy), FFlagAddIEMProfilePage (copy), UseProfileWrapperContextModule (copy), ProfilePlatformUseNewLayoutForAssetsCarousel (copy), UseTokensFunction (copy), FFlagProfilePlatformEnableVRModule (copy), UseIsSpatialFunction (copy), FFlagProfilePlatformDisableCurrentlyWearingOnConsoleModule (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), UseScreenSizeFunction1 (copy), UseScreenSizeFunction (copy), UseDynamicSizeMarginModule (copy), ReactModule (copy), FFlagProfilePlatformEnableInventory (copy), UseLocalizationFunction (copy), TextKeysModule (copy), SeeMoreCurrentlyWearingCompact (copy), SeeMoreCurrentlyWearingWide (copy), UseSelectorFunction (copy), FormFactor (copy), v1 (ref), UseBreakpointXFunction (copy), MarketplaceAssetTileModule (copy), AssetTileModule (copy), FFlagProfilePlatformFixResaleLimitedPriceModule (copy), FFlagProfilePlatformEnableBundlesInAssetsCarousel (copy), FFlagSplitPaneProfileMaxWidth (copy), CollectionCarousel (copy)
+	-- upvalues: FFlagAXEnableProfileTab (copy), EnumsModule (copy), UseProfileFormFactorModule (copy), FFlagAddIEMProfilePage (copy), UseProfileWrapperContextModule (copy), ProfilePlatformUseNewLayoutForAssetsCarousel (copy), UseTokensFunction (copy), FFlagProfilePlatformEnableVRModule (copy), UseIsSpatialFunction (copy), FFlagProfilePlatformDisableCurrentlyWearingOnConsoleModule (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), UseScreenSizeFunction1 (copy), UseScreenSizeFunction (copy), UseDynamicSizeMarginModule (copy), ReactModule (copy), FFlagProfilePlatformEnableInventory (copy), UseLocalizationFunction (copy), TextKeysModule (copy), SeeMoreCurrentlyWearingCompact (copy), SeeMoreCurrentlyWearingWide (copy), UseSelectorFunction (copy), FormFactor (copy), v1 (ref), UseBreakpointXFunction (copy), MarketplaceAssetTileModule (copy), AssetTileModule (copy), FFlagProfilePlatformFixResaleLimitedPriceModule (copy), FFlagSplitPaneProfileMaxWidth (copy), CollectionCarousel (copy)
 	local IsTileVariantMatch: boolean = FFlagAXEnableProfileTab and p1.tileVariant == EnumsModule.ProfileTabVariants.MeTab
 	local IsFormFactorMatch = if FFlagAXEnableProfileTab then UseProfileFormFactorModule().formFactor == EnumsModule.ProfileFormFactor.Wide else nil
 	local Source = if FFlagAddIEMProfilePage then UseProfileWrapperContextModule().sourceInfo.source else nil
@@ -72,7 +71,7 @@ return function(p1)
 	end
 	local v2: number = if FFlagAXEnableProfileTab and IsTileVariantMatch and IsFormFactorMatch then 5 else v1
 	local UseResult = ReactModule.useCallback(function(p2, LayoutOrder, Size)
-		-- upvalues: ReactModule (upval), IsTileVariantMatch (copy), MarketplaceAssetTileModule (upval), AssetTileModule (upval), FFlagProfilePlatformFixResaleLimitedPriceModule (upval), FFlagProfilePlatformEnableBundlesInAssetsCarousel (upval), UseIsSpatialResult1 (copy), p1 (copy)
+		-- upvalues: ReactModule (upval), IsTileVariantMatch (copy), MarketplaceAssetTileModule (upval), AssetTileModule (upval), FFlagProfilePlatformFixResaleLimitedPriceModule (upval), UseIsSpatialResult1 (copy), p1 (copy)
 		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = Size,
@@ -84,7 +83,7 @@ return function(p1)
 				isOffSale = if p2.isOffSale then true else nil,
 				lowestResalePrice = if FFlagProfilePlatformFixResaleLimitedPriceModule then p2.lowestResalePrice else nil,
 				assetId = p2.id,
-				itemType = if FFlagProfilePlatformEnableBundlesInAssetsCarousel then p2.itemType else "Asset",
+				itemType = p2.itemType,
 				onActivated = function()
 					-- upvalues: UseIsSpatialResult1 (upval), p1 (upval), p2 (copy), LayoutOrder (copy)
 					if not UseIsSpatialResult1 then
@@ -142,7 +141,7 @@ return function(p1)
 			renderItem = UseResult,
 			getItemHeight = UseResult1,
 			numColumns = if FFlagAXEnableProfileTab then v2 else v1,
-			columnGap = if FFlagAXEnableProfileTab and (IsTileVariantMatch and IsFormFactorMatch) then 12 elseif ProfilePlatformUseNewLayoutForAssetsCarousel then UseTokensResult.Gap.Medium else 8,
+			columnGap = if FFlagAXEnableProfileTab and IsTileVariantMatch and IsFormFactorMatch then 12 elseif ProfilePlatformUseNewLayoutForAssetsCarousel then UseTokensResult.Gap.Medium else 8,
 			sideMargin = UseDynamicSizeMarginModuleResult,
 			onActivateHeader = p1.onActivateHeader
 		})

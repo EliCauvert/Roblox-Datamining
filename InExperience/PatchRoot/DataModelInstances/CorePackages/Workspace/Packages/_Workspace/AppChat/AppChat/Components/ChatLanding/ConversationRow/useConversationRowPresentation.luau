@@ -8,7 +8,6 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local UseChatPagePaddingModule = require(AppChat.Contexts.ChatPagePadding.useChatPagePadding)
 local ChatPlacementContextModule = require(AppChat.Contexts.ChatPlacementContext)
 local UseThemeBackgroundFunction = require(Parent.ThemeBackground).useThemeBackground
-local FFlagAppThemeHalloween2026ChatBackgroundModule = require(AppChat.Flags.FFlagAppThemeHalloween2026ChatBackground)
 local UseRelativeTimestampBindingModule = require(AppChat.Hooks.useRelativeTimestampBinding)
 local UseTelemetryModule = require(AppChat.Telemetry.useTelemetry)
 local ChatLandingTelemetryLayerModule = require(AppChat.Telemetry.Layers.ChatLandingTelemetryLayer)
@@ -28,7 +27,7 @@ local function _(p1, p2, Enabled)
 end
 
 return function(p1)
-	-- upvalues: GetConversationStoreModule (copy), GetConversationViewModelStoreModule (copy), ReactModule (copy), SignalsModule (copy), SignalsReactModule (copy), UseChatPagePaddingModule (copy), ChatPlacementContextModule (copy), FFlagAppThemeHalloween2026ChatBackgroundModule (copy), UseThemeBackgroundFunction (copy), UseTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), UseRelativeTimestampBindingModule (copy), UseLocalizationFunction (copy), UseGetOneToOneFriendIdFromConversationIdModule (copy), UseIsRobloxSubscriberFunction (copy), FFlagEnableBlackbirdCheck (copy), UseConversationRowActivationModule (copy), FFlagAppChatUseActivationOnFocus (copy), UseActivationOnFocusFunction (copy), ConversationFocusActivationDelaySecondsModule (copy), ReactFocusNavigationModule (copy), NormalizeConversationForTelemetryModule (copy)
+	-- upvalues: GetConversationStoreModule (copy), GetConversationViewModelStoreModule (copy), ReactModule (copy), SignalsModule (copy), SignalsReactModule (copy), UseChatPagePaddingModule (copy), ChatPlacementContextModule (copy), UseThemeBackgroundFunction (copy), UseTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), UseRelativeTimestampBindingModule (copy), UseLocalizationFunction (copy), UseGetOneToOneFriendIdFromConversationIdModule (copy), UseIsRobloxSubscriberFunction (copy), FFlagEnableBlackbirdCheck (copy), UseConversationRowActivationModule (copy), FFlagAppChatUseActivationOnFocus (copy), UseActivationOnFocusFunction (copy), ConversationFocusActivationDelaySecondsModule (copy), ReactFocusNavigationModule (copy), NormalizeConversationForTelemetryModule (copy)
 	local ConversationStoreModule = GetConversationStoreModule(false)
 	local ConversationViewModelStoreModule = GetConversationViewModelStoreModule(false)
 	local UseMemoResult = ReactModule.useMemo(function()
@@ -68,7 +67,7 @@ return function(p1)
 	local HasUseSignalStateResult = UseSignalStateResult1 ~= nil
 	local UseChatPagePaddingModuleResult = UseChatPagePaddingModule()
 	local UseChatPlacementContextResult = ChatPlacementContextModule.useChatPlacementContext()
-	local HasUseThemeBackgroundResult: boolean = if FFlagAppThemeHalloween2026ChatBackgroundModule then UseThemeBackgroundFunction() ~= nil else false
+	local HasUseThemeBackgroundResult = UseThemeBackgroundFunction() ~= nil
 	local UseTelemetryModuleResult = UseTelemetryModule(ChatLandingTelemetryLayerModule.Context)
 	local UseRelativeTimestampBindingModuleResult = UseRelativeTimestampBindingModule(UseSignalStateResult9)
 	local UseLocalizationResult = UseLocalizationFunction({

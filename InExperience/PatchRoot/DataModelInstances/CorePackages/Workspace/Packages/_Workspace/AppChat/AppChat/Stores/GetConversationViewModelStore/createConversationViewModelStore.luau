@@ -14,7 +14,9 @@ local GetUnixTimestampMillisModule = require(AppChat.Utils.getUnixTimestampMilli
 local EnumsModule = require(AppChat.MessageData.Enums)
 local _ = require(AppChat.MessageData.Types)
 local Localization = require(Parent.RobloxAppLocales).Localization
+local FFlagEnableExperienceInviteCard = require(Parent.SharedFlags).FFlagEnableExperienceInviteCard
 local FFlagAppChatDerivedConversationLatestActivityModule = require(AppChat.Flags.FFlagAppChatDerivedConversationLatestActivity)
+local FFlagAppChatStartChattingSubtitleModule = require(AppChat.Flags.FFlagAppChatStartChattingSubtitle)
 local MessageType = EnumsModule.MessageType
 local MessageVisibility = EnumsModule.MessageVisibility
 
@@ -35,6 +37,15 @@ end
 local _ = function()
 	-- upvalues: Localization (copy), LocalizationService (copy)
 	return Localization.new(LocalizationService.RobloxLocaleId):Format("Feature.Chat.Label.MessageNotAvailable")
+end
+
+local function getStartChattingText()
+	-- upvalues: Localization (copy), LocalizationService (copy)
+	return Localization.new(LocalizationService.RobloxLocaleId):Format("Feature.Chat.Label.StartChatting")
+end
+
+local _ = function(p1): boolean
+	return p1.previewMessageId == nil and (p1.previewContent == nil or p1.previewContent == "")
 end
 
 local _ = function(p1)
@@ -59,26 +70,28 @@ local _ = function(p1, p2): boolean
 end
 
 local function getSubtitle(Conversation, Message)
-	-- upvalues: MessageVisibility (copy), Localization (copy), LocalizationService (copy), MessageType (copy)
-	if Message == nil then
-		local PreviewContent: string = Conversation.previewContent
+	-- upvalues: MessageVisibility (copy), Localization (copy), LocalizationService (copy), FFlagEnableExperienceInviteCard (copy), MessageType (copy), FFlagAppChatStartChattingSubtitleModule (copy), getStartChattingText (copy)
+	if Message ~= nil then
+		local FeatureChatLabelMessageNotAvailable = if Message.visibility == MessageVisibility.Hidden then Localization.new(LocalizationService.RobloxLocaleId):Format("Feature.Chat.Label.MessageNotAvailable") else Message.preview_content or (Message.content_to_display or Message.content)
 		
-		if type(PreviewContent) == "string" then
-			local v1 = PreviewContent:split("\n")
+		if (FeatureChatLabelMessageNotAvailable == nil or FFlagEnableExperienceInviteCard and FeatureChatLabelMessageNotAvailable == "") and Message.type == MessageType.System then
+			local Cards = Message.cards
+			FeatureChatLabelMessageNotAvailable = (if type(Cards) == "table" and type(Cards[1]) == "table" and type(Cards[1].alt_text) == "string" then Cards[1].alt_text else nil) or FeatureChatLabelMessageNotAvailable
+		end
+		if type(FeatureChatLabelMessageNotAvailable) == "string" then
+			local v1 = FeatureChatLabelMessageNotAvailable:split("\n")
 			
 			return v1 and v1[1] or ""
 		else
 			return ""
 		end
+	elseif FFlagAppChatStartChattingSubtitleModule and (Conversation.previewMessageId == nil and (Conversation.previewContent == nil or Conversation.previewContent == "")) then
+		return getStartChattingText()
 	else
-		local FeatureChatLabelMessageNotAvailable = if Message.visibility == MessageVisibility.Hidden then Localization.new(LocalizationService.RobloxLocaleId):Format("Feature.Chat.Label.MessageNotAvailable") else Message.preview_content or (Message.content_to_display or Message.content)
+		local PreviewContent: string = Conversation.previewContent
 		
-		if FeatureChatLabelMessageNotAvailable == nil and Message.type == MessageType.System then
-			local Cards = Message.cards
-			FeatureChatLabelMessageNotAvailable = if type(Cards) == "table" and type(Cards[1]) == "table" and type(Cards[1].alt_text) == "string" then Cards[1].alt_text else nil
-		end
-		if type(FeatureChatLabelMessageNotAvailable) == "string" then
-			local v2 = FeatureChatLabelMessageNotAvailable:split("\n")
+		if type(PreviewContent) == "string" then
+			local v2 = PreviewContent:split("\n")
 			
 			return v2 and v2[1] or ""
 		else
@@ -123,7 +136,7 @@ return function(p1, p2, p3)
 	
 	local function _(Key)
 		-- upvalues: t (copy), p3 (copy), p2 (copy), SignalsModule (upval)
-		local function v50(p4)
+		local function v54(p4)
 			-- upvalues: p3 (upval), Key (copy), p2 (upval)
 			local Message = nil
 			for _, value in p3.getOrderedIds(Key, p4) do
@@ -148,7 +161,7 @@ return function(p1, p2, p3)
 			Entry = {}
 			t[Key] = Entry
 		end
-		local Computed = SignalsModule.createComputed(v50)
+		local Computed = SignalsModule.createComputed(v54)
 		Entry.newestPreviewableMessage = Computed
 		
 		return Computed
@@ -157,7 +170,7 @@ return function(p1, p2, p3)
 	return {
 		getTitle = function(Key)
 			-- upvalues: t (copy), p1 (copy), GetConversationTitleModule (upval), SignalsModule (upval)
-			local function v45(p4)
+			local function v49(p4)
 				-- upvalues: p1 (upval), Key (copy), GetConversationTitleModule (upval)
 				local Conversation = p1.getConversation(Key, p4)
 				
@@ -176,14 +189,14 @@ return function(p1, p2, p3)
 				Entry = {}
 				t[Key] = Entry
 			end
-			local Computed = SignalsModule.createComputed(v45)
+			local Computed = SignalsModule.createComputed(v49)
 			Entry.title = Computed
 			
 			return Computed
 		end,
 		getSubtitle = function(Key)
 			-- upvalues: t (copy), p1 (copy), FFlagAppChatDerivedConversationLatestActivityModule (upval), p3 (copy), p2 (copy), SignalsModule (upval), GetUnixTimestampMillisModule (upval), getSubtitle (upval)
-			local function v55(p4)
+			local function v59(p4)
 				-- upvalues: p1 (upval), Key (copy), FFlagAppChatDerivedConversationLatestActivityModule (upval), t (upval), p3 (upval), p2 (upval), SignalsModule (upval), GetUnixTimestampMillisModule (upval), getSubtitle (upval)
 				local Conversation = p1.getConversation(Key, p4)
 				
@@ -192,7 +205,7 @@ return function(p1, p2, p3)
 				end
 				repeat
 					if not FFlagAppChatDerivedConversationLatestActivityModule then break end
-					local function v60(p5)
+					local function v64(p5)
 						-- upvalues: p3 (upval), Key (copy), p2 (upval)
 						local Message = nil
 						for _, value in p3.getOrderedIds(Key, p5) do
@@ -219,7 +232,7 @@ return function(p1, p2, p3)
 							Entry = {}
 							t[Key] = Entry
 						end
-						local Computed = SignalsModule.createComputed(v60)
+						local Computed = SignalsModule.createComputed(v64)
 						Entry.newestPreviewableMessage = Computed
 						Callback = Computed
 					until true
@@ -230,9 +243,9 @@ return function(p1, p2, p3)
 					local UnixTimestampMillisModule1 = GetUnixTimestampMillisModule(CallbackResult.created_at)
 					
 					if UnixTimestampMillisModule1 == nil or UnixTimestampMillisModule ~= nil and UnixTimestampMillisModule > UnixTimestampMillisModule1 then break end
-					return (getSubtitle(Conversation, CallbackResult))
+					return getSubtitle(Conversation, CallbackResult)
 				until true
-				return (getSubtitle(Conversation, if Conversation.previewMessageId == nil then nil else p2.getMessage(Conversation.previewMessageId, p4)))
+				return getSubtitle(Conversation, if Conversation.previewMessageId == nil then nil else p2.getMessage(Conversation.previewMessageId, p4))
 			end
 			
 			local Entry = t[Key]
@@ -247,14 +260,14 @@ return function(p1, p2, p3)
 				Entry = {}
 				t[Key] = Entry
 			end
-			local Computed = SignalsModule.createComputed(v55)
+			local Computed = SignalsModule.createComputed(v59)
 			Entry.subtitle = Computed
 			
 			return Computed
 		end,
 		getIsSubtitlePending = function(Key)
 			-- upvalues: t (copy), p1 (copy), UseIsUserPendingModule (upval), SignalsModule (upval)
-			local function v67(p4)
+			local function v71(p4)
 				-- upvalues: p1 (upval), Key (copy), UseIsUserPendingModule (upval)
 				local Conversation = p1.getConversation(Key, p4)
 				
@@ -273,14 +286,14 @@ return function(p1, p2, p3)
 				Entry = {}
 				t[Key] = Entry
 			end
-			local Computed = SignalsModule.createComputed(v67)
+			local Computed = SignalsModule.createComputed(v71)
 			Entry.isSubtitlePending = Computed
 			
 			return Computed
 		end,
 		getHasUnreadMessages = function(Key)
 			-- upvalues: t (copy), p1 (copy), SignalsModule (upval)
-			local function v72(p4): boolean
+			local function v76(p4): boolean
 				-- upvalues: p1 (upval), Key (copy)
 				local Conversation = p1.getConversation(Key, p4)
 				
@@ -299,14 +312,14 @@ return function(p1, p2, p3)
 				Entry = {}
 				t[Key] = Entry
 			end
-			local Computed = SignalsModule.createComputed(v72)
+			local Computed = SignalsModule.createComputed(v76)
 			Entry.hasUnreadMessages = Computed
 			
 			return Computed
 		end,
 		getHasGroupUp = function(Key)
 			-- upvalues: t (copy), p1 (copy), SignalsModule (upval)
-			local function v77(p4): boolean
+			local function v81(p4): boolean
 				-- upvalues: p1 (upval), Key (copy)
 				local Conversation = p1.getConversation(Key, p4)
 				
@@ -325,14 +338,14 @@ return function(p1, p2, p3)
 				Entry = {}
 				t[Key] = Entry
 			end
-			local Computed = SignalsModule.createComputed(v77)
+			local Computed = SignalsModule.createComputed(v81)
 			Entry.hasGroupUp = Computed
 			
 			return Computed
 		end,
 		getShouldShowOSA = function(Key)
 			-- upvalues: t (copy), p1 (copy), ShouldShowOSAForConversationModule (upval), SignalsModule (upval)
-			local function v82(p4): boolean
+			local function v86(p4): boolean
 				-- upvalues: p1 (upval), Key (copy), ShouldShowOSAForConversationModule (upval)
 				local Conversation = p1.getConversation(Key, p4)
 				
@@ -351,14 +364,14 @@ return function(p1, p2, p3)
 				Entry = {}
 				t[Key] = Entry
 			end
-			local Computed = SignalsModule.createComputed(v82)
+			local Computed = SignalsModule.createComputed(v86)
 			Entry.shouldShowOSA = Computed
 			
 			return Computed
 		end,
 		getShouldShowU13ChatOptIn = function(Key)
 			-- upvalues: t (copy), p1 (copy), ShouldShowU13ChatOptInForConversationModule (upval), SignalsModule (upval)
-			local function v87(p4): boolean
+			local function v91(p4): boolean
 				-- upvalues: p1 (upval), Key (copy), ShouldShowU13ChatOptInForConversationModule (upval)
 				local Conversation = p1.getConversation(Key, p4)
 				
@@ -377,14 +390,14 @@ return function(p1, p2, p3)
 				Entry = {}
 				t[Key] = Entry
 			end
-			local Computed = SignalsModule.createComputed(v87)
+			local Computed = SignalsModule.createComputed(v91)
 			Entry.shouldShowU13ChatOptIn = Computed
 			
 			return Computed
 		end,
 		getConversationType = function(Key)
 			-- upvalues: t (copy), p1 (copy), SignalsModule (upval)
-			local function v92(p4)
+			local function v96(p4)
 				-- upvalues: p1 (upval), Key (copy)
 				local Conversation = p1.getConversation(Key, p4)
 				
@@ -403,14 +416,14 @@ return function(p1, p2, p3)
 				Entry = {}
 				t[Key] = Entry
 			end
-			local Computed = SignalsModule.createComputed(v92)
+			local Computed = SignalsModule.createComputed(v96)
 			Entry.conversationType = Computed
 			
 			return Computed
 		end,
 		getUnixTime = function(Key)
 			-- upvalues: t (copy), p1 (copy), FFlagAppChatDerivedConversationLatestActivityModule (upval), p3 (copy), p2 (copy), SignalsModule (upval), GetUnixTimestampMillisModule (upval)
-			local function v97(p4)
+			local function v101(p4)
 				-- upvalues: p1 (upval), Key (copy), FFlagAppChatDerivedConversationLatestActivityModule (upval), t (upval), p3 (upval), p2 (upval), SignalsModule (upval), GetUnixTimestampMillisModule (upval)
 				local Conversation = p1.getConversation(Key, p4)
 				
@@ -418,7 +431,7 @@ return function(p1, p2, p3)
 					if Conversation == nil then
 						return nil
 					end
-					local function v102(p5)
+					local function v106(p5)
 						-- upvalues: p3 (upval), Key (copy), p2 (upval)
 						local Message = nil
 						for _, value in p3.getOrderedIds(Key, p5) do
@@ -445,7 +458,7 @@ return function(p1, p2, p3)
 							Entry = {}
 							t[Key] = Entry
 						end
-						local Computed = SignalsModule.createComputed(v102)
+						local Computed = SignalsModule.createComputed(v106)
 						Entry.newestPreviewableMessage = Computed
 						Callback = Computed
 					until true
@@ -476,14 +489,14 @@ return function(p1, p2, p3)
 				Entry = {}
 				t[Key] = Entry
 			end
-			local Computed = SignalsModule.createComputed(v97)
+			local Computed = SignalsModule.createComputed(v101)
 			Entry.unixTime = Computed
 			
 			return Computed
 		end,
 		getTestId = function(Key)
 			-- upvalues: t (copy), p1 (copy), DomLocatorsModule (upval), GetConversationTitleModule (upval), SignalsModule (upval)
-			local function v111(p4)
+			local function v115(p4)
 				-- upvalues: p1 (upval), Key (copy), DomLocatorsModule (upval), GetConversationTitleModule (upval)
 				local Conversation = p1.getConversation(Key, p4)
 				
@@ -502,14 +515,14 @@ return function(p1, p2, p3)
 				Entry = {}
 				t[Key] = Entry
 			end
-			local Computed = SignalsModule.createComputed(v111)
+			local Computed = SignalsModule.createComputed(v115)
 			Entry.testId = Computed
 			
 			return Computed
 		end,
 		getLocatorTitle = function(Key)
 			-- upvalues: t (copy), p1 (copy), GetConversationTitleModule (upval), SignalsModule (upval)
-			local function v116(p4)
+			local function v120(p4)
 				-- upvalues: p1 (upval), Key (copy), GetConversationTitleModule (upval)
 				local Conversation = p1.getConversation(Key, p4)
 				local Title = nil
@@ -538,7 +551,7 @@ return function(p1, p2, p3)
 				Entry = {}
 				t[Key] = Entry
 			end
-			local Computed = SignalsModule.createComputed(v116)
+			local Computed = SignalsModule.createComputed(v120)
 			Entry.locatorTitle = Computed
 			
 			return Computed

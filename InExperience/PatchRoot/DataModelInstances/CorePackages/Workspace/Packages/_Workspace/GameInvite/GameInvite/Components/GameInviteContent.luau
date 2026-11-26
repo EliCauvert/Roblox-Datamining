@@ -3,8 +3,11 @@ local Components = GameInvite.Components
 local Context = GameInvite.Context
 local Parent = GameInvite.Parent
 local FriendsMenuModule = require(Parent.FriendsMenu)
+local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
-local DeviceInfo = require(Parent.NotificationsCommon).DeviceInfo
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local NotificationsCommonModule = require(Parent.NotificationsCommon)
+local DeviceInfo = NotificationsCommonModule.DeviceInfo
 local FriendsMenuFriendsList = FriendsMenuModule.FriendsMenuFriendsList
 local InviteFriendContext = FriendsMenuModule.InviteFriendContext
 local FriendsMenuContextWrapper = FriendsMenuModule.FriendsMenuContextWrapper
@@ -24,12 +27,35 @@ local GetFFlagEnableGameInviteRewardsBannerFunction = require(Parent.SharedFlags
 local NewResult = require(Parent.Loggers).Logger:new(script.Name)
 local GetRewardMetadataModule = require(GameInvite.Requests.GetRewardMetadata)
 local FFlagGameInviteInExpUserListRendererModule = require(GameInvite.Flags.FFlagGameInviteInExpUserListRenderer)
-local IsGameInviteJoinForPioneerEnabledFunction = require(Parent.NotificationsCommon).isGameInviteJoinForPioneerEnabled
+local FFlagGameInviteHidePresenceOnLegacyList = require(Parent.SharedFlags).FFlagGameInviteHidePresenceOnLegacyList
+local IsPioneerEnabledLegacyInviteFriendsListModule = require(GameInvite.utils.isPioneerEnabledLegacyInviteFriendsList)
+local FFlagGameInviteLegacyListJoin = require(Parent.SharedFlags).FFlagGameInviteLegacyListJoin
+local ShouldShowJoinCtaModule = require(GameInvite.utils.shouldShowJoinCta)
+local GameInviteLegacyJoinButtonModule = if FFlagGameInviteLegacyListJoin then require(Components.GameInviteLegacyJoinButton) else nil
+local UseGameInviteJoinCardModule = require(Components.GameInviteFriendsList.useGameInviteJoinCard)
+local _ = require(Components.GameInviteFriendsList.joinFriendFromExperience)
+local GameInvitePresenceHiddenFriendsListModule = if FFlagGameInviteHidePresenceOnLegacyList then require(Components.GameInvitePresenceHiddenFriendsList) else nil
 local SidePadding = GameInviteConstantsModule.Layout.SidePadding
 local TitleHeight = GameInviteConstantsModule.Layout.TitleHeight
 
-local function v25(p1)
-	-- upvalues: ReactModule (copy), GameInviteModalLayoutContextModule (copy), GameDetailsContextModule (copy), GetFFlagEnableGameInviteRewardsBannerFunction (copy), GetRewardMetadataModule (copy), NewResult (copy), UseSelectorFunction (copy), DeviceInfo (copy), TitleHeight (copy), GameInviteTitleModule (copy), SidePadding (copy), FriendsMenuSearch (copy), GameInviteAnalyticsManagerModule (copy), GameInviteCustomTextModule (copy), GameInviteRewardsBannerModule (copy), FFlagGameInviteInExpUserListRendererModule (copy), IsGameInviteJoinForPioneerEnabledFunction (copy), GameInviteConstantsModule (copy), GameInviteFriendsListContainerModule (copy), FriendsMenuFriendsList (copy), FriendMenuType (copy)
+local function GameInviteLegacyJoinCardPortal(p1)
+	-- upvalues: FoundationModule (copy), ReactRobloxModule (copy), ReactModule (copy)
+	local UseOverlayResult = FoundationModule.Hooks.useOverlay()
+	local JoinCard = p1.joinCard
+	local CardComponent = JoinCard.cardComponent
+	
+	return if UseOverlayResult == nil or CardComponent == nil then nil else ReactRobloxModule.createPortal({
+		GameInviteLegacyJoinCard = ReactModule.createElement(CardComponent, {
+			userId = JoinCard.userId,
+			onJoin = p1.onJoin,
+			onClose = JoinCard.close
+		})
+	}, UseOverlayResult)
+end
+
+local function v37(p1)
+	-- upvalues: NotificationsCommonModule (copy), ReactModule (copy), GameInviteModalLayoutContextModule (copy), GameDetailsContextModule (copy), GetFFlagEnableGameInviteRewardsBannerFunction (copy), GetRewardMetadataModule (copy), NewResult (copy), FFlagGameInviteLegacyListJoin (copy), IsPioneerEnabledLegacyInviteFriendsListModule (copy), UseGameInviteJoinCardModule (copy), GameInviteLegacyJoinButtonModule (copy), UseSelectorFunction (copy), DeviceInfo (copy), TitleHeight (copy), GameInviteConstantsModule (copy), FriendMenuType (copy), ShouldShowJoinCtaModule (copy), GameInviteTitleModule (copy), SidePadding (copy), FriendsMenuSearch (copy), GameInviteAnalyticsManagerModule (copy), GameInviteCustomTextModule (copy), GameInviteRewardsBannerModule (copy), FFlagGameInviteInExpUserListRendererModule (copy), GameInviteFriendsListContainerModule (copy), FFlagGameInviteHidePresenceOnLegacyList (copy), GameInvitePresenceHiddenFriendsListModule (copy), FriendsMenuFriendsList (copy), GameInviteLegacyJoinCardPortal (copy)
+	local IsGameInviteJoinForPioneerEnabled = NotificationsCommonModule.isGameInviteJoinForPioneerEnabled
 	local UseContextResult = ReactModule.useContext(GameInviteModalLayoutContextModule)
 	local UseContextResult1 = ReactModule.useContext(GameDetailsContextModule)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
@@ -49,6 +75,34 @@ local function v25(p1)
 				end)
 			end
 		end, {})
+	end
+	local JoinCard = nil
+	local UseResult = nil
+	local UseResult1 = nil
+	
+	if FFlagGameInviteLegacyListJoin and (not IsGameInviteJoinForPioneerEnabled and IsPioneerEnabledLegacyInviteFriendsListModule()) then
+		local Text = tostring(game.GameId)
+		local JobId = game.JobId
+		local UseGameInviteJoinCardModuleResult = UseGameInviteJoinCardModule(Text, JobId)
+		local Open = UseGameInviteJoinCardModuleResult.open
+		local JoinFunction = UseGameInviteJoinCardModuleResult.join
+		JoinCard = UseGameInviteJoinCardModuleResult
+		UseResult = ReactModule.useCallback(function(p2)
+			-- upvalues: Text (copy), JoinFunction (copy)
+			if p2.universeId == Text then
+				JoinFunction(p2)
+			end
+		end, { JoinFunction, Text })
+		UseResult1 = ReactModule.useCallback(function(p2, LayoutOrder)
+			-- upvalues: ReactModule (upval), GameInviteLegacyJoinButtonModule (upval), Text (copy), JobId (copy), Open (copy)
+			return ReactModule.createElement(GameInviteLegacyJoinButtonModule, {
+				userId = p2.id,
+				universeId = Text,
+				jobId = JobId,
+				layoutOrder = LayoutOrder,
+				onJoin = Open
+			})
+		end, { Open, Text, JobId })
 	end
 	local UseSelectorResult = UseSelectorFunction(function(p2)
 		return p2.TopBar
@@ -72,6 +126,16 @@ local function v25(p1)
 		NewTitleHeight += UseSelectorResult.statusBarHeight
 		YOffset += UseSelectorResult.statusBarHeight
 	end
+	local config = {
+		layoutOrder = 3,
+		size = UDim2.new(1, 0, 1, -NewTitleHeight),
+		parentComponentName = GameInviteConstantsModule.ParentComponentName,
+		menuType = FriendMenuType.SingleSelect,
+		gameDetailsData = UseContextResult1,
+		disableSelectionParentManagement = p1.disableSelectionParentManagement,
+		renderJoinButton = if UseResult1 and ShouldShowJoinCtaModule(UseContextResult1) then UseResult1 else nil
+	}
+	
 	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
@@ -131,22 +195,16 @@ local function v25(p1)
 			promptMessage = PromptMessage
 		}) or nil,
 		RewardsBanner = GetFFlagEnableGameInviteRewardsBannerFunction() and UseStateResult ~= nil and ReactModule.createElement(GameInviteRewardsBannerModule, { layoutOrder = 2, rewardMetadata = UseStateResult }) or nil,
-		FriendsList = if (FFlagGameInviteInExpUserListRendererModule or IsGameInviteJoinForPioneerEnabledFunction()) and UseContextResult1.trigger == GameInviteConstantsModule.Triggers.GameMenu then ReactModule.createElement(GameInviteFriendsListContainerModule, {
+		FriendsList = if (FFlagGameInviteInExpUserListRendererModule or IsGameInviteJoinForPioneerEnabled) and UseContextResult1.trigger == GameInviteConstantsModule.Triggers.GameMenu then ReactModule.createElement(GameInviteFriendsListContainerModule, {
 			layoutOrder = 3,
 			size = UDim2.new(1, 0, 1, -NewTitleHeight)
-		}) else ReactModule.createElement(FriendsMenuFriendsList, {
-			layoutOrder = 3,
-			size = UDim2.new(1, 0, 1, -NewTitleHeight),
-			parentComponentName = GameInviteConstantsModule.ParentComponentName,
-			menuType = FriendMenuType.SingleSelect,
-			gameDetailsData = UseContextResult1,
-			disableSelectionParentManagement = p1.disableSelectionParentManagement
-		})
+		}) elseif FFlagGameInviteHidePresenceOnLegacyList and IsPioneerEnabledLegacyInviteFriendsListModule() then ReactModule.createElement(GameInvitePresenceHiddenFriendsListModule, config) else ReactModule.createElement(FriendsMenuFriendsList, config),
+		LegacyJoinCard = if JoinCard and UseResult then ReactModule.createElement(GameInviteLegacyJoinCardPortal, { joinCard = JoinCard, onJoin = UseResult }) else nil
 	})
 end
 
 return function(p1)
-	-- upvalues: GetFFlagEnableCommonFriendsMenuFunction (copy), ReactModule (copy), InviteFriendContext (copy), FriendsMenuContextWrapper (copy), v25 (copy)
+	-- upvalues: GetFFlagEnableCommonFriendsMenuFunction (copy), ReactModule (copy), InviteFriendContext (copy), FriendsMenuContextWrapper (copy), v37 (copy)
 	local UseContextResult = if GetFFlagEnableCommonFriendsMenuFunction() then ReactModule.useContext(InviteFriendContext) else {
 		inviteSingleFriend = function() end,
 		getMaxRecipientRowNum = function() end
@@ -156,5 +214,5 @@ return function(p1)
 		inviteSingleFriend = UseContextResult.inviteSingleFriend,
 		inviteMultiFriends = function() end,
 		isLoadingCustomParams = p1.isLoadingCustomParams
-	}, { GameInviteContent = ReactModule.createElement(v25, p1) }) else ReactModule.createElement(v25, p1)
+	}, { GameInviteContent = ReactModule.createElement(v37, p1) }) else ReactModule.createElement(v37, p1)
 end

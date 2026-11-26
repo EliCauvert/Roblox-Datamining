@@ -1,4 +1,5 @@
-﻿local Parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
+﻿local ChatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
+local Parent = ChatUIPrimitives.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local ResponsiveModule = require(Parent.Responsive)
@@ -6,11 +7,13 @@ local SizingModule = require(script.Parent.Parent.Sizing)
 local HeaderItemModule = require(script.Parent.HeaderItem)
 local MessageListClockModule = require(script.Parent.MessageListClock)
 local MessageListViewModule = require(script.Parent.MessageListView)
+local MessageRenderedContextModule = require(script.Parent.MessageRenderedContext)
 local ObservingUserContextModule = require(script.Parent.ObservingUserContext)
+local FFlagExpChatMessageListFinishIntervalsModule = require(ChatUIPrimitives.Flags.FFlagExpChatMessageListFinishIntervals)
 local UseMessageListViewModelModule = require(script.Parent.useMessageListViewModel)
 
 local function MessageListContent(p1)
-	-- upvalues: UseMessageListViewModelModule (copy), ReactModule (copy), ObservingUserContextModule (copy), SizingModule (copy), MessageListClockModule (copy), HeaderItemModule (copy), FoundationModule (copy), ResponsiveModule (copy), MessageListViewModule (copy)
+	-- upvalues: UseMessageListViewModelModule (copy), ReactModule (copy), ObservingUserContextModule (copy), SizingModule (copy), MessageListClockModule (copy), HeaderItemModule (copy), FoundationModule (copy), ResponsiveModule (copy), FFlagExpChatMessageListFinishIntervalsModule (copy), MessageRenderedContextModule (copy), MessageListViewModule (copy)
 	local UseMessageListViewModelModuleResult = UseMessageListViewModelModule(p1)
 	
 	return ReactModule.createElement(ObservingUserContextModule.Context.Provider, {
@@ -21,7 +24,11 @@ local function MessageListContent(p1)
 				Header = ReactModule.createElement(HeaderItemModule.Context.Provider, { value = p1.header }, {
 					Frame = ReactModule.createElement(FoundationModule.View, { Size = UDim2.fromScale(1, 1) }, {
 						ResponsiveContainer = ReactModule.createElement(ResponsiveModule.ResponsiveContainerFrame),
-						MessageListView = if UseMessageListViewModelModuleResult.isMeasured then ReactModule.createElement(MessageListViewModule, {
+						MessageListView = if UseMessageListViewModelModuleResult.isMeasured then if FFlagExpChatMessageListFinishIntervalsModule then ReactModule.createElement(MessageRenderedContextModule.Provider, { value = p1.onMessageRendered }, {
+							List = ReactModule.createElement(MessageListViewModule, {
+								listProps = UseMessageListViewModelModuleResult.listProps
+							})
+						}) else ReactModule.createElement(MessageListViewModule, {
 							listProps = UseMessageListViewModelModuleResult.listProps
 						}) else nil
 					})

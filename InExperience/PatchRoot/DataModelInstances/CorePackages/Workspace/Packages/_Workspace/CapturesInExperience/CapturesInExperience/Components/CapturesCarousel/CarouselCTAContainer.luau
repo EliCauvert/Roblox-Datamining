@@ -3,8 +3,10 @@ local Parent1 = Parent.Parent
 local MomentsCommonModule = require(Parent1.MomentsCommon)
 local ReactModule = require(Parent1.React)
 local RoactUtilsModule = require(Parent1.RoactUtils)
+local SignalsModule = require(Parent1.Signals)
 local SocialStopwatchModule = require(Parent1.SocialStopwatch)
 local UIBloxModule = require(Parent1.UIBlox)
+local GetMomentsCapabilitiesFunction = MomentsCommonModule.Stores.GetMomentsCapabilities
 local IconButton = UIBloxModule.App.Button.IconButton
 local Images = UIBloxModule.App.ImageSet.Images
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
@@ -12,6 +14,7 @@ local UseAnalyticsModule = require(Parent.Analytics.useAnalytics)
 local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
 local UseRefFunction = ReactModule.useRef
 local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
+local CanCreateMomentsModule = require(Parent.Utils.canCreateMoments)
 local CapturesPolicyModule = require(Parent.App.CapturesPolicy)
 local CaptureTypeModule = require(Parent.Enums.CaptureType)
 local CheckMomentsEligibilityModule = require(Parent.Thunks.CheckMomentsEligibility)
@@ -34,6 +37,7 @@ local _UDim = UDim.new(0.12, 0)
 local _UDim2 = UDim2.fromOffset(36, 36)
 local _UDim1 = UDim.new(0, 8)
 local CapturesCarousel = MomentsCommonModule.Analytics.FunnelEventNames.CreationIntentSource.CapturesCarousel
+local list = { 0, -1, 1 }
 
 local function _(Sound): boolean
 	-- upvalues: FIntMomentsInExperienceMinCaptureSecondsModule (copy)
@@ -51,7 +55,7 @@ end
 return (CapturesPolicyModule.connect(function(p1)
 	return { enableShareCaptureCTA = p1.enableShareCaptureCTA() }
 end)(function(Frame)
-	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseStyleFunction (copy), UseRefFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), FFlagCapturesCarouselMomentsButtonModule (copy), FFlagCreateMomentsToastModule (copy), ReactModule (copy), GetCaptureObjectModule (copy), CheckMomentsEligibilityModule (copy), IsEligibleForMomentsModule (copy), GetSaveToStoragePermissionModule (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy), EventNamesModule (copy), SocialStopwatchModule (copy), ShareCaptureModule (copy), ExternalShareSourceTypeModule (copy), StartMomentsCreationFlowModule (copy), CapturesCarousel (copy), GetIsDeleteWarningModalOptedOutModule (copy), DeleteWarningModalOpenedModule (copy), _UDim1 (copy), _UDim (copy), FIntMomentsInExperienceMinCaptureSecondsModule (copy), IconButton (copy), Images (copy), _UDim2 (copy)
+	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseStyleFunction (copy), UseRefFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), FFlagCapturesCarouselMomentsButtonModule (copy), FFlagCreateMomentsToastModule (copy), ReactModule (copy), CanCreateMomentsModule (copy), SignalsModule (copy), GetMomentsCapabilitiesFunction (copy), list (copy), GetCaptureObjectModule (copy), FIntMomentsInExperienceMinCaptureSecondsModule (copy), CheckMomentsEligibilityModule (copy), IsEligibleForMomentsModule (copy), GetSaveToStoragePermissionModule (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy), EventNamesModule (copy), SocialStopwatchModule (copy), ShareCaptureModule (copy), ExternalShareSourceTypeModule (copy), StartMomentsCreationFlowModule (copy), CapturesCarousel (copy), GetIsDeleteWarningModalOptedOutModule (copy), DeleteWarningModalOpenedModule (copy), _UDim1 (copy), _UDim (copy), IconButton (copy), Images (copy), _UDim2 (copy)
 	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	local UseDispatchResult = UseDispatchFunction()
 	local UseStyleResult = UseStyleFunction()
@@ -65,33 +69,71 @@ end)(function(Frame)
 		-- upvalues: ConstantsModule (upval)
 		return p1[ConstantsModule.RoduxKey].Captures
 	end) else nil
+	local UseSelectorResult2 = if FFlagCreateMomentsToastModule1 then UseSelectorFunction(function(p1)
+		-- upvalues: ConstantsModule (upval)
+		return p1[ConstantsModule.RoduxKey].Carousel.SelectedCaptureIndex
+	end) else nil
+	local v1 = false
 	
 	if FFlagCreateMomentsToastModule1 then
+		local UseStateResult2 = nil
+		v1, UseStateResult2 = ReactModule.useState(function()
+			-- upvalues: CanCreateMomentsModule (upval)
+			return CanCreateMomentsModule()
+		end)
 		ReactModule.useEffect(function()
-			-- upvalues: UseSelectorResult1 (copy), GetCaptureObjectModule (upval), UseDispatchResult (copy), CheckMomentsEligibilityModule (upval)
-			if UseSelectorResult1 == nil then return end
+			-- upvalues: SignalsModule (upval), GetMomentsCapabilitiesFunction (upval), UseStateResult2 (ref), CanCreateMomentsModule (upval)
+			return SignalsModule.createEffect(function(p1)
+				-- upvalues: GetMomentsCapabilitiesFunction (upval), UseStateResult2 (upval), CanCreateMomentsModule (upval)
+				GetMomentsCapabilitiesFunction(p1).getCanCreateMoments(p1)
+				UseStateResult2(CanCreateMomentsModule())
+			end)
+		end, {})
+	end
+	if FFlagCreateMomentsToastModule1 then
+		ReactModule.useEffect(function()
+			-- upvalues: UseSelectorResult1 (copy), UseSelectorResult2 (copy), v1 (ref), list (upval), GetCaptureObjectModule (upval), FIntMomentsInExperienceMinCaptureSecondsModule (upval), UseDispatchResult (copy), CheckMomentsEligibilityModule (upval)
+			if UseSelectorResult1 == nil or UseSelectorResult2 == nil or not v1 then return end
+			if UseSelectorResult1[UseSelectorResult2] == nil then return end
 			local t = {}
 			
-			for _, value in UseSelectorResult1 do
-				local CaptureObjectModule = GetCaptureObjectModule(value)
+			for _, value in list do
+				local UseSelectorResultEntry = UseSelectorResult1[UseSelectorResult2 + value]
+				local CaptureObjectModule = if UseSelectorResultEntry then GetCaptureObjectModule(UseSelectorResultEntry) else nil
 				
-				if CaptureObjectModule and not t[CaptureObjectModule.SourceUniverseId] then
-					t[CaptureObjectModule.SourceUniverseId] = true
-					UseDispatchResult(CheckMomentsEligibilityModule(CaptureObjectModule.SourceUniverseId))
+				if CaptureObjectModule then
+					local Flag = nil
+					if CaptureObjectModule == nil then
+						Flag = false
+					elseif CaptureObjectModule.CaptureType == Enum.CaptureType.Video then
+						local TimeLength = CaptureObjectModule.TimeLength
+						Flag = type(TimeLength) == "number" and TimeLength >= FIntMomentsInExperienceMinCaptureSecondsModule
+					else
+						Flag = true
+					end
+					if Flag and not t[CaptureObjectModule.SourceUniverseId] then
+						t[CaptureObjectModule.SourceUniverseId] = true
+						UseDispatchResult(CheckMomentsEligibilityModule(CaptureObjectModule.SourceUniverseId))
+					end
 				end
 			end
-		end, { UseSelectorResult1, UseDispatchResult })
+		end, {
+			UseSelectorResult1,
+			UseSelectorResult2,
+			v1,
+			UseDispatchResult
+		})
 	end
 	local UseMemoResult = if FFlagCreateMomentsToastModule1 then ReactModule.useMemo(function()
 		-- upvalues: UseSelectorResult (copy), GetCaptureObjectModule (upval)
 		return if UseSelectorResult == nil then nil else GetCaptureObjectModule(UseSelectorResult)
 	end, { UseSelectorResult }) else nil
 	local SourceUniverseId = if UseMemoResult then UseMemoResult.SourceUniverseId else nil
-	local UseSelectorResult2 = if FFlagCreateMomentsToastModule1 then UseSelectorFunction(function(p1)
+	local UseSelectorResult3 = if FFlagCreateMomentsToastModule1 then UseSelectorFunction(function(p1)
 		-- upvalues: SourceUniverseId (copy), IsEligibleForMomentsModule (upval), ConstantsModule (upval)
 		return SourceUniverseId ~= nil and IsEligibleForMomentsModule(p1[ConstantsModule.RoduxKey].MomentsEligibility, SourceUniverseId)
 	end) else false
-	local UseMemoResult1 = if UseSelectorResult2 then UseMemoResult else nil
+	local UseMemoResult1 = if UseSelectorResult3 then UseMemoResult else nil
 	local UseResult = ReactModule.useCallback(function(): boolean
 		-- upvalues: Frame (copy), UseRefResult (copy)
 		return if Frame.isDisabled then true else DateTime.now().UnixTimestampMillis - UseRefResult.current < 500
@@ -183,7 +225,7 @@ end)(function(Frame)
 		UseResult1
 	})
 	local CreateElementFunction = ReactModule.createElement
-	local v1 = "Frame"
+	local v2 = "Frame"
 	local config = {
 		BorderSizePixel = 0,
 		AutomaticSize = Enum.AutomaticSize.None,
@@ -210,16 +252,16 @@ end)(function(Frame)
 	local Element = nil
 	repeat
 		if FFlagCapturesCarouselMomentsButtonModule and UseResult4 and UseMemoResult1 then
-			local IsTimeLengthAbove = nil
+			local Flag = nil
 			if UseMemoResult1 == nil then
-				IsTimeLengthAbove = false
+				Flag = false
 			elseif UseMemoResult1.CaptureType == Enum.CaptureType.Video then
 				local TimeLength = UseMemoResult1.TimeLength
-				IsTimeLengthAbove = type(TimeLength) == "number" and TimeLength >= FIntMomentsInExperienceMinCaptureSecondsModule
+				Flag = type(TimeLength) == "number" and TimeLength >= FIntMomentsInExperienceMinCaptureSecondsModule
 			else
-				IsTimeLengthAbove = true
+				Flag = true
 			end
-			if IsTimeLengthAbove then
+			if Flag then
 				Element = ReactModule.createElement(IconButton, {
 					layoutOrder = 0,
 					showBackground = false,
@@ -265,5 +307,5 @@ end)(function(Frame)
 		size = _UDim2
 	})
 	
-	return CreateElementFunction(v1, config, config1)
+	return CreateElementFunction(v2, config, config1)
 end))

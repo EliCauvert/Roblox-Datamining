@@ -1,5 +1,6 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
+local FFlagMomentsSearchInterfaceModule = require(Moments.Flags.FFlagMomentsSearchInterface)
 local ReactModule = require(Parent.React)
 local _ = require(Moments.Enums.MomentsFeedType)
 local MomentsHeaderContainerModule = require(Moments.Components.MomentsHeader.MomentsHeaderContainer)
@@ -10,7 +11,7 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), MomentsHeaderContainerModule (copy), FFlagMomentsCreateAvatarPosts (copy)
+	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), MomentsHeaderContainerModule (copy), FFlagMomentsCreateAvatarPosts (copy), FFlagMomentsSearchInterfaceModule (copy)
 	local UseLocalizationResult = UseLocalizationFunction(config)
 	
 	return ReactModule.createElement(MomentsHeaderContainerModule, {
@@ -23,6 +24,7 @@ return function(p1)
 		onCreateAvatarMomentPressed = if FFlagMomentsCreateAvatarPosts then p1.onCreateAvatarMomentPressed else nil,
 		onClose = p1.onClose,
 		onNavigateToTrending = p1.onNavigateToTrending,
+		onSearch = if FFlagMomentsSearchInterfaceModule then p1.onSearch else nil,
 		onNavigateToMyMoments = p1.onNavigateToMyMoments,
 		title = p1.title or UseLocalizationResult.defaultTitle,
 		showTopScrim = p1.showTopScrim,

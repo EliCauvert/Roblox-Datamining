@@ -1,0 +1,1 @@
+﻿return { None = "None", Yaw = "Yaw", Gimbal = "Gimbal" }

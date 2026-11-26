@@ -20,6 +20,7 @@ local GetFFlagReportAnythingAnnotationIXPFunction = require(CorePackages.Workspa
 local TrustAndSafetyIXPManager = require(CorePackages.Workspace.Packages.TrustAndSafetyIxp).TrustAndSafetyIXPManager
 local GetCoreScriptsLayersModule = require(Modules.Experiment.GetCoreScriptsLayers)
 local GetFFlagRtMessagingModule = require(RobloxGui.Modules.Flags.GetFFlagRtMessaging)
+local FFlagFacialAnimationStreamingUseExtractedModulesModule = require(RobloxGui.Modules.Flags.FFlagFacialAnimationStreamingUseExtractedModules)
 local AddPublishAssetPrompt6 = game:DefineFastFlag("AddPublishAssetPrompt6", false)
 local EnablePromptAgeCheckListener = game:DefineFastFlag("EnablePromptAgeCheckListener", false)
 local IsCharacterNameHandlerEnabledFunction = require(CorePackages.Workspace.Packages.SharedFlags).isCharacterNameHandlerEnabled
@@ -78,6 +79,7 @@ if require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnableSchedulerFlag
 	end
 end
 local FFlagEnableAEGIS2CommsFAEUpsell = require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnableAEGIS2CommsFAEUpsell
+local FFlagEdpGameLeavePromptsPassIsCoplaySession = require(CorePackages.Workspace.Packages.SharedFlags).FFlagEdpGameLeavePromptsPassIsCoplaySession
 
 if require(CorePackages.Workspace.Packages.SharedFlags).FFlagInitializeSduiForInExperience then
 	require(Modules.ServerDrivenUi.initializeSduiForInExperience)()
@@ -146,13 +148,13 @@ if FFlagLuaAppEnableInExperienceDataModelStreamStarter then
 end
 if game:GetEngineFeature("ProtocolLaunchPrivateChannelUpdateCheckEngineFeature") then
 	local ChannelUpdatePrompt = Modules.ChannelUpdatePrompt
-	local Success, Result = pcall(require, ChannelUpdatePrompt)
+	local Success1, Result1 = pcall(require, ChannelUpdatePrompt)
 	local Result2 = nil
 	
-	if Success then
-		Result2 = Result
+	if Success1 then
+		Result2 = Result1
 	else
-		warn("Failure to Start CoreScript module " .. ChannelUpdatePrompt.Name .. ".\n" .. Result)
+		warn("Failure to Start CoreScript module " .. ChannelUpdatePrompt.Name .. ".\n" .. Result1)
 		Result2 = nil
 	end
 	if Result2 then
@@ -255,11 +257,30 @@ ScriptContext:AddCoreScriptLocal("CoreScripts/PerformanceStatsManagerScript", Ro
 ScriptContext:AddCoreScriptLocal("CoreScripts/PlayerRagdoll", RobloxGui)
 coroutine.wrap(safeRequire)(RobloxGui.Modules.ChatSelector)
 coroutine.wrap(safeRequire)(RobloxGui.Modules.PlayerList.PlayerListManager)
-local Success1, Result1 = pcall(function()
+
+if FFlagEdpGameLeavePromptsPassIsCoplaySession then
+	local CoplaySessionReporter = RobloxGui.Modules.PlayerList.CoplaySessionReporter
+	local Success2, Result3 = pcall(require, CoplaySessionReporter)
+	local Result5 = nil
+	
+	if Success2 then
+		Result5 = Result3
+	else
+		warn("Failure to Start CoreScript module " .. CoplaySessionReporter.Name .. ".\n" .. Result3)
+		Result5 = nil
+	end
+	if Result5 then
+		task.spawn(function()
+			-- upvalues: Result5 (copy)
+			Result5.getDefault().start()
+		end)
+	end
+end
+local Success3, Result4 = pcall(function()
 	return UserSettings():IsUserFeatureEnabled("UserRoactBubbleChatBeta")
 end)
 
-if game:GetEngineFeature("EnableBubbleChatFromChatService") or Success1 and Result1 then
+if game:GetEngineFeature("EnableBubbleChatFromChatService") or Success3 and Result4 then
 	ScriptContext:AddCoreScriptLocal("CoreScripts/PlayerBillboards", RobloxGui)
 end
 coroutine.wrap(function()
@@ -298,17 +319,17 @@ ScriptContext:AddCoreScriptLocal("CoreScripts/FriendPlayerPrompt", RobloxGui)
 
 if EnablePromptAgeCheckListener then
 	local PromptAgeCheckHandler = Modules.PromptAgeCheckHandler
-	local Success3, Result4 = pcall(require, PromptAgeCheckHandler)
-	local Result5 = nil
+	local Success4, Result6 = pcall(require, PromptAgeCheckHandler)
+	local v5 = nil
 	
-	if Success3 then
-		Result5 = Result4
+	if Success4 then
+		v5 = Result6
 	else
-		warn("Failure to Start CoreScript module " .. PromptAgeCheckHandler.Name .. ".\n" .. Result4)
-		Result5 = nil
+		warn("Failure to Start CoreScript module " .. PromptAgeCheckHandler.Name .. ".\n" .. Result6)
+		v5 = nil
 	end
-	if Result5 then
-		Result5.init()
+	if v5 then
+		v5.init()
 	end
 end
 ScriptContext:AddCoreScriptLocal("CoreScripts/AvatarContextMenu", RobloxGui)
@@ -403,7 +424,11 @@ if GetFFlagRtMessagingModule() then
 	game:GetService("RtMessagingService")
 end
 if game:GetEngineFeature("FacialAnimationStreaming2") then
-	ScriptContext:AddCoreScriptLocal("CoreScripts/FacialAnimationStreaming", script.Parent)
+	if FFlagFacialAnimationStreamingUseExtractedModulesModule then
+		ScriptContext:AddCoreScriptLocal("CoreScripts/FacialAnimationStreamingV2", script.Parent)
+	else
+		ScriptContext:AddCoreScriptLocal("CoreScripts/FacialAnimationStreaming", script.Parent)
+	end
 end
 ScriptContext:AddCoreScriptLocal("CoreScripts/AvatarMood", script.Parent)
 ScriptContext:AddCoreScriptLocal("CoreScripts/PortalTeleportGUI", RobloxGui)
@@ -477,16 +502,16 @@ end)()
 
 if game:GetEngineFeature("EnableLuaAdPlayer") then
 	local AdPlayer = CorePackages.Workspace.Packages.AdPlayer
-	local Success2, Result3 = pcall(require, AdPlayer)
-	local v5 = nil
+	local Success, Result = pcall(require, AdPlayer)
+	local Result7 = nil
 	
-	if Success2 then
-		v5 = Result3
+	if Success then
+		Result7 = Result
 	else
-		warn("Failure to Start CoreScript module " .. AdPlayer.Name .. ".\n" .. Result3)
-		v5 = nil
+		warn("Failure to Start CoreScript module " .. AdPlayer.Name .. ".\n" .. Result)
+		Result7 = nil
 	end
-	v5.init()
+	Result7.init()
 end
 if game:GetEngineFeature("EnableVoiceAttention") then
 	ScriptContext:AddCoreScriptLocal("CoreScripts/VoiceAttention", script.Parent)

@@ -8,13 +8,15 @@ local WorkshopWindowContextModule = require(AvatarWorkshop.Contexts.WorkshopWind
 local HorizontalLayoutModule = require(AvatarWorkshop.Components.HorizontalLayout)
 local VerticalLayoutModule = require(AvatarWorkshop.Components.VerticalLayout)
 local TopBarModule = require(AvatarWorkshop.Components.TopBar)
-local AvatarPreviewModule = require(AvatarWorkshop.Components.AvatarPreview.AvatarPreview)
+local CurrentAvatarPreviewModule = require(AvatarWorkshop.Components.AvatarPreview.CurrentAvatarPreview)
+local SaveAvatarFlowModule = require(AvatarWorkshop.Components.SaveAvatarFlow.SaveAvatarFlow)
+local WorkshopToastHostModule = require(AvatarWorkshop.Components.WorkshopToastHost.WorkshopToastHost)
 local ScreenTitlesModule = require(AvatarWorkshop.Constants.ScreenTitles)
 local GetActiveRouteModule = require(AvatarWorkshop.Navigation.getActiveRoute)
 local FFlagAlignSideSheetWindowCloseRight = require(Parent.SharedFlags).FFlagAlignSideSheetWindowCloseRight
 
-return function(p1)
-	-- upvalues: ReactModule (copy), WorkshopWindowContextModule (copy), GetActiveRouteModule (copy), FFlagAlignSideSheetWindowCloseRight (copy), TopBarModule (copy), ScreenTitlesModule (copy), RoactNavigationModule (copy), VerticalLayoutModule (copy), AvatarPreviewModule (copy), FoundationModule (copy), HorizontalLayoutModule (copy)
+local function WorkshopLayout(p1)
+	-- upvalues: ReactModule (copy), WorkshopWindowContextModule (copy), GetActiveRouteModule (copy), FFlagAlignSideSheetWindowCloseRight (copy), TopBarModule (copy), ScreenTitlesModule (copy), RoactNavigationModule (copy), VerticalLayoutModule (copy), CurrentAvatarPreviewModule (copy), FoundationModule (copy), HorizontalLayoutModule (copy)
 	local UseContextResult = ReactModule.useContext(WorkshopWindowContextModule)
 	local Navigation = p1.navigation
 	local ActiveRouteModule = GetActiveRouteModule(Navigation)
@@ -38,7 +40,7 @@ return function(p1)
 	
 	return if UseContextResult.verticalLayout then ReactModule.createElement(VerticalLayoutModule, {
 		headerSlot = Element,
-		topItemSlot = ReactModule.createElement(AvatarPreviewModule),
+		topItemSlot = ReactModule.createElement(CurrentAvatarPreviewModule),
 		bottomItemSlot = ReactModule.createElement(FoundationModule.View, { tag = "size-full-full padding-top-xlarge" }, { Content = Element1 }),
 		footerSlot = if Element2 then ReactModule.createElement(FoundationModule.View, {
 			tag = "size-full-0 auto-y padding-top-medium padding-x-xlarge padding-bottom-large"
@@ -49,12 +51,21 @@ return function(p1)
 		leftItemSlot = ReactModule.createElement(FoundationModule.View, { tag = "size-full-full" }, { Content = Element1 }),
 		rightItemSlot = ReactModule.createElement(FoundationModule.View, { tag = "col size-full-full" }, {
 			Preview = ReactModule.createElement(FoundationModule.View, { tag = "fill size-full-0", LayoutOrder = 1 }, {
-				AvatarPreview = ReactModule.createElement(AvatarPreviewModule)
+				AvatarPreview = ReactModule.createElement(CurrentAvatarPreviewModule)
 			}),
 			ActionBar = if Element2 then ReactModule.createElement(FoundationModule.View, {
 				tag = "size-full-0 auto-y padding-medium",
 				LayoutOrder = 2
 			}, { ActionBar = Element2 }) else nil
 		})
+	})
+end
+
+return function(p1)
+	-- upvalues: ReactModule (copy), FoundationModule (copy), WorkshopLayout (copy), SaveAvatarFlowModule (copy), WorkshopToastHostModule (copy)
+	return ReactModule.createElement(FoundationModule.View, { tag = "size-full-full" }, {
+		Layout = ReactModule.createElement(WorkshopLayout, p1),
+		SaveAvatarFlow = ReactModule.createElement(SaveAvatarFlowModule),
+		Toast = ReactModule.createElement(WorkshopToastHostModule)
 	})
 end

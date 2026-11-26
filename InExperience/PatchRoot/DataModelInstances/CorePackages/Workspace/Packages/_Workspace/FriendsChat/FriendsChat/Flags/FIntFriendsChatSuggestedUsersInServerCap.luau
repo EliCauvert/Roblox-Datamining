@@ -1,0 +1,1 @@
+﻿return game:DefineFastInt("FriendsChatSuggestedUsersInServerCap", 5)

@@ -331,7 +331,7 @@ function LoadingScreenView.renderBackground(p1, p2)
 				ImageTransparency = p1.bindings.thumbnailTransparency
 			}),
 			renderStepped = not p2.Settings.ReducedMotion and RoactModule.createElement(ExternalEventConnection, {
-				event = RunService.renderStepped,
+				event = RunService.RenderStepped,
 				callback = p1.renderBackgroundSteppedCallback
 			})
 		})
@@ -437,7 +437,7 @@ function LoadingScreenView.renderPlaceIcon(p1, p2)
 		config3.Offset = Vector2.new(ShimPos, 0)
 		config2.Gradient = CreateElementFunction1(v5, config3)
 		config2.renderStepped = RoactModule.createElement(ExternalEventConnection, {
-			event = RunService.renderStepped,
+			event = RunService.RenderStepped,
 			callback = p1.renderShimmerCallback
 		})
 		NoReducedMotion = CreateElementFunction2(v4, config1, config2)

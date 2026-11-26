@@ -34,6 +34,7 @@ return {
 		FFlagExpChatExpressionTrayReducedMotion = require(script.Flags.FFlagExpChatExpressionTrayReducedMotion),
 		FFlagExpChatHidePlaceholderUnderOverlay = require(script.Flags.FFlagExpChatHidePlaceholderUnderOverlay),
 		FFlagExpChatMessageListScrollParity = require(script.Flags.FFlagExpChatMessageListScrollParity),
+		FFlagExpChatMessageListFinishIntervals = require(script.Flags.FFlagExpChatMessageListFinishIntervals),
 		FFlagExpChatPerfTrackerTabName = require(script.Flags.FFlagExpChatPerfTrackerTabName),
 		FFlagTCWTranslationSupport = require(script.Flags.FFlagTCWTranslationSupport)
 	}

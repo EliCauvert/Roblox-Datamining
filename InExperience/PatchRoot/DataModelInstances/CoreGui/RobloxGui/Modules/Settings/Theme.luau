@@ -12,7 +12,6 @@ local IconSize = UIBloxModule.App.ImageSet.Enum.IconSize
 local GetUIScaleFunction = require(CorePackages.Workspace.Packages.Display).GetDisplayStore(false).getUIScale
 local InGameMenu = require(CorePackages.Workspace.Packages.CoreScriptsCommon).Constants.InGameMenu
 local IsInExperienceUIVREnabled = require(CorePackages.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
-local FFlagRelocateMobileMenuButtonsModule = require(RobloxGui.Modules.Settings.Flags.FFlagRelocateMobileMenuButtons)
 local FIntRelocateMobileMenuButtonsVariantModule = require(RobloxGui.Modules.Settings.Flags.FIntRelocateMobileMenuButtonsVariant)
 local config = {
 	[Enum.FontSize.Size14] = Enum.FontSize.Size11,
@@ -164,7 +163,7 @@ local config5 = {
 	PaddingTop = UDim.new(0, 0),
 	PaddingLeft = UDim.new(0, 12),
 	PaddingRight = UDim.new(0, 12),
-	PaddingBottom = if FFlagRelocateMobileMenuButtonsModule and (FIntRelocateMobileMenuButtonsVariantModule == 1 or FIntRelocateMobileMenuButtonsVariantModule == 3) then UDim.new(0, 24) else UDim.new(0, 12)
+	PaddingBottom = if FIntRelocateMobileMenuButtonsVariantModule == 1 or FIntRelocateMobileMenuButtonsVariantModule == 3 then UDim.new(0, 24) else UDim.new(0, 12)
 }
 local config6 = {
 	AnchorPoint = Vector2.new(0.5, 0.5),
@@ -200,8 +199,10 @@ return {
 		return IsYBelow
 	end,
 	HubPadding = function()
-		-- upvalues: FFlagRelocateMobileMenuButtonsModule (copy), FIntRelocateMobileMenuButtonsVariantModule (copy), getViewportSize (copy), UserInputService (copy), config5 (copy), config4 (copy), IsYBelow (ref)
-		if FFlagRelocateMobileMenuButtonsModule and FIntRelocateMobileMenuButtonsVariantModule ~= 0 then
+		-- upvalues: FIntRelocateMobileMenuButtonsVariantModule (copy), getViewportSize (copy), UserInputService (copy), config5 (copy), config4 (copy), IsYBelow (ref)
+		if FIntRelocateMobileMenuButtonsVariantModule == 0 then
+			return if IsYBelow then config5 else config4
+		else
 			local function _(): boolean
 				-- upvalues: getViewportSize (upval), UserInputService (upval)
 				local ViewportSize = getViewportSize()
@@ -213,8 +214,6 @@ return {
 			local IsYBelow1: boolean = ViewportSize and (UserInputService.TouchEnabled and (ViewportSize.Y < 500 or ViewportSize.X < 700))
 			
 			return if IsYBelow1 then config5 else config4
-		else
-			return if IsYBelow then config5 else config4
 		end
 	end,
 	MenuContainerPosition = function(p1)

@@ -54,6 +54,8 @@ return function(p1)
 	local ChunkDelay = P8.chunkDelay or 0.04
 	local t = {}
 	local Count = 0
+	local Copy = table.clone(P8.initialUnreadGames or {})
+	local Copy1 = table.clone(P8.initialUnreadPlaytests or {})
 	
 	if P8.initialSessions then
 		for _, initialSession in P8.initialSessions do
@@ -367,7 +369,51 @@ return function(p1)
 		return config
 	end
 	
+	local function unreadPage(p4, Cursor, ClampedValue: number)
+		local Number: number = Cursor and tonumber(Cursor) or 0
+		local List = {}
+		
+		for i = Number + 1, math.min(Number + ClampedValue, #p4) do
+			table.insert(List, p4[i])
+		end
+		local NewNumber = Number + #List
+		
+		if NewNumber < #p4 then
+			return List, (tostring(NewNumber))
+		else
+			return List, nil
+		end
+	end
+	
 	local config = {
+		[AcpProtocolModule.Methods.UnreadSummary] = function()
+			-- upvalues: Copy (copy), Copy1 (copy)
+			return {
+				hasUnreadGames = #Copy > 0,
+				hasUnreadPlaytests = #Copy1 > 0
+			}, nil
+		end,
+		[AcpProtocolModule.Methods.UnreadList] = function(p5)
+			-- upvalues: unreadPage (copy), Copy (copy), Copy1 (copy)
+			local UnreadPageResult, UnreadPageResult2 = unreadPage(if p5.kind == "game" then Copy else Copy1, p5.cursor, (math.clamp(p5.limit or 20, 1, 100)))
+			
+			return {
+				entries = UnreadPageResult,
+				nextCursor = UnreadPageResult2
+			}, nil
+		end,
+		[AcpProtocolModule.Methods.UnreadAck] = function(p5)
+			-- upvalues: Copy (copy), Copy1 (copy)
+			local Copy2 = if p5.kind == "game" then Copy else Copy1
+			for i, value in Copy2 do
+				if value.universeId == p5.universeId then
+					table.remove(Copy2, i)
+					
+					return { cleared = true }, nil
+				end
+			end
+			return { cleared = false }, nil
+		end,
 		[AcpProtocolModule.Methods.Initialize] = function()
 			-- upvalues: AcpProtocolModule (upval)
 			return {
@@ -383,9 +429,9 @@ return function(p1)
 				agentInfo = { name = "mock-my-stats-service", version = "0.0.1-mock" }
 			}, nil
 		end,
-		[AcpProtocolModule.Methods.SessionNew] = function(p4)
+		[AcpProtocolModule.Methods.SessionNew] = function(p6)
 			-- upvalues: AcpProtocolModule (upval), Count (ref), t (copy), FFlagBuildExperienceModelPickerData (upval), P8 (copy)
-			local ExtractSessionNewProjectResult = AcpProtocolModule.extractSessionNewProject(p4)
+			local ExtractSessionNewProjectResult = AcpProtocolModule.extractSessionNewProject(p6)
 			
 			if ExtractSessionNewProjectResult == nil then
 				return nil, {
@@ -429,9 +475,9 @@ return function(p1)
 			
 			return { sessions = List }, nil
 		end,
-		[AcpProtocolModule.Methods.SessionFindByUniverse] = function(p4)
+		[AcpProtocolModule.Methods.SessionFindByUniverse] = function(p6)
 			-- upvalues: AcpProtocolModule (upval), t (copy), sessionListEntry (copy)
-			if typeof(p4.universeId) ~= "number" or p4.universeId == 0 then
+			if typeof(p6.universeId) ~= "number" or p6.universeId == 0 then
 				return nil, {
 					message = "universeId is required",
 					code = AcpProtocolModule.ErrorCodes.InvalidParams
@@ -440,7 +486,7 @@ return function(p1)
 			local List = {}
 			
 			for _, value in t do
-				if value.closedUtc == nil and value.project ~= nil and value.project.universeId == p4.universeId then
+				if value.closedUtc == nil and value.project ~= nil and value.project.universeId == p6.universeId then
 					table.insert(List, (sessionListEntry(value)))
 				end
 			end
@@ -450,9 +496,9 @@ return function(p1)
 			
 			return { sessions = List }, nil
 		end,
-		[AcpProtocolModule.Methods.SessionLoad] = function(p5)
+		[AcpProtocolModule.Methods.SessionLoad] = function(p7)
 			-- upvalues: t (copy), AcpProtocolModule (upval), FFlagBuildExperienceModelPickerData (upval), P8 (copy)
-			local Entry = t[p5.sessionId]
+			local Entry = t[p7.sessionId]
 			local v2 = nil
 			local config = nil
 			
@@ -479,9 +525,9 @@ return function(p1)
 				}, nil
 			end
 		end,
-		[AcpProtocolModule.Methods.SessionReadTasks] = function(p5)
+		[AcpProtocolModule.Methods.SessionReadTasks] = function(p7)
 			-- upvalues: t (copy), AcpProtocolModule (upval)
-			local Entry = t[p5.sessionId]
+			local Entry = t[p7.sessionId]
 			local Config = if Entry == nil or Entry.closedUtc ~= nil then {
 				message = "session not found",
 				code = AcpProtocolModule.ErrorCodes.NotFound
@@ -493,9 +539,9 @@ return function(p1)
 				return { tasks = {} }, nil
 			end
 		end,
-		[AcpProtocolModule.Methods.SessionCancel] = function(p5)
+		[AcpProtocolModule.Methods.SessionCancel] = function(p7)
 			-- upvalues: t (copy), AcpProtocolModule (upval)
-			local Entry = t[p5.sessionId]
+			local Entry = t[p7.sessionId]
 			local Config = if Entry == nil or Entry.closedUtc ~= nil then {
 				message = "session not found",
 				code = AcpProtocolModule.ErrorCodes.NotFound
@@ -507,9 +553,9 @@ return function(p1)
 				return {}, nil
 			end
 		end,
-		[AcpProtocolModule.Methods.SessionDelete] = function(p5)
+		[AcpProtocolModule.Methods.SessionDelete] = function(p7)
 			-- upvalues: t (copy), AcpProtocolModule (upval)
-			local Entry = t[p5.sessionId]
+			local Entry = t[p7.sessionId]
 			
 			if Entry == nil then
 				return nil, {
@@ -522,9 +568,9 @@ return function(p1)
 				return {}, nil
 			end
 		end,
-		[AcpProtocolModule.Methods.SessionUpdateInfo] = function(p5)
+		[AcpProtocolModule.Methods.SessionUpdateInfo] = function(p7)
 			-- upvalues: t (copy), AcpProtocolModule (upval)
-			local Entry = t[p5.sessionId]
+			local Entry = t[p7.sessionId]
 			local v2 = nil
 			local config = nil
 			
@@ -541,8 +587,8 @@ return function(p1)
 			if config then
 				return nil, config
 			end
-			if p5.title ~= nil then
-				v2.title = p5.title
+			if p7.title ~= nil then
+				v2.title = p7.title
 				v2.updatedUtc = DateTime.now():ToIsoDate()
 			end
 			return {}, nil
@@ -550,9 +596,9 @@ return function(p1)
 		[AcpProtocolModule.Methods.SessionSaveAndPublish] = function(_)
 			return { status = "success", version = "1" }, nil
 		end,
-		[AcpProtocolModule.Methods.AdCampaignEligibility] = function(p5)
+		[AcpProtocolModule.Methods.AdCampaignEligibility] = function(p7)
 			-- upvalues: AcpProtocolModule (upval)
-			if typeof(p5.universeId) == "number" and p5.universeId > 0 then
+			if typeof(p7.universeId) == "number" and p7.universeId > 0 then
 				return {
 					schemaVersion = 2,
 					userEligible = true,
@@ -583,9 +629,9 @@ return function(p1)
 				}
 			end
 		end,
-		[AcpProtocolModule.Methods.AdCampaignCheckFunds] = function(p5)
+		[AcpProtocolModule.Methods.AdCampaignCheckFunds] = function(p7)
 			-- upvalues: AcpProtocolModule (upval)
-			if p5.campaignOption == "feedback" or p5.campaignOption == "plays" then
+			if p7.campaignOption == "feedback" or p7.campaignOption == "plays" then
 				return { canFund = true, fundingSource = "robux" }, nil
 			else
 				return nil, {
@@ -594,18 +640,18 @@ return function(p1)
 				}
 			end
 		end,
-		[AcpProtocolModule.Methods.AdCampaignCreate] = function(p5)
+		[AcpProtocolModule.Methods.AdCampaignCreate] = function(p7)
 			-- upvalues: AcpProtocolModule (upval)
-			if typeof(p5.universeId) ~= "number" or p5.universeId <= 0 then
+			if typeof(p7.universeId) ~= "number" or p7.universeId <= 0 then
 				return nil, {
 					message = "universeId is required",
 					code = AcpProtocolModule.ErrorCodes.InvalidParams
 				}
-			elseif typeof(p5.idempotencyKey) == "string" and p5.idempotencyKey ~= "" then
+			elseif typeof(p7.idempotencyKey) == "string" and p7.idempotencyKey ~= "" then
 				return {
 					campaignId = "mock_campaign_0001",
 					status = "in_review",
-					toolCallId = p5.toolCallId
+					toolCallId = p7.toolCallId
 				}, nil
 			else
 				return nil, {
@@ -616,12 +662,12 @@ return function(p1)
 		end
 	}
 	
-	local function dispatch(p5)
+	local function dispatch(p7)
 		-- upvalues: AcpProtocolModule (upval), t (copy), jsonError (upval), httpStatusForCode (upval), runResponder (copy), FFlagBuildExperienceModelPickerData (upval), jsonOk (upval), config (copy)
-		if p5.method == AcpProtocolModule.Methods.SessionPrompt then
-			local Entry = t[p5.params.sessionId]
-			local v2 = nil
+		if p7.method == AcpProtocolModule.Methods.SessionPrompt then
+			local Entry = t[p7.params.sessionId]
 			local config1 = nil
+			local v2 = nil
 			
 			if Entry == nil or Entry.closedUtc ~= nil then
 				v2 = nil
@@ -634,22 +680,22 @@ return function(p1)
 				config1 = nil
 			end
 			if config1 then
-				return (jsonError(p5.id, config1.code, config1.message, (httpStatusForCode(config1.code))))
+				return (jsonError(p7.id, config1.code, config1.message, (httpStatusForCode(config1.code))))
 			else
 				v2.updatedUtc = DateTime.now():ToIsoDate()
-				runResponder(p5.id, p5.params.sessionId, p5.params.prompt or {})
+				runResponder(p7.id, p7.params.sessionId, p7.params.prompt or {})
 				
-				return if FFlagBuildExperienceModelPickerData then { statusCode = 202, responseBody = "" } else jsonOk(p5.id, {})
+				return if FFlagBuildExperienceModelPickerData then { statusCode = 202, responseBody = "" } else jsonOk(p7.id, {})
 			end
 		else
-			local Entry1 = config[p5.method]
+			local Entry1 = config[p7.method]
 			
 			if Entry1 == nil then
-				return (jsonError(p5.id, AcpProtocolModule.ErrorCodes.MethodNotFound, "Method not found: " .. p5.method, 404))
+				return (jsonError(p7.id, AcpProtocolModule.ErrorCodes.MethodNotFound, "Method not found: " .. p7.method, 404))
 			else
-				local Success, Result, Result3 = pcall(Entry1, p5.params or {})
+				local Success, Result, Result3 = pcall(Entry1, p7.params or {})
 				
-				return if Success then if Result3 then jsonError(p5.id, Result3.code, Result3.message, (httpStatusForCode(Result3.code))) else jsonOk(p5.id, Result) else jsonError(p5.id, AcpProtocolModule.ErrorCodes.InternalError, tostring(Result), 500)
+				return if Success then if Result3 then jsonError(p7.id, Result3.code, Result3.message, (httpStatusForCode(Result3.code))) else jsonOk(p7.id, Result) else jsonError(p7.id, AcpProtocolModule.ErrorCodes.InternalError, tostring(Result), 500)
 			end
 		end
 	end
@@ -657,9 +703,9 @@ return function(p1)
 	v1 = CreateCreatorAgentChatStoreModule({
 		baseUrl = "mock://my-stats/v2",
 		network = {
-			request = function(p5, Callback: (any, any) -> ())
+			request = function(p7, Callback: (any, any) -> ())
 				-- upvalues: HttpService (upval), dispatch (copy)
-				local Data = HttpService:JSONDecode(p5.body or "{}")
+				local Data = HttpService:JSONDecode(p7.body or "{}")
 				
 				if typeof(Data) == "table" and typeof(Data.result) == "table" and Data.result.tool_name == "ask_tool" then
 					Callback(true, {

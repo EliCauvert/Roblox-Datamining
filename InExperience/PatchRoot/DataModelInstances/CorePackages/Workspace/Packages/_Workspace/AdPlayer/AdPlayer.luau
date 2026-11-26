@@ -23,10 +23,10 @@ return {
 		
 		function AdService.onDemandVideoPlayInUI(p1)
 			-- upvalues: Root (copy), AdService (upval), ReactModule (upval), BaseComponentModule (upval), AdPlayerComponentModule (upval)
-			local function _(p2)
+			local function _(Result)
 				-- upvalues: Root (upval), AdService (upval), p1 (copy)
 				Root:render(nil)
-				AdService:onDemandVideoCompleteFromUI(p2, p1.encryptedAdTrackingData, p1.encryptionMetadata, p1.rewardDetails)
+				AdService:OnDemandVideoCompleteFromUI(Result, p1.encryptedAdTrackingData, p1.encryptionMetadata, p1.rewardDetails)
 			end
 			
 			local BindableEvent = Instance.new("BindableEvent")
@@ -47,13 +47,13 @@ return {
 						-- upvalues: Root (upval), AdService (upval), p1 (copy)
 						local ShowInterrupted = Enum.ShowAdResult.ShowInterrupted
 						Root:render(nil)
-						AdService:onDemandVideoCompleteFromUI(ShowInterrupted, p1.encryptedAdTrackingData, p1.encryptionMetadata, p1.rewardDetails)
+						AdService:OnDemandVideoCompleteFromUI(ShowInterrupted, p1.encryptedAdTrackingData, p1.encryptionMetadata, p1.rewardDetails)
 					end,
 					onComplete = function()
 						-- upvalues: Root (upval), AdService (upval), p1 (copy)
 						local ShowCompleted = Enum.ShowAdResult.ShowCompleted
 						Root:render(nil)
-						AdService:onDemandVideoCompleteFromUI(ShowCompleted, p1.encryptedAdTrackingData, p1.encryptionMetadata, p1.rewardDetails)
+						AdService:OnDemandVideoCompleteFromUI(ShowCompleted, p1.encryptedAdTrackingData, p1.encryptionMetadata, p1.rewardDetails)
 					end,
 					showWhyThisAd = function()
 						-- upvalues: AdService (upval)

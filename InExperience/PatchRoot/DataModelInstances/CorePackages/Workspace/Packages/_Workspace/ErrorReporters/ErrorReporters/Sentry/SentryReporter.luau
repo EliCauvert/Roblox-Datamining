@@ -7,11 +7,9 @@ local ErrorQueueModule = require(script.Parent.Parent.ErrorQueue)
 local FIntOldestUAVersionToReportErrorsModule = require(script.Parent.Parent.FIntOldestUAVersionToReportErrors)
 local FIntSentryErrorLevelQueueTimeLimitSecondsModule = require(script.Parent.Parent.FIntSentryErrorLevelQueueTimeLimitSeconds)
 local FIntSentryDebugLevelQueueTimeLimitSecondsModule = require(script.Parent.Parent.FIntSentryDebugLevelQueueTimeLimitSeconds)
-local FFlagSentrySplitQueuesBySeverityModule = require(script.Parent.Parent.FFlagSentrySplitQueuesBySeverity)
 local ErrorReportModule = require(script.Parent.ErrorReport)
 local SentryReporterUtilityModule = require(script.Parent.SentryReporterUtility)
 local ConstantsModule = require(script.Parent.Constants)
-local FFlagLuaAppSentryStampOccurrenceTimeModule = require(script.Parent.Flags.FFlagLuaAppSentryStampOccurrenceTime)
 local FFlagLuaAppSentryReportIxpLayersAsFeatureFlagsModule = require(script.Parent.Flags.FFlagLuaAppSentryReportIxpLayersAsFeatureFlags)
 local BuildIxpFeatureFlagsContextModule = require(script.Parent.buildIxpFeatureFlagsContext)
 local IAttributesFunction = ErrorReportModule.IAttributes
@@ -85,7 +83,7 @@ local StrictInterfaceResult = TModule.strictInterface({
 })
 
 function SentryReporterModule.new(ReportQueuedError)
-	-- upvalues: StrictInterfaceResult (copy), IsDevelopmentModeModule (copy), FFlagLuaAppSentryReportIxpLayersAsFeatureFlagsModule (copy), Client (copy), SentryReporterModule (copy), FFlagSentrySplitQueuesBySeverityModule (copy), CryoModule (copy), FIntSentryDebugLevelQueueTimeLimitSecondsModule (copy), ErrorQueueModule (copy), FIntSentryErrorLevelQueueTimeLimitSecondsModule (copy)
+	-- upvalues: StrictInterfaceResult (copy), IsDevelopmentModeModule (copy), FFlagLuaAppSentryReportIxpLayersAsFeatureFlagsModule (copy), Client (copy), SentryReporterModule (copy), CryoModule (copy), FIntSentryDebugLevelQueueTimeLimitSecondsModule (copy), ErrorQueueModule (copy), FIntSentryErrorLevelQueueTimeLimitSecondsModule (copy)
 	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(ReportQueuedError)
 	
 	if not StrictInterfaceResultResult then
@@ -131,20 +129,18 @@ function SentryReporterModule.new(ReportQueuedError)
 		end
 	end
 	
-	local NewErrorQueue = ErrorQueueModule.new(reportQueuedError, if FFlagSentrySplitQueuesBySeverityModule then CryoModule.Dictionary.join({
+	local NewErrorQueue = ErrorQueueModule.new(reportQueuedError, (CryoModule.Dictionary.join({
 		queueTimeLimit = FIntSentryDebugLevelQueueTimeLimitSecondsModule
-	}, ReportQueuedError.debugQueueOptions or {}) else ReportQueuedError.debugQueueOptions)
+	}, ReportQueuedError.debugQueueOptions or {})))
 	config._debugLevelQueue = NewErrorQueue
 	NewErrorQueue:startTimer()
+	local NewErrorQueue1 = ErrorQueueModule.new(reportQueuedError, CryoModule.Dictionary.join({
+		flushImmediately = true,
+		queueTimeLimit = FIntSentryErrorLevelQueueTimeLimitSecondsModule
+	}, ReportQueuedError.errorQueueOptions or {}))
+	config._errorLevelQueue = NewErrorQueue1
+	NewErrorQueue1:startTimer()
 	
-	if FFlagSentrySplitQueuesBySeverityModule then
-		local NewErrorQueue1 = ErrorQueueModule.new(reportQueuedError, CryoModule.Dictionary.join({
-			flushImmediately = true,
-			queueTimeLimit = FIntSentryErrorLevelQueueTimeLimitSecondsModule
-		}, ReportQueuedError.errorQueueOptions or {}))
-		config._errorLevelQueue = NewErrorQueue1
-		NewErrorQueue1:startTimer()
-	end
 	return config
 end
 
@@ -229,7 +225,7 @@ function SentryReporterModule:_handleSentryExceptionCallback(p2, p3, p4, p5)
 end
 
 function SentryReporterModule:sendErrorReport(ErrorReport, Log): boolean
-	-- upvalues: IsDevelopmentModeModule (copy), ConstantsModule (copy), SentryReporterUtilityModule (copy), FFlagLuaAppSentryReportIxpLayersAsFeatureFlagsModule (copy), BuildIxpFeatureFlagsContextModule (copy), SentryReportBreadcrumbs (copy), FFlagLuaAppSentryStampOccurrenceTimeModule (copy)
+	-- upvalues: IsDevelopmentModeModule (copy), ConstantsModule (copy), SentryReporterUtilityModule (copy), FFlagLuaAppSentryReportIxpLayersAsFeatureFlagsModule (copy), BuildIxpFeatureFlagsContextModule (copy), SentryReportBreadcrumbs (copy)
 	if not self._isEnabled then
 		return false
 	end
@@ -288,7 +284,7 @@ function SentryReporterModule:sendErrorReport(ErrorReport, Log): boolean
 	}, Level, ParseErrorToContextResult, ParseThreadsToSentryResult, function(p2, p3, p4)
 		-- upvalues: self (copy), Log (copy)
 		self:_handleSentryExceptionCallback(p2, p3, p4, Log)
-	end, v1, if FFlagLuaAppSentryStampOccurrenceTimeModule then ErrorReport.timestamp else nil, ErrorReport.tags)
+	end, v1, ErrorReport.timestamp, ErrorReport.tags)
 	
 	return true
 end
@@ -317,7 +313,7 @@ function SentryReporterModule:_generateLog()
 end
 
 function SentryReporterModule:_generateErrorReport(p2, p3, StackDetails, p4, Level)
-	-- upvalues: CryoModule (copy), ErrorReportModule (copy), FFlagLuaAppSentryStampOccurrenceTimeModule (copy)
+	-- upvalues: CryoModule (copy), ErrorReportModule (copy)
 	local FromDetailsResult = nil
 	if type(StackDetails) == "table" then
 		FromDetailsResult = ErrorReportModule.fromDetails(if Level == nil then StackDetails else CryoModule.Dictionary.join(StackDetails, { level = Level }))
@@ -328,9 +324,8 @@ function SentryReporterModule:_generateErrorReport(p2, p3, StackDetails, p4, Lev
 			FromDetailsResult:addAnnotations({ stackDetails = StackDetails })
 		end
 	end
-	if FFlagLuaAppSentryStampOccurrenceTimeModule then
-		FromDetailsResult.timestamp = os.time()
-	end
+	FromDetailsResult.timestamp = os.time()
+	
 	if p4 ~= nil then
 		FromDetailsResult:addCustomMetadata(p4)
 	end

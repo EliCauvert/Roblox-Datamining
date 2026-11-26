@@ -14,6 +14,8 @@
 	ReactName = "CapturesApp",
 	RoduxKey = "CapturesInExperience",
 	FlashTimeout = 1,
+	MomentsEligibilityTimeout = 2,
+	CaptureSaveTimeout = 60,
 	ToastDuration = 2,
 	CarouselDirection = { Left = "Left", Right = "Right" },
 	StatusCodes = { OK = 200, FORBIDDEN = 403 },

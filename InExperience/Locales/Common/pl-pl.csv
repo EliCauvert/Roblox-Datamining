@@ -77,11 +77,13 @@ Amp.Upsell.Title.RequestSent,Wysłano prośbę
 Authentication.AccountSwitch.Action.SwitchAccount,Przełącz konta
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,Szybkie logowanie
+Authentication.Login.Action.Leave,Wyjdź
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.Save,Zapisz
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,"Wyjdź z Robloxa, aby przełączyć konto na {platformAccountName}"
 Authentication.Login.Button.UseDifferentRobloxAccount,Użyj innego konta Roblox
 Authentication.Login.Button.XboxAccountSwitcher,Zmień konto Xbox
+Authentication.Login.Description.LeaveAccountSetup,"Jeśli wyjdziesz teraz, Twoje konto Roblox nie zostanie skonfigurowane."
 Authentication.Login.Error.PasskeyOnlyAccount,Na Twoim koncie skonfigurowano wyłącznie logowanie za pomocą klucza dostępu. Spróbuj zalogować się za pomocą klucza dostępu lub odzyskaj konto.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Nie można zweryfikować konta na platformie. Spróbuj ponownie później.
 Authentication.Login.Heading.IncompatibleAccounts,Niezgodne konta
@@ -802,7 +804,7 @@ CoreScripts.FTUX.Label.SocialOnboarding,"Łatwy dostęp do funkcji społecznośc
 CoreScripts.FTUX.Label.UnifiedMenuEntrypointUpdate,"W tym menu znajdziesz wszystko, czego potrzebujesz, w tym opcję Opuść."
 CoreScripts.Feedback.EntryPoint.ButtonText,Prześlij opinię
 CoreScripts.Feedback.EntryPoint.OptionText,Prześlij opinię dotyczącą tłumaczenia
-CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,Wyjdź
+CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton,
 CoreScripts.Feedback.FeedbackBar.HelpButton,Pomoc
 CoreScripts.Feedback.FeedbackBar.MainLabel,
 CoreScripts.Feedback.FeedbackReportDialog.AdditionalCommentsHeader,Poniżej wpisz dodatkowe uwagi
@@ -2124,8 +2126,11 @@ Feature.AvatarSwitcher.Message.UnknownSupport,"Możesz zmienić awatara, ale w t
 Feature.AvatarSwitcher.Message.Unsupported,Ten projekt wykorzystuje niestandardowy awatar i nie obsługuje awatarów Robloxa.
 Feature.AvatarWorkshop.Action.EditAvatar,Edytuj awatara
 Feature.AvatarWorkshop.Action.TryAgain,
+Feature.AvatarWorkshop.Description.AddAvatar,Dodać tego awatara do Twojej kolekcji?
+Feature.AvatarWorkshop.Heading.AddAvatar,Dodać awatara?
 Feature.AvatarWorkshop.Heading.Customize,Dostosuj
 Feature.AvatarWorkshop.Heading.YourAvatars,Twoje awatary
+Feature.AvatarWorkshop.Label.DefaultAvatarName,
 Feature.AvatarWorkshop.Message.LoadItemsError,Coś poszło nie tak podczas wczytywania Twoich przedmiotów.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,Nie udało się wczytać większej liczby przedmiotów.
 Feature.AvatarWorkshop.Message.NoItemsOwned,Nie masz jeszcze żadnych przedmiotów z tej kategorii.
@@ -2398,6 +2403,8 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,Wszystkie gry
 Feature.Build.Label.AmountAvailable,Dostępne {AMOUNT}
+Feature.Build.Label.AttachmentCountPlural,Liczba załączników: {count}
+Feature.Build.Label.AttachmentCountSingular,1 załącznik
 Feature.Build.Label.Autosaved,Zapisano automatycznie
 Feature.Build.Label.Available,dostępne
 Feature.Build.Label.AvailableForPurchase,Dostępny do zakupu
@@ -2417,6 +2424,7 @@ Feature.Build.Label.DefaultDeveloperProductName,produkt deweloperski
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,Usunięty
 Feature.Build.Label.DescribeIdea,Opisz pomysł
+Feature.Build.Label.DescribeIdeaOrPick,Opisz pomysł lub wybierz jeden z poniższych
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,Opis: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Nazwa: {NAME}
@@ -3304,6 +3312,7 @@ Feature.Chat.Label.SearchFriends,Wyszukaj znajomych
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,"Wybierz, aby usunąć"
 Feature.Chat.Label.SnoozePartyNotifications,Wycisz powiadomienia dotyczące Imprezy w projekcie na:
+Feature.Chat.Label.StartChatting,Zacznij czatować
 Feature.Chat.Label.SwipeToReplyTooltip,"Przesuń, aby odpowiedzieć"
 Feature.Chat.Label.TapToRemove,"Dotknij, aby usunąć"
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} dni
@@ -3570,6 +3579,7 @@ Feature.Friends.Button.GotIt,
 Feature.Friends.Description.ContactsModal,"Osoby, które znasz, są na platformie Roblox! Dodajcie się nawzajem do znajomych, aby zobaczyć swoje pełne awatary i profile. Przejdź na stronę Dodaj znajomych, aby zobaczyć więcej osób, które możesz znać."
 Feature.Friends.Description.DoMoreWithTrustedConnections,"Korzystaj z Robloxa jeszcze lepiej dzięki zaufanym znajomym. Dodawaj tylko osoby, które znasz i którym ufasz."
 Feature.Friends.Description.DoMoreWithTrustedFriends,"Korzystaj z Robloxa jeszcze lepiej dzięki zaufanym znajomym. Dodawaj tylko osoby, które znasz i którym ufasz."
+Feature.Friends.Description.FoundFromContactImporter,Wysłano z narzędzia do importowania kontaktów
 Feature.Friends.Description.FromContacts,Z kontaktów
 Feature.Friends.Description.FromContactsV2,{contactName} z kontaktów
 Feature.Friends.Description.FromQrCode,Z kodu QR
@@ -3660,6 +3670,7 @@ Feature.Friends.Label.SentFromWithContext,Wysłano z gry {gameName}
 Feature.Friends.Label.SingularMutualFriend,wspólny znajomy
 Feature.Friends.Label.Suggested,Sugerowani
 Feature.Friends.Label.Unfollowed,Usunięto z obserwowanych
+Feature.Friends.Label.YouAreFollowing,
 Feature.Friends.Label.YourLinkedParent,Połączony z Tobą rodzic
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,"Czy chcesz, abyśmy polecali cię użytkownikom platformy Roblox, którzy mają twój numer telefonu?"
@@ -3704,6 +3715,7 @@ Feature.FriendsActivityFeed.Label.ViewRecentActivity,Wyświetl ostatnią aktywno
 Feature.FriendsMenu.Label.SelectedFriendsCount,Wybrano {numerator}/{denominator} znajomych
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,Wybrano {selectedCount} znajomych
 Feature.GameBadges.Label.Experience,
+Feature.GameDetails.Action.Continue,
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,
 Feature.GameDetails.Action.NotInterested,Nie interesuje mnie
@@ -3735,9 +3747,12 @@ Feature.GameDetails.Label.WhyThisAd,
 Feature.GameDetails.Label.Yes,
 Feature.GameDetails.Message.AdPreferences,Preferencje dotyczące reklam
 Feature.GameDetails.Message.AnonymousFeedbackTermsOfUse,Odpowiedzi są udostępniane anonimowo i stanowią Opinię w rozumieniu {underlineStart}Warunków użytkowania platformy Roblox{underlineEnd}.
+Feature.GameDetails.Message.ExternalLinkWarning,Kliknięcie przycisku „Kontynuuj” spowoduje przekierowanie na stronę internetową nienależącą do platformy Roblox ani przez nią niezarządzaną. Mogą tam obowiązywać inne warunki i polityka prywatności.
 Feature.GameDetails.Message.HelpImproveExperience,Pomóż nam poprawić Twoje wrażenia z gry
 Feature.GameDetails.Message.HidingExperienceQuestion,Dlaczego ukrywasz ten projekt?
+Feature.GameDetails.Message.LeavingRobloxTitle,Opuszczasz platformę Roblox
 Feature.GameDetails.Message.PurchaseGameV2,Odblokować dostęp do gry {gameName} za kwotę {X} Robuxów?
+Feature.GameDetails.Message.RobloxWebsiteSignedInWarning,Po kliknięciu przycisku „Kontynuuj” strona roblox.com otworzy się w przeglądarce internetowej i nastąpi zalogowanie na Twoje konto Roblox.
 Feature.GameDetails.Message.SponsoredDisclosure.Error,Nie udało się wyświetlić informacji dotyczących sponsoringu z powodu tymczasowego błędu.
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"Wyświetlono Ci tę sponsorowaną treść na podstawie niespersonalizowanych czynników, takich jak informacje o urządzeniu, lokalizacja i wiek, aby dostarczać Ci odpowiednie treści. Twórcą tego projektu jest {CreatorName}. Sponsoring został opłacony przez: {PayerName}. Aby dowiedzieć się więcej, odwiedź stronę „Prywatność i poziom treści dla dorosłych” w sekcji Ustawienia na swoim koncie, którą znajdziesz tutaj:"
 Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,"Wyświetlono Ci tę sponsorowaną treść na podstawie różnych czynników, takich jak lokalizacja, informacje o urządzeniu, wiek i zachowanie na platformie, aby dostarczać Ci odpowiednie treści. Twórcą tego projektu jest {CreatorName}. Sponsoring został opłacony przez: {PayerName}. Aby dowiedzieć się więcej, odwiedź stronę „Prywatność i poziom treści dla dorosłych” w sekcji Ustawienia na swoim koncie, którą znajdziesz tutaj:"
@@ -3756,9 +3771,12 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Włączono powiadomienia dotycz
 Feature.GameJoin.Description.DifferentServer,Rozpoczniesz na innym serwerze
 Feature.GameJoin.Label.PlayTogether,Możecie grać razem
 Feature.GameJoin.Label.PlayTogetherSoon,Wkrótce będziecie mogli grać razem
+Feature.GameJoin.Label.Played,grano
+Feature.GameJoin.Label.RecentCoplay,Niedawno graliście razem
 Feature.GamePage.Action.BackToTop,Powrót na górę strony
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
+Feature.GamePage.LabelCancelField,
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,Projekt jest niedostępny ze względu na twój status weryfikacji wieku.
 Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,Goście nie mogą dołączyć do tego projektu.
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,Do odwiedzenia tego projektu wymagane jest dokonanie zakupu.
@@ -3989,6 +4007,7 @@ Feature.Moments.Action.Hide,Ukryj szczegóły
 Feature.Moments.Action.HowToCapture,"Zobacz, jak przechwytywać"
 Feature.Moments.Action.KeepEditing,Kontynuuj edycję
 Feature.Moments.Action.Leave,
+Feature.Moments.Action.LoadMore,
 Feature.Moments.Action.Minimize,Minimalizuj
 Feature.Moments.Action.Ok,
 Feature.Moments.Action.Play,Odtwórz
@@ -5016,7 +5035,6 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} i jesz
 Feature.UniversalShareSheet.Response.SharedMessage,Wiadomość została wysłana
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Wiadomości zostały wysłane
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} i jeszcze {N} osobom
-Feature.UserLibrary.Label.MyLibrary,Moja biblioteka
 Feature.VIPServer.Message.TooManyFreeServersOnGame,Osiągnięto limit darmowych serwerów prywatnych dla tej gry.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,Osiągnięto limit aktywnych darmowych serwerów prywatnych. Najpierw dezaktywuj niektóre z innych serwerów.
 Feature.VerificationUpsell.Action.AddPhone,Dodaj numer telefonu
@@ -5188,7 +5206,7 @@ IAPExperience.InsufficientRobux.Title.InsufficientRobux,
 IAPExperience.LeaveRoblox.Action.Cancel,
 IAPExperience.LeaveRoblox.Action.Continue,
 IAPExperience.LeaveRoblox.Text.ExternalWebsiteWarning,"Kliknięcie przycisku „Kontynuuj” spowoduje przekierowanie na stronę internetową, która nie należy do Robloxa ani nie jest przez niego zarządzana. Mogą na niej obowiązywać inne warunki i zasady ochrony prywatności."
-IAPExperience.LeaveRoblox.Title.LeavingRoblox,Opuszczasz platformę Roblox
+IAPExperience.LeaveRoblox.Title.LeavingRoblox,
 IAPExperience.Loading.Text.PurchasingItem,Kupowanie przedmiotu...
 IAPExperience.Loading.Text.PurchasingRobux,Kupowanie Robuxów...
 IAPExperience.Loading.Text.WaitingForPurchase,Oczekiwanie na zakup...

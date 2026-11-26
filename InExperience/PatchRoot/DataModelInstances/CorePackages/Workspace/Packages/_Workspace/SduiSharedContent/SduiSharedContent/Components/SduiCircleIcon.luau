@@ -3,10 +3,10 @@ local ReactModule = require(Parent.React)
 local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 local _ = require(Parent.SduiCompat)
 local SduiViewModule = require(script.Parent.SduiView)
-local SduiIconModule = require(script.Parent.SduiIcon)
+local SduiIcon = require(Parent.SduiFoundation).SduiIcon
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), SduiViewModule (copy), SduiIconModule (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), SduiViewModule (copy), SduiIcon (copy)
 	local UseTokensResult = UseTokensFunction()
 	
 	return ReactModule.createElement(SduiViewModule, {
@@ -16,7 +16,7 @@ return ReactModule.memo(function(p1)
 		layoutOrder = p1.layoutOrder,
 		testId = p1.testId
 	}, {
-		Icon = if p1.iconName then ReactModule.createElement(SduiIconModule, {
+		Icon = if p1.iconName then ReactModule.createElement(SduiIcon, {
 			name = p1.iconName,
 			size = p1.iconSize,
 			testId = if p1.testId then p1.testId .. "-icon" else nil

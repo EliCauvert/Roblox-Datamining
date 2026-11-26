@@ -54,10 +54,12 @@ local function SectionEntry(p1)
 		return {
 			locationTab = "peek",
 			pageRoute = "/peek",
+			channel = "communityPeekView",
 			sessionId = p1.sessionId,
-			groupId = tonumber(p1.groupId)
+			groupId = tonumber(p1.groupId),
+			collectionPosition = p1.layoutOrder
 		}
-	end, { p1.sessionId, p1.groupId }) else nil
+	end, { p1.sessionId, p1.groupId, p1.layoutOrder }) else nil
 	
 	if UseComponentConfigFunction(ConfigKey, Announcement) == nil then
 		return nil

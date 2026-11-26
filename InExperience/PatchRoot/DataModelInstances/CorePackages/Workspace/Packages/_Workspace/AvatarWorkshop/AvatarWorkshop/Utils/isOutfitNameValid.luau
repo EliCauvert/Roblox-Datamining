@@ -1,0 +1,8 @@
+﻿local Parent = script:FindFirstAncestor("AvatarWorkshop").Parent
+local AvatarExperienceFormValidationModule = require(Parent.AvatarExperienceFormValidation)
+
+return (AvatarExperienceFormValidationModule.buildFormValidator({
+	AvatarExperienceFormValidationModule.Validators.isNotNull,
+	AvatarExperienceFormValidationModule.Validators.String.buildIsShorterThanOrEqualTo(require(Parent.AvatarExperienceFlags).FIntAXOutfitNameMaxLength),
+	AvatarExperienceFormValidationModule.Validators.String.isNotWhitespace
+}))

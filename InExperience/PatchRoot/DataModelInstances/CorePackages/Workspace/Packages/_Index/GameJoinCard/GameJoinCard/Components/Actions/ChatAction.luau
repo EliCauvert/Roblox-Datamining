@@ -10,6 +10,7 @@ local ChatEntryPointNames = SocialCommonModule.Enums.ChatEntryPointNames
 local EnteredChatFromEntryPointFunction = SocialCommonModule.Actions.EnteredChatFromEntryPoint
 local NotificationType = RobloxAppEnumsModule.NotificationType
 local FFlagGameJoinCardChatEntryPointModule = require(GameJoinCard.Flags.FFlagGameJoinCardChatEntryPoint)
+local FFlagMobileGameJoinCardServerChatWithNameModule = require(GameJoinCard.Flags.FFlagMobileGameJoinCardServerChatWithName)
 local GameJoinCardButtonAction = require(GameJoinCard.Analytics.AnalyticsConstants).GameJoinCardButtonAction
 local UseGameJoinCardAnalyticsModule = require(GameJoinCard.Analytics.useGameJoinCardAnalytics)
 local _ = require(script.Parent.Types)
@@ -17,13 +18,13 @@ local GetTelemetryFieldsModule = require(script.Parent.getTelemetryFields)
 
 return {
 	[UserCtaAction.Chat] = function(p1)
-		-- upvalues: UserCtaAction (copy), ButtonVariant (copy), InputSize (copy), UseGameJoinCardAnalyticsModule (copy), GameJoinCardButtonAction (copy), GetTelemetryFieldsModule (copy), FFlagGameJoinCardChatEntryPointModule (copy), EnteredChatFromEntryPointFunction (copy), ChatEntryPointNames (copy), NotificationType (copy)
+		-- upvalues: UserCtaAction (copy), ButtonVariant (copy), InputSize (copy), FFlagMobileGameJoinCardServerChatWithNameModule (copy), UseGameJoinCardAnalyticsModule (copy), GameJoinCardButtonAction (copy), GetTelemetryFieldsModule (copy), FFlagGameJoinCardChatEntryPointModule (copy), EnteredChatFromEntryPointFunction (copy), ChatEntryPointNames (copy), NotificationType (copy)
 		return {
 			id = UserCtaAction.Chat,
 			variant = ButtonVariant.Standard,
 			inputSize = InputSize.Medium,
 			width = UDim.new(1, 0),
-			text = p1.localized[UserCtaAction.Chat],
+			text = FFlagMobileGameJoinCardServerChatWithNameModule and p1.localized.chatWithName or p1.localized[UserCtaAction.Chat],
 			onActivated = function()
 				-- upvalues: p1 (copy), UseGameJoinCardAnalyticsModule (upval), GameJoinCardButtonAction (upval), GetTelemetryFieldsModule (upval), FFlagGameJoinCardChatEntryPointModule (upval), EnteredChatFromEntryPointFunction (upval), ChatEntryPointNames (upval), NotificationType (upval)
 				if p1.userId == "" then return end

@@ -26,11 +26,12 @@ local FFlagEnableUserRecentActivityEntryPoint = require(Parent.SharedFlags).FFla
 local ResponsiveModule = require(Parent.Responsive)
 local AppPage = require(Parent.RobloxAppEnums).AppPage
 local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local FFlagProfilePlatformUniformIdentityBadgeSize = require(Parent.SharedFlags).FFlagProfilePlatformUniformIdentityBadgeSize
 local UseIsRobloxSubscriberFunction = require(Parent.UserProfiles).Hooks.useIsRobloxSubscriber
 local GetBuilderIconForCurrentPlatformFunction = FoundationModule.Utility.getBuilderIconForCurrentPlatform
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), UseDynamicSizeMarginModule (copy), UseLocalUserIdFunction (copy), ConvertToFoundationPresenceEnumFunction (copy), FFlagEnableFontStylisticAlternativesOnSocialScreens (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), FFlagAddPlatformNameToProfileHeader (copy), GetBuilderIconForCurrentPlatformFunction (copy), FFlagEnableBlackbirdCheck (copy), UseIsRobloxSubscriberFunction (copy), FFlagDisableCopyUsernameOnConsole (copy), ResponsiveModule (copy), FFlagEnableUserRecentActivityEntryPoint (copy), UseCurrentProfileFriendStatusModule (copy), EnumsModule (copy), UseNavigationFunction (copy), AppPage (copy), Default (copy), Contexts (copy), SetCurrentToastMessageFunction (copy), IconsActionsEditCopy (copy), ConstantsModule (copy), UserTile (copy), LayoutMode (copy)
+	-- upvalues: UseTokensFunction (copy), UseDynamicSizeMarginModule (copy), UseLocalUserIdFunction (copy), ConvertToFoundationPresenceEnumFunction (copy), FFlagEnableFontStylisticAlternativesOnSocialScreens (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), FFlagAddPlatformNameToProfileHeader (copy), GetBuilderIconForCurrentPlatformFunction (copy), FFlagEnableBlackbirdCheck (copy), UseIsRobloxSubscriberFunction (copy), FFlagDisableCopyUsernameOnConsole (copy), ResponsiveModule (copy), FFlagEnableUserRecentActivityEntryPoint (copy), UseCurrentProfileFriendStatusModule (copy), EnumsModule (copy), UseNavigationFunction (copy), AppPage (copy), Default (copy), Contexts (copy), SetCurrentToastMessageFunction (copy), IconsActionsEditCopy (copy), ConstantsModule (copy), UserTile (copy), FFlagProfilePlatformUniformIdentityBadgeSize (copy), FoundationModule (copy), LayoutMode (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseDynamicSizeMarginModuleResult, UseDynamicSizeMarginModuleResult2 = UseDynamicSizeMarginModule()
 	local UserId = p1.userId
@@ -83,6 +84,7 @@ return function(p1)
 			isVerified = p1.isVerified,
 			isPremium = p1.isPremium,
 			isRobloxAdmin = p1.isRobloxAdmin,
+			badgeSize = if FFlagProfilePlatformUniformIdentityBadgeSize then FoundationModule.Enums.IconSize.Medium else nil,
 			subtitle = if p1.username and p1.username ~= "" then if FFlagEnableFontStylisticAlternativesOnSocialScreens then `<font features="zero, ss03">@{p1.username}</font>` else "@" .. p1.username else "",
 			contextualInfo = if FFlagAddPlatformNameToProfileHeader then p1.platformName else nil,
 			contextualInfoIcon = if FFlagAddPlatformNameToProfileHeader then UseMemoResult else nil,

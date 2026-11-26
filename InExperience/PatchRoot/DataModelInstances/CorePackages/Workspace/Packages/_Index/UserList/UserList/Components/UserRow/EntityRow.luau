@@ -6,9 +6,10 @@ local _ = require(UserList.Common.Types)
 local UserRowModule = require(script.Parent.UserRow)
 local ContactRowModule = require(script.Parent.ContactRow)
 local FFlagUserListCtaIntegrationEnabled = require(Parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
+local FFlagUserListClientRowProps = require(Parent.SharedFlags).FFlagUserListClientRowProps
 
 return ReactModule.memo(function(p1)
-	-- upvalues: ReactModule (copy), EnumsModule (copy), ContactRowModule (copy), UserRowModule (copy), FFlagUserListCtaIntegrationEnabled (copy)
+	-- upvalues: ReactModule (copy), EnumsModule (copy), ContactRowModule (copy), UserRowModule (copy), FFlagUserListCtaIntegrationEnabled (copy), FFlagUserListClientRowProps (copy)
 	local Entity = p1.entity
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: p1 (copy), Entity (copy)
@@ -43,11 +44,12 @@ return ReactModule.memo(function(p1)
 		shouldShowNewIndicator = p1.shouldShowNewIndicator,
 		trailingContent = p1.trailingContent,
 		configs = p1.configs,
-		primaryCtaEnum = p1.primaryCtaEnum,
-		secondaryCtaEnum = p1.secondaryCtaEnum,
-		onCtaSuccess = p1.onCtaSuccess,
-		contextualInfoSource = p1.contextualInfoSource,
-		onCtaToast = p1.onCtaToast,
-		friendshipOriginSourceType = p1.friendshipOriginSourceType
+		primaryClientAction = if FFlagUserListClientRowProps then p1.primaryClientAction else nil,
+		secondaryClientAction = if FFlagUserListClientRowProps then p1.secondaryClientAction else nil,
+		onClientActionSuccess = if FFlagUserListClientRowProps then p1.onClientActionSuccess else nil,
+		contextualInfoSource = if FFlagUserListClientRowProps then p1.contextualInfoSource else nil,
+		rowSize = if FFlagUserListClientRowProps then p1.rowSize else nil,
+		showToast = if FFlagUserListClientRowProps then p1.showToast else nil,
+		friendshipOriginSourceType = if FFlagUserListClientRowProps then p1.friendshipOriginSourceType else nil
 	})
 end)

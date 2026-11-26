@@ -1,8 +1,14 @@
 ﻿local Parent = script.Parent.Parent
-local _ = require(Parent.ChatUIPrimitives)
+local ChatUIPrimitivesModule = require(Parent.ChatUIPrimitives)
 local HttpService = game:GetService("HttpService")
 local GetFFlagExpChatProtectedChatInternalAPIsFunction = require(Parent.SharedFlags).getFFlagExpChatProtectedChatInternalAPIs
 local GetTextAndTranslationModule = require(script.Parent.getTextAndTranslation)
+local FFlagExpChatTCWMessageListModule = require(script.Parent.Flags.FFlagExpChatTCWMessageList)
+local FFlagExpChatMessageListFinishIntervals = ChatUIPrimitivesModule.Flags.FFlagExpChatMessageListFinishIntervals
+
+local function _(Text: string): boolean
+	return Text ~= nil and string.sub(Text, 1, 7) == "Roblox."
+end
 
 local function createUserMessage(UserMessage)
 	return {
@@ -49,11 +55,26 @@ return {
 		}
 	end,
 	createSystemMessageFromTextChatMessage = function(TextChatMessageInstance)
-		-- upvalues: GetFFlagExpChatProtectedChatInternalAPIsFunction (copy)
+		-- upvalues: GetFFlagExpChatProtectedChatInternalAPIsFunction (copy), FFlagExpChatTCWMessageListModule (copy), FFlagExpChatMessageListFinishIntervals (copy)
+		local TextInternal = if GetFFlagExpChatProtectedChatInternalAPIsFunction() then TextChatMessageInstance.TextInternal else TextChatMessageInstance.Text
+		
+		if FFlagExpChatTCWMessageListModule and FFlagExpChatMessageListFinishIntervals then
+			local Metadata: string = TextChatMessageInstance.Metadata
+			
+			if Metadata == nil or string.sub(Metadata, 1, 7) ~= "Roblox." then
+				return {
+					messageType = "system-experience",
+					messageId = TextChatMessageInstance.MessageId,
+					content = TextInternal,
+					timestamp = TextChatMessageInstance.Timestamp,
+					textChatMessageInstance = TextChatMessageInstance
+				}
+			end
+		end
 		return {
 			messageType = "system-roblox",
 			messageId = TextChatMessageInstance.MessageId,
-			content = if GetFFlagExpChatProtectedChatInternalAPIsFunction() then TextChatMessageInstance.TextInternal else TextChatMessageInstance.Text,
+			content = TextInternal,
 			timestamp = TextChatMessageInstance.Timestamp,
 			textChatMessageInstance = TextChatMessageInstance
 		}

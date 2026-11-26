@@ -1,8 +1,6 @@
 ﻿local DataHydrationTypesModule = require(script.DataHydrationTypes)
 local SharedFlagsModule = require(script.Parent.SharedFlags)
-local FFlagSduiLeaderboardComponent = SharedFlagsModule.FFlagSduiLeaderboardComponent
 local FFlagSduiBuyRobuxHydration = SharedFlagsModule.FFlagSduiBuyRobuxHydration
-local NotificationBadgeModule = require(script.NotificationBadge)
 local LeaderboardStatsModule = require(script.LeaderboardStats)
 local BuyRobuxModule = require(script.BuyRobux)
 
@@ -34,10 +32,8 @@ return {
 	Song = require(script.Song),
 	UserSettings = require(script.UserSettings),
 	UserProfile = require(script.UserProfile),
-	Community = require(script.Community),
 	Group = require(script.Group),
-	CommunityUserMembership = require(script.CommunityUserMembership),
-	NotificationBadge = if SharedFlagsModule.FFlagSduiNotificationBadgeHydration then NotificationBadgeModule else nil,
-	LeaderboardStats = if FFlagSduiLeaderboardComponent then LeaderboardStatsModule else nil,
+	NotificationBadge = require(script.NotificationBadge),
+	LeaderboardStats = if SharedFlagsModule.FFlagSduiLeaderboardComponent then LeaderboardStatsModule else nil,
 	BuyRobux = if FFlagSduiBuyRobuxHydration then BuyRobuxModule else nil
 }

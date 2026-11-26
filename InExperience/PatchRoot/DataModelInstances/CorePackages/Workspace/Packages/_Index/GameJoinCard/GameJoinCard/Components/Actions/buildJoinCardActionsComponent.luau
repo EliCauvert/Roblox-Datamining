@@ -1,13 +1,13 @@
 ﻿local Parent = script:FindFirstAncestor("GameJoinCard").Parent
 local _ = require(Parent.React)
 local UserCtaAction = require(Parent.UserCtaCommon).Enums.UserCtaAction
+local FFlagCoplayHistoryGameJoinCard = require(Parent.SharedFlags).FFlagCoplayHistoryGameJoinCard
 local _ = require(script.Parent.Types)
 
-return function(List, p1, Callback1, Callback)
-	-- upvalues: UserCtaAction (copy)
+return function(List, p1, Callback1, Callback, p2)
+	-- upvalues: FFlagCoplayHistoryGameJoinCard (copy), UserCtaAction (copy)
 	local RenderResults = {}
-	local Config = nil
-	
+	local Config = if FFlagCoplayHistoryGameJoinCard and p2 then { title = p1.recentCoplay } else nil
 	for i, value in List do
 		if Config == nil then
 			if value.id == UserCtaAction.JoinExperience then

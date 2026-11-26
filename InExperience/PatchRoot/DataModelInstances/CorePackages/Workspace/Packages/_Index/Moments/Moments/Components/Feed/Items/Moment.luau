@@ -11,7 +11,8 @@ local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagMomentsServeEDPVideos = SharedFlagsModule.FFlagMomentsServeEDPVideos
 local FFlagMomentsOptimisticProfilePending = SharedFlagsModule.FFlagMomentsOptimisticProfilePending
 local FFlagMomentsHideOfficialContentLabel = SharedFlagsModule.FFlagMomentsHideOfficialContentLabel
-local FStringMomentsOfficialContentCreatorIdModule = require(Moments.Flags.FStringMomentsOfficialContentCreatorId)
+local FStringMomentsOfficialContentCreatorIdsModule = require(Moments.Flags.FStringMomentsOfficialContentCreatorIds)
+local ParseUserAllowListModule = require(Moments.Utils.parseUserAllowList)
 local GetMomentsPreferencesStoreModule = require(Moments.Stores.GetMomentsPreferencesStore)
 local GetFFlagMomentsRenderPostAssetsModule = require(Parent.MomentsCommon.GetFFlagMomentsRenderPostAssets)
 local FFlagMomentsAvatarLookTryOn = SharedFlagsModule.FFlagMomentsAvatarLookTryOn
@@ -20,7 +21,6 @@ local FFlagMomentsRecommendationContentTypeModule = require(Moments.Flags.FFlagM
 local ToMediaItemModule = require(Moments.Components.Feed.Media.toMediaItem)
 local CommentsModule = require(Moments.Components.Comments)
 local MomentMediaView = MomentsCommonModule.Media.MomentMediaView
-local Number: number? = tonumber(FStringMomentsOfficialContentCreatorIdModule)
 
 local function momentAttribution(Moment)
 	-- upvalues: MakeRecommendationAttributionModule (copy), FFlagMomentsRecommendationContentTypeModule (copy)
@@ -54,7 +54,7 @@ return {
 			return momentAttribution(p1.moment)
 		end,
 		render = function(p1, _)
-			-- upvalues: GetFFlagMomentsRenderPostAssetsModule (copy), ToMediaItemModule (copy), ReactModule (copy), MomentMediaView (copy), GetMomentsPreferencesStoreModule (copy), MakeRecommendationAttributionModule (copy), FFlagMomentsRecommendationContentTypeModule (copy), FFlagMomentsAvatarLookTryOn (copy), FFlagMomentsHideOfficialContentLabel (copy), Number (copy), FFlagMomentsOptimisticProfilePending (copy), MomentsTypesModule (copy), SharedFlagsModule (copy), CommentsModule (copy), MomentItemModule (copy), createMediaSurface (copy), FFlagMomentsServeEDPVideos (copy), MomentItemSkeletonModule (copy)
+			-- upvalues: GetFFlagMomentsRenderPostAssetsModule (copy), ToMediaItemModule (copy), ReactModule (copy), MomentMediaView (copy), GetMomentsPreferencesStoreModule (copy), MakeRecommendationAttributionModule (copy), FFlagMomentsRecommendationContentTypeModule (copy), FFlagMomentsAvatarLookTryOn (copy), FFlagMomentsHideOfficialContentLabel (copy), ParseUserAllowListModule (copy), FStringMomentsOfficialContentCreatorIdsModule (copy), FFlagMomentsOptimisticProfilePending (copy), MomentsTypesModule (copy), SharedFlagsModule (copy), CommentsModule (copy), MomentItemModule (copy), createMediaSurface (copy), FFlagMomentsServeEDPVideos (copy), MomentItemSkeletonModule (copy)
 			local Moment = p1.moment
 			
 			if Moment == nil then
@@ -86,7 +86,7 @@ return {
 					universeId = Moment.metadata.universeId or 0,
 					outfitId = if FFlagMomentsAvatarLookTryOn then Moment.metadata.outfitId else nil,
 					isSponsored = Moment.metadata.partnerUploadType == "influencer",
-					isOfficialContent = if FFlagMomentsHideOfficialContentLabel then Number ~= nil and Moment.creatorId == Number else nil,
+					isOfficialContent = if FFlagMomentsHideOfficialContentLabel then Moment.creatorId ~= nil and ParseUserAllowListModule(FStringMomentsOfficialContentCreatorIdsModule, Moment.creatorId) else nil,
 					description = Moment.metadata.description,
 					isModerated = Moment.isModerated == true,
 					isPending = FFlagMomentsOptimisticProfilePending and Moment.status == MomentsTypesModule.Enums.MomentStatus.Pending,

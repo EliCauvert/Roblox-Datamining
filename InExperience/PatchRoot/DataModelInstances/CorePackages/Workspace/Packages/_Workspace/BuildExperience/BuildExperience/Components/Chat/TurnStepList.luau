@@ -18,7 +18,10 @@ return function(Frame)
 			index = row.index,
 			title = row.title,
 			body = row.body,
+			markdown = row.markdown,
+			answers = row.answers,
 			isRunning = row.isRunning,
+			isFailed = row.isFailed,
 			isLast = row.isLast,
 			isExpanded = row.isExpanded,
 			onToggle = row.onToggle

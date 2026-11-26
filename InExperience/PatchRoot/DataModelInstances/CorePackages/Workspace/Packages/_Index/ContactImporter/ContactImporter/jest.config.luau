@@ -1,4 +1,5 @@
-﻿local JestConfigsModule = require(script.Parent.Parent.Dev.JestConfigs)
+﻿local Parent = script.Parent
+local JestConfigsModule = require(Parent.Parent.Dev.JestConfigs)
 
 return {
 	displayName = "ContactImporter",
@@ -7,6 +8,8 @@ return {
 		JestConfigsModule.setupFiles.LogHandler,
 		JestConfigsModule.setupFiles.UIBloxInitializer,
 		JestConfigsModule.setupFiles.createPromiseRejectionHandler(),
+		Parent.TestHelpers.NetworkImplHandler,
+		JestConfigsModule.setupFiles.RemoveLeakedScreenGuis,
 		JestConfigsModule.setupFiles.RetryTimes
 	}
 }

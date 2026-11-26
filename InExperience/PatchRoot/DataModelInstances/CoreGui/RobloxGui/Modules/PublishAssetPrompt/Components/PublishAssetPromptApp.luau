@@ -21,7 +21,6 @@ local FocusNavigationUtilsModule = require(CorePackages.Workspace.Packages.Focus
 local Provider = FocusNavigationUtilsModule.FocusNavigableSurfaceRegistry.Provider
 local FocusRoot = FocusNavigationUtilsModule.FocusRoot
 local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local GetFFlagUploadMakeupSupportModule = require(Parent.Parent.Flags.GetFFlagUploadMakeupSupport)
 local PublishAssetPromptApp = RoactModule.PureComponent:extend("PublishAssetPromptApp")
 PublishAssetPromptApp.validateProps = TModule.strictInterface({
 	assetType = TModule.optional(TModule.enum(Enum.AssetType)),
@@ -48,8 +47,8 @@ function PublishAssetPromptApp.init(p1)
 end
 
 function PublishAssetPromptApp.render(p1)
-	-- upvalues: RoactModule (copy), ResultModalModule (copy), PromptTypeModule (copy), PublishAssetPromptSingleStepModule (copy), PublishAvatarPromptModule (copy), PublishAvatarAssetPromptModule (copy), GetFFlagUploadMakeupSupportModule (copy), PublishMakeupLookPromptModule (copy), ExternalEventConnection (copy), UserInputService (copy), GetInputGroupFunction (copy), InputTypeModule (copy), RoactGamepadModule (copy), SelectionCursorProvider (copy), ReactFocusNavigationModule (copy), NewResult (copy), Provider (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
-	local Element = if p1.props.resultModalType then RoactModule.createElement(ResultModalModule, { screenSize = p1.state.screenSize }) elseif p1.props.assetInstance then if p1.props.promptType == PromptTypeModule.PublishAssetSingleStep then RoactModule.createElement(PublishAssetPromptSingleStepModule, { screenSize = p1.state.screenSize }) else nil elseif p1.props.promptType == PromptTypeModule.PublishAvatar then RoactModule.createElement(PublishAvatarPromptModule, { screenSize = p1.state.screenSize }) elseif p1.props.promptType == PromptTypeModule.PublishAvatarAsset then RoactModule.createElement(PublishAvatarAssetPromptModule, { screenSize = p1.state.screenSize }) elseif GetFFlagUploadMakeupSupportModule() and p1.props.promptType == PromptTypeModule.PublishMakeupLook then RoactModule.createElement(PublishMakeupLookPromptModule, { screenSize = p1.state.screenSize }) else nil
+	-- upvalues: RoactModule (copy), ResultModalModule (copy), PromptTypeModule (copy), PublishAssetPromptSingleStepModule (copy), PublishAvatarPromptModule (copy), PublishAvatarAssetPromptModule (copy), PublishMakeupLookPromptModule (copy), ExternalEventConnection (copy), UserInputService (copy), GetInputGroupFunction (copy), InputTypeModule (copy), RoactGamepadModule (copy), SelectionCursorProvider (copy), ReactFocusNavigationModule (copy), NewResult (copy), Provider (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
+	local Element = if p1.props.resultModalType then RoactModule.createElement(ResultModalModule, { screenSize = p1.state.screenSize }) elseif p1.props.assetInstance then if p1.props.promptType == PromptTypeModule.PublishAssetSingleStep then RoactModule.createElement(PublishAssetPromptSingleStepModule, { screenSize = p1.state.screenSize }) else nil elseif p1.props.promptType == PromptTypeModule.PublishAvatar then RoactModule.createElement(PublishAvatarPromptModule, { screenSize = p1.state.screenSize }) elseif p1.props.promptType == PromptTypeModule.PublishAvatarAsset then RoactModule.createElement(PublishAvatarAssetPromptModule, { screenSize = p1.state.screenSize }) elseif p1.props.promptType == PromptTypeModule.PublishMakeupLook then RoactModule.createElement(PublishMakeupLookPromptModule, { screenSize = p1.state.screenSize }) else nil
 	
 	return if Element == nil then nil else RoactModule.createElement("ScreenGui", {
 		IgnoreGuiInset = true,

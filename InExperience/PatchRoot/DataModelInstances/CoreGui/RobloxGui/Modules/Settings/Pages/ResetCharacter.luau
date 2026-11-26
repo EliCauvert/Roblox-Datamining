@@ -1,14 +1,11 @@
 ﻿local AvatarEditorService = game:GetService("AvatarEditorService")
 local ContextActionService = game:GetService("ContextActionService")
 local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local GuiService = game:GetService("GuiService")
 local Players = game:GetService("Players")
 local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
 local CorePackages = game:GetService("CorePackages")
 local LocalizationService = game:GetService("LocalizationService")
 local UtilityModule = require(RobloxGui.Modules.Settings.Utility)
-local ThemeModule = require(RobloxGui.Modules.Settings.Theme)
-local CreateFunction = require(CorePackages.Workspace.Packages.AppCommonLib).Create
 local CryoModule = require(CorePackages.Packages.Cryo)
 local ReactModule = require(CorePackages.Packages.React)
 local ReactRobloxModule = require(CorePackages.Packages.ReactRoblox)
@@ -32,7 +29,6 @@ local NoFFlagResponsiveUnitsDeprecateTenFoot: boolean = require(RobloxGui.Module
 local FFlagEnableConsoleExpControls = SharedFlagsModule.FFlagEnableConsoleExpControls
 local FFlagChromeShortcutRemoveLeaveOnRespawnPage = SharedFlagsModule.FFlagChromeShortcutRemoveLeaveOnRespawnPage
 local FFlagRespawnActionChromeShortcutTelemetryModule = require(RobloxGui.Modules.Chrome.Flags.FFlagRespawnActionChromeShortcutTelemetry)
-local FFlagRefactorMenuConfirmationButtonsModule = require(RobloxGui.Modules.Settings.Flags.FFlagRefactorMenuConfirmationButtons)
 local FFlagConfirmationButtonsUseGreyButtonsModule = require(RobloxGui.Modules.Settings.Flags.FFlagConfirmationButtonsUseGreyButtons)
 local FFlagRenameRespawnConfirmationPage = SharedFlagsModule.FFlagRenameRespawnConfirmationPage
 local ConstantsModule1 = require(RobloxGui.Modules:WaitForChild("InGameMenu"):WaitForChild("Resources"):WaitForChild("Constants"))
@@ -122,7 +118,7 @@ local function ResetCharacterContainer(p1)
 end
 
 v1 = (function()
-	-- upvalues: RobloxGui (copy), RbxAnalyticsService (copy), ConstantsModule1 (copy), FFlagRefactorMenuConfirmationButtonsModule (copy), CreateFunction (copy), FFlagRenameRespawnConfirmationPage (copy), ThemeModule (copy), NoFFlagResponsiveUnitsDeprecateTenFoot (copy), UtilityModule (copy), Players (copy), FFlagRespawnActionChromeShortcutTelemetryModule (copy), CryoModule (copy), AvatarEditorService (copy), FFlagEnableConsoleExpControls (copy), ReactRobloxModule (copy), ReactModule (copy), ResetCharacterContainer (copy)
+	-- upvalues: RobloxGui (copy), RbxAnalyticsService (copy), ConstantsModule1 (copy), Players (copy), FFlagRespawnActionChromeShortcutTelemetryModule (copy), CryoModule (copy), AvatarEditorService (copy), FFlagEnableConsoleExpControls (copy), ReactRobloxModule (copy), ReactModule (copy), ResetCharacterContainer (copy)
 	local NewPage = require(RobloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
 	
 	function NewPage.DontResetCharFunc(IsUserInputTypeMatch)
@@ -153,48 +149,8 @@ v1 = (function()
 	NewPage.Page.Name = "ResetCharacter"
 	NewPage.ShouldShowBottomBar = false
 	NewPage.ShouldShowHubBar = false
-	local Parent = nil
 	
-	if not FFlagRefactorMenuConfirmationButtonsModule then
-		local Parent1 = CreateFunction("TextLabel")({
-			Name = "ResetCharacterText",
-			BackgroundTransparency = 1,
-			TextWrapped = true,
-			ZIndex = 2,
-			Text = if FFlagRenameRespawnConfirmationPage then "Are you sure you want to respawn your character?" else "Are you sure you want to reset your character?",
-			Font = ThemeModule.font(Enum.Font.SourceSansBold, "Confirmation"),
-			FontSize = ThemeModule.fontSize(Enum.FontSize.Size36, "Confirmation"),
-			TextColor3 = Color3.new(1, 1, 1),
-			Size = UDim2.new(1, 0, 0, 200),
-			Parent = NewPage.Page,
-			Position = NoFFlagResponsiveUnitsDeprecateTenFoot and UDim2.new(0, 0, 0, 100) or UDim2.new(0, 0, 0, 0)
-		})
-		Parent = CreateFunction("Frame")({
-			Name = "ResetButtonContainer",
-			BackgroundTransparency = 1,
-			Parent = Parent1,
-			Size = UDim2.new(1, 0, 0, 400),
-			Position = UDim2.new(0, 0, 1, 0)
-		})
-		local _ = CreateFunction("UIGridLayout")({
-			Name = "ResetButtonsLayout",
-			CellSize = NoFFlagResponsiveUnitsDeprecateTenFoot and UDim2.new(0, 300, 0, 80) or UDim2.new(0, 200, 0, 50),
-			CellPadding = UDim2.new(0, 20, 0, 20),
-			FillDirection = Enum.FillDirection.Horizontal,
-			HorizontalAlignment = Enum.HorizontalAlignment.Center,
-			SortOrder = Enum.SortOrder.LayoutOrder,
-			VerticalAlignment = Enum.VerticalAlignment.Top,
-			Parent = Parent
-		})
-		
-		if UtilityModule:IsSmallTouchScreen() then
-			Parent1.FontSize = Enum.FontSize.Size24
-			Parent1.Size = UDim2.new(1, 0, 0, 100)
-		elseif NoFFlagResponsiveUnitsDeprecateTenFoot then
-			Parent1.FontSize = Enum.FontSize.Size48
-		end
-	end
-	local function v52(p1)
+	local function v46(p1)
 		-- upvalues: Players (upval), ConstantsModule1 (upval), FFlagRespawnActionChromeShortcutTelemetryModule (upval), CryoModule (upval), RbxAnalyticsService (upval)
 		local LocalPlayer = Players.LocalPlayer
 		
@@ -224,11 +180,11 @@ v1 = (function()
 	NewPage.ResetBindable = true
 	
 	local function OnResetFunction(p1)
-		-- upvalues: AvatarEditorService (upval), NewPage (copy), v52 (copy)
+		-- upvalues: AvatarEditorService (upval), NewPage (copy), v46 (copy)
 		AvatarEditorService:BustAvatarFetchCache()
 		
 		if NewPage.ResetBindable == true then
-			v52(p1)
+			v46(p1)
 		elseif NewPage.ResetBindable then
 			NewPage.ResetBindable:Fire()
 		end
@@ -240,47 +196,32 @@ v1 = (function()
 	if FFlagEnableConsoleExpControls then
 		NewPage.ResetFunction = OnResetFunction
 	end
-	if not FFlagRefactorMenuConfirmationButtonsModule then
-		NewPage.ResetCharacterButton = UtilityModule:MakeStyledButton("ResetCharacter", if FFlagRenameRespawnConfirmationPage then "Respawn" else "Reset", nil, OnResetFunction)
-		NewPage.ResetCharacterButton.NextSelectionRight = nil
-		NewPage.ResetCharacterButton.Parent = Parent
-		local DontResetCharacter = UtilityModule:MakeStyledButton("DontResetCharacter", if FFlagRenameRespawnConfirmationPage then "Don't Respawn" else "Don't Reset", nil, NewPage.DontResetCharFromButton)
-		DontResetCharacter.NextSelectionLeft = nil
-		DontResetCharacter.Parent = Parent
-		NewPage.Page.Size = UDim2.new(1, 0, 0, DontResetCharacter.AbsolutePosition.Y + DontResetCharacter.AbsoluteSize.Y)
+	function NewPage.RenderPage()
+		-- upvalues: NewPage (copy), ReactRobloxModule (upval), ReactModule (upval), ResetCharacterContainer (upval), OnResetFunction (copy)
+		NewPage.PageRoot = ReactRobloxModule.createRoot(NewPage.Page)
+		NewPage.PageRoot:render(ReactModule.createElement(ResetCharacterContainer, {
+			onResetFunction = OnResetFunction,
+			dontResetCharFromButton = NewPage.DontResetCharFromButton
+		}))
 	end
-	if FFlagRefactorMenuConfirmationButtonsModule then
-		function NewPage.RenderPage()
-			-- upvalues: NewPage (copy), ReactRobloxModule (upval), ReactModule (upval), ResetCharacterContainer (upval), OnResetFunction (copy)
-			NewPage.PageRoot = ReactRobloxModule.createRoot(NewPage.Page)
-			NewPage.PageRoot:render(ReactModule.createElement(ResetCharacterContainer, {
-				onResetFunction = OnResetFunction,
-				dontResetCharFromButton = NewPage.DontResetCharFromButton
-			}))
+	
+	function NewPage.UnmountPage()
+		-- upvalues: NewPage (copy)
+		if NewPage.PageRoot then
+			NewPage.PageRoot:unmount()
 		end
-		
-		function NewPage.UnmountPage()
-			-- upvalues: NewPage (copy)
-			if NewPage.PageRoot then
-				NewPage.PageRoot:unmount()
-			end
-		end
-		
-		NewPage.Page.Size = UDim2.new(1, 0, 0, 0)
 	end
+	
+	NewPage.Page.Size = UDim2.new(1, 0, 0, 0)
+	
 	return NewPage
 end)()
 local Flag = false
 v1.Displayed.Event:connect(function()
-	-- upvalues: Flag (ref), FFlagRefactorMenuConfirmationButtonsModule (copy), v1 (ref), GuiService (copy), FFlagEnableConsoleExpControls (copy), EnabledResult (copy), FFlagChromeShortcutRemoveLeaveOnRespawnPage (copy), ServiceModule (copy), ConstantsModule (copy), ContextActionService (copy)
+	-- upvalues: Flag (ref), v1 (ref), FFlagEnableConsoleExpControls (copy), EnabledResult (copy), FFlagChromeShortcutRemoveLeaveOnRespawnPage (copy), ServiceModule (copy), ConstantsModule (copy), ContextActionService (copy)
 	Flag = true
+	v1.RenderPage()
 	
-	if FFlagRefactorMenuConfirmationButtonsModule then
-		v1.RenderPage()
-	end
-	if not FFlagRefactorMenuConfirmationButtonsModule then
-		GuiService.SelectedCoreObject = v1.ResetCharacterButton
-	end
 	if not FFlagEnableConsoleExpControls then
 		ContextActionService:BindCoreAction("ResetCharacterAction", v1.DontResetCharFromHotkey, false, Enum.KeyCode.ButtonB)
 	elseif EnabledResult then
@@ -296,12 +237,9 @@ v1.Displayed.Event:connect(function()
 	end
 end)
 v1.Hidden.Event:connect(function()
-	-- upvalues: Flag (ref), FFlagRefactorMenuConfirmationButtonsModule (copy), v1 (ref), ContextActionService (copy)
+	-- upvalues: Flag (ref), v1 (ref), ContextActionService (copy)
 	Flag = false
-	
-	if FFlagRefactorMenuConfirmationButtonsModule then
-		v1.UnmountPage()
-	end
+	v1.UnmountPage()
 	ContextActionService:UnbindCoreAction("ResetCharacterAction")
 end)
 

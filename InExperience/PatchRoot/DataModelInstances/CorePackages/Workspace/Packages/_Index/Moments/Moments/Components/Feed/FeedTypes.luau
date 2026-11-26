@@ -7,6 +7,7 @@ local _ = require(Parent.MomentsTypes)
 local _ = require(Moments.Components.VerticalPager)
 local _ = require(Moments.Analytics.RecommendationContentType)
 local _ = require(Moments.Enums.SignalActionType)
+local _ = require(Moments.Enums.SignalPreferenceType)
 local _ = require(Moments.Enums.NavigationDestinationType)
 
 return {}

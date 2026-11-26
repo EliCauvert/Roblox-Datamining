@@ -3,6 +3,7 @@
 return {
 	isValid = TModule.strictInterface({
 		text = TModule.string,
-		iconName = TModule.optional(TModule.string)
+		iconName = TModule.optional(TModule.string),
+		richText = TModule.optional(TModule.boolean)
 	})
 }

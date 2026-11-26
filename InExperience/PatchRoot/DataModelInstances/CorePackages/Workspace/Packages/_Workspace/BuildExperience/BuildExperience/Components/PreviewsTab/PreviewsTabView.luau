@@ -6,14 +6,18 @@ local LuaSocialLibrariesDepsModule = require(Parent.LuaSocialLibrariesDeps)
 local ReactModule = require(Parent.React)
 local BuildEmptyStateModule = require(BuildExperience.Components.BuildEmptyState.BuildEmptyState)
 local ExperienceResultsLoadingSkeletonModule = require(BuildExperience.Components.MyCreationsTab.ExperienceResultsLoadingSkeleton)
+local FFlagBuildExperienceUnreadServiceModule = require(BuildExperience.Flags.FFlagBuildExperienceUnreadService)
 local List = FoundationModule.List
+local StatusIndicator = FoundationModule.StatusIndicator
 local View = FoundationModule.View
 local RefreshScrollingFrame = LuaSocialLibrariesDepsModule.SocialLibraries.config({}).Components.RefreshScrollingFrame
 local DataStatus = DataHydrationModule.DataStatus
 local InputSize = FoundationModule.Enums.InputSize
+local StatusIndicatorShape = FoundationModule.Enums.StatusIndicatorShape
+local StatusIndicatorVariant = FoundationModule.Enums.StatusIndicatorVariant
 
 return function(Frame)
-	-- upvalues: DataStatus (copy), ReactModule (copy), List (copy), ExperienceResultsLoadingSkeletonModule (copy), RefreshScrollingFrame (copy), View (copy), BuildEmptyStateModule (copy), InputSize (copy)
+	-- upvalues: DataStatus (copy), FFlagBuildExperienceUnreadServiceModule (copy), ReactModule (copy), StatusIndicator (copy), StatusIndicatorVariant (copy), StatusIndicatorShape (copy), List (copy), ExperienceResultsLoadingSkeletonModule (copy), RefreshScrollingFrame (copy), View (copy), BuildEmptyStateModule (copy), InputSize (copy)
 	local IsListStatusMatch: boolean = #Frame.rows == 0 and Frame.listStatus == DataStatus.Ready
 	local Elements = {}
 	
@@ -24,6 +28,11 @@ return function(Frame)
 				leading = { iconName = row.gameIcon },
 				title = row.title,
 				description = row.description,
+				trailing = if FFlagBuildExperienceUnreadServiceModule and row.hasUnseenAttention then ReactModule.createElement(StatusIndicator, {
+					variant = StatusIndicatorVariant.Emphasis,
+					shape = StatusIndicatorShape.Circle,
+					testId = `PreviewsTab.AttentionDot.{row.universeId}`
+				}) else nil,
 				testId = `PreviewsTab.PreviewRow.{row.universeId}`,
 				onActivated = row.onActivated
 			})

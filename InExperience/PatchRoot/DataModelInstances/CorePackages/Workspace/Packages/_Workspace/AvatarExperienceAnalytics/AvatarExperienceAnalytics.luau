@@ -56,7 +56,10 @@ return {
 		UnifiedLoggingElementNameEnums = require(script.Enums.UnifiedLoggingElementNameEnums),
 		UnifiedLoggingSectionEnums = require(script.Enums.UnifiedLoggingSectionEnums)
 	},
-	Lib = { CartIdService = require(script.Lib.CartIdService) },
+	Lib = {
+		CartIdService = require(script.Lib.CartIdService),
+		JourneySession = require(script.Lib.JourneySession)
+	},
 	Store = {
 		SeenImpressionsStore = require(script.Store.SeenImpressionsStore),
 		UnifiedEventPageStore = require(script.Store.UnifiedEventPageStore),

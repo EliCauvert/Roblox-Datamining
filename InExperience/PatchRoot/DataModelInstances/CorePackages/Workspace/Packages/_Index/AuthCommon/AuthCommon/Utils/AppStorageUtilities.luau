@@ -306,7 +306,7 @@ function AppStorageUtilitiesModule.setPreviousAccountsList(Input)
 	-- upvalues: HttpService (copy), AppStorageService (copy), AuthLocalStorageKeysModule (copy)
 	if game:GetEngineFeature("PreviousAccountsListAvailable") then
 		AppStorageService:SetItem(AuthLocalStorageKeysModule.PreviousAccountsList, (HttpService:JSONEncode(Input)))
-		AppStorageService:flush()
+		AppStorageService:Flush()
 	end
 end
 
@@ -331,7 +331,7 @@ end
 
 function AppStorageUtilitiesModule.flush()
 	-- upvalues: AppStorageService (copy)
-	AppStorageService:flush()
+	AppStorageService:Flush()
 end
 
 return AppStorageUtilitiesModule

@@ -52,6 +52,13 @@ return {
 		CommentDelete = 8,
 		CommentSectionOpen = 9
 	},
+	RecommendationPreferenceTargetType = { User = 1, Universe = 2, CustomTag = 3 },
+	RecommendationPreferenceType = {
+		AddFollow = 1,
+		RemoveFollow = 2,
+		AddMute = 3,
+		RemoveMute = 4
+	},
 	HowToCaptureModalSteps = {
 		image1 = "rbxassetid://91055014485206",
 		image2 = "rbxassetid://107813398556114",

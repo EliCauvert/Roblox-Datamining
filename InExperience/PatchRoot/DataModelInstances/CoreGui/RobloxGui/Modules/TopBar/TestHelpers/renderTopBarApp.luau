@@ -11,14 +11,12 @@ local LocalizationProvider = require(CorePackages.Workspace.Packages.Localizatio
 local RobloxAppEnumsModule = require(CorePackages.Workspace.Packages.RobloxAppEnums)
 local DesignTokenProvider = require(CorePackages.Workspace.Packages.Style).DesignTokenProvider
 local UniversalAppPolicyModule = require(CorePackages.Workspace.Packages.UniversalAppPolicy)
-local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
+local _ = require(CorePackages.Workspace.Packages.SharedFlags)
 local Parent = script.Parent.Parent
 local MenuNavigationPromptTokenMapperModule = require(Parent.TokenMappers.MenuNavigationPromptTokenMapper)
 local ReducerModule = require(Parent.Reducer)
-local TopBarAppPolicyModule = require(Parent.TopBarAppPolicy)
 local RoactAppPolicy = UniversalAppPolicyModule.RoactAppPolicy
 local AppFeaturePolicies = UniversalAppPolicyModule.AppFeaturePolicies
-local FFlagShowGameAgeRating = SharedFlagsModule.FFlagShowGameAgeRating
 local Style = {
 	themeName = "dark",
 	fontName = "gotham",
@@ -31,13 +29,11 @@ if not CoreGui.RobloxGui:FindFirstChild("SendNotificationInfo") then
 	SendNotificationInfo.Parent = CoreGui.RobloxGui
 end
 return function(p1, p2)
-	-- upvalues: RoduxModule (copy), ReducerModule (copy), RoactModule (copy), RoactRoduxModule (copy), FFlagShowGameAgeRating (copy), RoactAppPolicy (copy), TopBarAppPolicyModule (copy), AppFeaturePolicies (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), UIBloxModule (copy), Style (copy), DesignTokenProvider (copy), MenuNavigationPromptTokenMapperModule (copy), ReactSceneUnderstandingModule (copy)
+	-- upvalues: RoduxModule (copy), ReducerModule (copy), RoactModule (copy), RoactRoduxModule (copy), RoactAppPolicy (copy), AppFeaturePolicies (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), UIBloxModule (copy), Style (copy), DesignTokenProvider (copy), MenuNavigationPromptTokenMapperModule (copy), ReactSceneUnderstandingModule (copy)
 	return RoactModule.mount(RoactModule.createElement(RoactRoduxModule.StoreProvider, {
 		store = RoduxModule.Store.new(ReducerModule, nil, { RoduxModule.thunkMiddleware })
 	}, {
-		PolicyProvider = RoactModule.createElement(if FFlagShowGameAgeRating then RoactAppPolicy.Provider else TopBarAppPolicyModule.Provider, {
-			policy = if FFlagShowGameAgeRating then { AppFeaturePolicies } else { TopBarAppPolicyModule.Mapper }
-		}, {
+		PolicyProvider = RoactModule.createElement(RoactAppPolicy.Provider, { policy = { AppFeaturePolicies } }, {
 			LocalizationProvider = RoactModule.createElement(LocalizationProvider, {
 				localization = Localization.new(LocalizationService.RobloxLocaleId)
 			}, {

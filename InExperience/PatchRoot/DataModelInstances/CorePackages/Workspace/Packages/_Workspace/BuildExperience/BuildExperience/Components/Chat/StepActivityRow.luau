@@ -1,12 +1,18 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
 local FoundationModule = require(Parent.Foundation)
+local MarkdownModule = require(Parent.Markdown)
 local ReactModule = require(Parent.React)
 local ChatScrollAnchorContextModule = require(BuildExperience.Chat.ChatScrollAnchorContext)
+local FFlagBuildExperienceStepTextAnimationModule = require(BuildExperience.Flags.FFlagBuildExperienceStepTextAnimation)
 local FFlagBuildExperienceTurnWorkTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceTurnWorkTelemetry)
 local TurnWorkTelemetryContextModule = require(BuildExperience.Chat.TurnWorkTelemetryContext)
 local FFlagBuildExperienceChatAccordionScrollAnchorModule = require(BuildExperience.Flags.FFlagBuildExperienceChatAccordionScrollAnchor)
+local HeightRevealModule = if FFlagBuildExperienceStepTextAnimationModule then require(script.Parent.HeightReveal) else nil
 local EscapeRichTextModule = require(BuildExperience.utils.escapeRichText)
+local GetMarkdownRendererPropsModule = require(BuildExperience.utils.getMarkdownRendererProps)
+local _ = require(BuildExperience.Chat.chatTypes)
+local MarkdownViewer = MarkdownModule.Components.MarkdownViewer
 local Icon = FoundationModule.Icon
 local Progress = FoundationModule.Progress
 local Text = FoundationModule.Text
@@ -21,19 +27,66 @@ local function _(p1): string
 	return `#{p1.Color3:ToHex()}`
 end
 
+local function getBodyText(Body, Answers)
+	-- upvalues: EscapeRichTextModule (copy)
+	if Answers == nil or #Answers == 0 then
+		return Body
+	end
+	local List = {}
+	
+	if Body ~= nil then
+		table.insert(List, EscapeRichTextModule(Body))
+	end
+	for _, answer in Answers do
+		local List1 = { `<b>{EscapeRichTextModule(answer.question)}</b>` }
+		
+		for _, answer1 in answer.answers do
+			table.insert(List1, `<font transparency="0.3">{EscapeRichTextModule(answer1)}</font>`)
+		end
+		table.insert(List, table.concat(List1, "\n"))
+	end
+	return table.concat(List, "\n\n")
+end
+
 return function(Frame)
-	-- upvalues: FoundationModule (copy), ReactModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), FFlagBuildExperienceTurnWorkTelemetryModule (copy), TurnWorkTelemetryContextModule (copy), EscapeRichTextModule (copy), View (copy), StateLayerAffordance (copy), Text (copy), Progress (copy), ProgressShape (copy), ProgressSize (copy), Icon (copy), IconName (copy), IconSize (copy)
+	-- upvalues: FoundationModule (copy), ReactModule (copy), getBodyText (copy), GetMarkdownRendererPropsModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), FFlagBuildExperienceTurnWorkTelemetryModule (copy), TurnWorkTelemetryContextModule (copy), EscapeRichTextModule (copy), FFlagBuildExperienceStepTextAnimationModule (copy), View (copy), Text (copy), MarkdownViewer (copy), StateLayerAffordance (copy), Icon (copy), IconName (copy), IconSize (copy), Progress (copy), ProgressShape (copy), ProgressSize (copy), HeightRevealModule (copy)
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	local UseBindingResult = ReactModule.useBinding(0)
-	local Size500: number = UseTokensResult.Size.Size_500
-	local Body = Frame.body
-	local HasBody = Body ~= nil
+	local Size500 = UseTokensResult.Size.Size_500
+	local Answers = Frame.answers
+	local RichText: boolean = Answers ~= nil and #Answers > 0
+	local BodyText = getBodyText(Frame.body, Answers)
+	local Markdown = Frame.markdown
+	local HasBodyText: boolean = BodyText ~= nil or Markdown ~= nil
+	local UseMemoResult = ReactModule.useMemo(function()
+		-- upvalues: GetMarkdownRendererPropsModule (upval), UseTokensResult (copy)
+		return GetMarkdownRendererPropsModule(UseTokensResult, UseTokensResult.Color.Content.Muted)
+	end, { UseTokensResult })
 	local IsIsExpanded = Frame.isExpanded == true
 	local OnToggleFunction = Frame.onToggle
 	local UseRefResult = if FFlagBuildExperienceChatAccordionScrollAnchorModule then ReactModule.useRef(nil) else nil
 	local UseContextResult = if FFlagBuildExperienceChatAccordionScrollAnchorModule then ReactModule.useContext(ChatScrollAnchorContextModule) else nil
 	local UseContextResult1 = if FFlagBuildExperienceTurnWorkTelemetryModule then ReactModule.useContext(TurnWorkTelemetryContextModule) else nil
 	local Index = Frame.index
+	
+	if FFlagBuildExperienceTurnWorkTelemetryModule then
+		local HasBodyText1: boolean = IsIsExpanded and HasBodyText
+		local UseRefResult1 = ReactModule.useRef(Index)
+		UseRefResult1.current = Index
+		ReactModule.useEffect(function()
+			-- upvalues: UseContextResult1 (copy), HasBodyText1 (copy), UseRefResult1 (copy)
+			if UseContextResult1 == nil or not HasBodyText1 then
+				return nil
+			else
+				local OpenStepSpanResult = UseContextResult1.openStepSpan(UseRefResult1.current)
+				
+				return function()
+					-- upvalues: UseContextResult1 (upval), OpenStepSpanResult (copy)
+					UseContextResult1.closeStepSpan(OpenStepSpanResult)
+				end
+			end
+		end, { UseContextResult1, HasBodyText1 })
+	end
 	local UseResult = ReactModule.useCallback(function()
 		-- upvalues: FFlagBuildExperienceChatAccordionScrollAnchorModule (upval), UseContextResult (copy), UseRefResult (copy), UseContextResult1 (copy), Index (copy), IsIsExpanded (copy), OnToggleFunction (copy)
 		if FFlagBuildExperienceChatAccordionScrollAnchorModule and UseContextResult ~= nil and UseRefResult ~= nil then
@@ -58,6 +111,43 @@ return function(Frame)
 	if Match2 ~= nil and Match2 ~= "" then
 		Text1 ..= ` <font color="{`#{UseTokensResult.Color.Content.Muted.Color3:ToHex()}`}">{EscapeRichTextModule(Match2)}</font>`
 	end
+	local Element = if FFlagBuildExperienceStepTextAnimationModule or IsIsExpanded and (BodyText ~= nil or Markdown ~= nil) then ReactModule.createElement(View, {
+		LayoutOrder = 2,
+		tag = "row gap-small size-full-0 auto-y padding-y-xxsmall"
+	}, {
+		Gutter = ReactModule.createElement(View, {
+			LayoutOrder = 1,
+			tag = "self-stretch",
+			Size = UDim2.fromOffset(Size500, 0)
+		}, {
+			Rail = if Frame.isLast == true and not RichText then nil else ReactModule.createElement(View, {
+				testId = "StepActivityRow.Rail",
+				tag = "bg-shift-200",
+				AnchorPoint = Vector2.new(0.5, 0),
+				Position = UDim2.fromScale(0.5, 0),
+				Size = UDim2.new(0, 1, 1, 0)
+			})
+		}),
+		Content = ReactModule.createElement(View, { LayoutOrder = 2, tag = "col gap-small fill auto-y" }, {
+			Text = if BodyText == nil then nil else ReactModule.createElement(Text, {
+				LayoutOrder = 1,
+				testId = "StepActivityRow.Body",
+				tag = "size-full-0 auto-y text-body-small text-wrap text-align-x-left content-muted",
+				RichText = RichText,
+				Text = BodyText
+			}),
+			Markdown = if Markdown == nil then nil else ReactModule.createElement(MarkdownViewer, {
+				Markdown = Markdown,
+				WrapperProps = {
+					LayoutOrder = 2,
+					tag = "col size-full-0 auto-y text-body-small content-muted",
+					testId = "StepActivityRow.Markdown"
+				},
+				MarkdownRendererProps = UseMemoResult
+			})
+		})
+	}) else nil
+	
 	return ReactModule.createElement(View, {
 		tag = "col size-full-0 auto-y",
 		LayoutOrder = Frame.LayoutOrder
@@ -67,7 +157,7 @@ return function(Frame)
 			tag = "row align-y-top gap-small size-full-0 auto-y",
 			testId = "StepActivityRow.Summary",
 			ref = UseRefResult,
-			onActivated = if HasBody then UseResult else nil,
+			onActivated = if HasBodyText then UseResult else nil,
 			stateLayer = { affordance = StateLayerAffordance.None }
 		}, {
 			Marker = ReactModule.createElement(View, {
@@ -75,10 +165,17 @@ return function(Frame)
 				tag = "align-x-center align-y-center",
 				Size = UDim2.fromOffset(Size500, Size500)
 			}, {
-				Number = if Frame.isRunning == true then nil else ReactModule.createElement(Text, {
-					testId = "StepActivityRow.Number",
-					tag = "auto-xy text-body-small content-default",
-					Text = tostring(Frame.index)
+				Check = if Frame.isRunning == true or Frame.isFailed == true then nil else ReactModule.createElement(Icon, {
+					testId = "StepActivityRow.Check",
+					name = IconName.Check,
+					size = IconSize.Medium,
+					style = UseTokensResult.Color.Content.Default
+				}),
+				Failed = if Frame.isRunning == true or Frame.isFailed ~= true then nil else ReactModule.createElement(Icon, {
+					testId = "StepActivityRow.Failed",
+					name = IconName.X,
+					size = IconSize.Medium,
+					style = UseTokensResult.Color.Content.Default
 				}),
 				Spinner = if Frame.isRunning == true then ReactModule.createElement(View, {
 					tag = "auto-xy clip",
@@ -98,7 +195,7 @@ return function(Frame)
 				tag = "fill auto-y text-body-medium text-wrap text-align-x-left content-emphasis",
 				Text = Text1
 			}),
-			Chevron = if HasBody then ReactModule.createElement(View, {
+			Chevron = if HasBodyText then ReactModule.createElement(View, {
 				LayoutOrder = 3,
 				Size = UDim2.fromOffset(UseTokensResult.Size.Size_300, Size500)
 			}, {
@@ -121,25 +218,7 @@ return function(Frame)
 				})
 			}) else nil
 		}),
-		Body = if IsIsExpanded and Body ~= nil then ReactModule.createElement(View, {
-			LayoutOrder = 2,
-			tag = "row gap-small size-full-0 auto-y padding-y-xxsmall"
-		}, {
-			Gutter = ReactModule.createElement(View, { LayoutOrder = 1, Size = UDim2.fromOffset(Size500, 0) }),
-			Text = ReactModule.createElement(Text, {
-				LayoutOrder = 2,
-				testId = "StepActivityRow.Body",
-				tag = "fill auto-y text-body-small text-wrap text-align-x-left content-muted",
-				Text = Body
-			}, {
-				Rail = if Frame.isLast == true then nil else ReactModule.createElement(View, {
-					testId = "StepActivityRow.Rail",
-					tag = "bg-shift-200",
-					Position = UDim2.fromOffset(-(UseTokensResult.Gap.Small + Size500 / 2), 0),
-					Size = UDim2.new(0, 1, 1, 0)
-				})
-			})
-		}) else nil,
+		Body = if FFlagBuildExperienceStepTextAnimationModule then ReactModule.createElement(HeightRevealModule, { LayoutOrder = 2, isOpen = IsIsExpanded and HasBodyText }, { Body = Element }) else Element,
 		Connector = if Frame.isLast == true then nil else ReactModule.createElement(View, {
 			LayoutOrder = 3,
 			tag = "align-x-center align-y-center",

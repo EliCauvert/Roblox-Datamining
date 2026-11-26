@@ -14,6 +14,7 @@ local FFlagFixTFLinksVRGatingModule = require(ProfilePlatform.Flags.FFlagFixTFLi
 local FFlagProfilePlatformEnableUserFollowModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnableUserFollow)
 local FFlagFriendsCallingClientGateDEV = SharedFlagsModule.FFlagFriendsCallingClientGate_DEV
 local FFlagJoinabilityCTARefactor = SharedFlagsModule.FFlagJoinabilityCTARefactor
+local FFlagDisableProfilePlayExperienceActionModule = require(ProfilePlatform.Flags.FFlagDisableProfilePlayExperienceAction)
 local List = {
 	EnumsModule.ProfileActions.AddFriend,
 	EnumsModule.ProfileActions.CannotAddFriend,
@@ -34,7 +35,7 @@ local List = {
 if FFlagFriendsCallingClientGateDEV then
 	table.insert(List, EnumsModule.ProfileActions.Call)
 end
-if FFlagJoinabilityCTARefactor then
+if FFlagJoinabilityCTARefactor and not FFlagDisableProfilePlayExperienceActionModule then
 	table.insert(List, EnumsModule.ProfileActions.PlayExperience)
 end
 if FFlagProfilePlatformEnableEditAppearanceMenuModule then

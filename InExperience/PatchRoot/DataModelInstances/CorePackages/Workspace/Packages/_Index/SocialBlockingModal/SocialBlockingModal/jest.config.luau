@@ -6,6 +6,7 @@ return {
 		JestConfigsModule.setupFiles.LogHandler,
 		JestConfigsModule.setupFiles.UIBloxInitializer,
 		JestConfigsModule.setupFiles.createPromiseRejectionHandler(),
+		JestConfigsModule.setupFiles.RemoveLeakedScreenGuis,
 		JestConfigsModule.setupFiles.RetryTimes
 	}
 }

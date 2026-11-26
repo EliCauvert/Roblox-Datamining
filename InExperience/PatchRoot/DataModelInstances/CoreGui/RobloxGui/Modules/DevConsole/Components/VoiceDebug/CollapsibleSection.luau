@@ -2,7 +2,9 @@
 local Components = script.Parent.Parent.Parent.Components
 local CellLabelModule = require(Components.CellLabel)
 local BannerButtonModule = require(Components.BannerButton)
-local MainRowPadding = require(script.Parent.Parent.Parent.Constants).GeneralFormatting.MainRowPadding
+local ConstantsModule = require(script.Parent.Parent.Parent.Constants)
+local MainRowPadding = ConstantsModule.GeneralFormatting.MainRowPadding
+local BorderGray = ConstantsModule.Color.BorderGray
 local CollapsibleSection = RoactModule.PureComponent:extend("CollapsibleSection")
 
 function CollapsibleSection.init(p1)
@@ -19,7 +21,8 @@ function CollapsibleSection.init(p1)
 end
 
 function CollapsibleSection.render(p1)
-	-- upvalues: RoactModule (copy), MainRowPadding (copy), BannerButtonModule (copy), CellLabelModule (copy)
+	-- upvalues: RoactModule (copy), MainRowPadding (copy), BannerButtonModule (copy), CellLabelModule (copy), ConstantsModule (copy), BorderGray (copy)
+	local HeaderNote = p1.props.headerNote
 	local Expanded = p1.state.expanded
 	
 	return RoactModule.createElement("Frame", {
@@ -45,7 +48,19 @@ function CollapsibleSection.render(p1)
 				text = p1.props.title,
 				size = UDim2.new(1, -20, 1, 0),
 				pos = UDim2.new(0, 20, 0, 0)
-			})
+			}),
+			Note = HeaderNote and RoactModule.createElement("TextLabel", {
+				BackgroundTransparency = 1,
+				Text = HeaderNote,
+				AnchorPoint = Vector2.new(1, 0.5),
+				Position = UDim2.new(1, -8, 0.5, 0),
+				Size = UDim2.new(0, 0, 1, 0),
+				AutomaticSize = Enum.AutomaticSize.X,
+				Font = ConstantsModule.Font.MainWindow,
+				TextSize = ConstantsModule.DefaultFontSize.MainWindow - 2,
+				TextColor3 = BorderGray,
+				TextXAlignment = Enum.TextXAlignment.Right
+			}) or nil
 		}),
 		Content = Expanded and RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,

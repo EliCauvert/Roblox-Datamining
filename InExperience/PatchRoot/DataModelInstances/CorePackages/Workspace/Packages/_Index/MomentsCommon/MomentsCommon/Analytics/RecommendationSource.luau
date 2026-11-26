@@ -2,5 +2,6 @@
 	Trending = "Trending",
 	MyMoments = "MyMoments",
 	Profile = "Profile",
-	Following = "Following"
+	Following = "Following",
+	Search = "Search"
 }

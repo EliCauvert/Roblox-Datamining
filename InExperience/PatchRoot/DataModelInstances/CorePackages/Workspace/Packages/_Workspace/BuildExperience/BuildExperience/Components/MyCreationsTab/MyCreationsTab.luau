@@ -71,6 +71,7 @@ return function(Frame: Frame)
 	local UseFilterResult = if FFlagBuildWithGroupsModule then FilterStore.useFilter() else nil
 	local UseMyCreationsResultsModuleResult = UseMyCreationsResultsModule({
 		creatorAgentChatStore = Frame.creatorAgentChatStore,
+		unreadStore = Frame.unreadStore,
 		creatorGroupsStore = Frame.creatorGroupsStore,
 		configurationStore = Frame.configurationStore,
 		searchStore = Frame.searchStore,
@@ -211,6 +212,7 @@ return function(Frame: Frame)
 					retryLoadMore = RetryLoadMore,
 					loadError = LoadError,
 					onOpenChat = if FFlagBuildUpdatedSearchUXForGAModule and FFlagBuildExperienceEventContextTelemetryModule then UseResult1 else Frame.onOpenChat,
+					onRowOpened = UseMyCreationsResultsModuleResult.acknowledgeGame,
 					onOpenConfigurationPage = Frame.onOpenConfigurationPage,
 					leadingItems = UseMemoResult
 				})

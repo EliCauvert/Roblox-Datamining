@@ -8,6 +8,7 @@ local FocusNavigationService = require(Parent.ReactFocusNavigation).FocusNavigat
 local CryoModule = require(Parent.Cryo)
 local ReactModule = require(Parent.React)
 local ReactOtterModule = require(Parent.ReactOtter)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local Signal = require(Parent.AppCommonLib).Signal
 local SignalsModule = require(Parent.Signals)
 local SocialCarouselModule = require(Parent.SocialCarousel)
@@ -28,7 +29,8 @@ local ConversationListViewRecyclerItemsModule = require(script.Parent.Conversati
 local _ = require(script.Parent.ConversationListTrailingItems)
 local ConversationRowLookupModule = require(script.Parent.ConversationRowLookup)
 local AppChatChatLandingInitialFetchLimit = game:DefineFastInt("AppChatChatLandingInitialFetchLimit", 5)
-local FFlagAppIaScrollAway = require(Parent.SharedFlags).FFlagAppIaScrollAway
+local FFlagAppIaScrollAway = SharedFlagsModule.FFlagAppIaScrollAway
+local FFlagFriendsChatSuggestedUsers = SharedFlagsModule.FFlagFriendsChatSuggestedUsers
 local AppChatChatLandingInitialFetchMinimumConversations = game:DefineFastInt("AppChatChatLandingInitialFetchMinimumConversations", 30)
 local FFlagAppChatRemoveConversationListDividerIxpEnabledModule = require(AppChat.Flags.FFlagAppChatRemoveConversationListDividerIxpEnabled)
 local FStringAppChatRemoveConversationListDividerIxpLayerModule = require(AppChat.Flags.FStringAppChatRemoveConversationListDividerIxpLayer)
@@ -80,9 +82,24 @@ local function buildTrailingItems(TrailingItems, p2)
 	local Buffer = table.create(#TrailingItems)
 	
 	for i, trailingItem in TrailingItems do
-		Buffer[i] = if trailingItem.kind == ConversationListItemKindModule.SuggestedUser then ConversationListViewRecyclerItemsModule.suggestedUser(trailingItem, p2) else trailingItem
+		Buffer[i] = if trailingItem.kind == ConversationListItemKindModule.SuggestedUser or trailingItem.kind == ConversationListItemKindModule.SuggestedUserPlaceholder then ConversationListViewRecyclerItemsModule.suggestedUser(trailingItem, p2) else trailingItem
 	end
 	return Buffer
+end
+
+local _ = function(Tbl)
+	-- upvalues: ConversationListViewRecyclerItemsModule (copy)
+	local CountTbl = #Tbl
+	
+	if CountTbl == 0 then
+		return Tbl
+	else
+		local Copy = table.clone(Tbl)
+		local Entry = Copy[CountTbl]
+		Copy[CountTbl] = ConversationListViewRecyclerItemsModule.conversation(Entry.id, Entry.presentationSignal, true)
+		
+		return Copy
+	end
 end
 
 local function concatItems(UseMemoResult, UseMemoResult1)
@@ -392,7 +409,7 @@ local function useLegacyListRef(ListRef, p3, Callback)
 end
 
 return ReactModule.memo(function(p3)
-	-- upvalues: CryoModule (copy), config1 (copy), UseTokensFunction (copy), usePagination (copy), useUnderfillPagination (copy), useConversationListScrollbar (copy), useScrollTracking (copy), ReactModule (copy), ConversationRowLookupModule (copy), FFlagFriendsChatUseViewRecyclerConversationListModule (copy), AppChatPerfExperimentation (copy), PartyPageCarouselExperimentation (copy), SquadQuickStartExperimentation (copy), FFlagAppChatRemoveConversationListDividerIxpEnabledModule (copy), IXPService (copy), FStringAppChatRemoveConversationListDividerIxpLayerModule (copy), FocusNavigationService (copy), CoreGui (copy), AppPage (copy), Constants (copy), Enums (copy), usePresentationSignal (copy), FFlagAppIaScrollAway (copy), ConversationListViewRecyclerItemsModule (copy), buildConversationItems (copy), buildTrailingItems (copy), concatItems (copy), FFlagAppChatConversationListViewRecyclerConsolePropsModule (copy), useListData (copy), useLegacyListRef (copy), useMeasuredLayout (copy), View (copy), ViewRecyclerModule (copy), AppChatPerfChatLandingPaginationOnStartReachedUnits (copy), AppChatPerfChatLandingPaginationOnEndReachedUnits (copy)
+	-- upvalues: CryoModule (copy), config1 (copy), UseTokensFunction (copy), usePagination (copy), useUnderfillPagination (copy), useConversationListScrollbar (copy), useScrollTracking (copy), ReactModule (copy), ConversationRowLookupModule (copy), FFlagFriendsChatUseViewRecyclerConversationListModule (copy), AppChatPerfExperimentation (copy), PartyPageCarouselExperimentation (copy), SquadQuickStartExperimentation (copy), FFlagAppChatRemoveConversationListDividerIxpEnabledModule (copy), IXPService (copy), FStringAppChatRemoveConversationListDividerIxpLayerModule (copy), FocusNavigationService (copy), CoreGui (copy), AppPage (copy), Constants (copy), Enums (copy), usePresentationSignal (copy), FFlagAppIaScrollAway (copy), ConversationListViewRecyclerItemsModule (copy), buildConversationItems (copy), buildTrailingItems (copy), FFlagFriendsChatSuggestedUsers (copy), concatItems (copy), FFlagAppChatConversationListViewRecyclerConsolePropsModule (copy), useListData (copy), useLegacyListRef (copy), useMeasuredLayout (copy), View (copy), ViewRecyclerModule (copy), AppChatPerfChatLandingPaginationOnStartReachedUnits (copy), AppChatPerfChatLandingPaginationOnEndReachedUnits (copy)
 	local JoinResult = CryoModule.Dictionary.join(config1, p3)
 	local EntryHeight = JoinResult.entryHeight
 	local ItemList = JoinResult.itemList
@@ -553,8 +570,25 @@ return ReactModule.memo(function(p3)
 		return if TrailingItems == nil or #TrailingItems == 0 then nil else buildTrailingItems(TrailingItems, UsePresentationSignalResult1)
 	end, { TrailingItems, UsePresentationSignalResult1 })
 	local UseMemoResult5 = ReactModule.useMemo(function()
-		-- upvalues: UseMemoResult4 (copy), UseMemoResult3 (copy), concatItems (upval)
-		return if UseMemoResult4 == nil then UseMemoResult3 else concatItems(UseMemoResult3, UseMemoResult4)
+		-- upvalues: UseMemoResult4 (copy), UseMemoResult3 (copy), FFlagFriendsChatSuggestedUsers (upval), concatItems (upval), ConversationListViewRecyclerItemsModule (upval)
+		if UseMemoResult4 == nil then
+			return UseMemoResult3
+		end
+		if not FFlagFriendsChatSuggestedUsers then
+			return (concatItems(UseMemoResult3, UseMemoResult4))
+		end
+		local CountUseMemoResult3 = #UseMemoResult3
+		local UseMemoResult = nil
+		
+		if CountUseMemoResult3 == 0 then
+			UseMemoResult = UseMemoResult3
+		else
+			local Copy = table.clone(UseMemoResult3)
+			local Entry = Copy[CountUseMemoResult3]
+			Copy[CountUseMemoResult3] = ConversationListViewRecyclerItemsModule.conversation(Entry.id, Entry.presentationSignal, true)
+			UseMemoResult = Copy
+		end
+		return (concatItems(UseMemoResult, UseMemoResult4))
 	end, { UseMemoResult3, UseMemoResult4 })
 	local UseMemoResult6 = UseMemoResult5
 	
@@ -598,7 +632,7 @@ return ReactModule.memo(function(p3)
 			onEndReached = if UsePaginationResult then UsePaginationResult4 else nil,
 			startReachedThreshold = EntryHeight * AppChatPerfChatLandingPaginationOnStartReachedUnits,
 			endReachedThreshold = EntryHeight * AppChatPerfChatLandingPaginationOnEndReachedUnits,
-			autoScrollOnChange = ViewRecyclerModule.AutoScrollPolicy.WhenAtStart,
+			autoScrollOnChange = if JoinResult.holdScrollPositionOnChange then nil else ViewRecyclerModule.AutoScrollPolicy.WhenAtStart,
 			scrollingFrameProps = {
 				Name = "RCTScrollView",
 				BackgroundTransparency = 1,

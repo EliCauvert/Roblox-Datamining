@@ -11,6 +11,7 @@ local CommentsReadOnlyNoticeViewModule = require(Moments.Components.Comments.Pan
 local PendingCommentRowViewModule = require(script.Parent.Parent.Rows.PendingCommentRowView)
 local _ = require(Moments.Components.Comments.GetCommentCollectionStore.CommentCollectionTypes)
 local FFlagMomentsCommentsAttachSheetScrollerModule = require(Moments.Flags.FFlagMomentsCommentsAttachSheetScroller)
+local FFlagMomentsEngagementToastsModule = require(Moments.Flags.FFlagMomentsEngagementToasts)
 local UseCommentsListRowFunction = require(script.Parent.CommentsListRowContext).useCommentsListRow
 local SizeFull0AutoYPaddingXMedium: string = if FFlagMomentsCommentsAttachSheetScrollerModule then "size-full-0 auto-y padding-x-medium" else "size-full-0 auto-y padding-x-small"
 local SizeFull0AutoYPaddingXXlarge: string = if FFlagMomentsCommentsAttachSheetScrollerModule then "size-full-0 auto-y padding-x-xlarge" else "size-full-0 auto-y padding-x-large"
@@ -19,7 +20,7 @@ local config = {
 }
 local Frozen = table.freeze({
 	comment = ViewRecyclerModule.createRecyclableView(function(p1)
-		-- upvalues: SignalsReactModule (copy), UseCommentsListRowFunction (copy), ReactModule (copy), FoundationModule (copy), SizeFull0AutoYPaddingXMedium (copy), CommentRowContainerModule (copy)
+		-- upvalues: SignalsReactModule (copy), UseCommentsListRowFunction (copy), ReactModule (copy), FoundationModule (copy), SizeFull0AutoYPaddingXMedium (copy), CommentRowContainerModule (copy), FFlagMomentsEngagementToastsModule (copy)
 		local UseSignalStateResult = SignalsReactModule.useSignalState(p1.itemSignal)
 		local UseCommentsListRowResult = UseCommentsListRowFunction()
 		
@@ -43,7 +44,8 @@ local Frozen = table.freeze({
 				isExpanded = UseSignalStateResult.isExpanded,
 				onToggleExpanded = UseCommentsListRowResult.onToggleCommentExpanded,
 				translationState = UseSignalStateResult.translationState,
-				onToggleTranslation = UseCommentsListRowResult.onToggleCommentTranslation
+				onToggleTranslation = UseCommentsListRowResult.onToggleCommentTranslation,
+				isPinned = if FFlagMomentsEngagementToastsModule then UseSignalStateResult.isPinned else nil
 			})
 		}) else nil
 	end, config),

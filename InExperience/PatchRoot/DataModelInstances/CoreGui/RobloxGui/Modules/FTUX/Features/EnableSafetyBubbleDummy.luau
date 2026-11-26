@@ -35,7 +35,7 @@ function EnableSafetyBubbleDummy()
 		-- upvalues: Character (upval), UserGameSettings (upval), IsNotVRSafetyBubbleModeMatch (upval), calculateTransparency (upval)
 		local Children = Character:GetChildren()
 		IsNotVRSafetyBubbleModeMatch = UserGameSettings.VRSafetyBubbleMode ~= Enum.VRSafetyBubbleMode.Anyone
-		for _, player in ipairs(game.Players:GetPlayers()) do
+		for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
 			if player.Character then
 				local Transparency = calculateTransparency(player, IsNotVRSafetyBubbleModeMatch)
 				Character.Head.Face.Transparency = Transparency

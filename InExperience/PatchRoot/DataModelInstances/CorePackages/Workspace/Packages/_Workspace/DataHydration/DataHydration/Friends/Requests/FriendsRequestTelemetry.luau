@@ -1,5 +1,6 @@
 ﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
 local HttpService = game:GetService("HttpService")
+local FFlagPresenceRefetchTelemetryRequestIdModule = require(Parent.SharedFlags.FFlagPresenceRefetchTelemetryRequestId)
 local SocialLuaAnalyticsModule = require(Parent.SocialLuaAnalytics)
 local LoggingProtocolModule = require(Parent.LoggingProtocol)
 local SupportedTelemetryBackends = SocialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends
@@ -49,9 +50,9 @@ local function _(p1, p2)
 end
 
 return {
-	generateRequestId = function(): string
-		-- upvalues: HttpService (copy)
-		return string.format("friends-sort-%s", HttpService:GenerateGUID(false))
+	generateRequestId = function(p1): string
+		-- upvalues: FFlagPresenceRefetchTelemetryRequestIdModule (copy), HttpService (copy)
+		return if FFlagPresenceRefetchTelemetryRequestIdModule and p1 then string.format("friends-sort-refetch-%s", HttpService:GenerateGUID(false)) else string.format("friends-sort-%s", HttpService:GenerateGUID(false))
 	end,
 	getRequestOptions = function(p1)
 		return if p1 == nil then nil else { headers = { ["friends-sort"] = p1 } }

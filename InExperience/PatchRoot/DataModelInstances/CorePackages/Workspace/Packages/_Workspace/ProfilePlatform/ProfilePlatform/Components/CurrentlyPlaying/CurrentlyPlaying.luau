@@ -33,9 +33,12 @@ local FFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule = require(Profil
 local FFlagProfileCurrentlyPlayingEDPFromCardModule = require(ProfilePlatform.Flags.FFlagProfileCurrentlyPlayingEDPFromCard)
 local FFlagProfilePlatformImproveGameDetailsAnalytics = require(Parent.SharedFlags).FFlagProfilePlatformImproveGameDetailsAnalytics
 local FFlagJoinabilityCTAContextCopy = require(Parent.SharedFlags).FFlagJoinabilityCTAContextCopy
+local FFlagExperienceGuidelinesRatingDisplayStoreModule = require(Parent.DataHydration.FFlagExperienceGuidelinesRatingDisplayStore)
+local UseGetMinimizedRatingIcon = if require(Parent.SharedFlags).FFlagSocialPlayIarcRatingLogo_DEV and FFlagExperienceGuidelinesRatingDisplayStoreModule then require(Parent.SocialCommon).Hooks.useGetMinimizedRatingIcon else nil
+local AppendIarcRatingIconFunction = require(Parent.SocialCommon).Components.appendIarcRatingIcon
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), UseDispatchFunction (copy), FFlagProfileCurrentlyPlayingEDPFromCardModule (copy), FFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule (copy), UseNavigationFunction (copy), UseProfileWrapperContextModule (copy), FFlagProfilePlatformImproveGameDetailsAnalytics (copy), UseRoactServiceFunction (copy), RoactAnalyticsCommonGameEvents (copy), FFlagJoinabilityCTAContextCopy (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), NetworkingGamesModule (copy), UseSelectorFunction (copy), GetDeepValueModule (copy), AppPage (copy), OpenGameDetailsFunction (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), ContentProvider (copy), HorizontalPageMargin (copy), View (copy), StateLayerAffordance (copy), Image (copy), Skeleton (copy), Radius (copy), Text (copy)
+	-- upvalues: UseTokensFunction (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), UseDispatchFunction (copy), FFlagProfileCurrentlyPlayingEDPFromCardModule (copy), FFlagProfileCurrentlyPlayingEDPFromNameAndThumbnailModule (copy), UseNavigationFunction (copy), UseProfileWrapperContextModule (copy), FFlagProfilePlatformImproveGameDetailsAnalytics (copy), UseRoactServiceFunction (copy), RoactAnalyticsCommonGameEvents (copy), FFlagJoinabilityCTAContextCopy (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UseGetMinimizedRatingIcon (copy), ReactModule (copy), NetworkingGamesModule (copy), UseSelectorFunction (copy), GetDeepValueModule (copy), AppPage (copy), OpenGameDetailsFunction (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), ContentProvider (copy), HorizontalPageMargin (copy), View (copy), StateLayerAffordance (copy), AppendIarcRatingIconFunction (copy), Image (copy), Skeleton (copy), Radius (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseProfileJsonComponentModuleResult = UseProfileJsonComponentModule(EnumsModule.Components.CurrentlyPlaying)
 	local UseDispatchResult = UseDispatchFunction()
@@ -48,6 +51,13 @@ return function(p1)
 		playTogetherSoon = TextKeysModule.PlayTogetherSoon
 	}) else nil
 	local UniverseId = UseProfileJsonComponentModuleResult.universeId
+	local v1 = nil
+	local v2 = nil
+	
+	if UseGetMinimizedRatingIcon ~= nil then
+		v1, v39 = UseGetMinimizedRatingIcon(if UniverseId == nil then nil else tostring(UniverseId))
+	end
+	local Size1300 = UseTokensResult.Size.Size_1300
 	ReactModule.useEffect(function()
 		-- upvalues: UniverseId (copy), UseDispatchResult (copy), NetworkingGamesModule (upval)
 		if UniverseId then
@@ -114,7 +124,7 @@ return function(p1)
 			tag = "row align-y-center gap-medium size-full-0 auto-y padding-large stroke-standard stroke-default radius-medium bg-shift-100",
 			onActivated = if FFlagProfileCurrentlyPlayingEDPFromCardModule and not IsNameMatch then UseResult1 else nil,
 			stateLayer = if FFlagProfileCurrentlyPlayingEDPFromCardModule and not IsNameMatch then { affordance = StateLayerAffordance.None } else nil
-		}, {
+		}, AppendIarcRatingIconFunction({
 			GameThumbnail = if IsNameMatch then ReactModule.createElement(Skeleton, {
 				LayoutOrder = 1,
 				Size = UDim2.fromOffset(UseTokensResult.Size.Size_1000, UseTokensResult.Size.Size_1000),
@@ -164,6 +174,6 @@ return function(p1)
 					Text = PlayTogether
 				})
 			})
-		})
+		}, if IsNameMatch then nil else v1, v2, Size1300))
 	}) else nil
 end

@@ -34,6 +34,13 @@ return function(p1, p2, Current, p3)
 		end
 		return nil
 	end, { UseMemoResult, p2 })
+	ReactModule.useLayoutEffect(function()
+		-- upvalues: p1 (copy), UseMemoResult (copy)
+		if p1 then
+			UseMemoResult.markTurnDone()
+		end
+		return nil
+	end, { UseMemoResult, p1 })
 	ReactModule.useEffect(function()
 		-- upvalues: p1 (copy), UseMemoResult (copy), p3 (copy)
 		if p1 then

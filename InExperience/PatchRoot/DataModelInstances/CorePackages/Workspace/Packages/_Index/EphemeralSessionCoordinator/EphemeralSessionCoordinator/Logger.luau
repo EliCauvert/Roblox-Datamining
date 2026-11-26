@@ -1,0 +1,1 @@
+﻿return require(script:FindFirstAncestor("EphemeralSessionCoordinator").Parent.Loggers).Logger:new("EphemeralSessionCoordinator")

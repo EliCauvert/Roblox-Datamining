@@ -11,7 +11,6 @@ local IxpFlyoutVariantNoSubTabs = game:DefineFastInt("IxpFlyoutVariantNoSubTabs"
 local IxpFlyoutVariantRemovalRobuxIcon = game:DefineFastInt("IxpFlyoutVariantRemovalRobuxIcon", 4)
 local FlyoutShowFriendsSortForCurrentVariant = game:DefineFastFlag("FlyoutShowFriendsSortForCurrentVariant", false)
 local EnableFlyoutExposure = game:DefineFastFlag("EnableFlyoutExposure", false)
-local FlyoutHamburgerEnableProfileEntry = game:DefineFastFlag("FlyoutHamburgerEnableProfileEntry", false)
 local FlyoutFacepileEnableProfileEntry = game:DefineFastFlag("FlyoutFacepileEnableProfileEntry", false)
 local FlyoutDisallowAlternativeEntryOnProfileEntryEnabled = game:DefineFastFlag("FlyoutDisallowAlternativeEntryOnProfileEntryEnabled", false)
 local FFlagSubTabRemoveFlyoutDependency = require(Parent.SharedFlags).FFlagSubTabRemoveFlyoutDependency
@@ -82,7 +81,7 @@ return {
 		return IxpFlyoutControl1 ~= IxpFlyoutControl
 	end,
 	isProfileEntryRemoved = function(): boolean
-		-- upvalues: v2 (ref), UniversalAppPolicyModule (copy), FlyoutAmpGatedVariant (copy), getIXPVariant (copy), FlyoutHamburgerEnableProfileEntry (copy), IxpFlyoutVariantHamburger (copy), FlyoutFacepileEnableProfileEntry (copy), IxpFlyoutVariantAlternateEntry (copy), IxpFlyoutVariantNoSubTabs (copy), IxpFlyoutControl (copy)
+		-- upvalues: v2 (ref), UniversalAppPolicyModule (copy), FlyoutAmpGatedVariant (copy), getIXPVariant (copy), IxpFlyoutVariantHamburger (copy), FlyoutFacepileEnableProfileEntry (copy), IxpFlyoutVariantAlternateEntry (copy), IxpFlyoutVariantNoSubTabs (copy), IxpFlyoutControl (copy)
 		local IxpFlyoutControl1 = nil
 		if v2 == nil then
 			v2 = if UniversalAppPolicyModule.getAppFeaturePolicies().getFlyoutSidePanelEnabled() then FlyoutAmpGatedVariant else getIXPVariant()
@@ -90,7 +89,7 @@ return {
 		else
 			IxpFlyoutControl1 = v2
 		end
-		return (not FlyoutHamburgerEnableProfileEntry or IxpFlyoutControl1 ~= IxpFlyoutVariantHamburger) and ((not FlyoutFacepileEnableProfileEntry or IxpFlyoutControl1 ~= IxpFlyoutVariantAlternateEntry and IxpFlyoutControl1 ~= IxpFlyoutVariantNoSubTabs) and IxpFlyoutControl1 ~= IxpFlyoutControl)
+		return IxpFlyoutControl1 ~= IxpFlyoutVariantHamburger and ((not FlyoutFacepileEnableProfileEntry or IxpFlyoutControl1 ~= IxpFlyoutVariantAlternateEntry and IxpFlyoutControl1 ~= IxpFlyoutVariantNoSubTabs) and IxpFlyoutControl1 ~= IxpFlyoutControl)
 	end,
 	isFriendsSortHeaderHiddenInFlyoutIxp = function(): boolean
 		-- upvalues: FFlagHiddenFriendsSortHeaderRemoveFlyoutDependency (copy), FFlagEnableSubTabOverride (copy), FlyoutShowFriendsSortForCurrentVariant (copy), FFlagEnableChartsInFlyout (copy), v2 (ref), UniversalAppPolicyModule (copy), FlyoutAmpGatedVariant (copy), getIXPVariant (copy), IxpFlyoutControl (copy), HiddenFriendsSortHeaderAddSubTabDependency (copy), FFlagAppIaHomeSubTab (copy)
@@ -123,7 +122,7 @@ return {
 		end
 	end,
 	isAlternateEntryPointEnabled = function(): boolean
-		-- upvalues: v2 (ref), UniversalAppPolicyModule (copy), FlyoutAmpGatedVariant (copy), getIXPVariant (copy), FlyoutDisallowAlternativeEntryOnProfileEntryEnabled (copy), FlyoutHamburgerEnableProfileEntry (copy), IxpFlyoutVariantHamburger (copy), FlyoutFacepileEnableProfileEntry (copy), IxpFlyoutVariantAlternateEntry (copy), IxpFlyoutVariantNoSubTabs (copy), IxpFlyoutControl (copy)
+		-- upvalues: v2 (ref), UniversalAppPolicyModule (copy), FlyoutAmpGatedVariant (copy), getIXPVariant (copy), FlyoutDisallowAlternativeEntryOnProfileEntryEnabled (copy), IxpFlyoutVariantHamburger (copy), FlyoutFacepileEnableProfileEntry (copy), IxpFlyoutVariantAlternateEntry (copy), IxpFlyoutVariantNoSubTabs (copy), IxpFlyoutControl (copy)
 		local IxpFlyoutVariantAlternateEntry1 = nil
 		if v2 == nil then
 			v2 = if UniversalAppPolicyModule.getAppFeaturePolicies().getFlyoutSidePanelEnabled() then FlyoutAmpGatedVariant else getIXPVariant()
@@ -141,7 +140,7 @@ return {
 		else
 			IxpFlyoutControl1 = v2
 		end
-		return (not FlyoutHamburgerEnableProfileEntry or IxpFlyoutControl1 ~= IxpFlyoutVariantHamburger) and ((not FlyoutFacepileEnableProfileEntry or IxpFlyoutControl1 ~= IxpFlyoutVariantAlternateEntry and IxpFlyoutControl1 ~= IxpFlyoutVariantNoSubTabs) and IxpFlyoutControl1 ~= IxpFlyoutControl) and (IxpFlyoutVariantAlternateEntry1 == IxpFlyoutVariantAlternateEntry or IxpFlyoutVariantAlternateEntry1 == IxpFlyoutVariantNoSubTabs)
+		return IxpFlyoutControl1 ~= IxpFlyoutVariantHamburger and ((not FlyoutFacepileEnableProfileEntry or IxpFlyoutControl1 ~= IxpFlyoutVariantAlternateEntry and IxpFlyoutControl1 ~= IxpFlyoutVariantNoSubTabs) and IxpFlyoutControl1 ~= IxpFlyoutControl) and (IxpFlyoutVariantAlternateEntry1 == IxpFlyoutVariantAlternateEntry or IxpFlyoutVariantAlternateEntry1 == IxpFlyoutVariantNoSubTabs)
 	end,
 	isRobuxIconRemoved = function(): boolean
 		-- upvalues: v2 (ref), UniversalAppPolicyModule (copy), FlyoutAmpGatedVariant (copy), getIXPVariant (copy), IxpFlyoutVariantRemovalRobuxIcon (copy)

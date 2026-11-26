@@ -2,11 +2,13 @@
 local GameTileModule = require(Parent.GameTile)
 local LocalizationModule = require(Parent.Localization)
 local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SharedFlagsModule = require(Parent.SharedFlags)
 local SduiActionType = SduiCoreSystemModule.SduiActionType
 local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 local ActivateGameNotInterestedFunction = GameTileModule.activateGameNotInterested
 local GetGameTileHiddenStoreFunction = GameTileModule.getGameTileHiddenStore
 local LocalizeStringsFunction = LocalizationModule.localizeStrings
+local FFlagLuaAppNotInterestedMobileSnackbar = SharedFlagsModule.FFlagLuaAppNotInterestedMobileSnackbar
 
 local function _(p1, Message, PropName)
 	-- upvalues: SduiErrorType (copy), SduiActionType (copy)
@@ -18,7 +20,7 @@ local function _(p1, Message, PropName)
 end
 
 return function(p1, _, p2)
-	-- upvalues: SduiErrorType (copy), SduiActionType (copy), LocalizeStringsFunction (copy), ActivateGameNotInterestedFunction (copy), GetGameTileHiddenStoreFunction (copy)
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), LocalizeStringsFunction (copy), FFlagLuaAppNotInterestedMobileSnackbar (copy), ActivateGameNotInterestedFunction (copy), GetGameTileHiddenStoreFunction (copy)
 	local ActionParams = if p1 then p1.actionParams else nil
 	
 	if ActionParams == nil then
@@ -57,7 +59,8 @@ return function(p1, _, p2)
 				dontLikeImage = "Feature.GameDetails.Label.DontLikeImage",
 				inappropriateContent = "Feature.GameDetails.Label.InappropriateContent",
 				somethingElse = "Feature.GameDetails.Label.SomethingElse",
-				tooRepetitive = "Feature.GameDetails.Label.TooRepetitive"
+				tooRepetitive = "Feature.GameDetails.Label.TooRepetitive",
+				suggestLessOften = if FFlagLuaAppNotInterestedMobileSnackbar then "Feature.GameDetails.Message.SuggestLessOften" else nil
 			}),
 			networking = p2.dependencies.networking,
 			placeId = ActionParams.placeId,

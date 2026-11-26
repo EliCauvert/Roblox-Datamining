@@ -1,5 +1,6 @@
 ﻿local Players = game:GetService("Players")
 local GuiService = game:GetService("GuiService")
+local FFlagExperienceStateReplayRecordedViewportEventModule = require(script.Parent.Parent.Flags.FFlagExperienceStateReplayRecordedViewportEvent)
 
 local function hasSightWord(Text: string): boolean
 	local Lowered = string.lower(Text)
@@ -52,8 +53,8 @@ local function firstHiddenAncestor(Frame, PlayerGui)
 	return nil
 end
 
-function AimAlignmentProbeModule.sample(Camera, Object)
-	-- upvalues: GuiService (copy), Players (copy), firstHiddenAncestor (copy), AimAlignmentProbeModule (copy)
+function AimAlignmentProbeModule.sample(Camera, Object, p1)
+	-- upvalues: FFlagExperienceStateReplayRecordedViewportEventModule (copy), GuiService (copy), Players (copy), firstHiddenAncestor (copy), AimAlignmentProbeModule (copy)
 	if Camera == nil then return end
 	local ViewportSize: number = Camera.ViewportSize
 	
@@ -62,6 +63,9 @@ function AimAlignmentProbeModule.sample(Camera, Object)
 	
 	if typeof(DMCTRecordedViewportSizeAttribute) ~= "Vector2" and Camera.GetAttribute then
 		DMCTRecordedViewportSizeAttribute = Camera:GetAttribute("DMCTRecordedViewportSize")
+	end
+	if FFlagExperienceStateReplayRecordedViewportEventModule then
+		DMCTRecordedViewportSizeAttribute = p1
 	end
 	if typeof(DMCTRecordedViewportSizeAttribute) ~= "Vector2" then
 		DMCTRecordedViewportSizeAttribute = Vector2.new(0, 0)

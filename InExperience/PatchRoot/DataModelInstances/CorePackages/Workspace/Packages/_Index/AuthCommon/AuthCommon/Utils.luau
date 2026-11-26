@@ -10,6 +10,7 @@
 	AppStorageUtilities = require(script.AppStorageUtilities),
 	scheduleAccountSwitchRelaunchFallback = require(script.scheduleAccountSwitchRelaunchFallback),
 	Base64 = require(script.Base64),
+	getPasskeyAssertion = require(script.getPasskeyAssertion),
 	GetDxBlob = require(script.GetDxBlob),
 	GetCaptchaDataJson = require(script.GetCaptchaDataJson),
 	GetMultipleUsersPerCredentialErrorData = require(script.GetMultipleUsersPerCredentialErrorData),

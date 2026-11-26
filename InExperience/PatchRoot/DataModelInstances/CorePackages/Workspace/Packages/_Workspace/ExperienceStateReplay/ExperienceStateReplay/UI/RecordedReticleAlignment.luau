@@ -1,5 +1,6 @@
 ﻿local Players = game:GetService("Players")
 local AimAlignmentProbeModule = require(script.Parent.AimAlignmentProbe)
+local FFlagExperienceStateReplayRecordedViewportEventModule = require(script.Parent.Parent.Flags.FFlagExperienceStateReplayRecordedViewportEvent)
 
 local function _(Vector, Vector1): UDim2
 	return UDim2.new(Vector.X.Scale, Vector.X.Offset + math.round(Vector1.X), Vector.Y.Scale, Vector.Y.Offset + math.round(Vector1.Y))
@@ -94,7 +95,7 @@ end
 
 return {
 	create = function(p1)
-		-- upvalues: Players (copy), isEnabledScreenGuiDescendant (copy), discover (copy)
+		-- upvalues: Players (copy), FFlagExperienceStateReplayRecordedViewportEventModule (copy), isEnabledScreenGuiDescendant (copy), discover (copy)
 		local List = {}
 		local T = {}
 		local Count = 0
@@ -118,8 +119,8 @@ return {
 		end
 		
 		return {
-			step = function(Camera, Object)
-				-- upvalues: clear (copy), Callback (copy), Count (ref), List (ref), isEnabledScreenGuiDescendant (upval), T (ref), discover (upval)
+			step = function(Camera, Object, p2)
+				-- upvalues: clear (copy), FFlagExperienceStateReplayRecordedViewportEventModule (upval), Callback (copy), Count (ref), List (ref), isEnabledScreenGuiDescendant (upval), T (ref), discover (upval)
 				if Camera == nil then
 					clear()
 					
@@ -130,6 +131,9 @@ return {
 				
 				if typeof(DMCTRecordedViewportSizeAttribute) ~= "Vector2" and Camera.GetAttribute then
 					DMCTRecordedViewportSizeAttribute = Camera:GetAttribute("DMCTRecordedViewportSize")
+				end
+				if FFlagExperienceStateReplayRecordedViewportEventModule then
+					DMCTRecordedViewportSizeAttribute = p2
 				end
 				if ViewportSize.X < 16 or ViewportSize.Y < 16 then
 					clear()

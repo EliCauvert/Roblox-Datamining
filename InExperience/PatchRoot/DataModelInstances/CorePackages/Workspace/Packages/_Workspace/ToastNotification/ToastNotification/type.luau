@@ -62,6 +62,7 @@ return {
 	NotificationTypeEnum = {
 		CallReceived = "CallReceived",
 		ChatNewMessage = "ChatNewMessage",
+		ExperienceInvitation = "ExperienceInvitation",
 		ScheduledSquadReminder = "ScheduledSquadReminder",
 		ScheduledSquadHappeningNow = "ScheduledSquadHappeningNow",
 		SquadInvitation = "SquadInvitation",

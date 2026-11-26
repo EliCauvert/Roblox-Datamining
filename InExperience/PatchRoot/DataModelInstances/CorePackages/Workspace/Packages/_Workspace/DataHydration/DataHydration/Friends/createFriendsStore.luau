@@ -15,7 +15,10 @@ local FFlagFriendsStoreSortOnlineFriendsByRank = SharedFlagsModule.FFlagFriendsS
 local FFlagPresenceRefetchTelemetryEnabledModule = require(DataHydration.Flags.FFlagPresenceRefetchTelemetryEnabled)
 local FFlagAddFriendsPageTrustedFriendRequestSection = require(Parent.SharedFlags).FFlagAddFriendsPageTrustedFriendRequestSection
 local FFlagPresenceLocationType = SharedFlagsModule.FFlagPresenceLocationType
+local FFlagFriendsStoresRealtimeListener = SharedFlagsModule.FFlagFriendsStoresRealtimeListener
 local RequestsModule = require(DataHydration.Friends.Requests)
+local FriendshipNotificationsModule = require(DataHydration.Friends.FriendshipNotifications)
+local EventType = FriendshipNotificationsModule.EventType
 local FindFriendsSortModule = require(DataHydration.Friends.Enums.FindFriendsSort)
 local MapFriendshipStatusToEnumModule = require(DataHydration.Friends.mapFriendshipStatusToEnum)
 local PresenceStoreModule = require(DataHydration.Presence.PresenceStore)
@@ -151,7 +154,7 @@ local _ = function(p3)
 end
 
 return function()
-	-- upvalues: PresenceStoreModule (copy), FFlagFriendSortedByPresenceSignalsImplementation (copy), GetLocalPlayerUserIdFunction (copy), CreateDataCacheModule (copy), OnlineFriendsCacheTtlSec (copy), IsFriendsWithCacheTtlSec (copy), AllFriendsCacheTtlSec (copy), FriendshipStatusCacheTtlSec (copy), FriendsCountCacheTtlSec (copy), LocalUserIdStore (copy), FFlagAddFriendsPageTrustedFriendRequestSection (copy), MergeListsWithoutDuplicatesFunction (copy), mergeListsWithoutDuplicates (copy), NormalizePresenceRawDataModule (copy), PresenceTypeModule (copy), normalizeStoredOnlineFriendRow (copy), normalizePresenceFromOnlineFriendsRow (copy), CreateDataResolverModule (copy), RequestsModule (copy), MapFriendshipStatusToEnumModule (copy), CryoModule (copy), FriendsPageSize (copy), InitialFriendsPageSize (copy), FindFriendsSortModule (copy), normalizeFindFriendsPageResponse (copy), mergeAllFriendsPage (copy), SignalsModule (copy), FFlagFriendsStoreSortOnlineFriendsByRank (copy), DataStatus (copy), FFlagEnableFriendsStoreChallengeInterceptor (copy), FFlagPresenceRefetchTelemetryEnabledModule (copy)
+	-- upvalues: PresenceStoreModule (copy), FFlagFriendSortedByPresenceSignalsImplementation (copy), GetLocalPlayerUserIdFunction (copy), CreateDataCacheModule (copy), OnlineFriendsCacheTtlSec (copy), IsFriendsWithCacheTtlSec (copy), AllFriendsCacheTtlSec (copy), FriendshipStatusCacheTtlSec (copy), FriendsCountCacheTtlSec (copy), LocalUserIdStore (copy), FFlagAddFriendsPageTrustedFriendRequestSection (copy), MergeListsWithoutDuplicatesFunction (copy), mergeListsWithoutDuplicates (copy), NormalizePresenceRawDataModule (copy), PresenceTypeModule (copy), normalizeStoredOnlineFriendRow (copy), normalizePresenceFromOnlineFriendsRow (copy), CreateDataResolverModule (copy), RequestsModule (copy), MapFriendshipStatusToEnumModule (copy), CryoModule (copy), FriendsPageSize (copy), InitialFriendsPageSize (copy), FindFriendsSortModule (copy), normalizeFindFriendsPageResponse (copy), mergeAllFriendsPage (copy), SignalsModule (copy), FFlagFriendsStoreSortOnlineFriendsByRank (copy), DataStatus (copy), EventType (copy), FFlagFriendsStoresRealtimeListener (copy), FriendshipNotificationsModule (copy), FFlagEnableFriendsStoreChallengeInterceptor (copy), FFlagPresenceRefetchTelemetryEnabledModule (copy)
 	local GetResult = PresenceStoreModule.get()
 	local Text = if FFlagFriendSortedByPresenceSignalsImplementation then nil else tostring(GetLocalPlayerUserIdFunction())
 	local DataCacheModule = CreateDataCacheModule(if OnlineFriendsCacheTtlSec and OnlineFriendsCacheTtlSec > 0 then OnlineFriendsCacheTtlSec else 1e999)
@@ -514,6 +517,31 @@ return function()
 		return DataResolverModule3.getCachedItem(CurrentUserId1).status(p12)
 	end)
 	
+	local function handleFriendshipNotification(p12)
+		-- upvalues: EventType (upval), DataCacheModule3 (copy), UpdateIsFriendsWith (copy)
+		local EventType1 = p12.eventType
+		local FriendRequestSent = if EventType1 == EventType.Requested then if p12.isLocalUserSender then Enum.FriendStatus.FriendRequestSent else Enum.FriendStatus.FriendRequestReceived elseif EventType1 == EventType.Created then Enum.FriendStatus.Friend elseif EventType1 == EventType.Destroyed or EventType1 == EventType.Declined then Enum.FriendStatus.NotFriend else nil
+		
+		if FriendRequestSent then
+			local OtherUserId = p12.otherUserId
+			DataCacheModule3.replaceItem(OtherUserId, FriendRequestSent)
+			UpdateIsFriendsWith(OtherUserId, FriendRequestSent == Enum.FriendStatus.Friend)
+		end
+	end
+	
+	local ObserveResult = if FFlagFriendsStoresRealtimeListener then FriendshipNotificationsModule.observe(function()
+		-- upvalues: LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval)
+		local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
+		
+		if CurrentUserId == "" then
+			local LocalPlayerUserId = GetLocalPlayerUserIdFunction()
+			
+			return if LocalPlayerUserId then tostring(LocalPlayerUserId) else ""
+		else
+			return CurrentUserId
+		end
+	end, handleFriendshipNotification) else nil
+	
 	return {
 		GetOnlineFriends = function()
 			-- upvalues: LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval), DataResolverModule (copy), Computed (copy)
@@ -665,15 +693,19 @@ return function()
 			table.clear(Tbl)
 		end,
 		dispose = function()
-			-- upvalues: DataResolverModule (copy), DataResolverModule1 (copy), DataResolverModule3 (copy), DataResolverModule2 (copy), DataResolverModule4 (copy), Tbl (copy)
+			-- upvalues: DataResolverModule (copy), DataResolverModule1 (copy), DataResolverModule3 (copy), DataResolverModule2 (copy), DataResolverModule4 (copy), Tbl (copy), ObserveResult (ref)
 			DataResolverModule.dispose()
 			DataResolverModule1.dispose()
 			DataResolverModule3.dispose()
 			DataResolverModule2.dispose()
 			DataResolverModule4.dispose()
 			table.clear(Tbl)
+			
+			if ObserveResult then
+				ObserveResult()
+			end
 		end,
-		_fetchOnlineFriendsAsync = function()
+		_fetchOnlineFriendsAsync = function(p12)
 			-- upvalues: LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval), RequestsModule (upval), applyGetOnlineFriendsResponseBody (copy), DataCacheModule (copy)
 			local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
 			local CurrentUserId1 = nil
@@ -684,7 +716,7 @@ return function()
 			else
 				CurrentUserId1 = CurrentUserId
 			end
-			return RequestsModule.GetOnlineFriends(CurrentUserId1):andThen(function(Result)
+			return RequestsModule.GetOnlineFriends(CurrentUserId1, p12):andThen(function(Result)
 				-- upvalues: applyGetOnlineFriendsResponseBody (upval), DataCacheModule (upval), CurrentUserId1 (copy)
 				DataCacheModule.replaceItems({
 					[CurrentUserId1] = applyGetOnlineFriendsResponseBody(Result)
@@ -765,7 +797,7 @@ return function()
 		_updateFriendsPresences = function(List, p12, _)
 			-- upvalues: normalizeStoredOnlineFriendRow (upval), NormalizePresenceRawDataModule (upval), GetResult (copy), DataCacheModule1 (copy), appendUserToAllFriends (copy), DataCacheModule3 (copy), DataCacheModule (copy), LocalUserIdStore (upval), GetLocalPlayerUserIdFunction (upval)
 			if not List then return end
-			local P67 = p12 or {}
+			local P69 = p12 or {}
 			local t = {}
 			
 			for _, value in pairs(List) do
@@ -773,7 +805,7 @@ return function()
 				local Text = if UserId then tostring(UserId) else nil
 				
 				if Text then
-					t[Text] = normalizeStoredOnlineFriendRow({ id = Text, sortScore = P67[Text] })
+					t[Text] = normalizeStoredOnlineFriendRow({ id = Text, sortScore = P69[Text] })
 					GetResult.UpdateUserPresence(Text, NormalizePresenceRawDataModule(value), { isUpdatedRealtime = true })
 					DataCacheModule1.replaceItem(Text, true)
 					appendUserToAllFriends(Text)

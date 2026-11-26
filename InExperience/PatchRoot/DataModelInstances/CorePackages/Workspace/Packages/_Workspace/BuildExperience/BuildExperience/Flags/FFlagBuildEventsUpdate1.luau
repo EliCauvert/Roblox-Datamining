@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("BuildEventsUpdate1", false)

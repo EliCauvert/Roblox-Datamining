@@ -60,11 +60,13 @@ Amp.Upsell.Title.RequestSent,Verzoek verzonden
 Authentication.AccountSwitch.Action.SwitchAccount,Van account wisselen
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,Snel aanmelden
+Authentication.Login.Action.Leave,Afsluiten
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.Save,Opslaan
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,Roblox afsluiten om van account te wisselen voor {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,Een ander Roblox-account gebruiken
 Authentication.Login.Button.XboxAccountSwitcher,Van Xbox-account wisselen
+Authentication.Login.Description.LeaveAccountSetup,"Als je nu stopt, wordt je Roblox-account niet ingesteld."
 Authentication.Login.Error.PasskeyOnlyAccount,Voor je account is alleen een toegangssleutel ingesteld om je aan te melden. Probeer je aan te melden met je toegangssleutel of herstel je account.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Kan platformaccount niet verifiëren. Probeer het later opnieuw.
 Authentication.Login.Heading.IncompatibleAccounts,Incompatibele accounts
@@ -93,7 +95,7 @@ Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.ContinueSetup,Doorgaan met instellen
 Authentication.SignUp.Action.Create,Maken
 Authentication.SignUp.Action.CreateAccountSentenceCase,Account aanmaken
-Authentication.SignUp.Action.ExitModalLeave,Afsluiten
+Authentication.SignUp.Action.ExitModalLeave,
 Authentication.SignUp.Action.RespawnNow,Nu respawnen
 Authentication.SignUp.Button.OKCaptialized,Oké
 Authentication.SignUp.Button.RetryLogIn,Opnieuw proberen inloggen
@@ -2106,8 +2108,11 @@ Feature.AvatarSwitcher.Message.UnknownSupport,"Je kunt je avatar nog steeds wiss
 Feature.AvatarSwitcher.Message.Unsupported,Deze ervaring maakt gebruik van een aangepaste avatar en ondersteunt geen Roblox-avatars.
 Feature.AvatarWorkshop.Action.EditAvatar,Avatar bewerken
 Feature.AvatarWorkshop.Action.TryAgain,
+Feature.AvatarWorkshop.Description.AddAvatar,Deze avatar toevoegen aan je avatars?
+Feature.AvatarWorkshop.Heading.AddAvatar,Avatar toevoegen?
 Feature.AvatarWorkshop.Heading.Customize,Aanpassen
 Feature.AvatarWorkshop.Heading.YourAvatars,Je avatars
+Feature.AvatarWorkshop.Label.DefaultAvatarName,
 Feature.AvatarWorkshop.Message.LoadItemsError,Er is iets misgegaan bij het laden van je items.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,Kan geen items meer laden.
 Feature.AvatarWorkshop.Message.NoItemsOwned,Je hebt hier nog geen items.
@@ -2380,6 +2385,8 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,Alle games
 Feature.Build.Label.AmountAvailable,{AMOUNT} beschikbaar
+Feature.Build.Label.AttachmentCountPlural,{count} bijlagen
+Feature.Build.Label.AttachmentCountSingular,1 bijlage
 Feature.Build.Label.Autosaved,Automatisch opgeslagen
 Feature.Build.Label.Available,beschikbaar
 Feature.Build.Label.AvailableForPurchase,Beschikbaar om te kopen
@@ -2399,6 +2406,7 @@ Feature.Build.Label.DefaultDeveloperProductName,ontwikkelaarsproduct
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,Verwijderd
 Feature.Build.Label.DescribeIdea,Beschrijf een idee
+Feature.Build.Label.DescribeIdeaOrPick,Beschrijf een idee of kies er hieronder een
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,Beschrijving: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Naam: {NAME}
@@ -3286,6 +3294,7 @@ Feature.Chat.Label.SearchFriends,Vrienden zoeken
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,Selecteren om te verwijderen
 Feature.Chat.Label.SnoozePartyNotifications,Groepsmeldingen in de ervaring dempen voor:
+Feature.Chat.Label.StartChatting,Beginnen met chatten
 Feature.Chat.Label.SwipeToReplyTooltip,Veeg om te antwoorden
 Feature.Chat.Label.TapToRemove,Tik om te verwijderen
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} d
@@ -3552,6 +3561,7 @@ Feature.Friends.Button.GotIt,
 Feature.Friends.Description.ContactsModal,Je contactpersonen zitten op Roblox! Word vrienden om hun volledige avatars en profielen te zien. Ga naar de pagina Vrienden toevoegen om meer personen te zien die je misschien kent.
 Feature.Friends.Description.DoMoreWithTrustedConnections,Doe meer op Roblox met vertrouwde connecties. Voeg alleen mensen toe die je kent en vertrouwt.
 Feature.Friends.Description.DoMoreWithTrustedFriends,Doe meer op Roblox met vertrouwde vrienden. Voeg alleen mensen toe die je kent en vertrouwt.
+Feature.Friends.Description.FoundFromContactImporter,Verzonden van contactimporter
 Feature.Friends.Description.FromContacts,Van contactpersonen
 Feature.Friends.Description.FromContactsV2,{contactName} van contactpersonen
 Feature.Friends.Description.FromQrCode,Van QR-code
@@ -3642,6 +3652,7 @@ Feature.Friends.Label.SentFromWithContext,Verzonden van {gameName}
 Feature.Friends.Label.SingularMutualFriend,gemeenschappelijke vriend
 Feature.Friends.Label.Suggested,Aanbevolen
 Feature.Friends.Label.Unfollowed,Ontvolgd
+Feature.Friends.Label.YouAreFollowing,Je volgt
 Feature.Friends.Label.YourLinkedParent,Je gekoppelde ouder
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,Wil je worden aanbevolen aan Roblox-gebruikers die jouw telefoonnummer hebben?
@@ -3686,6 +3697,7 @@ Feature.FriendsActivityFeed.Label.ViewRecentActivity,Recente activiteit bekijken
 Feature.FriendsMenu.Label.SelectedFriendsCount,{numerator}/{denominator} vrienden geselecteerd
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,{selectedCount} vrienden geselecteerd
 Feature.GameBadges.Label.Experience,
+Feature.GameDetails.Action.Continue,
 Feature.GameDetails.Action.GameDetails,Details van spel
 Feature.GameDetails.Action.GiveFeedback,
 Feature.GameDetails.Action.NotInterested,Niet geïnteresseerd
@@ -3717,9 +3729,12 @@ Feature.GameDetails.Label.WhyThisAd,
 Feature.GameDetails.Label.Yes,
 Feature.GameDetails.Message.AdPreferences,Advertentievoorkeuren
 Feature.GameDetails.Message.AnonymousFeedbackTermsOfUse,Reacties worden anoniem gedeeld en vallen onder feedback zoals gedefinieerd in de Gebruiksvoorwaarden van {underlineStart}Roblox{underlineEnd}.
+Feature.GameDetails.Message.ExternalLinkWarning,"Door op 'Doorgaan' te klikken, word je doorgestuurd naar een website die geen eigendom is van Roblox en niet door Roblox wordt beheerd. Deze website kan andere voorwaarden en een ander privacybeleid hebben."
 Feature.GameDetails.Message.HelpImproveExperience,Help ons je ervaring te verbeteren
 Feature.GameDetails.Message.HidingExperienceQuestion,Waarom verberg je deze ervaring?
+Feature.GameDetails.Message.LeavingRobloxTitle,Roblox verlaten
 Feature.GameDetails.Message.PurchaseGameV2,Toegang tot ontgrendelen {gameName} voor {X} Robux?
+Feature.GameDetails.Message.RobloxWebsiteSignedInWarning,"Door op 'Doorgaan' te klikken, wordt roblox.com geopend in een webbrowser en word je aangemeld bij je Roblox-account."
 Feature.GameDetails.Message.SponsoredDisclosure.Error,De sponsorinformatie kon niet worden weergegeven vanwege een tijdelijke fout.
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"Je ziet deze gesponsorde content op basis van niet-gepersonaliseerde factoren zoals apparaatinformatie, locatie en leeftijd om je passende content te tonen. De maker van de ervaring is {CreatorName}. De sponsoring is betaald door {PayerName}. Ga voor meer informatie naar de pagina 'Privacy en contentclassificatie' onder Instellingen in je account, hier:"
 Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,"Je ziet deze gesponsorde content op basis van verschillende factoren, zoals je locatie, apparaatinformatie, leeftijd en platformgedrag, om je relevante content te tonen. De maker van de ervaring is {CreatorName}. De sponsoring is betaald door {PayerName}. Ga voor meer informatie naar de pagina 'Privacy en contentclassificatie' onder Instellingen in je account, hier:"
@@ -3738,9 +3753,12 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Meldingen ingeschakeld voor {ex
 Feature.GameJoin.Description.DifferentServer,Je begint op een andere server
 Feature.GameJoin.Label.PlayTogether,Jullie kunnen samen spelen
 Feature.GameJoin.Label.PlayTogetherSoon,Jullie kunnen binnenkort samen spelen
+Feature.GameJoin.Label.Played,gespeeld
+Feature.GameJoin.Label.RecentCoplay,Jullie hebben onlangs samen gespeeld
 Feature.GamePage.Action.BackToTop,Terug naar boven
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
+Feature.GamePage.LabelCancelField,
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,Deze ervaring is niet beschikbaar vanwege de status van je leeftijdsverificatie.
 Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,Gasten kunnen niet deelnemen aan deze ervaring.
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,"Om deze ervaring te bezoeken, is een aankoop vereist."
@@ -3971,6 +3989,7 @@ Feature.Moments.Action.Hide,Details verbergen
 Feature.Moments.Action.HowToCapture,Bekijk hoe je een link vastlegt
 Feature.Moments.Action.KeepEditing,Doorgaan met bewerken
 Feature.Moments.Action.Leave,
+Feature.Moments.Action.LoadMore,
 Feature.Moments.Action.Minimize,Minimaliseren
 Feature.Moments.Action.Ok,
 Feature.Moments.Action.Play,
@@ -4273,7 +4292,7 @@ Feature.PlayerSearchResults.Label.NewUsername,Nieuwe gebruikersnaam
 Feature.PlayerSearchResults.Label.Previously,Eerder
 Feature.PlayerSearchResults.Label.ThisIsYou,Dit ben jij
 Feature.PlayerSearchResults.Label.You,Jij
-Feature.PlayerSearchResults.Label.YouAreFollowing,Je volgt
+Feature.PlayerSearchResults.Label.YouAreFollowing,
 Feature.PlayerSearchResults.Label.YouAreFriends,Jullie zijn vrienden
 Feature.PrivateServers.Action.CreatePrivateServer,Privéserver maken
 Feature.PrivateServers.Action.FreeWithBlackbird,Gratis met Plus
@@ -4998,7 +5017,6 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 an
 Feature.UniversalShareSheet.Response.SharedMessage,Bericht is verzonden
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Berichten zijn verzonden
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} anderen
-Feature.UserLibrary.Label.MyLibrary,Mijn bibliotheek
 Feature.VIPServer.Message.TooManyFreeServersOnGame,Je kunt niet nog meer gratis privéservers hebben voor deze game.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,Je kunt niet meer actieve gratis privéservers hebben. Deactiveer eerst een aantal andere servers.
 Feature.VerificationUpsell.Action.AddPhone,Telefoonnummer toevoegen
@@ -5169,8 +5187,8 @@ IAPExperience.InsufficientRobux.Text.YouNeed,Je hebt nog {robux} nodig. Koop mee
 IAPExperience.InsufficientRobux.Title.InsufficientRobux,
 IAPExperience.LeaveRoblox.Action.Cancel,
 IAPExperience.LeaveRoblox.Action.Continue,
-IAPExperience.LeaveRoblox.Text.ExternalWebsiteWarning,"Door op 'Doorgaan' te klikken, word je doorgestuurd naar een website die geen eigendom is van Roblox en niet door Roblox wordt beheerd. Deze website kan andere voorwaarden en een ander privacybeleid hebben."
-IAPExperience.LeaveRoblox.Title.LeavingRoblox,Roblox verlaten
+IAPExperience.LeaveRoblox.Text.ExternalWebsiteWarning,
+IAPExperience.LeaveRoblox.Title.LeavingRoblox,
 IAPExperience.Loading.Text.PurchasingItem,Bezig met het aankopen van item ...
 IAPExperience.Loading.Text.PurchasingRobux,Bezig met het aankopen van Robux ...
 IAPExperience.Loading.Text.WaitingForPurchase,Wachten op aankoop ...

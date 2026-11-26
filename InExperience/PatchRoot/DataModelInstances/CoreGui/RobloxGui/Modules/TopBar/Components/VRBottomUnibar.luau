@@ -14,8 +14,6 @@ local FFlagTopBarSignalizeKeepOutAreas = CoreGuiCommonModule.Flags.FFlagTopBarSi
 local InExperienceTopBarModule = require(CorePackages.Workspace.Packages.InExperienceTopBar)
 local ExperienceAgeRatingBadgeModule = require(CorePackages.Workspace.Packages.InExperienceTopBar.ExperienceAgeRatingBadge)
 local FFlagExperienceAgeRatingBadge = InExperienceTopBarModule.Flags.FFlagExperienceAgeRatingBadge
-local FFlagShowGameAgeRating = require(CorePackages.Workspace.Packages.SharedFlags).FFlagShowGameAgeRating
-local FFlagShowGameAgeRating1 = FFlagExperienceAgeRatingBadge and FFlagShowGameAgeRating
 local FFlagTopBarRefactor = InExperienceTopBarModule.Flags.FFlagTopBarRefactor
 
 local function MenuIconWrapper(p1)
@@ -34,13 +32,13 @@ local function MenuIconWrapper(p1)
 end
 
 return ReactModule.memo(function(p1)
-	-- upvalues: FFlagShowGameAgeRating1 (copy), FFlagExperienceAgeRatingBadge (copy), FFlagShowGameAgeRating (copy), ReactModule (copy), Panel3DInSpatialUI (copy), PanelType (copy), FFlagTopBarRefactor (copy), FoundationModule (copy), MenuIconWrapper (copy), UnibarModule (copy), ExperienceAgeRatingBadgeModule (copy)
-	local IsShowBadgeOver: boolean = FFlagShowGameAgeRating1 and p1.showBadgeOver12 == true
+	-- upvalues: FFlagExperienceAgeRatingBadge (copy), FFlagExperienceAgeRatingBadge (copy), ReactModule (copy), Panel3DInSpatialUI (copy), PanelType (copy), FFlagTopBarRefactor (copy), FoundationModule (copy), MenuIconWrapper (copy), UnibarModule (copy), ExperienceAgeRatingBadgeModule (copy)
+	local IsShowBadgeOver: boolean = FFlagExperienceAgeRatingBadge and p1.showBadgeOver12 == true
 	local v1 = nil
 	local UseBindingResult2 = nil
 	local UseResult = nil
 	
-	if FFlagExperienceAgeRatingBadge and FFlagShowGameAgeRating then
+	if FFlagExperienceAgeRatingBadge then
 		v1, UseBindingResult2 = ReactModule.useBinding(true)
 		UseResult = ReactModule.useCallback(function(p2)
 			-- upvalues: UseBindingResult2 (ref)
@@ -49,18 +47,18 @@ return ReactModule.memo(function(p1)
 	end
 	return if Panel3DInSpatialUI then ReactModule.createElement(Panel3DInSpatialUI, {
 		panelType = PanelType.BottomBar,
-		keepVisibleWhenTopBarHidden = if FFlagShowGameAgeRating1 then IsShowBadgeOver else nil,
-		controlsVisible = if FFlagShowGameAgeRating1 then v1 else nil,
+		keepVisibleWhenTopBarHidden = if FFlagExperienceAgeRatingBadge then IsShowBadgeOver else nil,
+		controlsVisible = if FFlagExperienceAgeRatingBadge then v1 else nil,
 		renderFunction = function(p2)
-			-- upvalues: ReactModule (upval), FFlagShowGameAgeRating1 (upval), v1 (ref), UseResult (ref), FFlagTopBarRefactor (upval), FoundationModule (upval), MenuIconWrapper (upval), p1 (copy), IsShowBadgeOver (copy), UnibarModule (upval), ExperienceAgeRatingBadgeModule (upval)
-			local Element = ReactModule.createElement(if FFlagShowGameAgeRating1 then "CanvasGroup" else "Frame", {
-				Name = if FFlagShowGameAgeRating1 then "AnimatablePanelManagedContent" else nil,
-				Visible = if FFlagShowGameAgeRating1 then v1 else nil,
+			-- upvalues: ReactModule (upval), FFlagExperienceAgeRatingBadge (upval), v1 (ref), UseResult (ref), FFlagTopBarRefactor (upval), FoundationModule (upval), MenuIconWrapper (upval), p1 (copy), IsShowBadgeOver (copy), UnibarModule (upval), ExperienceAgeRatingBadgeModule (upval)
+			local Element = ReactModule.createElement(if FFlagExperienceAgeRatingBadge then "CanvasGroup" else "Frame", {
+				Name = if FFlagExperienceAgeRatingBadge then "AnimatablePanelManagedContent" else nil,
+				Visible = if FFlagExperienceAgeRatingBadge then v1 else nil,
 				[ReactModule.Change.GroupTransparency] = UseResult,
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
-				Size = if FFlagShowGameAgeRating1 then UDim2.fromOffset(0, p2.Y) elseif FFlagTopBarRefactor then UDim2.new(1, 0, 0, 0) else UDim2.new(1, 0, 1, 0),
-				AutomaticSize = if FFlagShowGameAgeRating1 then Enum.AutomaticSize.X elseif FFlagTopBarRefactor then Enum.AutomaticSize.Y else nil
+				Size = if FFlagExperienceAgeRatingBadge then UDim2.fromOffset(0, p2.Y) elseif FFlagTopBarRefactor then UDim2.new(1, 0, 0, 0) else UDim2.new(1, 0, 1, 0),
+				AutomaticSize = if FFlagExperienceAgeRatingBadge then Enum.AutomaticSize.X elseif FFlagTopBarRefactor then Enum.AutomaticSize.Y else nil
 			}, {
 				ListLayout = ReactModule.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Horizontal,
@@ -106,7 +104,7 @@ return ReactModule.memo(function(p1)
 				})
 			})
 			
-			return if FFlagShowGameAgeRating1 then ReactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
+			return if FFlagExperienceAgeRatingBadge then ReactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
 				Layout = ReactModule.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Horizontal,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
@@ -118,6 +116,6 @@ return ReactModule.memo(function(p1)
 				AgeRating = if IsShowBadgeOver then ReactModule.createElement(ExperienceAgeRatingBadgeModule, { layoutOrder = 1, universeId = tostring(game.GameId) }) else nil
 			}) else Element
 		end,
-		requireCanvasGroup = not FFlagShowGameAgeRating1
+		requireCanvasGroup = not FFlagExperienceAgeRatingBadge
 	}) else nil
 end)

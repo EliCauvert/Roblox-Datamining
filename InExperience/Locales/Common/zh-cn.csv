@@ -60,11 +60,13 @@ Amp.Upsell.Title.RequestSent,请求已发送
 Authentication.AccountSwitch.Action.SwitchAccount,切换帐户
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,快速登录
+Authentication.Login.Action.Leave,离开
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.Save,保存
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,退出 Roblox 以切换为 {platformAccountName} 帐户
 Authentication.Login.Button.UseDifferentRobloxAccount,使用其他 Roblox 帐户
 Authentication.Login.Button.XboxAccountSwitcher,切换 Xbox 帐户
+Authentication.Login.Description.LeaveAccountSetup,如果现在离开，你的 Roblox 帐户将无法完成设置。
 Authentication.Login.Error.PasskeyOnlyAccount,你的帐户只设置了登录密码。请尝试使用你的通行密钥登录，或恢复你的帐户。
 Authentication.Login.Error.PlatformAccountConnectionFailure,无法验证平台帐户。请稍后重试。
 Authentication.Login.Heading.IncompatibleAccounts,帐户不兼容
@@ -93,7 +95,7 @@ Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.ContinueSetup,继续设置
 Authentication.SignUp.Action.Create,创建
 Authentication.SignUp.Action.CreateAccountSentenceCase,创建帐户
-Authentication.SignUp.Action.ExitModalLeave,离开
+Authentication.SignUp.Action.ExitModalLeave,
 Authentication.SignUp.Action.RespawnNow,立即重生
 Authentication.SignUp.Button.OKCaptialized,好的
 Authentication.SignUp.Button.RetryLogIn,重试登录
@@ -2105,8 +2107,11 @@ Feature.AvatarSwitcher.Message.UnknownSupport,你仍然可以切换虚拟形象�
 Feature.AvatarSwitcher.Message.Unsupported,本体验使用自定义虚拟形象，不支持 Roblox 虚拟形象。
 Feature.AvatarWorkshop.Action.EditAvatar,编辑虚拟形象
 Feature.AvatarWorkshop.Action.TryAgain,
+Feature.AvatarWorkshop.Description.AddAvatar,是否将此虚拟形象添加到你的虚拟形象？
+Feature.AvatarWorkshop.Heading.AddAvatar,添加虚拟形象？
 Feature.AvatarWorkshop.Heading.Customize,
 Feature.AvatarWorkshop.Heading.YourAvatars,你的虚拟形象
+Feature.AvatarWorkshop.Label.DefaultAvatarName,
 Feature.AvatarWorkshop.Message.LoadItemsError,加载你的道具时出现问题。
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,无法加载更多道具。
 Feature.AvatarWorkshop.Message.NoItemsOwned,你在这里还没有任何道具。
@@ -2379,6 +2384,8 @@ Feature.Build.Label.AdvancedModel,高级
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,所有游戏
 Feature.Build.Label.AmountAvailable,{AMOUNT} 可用
+Feature.Build.Label.AttachmentCountPlural,{count} 个附件
+Feature.Build.Label.AttachmentCountSingular,1 个附件
 Feature.Build.Label.Autosaved,已自动保存
 Feature.Build.Label.Available,可用
 Feature.Build.Label.AvailableForPurchase,可供购买
@@ -2398,6 +2405,7 @@ Feature.Build.Label.DefaultDeveloperProductName,开发者产品
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,已删除
 Feature.Build.Label.DescribeIdea,描述一个创意
+Feature.Build.Label.DescribeIdeaOrPick,描述创意，或在下方选择一个
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,描述：{DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,名称：{NAME}
@@ -3283,6 +3291,7 @@ Feature.Chat.Label.SearchFriends,搜索好友
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,选择以移除
 Feature.Chat.Label.SnoozePartyNotifications,将体验中的队伍通知静音：
+Feature.Chat.Label.StartChatting,开始聊天
 Feature.Chat.Label.SwipeToReplyTooltip,滑动以回复
 Feature.Chat.Label.TapToRemove,轻点以移除
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} 天
@@ -3549,6 +3558,7 @@ Feature.Friends.Button.GotIt,
 Feature.Friends.Description.ContactsModal,你的联系人也在 Roblox 上！成为好友后，你将可以看到他们完整的虚拟形象和个人资料。前往添加好友页面，查看更多你可能认识的人。
 Feature.Friends.Description.DoMoreWithTrustedConnections,在 Roblox 上与可信赖的联系人通过更多方式沟通。请仅添加你认识并信任的人。
 Feature.Friends.Description.DoMoreWithTrustedFriends,在 Roblox 上与信赖的好友通过更多方式沟通。请仅添加你认识并信任的人。
+Feature.Friends.Description.FoundFromContactImporter,从联系人批量导入工具发送
 Feature.Friends.Description.FromContacts,从通讯录
 Feature.Friends.Description.FromContactsV2,通讯录联系人名称：{contactName}
 Feature.Friends.Description.FromQrCode,来自二维码
@@ -3602,7 +3612,7 @@ Feature.Friends.Label.FollowsYou,已关注了你
 Feature.Friends.Label.Frequent,一起玩过
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,已邀请你成为 Roblox 好友
-Feature.Friends.Label.FriendOfUser,{displayName}的好友
+Feature.Friends.Label.FriendOfUser,为你推荐
 Feature.Friends.Label.FriendOwns,1 位好友拥有
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 位好友</b>最近玩过
 Feature.Friends.Label.FriendRequest,
@@ -3639,6 +3649,7 @@ Feature.Friends.Label.SentFromWithContext,发送自 {gameName}
 Feature.Friends.Label.SingularMutualFriend,
 Feature.Friends.Label.Suggested,建议体验
 Feature.Friends.Label.Unfollowed,已取消关注
+Feature.Friends.Label.YouAreFollowing,你正在关注
 Feature.Friends.Label.YourLinkedParent,你关联的家长
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,你想被推荐至其他经过验证并拥有你手机号码的用户吗？
@@ -3683,6 +3694,7 @@ Feature.FriendsActivityFeed.Label.ViewRecentActivity,查看近期活动
 Feature.FriendsMenu.Label.SelectedFriendsCount,已选择 {numerator}/{denominator} 位好友
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,已选择 {selectedCount} 位好友
 Feature.GameBadges.Label.Experience,
+Feature.GameDetails.Action.Continue,
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,
 Feature.GameDetails.Action.NotInterested,不感兴趣
@@ -3714,9 +3726,12 @@ Feature.GameDetails.Label.WhyThisAd,
 Feature.GameDetails.Label.Yes,
 Feature.GameDetails.Message.AdPreferences,广告偏好
 Feature.GameDetails.Message.AnonymousFeedbackTermsOfUse,你的反馈将以匿名形式提交，并根据 {underlineStart}Roblox 使用条款{underlineEnd}视为意见反馈。
+Feature.GameDetails.Message.ExternalLinkWarning,点按“继续”后，你将跳转至并非由 Roblox 运营并操作的网站，该网站可能受不同的条款及隐私政策约束。
 Feature.GameDetails.Message.HelpImproveExperience,帮助我们改善你的体验
 Feature.GameDetails.Message.HidingExperienceQuestion,为什么要隐藏此体验？
+Feature.GameDetails.Message.LeavingRobloxTitle,正在离开 Roblox
 Feature.GameDetails.Message.PurchaseGameV2,确定以 {X} Robux 解锁“{gameName}”的通行证？
+Feature.GameDetails.Message.RobloxWebsiteSignedInWarning,点按“继续”后，roblox.com 将在网页浏览器中打开，你需要登录 Roblox 帐户。
 Feature.GameDetails.Message.SponsoredDisclosure.Error,由于临时错误，无法显示赞助信息。
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,你看到的这个赞助内容基于非个性化因素（如设备信息、地理位置和年龄）推送，旨在向你展示适当的内容。体验创作者是{CreatorName}。此赞助由{PayerName}付费。如需了解更多信息，请访问帐户设置下的“隐私和内容成熟度”页面：
 Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,你看到的这个赞助内容基于不同因素（如地理位置、设备信息、年龄和平台行为）推送，旨在向你展示相关的内容。体验创作者是{CreatorName}。此赞助由{PayerName}付费。如需了解更多信息，请访问帐户设置下的“隐私和内容成熟度”页面：
@@ -3735,9 +3750,12 @@ Feature.GameFollows.TooltipTurnedOnNotifications,已开启关于“{experienceNa
 Feature.GameJoin.Description.DifferentServer,你们将在不同的服务器上开始游戏
 Feature.GameJoin.Label.PlayTogether,你们可以一起游玩
 Feature.GameJoin.Label.PlayTogetherSoon,你们很快就可以一起游玩了
+Feature.GameJoin.Label.Played,玩过
+Feature.GameJoin.Label.RecentCoplay,你们最近一起玩过
 Feature.GamePage.Action.BackToTop,返回顶部
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
+Feature.GamePage.LabelCancelField,
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,由于你的年龄验证状态，你无法加入此体验。
 Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,游客无法加入体验。
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,需购买以访问此作品。
@@ -3967,6 +3985,7 @@ Feature.Moments.Action.Hide,隐藏详情
 Feature.Moments.Action.HowToCapture,查看如何截取
 Feature.Moments.Action.KeepEditing,继续编辑
 Feature.Moments.Action.Leave,
+Feature.Moments.Action.LoadMore,
 Feature.Moments.Action.Minimize,最小化
 Feature.Moments.Action.Ok,
 Feature.Moments.Action.Play,播放
@@ -4993,7 +5012,6 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE}和另�
 Feature.UniversalShareSheet.Response.SharedMessage,信息已发送
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE}和另外 {N} 人
-Feature.UserLibrary.Label.MyLibrary,我的资源库
 Feature.VIPServer.Message.TooManyFreeServersOnGame,你无法为此游戏添加更多免费私人服务器。
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,您无法激活更多免费私人服务器。请先关闭一些其他的服务器。
 Feature.VerificationUpsell.Action.AddPhone,添加手机
@@ -5255,7 +5273,7 @@ IAPExperience.RobuxUpsell.Text.BuyRobuxQuestion,你想要购买吗
 IAPExperience.RobuxUpsell.Text.DisclosurePayment,我们会从你的支付方式中扣除费用。
 IAPExperience.RobuxUpsell.Text.DisclosureTerms,交易将受到 Roblox 使用条款规范。
 IAPExperience.RobuxUpsell.Text.DisclosureTermsURL,适用于 Roblox {termsofuse}。
-IAPExperience.RobuxUpsell.Text.ForYou,为你推荐
+IAPExperience.RobuxUpsell.Text.ForYou,
 IAPExperience.RobuxUpsell.Text.LastPurchased,上次购买
 IAPExperience.RobuxUpsell.Text.Loading,
 IAPExperience.RobuxUpsell.Text.MoreRobux,同样价格，更多 Robux

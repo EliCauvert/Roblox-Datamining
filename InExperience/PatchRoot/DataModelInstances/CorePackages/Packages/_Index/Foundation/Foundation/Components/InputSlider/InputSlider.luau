@@ -21,6 +21,7 @@ local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
 local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 local ControlStateModule = require(Foundation.Enums.ControlState)
 local InputLabelSizeModule = require(Foundation.Enums.InputLabelSize)
+local InputVariantModule = require(Foundation.Enums.InputVariant)
 local InputModeModule = require(Foundation.Utility.Input.InputMode)
 local OnChangeCallbackReasonModule = require(Foundation.Enums.OnChangeCallbackReason)
 local StateLayerAffordanceModule = require(Foundation.Enums.StateLayerAffordance)
@@ -40,7 +41,8 @@ local config = {
 local config1 = {
 	sensitivity = 1,
 	isDisabled = false,
-	testId = "--foundation-input-slider"
+	testId = "--foundation-input-slider",
+	variant = if FlagsModule.FoundationInputSliderVariant then InputVariantModule.Standard else nil
 }
 
 local function ScrubDragDetector(p1)
@@ -103,7 +105,7 @@ local _ = function(p1: number)
 end
 
 return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
-	-- upvalues: WithDefaultsModule (copy), config1 (copy), UseTokensModule (copy), UsePluginModule (copy), UseLastInputModeModule (copy), DevAssertModule (copy), ReactModule (copy), ControlStateModule (copy), GetBindableValueModule (copy), CalculateInputSliderValueModule (copy), OnChangeCallbackReasonModule (copy), FormatInputSliderValueModule (copy), SnapInputSliderValueModule (copy), FlagsModule (copy), UseTypedValueStepsModule (copy), UseSliderDirectionalInputModule (copy), InputModeModule (copy), UseInputSliderVariantsModule (copy), UseInputSliderFillModule (copy), MapBindableModule (copy), GetStateLayerStyleModule (copy), UseStyleTagsModule (copy), ViewModule (copy), WithCommonPropsModule (copy), config (copy), StateLayerAffordanceModule (copy), InputLabelModule (copy), InputLabelSizeModule (copy), ScrubDragDetector (copy), DashModule (copy), TextModule (copy)
+	-- upvalues: WithDefaultsModule (copy), config1 (copy), UseTokensModule (copy), UsePluginModule (copy), UseLastInputModeModule (copy), DevAssertModule (copy), ReactModule (copy), ControlStateModule (copy), GetBindableValueModule (copy), CalculateInputSliderValueModule (copy), OnChangeCallbackReasonModule (copy), FormatInputSliderValueModule (copy), SnapInputSliderValueModule (copy), FlagsModule (copy), UseTypedValueStepsModule (copy), UseSliderDirectionalInputModule (copy), InputModeModule (copy), UseInputSliderVariantsModule (copy), UseInputSliderFillModule (copy), MapBindableModule (copy), InputVariantModule (copy), GetStateLayerStyleModule (copy), UseStyleTagsModule (copy), ViewModule (copy), WithCommonPropsModule (copy), config (copy), StateLayerAffordanceModule (copy), InputLabelModule (copy), InputLabelSizeModule (copy), ScrubDragDetector (copy), DashModule (copy), TextModule (copy)
 	local WithDefaultsModuleResult = WithDefaultsModule(p1, config1)
 	local UseTokensModuleResult = UseTokensModule()
 	local UsePluginModuleResult = UsePluginModule()
@@ -389,7 +391,7 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 			Mouse.Icon = Icon
 		end
 	end, { UsePluginModuleResult, UseStateResult1_1 })
-	local UseInputSliderVariantsModuleResult = UseInputSliderVariantsModule(UseTokensModuleResult, UseStateResult7, IsDisabled)
+	local UseInputSliderVariantsModuleResult = UseInputSliderVariantsModule(UseTokensModuleResult, UseStateResult7, IsDisabled, WithDefaultsModuleResult.variant, UseStateResult1_1 or UseStateResult4)
 	local UseInputSliderFillModuleResult = UseInputSliderFillModule(WithDefaultsModuleResult.value, Range, UseInputSliderVariantsModuleResult.fill.filledStyle, UseInputSliderVariantsModuleResult.fill.unfilledStyle, UseRefResult4)
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: UseStateResult (copy), UseBindingResult (copy), MapBindableModule (upval), WithDefaultsModuleResult (copy), FormatInputSliderValueModule (upval), Range (copy)
@@ -403,15 +405,16 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 		WithDefaultsModuleResult.value,
 		Range
 	})
-	local StateLayerStyleModule = nil
+	local IsVariantMatch: boolean = FlagsModule.FoundationInputSliderVariant and WithDefaultsModuleResult.variant == InputVariantModule.Utility
+	local BackgroundStyle = nil
 	
-	if IsDisabled or UseStateResult or UseStateResult4 then
-		StateLayerStyleModule = nil
+	if IsDisabled or UseStateResult or (UseStateResult4 or IsVariantMatch) then
+		BackgroundStyle = nil
 	elseif UseStateResult1 then
-		StateLayerStyleModule = GetStateLayerStyleModule(UseTokensModuleResult, nil, ControlStateModule.Pressed)
+		BackgroundStyle = GetStateLayerStyleModule(UseTokensModuleResult, nil, ControlStateModule.Pressed)
 	else
 		local IsUseStateResultMatch1: boolean = UseStateResult5 == ControlStateModule.Hover or UseStateResult5 == ControlStateModule.Pressed
-		StateLayerStyleModule = if IsUseStateResultMatch1 then GetStateLayerStyleModule(UseTokensModuleResult, nil, UseStateResult5) else nil
+		BackgroundStyle = if IsUseStateResultMatch1 then GetStateLayerStyleModule(UseTokensModuleResult, nil, UseStateResult5) else nil
 	end
 	local config2 = {
 		isPresent = UseStateResult1 or (UseStateResult3 or UseLastInputModeModuleResult ~= InputModeModule.Directional),
@@ -466,10 +469,10 @@ return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref)
 			DragDetector = ReactModule.createElement(ScrubDragDetector, DashModule.join(config2, {
 				testId = `{WithDefaultsModuleResult.testId}--field--drag-detector`
 			})),
-			StateLayer = if StateLayerStyleModule then ReactModule.createElement(ViewModule, {
+			StateLayer = if BackgroundStyle then ReactModule.createElement(ViewModule, {
 				tag = "size-full radius-small",
 				ZIndex = 2,
-				backgroundStyle = StateLayerStyleModule,
+				backgroundStyle = BackgroundStyle,
 				testId = `{WithDefaultsModuleResult.testId}--state-layer`
 			}) else nil,
 			Content = ReactModule.createElement(ViewModule, {
