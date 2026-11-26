@@ -288,6 +288,9 @@ Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,Opnieuw proberen over: {WaitTime}
 Authentication.Login.Action.Continue,
+Authentication.Login.Action.ContinueSetup,Doorgaan met instellen
+Authentication.Login.Action.ContinueWithProvider,Doorgaan met {provider}
+Authentication.Login.Action.CreateANewAccount,
 Authentication.Login.Action.DownloadNow,Nu downloaden
 Authentication.Login.Action.EmailACode,Een code per e-mail verzenden
 Authentication.Login.Action.EmailMeCode,Stuur me een code per e-mail
@@ -297,6 +300,7 @@ Authentication.Login.Action.ForgotUsername,Gebruikersnaam vergeten?
 Authentication.Login.Action.ForgotUsernameOrPassword,Je gebruikersnaam of wachtwoord vergeten?
 Authentication.Login.Action.GetCodeByEmail,Code per e-mail ontvangen
 Authentication.Login.Action.Google,Google
+Authentication.Login.Action.Leave,Afsluiten
 Authentication.Login.Action.LogInEmailOneTimeCode,Stuur me een unieke code per e-mail
 Authentication.Login.Action.NeedHelp,Hulp nodig?
 Authentication.Login.Action.Next,
@@ -321,14 +325,19 @@ Authentication.Login.Description.ChooseHowToPlay,Kies hoe je wilt spelen
 Authentication.Login.Description.DownloadNewVersion,Deze versie van Roblox is niet beschikbaar voor je account. Download de juiste versie om door te gaan.
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,Voer de code in die we zojuist hebben gestuurd naar: {email}
 Authentication.Login.Description.GetOneTimeCodeHelp,Voer het e-mailadres in dat is geverifieerd op je account om een unieke code te ontvangen.
+Authentication.Login.Description.LeaveAccountSetup,"Als je nu stopt, wordt je Roblox-account niet ingesteld."
 Authentication.Login.Description.PasskeyDescription,"Je account heeft een toegangssleutel, een veiligere aanmeldingsmethode dan een wachtwoord. Je kunt je vingerafdruk, gezicht of schermvergrendeling gebruiken om je op dit apparaat aan te melden."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,We kunnen niet bepalen of je apparaat een toegangssleutel ondersteunt. Probeer het opnieuw of tik op 'Problemen bij het inloggen' om je account te herstellen met een e-mailadres of telefoonnummer.
 Authentication.Login.Description.PasskeyMobileOnly,Toegangssleutels zijn alleen beschikbaar op mobiele apparaten. Kies een andere manier om je aan te melden.
 Authentication.Login.Description.SigningInWith,Aanmelden met <b>{identifier}</b>
+Authentication.Login.Description.SsoLinkMultiple,"We hebben meerdere Roblox-accounts gevonden die dit e-mailadres gebruiken. Kies er een om te koppelen aan {provider} zodat je je sneller kunt aanmelden, of maak een nieuw account aan."
+Authentication.Login.Description.SsoLinkSingle,We hebben een Roblox-account gevonden dat dit e-mailadres gebruikt. Koppel het aan {provider} om je sneller aan te melden of maak een nieuw account.
 Authentication.Login.Description.UsernameHandle,@<b>{username}</b>
 Authentication.Login.Description.VerificationCodeSentTo,"Als er een Roblox-account bestaat, ontvang je een verificatiecode op {email}"
 Authentication.Login.Error.PasskeyOnlyAccount,Voor je account is alleen een toegangssleutel ingesteld om je aan te melden. Probeer je aan te melden met je toegangssleutel of herstel je account.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Kan platformaccount niet verifiëren. Probeer het later opnieuw.
+Authentication.Login.Header.LeaveAccountSetup,Stoppen met het instellen van je account?
+Authentication.Login.Header.YouAlreadyHaveAnAccount,Je hebt al een account
 Authentication.Login.Heading.EnterYourCode,Voer je code in
 Authentication.Login.Heading.GetStarted,Aan de slag
 Authentication.Login.Heading.IncompatibleAccounts,Incompatibele accounts
@@ -352,6 +361,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Sorry, er is een probleem 
 
 Wacht even en probeer het opnieuw."
 Authentication.Login.Label.ConnectionError.Title,Verbindingsfout
+Authentication.Login.Label.DontHaveARobloxAccountCreateOne,Heb je geen Roblox-account? {startTag}Maak er een{endTag}
 Authentication.Login.Label.DontHaveAnAccountCreateOne,Heb je geen account? {startTag}Maak er een aan{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,E-mailadressen
@@ -387,6 +397,7 @@ Authentication.Login.Label.VerificationCode,Verificatiecode
 Authentication.Login.Label.WeChatUserCancel,Je bent uitgelogd bij WeChat. Log in bij WeChat.
 Authentication.Login.Label.WeChatVersionNotSupported,De WeChat-versie wordt niet ondersteund
 Authentication.Login.LinkIllegalChildAccountLinking,Dit Roblox-account kon niet worden gekoppeld aan een Xbox-kinderaccount. Probeer een ander account of controleer je instellingen.
+Authentication.Login.Message.SsoProviderLinked,Je kunt je nu aanmelden met {provider}
 Authentication.Login.QrCodeLoginTitle,Scan de QR-code om in te loggen
 Authentication.Login.Response.AccountNotFound,Account niet gevonden. Probeer het opnieuw.
 Authentication.Login.Response.AlreadyLinked,Dit Roblox-account is al gekoppeld aan een ander account op {platform}. Probeer in te loggen met een ander Roblox-account.
@@ -445,13 +456,13 @@ Authentication.ResetPassword.Response.ResetPasswordStarted,Je moet je wachtwoord
 Authentication.SignUp.Action.ApplyOnNextRespawn,Toepassen bij de volgende respawn
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
-Authentication.SignUp.Action.ContinueSetup,Doorgaan met instellen
+Authentication.SignUp.Action.ContinueSetup,
 Authentication.SignUp.Action.Create,Maken
 Authentication.SignUp.Action.CreateAPasskey,Een passkey aanmaken
 Authentication.SignUp.Action.CreateAccount,
 Authentication.SignUp.Action.CreateAccountSentenceCase,
 Authentication.SignUp.Action.EnableFaceId,Face-ID inschakelen
-Authentication.SignUp.Action.ExitModalLeave,Afsluiten
+Authentication.SignUp.Action.ExitModalLeave,
 Authentication.SignUp.Action.IUnderstand,Begrepen
 Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,Nu respawnen
@@ -1592,7 +1603,6 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Vind personen op Roblox do
 Feature.AddFriends.Label.ConnectWithContacts,Nodig contactpersonen uit of maak contact met vrienden die al op Roblox zitten!
 Feature.AddFriends.Label.ContactsTile,Contactpersonen
 Feature.AddFriends.Label.DeclineAllBackgrounded,Alle vriendschapsverzoeken worden genegeerd. Dit kan een minuut duren.
-Feature.AddFriends.Label.EmptyStatePrompt,Met wie ga je Roblox verkennen? Zoek naar personen om toe te voegen of maak contact met vrienden die je al kent!
 Feature.AddFriends.Label.FriendRequests,Vriendschapsverzoeken
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,Personen zoeken
 Feature.AddFriends.Label.MyQrCode,Mijn QR-code
@@ -2663,6 +2673,8 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,Alle games
 Feature.Build.Label.AmountAvailable,{AMOUNT} beschikbaar
+Feature.Build.Label.AttachmentCountPlural,{count} bijlagen
+Feature.Build.Label.AttachmentCountSingular,1 bijlage
 Feature.Build.Label.Autosaved,Automatisch opgeslagen
 Feature.Build.Label.Available,beschikbaar
 Feature.Build.Label.AvailableForPurchase,Beschikbaar om te kopen
@@ -2682,6 +2694,7 @@ Feature.Build.Label.DefaultDeveloperProductName,ontwikkelaarsproduct
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,Verwijderd
 Feature.Build.Label.DescribeIdea,Beschrijf een idee
+Feature.Build.Label.DescribeIdeaOrPick,Beschrijf een idee of kies er hieronder een
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,Beschrijving: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Naam: {NAME}
@@ -3022,6 +3035,7 @@ Feature.BuyRobux.Label.MyFriendsWithCount,Mijn vrienden ({count})
 Feature.BuyRobux.Label.PeopleWithCount,Personen ({count})
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
+Feature.Captures.Title.Captures,Opnames
 Feature.Captures.Title.Gallery,Galerij
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
@@ -3516,6 +3530,7 @@ Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,Selecteren om te verwijderen
 Feature.Chat.Label.Sent,Verzonden
 Feature.Chat.Label.SnoozePartyNotifications,Groepsmeldingen in de ervaring dempen voor:
+Feature.Chat.Label.StartChatting,Beginnen met chatten
 Feature.Chat.Label.SwipeToReplyTooltip,Veeg om te antwoorden
 Feature.Chat.Label.TapToRemove,Tik om te verwijderen
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} d
@@ -3866,7 +3881,6 @@ Feature.Friends.Error.UserBannedError,Je bent verbannen van het uitvoeren van de
 Feature.Friends.Error.UserBlockedError,Je bent geblokkeerd voor het uitvoeren van deze bewerking.
 Feature.Friends.Error.UserNotPassedCaptcha,Je hebt de captcha-test niet doorstaan.
 Feature.Friends.Feature.Friends.Heading.AddFriends,
-Feature.Friends.FriendingTooltipBody,Sommige vriendschapsverzoeken kunnen afkomstig zijn van gebruikers die je vinden via je telefoonnummer. Zorg ervoor dat je ze kent voordat je vrienden wordt.
 Feature.Friends.Heading.Activities,Activiteiten
 Feature.Friends.Heading.FilterBy,Filteren op
 Feature.Friends.Heading.Friends,
@@ -3900,7 +3914,6 @@ Feature.Friends.Label.FriendOfUser,Vriend van {displayName}
 Feature.Friends.Label.FriendOwns,1 vriend bezit
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 vriend</b> speelde onlangs
 Feature.Friends.Label.FriendRequest,
-Feature.Friends.Label.FriendingTooltip,Tip voor vrienden maken
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,Vrienden zijn nu connecties!
 Feature.Friends.Label.FriendsHintBold,Laten we gaan!
@@ -4089,6 +4102,7 @@ Feature.GameDetails.Message.HidingExperienceQuestion,Waarom verberg je deze erva
 Feature.GameDetails.Message.LeavingRobloxTitle,Roblox verlaten
 Feature.GameDetails.Message.PurchaseGame,Toegang tot  ontgrendelen {gameName} voor R${X}?
 Feature.GameDetails.Message.PurchaseGameV2,Toegang tot ontgrendelen {gameName} voor {X} Robux?
+Feature.GameDetails.Message.RobloxWebsiteSignedInWarning,"Door op 'Doorgaan' te klikken, wordt roblox.com geopend in een webbrowser en word je aangemeld bij je Roblox-account."
 Feature.GameDetails.Message.SponsoredDisclosure.Error,De sponsorinformatie kon niet worden weergegeven vanwege een tijdelijke fout.
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"Je ziet deze gesponsorde content op basis van niet-gepersonaliseerde factoren zoals apparaatinformatie, locatie en leeftijd om je passende content te tonen. De maker van de ervaring is {CreatorName}. De sponsoring is betaald door {PayerName}. Ga voor meer informatie naar de pagina 'Privacy en contentclassificatie' onder Instellingen in je account, hier:"
 Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,"Je ziet deze gesponsorde content op basis van verschillende factoren, zoals je locatie, apparaatinformatie, leeftijd en platformgedrag, om je relevante content te tonen. De maker van de ervaring is {CreatorName}. De sponsoring is betaald door {PayerName}. Ga voor meer informatie naar de pagina 'Privacy en contentclassificatie' onder Instellingen in je account, hier:"
@@ -4108,6 +4122,8 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Meldingen ingeschakeld voor {ex
 Feature.GameJoin.Description.DifferentServer,Je begint op een andere server
 Feature.GameJoin.Label.PlayTogether,Jullie kunnen samen spelen
 Feature.GameJoin.Label.PlayTogetherSoon,Jullie kunnen binnenkort samen spelen
+Feature.GameJoin.Label.Played,gespeeld
+Feature.GameJoin.Label.RecentCoplay,Jullie hebben onlangs samen gespeeld
 Feature.GamePage.Action.BackToTop,Terug naar boven
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
@@ -4401,6 +4417,7 @@ Feature.Moments.Action.Hide,Details verbergen
 Feature.Moments.Action.HowToCapture,Bekijk hoe je een link vastlegt
 Feature.Moments.Action.KeepEditing,Doorgaan met bewerken
 Feature.Moments.Action.Leave,
+Feature.Moments.Action.LoadMore,
 Feature.Moments.Action.Minimize,Minimaliseren
 Feature.Moments.Action.Ok,
 Feature.Moments.Action.Play,
@@ -5354,6 +5371,7 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,Aanbieding alleen geldig voor nieuwe Plus-abonnees.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,Wanneer iemand Plus afsluit via jouw link.
 Feature.RobloxSubscription.Description.ReferralShare,Nodig iemand uit voor Plus en jullie krijgen allebei {amount} Robux wanneer die persoon Plus afsluit.
+Feature.RobloxSubscription.Description.SpawnEffectsPlusUpsell,Abonneer je op Plus om voordelen zoals spawneffecten en meer te ontdekken.
 Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,Krijg spawneffecten met Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Door op {201C}{ctaText} te klikken{201D}, ga je akkoord met de <a href=""{termsUrl}"">Abonnementsvoorwaarden van Roblox</a>. Er worden elke maand automatisch kosten in rekening gebracht totdat je opzegt."
 Feature.RobloxSubscription.Heading.ReferralEntry,Deel Plus om {amount} Robux te krijgen
@@ -5794,7 +5812,6 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 an
 Feature.UniversalShareSheet.Response.SharedMessage,Bericht is verzonden
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Berichten zijn verzonden
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} anderen
-Feature.UserLibrary.Label.MyLibrary,Mijn bibliotheek
 Feature.VIPServer.Message.TooManyFreeServersOnGame,Je kunt niet nog meer gratis privéservers hebben voor deze game.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,Je kunt niet meer actieve gratis privéservers hebben. Deactiveer eerst een aantal andere servers.
 Feature.VerificationUpsell.Action.AddPhone,

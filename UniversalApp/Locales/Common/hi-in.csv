@@ -288,6 +288,9 @@ Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,इतनी देर बाद कोशिश करें : {WaitTime}
 Authentication.Login.Action.Continue,
+Authentication.Login.Action.ContinueSetup,सेटअप जारी रखें
+Authentication.Login.Action.ContinueWithProvider,{provider} के साथ जारी रखें
+Authentication.Login.Action.CreateANewAccount,
 Authentication.Login.Action.DownloadNow,अभी डाउनलोड करें
 Authentication.Login.Action.EmailACode,कोड ईमेल करें
 Authentication.Login.Action.EmailMeCode,मुझे कोड ईमेल करें
@@ -297,6 +300,7 @@ Authentication.Login.Action.ForgotUsername,यूज़रनेम भूल �
 Authentication.Login.Action.ForgotUsernameOrPassword,यूज़रनेम या पासवर्ड याद नहीं है?
 Authentication.Login.Action.GetCodeByEmail,ईमेल से कोड पाएँ
 Authentication.Login.Action.Google,Google
+Authentication.Login.Action.Leave,छोड़ें
 Authentication.Login.Action.LogInEmailOneTimeCode,मुझे वन-टाइम कोड ईमेल करें
 Authentication.Login.Action.NeedHelp,मदद चाहिए?
 Authentication.Login.Action.Next,
@@ -321,14 +325,19 @@ Authentication.Login.Description.ChooseHowToPlay,अपने खेलने �
 Authentication.Login.Description.DownloadNewVersion,"Roblox का यह वर्ज़न आपके अकाउंट के लिए उपलब्ध नहीं है. जारी रखने के लिए, कृपया सही वर्ज़न डाउनलोड करें."
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,अभी-अभी आपके इस ईमेल पर भेजा गया कोड डालें : {email}
 Authentication.Login.Description.GetOneTimeCodeHelp,"वन-टाइम कोड पाने के लिए, अपना वेरिफ़ाइड ईमेल डालें."
+Authentication.Login.Description.LeaveAccountSetup,"अगर आपने अभी छोड़ा, तो आपका Roblox अकाउंट सेट अप नहीं होगा."
 Authentication.Login.Description.PasskeyDescription,"आपका अकाउंट पास-की का इस्तेमाल करता है. यह पासवर्ड से ज़्यादा सुरक्षित है. आप इस डिवाइस पर अपने फ़िंगरप्रिंट, फ़ेस या स्क्रीन लॉक से साइन इन कर सकते हैं."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"हम यह नहीं तय कर सकते कि आपका डिवाइस पास-की का सपोर्ट करता है या नहीं. ईमेल या फ़ोन इस्तेमाल करके, अपना अकाउंट रिकवर करने के लिए फिर से कोशिश करें या “साइन इन करने में समस्या” पर टैप करें."
 Authentication.Login.Description.PasskeyMobileOnly,पास-की सिर्फ़ मोबाइल पर उपलब्ध हैं. साइन-इन करने का कोई दूसरा तरीका चुनें.
 Authentication.Login.Description.SigningInWith,<b>{identifier}</b> से साइन-इन किया जा रहा है
+Authentication.Login.Description.SsoLinkMultiple,"हमें एक से ज़्यादा ऐसे Roblox अकाउंट मिले हैं, जिनमें इस ईमेल पते का इस्तेमाल किया गया है. ज़ल्दी साइन-इन करने के लिए, किसी एक अकाउंट को {provider} से लिंक करें या नया अकाउंट क्रिएट करें."
+Authentication.Login.Description.SsoLinkSingle,"हमें एक Roblox अकाउंट मिला है, जिसमें इस ईमेल पते का इस्तेमाल किया गया है. ज़ल्दी साइन-इन करने के लिए, इसे {provider} से लिंक करें या नया अकाउंट क्रिएट करें."
 Authentication.Login.Description.UsernameHandle,@<b>{username}</b>
 Authentication.Login.Description.VerificationCodeSentTo,"अगर कोई Roblox अकाउंट मौजूद है, तो आपको {email} पर एक वेरिफ़िकेशन कोड मिलेगा"
 Authentication.Login.Error.PasskeyOnlyAccount,"आपके अकाउंट में साइन-इन करने के लिए सिर्फ़ पास-की सेटअप है. अपने अकाउंट को वापस पाने के लिए, अपनी पास-की से साइन-इन करके देखें."
 Authentication.Login.Error.PlatformAccountConnectionFailure,प्लैटफ़ॉर्म अकाउंट वेरिफ़ाई नहीं किया जा सका. बाद में फिर से कोशिश करें.
+Authentication.Login.Header.LeaveAccountSetup,अकाउंट सेटअप छोड़ना है?
+Authentication.Login.Header.YouAlreadyHaveAnAccount,आपके पास पहले से ही एक अकाउंट है
 Authentication.Login.Heading.EnterYourCode,अपना कोड डालें :
 Authentication.Login.Heading.GetStarted,शुरू करें
 Authentication.Login.Heading.IncompatibleAccounts,अकाउंट कंपैटिबल नहीं हैं
@@ -352,6 +361,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"माफ़ करें,
 
 इंतज़ार के बाद, फिर से कोशिश करें."
 Authentication.Login.Label.ConnectionError.Title,कनेक्ट करने में गड़बड़ी हुई
+Authentication.Login.Label.DontHaveARobloxAccountCreateOne,आपके पास Roblox अकाउंट नहीं है? {startTag}एक अकाउंट क्रिएट करें{endTag}
 Authentication.Login.Label.DontHaveAnAccountCreateOne,आपके पास अकाउंट नहीं है? {startTag}एक अकाउंट बनाएँ{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,ईमेल पता
@@ -387,6 +397,7 @@ Authentication.Login.Label.VerificationCode,वेरिफ़िकेशन �
 Authentication.Login.Label.WeChatUserCancel,आप WeChat से लॉग आउट हो गए हैं. WeChat में लॉग इन करें.
 Authentication.Login.Label.WeChatVersionNotSupported,WeChat वर्ज़न को सपोर्ट हासिल नहीं है
 Authentication.Login.LinkIllegalChildAccountLinking,इस Roblox अकाउंट को Xbox चाइल्ड अकाउंट से लिंक नहीं किया जा सका. कृपया कोई दूसरे अकाउंट से कोशिश करें या अपनी सेटिंग चेक करें.
+Authentication.Login.Message.SsoProviderLinked,अब {provider} से साइन-इन किया जा सकता है
 Authentication.Login.QrCodeLoginTitle,"लॉग इन करने के लिए, QR कोड स्कैन करें"
 Authentication.Login.Response.AccountNotFound,अकाउंट नहीं मिला. फिर से कोशिश करें.
 Authentication.Login.Response.AlreadyLinked,इस Roblox अकाउंट को पहले से ही {platform} पर किसी दूसरे अकाउंट से लिंक किया गया है. किसी दूसरे Roblox अकाउंट से लॉग इन करने की कोशिश करें.
@@ -445,13 +456,13 @@ Authentication.ResetPassword.Response.ResetPasswordStarted,आपको पह�
 Authentication.SignUp.Action.ApplyOnNextRespawn,अगली बार रीस्पॉन करने पर लागू करें
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
-Authentication.SignUp.Action.ContinueSetup,सेटअप जारी रखें
+Authentication.SignUp.Action.ContinueSetup,
 Authentication.SignUp.Action.Create,क्रिएट करें
 Authentication.SignUp.Action.CreateAPasskey,पास-की क्रिएट करें
 Authentication.SignUp.Action.CreateAccount,अकाउंट बनाएँ
 Authentication.SignUp.Action.CreateAccountSentenceCase,
 Authentication.SignUp.Action.EnableFaceId,Face ID चालू करें
-Authentication.SignUp.Action.ExitModalLeave,छोड़ें
+Authentication.SignUp.Action.ExitModalLeave,
 Authentication.SignUp.Action.IUnderstand,मैं सहमत हूँ
 Authentication.SignUp.Action.NextWord,
 Authentication.SignUp.Action.RespawnNow,अभी रीस्पॉन करें
@@ -1590,7 +1601,6 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,"लोगों को �
 Feature.AddFriends.Label.ConnectWithContacts,कॉन्टैक्ट्स को इनवाइट करें या Roblox पर पहले से मौजूद फ़्रेंड्स से कनेक्ट हों!
 Feature.AddFriends.Label.ContactsTile,कॉन्टैक्ट्स
 Feature.AddFriends.Label.DeclineAllBackgrounded,सभी फ़्रेंड रिक्वेस्ट को इग्नोर किया जा रहा है. इसमें एक मिनट लग सकता है.
-Feature.AddFriends.Label.EmptyStatePrompt,"आप Roblox को किसके साथ एक्सप्लोर करेंगे? लोगों को जोड़ने के लिए सर्च करें या उन फ़्रेंड्स से कनेक्ट हों, जिन्हें आप पहले से जानते हैं!"
 Feature.AddFriends.Label.FriendRequests,फ़्रेंड रिक्वेस्ट
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,लोगों को सर्च करें
 Feature.AddFriends.Label.MyQrCode,मेरा QR कोड
@@ -2661,6 +2671,8 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,सभी गेम्स
 Feature.Build.Label.AmountAvailable,{AMOUNT} उपलब्ध हैं
+Feature.Build.Label.AttachmentCountPlural,{count} अटैचमेंट्स
+Feature.Build.Label.AttachmentCountSingular,1 अटैचमेंट
 Feature.Build.Label.Autosaved,अपने-आप सेव हो गया
 Feature.Build.Label.Available,उपलब्ध है
 Feature.Build.Label.AvailableForPurchase,खरीदने के लिए उपलब्ध
@@ -2680,6 +2692,7 @@ Feature.Build.Label.DefaultDeveloperProductName,डेवलपर प्रॉ�
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,डिलीट किया गया
 Feature.Build.Label.DescribeIdea,किसी आइडिया के बारे में बताएँ
+Feature.Build.Label.DescribeIdeaOrPick,अपना आइडिया बताएँ या नीचे से कोई आइडिया चुनें
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,विवरण : {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,नाम : {NAME}
@@ -3020,6 +3033,7 @@ Feature.BuyRobux.Label.MyFriendsWithCount,मेरे फ़्रेंड्�
 Feature.BuyRobux.Label.PeopleWithCount,लोग ({count})
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
+Feature.Captures.Title.Captures,कैप्चर
 Feature.Captures.Title.Gallery,गैलरी
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
@@ -3514,6 +3528,7 @@ Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,हटाने के लिए चुनें
 Feature.Chat.Label.Sent,भेज दिया गया
 Feature.Chat.Label.SnoozePartyNotifications,इन एक्सपीरिएंस पार्टी नोटिफ़िकेशन को म्यूट करें:
+Feature.Chat.Label.StartChatting,चैट करना शुरू करें
 Feature.Chat.Label.SwipeToReplyTooltip,जवाब देने के लिए स्वाइप करें
 Feature.Chat.Label.TapToRemove,हटाने के लिए टैप करें
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}दिन
@@ -3864,7 +3879,6 @@ Feature.Friends.Error.UserBannedError,आप पर इस ऑपरेशन �
 Feature.Friends.Error.UserBlockedError,आपको यह ऑपरेशन करने से ब्लॉक कर दिया गया है.
 Feature.Friends.Error.UserNotPassedCaptcha,आपने कैप्चा पास नहीं किया है.
 Feature.Friends.Feature.Friends.Heading.AddFriends,
-Feature.Friends.FriendingTooltipBody,"कुछ फ़्रेंड रिक्वेस्ट उन यूज़र्स से मिल सकती है, जिन्होंने आपको आपके फ़ोन नंबर से खोजा है. फ़्रेंड्स बनने से पहले पक्का कर लें कि आप उनसे परिचित हैं."
 Feature.Friends.Heading.Activities,ऐक्टिविटीज़
 Feature.Friends.Heading.FilterBy,इस आधार पर फ़िल्टर करें
 Feature.Friends.Heading.Friends,
@@ -3894,11 +3908,10 @@ Feature.Friends.Label.FollowsYou,आपको फ़ॉलो करता ह�
 Feature.Friends.Label.Frequent,एक साथ खेले
 Feature.Friends.Label.Friend,फ़्रेंड
 Feature.Friends.Label.FriendInvite,Roblox पर फ़्रेंड्स बनने के लिए इनवाइट किया है
-Feature.Friends.Label.FriendOfUser,{displayName} का फ़्रेंड
+Feature.Friends.Label.FriendOfUser,
 Feature.Friends.Label.FriendOwns,1 फ़्रेंड के पास है
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 फ़्रेंड ने</b> हाल ही में खेला
 Feature.Friends.Label.FriendRequest,
-Feature.Friends.Label.FriendingTooltip,फ़्रेंडिंग टिप
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,फ़्रेंड्स अब कनेक्शन हैं!
 Feature.Friends.Label.FriendsHintBold,"चलिए, खेलें!"
@@ -4087,6 +4100,7 @@ Feature.GameDetails.Message.HidingExperienceQuestion,आपने इस एक�
 Feature.GameDetails.Message.LeavingRobloxTitle,Roblox को छोड़ा जा रहा है
 Feature.GameDetails.Message.PurchaseGame,क्या R${X} के लिए {gameName} का ऐक्सेस अनलॉक करना है? 
 Feature.GameDetails.Message.PurchaseGameV2,क्या {X} Robux में {gameName} का ऐक्सेस अनलॉक करना है?
+Feature.GameDetails.Message.RobloxWebsiteSignedInWarning,"""जारी रखें"" पर क्लिक करने पर, वेब ब्राउज़र में roblox.com खुल जाएगा और आपको आपके Roblox अकाउंट में साइन-इन कर दिया जाएगा."
 Feature.GameDetails.Message.SponsoredDisclosure.Error,इस समय किसी गड़बड़ी के कारण स्पॉन्सरशिप की जानकारी नहीं दिखाई जा सकी.
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"आपको स्पॉन्सर किया गया यह कॉन्टेंट डिवाइस की जानकारी, लोकेशन और उम्र जैसे नॉन-पर्सनलाइज़ फ़ैक्टर्स के आधार पर दिख रहा है, ताकि आपको सही कॉन्टेंट दिखाया जा सके. एक्सपीरिएंस के क्रिएटर {CreatorName} हैं. स्पॉन्सरशिप का पेमेंट {PayerName} ने किया है. ज़्यादा जानने के लिए, कृपया अपने अकाउंट की सेटिंग में, यहाँ ""प्राइवेसी और कॉन्टेंट मैच्योरिटी"" पेज पर जाएँ :"
 Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,"आपको स्पॉन्सर किया गया यह कॉन्टेंट आपके लोकेशन, डिवाइस की जानकारी, उम्र और प्लैटफ़ॉर्म पर बिहेवियर जैसे अलग-अलग फ़ैक्टर्स के आधार पर दिख रहा है, ताकि आपको सही कॉन्टेंट दिखाया जा सके. एक्सपीरिएंस के क्रिएटर {CreatorName} हैं. स्पॉन्सरशिप का पेमेंट {PayerName} ने किया है. ज़्यादा जानने के लिए, कृपया अपने अकाउंट की सेटिंग में, यहाँ ""प्राइवेसी और कॉन्टेंट मैच्योरिटी"" पेज पर जाएँ :"
@@ -4106,6 +4120,8 @@ Feature.GameFollows.TooltipTurnedOnNotifications,{experienceName} के लि�
 Feature.GameJoin.Description.DifferentServer,आपके पास किसी दूसरे सर्वर में शुरू करने का विकल्प होगा
 Feature.GameJoin.Label.PlayTogether,आपके पास एक साथ खेलने की सुविधा है
 Feature.GameJoin.Label.PlayTogetherSoon,आपके पास जल्द ही एक साथ खेलने की सुविधा होगी
+Feature.GameJoin.Label.Played,खेला गया
+Feature.GameJoin.Label.RecentCoplay,आपने हाल ही में साथ खेला है
 Feature.GamePage.Action.BackToTop,वापस ऊपर जाएँ
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,स्पॉन्सर किया गया
@@ -4399,6 +4415,7 @@ Feature.Moments.Action.Hide,जानकारी छिपाएँ
 Feature.Moments.Action.HowToCapture,कैप्चर करने का तरीका देखें
 Feature.Moments.Action.KeepEditing,एडिटिंग जारी रखें
 Feature.Moments.Action.Leave,
+Feature.Moments.Action.LoadMore,
 Feature.Moments.Action.Minimize,छोटा करें
 Feature.Moments.Action.Ok,
 Feature.Moments.Action.Play,
@@ -5352,6 +5369,7 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,ऑफ़र सिर्फ़ Plus के नए सब्सक्राइबर्स के लिए मान्य है.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,जब कोई आपके लिंक से Plus खरीदता है.
 Feature.RobloxSubscription.Description.ReferralShare,किसी को Plus जॉइन करने के लिए इन्वाइट करें और उनके Plus खरीदने पर आप दोनों को {amount} Robux मिलेंगे.
+Feature.RobloxSubscription.Description.SpawnEffectsPlusUpsell,"स्पॉन इफ़ेक्ट्स और अन्य फ़ायदों का लाभ उठाने के लिए, Plus को सब्सक्राइब करें."
 Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,Plus के सब्सक्रिप्शन के साथ स्पॉन इफ़ेक्ट्स पाएँ
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"\u{201C}{ctaText}\u{201D} पर क्लिक करने का मतलब है कि आप <a href=""{termsUrl}"">Roblox के सब्सक्रिप्शन की शर्तों</a> से सहमत हैं. आपके कैंसिल करने तक आपसे हर महीने अपने आप शुल्क ले लिया जाएगा."
 Feature.RobloxSubscription.Heading.ReferralEntry,Plus शेयर करें और {amount} Robux पाएँ
@@ -5791,7 +5809,6 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 �
 Feature.UniversalShareSheet.Response.SharedMessage,मैसेज भेजा गया
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,मैसेज भेजे गए
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} अन्य
-Feature.UserLibrary.Label.MyLibrary,मेरी लाइब्रेरी
 Feature.VIPServer.Message.TooManyFreeServersOnGame,आपको इस गेम पर और फ़्री प्राइवेट सर्वर नहीं मिल सकते.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,आपके पास ज़्यादा ऐक्टिव फ़्री प्राइवेट सर्वर नहीं हो सकते. पहले कुछ और सर्वर डीऐक्टिवेट करें.
 Feature.VerificationUpsell.Action.AddPhone,

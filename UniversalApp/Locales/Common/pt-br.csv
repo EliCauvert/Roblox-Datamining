@@ -305,6 +305,9 @@ Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,Repetir
 Authentication.Login.Action.ConnectionError.RetryWait,Tentar novamente em: {WaitTime}
 Authentication.Login.Action.Continue,
+Authentication.Login.Action.ContinueSetup,Continuar a configuração
+Authentication.Login.Action.ContinueWithProvider,Continuar com {provider}
+Authentication.Login.Action.CreateANewAccount,
 Authentication.Login.Action.DownloadNow,Baixar agora
 Authentication.Login.Action.EmailACode,Enviar um código por e-mail
 Authentication.Login.Action.EmailMeCode,Envie-me um código por e-mail
@@ -314,6 +317,7 @@ Authentication.Login.Action.ForgotUsername,Esqueceu o nome de usuário?
 Authentication.Login.Action.ForgotUsernameOrPassword,Esqueceu o nome de usuário/senha?
 Authentication.Login.Action.GetCodeByEmail,Receber código por e-mail
 Authentication.Login.Action.Google,Google
+Authentication.Login.Action.Leave,
 Authentication.Login.Action.LogInEmailOneTimeCode,Envie-me um código único por e-mail
 Authentication.Login.Action.NeedHelp,Precisa de ajuda?
 Authentication.Login.Action.Next,
@@ -338,14 +342,19 @@ Authentication.Login.Description.ChooseHowToPlay,Escolha como você quer jogar
 Authentication.Login.Description.DownloadNewVersion,Esta versão do aplicativo Roblox não está disponível para sua conta. Baixe a versão correta para continuar.
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,Insira o código enviado para: {email}
 Authentication.Login.Description.GetOneTimeCodeHelp,Digite o e-mail verificado na sua conta para receber um código único.
+Authentication.Login.Description.LeaveAccountSetup,"Se você sair agora, sua conta do Roblox não será configurada."
 Authentication.Login.Description.PasskeyDescription,"Sua conta tem uma chave de acesso e um método de login mais seguro do que uma senha. Você pode usar sua impressão digital, rosto ou bloqueio de tela para fazer entrar na conta neste dispositivo."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"Não é possível determinar se o dispositivo suporta a chave de acesso. Tente novamente ou toque em ""Problemas ao entrar na conta"" para recuperar sua conta com um número de e-mail ou telefone."
 Authentication.Login.Description.PasskeyMobileOnly,As chaves de acesso só estão disponíveis no celular. Escolha outra maneira de entrar.
 Authentication.Login.Description.SigningInWith,Entrando com <b>{identifier}</b>
+Authentication.Login.Description.SsoLinkMultiple,Encontramos várias contas do Roblox que usam este e-mail. Escolha uma para vincular a {provider} para poder entrar mais rápido ou crie uma nova conta.
+Authentication.Login.Description.SsoLinkSingle,Encontramos uma conta Roblox que usa este e-mail. Vincule-a a {provider} para entrar mais rápido ou crie uma nova conta.
 Authentication.Login.Description.UsernameHandle,@<b>{username}</b>
 Authentication.Login.Description.VerificationCodeSentTo,"Se houver uma conta Roblox, você receberá um código de verificação em {email}"
 Authentication.Login.Error.PasskeyOnlyAccount,Sua conta só tem uma chave de acesso configurada para entrar. Tente entrar com sua chave de acesso ou recupere sua conta.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Não é possível verificar a conta da plataforma. Tente novamente mais tarde.
+Authentication.Login.Header.LeaveAccountSetup,Sair da configuração da conta?
+Authentication.Login.Header.YouAlreadyHaveAnAccount,Você já tem uma conta
 Authentication.Login.Heading.EnterYourCode,Digite seu código
 Authentication.Login.Heading.GetStarted,Comece agora
 Authentication.Login.Heading.IncompatibleAccounts,Contas Incompatíveis
@@ -369,6 +378,7 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Ocorreu um problema na com
 
 Aguarde e tente novamente."
 Authentication.Login.Label.ConnectionError.Title,Erro de conexão
+Authentication.Login.Label.DontHaveARobloxAccountCreateOne,Você não tem uma conta Roblox? {startTag}Crie uma{endTag}
 Authentication.Login.Label.DontHaveAnAccountCreateOne,Não tem uma conta? {startTag}Crie uma{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,Endereço de e-mail
@@ -404,6 +414,7 @@ Authentication.Login.Label.VerificationCode,Código de verificação
 Authentication.Login.Label.WeChatUserCancel,Você encerrou a sessão no WeChat. Reinicie a sessão no WeChat.
 Authentication.Login.Label.WeChatVersionNotSupported,Não há suporte para a versão do WeChat
 Authentication.Login.LinkIllegalChildAccountLinking,Não foi possível vincular esta conta Roblox a uma conta infantil do Xbox. Tente usar outra conta ou verifique suas configurações.
+Authentication.Login.Message.SsoProviderLinked,Agora você pode entrar com {provider}
 Authentication.Login.QrCodeLoginTitle,Escaneie o código QR para entrar
 Authentication.Login.Response.AccountNotFound,Conta não encontrada. Tente novamente.
 Authentication.Login.Response.AlreadyLinked,Esta conta Roblox já está vinculada a uma conta para a {platform}. Tente fazer login com uma conta Roblox diferente.
@@ -462,7 +473,7 @@ Authentication.ResetPassword.Response.ResetPasswordStarted,Você precisa redefin
 Authentication.SignUp.Action.ApplyOnNextRespawn,Aplicar na próxima regeneração
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
-Authentication.SignUp.Action.ContinueSetup,Continuar a configuração
+Authentication.SignUp.Action.ContinueSetup,
 Authentication.SignUp.Action.Create,Criar
 Authentication.SignUp.Action.CreateAPasskey,
 Authentication.SignUp.Action.CreateAccount,
@@ -1610,7 +1621,6 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Encontre pessoas na Roblox
 Feature.AddFriends.Label.ConnectWithContacts,Convide seus contatos ou conecte-se com amizades que já estão na Roblox!
 Feature.AddFriends.Label.ContactsTile,Contatos
 Feature.AddFriends.Label.DeclineAllBackgrounded,Ignorando todos os pedidos de amizade. Isto pode levar um minuto.
-Feature.AddFriends.Label.EmptyStatePrompt,Com quem você vai explorar a Roblox? Procure pessoas para adicionar ou conecte-se com amizades que você já conhece!
 Feature.AddFriends.Label.FriendRequests,Pedidos de amizade
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,Pesquisar pessoas
 Feature.AddFriends.Label.MyQrCode,Meu código QR
@@ -2681,6 +2691,8 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,Todos os jogos
 Feature.Build.Label.AmountAvailable,{AMOUNT} disponível
+Feature.Build.Label.AttachmentCountPlural,{count} anexos
+Feature.Build.Label.AttachmentCountSingular,1 anexo
 Feature.Build.Label.Autosaved,Salvo automaticamente
 Feature.Build.Label.Available,disponível(is)
 Feature.Build.Label.AvailableForPurchase,Disponível para compra
@@ -2700,6 +2712,7 @@ Feature.Build.Label.DefaultDeveloperProductName,produto de desenvolvedor
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,Excluído
 Feature.Build.Label.DescribeIdea,Descreva uma ideia
+Feature.Build.Label.DescribeIdeaOrPick,Descreva uma ideia ou escolha uma abaixo
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,Descrição: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Nome: {NAME}
@@ -3040,6 +3053,7 @@ Feature.BuyRobux.Label.MyFriendsWithCount,Minhas amizades ({count})
 Feature.BuyRobux.Label.PeopleWithCount,Pessoas ({count})
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,"Algo deu errado, tente novamente mais tarde."
+Feature.Captures.Title.Captures,Capturas
 Feature.Captures.Title.Gallery,Galeria
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
@@ -3534,6 +3548,7 @@ Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,Selecione para remover
 Feature.Chat.Label.Sent,Enviado
 Feature.Chat.Label.SnoozePartyNotifications,Silenciar notificações da Turma na experiência para:
+Feature.Chat.Label.StartChatting,Começar a conversar
 Feature.Chat.Label.SwipeToReplyTooltip,Deslize para responder
 Feature.Chat.Label.TapToRemove,Toque para remover
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} dias
@@ -3884,7 +3899,6 @@ Feature.Friends.Error.UserBannedError,Você está banido de executar esta opera�
 Feature.Friends.Error.UserBlockedError,Você está impedido de realizar esta operação.
 Feature.Friends.Error.UserNotPassedCaptcha,Você não passou no captcha.
 Feature.Friends.Feature.Friends.Heading.AddFriends,
-Feature.Friends.FriendingTooltipBody,Alguns pedidos de amizade podem vir de usuários que encontraram você por meio do seu número de telefone. Certifique-se de que você conheça essas pessoas antes de formar a amizade.
 Feature.Friends.Heading.Activities,Atividades
 Feature.Friends.Heading.FilterBy,Filtrar por
 Feature.Friends.Heading.Friends,
@@ -3918,7 +3932,6 @@ Feature.Friends.Label.FriendOfUser,Amizade de {displayName}
 Feature.Friends.Label.FriendOwns,1 amizade tem
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 amizade</b> jogou recentemente
 Feature.Friends.Label.FriendRequest,Solicitação de amizade
-Feature.Friends.Label.FriendingTooltip,Dica de amizade
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,As amizades agora são conexões!
 Feature.Friends.Label.FriendsHintBold,Vamos jogar!
@@ -4107,6 +4120,7 @@ Feature.GameDetails.Message.HidingExperienceQuestion,Por que você está esconde
 Feature.GameDetails.Message.LeavingRobloxTitle,Saindo da Roblox
 Feature.GameDetails.Message.PurchaseGame,Desbloquear acesso a {gameName} por R${X}?
 Feature.GameDetails.Message.PurchaseGameV2,Desbloquear o acesso a {gameName} por {X} Robux?
+Feature.GameDetails.Message.RobloxWebsiteSignedInWarning,"Ao clicar em ""Continuar"", o roblox.com será aberto em um navegador e você entrará na sua conta Roblox."
 Feature.GameDetails.Message.SponsoredDisclosure.Error,Não foi possível exibir as informações de patrocínio devido a um erro temporário.
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"Você está vendo este conteúdo patrocinado com base em fatores não personalizados, como informações do dispositivo, localização e idade, para oferecer conteúdo apropriado a você. O criador da experiência é {CreatorName}. O patrocínio foi pago por {PayerName}. Para saber mais, acesse a página ""Privacidade e maturidade do conteúdo"" nas configurações na sua conta aqui:"
 Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,"Você está vendo este conteúdo patrocinado com base em diferentes fatores, como sua localização, informações do dispositivo, idade e comportamento da plataforma, para oferecer conteúdo relevante a você. O criador da experiência é {CreatorName}. O patrocínio foi pago por {PayerName}. Para saber mais, acesse a página ""Privacidade e maturidade do conteúdo"" nas configurações na sua conta aqui:"
@@ -4126,6 +4140,8 @@ Feature.GameFollows.TooltipTurnedOnNotifications,
 Feature.GameJoin.Description.DifferentServer,Você começará em um servidor diferente
 Feature.GameJoin.Label.PlayTogether,Vocês podem jogar juntos
 Feature.GameJoin.Label.PlayTogetherSoon,Vocês poderão jogar juntos em breve
+Feature.GameJoin.Label.Played,jogou
+Feature.GameJoin.Label.RecentCoplay,Vocês jogaram juntos recentemente
 Feature.GamePage.Action.BackToTop,Voltar para o topo
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,Patrocinadas
@@ -4419,6 +4435,7 @@ Feature.Moments.Action.Hide,
 Feature.Moments.Action.HowToCapture,Veja como capturar
 Feature.Moments.Action.KeepEditing,Continuar editando
 Feature.Moments.Action.Leave,
+Feature.Moments.Action.LoadMore,
 Feature.Moments.Action.Minimize,Minimizar
 Feature.Moments.Action.Ok,
 Feature.Moments.Action.Play,
@@ -5371,6 +5388,7 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,Oferta válida apenas para novos assinantes do Plus.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,Quando alguém assina o Plus com o seu link.
 Feature.RobloxSubscription.Description.ReferralShare,Convide alguém para o Plus e todos receberão {amount} Robux quando a pessoa entrar.
+Feature.RobloxSubscription.Description.SpawnEffectsPlusUpsell,Assine o Plus para explorar benefícios como efeitos de surgimento e muito mais.
 Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,Obtenha efeitos de entrada com o Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Ao clicar em \u{201C}{ctaText}\u{201D}, você concorda com os <a href=""{termsUrl}"">Termos de assinatura da Roblox</a>. A cobrança será feita automaticamente todo mês até você cancelar."
 Feature.RobloxSubscription.Heading.ReferralEntry,Compartilhe o Plus e ganhe {amount} Robux
@@ -5811,7 +5829,6 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 ou
 Feature.UniversalShareSheet.Response.SharedMessage,A mensagem foi enviada
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,As mensagens foram enviadas
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} outras pessoas
-Feature.UserLibrary.Label.MyLibrary,Minha biblioteca
 Feature.VIPServer.Message.TooManyFreeServersOnGame,Você não pode ter mais servidores privados gratuitos neste jogo.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,"Você não pode ter mais servidores gratuitos ativos. Primeiro, desative alguns dos outros servidores."
 Feature.VerificationUpsell.Action.AddPhone,
